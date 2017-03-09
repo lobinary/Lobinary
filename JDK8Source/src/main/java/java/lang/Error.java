@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,15 @@ package java.lang;
  * That is, {@code Error} and its subclasses are regarded as unchecked
  * exceptions for the purposes of compile-time checking of exceptions.
  *
+ * <p>
+ *  {@code Error}是{@code Throwable}的子类,表示合理的应用程序不应该尝试捕获的严重问题。大多数这样的错误是异常条件。
+ *  {@code ThreadDeath}错误虽然是"正常"条件,但也是{@code Error}的子类,因为大多数应用程序不应该尝试捕获它。
+ * <p>
+ *  一个方法不需要在其{@code throws}子句中声明{@code Error}的任何子类,它可能在方法执行期间抛出,但没有被捕获,因为这些错误是不应该发生的异常情况。
+ * 
+ *  也就是说,为了编译时检查异常,{@code Error}及其子类被视为未检查的异常。
+ * 
+ * 
  * @author  Frank Yellin
  * @see     java.lang.ThreadDeath
  * @jls 11.2 Compile-Time Checking of Exceptions
@@ -53,6 +63,9 @@ public class Error extends Throwable {
      * Constructs a new error with {@code null} as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a
      * call to {@link #initCause}.
+     * <p>
+     *  使用{@code null}作为其详细消息构造一个新错误。原因未初始化,并可能随后通过调用{@link #initCause}初始化。
+     * 
      */
     public Error() {
         super();
@@ -63,6 +76,10 @@ public class Error extends Throwable {
      * cause is not initialized, and may subsequently be initialized by
      * a call to {@link #initCause}.
      *
+     * <p>
+     *  使用指定的详细消息构造新错误。原因未初始化,并可能随后通过调用{@link #initCause}初始化。
+     * 
+     * 
      * @param   message   the detail message. The detail message is saved for
      *          later retrieval by the {@link #getMessage()} method.
      */
@@ -76,6 +93,10 @@ public class Error extends Throwable {
      * {@code cause} is <i>not</i> automatically incorporated in
      * this error's detail message.
      *
+     * <p>
+     *  使用指定的详细消息和原因构造新错误。 <p>请注意,与{@code cause}相关联的详细信息</i>不会自动并入此错误的详细信息中。
+     * 
+     * 
      * @param  message the detail message (which is saved for later retrieval
      *         by the {@link #getMessage()} method).
      * @param  cause the cause (which is saved for later retrieval by the
@@ -95,6 +116,11 @@ public class Error extends Throwable {
      * This constructor is useful for errors that are little more than
      * wrappers for other throwables.
      *
+     * <p>
+     * 使用指定的原因和{@code(cause == null?null：cause.toString())}(通常包含{@code cause}的类和详细信息)的详细消息构造一个新错误。
+     * 这个构造函数对于其他throwables的包装器的错误很有用。
+     * 
+     * 
      * @param  cause the cause (which is saved for later retrieval by the
      *         {@link #getCause()} method).  (A {@code null} value is
      *         permitted, and indicates that the cause is nonexistent or
@@ -110,6 +136,8 @@ public class Error extends Throwable {
      * cause, suppression enabled or disabled, and writable stack
      * trace enabled or disabled.
      *
+     * <p>
+     * 
      * @param  message the detail message.
      * @param cause the cause.  (A {@code null} value is permitted,
      * and indicates that the cause is nonexistent or unknown.)

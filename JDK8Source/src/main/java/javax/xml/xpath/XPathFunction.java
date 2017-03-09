@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,12 @@ import java.util.List;
  *
  * <p>Functions are identified by QName and arity in XPath.</p>
  *
+ * <p>
+ *  <p> <code> XPathFunction </code>提供对XPath函数的访问。</p>
+ * 
+ *  <p>函数由XPath中的QName和arity标识。</p>
+ * 
+ * 
  * @author  <a href="mailto:Norman.Walsh@Sun.com">Norman Walsh</a>
  * @author  <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  * @since 1.5
@@ -45,6 +52,10 @@ public interface XPathFunction {
    * XPath expression is under no obligation to call extension functions in
    * any particular order or any particular number of times.</p>
    *
+   * <p>
+   *  <p>使用指定的参数计算函数。</p>
+   * 
+   * 
    * @param args The arguments, <code>null</code> is a valid value.
    *
    * @return The result of evaluating the <code>XPath</code> function as an <code>Object</code>.

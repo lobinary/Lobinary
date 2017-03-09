@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: VariableBase.java,v 1.5 2005/09/28 13:48:18 pvedula Exp $
+ * <p>
+ *  $ Id：VariableBase.java,v 1.5 2005/09/28 13:48:18 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -41,6 +54,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 import com.sun.org.apache.xml.internal.utils.XML11Char;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -70,6 +85,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Disable this variable/parameter
+     * <p>
+     *  禁用此变量/参数
+     * 
      */
     public void disable() {
         _ignore = true;
@@ -78,6 +96,9 @@ class VariableBase extends TopLevelElement {
     /**
      * Add a reference to this variable. Called by VariableRef when an
      * expression contains a reference to this variable.
+     * <p>
+     *  添加对此变量的引用。当表达式包含对此变量的引用时,由VariableRef调用。
+     * 
      */
     public void addReference(VariableRefBase vref) {
         _refs.addElement(vref);
@@ -88,6 +109,9 @@ class VariableBase extends TopLevelElement {
      * its references need to be copied or otherwise it may be
      * compiled away as dead code. This method can be used for that
      * purpose.
+     * <p>
+     *  当一个变量被另一个变量覆盖时,通过xsl：import,它的引用需要被复制,否则它可能被编译为死代码。该方法可用于该目的。
+     * 
      */
     public void copyReferences(VariableBase var) {
         final int size = _refs.size();
@@ -98,6 +122,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Map this variable to a register
+     * <p>
+     *  将此变量映射到寄存器
+     * 
      */
     public void mapRegister(MethodGenerator methodGen) {
         if (_local == null) {
@@ -111,6 +138,9 @@ class VariableBase extends TopLevelElement {
     /**
      * Remove the mapping of this variable to a register.
      * Called when we leave the AST scope of the variable's declaration
+     * <p>
+     *  删除此变量到寄存器的映射。当我们离开变量的声明的AST范围时调用
+     * 
      */
     public void unmapRegister(MethodGenerator methodGen) {
         if (_local != null) {
@@ -124,6 +154,9 @@ class VariableBase extends TopLevelElement {
     /**
      * Returns an instruction for loading the value of this variable onto
      * the JVM stack.
+     * <p>
+     *  返回将此变量的值加载到JVM堆栈的指令。
+     * 
      */
     public Instruction loadInstruction() {
         final Instruction instr = _loadInstruction;
@@ -136,6 +169,9 @@ class VariableBase extends TopLevelElement {
     /**
      * Returns an instruction for storing a value from the JVM stack
      * into this variable.
+     * <p>
+     *  返回将来自JVM堆栈的值存储到此变量的指令。
+     * 
      */
     public Instruction storeInstruction() {
         final Instruction instr = _storeInstruction;
@@ -147,6 +183,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Returns the expression from this variable's select attribute (if any)
+     * <p>
+     * 从此变量的select属性(如果有)返回表达式
+     * 
      */
     public Expression getExpression() {
         return(_select);
@@ -154,6 +193,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Display variable as single string
+     * <p>
+     *  将变量显示为单个字符串
+     * 
      */
     public String toString() {
         return("variable("+_name+")");
@@ -161,6 +203,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Display variable in a full AST dump
+     * <p>
+     *  在完全AST转储中显示变量
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -174,6 +219,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Returns the type of the variable
+     * <p>
+     *  返回变量的类型
+     * 
      */
     public Type getType() {
         return _type;
@@ -182,6 +230,9 @@ class VariableBase extends TopLevelElement {
     /**
      * Returns the name of the variable or parameter as it will occur in the
      * compiled translet.
+     * <p>
+     *  返回将在编译的translet中发生的变量或参数的名称。
+     * 
      */
     public QName getName() {
         return _name;
@@ -189,6 +240,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Returns the escaped qname of the variable or parameter
+     * <p>
+     *  返回变量或参数的转义的qname
+     * 
      */
     public String getEscapedName() {
         return _escapedName;
@@ -196,6 +250,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Set the name of the variable or paremeter. Escape all special chars.
+     * <p>
+     *  设置变量或参数的名称。逃脱所有特殊字符。
+     * 
      */
     public void setName(QName name) {
         _name = name;
@@ -204,6 +261,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Returns the true if the variable is local
+     * <p>
+     *  如果变量是本地的,则返回true
+     * 
      */
     public boolean isLocal() {
         return _isLocal;
@@ -211,6 +271,9 @@ class VariableBase extends TopLevelElement {
 
     /**
      * Parse the contents of the <xsl:decimal-format> element.
+     * <p>
+     *  解析<xsl：decimal-format>元素的内容。
+     * 
      */
     public void parseContents(Parser parser) {
         // Get the 'name attribute
@@ -248,6 +311,8 @@ class VariableBase extends TopLevelElement {
     /**
      * Compile the value of the variable, which is either in an expression in
      * a 'select' attribute, or in the variable elements body
+     * <p>
+     *  编译变量的值,它位于"select"属性中的表达式中,或者在变量元素主体中
      */
     public void translateValue(ClassGenerator classGen,
                                MethodGenerator methodGen) {

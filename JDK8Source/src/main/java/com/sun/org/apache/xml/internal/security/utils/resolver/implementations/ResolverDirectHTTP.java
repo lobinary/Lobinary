@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils.resolver.implementations;
 
@@ -55,6 +64,18 @@ import com.sun.org.apache.xml.internal.security.utils.resolver.ResourceResolverS
  * resourceResolver.setProperty("http.proxy.password", "secretca");
  * </PRE>
  *
+ * <p>
+ *  一个用于HTTP请求的简单ResourceResolver。此类仅处理"纯"HTTP URI,这意味着没有片段。 Fragment处理由{@link ResolverFragment}类完成。
+ * <BR>
+ *  如果用户具有要使用的公司HTTP代理,则可以通过设置解析器的属性来打开用法：
+ * <PRE>
+ *  resourceResolver.setProperty("http.proxy.host","proxy.company.com"); resourceResolver.setProperty("h
+ * ttp.proxy.port","8080");。
+ * 
+ * //如果我们需要代理的密码resourceResolver.setProperty("http.proxy.username","proxyuser3"); resourceResolver.setPr
+ * operty("http.proxy.password","secretca");。
+ * </PRE>
+ * 
  * @see <A HREF="http://www.javaworld.com/javaworld/javatips/jw-javatip42_p.html">Java Tip 42: Write Java apps that work with proxy-based firewalls</A>
  * @see <A HREF="https://docs.oracle.com/javase/1.4.2/docs/guide/net/properties.html">SUN J2SE docs for network properties</A>
  * @see <A HREF="http://metalab.unc.edu/javafaq/javafaq.html#proxy">The JAVA FAQ Question 9.5: How do I make Java work with a proxy server?</A>
@@ -98,6 +119,9 @@ public class ResolverDirectHTTP extends ResourceResolverSpi {
     /**
      * Method resolve
      *
+     * <p>
+     * 
+     * 
      * @param uri
      * @param baseURI
      *
@@ -208,6 +232,10 @@ public class ResolverDirectHTTP extends ResourceResolverSpi {
     /**
      * We resolve http URIs <I>without</I> fragment...
      *
+     * <p>
+     *  方法解析
+     * 
+     * 
      * @param uri
      * @param baseURI
      * @return true if can be resolved
@@ -248,6 +276,9 @@ public class ResolverDirectHTTP extends ResourceResolverSpi {
 
     /**
      * @inheritDoc
+     * <p>
+     *  我们解析http URIs <I>,而没有</I>片段...
+     * 
      */
     public String[] engineGetPropertyKeys() {
         return ResolverDirectHTTP.properties.clone();

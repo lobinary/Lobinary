@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -108,6 +109,8 @@ abstract public class ObjectAdapterBase extends org.omg.CORBA.LocalObject
     /*
      * This creates the complete template.
      * When it is done, reference creation can proceed.
+     * <p>
+     *  这将创建完整的模板。完成后,可以继续引用创建。
      */
     final public void initializeTemplate( ObjectKeyTemplate oktemp,
         boolean notifyORB, Policies policies, String codebase,

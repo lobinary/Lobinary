@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -191,6 +192,9 @@ final class ColorChooserPanel extends AbstractColorChooserPanel implements Prope
     /**
      * Allows to show context popup for all components recursively.
      *
+     * <p>
+     *  允许以递归方式显示所有组件的上下文弹出窗口。
+     * 
      * @param component  the root component of the tree
      * @param value      whether or not the popup menu is inherited
      */

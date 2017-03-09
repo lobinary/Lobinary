@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -31,6 +41,10 @@ import org.xml.sax.SAXParseException;
 /**
  * This class wraps a SAX error handler in an XNI error handler.
  *
+ * <p>
+ *  这个类在一个XNI错误处理程序中包装一个SAX错误处理程序。
+ * 
+ * 
  * @see ErrorHandler
  *
  * @author Andy Clark, IBM
@@ -80,6 +94,10 @@ public class ErrorHandlerWrapper
      * Reports a warning. Warnings are non-fatal and can be safely ignored
      * by most applications.
      *
+     * <p>
+     *  报告警告。警告是非致命的,可以被大多数应用程序安全地忽略。
+     * 
+     * 
      * @param domain    The domain of the warning. The domain can be any
      *                  string but is suggested to be a valid URI. The
      *                  domain can be used to conveniently specify a web
@@ -115,6 +133,10 @@ public class ErrorHandlerWrapper
      * Reports an error. Errors are non-fatal and usually signify that the
      * document is invalid with respect to its grammar(s).
      *
+     * <p>
+     *  报告错误。错误是非致命的,通常表示文档相对于其语法是无效的。
+     * 
+     * 
      * @param domain    The domain of the error. The domain can be any
      *                  string but is suggested to be a valid URI. The
      *                  domain can be used to conveniently specify a web
@@ -158,6 +180,12 @@ public class ErrorHandlerWrapper
      * handler fails to throw an exception, the continuing operation of
      * the parser is undetermined.
      *
+     * <p>
+     *  报告致命错误。致命错误通常发生在文档格式不正确且表示解析器无法继续正常操作时。
+     * <p>
+     * <strong>注意</strong>：错误处理程序应始终</em>从此方法中抛出<code> XNIException </code>。
+     * 此异常可以是作为参数传递给方法的同一异常,也可以是新的XNI异常对象。如果注册的错误处理程序无法抛出异常,则解析器的继续操作未确定。
+     * 
      * @param domain    The domain of the fatal error. The domain can be
      *                  any string but is suggested to be a valid URI. The
      *                  domain can be used to conveniently specify a web
@@ -225,6 +253,9 @@ public class ErrorHandlerWrapper
 
     /** Creates an XNIException from a SAXException.
         NOTE:  care should be taken *not* to call this with a SAXParseException; this will
+        NOTE:  care should be taken * <p>
+        NOTE:  care should be taken * 
+        NOTE:  care should be taken * 
         lose information!!! */
     protected static XNIException createXNIException(SAXException exception) {
         return new XNIException(exception.getMessage(),exception);

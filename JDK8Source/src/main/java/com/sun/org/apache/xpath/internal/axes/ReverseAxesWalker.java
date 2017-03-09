@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ReverseAxesWalker.java,v 1.2.4.1 2005/09/14 19:45:21 jeffsuttor Exp $
+ * <p>
+ *  $ Id：ReverseAxesWalker.java,v 1.2.4.1 2005/09/14 19:45:21 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -28,6 +41,10 @@ import com.sun.org.apache.xpath.internal.XPathContext;
 
 /**
  * Walker for a reverse axes.
+ * <p>
+ *  沃克为反向轴。
+ * 
+ * 
  * @see <a href="http://www.w3.org/TR/xpath#predicates">XPath 2.4 Predicates</a>
  */
 public class ReverseAxesWalker extends AxesWalker
@@ -37,6 +54,10 @@ public class ReverseAxesWalker extends AxesWalker
   /**
    * Construct an AxesWalker using a LocPathIterator.
    *
+   * <p>
+   *  使用LocPathIterator构造AxesWalker。
+   * 
+   * 
    * @param locPathIterator The location path iterator that 'owns' this walker.
    */
   ReverseAxesWalker(LocPathIterator locPathIterator, int axis)
@@ -48,6 +69,10 @@ public class ReverseAxesWalker extends AxesWalker
    * Set the root node of the TreeWalker.
    * (Not part of the DOM2 TreeWalker interface).
    *
+   * <p>
+   *  设置TreeWalker的根节点。 (不是DOM2 TreeWalker接口的一部分)。
+   * 
+   * 
    * @param root The context node of this step.
    */
   public void setRoot(int root)
@@ -61,6 +86,9 @@ public class ReverseAxesWalker extends AxesWalker
    * Detaches the walker from the set which it iterated over, releasing
    * any computational resources and placing the iterator in the INVALID
    * state.
+   * <p>
+   *  将步行器从迭代的集合中分离,释放任何计算资源并将迭代器置于INVALID状态。
+   * 
    */
   public void detach()
   {
@@ -71,6 +99,10 @@ public class ReverseAxesWalker extends AxesWalker
   /**
    * Get the next node in document order on the axes.
    *
+   * <p>
+   *  获取轴上文档顺序中的下一个节点。
+   * 
+   * 
    * @return the next node in document order on the axes, or null.
    */
   protected int getNextNode()
@@ -93,6 +125,10 @@ public class ReverseAxesWalker extends AxesWalker
   /**
    * Tells if this is a reverse axes.  Overrides AxesWalker#isReverseAxes.
    *
+   * <p>
+   *  告诉这是否是一个反向轴。覆盖AxesWalker#isReverseAxes。
+   * 
+   * 
    * @return true for this class.
    */
   public boolean isReverseAxes()
@@ -103,6 +139,10 @@ public class ReverseAxesWalker extends AxesWalker
 //  /**
 //   *  Set the root node of the TreeWalker.
 //   *
+//   * <p>
+//   *  // *设置TreeWalker的根节点。 // *
+//   * 
+//   * 
 //   * @param root The context node of this step.
 //   */
 //  public void setRoot(int root)
@@ -117,6 +157,10 @@ public class ReverseAxesWalker extends AxesWalker
    * the nodes searched, but, for the moment, this case is probably
    * rare enough that the added complexity isn't worth it.
    *
+   * <p>
+   * 获取当前子上下文位置。为了做反向轴计数,暂时重新搜索轴直到谓词。对此的一个优化是缓存搜索的节点,但是,这种情况可能是足够稀少,增加的复杂性是不值得的。
+   * 
+   * 
    * @param predicateIndex The predicate index of the proximity position.
    *
    * @return The pridicate index, or -1.
@@ -175,6 +219,24 @@ public class ReverseAxesWalker extends AxesWalker
   /**
    * Count backwards one proximity position.
    *
+   * <p>
+   *  // -sb if(predicateIndex <0)return -1;
+   * 
+   *  int count = m_proximityPositions [predicateIndex];
+   * 
+   *  if(count <= 0){AxesWalker savedWalker = wi()。getLastUsedWalker();
+   * 
+   *  try {ReverseAxesWalker clone =(ReverseAxesWalker)this.clone();
+   * 
+   *  clone.setRoot(this.getRoot());
+   * 
+   *  clone.setPredicateCount(predicateIndex);
+   * 
+   *  clone.setPrevWalker(null); clone.setNextWalker(null); wi()。setLastUsedWalker(clone);
+   * 
+   *  // Count'em all count ++; int next;
+   * 
+   * 
    * @param i The predicate index.
    */
   protected void countProximityPosition(int i)
@@ -188,6 +250,16 @@ public class ReverseAxesWalker extends AxesWalker
    * named?
    *
    *
+   * <p>
+   *  while(DTM.NULL！=(next = clone.nextNode())){count ++; }}
+   * 
+   *  m_proximityPositions [predicateIndex] = count; } catch(CloneNotSupportedException cnse){
+   * 
+   *  //不能发生} finally {wi()。setLastUsedWalker(savedWalker); }}
+   * 
+   *  return count; }}
+   * 
+   * 
    * @param xctxt The XPath runtime context.
    *
    * @return the number of nodes in this node list.
@@ -237,6 +309,10 @@ public class ReverseAxesWalker extends AxesWalker
    * order.
    * Warning: This can only be called after setRoot has been called!
    *
+   * <p>
+   *  / **向后计算一个接近位置。
+   * 
+   * 
    * @return false.
    */
   public boolean isDocOrdered()

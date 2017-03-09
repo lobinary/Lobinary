@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -26,6 +27,10 @@ import org.w3c.dom.Element;
  * KeyResolverSpi implementation which resolves public keys and X.509 certificates from a
  * <code>dsig11:X509Digest</code> element.
  *
+ * <p>
+ *  KeyResolverSpi实现,它解析来自<code> dsig11：X509Digest </code>元素的公钥和X.509证书。
+ * 
+ * 
  * @author Brent Putman (putmanb@georgetown.edu)
  */
 public class X509DigestResolver extends KeyResolverSpi {
@@ -93,6 +98,10 @@ public class X509DigestResolver extends KeyResolverSpi {
     /**
      * Resolves from the storage resolver the actual certificate represented by the digest.
      *
+     * <p>
+     *  从存储解析器解析由摘要表示的实际证书。
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -147,6 +156,9 @@ public class X509DigestResolver extends KeyResolverSpi {
     /**
      * Method checkSrorage
      *
+     * <p>
+     *  方法checkSrorage
+     * 
      * @param storage
      * @throws KeyResolverException
      */

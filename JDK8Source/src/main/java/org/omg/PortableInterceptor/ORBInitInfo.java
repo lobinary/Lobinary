@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -20,6 +21,12 @@ package org.omg.PortableInterceptor;
    * <code>ORB.init</code> returns, the object no longer exists and an 
    * <code>OBJECT_NOT_EXIST</code> exception shall be thrown.
    *
+   * <p>
+   *  传递到每个<code> ORBInitializer </code>,允许它在ORB初始化时注册拦截器并执行其他职责。
+   * <p>
+   *  <code> ORBInitInfo </code>对象仅在<code> ORB.init </code>中有效。
+   * 如果服务保持对其<code> ORBInitInfo </code>对象的引用,并尝试在<code> ORB.init </code>返回后使用它,该对象不再存在,并且<code> OBJECT_NOT
+   * 
    * @see ORBInitializer
    */
 public interface ORBInitInfo extends ORBInitInfoOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 

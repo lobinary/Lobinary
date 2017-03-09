@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -98,6 +99,33 @@ import java.util.concurrent.TimeUnit;
  * it is not required that changes to files carried out on remote systems be
  * detected.
  *
+ * <p>
+ *  针对更改和事件<em>监视</em>注册对象的监视服务。例如,文件管理器可以使用监视服务来监视目录以进行改变,使得当文件被创建或删除时,它可以更新其对文件列表的显示。
+ * 
+ *  <p>通过调用其{@link Watchable#register register}方法,返回一个{@link WatchKey}来表示注册,向注册服务注册{@link Watchable}对象。
+ * 当检测到对象的事件时,用信号通知该键,如果没有当前发出信号,则将其排队到监视服务,使得它可以被消费者检索,该消费者调用{@link #poll )poll}或{@link #take()take}方法来
+ * 检索键和处理事件。
+ * 一旦事件已经被处理,消费者调用密钥的{@link WatchKey#reset reset}方法来重置密钥,该密钥允许通过信号发送密钥并且用其它事件重新排队。
+ * 
+ * <p>通过调用键的{@link WatchKey#cancel cancel}方法,可以取消通过手表服务进行注册。在取消它时排队的键将保留在队列中,直到它被检索。根据对象,可以自动取消键。
+ * 例如,假设监视目录并且监视服务检测到它已被删除或其文件系统不再可访问。当以这种方式取消键时,如果没有当前发信号通知,则发信号通知和排队。
+ * 为了确保通知消费者,{@code reset}方法的返回值表示密钥是否有效。
+ * 
+ *  <p>手表服务可安全地供多个并发消费者使用。为了确保只有一个消费者在任何时候处理特定对象的事件,那么应该注意确保键的{@code reset}方法仅在其事件被处理后才被调用。
+ * 可以随时调用{@link #close close}方法关闭服务,导致任何等待检索键的线程抛出{@code ClosedWatchServiceException}。
+ * 
+ * <p>文件系统可以报告事件的速度比可以检索或处理的速度快,实施可能会对可能累积的事件数施加未指定的限制。
+ * 如果实现<em>有意地丢弃事件,那么它会安排密钥的{@link WatchKey#pollEvents pollEvents}方法返回事件类型为{@link StandardWatchEventKinds#OVERFLOW OVERFLOW}
+ * 的元素。
+ * <p>文件系统可以报告事件的速度比可以检索或处理的速度快,实施可能会对可能累积的事件数施加未指定的限制。此事件可由消费者用作重新检查对象状态的触发器。
+ * 
+ *  <p>当报告一个事件以指示被监视目录中的文件已被修改时,不能保证已修改该文件的一个或多个程序已经完成。应注意协调与可能正在更新文件的其他程序的访问。
+ *  {@link java.nio.channels.FileChannel FileChannel}类定义了用于锁定文件的区域以防其他程序访问的方法。
+ * 
+ *  <h2>平台相关性</h2>
+ * 
+ * <p>观察来自文件系统的事件的实现旨在直接映射到可用的本地文件事件通知工具,或者在本机工具不可用时使用原始机制,例如轮询。
+ * 
  * @since 1.7
  *
  * @see FileSystem#newWatchService
@@ -121,6 +149,15 @@ public interface WatchService
      * If this watch service is already closed then invoking this method
      * has no effect.
      *
+     * <p>
+     * 因此,关于如何检测事件,它们的时间性以及它们的排序是否被保留的许多细节是高度实现特定的。
+     * 例如,当监视目录中的文件被修改时,在一些实现中可能导致单个{@link StandardWatchEventKinds#ENTRY_MODIFY ENTRY_MODIFY}事件,而在其他实现中可能导致几
+     * 个事件。
+     * 因此,关于如何检测事件,它们的时间性以及它们的排序是否被保留的许多细节是高度实现特定的。短期文件(意味着文件在创建之后很快被删除)可能无法被周期性轮询文件系统以检测更改的原始实现检测到。
+     * 
+     *  <p>如果观看的文件不位于本地存储设备上,则它是实现特定的,如果可以检测到文件的更改。特别地,不需要检测对在远程系统上执行的文件的改变。
+     * 
+     * 
      * @throws  IOException
      *          if an I/O error occurs
      */
@@ -131,6 +168,16 @@ public interface WatchService
      * Retrieves and removes the next watch key, or {@code null} if none are
      * present.
      *
+     * <p>
+     *  关闭此手表服务。
+     * 
+     *  <p>如果某个线程当前在{@link #take take}或{@link #poll(long,TimeUnit)poll}方法中被阻塞,等待一个键排队,那么它立即会收到{@link ClosedWatchServiceException}
+     * 。
+     * 与此手表服务相关联的任何有效密钥都是{@link WatchKey#isValid invalidated}。
+     * 
+     * <p>关闭观察服务后,任何进一步尝试调用操作的操作都会抛出{@link ClosedWatchServiceException}。如果这个监视服务已经关闭,那么调用这个方法没有效果。
+     * 
+     * 
      * @return  the next watch key, or {@code null}
      *
      * @throws  ClosedWatchServiceException
@@ -142,6 +189,10 @@ public interface WatchService
      * Retrieves and removes the next watch key, waiting if necessary up to the
      * specified wait time if none are yet present.
      *
+     * <p>
+     *  检索并删除下一个观看键,或{@code null}(如果没有)。
+     * 
+     * 
      * @param   timeout
      *          how to wait before giving up, in units of unit
      * @param   unit
@@ -162,6 +213,10 @@ public interface WatchService
     /**
      * Retrieves and removes next watch key, waiting if none are yet present.
      *
+     * <p>
+     *  检索并删除下一个监视键,如果必要,等待指定的等待时间(如果还没有)。
+     * 
+     * 
      * @return  the next watch key
      *
      * @throws  ClosedWatchServiceException

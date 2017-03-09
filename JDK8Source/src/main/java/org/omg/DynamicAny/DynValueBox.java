@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -15,6 +16,7 @@ package org.omg.DynamicAny;
     * For a DynValueBox representing a non-null value type, the DynValueBox has a single component
     * of the boxed type. A DynValueBox representing a null value type has no components
     * and a current position of -1.
+    * <p>
     */
 public interface DynValueBox extends DynValueBoxOperations, org.omg.DynamicAny.DynValueCommon, org.omg.CORBA.portable.IDLEntity 
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,9 @@ import java.nio.ByteOrder;
  * This class is designed to reduce the number of methods that must
  * be implemented by subclasses.
  *
+ * <p>
+ *  一个实现<code> ImageOutputStream </code>接口的抽象类。这个类被设计为减少必须由子类实现的方法的数量。
+ * 
  */
 public abstract class ImageOutputStreamImpl
     extends ImageInputStreamImpl
@@ -41,6 +45,9 @@ public abstract class ImageOutputStreamImpl
 
     /**
      * Constructs an <code>ImageOutputStreamImpl</code>.
+     * <p>
+     *  构造一个<code> ImageOutputStreamImpl </code>。
+     * 
      */
     public ImageOutputStreamImpl() {
     }
@@ -484,6 +491,10 @@ public abstract class ImageOutputStreamImpl
      * beginning of the <code>write(int)</code> and
      * <code>write(byte[], int, int)</code> methods.
      *
+     * <p>
+     *  如果位偏移不为零,则强制当前字节中的剩余位为0,并将流位置前移一位。
+     * 这个方法应该由<code> write(int)</code>和<code> write(byte [],int,int)</code>方法的子类调用。
+     * 
      * @exception IOException if an I/O error occurs.
      */
     protected final void flushBits() throws IOException {

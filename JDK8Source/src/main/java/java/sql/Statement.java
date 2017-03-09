@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,14 @@ package java.sql;
  * <code>Statement</code> interface implicitly close a current
  * <code>ResultSet</code> object of the statement if an open one exists.
  *
+ * <p>
+ *  <P>用于执行静态SQL语句并返回其生成的结果的对象。
+ * <P>
+ *  默认情况下,每个<code> Statement </code>对象只能有一个<code> ResultSet </code>对象可以同时打开。
+ * 因此,如果一个<code> ResultSet </code>对象的读取与另一个的读取交错,则每个对象必须由不同的<code> Statement </code>对象生成。
+ *  <code> Statement </code>接口中的所有执行方法隐含地关闭语句的当前<code> ResultSet </code>对象(如果存在打开的对象)。
+ * 
+ * 
  * @see Connection#createStatement
  * @see ResultSet
  */
@@ -48,6 +57,12 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * <strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     *  执行给定的SQL语句,它返回单个<code> ResultSet </code>对象。
+     * p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * 
+     * 
      * @param sql an SQL statement to be sent to the database, typically a
      *        static SQL <code>SELECT</code> statement
      * @return a <code>ResultSet</code> object that contains the data produced
@@ -71,6 +86,13 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * <strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     *  执行给定的SQL语句,可以是<code> INSERT </code>,<code> UPDATE </code>或<code> DELETE </code>语句或不返回任何内容的SQL语句, DDL
+     * 语句。
+     * p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * 
+     * 
      * @param sql an SQL Data Manipulation Language (DML) statement, such as <code>INSERT</code>, <code>UPDATE</code> or
      * <code>DELETE</code>; or an SQL statement that returns nothing,
      * such as a DDL statement.
@@ -104,6 +126,14 @@ public interface Statement extends Wrapper, AutoCloseable {
      * closed, its current <code>ResultSet</code> object, if one exists, is
      * also closed.
      *
+     * <p>
+     * 立即释放此<code> Statement </code>对象的数据库和JDBC资源,而不是在自动关闭时等待此事件发生。一旦完成它们,一般是良好的做法释放资源,以避免占用数据库资源。
+     * <P>
+     *  调用已经关闭的<code> Statement </code>对象上的<code> close </code>方法没有效果。
+     * <P>
+     *  <B>注意：</B>当一个<code> Statement </code>对象关闭时,它的当前<code> ResultSet </code>对象
+     * 
+     * 
      * @exception SQLException if a database access error occurs
      */
     void close() throws SQLException;
@@ -120,6 +150,14 @@ public interface Statement extends Wrapper, AutoCloseable {
      * and <code>LONGVARCHAR</code> columns.  If the limit is exceeded, the
      * excess data is silently discarded.
      *
+     * <p>
+     *  检索由此<code> Statement </code>对象生成的<code> ResultSet </code>对象中可返回字符和二进制列值的最大字节数。
+     * 此限制仅适用于<code> BINARY </code>,<code> VARBINARY </code>,<code> LONGVARBINARY </code>,<code> CHAR </code>
+     * ,<code> VARCHAR </code> <code> NCHAR </code>,<code> NVARCHAR </code>,<code> LONGNVARCHAR </code>和<code>
+     *  LONGVARCHAR </code>列。
+     *  检索由此<code> Statement </code>对象生成的<code> ResultSet </code>对象中可返回字符和二进制列值的最大字节数。如果超过限制,则超出的数据将被静默丢弃。
+     * 
+     * 
      * @return the current column size limit for columns storing character and
      *         binary values; zero means there is no limit
      * @exception SQLException if a database access error occurs or
@@ -141,6 +179,15 @@ public interface Statement extends Wrapper, AutoCloseable {
      * is silently discarded. For maximum portability, use values
      * greater than 256.
      *
+     * <p>
+     *  设置由<code> Statement </code>对象生成的<code> ResultSet </code>对象中可返回字符和二进制列值的最大字节数限制。
+     * 
+     * 此限制仅适用于<code> BINARY </code>,<code> VARBINARY </code>,<code> LONGVARBINARY </code>,<code> CHAR </code>
+     * ,<code> VARCHAR </code> <code> NCHAR </code>,<code> NVARCHAR </code>,<code> LONGNVARCHAR </code>和<code>
+     *  LONGVARCHAR </code>字段。
+     * 如果超过限制,则超出的数据将被静默丢弃。为了实现最大可移植性,请使用大于256的值。
+     * 
+     * 
      * @param max the new column size limit in bytes; zero means there is no limit
      * @exception SQLException if a database access error occurs,
      * this method is called on a closed <code>Statement</code>
@@ -155,6 +202,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * <code>Statement</code> object can contain.  If this limit is exceeded,
      * the excess rows are silently dropped.
      *
+     * <p>
+     *  检索由此<code> Statement </code>对象生成的<code> ResultSet </code>对象可以包含的最大行数。如果超出此限制,则将静默删除多余的行。
+     * 
+     * 
      * @return the current maximum number of rows for a <code>ResultSet</code>
      *         object produced by this <code>Statement</code> object;
      *         zero means there is no limit
@@ -171,6 +222,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * If the limit is exceeded, the excess
      * rows are silently dropped.
      *
+     * <p>
+     *  设置<code> Statement </code>对象生成的任何<code> ResultSet </code>对象可以包含给定数字的最大行数限制。如果超过限制,则超出的行将被静默删除。
+     * 
+     * 
      * @param max the new max rows limit; zero means there is no limit
      * @exception SQLException if a database access error occurs,
      * this method is called on a closed <code>Statement</code>
@@ -196,6 +251,16 @@ public interface Statement extends Wrapper, AutoCloseable {
      * to making this call, disabling escape processing for
      * <code>PreparedStatements</code> objects will have no effect.
      *
+     * <p>
+     *  设置或禁用转义处理。如果启用了逃生扫描(默认值),驱动程序将在将SQL语句发送到数据库之前执行转义替换。
+     * p>
+     *  {@code Connection}和{@code DataSource}属性{@code escapeProcessing}可用于更改默认的转义处理行为。
+     * 值为true(默认值)对所有{@code Statement}对象启用转义处理。值为false会禁用所有{@code Statement}对象的转义处理。
+     *  {@code setEscapeProcessing}方法可用于为单个{@code Statement}对象指定转义处理行为。
+     * <p>
+     * 注意：由于准备语句通常在进行此调用之前被解析,因此禁用<code> PreparedStatements </code>对象的转义处理将不起作用。
+     * 
+     * 
      * @param enable <code>true</code> to enable escape processing;
      *       <code>false</code> to disable it
      * @exception SQLException if a database access error occurs or
@@ -209,6 +274,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * If the limit is exceeded, a
      * <code>SQLException</code> is thrown.
      *
+     * <p>
+     *  检索驱动程序等待执行<code> Statement </code>对象的秒数。如果超过限制,将抛出<code> SQLException </code>。
+     * 
+     * 
      * @return the current query timeout limit in seconds; zero means there is
      *         no limit
      * @exception SQLException if a database access error occurs or
@@ -236,6 +305,17 @@ public interface Statement extends Wrapper, AutoCloseable {
      * the entire batch of SQL commands invoked by the {@code executeBatch}
      * method (consult your driver vendor documentation for details).
      *
+     * <p>
+     *  设置驱动程序等待<code> Statement </code>对象执行到给定秒数的秒数。 y默认情况下,对于运行语句完成所允许的时间量没有限制。
+     * 如果超出限制,则会抛出<code> SQLTimeoutException </code>。
+     *  JDBC驱动程序必须将此限制应用于<code> execute </code>,<code> executeQuery </code>和<code> executeUpdate </code>方法。
+     * <p>
+     *  <strong>注意</strong>：JDBC驱动程序实现也可以将此限制应用于{@code ResultSet}方法(有关详细信息,请参考驱动程序供应商文档)。
+     * <p>
+     *  <strong>注意</strong>：对于{@code Statement}批处理,它是实现定义的超时是否应用于通过{@code addBatch}方法添加的单个SQL命令或整个{@code executeBatch}
+     * 方法调用的一批SQL命令(有关详细信息,请参阅驱动程序供应商文档)。
+     * 
+     * 
      * @param seconds the new query timeout limit in seconds; zero means
      *        there is no limit
      * @exception SQLException if a database access error occurs,
@@ -251,6 +331,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * This method can be used by one thread to cancel a statement that
      * is being executed by another thread.
      *
+     * <p>
+     *  如果DBMS和驱动程序支持中止一个SQL语句,则取消此<code> Statement </code>对象。这个方法可以被一个线程用来取消由另一个线程执行的语句。
+     * 
+     * 
      * @exception SQLException if a database access error occurs or
      * this method is called on a closed <code>Statement</code>
      * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -273,6 +357,16 @@ public interface Statement extends Wrapper, AutoCloseable {
      * will be chained on it rather than on the <code>Statement</code>
      * object that produced it.
      *
+     * <p>
+     * 检索此<code> Statement </code>对象上调用所报告的第一个警告。
+     * 后续<code> Statement </code>对象警告将链接到此<code> SQLWarning </code>对象。
+     * 
+     *  <p>警告链会在每次重新执行语句时自动清除。此方法可能不会在封闭的<code> Statement </code>对象上调用;这样做会导致抛出<code> SQLException </code>。
+     * 
+     *  <P> <B>注意：</B>如果您正在处理一个<code> ResultSet </code>对象,那么与<code> ResultSet </code>对象上的读取相关联的任何警告都将链接在其上,而
+     * 不是在产生它的<code> Statement </code>对象上。
+     * 
+     * 
      * @return the first <code>SQLWarning</code> object or <code>null</code>
      *         if there are no warnings
      * @exception SQLException if a database access error occurs or
@@ -287,6 +381,11 @@ public interface Statement extends Wrapper, AutoCloseable {
      * <code>null</code> until a new warning is reported for this
      * <code>Statement</code> object.
      *
+     * <p>
+     *  清除此<code> Statement </code>对象上报告的所有警告。
+     * 调用此方法后,<code> getWarnings </code>方法将返回<code> null </code>,直到为此<code> Statement </code>对象报告新的警告。
+     * 
+     * 
      * @exception SQLException if a database access error occurs or
      * this method is called on a closed <code>Statement</code>
      */
@@ -309,6 +408,16 @@ public interface Statement extends Wrapper, AutoCloseable {
      * the one that generated the <code>ResultSet</code> object being used for
      * positioning. Also, cursor names must be unique within a connection.
      *
+     * <p>
+     * 将SQL游标名称设置为给定的<code> String </code>,它将被后续的<code> Statement </code>对象<code> execute </code>方法使用。
+     * 然后可以在SQL定位的update或delete语句中使用此名称来标识由此语句生成的<code> ResultSet </code>对象中的当前行。如果数据库不支持定位更新/删除,此方法是noop。
+     * 为了确保游标具有适当的隔离级别以支持更新,游标的<code> SELECT </code>语句应该具有<code> SELECT FOR UPDATE </code>的形式。
+     * 如果<code> FOR UPDATE </code>不存在,定位的更新可能会失败。
+     * 
+     *  <P> <B>注意：</B>根据定义,定位更新和删除的执行必须由与生成<code> ResultSet </code的对象不同的<code> Statement </code> >用于定位的对象。
+     * 此外,光标名称在连接中必须是唯一的。
+     * 
+     * 
      * @param name the new cursor name, which must be unique within
      *             a connection
      * @exception SQLException if a database access error occurs or
@@ -335,6 +444,18 @@ public interface Statement extends Wrapper, AutoCloseable {
      * <p>
      *<strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     *  执行给定的SQL语句,它可能返回多个结果。在一些(不常见的)情况下,单个SQL语句可能返回多个结果集和/或更新计数。
+     * 通常,您可以忽略此操作,除非您(1)执行一个您知道可能返回多个结果的存储过程,或(2)您正在动态执行未知的SQL字符串。
+     * <P>
+     * <code> execute </code>方法执行SQL语句并指示第一个结果的格式。
+     * 然后必须使用方法<code> getResultSet </code>或<code> getUpdateCount </code>检索结果,并使用<code> getMoreResults </code>
+     * 移动到任何后续结果。
+     * <code> execute </code>方法执行SQL语句并指示第一个结果的格式。
+     * <p>
+     *  strong>注意</strong>：此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>上调用。
+     * 
+     * 
      * @param sql any SQL statement
      * @return <code>true</code> if the first result is a <code>ResultSet</code>
      *         object; <code>false</code> if it is an update count or there are
@@ -357,6 +478,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      *  Retrieves the current result as a <code>ResultSet</code> object.
      *  This method should be called only once per result.
      *
+     * <p>
+     *  将当前结果作为<code> ResultSet </code>对象检索。每个结果只应调用此方法一次。
+     * 
+     * 
      * @return the current result as a <code>ResultSet</code> object or
      * <code>null</code> if the result is an update count or there are no more results
      * @exception SQLException if a database access error occurs or
@@ -370,6 +495,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      *  if the result is a <code>ResultSet</code> object or there are no more results, -1
      *  is returned. This method should be called only once per result.
      *
+     * <p>
+     *  检索当前结果作为更新计数;如果结果是一个<code> ResultSet </code>对象或没有更多的结果,则返回-1。每个结果只应调用此方法一次。
+     * 
+     * 
      * @return the current result as an update count; -1 if the current result is a
      * <code>ResultSet</code> object or there are no more results
      * @exception SQLException if a database access error occurs or
@@ -390,6 +519,14 @@ public interface Statement extends Wrapper, AutoCloseable {
      *     ((stmt.getMoreResults() == false) && (stmt.getUpdateCount() == -1))
      * }</PRE>
      *
+     * <p>
+     *  移动到此<code> Statement </code>对象的下一个结果,如果它是一个<code> ResultSet </code>对象,则返回<code> true </code>,并隐式关闭任何
+     * 当前<code> ResultSet </code >通过方法<code> getResultSet </code>获得的对象。
+     * 
+     *  <P>当以下是真的时,没有更多的结果：<PRE> {@ code // stmt是一个Statement对象((stmt.getMoreResults()== false)&&(stmt.getUpdateCount()== -1) )}
+     *  </PRE>。
+     * 
+     * 
      * @return <code>true</code> if the next result is a <code>ResultSet</code>
      *         object; <code>false</code> if it is an update count or there are
      *         no more results
@@ -414,6 +551,13 @@ public interface Statement extends Wrapper, AutoCloseable {
      * Each result set has its own methods for getting and setting
      * its own fetch direction.
      *
+     * <p>
+     *  向驱动程序提供关于使用此<code> Statement </code>对象创建的<code> ResultSet </code>对象中将处理行的方向的提示。
+     * 默认值为<code> ResultSet.FETCH_FORWARD </code>。
+     * <P>
+     * 请注意,此方法为由此<code> Statement </code>对象生成的结果集设置默认提取方向。每个结果集都有自己的方法来获取和设置自己的获取方向。
+     * 
+     * 
      * @param direction the initial direction for processing rows
      * @exception SQLException if a database access error occurs,
      * this method is called on a closed <code>Statement</code>
@@ -433,6 +577,11 @@ public interface Statement extends Wrapper, AutoCloseable {
      * a fetch direction by calling the method <code>setFetchDirection</code>,
      * the return value is implementation-specific.
      *
+     * <p>
+     *  检索从数据库表中提取行的方向,这是从此<code> Statement </code>对象生成的结果集的默认行。
+     * 如果这个<code> Statement </code>对象没有通过调用<code> setFetchDirection </code>方法来设置获取方向,则返回值是实现特定的。
+     * 
+     * 
      * @return the default fetch direction for result sets generated
      *          from this <code>Statement</code> object
      * @exception SQLException if a database access error occurs or
@@ -449,6 +598,11 @@ public interface Statement extends Wrapper, AutoCloseable {
      * If the value specified is zero, then the hint is ignored.
      * The default value is zero.
      *
+     * <p>
+     *  向JDBC驱动程序提供关于在由此<code> Statement </code>生成的<code> ResultSet </code>对象需要更多行时应从数据库获取的行数的提示。
+     * 如果指定的值为零,则忽略提示。默认值为零。
+     * 
+     * 
      * @param rows the number of rows to fetch
      * @exception SQLException if a database access error occurs,
      * this method is called on a closed <code>Statement</code> or the
@@ -466,6 +620,11 @@ public interface Statement extends Wrapper, AutoCloseable {
      * a fetch size by calling the method <code>setFetchSize</code>,
      * the return value is implementation-specific.
      *
+     * <p>
+     *  检索从此<code> Statement </code>对象生成的<code> ResultSet </code>对象的默认访存大小的结果集行数。
+     * 如果这个<code> Statement </code>对象没有通过调用<code> setFetchSize </code>方法来设置获取大小,那么返回值是实现特定的。
+     * 
+     * 
      * @return the default fetch size for result sets generated
      *          from this <code>Statement</code> object
      * @exception SQLException if a database access error occurs or
@@ -479,6 +638,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * Retrieves the result set concurrency for <code>ResultSet</code> objects
      * generated by this <code>Statement</code> object.
      *
+     * <p>
+     *  检索由此<code> Statement </code>对象生成的<code> ResultSet </code>对象的结果集并发。
+     * 
+     * 
      * @return either <code>ResultSet.CONCUR_READ_ONLY</code> or
      * <code>ResultSet.CONCUR_UPDATABLE</code>
      * @exception SQLException if a database access error occurs or
@@ -491,6 +654,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * Retrieves the result set type for <code>ResultSet</code> objects
      * generated by this <code>Statement</code> object.
      *
+     * <p>
+     *  检索由此<code> Statement </code>对象生成的<code> ResultSet </code>对象的结果集类型。
+     * 
+     * 
      * @return one of <code>ResultSet.TYPE_FORWARD_ONLY</code>,
      * <code>ResultSet.TYPE_SCROLL_INSENSITIVE</code>, or
      * <code>ResultSet.TYPE_SCROLL_SENSITIVE</code>
@@ -507,6 +674,12 @@ public interface Statement extends Wrapper, AutoCloseable {
      * <P>
      *<strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     * 将给定的SQL命令添加到此<code> Statement </code>对象的当前命令列表中。此列表中的命令可以通过调用<code> executeBatch </code>方法作为批处理执行。
+     * <P>
+     *  strong>注意</strong>：此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>上调用。
+     * 
+     * 
      * @param sql typically this is a SQL <code>INSERT</code> or
      * <code>UPDATE</code> statement
      * @exception SQLException if a database access error occurs,
@@ -523,6 +696,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * Empties this <code>Statement</code> object's current list of
      * SQL commands.
      * <P>
+     * <p>
+     *  清空此<code> Statement </code>对象的当前SQL命令列表。
+     * <P>
+     * 
      * @exception SQLException if a database access error occurs,
      *  this method is called on a closed <code>Statement</code> or the
      * driver does not support batch updates
@@ -570,6 +747,25 @@ public interface Statement extends Wrapper, AutoCloseable {
      * accommodate the option of continuing to process commands in a batch
      * update after a <code>BatchUpdateException</code> object has been thrown.
      *
+     * <p>
+     *  将一批命令提交到数据库以供执行,如果所有命令成功执行,则返回更新计数的数组。返回的数组的<code> int </code>元素被排序为对应于批处理中的命令,这些命令根据它们添加到批处理的顺序排序。
+     * 由方法<code> executeBatch </code>返回的数组中的元素可能是以下之一：。
+     * <OL>
+     *  <LI>大于或等于零的数字表示命令已成功处理,是一个更新计数,提供数据库中受命令执行影响的行数<LI> <code> SUCCESS_NO_INFO的值</code>  - 表示命令已成功处理,但受影
+     * 响的行数未知。
+     * <P>
+     * 如果批处理更新中的某个命令无法正常执行,此方法会抛出<code> BatchUpdateException </code>,并且JDBC驱动程序可能也可能不会继续处理批处理中的其余命令。
+     * 然而,驱动程序的行为必须与特定的DBMS一致,总是继续处理命令或从不继续处理命令。
+     * 如果驱动程序在故障后继续处理,由方法<code> BatchUpdateException.getUpdateCounts </code>返回的数组将包含与批处理中的命令一样多的元素,并且至少有一个元素
+     * 如下：。
+     * 然而,驱动程序的行为必须与特定的DBMS一致,总是继续处理命令或从不继续处理命令。
+     * 
+     *  <LI> <code> EXECUTE_FAILED </code>的值表示该命令无法成功执行,并且仅在驱动程序在命令失败后继续处理命令时发生
+     * </OL>
+     * <P>
+     *  在Java 2 SDK,标准版本1.3中修改了可能的实现和返回值,以适应在引发<code> BatchUpdateException </code>对象后继续处理批量更新中的命令的选项。
+     * 
+     * 
      * @return an array of update counts containing one element for each
      * command in the batch.  The elements of the array are ordered according
      * to the order in which commands were added to the batch.
@@ -592,6 +788,10 @@ public interface Statement extends Wrapper, AutoCloseable {
     /**
      * Retrieves the <code>Connection</code> object
      * that produced this <code>Statement</code> object.
+     * <p>
+     *  检索生成此<code> Statement </code>对象的<code> Connection </code>对象。
+     * 
+     * 
      * @return the connection that produced this statement
      * @exception SQLException if a database access error occurs or
      * this method is called on a closed <code>Statement</code>
@@ -605,6 +805,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * The constant indicating that the current <code>ResultSet</code> object
      * should be closed when calling <code>getMoreResults</code>.
      *
+     * <p>
+     *  常量指示当调用<code> getMoreResults </code>时,当前<code> ResultSet </code>对象应该关闭。
+     * 
+     * 
      * @since 1.4
      */
     int CLOSE_CURRENT_RESULT = 1;
@@ -613,6 +817,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * The constant indicating that the current <code>ResultSet</code> object
      * should not be closed when calling <code>getMoreResults</code>.
      *
+     * <p>
+     *  常量指示当调用<code> getMoreResults </code>时,不应关闭当前<code> ResultSet </code>对象。
+     * 
+     * 
      * @since 1.4
      */
     int KEEP_CURRENT_RESULT = 2;
@@ -622,6 +830,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * have previously been kept open should be closed when calling
      * <code>getMoreResults</code>.
      *
+     * <p>
+     * 常量指示所有以前保持打开的<code> ResultSet </code>对象在调用<code> getMoreResults </code>时应关闭。
+     * 
+     * 
      * @since 1.4
      */
     int CLOSE_ALL_RESULTS = 3;
@@ -630,6 +842,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * The constant indicating that a batch statement executed successfully
      * but that no count of the number of rows it affected is available.
      *
+     * <p>
+     *  该常量指示批处理语句已成功执行,但没有对其影响的行数的计数可用。
+     * 
+     * 
      * @since 1.4
      */
     int SUCCESS_NO_INFO = -2;
@@ -638,6 +854,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * The constant indicating that an error occurred while executing a
      * batch statement.
      *
+     * <p>
+     *  常量,表示执行批处理语句时发生错误。
+     * 
+     * 
      * @since 1.4
      */
     int EXECUTE_FAILED = -3;
@@ -646,6 +866,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * The constant indicating that generated keys should be made
      * available for retrieval.
      *
+     * <p>
+     *  常数,指示生成的键应该可用于检索。
+     * 
+     * 
      * @since 1.4
      */
     int RETURN_GENERATED_KEYS = 1;
@@ -654,6 +878,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * The constant indicating that generated keys should not be made
      * available for retrieval.
      *
+     * <p>
+     *  常数,指示生成的键不应提供检索。
+     * 
+     * 
      * @since 1.4
      */
     int NO_GENERATED_KEYS = 2;
@@ -670,6 +898,14 @@ public interface Statement extends Wrapper, AutoCloseable {
      *     ((stmt.getMoreResults(current) == false) && (stmt.getUpdateCount() == -1))
      * }</PRE>
      *
+     * <p>
+     *  移动到此<code> Statement </code>对象的下一个结果,根据给定标志指定的指令处理任何当前<code> ResultSet </code>对象,并返回<code> true </code >
+     * 如果下一个结果是一个<code> ResultSet </code>对象。
+     * 
+     *  <P>当以下是真的时,没有更多的结果：<PRE> {@ code // stmt是一个Statement对象((stmt.getMoreResults(current)== false)&&(stmt.getUpdateCount ))}
+     *  </PRE>。
+     * 
+     * 
      * @param current one of the following <code>Statement</code>
      *        constants indicating what should happen to current
      *        <code>ResultSet</code> objects obtained using the method
@@ -706,6 +942,13 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p><B>Note:</B>If the columns which represent the auto-generated keys were not specified,
      * the JDBC driver implementation will determine the columns which best represent the auto-generated keys.
      *
+     * <p>
+     *  检索由于执行此<code> Statement </code>对象而创建的任何自动生成的键。
+     * 如果这个<code> Statement </code>对象没有生成任何键,则返回一个空的<code> ResultSet </code>对象。
+     * 
+     *  p> <B>注意：</B>如果未指定表示自动生成的键的列,JDBC驱动程序实现将确定最能代表自动生成的键的列。
+     * 
+     * 
      * @return a <code>ResultSet</code> object containing the auto-generated key(s)
      *         generated by the execution of this <code>Statement</code> object
      * @exception SQLException if a database access error occurs or
@@ -726,6 +969,13 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * <strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     * 执行给定的SQL语句,并用给定标志向驱动程序发出信号,告知该<code> Statement </code>对象生成的自动生成的键是否应该可用于检索。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略该标志。
+     * p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * 
+     * 
      * @param sql an SQL Data Manipulation Language (DML) statement, such as <code>INSERT</code>, <code>UPDATE</code> or
      * <code>DELETE</code>; or an SQL statement that returns nothing,
      * such as a DDL statement.
@@ -764,6 +1014,13 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * <strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     *  执行给定的SQL语句,并通知驱动程序给定数组中指示的自动生成的键应该可用于检索。此数组包含目标表中包含应该可用的自动生成的键的列的索引。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略该数组。
+     * p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * 
+     * 
      * @param sql an SQL Data Manipulation Language (DML) statement, such as <code>INSERT</code>, <code>UPDATE</code> or
      * <code>DELETE</code>; or an SQL statement that returns nothing,
      * such as a DDL statement.
@@ -799,6 +1056,13 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * <strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     * 执行给定的SQL语句,并通知驱动程序给定数组中指示的自动生成的键应该可用于检索。此数组包含目标表中包含应该可用的自动生成的键的列的名称。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略该数组。
+     * p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * 
+     * 
      * @param sql an SQL Data Manipulation Language (DML) statement, such as <code>INSERT</code>, <code>UPDATE</code> or
      * <code>DELETE</code>; or an SQL statement that returns nothing,
      * such as a DDL statement.
@@ -844,6 +1108,20 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      *<strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     *  执行给定的SQL语句,它可能返回多个结果,并通知驱动程序任何自动生成的键应该可用于检索。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略此信号。
+     * <P>
+     *  在一些(不常见的)情况下,单个SQL语句可能返回多个结果集和/或更新计数。通常,您可以忽略此操作,除非您(1)执行一个您知道可能返回多个结果的存储过程,或(2)您正在动态执行未知的SQL字符串。
+     * <P>
+     * <code> execute </code>方法执行SQL语句并指示第一个结果的格式。
+     * 然后必须使用方法<code> getResultSet </code>或<code> getUpdateCount </code>检索结果,并使用<code> getMoreResults </code>
+     * 移动到任何后续结果。
+     * <code> execute </code>方法执行SQL语句并指示第一个结果的格式。
+     * p>
+     *  strong>注意</strong>：此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>上调用。
+     * 
+     * 
      * @param sql any SQL statement
      * @param autoGeneratedKeys a constant indicating whether auto-generated
      *        keys should be made available for retrieval using the method
@@ -899,6 +1177,20 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * <strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     *  执行给定的SQL语句,它可能返回多个结果,并通知驱动程序给定数组中指示的自动生成的键应该可用于检索。此数组包含目标表中包含应该可用的自动生成的键的列的索引。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略该数组。
+     * <P>
+     *  在一些(不常见的)情况下,单个SQL语句可能返回多个结果集和/或更新计数。通常,您可以忽略此操作,除非您(1)执行一个您知道可能返回多个结果的存储过程,或(2)您正在动态执行未知的SQL字符串。
+     * <P>
+     * <code> execute </code>方法执行SQL语句并指示第一个结果的格式。
+     * 然后必须使用方法<code> getResultSet </code>或<code> getUpdateCount </code>检索结果,并使用<code> getMoreResults </code>
+     * 移动到任何后续结果。
+     * <code> execute </code>方法执行SQL语句并指示第一个结果的格式。
+     * p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * 
+     * 
      * @param sql any SQL statement
      * @param columnIndexes an array of the indexes of the columns in the
      *        inserted row that should be  made available for retrieval by a
@@ -948,6 +1240,20 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * <strong>Note:</strong>This method cannot be called on a
      * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * <p>
+     *  执行给定的SQL语句,它可能返回多个结果,并通知驱动程序给定数组中指示的自动生成的键应该可用于检索。此数组包含目标表中包含应该可用的自动生成的键的列的名称。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略该数组。
+     * <P>
+     *  在一些(不常见的)情况下,单个SQL语句可能返回多个结果集和/或更新计数。通常,您可以忽略此操作,除非您(1)执行一个您知道可能返回多个结果的存储过程,或(2)您正在动态执行未知的SQL字符串。
+     * <P>
+     * <code> execute </code>方法执行SQL语句并指示第一个结果的格式。
+     * 然后必须使用方法<code> getResultSet </code>或<code> getUpdateCount </code>检索结果,并使用<code> getMoreResults </code>
+     * 移动到任何后续结果。
+     * <code> execute </code>方法执行SQL语句并指示第一个结果的格式。
+     * p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * 
+     * 
      * @param sql any SQL statement
      * @param columnNames an array of the names of the columns in the inserted
      *        row that should be made available for retrieval by a call to the
@@ -978,6 +1284,10 @@ public interface Statement extends Wrapper, AutoCloseable {
      * Retrieves the result set holdability for <code>ResultSet</code> objects
      * generated by this <code>Statement</code> object.
      *
+     * <p>
+     *  检索由此<code> Statement </code>对象生成的<code> ResultSet </code>对象的结果集保持性。
+     * 
+     * 
      * @return either <code>ResultSet.HOLD_CURSORS_OVER_COMMIT</code> or
      *         <code>ResultSet.CLOSE_CURSORS_AT_COMMIT</code>
      * @exception SQLException if a database access error occurs or
@@ -990,6 +1300,10 @@ public interface Statement extends Wrapper, AutoCloseable {
     /**
      * Retrieves whether this <code>Statement</code> object has been closed. A <code>Statement</code> is closed if the
      * method close has been called on it, or if it is automatically closed.
+     * <p>
+     *  检索此<...> Statement </code>对象是否已关闭。如果方法close已经被调用,或者它被自动关闭,那么<code> Statement </code>被关闭。
+     * 
+     * 
      * @return true if this <code>Statement</code> object is closed; false if it is still open
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -1010,6 +1324,15 @@ public interface Statement extends Wrapper, AutoCloseable {
          * a <code>PreparedStatement</code> and <code>CallableStatement</code>
          * are poolable when created.
          * <p>
+         * <p>
+         *  请求<code>语句</code>被合并或不合并。指定的值是对语句池实现的提示,指示应用程序是否希望该语句被合并。关于是否使用提示取决于语句池管理器。
+         * <p>
+         *  语句的poolable值适用于由驱动程序实现的内部语句高速缓存和由应用程序服务器和其他应用程序实现的外部语句高速缓存。
+         * <p>
+         *  默认情况下,<code> Statement </code>在创建时不可池化,并且<code> PreparedStatement </code>和<code> CallableStatement </code>
+         * 。
+         * <p>
+         * 
          * @param poolable              requests that the statement be pooled if true and
          *                                              that the statement not be pooled if false
          * <p>
@@ -1025,6 +1348,10 @@ public interface Statement extends Wrapper, AutoCloseable {
          * Returns a  value indicating whether the <code>Statement</code>
          * is poolable or not.
          * <p>
+         * <p>
+         *  返回一个值,指示<code> Statement </code>是否可以池化。
+         * <p>
+         * 
          * @return              <code>true</code> if the <code>Statement</code>
          * is poolable; <code>false</code> otherwise
          * <p>
@@ -1051,6 +1378,13 @@ public interface Statement extends Wrapper, AutoCloseable {
      * statements, and statements that currently have open, dependent,
      * result sets.
      *
+     * <p>
+     * 指定此{@code Statement}将在其所有相关结果集都关闭时关闭。如果{@code Statement}的执行不产生任何结果集,则此方法不起作用。
+     * <p>
+     *  <strong>注意：</strong>对{@code closeOnCompletion}的多次调用不会切换对此{@code Statement}的效果。
+     * 但是,对{@code closeOnCompletion}的调用会影响语句的后续执行,以及当前具有打开,从属,结果集的语句。
+     * 
+     * 
      * @throws SQLException if this method is called on a closed
      * {@code Statement}
      * @since 1.7
@@ -1060,6 +1394,10 @@ public interface Statement extends Wrapper, AutoCloseable {
     /**
      * Returns a value indicating whether this {@code Statement} will be
      * closed when all its dependent result sets are closed.
+     * <p>
+     *  返回一个值,指示{@code Statement}在其所有相关结果集都关闭时是否关闭。
+     * 
+     * 
      * @return {@code true} if the {@code Statement} will be closed when all
      * of its dependent result sets are closed; {@code false} otherwise
      * @throws SQLException if this method is called on a closed
@@ -1081,6 +1419,14 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code UnsupportedOperationException}
      *
+     * <p>
+     *  检索当前结果作为更新计数;如果结果是一个<code> ResultSet </code>对象或没有更多的结果,则返回-1。每个结果只应调用此方法一次。
+     * <p>
+     *  当返回的行数可能超过{@link Integer#MAX_VALUE}时,应使用此方法。
+     * p>
+     *  默认实现将抛出{@code UnsupportedOperationException}
+     * 
+     * 
      * @return the current result as an update count; -1 if the current result
      * is a <code>ResultSet</code> object or there are no more results
      * @exception SQLException if a database access error occurs or
@@ -1104,6 +1450,14 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code UnsupportedOperationException}
      *
+     * <p>
+     *  设置<code> Statement </code>对象生成的任何<code> ResultSet </code>对象可以包含给定数字的最大行数限制。如果超过限制,则超出的行将被静默删除。
+     * <p>
+     *  当行限制可能超过{@link整数#MAX_VALUE}时,应使用此方法。
+     * p>
+     *  默认实现将抛出{@code UnsupportedOperationException}
+     * 
+     * 
      * @param max the new max rows limit; zero means there is no limit
      * @exception SQLException if a database access error occurs,
      * this method is called on a closed <code>Statement</code>
@@ -1126,6 +1480,14 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will return {@code 0}
      *
+     * <p>
+     * 检索由此<code> Statement </code>对象生成的<code> ResultSet </code>对象可以包含的最大行数。如果超出此限制,则将静默删除多余的行。
+     * <p>
+     *  当返回的行限制可能超过{@link Integer#MAX_VALUE}时,应使用此方法。
+     * p>
+     *  默认实现将返回{@code 0}
+     * 
+     * 
      * @return the current maximum number of rows for a <code>ResultSet</code>
      *         object produced by this <code>Statement</code> object;
      *         zero means there is no limit
@@ -1176,6 +1538,28 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code UnsupportedOperationException}
      *
+     * <p>
+     *  将一批命令提交到数据库以供执行,如果所有命令成功执行,则返回更新计数的数组。
+     * 返回的数组的<code> long </code>元素被排序为对应于批处理中的命令,这些命令根据它们添加到批处理的顺序排序。
+     * 由{@code executeLargeBatch}方法返回的数组中的元素可能是以下之一：。
+     * <OL>
+     *  <LI>大于或等于零的数字表示命令已成功处理,是一个更新计数,提供数据库中受命令执行影响的行数<LI> <code> SUCCESS_NO_INFO的值</code>  - 表示命令已成功处理,但受影
+     * 响的行数未知。
+     * <P>
+     * 如果批处理更新中的某个命令无法正常执行,此方法会抛出<code> BatchUpdateException </code>,并且JDBC驱动程序可能也可能不会继续处理批处理中的其余命令。
+     * 然而,驱动程序的行为必须与特定的DBMS一致,总是继续处理命令或从不继续处理命令。
+     * 如果驱动程序在故障后继续处理,则由方法<code> BatchUpdateException.getLargeUpdateCounts </code>返回的数组将包含与批处理中的命令一样多的元素,并且至
+     * 少有一个元素如下：。
+     * 然而,驱动程序的行为必须与特定的DBMS一致,总是继续处理命令或从不继续处理命令。
+     * 
+     *  <LI> <code> EXECUTE_FAILED </code>的值表示该命令无法成功执行,并且仅在驱动程序在命令失败后继续处理命令时发生
+     * </OL>
+     * <p>
+     *  当返回的行数可能超过{@link Integer#MAX_VALUE}时,应使用此方法。
+     * p>
+     *  默认实现将抛出{@code UnsupportedOperationException}
+     * 
+     * 
      * @return an array of update counts containing one element for each
      * command in the batch.  The elements of the array are ordered according
      * to the order in which commands were added to the batch.
@@ -1210,6 +1594,17 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code UnsupportedOperationException}
      *
+     * <p>
+     *  执行给定的SQL语句,可以是<code> INSERT </code>,<code> UPDATE </code>或<code> DELETE </code>语句或不返回任何内容的SQL语句, DDL
+     * 语句。
+     * <p>
+     *  当返回的行数可能超过{@link Integer#MAX_VALUE}时,应使用此方法。
+     * <p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * p>
+     *  默认实现将抛出{@code UnsupportedOperationException}
+     * 
+     * 
      * @param sql an SQL Data Manipulation Language (DML) statement,
      * such as <code>INSERT</code>, <code>UPDATE</code> or
      * <code>DELETE</code>; or an SQL statement that returns nothing,
@@ -1249,6 +1644,17 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code SQLFeatureNotSupportedException}
      *
+     * <p>
+     * 执行给定的SQL语句,并用给定标志向驱动程序发出信号,告知该<code> Statement </code>对象生成的自动生成的键是否应该可用于检索。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略该标志。
+     * <p>
+     *  当返回的行数可能超过{@link Integer#MAX_VALUE}时,应使用此方法。
+     * <p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * p>
+     *  默认实现将抛出{@code SQLFeatureNotSupportedException}
+     * 
+     * 
      * @param sql an SQL Data Manipulation Language (DML) statement,
      * such as <code>INSERT</code>, <code>UPDATE</code> or
      * <code>DELETE</code>; or an SQL statement that returns nothing,
@@ -1297,6 +1703,17 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code SQLFeatureNotSupportedException}
      *
+     * <p>
+     *  执行给定的SQL语句,并通知驱动程序给定数组中指示的自动生成的键应该可用于检索。此数组包含目标表中包含应该可用的自动生成的键的列的索引。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略该数组。
+     * <p>
+     *  当返回的行数可能超过{@link Integer#MAX_VALUE}时,应使用此方法。
+     * <p>
+     *  <strong>注意：</strong>此方法无法在<code> PreparedStatement </code>或<code> CallableStatement </code>中调用。
+     * p>
+     *  默认实现将抛出{@code SQLFeatureNotSupportedException}
+     * 
+     * 
      * @param sql an SQL Data Manipulation Language (DML) statement,
      * such as <code>INSERT</code>, <code>UPDATE</code> or
      * <code>DELETE</code>; or an SQL statement that returns nothing,
@@ -1341,6 +1758,13 @@ public interface Statement extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code SQLFeatureNotSupportedException}
      *
+     * <p>
+     * 执行给定的SQL语句,并通知驱动程序给定数组中指示的自动生成的键应该可用于检索。此数组包含目标表中包含应该可用的自动生成的键的列的名称。
+     * 如果SQL语句不是<code> INSERT </code>语句或能够返回自动生成的键的SQL语句(此类语句的列表是供应商特定的),则驱动程序将忽略该数组。
+     * <p>
+     *  当返回的行数可能超过{@link Integer#MAX_VALUE}时,应使用此方法。
+     * <p>
+     * 
      * @param sql an SQL Data Manipulation Language (DML) statement,
      * such as <code>INSERT</code>, <code>UPDATE</code> or
      * <code>DELETE</code>; or an SQL statement that returns nothing,

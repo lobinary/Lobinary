@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,11 +42,17 @@ import org.w3c.dom.NamedNodeMap;
  * basic class, which used for unrecognized APPn marker
  * segments.  XXX break out UnknownMarkerSegment as a subclass
  * and make this abstract, avoiding unused data field.
+ * <p>
+ *  所有元数据存储在MarkerSegments中。我们知道的标记段存储在这个基本类的子类中,用于无法识别的APPn标记段。
+ *  XXX突破UnknownMarkerSegment作为子类,并使此抽象,避免未使用的数据字段。
+ * 
  */
 class MarkerSegment implements Cloneable {
     protected static final int LENGTH_SIZE = 2; // length is 2 bytes
     int tag;      // See JPEG.java
     int length;    /* Sometimes needed by subclasses; doesn't include
+    int length;    /* <p>
+    int length;    /* 
                       itself.  Meaningful only if constructed from a stream */
     byte [] data = null;  // Raw segment data, used for unrecognized segments
     boolean unknown = false; // Set to true if the tag is not recognized
@@ -53,6 +60,9 @@ class MarkerSegment implements Cloneable {
     /**
      * Constructor for creating <code>MarkerSegment</code>s by reading
      * from an <code>ImageInputStream</code>.
+     * <p>
+     *  通过读取<code> ImageInputStream </code>创建<code> MarkerSegment </code>的构造函数。
+     * 
      */
     MarkerSegment(JPEGBuffer buffer) throws IOException {
 
@@ -74,6 +84,9 @@ class MarkerSegment implements Cloneable {
     /**
      * Constructor used when creating segments other than by
      * reading them from a stream.
+     * <p>
+     *  在创建段而不是从流中读取时使用的构造函数。
+     * 
      */
     MarkerSegment(int tag) {
         this.tag = tag;
@@ -82,6 +95,9 @@ class MarkerSegment implements Cloneable {
 
     /**
      * Construct a MarkerSegment from an "unknown" DOM Node.
+     * <p>
+     *  从"未知"DOM节点构造MarkerSegment。
+     * 
      */
     MarkerSegment(Node node) throws IIOInvalidTreeException {
         // The type of node should have been verified already.
@@ -112,6 +128,9 @@ class MarkerSegment implements Cloneable {
 
     /**
      * Deep copy of data array.
+     * <p>
+     *  数据数组的深度副本。
+     * 
      */
     protected Object clone() {
         MarkerSegment newGuy = null;
@@ -127,6 +146,9 @@ class MarkerSegment implements Cloneable {
     /**
      * We have determined that we don't know the type, so load
      * the data using the length parameter.
+     * <p>
+     *  我们已经确定我们不知道类型,因此使用length参数加载数据。
+     * 
      */
     void loadData(JPEGBuffer buffer) throws IOException {
         data = new byte[length];
@@ -172,6 +194,9 @@ class MarkerSegment implements Cloneable {
      * Writes the marker, tag, and length.  Note that length
      * should be verified by the caller as a correct JPEG
      * length, i.e it includes itself.
+     * <p>
+     *  写入标记,标记和长度。注意,长度应该由调用者验证为正确的JPEG长度,即它包括自身。
+     * 
      */
     void writeTag(ImageOutputStream ios) throws IOException {
         ios.write(0xff);
@@ -182,6 +207,8 @@ class MarkerSegment implements Cloneable {
     /**
      * Writes the data for this segment to the stream in
      * valid JPEG format.
+     * <p>
+     *  以有效的JPEG格式将此段的数据写入流。
      */
     void write(ImageOutputStream ios) throws IOException {
         length = 2 + ((data != null) ? data.length : 0);

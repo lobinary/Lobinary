@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,22 @@ import java.awt.peer.ComponentPeer;
  * <a href="../../java/awt/doc-files/FocusSpec.html">Focus Specification</a>
  * for more information.
  *
+ * <p>
+ *  一个FocusTraversalPolicy,它根据容器中子组件的顺序确定遍历顺序。
+ * 从特定的焦点循环根,策略对组件层次结构进行预订遍历,并根据<code> Container.getComponents()</code>返回的数组的顺序遍历Container的子节点。
+ * 不会搜索不可见和可显示的层次结构的部分。
+ * <p>
+ *  如果客户端代码通过覆盖<code> Component.isFocusTraversable()</code>或<code> Component.isFocusable()</code>或通过调用<code>
+ *  Component.setFocusable )</code>,那么DefaultFocusTraversalPolicy的行为完全类似于ContainerOrderFocusTraversalPol
+ * icy。
+ * 然而,如果组件依赖于默认可聚焦性,则DefaultFocusTraversalPolicy将拒绝具有不可聚焦对等体的所有组件。这是所有AWT容器的默认FocusTraversalPolicy。
+ * <p>
+ * 对等体的可聚焦性取决于实现。 Sun建议特定原生平台的所有实现构建具有相同可聚焦性的对等体。
+ * 对于Windows和Unix的建议是,画布,标签,面板,滚动条,ScrollPanes,Windows和轻量级组件具有不可聚焦的对等体,所有其他组件具有可聚焦的对等体。
+ * 这些建议在Sun AWT实现中使用。注意,组件对等体的可聚焦性不同于组件自身的可聚焦性,并且不影响组件自身的可聚焦性。
+ * <p>
+ *  请参见
+ * 
  * @author David Mendenhall
  *
  * @see Container#getComponents
@@ -72,6 +89,11 @@ public class DefaultFocusTraversalPolicy
 {
     /*
      * serialVersionUID
+     * <p>
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用焦点子系统</a>,<em> Java教程</em>和<a href ="../../ java / awt / doc-files / FocusSpec.html" >聚焦规格</a>了解
+     * 更多信息。
+     * 
      */
     private static final long serialVersionUID = 8876966522510157497L;
 
@@ -88,6 +110,10 @@ public class DefaultFocusTraversalPolicy
      * Scrollbars, ScrollPanes, Windows, and lightweight Components will be
      * rejected.
      *
+     * <p>
+     *  serialVersionUID
+     * 
+     * 
      * @param aComponent the Component whose fitness as a focus owner is to
      *        be tested
      * @return <code>true</code> if aComponent meets the above requirements;

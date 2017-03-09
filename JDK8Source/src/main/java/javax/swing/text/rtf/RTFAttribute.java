@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import java.io.IOException;
 /**
  * This interface describes a class which defines a 1-1 mapping between
  * an RTF keyword and a SwingText attribute.
+ * <p>
+ *  这个接口描述了定义RTF关键字和SwingText属性之间的1-1映射的类。
+ * 
  */
 interface RTFAttribute
 {
@@ -41,6 +45,8 @@ interface RTFAttribute
     static final int D_META = 4;
 
     /* These next three should really be public variables,
+    /* <p>
+    /* 
        but you can't declare public variables in an interface... */
     /* int domain; */
     public int domain();

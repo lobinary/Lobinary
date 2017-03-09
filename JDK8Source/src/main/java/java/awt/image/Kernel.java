@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ package java.awt.image;
  * that corresponds to the pixel position for which an output value is
  * being computed.
  *
+ * <p>
+ *  <code> Kernel </code>类定义了一个矩阵,描述了指定像素及其周围像素如何影响为滤波操作的输出图像中的像素位置计算的值。 X原点和Y原点指示与计算输出值的像素位置相对应的核矩阵元素。
+ * 
+ * 
  * @see ConvolveOp
  */
 public class Kernel implements Cloneable {
@@ -56,6 +61,13 @@ public class Kernel implements Cloneable {
      * If the length of the <code>data</code> array is less
      * than width*height, an <code>IllegalArgumentException</code> is thrown.
      * The X origin is (width-1)/2 and the Y origin is (height-1)/2.
+     * <p>
+     *  从浮点数组构造一个<code> Kernel </code>对象。
+     * 复制<code> data </code>数组的第一个<code> width </code> * <code> height </code>如果<code> data </code>数组的长度小于wi
+     * dth * height,则抛出一个<code> IllegalArgumentException </code>。
+     *  从浮点数组构造一个<code> Kernel </code>对象。 X原点是(width-1)/ 2,Y原点是(height-1)/ 2。
+     * 
+     * 
      * @param width         width of the kernel
      * @param height        height of the kernel
      * @param data          kernel data in row major order
@@ -81,6 +93,10 @@ public class Kernel implements Cloneable {
 
     /**
      * Returns the X origin of this <code>Kernel</code>.
+     * <p>
+     *  返回此<code> Kernel </code>的X原点。
+     * 
+     * 
      * @return the X origin.
      */
     final public int getXOrigin(){
@@ -89,6 +105,10 @@ public class Kernel implements Cloneable {
 
     /**
      * Returns the Y origin of this <code>Kernel</code>.
+     * <p>
+     *  返回此<code> Kernel </code>的Y原点。
+     * 
+     * 
      * @return the Y origin.
      */
     final public int getYOrigin() {
@@ -97,6 +117,10 @@ public class Kernel implements Cloneable {
 
     /**
      * Returns the width of this <code>Kernel</code>.
+     * <p>
+     *  返回此<code> Kernel </code>的宽度。
+     * 
+     * 
      * @return the width of this <code>Kernel</code>.
      */
     final public int getWidth() {
@@ -105,6 +129,10 @@ public class Kernel implements Cloneable {
 
     /**
      * Returns the height of this <code>Kernel</code>.
+     * <p>
+     *  返回此<code> Kernel </code>的高度。
+     * 
+     * 
      * @return the height of this <code>Kernel</code>.
      */
     final public int getHeight() {
@@ -115,6 +143,10 @@ public class Kernel implements Cloneable {
      * Returns the kernel data in row major order.
      * The <code>data</code> array is returned.  If <code>data</code>
      * is <code>null</code>, a new array is allocated.
+     * <p>
+     *  以行主要顺序返回内核数据。返回<code> data </code>数组。如果<code> data </code>是<code> null </code>,则会分配一个新数组。
+     * 
+     * 
      * @param data  if non-null, contains the returned kernel data
      * @return the <code>data</code> array containing the kernel data
      *         in row major order or, if <code>data</code> is
@@ -140,6 +172,9 @@ public class Kernel implements Cloneable {
 
     /**
      * Clones this object.
+     * <p>
+     *  克隆此对象。
+     * 
      * @return a clone of this object.
      */
     public Object clone() {

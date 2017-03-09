@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: StringToStringTable.java,v 1.2.4.1 2005/09/15 08:15:56 suresh_emailid Exp $
+ * <p>
+ *  $ Id：StringToStringTable.java,v 1.2.4.1 2005/09/15 08:15:56 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -26,6 +39,9 @@ package com.sun.org.apache.xml.internal.utils;
  * A very simple lookup table that stores a list of strings, the even
  * number strings being keys, and the odd number strings being values.
  * @xsl.usage internal
+ * <p>
+ *  一个非常简单的查找表,用于存储字符串列表,偶数字符串是键,奇数字符串是值。 @ xsl.usage internal
+ * 
  */
 public class StringToStringTable
 {
@@ -45,6 +61,9 @@ public class StringToStringTable
   /**
    * Default constructor.  Note that the default
    * block size is very small, for small lists.
+   * <p>
+   *  默认构造函数。请注意,对于小列表,默认块大小非常小。
+   * 
    */
   public StringToStringTable()
   {
@@ -57,6 +76,10 @@ public class StringToStringTable
   /**
    * Construct a StringToStringTable, using the given block size.
    *
+   * <p>
+   *  使用给定的块大小构造StringToStringTable。
+   * 
+   * 
    * @param blocksize Size of blocks to allocate
    */
   public StringToStringTable(int blocksize)
@@ -70,6 +93,10 @@ public class StringToStringTable
   /**
    * Get the length of the list.
    *
+   * <p>
+   *  获取列表的长度。
+   * 
+   * 
    * @return Number of strings in the list
    */
   public final int getLength()
@@ -82,6 +109,10 @@ public class StringToStringTable
    * The strings go to the even locations in the array
    * and the values in the odd.
    *
+   * <p>
+   *  将一个字符串附加到向量。字符串转到数组中的偶数位置,奇数中的值。
+   * 
+   * 
    * @param key String to add to the list
    * @param value Value of the string
    */
@@ -111,6 +142,10 @@ public class StringToStringTable
   /**
    * Tell if the table contains the given string.
    *
+   * <p>
+   *  告诉表格是否包含给定的字符串。
+   * 
+   * 
    * @param key String to look up
    *
    * @return return the value of the string or null if not found.
@@ -130,6 +165,10 @@ public class StringToStringTable
   /**
    * Remove the given string and its value from this table.
    *
+   * <p>
+   *  从此表中删除给定的字符串及其值。
+   * 
+   * 
    * @param key String to remove from the table
    */
   public final void remove(String key)
@@ -154,6 +193,10 @@ public class StringToStringTable
   /**
    * Tell if the table contains the given string. Ignore case
    *
+   * <p>
+   *  告诉表格是否包含给定的字符串。忽略大小写
+   * 
+   * 
    * @param key String to look up
    *
    * @return The value of the string or null if not found
@@ -176,6 +219,10 @@ public class StringToStringTable
   /**
    * Tell if the table contains the given string in the value.
    *
+   * <p>
+   *  告诉表中是否包含值中的给定字符串。
+   * 
+   * 
    * @param val Value of the string to look up
    *
    * @return the string associated with the given value or null if not found
@@ -195,6 +242,10 @@ public class StringToStringTable
   /**
    * Get the nth element.
    *
+   * <p>
+   *  获取第n个元素。
+   * 
+   * 
    * @param i index of the string to look up.
    *
    * @return The string at the given index.
@@ -207,6 +258,10 @@ public class StringToStringTable
   /**
    * Tell if the table contains the given string.
    *
+   * <p>
+   * 告诉表格是否包含给定的字符串。
+   * 
+   * 
    * @param key String to look up
    *
    * @return True if the given string is in this table
@@ -226,6 +281,9 @@ public class StringToStringTable
   /**
    * Tell if the table contains the given string.
    *
+   * <p>
+   *  告诉表格是否包含给定的字符串。
+   * 
    * @param val value to look up
    *
    * @return True if the given value is in the table.

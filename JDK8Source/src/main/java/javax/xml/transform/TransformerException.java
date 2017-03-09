@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * This class specifies an exceptional condition that occured
  * during the transformation process.
+ * <p>
+ *  此类指定在转换过程中发生的异常情况。
+ * 
  */
 public class TransformerException extends Exception {
 
@@ -41,6 +45,10 @@ public class TransformerException extends Exception {
      * Method getLocator retrieves an instance of a SourceLocator
      * object that specifies where an error occured.
      *
+     * <p>
+     *  方法getLocator检索指定错误发生位置的SourceLocator对象的实例。
+     * 
+     * 
      * @return A SourceLocator object, or null if none was specified.
      */
     public SourceLocator getLocator() {
@@ -51,6 +59,10 @@ public class TransformerException extends Exception {
      * Method setLocator sets an instance of a SourceLocator
      * object that specifies where an error occured.
      *
+     * <p>
+     *  方法setLocator设置一个SourceLocator对象的实例,该对象指定发生错误的位置。
+     * 
+     * 
      * @param location A SourceLocator object, or null to clear the location.
      */
     public void setLocator(SourceLocator location) {
@@ -63,6 +75,10 @@ public class TransformerException extends Exception {
     /**
      * This method retrieves an exception that this exception wraps.
      *
+     * <p>
+     *  此方法检索此异常包装的异常。
+     * 
+     * 
      * @return An Throwable object, or null.
      * @see #getCause
      */
@@ -74,6 +90,9 @@ public class TransformerException extends Exception {
      * Returns the cause of this throwable or <code>null</code> if the
      * cause is nonexistent or unknown.  (The cause is the throwable that
      * caused this throwable to get thrown.)
+     * <p>
+     *  如果原因不存在或未知,则返回此throwable或<code> null </code>的原因。 (原因是throwable引起这个throwable被抛出。)
+     * 
      */
     public Throwable getCause() {
 
@@ -93,6 +112,15 @@ public class TransformerException extends Exception {
      * {@link #TransformerException(String,Throwable)}, this method cannot be called
      * even once.
      *
+     * <p>
+     *  将此可抛弃项的<i>原因</i>初始化为指定的值。 (原因是throwable引起这个throwable被抛出。)
+     * 
+     *  <p>此方法最多可调用一次。它通常在构造函数内调用,或者在创建可抛出对象之后立即调用。
+     * 如果此throwable是使用{@link #TransformerException(Throwable)}或{@link #TransformerException(String,Throwable)}
+     * 创建的,则此方法无法调用一次。
+     *  <p>此方法最多可调用一次。它通常在构造函数内调用,或者在创建可抛出对象之后立即调用。
+     * 
+     * 
      * @param  cause the cause (which is saved for later retrieval by the
      *         {@link #getCause()} method).  (A <code>null</code> value is
      *         permitted, and indicates that the cause is nonexistent or
@@ -125,6 +153,10 @@ public class TransformerException extends Exception {
     /**
      * Create a new TransformerException.
      *
+     * <p>
+     *  创建一个新的TransformerException。
+     * 
+     * 
      * @param message The error or warning message.
      */
     public TransformerException(String message) {
@@ -138,6 +170,10 @@ public class TransformerException extends Exception {
     /**
      * Create a new TransformerException wrapping an existing exception.
      *
+     * <p>
+     *  创建一个新的TransformerException包装一个现有的异常。
+     * 
+     * 
      * @param e The exception to be wrapped.
      */
     public TransformerException(Throwable e) {
@@ -154,6 +190,12 @@ public class TransformerException extends Exception {
      * <p>This is used for throwing processor exceptions before
      * the processing has started.</p>
      *
+     * <p>
+     *  在TransformerException中包装现有异常。
+     * 
+     *  <p>这用于在处理开始之前抛出处理器异常。</p>
+     * 
+     * 
      * @param message The error or warning message, or null to
      *                use the message from the embedded exception.
      * @param e Any exception
@@ -175,6 +217,12 @@ public class TransformerException extends Exception {
      * creating its own exception from within a DocumentHandler
      * callback.</p>
      *
+     * <p>
+     *  从消息和定位器创建一个新的TransformerException。
+     * 
+     * <p>当应用程序从DocumentHandler回调中创建自己的异常时,此构造函数尤其有用。</p>
+     * 
+     * 
      * @param message The error or warning message.
      * @param locator The locator object for the error or warning.
      */
@@ -189,6 +237,10 @@ public class TransformerException extends Exception {
     /**
      * Wrap an existing exception in a TransformerException.
      *
+     * <p>
+     *  在TransformerException中包装现有异常。
+     * 
+     * 
      * @param message The error or warning message, or null to
      *                use the message from the embedded exception.
      * @param locator The locator object for the error or warning.
@@ -207,6 +259,10 @@ public class TransformerException extends Exception {
      * Get the error message with location information
      * appended.
      *
+     * <p>
+     *  获取附加了位置信息的错误消息。
+     * 
+     * 
      * @return A <code>String</code> representing the error message with
      *         location information appended.
      */
@@ -246,6 +302,10 @@ public class TransformerException extends Exception {
     /**
      * Get the location information as a string.
      *
+     * <p>
+     *  以字符串形式获取位置信息。
+     * 
+     * 
      * @return A string with location info, or null
      * if there is no location information.
      */
@@ -282,6 +342,9 @@ public class TransformerException extends Exception {
      * Print the the trace of methods from where the error
      * originated.  This will trace all nested exception
      * objects, as well as this object.
+     * <p>
+     *  从错误发生的地方打印方法的跟踪。这将跟踪所有嵌套异常对象以及此对象。
+     * 
      */
     public void printStackTrace() {
         printStackTrace(new java.io.PrintWriter(System.err, true));
@@ -291,6 +354,10 @@ public class TransformerException extends Exception {
      * Print the the trace of methods from where the error
      * originated.  This will trace all nested exception
      * objects, as well as this object.
+     * <p>
+     *  从错误发生的地方打印方法的跟踪。这将跟踪所有嵌套异常对象以及此对象。
+     * 
+     * 
      * @param s The stream where the dump will be sent to.
      */
     public void printStackTrace(java.io.PrintStream s) {
@@ -301,6 +368,9 @@ public class TransformerException extends Exception {
      * Print the the trace of methods from where the error
      * originated.  This will trace all nested exception
      * objects, as well as this object.
+     * <p>
+     *  从错误发生的地方打印方法的跟踪。这将跟踪所有嵌套异常对象以及此对象。
+     * 
      * @param s The writer where the dump will be sent to.
      */
     public void printStackTrace(java.io.PrintWriter s) {

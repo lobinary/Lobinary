@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 2012  All Rights Reserved
  *
+ * <p>
+ *  许可材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 2012保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.io;
@@ -72,6 +76,12 @@ import sun.corba.Bridge;
  * The ObjectStreamClass for a specific class loaded in this Java VM can
  * be found using the lookup method.
  *
+ * <p>
+ *  ObjectStreamClass描述了一个可以被序列化为流或被序列化到流的类的类。它包含类的名称和serialVersionUID。
+ * <br>
+ *  可以使用lookup方法找到在此Java VM中加载的特定类的ObjectStreamClass。
+ * 
+ * 
  * @author  Roger Riggs
  * @since   JDK1.1
  */
@@ -98,6 +108,9 @@ public class ObjectStreamClass implements java.io.Serializable {
     /** Find the descriptor for a class that can be serialized.  Null
      * is returned if the specified class does not implement
      * java.io.Serializable or java.io.Externalizable.
+     * <p>
+     *  如果指定的类不实现java.io.Serializable或java.io.Externalizable,则返回。
+     * 
      */
     static final ObjectStreamClass lookup(Class<?> cl)
     {
@@ -110,11 +123,17 @@ public class ObjectStreamClass implements java.io.Serializable {
     /*
      * Find the class descriptor for the specified class.
      * Package access only so it can be called from ObjectIn/OutStream.
+     * <p>
+     *  找到指定类的类描述符。仅包访问,因此它可以从ObjectIn / OutStream调用。
+     * 
      */
     static ObjectStreamClass lookupInternal(Class<?> cl)
     {
         /* Synchronize on the hashtable so no two threads will do
          * this at the same time.
+         * <p>
+         *  这个在同一时间。
+         * 
          */
         ObjectStreamClass desc = null;
         synchronized (descriptorFor) {
@@ -126,6 +145,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
                 /* If the class is only Serializable,
                  * lookup the descriptor for the superclass.
+                 * <p>
+                 *  查找超类的描述符。
+                 * 
                  */
                 ObjectStreamClass superdesc = null;
                 if (serializable) {
@@ -137,6 +159,9 @@ public class ObjectStreamClass implements java.io.Serializable {
                 /* Check if its' externalizable.
                  * If it's Externalizable, clear the serializable flag.
                  * Only one or the other may be set in the protocol.
+                 * <p>
+                 *  如果它是Externalizable,清除serializable标志。在协议中只能设置一个或另一个。
+                 * 
                  */
                 boolean externalizable = false;
                 if (serializable) {
@@ -150,6 +175,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
                 /* Create a new version descriptor,
                  * it put itself in the known table.
+                 * <p>
+                 *  它把自己放在已知的表中。
+                 * 
                  */
                 desc = new ObjectStreamClass(cl, superdesc,
                                              serializable, externalizable);
@@ -175,6 +203,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * The name of the class described by this descriptor.
+     * <p>
+     *  此描述符描述的类的名称。
+     * 
      */
     public final String getName() {
         return name;
@@ -185,6 +216,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * The serialVersionUID defines a set of classes all with the same name
      * that have evolved from a common root class and agree to be serialized
      * and deserialized using a common format.
+     * <p>
+     *  返回此类的serialVersionUID。 serialVersionUID定义了一组类,它们都具有相同的名称,这些类从公共根类演化而来,并且同意使用通用格式进行序列化和反序列化。
+     * 
      */
     public static final long getSerialVersionUID( java.lang.Class<?> clazz) {
         ObjectStreamClass theosc = ObjectStreamClass.lookup( clazz );
@@ -200,6 +234,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * The serialVersionUID defines a set of classes all with the same name
      * that have evolved from a common root class and agree to be serialized
      * and deserialized using a common format.
+     * <p>
+     *  返回此类的serialVersionUID。 serialVersionUID定义了一组类,它们都具有相同的名称,这些类从公共根类演化而来,并且同意使用通用格式进行序列化和反序列化。
+     * 
      */
     public final long getSerialVersionUID() {
         return suid;
@@ -210,6 +247,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * The serialVersionUID defines a set of classes all with the same name
      * that have evolved from a common root class and agree to be serialized
      * and deserialized using a common format.
+     * <p>
+     * 返回此类的serialVersionUID字符串。 serialVersionUID定义了一组类,它们都具有相同的名称,这些类从公共根类演化而来,并且同意使用通用格式进行序列化和反序列化。
+     * 
      */
     public final String getSerialVersionUIDStr() {
         if (suidStr == null)
@@ -219,6 +259,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Return the actual (computed) serialVersionUID for this class.
+     * <p>
+     *  返回此类的实际(计算)serialVersionUID。
+     * 
      */
     public static final long getActualSerialVersionUID( java.lang.Class<?> clazz )
     {
@@ -232,6 +275,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Return the actual (computed) serialVersionUID for this class.
+     * <p>
+     *  返回此类的实际(计算)serialVersionUID。
+     * 
      */
     public final long getActualSerialVersionUID() {
         return actualSuid;
@@ -239,6 +285,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Return the actual (computed) serialVersionUID for this class.
+     * <p>
+     *  返回此类的实际(计算)serialVersionUID。
+     * 
      */
     public final String getActualSerialVersionUIDStr() {
         if (actualSuidStr == null)
@@ -249,6 +298,9 @@ public class ObjectStreamClass implements java.io.Serializable {
     /**
      * Return the class in the local VM that this version is mapped to.
      * Null is returned if there is no corresponding local class.
+     * <p>
+     *  返回此版本映射到的本地VM中的类。如果没有相应的本地类,则返回Null。
+     * 
      */
     public final Class<?> forClass() {
         return ofClass;
@@ -256,6 +308,10 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Return an array of the fields of this serializable class.
+     * <p>
+     *  返回此可序列化类的字段的数组。
+     * 
+     * 
      * @return an array containing an element for each persistent
      * field of this class. Returns an array of length zero if
      * there are no fields.
@@ -297,11 +353,16 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Get the field of this class by name.
+     * <p>
+     *  按名称获取此类的字段。
+     * 
+     * 
      * @return The ObjectStreamField object of the named field or null if there
      * is no such named field.
      */
     public final ObjectStreamField getField(String name) {
         /* Binary search of fields by name.
+        /* <p>
          */
         for (int i = fields.length-1; i >= 0; i--) {
             if (name.equals(fields[i].getName())) {
@@ -335,6 +396,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Return a string describing this ObjectStreamClass.
+     * <p>
+     *  返回一个描述此ObjectStreamClass的字符串。
+     * 
      */
     public final String toString() {
         StringBuffer sb = new StringBuffer();
@@ -349,6 +413,9 @@ public class ObjectStreamClass implements java.io.Serializable {
     /*
      * Create a new ObjectStreamClass from a loaded class.
      * Don't call this directly, call lookup instead.
+     * <p>
+     *  从加载的类创建一个新的ObjectStreamClass。不要直接调用它,而是调用查找。
+     * 
      */
     private ObjectStreamClass(java.lang.Class<?> cl, ObjectStreamClass superdesc,
                               boolean serial, boolean extern)
@@ -372,6 +439,9 @@ public class ObjectStreamClass implements java.io.Serializable {
          * Enter this class in the table of known descriptors.
          * Otherwise, when the fields are read it may recurse
          * trying to find the descriptor for itself.
+         * <p>
+         *  在已知描述符表中输入此类。否则,当字段被读取时,它可能递归地尝试找到它自己的描述符。
+         * 
          */
         insertDescriptorFor(this);
 
@@ -379,6 +449,9 @@ public class ObjectStreamClass implements java.io.Serializable {
          * The remainder of initialization occurs in init(), which is called
          * after the lock on the global class descriptor table has been
          * released.
+         * <p>
+         *  初始化的剩余部分发生在init()中,init()在全局类描述符表上的锁释放之后调用。
+         * 
          */
     }
 
@@ -424,6 +497,10 @@ public class ObjectStreamClass implements java.io.Serializable {
      * separate from the ObjectStreamClass constructor so that lookupInternal
      * does not have to hold onto a global class descriptor table lock while the
      * class descriptor is being initialized (see bug 4165204).
+     * <p>
+     *  初始化类描述符。此方法仅在通过调用lookupInternal()创建的类描述符上调用。
+     * 此方法与ObjectStreamClass构造函数保持分离,因此在初始化类描述符时,lookupInternal不必保持全局类描述符表锁定(参见错误4165204)。
+     * 
      */
 
 
@@ -443,12 +520,16 @@ public class ObjectStreamClass implements java.io.Serializable {
             fields = NO_FIELDS;
         } else if (serializable) {
             /* Ask for permission to override field access checks.
+            /* <p>
              */
             AccessController.doPrivileged(new PrivilegedAction() {
                 public Object run() {
                 /* Fill in the list of persistent fields.
                  * If it is declared, use the declared serialPersistentFields.
                  * Otherwise, extract the fields from the class itself.
+                 * <p>
+                 * 如果它被声明,使用声明的serialPersistentFields。否则,从类本身提取字段。
+                 * 
                  */
                     fields = persistentFieldsValue.get(cl);
 
@@ -460,6 +541,10 @@ public class ObjectStreamClass implements java.io.Serializable {
                      * non-static, non-transient field. Then copy the
                      * temporary array into an array of the correct
                      * size once the number of fields is known.
+                     * <p>
+                     *  类。 setAccessible在所有字段上,以便以后可以访问。创建一个临时ObjectStreamField数组来保存每个非静态,非瞬态字段。
+                     * 然后,一旦知道字段数,就将临时数组复制到正确大小的数组中。
+                     * 
                      */
                     Field[] actualfields = cl.getDeclaredFields();
 
@@ -511,6 +596,11 @@ public class ObjectStreamClass implements java.io.Serializable {
          * the field objects is only used here.
          *
          * NonSerializable classes have a serialVerisonUID of 0L.
+         * <p>
+         *  它使用访问覆盖机制,因此请确保字段对象仅在此处使用。
+         * 
+         *  NonSerializable类的serialVerisonUID为0L。
+         * 
          */
          if (isNonSerializable() || isEnum) {
              suid = 0L;
@@ -560,6 +650,9 @@ public class ObjectStreamClass implements java.io.Serializable {
                     /* Look for the writeObject method
                      * Set the accessible flag on it here. ObjectOutputStream
                      * will call it as necessary.
+                     * <p>
+                     *  在这里设置可访问的标志。 ObjectOutputStream将根据需要调用它。
+                     * 
                      */
                     writeObjectMethod = getPrivateMethod( cl, "writeObject",
                         new Class<?>[] { java.io.ObjectOutputStream.class }, Void.TYPE ) ;
@@ -589,6 +682,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * Returns non-static private method with given signature defined by given
      * class, or null if none found.  Access checks are disabled on the
      * returned method (if any).
+     * <p>
+     *  返回具有由给定类定义的给定签名的非静态私有方法,如果没有找到则返回null。对返回的方法(如果有)禁用访问检查。
+     * 
      */
     private static Method getPrivateMethod(Class<?> cl, String name,
                                            Class<?>[] argTypes,
@@ -615,6 +711,12 @@ public class ObjectStreamClass implements java.io.Serializable {
      * fully-qualified name of the class whose writeObject method
      * is being invoked and hashcode and suid are the class's hashcode
      * and SUID."
+     * <p>
+     *  Java到IDL ptc-02-01-12 1.5.1
+     * 
+     *  "传递给start_value方法的rep_id字符串必须是'RMI：org.omg.custom.class：hashcode：suid',其中class是被调用writeObject方法的类的完全
+     * 限定名,hashcode和suid是类的哈希码和SUID"。
+     * 
      */
     private String computeRMIIIOPOptionalDataRepId() {
 
@@ -630,6 +732,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * This will return null if there is no writeObject method.
+     * <p>
+     *  如果没有writeObject方法,将返回null。
+     * 
      */
     public final String getRMIIIOPOptionalDataRepId() {
         return rmiiiopOptionalDataRepId;
@@ -640,6 +745,10 @@ public class ObjectStreamClass implements java.io.Serializable {
      * This is separate from read so ObjectInputStream can assign the
      * wire handle early, before any nested ObjectStreamClass might
      * be read.
+     * <p>
+     *  为要读取的类创建一个空的ObjectStreamClass。
+     * 这与读取是分开的,因此ObjectInputStream可以在任何嵌套的ObjectStreamClass可能被读取之前尽早分配wire句柄。
+     * 
      */
     ObjectStreamClass(String n, long s) {
         name = n;
@@ -653,6 +762,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * The base class name and serializable hash must match.
      * Fill in the reflected Fields that will be used
      * for reading.
+     * <p>
+     *  设置此版本描述符匹配的类。基类名和可序列化哈希必须匹配。填写将用于阅读的反射字段。
+     * 
      */
     final void setClass(Class<?> cl) throws InvalidClassException {
 
@@ -674,6 +786,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
             /* Allow adding Serializable or Externalizable
              * to a later release of the class.
+             * <p>
+             * 到更高版本的类。
+             * 
              */
             boolean addedSerialOrExtern =
                 isNonSerializable() || localClassDesc.isNonSerializable();
@@ -685,6 +800,11 @@ public class ObjectStreamClass implements java.io.Serializable {
              * qualified array class is used in the
              * computation of the array's serialVersionUID. There is
              * no way to set a permanent serialVersionUID for an array type.
+             * <p>
+             *  当name和cl.Name不同时。
+             * 如果resolveClass()返回一个具有不同包名称的数组,则serialVersionUIDs将不匹配,因为在数组的serialVersionUID的计算中使用了全限定数组类。
+             * 没有办法为数组类型设置永久的serialVersionUID。
+             * 
              */
 
             boolean arraySUID = (cl.isArray() && ! cl.getName().equals(name));
@@ -708,6 +828,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
         /*
          * Test that both implement either serializable or externalizable.
+         * <p>
+         *  测试它们实现可序列化或可外部化。
+         * 
          */
 
         // The next check is more generic, since it covers the
@@ -738,6 +861,11 @@ public class ObjectStreamClass implements java.io.Serializable {
          * If extra fields are present in the class they are ignored. Their
          * values will be set to the default value by the object allocator.
          * Both the src and dest field list are sorted by type and name.
+         * <p>
+         *  该描述符中的字段应该被存储。此ObjectStreamClass(源)中的每个字段(按名称)位于类(目标)的ObjectStreamClass中。
+         * 在通常(非版本化的情况下)字段在两个描述符中,并且类型匹配,因此将复制反映的字段。如果类型不匹配,则抛出InvalidClass异常。
+         * 如果字段不存在于类中,则反映的字段保持为空,因此字段将被读取但被丢弃。如果类中存在额外的字段,它们将被忽略。它们的值将由对象分配器设置为默认值。 src和dest字段列表按类型和名称排序。
+         * 
          */
 
         ObjectStreamField[] destfield =
@@ -780,6 +908,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
         /* get the cache of these methods from the local class
          * implementation.
+         * <p>
+         *  实施。
+         * 
          */
         readObjectMethod = localClassDesc.readObjectMethod;
         readResolveObjectMethod = localClassDesc.readResolveObjectMethod;
@@ -787,6 +918,8 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /* Compare the base class names of streamName and localName.
      *
+     * <p>
+     * 
      * @return  Return true iff the base class name compare.
      * @parameter streamName    Fully qualified class name.
      * @parameter localName     Fully qualified class name.
@@ -814,6 +947,9 @@ public class ObjectStreamClass implements java.io.Serializable {
     /*
      * Compare the types of two class descriptors.
      * They match if they have the same class name and suid
+     * <p>
+     *  比较两个类描述符的类型。如果它们具有相同的类名和suid,则它们匹配
+     * 
      */
     final boolean typeEquals(ObjectStreamClass other) {
         return (suid == other.suid) &&
@@ -822,6 +958,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Return the superclass descriptor of this descriptor.
+     * <p>
+     *  返回此描述符的超类描述符。
+     * 
      */
     final void setSuperclass(ObjectStreamClass s) {
         superclass = s;
@@ -829,6 +968,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Return the superclass descriptor of this descriptor.
+     * <p>
+     *  返回此描述符的超类描述符。
+     * 
      */
     final ObjectStreamClass getSuperclass() {
         return superclass;
@@ -836,6 +978,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Return whether the class has a readObject method
+     * <p>
+     *  返回类是否有一个readObject方法
+     * 
      */
     final boolean hasReadObject() {
         return readObjectMethod != null;
@@ -843,6 +988,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Return whether the class has a writeObject method
+     * <p>
+     *  返回类是否有writeObject方法
+     * 
      */
     final boolean hasWriteObject() {
         return writeObjectMethod != null ;
@@ -853,6 +1001,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * marshaled (use chunking).  This should happen if
      * it is Externalizable OR if it or
      * any of its superclasses has a writeObject method,
+     * <p>
+     * 返回此类是否应该自定义封送(使用分块)。这应该发生,如果它是Externalizable或如果它或任何其超类有一个writeObject方法,
+     * 
      */
     final boolean isCustomMarshaled() {
         return (hasWriteObject() || isExternalizable())
@@ -879,6 +1030,17 @@ public class ObjectStreamClass implements java.io.Serializable {
      *   disabled. This is enforced by not allowing the PROTOCOL_VERSION
      *   of a stream to he changed after any objects have been written.
      *
+     * <p>
+     *  如果'this'Externalizable类的所有实例都以块数据模式从读取'this'的流中写入,则返回true。 <p>
+     * 
+     *  在JDK 1.1中,所有Externalizable实例都不是以块数据模式写入的。
+     * 在JDK 1.2中,默认情况下,所有Externalizable实例都以块数据模式写入,而Externalizable实例以标记TC_ENDBLOCKDATA结束。
+     * 更改启用了跳过Externalizable实例的功能。
+     * 
+     *  实现注意：这应该是每个流保持的模式;但是,出于兼容性原因,只能每个类记录此更改。给定流中的所有可外化类应该启用或禁用此模式。
+     * 这是通过不允许在任何对象被写入之后改变流的PROTOCOL_VERSION来实现的。
+     * 
+     * 
      * @see ObjectOutputStream#useProtocolVersion
      * @see ObjectStreamConstants#PROTOCOL_VERSION_1
      * @see ObjectStreamConstants#PROTOCOL_VERSION_2
@@ -897,6 +1059,10 @@ public class ObjectStreamClass implements java.io.Serializable {
      * this class descriptor is not associated with a class, if the associated
      * class is non-serializable or if the appropriate no-arg constructor is
      * inaccessible/unavailable.
+     * <p>
+     *  创建所表示类的新实例。如果类是可外部化的,调用它的公共无参构造函数;否则,如果类是可序列化的,则调用第一个非可串行化超类的无参构造器。
+     * 如果此类描述符不与类关联,则抛出UnsupportedOperationException(如果关联类不可序列化,或者相应的无参数构造函数不可访问/不可用)。
+     * 
      */
     Object newInstance()
         throws InstantiationException, InvocationTargetException,
@@ -920,6 +1086,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * Returns public no-arg constructor of given class, or null if none found.
      * Access checks are disabled on the returned constructor (if any), since
      * the defining class may still be non-public.
+     * <p>
+     * 返回给定类的公共无参构造函数,如果没有找到则返回null。对返回的构造函数(如果有)禁用访问检查,因为定义类可能仍然是非公共的。
+     * 
      */
     private static Constructor getExternalizableConstructor(Class<?> cl) {
         try {
@@ -936,6 +1105,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * Returns subclass-accessible no-arg constructor of first non-serializable
      * superclass, or null if none found.  Access checks are disabled on the
      * returned constructor (if any).
+     * <p>
+     *  返回第一个非可序列化超类的子类可访问的无参数构造函数,如果没有找到则返回null。对返回的构造函数(如果有)禁用访问检查。
+     * 
      */
     private static Constructor getSerializableConstructor(Class<?> cl) {
         Class<?> initCl = cl;
@@ -963,6 +1135,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Return the ObjectStreamClass of the local class this one is based on.
+     * <p>
+     *  返回这个基于的本地类的ObjectStreamClass。
+     * 
      */
     final ObjectStreamClass localClassDescriptor() {
         return localClassDesc;
@@ -970,6 +1145,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Get the Serializability of the class.
+     * <p>
+     *  获取类的可串行化。
+     * 
      */
     boolean isSerializable() {
         return serializable;
@@ -977,6 +1155,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Get the externalizability of the class.
+     * <p>
+     *  获得类的外向性。
+     * 
      */
     boolean isExternalizable() {
         return externalizable;
@@ -990,6 +1171,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * Calculate the size of the array needed to store primitive data and the
      * number of object references to read when reading from the input
      * stream.
+     * <p>
+     *  计算从输入流读取时存储基本数据所需的数组大小和要读取的对象引用数。
+     * 
      */
     private void computeFieldInfo() {
         primBytes = 0;
@@ -1033,6 +1217,10 @@ public class ObjectStreamClass implements java.io.Serializable {
      * must be ignored, as otherwise interoperability with ORBs in earlier
      * JDK versions can be compromised.  I am adding these masks for this
      * purpose as discussed in the CCC for this bug (see http://ccc.sfbay/4897937).
+     * <p>
+     *  这可能影响SVUID计算(见错误4897937)。这些位必须被忽略,否则可能会损害早期JDK版本中与ORB的互操作性。
+     * 我为这个目的添加这些掩码,如CCC中讨论的这个bug(参见http：//ccc.sfbay/4897937)。
+     * 
      */
 
     public static final int CLASS_MASK = Modifier.PUBLIC | Modifier.FINAL |
@@ -1049,6 +1237,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * Compute a hash for the specified class.  Incrementally add
      * items to the hash accumulating in the digest stream.
      * Fold the hash into a long.  Use the SHA secure hash function.
+     * <p>
+     *  计算指定类的哈希值。增量地将项目添加到在摘要流中累积的散列中。将哈希折叠成一个长。使用SHA安全散列函数。
+     * 
      */
     private static long _computeSerialVersionUID(Class<?> cl) {
         if (DEBUG_SVUID)
@@ -1075,6 +1266,9 @@ public class ObjectStreamClass implements java.io.Serializable {
              * This is required so correct hashes can be computed
              * for existing class files.
              * Previously this hack was previously present in the VM.
+             * <p>
+             *  接口如果接口有一些方法。 ABSTRACT位反映方法数> 0。这是必需的,因此可以为现有类文件计算正确的散列。以前,此黑客以前存在于VM中。
+             * 
              */
             Method[] method = cl.getDeclaredMethods();
             if ((classaccess & Modifier.INTERFACE) != 0) {
@@ -1095,6 +1289,9 @@ public class ObjectStreamClass implements java.io.Serializable {
              * Get the list of interfaces supported,
              * Accumulate their names their names in Lexical order
              * and add them to the hash
+             * <p>
+             *  获取支持的接口列表,按词法顺序收集名称及其名称,并将它们添加到哈希
+             * 
              */
             if (!cl.isArray()) {
                 /* In 1.2fcs, getInterfaces() was modified to return
@@ -1102,6 +1299,9 @@ public class ObjectStreamClass implements java.io.Serializable {
                  * called on array classes.  These values would upset
                  * the computation of the hash, so we explicitly omit
                  * them from its computation.
+                 * <p>
+                 * {java.lang.Cloneable,java.io.Serializable}在数组类上调用时。这些值将破坏散列的计算,因此我们从其计算中明确省略它们。
+                 * 
                  */
 
                 Class<?> interfaces[] = cl.getInterfaces();
@@ -1123,6 +1323,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
                 /* Include in the hash all fields except those that are
                  * private transient and private static.
+                 * <p>
+                 *  私有瞬态和私有静态。
+                 * 
                  */
                 int m = f.getModifiers();
                 if (Modifier.isPrivate(m) &&
@@ -1163,6 +1366,9 @@ public class ObjectStreamClass implements java.io.Serializable {
              * Get the list of constructors including name and signature
              * Sort lexically, add all except the private constructors
              * to the hash with their access flags
+             * <p>
+             *  获取构造函数的列表,包括名称和签名排序,添加除了私有构造函数的所有的构造函数到它们的访问标志的哈希
+             * 
              */
 
             MethodSignature[] constructors =
@@ -1190,6 +1396,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
             /* Include in the hash all methods except those that are
              * private transient and private static.
+             * <p>
+             *  私有瞬态和私有静态。
+             * 
              */
             MethodSignature[] methods =
                 MethodSignature.removePrivateAndSort(method);
@@ -1216,6 +1425,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
             /* Compute the hash value for this class.
              * Use only the first 64 bits of the hash.
+             * <p>
+             *  只使用哈希的前64位。
+             * 
              */
             data.flush();
             byte hasharray[] = md.digest();
@@ -1287,6 +1499,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
             /* Compute the hash value for this class.
              * Use only the first 64 bits of the hash.
+             * <p>
+             *  只使用哈希的前64位。
+             * 
              */
             data.flush();
             byte hasharray[] = md.digest();
@@ -1309,6 +1524,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Compute the JVM signature for the class.
+     * <p>
+     *  计算类的JVM签名。
+     * 
      */
     static String getSignature(Class<?> clazz) {
         String type = null;
@@ -1353,6 +1571,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Compute the JVM method descriptor for the method.
+     * <p>
+     *  计算方法的JVM方法描述符。
+     * 
      */
     static String getSignature(Method meth) {
         StringBuffer sb = new StringBuffer();
@@ -1370,6 +1591,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Compute the JVM constructor descriptor for the constructor.
+     * <p>
+     *  计算构造函数的JVM构造函数描述符。
+     * 
      */
     static String getSignature(Constructor cons) {
         StringBuffer sb = new StringBuffer();
@@ -1386,6 +1610,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Cache of Class -> ClassDescriptor Mappings.
+     * <p>
+     *  类的缓存 - > ClassDescriptor映射。
+     * 
      */
     static private ObjectStreamClassEntry[] descriptorFor = new ObjectStreamClassEntry[61];
 
@@ -1395,6 +1622,10 @@ public class ObjectStreamClass implements java.io.Serializable {
      * of the Class is used for the lookup since the Class is the key.
      * The entries are extended from java.lang.ref.SoftReference so the
      * gc will be able to free them if needed.
+     * <p>
+     *  findDescriptor对于类。这在缓存中查找从Class  - > ObjectStreamClass映射的映射。 Class的hashCode用于查找,因为Class是键。
+     * 条目从java.lang.ref.SoftReference扩展,因此gc将能够释放它们,如果需要。
+     * 
      */
     private static ObjectStreamClass findDescriptorFor(Class<?> cl) {
 
@@ -1410,6 +1641,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
         /* Traverse the chain looking for a descriptor with ofClass == cl.
          * unlink entries that are unresolved.
+         * <p>
+         *  取消链接未解析的条目。
+         * 
          */
         prev = e;
         while (e != null ) {
@@ -1429,6 +1663,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * insertDescriptorFor a Class -> ObjectStreamClass mapping.
+     * <p>
+     *  insertDescriptorFor一个Class  - > ObjectStreamClass映射。
+     * 
      */
     private static void insertDescriptorFor(ObjectStreamClass desc) {
         // Make sure not already present
@@ -1454,16 +1691,25 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * The name of this descriptor
+     * <p>
+     *  此描述符的名称
+     * 
      */
     private String name;
 
     /*
      * The descriptor of the supertype.
+     * <p>
+     *  超类型的描述符。
+     * 
      */
     private ObjectStreamClass superclass;
 
     /*
      * Flags for Serializable and Externalizable.
+     * <p>
+     *  可序列化和可外部化的标志。
+     * 
      */
     private boolean serializable;
     private boolean externalizable;
@@ -1471,28 +1717,43 @@ public class ObjectStreamClass implements java.io.Serializable {
     /*
      * Array of persistent fields of this class, sorted by
      * type and name.
+     * <p>
+     *  该类的持久字段数组,按类型和名称排序。
+     * 
      */
     private ObjectStreamField[] fields;
 
     /*
      * Class that is a descriptor for in this virtual machine.
+     * <p>
+     *  作为此虚拟机中的描述符的类。
+     * 
      */
     private Class<?> ofClass;
 
     /*
      * True if descriptor for a proxy class.
+     * <p>
+     *  如果代理类的描述符为True。
+     * 
      */
     boolean forProxyClass;
 
 
     /*
      * SerialVersionUID for this class.
+     * <p>
+     *  此类的SerialVersionUID。
+     * 
      */
     private long suid = kDefaultUID;
     private String suidStr = null;
 
     /*
      * Actual (computed) SerialVersionUID for this class.
+     * <p>
+     *  此类的实际(计算)SerialVersionUID。
+     * 
      */
     private long actualSuid = kDefaultUID;
     private String actualSuidStr = null;
@@ -1500,6 +1761,9 @@ public class ObjectStreamClass implements java.io.Serializable {
     /*
      * The total number of bytes of primitive fields.
      * The total number of object fields.
+     * <p>
+     * 基本字段的字节总数。对象字段的总数。
+     * 
      */
     int primBytes;
     int objFields;
@@ -1509,6 +1773,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * successfully completed initialization.  This is to
      * try to fix bug 4373844.  Working to move to
      * reusing java.io.ObjectStreamClass for JDK 1.5.
+     * <p>
+     *  表示此实例是否已成功完成初始化的标志。这是尝试修复错误4373844.工作要移动到重用为JDK 1.5的java.io.ObjectStreamClass。
+     * 
      */
     private boolean initialized = false;
 
@@ -1519,6 +1786,10 @@ public class ObjectStreamClass implements java.io.Serializable {
      * As of JDK 1.2, external data is written in block data mode. This
      * flag enables JDK 1.2 to be able to read JDK 1.1 written external data.
      *
+     * <p>
+     *  从JDK 1.2开始,外部数据以块数据模式写入。此标志使JDK 1.2能够读取JDK 1.1写入的外部数据。
+     * 
+     * 
      * @since JDK 1.2
      */
     private boolean hasExternalizableBlockData;
@@ -1535,11 +1806,18 @@ public class ObjectStreamClass implements java.io.Serializable {
      * a special repository ID made from the Serializable's
      * information which we are pre-computing and
      * storing here.
+     * <p>
+     *  从Java开始到IDL ptc / 02-01-12,RMI-IIOP有一个流格式版本2,它在Serializable的可选自定义数据周围放置一个假值类型。
+     * 这个值类型有一个特殊的存储库ID,由Serializable的信息,我们在这里预先计算和存储。
+     * 
      */
     private String rmiiiopOptionalDataRepId = null;
 
     /*
      * ObjectStreamClass that this one was built from.
+     * <p>
+     *  ObjectStreamClass,这个是从中构建的。
+     * 
      */
     private ObjectStreamClass localClassDesc;
 
@@ -1548,6 +1826,9 @@ public class ObjectStreamClass implements java.io.Serializable {
     /**
      * Returns true if the given class defines a static initializer method,
      * false otherwise.
+     * <p>
+     *  如果给定类定义了静态初始化方法,则返回true,否则返回false。
+     * 
      */
     private static boolean hasStaticInitializer(Class<?> cl) {
         if (hasStaticInitializerMethod == null) {
@@ -1590,6 +1871,9 @@ public class ObjectStreamClass implements java.io.Serializable {
     /**
      * Set serialPersistentFields of a Serializable class to this value to
      * denote that the class has no Serializable fields.
+     * <p>
+     *  将Serializable类的serialPersistentFields设置为此值,以表示该类没有可序列化字段。
+     * 
      */
     public static final ObjectStreamField[] NO_FIELDS =
         new ObjectStreamField[0];
@@ -1597,6 +1881,9 @@ public class ObjectStreamClass implements java.io.Serializable {
     /*
      * Entries held in the Cache of known ObjectStreamClass objects.
      * Entries are chained together with the same hash value (modulo array size).
+     * <p>
+     *  在Cache中保存的已知ObjectStreamClass对象的条目。条目与相同的哈希值(模数组大小)链接在一起。
+     * 
      */
     private static class ObjectStreamClassEntry // extends java.lang.ref.SoftReference
     {
@@ -1615,6 +1902,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Comparator object for Classes and Interfaces
+     * <p>
+     *  类和接口的比较器对象
+     * 
      */
     private static Comparator compareClassByName =
         new CompareClassByName();
@@ -1629,6 +1919,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /**
      * Comparator for ObjectStreamFields by name
+     * <p>
+     *  ObjectStreamFields的比较器按名称
+     * 
      */
     private final static Comparator compareObjStrFieldsByName
         = new CompareObjStrFieldsByName();
@@ -1644,6 +1937,9 @@ public class ObjectStreamClass implements java.io.Serializable {
 
     /*
      * Comparator object for Members, Fields, and Methods
+     * <p>
+     *  成员,字段和方法的比较器对象
+     * 
      */
     private static Comparator compareMemberByName =
         new CompareMemberByName();
@@ -1665,14 +1961,20 @@ public class ObjectStreamClass implements java.io.Serializable {
     }
 
     /* It is expensive to recompute a method or constructor signature
+    /* <p>
+    /* 
        many times, so compute it only once using this data structure. */
     private static class MethodSignature implements Comparator {
         Member member;
         String signature;      // cached parameter signature
 
         /* Given an array of Method or Constructor members,
+        /* <p>
+        /* 
            return a sorted array of the non-private members.*/
         /* A better implementation would be to implement the returned data
+        /* <p>
+        /* 
            structure as an insertion sorted link list.*/
         static MethodSignature[] removePrivateAndSort(Member[] m) {
             int numNonPrivate = 0;
@@ -1695,6 +1997,8 @@ public class ObjectStreamClass implements java.io.Serializable {
         }
 
         /* Assumes that o1 and o2 are either both methods
+        /* <p>
+        /* 
            or both constructors.*/
         public int compare(Object o1, Object o2) {
             /* Arrays.sort calls compare when o1 and o2 are equal.*/
@@ -1735,6 +2039,11 @@ public class ObjectStreamClass implements java.io.Serializable {
      * method (if any).
      *
      * Copied from the Merlin java.io.ObjectStreamClass.
+     * <p>
+     *  返回具有给定签名的非静态,​​非抽象方法,只要它由给定类定义或可访问(通过继承),如果没有找到匹配则返回null。对返回的方法(如果有)禁用访问检查。
+     * 
+     * 从Merlin java.io.ObjectStreamClass复制。
+     * 
      */
     private static Method getInheritableMethod(Class<?> cl, String name,
                                                Class<?>[] argTypes,
@@ -1772,6 +2081,9 @@ public class ObjectStreamClass implements java.io.Serializable {
      * otherwise.
      *
      * Copied from the Merlin java.io.ObjectStreamClass.
+     * <p>
+     *  如果类在同一个包中定义,则返回true,否则返回false。
+     * 
      */
     private static boolean packageEquals(Class<?> cl1, Class<?> cl2) {
         Package pkg1 = cl1.getPackage(), pkg2 = cl2.getPackage();

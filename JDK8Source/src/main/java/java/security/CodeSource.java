@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,10 @@ import java.security.cert.*;
  * encapsulate not only the location (URL) but also the certificate chains
  * that were used to verify signed code originating from that location.
  *
+ * <p>
+ *  <p>此类扩展了代码库的概念,以便不仅封装位置(URL),还封装用于验证源自该位置的签名代码的证书链。
+ * 
+ * 
  * @author Li Gong
  * @author Roland Schemers
  */
@@ -52,17 +57,27 @@ public class CodeSource implements java.io.Serializable {
     /**
      * The code location.
      *
+     * <p>
+     *  代码位置。
+     * 
+     * 
      * @serial
      */
     private URL location;
 
     /*
      * The code signers.
+     * <p>
+     *  代码签名者。
+     * 
      */
     private transient CodeSigner[] signers = null;
 
     /*
      * The code signers. Certificate chains are concatenated.
+     * <p>
+     *  代码签名者。证书链是并置的。
+     * 
      */
     private transient java.security.cert.Certificate certs[] = null;
 
@@ -76,6 +91,10 @@ public class CodeSource implements java.io.Serializable {
      * Constructs a CodeSource and associates it with the specified
      * location and set of certificates.
      *
+     * <p>
+     *  构造一个CodeSource并将其与指定的位置和证书集相关联。
+     * 
+     * 
      * @param url the location (URL).
      *
      * @param certs the certificate(s). It may be null. The contents of the
@@ -94,6 +113,10 @@ public class CodeSource implements java.io.Serializable {
      * Constructs a CodeSource and associates it with the specified
      * location and set of code signers.
      *
+     * <p>
+     *  构造一个CodeSource并将其与指定的位置和代码签名者集合相关联。
+     * 
+     * 
      * @param url the location (URL).
      * @param signers the code signers. It may be null. The contents of the
      * array are copied to protect against subsequent modification.
@@ -112,6 +135,10 @@ public class CodeSource implements java.io.Serializable {
     /**
      * Returns the hash code value for this object.
      *
+     * <p>
+     *  返回此对象的哈希码值。
+     * 
+     * 
      * @return a hash code value for this object.
      */
     @Override
@@ -129,6 +156,10 @@ public class CodeSource implements java.io.Serializable {
      * chains are of identical value. It is not required that
      * the certificate chains be in the same order.
      *
+     * <p>
+     *  测试指定对象与此对象之间的等同性。如果两个CodeSource对象的位置具有相同的值,并且它们的签名者证书链具有相同的值,则它们被认为是相等的。不要求证书链按相同的顺序。
+     * 
+     * 
      * @param obj the object to test for equality with this object.
      *
      * @return true if the objects are considered equal, false otherwise.
@@ -160,10 +191,16 @@ public class CodeSource implements java.io.Serializable {
     /**
      * Returns the location associated with this CodeSource.
      *
+     * <p>
+     *  返回与此CodeSource相关联的位置。
+     * 
+     * 
      * @return the location (URL).
      */
     public final URL getLocation() {
         /* since URL is practically immutable, returning itself is not
+        /* <p>
+        /* 
            a security problem */
         return this.location;
     }
@@ -180,6 +217,14 @@ public class CodeSource implements java.io.Serializable {
      * bottom-to-top (i.e., with the signer certificate first and the (root)
      * certificate authority last).
      *
+     * <p>
+     *  返回与此CodeSource关联的证书。
+     * <p>
+     * 如果此CodeSource对象是使用{@link #CodeSource(URL url,CodeSigner [] signers)}构造函数创建的,那么它的证书链将被提取并用于创建一个Certifi
+     * cate对象数组。
+     * 每个签署者证书后面是其支持证书链(可能为空)。每个签名者证书及其支持证书链从下到上排序(即,首先是签名者证书,最后是(根)证书授权者)。
+     * 
+     * 
      * @return A copy of the certificates array, or null if there is none.
      */
     public final java.security.cert.Certificate[] getCertificates() {
@@ -212,6 +257,14 @@ public class CodeSource implements java.io.Serializable {
      * create an array of CodeSigner objects. Note that only X.509 certificates
      * are examined - all other certificate types are ignored.
      *
+     * <p>
+     *  返回与此CodeSource相关联的代码签名者。
+     * <p>
+     *  如果此CodeSource对象是使用{@link #CodeSource(URL url,java.security.cert.Certificate [] certs)}构造函数创建的,那么它的证书
+     * 链将被提取并用于创建一个CodeSigner对象数组。
+     * 请注意,仅检查X.509证书 - 忽略所有其他证书类型。
+     * 
+     * 
      * @return A copy of the code signer array, or null if there is none.
      *
      * @since 1.5
@@ -294,6 +347,44 @@ public class CodeSource implements java.io.Serializable {
      * Note that if this CodeSource has a null location and a null
      * certificate chain, then it implies every other CodeSource.
      *
+     * <p>
+     *  如果此CodeSource对象"隐含"指定的CodeSource,则返回true。
+     * <p>
+     *  更具体地,该方法进行以下检查。如果任何失败,它返回false。如果它们都成功,它返回true。
+     * <ul>
+     *  <li> <i> codesource </i>不能为空。 <li>如果此对象的证书不为null,则此对象的所有证书必须存在于<i> codesource </i>的证书中。
+     *  <li>如果此对象的位置(getLocation())不为null,则会对此对象的位置和<i> codesource </i>进行以下检查：。
+     * <ul>
+     *  <li> <i> codesource </i>的位置不得为空。
+     * 
+     * <li>如果此对象的位置等于<i> codesource </i>的位置,则返回true。
+     * 
+     *  <li>此对象的协议(getLocation()。getProtocol())必须等于<i> codesource </i>的协议,忽略大小写。
+     * 
+     *  <li>如果此对象的主机(getLocation()。
+     * getHost())不为null,则使用此对象的主机构建的SocketPermission必须暗示使用<i> codesource </i>的主机构造的SocketPermission。
+     * 
+     *  <li>如果此对象的端口(getLocation()。
+     * getPort())不等于-1(即如果指定了端口),则它必须等于<i> codesource </i>的端口或默认端口(codesource.getLocation()。
+     * getDefaultPort())。
+     * 
+     *  <li>如果此对象的文件(getLocation()。
+     * getFile())不等于<i> codesource </i>的文件,则进行以下检查：如果此对象的文件以"/  - 那么<i> codesource </i>的文件必须以此对象的文件开头(不包括尾部的
+     * " - ")。
+     *  <li>如果此对象的文件(getLocation()。如果此对象的文件以"/ *"结尾,则<i> codesource </i>的文件必须以此对象的文件开头,且不得有任何其他"/"分隔符。
+     * 如果此对象的文件未以"/"结尾,则<i> codesource </i>的文件必须与此对象的文件匹配,并附加一个'/'。
+     * 
+     *  <li>如果此对象的引用(getLocation()。getRef())不为null,则它必须等于<i> codesource </i>的引用。
+     * 
+     * </ul>
+     * </ul>
+     * <p>
+     *  例如,具有以下位置和空证书的codesource对象都意味着具有位置"http://java.sun.com/classes/foo.jar"和空证书的codesource：
+     * <pre>
+     * http：http：//*.sun.com/classes/* http://java.sun.com/classes/- http://java.sun.com/classes/foo.jar
+     * </pre>
+     * 
+     * 
      * @param codesource CodeSource to compare against.
      *
      * @return true if the specified codesource is implied by this codesource,
@@ -312,6 +403,10 @@ public class CodeSource implements java.io.Serializable {
      * Returns true if all the certs in this
      * CodeSource are also in <i>that</i>.
      *
+     * <p>
+     *  注意,如果这个CodeSource有一个空位置和一个空证书链,那么它意味着每隔一个CodeSource。
+     * 
+     * 
      * @param that the CodeSource to check against.
      * @param strict If true then a strict equality match is performed.
      *               Otherwise a subset match is performed.
@@ -369,6 +464,10 @@ public class CodeSource implements java.io.Serializable {
     /**
      * Returns true if two CodeSource's have the "same" location.
      *
+     * <p>
+     *  如果此CodeSource中的所有证书也在<i> </i>中,则返回true。
+     * 
+     * 
      * @param that CodeSource to compare against
      */
     private boolean matchLocation(CodeSource that) {
@@ -458,6 +557,10 @@ public class CodeSource implements java.io.Serializable {
      * Returns a string describing this CodeSource, telling its
      * URL and certificates.
      *
+     * <p>
+     *  如果两个CodeSource具有"相同"位置,则返回true。
+     * 
+     * 
      * @return information about this CodeSource.
      */
     @Override
@@ -485,6 +588,22 @@ public class CodeSource implements java.io.Serializable {
     /**
      * Writes this object out to a stream (i.e., serializes it).
      *
+     * <p>
+     *  //匹配目录和该目录中包含的所有文件。
+     *  //例如,"/ a / b / *"意味着以"/ a / b /"开头但没有进一步斜线的任何内容int last = that.location.getFile()。
+     * lastIndexOf('/'); if(last == -1)return false; String thisPath = location.getFile()。
+     * substring(0,location.getFile()。length() -  1); String thatPath = that.location.getFile()。
+     * substring(0,last + 1); if(！thatPath.equals(thisPath))return false; } else {//完全匹配。
+     *  //例如,"/ a / b"和"/ a / b /"都意味着"/ a / b /"if((！that.location.getFile()。
+     * equals(location.getFile()))&& (！that.location.getFile()。
+     * equals(location.getFile()+"/"))){return false; }}。
+     * 
+     *  if(location.getRef()！= null &&！location.getRef()。equals(that.location.getRef())){return false; }}
+     * 
+     * String thisHost = location.getHost(); String thatHost = that.location.getHost(); if(thisHost！= null){if(("".equals(thisHost)||"localhost".equals(thisHost))&&("".equals(thatHost)||"localhost" {// ok}
+     *  else if(！thisHost.equals(thatHost)){if(thatHost == null){return false; } if(this.sp == null){this.sp = new SocketPermission(thisHost,"resolve"); }
+     *  if(that.sp == null){that.sp = new SocketPermission(thatHost,"resolve"); } if(！this.sp.implies(that.s
+     * 
      * @serialData An initial {@code URL} is followed by an
      * {@code int} indicating the number of certificates to follow
      * (a value of "zero" denotes that there are no certificates associated
@@ -529,6 +648,11 @@ public class CodeSource implements java.io.Serializable {
 
     /**
      * Restores this object from a stream (i.e., deserializes it).
+     * <p>
+     * p)){return false; }}} //一切都匹配return true; }}。
+     * 
+     *  / **返回一个描述这个CodeSource的字符串,告诉它的URL和证书。
+     * 
      */
     private void readObject(java.io.ObjectInputStream ois)
         throws IOException, ClassNotFoundException
@@ -595,6 +719,10 @@ public class CodeSource implements java.io.Serializable {
      * The array of certificates is a concatenation of certificate chains
      * where the initial certificate in each chain is the end-entity cert.
      *
+     * <p>
+     *  将此对象写入流(即,将其序列化)。
+     * 
+     * 
      * @return An array of code signers or null if none are generated.
      */
     private CodeSigner[] convertCertArrayToSignerArray(

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -12,6 +13,8 @@ package org.omg.PortableServer;
 /**
 	 * When the POA has the RETAIN policy it uses servant 
 	 * managers that are ServantActivators. 
+	 * <p>
+	 * 
 	 */
 public abstract class ServantActivatorPOA extends org.omg.PortableServer.Servant
  implements org.omg.PortableServer.ServantActivatorOperations, org.omg.CORBA.portable.InvokeHandler

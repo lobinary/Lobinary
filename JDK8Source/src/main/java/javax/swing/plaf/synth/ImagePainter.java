@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,9 @@ import sun.swing.plaf.synth.Paint9Painter;
  * by way of an insets, and the remaining regions are either tiled or
  * scaled to fit.
  *
+ * <p>
+ *  ImagePainter使用图像填充指定的区域。图像被分为9个部分：北部,东北部,东部,东南部,南部,西南部,西部,西北部和中心。角部通过插入物来限定,并且剩余的区域被平铺或缩放以适合。
+ * 
  * @author Scott Violet
  */
 class ImagePainter extends SynthPainter {

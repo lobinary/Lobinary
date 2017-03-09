@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ExsltStrings.java,v 1.1.2.1 2005/08/01 02:08:48 jeffsuttor Exp $
+ * <p>
+ *  $ Id：ExsltStrings.java,v 1.1.2.1 2005/08/01 02:08:48 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.lib;
 
@@ -46,6 +59,16 @@ import org.w3c.dom.Text;
  * The documentation for each function has been copied from the relevant
  * EXSLT Implementer page.
  *
+ * <p>
+ *  这个类包含EXSLT字符串扩展函数。
+ * 
+ *  可通过指定名称空间URI来访问它,如下所示：
+ * <pre>
+ *  xmlns：str ="http://exslt.org/strings"
+ * </pre>
+ *  每个函数的文档已从相关的EXSLT实施者页面复制。
+ * 
+ * 
  * @see <a href="http://www.exslt.org/">EXSLT</a>
 
  * @xsl.usage general
@@ -77,6 +100,20 @@ public class ExsltStrings extends ExsltBase
    * If the target string is longer than the padding string, then it is truncated to be
    * the same length as the padding string and returned.
    *
+   * <p>
+   *  str：align函数将字符串与另一个字符串对齐。
+   * <p>
+   *  第一个参数给出要对齐的目标字符串。第二个参数给出了要在其中对齐的填充字符串。
+   * <p>
+   * 如果目标字符串比填充字符串短,那么填充字符串中的字符范围将与目标字符串中的字符范围重新排列。哪些字符被替换取决于第三个参数的值,它给出了对齐的类型。它可以是"左","右"或"中心"之一。
+   * 如果没有给出第三个参数,或者它不是这些值之一,那么它默认为左对齐。
+   * <p>
+   *  使用左对齐,由目标字符串替换的字符范围以填充字符串中的第一个字符开始。使用右对齐,由目标字符串替换的字符范围以填充字符串中的最后一个字符结尾。
+   * 使用中心对齐时,由目标字符串替换的字符范围位于填充字符串的中间,以使范围任一侧的未替换字符数相同,或左侧有一个少于在右边。
+   * <p>
+   *  如果目标字符串比填充字符串长,则它被截断为与填充字符串相同的长度并返回。
+   * 
+   * 
    * @param targetStr The target string
    * @param paddingStr The padding string
    * @param type The type of alignment
@@ -106,6 +143,9 @@ public class ExsltStrings extends ExsltBase
 
   /**
    * See above
+   * <p>
+   *  往上看
+   * 
    */
   public static String align(String targetStr, String paddingStr)
   {
@@ -117,6 +157,10 @@ public class ExsltStrings extends ExsltBase
    * string values of the nodes in that node set. If the node set is empty, it returns
    * an empty string.
    *
+   * <p>
+   *  str：concat函数接受一个节点集,并返回该节点集中节点的字符串值的并置。如果节点集为空,它返回一个空字符串。
+   * 
+   * 
    * @param nl A node set
    * @return The concatenation of the string values of the nodes in that node set
    */
@@ -145,6 +189,12 @@ public class ExsltStrings extends ExsltBase
    * argument is specified, it defaults to a space (' '). If the second argument is
    * an empty string, str:padding returns an empty string.
    *
+   * <p>
+   * str：padding函数创建一定长度的填充字符串。第一个参数给出了要创建的填充字符串的长度。第二个参数给出了用于创建填充的字符串。
+   * 此字符串重复所需的次数,以创建由第一个参数指定的长度的字符串;如果字符串超过一个字符长,它可能必须被截断以产生所需的长度。如果没有指定第二个参数,它将默认为空格('')。
+   * 如果第二个参数是空字符串,str：padding返回一个空字符串。
+   * 
+   * 
    * @param length The length of the padding string to be created
    * @param pattern The string to be used as pattern
    *
@@ -174,6 +224,9 @@ public class ExsltStrings extends ExsltBase
 
   /**
    * See above
+   * <p>
+   *  往上看
+   * 
    */
   public static String padding(double length)
   {
@@ -196,6 +249,18 @@ public class ExsltStrings extends ExsltBase
    * </pre>
    * If the second argument is omitted, the default is the string '&#x20;' (i.e. a space).
    *
+   * <p>
+   *  str：split函数拆分一个字符串,并返回一组节点元素,每个节点包含一个来自字符串的令牌。
+   * <p>
+   *  第一个参数是要拆分的字符串。第二个参数是模式字符串。由第一个参数给定的字符串在此模式的任何出现时被拆分。例如：
+   * <pre>
+   *  str：split('a,simple,list',',')给出由以下组成的节点集：
+   * 
+   *  <token> a </token> <token> simple </token> <token> list </token>
+   * </pre>
+   *  如果省略第二个参数,默认值为字符串'&#x20;' (即空间)。
+   * 
+   * 
    * @param str The string to be split
    * @param pattern The pattern
    *
@@ -242,6 +307,9 @@ public class ExsltStrings extends ExsltBase
 
   /**
    * See above
+   * <p>
+   *  往上看
+   * 
    */
   public static NodeList split(String str)
   {
@@ -276,6 +344,17 @@ public class ExsltStrings extends ExsltBase
    * namespace. The one in Xalan returns a set of Text nodes, while this one wraps
    * the Text nodes inside the token Element nodes.
    *
+   * <p>
+   *  str：tokenize函数拆分一个字符串,并返回一组节点元素,每个节点包含一个来自字符串的令牌。
+   * <p>
+   * 第一个参数是要进行标记化的字符串。第二个参数是由多个字符组成的字符串。此字符串中的每个字符都将作为定界字符。第一个参数给出的字符串在任何这些字符出现时都会被拆分。例如：
+   * <pre>
+   *  str：tokenize('2001-06-03T11：40：23','-T：')给出由以下组成的节点集：
+   * 
+   *  <token> 2001 </token> <token> </token> </token> </token> </token>
+   * </pre>
+   *  如果省略第二个参数,默认值为字符串'&#x9;&#xA;&#xD;&#x20;' (即空白字符)。
+   * 
    * @param toTokenize The string to be tokenized
    * @param delims The delimiter string
    *
@@ -324,6 +403,12 @@ public class ExsltStrings extends ExsltBase
 
   /**
    * See above
+   * <p>
+   * <p>
+   *  如果第二个参数是空字符串,则函数返回一组令牌元素,每个元素都保存单个字符。
+   * <p>
+   *  注意：这个不同于Xalan命名空间中的tokenize扩展函数。 Xalan中的一个返回一组Text节点,而这一个包裹了Token Element节点内的Text节点。
+   * 
    */
   public static NodeList tokenize(String toTokenize)
   {
@@ -331,6 +416,8 @@ public class ExsltStrings extends ExsltBase
   }
 
     /**
+    /* <p>
+    /* 
    * @return an instance of DOM Document
      */
    private static Document getDocument()

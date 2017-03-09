@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -21,6 +22,13 @@ public interface IORInterceptor_3_0Operations  extends org.omg.PortableIntercept
      * Adapter that called this interceptor.  In the case of the POA,
      * an exception results in a OBJ_ADAPTER exception with an OMG
      * standard minor code of 6.
+     * <p>
+     *  IORInterceptor_3_0在所有注册的IORInterceptor实例上调用establish_components之后的实例。
+     * 在此调用期间,可在info中使用adapter_template。在该呼叫期间,可以在信息中获得或设置current_factory。
+     * <p>
+     *  从此方法抛出的任何异常都由调用此拦截器的对象适配器处理。在POA的情况下,异常导致OBJ_ADAPTER异常,OMG标准次要代码为6。
+     * 
+     * 
      * @param info The IORInfo for the object adapter being created.
      */
   void components_established (org.omg.PortableInterceptor.IORInfo info);
@@ -29,6 +37,11 @@ public interface IORInterceptor_3_0Operations  extends org.omg.PortableIntercept
      * For the POA, that is the POAManager.  If the state change
      * is reported through <code>adapter_manager_state_changed</code>,
      * it is not reported through <code>adapter_state_changed</code>.
+     * <p>
+     *  对于POA,即POAManager。
+     * 如果状态更改通过<code> adapter_manager_state_changed </code>报告,则不会通过<code> adapter_state_changed </code>报告。
+     * 
+     * 
      * @param id the adapter manager id of the adapter manager that 
      * changed state
      * @param state the new state of the adapter manager
@@ -39,6 +52,8 @@ public interface IORInterceptor_3_0Operations  extends org.omg.PortableIntercept
      * the state change is not caused by an adapter manager.  Such
      * changes are reported to all registered <code>IORInterceptor_3_0</code> 
      * instances.
+     * <p>
+     * 
      * @param templates the sequence of <code>ObjectReferenceTemplate</code> instances
      *     on which this state change occurred.
      * @param state the new <code>AdapterState</code> shared by all of the templates.

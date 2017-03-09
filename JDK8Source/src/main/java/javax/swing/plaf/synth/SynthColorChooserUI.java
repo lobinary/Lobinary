@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import java.beans.PropertyChangeListener;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JColorChooser}.
  *
+ * <p>
+ *  为{@link javax.swing.JColorChooser}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author Tom Santos
  * @author Steve Wilson
  * @since 1.7
@@ -50,6 +55,10 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
     /**
      * Creates a new UI object for the given component.
      *
+     * <p>
+     *  为给定组件创建一个新的UI对象。
+     * 
+     * 
      * @param c component to create UI object for
      * @return the UI object
      */
@@ -59,6 +68,9 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected AbstractColorChooserPanel[] createDefaultChoosers() {
@@ -75,6 +87,9 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installDefaults() {
@@ -90,6 +105,9 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallDefaults() {
@@ -103,6 +121,9 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installListeners() {
@@ -112,6 +133,9 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallListeners() {
@@ -121,6 +145,9 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -143,6 +170,12 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -163,6 +196,10 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -179,6 +216,10 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
      * Paints the specified component.
      * This implementation does not perform any actions.
      *
+     * <p>
+     *  绘制指定的组件。此实现不执行任何操作。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -188,6 +229,9 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -197,6 +241,8 @@ public class SynthColorChooserUI extends BasicColorChooserUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     public void propertyChange(PropertyChangeEvent e) {

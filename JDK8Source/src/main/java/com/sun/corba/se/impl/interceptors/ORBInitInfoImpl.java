@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,9 @@ import com.sun.corba.se.impl.logging.OMGSystemException;
 /**
  * ORBInitInfoImpl is the implementation of the ORBInitInfo class to be
  * passed to ORBInitializers, as described in orbos/99-12-02.
+ * <p>
+ *  ORBInitInfoImpl是要传递给ORBInitializers的ORBInitInfo类的实现,如orbos / 99-12-02中所述。
+ * 
  */
 public final class ORBInitInfoImpl
     extends org.omg.CORBA.LocalObject
@@ -95,6 +99,10 @@ public final class ORBInitInfoImpl
     /**
      * Creates a new ORBInitInfoImpl object (scoped to package)
      *
+     * <p>
+     *  创建一个新的ORBInitInfoImpl对象(作用域到包)
+     * 
+     * 
      * @param args The arguments passed to ORB_init.
      */
     ORBInitInfoImpl( ORB orb, String[] args,
@@ -116,6 +124,9 @@ public final class ORBInitInfoImpl
 
     /** Return the ORB behind this ORBInitInfo.  This is defined in the
      * ORBInitInfoExt interface.
+     * <p>
+     *  ORBInitInfoExt接口。
+     * 
      */
     public ORB getORB()
     {
@@ -125,6 +136,9 @@ public final class ORBInitInfoImpl
     /**
      * Sets the current stage we are in.  This limits access to certain
      * functionality.
+     * <p>
+     *  设置我们当前的阶段。这限制了对某些功能的访问。
+     * 
      */
     void setStage( int stage ) {
         this.stage = stage;
@@ -135,6 +149,9 @@ public final class ORBInitInfoImpl
      * This is called before any method is invoked to ensure that
      * no method invocations are attempted after all calls to post_init()
      * are completed.
+     * <p>
+     *  如果当前阶段为STAGE_CLOSED,则抛出异常。这在调用任何方法之前调用,以确保在对post_init()的所有调用完成后不尝试方法调用。
+     * 
      */
     private void checkStage() {
         if( stage == STAGE_CLOSED ) {
@@ -145,11 +162,18 @@ public final class ORBInitInfoImpl
     /*
      *******************************************************************
      * The following are implementations of the ORBInitInfo operations.
+     * <p>
+     *  **************************************************** ***************以下是ORBInitInfo操作的实现。
+     * 
+     * 
      *******************************************************************/
 
     /**
      * This attribute contains the arguments passed to ORB_init.  They may
      * or may not contain the ORB's arguments
+     * <p>
+     *  此属性包含传递给ORB_init的参数。它们可能包含或不包含ORB的参数
+     * 
      */
     public String[] arguments () {
         checkStage();
@@ -158,6 +182,9 @@ public final class ORBInitInfoImpl
 
     /**
      * This attribute is the ID of the ORB being initialized
+     * <p>
+     *  此属性是要初始化的ORB的ID
+     * 
      */
     public String orb_id () {
         checkStage();
@@ -170,6 +197,12 @@ public final class ORBInitInfoImpl
      * but since the ORB is not yet available and Interceptors, particularly
      * when processing service contexts, will require a Codec, a means of
      * obtaining a Codec is necessary during ORB intialization.
+     * <p>
+     *  这个属性是IOP :: CodecFactory。
+     *  CodecFactory通常通过调用ORB :: resolve_initial_references("CodecFactory")获得,但是由于ORB尚不可用,并且拦截器,特别是在处理服务上下文时
+     * ,将需要编解码器,在ORB期间需要获得编解码器的手段初始化。
+     *  这个属性是IOP :: CodecFactory。
+     * 
      */
     public CodecFactory codec_factory () {
         checkStage();
@@ -184,6 +217,12 @@ public final class ORBInitInfoImpl
      * may need to be registered as part of Interceptor registration.
      * <p>
      * This method may not be called during post_init.
+     * <p>
+     * 参见orbos / 99-12-02,第11章,动态初始参考(第11-81页)。此操作与那里描述的ORB :: register_initial_reference相同。
+     * 此处存在相同的功能,因为尚未完全初始化的ORB尚不可用,但初始引用可能需要作为Interceptor注册的一部分注册。
+     * <p>
+     *  在post_init过程中可能不会调用此方法。
+     * 
      */
     public void register_initial_reference( String id,
                                             org.omg.CORBA.Object obj )
@@ -231,6 +270,14 @@ public final class ORBInitInfoImpl
      * (incorporates changes from errata in orbos/00-01-01)
      * <p>
      * This method may not be called during pre_init.
+     * <p>
+     *  此操作仅在post_init中有效。它与ORB :: resolve_initial_references相同。
+     * 此处存在相同的功能,因为尚未完全初始化的ORB尚不可用,但作为Interceptor注册的一部分,可能需要从ORB初始引用。
+     * <p>
+     *  (包含了orbos / 00-01-01中勘误表的更改)
+     * <p>
+     *  在pre_init期间可能不会调用此方法。
+     * 
      */
     public org.omg.CORBA.Object resolve_initial_references (String id)
         throws InvalidName
@@ -275,6 +322,11 @@ public final class ORBInitInfoImpl
      * <p>
      * If a client-side request Interceptor has already been registered
      * with this Interceptor's name, DuplicateName is raised.
+     * <p>
+     *  此操作用于将客户端请求拦截器添加到客户端请求拦截器列表。
+     * <p>
+     *  如果客户端请求拦截器已经注册了此拦截器的名称,则会引发DuplicateName。
+     * 
      */
     public void add_client_request_interceptor (
         ClientRequestInterceptor interceptor)
@@ -302,6 +354,11 @@ public final class ORBInitInfoImpl
      * <p>
      * If a server-side request Interceptor has already been registered
      * with this Interceptor's name, DuplicateName is raised.
+     * <p>
+     *  此操作用于将服务器端请求拦截器添加到服务器端请求拦截器列表中。
+     * <p>
+     *  如果服务器端请求拦截器已经使用此拦截器的名称注册,则会引发DuplicateName。
+     * 
      */
     public void add_server_request_interceptor (
         ServerRequestInterceptor interceptor)
@@ -329,6 +386,11 @@ public final class ORBInitInfoImpl
      * <p>
      * If an IOR Interceptor has already been registered
      * with this Interceptor's name, DuplicateName is raised.
+     * <p>
+     *  此操作用于将IOR拦截器添加到IOR拦截器列表。
+     * <p>
+     *  如果IOR拦截器已经注册了该拦截器的名称,则会引发DuplicateName。
+     * 
      */
     public void add_ior_interceptor (
         IORInterceptor interceptor )
@@ -345,6 +407,10 @@ public final class ORBInitInfoImpl
      * A service calls allocate_slot_id to allocate a slot on
      * PortableInterceptor::Current.
      *
+     * <p>
+     * 一个服务调用allocate_slot_id在PortableInterceptor :: Current上分配一个槽。
+     * 
+     * 
      * @return The index to the slot which has been allocated.
      */
     public int allocate_slot_id () {
@@ -359,6 +425,11 @@ public final class ORBInitInfoImpl
      * <p>
      * If a PolicyFactory already exists for the given PolicyType,
      * BAD_INV_ORDER is raised with a minor code of TBD_BIO+2.
+     * <p>
+     *  为给定的PolicyType注册PolicyFactory。
+     * <p>
+     *  如果对于给定的PolicyType,PolicyFactory已经存在,则BAD_INV_ORDER将以次要代码TBD_BIO + 2引发。
+     * 
      */
     public void register_policy_factory( int type,
                                          PolicyFactory policy_factory )
@@ -372,6 +443,7 @@ public final class ORBInitInfoImpl
     /**
      * Called when an invalid null parameter was passed.  Throws a
      * BAD_PARAM with a minor code of 1
+     * <p>
      */
     private void nullParam()
         throws BAD_PARAM

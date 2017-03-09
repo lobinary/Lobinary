@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,20 @@ package java.util;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  此类提供了<tt> Set </tt>接口的骨架实现,以最小化实现此接口所需的工作量。 <p>
+ * 
+ *  通过扩展这个类来实现集合的过程与通过扩展AbstractCollection来实现集合的过程相同,只是该类的子类中的所有方法和构造函数都必须遵守<tt> Set </tt >接口(例如,add方法不允
+ * 许将一个对象的多个实例添加到集合中)。
+ * <p>。
+ * 
+ *  请注意,此类不会覆盖<tt> AbstractCollection </tt>类中的任何实现。它只是添加了<tt> equals </tt>和<tt> hashCode </tt>的实现。<p>
+ * 
+ *  这个类是成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @param <E> the type of elements maintained by this set
  *
  * @author  Josh Bloch
@@ -59,6 +74,9 @@ public abstract class AbstractSet<E> extends AbstractCollection<E> implements Se
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
      */
     protected AbstractSet() {
     }
@@ -79,6 +97,14 @@ public abstract class AbstractSet<E> extends AbstractCollection<E> implements Se
      * this set; if not, it returns false.  If so, it returns
      * <tt>containsAll((Collection) o)</tt>.
      *
+     * <p>
+     *  将指定的对象与此设置相比较以确保相等。返回<tt> true </tt>如果给定对象也是一个集合,则两个集合具有相同的大小,并且给定集合的每个成员都包含在此集合中。
+     * 这可以确保<tt>等于</tt>方法在<tt> Set </tt>界面的不同实现中正常工作。<p>。
+     * 
+     * 这个实现首先检查指定的对象是否是这个集合;如果是,则返回<tt> true </tt>。然后,它检查指定的对象是否是一个大小与此集合的大小相同的集合;如果不是,则返回false。
+     * 如果是,则返回<tt> containsAll((Collection)o)</tt>。
+     * 
+     * 
      * @param o object to be compared for equality with this set
      * @return <tt>true</tt> if the specified object is equal to this set
      */
@@ -113,6 +139,15 @@ public abstract class AbstractSet<E> extends AbstractCollection<E> implements Se
      * <tt>hashCode</tt> method on each element in the set, and adding up
      * the results.
      *
+     * <p>
+     *  返回此集合的哈希码值。集合的哈希码被定义为集合中的元素的哈希码的总和,其中<tt> null </tt>元素的哈希码被定义为零。
+     * 这可以确保<tt> s1.equals(s2)</tt>意味着任何两个集合<tt> s1 </tt>的<tt> s1.hashCode()== s2.hashCode()</tt> <tt> s2 </tt>
+     * ,根据{@link Object#hashCode}的一般合同的要求。
+     *  返回此集合的哈希码值。集合的哈希码被定义为集合中的元素的哈希码的总和,其中<tt> null </tt>元素的哈希码被定义为零。
+     * 
+     *  <p>此实现循环遍历集合,对集合中的每个元素调用<tt> hashCode </tt>方法,并将结果相加。
+     * 
+     * 
      * @return the hash code value for this set
      * @see Object#equals(Object)
      * @see Set#equals(Object)
@@ -151,6 +186,13 @@ public abstract class AbstractSet<E> extends AbstractCollection<E> implements Se
      * <tt>UnsupportedOperationException</tt> if the iterator returned by the
      * <tt>iterator</tt> method does not implement the <tt>remove</tt> method.
      *
+     * <p>
+     *  从此集合中删除包含在指定集合中的所有元素(可选操作)。如果指定的集合也是集合,则此操作有效地修改该集合,使得其值是两个集合的<i>非对称集合差异</i>。
+     * 
+     * <p>此实现通过在每个方法上调用<tt> size </tt>方法来确定此集合和指定集合中的较小者。
+     * 如果这个集合具有较少的元素,那么实现在该集合上迭代,检查迭代器返回的每个元素,以查看它是否包含在指定的集合中。如果它是这样包含的,它将使用迭代器的<tt> remove </tt>方法从此集合中删除。
+     * 如果指定的集合具有较少的元素,那么实现将遍历指定的集合,从此集合中除去迭代器返回的每个元素,使用此集合的<tt> remove </tt>方法。
+     * 
      * @param  c collection containing elements to be removed from this set
      * @return <tt>true</tt> if this set changed as a result of the call
      * @throws UnsupportedOperationException if the <tt>removeAll</tt> operation

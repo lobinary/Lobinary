@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,24 @@ import com.sun.jmx.snmp.SnmpStatusException;
  * </b></i></p>
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ * <p>
+ *  此类是一个实用程序类,它将SNMP GET / SET请求转换为在MBean上调用的get <i> AttributeName </i>()set <i> AttributeName </i>
+ * </p>
+ * 
+ * <p>
+ *  该转换依赖于由{@link com.sun.jmx.snmp.agent.SnmpStandardMetaServer}对象提供的元数据信息,该对象作为第一个参数传递给每个方法。
+ * 这个SnmpStandardMetaServer对象通常是由<code> mibgen </code>生成的元数据对象。
+ * </p>
+ * 
+ * <p>
+ *  MBean不是由这个类直接调用,而是通过保存有引用的元数据对象来调用。
+ * </p>
+ * 
+ *  <p> <b> <i>此类在mibgen生成的元数据对象内部使用,您不应该直接使用它。
+ *  </b> </i> </p> <p> <b>此API是Sun Microsystems内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
+ * 
  **/
 
 public class SnmpStandardObjectServer implements Serializable {
@@ -97,6 +116,28 @@ public class SnmpStandardObjectServer implements Serializable {
      * underlying resources.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE> get </CODE>操作。
+     *  <p>此方法的默认实现是循环遍历与子请求相关联的varbind列表,并调用<CODE> get(var.oid.getOidArc(depth),data); </CODE>。
+     * <pre>
+     *  public void get(SnmpStandardMetaServer meta,SnmpMibSubRequest req,int depth)throws SnmpStatusExcepti
+     * on {。
+     * 
+     *  final Object data = req.getUserData();
+     * 
+     *  for(Enumeration e = req.getElements(); e.hasMoreElements();){
+     * 
+     *  final SnmpVarBind var =(SnmpVarBind)e.nextElement();
+     * 
+     * try {//这个方法将生成一个SnmpStatusException //如果"depth"超出范围。
+     *  // final long id = var.oid.getOidArc(depth); var.value = meta.get(id,data); } catch(SnmpStatusExcept
+     * ion x){req.registerGetException(var,x); }}}。
+     * try {//这个方法将生成一个SnmpStatusException //如果"depth"超出范围。
+     * </pre>
+     *  <p>如果您需要实施一些特定策略以最小化对某些远程基础资源的访问,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param meta  A pointer to the generated meta-data object which
      *              implements the <code>SnmpStandardMetaServer</code>
      *              interface.
@@ -158,6 +199,28 @@ public class SnmpStandardObjectServer implements Serializable {
      * underlying resources.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE>设置</CODE>操作。
+     *  <p>此方法的默认实现是循环遍历与子请求相关联的varbind列表,并调用<CODE> set(var.value,var.oid.getOidArc(depth),data); </CODE>。
+     * <pre>
+     *  public void set(SnmpStandardMetaServer meta,SnmpMibSubRequest req,int depth)throws SnmpStatusExcepti
+     * on {。
+     * 
+     *  final Object data = req.getUserData();
+     * 
+     *  for(Enumeration e = req.getElements(); e.hasMoreElements();){
+     * 
+     *  final SnmpVarBind var =(SnmpVarBind)e.nextElement();
+     * 
+     *  try {//这个方法将生成一个SnmpStatusException //如果"depth"超出范围。
+     *  // final long id = var.oid.getOidArc(depth); var.value = meta.set(var.value,id,data); } catch(SnmpSt
+     * atusException x){req.registerSetException(var,x); }}}。
+     *  try {//这个方法将生成一个SnmpStatusException //如果"depth"超出范围。
+     * </pre>
+     *  <p>如果您需要实施一些特定策略以最小化对某些远程基础资源的访问,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param meta  A pointer to the generated meta-data object which
      *              implements the <code>SnmpStandardMetaServer</code>
      *              interface.
@@ -223,6 +286,19 @@ public class SnmpStandardObjectServer implements Serializable {
      * checks between the different values provided in the varbind list.
      * <p>
      *
+     * <p>
+     * 一般处理<CODE>检查</CODE>操作。
+     *  <p>此方法的默认实现是循环遍历与子请求相关联的varbind列表,并调用<CODE> check(var.value,var.oid.getOidArc(depth),data); </CODE>。
+     * 一般处理<CODE>检查</CODE>操作。
+     * <pre>
+     *  public void check(SnmpStandardMetaServer meta,SnmpMibSubRequest req,int depth)throws SnmpStatusExcep
+     * tion {。
+     * 
+     *  final Object data = req.getUserData();
+     * 
+     *  for(Enumeration e = req.getElements(); e.hasMoreElements();){
+     * 
+     * 
      * @param meta  A pointer to the generated meta-data object which
      *              implements the <code>SnmpStandardMetaServer</code>
      *              interface.

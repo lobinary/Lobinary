@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * $Id: KeyInfoFactory.java,v 1.12 2005/05/10 16:35:35 mullan Exp $
+ * <p>
+ *  $ Id：KeyInfoFactory.java,v 1.12 2005/05/10 16:35:35 mullan Exp $
+ * 
  */
 package javax.xml.crypto.dsig.keyinfo;
 
@@ -100,6 +104,41 @@ import sun.security.jca.GetInstance.Instance;
  * Multiple threads each manipulating a different <code>KeyInfoFactory</code>
  * instance need not synchronize.
  *
+ * <p>
+ *  一个从头开始创建{@link KeyInfo}对象或从对应的XML表示中解组成一个<code> KeyInfo </code>对象的工厂。
+ * 
+ *  <p> <code> KeyInfoFactory </code>的每个实例都支持特定的XML机制类型。
+ * 要创建<code> KeyInfoFactory </code>,请调用静态{@link #getInstance getInstance}方法之一,传入所需的XML机制类型,例如：。
+ * 
+ *  <blockquote> <code> KeyInfoFactory factory = KeyInfoFactory.getInstance("DOM"); </code> </blockquote>
+ * 。
+ * 
+ *  <p>此工厂生成的对象将基于DOM,并遵守DOM中定义的DOM互操作性要求
+ * <a href="../../../../../../technotes/guides/security/xmldsig/overview.html#DOM Mechanism Requirements">
+ *  DOM机制要求</a>部分。看到
+ * <a href="../../../../../../technotes/guides/security/xmldsig/overview.html#Service Provider">
+ *  服务提供商</a>部分,了解标准机制类型的列表。
+ * 
+ *  使用{@link java.security.Provider}机制注册并加载<p> <code> KeyInfoFactory </code>实现。
+ * 例如,支持DOM机制的服务提供者将在<code> Provider </code>子类中指定为：。
+ * <pre>
+ *  put("KeyInfoFactory.DOM","org.example.DOMKeyInfoFactory");
+ * </pre>
+ * 
+ *  <p>此外,由此工厂创建的<code> XMLStructure </code>可能包含特定于<code> KeyInfo </code>的状态,并且不打算可重复使用。
+ * 
+ * <p>实现必须最低限度支持默认机制类型：DOM。
+ * 
+ *  <p>请注意,调用者必须使用相同的<code> KeyInfoFactory </code>实例来创建特定<code> KeyInfo </code>对象的<code> XMLStructure </code>
+ * 。
+ * 如果来自不同提供程序或不同机制类型的<code> XMLStructure </code>一起使用,则行为是未定义的。
+ * 
+ *  <p> <b>并发访问</b> <p>此类的静态方法保证是线程安全的。多线程可以同时调用这个类中定义的静态方法,没有不良影响。
+ * 
+ *  <p>但是,这不是由这个类定义的非静态方法。除非特定提供者另有说明,需要同时访问单个<code> KeyInfoFactory </code>实例的线程应在它们之间同步并提供必要的锁定。
+ * 每个操作不同<code> KeyInfoFactory </code>实例的多个线程不需要同步。
+ * 
+ * 
  * @author Sean Mullan
  * @author JSR 105 Expert Group
  * @since 1.6
@@ -111,6 +150,9 @@ public abstract class KeyInfoFactory {
 
     /**
      * Default constructor, for invocation by subclasses.
+     * <p>
+     *  默认构造函数,用于由子类调用。
+     * 
      */
     protected KeyInfoFactory() {}
 
@@ -129,6 +171,16 @@ public abstract class KeyInfoFactory {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回支持指定的XML处理机制和表示类型(例如："DOM")的<code> KeyInfoFactory </code>。
+     * 
+     * <p>此方法使用标准JCA提供程序查找机制来定位和实例化所需机制类型的<code> KeyInfoFactory </code>实现。
+     * 它遍历注册安全性<code>提供程序</code>的列表,从最优选的<code>提供程序</code>开始。
+     * 将返回来自支持指定机制的第一个<code> Provider </code>的新<Key> KeyInfoFactory </code>对象。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param mechanismType the type of the XML processing mechanism and
      *    representation. See the <a
      *    href="../../../../../../technotes/guides/security/xmldsig/overview.html#Service Provider">
@@ -165,6 +217,11 @@ public abstract class KeyInfoFactory {
      * <code>Provider</code> object does not have to be registered in the
      * provider list.
      *
+     * <p>
+     *  返回一个<code> KeyInfoFactory </code>,它支持请求的XML处理机制和表示类型(例如："DOM"),由指定的提供者提供。
+     * 请注意,指定的<code> Provider </code>对象不必在提供程序列表中注册。
+     * 
+     * 
      * @param mechanismType the type of the XML processing mechanism and
      *    representation. See the <a
      *    href="../../../../../../technotes/guides/security/xmldsig/overview.html#Service Provider">
@@ -209,6 +266,12 @@ public abstract class KeyInfoFactory {
      * <p>Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回一个<code> KeyInfoFactory </code>,它支持请求的XML处理机制和表示类型(例如："DOM"),由指定的提供者提供。指定的提供程序必须在安全提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param mechanismType the type of the XML processing mechanism and
      *    representation. See the <a
      *    href="../../../../../../technotes/guides/security/xmldsig/overview.html#Service Provider">
@@ -263,6 +326,16 @@ public abstract class KeyInfoFactory {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回支持默认XML处理机制和表示类型("DOM")的<code> KeyInfoFactory </code>。
+     * 
+     * <p>此方法使用标准JCA提供程序查找机制来定位和实例化默认机制类型的<code> KeyInfoFactory </code>实现。
+     * 它遍历注册安全性<code>提供程序</code>的列表,从最优选的<code>提供程序</code>开始。
+     * 将返回来自支持DOM机制的第一个<code> Provider </code>的新<Key> KeyInfoFactory </code>对象。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @return a new <code>KeyInfoFactory</code>
      * @throws NoSuchMechanismException if no <code>Provider</code> supports a
      *    <code>KeyInfoFactory</code> implementation for the DOM mechanism
@@ -276,6 +349,10 @@ public abstract class KeyInfoFactory {
      * Returns the type of the XML processing mechanism and representation
      * supported by this <code>KeyInfoFactory</code> (ex: "DOM")
      *
+     * <p>
+     *  返回此<code> KeyInfoFactory </code>(例如："DOM")支持的XML处理机制和表示形式的类型
+     * 
+     * 
      * @return the XML processing mechanism type supported by this
      *    <code>KeyInfoFactory</code>
      */
@@ -286,6 +363,10 @@ public abstract class KeyInfoFactory {
     /**
      * Returns the provider of this <code>KeyInfoFactory</code>.
      *
+     * <p>
+     *  返回此<code> KeyInfoFactory </code>的提供程序。
+     * 
+     * 
      * @return the provider of this <code>KeyInfoFactory</code>
      */
     public final Provider getProvider() {
@@ -296,6 +377,10 @@ public abstract class KeyInfoFactory {
      * Creates a <code>KeyInfo</code> containing the specified list of
      * key information types.
      *
+     * <p>
+     *  创建包含指定的关键信息类型列表的<code> KeyInfo </code>。
+     * 
+     * 
      * @param content a list of one or more {@link XMLStructure}s representing
      *    key information types. The list is defensively copied to protect
      *    against subsequent modification.
@@ -315,6 +400,11 @@ public abstract class KeyInfoFactory {
      * <code>ID</code> attribute and is useful for referencing
      * the <code>KeyInfo</code> from other XML structures.
      *
+     * <p>
+     *  创建包含指定的键信息类型列表和可选ID的<code> KeyInfo </code>。
+     *  <code> id </code>参数表示XML <code> ID </code>属性的值,可用于引用来自其他XML结构的<code> KeyInfo </code>。
+     * 
+     * 
      * @param content a list of one or more {@link XMLStructure}s representing
      *    key information types. The list is defensively copied to protect
      *    against subsequent modification.
@@ -331,6 +421,10 @@ public abstract class KeyInfoFactory {
     /**
      * Creates a <code>KeyName</code> from the specified name.
      *
+     * <p>
+     *  从指定的名称创建<code> KeyName </code>。
+     * 
+     * 
      * @param name the name that identifies the key
      * @return a <code>KeyName</code>
      * @throws NullPointerException if <code>name</code> is <code>null</code>
@@ -340,6 +434,10 @@ public abstract class KeyInfoFactory {
     /**
      * Creates a <code>KeyValue</code> from the specified public key.
      *
+     * <p>
+     *  从指定的公钥中创建<code> KeyValue </code>。
+     * 
+     * 
      * @param key the public key
      * @return a <code>KeyValue</code>
      * @throws KeyException if the <code>key</code>'s algorithm is not
@@ -352,6 +450,10 @@ public abstract class KeyInfoFactory {
      * Creates a <code>PGPData</code> from the specified PGP public key
      * identifier.
      *
+     * <p>
+     *  从指定的PGP公钥标识符创建<code> PGPData </code>。
+     * 
+     * 
      * @param keyId a PGP public key identifier as defined in <a href=
      *    "http://www.ietf.org/rfc/rfc2440.txt">RFC 2440</a>, section 11.2.
      *    The array is cloned to protect against subsequent modification.
@@ -367,6 +469,10 @@ public abstract class KeyInfoFactory {
      * identifier, and optional key material packet and list of external
      * elements.
      *
+     * <p>
+     *  从指定的PGP公钥标识符和可选的密钥材料包和外部元素列表创建<code> PGPData </code>。
+     * 
+     * 
      * @param keyId a PGP public key identifier as defined in <a href=
      *    "http://www.ietf.org/rfc/rfc2440.txt">RFC 2440</a>, section 11.2.
      *    The array is cloned to protect against subsequent modification.
@@ -395,6 +501,10 @@ public abstract class KeyInfoFactory {
      * Creates a <code>PGPData</code> from the specified PGP key material
      * packet and optional list of external elements.
      *
+     * <p>
+     * 从指定的PGP密钥材料包和可选的外部元素列表创建<code> PGPData </code>。
+     * 
+     * 
      * @param keyPacket a PGP key material packet as defined in <a href=
      *    "http://www.ietf.org/rfc/rfc2440.txt">RFC 2440</a>, section 5.5.
      *    The array is cloned to protect against subsequent modification.
@@ -417,6 +527,10 @@ public abstract class KeyInfoFactory {
     /**
      * Creates a <code>RetrievalMethod</code> from the specified URI.
      *
+     * <p>
+     *  从指定的URI创建一个<code> RetrievalMethod </code>。
+     * 
+     * 
      * @param uri the URI that identifies the <code>KeyInfo</code> information
      *    to be retrieved
      * @return a <code>RetrievalMethod</code>
@@ -429,6 +543,10 @@ public abstract class KeyInfoFactory {
     /**
      * Creates a <code>RetrievalMethod</code> from the specified parameters.
      *
+     * <p>
+     *  从指定的参数创建<code> RetrievalMethod </code>。
+     * 
+     * 
      * @param uri the URI that identifies the <code>KeyInfo</code> information
      *    to be retrieved
      * @param type a URI that identifies the type of <code>KeyInfo</code>
@@ -451,6 +569,10 @@ public abstract class KeyInfoFactory {
      * Creates a <code>X509Data</code> containing the specified list of
      * X.509 content.
      *
+     * <p>
+     *  创建包含指定的X.509内容列表的<code> X509Data </code>。
+     * 
+     * 
      * @param content a list of one or more X.509 content types. Valid types are
      *    {@link String} (subject names), <code>byte[]</code> (subject key ids),
      *    {@link java.security.cert.X509Certificate}, {@link X509CRL},
@@ -476,6 +598,10 @@ public abstract class KeyInfoFactory {
      * Creates an <code>X509IssuerSerial</code> from the specified X.500 issuer
      * distinguished name and serial number.
      *
+     * <p>
+     *  从指定的X.500发行商可分辨名称和序列号创建<code> X509IssuerSerial </code>。
+     * 
+     * 
      * @param issuerName the issuer's distinguished name in RFC 2253 String
      *    format. Implementations MUST support the attribute type keywords
      *    defined in RFC 2253 (CN, L, ST, O, OU, C, STREET, DC and UID).
@@ -493,6 +619,10 @@ public abstract class KeyInfoFactory {
     /**
      * Indicates whether a specified feature is supported.
      *
+     * <p>
+     *  指示是否支持指定的功能。
+     * 
+     * 
      * @param feature the feature name (as an absolute URI)
      * @return <code>true</code> if the specified feature is supported,
      *    <code>false</code> otherwise
@@ -504,6 +634,10 @@ public abstract class KeyInfoFactory {
      * Returns a reference to the <code>URIDereferencer</code> that is used by
      * default to dereference URIs in {@link RetrievalMethod} objects.
      *
+     * <p>
+     *  返回对<code> URIDereferencer </code>的引用,该引用默认用于在{@link RetrievalMethod}对象中解除引用URI。
+     * 
+     * 
      * @return a reference to the default <code>URIDereferencer</code>
      */
     public abstract URIDereferencer getURIDereferencer();
@@ -513,6 +647,9 @@ public abstract class KeyInfoFactory {
      * mechanism-specific <code>XMLStructure</code> (ex: {@link DOMStructure})
      * instance.
      *
+     * <p>
+     *  从机制特定的<code> XMLStructure </code>(例如：{@link DOMStructure})实例中解组一个新的<code> KeyInfo </code>实例。
+     * 
      * @param xmlStructure a mechanism-specific XML structure from which to
      *   unmarshal the keyinfo from
      * @return the <code>KeyInfo</code>

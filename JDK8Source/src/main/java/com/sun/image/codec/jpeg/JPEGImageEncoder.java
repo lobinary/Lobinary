@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -12,6 +13,15 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ * COPYRIGHT(c)1997-1998 Eastman Kodak公司。
+ *  *** *根据United *** *国家法典第17章的未发表的作品。版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ *  *** *根据United *** *国家法典第17章的未发表的作品。版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package com.sun.image.codec.jpeg;
@@ -37,6 +47,17 @@ package com.sun.image.codec.jpeg;
  * updates to the standard color space designations have been made to
  * allow this decoder to handle alpha channels.  See the
  * JPEGEncodeParam description for more details on additional color
+ * <p>
+ *  JPEGImageEncoder接口
+ * 
+ *  JPEGImageEncoder将图像压缩为JPEG数据流,并将JPEG流写入OutputStream。要编码的图像数据可以作为图像数据的栅格或作为缓冲图像传递。
+ * 编码或图像数据到输出JPEG流由JPEGEncodeParam对象中的参数设置控制。<P>。
+ * 
+ * ColorSpace的评论：首先JPEG的规格是色盲！也就是说,这个接口将以更好的压缩比的名义执行一些颜色空间转换。
+ *  JPEGEncodeParam接口中没有明确的机制,用于在将数据写入JPEG数据流时控制数据的编码色彩空间。如果尚未定义颜色空间设置,则建议使用colorspace unknown。
+ * 已经对标准颜色空间指定进行了一些更新以允许该解码器处理α通道。有关附加颜色的详细信息,请参阅JPEGEncodeParam描述。
+ * 
+ * 
  * space designations ( @see JPEGEncodeParam ).<P>
  *
  * This encoder will process interchange, and abbreviated JPEG
@@ -69,6 +90,19 @@ import java.awt.image.Raster;
  * be available in a core API or standard extension.
  * <p>
  *
+ * <p>
+ *  JPEGImageEncoder将图像数据的缓冲区编码为JPEG数据流。
+ * 该接口的用户需要在Raster或BufferedImage中提供图像数据,在JPEGEncodeParams对象中设置必要的参数,并成功打开作为编码JPEG流目的地的<code> OutputStrea
+ * m </code>。
+ *  JPEGImageEncoder将图像数据的缓冲区编码为JPEG数据流。
+ * 
+ *  JPEGImageEncoder接口可以将图像数据编码为互换,并将缩写的JPEG数据流写入提供给编码器的OutputStream。
+ * <p>
+ * 请注意,com.sun.image.codec.jpeg包中的类不是核心Java API的一部分。它们是Sun的JDK和JRE发行版的一部分。
+ * 虽然其他许可证持有者可能选择分发这些类,但开发人员不能依赖其在非Sun实施中的可用性。我们期望等效功能最终将在核心API或标准扩展中可用。
+ * <p>
+ * 
+ * 
  * @see         JPEGCodec
  * @see         JPEGEncodeParam
  * @see         Raster
@@ -79,6 +113,9 @@ import java.awt.image.Raster;
 public interface JPEGImageEncoder {
         /**
          * Return the stream the Encoder is currenlt associated with.
+         * <p>
+         *  返回与编码器currenlt相关联的流。
+         * 
          */
         public OutputStream getOutputStream();
 
@@ -86,6 +123,10 @@ public interface JPEGImageEncoder {
          * Set the JPEGEncodeParam object that is to be used for future
          * encoding operations. 'jep' is copied so changes will not be
          * tracked, unless you call this method again.
+         * <p>
+         *  设置要用于将来编码操作的JPEGEncodeParam对象。 'jep'被复制,因此将不会跟踪更改,除非您再次调用此方法。
+         * 
+         * 
          * @param jep The JPEGEncodeParam object to use for future encodings.
          *
          */
@@ -96,6 +137,10 @@ public interface JPEGImageEncoder {
          * you want changes to affect the encoding process you must 'set'
          * it back into the encoder (either through setJPEGEncodeParam or
          * by providing the modified param object in the call to encode.
+         * <p>
+         *  这将返回当前JPEGEncodeParam对象的副本,如果要更改影响编码过程,您必须将其设置回编码器(通过setJPEGEncodeParam或通过在调用调用中提供修改的param对象)。
+         * 
+         * 
          * @return A copy of the current JPEGEncodeParam object
          */
         public JPEGEncodeParam getJPEGEncodeParam();
@@ -104,6 +149,9 @@ public interface JPEGImageEncoder {
          * This is a factory method for creating JPEGEncodeParam objects.
          * The returned object will do a credible job of encoding the
          * given BufferedImage.
+         * <p>
+         *  这是一个用于创建JPEGEncodeParam对象的工厂方法。返回的对象将做一个可信的编码给定的BufferedImage的工作。
+         * 
          */
         public JPEGEncodeParam getDefaultJPEGEncodeParam(BufferedImage bi)
                 throws ImageFormatException;
@@ -118,6 +166,13 @@ public interface JPEGImageEncoder {
          * one will be created by calling getDefaultJPEGEncodeParam with
          * bi.
 
+         * <p>
+         *  将BufferedImage编码为JPEG数据流。请注意,可能会发生一些颜色转换。
+         * 当给定BufferedImage的ColorModel时,当前JPEGEncodeParam的编码COLOR_ID应该与getDefaultColorID返回的值匹配。<P>。
+         * 
+         *  如果没有提供JPEGEncodeParam对象,则将通过调用带有bi的getDefaultJPEGEncodeParam创建一个默认的对象。
+         * 
+         * 
          * @param bi The BufferedImage to encode.
          */
         public void encode(BufferedImage bi)
@@ -134,6 +189,14 @@ public interface JPEGImageEncoder {
          * encodings.  If jep is null then a new JPEGEncodeParam object
          * will be created by calling getDefaultJPEGEncodeParam with bi.
 
+         * <p>
+         * 将BufferedImage编码为JPEG数据流。请注意,可能会发生一些颜色转换。
+         * 给定BufferedImage的ColorModel时,jep的编码COLOR_ID应该与getDefaultColorID返回的值相匹配。<P>。
+         * 
+         *  此调用还设置当前JPEGEncodeParam对象。给定的JPEGEncodeParam对象将用于此和将来的编码。
+         * 如果jep为null,那么将通过调用带有bi的getDefaultJPEGEncodeParam来创建一个新的JPEGEncodeParam对象。
+         * 
+         * 
          * @param bi  The BufferedImage to encode.
          * @param jep The JPEGEncodeParam object used to control the encoding.
          */
@@ -147,6 +210,10 @@ public interface JPEGImageEncoder {
          * It can be useful for encoding Rasters.  To determine what needs
          * to be done to the image prior to encoding.
 
+         * <p>
+         *  返回给定ColorModel的"默认"编码COLOR_ID。这种方法不需要在编码缓冲图像的简单情况下(图书馆会为你解决问题)。它可以用于编码Raster。以确定在编码之前需要对图像做什么。
+         * 
+         * 
          * @param cm The ColorModel to map to an jpeg encoded COLOR_ID.
          * @return The default mapping of cm to a jpeg Color_ID note that
          * in a few cases color conversion is required.
@@ -160,6 +227,10 @@ public interface JPEGImageEncoder {
          * either poor compression or poor image quality.  If you don't
          * understand much about JPEG it is strongly reccomended that you
          * stick to the BufferedImage interfaces.
+         * <p>
+         *  这是一个用于创建JPEGEncodeParam对象的工厂方法。用户负责将colorID与栅格中包含的数据进行匹配。否则可能导致压缩不良或图像质量差。
+         * 如果你不太了解JPEG,强烈建议你坚持BufferedImage接口。
+         * 
          */
         public JPEGEncodeParam getDefaultJPEGEncodeParam(Raster ras, int colorID)
                 throws ImageFormatException;
@@ -172,6 +243,11 @@ public interface JPEGImageEncoder {
           * quality.  If you don't understand much about JPEG it is strongly
           * recommended that you stick to the BufferedImage interface.
           *
+          * <p>
+          *  这是一个用于创建JPEGEncodeParam对象的工厂方法。用户负责将colorID与给定数量的带匹配,应与要编码的数据匹配。否则可能导致压缩不良和/或图像质量差。
+          * 如果你不太了解JPEG,强烈建议你坚持BufferedImage接口。
+          * 
+          * 
           * @param numBands the number of bands that will be encoded (max of
           * four).
           * @param colorID the COLOR_ID for the encoded data.  This is used to
@@ -188,6 +264,11 @@ public interface JPEGImageEncoder {
          * that is initialized from the JPEGDecodeParam object.  All major
          * pieces of information will be initialized from the DecodeParam
          * (Markers, Tables, mappings).
+         * <p>
+         * 这是一个从JPEGDecodeParam创建JPEGEncodeParam的工厂方法。这将返回一个新的JPEGEncodeParam对象,该对象从JPEGDecodeParam对象初始化。
+         * 所有主要的信息将从DecodeParam(标记,表,映射)初始化。
+         * 
+         * 
          * @param jdp The JPEGDecodeParam object to copy.
          */
         public JPEGEncodeParam getDefaultJPEGEncodeParam(JPEGDecodeParam jdp)
@@ -203,6 +284,13 @@ public interface JPEGImageEncoder {
          * new JPEGEncodeParam object will be created by calling
          * getDefaultJPEGEncodeParam with ras and COLOR_ID_UNKNOWN.
 
+         * <p>
+         *  将栅格编码为JPEG数据流。请注意,不会进行颜色转换。您需要将栅格与当前JPEGEncodeParam对象中包含的编码COLOR_ID匹配。<P>
+         * 
+         *  如果没有提供JPEGEncodeParam对象,则将通过调用具有ras和COLOR_ID_UNKNOWN的getDefaultJPEGEncodeParam来创建新的JPEGEncodeParam对象
+         * 。
+         * 
+         * 
          * @param ras The Raster to encode.
          */
         public void encode(Raster ras)
@@ -218,6 +306,8 @@ public interface JPEGImageEncoder {
          * calling getDefaultJPEGEncodeParam with ras and
          * COLOR_ID_UNKNOWN.
 
+         * <p>
+         * 
          * @param ras The Raster to encode.
          * @param jep The JPEGEncodeParam object used to control the encoding.
          */

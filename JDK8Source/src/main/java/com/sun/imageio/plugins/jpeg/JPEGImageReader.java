@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,9 @@ public class JPEGImageReader extends ImageReader {
      * structure for this reader.  It is assigned in the constructor
      * and then is passed in to every native call.  It is set to 0
      * by dispose to avoid disposing twice.
+     * <p>
+     *  以下变量包含指向此阅读器的IJG库结构的指针。它在构造函数中分配,然后传递到每个本地调用。通过处理将其设置为0,以避免布置两次。
+     * 
      */
     private long structPointer = 0;
 
@@ -77,11 +81,17 @@ public class JPEGImageReader extends ImageReader {
     /**
      * List of stream positions for images, reinitialized every time
      * a new input source is set.
+     * <p>
+     *  图像的流位置列表,每次设置新的输入源时重新初始化。
+     * 
      */
     private List imagePositions = null;
 
     /**
      * The number of images in the stream, or 0.
+     * <p>
+     *  流中的图片数,或0。
+     * 
      */
     private int numImages = 0;
 
@@ -107,6 +117,9 @@ public class JPEGImageReader extends ImageReader {
      * that the EOI marker is missing from the end of the stream.
      * This usually signals that the stream is corrupted, but
      * everything up to the last MCU should be usable.
+     * <p>
+     *  要传递给warningOccurred的警告代码,以指示流结尾处缺少EOI标记。这通常表示流已损坏,但是到最后一个MCU的一切都应该可用。
+     * 
      */
     protected static final int WARNING_NO_EOI = 0;
 
@@ -114,12 +127,18 @@ public class JPEGImageReader extends ImageReader {
      * Warning code to be passed to warningOccurred to indicate
      * that a JFIF segment was encountered inside a JFXX JPEG
      * thumbnail and is being ignored.
+     * <p>
+     *  要传递给warningOccurred的警告代码,以指示在JFXX JPEG缩略图中遇到并被忽略的JFIF段。
+     * 
      */
     protected static final int WARNING_NO_JFIF_IN_THUMB = 1;
 
     /**
      * Warning code to be passed to warningOccurred to indicate
      * that embedded ICC profile is invalid and will be ignored.
+     * <p>
+     *  要传递给warningOccurred的警告代码,以指示嵌入的ICC配置文件无效,并将被忽略。
+     * 
      */
     protected static final int WARNING_IGNORE_INVALID_ICC = 2;
 
@@ -128,6 +147,9 @@ public class JPEGImageReader extends ImageReader {
     /**
      * Image index of image for which header information
      * is available.
+     * <p>
+     *  可用标题信息的图像的图像索引。
+     * 
      */
     private int currentImage = -1;
 
@@ -142,11 +164,17 @@ public class JPEGImageReader extends ImageReader {
     /**
      * Set by setImageData native code callback.  A modified
      * IJG+NIFTY colorspace code.
+     * <p>
+     *  由setImageData本地代码回调。修改的IJG + NIFTY色彩空间代码。
+     * 
      */
     private int colorSpaceCode;
     /**
      * Set by setImageData native code callback.  A modified
      * IJG+NIFTY colorspace code.
+     * <p>
+     *  由setImageData本地代码回调。修改的IJG + NIFTY色彩空间代码。
+     * 
      */
     private int outColorSpaceCode;
     /** Set by setImageData native code callback */
@@ -186,12 +214,18 @@ public class JPEGImageReader extends ImageReader {
     /**
      * Set to true every time we seek in the stream; used to
      * invalidate the native buffer contents in C.
+     * <p>
+     *  每次我们在流中寻找时设置为true;用于使C中的本地缓冲区内容无效。
+     * 
      */
     private boolean haveSeeked = false;
 
     /**
      * Tables that have been read from a tables-only image at the
      * beginning of a stream.
+     * <p>
+     *  已从流开头处的仅表图像读取的表。
+     * 
      */
     private JPEGQTable [] abbrevQTables = null;
     private JPEGHuffmanTable[] abbrevDCHuffmanTables = null;
@@ -202,6 +236,9 @@ public class JPEGImageReader extends ImageReader {
 
     /**
      * Variables used by progress monitoring.
+     * <p>
+     *  进度监视使用的变量。
+     * 
      */
     private static final int UNKNOWN = -1;  // Number of passes
     private static final int MIN_ESTIMATED_PASSES = 10; // IJG default
@@ -213,6 +250,9 @@ public class JPEGImageReader extends ImageReader {
 
     /**
      * Set to true once stream has been checked for stream metadata
+     * <p>
+     *  一旦流已检查流元数据,设置为true
+     * 
      */
     private boolean tablesOnlyChecked = false;
 
@@ -241,6 +281,9 @@ public class JPEGImageReader extends ImageReader {
      * Called by the native code or other classes to signal a warning.
      * The code is used to lookup a localized message to be used when
      * sending warnings to listeners.
+     * <p>
+     * 由本地代码或其他类调用以发出警告。该代码用于查找向收听程序发送警告时要使用的本地化消息。
+     * 
      */
     protected void warningOccurred(int code) {
         cbLock.lock();
@@ -268,6 +311,11 @@ public class JPEGImageReader extends ImageReader {
      * and formats (%u with possibly large numbers, %02d, %02x, etc.)
      * that actually occur in the JPEG library.  For now, this prevents
      * library warnings from being printed to stderr.
+     * <p>
+     *  库有它自己的错误设施,发出警告消息。当它已经格式化一个字符串输出时,本地代码调用这个例程。
+     *  XXX对于所有警告消息的完全本地化,本地代码中的sun_jpeg_output_message例程应仅将代码和参数发送到Java中的方法,然后使用本地化的字符串格式化并发送警告。
+     * 此方法将必须处理实际发生在JPEG库中的所有参数和格式(％u与可能的大数字,％02d,％02x等)。现在,这防止库警告打印到stderr。
+     * 
      */
     protected void warningWithMessage(String msg) {
         cbLock.lock();
@@ -304,6 +352,12 @@ public class JPEGImageReader extends ImageReader {
      * method, in order to prevent a corruption of the native decoder
      * state.
      *
+     * <p>
+     *  此方法从本机代码调用以填充本机输入缓冲区。
+     * 
+     *  我们阻止在此方法期间改变读取状态的任何尝试,以防止本机解码器状态的损坏。
+     * 
+     * 
      * @return number of bytes read from the stream.
      */
     private int readInputData(byte[] buf, int off, int len) throws IOException {
@@ -319,6 +373,10 @@ public class JPEGImageReader extends ImageReader {
      * This method is called from the native code in order to
      * skip requested number of bytes in the input stream.
      *
+     * <p>
+     *  从本地代码调用此方法,以便跳过输入流中请求的字节数。
+     * 
+     * 
      * @param n
      * @return
      * @throws IOException
@@ -464,6 +522,10 @@ public class JPEGImageReader extends ImageReader {
     /**
      * Sets the input stream to the start of the requested image.
      * <pre>
+     * <p>
+     *  将输入流设置为所请求图像的开头。
+     * <pre>
+     * 
      * @exception IllegalStateException if the input source has not been
      * set.
      * @exception IndexOutOfBoundsException if the supplied index is
@@ -522,6 +584,10 @@ public class JPEGImageReader extends ImageReader {
      * until we encounter an EOI marker or until the end of the stream.
      * If the stream ends before an EOI marker is encountered, an
      * IndexOutOfBoundsException is thrown.
+     * <p>
+     * 跳过流中的完整图像,使流定位,使得要读取的下一个字节是下一个图像的第一个字节。对于JPEG,这意味着我们读取,直到我们遇到EOI标记或直到流的结束。
+     * 如果流在遇到EOI标记之前结束,则抛出IndexOutOfBoundsException。
+     * 
      */
     private void skipImage() throws IOException {
         if (debug) {
@@ -546,6 +612,9 @@ public class JPEGImageReader extends ImageReader {
      * Returns <code>true</code> if there is an image beyond
      * the current stream position.  Does not disturb the
      * stream position.
+     * <p>
+     *  如果有超出当前流位置的图像,则返回<code> true </code>。不干扰流位置。
+     * 
      */
     private boolean hasNextImage() throws IOException {
         if (debug) {
@@ -580,6 +649,9 @@ public class JPEGImageReader extends ImageReader {
      * Push back the given number of bytes to the input stream.
      * Called by the native code at the end of each image so
      * that the next one can be identified from Java.
+     * <p>
+     *  将给定数量的字节推回到输入流。由每个图像末尾的本地代码调用,以便从Java中识别下一个。
+     * 
      */
     private void pushBack(int num) throws IOException {
         if (debug) {
@@ -596,6 +668,9 @@ public class JPEGImageReader extends ImageReader {
 
     /**
      * Reads header information for the given image, if possible.
+     * <p>
+     *  如果可能,读取给定图像的标题信息。
+     * 
      */
     private void readHeader(int imageIndex, boolean reset)
         throws IOException {
@@ -623,6 +698,11 @@ public class JPEGImageReader extends ImageReader {
      * object is reset so that it can read a header again.
      * This happens automatically if the header was a tables-only
      * image.
+     * <p>
+     *  从当前流位置开始读取头信息,如果头是纯表图像,则返回<code> true </code>。
+     * 在此调用之后,如果头部不是仅表格图像,则本地IJG解压缩结构将包含大多数以下查询调用所需的图像信息(例如,getWidth,getHeight等)。
+     * 如果reset是<code> true </code>,则IJG对象的状态被重置,以便它可以再次读取头。如果标题是仅表格的图像,则会自动进行。
+     * 
      */
     private native boolean readImageHeader(long structPointer,
                                            boolean clearBuffer,
@@ -634,6 +714,9 @@ public class JPEGImageReader extends ImageReader {
      * read.  Whether we read metadata or not, we always need this
      * information, so it is passed back independently of
      * metadata, which may never be read.
+     * <p>
+     *  每当读取图像头时,由本地代码调用。无论我们是否读取元数据,我们总是需要这些信息,因此它独立于元数据传回,而元数据可能永远不会被读取。
+     * 
      */
     private void setImageData(int width,
                               int height,
@@ -659,6 +742,9 @@ public class JPEGImageReader extends ImageReader {
             /*
              * Color profile data seems to be invalid.
              * Ignore this profile.
+             * <p>
+             *  颜色配置文件数据似乎无效。忽略此配置文件。
+             * 
              */
             iccCS = null;
             warningOccurred(WARNING_IGNORE_INVALID_ICC);
@@ -684,6 +770,11 @@ public class JPEGImageReader extends ImageReader {
          * So, we have to do data comparison in order to avoid
          * creation of different ColorSpace instances for the same
          * embedded data.
+         * <p>
+         * 目前,我们不能依赖ColorSpace.equals()和ICC_Profile.equals(),因为它们没有检测到从相同的数据创建两个配置文件的情况。
+         * 
+         *  因此,我们必须进行数据比较,以避免为相同的嵌入式数据创建不同的ColorSpace实例。
+         * 
          */
         if (oldData == null ||
             !java.util.Arrays.equals(oldData, newData))
@@ -696,6 +787,9 @@ public class JPEGImageReader extends ImageReader {
                 /*
                  * Embedded profile seems to be corrupted.
                  * Ignore this profile.
+                 * <p>
+                 *  嵌入的配置文件似乎已损坏。忽略此配置文件。
+                 * 
                  */
                 iccCS = null;
                 cbLock.lock();
@@ -739,6 +833,9 @@ public class JPEGImageReader extends ImageReader {
     /**
      * Return an ImageTypeSpecifier corresponding to the given
      * color space code, or null if the color space is unsupported.
+     * <p>
+     *  返回与给定颜色空间代码对应的ImageTypeSpecifier,如果不支持颜色空间,则返回null。
+     * 
      */
     private ImageTypeProducer getImageType(int code) {
         ImageTypeProducer ret = null;
@@ -871,6 +968,10 @@ public class JPEGImageReader extends ImageReader {
      * bands are specified in the param), then the default color
      * conversions are assumed to be correct.
      * Throws an IIOException if there is no conversion available.
+     * <p>
+     *  检查流和目标图像之间的隐含颜色转换,如有必要,更改IJG输出颜色空间。如果需要进行java颜色转换,那么这将设置<code> convert </code>。
+     * 如果频带正在重新排列(在参数中指定了源频带或目标频带),则默认的颜色转换被假定为正确的。如果没有可用的转换,则抛出IIOException。
+     * 
      */
     private void checkColorConversion(BufferedImage image,
                                       ImageReadParam param)
@@ -982,6 +1083,9 @@ public class JPEGImageReader extends ImageReader {
     /**
      * Set the IJG output space to the given value.  The library will
      * perform the appropriate colorspace conversions.
+     * <p>
+     *  将IJG输出空间设置为给定值。库将执行适当的颜色空间转换。
+     * 
      */
     private native void setOutColorSpace(long structPointer, int id);
 
@@ -1175,6 +1279,9 @@ public class JPEGImageReader extends ImageReader {
          * If the process is sequential, and we have restart markers,
          * we could skip to the correct restart marker, if the library
          * lets us.  That's an optimization to investigate later.
+         * <p>
+         *  如果进程是顺序的,并且我们有重新启动标记,我们可以跳过正确的重新开始标记,如果库允许我们。这是稍后调查的优化。
+         * 
          */
 
         // Check for update listeners (don't call back if none)
@@ -1262,6 +1369,9 @@ public class JPEGImageReader extends ImageReader {
      * is full.  The parameter indicates the scanline in the target
      * Raster to which the intermediate Raster should be copied.
      * After the copy, we notify update listeners.
+     * <p>
+     *  当中间光栅已满时,从C调用此方法。该参数指示应复制中间光栅的目标栅格中的扫描线。复制后,我们通知更新侦听器。
+     * 
      */
     private void acceptPixels(int y, boolean progressive) {
         if (convert != null) {
@@ -1394,6 +1504,9 @@ public class JPEGImageReader extends ImageReader {
 
     /**
      * Returns <code>true</code> if the read was aborted.
+     * <p>
+     *  如果读取已中止,则返回<code> true </code>。
+     * 
      */
     private native boolean readImage(long structPointer,
                                      byte [] buffer,
@@ -1416,6 +1529,9 @@ public class JPEGImageReader extends ImageReader {
             /**
              * NB: we do not check the call back lock here,
              * we allow to abort the reader any time.
+             * <p>
+             * 注意：我们不检查回调锁在这里,我们允许随时中止读者。
+             * 
              */
 
             super.abort();
@@ -1445,6 +1561,9 @@ public class JPEGImageReader extends ImageReader {
              * This could be further optimized by not resetting the dest.
              * offset and creating a translated raster in readInternal()
              * (see bug 4994702 for more info).
+             * <p>
+             *  这可以通过不重置dest来进一步优化。偏移并在readInternal()中创建已翻译的栅格(有关详细信息,请参阅错误4994702)。
+             * 
              */
 
             // For Rasters, destination offset is logical, not physical, so
@@ -1695,6 +1814,9 @@ public class JPEGImageReader extends ImageReader {
 /**
  * An internal helper class that wraps producer's iterator
  * and extracts specifier instances on demand.
+ * <p>
+ *  一个内部辅助类,它包装生产者的迭代器,并根据需要提取说明符实例。
+ * 
  */
 class ImageTypeIterator implements Iterator<ImageTypeSpecifier> {
      private Iterator<ImageTypeProducer> producers;
@@ -1743,6 +1865,10 @@ class ImageTypeIterator implements Iterator<ImageTypeSpecifier> {
  *
  * To support other color spaces one can override produce() method to
  * return custom instance of ImageTypeSpecifier.
+ * <p>
+ *  内部辅助类,提供描述可用目标类型所需的ImageTypeSpecifier实例的延迟创建方法。
+ * 
+ *  此实现仅支持标准的jpeg颜色空间(由相应的JCS颜色空间代码定义)。
  */
 class ImageTypeProducer {
 

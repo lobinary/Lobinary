@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -103,6 +113,19 @@ import com.sun.org.apache.xerces.internal.parsers.XMLParser;
  *
  * @xerces.internal
  *
+ * <p>
+ *  XML模式验证器。验证器实现文档过滤器：从扫描器接收文档事件;验证内容和结构;扩充InfoSet(如果适用);以及向所述解析器通知从所述验证过程产生的信息。
+ * <p>
+ *  此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ *  <li> http://xml.org/sax/features/validation </li> <li> http://apache.org/xml/properties/internal/sym
+ * bol-table </li> <li> http：/ /apache.org/xml/properties/internal/error-reporter </li> <li> http://apac
+ * he.org/xml/properties/internal/entity-resolver </li>。
+ * </ul>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao IBM
  * @author Elena Litani IBM
  * @author Andy Clark IBM
@@ -327,6 +350,9 @@ public class XMLSchemaValidator
     /**
      * Map which is used to catch instance documents that try
      * and match a field several times in the same scope.
+     * <p>
+     *  用于捕获在同一作用域中多次尝试匹配字段的实例文档的映射。
+     * 
      */
     protected final HashMap fMayMatchFieldMap = new HashMap();
 
@@ -364,6 +390,9 @@ public class XMLSchemaValidator
 
     /**
      * While parsing a document, keep the location of the document.
+     * <p>
+     * 在解析文档时,保留文档的位置。
+     * 
      */
     private XMLLocator fLocator;
 
@@ -371,6 +400,9 @@ public class XMLSchemaValidator
      * A wrapper of the standard error reporter. We'll store all schema errors
      * in this wrapper object, so that we can get all errors (error codes) of
      * a specific element. This is useful for PSVI.
+     * <p>
+     *  标准错误报告器的包装器。我们将在此包装器对象中存储所有模式错误,以便我们可以获取特定元素的所有错误(错误代码)。这对PSVI很有用。
+     * 
      */
     protected final class XSIErrorReporter {
 
@@ -515,6 +547,9 @@ public class XMLSchemaValidator
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的要素标识符列表。如果此组件未识别任何功能,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedFeatures() {
         return (String[]) (RECOGNIZED_FEATURES.clone());
@@ -527,6 +562,12 @@ public class XMLSchemaValidator
      * <strong>Note:</strong> Components should silently ignore features
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置要素的状态。当特性改变状态时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应默认忽略不影响组件操作的功能。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -542,6 +583,9 @@ public class XMLSchemaValidator
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符列表。如果此组件未识别任何属性,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedProperties() {
         return (String[]) (RECOGNIZED_PROPERTIES.clone());
@@ -554,6 +598,12 @@ public class XMLSchemaValidator
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置属性的值。当属性更改值时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应静默忽略不影响组件操作的属性。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *
@@ -570,6 +620,10 @@ public class XMLSchemaValidator
      * component does not want to report a default value for this
      * feature.
      *
+     * <p>
+     *  返回特征的默认状态,如果此组件不希望报告此特征的默认值,则返回null。
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @since Xerces 2.2.0
@@ -588,6 +642,10 @@ public class XMLSchemaValidator
      * component does not want to report a default value for this
      * property.
      *
+     * <p>
+     *  返回属性的默认状态,如果此组件不希望报告此属性的默认值,则返回null。
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @since Xerces 2.2.0
@@ -643,6 +701,10 @@ public class XMLSchemaValidator
     /**
      * The start of the document.
      *
+     * <p>
+     *  文档的开始。
+     * 
+     * 
      * @param locator The system identifier of the entity if the entity
      *                 is external, null otherwise.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -687,6 +749,10 @@ public class XMLSchemaValidator
      * present, this method will be called immediately following the
      * startDocument call.
      *
+     * <p>
+     *  通知文档中存在XMLDecl行。如果存在,此方法将在startDocument调用后立即调用。
+     * 
+     * 
      * @param version    The XML version.
      * @param encoding   The IANA encoding name of the document, or null if
      *                   not specified.
@@ -708,6 +774,10 @@ public class XMLSchemaValidator
     /**
      * Notifies of the presence of the DOCTYPE line in the document.
      *
+     * <p>
+     * 通知文档中DOCTYPE行的存在。
+     * 
+     * 
      * @param rootElement The name of the root element.
      * @param publicId    The public identifier if an external DTD or null
      *                    if the external DTD is specified using SYSTEM.
@@ -734,6 +804,10 @@ public class XMLSchemaValidator
     /**
      * The start of an element.
      *
+     * <p>
+     *  元素的开始。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs     Additional information that may include infoset augmentations
@@ -754,6 +828,10 @@ public class XMLSchemaValidator
     /**
      * An empty element.
      *
+     * <p>
+     *  空元素。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs     Additional information that may include infoset augmentations
@@ -789,6 +867,10 @@ public class XMLSchemaValidator
     /**
      * Character content.
      *
+     * <p>
+     *  字符内容。
+     * 
+     * 
      * @param text The content.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -829,6 +911,10 @@ public class XMLSchemaValidator
      * characters in the document are ignorable based on the element
      * content model.
      *
+     * <p>
+     *  可怕的空格。对于要调用的此方法,文档源必须具有某种方式确定仅包含空格字符的文本应该被视为可忽略。例如,验证器可以基于元素内容模型来确定文档中的空白字符的长度是否可忽略。
+     * 
+     * 
      * @param text The ignorable whitespace.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -846,6 +932,10 @@ public class XMLSchemaValidator
     /**
      * The end of an element.
      *
+     * <p>
+     *  元素的结尾。
+     * 
+     * 
      * @param element The name of the element.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -871,6 +961,10 @@ public class XMLSchemaValidator
     /**
     * The start of a CDATA section.
     *
+    * <p>
+    *  CDATA节的开始。
+    * 
+    * 
     * @param augs     Additional information that may include infoset augmentations
     *
     * @throws XNIException Thrown by handler to signal an error.
@@ -889,6 +983,10 @@ public class XMLSchemaValidator
     /**
      * The end of a CDATA section.
      *
+     * <p>
+     *  CDATA段的结尾。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -906,6 +1004,10 @@ public class XMLSchemaValidator
     /**
      * The end of the document.
      *
+     * <p>
+     *  文档的结尾。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -983,6 +1085,12 @@ public class XMLSchemaValidator
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知一般实体的开始。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name     The name of the general entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -1021,6 +1129,14 @@ public class XMLSchemaValidator
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  通知实体中存在TextDecl行。如果存在,此方法将在startEntity调用之后立即调用。
+     * <p>
+     *  <strong>注意：</strong>此方法将永远不会为文档实体调用;它只被要求在文档内容中引用的外部通用实体。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param version  The XML version, or null if not specified.
      * @param encoding The IANA encoding name of the entity.
      * @param augs     Additional information that may include infoset augmentations
@@ -1039,6 +1155,10 @@ public class XMLSchemaValidator
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text The text in the comment.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -1064,6 +1184,12 @@ public class XMLSchemaValidator
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     *  一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     * 通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augs     Additional information that may include infoset augmentations
@@ -1086,6 +1212,12 @@ public class XMLSchemaValidator
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知一般实体的结束。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name   The name of the entity.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -1261,6 +1393,13 @@ public class XMLSchemaValidator
      * <strong>Note:</strong> Once the activation scope is left, the
      * XPath matchers are automatically removed from the stack of
      * active matchers and no longer receive callbacks.
+     * <p>
+     *  用于身份约束的活动XPath匹配器堆栈。所有活动的XPath匹配器都被通知startElement和endElement回调,以便执行它们的匹配。
+     * <p>
+     *  对于具有标识约束的每个元素,激活每个标识约束的选择器。当选择器匹配其XPath时,则激活身份约束的所有字段。
+     * <p>
+     *  <strong>注意</strong>：留下激活范围后,XPath匹配器会自动从活动匹配器堆栈中移除,不再接收回调。
+     * 
      */
     protected XPathMatcherStack fMatcherStack = new XPathMatcherStack();
 
@@ -1283,6 +1422,10 @@ public class XMLSchemaValidator
      * about any features and properties that affect the operation of the
      * component.
      *
+     * <p>
+     *  复位组件。组件可以向组件管理器查询影响组件操作的任何特征和属性。
+     * 
+     * 
      * @param componentManager The component manager.
      *
      * @throws SAXException Thrown by component on finitialization error.
@@ -1425,6 +1568,10 @@ public class XMLSchemaValidator
      * method is called when the selector matches in order to initialize
      * the value store.
      *
+     * <p>
+     *  启动指定标识约束的值范围。当选择器匹配以便初始化值存储时调用此方法。
+     * 
+     * 
      * @param identityConstraint The identity constraint.
      */
     public void startValueScopeFor(IdentityConstraint identityConstraint, int initialDepth) {
@@ -1439,6 +1586,10 @@ public class XMLSchemaValidator
      * Request to activate the specified field. This method returns the
      * matcher for the field.
      *
+     * <p>
+     *  请求激活指定的字段。此方法返回字段的匹配器。
+     * 
+     * 
      * @param field The field to activate.
      */
     public XPathMatcher activateField(Field field, int initialDepth) {
@@ -1454,6 +1605,10 @@ public class XMLSchemaValidator
     /**
      * Ends the value scope for the specified identity constraint.
      *
+     * <p>
+     *  结束指定的标识约束的值作用域。
+     * 
+     * 
      * @param identityConstraint The identity constraint.
      */
     public void endValueScopeFor(IdentityConstraint identityConstraint, int initialDepth) {
@@ -1469,6 +1624,10 @@ public class XMLSchemaValidator
      * This should be used to catch instance documents that try
      * and match a field several times in the same scope.
      *
+     * <p>
+     * 设置是否允许给定字段与值匹配。这应该用于捕获在同一范围内尝试和匹配一个字段多次的实例文档。
+     * 
+     * 
      * @param field The field that may be permitted to be matched.
      * @param state Boolean indiciating whether the field may be matched.
      */
@@ -1479,6 +1638,10 @@ public class XMLSchemaValidator
     /**
      * Returns whether the given field is permitted to match a value.
      *
+     * <p>
+     *  返回是否允许给定字段与值匹配。
+     * 
+     * 
      * @param field The field that may be permitted to be matched.
      * @return Boolean indicating whether the field may be matched.
      */
@@ -1606,6 +1769,10 @@ public class XMLSchemaValidator
     /**
      * Normalize whitespace in an XMLString according to the rules defined
      * in XML Schema specifications.
+     * <p>
+     *  根据XML模式规范中定义的规则,规范XMLString中的空格。
+     * 
+     * 
      * @param value    The string to normalize.
      * @param collapse replace or collapse
      */
@@ -2088,6 +2255,9 @@ public class XMLSchemaValidator
      *  Handle end element. If there is not text content, and there is a
      *  {value constraint} on the corresponding element decl, then
      * set the fDefaultValue XMLString representing the default value.
+     * <p>
+     *  处理结束元素。如果没有文本内容,并且对应的元素decl有一个{value constraint},那么设置fDefaultValue XMLString表示默认值。
+     * 
      */
     Augmentations handleEndElement(QName element, Augmentations augs) {
 
@@ -2988,6 +3158,9 @@ public class XMLSchemaValidator
      *  If there is not text content, and there is a
      *  {value constraint} on the corresponding element decl, then return
      *  an XMLString representing the default value.
+     * <p>
+     *  如果没有文本内容,并且对应的元素decl有一个{value constraint},那么返回一个表示默认值的XMLString。
+     * 
      */
     void processElementContent(QName element) {
         // 1 If the item is ?valid? with respect to an element declaration as per Element Locally Valid (Element) (?3.3.4) and the {value constraint} is present, but clause 3.2 of Element Locally Valid (Element) (?3.3.4) above is not satisfied and the item has no element or character information item [children], then schema. Furthermore, the post-schema-validation infoset has the canonical lexical representation of the {value constraint} value as the item's [schema normalized value] property.
@@ -3308,6 +3481,10 @@ public class XMLSchemaValidator
     /**
      * Stack of XPath matchers for identity constraints.
      *
+     * <p>
+     *  用于身份约束的XPath匹配器堆栈。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected static class XPathMatcherStack {
@@ -3397,6 +3574,10 @@ public class XMLSchemaValidator
      * Value store implementation base class. There are specific subclasses
      * for handling unique, key, and keyref.
      *
+     * <p>
+     *  值存储实现基类。有用于处理unique,key和keyref的特定子类。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected abstract class ValueStoreBase implements ValueStore {
@@ -3534,6 +3715,9 @@ public class XMLSchemaValidator
          * Signals the end of the document. This is where the specific
          * instances of value stores can verify the integrity of the
          * identity constraints.
+         * <p>
+         *  指示文档的结尾。这是值存储的特定实例可以验证身份约束的完整性的地方。
+         * 
          */
         public void endDocument() {
         } // endDocument()
@@ -3544,6 +3728,9 @@ public class XMLSchemaValidator
 
         /* reports an error if an element is matched
          * has nillable true and is matched by a key.
+         * <p>
+         *  有nillable true并且由一个键匹配。
+         * 
          */
 
         public void reportError(String key, Object[] args) {
@@ -3553,6 +3740,10 @@ public class XMLSchemaValidator
         /**
          * Adds the specified value to the value store.
          *
+         * <p>
+         *  将指定的值添加到值存储。
+         * 
+         * 
          * @param field The field associated to the value. This reference
          *              is used to ensure that each field only adds a value
          *              once within a selection scope.
@@ -3596,6 +3787,9 @@ public class XMLSchemaValidator
 
         /**
          * Returns true if this value store contains the locally scoped value stores
+         * <p>
+         *  如果此值存储包含本地作用域值值存储,则返回true
+         * 
          */
         public boolean contains() {
             // REVISIT: we can improve performance by using hash codes, instead of
@@ -3631,6 +3825,9 @@ public class XMLSchemaValidator
          * Returns -1 if this value store contains the specified
          * values, otherwise the index of the first field in the
          * key sequence.
+         * <p>
+         *  如果此值存储包含指定的值,则返回-1,否则返回键序列中第一个字段的索引。
+         * 
          */
         public int contains(ValueStoreBase vsb) {
 
@@ -3832,6 +4029,10 @@ public class XMLSchemaValidator
     /**
      * Unique value store.
      *
+     * <p>
+     *  唯一值存储。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected class UniqueValueStore extends ValueStoreBase {
@@ -3851,6 +4052,9 @@ public class XMLSchemaValidator
 
         /**
          * Called when a duplicate value is added.
+         * <p>
+         *  添加重复值时调用。
+         * 
          */
         protected void checkDuplicateValues() {
             // is this value as a group duplicated?
@@ -3868,6 +4072,10 @@ public class XMLSchemaValidator
     /**
      * Key value store.
      *
+     * <p>
+     *  键值存储。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected class KeyValueStore extends ValueStoreBase {
@@ -3889,6 +4097,9 @@ public class XMLSchemaValidator
 
         /**
          * Called when a duplicate value is added.
+         * <p>
+         *  添加重复值时调用。
+         * 
          */
         protected void checkDuplicateValues() {
             if (contains()) {
@@ -3905,6 +4116,10 @@ public class XMLSchemaValidator
     /**
      * Key reference value store.
      *
+     * <p>
+     *  键参考值存储。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected class KeyRefValueStore extends ValueStoreBase {
@@ -3975,6 +4190,10 @@ public class XMLSchemaValidator
      * Value store cache. This class is used to store the values for
      * identity constraints.
      *
+     * <p>
+     *  值存储高速缓存。此类用于存储身份约束的值。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected class ValueStoreCache {
@@ -3996,6 +4215,10 @@ public class XMLSchemaValidator
          * of all cases, including where ID constraints with
          * descendant-or-self axes occur on recursively-defined
          * elements.
+         * <p>
+         * 与特定身份约束相关联的值存储。此散列表映射IdentityConstraints和基于0的元素,其选择器首先与相应的ValueStore匹配。
+         * 这应该考虑所有情况,包括在递归定义的元素上发生带有后代或自身轴的ID约束。
+         * 
          */
         protected final Hashtable fIdentityConstraint2ValueStoreMap = new Hashtable();
 
@@ -4054,6 +4277,9 @@ public class XMLSchemaValidator
 
         /** endElement():  merges contents of fGlobalIDConstraintMap with the
          * top of fGlobalMapStack into fGlobalIDConstraintMap.
+         * <p>
+         *  fGlobalMapStack顶部到fGlobalIDConstraintMap。
+         * 
          */
         public void endElement() {
             if (fGlobalMapStack.isEmpty()) {
@@ -4085,6 +4311,9 @@ public class XMLSchemaValidator
         /**
          * Initializes the value stores for the specified element
          * declaration.
+         * <p>
+         *  初始化指定元素声明的值存储。
+         * 
          */
         public void initValueStoresFor(XSElementDecl eDecl, FieldActivator activator) {
             // initialize value stores for unique fields
@@ -4235,6 +4464,8 @@ public class XMLSchemaValidator
 
     /**
      * A simple vector for <code>short</code>s.
+     * <p>
+     *  <code> short </code>的简单向量。
      */
     protected static final class ShortVector {
 

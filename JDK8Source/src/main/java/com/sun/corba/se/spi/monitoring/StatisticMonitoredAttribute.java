@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ import java.util.*;
 /**
  * <p>
  *
+ * <p>
+ * <p>
+ * 
+ * 
  * @author Hemanth Puttaswamy
  * </p>
  * <p>
@@ -62,6 +67,13 @@ public class StatisticMonitoredAttribute extends MonitoredAttributeBase {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  构造StaisticMonitoredAttribute,构建所需的MonitoredAttributeInfo,Long作为类类型并且始终为只读属性。
+ * </p>
+ * <p>
+ * 
+ * 
  * @param name Of this attribute
  * </p>
  * <p>
@@ -102,6 +114,9 @@ public class StatisticMonitoredAttribute extends MonitoredAttributeBase {
  *  Gets the value from the StatisticsAccumulator, the value will be a formatted
  *  String with the computed statistics based on the samples accumulated in the
  *  Statistics Accumulator.
+ * <p>
+ *  从StatisticsAccumulator获取值,该值将是一个格式化的字符串,其计算的统计信息基于累加在统计累加器中的样本。
+ * 
  */
     public Object getValue( ) {
         synchronized( mutex ) {
@@ -112,6 +127,9 @@ public class StatisticMonitoredAttribute extends MonitoredAttributeBase {
 /**
  *  Clears the state on Statistics Accumulator, After this call all samples are
  *  treated fresh and the old sample computations are disregarded.
+ * <p>
+ *  清除统计累加器上的状态。在此调用之后,所有样本被处理为新鲜,而旧样本计算被忽略。
+ * 
  */
     public void clearState( ) {
         synchronized( mutex ) {
@@ -123,6 +141,8 @@ public class StatisticMonitoredAttribute extends MonitoredAttributeBase {
  *  Gets the statistics accumulator associated with StatisticMonitoredAttribute.
  *  Usually, the user don't need to use this method as they can keep the handle
  *  to Accumulator to collect the samples.
+ * <p>
+ *  获取与StatisticMonitoredAttribute关联的统计累积器。通常,用户不需要使用此方法,因为他们可以保持句柄到累加器收集样本。
  */
     public StatisticsAccumulator getStatisticsAccumulator( ) {
         return statisticsAccumulator;

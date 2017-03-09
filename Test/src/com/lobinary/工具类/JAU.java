@@ -14,7 +14,7 @@ public class JAU {
 //	private final static Logger log = LoggerFactory.getLogger(JAU.class);
 	
 	private static List<String> 注释终止符号 = new ArrayList<String>();
-	private final static int 每行翻译后的注释的推荐长度 = 100;
+	public static int 每行翻译后的注释的推荐长度 = 100;
 	private final static String 翻译完成标志 = "/***** Lobxxx Translate Finished ******/";
 	
 	static{
@@ -37,7 +37,7 @@ public class JAU {
 	public static void main(String[] args) throws Exception {
 		File f = new File("C:/test/CheckboxMenuItem.java");
 		翻译(f);
-	}
+	}	
 	
 	public static void 翻译(File f) throws Exception{
 		List<String> list = FileUtil.readLine2List(f);

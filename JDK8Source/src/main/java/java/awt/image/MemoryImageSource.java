@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -98,6 +99,35 @@ import java.util.Enumeration;
  *
  * }</pre>
  *
+ * <p>
+ *  这个类是ImageProducer接口的实现,它使用数组来产生图像的像素值。
+ * 这里是一个例子,它计算一个100x100的图像,表示沿着X轴从黑色到蓝色的淡变,以及沿着Y轴从黑色到红色的淡化：<pre> {@ code。
+ * 
+ *  int w = 100; int h = 100; int pix [] = new int [w * h]; int index = 0; for(int y = 0; y <h; y ++){int red =(y * 255)/(h-1) for(int x = 0; x <w; x ++){int blue =(x * 255)/(w-1); pix [index ++] =(255 << 24)| (红色<< 16)|蓝色; }} Image img = createImage(new MemoryImageSource(w,h,pix,0,w));。
+ * 
+ *  } </pre> MemoryImageSource还能够管理随时间变化的内存映像,以允许动画或自定义渲染。
+ * 这里是一个例子,显示如何设置动画源和信号变化的数据(改编自Garth Dickie的MemoryAnimationSourceDemo)：<pre> {@ code。
+ * 
+ *  int pixels []; MemoryImageSource源;
+ * 
+ *  public void init(){int width = 50; int height = 50; int size = width * height; pixels = new int [size];。
+ * 
+ *  int value = getBackground()。getRGB(); for(int i = 0; i <size; i ++){pixels [i] = value; }}
+ * 
+ *  source = new MemoryImageSource(width,height,pixels,0,width); source.setAnimated(true) image = create
+ * Image(source); }}。
+ * 
+ * public void run(){Thread me = Thread.currentThread(); me.setPriority(Thread.MIN_PRIORITY);
+ * 
+ *  while(true){try {Thread.sleep(10); } catch(InterruptedException e){return; }}
+ * 
+ *  //修改像素数组中的值(x,y,w,h)
+ * 
+ *  //将新数据发送到感兴趣的ImageConsumers source.newPixels(x,y,w,h); }}
+ * 
+ *  } </pre>
+ * 
+ * 
  * @see ImageProducer
  *
  * @author      Jim Graham
@@ -119,6 +149,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Constructs an ImageProducer object which uses an array of bytes
      * to produce data for an Image object.
+     * <p>
+     *  构造一个ImageProducer对象,该对象使用字节数组为Image对象生成数据。
+     * 
+     * 
      * @param w the width of the rectangle of pixels
      * @param h the height of the rectangle of pixels
      * @param cm the specified <code>ColorModel</code>
@@ -137,6 +171,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Constructs an ImageProducer object which uses an array of bytes
      * to produce data for an Image object.
+     * <p>
+     *  构造一个ImageProducer对象,该对象使用字节数组为Image对象生成数据。
+     * 
+     * 
      * @param w the width of the rectangle of pixels
      * @param h the height of the rectangle of pixels
      * @param cm the specified <code>ColorModel</code>
@@ -159,6 +197,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Constructs an ImageProducer object which uses an array of integers
      * to produce data for an Image object.
+     * <p>
+     *  构造一个ImageProducer对象,该对象使用整数数组为Image对象生成数据。
+     * 
+     * 
      * @param w the width of the rectangle of pixels
      * @param h the height of the rectangle of pixels
      * @param cm the specified <code>ColorModel</code>
@@ -177,6 +219,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Constructs an ImageProducer object which uses an array of integers
      * to produce data for an Image object.
+     * <p>
+     *  构造一个ImageProducer对象,该对象使用整数数组为Image对象生成数据。
+     * 
+     * 
      * @param w the width of the rectangle of pixels
      * @param h the height of the rectangle of pixels
      * @param cm the specified <code>ColorModel</code>
@@ -213,6 +259,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Constructs an ImageProducer object which uses an array of integers
      * in the default RGB ColorModel to produce data for an Image object.
+     * <p>
+     *  构造一个ImageProducer对象,它使用默认RGB ColorModel中的整数数组为Image对象生成数据。
+     * 
+     * 
      * @param w the width of the rectangle of pixels
      * @param h the height of the rectangle of pixels
      * @param pix an array of pixels
@@ -231,6 +281,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Constructs an ImageProducer object which uses an array of integers
      * in the default RGB ColorModel to produce data for an Image object.
+     * <p>
+     *  构造一个ImageProducer对象,它使用默认RGB ColorModel中的整数数组为Image对象生成数据。
+     * 
+     * 
      * @param w the width of the rectangle of pixels
      * @param h the height of the rectangle of pixels
      * @param pix an array of pixels
@@ -253,6 +307,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Adds an ImageConsumer to the list of consumers interested in
      * data for this image.
+     * <p>
+     *  将ImageConsumer添加到对此图像的数据感兴趣的消费者列表中。
+     * 
+     * 
      * @param ic the specified <code>ImageConsumer</code>
      * @throws NullPointerException if the specified
      *           <code>ImageConsumer</code> is null
@@ -285,6 +343,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Determines if an ImageConsumer is on the list of consumers currently
      * interested in data for this image.
+     * <p>
+     *  确定ImageConsumer是否在当前对此图像的数据感兴趣的消费者列表上。
+     * 
+     * 
      * @param ic the specified <code>ImageConsumer</code>
      * @return <code>true</code> if the <code>ImageConsumer</code>
      * is on the list; <code>false</code> otherwise.
@@ -297,6 +359,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Removes an ImageConsumer from the list of consumers interested in
      * data for this image.
+     * <p>
+     *  从对此图像的数据感兴趣的消费者列表中删除ImageConsumer。
+     * 
+     * 
      * @param ic the specified <code>ImageConsumer</code>
      * @see ImageConsumer
      */
@@ -308,6 +374,10 @@ public class MemoryImageSource implements ImageProducer {
      * Adds an ImageConsumer to the list of consumers interested in
      * data for this image and immediately starts delivery of the
      * image data through the ImageConsumer interface.
+     * <p>
+     *  将ImageConsumer添加到对此图像的数据感兴趣的消费者列表中,并立即通过ImageConsumer界面开始传递图像数据。
+     * 
+     * 
      * @param ic the specified <code>ImageConsumer</code>
      * image data through the ImageConsumer interface.
      * @see ImageConsumer
@@ -319,6 +389,10 @@ public class MemoryImageSource implements ImageProducer {
     /**
      * Requests that a given ImageConsumer have the image data delivered
      * one more time in top-down, left-right order.
+     * <p>
+     * 请求给定的ImageConsumer具有以自上而下,左右顺序再次传送图像数据。
+     * 
+     * 
      * @param ic the specified <code>ImageConsumer</code>
      * @see ImageConsumer
      */
@@ -337,6 +411,12 @@ public class MemoryImageSource implements ImageProducer {
      * is added to this ImageProducer before this flag is set then
      * that ImageConsumer will see only a snapshot of the pixel
      * data that was available when it connected.
+     * <p>
+     *  根据动画参数将此内存图像更改为多帧动画或单帧静态图像。
+     *  <p>此方法应在构建MemoryImageSource之后并在使用它创建图像之前立即调用,以确保所有ImageConsumers都将接收到正确的多帧数据。
+     * 如果在设置此标志之前将ImageConsumer添加到此ImageProducer,则ImageConsumer将仅查看连接时可用的像素数据的快照。
+     * 
+     * 
      * @param animated <code>true</code> if the image is a
      *       multi-frame animation
      */
@@ -365,6 +445,11 @@ public class MemoryImageSource implements ImageProducer {
      * MemoryImageSource is constructed and before an image is
      * created with it to ensure that all ImageConsumers will
      * receive the correct pixel delivery hints.
+     * <p>
+     *  指定是否应始终通过在发生更改时发送像素的完整缓冲区来更新此动画内存映像。如果动画标志未通过setAnimated()方法打开,则将忽略此标志。
+     *  <p>此方法应在构建MemoryImageSource之后并在使用它创建图像之前立即调用,以确保所有ImageConsumers都将接收到正确的像素传递提示。
+     * 
+     * 
      * @param fullbuffers <code>true</code> if the complete pixel
      *             buffer should always
      * be sent
@@ -393,6 +478,10 @@ public class MemoryImageSource implements ImageProducer {
      * them that an animation frame is complete.
      * This method only has effect if the animation flag has been
      * turned on through the setAnimated() method.
+     * <p>
+     *  向当前对此图像的数据感兴趣的任何ImageConsum发送一个全新的像素缓冲区,并通知他们动画帧已完成。此方法仅在动画标志通过setAnimated()方法打开时有效。
+     * 
+     * 
      * @see #newPixels(int, int, int, int, boolean)
      * @see ImageConsumer
      * @see #setAnimated
@@ -410,6 +499,11 @@ public class MemoryImageSource implements ImageProducer {
      * If the full buffer update flag was turned on with the
      * setFullBufferUpdates() method then the rectangle parameters
      * will be ignored and the entire buffer will always be sent.
+     * <p>
+     * 将像素缓冲区的矩形区域发送到当前对此图像的数据感兴趣的任何ImageConsumers,并通知它们动画帧已完成。此方法仅在动画标志通过setAnimated()方法打开时有效。
+     * 如果使用setFullBufferUpdates()方法打开完全缓冲区更新标志,那么将忽略矩形参数,并且将始终发送整个缓冲区。
+     * 
+     * 
      * @param x the x coordinate of the upper left corner of the rectangle
      * of pixels to be sent
      * @param y the y coordinate of the upper left corner of the rectangle
@@ -436,6 +530,11 @@ public class MemoryImageSource implements ImageProducer {
      * If the full buffer update flag was turned on with the
      * setFullBufferUpdates() method then the rectangle parameters
      * will be ignored and the entire buffer will always be sent.
+     * <p>
+     *  将像素缓冲区的矩形区域发送到当前对此图像的数据感兴趣的任何ImageConsumers。如果framenotify参数为true,则还通知消费者动画帧完成。
+     * 此方法仅在动画标志通过setAnimated()方法打开时有效。如果使用setFullBufferUpdates()方法打开完全缓冲区更新标志,那么将忽略矩形参数,并且将始终发送整个缓冲区。
+     * 
+     * 
      * @param x the x coordinate of the upper left corner of the rectangle
      * of pixels to be sent
      * @param y the y coordinate of the upper left corner of the rectangle
@@ -493,6 +592,10 @@ public class MemoryImageSource implements ImageProducer {
      * method, then the new pixels will be immediately delivered to any
      * ImageConsumers that are currently interested in the data for
      * this image.
+     * <p>
+     *  更改为保存此图像的像素的新字节数组。如果动画标志已通过setAnimated()方法打开,则新的像素将立即传递到当前对此图像的数据感兴趣的任何ImageConsumers。
+     * 
+     * 
      * @param newpix the new pixel array
      * @param newmodel the specified <code>ColorModel</code>
      * @param offset the offset into the array
@@ -516,6 +619,9 @@ public class MemoryImageSource implements ImageProducer {
      * method, then the new pixels will be immediately delivered to any
      * ImageConsumers that are currently interested in the data for
      * this image.
+     * <p>
+     * 更改为保存此图像的像素的新int数组。如果动画标志已通过setAnimated()方法打开,则新的像素将立即传递到当前对此图像的数据感兴趣的任何ImageConsumers。
+     * 
      * @param newpix the new pixel array
      * @param newmodel the specified <code>ColorModel</code>
      * @param offset the offset into the array

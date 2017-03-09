@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XStringForChars.java,v 1.2.4.1 2005/09/14 20:46:27 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XStringForChars.java,v 1.2.4.1 2005/09/14 20:46:27 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.objects;
 
@@ -29,6 +42,9 @@ import com.sun.org.apache.xpath.internal.res.XPATHErrorResources;
 
 /**
  * This class will wrap a FastStringBuffer and allow for
+ * <p>
+ *  这个类将包装一个FastStringBuffer并允许
+ * 
  */
 public class XStringForChars extends XString
 {
@@ -44,6 +60,10 @@ public class XStringForChars extends XString
   /**
    * Construct a XNodeSet object.
    *
+   * <p>
+   *  构造一个XNodeSet对象。
+   * 
+   * 
    * @param val FastStringBuffer object this will wrap, must be non-null.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -62,6 +82,10 @@ public class XStringForChars extends XString
   /**
    * Construct a XNodeSet object.
    *
+   * <p>
+   *  构造一个XNodeSet对象。
+   * 
+   * 
    * @param val String object this will wrap.
    */
   private XStringForChars(String val)
@@ -74,6 +98,10 @@ public class XStringForChars extends XString
   /**
    * Cast result object to a string.
    *
+   * <p>
+   *  将结果对象转换为字符串。
+   * 
+   * 
    * @return The string this wraps or the empty string if null
    */
   public FastStringBuffer fsb()
@@ -84,6 +112,10 @@ public class XStringForChars extends XString
   /**
    * Cast result object to a string.
    *
+   * <p>
+   *  将结果对象转换为字符串。
+   * 
+   * 
    * @return The string this wraps or the empty string if null
    */
   public void appendToFsb(com.sun.org.apache.xml.internal.utils.FastStringBuffer fsb)
@@ -95,6 +127,10 @@ public class XStringForChars extends XString
   /**
    * Tell if this object contains a java String object.
    *
+   * <p>
+   *  告诉这个对象是否包含一个java String对象。
+   * 
+   * 
    * @return true if this XMLString can return a string without creating one.
    */
   public boolean hasString()
@@ -106,6 +142,10 @@ public class XStringForChars extends XString
   /**
    * Cast result object to a string.
    *
+   * <p>
+   *  将结果对象转换为字符串。
+   * 
+   * 
    * @return The string this wraps or the empty string if null
    */
   public String str()
@@ -121,6 +161,10 @@ public class XStringForChars extends XString
    * Since this object is incomplete without the length and the offset, we
    * have to convert to a string when this function is called.
    *
+   * <p>
+   *  由于这个对象是不完整的没有长度和偏移量,我们必须转换为一个字符串,当这个函数被调用。
+   * 
+   * 
    * @return The java String representation of this object.
    */
   public Object object()
@@ -135,6 +179,10 @@ public class XStringForChars extends XString
    * ContentHandler's characters methods may well occur for a single call to
    * this method.
    *
+   * <p>
+   *  直接调用传递的ContentHandler中的字符方法的字符串值。对ContentHandler的字符方法的多次调用很可能发生在对此方法的单个调用中。
+   * 
+   * 
    * @param ch A non-null reference to a ContentHandler.
    *
    * @throws org.xml.sax.SAXException
@@ -150,6 +198,10 @@ public class XStringForChars extends XString
    * comment method on the passed LexicalHandler for the
    * string-value.
    *
+   * <p>
+   *  在传递的LexicalHandler的字符串值上直接调用注释方法。
+   * 
+   * 
    * @param lh A non-null reference to a LexicalHandler.
    *
    * @throws org.xml.sax.SAXException
@@ -163,6 +215,10 @@ public class XStringForChars extends XString
   /**
    * Returns the length of this string.
    *
+   * <p>
+   * 返回此字符串的长度。
+   * 
+   * 
    * @return  the length of the sequence of characters represented by this
    *          object.
    */
@@ -177,6 +233,11 @@ public class XStringForChars extends XString
    * of the sequence is at index <code>0</code>, the next at index
    * <code>1</code>, and so on, as for array indexing.
    *
+   * <p>
+   *  返回指定索引处的字符。索引的范围从<code> 0 </code>到<code> length() -  1 </code>。
+   * 序列的第一个字符位于索引<code> 0 </code>,下一个位于索引<code> 1 </code>,依此类推,就像数组索引一样。
+   * 
+   * 
    * @param      index   the index of the character.
    * @return     the character at the specified index of this string.
    *             The first character is at index <code>0</code>.
@@ -193,6 +254,8 @@ public class XStringForChars extends XString
    * Copies characters from this string into the destination character
    * array.
    *
+   * <p>
+   * 
    * @param      srcBegin   index of the first character in the string
    *                        to copy.
    * @param      srcEnd     index after the last character in the string

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.swing.plaf.ComponentInputMapUIResource;
 /**
  * Button Listener
  *
+ * <p>
+ *  按钮监听器
+ * 
+ * 
  * @author Jeff Dinkins
  * @author Arnaud Weber (keyboard UI support)
  */
@@ -51,6 +56,9 @@ public class BasicButtonListener implements MouseListener, MouseMotionListener,
 
     /**
      * Populates Buttons actions.
+     * <p>
+     *  填充按钮操作。
+     * 
      */
     static void loadActionMap(LazyActionMap map) {
         map.put(new Actions(Actions.PRESS));
@@ -83,6 +91,9 @@ public class BasicButtonListener implements MouseListener, MouseMotionListener,
     /**
      * Register default key actions: pressing space to "click" a
      * button and registring the keyboard mnemonic (if any).
+     * <p>
+     *  注册默认键操作：按空格键以"点击"按钮并注册键盘助记符(如果有)。
+     * 
      */
     public void installKeyboardActions(JComponent c) {
         AbstractButton b = (AbstractButton)c;
@@ -99,6 +110,9 @@ public class BasicButtonListener implements MouseListener, MouseMotionListener,
 
     /**
      * Unregister's default key actions
+     * <p>
+     *  取消注册默认的关键操作
+     * 
      */
     public void uninstallKeyboardActions(JComponent c) {
         SwingUtilities.replaceUIInputMap(c, JComponent.
@@ -110,6 +124,9 @@ public class BasicButtonListener implements MouseListener, MouseMotionListener,
     /**
      * Returns the InputMap for condition <code>condition</code>. Called as
      * part of <code>installKeyboardActions</code>.
+     * <p>
+     *  返回条件<code> condition </code>的InputMap。作为<code> installKeyboardActions </code>的一部分调用。
+     * 
      */
     InputMap getInputMap(int condition, JComponent c) {
         if (condition == JComponent.WHEN_FOCUSED) {
@@ -126,6 +143,9 @@ public class BasicButtonListener implements MouseListener, MouseMotionListener,
     /**
      * Resets the binding for the mnemonic in the WHEN_IN_FOCUSED_WINDOW
      * UI InputMap.
+     * <p>
+     *  在WHEN_IN_FOCUSED_WINDOW UI InputMap中重置助记符的绑定。
+     * 
      */
     void updateMnemonicBinding(AbstractButton b) {
         int m = b.getMnemonic();
@@ -278,6 +298,8 @@ public class BasicButtonListener implements MouseListener, MouseMotionListener,
      * Actions for Buttons. Two types of action are supported:
      * pressed: Moves the button to a pressed state
      * released: Disarms the button.
+     * <p>
+     *  按钮的操作。支持两种类型的操作：按下：将按钮移动到释放的按下状态：解除按钮。
      */
     private static class Actions extends UIAction {
         private static final String PRESS = "pressed";

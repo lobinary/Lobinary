@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xpath.regex;
@@ -27,6 +37,12 @@ import java.text.CharacterIterator;
  *
  * @xerces.internal
  *
+ * <p>
+ *  此类的实例具有在匹配中捕获的范围。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @see RegularExpression#matches(char[], int, int, Match)
  * @see RegularExpression#matches(char[], Match)
  * @see RegularExpression#matches(java.text.CharacterIterator, Match)
@@ -45,12 +61,16 @@ public class Match implements Cloneable {
 
     /**
      * Creates an instance.
+     * <p>
+     *  创建实例。
+     * 
      */
     public Match() {
     }
 
     /**
      *
+     * <p>
      */
     public synchronized Object clone() {
         Match ma = new Match();
@@ -68,6 +88,7 @@ public class Match implements Cloneable {
 
     /**
      *
+     * <p>
      */
     protected void setNumberOfGroups(int n) {
         int oldn = this.nofgroups;
@@ -85,6 +106,7 @@ public class Match implements Cloneable {
 
     /**
      *
+     * <p>
      */
     protected void setSource(CharacterIterator ci) {
         this.ciSource = ci;
@@ -93,6 +115,7 @@ public class Match implements Cloneable {
     }
     /**
      *
+     * <p>
      */
     protected void setSource(String str) {
         this.ciSource = null;
@@ -101,6 +124,7 @@ public class Match implements Cloneable {
     }
     /**
      *
+     * <p>
      */
     protected void setSource(char[] chars) {
         this.ciSource = null;
@@ -110,6 +134,7 @@ public class Match implements Cloneable {
 
     /**
      *
+     * <p>
      */
     protected void setBeginning(int index, int v) {
         this.beginpos[index] = v;
@@ -117,6 +142,7 @@ public class Match implements Cloneable {
 
     /**
      *
+     * <p>
      */
     protected void setEnd(int index, int v) {
         this.endpos[index] = v;
@@ -125,6 +151,9 @@ public class Match implements Cloneable {
     /**
      * Return the number of regular expression groups.
      * This method returns 1 when the regular expression has no capturing-parenthesis.
+     * <p>
+     *  返回正则表达式组的数量。当正则表达式没有捕获圆括号时,此方法返回1。
+     * 
      */
     public int getNumberOfGroups() {
         if (this.nofgroups <= 0)
@@ -135,6 +164,10 @@ public class Match implements Cloneable {
     /**
      * Return a start position in the target text matched to specified regular expression group.
      *
+     * <p>
+     *  返回与指定正则表达式组匹配的目标文本中的起始位置。
+     * 
+     * 
      * @param index Less than <code>getNumberOfGroups()</code>.
      */
     public int getBeginning(int index) {
@@ -149,6 +182,10 @@ public class Match implements Cloneable {
     /**
      * Return an end position in the target text matched to specified regular expression group.
      *
+     * <p>
+     *  返回与指定正则表达式组匹配的目标文本中的结束位置。
+     * 
+     * 
      * @param index Less than <code>getNumberOfGroups()</code>.
      */
     public int getEnd(int index) {
@@ -163,6 +200,9 @@ public class Match implements Cloneable {
     /**
      * Return an substring of the target text matched to specified regular expression group.
      *
+     * <p>
+     *  返回与指定正则表达式组匹配的目标文本的子字符串。
+     * 
      * @param index Less than <code>getNumberOfGroups()</code>.
      */
     public String getCapturedText(int index) {

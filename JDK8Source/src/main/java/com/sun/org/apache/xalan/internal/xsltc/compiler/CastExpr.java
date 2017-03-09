@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: CastExpr.java,v 1.2.4.1 2005/09/12 10:06:35 pvedula Exp $
+ * <p>
+ *  $ Id：CastExpr.java,v 1.2.4.1 2005/09/12 10:06:35 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -40,6 +53,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xml.internal.dtm.Axis;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -50,6 +65,9 @@ final class CastExpr extends Expression {
 
     /**
      * Legal conversions between internal types.
+     * <p>
+     *  内部类型之间的法律转换。
+     * 
      */
     static private MultiHashtable InternalTypeMap = new MultiHashtable();
 
@@ -125,6 +143,9 @@ final class CastExpr extends Expression {
     /**
      * Construct a cast expression and check that the conversion is
      * valid by calling typeCheck().
+     * <p>
+     *  构造一个转换表达式,并通过调用typeCheck()检查转换是否有效。
+     * 
      */
     public CastExpr(Expression left, Type type) throws TypeCheckError {
         _left = left;
@@ -150,6 +171,9 @@ final class CastExpr extends Expression {
     /**
      * Returns true if this expressions contains a call to position(). This is
      * needed for context changes in node steps containing multiple predicates.
+     * <p>
+     *  如果此表达式包含对position()的调用,则返回true。这对于包含多个谓词的节点步骤中的上下文更改是必需的。
+     * 
      */
     public boolean hasPositionCall() {
         return(_left.hasPositionCall());
@@ -168,6 +192,8 @@ final class CastExpr extends Expression {
      * type conversion is legal. Cast expressions are created during
      * type checking, but typeCheck() is usually not called on them.
      * As a result, this method is called from the constructor.
+     * <p>
+     *  键入检查转换表达式等于验证类型转换是否合法。类型检查期间创建铸造表达式,但通常不会调用typeCheck()。因此,从构造函数调用此方法。
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         Type tleft = _left.getType();

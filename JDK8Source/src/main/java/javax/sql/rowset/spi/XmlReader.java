@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,14 @@ import javax.sql.rowset.*;
  * rowset's <code>xmlReader</code> field. When the <code>WebRowSet</code>
  * object's <code>readXml</code> method is invoked, it in turn invokes
  * its XML reader's <code>readXML</code> method.
+ * <p>
+ *  一个专用接口,用于为面向XML的同步提供程序扩展<code> SyncProvider </code>抽象类。
+ * <P>
+ *  提供诸如输出XML流能力的XML数据读取器能力的<code> SyncProvider </code>实现可以实现该接口,以向<code> WebRowSet </code>实现提供标准<code> 
+ * XmlReader </code>对象。
+ * <p>
+ *  通过分配给行集的<code> xmlReader </code>字段,将<code> XmlReader </code>对象注册为<code> WebRowSet </code>的XML读取器。
+ * 当调用<code> WebRowSet </code>对象的<code> readXml </code>方法时,它反过来调用其XML读取器的<code> readXML </code>方法。
  */
 public interface XmlReader extends RowSetReader {
 
@@ -59,6 +68,9 @@ public interface XmlReader extends RowSetReader {
    * include information about the location of the error in the
    * original XML document.
    *
+   * <p>
+   * 
+   * 
    * @param caller the <code>WebRowSet</code> object to be parsed, whose
    *        <code>xmlReader</code> field must contain a reference to
    *        this <code>XmlReader</code> object

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -108,6 +109,32 @@
  *     </li>
  * </ul>
  *
+ * <p>
+ *  <em>功能接口</em>提供lambda表达式和方法引用的目标类型。每个功能接口都有一个抽象方法,称为该函数接口的<em>功能方法</em>,其中lambda表达式的参数和返回类型匹配或调整。
+ * 功能接口可以在多个上下文中提供目标类型,例如赋值上下文,方法调用或转换上下文：。
+ * 
+ *  <pre> {@ code //赋值上下文谓词<String> p = String :: isEmpty;
+ * 
+ *  //方法调用上下文stream.filter(e  - > e.getSize()> 10)...
+ * 
+ *  // Cast context stream.map((ToIntFunction)e  - > e.getSize())...} </pre>
+ * 
+ *  <p>此包中的接口是JDK使用的通用功能接口,也可供用户代码使用。虽然它们没有识别一组完整的函数形状,lambda表达式可能适用于它们,但是它们提供足以覆盖公共需求的函数形状。
+ * 为特定目的提供的其他功能接口(如{@link java.io.FileFilter})在使用它们的包中定义。
+ * 
+ * <p>此包中的接口使用{@link java.lang.FunctionalInterface}注释。
+ * 这个注释不是编译器将接口识别为功能接口的要求,而仅仅是帮助捕获设计意图,并帮助编译器识别意外违反设计意图的帮助。
+ * 
+ *  <p>功能接口通常代表抽象概念,如函数,动作或谓词。在记录功能接口或引用被称为功能接口的变量时,通常直接引用那些抽象概念,例如使用"该函数"而不是"由该对象表示的函数"。
+ * 当API方法被称为以这种方式接受或返回功能接口时,诸如"将所提供的函数应用于...",这被理解为是指对对象的非空的引用实现适当的功能接口,除非明确指定潜在的无效性。
+ * 
+ *  <p>此软件包中的功能接口遵循可扩展命名约定,如下所示：
+ * 
+ * <ul>
+ *  <li>有几个基本的函数形状,包括{@link java.util.function.Function}(从{@code T}到{@code R}的一元函数),{@link java.util.function.Consumer}
+ *  (从{@code T}到{@code void}的一元函数),{@link java.util.function.Predicate}(从{@code T}到{@code boolean}的一元函数)
+ * 和{@link java .util.function.Supplier}(nilary函数到{@code R})。
+ * 
  * @see java.lang.FunctionalInterface
  * @since 1.8
  */

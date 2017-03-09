@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XPathVisitor.java,v 1.1.2.1 2005/08/01 01:30:11 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XPathVisitor.java,v 1.1.2.1 2005/08/01 01:30:11 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal;
 
@@ -49,11 +62,23 @@ import com.sun.org.apache.xpath.internal.patterns.UnionPattern;
  *
  * <p>This class is meant to be a base class that will be derived by concrete classes,
  * and doesn't much except return true for each method.</p>
+ * <p>
+ *  可以将此类的派生类传递给实现XPathVisitable接口的类,以便为XPath的每个组件调用适当的方法。除了可能的其他用途,主要目的是提供一种合理的方法来执行表达式重写。
+ * 
+ *  <p>每个方法都具有<code> boolean visitComponentType(ExpressionOwner owner,ComponentType compType)</code>的形式。
+ *  ExpressionOwner参数是组件的所有者,可用于重置表达式以进行重写。如果方法返回false,则不会遍历子层次结构。</p>。
+ * 
+ * <p>这个类是一个基类,它将通过具体的类派生,并且没有多少,除非每个方法都返回true。</p>
+ * 
  */
 public class XPathVisitor
 {
         /**
          * Visit a LocationPath.
+         * <p>
+         *  访问LocationPath。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param path The LocationPath object.
@@ -66,6 +91,10 @@ public class XPathVisitor
 
         /**
          * Visit a UnionPath.
+         * <p>
+         *  访问UnionPath。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param path The UnionPath object.
@@ -78,6 +107,10 @@ public class XPathVisitor
 
         /**
          * Visit a step within a location path.
+         * <p>
+         *  访问位置路径中的步骤。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param step The Step object.
@@ -93,6 +126,10 @@ public class XPathVisitor
          * proper unique component for predicates, and that the expression will
          * be called also for whatever type Expression is.
          *
+         * <p>
+         *  访问位置路径中的谓词。注意,谓词没有一个适当的唯一组件,并且表达式也将被称为Expression是任何类型。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param pred The predicate object.
@@ -105,6 +142,10 @@ public class XPathVisitor
 
         /**
          * Visit a binary operation.
+         * <p>
+         *  访问二进制操作。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param op The operation object.
@@ -117,6 +158,10 @@ public class XPathVisitor
 
         /**
          * Visit a unary operation.
+         * <p>
+         *  访问一元操作。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param op The operation object.
@@ -129,6 +174,10 @@ public class XPathVisitor
 
         /**
          * Visit a variable reference.
+         * <p>
+         *  访问变量引用。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param var The variable reference object.
@@ -141,6 +190,10 @@ public class XPathVisitor
 
         /**
          * Visit a function.
+         * <p>
+         *  访问函数。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param func The function reference object.
@@ -153,6 +206,10 @@ public class XPathVisitor
 
         /**
          * Visit a match pattern.
+         * <p>
+         *  访问匹配模式。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param pattern The match pattern object.
@@ -165,6 +222,10 @@ public class XPathVisitor
 
         /**
          * Visit a union pattern.
+         * <p>
+         *  访问联合模式。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param pattern The union pattern object.
@@ -177,6 +238,10 @@ public class XPathVisitor
 
         /**
          * Visit a string literal.
+         * <p>
+         *  访问字符串字面量。
+         * 
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param str The string literal object.
@@ -190,6 +255,9 @@ public class XPathVisitor
 
         /**
          * Visit a number literal.
+         * <p>
+         *  访问数字文字。
+         * 
          * @param owner The owner of the expression, to which the expression can
          *              be reset if rewriting takes place.
          * @param num The number literal object.

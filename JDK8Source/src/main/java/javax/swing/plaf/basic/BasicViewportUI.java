@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,9 @@ import java.awt.event.*;
 /**
  * BasicViewport implementation
  *
+ * <p>
+ *  BasicViewport实现
+ * 
  * @author Rich Schiavi
  */
 public class BasicViewportUI extends ViewportUI {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,17 @@ import java.io.IOException;
  * non-zero bit offset causes the remaining bits in the byte to be written
  * as 0s.  The byte-aligned write then starts at the next byte position.
  *
+ * <p>
+ *  可搜索的输出流接口供<code> ImageWriter </code>使用。
+ * 诸如<code> OutputStream </code>和<code> File </code>之类的各种输出目的地以及未来的快速I / O目的地可以由该接口的适当实现来"包装" Image I / 
+ * O API。
+ *  可搜索的输出流接口供<code> ImageWriter </code>使用。
+ * 
+ *  <p>与标准<code> OutputStream </code>不同,ImageOutputStream扩展了其对应的<code> ImageInputStream </code>。
+ * 因此,可以在流被写入时从流中读取。尽管在字节对齐写入之前处理非零位偏移的语义必然不同于在字节对齐之前处理非零位偏移的语义,但是相同的查找和刷新位置适用于读取和写入,对齐读。
+ * 当读取字节时,在读取之前将任何位偏移设置为0;当写入字节时,非零位偏移导致字节中的剩余位被写为0。然后,字节对齐写入从下一个字节位置开始。
+ * 
+ * 
  * @see ImageInputStream
  *
  */
@@ -63,6 +75,15 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * method of {@link ImageOutputStreamImpl ImageOutputStreamImpl}
      * to guarantee this.
      *
+     * <p>
+     *  在当前位置的流中写入一个字节。忽略<code> b </code>的24个高位。
+     * 
+     * <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 实现者可以使用{@link ImageOutputStreamImpl ImageOutputStreamImpl}的{@link ImageOutputStreamImpl#flushBits flushBits}
+     * 方法来保证这一点。
+     * <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param b an <code>int</code> whose lower 8 bits are to be
      * written.
      *
@@ -81,6 +102,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  在当前位置的流中写入一个字节序列。如果<code> b.length </code>为0,则不写入任何内容。
+     * 首先写入字节<code> b [0] </code>,然后写入字节<code> b [1] </code>,依此类推。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param b an array of <code>byte</code>s to be written.
      *
      * @exception NullPointerException if <code>b</code> is
@@ -103,6 +131,16 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * method of {@link ImageOutputStreamImpl ImageOutputStreamImpl}
      * to guarantee this.
      *
+     * <p>
+     *  在当前位置的流中写入一个字节序列。如果<code> len </code>为0,则不写入任何内容。
+     * 首先写入字节<code> b [off] </code>,然后写入字节<code> b [off + 1] </code>,依此类推。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 实现者可以使用{@link ImageOutputStreamImpl ImageOutputStreamImpl}的{@link ImageOutputStreamImpl#flushBits flushBits}
+     * 方法来保证这一点。
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param b an array of <code>byte</code>s to be written.
      * @param off the start offset in the data.
      * @param len the number of <code>byte</code>s to write.
@@ -127,6 +165,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  向流中写入<code> boolean </code>值。
+     * 如果<code> v </code>为真,则写入<code>(byte)1 </code>如果<code> v </code>为false,则写入<code>(byte)0 </code>。
+     * 
+     * <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param v the <code>boolean</code> to be written.
      *
      * @exception IOException if an I/O error occurs.
@@ -144,6 +189,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  将<code> v </code>的8个低位写入流。忽略<code> v </code>的24个高阶位。
+     *  (这意味着<code> writeByte </code>和整数参数<code> write </code>完全一样)。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param v an <code>int</code> containing the byte value to be
      * written.
      *
@@ -174,6 +226,22 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  将<code> v </code>的16个低位写入流。忽略<code> v </code>的高16位。如果流使用网络字节顺序,则按顺序写入的字节将是：
+     * 
+     * <pre>
+     *  (字节)((v> 8)&amp; 0xff)(字节)(v&amp; 0xff)
+     * </pre>
+     * 
+     *  否则,写入的字节将是：
+     * 
+     * <pre>
+     *  (字节)(v&amp; 0xff)(字节)((v>&gt; 8)&amp; 0xff)
+     * </pre>
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param v an <code>int</code> containing the short value to be
      * written.
      *
@@ -184,6 +252,10 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
     /**
      * This method is a synonym for {@link #writeShort writeShort}.
      *
+     * <p>
+     *  此方法是{@link #writeShort writeShort}的同义词。
+     * 
+     * 
      * @param v an <code>int</code> containing the char (unsigned
      * short) value to be written.
      *
@@ -219,6 +291,22 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  将32位<code> v </code>写入流。如果流使用网络字节顺序,则按顺序写入的字节将是：
+     * 
+     * <pre>
+     *  (字节)((v&gt;&gt; 24)&amp; 0xff)(字节)((v> 16)&amp; 0xff) )(v&amp; 0xff)
+     * </pre>
+     * 
+     *  Otheriwse,写入的字节将是：
+     * 
+     * <pre>
+     * (字节)(v&amp; 0xff)(字节)((v> 8)&amp; 0xff)(字节)((v> 16)&amp; 0xff) ; 24)&amp; 0xff)
+     * </pre>
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param v an <code>int</code> containing the value to be
      * written.
      *
@@ -260,6 +348,24 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  将64位的<code> v </code>写入流。如果流使用网络字节顺序,则按顺序写入的字节将是：
+     * 
+     * <pre>
+     *  (字节)((v> 56)&amp; 0xff)(字节)((v> 48)&amp; 0xff) )((v&gt;&gt; 32)&amp; 0xff)(字节)((v> 24)&amp; 0xff) (v
+     * >&gt; 8)&amp; 0xff)(字节)(v&amp; 0xff)。
+     * </pre>
+     * 
+     *  否则,写入的字节将是：
+     * 
+     * <pre>
+     *  (字节)(v&amp; 0xff)(字节)((v> 8)&amp; 0xff)(字节)((v> 16)&amp; 0xff) ; 24)&amp; 0xff)(字节)((v> 32)&amp; 0xf
+     * f)(字节)((v> 40)&amp; 0xff) )&amp; 0xff)(字节)((v>&gt; 56)&amp; 0xff)。
+     * </pre>
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param v a <code>long</code> containing the value to be
      * written.
      *
@@ -280,6 +386,15 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     * 将一个由四个字节组成的<code> float </code>值写入输出流。
+     * 它这样做,好像它首先按照<code> Float.floatToIntBits </code>方法的方式将此<code> float </code>值转换为<code> int </code>值与<code>
+     *  writeInt </code>方法的方式完全相同。
+     * 将一个由四个字节组成的<code> float </code>值写入输出流。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param v a <code>float</code> containing the value to be
      * written.
      *
@@ -301,6 +416,15 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  将一个由四个字节组成的<code> double </code>值写入输出流。
+     * 它这样做,好像它首先以<code> Double.doubleToLongBits </code>方法的方式将此<code> double </code>值转换为<code> long </code>,
+     * 然后将long值与<code> writeLong </code>方法的方式完全相同。
+     *  将一个由四个字节组成的<code> double </code>值写入输出流。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param v a <code>double</code> containing the value to be
      * written.
      *
@@ -327,6 +451,17 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  将字符串写入输出流。对于字符串<code> s </code>中的每个字符,按顺序,将一个字节写入输出流。
+     * 如果<code> s </code>是<code> null </code>,则抛出<code> NullPointerException </code>。
+     * 
+     * <p>如果<code> s.length </code>为零,则不会写入任何字节。
+     * 否则,首先写入字符<code> s [0] </code>,然后写入<code> s [1] </code>,依此类推;所写的最后一个字符是<code> s [s.length-1] </code>。
+     * 对于每个字符,以<code> writeByte </code>方法的方式写入一个字节,低字节。字符串中每个字符的高8位将被忽略。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param s a <code>String</code> containing the value to be
      * written.
      *
@@ -355,6 +490,16 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  将字符串写入输出流。对于字符串<code> s </code>中的每个字符,按顺序,将两个字节写入输出流,根据当前字节顺序设置排序。如果使用网络字节顺序,则首先写入高位字节;否则顺序相反。
+     * 如果<code> s </code>是<code> null </code>,则抛出<code> NullPointerException </code>。
+     * 
+     *  <p>如果<code> s.length </code>为零,则不会写入任何字节。
+     * 否则,首先写入字符<code> s [0] </code>,然后写入<code> s [1] </code>,依此类推;所写的最后一个字符是<code> s [s.length-1] </code>。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param s a <code>String</code> containing the value to be
      * written.
      *
@@ -424,6 +569,38 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * because  the modified UTF-8 used here is incompatible with
      * standard UTF-8.
      *
+     * <p>
+     * 按网络字节顺序将两个字节的长度信息写入输出流,然后是<a href="../../../java/io/DataInput.html#modified-utf-8">修改的UTF- 8 </a>表示字符
+     * 串<code> s </code>中的每个字符。
+     * 如果<code> s </code>是<code> null </code>,则抛出<code> NullPointerException </code>。
+     * 字符串<code> s </code>中的每个字符都将转换为一个包含一个,两个或三个字节的组,具体取决于字符的值。
+     * 
+     *  <p>如果字符<code> c </code>在<code> \ u0001 </code>到<code> \ u007f </code>的范围内,
+     * 
+     *  <p> <pre>(byte)c
+     * </pre>
+     * 
+     *  <p>如果字符<code> c </code>为<code> \ u0000 </code>或位于<code> \ u0080 </code>到<code> \ u07ff </code>它由两个字节
+     * 表示,以所示的顺序写入：。
+     * 
+     *  <p> <pre> <code>(byte)(0xc0 |(0x1f&amp;(c> 6)))(byte)(0x80 |(0x3f&amp; c))</code>
+     * 
+     *  <p>如果字符<code> c </code>在<code> \ u0800 </code>到<code> uffff </code>的范围内,则由三个字节表示,订单显示：
+     * 
+     *  <p> <pre> <code>(byte)(0xe0 |(0x0f&amp;(c> 12)))(byte)(0x80 |(0x3f&amp;(c> 6)))字节)(0x80 |(0x3f&amp; 
+     * c))</code> </pre>。
+     * 
+     * <p>首先,计算表示<code> s </code>的所有字符所需的总字节数。
+     * 如果此数字大于<code> 65535 </code>,则会抛出<code> UTFDataFormatException </code>。
+     * 否则,该长度以<code> writeShort </code>方法的方式写入输出流;在此之后,写入字符串<code> s </code>中的每个字符的一个,两个或三个字节的表示。
+     * 
+     *  <p>当前字节顺序设置被忽略。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     *  <p> <strong>请注意</strong>：此方法不应用于实施使用标准UTF-8的图像格式,因为此处使用的修改的UTF-8与标准UTF-8不兼容。
+     * 
+     * 
      * @param s a <code>String</code> containing the value to be
      * written.
      *
@@ -448,6 +625,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  在当前位置向流中写入短序列。如果<code> len </code>为0,则不写入任何内容。
+     * 首先写入短<code> s [off] </code>,然后写短<code> s [off + 1] </code>,等等。流的字节顺序用于确定写入各个字节的顺序。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param s an array of <code>short</code>s to be written.
      * @param off the start offset in the data.
      * @param len the number of <code>short</code>s to write.
@@ -474,6 +658,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     * 在当前位置的流中写入一个字符序列。如果<code> len </code>为0,则不写入任何内容。
+     * 首先写入char <code> c [off] </code>,然后输入char <code> c [off + 1] </code>,等等。流的字节顺序用于确定写入各个字节的顺序。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param c an array of <code>char</code>s to be written.
      * @param off the start offset in the data.
      * @param len the number of <code>char</code>s to write.
@@ -500,6 +691,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  在当前位置的流中写入一个int序列。如果<code> len </code>为0,则不写入任何内容。
+     * 首先写入int <code> i [off] </code>,然后是int <code> i [off + 1] </code>,依此类推。流的字节顺序用于确定写入各个字节的顺序。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param i an array of <code>int</code>s to be written.
      * @param off the start offset in the data.
      * @param len the number of <code>int</code>s to write.
@@ -526,6 +724,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  在当前位置的流中写入一个longs序列。如果<code> len </code>为0,则不写入任何内容。
+     * 首先写入长<code> l [off] </code>,然后写长<code> l [off + 1] </code>,等等。流的字节顺序用于确定写入各个字节的顺序。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param l an array of <code>long</code>s to be written.
      * @param off the start offset in the data.
      * @param len the number of <code>long</code>s to write.
@@ -552,6 +757,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     * 在当前位置的流中写入一系列浮点数。如果<code> len </code>为0,则不写入任何内容。
+     * 首先写入浮动<code> f [off] </code>,然后浮动<code> f [off + 1] </code>,依此类推。流的字节顺序用于确定写入各个字节的顺序。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param f an array of <code>float</code>s to be written.
      * @param off the start offset in the data.
      * @param len the number of <code>float</code>s to write.
@@ -578,6 +790,13 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * and written out first.  The bit offset will be 0 after the
      * write.
      *
+     * <p>
+     *  在当前位置的流中写入一个双精度序列。如果<code> len </code>为0,则不写入任何内容。
+     * 双写<code> d [off] </code>先写,然后双写<code> d [off + 1] </code>,依此类推。流的字节顺序用于确定写入各个字节的顺序。
+     * 
+     *  <p>如果流中的位偏移量不为零,则当前字节的剩余部分将用0填充并首先写入。写入后位偏移为0。
+     * 
+     * 
      * @param d an array of <code>doubles</code>s to be written.
      * @param off the start offset in the data.
      * @param len the number of <code>double</code>s to write.
@@ -603,6 +822,12 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * at the time the byte is flushed to the destination, those
      * bits will be set to 0 automatically.
      *
+     * <p>
+     *  将由参数的最低有效位给出的单个位写入当前字节位置内当前位偏移处的流。参数的高31位将被忽略。给定位替换该位置处的前一位。比特偏移被提前一并减模8。
+     * 
+     *  <p>如果特定字节的任何位在字节刷新到目的地时从未设置过,那么这些位将自动设置为0。
+     * 
+     * 
      * @param bit an <code>int</code> whose least significant bit
      * is to be written to the stream.
      *
@@ -631,6 +856,15 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * at the time the byte is flushed to the destination, those
      * bits will be set to 0 automatically.
      *
+     * <p>
+     * 以从左到右的顺序写入由<code> bits </code>参数的<code> numBits </code>个最低有效位给出的位序列到当前位在当前位偏移处的流中字节位置。
+     * 参数的上部<code> 64  -  numBits </code>位将被忽略。
+     * 位偏移提前<code> numBits </code>并减少模8.注意,位偏移量0始终指示字节的最高有效位,并且位的字节按顺序写出,因为它们被遇到。因此,位写入总是以网络字节顺序有效。
+     * 实际流字节顺序设置被忽略。
+     * 
+     *  <p>位数据可能会无限期地累积在存储器中,直到调用<code> flushBefore </code>。此时,将写入冲刷位置之前的所有位数据。
+     * 
+     * 
      * @param bits a <code>long</code> containing the bits to be
      * written, starting with the bit in position <code>numBits -
      * 1</code> down to the least significant bit.
@@ -650,6 +884,10 @@ public interface ImageOutputStream extends ImageInputStream, DataOutput {
      * of the stream will result in an
      * <code>IndexOutOfBoundsException</code>.
      *
+     * <p>
+     *  <p>如果特定字节的任何位在字节刷新到目的地时从未设置过,那么这些位将自动设置为0。
+     * 
+     * 
      * @param pos a <code>long</code> containing the length of the
      * stream prefix that may be flushed to the destination.
      *

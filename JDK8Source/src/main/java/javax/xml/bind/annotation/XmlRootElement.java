@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -154,6 +155,60 @@ import static java.lang.annotation.ElementType.TYPE;
  *     &lt;/xs:complexType>
  * </pre>
  *
+ * <p>
+ *  将类或枚举类型映射到XML元素。
+ * 
+ *  <p> <b>使用</b> </p>
+ * <p>
+ *  @XmlRootElement注释可以与以下程序元素一起使用：
+ * <ul>
+ *  <li>顶级类</li> <li>枚举类型</li>
+ * </ul>
+ * 
+ *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
+ * 
+ * <p>
+ *  当顶级类或枚举类型用@XmlRootElement注释注释时,其值在XML文档中表示为XML元素。
+ * 
+ *  <p>此注释可用于以下注释：{@link XmlType},{@link XmlEnum},{@link XmlAccessorType},{@link XmlAccessorOrder}。
+ * <p>
+ * 
+ * <p>
+ *  <b>示例1：</b>将元素与XML模式类型相关联
+ * <pre>
+ *  //示例：代码片段@XmlRootElement类Point {int x; int y; Point(int _x,int _y){x = _x; y = _y;}}
+ * </pre>
+ * 
+ * <pre>
+ *  //示例：对应XML输出的代码片段marshal(new Point(3,5),System.out);
+ * </pre>
+ * 
+ * <pre>
+ * &lt;!-- Example: XML output -->
+ * &lt;point>
+ *  &lt; x> 3 </x>&lt; y> 5 </y>
+ * &lt;/point>
+ * </pre>
+ * 
+ *  注释导致在模式中生成全局元素声明。全局元素声明与类映射到的XML模式类型相关联。
+ * 
+ * <pre>
+ * &lt;!-- Example: XML schema definition -->
+ * &lt;xs:element name="point" type="point"/>
+ * &lt;xs:complexType name="point">
+ * &lt;xs:sequence>
+ * &lt;xs:element name="x" type="xs:int"/>
+ * &lt;xs:element name="y" type="xs:int"/>
+ * &lt;/xs:sequence>
+ * &lt;/xs:complexType>
+ * </pre>
+ * 
+ * <p>
+ * 
+ *  <b>示例2：类型继承的正交性</b>
+ * 
+ * <p>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since JAXB2.0
  */
@@ -167,6 +222,33 @@ public @interface XmlRootElement {
      * from the package of the class ( {@link XmlSchema} ). If the
      * package is unnamed, then the XML namespace is the default empty
      * namespace.
+     * <p>
+     *  在类型上注释的元素声明不会被其派生类型继承。以下示例显示此示例。
+     * <pre>
+     * //示例：代码片段@XmlRootElement类Point3D extends Point {int z; Point3D(int _x,int _y,int _z){super(_x,_y); z = _z;}
+     * }。
+     * 
+     *  //示例：对应XML输出的代码片段* marshal(new Point3D(3,5,0),System.out);
+     * 
+     * &lt;!-- Example: XML output -->
+     * &lt;!-- The element name is point3D not point -->
+     * &lt;point3D>
+     * &lt;x>3&lt;/x>
+     * &lt;y>5&lt;/y>
+     * &lt;z>0&lt;/z>
+     * &lt;/point3D>
+     * 
+     * &lt;!-- Example: XML schema definition -->
+     * &lt;xs:element name="point3D" type="point3D"/>
+     * &lt;xs:complexType name="point3D">
+     * &lt;xs:complexContent>
+     * &lt;xs:extension base="point">
+     * &lt;xs:sequence>
+     * &lt;xs:element name="z" type="xs:int"/>
+     * &lt;/xs:sequence>
+     * &lt;/xs:extension>
+     * &lt;/xs:complexContent>
+     * &lt;/xs:complexType>
      */
     String namespace() default "##default";
 
@@ -176,6 +258,20 @@ public @interface XmlRootElement {
      * If the value is "##default", then the name is derived from the
      * class name.
      *
+     * <p>
+     * </pre>
+     * 
+     *  <b>示例3：</b>将全局元素与类映射到的XML模式类型相关联。
+     * <pre>
+     *  //示例：代码片段@XmlRootElement(name ="PriceElement")public class USPrice {@XmlElement public java.math.BigDecimal price; }
+     * }。
+     * 
+     * &lt;!-- Example: XML schema definition -->
+     * &lt;xs:element name="PriceElement" type="USPrice"/>
+     * &lt;xs:complexType name="USPrice">
+     * &lt;xs:sequence>
+     * &lt;xs:element name="price" type="xs:decimal"/>
+     * &lt;/sequence>
      */
     String name() default "##default";
 

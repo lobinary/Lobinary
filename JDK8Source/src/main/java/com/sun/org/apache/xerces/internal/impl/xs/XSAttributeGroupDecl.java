@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -36,6 +46,12 @@ import com.sun.org.apache.xerces.internal.xs.XSWildcard;
  *
  * @xerces.internal
  *
+ * <p>
+ *  属性组声明模式组件的XML表示形式是一个全局<attributeGroup>元素信息项
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  * @author Rahul Srivastava, Sun Microsystems Inc.
  *
@@ -166,6 +182,13 @@ public class XSAttributeGroupDecl implements XSAttributeGroupDefinition {
      *
      * REVISIT: is there a better way of returning the appropriate information for the error?
      *
+     * <p>
+     *  检查此组中的属性是否有效地限制来自基本组的属性。如果发现错误,则返回Object []。它包含描述错误的错误消息的参数。数组中的最后一个元素(索引为arr.length  -  1)是错误代码。
+     * 如果没有错误,则返回null。
+     * 
+     *  REVISIT：有没有更好的方法返回错误的适当信息?
+     * 
+     * 
      * @param typeName the name of the type containing this attribute group, used for error reporting purposes
      * @param baseGroup the XSAttributeGroupDecl that is the base we are checking against
      */
@@ -335,6 +358,9 @@ public class XSAttributeGroupDecl implements XSAttributeGroupDefinition {
 
     /**
      * Get the type of the object, i.e ELEMENT_DECLARATION.
+     * <p>
+     *  获取对象的类型,即ELEMENT_DECLARATION。
+     * 
      */
     public short getType() {
         return XSConstants.ATTRIBUTE_GROUP;
@@ -343,6 +369,9 @@ public class XSAttributeGroupDecl implements XSAttributeGroupDefinition {
     /**
      * The <code>name</code> of this <code>XSObject</code> depending on the
      * <code>XSObject</code> type.
+     * <p>
+     *  取决于<code> XSObject </code>类型的<code> XSObject </code>的<code> name </code>
+     * 
      */
     public String getName() {
         return fName;
@@ -352,6 +381,9 @@ public class XSAttributeGroupDecl implements XSAttributeGroupDefinition {
      * The namespace URI of this node, or <code>null</code> if it is
      * unspecified.  defines how a namespace URI is attached to schema
      * components.
+     * <p>
+     * 此节点的名称空间URI,或<code> null </code>(如果未指定)。定义命名空间URI如何附加到模式组件。
+     * 
      */
     public String getNamespace() {
         return fTargetNamespace;
@@ -359,6 +391,9 @@ public class XSAttributeGroupDecl implements XSAttributeGroupDefinition {
 
     /**
      * {attribute uses} A set of attribute uses.
+     * <p>
+     *  {attribute uses}一组属性使用。
+     * 
      */
     public XSObjectList getAttributeUses() {
         if (fAttrUses == null){
@@ -369,6 +404,9 @@ public class XSAttributeGroupDecl implements XSAttributeGroupDefinition {
 
     /**
      * {attribute wildcard} Optional. A wildcard.
+     * <p>
+     *  {attribute wildcard}可选。通配符。
+     * 
      */
     public XSWildcard getAttributeWildcard() {
         return fAttributeWC;
@@ -376,6 +414,9 @@ public class XSAttributeGroupDecl implements XSAttributeGroupDefinition {
 
     /**
      * Optional. Annotation.
+     * <p>
+     *  可选的。注解。
+     * 
      */
     public XSAnnotation getAnnotation() {
         return (fAnnotations != null) ? (XSAnnotation) fAnnotations.item(0) : null;
@@ -383,12 +424,17 @@ public class XSAttributeGroupDecl implements XSAttributeGroupDefinition {
 
     /**
      * Optional. Annotations.
+     * <p>
+     *  可选的。注释。
+     * 
      */
     public XSObjectList getAnnotations() {
         return (fAnnotations != null) ? fAnnotations : XSObjectListImpl.EMPTY_LIST;
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.apache.xerces.xs.XSObject#getNamespaceItem()
      */
     public XSNamespaceItem getNamespaceItem() {

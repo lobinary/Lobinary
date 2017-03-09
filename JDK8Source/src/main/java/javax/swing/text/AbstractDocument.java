@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -94,6 +95,29 @@ import sun.swing.SwingUtilities2;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  文档界面的实现作为实现各种文档的基础。在这个级别有很少的政策,所以使用的难度也相应增加。
+ * <p>
+ *  此类实现文档的锁定机制。它允许多个读取器或一个写入器,并且写入器必须等待,直到文档的所有观察者在开始对文档的另一个突变之前已经通知了先前的改变。
+ * 使用<code> render </code>方法获取并释放读取锁定。写锁定通过突变文档的方法获取,并且在方法调用期间保持。
+ * 通知在产生突变的线程上完成,并且线程在通知期间具有对文档的完全读取访问,但是其他读取器被保持直到通知完成。通知是一个beans事件通知,它不允许任何进一步的突变,直到所有的监听器都被通知。
+ * <p>
+ * 从这个类继承的任何模型,以及一个具有从BasicTextUI派生的外观实现的文本组件一起使用的模型可以安全地异步更新,因为如果文档的类型为<代码> AbstractDocument </code>。
+ * 锁定假定独立线程将仅从DocumentListener方法访问View层次结构,并且每次只有一个活动线程处于活动状态。
+ * <p>
+ *  如果需要并发支持,还有以下附加的含义。任何DocumentListener实现和任何UndoListener实现的代码路径必须是threadsafe,并且如果试图从死锁中安全,不能访问组件锁。
+ *  JComponent上的<code> repaint </code>和<code> revalidate </code>方法是安全的。
+ * <p>
+ * AbstractDocument在文档的末尾建模一个隐含的断点。除此之外,这允许您在最后一个字符之后放置插入符号。作为其结果,<code> getLength </code>返回比内容的长度小一个。
+ * 如果您创建自己的内容,请确保并初始化它以具有其他字符。参考StringContent和GapContent举个例子。
+ * 另一个暗示是,对隐式结束字符建模的元素将具有endOffset ==(getLength()+ 1)。
+ * 例如,在DefaultStyledDocument <code> getParagraphElement(getLength())。
+ * getEndOffset()== getLength()+ 1 </code>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public abstract class AbstractDocument implements Document, Serializable {
@@ -102,6 +126,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Constructs a new <code>AbstractDocument</code>, wrapped around some
      * specified content storage mechanism.
      *
+     * <p>
+     *  构造一个新的<code> AbstractDocument </code>,包裹在一些指定的内容存储机制。
+     * 
+     * 
      * @param data the content
      */
     protected AbstractDocument(Content data) {
@@ -112,6 +140,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Constructs a new <code>AbstractDocument</code>, wrapped around some
      * specified content storage mechanism.
      *
+     * <p>
+     *  构造一个新的<code> AbstractDocument </code>,包裹在一些指定的内容存储机制。
+     * 
+     * 
      * @param data the content
      * @param context the attribute context
      */
@@ -157,6 +189,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * can use the <code>documentProperties</code> dictionary
      * to annotate the document with document-wide properties.
      *
+     * <p>
+     *  支持管理一组属性。调用者可以使用<code> documentProperties </code>字典来用文档范围的属性注释文档。
+     * 
+     * 
      * @return a non-<code>null</code> <code>Dictionary</code>
      * @see #setDocumentProperties
      */
@@ -170,6 +206,10 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Replaces the document properties dictionary for this document.
      *
+     * <p>
+     *  替换此文档的文档属性字典。
+     * 
+     * 
      * @param x the new dictionary
      * @see #getDocumentProperties
      */
@@ -183,6 +223,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * is lazily created using the parameters passed into
      * the fire method.
      *
+     * <p>
+     * 通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @param e the event
      * @see EventListenerList
      */
@@ -212,6 +256,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * is lazily created using the parameters passed into
      * the fire method.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @param e the event
      * @see EventListenerList
      */
@@ -241,6 +289,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * is lazily created using the parameters passed into
      * the fire method.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @param e the event
      * @see EventListenerList
      */
@@ -270,6 +322,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * is lazily created using the parameters passed into
      * the fire method.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @param e the event
      * @see EventListenerList
      */
@@ -307,6 +363,20 @@ public abstract class AbstractDocument implements Document, Serializable {
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此文档上注册为<code> <em> Foo </em>侦听器</code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * 
+     * <p>
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询文档<code> d </code>的文档侦听器：。
+     * 
+     *  <pre> DocumentListener [] mls =(DocumentListener [])(d.getListeners(DocumentListener.class)); </pre>
+     * 。
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -331,6 +401,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Gets the asynchronous loading priority.  If less than zero,
      * the document should not be loaded asynchronously.
      *
+     * <p>
+     *  获取异步加载优先级。如果小于零,则不应异步加载文档。
+     * 
+     * 
      * @return the asynchronous loading priority, or <code>-1</code>
      *   if the document should not be loaded asynchronously
      */
@@ -345,6 +419,10 @@ public abstract class AbstractDocument implements Document, Serializable {
 
     /**
      * Sets the asynchronous loading priority.
+     * <p>
+     *  设置异步加载优先级。
+     * 
+     * 
      * @param p the new asynchronous loading priority; a value
      *   less than zero indicates that the document should not be
      *   loaded asynchronously
@@ -360,6 +438,12 @@ public abstract class AbstractDocument implements Document, Serializable {
      * allow inserting/deleting of the text.  A <code>null</code> value
      * indicates that no filtering will occur.
      *
+     * <p>
+     * 设置<code> DocumentFilter </code>。
+     *  <code> DocumentFilter </code>通过<code> insert </code>和<code> remove </code>来有条件地允许插入/删除文本。
+     *  <code> null </code>值表示不会进行过滤。
+     * 
+     * 
      * @param filter the <code>DocumentFilter</code> used to constrain text
      * @see #getDocumentFilter
      * @since 1.4
@@ -373,6 +457,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * filtering of insertion/removal. A <code>null</code> return value
      * implies no filtering is to occur.
      *
+     * <p>
+     *  返回负责过滤插入/删除的<code> DocumentFilter </code>。 <code> null </code>返回值意味着不会发生过滤。
+     * 
+     * 
      * @since 1.4
      * @see #setDocumentFilter
      * @return the DocumentFilter
@@ -411,6 +499,20 @@ public abstract class AbstractDocument implements Document, Serializable {
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  这允许在存在货币的情况下安全地呈现模型,如果模型支持异步更新。给定的runnable将以允许其在执行可运行的时候安全地读取模型而没有改变的方式执行。可运行的本身可能不会</em>进行任何突变。
+     * <p>
+     *  这被实现为在运行时间执行期间获取读锁定。可能有多个运行同时执行,并且当有活动的渲染可运行时,所有写入程序将被阻塞。如果runnable抛出异常,它的锁将被安全释放。
+     * 没有针对从不退出的可运行文件的保护,这将有效地将文档锁定以使其生存。
+     * <p>
+     *  如果给定的runnable尝试在此实现中进行任何突变,将发生死锁。没有跟踪单个渲染线程来启用检测这种情况,但是一个子类可能会产生跟踪它们并引发错误的开销。
+     * <p>
+     * 这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     * 这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param r the renderer to execute
      */
     public void render(Runnable r) {
@@ -426,6 +528,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Returns the length of the data.  This is the number of
      * characters of content that represents the users data.
      *
+     * <p>
+     *  返回数据的长度。这是表示用户数据的内容的字符数。
+     * 
+     * 
      * @return the length &gt;= 0
      * @see Document#getLength
      */
@@ -436,6 +542,10 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Adds a document listener for notification of any changes.
      *
+     * <p>
+     *  添加文档侦听器以通知任何更改。
+     * 
+     * 
      * @param listener the <code>DocumentListener</code> to add
      * @see Document#addDocumentListener
      */
@@ -446,6 +556,10 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Removes a document listener.
      *
+     * <p>
+     *  删除文档侦听器。
+     * 
+     * 
      * @param listener the <code>DocumentListener</code> to remove
      * @see Document#removeDocumentListener
      */
@@ -457,6 +571,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Returns an array of all the document listeners
      * registered on this document.
      *
+     * <p>
+     *  返回在此文档上注册的所有文档侦听器的数组。
+     * 
+     * 
      * @return all of this document's <code>DocumentListener</code>s
      *         or an empty array if no document listeners are
      *         currently registered
@@ -475,6 +593,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * will cause the appropriate DocumentEvent to be fired to keep
      * the view(s) in sync with the model.
      *
+     * <p>
+     *  添加一个用于通知任何更改的undo侦听器。在<code> UndoableEdit </code>上执行的撤消/重做操作将导致相应的DocumentEvent被触发,以保持视图与模型同步。
+     * 
+     * 
      * @param listener the <code>UndoableEditListener</code> to add
      * @see Document#addUndoableEditListener
      */
@@ -485,6 +607,10 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Removes an undo listener.
      *
+     * <p>
+     *  删除撤消侦听器。
+     * 
+     * 
      * @param listener the <code>UndoableEditListener</code> to remove
      * @see Document#removeDocumentListener
      */
@@ -496,6 +622,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Returns an array of all the undoable edit listeners
      * registered on this document.
      *
+     * <p>
+     *  返回在此文档上注册的所有可撤销的编辑侦听器的数组。
+     * 
+     * 
      * @return all of this document's <code>UndoableEditListener</code>s
      *         or an empty array if no undoable edit listeners are
      *         currently registered
@@ -516,6 +646,13 @@ public abstract class AbstractDocument implements Document, Serializable {
      * getDocumentProperties().get(key);
      * </pre>
      *
+     * <p>
+     *  用于查找属性值的方便方法。它等效于：
+     * <pre>
+     *  getDocumentProperties()。get(key);
+     * </pre>
+     * 
+     * 
      * @param key the non-<code>null</code> property key
      * @return the value of this property or <code>null</code>
      * @see #getDocumentProperties
@@ -534,6 +671,14 @@ public abstract class AbstractDocument implements Document, Serializable {
      * If <code>value</code> is <code>null</code> this method will
      * remove the property.
      *
+     * <p>
+     *  一种用于存储属性值的方便方法。它等效于：
+     * <pre>
+     *  getDocumentProperties()。put(key,value);
+     * </pre>
+     *  如果<code> value </code>为<code> null </code>,此方法将删除该属性。
+     * 
+     * 
      * @param key the non-<code>null</code> key
      * @param value the property value
      * @see #getDocumentProperties
@@ -572,6 +717,15 @@ public abstract class AbstractDocument implements Document, Serializable {
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  从文档中删除一些内容。删除内容会导致在发生实际更改时保持写锁定。通知观察者调用此方法的线程上的更改。
+     * <p>
+     * 这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     * 这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param offs the starting offset &gt;= 0
      * @param len the number of characters to remove &gt;= 0
      * @exception BadLocationException  the given remove position is not a valid
@@ -597,6 +751,9 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Performs the actual work of the remove. It is assumed the caller
      * will have obtained a <code>writeLock</code> before invoking this.
+     * <p>
+     *  执行删除的实际工作。假设调用者在调用之前已经获得了一个<code> writeLock </code>。
+     * 
      */
     void handleRemove(int offs, int len) throws BadLocationException {
         if (len > 0) {
@@ -636,6 +793,11 @@ public abstract class AbstractDocument implements Document, Serializable {
      * followed by an insert, others may treat the replace as one atomic
      * operation.
      *
+     * <p>
+     *  将文本区域从<code> offset </code>删除为<code> offset + length </code>,并将其替换为<code> text </code>。
+     * 它取决于如何实现它,一些实现可以将其看作两个不同的操作：一个删除后面插入,另一些可以将替换看作一个原子操作。
+     * 
+     * 
      * @param offset index of child element
      * @param length length of text to delete, may be 0 indicating don't
      *               delete anything
@@ -685,6 +847,15 @@ public abstract class AbstractDocument implements Document, Serializable {
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  在文档中插入一些内容。插入内容会导致在发生实际更改时保持写锁定,然后通知抓取写锁定的线程上的观察者。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param offs the starting offset &gt;= 0
      * @param str the string to insert; does nothing with null/empty strings
      * @param a the attributes for the inserted content
@@ -714,6 +885,9 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Performs the actual work of inserting the text; it is assumed the
      * caller has obtained a write lock before invoking this.
+     * <p>
+     *  执行插入文本的实际工作;假定调用者在调用之前已获得写锁定。
+     * 
      */
     private void handleInsertString(int offs, String str, AttributeSet a)
             throws BadLocationException {
@@ -756,6 +930,10 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Gets a sequence of text from the document.
      *
+     * <p>
+     *  获取文档中的一系列文本。
+     * 
+     * 
      * @param offset the starting offset &gt;= 0
      * @param length the number of characters to retrieve &gt;= 0
      * @return the text
@@ -797,6 +975,19 @@ public abstract class AbstractDocument implements Document, Serializable {
      * &nbsp; }
      * </pre>
      *
+     * <p>
+     *  获取文档给定部分中包含的文本。
+     * <p>
+     * 如果txt参数的partialReturn属性为false,则段中返回的数据将是请求的整个长度,根据数据的存储方式,可能或可能不是副本。
+     * 如果partialReturn属性为true,则只返回无需创建副本即可返回的文本量。使用部分返回将为正在扫描文档的大部分的情况提供更好的性能。以下是使用部分返回访问整个文档的示例：。
+     * 
+     * <pre>
+     *  &nbsp; int nleft = doc.getDocumentLength(); &nbsp; segment text = new Segment(); &nbsp; int offs = 0
+     * ; &nbsp; text.setPartialReturn(true); &nbsp; while(nleft> 0){&nbsp; doc.getText(offs,nleft,text); &nbsp; // do something with text&nbsp; nleft  -  = text.count; &nbsp; offs + = text.count; &nbsp; }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param offset the starting offset &gt;= 0
      * @param length the number of characters to retrieve &gt;= 0
      * @param txt the Segment object to retrieve the text into
@@ -819,6 +1010,15 @@ public abstract class AbstractDocument implements Document, Serializable {
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  返回将随文档更改跟踪更改的位置。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param offs the position in the model &gt;= 0
      * @return the position
      * @exception BadLocationException  if the given position does not
@@ -834,6 +1034,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * position returned can be counted on to track change and stay
      * located at the beginning of the document.
      *
+     * <p>
+     *  返回表示文档开头的位置。返回的位置可以计入跟踪更改并保留位于文档开头。
+     * 
+     * 
      * @return the position
      */
     public final Position getStartPosition() {
@@ -851,6 +1055,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * position returned can be counted on to track change and stay
      * located at the end of the document.
      *
+     * <p>
+     *  返回表示文档结尾的位置。返回的位置可以计入跟踪更改并保留位于文档末尾。
+     * 
+     * 
      * @return the position
      */
     public final Position getEndPosition() {
@@ -868,6 +1076,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * will only be one so the default implementation
      * is to return the default root element.
      *
+     * <p>
+     * 获取定义的所有根元素。通常,只有一个,所以默认实现是返回默认的根元素。
+     * 
+     * 
      * @return the root element
      */
     public Element[] getRootElements() {
@@ -882,6 +1094,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * unless some other mechanism for assigning views to element
      * structures is provided.
      *
+     * <p>
+     *  返回视图应该基于的根元素,除非提供了用于将视图分配给元素结构的一些其他机制。
+     * 
+     * 
      * @return the root element
      * @see Document#getDefaultRootElement
      */
@@ -892,6 +1108,9 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Returns the <code>FilterBypass</code>. This will create one if one
      * does not yet exist.
+     * <p>
+     *  返回<code> FilterBypass </code>。如果还不存在,这将创建一个。
+     * 
      */
     private DocumentFilter.FilterBypass getFilterBypass() {
         if (filterBypass == null) {
@@ -904,6 +1123,9 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Returns the root element of the bidirectional structure for this
      * document.  Its children represent character runs with a given
      * Unicode bidi level.
+     * <p>
+     *  返回此文档的双向结构的根元素。其子代表具有给定Unicode双级别的字符运行。
+     * 
      */
     public Element getBidiRootElement() {
         return bidiRoot;
@@ -912,6 +1134,9 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Returns true if the text in the range <code>p0</code> to
      * <code>p1</code> is left to right.
+     * <p>
+     *  如果范围<code> p0 </code>到<code> p1 </code>的文本从左到右,则返回true。
+     * 
      */
     static boolean isLeftToRight(Document doc, int p0, int p1) {
         if (Boolean.TRUE.equals(doc.getProperty(I18NProperty))) {
@@ -935,6 +1160,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * should keep in mind however that a paragraph should at least be the
      * unit of text over which to run the Unicode bidirectional algorithm.
      *
+     * <p>
+     *  获取包含给定位置的段落元素。子类必须为自己定义一个段落究竟是什么。他们应该记住,一个段落至少应该是运行Unicode双向算法的文本单元。
+     * 
+     * 
      * @param pos the starting offset &gt;= 0
      * @return the element */
     public abstract Element getParagraphElement(int pos);
@@ -945,6 +1174,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * method effectively establishes the strategy used
      * for compressing AttributeSet information.
      *
+     * <p>
+     *  获取用于管理属性的上下文。此方法有效地建立了用于压缩AttributeSet信息的策略。
+     * 
+     * 
      * @return the context
      */
     protected final AttributeContext getAttributeContext() {
@@ -957,6 +1190,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * this class reimplements this method, it should delegate to the
      * superclass as well.
      *
+     * <p>
+     *  由于文本插入更新文档结构。这将发生在写锁定内。如果这个类的子类重新实现这个方法,它也应该委托给超类。
+     * 
+     * 
      * @param chng a description of the change
      * @param attr the attributes for the change
      */
@@ -992,6 +1229,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * of this class reimplements this method, it should delegate to the
      * superclass as well.
      *
+     * <p>
+     * 由于文本删除而更新任何文档结构。此方法在文本实际从内容中删除之前调用。这将发生在写锁定内。如果这个类的子类重新实现这个方法,它也应该委托给超类。
+     * 
+     * 
      * @param chng a description of the change
      */
     protected void removeUpdate(DefaultDocumentEvent chng) {
@@ -1004,6 +1245,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * of this class reimplements this method, it should delegate to the
      * superclass as well.
      *
+     * <p>
+     *  由于文本删除而更新任何文档结构。在从内容中删除文本后调用此方法。这将发生在写锁定内。如果这个类的子类重新实现这个方法,它也应该委托给超类。
+     * 
+     * 
      * @param chng a description of the change
      */
     protected void postRemoveUpdate(DefaultDocumentEvent chng) {
@@ -1020,6 +1265,11 @@ public abstract class AbstractDocument implements Document, Serializable {
      * This method assumes that every offset in the model is contained in
      * exactly one paragraph.  This method also assumes that it is called
      * after the change is made to the default element structure.
+     * <p>
+     *  作为对文档的给定更改的结果,更新bidi元素结构。给定的更改将更新以反映对双向结构所做的更改。
+     * 
+     *  此方法假定模型中的每个偏移量都包含在恰好一个段落中。此方法还假定在对默认元素结构进行更改后调用它。
+     * 
      */
     void updateBidi( DefaultDocumentEvent chng ) {
 
@@ -1171,6 +1421,9 @@ public abstract class AbstractDocument implements Document, Serializable {
 
     /**
      * Calculate the levels array for a range of paragraphs.
+     * <p>
+     *  计算段落范围的水平数组。
+     * 
      */
     private byte[] calculateBidiLevels( int firstPStart, int lastPEnd ) {
 
@@ -1237,6 +1490,10 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Gives a diagnostic dump.
      *
+     * <p>
+     *  提供诊断转储。
+     * 
+     * 
      * @param out the output stream
      */
     public void dump(PrintStream out) {
@@ -1250,6 +1507,10 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Gets the content for the document.
      *
+     * <p>
+     *  获取文档的内容。
+     * 
+     * 
      * @return the content
      */
     protected final Content getContent() {
@@ -1265,6 +1526,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * follow.  The document itself gets to decide how to generate
      * elements to give flexibility in the type of elements used.
      *
+     * <p>
+     *  创建文档叶元素。钩子,通过它创建元素来表示文档结构。因为这个实现保持结构和内容分离,当内容被扩展时元素自动增长,所以现有元素的分裂跟随。文档本身决定如何生成元素,以在所使用的元素类型中提供灵活性。
+     * 
+     * 
      * @param parent the parent element
      * @param a the attributes for the element
      * @param p0 the beginning of the range &gt;= 0
@@ -1278,6 +1543,10 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * Creates a document branch element, that can contain other elements.
      *
+     * <p>
+     *  创建一个文档分支元素,其中可以包含其他元素。
+     * 
+     * 
      * @param parent the parent element
      * @param a the attributes
      * @return the element
@@ -1295,6 +1564,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * if a lock needs to be acquired and a new transaction
      * started.
      *
+     * <p>
+     * 获取当前写入线程(如果有)。这可以用于区分方法是作为现有修改的一部分被调用还是需要获取锁并且新事务开始。
+     * 
+     * 
      * @return the thread actively modifying the document
      *  or <code>null</code> if there are no modifications in progress
      */
@@ -1320,6 +1593,16 @@ public abstract class AbstractDocument implements Document, Serializable {
      * <code>Document</code> will be left in a locked state so that no
      * reading or writing can be done.
      *
+     * <p>
+     *  获取锁定以开始更改此锁保护的文档。可以没有写,更改的通知,或阅读,以获得锁。
+     * 此外,线程允许获得多个<code> writeLock </code>,只要它不尝试从文档通知中获取额外的<code> writeLock </code>。
+     * 尝试从DocumentListener通知中获取<code> writeLock </code>将导致<code> IllegalStateException </code>。
+     * 每个线程获取多个<code> writeLock </code>的能力允许子类获得一个writeLock,执行多个操作,然后释放锁。
+     * <p>
+     *  对<code> writeLock </code>的调用必须与对<code> writeUnlock </code>的调用保持平衡,否则<code> Document </code>将保持锁定状态,完
+     * 成。
+     * 
+     * 
      * @exception IllegalStateException thrown on illegal lock
      *  attempt.  If the document is implemented properly, this can
      *  only happen if a document listener attempts to mutate the
@@ -1355,6 +1638,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * After decrementing the lock count if there are no outstanding locks
      * this will allow a new writer, or readers.
      *
+     * <p>
+     *  释放以前通过<code> writeLock </code>获得的写锁定。如果没有未完成的锁,则递减锁定计数,这将允许新的作者或读者。
+     * 
+     * 
      * @see #writeLock
      */
     protected synchronized final void writeUnlock() {
@@ -1374,6 +1661,11 @@ public abstract class AbstractDocument implements Document, Serializable {
      * of the document.  It should always be balanced with a
      * <code>readUnlock</code>.
      *
+     * <p>
+     * 获取锁定以开始从文档读取某个状态。可以同时有多个读卡器。写入阻止读取器,直到已经完成对监听器的改变的通知。应该非常仔细地使用此方法,以避免对文档的意外损害。
+     * 它应该始终与<code> readUnlock </code>平衡。
+     * 
+     * 
      * @see #readUnlock
      */
     public synchronized final void readLock() {
@@ -1408,6 +1700,13 @@ public abstract class AbstractDocument implements Document, Serializable {
      * &nbsp;   }
      * </code></pre>
      *
+     * <p>
+     *  读取解锁。这表示其中一个读者完成了。如果没有更多的读者,那么写作可以再次开始。这应该与readLock平衡,并且应该发生在finally语句中,以便保证平衡。下面是一个例子。
+     *  <pre> <code>&nbsp; readLock(); &nbsp;尝试{&nbsp; // do something&nbsp; } finally {&nbsp; readUnlock(); &nbsp; }
+     *  </code> </pre>。
+     *  读取解锁。这表示其中一个读者完成了。如果没有更多的读者,那么写作可以再次开始。这应该与readLock平衡,并且应该发生在finally语句中,以便保证平衡。下面是一个例子。
+     * 
+     * 
      * @see #readLock
      */
     public synchronized final void readUnlock() {
@@ -1469,10 +1768,16 @@ public abstract class AbstractDocument implements Document, Serializable {
     private transient Thread currWriter;
     /**
      * The number of writers, all obtained from <code>currWriter</code>.
+     * <p>
+     *  写入的数量,都从<code> currWriter </code>获取。
+     * 
      */
     private transient int numWriters;
     /**
      * True will notifying listeners.
+     * <p>
+     *  True将通知监听器。
+     * 
      */
     private transient boolean notifyingListeners;
 
@@ -1480,17 +1785,26 @@ public abstract class AbstractDocument implements Document, Serializable {
 
     /**
      * Storage for document-wide properties.
+     * <p>
+     *  存储文档范围的属性。
+     * 
      */
     private Dictionary<Object,Object> documentProperties = null;
 
     /**
      * The event listener list for the document.
+     * <p>
+     *  文档的事件侦听器列表。
+     * 
      */
     protected EventListenerList listenerList = new EventListenerList();
 
     /**
      * Where the text is actually stored, and a set of marks
      * that track change as the document is edited are managed.
+     * <p>
+     *  在文本实际存储的地方,并且管理当文档被编辑时跟踪改变的一组标记。
+     * 
      */
     private Content data;
 
@@ -1499,22 +1813,34 @@ public abstract class AbstractDocument implements Document, Serializable {
      * attribute compression and control of the lifetime of
      * a set of attributes as a collection.  This may be shared
      * with other documents.
+     * <p>
+     *  工厂的属性。这是属性压缩和控制作为集合的一组属性的生命周期的策略。这可以与其他文档共享。
+     * 
      */
     private AttributeContext context;
 
     /**
      * The root of the bidirectional structure for this document.  Its children
      * represent character runs with the same Unicode bidi level.
+     * <p>
+     *  此文档的双向结构的根。其子代表具有相同Unicode双精度水平的字符运行。
+     * 
      */
     private transient BranchElement bidiRoot;
 
     /**
      * Filter for inserting/removing of text.
+     * <p>
+     *  用于插入/删除文本的过滤器。
+     * 
      */
     private DocumentFilter documentFilter;
 
     /**
      * Used by DocumentFilter to do actual insert/remove.
+     * <p>
+     *  用于DocumentFilter做实际的插入/删除。
+     * 
      */
     private transient DocumentFilter.FilterBypass filterBypass;
 
@@ -1522,32 +1848,50 @@ public abstract class AbstractDocument implements Document, Serializable {
 
     /**
      * Error message to indicate a bad location.
+     * <p>
+     * 指示错误位置的错误消息。
+     * 
      */
     protected static final String BAD_LOCATION = "document location failure";
 
     /**
      * Name of elements used to represent paragraphs
+     * <p>
+     *  用于表示段落的元素的名称
+     * 
      */
     public static final String ParagraphElementName = "paragraph";
 
     /**
      * Name of elements used to represent content
+     * <p>
+     *  用于表示内容的元素的名称
+     * 
      */
     public static final String ContentElementName = "content";
 
     /**
      * Name of elements used to hold sections (lines/paragraphs).
+     * <p>
+     *  用于保存节的元素的名称(行/段)。
+     * 
      */
     public static final String SectionElementName = "section";
 
     /**
      * Name of elements used to hold a unidirectional run
+     * <p>
+     *  用于保持单向运行的元素的名称
+     * 
      */
     public static final String BidiElementName = "bidi level";
 
     /**
      * Name of the attribute used to specify element
      * names.
+     * <p>
+     *  用于指定元素名称的属性名称。
+     * 
      */
     public static final String ElementNameAttribute = "$ename";
 
@@ -1560,6 +1904,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * that live in different packages (e.g. HTMLDocument as of now),
      * so those copies should also be taken care of when this property
      * needs to be modified.
+     * <p>
+     *  指示是否应执行国际化功能(如文本重新排序或重新整形)的文档属性。此属性不应公开显示,因为它仅用于实现方便。
+     * 作为副作用,此属性的副本可能在其子类中生活在不同的包(例如HTMLDocument as now)中,因此,当此属性需要修改时,也应该考虑这些副本。
+     * 
      */
     static final String I18NProperty = "i18n";
 
@@ -1567,12 +1915,18 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Document property that indicates if a character has been inserted
      * into the document that is more than one byte long.  GlyphView uses
      * this to determine if it should use BreakIterator.
+     * <p>
+     *  文档属性,指示一个字符是否已插入到文档中超过一个字节长。 GlyphView使用这个来确定是否应该使用BreakIterator。
+     * 
      */
     static final Object MultiByteProperty = "multiByte";
 
     /**
      * Document property that indicates asynchronous loading is
      * desired, with the thread priority given as the value.
+     * <p>
+     *  需要指示异步加载的文档属性,将线程优先级指定为值。
+     * 
      */
     static final String AsyncLoadPriority = "load priority";
 
@@ -1581,6 +1935,10 @@ public abstract class AbstractDocument implements Document, Serializable {
      * can be edited.  Implementations may or may not support a
      * history mechanism which will be reflected by whether or not
      * mutations return an UndoableEdit implementation.
+     * <p>
+     *  描述可以编辑的字符内容序列的接口。实现可能支持或可能不支持历史机制,这将通过是否返回UndoableEdit实现来反映。
+     * 
+     * 
      * @see AbstractDocument
      */
     public interface Content {
@@ -1589,6 +1947,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * Creates a position within the content that will
          * track change as the content is mutated.
          *
+         * <p>
+         *  在内容中创建一个位置,以便在内容发生改变时跟踪更改。
+         * 
+         * 
          * @param offset the offset in the content &gt;= 0
          * @return a Position
          * @exception BadLocationException for an invalid offset
@@ -1598,6 +1960,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Current length of the sequence of character content.
          *
+         * <p>
+         *  字符内容序列的当前长度。
+         * 
+         * 
          * @return the length &gt;= 0
          */
         public int length();
@@ -1605,6 +1971,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Inserts a string of characters into the sequence.
          *
+         * <p>
+         *  在序列中插入字符串。
+         * 
+         * 
          * @param where   offset into the sequence to make the insertion &gt;= 0
          * @param str     string to insert
          * @return  if the implementation supports a history mechanism,
@@ -1618,6 +1988,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Removes some portion of the sequence.
          *
+         * <p>
+         * 删除序列的一些部分。
+         * 
+         * 
          * @param where   The offset into the sequence to make the
          *   insertion &gt;= 0.
          * @param nitems  The number of items in the sequence to remove &gt;= 0.
@@ -1632,6 +2006,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Fetches a string of characters contained in the sequence.
          *
+         * <p>
+         *  获取序列中包含的字符串。
+         * 
+         * 
          * @param where   Offset into the sequence to fetch &gt;= 0.
          * @param len     number of characters to copy &gt;= 0.
          * @return the string
@@ -1643,6 +2021,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets a sequence of characters and copies them into a Segment.
          *
+         * <p>
+         *  获取一个字符序列,并将它们复制到一个段。
+         * 
+         * 
          * @param where the starting offset &gt;= 0
          * @param len the number of characters &gt;= 0
          * @param txt the target location to copy into
@@ -1669,6 +2051,14 @@ public abstract class AbstractDocument implements Document, Serializable {
      * return the object responsible for implementing the desired
      * compression technique.
      *
+     * <p>
+     *  一个接口,可用于允许MutableAttributeSet实现使用可插入的属性压缩技术。
+     * 属性集的每个突变可以用于将先前的AttributeSet实例与另一个实例交换,从而保持AttributeSet保持不变的可能性。一个实现由StyleContext类提供。
+     * 
+     *  这个类提供的Element实现使用这个接口来提供他们的MutableAttributeSet实现,使得可以采用不同的AttributeSet压缩技术。
+     * 应该实现方法<code> getAttributeContext </code>以返回负责实现所需压缩技术的对象。
+     * 
+     * 
      * @see StyleContext
      */
     public interface AttributeContext {
@@ -1677,6 +2067,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * Adds an attribute to the given set, and returns
          * the new representative set.
          *
+         * <p>
+         *  向给定集合添加属性,并返回新的代表集。
+         * 
+         * 
          * @param old the old attribute set
          * @param name the non-null attribute name
          * @param value the attribute value
@@ -1688,6 +2082,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Adds a set of attributes to the element.
          *
+         * <p>
+         *  向元素添加一组属性。
+         * 
+         * 
          * @param old the old attribute set
          * @param attr the attributes to add
          * @return the updated attribute set
@@ -1698,6 +2096,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Removes an attribute from the set.
          *
+         * <p>
+         *  从集合中删除属性。
+         * 
+         * 
          * @param old the old attribute set
          * @param name the non-null attribute name
          * @return the updated attribute set
@@ -1708,6 +2110,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Removes a set of attributes for the element.
          *
+         * <p>
+         *  删除元素的一组属性。
+         * 
+         * 
          * @param old the old attribute set
          * @param names the attribute names
          * @return the updated attribute set
@@ -1718,6 +2124,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Removes a set of attributes for the element.
          *
+         * <p>
+         *  删除元素的一组属性。
+         * 
+         * 
          * @param old the old attribute set
          * @param attrs the attributes
          * @return the updated attribute set
@@ -1728,6 +2138,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Fetches an empty AttributeSet.
          *
+         * <p>
+         *  获取一个空的AttributeSet。
+         * 
+         * 
          * @return the attribute set
          */
         public AttributeSet getEmptySet();
@@ -1739,6 +2153,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * in 1.1 where there are no weak references.  A 1.1 implementation
          * would call this in its finalize method.
          *
+         * <p>
+         *  回收属性集。这是一个MutableAttributeSet标记它不再需要一个特定的不可变集的方法。这只有在没有弱引用的1.1中才需要。 1.1实现将在其finalize方法中调用this。
+         * 
+         * 
          * @param a the attribute set to reclaim
          */
         public void reclaim(AttributeSet a);
@@ -1760,12 +2178,23 @@ public abstract class AbstractDocument implements Document, Serializable {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 实现元素的抽象部分。默认情况下,元素通过具有表示元素的当前属性集的不可变部分的字段来支持属性。元素本身实现了MutableAttributeSet,它可以用于通过获取一个新的不可变集来修改集合。
+     * 不可变集由与文档相关联的AttributeContext提供。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public abstract class AbstractElement implements Element, MutableAttributeSet, Serializable, TreeNode {
 
         /**
          * Creates a new AbstractElement.
          *
+         * <p>
+         *  创建一个新的AbstractElement。
+         * 
+         * 
          * @param parent the parent element
          * @param a the attributes for the element
          * @since 1.4
@@ -1787,6 +2216,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Dumps a debugging representation of the element hierarchy.
          *
+         * <p>
+         *  转储元素层次结构的调试表示。
+         * 
+         * 
          * @param psOut the output stream
          * @param indentAmount the indentation level &gt;= 0
          */
@@ -1846,6 +2279,17 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the number of attributes that are defined.
          *
+         * <p>
+         *  if(contentStr.length()> 40){contentStr = contentStr.substring(0,40)+"..."; } out.println("["+ conten
+         * tStr +"]"); } catch(BadLocationException e){}。
+         * 
+         *  } else {int n = getElementCount(); for(int i = 0; i <n; i ++){AbstractElement e =(AbstractElement)getElement(i); e.dump(psOut,indentAmount + 1); }}}。
+         * 
+         *  // --- AttributeSet ---------------------------- //委托给不可变字段"attributes"
+         * 
+         *  / **获取定义的属性数。
+         * 
+         * 
          * @return the number of attributes &gt;= 0
          * @see AttributeSet#getAttributeCount
          */
@@ -1856,6 +2300,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Checks whether a given attribute is defined.
          *
+         * <p>
+         *  检查是否定义了给定属性。
+         * 
+         * 
          * @param attrName the non-null attribute name
          * @return true if the attribute is defined
          * @see AttributeSet#isDefined
@@ -1867,6 +2315,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Checks whether two attribute sets are equal.
          *
+         * <p>
+         *  检查两个属性集是否相等。
+         * 
+         * 
          * @param attr the attribute set to check against
          * @return true if the same
          * @see AttributeSet#isEqual
@@ -1878,6 +2330,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Copies a set of attributes.
          *
+         * <p>
+         *  复制一组属性。
+         * 
+         * 
          * @return the copy
          * @see AttributeSet#copyAttributes
          */
@@ -1888,6 +2344,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the value of an attribute.
          *
+         * <p>
+         * 获取属性的值。
+         * 
+         * 
          * @param attrName the non-null attribute name
          * @return the attribute value
          * @see AttributeSet#getAttribute
@@ -1909,6 +2369,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the names of all attributes.
          *
+         * <p>
+         *  获取所有属性的名称。
+         * 
+         * 
          * @return the attribute names as an enumeration
          * @see AttributeSet#getAttributeNames
          */
@@ -1919,6 +2383,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Checks whether a given attribute name/value is defined.
          *
+         * <p>
+         *  检查是否定义了给定的属性名称/值。
+         * 
+         * 
          * @param name the non-null attribute name
          * @param value the attribute value
          * @return true if the name/value is defined
@@ -1932,6 +2400,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Checks whether the element contains all the attributes.
          *
+         * <p>
+         *  检查元素是否包含所有属性。
+         * 
+         * 
          * @param attrs the attributes to check
          * @return true if the element contains all the attributes
          * @see AttributeSet#containsAttributes
@@ -1945,6 +2417,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * If not overridden, the resolving parent defaults to
          * the parent element.
          *
+         * <p>
+         *  获取解析父代。如果未覆盖,则解析父代方默认为父元素。
+         * 
+         * 
          * @return the attributes from the parent, <code>null</code> if none
          * @see AttributeSet#getResolveParent
          */
@@ -1963,6 +2439,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Adds an attribute to the element.
          *
+         * <p>
+         *  向元素添加属性。
+         * 
+         * 
          * @param name the non-null attribute name
          * @param value the attribute value
          * @see MutableAttributeSet#addAttribute
@@ -1976,6 +2456,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Adds a set of attributes to the element.
          *
+         * <p>
+         *  向元素添加一组属性。
+         * 
+         * 
          * @param attr the attributes to add
          * @see MutableAttributeSet#addAttribute
          */
@@ -1988,6 +2472,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Removes an attribute from the set.
          *
+         * <p>
+         *  从集合中删除属性。
+         * 
+         * 
          * @param name the non-null attribute name
          * @see MutableAttributeSet#removeAttribute
          */
@@ -2000,6 +2488,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Removes a set of attributes for the element.
          *
+         * <p>
+         *  删除元素的一组属性。
+         * 
+         * 
          * @param names the attribute names
          * @see MutableAttributeSet#removeAttributes
          */
@@ -2012,6 +2504,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Removes a set of attributes for the element.
          *
+         * <p>
+         *  删除元素的一组属性。
+         * 
+         * 
          * @param attrs the attributes
          * @see MutableAttributeSet#removeAttributes
          */
@@ -2028,6 +2524,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Sets the resolving parent.
          *
+         * <p>
+         *  设置解析父代。
+         * 
+         * 
          * @param parent the parent, null if none
          * @see MutableAttributeSet#setResolveParent
          */
@@ -2056,6 +2556,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Retrieves the underlying model.
          *
+         * <p>
+         *  检索基础模型。
+         * 
+         * 
          * @return the model
          */
         public Document getDocument() {
@@ -2065,6 +2569,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the parent of the element.
          *
+         * <p>
+         *  获取元素的父级。
+         * 
+         * 
          * @return the parent
          */
         public Element getParentElement() {
@@ -2074,6 +2582,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the attributes for the element.
          *
+         * <p>
+         *  获取元素的属性。
+         * 
+         * 
          * @return the attribute set
          */
         public AttributeSet getAttributes() {
@@ -2083,6 +2595,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the name of the element.
          *
+         * <p>
+         *  获取元素的名称。
+         * 
+         * 
          * @return the name, null if none
          */
         public String getName() {
@@ -2095,6 +2611,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the starting offset in the model for the element.
          *
+         * <p>
+         *  获取元素的模型中的起始偏移量。
+         * 
+         * 
          * @return the offset &gt;= 0
          */
         public abstract int getStartOffset();
@@ -2102,6 +2622,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the ending offset in the model for the element.
          *
+         * <p>
+         *  获取元素的模型中的结束偏移量。
+         * 
+         * 
          * @return the offset &gt;= 0
          */
         public abstract int getEndOffset();
@@ -2109,6 +2633,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets a child element.
          *
+         * <p>
+         *  获取子元素。
+         * 
+         * 
          * @param index the child index, &gt;= 0 &amp;&amp; &lt; getElementCount()
          * @return the child element
          */
@@ -2117,6 +2645,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the number of children for the element.
          *
+         * <p>
+         *  获取元素的子元素数。
+         * 
+         * 
          * @return the number of children &gt;= 0
          */
         public abstract int getElementCount();
@@ -2124,6 +2656,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the child element index closest to the given model offset.
          *
+         * <p>
+         *  获取最接近给定模型偏移的子元素索引。
+         * 
+         * 
          * @param offset the offset &gt;= 0
          * @return the element index &gt;= 0
          */
@@ -2132,6 +2668,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Checks whether the element is a leaf.
          *
+         * <p>
+         *  检查元素是否为叶。
+         * 
+         * 
          * @return true if a leaf
          */
         public abstract boolean isLeaf();
@@ -2141,6 +2681,9 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the child <code>TreeNode</code> at index
          * <code>childIndex</code>.
+         * <p>
+         *  返回索引<code> childIndex </code>处的子<code> TreeNode </code>。
+         * 
          */
         public TreeNode getChildAt(int childIndex) {
             return (TreeNode)getElement(childIndex);
@@ -2149,6 +2692,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the number of children <code>TreeNode</code>'s
          * receiver contains.
+         * <p>
+         *  返回<code> TreeNode </code>的接收者包含的子节点数。
+         * 
+         * 
          * @return the number of children <code>TreeNodews</code>'s
          * receiver contains
          */
@@ -2158,6 +2705,10 @@ public abstract class AbstractDocument implements Document, Serializable {
 
         /**
          * Returns the parent <code>TreeNode</code> of the receiver.
+         * <p>
+         *  返回接收者的父代码<code> TreeNode </code>。
+         * 
+         * 
          * @return the parent <code>TreeNode</code> of the receiver
          */
         public TreeNode getParent() {
@@ -2168,6 +2719,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * Returns the index of <code>node</code> in the receivers children.
          * If the receiver does not contain <code>node</code>, -1 will be
          * returned.
+         * <p>
+         *  返回接收器children中<code> node </code>的索引。如果接收方不包含<code> node </code>,将返回-1。
+         * 
+         * 
          * @param node the location of interest
          * @return the index of <code>node</code> in the receiver's
          * children, or -1 if absent
@@ -2181,6 +2736,10 @@ public abstract class AbstractDocument implements Document, Serializable {
 
         /**
          * Returns true if the receiver allows children.
+         * <p>
+         *  如果接收者允许孩子,则返回true。
+         * 
+         * 
          * @return true if the receiver allows children, otherwise false
          */
         public abstract boolean getAllowsChildren();
@@ -2189,6 +2748,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the children of the receiver as an
          * <code>Enumeration</code>.
+         * <p>
+         *  以<code>枚举</code>返回接收器的子代。
+         * 
+         * 
          * @return the children of the receiver as an <code>Enumeration</code>
          */
         public abstract Enumeration children();
@@ -2229,6 +2792,12 @@ public abstract class AbstractDocument implements Document, Serializable {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  实现包含其他元素的复合元素。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public class BranchElement extends AbstractElement {
 
@@ -2236,6 +2805,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * Constructs a composite element that initially contains
          * no children.
          *
+         * <p>
+         *  构造最初不包含子元素的复合元素。
+         * 
+         * 
          * @param parent  The parent element
          * @param a the attributes for the element
          * @since 1.4
@@ -2251,6 +2824,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * Gets the child element that contains
          * the given model position.
          *
+         * <p>
+         *  获取包含给定模型位置的子元素。
+         * 
+         * 
          * @param pos the position &gt;= 0
          * @return the element, null if none
          */
@@ -2268,6 +2845,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Replaces content with a new set of elements.
          *
+         * <p>
+         *  使用一组新的元素替换内容。
+         * 
+         * 
          * @param offset the starting offset &gt;= 0
          * @param length the length to replace &gt;= 0
          * @param elems the new elements
@@ -2296,6 +2877,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Converts the element to a string.
          *
+         * <p>
+         *  将元素转换为字符串。
+         * 
+         * 
          * @return the string
          */
         public String toString() {
@@ -2308,6 +2893,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the element name.
          *
+         * <p>
+         *  获取元素名称。
+         * 
+         * 
          * @return the element name
          */
         public String getName() {
@@ -2321,6 +2910,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the starting offset in the model for the element.
          *
+         * <p>
+         *  获取元素的模型中的起始偏移量。
+         * 
+         * 
          * @return the offset &gt;= 0
          */
         public int getStartOffset() {
@@ -2329,6 +2922,10 @@ public abstract class AbstractDocument implements Document, Serializable {
 
         /**
          * Gets the ending offset in the model for the element.
+         * <p>
+         *  获取元素的模型中的结束偏移量。
+         * 
+         * 
          * @throws NullPointerException if this element has no children
          *
          * @return the offset &gt;= 0
@@ -2342,6 +2939,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets a child element.
          *
+         * <p>
+         *  获取子元素。
+         * 
+         * 
          * @param index the child index, &gt;= 0 &amp;&amp; &lt; getElementCount()
          * @return the child element, null if none
          */
@@ -2355,6 +2956,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the number of children for the element.
          *
+         * <p>
+         *  获取元素的子元素数。
+         * 
+         * 
          * @return the number of children &gt;= 0
          */
         public int getElementCount()  {
@@ -2364,6 +2969,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the child element index closest to the given model offset.
          *
+         * <p>
+         *  获取最接近给定模型偏移的子元素索引。
+         * 
+         * 
          * @param offset the offset &gt;= 0
          * @return the element index &gt;= 0
          */
@@ -2430,6 +3039,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Checks whether the element is a leaf.
          *
+         * <p>
+         *  检查元素是否为叶。
+         * 
+         * 
          * @return true if a leaf
          */
         public boolean isLeaf() {
@@ -2441,6 +3054,10 @@ public abstract class AbstractDocument implements Document, Serializable {
 
         /**
          * Returns true if the receiver allows children.
+         * <p>
+         *  如果接收者允许孩子,则返回true。
+         * 
+         * 
          * @return true if the receiver allows children, otherwise false
          */
         public boolean getAllowsChildren() {
@@ -2451,6 +3068,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the children of the receiver as an
          * <code>Enumeration</code>.
+         * <p>
+         *  以<code>枚举</code>返回接收器的子代。
+         * 
+         * 
          * @return the children of the receiver
          */
         public Enumeration children() {
@@ -2484,6 +3105,13 @@ public abstract class AbstractDocument implements Document, Serializable {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  实现直接表示某种内容的元素。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see     Element
      */
     public class LeafElement extends AbstractElement {
@@ -2492,6 +3120,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * Constructs an element that represents content within the
          * document (has no children).
          *
+         * <p>
+         *  构造表示文档内的内容(没有子代)的元素。
+         * 
+         * 
          * @param parent  The parent element
          * @param a       The element attributes
          * @param offs0   The start offset &gt;= 0
@@ -2513,6 +3145,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Converts the element to a string.
          *
+         * <p>
+         *  将元素转换为字符串。
+         * 
+         * 
          * @return the string
          */
         public String toString() {
@@ -2524,6 +3160,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the starting offset in the model for the element.
          *
+         * <p>
+         *  获取元素的模型中的起始偏移量。
+         * 
+         * 
          * @return the offset &gt;= 0
          */
         public int getStartOffset() {
@@ -2533,6 +3173,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the ending offset in the model for the element.
          *
+         * <p>
+         *  获取元素的模型中的结束偏移量。
+         * 
+         * 
          * @return the offset &gt;= 0
          */
         public int getEndOffset() {
@@ -2542,6 +3186,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the element name.
          *
+         * <p>
+         *  获取元素名称。
+         * 
+         * 
          * @return the name
          */
         public String getName() {
@@ -2555,6 +3203,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the child element index closest to the given model offset.
          *
+         * <p>
+         *  获取最接近给定模型偏移的子元素索引。
+         * 
+         * 
          * @param pos the offset &gt;= 0
          * @return the element index &gt;= 0
          */
@@ -2565,6 +3217,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets a child element.
          *
+         * <p>
+         *  获取子元素。
+         * 
+         * 
          * @param index the child index, &gt;= 0 &amp;&amp; &lt; getElementCount()
          * @return the child element
          */
@@ -2575,6 +3231,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the number of child elements.
          *
+         * <p>
+         *  返回子元素的数量。
+         * 
+         * 
          * @return the number of children &gt;= 0
          */
         public int getElementCount()  {
@@ -2584,6 +3244,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Checks whether the element is a leaf.
          *
+         * <p>
+         *  检查元素是否为叶。
+         * 
+         * 
          * @return true if a leaf
          */
         public boolean isLeaf() {
@@ -2594,6 +3258,10 @@ public abstract class AbstractDocument implements Document, Serializable {
 
         /**
          * Returns true if the receiver allows children.
+         * <p>
+         *  如果接收者允许孩子,则返回true。
+         * 
+         * 
          * @return true if the receiver allows children, otherwise false
          */
         public boolean getAllowsChildren() {
@@ -2604,6 +3272,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the children of the receiver as an
          * <code>Enumeration</code>.
+         * <p>
+         *  以<code>枚举</code>返回接收器的子代。
+         * 
+         * 
          * @return the children of the receiver
          */
         public Enumeration children() {
@@ -2646,6 +3318,9 @@ public abstract class AbstractDocument implements Document, Serializable {
      * Represents the root element of the bidirectional element structure.
      * The root element is the only element in the bidi element structure
      * which contains children.
+     * <p>
+     *  表示双向元素结构的根元素。根元素是包含子元素的bidi元素结构中唯一的元素。
+     * 
      */
     class BidiRootElement extends BranchElement {
 
@@ -2655,6 +3330,10 @@ public abstract class AbstractDocument implements Document, Serializable {
 
         /**
          * Gets the name of the element.
+         * <p>
+         *  获取元素的名称。
+         * 
+         * 
          * @return the name
          */
         public String getName() {
@@ -2664,11 +3343,17 @@ public abstract class AbstractDocument implements Document, Serializable {
 
     /**
      * Represents an element of the bidirectional element structure.
+     * <p>
+     *  表示双向元素结构的元素。
+     * 
      */
     class BidiElement extends LeafElement {
 
         /**
          * Creates a new BidiElement.
+         * <p>
+         *  创建一个新的BidiElement。
+         * 
          */
         BidiElement(Element parent, int start, int end, int level) {
             super(parent, new SimpleAttributeSet(), start, end);
@@ -2679,6 +3364,10 @@ public abstract class AbstractDocument implements Document, Serializable {
 
         /**
          * Gets the name of the element.
+         * <p>
+         *  获取元素的名称。
+         * 
+         * 
          * @return the name
          */
         public String getName() {
@@ -2704,12 +3393,19 @@ public abstract class AbstractDocument implements Document, Serializable {
      * when done with the document modification transaction.
      * This is used by the AbstractDocument class and its extensions
      * for broadcasting change information to the document listeners.
+     * <p>
+     * 在文档正在修改时存储文档更改。随后可以在完成文档修改事务时用于更改通知。这由AbstractDocument类及其扩展使用,用于向文档侦听器广播更改信息。
+     * 
      */
     public class DefaultDocumentEvent extends CompoundEdit implements DocumentEvent {
 
         /**
          * Constructs a change record.
          *
+         * <p>
+         *  构造更改记录。
+         * 
+         * 
          * @param offs the offset into the document of the change &gt;= 0
          * @param len  the length of the change &gt;= 0
          * @param type the type of event (DocumentEvent.EventType)
@@ -2725,6 +3421,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns a string description of the change event.
          *
+         * <p>
+         *  返回更改事件的字符串描述。
+         * 
+         * 
          * @return a string
          */
         public String toString() {
@@ -2739,6 +3439,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * ElementChange implementations since access of these
          * needs to be relatively quick.
          *
+         * <p>
+         *  添加文档编辑。如果编辑次数超过阈值,这将启用ElementChange实现的散列表查找,因为这些访问需要相对较快。
+         * 
+         * 
          * @param anEdit a document edit record
          * @return true if the edit was added
          */
@@ -2769,6 +3473,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Redoes a change.
          *
+         * <p>
+         *  重做更改。
+         * 
+         * 
          * @exception CannotRedoException if the change cannot be redone
          */
         public void redo() throws CannotRedoException {
@@ -2793,6 +3501,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Undoes a change.
          *
+         * <p>
+         *  撤消更改。
+         * 
+         * 
          * @exception CannotUndoException if the change cannot be undone
          */
         public void undo() throws CannotUndoException {
@@ -2819,6 +3531,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * DefaultDocumentEvents to present them as a single edit to the user
          * place them into a CompoundEdit.
          *
+         * <p>
+         *  DefaultDocument事件很重要。如果您希望聚合DefaultDocumentEvents以将它们作为单个编辑呈现给用户,将它们放入CompoundEdit中。
+         * 
+         * 
          * @return whether the event is significant for edit undo purposes
          */
         public boolean isSignificant() {
@@ -2830,6 +3546,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * Provides a localized, human readable description of this edit
          * suitable for use in, say, a change log.
          *
+         * <p>
+         *  提供此编辑的本地化,人性化可读描述,适用于例如更改日志。
+         * 
+         * 
          * @return the description
          */
         public String getPresentationName() {
@@ -2846,6 +3566,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * form of this edit, e.g. for use as an Undo menu item. Typically
          * derived from getDescription();
          *
+         * <p>
+         *  提供此编辑的可撤消表单的本地化,人性化可读的说明,例如用作撤销菜单项。通常派生自getDescription();
+         * 
+         * 
          * @return the description
          */
         public String getUndoPresentationName() {
@@ -2858,6 +3582,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * form of this edit, e.g. for use as a Redo menu item. Typically
          * derived from getPresentationName();
          *
+         * <p>
+         *  提供此编辑的可重复格式的本地化,人性化可读的说明,例如用作重做菜单项。通常派生自getPresentationName();
+         * 
+         * 
          * @return the description
          */
         public String getRedoPresentationName() {
@@ -2870,6 +3598,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the type of event.
          *
+         * <p>
+         *  返回事件的类型。
+         * 
+         * 
          * @return the event type as a DocumentEvent.EventType
          * @see DocumentEvent#getType
          */
@@ -2880,6 +3612,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the offset within the document of the start of the change.
          *
+         * <p>
+         *  返回文档中更改开始处的偏移量。
+         * 
+         * 
          * @return the offset &gt;= 0
          * @see DocumentEvent#getOffset
          */
@@ -2890,6 +3626,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the length of the change.
          *
+         * <p>
+         *  返回更改的长度。
+         * 
+         * 
          * @return the length &gt;= 0
          * @see DocumentEvent#getLength
          */
@@ -2900,6 +3640,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the document that sourced the change event.
          *
+         * <p>
+         *  获取发生更改事件的文档。
+         * 
+         * 
          * @return the document
          * @see DocumentEvent#getDocument
          */
@@ -2910,6 +3654,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets the changes for an element.
          *
+         * <p>
+         *  获取元素的更改。
+         * 
+         * 
          * @param elem the element
          * @return the changes
          */
@@ -2944,6 +3692,9 @@ public abstract class AbstractDocument implements Document, Serializable {
      * operations. It just wraps DefaultDocumentEvent and delegates
      * all calls to it except getType() which depends on operation
      * (Undo or Redo).
+     * <p>
+     * 在撤消/重做操作期间触发文档更改时使用此事件。它只是包装DefaultDocumentEvent并委托所有调用,除了取决于操作(撤消或重做)的getType()。
+     * 
      */
     class UndoRedoDocumentEvent implements DocumentEvent {
         private DefaultDocumentEvent src = null;
@@ -2994,6 +3745,9 @@ public abstract class AbstractDocument implements Document, Serializable {
     /**
      * An implementation of ElementChange that can be added to the document
      * event.
+     * <p>
+     *  可以添加到文档事件的ElementChange的实现。
+     * 
      */
     public static class ElementEdit extends AbstractUndoableEdit implements DocumentEvent.ElementChange {
 
@@ -3002,6 +3756,10 @@ public abstract class AbstractDocument implements Document, Serializable {
          * so it can safely be used to <em>catch up</em> a view to the
          * current model state for views that just attached to a model.
          *
+         * <p>
+         *  构造编辑记录。这不会修改元素,因此它可以安全地用于将视图追踪到刚刚附加到模型的视图的当前模型状态。
+         * 
+         * 
          * @param e the element
          * @param index the index into the model &gt;= 0
          * @param removed a set of elements that were removed
@@ -3018,6 +3776,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the underlying element.
          *
+         * <p>
+         *  返回底层元素。
+         * 
+         * 
          * @return the element
          */
         public Element getElement() {
@@ -3027,6 +3789,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Returns the index into the list of elements.
          *
+         * <p>
+         *  将索引返回到元素列表中。
+         * 
+         * 
          * @return the index &gt;= 0
          */
         public int getIndex() {
@@ -3036,6 +3802,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets a list of children that were removed.
          *
+         * <p>
+         *  获取已删除的子级的列表。
+         * 
+         * 
          * @return the list
          */
         public Element[] getChildrenRemoved() {
@@ -3045,6 +3815,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Gets a list of children that were added.
          *
+         * <p>
+         *  获取添加的子级的列表。
+         * 
+         * 
          * @return the list
          */
         public Element[] getChildrenAdded() {
@@ -3054,6 +3828,10 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Redoes a change.
          *
+         * <p>
+         *  重做更改。
+         * 
+         * 
          * @exception CannotRedoException if the change cannot be redone
          */
         public void redo() throws CannotRedoException {
@@ -3071,6 +3849,9 @@ public abstract class AbstractDocument implements Document, Serializable {
         /**
          * Undoes a change.
          *
+         * <p>
+         *  撤消更改。
+         * 
          * @exception CannotUndoException if the change cannot be undone
          */
         public void undo() throws CannotUndoException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.xml.transform.dom.DOMSource;
 /**
  * {@link DomHandler} implementation for W3C DOM (<code>org.w3c.dom</code> package.)
  *
+ * <p>
+ *  {@link DomHandler}实施W3C DOM(<code> org.w3c.dom </code>包)。
+ * 
+ * 
  * @author Kohsuke Kawaguchi
  * @since JAXB2.0
  */
@@ -51,6 +56,11 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
      *
      * It is up to a JAXB provider to decide which DOM implementation
      * to use or how that is configured.
+     * <p>
+     *  默认构造函数。
+     * 
+     *  由JAXB提供程序决定要使用哪个DOM实现或如何配置。
+     * 
      */
     public W3CDomHandler() {
         this.builder = null;
@@ -60,6 +70,8 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
      * Constructor that allows applications to specify which DOM implementation
      * to be used.
      *
+     * <p>
+     * 
      * @param builder
      *      must not be null. JAXB uses this {@link DocumentBuilder} to create
      *      a new element.

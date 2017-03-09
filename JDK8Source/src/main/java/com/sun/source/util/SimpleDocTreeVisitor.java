@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ import com.sun.source.doctree.*;
 /**
  * A simple visitor for tree nodes.
  *
+ * <p>
+ *  树节点的简单访问者。
+ * 
  * @since 1.8
  */
 @jdk.Exported

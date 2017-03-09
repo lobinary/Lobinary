@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,8 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase;
 import com.sun.corba.se.impl.orbutil.ORBUtility;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public abstract class CorbaContactInfoBase

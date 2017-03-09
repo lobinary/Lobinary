@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,11 @@ import javax.swing.text.View;
  * Standard tool tip L&amp;F.
  * <p>
  *
+ * <p>
+ *  标准刀尖L&amp; F。
+ * <p>
+ * 
+ * 
  * @author Dave Moore
  */
 public class BasicToolTipUI extends ToolTipUI
@@ -51,6 +57,9 @@ public class BasicToolTipUI extends ToolTipUI
     /**
      * Global <code>PropertyChangeListener</code> that
      * <code>createPropertyChangeListener</code> returns.
+     * <p>
+     *  <code> createPropertyChangeListener </code>返回的全局<code> PropertyChangeListener </code>。
+     * 
      */
     private static PropertyChangeListener sharedPropertyChangedListener;
 
@@ -90,12 +99,14 @@ public class BasicToolTipUI extends ToolTipUI
     }
 
     /* Unfortunately this has to remain private until we can make API additions.
+    /* <p>
      */
     private void installComponents(JComponent c){
         BasicHTML.updateRenderer(c, ((JToolTip)c).getTipText());
     }
 
     /* Unfortunately this has to remain private until we can make API additions.
+    /* <p>
      */
     private void uninstallComponents(JComponent c){
         BasicHTML.updateRenderer(c, "");
@@ -114,6 +125,7 @@ public class BasicToolTipUI extends ToolTipUI
     }
 
     /* Unfortunately this has to remain private until we can make API additions.
+    /* <p>
      */
     private PropertyChangeListener createPropertyChangeListener(JComponent c) {
         if (sharedPropertyChangedListener == null) {
@@ -198,6 +210,10 @@ public class BasicToolTipUI extends ToolTipUI
      * <code>JToolTip</code> has changed, or at initialization time. This
      * should update any state dependant upon the <code>JComponent</code>.
      *
+     * <p>
+     *  当与<code> JToolTip </code>关联的<code> JCompoment </code>更改或在初始化时调用。
+     * 这应该更新依赖于<code> JComponent </code>的任何状态。
+     * 
      * @param c the JToolTip the JComponent has changed on.
      */
     private void componentChanged(JComponent c) {

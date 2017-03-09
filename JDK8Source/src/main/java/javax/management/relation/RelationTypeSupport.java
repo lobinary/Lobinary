@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,17 @@ import java.util.logging.Level;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>4611072955724144607L</code>.
  *
+ * <p>
+ *  RelationTypeSupport对象实现RelationType接口。 <P>它表示关系类型,为该类型的每个关系中预期支持的每个角色提供角色信息。
+ * 
+ *  <P>关系类型包括关系类型名称和角色信息列表(由RoleInfo对象表示)。
+ * 
+ *  <P>关系类型必须在关系服务中声明：<P>  - 使用createRelationType()方法,其中将使用addRelationType()方法创建RelationTypeSupport对象并将其
+ * 保存在关系服务<P>方法,其中用户必须创建实现RelationType接口的对象,并且此对象将用作表示关系服务中的关系类型。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> 4611072955724144607L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -97,6 +109,8 @@ public class RelationTypeSupport implements RelationType {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField typeName String Relation type name
      * @serialField roleName2InfoMap Map {@link Map} holding the mapping:
      *              &lt;role name ({@link String})&gt; -&gt; &lt;role info ({@link RoleInfo} object)&gt;
@@ -129,11 +143,15 @@ public class RelationTypeSupport implements RelationType {
     //
 
     /**
+    /* <p>
+    /* 
      * @serial Relation type name
      */
     private String typeName = null;
 
     /**
+    /* <p>
+    /* 
      * @serial {@link Map} holding the mapping:
      *           &lt;role name ({@link String})&gt; -&gt; &lt;role info ({@link RoleInfo} object)&gt;
      */
@@ -141,6 +159,8 @@ public class RelationTypeSupport implements RelationType {
         new HashMap<String,RoleInfo>();
 
     /**
+    /* <p>
+    /* 
      * @serial Flag specifying whether the relation type has been declared in the
      *         Relation Service (so can no longer be updated)
      */
@@ -154,6 +174,10 @@ public class RelationTypeSupport implements RelationType {
      * Constructor where all role definitions are dynamically created and
      * passed as parameter.
      *
+     * <p>
+     *  动态创建所有角色定义并作为参数传递的构造函数。
+     * 
+     * 
      * @param relationTypeName  Name of relation type
      * @param roleInfoArray  List of role definitions (RoleInfo objects)
      *
@@ -188,6 +212,10 @@ public class RelationTypeSupport implements RelationType {
     /**
      * Constructor to be used for subclasses.
      *
+     * <p>
+     *  用于子类的构造方法。
+     * 
+     * 
      * @param relationTypeName  Name of relation type.
      *
      * @exception IllegalArgumentException  if null parameter.
@@ -216,6 +244,10 @@ public class RelationTypeSupport implements RelationType {
     /**
      * Returns the relation type name.
      *
+     * <p>
+     *  返回关系类型名称。
+     * 
+     * 
      * @return the relation type name.
      */
     public String getRelationTypeName() {
@@ -224,6 +256,9 @@ public class RelationTypeSupport implements RelationType {
 
     /**
      * Returns the list of role definitions (ArrayList of RoleInfo objects).
+     * <p>
+     *  返回角色定义的列表(RoleInfo对象的ArrayList)。
+     * 
      */
     public List<RoleInfo> getRoleInfos() {
         return new ArrayList<RoleInfo>(roleName2InfoMap.values());
@@ -233,6 +268,10 @@ public class RelationTypeSupport implements RelationType {
      * Returns the role info (RoleInfo object) for the given role info name
      * (null if not found).
      *
+     * <p>
+     *  返回给定角色信息名称(如果未找到,则为null)的角色信息(RoleInfo对象)。
+     * 
+     * 
      * @param roleInfoName  role info name
      *
      * @return RoleInfo object providing role definition
@@ -282,6 +321,10 @@ public class RelationTypeSupport implements RelationType {
      * Can throw a RuntimeException if trying to update a relation type
      * declared in the Relation Service.
      *
+     * <p>
+     * 添加角色信息。这种方法当然不应该在创建关系类型之后使用,因为更新它将使得与该类型关联创建的关系仍然符合它。如果尝试更新在关系服务中声明的关系类型,可能会抛出RuntimeException。
+     * 
+     * 
      * @param roleInfo  role info to be added.
      *
      * @exception IllegalArgumentException  if null parameter.
@@ -428,6 +471,9 @@ public class RelationTypeSupport implements RelationType {
 
     /**
      * Deserializes a {@link RelationTypeSupport} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link RelationTypeSupport}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -463,6 +509,8 @@ public class RelationTypeSupport implements RelationType {
 
     /**
      * Serializes a {@link RelationTypeSupport} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link RelationTypeSupport}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,11 @@ package java.security.spec;
  * generating DSA parameters as specified in
  * <a href="http://csrc.nist.gov/publications/fips/fips186-3/fips_186-3.pdf">FIPS 186-3 Digital Signature Standard (DSS)</a>.
  *
+ * <p>
+ *  此不可变类指定了用于生成DSA参数的参数集,如<a href="http://csrc.nist.gov/publications/fips/fips186-3/fips_186-3.pdf"> FI
+ * PS 186-3数字签名标准(DSS)</a>。
+ * 
+ * 
  * @see AlgorithmParameterSpec
  *
  * @since 8
@@ -44,6 +50,10 @@ public final class DSAGenParameterSpec implements AlgorithmParameterSpec {
      * generation using {@code primePLen} and {@code subprimeQLen}.
      * The value of {@code subprimeQLen} is also used as the default
      * length of the domain parameter seed in bits.
+     * <p>
+     *  使用{@code primePLen}和{@code subprimeQLen}创建用于DSA参数生成的域参数规范。 {@code subprimeQLen}的值也用作位参数种子的默认长度。
+     * 
+     * 
      * @param primePLen the desired length of the prime P in bits.
      * @param subprimeQLen the desired length of the sub-prime Q in bits.
      * @exception IllegalArgumentException if {@code primePLen}
@@ -58,6 +68,10 @@ public final class DSAGenParameterSpec implements AlgorithmParameterSpec {
      * Creates a domain parameter specification for DSA parameter
      * generation using {@code primePLen}, {@code subprimeQLen},
      * and {@code seedLen}.
+     * <p>
+     *  使用{@code primePLen},{@code subprimeQLen}和{@code seedLen}创建用于DSA参数生成的域参数规范。
+     * 
+     * 
      * @param primePLen the desired length of the prime P in bits.
      * @param subprimeQLen the desired length of the sub-prime Q in bits.
      * @param seedLen the desired length of the domain parameter seed in bits,
@@ -102,6 +116,10 @@ public final class DSAGenParameterSpec implements AlgorithmParameterSpec {
     /**
      * Returns the desired length of the prime P of the
      * to-be-generated DSA domain parameters in bits.
+     * <p>
+     *  以比特形式返回要生成的DSA域参数的素数P的期望长度。
+     * 
+     * 
      * @return the length of the prime P.
      */
     public int getPrimePLength() {
@@ -111,6 +129,10 @@ public final class DSAGenParameterSpec implements AlgorithmParameterSpec {
     /**
      * Returns the desired length of the sub-prime Q of the
      * to-be-generated DSA domain parameters in bits.
+     * <p>
+     *  以比特形式返回要生成的DSA域参数的子素数Q的期望长度。
+     * 
+     * 
      * @return the length of the sub-prime Q.
      */
     public int getSubprimeQLength() {
@@ -119,6 +141,9 @@ public final class DSAGenParameterSpec implements AlgorithmParameterSpec {
 
     /**
      * Returns the desired length of the domain parameter seed in bits.
+     * <p>
+     *  返回域参数种子的所需长度(以位为单位)。
+     * 
      * @return the length of the domain parameter seed.
      */
     public int getSeedLength() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -35,6 +36,14 @@ public interface TAG_INTERNET_IOP
      * The <code>profile_data</code> for the <code>TAG_INTERNET_IOP</code> 
      * profile is a CDR encapsulation of the <code>IIOP.ProfileBody_1_1</code>
      * type.
+     * <p>
+     *  标识支持互联网ORB协议的配置文件。此配置文件的<code> ProfileBody </code>包含包含由IIOP使用的寻址和对象标识信息的结构的CDR封装。
+     *  <code> TAG_INTERNET_IOP </code>配置文件的版本1.1还包括一个TaggedComponent对象数组,它可以包含支持可选IIOP功能,ORB服务(如安全性)和未来协议扩展
+     * 的附加信息。
+     *  标识支持互联网ORB协议的配置文件。此配置文件的<code> ProfileBody </code>包含包含由IIOP使用的寻址和对象标识信息的结构的CDR封装。
+     * <p>
+     *  IIOP之外的协议(如ESIOP和其他GIOP)可以通过将其附加配置文件信息编码为<code> TAG_INTERNET_IOP </code>配置文件中的组件,与IIOP共享配置文件信息(如对象标识
+     * 或安全信息)。
      */
   public static final int value = (int)(0L);
 }

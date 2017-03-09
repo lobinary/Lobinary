@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ package java.lang.annotation;
  * header files to determine whether a header file is required, and
  * if so, what declarations it should contain.
  *
+ * <p>
+ *  表示定义常量值的字段可以从本地代码引用。
+ * 
+ * 
  * @since 1.8
  */
 @Documented

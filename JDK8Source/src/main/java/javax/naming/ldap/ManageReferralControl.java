@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,14 @@ package javax.naming.ldap;
  *
  * The control has no control value.
  *
+ * <p>
+ *  请求将引用和其他特殊LDAP对象作为常规LDAP对象进行操作。它使请求者能够询问或更新这样的对象。
+ * p>
+ *  此类实现<a href="http://www.ietf.org/rfc/rfc3296.txt"> RFC 3296 </a>中定义的ManageDsaIT的LDAPv3请求控制。
+ * 
+ *  控制没有控制值。
+ * 
+ * 
  * @since 1.5
  * @author Vincent Ryan
  */
@@ -44,6 +53,9 @@ final public class ManageReferralControl extends BasicControl {
     /**
      * The ManageReferral control's assigned object identifier
      * is 2.16.840.1.113730.3.4.2.
+     * <p>
+     *  ManageReferral控制的分配对象标识符为2.16.840.1.113730.3.4.2。
+     * 
      */
     public static final String OID = "2.16.840.1.113730.3.4.2";
 
@@ -51,6 +63,9 @@ final public class ManageReferralControl extends BasicControl {
 
     /**
      * Constructs a critical ManageReferral control.
+     * <p>
+     *  构造一个关键的ManageReferral控制。
+     * 
      */
     public ManageReferralControl() {
         super(OID, true, null);
@@ -59,6 +74,9 @@ final public class ManageReferralControl extends BasicControl {
     /**
      * Constructs a ManageReferral control.
      *
+     * <p>
+     *  构造一个ManageReferral控件。
+     * 
      * @param   criticality The control's criticality setting.
      */
     public ManageReferralControl(boolean criticality) {

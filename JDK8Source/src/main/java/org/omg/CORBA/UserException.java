@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ package org.omg.CORBA;
  * means that they need to
  * be declared in method signatures.
  *
+ * <p>
+ *  CORBA IDL定义的用户异常的根类。所有CORBA用户异常都是已检查异常,这意味着它们需要在方法签名中声明。
+ * 
+ * 
  * @see <A href="../../../../technotes/guides/idl/jidlExceptions.html">documentation on
  * Java&nbsp;IDL exceptions</A>
  */
@@ -39,6 +44,9 @@ public abstract class UserException extends java.lang.Exception implements org.o
     /**
      * Constructs a <code>UserException</code> object.
      * This method is called only by subclasses.
+     * <p>
+     *  构造一个<code> UserException </code>对象。此方法仅由子类调用。
+     * 
      */
     protected UserException() {
         super();
@@ -48,6 +56,9 @@ public abstract class UserException extends java.lang.Exception implements org.o
      * Constructs a <code>UserException</code> object with a
      * detail message. This method is called only by subclasses.
      *
+     * <p>
+     *  构造具有详细消息的<code> UserException </code>对象。此方法仅由子类调用。
+     * 
      * @param reason a <code>String</code> object giving the reason for this
      *         exception
      */

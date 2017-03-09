@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -18,6 +19,9 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_ADAPTOR_LOGGER;
 /**
  * This class implements a server queue manager.
  * This class is for internal use.
+ * <p>
+ *  此类实现了服务器队列管理器。此类用于内部使用。
+ * 
  */
 final class SnmpQManager implements Serializable {
     private static final long serialVersionUID = 2163709017015248264L;
@@ -108,6 +112,9 @@ final class SnmpQManager implements Serializable {
 
 /**
  * This vector manages the inform requests to be sent to the manager.
+ * <p>
+ *  这个向量管理要发送给管理器的通知请求。
+ * 
  */
 @SuppressWarnings("serial")  // no serialVersionUID but never serialized
 class SendQ extends Vector<SnmpInformRequest> {
@@ -216,6 +223,8 @@ class SendQ extends Vector<SnmpInformRequest> {
 
 /**
  * This vector manages the inform requests to be retried to the manager.
+ * <p>
+ *  此向量管理要重试到管理器的通知请求。
  */
 @SuppressWarnings("serial")  // no serialVersionUID, but never serialized
 class WaitQ extends Vector<SnmpInformRequest> {

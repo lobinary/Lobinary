@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,13 @@ import com.sun.jmx.snmp.SnmpStatusException;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  <CODE> SnmpMibNode </CODE>类表示SNMP MIB中的一个节点。
+ * <P>
+ *  这个类在内部使用,由<CODE> mibgen </CODE>生成的类使用。你不应该直接使用这个类。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public abstract class SnmpMibNode implements Serializable {
@@ -64,6 +72,10 @@ public abstract class SnmpMibNode implements Serializable {
      * Get the next OID arc corresponding to a readable scalar variable,
      * a branch leading to a subgroub, or a table.
      *
+     * <p>
+     *  获取对应于可读标量变量的下一个OID弧,通向子树的分支或表。
+     * 
+     * 
      * @param id Id we start from looking for the next.
      * @param userData A contextual object containing user-data.
      *        This object is allocated through the <code>
@@ -87,6 +99,13 @@ public abstract class SnmpMibNode implements Serializable {
      * Calls {@link #getNextVarId(long,java.lang.Object)} until
      * {@link #skipVariable(long,java.lang.Object,int)} returns false.
      *
+     * <p>
+     *  获取对应于可读标量变量的下一个OID弧,通向子树的分支或表,可能跳过不能或不能返回的那些弧。
+     * 
+     *  调用{@link #getNextVarId(long,java.lang.Object)},直到{@link #skipVariable(long,java.lang.Object,int)}返回f
+     * alse。
+     * 
+     * 
      * @param id Id we start from looking for the next.
      * @param userData A contextual object containing user-data.
      *        This object is allocated through the <code>
@@ -119,6 +138,13 @@ public abstract class SnmpMibNode implements Serializable {
      *     version of the protocol (e.g. an Counter64 with SNMPv1).</li>
      * </ul>
      *
+     * <p>
+     *  钩子的子类。此方法的默认实现是始终返回false。
+     * 子类应重新定义此方法,以便在以下情况下返回true：<ul> <li>该变量是未实例化的叶子</li> <li>或者该变量是类型不能由该版本返回的叶子协议(例如,使用SNMPv1的Counter64)。
+     *  钩子的子类。此方法的默认实现是始终返回false。</li>。
+     * </ul>
+     * 
+     * 
      * @param id Id we start from looking for the next.
      * @param userData A contextual object containing user-data.
      *        This object is allocated through the <code>
@@ -138,6 +164,10 @@ public abstract class SnmpMibNode implements Serializable {
      * SnmpRequestTree. This method is a pure internal method. You should
      * never try to call it directly.
      *
+     * <p>
+     *  找到处理varbind的节点,并在SnmpRequestTree中注册它。这个方法是一个纯内部方法。你永远不要尝试直接调用它。
+     * 
+     * 
      * @param varbind  The varbind to be handled
      *
      * @param oid      The OID array extracted from the varbind
@@ -164,6 +194,10 @@ public abstract class SnmpMibNode implements Serializable {
      * This method is a pure internal method. You should never try to call
      * it directly.
      *
+     * <p>
+     * 找到处理紧随给定varbind OID的叶的节点,并将其注册在SnmpRequestTree中。这个方法是一个纯内部方法。你永远不要尝试直接调用它。
+     * 
+     * 
      * @param varbind  The varbind to be handled
      *
      * @param oid      The OID array extracted from the varbind
@@ -194,6 +228,13 @@ public abstract class SnmpMibNode implements Serializable {
      * underlying resources.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE> get </CODE>操作。
+     * 
+     *  <p>如果您需要实施一些特定策略以最小化对某些远程基础资源的访问,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -211,6 +252,11 @@ public abstract class SnmpMibNode implements Serializable {
      * underlying resources.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE>设置</CODE>操作。 <p>如果您需要实施一些特定策略以最小化对某些远程基础资源的访问,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -229,6 +275,11 @@ public abstract class SnmpMibNode implements Serializable {
      * checks between the different values provided in the varbind list.
      * <p>
      *
+     * <p>
+     *  一般处理<CODE>检查</CODE>操作。 <p>如果您需要实施一些特定策略以最小化对某些远程底层资源的访问,或者您需要在varbind列表中提供的不同值之间实施一些一致性检查,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -242,6 +293,10 @@ public abstract class SnmpMibNode implements Serializable {
     /**
      * Sorts the specified integer array.
      *
+     * <p>
+     *  对指定的整数数组排序。
+     * 
+     * 
      * @param array An integer array.
      */
     static public void sort(int array[]) {
@@ -250,6 +305,9 @@ public abstract class SnmpMibNode implements Serializable {
 
     /**
      * Computes the root OID of the MIB.
+     * <p>
+     *  计算MIB的根OID。
+     * 
      */
     public void getRootOid(Vector<Integer> result) {
         return;
@@ -270,6 +328,12 @@ public abstract class SnmpMibNode implements Serializable {
      * left and highest index or right.  The first time you call
      * this function it will be with the parameters 0, a.length - 1.
      *
+     * <p>
+     *  这是C.A.R Hoare的快速排序算法的通用版本。这将处理已排序的数组,以及具有重复键的数组。
+     * 
+     *  如果你认为一维数组从左边的最低索引到右边的最高索引,那么这个函数的参数是最低索引或左边和最高索引或右边。第一次调用此函数时,将使用参数0,a.length  -  1。
+     * 
+     * 
      * @param a An integer array.
      * @param lo0 Left boundary of array partition.
      * @param hi0 Right boundary of array partition.
@@ -283,6 +347,9 @@ public abstract class SnmpMibNode implements Serializable {
 
             /* Arbitrarily establishing partition element as the midpoint of
              * the array.
+             * <p>
+             *  数组。
+             * 
              */
             mid = a[ ( lo0 + hi0 ) / 2 ];
 
@@ -290,12 +357,18 @@ public abstract class SnmpMibNode implements Serializable {
             while( lo <= hi ) {
                 /* find the first element that is greater than or equal to
                  * the partition element starting from the left Index.
+                 * <p>
+                 * 分区元素从左边的Index开始。
+                 * 
                  */
                 while( ( lo < hi0 )  && ( a[lo] < mid ))
                     ++lo;
 
                 /* find an element that is smaller than or equal to
                  * the partition element starting from the right Index.
+                 * <p>
+                 *  分区元素从右边的Index开始。
+                 * 
                  */
                 while( ( hi > lo0 ) && ( a[hi] > mid ))
                     --hi;
@@ -310,12 +383,18 @@ public abstract class SnmpMibNode implements Serializable {
 
             /* If the right index has not reached the left side of array
              * must now sort the left partition.
+             * <p>
+             *  必须现在排序左分区。
+             * 
              */
             if( lo0 < hi )
                 QuickSort( a, lo0, hi );
 
             /* If the left index has not reached the right side of array
              * must now sort the right partition.
+             * <p>
+             *  必须现在排序正确的分区。
+             * 
              */
             if( lo < hi0 )
                 QuickSort( a, lo, hi0 );
@@ -333,6 +412,11 @@ public abstract class SnmpMibNode implements Serializable {
      * If there is no element of the array greater than <CODE>value</CODE>,
      * the method will throw a <CODE>SnmpStatusException</CODE>.
      *
+     * <p>
+     *  这将使排序数组中的第一个元素大于<CODE> value </CODE>。
+     * 如果数组中没有大于<CODE> value </CODE>的元素,该方法将抛出一个<CODE> SnmpStatusException </CODE>。
+     * 
+     * 
      * @param table A sorted integer array.
      *
      * @param value The greatest value.
@@ -401,6 +485,7 @@ public abstract class SnmpMibNode implements Serializable {
 
     /**
      * Contains the list of variable identifiers.
+     * <p>
      */
     protected int[] varList;
 }

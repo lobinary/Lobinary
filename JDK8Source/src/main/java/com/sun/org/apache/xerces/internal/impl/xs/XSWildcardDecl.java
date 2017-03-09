@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -35,6 +45,12 @@ import com.sun.org.apache.xerces.internal.xs.XSObjectList;
  *
  * @xerces.internal
  *
+ * <p>
+ *  通配符声明模式组件的XML表示形式是一个<any>或<anyAttribute>元素信息项
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  * @author Rahul Srivastava, Sun Microsystems Inc.
  *
@@ -75,6 +91,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * Validation Rule: Wildcard allows Namespace Name
+     * <p>
+     *  验证规则：通配符允许命名空间名称
+     * 
      */
     public boolean allowNamespace(String namespace) {
         // For a value which is either a namespace name or absent to be valid with respect to a wildcard constraint (the value of a {namespace constraint}) one of the following must be true:
@@ -116,6 +135,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      *  Schema Component Constraint: Wildcard Subset
+     * <p>
+     *  模式组件约束：通配符子集
+     * 
      */
     public boolean isSubsetOf(XSWildcardDecl superWildcard) {
         // if the super is null (not expressible), return false
@@ -172,6 +194,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * Check whether this wildcard has a weaker process contents than the super.
+     * <p>
+     *  检查此通配符是否具有比超级更弱的进程内容。
+     * 
      */
     public boolean weakerProcessContents(XSWildcardDecl superWildcard) {
         return fProcessContents == XSWildcardDecl.PC_LAX &&
@@ -182,6 +207,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * Schema Component Constraint: Attribute Wildcard Union
+     * <p>
+     *  模式组件约束：属性通配符联合
+     * 
      */
     public XSWildcardDecl performUnionWith(XSWildcardDecl wildcard,
                                            short processContents) {
@@ -296,6 +324,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * Schema Component Constraint: Attribute Wildcard Intersection
+     * <p>
+     *  模式组件约束：属性通配符交集
+     * 
      */
     public XSWildcardDecl performIntersectionWith(XSWildcardDecl wildcard,
                                                   short processContents) {
@@ -475,6 +506,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * get the string description of this wildcard
+     * <p>
+     *  获取此通配符的字符串描述
+     * 
      */
     private String fDescription = null;
     public String toString() {
@@ -516,6 +550,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * Get the type of the object, i.e ELEMENT_DECLARATION.
+     * <p>
+     *  获取对象的类型,即ELEMENT_DECLARATION。
+     * 
      */
     public short getType() {
         return XSConstants.WILDCARD;
@@ -524,6 +561,9 @@ public class XSWildcardDecl implements XSWildcard {
     /**
      * The <code>name</code> of this <code>XSObject</code> depending on the
      * <code>XSObject</code> type.
+     * <p>
+     *  取决于<code> XSObject </code>类型的<code> XSObject </code>的<code> name </code>
+     * 
      */
     public String getName() {
         return null;
@@ -533,6 +573,9 @@ public class XSWildcardDecl implements XSWildcard {
      * The namespace URI of this node, or <code>null</code> if it is
      * unspecified.  defines how a namespace URI is attached to schema
      * components.
+     * <p>
+     *  此节点的名称空间URI,或<code> null </code>(如果未指定)。定义命名空间URI如何附加到模式组件。
+     * 
      */
     public String getNamespace() {
         return null;
@@ -540,6 +583,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * Namespace constraint: A constraint type: any, not, list.
+     * <p>
+     * 命名空间约束：约束类型：any,not,list。
+     * 
      */
     public short getConstraintType() {
         return fType;
@@ -550,6 +596,10 @@ public class XSWildcardDecl implements XSWildcard {
      * LIST_NSCONSTRAINT, the list contains allowed namespaces. For
      * <code>constraintType</code> NOT_NSCONSTRAINT, the list contains
      * disallowed namespaces.
+     * <p>
+     *  命名空间约束。对于<code> constraintType </code> LIST_NSCONSTRAINT,列表包含允许的命名空间。
+     * 对于<code> constraintType </code> NOT_NSCONSTRAINT,列表包含不允许的命名空间。
+     * 
      */
     public StringList getNsConstraintList() {
         return new StringListImpl(fNamespaceList, fNamespaceList == null ? 0 : fNamespaceList.length);
@@ -558,6 +608,9 @@ public class XSWildcardDecl implements XSWildcard {
     /**
      * {process contents} One of skip, lax or strict. Valid constants values
      * are: PC_SKIP, PC_LAX, PC_STRICT.
+     * <p>
+     *  {process content} skip,lax或strict之一。有效的常数值为：PC_SKIP,PC_LAX,PC_STRICT。
+     * 
      */
     public short getProcessContents() {
         return fProcessContents;
@@ -565,6 +618,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * String valid of {process contents}. One of "skip", "lax" or "strict".
+     * <p>
+     *  字符串有效的{进程内容}。 "跳过","松弛"或"严格"之一。
+     * 
      */
     public String getProcessContentsAsString() {
         switch (fProcessContents) {
@@ -577,6 +633,9 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * Optional. Annotation.
+     * <p>
+     *  可选的。注解。
+     * 
      */
     public XSAnnotation getAnnotation() {
         return (fAnnotations != null) ? (XSAnnotation) fAnnotations.item(0) : null;
@@ -584,12 +643,17 @@ public class XSWildcardDecl implements XSWildcard {
 
     /**
      * Optional. Annotations.
+     * <p>
+     *  可选的。注释。
+     * 
      */
     public XSObjectList getAnnotations() {
         return (fAnnotations != null) ? fAnnotations : XSObjectListImpl.EMPTY_LIST;
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.apache.xerces.xs.XSObject#getNamespaceItem()
      */
     public XSNamespaceItem getNamespaceItem() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,11 @@ package java.awt.image;
   * a call to getWritableTile, and when they become unmodifiable via
   * the last call to releaseWritableTile.
   *
+  * <p>
+  *  当一个WritableRenderedImage的图块通过一个调用getWritableTile变得可以被修改时,以及当它们通过最后一次调用releaseWritableTile变得不可修改时,希望被
+  * 通知的对象的接口。
+  * 
+  * 
   * @see WritableRenderedImage
   *
   * @author Thomas DeWeese
@@ -42,6 +48,8 @@ public interface TileObserver {
     * A tile is about to be updated (it is either about to be grabbed
     * for writing, or it is being released from writing).
     *
+    * <p>
+    * 
     * @param source the image that owns the tile.
     * @param tileX the X index of the tile that is being updated.
     * @param tileY the Y index of the tile that is being updated.

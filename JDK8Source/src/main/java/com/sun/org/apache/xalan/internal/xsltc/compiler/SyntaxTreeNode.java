@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SyntaxTreeNode.java,v 1.6 2006/06/06 22:34:33 spericas Exp $
+ * <p>
+ *  $ Id：SyntaxTreeNode.java,v 1.6 2006/06/06 22:34:33 spericas Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -54,6 +67,8 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author G. Todd Miller
@@ -89,6 +104,9 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Creates a new SyntaxTreeNode with a 'null' QName and no source file
      * line number reference.
+     * <p>
+     *  创建一个带有'null'QName并且没有源文件行号引用的新的SyntaxTreeNode。
+     * 
      */
     public SyntaxTreeNode() {
         _line = 0;
@@ -97,6 +115,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Creates a new SyntaxTreeNode with a 'null' QName.
+     * <p>
+     *  创建一个带有'null'QName的新的SyntaxTreeNode。
+     * 
+     * 
      * @param line Source file line number reference
      */
     public SyntaxTreeNode(int line) {
@@ -106,6 +128,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Creates a new SyntaxTreeNode with no source file line number reference.
+     * <p>
+     *  创建一个没有源文件行号引用的新的SyntaxTreeNode。
+     * 
+     * 
      * @param uri The element's namespace URI
      * @param prefix The element's namespace prefix
      * @param local The element's local name
@@ -117,6 +143,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Set the source file line number for this element
+     * <p>
+     *  设置此元素的源文件行号
+     * 
+     * 
      * @param line The source file line number.
      */
     protected final void setLineNumber(int line) {
@@ -127,6 +157,10 @@ public abstract class SyntaxTreeNode implements Constants {
      * Get the source file line number for this element. If unavailable, lookup
      * in ancestors.
      *
+     * <p>
+     *  获取此元素的源文件行号。如果不可用,查找祖先。
+     * 
+     * 
      * @return The source file line number.
      */
     public final int getLineNumber() {
@@ -137,6 +171,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Set the QName for the syntax tree node.
+     * <p>
+     *  设置语法树节点的QName。
+     * 
+     * 
      * @param qname The QName for the syntax tree node
      */
     protected void setQName(QName qname) {
@@ -145,6 +183,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Set the QName for the SyntaxTreeNode
+     * <p>
+     *  设置SyntaxTreeNode的QName
+     * 
+     * 
      * @param uri The element's namespace URI
      * @param prefix The element's namespace prefix
      * @param local The element's local name
@@ -155,6 +197,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Set the QName for the SyntaxTreeNode
+     * <p>
+     *  设置SyntaxTreeNode的QName
+     * 
+     * 
      * @param qname The QName for the syntax tree node
      */
     protected QName getQName() {
@@ -163,6 +209,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Set the attributes for this SyntaxTreeNode.
+     * <p>
+     *  设置此SyntaxTreeNode的属性。
+     * 
+     * 
      * @param attributes Attributes for the element. Must be passed in as an
      *                   implementation of org.xml.sax.Attributes.
      */
@@ -172,6 +222,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns a value for an attribute from the source element.
+     * <p>
+     *  从源元素返回属性的值。
+     * 
+     * 
      * @param qname The QName of the attribute to return.
      * @return The value of the attribute of name 'qname'.
      */
@@ -207,6 +261,10 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Returns a list of all attributes declared for the element represented by
      * this syntax tree node.
+     * <p>
+     *  返回由此语法树节点表示的元素声明的所有属性的列表。
+     * 
+     * 
      * @return Attributes for this syntax tree node
      */
     protected Attributes getAttributes() {
@@ -219,6 +277,11 @@ public abstract class SyntaxTreeNode implements Constants {
      * may have to check ancestor elements to get all mappings that are in
      * in scope. The prefixes must be passed in as a Hashtable that maps
      * namespace prefixes (String objects) to namespace URIs (also String).
+     * <p>
+     * 为在此元素中声明的命名空间设置前缀映射。这不包括范围中的所有前缀映射,因此可能必须检查祖先元素以获取范围内的所有映射。
+     * 前缀必须作为将命名空间前缀(String对象)映射到命名空间URI(也是String)的Hashtable传递。
+     * 
+     * 
      * @param mapping The Hashtable containing the mappings.
      */
     protected void setPrefixMapping(Hashtable mapping) {
@@ -230,6 +293,10 @@ public abstract class SyntaxTreeNode implements Constants {
      * for this element. This does not include all prefix mappings in scope,
      * so one may have to check ancestor elements to get all mappings that are
      * in in scope.
+     * <p>
+     *  返回包含为此元素声明的前缀映射的Hashtable。这不包括范围中的所有前缀映射,因此可能必须检查祖先元素以获取范围内的所有映射。
+     * 
+     * 
      * @return Prefix mappings (for this element only).
      */
     protected Hashtable getPrefixMapping() {
@@ -238,6 +305,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Adds a single prefix mapping to this syntax tree node.
+     * <p>
+     *  向此语法树节点添加单个前缀映射。
+     * 
+     * 
      * @param prefix Namespace prefix.
      * @param uri Namespace URI.
      */
@@ -252,6 +323,10 @@ public abstract class SyntaxTreeNode implements Constants {
      * method checks namespace mappings for this element, and if necessary
      * for ancestor elements as well (ie. if the prefix maps to an URI in this
      * scope then you'll definately get the URI from this method).
+     * <p>
+     *  返回给定前缀范围内的任何命名空间URI。此方法检查此元素的命名空间映射,如果必要,还检查祖先元素(即如果前缀映射到此范围中的URI,那么您将从此方法中明确获取URI)。
+     * 
+     * 
      * @param prefix Namespace prefix.
      * @return Namespace URI.
      */
@@ -279,6 +354,11 @@ public abstract class SyntaxTreeNode implements Constants {
      * within the current scope then you'll definately get the prefix from
      * this method). Note that this is a very slow method and consequentially
      * it should only be used strictly when needed.
+     * <p>
+     *  返回映射到当前作用域中的前缀的任何命名空间前缀。此方法检查此元素的命名空间映射,如果必要,还检查祖先元素(即,如果URI在当前范围内声明,那么您将明确地从此方法获取前缀)。
+     * 注意,这是一个非常缓慢的方法,因此它应该只在需要时严格使用。
+     * 
+     * 
      * @param uri Namespace URI.
      * @return Namespace prefix.
      */
@@ -308,6 +388,10 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Set this node's parser. The parser (the XSLT parser) gives this
      * syntax tree node access to the symbol table and XPath parser.
+     * <p>
+     *  设置此节点的解析器。解析器(XSLT解析器)给这个语法树节点访问符号表和XPath解析器。
+     * 
+     * 
      * @param parser The XSLT parser.
      */
     protected void setParser(Parser parser) {
@@ -316,6 +400,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns this node's XSLT parser.
+     * <p>
+     *  返回此节点的XSLT解析器。
+     * 
+     * 
      * @return The XSLT parser.
      */
     public final Parser getParser() {
@@ -326,6 +414,10 @@ public abstract class SyntaxTreeNode implements Constants {
      * Set this syntax tree node's parent node, if unset. For
      * re-parenting just use <code>node._parent = newparent</code>.
      *
+     * <p>
+     * 如果未设置,请设置此语法树节点的父节点。对于重新生成,只需使用<code> node._parent = newparent </code>。
+     * 
+     * 
      * @param parent The parent node.
      */
     protected void setParent(SyntaxTreeNode parent) {
@@ -334,6 +426,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns this syntax tree node's parent node.
+     * <p>
+     *  返回此语法树节点的父节点。
+     * 
+     * 
      * @return The parent syntax tree node.
      */
     protected final SyntaxTreeNode getParent() {
@@ -342,6 +438,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns 'true' if this syntax tree node is the Sentinal node.
+     * <p>
+     *  如果此语法树节点是Sentinal节点,则返回'true'。
+     * 
+     * 
      * @return 'true' if this syntax tree node is the Sentinal node.
      */
     protected final boolean isDummy() {
@@ -351,6 +451,10 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Get the import precedence of this element. The import precedence equals
      * the import precedence of the stylesheet in which this element occured.
+     * <p>
+     *  获取此元素的导入优先级。导入优先级等于此元素出现的样式表的导入优先级。
+     * 
+     * 
      * @return The import precedence of this syntax tree node.
      */
     protected int getImportPrecedence() {
@@ -362,6 +466,10 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Get the Stylesheet node that represents the <xsl:stylesheet/> element
      * that this node occured under.
+     * <p>
+     *  获取表示此节点出现的<xsl：stylesheet />元素的样式表节点。
+     * 
+     * 
      * @return The Stylesheet ancestor node of this node.
      */
     public Stylesheet getStylesheet() {
@@ -381,6 +489,10 @@ public abstract class SyntaxTreeNode implements Constants {
      * Get the Template node that represents the <xsl:template/> element
      * that this node occured under. Note that this method will return 'null'
      * for nodes that represent top-level elements.
+     * <p>
+     *  获取表示此节点发生的<xsl：template />元素的模板节点。请注意,此方法将为表示顶级元素的节点返回"null"。
+     * 
+     * 
      * @return The Template ancestor node of this node or 'null'.
      */
     protected Template getTemplate() {
@@ -395,6 +507,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns a reference to the XSLTC (XSLT compiler) in use.
+     * <p>
+     *  返回对正在使用的XSLTC(XSLT编译器)的引用。
+     * 
+     * 
      * @return XSLTC - XSLT compiler.
      */
     protected final XSLTC getXSLTC() {
@@ -403,6 +519,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns the XSLT parser's symbol table.
+     * <p>
+     *  返回XSLT解析器的符号表。
+     * 
+     * 
      * @return Symbol table.
      */
     protected final SymbolTable getSymbolTable() {
@@ -414,6 +534,10 @@ public abstract class SyntaxTreeNode implements Constants {
      * expressions, patterns and functions). The default behaviour is to parser
      * the syntax tree node's children (since there are no common expressions,
      * patterns, etc. that can be handled in this base class.
+     * <p>
+     *  解析此语法树节点(子节点,XPath表达式,模式和函数)的内容。默认行为是解析语法树节点的子节点(因为没有公共表达式,模式等可以在这个基类中处理。
+     * 
+     * 
      * @param parser reference to the XSLT parser
      */
     public void parseContents(Parser parser) {
@@ -423,6 +547,10 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Parse all children of this syntax tree node. This method is normally
      * called by the parseContents() method.
+     * <p>
+     *  解析此语法树节点的所有子节点。这个方法通常由parseContents()方法调用。
+     * 
+     * 
      * @param parser reference to the XSLT parser
      */
     protected final void parseChildren(Parser parser) {
@@ -458,6 +586,9 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Add a node to the current scope and return name of a variable or
      * parameter if the node represents a variable or a parameter.
+     * <p>
+     *  如果节点表示变量或参数,则将节点添加到当前作用域并返回变量或参数的名称。
+     * 
      */
     protected QName updateScope(Parser parser, SyntaxTreeNode node) {
         if (node instanceof Variable) {
@@ -478,12 +609,20 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Type check the children of this node. The type check phase may add
      * coercions (CastExpr) to the AST.
+     * <p>
+     *  类型检查此节点的子节点。类型检查阶段可以向AST添加强制(CastExpr)。
+     * 
+     * 
      * @param stable The compiler/parser's symbol table
      */
     public abstract Type typeCheck(SymbolTable stable) throws TypeCheckError;
 
     /**
      * Call typeCheck() on all child syntax tree nodes.
+     * <p>
+     *  在所有子语法树节点上调用typeCheck()。
+     * 
+     * 
      * @param stable The compiler/parser's symbol table
      */
     protected Type typeCheckContents(SymbolTable stable) throws TypeCheckError {
@@ -497,6 +636,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Translate this abstract syntax tree node into JVM bytecodes.
+     * <p>
+     *  将此抽象语法树节点转换为JVM字节码。
+     * 
+     * 
      * @param classGen BCEL Java class generator
      * @param methodGen BCEL Java method generator
      */
@@ -505,6 +648,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Call translate() on all child syntax tree nodes.
+     * <p>
+     * 在所有子语法树节点上调用translate()。
+     * 
+     * 
      * @param classGen BCEL Java class generator
      * @param methodGen BCEL Java method generator
      */
@@ -538,6 +685,12 @@ public abstract class SyntaxTreeNode implements Constants {
      *
      * A node is a simple RTF if all children only produce Text value.
      *
+     * <p>
+     *  如果节点表示简单的RTF,则返回true。
+     * 
+     *  如果所有的子节点都只生成Text值,节点是一个简单的RTF。
+     * 
+     * 
      * @param node A node
      * @return true if the node content can be considered as a simple RTF.
      */
@@ -559,6 +712,12 @@ public abstract class SyntaxTreeNode implements Constants {
      * A node is an adaptive RTF if each children is a Text element
      * or it is <xsl:call-template> or <xsl:apply-templates>.
      *
+     * <p>
+     *  如果节点表示自适应RTF,则返回true。
+     * 
+     *  如果每个子代是一个Text元素,或者它是<xsl：call-template>或<xsl：apply-templates>,则节点是自适应RTF。
+     * 
+     * 
      * @param node A node
      * @return true if the node content can be considered as an adaptive RTF.
      */
@@ -584,6 +743,14 @@ public abstract class SyntaxTreeNode implements Constants {
      * If the doExtendedCheck flag is true, xsl:call-template and xsl:apply-templates
      * are also considered as Text elements.
      *
+     * <p>
+     *  如果节点仅生成文本内容,则返回true。
+     * 
+     *  如果节点是Text,xsl：value-of,xsl：number或嵌套在控制指令(xsl：if或xsl：choose)中的组合,则该节点是Text元素。
+     * 
+     *  如果doExtendedCheck标志为true,则xsl：call-template和xsl：apply-templates也被视为文本元素。
+     * 
+     * 
      * @param node A node
      * @param doExtendedCheck If this flag is true, <xsl:call-template> and
      * <xsl:apply-templates> are also considered as Text elements.
@@ -623,6 +790,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Utility method used by parameters and variables to store result trees
+     * <p>
+     *  用于存储结果树的参数和变量使用的实用程序方法
+     * 
+     * 
      * @param classGen BCEL Java class generator
      * @param methodGen BCEL Java method generator
      */
@@ -701,6 +872,9 @@ public abstract class SyntaxTreeNode implements Constants {
             /*
              * Give the DOM adapter an empty type mapping if the nodeset
              * extension function is never called.
+             * <p>
+             *  如果从未调用节点集扩展函数,则为DOM适配器指定空类型映射。
+             * 
              */
             if (!stylesheet.callsNodeset()) {
                 il.append(new ICONST(0));
@@ -757,6 +931,10 @@ public abstract class SyntaxTreeNode implements Constants {
      * default, every expression/instruction depends on the context unless it
      * overrides this method. Currently used to determine if result trees are
      * compiled using procedures or little DOMs (result tree fragments).
+     * <p>
+     *  如果此表达式/指令取决于上下文,则返回true。默认情况下,每个表达式/指令取决于上下文,除非它覆盖此方法。目前用于确定结果树是使用过程还是使用小DOM(结果树片段)进行编译。
+     * 
+     * 
      * @return 'true' if this node depends on the context.
      */
     protected boolean contextDependent() {
@@ -766,6 +944,10 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Return true if any of the expressions/instructions in the contents of
      * this node is context dependent.
+     * <p>
+     *  如果此节点的内容中的任何表达式/指令是上下文相关的,则返回true。
+     * 
+     * 
      * @return 'true' if the contents of this node is context dependent.
      */
     protected boolean dependentContents() {
@@ -781,6 +963,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Adds a child node to this syntax tree node.
+     * <p>
+     *  将一个子节点添加到此语法树节点。
+     * 
+     * 
      * @param element is the new child node.
      */
     protected final void addElement(SyntaxTreeNode element) {
@@ -791,6 +977,10 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Inserts the first child node of this syntax tree node. The existing
      * children are shifted back one position.
+     * <p>
+     *  插入此语法树节点的第一个子节点。现有的孩子被移回一个位置。
+     * 
+     * 
      * @param element is the new child node.
      */
     protected final void setFirstElement(SyntaxTreeNode element) {
@@ -800,6 +990,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Removed a child node of this syntax tree node.
+     * <p>
+     *  删除了此语法树节点的子节点。
+     * 
+     * 
      * @param element is the child node to remove.
      */
     protected final void removeElement(SyntaxTreeNode element) {
@@ -809,6 +1003,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns a Vector containing all the child nodes of this node.
+     * <p>
+     *  返回包含此节点的所有子节点的向量。
+     * 
+     * 
      * @return A Vector containing all the child nodes of this node.
      */
     protected final Vector getContents() {
@@ -817,6 +1015,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Tells you if this node has any child nodes.
+     * <p>
+     * 告诉你这个节点是否有任何子节点。
+     * 
+     * 
      * @return 'true' if this node has any children.
      */
     protected final boolean hasContents() {
@@ -825,6 +1027,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns the number of children this node has.
+     * <p>
+     *  返回此节点具有的子节点数。
+     * 
+     * 
      * @return Number of child nodes.
      */
     protected final int elementCount() {
@@ -833,6 +1039,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns an Enumeration of all child nodes of this node.
+     * <p>
+     *  返回此节点的所有子节点的枚举。
+     * 
+     * 
      * @return An Enumeration of all child nodes of this node.
      */
     protected final Enumeration elements() {
@@ -841,6 +1051,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns a child node at a given position.
+     * <p>
+     *  返回给定位置的子节点。
+     * 
+     * 
      * @param pos The child node's position.
      * @return The child node.
      */
@@ -850,6 +1064,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Returns this element's last child
+     * <p>
+     *  返回此元素的最后一个子元素
+     * 
+     * 
      * @return The child node.
      */
     protected final SyntaxTreeNode lastChild() {
@@ -861,6 +1079,10 @@ public abstract class SyntaxTreeNode implements Constants {
      * Displays the contents of this syntax tree node (to stdout).
      * This method is intended for debugging _only_, and should be overridden
      * by all syntax tree node implementations.
+     * <p>
+     *  显示此语法树节点(到stdout)的内容。此方法用于调试_only_,并且应该被所有语法树节点实现覆盖。
+     * 
+     * 
      * @param indent Indentation level for syntax tree levels.
      */
     public void display(int indent) {
@@ -870,6 +1092,10 @@ public abstract class SyntaxTreeNode implements Constants {
     /**
      * Displays the contents of this syntax tree node (to stdout).
      * This method is intended for debugging _only_ !!!
+     * <p>
+     *  显示此语法树节点(到stdout)的内容。这个方法是用来调试_only_！
+     * 
+     * 
      * @param indent Indentation level for syntax tree levels.
      */
     protected void displayContents(int indent) {
@@ -882,6 +1108,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Set the indentation level for debug output.
+     * <p>
+     *  设置调试输出的缩进级别。
+     * 
+     * 
      * @param indent Indentation level for syntax tree levels.
      */
     protected final void indent(int indent) {
@@ -890,6 +1120,10 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Report an error to the parser.
+     * <p>
+     *  向解析器报告错误。
+     * 
+     * 
      * @param element The element in which the error occured (normally 'this'
      * but it could also be an expression/pattern/etc.)
      * @param parser The XSLT parser to report the error to.
@@ -904,6 +1138,9 @@ public abstract class SyntaxTreeNode implements Constants {
 
     /**
      * Report a recoverable error to the parser.
+     * <p>
+     *  向解析器报告可恢复的错误。
+     * 
      * @param element The element in which the error occured (normally 'this'
      * but it could also be an expression/pattern/etc.)
      * @param parser The XSLT parser to report the error to.

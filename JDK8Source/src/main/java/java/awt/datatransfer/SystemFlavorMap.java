@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,12 @@ import sun.awt.datatransfer.DataTransferer;
  * applications, and between Java applications in separate VMs.
  * <p>
  *
+ * <p>
+ *  SystemFlavorMap是对应于平台特定数据格式的"本地"(Strings)和对应于平台无关MIME类型的"flavor"(DataFlavors)之间的可配置映射。
+ * 此映射由数据传输子系统用于在Java和本机应用程序之间以及在单独的VM中的Java应用程序之间传输数据。
+ * <p>
+ * 
+ * 
  * @since 1.2
  */
 public final class SystemFlavorMap implements FlavorMap, FlavorTable {
@@ -65,6 +72,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
     /**
      * Constant prefix used to tag Java types converted to native platform
      * type.
+     * <p>
+     *  用于标记转换为本机平台类型的Java类型的常量前缀。
+     * 
      */
     private static String JavaMIME = "JAVA_DATAFLAVOR:";
 
@@ -72,6 +82,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
 
     /**
      * Copied from java.util.Properties.
+     * <p>
+     *  从java.util.Properties复制。
+     * 
      */
     private static final String keyValueSeparators = "=: \t\r\n\f";
     private static final String strictKeyValueSeparators = "=:";
@@ -80,6 +93,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
     /**
      * The list of valid, decoded text flavor representation classes, in order
      * from best to worst.
+     * <p>
+     *  有效的,解码的文本风味表示类的列表,按照从最好到最差的顺序。
+     * 
      */
     private static final String[] UNICODE_TEXT_CLASSES = {
         "java.io.Reader", "java.lang.String", "java.nio.CharBuffer", "\"[C\""
@@ -88,6 +104,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
     /**
      * The list of valid, encoded text flavor representation classes, in order
      * from best to worst.
+     * <p>
+     *  有效的,编码的文本风味表示类的列表,按照从最好到最差的顺序。
+     * 
      */
     private static final String[] ENCODED_TEXT_CLASSES = {
         "java.io.InputStream", "java.nio.ByteBuffer", "\"[B\""
@@ -95,11 +114,17 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
 
     /**
      * A String representing text/plain MIME type.
+     * <p>
+     *  表示文本/纯MIME类型的字符串。
+     * 
      */
     private static final String TEXT_PLAIN_BASE_TYPE = "text/plain";
 
     /**
      * A String representing text/html MIME type.
+     * <p>
+     *  表示文本/ html MIME类型的字符串。
+     * 
      */
     private static final String HTML_TEXT_BASE_TYPE = "text/html";
 
@@ -107,6 +132,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * Maps native Strings to Lists of DataFlavors (or base type Strings for
      * text DataFlavors).
      * Do not use the field directly, use getNativeToFlavor() instead.
+     * <p>
+     *  将本地字符串映射到DataFlavors列表(或文本DataFlavors的基本类型字符串)。不要直接使用该字段,请改用getNativeToFlavor()。
+     * 
      */
     private final Map<String, LinkedHashSet<DataFlavor>> nativeToFlavor = new HashMap<>();
 
@@ -115,6 +143,10 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * use this accessor instead of direct access to the field which may not be
      * initialized yet.  This method will initialize the field if needed.
      *
+     * <p>
+     *  nativeToFlavor地图的访问者。因为我们使用延迟初始化,我们必须使用这个访问器,而不是直接访问可能没有初始化的字段。如果需要,此方法将初始化字段。
+     * 
+     * 
      * @return nativeToFlavor
      */
     private Map<String, LinkedHashSet<DataFlavor>> getNativeToFlavor() {
@@ -128,6 +160,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * Maps DataFlavors (or base type Strings for text DataFlavors) to Lists of
      * native Strings.
      * Do not use the field directly, use getFlavorToNative() instead.
+     * <p>
+     *  将DataFlavors(或文本DataFlavors的基本类型字符串)映射到本机字符串列表。不要直接使用该字段,请改用getFlavorToNative()。
+     * 
      */
     private final Map<DataFlavor, LinkedHashSet<String>> flavorToNative = new HashMap<>();
 
@@ -136,6 +171,10 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * use this accessor instead of direct access to the field which may not be
      * initialized yet.  This method will initialize the field if needed.
      *
+     * <p>
+     * flavorToNative映射的访问者。因为我们使用延迟初始化,我们必须使用这个访问器,而不是直接访问可能没有初始化的字段。如果需要,此方法将初始化字段。
+     * 
+     * 
      * @return flavorToNative
      */
     private synchronized Map<DataFlavor, LinkedHashSet<String>> getFlavorToNative() {
@@ -149,11 +188,17 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * Maps a text DataFlavor primary mime-type to the native. Used only to store
      * standard mappings registered in the flavormap.properties
      * Do not use this field directly, use getTextTypeToNative() instead.
+     * <p>
+     *  将文本DataFlavor主mime类型映射到本机。仅用于存储在flavormap.properties中注册的标准映射不要直接使用此字段,请改用getTextTypeToNative()。
+     * 
      */
     private Map<String, LinkedHashSet<String>> textTypeToNative = new HashMap<>();
 
     /**
      * Shows if the object has been initialized.
+     * <p>
+     *  显示对象是否已初始化。
+     * 
      */
     private boolean isMapInitialized = false;
 
@@ -162,6 +207,10 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * must use this accessor instead of direct access to the field which may not
      * be initialized yet. This method will initialize the field if needed.
      *
+     * <p>
+     *  textTypeToNative地图的访问器。因为我们使用延迟初始化,我们必须使用这个访问器,而不是直接访问可能没有初始化的字段。如果需要,此方法将初始化字段。
+     * 
+     * 
      * @return textTypeToNative
      */
     private synchronized Map<String, LinkedHashSet<String>> getTextTypeToNative() {
@@ -176,12 +225,18 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
     /**
      * Caches the result of getNativesForFlavor(). Maps DataFlavors to
      * SoftReferences which reference LinkedHashSet of String natives.
+     * <p>
+     *  缓存getNativesForFlavor()的结果。将DataFlavors映射到SoftReferences,引用LinkedHashSet的String Native。
+     * 
      */
     private final SoftCache<DataFlavor, String> nativesForFlavorCache = new SoftCache<>();
 
     /**
      * Caches the result getFlavorsForNative(). Maps String natives to
      * SoftReferences which reference LinkedHashSet of DataFlavors.
+     * <p>
+     *  缓存结果getFlavorsForNative()。将字符串本地映射到引用DataFlavors的LinkedHashSet的SoftReferences。
+     * 
      */
     private final SoftCache<String, DataFlavor> flavorsForNativeCache = new SoftCache<>();
 
@@ -190,11 +245,18 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * to the DataFlavors and String natives for which the mappings have been
      * explicitly specified with setFlavorsForNative() or
      * setNativesForFlavor(). This keeps all such keys.
+     * <p>
+     *  用于文本映射的动态映射生成不应应用于已使用setFlavorsForNative()或setNativesForFlavor()明确指定映射的DataFlavors和String本地。
+     * 这保持所有这样的键。
+     * 
      */
     private Set<Object> disabledMappingGenerationKeys = new HashSet<>();
 
     /**
      * Returns the default FlavorMap for this thread's ClassLoader.
+     * <p>
+     *  返回此线程的ClassLoader的默认FlavorMap。
+     * 
      */
     public static FlavorMap getDefaultFlavorMap() {
         AppContext context = AppContext.getAppContext();
@@ -213,6 +275,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * Initializes a SystemFlavorMap by reading flavormap.properties and
      * AWT.DnD.flavorMapFileURL.
      * For thread-safety must be called under lock on this.
+     * <p>
+     *  通过读取flavormap.properties和AWT.DnD.flavorMapFileURL来初始化SystemFlavorMap。对于线程安全必须在锁上调用这个。
+     * 
      */
     private void initSystemFlavorMap() {
         if (isMapInitialized) {
@@ -283,6 +348,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
     /**
      * Copied code from java.util.Properties. Parsing the data ourselves is the
      * only way to handle duplicate keys and values.
+     * <p>
+     * 从java.util.Properties复制代码。解析数据是处理重复的键和值的唯一方法。
+     * 
      */
     private void parseAndStoreReader(BufferedReader in) throws IOException {
         while (true) {
@@ -446,6 +514,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
 
     /**
      * Copied from java.util.Properties.
+     * <p>
+     *  从java.util.Properties复制。
+     * 
      */
     private boolean continueLine (String line) {
         int slashCount = 0;
@@ -458,6 +529,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
 
     /**
      * Copied from java.util.Properties.
+     * <p>
+     *  从java.util.Properties复制。
+     * 
      */
     private String loadConvert(String theString) {
         char aChar;
@@ -520,6 +594,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * standard map, the listed object will not replace any object already at
      * the appropriate Map location, but rather will be appended to a List
      * stored in that location.
+     * <p>
+     *  将列出的对象存储在map中指定的哈希键下。与标准地图不同,列出的对象不会替换已经在相应地图位置的任何对象,而是将附加到存储在该位置的列表。
+     * 
      */
     private <H, L> void store(H hashed, L listed, Map<H, LinkedHashSet<L>> map) {
         LinkedHashSet<L> list = map.get(hashed);
@@ -537,6 +614,10 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * handles the case where 'nat' is not found in 'nativeToFlavor'. In that
      * case, a new DataFlavor is synthesized, stored, and returned, if and
      * only if the specified native is encoded as a Java MIME type.
+     * <p>
+     *  语义上等同于"nativeToFlavor.get(nat)"。此方法处理'nativeToFlavor'中找不到'nat'的情况。
+     * 在这种情况下,当且仅当指定的本机编码为Java MIME类型时,才合成,存储和返回新的DataFlavor。
+     * 
      */
     private LinkedHashSet<DataFlavor> nativeToFlavorLookup(String nat) {
         LinkedHashSet<DataFlavor> flavors = getNativeToFlavor().get(nat);
@@ -599,6 +680,11 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * SYNTHESIZE_IF_NOT_FOUND a native is synthesized, stored, and returned by
      * encoding the DataFlavor's MIME type. Otherwise an empty List is returned
      * and 'flavorToNative' remains unaffected.
+     * <p>
+     *  语义上等同于'flavorToNative.get(flav)'。此方法处理根据通过'synthesize'参数的值,在'flavorToNative'中找不到'flav'的情况。
+     * 如果'synthesize'是SYNTHESIZE_IF_NOT_FOUND,通过编码DataFlavor的MIME类型来合成,存储和返回本机。
+     * 否则返回一个空列表,并且'flavorToNative'保持不受影响。
+     * 
      */
     private LinkedHashSet<String> flavorToNativeLookup(final DataFlavor flav,
                                                        final boolean synthesize) {
@@ -661,6 +747,14 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * mapping in both directions between the specified <code>DataFlavor</code>
      * and an encoded version of its MIME type as its native.
      *
+     * <p>
+     *  返回数据传输子系统可以转换指定的<code> DataFlavor </code>的<code> String </code>本地的<code> List </code>。
+     *  <code> List </code>将从最好的本机到最差。也就是说,第一本地人将最好地将指定风格中的数据反映到底层本地平台。
+     * <p>
+     * 如果指定的<code> DataFlavor </code>之前对于数据传输子系统是未知的,并且数据传输子系统不能将此<code> DataFlavor </code>翻译成任何现有的本机,则调用此方法
+     * 将建立映射在指定的<code> DataFlavor </code>和其MIME类型的编码版本之间的两个方向上作为其本机。
+     * 
+     * 
      * @param flav the <code>DataFlavor</code> whose corresponding natives
      *        should be returned. If <code>null</code> is specified, all
      *        natives currently known to the data transfer subsystem are
@@ -753,6 +847,38 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * <code>List</code> is platform dependent, but <code>null</code>
      * cannot be returned.
      *
+     * <p>
+     *  // flavormap.properties按照每个flavor的基本类型存储。
+     *  if("text".equals(flav.getPrimaryType())){LinkedHashSet <String> textTypeNatives = getTextTypeToNative()。
+     *  // flavormap.properties按照每个flavor的基本类型存储。
+     * get(flav.mimeType.getBaseType()); if(textTypeNatives！= null){retval.addAll(textTypeNatives); }}。
+     * 
+     *  //也包括文本/纯原生代码,但不要重复字符串LinkedHashSet <String> textTypeNatives = getTextTypeToNative()。
+     * get(TEXT_PLAIN_BASE_TYPE); if(textTypeNatives！= null){retval.addAll(textTypeNatives); }}。
+     * 
+     *  if(retval.isEmpty()){retval = flavorToNativeLookup(flav,true); } else {//在这个分支中,保证显式地列出的用于flav的MIME类型的本地被添加// addUnencodedNativeForFlavor(),因此它们具有较低的优先级。
+     *  retval.addAll(flavorToNativeLookup(flav,false)); };} else if(DataTransferer.isFlavorNoncharsetTextTy
+     * pe(flav)){retval = getTextTypeToNative()。
+     * get(flav.mimeType.getBaseType());。
+     * 
+     * if(retval == null || retval.isEmpty()){retval = flavorToNativeLookup(flav,true); } else {//在这个分支中,保证显式地列出的用于flav的MIME类型的本地被添加// addUnencodedNativeForFlavor(),因此它们具有较低的优先级。
+     *  retval.addAll(flavorToNativeLookup(flav,false)); }} else {retval = flavorToNativeLookup(flav,true); }
+     * }。
+     * 
+     *  nativesForFlavorCache.put(flav,retval); //创建副本,因为客户端代码可以修改返回的列表。
+     *  return new ArrayList <>(retval); }}。
+     * 
+     *  / **返回数据传输子系统可以转换指定的<code> String </code>本机的<code> DataFlavor </code>的<code> List </code>。
+     *  <code> List </code>将从最佳<code> DataFlavor </code>中排序到最差。
+     * 也就是说,第一个<code> DataFlavor </code>将最好地将指定本机中的数据反映到Java应用程序中。
+     * <p>
+     *  如果指定的本地数据传输子系统以前未知,并且该本地数据已被正确编码,则调用此方法将在指定的本地数据和<code> DataFlavor </code>之间建立两个方向的映射,其MIME类型为原生的解码版
+     * 本。
+     * <p>
+     *  如果指定的本机不是正确编码的本机,并且此本机的映射未使用<code> setFlavorsForNative </code>更改,则<code> List </code>的内容取决于平台, > nul
+     * l </code>无法返回。
+     * 
+     * 
      * @param nat the native whose corresponding <code>DataFlavor</code>s
      *        should be returned. If <code>null</code> is specified, all
      *        <code>DataFlavor</code>s currently known to the data transfer
@@ -918,6 +1044,14 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * mapping in both directions between the specified <code>DataFlavor</code>
      * and an encoded version of its MIME type as its native.
      *
+     * <p>
+     * 将指定的<code> DataFlavor </code>的<code> Map </code>返回到其最喜欢的<code> String </code>本机。
+     * 每个原生值将与由<code> getNativesForFlavor </code>为指定的flavor返回的列表中的第一个原生值相同。
+     * <p>
+     *  如果数据传输子系统先前未知指定的<code> DataFlavor </code>,则调用此方法将在指定的<code> DataFlavor </code>和其MIME类型的编码版本之间建立两个方向的
+     * 映射作为它的天生。
+     * 
+     * 
      * @param flavors an array of <code>DataFlavor</code>s which will be the
      *        key set of the returned <code>Map</code>. If <code>null</code> is
      *        specified, a mapping of all <code>DataFlavor</code>s known to the
@@ -964,6 +1098,16 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * native and a <code>DataFlavor</code> whose MIME type is a decoded
      * version of the native.
      *
+     * <p>
+     *  将指定的<code> String </code>本机的<code> Map </code>返回到其最喜欢的<code> DataFlavor </code>。
+     * 每个<code> DataFlavor </code>值将与<code> getFlavorsForNative </code>返回的列表中指定本机的第一个<code> DataFlavor </code>
+     * 相同。
+     *  将指定的<code> String </code>本机的<code> Map </code>返回到其最喜欢的<code> DataFlavor </code>。
+     * <p>
+     *  如果指定的本地数据传输子系统先前未知,并且该本地数据已被正确编码,则调用此方法将在指定的本地数据和<code> DataFlavor </code>之间建立两个方向的映射,MIME类型为原生的解码版本
+     * 。
+     * 
+     * 
      * @param natives an array of <code>String</code>s which will be the
      *        key set of the returned <code>Map</code>. If <code>null</code> is
      *        specified, a mapping of all supported <code>String</code> natives
@@ -1007,6 +1151,14 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * <code>DataFlavor</code> to the specified <code>String</code> native
      * already exists.
      *
+     * <p>
+     * 将指定<code> DataFlavor </code>(和所有<code> DataFlavor </code>等于指定的<code> DataFlavor </code>)的映射添加到指定的<code>
+     *  String </code>本机。
+     * 与<code> getNativesForFlavor </code>不同,映射只会在一个方向上建立,而本机将不会被编码。
+     * 要建立双向映射,请调用<code> addFlavorForUnencodedNative </code>。新映射的优先级低于任何现有映射。
+     * 如果从指定的或等于<code> DataFlavor </code>到指定的<code> String </code>本机的映射已存在,则此方法不起作用。
+     * 
+     * 
      * @param flav the <code>DataFlavor</code> key for the mapping
      * @param nat the <code>String</code> native value for the mapping
      * @throws NullPointerException if flav or nat is <code>null</code>
@@ -1048,6 +1200,17 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * data transfer subsystem. This method should only be used for
      * application-level mappings.
      *
+     * <p>
+     *  丢弃指定的<code> DataFlavor </code>和所有<code> DataFlavor </code>等于指定的<code> DataFlavor </code>的当前映射,并创建指向<code>
+     *  String的新映射</code>当地人。
+     * 与<code> getNativesForFlavor </code>不同,映射只会在一个方向上建立,而原生代码将不会被编码。
+     * 要建立双向映射,请调用<code> setFlavorsForNative </code>。数组中的第一个本机将表示最高优先级映射。后来的本地化将表示递减优先级的映射。
+     * <p>
+     *  如果数组包含引用等于<code> String </code> Natives的几个元素,此方法将为这些元素中的第一个建立新的映射,并忽略其余的。
+     * <p>
+     * 建议客户端代码不重置由数据传输子系统建立的映射。此方法应仅用于应用程序级映射。
+     * 
+     * 
      * @param flav the <code>DataFlavor</code> key for the mappings
      * @param natives the <code>String</code> native values for the mappings
      * @throws NullPointerException if flav or natives is <code>null</code>
@@ -1080,6 +1243,13 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * <code>String</code> native to the specified or equal
      * <code>DataFlavor</code> already exists.
      *
+     * <p>
+     *  添加从单个<code> String </code>本机到单个<code> DataFlavor </code>的映射。
+     * 与<code> getFlavorsForNative </code>不同,映射只会在一个方向上建立,而本机将不会被编码。
+     * 要建立双向映射,请调用<code> addUnencodedNativeForFlavor </code>。新映射的优先级低于任何现有映射。
+     * 如果从指定的<code> String </code>本地到指定或等于<code> DataFlavor </code>的映射已经存在,则此方法不起作用。
+     * 
+     * 
      * @param nat the <code>String</code> native key for the mapping
      * @param flav the <code>DataFlavor</code> value for the mapping
      * @throws NullPointerException if nat or flav is <code>null</code>
@@ -1120,6 +1290,17 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * data transfer subsystem. This method should only be used for
      * application-level mappings.
      *
+     * <p>
+     *  丢弃指定的<code> String </code>本机的当前映射,并创建到指定的<code> DataFlavor </code>的新映射。
+     * 与<code> getFlavorsForNative </code>不同,映射只能在一个方向上建立,并且原生代不需要编码。
+     * 要建立双向映射,请调用<code> setNativesForFlavor </code>。数组中的第一个<code> DataFlavor </code>将表示最高优先级的映射。
+     * 随后的<code> DataFlavor </code>将表示递减优先级的映射。
+     * <p>
+     *  如果数组包含引用等于<code> DataFlavor </code>的几个元素,此方法将为这些元素的第一个建立新的映射,并忽略其余的。
+     * <p>
+     * 建议客户端代码不重置由数据传输子系统建立的映射。此方法应仅用于应用程序级映射。
+     * 
+     * 
      * @param nat the <code>String</code> native key for the mappings
      * @param flavors the <code>DataFlavor</code> values for the mappings
      * @throws NullPointerException if nat or flavors is <code>null</code>
@@ -1156,6 +1337,18 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * The reference implementation of this method returns the specified MIME
      * type <code>String</code> prefixed with <code>JAVA_DATAFLAVOR:</code>.
      *
+     * <p>
+     *  编码MIME类型以用作<code> String </code>本机。 MIME类型的编码表示的格式是实现相关的。唯一的限制是：
+     * <ul>
+     *  <li>当且仅当MIME类型<code> String </code>为<code> null </code>时,编码表示为<code> null </code>。
+     * </li> <li>对于两个非<code> null </code> MIME类型<code> String </code>是相等的,当且仅当这些<code> String </code>根据<code>
+     *  String.equals对象)</code>。
+     *  <li>当且仅当MIME类型<code> String </code>为<code> null </code>时,编码表示为<code> null </code>。</li>。
+     * </ul>
+     * <p>
+     *  此方法的参考实现返回以<code> JAVA_DATAFLAVOR：</code>为前缀的指定MIME类型<code> String </code>。
+     * 
+     * 
      * @param mimeType the MIME type to encode
      * @return the encoded <code>String</code>, or <code>null</code> if
      *         mimeType is <code>null</code>
@@ -1185,6 +1378,18 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * <code>String</code> of the specified <code>DataFlavor</code> prefixed
      * with <code>JAVA_DATAFLAVOR:</code>.
      *
+     * <p>
+     *  对<code> DataFlavor </code>进行编码以用作<code> String </code>本机。编码的<code> DataFlavor </code>的格式是与实现相关的。
+     * 唯一的限制是：。
+     * <ul>
+     *  <li>当且仅当指定的<code> DataFlavor </code>为<code> null </code>或其MIME类型<code> String </code> </>>两个非<code> 
+     * null </code> <code> DataFlavor </code>的编码表示与非<code> null </code>代码> MIME类型<code> String </code> s是相等的
+     * ,如果且仅当这些<code> DataFlavor </code>的MIME类型<code> String </code> .equals(Object)</code>。
+     * </li>。
+     * </ul>
+     * <p>
+     * 此方法的参考实现返回以<code> JAVA_DATAFLAVOR：</code>为前缀的指定<code> DataFlavor </code>的MIME类型<code> String </code>。
+     * 
      * @param flav the <code>DataFlavor</code> to encode
      * @return the encoded <code>String</code>, or <code>null</code> if
      *         flav is <code>null</code> or has a <code>null</code> MIME type
@@ -1199,6 +1404,9 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * Returns whether the specified <code>String</code> is an encoded Java
      * MIME type.
      *
+     * <p>
+     * 
+     * 
      * @param str the <code>String</code> to test
      * @return <code>true</code> if the <code>String</code> is encoded;
      *         <code>false</code> otherwise
@@ -1210,6 +1418,10 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
     /**
      * Decodes a <code>String</code> native for use as a Java MIME type.
      *
+     * <p>
+     *  返回指定的<code> String </code>是否是已编码的Java MIME类型。
+     * 
+     * 
      * @param nat the <code>String</code> to decode
      * @return the decoded Java MIME type, or <code>null</code> if nat is not
      *         an encoded <code>String</code> native
@@ -1224,6 +1436,10 @@ public final class SystemFlavorMap implements FlavorMap, FlavorTable {
      * Decodes a <code>String</code> native for use as a
      * <code>DataFlavor</code>.
      *
+     * <p>
+     *  解码<code> String </code>本机以用作Java MIME类型。
+     * 
+     * 
      * @param nat the <code>String</code> to decode
      * @return the decoded <code>DataFlavor</code>, or <code>null</code> if
      *         nat is not an encoded <code>String</code> native

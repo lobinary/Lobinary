@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -12,6 +13,9 @@ public interface NON_EXISTENT
 {
 
   /** Object adapter state indicating that the adapter has been destroyed.
+  /* <p>
+  /* org / omg / PortableInterceptor / NON_EXISTENT.java。
+  /* 
    */
   public static final short value = (short)(4);
 }

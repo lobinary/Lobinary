@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@ import java.rmi.Remote;
  * a server-side entity that dispatches calls to the actual remote object
  * implementation.
  *
+ * <p>
+ *  <code> Skeleton </code>接口仅由RMI实现使用。
+ * 
+ *  <p>使用rmic存根编译器生成的每个版本1.1(以及使用<code> rmic -vcompat </code>在1.2中生成的1.1版本兼容的骨架)框架类实现此接口。
+ * 远程对象的框架是一个服务器端实体,它将调用分派给实际的远程对象实现。
+ * 
+ * 
  * @author  Ann Wollrath
  * @since   JDK1.1
  * @deprecated no replacement.  Skeletons are no longer required for remote
@@ -47,6 +55,10 @@ public interface Skeleton {
      * Unmarshals arguments, calls the actual remote object implementation,
      * and marshals the return value or any exception.
      *
+     * <p>
+     *  解组参数,调用实际的远程对象实现,并调度返回值或任何异常。
+     * 
+     * 
      * @param obj remote implementation to dispatch call to
      * @param theCall object representing remote call
      * @param opnum operation number
@@ -61,6 +73,9 @@ public interface Skeleton {
 
     /**
      * Returns the operations supported by the skeleton.
+     * <p>
+     *  返回骨架支持的操作。
+     * 
      * @return operations supported by skeleton
      * @since JDK1.1
      * @deprecated no replacement

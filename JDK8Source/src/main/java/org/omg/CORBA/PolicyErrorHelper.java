@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CORBA;
 
 
@@ -12,6 +13,8 @@ package org.omg.CORBA;
 /**
    * Thrown to indicate problems with parameter values passed to the
    * <code>ORB.create_policy</code> operation.  
+   * <p>
+   * 
    */
 abstract public class PolicyErrorHelper
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,12 @@ package java.sql;
  * <p>
  * Please consult your driver vendor documentation for the vendor-specified
  * conditions for which this <code>Exception</code> may be thrown.
+ * <p>
+ *  当SQLState类值为"<i> 42 </i>"或在供应商指定的条件下时抛出的{@link SQLException}子类。这表示进行中的查询违反了SQL语法规则。
+ * <p>
+ *  请查阅您的驱动程序供应商文档,了解可能抛出该<code>异常</code>的供应商指定条件。
+ * 
+ * 
  * @since 1.6
  */
 public class SQLSyntaxErrorException extends SQLNonTransientException {
@@ -45,6 +52,13 @@ public class SQLSyntaxErrorException extends SQLNonTransientException {
          * initialized by a call to the
          * {@link Throwable#initCause(java.lang.Throwable)} method.
          * <p>
+         * <p>
+         *  构造一个<code> SQLSyntaxErrorException </code>对象。
+         *  <code> reason </code>,<code> SQLState </code>初始化为<code> null </code>,供应商代码初始化为0。
+         * 
+         *  <code> cause </code>没有被初始化,并且随后可以通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+         * <p>
+         * 
          * @since 1.6
          */
         public SQLSyntaxErrorException() {
@@ -61,6 +75,13 @@ public class SQLSyntaxErrorException extends SQLNonTransientException {
          * initialized by a call to the
          * {@link Throwable#initCause(java.lang.Throwable)} method.
          * <p>
+         * <p>
+         *  构造具有给定<code> reason </code>的<code> SQLSyntaxErrorException </code>对象。
+         *  <code> SQLState </code>初始化为<code> null </code>,供应商代码初始化为0。
+         * 
+         *  <code> cause </code>没有被初始化,并且随后可以通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+         * <p>
+         * 
          * @param reason a description of the exception
          * @since 1.6
          */
@@ -77,6 +98,13 @@ public class SQLSyntaxErrorException extends SQLNonTransientException {
          * {@link Throwable#initCause(java.lang.Throwable)} method. The vendor code
          * is initialized to 0.
          * <p>
+         * <p>
+         *  用给定的<code> reason </code>和<code> SQLState </code>构造一个<code> SQLSyntaxErrorException </code>对象。
+         * 
+         *  <code> cause </code>没有被初始化,并且随后可以通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+         * 供应商代码初始化为0。
+         * <p>
+         * 
          * @param reason a description of the exception
          * @param SQLState an XOPEN or SQL:2003 code identifying the exception
          * @since 1.6
@@ -94,6 +122,13 @@ public class SQLSyntaxErrorException extends SQLNonTransientException {
          * initialized by a call to the
          * {@link Throwable#initCause(java.lang.Throwable)} method.
          * <p>
+         * <p>
+         * 使用给定的<code> reason </code>,<code> SQLState </code>和<code> vendorCode </code>构造<code> SQLSyntaxErrorEx
+         * ception </code>对象。
+         * 
+         *  <code> cause </code>没有被初始化,并且随后可以通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+         * <p>
+         * 
          * @param reason a description of the exception
          * @param SQLState an XOPEN or SQL:2003 code identifying the exception
          * @param vendorCode a database vendor specific exception code
@@ -112,6 +147,13 @@ public class SQLSyntaxErrorException extends SQLNonTransientException {
      * <code>cause==null</code> or to <code>cause.toString()</code> if
      * <code>cause!=null</code>.
      * <p>
+     * <p>
+     *  用给定的<code> cause </code>构造一个<code> SQLSyntaxErrorException </code>对象。
+     *  <code> SQLState </code>初始化为<code> null </code>,供应商代码初始化为0. <code> reason </code>初始化为<code> null </code>
+     *  if <code> cause == null </code>或<code> cause.toString()</code>如果<code> cause！= null </code>。
+     *  用给定的<code> cause </code>构造一个<code> SQLSyntaxErrorException </code>对象。
+     * <p>
+     * 
      * @param cause the underlying reason for this <code>SQLException</code> (which is saved for later retrieval by the <code>getCause()</code> method); may be null indicating
      *     the cause is non-existent or unknown.
      * @since 1.6
@@ -127,6 +169,11 @@ public class SQLSyntaxErrorException extends SQLNonTransientException {
      * The <code>SQLState</code> is  initialized to <code>null</code>
      * and the vendor code is initialized to 0.
      * <p>
+     * <p>
+     *  用给定的<code> reason </code>和<code> cause </code>构造一个<code> SQLSyntaxErrorException </code>对象。
+     *  <code> SQLState </code>初始化为<code> null </code>,供应商代码初始化为0。
+     * <p>
+     * 
      * @param reason a description of the exception.
      * @param cause the underlying reason for this <code>SQLException</code> (which is saved for later retrieval by the <code>getCause()</code> method); may be null indicating
      *     the cause is non-existent or unknown.
@@ -142,6 +189,12 @@ public class SQLSyntaxErrorException extends SQLNonTransientException {
      * <code>reason</code>, <code>SQLState</code> and  <code>cause</code>.
      * The vendor code is initialized to 0.
      * <p>
+     * <p>
+     *  构造具有给定<code>原因</code>,<code> SQLState </code>和<code>原因</code>的<code> SQLSyntaxErrorException </code>
+     * 对象。
+     * 供应商代码初始化为0。
+     * <p>
+     * 
      * @param reason a description of the exception.
      * @param SQLState an XOPEN or SQL:2003 code identifying the exception
      * @param cause the (which is saved for later retrieval by the <code>getCause()</code> method); may be null indicating
@@ -158,6 +211,8 @@ public class SQLSyntaxErrorException extends SQLNonTransientException {
      * <code>reason</code>, <code>SQLState</code>, <code>vendorCode</code>
      * and  <code>cause</code>.
      * <p>
+     * <p>
+     * 
      * @param reason a description of the exception
      * @param SQLState an XOPEN or SQL:2003 code identifying the exception
      * @param vendorCode a database vendor-specific exception code

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,11 @@ import java.beans.Transient;
  * query and modify the rectangular frame, which provides a reference
  * for the subclasses to define their geometry.
  *
+ * <p>
+ *  <code> RectangularShape </code>是几何由矩形框定义的{@link Shape}对象的基类。
+ * 这个类本身并不直接指定任何特定的几何,而只是提供由整个类别的<code> Shape </code>对象继承的操作方法。此类提供的操作方法可用于查询和修改矩形框架,为子类提供参考以定义其几何。
+ * 
+ * 
  * @author      Jim Graham
  * @since 1.2
  */
@@ -47,6 +53,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
     /**
      * This is an abstract class that cannot be instantiated directly.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类。
+     * 
+     * 
      * @see Arc2D
      * @see Ellipse2D
      * @see Rectangle2D
@@ -59,6 +69,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
     /**
      * Returns the X coordinate of the upper-left corner of
      * the framing rectangle in <code>double</code> precision.
+     * <p>
+     *  返回<code> double </code>精度中框架矩形左上角的X坐标。
+     * 
+     * 
      * @return the X coordinate of the upper-left corner of
      * the framing rectangle.
      * @since 1.2
@@ -68,6 +82,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
     /**
      * Returns the Y coordinate of the upper-left corner of
      * the framing rectangle in <code>double</code> precision.
+     * <p>
+     *  返回<code> double </code>精度中框线矩形左上角的Y坐标。
+     * 
+     * 
      * @return the Y coordinate of the upper-left corner of
      * the framing rectangle.
      * @since 1.2
@@ -77,6 +95,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
     /**
      * Returns the width of the framing rectangle in
      * <code>double</code> precision.
+     * <p>
+     *  以<code> double </code>精度返回框架矩形的宽度。
+     * 
+     * 
      * @return the width of the framing rectangle.
      * @since 1.2
      */
@@ -85,6 +107,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
     /**
      * Returns the height of the framing rectangle
      * in <code>double</code> precision.
+     * <p>
+     *  以<code> double </code>精度返回框架矩形的高度。
+     * 
+     * 
      * @return the height of the framing rectangle.
      * @since 1.2
      */
@@ -94,6 +120,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * Returns the smallest X coordinate of the framing
      * rectangle of the <code>Shape</code> in <code>double</code>
      * precision.
+     * <p>
+     *  返回<code> double </code>精度中<code> Shape </code>的框架矩形的最小X坐标。
+     * 
+     * 
      * @return the smallest X coordinate of the framing
      *          rectangle of the <code>Shape</code>.
      * @since 1.2
@@ -106,6 +136,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * Returns the smallest Y coordinate of the framing
      * rectangle of the <code>Shape</code> in <code>double</code>
      * precision.
+     * <p>
+     *  返回<code> double </code>精度中<code> Shape </code>的框架矩形的最小Y坐标。
+     * 
+     * 
      * @return the smallest Y coordinate of the framing
      *          rectangle of the <code>Shape</code>.
      * @since 1.2
@@ -118,6 +152,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * Returns the largest X coordinate of the framing
      * rectangle of the <code>Shape</code> in <code>double</code>
      * precision.
+     * <p>
+     *  返回<code> double </code>精度中<code> Shape </code>的框架矩形的最大X坐标。
+     * 
+     * 
      * @return the largest X coordinate of the framing
      *          rectangle of the <code>Shape</code>.
      * @since 1.2
@@ -130,6 +168,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * Returns the largest Y coordinate of the framing
      * rectangle of the <code>Shape</code> in <code>double</code>
      * precision.
+     * <p>
+     * 返回<code> double </code>精度中<code> Shape </code>的框架矩形的最大Y坐标。
+     * 
+     * 
      * @return the largest Y coordinate of the framing
      *          rectangle of the <code>Shape</code>.
      * @since 1.2
@@ -142,6 +184,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * Returns the X coordinate of the center of the framing
      * rectangle of the <code>Shape</code> in <code>double</code>
      * precision.
+     * <p>
+     *  返回<code> double </code>精度中<code> Shape </code>的框架矩形中心的X坐标。
+     * 
+     * 
      * @return the X coordinate of the center of the framing rectangle
      *          of the <code>Shape</code>.
      * @since 1.2
@@ -154,6 +200,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * Returns the Y coordinate of the center of the framing
      * rectangle of the <code>Shape</code> in <code>double</code>
      * precision.
+     * <p>
+     *  返回<code> double </code>精度中<code> Shape </code>的框架矩形中心的Y坐标。
+     * 
+     * 
      * @return the Y coordinate of the center of the framing rectangle
      *          of the <code>Shape</code>.
      * @since 1.2
@@ -165,6 +215,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
     /**
      * Returns the framing {@link Rectangle2D}
      * that defines the overall shape of this object.
+     * <p>
+     *  返回定义此对象的整体形状的框架{@link Rectangle2D}。
+     * 
+     * 
      * @return a <code>Rectangle2D</code>, specified in
      * <code>double</code> coordinates.
      * @see #setFrame(double, double, double, double)
@@ -181,6 +235,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * Determines whether the <code>RectangularShape</code> is empty.
      * When the <code>RectangularShape</code> is empty, it encloses no
      * area.
+     * <p>
+     *  确定<code> RectangularShape </code>是否为空。当<code> RectangularShape </code>为空时,它不包含任何区域。
+     * 
+     * 
      * @return <code>true</code> if the <code>RectangularShape</code> is empty;
      *          <code>false</code> otherwise.
      * @since 1.2
@@ -191,6 +249,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * Sets the location and size of the framing rectangle of this
      * <code>Shape</code> to the specified rectangular values.
      *
+     * <p>
+     *  将<code> Shape </code>的框架矩形的位置和大小设置为指定的矩形值。
+     * 
+     * 
      * @param x the X coordinate of the upper-left corner of the
      *          specified rectangular shape
      * @param y the Y coordinate of the upper-left corner of the
@@ -208,6 +270,11 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * {@link Dimension2D}, respectively.  The framing rectangle is used
      * by the subclasses of <code>RectangularShape</code> to define
      * their geometry.
+     * <p>
+     *  将<code> Shape </code>的框架矩形的位置和大小分别设置为指定的{@link Point2D}和{@link Dimension2D}。
+     * 框架矩形由<code> RectangularShape </code>的子类使用以定义其几何。
+     * 
+     * 
      * @param loc the specified <code>Point2D</code>
      * @param size the specified <code>Dimension2D</code>
      * @see #getFrame
@@ -222,6 +289,11 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * be the specified <code>Rectangle2D</code>.  The framing rectangle is
      * used by the subclasses of <code>RectangularShape</code> to define
      * their geometry.
+     * <p>
+     *  将<code> Shape </code>的框架矩形设置为指定的<code> Rectangle2D </code>。
+     * 框架矩形由<code> RectangularShape </code>的子类使用以定义其几何。
+     * 
+     * 
      * @param r the specified <code>Rectangle2D</code>
      * @see #getFrame
      * @since 1.2
@@ -236,6 +308,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * used by the subclasses of <code>RectangularShape</code> to define
      * their geometry.
      *
+     * <p>
+     *  基于两个指定的坐标设置此<code> Shape </code>框架矩形的对角线。框架矩形由<code> RectangularShape </code>的子类使用以定义其几何。
+     * 
+     * 
      * @param x1 the X coordinate of the start point of the specified diagonal
      * @param y1 the Y coordinate of the start point of the specified diagonal
      * @param x2 the X coordinate of the end point of the specified diagonal
@@ -263,6 +339,11 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * rectangle is used by the subclasses of <code>RectangularShape</code>
      * to define their geometry.
      *
+     * <p>
+     * 基于两个指定的<code> Point2D </code>对象,设置此<code> Shape </code>框架矩形的对角线。
+     * 框架矩形由<code> RectangularShape </code>的子类使用以定义其几何。
+     * 
+     * 
      * @param p1 the start <code>Point2D</code> of the specified diagonal
      * @param p2 the end <code>Point2D</code> of the specified diagonal
      * @since 1.2
@@ -277,6 +358,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * coordinates.  The framing rectangle is used by the subclasses of
      * <code>RectangularShape</code> to define their geometry.
      *
+     * <p>
+     *  基于指定的中心点坐标和角点坐标设置此<code> Shape </code>的框架矩形。框架矩形由<code> RectangularShape </code>的子类使用以定义其几何。
+     * 
+     * 
      * @param centerX the X coordinate of the specified center point
      * @param centerY the Y coordinate of the specified center point
      * @param cornerX the X coordinate of the specified corner point
@@ -295,6 +380,11 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * specified center <code>Point2D</code> and corner
      * <code>Point2D</code>.  The framing rectangle is used by the subclasses
      * of <code>RectangularShape</code> to define their geometry.
+     * <p>
+     *  基于指定的中心<code> Point2D </code>和角<code> Point2D </code>设置此<code> Shape </code>的框架矩形。
+     * 框架矩形由<code> RectangularShape </code>的子类使用以定义其几何。
+     * 
+     * 
      * @param center the specified center <code>Point2D</code>
      * @param corner the specified corner <code>Point2D</code>
      * @since 1.2
@@ -306,6 +396,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Point2D p) {
@@ -314,6 +408,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(Rectangle2D r) {
@@ -322,6 +420,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Rectangle2D r) {
@@ -330,6 +432,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public Rectangle getBounds() {
@@ -364,6 +470,13 @@ public abstract class RectangularShape implements Shape, Cloneable {
      * An optional {@link AffineTransform} can
      * be specified so that the coordinates returned in the iteration are
      * transformed accordingly.
+     * <p>
+     *  返回一个迭代器对象,该对象沿着<code> Shape </code>对象的边界进行迭代,并提供对<code> Shape </code>对象几何体轮廓的展开视图的访问。
+     * <p>
+     *  只有SEG_MOVETO,SEG_LINETO和SEG_CLOSE点类型将由迭代器返回。
+     * <p>
+     *  曲线段的细分量由<code> flatness </code>参数控制,该参数指定未平坦变换曲线上的任何点可以偏离返回的平坦路径段的最大距离。
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to the
      *          coordinates as they are returned in the iteration,
      *          or <code>null</code> if untransformed coordinates are desired.
@@ -381,6 +494,10 @@ public abstract class RectangularShape implements Shape, Cloneable {
     /**
      * Creates a new object of the same class and with the same
      * contents as this object.
+     * <p>
+     * 可以指定一个可选的{@link AffineTransform},以便在迭代中返回的坐标被相应地转换。
+     * 
+     * 
      * @return     a clone of this instance.
      * @exception  OutOfMemoryError            if there is not enough memory.
      * @see        java.lang.Cloneable

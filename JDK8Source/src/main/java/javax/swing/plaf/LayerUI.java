@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,17 @@ import java.io.Serializable;
  * The subclasses of {@code LayerUI} can either be stateless and shareable
  * by multiple {@code JLayer}s or not shareable.
  *
+ * <p>
+ *  所有{@link javax.swing.JLayer}的UI代理的基类。
+ * <p>
+ *  {@link #paint(java.awt.Graphics,javax.swing.JComponent)}方法执行{@code JLayer}和{@link #eventDispatched(AWTEvent,JLayer)}
+ * 方法的绘制任何{@code AWTEvent},它们由{@code JLayer}或其任何子组件生成。
+ * <p>
+ *  {@code LayerUI}与其他组件的UI代理不同,因为它是独立的LookAndFeel,并且在系统LookAndFeel更改时不会默认更新。
+ * <p>
+ *  {@code LayerUI}的子类可以是无状态的,也可以由多个{@code JLayer}共享或不可共享。
+ * 
+ * 
  * @param <V> one of the super types of {@code JLayer}'s view component
  *
  * @see JLayer#setUI(LayerUI)
@@ -72,6 +84,12 @@ public class LayerUI<V extends Component>
      * <p>
      * The default implementation paints the passed component as is.
      *
+     * <p>
+     *  绘制指定的组件。子类应重写此方法,并使用指定的{@code Graphics}对象来呈现组件的内容。
+     * <p>
+     *  默认实现原样绘制传递的组件。
+     * 
+     * 
      * @param g the {@code Graphics} context in which to paint
      * @param c the component being painted
      */
@@ -94,6 +112,16 @@ public class LayerUI<V extends Component>
      * <p>
      * <b>Note:</b> Events are processed only for displayable {@code JLayer}s.
      *
+     * <p>
+     *  为{@code JLayer}和<b>其所有后代</b>处理{@code AWTEvent}到此{@code LayerUI}实例。
+     * <p>
+     *  要启用特定类型的{@code AWTEvent},请在{@link #installUI(javax.swing.JComponent)}中调用{@link JLayer#setLayerEventMask}
+     * 并将层事件掩码设置为{@code 0} {@link #uninstallUI(javax.swing.JComponent)}之后。
+     * 默认情况下,此方法为给定类的事件调用适当的{@code process&lt; event&nbsp; type&gt; Event}方法。
+     * <p>
+     * <b>注意：</b>只有可显示的{@code JLayer}才会处理活动。
+     * 
+     * 
      * @param e the event to be dispatched
      * @param l the layer this LayerUI is set to
      *
@@ -170,6 +198,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     *  处理在{@link JLayer}或其任何子组件上发生的组件事件。
+     * <p>
+     *  除非为{@code JLayer}对象启用了组件事件,否则不会调用此方法,而将{@code LayerUI}设置为。
+     * 组件事件在覆盖的{@link #installUI}方法中启用,之后应在{@link #uninstallUI}方法中禁用。
+     * <pre>
+     *  public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.COMPONENT_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code ComponentEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -202,6 +244,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     *  处理发生在{@link JLayer}或其任何子组件上的事件。
+     * <p>
+     *  除非为{@code JLayer}对象启用焦点事件,否则不会调用此方法,因为{@code LayerUI}设置为。
+     * 焦点事件在重写的{@link #installUI}方法中启用,并应在{@link #uninstallUI}方法中禁用。
+     * <pre>
+     *  public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.FOCUS_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code FocusEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -234,6 +290,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     *  处理在{@link JLayer}或其任何子组件上发生的关键事件。
+     * <p>
+     * 除非为{@code JLayer}对象启用了关键事件,否则不会调用此方法,而将{@code LayerUI}设置为。
+     * 在重写的{@link #installUI}方法中启用重要事件,之后应在{@link #uninstallUI}方法中停用。
+     * <pre>
+     *  public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.KEY_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code KeyEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -266,6 +336,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     *  处理发生在{@link JLayer}或其任何子组件上的鼠标事件。
+     * <p>
+     *  除非为{@code JLayer}对象启用了鼠标事件,否则不会调用此方法,而将{@code LayerUI}设置为。
+     * 在覆盖的{@link #installUI}方法中启用鼠标事件,之后应在{@link #uninstallUI}方法中禁用。
+     * <pre>
+     *  public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.MOUSE_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code MouseEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -298,6 +382,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     *  处理在{@link JLayer}或其任何子组件上发生的鼠标移动事件。
+     * <p>
+     *  除非为{@code JLayer}对象启用了鼠标运动事件,否则不会调用此方法,因为{@code LayerUI}设置为。
+     * 在覆盖的{@link #installUI}方法中启用鼠标移动事件,之后应在{@link #uninstallUI}方法中禁用鼠标移动事件。
+     * <pre>
+     * public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.MOUSE_MOTION_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code MouseEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -330,6 +428,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     *  处理在{@link JLayer}或其任何子组件上发生的鼠标滚轮事件。
+     * <p>
+     *  除非为{@code JLayer}对象启用了鼠标滚轮事件,否则不会调用此方法,因为{@code LayerUI}设置为。
+     * 在覆盖的{@link #installUI}方法中启用鼠标滚轮事件,之后应在{@link #uninstallUI}方法中禁用鼠标滚轮事件。
+     * <pre>
+     *  public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.MOUSE_WHEEL_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code MouseEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -362,6 +474,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     *  处理在{@link JLayer}或其任何子组件上发生的输入事件。
+     * <p>
+     *  除非为{@code JLayer}对象启用了输入事件,否则不会调用此方法,而将{@code LayerUI}设置为。
+     * 输入事件在覆盖的{@link #installUI}方法中启用,在此之后应在{@link #uninstallUI}方法中禁用。
+     * <pre>
+     *  public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.INPUT_METHOD_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code InputMethodEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -394,6 +520,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     * 处理在{@link JLayer}或其任何子组件上发生的层次结构事件。
+     * <p>
+     *  除非为{@code JLayer}对象启用了层次结构事件,否则不会调用此方法,而将{@code LayerUI}设置为。
+     * 层次结构事件在覆盖的{@link #installUI}方法中启用,之后应在{@link #uninstallUI}方法中禁用。
+     * <pre>
+     *  public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.HIERARCHY_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code HierarchyEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -426,6 +566,20 @@ public class LayerUI<V extends Component>
      * }
      * </pre>
      *
+     * <p>
+     *  处理在{@link JLayer}或其任何子组件上发生的层次结构事件。
+     * <p>
+     *  除非为{@code JLayer}对象启用了层次结构边界事件,否则不会调用此方法,而将{@code LayerUI}设置为。
+     * 层次结构边界事件在覆盖的{@link #installUI}方法中启用,并应在{@link #uninstallUI}方法中禁用。
+     * <pre>
+     *  public void installUI(JComponent c){super.installUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(AWTEvent.HIERARCHY_BOUNDS_EVENT_MASK); }
+     * }。
+     * 
+     *  public void uninstallUI(JComponent c){super.uninstallUI(c); JLayer l =(JLayer)c; l.setLayerEventMask(0); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param e the {@code HierarchyEvent} to be processed
      * @param l the layer this {@code LayerUI} instance is set to
      *
@@ -440,6 +594,10 @@ public class LayerUI<V extends Component>
      * Invoked when {@link javax.swing.JLayer#updateUI()} is called
      * by the {@code JLayer} this {@code LayerUI} is set to.
      *
+     * <p>
+     *  在{@code JLayer}调用{@link javax.swing.JLayer#updateUI()}时调用此{@code LayerUI}设置为。
+     * 
+     * 
      * @param l the {@code JLayer} which UI is updated
      */
     public void updateUI(JLayer<? extends V> l){
@@ -450,6 +608,11 @@ public class LayerUI<V extends Component>
      * The default implementation registers the passed {@code JLayer} component
      * as a {@code PropertyChangeListener} for the property changes of this {@code LayerUI}.
      *
+     * <p>
+     * 配置{@code JLayer}此{@code LayerUI}设置为。
+     * 默认实现将传递的{@code JLayer}组件注册为此{@code LayerUI}的属性更改的{@code PropertyChangeListener}。
+     * 
+     * 
      * @param c the {@code JLayer} component where this UI delegate is being installed
      */
     public void installUI(JComponent c) {
@@ -462,6 +625,11 @@ public class LayerUI<V extends Component>
      * The default implementation unregisters the passed {@code JLayer} component
      * as a {@code PropertyChangeListener} for the property changes of this {@code LayerUI}.
      *
+     * <p>
+     *  撤销先前在{@link #installUI(JComponent)}方法中设置的配置。
+     * 默认实现将传递的{@code JLayer}组件注册为此{@code LayerUI}的属性更改的{@code PropertyChangeListener}。
+     * 
+     * 
      * @param c the component from which this UI delegate is being removed.
      */
     public void uninstallUI(JComponent c) {
@@ -475,6 +643,12 @@ public class LayerUI<V extends Component>
      * If {@code listener} is {@code null},
      * no exception is thrown and no action is performed.
      *
+     * <p>
+     *  将PropertyChangeListener添加到侦听器列表。侦听器为此类的所有绑定属性注册。
+     * <p>
+     *  如果{@code listener}是{@code null},则不会抛出任何异常,并且不会执行任何操作。
+     * 
+     * 
      * @param listener the property change listener to be added
      * @see #removePropertyChangeListener
      * @see #getPropertyChangeListeners
@@ -492,6 +666,12 @@ public class LayerUI<V extends Component>
      * If {@code listener} is {@code null},
      * no exception is thrown and no action is performed.
      *
+     * <p>
+     *  从侦听器列表中删除PropertyChangeListener。此方法应用于删除为此类的所有绑定属性注册的PropertyChangeListeners。
+     * <p>
+     *  如果{@code listener}是{@code null},则不会抛出任何异常,并且不会执行任何操作。
+     * 
+     * 
      * @param listener the PropertyChangeListener to be removed
      * @see #addPropertyChangeListener
      * @see #getPropertyChangeListeners
@@ -505,6 +685,10 @@ public class LayerUI<V extends Component>
      * Returns an array of all the property change listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有属性更改侦听器的数组。
+     * 
+     * 
      * @return all of this ui's {@code PropertyChangeListener}s
      *         or an empty array if no property change
      *         listeners are currently registered
@@ -523,6 +707,12 @@ public class LayerUI<V extends Component>
      * If {@code propertyName} or {@code listener} is {@code null},
      * no exception is thrown and no action is taken.
      *
+     * <p>
+     *  将PropertyChangeListener添加到特定属性的侦听器列表。
+     * <p>
+     *  如果{@code propertyName}或{@code listener}为{@code null},则不会抛出任何异常,并且不会采取任何操作。
+     * 
+     * 
      * @param propertyName one of the property names listed above
      * @param listener     the property change listener to be added
      * @see #removePropertyChangeListener(String, PropertyChangeListener)
@@ -543,6 +733,12 @@ public class LayerUI<V extends Component>
      * If {@code propertyName} or {@code listener} is {@code null},
      * no exception is thrown and no action is taken.
      *
+     * <p>
+     *  从特定属性的侦听器列表中删除{@code PropertyChangeListener}。此方法应该用于删除为特定绑定属性注册的{@code PropertyChangeListener}。
+     * <p>
+     * 如果{@code propertyName}或{@code listener}为{@code null},则不会抛出任何异常,并且不会采取任何操作。
+     * 
+     * 
      * @param propertyName a valid property name
      * @param listener     the PropertyChangeListener to be removed
      * @see #addPropertyChangeListener(String, PropertyChangeListener)
@@ -558,6 +754,10 @@ public class LayerUI<V extends Component>
      * Returns an array of all the listeners which have been associated
      * with the named property.
      *
+     * <p>
+     *  返回与命名属性关联的所有侦听器的数组。
+     * 
+     * 
      * @param propertyName  The name of the property being listened to
      * @return all of the {@code PropertyChangeListener}s associated with
      *         the named property; if no such listeners have been added or
@@ -577,6 +777,10 @@ public class LayerUI<V extends Component>
      * send the appropriate PropertyChangeEvent to any registered
      * PropertyChangeListeners.
      *
+     * <p>
+     *  支持为对象属性报告绑定的属性更改。当绑定属性发生变化时,可以调用此方法,并且它会向适当的PropertyChangeListener发送适当的PropertyChangeEvent。
+     * 
+     * 
      * @param propertyName the property whose value has changed
      * @param oldValue     the property's previous value
      * @param newValue     the property's new value
@@ -591,6 +795,10 @@ public class LayerUI<V extends Component>
      * and enables updating every {@code JLayer}
      * this {@code LayerUI} instance is set to.
      *
+     * <p>
+     *  当{@code LayerUI}的任何属性更改并通知{@code JLayer}此{@code LayerUI}实例设置为更新时通知{@code LayerUI}。
+     * 
+     * 
      * @param evt the PropertyChangeEvent generated by this {@code LayerUI}
      * @param l the {@code JLayer} this LayerUI is set to
      */
@@ -602,6 +810,10 @@ public class LayerUI<V extends Component>
      * this calls the view's {@code getBaseline()} method.
      * Otherwise, the default implementation is called.
      *
+     * <p>
+     *  如果{@code JLayer}的视图组件不是{@code null},则会调用视图的{@code getBaseline()}方法。否则,将调用默认实现。
+     * 
+     * 
      * @param c {@code JLayer} to return baseline resize behavior for
      * @param width the width to get the baseline for
      * @param height the height to get the baseline for
@@ -621,6 +833,10 @@ public class LayerUI<V extends Component>
      * this returns the result of the view's {@code getBaselineResizeBehavior()} method.
      * Otherwise, the default implementation is called.
      *
+     * <p>
+     *  如果{@code JLayer}的视图组件不是{@code null},则返回视图的{@code getBaselineResizeBehavior()}方法的结果。否则,将调用默认实现。
+     * 
+     * 
      * @param c {@code JLayer} to return baseline resize behavior for
      * @return an enum indicating how the baseline changes as the component
      *         size changes
@@ -636,6 +852,10 @@ public class LayerUI<V extends Component>
     /**
      * Causes the passed instance of {@code JLayer} to lay out its components.
      *
+     * <p>
+     *  导致传递的{@code JLayer}实例布局其组件。
+     * 
+     * 
      * @param l the {@code JLayer} component where this UI delegate is being installed
      */
     public void doLayout(JLayer<? extends V> l) {
@@ -654,6 +874,10 @@ public class LayerUI<V extends Component>
      * this returns the result of  the view's {@code getPreferredSize()} method.
      * Otherwise, the default implementation is used.
      *
+     * <p>
+     *  如果{@code JLayer}的视图组件不是{@code null},则返回视图的{@code getPreferredSize()}方法的结果。否则,将使用默认实现。
+     * 
+     * 
      * @param c {@code JLayer} to return preferred size for
      * @return preferred size for the passed {@code JLayer}
      */
@@ -671,6 +895,10 @@ public class LayerUI<V extends Component>
      * this returns the result of  the view's {@code getMinimalSize()} method.
      * Otherwise, the default implementation is used.
      *
+     * <p>
+     *  如果{@code JLayer}的视图组件不是{@code null},则返回视图的{@code getMinimalSize()}方法的结果。否则,将使用默认实现。
+     * 
+     * 
      * @param c {@code JLayer} to return preferred size for
      * @return minimal size for the passed {@code JLayer}
      */
@@ -688,6 +916,10 @@ public class LayerUI<V extends Component>
      * this returns the result of  the view's {@code getMaximumSize()} method.
      * Otherwise, the default implementation is used.
      *
+     * <p>
+     * 如果{@code JLayer}的视图组件不是{@code null},则返回视图的{@code getMaximumSize()}方法的结果。否则,将使用默认实现。
+     * 
+     * 
      * @param c {@code JLayer} to return preferred size for
      * @return maximum size for the passed {@code JLayer}
      */
@@ -706,6 +938,10 @@ public class LayerUI<V extends Component>
      * This method is to be overridden when the dirty region needs to be changed.
      * The default implementation delegates its functionality to {@link JComponent#paintImmediately(int, int, int, int)}.
      *
+     * <p>
+     *  将{@code JLayer}中的指定区域绘制为{@code LayerUI},立即设置为。
+     * <p>
+     * 
      * @param x  the x value of the region to be painted
      * @param y  the y value of the region to be painted
      * @param width  the width of the region to be painted

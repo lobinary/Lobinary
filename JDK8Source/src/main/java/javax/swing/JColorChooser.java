@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -79,6 +80,30 @@ import sun.swing.SwingUtilities2;
  *    description: A component that supports selecting a Color.
  *
  *
+ * <p>
+ *  <code> JColorChooser </code>提供了一系列控件,旨在允许用户操作和选择颜色。
+ * 有关使用颜色选择器的信息,请参见<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/colorchooser.html">
+ * 如何使用颜色选择器</a>, em> Java教程</em>。
+ *  <code> JColorChooser </code>提供了一系列控件,旨在允许用户操作和选择颜色。
+ * 
+ * <p>
+ * 
+ *  这个类提供了三个级别的API：
+ * <ol>
+ *  <li>静态便利方法,显示模态颜色选择器对话框,并返回用户选择的颜色。
+ *  <li>创建颜色选择器对话框的静态方便方法,其中<code> ActionListeners </code>可以指定为在用户按下其中一个对话框按钮时调用。
+ *  <li>直接(在任何容器内)创建<code> JColorChooser </code>窗格实例的功能。
+ * 可以添加<code> PropertyChange </code>侦听器来检测当前"颜色"属性何时更改。
+ * </ol>
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ *  @beaninfo属性：isContainer false description：支持选择颜色的组件。
+ * 
+ * 
  * @author James Gosling
  * @author Amy Fowler
  * @author Steve Wilson
@@ -86,6 +111,8 @@ import sun.swing.SwingUtilities2;
 public class JColorChooser extends JComponent implements Accessible {
 
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -101,16 +128,25 @@ public class JColorChooser extends JComponent implements Accessible {
 
     /**
      * The selection model property name.
+     * <p>
+     *  选择模型属性名称。
+     * 
      */
     public static final String      SELECTION_MODEL_PROPERTY = "selectionModel";
 
     /**
      * The preview panel property name.
+     * <p>
+     *  预览面板属性名称。
+     * 
      */
     public static final String      PREVIEW_PANEL_PROPERTY = "previewPanel";
 
     /**
      * The chooserPanel array property name.
+     * <p>
+     *  chooserPanel数组属性名称。
+     * 
      */
     public static final String      CHOOSER_PANELS_PROPERTY = "chooserPanels";
 
@@ -123,6 +159,11 @@ public class JColorChooser extends JComponent implements Accessible {
      * pressing "OK", then this method hides/disposes the dialog and returns
      * <code>null</code>.
      *
+     * <p>
+     *  显示模态颜色选择器对话框并阻止,直到对话框被隐藏。如果用户按下"确定"按钮,则该方法隐藏/布置对话框并返回所选择的颜色。
+     * 如果用户按下"取消"按钮或关闭对话框而不按下"确定",则此方法隐藏/处置对话框并返回<code> null </code>。
+     * 
+     * 
      * @param component    the parent <code>Component</code> for the dialog
      * @param title        the String containing the dialog's title
      * @param initialColor the initial Color set when the color-chooser is shown
@@ -157,6 +198,11 @@ public class JColorChooser extends JComponent implements Accessible {
      * color which was set the last time <code>show</code> was invoked on the
      * dialog and the dialog will remain showing.
      *
+     * <p>
+     *  创建并返回包含指定的<code> ColorChooser </code>窗格的新对话框以及"确定","取消"和"重置"按钮。如果按下"确定"或"取消"按钮,对话框将自动隐藏(但不会丢弃)。
+     * 如果按下"复位"按钮,颜色选择器的颜色将被重置为上次在对话框上调用<code>显示</code>时设置的颜色,对话框将保持显示。
+     * 
+     * 
      * @param c              the parent component for the dialog
      * @param title          the title for the dialog
      * @param modal          a boolean. When true, the remainder of the program
@@ -188,6 +234,9 @@ public class JColorChooser extends JComponent implements Accessible {
 
     /**
      * Creates a color chooser pane with an initial color of white.
+     * <p>
+     *  创建一个初始颜色为白色的颜色选择器窗格。
+     * 
      */
     public JColorChooser() {
         this(Color.white);
@@ -196,6 +245,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Creates a color chooser pane with the specified initial color.
      *
+     * <p>
+     * 创建具有指定初始颜色的颜色选择器窗格。
+     * 
+     * 
      * @param initialColor the initial color set in the chooser
      */
     public JColorChooser(Color initialColor) {
@@ -207,6 +260,10 @@ public class JColorChooser extends JComponent implements Accessible {
      * Creates a color chooser pane with the specified
      * <code>ColorSelectionModel</code>.
      *
+     * <p>
+     *  使用指定的<code> ColorSelectionModel </code>创建颜色选择器窗格。
+     * 
+     * 
      * @param model the <code>ColorSelectionModel</code> to be used
      */
     public JColorChooser(ColorSelectionModel model) {
@@ -218,6 +275,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Returns the L&amp;F object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @return the <code>ColorChooserUI</code> object that renders
      *          this component
      */
@@ -228,6 +289,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Sets the L&amp;F object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @param ui  the <code>ColorChooserUI</code> L&amp;F object
      * @see UIDefaults#getUI
      *
@@ -245,6 +310,10 @@ public class JColorChooser extends JComponent implements Accessible {
      * Replaces the current UI object with the latest version from the
      * <code>UIManager</code>.
      *
+     * <p>
+     *  来自<code> UIManager </code>的通知表示L&amp; F已更改。使用<code> UIManager </code>中的最新版本替换当前的UI对象。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -254,6 +323,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Returns the name of the L&amp;F class that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F类的名称。
+     * 
+     * 
      * @return the string "ColorChooserUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -266,6 +339,10 @@ public class JColorChooser extends JComponent implements Accessible {
      * Gets the current color value from the color chooser.
      * By default, this delegates to the model.
      *
+     * <p>
+     *  从颜色选择器获取当前颜色值。默认情况下,这将委派给模型。
+     * 
+     * 
      * @return the current color value of the color chooser
      */
     public Color getColor() {
@@ -275,6 +352,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Sets the current color of the color chooser to the specified color.
      * The <code>ColorSelectionModel</code> will fire a <code>ChangeEvent</code>
+     * <p>
+     *  将颜色选择器的当前颜色设置为指定的颜色。 <code> ColorSelectionModel </code>会触发一个<code> ChangeEvent </code>
+     * 
+     * 
      * @param color the color to be set in the color chooser
      * @see JComponent#addPropertyChangeListener
      *
@@ -293,6 +374,10 @@ public class JColorChooser extends JComponent implements Accessible {
      * specified RGB color.  Note that the values of red, green,
      * and blue should be between the numbers 0 and 255, inclusive.
      *
+     * <p>
+     *  将颜色选择器的当前颜色设置为指定的RGB颜色。请注意,红色,绿色和蓝色的值应在数字0和255之间(包括0和255)。
+     * 
+     * 
      * @param r   an int specifying the amount of Red
      * @param g   an int specifying the amount of Green
      * @param b   an int specifying the amount of Blue
@@ -307,6 +392,10 @@ public class JColorChooser extends JComponent implements Accessible {
      * Sets the current color of the color chooser to the
      * specified color.
      *
+     * <p>
+     *  将颜色选择器的当前颜色设置为指定的颜色。
+     * 
+     * 
      * @param c an integer value that sets the current color in the chooser
      *          where the low-order 8 bits specify the Blue value,
      *          the next 8 bits specify the Green value, and the 8 bits
@@ -338,6 +427,17 @@ public class JColorChooser extends JComponent implements Accessible {
      * to directly call the <code>exportAsDrag</code> method of a
      * <code>TransferHandler</code>.
      *
+     * <p>
+     *  设置<code> dragEnabled </code>属性,必须<code> true </code>才能在此组件上启用自动拖动处理(拖放的第一部分)。
+     * 对于拖动执行任何操作,<code> transferHandler </code>属性需要设置为非<code> null </code>值。
+     *  <code> dragEnabled </code>属性的默认值为<code> false </code>。
+     * 
+     * <p>
+     * 
+     * 当启用自动拖动处理时,当用户在预览面板上按下鼠标按钮时,大多数外观和感觉开始拖放操作。一些外观和感觉可能不支持自动拖放;他们将忽略此属性。
+     * 你可以通过修改组件来直接调用<code> TransferHandler </code>的<code> exportAsDrag </code>方法来解决这种外观和感觉。
+     * 
+     * 
      * @param b the value to set the <code>dragEnabled</code> property to
      * @exception HeadlessException if
      *            <code>b</code> is <code>true</code> and
@@ -365,6 +465,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Gets the value of the <code>dragEnabled</code> property.
      *
+     * <p>
+     *  获取<code> dragEnabled </code>属性的值。
+     * 
+     * 
      * @return  the value of the <code>dragEnabled</code> property
      * @see #setDragEnabled
      * @since 1.4
@@ -378,6 +482,10 @@ public class JColorChooser extends JComponent implements Accessible {
      * This will fire a <code>PropertyChangeEvent</code> for the property
      * named "previewPanel".
      *
+     * <p>
+     *  设置当前预览面板。这将为名为"previewPanel"的属性触发<code> PropertyChangeEvent </code>。
+     * 
+     * 
      * @param preview the <code>JComponent</code> which displays the current color
      * @see JComponent#addPropertyChangeListener
      *
@@ -398,6 +506,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Returns the preview panel that shows a chosen color.
      *
+     * <p>
+     *  返回显示所选颜色的预览面板。
+     * 
+     * 
      * @return a <code>JComponent</code> object -- the preview panel
      */
     public JComponent getPreviewPanel() {
@@ -407,6 +519,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Adds a color chooser panel to the color chooser.
      *
+     * <p>
+     *  向颜色选择器添加颜色选择器面板。
+     * 
+     * 
      * @param panel the <code>AbstractColorChooserPanel</code> to be added
      */
     public void addChooserPanel( AbstractColorChooserPanel panel ) {
@@ -420,6 +536,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Removes the Color Panel specified.
      *
+     * <p>
+     *  删除指定的颜色面板。
+     * 
+     * 
      * @param panel   a string that specifies the panel to be removed
      * @return the color panel
      * @exception IllegalArgumentException if panel is not in list of
@@ -463,6 +583,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Specifies the Color Panels used to choose a color value.
      *
+     * <p>
+     *  指定用于选择颜色值的颜色面板。
+     * 
+     * 
      * @param panels  an array of <code>AbstractColorChooserPanel</code>
      *          objects
      *
@@ -480,6 +604,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Returns the specified color panels.
      *
+     * <p>
+     *  返回指定的颜色面板。
+     * 
+     * 
      * @return an array of <code>AbstractColorChooserPanel</code> objects
      */
     public AbstractColorChooserPanel[] getChooserPanels() {
@@ -489,6 +617,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Returns the data model that handles color selections.
      *
+     * <p>
+     *  返回处理颜色选择的数据模型。
+     * 
+     * 
      * @return a <code>ColorSelectionModel</code> object
      */
     public ColorSelectionModel getSelectionModel() {
@@ -499,6 +631,10 @@ public class JColorChooser extends JComponent implements Accessible {
     /**
      * Sets the model containing the selected color.
      *
+     * <p>
+     *  设置包含所选颜色的模型。
+     * 
+     * 
      * @param newModel   the new <code>ColorSelectionModel</code> object
      *
      * @beaninfo
@@ -517,6 +653,10 @@ public class JColorChooser extends JComponent implements Accessible {
      * See <code>readObject</code> and <code>writeObject</code> in
      * <code>JComponent</code> for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅<code> readComponent </code>中的<code> readObject </code>和<code> writeObject </code>
+     * 。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -538,6 +678,11 @@ public class JColorChooser extends JComponent implements Accessible {
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JColorChooser </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JColorChooser</code>
      */
     protected String paramString() {
@@ -566,6 +711,11 @@ public class JColorChooser extends JComponent implements Accessible {
      * AccessibleJColorChooser.
      * A new AccessibleJColorChooser instance is created if necessary.
      *
+     * <p>
+     * 获取与此JColorChooser相关联的AccessibleContext。对于颜色选择器,AccessibleContext采用AccessibleJColorChooser的形式。
+     * 如果需要,将创建一个新的AccessibleJColorChooser实例。
+     * 
+     * 
      * @return an AccessibleJColorChooser that serves as the
      *         AccessibleContext of this JColorChooser
      */
@@ -581,12 +731,19 @@ public class JColorChooser extends JComponent implements Accessible {
      * <code>JColorChooser</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to color chooser user-interface
      * elements.
+     * <p>
+     *  这个类实现了对<code> JColorChooser </code>类的辅助功能支持。它提供了适用于颜色选择器用户界面元素的Java可访问性API的实现。
+     * 
      */
     protected class AccessibleJColorChooser extends AccessibleJComponent {
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -604,6 +761,11 @@ public class JColorChooser extends JComponent implements Accessible {
  * a JColorChooser with "Ok", "Cancel", and "Reset" buttons.
  *
  * Note: This needs to be fixed to deal with localization!
+ * <p>
+ *  类,它构建一个由带有"Ok","Cancel"和"Reset"按钮的JColorChooser组成的颜色选择器对话框。
+ * 
+ *  注意：这需要固定处理本地化！
+ * 
  */
 class ColorChooserDialog extends JDialog {
     private Color initialColor;
@@ -643,6 +805,7 @@ class ColorChooserDialog extends JDialog {
 
         /*
          * Create Lower button panel
+         * <p>
          */
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));

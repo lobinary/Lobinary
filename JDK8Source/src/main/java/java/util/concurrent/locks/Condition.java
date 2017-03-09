@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.locks;
@@ -173,6 +177,63 @@ import java.util.Date;
  * shown that the interrupt occurred after another action that may have
  * unblocked the thread. An implementation should document this behavior.
  *
+ * <p>
+ *  {@code Condition}将{@code Object}监视方法({@link Object#wait()wait},{@link Object#notify notify}和{@link Object#notifyAll notifyAll}
+ * 通过使用任意{@link Lock}实现来组合每个对象具有多个等待集的效果。
+ * 当{@code Lock}取代使用{@code synchronized}方法和语句时,{@code Condition}会取代使用对象监视方法。
+ * 
+ *  <p>条件(也称为<em>条件队列</em>或<em>条件变量</em>)提供了一种线程暂停执行("等待"一些状态条件现在可以是真的。
+ * 因为对这个共享状态信息的访问发生在不同的线程中,所以它必须被保护,因此某种形式的锁与条件相关联。
+ * 等待条件提供的关键属性是它以原子方式释放相关的锁并挂起当前线程,就像{@code Object.wait}。
+ * 
+ *  <p> {@code Condition}实例本质上绑定到锁。
+ * 要获取特定{@link Lock}实例的{@code Condition}实例,请使用其{@link Lock#newCondition newCondition()}方法。
+ * 
+ * <p>例如,假设我们有一个有界缓冲区,它支持{@code put}和{@code take}方法。
+ * 如果对空缓冲区尝试{@code take},则线程将阻塞,直到一个项目变为可用;如果在一个完整的缓冲区上尝试{@code put},那么线程将阻塞,直到空间可用。
+ * 我们希望在单独的等待集中继续等待{@code put}线程和{@code take}线程,这样我们就可以使用优化来在缓冲区中的项目或空间变为可用时只通知单个线程。
+ * 这可以使用两个{@link Condition}实例来实现。
+ * <pre>
+ *  class BoundedBuffer {<b> final Lock lock = new ReentrantLock(); </b> final Condition notFull = <b> lock.newCondition(); </b> final condition notEmpty = <b> lock.newCondition(); </b>。
+ * 
+ *  final Object [] items = new Object [100]; int putptr,takeptr,count;
+ * 
+ *  public void put(Object x)throws InterruptedException {<b> lock.lock(); try {</b> while(count == items.length)<b> notFull.await(); </b> items [putptr] = x; if(++ putptr == items.length)putptr = 0; ++ count; <b> notEmpty.signal(); </b> <b>}
+ *  finally {lock.unlock(); } </b>}。
+ * 
+ *  public Object take()throws InterruptedException {<b> lock.lock(); try {</b> while(count == 0)<b> notEmpty.await(); </b> Object x = items [takeptr]; if(++ takeptr == items.length)takeptr = 0; - 计数; <b> notFull.signal(); </b> return x; <b>}
+ *  finally {lock.unlock(); } </b>}}。
+ * </pre>
+ * 
+ * ({@link java.util.concurrent.ArrayBlockingQueue}类提供了此功能,因此没有理由实现此示例用法类。)
+ * 
+ *  <p> {@code Condition}实现可以提供与{@code Object}监视方法不同的行为和语义,例如保证通知的排序,或者不需要在执行通知时保持锁定。
+ * 如果实现提供这样的专用语义,则实现必须记录那些语义。
+ * 
+ *  <p>请注意,{@code Condition}实例只是常规对象,可以在{@code synchronized}语句中用作目标,并且可以有自己的监视器{@link Object#wait wait}和
+ * {@link Object#notify notification}方法。
+ * 获取{@code Condition}实例的监视锁定或使用其监视方法与获取与该{@code Condition}关联的{@link Lock}或使用其{@linkplain #await等待}和{@linkplain #signal signaling}
+ * 方法。
+ * 为了避免混淆,建议您不要以这种方式使用{@code Condition}实例,除非在自己的实现中。
+ * 
+ *  <p>除非另有说明,否则传递任何参数的{@code null}值将导致抛出{@link NullPointerException}。
+ * 
+ *  <h3>实施注意事项</h3>
+ * 
+ * <p>当等待{@code Condition}时,"<em>伪唤醒</em>"允许发生,一般来说,作为对底层平台语义的让步。
+ * 这对大多数应用程序没有实际影响,因为{@code Condition}应该总是在循环中等待,测试正在等待的状态谓词。
+ * 实现可以自由地消除伪唤醒的可能性,但是建议应用程序员总是假定它们可以发生,因此总是在循环中等待。
+ * 
+ *  <p>条件等待的三种形式(可中断,不可中断和定时)可能在某些平台上的易于实现和它们的性能特性方面不同。特别地,可能难以提供这些特征并维持诸如排序保证的特定语义。
+ * 此外,中断线程的实际挂起的能力可能并不总是可行地在所有平台上实现。
+ * 
+ *  因此,实现不需要为所有三种形式的等待定义完全相同的保证或语义,也不需要支持线程的实际挂起的中断。
+ * 
+ *  <p>需要一个实现来清楚地记录每个等待方法提供的语义和保证,并且当实现确实支持线程挂起中断时,它必须遵守在该接口中定义的中断语义。
+ * 
+ * <p>由于中断通常意味着取消,并且检查中断通常很少发生,因此实现可以有利于响应于正常方法返回的中断。这是真的,即使可以显示中断发生在另一个可能已解除线程的操作之后。实现应该记录这种行为。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -225,6 +286,31 @@ public interface Condition {
      * must ensure that the signal is redirected to another waiting thread, if
      * there is one.
      *
+     * <p>
+     *  使当前线程等待,直到它发出信号或{@linkplain线程#中断}。
+     * 
+     *  <p>与此{@code Condition}相关联的锁定以原子方式释放,并且当前线程因线程调度目的而被禁用,并处于休眠状态,直到发生以下四种情况：<em>
+     * <ul>
+     *  <li>一些其他线程调用此{@code Condition}的{@link #signal}方法,并且当前线程恰好被选择为要唤醒的线程;或<li>某些其他线程调用此{@code Condition}的
+     * {@link #signalAll}方法;或<li>一些其他线程{@linkplain线程#中断中断}当前线程,并且支持中断线程挂起;或<li>"<em>伪唤醒</em>"发生。
+     * </ul>
+     * 
+     *  <p>在所有情况下,在此方法可以返回之前,当前线程必须重新获取与此条件相关联的锁。当线程返回时,<em>确保</em>保持此锁定。
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     * <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断中断},同时等待和中断线程挂起被支持,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。在第一种情况下,没有指定是否在锁被释放之前进行中断测试。
+     * 
+     *  <p> <b>实施注意事项</b>
+     * 
+     *  <p>当调用此方法时,假定当前线程持有与此{@code Condition}相关联的锁。它是由执行来确定是否是这种情况,如果不是,如何回应。
+     * 通常,将抛出异常(例如{@link IllegalMonitorStateException}),实现必须记录该事实。
+     * 
+     *  <p>响应于信号,实现可以有利于响应于正常方法返回的中断。在这种情况下,实现必须确保信号被重定向到另一个等待线程(如果有的话)。
+     * 
+     * 
      * @throws InterruptedException if the current thread is interrupted
      *         (and interruption of thread suspension is supported)
      */
@@ -263,6 +349,24 @@ public interface Condition {
      * the case and if not, how to respond. Typically, an exception will be
      * thrown (such as {@link IllegalMonitorStateException}) and the
      * implementation must document that fact.
+     * <p>
+     *  使当前线程等待,直到它发出信号。
+     * 
+     *  <p>与此条件相关联的锁定是原子释放的,当前线程因线程调度目的而被禁用,并处于休眠状态,直到发生以下三种情况：<em>
+     * <ul>
+     * <li>一些其他线程调用此{@code Condition}的{@link #signal}方法,并且当前线程恰好被选择为要唤醒的线程;或<li>某些其他线程调用此{@code Condition}的{@link #signalAll}
+     * 方法;或<li>"<em>伪唤醒</em>"发生。
+     * </ul>
+     * 
+     *  <p>在所有情况下,在此方法可以返回之前,当前线程必须重新获取与此条件相关联的锁。当线程返回时,<em>确保</em>保持此锁定。
+     * 
+     *  <p>如果在进入此方法时设置了当前线程的中断状态,或者在等待期间{@linkplain线程#中断},它将继续等待,直到发出信号。当它最终从这个方法返回时,它的中断状态仍然被设置。
+     * 
+     *  <p> <b>实施注意事项</b>
+     * 
+     *  <p>当调用此方法时,假定当前线程持有与此{@code Condition}相关联的锁。它是由执行来确定是否是这种情况,如果不是,如何回应。
+     * 通常,将抛出异常(例如{@link IllegalMonitorStateException}),实现必须记录该事实。
+     * 
      */
     void awaitUninterruptibly();
 
@@ -345,6 +449,39 @@ public interface Condition {
      * must ensure that the signal is redirected to another waiting thread, if
      * there is one.
      *
+     * <p>
+     *  使当前线程等待,直到它发出信号或中断,或经过指定的等待时间。
+     * 
+     *  <p>与此条件相关联的锁定以原子方式释放,并且当前线程针对线程调度目标停用,并处于休眠状态,直到发生以下五种情况为止：<em>
+     * <ul>
+     * <li>一些其他线程调用此{@code Condition}的{@link #signal}方法,并且当前线程恰好被选择为要唤醒的线程;或<li>某些其他线程调用此{@code Condition}的{@link #signalAll}
+     * 方法;或<li>一些其他线程{@linkplain线程#中断中断}当前线程,并且支持中断线程挂起;或<li>指定的等待时间已过;或<li>"<em>伪唤醒</em>"发生。
+     * </ul>
+     * 
+     *  <p>在所有情况下,在此方法可以返回之前,当前线程必须重新获取与此条件相关联的锁。当线程返回时,<em>确保</em>保持此锁定。
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     *  <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断中断},同时等待和中断线程挂起被支持,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。在第一种情况下,没有指定是否在锁被释放之前进行中断测试。
+     * 
+     *  <p>该方法返回返回时所提供的{@code nanosTimeout}值等待的纳秒数的估计值,如果超时则返回小于或等于零的值。
+     * 该值可用于确定在等待返回但等待的条件仍然不成立的情况下是否以及如何重新等待。此方法的典型用途采用以下形式：。
+     * 
+     * <pre> {@code boolean aMethod(long timeout,TimeUnit unit){long nanos = unit.toNanos(timeout); lock.lock(); try {while(！conditionBeingWaitedFor()){if(nanos <= 0L)return false; nanos = theCondition.awaitNanos(nanos); } // ...} finally {lock.unlock(); }}} </pre>
+     * 。
+     * 
+     *  <p>设计注意：此方法需要纳秒参数,以避免在报告剩余时间时出现截断错误。这种精度损失将使得程序员难以确保当重新等待发生时总的等待时间不会系统地短于指定时间。
+     * 
+     *  <p> <b>实施注意事项</b>
+     * 
+     *  <p>当调用此方法时,假定当前线程持有与此{@code Condition}相关联的锁。它是由执行来确定是否是这种情况,如果不是,如何回应。
+     * 通常,将抛出异常(例如{@link IllegalMonitorStateException}),实现必须记录该事实。
+     * 
+     *  <p>实现可以有利于响应于对信号的正常方法返回响应中断,或者超过指示经过指定的等待时间。在任一情况下,实现必须确保信号被重定向到另一个等待线程(如果有的话)。
+     * 
+     * 
      * @param nanosTimeout the maximum time to wait, in nanoseconds
      * @return an estimate of the {@code nanosTimeout} value minus
      *         the time spent waiting upon return from this method.
@@ -363,6 +500,10 @@ public interface Condition {
      * equivalent to:
      *  <pre> {@code awaitNanos(unit.toNanos(time)) > 0}</pre>
      *
+     * <p>
+     *  使当前线程等待,直到它发出信号或中断,或经过指定的等待时间。此方法在行为上等效于：<pre> {@code awaitNanos(unit.toNanos(time))> 0} </pre>
+     * 
+     * 
      * @param time the maximum time to wait
      * @param unit the time unit of the {@code time} argument
      * @return {@code false} if the waiting time detectably elapsed
@@ -441,6 +582,32 @@ public interface Condition {
      * must ensure that the signal is redirected to another waiting thread, if
      * there is one.
      *
+     * <p>
+     * 使当前线程等待,直到它发出信号或中断,或指定的截止时间已过。
+     * 
+     *  <p>与此条件相关联的锁定以原子方式释放,并且当前线程针对线程调度目标停用,并处于休眠状态,直到发生以下五种情况为止：<em>
+     * <ul>
+     *  <li>一些其他线程调用此{@code Condition}的{@link #signal}方法,并且当前线程恰好被选择为要唤醒的线程;或<li>某些其他线程调用此{@code Condition}的
+     * {@link #signalAll}方法;或<li>一些其他线程{@linkplain线程#中断中断}当前线程,并且支持中断线程挂起;或<li>指定的截止时间已过;或<li>"<em>伪唤醒</em>"
+     * 发生。
+     * </ul>
+     * 
+     *  <p>在所有情况下,在此方法可以返回之前,当前线程必须重新获取与此条件相关联的锁。当线程返回时,<em>确保</em>保持此锁定。
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     *  <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断中断},同时等待和中断线程挂起被支持,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。在第一种情况下,没有指定是否在锁被释放之前进行中断测试。
+     * 
+     * <p>返回值表示截止时间是否已过,可以使用如下：<pre> {@code boolean aMethod(Date deadline){boolean stillWaiting = true; lock.lock(); try {while(！conditionBeingWaitedFor()){if(！stillWaiting)return false; stillWaiting = theCondition.awaitUntil(deadline); }
+     *  // ...} finally {lock.unlock(); }}} </pre>。
+     * 
+     *  <p> <b>实施注意事项</b>
+     * 
+     *  <p>当调用此方法时,假定当前线程持有与此{@code Condition}相关联的锁。它是由执行来确定是否是这种情况,如果不是,如何回应。
+     * 通常,将抛出异常(例如{@link IllegalMonitorStateException}),实现必须记录该事实。
+     * 
      * @param deadline the absolute time to wait until
      * @return {@code false} if the deadline has elapsed upon return, else
      *         {@code true}
@@ -464,6 +631,10 @@ public interface Condition {
      * document this precondition and any actions taken if the lock is
      * not held. Typically, an exception such as {@link
      * IllegalMonitorStateException} will be thrown.
+     * <p>
+     * 
+     *  <p>实现可以有利于响应于响应于信号的正常方法返回响应中断,或者超过指示所指定的期限的通过。在任一情况下,实现必须确保信号被重定向到另一个等待线程(如果有的话)。
+     * 
      */
     void signal();
 
@@ -482,6 +653,16 @@ public interface Condition {
      * document this precondition and any actions taken if the lock is
      * not held. Typically, an exception such as {@link
      * IllegalMonitorStateException} will be thrown.
+     * <p>
+     *  醒来一个等待线程。
+     * 
+     *  <p>如果任何线程正在等待此条件,则选择一个线程唤醒。然后,该线程必须在从{@code await}返回之前重新获取锁。
+     * 
+     *  <p> <b>实施注意事项</b>
+     * 
+     * <p>当调用此方法时,实现可能(通常情况下)要求当前线程保存与此{@code Condition}相关联的锁。实现必须记录这个前提条件,并且如果锁没有被锁住,采取的任何操作。
+     * 通常,将抛出异常,例如{@link IllegalMonitorStateException}。
+     * 
      */
     void signalAll();
 }

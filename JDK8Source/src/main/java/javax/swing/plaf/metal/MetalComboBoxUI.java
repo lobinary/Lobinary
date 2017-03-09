@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import java.beans.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  JComboBox的金属UI
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see MetalComboBoxEditor
  * @see MetalComboBoxButton
  * @author Tom Santos
@@ -66,6 +74,10 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
     /**
      * If necessary paints the currently selected item.
      *
+     * <p>
+     *  如果需要,绘制当前选择的项目。
+     * 
+     * 
      * @param g Graphics to paint to
      * @param bounds Region to paint current value to
      * @param hasFocus whether or not the JComboBox has focus
@@ -98,6 +110,10 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
     /**
      * If necessary paints the background of the currently selected item.
      *
+     * <p>
+     *  如果需要,绘制当前选定项目的背景。
+     * 
+     * 
      * @param g Graphics to paint to
      * @param bounds Region to paint background to
      * @param hasFocus whether or not the JComboBox has focus
@@ -137,6 +153,10 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -185,6 +205,9 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
 
     /**
      * Resets the necessary state on the ComboBoxButton for ocean.
+     * <p>
+     *  在ComboBoxButton上重置海洋的必要状态。
+     * 
      */
     private void updateButtonForOcean(JButton button) {
         if (MetalLookAndFeel.usingOcean()) {
@@ -201,6 +224,9 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code MetalComboBoxUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code MetalComboBoxUI}的子类中实例化它。
+     * 
      */
     public class MetalPropertyChangeListener extends BasicComboBoxUI.PropertyChangeHandler {
         public void propertyChange(PropertyChangeEvent e) {
@@ -233,6 +259,10 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
      * override. All the functionality of this method is in the
      * MetalPropertyChangeListener.
      *
+     * <p>
+     *  从Java 2平台v1.4这个方法不再使用。不要调用或覆盖。此方法的所有功能都在MetalPropertyChangeListener中。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.4.
      */
     @Deprecated
@@ -245,6 +275,9 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code MetalComboBoxUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code MetalComboBoxUI}的子类中实例化它。
+     * 
      */
     public class MetalComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
         public void layoutContainer( Container parent ) {
@@ -294,6 +327,10 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
      * As of Java 2 platform v1.4 this method is no
      * longer used.
      *
+     * <p>
+     *  从Java 2平台v1.4这个方法不再使用。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.4.
      */
     @Deprecated
@@ -361,6 +398,10 @@ public class MetalComboBoxUI extends BasicComboBoxUI {
      * is only included for backwards API compatibility. Do not call or
      * override.
      *
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code MetalComboBoxUI}的子类中实例化它。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.4.
      */
     @Deprecated

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -15,6 +16,8 @@ public interface CodeSets
      * Identifies a CDR encapsulation of the 
      * <code>CONV_FRAME.CodeSetContext</code> defined in 
      * Section 13.10.2.5, "GIOP Code Set Service Context," on page 13-43.
+     * <p>
+     * 
      */
   public static final int value = (int)(1L);
 }

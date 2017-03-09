@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xpath.regex;
@@ -27,6 +37,11 @@ import java.text.CharacterIterator;
  *
  * @xerces.internal
  *
+ * <p>
+ *  Boyer-Moore搜索者。
+ * 
+ *  @ xerces.internal
+ * 
  */
 public class BMPattern {
     char[] pattern;
@@ -67,6 +82,8 @@ public class BMPattern {
 
     /**
      *
+     * <p>
+     * 
      * @return -1 if <var>iterator</var> does not contain this pattern.
      */
     public int matches(CharacterIterator iterator, int start, int limit) {
@@ -92,6 +109,8 @@ public class BMPattern {
 
     /**
      *
+     * <p>
+     * 
      * @return -1 if <var>str</var> does not contain this pattern.
      */
     public int matches(String str, int start, int limit) {
@@ -117,6 +136,8 @@ public class BMPattern {
     }
     /**
      *
+     * <p>
+     * 
      * @return -1 if <var>chars</char> does not contain this pattern.
      */
     public int matches(char[] chars, int start, int limit) {
@@ -233,5 +254,8 @@ public class BMPattern {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    /* <p>
+    /*  public static void main(String [] argv){try {int [] shiftTable = new int [256]; initializeBoyerMoore(argv [0],shiftTable,true); int o = -1; CharacterIterator ite = new java.text.StringCharacterIterator(argv [1]); long start = System.currentTimeMillis(); // for(int i = 0; i <10000; i ++)o = searchIgnoreCasesWithBoyerMoore(ite,0,argv [0],shiftTable); start = System.currentTimeMillis() -  start; System.out.println("Result："+ o +",Elapsed："+ start); } catch(Exception ex){ex.printStackTrace(); }}。
+    /* 
     }*/
 }

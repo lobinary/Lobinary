@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -14,6 +15,11 @@ package com.sun.jmx.snmp;
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
  *
+ * <p>
+ *  包含<CODE> SnmpTimeTick </CODE>值,单位为1/100秒。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public class SnmpTimeticks extends SnmpUnsignedInt {
@@ -23,6 +29,10 @@ public class SnmpTimeticks extends SnmpUnsignedInt {
     /**
      * Constructs a new <CODE>SnmpTimeticks</CODE> from the specified
      * integer value.
+     * <p>
+     *  从指定的整数值构造新的<CODE> SnmpTimeticks </CODE>。
+     * 
+     * 
      * @param v The initialization value.
      * @exception IllegalArgumentException The specified value is negative.
      */
@@ -33,6 +43,10 @@ public class SnmpTimeticks extends SnmpUnsignedInt {
     /**
      * Constructs a new <CODE>SnmpTimeticks</CODE> from the specified
      * <CODE>Integer</CODE> value.
+     * <p>
+     *  从指定的<CODE> Integer </CODE>值构造新的<CODE> SnmpTimeticks </CODE>。
+     * 
+     * 
      * @param v The initialization value.
      * @exception IllegalArgumentException The specified value is negative.
      */
@@ -46,6 +60,13 @@ public class SnmpTimeticks extends SnmpUnsignedInt {
      * <p>If the specified value is greater than {@link
      * SnmpUnsignedInt#MAX_VALUE SnmpUnsignedInt.MAX_VALUE}, the SnmpTimeTicks
      * will be initialized with <code>v%(SnmpUnsignedInt.MAX_VALUE+1)</code>.
+     * <p>
+     *  从指定的长整型值构造新的<CODE> SnmpTimeticks </CODE>。
+     *  <p>如果指定的值大于{@link SnmpUnsignedInt#MAX_VALUE SnmpUnsignedInt.MAX_VALUE},则SnmpTimeTicks将使用<code> v％(Sn
+     * mpUnsignedInt.MAX_VALUE + 1)</code>进行初始化。
+     *  从指定的长整型值构造新的<CODE> SnmpTimeticks </CODE>。
+     * 
+     * 
      * @param v The initialization value.
      * @exception IllegalArgumentException if the specified value is negative.
      */
@@ -59,6 +80,13 @@ public class SnmpTimeticks extends SnmpUnsignedInt {
      * <p>If the specified value is greater than {@link
      * SnmpUnsignedInt#MAX_VALUE SnmpUnsignedInt.MAX_VALUE}, the SnmpTimeTicks
      * will be initialized with <code>v%(SnmpUnsignedInt.MAX_VALUE+1)</code>.
+     * <p>
+     *  从指定的<CODE>长</CODE>值构造新的<CODE> SnmpTimeticks </CODE>。
+     *  <p>如果指定的值大于{@link SnmpUnsignedInt#MAX_VALUE SnmpUnsignedInt.MAX_VALUE},则SnmpTimeTicks将使用<code> v％(Sn
+     * mpUnsignedInt.MAX_VALUE + 1)</code>进行初始化。
+     *  从指定的<CODE>长</CODE>值构造新的<CODE> SnmpTimeticks </CODE>。
+     * 
+     * 
      * @param v The initialization value.
      * @exception IllegalArgumentException if the specified value is negative.
      */
@@ -71,6 +99,10 @@ public class SnmpTimeticks extends SnmpUnsignedInt {
     /**
      * Parses the specified long value with time units and
      * returns a <CODE>String</CODE> of the form <CODE>d days hh:mm:ss</CODE>.
+     * <p>
+     *  以时间单位解析指定的长整型值,并返回<CODE> d days hh：mm：ss </CODE>形式的<CODE>字符串</CODE>。
+     * 
+     * 
      * @param timeticks The value to be parsed.
      * @return The <CODE>String</CODE> representation of the value.
      */
@@ -105,6 +137,11 @@ public class SnmpTimeticks extends SnmpUnsignedInt {
      * Converts the timeticks value to its <CODE>String</CODE> form.
      * The format of the returned <CODE>String</CODE> is <CODE>d days hh:mm:ss</CODE>.
      * <BR>Note: this method simply calls the {@link #printTimeTicks printTimeTicks} method.
+     * <p>
+     *  将时间表值转换为其<CODE>字符串</CODE>表单。返回的<CODE> String </CODE>的格式为<CODE> d days hh：mm：ss </CODE>。
+     *  <BR>注意：此方法仅调用{@link #printTimeTicks printTimeTicks}方法。
+     * 
+     * 
      * @return The <CODE>String</CODE> representation of the value.
      */
     final public String toString() {
@@ -113,6 +150,10 @@ public class SnmpTimeticks extends SnmpUnsignedInt {
 
     /**
      * Returns a textual description of the type object.
+     * <p>
+     *  返回类型对象的文本描述。
+     * 
+     * 
      * @return ASN.1 textual description.
      */
     final public String getTypeName() {
@@ -123,6 +164,8 @@ public class SnmpTimeticks extends SnmpUnsignedInt {
     //----------
     /**
      * Name of the type.
+     * <p>
+     *  类型的名称。
      */
     final static String name = "TimeTicks" ;
     static final private long serialVersionUID = -5486435222360030630L;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,12 @@ import java.io.*;
  * getNext() method repeatedly to enumerate all the attributes
  * of an element.
  *
+ * <p>
+ *  此类定义了使用ATTLIST结构在DTD中描述的SGML元素的属性。 AttributeList可以使用getAttributes()方法从Element类获取。
+ * <p>
+ *  它实际上是链表中的一个元素。重复使用getNext()方法枚举元素的所有属性。
+ * 
+ * 
  * @see         Element
  * @author      Arthur Van Hoff
  *
@@ -58,6 +65,9 @@ class AttributeList implements DTDConstants, Serializable {
 
     /**
      * Create an attribute list element.
+     * <p>
+     *  创建属性列表元素。
+     * 
      */
     public AttributeList(String name) {
         this.name = name;
@@ -65,6 +75,9 @@ class AttributeList implements DTDConstants, Serializable {
 
     /**
      * Create an attribute list element.
+     * <p>
+     *  创建属性列表元素。
+     * 
      */
     public AttributeList(String name, int type, int modifier, String value, Vector<?> values, AttributeList next) {
         this.name = name;
@@ -76,6 +89,8 @@ class AttributeList implements DTDConstants, Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return attribute name
      */
     public String getName() {
@@ -83,6 +98,8 @@ class AttributeList implements DTDConstants, Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return attribute type
      * @see DTDConstants
      */
@@ -91,6 +108,8 @@ class AttributeList implements DTDConstants, Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return attribute modifier
      * @see DTDConstants
      */
@@ -99,6 +118,8 @@ class AttributeList implements DTDConstants, Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return possible attribute values
      */
     public Enumeration<?> getValues() {
@@ -106,6 +127,8 @@ class AttributeList implements DTDConstants, Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return default attribute value
      */
     public String getValue() {
@@ -113,6 +136,8 @@ class AttributeList implements DTDConstants, Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return the next attribute in the list
      */
     public AttributeList getNext() {
@@ -120,6 +145,8 @@ class AttributeList implements DTDConstants, Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return string representation
      */
     public String toString() {
@@ -128,6 +155,8 @@ class AttributeList implements DTDConstants, Serializable {
 
     /**
      * Create a hashtable of attribute types.
+     * <p>
+     *  创建一个哈希表的属性类型。
      */
     static Hashtable<Object, Object> attributeTypes = new Hashtable<Object, Object>();
 

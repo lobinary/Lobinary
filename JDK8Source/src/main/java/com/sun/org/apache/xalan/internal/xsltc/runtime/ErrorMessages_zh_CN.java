@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.runtime;
@@ -23,6 +33,8 @@ package com.sun.org.apache.xalan.internal.xsltc.runtime;
 import java.util.ListResourceBundle;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  */
 public class ErrorMessages_zh_CN extends ListResourceBundle {
@@ -75,11 +87,42 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
  *
  *   9) Translet is an invented term that refers to the class file that contains
  *      the compiled form of a stylesheet.
+ * <p>
+ *  XSLTC运行时错误消息。
+ * 
+ *  翻译者和定义的一般注释：
+ * 
+ *  1)XSLTC是产品的名称。它是XML样式表：转换编译器的首字母缩写
+ * 
+ *  2)样式表是如何将输入XML文档转换为结果输出XML文档(或HTML文档或文本)的描述,
+ * 
+ *  3)轴是XML文档的树表示中的特定"维度";树中的节点沿不同的轴被划分。
+ * 例如,遍历"子"轴意味着程序将访问特定节点的每个子节点;遍历"后代"轴意味着程序将访问特定节点的子节点,它们的子节点,等等,直到到达树的叶节点。
+ * 
+ * 4)迭代器是沿着特定轴遍历树中的节点的对象,一次一个。
+ * 
+ *  5)元素是XML文档中的标记标记;属性是标记上的修饰符。
+ * 例如,在<elem attr ='val'attr2 ='val2'>"elem"是元素名称,"attr"和"attr2"分别是具有值"val"和"val2"的属性名称。
+ * 
+ *  6)命名空间声明是用于将前缀与URI(命名空间)相关联的特殊属性。使用该前缀的元素名称和属性名称的含义是相对于该命名空间定义的。
+ * 
+ *  7)DOM是文档对象模型的首字母缩略词。它是XML文档的树表示。
+ * 
+ *  SAX是Simple API for XML处理的首字母缩略词。它是一个API,用于通知XML处理器(在本例中为XSLTC)XML文档的结构和内容。
+ * 
+ *  对样式表处理器的输入可以来自XML解析器,以DOM树的形式或通过SAX API。
+ * 
+ *  8)DTD是一个文档类型声明。它是一种指定XML文件的语法,元素的名称和类型,属性等的方法。
+ * 
+ *  9)Translet是一个发明的术语,它引用包含样式表的编译形式的类文件。
+ * 
  */
 
     // These message should be read from a locale-specific resource bundle
     /** Get the lookup table for error messages.
      *
+     * <p>
+     * 
      * @return The message lookup table.
      */
     public Object[][] getContents()
@@ -89,6 +132,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
         /*
          * Note to translators:  the substitution text in the following message
          * is a class name.  Used for internal errors in the processor.
+         * <p>
+         *  注意翻译者：以下消息中的替换文本是类名。用于处理器中的内部错误。
+         * 
          */
         {BasisLibrary.RUN_TIME_INTERNAL_ERR,
         "''{0}'' \u4E2D\u7684\u8FD0\u884C\u65F6\u5185\u90E8\u9519\u8BEF"},
@@ -96,6 +142,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
         /*
          * Note to translators:  <xsl:copy> is a keyword that should not be
          * translated.
+         * <p>
+         *  注意翻译者：<xsl：copy>是不应翻译的关键字。
+         * 
          */
         {BasisLibrary.RUN_TIME_COPY_ERR,
         "\u6267\u884C <xsl:copy> \u65F6\u51FA\u73B0\u8FD0\u884C\u65F6\u9519\u8BEF\u3002"},
@@ -105,6 +154,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * The message is displayed if a value in a particular context needs to
          * be converted to type {1}, but that's not possible for a value of type
          * {0}.
+         * <p>
+         * 翻译者注意：替换文本指的是数据类型。如果特定上下文中的值需要转换为类型{1},那么将显示该消息,但对于类型为{0}的值不可能。
+         * 
          */
         {BasisLibrary.DATA_CONVERSION_ERR,
         "\u4ECE ''{0}'' \u5230 ''{1}'' \u7684\u8F6C\u6362\u65E0\u6548\u3002"},
@@ -113,6 +165,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * Note to translators:  This message is displayed if the function named
          * by the substitution text is not a function that is supported.  XSLTC
          * is the acronym naming the product.
+         * <p>
+         *  注意翻译者：如果替换文本命名的函数不是受支持的函数,则会显示此消息。 XSLTC是命名产品的首字母缩略词。
+         * 
          */
         {BasisLibrary.EXTERNAL_FUNC_ERR,
         "XSLTC \u4E0D\u652F\u6301\u5916\u90E8\u51FD\u6570 ''{0}''\u3002"},
@@ -121,6 +176,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * Note to translators:  This message is displayed if two values are
          * compared for equality, but the data type of one of the values is
          * unknown.
+         * <p>
+         *  翻译者注意：如果对两个值进行相等比较,但其中一个值的数据类型未知,则会显示此消息。
+         * 
          */
         {BasisLibrary.EQUALITY_EXPR_ERR,
         "\u7B49\u5F0F\u8868\u8FBE\u5F0F\u4E2D\u7684\u53C2\u6570\u7C7B\u578B\u672A\u77E5\u3002"},
@@ -130,6 +188,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * type; the substitution text for {1} will be the name of a function.
          * This is displayed if an argument of the particular data type is not
          * permitted for a call to this function.
+         * <p>
+         *  对翻译者的注解：{0}的替换文本将是一种数据类型; {1}的替换文本将是函数的名称。如果特定数据类型的参数不允许调用此函数,则会显示此消息。
+         * 
          */
         {BasisLibrary.INVALID_ARGUMENT_ERR,
         "\u8C03\u7528 ''{1}'' \u65F6\u7684\u53C2\u6570\u7C7B\u578B ''{0}'' \u65E0\u6548"},
@@ -138,6 +199,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * Note to translators:  There is way of specifying a format for a
          * number using a pattern; the processor was unable to format the
          * particular value using the specified pattern.
+         * <p>
+         *  注意翻译者：有一种方法使用模式指定数字的格式;处理器无法使用指定的模式格式化特定值。
+         * 
          */
         {BasisLibrary.FORMAT_NUMBER_ERR,
         "\u5C1D\u8BD5\u4F7F\u7528\u6A21\u5F0F ''{1}'' \u8BBE\u7F6E\u6570\u5B57 ''{0}'' \u7684\u683C\u5F0F\u3002"},
@@ -146,6 +210,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * Note to translators:  The following represents an internal error
          * situation in XSLTC.  The processor was unable to create a copy of an
          * iterator.  (See definition of iterator above.)
+         * <p>
+         *  转换器注意事项：以下代表XSLTC中的内部错误情况。处理器无法创建迭代器的副本。 (见上面的迭代器的定义。)
+         * 
          */
         {BasisLibrary.ITERATOR_CLONE_ERR,
         "\u65E0\u6CD5\u514B\u9686\u8FED\u4EE3\u5668 ''{0}''\u3002"},
@@ -155,6 +222,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * situation in XSLTC.  The processor attempted to create an iterator
          * for a particular axis (see definition above) that it does not
          * support.
+         * <p>
+         *  转换器注意事项：以下代表XSLTC中的内部错误情况。处理器尝试为特定轴(见上面的定义)创建一个不支持的迭代器。
+         * 
          */
         {BasisLibrary.AXIS_SUPPORT_ERR,
         "\u4E0D\u652F\u6301\u8F74 ''{0}'' \u7684\u8FED\u4EE3\u5668\u3002"},
@@ -164,6 +234,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * situation in XSLTC.  The processor attempted to create an iterator
          * for a particular axis (see definition above) that it does not
          * support.
+         * <p>
+         * 转换器注意事项：以下代表XSLTC中的内部错误情况。处理器尝试为特定轴(见上面的定义)创建一个不支持的迭代器。
+         * 
          */
         {BasisLibrary.TYPED_AXIS_SUPPORT_ERR,
         "\u4E0D\u652F\u6301\u7C7B\u578B\u5316\u8F74 ''{0}'' \u7684\u8FED\u4EE3\u5668\u3002"},
@@ -173,6 +246,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * being processed attempted to construct an XML document with an
          * attribute in a place other than on an element.  The substitution text
          * specifies the name of the attribute.
+         * <p>
+         *  翻译者注意：如果正在处理的样式表试图在一个元素之外的地方构造一个具有属性的XML文档,则会报告此消息。替换文本指定属性的名称。
+         * 
          */
         {BasisLibrary.STRAY_ATTRIBUTE_ERR,
         "\u5C5E\u6027 ''{0}'' \u5728\u5143\u7D20\u5916\u90E8\u3002"},
@@ -183,6 +259,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * appear on an element.  The substitution text {0} is the namespace
          * prefix and {1} is the URI that was being used in the erroneous
          * namespace declaration.
+         * <p>
+         *  对翻译者的注意：与前面的消息一样,命名空间声明具有属性的形式,并且只允许出现在元素上。替换文本{0}是命名空间前缀,{1}是在错误的命名空间声明中使用的URI。
+         * 
          */
         {BasisLibrary.STRAY_NAMESPACE_ERR,
         "\u540D\u79F0\u7A7A\u95F4\u58F0\u660E ''{0}''=''{1}'' \u5728\u5143\u7D20\u5916\u90E8\u3002"},
@@ -191,6 +270,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * Note to translators:  The stylesheet contained a reference to a
          * namespace prefix that was undefined.  The value of the substitution
          * text is the name of the prefix.
+         * <p>
+         *  翻译者注意：样式表包含对未定义的命名空间前缀的引用。替换文本的值是前缀的名称。
+         * 
          */
         {BasisLibrary.NAMESPACE_PREFIX_ERR,
         "\u6CA1\u6709\u8BF4\u660E\u540D\u79F0\u7A7A\u95F4\u524D\u7F00 ''{0}''\u3002"},
@@ -198,6 +280,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
         /*
          * Note to translators:  The following represents an internal error.
          * DOMAdapter is a Java class in XSLTC.
+         * <p>
+         *  翻译者注意：以下代表内部错误。 DOMAdapter是XSLTC中的一个Java类。
+         * 
          */
         {BasisLibrary.DOM_ADAPTER_INIT_ERR,
         "\u4F7F\u7528\u9519\u8BEF\u7C7B\u578B\u7684\u6E90 DOM \u521B\u5EFA\u4E86 DOMAdapter\u3002"},
@@ -207,6 +292,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * parser that is providing input to XSLTC cannot be used because it
          * does not describe to XSLTC the structure of the input XML document's
          * DTD.
+         * <p>
+         *  注意翻译者：以下消息表明,提供输入到XSLTC的XML解析器不能使用,因为它不向XSLTC描述输入XML文档的DTD的结构。
+         * 
          */
         {BasisLibrary.PARSER_DTD_SUPPORT_ERR,
         "\u4F7F\u7528\u7684 SAX \u89E3\u6790\u5668\u4E0D\u4F1A\u5904\u7406 DTD \u58F0\u660E\u4E8B\u4EF6\u3002"},
@@ -216,6 +304,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * parser that is providing input to XSLTC cannot be used because it
          * does not distinguish between ordinary XML attributes and namespace
          * declarations.
+         * <p>
+         *  注意翻译者：以下消息表明,提供输入到XSLTC的XML解析器不能使用,因为它不区分普通的XML属性和命名空间声明。
+         * 
          */
         {BasisLibrary.NAMESPACES_SUPPORT_ERR,
         "\u4F7F\u7528\u7684 SAX \u89E3\u6790\u5668\u4E0D\u652F\u6301 XML \u540D\u79F0\u7A7A\u95F4\u3002"},
@@ -223,6 +314,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
         /*
          * Note to translators:  The substitution text is the URI that was in
          * error.
+         * <p>
+         *  注意翻译者：替换文本是错误的URI。
+         * 
          */
         {BasisLibrary.CANT_RESOLVE_RELATIVE_URI_ERR,
         "\u65E0\u6CD5\u89E3\u6790 URI \u5F15\u7528 ''{0}''\u3002"},
@@ -231,6 +325,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * Note to translators:  The stylesheet contained an element that was
          * not recognized as part of the XSL syntax.  The substitution text
          * gives the element name.
+         * <p>
+         * 对翻译者的注意：样式表包含一个未被识别为XSL语法一部分的元素。替换文本提供元素名称。
+         * 
          */
         {BasisLibrary.UNSUPPORTED_XSL_ERR,
         "XSL \u5143\u7D20 ''{0}'' \u4E0D\u53D7\u652F\u6301"},
@@ -240,6 +337,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * XSL syntax and indicated that it was defined by XSLTC, but XSLTC does
          * not recognize the particular extension named.  The substitution text
          * gives the extension name.
+         * <p>
+         *  对翻译者的注意：样式表指的是XSL语法的扩展,并指示它是由XSLTC定义的,但XSLTC不识别特定的扩展名。替换文本提供扩展名。
+         * 
          */
         {BasisLibrary.UNSUPPORTED_EXT_ERR,
         "XSLTC \u6269\u5C55 ''{0}'' \u65E0\u6CD5\u8BC6\u522B"},
@@ -250,6 +350,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * class was compiled using a newer version of XSLTC and deployed for
          * execution with an older version of XSLTC.  The substitution text is
          * the name of the translet class.
+         * <p>
+         *  翻译员注意：如果translet类是使用较新版本的XSLTC编译并部署为使用旧版本的XSLTC执行,则会生成此错误消息。替换文本是translet类的名称。
+         * 
          */
         {BasisLibrary.UNKNOWN_TRANSLET_VERSION_ERR,
         "\u521B\u5EFA\u6307\u5B9A translet ''{0}'' \u65F6\u4F7F\u7528\u7684 XSLTC \u7684\u7248\u672C\u9AD8\u4E8E\u6B63\u5728\u4F7F\u7528\u7684 XSLTC \u8FD0\u884C\u65F6\u7684\u7248\u672C\u3002\u5FC5\u987B\u91CD\u65B0\u7F16\u8BD1\u6837\u5F0F\u8868\u6216\u4F7F\u7528\u8F83\u65B0\u7684 XSLTC \u7248\u672C\u8FD0\u884C\u6B64 translet\u3002"},
@@ -259,6 +362,9 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * to be a "QName" had a value that was incorrect.
          * 'QName' is an XML syntactic term that must not be translated.  The
          * substitution text contains the actual value of the attribute.
+         * <p>
+         *  翻译者注意：有效值必须为"QName"的属性的值不正确。 'QName'是一个XML语法术语,不能翻译。替换文本包含属性的实际值。
+         * 
          */
         {BasisLibrary.INVALID_QNAME_ERR,
         "\u5176\u503C\u5FC5\u987B\u4E3A QName \u7684\u5C5E\u6027\u5177\u6709\u503C ''{0}''"},
@@ -269,6 +375,8 @@ public class ErrorMessages_zh_CN extends ListResourceBundle {
          * to be a "NCName" had a value that was incorrect.
          * 'NCName' is an XML syntactic term that must not be translated.  The
          * substitution text contains the actual value of the attribute.
+         * <p>
+         *  翻译者注意：有效值必须为"NCName"的属性的值不正确。 "NCName"是不能翻译的XML句法术语。替换文本包含属性的实际值。
          */
         {BasisLibrary.INVALID_NCNAME_ERR,
         "\u5176\u503C\u5FC5\u987B\u4E3A NCName \u7684\u5C5E\u6027\u5177\u6709\u503C ''{0}''"},

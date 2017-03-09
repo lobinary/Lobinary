@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -13,6 +14,8 @@ public interface LIFESPAN_POLICY_ID
 
   /**
 	 * The value representing LIFESPAN_POLICY_ID.
+	 * <p>
+	 * 
 	 */
   public static final int value = (int)(17L);
 }

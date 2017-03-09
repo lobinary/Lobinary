@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -17,6 +18,7 @@ package org.omg.PortableServer;
 	 * assigned Object Ids only by the POA. If the POA also 
 	 * has the PERSISTENT policy, assigned Object Ids must 
 	 * be unique across all instantiations of the same POA.
+	 * <p>
 	 */
 public class IdAssignmentPolicyValue implements org.omg.CORBA.portable.IDLEntity
 {

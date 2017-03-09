@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@ package com.sun.source.tree;
  *
  * @jls section 15.26.2
  *
+ * <p>
+ *  复合赋值运算符的树节点。使用{@link #getKind getKind}来确定运算符的类型。
+ * 
+ *  例如：
+ * <pre>
+ *  <em> <em> </em> <em> </em>运算符</em>
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ package java.nio;
  * ReadOnlyBufferException} and overriding the view-buffer methods to return an
  * instance of this class rather than of the superclass.
 
+ * <p>
+ *  只读HeapLongBuffer。
+ * 这个类扩展了相应的读/写类,覆盖了突变方法抛出一个{@link ReadOnlyBufferException},并重写视图缓冲区方法来返回这个类的实例,而不是超类。
  */
 
 class HeapLongBufferR
@@ -50,6 +54,8 @@ class HeapLongBufferR
 
 
 
+    /* <p>
+    /* 
     */
 
     HeapLongBufferR(int cap, int lim) {            // package-private

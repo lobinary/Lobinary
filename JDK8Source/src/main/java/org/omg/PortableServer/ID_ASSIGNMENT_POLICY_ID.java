@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -13,6 +14,8 @@ public interface ID_ASSIGNMENT_POLICY_ID
 
   /**
 	 * The value representing ID_ASSIGNMENT_POLICY_ID.
+	 * <p>
+	 * 
 	 */
   public static final int value = (int)(19L);
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import java.util.logging.Level;
 /**
  * This class is used for parsing URLs.
  *
+ * <p>
+ *  此类用于解析URL。
+ * 
+ * 
  * @since 1.5
  */
 class MLetParser {
@@ -51,15 +56,24 @@ class MLetParser {
   * ------------------------------------------
   *   PRIVATE VARIABLES
   * ------------------------------------------
+  * <p>
+  *  ------------------------------------------私人变数------ ------------------------------------
+  * 
   */
 
     /**
      * The current character
+     * <p>
+     *  当前字符
+     * 
      */
     private int c;
 
     /**
      * Tag to parse.
+     * <p>
+     *  标记解析。
+     * 
      */
     private static String tag = "mlet";
 
@@ -68,10 +82,16 @@ class MLetParser {
   * ------------------------------------------
   *   CONSTRUCTORS
   * ------------------------------------------
+  * <p>
+  *  ------------------------------------------建筑师------- -----------------------------------
+  * 
   */
 
     /**
      * Create an MLet parser object
+     * <p>
+     *  创建MLet解析器对象
+     * 
      */
     public MLetParser() {
     }
@@ -80,10 +100,16 @@ class MLetParser {
      * ------------------------------------------
      *   PUBLIC METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------公共方法------------------------------------
+     * 
      */
 
     /**
      * Scan spaces.
+     * <p>
+     *  扫描空间。
+     * 
      */
     public void skipSpace(Reader in) throws IOException {
         while ((c >= 0) && ((c == ' ') || (c == '\t') || (c == '\n') || (c == '\r'))) {
@@ -93,6 +119,9 @@ class MLetParser {
 
     /**
      * Scan identifier
+     * <p>
+     *  扫描标识符
+     * 
      */
     public String scanIdentifier(Reader in) throws IOException {
         StringBuilder buf = new StringBuilder();
@@ -110,6 +139,9 @@ class MLetParser {
 
     /**
      * Scan tag
+     * <p>
+     *  扫描标签
+     * 
      */
     public Map<String,String> scanTag(Reader in) throws IOException {
         Map<String,String> atts = new HashMap<String,String>();
@@ -150,6 +182,9 @@ class MLetParser {
 
     /**
      * Scan an html file for {@literal <mlet>} tags.
+     * <p>
+     *  扫描html文件中的{@literal <mlet>}标签。
+     * 
      */
     public List<MLetContent> parse(URL url) throws IOException {
         String mth = "parse";
@@ -259,6 +294,8 @@ class MLetParser {
 
     /**
      * Parse the document pointed by the URL urlname
+     * <p>
+     *  解析URL urlname指向的文档
      */
     public List<MLetContent> parseURL(String urlname) throws IOException {
         // Parse the document

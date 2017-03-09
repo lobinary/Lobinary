@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ package javax.xml.bind;
 /**
  * Processes white space normalization.
  *
+ * <p>
+ *  处理白空间规范化。
+ * 
+ * 
  * @since 1.0
  */
 abstract class WhiteSpaceProcessor {
@@ -55,6 +60,8 @@ abstract class WhiteSpaceProcessor {
     }
 
     /**
+    /* <p>
+    /* 
      * @since 2.0
      */
     public static CharSequence replace(CharSequence text) {
@@ -82,6 +89,10 @@ abstract class WhiteSpaceProcessor {
 
     /**
      * Equivalent of {@link String#trim()}.
+     * <p>
+     *  等效于{@link String#trim()}。
+     * 
+     * 
      * @since 2.0
      */
     public static CharSequence trim(CharSequence text) {
@@ -109,6 +120,10 @@ abstract class WhiteSpaceProcessor {
     /**
      * This is usually the biggest processing bottleneck.
      *
+     * <p>
+     *  这通常是最大的处理瓶颈。
+     * 
+     * 
      * @since 2.0
      */
     public static CharSequence collapse(CharSequence text) {
@@ -165,6 +180,15 @@ abstract class WhiteSpaceProcessor {
 
     /**
      * Returns true if the specified string is all whitespace.
+     * <p>
+     *  if(s！= 0){for(int i = 0; i <s; i ++)result.append(text.charAt(i)); result.append(''); }}
+     * 
+     *  boolean inStripMode = true; for(int i = s + 1; i <len; i ++){char ch = text.charAt(i); boolean b = isWhiteSpace(ch); if(inStripMode && b)continue; //跳过此字符。
+     * 
+     *  inStripMode = b; if(inStripMode)result.append(''); else result.append(ch); }}
+     * 
+     *  // remove trailing whitespaces len = result.length(); if(len> 0 && result.charAt(len  -  1)=='')resu
+     * lt.setLength(len  -  1); //空格已经折叠,//所有我们要做的是删除最后一个字符//如果它是一个空格。
      */
     public static final boolean isWhiteSpace(CharSequence s) {
         for( int i=s.length()-1; i>=0; i-- )
@@ -186,6 +210,11 @@ abstract class WhiteSpaceProcessor {
     /**
      * Returns true if the specified char is a white space character
      * but not 0x20.
+     * <p>
+     * 
+     *  返回结果; }}
+     * 
+     *  / **如果指定的字符串是空格,则返回true。
      */
     protected static final boolean isWhiteSpaceExceptSpace(char ch) {
         // most of the characters are non-control characters.

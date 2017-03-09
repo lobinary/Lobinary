@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import org.xml.sax.SAXException;
  * KeyResolverSpi implementation which resolves public keys, private keys, secret keys, and X.509 certificates from a
  * <code>dsig11:KeyInfoReference</code> element.
  *
+ * <p>
+ *  KeyResolverSpi实现,它从<code> dsig11：KeyInfoReference </code>元素中解析公钥,私钥,密钥和X.509证书。
+ * 
+ * 
  * @author Brent Putman (putmanb@georgetown.edu)
  */
 public class KeyInfoReferenceResolver extends KeyResolverSpi {
@@ -157,6 +162,10 @@ public class KeyInfoReferenceResolver extends KeyResolverSpi {
     /**
      * Resolve the KeyInfoReference Element's URI attribute into a KeyInfo instance.
      *
+     * <p>
+     *  将KeyInfoReference元素的URI属性解析为KeyInfo实例。
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -194,6 +203,10 @@ public class KeyInfoReferenceResolver extends KeyResolverSpi {
     /**
      * Validate the Element referred to by the KeyInfoReference.
      *
+     * <p>
+     *  验证KeyInfoReference引用的元素。
+     * 
+     * 
      * @param referentElement
      *
      * @throws XMLSecurityException
@@ -221,6 +234,10 @@ public class KeyInfoReferenceResolver extends KeyResolverSpi {
     /**
      * Resolve the XML signature input represented by the specified URI.
      *
+     * <p>
+     *  解析由指定URI表示的XML签名输入。
+     * 
+     * 
      * @param uri
      * @param baseURI
      * @param secureValidation
@@ -237,6 +254,10 @@ public class KeyInfoReferenceResolver extends KeyResolverSpi {
     /**
      * Resolve the Element effectively represented by the XML signature input source.
      *
+     * <p>
+     *  解析由XML签名输入源有效表示的元素。
+     * 
+     * 
      * @param resource
      * @return
      * @throws CanonicalizationException
@@ -266,6 +287,9 @@ public class KeyInfoReferenceResolver extends KeyResolverSpi {
     /**
      * Parses a byte array and returns the parsed Element.
      *
+     * <p>
+     *  解析一个字节数组并返回解析的Element。
+     * 
      * @param bytes
      * @return the Document Element after parsing bytes
      * @throws KeyResolverException if something goes wrong

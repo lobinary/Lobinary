@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import sun.misc.VM;
 
 final class Finalizer extends FinalReference<Object> { /* Package-private; must be in
                                                           same package as the Reference
+final class Finalizer extends FinalReference<Object> { /* <p>
+final class Finalizer extends FinalReference<Object> { /*  相同的包作为参考
+final class Finalizer extends FinalReference<Object> { /* 
+final class Finalizer extends FinalReference<Object> { /* 
                                                           class */
 
     private static ReferenceQueue<Object> queue = new ReferenceQueue<>();
@@ -98,6 +103,8 @@ final class Finalizer extends FinalReference<Object> { /* Package-private; must 
                 jla.invokeFinalize(finalizee);
 
                 /* Clear stack slot containing this variable, to decrease
+                /* <p>
+                /* 
                    the chances of false retention with a conservative GC */
                 finalizee = null;
             }
@@ -117,6 +124,10 @@ final class Finalizer extends FinalReference<Object> { /* Package-private; must 
        to the regular finalizer thread and waiting for that thread to finish.
        The advantage of creating a fresh thread, however, is that it insulates
        invokers of these methods from a stalled or deadlocked finalizer thread.
+    /* <p>
+    /*  组为给定的Runnable,并等待它完成。
+    /* 
+    /*  此方法由runFinalization和runFinalizersOnExit使用。前一个方法调用所有未决的终结器,而后者调用所有未调用的终结器,如果已经启用了出口终结。
      */
     private static void forkSecondaryFinalizer(final Runnable proc) {
         AccessController.doPrivileged(

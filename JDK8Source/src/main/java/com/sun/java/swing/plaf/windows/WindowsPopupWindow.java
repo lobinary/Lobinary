@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,14 @@ import java.awt.Graphics;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  一个类,它标记具有特定语义用法的窗口,工具提示,菜单,子菜单,弹出菜单或comobobox弹出。
+ * 这用作临时解决方案,用于在Windows 98和Windows 2000中获取本机AWT对转换效果的支持。本机代码将解释windowType属性,并在显示/隐藏窗口时自动实现适当的动画。
+ * <p>
+ *  请注意,对转换效果的支持可能会在未来支持一个不同的机制,因此这个类是package-private并且仅针对Swing实现使用。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 
  * @author Amy Fowler
  */
 class WindowsPopupWindow extends JWindow {
@@ -84,6 +93,9 @@ class WindowsPopupWindow extends JWindow {
          * frame is miniaturized, the parent frame of this frame is
          * invisible, causing AWT to believe that this frame
          *  is invisible and causing hide() to do nothing
+         * <p>
+         * 未来的Swing版本将为长期持久性提供支持。
+         * 
          */
         removeNotify();
     }

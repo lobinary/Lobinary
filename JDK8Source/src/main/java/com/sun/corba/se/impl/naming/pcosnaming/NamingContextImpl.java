@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,16 @@ import java.util.Hashtable;
  * None of the methods here are Synchronized because These methods will be
  * invoked from Super class's doBind( ), doResolve( ) which are already
  * Synchronized.
+ * <p>
+ *  类NamingContextImpl实现org.omg.CosNaming :: NamingContext和NamingContextExt接口。
+ * <p>
+ *  操作bind(),rebind(),bind_context()和rebind_context()都是由doBind()实现的。
+ *  resolve()实际上是由doResolve(),unbind()通过doUnbind()实现的。
+ *  list(),new_context()和destroy()直接使用NamingContextDataStore接口。所有的doX()方法都是public static。
+ * 它们在NamingContextDataStore对象上同步。
+ * <p>
+ *  这里没有一个方法是同步的,因为这些方法将从Super类的doBind(),doResolve()已经同步。
+ * 
  */
 
 
@@ -114,6 +125,10 @@ public class NamingContextImpl
     /**
      * Create a naming context servant.
      * Runs the super constructor.
+     * <p>
+     *  创建命名上下文服务方。运行超级构造函数。
+     * 
+     * 
      * @param orb an ORB object.
      * @param objKey as String
      * @param TheNameService as NameService
@@ -183,6 +198,11 @@ public class NamingContextImpl
    * exists. If the
    * object to be bound is a NamingContext it will not participate in
    * a recursive resolve.
+   * <p>
+   *  在此NamingContext中的名称下绑定对象。如果名称包含多个(n)组件,n-1将在此NamingContext中解析,并且对象在生成的NamingContext中绑定。
+   * 如果使用提供的名称的绑定已存在,则抛出异常。如果要绑定的对象是NamingContext,它不会参与递归解析。
+   * 
+   * 
    * @param n a sequence of NameComponents which is the name under which
    * the object will be bound.
    * @param obj the object reference to be bound.
@@ -221,6 +241,11 @@ public class NamingContextImpl
    * NamingContext and the object bound in resulting NamingContext.
    * An exception is thrown if a binding with the supplied name already
    * exists. The NamingContext will participate in recursive resolving.
+   * <p>
+   * 在此NamingContext中的名称下绑定一个NamingContext。如果名称包含多个(n)组件,n-1将在此NamingContext中解析,并且对象在生成的NamingContext中绑定。
+   * 如果使用提供的名称的绑定已存在,则抛出异常。 NamingContext将参与递归解析。
+   * 
+   * 
    * @param n a sequence of NameComponents which is the name under which
    * the object will be bound.
    * @param obj the NamingContect object reference to be bound.
@@ -258,6 +283,11 @@ public class NamingContextImpl
    * unbound first. If the
    * object to be bound is a NamingContext it will not participate in
    * a recursive resolve.
+   * <p>
+   *  在此NamingContext中的名称下绑定对象。如果名称包含多个(n)组件,n-1将在此NamingContext中解析,并且对象在生成的NamingContext中绑定。
+   * 如果提供的名称下的绑定已存在,它将首先解除绑定。如果要绑定的对象是NamingContext,它不会参与递归解析。
+   * 
+   * 
    * @param n a sequence of NameComponents which is the name under which
    * the object will be bound.
    * @param obj the object reference to be bound.
@@ -299,6 +329,12 @@ public class NamingContextImpl
    * NamingContext and the object bound in resulting NamingContext.
    * If a binding under the supplied name already exists it will be
    * unbound first. The NamingContext will participate in recursive resolving.
+   * <p>
+   *  在此NamingContext中的名称下绑定一个NamingContext。
+   * 如果名称包含多个(n)组件,则前N-1个组件将在此NamingContext中解析,并且对象在生成的NamingContext中绑定。如果提供的名称下的绑定已存在,它将首先解除绑定。
+   *  NamingContext将参与递归解析。
+   * 
+   * 
    * @param n a sequence of NameComponents which is the name under which
    * the object will be bound.
    * @param obj the object reference to be bound.
@@ -336,6 +372,13 @@ public class NamingContextImpl
    * remaining components resolved in the resulting NamingContext, provided
    * that the NamingContext bound to the first component of the name was
    * bound with bind_context().
+   * <p>
+   *  解析此NamingContext中的名称,并返回绑定到该名称的对象引用。
+   * 如果名称包含多个(n)组件,则第一个组件将在此NamingContext中解析,其余组件在生成的NamingContext中解析,前提是绑定到名称的第一个组件的NamingContext已与bind_c
+   * ontext()绑定。
+   *  解析此NamingContext中的名称,并返回绑定到该名称的对象引用。
+   * 
+   * 
    * @param n a sequence of NameComponents which is the name to be resolved.
    * @return the object reference bound under the supplied name.
    * @exception org.omg.CosNaming.NamingContextPackage.NotFound A name with multiple
@@ -365,6 +408,10 @@ public class NamingContextImpl
    * multiple (n) components, the first n-1 components will be resolved
    * from this NamingContext and the final component unbound in
    * the resulting NamingContext.
+   * <p>
+   * 从此NamingContext中删除一个绑定。如果名称包含多个(n)组件,则第一个n-1个组件将从此NamingContext中解析,最终组件在所生成的NamingContext中解除绑定。
+   * 
+   * 
    * @param n a sequence of NameComponents which is the name to be unbound.
    * @exception org.omg.CosNaming.NamingContextPackage.NotFound A name with multiple
    * components was supplied, but the first component could not be
@@ -393,6 +440,10 @@ public class NamingContextImpl
    * is returned (a BindingList) containing up to the number of requested
    * bindings, and a BindingIterator object reference is returned for
    * iterating over the remaining bindings.
+   * <p>
+   *  列出此NamingContest的内容。返回一个绑定序列(一个BindingList),它包含的请求绑定数量,并返回一个BindingIterator对象引用,用于迭代剩余的绑定。
+   * 
+   * 
    * @param how_many The number of requested bindings in the BindingList.
    * @param bl The BindingList as an out parameter.
    * @param bi The BindingIterator as an out parameter.
@@ -417,6 +468,10 @@ public class NamingContextImpl
 
    /**
    * Create a NamingContext object and return its object reference.
+   * <p>
+   *  创建一个NamingContext对象并返回其对象引用。
+   * 
+   * 
    * @return an object reference for a new NamingContext object implemented
    * by this Name Server.
    * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA system exceptions.
@@ -438,6 +493,11 @@ public class NamingContextImpl
    * its object reference. This is equivalent to using new_context() followed
    * by bind_context() with the supplied name and the object reference for
    * the newly created NamingContext.
+   * <p>
+   *  创建一个新的NamingContext,绑定在这个命名上下文中并返回它的对象引用。
+   * 这相当于使用new_context()后跟bind_context(),使用提供的名称和新创建的NamingContext的对象引用。
+   * 
+   * 
    * @param n a sequence of NameComponents which is the name to be unbound.
    * @return an object reference for a new NamingContext object implemented
    * by this Name Server, bound to the supplied name.
@@ -483,6 +543,10 @@ public class NamingContextImpl
     /**
    * Destroy this NamingContext object. If this NamingContext contains
    * no bindings, the NamingContext is deleted.
+   * <p>
+   *  销毁这个NamingContext对象。如果此NamingContext不包含绑定,则删除NamingContext。
+   * 
+   * 
    * @exception org.omg.CosNaming.NamingContextPackage.NotEmpty This NamingContext
    * is not empty (i.e., contains bindings).
    * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA system exceptions.
@@ -513,6 +577,12 @@ public class NamingContextImpl
    * form of bind passed to the resulting NamingContext.
    * This method is static for maximal reuse - even for extended naming
    * context implementations where the recursive semantics still apply.
+   * <p>
+   *  实现所有四种类型的绑定。它使用Resolve()来检查绑定是否已经存在(对于bind和bind_context)和unbind(),以确保绑定不存在。
+   * 如果名称的长度为1,则使用名称和要绑定的对象调用Bind()。否则,名称的第一个组件在此NamingContext中解析,并将适当的绑定形式传递给生成的NamingContext。
+   * 此方法对于最大重用是静态的 - 即使对于递归语义仍然适用的扩展命名上下文实现。
+   * 
+   * 
    * @param impl an implementation of NamingContextDataStore
    * @param n a sequence of NameComponents which is the name under which
    * the object will be bound.
@@ -638,6 +708,12 @@ public class NamingContextImpl
    * components of the name is resolved in the resulting NamingContext.
    * This method is static for maximal reuse - even for extended naming
    * context implementations where the recursive semantics still apply.
+   * <p>
+   * 在此NamingContext中实现解析名称。提供的名称的第一个组件通过调用Resolve()在此NamingContext中解析。如果名称中没有更多组件,则返回生成的对象引用。
+   * 否则,生成的对象引用必须已绑定为上下文,并且可缩小到NamingContext。如果是这种情况,则名称的其余组件在生成的NamingContext中解析。
+   * 此方法对于最大重用是静态的 - 即使对于递归语义仍然适用的扩展命名上下文实现。
+   * 
+   * 
    * @param impl an implementation of NamingContextDataStore
    * @param n a sequence of NameComponents which is the name to be resolved.
    * @return the object reference bound under the supplied name.
@@ -699,6 +775,11 @@ public class NamingContextImpl
    * unbind passed to the resulting NamingContext.
    * This method is static for maximal reuse - even for extended naming
    * context implementations where the recursive semantics still apply.
+   * <p>
+   *  在此NamingContext中实现未绑定的绑定名称。如果名称只包含一个组件,则在此NamingContext中使用Unbind()解除绑定该名称。
+   * 否则,名称的第一个组件在此NamingContext中解析,并解除绑定传递到生成的NamingContext。此方法对于最大重用是静态的 - 即使对于递归语义仍然适用的扩展命名上下文实现。
+   * 
+   * 
    * @param impl an implementation of NamingContextDataStore
    * @param n a sequence of NameComponents which is the name to be unbound.
    * @exception org.omg.CosNaming.NamingContextPackage.NotFound A name with multiple
@@ -757,6 +838,10 @@ public class NamingContextImpl
    * Implements resolving a NameComponent in this context and
    * narrowing it to CosNaming::NamingContext. It will throw appropriate
    * exceptions if not found or not narrowable.
+   * <p>
+   *  实现在此上下文中解析NameComponent并将其缩小为CosNaming :: NamingContext。如果找不到或不可缩小,它将抛出适当的异常。
+   * 
+   * 
    * @param impl an implementation of NamingContextDataStore
    * @param n a NameComponents which is the name to be found.
    * @exception org.omg.CosNaming.NamingContextPackage.NotFound The
@@ -837,6 +922,11 @@ public class NamingContextImpl
     * case of rebind it calls Unbind first.
     * This method does one level binding only, To have n-level binding
     * with compound names, doBind( ) calls this method recursively.
+    * <p>
+    * 实现所有的绑定(bind和bindcontext)这个方法将从超类的doBind()方法调用,该方法在调用此方法之前处理所有条件。
+    * 即,它检查名称是否已经被绑定,然后在重新绑定的情况下,它首先调用解除绑定。此方法仅执行一级绑定,要使用复合名称进行n级绑定,doBind()将递归调用此方法。
+    * 
+    * 
     * @param n a sequence of NameComponents which is the name under which
     * the object will be bound.
     * @param obj the object reference to be bound.
@@ -906,6 +996,10 @@ public class NamingContextImpl
     * This method resolves the NamingContext or Object Reference for one level
     * The doResolve( ) method calls Resolve( ) recursively to resolve n level
     * Names.
+    * <p>
+    *  此方法解析一个级别的NamingContext或对象引用doResolve()方法以递归方式调用Resolve()以解析n个级别的名称。
+    * 
+    * 
     * @param n a sequence of NameComponents which is the name to be resolved.
     * @param bt Type of binding (as object or as context).
     * @return the object reference bound under the supplied name.
@@ -980,6 +1074,10 @@ public class NamingContextImpl
    * This method Unbinds the NamingContext or Object Reference for one level
    * The doUnbind( ) method from superclass calls Unbind() to recursively
    * Unbind using compound Names.
+   * <p>
+   *  此方法解除绑定一级的NamingContext或对象引用来自超类的doUnbind()方法调用Unbind()以递归方式使用复合名称解除绑定。
+   * 
+   * 
    * @param n a sequence of NameComponents which is the name to be resolved.
    * @return the object reference bound under the supplied name.
    * @exception org.omg.CosNaming.NamingContextPackage.NotFound Neither a NamingContext
@@ -1035,6 +1133,10 @@ public class NamingContextImpl
    * PersistentBindingIterator object and passes it a clone of the
    * hash table and an orb object. It then uses the
    * newly created object to return the required number of bindings.
+   * <p>
+   *  列出这个NamingContext的内容。它创建一个新的PersistentBindingIterator对象,并传递它一个哈希表和一个orb对象的克隆。然后,它使用新创建的对象来返回所需的绑定数。
+   * 
+   * 
    * @param how_many The number of requested bindings in the BindingList.
    * @param bl The BindingList as an out parameter.
    * @param bi The BindingIterator as an out parameter.
@@ -1096,6 +1198,10 @@ public class NamingContextImpl
 
    /**
    * Create a NamingContext object and return its object reference.
+   * <p>
+   *  创建一个NamingContext对象并返回其对象引用。
+   * 
+   * 
    * @return an object reference for a new NamingContext object implemented
    * by this Name Server.
    * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA system exceptions.
@@ -1114,6 +1220,9 @@ public class NamingContextImpl
 
    /**
    * Destroys the NamingContext.
+   * <p>
+   *  销毁NamingContext。
+   * 
    */
     public void Destroy() throws SystemException
     {
@@ -1134,12 +1243,23 @@ public class NamingContextImpl
         } catch( Exception e ) {
             throw updateWrapper.transNcDestroyGotEx( e ) ;
         }
+        /* <p>
+        /*  // XXX这需要通过清理备份命名上下文的//文件来替换。在POA级别不需要显式的//操作,因为这是使用非保留策略创建的。
+        /*  / * try {orb.disconnect(theNameServiceHandle.getObjectReferenceFromKey(this.objKey)); } catch(org.om
+        /* g.CORBA.SystemException e){throw e; } catch(Exception e){throw updateWrapper.transNcDestroyGotEx(e); }
+        /* }。
+        /*  // XXX这需要通过清理备份命名上下文的//文件来替换。在POA级别不需要显式的//操作,因为这是使用非保留策略创建的。
+        /* 
         */
     }
 
     /**
     * This operation creates a stringified name from the array of Name
     * components.
+    * <p>
+    * 此操作从名称组件数组创建一个字符串名称。
+    * 
+    * 
     * @param n Name of the object <p>
     * @exception org.omg.CosNaming.NamingContextExtPackage.InvalidName
     * Indicates the name does not identify a binding.<p>
@@ -1167,6 +1287,10 @@ public class NamingContextImpl
     /**
     * This operation  converts a Stringified Name into an  equivalent array
     * of Name Components.
+    * <p>
+    *  此操作将字符串化名称转换为名称组件的等效数组。
+    * 
+    * 
     * @param sn Stringified Name of the object <p>
     * @exception org.omg.CosNaming.NamingContextExtPackage.InvalidName
     * Indicates the name does not identify a binding.<p>
@@ -1203,6 +1327,10 @@ public class NamingContextImpl
     /**
     * This operation creates a URL based "iiopname://" format name
     * from the Stringified Name of the object.
+    * <p>
+    *  此操作从对象的Stringified Name创建一个基于"iiopname：//"格式名的URL。
+    * 
+    * 
     * @param addr internet based address of the host machine where
     * Name Service is running <p>
     * @param sn Stringified Name of the object <p>
@@ -1247,6 +1375,10 @@ public class NamingContextImpl
     /**
      * This operation resolves the Stringified name into the object
      * reference.
+     * <p>
+     *  此操作将Stringified名称解析为对象引用。
+     * 
+     * 
      * @param sn Stringified Name of the object <p>
      * @exception org.omg.CosNaming.NamingContextPackage.NotFound
      * Indicates there is no object reference for the given name. <p>
@@ -1279,6 +1411,9 @@ public class NamingContextImpl
 
    /**
    * This is a Debugging Method
+   * <p>
+   *  这是一个调试方法
+   * 
    */
     public boolean IsEmpty()
     {
@@ -1287,6 +1422,8 @@ public class NamingContextImpl
 
    /**
    * This is a Debugging Method
+   * <p>
+   *  这是一个调试方法
    */
     public void printSize( )
     {

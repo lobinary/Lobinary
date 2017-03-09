@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: EnvironmentCheck.java,v 1.2.4.1 2005/09/09 07:13:59 pvedula Exp $
+ * <p>
+ *  $ Id：EnvironmentCheck.java,v 1.2.4.1 2005/09/09 07:13:59 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.xslt;
 
@@ -91,6 +104,35 @@ import org.w3c.dom.Node;
  * the xml-commons' project Which utility which does the same kind
  * of thing but in a much simpler manner.</p>
  *
+ * <p>
+ *  实用程序类,用于报告有关环境的简单信息。在JVM中发现的某些类的简单报告可能有助于回答一些简单问题的常见问题。
+ * 
+ *  <p>用法 - 命令行：
+ * <code>
+ *  java com.sun.org.apache.xalan.internal.xslt.EnvironmentCheck [-out outFile] </code> </p>
+ * 
+ *  <p>使用方法：
+ * <code>
+ *  boolean environmentOK =(new EnvironmentCheck())。checkEnvironment(yourPrintWriter); </code> </p>
+ * 
+ * <p> Usage-from stylesheet：<code> <pre>&lt;?xml version ="1.0"?&gt; &lt; xsl：stylesheet xmlns：xsl ="ht
+ * tp://www.w3.org/1999/XSL/Transform"version ="1.0"xmlns：xalan ="http://xml.apache.org/xalan"exclude- r
+ * esult-prefixes ="xalan"&gt; &lt; xsl：output indent ="yes"/&gt; &lt; xsl：template match ="/"&gt; &lt; 
+ * xsl：copy-of select ="xalan：checkEnvironment()"/&gt; &lt; / xsl：template&gt; &lt; / xsl：stylesheet&gt;
+ *  </pre> </code> </p>。
+ * 
+ *  <p>我们鼓励Xalan用户报告问题,以便在报告错误之前<b> </b>之前使用此类查看其实际Java环境是否存在潜在问题。
+ * 注意,你应该从JVM / JRE的命令行检查,以及直接从你的代码中临时调用checkEnvironment(),因为类路径可能不同(特别是servlet等)。</p>。
+ * 
+ *  <p>另请参阅http://xml.apache.org/xalan-j/faq.html </p>
+ * 
+ *  <p>注意：这个类很简单：结果不一定是明确的,也不会找到所有与环境设置相关的问题。此外,您应该避免在部署的生产代码中调用此方法,因为它非常慢,并且会强制类加载。</p>
+ * 
+ *  <p>注意：这个类显式地具有非常有限的编译时依赖性,以便即使在不存在Xalan,DOM / SAX / JAXP等时也能够容易编译和使用。</p>
+ * 
+ *  <p>注意：对于这个实用程序的改进版本,请参见xml-commons的项目哪个实用程序做同样的事情,但在一个更简单的方式。</p>
+ * 
+ * 
  * @author Shane_Curcuru@us.ibm.com
  * @version $Id: EnvironmentCheck.java,v 1.10 2010-11-01 04:34:13 joehw Exp $
  */
@@ -101,6 +143,10 @@ public class EnvironmentCheck
    * Command line runnability: checks for [-out outFilename] arg.
    * <p>Command line entrypoint; Sets output and calls
    * {@link #checkEnvironment(PrintWriter)}.</p>
+   * <p>
+   * 命令行运行性：检查[-out outFilename] arg。 <p>命令行入口;设置输出和调用{@link #checkEnvironment(PrintWriter)}。</p>
+   * 
+   * 
    * @param args command line args
    */
   public static void main(String[] args)
@@ -156,6 +202,15 @@ public class EnvironmentCheck
    * may simply send the output from this tool along with any bugs
    * they submit to help us in the debugging process.</p>
    *
+   * <p>
+   *  编程入口点：报告影响Xalan的基本Java环境和CLASSPATH设置。
+   * 
+   *  <p>请注意,此类不够高级,无法告诉您有关影响Xalan的环境的一切,有时报告实际上不会影响Xalan行为的错误。
+   * 目前,它非常简单地检查JVM的环境中的一些基本属性并将其注销;如果找到<i>可能</i>的设置或.jar文件导致问题,它将报告问题。</p>。
+   * 
+   *  <p>高级用户可以仔细阅读本文中的代码,以帮助他们调查发现的潜在环境问题;其他用户可能只是发送此工具的输出以及他们提交的任何错误,以帮助我们在调试过程中。</p>
+   * 
+   * 
    * @param pw PrintWriter to send output to; can be sent to a
    * file that will look similar to a Properties file; defaults
    * to System.out if null
@@ -214,6 +269,16 @@ public class EnvironmentCheck
    * point out the most common classpath and system property
    * problems that we've seen.</p>
    *
+   * <p>
+   *  使用影响Xalan的基本环境设置填充散列。
+   * 
+   * <p>从各个地方调用的Worker方法。</p> <p>各种系统和CLASSPATH等属性都作为键值放入哈希中,并将该项目的当前状态的简要描述作为值。
+   * 任何严重的问题将被放在一个以{@link #ERROR'ERROR。
+   * '}为前缀的键,因此它在任何生成的报告中都是突出的; </p> <p>请注意,一些合法的情况被划分为潜在的错误 - 即当开发人员自己重新编译xalan.jar  - 甚至是一个非法的 - 错误状态不保证
+   * 环境中的一切是正确的。
+   * 任何严重的问题将被放在一个以{@link #ERROR'ERROR。但这将有助于指出我们见过的最常见的类路径和系统属性问题。</p>。
+   * 
+   * 
    * @return Hashtable full of useful environment info about Xalan
    * and related system properties, etc.
    */
@@ -245,6 +310,12 @@ public class EnvironmentCheck
    * the Hashtable to our PrintWriter; it does special processing
    * for entries that are .jars found in the classpath.</p>
    *
+   * <p>
+   *  将基本的Xalan环境报告转储到outWriter。
+   * 
+   *  <p>这将一个简单的标题,然后每个Hashtable的条目转储到我们的PrintWriter;它对在类路径中找到的.jars条目进行特殊处理。</p>
+   * 
+   * 
    * @param h Hashtable of items to report on; presumably
    * filled in by our various check*() methods
    * @return true if your environment appears to have no major
@@ -350,6 +421,12 @@ public class EnvironmentCheck
    * Takes the information encoded from a checkPathForJars()
    * call and dumps it out to our PrintWriter.
    *
+   * <p>
+   *  打印在类路径中找到的.jars的报告。
+   * 
+   *  从checkPathForJars()调用编码的信息,并将其转储到我们的PrintWriter。
+   * 
+   * 
    * @param v Vector of Hashtables of .jar file info
    * @param desc description to print out in header
    *
@@ -407,6 +484,12 @@ public class EnvironmentCheck
    * <p>Copy of writeEnvironmentReport that creates a Node suitable
    * for other processing instead of a properties-like text output.
    * </p>
+   * <p>
+   *  样式表扩展entrypoint：将基本的Xalan环境报告从getEnvironmentHash()转储到节点。
+   * 
+   *  <p> writeEnvironmentReport的副本,创建适合于其他处理的节点,而不是类属性文本输出。
+   * </p>
+   * 
    * @param container Node to append our report to
    * @param factory Document providing createElement, etc. services
    * @param h Hash presumably from {@link #getEnvironmentHash()}
@@ -500,6 +583,12 @@ public class EnvironmentCheck
    * Takes the information encoded from a checkPathForJars()
    * call and dumps it out to our PrintWriter.
    *
+   * <p>
+   *  打印在类路径中找到的.jars的报告。
+   * 
+   * 从checkPathForJars()调用编码的信息,并将其转储到我们的PrintWriter。
+   * 
+   * 
    * @param container Node to append our report to
    * @param factory Document providing createElement, etc. services
    * @param v Vector of Hashtables of .jar file info
@@ -562,6 +651,14 @@ public class EnvironmentCheck
    * //@todo NOTE: We don't actually search java.ext.dirs for
    * //  *.jar files therein! This should be updated
    *
+   * <p>
+   *  使用有关SystemProperties的信息的Fillin散列。
+   * 
+   *  日志java.class.path和其他可能的路径;然后尝试使用与Xalan相关的类搜索这些路径.jar文件。
+   * 
+   *  // @ todo注意：我们实际上不搜索java.ext.dirs中的// * .jar文件！这应该更新
+   * 
+   * 
    * @param h Hashtable to put information in
    * @see #jarNames
    * @see #checkPathForJars(String, String[])
@@ -651,6 +748,12 @@ public class EnvironmentCheck
    * .jar filenames, and return a listing of their names and
    * where (apparently) they came from.
    *
+   * <p>
+   *  在类路径中找到的指定.jars的Cheap-o列表。
+   * 
+   *  cp应该由通常的File.pathSeparator分隔。然后,我们对任何请求的.jar文件名的路径进行一个简单的搜索,并返回他们的名字列表,以及他们来自哪里(显然)。
+   * 
+   * 
    * @param cp classpath to search
    * @param jars array of .jar base filenames to look for
    *
@@ -738,6 +841,15 @@ public class EnvironmentCheck
    *
    * //@todo actually look up version info in manifests
    *
+   * <p>
+   *  Cheap-o方法来确定.jar的产品版本。
+   * 
+   *  目前正在查找一些最近运输的Xalan版本的本地表,以确定.jar可能来自哪里。请注意,如果您自己重新编译Xalan或Xerces,这可能会报告一个潜在的错误,因为我们不能证明除了我们发货的版本。
+   * 只有针对选定的已发布Xalan-J的报告生成。
+   * 
+   *  // @ todo实际上在清单中查找版本信息
+   * 
+   * 
    * @param jarName base filename of the .jarfile
    * @param jarSize size of the .jarfile
    *
@@ -783,6 +895,12 @@ public class EnvironmentCheck
    * and not found; only tests the interfaces, and does not
    * check for reference implementation versions.
    *
+   * <p>
+   *  报告有关JAXP接口的版本信息。
+   * 
+   *  目前区分JAXP 1.0.1和JAXP 1.1,未找到;只测试接口,并且不检查参考实现版本。
+   * 
+   * 
    * @param h Hashtable to put information in
    */
   protected void checkJAXPVersion(Hashtable h)
@@ -814,6 +932,12 @@ public class EnvironmentCheck
    *
    * Looks for version info in xalan.jar from Xalan-J products.
    *
+   * <p>
+   *  从Xalan-J报告产品版本信息。
+   * 
+   *  在Xalan-J产品中查找xalan.jar中的版本信息。
+   * 
+   * 
    * @param h Hashtable to put information in
    */
   protected void checkProcessorVersion(Hashtable h)
@@ -900,6 +1024,14 @@ public class EnvironmentCheck
    *
    * //@todo actually look up version info in crimson manifest
    *
+   * <p>
+   *  从常见解析器报告产品版本信息。
+   * 
+   * 在xerces.jar / xercesImpl.jar / crimson.jar中查找版本信息。
+   * 
+   *  // @ todo实际上在深红色清单中查找版本信息
+   * 
+   * 
    * @param h Hashtable to put information in
    */
   protected void checkParserVersion(Hashtable h)
@@ -961,6 +1093,10 @@ public class EnvironmentCheck
   /**
    * Report product version information from Ant.
    *
+   * <p>
+   *  从Ant报告产品版本信息。
+   * 
+   * 
    * @param h Hashtable to put information in
    */
   protected void checkAntVersion(Hashtable h)
@@ -991,6 +1127,10 @@ public class EnvironmentCheck
   /**
    * Report version info from DOM interfaces.
    *
+   * <p>
+   *  从DOM接口报告版本信息。
+   * 
+   * 
    * @param h Hashtable to put information in
    */
   protected boolean checkDOML3(Hashtable h)
@@ -1026,6 +1166,12 @@ public class EnvironmentCheck
    * level 2 working draft, the DOM level 2 final draft,
    * and not found.
    *
+   * <p>
+   *  从DOM接口报告版本信息。
+   * 
+   *  目前区分前DOM级别2,DOM级别2工作草案,DOM级别2最终草案,并未找到。
+   * 
+   * 
    * @param h Hashtable to put information in
    */
   protected void checkDOMVersion(Hashtable h)
@@ -1102,6 +1248,12 @@ public class EnvironmentCheck
    * Currently distinguishes between SAX 2, SAX 2.0beta2,
    * SAX1, and not found.
    *
+   * <p>
+   *  从SAX接口报告版本信息。
+   * 
+   *  目前区分SAX 2,SAX 2.0beta2,SAX1,并未找到。
+   * 
+   * 
    * @param h Hashtable to put information in
    */
   protected void checkSAXVersion(Hashtable h)
@@ -1186,6 +1338,10 @@ public class EnvironmentCheck
    * key=jarsize, value=jarname ' from ' distro name
    * Note assumption: two jars cannot have the same size!
    *
+   * <p>
+   *  已知.jar尺寸的手动表。仅包括某些项目的已发布版本。 key = jarsize,value = jarname'from'distro name注意假设：两个jars不能有相同的大小！
+   * 
+   * 
    * @see #getApparentVersion(String, long)
    */
   private static Hashtable jarVersions = new Hashtable();
@@ -1194,6 +1350,10 @@ public class EnvironmentCheck
    * Static initializer for jarVersions table.
    * Doing this just once saves time and space.
    *
+   * <p>
+   *  jarVersions表的静态初始值设置。这只是一次节省时间和空间。
+   * 
+   * 
    * @see #getApparentVersion(String, long)
    */
   static
@@ -1294,6 +1454,9 @@ public class EnvironmentCheck
 
   /**
    * Bottleneck output: calls outWriter.println(s).
+   * <p>
+   *  瓶颈输出：调用outWriter.println(s)。
+   * 
    * @param s String to print
    */
   protected void logMsg(String s)

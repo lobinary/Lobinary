@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,15 @@ import java.util.Map;
  * WS-Addressing</a>
  * for more information on WS-Addressing EndpointReferences.
  *
+ * <p>
+ *  此类表示W3C寻址EndpointReferece,它是对支持W3C WS-Addressing 1.0  -  Core Recommendation的Web服务端点的远程引用。
+ * <p>
+ *  如果想要传递/返回表示W3C WS-Addressing建议的端点引用,开发人员应该在其SEI中使用这个类。
+ * <p>
+ *  JAXB将使用JAXB注释并将此类绑定到与WS-Addressing定义的XML信息集一致的XML信息集。看到
+ * <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">
+ *  WS-Addressing </a>以获取有关WS-Addressing EndpointReferences的更多信息。
+ * 
  * @since JAX-WS 2.1
  */
 
@@ -82,6 +92,9 @@ public final class W3CEndpointReference extends EndpointReference {
     /**
      * Creates an EPR from infoset representation
      *
+     * <p>
+     * 
+     * 
      * @param source A source object containing valid XmlInfoset
      * instance consistent with the W3C WS-Addressing Core
      * recommendation.
@@ -109,6 +122,9 @@ public final class W3CEndpointReference extends EndpointReference {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  从信息集表示创建EPR
+     * 
      */
     public void writeTo(Result result){
         try {

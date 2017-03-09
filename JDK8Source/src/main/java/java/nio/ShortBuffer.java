@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -254,6 +255,35 @@ package java.nio;
 
  *
  *
+ * <p>
+ *  短缓冲区。
+ * 
+ *  <p>此类在短缓冲区上定义了四类操作：
+ * 
+ * <ul>
+ * 
+ *  <li> <p>读取和写入单个短裤的绝对和相对{@link #get()<i> get </i>}和{@link #put(短)<i>放</i> ; </p> </li>
+ * 
+ *  <li> <p>相对{@link #get(short [])<i>批量get </i>}方法可将来自此缓冲区的连续短序列传送到数组中;和</p> </li>
+ * 
+ *  <li> <p>相对{@link #put(short [])<i>批量放入</i>}方法将短阵列或其他短缓冲区的连续序列传送到此缓冲区;和</p> </li>
+ * 
+ *  <li> <p> {@link #compact compacting},{@link #duplicate duplicating}和{@link #slice slicing}一个短缓冲区的方法。
+ *  </p> </li>。
+ * 
+ * </ul>
+ * 
+ *  <p>可以通过{@link #allocate <i>分配</i>}创建短缓冲区,它为缓冲区分配空间
+ * 
+ *  内容,通过{@link #wrap(short [])<i>包装</i>}将现有短阵列缓冲区,或通过创建<a href="ByteBuffer.html#views"> <i>视图</i> </a>。
+ * 
+ * <p>像字节缓冲区一样,短缓冲区是<a href="ByteBuffer.html#direct"> <i>直接</i>或<i>非直接</i> </a>。
+ * 通过此类的<tt> wrap </tt>方法创建的短缓冲区将是非直接的。作为字节缓冲器视图创建的短缓冲器将是直接的,如果且仅当字节缓冲器本身是直接的。
+ * 短缓冲区是否是直接的可以通过调用{@link #isDirect isDirect}方法来确定。 </p>。
+ * 
+ *  <p>此类中没有返回值的方法被指定为返回调用它们的缓冲区。这允许方法调用链接。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -321,6 +351,13 @@ public abstract class ShortBuffer
      * initialized to zero.  It will have a {@link #array backing array},
      * and its {@link #arrayOffset array offset} will be zero.
      *
+     * <p>
+     *  分配新的短缓冲区。
+     * 
+     *  <p>新缓冲区的位置将为零,其限制将是其容量,其标记将是未定义的,并且其每个元素将初始化为零。
+     * 它将有一个{@link #array返回数组},其{@link #arrayOffset数组偏移量}将为零。
+     * 
+     * 
      * @param  capacity
      *         The new buffer's capacity, in shorts
      *
@@ -346,6 +383,14 @@ public abstract class ShortBuffer
      * {@link #array backing array} will be the given array, and
      * its {@link #arrayOffset array offset} will be zero.  </p>
      *
+     * <p>
+     *  将短数组包装到缓冲区中。
+     * 
+     *  <p>新缓冲区将由给定的短阵列支持;也就是说,对缓冲区的修改将导致数组被修改,反之亦然。
+     * 新缓冲区的容量将为<tt> array.length </tt>,其位置将为<tt> offset </tt>,其限制将为<tt> offset + length </tt>,其标记将为未定义。
+     * 它的{@link #array backing array}将是给定的数组,其{@link #arrayOffset数组偏移量}将为零。 </p>。
+     * 
+     * 
      * @param  array
      *         The array that will back the new buffer
      *
@@ -387,6 +432,13 @@ public abstract class ShortBuffer
      * given array, and its {@link #arrayOffset array offset>} will
      * be zero.  </p>
      *
+     * <p>
+     *  将短数组包装到缓冲区中。
+     * 
+     * <p>新缓冲区将由给定的短阵列支持;也就是说,对缓冲区的修改将导致数组被修改,反之亦然。新缓冲区的容量和限制将为<tt> array.length </tt>,其位置将为零,其标记将为未定义。
+     * 它的{@link #array backing array}将是给定的数组,其{@link #arrayOffset数组偏移量}将为零。 </p>。
+     * 
+     * 
      * @param  array
      *         The array that will back this buffer
      *
@@ -504,6 +556,14 @@ public abstract class ShortBuffer
      * buffer is direct, and it will be read-only if, and only if, this buffer
      * is read-only.  </p>
      *
+     * <p>
+     *  创建一个新的短缓冲区,其内容是此缓冲区内容的共享子序列。
+     * 
+     *  <p>新缓冲区的内容将从此缓冲区的当前位置开始。对此缓冲区内容的更改将在新缓冲区中可见,反之亦然;两个缓冲器的位置,限制和标记值将是独立的。
+     * 
+     *  <p>新缓冲区的位置将为零,其容量和限制将是此缓冲区中剩余的短路数,其标记将未定义。新缓冲区将是直接的,如果且仅当这个缓冲区是直接的,并且只有当且仅当这个缓冲区是只读时,它才是只读的。 </p>
+     * 
+     * 
      * @return  The new short buffer
      */
     public abstract ShortBuffer slice();
@@ -521,6 +581,14 @@ public abstract class ShortBuffer
      * and only if, this buffer is direct, and it will be read-only if, and
      * only if, this buffer is read-only.  </p>
      *
+     * <p>
+     *  创建一个共享此缓冲区内容的新短缓冲区。
+     * 
+     *  <p>新缓冲区的内容将是此缓冲区的内容。对此缓冲区内容的更改将在新缓冲区中可见,反之亦然;两个缓冲器的位置,限制和标记值将是独立的。
+     * 
+     * <p>新缓冲区的容量,限制,位置和标记值将与此缓冲区的容量,限制,位置和标记值相同。新缓冲区将是直接的,如果且仅当这个缓冲区是直接的,并且只有当且仅当这个缓冲区是只读时,它才是只读的。 </p>
+     * 
+     * 
      * @return  The new short buffer
      */
     public abstract ShortBuffer duplicate();
@@ -541,6 +609,16 @@ public abstract class ShortBuffer
      * <p> If this buffer is itself read-only then this method behaves in
      * exactly the same way as the {@link #duplicate duplicate} method.  </p>
      *
+     * <p>
+     *  创建一个新的只读短缓冲区,共享此缓冲区的内容。
+     * 
+     *  <p>新缓冲区的内容将是此缓冲区的内容。对此缓冲区内容的更改将在新缓冲区中可见;但是,新的缓冲区本身将是只读的,不允许修改共享内容。两个缓冲区的位置,极限和标记值将是独立的。
+     * 
+     *  <p>新缓冲区的容量,限制,位置和标记值将与此缓冲区的容量,限制,位置和标记值相同。
+     * 
+     *  <p>如果此缓冲区本身是只读的,那么此方法的行为方式与{@link #duplicate duplicate}方法完全相同。 </p>
+     * 
+     * 
      * @return  The new, read-only short buffer
      */
     public abstract ShortBuffer asReadOnlyBuffer();
@@ -552,6 +630,10 @@ public abstract class ShortBuffer
      * Relative <i>get</i> method.  Reads the short at this buffer's
      * current position, and then increments the position.
      *
+     * <p>
+     *  相对<i> get </i>方法。读取该缓冲器当前位置处的短路,然后增加位置。
+     * 
+     * 
      * @return  The short at the buffer's current position
      *
      * @throws  BufferUnderflowException
@@ -565,6 +647,12 @@ public abstract class ShortBuffer
      * <p> Writes the given short into this buffer at the current
      * position, and then increments the position. </p>
      *
+     * <p>
+     *  相对<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>将当前位置写入此缓冲区中的给定短路,然后增加位置。 </p>
+     * 
+     * 
      * @param  s
      *         The short to be written
      *
@@ -582,6 +670,10 @@ public abstract class ShortBuffer
      * Absolute <i>get</i> method.  Reads the short at the given
      * index.
      *
+     * <p>
+     *  绝对<i> get </i>方法。读取给定索引处的短路。
+     * 
+     * 
      * @param  index
      *         The index from which the short will be read
      *
@@ -612,6 +704,12 @@ public abstract class ShortBuffer
      * <p> Writes the given short into this buffer at the given
      * index. </p>
      *
+     * <p>
+     *  绝对<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>在给定索引处将给定的短写入此缓冲区。 </p>
+     * 
+     * 
      * @param  index
      *         The index at which the short will be written
      *
@@ -659,6 +757,23 @@ public abstract class ShortBuffer
      * except that it first checks that there are sufficient shorts in
      * this buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> get </i>方法。
+     * 
+     * <p>此方法将短路从此缓冲区传送到给定的目标数组。
+     * 如果缓冲器中剩余的短路少于满足请求所需的短路,即如果<tt> length </tt>&lt; tt&gt; </tt>&lt; tt&gt; remaining() tt>,则不会传输短路,并抛出{@link BufferUnderflowException}
+     * 。
+     * <p>此方法将短路从此缓冲区传送到给定的目标数组。
+     * 
+     *  <p>否则,此方法会将此缓冲区中的<tt>长度</tt>短片复制到给定数组中,从此缓冲区的当前位置开始,并在数组中的给定偏移处开始。然后,该缓冲区的位置增加<tt> length </tt>。
+     * 
+     *  <p>换句话说,对形式为<tt> src.get(dst,&nbsp; off,&nbsp; len)</tt>的此方法的调用与循环具有完全相同的效果
+     * 
+     *  <pre> {@ code for(int i = off; i <off + len; i ++)dst [i] = src.get()：} </pre>
+     * 
+     *  除了它首先检查在该缓冲器中存在足够的短路并且其潜在地更加有效。
+     * 
+     * 
      * @param  dst
      *         The array into which shorts are to be written
      *
@@ -702,6 +817,15 @@ public abstract class ShortBuffer
      * <pre>
      *     src.get(a, 0, a.length) </pre>
      *
+     * <p>
+     *  相对批量<i> get </i>方法。
+     * 
+     *  <p>此方法将短路从此缓冲区传送到给定的目标数组。调用此方法的形式<tt> src.get(a)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  src.get(a,0,a.length)</pre>
+     * 
+     * 
      * @param   dst
      *          The destination array
      *
@@ -743,6 +867,24 @@ public abstract class ShortBuffer
      * except that it first checks that there is sufficient space in this
      * buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     * <p>此方法将指定源缓冲区中剩余的短路传输到此缓冲区。
+     * 如果源缓冲区中有比此缓冲区更多的短路,即如果<tt> src.remaining()</tt>&nbsp; <tt>&gt; </tt> </tt>,则不会传输任何短片,并且会抛出{@link BufferOverflowException}
+     * 。
+     * <p>此方法将指定源缓冲区中剩余的短路传输到此缓冲区。
+     * 
+     *  <p>否则,此方法会从每个缓冲区的当前位置开始,将给定缓冲区中的<i> n </i>&nbsp; =&nbsp; <tt> src.remaining()</tt>然后,两个缓冲器的位置增加n n。
+     * 
+     *  <p>换句话说,对形式<tt> dst.put(src)</tt>的此方法的调用具有与循环完全相同的效果
+     * 
+     * <pre>
+     *  while(src.hasRemaining())dst.put(src.get()); </pre>
+     * 
+     *  除了它首先检查在这个缓冲器中有足够的空间并且它可能更有效率。
+     * 
+     * 
      * @param  src
      *         The source buffer from which shorts are to be read;
      *         must not be this buffer
@@ -799,6 +941,23 @@ public abstract class ShortBuffer
      * except that it first checks that there is sufficient space in this
      * buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法从给定源数组将短路传递到此缓冲区。
+     * 如果有更多的要从该数组复制的短路而不是保留在该缓冲器中,也就是说,如果<tt> length </tt> <tt>&gt; </tt>&nbsp; <tt> remaining tt>,那么不会传输短路
+     * ,并且会抛出{@link BufferOverflowException}。
+     *  <p>此方法从给定源数组将短路传递到此缓冲区。
+     * 
+     * <p>否则,此方法会从给定数组中的<tt>长度</tt>短片复制到此缓冲区中,从数组中给定的偏移量和此缓冲区的当前位置开始。然后,该缓冲区的位置增加<tt> length </tt>。
+     * 
+     *  <p>换句话说,对形式为<tt> dst.put(src,&nbsp; off,&nbsp; len)</tt>的此方法的调用与循环具有完全相同的效果
+     * 
+     *  <pre> {@ code for(int i = off; i <off + len; i ++)dst.put(a [i]); } </pre>
+     * 
+     *  除了它首先检查在这个缓冲器中有足够的空间并且它可能更有效率。
+     * 
+     * 
      * @param  src
      *         The array from which shorts are to be read
      *
@@ -844,6 +1003,15 @@ public abstract class ShortBuffer
      * <pre>
      *     dst.put(a, 0, a.length) </pre>
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法将给定源短数组的整个内容传输到此缓冲区。调用此方法的形式<tt> dst.put(a)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  dst.put(a,0,a.length)</pre>
+     * 
+     * 
      * @param   src
      *          The source array
      *
@@ -963,6 +1131,13 @@ public abstract class ShortBuffer
      * and {@link #arrayOffset() arrayOffset} methods may safely be invoked.
      * </p>
      *
+     * <p>
+     *  告诉这个缓冲区是否由可访问的短数组支持。
+     * 
+     *  <p>如果此方法返回<tt> true </tt>,则可以安全地调用{@link #array()数组}和{@link #arrayOffset()arrayOffset}方法。
+     * </p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer
      *          is backed by an array and is not read-only
      */
@@ -981,6 +1156,14 @@ public abstract class ShortBuffer
      * method in order to ensure that this buffer has an accessible backing
      * array.  </p>
      *
+     * <p>
+     *  返回支持此缓冲区的短数组&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>修改此缓冲区的内容将导致返回的数组的内容被修改,反之亦然。
+     * 
+     *  <p>在调用此方法之前调用{@link #hasArray hasArray}方法,以确保此缓冲区具有可访问的后备数组。 </p>
+     * 
+     * 
      * @return  The array that backs this buffer
      *
      * @throws  ReadOnlyBufferException
@@ -1008,6 +1191,14 @@ public abstract class ShortBuffer
      * method in order to ensure that this buffer has an accessible backing
      * array.  </p>
      *
+     * <p>
+     * 返回缓冲区的第一个元素(可选操作)</i>在此缓冲区的后备数组中的偏移量。
+     * 
+     *  <p>如果此缓冲区由数组支持,则缓冲区位置<i> p </i>对应于数组索引<i> p </i>&nbsp; <tt> arrayOffset()</tt>。
+     * 
+     *  <p>在调用此方法之前调用{@link #hasArray hasArray}方法,以确保此缓冲区具有可访问的后备数组。 </p>
+     * 
+     * 
      * @return  The offset within this buffer's array
      *          of the first element of the buffer
      *
@@ -1060,6 +1251,18 @@ public abstract class ShortBuffer
 
 
      *
+     * <p>
+     *  压缩此缓冲区&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>缓冲区的当前位置和其限制之间的短路(如果有)将被复制到缓冲区的开头。
+     * 也就是说,将索引<i> p </t>> </tt>处的短号复制到索引0,索引<i> p </i> +&nbsp; 1复制到索引1,依此类推,直到索引<tt> limit()</tt>&nbsp;  - 
+     * &nbsp; 1的短语复制到索引<i> n </i>&nbsp; =&nbsp; ; <tt> limit()</tt>&nbsp;  - &nbsp; <tt> 1 </tt>&nbsp;  - &n
+     * bsp; <i> p </i>。
+     *  <p>缓冲区的当前位置和其限制之间的短路(如果有)将被复制到缓冲区的开头。然后将缓冲器的位置设置为<n> n + 1,并将其限制设置为其容量。如果定义,标记将被丢弃。
+     * 
+     *  <p>缓冲器的位置被设置为所复制的短路的数量,而不是零,使得可以立即通过调用另一相对</i>方法来调用该方法。 </p>
+     * 
+     * 
      * @return  This buffer
      *
      * @throws  ReadOnlyBufferException
@@ -1070,6 +1273,10 @@ public abstract class ShortBuffer
     /**
      * Tells whether or not this short buffer is direct.
      *
+     * <p>
+     *  告诉这个短缓冲区是否是直接的。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer is direct
      */
     public abstract boolean isDirect();
@@ -1079,6 +1286,10 @@ public abstract class ShortBuffer
     /**
      * Returns a string summarizing the state of this buffer.
      *
+     * <p>
+     *  返回汇总此缓冲区状态的字符串。
+     * 
+     * 
      * @return  A summary string
      */
     public String toString() {
@@ -1110,6 +1321,14 @@ public abstract class ShortBuffer
      * to use buffers as keys in hash maps or similar data structures unless it
      * is known that their contents will not change.  </p>
      *
+     * <p>
+     *  返回此缓冲区的当前散列码。
+     * 
+     * <p>短缓冲器的哈希码仅取决于其剩余元素;即从<tt> position()</tt>到<tt> limit()</tt>&nbsp; <tt> 1 </tt>的元素,并包含该元素。
+     * 
+     *  <p>因为缓冲区哈希码是内容相关的,所以不宜使用缓冲区作为哈希映射或类似数据结构中的键,除非知道它们的内容不会改变。 </p>
+     * 
+     * 
      * @return  The current hash code of this buffer
      */
     public int hashCode() {
@@ -1151,6 +1370,25 @@ public abstract class ShortBuffer
      *
      * <p> A short buffer is not equal to any other type of object.  </p>
      *
+     * <p>
+     *  告诉这个缓冲区是否等于另一个对象。
+     * 
+     *  <p>两个短缓冲器是相等的,如果,只有,
+     * 
+     * <ol>
+     * 
+     *  <li> <p>它们具有相同的元素类型,</p> </li>
+     * 
+     *  <li> <p>它们具有相同数量的剩余元素,</p> </li>
+     * 
+     *  <li> <p>剩余元素的两个序列,独立于其起始位置考虑,是逐点相等的。
+     * 
+     *  </p> </li>
+     * 
+     * </ol>
+     * 
+     *  <p>短缓冲区不等于任何其他类型的对象。 </p>
+     * 
      * @param  ob  The object to which this buffer is to be compared
      *
      * @return  <tt>true</tt> if, and only if, this buffer is equal to the
@@ -1199,6 +1437,9 @@ public abstract class ShortBuffer
      *
      * <p> A short buffer is not comparable to any other type of object.
      *
+     * <p>
+     * 
+     * 
      * @return  A negative integer, zero, or a positive integer as this buffer
      *          is less than, equal to, or greater than the given buffer
      */
@@ -1432,6 +1673,15 @@ public abstract class ShortBuffer
      * href="ByteBuffer.html#views">view</a> of a byte buffer is that of the
      * byte buffer at the moment that the view is created.  </p>
      *
+     * <p>
+     *  将此缓冲区与另一个进行比较。
+     * 
+     *  <p>通过以字典方式比较剩余元素的序列来比较两个短缓冲器,而不考虑每个序列在其相应缓冲器内的起始位置。
+     * 
+     *  比较{@code short}元素对,如同通过调用{@link Short#compare(short,short)}。
+     * 
+     *  <p>短缓冲区与任何其他类型的对象不可比。
+     * 
      * @return  This buffer's byte order
      */
     public abstract ByteOrder order();

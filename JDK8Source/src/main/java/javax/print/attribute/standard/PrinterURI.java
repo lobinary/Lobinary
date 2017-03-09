@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,14 @@ import javax.print.attribute.PrintServiceAttribute;
  * gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  类PrinterURI是一个打印属性类,一个URI,它指定打印机的全局唯一名称。如果它有这样的名称,管理员确定打印机的URI并将此属性设置为该名称。
+ * <P>
+ *  <B> IPP兼容性：</B>这实现IPP printer-uri属性。 <CODE> toString()</CODE>返回的字符串形式给出了IPP printer-uri值。
+ * 由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Robert Herriot
  */
 
@@ -54,6 +63,10 @@ public final class PrinterURI extends URISyntax
     /**
      * Constructs a new PrinterURI attribute with the specified URI.
      *
+     * <p>
+     *  构造具有指定URI的新PrinterURI属性。
+     * 
+     * 
      * @param  uri  URI of the printer
      *
      * @exception  NullPointerException
@@ -77,6 +90,18 @@ public final class PrinterURI extends URISyntax
      * <CODE>object</CODE>'s underlying URI are equal.
      * </OL>
      *
+     * <p>
+     *  返回此打印机名称属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是PrinterURI类的实例。
+     * <LI>
+     *  这个PrinterURI属性的底层URI和<CODE>对象</CODE>的底层URI是相等的。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this PrinterURI
@@ -93,6 +118,8 @@ public final class PrinterURI extends URISyntax
      * For class PrinterURI and any vendor-defined subclasses, the category is
      * class PrinterURI itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -107,6 +134,12 @@ public final class PrinterURI extends URISyntax
      * For class PrinterURI and any vendor-defined subclasses, the category
      * name is <CODE>"printer-uri"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于PrinterURI类和任何供应商定义的子类,类别是PrinterURI类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

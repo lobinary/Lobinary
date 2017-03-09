@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -101,6 +102,45 @@ import java.util.ServiceLoader;
  *
  * </ul>
  *
+ * <p>
+ *  <code> RMIClassLoader </code>包含静态方法以支持使用RMI进行动态类加载。包括用于从网络位置(一个或多个URL)加载类并且获得远程方应当加载现有类的位置的方法。
+ * 当编组和解组远程方法调用的参数和返回值中的类时,这些方法由RMI运行时使用,并且它们也可以由应用程序直接调用以模仿RMI的动态类加载行为。
+ * 
+ *  <p>执行以下静态方法
+ * 
+ * <ul>
+ * 
+ *  <li> {@ link #loadClass(URL,String)} <li> {@ link #loadClass(String,String)} <li> {@ link #loadClass(String,String,ClassLoader)}
+ *  <li> {@ link #loadProxyClass(String,String [],ClassLoader)} <li> {@ link #getClassLoader(String)} <li>
+ *  {@ link #getClassAnnotation(Class)}。
+ * 
+ * </ul>
+ * 
+ *  由{@link RMIClassLoaderSpi}的实例提供,这是这些方法的服务提供程序接口。当调用其中一个方法时,其行为是委托给服务提供程序实例上的相应方法。
+ * 每个特定方法的文档中描述了每个方法如何委派给提供程序实例的详细信息。
+ * 
+ *  <p>服务提供程序实例选择如下：
+ * 
+ * <ul>
+ * 
+ * <li>如果定义了系统属性<code> java.rmi.server.RMIClassLoaderSpi </code>,则如果其值等于<code>"default"</code>字符串,则提供程序实
+ * 例将是返回的值通过调用{@link #getDefaultProviderInstance()}方法,对于任何其他值,如果使用属性值命名的类可以由系统类加载器加载(参见{@link ClassLoader#getSystemClassLoader}
+ * ),该类可分配给{@link RMIClassLoaderSpi}并具有公共无参构造函数,那么将调用该构造函数来创建提供者实例。
+ * 如果定义了该属性,但这些条件中的任何其他条件都不为真,则会向尝试使用<code> RMIClassLoader </code>的代码抛出未指定的<code> Error </code>,表示无法获取提供
+ * 程序实例。
+ * 
+ * <li>如果名为<code> META-INF / services / java.rmi.server.RMIClassLoaderSpi </code>的资源对系统类加载器可见,那么该资源的内容将被
+ * 解释为提供程序配置文件,并将该文件中指定的第一个类名用作提供程序类名。
+ * 如果具有该名称的类可以由系统类加载器加载,并且该类可分配给{@link RMIClassLoaderSpi}并具有公共无参构造函数,那么将调用该构造函数来创建提供者实例。
+ * 如果找到资源,但是提供者不能如所描述的那样被实例化,那么将试图使用<code> RMIClassLoader </code>的代码抛出未指定的<code> Error </code>,表示无法获取提供者
+ * 实例。
+ * 如果具有该名称的类可以由系统类加载器加载,并且该类可分配给{@link RMIClassLoaderSpi}并具有公共无参构造函数,那么将调用该构造函数来创建提供者实例。
+ * 
+ *  <li>否则,提供程序实例将是调用{@link #getDefaultProviderInstance()}方法时返回的值。
+ * 
+ * </ul>
+ * 
+ * 
  * @author      Ann Wollrath
  * @author      Peter Jones
  * @author      Laird Dornin
@@ -122,6 +162,9 @@ public class RMIClassLoader {
 
     /*
      * Disallow anyone from creating one of these.
+     * <p>
+     *  禁止任何人创建其中的一个。
+     * 
      */
     private RMIClassLoader() {}
 
@@ -132,6 +175,12 @@ public class RMIClassLoader {
      * passing <code>null</code> as the first argument and
      * <code>name</code> as the second argument.
      *
+     * <p>
+     *  使用指定的<code> name </code>加载类。
+     * 
+     *  <p>此方法委托{@link #loadClass(String,String)},传递<code> null </code>作为第一个参数,并将<code> name </code>作为第二个参数。
+     * 
+     * 
      * @param   name the name of the class to load
      *
      * @return  the <code>Class</code> object representing the loaded class
@@ -167,6 +216,17 @@ public class RMIClassLoader {
      * <code>name</code> as the second argument,
      * and <code>null</code> as the third argument.
      *
+     * <p>
+     *  从代码库URL加载类。
+     * 
+     *  如果<code> codebase </code>是<code> null </code>,那么此方法将与{@link #loadClass(String,String)}一样具有<code> nul
+     * l </code> <code > codebase </code>和给定的类名。
+     * 
+     * <p>此方法委托提供者实例的{@link RMIClassLoaderSpi#loadClass(String,String,ClassLoader)}方法,将调用{@link URL#toString}
+     * 的结果传递给给定的URL(或<code> null </code>如果<code> codebase </code>为null)作为第一个参数,<code> name </code>作为第二个参数,<code>
+     *  null </code>。
+     * 
+     * 
      * @param   codebase the URL to load the class from, or <code>null</code>
      *
      * @param   name the name of the class to load
@@ -196,6 +256,13 @@ public class RMIClassLoader {
      * as the first argument, <code>name</code> as the second argument,
      * and <code>null</code> as the third argument.
      *
+     * <p>
+     *  从代码库URL路径加载类。
+     * 
+     *  <p>此方法委托提供者实例的{@link RMIClassLoaderSpi#loadClass(String,String,ClassLoader)}方法,将<code> codebase </code>
+     * 作为第一个参数<code> name </code>作为第二个参数,<code> null </code>作为第三个参数。
+     * 
+     * 
      * @param   codebase the list of URLs (separated by spaces) to load
      * the class from, or <code>null</code>
      *
@@ -237,6 +304,16 @@ public class RMIClassLoader {
      * as the first argument, <code>name</code> as the second argument,
      * and <code>defaultLoader</code> as the third argument.
      *
+     * <p>
+     *  从代码库URL路径加载类,可选择使用提供的加载器。
+     * 
+     *  当调用者想要向提供者实现提供一个额外的上下文类加载器来考虑时,例如堆栈上的调用者的加载器时,应该使用这个方法。
+     * 通常,在尝试从代码库URL路径解析类之前,提供程序实现将尝试使用给定的<code> defaultLoader </code>(如果指定)解析命名类。
+     * 
+     *  <p>此方法委托提供者实例的{@link RMIClassLoaderSpi#loadClass(String,String,ClassLoader)}方法,将<code> codebase </code>
+     * 作为第一个参数<code> name </code>作为第二个参数,<code> defaultLoader </code>作为第三个参数。
+     * 
+     * 
      * @param   codebase the list of URLs (separated by spaces) to load
      * the class from, or <code>null</code>
      *
@@ -279,6 +356,15 @@ public class RMIClassLoader {
      * as the first argument, <code>interfaces</code> as the second argument,
      * and <code>defaultLoader</code> as the third argument.
      *
+     * <p>
+     * 加载一个动态代理类(参见{@link java.lang.reflect.Proxy}),它从代码库URL路径实现一组具有给定名称的接口。
+     * 
+     *  <p>类似于通过{@link #loadClass(String,String)}方法使用给定的<code> codebase </code>加载的类来解析接口。
+     * 
+     *  <p>此方法委托提供者实例的{@link RMIClassLoaderSpi#LoadProxyClass(String,String [],ClassLoader)}方法,将<code> codeb
+     * ase </code>作为第一个参数<code> interfaces < code>作为第二个参数,<code> defaultLoader </code>作为第三个参数。
+     * 
+     * 
      * @param   codebase the list of URLs (space-separated) to load
      * classes from, or <code>null</code>
      *
@@ -331,6 +417,18 @@ public class RMIClassLoader {
      * security checks to verify that the calling context has permission to
      * connect to all of the URLs in the codebase URL path.
      *
+     * <p>
+     *  返回从给定代码库URL路径加载类的类加载器。
+     * 
+     *  <p>返回的类加载器是类加载器,{@link #loadClass(String,String)}方法将用于加载同一个<code> codebase </code>参数的类。
+     * 
+     *  <p>此方法委托提供者实例的{@link RMIClassLoaderSpi#getClassLoader(String)}方法,传递<code> codebase </code>作为参数。
+     * 
+     *  <p>如果有安全管理器,其<code> checkPermission </code>方法将使用<code> RuntimePermission("getClassLoader")</code>权限调
+     * 用;这可能导致<code> SecurityException </code>。
+     * 此方法的提供者实现还可以执行进一步的安全检查以验证调用上下文具有连接到代码库URL路径中的所有URL的权限。
+     * 
+     * 
      * @param   codebase the list of URLs (space-separated) from which
      * the returned class loader will load classes from, or <code>null</code>
      *
@@ -364,6 +462,12 @@ public class RMIClassLoader {
      * {@link RMIClassLoaderSpi#getClassAnnotation(Class)} method
      * of the provider instance, passing <code>cl</code> as the argument.
      *
+     * <p>
+     * 返回在编组给定类的对象时RMI将用来注释类描述符的注释字符串(表示类定义的位置)。
+     * 
+     *  <p>此方法委托提供者实例的{@link RMIClassLoaderSpi#getClassAnnotation(Class)}方法,传递<code> cl </code>作为参数。
+     * 
+     * 
      * @param   cl the class to obtain the annotation for
      *
      * @return  a string to be used to annotate the given class when
@@ -376,6 +480,9 @@ public class RMIClassLoader {
     /*
      * REMIND: Should we say that the returned class annotation will or
      * should be a (space-separated) list of URLs?
+     * <p>
+     *  REMIND：我们应该说返回的类注释是否应该是一个(空格分隔的)URL列表?
+     * 
      */
     public static String getClassAnnotation(Class<?> cl) {
         return provider.getClassAnnotation(cl);
@@ -593,6 +700,78 @@ public class RMIClassLoader {
      *
      * </blockquote>
      *
+     * <p>
+     *  返回服务提供程序接口{@link RMIClassLoaderSpi}的默认提供程序的规范实例。
+     * 如果未定义系统属性<code> java.rmi.server.RMIClassLoaderSpi </code>,则<code> RMIClassLoader </code>静态方法。
+     * 
+     * <ul>
+     * 
+     *  <li> {@ link #loadClass(URL,String)} <li> {@ link #loadClass(String,String)} <li> {@ link #loadClass(String,String,ClassLoader)}
+     *  <li> {@ link #loadProxyClass(String,String [],ClassLoader)} <li> {@ link #getClassLoader(String)} <li>
+     *  {@ link #getClassAnnotation(Class)}。
+     * 
+     * </ul>
+     * 
+     *  将使用默认提供程序的规范实例作为服务提供程序实例。
+     * 
+     *  <p>如果有安全管理器,其<code> checkPermission </code>方法将使用<code> RuntimePermission("setFactory")</code>权限调用;这可
+     * 能导致<code> SecurityException </code>。
+     * 
+     *  <p>默认服务提供程序实例实现{@link RMIClassLoaderSpi},如下所示：
+     * 
+     * <blockquote>
+     * 
+     * <p> <b> {@ link RMIClassLoaderSpi#getClassAnnotation(Class)getClassAnnotation} </b>方法会传回代表远端程式用来下载定义的
+     * 代码库网址路径的<code> String </code>指定类。
+     * 返回的字符串的格式是用空格分隔的URL的路径。
+     * 
+     *  返回的代码库字符串取决于指定类的定义类加载器：
+     * 
+     * <ul>
+     * 
+     *  <li> <p>如果类加载器是系统类加载器(参见{@link ClassLoader#getSystemClassLoader}),系统类加载器的父代,例如用于已安装扩展的加载器,或引导类加载器由<code>
+     *  null </code>表示),则返回<code> java.rmi.server.codebase </code>属性的值(或者可能是之前缓存的值),或<code> null <如果未设置该属性,则返回/ code>
+     * 。
+     * 
+     * <li> <p>否则,如果类加载器是<code> URLClassLoader </code>的实例,则返回的字符串是通过调用<code> getURLs返回的URL的外部形式的空格分隔列表</code>
+     * 加载器的方法。
+     * 如果此提供程序创建了<code> URLClassLoader </code>以调用其<code> loadClass </code>或<code> loadProxyClass </code>方法,则
+     * 不需要任何权限来获取关联的代码库串。
+     * 如果是任意的其他<code> URLClassLoader </code>实例,那么如果有安全管理器,它的<code> checkPermission </code>方法将被<code> getURLs
+     *  </code>代码>方法,通过在每个URL上调用<code> openConnection()。
+     * getPermission()</code>如果任何这些调用抛出一个<code> SecurityException </code>或<code> IOException </code>,那么<code>
+     *  java.rmi.server.codebase </code>属性的值返回早期缓存值),如果未设置此属性,则返回<code> null </code>。
+     * 
+     *  <li> <p>最后,如果类加载器不是<code> URLClassLoader </code>的实例,那么<code> java.rmi.server.codebase </code>属性的值返回早
+     * 期缓存值),如果未设置此属性,则返回<code> null </code>。
+     * 
+     * </ul>
+     * 
+     * <p>对于下面描述的方法的实现,这些方法都采用名为<code> codebase </code>的<code> String </code>参数,这是一个空格分隔的URL列表, i>代码库加载器</i>
+     * ,它使用<code> codebase </code>参数与当前线程的上下文类加载器(参见{@link Thread#getContextClassLoader()})进行标识。
+     * 当有安全管理器时,此提供程序维护一个类加载器实例(至少是{@link java.net.URLClassLoader}的实例)的内部表,它由父类加载器及其代码库URL路径(一个URL的有序列表)。
+     * 如果<code> codebase </code>参数是<code> null </code>,则代码库URL路径是系统属性<code> java.rmi.server.codebase </code>
+     * 的值,缓存值。
+     * 当有安全管理器时,此提供程序维护一个类加载器实例(至少是{@link java.net.URLClassLoader}的实例)的内部表,它由父类加载器及其代码库URL路径(一个URL的有序列表)。
+     * 对于作为给定上下文中的下列方法之一的调用的<code> codebase </code>参数传递的给定代码库URL路径,代码库加载器是具有指定的代码库URL路径和当前线程的上下文类加载器作为其父类。
+     * 如果不存在这样的加载器,则创建一个并将其添加到表中。该表不保持对其所包含加载器的强引用,以便允许它们和它们所定义的类在不可访问时被垃圾收集。
+     * 为了防止任意不受信任的代码被隐式地加载到没有安全管理器的虚拟机中,如果没有安全管理器设置,则代码库加载器只是当前线程的上下文类加载器(提供的代码库URL路径被忽略,所以远程类加载被禁用)。
+     * 
+     * <p> <b> {@ link RMIClassLoaderSpi#getClassLoader(String)getClassLoader} </b>方法会返回指定代码库网址路径的代码库加载器。
+     * 如果有安全管理器,那么如果调用上下文没有连接到代码库URL路径中的所有URL的权限,将抛出一个<code> SecurityException </code>。
+     * 
+     *  <p> <b> {@ link RMIClassLoaderSpi#loadClass(String,String,ClassLoader)loadClass} </b>方法尝试载入具有指定名称的类别
+     * ,如下所示：。
+     * 
+     * <blockquote>
+     * 
+     *  如果<code> defaultLoader </code>参数是非<code> null </code>,它首先尝试使用<code> defaultLoader </code>加载指定的<code>
+     *  name </code> >,例如通过评估。
+     * 
+     * <pre>
+     *  Class.forName(name,false,defaultLoader)
+     * </pre>
+     * 
      * @return  the canonical instance of the default service provider
      *
      * @throws  SecurityException if there is a security manager and the
@@ -611,6 +790,43 @@ public class RMIClassLoader {
     /**
      * Returns the security context of the given class loader.
      *
+     * <p>
+     * 
+     *  如果类从<code> defaultLoader </code>成功加载,则返回该类。
+     * 如果抛出<code> ClassNotFoundException </code>之外的异常,那么该异常将抛出给调用者。
+     * 
+     *  <p>接下来,<code> loadClass </code>方法尝试使用指定代码库URL路径的代码库加载器加载指定了<code> name </code>的类。
+     * 如果有安全管理器,则调用上下文必须具有连接到代码库URL路径中的所有URL的权限;否则,将使用当前线程的上下文类加载器而不是代码库加载器。
+     * 
+     * </blockquote>
+     * 
+     * <p> <b> {@ link RMIClassLoaderSpi#loadProxyClass(String,String [],ClassLoader)loadProxyClass} </b>方法尝
+     * 试使用命名接口返回动态代理类,如下所示：。
+     * 
+     * <blockquote>
+     * 
+     *  <p>如果<code> defaultLoader </code>参数是非<code> null </code>,并且所有命名接口都可以通过该加载器解析,
+     * 
+     * <ul>
+     * 
+     *  <li>如果所有解析的接口都是<code> public </code>,那么它首先尝试获取一个动态代理类(使用{@link java.lang.reflect.Proxy#getProxyClass(ClassLoader,Class []) Proxy.getProxyClass}
+     * )用于在代码库加载器中定义的解析接口;如果该尝试抛出一个<code> IllegalArgumentException </code>,它会尝试为<code> defaultLoader </code>
+     * 中定义的解析接口获取一个动态代理类。
+     * 如果两个尝试都抛出<code> IllegalArgumentException </code>,那么这个方法会抛出一个<code> ClassNotFoundException </code>。
+     * 如果抛出任何其他异常,那么该异常将抛出给调用者。
+     * 
+     *  <li>如果所有非<code> public </code>解析的接口在同一个类加载器中定义,则它尝试为该加载器中定义的已解析接口获取一个动态代理类。
+     * 
+     *  <li>否则,会抛出<code> LinkageError </code>(因为实现所有指定接口的类不能在任何加载器中定义)。
+     * 
+     * </ul>
+     * 
+     *  <p>否则,如果所有命名接口都可以通过代码库加载器解析,
+     * 
+     * <ul>
+     * 
+     * <li>如果所有已解析的接口都是<code> public </code>,那么它会尝试为已解析的代码库加载器中的接口获取一个动态代理类。
+     * 
      * @param   loader a class loader from which to get the security context
      *
      * @return  the security context
@@ -627,6 +843,21 @@ public class RMIClassLoader {
 
     /**
      * Creates an instance of the default provider class.
+     * <p>
+     * 如果尝试抛出一个<code> IllegalArgumentException </code>,那么这个方法会抛出一个<code> ClassNotFoundException </code>。
+     * 
+     *  <li>如果所有非<code> public </code>解析的接口在同一个类加载器中定义,则它尝试为该加载器中定义的已解析接口获取一个动态代理类。
+     * 
+     *  <li>否则,会抛出<code> LinkageError </code>(因为实现所有指定接口的类不能在任何加载器中定义)。
+     * 
+     * </ul>
+     * 
+     *  <p>否则,为无法解析的命名接口之一抛出<code> ClassNotFoundException </code>。
+     * 
+     * </blockquote>
+     * 
+     * </blockquote>
+     * 
      */
     private static RMIClassLoaderSpi newDefaultProviderInstance() {
         return new RMIClassLoaderSpi() {
@@ -663,10 +894,16 @@ public class RMIClassLoader {
      * Chooses provider instance, following above documentation.
      *
      * This method assumes that it has been invoked in a privileged block.
+     * <p>
+     *  返回给定类加载器的安全上下文。
+     * 
      */
     private static RMIClassLoaderSpi initializeProvider() {
         /*
          * First check for the system property being set:
+         * <p>
+         *  创建默认提供程序类的实例。
+         * 
          */
         String providerClassName =
             System.getProperty("java.rmi.server.RMIClassLoaderSpi");
@@ -699,6 +936,11 @@ public class RMIClassLoader {
 
         /*
          * Next look for a provider configuration file installed:
+         * <p>
+         *  选择提供程序实例,如上所述。
+         * 
+         *  此方法假定它已在特权块中调用。
+         * 
          */
         Iterator<RMIClassLoaderSpi> iter =
             ServiceLoader.load(RMIClassLoaderSpi.class,
@@ -716,6 +958,9 @@ public class RMIClassLoader {
 
         /*
          * Finally, return the canonical instance of the default provider.
+         * <p>
+         *  首先检查所设置的系统属性：
+         * 
          */
         return defaultProvider;
     }

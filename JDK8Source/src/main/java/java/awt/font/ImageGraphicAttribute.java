@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@
  * This notice and attribution to Taligent may not be removed.
  * Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权所有Taligent,Inc. 1996  -  1997,保留所有权利(C)版权所有IBM Corp. 1996  -  1998,保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 
+ *  此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.awt.font;
@@ -48,6 +56,10 @@ import java.awt.geom.Rectangle2D;
  * The <code>ImageGraphicAttribute</code> class is an implementation of
  * {@link GraphicAttribute} which draws images in
  * a {@link TextLayout}.
+ * <p>
+ *  <code> ImageGraphicAttribute </code>类是{@link GraphicAttribute}的一个实现,它在{@link TextLayout}中绘制图像。
+ * 
+ * 
  * @see GraphicAttribute
  */
 
@@ -60,6 +72,10 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
     /**
      * Constucts an <code>ImageGraphicAttribute</code> from the specified
      * {@link Image}.  The origin is at (0,&nbsp;0).
+     * <p>
+     *  从指定的{@link Image}中产生一个<code> ImageGraphicAttribute </code>。起点为(0,&nbsp; 0)。
+     * 
+     * 
      * @param image the <code>Image</code> rendered by this
      * <code>ImageGraphicAttribute</code>.
      * This object keeps a reference to <code>image</code>.
@@ -77,6 +93,13 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
      * (<code>originX</code>,&nbsp;<code>originY</code>) in the
      * <code>Image</code> appears at the origin of the
      * <code>ImageGraphicAttribute</code> within the text.
+     * <p>
+     *  从指定的<code> Image </code>构造一个<code> ImageGraphicAttribute </code>。
+     *  <code> Image </code>中的<code> originX </code>,&nbsp; <code> originY </code>)出现在文本中<code> ImageGraphic
+     * Attribute </code> 。
+     *  从指定的<code> Image </code>构造一个<code> ImageGraphicAttribute </code>。
+     * 
+     * 
      * @param image the <code>Image</code> rendered by this
      * <code>ImageGraphicAttribute</code>.
      * This object keeps a reference to <code>image</code>.
@@ -112,6 +135,10 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
      * Returns the ascent of this <code>ImageGraphicAttribute</code>.  The
      * ascent of an <code>ImageGraphicAttribute</code> is the distance
      * from the top of the image to the origin.
+     * <p>
+     *  返回此<code> ImageGraphicAttribute </code>的上升。 <code> ImageGraphicAttribute </code>的上升是从图像的顶部到原点的距离。
+     * 
+     * 
      * @return the ascent of this <code>ImageGraphicAttribute</code>.
      */
     public float getAscent() {
@@ -123,6 +150,10 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
      * Returns the descent of this <code>ImageGraphicAttribute</code>.
      * The descent of an <code>ImageGraphicAttribute</code> is the
      * distance from the origin to the bottom of the image.
+     * <p>
+     * 返回此<code> ImageGraphicAttribute </code>的下降。 <code> ImageGraphicAttribute </code>的下降是从原点到图像底部的距离。
+     * 
+     * 
      * @return the descent of this <code>ImageGraphicAttribute</code>.
      */
     public float getDescent() {
@@ -134,6 +165,10 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
      * Returns the advance of this <code>ImageGraphicAttribute</code>.
      * The advance of an <code>ImageGraphicAttribute</code> is the
      * distance from the origin to the right edge of the image.
+     * <p>
+     *  返回此<code> ImageGraphicAttribute </code>的提前。 <code> ImageGraphicAttribute </code>的前进是从原点到图像右边缘的距离。
+     * 
+     * 
      * @return the advance of this <code>ImageGraphicAttribute</code>.
      */
     public float getAdvance() {
@@ -147,6 +182,11 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
      * to the rendering position.  A graphic can be rendered beyond its
      * origin, ascent, descent, or advance;  but if it is, this
      * method's implementation must indicate where the graphic is rendered.
+     * <p>
+     *  返回一个{@link Rectangle2D},它包含由此<code> ImageGraphicAttribute </code>呈现的所有位,相对于呈现位置。
+     * 图形可以超越其起源,上升,下降或前进;但如果是这样,这个方法的实现必须指出图形的呈现位置。
+     * 
+     * 
      * @return a <code>Rectangle2D</code> that encloses all of the bits
      * rendered by this <code>ImageGraphicAttribute</code>.
      */
@@ -158,6 +198,9 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void draw(Graphics2D graphics, float x, float y) {
 
@@ -166,6 +209,10 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
 
     /**
      * Returns a hashcode for this <code>ImageGraphicAttribute</code>.
+     * <p>
+     *  返回此<code> ImageGraphicAttribute </code>的哈希码。
+     * 
+     * 
      * @return  a hash code value for this object.
      */
     public int hashCode() {
@@ -176,6 +223,10 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
     /**
      * Compares this <code>ImageGraphicAttribute</code> to the specified
      * {@link Object}.
+     * <p>
+     *  将此<code> ImageGraphicAttribute </code>比较到指定的{@link对象}。
+     * 
+     * 
      * @param rhs the <code>Object</code> to compare for equality
      * @return <code>true</code> if this
      * <code>ImageGraphicAttribute</code> equals <code>rhs</code>;
@@ -194,6 +245,9 @@ public final class ImageGraphicAttribute extends GraphicAttribute {
     /**
      * Compares this <code>ImageGraphicAttribute</code> to the specified
      * <code>ImageGraphicAttribute</code>.
+     * <p>
+     *  将此<code> ImageGraphicAttribute </code>与指定的<code> ImageGraphicAttribute </code>进行比较。
+     * 
      * @param rhs the <code>ImageGraphicAttribute</code> to compare for
      * equality
      * @return <code>true</code> if this

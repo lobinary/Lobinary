@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,18 @@ import org.xml.sax.helpers.DefaultHandler;
  * <em>ContentHandler.startElement()</em> call might be passed a
  * {@link Attributes2} object.
  *
+ * <p>
+ *  此类扩展了SAX2基本处理程序类,以支持SAX2 {@link LexicalHandler},{@link DeclHandler}和{@link EntityResolver2}扩展。
+ * 除了覆盖原来的SAX1 {@link DefaultHandler#resolveEntity resolveEntity()}方法,添加的处理程序方法只是返回。子类可以在逐个方法的基础上覆盖一切。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)位于公共域中,并且随附<strong>无保修</strong>。</em>
+ * </blockquote>
+ * 
+ *  <p> <em>注意：<em>此类可能还会了解到,ContentHandler.setDocumentLocator()</em>调用可能传递了一个{@link Locator2}对象,而且<em> 
+ * ContentHandler .startElement()</em>调用可能传递一个{@link Attributes2}对象。
+ * 
+ * 
  * @since SAX 2.0 (extensions 1.1 alpha)
  * @author David Brownell
  */
@@ -121,6 +134,9 @@ public class DefaultHandler2 extends DefaultHandler
     /**
      * Tells the parser that if no external subset has been declared
      * in the document text, none should be used.
+     * <p>
+     *  告诉解析器,如果没有在文档文本中声明外部子集,则不应使用任何外部子集。
+     * 
      */
     public InputSource getExternalSubset (String name, String baseURI)
     throws SAXException, IOException
@@ -134,6 +150,12 @@ public class DefaultHandler2 extends DefaultHandler
      * method is overridden to call this one, this method may sometimes
      * be invoked with null <em>name</em> and <em>baseURI</em>, and
      * with the <em>systemId</em> already absolutized.
+     * <p>
+     *  告诉解析器根据baseURI解析systemId,并从生成的绝对URI中读取实体文本。
+     * 请注意,因为较早的{@link DefaultHandler#resolveEntity DefaultHandler.resolveEntity()}方法被覆盖而无法调用此方法,所以有时可以使用nul
+     * l <em> name </em>和<em> baseURI </em >,以及已经绝对的<em> systemId </em>。
+     *  告诉解析器根据baseURI解析systemId,并从生成的绝对URI中读取实体文本。
+     * 
      */
     public InputSource resolveEntity (String name, String publicId,
             String baseURI, String systemId)
@@ -147,6 +169,7 @@ public class DefaultHandler2 extends DefaultHandler
      * {@link EntityResolver2#resolveEntity EntityResolver2.resolveEntity()}
      * with null entity name and base URI.
      * You only need to override that method to use this class.
+     * <p>
      */
     public InputSource resolveEntity (String publicId, String systemId)
     throws SAXException, IOException

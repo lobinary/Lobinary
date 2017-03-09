@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,11 @@ package java.io;
  * indicates how many bytes were successfully transferred before
  * the interruption occurred.
  *
+ * <p>
+ *  表示I / O操作已中断。抛出<code> InterruptedIOException </code>以指示输入或输出传输已终止,因为执行它的线程已中断。
+ * 字段{@link #bytesTransferred}指示在中断发生之前成功传输了多少字节。
+ * 
+ * 
  * @author  unascribed
  * @see     java.io.InputStream
  * @see     java.io.OutputStream
@@ -46,6 +52,9 @@ class InterruptedIOException extends IOException {
     /**
      * Constructs an <code>InterruptedIOException</code> with
      * <code>null</code> as its error detail message.
+     * <p>
+     *  构造具有<code> null </code>作为其错误详细消息的<code> InterruptedIOException </code>。
+     * 
      */
     public InterruptedIOException() {
         super();
@@ -58,6 +67,12 @@ class InterruptedIOException extends IOException {
      * <code>{@link java.lang.Throwable#getMessage}</code>
      * method of class <code>java.lang.Throwable</code>.
      *
+     * <p>
+     *  使用指定的详细消息构造一个<code> InterruptedIOException </code>。
+     * 稍后可以通过<code> java.lang.Throwable </code>类的<code> {@ link java.lang.Throwable#getMessage} </code>方法检索字
+     * 符串<code> s </code>。
+     *  使用指定的详细消息构造一个<code> InterruptedIOException </code>。
+     * 
      * @param   s   the detail message.
      */
     public InterruptedIOException(String s) {
@@ -68,6 +83,9 @@ class InterruptedIOException extends IOException {
      * Reports how many bytes had been transferred as part of the I/O
      * operation before it was interrupted.
      *
+     * <p>
+     * 
+     * 
      * @serial
      */
     public int bytesTransferred = 0;

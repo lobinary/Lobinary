@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,12 @@ import javax.swing.plaf.basic.BasicPopupMenuUI;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  一个Motif L&F实现PopupMenuUI。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
  * @author Georges Saab
  * @author Rich Schiavi
  */
@@ -69,6 +76,8 @@ public class MotifPopupMenuUI extends BasicPopupMenuUI {
 
     /* This has to deal with the fact that the title may be wider than
        the widest child component.
+    /* <p>
+    /* 
        */
     public Dimension getPreferredSize(JComponent c) {
         LayoutManager layout = c.getLayout();

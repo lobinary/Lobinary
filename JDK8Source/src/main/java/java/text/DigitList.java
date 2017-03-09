@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996,1997  - 保留所有权利(C)版权所有IBM Corp. 1996  -  1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.text;
@@ -63,6 +70,16 @@ import sun.misc.FloatingDecimal;
  * derived by placing all the digits of the list to the right of the
  * decimal point, by 10^exponent.
  *
+ * <p>
+ *  数字列表。专用于DecimalFormat。处理数字值和字符串之间的转码。只处理非负数。
+ *  DigitList和DecimalFormat之间的分工是DigitList处理基数10表示问题; DecimalFormat处理特定于语言环境的问题,例如正/负,分组,小数点,货币等。
+ * 
+ *  DigitList实际上是一个浮点值的表示。它可以是整数值;我们假设double具有足够的精度来表示long的所有数字。
+ * 
+ * DigitList表示由一个字符串组成,它是从"0"到"9"的十进制数字。它还有一个与其相关的基数10指数。
+ * 由DigitList对象表示的值可以通过乘以分数f来计算,其中0 <= f <1,通过将列表的所有数字放置在小数点右侧,乘以10 ^指数来导出。
+ * 
+ * 
  * @see  Locale
  * @see  Format
  * @see  NumberFormat
@@ -76,6 +93,9 @@ final class DigitList implements Cloneable {
      * The maximum number of significant digits in an IEEE 754 double, that
      * is, in a Java double.  This must not be increased, or garbage digits
      * will be generated, and should not be decreased, or accuracy will be lost.
+     * <p>
+     *  IEEE 754中的最大有效位数为double,即在Java中为double。这不能增加,或者将生成无用数字,并且不应该减少,否则精度将丢失。
+     * 
      */
     public static final int MAX_COUNT = 19; // == Long.toString(Long.MAX_VALUE).length()
 
@@ -99,6 +119,18 @@ final class DigitList implements Cloneable {
      *
      * Zero is represented by any DigitList with count == 0 or with each digits[i]
      * for all i <= count == '0'.
+     * <p>
+     *  这些数据成员是故意公开的,可以直接设置。
+     * 
+     *  表示的值通过将小数点放在数字[decimalAt]之前给出。如果decimalAt <0,则暗示小数点和第一个非零数字之间的前导零。
+     * 如果decimalAt> count,则隐含数字[count-1]和小数点之间的尾随零。
+     * 
+     *  等价地,表示的值由f * 10 ^十进制给出。这里f是0.1 <= f <1的值,通过将数字放在小数右边的数字中。
+     * 
+     *  DigitList被归一化,因此如果它是非零,figits [0]是非零。我们不允许非规范化的数字,因为我们的指数实际上是无限大的。计数值包含数字[]中存在的有效数字位数。
+     * 
+     *  零由任何具有count == 0的数字列表表示,或者对于所有i <= count =='0'的每个数字[i]表示。
+     * 
      */
     public int decimalAt = 0;
     public int count = 0;
@@ -110,6 +142,9 @@ final class DigitList implements Cloneable {
 
     /**
      * Return true if the represented number is zero.
+     * <p>
+     * 如果所表示的数字为零,则返回true。
+     * 
      */
     boolean isZero() {
         for (int i=0; i < count; ++i) {
@@ -122,6 +157,9 @@ final class DigitList implements Cloneable {
 
     /**
      * Set the rounding mode
+     * <p>
+     *  设置舍入模式
+     * 
      */
     void setRoundingMode(RoundingMode r) {
         roundingMode = r;
@@ -133,6 +171,10 @@ final class DigitList implements Cloneable {
      * Typically, you set a series of digits with append, then at the point
      * you hit the decimal point, you set myDigitList.decimalAt = myDigitList.count;
      * then go on appending digits.
+     * <p>
+     *  清除数字。在添加它们之前使用。
+     * 通常,你用append设置一系列数字,然后在你点击小数点的那一点,你设置myDigitList.decimalAt = myDigitList.count;然后继续追加数字。
+     * 
      */
     public void clear () {
         decimalAt = 0;
@@ -141,6 +183,9 @@ final class DigitList implements Cloneable {
 
     /**
      * Appends a digit to the list, extending the list when necessary.
+     * <p>
+     *  将数字附加到列表,必要时扩展列表。
+     * 
      */
     public void append(char digit) {
         if (count == digits.length) {
@@ -155,6 +200,9 @@ final class DigitList implements Cloneable {
      * Utility routine to get the value of the digit list
      * If (count == 0) this throws a NumberFormatException, which
      * mimics Long.parseLong().
+     * <p>
+     *  获得数字列表的值的实用程序如果(count == 0)这将抛出一个NumberFormatException,它模仿Long.parseLong()。
+     * 
      */
     public final double getDouble() {
         if (count == 0) {
@@ -172,6 +220,9 @@ final class DigitList implements Cloneable {
     /**
      * Utility routine to get the value of the digit list.
      * If (count == 0) this returns 0, unlike Long.parseLong().
+     * <p>
+     *  获取数字列表值的实用程序。如果(count == 0)这返回0,不同于Long.parseLong()。
+     * 
      */
     public final long getLong() {
         // for now, simple implementation; later, do proper IEEE native stuff
@@ -214,6 +265,10 @@ final class DigitList implements Cloneable {
     /**
      * Return true if the number represented by this object can fit into
      * a long.
+     * <p>
+     *  如果此对象表示的数字适合长整型,则返回true。
+     * 
+     * 
      * @param isPositive true if this number should be regarded as positive
      * @param ignoreNegativeZero true if -0 should be regarded as identical to
      * +0; otherwise they are considered distinct
@@ -265,6 +320,10 @@ final class DigitList implements Cloneable {
     /**
      * Set the digit list to a representation of the given double value.
      * This method supports fixed-point notation.
+     * <p>
+     *  将数字列表设置为给定double值的表示。此方法支持定点符号。
+     * 
+     * 
      * @param isNegative Boolean value indicating whether the number is negative.
      * @param source Value to be converted; must not be Inf, -Inf, Nan,
      * or a value <= 0.
@@ -278,6 +337,10 @@ final class DigitList implements Cloneable {
     /**
      * Set the digit list to a representation of the given double value.
      * This method supports both fixed-point and exponential notation.
+     * <p>
+     *  将数字列表设置为给定double值的表示。此方法支持定点和指数符号。
+     * 
+     * 
      * @param isNegative Boolean value indicating whether the number is negative.
      * @param source Value to be converted; must not be Inf, -Inf, Nan,
      * or a value <= 0.
@@ -302,6 +365,10 @@ final class DigitList implements Cloneable {
     /**
      * Generate a representation of the form DDDDD, DDDDD.DDDDD, or
      * DDDDDE+/-DDDDD.
+     * <p>
+     *  生成表单DDDDD,DDDDD.DDDDD或DDDDDE +/- DDDDD。
+     * 
+     * 
      * @param roundedUp whether or not rounding up has already happened.
      * @param valueExactAsDecimal whether or not collected digits provide
      * an exact decimal representation of the value.
@@ -388,6 +455,10 @@ final class DigitList implements Cloneable {
 
     /**
      * Round the representation to the given number of digits.
+     * <p>
+     *  将表示法四舍五入到给定数字位数。
+     * 
+     * 
      * @param maximumDigits The maximum number of digits to be shown.
      * @param alreadyRounded whether or not rounding up has already happened.
      * @param valueExactAsDecimal whether or not collected digits provide
@@ -438,6 +509,10 @@ final class DigitList implements Cloneable {
      * method implements the rounding modes defined in the
      * java.math.RoundingMode class.
      * [bnf]
+     * <p>
+     *  如果将表达式截断到给定数字位数,则返回true,将导致最后一位数字递增。此方法实现java.math.RoundingMode类中定义的舍入模式。 [bnf]
+     * 
+     * 
      * @param maximumDigits the number of digits to keep, from 0 to
      * <code>count-1</code>.  If 0, then all digits are rounded away, and
      * this method returns true if a one should be generated (e.g., formatting
@@ -498,6 +573,27 @@ final class DigitList implements Cloneable {
              *   have to be  set to false, and valueExactAsDecimal has to be set to
              *   true in the upper DigitList call stack, providing the right state
              *   for those situations..
+             * <p>
+             * 为了避免在将二进制双精度值转换为文本时出现错误的双舍入或截断,在此类中需要有关FloatingDecimal中的转换结果的精确性以及任何舍入操作的信息。
+             * 
+             *   - 对于HALF_DOWN,HALF_EVEN,HALF_UP舍入规则如下：在形成float或double的情况下,我们必须考虑FloatingDecimal在二进制到十进制转换中做了什么。
+             * 
+             *  考虑到关系的情况,FloatingDecimal可以向上舍入该值(当它低于时返回十进制数等于tie),或者当值高于该值时,"截断"该值,或者当二进制值可以时,提供确切的十进制数字被精确地转换为其十进制
+             * 表示给定的浮点十进制的格式规则(因此我们有二进制值的精确的十进制表示)。
+             * 
+             *   - 如果双二进制值完全转换为十进制值,则DigitList代码必须应用预期的舍入规则。
+             * 
+             *   - 如果FloatingDecimal已经向上舍入十进制值,则DigitList不应该在上述三个舍入模式中的任一个中再次向上舍入该值。
+             * 
+             *   - 如果FloatingDecimal已将十进制值截断为结束"5"数字,则DigitList应将上述三个舍入模式中的值向上舍入。
+             * 
+             *  这是必须考虑只有当数字在maximumDigits索引正好是数字集中的最后一个,否则在该位置后有剩余的数字,我们不必考虑什么FloatingDecimal做的。
+             * 
+             *  - 其他舍入模式不受这些连结案例的影响。
+             * 
+             *   - 对于总是转换为精确数字(如BigInteger,Long,...)的其他数字,传递的alreadyRounded布尔值必须设置为false,并且valueExactAsDecimal必须在高位D
+             * igitList调用堆栈中设置为true,正确的状态。
+             * 
              */
 
             switch(roundingMode) {
@@ -601,6 +697,9 @@ final class DigitList implements Cloneable {
 
     /**
      * Utility routine to set the value of the digit list from a long
+     * <p>
+     *  实用程序设置数字列表的值从长
+     * 
      */
     final void set(boolean isNegative, long source) {
         set(isNegative, source, 0);
@@ -608,6 +707,10 @@ final class DigitList implements Cloneable {
 
     /**
      * Set the digit list to a representation of the given long value.
+     * <p>
+     *  将数字列表设置为给定长值的表示形式。
+     * 
+     * 
      * @param isNegative Boolean value indicating whether the number is negative.
      * @param source Value to be converted; must be >= 0 or ==
      * Long.MIN_VALUE.
@@ -654,6 +757,10 @@ final class DigitList implements Cloneable {
     /**
      * Set the digit list to a representation of the given BigDecimal value.
      * This method supports both fixed-point and exponential notation.
+     * <p>
+     *  将数字列表设置为给定的BigDecimal值的表示。此方法支持定点和指数符号。
+     * 
+     * 
      * @param isNegative Boolean value indicating whether the number is negative.
      * @param source Value to be converted; must not be a value <= 0.
      * @param maximumDigits The most fractional or total digits which should
@@ -672,6 +779,10 @@ final class DigitList implements Cloneable {
 
     /**
      * Set the digit list to a representation of the given BigInteger value.
+     * <p>
+     *  将数字列表设置为给定BigInteger值的表示形式。
+     * 
+     * 
      * @param isNegative Boolean value indicating whether the number is negative.
      * @param source Value to be converted; must be >= 0.
      * @param maximumDigits The most digits which should be converted.
@@ -698,6 +809,9 @@ final class DigitList implements Cloneable {
 
     /**
      * equality test between two digit lists.
+     * <p>
+     *  两个数字列表之间的相等测试。
+     * 
      */
     public boolean equals(Object obj) {
         if (this == obj)                      // quick check
@@ -716,6 +830,9 @@ final class DigitList implements Cloneable {
 
     /**
      * Generates the hash code for the digit list.
+     * <p>
+     *  生成数字列表的哈希码。
+     * 
      */
     public int hashCode() {
         int hashcode = decimalAt;
@@ -729,6 +846,10 @@ final class DigitList implements Cloneable {
 
     /**
      * Creates a copy of this object.
+     * <p>
+     *  创建此对象的副本。
+     * 
+     * 
      * @return a clone of this instance.
      */
     public Object clone() {
@@ -747,6 +868,8 @@ final class DigitList implements Cloneable {
     /**
      * Returns true if this DigitList represents Long.MIN_VALUE;
      * false, otherwise.  This is required so that getLong() works.
+     * <p>
+     *  如果此DigitList表示Long.MIN_VALUE,则返回true; false,否则。这是必需的,以便getLong()工作。
      */
     private boolean isLongMIN_VALUE() {
         if (decimalAt != count || count != MAX_COUNT) {

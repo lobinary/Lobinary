@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,11 @@ import org.omg.CORBA.SystemException;
  *  forwarded to a <code>Delegate</code> object stored in the <code>ObjectImpl</code>
  *  instance.  <code>ObjectImpl</code> allows for portable stubs because the
  *  <code>Delegate</code> can be implemented by a different vendor-specific ORB.
+ * <p>
+ *  所有存根类的公共基类;提供了<code> org.omg.CORBA.Object </code>方法的默认实现。
+ * 所有方法实现都转发到存储在<code> ObjectImpl </code>实例中的<code> Delegate </code>对象。
+ *  <code> ObjectImpl </code>允许使用便携式存根,因为<code> Delegate </code>可以由不同的供应商特定的ORB实现。
+ * 
  */
 
 abstract public class ObjectImpl implements org.omg.CORBA.Object
@@ -53,6 +59,11 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * which are derived from this <code>ObjectImpl</code> class, can be
      * portable because they delegate all of the methods called on them to this
      * <code>Delegate</code> object.
+     * <p>
+     *  存储此<code> ObjectImpl </code>对象的<code> Delegate </code>实例的字段。
+     * 此<code> Delegate </code>实例可以由供应商特定的ORB实现。
+     * 从这个<code> ObjectImpl </code>类派生的Stub类可以是可移植的,因为它们将所有调用的方法委托给这个<code> Delegate </code>对象。
+     * 
      */
     private transient Delegate __delegate;
 
@@ -62,6 +73,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * object to which this <code>ObjectImpl</code> object delegates all
      * methods invoked on it.
      *
+     * <p>
+     *  获取对该代理调用的所有方法的<code> ObjectImpl </code>对象所针对的供应商特定<code> Delegate </code>对象的引用。
+     * 
+     * 
      * @return the Delegate contained in this ObjectImpl instance
      * @throws BAD_OPERATION if the delegate has not been set
      * @see #_set_delegate
@@ -78,6 +93,11 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * <code>Delegate</code> object.  All method invocations on this
      * <code>ObjectImpl</code> object will be forwarded to this delegate.
      *
+     * <p>
+     *  将这个<code> ObjectImpl </code>实例的代理设置为给定的<code> Delegate </code>对象。
+     * 对这个<code> ObjectImpl </code>对象的所有方法调用将被转发到这个代理。
+     * 
+     * 
      * @param delegate the <code>Delegate</code> instance to which
      *        all method calls on this <code>ObjectImpl</code> object
      *        will be delegated; may be implemented by a third-party ORB
@@ -93,6 +113,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * for a stub, this method returns information about all the
      * interfaces supported by the stub.
      *
+     * <p>
+     *  检索包含此<object> ObjectImpl </code>对象支持的存储库标识符的字符串数组。例如,对于存根,此方法返回有关存根支持的所有接口的信息。
+     * 
+     * 
      * @return the array of all repository identifiers supported by this
      *         <code>ObjectImpl</code> instance
      */
@@ -102,6 +126,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
     /**
      * Returns a duplicate of this <code>ObjectImpl</code> object.
      *
+     * <p>
+     * 返回此<object> ObjectImpl </code>对象的副本。
+     * 
+     * 
      * @return an <code>orb.omg.CORBA.Object</code> object that is
      *         a duplicate of this object
      */
@@ -111,6 +139,9 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
 
     /**
      * Releases the resources associated with this <code>ObjectImpl</code> object.
+     * <p>
+     *  释放与此<code> ObjectImpl </code>对象相关联的资源。
+     * 
      */
     public void _release() {
         _get_delegate().release(this);
@@ -120,6 +151,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Checks whether the object identified by the given repository
      * identifier is an <code>ObjectImpl</code> object.
      *
+     * <p>
+     *  检查由给定存储库标识符标识的对象是否为<code> ObjectImpl </code>对象。
+     * 
+     * 
      * @param repository_id a <code>String</code> object with the repository
      *        identifier to check
      * @return <code>true</code> if the object identified by the given
@@ -134,6 +169,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Checks whether the the given <code>ObjectImpl</code> object is
      * equivalent to this <code>ObjectImpl</code> object.
      *
+     * <p>
+     *  检查给定的<code> ObjectImpl </code>对象是否等同于此<object> ObjectImpl </code>对象。
+     * 
+     * 
      * @param that an instance of <code>ObjectImpl</code> to compare with
      *        this <code>ObjectImpl</code> object
      * @return <code>true</code> if the given object is equivalent
@@ -148,6 +187,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Checks whether the server object for this <code>ObjectImpl</code>
      * object has been destroyed.
      *
+     * <p>
+     *  检查此<code> ObjectImpl </code>对象的服务器对象是否已被销毁。
+     * 
+     * 
      * @return <code>true</code> if the ORB knows authoritatively that the
      *         server object does not exist; <code>false</code> otherwise
      */
@@ -159,6 +202,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Retrieves the hash code that serves as an ORB-internal identifier for
      * this <code>ObjectImpl</code> object.
      *
+     * <p>
+     *  检索用作此<object> ObjectImpl </code>对象的ORB内部标识符的哈希码。
+     * 
+     * 
      * @param maximum an <code>int</code> indicating the upper bound on the hash
      *        value returned by the ORB
      * @return an <code>int</code> representing the hash code for this
@@ -172,6 +219,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Creates a <code>Request</code> object containing the given method
      * that can be used with the Dynamic Invocation Interface.
      *
+     * <p>
+     *  创建一个包含可以与动态调用接口一起使用的给定方法的<code> Request </code>对象。
+     * 
+     * 
      * @param operation the method to be invoked by the new <code>Request</code>
      *        object
      * @return a new <code>Request</code> object initialized with the
@@ -185,6 +236,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Creates a <code>Request</code> object that contains the given context,
      * method, argument list, and container for the result.
      *
+     * <p>
+     *  创建包含结果的给定上下文,方法,参数列表和容器的<code> Request </code>对象。
+     * 
+     * 
      * @param ctx the Context for the request
      * @param operation the method that the new <code>Request</code>
      *        object will invoke
@@ -214,6 +269,11 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * This <code>Request</code> object is for use in the Dynamic
      * Invocation Interface.
      *
+     * <p>
+     *  创建包含给定上下文,方法,参数列表,结果,异常的容器以及用于解析上下文字符串的属性名称列表的<code> Request </code>对象。
+     * 此<code> Request </code>对象用于动态调用接口。
+     * 
+     * 
      * @param ctx the <code>Context</code> object that contains the
      *        context strings that must be resolved before they are
      *        sent along with the request
@@ -254,6 +314,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Retrieves the interface definition for this <code>ObjectImpl</code>
      * object.
      *
+     * <p>
+     *  检索此<object> ObjectImpl </code>对象的接口定义。
+     * 
+     * 
      * @return the <code>org.omg.CORBA.Object</code> instance that is the
      *         interface definition for this <code>ObjectImpl</code> object
      */
@@ -305,6 +369,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * its delegate.  This is the <code>ORB</code> object that created
      * the delegate.
      *
+     * <p>
+     *  返回对与此对象及其委托关联的ORB的引用。这是创建代理的<code> ORB </code>对象。
+     * 
+     * 
      * @return the <code>ORB</code> instance that created the
      *          <code>Delegate</code> object contained in this
      *          <code>ObjectImpl</code> object
@@ -319,6 +387,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * <code>ObjectImpl</code> object that has the given
      * policy type.
      *
+     * <p>
+     *  检索具有给定策略类型的<code> ObjectImpl </code>对象的<code> Policy </code>对象。
+     * 
+     * 
      * @param policy_type an int indicating the policy type
      * @return the <code>Policy</code> object that is the specified policy type
      *         and that applies to this <code>ObjectImpl</code> object
@@ -332,6 +404,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Retrieves a list of the domain managers for this
      * <code>ObjectImpl</code> object.
      *
+     * <p>
+     * 检索此<object> ObjectImpl </code>对象的域管理器列表。
+     * 
+     * 
      * @return an array containing the <code>DomainManager</code>
      *         objects for this instance of <code>ObjectImpl</code>
      */
@@ -344,6 +420,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * the given policies to the given instance of
      * <code>SetOverrideType</code>.
      *
+     * <p>
+     *  将给定策略的<code> ObjectImpl </code>对象的覆盖类型设置为<code> SetOverrideType </code>的给定实例。
+     * 
+     * 
      * @param policies an array of <code>Policy</code> objects with the
      *         policies that will replace the current policies or be
      *         added to the current policies
@@ -365,6 +445,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Checks whether this <code>ObjectImpl</code> object is implemented
      * by a local servant.  If so, local invocation API's may be used.
      *
+     * <p>
+     *  检查这个<code> ObjectImpl </code>对象是否由本地服务方实现。如果是,则可以使用本地调用API。
+     * 
+     * 
      * @return <code>true</code> if this object is implemented by a local
      *         servant; <code>false</code> otherwise
      */
@@ -386,6 +470,17 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * directly. The <code>ServantRequest</code> object is valid for only one
      * invocation and cannot be used for more than one invocation.
      *
+     * <p>
+     *  返回对本地服务器的Java引用,该引用应该用于发送指定方法的请求。
+     * 如果这个<code> ObjectImpl </code>对象是本地存根,它将在发送请求之前调用<code> _servant_preinvoke </code>方法以获取要使用的<code> Serv
+     * antObject </code>实例。
+     *  返回对本地服务器的Java引用,该引用应该用于发送指定方法的请求。
+     * <P>
+     *  如果返回一个<code> ServantObject </code>对象,它的<code> servant </code>字段被设置为期望类型的对象(注意：对象可能是实际的servant实例,本地存根
+     * 可以将servant字段强制转换为期望的类型,然后直接调用操作。
+     *  <code> ServantRequest </code>对象仅对一个调用有效,不能用于多个调用。
+     * 
+     * 
      * @param operation a <code>String</code> containing the name of the method
      *        to be invoked. This name should correspond to the method name as
      *        it would be encoded in a GIOP request.
@@ -421,6 +516,12 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * to the method <code>_servant_postinvoke</code> should be placed
      * in a Java <code>finally</code> clause.
      *
+     * <p>
+     * 在本地存根调用对本地servant的操作之后被调用,该操作以前是从对<code> _servant_preinvoke </code>方法的调用中检索的。
+     * 如果<code> _servant_preinvoke </code>方法返回非空值,则必须调用<code> _servant_postinvoke </code>方法,即使服务方调用的方法抛出异常。
+     * 为此,对<code> _servant_postinvoke </code>方法的调用应该放在Java <code> finally </code>子句中。
+     * 
+     * 
      * @param servant the instance of the <code>ServantObject</code>
      *        returned by the <code>_servant_preinvoke</code> method
      */
@@ -431,6 +532,9 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
     /*
      * The following methods were added by orbos/98-04-03: Java to IDL
      * Mapping. These are used by RMI over IIOP.
+     * <p>
+     *  以下方法由orbos / 98-04-03：Java添加到IDL映射。这些被RMI用于IIOP。
+     * 
      */
 
     /**
@@ -439,6 +543,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * which must indicate if a response is expected, that is, whether or not
      * the call is oneway.
      *
+     * <p>
+     *  返回一个<code> OutputStream </code>对象,用于编组给定方法的参数。此方法由存根调用,该存根必须指示是否预期响应,即,呼叫是否是单向的。
+     * 
+     * 
      * @param operation         a String giving the name of the method.
      * @param responseExpected  a boolean -- <code>true</code> if the
      *         request is not one way, that is, a response is expected
@@ -461,6 +569,15 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * <code>ApplicationException</code> object that contains an InputStream from
      * which the user exception state may be unmarshalled.
      *
+     * <p>
+     *  调用操作并返回<code> InputStream </code>对象以读取响应。
+     * 存根提供之前通过调用<code> _request </code>方法返回的<code> OutputStream </code>对象。
+     * 在之前调用<code> _request </code>时指定为参数的方法是此方法调用的方法。
+     * <P>
+     *  如果发生异常,<code> _invoke </code>方法可能会抛出一个包含InputStream的<code> ApplicationException </code>对象,用户异常状态可能未解
+     * 组。
+     * 
+     * 
      * @param output  an OutputStream object for dispatching the request
      * @return an <code>InputStream</code> object containing the marshalled
      *         response to the method invoked
@@ -481,6 +598,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * completed after a call to the method <code>_invoke</code>.
      * Calling this method is optional for the stub.
      *
+     * <p>
+     * 在调用方法<code> _invoke </code>之后解除编组时,将给定的应答流释放回ORB。对存根调用此方法是可选的。
+     * 
+     * 
      * @param input  the <code>InputStream</code> object that was returned
      *        by the <code>_invoke</code> method or the
      *        <code>ApplicationException.getInputStream</code> method;
@@ -496,6 +617,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Returns a <code>String</code> object that represents this
      * <code>ObjectImpl</code> object.
      *
+     * <p>
+     *  返回表示此<object> ObjectImpl </code>对象的<code> String </code>对象。
+     * 
+     * 
      * @return the <code>String</code> representation of this object
      */
     public String toString() {
@@ -508,6 +633,10 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
     /**
      * Returns the hash code for this <code>ObjectImpl</code> object.
      *
+     * <p>
+     *  返回此<object> ObjectImpl </code>对象的哈希码。
+     * 
+     * 
      * @return the hash code for this object
      */
     public int hashCode() {
@@ -521,6 +650,9 @@ abstract public class ObjectImpl implements org.omg.CORBA.Object
      * Compares this <code>ObjectImpl</code> object with the given one
      * for equality.
      *
+     * <p>
+     *  将此<code> ObjectImpl </code>对象与给定的对等比较。
+     * 
      *@param obj the object with which to compare this object
      *@return <code>true</code> if the two objects are equal;
      *        <code>false</code> otherwise

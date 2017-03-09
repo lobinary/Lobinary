@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,11 @@ import java.beans.*;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  ComboBox主题外观<p> * <strong>警告：</strong>此类的序列化对象不会与未来的Swing版本兼容。
+ * 当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Arnaud Weber
  */
 public class MotifComboBoxUI extends BasicComboBoxUI implements Serializable {
@@ -92,6 +98,9 @@ public class MotifComboBoxUI extends BasicComboBoxUI implements Serializable {
 
     /**
      * Overriden to empty the MouseMotionListener.
+     * <p>
+     *  覆盖以清空MouseMotionListener。
+     * 
      */
     protected class MotifComboPopup extends BasicComboPopup {
 
@@ -101,6 +110,9 @@ public class MotifComboBoxUI extends BasicComboBoxUI implements Serializable {
 
         /**
          * Motif combo popup should not track the mouse in the list.
+         * <p>
+         *  Motif组合弹出窗口不应该在列表中跟踪鼠标。
+         * 
          */
         public MouseMotionListener createListMouseMotionListener() {
            return new MouseMotionAdapter() {};
@@ -262,6 +274,9 @@ public class MotifComboBoxUI extends BasicComboBoxUI implements Serializable {
      * This inner class is marked &quot;public&quot; due to a compiler bug.
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <FooUI>.
+     * <p>
+     *  这个内部类被标记为"公共"由于编译器错误。该类应当被视为"受保护的"内部类。仅在<FooUI>的子类中实例化它。
+     * 
      */
     public class ComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
         public ComboBoxLayoutManager() {
@@ -334,6 +349,10 @@ public class MotifComboBoxUI extends BasicComboBoxUI implements Serializable {
     /**
      *{@inheritDoc}
      *
+     * <p>
+     *  @inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     protected PropertyChangeListener createPropertyChangeListener() {
@@ -342,6 +361,8 @@ public class MotifComboBoxUI extends BasicComboBoxUI implements Serializable {
 
     /**
      * This class should be made &quot;protected&quot; in future releases.
+     * <p>
+     *  这个类应该被"保护"在未来的版本。
      */
     private class MotifPropertyChangeListener
             extends BasicComboBoxUI.PropertyChangeHandler {

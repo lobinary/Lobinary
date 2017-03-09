@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Version.java,v 1.2 2005/09/28 13:49:09 pvedula Exp $
+ * <p>
+ *  $ Id：Version.java,v 1.2 2005/09/28 13:49:09 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -29,6 +42,10 @@ package com.sun.org.apache.xml.internal.serializer;
  * org.apache.project-name.Version.getVersion() be a standard way
  * to get version information.</P>
  * @xsl.usage general
+ * <p>
+ *  用于跟踪Serializer版本号的管理类。 <P>此类实现了将org.apache.project-name.Version.getVersion()作为获取版本信息的标准方法的即将到来的标准。
+ * </P> @ xsl.usage general。
+ * 
  */
 public final class Version
 {
@@ -40,6 +57,13 @@ public final class Version
    *
    * Futurework: have this read version info from jar manifest.
    *
+   * <p>
+   *  获取当前Serializer的基本版本字符串。
+   * 版本字符串格式为<CODE>"<B> Serializer </B> <B> Java </B> v.r [.dd | <B> D </B> nn]"</CODE>。
+   * 
+   *  未来工作：有这个从jar清单读取版本信息。
+   * 
+   * 
    * @return String denoting our current version
    */
   public static String getVersion()
@@ -53,6 +77,10 @@ public final class Version
   /**
    * Print the processor version to the command line.
    *
+   * <p>
+   *  将处理器版本打印到命令行。
+   * 
+   * 
    * @param argv command line arguments, unused.
    */
   public static void _main(String argv[])
@@ -62,6 +90,9 @@ public final class Version
 
   /**
    * Name of product: Serializer.
+   * <p>
+   *  产品名称：Serializer。
+   * 
    */
   public static String getProduct()
   {
@@ -70,6 +101,9 @@ public final class Version
 
   /**
    * Implementation Language: Java.
+   * <p>
+   *  实现语言：Java。
+   * 
    */
   public static String getImplementationLanguage()
   {
@@ -87,6 +121,11 @@ public final class Version
    *          Clients should carefully consider the implications
    *          of new versions as external interfaces and behaviour
    *          may have changed.
+   * <p>
+   * 主版本号。版本号。只有当前一版本具有显着的外部明显增强时,此更改才会更改。 'n'表示第n个版本。
+   * 
+   *  客户端应该仔细考虑新版本的影响,因为外部接口和行为可能已更改。
+   * 
    */
   public static int getMajorVersionNum()
   {
@@ -101,6 +140,9 @@ public final class Version
    *               implementation of a new W3C specification.
    *            -  API or behaviour change.
    *            -  its designated as a reference release.
+   * <p>
+   *  版本号。版本号。这在以下情况下改变： - 要添加新的功能集,例如,实施新的W3C规范。 -  API或行为更改。 - 其被指定为参考释放。
+   * 
    */
   public static int getReleaseVersionNum()
   {
@@ -115,6 +157,9 @@ public final class Version
    *          with the release and contains no API changes.
    *          When missing, it designates the final and complete
    *          development drop for a release.
+   * <p>
+   *  维护液滴数。用于指定应用于特定版本的维护水滴的可选标识符,包含报告的缺陷的修复程序。它保持与发行版的兼容性,并且不包含API更改。当缺失时,它指定发布的最终和完整的开发下降。
+   * 
    */
   public static int getMaintenanceVersionNum()
   {
@@ -137,6 +182,10 @@ public final class Version
    *          Each 'D' drops can contain functional enhancements as
    *          well as defect fixes. 'D' drops may not be as stable as
    *          the final releases.
+   * <p>
+   *  发展水滴数。可选标识符指定特定发行版的开发。 D01是新版本的第一个开发下拉。
+   * 
+   *  发展落地正在朝着最终发布的方向发展。具体的开发下降可能不能完全实现新特征的所有方面,这可能需要几个开发下降来完成。在发布的最后一个点,D后缀将被省略。
    */
   public static int getDevelopmentVersionNum()
   {

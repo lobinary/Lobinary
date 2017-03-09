@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CORBA;
 
 /**
@@ -11,6 +12,8 @@ package org.omg.CORBA;
 /**
    * Thrown to indicate problems with parameter values passed to the
    * <code>ORB.create_policy</code> operation.  
+   * <p>
+   * 
    */
 public final class PolicyErrorHolder implements org.omg.CORBA.portable.Streamable
 {

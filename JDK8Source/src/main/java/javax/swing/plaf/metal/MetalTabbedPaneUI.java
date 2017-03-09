@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  BasicTabbedPaneUI的Metal子类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Tom Santos
  */
 
@@ -777,6 +785,9 @@ public class MetalTabbedPaneUI extends BasicTabbedPaneUI {
 
     /**
      * Overridden to do nothing for the Java L&amp;F.
+     * <p>
+     *  覆盖为Java L&amp; F不做任何事情。
+     * 
      */
     protected int getTabLabelShiftX( int tabPlacement, int tabIndex, boolean isSelected ) {
         return 0;
@@ -785,6 +796,9 @@ public class MetalTabbedPaneUI extends BasicTabbedPaneUI {
 
     /**
      * Overridden to do nothing for the Java L&amp;F.
+     * <p>
+     *  覆盖为Java L&amp; F不做任何事情。
+     * 
      */
     protected int getTabLabelShiftY( int tabPlacement, int tabIndex, boolean isSelected ) {
         return 0;
@@ -793,6 +807,10 @@ public class MetalTabbedPaneUI extends BasicTabbedPaneUI {
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     protected int getBaselineOffset() {
@@ -1176,6 +1194,9 @@ public class MetalTabbedPaneUI extends BasicTabbedPaneUI {
 
     /**
      * Returns the color to use for the specified tab.
+     * <p>
+     *  返回要用于指定选项卡的颜色。
+     * 
      */
     private Color getUnselectedBackgroundAt(int index) {
         Color color = tabPane.getBackgroundAt(index);
@@ -1189,6 +1210,9 @@ public class MetalTabbedPaneUI extends BasicTabbedPaneUI {
 
     /**
      * Returns the tab index of JTabbedPane the mouse is currently over
+     * <p>
+     *  返回鼠标当前结束的JTabbedPane的Tab索引
+     * 
      */
     int getRolloverTabIndex() {
         return getRolloverTab();
@@ -1197,6 +1221,8 @@ public class MetalTabbedPaneUI extends BasicTabbedPaneUI {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code MetalTabbedPaneUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code MetalTabbedPaneUI}的子类中实例化它。
      */
     public class TabbedPaneLayout extends BasicTabbedPaneUI.TabbedPaneLayout {
 

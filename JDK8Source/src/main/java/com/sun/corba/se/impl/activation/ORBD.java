@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
@@ -58,6 +59,8 @@ import com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl;
 
 /**
  *
+ * <p>
+ * 
  * @author      Rohit Garg
  * @since       JDK1.2
  */
@@ -228,6 +231,9 @@ public class ORBD
     /**
      * Ensure that the Db directory exists. If not, create the Db
      * and the log directory and return true. Otherwise return false.
+     * <p>
+     *  确保Db目录存在。如果没有,创建Db和日志目录并返回true。否则返回false。
+     * 
      */
     protected boolean createSystemDirs(String defaultDbDir)
     {
@@ -314,6 +320,9 @@ public class ORBD
     /**
      * Go through the list of ORB Servers and initialize and start
      * them up.
+     * <p>
+     *  浏览ORB服务器列表,并初始化并启动它们。
+     * 
      */
     protected void installOrbServers(RepositoryImpl repository,
                                      Activator activator)
@@ -347,6 +356,9 @@ public class ORBD
      * List of servers to be auto registered and started by the ORBd.
      *
      * Each server entry is of the form {id, name, path, args, vmargs}.
+     * <p>
+     *  由ORBd自动注册和启动的服务器列表。
+     * 
      */
     private static String[][] orbServers = {
         {""}

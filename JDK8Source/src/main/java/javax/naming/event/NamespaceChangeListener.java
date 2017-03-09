@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,20 @@ package javax.naming.event;
   * should also implement the <tt>ObjectChangeListener</tt>
   * interface.
   *
+  * <p>
+  *  指定对命名空间更改感兴趣的侦听器必须实现的方法。
+  * 具体来说,监听器对<tt> OBJECT_ADDED </TT>,<TT> OBJECT_RENAMED </TT>或<TT> OBJECT_REMOVED </TT>的事件类型感兴趣于<tt> Nam
+  * ingEvent </tt>。
+  *  指定对命名空间更改感兴趣的侦听器必须实现的方法。
+  * p>
+  *  这样的监听器必须：
+  * ol>
+  *  li>实现此接口及其方法。 li>实现<tt> NamingListener.namingExceptionThrown()</tt>,以便在尝试收集有关事件的信息时通知抛出的异常。
+  *  li>使用源的<tt> addNamingListener()</tt>方法向源注册。
+  * /ol>
+  *  想要通知<tt> OBJECT_CHANGED </tt>事件类型的侦听器也应实现<tt> ObjectChangeListener </tt>接口。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -61,6 +76,12 @@ public interface NamespaceChangeListener extends NamingListener {
      *<p>
      * The binding of the newly added object can be obtained using
      * <tt>evt.getNewBinding()</tt>.
+     * <p>
+     *  在添加对象时调用。
+     * p>
+     *  新添加的对象的绑定可以使用<tt> evt.getNewBinding()</tt>获得。
+     * 
+     * 
      * @param evt The nonnull event.
      * @see NamingEvent#OBJECT_ADDED
      */
@@ -71,6 +92,12 @@ public interface NamespaceChangeListener extends NamingListener {
      *<p>
      * The binding of the newly removed object can be obtained using
      * <tt>evt.getOldBinding()</tt>.
+     * <p>
+     *  当对象已删除时调用。
+     * p>
+     *  可以使用<tt> evt.getOldBinding()</tt>来获取新删除的对象的绑定。
+     * 
+     * 
      * @param evt The nonnull event.
      * @see NamingEvent#OBJECT_REMOVED
      */
@@ -84,6 +111,11 @@ public interface NamespaceChangeListener extends NamingListener {
      * can be obtained using <tt>evt.getOldBinding()</tt>.
      * One of these may be null if the old/new binding was outside the
      * scope in which the listener has registered interest.
+     * <p>
+     *  当对象已重命名时调用。
+     * p>
+     *  可以使用<tt> evt.getNewBinding()</tt>来获取重命名的对象的绑定。它的旧绑定(重命名之前)可以使用<tt> evt.getOldBinding()</tt>获取。
+     * 
      * @param evt The nonnull event.
      * @see NamingEvent#OBJECT_RENAMED
      */

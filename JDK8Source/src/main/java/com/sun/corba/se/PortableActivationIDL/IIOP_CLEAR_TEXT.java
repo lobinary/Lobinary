@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -15,6 +16,8 @@ public interface IIOP_CLEAR_TEXT
     * If you change the value of this constant then update
     * core.EndPoint accordingly.  It has a duplicate definition
     * to avoid a compilation dependency.
+    * <p>
+    * 
     */
   public static final String value = "IIOP_CLEAR_TEXT";
 }

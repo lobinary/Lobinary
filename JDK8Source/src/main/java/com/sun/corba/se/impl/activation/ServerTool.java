@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,8 @@ import com.sun.corba.se.spi.activation.LocatorPackage.ServerLocationPerORB;
 
 /**
  *
+ * <p>
+ * 
  * @author      Anita Jindal
  * @since       JDK1.3
  */
@@ -681,6 +684,8 @@ static void printServerDef(ServerDef serverDef, int serverId,
 /**
  * Do a simple bubble sort to sort the server ids in ascending
  * order.
+ * <p>
+ *  执行简单的气泡排序以按升序对服务器标识进行排序。
  */
 static void sortServers(int[] serverIds)
 {

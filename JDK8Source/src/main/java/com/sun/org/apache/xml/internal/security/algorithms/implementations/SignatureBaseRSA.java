@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.algorithms.implementations;
 
@@ -53,6 +62,10 @@ public abstract class SignatureBaseRSA extends SignatureAlgorithmSpi {
     /**
      * Constructor SignatureRSA
      *
+     * <p>
+     *  构造符SignatureRSA
+     * 
+     * 
      * @throws XMLSignatureException
      */
     public SignatureBaseRSA() throws XMLSignatureException {
@@ -224,12 +237,19 @@ public abstract class SignatureBaseRSA extends SignatureAlgorithmSpi {
 
     /**
      * Class SignatureRSASHA1
+     * <p>
+     *  类签名RSASHA1
+     * 
      */
     public static class SignatureRSASHA1 extends SignatureBaseRSA {
 
         /**
          * Constructor SignatureRSASHA1
          *
+         * <p>
+         *  构造符签名RSASHA1
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public SignatureRSASHA1() throws XMLSignatureException {
@@ -244,12 +264,19 @@ public abstract class SignatureBaseRSA extends SignatureAlgorithmSpi {
 
     /**
      * Class SignatureRSASHA256
+     * <p>
+     *  类签名RSASHA256
+     * 
      */
     public static class SignatureRSASHA256 extends SignatureBaseRSA {
 
         /**
          * Constructor SignatureRSASHA256
          *
+         * <p>
+         *  构造符签名RSASHA256
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public SignatureRSASHA256() throws XMLSignatureException {
@@ -264,12 +291,19 @@ public abstract class SignatureBaseRSA extends SignatureAlgorithmSpi {
 
     /**
      * Class SignatureRSASHA384
+     * <p>
+     *  类签名RSASHA384
+     * 
      */
     public static class SignatureRSASHA384 extends SignatureBaseRSA {
 
         /**
          * Constructor SignatureRSASHA384
          *
+         * <p>
+         *  构建体SignatureRSASHA384
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public SignatureRSASHA384() throws XMLSignatureException {
@@ -284,12 +318,19 @@ public abstract class SignatureBaseRSA extends SignatureAlgorithmSpi {
 
     /**
      * Class SignatureRSASHA512
+     * <p>
+     *  类签名RSASHA512
+     * 
      */
     public static class SignatureRSASHA512 extends SignatureBaseRSA {
 
         /**
          * Constructor SignatureRSASHA512
          *
+         * <p>
+         *  构造符签名RSASHA512
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public SignatureRSASHA512() throws XMLSignatureException {
@@ -304,12 +345,19 @@ public abstract class SignatureBaseRSA extends SignatureAlgorithmSpi {
 
     /**
      * Class SignatureRSARIPEMD160
+     * <p>
+     *  Class SignatureRSARIPEMD160
+     * 
      */
     public static class SignatureRSARIPEMD160 extends SignatureBaseRSA {
 
         /**
          * Constructor SignatureRSARIPEMD160
          *
+         * <p>
+         *  构造符签名RSARIPEMD160
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public SignatureRSARIPEMD160() throws XMLSignatureException {
@@ -324,12 +372,18 @@ public abstract class SignatureBaseRSA extends SignatureAlgorithmSpi {
 
     /**
      * Class SignatureRSAMD5
+     * <p>
+     *  SignatureRSAMD5类
+     * 
      */
     public static class SignatureRSAMD5 extends SignatureBaseRSA {
 
         /**
          * Constructor SignatureRSAMD5
          *
+         * <p>
+         *  构造符签名RSAMD5
+         * 
          * @throws XMLSignatureException
          */
         public SignatureRSAMD5() throws XMLSignatureException {

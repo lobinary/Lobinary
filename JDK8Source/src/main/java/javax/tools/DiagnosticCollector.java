@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.util.List;
 /**
  * Provides an easy way to collect diagnostics in a list.
  *
+ * <p>
+ *  提供在列表中收集诊断的简单方法。
+ * 
+ * 
  * @param <S> the type of source objects used by diagnostics received
  * by this object
  *
@@ -50,6 +55,9 @@ public final class DiagnosticCollector<S> implements DiagnosticListener<S> {
     /**
      * Gets a list view of diagnostics collected by this object.
      *
+     * <p>
+     *  获取此对象收集的诊断信息的列表视图。
+     * 
      * @return a list view of diagnostics
      */
     public List<Diagnostic<? extends S>> getDiagnostics() {

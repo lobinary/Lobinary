@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.io.IOException;
 /**
  * This class represents an error that has occurred when using SASL.
  *
+ * <p>
+ *  此类表示在使用SASL时发生的错误。
+ * 
+ * 
  * @since 1.5
  *
  * @author Rosanna Lee
@@ -39,6 +44,10 @@ import java.io.IOException;
 public class SaslException extends IOException {
     /**
      * The possibly null root cause exception.
+     * <p>
+     *  可能为空的根本原因异常。
+     * 
+     * 
      * @serial
      */
     // Required for serialization interoperability with JSR 28
@@ -47,6 +56,9 @@ public class SaslException extends IOException {
     /**
      * Constructs a new instance of {@code SaslException}.
      * The root exception and the detailed message are null.
+     * <p>
+     *  构造{@code SaslException}的新实例。根异常和详细消息为null。
+     * 
      */
     public SaslException () {
         super();
@@ -55,6 +67,10 @@ public class SaslException extends IOException {
     /**
      * Constructs a new instance of {@code SaslException} with a detailed message.
      * The root exception is null.
+     * <p>
+     *  使用详细消息构造{@code SaslException}的新实例。根异常为null。
+     * 
+     * 
      * @param detail A possibly null string containing details of the exception.
      *
      * @see java.lang.Throwable#getMessage
@@ -73,6 +89,13 @@ public class SaslException extends IOException {
      * SaslException's root exception would be then be the exception thrown
      * by the callback handler.
      *
+     * <p>
+     *  构造具有详细消息和根异常的{@code SaslException}的新实例。
+     * 例如,SaslException可能来自回调处理程序的问题,如果它不支持请求的回调,它可能会抛出一个NoSuchCallbackException,或者如果获取回调的数据有问题,则抛出IOExcepti
+     * on。
+     *  构造具有详细消息和根异常的{@code SaslException}的新实例。 SaslException的根异常将是由回调处理程序抛出的异常。
+     * 
+     * 
      * @param detail A possibly null string containing details of the exception.
      * @param ex A possibly null root exception that caused this exception.
      *
@@ -89,6 +112,9 @@ public class SaslException extends IOException {
     /*
      * Override Throwable.getCause() to ensure deserialized object from
      * JSR 28 would return same value for getCause() (i.e., _exception).
+     * <p>
+     *  重写Throwable.getCause()以确保来自JSR 28的反序列化对象将为getCause()返回相同的值(即_exception)。
+     * 
      */
     public Throwable getCause() {
         return _exception;
@@ -97,6 +123,9 @@ public class SaslException extends IOException {
     /*
      * Override Throwable.initCause() to match getCause() by updating
      * _exception as well.
+     * <p>
+     *  覆盖Throwable.initCause()以通过更新_exception也匹配getCause()。
+     * 
      */
     public Throwable initCause(Throwable cause) {
         super.initCause(cause);
@@ -112,6 +141,9 @@ public class SaslException extends IOException {
      * exception. This string representation
      * is meant for debugging and not meant to be interpreted
      * programmatically.
+     * <p>
+     *  返回此异常的字符串表示形式。字符串表示包含此异常的类名称及其详细消息,如果它有根异常,则表示根异常的字符串表示。此字符串表示形式用于调试,而不是以编程方式解释。
+     * 
      * @return The non-null string representation of this exception.
      * @see java.lang.Throwable#getMessage
      */

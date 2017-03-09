@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,14 @@ import java.security.Principal;
  * on how to achieve this.  Authorization decisions can then be based upon
  * the Principals associated with a <code>Subject</code>.
  *
+ * <p>
+ *  <p>此类实现<code> Principal </code>接口并表示用户的Unix标识号(UID)。
+ * 
+ *  <p>诸如此<code> UnixNumericUserPrincipal </code>之类的主体可以与特定的<code> Subject </code>相关联以增加具有附加标识的<code> Su
+ * bject </code>。
+ * 有关如何实现这一点的更多信息,请参阅<code> Subject </code>类。授权决定可以基于与<code> Subject </code>相关联的主体。
+ * 
+ * 
  * @see java.security.Principal
  * @see javax.security.auth.Subject
  */
@@ -48,6 +57,8 @@ public class UnixNumericUserPrincipal implements
     private static final long serialVersionUID = -4329764253802397821L;
 
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private String name;
@@ -59,6 +70,12 @@ public class UnixNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  使用用户标识号(UID)的<code> String </code>表示形式创建<code> UnixNumericUserPrincipal </code>。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the user identification number (UID) for this user.
      *
      * @exception NullPointerException if the <code>name</code>
@@ -83,6 +100,12 @@ public class UnixNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  使用用户标识号(UID)的长表示创建<code> UnixNumericUserPrincipal </code>。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the user identification number (UID) for this user
      *                  represented as a long.
      */
@@ -96,6 +119,12 @@ public class UnixNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  返回此<code> UnixNumericUserPrincipal </code>的用户标识号(UID)。
+     * 
+     * <p>
+     * 
+     * 
      * @return the user identification number (UID) for this
      *          <code>UnixNumericUserPrincipal</code>
      */
@@ -109,6 +138,12 @@ public class UnixNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  将此<code> UnixNumericUserPrincipal </code>的用户标识号(UID)返回为长整型。
+     * 
+     * <p>
+     * 
+     * 
      * @return the user identification number (UID) for this
      *          <code>UnixNumericUserPrincipal</code> as a long.
      */
@@ -122,6 +157,12 @@ public class UnixNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  返回此<code> UnixNumericUserPrincipal </code>的字符串表示形式。
+     * 
+     * <p>
+     * 
+     * 
      * @return a string representation of this
      *          <code>UnixNumericUserPrincipal</code>.
      */
@@ -144,6 +185,14 @@ public class UnixNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  将指定的对象与此<code> UnixNumericUserPrincipal </code>进行比较以确保相等。
+     * 如果给定对象也是<code> UnixNumericUserPrincipal </code>,并且两个UnixNumericUserPrincipals具有相同的用户标识号(UID),则返回true。
+     *  将指定的对象与此<code> UnixNumericUserPrincipal </code>进行比较以确保相等。
+     * 
+     * <p>
+     * 
+     * 
      * @param o Object to be compared for equality with this
      *          <code>UnixNumericUserPrincipal</code>.
      *
@@ -171,6 +220,8 @@ public class UnixNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     * 
      * @return a hash code for this <code>UnixNumericUserPrincipal</code>.
      */
     public int hashCode() {

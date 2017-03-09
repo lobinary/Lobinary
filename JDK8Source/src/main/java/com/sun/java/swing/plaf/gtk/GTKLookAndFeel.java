@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,8 @@ import sun.swing.DefaultLayoutStyle;
 import sun.swing.SwingUtilities2;
 
 /**
+/* <p>
+/* 
  * @author Scott Violet
  */
 public class GTKLookAndFeel extends SynthLookAndFeel {
@@ -59,12 +62,18 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
      * desktop property 'gnome.Xft/Antialias' and 'gnome.Xft/RGBA'
      * We should assume ON - or some variation of ON as no GTK desktop
      * ships with it OFF.
+     * <p>
+     *  是否对文本进行抗锯齿。这关闭桌面属性"gnome.Xft / Antialias"和"gnome.Xft / RGBA"我们应该假设ON  - 或一些变化的ON,因为没有GTK桌面关闭它。
+     * 
      */
     static Object aaTextInfo;
 
     /**
      * Solaris, or Linux with Sun JDS in a CJK Locale.
      * Used to determine if Sun's high quality CJK fonts are present.
+     * <p>
+     *  Solaris或带有Sun JDS的Linux在CJK语言环境中。用于确定是否存在Sun的高质量CJK字体。
+     * 
      */
     private static boolean isSunCJK;
 
@@ -74,33 +83,51 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
      * for CJK locales which is not likely to be a good universal answer, and
      * also its off for remote display. So this provides an unsupported
      * way to explicitly request that it be "on".
+     * <p>
+     *  用于覆盖是否应使用系统(桌面)文本抗锯齿设置。这样做的原因是,目前它的CJK语言环境的"关闭",这不可能是一个良好的通用答案,并且它的远程显示。所以这提供了一个不支持的方式来显式地请求它是"开"。
+     * 
      */
     private static boolean gtkAAFontSettingsCond;
 
     /**
      * Font to use in places where there is no widget.
+     * <p>
+     *  在没有窗口小部件的地方使用的字体。
+     * 
      */
     private Font fallbackFont;
 
     /**
      * If true, GTKLookAndFeel is inside the <code>initialize</code>
      * method.
+     * <p>
+     *  如果为true,GTKLookAndFeel在<code> initialize </code>方法中。
+     * 
      */
     private boolean inInitialize;
 
     /**
      * If true, PropertyChangeListeners have been installed for the
      * Toolkit.
+     * <p>
+     *  如果为true,则已为Toolkit安装了PropertyChangeListeners。
+     * 
      */
     private boolean pclInstalled;
 
     /**
      * StyleFactory needs to be created only the first time.
+     * <p>
+     *  StyleFactory只需要第一次创建。
+     * 
      */
     private GTKStyleFactory styleFactory;
 
     /**
      * Cached theme name. Used by GTKGraphicsUtils
+     * <p>
+     *  缓存主题名称。使用的GTKGraphicsUtils
+     * 
      */
     private static String gtkThemeName = "Default";
 
@@ -147,6 +174,9 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
 
     /**
      * Returns true if running on system containing at least 2.2.
+     * <p>
+     *  如果在包含至少2.2的系统上运行,则返回true。
+     * 
      */
     static boolean is2_2() {
         // NOTE: We're currently hard coding to use 2.2.
@@ -158,6 +188,9 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
 
     /**
      * Maps a swing constant to a GTK constant.
+     * <p>
+     *  将摆动常数映射到GTK常数。
+     * 
      */
     static PositionType SwingOrientationConstantToGTK(int side) {
         switch (side) {
@@ -177,6 +210,9 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
     /**
      * Maps from Synth state to native GTK state using typesafe enumeration
      * StateType.  This is only used by GTKEngine.
+     * <p>
+     *  使用类型安全枚举StateType从Synth状态到本机GTK状态的映射。这只是由GTKEngine使用。
+     * 
      */
     static StateType synthStateToGTKStateType(int state) {
         StateType result;
@@ -213,6 +249,15 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
      * <tr><td>SynthConstants.ENABLED<td>NORMAL
      * </table>
      * Additionally some widgets are special cased.
+     * <p>
+     * 从合成状态映射到相应的GTK状态。
+     *  GTK状态命名不同于Synth的状态,下面给出了映射：<table> <tr> <td> Synth <td> GTK <tr> <td> SynthConstants.PRESSED <td> AC
+     * TIVE <tr> <td> SynthConstants .SELECTED <td> SELECTED <tr> <td> SynthConstants.MOUSE_OVER <td> PRELIG
+     * HT <tr> <td> SynthConstants.DISABLED <td> INSENSITIVE <tr> <td> SynthConstants.ENABLED <td> NORMAL。
+     * 从合成状态映射到相应的GTK状态。
+     * </table>
+     *  另外一些小部件是特殊的。
+     * 
      */
     static int synthStateToGTKState(Region region, int state) {
         if ((state & SynthConstants.PRESSED) != 0) {
@@ -417,6 +462,8 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
                       "KP_LEFT", DefaultEditorKit.backwardAction,
                         "ENTER", JTextField.notifyAction,
               "ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+              "ctrl BACK_SLASH", "unselect"/* <p>
+              "ctrl BACK_SLASH", "unselect"/* 
                "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
             });
 
@@ -457,6 +504,8 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
                       "KP_LEFT", DefaultEditorKit.backwardAction,
                         "ENTER", JTextField.notifyAction,
               "ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+              "ctrl BACK_SLASH", "unselect"/* <p>
+              "ctrl BACK_SLASH", "unselect"/* 
                "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
             });
 
@@ -524,6 +573,12 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
                            "ctrl T", "next-link-action",
                      "ctrl shift T", "previous-link-action",
                        "ctrl SPACE", "activate-link-action",
+                  "ctrl BACK_SLASH", "unselect"/* <p>
+                  "ctrl BACK_SLASH", "unselect"/*  "ctrl HOME",DefaultEditorKit.selectionEndAction,"ctrl T","next-link-action","ctrl HOME",DefaultEdito
+                  "ctrl BACK_SLASH", "unselect"/* rKit.beginAction,"ctrl END",DefaultEditorKit.endAction,"ctrl shift HOME",DefaultEditorKit.selectionBe
+                  "ctrl BACK_SLASH", "unselect"/* ginAction, ,"ctrl shift T","上一链接动作","ctrl SPACE","activate-link-action"。
+                  "ctrl BACK_SLASH", "unselect"/* 
+                  "ctrl BACK_SLASH", "unselect"/* 
                    "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
             });
 
@@ -1411,6 +1466,9 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
 
     /**
      * Creates the GTK look and feel class for the passed in Component.
+     * <p>
+     *  为组件中传递的内容创建GTK外观类。
+     * 
      */
     public static ComponentUI createUI(JComponent c) {
         String key = c.getUIClassID().intern();
@@ -1423,6 +1481,9 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
 
     /**
      * Returns the cached gtkThemeName
+     * <p>
+     *  返回缓存的gtkThemeName
+     * 
      */
     static String getGtkThemeName() {
         return gtkThemeName;
@@ -1439,6 +1500,10 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
          * fail (since we've already verified native GTK support in
          * isSupportedLookAndFeel()), but we can throw an error in the
          * failure situation just in case.
+         * <p>
+         *  我们需要调用loadGTK()以确保加载本机GTK库。
+         * 这是不太可能的,这个调用将失败(因为我们已经验证了本机GTK支持isSupportedLookAndFeel()),但我们可以在错误情况下抛出一个错误,以防万一。
+         * 
          */
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         if (toolkit instanceof UNIXToolkit &&
@@ -1465,6 +1530,11 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
          * set for specific fonts.
          * REMIND 2: See comment on isLocalDisplay() definition regarding
          * XRender.
+         * <p>
+         * 检查是否应使用系统AA字体设置。 Sun的JDS(用于Linux和Solaris)附带高质量的CJK字体,并通过fontconfig指定这些在B&W中渲染以利用嵌入式位图。
+         * 如果是Sun CJK语言环境或远程显示,则通过条件变量指示在这种情况下L&F建议忽略桌面设置。在其他Unix(例如Linux)上,这不适用。
+         * 提醒1：isSunCJK测试真的只是一个占位符,直到我们可以正确查询fontconfig并使用为特定字体设置的属性。提醒2：请参阅关于XRender的isLocalDisplay()定义的注释。
+         * 
          */
         gtkAAFontSettingsCond = !isSunCJK && SwingUtilities2.isLocalDisplay();
         aaTextInfo = SwingUtilities2.AATextInfo.getAATextInfo(gtkAAFontSettingsCond);
@@ -1512,6 +1582,9 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
                          * However we don't need to read these here as
                          * the UIDefaults reads them and this event causes
                          * those to be reinitialised.
+                         * <p>
+                         *  "gnome.Xft / Antialias"和"gnome.Xft / RGBA"。然而,当UIDefault读取它们时,我们不需要在这里读取这些事件,并且这个事件导致那些被重新初始化。
+                         * 
                          */
                         if ("gnome.Net/ThemeName".equals(name)) {
                             GTKEngine.INSTANCE.themeChanged();
@@ -1660,6 +1733,10 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
      * <code>SynthStyles</code> from the <code>SynthStyleFactory</code>
      * when the ancestor of the Component changes.
      *
+     * <p>
+     *  返回当组件的祖代更改时,UI是否应从<code> SynthStyleFactory </code>更新其<code> SynthStyles </code>。
+     * 
+     * 
      * @return whether or not the UIs should update their
      * <code>SynthStyles</code> from the <code>SynthStyleFactory</code>
      * when the ancestor changed.
@@ -1670,6 +1747,9 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public LayoutStyle getLayoutStyle() {
         return GnomeLayoutStyle.INSTANCE;
@@ -1682,6 +1762,10 @@ public class GTKLookAndFeel extends SynthLookAndFeel {
      * You'll notice this doesn't do the radiobutton/checkbox border
      * adjustments that windows/metal do.  This is because gtk doesn't
      * provide margins/insets for checkbox/radiobuttons.
+     * <p>
+     *  Gnome布局样式。
+     * 从：http://developer.gnome.org/projects/gup/hig/2.0/design-window.html#window-layout-spacing你会注意到这不做单选按
+     * 钮/复选框边框调整窗口/金属做。
      */
     private static class GnomeLayoutStyle extends DefaultLayoutStyle {
         private static GnomeLayoutStyle INSTANCE = new GnomeLayoutStyle();

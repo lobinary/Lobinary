@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.xni;
@@ -28,6 +38,10 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource;
  * interested in DTD information implement this interface and are
  * registered as the DTD handler on the DTD source.
  *
+ * <p>
+ *  DTD处理程序接口定义回调方法以报告XML文档的DTD中的信息项。对DTD信息感兴趣的解析器组件实现此接口,并在DTD源上注册为DTD处理程序。
+ * 
+ * 
  * @see XMLDTDContentModelHandler
  *
  * @author Andy Clark, IBM
@@ -42,6 +56,10 @@ public interface XMLDTDHandler {
     /**
      * Conditional section: INCLUDE.
      *
+     * <p>
+     *  条件部分：INCLUDE。
+     * 
+     * 
      * @see #CONDITIONAL_IGNORE
      */
     public static final short CONDITIONAL_INCLUDE = 0;
@@ -49,6 +67,10 @@ public interface XMLDTDHandler {
     /**
      * Conditional section: IGNORE.
      *
+     * <p>
+     *  条件部分：IGNORE。
+     * 
+     * 
      * @see #CONDITIONAL_INCLUDE
      */
     public static final short CONDITIONAL_IGNORE = 1;
@@ -60,6 +82,10 @@ public interface XMLDTDHandler {
     /**
      * The start of the DTD.
      *
+     * <p>
+     *  DTD的开始。
+     * 
+     * 
      * @param locator  The document locator, or null if the document
      *                 location cannot be reported during the parsing of
      *                 the document DTD. However, it is <em>strongly</em>
@@ -78,6 +104,10 @@ public interface XMLDTDHandler {
      * This method notifies of the start of a parameter entity. The parameter
      * entity name start with a '%' character.
      *
+     * <p>
+     *  该方法通知参数实体的开始。参数实体名称以"％"字符开头。
+     * 
+     * 
      * @param name     The name of the parameter entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -101,6 +131,12 @@ public interface XMLDTDHandler {
      * <strong>Note:</strong> This method is only called for external
      * parameter entities referenced in the DTD.
      *
+     * <p>
+     *  通知实体中存在TextDecl行。如果存在,此方法将在startEntity调用之后立即调用。
+     * <p>
+     *  <strong>注意</strong>：仅在DTD中引用的外部参数实体才调用此方法。
+     * 
+     * 
      * @param version  The XML version, or null if not specified.
      * @param encoding The IANA encoding name of the entity.
      * @param augmentations Additional information that may include infoset
@@ -115,6 +151,10 @@ public interface XMLDTDHandler {
      * This method notifies the end of a parameter entity. Parameter entity
      * names begin with a '%' character.
      *
+     * <p>
+     * 此方法通知参数实体的结束。参数实体名称以"％"字符开头。
+     * 
+     * 
      * @param name The name of the parameter entity.
      * @param augmentations Additional information that may include infoset
      *                      augmentations.
@@ -127,6 +167,10 @@ public interface XMLDTDHandler {
     /**
      * The start of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的开始。
+     * 
+     * 
      * @param identifier The resource identifier.
      * @param augmentations
      *                   Additional information that may include infoset
@@ -141,6 +185,10 @@ public interface XMLDTDHandler {
     /**
      * The end of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的结束。
+     * 
+     * 
      * @param augmentations Additional information that may include infoset
      *                      augmentations.
      *
@@ -152,6 +200,10 @@ public interface XMLDTDHandler {
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text The text in the comment.
      * @param augmentations Additional information that may include infoset
      *                      augmentations.
@@ -172,6 +224,12 @@ public interface XMLDTDHandler {
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     *  一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augmentations Additional information that may include infoset
@@ -186,6 +244,10 @@ public interface XMLDTDHandler {
     /**
      * An element declaration.
      *
+     * <p>
+     *  元素声明。
+     * 
+     * 
      * @param name         The name of the element.
      * @param contentModel The element content model.
      * @param augmentations Additional information that may include infoset
@@ -200,6 +262,10 @@ public interface XMLDTDHandler {
     /**
      * The start of an attribute list.
      *
+     * <p>
+     *  属性列表的开始。
+     * 
+     * 
      * @param elementName The name of the element that this attribute
      *                    list is associated with.
      * @param augmentations Additional information that may include infoset
@@ -213,6 +279,10 @@ public interface XMLDTDHandler {
     /**
      * An attribute declaration.
      *
+     * <p>
+     *  属性声明。
+     * 
+     * 
      * @param elementName   The name of the element that this attribute
      *                      is associated with.
      * @param attributeName The name of the attribute.
@@ -244,6 +314,10 @@ public interface XMLDTDHandler {
     /**
      * The end of an attribute list.
      *
+     * <p>
+     *  属性列表的结尾。
+     * 
+     * 
      * @param augmentations Additional information that may include infoset
      *                      augmentations.
      *
@@ -254,6 +328,10 @@ public interface XMLDTDHandler {
     /**
      * An internal entity declaration.
      *
+     * <p>
+     *  内部实体声明。
+     * 
+     * 
      * @param name The name of the entity. Parameter entity names start with
      *             '%', whereas the name of a general entity is just the
      *             entity name.
@@ -275,6 +353,10 @@ public interface XMLDTDHandler {
     /**
      * An external entity declaration.
      *
+     * <p>
+     *  外部实体声明。
+     * 
+     * 
      * @param name     The name of the entity. Parameter entity names start
      *                 with '%', whereas the name of a general entity is just
      *                 the entity name.
@@ -293,6 +375,10 @@ public interface XMLDTDHandler {
     /**
      * An unparsed entity declaration.
      *
+     * <p>
+     *  未解析的实体声明。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier    An object containing all location information
      *                      pertinent to this unparsed entity declaration.
@@ -310,6 +396,10 @@ public interface XMLDTDHandler {
     /**
      * A notation declaration
      *
+     * <p>
+     *  符号声明
+     * 
+     * 
      * @param name     The name of the notation.
      * @param identifier    An object containing all location information
      *                      pertinent to this notation.
@@ -324,6 +414,10 @@ public interface XMLDTDHandler {
     /**
      * The start of a conditional section.
      *
+     * <p>
+     *  条件段的开始。
+     * 
+     * 
      * @param type The type of the conditional section. This value will
      *             either be CONDITIONAL_INCLUDE or CONDITIONAL_IGNORE.
      * @param augmentations Additional information that may include infoset
@@ -340,6 +434,10 @@ public interface XMLDTDHandler {
     /**
      * Characters within an IGNORE conditional section.
      *
+     * <p>
+     *  IGNORE条件部分中的字符。
+     * 
+     * 
      * @param text The ignored text.
      * @param augmentations Additional information that may include infoset
      *                      augmentations.
@@ -352,6 +450,10 @@ public interface XMLDTDHandler {
     /**
      * The end of a conditional section.
      *
+     * <p>
+     *  条件段的结束。
+     * 
+     * 
      * @param augmentations Additional information that may include infoset
      *                      augmentations.
      *
@@ -362,6 +464,9 @@ public interface XMLDTDHandler {
     /**
      * The end of the DTD.
      *
+     * <p>
+     *  DTD的结束。
+     * 
      * @param augmentations Additional information that may include infoset
      *                      augmentations.
      *

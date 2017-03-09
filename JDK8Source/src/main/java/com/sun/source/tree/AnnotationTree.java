@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import java.util.List;
  *
  * @jls section 9.7
  *
+ * <p>
+ *  注释的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  {@code @} <em> annotationType </em> {@code @} <em> annotationType </em>(<em> arguments </em>)
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

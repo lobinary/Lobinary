@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * $Id: XPathFilter2ParameterSpec.java,v 1.7 2005/05/13 18:45:42 mullan Exp $
+ * <p>
+ *  $ Id：XPathFilter2ParameterSpec.java,v 1.7 2005/05/13 18:45:42 mullan Exp $
+ * 
  */
 package javax.xml.crypto.dsig.spec;
 
@@ -38,6 +42,12 @@ import javax.xml.crypto.dsig.Transform;
  * XPath Filter 2.0 Transform Algorithm</a>.
  * The parameters include a list of one or more {@link XPathType} objects.
  *
+ * <p>
+ *  W3C推荐的参数
+ * <a href="http://www.w3.org/TR/xmldsig-filter2/">
+ *  XPath Filter 2.0变换算法</a>。参数包括一个或多个{@link XPathType}对象的列表。
+ * 
+ * 
  * @author Sean Mullan
  * @author JSR 105 Expert Group
  * @since 1.6
@@ -51,6 +61,10 @@ public final class XPathFilter2ParameterSpec implements TransformParameterSpec {
     /**
      * Creates an <code>XPathFilter2ParameterSpec</code>.
      *
+     * <p>
+     *  创建<code> XPathFilter2ParameterSpec </code>。
+     * 
+     * 
      * @param xPathList a list of one or more {@link XPathType} objects. The
      *    list is defensively copied to protect against subsequent modification.
      * @throws ClassCastException if <code>xPathList</code> contains any
@@ -88,6 +102,10 @@ public final class XPathFilter2ParameterSpec implements TransformParameterSpec {
      * This implementation returns an {@link Collections#unmodifiableList
      * unmodifiable list}.
      *
+     * <p>
+     *  返回一个或多个{@link XPathType}对象的列表。
+     * <p>
+     * 
      * @return a <code>List</code> of <code>XPathType</code> objects
      *    (never <code>null</code> or empty)
      */

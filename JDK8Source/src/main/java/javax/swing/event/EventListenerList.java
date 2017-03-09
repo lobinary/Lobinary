@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -93,6 +94,31 @@ import sun.reflect.misc.ReflectUtil;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  一个包含EventListener列表的类。单个实例可用于保存使用列表的实例的所有侦听器(所有类型的)。
+ * 使用EventListenerList来提供类型安全的API(最好符合JavaBeans规范)和将事件通知方法分派给列表上适当的事件监听器的方法是类的责任。
+ * 
+ *  这个类提供的主要好处是它在没有监听器的情况下相对便宜,并且在单个位置提供事件监听器列表的序列化,以及一定程度的MT安全性(当正确使用时)。
+ * 
+ *  使用示例：说一个是定义一个发送FooEvents的类,并且想要允许该类的用户注册FooListeners并在FooEvents发生时接收通知。以下应该添加到类定义：
+ * <pre>
+ *  EventListenerList listenerList = new EventListenerList(); FooEvent fooEvent = null;
+ * 
+ *  public void addFooListener(FooListener l){listenerList.add(FooListener.class,l); }}
+ * 
+ *  public void removeFooListener(FooListener l){listenerList.remove(FooListener.class,l); }}
+ * 
+ *  //通知所有对此事件类型的//通知感兴趣的侦听器。事件实例//使用传递到fire方法的参数进行延迟创建。
+ * 
+ * protected void fireFooXXX(){//保证返回一个非空数组Object [] listeners = listenerList.getListenerList(); //处理侦听器最后到第一个,通知//那些对此事件感兴趣的事件for(int i = listeners.length-2; i&gt; = 0; i- = 2){if(listeners [i] == FooListener .class){// Lazily创建事件：if(fooEvent == null)fooEvent = new FooEvent(this); ((FooListener)listeners [i + 1])fooXXX(fooEvent); }
+ * }}。
+ * </pre>
+ *  foo应该更改为适当的名称,并将fireFooXxx更改为适当的方法名称。对于FooListener接口中的每个通知方法,应存在一个fire方法。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Georges Saab
  * @author Hans Muller
  * @author James Gosling
@@ -120,6 +146,12 @@ public class EventListenerList implements Serializable {
      * any such manipulation is necessary, it should be done
      * on a copy of the array returned rather than the array
      * itself.
+     * <p>
+     *  将事件侦听器列表作为ListenerType-listener对的数组传回。
+     * 请注意,出于性能原因,此实现传回实际数据结构,其中监听器数据在内部存储！此方法保证传回非空数组,因此在fire方法中不需要null检查。如果当前没有侦听器,则应返回对象的零长度数组。
+     * 
+     * 警告！！！绝对不能修改包含在这个数组中的数据 - 如果需要这样的操作,它应该在返回的数组的副本而不是数组本身上进行。
+     * 
      */
     public Object[] getListenerList() {
         return listenerList;
@@ -127,6 +159,10 @@ public class EventListenerList implements Serializable {
 
     /**
      * Return an array of all the listeners of the given type.
+     * <p>
+     *  返回给定类型的所有侦听器的数组。
+     * 
+     * 
      * @return all of the listeners of the specified type.
      * @exception  ClassCastException if the supplied class
      *          is not assignable to EventListener
@@ -148,6 +184,9 @@ public class EventListenerList implements Serializable {
 
     /**
      * Returns the total number of listeners for this listener list.
+     * <p>
+     *  返回此侦听器列表的侦听器的总数。
+     * 
      */
     public int getListenerCount() {
         return listenerList.length/2;
@@ -156,6 +195,9 @@ public class EventListenerList implements Serializable {
     /**
      * Returns the total number of listeners of the supplied type
      * for this listener list.
+     * <p>
+     *  返回此侦听器列表的提供类型的侦听器的总数。
+     * 
      */
     public int getListenerCount(Class<?> t) {
         Object[] lList = listenerList;
@@ -173,6 +215,10 @@ public class EventListenerList implements Serializable {
 
     /**
      * Adds the listener as a listener of the specified type.
+     * <p>
+     *  将侦听器添加为指定类型的侦听器。
+     * 
+     * 
      * @param t the type of the listener to be added
      * @param l the listener to be added
      */
@@ -206,6 +252,10 @@ public class EventListenerList implements Serializable {
 
     /**
      * Removes the listener as a listener of the specified type.
+     * <p>
+     *  删除作为指定类型的侦听器的侦听器。
+     * 
+     * 
      * @param t the type of the listener to be removed
      * @param l the listener to be removed
      */
@@ -280,6 +330,8 @@ public class EventListenerList implements Serializable {
 
     /**
      * Returns a string representation of the EventListenerList.
+     * <p>
+     *  返回EventListenerList的字符串表示形式。
      */
     public String toString() {
         Object[] lList = listenerList;

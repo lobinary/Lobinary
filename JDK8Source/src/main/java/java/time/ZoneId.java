@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time;
 
@@ -172,6 +191,54 @@ import java.util.TimeZone;
  * One implementation models region-based IDs, the other is {@code ZoneOffset} modelling
  * offset-based IDs. This difference is visible in serialization.
  *
+ * <p>
+ *  时区ID,例如{@code Europe / Paris}。
+ * <p>
+ *  {@code ZoneId}用于标识用于在{@link Instant}和{@link LocalDateTime}之间进行转换的规则。有两种不同类型的ID：
+ * <ul>
+ *  <li>固定偏移 - 与UTC /格林威治完全偏移的偏移,在所有本地日期时间使用相同的偏移<li>地理区域 - 用于查找UTC /格林威治偏移的特定规则集合的区域
+ * </ul>
+ *  大多数固定偏移由{@link ZoneOffset}表示。
+ * 在任何{@code ZoneId}上调用{@link #normalized()}将确保固定的偏移ID将表示为{@code ZoneOffset}。
+ * <p>
+ * 描述偏移变化的时间和方式的实际规则由{@link ZoneRules}定义。这个类只是一个用于获取基础规则的ID。采用这种方法是因为规则由政府定义并且频繁变化,而ID是稳定的。
+ * <p>
+ *  区别有其他影响。序列化{@code ZoneId}只会发送ID,而序列化规则会发送整个数据集。类似地,两个ID的比较仅检查ID,而两个规则的比较检查整个数据集。
+ * 
+ *  <h3>时区ID </h3> ID在系统中是唯一的。有三种类型的ID。
+ * <p>
+ *  最简单的ID类型是{@code ZoneOffset}。这由"Z"和以"+"或" - "开头的ID组成。
+ * <p>
+ *  下一种类型的ID是具有某种形式的前缀的偏移样式ID,例如"GMT + 2"或"UTC + 01：00"。识别的前缀是"UTC","GMT"和"UT"。偏移量是后缀,将在创建过程中进行标准化。
+ * 这些ID可以使用{@code normalized()}标准化为{@code ZoneOffset}。
+ * <p>
+ *  第三类型的ID是基于区域的ID。基于区域的ID必须为两个或多个字符,且不能以"UTC","GMT","UT","+"或" - "开头。
+ * 基于区域的ID由配置定义,请参阅{@link ZoneRulesProvider}。配置重点在于提供从ID到底层{@code ZoneRules}的查找。
+ * <p>
+ * 时区规则由政府定义并经常变化。有许多组织,这里称为组,监视时区更改和整理它们。默认组是IANA时区数据库(TZDB)。其他组织包括IATA(航空工业机构)和Microsoft。
+ * <p>
+ *  每个组为其提供的区域ID定义自己的格式。 TZDB组定义了"Europe / London"或"America / New_York"等ID。 TZDB ID优先于其他组。
+ * <p>
+ *  强烈建议组名称包括在除TZDB以外的组提供的所有ID中,以避免冲突。例如,IATA航空公司时区区域ID通常与三字母机场代码相同。然而,乌得勒支的机场有代码"UTC",这显然是一个冲突。
+ * 来自TZDB以外的组的区域ID的推荐格式为"group〜region"。因此,如果IATA数据被定义,Utrecht机场将是'IATA〜UTC'。
+ * 
+ *  <h3>序列化</h3>此类可以序列化,并以外部形式存储字符串区域ID。 {@code ZoneOffset}子类使用专用格式,只存储UTC / Greenwich的偏移量。
+ * <p>
+ * {@code ZoneId}可以在未知ID的Java运行时反序列化。例如,如果服务器端Java运行时已使用新的区域ID更新,但客户端Java运行时尚未更新。
+ * 在这种情况下,{@code ZoneId}对象将存在,并且可以使用{@code getId},{@code equals},{@code hashCode},{@code toString},{@code getDisplayName}
+ *  @code normalized}。
+ * {@code ZoneId}可以在未知ID的Java运行时反序列化。例如,如果服务器端Java运行时已使用新的区域ID更新,但客户端Java运行时尚未更新。
+ * 但是,对{@code getRules}的任何调用都将失败,并显示{@code ZoneRulesException}。
+ * 此方法旨在允许在具有不完整时区信息的Java运行时上加载和查询{@link ZonedDateTime},但不进行修改。
+ * 
+ * <p>
+ *  这是<a href="{@docRoot}/java/lang/doc-files/ValueBased.html">以价值为基础的</a>类;在{@code ZoneId}实例上使用身份敏感操作(包
+ * 括引用等同性({@code ==}),身份哈希码或同步)可能会产生不可预测的结果,应该避免使用。
+ * 应该使用{@code equals}方法进行比较。
+ * 
+ *  @implSpec这个抽象类有两个实现,它们都是不可变的和线程安全的。一个实现模型基于区域的ID,另一个是{@code ZoneOffset}建模基于偏移的ID。这种差异在序列化中可见。
+ * 
+ * 
  * @since 1.8
  */
 public abstract class ZoneId implements Serializable {
@@ -219,6 +286,26 @@ public abstract class ZoneId implements Serializable {
      * <li>VST - Asia/Ho_Chi_Minh</li>
      * </ul>
      * The map is unmodifiable.
+     * <p>
+     *  区域覆盖的地图,以便使用短时区名称。
+     * <p>
+     *  {@code java.util.TimeZone}已弃用使用短区域ID。此地图允许通过{@link #of(String,Map)}工厂方法继续使用ID。
+     * <p>
+     * 此映射包含与TZDB 2005r及更高版本一致的ID映射,其中"EST","MST"和"HST"映射到不包括夏令时的ID。
+     * <p>
+     *  这个映射如下：
+     * <ul>
+     *  <li> EST  -  -05：00 </li> <li> HST  -  -10：00 </li> <li> MST  -  -07：00 </li> <li> ACT  -  Australia
+     *  / Darwin </li > <li>澳大利亚/悉尼</li> <li> AGT  - 美洲/阿根廷/布宜诺斯艾利斯</li> <li> ART  - 非洲/开罗</li> <li> AST  - 
+     * 美洲/ > <li> BET  - 美国/ Sao_Paulo </li> <li> BST  - 亚洲/达卡</li> <li> CAT  - 非洲/哈拉雷</li> <li> CNT-美国/ St_
+     * Johns </li> </li> <li> CTT  - 亚洲/上海</li> <li> EAT  - 非洲/ Addis_Ababa </li> <li> ECT-欧洲/巴黎</li> <li> I
+     * ET  -  America / Indiana / Indianapolis </li> <li> IST  - 亚洲/加尔各答</li> <li> JST-亚洲/东京</li> <li> MIT-太
+     * 平洋/ NET  - 亚洲/埃里温</li> <li> NST  - 太平洋/奥克兰</li> <li> PLT-亚洲/卡拉奇</li> <li> PNT-美国/凤凰</li> <li> America
+     *  / Puerto_Rico </li> <li> PST  - 美洲/ Los_Angeles </li> <li> SST  - 太平洋/ Guadalcanal </li> <li> VST  -
+     *   Asia / Ho_Chi_Minh </li>。
+     * </ul>
+     *  地图是不可修改的。
+     * 
      */
     public static final Map<String, String> SHORT_IDS;
     static {
@@ -255,6 +342,9 @@ public abstract class ZoneId implements Serializable {
     }
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 8352817235686L;
 
@@ -266,6 +356,12 @@ public abstract class ZoneId implements Serializable {
      * and converts it to a {@code ZoneId}. If the system default time-zone is changed,
      * then the result of this method will also change.
      *
+     * <p>
+     *  获取系统默认时区。
+     * <p>
+     *  这将查询{@link TimeZone#getDefault()}以查找默认时区,并将其转换为{@code ZoneId}。如果系统默认时区更改,则此方法的结果也将更改。
+     * 
+     * 
      * @return the zone ID, not null
      * @throws DateTimeException if the converted zone ID has an invalid format
      * @throws ZoneRulesException if the converted zone region ID cannot be found
@@ -284,6 +380,14 @@ public abstract class ZoneId implements Serializable {
      * The set of zone IDs can increase over time, although in a typical application
      * the set of IDs is fixed. Each call to this method is thread-safe.
      *
+     * <p>
+     *  获取可用区域ID集。
+     * <p>
+     * 此集包括所有可用的基于区域的ID的字符串形式。基于偏移的区域ID不包括在返回的集中。可以将ID传递给{@link #of(String)}以创建{@code ZoneId}。
+     * <p>
+     *  区域ID的集合可以随时间增加,但是在典型的应用中,ID的集合是固定的。每个对这个方法的调用都是线程安全的。
+     * 
+     * 
      * @return a modifiable copy of the set of zone IDs, not null
      */
     public static Set<String> getAvailableZoneIds() {
@@ -301,6 +405,12 @@ public abstract class ZoneId implements Serializable {
      * This method allows a map of string to time-zone to be setup and reused
      * within an application.
      *
+     * <p>
+     *  使用别名的地图来获取{@code ZoneId}的实例(使用其ID),以补充标准区域ID。
+     * <p>
+     *  时区的许多用户使用简短缩写,例如"太平洋标准时间"的PST和"太平洋夏令时"的PDT。这些缩写不是唯一的,因此不能用作ID。此方法允许在应用程序中设置和重新使用字符串到时区的映射。
+     * 
+     * 
      * @param zoneId  the time-zone ID, not null
      * @param aliasMap  a map of alias zone IDs (typically abbreviations) to real zone IDs, not null
      * @return the zone ID, not null
@@ -350,6 +460,29 @@ public abstract class ZoneId implements Serializable {
      *  This is compatible with most IDs from {@link java.util.TimeZone}.
      * </ul>
      *
+     * <p>
+     *  从ID获取{@code ZoneId}的实例,确保该ID有效并可供使用。
+     * <p>
+     *  此方法解析产生{@code ZoneId}或{@code ZoneOffset}的ID。如果ID为"Z",或者以"+"或" - "开头,则返回{@code ZoneOffset}。
+     * 结果将始终是可获取{@link ZoneRules}的有效ID。
+     * <p>
+     *  解析与区域ID逐步匹配如下。
+     * <ul>
+     * <li>如果区域ID等于"Z",则结果为{@code ZoneOffset.UTC}。
+     *  <li>如果区域ID由单个字母组成,则区域ID无效,并且会抛出{@code DateTimeException}。
+     *  <li>如果区域ID以"+"或" - "开头,则使用{@link ZoneOffset#of(String)}将ID解析为{@code ZoneOffset}。
+     *  <li>如果区域ID等于'GMT','UTC'或'UT',则结果是具有与{@code ZoneOffset.UTC}相同的ID和规则的{@code ZoneId}。
+     *  <li>如果区域ID以"UTC +","UTC-","GMT +","GMT-","UT +"或"UT-"开头,则ID是基于前缀的基于偏移量的ID。
+     *  ID分为两部分,两个或三个字母的前缀和一个以符号开头的后缀。后缀解析为{@link ZoneOffset#of(String)ZoneOffset}。
+     * 结果将是具有指定的UTC / GMT / UT前缀的{@code ZoneId},以及根据{@link ZoneOffset#getId()}的规范化偏移ID。
+     * 返回的{@code ZoneId}的规则将等同于解析的{@code ZoneOffset}。 <li>所有其他ID都会解析为基于区域的区域ID。
+     * 区域ID必须与正则表达式<code> [A-Za-z] [A-Za-z0-9〜/._+-]+</code>相匹配,否则抛出{@code DateTimeException}。
+     * 如果区域ID不在已配置的ID集中,则会抛出{@code ZoneRulesException}。区域ID的详细格式取决于提供数据的组。默认数据集由IANA时区数据库(TZDB)提供。
+     * 它具有"{area} / {city}"形式的区域ID,例如"Europe / Paris"或"America / New_York"。
+     * 这与来自{@link java.util.TimeZone}的大多数ID兼容。
+     * </ul>
+     * 
+     * 
      * @param zoneId  the time-zone ID, not null
      * @return the zone ID, not null
      * @throws DateTimeException if the zone ID has an invalid format
@@ -366,6 +499,12 @@ public abstract class ZoneId implements Serializable {
      * with the prefix and the non-zero offset is returned.
      * If the prefix is empty {@code ""} the {@code ZoneOffset} is returned.
      *
+     * <p>
+     * 获取{@code ZoneId}包装偏移量的实例。
+     * <p>
+     *  如果前缀是"GMT","UTC"或"UT",将返回带有前缀和非零偏移量的{@code ZoneId}。如果前缀为空{@code""},则返回{@code ZoneOffset}。
+     * 
+     * 
      * @param prefix  the time-zone ID, not null
      * @param offset  the offset, not null
      * @return the zone ID, not null
@@ -393,6 +532,10 @@ public abstract class ZoneId implements Serializable {
      * Parses the ID, taking a flag to indicate whether {@code ZoneRulesException}
      * should be thrown or not, used in deserialization.
      *
+     * <p>
+     *  解析ID,使用一个标志来指示是否应该抛出{@code ZoneRulesException},用于反序列化。
+     * 
+     * 
      * @param zoneId  the time-zone ID, not null
      * @param checkAvailable  whether to check if the zone ID is available
      * @return the zone ID, not null
@@ -414,6 +557,10 @@ public abstract class ZoneId implements Serializable {
     /**
      * Parse once a prefix is established.
      *
+     * <p>
+     *  一个前缀建立后解析。
+     * 
+     * 
      * @param zoneId  the time-zone ID, not null
      * @param prefixLength  the length of the prefix, 2 or 3
      * @return the zone ID, not null
@@ -455,6 +602,18 @@ public abstract class ZoneId implements Serializable {
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used in queries via method reference, {@code ZoneId::from}.
      *
+     * <p>
+     *  从临时对象获取{@code ZoneId}的实例。
+     * <p>
+     *  这基于指定的时间获得区。 {@code TemporalAccessor}表示一组任意的日期和时间信息,该工厂将其转换为{@code ZoneId}的实例。
+     * <p>
+     *  {@code TemporalAccessor}表示某种形式的日期和时间信息。此工厂将任意临时对象转换为{@code ZoneId}的实例。
+     * <p>
+     *  转换将尝试使用{@link TemporalQueries#zone()},以偏好为基础的区域优先于基于区域的区域的方式获取区域。
+     * <p>
+     *  此方法匹配功能接口{@link TemporalQuery}的签名,允许它通过方法引用{@code ZoneId :: from}在查询中使用。
+     * 
+     * 
      * @param temporal  the temporal object to convert, not null
      * @return the zone ID, not null
      * @throws DateTimeException if unable to convert to a {@code ZoneId}
@@ -471,6 +630,9 @@ public abstract class ZoneId implements Serializable {
     //-----------------------------------------------------------------------
     /**
      * Constructor only accessible within the package.
+     * <p>
+     *  构造函数只能在包中访问。
+     * 
      */
     ZoneId() {
         if (getClass() != ZoneOffset.class && getClass() != ZoneRegion.class) {
@@ -485,6 +647,12 @@ public abstract class ZoneId implements Serializable {
      * This ID uniquely defines this object.
      * The format of an offset based ID is defined by {@link ZoneOffset#getId()}.
      *
+     * <p>
+     *  获取唯一的时区ID。
+     * <p>
+     *  此ID唯一定义此对象。基于偏移的ID的格式由{@link ZoneOffset#getId()}定义。
+     * 
+     * 
      * @return the time-zone unique ID, not null
      */
     public abstract String getId();
@@ -500,6 +668,14 @@ public abstract class ZoneId implements Serializable {
      * <p>
      * If no textual mapping is found then the {@link #getId() full ID} is returned.
      *
+     * <p>
+     *  获取区域的文本表示,例如"英国时间"或"+02：00"。
+     * <p>
+     * 这返回用于标识时区ID的文本名称,适合向用户显示。参数控制返回的文本和语言环境的样式。
+     * <p>
+     *  如果没有找到文本映射,则返回{@link #getId()full ID}。
+     * 
+     * 
      * @param style  the length of the text required, not null
      * @param locale  the locale to use, not null
      * @return the text value of the zone, not null
@@ -518,6 +694,14 @@ public abstract class ZoneId implements Serializable {
      * The returned temporal has no supported fields, with the query method
      * supporting the return of the zone using {@link TemporalQueries#zoneId()}.
      *
+     * <p>
+     *  将此区域转换为{@code TemporalAccessor}。
+     * <p>
+     *  {@code ZoneId}可以完全表示为{@code TemporalAccessor}。但是,该接口不是由这个类实现的,因为接口上的大多数方法对{@code ZoneId}没有意义。
+     * <p>
+     *  返回的temporal没有支持的字段,查询方法支持使用{@link TemporalQueries#zoneId()}返回区域。
+     * 
+     * 
      * @return a temporal equivalent to this zone, not null
      */
     private TemporalAccessor toTemporal() {
@@ -559,6 +743,19 @@ public abstract class ZoneId implements Serializable {
      * <p>
      * {@link ZoneOffset} will always return a set of rules where the offset never changes.
      *
+     * <p>
+     *  获取此ID的时区规则,以便执行计算。
+     * <p>
+     *  规则提供与时区相关联的功能,例如找到给定时刻或本地日期时间的偏移。
+     * <p>
+     *  如果时区在Java运行时中反序列化,该时间库不具有与存储它的Java运行时相同的规则,则该时区可能无效。在这种情况下,调用此方法将抛出一个{@code ZoneRulesException}。
+     * <p>
+     *  规则由{@link ZoneRulesProvider}提供。高级提供程序可以支持对规则的动态更新,而不必重新启动Java运行时。如果是,则此方法的结果可能随时间而改变。
+     * 每个单独的调用仍将保持线程安全。
+     * <p>
+     *  {@link ZoneOffset}将总是返回一组规则,其中偏移量从不改变。
+     * 
+     * 
      * @return the rules, not null
      * @throws ZoneRulesException if no rules are available for this ID
      */
@@ -575,6 +772,14 @@ public abstract class ZoneId implements Serializable {
      * If they do, then the {@code ZoneOffset} equal to that offset is returned.
      * Otherwise {@code this} is returned.
      *
+     * <p>
+     * 规范化时区ID,尽可能返回{@code ZoneOffset}。
+     * <p>
+     *  返回一个标准化的{@code ZoneId},可以用来代替这个ID。结果将有{@code ZoneRules}等价于由此对象返回的那些,但是{@code getId()}返回的ID可能不同。
+     * <p>
+     *  规范化检查此{@code ZoneId}的规则是否具有固定偏移量。如果它们这样做,则返回等于该偏移量的{@code ZoneOffset}。否则返回{@code this}。
+     * 
+     * 
      * @return the time-zone unique ID, not null
      */
     public ZoneId normalized() {
@@ -595,6 +800,12 @@ public abstract class ZoneId implements Serializable {
      * <p>
      * The comparison is based on the ID.
      *
+     * <p>
+     *  检查此时区ID是否等于另一个时区ID。
+     * <p>
+     *  比较基于ID。
+     * 
+     * 
      * @param obj  the object to check, null returns false
      * @return true if this is equal to the other time-zone ID
      */
@@ -613,6 +824,10 @@ public abstract class ZoneId implements Serializable {
     /**
      * A hash code for this time-zone ID.
      *
+     * <p>
+     *  此时区ID的哈希码。
+     * 
+     * 
      * @return a suitable hash code
      */
     @Override
@@ -624,6 +839,10 @@ public abstract class ZoneId implements Serializable {
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */
@@ -634,6 +853,10 @@ public abstract class ZoneId implements Serializable {
     /**
      * Outputs this zone as a {@code String}, using the ID.
      *
+     * <p>
+     *  使用ID将此区域输出为{@code String}。
+     * 
+     * 
      * @return a string representation of this time-zone ID, not null
      */
     @Override
@@ -645,6 +868,9 @@ public abstract class ZoneId implements Serializable {
     /**
      * Writes the object using a
      * <a href="../../serialized-form.html#java.time.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../serialized-form.html#java.time.Ser">专用序列化表单</a>写入对象。
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(7);  // identifies a ZoneId (not ZoneOffset)

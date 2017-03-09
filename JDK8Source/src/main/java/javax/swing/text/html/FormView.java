@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -101,6 +102,55 @@ import javax.swing.text.*;
  * </tr>
  * </table>
  *
+ * <p>
+ *  实现表单元素&lt; input&gt;,&lt; textarea&gt;和&lt; select&gt;的视图接口的组件装饰器。
+ * 组件的模型存储为元素的属性(使用StyleConstants.ModelAttribute),并用于构建视图的组件。
+ * 模型的类型假设为由<code> HTMLDocument.HTMLReader.FormAction </code>设置的类型。如果文档上有多个视图,它们将共享嵌入式组件模型。
+ * <p>
+ *  下表显示了此视图构建的组件。
+ * <table summary="shows what components get built by this view">
+ * <tr>
+ *  <th>元素类型</th> <th>组件已构建</th>
+ * </tr>
+ * <tr>
+ *  <td>输入,键入</td> <td> JButton </td>
+ * </tr>
+ * <tr>
+ *  <td>输入,键入checkbox </td> <td> JCheckBox </td>
+ * </tr>
+ * <tr>
+ *  <td>输入,输入image </td> <td> JButton </td>
+ * </tr>
+ * <tr>
+ *  <td>输入,键入密码</td> <td> JPasswordField </td>
+ * </tr>
+ * <tr>
+ *  <td>输入,输入radio </td> <td> JRadioButton </td>
+ * </tr>
+ * <tr>
+ *  <td>输入,键入reset </td> <td> JButton </td>
+ * </tr>
+ * <tr>
+ *  <td>输入,输入submit </td> <td> JButton </td>
+ * </tr>
+ * <tr>
+ *  <td>输入,键入文本</td> <td> JTextField </td>
+ * </tr>
+ * <tr>
+ *  <td> select,size&gt; 1或JScrollPane中定义的多个属性</td> <td> JList </td>
+ * </tr>
+ * <tr>
+ *  <td> select,size unspecified或1 </td> <td> JComboBox </td>
+ * </tr>
+ * <tr>
+ *  <td> textarea </td> <td> JTrollPane中的JTextArea </td>
+ * </tr>
+ * <tr>
+ *  <td>输入,键入文件</td> <td> JTextField </td>
+ * </tr>
+ * </table>
+ * 
+ * 
  * @author Timothy Prinzing
  * @author Sunita Mani
  */
@@ -110,6 +160,10 @@ public class FormView extends ComponentView implements ActionListener {
      * If a value attribute is not specified for a FORM input element
      * of type "submit", then this default string is used.
      *
+     * <p>
+     * 如果没有为类型"submit"的FORM输入元素指定value属性,则使用此默认字符串。
+     * 
+     * 
      * @deprecated As of 1.3, value now comes from UIManager property
      *             FormView.submitButtonText
      */
@@ -119,6 +173,10 @@ public class FormView extends ComponentView implements ActionListener {
      * If a value attribute is not specified for a FORM input element
      * of type "reset", then this default string is used.
      *
+     * <p>
+     *  如果没有为"reset"类型的FORM输入元素指定value属性,则使用此默认字符串。
+     * 
+     * 
      * @deprecated As of 1.3, value comes from UIManager UIManager property
      *             FormView.resetButtonText
      */
@@ -128,6 +186,9 @@ public class FormView extends ComponentView implements ActionListener {
     /**
      * Document attribute name for storing POST data. JEditorPane.getPostData()
      * uses the same name, should be kept in sync.
+     * <p>
+     *  用于存储POST数据的文档属性名称。 JEdi​​torPane.getPostData()使用相同的名称,应该保持同步。
+     * 
      */
     final static String PostDataProperty = "javax.swing.JEditorPane.postdata";
 
@@ -136,12 +197,19 @@ public class FormView extends ComponentView implements ActionListener {
      * preferred span. This is used so that the Component's size doesn't
      * change if there is extra room on a line. The first bit is used for
      * the X direction, and the second for the y direction.
+     * <p>
+     *  用于指示最大跨度是否应与首选跨度相同。这是为了使组件的大小不会改变,如果在一行上有额外的空间。第一位用于X方向,第二位用于y方向。
+     * 
      */
     private short maxIsPreferred;
 
     /**
      * Creates a new FormView object.
      *
+     * <p>
+     *  创建一个新的FormView对象。
+     * 
+     * 
      * @param elem the element to decorate
      */
     public FormView(Element elem) {
@@ -152,6 +220,9 @@ public class FormView extends ComponentView implements ActionListener {
      * Create the component.  This is basically a
      * big switch statement based upon the tag type
      * and html attributes of the associated element.
+     * <p>
+     *  创建组件。这基本上是一个大的switch语句,基于相关元素的标签类型和html属性。
+     * 
      */
     protected Component createComponent() {
         AttributeSet attr = getElement().getAttributes();
@@ -207,6 +278,10 @@ public class FormView extends ComponentView implements ActionListener {
      * Creates a component for an &lt;INPUT&gt; element based on the
      * value of the "type" attribute.
      *
+     * <p>
+     *  创建&lt; INPUT&gt;元素基于"type"属性的值。
+     * 
+     * 
      * @param set of attributes associated with the &lt;INPUT&gt; element.
      * @param model the value of the StyleConstants.ModelAttribute
      * @return the component.
@@ -379,6 +454,10 @@ public class FormView extends ComponentView implements ActionListener {
      * returned by Component.getMaximumSize along the
      * axis of interest.
      *
+     * <p>
+     *  确定沿轴的此视图的最大跨度。对于某些组件,最大和首选跨度相同。对于其他人,这将返回Component.getMaximumSize沿着感兴趣的轴返回的值。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return   the span the view would like to be rendered into &gt;= 0.
      *           Typically the view is told to render into the span
@@ -419,6 +498,11 @@ public class FormView extends ComponentView implements ActionListener {
      * the form is submitted.  Otherwise, focus is transferred
      * to the next component in the form.
      *
+     * <p>
+     * 负责处理ActionEvent。如果与FormView关联的元素具有"提交","重置","文本"或"密码"类型,则处理动作。在"提交"的情况下,提交表单。在"复位"的情况下,表单被重置为其原始状态。
+     * 在"文本"或"密码"的情况下,如果元素是类型"文本"或"密码"的最后一个,则提交表单。否则,焦点将传递到窗体中的下一个组件。
+     * 
+     * 
      * @param evt the ActionEvent.
      */
     public void actionPerformed(ActionEvent evt) {
@@ -448,6 +532,9 @@ public class FormView extends ComponentView implements ActionListener {
     /**
      * This method is responsible for submitting the form data.
      * A thread is forked to undertake the submission.
+     * <p>
+     *  此方法负责提交表单数据。一个线程被分叉进行提交。
+     * 
      */
     protected void submitData(String data) {
         Element form = getFormElement();
@@ -525,6 +612,11 @@ public class FormView extends ComponentView implements ActionListener {
          * responsibility of FrameView which updates the target frame
          * to move data from the frameset document property into the frame
          * document property.
+         * <p>
+         *  PostDataProperty从它以后被方法JEditorPane.getPostData()检索。
+         * 如果当前文档在一个框架中,则数据最初被放入toplevel(框架集)文档属性(名为<PostDataProperty>。<Target frame name>)。
+         *  FrameView的职责是更新目标框架,将数据从框架集文档属性移动到框架文档属性中。
+         * 
          */
 
         Document propDoc = doc;
@@ -551,6 +643,9 @@ public class FormView extends ComponentView implements ActionListener {
      * A MouseListener is necessary since along with the image
      * data the coordinates associated with the mouse click
      * need to be submitted.
+     * <p>
+     *  MouseEventListener类,用于在单击类型为image的输入时处理表单提交。 MouseListener是必要的,因为与图像数据一起,需要提交与鼠标点击相关联的坐标。
+     * 
      */
     protected class MouseEventListener extends MouseAdapter {
 
@@ -565,6 +660,10 @@ public class FormView extends ComponentView implements ActionListener {
      * to a click on an image -- an &lt;INPUT&gt; form
      * element of type "image".
      *
+     * <p>
+     *  调用此方法以响应于对图像的点击而提交表单 - &lt; INPUT&gt;形式的"图像"元素。
+     * 
+     * 
      * @param imageData the mouse click coordinates.
      */
     protected void imageSubmit(String imageData) {
@@ -591,6 +690,12 @@ public class FormView extends ComponentView implements ActionListener {
      * otherwise,
      *      "x="+ x +"&y="+ y
      *
+     * <p>
+     * 提取与image类型的输入元素关联的name属性的值。
+     * 如果name被定义,它使用URLEncoder.encode()方法编码,并且图像数据以以下格式返回：name +".x"+"="+ x +"&"+ name +"。
+     * y" "="+ y否则,"x ="+ x +"&y ="+ y。
+     * 
+     * 
      * @param point associated with the mouse click.
      * @return the image data.
      */
@@ -620,11 +725,17 @@ public class FormView extends ComponentView implements ActionListener {
      * that is associated with each form element, and in the
      * case of reset, reinitialize the each model to its
      * initial state.
+     * <p>
+     *  以下方法提供迭代表单元素所需的功能,以及在表单提交的情况下,从与每个表单元素相关联的每个模型中提取数据,并且在重置的情况下,重新初始化每个模型其初始状态。
+     * 
      */
 
 
     /**
      * Returns the Element representing the <code>FORM</code>.
+     * <p>
+     *  返回表示<code> FORM </code>的元素。
+     * 
      */
     private Element getFormElement() {
         Element elem = getElement();
@@ -646,6 +757,10 @@ public class FormView extends ComponentView implements ActionListener {
      * of the same form whose element triggered the submit
      * action.
      *
+     * <p>
+     *  迭代元素层次结构,从与相关表单元素相关联的模型中提取数据。 "相关"是指表单元素是其元素触发提交操作的同一表单的一部分。
+     * 
+     * 
      * @param buffer        the buffer that contains that data to submit
      * @param targetElement the element that triggered the
      *                      form submission
@@ -683,6 +798,9 @@ public class FormView extends ComponentView implements ActionListener {
      * on the type of the form element.  Essentially
      * data is loaded in name/value pairs.
      *
+     * <p>
+     *  将与元素关联的数据装入缓冲区。附加数据的格式取决于表单元素的类型。基本上,数据以名称/值对加载。
+     * 
      */
     private void loadElementDataIntoBuffer(Element elem, StringBuilder buffer) {
 
@@ -715,6 +833,9 @@ public class FormView extends ComponentView implements ActionListener {
      * used to determine the type of the model associated
      * with the element and then the relevant data is
      * extracted.
+     * <p>
+     *  返回与&lt; INPUT&gt;表单元素。 "type"属性的值用于确定与元素相关联的模型的类型,然后提取相关数据。
+     * 
      */
     private String getInputElementData(AttributeSet attr) {
 
@@ -762,6 +883,9 @@ public class FormView extends ComponentView implements ActionListener {
      * Returns the data associated with the &lt;TEXTAREA&gt; form
      * element.  This is done by getting the text stored in the
      * Document model.
+     * <p>
+     *  返回与&lt; TEXTAREA&gt;关联的数据。表单元素。这通过将文本存储在Document模型中来完成。
+     * 
      */
     private String getTextAreaData(AttributeSet attr) {
         Document doc = (Document)attr.getAttribute(StyleConstants.ModelAttribute);
@@ -777,6 +901,9 @@ public class FormView extends ComponentView implements ActionListener {
      * Loads the buffer with the data associated with the Select
      * form element.  Basically, only items that are selected
      * and have their name attribute set are added to the buffer.
+     * <p>
+     * 使用与选择表单元素相关联的数据加载缓冲区。基本上,只有选择并设置其名称属性的项目才会添加到缓冲区。
+     * 
      */
     private void loadSelectData(AttributeSet attr, StringBuilder buffer) {
 
@@ -808,6 +935,9 @@ public class FormView extends ComponentView implements ActionListener {
      * buffer.  Both names and values are encoded using the
      * URLEncoder.encode() method before being added to the
      * buffer.
+     * <p>
+     *  将名称/值对附加到缓冲区中。在添加到缓冲区之前,名称和值都使用URLEncoder.encode()方法进行编码。
+     * 
      */
     private void appendBuffer(StringBuilder buffer, String name, String value) {
         if (buffer.length() > 0) {
@@ -822,6 +952,9 @@ public class FormView extends ComponentView implements ActionListener {
 
     /**
      * Returns true if the Element <code>elem</code> represents a control.
+     * <p>
+     *  如果元素<code> elem </code>表示控件,则返回true。
+     * 
      */
     private boolean isControl(Element elem) {
         return elem.isLeaf();
@@ -832,6 +965,9 @@ public class FormView extends ComponentView implements ActionListener {
      * the element parameter, which is assumed to be an
      * &lt;INPUT&gt; element of type password or text, is the last
      * one of either kind, in the form to which it belongs.
+     * <p>
+     *  迭代元素层次结构以确定元素参数(假定为&lt; INPUT&gt;密码或文本类型的元素是它所属的表单中的最后一个类型。
+     * 
      */
     boolean isLastTextOrPasswordField() {
         Element parent = getFormElement();
@@ -871,6 +1007,11 @@ public class FormView extends ComponentView implements ActionListener {
      * values.
      *
      * param elem the element that triggered the reset
+     * <p>
+     *  通过将与每个表单元素相关联的模型重新初始化为其初始值,将表单重置为其初始状态。
+     * 
+     *  param elem触发复位的元素
+     * 
      */
     void resetForm() {
         Element parent = getFormElement();
@@ -937,6 +1078,7 @@ public class FormView extends ComponentView implements ActionListener {
      * clicks the button a JFileChooser is brought up allowing the user
      * to select a file in the file system. The resulting path to the selected
      * file is set in the text field (actually an instance of Document).
+     * <p>
      */
     private class BrowseFileAction implements ActionListener {
         private AttributeSet attrs;

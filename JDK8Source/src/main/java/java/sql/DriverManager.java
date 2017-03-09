@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -75,6 +76,37 @@ import sun.reflect.Reflection;
  * permission has been granted.  Normally this will be done with
  * the tool PolicyTool, which can be used to grant <code>permission
  * java.sql.SQLPermission "setLog"</code>.
+ * <p>
+ *  <P>用于管理一组JDBC驱动程序的基本服务。
+ * <br> <B>注：</B> {@link javax.sql.DataSource}接口是JDBC 2.0 API中的新功能,提供了另一种连接方式到数据源。
+ * 使用<code> DataSource </code>对象是连接到数据源的首选方法。
+ * 
+ *  <P>作为初始化的一部分,<code> DriverManager </code>类将尝试加载在"jdbc.drivers"系统属性中引用的驱动程序类。
+ * 这允许用户定制其应用程序使用的JDBC驱动程序。例如在〜/ .hotjava / properties文件中,您可以指定：。
+ * <pre>
+ *  <CODE> jdbc.drivers = foo.bah.Driver：wombat.sql.Driver：bad.taste.ourDriver </CODE>
+ * </pre>
+ *  P> <code> DriverManager </code>方法<code> getConnection </code>和<code> getDrivers </code>已得到增强,以支持Java
+ * 标准版<a href ="../../。
+ *  ./technotes/guides/jar/jar.html#Service%20Provider">服务提供商</a>机制。
+ *  JDBC 4.0驱动程序必须包括文件<code> META-INF / services / java.sql.Driver </code>。
+ * 此文件包含<code> java.sql.Driver </code>的JDBC驱动程序实现的名称。
+ * 例如,要加载<code> my.sql.Driver </code>类,<code> META-INF / services / java.sql.Driver </code>文件将包含以下条目：。
+ * <pre>
+ *  <code> my.sql.Driver </code>
+ * </pre>
+ * 
+ * <P>应用程序不再需要使用<code> Class.forName()</code>显式加载JDBC驱动程序。
+ * 使用<code> Class.forName()</code>当前加载JDBC驱动程序的现有程序将继续工作,无需修改。
+ * 
+ *  <p>当调用方法<code> getConnection </code>时,<code> DriverManager </code>将尝试从初始化时加载的驱动程序中找到合适的驱动程序,并显式使用与当前
+ * 小程序或应用程序。
+ * 
+ * <P>
+ *  从Java 2 SDK,Standard Edition 1.3版开始,只有在授予适当的权限后,才能设置日志记录流。
+ * 通常这将使用工具PolicyTool完成,它可以用于授予<code>权限java.sql.SQLPermission"setLog"</code>。
+ * 
+ * 
  * @see Driver
  * @see Connection
  */
@@ -96,6 +128,9 @@ public class DriverManager {
     /**
      * Load the initial JDBC drivers by checking the System property
      * jdbc.properties and then use the {@code ServiceLoader} mechanism
+     * <p>
+     *  通过检查系统属性jdbc.properties然后使用{@code ServiceLoader}机制加载初始JDBC驱动程序
+     * 
      */
     static {
         loadInitialDrivers();
@@ -105,6 +140,10 @@ public class DriverManager {
     /**
      * The <code>SQLPermission</code> constant that allows the
      * setting of the logging stream.
+     * <p>
+     *  允许设置日志记录流的<code> SQLPermission </code>常量。
+     * 
+     * 
      * @since 1.3
      */
     final static SQLPermission SET_LOG_PERMISSION =
@@ -113,6 +152,10 @@ public class DriverManager {
     /**
      * The {@code SQLPermission} constant that allows the
      * un-register a registered JDBC driver.
+     * <p>
+     *  允许注销注册的JDBC驱动程序的{@code SQLPermission}常量。
+     * 
+     * 
      * @since 1.8
      */
     final static SQLPermission DEREGISTER_DRIVER_PERMISSION =
@@ -126,6 +169,13 @@ public class DriverManager {
      * The <code>getLogWriter</code> and <code>setLogWriter</code>
      * methods should be used instead
      * of the <code>get/setlogStream</code> methods, which are deprecated.
+     * <p>
+     *  检索日志写入程序。
+     * 
+     *  应该使用<code> getLogWriter </code>和<code> setLogWriter </code>方法,而不是使用已被弃用的<code> get / setlogStream </code>
+     * 方法。
+     * 
+     * 
      * @return a <code>java.io.PrintWriter</code> object
      * @see #setLogWriter
      * @since 1.2
@@ -153,6 +203,21 @@ public class DriverManager {
      * <code>checkPermission</code> method denies setting the log writer, this
      * method throws a <code>java.lang.SecurityException</code>.
      *
+     * <p>
+     *  设置<code> DriverManager </code>和所有驱动程序使用的日志/跟踪<code> PrintWriter </code>对象。
+     * <P>
+     * 通过引入方法<code> setLogWriter </code>创建了一个次版本化问题。
+     * 方法<code> setLogWriter </code>无法创建将由<code> getLogStream </code>返回的<code> PrintStream </code>对象--- Java
+     * 平台不提供向后转换。
+     * 通过引入方法<code> setLogWriter </code>创建了一个次版本化问题。
+     * 因此,使用<code> setLogWriter </code>并使用<code> getLogStream </code>的JDBC 1.0驱动程序的新应用程序很可能看不到该驱动程序写入的调试信息。
+     * P>
+     *  从Java 2 SDK,Standard Edition,版本1.3版本开始,此方法检查以查看在设置日志记录流之前有一个<code> SQLPermission </code>对象。
+     * 如果存在<code> SecurityManager </code>并且其<code> checkPermission </code>方法拒绝设置日志写入程序,则此方法会抛出<code> java.la
+     * ng.SecurityException </code>。
+     *  从Java 2 SDK,Standard Edition,版本1.3版本开始,此方法检查以查看在设置日志记录流之前有一个<code> SQLPermission </code>对象。
+     * 
+     * 
      * @param out the new logging/tracing <code>PrintStream</code> object;
      *      <code>null</code> to disable logging and tracing
      * @throws SecurityException
@@ -188,6 +253,13 @@ public class DriverManager {
      * For maximum portability, an application should only specify a
      * property once.
      *
+     * <p>
+     *  尝试建立与给定数据库URL的连接。 <code> DriverManager </code>尝试从注册的JDBC驱动程序集中选择适当的驱动程序。
+     * p>
+     *  <B>注意：</B>如果属性被指定为{@code url}的一部分,并且也在{@code Properties}对象中指定,那么它是由实现定义的,哪个值将优先。
+     * 为了最大的可移植性,应用程序应该只指定一个属性。
+     * 
+     * 
      * @param url a database url of the form
      * <code> jdbc:<em>subprotocol</em>:<em>subname</em></code>
      * @param info a list of arbitrary string tag/value pairs as
@@ -219,6 +291,13 @@ public class DriverManager {
      * For maximum portability, an application should only specify a
      * property once.
      *
+     * <p>
+     *  尝试建立与给定数据库URL的连接。 <code> DriverManager </code>尝试从注册的JDBC驱动程序集中选择适当的驱动程序。
+     * p>
+     * <B>注意：</B>如果{@code user}或{@code password}属性也被指定为{@code url}的一部分,它是由实现定义的,哪个值优先。
+     * 为了最大的可移植性,应用程序应该只指定一个属性。
+     * 
+     * 
      * @param url a database url of the form
      * <code>jdbc:<em>subprotocol</em>:<em>subname</em></code>
      * @param user the database user on whose behalf the connection is being
@@ -252,6 +331,10 @@ public class DriverManager {
      * The <code>DriverManager</code> attempts to select an appropriate driver from
      * the set of registered JDBC drivers.
      *
+     * <p>
+     *  尝试建立与给定数据库URL的连接。 <code> DriverManager </code>尝试从注册的JDBC驱动程序集中选择适当的驱动程序。
+     * 
+     * 
      * @param url a database url of the form
      *  <code> jdbc:<em>subprotocol</em>:<em>subname</em></code>
      * @return a connection to the URL
@@ -275,6 +358,10 @@ public class DriverManager {
      * The <code>DriverManager</code> attempts to select an appropriate driver from
      * the set of registered JDBC drivers.
      *
+     * <p>
+     *  尝试找到理解给定URL的驱动程序。 <code> DriverManager </code>尝试从注册的JDBC驱动程序集中选择适当的驱动程序。
+     * 
+     * 
      * @param url a database URL of the form
      *     <code>jdbc:<em>subprotocol</em>:<em>subname</em></code>
      * @return a <code>Driver</code> object representing a driver
@@ -323,6 +410,11 @@ public class DriverManager {
      * known to the {@code DriverManager}. If the driver is currently
      * registered, no action is taken.
      *
+     * <p>
+     *  使用{@code DriverManager}注册给定的驱动程序。一个新加载的驱动程序类应该调用{@code registerDriver}方法让{@code DriverManager}知道它。
+     * 如果驱动程序当前已注册,则不执行任何操作。
+     * 
+     * 
      * @param driver the new JDBC Driver that is to be registered with the
      *               {@code DriverManager}
      * @exception SQLException if a database access error occurs
@@ -341,6 +433,11 @@ public class DriverManager {
      * known to the {@code DriverManager}. If the driver is currently
      * registered, no action is taken.
      *
+     * <p>
+     *  使用{@code DriverManager}注册给定的驱动程序。一个新加载的驱动程序类应该调用{@code registerDriver}方法让{@code DriverManager}知道它。
+     * 如果驱动程序当前已注册,则不执行任何操作。
+     * 
+     * 
      * @param driver the new JDBC Driver that is to be registered with the
      *               {@code DriverManager}
      * @param da     the {@code DriverAction} implementation to be used when
@@ -383,6 +480,18 @@ public class DriverManager {
      * registered, its deregister method will be called
      * prior to the driver being removed from the list of registered drivers.
      *
+     * <p>
+     *  从{@code DriverManager}的注册驱动程序列表中删除指定的驱动程序。
+     * <p>
+     *  如果为要删除的驱动程序指定了{@code null}值,则不会执行任何操作。
+     * <p>
+     *  如果安全管理员存在且其{@code checkPermission}拒绝权限,则会抛出{@code SecurityException}。
+     * <p>
+     * 如果在注册的驱动程序列表中找不到指定的驱动程序,则不执行任何操作。如果找到驱动程序,它将从注册的驱动程序列表中删除。
+     * <p>
+     *  如果在注册JDBC驱动程序时指定了{@code DriverAction}实例,则在从注册的驱动程序列表中删除驱动程序之前,将调用其注销方法。
+     * 
+     * 
      * @param driver the JDBC Driver to remove
      * @exception SQLException if a database access error occurs
      * @throws SecurityException if a security manager exists and its
@@ -431,6 +540,12 @@ public class DriverManager {
      * <P><B>Note:</B> The classname of a driver can be found using
      * <CODE>d.getClass().getName()</CODE>
      *
+     * <p>
+     *  检索当前调用程序可访问的当前加载的所有JDBC驱动程序的枚举。
+     * 
+     *  <P> <B>注：</B>驱动程序的类名可以使用<CODE> d.getClass()。getName()</CODE>
+     * 
+     * 
      * @return the list of JDBC Drivers loaded by the caller's class loader
      */
     @CallerSensitive
@@ -458,6 +573,10 @@ public class DriverManager {
      * while attempting to connect to a database once the driver has
      * been identified.
      *
+     * <p>
+     *  设置驱动程序识别后尝试连接到数据库时驱动程序将等待的最长时间(以秒为单位)。
+     * 
+     * 
      * @param seconds the login time limit in seconds; zero means there is no limit
      * @see #getLoginTimeout
      */
@@ -469,6 +588,10 @@ public class DriverManager {
      * Gets the maximum time in seconds that a driver can wait
      * when attempting to log in to a database.
      *
+     * <p>
+     *  获取尝试登录数据库时驱动程序可以等待的最长时间(以秒为单位)。
+     * 
+     * 
      * @return the driver login time limit in seconds
      * @see #setLoginTimeout
      */
@@ -487,6 +610,15 @@ public class DriverManager {
      * <code>checkPermission</code> method denies setting the log writer, this
      * method throws a <code>java.lang.SecurityException</code>.
      *
+     * <p>
+     *  设置由<code> DriverManager </code>和所有驱动程序使用的日志/跟踪PrintStream。
+     * P>
+     *  在Java 2 SDK标准版本1.3版本中,此方法检查在设置日志记录流之前是否有一个<code> SQLPermission </code>对象。
+     * 如果存在<code> SecurityManager </code>并且其<code> checkPermission </code>方法拒绝设置日志写入程序,则此方法会抛出<code> java.la
+     * ng.SecurityException </code>。
+     *  在Java 2 SDK标准版本1.3版本中,此方法检查在设置日志记录流之前是否有一个<code> SQLPermission </code>对象。
+     * 
+     * 
      * @param out the new logging/tracing PrintStream; to disable, set to <code>null</code>
      * @deprecated Use {@code setLogWriter}
      * @throws SecurityException if a security manager exists and its
@@ -514,6 +646,10 @@ public class DriverManager {
      * Retrieves the logging/tracing PrintStream that is used by the <code>DriverManager</code>
      * and all drivers.
      *
+     * <p>
+     *  检索由<code> DriverManager </code>和所有驱动程序使用的日志/跟踪PrintStream。
+     * 
+     * 
      * @return the logging/tracing PrintStream; if disabled, is <code>null</code>
      * @deprecated  Use {@code getLogWriter}
      * @see #setLogStream
@@ -526,6 +662,10 @@ public class DriverManager {
     /**
      * Prints a message to the current JDBC log stream.
      *
+     * <p>
+     *  将消息打印到当前JDBC日志流。
+     * 
+     * 
      * @param message a log or tracing message
      */
     public static void println(String message) {
@@ -597,6 +737,12 @@ public class DriverManager {
                  * Adding a try catch block to catch those runtime errors
                  * if driver not available in classpath but it's
                  * packaged as service and that service is there in classpath.
+                 * <p>
+                 * 可能的情况是驱动程序类可能不在那里,即可能有一个打包的驱动程序与服务类作为java.sql.Driver的实现,但实际的类可能会丢失。
+                 * 在这种情况下,一个java.util.ServiceConfigurationError将在运行时被试图定位和加载服务的VM抛出。
+                 * 
+                 *  添加一个try catch块来捕获这些运行时错误,如果驱动程序在类路径中不可用,但它打包为服务,并且该服务在类路径中。
+                 * 
                  */
                 try{
                     while(driversIterator.hasNext()) {
@@ -636,6 +782,9 @@ public class DriverManager {
          * (which is invoking this class indirectly)
          * classloader, so that the JDBC driver class outside rt.jar
          * can be loaded from here.
+         * <p>
+         *  当callerCl为null时,我们应该检查应用程序(这是间接调用这个类)classloader,以便可以从这里加载rt.jar之外的JDBC驱动程序类。
+         * 
          */
         ClassLoader callerCL = caller != null ? caller.getClassLoader() : null;
         synchronized(DriverManager.class) {
@@ -696,6 +845,8 @@ public class DriverManager {
  * Wrapper class for registered Drivers in order to not expose Driver.equals()
  * to avoid the capture of the Driver it being compared to as it might not
  * normally have access.
+ * <p>
+ *  注册驱动程序的Wrapper类,以便不暴露Driver.equals(),以避免捕获正在比较的驱动程序,因为它通常无法访问。
  */
 class DriverInfo {
 

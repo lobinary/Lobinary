@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,12 @@ import java.nio.channels.*;
  *
  * <p> This class tracks the validity of the key and implements cancellation.
  *
+ * <p>
+ *  选择键的基本实现类。
+ * 
+ *  <p>此类跟踪键的有效性并实现取消。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -44,6 +51,9 @@ public abstract class AbstractSelectionKey
 
     /**
      * Initializes a new instance of this class.
+     * <p>
+     *  初始化此类的新实例。
+     * 
      */
     protected AbstractSelectionKey() { }
 
@@ -62,6 +72,9 @@ public abstract class AbstractSelectionKey
      *
      * <p> If this key has not yet been cancelled then it is added to its
      * selector's cancelled-key set while synchronized on that set.  </p>
+     * <p>
+     *  取消此键。
+     * 
      */
     public final void cancel() {
         // Synchronizing "this" to prevent this key from getting canceled

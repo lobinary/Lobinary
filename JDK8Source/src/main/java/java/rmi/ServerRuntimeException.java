@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,13 @@ package java.rmi;
  * <p>A <code>ServerRuntimeException</code> is not thrown from servers
  * executing on the Java 2 platform v1.2 or later versions.
  *
+ * <p>
+ *  从在JDK&nbsp; 1.1上执行的服务器,当在服务器上处理调用时抛出<code> RuntimeException </code>时,作为远程​​方法调用的结果,会抛出<code> ServerR
+ * untimeException </code>解组参数,执行远程方法本身或编组返回值。
+ * 
+ *  <code> ServerRuntimeException </code>实例包含作为其原因发生的原始<code> RuntimeException </code>。
+ * 
+ * 
  * @author  Ann Wollrath
  * @since   JDK1.1
  * @deprecated no replacement
@@ -53,6 +61,10 @@ public class ServerRuntimeException extends RemoteException {
      * Constructs a <code>ServerRuntimeException</code> with the specified
      * detail message and nested exception.
      *
+     * <p>
+     *  <p>不会从在Java 2平台v1.2或更高版本上执行的服务器抛出<code> ServerRuntimeException </code>。
+     * 
+     * 
      * @param s the detail message
      * @param ex the nested exception
      * @deprecated no replacement

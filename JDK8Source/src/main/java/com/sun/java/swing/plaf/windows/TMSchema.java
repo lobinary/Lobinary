@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,14 @@
  * such as the wrong colors showing up, and is generally not
  * encouraged.
  *
+ * <p>
+ *  <p>这些类设计为在安装相应的<code> LookAndFeel </code>类时使用(<code> UIManager.setLookAndFeel(new <i> XXX </i> LookA
+ * ndFeel())</code> )。
+ * 在安装不同的<code> LookAndFeel </code>时使用它们可能会产生意外的结果,包括异常。
+ * 另外,改变由<code> UIManager </code>维护的<code> LookAndFeel </code>而不更新任何<code> JComponent </code>的相应<Component>
+ *  ComponentUI </code>结果,如出现错误的颜色,一般不鼓励。
+ * 在安装不同的<code> LookAndFeel </code>时使用它们可能会产生意外的结果,包括异常。
+ * 
  */
 
 package com.sun.java.swing.plaf.windows;
@@ -53,6 +62,13 @@ import sun.awt.windows.ThemeReader;
  * See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/commctls/userex/topics/partsandstates.asp
  * See tmschema.h (or vssym32.h & vsstyle.h for MS Vista)
  *
+ * <p>
+ *  实现Windows部件及其状态和属性为Windows外观。
+ * 
+ *  请参阅http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/commctls/userex
+ * /topics/partsandstates.asp参见tmschema.h(或vssym32.h&vsstyle .h的MS Vista)。
+ * 
+ * 
  * @author Leif Samuelsson
  */
 class TMSchema {
@@ -60,6 +76,9 @@ class TMSchema {
     /**
      * An enumeration of the various Windows controls (also known as
      * components, or top-level parts)
+     * <p>
+     *  各种Windows控件(也称为组件或顶层部件)的枚举
+     * 
      */
     public static enum Control {
         BUTTON,
@@ -83,6 +102,9 @@ class TMSchema {
 
     /**
      * An enumeration of the Windows compoent parts
+     * <p>
+     *  Windows组件部分的枚举
+     * 
      */
     public static enum Part {
         MENU (Control.MENU, 0), // Special case, not in native
@@ -220,6 +242,9 @@ class TMSchema {
 
     /**
      * An enumeration of the possible component states
+     * <p>
+     *  可能的组件状态的枚举
+     * 
      */
     public static enum State {
         ACTIVE,
@@ -297,6 +322,9 @@ class TMSchema {
 
         /**
          * A map of allowed states for each Part
+         * <p>
+         *  每个部件的允许状态的映射
+         * 
          */
         private static EnumMap<Part, State[]> stateMap;
 
@@ -468,6 +496,9 @@ class TMSchema {
     /**
      * An enumeration of the possible component attributes and the
      * corresponding value type
+     * <p>
+     *  可能的组件属性和相应的值类型的枚举
+     * 
      */
     public static enum Prop {
         COLOR(Color.class,                204),
@@ -524,6 +555,8 @@ class TMSchema {
 
     /**
      * An enumeration of attribute values for some Props
+     * <p>
+     *  某些Props的属性值的枚举
      */
     public static enum TypeEnum {
         BT_IMAGEFILE (Prop.BGTYPE, "imagefile",  0),

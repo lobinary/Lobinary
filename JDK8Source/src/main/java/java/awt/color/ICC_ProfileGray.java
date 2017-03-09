@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,16 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ ************** ********************************************
+ * ******** **** * COPYRIGHT(c)Eastman Kodak Company,1997 *** *根据United *** *国家法典第17章的未发表的作品。
+ * 版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ * 版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package java.awt.color;
@@ -64,6 +75,19 @@ import sun.java2d.cmm.ProfileDeferralInfo;
 </pre>
  * The inverse transform is done by converting the PCS Y components to
  * device Gray via the inverse of the grayTRC.
+ * <p>
+ *  ICC_Profile类的子类,它表示满足以下条件的概要文件：概要文件的颜色空间类型为TYPE_GRAY,概要文件包括grayTRCTag和mediaWhitePointTag标记。
+ * 这种简档的示例是单色输入简档,单色显示简档和单色输出简档。当满足上述条件时,ICC_Profile类中的getInstance方法将返回一个ICC_ProfileGray对象。
+ * 这个类的优点是它提供了一个查找表,Java或本地方法可能能够在某些情况下直接使用来优化颜色转换。
+ * <p>
+ * 为了从GRAY设备配置文件颜色空间变换到CIEXYZ配置文件连接空间,通过色调再现曲线(TRC)的查找来转换设备灰色分量。结果被视为PCS的消色差分量。
+ * <pre>
+ * 
+ *  &nbsp; PCSY = grayTRC [deviceGray]
+ * 
+ * </pre>
+ *  逆变换通过经由grayTRC的逆来将PCS Y分量转换到设备Gray来完成。
+ * 
  */
 
 
@@ -75,6 +99,9 @@ extends ICC_Profile {
 
     /**
      * Constructs a new ICC_ProfileGray from a CMM ID.
+     * <p>
+     *  从CMM ID构造新的ICC_ProfileGray。
+     * 
      */
     ICC_ProfileGray(Profile p) {
         super(p);
@@ -82,6 +109,9 @@ extends ICC_Profile {
 
     /**
      * Constructs a new ICC_ProfileGray from a ProfileDeferralInfo object.
+     * <p>
+     *  从ProfileDeferralInfo对象构造新的ICC_ProfileGray。
+     * 
      */
     ICC_ProfileGray(ProfileDeferralInfo pdi) {
         super(pdi);
@@ -91,6 +121,10 @@ extends ICC_Profile {
     /**
      * Returns a float array of length 3 containing the X, Y, and Z
      * components of the mediaWhitePointTag in the ICC profile.
+     * <p>
+     *  返回长度为3的float数组,其中包含ICC配置文件中mediaWhitePointTag的X,Y和Z分量。
+     * 
+     * 
      * @return an array containing the components of the
      * mediaWhitePointTag in the ICC profile.
      */
@@ -111,6 +145,14 @@ extends ICC_Profile {
 &nbsp;        PCSY = deviceGray
 
 </pre>
+     * <p>
+     *  返回表示色调再现曲线(TRC)的伽马值。如果配置文件将TRC表示为表而不是单个gamma值,则抛出异常。在这种情况下,实际的表可以通过getTRC()获得。当使用伽马值时,PCS Y分量计算如下：
+     * <pre>
+     * 
+     *  &nbsp; gamma&nbsp; PCSY = deviceGray
+     * 
+     * </pre>
+     * 
      * @return the gamma value as a float.
      * @exception ProfileDataException if the profile does not specify
      *            the TRC as a single gamma value.
@@ -136,6 +178,8 @@ extends ICC_Profile {
      * Value 0.0 is represented by an array value of 0x0000 and
      * value 1.0 by 0xFFFF, i.e. the values are really unsigned
      * short values, although they are returned in a short array.
+     * <p>
+     * 
      * @return a short array representing the TRC.
      * @exception ProfileDataException if the profile does not specify
      *            the TRC as a table.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,33 @@
  * Business Machines, Inc., http://www.apache.org.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)1999-2002 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得将"Xerces"和"Apache Software Foundation"名称用于支持或推广从本软件衍生的产品。如需书面许可,请联系apache@apache.org。
+ * 
+ *  未经Apache软件基金会事先书面许可,从本软件派生的产品可能不会被称为"Apache",也不可能出现在他们的名字中。
+ * 
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款,最初是基于软件版权(c)1999,国际商业机器公司,http://www.apache.org。
+ * 有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -75,6 +103,12 @@ import java.io.IOException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  在XML 1.1的上下文中实现实体扫描器方法。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  * @author Neil Graham, IBM
  * @version $Id: XML11EntityScanner.java,v 1.5 2010-11-01 04:39:40 joehw Exp $
@@ -101,6 +135,12 @@ public class XML11EntityScanner
      * <p>
      * <strong>Note:</strong> The character is <em>not</em> consumed.
      *
+     * <p>
+     *  返回输入上的下一个字符。
+     * <p>
+     *  <strong>请注意</strong>：<em> </em>不是<em> </em>。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      */
@@ -129,6 +169,12 @@ public class XML11EntityScanner
      * <p>
      * <strong>Note:</strong> The character is consumed.
      *
+     * <p>
+     *  返回输入上的下一个字符。
+     * <p>
+     *  <strong>注意：</strong>字符已消耗。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      */
@@ -175,6 +221,14 @@ public class XML11EntityScanner
      * <strong>Note:</strong> The string returned must be a symbol. The
      * SymbolTable can be used for this purpose.
      *
+     * <p>
+     * 返回与输入中立即出现的NMTOKEN生产作为符号匹配的字符串,如果NMTOKEN名称字符串存在,则返回null。
+     * <p>
+     *  <strong>请注意</strong>：NMTOKEN个字符已用完。
+     * <p>
+     *  <strong>注意：</strong>返回的字符串必须是符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      *
@@ -288,6 +342,14 @@ public class XML11EntityScanner
      * <strong>Note:</strong> The string returned must be a symbol. The
      * SymbolTable can be used for this purpose.
      *
+     * <p>
+     *  返回与输入上立即出现的Name生产作为符号匹配的字符串,如果没有Name字符串,则返回null。
+     * <p>
+     *  <strong>注意：</strong>名称字符已消耗。
+     * <p>
+     *  <strong>注意：</strong>返回的字符串必须是符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      *
@@ -448,6 +510,14 @@ public class XML11EntityScanner
      * <strong>Note:</strong> The string returned must be a symbol. The
      * SymbolTable can be used for this purpose.
      *
+     * <p>
+     *  返回与输入中立即出现的NCName生产作为符号匹配的字符串,如果没有NCName字符串,则返回null。
+     * <p>
+     *  <strong>注意：</strong>会使用NCName字符。
+     * <p>
+     *  <strong>注意：</strong>返回的字符串必须是符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      *
@@ -610,6 +680,14 @@ public class XML11EntityScanner
      * QName structure must be symbols. The SymbolTable can be used for
      * this purpose.
      *
+     * <p>
+     *  从输入扫描限定名称,适当地设置QName结构的字段。
+     * <p>
+     *  <strong>注意：</strong>使用限定名称字符。
+     * <p>
+     *  <strong>注意：</strong>用于设置QName结构的值的字符串必须是符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @param qname The qualified name structure to fill.
      *
      * @return Returns true if a qualified name appeared immediately on
@@ -829,6 +907,16 @@ public class XML11EntityScanner
      * immediately using the returned character data or making a copy of
      * the character data.
      *
+     * <p>
+     *  扫描一系列解析的字符数据,适当地设置XMLString结构的字段。
+     * <p>
+     *  <strong>注意</strong>：字符已消耗。
+     * <p>
+     * <strong>注意</strong>：此方法不保证返回最长的已解析字符数据。此方法可能由于到达输入缓冲区的末尾或任何其他原因而在标记之前返回。
+     * <p>
+     *  <strong>注意</strong>：XMLString结构中包含的字段不能保证在对实体扫描程序的后续调用时保持有效。因此,调用者负责立即使用返回的字符数据或制作字符数据的副本。
+     * 
+     * 
      * @param content The content structure to fill.
      *
      * @return Returns the next character on the input, if known. This
@@ -969,6 +1057,16 @@ public class XML11EntityScanner
      * immediately using the returned character data or making a copy of
      * the character data.
      *
+     * <p>
+     *  扫描一系列属性值数据,适当地设置XMLString结构的字段。
+     * <p>
+     *  <strong>注意</strong>：字符已消耗。
+     * <p>
+     *  <strong>注意：</strong>此方法不保证返回最长的属性值数据。由于到达输入缓冲区的末尾或任何其他原因,此方法可能在引号字符之前返回。
+     * <p>
+     *  <strong>注意</strong>：XMLString结构中包含的字段不能保证在对实体扫描程序的后续调用时保持有效。因此,调用者负责立即使用返回的字符数据或制作字符数据的副本。
+     * 
+     * 
      * @param quote   The quote character that signifies the end of the
      *                attribute value data.
      * @param content The content structure to fill.
@@ -1118,6 +1216,18 @@ public class XML11EntityScanner
      * immediately using the returned character data or making a copy of
      * the character data.
      *
+     * <p>
+     *  将一系列字符数据扫描到指定的分隔符,并适当地设置XMLString结构的字段。
+     * <p>
+     *  <strong>注意</strong>：字符已消耗。
+     * <p>
+     * <strong>注意：</strong>这假设内部缓冲区的大小至少与分隔符的长度相同或大于分隔符的长度,并且分隔符至少包含一个字符。
+     * <p>
+     *  <strong>注意：</strong>此方法不保证返回最长字符数据。由于到达输入缓冲区的末尾或任何其他原因,此方法可能在分隔符之前返回。
+     * <p>
+     *  <strong>注意</strong>：XMLString结构中包含的字段不能保证在对实体扫描程序的后续调用时保持有效。因此,调用者负责立即使用返回的字符数据或制作字符数据的副本。
+     * 
+     * 
      * @param delimiter The string that signifies the end of the character
      *                  data to be scanned.
      * @param data      The data structure to fill.
@@ -1322,6 +1432,12 @@ public class XML11EntityScanner
      * <strong>Note:</strong> The character is consumed only if it matches
      * the specified character.
      *
+     * <p>
+     *  跳过在输入上立即出现的字符。
+     * <p>
+     *  <strong>请注意</strong>：只有符合指定字符的字符才会使用。
+     * 
+     * 
      * @param c The character to skip.
      *
      * @return Returns true if the character was skipped.
@@ -1382,6 +1498,12 @@ public class XML11EntityScanner
      * <strong>Note:</strong> The characters are consumed only if they are
      * space characters.
      *
+     * <p>
+     *  跳过输入上立即出现的空格字符。
+     * <p>
+     *  <strong>请注意</strong>：仅当字符为空格字符时,才会使用这些字符。
+     * 
+     * 
      * @return Returns true if at least one space character was skipped.
      *
      * @throws IOException  Thrown if i/o error occurs.
@@ -1511,6 +1633,10 @@ public class XML11EntityScanner
      * <strong>Note:</strong> The characters are consumed only if they are
      * space characters.
      *
+     * <p>
+     *  跳过输入上立即出现的指定字符串。
+     * <p>
+     * 
      * @param s The string to skip.
      *
      * @return Returns true if the string was skipped.

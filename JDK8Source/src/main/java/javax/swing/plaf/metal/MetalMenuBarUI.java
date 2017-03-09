@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import javax.swing.plaf.basic.*;
  * Metal implementation of <code>MenuBarUI</code>. This class is responsible
  * for providing the metal look and feel for <code>JMenuBar</code>s.
  *
+ * <p>
+ *  金属实现<code> MenuBarUI </code>。这个类负责提供<code> JMenuBar </code>的金属外观和感觉。
+ * 
+ * 
  * @see javax.swing.plaf.MenuBarUI
  * @since 1.5
  */
@@ -43,6 +48,10 @@ public class MetalMenuBarUI extends BasicMenuBarUI  {
      * Creates the <code>ComponentUI</code> implementation for the passed
      * in component.
      *
+     * <p>
+     *  为传递的组件创建<code> ComponentUI </code>实现。
+     * 
+     * 
      * @param x JComponent to create the ComponentUI implementation for
      * @return ComponentUI implementation for <code>x</code>
      * @throws NullPointerException if <code>x</code> is null
@@ -58,6 +67,10 @@ public class MetalMenuBarUI extends BasicMenuBarUI  {
      * Configures the specified component appropriate for the metal look and
      * feel.
      *
+     * <p>
+     *  配置适合金属外观的指定组件。
+     * 
+     * 
      * @param c the component where this UI delegate is being installed
      * @throws NullPointerException if <code>c</code> is null.
      */
@@ -70,6 +83,10 @@ public class MetalMenuBarUI extends BasicMenuBarUI  {
      * Reverses configuration which was done on the specified component during
      * <code>installUI</code>.
      *
+     * <p>
+     *  在<code> installUI </code>期间在指定的组件上完成的反转配置。
+     * 
+     * 
      * @param c the component where this UI delegate is being installed
      * @throws NullPointerException if <code>c</code> is null.
      */
@@ -82,6 +99,9 @@ public class MetalMenuBarUI extends BasicMenuBarUI  {
      * If necessary paints the background of the component, then
      * invokes <code>paint</code>.
      *
+     * <p>
+     *  如果需要绘制组件的背景,然后调用<code> paint </code>。
+     * 
      * @param g Graphics to paint to
      * @param c JComponent painting on
      * @throws NullPointerException if <code>g</code> or <code>c</code> is

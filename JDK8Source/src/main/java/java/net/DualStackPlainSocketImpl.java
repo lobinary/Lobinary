@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import sun.misc.JavaIOFileDescriptorAccess;
  * layer TCP/IP stack and can handle both IPv4 and IPV6 through a
  * single file descriptor.
  *
+ * <p>
+ *  此类定义了在大于或等于Windows Vista的Windows平台上使用的普通SocketImpl。这些平台具有双层TCP / IP堆栈,并且可以通过单个文件描述符处理IPv4和IPV6。
+ * 
+ * 
  * @author Chris Hegarty
  */
 
@@ -92,6 +97,16 @@ class DualStackPlainSocketImpl extends AbstractPlainSocketImpl
          * We need to set the local port field. If bind was called
          * previous to the connect (by the client) then localport field
          * will already be set.
+         * <p>
+         *  fdAccess.set(fd,newfd); }}
+         * 
+         *  void socketConnect(InetAddress address,int port,int timeout)throws IOException {int nativefd = checkAndReturnNativeFD();。
+         * 
+         *  if(address == null)throw new NullPointerException("inet address argument is null。");
+         * 
+         *  int connectResult; if(timeout <= 0){connectResult = connect0(nativefd,address,port); } else {configureBlocking(nativefd,false); try {connectResult = connect0(nativefd,address,port); if(connectResult == WOULDBLOCK){waitForConnect(nativefd,timeout); }} finally {configureBlocking(nativefd,true);} }} / *我们需要设置本地端口字段。
+         * 如果绑定在connect(由客户端)之前调用,那么localport字段将已经设置。
+         * 
          */
         if (localport == 0)
             localport = localPort0(nativefd);
@@ -209,6 +224,19 @@ class DualStackPlainSocketImpl extends AbstractPlainSocketImpl
                     optionValue = -1;
                 }
                 break;
+    void socketClose0(boolean useDeferredClose/* <p>
+    void socketClose0(boolean useDeferredClose/*  if(fd == null)throw new SocketException("Socket closed");
+    void socketClose0(boolean useDeferredClose/* 
+    void socketClose0(boolean useDeferredClose/*  if(！fd.valid())return;
+    void socketClose0(boolean useDeferredClose/* 
+    void socketClose0(boolean useDeferredClose/*  final int nativefd = fdAccess.get(fd); fdAccess.set(fd,-1); close0(nativefd); }}
+    void socketClose0(boolean useDeferredClose/* 
+    void socketClose0(boolean useDeferredClose/*  void socketShutdown(int howto)throws IOException {int nativefd = checkAndReturnNativeFD(); shutdown0(nativefd,howto); }
+    void socketClose0(boolean useDeferredClose/* }。
+    void socketClose0(boolean useDeferredClose/* 
+    void socketClose0(boolean useDeferredClose/* //在SO_REUSEADDR之后有意逃脱@SuppressWarnings("fallthrough")void socketSetOption(int opt,boolean on,Object v
+    void socketClose0(boolean useDeferredClose/* alue)throws SocketException {int nativefd = checkAndReturnNativeFD();。
+    void socketClose0(boolean useDeferredClose/* 
             default :/* shouldn't get here */
                 throw new SocketException("Option not supported");
         }

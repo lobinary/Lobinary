@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,10 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException ;
 /**
  * This implements the GIOP 1.2 Request header.
  *
+ * <p>
+ *  这实现GIOP 1.2请求头。
+ * 
+ * 
  * @author Ram Jeyaraman 05/14/2000
  */
 
@@ -100,6 +105,8 @@ public final class RequestMessage_1_2 extends Message_1_2
             else if (LSB[0] == 1) // 0x01
                 oneway call; but server may provide
                 a location forward response or system exception response.
+        /* <p>
+        /*  
         */
 
         if ( (this.response_flags & RESPONSE_EXPECTED_BIT) == RESPONSE_EXPECTED_BIT ) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.temporal;
 
@@ -99,6 +118,27 @@ import java.time.DateTimeException;
  * This interface places no restrictions on the mutability of implementations,
  * however immutability is strongly recommended.
  *
+ * <p>
+ *  调整时间对象的策略。
+ * <p>
+ *  调整器是修改时态对象的关键工具。它们存在于外部化调整的过程,允许不同的方法,根据战略设计模式。示例可以是设置避免周末的日期的调整器,或者将日期设置为该月的最后一天的日期。
+ * <p>
+ *  有两种等效的使用{@code TemporalAdjuster}的方法。第一种是直接在此接口上调用方法。第二个是使用{@link Temporal#with(TemporalAdjuster)}：
+ * <pre>
+ *  //这两行是等效的,但第二种方法是建议temporal = thisAdjuster.adjustInto(temporal); temporal = temporal.with(thisAdjust
+ * er);。
+ * </pre>
+ * 建议使用第二种方法,{@code with(TemporalAdjuster)},因为它在代码中很容易阅读。
+ * <p>
+ *  {@link TemporalAdjusters}类包含一组标准调整器,可用作静态方法。这些包括：
+ * <ul>
+ *  <li>查找每月的第一天或最后一天<li>查找下个月的第一天<li>查找一年中的第一天或最后一天<li>找到明年的第一天<li>找到第一个或在一个月内的最后一天,例如"六月的第一个星期三"<li>找到
+ * 下一个或前一个星期,例如"下星期四"。
+ * </ul>
+ * 
+ *  @implSpec此接口对实现的可变性没有限制,但强烈建议使用不可变性。
+ * 
+ * 
  * @see TemporalAdjusters
  * @since 1.8
  */
@@ -142,6 +182,18 @@ public interface TemporalAdjuster {
      * This method may be called from multiple threads in parallel.
      * It must be thread-safe when invoked.
      *
+     * <p>
+     *  调整指定的时间对象。
+     * <p>
+     *  这使用在实现类中封装的逻辑来调整指定的时间对象。示例可以是设置避免周末的日期的调整器,或者将日期设置为该月的最后一天的日期。
+     * <p>
+     *  有两种等效的方法使用这种方法。第一个是直接调用这个方法。第二个是使用{@link Temporal#with(TemporalAdjuster)}：
+     * <pre>
+     *  //这两行是等效的,但第二种方法是建议temporal = thisAdjuster.adjustInto(temporal); temporal = temporal.with(thisAdjust
+     * er);。
+     * </pre>
+     *  建议使用第二种方法,{@code with(TemporalAdjuster)},因为它在代码中很容易阅读。
+     * 
      * @param temporal  the temporal object to adjust, not null
      * @return an object of the same observable type with the adjustment made, not null
      * @throws DateTimeException if unable to make the adjustment

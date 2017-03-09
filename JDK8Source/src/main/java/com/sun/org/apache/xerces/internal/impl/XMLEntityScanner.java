@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  */
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -46,6 +56,10 @@ import java.util.Vector;
 /**
  * Implements the entity scanner methods.
  *
+ * <p>
+ *  实现实体扫描器方法。
+ * 
+ * 
  * @author Neeraj Bajaj, Sun Microsystems
  * @author Andy Clark, IBM
  * @author Arnaud  Le Hors, IBM
@@ -71,11 +85,17 @@ public class XMLEntityScanner implements XMLLocator  {
      * Debug printing of buffer. This debugging flag works best when you
      * resize the DEFAULT_BUFFER_SIZE down to something reasonable like
      * 64 characters.
+     * <p>
+     *  调试打印缓冲区。当你将DEFAULT_BUFFER_SIZE的大小调整到合理的64个字符时,这个调试标志的效果最好。
+     * 
      */
     private static final boolean DEBUG_BUFFER = false;
     private static final boolean DEBUG_SKIP_STRING = false;
     /**
      * To signal the end of the document entity, this exception will be thrown.
+     * <p>
+     *  要表示文档实体的结束,将抛出此异常。
+     * 
      */
     private static final EOFException END_OF_DOCUMENT_ENTITY = new EOFException() {
         private static final long serialVersionUID = 980337771224675268L;
@@ -93,6 +113,9 @@ public class XMLEntityScanner implements XMLLocator  {
     /**
      * Allow Java encoding names. This feature identifier is:
      * http://apache.org/xml/features/allow-java-encodings
+     * <p>
+     *  允许Java编码名称。此功能标识符为：http://apache.org/xml/features/allow-java-encodings
+     * 
      */
     protected boolean fAllowJavaEncodings;
 
@@ -144,6 +167,10 @@ public class XMLEntityScanner implements XMLLocator  {
 
     /**  private constructor, this class can only be instantiated within this class. Instance of this class should
      *    be obtained using getEntityScanner() or getEntityScanner(ScannedEntity scannedEntity)
+     * <p>
+     *  使用getEntityScanner()或getEntityScanner(ScannedEntity scannedEntity)
+     * 
+     * 
      *    @see getEntityScanner()
      *    @see getEntityScanner(ScannedEntity)
      */
@@ -170,6 +197,9 @@ public class XMLEntityScanner implements XMLLocator  {
 
     /**
      * Resets the components.
+     * <p>
+     *  复位组件。
+     * 
      */
     public void reset(PropertyManager propertyManager){
         fSymbolTable = (SymbolTable)propertyManager.getProperty(SYMBOL_TABLE) ;
@@ -185,6 +215,10 @@ public class XMLEntityScanner implements XMLLocator  {
      * about any features and properties that affect the operation of the
      * component.
      *
+     * <p>
+     *  复位组件。组件可以向组件管理器查询影响组件操作的任何特征和属性。
+     * 
+     * 
      * @param componentManager The component manager.
      *
      * @throws SAXException Thrown by component on initialization error.
@@ -228,6 +262,10 @@ public class XMLEntityScanner implements XMLLocator  {
      * document. Also note that, for a given entity, this value can only be considered
      * final once the XML or text declaration has been read or once it has been
      * determined that there is no such declaration.
+     * <p>
+     * 返回当前实体的XML版本。这通常是来自XML或文本声明的值或由解析器默认的值。请注意,此值可能不同于应用于当前实体的处理规则的版本。例如,XML 1.1文档可以引用XML 1.0实体。
+     * 在这种情况下,XML 1.1的规则应用于整个文档。还要注意,对于给定的实体,只有一旦读取了XML或文本声明,或者一旦确定没有这样的声明,该值只能被认为是final。
+     * 
      */
     public final String getXMLVersion() {
         if (fCurrentEntity != null) {
@@ -241,6 +279,10 @@ public class XMLEntityScanner implements XMLLocator  {
      * scanners to report the value of the version pseudo-attribute
      * in an XML or text declaration.
      *
+     * <p>
+     *  设置XML版本。扫描器使用此方法在XML或文本声明中报告版本伪属性的值。
+     * 
+     * 
      * @param xmlVersion the XML version of the current entity
      */
     public final void setXMLVersion(String xmlVersion) {
@@ -250,6 +292,8 @@ public class XMLEntityScanner implements XMLLocator  {
 
 
     /** set the instance of current scanned entity.
+    /* <p>
+    /* 
      *   @param ScannedEntity
      */
 
@@ -272,12 +316,17 @@ public class XMLEntityScanner implements XMLLocator  {
     /**
      * Returns the base system identifier of the currently scanned
      * entity, or null if none is available.
+     * <p>
+     *  返回当前扫描实体的基本系统标识符,如果没有可用则返回null。
+     * 
      */
     public final String getBaseSystemId() {
         return (fCurrentEntity != null && fCurrentEntity.entityLocation != null) ? fCurrentEntity.entityLocation.getExpandedSystemId() : null;
     } // getBaseSystemId():String
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier#setBaseSystemId(String)
      */
     public void setBaseSystemId(String systemId) {
@@ -292,6 +341,8 @@ public class XMLEntityScanner implements XMLLocator  {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLLocator#setLineNumber(int)
      */
     public void setLineNumber(int line) {
@@ -306,6 +357,8 @@ public class XMLEntityScanner implements XMLLocator  {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLLocator#setColumnNumber(int)
      */
     public void setColumnNumber(int col) {
@@ -323,6 +376,8 @@ public class XMLEntityScanner implements XMLLocator  {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier#setExpandedSystemId(String)
      */
     public void setExpandedSystemId(String systemId) {
@@ -335,6 +390,8 @@ public class XMLEntityScanner implements XMLLocator  {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier#setLiteralSystemId(String)
      */
     public void setLiteralSystemId(String systemId) {
@@ -347,6 +404,8 @@ public class XMLEntityScanner implements XMLLocator  {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier#setPublicId(String)
      */
     public void setPublicId(String publicId) {
@@ -373,6 +432,10 @@ public class XMLEntityScanner implements XMLLocator  {
      * has been determined that there is no such declaration) since, no encoding
      * having been specified on the XMLInputSource, the parser
      * will make an initial "guess" which could be in error.
+     * <p>
+     *  返回当前实体的编码。
+     * 注意,对于给定的实体,一旦读取了编码声明(或者一旦确定没有这样的声明),该值只能被认为是final,因为没有在XMLInputSource上指定编码,解析器将做一个可能是错误的初始"猜测"。
+     * 
      */
     public final String getEncoding() {
         if (fCurrentEntity != null) {
@@ -393,6 +456,13 @@ public class XMLEntityScanner implements XMLLocator  {
      * that is resolved directly to the appropriate java.io.Reader
      * object).
      *
+     * <p>
+     *  设置扫描仪的编码。如果XMLDecl或TextDecl行包含编码伪属性,扫描程序将使用此方法。
+     * <p>
+     * <strong>注意</strong>：当前实体的底层字符阅读器将更改为适应新的编码。
+     * 然而,如果当前的读取器不是从输入流(例如,直接解析到适当的java.io.Reader对象的外部实体)构造的,则忽略新的编码。
+     * 
+     * 
      * @param encoding The IANA encoding name of the new encoding.
      *
      * @throws IOException Thrown if the new encoding is not supported.
@@ -475,6 +545,12 @@ public class XMLEntityScanner implements XMLLocator  {
      * <p>
      * <strong>Note:</strong> The character is <em>not</em> consumed.
      *
+     * <p>
+     *  返回输入上的下一个字符。
+     * <p>
+     *  <strong>请注意</strong>：<em> </em>不是<em> </em>。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      */
@@ -516,6 +592,12 @@ public class XMLEntityScanner implements XMLLocator  {
      * <p>
      * <strong>Note:</strong> The character is consumed.
      *
+     * <p>
+     *  返回输入上的下一个字符。
+     * <p>
+     *  <strong>注意：</strong>字符已消耗。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      */
@@ -570,6 +652,14 @@ public class XMLEntityScanner implements XMLLocator  {
      * <strong>Note:</strong> The string returned must be a symbol. The
      * SymbolTable can be used for this purpose.
      *
+     * <p>
+     *  返回与输入中立即出现的NMTOKEN生产作为符号匹配的字符串,如果NMTOKEN名称字符串存在,则返回null。
+     * <p>
+     *  <strong>请注意</strong>：NMTOKEN个字符已用完。
+     * <p>
+     *  <strong>注意：</strong>返回的字符串必须是符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      *
@@ -648,6 +738,14 @@ public class XMLEntityScanner implements XMLLocator  {
      * <strong>Note:</strong> The string returned must be a symbol. The
      * SymbolTable can be used for this purpose.
      *
+     * <p>
+     *  返回与输入上立即出现的Name生产作为符号匹配的字符串,如果没有Name字符串,则返回null。
+     * <p>
+     *  <strong>注意：</strong>名称字符已消耗。
+     * <p>
+     *  <strong>注意：</strong>返回的字符串必须是符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @throws IOException  Thrown if i/o error occurs.
      * @throws EOFException Thrown on end of file.
      *
@@ -745,6 +843,14 @@ public class XMLEntityScanner implements XMLLocator  {
      * QName structure must be symbols. The SymbolTable can be used for
      * this purpose.
      *
+     * <p>
+     *  从输入扫描限定名称,适当地设置QName结构的字段。
+     * <p>
+     *  <strong>注意：</strong>使用限定名称字符。
+     * <p>
+     *  <strong>注意：</strong>用于设置QName结构的值的字符串必须是符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @param qname The qualified name structure to fill.
      *
      * @return Returns true if a qualified name appeared immediately on
@@ -889,6 +995,15 @@ public class XMLEntityScanner implements XMLLocator  {
      * other reason.
      * <p>
      *
+     * <p>
+     * CHANGED：扫描一系列解析的字符数据,此函数将字符数据附加到提供的缓冲区。
+     * <p>
+     *  <strong>注意</strong>：字符已消耗。
+     * <p>
+     *  <strong>注意</strong>：此方法不保证返回最长的已解析字符数据。此方法可能由于到达输入缓冲区的末尾或任何其他原因而在标记之前返回。
+     * <p>
+     * 
+     * 
      * @param content The content structure to fill.
      *
      * @return Returns the next character on the input, if known. This
@@ -1036,6 +1151,16 @@ public class XMLEntityScanner implements XMLLocator  {
      * immediately using the returned character data or making a copy of
      * the character data.
      *
+     * <p>
+     *  扫描一系列属性值数据,适当地设置XMLString结构的字段。
+     * <p>
+     *  <strong>注意</strong>：字符已消耗。
+     * <p>
+     *  <strong>注意：</strong>此方法不保证返回最长的属性值数据。由于到达输入缓冲区的末尾或任何其他原因,此方法可能在引号字符之前返回。
+     * <p>
+     *  <strong>注意</strong>：XMLString结构中包含的字段不能保证在对实体扫描程序的后续调用时保持有效。因此,调用者负责立即使用返回的字符数据或制作字符数据的副本。
+     * 
+     * 
      * @param quote   The quote character that signifies the end of the
      *                attribute value data.
      * @param content The content structure to fill.
@@ -1115,6 +1240,11 @@ public class XMLEntityScanner implements XMLLocator  {
                      * fCurrentEntity.position++;
                      * offset++;
                      * }
+                     * <p>
+                     *  if(fCurrentEntity.ch [fCurrentEntity.position] =='\ r'&& external){fCurrentEntity.position ++; offset ++; }
+                     * }。
+                     * 
+                     * 
                      * /***/
                 } else {
                     fCurrentEntity.position--;
@@ -1187,6 +1317,12 @@ public class XMLEntityScanner implements XMLLocator  {
      *
      * For XML 1.0, legal characters below 0x20 are 0x09 (TAB), 0x0A (LF) and 0x0D (CR).
      *
+     * <p>
+     *  保存空格信息。需要时,将空白缓冲区增加100。
+     * 
+     *  对于XML 1.0,0x20以下的合法字符为0x09(TAB),0x0A(LF)和0x0D(CR)。
+     * 
+     * 
      * @param whiteSpacePos position of a whitespace in the scanner entity buffer
      */
     private void storeWhiteSpace(int whiteSpacePos) {
@@ -1214,6 +1350,16 @@ public class XMLEntityScanner implements XMLLocator  {
      * the delimiter due to reaching the end of the input buffer or any
      * other reason.
      * <p>
+     * <p>
+     *  扫描一定范围的字符数据,直到指定的分隔符,适当地设置XMLString结构的字段。
+     * <p>
+     *  <strong>注意</strong>：字符已消耗。
+     * <p>
+     * <strong>注意：</strong>这假定分隔符的长度,并且分隔符至少包含一个字符。
+     * <p>
+     *  <strong>注意：</strong>此方法不保证返回最长字符数据。由于到达输入缓冲区的末尾或任何其他原因,此方法可能在分隔符之前返回。
+     * <p>
+     * 
      * @param delimiter The string that signifies the end of the character
      *                  data to be scanned.
      * @param buffer    The XMLStringBuffer to fill.
@@ -1394,6 +1540,12 @@ public class XMLEntityScanner implements XMLLocator  {
      * <strong>Note:</strong> The character is consumed only if it matches
      * the specified character.
      *
+     * <p>
+     *  跳过在输入上立即出现的字符。
+     * <p>
+     *  <strong>请注意</strong>：只有符合指定字符的字符才会使用。
+     * 
+     * 
      * @param c The character to skip.
      *
      * @return Returns true if the character was skipped.
@@ -1469,6 +1621,12 @@ public class XMLEntityScanner implements XMLLocator  {
      * <strong>Note:</strong> The characters are consumed only if they are
      * space characters.
      *
+     * <p>
+     *  跳过输入上立即出现的空格字符。
+     * <p>
+     *  <strong>请注意</strong>：仅当字符为空格字符时,才会使用这些字符。
+     * 
+     * 
      * @return Returns true if at least one space character was skipped.
      *
      * @throws IOException  Thrown if i/o error occurs.
@@ -1570,6 +1728,8 @@ public class XMLEntityScanner implements XMLLocator  {
 
 
     /**
+    /* <p>
+    /* 
      * @param legnth This function checks that following number of characters are available.
      * to the underlying buffer.
      * @return This function returns true if capacity asked is available.
@@ -1579,6 +1739,8 @@ public class XMLEntityScanner implements XMLLocator  {
     }
 
     /**
+    /* <p>
+    /* 
      * @param legnth This function checks that following number of characters are available.
      * to the underlying buffer.
      * @param if the underlying function should change the entity
@@ -1637,6 +1799,12 @@ public class XMLEntityScanner implements XMLLocator  {
      * <strong>Note:</strong> The characters are consumed only if all
      * the characters are skipped.
      *
+     * <p>
+     *  跳过输入上立即出现的指定字符串。
+     * <p>
+     *  <strong>请注意</strong>：仅当跳过所有字符时,才会使用这些字符。
+     * 
+     * 
      * @param s The string to skip.
      *
      * @return Returns true if the string was skipped.
@@ -1709,6 +1877,10 @@ public class XMLEntityScanner implements XMLLocator  {
     /**
      * Loads a chunk of text.
      *
+     * <p>
+     *  加载一大块文本。
+     * 
+     * 
      * @param offset       The offset into the character buffer to
      *                     read the next batch of characters.
      * @param changeEntity True if the load should change entities
@@ -1787,6 +1959,10 @@ public class XMLEntityScanner implements XMLLocator  {
      * Creates a reader capable of reading the given input stream in
      * the specified encoding.
      *
+     * <p>
+     *  创建能够读取指定编码中给定输入流的阅读器。
+     * 
+     * 
      * @param inputStream  The input stream.
      * @param encoding     The encoding name that the input stream is
      *                     encoded using. If the user has specified that
@@ -1907,6 +2083,10 @@ public class XMLEntityScanner implements XMLLocator  {
      * Returns the IANA encoding name that is auto-detected from
      * the bytes specified, with the endian-ness of that encoding where appropriate.
      *
+     * <p>
+     *  返回从指定的字节自动检测的IANA编码名称,并在适当的位置使用该编码的字节顺序。
+     * 
+     * 
      * @param b4    The first four bytes of the input.
      * @param count The number of bytes actually read.
      * @return a 2-element array:  the first element, an IANA-encoding string,
@@ -1995,6 +2175,10 @@ public class XMLEntityScanner implements XMLLocator  {
      * xxx not removing endEntity() so that i remember that we need to implement it.
      * Ends an entity.
      *
+     * <p>
+     *  xxx不删除endEntity(),所以我记得我们需要实现它。结束实体。
+     * 
+     * 
      * @throws XNIException Thrown by entity handler to signal an error.
      */
     //
@@ -2053,6 +2237,10 @@ public class XMLEntityScanner implements XMLLocator  {
 
     /**
      * Registers the listener object and provides callback.
+     * <p>
+     *  注册侦听器对象并提供回调。
+     * 
+     * 
      * @param listener listener to which call back should be provided when scanner buffer
      * is being changed.
      */
@@ -2063,6 +2251,8 @@ public class XMLEntityScanner implements XMLLocator  {
 
     /**
      *
+     * <p>
+     * 
      * @param loadPos Starting position from which new data is being loaded into scanner buffer.
      */
     public void invokeListeners(int loadPos){
@@ -2082,6 +2272,13 @@ public class XMLEntityScanner implements XMLLocator  {
      * <strong>Note:</strong> The characters are consumed only if they would
      * match non-terminal S before end of line normalization is performed.
      *
+     * <p>
+     *  在执行行标准化结束之前跳过在输入上立即出现匹配非终端S(0x09,0x0A,0x0D,0x20)的空格字符。
+     * 当扫描只能包含US-ASCII字符的XMLDecl和TextDecl等结构时,这是非常有用的。
+     * <p>
+     * <strong>注意</strong>：只有在执行行尾标准化之前,匹配非终端S的字符才会使用这些字符。
+     * 
+     * 
      * @return Returns true if at least one space character was skipped.
      *
      * @throws IOException  Thrown if i/o error occurs.
@@ -2133,6 +2330,8 @@ public class XMLEntityScanner implements XMLLocator  {
                      * fCurrentEntity.position++;
                      * }
                      * }
+                     * <p>
+                     * 
                      * /***/
                 } else {
                     fCurrentEntity.columnNumber++;

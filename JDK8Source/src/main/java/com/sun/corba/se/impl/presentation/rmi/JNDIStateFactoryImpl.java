@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,11 @@ import com.sun.corba.se.spi.presentation.rmi.StubAdapter ;
   * Based on the original com.sun.jndi.cosnaming.RemoteToCorba and
   * com.sun.jndi.toolkit.corba.CorbaUtils.
   *
+  * <p>
+  *  StateFactory,将java.rmi.Remote对象转换为org.omg.CORBA.Object。此版本适用于标准RMI-IIOP或Dynamic RMI-IIOP。
+  * 基于原始com.sun.jndi.cosnaming.RemoteToCorba和com.sun.jndi.toolkit.corba.CorbaUtils。
+  * 
+  * 
   * @author Ken Cavanaugh
   */
 
@@ -88,6 +94,8 @@ public class JNDIStateFactoryImpl implements StateFactory
      * If input is not a Remote object, or if Remote object uses JRMP, return null.
      * If the RMI-IIOP library is not available, throw ConfigurationException.
      *
+     * <p>
+     * 
      * @param orig The object to turn into a CORBA object. If not Remote,
      *             or if is a JRMP stub or impl, return null.
      * @param name Ignored

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 /**
@@ -302,6 +306,83 @@
  *
  * </ul>
  *
+ * <p>
+ *  实用程序类通常用于并发编程。这个包包括几个小的标准化可扩展框架,以及一些提供有用功能的类,否则乏味或难以实现。以下是主要组件的简要说明。
+ * 另请参阅{@link java.util.concurrent.locks}和{@link java.util.concurrent.atomic}软件包。
+ * 
+ *  <h2>执行者</h2>
+ * 
+ *  <b>接口。</b>
+ * 
+ *  {@link java.util.concurrent.Executor}是一个简单的标准化接口,用于定义自定义线程子系统,包括线程池,异步I / O和轻量级任务框架。
+ * 根据使用哪个具体的Executor类,任务可以在新创建的线程,现有的任务执行线程或调用{@link java.util.concurrent.Executor#execute execute}的线程中执
+ * 行,并且可以顺序执行或同时。
+ *  {@link java.util.concurrent.Executor}是一个简单的标准化接口,用于定义自定义线程子系统,包括线程池,异步I / O和轻量级任务框架。
+ * 
+ *  {@link java.util.concurrent.ExecutorService}提供了一个更完整的异步任务执行框架。 ExecutorService管理任务的排队和调度,并允许受控关闭。
+ * 
+ * {@link java.util.concurrent.ScheduledExecutorService}子接口和相关联的接口添加了对延迟和周期性任务执行的支持。
+ *  ExecutorServices提供了安排异步执行任何表示为{@link java.util.concurrent.Callable}的函数的方法,这是{@link java.lang.Runnable}
+ * 的结果类比。
+ * {@link java.util.concurrent.ScheduledExecutorService}子接口和相关联的接口添加了对延迟和周期性任务执行的支持。
+ * 
+ *  {@link java.util.concurrent.Future}返回函数的结果,允许确定执行是否已完成,并提供取消执行的方法。
+ * 
+ *  {@link java.util.concurrent.RunnableFuture}是一个{@code Future},拥有一个{@code run}方法,在执行时,设置其结果。
+ * 
+ * <p>
+ * 
+ *  <b>实施。</b>
+ * 
+ *  类{@link java.util.concurrent.ThreadPoolExecutor}和{@link java.util.concurrent.ScheduledThreadPoolExecutor}
+ * 提供可调,灵活的线程池。
+ * 
+ *  {@link java.util.concurrent.Executors}类为最常见的Executors类型和配置提供了工厂方法,以及一些使用它们的实用程序方法。
+ * 基于{@code Executors}的其他实用程序包括提供Futures的常见可扩展实现的具体类{@link java.util.concurrent.FutureTask}和{@link java.util.concurrent.ExecutorCompletionService}
+ * ,它有助于协调处理异步任务组。
+ *  {@link java.util.concurrent.Executors}类为最常见的Executors类型和配置提供了工厂方法,以及一些使用它们的实用程序方法。
+ * 
+ * <p>类{@link java.util.concurrent.ForkJoinPool}提供了一个主要用于处理{@link java.util.concurrent.ForkJoinTask}及其子类
+ * 的实例的Executor。
+ * 这些类使用工作窃取调度器,其对于符合通常在计算密集型并行处理中保持的限制的任务获得高吞吐量。
+ * 
+ *  <h2>队列</h2>
+ * 
+ *  {@link java.util.concurrent.ConcurrentLinkedQueue}类提供了一个高效的可扩展线程安全无阻塞FIFO队列。
+ *  {@link java.util.concurrent.ConcurrentLinkedDeque}类是类似的,但是还支持{@link java.util.Deque}接口。
+ * 
+ *  <p> {@code java.util.concurrent}中的五个实现支持扩展的{@link java.util.concurrent.BlockingQueue}接口,它定义了put和take
+ * 的阻塞版本：{@link java.util.concurrent.LinkedBlockingQueue },{@link java.util.concurrent.ArrayBlockingQueue}
+ * ,{@link java.util.concurrent.SynchronousQueue},{@link java.util.concurrent.PriorityBlockingQueue}和{@link java.util.concurrent.DelayQueue}
+ *  。
+ * 不同的类涵盖了生产者 - 消费者,消息,并行任务和相关并发设计的最常见的使用上下文。
+ * 
+ *  <p>扩展界面{@link java.util.concurrent.TransferQueue}和实现{@link java.util.concurrent.LinkedTransferQueue}
+ * 引入了一个同步{@code transfer}方法(以及相关功能),其中生产者可以可选地阻止等待其消费者。
+ * 
+ * <p> {@link java.util.concurrent.BlockingDeque}接口扩展{@code BlockingQueue}以支持FIFO和LIFO(基于堆栈)操作。
+ * 类{@link java.util.concurrent.LinkedBlockingDeque}提供了一个实现。
+ * 
+ *  <h2>计时</h2>
+ * 
+ *  {@link java.util.concurrent.TimeUnit}类提供了用于指定和控制基于超时的操作的多个粒度(包括纳秒)。包中的大多数类包含除了不确定等待之外基于超时的操作。
+ * 在使用超时的所有情况下,超时指定方法在指示其超时之前应该等待的最小时间。实现做出"最大努力"以在它们发生之后尽快检测到超时。
+ * 然而,在检测到的超时和在该超时之后实际再次执行的线程之间可能经过不确定的时间量。所有接受超时参数的方法都会将小于或等于零的值视为不等待。
+ * 要等待"永远",您可以使用{@code Long.MAX_VALUE}的值。
+ * 
+ *  <h2>同步器</h2>
+ * 
+ *  五个类支持常见的专用同步习语。
+ * <ul>
+ * 
+ *  <li> {@ link java.util.concurrent.Semaphore}是一种经典的并发工具。
+ * 
+ *  <li> {@ link java.util.concurrent.CountDownLatch}是一个非常简单但非常常见的实用程序,用于阻塞,直到给定数量的信号,事件或条件成立。
+ * 
+ * <li> {@link java.util.concurrent.CyclicBarrier}是一个可重置的多路同步点,在某些并行编程风格中很有用。
+ * 
+ *  <li> {@link java.util.concurrent.Phaser}提供了一种更灵活的屏障形式,可用于控制多个线程之间的相位计算。
+ * 
  * @since 1.5
  */
 package java.util.concurrent;

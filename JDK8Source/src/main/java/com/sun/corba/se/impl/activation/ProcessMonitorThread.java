@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,9 @@ import com.sun.corba.se.impl.orbutil.ORBConstants;
   * De-Activated.
   * Note: This thread can be killed from the main thread by calling
   *       interrupThread()
+  * <p>
+  *  线程每分钟唤醒(这可以通过设置sleepTime更改),并确保注册到ServerTool的所有进程(服务器)都是正常的。
+  * 如果不是,ServerTableEntry中的状态将更改为De-Activated。注意：这个线程可以通过调用interrupThread()从主线程中被杀死,。
   */
 public class ProcessMonitorThread extends java.lang.Thread {
     private HashMap serverTable;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: NamespaceSupport2.java,v 1.3 2005/09/28 13:49:20 pvedula Exp $
+ * <p>
+ *  $ Id：NamespaceSupport2.java,v 1.3 2005/09/28 13:49:20 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -41,6 +54,15 @@ import java.util.Vector;
  * we seem to have written that SAX class into our APIs... and I don't
  * want to argue with it right now. </p>
  *
+ * <p>
+ *  封装SAX驱动程序使用的命名空间跟踪逻辑。
+ * 
+ *  <p>此类试图重写SAX NamespaceSupport"帮助器"类,以提高效率。它可以用于跟踪当前在作用域中的命名空间声明,提供查找例程以将前缀映射到URI,反之亦然。</p>
+ * 
+ *  <p>问题：为了测试的目的,我已经扩展了NamespaceSupport,尽管我完全重申所有的行为和领域。
+ * 浪费....但是SAX没有在该对象下面放置一个接口,我们似乎已经将SAX类写入我们的API ...我现在不想争论。 </p>。
+ * 
+ * 
  * @see org.xml.sax.helpers.NamespaceSupport
  * */
 public class NamespaceSupport2
@@ -63,6 +85,11 @@ public class NamespaceSupport2
      *
      * <p>This is the Namespace URI that is automatically mapped
      * to the "xml" prefix.</p>
+     * <p>
+     *  XML命名空间作为常量。
+     * 
+     * <p>这是自动映射到"xml"前缀的命名空间URI。</p>
+     * 
      */
     public final static String XMLNS =
         "http://www.w3.org/XML/1998/namespace";
@@ -75,6 +102,9 @@ public class NamespaceSupport2
 
     /**
      * Create a new Namespace support object.
+     * <p>
+     *  创建一个新的命名空间支持对象。
+     * 
      */
     public NamespaceSupport2 ()
     {
@@ -92,6 +122,11 @@ public class NamespaceSupport2
      *
      * <p>It is necessary to invoke this method before reusing the
      * Namespace support object for a new session.</p>
+     * <p>
+     *  重置此命名空间支持对象以供重用。
+     * 
+     *  <p>在重新使用新会话的命名空间支持对象之前,必须调用此方法。</p>
+     * 
      */
     public void reset ()
     {
@@ -115,6 +150,14 @@ public class NamespaceSupport2
      * already in force: in this context, only the "xml" prefix is
      * declared.</p>
      *
+     * <p>
+     *  启动新的命名空间上下文。
+     * 
+     *  <p>通常,您应该在每个XML元素的开头部分推送一个新的上下文：新的上下文将自动继承其父上下文的声明,但它还将跟踪在此上下文中作出的声明。</p >
+     * 
+     *  <p>命名空间支持对象始终以一个已经生效的基本上下文开始：在此上下文中,只声明了"xml"前缀。</p>
+     * 
+     * 
      * @see #popContext
      */
     public void pushContext ()
@@ -148,6 +191,14 @@ public class NamespaceSupport2
      * prefixes after popping a context, unless you push another
      * context first.</p>
      *
+     * <p>
+     *  还原到以前的命名空间上下文。
+     * 
+     *  <p>通常,您应该在每个XML元素的结尾处弹出上下文。弹出上下文后,将恢复先前有效的所有命名空间前缀映射。</p>
+     * 
+     *  <p>您不得在弹出上下文后尝试声明其他命名空间前缀,除非您先推送另一个上下文。</p>
+     * 
+     * 
      * @see #pushContext
      */
     public void popContext ()
@@ -186,6 +237,20 @@ public class NamespaceSupport2
      * This asymmetry exists to make it easier to look up prefixes
      * for attribute names, where the default prefix is not allowed.</p>
      *
+     * <p>
+     *  声明一个命名空间前缀。
+     * 
+     *  <p>此方法在当前命名空间上下文中声明一个前缀;该前缀将一直有效,直到该上下文被弹出,除非它在后代上下文中被隐藏。</p>
+     * 
+     *  <p>要声明默认的命名空间,请使用空字符串。前缀不能是"xml"或"xmlns"。</p>
+     * 
+     *  <p>请注意,在您推送并弹出其他命名空间后,您必须<em>不要</em>声明一个前缀。</p>
+     * 
+     * <p>请注意,此库中存在不对称性：while {@link #getPrefix getPrefix}不会返回默认的""前缀,即使您已声明了前缀;要检查默认前缀,您必须使用{@link #getURI getURI}
+     * 明确查找。
+     * 这种不对称性使得更容易查找属性名称的前缀,其中不允许使用默认前缀。</p>。
+     * 
+     * 
      * @param prefix The prefix to declare, or null for the empty
      *        string.
      * @param uri The Namespace URI to associate with the prefix.
@@ -232,6 +297,21 @@ public class NamespaceSupport2
      * default Namespace (if any), while an unprefixed element name
      * will not.</p>
      *
+     * <p>
+     *  处理原始XML 1.0名称。
+     * 
+     *  <p>此方法通过删除前缀并在当前声明的前缀中查找,在当前上下文中处理原始XML 1.0名称。返回值将是调用者提供的数组,填充如下：</p>
+     * 
+     * <dl>
+     *  <dt> parts [0] </dt> <dd>命名空间URI或空字符串,如果没有使用。</dd> <dt> parts [1]无前缀)。
+     * </dd> <dt> parts [2] </dt> <dd>原始原始名称。</dd>。
+     * </dl>
+     * 
+     *  <p>数组中的所有字符串都将被内化。如果原始名称具有尚未声明的前缀,则返回值将为null。</p>
+     * 
+     *  <p>请注意,属性名称的处理方式与元素名称不同：不带前缀的元素名称将接收默认名称空间(如果有),而不带前缀的元素名称则不会。</p>
+     * 
+     * 
      * @param qName The raw XML 1.0 name to be processed.
      * @param parts A string array supplied by the caller, capable of
      *        holding at least three members.
@@ -263,6 +343,12 @@ public class NamespaceSupport2
      * <p>This method looks up the prefix in the current context.
      * Use the empty string ("") for the default Namespace.</p>
      *
+     * <p>
+     *  查找前缀并获取当前映射的命名空间URI。
+     * 
+     *  <p>此方法在当前上下文中查找前缀。对默认命名空间使用空字符串("")。</p>
+     * 
+     * 
      * @param prefix The prefix to look up.
      * @return The associated Namespace URI, or null if the prefix
      *         is undeclared in this context.
@@ -282,6 +368,12 @@ public class NamespaceSupport2
      * returned in this enumeration; check for the default prefix
      * using the {@link #getURI getURI} with an argument of "".</p>
      *
+     * <p>
+     *  返回当前声明的所有前缀的枚举。
+     * 
+     * <p> <strong>注意：</strong>如果有默认前缀,则不会在此枚举中返回;请使用带有参数""的{@link #getURI getURI}检查默认前缀。</p>
+     * 
+     * 
      * @return An enumeration of all prefixes declared in the
      *         current context except for the empty (default)
      *         prefix.
@@ -306,6 +398,14 @@ public class NamespaceSupport2
      * (default) prefix; to check for a default prefix, use the {@link
      * #getURI getURI} method with an argument of "".</p>
      *
+     * <p>
+     *  返回映射到命名空间URI的前缀之一。
+     * 
+     *  <p>如果当前有多个前缀映射到同一个URI,此方法将进行任意选择;如果您想要所有的前缀,请改用{@link #getPrefixes}方法。</p>
+     * 
+     *  <p> <strong>注意：</strong>这永远不会返回空(默认)前缀;要检查默认前缀,请使用参数为""的{@link #getURI getURI}方法。</p>
+     * 
+     * 
      * @param uri The Namespace URI.
      * @return One of the prefixes currently mapped to the URI supplied,
      *         or null if none is mapped or if the URI is assigned to
@@ -332,6 +432,16 @@ public class NamespaceSupport2
      * presence of a default Namespace, use the {@link #getURI getURI}
      * method with an argument of "".</p>
      *
+     * <p>
+     *  返回当前为URI声明的所有前缀的枚举。
+     * 
+     *  <p>此方法返回映射到特定命名空间URI的前缀。将包括xml：前缀。
+     * 如果您只想要将一个前缀映射到命名空间URI,而不关心您获得哪个前缀,请改用{@link #getPrefix getPrefix}方法。</p>。
+     * 
+     *  <p> <strong>请注意</strong>：此枚举中包含空(默认)前缀<em>从不</em>;要检查默认命名空间的存在,请使用参数为""的{@link #getURI getURI}方法。
+     * </p>。
+     * 
+     * 
      * @param uri The Namespace URI.
      * @return An enumeration of all prefixes declared in the
      *         current context.
@@ -361,6 +471,12 @@ public class NamespaceSupport2
      * enumeration; note that this behaviour differs from that of
      * {@link #getPrefix} and {@link #getPrefixes}.</p>
      *
+     * <p>
+     *  返回在此上下文中声明的所有前缀的枚举。
+     * 
+     *  <p>空(默认)前缀将包含在此枚举中;请注意,此行为与{@link #getPrefix}和{@link #getPrefixes}的行为不同。</p>
+     * 
+     * 
      * @return An enumeration of all prefixes declared in this
      *         context.
      * @see #getPrefixes
@@ -386,6 +502,9 @@ public class NamespaceSupport2
  * aroung the get-all-prefixes version of the operation. This is NOT
  * necessarily the most efficient approach; finding the URI and then asking
  * what prefixes apply to it might make much more sense.
+ * <p>
+ * 实现枚举过滤器,包装了一个get-all-prefixes版本的操作。这不一定是最有效的方法;找到URI,然后询问什么前缀适用于它可能会更有意义。
+ * 
  */
 class PrefixForUriEnumerator implements Enumeration
 {
@@ -439,6 +558,11 @@ class PrefixForUriEnumerator implements Enumeration
  * <p>This module caches and reuses Namespace contexts, so the number allocated
  * will be equal to the element depth of the document, not to the total
  * number of elements (i.e. 5-10 rather than tens of thousands).</p>
+ * <p>
+ *  单个命名空间上下文的内部类。
+ * 
+ *  <p>此模块缓存和重用命名空间上下文,因此分配的数字将等于文档的元素深度,而不是元素的总数(即5-10而不是数万)。</p>
+ * 
  */
 final class Context2 {
 
@@ -448,6 +572,9 @@ final class Context2 {
 
     /**
      * An empty enumeration.
+     * <p>
+     *  空枚举。
+     * 
      */
     private final static Enumeration EMPTY_ENUMERATION =
         new Vector().elements();
@@ -473,6 +600,9 @@ final class Context2 {
 
     /**
      * Create a new Namespace context.
+     * <p>
+     *  创建一个新的命名空间上下文。
+     * 
      */
     Context2 (Context2 parent)
     {
@@ -489,6 +619,8 @@ final class Context2 {
 
 
     /**
+    /* <p>
+    /* 
      * @returns The child Namespace context object, or null if this
      * is the last currently on the chain.
      */
@@ -498,6 +630,8 @@ final class Context2 {
     }
 
     /**
+    /* <p>
+    /* 
      * @returns The parent Namespace context object, or null if this
      * is the root.
      */
@@ -511,6 +645,10 @@ final class Context2 {
      * This is separate from the c'tor because it's re-applied
      * when a Context2 is reused by push-after-pop.
      *
+     * <p>
+     *  (Re)设置此Namespace上下文的父级。这与c'tor是分开的,因为当Context2被push-after-pop重用时,它被重新应用。
+     * 
+     * 
      * @param parent The parent Namespace context object.
      */
     void setParent (Context2 parent)
@@ -530,6 +668,10 @@ final class Context2 {
     /**
      * Declare a Namespace prefix for this context.
      *
+     * <p>
+     *  声明此上下文的命名空间前缀。
+     * 
+     * 
      * @param prefix The prefix to declare.
      * @param uri The associated Namespace URI.
      * @see org.xml.sax.helpers.NamespaceSupport2#declarePrefix
@@ -563,6 +705,10 @@ final class Context2 {
     /**
      * Process a raw XML 1.0 name in this context.
      *
+     * <p>
+     *  在此上下文中处理原始XML 1.0名称。
+     * 
+     * 
      * @param qName The raw XML 1.0 name.
      * @param isAttribute true if this is an attribute name.
      * @return An array of three strings containing the
@@ -640,6 +786,10 @@ final class Context2 {
     /**
      * Look up the URI associated with a prefix in this context.
      *
+     * <p>
+     *  在此上下文中查找与前缀关联的URI。
+     * 
+     * 
      * @param prefix The prefix to look up.
      * @return The associated Namespace URI, or null if none is
      *         declared.
@@ -663,6 +813,12 @@ final class Context2 {
      * <p>Since many prefixes may be mapped to the same URI,
      * the return value may be unreliable.</p>
      *
+     * <p>
+     *  在此上下文中查找与URI相关联的前缀之一。
+     * 
+     *  <p>由于许多前缀可能映射到同一个URI,返回值可能不可靠。</p>
+     * 
+     * 
      * @param uri The URI to look up.
      * @return The associated prefix, or null if none is declared.
      * @see org.xml.sax.helpers.NamespaceSupport2#getPrefix
@@ -680,6 +836,10 @@ final class Context2 {
     /**
      * Return an enumeration of prefixes declared in this context.
      *
+     * <p>
+     *  返回在此上下文中声明的前缀的枚举。
+     * 
+     * 
      * @return An enumeration of prefixes (possibly empty).
      * @see org.xml.sax.helpers.NamespaceSupport2#getDeclaredPrefixes
      */
@@ -699,6 +859,12 @@ final class Context2 {
      * <p>The default prefix, if in force, is <em>not</em>
      * returned, and will have to be checked for separately.</p>
      *
+     * <p>
+     *  返回当前有效的所有前缀的枚举。
+     * 
+     *  <p>默认前缀(如果有效)不是</em>返回,必须单独检查。</p>
+     * 
+     * 
      * @return An enumeration of prefixes (never empty).
      * @see org.xml.sax.helpers.NamespaceSupport2#getPrefixes
      */
@@ -726,6 +892,10 @@ final class Context2 {
      *
      * <p> JJK: **** Alternative: each Context2 might declare
      *  _only_ its local bindings, and delegate upward if not found.</p>
+     * <p>
+     *  在此上下文中为内部表写入时复制。
+     * 
+     * <p>此类针对大多数元素不包含命名空间声明的正常情况进行了优化。在这种情况下,Context2将与其父级共享数据结构。只有在发布新声明时才会获得新表,因此可以从堆栈中弹出它们。</p>
      */
     private void copyTables ()
     {

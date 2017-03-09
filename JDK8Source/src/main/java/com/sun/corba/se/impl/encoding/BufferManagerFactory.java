@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,8 @@ import org.omg.CORBA.INTERNAL;
 /**
  * Creates read/write buffer managers to handle over/under flow
  * in CDR*putStream.
+ * <p>
+ *  创建读/写缓冲区管理器以处理CDR * putStream中的过/下流。
  */
 
 public class BufferManagerFactory

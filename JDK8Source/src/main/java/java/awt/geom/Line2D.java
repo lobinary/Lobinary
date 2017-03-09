@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,15 @@ import java.io.Serializable;
  * The actual storage representation of the coordinates is left to
  * the subclass.
  *
+ * <p>
+ *  此<code> Line2D </code>表示{@code(x,y)}坐标空间中的线段。
+ * 该类与所有Java 2D API一样,使用默认坐标系统,称为<i>用户空间</i>,其中y轴值向下增加,x轴值向右增加。有关用户空间坐标系的更多信息,请参阅。
+ * <a href="https://docs.oracle.com/javase/1.3/docs/guide/2d/spec/j2d-intro.fm2.html#61857">
+ *  Java 2D程序员指南中的"坐标系统</a>"部分。
+ * <p>
+ *  这个类只是存储2D线段的所有对象的抽象超类。坐标的实际存储表示是留给子类的。
+ * 
+ * 
  * @author      Jim Graham
  * @since 1.2
  */
@@ -50,11 +60,19 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * A line segment specified with float coordinates.
+     * <p>
+     *  用浮点坐标指定的线段。
+     * 
+     * 
      * @since 1.2
      */
     public static class Float extends Line2D implements Serializable {
         /**
          * The X coordinate of the start point of the line segment.
+         * <p>
+         *  线段起点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -62,6 +80,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * The Y coordinate of the start point of the line segment.
+         * <p>
+         *  线段起点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -69,6 +91,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * The X coordinate of the end point of the line segment.
+         * <p>
+         *  线段终点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -76,6 +102,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * The Y coordinate of the end point of the line segment.
+         * <p>
+         *  线段的终点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -83,6 +113,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * Constructs and initializes a Line with coordinates (0, 0) &rarr; (0, 0).
+         * <p>
+         *  构造和初始化坐标为(0,0)&rarr的线; (0,0)。
+         * 
+         * 
          * @since 1.2
          */
         public Float() {
@@ -90,6 +124,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * Constructs and initializes a Line from the specified coordinates.
+         * <p>
+         *  根据指定的坐标构造和初始化线。
+         * 
+         * 
          * @param x1 the X coordinate of the start point
          * @param y1 the Y coordinate of the start point
          * @param x2 the X coordinate of the end point
@@ -103,6 +141,10 @@ public abstract class Line2D implements Shape, Cloneable {
         /**
          * Constructs and initializes a <code>Line2D</code> from the
          * specified <code>Point2D</code> objects.
+         * <p>
+         *  从指定的<code> Point2D </code>对象构造并初始化<code> Line2D </code>。
+         * 
+         * 
          * @param p1 the start <code>Point2D</code> of this line segment
          * @param p2 the end <code>Point2D</code> of this line segment
          * @since 1.2
@@ -113,6 +155,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX1() {
@@ -121,6 +167,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY1() {
@@ -129,6 +179,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP1() {
@@ -137,6 +191,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX2() {
@@ -145,6 +203,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY2() {
@@ -153,6 +215,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP2() {
@@ -161,6 +227,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setLine(double x1, double y1, double x2, double y2) {
@@ -173,6 +243,10 @@ public abstract class Line2D implements Shape, Cloneable {
         /**
          * Sets the location of the end points of this <code>Line2D</code>
          * to the specified float coordinates.
+         * <p>
+         *  将<code> Line2D </code>的结束点的位置设置为指定的浮点坐标。
+         * 
+         * 
          * @param x1 the X coordinate of the start point
          * @param y1 the Y coordinate of the start point
          * @param x2 the X coordinate of the end point
@@ -188,6 +262,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -211,17 +289,28 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 6161772511649436349L;
     }
 
     /**
      * A line segment specified with double coordinates.
+     * <p>
+     * 用双坐标指定的线段。
+     * 
+     * 
      * @since 1.2
      */
     public static class Double extends Line2D implements Serializable {
         /**
          * The X coordinate of the start point of the line segment.
+         * <p>
+         *  线段起点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -229,6 +318,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * The Y coordinate of the start point of the line segment.
+         * <p>
+         *  线段起点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -236,6 +329,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * The X coordinate of the end point of the line segment.
+         * <p>
+         *  线段终点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -243,6 +340,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * The Y coordinate of the end point of the line segment.
+         * <p>
+         *  线段的终点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -250,6 +351,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * Constructs and initializes a Line with coordinates (0, 0) &rarr; (0, 0).
+         * <p>
+         *  构造和初始化坐标为(0,0)&rarr的线; (0,0)。
+         * 
+         * 
          * @since 1.2
          */
         public Double() {
@@ -258,6 +363,10 @@ public abstract class Line2D implements Shape, Cloneable {
         /**
          * Constructs and initializes a <code>Line2D</code> from the
          * specified coordinates.
+         * <p>
+         *  从指定的坐标构造和初始化<code> Line2D </code>。
+         * 
+         * 
          * @param x1 the X coordinate of the start point
          * @param y1 the Y coordinate of the start point
          * @param x2 the X coordinate of the end point
@@ -271,6 +380,10 @@ public abstract class Line2D implements Shape, Cloneable {
         /**
          * Constructs and initializes a <code>Line2D</code> from the
          * specified <code>Point2D</code> objects.
+         * <p>
+         *  从指定的<code> Point2D </code>对象构造并初始化<code> Line2D </code>。
+         * 
+         * 
          * @param p1 the start <code>Point2D</code> of this line segment
          * @param p2 the end <code>Point2D</code> of this line segment
          * @since 1.2
@@ -281,6 +394,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX1() {
@@ -289,6 +406,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY1() {
@@ -297,6 +418,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP1() {
@@ -305,6 +430,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX2() {
@@ -313,6 +442,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY2() {
@@ -321,6 +454,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP2() {
@@ -329,6 +466,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setLine(double x1, double y1, double x2, double y2) {
@@ -340,6 +481,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -363,6 +508,9 @@ public abstract class Line2D implements Shape, Cloneable {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 7979627399746467499L;
     }
@@ -374,6 +522,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * the information necessary to satisfy the various accessory
      * methods below.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类。类型特定的实现子类可用于实例化,并且提供用于存储满足下面的各种附件方法所必需的信息的多种格式。
+     * 
+     * 
      * @see java.awt.geom.Line2D.Float
      * @see java.awt.geom.Line2D.Double
      * @since 1.2
@@ -383,6 +535,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * Returns the X coordinate of the start point in double precision.
+     * <p>
+     *  以双精度返回起点的X坐标。
+     * 
+     * 
      * @return the X coordinate of the start point of this
      *         {@code Line2D} object.
      * @since 1.2
@@ -391,6 +547,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * Returns the Y coordinate of the start point in double precision.
+     * <p>
+     *  以双精度返回起点的Y坐标。
+     * 
+     * 
      * @return the Y coordinate of the start point of this
      *         {@code Line2D} object.
      * @since 1.2
@@ -399,6 +559,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * Returns the start <code>Point2D</code> of this <code>Line2D</code>.
+     * <p>
+     *  返回此<code> Line2D </code>的开始<code> Point2D </code>。
+     * 
+     * 
      * @return the start <code>Point2D</code> of this <code>Line2D</code>.
      * @since 1.2
      */
@@ -406,6 +570,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * Returns the X coordinate of the end point in double precision.
+     * <p>
+     *  以双精度返回终点的X坐标。
+     * 
+     * 
      * @return the X coordinate of the end point of this
      *         {@code Line2D} object.
      * @since 1.2
@@ -414,6 +582,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * Returns the Y coordinate of the end point in double precision.
+     * <p>
+     *  以双精度返回终点的Y坐标。
+     * 
+     * 
      * @return the Y coordinate of the end point of this
      *         {@code Line2D} object.
      * @since 1.2
@@ -422,6 +594,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * Returns the end <code>Point2D</code> of this <code>Line2D</code>.
+     * <p>
+     *  返回此<code> Line2D </code>的结束<code> Point2D </code>。
+     * 
+     * 
      * @return the end <code>Point2D</code> of this <code>Line2D</code>.
      * @since 1.2
      */
@@ -430,6 +606,10 @@ public abstract class Line2D implements Shape, Cloneable {
     /**
      * Sets the location of the end points of this <code>Line2D</code> to
      * the specified double coordinates.
+     * <p>
+     *  将<code> Line2D </code>的结束点的位置设置为指定的双坐标。
+     * 
+     * 
      * @param x1 the X coordinate of the start point
      * @param y1 the Y coordinate of the start point
      * @param x2 the X coordinate of the end point
@@ -441,6 +621,10 @@ public abstract class Line2D implements Shape, Cloneable {
     /**
      * Sets the location of the end points of this <code>Line2D</code> to
      * the specified <code>Point2D</code> coordinates.
+     * <p>
+     * 将<code> Line2D </code>的终点位置设置为指定的<code> Point2D </code>坐标。
+     * 
+     * 
      * @param p1 the start <code>Point2D</code> of the line segment
      * @param p2 the end <code>Point2D</code> of the line segment
      * @since 1.2
@@ -452,6 +636,10 @@ public abstract class Line2D implements Shape, Cloneable {
     /**
      * Sets the location of the end points of this <code>Line2D</code> to
      * the same as those end points of the specified <code>Line2D</code>.
+     * <p>
+     *  将<code> Line2D </code>的结束点的位置设置为与指定的<code> Line2D </code>的结束点相同。
+     * 
+     * 
      * @param l the specified <code>Line2D</code>
      * @since 1.2
      */
@@ -484,6 +672,14 @@ public abstract class Line2D implements Shape, Cloneable {
      * lies "beyond {@code (x1,y1)}" or 1 if the point lies
      * "beyond {@code (x2,y2)}".
      *
+     * <p>
+     *  返回指定点{@code(px,py)}相对于从{@code(x1,y1)}到{@code(x2,y2)}的线段的位置的指示符。
+     * 返回值可以是1,-1或0,并且指示指定的行必须围绕其第一个结束点{@code(x1,y1)}枢转,以便指向指定的点{@code (px,py)}。
+     *  <p>返回值为1表示线段必须沿着正X轴朝负Y轴的方向旋转。在Java 2D使用的默认坐标系中,此方向为逆时针。 <p>返回值为-1表示线段必须沿着正X轴朝向正Y轴的方向旋转。
+     * 在默认坐标系中,该方向为顺时针方向。 <p>返回值为0表示点正好位于线段上。注意,指示符值0是罕见的,并且由于浮点舍入问题而不用于确定共线性。
+     *  <p>如果点与线段共线,但不在端点之间,则如果点位于"{@code(x1,y1)}"之上,则值为-1,如果点位于"超出{@code(x2,y2)}"。
+     * 
+     * 
      * @param x1 the X coordinate of the start point of the
      *           specified line segment
      * @param y1 the Y coordinate of the start point of the
@@ -543,6 +739,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * See the method comments of
      * {@link #relativeCCW(double, double, double, double, double, double)}
      * to interpret the return value.
+     * <p>
+     * 返回指定点{@code(px,py)}相对于此线段的位置的指示符。
+     * 请参阅{@link #relativeCCW(double,double,double,double,double,double)}的方法注释来解释返回值。
+     * 
+     * 
      * @param px the X coordinate of the specified point
      *           to be compared with this <code>Line2D</code>
      * @param py the Y coordinate of the specified point
@@ -562,6 +763,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * See the method comments of
      * {@link #relativeCCW(double, double, double, double, double, double)}
      * to interpret the return value.
+     * <p>
+     *  返回指定的<code> Point2D </code>相对于此线段的位置的指示符。
+     * 请参阅{@link #relativeCCW(double,double,double,double,double,double)}的方法注释来解释返回值。
+     * 
+     * 
      * @param p the specified <code>Point2D</code> to be compared
      *          with this <code>Line2D</code>
      * @return an integer that indicates the position of the specified
@@ -579,6 +785,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * {@code (x2,y2)} intersects the line segment from {@code (x3,y3)}
      * to {@code (x4,y4)}.
      *
+     * <p>
+     *  测试{@code(x1,y1)}到{@code(x2,y2)}的线段是否与{@code(x3,y3)}到{@code(x4,y4)}的线段相交。
+     * 
+     * 
      * @param x1 the X coordinate of the start point of the first
      *           specified line segment
      * @param y1 the Y coordinate of the start point of the first
@@ -615,6 +825,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * Tests if the line segment from {@code (x1,y1)} to
      * {@code (x2,y2)} intersects this line segment.
      *
+     * <p>
+     *  测试{@code(x1,y1)}到{@code(x2,y2)}的线段是否与此线段相交。
+     * 
+     * 
      * @param x1 the X coordinate of the start point of the
      *           specified line segment
      * @param y1 the Y coordinate of the start point of the
@@ -634,6 +848,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * Tests if the specified line segment intersects this line segment.
+     * <p>
+     *  测试指定的线段是否与此线段相交。
+     * 
+     * 
      * @param l the specified <code>Line2D</code>
      * @return <code>true</code> if this line segment and the specified line
      *                  segment intersect each other;
@@ -652,6 +870,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * If the specified point intersects the line segment in between the
      * end points, this method returns 0.0.
      *
+     * <p>
+     *  返回从点到线段的距离的平方。测量的距离是指定点和指定终点之间的最近点之间的距离。如果指定点与终点之间的线段相交,则此方法返回0.0。
+     * 
+     * 
      * @param x1 the X coordinate of the start point of the
      *           specified line segment
      * @param y1 the Y coordinate of the start point of the
@@ -727,6 +949,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * If the specified point intersects the line segment in between the
      * end points, this method returns 0.0.
      *
+     * <p>
+     *  返回从点到线段的距离。测量的距离是指定点和指定终点之间的最近点之间的距离。如果指定点与终点之间的线段相交,则此方法返回0.0。
+     * 
+     * 
      * @param x1 the X coordinate of the start point of the
      *           specified line segment
      * @param y1 the Y coordinate of the start point of the
@@ -758,6 +984,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * If the specified point intersects the line segment in between the
      * end points, this method returns 0.0.
      *
+     * <p>
+     * 返回从点到此线段的距离的平方。测量的距离是指定点与当前线的端点之间的最近点之间的距离。如果指定点与终点之间的线段相交,则此方法返回0.0。
+     * 
+     * 
      * @param px the X coordinate of the specified point being
      *           measured against this line segment
      * @param py the Y coordinate of the specified point being
@@ -778,6 +1008,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * point and the closest point between the current line's end points.
      * If the specified point intersects the line segment in between the
      * end points, this method returns 0.0.
+     * <p>
+     *  返回从<code> Point2D </code>到此线段的距离的平方。测量的距离是指定点与当前线的端点之间的最近点之间的距离。如果指定点与终点之间的线段相交,则此方法返回0.0。
+     * 
+     * 
      * @param pt the specified <code>Point2D</code> being measured against
      *           this line segment.
      * @return a double value that is the square of the distance from the
@@ -798,6 +1032,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * If the specified point intersects the line segment in between the
      * end points, this method returns 0.0.
      *
+     * <p>
+     *  返回从点到此线段的距离。测量的距离是指定点与当前线的端点之间的最近点之间的距离。如果指定点与终点之间的线段相交,则此方法返回0.0。
+     * 
+     * 
      * @param px the X coordinate of the specified point being
      *           measured against this line segment
      * @param py the Y coordinate of the specified point being
@@ -818,6 +1056,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * point and the closest point between the current line's end points.
      * If the specified point intersects the line segment in between the
      * end points, this method returns 0.0.
+     * <p>
+     *  返回从<code> Point2D </code>到此线段的距离。测量的距离是指定点与当前线的端点之间的最近点之间的距离。如果指定点与终点之间的线段相交,则此方法返回0.0。
+     * 
+     * 
      * @param pt the specified <code>Point2D</code> being measured
      *          against this line segment
      * @return a double value that is the distance from the specified
@@ -838,6 +1080,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * defined by the specified coordinates.  If the specified point
      * intersects the line, this method returns 0.0.
      *
+     * <p>
+     *  返回从点到线的距离的平方。测量的距离是指定点与由指定坐标定义的无限延伸线上的最近点之间的距离。如果指定的点与线相交,则此方法返回0.0。
+     * 
+     * 
      * @param x1 the X coordinate of the start point of the specified line
      * @param y1 the Y coordinate of the start point of the specified line
      * @param x2 the X coordinate of the end point of the specified line
@@ -883,6 +1129,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * defined by the specified coordinates.  If the specified point
      * intersects the line, this method returns 0.0.
      *
+     * <p>
+     * 返回从点到线的距离。测量的距离是指定点与由指定坐标定义的无限延伸线上的最近点之间的距离。如果指定的点与线相交,则此方法返回0.0。
+     * 
+     * 
      * @param x1 the X coordinate of the start point of the specified line
      * @param y1 the Y coordinate of the start point of the specified line
      * @param x2 the X coordinate of the end point of the specified line
@@ -910,6 +1160,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * defined by this <code>Line2D</code>.  If the specified point
      * intersects the line, this method returns 0.0.
      *
+     * <p>
+     *  返回从点到此线的距离的平方。测量的距离是指定点与由此<code> Line2D </code>定义的无限扩展线上的最近点之间的距离。如果指定的点与线相交,则此方法返回0.0。
+     * 
+     * 
      * @param px the X coordinate of the specified point being
      *           measured against this line
      * @param py the Y coordinate of the specified point being
@@ -930,6 +1184,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * point and the closest point on the infinitely-extended line
      * defined by this <code>Line2D</code>.  If the specified point
      * intersects the line, this method returns 0.0.
+     * <p>
+     *  返回从指定<code> Point2D </code>到此行的距离的平方。测量的距离是指定点与由此<code> Line2D </code>定义的无限扩展线上的最近点之间的距离。
+     * 如果指定的点与线相交,则此方法返回0.0。
+     * 
+     * 
      * @param pt the specified <code>Point2D</code> being measured
      *           against this line
      * @return a double value that is the square of the distance from a
@@ -950,6 +1209,10 @@ public abstract class Line2D implements Shape, Cloneable {
      * defined by this <code>Line2D</code>.  If the specified point
      * intersects the line, this method returns 0.0.
      *
+     * <p>
+     *  返回从点到此线的距离。测量的距离是指定点与由此<code> Line2D </code>定义的无限扩展线上的最近点之间的距离。如果指定的点与线相交,则此方法返回0.0。
+     * 
+     * 
      * @param px the X coordinate of the specified point being
      *           measured against this line
      * @param py the Y coordinate of the specified point being
@@ -969,6 +1232,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * point and the closest point on the infinitely-extended line
      * defined by this <code>Line2D</code>.  If the specified point
      * intersects the line, this method returns 0.0.
+     * <p>
+     *  返回从<code> Point2D </code>到此行的距离。测量的距离是指定点与由此<code> Line2D </code>定义的无限扩展线上的最近点之间的距离。
+     * 如果指定的点与线相交,则此方法返回0.0。
+     * 
+     * 
      * @param pt the specified <code>Point2D</code> being measured
      * @return a double value that is the distance from a specified
      *                  <code>Point2D</code> to the current line.
@@ -986,6 +1254,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * {@link Shape} interface, but in the case of <code>Line2D</code>
      * objects it always returns <code>false</code> since a line contains
      * no area.
+     * <p>
+     * 测试指定的坐标是否在此<code> Line2D </code>的边界内。
+     * 此方法是实现{@link Shape}接口所必需的,但在<code> Line2D </code>对象的情况下,它总是返回<code> false </code>,因为一行不包含区域。
+     * 
+     * 
      * @param x the X coordinate of the specified point to be tested
      * @param y the Y coordinate of the specified point to be tested
      * @return <code>false</code> because a <code>Line2D</code> contains
@@ -1002,6 +1275,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * This method is required to implement the {@link Shape} interface,
      * but in the case of <code>Line2D</code> objects it always returns
      * <code>false</code> since a line contains no area.
+     * <p>
+     *  测试给定的<code> Point2D </code>是否在此<code> Line2D </code>的边界内。
+     * 此方法是实现{@link Shape}接口所必需的,但在<code> Line2D </code>对象的情况下,它总是返回<code> false </code>,因为一行不包含区域。
+     * 
+     * 
      * @param p the specified <code>Point2D</code> to be tested
      * @return <code>false</code> because a <code>Line2D</code> contains
      * no area.
@@ -1013,6 +1291,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(double x, double y, double w, double h) {
@@ -1021,6 +1303,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(Rectangle2D r) {
@@ -1033,6 +1319,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * This method is required to implement the <code>Shape</code> interface,
      * but in the case of <code>Line2D</code> objects it always returns
      * false since a line contains no area.
+     * <p>
+     *  测试这个<code> Line2D </code>的内部是否完全包含指定的一组直角坐标。
+     * 此方法是实现<code> Shape </code>接口所必需的,但在<code> Line2D </code>对象的情况下,它总是返回false,因为一行不包含区域。
+     * 
+     * 
      * @param x the X coordinate of the upper-left corner of the
      *          specified rectangular area
      * @param y the Y coordinate of the upper-left corner of the
@@ -1053,6 +1344,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * This method is required to implement the <code>Shape</code> interface,
      * but in the case of <code>Line2D</code> objects it always returns
      * <code>false</code> since a line contains no area.
+     * <p>
+     *  测试此<code> Line2D </code>的内部是否完全包含指定的<code> Rectangle2D </code>。
+     * 此方法是实现<code> Shape </code>接口所必需的,但在<code> Line2D </code>对象的情况下,它总是返回<code> false </code>,因为一行不包含区域。
+     * 
+     * 
      * @param r the specified <code>Rectangle2D</code> to be tested
      * @return <code>false</code> because a <code>Line2D</code> contains
      * no area.
@@ -1064,6 +1360,10 @@ public abstract class Line2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public Rectangle getBounds() {
@@ -1078,6 +1378,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * guarantee that modifications to the geometry of this
      * <code>Line2D</code> object do not affect any iterations of that
      * geometry that are already in process.
+     * <p>
+     * 返回定义此<code> Line2D </code>边界的迭代对象。
+     * 这个类的迭代器不是多线程安全的,这意味着这个<code> Line2D </code>类不保证对这个<code> Line2D </code>对象的几何形状的修改不影响任何迭代该几何已经在处理中。
+     * 
+     * 
      * @param at the specified {@link AffineTransform}
      * @return a {@link PathIterator} that defines the boundary of this
      *          <code>Line2D</code>.
@@ -1095,6 +1400,11 @@ public abstract class Line2D implements Shape, Cloneable {
      * guarantee that modifications to the geometry of this
      * <code>Line2D</code> object do not affect any iterations of that
      * geometry that are already in process.
+     * <p>
+     *  返回定义此扁平<code> Line2D </code>的边界的迭代对象。
+     * 这个类的迭代器不是多线程安全的,这意味着这个<code> Line2D </code>类不保证对这个<code> Line2D </code>对象的几何形状的修改不影响任何迭代该几何已经在处理中。
+     * 
+     * 
      * @param at the specified <code>AffineTransform</code>
      * @param flatness the maximum amount that the control points for a
      *          given curve can vary from colinear before a subdivided
@@ -1112,6 +1422,8 @@ public abstract class Line2D implements Shape, Cloneable {
     /**
      * Creates a new object of the same class as this object.
      *
+     * <p>
+     * 
      * @return     a clone of this instance.
      * @exception  OutOfMemoryError            if there is not enough memory.
      * @see        java.lang.Cloneable

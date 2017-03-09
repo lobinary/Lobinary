@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CORBA;
 
 
@@ -12,6 +13,9 @@ package org.omg.CORBA;
 /** 
    * Encapsulates a reason a Policy may be invalid.
    *
+   * <p>
+   * 
+   * 
    * @see PolicyError
    */
 abstract public class PolicyErrorCodeHelper

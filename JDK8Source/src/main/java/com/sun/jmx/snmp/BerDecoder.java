@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,18 @@ package com.sun.jmx.snmp;
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
  *
+ * <p>
+ *  <CODE> BerDecoder </CODE>类用于解码BER编码数据。
+ * 
+ *  需要使用包含编码的字节字符串来设置<CODE> BerDecoder </CODE>。它在字节字符串中保持当前位置。
+ * 
+ *  方法允许从当前位置获取整数,字符串,OID等。提取后,当前位置向前移动。
+ * 
+ *  如果编码不是预期类型,则提取会抛出<CODE> BerException </CODE>。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @since 1.5
  */
 
@@ -53,6 +66,10 @@ public class BerDecoder {
   /**
   * Constructs a new decoder and attaches it to the specified byte string.
   *
+  * <p>
+  *  构造一个新的解码器并将其附加到指定的字节字符串。
+  * 
+  * 
   * @param b The byte string containing the encoded data.
   */
 
@@ -69,6 +86,10 @@ public class BerDecoder {
   /**
   * Fetch an integer.
   *
+  * <p>
+  *  获取整数。
+  * 
+  * 
   * @return The decoded integer.
   *
   * @exception BerException Current position does not point to an integer.
@@ -82,6 +103,10 @@ public class BerDecoder {
   /**
   * Fetch an integer with the specified tag.
   *
+  * <p>
+  *  使用指定的标记获取整数。
+  * 
+  * 
   * @param tag The expected tag.
   *
   * @return The decoded integer.
@@ -112,6 +137,10 @@ public class BerDecoder {
   /**
   * Fetch an integer and return a long value.
   *
+  * <p>
+  *  获取整数并返回长整型值。
+  * 
+  * 
   * @return The decoded integer.
   *
   * @exception BerException Current position does not point to an integer.
@@ -125,6 +154,10 @@ public class BerDecoder {
   /**
   * Fetch an integer with the specified tag and return a long value.
   *
+  * <p>
+  *  使用指定的标记获取整数并返回长整型值。
+  * 
+  * 
   * @param tag The expected tag.
   *
   * @return The decoded integer.
@@ -155,6 +188,10 @@ public class BerDecoder {
   /**
   * Fetch an octet string.
   *
+  * <p>
+  *  获取八位字节字符串。
+  * 
+  * 
   * @return The decoded string.
   *
   * @exception BerException Current position does not point to an octet string.
@@ -168,6 +205,10 @@ public class BerDecoder {
   /**
   * Fetch an octet string with a specified tag.
   *
+  * <p>
+  *  获取带有指定标签的八位字节字符串。
+  * 
+  * 
   * @param tag The expected tag.
   *
   * @return The decoded string.
@@ -197,6 +238,10 @@ public class BerDecoder {
   /**
   * Fetch an object identifier.
   *
+  * <p>
+  *  获取对象标识符。
+  * 
+  * 
   * @return The decoded object identifier as an array of long.
   */
 
@@ -208,6 +253,10 @@ public class BerDecoder {
   /**
   * Fetch an object identifier with a specified tag.
   *
+  * <p>
+  *  使用指定的标记获取对象标识符。
+  * 
+  * 
   * @param tag The expected tag.
   *
   * @return The decoded object identifier as an array of long.
@@ -237,6 +286,10 @@ public class BerDecoder {
   /**
   * Fetch a <CODE>NULL</CODE> value.
   *
+  * <p>
+  *  获取<CODE> NULL </CODE>值。
+  * 
+  * 
   * @exception BerException Current position does not point to <CODE>NULL</CODE> value.
   */
 
@@ -248,6 +301,10 @@ public class BerDecoder {
   /**
   * Fetch a <CODE>NULL</CODE> value with a specified tag.
   *
+  * <p>
+  *  使用指定的标签获取<CODE> NULL </CODE>值。
+  * 
+  * 
   * @param tag The expected tag.
   *
   * @exception BerException Current position does not point to
@@ -275,6 +332,10 @@ public class BerDecoder {
   * Fetch an <CODE>ANY</CODE> value. In fact, this method does not decode anything
   * it simply returns the next TLV as an array of bytes.
   *
+  * <p>
+  *  获取<CODE>任何</CODE>值。事实上,这种方法不解码任何东西,它只是返回下一个TLV作为一个字节数组。
+  * 
+  * 
   * @return The TLV as a byte array.
   *
   * @exception BerException The next TLV is really badly encoded...
@@ -314,6 +375,10 @@ public class BerDecoder {
   /**
   * Fetch an <CODE>ANY</CODE> value with a specific tag.
   *
+  * <p>
+  *  使用特定标记获取<CODE> ANY </CODE>值。
+  * 
+  * 
   * @param tag The expected tag.
   *
   * @return The TLV as a byte array.
@@ -335,6 +400,10 @@ public class BerDecoder {
   * The decoder computes the end position of the sequence and push it
   * on its stack.
   *
+  * <p>
+  *  获取序列标题。解码器计算序列的结束位置并将其推到其堆栈上。
+  * 
+  * 
   * @exception BerException Current position does not point to a sequence header.
   */
 
@@ -346,6 +415,10 @@ public class BerDecoder {
   /**
   * Fetch a sequence header with a specific tag.
   *
+  * <p>
+  * 使用特定标记获取序列标头。
+  * 
+  * 
   * @param tag The expected tag.
   *
   * @exception BerException Current position does not point to a sequence header
@@ -376,6 +449,10 @@ public class BerDecoder {
   * matches with the calculated end of the sequence. If not it throws
   * an exception.
   *
+  * <p>
+  *  关闭序列。解码拉动堆栈并验证当前位置与计算的序列末端匹配。如果不是,它抛出异常。
+  * 
+  * 
   * @exception BerException The sequence is not expected to finish here.
   */
 
@@ -394,6 +471,11 @@ public class BerDecoder {
   * When this method returns <CODE>false</CODE>, <CODE>closeSequence</CODE> can (and must) be
   * invoked.
   *
+  * <p>
+  *  如果未达到当前序列的末尾,则返回<CODE> true </CODE>。
+  * 当此方法返回<CODE> false </CODE>时,可以(必须)调用<CODE> closeSequence </CODE>。
+  * 
+  * 
   * @return <CODE>true</CODE> if there is still some data in the sequence.
   */
 
@@ -406,6 +488,10 @@ public class BerDecoder {
   * Get the tag of the data at the current position.
   * Current position is unchanged.
   *
+  * <p>
+  *  获取当前位置的数据标签。当前位置不变。
+  * 
+  * 
   * @return The next tag.
   */
 
@@ -465,6 +551,10 @@ public class BerDecoder {
   /**
   * Fetch a tag and move the current position forward.
   *
+  * <p>
+  *  获取标签并向前移动当前位置。
+  * 
+  * 
   * @return The tag
   */
 
@@ -494,6 +584,10 @@ public class BerDecoder {
   /**
   * Fetch a length and move the current position forward.
   *
+  * <p>
+  *  获取长度并向前移动当前位置。
+  * 
+  * 
   * @return The length
   */
 
@@ -526,6 +620,10 @@ public class BerDecoder {
   /**
   * Fetch an integer value and move the current position forward.
   *
+  * <p>
+  *  获取整数值并向前移动当前位置。
+  * 
+  * 
   * @return The integer
   */
 
@@ -571,6 +669,10 @@ public class BerDecoder {
   * FIX ME: someday we could have only on fetchIntegerValue() which always
   * returns a long value.
   *
+  * <p>
+  *  获取整数值并返回长整型值。 FIX ME：有一天我们可以只有fetchIntegerValue(),它总是返回一个长的值。
+  * 
+  * 
   * @return The integer
   */
 
@@ -615,6 +717,10 @@ public class BerDecoder {
   /**
   * Fetch a byte string and move the current position forward.
   *
+  * <p>
+  *  获取字节字符串并向前移动当前位置。
+  * 
+  * 
   * @return The byte string
   */
 
@@ -661,6 +767,9 @@ public class BerDecoder {
   /**
   * Fetch an oid and move the current position forward.
   *
+  * <p>
+  *  获取一个oid并向前移动当前位置。
+  * 
   * @return The oid
   */
 

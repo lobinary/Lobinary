@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -12,6 +13,8 @@ package org.omg.PortableServer;
 /**
 	 * This policy specifies whether the created POA retains 
 	 * active servants in an Active Object Map. 
+	 * <p>
+	 * 
 	 */
 public interface ServantRetentionPolicy extends ServantRetentionPolicyOperations, org.omg.CORBA.Policy, org.omg.CORBA.portable.IDLEntity 
 {

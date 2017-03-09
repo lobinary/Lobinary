@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -12,6 +13,16 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ * COPYRIGHT(c)Eastman Kodak Company,1997 *** *根据United *** 
+ * *国家法典第17章的未公布的工作。
+ * 版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ * 版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package com.sun.image.codec.jpeg;
@@ -32,6 +43,14 @@ import java.awt.image.BufferedImage;
  * be available in a core API or standard extension.
  * <p>
  *
+ * <p>
+ *  表示检测到截断的文件。此对象包含其中包含部分解码图像数据的Raster / BufferedImage。没有指示光栅的部分可能或可能不是好的。
+ * <p>
+ *  请注意,com.sun.image.codec.jpeg包中的类不是核心Java API的一部分。它们是Sun的JDK和JRE发行版的一部分。
+ * 虽然其他许可证持有者可能选择分发这些类,但开发人员不能依赖其在非Sun实施中的可用性。我们期望等效功能最终将在核心API或标准扩展中可用。
+ * <p>
+ * 
+ * 
  * @author  Thomas DeWeese
  * @see     JPEGImageDecoder
  * @since   1.2
@@ -46,6 +65,10 @@ class TruncatedFileException extends RuntimeException {
      * Constructs a <code>TruncatedFileException</code> with the
      * partially decoded BufferedImage.
      *
+     * <p>
+     *  用部分解码的BufferedImage构造一个<code> TruncatedFileException </code>。
+     * 
+     * 
      * @param   bi the partially decoded BufferedImage (may be null).
      * @since   1.2
      */
@@ -59,6 +82,10 @@ class TruncatedFileException extends RuntimeException {
      * Constructs an <code>TruncatedFileException</code> with the
      * partially decoded Raster
      *
+     * <p>
+     *  用部分解码的Raster构造一个<code> TruncatedFileException </code>
+     * 
+     * 
      * @param   ras the partially decoded Raster (may be null).
      * @since   1.2
      */
@@ -70,6 +97,10 @@ class TruncatedFileException extends RuntimeException {
         /** Allows access to the raster that was in the progress of being
          * decoded may be null, it is likely to be only partially filled
          * with image data.
+         * <p>
+         * 解码可以为零,则可能仅部分地填充有图像数据。
+         * 
+         * 
      * @since   1.2
          */
         public Raster getRaster() { return ras; }
@@ -77,6 +108,9 @@ class TruncatedFileException extends RuntimeException {
         /** Allows access to the BufferedImage that was in the progress of
          * being decoded, this may be null, it is likely to be only
          * partially filled with image data.
+         * <p>
+         *  正在被解码,则这可以是空,它可能仅被图像数据部分地填充。
+         * 
      * @since   1.2
          */
         public BufferedImage getBufferedImage() { return bi; }

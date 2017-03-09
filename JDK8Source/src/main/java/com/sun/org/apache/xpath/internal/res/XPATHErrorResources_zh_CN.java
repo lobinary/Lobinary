@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xpath.internal.res;
 
@@ -30,6 +40,10 @@ import java.util.ListResourceBundle;
   * Also you need to  update the count of messages(MAX_CODE)or
  * the count of warnings(MAX_WARNING) [ Information purpose only]
  * @xsl.usage advanced
+ * <p>
+ *  设置错误消息。我们构建一个消息键和消息字符串的二维数组。为了在这里添加一个新消息,你需要首先为Key添加一个静态字符串常量,并用Key,Value pair更新contents数组。
+ * 还需要更新消息计数(MAX_CODE)或警告计数(MAX_WARNING )[仅供参考] @ xsl.usage advanced。
+ * 
  */
 public class XPATHErrorResources_zh_CN extends ListResourceBundle
 {
@@ -79,10 +93,40 @@ public class XPATHErrorResources_zh_CN extends ListResourceBundle
  *     colon (a "no-colon name").
  *
  *  11) QName is an XML term meaning "qualified name".
+ * <p>
+ *  翻译者的一般注意事项：
+ * 
+ *  此文件包含与XPath错误处理相关的错误和警告消息。
+ * 
+ *  1)Xalan(或更恰当地,Xalan解释)和XSLTC是组件的名称。 XSLT是"XML Stylesheet Language：Transformations"的缩写。
+ *  XSLTC是XSLT编译器的首字母缩写。
+ * 
+ * 2)样式表是如何将输入XML文档转换为结果XML文档(或HTML文档或文本)的描述。样式表本身以XML文档的形式描述。
+ * 
+ *  3)模板是用于匹配输入文档的特定部分并指定输出文档的对应部分的形式的样式表的组件。
+ * 
+ *  4)元素是XML文档中的标记标记;属性是标记上的修饰符。
+ * 例如,在<elem attr ='val'attr2 ='val2'>"elem"是元素名称,"attr"和"attr2"分别是具有值"val"和"val2"的属性名称。
+ * 
+ *  5)命名空间声明是一个特殊属性,用于将前缀与URI(命名空间)相关联。使用该前缀的元素名称和属性名称的含义是相对于该命名空间定义的。
+ * 
+ *  6)"Translet"是一个发明的术语,描述了将XML样式表编译成Java类所产生的类文件。
+ * 
+ *  7)XPath是描述用于标识XML文档的树结构表示中的节点的符号的规范。该符号的实例称为XPath表达式。
  */
 
   /*
    * static variables
+   * <p>
+   * 
+   *  8)上下文节点是文档中正在评估XPath表达式的节点。
+   * 
+   *  9)迭代器是一个在树中遍历节点的对象,一次一个。
+   * 
+   *  10)NCName是用于描述不包含冒号("冒号名称")的名称的XML术语。
+   * 
+   * 11)QName是一个XML术语,意思是"限定名"。
+   * 
    */
   public static final String ERROR0000 = "ERROR0000";
   public static final String ER_CURRENT_NOT_ALLOWED_IN_MATCH =
@@ -294,6 +338,7 @@ public static final String ER_IGNORABLE_WHITESPACE_NOT_HANDLED =
   public static final String ER_WRONG_DOCUMENT = "ER_WRONG_DOCUMENT";
   /* Note to translators:  The XPath expression cannot be evaluated with respect
    * to this type of node.
+   * <p>
    */
   /** Field ER_WRONG_NODETYPE                    */
   public static final String ER_WRONG_NODETYPE = "ER_WRONG_NODETYPE";
@@ -895,6 +940,10 @@ public static final String ER_IGNORABLE_WHITESPACE_NOT_HANDLED =
   /**
    * Get the association list.
    *
+   * <p>
+   *  静态变量
+   * 
+   * 
    * @return The association list.
    */
   public Object[][] getContents()

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.util.TreeMap;
 
 /**
  * An immutable descriptor.
+ * <p>
+ *  一个不变的描述符。
+ * 
+ * 
  * @since 1.6
  */
 public class ImmutableDescriptor implements Descriptor {
@@ -45,12 +50,18 @@ public class ImmutableDescriptor implements Descriptor {
      * The names of the fields in this ImmutableDescriptor with their
      * original case.  The names must be in alphabetical order as determined
      * by {@link String#CASE_INSENSITIVE_ORDER}.
+     * <p>
+     *  此ImmutableDescriptor中的字段名称及其原始大小写。名称必须按字母顺序排列,由{@link String#CASE_INSENSITIVE_ORDER}确定。
+     * 
      */
     private final String[] names;
     /**
      * The values of the fields in this ImmutableDescriptor.  The
      * elements in this array match the corresponding elements in the
      * {@code names} array.
+     * <p>
+     *  此ImmutableDescriptor中的字段的值。此数组中的元素与{@code names}数组中的相应元素相匹配。
+     * 
      */
     private final Object[] values;
 
@@ -58,6 +69,9 @@ public class ImmutableDescriptor implements Descriptor {
 
     /**
      * An empty descriptor.
+     * <p>
+     *  空描述符。
+     * 
      */
     public static final ImmutableDescriptor EMPTY_DESCRIPTOR =
             new ImmutableDescriptor();
@@ -65,6 +79,10 @@ public class ImmutableDescriptor implements Descriptor {
     /**
      * Construct a descriptor containing the given fields and values.
      *
+     * <p>
+     *  构造一个包含给定字段和值的描述符。
+     * 
+     * 
      * @throws IllegalArgumentException if either array is null, or
      * if the arrays have different sizes, or
      * if a field name is null or empty, or if the same field name
@@ -81,6 +99,11 @@ public class ImmutableDescriptor implements Descriptor {
      * is {@code a=b=c} then the field name is {@code a} and its value
      * is {@code b=c}.
      *
+     * <p>
+     *  构造包含给定字段的描述符。每个String的格式必须为{@code fieldName = fieldValue}。
+     * 字段名以第一个{@code =}字符结束;例如如果String是{@code a = b = c},则字段名称为{@code a},其值为{@code b = c}。
+     * 
+     * 
      * @throws IllegalArgumentException if the parameter is null, or
      * if a field name is empty, or if the same field name appears
      * more than once, or if one of the strings does not contain
@@ -94,6 +117,10 @@ public class ImmutableDescriptor implements Descriptor {
      * <p>Construct a descriptor where the names and values of the fields
      * are the keys and values of the given Map.</p>
      *
+     * <p>
+     *  <p>构造一个描述符,其中字段的名称和值是给定Map的键和值。</p>
+     * 
+     * 
      * @throws IllegalArgumentException if the parameter is null, or
      * if a field name is null or empty, or if the same field name appears
      * more than once (which can happen because field names are not case
@@ -123,6 +150,10 @@ public class ImmutableDescriptor implements Descriptor {
      * a deserialized empty ImmutableDescriptor with
      * {@link #EMPTY_DESCRIPTOR}.
      *
+     * <p>
+     *  此方法可以用另一个实例替换此类的反序列化实例。例如,它可以用{@link #EMPTY_DESCRIPTOR}替换反序列化的空ImmutableDescriptor。
+     * 
+     * 
      * @return the replacement object, which may be {@code this}.
      *
      * @throws InvalidObjectException if the read object has invalid fields.
@@ -209,6 +240,17 @@ public class ImmutableDescriptor implements Descriptor {
      * ImmutableDescriptor copy = ImmutableDescriptor.union(d);
      * </pre>
      *
+     * <p>
+     *  <p>返回一个{@code ImmutableDescriptor},其内容是给定描述符的并集。在任何描述符中出现的每个字段名称将显示在调用该方法时具有的值的结果中。
+     * 对任何描述符的后续更改不会影响此处返回的ImmutableDescriptor。</p>。
+     * 
+     * <p>在最简单的情况下,只有一个描述符,返回的{@code ImmutableDescriptor}是在调用此方法时其字段的副本：</p>
+     * 
+     * <pre>
+     *  描述符d = something(); ImmutableDescriptor copy = ImmutableDescriptor.union(d);
+     * </pre>
+     * 
+     * 
      * @param descriptors the descriptors to be combined.  Any of the
      * descriptors can be null, in which case it is skipped.
      *
@@ -355,6 +397,16 @@ public class ImmutableDescriptor implements Descriptor {
      * <li>Otherwise {@link Object#equals(Object)} must return true.</li>
      * </ul>
      *
+     * <p>
+     *  将此描述符与给定对象进行比较。如果给定对象也是描述符,并且如果两个描述符具有相同的字段名(在情况下可能不同)和相同的关联值,则对象是相等的。如果以下条件成立,则两个描述符中的字段的相应值相等：
+     * 
+     * <ul>
+     *  <li>如果一个值为null,那么另一个值也必须为空。</li> <li>如果一个值是基本数组,则另一个值必须是具有相同元素的相同类型的基本数组。
+     * </li> <li>如果一个值是一个对象数组,那么另一个值也必须是对象数组,并且{@link Arrays#deepEquals(Object [],Object [])}必须​​返回true。
+     * </li> <li>否则{@link Object# equals(Object)}必须返回true。</li>。
+     * </ul>
+     * 
+     * 
      * @param o the object to compare with.
      *
      * @return {@code true} if the objects are the same; {@code false}
@@ -407,6 +459,19 @@ public class ImmutableDescriptor implements Descriptor {
      * <li>Otherwise {@code h} is {@code v.hashCode()}.</li>
      * </ul>
      *
+     * <p>
+     *  <p>返回此描述符的哈希码值。哈希码被计算为描述符中的每个字段的哈希码的和。名为{@code n}和值{@code v}的字段的哈希码是{@code n.toLowerCase()。
+     * hashCode()^ h}。这里{@code h}是{@code v}的哈希码,计算如下：</p>。
+     * 
+     * <ul>
+     * <li>如果{@code v}为null,则{@code h}为0。
+     * </li> <li>如果{@code v}是原始数组,则{@code h} {@code java.util.Arrays.hashCode}。
+     * </li> <li>如果{@code v}是对象数组,则{@code h}使用{@link Arrays#deepHashCode(Object [])} </li> <li>否则{@code h}是{@code v.hashCode()}
+     * 。
+     * </li> <li>如果{@code v}是原始数组,则{@code h} {@code java.util.Arrays.hashCode}。</li>。
+     * </ul>
+     * 
+     * 
      * @return A hash code value for this object.
      *
      */
@@ -443,6 +508,10 @@ public class ImmutableDescriptor implements Descriptor {
      * names.  This method always returns true, but a subclass can
      * override it to return false when appropriate.
      *
+     * <p>
+     *  如果所有字段都具有指定名称的合法值,则返回true。此方法总是返回true,但是子类可以覆盖它,以在适当时返回false。
+     * 
+     * 
      * @return true if the values are legal.
      *
      * @exception RuntimeOperationsException if the validity checking fails.
@@ -462,6 +531,12 @@ public class ImmutableDescriptor implements Descriptor {
      * A subclass can override it
      * to return another object provided the contract is respected.
      *
+     * <p>
+     *  <p>返回等于此描述符的描述符。对返回的描述符的更改对此描述符没有影响,反之亦然。</p>
+     * 
+     *  <p>此方法返回调用它的对象。子类可以覆盖它以返回另一个对象,只要合同受到尊重。
+     * 
+     * 
      * @exception RuntimeOperationsException for illegal value for field Names
      * or field Values.
      * If the descriptor construction fails for any reason, this exception will
@@ -480,6 +555,11 @@ public class ImmutableDescriptor implements Descriptor {
      * the behavior is the same as it would be for a mutable descriptor:
      * either an exception is thrown because of illegal parameters, or
      * there is no effect.
+     * <p>
+     *  此操作不受支持,因为此类是不可变的。
+     * 如果此调用将更改具有相同内容的可变描述符,则会抛出{@link RuntimeOperationsException}包装{@link UnsupportedOperationException}。
+     * 否则,行为与可变描述符的行为相同：或者由于非法参数抛出异常,或者没有效果。
+     * 
      */
     public final void setFields(String[] fieldNames, Object[] fieldValues)
         throws RuntimeOperationsException {
@@ -501,6 +581,11 @@ public class ImmutableDescriptor implements Descriptor {
      * the behavior is the same as it would be for a mutable descriptor:
      * either an exception is thrown because of illegal parameters, or
      * there is no effect.
+     * <p>
+     * 此操作不受支持,因为此类是不可变的。
+     * 如果此调用将更改具有相同内容的可变描述符,则会抛出{@link RuntimeOperationsException}包装{@link UnsupportedOperationException}。
+     * 否则,行为与可变描述符的行为相同：或者由于非法参数抛出异常,或者没有效果。
+     * 
      */
     public final void setField(String fieldName, Object fieldValue)
         throws RuntimeOperationsException {
@@ -518,6 +603,8 @@ public class ImmutableDescriptor implements Descriptor {
     /**
      * Removes a field from the descriptor.
      *
+     * <p>
+     * 
      * @param fieldName String name of the field to be removed.
      * If the field name is illegal or the field is not found,
      * no exception is thrown.

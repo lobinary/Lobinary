@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -11,6 +12,8 @@ package org.omg.PortableInterceptor;
 
 /** The object reference factory.  This provides the capability of
   * creating an object reference.
+  * <p>
+  * 
   */
 abstract public class ObjectReferenceFactoryHelper
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,11 @@ import java.util.Arrays;
  * For more information about the operation of the standard JPEG plug-in,
  * see the <A HREF="../../metadata/doc-files/jpeg_metadata.html">JPEG
  * metadata format specification and usage notes</A>
+ * <p>
+ *  封装单个JPEG量化表的类。元素以自然顺序出现(与锯齿顺序相反)。为从JPEG规范的附件K获取的"标准"表以及常规用于视觉无损编码的默认表提供静态变量。
+ * <p>
+ *  有关标准JPEG插件操作的详情,请参阅<A HREF="../../metadata/doc-files/jpeg_metadata.html"> JPEG元数据格式规范和使用说明</A>
+ * 
  */
 
 public class JPEGQTable {
@@ -89,6 +95,10 @@ public class JPEGQTable {
      * The sample luminance quantization table given in the JPEG
      * specification, table K.1. According to the specification,
      * these values produce "good" quality output.
+     * <p>
+     *  在JPEG规范中给出的样本亮度量化表,表K.1。根据规范,这些值产生"良好"的质量输出。
+     * 
+     * 
      * @see #K1Div2Luminance
      */
     public static final JPEGQTable
@@ -101,6 +111,10 @@ public class JPEGQTable {
      * quality output. This is the table usually used for "visually lossless"
      * encoding, and is the default luminance table used if the default
      * tables and quality settings are used.
+     * <p>
+     *  在JPEG规范表K.1中给出的样本亮度量化表,所有元素除以2.根据规范,这些值产生"非常好"的质量输出。这是通常用于"视觉无损"编码的表,并且是在使用默认表和质量设置时使用的默认亮度表。
+     * 
+     * 
      * @see #K1Luminance
      */
     public static final JPEGQTable
@@ -110,6 +124,10 @@ public class JPEGQTable {
      * The sample chrominance quantization table given in the JPEG
      * specification, table K.2. According to the specification,
      * these values produce "good" quality output.
+     * <p>
+     *  JPEG规范中给出的样本色度量化表,表K.2。根据规范,这些值产生"良好"的质量输出。
+     * 
+     * 
      * @see #K2Div2Chrominance
      */
     public static final JPEGQTable K2Chrominance =
@@ -122,6 +140,10 @@ public class JPEGQTable {
      * quality output. This is the table usually used for "visually lossless"
      * encoding, and is the default chrominance table used if the default
      * tables and quality settings are used.
+     * <p>
+     * 在JPEG规范表K.1中给出的样本色度量化表,所有元素除以2.根据规范,这些值产生"非常好"的质量输出。这是通常用于"视觉无损"编码的表,并且是在使用默认表和质量设置时使用的默认色度表。
+     * 
+     * 
      * @see #K2Chrominance
      */
     public static final JPEGQTable K2Div2Chrominance =
@@ -137,6 +159,10 @@ public class JPEGQTable {
      * Constructs a quantization table from the argument, which must
      * contain 64 elements in natural order (not zig-zag order).
      * A copy is made of the the input array.
+     * <p>
+     *  从参数构造量化表,其必须包含自然顺序的64个元素(不是之字形顺序)。复制由输入数组组成。
+     * 
+     * 
      * @param table the quantization table, as an <code>int</code> array.
      * @throws IllegalArgumentException if <code>table</code> is
      * <code>null</code> or <code>table.length</code> is not equal to 64.
@@ -154,6 +180,10 @@ public class JPEGQTable {
     /**
      * Returns a copy of the current quantization table as an array
      * of {@code int}s in natural (not zig-zag) order.
+     * <p>
+     *  以自然(非Z字形)顺序将当前量化表的副本返回为{@code int}数组。
+     * 
+     * 
      * @return A copy of the current quantization table.
      */
     public int[] getTable() {
@@ -168,6 +198,12 @@ public class JPEGQTable {
      * Values of <code>scaleFactor</code> less than 1 tend to improve
      * the quality level of the table, and values greater than 1.0
      * degrade the quality level of the table.
+     * <p>
+     *  返回一个新的量化表,其中的值乘以<code> scaleFactor </code>,然后钳位到范围1..32767(或如果<code> forceBaseline </code>为true,则为1.
+     * .255)。
+     * <p>
+     *  <code> scaleFactor </code>小于1的值倾向于提高表的质量级别,大于1.0的值会降低表的质量级别。
+     * 
      * @param scaleFactor multiplication factor for the table.
      * @param forceBaseline if <code>true</code>,
      * the values will be clamped to the range 1..255
@@ -193,6 +229,9 @@ public class JPEGQTable {
 
     /**
      * Returns a {@code String} representing this quantization table.
+     * <p>
+     * 
+     * 
      * @return a {@code String} representing this quantization table.
      */
     public String toString() {

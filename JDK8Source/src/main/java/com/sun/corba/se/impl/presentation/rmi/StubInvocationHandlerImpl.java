@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -118,6 +119,9 @@ public final class StubInvocationHandlerImpl implements LinkedInvocationHandler
 
     /** Invoke the given method with the args and return the result.
      *  This may result in a remote invocation.
+     * <p>
+     *  这可能导致远程调用。
+     * 
      *  @param proxy The proxy used for this class (null if not using java.lang.reflect.Proxy)
      */
     public Object invoke( Object proxy, final Method method,

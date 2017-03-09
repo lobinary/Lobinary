@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -11,6 +12,9 @@ package org.omg.PortableInterceptor;
 
 /**
    * All Portable Interceptors implement Interceptor.
+   * <p>
+   *  所有便携式拦截器实现拦截器。
+   * 
    */
 public interface InterceptorOperations 
 {
@@ -25,6 +29,13 @@ public interface InterceptorOperations
      * attribute. Any number of anonymous Interceptors may be registered with 
      * the ORB.
      *
+     * <p>
+     *  返回拦截器的名称。
+     * <p>
+     *  每个拦截器可以具有可以在管理上用于排序拦截器列表的名称。对于每个拦截器类型,只能向ORB注册给定名称的一个拦截器。拦截器可以是匿名的,即,具有空字符串作为名称属性。
+     * 任何数量的匿名拦截器可以向ORB注册。
+     * 
+     * 
      * @return the name of the interceptor.
      */
   String name ();
@@ -45,6 +56,11 @@ public interface InterceptorOperations
      * implemented on an ORB other than the one being destroyed are 
      * permitted. (This means that the ORB being destroyed is still capable 
      * of acting as a client, but not as a server.) 
+     * <p>
+     *  提供一个机会来销毁这个拦截器。 destroy方法在<code> ORB.destroy </code>期间调用。当应用程序调用<code> ORB.destroy </code>时,ORB：
+     * <ol>
+     *  <li>等待所有正在进行的请求完成</li> <li>为每个拦截器调用<code> Interceptor.destroy </code>操作</li> <li>
+     * </ol>
      */
   void destroy ();
 } // interface InterceptorOperations

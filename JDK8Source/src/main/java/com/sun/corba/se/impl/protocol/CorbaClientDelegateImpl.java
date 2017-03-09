@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,8 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 // so RMI-IIOP Util.isLocal can call ClientRequestDispatcher.useLocalInvocation.
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class CorbaClientDelegateImpl extends CorbaClientDelegate
@@ -306,6 +309,9 @@ public class CorbaClientDelegateImpl extends CorbaClientDelegate
     /**
      * This method overrides the org.omg.CORBA.portable.Delegate.equals method,
      * and does the equality check based on IOR equality.
+     * <p>
+     *  此方法覆盖org.omg.CORBA.portable.Delegate.equals方法,并根据IOR等式进行相等性检查。
+     * 
      */
     public boolean equals(org.omg.CORBA.Object self, java.lang.Object other)
     {
@@ -383,6 +389,11 @@ public class CorbaClientDelegateImpl extends CorbaClientDelegate
      * REVISIT: locatedIOR should be replaced with a method call that
      *      returns the current IOR for this request (e.g. ContactInfoChooser).
      *
+     * <p>
+     *  如果此对象由本地服务方实现,则返回true。
+     * 
+     *  REVISIT：locateIOR应该替换为返回此请求的当前IOR的方法调用(例如ContactInfoChooser)。
+     * 
      * @param self The object reference which delegated to this delegate.
      * @return true only if the servant incarnating this object is located in
      * this ORB.
@@ -412,6 +423,9 @@ public class CorbaClientDelegateImpl extends CorbaClientDelegate
 
     // XXX Should this be public?
     /* Returns the codebase for object reference provided.
+    /* <p>
+    /* 
+    /* 
      * @param self the object reference whose codebase needs to be returned.
      * @return the codebase as a space delimited list of url strings or
      * null if none.

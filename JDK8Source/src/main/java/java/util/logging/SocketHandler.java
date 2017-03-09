@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -75,6 +76,32 @@ import java.net.*;
  * The output IO stream is buffered, but is flushed after each
  * <tt>LogRecord</tt> is written.
  *
+ * <p>
+ *  简单网络日志<tt>处理程序</tt>。
+ * <p>
+ *  <tt> LogRecords </tt>发布到网络流连接。默认情况下,<tt> XMLFormatter </tt>类用于格式化。
+ * <p>
+ *  <b>配置：</b>默认情况下,每个<tt> SocketHandler </tt>都使用以下<tt> LogManager </tt>配置属性进行初始化,其中<tt>&lt; handler-nam
+ * e&gt; </tt>到处理程序的完全限定类名。
+ * 如果未定义属性(或具有无效值),则使用指定的默认值。
+ * <ul>
+ *  <li>&lt; handler-name&gt; .level指定<tt>处理程序</tt>(默认为<tt> Level.ALL </tt>)的默认级别。
+ *  </li> <li>&lt; handler-name&gt; .filter指定要使用的<tt> Filter </tt>类的名称(默认为<tt> Filter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .formatter指定要使用的<tt> Formatter </tt>类的名称(默认为<tt> java.util.logging.X
+ * MLFormatter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .filter指定要使用的<tt> Filter </tt>类的名称(默认为<tt> Filter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .encoding要使用的字符集编码的名称(默认为默认平台编码)。
+ *  </li> <li>&lt; handler-name&gt; .host指定要连接到的目标主机名(无默认值)。
+ *  </li> <li>&lt; handler-name&gt; .port指定要使用的目标TCP端口(无默认值)。 </li>。
+ * </ul>
+ * <p>
+ *  例如,{@code SocketHandler}的属性将是：
+ * <ul>
+ * <li> java.util.logging.SocketHandler.level = INFO </li> <li> java.util.logging.SocketHandler.formatte
+ * r = java.util.logging.SimpleFormatter </li>。
+ * </ul>
+ * <p>
+ * 
  * @since 1.4
  */
 
@@ -111,6 +138,16 @@ public class SocketHandler extends StreamHandler {
     /**
      * Create a <tt>SocketHandler</tt>, using only <tt>LogManager</tt> properties
      * (or their defaults).
+     * <p>
+     *  对于自定义处理程序,例如com.foo.MyHandler,属性将是：
+     * <ul>
+     *  <li> com.foo.MyHandler.level = INFO </li> <li> com.foo.MyHandler.formatter = java.util.logging.Simpl
+     * eFormatter </li>。
+     * </ul>
+     * <p>
+     *  输出IO流被缓冲,但在每个<tt> LogRecord </tt>写入后刷新。
+     * 
+     * 
      * @throws IllegalArgumentException if the host or port are invalid or
      *          are not specified as LogManager properties.
      * @throws IOException if we are unable to connect to the target
@@ -138,6 +175,10 @@ public class SocketHandler extends StreamHandler {
      * and port arguments are used. If the host argument is empty, but not
      * null String then the localhost is used.
      *
+     * <p>
+     *  只使用<tt> LogManager </tt>属性(或其默认值)创建<tt> SocketHandler </tt>。
+     * 
+     * 
      * @param host target host.
      * @param port target port.
      *
@@ -173,6 +214,13 @@ public class SocketHandler extends StreamHandler {
     /**
      * Close this output stream.
      *
+     * <p>
+     *  使用指定的主机和端口构造<tt> SocketHandler </tt>。
+     * 
+     *  <tt> SocketHandler </tt>是根据<tt> LogManager </tt>属性(或其默认值)配置的,但使用给定的目标主机和端口参数除外。
+     * 如果host参数为空,但不是null String,则使用localhost。
+     * 
+     * 
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have <tt>LoggingPermission("control")</tt>.
      */
@@ -192,6 +240,10 @@ public class SocketHandler extends StreamHandler {
     /**
      * Format and publish a <tt>LogRecord</tt>.
      *
+     * <p>
+     *  关闭此输出流。
+     * 
+     * 
      * @param  record  description of the log event. A null record is
      *                 silently ignored and is not published
      */

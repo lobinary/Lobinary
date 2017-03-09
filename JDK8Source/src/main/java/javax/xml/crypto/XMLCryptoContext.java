@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * $Id: XMLCryptoContext.java,v 1.6 2005/05/10 15:47:42 mullan Exp $
+ * <p>
+ *  $ Id：XMLCryptoContext.java,v 1.6 2005/05/10 15:47:42 mullan Exp $
+ * 
  */
 package javax.xml.crypto;
 
@@ -40,6 +44,17 @@ package javax.xml.crypto;
  * {@link javax.xml.crypto.dsig.XMLValidateContext} instance to validate two
  * different {@link javax.xml.crypto.dsig.XMLSignature} objects).
  *
+ * <p>
+ *  包含用于XML加密操作的公共上下文信息。
+ * 
+ *  <p>此界面包含用于设置和检索影响XML签名或XML加密结构处理的属性的方法。
+ * 
+ *  <p>请注意,<code> XMLCryptoContext </code>实例可以包含特定于与其一起使用的XML加密结构的信息和状态。
+ * 如果使用具有多个结构的<code> XMLCryptoContext </code>,结果是不可预测的(例如,您不应该使用相同的{@link javax.xml.crypto.dsig.XMLValidateContext}
+ * 实例来验证两个不同的{@link javax.xml.crypto.dsig.XMLSignature}对象)。
+ *  <p>请注意,<code> XMLCryptoContext </code>实例可以包含特定于与其一起使用的XML加密结构的信息和状态。
+ * 
+ * 
  * @author Sean Mullan
  * @author JSR 105 Expert Group
  * @since 1.6
@@ -49,6 +64,10 @@ public interface XMLCryptoContext {
     /**
      * Returns the base URI.
      *
+     * <p>
+     *  返回基本URI。
+     * 
+     * 
      * @return the base URI, or <code>null</code> if not specified
      * @see #setBaseURI(String)
      */
@@ -57,6 +76,10 @@ public interface XMLCryptoContext {
     /**
      * Sets the base URI.
      *
+     * <p>
+     *  设置基本URI。
+     * 
+     * 
      * @param baseURI the base URI, or <code>null</code> to remove current
      *    value
      * @throws IllegalArgumentException if <code>baseURI</code> is not RFC
@@ -68,6 +91,10 @@ public interface XMLCryptoContext {
     /**
      * Returns the key selector for finding a key.
      *
+     * <p>
+     *  返回用于查找键的键选择器。
+     * 
+     * 
      * @return the key selector, or <code>null</code> if not specified
      * @see #setKeySelector(KeySelector)
      */
@@ -76,6 +103,10 @@ public interface XMLCryptoContext {
     /**
      * Sets the key selector for finding a key.
      *
+     * <p>
+     *  设置用于查找键的键选择器。
+     * 
+     * 
      * @param ks the key selector, or <code>null</code> to remove the current
      *    setting
      * @see #getKeySelector
@@ -86,6 +117,10 @@ public interface XMLCryptoContext {
      * Returns a <code>URIDereferencer</code> that is used to dereference
      * {@link URIReference}s.
      *
+     * <p>
+     *  返回用于取消引用{@link URIReference}的<code> URIDereferencer </code>。
+     * 
+     * 
      * @return the <code>URIDereferencer</code>, or <code>null</code> if not
      *    specified
      * @see #setURIDereferencer(URIDereferencer)
@@ -98,6 +133,11 @@ public interface XMLCryptoContext {
      * is used in place of an implementation's default
      * <code>URIDereferencer</code>.
      *
+     * <p>
+     *  设置用于取消引用{@link URIReference}的<code> URIDereferencer </code>。
+     * 指定的<code> URIDereferencer </code>用于代替实现的默认<code> URIDereferencer </code>。
+     * 
+     * 
      * @param dereferencer the <code>URIDereferencer</code>, or
      *    <code>null</code> to remove any current setting
      * @see #getURIDereferencer
@@ -111,6 +151,11 @@ public interface XMLCryptoContext {
      * to a prefix, call the {@link #putNamespacePrefix putNamespacePrefix}
      * method.
      *
+     * <p>
+     * 返回指定的命名空间URI与之关联的命名空间前缀。如果指定的命名空间URI未绑定到前缀,则返回指定的默认前缀。
+     * 要将命名空间URI绑定到前缀,请调用{@link #putNamespacePrefix putNamespacePrefix}方法。
+     * 
+     * 
      * @param namespaceURI a namespace URI
      * @param defaultPrefix the prefix to be returned in the event that the
      *    the specified namespace URI has not been bound to a prefix.
@@ -129,6 +174,10 @@ public interface XMLCryptoContext {
      * already a prefix associated with the specified namespace URI, the old
      * prefix is replaced by the specified prefix.
      *
+     * <p>
+     *  将指定的命名空间URI映射到指定的前缀。如果已有与指定的命名空间URI相关联的前缀,则旧前缀将替换为指定的前缀。
+     * 
+     * 
      * @param namespaceURI a namespace URI
      * @param prefix a namespace prefix (or <code>null</code> to remove any
      *    existing mapping). Specifying the empty string (<code>""</code>)
@@ -146,6 +195,10 @@ public interface XMLCryptoContext {
      * is the prefix for all namespace URIs not explicitly set by the
      * {@link #putNamespacePrefix putNamespacePrefix} method.
      *
+     * <p>
+     *  返回默认的命名空间前缀。默认命名空间前缀是未由{@link #putNamespacePrefix putNamespacePrefix}方法显式设置的所有命名空间URI的前缀。
+     * 
+     * 
      * @return the default namespace prefix, or <code>null</code> if none has
      *    been set.
      * @see #setDefaultNamespacePrefix(String)
@@ -157,6 +210,10 @@ public interface XMLCryptoContext {
      * all namespace URIs not explicitly set by the {@link #putNamespacePrefix
      * putNamespacePrefix} method.
      *
+     * <p>
+     *  设置默认命名空间前缀。这会为未由{@link #putNamespacePrefix putNamespacePrefix}方法显式设置的所有命名空间URI设置命名空间前缀。
+     * 
+     * 
      * @param defaultPrefix the default namespace prefix, or <code>null</code>
      *    to remove the current setting. Specify the empty string
      *    (<code>""</code>) to bind no prefix.
@@ -167,6 +224,10 @@ public interface XMLCryptoContext {
     /**
      * Sets the specified property.
      *
+     * <p>
+     *  设置指定的属性。
+     * 
+     * 
      * @param name the name of the property
      * @param value the value of the property to be set
      * @return the previous value of the specified property, or
@@ -179,6 +240,10 @@ public interface XMLCryptoContext {
     /**
      * Returns the value of the specified property.
      *
+     * <p>
+     *  返回指定属性的值。
+     * 
+     * 
      * @param name the name of the property
      * @return the current value of the specified property, or
      *    <code>null</code> if it does not have a value
@@ -199,6 +264,15 @@ public interface XMLCryptoContext {
      * <p>This method is useful for retrieving arbitrary information that is
      * specific to the cryptographic operation that this context is used for.
      *
+     * <p>
+     *  返回此上下文映射指定键的值。
+     * 
+     *  更正式地说,如果这个上下文包含从密钥<code> k </code>到值<code> v </code>的映射,使得<code>(key == null?k == null： key.equals(k
+     * ))</code>,则此方法返回<code> v </code>;否则返回<code> null </code>。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     *  <p>此方法对于检索特定于此上下文用于的加密操作的任意信息非常有用。
+     * 
      * @param key the key whose associated value is to be returned
      * @return the value to which this context maps the specified key, or
      *    <code>null</code> if there is no mapping for the key
@@ -214,6 +288,9 @@ public interface XMLCryptoContext {
      * <p>This method is useful for storing arbitrary information that is
      * specific to the cryptographic operation that this context is used for.
      *
+     * <p>
+     * 
+     * 
      * @param key key with which the specified value is to be associated with
      * @param value value to be associated with the specified key
      * @return the previous value associated with the key, or <code>null</code>

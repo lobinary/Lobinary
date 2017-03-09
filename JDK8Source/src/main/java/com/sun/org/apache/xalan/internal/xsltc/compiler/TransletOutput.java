@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: TransletOutput.java,v 1.2.4.1 2005/09/05 09:19:44 pvedula Exp $
+ * <p>
+ *  $ Id：TransletOutput.java,v 1.2.4.1 2005/09/05 09:19:44 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -37,6 +50,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  */
 final class TransletOutput extends Instruction {
@@ -46,6 +61,9 @@ final class TransletOutput extends Instruction {
 
     /**
      * Displays the contents of this <xsltc:output> element.
+     * <p>
+     *  显示此<xsltc：output>元素的内容。
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -55,6 +73,9 @@ final class TransletOutput extends Instruction {
     /**
      * Parse the contents of this <xsltc:output> element. The only attribute
      * we recognise is the 'file' attribute that contains teh output filename.
+     * <p>
+     *  解析此<xsltc：output>元素的内容。唯一的属性是包含teh输出文件名的'file'属性。
+     * 
      */
     public void parseContents(Parser parser) {
         // Get the output filename from the 'file' attribute
@@ -84,6 +105,9 @@ final class TransletOutput extends Instruction {
 
     /**
      * Type checks the 'file' attribute (must be able to convert it to a str).
+     * <p>
+     *  类型检查'file'属性(必须能够将其转换为str)。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         final Type type = _filename.typeCheck(stable);
@@ -97,6 +121,8 @@ final class TransletOutput extends Instruction {
     /**
      * Compile code that opens the give file for output, dumps the contents of
      * the element to the file, then closes the file.
+     * <p>
+     *  编译打开给定文件以进行输出的代码,将元素的内容转储到文件,然后关闭文件。
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         final ConstantPoolGen cpg = classGen.getConstantPool();

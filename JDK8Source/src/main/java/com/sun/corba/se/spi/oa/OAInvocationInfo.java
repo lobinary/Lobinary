@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,8 @@ import com.sun.corba.se.spi.copyobject.ObjectCopierFactory ;
 /** This class is a holder for the information required to implement POACurrent.
 * It is also used for the ServantObject that is returned by _servant_preinvoke calls.
 * This allows us to avoid allocating an extra object on each collocated invocation.
+* <p>
+*  它也用于_servant_preinvoke调用返回的ServantObject。这允许我们避免在每个并置的调用上分配额外的对象。
 */
 public class OAInvocationInfo extends ServantObject {
     // This is the container object for the servant.

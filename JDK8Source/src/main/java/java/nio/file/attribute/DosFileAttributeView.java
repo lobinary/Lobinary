@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,37 @@ import java.io.IOException;
  * setReadOnly}, {@link #setHidden setHidden}, {@link #setSystem setSystem}, and
  * {@link #setArchive setArchive} methods respectively.
  *
+ * <p>
+ *  文件属性视图,提供了旧版"DOS"文件属性的视图。这些属性由文件系统支持,例如在消费者设备中常用的文件分配表(FAT)格式</em>。
+ * 
+ *  <p> {@code DosFileAttributeView}是一个{@link BasicFileAttributeView},它还支持访问用于指示文件是只读,隐藏,系统文件还是归档的一组DOS属
+ * 性标志。
+ * 
+ *  <p>在需要动态访问文件属性时,此属性视图支持的属性由{@code BasicFileAttributeView}定义,此外,还支持以下属性：
+ * <blockquote>
+ * <table border="1" cellpadding="8" summary="Supported attributes">
+ * <tr>
+ *  <th>名称</th> <th>键入</th>
+ * </tr>
+ * <tr>
+ *  <td> readonly </td> <td> {@link Boolean} </td>
+ * </tr>
+ * <tr>
+ *  <td> hidden </td> <td> {@link Boolean} </td>
+ * </tr>
+ * <tr>
+ *  <td> system </td> <td> {@link Boolean} </td>
+ * </tr>
+ * <tr>
+ *  <td>归档</td> <td> {@link Boolean} </td>
+ * </tr>
+ * </table>
+ * </blockquote>
+ * 
+ *  <p> {@link java.nio.file.Files#getAttribute getAttribute}方法可用于读取任何这些属性或由{@link BasicFileAttributeView}
+ * 定义的任何属性,如同通过调用{@link# readAttributes readAttributes()}方法。
+ * 
+ * 
  * @since 1.7
  */
 
@@ -86,11 +118,21 @@ public interface DosFileAttributeView
     /**
      * Returns the name of the attribute view. Attribute views of this type
      * have the name {@code "dos"}.
+     * <p>
+     * <p> {@link java.nio.file.Files#setAttribute setAttribute}方法可用于更新文件的最后修改时间,最后访问时间或由{@link BasicFileAttributeView}
+     * 定义的创建时间属性。
+     * 它还可以用于分别更新DOS属性,如同分别调用{@link #setReadOnly setReadOnly},{@link #setHidden setHidden},{@link #setSystem setSystem}
+     * 和{@link #setArchive setArchive}方法。
+     * 
      */
     @Override
     String name();
 
     /**
+    /* <p>
+    /*  返回属性视图的名称。此类型的属性视图名称为{@code"dos"}。
+    /* 
+    /* 
      * @throws  IOException                             {@inheritDoc}
      * @throws  SecurityException                       {@inheritDoc}
      */
@@ -105,6 +147,8 @@ public interface DosFileAttributeView
      * implementation may, for example, require to read the existing value of
      * the DOS attribute in order to update this attribute.
      *
+     * <p>
+     * 
      * @param   value
      *          the new value of the attribute
      *
@@ -125,6 +169,12 @@ public interface DosFileAttributeView
      * implementation may, for example, require to read the existing value of
      * the DOS attribute in order to update this attribute.
      *
+     * <p>
+     *  更新只读属性的值。
+     * 
+     *  <p>如果属性可以更新为相对于其他文件系统操作的原子操作,则它是实现特定的。例如,实现可能需要读取DOS属性的现有值,以便更新该属性。
+     * 
+     * 
      * @param   value
      *          the new value of the attribute
      *
@@ -145,6 +195,12 @@ public interface DosFileAttributeView
      * implementation may, for example, require to read the existing value of
      * the DOS attribute in order to update this attribute.
      *
+     * <p>
+     *  更新隐藏属性的值。
+     * 
+     *  <p>如果属性可以更新为相对于其他文件系统操作的原子操作,则它是实现特定的。例如,实现可能需要读取DOS属性的现有值,以便更新该属性。
+     * 
+     * 
      * @param   value
      *          the new value of the attribute
      *
@@ -165,6 +221,12 @@ public interface DosFileAttributeView
      * implementation may, for example, require to read the existing value of
      * the DOS attribute in order to update this attribute.
      *
+     * <p>
+     *  更新系统属性的值。
+     * 
+     *  <p>如果属性可以更新为相对于其他文件系统操作的原子操作,则它是实现特定的。例如,实现可能需要读取DOS属性的现有值,以便更新该属性。
+     * 
+     * 
      * @param   value
      *          the new value of the attribute
      *

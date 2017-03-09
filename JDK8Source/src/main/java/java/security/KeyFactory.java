@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -81,6 +82,31 @@ import sun.security.jca.GetInstance.Instance;
  * Consult the release documentation for your implementation to see if any
  * other algorithms are supported.
  *
+ * <p>
+ *  关键工厂用于将<I>密钥</I>({@code Key}类型的不透明加密密钥)转换为<I>密钥规范</I>(底层密钥材料的透明表示),反之亦然。
+ * 
+ *  主要工厂是双向的。也就是说,它们允许您从给定的键规范(键材料)构建不透明的键对象,或者以合适的格式检索键对象的基础键材料。
+ * 
+ *  <P>对于同一个键,可能存在多个兼容的键规范。例如,可以使用{@code DSAPublicKeySpec}或{@code X509EncodedKeySpec}来指定DSA公钥。
+ * 关键工厂可用于在兼容的关键规格之间转换。
+ * 
+ *  <P>以下是如何使用密钥工厂以从其编码实例化DSA公钥的示例。假设Alice已经从Bob接收到数字签名。 Bob还向她发送了他的公钥(以编码格式)以验证他的签名。然后Alice执行以下操作：
+ * 
+ * <pre>
+ *  X509EncodedKeySpec bobPubKeySpec = new X509EncodedKeySpec(bobEncodedPubKey); KeyFactory keyFactory =
+ *  KeyFactory.getInstance("DSA"); PublicKey bobPubKey = keyFactory.generatePublic(bobPubKeySpec);签名sig 
+ * = Signature.getInstance("DSA"); sig.initVerify(bobPubKey); sig.update(data); sig.verify(signature);。
+ * </pre>
+ * 
+ * <p>每个Java平台的实现都需要支持以下标准{@code KeyFactory}算法：
+ * <ul>
+ *  <li> {@ code DiffieHellman} </li> <li> {@ code DSA} </li> <li> {@ code RSA} </li>
+ * </ul>
+ *  这些算法在<a href =中描述
+ * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyFactory">
+ *  Java密码体系结构标准算法名称文档的KeyFactory部分</a>。有关实现的信息,请参阅发行文档,以了解是否支持任何其他算法。
+ * 
+ * 
  * @author Jan Luehe
  *
  * @see Key
@@ -117,6 +143,10 @@ public class KeyFactory {
     /**
      * Creates a KeyFactory object.
      *
+     * <p>
+     *  创建KeyFactory对象。
+     * 
+     * 
      * @param keyFacSpi the delegate
      * @param provider the provider
      * @param algorithm the name of the algorithm
@@ -153,6 +183,14 @@ public class KeyFactory {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回一个KeyFactory对象,用于转换指定算法的公钥/私钥。
+     * 
+     *  <p>此方法遍历注册的安全提供程序列表,从最常用的提供程序开始。将返回一个新的KeyFactory对象,该对象封装了来自支持指定算法的第一个Provider的KeyFactorySpi实现。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the name of the requested key algorithm.
      * See the KeyFactory section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyFactory">
@@ -184,6 +222,14 @@ public class KeyFactory {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回一个KeyFactory对象,用于转换指定算法的公钥/私钥。
+     * 
+     *  <p>返回一个新的KeyFactory对象,用于封装来自指定提供者的KeyFactorySpi实现。指定的提供程序必须在安全提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the name of the requested key algorithm.
      * See the KeyFactory section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyFactory">
@@ -223,6 +269,12 @@ public class KeyFactory {
      * object is returned.  Note that the specified Provider object
      * does not have to be registered in the provider list.
      *
+     * <p>
+     *  返回一个KeyFactory对象,用于转换指定算法的公钥/私钥。
+     * 
+     * <p>返回一个新的KeyFactory对象,该对象封装来自指定的Provider对象的KeyFactorySpi实现。请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     * 
      * @param algorithm the name of the requested key algorithm.
      * See the KeyFactory section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyFactory">
@@ -254,6 +306,10 @@ public class KeyFactory {
     /**
      * Returns the provider of this key factory object.
      *
+     * <p>
+     *  返回此关键工厂对象的提供程序。
+     * 
+     * 
      * @return the provider of this key factory object
      */
     public final Provider getProvider() {
@@ -268,6 +324,10 @@ public class KeyFactory {
      * Gets the name of the algorithm
      * associated with this {@code KeyFactory}.
      *
+     * <p>
+     *  获取与此{@code KeyFactory}相关联的算法的名称。
+     * 
+     * 
      * @return the name of the algorithm associated with this
      * {@code KeyFactory}
      */
@@ -280,6 +340,9 @@ public class KeyFactory {
      * implementation for failover. If no more implemenations are
      * available, this method returns null. However, the active spi of
      * this class is never set to null.
+     * <p>
+     *  更新此类的活动KeyFactorySpi,并返回故障转移的下一个实现。如果没有更多的实现可用,此方法返回null。但是,此类的活动spi从不设置为null。
+     * 
      */
     private KeyFactorySpi nextSpi(KeyFactorySpi oldSpi) {
         synchronized (lock) {
@@ -315,6 +378,10 @@ public class KeyFactory {
      * Generates a public key object from the provided key specification
      * (key material).
      *
+     * <p>
+     *  根据提供的密钥规范(密钥材料)生成公钥对象。
+     * 
+     * 
      * @param keySpec the specification (key material) of the public key.
      *
      * @return the public key.
@@ -353,6 +420,10 @@ public class KeyFactory {
      * Generates a private key object from the provided key specification
      * (key material).
      *
+     * <p>
+     *  从提供的密钥规范(密钥材料)生成私钥对象。
+     * 
+     * 
      * @param keySpec the specification (key material) of the private key.
      *
      * @return the private key.
@@ -395,6 +466,11 @@ public class KeyFactory {
      * key material should be returned in an instance of the
      * {@code DSAPublicKeySpec} class.
      *
+     * <p>
+     *  返回给定键对象的规范(键材料)。 {@code keySpec}标识应当返回密钥材料的规范类。
+     * 例如,它可以是{@code DSAPublicKeySpec.class},以指示密钥材料应在{@code DSAPublicKeySpec}类的实例中返回。
+     * 
+     * 
      * @param <T> the type of the key specification to be returned
      *
      * @param key the key.
@@ -440,6 +516,8 @@ public class KeyFactory {
      * Translates a key object, whose provider may be unknown or potentially
      * untrusted, into a corresponding key object of this key factory.
      *
+     * <p>
+     * 
      * @param key the key whose provider is unknown or untrusted.
      *
      * @return the translated key.

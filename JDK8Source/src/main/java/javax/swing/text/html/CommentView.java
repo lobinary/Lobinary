@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,11 @@ import java.util.*;
  * reset. As this inherits from EditableView if the JTextComponent is
  * not editable, the textarea will not be visible.
  *
+ * <p>
+ *  CommentView subclasses HiddenTagView包含一个显示注释的JTextArea。当编辑textarea时,将重置注释。
+ * 因为这继承自EditableView,如果JTextComponent不可编辑,则textarea将不可见。
+ * 
+ * 
  * @author  Scott Violet
  */
 class CommentView extends HiddenTagView {
@@ -76,6 +82,7 @@ class CommentView extends HiddenTagView {
     /**
      * This is subclassed to put the text on the Comment attribute of
      * the Element's AttributeSet.
+     * <p>
      */
     void _updateModelFromText() {
         JTextComponent textC = getTextComponent();

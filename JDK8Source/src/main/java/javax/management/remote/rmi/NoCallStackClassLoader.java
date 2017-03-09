@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -73,6 +74,23 @@ import java.security.ProtectionDomain;
     Of course, referencedClassNames should not contain any classes
     that the user might want to deserialize, because the whole point
     of this loader is that it does not find such classes.
+/* <p>
+/*  <p>类加载器只知道如何定义有限数量的类,并通过委派加载有限数量的其他类到另一个加载器。它用于解决序列化的问题,特别是RMI(包括RMI / IIOP)使用的问题。
+/*  JMX远程API准确地定义必须使用哪个类加载器来反序列化服务器上​​的参数,并在客户端上返回值。我们通过将其设置为上下文类加载器来将此类加载器传递给RMI。
+/*  RMI使用上下文类加载器来加载类,因为它反序列化,这是我们想要的。然而,在咨询上下文类加载器之前,它查找具有非空类加载器的类的调用栈,并且如果它找到一个类加载器,则使用它。
+/* 因此,在javax.management.remote的独立版本中,如果你正在寻找的类是jmxremote.jar的加载器(通常是系统类加载器)已知的,那么加载器将加载它。这与所需的类加载语义相矛盾。
+/* 
+/*  <p>我们通过确保在调用堆栈中搜索找到一个不加载任何感兴趣的类的非空类加载器,即这一个,解决了这个问题。因此,即使这个加载器在反序列化期间确实被咨询,它从来没有发现类被反序列化。
+/*  RMI然后继续使用上下文类加载器,如我们所要求的。
+/* 
+/* <p>这个加载程序是用它定义的一个或多个类的名字和字节码构成的,还有一个类加载器,它将委托该字节码所需的某些其他类。
+/* 我们通过直接编译Java代码,转换为字符串,将该字符串复制到需要该加载器的类中,并使用stringToBytes方法将其转换为字节数组,从而构建字节码。
+/* 我们使用-g：none编译,因为在这些直接编码的类中有行号信息等没有多少意义。
+/* 
+/*  <p> referencedClassNames应包含由此加载器定义的类引用的所有类的名称。然而,没有必要包括标准的J2SE类。
+/* 这里,如果类是定义类的超类或超级接口,或者如果它是字段,参数或返回值的类型,则引用该类。如果类只出现在方法或构造函数的throws子句中,则不会引用该类。
+/* 当然,referencedClassNames不应该包含用户可能想要反序列化的任何类,因为这个加载器的整个点是它没有找到这样的类。
+/* 
 */
 
 class NoCallStackClassLoader extends ClassLoader {
@@ -117,6 +135,9 @@ class NoCallStackClassLoader extends ClassLoader {
     /* This method is called at most once per name.  Define the name
      * if it is one of the classes whose byte code we have, or
      * delegate the load if it is one of the referenced classes.
+     * <p>
+     *  如果它是我们有其字节码的类之一,或委托加载,如果它是引用类之一。
+     * 
      */
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
@@ -131,6 +152,9 @@ class NoCallStackClassLoader extends ClassLoader {
         /* If the referencedClassLoader is null, it is the bootstrap
          * class loader, and there's no point in delegating to it
          * because it's already our parent class loader.
+         * <p>
+         *  类加载器,并且没有任何意义,因为它已经是我们的父类加载器。
+         * 
          */
         if (referencedClassLoader != null) {
             for (int i = 0; i < referencedClassNames.length; i++) {
@@ -171,6 +195,16 @@ class NoCallStackClassLoader extends ClassLoader {
      * it does not use any encoding.  So it is guaranteed that each
      * byte of the result is numerically identical (mod 256) to the
      * corresponding character of the input.
+     * <p>
+     * <p>使用给定的<code> String </code>字符构造<code> byte [] </code>。只使用每个字符的低位字节。
+     * 此方法对于减少包含大字节数组(例如其他类的字节代码)的类的占用空间非常有用,因为字符串在类文件中占用的空间远小于字节代码来初始化<code> byte [] </code>以相同的字节数。</p>。
+     * 
+     *  <p>我们每个字符只使用一个字节,即使字符包含两个字节。
+     * 结果输出长度是相同的：每个字符使用一个字节更短,因为它有更多的字符在最佳1-127范围,但更长,因为它有更多的零字节(这是频繁的,并且被编码为两个字节在类文件UTF -8)。
+     * 但是每个字符一个字节有两个主要优点：(1)你可以看到字符串常量,这是令人放心,(2)你不需要知道类文件长度是否为奇数。</p>。
+     * 
+     *  <p>此方法与{@link String#getBytes()}不同,它不使用任何编码。因此,保证结果的每个字节在数字上与输入的相应字符相同(mod 256)。
+     * 
      */
     public static byte[] stringToBytes(String s) {
         final int slen = s.length();
@@ -294,4 +328,19 @@ public class BytesToString {
     }
 }
 
+         (buf (generate-new-buffer "* <p>
+         (buf (generate-new-buffer "*  您可以使用以下Emacs函数将类文件转换为stringToBytes方法要使用的字符串。
+         (buf (generate-new-buffer "* 用鼠标选择整个(defun ...)并键入M-x eval-region,或将其保存到文件并执行M-x加载文件。然后访问* .class文件并做M-x类字符串。
+         (buf (generate-new-buffer "* 
+         (buf (generate-new-buffer "* ;; class-string.el ;;使用emacs访问* .class文件,然后调用此函数
+         (buf (generate-new-buffer "* 
+         (buf (generate-new-buffer "*  (defun class-string()"构造一个字符串与当前缓冲区相同的Java字符串,将结果字符串放入一个名为* string *的缓冲区中,可能带有<2>这样的数字后缀, insert-buf
+         (buf (generate-new-buffer "* fer'd into a Java program。
+         (buf (generate-new-buffer "* "(交互)(let *((s(buffer-string))(slen(length s))(i 0)(buf(generate-new-buffer"* string * ))(set-buffer 
+         (buf (generate-new-buffer "* buf)(插入"\"")(while(<i slen)(if(>(current-column)61)(insert"\"+ \ n \""))let (c(aref si)))(insert(cond
+         (buf (generate-new-buffer "* ((&gt; c 126)(format"\\％o"c))((= c?\")"\\\" \)"\\\\")((<c 33)(let((nextc(if(<(1+ i slen)(aref s(1+ i))?\ 0)和(<= nextc?7)(>
+         (buf (generate-new-buffer "*  = nextc?0))(格式"\\％03o"c) setq i(1+ i)))(插入"\""(切换到缓冲器buf)))。
+         (buf (generate-new-buffer "* 
+         (buf (generate-new-buffer "*  或者,以下类读取类文件并输出可由上面的stringToBytes方法使用的字符串。
+         (buf (generate-new-buffer "* 
 */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,17 @@ import java.util.stream.StreamSupport;
  * arbitrary <tt>CharSequence</tt> instances as elements in a set or as keys in
  * a map. </p>
  *
+ * <p>
+ *  <tt> CharSequence </tt>是<code> char </code>值的可读序列。此接口提供对许多不同种类的<code> char </code>序列的统一,只读访问。
+ *  <code> char </code>值表示<b>基本多语言平面(BMP)</i>中的字符或代理。
+ * 有关详细信息,请参阅<a href="Character.html#unicode"> Unicode字符表示</a>。
+ * 
+ *  <p>此接口不会细化{@link java.lang.Object#equals(java.lang.Object)equals}和{@link java.lang.Object#hashCode()hashCode}
+ * 方法的一般合同。
+ * 因此,比较实现<tt> CharSequence </tt>的两个对象的结果通常是未定义的。每个对象可以由不同的类实现,并且不能保证每个类将能够测试其实例以与其他类的实例相等。
+ * 因此,不宜使用任意的<tt> CharSequence </tt>实例作为集合中的元素或作为地图中的键。 </p>。
+ * 
+ * 
  * @author Mike McCloskey
  * @since 1.4
  * @spec JSR-51
@@ -62,6 +74,10 @@ public interface CharSequence {
      * Returns the length of this character sequence.  The length is the number
      * of 16-bit <code>char</code>s in the sequence.
      *
+     * <p>
+     *  返回此字符序列的长度。长度是序列中16位<code> char </code>的数量。
+     * 
+     * 
      * @return  the number of <code>char</code>s in this sequence
      */
     int length();
@@ -76,6 +92,13 @@ public interface CharSequence {
      * <a href="{@docRoot}/java/lang/Character.html#unicode">surrogate</a>, the surrogate
      * value is returned.
      *
+     * <p>
+     *  返回指定索引处的<code> char </code>值。索引范围从零到<tt> length() -  1 </tt>。
+     * 序列的第一个<code> char </code>值为索引0,下一个为索引1,依此类推,如同数组索引一样。
+     * 
+     * <p>如果索引指定的<code> char </code>值为<a href="{@docRoot}/java/lang/Character.html#unicode">代理</a>,代理值返回。
+     * 
+     * 
      * @param   index   the index of the <code>char</code> value to be returned
      *
      * @return  the specified <code>char</code> value
@@ -94,6 +117,12 @@ public interface CharSequence {
      * returned sequence is <tt>end - start</tt>, so if <tt>start == end</tt>
      * then an empty sequence is returned.
      *
+     * <p>
+     *  返回一个<code> CharSequence </code>,它是此序列的子序列。
+     * 子序列以指定索引处的<code> char </code>值开始,并以索引<tt> end-1 </tt>处的<code> char </code>值结束。
+     * 返回序列的长度(在<code> char </code>中)为<tt> end-start </tt>,因此如果<tt> start == end </tt>,则返回空序列。
+     * 
+     * 
      * @param   start   the start index, inclusive
      * @param   end     the end index, exclusive
      *
@@ -111,6 +140,10 @@ public interface CharSequence {
      * order as this sequence.  The length of the string will be the length of
      * this sequence.
      *
+     * <p>
+     *  以与此序列相同的顺序返回包含此序列中的字符的字符串。字符串的长度将是此序列的长度。
+     * 
+     * 
      * @return  a string consisting of exactly this sequence of characters
      */
     public String toString();
@@ -124,6 +157,13 @@ public interface CharSequence {
      * <p>If the sequence is mutated while the stream is being read, the
      * result is undefined.
      *
+     * <p>
+     *  返回从此序列中{@code int}零扩展{@code char}值的流。
+     * 映射到<a href="{@docRoot}/java/lang/Character.html#unicode">代理代码点</a>的任何字符都将通过未解析的字符传递。
+     * 
+     *  <p>如果在读取流时序列发生了突变,则结果未定义。
+     * 
+     * 
      * @return an IntStream of char values from this sequence
      * @since 1.8
      */
@@ -171,6 +211,11 @@ public interface CharSequence {
      * <p>If the sequence is mutated while the stream is being read, the result
      * is undefined.
      *
+     * <p>
+     *  从此序列返回代码点值的流。
+     * 在序列中遇到的任何代理对被组合,如同通过{@linkplain Character#toCodePoint Character.toCodePoint},并且结果被传递到流。
+     * 任何其他代码单元,包括普通的BMP字符,不成对的代理和未定义的代码单元,被零扩展为{@code int}值,然后传递给流。
+     * 
      * @return an IntStream of Unicode code points from this sequence
      * @since 1.8
      */

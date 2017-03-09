@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,29 @@ import org.xml.sax.SAXException;
  * if the original SAX 1.0 style entity resolution method is invoked.
  * </p>
  *
+ * <p>
+ *  扩展接口,用于将外部实体引用映射到输入源,或提供缺少的外部子集。
+ *  {@link XMLReader#setEntityResolver XMLReader.setEntityResolver()}方法用于向解析器提供此接口的实现。
+ * 当解析器使用此接口中的方法时,将使用{@link EntityResolver2#resolveEntity EntityResolver2.resolveEntity()}方法(在此接口中)<em>而
+ * 不是</em>旧的(SAX 1.0){@link EntityResolver #resolveEntity EntityResolver.resolveEntity()}方法。
+ *  {@link XMLReader#setEntityResolver XMLReader.setEntityResolver()}方法用于向解析器提供此接口的实现。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)位于公共域中,并且随附<strong>无保修</strong>。</em>
+ * </blockquote>
+ * 
+ *  <p>如果SAX应用程序需要此界面为外部实体定义的自定义处理,则必须确保它使用具有<em> http://xml.org/sax/features/use-entity-resolver2 < / em>
+ * 功能标志设置为<em> true </em>(识别功能时为默认值)。
+ * 如果该标志不可识别,或其值为false,或解析器不实现此接口,则将仅使用{@link EntityResolver}方法。
+ * </p>
+ * 
+ * <p>支持修改实体分辨率的三类应用程序。 <em>旧样式</em>应用程序将不知道此界面;他们将提供一个EntityResolver。
+ *  <em>过渡模式</em>提供EntityResolver2,并且由于多态性而在支持它的任何系统(解析器或其他工具)中自动获得其方法的好处。
+ *  <em>旧样式</em>和<em>过渡模式</em>应用程序将与任何SAX2解析器一起使用。 <em>新样式</em>应用程序将无法运行,除了支持此特定功能的SAX2解析器。
+ * 他们将坚持特征标志具有值"true",如果调用原始的SAX 1.0样式实体解析方法,它们提供的EntityResolver2实现可能会抛出异常。
+ * </p>
+ * 
+ * 
  * @see org.xml.sax.XMLReader#setEntityResolver
  *
  * @since SAX 2.0 (extensions 1.1 alpha)
@@ -138,6 +162,26 @@ public interface EntityResolver2 extends EntityResolver
      * it can make a malformed document appear to be well formed.
      * </p>
      *
+     * <p>
+     *  允许应用程序为未明确定义文档的文档提供外部子集。具有省略外部子集的DOCTYPE声明的文档因此可以增加可用于验证,实体处理和属性处理(规范化,默认以及包括ID的报告类型)的声明。
+     * 通过{@link LexicalHandler#startDTD startDTD()}方法报告此增强,就像文档文本最初包含外部子集一样;此回调在报告任何内部子集数据或错误之前进行。</p>。
+     * 
+     * <p>此方法也可用于没有DOCTYPE声明的文档。当遇到根元素,但没有看到DOCTYPE声明时,将调用此方法。
+     * 如果它为外部子集返回一个值,那么该根元素被声明为根元素,从而在文档的序言结束时拼接DOCTYPE声明的效果不能以其他方式有效。在这种情况下,解析器回调的顺序在逻辑上类似于：</p>。
+     * 
+     * <pre>
+     *  ...注释和来自prolog的PI(像往常一样)startDTD("rootName",source.getPublicId(),source.getSystemId()); startEntity(
+     * "[dtd]"); ...来自外部子集的声明,注释和PI endEntity("[dtd]"); endDTD(); ...然后文档的其余部分(像往常一样)startElement(...,"rootN
+     * ame",...);。
+     * </pre>
+     * 
+     *  <p>请注意,InputSource没有得到进一步的解析。
+     * 此方法的实现可能希望调用{@link #resolveEntity resolveEntity()}以获得诸如使用DTD实体的本地高速缓存的益处。
+     * 此外,此方法将永远不会被不包括外部参数实体的(非验证)处理器使用。 </p>。
+     * 
+     * <p>此方法的使用包括在与将对外部实体总是需要不期望的网络访问的XML处理器互操作时促进数据验证,或者出于其他原因采用"无DTD"策略。非验证动机包括强制文档包括DTD,以便一致地处理属性。
+     * 例如,XPath处理器需要知道哪些属性具有类型"ID",然后才能处理广泛使用的引用类型。</p>。
+     * 
      * @param name Identifies the document root element.  This name comes
      *  from a DOCTYPE declaration (where available) or from the actual
      *  root element.
@@ -184,6 +228,12 @@ public interface EntityResolver2 extends EntityResolver
         ContentHandler.skippedEntity()}
      * method. </p>
      *
+     * <p>
+     * 
+     *  <p> <strong>警告：</strong>返回外部子集将修改输入文档。通过提供一般实体的定义,它可以使得畸形文档看起来形成良好。
+     * </p>
+     * 
+     * 
      * @param name Identifies the external entity being resolved.
      *  Either "[dtd]" for the external subset, or a name starting
      *  with "%" to indicate a parameter entity, or else the name of

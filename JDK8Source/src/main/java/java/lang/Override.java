@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,10 @@ import java.lang.annotation.*;
  * any public method declared in {@linkplain Object}.
  * </li></ul>
  *
+ * <p>
+ *  表示方法声明旨在覆盖父类中的方法声明。如果方法使用此注释类型注释,则编译器需要生成错误消息,除非以下条件中的至少一个成立：
+ * 
+ * 
  * @author  Peter von der Ah&eacute;
  * @author  Joshua Bloch
  * @jls 9.6.1.4 @Override

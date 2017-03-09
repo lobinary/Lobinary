@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import java.util.concurrent.Callable;
 /**
  * Interface to invoke Java&trade; programming language documentation tools from
  * programs.
+ * <p>
+ *  调用Java和交易的接口;编程语言文档工具。
+ * 
  */
 public interface DocumentationTool extends Tool, OptionChecker {
     /**
@@ -46,6 +50,13 @@ public interface DocumentationTool extends Tool, OptionChecker {
      * {@link StandardLocation#CLASS_PATH}, and
      * {@link StandardLocation#PLATFORM_CLASS_PATH}.
      *
+     * <p>
+     *  使用给定的组件和参数创建文档任务的未来。任务可能未完成,如DocumentationTask界面中所述。
+     * 
+     *  <p>如果提供了文件管理器,它必须能够处理{@link DocumentationTool.Location}中定义的所有位置,以及{@link StandardLocation#SOURCE_PATH}
+     * ,{@link StandardLocation#CLASS_PATH}和{@ link StandardLocation#PLATFORM_CLASS_PATH}。
+     * 
+     * 
      * @param out a Writer for additional output from the tool;
      * use {@code System.err} if {@code null}
      *
@@ -92,6 +103,12 @@ public interface DocumentationTool extends Tool, OptionChecker {
      * it is accessed after calls to {@code flush} or {@code close}.
      * The standard file manager must be usable with other tools.
      *
+     * <p>
+     *  获取此工具的标准文件管理器实现的新实例。文件管理器将使用给定的诊断侦听器来产生任何非致命诊断。将用适当的例外信号通知致命错误。
+     * 
+     *  <p>如果在调用{@code flush}或{@code close}后访问标准文件管理器,它将自动重新打开。标准文件管理器必须可用于其他工具。
+     * 
+     * 
      * @param diagnosticListener a diagnostic listener for non-fatal
      * diagnostics; if {@code null} use the compiler's default method
      * for reporting diagnostics
@@ -117,12 +134,21 @@ public interface DocumentationTool extends Tool, OptionChecker {
      * <p>Before calling the call method, additional aspects of the
      * task can be configured, for example, by calling the
      * {@linkplain #setLocale setLocale} method.
+     * <p>
+     *  表示文档任务的未来的接口。任务尚未开始。要启动任务,请调用{@linkplain #call call}方法。
+     * 
+     *  <p>在调用调用方法之前,可以配置任务的其他方面,例如通过调用{@linkplain #setLocale setLocale}方法。
+     * 
      */
     interface DocumentationTask extends Callable<Boolean> {
         /**
          * Set the locale to be applied when formatting diagnostics and
          * other localized data.
          *
+         * <p>
+         *  设置在格式化诊断和其他本地化数据时要应用的区域设置。
+         * 
+         * 
          * @param locale the locale to apply; {@code null} means apply no
          * locale
          * @throws IllegalStateException if the task has started
@@ -134,6 +160,10 @@ public interface DocumentationTool extends Tool, OptionChecker {
          * be performed once.  Subsequent calls to this method throw
          * IllegalStateException.
          *
+         * <p>
+         * 执行此文档任务。任务只能执行一次。对此方法的后续调用将抛出IllegalStateException。
+         * 
+         * 
          * @return true if and only all the files were processed without errors;
          * false otherwise
          *
@@ -150,21 +180,33 @@ public interface DocumentationTool extends Tool, OptionChecker {
     /**
      * Locations specific to {@link DocumentationTool}.
      *
+     * <p>
+     *  {@link DocumentationTool}特定的位置。
+     * 
+     * 
      * @see StandardLocation
      */
     enum Location implements JavaFileManager.Location {
         /**
          * Location of new documentation files.
+         * <p>
+         *  新文档文件的位置。
+         * 
          */
         DOCUMENTATION_OUTPUT,
 
         /**
          * Location to search for doclets.
+         * <p>
+         *  搜索doclets的位置。
+         * 
          */
         DOCLET_PATH,
 
         /**
          * Location to search for taglets.
+         * <p>
+         *  搜索taglets的位置。
          */
         TAGLET_PATH;
 

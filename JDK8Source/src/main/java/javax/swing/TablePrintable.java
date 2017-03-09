@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -92,6 +93,31 @@ import java.text.MessageFormat;
  * The behavior of this <code>Printable</code> is undefined if the table is
  * changed at any time after creation.
  *
+ * <p>
+ *  用于打印<code> JTable </code>的<code> Printable </code>的实现。
+ * <p>
+ *  此实现将表行自然地按顺序跨多个页面传播,每页适合尽可能多的行。另一方面,列的分布由传递给构造函数的打印模式参数控制。
+ * 当使用<code> JTable.PrintMode.NORMAL </code>时,实现以类似于处理行的方式处理列,将它们分布在多个页面上(按照与表的<code> ComponentOrientati
+ * on </code >)。
+ *  此实现将表行自然地按顺序跨多个页面传播,每页适合尽可能多的行。另一方面,列的分布由传递给构造函数的打印模式参数控制。
+ * 当给出<code> JTable.PrintMode.FIT_WIDTH </code>时,如果需要,实现会缩小输出,以确保所有列都适合页面。 (请注意,宽度和高度均匀缩放,以确保高宽比保持不变)。
+ * <p>
+ *  每个页面上打印的表的部分由表的<code> JTableHeader </code>的适当部分标题。
+ * <p>
+ *  通过向构造函数提供<code> MessageFormat </code>实例,可以将头和脚注文本添加到输出中。
+ * 打印代码通过使用单个参数调用其<code>格式</code>方法来请求格式的字符串：包含<code> Integer </code>类型的单个元素的<code> Object </code>表示当前页码
+ * 。
+ *  通过向构造函数提供<code> MessageFormat </code>实例,可以将头和脚注文本添加到输出中。
+ * <p>
+ * 在某些情况下,此<code> Printable </code>无法适当地填充项目,导致剪辑输出。这些是：
+ * <ul>
+ *  <li>在任何模式下,当页眉或页脚文字太宽,无法完全适合可打印区域时。实现从一开始就打印尽可能多的文本,这由表的<code> ComponentOrientation </code>确定。
+ *  <li>在任何模式下,当行太大,无法适合可打印区域时。该行的最上部分被打印,并且没有示出下边界。
+ *  <li>在<code> JTable.PrintMode.NORMAL </code>中,当列太宽而不适合可打印区域时。列的中心被打印,并且没有显示左边界和右边界。
+ * </ul>
+ * <p>
+ *  开发人员将此<code>可打印</code>包装在另一个中以便创建复杂的报表和文档是完全有效的。他们甚至可以请求将不同的页面呈现为不同大小的可打印区域。
+ * 
  * @author  Shannon Hickey
  */
 class TablePrintable implements Printable {
@@ -156,6 +182,15 @@ class TablePrintable implements Printable {
      * two <code>MessageFormat</code> parameters. When called upon to provide
      * a String, each format is given the current page number.
      *
+     * <p>
+     * 实现的目的是通过即时执行大部分计算来处理这个问题。
+     * 但是,当使用<code> JTable.PrintMode.FIT_WIDTH </code>时,或者当只有可打印宽度在页面之间更改时,提供不同大小的效果最好。
+     * 这是因为当它在<code> JTable.PrintMode.NORMAL </code>中打印一组行时,实现确定需要跨页面分发列,它假定所有这些行都适合每个后续页面以适合列。
+     * <p>
+     * 在创建此<code> Printable </code>(无效修改包括：大小,渲染器或基础数据中的更改)后,开发人员有责任确保表不会以任何方式修改。
+     * 如果在创建后的任何时间更改表,此<code> Printable </code>的行为是未定义的。
+     * 
+     * 
      * @param  table         the table to print
      * @param  printMode     the printing mode for this printable
      * @param  headerFormat  a <code>MessageFormat</code> specifying the text to
@@ -196,6 +231,11 @@ class TablePrintable implements Printable {
      * Prints the specified page of the table into the given {@link Graphics}
      * context, in the specified format.
      *
+     * <p>
+     *  为给定的<code> JTable </code>创建一个新的<code> TablePrintable </code>。
+     * 可以使用两个<code> MessageFormat </code>参数指定页眉和页脚文本。当被要求提供一个字符串时,每种格式都给出当前页码。
+     * 
+     * 
      * @param   graphics    the context into which the page is drawn
      * @param   pageFormat  the size and orientation of the page being drawn
      * @param   pageIndex   the zero based index of the page to be drawn
@@ -401,6 +441,10 @@ class TablePrintable implements Printable {
      * A helper method that encapsulates common code for rendering the
      * header and footer text.
      *
+     * <p>
+     *  以指定的格式将表的指定页面打印到给定的{@link Graphics}上下文中。
+     * 
+     * 
      * @param  g2d       the graphics to draw into
      * @param  text      the text to draw, non null
      * @param  rect      the bounding rectangle for this text,
@@ -444,6 +488,10 @@ class TablePrintable implements Printable {
      * To avoid an infinite loop in printing, this will
      * always put at least one cell on each page.
      *
+     * <p>
+     *  一种帮助方法,用于封装用于呈现页眉和页脚文本的常用代码。
+     * 
+     * 
      * @param  pw  the width of the area to print in
      * @param  ph  the height of the area to print in
      */

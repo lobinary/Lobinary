@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,8 @@ import java.util.Set;
 
 /**
  *
+ * <p>
+ * 
  * @author Hans Muller
  */
 class MultiUIDefaults extends UIDefaults

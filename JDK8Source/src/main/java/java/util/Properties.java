@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -110,6 +111,52 @@ import sun.util.spi.XmlPropertiesProvider;
  * <p>This class is thread-safe: multiple threads can share a single
  * <tt>Properties</tt> object without the need for external synchronization.
  *
+ * <p>
+ *  {@code属性}类表示一组持久的属性。 {@code属性}可以保存到流中或从流中加载。属性列表中的每个键及其对应的值是一个字符串。
+ * <p>
+ *  属性列表可以包含另一个属性列表作为其"默认值";如果在原始属性列表中找不到属性键,则搜索此第二属性列表。
+ * <p>
+ *  因为{@code属性}继承自{@code Hashtable},所以{@code put}和{@code putAll}方法可以应用于{@code Properties}对象。
+ * 强烈建议不要使用它们,因为它们允许调用者插入其键或值不是{@code Strings}的条目。应该使用{@code setProperty}方法。
+ * 如果在包含非 -  {@ code String}键或值的"受损"{@code属性}对象上调用{@code store}或{@code save}方法,调用将失败。
+ * 同样,如果在包含非 -  {@ code String}键的"受影响的"{@code属性}对象上调用{@code propertyNames}或{@code list}方法,则会调用失败。
+ * 
+ * <p>
+ *  {@link #load(java.io.Reader)load(Reader)} <tt> / </tt> {@link #store(java.io.Writer,java.lang.String)store(Writer,String) }
+ * 方法以下面指定的简单的面向行的格式从字符流中加载和存储属性。
+ * 
+ * {@link #load(java.io.InputStream)load(InputStream)} <tt> / </tt> {@link #store(java.io.OutputStream,java.lang.String)store(OutputStream,String) }
+ * 方法的工作方式与load(Reader)/ store(Writer,String)对相同,除了输入/输出流以ISO 8859-1字符编码进行编码。
+ * 不能在此编码中直接表示的字符可以使用Unicode转义编写,如第<cite>节"Java&trade;语言规范</cite>;在转义序列中只允许单个"u"字符。
+ *  native2ascii工具可以用于将属性文件转换为其他字符编码或从其他字符编码转换。
+ * 
+ *  <p> {@link #loadFromXML(InputStream)}和{@link #storeToXML(OutputStream,String,String)}方法以简单的XML格式加载和存
+ * 储属性。
+ * 默认情况下,使用UTF-8字符编码,但是如果需要,可以指定特定的编码。实现需要支持UTF-8和UTF-16,并且可以支持其他编码。 XML属性文档具有以下DOCTYPE声明：。
+ * 
+ * <pre>
+ *  &lt;！DOCTYPE properties SYSTEM"http://java.sun.com/dtd/properties.dtd"&gt;
+ * </pre>
+ *  请注意,在导出或导入属性时,不会</i>访问系统URI(http://java.sun.com/dtd/properties.dtd);它只是作为一个字符串来唯一标识DTD,它是：
+ * <pre>
+ *  &lt;?xml version ="1.0"encoding ="UTF-8"?&gt;
+ * 
+ *  &lt;！ - 属性的DTD  - &gt;
+ * 
+ *  &lt;！ELEMENT属性(comment,entry *)&gt;
+ * 
+ * &lt;！ATTLIST属性版本CDATA #FIXED"1.0"&gt;
+ * 
+ *  &lt;！ELEMENT comment(#PCDATA)&gt;
+ * 
+ *  &lt;！ELEMENT entry(#PCDATA)&gt;
+ * 
+ *  &lt;！ATTLIST entry key CDATA#REQUIRED&gt;
+ * </pre>
+ * 
+ *  <p>这个类是线程安全的：多个线程可以共享一个<tt> Properties </tt>对象,而不需要外部同步。
+ * 
+ * 
  * @see <a href="../../../technotes/tools/solaris/native2ascii.html">native2ascii tool for Solaris</a>
  * @see <a href="../../../technotes/tools/windows/native2ascii.html">native2ascii tool for Windows</a>
  *
@@ -122,6 +169,9 @@ public
 class Properties extends Hashtable<Object,Object> {
     /**
      * use serialVersionUID from JDK 1.1.X for interoperability
+     * <p>
+     *  使用JDK 1.1.X中的serialVersionUID实现互操作性
+     * 
      */
      private static final long serialVersionUID = 4112578634029874840L;
 
@@ -129,12 +179,19 @@ class Properties extends Hashtable<Object,Object> {
      * A property list that contains default values for any keys not
      * found in this property list.
      *
+     * <p>
+     *  属性列表,包含此属性列表中未找到的任何键的默认值。
+     * 
+     * 
      * @serial
      */
     protected Properties defaults;
 
     /**
      * Creates an empty property list with no default values.
+     * <p>
+     *  创建一个没有默认值的空属性列表。
+     * 
      */
     public Properties() {
         this(null);
@@ -143,6 +200,10 @@ class Properties extends Hashtable<Object,Object> {
     /**
      * Creates an empty property list with the specified defaults.
      *
+     * <p>
+     *  创建具有指定默认值的空属性列表。
+     * 
+     * 
      * @param   defaults   the defaults.
      */
     public Properties(Properties defaults) {
@@ -155,6 +216,11 @@ class Properties extends Hashtable<Object,Object> {
      * strings for property keys and values. The value returned is the
      * result of the <tt>Hashtable</tt> call to {@code put}.
      *
+     * <p>
+     *  调用<tt> Hashtable </tt>方法{@code put}。用于与<tt> getProperty </tt>方法并行。对属性键和值强制使用字符串。
+     * 返回的值是<tt> Hashtable </tt>调用{@code put}的结果。
+     * 
+     * 
      * @param key the key to be placed into this property list.
      * @param value the value corresponding to <tt>key</tt>.
      * @return     the previous value of the specified key in this property
@@ -306,6 +372,73 @@ class Properties extends Hashtable<Object,Object> {
      * <p>
      * The specified stream remains open after this method returns.
      *
+     * <p>
+     *  以简单的面向行的格式从输入字符流读取属性列表(键和元素对)。
+     * <p>
+     * 属性按行处理。有两种类型的行,<i>自然行</i>和<i>逻辑行</i>。
+     * 自然行被定义为由一组行终止符字符({@code \ n}或{@code \ r}或{@code \ r \ n})终止的一行字符或由流。自然线可以是空白线,注释线,或保持所有或一些关键元素对。
+     * 逻辑行保存键元素对的所有数据,通过用反斜杠字符{@code \}转义行终止符序列,可以跨几个相邻的自然行分布。注意,注释行不能以这种方式扩展;每个自然线是一个注释必须有自己的注释指示符,如下所述。
+     * 从输入读取行,直到到达流的结束。
+     * 
+     * <p>
+     *  仅包含空格字符的自然行被视为空白,并被忽略。注释行具有ASCII {@code'#'}或{@code'！'}作为其第一个非空格字符;注释行也被忽略,并且不编码关键元素信息。
+     * 除了行终止符之外,此格式还考虑字符空间({@code''},{@code'\ u005Cu0020'}),制表符({@code'\ t'},{@code'\ u005Cu0009'}) ,并将feed(
+     * {@code'\ f'},{@code'\ u005Cu000C'})形成为空白。
+     *  仅包含空格字符的自然行被视为空白,并被忽略。注释行具有ASCII {@code'#'}或{@code'！'}作为其第一个非空格字符;注释行也被忽略,并且不编码关键元素信息。
+     * 
+     * <p>
+     * 如果逻辑行分散在多个自然行中,则转义行终止符序列,行终止符序列和下一行开始处的任何空格的反斜杠对键或元素值没有影响。
+     * 关键字和元素解析(加载时)的剩余部分将假设构成键和元素的所有字符在删除行连续字符之后出现在一个自然的行上。
+     * 注意,仅仅检查行终止符序列之前的字符以决定行终止符是否被转义并不是足够的;对于要转义的行终止符,必须有奇数个连续反斜杠。
+     * 由于输入是从左到右处理的,在行终止符(或其他地方)之前的非零偶数的2n个连续反斜杠在转义处理之后编码n个反斜杠。
+     * 
+     * <p>
+     *  键包含从第一个非空白字符开始,但不包括第一个非转义的{@code'='},{@code'：'}或空格字符的行中的所有字符而不是行终止符。
+     * 所有这些关键终止字符可以通过用前面的反斜杠字符转义来包括在该键中;例如,<p>。
+     * 
+     *  {@code \：\ =} <p>
+     * 
+     * 将是双字符键{@code"：="}。可以使用{@code \ r}和{@code \ n}转义序列来包含行终止符字符。
+     * 跳过键后的任何空格;如果键后面的第一个非空格字符是{@code'='}或{@code'：'},那么它将被忽略,并且其后的任何空格字符也将被跳过。
+     * 行上的所有其余字符都成为相关联的元素字符串的一部分;如果没有剩余的字符,则该元素是空字符串{@code""}。一旦识别了构成密钥和元素的原始字符序列,则如上所述执行转义处理。
+     * 
+     * <p>
+     *  作为示例,以下三行中的每一行指定键{@code"Truth"}和相关联的元素值{@code"Beauty"}：
+     * <pre>
+     *  真理：美丽真相：美丽真相：美丽
+     * </pre>
+     *  作为另一个示例,以下三行指定单个属性：
+     * <pre>
+     *  水果苹果,香蕉,梨,\哈密瓜,西瓜,\猕猴桃,芒果
+     * </pre>
+     *  关键是{@code"fruits"},相关联的元素是：<pre>"apple,banana,pear,cantaloupe,watermelon,kiwi,mango"注意每个{@code \}以便在
+     * 最终结果中的每个逗号之后将出现一个空格;连续行上的{@code \},行终止符和前导空格仅被丢弃,并且不被一个或多个其他字符替代。
+     * <p>
+     *  作为第三个例子,行：<pre>奶酪
+     * </pre>
+     * 指定键是{@code"cheeses"},相关联的元素是空字符串{@code""}。
+     * <p>
+     *  <a name="unicodeescapes"> </a>键和元素中的字符可以用类似于用于字符和字符串文字的转义序列表示(请参见<cite> Java&trade;语言规范< / cite>)。
+     * 
+     *  与用于字符和字符串的字符转义序列和Unicode转义字符的区别是：
+     * 
+     * <ul>
+     *  <li>无法识别八进制转义。
+     * 
+     *  <li>字符序列{@code \ b} </i>不</i>表示退格字符。
+     * 
+     *  <li>该方法不将反斜杠字符{@code \}视为无效的转义字符之前的错误;反斜杠被默默地丢弃。例如,在Java字符串中,序列{@code"\ z"}将导致编译时错误。
+     * 相反,这种方法默默地丢弃反斜杠。因此,此方法将两个字符序列{@code"\ b"}视为等同于单个字符{@code'b'}。
+     * 
+     *  <li>单引号和双引号不需要转义;然而,通过上面的规则,单引号和双引号字符前面的反斜杠仍然分别产生单引号和双引号字符。
+     * 
+     *  <li>在Unicode转义序列中只允许使用单个"u"字符。
+     * 
+     * </ul>
+     * <p>
+     *  此方法返回后,指定的流保持打开状态。
+     * 
+     * 
      * @param   reader   the input character stream.
      * @throws  IOException  if an error occurred when reading from the
      *          input stream.
@@ -330,6 +463,14 @@ class Properties extends Hashtable<Object,Object> {
      * <p>
      * The specified stream remains open after this method returns.
      *
+     * <p>
+     * 从输入字节流读取属性列表(键和元素对)。
+     * 输入流采用{@link #load(java.io.Reader)load(Reader)}中指定的简单的面向行的格式,并假设使用ISO 8859-1字符编码;即每个字节是一个Latin1字符。
+     * 不在Latin1中的字符和某些特殊字符使用Unicode转义(在<cite> Java&trade;语言规范</cite>。
+     * <p>
+     *  此方法返回后,指定的流保持打开状态。
+     * 
+     * 
      * @param      inStream   the input stream.
      * @exception  IOException  if an error occurred when reading from the
      *             input stream.
@@ -398,6 +539,9 @@ class Properties extends Hashtable<Object,Object> {
      * (\u0020, \u0009 and \u000c) from the beginning of a "natural line".
      * Method returns the char length of the "logical line" and stores
      * the line in "lineBuf".
+     * <p>
+     *  和空白行,并从"自然线"的开头过滤掉那些前导空白字符(\ u0020,\ u0009和\ u000c)。方法返回"逻辑行"的char长度并将行存储在"lineBuf"中。
+     * 
      */
     class LineReader {
         public LineReader(InputStream inStream) {
@@ -534,6 +678,9 @@ class Properties extends Hashtable<Object,Object> {
     /*
      * Converts encoded &#92;uxxxx to unicode chars
      * and changes special saved chars to their original forms
+     * <p>
+     *  将编码的\ uxxxx转换为unicode字符,并将特殊保存的字符更改为其原始形式
+     * 
      */
     private String loadConvert (char[] in, int off, int len, char[] convtBuf) {
         if (convtBuf.length < len) {
@@ -593,6 +740,9 @@ class Properties extends Hashtable<Object,Object> {
     /*
      * Converts unicodes to encoded &#92;uxxxx and escapes
      * special characters with a preceding slash
+     * <p>
+     *  将unicode转换为编码的\ uxxxx,并使用前面的斜线转义特殊字符
+     * 
      */
     private String saveConvert(String theString,
                                boolean escapeSpace,
@@ -697,6 +847,10 @@ class Properties extends Hashtable<Object,Object> {
      * Calls the {@code store(OutputStream out, String comments)} method
      * and suppresses IOExceptions that were thrown.
      *
+     * <p>
+     *  调用{@code store(OutputStream out,String comments)}方法并抑制抛出的IOExceptions。
+     * 
+     * 
      * @deprecated This method does not throw an IOException if an I/O error
      * occurs while saving the property list.  The preferred way to save a
      * properties list is via the {@code store(OutputStream out,
@@ -756,6 +910,27 @@ class Properties extends Hashtable<Object,Object> {
      * The output stream remains open after this method returns.
      * <p>
      *
+     * <p>
+     *  使用适合使用{@link #load(java.io.Reader)load(Reader)}方法的格式将此{@code Properties}表中的此属性列表(键和元素对)写入输出字符流。
+     * <p>
+     *  此{@code属性}表(如果有)的默认表格的属性不是</i>由此方法写出。
+     * <p>
+     * 如果注释参数不为空,那么首先将ASCII {@code#}字符,注释字符串和行分隔符写入输出流。因此,{@code comments}可以作为标识注释。
+     * 在换行符('\ n'),回车符('\ r')或回车符后紧接着换行符的任何一个换行符被替换为由{@code Writer}和如果注释中的下一个字符不是字符{@code#}或字符{@code！},则在该行分
+     * 隔符之后写出一个ASCII {@code#}。
+     * 如果注释参数不为空,那么首先将ASCII {@code#}字符,注释字符串和行分隔符写入输出流。因此,{@code comments}可以作为标识注释。
+     * <p>
+     *  接下来,始终会写入一条注释行,其中包含一个ASCII {@code#}字符,当前日期和时间(如同当前时间的{@code Date}的{@code toString}方法生成的)一个由{@code Writer}
+     * 生成的行分隔符。
+     * <p>
+     *  然后,这个{@code属性}表中的每个条目都会写出,每行一个。对于每个条目,写入密钥字符串,然后是ASCII {@code =},然后是相关联的元素字符串。
+     * 对于键,所有空格字符都使用前面的{@code \}字符写入。对于元素,前导空格字符,但不是嵌入或尾随空格字符,使用前面的{@code \}字符写入。
+     * 键和元素字符{@code#},{@code！},{@code =}和{@code：}用前面的反斜杠写入,以确保它们正确加载。
+     * <p>
+     * 在写入条目之后,输出流被刷新。此方法返回后,输出流保持打开状态。
+     * <p>
+     * 
+     * 
      * @param   writer      an output character stream writer.
      * @param   comments   a description of the property list.
      * @exception  IOException if writing this property list to the specified
@@ -803,6 +978,25 @@ class Properties extends Hashtable<Object,Object> {
      * After the entries have been written, the output stream is flushed.
      * The output stream remains open after this method returns.
      * <p>
+     * <p>
+     *  将此{@code Properties}表中的此属性列表(键和元素对)以适合于使用{@link #load(InputStream)加载(InputStream)加载到{@code属性}表中的格式写入
+     * 输出流, } 方法。
+     * <p>
+     *  此{@code属性}表(如果有)的默认表格的属性不是</i>由此方法写出。
+     * <p>
+     *  此方法以与{@link #store(java.io.Writer,java.lang.String)store(Writer)}中指定的格式相同的格式输出注释,属性键和值,具有以下差异：
+     * <ul>
+     *  <li>流使用ISO 8859-1字符编码写入。
+     * 
+     *  <li>注释中不是拉丁语-1的字符以{@code \ u005Cu} <i> xxxx </i>格式表示为适当的Unicode字符十六进制值<i> xxxx </i>。
+     * 
+     *  <li>在属性键或值中小于{@code \ u005Cu0020}的字符和大于{@code \ u005Cu007E}的字符将写为{@code \ u005Cu} <i> xxxx </i>,以获得适
+     * 当的十六进制值< i> xxxx </i>。
+     * </ul>
+     * <p>
+     *  在写入条目之后,输出流被刷新。此方法返回后,输出流保持打开状态。
+     * <p>
+     * 
      * @param   out      an output stream.
      * @param   comments   a description of the property list.
      * @exception  IOException if writing this property list to the specified
@@ -835,6 +1029,9 @@ class Properties extends Hashtable<Object,Object> {
                 key = saveConvert(key, true, escUnicode);
                 /* No need to escape embedded and trailing spaces for value, hence
                  * pass false to flag.
+                 * <p>
+                 *  传递false到标志。
+                 * 
                  */
                 val = saveConvert(val, false, escUnicode);
                 bw.write(key + "=" + val);
@@ -861,6 +1058,20 @@ class Properties extends Hashtable<Object,Object> {
      *
      * <p>The specified stream is closed after this method returns.
      *
+     * <p>
+     *  将指定输入流上的XML文档所表示的所有属性加载到此属性表中。
+     * 
+     *  <p> XML文档必须具有以下DOCTYPE声明：
+     * <pre>
+     * &lt;！DOCTYPE properties SYSTEM"http://java.sun.com/dtd/properties.dtd"&gt;
+     * </pre>
+     *  此外,文件必须满足上述性质DTD。
+     * 
+     *  <p>需要使用实现来读取使用"{@code UTF-8}"或"{@code UTF-16}"编码的XML文档。实现可以支持额外的编码。
+     * 
+     *  <p>此方法返回后,指定的流将关闭。
+     * 
+     * 
      * @param in the input stream from which to read the XML document.
      * @throws IOException if reading from the specified input stream
      *         results in an <tt>IOException</tt>.
@@ -890,6 +1101,13 @@ class Properties extends Hashtable<Object,Object> {
      * comment)</tt> behaves in exactly the same way as the invocation
      * <tt>props.storeToXML(os, comment, "UTF-8");</tt>.
      *
+     * <p>
+     *  发出表示此表中包含的所有属性的XML文档。
+     * 
+     *  <p>调用此方法的形式<tt> props.storeToXML(os,comment)</tt>的行为与调用<tt> props.storeToXML(os,comment,"UTF-8 "); </tt>
+     * 。
+     * 
+     * 
      * @param os the output stream on which to emit the XML document.
      * @param comment a description of the property list, or {@code null}
      *        if no comment is desired.
@@ -926,6 +1144,21 @@ class Properties extends Hashtable<Object,Object> {
      *
      * <p>The specified stream remains open after this method returns.
      *
+     * <p>
+     *  使用指定的编码发出表示此表中包含的所有属性的XML文档。
+     * 
+     *  <p> XML文档将具有以下DOCTYPE声明：
+     * <pre>
+     *  &lt;！DOCTYPE properties SYSTEM"http://java.sun.com/dtd/properties.dtd"&gt;
+     * </pre>
+     * 
+     *  <p>如果指定的注释是{@code null},则不会在文档中存储注释。
+     * 
+     *  <p>需要一个实现来支持使用"{@code UTF-8}"或"{@code UTF-16}"编码的XML文档的写入。实现可以支持额外的编码。
+     * 
+     *  <p>此方法返回后,指定的流保持打开状态。
+     * 
+     * 
      * @param os        the output stream on which to emit the XML document.
      * @param comment   a description of the property list, or {@code null}
      *                  if no comment is desired.
@@ -960,6 +1193,10 @@ class Properties extends Hashtable<Object,Object> {
      * and its defaults, recursively, are then checked. The method returns
      * {@code null} if the property is not found.
      *
+     * <p>
+     * 在此属性列表中使用指定的键搜索属性。如果在此属性列表中找不到键,则递归检查默认属性列表及其默认值。如果未找到该属性,该方法将返回{@code null}。
+     * 
+     * 
      * @param   key   the property key.
      * @return  the value in this property list with the specified key value.
      * @see     #setProperty
@@ -977,6 +1214,10 @@ class Properties extends Hashtable<Object,Object> {
      * and its defaults, recursively, are then checked. The method returns the
      * default value argument if the property is not found.
      *
+     * <p>
+     *  在此属性列表中使用指定的键搜索属性。如果在此属性列表中找不到键,则递归检查默认属性列表及其默认值。如果未找到属性,该方法将返回默认值参数。
+     * 
+     * 
      * @param   key            the hashtable key.
      * @param   defaultValue   a default value.
      *
@@ -995,6 +1236,10 @@ class Properties extends Hashtable<Object,Object> {
      * of the same name has not already been found from the main
      * properties list.
      *
+     * <p>
+     *  返回此属性列表中所有键的枚举,如果尚未在主属性列表中找到相同名称的键,则包括默认属性列表中的不同键。
+     * 
+     * 
      * @return  an enumeration of all the keys in this property list, including
      *          the keys in the default property list.
      * @throws  ClassCastException if any key in this property list
@@ -1021,6 +1266,12 @@ class Properties extends Hashtable<Object,Object> {
      * Changes to this <tt>Properties</tt> are not reflected in the set,
      * or vice versa.
      *
+     * <p>
+     *  返回此属性列表中的一组键,其中键及其对应的值是字符串,如果尚未从主属性列表中找到相同名称的键,则在默认属性列表中包括不同键。省略键或值不是<tt> String </tt>类型的属性。
+     * <p>
+     *  返回的集合不受<tt>属性</tt>对象支持。对此<tt>属性</tt>的更改不会反映在集合中,反之亦然。
+     * 
+     * 
      * @return  a set of keys in this property list where
      *          the key and its corresponding value are strings,
      *          including the keys in the default property list.
@@ -1037,6 +1288,10 @@ class Properties extends Hashtable<Object,Object> {
      * Prints this property list out to the specified output stream.
      * This method is useful for debugging.
      *
+     * <p>
+     *  将此属性列表打印到指定的输出流。此方法对于调试非常有用。
+     * 
+     * 
      * @param   out   an output stream.
      * @throws  ClassCastException if any key in this property list
      *          is not a string.
@@ -1059,6 +1314,10 @@ class Properties extends Hashtable<Object,Object> {
      * Prints this property list out to the specified output stream.
      * This method is useful for debugging.
      *
+     * <p>
+     *  将此属性列表打印到指定的输出流。此方法对于调试非常有用。
+     * 
+     * 
      * @param   out   an output stream.
      * @throws  ClassCastException if any key in this property list
      *          is not a string.
@@ -1068,6 +1327,9 @@ class Properties extends Hashtable<Object,Object> {
      * Rather than use an anonymous inner class to share common code, this
      * method is duplicated in order to ensure that a non-1.1 compiler can
      * compile this file.
+     * <p>
+     * 不是使用匿名内部类来共享公共代码,而是复制此方法以确保非1.1编译器可以编译此文件。
+     * 
      */
     public void list(PrintWriter out) {
         out.println("-- listing properties --");
@@ -1085,6 +1347,10 @@ class Properties extends Hashtable<Object,Object> {
 
     /**
      * Enumerates all key/value pairs in the specified hashtable.
+     * <p>
+     *  枚举指定散列表中的所有键/值对。
+     * 
+     * 
      * @param h the hashtable
      * @throws ClassCastException if any of the property keys
      *         is not of String type.
@@ -1102,6 +1368,10 @@ class Properties extends Hashtable<Object,Object> {
     /**
      * Enumerates all key/value pairs in the specified hashtable
      * and omits the property if the key or value is not a string.
+     * <p>
+     *  枚举指定散列表中的所有键/值对,如果键或值不是字符串,则省略属性。
+     * 
+     * 
      * @param h the hashtable
      */
     private synchronized void enumerateStringProperties(Hashtable<String, String> h) {
@@ -1119,6 +1389,10 @@ class Properties extends Hashtable<Object,Object> {
 
     /**
      * Convert a nibble to a hex character
+     * <p>
+     *  将半字节转换为十六进制字符
+     * 
+     * 
      * @param   nibble  the nibble to convert.
      */
     private static char toHex(int nibble) {
@@ -1155,6 +1429,15 @@ class Properties extends Hashtable<Object,Object> {
      *   <li> If the provider is not found by the above means then a system
      *   default provider will be instantiated and used. </li>
      * </ol>
+     * <p>
+     *  支持以XML格式加载/存储属性的类。
+     * 
+     *  <p>这里定义的{@code load}和{@code store}方法委托给系统范围的{@code XmlPropertiesProvider}。
+     * 在首次调用任一方法时,系统范围的提供程序位于以下位置：</p>。
+     * 
+     * <ol>
+     *  <li>如果系统属性{@code sun.util.spi.XmlPropertiesProvider}已定义,那么它将被视为具体提供程序类的完全限定名称。类用系统类加载器作为启动加载器加载。
+     * 如果不能使用零参数构造函数加载或实例化,那么会抛出未指定的错误。 </li>。
      */
     private static class XmlSupport {
 

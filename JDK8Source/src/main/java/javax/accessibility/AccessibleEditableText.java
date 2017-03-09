@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,14 @@ import javax.swing.text.*;
  * method of AccessibleContext.  If the return value is not null, the object
  * supports this interface.
  *
+ * <p>
+ *  <P> AccessibleEditableText接口应该由在显示器上呈现可编辑文本信息的所有类实现。
+ * 与AccessibleText接口一起,该接口为辅助技术通过其内容,属性和空间位置来访问该文本提供了标准机制。
+ * 应用程序可以通过首先获取其AccessibleContext(参见{@link Accessible})然后调用AccessibleContext的{@link AccessibleContext#getAccessibleEditableText}
+ * 方法来确定对象是否支持AccessibleEditableText接口。
+ * 与AccessibleText接口一起,该接口为辅助技术通过其内容,属性和空间位置来访问该文本提供了标准机制。如果返回值不为null,则对象支持此接口。
+ * 
+ * 
  * @see Accessible
  * @see Accessible#getAccessibleContext
  * @see AccessibleContext
@@ -56,6 +65,10 @@ public interface AccessibleEditableText extends AccessibleText {
     /**
      * Sets the text contents to the specified string.
      *
+     * <p>
+     *  将文本内容设置为指定的字符串。
+     * 
+     * 
      * @param s the string to set the text contents
      */
     public void setTextContents(String s);
@@ -63,6 +76,10 @@ public interface AccessibleEditableText extends AccessibleText {
     /**
      * Inserts the specified string at the given index/
      *
+     * <p>
+     *  将指定的字符串插入给定的索引/
+     * 
+     * 
      * @param index the index in the text where the string will
      * be inserted
      * @param s the string to insert in the text
@@ -72,6 +89,10 @@ public interface AccessibleEditableText extends AccessibleText {
     /**
      * Returns the text string between two indices.
      *
+     * <p>
+     *  返回两个索引之间的文本字符串。
+     * 
+     * 
      * @param startIndex the starting index in the text
      * @param endIndex the ending index in the text
      * @return the text string between the indices
@@ -81,6 +102,10 @@ public interface AccessibleEditableText extends AccessibleText {
     /**
      * Deletes the text between two indices
      *
+     * <p>
+     *  删除两个索引之间的文本
+     * 
+     * 
      * @param startIndex the starting index in the text
      * @param endIndex the ending index in the text
      */
@@ -89,6 +114,10 @@ public interface AccessibleEditableText extends AccessibleText {
     /**
      * Cuts the text between two indices into the system clipboard.
      *
+     * <p>
+     *  将两个索引之间的文本切换到系统剪贴板。
+     * 
+     * 
      * @param startIndex the starting index in the text
      * @param endIndex the ending index in the text
      */
@@ -98,6 +127,10 @@ public interface AccessibleEditableText extends AccessibleText {
      * Pastes the text from the system clipboard into the text
      * starting at the specified index.
      *
+     * <p>
+     *  将系统剪贴板中的文本粘贴到从指定索引开始的文本中。
+     * 
+     * 
      * @param startIndex the starting index in the text
      */
     public void paste(int startIndex);
@@ -106,6 +139,10 @@ public interface AccessibleEditableText extends AccessibleText {
      * Replaces the text between two indices with the specified
      * string.
      *
+     * <p>
+     *  用指定的字符串替换两个索引之间的文本。
+     * 
+     * 
      * @param startIndex the starting index in the text
      * @param endIndex the ending index in the text
      * @param s the string to replace the text between two indices
@@ -115,6 +152,10 @@ public interface AccessibleEditableText extends AccessibleText {
     /**
      * Selects the text between two indices.
      *
+     * <p>
+     *  选择两个索引之间的文本。
+     * 
+     * 
      * @param startIndex the starting index in the text
      * @param endIndex the ending index in the text
      */
@@ -123,6 +164,9 @@ public interface AccessibleEditableText extends AccessibleText {
     /**
      * Sets attributes for the text between two indices.
      *
+     * <p>
+     *  在两个索引之间设置文本的属性。
+     * 
      * @param startIndex the starting index in the text
      * @param endIndex the ending index in the text
      * @param as the attribute set

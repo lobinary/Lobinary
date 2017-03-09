@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,14 @@ import java.util.List;
  * validate or unmarshal completes, call the getEvents method to retrieve all
  * the reported errors and warnings.
  *
+ * <p>
+ *  {@link javax.xml.bind.ValidationEventHandler ValidationEventHandler}实现,收集所有事件。
+ * 
+ * <p>
+ *  要使用此类,请创建一个新实例,并将其传递给Validator,Unmarshaller,Marshaller类的setEventHandler方法。
+ * 调用validate或unmarshal完成后,调用getEvents方法检索所有报告的错误和警告。
+ * 
+ * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see javax.xml.bind.Validator
  * @see javax.xml.bind.ValidationEventHandler
@@ -55,6 +64,10 @@ public class ValidationEventCollector implements ValidationEventHandler
      * Return an array of ValidationEvent objects containing a copy of each of
      * the collected errors and warnings.
      *
+     * <p>
+     *  返回一个ValidationEvent对象数组,其中包含每个收集的错误和警告的副本。
+     * 
+     * 
      * @return
      *      a copy of all the collected errors and warnings or an empty array
      *      if there weren't any
@@ -65,6 +78,9 @@ public class ValidationEventCollector implements ValidationEventHandler
 
     /**
      * Clear all collected errors and warnings.
+     * <p>
+     *  清除所有收集的错误和警告。
+     * 
      */
     public void reset() {
         events.clear();
@@ -74,6 +90,9 @@ public class ValidationEventCollector implements ValidationEventHandler
      * Returns true if this event collector contains at least one
      * ValidationEvent.
      *
+     * <p>
+     *  如果此事件收集器至少包含一个ValidationEvent,则返回true。
+     * 
      * @return true if this event collector contains at least one
      *         ValidationEvent, false otherwise
      */

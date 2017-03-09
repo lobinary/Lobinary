@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ package java.beans;
 /**
  * A PropertyVetoException is thrown when a proposed change to a
  * property represents an unacceptable value.
+ * <p>
+ *  当对属性的建议更改表示不可接受的值时,抛出PropertyVetoException。
+ * 
  */
 
 public
@@ -39,6 +43,10 @@ class PropertyVetoException extends Exception {
      * Constructs a <code>PropertyVetoException</code> with a
      * detailed message.
      *
+     * <p>
+     *  构造具有详细消息的<code> PropertyVetoException </code>。
+     * 
+     * 
      * @param mess Descriptive message
      * @param evt A PropertyChangeEvent describing the vetoed change.
      */
@@ -50,6 +58,10 @@ class PropertyVetoException extends Exception {
      /**
      * Gets the vetoed <code>PropertyChangeEvent</code>.
      *
+     * <p>
+     *  获取被否决的<code> PropertyChangeEvent </code>。
+     * 
+     * 
      * @return A PropertyChangeEvent describing the vetoed change.
      */
     public PropertyChangeEvent getPropertyChangeEvent() {
@@ -58,6 +70,9 @@ class PropertyVetoException extends Exception {
 
     /**
      * A PropertyChangeEvent describing the vetoed change.
+     * <p>
+     *  描述被否决的更改的PropertyChangeEvent。
+     * 
      * @serial
      */
     private PropertyChangeEvent evt;

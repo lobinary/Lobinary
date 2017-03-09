@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,7 @@ import com.sun.corba.se.spi.orb.ORB ;
 import com.sun.corba.se.impl.orbutil.ORBUtility ;
 
 /** Internal class used to hold data about a service context class.
+/* <p>
 */
 public class ServiceContextData {
     private void dprint( String msg )
@@ -120,6 +122,8 @@ public class ServiceContextData {
 
     /** Factory method used to create a ServiceContext object by
      * unmarshalling it from the InputStream.
+     * <p>
+     *  解压缩它从InputStream。
      */
     public ServiceContext makeServiceContext(InputStream is, GIOPVersion gv)
     {

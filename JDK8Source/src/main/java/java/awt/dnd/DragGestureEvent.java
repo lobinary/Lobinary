@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,18 @@ import java.io.ObjectOutputStream;
  * </ul>
  * Assigning the value different from listed above will cause an unspecified behavior.
  *
+ * <p>
+ *  当特定的<code> DragGestureRecognizer </code>检测到平台相关的拖动启动手势发生在<code> DragGestureRecognized()方法时,将<code> D
+ * ragGestureEvent </code>代码>组件</code>。
+ * 
+ *  任何{@code DragGestureEvent}实例的{@code action}字段应采用以下值之一：
+ * <ul>
+ *  <li> {@code DnDConstants.ACTION_COPY} <li> {@code DnDConstants.ACTION_MOVE} <li> {@code DnDConstants.ACTION_LINK}
+ * 。
+ * </ul>
+ *  分配与上述不同的值将导致未指定的行为。
+ * 
+ * 
  * @see java.awt.dnd.DragGestureRecognizer
  * @see java.awt.dnd.DragGestureListener
  * @see java.awt.dnd.DragSource
@@ -83,6 +96,11 @@ public class DragGestureEvent extends EventObject {
      * indicating the origin of the drag, and a {@code List} of
      * events that comprise the gesture({@code evs} parameter).
      * <P>
+     * <p>
+     *  构造由触发此事件的<code> DragGestureRecognizer </code>实例给出的<code> DragGestureEvent </code>对象,表示用户首选操作的{@code act}
+     * 参数,表示用户首选操作的{@code ori} ,以及构成手势({@ code evs}参数)的{@code List}事件。
+     * <P>
+     * 
      * @param dgr The <code>DragGestureRecognizer</code> firing this event
      * @param act The user's preferred action.
      *            For information on allowable values, see
@@ -125,6 +143,10 @@ public class DragGestureEvent extends EventObject {
     /**
      * Returns the source as a <code>DragGestureRecognizer</code>.
      * <P>
+     * <p>
+     *  将源作为<code> DragGestureRecognizer </code>返回。
+     * <P>
+     * 
      * @return the source as a <code>DragGestureRecognizer</code>
      */
 
@@ -136,6 +158,10 @@ public class DragGestureEvent extends EventObject {
      * Returns the <code>Component</code> associated
      * with this <code>DragGestureEvent</code>.
      * <P>
+     * <p>
+     *  返回与此<code> DragGestureEvent </code>关联的<code> Component </code>。
+     * <P>
+     * 
      * @return the Component
      */
 
@@ -144,6 +170,10 @@ public class DragGestureEvent extends EventObject {
     /**
      * Returns the <code>DragSource</code>.
      * <P>
+     * <p>
+     *  返回<code> DragSource </code>。
+     * <P>
+     * 
      * @return the <code>DragSource</code>
      */
 
@@ -153,6 +183,10 @@ public class DragGestureEvent extends EventObject {
      * Returns a <code>Point</code> in the coordinates
      * of the <code>Component</code> over which the drag originated.
      * <P>
+     * <p>
+     *  在拖动所源于的<code> Component </code>的坐标中返回<code> Point </code>。
+     * <P>
+     * 
      * @return the Point where the drag originated in Component coords.
      */
 
@@ -164,6 +198,10 @@ public class DragGestureEvent extends EventObject {
      * Returns an <code>Iterator</code> for the events
      * comprising the gesture.
      * <P>
+     * <p>
+     *  为包含手势的事件返回<code>迭代器</code>。
+     * <P>
+     * 
      * @return an Iterator for the events comprising the gesture
      */
     @SuppressWarnings("unchecked")
@@ -173,6 +211,10 @@ public class DragGestureEvent extends EventObject {
      * Returns an <code>Object</code> array of the
      * events comprising the drag gesture.
      * <P>
+     * <p>
+     * 返回包含拖动手势的事件的<code> Object </code>数组。
+     * <P>
+     * 
      * @return an array of the events comprising the gesture
      */
 
@@ -181,6 +223,10 @@ public class DragGestureEvent extends EventObject {
     /**
      * Returns an array of the events comprising the drag gesture.
      * <P>
+     * <p>
+     *  返回包含拖动手势的事件数组。
+     * <P>
+     * 
      * @param array the array of <code>EventObject</code> sub(types)
      * <P>
      * @return an array of the events comprising the gesture
@@ -192,6 +238,10 @@ public class DragGestureEvent extends EventObject {
      * Returns an <code>int</code> representing the
      * action selected by the user.
      * <P>
+     * <p>
+     *  返回表示用户选择的操作的<code> int </code>。
+     * <P>
+     * 
      * @return the action selected by the user
      */
 
@@ -200,6 +250,10 @@ public class DragGestureEvent extends EventObject {
     /**
      * Returns the initial event that triggered the gesture.
      * <P>
+     * <p>
+     *  返回触发手势的初始事件。
+     * <P>
+     * 
      * @return the first "triggering" event in the sequence of the gesture
      */
 
@@ -217,6 +271,14 @@ public class DragGestureEvent extends EventObject {
      * <br>
      * If a <code>null</code> <code>Transferable</code> is specified
      * <code>NullPointerException</code> will be thrown.
+     * <p>
+     *  给定用于此拖动操作的<code> Cursor </code>和表示此拖动操作的源数据的<code> Transferable </code>开始拖动操作。
+     * <br>
+     *  如果指定<code> null </code> <code> Cursor </code>,则不会抛出异常,而是使用默认的拖动光标。
+     * <br>
+     *  如果指定<code> null </code> <code>可转移</code> <code>将抛出NullPointerException </code>。
+     * 
+     * 
      * @param dragCursor     The initial {@code Cursor} for this drag operation
      *                       or {@code null} for the default cursor handling;
      *                       see
@@ -243,6 +305,10 @@ public class DragGestureEvent extends EventObject {
      * the <code>Transferable</code> object,
      * and the <code>DragSourceListener</code> to use.
      * <P>
+     * <p>
+     *  开始拖动,给出显示的初始<code> Cursor </code>,<code> Transferable </code>对象和<code> DragSourceListener </code>
+     * <P>
+     * 
      * @param dragCursor     The initial {@code Cursor} for this drag operation
      *                       or {@code null} for the default cursor handling;
      *                       see
@@ -270,6 +336,11 @@ public class DragGestureEvent extends EventObject {
      * the <code>Transferable</code> object, and
      * the <code>DragSourceListener</code> to use.
      * <P>
+     * <p>
+     *  开始拖动给出的初始<code> Cursor </code>以显示,拖动<code> Image </code>,偏移量<code> Image </code>,<code> Transferable
+     *  </code>对象,并使用<code> DragSourceListener </code>。
+     * <P>
+     * 
      * @param dragCursor     The initial {@code Cursor} for this drag operation
      *                       or {@code null} for the default cursor handling;
      *                       see
@@ -300,6 +371,12 @@ public class DragGestureEvent extends EventObject {
      * <code>DragGestureEvent</code> created from the resulting deserialized
      * stream will contain an empty <code>List</code> of gesture events.
      *
+     * <p>
+     *  将此<code> DragGestureEvent </code>序列化。
+     * 执行默认序列化,然后当且仅当<code> List </code>可以序列化时,写出该对象的<code> List </code>手势事件。如果不是,写入<code> null </code>。
+     * 在这种情况下,从生成的反序列化流创建的<code> DragGestureEvent </code>将包含一个空的<code> List </code>手势事件。
+     * 
+     * 
      * @serialData The default serializable fields, in alphabetical order,
      *             followed by either a <code>List</code> instance, or
      *             <code>null</code>.
@@ -323,6 +400,14 @@ public class DragGestureEvent extends EventObject {
      * <code>null</code>, this object's <code>List</code> of gesture events
      * is set to an empty <code>List</code>.
      *
+     * <p>
+     * 反序列化此<code> DragGestureEvent </code>。该方法首先对所有非<code> transient </code>字段执行默认反序列化。
+     * 然后尝试反序列化该对象的手势事件的<code> List </code>。
+     * 这首先通过反序列化<code>事件</code>字段来尝试,因为在1.4之前的版本中,该名称的非<代码>瞬态</code>字段存储了<code> List </code>的手势事件。
+     * 如果失败,则使用流中的下一个对象。
+     * 如果结果<code> List </code>是<code> null </code>,则该对象的<code> List </code>手势事件被设置为空的<code> List </code>。
+     * 
+     * 
      * @since 1.4
      */
     private void readObject(ObjectInputStream s)
@@ -378,6 +463,9 @@ public class DragGestureEvent extends EventObject {
 
     /*
      * fields
+     * <p>
+     *  字段
+     * 
      */
     @SuppressWarnings("rawtypes")
     private transient List events;
@@ -385,6 +473,10 @@ public class DragGestureEvent extends EventObject {
     /**
      * The DragSource associated with this DragGestureEvent.
      *
+     * <p>
+     *  与此DragGestureEvent相关联的DragSource。
+     * 
+     * 
      * @serial
      */
     private DragSource dragSource;
@@ -392,6 +484,10 @@ public class DragGestureEvent extends EventObject {
     /**
      * The Component associated with this DragGestureEvent.
      *
+     * <p>
+     *  与此DragGestureEvent相关联的组件。
+     * 
+     * 
      * @serial
      */
     private Component  component;
@@ -399,6 +495,10 @@ public class DragGestureEvent extends EventObject {
     /**
      * The origin of the drag.
      *
+     * <p>
+     *  拖动的原点。
+     * 
+     * 
      * @serial
      */
     private Point      origin;
@@ -406,6 +506,9 @@ public class DragGestureEvent extends EventObject {
     /**
      * The user's preferred action.
      *
+     * <p>
+     *  用户的首选操作。
+     * 
      * @serial
      */
     private int        action;

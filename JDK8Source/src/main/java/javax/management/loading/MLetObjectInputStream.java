@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.lang.reflect.Array;
  * This subclass of ObjectInputStream delegates loading of classes to
  * an existing MLetClassLoader.
  *
+ * <p>
+ *  ObjectInputStream的这个子类将类的加载委托给现有的MLetClassLoader。
+ * 
+ * 
  * @since 1.5
  */
 class MLetObjectInputStream extends ObjectInputStream {
@@ -44,6 +49,9 @@ class MLetObjectInputStream extends ObjectInputStream {
 
     /**
      * Loader must be non-null;
+     * <p>
+     *  装载器必须是非null;
+     * 
      */
     public MLetObjectInputStream(InputStream in, MLet loader)
         throws IOException, StreamCorruptedException {
@@ -86,6 +94,9 @@ class MLetObjectInputStream extends ObjectInputStream {
 
     /**
      * Use the given ClassLoader rather than using the system class
+     * <p>
+     *  使用给定的ClassLoader而不是使用系统类
+     * 
      */
     @Override
     protected Class<?> resolveClass(ObjectStreamClass objectstreamclass)
@@ -115,6 +126,8 @@ class MLetObjectInputStream extends ObjectInputStream {
 
     /**
      * Returns the ClassLoader being used
+     * <p>
+     *  返回正在使用的ClassLoader
      */
     public ClassLoader getClassLoader() {
         return loader;

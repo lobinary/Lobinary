@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.util.WeakHashMap;
  * context referenced by the specific {@link ThreadGroup}.
  * This is a replacement for the {@link sun.awt.AppContext}.
  *
+ * <p>
+ *  {@code ThreadGroupContext}是一个由特定{@link ThreadGroup}引用的应用程序相关上下文。这是{@link sun.awt.AppContext}的替代品。
+ * 
+ * 
  * @author  Sergey Malenkov
  */
 final class ThreadGroupContext {
@@ -51,6 +56,9 @@ final class ThreadGroupContext {
      * Returns the appropriate {@code ThreadGroupContext} for the caller,
      * as determined by its {@code ThreadGroup}.
      *
+     * <p>
+     *  为调用者返回适当的{@code ThreadGroupContext},由其{@code ThreadGroup}确定。
+     * 
      * @return  the application-dependent context
      */
     static ThreadGroupContext getContext() {

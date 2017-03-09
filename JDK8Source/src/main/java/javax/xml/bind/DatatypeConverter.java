@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -84,6 +85,40 @@ import javax.xml.namespace.NamespaceContext;
  * or a subclass of IllegalArgumentException must be thrown by the method.
  * </p>
  *
+ * <p>
+ * <p>
+ *  javaType绑定声明可用于自定义XML模式数据类型与Java数据类型的绑定。定制可以涉及编写用于分别解析和打印XML模式数据类型的词法表示的解析和打印方法。
+ * 但是,编写解析和打印方法需要知道词法表示(<a href="http://www.w3.org/TR/xmlschema-2/"> XML模式Part2：数据类型规范</a>),因此可能很难写。
+ * </p>
+ * <p>
+ *  这个类使得更容易编写解析和打印方法。它定义静态解析和打印方法,提供对JAXB提供程序实现的解析和打印方法的访问。这些方法由自定义的解析和打印方法调用。
+ * 例如,xsd：dateTime到long的绑定可以使用解析和打印方法来定制,如下所示：。
+ * <blockquote>
+ * <pre>
+ *  //定制的解析方法public long myParseCal(String dateTimeString){java.util.Calendar cal = DatatypeConverter.parseDateTime(dateTimeString); long longval = convert_calendar_to_long(cal); // application specific return longval; }
+ * }。
+ * 
+ *  //定制打印方法public String myPrintCal(Long longval){java.util.Calendar cal = convert_long_to_calendar(longval); // application specific String dateTimeString = DatatypeConverter.printDateTime(cal); return dateTimeString; }
+ * }。
+ * </pre>
+ * </blockquote>
+ * <p>
+ * 在{@link DatatypeConverterInterface DatatypeConverterInterface}中分别有对应于每个解析和打印方法的静态解析和打印方法。
+ * <p>
+ *  类中定义的静态方法也可以用于在javaType绑定声明中指定解析或打印方法。
+ * </p>
+ * <p>
+ *  JAXB提供程序需要在第一个编组或解组操作之前的某个时间(可能在调用JAXBContext.newInstance期间)调用{@link #setDatatypeConverter(DatatypeConverterInterface)setDatatypeConverter}
+ *  api。
+ * 此步骤对于配置应用于执行打印和解析功能的转换器是必要的。
+ * </p>
+ * 
+ * <p>
+ *  XML模式数据类型的打印方法可以输出对于XML模式数据类型有效的任何词法表示。
+ * 如果在转换期间遇到错误,则必须由方法抛出IllegalArgumentException或IllegalArgumentException的子类。
+ * </p>
+ * 
+ * 
  * @author <ul><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker,Sun Microsystems Inc.</li></ul>
  * @see DatatypeConverterInterface
  * @see ParseConversionEvent
@@ -116,6 +151,15 @@ final public class DatatypeConverter {
      * DatatypeConverterInterface instance passed into the first invocation is
      * the one that will be used from then on.
      *
+     * <p>
+     *  此方法仅供JAXB提供程序使用。
+     * <p>
+     *  JAXB提供程序需要在允许任何JAXB客户端编组或解组操作发生之前的某个时间调用此方法。这对于配置应用于执行打印和解析转换的数据类型转换器是必要的。
+     * 
+     * <p>
+     *  重复调用此api将不起作用 - 传递到第一次调用的DatatypeConverterInterface实例是从那时起将使用的实例。
+     * 
+     * 
      * @param converter an instance of a class that implements the
      * DatatypeConverterInterface class - this parameter must not be null.
      * @throws IllegalArgumentException if the parameter is null
@@ -143,6 +187,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Convert the lexical XSD string argument into a String value.
+     * <p>
+     * <p>
+     *  将词法XSD字符串参数转换为字符串值。
+     * 
+     * 
      * @param lexicalXSDString
      *     A string containing a lexical representation of
      *     xsd:string.
@@ -157,6 +206,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Convert the string argument into a BigInteger value.
+     * <p>
+     * <p>
+     * 将字符串参数转换为BigInteger值。
+     * 
+     * 
      * @param lexicalXSDInteger
      *     A string containing a lexical representation of
      *     xsd:integer.
@@ -172,6 +226,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Convert the string argument into an int value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为int值。
+     * 
+     * 
      * @param lexicalXSDInt
      *     A string containing a lexical representation of
      *     xsd:int.
@@ -187,6 +246,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a long value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为长整型值。
+     * 
+     * 
      * @param lexicalXSDLong
      *     A string containing lexical representation of
      *     xsd:long.
@@ -202,6 +266,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a short value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为短值。
+     * 
+     * 
      * @param lexicalXSDShort
      *     A string containing lexical representation of
      *     xsd:short.
@@ -217,6 +286,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a BigDecimal value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为BigDecimal值。
+     * 
+     * 
      * @param lexicalXSDDecimal
      *     A string containing lexical representation of
      *     xsd:decimal.
@@ -232,6 +306,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a float value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为浮点值。
+     * 
+     * 
      * @param lexicalXSDFloat
      *     A string containing lexical representation of
      *     xsd:float.
@@ -247,6 +326,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a double value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为双精度值。
+     * 
+     * 
      * @param lexicalXSDDouble
      *     A string containing lexical representation of
      *     xsd:double.
@@ -262,6 +346,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a boolean value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为布尔值。
+     * 
+     * 
      * @param lexicalXSDBoolean
      *     A string containing lexical representation of
      *     xsd:boolean.
@@ -277,6 +366,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a byte value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为字节值。
+     * 
+     * 
      * @param lexicalXSDByte
      *     A string containing lexical representation of
      *     xsd:byte.
@@ -297,6 +391,15 @@ final public class DatatypeConverter {
      * String parameter <tt>lexicalXSDQname</tt> must conform to lexical value space specifed at
      * <a href="http://www.w3.org/TR/xmlschema-2/#QName">XML Schema Part 2:Datatypes specification:QNames</a>
      *
+     * <p>
+     * <p>
+     *  将字符串参数转换为字节值。
+     * 
+     * <p>
+     *  字符串参数<tt> lexicalXSDQname </tt>必须符合在<a href="http://www.w3.org/TR/xmlschema-2/#QName"> XML模式第2部分：数据类
+     * 型规范中指定的词法值空间：QNames </a>。
+     * 
+     * 
      * @param lexicalXSDQName
      *     A string containing lexical representation of xsd:QName.
      * @param nsc
@@ -315,6 +418,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a Calendar value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为日历值。
+     * 
+     * 
      * @param lexicalXSDDateTime
      *     A string containing lexical representation of
      *     xsd:datetime.
@@ -330,6 +438,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into an array of bytes.
+     * <p>
+     * <p>
+     *  将字符串参数转换为字节数组。
+     * 
+     * 
      * @param lexicalXSDBase64Binary
      *     A string containing lexical representation
      *     of xsd:base64Binary.
@@ -345,6 +458,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into an array of bytes.
+     * <p>
+     * <p>
+     *  将字符串参数转换为字节数组。
+     * 
+     * 
      * @param lexicalXSDHexBinary
      *     A string containing lexical representation of
      *     xsd:hexBinary.
@@ -360,6 +478,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a long value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为长整型值。
+     * 
+     * 
      * @param lexicalXSDUnsignedInt
      *     A string containing lexical representation
      *     of xsd:unsignedInt.
@@ -375,6 +498,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into an int value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为int值。
+     * 
+     * 
      * @param lexicalXSDUnsignedShort
      *     A string containing lexical
      *     representation of xsd:unsignedShort.
@@ -390,6 +518,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a Calendar value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为日历值。
+     * 
+     * 
      * @param lexicalXSDTime
      *     A string containing lexical representation of
      *     xsd:time.
@@ -404,6 +537,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a Calendar value.
+     * <p>
+     * <p>
+     *  将字符串参数转换为日历值。
+     * 
+     * 
      * @param lexicalXSDDate
      *      A string containing lexical representation of
      *     xsd:Date.
@@ -420,6 +558,11 @@ final public class DatatypeConverter {
      * <p>
      * Return a string containing the lexical representation of the
      * simple type.
+     * <p>
+     * <p>
+     *  返回一个包含简单类型的词法表示的字符串。
+     * 
+     * 
      * @param lexicalXSDAnySimpleType
      *     A string containing lexical
      *     representation of the simple type.
@@ -434,6 +577,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts the string argument into a string.
+     * <p>
+     * <p>
+     *  将字符串参数转换为字符串。
+     * 
+     * 
      * @param val
      *     A string value.
      * @return
@@ -450,6 +598,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a BigInteger value into a string.
+     * <p>
+     * <p>
+     *  将BigInteger值转换为字符串。
+     * 
+     * 
      * @param val
      *     A BigInteger value
      * @return
@@ -464,6 +617,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts an int value into a string.
+     * <p>
+     * <p>
+     *  将int值转换为字符串。
+     * 
+     * 
      * @param val
      *     An int value
      * @return
@@ -477,6 +635,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts A long value into a string.
+     * <p>
+     * <p>
+     *  将长整型值转换为字符串。
+     * 
+     * 
      * @param val
      *     A long value
      * @return
@@ -490,6 +653,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a short value into a string.
+     * <p>
+     * <p>
+     *  将短值转换为字符串。
+     * 
+     * 
      * @param val
      *     A short value
      * @return
@@ -503,6 +671,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a BigDecimal value into a string.
+     * <p>
+     * <p>
+     *  将BigDecimal值转换为字符串。
+     * 
+     * 
      * @param val
      *     A BigDecimal value
      * @return
@@ -517,6 +690,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a float value into a string.
+     * <p>
+     * <p>
+     *  将浮点值转换为字符串。
+     * 
+     * 
      * @param val
      *     A float value
      * @return
@@ -530,6 +708,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a double value into a string.
+     * <p>
+     * <p>
+     *  将双精度值转换为字符串。
+     * 
+     * 
      * @param val
      *     A double value
      * @return
@@ -543,6 +726,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a boolean value into a string.
+     * <p>
+     * <p>
+     * 将布尔值转换为字符串。
+     * 
+     * 
      * @param val
      *     A boolean value
      * @return
@@ -556,6 +744,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a byte value into a string.
+     * <p>
+     * <p>
+     *  将字节值转换为字符串。
+     * 
+     * 
      * @param val
      *     A byte value
      * @return
@@ -569,6 +762,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a QName instance into a string.
+     * <p>
+     * <p>
+     *  将QName实例转换为字符串。
+     * 
+     * 
      * @param val
      *     A QName value
      * @param nsc
@@ -587,6 +785,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a Calendar value into a string.
+     * <p>
+     * <p>
+     *  将日历值转换为字符串。
+     * 
+     * 
      * @param val
      *     A Calendar value
      * @return
@@ -601,6 +804,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts an array of bytes into a string.
+     * <p>
+     * <p>
+     *  将字节数组转换为字符串。
+     * 
+     * 
      * @param val
      *     An array of bytes
      * @return
@@ -615,6 +823,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts an array of bytes into a string.
+     * <p>
+     * <p>
+     *  将字节数组转换为字符串。
+     * 
+     * 
      * @param val
      *     An array of bytes
      * @return
@@ -629,6 +842,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a long value into a string.
+     * <p>
+     * <p>
+     *  将长整型值转换为字符串。
+     * 
+     * 
      * @param val
      *     A long value
      * @return
@@ -642,6 +860,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts an int value into a string.
+     * <p>
+     * <p>
+     *  将int值转换为字符串。
+     * 
+     * 
      * @param val
      *     An int value
      * @return
@@ -655,6 +878,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a Calendar value into a string.
+     * <p>
+     * <p>
+     *  将日历值转换为字符串。
+     * 
+     * 
      * @param val
      *     A Calendar value
      * @return
@@ -669,6 +897,11 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a Calendar value into a string.
+     * <p>
+     * <p>
+     *  将日历值转换为字符串。
+     * 
+     * 
      * @param val
      *     A Calendar value
      * @return
@@ -683,6 +916,10 @@ final public class DatatypeConverter {
     /**
      * <p>
      * Converts a string value into a string.
+     * <p>
+     * <p>
+     *  将字符串值转换为字符串。
+     * 
      * @param val
      *     A string value
      * @return

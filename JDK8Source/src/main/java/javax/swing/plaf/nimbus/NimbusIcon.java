@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import javax.swing.plaf.UIResource;
 
 /**
  * An icon that delegates to a painter.
+ * <p>
+ *  委派给画家的图标。
+ * 
+ * 
  * @author rbair
  */
 class NimbusIcon extends SynthIcon {
@@ -137,6 +142,9 @@ class NimbusIcon extends SynthIcon {
      * synth stub passes null for the context and this will cause us to not
      * paint any thing, so we override here so that we can paint the enabled
      * state if no synth context is available
+     * <p>
+     *  实现标准的Icon接口的paintIcon方法,因为标准的合成器存根为上下文传递null,这将导致我们不绘制任何东西,所以我们覆盖这里,以便我们可以绘制启用状态,如果没有合成器上下文
+     * 
      */
     @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -197,6 +205,9 @@ class NimbusIcon extends SynthIcon {
      * Scale a size based on the "JComponent.sizeVariant" client property of the
      * component that is using this icon
      *
+     * <p>
+     *  基于使用此图标的组件的"JComponent.sizeVariant"客户端属性缩放大小
+     * 
      * @param context The synthContext to get the component from
      * @param size The size to scale
      * @return The scaled size or original if "JComponent.sizeVariant" is not

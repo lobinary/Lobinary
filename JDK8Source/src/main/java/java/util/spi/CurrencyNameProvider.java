@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ import java.util.ResourceBundle.Control;
  * {@link java.util.spi.LocaleServiceProvider LocaleServiceProvider}
  * specification.
  *
+ * <p>
+ *  服务提供者的抽象类,为{@link java.util.Currency Currency}类提供本地化的货币符号和显示名称。
+ * 请注意,在确定{@link java.util.spi.LocaleServiceProvider LocaleServiceProvider}规范中描述的行为时,货币符号被视为名称。
+ * 
+ * 
  * @since        1.6
  */
 public abstract class CurrencyNameProvider extends LocaleServiceProvider {
@@ -47,6 +53,9 @@ public abstract class CurrencyNameProvider extends LocaleServiceProvider {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
      */
     protected CurrencyNameProvider() {
     }
@@ -57,6 +66,10 @@ public abstract class CurrencyNameProvider extends LocaleServiceProvider {
      * locale is the US, while for other locales it may be "US$". If no
      * symbol can be determined, null should be returned.
      *
+     * <p>
+     *  获取指定语言环境的给定货币代码的符号。例如,对于"USD"(美元),如果指定的区域设置是美国,则符号是"$",而对于其他区域设置,其可以是"US $"。如果无法确定符号,应返回null。
+     * 
+     * 
      * @param currencyCode the ISO 4217 currency code, which
      *     consists of three upper-case letters between 'A' (U+0041) and
      *     'Z' (U+005A)
@@ -78,6 +91,9 @@ public abstract class CurrencyNameProvider extends LocaleServiceProvider {
      * Returns a name for the currency that is appropriate for display to the
      * user.  The default implementation returns null.
      *
+     * <p>
+     *  返回适合显示给用户的货币的名称。默认实现返回null。
+     * 
      * @param currencyCode the ISO 4217 currency code, which
      *     consists of three upper-case letters between 'A' (U+0041) and
      *     'Z' (U+005A)

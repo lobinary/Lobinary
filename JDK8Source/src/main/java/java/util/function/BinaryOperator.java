@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,12 @@ import java.util.Comparator;
  * <p>This is a <a href="package-summary.html">functional interface</a>
  * whose functional method is {@link #apply(Object, Object)}.
  *
+ * <p>
+ *  表示对相同类型的两个操作数的操作,生成与操作数相同类型的结果。这是{@link BiFunction}的一个特殊化,对于操作数和结果都是相同类型的情况。
+ * 
+ *  <p>这是一个<a href="package-summary.html">功能介面</a>,其功能方法是{@link #apply(Object,Object)}。
+ * 
+ * 
  * @param <T> the type of the operands and result of the operator
  *
  * @see BiFunction
@@ -48,6 +55,10 @@ public interface BinaryOperator<T> extends BiFunction<T,T,T> {
      * Returns a {@link BinaryOperator} which returns the lesser of two elements
      * according to the specified {@code Comparator}.
      *
+     * <p>
+     *  返回{@link BinaryOperator},它根据指定的{@code Comparator}返回两个元素中的较小者。
+     * 
+     * 
      * @param <T> the type of the input arguments of the comparator
      * @param comparator a {@code Comparator} for comparing the two values
      * @return a {@code BinaryOperator} which returns the lesser of its operands,
@@ -63,6 +74,9 @@ public interface BinaryOperator<T> extends BiFunction<T,T,T> {
      * Returns a {@link BinaryOperator} which returns the greater of two elements
      * according to the specified {@code Comparator}.
      *
+     * <p>
+     *  返回一个{@link BinaryOperator},它根据指定的{@code Comparator}返回两个元素中的较大者。
+     * 
      * @param <T> the type of the input arguments of the comparator
      * @param comparator a {@code Comparator} for comparing the two values
      * @return a {@code BinaryOperator} which returns the greater of its operands,

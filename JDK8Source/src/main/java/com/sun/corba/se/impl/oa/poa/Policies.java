@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,10 @@ public final class Policies {
    SERvANT_RETENTION_
    REQUEST_PROCESSING_
    The code in this class depends on this order!
+/* <p>
+/*  THREAD_ LIFESPAN_ ID_UNIQUENESS_ ID_ASSIGNMENT_ IMPLICIT_ACTIVATION_ SERVANT_RETENTION_ REQUEST_PROC
+/* ESSING_此类中的代码取决于此订单！。
+/* 
 */
     private static final int MIN_POA_POLICY_ID = THREAD_POLICY_ID.value ;
     private static final int MAX_POA_POLICY_ID = REQUEST_PROCESSING_POLICY_ID.value ;
@@ -131,6 +136,9 @@ public final class Policies {
 
     /* Returns the integer value of the POA policy, if this is a
      * POA policy, otherwise returns -1.
+     * <p>
+     *  POA策略,否则返回-1。
+     * 
      */
     private int getPOAPolicyValue( Policy policy)
     {
@@ -154,6 +162,9 @@ public final class Policies {
 
     /** If any errors were found, throw INVALID_POLICY with the smallest
      * index of any offending policy.
+     * <p>
+     *  任何违规政策的指数。
+     * 
      */
     private void checkForPolicyError( BitSet errorSet ) throws InvalidPolicy
     {
@@ -164,6 +175,9 @@ public final class Policies {
 
     /** Add the first index in policies at which the policy is of type
     * policyId to errorSet, if the polictId is in policies (it may not be).
+    * <p>
+    *  policyId到errorSet,如果polictId在策略中(可能不是)。
+    * 
     */
     private void addToErrorSet( Policy[] policies, int policyId,
         BitSet errorSet )
@@ -177,6 +191,8 @@ public final class Policies {
 
     /** Main constructor used from POA::create_POA.  This need only be visible
     * within the POA package.
+    * <p>
+    *  在POA包内。
     */
     Policies(Policy[] policies, int id ) throws InvalidPolicy
     {

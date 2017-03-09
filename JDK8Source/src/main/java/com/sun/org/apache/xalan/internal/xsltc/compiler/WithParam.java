@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: WithParam.java,v 1.2.4.1 2005/09/12 11:38:01 pvedula Exp $
+ * <p>
+ *  $ Id：WithParam.java,v 1.2.4.1 2005/09/12 11:38:01 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -37,6 +50,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 import com.sun.org.apache.xml.internal.utils.XML11Char;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -46,16 +61,25 @@ final class WithParam extends Instruction {
 
     /**
      * Parameter's name.
+     * <p>
+     *  参数名称。
+     * 
      */
     private QName _name;
 
     /**
      * The escaped qname of the with-param.
+     * <p>
+     *  with-param的转义的qname。
+     * 
      */
     protected String _escapedName;
 
     /**
      * Parameter's default value.
+     * <p>
+     *  参数的默认值。
+     * 
      */
     private Expression _select;
 
@@ -64,11 +88,18 @@ final class WithParam extends Instruction {
      * for a simple named template. If this is true, the parameters are
      * passed to the named template through method arguments rather than
      * using the expensive Translet.addParameter() call.
+     * <p>
+     *  ％OPT％当在CallTemplate中使用WithParam作为简单命名模板时,此属性设置为true。
+     * 如果这是真的,参数通过方法参数传递到命名的模板,而不是使用昂贵的Translet.addParameter()调用。
+     * 
      */
     private boolean _doParameterOptimization = false;
 
     /**
      * Displays the contents of this element
+     * <p>
+     *  显示此元素的内容
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -82,6 +113,9 @@ final class WithParam extends Instruction {
 
     /**
      * Returns the escaped qname of the parameter
+     * <p>
+     *  返回参数的转义的qname
+     * 
      */
     public String getEscapedName() {
         return _escapedName;
@@ -89,6 +123,9 @@ final class WithParam extends Instruction {
 
     /**
      * Return the name of this WithParam.
+     * <p>
+     *  返回此WithParam的名称。
+     * 
      */
     public QName getName() {
         return _name;
@@ -96,6 +133,9 @@ final class WithParam extends Instruction {
 
     /**
      * Set the name of the variable or paremeter. Escape all special chars.
+     * <p>
+     *  设置变量或参数的名称。逃脱所有特殊字符。
+     * 
      */
     public void setName(QName name) {
         _name = name;
@@ -104,6 +144,9 @@ final class WithParam extends Instruction {
 
     /**
      * Set the do parameter optimization flag
+     * <p>
+     *  设置do参数优化标志
+     * 
      */
     public void setDoParameterOptimization(boolean flag) {
         _doParameterOptimization = flag;
@@ -112,6 +155,9 @@ final class WithParam extends Instruction {
     /**
      * The contents of a <xsl:with-param> elements are either in the element's
      * 'select' attribute (this has precedence) or in the element body.
+     * <p>
+     *  <xsl：with-param>元素的内容位于元素的"select"属性中(这具有优先级)或在元素体中。
+     * 
      */
     public void parseContents(Parser parser) {
         final String name = getAttribute("name");
@@ -138,6 +184,9 @@ final class WithParam extends Instruction {
     /**
      * Type-check either the select attribute or the element body, depending
      * on which is in use.
+     * <p>
+     * 类型检查select属性或元素体,具体取决于使用中。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         if (_select != null) {
@@ -155,6 +204,9 @@ final class WithParam extends Instruction {
     /**
      * Compile the value of the parameter, which is either in an expression in
      * a 'select' attribute, or in the with-param element's body
+     * <p>
+     *  编译参数的值,该值在"select"属性中的表达式中,或者在with-param元素的正文中
+     * 
      */
     public void translateValue(ClassGenerator classGen,
                                MethodGenerator methodGen) {
@@ -179,6 +231,8 @@ final class WithParam extends Instruction {
      * This code generates a sequence of bytecodes that call the
      * addParameter() method in AbstractTranslet. The method call will add
      * (or update) the parameter frame with the new parameter value.
+     * <p>
+     *  此代码生成调用AbstractTranslet中的addParameter()方法的一系列字节码。方法调用将使用新的参数值添加(或更新)参数框架。
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         final ConstantPoolGen cpg = classGen.getConstantPool();

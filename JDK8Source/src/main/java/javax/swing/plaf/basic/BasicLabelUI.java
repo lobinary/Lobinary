@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,10 @@ import java.beans.PropertyChangeListener;
  * is completely static, i.e. there's only one UIView implementation
  * that's shared by all JLabel objects.
  *
+ * <p>
+ *  LabelUI的Windows L&amp; F实现。这个实现是完全静态的,即只有一个由所有JLabel对象共享的UIView实现。
+ * 
+ * 
  * @author Hans Muller
  */
 public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
@@ -63,6 +68,10 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
     * not be used. To change the default instance use a subclass which
     * overrides the <code>createUI</code> method, and place that class
     * name in defaults table under the key "LabelUI".
+    * <p>
+    *  默认的<code> BasicLabelUI </code>实例。可能不使用此字段。
+    * 要更改默认实例,请使用覆盖<code> createUI </code>方法的子类,并将该类名称放置在键"LabelUI"下的defaults表中。
+    * 
     */
     protected static BasicLabelUI labelUI = new BasicLabelUI();
     private static final Object BASIC_LABEL_UI_KEY = new Object();
@@ -80,6 +89,10 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
      * This method is here so that a subclass could do Label specific
      * layout and to shorten the method name a little.
      *
+     * <p>
+     *  转发调用SwingUtilities.layoutCompoundLabel()。这个方法是这样的,一个子类可以做Label特定的布局和缩短方法名称一点。
+     * 
+     * 
      * @see SwingUtilities#layoutCompoundLabel
      */
     protected String layoutCL(
@@ -109,6 +122,10 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
     /**
      * Paint clippedText at textX, textY with the labels foreground color.
      *
+     * <p>
+     *  在textX处绘制剪辑的文本,使用标记前景颜色的textY。
+     * 
+     * 
      * @see #paint
      * @see #paintDisabledText
      */
@@ -125,6 +142,10 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
      * Paint clippedText at textX, textY with background.lighter() and then
      * shifted down and to the right by one pixel with background.darker().
      *
+     * <p>
+     *  paint clippedText在textX,textY与background.lighter(),然后向下移动一个像素与background.darker()右侧。
+     * 
+     * 
      * @see #paint
      * @see #paintEnabledText
      */
@@ -146,6 +167,11 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
      * text is drawn by {@link #paintEnabledText} or {@link #paintDisabledText}.
      * The locations of the label parts are computed by {@link #layoutCL}.
      *
+     * <p>
+     *  使用前景颜色绘制标签文本,如果标签不透明,则使用背景颜色绘制整个背景。标签文字由{@link #paintEnabledText}或{@link #paintDisabledText}提供。
+     * 标签部分的位置由{@link #layoutCL}计算。
+     * 
+     * 
      * @see #paintEnabledText
      * @see #paintDisabledText
      * @see #layoutCL
@@ -250,6 +276,8 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
 
 
     /**
+    /* <p>
+    /* 
      * @return getPreferredSize(c)
      */
     public Dimension getMinimumSize(JComponent c) {
@@ -262,6 +290,8 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
     }
 
     /**
+    /* <p>
+    /* 
      * @return getPreferredSize(c)
      */
     public Dimension getMaximumSize(JComponent c) {
@@ -276,6 +306,10 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -298,6 +332,9 @@ public class BasicLabelUI extends LabelUI implements  PropertyChangeListener
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6

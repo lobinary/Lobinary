@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -81,6 +82,27 @@ import java.util.LinkedHashSet;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  用于创建多文档界面或虚拟桌面的容器。您创建<code> JInternalFrame </code>对象并将它们添加到<code> JDesktopPane </code>。
+ *  <code> JDesktopPane </code>扩展<code> JLayeredPane </code>以管理可能重叠的内部框架。
+ * 它还维护对由UI类为当前外观(L&amp; F)设置的<code> DesktopManager </code>实例的引用。请注意,<code> JDesktopPane </code>不支持边框。
+ * <p>
+ *  此类通常用作<code> JInternalFrames </code>的父代,以向<code> JInternalFrames </code>提供可插入的<code> DesktopManager 
+ * </code>对象。
+ *  L&amp; F特定实现的<code> installUI </code>负责适当地设置<code> desktopManager </code>变量。
+ * 当<code> JInternalFrame </code>的父级是<code> JDesktopPane </code>时,它应将其大部分行为委托给<code> desktopManager </code>
+ * (关闭,调整大小等)。
+ *  L&amp; F特定实现的<code> installUI </code>负责适当地设置<code> desktopManager </code>变量。
+ * <p>
+ *  有关其他文档和示例,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/internalframe.html">
+ * 如何使用内部框架</a>,<em> Java教程</em>。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see JInternalFrame
  * @see JInternalFrame.JDesktopIcon
  * @see DesktopManager
@@ -90,6 +112,8 @@ import java.util.LinkedHashSet;
 public class JDesktopPane extends JLayeredPane implements Accessible
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -103,6 +127,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
       * Indicates that the entire contents of the item being dragged
       * should appear inside the desktop pane.
       *
+      * <p>
+      *  表示正在拖动的项目的整个内容应显示在桌面窗格内。
+      * 
+      * 
       * @see #OUTLINE_DRAG_MODE
       * @see #setDragMode
       */
@@ -112,6 +140,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
       * Indicates that an outline only of the item being dragged
       * should appear inside the desktop pane.
       *
+      * <p>
+      *  表示仅被拖动项目的轮廓应显示在桌面窗格内。
+      * 
+      * 
       * @see #LIVE_DRAG_MODE
       * @see #setDragMode
       */
@@ -125,6 +157,9 @@ public class JDesktopPane extends JLayeredPane implements Accessible
 
     /**
      * Creates a new <code>JDesktopPane</code>.
+     * <p>
+     *  创建新的<code> JDesktopPane </code>。
+     * 
      */
     public JDesktopPane() {
         setUIProperty("opaque", Boolean.TRUE);
@@ -149,6 +184,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
     /**
      * Returns the L&amp;F object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @return the <code>DesktopPaneUI</code> object that
      *   renders this component
      */
@@ -159,6 +198,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
     /**
      * Sets the L&amp;F object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @param ui  the DesktopPaneUI L&amp;F object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -176,6 +219,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      * You may want to change to one mode or another for
      * performance or aesthetic reasons.
      *
+     * <p>
+     *  设置桌面窗格使用的"拖动样式"。出于性能或美观的原因,您可能需要更改为一种模式。
+     * 
+     * 
      * @param dragMode the style of drag to use for items in the Desktop
      *
      * @see #LIVE_DRAG_MODE
@@ -197,6 +244,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
 
     /**
      * Gets the current "dragging style" used by the desktop pane.
+     * <p>
+     *  获取桌面窗格使用的当前"拖动样式"。
+     * 
+     * 
      * @return either <code>Live_DRAG_MODE</code> or
      *   <code>OUTLINE_DRAG_MODE</code>
      * @see #setDragMode
@@ -209,6 +260,9 @@ public class JDesktopPane extends JLayeredPane implements Accessible
     /**
      * Returns the <code>DesktopManger</code> that handles
      * desktop-specific UI actions.
+     * <p>
+     *  返回处理桌面特定UI操作的<code> DesktopManger </code>。
+     * 
      */
     public DesktopManager getDesktopManager() {
         return desktopManager;
@@ -219,6 +273,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      * desktop-specific UI actions. This may be overridden by
      * {@code LookAndFeel}.
      *
+     * <p>
+     *  设置将处理桌面特定UI操作的<code> DesktopManger </code>。这可能被{@code LookAndFeel}覆盖。
+     * 
+     * 
      * @param d the <code>DesktopManager</code> to use
      *
      * @beaninfo
@@ -237,6 +295,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      * Replaces the current UI object with the latest version from the
      * <code>UIManager</code>.
      *
+     * <p>
+     *  来自<code> UIManager </code>的通知表示L&amp; F已更改。使用<code> UIManager </code>中的最新版本替换当前的UI对象。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -247,6 +309,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
     /**
      * Returns the name of the L&amp;F class that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F类的名称。
+     * 
+     * 
      * @return the string "DesktopPaneUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -259,6 +325,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      * Returns all <code>JInternalFrames</code> currently displayed in the
      * desktop. Returns iconified frames as well as expanded frames.
      *
+     * <p>
+     * 返回当前显示在桌面上的所有<code> JInternalFrames </code>。返回图标化框架以及扩展框架。
+     * 
+     * 
      * @return an array of <code>JInternalFrame</code> objects
      */
     public JInternalFrame[] getAllFrames() {
@@ -289,6 +359,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
       * in this <code>JDesktopPane</code>, or <code>null</code>
       * if no <code>JInternalFrame</code> is currently active.
       *
+      * <p>
+      *  如果没有<code> JInternalFrame </code>当前处于活动状态,则在<code> JDesktopPane </code>或<code> null </code>
+      * 
+      * 
       * @return the currently active <code>JInternalFrame</code> or
       *   <code>null</code>
       * @since 1.3
@@ -304,6 +378,11 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      *  code and should not be called directly. To visually select the frame
      *  the client must call JInternalFrame.setSelected(true) to activate
      *  the frame.
+     * <p>
+     *  在这个<code> JDesktopPane </code>中。此方法用于桥接JDesktopPane和平台实现代码之间的包装差距,不应直接调用。
+     * 为了可视地选择框架,客户端必须调用JInternalFrame.setSelected(true)来激活框架。
+     * 
+     * 
      *  @see JInternalFrame#setSelected(boolean)
      *
      * @param f the internal frame that's currently selected
@@ -319,6 +398,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      * specified layer of the desktop. Returns iconified frames as well
      * expanded frames.
      *
+     * <p>
+     *  返回当前显示在桌面指定图层中的所有<code> JInternalFrames </code>。返回图标化框架以及扩展框架。
+     * 
+     * 
      * @param layer  an int specifying the desktop layer
      * @return an array of <code>JInternalFrame</code> objects
      * @see JLayeredPane
@@ -430,6 +513,9 @@ public class JDesktopPane extends JLayeredPane implements Accessible
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void remove(Component comp) {
@@ -440,6 +526,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
     /**
      * Selects the next <code>JInternalFrame</code> in this desktop pane.
      *
+     * <p>
+     *  在此桌面窗格中选择下一个<code> JInternalFrame </code>。
+     * 
+     * 
      * @param forward a boolean indicating which direction to select in;
      *        <code>true</code> for forward, <code>false</code> for
      *        backward
@@ -467,6 +557,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
 
     /*
      * Sets whether component order checking is enabled.
+     * <p>
+     *  设置是否启用组件订单检查。
+     * 
+     * 
      * @param enable a boolean value, where <code>true</code> means
      * a change in component order will cause a change in the keyboard
      * navigation order.
@@ -478,6 +572,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     protected void addImpl(Component comp, Object constraints, int index) {
@@ -492,6 +590,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     public void remove(int index) {
@@ -507,6 +609,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     public void removeAll() {
@@ -526,6 +632,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     public void setComponentZOrder(Component comp, int index) {
@@ -541,6 +651,9 @@ public class JDesktopPane extends JLayeredPane implements Accessible
     /**
      * See readObject() and writeObject() in JComponent for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅JComponent中的readObject()和writeObject()。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -571,6 +684,11 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JDesktopPane </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JDesktopPane</code>
      */
     protected String paramString() {
@@ -592,6 +710,12 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      * <code>AccessibleJDesktopPane</code>.
      * A new <code>AccessibleJDesktopPane</code> instance is created if necessary.
      *
+     * <p>
+     * 获取与此<code> JDesktopPane </code>关联的<code> AccessibleContext </code>。
+     * 对于桌面窗格,<code> AccessibleContext </code>采用<code> AccessibleJDesktopPane </code>的形式。
+     * 如果需要,将创建一个新的<code> AccessibleJDesktopPane </code>实例。
+     * 
+     * 
      * @return an <code>AccessibleJDesktopPane</code> that serves as the
      *         <code>AccessibleContext</code> of this <code>JDesktopPane</code>
      */
@@ -616,12 +740,20 @@ public class JDesktopPane extends JLayeredPane implements Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现<code> JDesktopPane </code>类的辅助功能支持。它提供了适用于桌面窗格用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
      */
     protected class AccessibleJDesktopPane extends AccessibleJComponent {
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole

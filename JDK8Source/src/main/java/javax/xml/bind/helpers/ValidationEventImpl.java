@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import javax.xml.bind.ValidationEventLocator;
  * the ValidationEvent interface. This class is just provided for a
  * convenience.
  *
+ * <p>
+ *  ValidationEvent接口的默认实现。
+ * 
+ * <p>
+ *  允许JAXB提供程序使用任何实现ValidationEvent接口的类。这个类只是为了方便。
+ * 
+ * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li></ul>
  * @see javax.xml.bind.Validator
  * @see javax.xml.bind.ValidationEventHandler
@@ -51,6 +59,10 @@ public class ValidationEventImpl implements ValidationEvent
     /**
      * Create a new ValidationEventImpl.
      *
+     * <p>
+     *  创建一个新的ValidationEventImpl。
+     * 
+     * 
      * @param _severity The severity value for this event.  Must be one of
      * ValidationEvent.WARNING, ValidationEvent.ERROR, or
      * ValidationEvent.FATAL_ERROR
@@ -67,6 +79,10 @@ public class ValidationEventImpl implements ValidationEvent
     /**
      * Create a new ValidationEventImpl.
      *
+     * <p>
+     *  创建一个新的ValidationEventImpl。
+     * 
+     * 
      * @param _severity The severity value for this event.  Must be one of
      * ValidationEvent.WARNING, ValidationEvent.ERROR, or
      * ValidationEvent.FATAL_ERROR
@@ -99,6 +115,10 @@ public class ValidationEventImpl implements ValidationEvent
     /**
      * Set the severity field of this event.
      *
+     * <p>
+     *  设置此事件的严重性字段。
+     * 
+     * 
      * @param _severity Must be one of ValidationEvent.WARNING,
      * ValidationEvent.ERROR, or ValidationEvent.FATAL_ERROR.
      * @throws IllegalArgumentException if an illegal severity field is supplied
@@ -121,6 +141,10 @@ public class ValidationEventImpl implements ValidationEvent
     /**
      * Set the message field of this event.
      *
+     * <p>
+     *  设置此事件的消息字段。
+     * 
+     * 
      * @param _message String message - may be null.
      */
     public void setMessage( String _message ) {
@@ -133,6 +157,10 @@ public class ValidationEventImpl implements ValidationEvent
     /**
      * Set the linked exception field of this event.
      *
+     * <p>
+     *  设置此事件的链接异常字段。
+     * 
+     * 
      * @param _linkedException Optional linked exception - may be null.
      */
     public void setLinkedException( Throwable _linkedException ) {
@@ -145,6 +173,10 @@ public class ValidationEventImpl implements ValidationEvent
     /**
      * Set the locator object for this event.
      *
+     * <p>
+     *  设置此事件的定位器对象。
+     * 
+     * 
      * @param _locator The locator - may be null.
      */
     public void setLocator( ValidationEventLocator _locator ) {
@@ -155,6 +187,9 @@ public class ValidationEventImpl implements ValidationEvent
      * Returns a string representation of this object in a format
      * helpful to debugging.
      *
+     * <p>
+     *  以有助于调试的格式返回此对象的字符串表示形式。
+     * 
      * @see Object#equals(Object)
      */
     public String toString() {

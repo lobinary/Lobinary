@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,24 @@ import javax.print.attribute.PrintJobAttribute;
  * name.
  * <P>
  *
+ * <p>
+ *  JobImpressions类是一个整数值打印属性类,用于指定要提交的文档的总展示次数。 "印象"是施加到单个媒体页面上的图像(可能是许多不同配置的打印流页面)。
+ * <P>
+ *  JobImpressions属性描述作业的大小。此属性不是计数器;如果已知,则意图是有用的路由和调度信息。如果打印请求中未提供JobImpressions属性的值,打印机可能会尝试计算该值。
+ * 即使客户端为打印请求中的JobImpressions属性提供了值,如果打印机能够计算比客户端提供的值更精确的值,打印机可以选择更改值。
+ * 打印机可以能够在作业提交时或在任何稍后的时间点确定JobImpressions属性的正确值。
+ * <P>
+ * 与{@link JobKOctets JobKOctets}一样,JobImpressions值不能包括由{@link Copies Copies}属性指定的副本数量所贡献的乘法因子,而与设备是否可以处
+ * 理多个副本而不进行多次通过作业或文档数据,并且与是否整理输出无关。
+ * 因此,该值与实现无关,并且反映了以印记测量的文档的大小,而与复制数量无关。
+ * <P>
+ *  与{@link JobKOctets JobKOctets}一样,由于嵌入在文档数据中的副本指令,JobImpressions值也必须不包括乘法因子。
+ * 如果文档数据实际上包括文档数据的复制,则该值将包括这样的复制。换句话说,此值始终是源文档数据中的展示次数,而不是作业要产生的展示次数的度量。
+ * <P>
+ *  <B> IPP兼容性：</B>整数值给出IPP整数值。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @see JobImpressionsSupported
  * @see JobImpressionsCompleted
  * @see JobKOctets
@@ -83,6 +102,10 @@ public final class JobImpressions extends IntegerSyntax
     /**
      * Construct a new job impressions attribute with the given integer value.
      *
+     * <p>
+     *  使用给定的整数值构造新的作业展示次数属性。
+     * 
+     * 
      * @param  value  Integer value.
      *
      * @exception  IllegalArgumentException
@@ -106,6 +129,18 @@ public final class JobImpressions extends IntegerSyntax
      * are equal.
      * </OL>
      *
+     * <p>
+     *  返回此作业展示次数属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是JobImpressions类的实例。
+     * <LI>
+     * 此作业展示次数属性的值和<CODE>对象</CODE>的值相等。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job
@@ -121,6 +156,8 @@ public final class JobImpressions extends IntegerSyntax
      * <P>
      * For class JobImpressions, the category is class JobImpressions itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -135,6 +172,12 @@ public final class JobImpressions extends IntegerSyntax
      * For class JobImpressions, the category name is
      * <CODE>"job-impressions"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobImpressions类,类别是JobImpressions类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

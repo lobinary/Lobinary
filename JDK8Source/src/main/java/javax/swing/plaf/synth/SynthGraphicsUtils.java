@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import sun.swing.plaf.synth.*;
 /**
  * Wrapper for primitive graphics calls.
  *
+ * <p>
+ *  原始图形调用的包装器。
+ * 
+ * 
  * @since 1.5
  * @author Scott Violet
  */
@@ -56,6 +61,9 @@ public class SynthGraphicsUtils {
 
     /**
      * Creates a <code>SynthGraphicsUtils</code>.
+     * <p>
+     *  创建<code> SynthGraphicsUtils </code>。
+     * 
      */
     public SynthGraphicsUtils() {
     }
@@ -63,6 +71,10 @@ public class SynthGraphicsUtils {
     /**
      * Draws a line between the two end points.
      *
+     * <p>
+     *  在两个端点之间绘制线。
+     * 
+     * 
      * @param context Identifies hosting region.
      * @param paintKey Identifies the portion of the component being asked
      *                 to paint, may be null.
@@ -85,6 +97,11 @@ public class SynthGraphicsUtils {
      * <p>Specifying <code>null</code> or any key different from
      * <code>"dashed"</code> will draw solid lines.
      *
+     * <p>
+     *  在两个端点之间绘制线。 <p>此实现仅支持一个线型键,<code>"broken"</code>。 <code>"broken"</code>线条样式仅应用于垂直和水平线。
+     *  <p>指定<code> null </code>或与<code>"broken"</code>不同的任何键将绘制实线。
+     * 
+     * 
      * @param context identifies hosting region
      * @param paintKey identifies the portion of the component being asked
      *                 to paint, may be null
@@ -125,6 +142,10 @@ public class SynthGraphicsUtils {
      * Lays out text and an icon returning, by reference, the location to
      * place the icon and text.
      *
+     * <p>
+     *  退出文本和图标,通过引用返回,放置图标和文本的位置。
+     * 
+     * 
      * @param ss SynthContext
      * @param fm FontMetrics for the Font to use, this may be ignored
      * @param text Text to layout
@@ -162,6 +183,10 @@ public class SynthGraphicsUtils {
     /**
      * Returns the size of the passed in string.
      *
+     * <p>
+     *  返回传入的字符串的大小。
+     * 
+     * 
      * @param ss SynthContext
      * @param font Font to use
      * @param metrics FontMetrics, may be ignored
@@ -176,6 +201,10 @@ public class SynthGraphicsUtils {
     /**
      * Returns the minimum size needed to properly render an icon and text.
      *
+     * <p>
+     *  返回正确呈现图标和文本所需的最小大小。
+     * 
+     * 
      * @param ss SynthContext
      * @param font Font to use
      * @param text Text to layout
@@ -207,6 +236,10 @@ public class SynthGraphicsUtils {
     /**
      * Returns the maximum size needed to properly render an icon and text.
      *
+     * <p>
+     *  返回正确呈现图标和文本所需的最大大小。
+     * 
+     * 
      * @param ss SynthContext
      * @param font Font to use
      * @param text Text to layout
@@ -239,6 +272,10 @@ public class SynthGraphicsUtils {
      * Returns the maximum height of the the Font from the passed in
      * SynthContext.
      *
+     * <p>
+     *  返回从SynthContext传递的字体的最大高度。
+     * 
+     * 
      * @param context SynthContext used to determine font.
      * @return maximum height of the characters for the font from the passed
      *         in context.
@@ -252,6 +289,10 @@ public class SynthGraphicsUtils {
     /**
      * Returns the preferred size needed to properly render an icon and text.
      *
+     * <p>
+     *  返回适当呈现图标和文本所需的首选大小。
+     * 
+     * 
      * @param ss SynthContext
      * @param font Font to use
      * @param text Text to layout
@@ -308,6 +349,10 @@ public class SynthGraphicsUtils {
      * render the text as html nor will it offset by the insets of the
      * component.
      *
+     * <p>
+     *  在指定位置绘制文本。这不会尝试将文本呈现为html,也不会被组件的插入偏移。
+     * 
+     * 
      * @param ss SynthContext
      * @param g Graphics used to render string in.
      * @param text Text to render
@@ -324,6 +369,10 @@ public class SynthGraphicsUtils {
      * render the text as html nor will it offset by the insets of the
      * component.
      *
+     * <p>
+     *  在指定位置绘制文本。这将不会尝试将文本呈现为html,也不会被组件的插入偏移。
+     * 
+     * 
      * @param ss SynthContext
      * @param g Graphics used to render string in.
      * @param text Text to render
@@ -346,6 +395,10 @@ public class SynthGraphicsUtils {
      * Paints an icon and text. This will render the text as html, if
      * necessary, and offset the location by the insets of the component.
      *
+     * <p>
+     *  绘制图标和文本。这将渲染文本为html,如果必要,并且偏移位置由组件的插图。
+     * 
+     * 
      * @param ss SynthContext
      * @param g Graphics to render string and icon into
      * @param text Text to layout
@@ -423,6 +476,11 @@ public class SynthGraphicsUtils {
       * know the maximum (preferred) menu item size for that popup menu.
       * Later when it comes time to paint each menu item, we can use those
       * same accumulated max element sizes in order to layout the item.
+      * <p>
+      * 关于如何计算优选大小的快速注释...一般来说,SynthPopupMenuUI将运行其子代的列表(从上到下),并询问每个它的首选大小。
+      * 每个菜单项将累加到目前为止遇到的每个元素(图标,文本,加速器间距,加速器文本或箭头图标)的最大宽度,因此在所有菜单项已被计算时,我们将知道最大(首选)菜单该弹出菜单的项目大小。
+      * 后来当时间绘制每个菜单项,我们可以使用相同的累积最大元素大小为了布局项。
+      * 
       */
     static Dimension getPreferredMenuItemSize(SynthContext context,
            SynthContext accContext, JComponent c,
@@ -607,6 +665,7 @@ public class SynthGraphicsUtils {
     /**
      * Wraps a SynthIcon around the Icon interface, forwarding calls to
      * the SynthIcon with a given SynthContext.
+     * <p>
      */
     private static class SynthIconWrapper implements Icon {
         private static final java.util.List<SynthIconWrapper> CACHE = new java.util.ArrayList<SynthIconWrapper>(1);

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -14,6 +15,9 @@ package org.omg.PortableServer;
 	 * A POA manager may be associated with one or more 
 	 * POA objects. A POA manager encapsulates the processing 
 	 * state of the POAs it is associated with.
+	 * <p>
+	 *  每个POA对象都有一个关联的POAManager对象。 POA管理器可以与一个或多个POA对象相关联。 POA管理器封装与其相关联的POA的处理状态。
+	 * 
 	 */
 public interface POAManagerOperations 
 {
@@ -22,6 +26,10 @@ public interface POAManagerOperations
 	 * This operation changes the state of the POA manager 
 	 * to active, causing associated POAs to start processing
 	 * requests.
+	 * <p>
+	 *  此操作将POA管理器的状态更改为活动状态,使相关的POA开始处理请求。
+	 * 
+	 * 
 	 * @exception AdapterInactive is raised if the operation is
 	 *            invoked on the POAManager in inactive state.
 	 */
@@ -31,6 +39,10 @@ public interface POAManagerOperations
 	 * This operation changes the state of the POA manager 
 	 * to holding, causing associated POAs to queue incoming
 	 * requests.
+	 * <p>
+	 *  此操作将POA管理器的状态更改为保持,从而使相关联的POA对入站请求进行排队。
+	 * 
+	 * 
 	 * @param wait_for_completion if FALSE, the operation 
 	 *            returns immediately after changing state.  
 	 *            If TRUE, it waits for all active requests 
@@ -44,6 +56,10 @@ public interface POAManagerOperations
 	 * This operation changes the state of the POA manager 
 	 * to discarding. This causes associated POAs to discard
 	 * incoming requests.
+	 * <p>
+	 *  此操作将POA管理器的状态更改为丢弃。这将导致关联的POA丢弃传入的请求。
+	 * 
+	 * 
 	 * @param wait_for_completion if FALSE, the operation 
 	 *            returns immediately after changing state.  
 	 *            If TRUE, it waits for all active requests 
@@ -58,6 +74,10 @@ public interface POAManagerOperations
 	 * to inactive, causing associated POAs to reject the
 	 * requests that have not begun executing as well as
 	 * as any new requests.
+	 * <p>
+	 *  此操作将POA管理器的状态更改为非活动状态,导致相关联的POA拒绝尚未开始执行的请求以及任何新请求。
+	 * 
+	 * 
 	 * @param etherealize_objects a flag to indicate whether
 	 *        to invoke the etherealize operation of the
 	 *        associated servant manager for all active 
@@ -73,6 +93,8 @@ public interface POAManagerOperations
 
   /**
 	 * This operation returns the state of the POA manager.
+	 * <p>
+	 *  此操作返回POA管理器的状态。
 	 */
   org.omg.PortableServer.POAManagerPackage.State get_state ();
 } // interface POAManagerOperations

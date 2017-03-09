@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,13 @@ import sun.awt.AppContext;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  Windows按钮。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Jeff Dinkins
  *
  */
@@ -116,6 +124,9 @@ public class WindowsButtonUI extends BasicButtonUI
 
     /**
      * Overridden method to render the text without the mnemonic
+     * <p>
+     *  覆盖的方法来呈现没有助记符的文本
+     * 
      */
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         WindowsGraphicsUtils.paintText(g, b, textRect, text, getTextShiftOffset());
@@ -143,6 +154,9 @@ public class WindowsButtonUI extends BasicButtonUI
 
         /* Ensure that the width and height of the button is odd,
          * to allow for the focus line if focus is painted
+         * <p>
+         *  以便在焦点被绘时允许焦点线
+         * 
          */
         AbstractButton b = (AbstractButton)c;
         if (d != null && b.isFocusPainted()) {
@@ -157,6 +171,9 @@ public class WindowsButtonUI extends BasicButtonUI
      * ButtonUI.paint() calls.  Re-using rectangles rather than
      * allocating them in each paint call substantially reduced the time
      * it took paint to run.  Obviously, this method can't be re-entered.
+     * <p>
+     *  ButtonUI.paint()调用。重新使用矩形而不是在每个绘制调用中分配它们大大减少了绘画运行的时间。显然,这种方法不能重新输入。
+     * 
      */
     private Rectangle viewRect = new Rectangle();
 
@@ -286,6 +303,8 @@ public class WindowsButtonUI extends BasicButtonUI
      *         - null if border is completely non-opaque
      *         - somewhere inbetween if border is compound and
      *              outside border is opaque and inside isn't
+     * <p>
+     *  返回 -  b.getBorderInsets(c)如果border是不透明的 - 如果border是完全不透明的,则为null  - 如果border是复合的,外部边界是不透明的,
      */
     private static Insets getOpaqueInsets(Border b, Component c) {
         if (b == null) {

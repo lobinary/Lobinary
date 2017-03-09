@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ package javax.xml.ws;
  *  the <code>Provider</code> instance will receive entire protocol messages
  *  or just message payloads.
  *
+ * <p>
+ *  <p>服务端点可以实现<code> Provider </code>接口作为SEI的动态替代。
+ * 
+ *  <p>取决于使用的绑定,实现需要支持<code> Provider&lt; Source&gt; </code>,<code> Provider&lt; SOAPMessage&gt; </code>
+ * 和<code> Provider&lt; DataSource&gt; </code>和服务模式。
+ * 
+ * 
  *  @since JAX-WS 2.0
  *
  *  @see javax.xml.transform.Source
@@ -49,6 +57,10 @@ public interface Provider<T> {
   /** Invokes an operation occording to the contents of the request
    *  message.
    *
+   * <p>
+   *  <p> <code> ServiceMode </code>注释可用于控制<code> Provider </code>实例是否将接收整个协议消息或仅接收消息有效内容。
+   * 
+   * 
    *  @param  request The request message or message payload.
    *  @return The response message or message payload. May be <code>null</code> if
               there is no response.

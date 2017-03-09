@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: MatchPatternIterator.java,v 1.2.4.2 2005/09/14 19:45:22 jeffsuttor Exp $
+ * <p>
+ *  $ Id：MatchPatternIterator.java,v 1.2.4.2 2005/09/14 19:45:22 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -40,6 +53,11 @@ import com.sun.org.apache.xpath.internal.patterns.StepPattern;
  * traversal against the LocationPath interpreted as a match pattern.  This
  * class is useful to find nodes in document order that are complex paths
  * whose steps probably criss-cross each other.
+ * <p>
+ *  此类将<a href="http://www.w3.org/TR/xpath#location-paths"> LocationPath </a>视为树上的过滤迭代,评估超级轴中的每个节点遍历将Loc
+ * ationPath解释为匹配模式。
+ * 此类对于查找文档顺序中的节点是有用的,这些节点是复杂路径,其步骤可能彼此交叉。
+ * 
  */
 public class MatchPatternIterator extends LocPathIterator
 {
@@ -64,6 +82,10 @@ public class MatchPatternIterator extends LocPathIterator
    * of step walkers from the opcode list, and call back
    * into the Compiler to create predicate expressions.
    *
+   * <p>
+   *  创建LocPathIterator对象,包括从操作码列表创建步骤步行器,并回调到编译器以创建谓词表达式。
+   * 
+   * 
    * @param compiler The Compiler which is creating
    * this expression.
    * @param opPos The position of this iterator in the
@@ -156,6 +178,10 @@ public class MatchPatternIterator extends LocPathIterator
    * Initialize the context values for this expression
    * after it is cloned.
    *
+   * <p>
+   *  在克隆后,对此表达式的上下文值进行初始化。
+   * 
+   * 
    * @param context The XPath runtime context for this
    * transformation.
    */
@@ -171,6 +197,11 @@ public class MatchPatternIterator extends LocPathIterator
    * state. After<code>detach</code> has been invoked, calls to
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
+   * <p>
+   * 从迭代的集合中分离迭代器,释放任何计算资源并将迭代器置于INVALID状态。
+   * 调用<code> detach </code>后,调用<code> nextNode </code>或<code> previousNode </code>会引发异常INVALID_STATE_ERR。
+   * 从迭代的集合中分离迭代器,释放任何计算资源并将迭代器置于INVALID状态。
+   * 
    */
   public void detach()
   {
@@ -185,6 +216,10 @@ public class MatchPatternIterator extends LocPathIterator
 
   /**
    * Get the next node via getNextXXX.  Bottlenecked for derived class override.
+   * <p>
+   *  通过getNextXXX获取下一个节点。瓶颈为派生类覆盖。
+   * 
+   * 
    * @return The next node on the axis, or DTM.NULL.
    */
   protected int getNextNode()
@@ -199,6 +234,10 @@ public class MatchPatternIterator extends LocPathIterator
    *  Returns the next node in the set and advances the position of the
    * iterator in the set. After a NodeIterator is created, the first call
    * to nextNode() returns the first node in the set.
+   * <p>
+   *  返回集合中的下一个节点,并推进迭代器在集合中的位置。创建NodeIterator之后,第一次调用nextNode()返回集合中的第一个节点。
+   * 
+   * 
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
@@ -282,6 +321,9 @@ public class MatchPatternIterator extends LocPathIterator
    * TreeWalker or NodeIterator. This function will be called by the
    * implementation of TreeWalker and NodeIterator; it is not intended to
    * be called directly from user code.
+   * <p>
+   *  测试指定的节点在TreeWalker或NodeIterator的逻辑视图中是否可见。这个函数将通过TreeWalker和NodeIterator的实现来调用;它不打算从用户代码直接调用。
+   * 
    * @param n  The node to check to see if it passes the filter or not.
    * @return  a constant to determine whether the node is accepted,
    *   rejected, or skipped, as defined  above .

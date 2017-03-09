@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import java.io.Serializable;
 /**
  * The default model for combo boxes.
  *
+ * <p>
+ *  组合框的默认模型。
+ * 
+ * 
  * @param <E> the type of the elements of this model
  *
  * @author Arnaud Weber
@@ -43,6 +48,9 @@ public class DefaultComboBoxModel<E> extends AbstractListModel<E> implements Mut
 
     /**
      * Constructs an empty DefaultComboBoxModel object.
+     * <p>
+     *  构造一个空的DefaultComboBoxModel对象。
+     * 
      */
     public DefaultComboBoxModel() {
         objects = new Vector<E>();
@@ -52,6 +60,10 @@ public class DefaultComboBoxModel<E> extends AbstractListModel<E> implements Mut
      * Constructs a DefaultComboBoxModel object initialized with
      * an array of objects.
      *
+     * <p>
+     *  构造一个用对象数组初始化的DefaultComboBoxModel对象。
+     * 
+     * 
      * @param items  an array of Object objects
      */
     public DefaultComboBoxModel(final E items[]) {
@@ -70,6 +82,10 @@ public class DefaultComboBoxModel<E> extends AbstractListModel<E> implements Mut
      * Constructs a DefaultComboBoxModel object initialized with
      * a vector.
      *
+     * <p>
+     *  构造一个用向量初始化的DefaultComboBoxModel对象。
+     * 
+     * 
      * @param v  a Vector object ...
      */
     public DefaultComboBoxModel(Vector<E> v) {
@@ -84,6 +100,10 @@ public class DefaultComboBoxModel<E> extends AbstractListModel<E> implements Mut
     /**
      * Set the value of the selected item. The selected item may be null.
      *
+     * <p>
+     *  设置所选项目的值。所选项目可以为空。
+     * 
+     * 
      * @param anObject The combo box value or null for no selection.
      */
     public void setSelectedItem(Object anObject) {
@@ -115,6 +135,10 @@ public class DefaultComboBoxModel<E> extends AbstractListModel<E> implements Mut
     /**
      * Returns the index-position of the specified object in the list.
      *
+     * <p>
+     *  返回列表中指定对象的索引位置。
+     * 
+     * 
      * @param anObject
      * @return an int representing the index position, where 0 is
      *         the first position
@@ -164,6 +188,8 @@ public class DefaultComboBoxModel<E> extends AbstractListModel<E> implements Mut
 
     /**
      * Empties the list.
+     * <p>
+     *  清空列表。
      */
     public void removeAllElements() {
         if ( objects.size() > 0 ) {

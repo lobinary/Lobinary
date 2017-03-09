@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 /**
@@ -9,6 +10,9 @@ package com.sun.corba.se.PortableActivationIDL;
 
 
 /** ORB callback interface, passed to Activator in registerORB method.
+/* <p>
+/* com / sun / corba / se / PortableActivationIDL / ORBProxyHolder.java。
+/* 
     */
 public final class ORBProxyHolder implements org.omg.CORBA.portable.Streamable
 {

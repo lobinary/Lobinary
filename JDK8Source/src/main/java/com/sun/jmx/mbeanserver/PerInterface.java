@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import static com.sun.jmx.mbeanserver.Util.*;
  * by all MBeans of the same kind (Standard MBean or MXBean) that have the same
  * MBean interface.
  *
+ * <p>
+ *  每MBean接口行为。该类的单个实例可以由具有相同MBean接口的所有相同类型的MBean(标准MBean或MXBean)共享。
+ * 
+ * 
  * @since 1.6
  */
 final class PerInterface<M> {
@@ -158,6 +163,13 @@ final class PerInterface<M> {
      * the property was consulted on every invocation.  So this simpler
      * implementation could potentially break code that sets and unsets
      * the property at different times.
+     * <p>
+     *  当invoke未找到命名方法时,将调用此方法。在抛出异常之前,我们检查是否设置了jmx.invoke.getters属性,如果是,则调用的方法可能是getter还是setter。
+     * 如果是这样,我们调用它并返回结果。这是为了与基于JMX RI 1.0或1.1的代码兼容,允许调用getter和setter。这是*不*推荐新的代码使用此功能。
+     * 
+     *  由于此方法要抛出异常或使用强烈阻止的功能,我们认为其性能不是很重要。
+     * 
+     *  实现功能的一种更简单的方法是在设置jmx.invoke.getters时将getter和setter添加到操作映射中。但是,这意味着在内部检查MBean接口时查询该属性,而不是之后。
      */
     private Object noSuchMethod(String msg, Object resource, String operation,
                                 Object[] params, String[] signature,
@@ -230,6 +242,9 @@ final class PerInterface<M> {
 
     /**
      * Visitor that sets up the method maps (operations, getters, setters).
+     * <p>
+     * 以前,每次调用咨询该属性。所以这个更简单的实现可能会破坏在不同时间设置和取消设置属性的代码。
+     * 
      */
     private class InitMaps implements MBeanAnalyzer.MBeanVisitor<M> {
         public void visitAttribute(String attributeName,

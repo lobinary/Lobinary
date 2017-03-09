@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xerces.internal.dom;
 
@@ -52,6 +62,16 @@ import org.w3c.dom.ls.LSSerializer;
  *
  * @xerces.internal
  *
+ * <p>
+ *  DOMImplementation类是对文档对象模型的特定实现的描述。因此,其数据是静态的,由该实现的所有实例共享。
+ * <P>
+ *  DOM API要求它是一个真正的对象,而不是静态方法。然而,没有什么说它不能是一个单身,所以这是我如何实现它。
+ * <P>
+ *  这个特定的类,以及CoreDocumentImpl,支持DOM核心和加载/保存(实验)。可选模块由更完整的DOMImplementation类以及DocumentImpl支持。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @version $Id: CoreDOMImplementationImpl.java,v 1.6 2010-11-01 04:39:37 joehw Exp $
  * @since PR-DOM-Level-1-19980818.
  */
@@ -93,6 +113,10 @@ public class CoreDOMImplementationImpl
          * Test if the DOM implementation supports a specific "feature" --
          * currently meaning language and level thereof.
          *
+         * <p>
+         *  测试DOM实现是否支持特定的"特征" - 目前意味着语言和其级别。
+         * 
+         * 
          * @param feature The package name of the feature to test.
          * In Level 1, supported values are "HTML" and "XML" (case-insensitive).
          * At this writing, com.sun.org.apache.xerces.internal.dom supports only XML.
@@ -158,6 +182,12 @@ public class CoreDOMImplementationImpl
          *
          * Creates an empty DocumentType node.
          *
+         * <p>
+         *  在DOM级别2中引入。<p>
+         * 
+         *  创建一个空的DocumentType节点。
+         * 
+         * 
          * @param qualifiedName The qualified name of the document type to be created.
          * @param publicID The document type public identifier.
          * @param systemID The document type system identifier.
@@ -243,6 +273,12 @@ public class CoreDOMImplementationImpl
          * Creates an XML Document object of the specified type with its document
          * element.
          *
+         * <p>
+         * 在DOM级别2中引入。<p>
+         * 
+         *  使用其document元素创建指定类型的XML Document对象。
+         * 
+         * 
          * @param namespaceURI     The namespace URI of the document
          *                         element to create, or null.
          * @param qualifiedName    The qualified name of the document
@@ -278,6 +314,9 @@ public class CoreDOMImplementationImpl
 
         /**
          * DOM Level 3 WD - Experimental.
+         * <p>
+         *  DOM 3级WD  - 实验。
+         * 
          */
         public Object getFeature(String feature, String version) {
             if (singleton.hasFeature(feature, version)) {
@@ -312,6 +351,11 @@ public class CoreDOMImplementationImpl
      * then be configured by means of its <code>DOMConfiguration</code>
      * object, and used to parse documents by means of its <code>parse</code>
      *  method.
+     * <p>
+     *  DOM Level 3 LS CR  - 实验。创建一个新的<code> LSParser </code>。
+     * 新构造的解析器然后可以通过其<code> DOMConfiguration </code>对象来配置,并且用于通过其<code> parse </code>方法解析文档。
+     * 
+     * 
      * @param mode  The <code>mode</code> argument is either
      *   <code>MODE_SYNCHRONOUS</code> or <code>MODE_ASYNCHRONOUS</code>, if
      *   <code>mode</code> is <code>MODE_SYNCHRONOUS</code> then the
@@ -375,6 +419,10 @@ public class CoreDOMImplementationImpl
         /**
          * DOM Level 3 LS CR - Experimental.
          * Create a new <code>LSSerializer</code> object.
+         * <p>
+         *  DOM Level 3 LS CR  - 实验。创建一个新的<code> LSSerializer </code>对象。
+         * 
+         * 
          * @return The newly created <code>LSSerializer</code> object.
          * <p ><b>Note:</b>    By default, the newly created
          * <code>LSSerializer</code> has no <code>DOMErrorHandler</code>,
@@ -391,6 +439,10 @@ public class CoreDOMImplementationImpl
         /**
          * DOM Level 3 LS CR - Experimental.
          * Create a new empty input source.
+         * <p>
+         *  DOM Level 3 LS CR  - 实验。创建新的空输入源。
+         * 
+         * 
          * @return  The newly created input object.
          */
         public LSInput createLSInput() {
@@ -479,6 +531,10 @@ public class CoreDOMImplementationImpl
      * <code>LSOutput.byteStream</code>, <code>LSOutput.systemId</code>,
      * <code>LSOutput.encoding</code> are null.
 
+     * <p>
+     *  创建新的空输出目标对象,其中<code> LSOutput.characterStream </code>,<code> LSOutput.byteStream </code>,<code> LSOu
+     * tput.systemId </code>,<code> LSOutput.encoding </code >为空。
+     * 
      * @return  The newly created output object.
      */
        public LSOutput createLSOutput() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,11 @@ import java.util.Stack;
  *  modified).  Since parse ahead does not execute actions, only parse
  *  state is maintained on the virtual stack, not full Symbol objects.
  *
+ * <p>
+ *  替换实际解析堆栈的顶部(由一组操作改变的部分),同时保持其原始内容。当解析需要"解析"以确定给定的错误恢复尝试是否将允许解析继续足够远以认为解析成功时,使用该数据结构。
+ * 一旦确定前向解析的成功或失败,则系统然后恢复到原始解析堆栈(其实际上未被修改)。由于解析未执行操作,因此只有解析状态在虚拟堆栈上维护,而不是完整的符号对象。
+ * 
+ * 
  * @see     com.sun.java_cup.internal.runtime.lr_parser
  * @author  Frank Flannery
  */
@@ -72,6 +78,9 @@ public class virtual_parse_stack {
   /** The real stack that we shadow.  This is accessed when we move off
    *  the bottom of the virtual portion of the stack, but is always left
    *  unmodified.
+   * <p>
+   *  堆栈的虚拟部分的底部,但是总是保持未修改。
+   * 
    */
   protected Stack real_stack;
 
@@ -80,6 +89,9 @@ public class virtual_parse_stack {
   /** Top of stack indicator for where we leave off in the real stack.
    *  This is measured from top of stack, so 0 would indicate that no
    *  elements have been "moved" from the real to virtual stack.
+   * <p>
+   *  这是从堆栈顶部开始测量的,因此0将表示没有元素从真实堆栈移动到虚拟堆栈。
+   * 
    */
   protected int real_next;
 
@@ -90,6 +102,9 @@ public class virtual_parse_stack {
    *  of the real stack within the area that has been modified (via operations
    *  on the virtual stack).  When this portion of the stack becomes empty we
    *  transfer elements from the underlying stack onto this stack.
+   * <p>
+   *  具有状态数的对象。该堆栈影响已经修改的区域(通过虚拟堆栈上的操作)的真实堆栈的顶部。当堆栈的这个部分变为空时,我们将元素从底层堆栈传送到这个堆栈。
+   * 
    */
   protected Stack vstack;
 
@@ -99,6 +114,9 @@ public class virtual_parse_stack {
 
   /** Transfer an element from the real to the virtual stack.  This assumes
    *  that the virtual stack is currently empty.
+   * <p>
+   *  虚拟堆栈当前为空。
+   * 
    */
   protected void get_from_real()
     {
@@ -123,6 +141,8 @@ public class virtual_parse_stack {
   public boolean empty()
     {
       /* if vstack is empty then we were unable to transfer onto it and
+      /* <p>
+      /* 
          the whole thing is empty. */
       return vstack.empty();
     }

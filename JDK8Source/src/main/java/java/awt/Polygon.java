@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,15 @@ import java.util.Arrays;
  * methods, use the <i>insideness</i> definition described in the
  * {@link Shape} class comments.
  *
+ * <p>
+ *  <code> Polygon </code>类封装了在坐标空间内的封闭二维区域的描述。该区域由任意数量的线段限定,每个线段是多边形的一侧。
+ * 在内部,多边形包括{@code(x,y)}坐标对的列表,其中每对定义多边形的<i>顶点<i> <i>,并且两个连续的对是线的端点,多边形的一边。
+ * 第一个和最后一对{@code(x,y)}点由闭合多边形的线段连接。该<code>多边形</code>用偶数奇数绕组规则定义。
+ * 有关偶数奇数绕组规则的定义,请参见{@link java.awt.geom.PathIterator#WIND_EVEN_ODD WIND_EVEN_ODD}。
+ * 此类的命中测试方法包括<code>包含</code>,<code>与</code>内部的</code>和<code>相交,使用<i> insideness </i>在{@link Shape}类注释中。
+ * 有关偶数奇数绕组规则的定义,请参见{@link java.awt.geom.PathIterator#WIND_EVEN_ODD WIND_EVEN_ODD}。
+ * 
+ * 
  * @author      Sami Shaio
  * @see Shape
  * @author      Herb Jellinek
@@ -64,6 +74,13 @@ public class Polygon implements Shape, java.io.Serializable {
      * {@link #xpoints xpoints} or {@link #ypoints ypoints}.
      * This value can be NULL.
      *
+     * <p>
+     *  总点数。
+     *  <code> npoints </code>的值表示此<code>多边形</code>中的有效点数,可能小于{@link #xpoints xpoints}或{@link #ypoints ypoints}
+     * 。
+     *  总点数。此值可以为NULL。
+     * 
+     * 
      * @serial
      * @see #addPoint(int, int)
      * @since 1.0
@@ -78,6 +95,11 @@ public class Polygon implements Shape, java.io.Serializable {
      * array.  The value of {@link #npoints npoints} is equal to the
      * number of valid points in this <code>Polygon</code>.
      *
+     * <p>
+     * X坐标数组。此数组中的元素数量可能多于此<code>多边形</code>中的X坐标数量。额外的元素允许新的点添加到这个<code>多边形</code>,而不需要重新创建这个数组。
+     *  {@link #npoints npoints}的值等于此<code>多边形</code>中的有效点数。
+     * 
+     * 
      * @serial
      * @see #addPoint(int, int)
      * @since 1.0
@@ -92,6 +114,11 @@ public class Polygon implements Shape, java.io.Serializable {
      * array.  The value of <code>npoints</code> is equal to the
      * number of valid points in this <code>Polygon</code>.
      *
+     * <p>
+     *  Y坐标数组。此数组中的元素数量可能多于此<code>多边形</code>中的Y坐标数量。额外的元素允许新的点添加到这个<code>多边形</code>,而不需要重新创建这个数组。
+     *  <code> npoints </code>的值等于此<code>多边形</code>中的有效点数。
+     * 
+     * 
      * @serial
      * @see #addPoint(int, int)
      * @since 1.0
@@ -102,6 +129,10 @@ public class Polygon implements Shape, java.io.Serializable {
      * The bounds of this {@code Polygon}.
      * This value can be null.
      *
+     * <p>
+     *  此{@code多边形}的边界。此值可以为null。
+     * 
+     * 
      * @serial
      * @see #getBoundingBox()
      * @see #getBounds()
@@ -111,16 +142,26 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -6460061437900069969L;
 
     /*
      * Default length for xpoints and ypoints.
+     * <p>
+     *  xpoint和ypoints的默认长​​度。
+     * 
      */
     private static final int MIN_LENGTH = 4;
 
     /**
      * Creates an empty polygon.
+     * <p>
+     *  创建空多边形。
+     * 
+     * 
      * @since 1.0
      */
     public Polygon() {
@@ -131,6 +172,10 @@ public class Polygon implements Shape, java.io.Serializable {
     /**
      * Constructs and initializes a <code>Polygon</code> from the specified
      * parameters.
+     * <p>
+     *  从指定的参数构造并初始化<code>多边形</code>。
+     * 
+     * 
      * @param xpoints an array of X coordinates
      * @param ypoints an array of Y coordinates
      * @param npoints the total number of points in the
@@ -177,6 +222,12 @@ public class Polygon implements Shape, java.io.Serializable {
      * the number of vertices in the new polygon data is significantly
      * smaller than the number of vertices in the data from before the
      * reset.
+     * <p>
+     * 将此<code>多边形</code>对象重置为空多边形。坐标数组和其中的数据保持不变,但是点的数量被重置为零,以将旧的顶点数据标记为无效,并开始在开始累积新的顶点数据。
+     * 与旧顶点相关的所有内部缓存的数据被丢弃。
+     * 注意,由于重置前的坐标数组被重新使用,所以如果新的多边形数据中的顶点的数目显着小于重新设置的多边形数据的顶点的数目,则创建新的空<代码>多边形</code>可能比重置当前的<复位前数据中的顶点数。
+     * 
+     * 
      * @see         java.awt.Polygon#invalidate
      * @since 1.4
      */
@@ -194,6 +245,13 @@ public class Polygon implements Shape, java.io.Serializable {
      * from methods such as <code>getBounds</code> or <code>contains</code>
      * that might cache data from earlier computations relating to
      * the vertex coordinates.
+     * <p>
+     *  无效或刷新依赖于此<code>多边形</code>的顶点坐标的任何内部缓存数据。
+     * 在任何直接操作<code> xpoints </code>或<code> ypoints </code>数组中的坐标之后,应该调用此方法,以避免诸如<code> getBounds </code>代码>
+     * 包含</code>可能缓存来自与顶点坐标有关的早期计算的数据。
+     *  无效或刷新依赖于此<code>多边形</code>的顶点坐标的任何内部缓存数据。
+     * 
+     * 
      * @see         java.awt.Polygon#getBounds
      * @since 1.4
      */
@@ -205,6 +263,10 @@ public class Polygon implements Shape, java.io.Serializable {
      * Translates the vertices of the <code>Polygon</code> by
      * <code>deltaX</code> along the x axis and by
      * <code>deltaY</code> along the y axis.
+     * <p>
+     *  沿x轴转换<code>多边形</code>的顶点,通过<code> deltaX </code>沿y轴转换<code> deltaY </code>
+     * 
+     * 
      * @param deltaX the amount to translate along the X axis
      * @param deltaY the amount to translate along the Y axis
      * @since 1.1
@@ -222,6 +284,10 @@ public class Polygon implements Shape, java.io.Serializable {
     /*
      * Calculates the bounding box of the points passed to the constructor.
      * Sets <code>bounds</code> to the result.
+     * <p>
+     *  计算传递给构造函数的点的边界框。将<code> bounds </code>设置为结果。
+     * 
+     * 
      * @param xpoints[] array of <i>x</i> coordinates
      * @param ypoints[] array of <i>y</i> coordinates
      * @param npoints the total number of points
@@ -247,6 +313,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /*
      * Resizes the bounding box to accommodate the specified coordinates.
+     * <p>
+     *  调整边界框的大小以适应指定的坐标。
+     * 
+     * 
      * @param x,&nbsp;y the specified coordinates
      */
     void updateBounds(int x, int y) {
@@ -276,6 +346,12 @@ public class Polygon implements Shape, java.io.Serializable {
      * <code>Polygon</code> has already been performed, such as
      * <code>getBounds</code> or <code>contains</code>, then this
      * method updates the bounding box.
+     * <p>
+     *  将指定的坐标追加到此<code>多边形</code>。
+     * <p>
+     * 如果已经执行了计算该<code>多边形</code>的边界框的操作,例如<code> getBounds </code>或<code>包含</code>,则该方法更新边界框。
+     * 
+     * 
      * @param       x the specified X coordinate
      * @param       y the specified Y coordinate
      * @see         java.awt.Polygon#getBounds
@@ -309,6 +385,10 @@ public class Polygon implements Shape, java.io.Serializable {
      * The bounding box is the smallest {@link Rectangle} whose
      * sides are parallel to the x and y axes of the
      * coordinate space, and can completely contain the <code>Polygon</code>.
+     * <p>
+     *  获取此<code>多边形</code>的边框。边界框是最小的{@link Rectangle},其边与坐标空间的x和y轴平行,并且可以完全包含<code>多边形</code>。
+     * 
+     * 
      * @return a <code>Rectangle</code> that defines the bounds of this
      * <code>Polygon</code>.
      * @since 1.1
@@ -319,6 +399,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /**
      * Returns the bounds of this <code>Polygon</code>.
+     * <p>
+     *  返回此<code>多边形</code>的边界。
+     * 
+     * 
      * @return the bounds of this <code>Polygon</code>.
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getBounds()</code>.
@@ -338,6 +422,10 @@ public class Polygon implements Shape, java.io.Serializable {
     /**
      * Determines whether the specified {@link Point} is inside this
      * <code>Polygon</code>.
+     * <p>
+     *  确定指定的{@link Point}是否在此<代码>多边形</code>中。
+     * 
+     * 
      * @param p the specified <code>Point</code> to be tested
      * @return <code>true</code> if the <code>Polygon</code> contains the
      *                  <code>Point</code>; <code>false</code> otherwise.
@@ -352,6 +440,10 @@ public class Polygon implements Shape, java.io.Serializable {
      * Determines whether the specified coordinates are inside this
      * <code>Polygon</code>.
      * <p>
+     * <p>
+     *  确定指定的坐标是否在此<代码>多边形</code>中。
+     * <p>
+     * 
      * @param x the specified X coordinate to be tested
      * @param y the specified Y coordinate to be tested
      * @return {@code true} if this {@code Polygon} contains
@@ -367,6 +459,10 @@ public class Polygon implements Shape, java.io.Serializable {
     /**
      * Determines whether the specified coordinates are contained in this
      * <code>Polygon</code>.
+     * <p>
+     *  确定指定的坐标是否包含在此<code>多边形</code>中。
+     * 
+     * 
      * @param x the specified X coordinate to be tested
      * @param y the specified Y coordinate to be tested
      * @return {@code true} if this {@code Polygon} contains
@@ -384,6 +480,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public Rectangle2D getBounds2D() {
@@ -392,6 +492,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y) {
@@ -481,6 +585,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Point2D p) {
@@ -489,6 +597,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(double x, double y, double w, double h) {
@@ -502,6 +614,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(Rectangle2D r) {
@@ -510,6 +626,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y, double w, double h) {
@@ -523,6 +643,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Rectangle2D r) {
@@ -535,6 +659,11 @@ public class Polygon implements Shape, java.io.Serializable {
      * of the outline of this <code>Polygon</code>.  An optional
      * {@link AffineTransform} can be specified so that the coordinates
      * returned in the iteration are transformed accordingly.
+     * <p>
+     *  返回一个迭代器对象,该对象沿着<code> Polygon </code>的边界进行迭代,并提供对此<code>多边形</code>的轮廓几何体的访问。
+     * 可以指定一个可选的{@link AffineTransform},以便在迭代中返回的坐标被相应地转换。
+     * 
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to the
      *          coordinates as they are returned in the iteration, or
      *          <code>null</code> if untransformed coordinates are desired
@@ -555,6 +684,12 @@ public class Polygon implements Shape, java.io.Serializable {
      * is ignored.  An optional <code>AffineTransform</code> can be specified
      * in which case the coordinates returned in the iteration are transformed
      * accordingly.
+     * <p>
+     * 返回一个迭代器对象,它沿着<code> Shape </code>的边界进行迭代,并提供对<code> Shape </code>的轮廓几何体的访问。
+     * 迭代器只返回SEG_MOVETO,SEG_LINETO和SEG_CLOSE点类型。由于多边形已经是平的,因此将忽略<code> flatness </code>参数。
+     * 可以指定一个可选的<code> AffineTransform </code>,在这种情况下,迭代中返回的坐标将相应地进行转换。
+     * 
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to the
      *          coordinates as they are returned in the iteration, or
      *          <code>null</code> if untransformed coordinates are desired
@@ -588,6 +723,10 @@ public class Polygon implements Shape, java.io.Serializable {
         /**
          * Returns the winding rule for determining the interior of the
          * path.
+         * <p>
+         *  返回确定路径内部的绕组规则。
+         * 
+         * 
          * @return an integer representing the current winding rule.
          * @see PathIterator#WIND_NON_ZERO
          */
@@ -597,6 +736,10 @@ public class Polygon implements Shape, java.io.Serializable {
 
         /**
          * Tests if there are more points to read.
+         * <p>
+         *  测试是否有更多的要读取的点。
+         * 
+         * 
          * @return <code>true</code> if there are more points to read;
          *          <code>false</code> otherwise.
          */
@@ -608,6 +751,9 @@ public class Polygon implements Shape, java.io.Serializable {
          * Moves the iterator forwards, along the primary direction of
          * traversal, to the next segment of the path when there are
          * more points in that direction.
+         * <p>
+         *  当该方向上有更多的点时,将迭代器沿着遍历的主要方向向前移动到路径的下一段。
+         * 
          */
         public void next() {
             index++;
@@ -623,6 +769,12 @@ public class Polygon implements Shape, java.io.Serializable {
          * Each point is stored as a pair of <code>float</code> x,&nbsp;y
          * coordinates.  SEG_MOVETO and SEG_LINETO types return one
          * point, and SEG_CLOSE does not return any points.
+         * <p>
+         *  返回迭代中当前路径段的坐标和类型。返回值是路径段类型：SEG_MOVETO,SEG_LINETO或SEG_CLOSE。
+         * 必须传递长度为2的<code> float </code>数组,并且可以用于存储点的坐标。每个点都存储为一对<code> float </code> x,y坐标。
+         *  SEG_MOVETO和SEG_LINETO类型返回一个点,SEG_CLOSE不返回任何点。
+         * 
+         * 
          * @param coords a <code>float</code> array that specifies the
          * coordinates of the point(s)
          * @return an integer representing the type and coordinates of the
@@ -654,6 +806,10 @@ public class Polygon implements Shape, java.io.Serializable {
          * coordinates.
          * SEG_MOVETO and SEG_LINETO types return one point,
          * and SEG_CLOSE does not return any points.
+         * <p>
+         * 返回迭代中当前路径段的坐标和类型。返回值是路径段类型：SEG_MOVETO,SEG_LINETO或SEG_CLOSE。
+         * 必须传递长度为2的<code> double </code>数组,并且可以用于存储点的坐标。每个点都存储为一对<code> double </code> x,y坐标。
+         * 
          * @param coords a <code>double</code> array that specifies the
          * coordinates of the point(s)
          * @return an integer representing the type and coordinates of the

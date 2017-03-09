@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 
@@ -21,6 +22,13 @@ package org.omg.CosNaming;
  * See <a href="http://www.omg.org/technology/documents/formal/naming_service.htm">
  * CORBA COS 
  * Naming Specification.</a>
+ * <p>
+ *  <code> NamingContextExt </code>是<code> NamingContext </code>的扩展,它包含一组名称绑定,其中每个名称是唯一的,并且是可互操作命名服务的一部分
+ * 。
+ * 不同的名称可以同时绑定到相同或不同上下文中的对象。使用<tt> NamingContextExt </tt>,您可以使用基于URL的名称进行绑定和解析。 <p>。
+ * 
+ *  请参见<a href="http://www.omg.org/technology/documents/formal/naming_service.htm"> CORBA COS命名规范</a>。
+ * 
  */
 public interface NamingContextExtOperations  extends org.omg.CosNaming.NamingContextOperations
 {
@@ -28,6 +36,10 @@ public interface NamingContextExtOperations  extends org.omg.CosNaming.NamingCon
   /**
  * This operation creates a stringified name from the array of Name
  * components.
+ * 
+ * <p>
+ *  此操作从名称组件数组创建一个字符串名称。
+ * 
  * 
  * @param n Name of the object <p>
  * 
@@ -41,6 +53,10 @@ public interface NamingContextExtOperations  extends org.omg.CosNaming.NamingCon
  * This operation  converts a Stringified Name into an  equivalent array
  * of Name Components. 
  * 
+ * <p>
+ *  此操作将字符串化名称转换为名称组件的等效数组。
+ * 
+ * 
  * @param sn Stringified Name of the object <p>
  * 
  * @exception org.omg.CosNaming.NamingContextExtPackage.InvalidName
@@ -52,6 +68,10 @@ public interface NamingContextExtOperations  extends org.omg.CosNaming.NamingCon
   /**
  * This operation creates a URL based "iiopname://" format name
  * from the Stringified Name of the object.
+ * 
+ * <p>
+ *  此操作从对象的Stringified Name创建一个基于"iiopname：//"格式名的URL。
+ * 
  * 
  * @param addr internet based address of the host machine where  Name Service is running <p>
  * @param sn Stringified Name of the object <p>
@@ -68,6 +88,9 @@ public interface NamingContextExtOperations  extends org.omg.CosNaming.NamingCon
   /**
  * This operation resolves the Stringified name into the object
  * reference. 
+ * 
+ * <p>
+ *  此操作将Stringified名称解析为对象引用。
  * 
  * @param sn Stringified Name of the object <p>
  * 

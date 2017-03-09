@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import javax.swing.event.*;
  * Button Listener
  * <p>
  *
+ * <p>
+ *  按钮监听器
+ * <p>
+ * 
  * @author Rich Schiavi
  */
 public class MotifButtonListener extends BasicButtonListener {

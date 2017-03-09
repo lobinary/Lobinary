@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: URI.java,v 1.1.4.1 2005/09/08 11:03:20 suresh_emailid Exp $
+ * <p>
+ *  $ Id：URI.java,v 1.1.4.1 2005/09/08 11:03:20 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer.utils;
 
@@ -63,6 +76,25 @@ import java.util.Objects;
  * the class is no longer "public".
  *
  * @xsl.usage internal
+ * <p>
+ *  用于表示统一资源标识符(URI)的类。此类设计为处理URI的解析并提供对可构成URI的各种组件(方案,主机,端口,用户信息,路径,查询字符串和片段)的访问。
+ * <p>
+ * 根据RFC 2396 <http://www.ietf.org/rfc/rfc2396.txt?number=2396>中描述的URI语法来完成URI规范的解析。
+ * 每个URI都由一个方案组成,后面跟一个冒号('：'),后跟一个方案特定的部分。
+ * 对于遵循"通用URI"语法的URI,特定于方案的部分以两个斜杠("//")开头,并且可以后跟一个权限段(由用户信息,主机和端口组成),路径段,查询段和片段。
+ * 请注意,RFC 2396不再指定使用参数段,并且将"user：password"语法作为权限段的一部分排除在外。
+ * 如果URI中出现"user：password",则整个用户/密码字符串存储为userinfo。
+ * <p>
+ *  对于不遵循"通用URI"语法(例如mailto)的URI,整个方案特定部分被视为URI的"路径"部分。
+ * <p>
+ *  请注意,与java.net.URL类不同,此类不提供任何内置网络访问功能,也不提供任何特定于方案的功能(例如,它不知道特定方案的默认端口)。相反,它只知道可以应用于URI的语法和基本操作集。
+ * 
+ *  这个类是com.sun.org.apache.xml.internal.utils中的一个副本。它存在于减少序列化程序对该包的依赖。
+ * 
+ *  从原来的一个小的改变是,这个类不再实现Serializable,并且serialVersionUID魔术字段被删除,并且类不再是"public"。
+ * 
+ * @ xsl.usage internal
+ * 
  */
 final class URI
 {
@@ -71,6 +103,9 @@ final class URI
    * or setting fields on a URI when an operation would result in an
    * invalid URI specification.
    *
+   * <p>
+   *  当操作导致无效的URI规范时,会在构建URI或设置URI字段的过程中抛出MalformedURIExceptions。
+   * 
    */
   public static class MalformedURIException extends IOException
   {
@@ -78,6 +113,9 @@ final class URI
     /**
      * Constructs a <code>MalformedURIException</code> with no specified
      * detail message.
+     * <p>
+     *  构造一个没有指定详细消息的<code> MalformedURIException </code>。
+     * 
      */
     public MalformedURIException()
     {
@@ -88,6 +126,10 @@ final class URI
      * Constructs a <code>MalformedURIException</code> with the
      * specified detail message.
      *
+     * <p>
+     *  使用指定的详细消息构造<code> MalformedURIException </code>。
+     * 
+     * 
      * @param p_msg the detail message.
      */
     public MalformedURIException(String p_msg)
@@ -102,6 +144,9 @@ final class URI
   /**
    * URI punctuation mark characters - these, combined with
    *   alphanumerics, constitute the "unreserved" characters
+   * <p>
+   *  URI标点符号字符 - 这些字符与字母数字组合构成"未保留"字符
+   * 
    */
   private static final String MARK_CHARACTERS = "-_.!~*'() ";
 
@@ -111,37 +156,56 @@ final class URI
   /**
    * userinfo can be composed of unreserved, escaped and these
    *   characters
+   * <p>
+   *  userinfo可以由未预留,转义和这些字符组成
+   * 
    */
   private static final String USERINFO_CHARACTERS = ";:&=+$,";
 
   /** Stores the scheme (usually the protocol) for this URI.
+  /* <p>
+  /* 
    *  @serial */
   private String m_scheme = null;
 
   /** If specified, stores the userinfo for this URI; otherwise null.
+  /* <p>
+  /* 
    *  @serial */
   private String m_userinfo = null;
 
   /** If specified, stores the host for this URI; otherwise null.
+  /* <p>
+  /* 
    *  @serial */
   private String m_host = null;
 
   /** If specified, stores the port for this URI; otherwise -1.
+  /* <p>
+  /* 
    *  @serial */
   private int m_port = -1;
 
   /** If specified, stores the path for this URI; otherwise null.
+  /* <p>
+  /* 
    *  @serial */
   private String m_path = null;
 
   /**
    * If specified, stores the query string for this URI; otherwise
    *   null.
+   * <p>
+   *  如果指定,则存储此URI的查询字符串;否则为null。
+   * 
+   * 
    * @serial
    */
   private String m_queryString = null;
 
   /** If specified, stores the fragment for this URI; otherwise null.
+  /* <p>
+  /* 
    *  @serial */
   private String m_fragment = null;
 
@@ -150,6 +214,9 @@ final class URI
 
   /**
    * Construct a new and uninitialized URI.
+   * <p>
+   *  构造一个新的未初始化的URI。
+   * 
    */
   public URI(){}
 
@@ -157,6 +224,10 @@ final class URI
    * Construct a new URI from another URI. All fields for this URI are
    * set equal to the fields of the URI passed in.
    *
+   * <p>
+   *  从另一个URI构造一个新的URI。此URI的所有字段都设置为等于传入的URI的字段。
+   * 
+   * 
    * @param p_other the URI to copy (cannot be null)
    */
   public URI(URI p_other)
@@ -173,6 +244,12 @@ final class URI
    * not follow the "generic URI" syntax, the specification is parsed
    * into a scheme and scheme-specific part (stored as the path) only.
    *
+   * <p>
+   *  从URI规范字符串构造一个新的URI。
+   * 如果规范遵循"通用URI"语法(第一个冒号之后的两个斜杠),则将相应地解析规范 - 根据需要设置scheme,userinfo,主机,端口,路径,查询字符串和片段字段。
+   * 如果规范不遵循"通用URI"语法,则该规范仅被解析为方案和方案特定部分(存储为路径)。
+   * 
+   * 
    * @param p_uriSpec the URI specification string (cannot be null or
    *                  empty)
    *
@@ -188,6 +265,10 @@ final class URI
    * Construct a new URI from a base URI and a URI specification string.
    * The URI specification string may be a relative URI.
    *
+   * <p>
+   *  根据基本URI和URI规范字符串构造新的URI。 URI规范字符串可以是相对URI。
+   * 
+   * 
    * @param p_base the base URI (cannot be null if p_uriSpec is null or
    *               empty)
    * @param p_uriSpec the URI specification string (cannot be null or
@@ -206,6 +287,10 @@ final class URI
    * Only the scheme and scheme-specific part (stored as the path) are
    * initialized.
    *
+   * <p>
+   *  构造一个不遵循通用URI语法的新URI。只有方案和方案特定部分(存储为路径)被初始化。
+   * 
+   * 
    * @param p_scheme the URI scheme (cannot be null or empty)
    * @param p_schemeSpecificPart the scheme-specific part (cannot be
    *                             null or empty)
@@ -240,6 +325,10 @@ final class URI
    * basic semantic checks are performed as well.  See the individual
    * setter methods for specifics.
    *
+   * <p>
+   * 从其组成部分构造一个遵循通用URI语法的新URI。每个组件都经过语法验证,并且还执行一些基本语义检查。有关详细信息,请参阅各个setter方法。
+   * 
+   * 
    * @param p_scheme the URI scheme (cannot be null or empty)
    * @param p_host the hostname or IPv4 address for the URI
    * @param p_path the URI path - if the path contains '?' or '#',
@@ -267,6 +356,10 @@ final class URI
    * basic semantic checks are performed as well.  See the individual
    * setter methods for specifics.
    *
+   * <p>
+   *  从其组成部分构造一个遵循通用URI语法的新URI。每个组件都经过语法验证,并且还执行一些基本语义检查。有关详细信息,请参阅各个setter方法。
+   * 
+   * 
    * @param p_scheme the URI scheme (cannot be null or empty)
    * @param p_userinfo the URI userinfo (cannot be specified if host
    *                   is null)
@@ -337,6 +430,10 @@ final class URI
   /**
    * Initialize all fields of this URI from another URI.
    *
+   * <p>
+   *  从另一个URI初始化此URI的所有字段。
+   * 
+   * 
    * @param p_other the URI to copy (cannot be null)
    */
   private void initialize(URI p_other)
@@ -357,6 +454,10 @@ final class URI
    * the URI and Section 5 for specifications on resolving relative URIs
    * and relative paths.
    *
+   * <p>
+   *  从基本URI和URI规范字符串初始化此URI。有关解析URI的规范,请参阅RFC 2396第4节和附录B,有关解析相对URI和相对路径的规范,请参阅第5节。
+   * 
+   * 
    * @param p_base the base URI (may be null if p_uriSpec is an absolute
    *               URI)
    * @param p_uriSpec the URI spec string which may be an absolute or
@@ -575,6 +676,10 @@ final class URI
   /**
    * Initialize the scheme for this URI from a URI string spec.
    *
+   * <p>
+   *  从URI字符串规范初始化此URI的方案。
+   * 
+   * 
    * @param p_uriSpec the URI specification (cannot be null)
    *
    * @throws MalformedURIException if URI does not have a conformant
@@ -617,6 +722,10 @@ final class URI
    * Initialize the authority (userinfo, host and port) for this
    * URI from a URI string spec.
    *
+   * <p>
+   *  从URI字符串规范初始化此URI的权限(userinfo,主机和端口)。
+   * 
+   * 
    * @param p_uriSpec the URI specification (cannot be null)
    *
    * @throws MalformedURIException if p_uriSpec violates syntax rules
@@ -721,6 +830,10 @@ final class URI
   /**
    * Initialize the path for this URI from a URI string spec.
    *
+   * <p>
+   *  从URI字符串规范初始化此URI的路径。
+   * 
+   * 
    * @param p_uriSpec the URI specification (cannot be null)
    *
    * @throws MalformedURIException if p_uriSpec violates syntax rules
@@ -847,6 +960,10 @@ final class URI
   /**
    * Get the scheme for this URI.
    *
+   * <p>
+   *  获取此URI的方案。
+   * 
+   * 
    * @return the scheme for this URI
    */
   public String getScheme()
@@ -858,6 +975,10 @@ final class URI
    * Get the scheme-specific part for this URI (everything following the
    * scheme and the first colon). See RFC 2396 Section 5.2 for spec.
    *
+   * <p>
+   *  获取此URI的方案特定部分(方案之后的所有内容和第一个冒号)。有关规范,请参阅RFC 2396第5.2节。
+   * 
+   * 
    * @return the scheme-specific part for this URI
    */
   public String getSchemeSpecificPart()
@@ -910,6 +1031,10 @@ final class URI
   /**
    * Get the userinfo for this URI.
    *
+   * <p>
+   *  获取此URI的userinfo。
+   * 
+   * 
    * @return the userinfo for this URI (null if not specified).
    */
   public String getUserinfo()
@@ -920,6 +1045,10 @@ final class URI
   /**
    * Get the host for this URI.
    *
+   * <p>
+   *  获取此URI的主机。
+   * 
+   * 
    * @return the host for this URI (null if not specified).
    */
   public String getHost()
@@ -930,6 +1059,10 @@ final class URI
   /**
    * Get the port for this URI.
    *
+   * <p>
+   *  获取此URI的端口。
+   * 
+   * 
    * @return the port for this URI (-1 if not specified).
    */
   public int getPort()
@@ -941,6 +1074,10 @@ final class URI
    * Get the path for this URI (optionally with the query string and
    * fragment).
    *
+   * <p>
+   *  获取此URI的路径(可选择包含查询字符串和片段)。
+   * 
+   * 
    * @param p_includeQueryString if true (and query string is not null),
    *                             then a "?" followed by the query string
    *                             will be appended
@@ -976,6 +1113,10 @@ final class URI
    * Get the path for this URI. Note that the value returned is the path
    * only and does not include the query string or fragment.
    *
+   * <p>
+   *  获取此URI的路径。请注意,返回的值仅是路径,不包括查询字符串或片段。
+   * 
+   * 
    * @return the path for this URI.
    */
   public String getPath()
@@ -986,6 +1127,10 @@ final class URI
   /**
    * Get the query string for this URI.
    *
+   * <p>
+   *  获取此URI的查询字符串。
+   * 
+   * 
    * @return the query string for this URI. Null is returned if there
    *         was no "?" in the URI spec, empty string if there was a
    *         "?" but no query string following it.
@@ -998,6 +1143,10 @@ final class URI
   /**
    * Get the fragment for this URI.
    *
+   * <p>
+   *  获取此URI的片段。
+   * 
+   * 
    * @return the fragment for this URI. Null is returned if there
    *         was no "#" in the URI spec, empty string if there was a
    *         "#" but no fragment following it.
@@ -1011,6 +1160,10 @@ final class URI
    * Set the scheme for this URI. The scheme is converted to lowercase
    * before it is set.
    *
+   * <p>
+   * 设置此URI的方案。该方案在设置之前转换为小写。
+   * 
+   * 
    * @param p_scheme the scheme for this URI (cannot be null)
    *
    * @throws MalformedURIException if p_scheme is not a conformant
@@ -1036,6 +1189,10 @@ final class URI
    * Set the userinfo for this URI. If a non-null value is passed in and
    * the host value is null, then an exception is thrown.
    *
+   * <p>
+   *  设置此URI的userinfo。如果传入非空值,且主机值为null,则抛出异常。
+   * 
+   * 
    * @param p_userinfo the userinfo for this URI
    *
    * @throws MalformedURIException if p_userinfo contains invalid
@@ -1093,6 +1250,10 @@ final class URI
    * Set the host for this URI. If null is passed in, the userinfo
    * field is also set to null and the port is set to -1.
    *
+   * <p>
+   *  设置此URI的主机。如果传入null,userinfo字段也设置为null,并且端口设置为-1。
+   * 
+   * 
    * @param p_host the host for this URI
    *
    * @throws MalformedURIException if p_host is not a valid IP
@@ -1121,6 +1282,10 @@ final class URI
    * If a valid port number is passed in and the host field is null,
    * an exception is thrown.
    *
+   * <p>
+   *  设置此URI的端口。 -1用于指示未指定端口,否则有效端口号介于0和65535之间。如果传入有效的端口号并且主机字段为空,则抛出异常。
+   * 
+   * 
    * @param p_port the port number for this URI
    *
    * @throws MalformedURIException if p_port is not -1 and not a
@@ -1154,6 +1319,11 @@ final class URI
    * For URIs that do not follow the generic URI syntax, this method
    * sets the scheme-specific part.
    *
+   * <p>
+   *  设置此URI的路径。如果提供的路径为空,那么查询字符串和片段也将设置为null。如果提供的路径包括查询字符串和/或片段,这些字段也将被解析和设置。
+   * 请注意,对于遵循"通用URI"语法的URI,指定的路径应以斜杠开头。对于不遵循通用URI语法的URI,此方法设置特定于方案的部分。
+   * 
+   * 
    * @param p_path the path for this URI (may be null)
    *
    * @throws MalformedURIException if p_path contains invalid
@@ -1182,6 +1352,11 @@ final class URI
    * and the new segment begins with a slash, the extra slash will be
    * removed before the new segment is appended.
    *
+   * <p>
+   *  附加到此URI的路径的末尾。如果当前路径不是以斜杠结尾,并且要附加的路径不以斜杠开头,则在添加新段之前,会在当前路径中添加斜杠。
+   * 此外,如果当前路径以斜杠结尾,并且新段以斜杠开头,则在添加新段之前,将删除额外的斜线。
+   * 
+   * 
    * @param p_addToPath the new segment to be added to the current path
    *
    * @throws MalformedURIException if p_addToPath contains syntax
@@ -1240,6 +1415,10 @@ final class URI
    * if this is an URI conforming to the generic URI syntax and
    * the path value is not null.
    *
+   * <p>
+   *  设置此URI的查询字符串。非空值仅当这是符合通用URI语法的URI且路径值不为null时才有效。
+   * 
+   * 
    * @param p_queryString the query string for this URI
    *
    * @throws MalformedURIException if p_queryString is not null and this
@@ -1280,6 +1459,10 @@ final class URI
    * if this is a URI conforming to the generic URI syntax and
    * the path value is not null.
    *
+   * <p>
+   * 设置此URI的片段。非空值只有在这是符合通用URI语法的URI且路径值不为null时才有效。
+   * 
+   * 
    * @param p_fragment the fragment for this URI
    *
    * @throws MalformedURIException if p_fragment is not null and this
@@ -1316,6 +1499,10 @@ final class URI
   /**
    * Determines if the passed-in Object is equivalent to this URI.
    *
+   * <p>
+   *  确定传入的对象是否等同于此URI。
+   * 
+   * 
    * @param p_test the Object to test for equality.
    *
    * @return true if p_test is a URI with all values equal to this
@@ -1360,6 +1547,10 @@ final class URI
   /**
    * Get the URI as a string specification. See RFC 2396 Section 5.2.
    *
+   * <p>
+   *  获取URI作为字符串规范。参见RFC 2396第5.2节。
+   * 
+   * 
    * @return the URI string specification
    */
   @Override
@@ -1383,6 +1574,10 @@ final class URI
    * Get the indicator as to whether this URI uses the "generic URI"
    * syntax.
    *
+   * <p>
+   *  获取关于此URI是否使用"通用URI"语法的指示符。
+   * 
+   * 
    * @return true if this URI uses the "generic URI" syntax, false
    *         otherwise
    */
@@ -1400,6 +1595,10 @@ final class URI
    * contains only alphanumerics, '+','-' and '.'.
    *
    *
+   * <p>
+   *  确定方案是否符合方案名称的规则。如果方案以字母数字开头,只包含字母数字,'+',' - '和'。',则方案是一致的。
+   * 
+   * 
    * @param p_scheme The sheme name to check
    * @return true if the scheme is conformant, false otherwise
    */
@@ -1440,6 +1639,11 @@ final class URI
    * & by a '.'. See RFC 2396 Section 3.2.2.
    *
    *
+   * <p>
+   *  确定字符串在语法上是否能够表示有效的IPv4地址或网络主机的域名。有效的IPv4地址由四个十进制数字组组成,用"。"分隔。
+   * 主机名由域标签(每个域标签必须以字母数字开头和结尾,但可能包含" - ")由'。'分隔。参见RFC 2396第3.2.2节。
+   * 
+   * 
    * @param p_address The address string to check
    * @return true if the string is a syntactically valid IPv4 address
    *              or hostname
@@ -1545,6 +1749,10 @@ final class URI
    * Determine whether a char is a digit.
    *
    *
+   * <p>
+   *  确定char是否为数字。
+   * 
+   * 
    * @param p_char the character to check
    * @return true if the char is betweeen '0' and '9', false otherwise
    */
@@ -1557,6 +1765,10 @@ final class URI
    * Determine whether a character is a hexadecimal character.
    *
    *
+   * <p>
+   *  确定字符是否为十六进制字符。
+   * 
+   * 
    * @param p_char the character to check
    * @return true if the char is between '0' and '9', 'a' and 'f'
    *         or 'A' and 'F', false otherwise
@@ -1571,6 +1783,10 @@ final class URI
    * Determine whether a char is an alphabetic character: a-z or A-Z
    *
    *
+   * <p>
+   *  确定字符是否为字母字符：a-z或A-Z
+   * 
+   * 
    * @param p_char the character to check
    * @return true if the char is alphabetic, false otherwise
    */
@@ -1584,6 +1800,10 @@ final class URI
    * Determine whether a char is an alphanumeric: 0-9, a-z or A-Z
    *
    *
+   * <p>
+   *  确定字符是否为字母数字：0-9,a-z或A-Z
+   * 
+   * 
    * @param p_char the character to check
    * @return true if the char is alphanumeric, false otherwise
    */
@@ -1597,6 +1817,10 @@ final class URI
    * ';', '/', '?', ':', '@', '&', '=', '+', '$' or ','
    *
    *
+   * <p>
+   *  确定字符是否为保留字符：';','/','?','：','@','&','=','+','$'
+   * 
+   * 
    * @param p_char the character to check
    * @return true if the string contains any reserved characters
    */
@@ -1609,6 +1833,10 @@ final class URI
    * Determine whether a char is an unreserved character.
    *
    *
+   * <p>
+   *  确定字符是否是未保留字符。
+   * 
+   * 
    * @param p_char the character to check
    * @return true if the char is unreserved, false otherwise
    */
@@ -1623,6 +1851,9 @@ final class URI
    * characters, unreserved characters and escaped characters.
    *
    *
+   * <p>
+   *  确定给定字符串是否仅包含URI字符(在RFC 2396中也称为"uric")。 uric由所有保留字符,未保留字符和转义字符组成。
+   * 
    * @param p_uric URI string
    * @return true if the string is comprised of uric, false otherwise
    */

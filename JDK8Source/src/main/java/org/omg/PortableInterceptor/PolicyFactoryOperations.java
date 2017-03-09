@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -20,6 +21,14 @@ package org.omg.PortableInterceptor;
    * any policy which is registered with <code>ORBInitInfo</code> in this 
    * manner.
    *
+   * <p>
+   *  允许使用<code> CORBA.ORB.create_policy </code>构建策略类型。
+   * <p>
+   *  便携式ORB服务实现在ORB初始化期间注册<code> PolicyFactory </code>接口的实例,以便使用<code> CORBA.ORB.create_policy </code>来构造
+   * 其策略类型。
+   *  POA需要保留以这种方式向<code> ORBInitInfo </code>注册的任何策略。
+   * 
+   * 
    * @see ORBInitInfo#register_policy_factory
    */
 public interface PolicyFactoryOperations 
@@ -39,6 +48,12 @@ public interface PolicyFactoryOperations
      * <code>CORBA.Policy</code> whose value corresponds to the specified 
      * any. If it cannot, it shall throw an exception as described for 
      * <code>CORBA.ORB.create_policy</code>. 
+     * 
+     * <p>
+     *  返回从<code> CORBA.Policy </code>派生的适当接口的实例,其值对应于指定的any。
+     * <p>
+     *  当为<code> PolicyType </code>调用<code> CORBA.ORB.create_policy </code>时,ORB在注册的<code> PolicyFactory </code>
+     * 实例上调用<code> create_policy </code>已经注册了<code> PolicyFactory </code>。
      * 
      * @param type An int specifying the type of policy being created. 
      * @param value An any containing data with which to construct the 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,17 @@ import javax.swing.plaf.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <p>多重外观,允许多个UI同时与组件相关联。主要外观和感觉称为<em>默认</em>外观,而其他外观和感觉称为<em>辅助</em>。
+ * <p>
+ * 
+ *  有关详细信息,请参见<a href="doc-files/multi_tsc.html" target="_top">使用多路复用外观和感觉</a>。
+ * 
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see UIManager#addAuxiliaryLookAndFeel
  * @see javax.swing.plaf.multi
  *
@@ -66,6 +78,10 @@ public class MultiLookAndFeel extends LookAndFeel {
      * Returns a string, suitable for use in menus,
      * that identifies this look and feel.
      *
+     * <p>
+     *  返回一个适合在菜单中使用的字符串,用于标识此外观。
+     * 
+     * 
      * @return a string such as "Multiplexing Look and Feel"
      */
     public String getName() {
@@ -76,6 +92,10 @@ public class MultiLookAndFeel extends LookAndFeel {
      * Returns a string, suitable for use by applications/services,
      * that identifies this look and feel.
      *
+     * <p>
+     *  返回一个字符串,适合由应用程序/服务使用,以标识此外观。
+     * 
+     * 
      * @return "Multiplex"
      */
     public String getID() {
@@ -85,6 +105,10 @@ public class MultiLookAndFeel extends LookAndFeel {
     /**
      * Returns a one-line description of this look and feel.
      *
+     * <p>
+     *  返回此外观的单行描述。
+     * 
+     * 
      * @return a descriptive string such as "Allows multiple UI instances per component instance"
      */
     public String getDescription() {
@@ -95,6 +119,10 @@ public class MultiLookAndFeel extends LookAndFeel {
      * Returns <code>false</code>;
      * this look and feel is not native to any platform.
      *
+     * <p>
+     *  返回<code> false </code>;这种外观和感觉不是原生的任何平台。
+     * 
+     * 
      * @return <code>false</code>
      */
     public boolean isNativeLookAndFeel() {
@@ -105,6 +133,10 @@ public class MultiLookAndFeel extends LookAndFeel {
      * Returns <code>true</code>;
      * every platform permits this look and feel.
      *
+     * <p>
+     *  返回<code> true </code>;每个平台都允许这种外观和感觉。
+     * 
+     * 
      * @return <code>true</code>
      */
     public boolean isSupportedLookAndFeel() {
@@ -121,6 +153,13 @@ public class MultiLookAndFeel extends LookAndFeel {
      * to <code>ComponentUI</code> class names
      * (such as "javax.swing.plaf.multi.MultiButtonUI").
      *
+     * <p>
+     * 创建,初始化和返回外观和感觉特定的默认值。
+     * 对于这种外观,默认值只包括UI类ID(例如"ButtonUI")到<code> ComponentUI </code>类名称(例如"javax.swing.plaf.multi.MultiButtonU
+     * I")的映射。
+     * 创建,初始化和返回外观和感觉特定的默认值。
+     * 
+     * 
      * @return an initialized <code>UIDefaults</code> object
      * @see javax.swing.JComponent#getUIClassID
      */
@@ -200,6 +239,15 @@ public class MultiLookAndFeel extends LookAndFeel {
      * This method is invoked by the <code>createUI</code> method
      * of <code>MultiXxxxUI</code> classes.
      *
+     * <p>
+     *  创建显示<code>目标</code>组件所需的<code> ComponentUI </code>对象,将对象放置在<code> uis </code>向量中并返回<code> ComponentU
+     * I </code>最能代表组件UI的对象。
+     * 此方法通过在当前使用的每个默认和辅助外观上调用<code> getDefaults()。getUI(target)</code>来查找<code> ComponentUI </code>对象。
+     * 此方法添加到<code> uis </code>向量的第一个UI对象是默认的外观和感觉。
+     * <p>
+     *  此方法由<code> MultiXxxxUI </code>类的<code> createUI </code>方法调用。
+     * 
+     * 
      * @param mui the <code>ComponentUI</code> object
      *            that represents the complete UI
      *            for the <code>target</code> component;
@@ -264,6 +312,12 @@ public class MultiLookAndFeel extends LookAndFeel {
      * A run-time error occurs if any objects in the <code>uis</code> vector
      * are not of type <code>ComponentUI</code>.
      *
+     * <p>
+     *  创建数组,使用传入的向量中的UI对象填充数组,并返回数组。如果<code> uis </code>为null,此方法返回一个零元素的数组。
+     * 如果<code> uis </code>是一个空向量,此方法返回<code> null </code>。
+     * 如果<code> uis </code>向量中的任何对象不是类型<code> ComponentUI </code>,则会发生运行时错误。
+     * 
+     * 
      * @param uis a vector containing <code>ComponentUI</code> objects
      * @return an array equivalent to the passed-in vector
      *
@@ -292,6 +346,7 @@ public class MultiLookAndFeel extends LookAndFeel {
  * getUIError method of UIDefaults, which is the method that
  * emits error messages when it cannot find a UI class in the
  * LAF.
+ * <p>
  */
 class MultiUIDefaults extends UIDefaults {
     MultiUIDefaults(int initialCapacity, float loadFactor) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,11 @@ import javax.swing.event.*;
  * and will adjust the horizontal allocation to match the
  * current visibility settings of the JTextField.
  *
+ * <p>
+ *  扩展多行纯文本视图以适合单行编辑器视图。如果视图被分配了额外的空间,则该字段必须为其调整。
+ * 如果托管组件是JTextField,则此视图将管理关联的BoundedRangeModel的范围,并将调整水平分配以匹配JTextField的当前可见性设置。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     View
  */
@@ -45,6 +51,10 @@ public class FieldView extends PlainView {
     /**
      * Constructs a new FieldView wrapped on an element.
      *
+     * <p>
+     *  构造一个包裹在元素上的新FieldView。
+     * 
+     * 
      * @param elem the element
      */
     public FieldView(Element elem) {
@@ -55,6 +65,10 @@ public class FieldView extends PlainView {
      * Fetches the font metrics associated with the component hosting
      * this view.
      *
+     * <p>
+     *  获取与托管此视图的组件关联的字体指标。
+     * 
+     * 
      * @return the metrics
      */
     protected FontMetrics getFontMetrics() {
@@ -72,6 +86,11 @@ public class FieldView extends PlainView {
      * alignment property set on the associated JTextField
      * (if that is the type of the hosting component).
      *
+     * <p>
+     *  将为视图分配的分配调整为文本字段的合适分配。如果视图已被垂直分配超过首选跨度,则分配将更改为垂直居中。
+     * 水平地根据在相关联的JTextField上设置的水平对齐属性来调整视图(如果这是主机组件的类型)。
+     * 
+     * 
      * @param a the allocation given to the view, which may need
      *  to be adjusted.
      * @return the allocation that the superclass should use.
@@ -150,6 +169,9 @@ public class FieldView extends PlainView {
      * range properties are updated.  If the view hasn't yet been
      * shown the extent will be zero and we just set it to be full
      * until determined otherwise.
+     * <p>
+     *  使用关联的JTextField(如果有)来更新可见性模型,以反映作为文档模型更改结果的当前可见性。有界范围属性已更新。如果视图尚未显示,则范围将为零,并且我们将其设置为完全,直到确定为否。
+     * 
      */
     void updateVisibilityModel() {
         Component c = getContainer();
@@ -177,6 +199,10 @@ public class FieldView extends PlainView {
      * The view may need to do layout and create child views to enable
      * itself to render into the given allocation.
      *
+     * <p>
+     * 使用给定的渲染表面和该表面上的区域渲染。视图可能需要进行布局和创建子视图,以使自身能够呈现给定的分配。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param a the allocated region to render into
      *
@@ -190,6 +216,9 @@ public class FieldView extends PlainView {
 
     /**
      * Adjusts <code>a</code> based on the visible region and returns it.
+     * <p>
+     *  根据可见区域调整<code> a </code>并返回。
+     * 
      */
     Shape adjustPaintRegion(Shape a) {
         return adjustAllocation(a);
@@ -199,6 +228,10 @@ public class FieldView extends PlainView {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return   the span the view would like to be rendered into &gt;= 0.
      *           Typically the view is told to render into the span
@@ -240,6 +273,10 @@ public class FieldView extends PlainView {
      * Determines the resizability of the view along the
      * given axis.  A value of 0 or less is not resizable.
      *
+     * <p>
+     *  确定沿给定轴的视图的可重新调整性。值为0或更小不可调整大小。
+     * 
+     * 
      * @param axis View.X_AXIS or View.Y_AXIS
      * @return the weight -&gt; 1 for View.X_AXIS, else 0
      */
@@ -254,6 +291,10 @@ public class FieldView extends PlainView {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param a the allocated region to render into
      * @return the bounding box of the given position
@@ -269,6 +310,10 @@ public class FieldView extends PlainView {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param fx the X coordinate &gt;= 0.0f
      * @param fy the Y coordinate &gt;= 0.0f
      * @param a the allocated region to render into
@@ -284,6 +329,10 @@ public class FieldView extends PlainView {
      * Gives notification that something was inserted into the document
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。
+     * 
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -298,6 +347,9 @@ public class FieldView extends PlainView {
      * Gives notification that something was removed from the document
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  提供通知,说明该视图负责的位置中的文档被删除了。
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children

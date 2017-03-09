@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.identity;
@@ -34,6 +44,12 @@ import com.sun.org.apache.xerces.internal.impl.xs.XSAnnotationImpl;
  *
  * @xerces.internal
  *
+ * <p>
+ *  模式标识约束的基类。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Andy Clark, IBM
  */
 public abstract class IdentityConstraint implements XSIDCDefinition {
@@ -164,6 +180,9 @@ public abstract class IdentityConstraint implements XSIDCDefinition {
 
     /**
      * Get the type of the object, i.e ELEMENT_DECLARATION.
+     * <p>
+     *  获取对象的类型,即ELEMENT_DECLARATION。
+     * 
      */
     public short getType() {
         return XSConstants.IDENTITY_CONSTRAINT;
@@ -172,6 +191,9 @@ public abstract class IdentityConstraint implements XSIDCDefinition {
     /**
      * The <code>name</code> of this <code>XSObject</code> depending on the
      * <code>XSObject</code> type.
+     * <p>
+     *  取决于<code> XSObject </code>类型的<code> XSObject </code>的<code> name </code>
+     * 
      */
     public String getName() {
         return fIdentityConstraintName;
@@ -181,6 +203,9 @@ public abstract class IdentityConstraint implements XSIDCDefinition {
      * The namespace URI of this node, or <code>null</code> if it is
      * unspecified.  defines how a namespace URI is attached to schema
      * components.
+     * <p>
+     *  此节点的名称空间URI,或<code> null </code>(如果未指定)。定义命名空间URI如何附加到模式组件。
+     * 
      */
     public String getNamespace() {
         return fNamespace;
@@ -188,6 +213,9 @@ public abstract class IdentityConstraint implements XSIDCDefinition {
 
     /**
      * {identity-constraint category} One of key, keyref or unique.
+     * <p>
+     *  {identity-constraint category}键,keyref或唯一键之一。
+     * 
      */
     public short getCategory() {
         return type;
@@ -195,6 +223,9 @@ public abstract class IdentityConstraint implements XSIDCDefinition {
 
     /**
      * {selector} A restricted XPath ([XPath]) expression
+     * <p>
+     *  {selector}受限XPath([XPath])表达式
+     * 
      */
     public String getSelectorStr() {
         return (fSelector != null) ? fSelector.toString() : null;
@@ -202,6 +233,9 @@ public abstract class IdentityConstraint implements XSIDCDefinition {
 
     /**
      * {fields} A non-empty list of restricted XPath ([XPath]) expressions.
+     * <p>
+     *  {fields}受限XPath([XPath])表达式的非空列表。
+     * 
      */
     public StringList getFieldStrs() {
         String[] strs = new String[fFieldCount];
@@ -214,6 +248,10 @@ public abstract class IdentityConstraint implements XSIDCDefinition {
      * {referenced key} Required if {identity-constraint category} is keyref,
      * forbidden otherwise. An identity-constraint definition with
      * {identity-constraint category} equal to key or unique.
+     * <p>
+     *  {referenced key}如果{identity-constraint category}是keyref,则为必需,否则禁止。
+     * 一个身份约束定义{identity-constraint category}等于key或unique。
+     * 
      */
     public XSIDCDefinition getRefKey() {
         return null;
@@ -221,12 +259,17 @@ public abstract class IdentityConstraint implements XSIDCDefinition {
 
     /**
      * Optional. Annotation.
+     * <p>
+     *  可选的。注解。
+     * 
      */
     public XSObjectList getAnnotations() {
         return new XSObjectListImpl(fAnnotations, fNumAnnotations);
     }
 
         /**
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getNamespaceItem()
          */
         public XSNamespaceItem getNamespaceItem() {

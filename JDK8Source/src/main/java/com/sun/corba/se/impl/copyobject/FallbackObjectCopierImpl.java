@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,8 @@ import com.sun.corba.se.spi.copyobject.ReflectiveCopyException ;
 
 /** Trys a first ObjectCopier.  If the first throws a ReflectiveCopyException,
  * falls back and tries a second ObjectCopier.
+ * <p>
+ *  回退并尝试第二个ObjectCopier。
  */
 public class FallbackObjectCopierImpl implements ObjectCopier
 {

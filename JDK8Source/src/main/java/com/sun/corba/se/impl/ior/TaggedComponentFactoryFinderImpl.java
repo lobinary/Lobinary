@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,8 @@ import com.sun.corba.se.spi.orb.ORB ;
 import org.omg.CORBA_2_3.portable.InputStream ;
 
 /**
+/* <p>
+/* 
  * @author Ken Cavanaugh
  */
 public class TaggedComponentFactoryFinderImpl extends

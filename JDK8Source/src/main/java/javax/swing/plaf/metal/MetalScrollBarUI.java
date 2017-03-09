@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,11 @@ import static sun.swing.SwingUtilities2.drawVLine;
  * Implementation of ScrollBarUI for the Metal Look and Feel
  * <p>
  *
+ * <p>
+ *  实现ScrollBarUI的金属外观和感觉
+ * <p>
+ * 
+ * 
  * @author Tom Santos
  * @author Steve Wilson
  */
@@ -118,6 +124,7 @@ public class MetalScrollBarUI extends BasicScrollBarUI
     }
 
     /** Returns the view that represents the decrease view.
+    /* <p>
       */
     protected JButton createDecreaseButton( int orientation )
     {
@@ -383,10 +390,14 @@ public class MetalScrollBarUI extends BasicScrollBarUI
     /**
       * This is overridden only to increase the invalid area.  This
       * ensures that the "Shadow" below the thumb is invalidated
+      * <p>
+      *  这被覆盖只是增加无效区域。这确保拇指下方的"阴影"无效
+      * 
       */
     protected void setThumbBounds(int x, int y, int width, int height)
     {
         /* If the thumbs bounds haven't changed, we're done.
+        /* <p>
          */
         if ((thumbRect.x == x) &&
             (thumbRect.y == y) &&
@@ -397,6 +408,9 @@ public class MetalScrollBarUI extends BasicScrollBarUI
 
         /* Update thumbRect, and repaint the union of x,y,w,h and
          * the old thumbRect.
+         * <p>
+         *  老thumbRect。
+         * 
          */
         int minX = Math.min(x, thumbRect.x);
         int minY = Math.min(y, thumbRect.y);
@@ -454,6 +468,8 @@ public class MetalScrollBarUI extends BasicScrollBarUI
                     isFreeStanding = false;
                     toFlush();
                 }
+/* <p>
+/*  if(isFreeStanding){isFreeStanding = false;去冲(); }}
 */
             }
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,15 @@ package java.util;
  * concurrently.
  * </p>
  *
+ * <p>
+ * <p>
+ *  <code> TooManyListenersException </code>异常用作Java事件模型的一部分,以注释和实现多播事件源的单播特殊情况。
+ * </p>
+ * <p>
+ *  在通常多播"void addXyzEventListener"事件侦听器注册模式的任何给定的具体实现上存在"throws TooManyListenersException"子句用于将该接口注释为实现
+ * 单播侦听器特殊情况,即只有一个侦听器可以同时在特定事件侦听器源上注册。
+ * </p>
+ * 
  * @see java.util.EventObject
  * @see java.util.EventListener
  *
@@ -53,6 +63,8 @@ public class TooManyListenersException extends Exception {
     /**
      * Constructs a TooManyListenersException with no detail message.
      * A detail message is a String that describes this particular exception.
+     * <p>
+     * 
      */
 
     public TooManyListenersException() {
@@ -62,6 +74,10 @@ public class TooManyListenersException extends Exception {
     /**
      * Constructs a TooManyListenersException with the specified detail message.
      * A detail message is a String that describes this particular exception.
+     * <p>
+     *  构造一个没有详细消息的TooManyListenersException。详细消息是描述此特殊异常的字符串。
+     * 
+     * 
      * @param s the detail message
      */
 

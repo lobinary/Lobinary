@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: GetOpt.java,v 1.2.4.1 2005/08/31 11:46:04 pvedula Exp $
+ * <p>
+ *  $ Id：GetOpt.java,v 1.2.4.1 2005/08/31 11:46:04 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt;
@@ -42,6 +55,13 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMsg;
 * '-d <file>' it will throw a MissingOptArgException if the
 * option argument '<file>' is not included on the commandline.
 * getopt(3C) does not check for this.
+* <p>
+*  GetOpt是Java等价于在getopt(3C)手册页讨论的C getopt()库函数。它为Java应用程序提供命令行解析。
+* 它支持大多数命令行标准的规则(请参见手册页intro(1)),包括诸如"-sxm"(等效于-s -x -m)之类的堆栈选项;它处理特殊的" - "选项,表示选项的结束。
+* 此外,getopt的此实现将检查选项的强制参数,例如在"-d <file>"的情况下,如果命令行中不包括选项参数'<file>',它将抛出MissingOptArgException。
+*  getopt(3C)不检查这一点。
+* 
+* 
  * @author G Todd Miller
 */
 public class GetOpt{
@@ -114,6 +134,9 @@ public class GetOpt{
 
     /**
     * debugging routine to print out all options collected
+    * <p>
+    *  调试例程打印出收集的所有选项
+    * 
     */
     public void printOptions(){
         for(ListIterator it=theOptions.listIterator(); it.hasNext();){
@@ -137,6 +160,12 @@ public class GetOpt{
     * If the next option found has been declared to take an argument,
     * and no such argument exists, then a MissingOptArgException
     * is thrown (case 2).
+    * <p>
+    * 获取在命令行中找到的下一个选项。区分两个坏的情况,一个情况是当发现非法选项,然后其他情况是当选项接受参数,但没有找到该选项的参数。
+    * 如果找到的选项未在optString中声明,那么将抛出IllegalArgumentException(情况1)。
+    * 如果找到的下一个选项被声明为接受一个参数,并且没有这样的参数存在,则抛出MissingOptArgException(情况2)。
+    * 
+    * 
     * @param none
     * @return int - the next option found.
     * @throws IllegalArgumentException, MissingOptArgException.
@@ -169,6 +198,10 @@ public class GetOpt{
     * gets the argument for the current parsed option. For example,
     * in case of '-d <file>', if current option parsed is 'd' then
     * getOptionArg() would return '<file>'.
+    * <p>
+    *  获取当前已解析选项的参数。例如,在'-d <file>'的情况下,如果当前选项被解析为'd',则getOptionArg()将返回'<file>'。
+    * 
+    * 
     * @return String - argument for current parsed option.
     * @param none
     */
@@ -187,6 +220,11 @@ public class GetOpt{
     * such as 'cmd -s -d file file2 file3 file4'  with the usage
     * 'cmd [-s] [-d <file>] <file>...', getCmdArgs() would return
     * the list {file2, file3, file4}.
+    * <p>
+    *  获取命令行参数的列表。
+    * 例如,在诸如具有用法"cmd [-s] [-d <file>] <file> ...'的'cmd -s -d文件file2 file3 file4'的命令中,getCmdArgs()将返回列表{ file2,file3,file4}
+    * 。
+    * 
     * @return String[] - list of command arguments that may appear
     *                    after options and option arguments.
     * @params none

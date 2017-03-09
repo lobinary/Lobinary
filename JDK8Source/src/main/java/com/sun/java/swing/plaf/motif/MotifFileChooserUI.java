@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import sun.swing.SwingUtilities2;
 /**
  * Motif FileChooserUI.
  *
+ * <p>
+ *  Motif FileChooserUI。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class MotifFileChooserUI extends BasicFileChooserUI {
@@ -758,6 +763,9 @@ public class MotifFileChooserUI extends BasicFileChooserUI {
 
     /**
      * Render different type sizes and styles.
+     * <p>
+     *  呈现不同的字体大小和样式。
+     * 
      */
     public class FilterComboBoxRenderer extends DefaultListCellRenderer {
         public Component getListCellRendererComponent(JList list,
@@ -776,6 +784,8 @@ public class MotifFileChooserUI extends BasicFileChooserUI {
 
     /**
      * Data model for a type-face selection combo-box.
+     * <p>
+     *  面型选择组合框的数据模型。
      */
     protected class FilterComboBoxModel extends AbstractListModel<FileFilter> implements ComboBoxModel<FileFilter>,
             PropertyChangeListener {

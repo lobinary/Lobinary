@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import sun.awt.AppContext;
  * type, content model, attributes, attribute types etc. It is used
  * to correctly parse a document by the Parser.
  *
+ * <p>
+ *  使用ELEMENT结构的DTD中描述的元素。这是标签的描述的必要。它描述了类型,内容模型,属性,属性类型等。它用于由解析器正确解析文档。
+ * 
+ * 
  * @see DTD
  * @see AttributeList
  * @author Arthur van Hoff
@@ -55,6 +60,9 @@ class Element implements DTDConstants, Serializable {
     /**
      * A field to store user data. Mostly used to store
      * style sheets.
+     * <p>
+     *  用于存储用户数据的字段。主要用于存储样式表。
+     * 
      */
     public Object data;
 
@@ -63,6 +71,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Create a new element.
+     * <p>
+     *  创建一个新元素。
+     * 
      */
     Element(String name, int index) {
         this.name = name;
@@ -83,6 +94,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Get the name of the element.
+     * <p>
+     *  获取元素的名称。
+     * 
      */
     public String getName() {
         return name;
@@ -90,6 +104,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Return true if the start tag can be omitted.
+     * <p>
+     *  如果可以省略开始标签,则返回true。
+     * 
      */
     public boolean omitStart() {
         return oStart;
@@ -97,6 +114,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Return true if the end tag can be omitted.
+     * <p>
+     *  如果结束标签可以省略,则返回true。
+     * 
      */
     public boolean omitEnd() {
         return oEnd;
@@ -104,6 +124,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Get type.
+     * <p>
+     *  获取类型。
+     * 
      */
     public int getType() {
         return type;
@@ -111,6 +134,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Get content model
+     * <p>
+     *  获取内容模型
+     * 
      */
     public ContentModel getContent() {
         return content;
@@ -118,6 +144,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Get the attributes.
+     * <p>
+     *  获取属性。
+     * 
      */
     public AttributeList getAttributes() {
         return atts;
@@ -125,6 +154,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Get index.
+     * <p>
+     *  获取索引。
+     * 
      */
     public int getIndex() {
         return index;
@@ -132,6 +164,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Check if empty
+     * <p>
+     *  检查是否为空
+     * 
      */
     public boolean isEmpty() {
         return type == EMPTY;
@@ -139,6 +174,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Convert to a string.
+     * <p>
+     *  转换为字符串。
+     * 
      */
     public String toString() {
         return name;
@@ -146,6 +184,9 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Get an attribute by name.
+     * <p>
+     *  按名称获取属性。
+     * 
      */
     public AttributeList getAttribute(String name) {
         for (AttributeList a = atts ; a != null ; a = a.next) {
@@ -158,6 +199,8 @@ class Element implements DTDConstants, Serializable {
 
     /**
      * Get an attribute by value.
+     * <p>
+     *  按值获取属性。
      */
     public AttributeList getAttributeByValue(String name) {
         for (AttributeList a = atts ; a != null ; a = a.next) {

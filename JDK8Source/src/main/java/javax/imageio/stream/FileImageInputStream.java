@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import sun.java2d.Disposer;
  * The file contents are assumed to be stable during the lifetime of
  * the object.
  *
+ * <p>
+ *  从<code> File </code>或<code> RandomAccessFile </code>获取其输入的<code> ImageInputStream </code>的实现。
+ * 假定文件内容在对象的生存期内是稳定的。
+ * 
  */
 public class FileImageInputStream extends ImageInputStreamImpl {
 
@@ -58,6 +63,12 @@ public class FileImageInputStream extends ImageInputStreamImpl {
      * object is constructed and the time of the last call to a read
      * method.
      *
+     * <p>
+     *  构造将从给定的<code>文件</code>读取的<code> FileImageInputStream </code>。
+     * 
+     *  <p>文件内容不能在构建此对象的时间与最后一次调用读取方法的时间之间更改。
+     * 
+     * 
      * @param f a <code>File</code> to read from.
      *
      * @exception IllegalArgumentException if <code>f</code> is
@@ -81,6 +92,12 @@ public class FileImageInputStream extends ImageInputStreamImpl {
      * object is constructed and the time of the last call to a read
      * method.
      *
+     * <p>
+     *  构造将从给定的<code> RandomAccessFile </code>读取的<code> FileImageInputStream </code>。
+     * 
+     *  <p>文件内容不能在构建此对象的时间与最后一次调用读取方法的时间之间更改。
+     * 
+     * 
      * @param raf a <code>RandomAccessFile</code> to read from.
      *
      * @exception IllegalArgumentException if <code>raf</code> is
@@ -125,6 +142,10 @@ public class FileImageInputStream extends ImageInputStreamImpl {
      * Returns the length of the underlying file, or <code>-1</code>
      * if it is unknown.
      *
+     * <p>
+     *  返回底层文件的长度,如果未知,则返回<code> -1 </code>。
+     * 
+     * 
      * @return the file length as a <code>long</code>, or
      * <code>-1</code>.
      */
@@ -155,6 +176,8 @@ public class FileImageInputStream extends ImageInputStreamImpl {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     protected void finalize() throws Throwable {
         // Empty finalizer: for performance reasons we instead use the

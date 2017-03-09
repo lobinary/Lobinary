@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import java.io.Serializable;
 /**
  * A generic implementation of <code>ColorSelectionModel</code>.
  *
+ * <p>
+ *  <code> ColorSelectionModel </code>的通用实现。
+ * 
+ * 
  * @author Steve Wilson
  *
  * @see java.awt.Color
@@ -43,6 +48,9 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
      * Only one <code>ChangeEvent</code> is needed per model instance
      * since the event's only (read-only) state is the source property.
      * The source of events generated here is always "this".
+     * <p>
+     *  由于事件的只读(只读)状态是源属性,因此每个模型实例只需要一个<code> ChangeEvent </code>。这里生成的事件源始终是"this"。
+     * 
      */
     protected transient ChangeEvent changeEvent = null;
 
@@ -54,6 +62,9 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
      * Creates a <code>DefaultColorSelectionModel</code> with the
      * current color set to <code>Color.white</code>.  This is
      * the default constructor.
+     * <p>
+     *  创建一个<code> DefaultColorSelectionModel </code>,当前颜色设置为<code> Color.white </code>。这是默认构造函数。
+     * 
      */
     public DefaultColorSelectionModel() {
         selectedColor = Color.white;
@@ -66,6 +77,11 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
      * <code>null</code> is undefined and may have unpredictable
      * results.
      *
+     * <p>
+     *  创建一个<code> DefaultColorSelectionModel </code>,当前颜色设置为<code> color </code>,它应该是非<code> null </code>。
+     * 请注意,将颜色设置为<code> null </code>是未定义的,并且可能具有不可预测的结果。
+     * 
+     * 
      * @param color the new <code>Color</code>
      */
     public DefaultColorSelectionModel(Color color) {
@@ -76,6 +92,10 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
      * Returns the selected <code>Color</code> which should be
      * non-<code>null</code>.
      *
+     * <p>
+     *  返回所选的<code> Color </code>,它应该是非<code> null </code>。
+     * 
+     * 
      * @return the selected <code>Color</code>
      */
     public Color getSelectedColor() {
@@ -91,6 +111,11 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
      * if the new color is the same as the current color,
      * no event is fired.
      *
+     * <p>
+     *  将所选颜色设置为<code> color </code>。请注意,将颜色设置为<code> null </code>是未定义的,并且可能具有不可预测的结果。
+     * 如果将当前颜色设置为新的非<code> null </code>颜色,则此方法触发状态更改事件;如果新颜色与当前颜色相同,则不会触发任何事件。
+     * 
+     * 
      * @param color the new <code>Color</code>
      */
     public void setSelectedColor(Color color) {
@@ -104,6 +129,10 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
     /**
      * Adds a <code>ChangeListener</code> to the model.
      *
+     * <p>
+     *  向模型中添加<code> ChangeListener </code>。
+     * 
+     * 
      * @param l the <code>ChangeListener</code> to be added
      */
     public void addChangeListener(ChangeListener l) {
@@ -112,6 +141,10 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
 
     /**
      * Removes a <code>ChangeListener</code> from the model.
+     * <p>
+     *  从模型中删除<code> ChangeListener </code>。
+     * 
+     * 
      * @param l the <code>ChangeListener</code> to be removed
      */
     public void removeChangeListener(ChangeListener l) {
@@ -123,6 +156,11 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
      * to this <code>DefaultColorSelectionModel</code> with
      * <code>addChangeListener</code>.
      *
+     * <p>
+     *  返回使用<code> addChangeListener </code>添加到此<code> DefaultColorSelectionModel </code>中的所有<code> ChangeLi
+     * stener </code>的数组。
+     * 
+     * 
      * @return all of the <code>ChangeListener</code>s added, or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -135,6 +173,8 @@ public class DefaultColorSelectionModel implements ColorSelectionModel, Serializ
      * Runs each <code>ChangeListener</code>'s
      * <code>stateChanged</code> method.
      *
+     * <p>
+     * 
      * <!-- @see #setRangeProperties    //bad link-->
      * @see EventListenerList
      */

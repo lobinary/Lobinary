@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -105,6 +106,59 @@ import java.nio.channels.spi.SelectorProvider;
  * support concurrent reading and writing, though at most one thread may be
  * reading and at most one thread may be writing at any given time.  </p>
  *
+ * <p>
+ *  面向数据报的套接字的可选通道。
+ * 
+ *  <p>通过调用此类的{@link #open open}方法之一创建数据报通道。不可能为任意的,预先存在的数据报套接字创建通道。新创建的数据报通道已打开但未连接。
+ * 不需要连接数据报信道,以便使用{@link #send send}和{@link #receive receive}方法。
+ * 可以通过调用其{@link #connect connect}方法来连接数据报信道,以避免作为每个发送和接收操作的一部分执行安全检查的开销。
+ * 为了使用{@link #read(java.nio.ByteBuffer)read}和{@link #write(java.nio.ByteBuffer)write}方法,必须连接数据报通道,因为这些方
+ * 法不接受或返回套接字地址。
+ * 可以通过调用其{@link #connect connect}方法来连接数据报信道,以避免作为每个发送和接收操作的一部分执行安全检查的开销。
+ * 
+ *  <p>连接后,数据报通道保持连接状态,直到断开或关闭。可以通过调用其{@link #isConnected isConnected}方法来确定数据报信道是否连接。
+ * 
+ *  <p>使用{@link #setOption(SocketOption,Object)setOption}方法配置套接字选项。到Internet协议套接字的数据报通道支持以下选项：
+ * <blockquote>
+ * <table border summary="Socket options">
+ * <tr>
+ *  <th>选项名称</th> <th>说明</th>
+ * </tr>
+ * <tr>
+ * <td> {@link java.net.StandardSocketOptions#SO_SNDBUF SO_SNDBUF} </td> <td>套接字发送缓冲区的大小</td>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_RCVBUF SO_RCVBUF} </td> <td>套接字接收缓冲区的大小</td>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_REUSEADDR SO_REUSEADDR} </td> <td>重新使用地址</td>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_BROADCAST SO_BROADCAST} </td> <td>允许传输广播数据报</td>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#IP_TOS IP_TOS} </td> <td> Internet协议(IP)头中的服务类型(ToS)八位字节</td>
+ * 。
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#IP_MULTICAST_IF IP_MULTICAST_IF} </td> <td>因特网协议(IP)多播数据报
+ * 的网络接口</td>。
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#IP_MULTICAST_TTL IP_MULTICAST_TTL} </td> <td>互联网协议(IP)多播数
+ * 据报的<em>生存时间</em> </td>。
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#IP_MULTICAST_LOOP IP_MULTICAST_LOOP} </td> <td>因特网协议(IP)多
+ * 播数据报的环回</td>。
+ * </tr>
+ * </table>
+ * </blockquote>
+ *  还可以支持附加(实现特定)选项。
+ * 
+ *  <p>数据报通道可安全地用于多个并发线程。它们支持并发读取和写入,但是最多一个线程可能正在读取,并且最多一个线程可能在任何给定时间写入。 </p>
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -118,6 +172,10 @@ public abstract class DatagramChannel
     /**
      * Initializes a new instance of this class.
      *
+     * <p>
+     *  初始化此类的新实例。
+     * 
+     * 
      * @param  provider
      *         The provider that created this channel
      */
@@ -140,6 +198,17 @@ public abstract class DatagramChannel
      * selected when opening a datagram channel, and should be used to open
      * datagram channels that are intended for Internet Protocol multicasting.
      *
+     * <p>
+     *  打开数据报通道。
+     * 
+     * <p>新频道是通过调用系统级默认{@link java.nio.channels.spi.SelectorProvider}对象的{@link java.nio.channels.spi.SelectorProvider#openDatagramChannel()openDatagramChannel}
+     * 方法创建的。
+     * 通道不会连接。
+     * 
+     *  <p>通道套接字的{@link ProtocolFamily ProtocolFamily}是平台(可能是配置)相关的,因此未指定。
+     *  {@link #open(ProtocolFamily)open}允许在打开数据报通道时选择协议系列,并且应该用于打开用于Internet协议多播的数据报通道。
+     * 
+     * 
      * @return  A new datagram channel
      *
      * @throws  IOException
@@ -163,6 +232,16 @@ public abstract class DatagramChannel
      * java.nio.channels.spi.SelectorProvider} object.  The channel will not be
      * connected.
      *
+     * <p>
+     *  打开数据报通道。
+     * 
+     *  <p> {@code family}参数用于指定{@link ProtocolFamily}。如果数据报信道要用于IP多播,则这应该对应于该信道将加入的多播组的地址类型。
+     * 
+     *  <p>新频道是通过调用系统级默认的{@link java.nio.channels.spi.SelectorProvider#openDatagramChannel(ProtocolFamily)openDatagramChannel}
+     * 方法创建的{@link java.nio.channels.spi.SelectorProvider}目的。
+     * 通道不会连接。
+     * 
+     * 
      * @param   family
      *          The protocol family
      *
@@ -190,6 +269,14 @@ public abstract class DatagramChannel
      * returns <tt>(</tt>{@link SelectionKey#OP_READ} <tt>|</tt>&nbsp;{@link
      * SelectionKey#OP_WRITE}<tt>)</tt>.  </p>
      *
+     * <p>
+     *  返回标识此通道支持的操作的操作集。
+     * 
+     *  <p>数据报通道支持读写,因此此方法返回<tt>(</tt> {@ link SelectionKey#OP_READ} <tt> | </tt>&nbsp; {@ link SelectionKey#OP_WRITE}
+     *  <tt> </tt>。
+     *  </p>。
+     * 
+     * 
      * @return  The valid-operation set
      */
     public final int validOps() {
@@ -201,6 +288,8 @@ public abstract class DatagramChannel
     // -- Socket-specific operations --
 
     /**
+    /* <p>
+    /* 
      * @throws  AlreadyBoundException               {@inheritDoc}
      * @throws  UnsupportedAddressTypeException     {@inheritDoc}
      * @throws  ClosedChannelException              {@inheritDoc}
@@ -216,6 +305,8 @@ public abstract class DatagramChannel
         throws IOException;
 
     /**
+    /* <p>
+    /* 
      * @throws  UnsupportedOperationException           {@inheritDoc}
      * @throws  IllegalArgumentException                {@inheritDoc}
      * @throws  ClosedChannelException                  {@inheritDoc}
@@ -232,6 +323,12 @@ public abstract class DatagramChannel
      * <p> The returned object will not declare any public methods that are not
      * declared in the {@link java.net.DatagramSocket} class.  </p>
      *
+     * <p>
+     *  检索与此通道关联的数据报套接字。
+     * 
+     * <p>返回的对象不会声明任何未在{@link java.net.DatagramSocket}类中声明的公共方法。 </p>
+     * 
+     * 
      * @return  A datagram socket associated with this channel
      */
     public abstract DatagramSocket socket();
@@ -239,6 +336,10 @@ public abstract class DatagramChannel
     /**
      * Tells whether or not this channel's socket is connected.
      *
+     * <p>
+     *  告诉这个通道的插座是否连接。
+     * 
+     * 
      * @return  {@code true} if, and only if, this channel's socket
      *          is {@link #isOpen open} and connected
      */
@@ -269,6 +370,20 @@ public abstract class DatagramChannel
      * automatically, as if invoking the {@link #bind bind} method with a
      * parameter of {@code null}. </p>
      *
+     * <p>
+     *  连接此通道的插座。
+     * 
+     *  <p>通道的套接字配置为只接收来自给定远程对等体地址的数据报,并将数据报发送到给定远程对等体地址。一旦连接,可以不从任何其他地址接收或发送数据报。数据报套接字保持连接,直到它明确断开或直到它被关闭。
+     * 
+     *  <p>此方法执行与{@link java.net.DatagramSocket}类的{@link java.net.DatagramSocket#connect connect}方法完全相同的安全检查
+     * 。
+     * 也就是说,如果已经安装了安全管理器,那么此方法将验证其{@link java.lang.SecurityManager#checkAccept checkAccept}和{@link java.lang.SecurityManager#checkConnect checkConnect}
+     * 方法是否允许接收和发送数据报分别到给定的远程地址。
+     * 
+     *  <p>此方法可能随时被调用。它不会对在调用时已经在进行的读取或写入操作产生任何影响。
+     * 如果这个通道的套接字没有绑定,那么这个方法将首先导致套接字绑定到一个自动分配的地址,就好像使用参数{@code null}调用{@link #bind bind}方法。 </p>。
+     * 
+     * 
      * @param  remote
      *         The remote address to which this channel is to be connected
      *
@@ -311,6 +426,16 @@ public abstract class DatagramChannel
      * <p> If this channel's socket is not connected, or if the channel is
      * closed, then invoking this method has no effect.  </p>
      *
+     * <p>
+     *  断开此通道的插座。
+     * 
+     * <p>通道的套接字配置为只要安全管理器允许,就可以从任何远程地址接收数据报,并将数据报发送到任何远程地址。
+     * 
+     *  <p>此方法可能随时被调用。它不会对在调用时已经在进行的读取或写入操作产生任何影响。
+     * 
+     *  <p>如果此频道的套接字未连接,或者频道已关闭,则调用此方法无效。 </p>
+     * 
+     * 
      * @return  This datagram channel
      *
      * @throws  IOException
@@ -321,6 +446,10 @@ public abstract class DatagramChannel
     /**
      * Returns the remote address to which this channel's socket is connected.
      *
+     * <p>
+     *  返回此通道的套接字所连接的远程地址。
+     * 
+     * 
      * @return  The remote address; {@code null} if the channel's socket is not
      *          connected
      *
@@ -367,6 +496,24 @@ public abstract class DatagramChannel
      * automatically, as if invoking the {@link #bind bind} method with a
      * parameter of {@code null}. </p>
      *
+     * <p>
+     *  通过此通道接收数据报。
+     * 
+     *  <p>如果数据报立即可用,或者此通道处于阻塞模式,并且最终变为可用,则将数据报复制到给定的字节缓冲区中,并返回其源地址。
+     * 如果此通道处于非阻塞模式,并且数据报不立即可用,则此方法立即返回<tt> null </tt>。
+     * 
+     *  <p>数据报从其当前位置开始传送到给定的字节缓冲区,如同通过常规的{@link ReadableByteChannel#read(java.nio.ByteBuffer)read}操作。
+     * 如果在缓冲器中剩余的字节少于保持数据报所需的字节,则数据报的剩余部分被静默地丢弃。
+     * 
+     * <p>此方法执行与{@link java.net.DatagramSocket}类的{@link java.net.DatagramSocket#receive receive}方法完全相同的安全检查。
+     * 也就是说,如果套接字未连接到特定的远程地址,并且安装了安全管理器,那么对于接收的每个数据报,此方法将验证源地址和端口号是否被安全管理器的{@link java.lang.SecurityManager #checkAccept checkAccept}
+     * 方法。
+     * 可以通过首先通过{@link #connect connect}方法连接套接字来避免此安全检查的开销。
+     * 
+     *  <p>此方法可能随时被调用。如果另一个线程已经在该通道上启动了读取操作,则该方法的调用将阻塞,直到第一操作完成。
+     * 如果这个通道的套接字没有绑定,那么这个方法将首先导致套接字绑定到一个自动分配的地址,就好像使用参数{@code null}调用{@link #bind bind}方法。 </p>。
+     * 
+     * 
      * @param  dst
      *         The buffer into which the datagram is to be transferred
      *
@@ -427,6 +574,23 @@ public abstract class DatagramChannel
      * automatically, as if by invoking the {@link #bind bind} method with a
      * parameter of {@code null}. </p>
      *
+     * <p>
+     *  通过此通道发送数据报。
+     * 
+     *  <p>如果此通道处于非阻塞模式,并且在底层输出缓冲区中有足够的空间,或者如果此通道处于阻塞模式并且有足够的空间可用,则给定缓冲区中的剩余字节将作为单个数据报到给定的目标地址。
+     * 
+     * <p>数据报从字节缓冲区传送,就像是通过常规的{@link WritableByteChannel#write(java.nio.ByteBuffer)write}操作。
+     * 
+     *  <p>此方法执行与{@link java.net.DatagramSocket}类的{@link java.net.DatagramSocket#send send}方法完全相同的安全检查。
+     * 也就是说,如果套接字没有连接到特定的远程地址,并且已经安装了安全管理器,那么对于发送的每个数据报,此方法将验证目标地址和端口号是否被安全管理器的{@link java.lang.SecurityManager #checkConnect checkConnect}
+     * 方法。
+     *  <p>此方法执行与{@link java.net.DatagramSocket}类的{@link java.net.DatagramSocket#send send}方法完全相同的安全检查。
+     * 可以通过首先通过{@link #connect connect}方法连接套接字来避免此安全检查的开销。
+     * 
+     *  <p>此方法可能随时被调用。如果另一个线程已经在该通道上启动了写操作,则该方法的调用将被阻塞,直到第一操作完成。
+     * 如果这个通道的套接字没有绑定,那么这个方法将首先导致套接字被绑定到一个自动分配的地址,就像调用{@link #bind bind}方法使用参数{@code null}。 </p>。
+     * 
+     * 
      * @param  src
      *         The buffer containing the datagram to be sent
      *
@@ -476,6 +640,13 @@ public abstract class DatagramChannel
      * this method behaves exactly as specified in the {@link
      * ReadableByteChannel} interface.  </p>
      *
+     * <p>
+     *  从此通道读取数据报。
+     * 
+     * <p>此方法只能在此通道的套接字连接时调用,并且只接受来自套接字对等体的数据报。如果数据报中有更多的字节而不是保留在给定的缓冲器中,则数据报的剩余部分被静默地丢弃。
+     * 否则,此方法的行为与{@link ReadableByteChannel}接口中指定的完全相同。 </p>。
+     * 
+     * 
      * @throws  NotYetConnectedException
      *          If this channel's socket is not connected
      */
@@ -491,6 +662,13 @@ public abstract class DatagramChannel
      * this method behaves exactly as specified in the {@link
      * ScatteringByteChannel} interface.  </p>
      *
+     * <p>
+     *  从此通道读取数据报。
+     * 
+     *  <p>此方法只能在此通道的套接字连接时调用,并且只接受来自套接字对等体的数据报。如果数据报中有更多字节而不是保留在给定的缓冲器中,则数据报的剩余部分被静默地丢弃。
+     * 否则,此方法的行为与{@link ScatteringByteChannel}接口中指定的完全相同。 </p>。
+     * 
+     * 
      * @throws  NotYetConnectedException
      *          If this channel's socket is not connected
      */
@@ -507,6 +685,13 @@ public abstract class DatagramChannel
      * this method behaves exactly as specified in the {@link
      * ScatteringByteChannel} interface.  </p>
      *
+     * <p>
+     *  从此通道读取数据报。
+     * 
+     *  <p>此方法只能在此通道的套接字连接时调用,并且只接受来自套接字对等体的数据报。如果数据报中有更多字节而不是保留在给定的缓冲器中,则数据报的剩余部分被静默地丢弃。
+     * 否则,此方法的行为与{@link ScatteringByteChannel}接口中指定的完全相同。 </p>。
+     * 
+     * 
      * @throws  NotYetConnectedException
      *          If this channel's socket is not connected
      */
@@ -522,6 +707,13 @@ public abstract class DatagramChannel
      * peer.  Otherwise it behaves exactly as specified in the {@link
      * WritableByteChannel} interface.  </p>
      *
+     * <p>
+     *  将数据报写入此通道。
+     * 
+     *  <p>此方法只能在此通道的套接字连接时调用,在这种情况下,它会将数据报直接发送到套接字的对等端。否则,它的行为与{@link WritableByteChannel}接口中指定的完全相同。
+     *  </p>。
+     * 
+     * 
      * @throws  NotYetConnectedException
      *          If this channel's socket is not connected
      */
@@ -535,6 +727,13 @@ public abstract class DatagramChannel
      * peer.  Otherwise it behaves exactly as specified in the {@link
      * GatheringByteChannel} interface.  </p>
      *
+     * <p>
+     *  将数据报写入此通道。
+     * 
+     * <p>此方法只能在此通道的套接字连接时调用,在这种情况下,它会将数据报直接发送到套接字的对等端。否则,它的行为与{@link GatheringByteChannel}接口中指定的完全相同。
+     *  </p>。
+     * 
+     * 
      * @return   The number of bytes sent, which will be either the number
      *           of bytes that were remaining in the source buffer when this
      *           method was invoked or, if this channel is non-blocking, may be
@@ -555,6 +754,13 @@ public abstract class DatagramChannel
      * peer.  Otherwise it behaves exactly as specified in the {@link
      * GatheringByteChannel} interface.  </p>
      *
+     * <p>
+     *  将数据报写入此通道。
+     * 
+     *  <p>此方法只能在此通道的套接字连接时调用,在这种情况下,它会将数据报直接发送到套接字的对等端。否则,它的行为与{@link GatheringByteChannel}接口中指定的完全相同。
+     *  </p>。
+     * 
+     * 
      * @return   The number of bytes sent, which will be either the number
      *           of bytes that were remaining in the source buffer when this
      *           method was invoked or, if this channel is non-blocking, may be
@@ -578,6 +784,12 @@ public abstract class DatagramChannel
      * {@link java.net.InetAddress#getLoopbackAddress loopback} address and the
      * local port of the channel's socket is returned.
      *
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     *  如果存在安全管理器集,则会使用本地地址和{@code -1}作为其参数来调用其{@code checkConnect}方法,以查看是否允许该操作。
+     * 如果不允许该操作,则返回表示{@link java.net.InetAddress#getLoopbackAddress loopback}地址和通道套接字的本地端口的{@code SocketAddress}
+     * 
      * @return  The {@code SocketAddress} that the socket is bound to, or the
      *          {@code SocketAddress} representing the loopback address if
      *          denied by the security manager, or {@code null} if the

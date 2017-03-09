@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -160,6 +161,9 @@ public class GIOPVersion {
     /**
      * This chooses the appropriate GIOP version.
      *
+     * <p>
+     *  这选择适当的GIOP版本。
+     * 
      * @return the GIOP version 13.00 if Java serialization is enabled, or
      *         smallest(profGIOPVersion, orbGIOPVersion)
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ import java.util.*;
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  监控管理器将与ORB具有1对1关联。这允许访问顶级监视对象,使用它可以添加和遍历更多的监视对象和属性。
+ * </p>
+ * <p>
+ * 
+ * 
  * @author Hemanth Puttaswamy
  * </p>
  */
@@ -52,6 +60,13 @@ public interface MonitoringManager extends Closeable {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  获取根监视对象,其包含暴露各种模块的各种可监视属性的监视对象的层次结构。
+ * </p>
+ * <p>
+ * 
+ * 
  * @param MonitoredObject ...
  * </p>
  */
@@ -63,6 +78,7 @@ public interface MonitoringManager extends Closeable {
  * MonitoredObjects and it's Monitored Attributes.
  * </p>
  *
+ * <p>
  */
     public void clearState();
 

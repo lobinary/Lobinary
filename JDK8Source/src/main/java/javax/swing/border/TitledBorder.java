@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,18 @@ import javax.swing.plaf.basic.BasicHTML;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  一个类,它实现一个任意边框,在指定位置添加一个字符串标题和对齐。
+ * <p>
+ *  如果未在构造函数中指定border,font或color属性值,或者通过调用适当的set方法,那么将使用默认值表中的以下属性名称,通过当前外观定义属性值：
+ * <ul>
+ *  <li>"TitledBorder.border" <li>"TitledBorder.font" <li>"TitledBorder.titleColor"
+ * </ul>
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  * @author Amy Fowler
  */
@@ -81,6 +94,9 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Use the default vertical orientation for the title text.
+     * <p>
+     *  使用标题文本的默认垂直方向。
+     * 
      */
     static public final int     DEFAULT_POSITION        = 0;
     /** Position the title above the border's top line. */
@@ -98,6 +114,9 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Use the default justification for the title text.
+     * <p>
+     *  对标题文本使用默认对齐方式。
+     * 
      */
     static public final int     DEFAULT_JUSTIFICATION   = 0;
     /** Position title text at the left side of the border line. */
@@ -109,11 +128,17 @@ public class TitledBorder extends AbstractBorder
     /** Position title text at the left side of the border line
      *  for left to right orientation, at the right side of the
      *  border line for right to left orientation.
+     * <p>
+     *  从左到右的方向,在边界线的右边从右到左的方向。
+     * 
      */
     static public final int     LEADING = 4;
     /** Position title text at the right side of the border line
      *  for left to right orientation, at the left side of the
      *  border line for right to left orientation.
+     * <p>
+     *  对于从左到右的方向,在边界线的左侧从右到左方向。
+     * 
      */
     static public final int     TRAILING = 5;
 
@@ -129,6 +154,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Creates a TitledBorder instance.
      *
+     * <p>
+     *  创建TitledBorder实例。
+     * 
+     * 
      * @param title  the title the border should display
      */
     public TitledBorder(String title) {
@@ -139,6 +168,10 @@ public class TitledBorder extends AbstractBorder
      * Creates a TitledBorder instance with the specified border
      * and an empty title.
      *
+     * <p>
+     *  创建具有指定边框和空标题的TitledBorder实例。
+     * 
+     * 
      * @param border  the border
      */
     public TitledBorder(Border border) {
@@ -149,6 +182,10 @@ public class TitledBorder extends AbstractBorder
      * Creates a TitledBorder instance with the specified border
      * and title.
      *
+     * <p>
+     * 创建具有指定边框和标题的TitledBorder实例。
+     * 
+     * 
      * @param border  the border
      * @param title  the title the border should display
      */
@@ -160,6 +197,10 @@ public class TitledBorder extends AbstractBorder
      * Creates a TitledBorder instance with the specified border,
      * title, title-justification, and title-position.
      *
+     * <p>
+     *  创建具有指定边框,标题,标题对齐和标题位置的TitledBorder实例。
+     * 
+     * 
      * @param border  the border
      * @param title  the title the border should display
      * @param titleJustification the justification for the title
@@ -177,6 +218,10 @@ public class TitledBorder extends AbstractBorder
      * Creates a TitledBorder instance with the specified border,
      * title, title-justification, title-position, and title-font.
      *
+     * <p>
+     *  创建具有指定边框,标题,标题对齐,标题位置和标题字体的TitledBorder实例。
+     * 
+     * 
      * @param border  the border
      * @param title  the title the border should display
      * @param titleJustification the justification for the title
@@ -197,6 +242,10 @@ public class TitledBorder extends AbstractBorder
      * title, title-justification, title-position, title-font, and
      * title-color.
      *
+     * <p>
+     *  创建具有指定边框,标题,标题对齐,标题位置,标题字体和标题颜色的TitledBorder实例。
+     * 
+     * 
      * @param border  the border
      * @param title  the title the border should display
      * @param titleJustification the justification for the title
@@ -227,6 +276,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Paints the border for the specified component with the
      * specified position and size.
+     * <p>
+     *  以指定的位置和大小绘制指定组件的边框。
+     * 
+     * 
      * @param c the component for which this border is being painted
      * @param g the paint graphics
      * @param x the x position of the painted border
@@ -342,6 +395,10 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Reinitialize the insets parameter with this Border's current Insets.
+     * <p>
+     *  使用此Border的当前Insets重新初始化insets参数。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
      */
@@ -391,6 +448,9 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Returns whether or not the border is opaque.
+     * <p>
+     *  返回边框是否不透明。
+     * 
      */
     public boolean isBorderOpaque() {
         return false;
@@ -399,6 +459,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Returns the title of the titled border.
      *
+     * <p>
+     *  返回标题边框的标题。
+     * 
+     * 
      * @return the title of the titled border
      */
     public String getTitle() {
@@ -408,6 +472,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Returns the border of the titled border.
      *
+     * <p>
+     *  返回标题边框的边框。
+     * 
+     * 
      * @return the border of the titled border
      */
     public Border getBorder() {
@@ -419,6 +487,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Returns the title-position of the titled border.
      *
+     * <p>
+     *  返回标题边框的标题位置。
+     * 
+     * 
      * @return the title-position of the titled border
      */
     public int getTitlePosition() {
@@ -428,6 +500,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Returns the title-justification of the titled border.
      *
+     * <p>
+     *  返回标题边框的标题对齐。
+     * 
+     * 
      * @return the title-justification of the titled border
      */
     public int getTitleJustification() {
@@ -437,6 +513,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Returns the title-font of the titled border.
      *
+     * <p>
+     *  返回标题边框的标题字体。
+     * 
+     * 
      * @return the title-font of the titled border
      */
     public Font getTitleFont() {
@@ -446,6 +526,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Returns the title-color of the titled border.
      *
+     * <p>
+     *  返回标题边框的标题颜色。
+     * 
+     * 
      * @return the title-color of the titled border
      */
     public Color getTitleColor() {
@@ -457,6 +541,10 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Sets the title of the titled border.
+     * <p>
+     *  设置标题边框的标题。
+     * 
+     * 
      * @param title  the title for the border
      */
     public void setTitle(String title) {
@@ -465,6 +553,10 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Sets the border of the titled border.
+     * <p>
+     *  设置标题边框的边框。
+     * 
+     * 
      * @param border the border
      */
     public void setBorder(Border border) {
@@ -473,6 +565,10 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Sets the title-position of the titled border.
+     * <p>
+     *  设置标题边框的标题位置。
+     * 
+     * 
      * @param titlePosition the position for the border
      */
     public void setTitlePosition(int titlePosition) {
@@ -494,6 +590,10 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Sets the title-justification of the titled border.
+     * <p>
+     *  设置标题边框的标题对齐方式。
+     * 
+     * 
      * @param titleJustification the justification for the border
      */
     public void setTitleJustification(int titleJustification) {
@@ -514,6 +614,10 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Sets the title-font of the titled border.
+     * <p>
+     *  设置标题边框的标题字体。
+     * 
+     * 
      * @param titleFont the font for the border title
      */
     public void setTitleFont(Font titleFont) {
@@ -522,6 +626,10 @@ public class TitledBorder extends AbstractBorder
 
     /**
      * Sets the title-color of the titled border.
+     * <p>
+     *  设置标题边框的标题颜色。
+     * 
+     * 
      * @param titleColor the color for the border title
      */
     public void setTitleColor(Color titleColor) {
@@ -531,6 +639,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Returns the minimum dimensions this border requires
      * in order to fully display the border and title.
+     * <p>
+     *  返回此边框所需的最小尺寸,以便完全显示边框和标题。
+     * 
+     * 
      * @param c the component where this border will be drawn
      * @return the {@code Dimension} object
      */
@@ -557,6 +669,10 @@ public class TitledBorder extends AbstractBorder
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -609,6 +725,9 @@ public class TitledBorder extends AbstractBorder
      * Returns an enum indicating how the baseline of the border
      * changes as the size changes.
      *
+     * <p>
+     *  返回指示边框基线如何随大小更改而变化的枚举。
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,25 @@ import java.util.function.Supplier;
  * thread-local instances are subject to garbage collection (unless other
  * references to these copies exist).
  *
+ * <p>
+ *  这个类提供线程局部变量。这些变量与它们的正常对象不同,每个访问它的线程(通过其{@code get}或{@code set}方法)都有自己的,独立初始化的变量副本。
+ *  {@code ThreadLocal}实例通常是希望将状态与线程(例如,用户ID或事务ID)相关联的类中的私有静态字段。
+ * 
+ *  <p>例如,下面的类生成每个线程本地的唯一标识符。线程的id是在第一次调用{@code ThreadId.get()}时分配的,并且在后续调用中保持不变。
+ * <pre>
+ *  import java.util.concurrent.atomic.AtomicInteger;
+ * 
+ *  public class ThreadId {//包含要分配的下一个线程ID的原子整数private static final AtomicInteger nextId = new AtomicInteger(0);。
+ * 
+ *  //线程局部变量包含每个线程的ID private static final ThreadLocal&lt; Integer&gt; threadId = new ThreadLocal&lt; In
+ * teger&gt;(){@覆盖protected Integer initialValue(){return nextId.getAndIncrement(); }};。
+ * 
+ *  //返回当前线程的唯一ID,必要时分配它public static int get(){return threadId.get(); }}
+ * </pre>
+ * <p>每个线程都持有对线程局部变量的副本的隐式引用,只要线程是活的并且{@code ThreadLocal}实例是可访问的;在线程离开后,线程本地实例的所有副本都将进行垃圾回收(除非存在对这些副本的其他
+ * 引用)。
+ * 
+ * 
  * @author  Josh Bloch and Doug Lea
  * @since   1.2
  */
@@ -81,12 +101,20 @@ public class ThreadLocal<T> {
      * in the common case where consecutively constructed ThreadLocals
      * are used by the same threads, while remaining well-behaved in
      * less common cases.
+     * <p>
+     *  ThreadLocals依赖于附加到每个线程的每线程线性探测哈希映射(Thread.threadLocals和inheritableThreadLocals)。
+     *  ThreadLocal对象作为键,通过threadLocalHashCode搜索。
+     * 这是一个自定义哈希码(仅在ThreadLocalMaps中有用),在常见情况下消除冲突,其中连续构造的ThreadLocals由相同的线程使用,而在较不常见的情况下保持良好的行为。
+     * 
      */
     private final int threadLocalHashCode = nextHashCode();
 
     /**
      * The next hash code to be given out. Updated atomically. Starts at
      * zero.
+     * <p>
+     *  下一个哈希码要给出。原子式更新。从零开始。
+     * 
      */
     private static AtomicInteger nextHashCode =
         new AtomicInteger();
@@ -95,11 +123,17 @@ public class ThreadLocal<T> {
      * The difference between successively generated hash codes - turns
      * implicit sequential thread-local IDs into near-optimally spread
      * multiplicative hash values for power-of-two-sized tables.
+     * <p>
+     *  连续生成的散列码之间的差异 - 将隐式顺序线程本地ID转换为二次幂表的近似最优扩展的乘法散列值。
+     * 
      */
     private static final int HASH_INCREMENT = 0x61c88647;
 
     /**
      * Returns the next hash code.
+     * <p>
+     *  返回下一个散列码。
+     * 
      */
     private static int nextHashCode() {
         return nextHashCode.getAndAdd(HASH_INCREMENT);
@@ -121,6 +155,15 @@ public class ThreadLocal<T> {
      * subclassed, and this method overridden.  Typically, an
      * anonymous inner class will be used.
      *
+     * <p>
+     * 返回此线程局部变量的当前线程的"初始值"。
+     * 该方法将在线程首次使用{@link #get}方法访问变量时调用,除非线程以前调用了{@link #set}方法,在这种情况下,{@code initialValue}方法不会调用线程。
+     * 通常,每个线程最多调用此方法一次,但是在后续调用{@link #remove}和{@link #get}的情况下可以再次调用此方法。
+     * 
+     *  <p>这个实现只返回{@code null};如果程序员希望线程局部变量具有除{@code null}之外的初始值,则{@code ThreadLocal}必须被子类化,并且该方法被覆盖。
+     * 通常,将使用匿名内部类。
+     * 
+     * 
      * @return the initial value for this thread-local
      */
     protected T initialValue() {
@@ -131,6 +174,10 @@ public class ThreadLocal<T> {
      * Creates a thread local variable. The initial value of the variable is
      * determined by invoking the {@code get} method on the {@code Supplier}.
      *
+     * <p>
+     *  创建线程局部变量。变量的初始值通过调用{@code Supplier}上的{@code get}方法来确定。
+     * 
+     * 
      * @param <S> the type of the thread local's value
      * @param supplier the supplier to be used to determine the initial value
      * @return a new thread local variable
@@ -143,6 +190,10 @@ public class ThreadLocal<T> {
 
     /**
      * Creates a thread local variable.
+     * <p>
+     *  创建线程局部变量。
+     * 
+     * 
      * @see #withInitial(java.util.function.Supplier)
      */
     public ThreadLocal() {
@@ -154,6 +205,10 @@ public class ThreadLocal<T> {
      * current thread, it is first initialized to the value returned
      * by an invocation of the {@link #initialValue} method.
      *
+     * <p>
+     *  返回此线程局部变量的当前线程副本中的值。如果变量对当前线程没有值,则首先将其初始化为调用{@link #initialValue}方法返回的值。
+     * 
+     * 
      * @return the current thread's value of this thread-local
      */
     public T get() {
@@ -174,6 +229,10 @@ public class ThreadLocal<T> {
      * Variant of set() to establish initialValue. Used instead
      * of set() in case user has overridden the set() method.
      *
+     * <p>
+     *  set()的变体来建立initialValue。用于代替set(),以防用户覆​​盖了set()方法。
+     * 
+     * 
      * @return the initial value
      */
     private T setInitialValue() {
@@ -193,6 +252,10 @@ public class ThreadLocal<T> {
      * override this method, relying solely on the {@link #initialValue}
      * method to set the values of thread-locals.
      *
+     * <p>
+     * 将当前线程的线程局部变量的副本设置为指定的值。大多数子类将不需要重写此方法,仅仅依靠{@link #initialValue}方法来设置thread-locals的值。
+     * 
+     * 
      * @param value the value to be stored in the current thread's copy of
      *        this thread-local.
      */
@@ -214,6 +277,13 @@ public class ThreadLocal<T> {
      * in the interim.  This may result in multiple invocations of the
      * {@code initialValue} method in the current thread.
      *
+     * <p>
+     *  删除此线程局部变量的当前线程的值。
+     * 如果这个线程局部变量随后是当前线程的{@linkplain #get read},它的值将通过调用其{@link #initialValue}方法重新初始化,除非它的值为{@linkplain #set set}
+     * 线程在临时。
+     *  删除此线程局部变量的当前线程的值。这可能导致当前线程中的{@code initialValue}方法的多次调用。
+     * 
+     * 
      * @since 1.5
      */
      public void remove() {
@@ -226,6 +296,10 @@ public class ThreadLocal<T> {
      * Get the map associated with a ThreadLocal. Overridden in
      * InheritableThreadLocal.
      *
+     * <p>
+     *  获取与ThreadLocal相关联的地图。在InheritableThreadLocal中重写。
+     * 
+     * 
      * @param  t the current thread
      * @return the map
      */
@@ -237,6 +311,10 @@ public class ThreadLocal<T> {
      * Create the map associated with a ThreadLocal. Overridden in
      * InheritableThreadLocal.
      *
+     * <p>
+     *  创建与ThreadLocal关联的地图。在InheritableThreadLocal中重写。
+     * 
+     * 
      * @param t the current thread
      * @param firstValue value for the initial entry of the map
      */
@@ -248,6 +326,10 @@ public class ThreadLocal<T> {
      * Factory method to create map of inherited thread locals.
      * Designed to be called only from Thread constructor.
      *
+     * <p>
+     *  工厂方法创建继承的线程局部变量的映射。设计为仅从Thread构造函数调用。
+     * 
+     * 
      * @param  parentMap the map associated with parent thread
      * @return a map containing the parent's inheritable bindings
      */
@@ -262,6 +344,11 @@ public class ThreadLocal<T> {
      * needing to subclass the map class in InheritableThreadLocal.
      * This technique is preferable to the alternative of embedding
      * instanceof tests in methods.
+     * <p>
+     *  方法childValue在子类InheritableThreadLocal中可见地定义,但在此处为了提供createInheritedMap工厂方法而在内部定义,而不需要在InheritableThr
+     * eadLocal中子类化地图类。
+     * 这种技术优于在方法中嵌入instanceof测试的替代方法。
+     * 
      */
     T childValue(T parentValue) {
         throw new UnsupportedOperationException();
@@ -270,6 +357,9 @@ public class ThreadLocal<T> {
     /**
      * An extension of ThreadLocal that obtains its initial value from
      * the specified {@code Supplier}.
+     * <p>
+     *  ThreadLocal的扩展,从指定的{@code Supplier}获取其初始值。
+     * 
      */
     static final class SuppliedThreadLocal<T> extends ThreadLocal<T> {
 
@@ -294,6 +384,10 @@ public class ThreadLocal<T> {
      * WeakReferences for keys. However, since reference queues are not
      * used, stale entries are guaranteed to be removed only when
      * the table starts running out of space.
+     * <p>
+     * ThreadLocalMap是一个自定义的哈希映射,仅适用于维护线程本地值。没有在ThreadLocal类外部导出任何操作。类是包私有的,允许在类Thread中声明字段。
+     * 为了帮助处理非常大和长期使用,哈希表条目使用WeakReferences的密钥。但是,由于不使用引用队列,因此只有当表开始耗尽空间时,才保证删除过时的条目。
+     * 
      */
     static class ThreadLocalMap {
 
@@ -304,6 +398,10 @@ public class ThreadLocal<T> {
          * == null) mean that the key is no longer referenced, so the
          * entry can be expunged from table.  Such entries are referred to
          * as "stale entries" in the code that follows.
+         * <p>
+         *  此散列映射中的条目扩展了WeakReference,使用其主ref字段作为键(始终是ThreadLocal对象)。
+         * 注意,null键(即entry.get()== null)意味着该键不再被引用,因此该条目可以从表中被清除。这些条目在随后的代码中被称为"陈旧条目"。
+         * 
          */
         static class Entry extends WeakReference<ThreadLocal<?>> {
             /** The value associated with this ThreadLocal. */
@@ -317,27 +415,42 @@ public class ThreadLocal<T> {
 
         /**
          * The initial capacity -- MUST be a power of two.
+         * <p>
+         *  初始容量 - 必须是二的幂。
+         * 
          */
         private static final int INITIAL_CAPACITY = 16;
 
         /**
          * The table, resized as necessary.
          * table.length MUST always be a power of two.
+         * <p>
+         *  该表,必要时调整大小。 table.length必须总是2的幂。
+         * 
          */
         private Entry[] table;
 
         /**
          * The number of entries in the table.
+         * <p>
+         *  表中的条目数。
+         * 
          */
         private int size = 0;
 
         /**
          * The next size value at which to resize.
+         * <p>
+         *  要调整大小的下一个大小值。
+         * 
          */
         private int threshold; // Default to 0
 
         /**
          * Set the resize threshold to maintain at worst a 2/3 load factor.
+         * <p>
+         *  设置调整大小阈值以保持最差2/3的负载系数。
+         * 
          */
         private void setThreshold(int len) {
             threshold = len * 2 / 3;
@@ -345,6 +458,9 @@ public class ThreadLocal<T> {
 
         /**
          * Increment i modulo len.
+         * <p>
+         *  增量i模数len。
+         * 
          */
         private static int nextIndex(int i, int len) {
             return ((i + 1 < len) ? i + 1 : 0);
@@ -352,6 +468,9 @@ public class ThreadLocal<T> {
 
         /**
          * Decrement i modulo len.
+         * <p>
+         *  递减i模数len。
+         * 
          */
         private static int prevIndex(int i, int len) {
             return ((i - 1 >= 0) ? i - 1 : len - 1);
@@ -361,6 +480,9 @@ public class ThreadLocal<T> {
          * Construct a new map initially containing (firstKey, firstValue).
          * ThreadLocalMaps are constructed lazily, so we only create
          * one when we have at least one entry to put in it.
+         * <p>
+         *  构造一个最初包含(firstKey,firstValue)的新映射。 ThreadLocalMaps是懒惰​​的,所以我们只创建一个,当我们至少有一个条目放入。
+         * 
          */
         ThreadLocalMap(ThreadLocal<?> firstKey, Object firstValue) {
             table = new Entry[INITIAL_CAPACITY];
@@ -374,6 +496,10 @@ public class ThreadLocal<T> {
          * Construct a new map including all Inheritable ThreadLocals
          * from given parent map. Called only by createInheritedMap.
          *
+         * <p>
+         *  从给定的父映射构造包括所有可继承的ThreadLocals的新映射。仅由createInheritedMap调用。
+         * 
+         * 
          * @param parentMap the map associated with parent thread.
          */
         private ThreadLocalMap(ThreadLocalMap parentMap) {
@@ -407,6 +533,10 @@ public class ThreadLocal<T> {
          * designed to maximize performance for direct hits, in part
          * by making this method readily inlinable.
          *
+         * <p>
+         * 获取与键相关联的条目。此方法本身仅处理快速路径：直接命中现有键。否则它将继承getEntryAfterMiss。这是为了使直接命中的性能最大化,部分原因是使这种方法容易嵌入。
+         * 
+         * 
          * @param  key the thread local object
          * @return the entry associated with key, or null if no such
          */
@@ -423,6 +553,10 @@ public class ThreadLocal<T> {
          * Version of getEntry method for use when key is not found in
          * its direct hash slot.
          *
+         * <p>
+         *  getEntry方法的版本,用于在其直接哈希槽中找不到键。
+         * 
+         * 
          * @param  key the thread local object
          * @param  i the table index for key's hash code
          * @param  e the entry at table[i]
@@ -448,6 +582,10 @@ public class ThreadLocal<T> {
         /**
          * Set the value associated with key.
          *
+         * <p>
+         *  设置与键关联的值。
+         * 
+         * 
          * @param key the thread local object
          * @param value the value to be set
          */
@@ -486,6 +624,9 @@ public class ThreadLocal<T> {
 
         /**
          * Remove the entry for key.
+         * <p>
+         *  删除密钥的条目。
+         * 
          */
         private void remove(ThreadLocal<?> key) {
             Entry[] tab = table;
@@ -512,6 +653,12 @@ public class ThreadLocal<T> {
          * "run" containing the stale entry.  (A run is a sequence of entries
          * between two null slots.)
          *
+         * <p>
+         *  将set操作期间遇到的失效条目替换为指定键的条目。 value参数中传递的值存储在条目中,无论是否已存在指定键的条目。
+         * 
+         *  作为副作用,此方法清除包含过时条目的"运行"中的所有过时条目。 (A run是两个空槽之间的条目序列。)
+         * 
+         * 
          * @param  key the key
          * @param  value the value to be associated with key
          * @param  staleSlot index of the first stale entry encountered while
@@ -581,6 +728,10 @@ public class ThreadLocal<T> {
          * any other stale entries encountered before the trailing null.  See
          * Knuth, Section 6.4
          *
+         * <p>
+         *  通过重新散列位于staleSlot和下一个空槽之间的任何可能的冲突条目来清除失效的条目。这也消除了在尾随null之前遇到的任何其他失效条目。见Knuth,第6.4节
+         * 
+         * 
          * @param staleSlot index of slot known to have null key
          * @return the index of the next null slot after staleSlot
          * (all between staleSlot and this slot will have been checked
@@ -631,6 +782,11 @@ public class ThreadLocal<T> {
          * proportional to number of elements, that would find all
          * garbage but would cause some insertions to take O(n) time.
          *
+         * <p>
+         *  启发式扫描一些单元格寻找陈旧的条目。当添加一个新元素或另一个失效的元素被调用时,将调用此方法。
+         * 它执行对数扫描,作为没有扫描(快速但保留垃圾)和与元素数成比例的扫描数之间的平衡,这将找到所有垃圾,但将导致一些插入花费O(n)时间。
+         * 
+         * 
          * @param i a position known NOT to hold a stale entry. The
          * scan starts at the element after i.
          *
@@ -666,6 +822,9 @@ public class ThreadLocal<T> {
          * Re-pack and/or re-size the table. First scan the entire
          * table removing stale entries. If this doesn't sufficiently
          * shrink the size of the table, double the table size.
+         * <p>
+         * 重新包装和/或重新调整桌子的尺寸。首先扫描整个表,删除过时的条目。如果这不足以缩小表的大小,请将表大小加倍。
+         * 
          */
         private void rehash() {
             expungeStaleEntries();
@@ -677,6 +836,9 @@ public class ThreadLocal<T> {
 
         /**
          * Double the capacity of the table.
+         * <p>
+         *  加倍表的容量。
+         * 
          */
         private void resize() {
             Entry[] oldTab = table;
@@ -708,6 +870,8 @@ public class ThreadLocal<T> {
 
         /**
          * Expunge all stale entries in the table.
+         * <p>
+         *  清除表中所有失效的条目。
          */
         private void expungeStaleEntries() {
             Entry[] tab = table;

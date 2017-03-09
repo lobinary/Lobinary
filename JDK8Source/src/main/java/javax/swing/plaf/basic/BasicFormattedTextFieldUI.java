@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,12 +32,20 @@ import javax.swing.plaf.ComponentUI;
  * Provides the look and feel implementation for
  * <code>JFormattedTextField</code>.
  *
+ * <p>
+ *  提供<code> JFormattedTextField </code>的外观和感觉实现。
+ * 
+ * 
  * @since 1.4
  */
 public class BasicFormattedTextFieldUI extends BasicTextFieldUI {
     /**
      * Creates a UI for a JFormattedTextField.
      *
+     * <p>
+     *  为JFormattedTextField创建一个UI。
+     * 
+     * 
      * @param c the formatted text field
      * @return the UI
      */
@@ -49,6 +58,9 @@ public class BasicFormattedTextFieldUI extends BasicTextFieldUI {
      * UIManager.  This is used as a prefix to all the standard
      * text properties.
      *
+     * <p>
+     *  获取用作通过UIManager查找属性的键的名称。这用作所有标准文本属性的前缀。
+     * 
      * @return the name "FormattedTextField"
      */
     protected String getPropertyPrefix() {

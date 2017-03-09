@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -21,6 +22,14 @@ package org.omg.PortableInterceptor;
    * This is supported through the <code>IORInterceptor</code> and 
    * <code>IORInfo</code> interfaces. 
    *
+   * <p>
+   *  拦截器用于在IOR中的配置文件中建立标记的组件。
+   * <p>
+   *  在某些情况下,便携式ORB服务实现可能需要向对象引用添加描述服务器或对象的ORB服务相关功能的信息,以便使客户端中的ORB服务实现正常运行。
+   * <p>
+   *  这是通过<code> IORInterceptor </code>和<code> IORInfo </code>接口支持的。
+   * 
+   * 
    * @see IORInfo
    */
 public interface IORInterceptorOperations  extends org.omg.PortableInterceptor.InterceptorOperations
@@ -42,6 +51,12 @@ public interface IORInterceptorOperations  extends org.omg.PortableInterceptor.I
      * and proceed to call the next IOR Interceptor's 
      * <code>establish_components</code> operation. 
      *
+     * <p>
+     *  当服务器端ORB组装将包括在对象引用的简档或简档中的组件的列表时,服务器侧ORB调用所有注册的<code> IORInterceptor </code>实例上的<code> establish_com
+     * ponents </code>对于每个单独的对象引用,不一定调用此操作。
+     * 在POA的情况下,每次调用POA :: create_POA时调用此操作。
+     * 在任何情况下,对于每个不同的服务器策略集合,保证调用<code> establish_components </code>至少一次。
+     * 
      * @param info The <code>IORInfo</code> instance used by the ORB 
      *     service to query applicable policies and add components to be 
      *     included in the generated IORs.

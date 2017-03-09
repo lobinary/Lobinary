@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,12 +36,20 @@ import java.awt.image.WritableRaster;
  * compositing operations.  In a multi-threaded environment, several
  * contexts can exist simultaneously for a single {@link Composite}
  * object.
+ * <p>
+ *  <code> CompositeContext </code>接口定义了合成操作的封装和优化环境。 <code> CompositeContext </code>对象维护合成操作的状态。
+ * 在多线程环境中,单个{@link Composite}对象可以同时存在多个上下文。
+ * 
+ * 
  * @see Composite
  */
 
 public interface CompositeContext {
     /**
      * Releases resources allocated for a context.
+     * <p>
+     *  释放为上下文分配的资源。
+     * 
      */
     public void dispose();
 
@@ -54,6 +63,11 @@ public interface CompositeContext {
      * <code>dstColorModel</code> passed to the
      * {@link Composite#createContext(java.awt.image.ColorModel, java.awt.image.ColorModel, java.awt.RenderingHints) createContext}
      * method of the <code>Composite</code> interface.
+     * <p>
+     *  组合两个源{@link Raster}对象,并将结果放在目标{@link WritableRaster}中。请注意,目标可以是与第一个或第二个源相同的对象。
+     * 注意,<code> dstIn </code>和<code> dstOut </code>必须与传递给{@link Composite#createContext(java.awt.image.ColorModel, java.awt.image.ColorModel,java.awt.RenderingHints)createContext}
+     * 方法的<code> Composite </code>接口。
+     * 
      * @param src the first source for the compositing operation
      * @param dstIn the second source for the compositing operation
      * @param dstOut the <code>WritableRaster</code> into which the

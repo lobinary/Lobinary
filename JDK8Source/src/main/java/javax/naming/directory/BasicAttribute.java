@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,25 @@ import javax.naming.OperationNotSupportedException;
   * multithreaded access. Multiple threads trying to access and modify a
   * <tt>BasicAttribute</tt> should lock the object.
   *
+  * <p>
+  *  此类提供了<tt> Attribute </tt>接口的基本实现。
+  * p>
+  *  此实现不支持模式方法<tt> getAttributeDefinition()</tt>和<tt> getAttributeSyntaxDefinition()</tt>。
+  * 他们只是抛出<tt> OperationNotSupportedException </tt>。 <tt> BasicAttribute </tt>的子类应该覆盖这些方法,如果他们支持它们。
+  * p>
+  *  默认情况下,<tt> BasicAttribute </tt>类使用<tt> Object.equals()</tt>确定测试相等或搜索值时属性值的相等性,<em>该值是一个数组。
+  * 对于数组,使用<tt> Object.equals()</tt>检查数组的每个元素。
+  *  <tt> BasicAttribute </tt>的子类可以通过重写方法进行类似的等同检查时使用模式信息,其中这种模式的使用是有意义的。
+  * 类似地,默认情况下,<tt> BasicAttribute </tt>类返回传递给其构造函数和/或使用add / remove方法操作的值。
+  *  <tt> BasicAttribute </tt>的子类可以覆盖<tt> get()</tt>和<tt> getAll()</tt>从目录动态获取值(或实现<tt> Attribute < / tt>
+  * 接口,而不是子类化<tt> BasicAttribute </tt>)。
+  * 类似地,默认情况下,<tt> BasicAttribute </tt>类返回传递给其构造函数和/或使用add / remove方法操作的值。
+  * p>
+  * 请注意,更新<tt> BasicAttribute </tt>(例如添加或删除值)不会影响目录中属性的相应表示。只能使用<tt> DirContext </tt>界面中的操作来更新目录。
+  * p>
+  *  <tt> BasicAttribute </tt>实例未与并发多线程访问同步。尝试访问和修改<tt> BasicAttribute </tt>的多个线程应锁定该对象。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @since 1.3
@@ -74,6 +94,10 @@ public class BasicAttribute implements Attribute {
      * Holds the attribute's id. It is initialized by the public constructor and
      * cannot be null unless methods in BasicAttribute that use attrID
      * have been overridden.
+     * <p>
+     *  保留属性的ID。它由公共构造函数初始化,并且不能为空,除非使用attrID的BasicAttribute中的方法已被覆盖。
+     * 
+     * 
      * @serial
      */
     protected String attrID;
@@ -82,11 +106,18 @@ public class BasicAttribute implements Attribute {
      * Holds the attribute's values. Initialized by public constructors.
      * Cannot be null unless methods in BasicAttribute that use
      * values have been overridden.
+     * <p>
+     *  保存属性的值。由公共构造函数初始化。除非使用值的BasicAttribute中的方法已被覆盖,否则不能为空。
+     * 
      */
     protected transient Vector<Object> values;
 
     /**
      * A flag for recording whether this attribute's values are ordered.
+     * <p>
+     *  用于记录此属性的值是否有序的标志。
+     * 
+     * 
      * @serial
      */
     protected boolean ordered = false;
@@ -124,6 +155,15 @@ public class BasicAttribute implements Attribute {
       * <tt>hashCode()</tt>
       * such that two attributes that are equal have the same hash code.
       *
+      * <p>
+      *  确定obj是否等于此属性。如果属性id,语法和值相等,则两个属性相等。如果属性值是无序的,则添加值的顺序不相关。如果属性值是有序的,则值必须匹配的顺序。
+      * 如果obj为null或不是属性,则返回false。
+      * p>
+      * 默认情况下,比较属性id及其值时使用<tt> Object.equals()</tt>,除非值是数组。对于数组,使用<tt> Object.equals()</tt>检查数组的每个元素。
+      * 子类可以覆盖此,以利用模式语法信息和匹配规则,这些规则定义了两个属性相等的含义。子类如何以及子类是否使用模式信息由子类决定。
+      * 如果一个子类覆盖<tt> equals()</tt>,它也应该覆盖<tt> hashCode()</tt>,使得两个相等的属性具有相同的哈希码。
+      * 
+      * 
       * @param obj      The possibly null object to check.
       * @return true if obj is equal to this attribute; false otherwise.
       * @see #hashCode
@@ -176,6 +216,13 @@ public class BasicAttribute implements Attribute {
       * <tt>equals()</tt>
       * as well so that two attributes that are equal have the same hash code.
       *
+      * <p>
+      *  计算此属性的哈希码。
+      * p>
+      *  散列码是通过添加属性的id和除了数组值之外的所有值的散列码来计算的。对于数组,数组的每个元素的哈希码被求和。
+      * 如果一个子类重写<tt> hashCode()</tt>,它应该重写<tt> equals()</tt>,以使两个相等的属性具有相同的哈希码。
+      * 
+      * 
       * @return an int representing the hash code of this attribute.
       * @see #equals
       */
@@ -208,6 +255,10 @@ public class BasicAttribute implements Attribute {
       * The string consists of the attribute's id and its values.
       * This string is meant for debugging and not meant to be
       * interpreted programmatically.
+      * <p>
+      *  生成此属性的字符串表示形式。该字符串由属性的id及其值组成。这个字符串用于调试,不能用编程方式解释。
+      * 
+      * 
       * @return The non-null string representation of this attribute.
       */
     public String toString() {
@@ -229,6 +280,10 @@ public class BasicAttribute implements Attribute {
     /**
       * Constructs a new instance of an unordered attribute with no value.
       *
+      * <p>
+      *  构造无值属性的新实例。
+      * 
+      * 
       * @param id The attribute's id. It cannot be null.
       */
     public BasicAttribute(String id) {
@@ -238,6 +293,10 @@ public class BasicAttribute implements Attribute {
     /**
       * Constructs a new instance of an unordered attribute with a single value.
       *
+      * <p>
+      *  使用单个值构造无序属性的新实例。
+      * 
+      * 
       * @param id The attribute's id. It cannot be null.
       * @param value The attribute's value. If null, a null
       *        value is added to the attribute.
@@ -249,6 +308,10 @@ public class BasicAttribute implements Attribute {
     /**
       * Constructs a new instance of a possibly ordered attribute with no value.
       *
+      * <p>
+      *  构造一个没有值的可能有序属性的新实例。
+      * 
+      * 
       * @param id The attribute's id. It cannot be null.
       * @param ordered true means the attribute's values will be ordered;
       * false otherwise.
@@ -263,6 +326,10 @@ public class BasicAttribute implements Attribute {
       * Constructs a new instance of a possibly ordered attribute with a
       * single value.
       *
+      * <p>
+      * 构造具有单个值的可能有序属性的新实例。
+      * 
+      * 
       * @param id The attribute's id. It cannot be null.
       * @param value The attribute's value. If null, a null
       *        value is added to the attribute.
@@ -281,6 +348,11 @@ public class BasicAttribute implements Attribute {
       * constructor and/or manipulated using the add/replace/remove methods.
       * A subclass may override this to retrieve the values dynamically
       * from the directory.
+      * <p>
+      *  检索此属性值的枚举。
+      * p>
+      *  默认情况下,返回的值是传递给构造函数和/或使用add / replace / remove方法操作的值。子类可以覆盖此,以从目录中动态检索值。
+      * 
       */
     public NamingEnumeration<?> getAll() throws NamingException {
       return new ValuesEnumImpl();
@@ -293,6 +365,11 @@ public class BasicAttribute implements Attribute {
       * constructor and/or manipulated using the add/replace/remove methods.
       * A subclass may override this to retrieve the value dynamically
       * from the directory.
+      * <p>
+      *  检索此属性的值之一。
+      * p>
+      *  默认情况下,返回的值是传递给构造函数和/或使用add / replace / remove方法操作的值之一。子类可以覆盖此来从目录中动态检索值。
+      * 
       */
     public Object get() throws NamingException {
         if (values.size() == 0) {
@@ -320,6 +397,12 @@ public class BasicAttribute implements Attribute {
       * For an array, each element of the array is checked using
       * <tt>Object.equals()</tt>.
       * A subclass may use schema information to determine equality.
+      * <p>
+      *  确定值是否在此属性中。
+      * p>
+      *  默认情况下,当将<tt> attrVal </tt>与此属性的值进行比较时使用<tt> Object.equals()</tt>,除非<tt> attrVal </tt>是数组。
+      * 对于数组,使用<tt> Object.equals()</tt>检查数组的每个元素。子类可以使用模式信息来确定相等性。
+      * 
       */
     public boolean contains(Object attrVal) {
         return (find(attrVal) >= 0);
@@ -353,6 +436,9 @@ public class BasicAttribute implements Attribute {
     /**
      * Determines whether two attribute values are equal.
      * Use arrayEquals for arrays and <tt>Object.equals()</tt> otherwise.
+     * <p>
+     *  确定两个属性值是否相等。对于数组使用arrayEquals,否则使用<tt> Object.equals()</tt>。
+     * 
      */
     private static boolean valueEquals(Object obj1, Object obj2) {
         if (obj1 == obj2) {
@@ -371,6 +457,9 @@ public class BasicAttribute implements Attribute {
     /**
      * Determines whether two arrays are equal by comparing each of their
      * elements using <tt>Object.equals()</tt>.
+     * <p>
+     *  通过使用<tt> Object.equals()</tt>比较每个数组的元素来确定两个数组是否相等。
+     * 
      */
     private static boolean arrayEquals(Object a1, Object a2) {
         int len;
@@ -398,6 +487,12 @@ public class BasicAttribute implements Attribute {
       * For an array, each element of the array is checked using
       * <tt>Object.equals()</tt>.
       * A subclass may use schema information to determine equality.
+      * <p>
+      *  向此属性添加新值。
+      * p>
+      * 默认情况下,当将<tt> attrVal </tt>与此属性的值进行比较时使用<tt> Object.equals()</tt>,除非<tt> attrVal </tt>是数组。
+      * 对于数组,使用<tt> Object.equals()</tt>检查数组的每个元素。子类可以使用模式信息来确定相等性。
+      * 
       */
     public boolean add(Object attrVal) {
         if (isOrdered() || (find(attrVal) < 0)) {
@@ -416,6 +511,12 @@ public class BasicAttribute implements Attribute {
       * For an array, each element of the array is checked using
       * <tt>Object.equals()</tt>.
       * A subclass may use schema information to determine equality.
+      * <p>
+      *  从此属性中删除指定值。
+      * p>
+      *  默认情况下,当将<tt> attrVal </tt>与此属性的值进行比较时使用<tt> Object.equals()</tt>,除非<tt> attrVal </tt>是数组。
+      * 对于数组,使用<tt> Object.equals()</tt>检查数组的每个元素。子类可以使用模式信息来确定相等性。
+      * 
       */
     public boolean remove(Object attrval) {
         // For the Java 2 platform, can just use "return removeElement(attrval);"
@@ -475,6 +576,11 @@ public class BasicAttribute implements Attribute {
       *<p>
       * This method by default throws OperationNotSupportedException. A subclass
       * should override this method if it supports schema.
+      * <p>
+      *  检索与此属性关联的语法定义。
+      * p>
+      *  此方法默认情况下会抛出OperationNotSupportedException。如果子类支持模式,它应该覆盖此方法。
+      * 
       */
     public DirContext getAttributeSyntaxDefinition() throws NamingException {
             throw new OperationNotSupportedException("attribute syntax");
@@ -485,6 +591,11 @@ public class BasicAttribute implements Attribute {
       *<p>
       * This method by default throws OperationNotSupportedException. A subclass
       * should override this method if it supports schema.
+      * <p>
+      *  检索此属性的模式定义。
+      * p>
+      *  此方法默认情况下会抛出OperationNotSupportedException。如果子类支持模式,它应该覆盖此方法。
+      * 
       */
     public DirContext getAttributeDefinition() throws NamingException {
         throw new OperationNotSupportedException("attribute definition");
@@ -495,6 +606,10 @@ public class BasicAttribute implements Attribute {
 
     /**
      * Overridden to avoid exposing implementation details
+     * <p>
+     *  覆盖以避免暴露实施详细信息
+     * 
+     * 
      * @serialData Default field (the attribute ID -- a String),
      * followed by the number of values (an int), and the
      * individual values.
@@ -510,6 +625,9 @@ public class BasicAttribute implements Attribute {
 
     /**
      * Overridden to avoid exposing implementation details.
+     * <p>
+     *  覆盖以避免暴露实施详细信息。
+     * 
      */
     private void readObject(java.io.ObjectInputStream s)
             throws java.io.IOException, ClassNotFoundException {
@@ -552,6 +670,8 @@ public class BasicAttribute implements Attribute {
 
     /**
      * Use serialVersionUID from JNDI 1.1.1 for interoperability.
+     * <p>
+     *  从JNDI 1.1.1使用serialVersionUID以实现互操作性。
      */
     private static final long serialVersionUID = 6743528196119291326L;
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.util.function.Supplier;
  * quantified predicate matching on the elements of a stream. Supported variants
  * include match-all, match-any, and match-none.
  *
+ * <p>
+ *  针对对流元素实施量化谓词匹配的短路{@code TerminalOp}实例的工厂。支持的变体包括match-all,match-any和match-none。
+ * 
+ * 
  * @since 1.8
  */
 final class MatchOps {
@@ -46,6 +51,9 @@ final class MatchOps {
     /**
      * Enum describing quantified match options -- all match, any match, none
      * match.
+     * <p>
+     *  枚举描述量化匹配选项 - 所有匹配,任何匹配,无匹配。
+     * 
      */
     enum MatchKind {
         /** Do all elements match the predicate? */
@@ -70,6 +78,10 @@ final class MatchOps {
     /**
      * Constructs a quantified predicate matcher for a Stream.
      *
+     * <p>
+     *  构造流的量化谓词匹配器。
+     * 
+     * 
      * @param <T> the type of stream elements
      * @param predicate the {@code Predicate} to apply to stream elements
      * @param matchKind the kind of quantified match (all, any, none)
@@ -100,6 +112,10 @@ final class MatchOps {
     /**
      * Constructs a quantified predicate matcher for an {@code IntStream}.
      *
+     * <p>
+     *  为{@code IntStream}构造量化谓词匹配器。
+     * 
+     * 
      * @param predicate the {@code Predicate} to apply to stream elements
      * @param matchKind the kind of quantified match (all, any, none)
      * @return a {@code TerminalOp} implementing the desired quantified match
@@ -129,6 +145,10 @@ final class MatchOps {
     /**
      * Constructs a quantified predicate matcher for a {@code LongStream}.
      *
+     * <p>
+     *  构造{@code LongStream}的量化谓词匹配器。
+     * 
+     * 
      * @param predicate the {@code Predicate} to apply to stream elements
      * @param matchKind the kind of quantified match (all, any, none)
      * @return a {@code TerminalOp} implementing the desired quantified match
@@ -159,6 +179,10 @@ final class MatchOps {
     /**
      * Constructs a quantified predicate matcher for a {@code DoubleStream}.
      *
+     * <p>
+     *  构造{@code DoubleStream}的量化谓词匹配器。
+     * 
+     * 
      * @param predicate the {@code Predicate} to apply to stream elements
      * @param matchKind the kind of quantified match (all, any, none)
      * @return a {@code TerminalOp} implementing the desired quantified match
@@ -191,6 +215,10 @@ final class MatchOps {
      * elements of a stream and determines whether all, any or none of those
      * elements match the predicate.
      *
+     * <p>
+     *  短路{@code TerminalOp},用于评估流元素的谓词,并确定这些元素是否全部或任何一个与谓词匹配。
+     * 
+     * 
      * @param <T> the output type of the stream pipeline
      */
     private static final class MatchOp<T> implements TerminalOp<T, Boolean> {
@@ -201,6 +229,10 @@ final class MatchOps {
         /**
          * Constructs a {@code MatchOp}.
          *
+         * <p>
+         *  构造一个{@code MatchOp}。
+         * 
+         * 
          * @param shape the output shape of the stream pipeline
          * @param matchKind the kind of quantified match (all, any, none)
          * @param sinkSupplier {@code Supplier} for a {@code Sink} of the
@@ -247,6 +279,10 @@ final class MatchOps {
      * Boolean specific terminal sink to avoid the boxing costs when returning
      * results.  Subclasses implement the shape-specific functionality.
      *
+     * <p>
+     *  布尔特定终端接收器,以避免返回结果时的拳击成本。子类实现特定于形状的功能。
+     * 
+     * 
      * @param <T> The output type of the stream pipeline
      */
     private static abstract class BooleanTerminalSink<T> implements Sink<T> {
@@ -271,6 +307,10 @@ final class MatchOps {
      * ForkJoinTask implementation to implement a parallel short-circuiting
      * quantified match
      *
+     * <p>
+     *  ForkJoinTask实现了实现并行短路量化匹配
+     * 
+     * 
      * @param <P_IN> the type of source elements for the pipeline
      * @param <P_OUT> the type of output elements for the pipeline
      */
@@ -281,6 +321,9 @@ final class MatchOps {
 
         /**
          * Constructor for root node
+         * <p>
+         *  根节点的构造函数
+         * 
          */
         MatchTask(MatchOp<P_OUT> op, PipelineHelper<P_OUT> helper,
                   Spliterator<P_IN> spliterator) {
@@ -290,6 +333,8 @@ final class MatchOps {
 
         /**
          * Constructor for non-root node
+         * <p>
+         *  非根节点的构造方法
          */
         MatchTask(MatchTask<P_IN, P_OUT> parent, Spliterator<P_IN> spliterator) {
             super(parent, spliterator);

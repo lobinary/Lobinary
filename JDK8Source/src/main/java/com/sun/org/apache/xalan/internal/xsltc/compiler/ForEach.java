@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ForEach.java,v 1.2.4.1 2005/09/01 15:23:46 pvedula Exp $
+ * <p>
+ *  $ Id：ForEach.java,v 1.2.4.1 2005/09/01 15:23:46 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -44,6 +57,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -182,6 +197,10 @@ final class ForEach extends Instruction {
      *           :
      *  Iterate: node = iterator.next();
      *           if (node != END) goto Loop
+     * <p>
+     *  由嵌套for-each循环生成的代码可能会出现在一些JVM上,就像它正在访问未初始化的变量一样。我们必须添加一些代码,推动堆栈上的默认变量值,并将其弹出到变量槽。
+     * 这是通过Variable.initialize()方法。我们为这个循环编译的代码如下所示：。
+     * 
      */
     public void initializeVariables(ClassGenerator classGen,
                                    MethodGenerator methodGen) {

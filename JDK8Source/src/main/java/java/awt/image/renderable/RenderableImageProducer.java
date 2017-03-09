@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ * COPYRIGHT(c)Eastman Kodak Company,1997 *** *根据United *** 
+ * *国家法典第17章的未公布的工作。
+ * 版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ * 版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package java.awt.image.renderable;
@@ -58,6 +69,11 @@ import java.util.Vector;
  * threads.  These threads could render either the same image at
  * progressively better quality, or different sections of the image at
  * a single resolution.
+ * <p>
+ *  实现ImageProducer以允许异步生成RenderableImage的适配器类。 ImageConsumer的大小由RenderContext中的usr2dev变换的缩放因子决定。
+ * 如果RenderContext为null,则使用RenderableImage的默认呈现。此类实现异步生产,以一种分辨率在一个线程中生成映像。这个类可以被子类化以实现将使用多个线程渲染图像的版本。
+ * 这些线程可以以逐渐更好的质量呈现相同的图像,或者以单个分辨率呈现图像的不同部分。
+ * 
  */
 public class RenderableImageProducer implements ImageProducer, Runnable {
 
@@ -74,6 +90,10 @@ public class RenderableImageProducer implements ImageProducer, Runnable {
      * Constructs a new RenderableImageProducer from a RenderableImage
      * and a RenderContext.
      *
+     * <p>
+     *  从RenderableImage和RenderContext构造一个新的RenderableImageProducer。
+     * 
+     * 
      * @param rdblImage the RenderableImage to be rendered.
      * @param rc the RenderContext to use for producing the pixels.
      */
@@ -86,6 +106,10 @@ public class RenderableImageProducer implements ImageProducer, Runnable {
     /**
      * Sets a new RenderContext to use for the next startProduction() call.
      *
+     * <p>
+     *  设置一个新的RenderContext用于下一个startProduction()调用。
+     * 
+     * 
      * @param rc the new RenderContext.
      */
     public synchronized void setRenderContext(RenderContext rc) {
@@ -96,6 +120,10 @@ public class RenderableImageProducer implements ImageProducer, Runnable {
      * Adds an ImageConsumer to the list of consumers interested in
      * data for this image.
      *
+     * <p>
+     * 将ImageConsumer添加到对此图像的数据感兴趣的消费者列表中。
+     * 
+     * 
      * @param ic an ImageConsumer to be added to the interest list.
      */
     public synchronized void addConsumer(ImageConsumer ic) {
@@ -108,6 +136,10 @@ public class RenderableImageProducer implements ImageProducer, Runnable {
      * Determine if an ImageConsumer is on the list of consumers
      * currently interested in data for this image.
      *
+     * <p>
+     *  确定ImageConsumer是否在当前对此图像的数据感兴趣的消费者列表中。
+     * 
+     * 
      * @param ic the ImageConsumer to be checked.
      * @return true if the ImageConsumer is on the list; false otherwise.
      */
@@ -119,6 +151,10 @@ public class RenderableImageProducer implements ImageProducer, Runnable {
      * Remove an ImageConsumer from the list of consumers interested in
      * data for this image.
      *
+     * <p>
+     *  从对此图像的数据感兴趣的消费者列表中删除ImageConsumer。
+     * 
+     * 
      * @param ic the ImageConsumer to be removed.
      */
     public synchronized void removeConsumer(ImageConsumer ic) {
@@ -130,6 +166,10 @@ public class RenderableImageProducer implements ImageProducer, Runnable {
      * data for this image, and immediately starts delivery of the
      * image data through the ImageConsumer interface.
      *
+     * <p>
+     *  将ImageConsumer添加到对此图像的数据感兴趣的消费者列表中,并立即通过ImageConsumer界面开始传递图像数据。
+     * 
+     * 
      * @param ic the ImageConsumer to be added to the list of consumers.
      */
     public synchronized void startProduction(ImageConsumer ic) {
@@ -143,6 +183,10 @@ public class RenderableImageProducer implements ImageProducer, Runnable {
      * Requests that a given ImageConsumer have the image data delivered
      * one more time in top-down, left-right order.
      *
+     * <p>
+     *  请求给定的ImageConsumer具有以自上而下,左右顺序再次传送图像数据。
+     * 
+     * 
      * @param ic the ImageConsumer requesting the resend.
      */
     public void requestTopDownLeftRightResend(ImageConsumer ic) {
@@ -153,6 +197,8 @@ public class RenderableImageProducer implements ImageProducer, Runnable {
      * The runnable method for this class. This will produce an image using
      * the current RenderableImage and RenderContext and send it to all the
      * ImageConsumer currently registered with this class.
+     * <p>
+     *  这个类的runnable方法。这将产生一个使用当前RenderableImage和RenderContext的图像,并将其发送到当前注册此类的所有ImageConsumer。
      */
     public void run() {
         // First get the rendered image

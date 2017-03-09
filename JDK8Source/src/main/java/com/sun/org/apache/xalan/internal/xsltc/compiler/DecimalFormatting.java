@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DecimalFormatting.java,v 1.2.4.1 2005/09/12 10:14:32 pvedula Exp $
+ * <p>
+ *  $ Id：DecimalFormatting.java,v 1.2.4.1 2005/09/12 10:14:32 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -38,6 +51,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xml.internal.utils.XML11Char;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -51,6 +66,9 @@ final class DecimalFormatting extends TopLevelElement {
 
     /**
      * No type check needed for the <xsl:decimal-formatting/> element
+     * <p>
+     *  <xsl：decimal-formatting />元素不需要类型检查
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         return Type.Void;
@@ -58,6 +76,9 @@ final class DecimalFormatting extends TopLevelElement {
 
     /**
      * Parse the name of the <xsl:decimal-formatting/> element
+     * <p>
+     *  解析<xsl：decimal-formatting />元素的名称
+     * 
      */
     public void parseContents(Parser parser) {
         // Get the name of these decimal formatting symbols
@@ -87,6 +108,9 @@ final class DecimalFormatting extends TopLevelElement {
     /**
      * This method is called when the constructor is compiled in
      * Stylesheet.compileConstructor() and not as the syntax tree is traversed.
+     * <p>
+     *  此方法在构造函数在Stylesheet.compileConstructor()中编译时调用,而不是遍历语法树。
+     * 
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
 
@@ -212,6 +236,9 @@ final class DecimalFormatting extends TopLevelElement {
      * AbstractTranslet's format_symbols hashtable.
      * This should be called for every stylesheet, and the entry
      * may be overridden by later nameless xsl:decimal-format instructions.
+     * <p>
+     *  在AbstractTranslet的format_symbols hashtable中创建默认的,无名的,DecimalFormat对象。
+     * 这应该为每个样式表调用,并且该条目可以被稍后无名的xsl：十进制格式指令覆盖。
      */
     public static void translateDefaultDFS(ClassGenerator classGen,
                                            MethodGenerator methodGen) {

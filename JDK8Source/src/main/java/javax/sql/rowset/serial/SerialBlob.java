@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,23 @@ import java.util.Arrays;
  * SerialBlob is to be used by more than one thread then access to the SerialBlob
  * should be controlled by appropriate synchronization.
  *
+ * <p>
+ *  在Java编程语言中的SQL <code> BLOB </code>值的序列化映射。
+ * <P>
+ *  <code> SerialBlob </code>类提供了一个从<code> Blob </code>对象创建实例的构造函数。
+ * 注意,在从<code> BLOB </code>对象构建一个<code> SerialBlob </code>对象之前,<code> Blob </code>对象应该将SQL <code> BLOB </code>
+ *  SQL <code> BLOB </code>值的数据可以在客户端上作为字节数组实现(使用方法<code> Blob.getBytes </code>)或作为未解释字节流方法<code> Blob.g
+ * etBinaryStream </code>)。
+ *  <code> SerialBlob </code>类提供了一个从<code> Blob </code>对象创建实例的构造函数。
+ * <P>
+ *  <code> SerialBlob </code>方法可以将<code> SerialBlob </code>对象的副本作为字节数组或作为流。
+ * 它们还使得可以在<code> SerialBlob </code>对象内定位给定字节模式或<code> Blob </code>对象,并更新或截断<code> Blob </code>对象。
+ * 
+ *  <h3>线程安全</h3>
+ * 
+ *  <p> SerialBlob不能安全地用于多个并发线程。如果一个SerialBlob要被多个线程使用,那么对SerialBlob的访问应该通过适当的同步来控制。
+ * 
+ * 
  * @author Jonathan Bruce
  */
 public class SerialBlob implements Blob, Serializable, Cloneable {
@@ -64,6 +82,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
     /**
      * A serialized array of uninterpreted bytes representing the
      * value of this <code>SerialBlob</code> object.
+     * <p>
+     *  表示此<serial> SerialBlob </code>对象的值的未解释字节的序列化数组。
+     * 
+     * 
      * @serial
      */
     private byte buf[];
@@ -71,12 +93,19 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
     /**
      * The internal representation of the <code>Blob</code> object on which this
      * <code>SerialBlob</code> object is based.
+     * <p>
+     * SerialBlob </code>对象所基于的<code> Blob </code>对象的内部表示。
+     * 
      */
     private Blob blob;
 
     /**
      * The number of bytes in this <code>SerialBlob</code> object's
      * array of bytes.
+     * <p>
+     *  在这个<code> SerialBlob </code>对象的字节数组中的字节数。
+     * 
+     * 
      * @serial
      */
     private long len;
@@ -84,6 +113,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
     /**
      * The original number of bytes in this <code>SerialBlob</code> object's
      * array of bytes when it was first established.
+     * <p>
+     *  当首次建立时,这个<code> SerialBlob </code>对象的字节数组中的原始字节数。
+     * 
+     * 
      * @serial
      */
     private long origLen;
@@ -97,6 +130,13 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * objects to establish serialized <code>Blob</code> objects without
      * touching the data source.
      *
+     * <p>
+     *  构造一个<code> SerialBlob </code>对象,它是给定<code> byte </code>数组的序列化版本。
+     * <p>
+     *  新的<code> SerialBlob </code>对象用来自<code> byte </code>数组的数据初始化,因此允许断开<code> RowSet </code>对象来建立序列化的<code>
+     *  Blob </code >对象而不触及数据源。
+     * 
+     * 
      * @param b the <code>byte</code> array containing the data for the
      *        <code>Blob</code> object to be serialized
      * @throws SerialException if an error occurs during serialization
@@ -124,6 +164,14 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * the database. Otherwise, the new <code>SerialBlob</code> object
      * will contain no data.
      *
+     * <p>
+     *  构造一个<code> SerialBlob </code>对象,它是给定的<code> Blob </code>对象的一个​​序列化版本。
+     * <P>
+     *  新的<code> SerialBlob </code>对象用来自<code> Blob </code>对象的数据初始化;因此,<code> Blob </code>对象应该以前将SQL <code> 
+     * BLOB </code>值的数据从数据库带到客户端。
+     * 否则,新的<code> SerialBlob </code>对象将不包含数据。
+     * 
+     * 
      * @param blob the <code>Blob</code> object from which this
      *     <code>SerialBlob</code> object is to be constructed;
      *     cannot be null.
@@ -157,6 +205,12 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * the length of this <code>SerialBlob</code> object's array of
      * bytes, the given number will be shortened to the array's length.
      *
+     * <p>
+     *  从指定位置开始,从这个<code> SerialBlob </code>对象复制指定数量的字节到另一个字节数组。
+     * <P>
+     *  注意,如果要复制的给定字节数大于这个<code> SerialBlob </code>对象的字节数组的长度,给定的数字将被缩短为数组的长度。
+     * 
+     * 
      * @param pos the ordinal position of the first byte in this
      *            <code>SerialBlob</code> object to be copied;
      *            numbering starts at <code>1</code>; must not be less
@@ -195,6 +249,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * Retrieves the number of bytes in this <code>SerialBlob</code>
      * object's array of bytes.
      *
+     * <p>
+     * 获取这个<code> SerialBlob </code>对象的字节数组中的字节数。
+     * 
+     * 
      * @return a <code>long</code> indicating the length in bytes of this
      *         <code>SerialBlob</code> object's array of bytes
      * @throws SerialException if an error occurs;
@@ -211,6 +269,13 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * a stream is produced regardless of whether the <code>SerialBlob</code>
      * was created with a <code>Blob</code> object or a <code>byte</code> array.
      *
+     * <p>
+     *  返回这个<code> SerialBlob </code>对象作为输入流。
+     * 与相关方法<code> setBinaryStream </code>不同,不管<code> SerialBlob </code>是用<code> Blob </code>对象还是<code> / co
+     * de>数组。
+     *  返回这个<code> SerialBlob </code>对象作为输入流。
+     * 
+     * 
      * @return a <code>java.io.InputStream</code> object that contains
      *         this <code>SerialBlob</code> object's array of bytes
      * @throws SerialException if an error occurs;
@@ -228,6 +293,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * the given pattern of bytes begins, starting the search at the
      * specified position.
      *
+     * <p>
+     *  返回在这个<code> SerialBlob </code>对象中的位置,其中给定的字节模式开始,开始在指定位置搜索。
+     * 
+     * 
      * @param pattern the pattern of bytes for which to search
      * @param start the position of the byte in this
      *              <code>SerialBlob</code> object from which to begin
@@ -273,6 +342,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * the given <code>Blob</code> object begins, starting the search at the
      * specified position.
      *
+     * <p>
+     *  返回给定<code> Blob </code>对象开始的<code> SerialBlob </code>对象中的位置,开始在指定位置搜索。
+     * 
+     * 
      * @param pattern the <code>Blob</code> object for which to search;
      * @param start the position of the byte in this
      *              <code>SerialBlob</code> object from which to begin
@@ -300,6 +373,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * this <code>Blob</code> object represents, starting at position
      * <code>pos</code>, and returns the number of bytes written.
      *
+     * <p>
+     *  将给定的字节数组写入这个<code> Blob </code>对象表示的<code> BLOB </code>值,从位置<code> pos </code>开始,并返回写入的字节数。
+     * 
+     * 
      * @param pos the position in the SQL <code>BLOB</code> value at which
      *     to start writing. The first position is <code>1</code>;
      *     must not be less than <code>1</code> nor greater than
@@ -327,6 +404,11 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * Writing starts at position <code>pos</code> in the <code>BLOB</code>
      * value; <i>len</i> bytes from the given byte array are written.
      *
+     * <p>
+     *  将给定<code> byte </code>数组的全部或部分写入此<b> </code>对象表示的<code> BLOB </code>值,并返回写入的字节数。
+     * 写入从<code> BLOB </code>值中的<code> pos </code>位置开始;从给定字节数组写入<i> len </i>字节。
+     * 
+     * 
      * @param pos the position in the <code>BLOB</code> object at which
      *     to start writing. The first position is <code>1</code>;
      *     must not be less than <code>1</code> nor greater than
@@ -390,6 +472,12 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * <code>Blob</code>. If this <code>SerialBlob</code> is instantiated with
      * a <code>byte</code> array, a <code>SerialException</code> is thrown.
      *
+     * <p>
+     * 检索可用于写入此<b> <b> </code>对象表示的<code> BLOB </code>值的流。流开始于位置<code> pos </code>。
+     * 在该<code> SerialBlob </code>对象被实例化为<code> Blob </code>的情况下,此方法将<code> setBinaryStream()</code>代码>。
+     * 如果这个<code> SerialBlob </code>用一个<code> byte </code>数组实例化,则抛出一个<code> SerialException </code>。
+     * 
+     * 
      * @param pos the position in the <code>BLOB</code> value at which
      *        to start writing
      * @return a <code>java.io.OutputStream</code> object to which data can
@@ -417,6 +505,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * Truncates the <code>BLOB</code> value that this <code>Blob</code>
      * object represents to be <code>len</code> bytes in length.
      *
+     * <p>
+     *  截断<code> BLOB </code>值,这个<code> Blob </code>对象表示长度为<code> len </code>个字节。
+     * 
+     * 
      * @param length the length, in bytes, to which the <code>BLOB</code>
      *        value that this <code>Blob</code> object represents should be
      *        truncated
@@ -446,6 +538,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * {@code Blob} value, starting with the byte specified by pos, which is
      * length bytes in length.
      *
+     * <p>
+     *  返回一个包含部分{@code Blob}值的<code> InputStream </code>对象,从由pos指定的字节开始,长度为字节长度。
+     * 
+     * 
      * @param pos the offset to the first byte of the partial value to be
      * retrieved. The first byte in the {@code Blob} is at position 1
      * @param length the length in bytes of the partial value to be retrieved
@@ -479,6 +575,11 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * method is called. <p> If {@code free} is called multiple times, the
      * subsequent calls to {@code free} are treated as a no-op. </P>
      *
+     * <p>
+     *  此方法释放{@code SeriableBlob}对象并释放其保存的资源。调用{@code free}方法后,对象无效。
+     *  <p>如果{@code free}被多次调用,则对{@code free}的后续调用将被视为无操作。 </P>。
+     * 
+     * 
      * @throws SQLException if an error occurs releasing the Blob's resources
      * @since 1.6
      */
@@ -498,6 +599,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * SerialBlob} object that represents the same sequence of bytes as this
      * object.
      *
+     * <p>
+     *  将此SerialBlob与指定的对象进行比较。结果是{@code true}当且仅当参数不是{@code null},并且是一个代表与此对象相同的字节序列的{@code SerialBlob}对象。
+     * 
+     * 
      * @param  obj The object to compare this {@code SerialBlob} against
      *
      * @return {@code true} if the given object represents a {@code SerialBlob}
@@ -519,6 +624,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
 
     /**
      * Returns a hash code for this {@code SerialBlob}.
+     * <p>
+     *  返回此{@code SerialBlob}的哈希码。
+     * 
+     * 
      * @return  a hash code value for this object.
      */
     public int hashCode() {
@@ -531,6 +640,11 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * to the original internal byte array of this {@code SerialBlob} object.
      * The underlying {@code Blob} object will be set to null.
      *
+     * <p>
+     * 返回此{@code SerialBlob}的克隆。副本将包含对内部字节数组的克隆的引用,而不是对此{@code SerialBlob}对象的原始内部字节数组的引用。
+     * 底层的{@code Blob}对象将设置为null。
+     * 
+     * 
      * @return  a clone of this SerialBlob
      */
     public Object clone() {
@@ -549,6 +663,9 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
     /**
      * readObject is called to restore the state of the SerialBlob from
      * a stream.
+     * <p>
+     *  readObject被调用以从流中恢复SerialBlob的状态。
+     * 
      */
     private void readObject(ObjectInputStream s)
             throws IOException, ClassNotFoundException {
@@ -568,6 +685,9 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
     /**
      * writeObject is called to save the state of the SerialBlob
      * to a stream.
+     * <p>
+     *  writeObject被调用以将SerialBlob的状态保存到流。
+     * 
      */
     private void writeObject(ObjectOutputStream s)
             throws IOException, ClassNotFoundException {
@@ -586,6 +706,10 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
      * Check to see if this object had previously had its {@code free} method
      * called
      *
+     * <p>
+     *  检查此对象之前是否已调用其{@code free}方法
+     * 
+     * 
      * @throws SerialException
      */
     private void isValid() throws SerialException {
@@ -598,6 +722,8 @@ public class SerialBlob implements Blob, Serializable, Cloneable {
     /**
      * The identifier that assists in the serialization of this
      * {@code SerialBlob} object.
+     * <p>
+     *  有助于序列化此{@code SerialBlob}对象的标识符。
      */
     static final long serialVersionUID = -8144641928112860441L;
 }

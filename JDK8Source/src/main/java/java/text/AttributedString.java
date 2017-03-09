@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,15 @@ import java.text.AttributedCharacterIterator.Attribute;
  * by clients or storage.  They are always passed by reference, and not
  * cloned.
  *
+ * <p>
+ *  AttributedString保存文本和相关属性信息。在文本读取器想要通过AttributedCharacterIterator接口访问属性文本的某些情况下,它可以用作实际的数据存储。
+ * 
+ * <p>
+ *  属性是由键标识的键/值对。给定字符上没有两个属性可以具有相同的键。
+ * 
+ *  <p>属性的值是不可变的,或者不能由客户端或存储器改变。它们总是通过引用传递,而不是克隆。
+ * 
+ * 
  * @see AttributedCharacterIterator
  * @see Annotation
  * @since 1.2
@@ -68,6 +78,10 @@ public class AttributedString {
      * Constructs an AttributedString instance with the given
      * AttributedCharacterIterators.
      *
+     * <p>
+     *  使用给定的AttributedCharacterIterators构造一个AttributedString实例。
+     * 
+     * 
      * @param iterators AttributedCharacterIterators to construct
      * AttributedString from.
      * @throws NullPointerException if iterators is null
@@ -119,6 +133,10 @@ public class AttributedString {
 
     /**
      * Constructs an AttributedString instance with the given text.
+     * <p>
+     *  构造具有给定文本的AttributedString实例。
+     * 
+     * 
      * @param text The text for this attributed string.
      * @exception NullPointerException if <code>text</code> is null.
      */
@@ -131,6 +149,10 @@ public class AttributedString {
 
     /**
      * Constructs an AttributedString instance with the given text and attributes.
+     * <p>
+     *  构造具有给定文本和属性的AttributedString实例。
+     * 
+     * 
      * @param text The text for this attributed string.
      * @param attributes The attributes that apply to the entire string.
      * @exception NullPointerException if <code>text</code> or
@@ -173,6 +195,10 @@ public class AttributedString {
     /**
      * Constructs an AttributedString instance with the given attributed
      * text represented by AttributedCharacterIterator.
+     * <p>
+     *  构造具有由AttributedCharacterIterator表示的给定属性文本的AttributedString实例。
+     * 
+     * 
      * @param text The text for this attributed string.
      * @exception NullPointerException if <code>text</code> is null.
      */
@@ -191,6 +217,11 @@ public class AttributedString {
      * attributes wrapped by an Annotation object are discarded for a
      * subrange of the original attribute range.
      *
+     * <p>
+     *  构造带有由AttributedCharacterIterator表示的给定属性文本的子范围的AttributedString实例。如果给定范围产生空文本,所有属性将被丢弃。
+     * 请注意,对于原始属性范围的子范围,将丢弃由Annotation对象包装的任何属性。
+     * 
+     * 
      * @param text The text for this attributed string.
      * @param beginIndex Index of the first character of the range.
      * @param endIndex Index of the character following the last character
@@ -216,6 +247,11 @@ public class AttributedString {
      * object are discarded for a subrange of the original attribute
      * range.
      *
+     * <p>
+     * 构造带有由AttributedCharacterIterator表示的给定属性文本的子范围的AttributedString实例。只有与给定属性匹配的属性才会合并到实例中。
+     * 如果给定范围产生空文本,所有属性将被丢弃。请注意,对于原始属性范围的子范围,将丢弃由Annotation对象包装的任何属性。
+     * 
+     * 
      * @param text The text for this attributed string.
      * @param beginIndex Index of the first character of the range.
      * @param endIndex Index of the character following the last character
@@ -308,6 +344,10 @@ public class AttributedString {
 
     /**
      * Adds an attribute to the entire string.
+     * <p>
+     *  向整个字符串添加属性。
+     * 
+     * 
      * @param attribute the attribute key
      * @param value the value of the attribute; may be null
      * @exception NullPointerException if <code>attribute</code> is null.
@@ -330,6 +370,10 @@ public class AttributedString {
 
     /**
      * Adds an attribute to a subrange of the string.
+     * <p>
+     *  将属性添加到字符串的子范围。
+     * 
+     * 
      * @param attribute the attribute key
      * @param value The value of the attribute. May be null.
      * @param beginIndex Index of the first character of the range.
@@ -355,6 +399,10 @@ public class AttributedString {
 
     /**
      * Adds a set of attributes to a subrange of the string.
+     * <p>
+     *  将一组属性添加到字符串的子范围。
+     * 
+     * 
      * @param attributes The attributes to be added to the string.
      * @param beginIndex Index of the first character of the range.
      * @param endIndex Index of the character following the last
@@ -445,6 +493,12 @@ public class AttributedString {
      * <li>If copyAttrs is false, the attributes from the existing run
      * will NOT be copied to the run to the right (>= offset) of the break,
      * but will exist on the run to the left (< offset).
+     * </ul>
+     * <p>
+     *  确保偏移处有一个运行中断,返回运行的索引。如果这导致分割运行,可能会发生两件事：
+     * <ul>
+     *  <li>如果copyAttrs为true,则来自现有运行的属性将放置在两个新创建的运行中。
+     *  <li>如果copyAttrs为false,则来自现有运行的属性将不会复制到断点右侧(> = offset)的运行,但将存在于左侧运行(<offset)。
      * </ul>
      */
     private final int ensureRunBreak(int offset, boolean copyAttrs) {
@@ -554,6 +608,10 @@ public class AttributedString {
      * Creates an AttributedCharacterIterator instance that provides access to the entire contents of
      * this string.
      *
+     * <p>
+     *  创建一个AttributedCharacterIterator实例,提供对该字符串的全部内容的访问。
+     * 
+     * 
      * @return An iterator providing access to the text and its attributes.
      */
     public AttributedCharacterIterator getIterator() {
@@ -568,6 +626,11 @@ public class AttributedString {
      * If the list is null, all available attribute information should be made
      * accessible.
      *
+     * <p>
+     *  创建一个AttributedCharacterIterator实例,提供对此字符串的选定内容的访问。关于未在实现者可能具有的属性中未列出的属性的信息不需要通过迭代器可访问。
+     * 如果列表为空,则应使所有可用的属性信息可访问。
+     * 
+     * 
      * @param attributes a list of attributes that the client is interested in
      * @return an iterator providing access to the entire text and its selected attributes
      */
@@ -583,6 +646,11 @@ public class AttributedString {
      * If the list is null, all available attribute information should be made
      * accessible.
      *
+     * <p>
+     * 创建一个AttributedCharacterIterator实例,提供对此字符串的选定内容的访问。关于未在实现者可能具有的属性中未列出的属性的信息不需要通过迭代器可访问。
+     * 如果列表为空,则应使所有可用的属性信息可访问。
+     * 
+     * 
      * @param attributes a list of attributes that the client is interested in
      * @param beginIndex the index of the first character
      * @param endIndex the index of the character following the last character
@@ -685,6 +753,9 @@ public class AttributedString {
     /**
      * Appends the contents of the CharacterIterator iterator into the
      * StringBuffer buf.
+     * <p>
+     *  将CharacterIterator迭代器的内容追加到StringBuffer buf中。
+     * 
      */
     private final void appendContents(StringBuffer buf,
                                       CharacterIterator iterator) {
@@ -701,6 +772,9 @@ public class AttributedString {
      * Sets the attributes for the range from offset to the next run break
      * (typically the end of the text) to the ones specified in attrs.
      * This is only meant to be called from the constructor!
+     * <p>
+     *  将范围的属性设置为在attrs中指定的范围,从offset到下一个运行断点(通常是文本的结尾)。这只是意味着从构造函数中调用！
+     * 
      */
     private void setAttributes(Map<Attribute, Object> attrs, int offset) {
         if (runCount == 0) {
@@ -728,6 +802,8 @@ public class AttributedString {
 
     /**
      * Returns true if the attributes specified in last and attrs differ.
+     * <p>
+     *  如果last和attrs中指定的属性不同,则返回true。
      */
     private static <K,V> boolean mapsDiffer(Map<K, V> last, Map<K, V> attrs) {
         if (last == null) {

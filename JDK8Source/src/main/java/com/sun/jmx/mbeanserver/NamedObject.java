@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import javax.management.* ;
  * This class is used for storing a pair (name, object) where name is
  * an object name and object is a reference to the object.
  *
+ * <p>
+ *  此类用于存储对(名称,对象),其中name是对象名称,object是对对象的引用。
+ * 
+ * 
  * @since 1.5
  */
 public class NamedObject  {
@@ -40,11 +45,17 @@ public class NamedObject  {
 
     /**
      * Object name.
+     * <p>
+     *  对象名称。
+     * 
      */
     private final ObjectName name;
 
     /**
      * Object reference.
+     * <p>
+     *  对象引用。
+     * 
      */
     private final DynamicMBean object;
 
@@ -52,6 +63,10 @@ public class NamedObject  {
     /**
      * Allows a named object to be created.
      *
+     * <p>
+     *  允许创建命名对象。
+     * 
+     * 
      *@param objectName The object name of the object.
      *@param object A reference to the object.
      */
@@ -66,6 +81,10 @@ public class NamedObject  {
     /**
      * Allows a named object to be created.
      *
+     * <p>
+     *  允许创建命名对象。
+     * 
+     * 
      *@param objectName The string representation of the object name of the object.
      *@param object A reference to the object.
      *
@@ -83,6 +102,10 @@ public class NamedObject  {
     /**
      * Compares the current object name with another object name.
      *
+     * <p>
+     *  将当前对象名称与另一个对象名称进行比较。
+     * 
+     * 
      * @param object  The Named Object that the current object name is to be
      *        compared with.
      *
@@ -100,6 +123,9 @@ public class NamedObject  {
     /**
      * Returns a hash code for this named object.
      *
+     * <p>
+     *  返回此命名对象的哈希码。
+     * 
      */
     public int hashCode() {
         return name.hashCode();
@@ -107,6 +133,9 @@ public class NamedObject  {
 
     /**
      * Get the object name.
+     * <p>
+     *  获取对象名称。
+     * 
      */
     public ObjectName getName()  {
         return name;
@@ -114,6 +143,8 @@ public class NamedObject  {
 
     /**
      * Get the object
+     * <p>
+     *  获取对象
      */
     public DynamicMBean getObject()  {
         return object;

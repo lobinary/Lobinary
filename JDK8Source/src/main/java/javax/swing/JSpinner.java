@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -115,6 +116,39 @@ import sun.util.locale.provider.LocaleServiceProviderPool;
  * description: A single line input field that lets the user select a
  *     number or an object value from an ordered set.
  *
+ * <p>
+ *  单行输入字段,允许用户从有序序列中选择数字或对象值。纺纱机通常提供一对微小的箭头按钮,用于穿过顺序的元素。键盘上/下箭头键也循环通过元素。还可以允许用户直接在微调器中键入(合法)值。
+ * 尽管组合框提供类似的功能,但是旋转器有时是优选的,因为它们不需要可能模糊重要数据的下拉列表。
+ * <p>
+ *  <code> JSpinner </code>的序列值由其<code> SpinnerModel </code>定义。
+ *  <code>模型</code>可以指定为构造函数参数,并使用<code> model </code>属性更改。
+ *  <code> SpinnerModel </code>类提供了一些常见类型：<code> SpinnerListModel </code>,<code> SpinnerNumberModel </code>
+ * 和<code> SpinnerDateModel </code>。
+ *  <code>模型</code>可以指定为构造函数参数,并使用<code> model </code>属性更改。
+ * <p>
+ * <code> JSpinner </code>有一个子组件,负责显示和潜在更改模型的当前元素或<i>值</i>,这称为<code>编辑器</code>。
+ * 编辑器由<code> JSpinner </code>的构造函数创建,可以使用<code> editor </code>属性更改。
+ * 通过侦听<code> ChangeEvent </code>,<code> JSpinner </code>的编辑器与模型保持同步。
+ * 如果用户更改了<code> editor </code>显示的值,则<code> model </code>的值可能与<code>编辑器</code>的值不同。
+ * 要确保<code>模型</code>与编辑器使用<code> commitEdit </code>方法具有相同的值,例如：。
+ * <pre>
+ *  try {spinner.commitEdit();你可以还原微调器来显示：JComponent editor = spinner.getEditor()if(editor instanceof DefaultEditor){((DefaultEditor)editor).getTextField()。
+ * setValue(spinner.getValue();} //将值重置为某个已知值：spinner.setValue(fallbackValue); //或将最后一个有效值作为current,其中//
+ *  case你不需要做任何事情} return spinner.getValue();。
+ * </pre>
+ * <p>
+ *  有关使用微调器的信息和示例,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/spinner.html">如
+ * 何使用纺纱器</a>,<em > Java教程。
+ * </em>。
+ * <p>
+ * <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ *  @beaninfo属性：isContainer false description：一个单行输入字段,允许用户从有序集中选择数字或对象值。
+ * 
+ * 
  * @see SpinnerModel
  * @see AbstractSpinnerModel
  * @see SpinnerListModel
@@ -129,6 +163,8 @@ import sun.util.locale.provider.LocaleServiceProviderPool;
 public class JSpinner extends JComponent implements Accessible
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -148,6 +184,10 @@ public class JSpinner extends JComponent implements Accessible
      * a set of previous/next buttons, and an editor appropriate
      * for the model.
      *
+     * <p>
+     *  构造给定模型的微调框。微调器具有一组上一个/下一个按钮,以及一个适用于模型的编辑器。
+     * 
+     * 
      * @throws NullPointerException if the model is {@code null}
      */
     public JSpinner(SpinnerModel model) {
@@ -164,6 +204,9 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * Constructs a spinner with an <code>Integer SpinnerNumberModel</code>
      * with initial value 0 and no minimum or maximum limits.
+     * <p>
+     *  使用初始值为0且没有最小或最大限制的<code> Integer SpinnerNumberModel </code>构造微调器。
+     * 
      */
     public JSpinner() {
         this(new SpinnerNumberModel());
@@ -173,6 +216,10 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * Returns the look and feel (L&amp;F) object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的外观和感觉(L&amp; F)对象。
+     * 
+     * 
      * @return the <code>SpinnerUI</code> object that renders this component
      */
     public SpinnerUI getUI() {
@@ -183,6 +230,10 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * Sets the look and feel (L&amp;F) object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的外观和感觉(L&amp; F)对象。
+     * 
+     * 
      * @param ui  the <code>SpinnerUI</code> L&amp;F object
      * @see UIDefaults#getUI
      */
@@ -195,6 +246,10 @@ public class JSpinner extends JComponent implements Accessible
      * Returns the suffix used to construct the name of the look and feel
      * (L&amp;F) class used to render this component.
      *
+     * <p>
+     *  返回用于构造用于渲染此组件的外观和感觉(L&amp; F)类的名称的后缀。
+     * 
+     * 
      * @return the string "SpinnerUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -208,6 +263,10 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * Resets the UI property with the value from the current look and feel.
      *
+     * <p>
+     *  使用当前外观的值重置UI属性。
+     * 
+     * 
      * @see UIManager#getUI
      */
     public void updateUI() {
@@ -236,6 +295,19 @@ public class JSpinner extends JComponent implements Accessible
      * <li> <i>all others</i> =&gt; <code>JSpinner.DefaultEditor</code>
      * </ul>
      *
+     * <p>
+     * 此方法由构造函数调用以创建显示序列的当前值的<code> JComponent </code>。编辑器还可以允许用户直接输入序列的元素。
+     * 编辑器必须监听<code> model </code>上的<code> ChangeEvents </code>,并保持其显示的值与模型的值同步。
+     * <p>
+     *  子类可以覆盖此方法以添加对新的<code> SpinnerModel </code>类的支持。或者,可以使用<code> setEditor </code>方法替换此处创建的编辑器。
+     * 从模型类型到编辑器的默认映射是：。
+     * <ul>
+     *  <li> <code> SpinnerNumberModel =&gt; JSpinner.NumberEditor </code> <li> <code> SpinnerDateModel =&gt
+     * ; JSpinner.DateEditor </code> <li> <code> SpinnerListModel =&gt; JSpinner.ListEditor </code> <li> <i>
+     * 所有其他</i> =&gt; <code> JSpinner.DefaultEditor </code>。
+     * </ul>
+     * 
+     * 
      * @return a component that displays the current value of the sequence
      * @param model the value of getModel
      * @see #getModel
@@ -268,6 +340,15 @@ public class JSpinner extends JComponent implements Accessible
      * setEditor(createEditor(model));
      * </pre>
      *
+     * <p>
+     *  更改表示此微调框值的模型。
+     * 如果编辑器属性没有被显式设置,则编辑器属性在<code>"model"</code> <code> PropertyChangeEvent </code>被触发后(隐式地)设置。
+     *  editor属性设置为<code> createEditor </code>返回的值,如：。
+     * <pre>
+     *  setEditor(createEditor(model));
+     * </pre>
+     * 
+     * 
      * @param model the new <code>SpinnerModel</code>
      * @see #getModel
      * @see #getEditor
@@ -305,6 +386,10 @@ public class JSpinner extends JComponent implements Accessible
      * Returns the <code>SpinnerModel</code> that defines
      * this spinners sequence of values.
      *
+     * <p>
+     *  返回定义这个spinners序列值的<code> SpinnerModel </code>。
+     * 
+     * 
      * @return the value of the model property
      * @see #setModel
      */
@@ -327,6 +412,18 @@ public class JSpinner extends JComponent implements Accessible
      * getModel().getValue()
      * </pre>
      *
+     * <p>
+     * 返回模型的当前值,通常此值由<code> editor </code>显示。
+     * 如果用户更改了<code> editor </code>显示的值,则<code> model </code>的值可能与<code>编辑器</code>的值不同,请参考到类级别javadoc的例子如何处理
+     * 这个。
+     * 返回模型的当前值,通常此值由<code> editor </code>显示。
+     * <p>
+     *  这个方法简单地委托给<code>模型</code>。它等效于：
+     * <pre>
+     *  getModel()。getValue()
+     * </pre>
+     * 
+     * 
      * @see #setValue
      * @see SpinnerModel#getValue
      */
@@ -348,6 +445,16 @@ public class JSpinner extends JComponent implements Accessible
      * getModel().setValue(value)
      * </pre>
      *
+     * <p>
+     *  更改模型的当前值,通常此值由<code> editor </code>显示。
+     * 如果<code> SpinnerModel </code>实现不支持指定的值,那么会抛出<code> IllegalArgumentException </code>。
+     * <p>
+     *  这个方法简单地委托给<code>模型</code>。它等效于：
+     * <pre>
+     *  getModel()。setValue(value)
+     * </pre>
+     * 
+     * 
      * @throws IllegalArgumentException if <code>value</code> isn't allowed
      * @see #getValue
      * @see SpinnerModel#setValue
@@ -369,6 +476,16 @@ public class JSpinner extends JComponent implements Accessible
      * getModel().getNextValue()
      * </pre>
      *
+     * <p>
+     *  返回在<code> getValue()</code>返回的对象之后的序列中的对象。如果已经到达序列的结尾,则返回<code> null </code>。
+     * 调用此方法不会影响<code> value </code>。
+     * <p>
+     *  这个方法简单地委托给<code>模型</code>。它等效于：
+     * <pre>
+     *  getModel()。getNextValue()
+     * </pre>
+     * 
+     * 
      * @return the next legal value or <code>null</code> if one doesn't exist
      * @see #getValue
      * @see #getPreviousValue
@@ -382,6 +499,9 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * We pass <code>Change</code> events along to the listeners with the
      * the slider (instead of the model itself) as the event source.
+     * <p>
+     *  我们使用滑块(而不是模型本身)将<code>更改</code>事件传递给侦听器作为事件源。
+     * 
      */
     private class ModelListener implements ChangeListener, Serializable {
         public void stateChanged(ChangeEvent e) {
@@ -400,6 +520,12 @@ public class JSpinner extends JComponent implements Accessible
      * case is that the source of the event would be the
      * <code>SpinnerModel</code>.
      *
+     * <p>
+     * 将监听器添加到每次发生模型更改时通知的列表中。
+     * 传递到<code> ChangeListeners </code>的<code> ChangeEvents </code>的源将是这个<code> JSpinner </code>。
+     * 还要注意,替换模型不会影响直接添加到JSpinner的侦听器。应用程序可以直接向模型添加侦听器。在这种情况下,事件的源是<code> SpinnerModel </code>。
+     * 
+     * 
      * @param listener the <code>ChangeListener</code> to add
      * @see #removeChangeListener
      * @see #getModel
@@ -417,6 +543,10 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * Removes a <code>ChangeListener</code> from this spinner.
      *
+     * <p>
+     *  从此微调器中删除<code> ChangeListener </code>。
+     * 
+     * 
      * @param listener the <code>ChangeListener</code> to remove
      * @see #fireStateChanged
      * @see #addChangeListener
@@ -430,6 +560,10 @@ public class JSpinner extends JComponent implements Accessible
      * Returns an array of all the <code>ChangeListener</code>s added
      * to this JSpinner with addChangeListener().
      *
+     * <p>
+     *  返回使用addChangeListener()添加到此JSpinner的所有<code> ChangeListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ChangeListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -446,6 +580,11 @@ public class JSpinner extends JComponent implements Accessible
      * to the spinner, this method method is called each time
      * a <code>ChangeEvent</code> is received from the model.
      *
+     * <p>
+     *  向每个<code> ChangeListener </code>发送一个<code> ChangeEvent </code>,其源代码是<code> JSpinner </code>。
+     * 当将<code> ChangeListener </code>添加到微调器时,每当从模型接收到<code> ChangeEvent </code>时,将调用此方法方法。
+     * 
+     * 
      * @see #addChangeListener
      * @see #removeChangeListener
      * @see EventListenerList
@@ -476,6 +615,16 @@ public class JSpinner extends JComponent implements Accessible
      * getModel().getPreviousValue()
      * </pre>
      *
+     * <p>
+     *  返回在<code> getValue()</code>返回的对象之前的序列中的对象。如果已经到达序列的结尾,则返回<code> null </code>。
+     * 调用此方法不会影响<code> value </code>。
+     * <p>
+     *  这个方法简单地委托给<code>模型</code>。它等效于：
+     * <pre>
+     *  getModel()。getPreviousValue()
+     * </pre>
+     * 
+     * 
      * @return the previous legal value or <code>null</code>
      *   if one doesn't exist
      * @see #getValue
@@ -495,6 +644,12 @@ public class JSpinner extends JComponent implements Accessible
      * old editors <code>ChangeListener</code> from the model or the
      * spinner itself and adding one for the new editor.
      *
+     * <p>
+     * 更改显示<code> SpinnerModel </code>当前值的<code> JComponent </code>。
+     * 这种方法的责任是<i> </i> </i>将旧编辑器与模型断开连接,并连接新编辑器。
+     * 这可能意味着从模型或微调框本身删除旧的编辑器<code> ChangeListener </code>,并为新的编辑器添加一个。
+     * 
+     * 
      * @param editor the new editor
      * @see #getEditor
      * @see #createEditor
@@ -528,6 +683,10 @@ public class JSpinner extends JComponent implements Accessible
      * Returns the component that displays and potentially
      * changes the model's value.
      *
+     * <p>
+     *  返回显示和潜在更改模型值的组件。
+     * 
+     * 
      * @return the component that displays and potentially
      *    changes the model's value
      * @see #setEditor
@@ -544,6 +703,12 @@ public class JSpinner extends JComponent implements Accessible
      * If the editor is an instance of <code>DefaultEditor</code>, the
      * call if forwarded to the editor, otherwise this does nothing.
      *
+     * <p>
+     *  将当前编辑的值提交到<code> SpinnerModel </code>。
+     * <p>
+     *  如果编辑器是<code> DefaultEditor </code>的一个实例,则调用如果转发到编辑器,否则不做任何操作。
+     * 
+     * 
      * @throws ParseException if the currently edited value couldn't
      *         be committed.
      */
@@ -559,6 +724,10 @@ public class JSpinner extends JComponent implements Accessible
      * See readObject and writeObject in JComponent for more
      * information about serialization in Swing.
      *
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅JComponent中的readObject和writeObject。
+     * 
+     * 
      * @param s Stream to write to
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
@@ -601,6 +770,23 @@ public class JSpinner extends JComponent implements Accessible
      * This class is the <code>LayoutManager</code> for it's single
      * <code>JFormattedTextField</code> child.   By default the
      * child is just centered with the parents insets.
+     * <p>
+     *  更专业的编辑器的简单基类,通过<code> JFormattedTextField </code>显示模型当前值的只读视图。
+     * 子类可以配置<code> JFormattedTextField </code>来创建一个适合他们支持的模型类型的编辑器,并且他们可以覆盖<code> stateChanged </code>和<code>
+     *  propertyChanged </code>方法,使模型和文本字段保持同步。
+     *  更专业的编辑器的简单基类,通过<code> JFormattedTextField </code>显示模型当前值的只读视图。
+     * <p>
+     * 这个类定义了一个<code> dismiss </code>方法,它从它所属的<code> JSpinner </code>中移除编辑器<code> ChangeListener </code>。
+     *  <code> setEditor </code>方法知道<code> DefaultEditor.dismiss </code>,所以如果开发人员替换从<code> JSpinner.DefaultE
+     * ditor </code>派生的编辑器<code> ChangeListener <代码>连接回到<code> JSpinner </code>将被删除。
+     * 这个类定义了一个<code> dismiss </code>方法,它从它所属的<code> JSpinner </code>中移除编辑器<code> ChangeListener </code>。
+     * 然后,由开发人员管理他们的编辑器监听器。
+     * 类似地,如果一个子类重写<code> createEditor </code>,它由子类处理它们的编辑器随后被替换(用<code> setEditor </code>)。
+     * 我们期望在大多数情况下,在安装了<code> setEditor </code>或由<code> createEditor </code>覆盖创建的编辑器中,不会被替换。
+     * <p>
+     *  这个类是<code> LayoutManager </code>,它是单个<code> JFormattedTextField </code>子对象。默认情况下,孩子只是以父母插入为中心。
+     * 
+     * 
      * @since 1.4
      */
     public static class DefaultEditor extends JPanel
@@ -614,6 +800,14 @@ public class JSpinner extends JComponent implements Accessible
          * initializes it's value to be the spinner model's current value
          * and adds it to <code>this</code> <code>DefaultEditor</code>.
          *
+         * <p>
+         *  构造指定的<code> JSpinner </code>的编辑器组件。
+         * 这个<code> DefaultEditor </code>是它自己的布局管理器,它被添加到微调框的<code> ChangeListener </code>列表中。
+         * 构造函数创建单个<code> JFormattedTextField </code>子对象,将其值初始化为微调模型的当前值,并将其添加到<code> this </code> <code> Defaul
+         * tEditor </code>。
+         * 这个<code> DefaultEditor </code>是它自己的布局管理器,它被添加到微调框的<code> ChangeListener </code>列表中。
+         * 
+         * 
          * @param spinner the spinner whose model <code>this</code> editor will monitor
          * @see #getTextField
          * @see JSpinner#addChangeListener
@@ -657,6 +851,10 @@ public class JSpinner extends JComponent implements Accessible
          * <code>JSpinner</code>.  By default, this method removes
          * itself from the spinners <code>ChangeListener</code> list.
          *
+         * <p>
+         * 从指定的<code> JSpinner </code>断开<code>此</code>编辑器。默认情况下,此方法将自己从旋转器<code> ChangeListener </code>列表中删除。
+         * 
+         * 
          * @param spinner the <code>JSpinner</code> to disconnect this
          *    editor from; the same spinner as was passed to the constructor.
          */
@@ -674,6 +872,13 @@ public class JSpinner extends JComponent implements Accessible
          * the <code>createEditor</code> method and insert one or more containers
          * between the <code>JSpinner</code> and it's editor.
          *
+         * <p>
+         *  如果没有祖先是<code> JSpinner </code>,则返回此编辑器的<code> JSpinner </code>祖先或<code> null </code>。
+         * 通常,编辑器的父类是<code> JSpinner </code>,但是<code> JSpinner </code>的子类可以覆盖<code> createEditor </code>方法,并在<code>
+         *  JSpinner </code>和它的编辑器。
+         *  如果没有祖先是<code> JSpinner </code>,则返回此编辑器的<code> JSpinner </code>祖先或<code> null </code>。
+         * 
+         * 
          * @return <code>JSpinner</code> ancestor; <code>null</code>
          *         if none of the ancestors are a <code>JSpinner</code>
          *
@@ -694,6 +899,10 @@ public class JSpinner extends JComponent implements Accessible
          * editor.  By default the text field is the first and only
          * child of editor.
          *
+         * <p>
+         *  返回此编辑器的<code> JFormattedTextField </code>子代。默认情况下,文本字段是编辑器的第一个也是唯一的子项。
+         * 
+         * 
          * @return the <code>JFormattedTextField</code> that gives the user
          *     access to the <code>SpinnerDateModel's</code> value.
          * @see #getSpinner
@@ -709,6 +918,10 @@ public class JSpinner extends JComponent implements Accessible
          * It sets the <code>value</code> of the text field to the current
          * value of the spinners model.
          *
+         * <p>
+         *  当微调器的模型的状态改变时,调用此方法。它将文本字段的<code> value </code>设置为旋转模型的当前值。
+         * 
+         * 
          * @param e the <code>ChangeEvent</code> whose source is the
          * <code>JSpinner</code> whose model has changed.
          * @see #getTextField
@@ -731,6 +944,14 @@ public class JSpinner extends JComponent implements Accessible
          * may safely make <code>this</code> <code>DefaultEditor</code> a
          * <code>PropertyChangeListener</code> on other objects.
          *
+         * <p>
+         *  由<code> JFormattedTextField </code> <code> PropertyChangeListener </code>调用。
+         * 当<code>"value"</code>属性改变时,这意味着用户键入了一个新的数字,我们设置了旋转模型的值。
+         * <p>
+         *  这个类忽略了源代码不是<code> JFormattedTextField </code>的<code> PropertyChangeEvents </code>,所以子类可以安全地使<code> t
+         * his </code> <code> DefaultEditor </code> PropertyChangeListener </code>。
+         * 
+         * 
          * @param e the <code>PropertyChangeEvent</code> whose source is
          *    the <code>JFormattedTextField</code> created by this class.
          * @see #getTextField
@@ -771,6 +992,10 @@ public class JSpinner extends JComponent implements Accessible
          * only managing a single child and there's no support
          * for layout constraints.
          *
+         * <p>
+         *  这个<code> LayoutManager </code>方法什么也不做。我们只管理一个孩子,并且不支持布局约束。
+         * 
+         * 
          * @param name ignored
          * @param child ignored
          */
@@ -782,6 +1007,10 @@ public class JSpinner extends JComponent implements Accessible
          * This <code>LayoutManager</code> method does nothing.  There
          * isn't any per-child state.
          *
+         * <p>
+         * 这个<code> LayoutManager </code>方法什么也不做。没有任何每个孩子的状态。
+         * 
+         * 
          * @param child ignored
          */
         public void removeLayoutComponent(Component child) {
@@ -790,6 +1019,9 @@ public class JSpinner extends JComponent implements Accessible
 
         /**
          * Returns the size of the parents insets.
+         * <p>
+         *  返回父插入的大小。
+         * 
          */
         private Dimension insetSize(Container parent) {
             Insets insets = parent.getInsets();
@@ -803,6 +1035,10 @@ public class JSpinner extends JComponent implements Accessible
          * Returns the preferred size of first (and only) child plus the
          * size of the parents insets.
          *
+         * <p>
+         *  返回首(且仅)子项的首选大小加上父项插入的大小。
+         * 
+         * 
          * @param parent the Container that's managing the layout
          * @return the preferred dimensions to lay out the subcomponents
          *          of the specified container.
@@ -822,6 +1058,10 @@ public class JSpinner extends JComponent implements Accessible
          * Returns the minimum size of first (and only) child plus the
          * size of the parents insets.
          *
+         * <p>
+         *  返回第一个(且仅)子项的最小大小加上父项插入的大小。
+         * 
+         * 
          * @param parent the Container that's managing the layout
          * @return  the minimum dimensions needed to lay out the subcomponents
          *          of the specified container.
@@ -840,6 +1080,9 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Resize the one (and only) child to completely fill the area
          * within the parents insets.
+         * <p>
+         *  调整一个(和唯一)的孩子,以完全填充父母内插区域。
+         * 
          */
         public void layoutContainer(Container parent) {
             if (parent.getComponentCount() > 0) {
@@ -856,6 +1099,12 @@ public class JSpinner extends JComponent implements Accessible
          * The default implementation invokes <code>commitEdit</code> on the
          * <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  将当前编辑的值推送到<code> SpinnerModel </code>。
+         * <p>
+         *  默认实现调用<code> JFormattedTextField </code>上的<code> commitEdit </code>。
+         * 
+         * 
          * @throws ParseException if the edited value is not legal
          */
         public void commitEdit()  throws ParseException {
@@ -870,6 +1119,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the baseline.
          *
+         * <p>
+         *  返回基线。
+         * 
+         * 
          * @throws IllegalArgumentException {@inheritDoc}
          * @see javax.swing.JComponent#getBaseline(int,int)
          * @see javax.swing.JComponent#getBaselineResizeBehavior()
@@ -892,6 +1145,10 @@ public class JSpinner extends JComponent implements Accessible
          * Returns an enum indicating how the baseline of the component
          * changes as the size changes.
          *
+         * <p>
+         *  返回枚举,指示组件的基准如何随着大小更改而更改。
+         * 
+         * 
          * @throws NullPointerException {@inheritDoc}
          * @see javax.swing.JComponent#getBaseline(int, int)
          * @since 1.6
@@ -907,6 +1164,9 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * This subclass of javax.swing.DateFormatter maps the minimum/maximum
      * properties to te start/end properties of a SpinnerDateModel.
+     * <p>
+     *  javax.swing.DateFormatter的此子类将最小/最大属性映射到SpinnerDateModel的te start / end属性。
+     * 
      */
     private static class DateEditorFormatter extends DateFormatter {
         private final SpinnerDateModel model;
@@ -941,6 +1201,13 @@ public class JSpinner extends JComponent implements Accessible
      * is defined by a <code>DateFormatter</code> instance whose
      * <code>minimum</code> and <code>maximum</code> properties
      * are mapped to the <code>SpinnerDateModel</code>.
+     * <p>
+     *  <code> JSpinner </code>的编辑器,其模型是<code> SpinnerDateModel </code>。
+     * 编辑器的值用<code> JFormattedTextField </code>显示,其格式由<code> DateFormatter </code>实例定义,<code>最小</code>属性映射到<code>
+     *  SpinnerDateModel </code>。
+     *  <code> JSpinner </code>的编辑器,其模型是<code> SpinnerDateModel </code>。
+     * 
+     * 
      * @since 1.4
      */
     // PENDING(hmuller): more example javadoc
@@ -965,6 +1232,13 @@ public class JSpinner extends JComponent implements Accessible
          * on the spinners model and a <code>PropertyChangeListener</code>
          * on the new <code>JFormattedTextField</code>.
          *
+         * <p>
+         * 构造一个<code> JSpinner </code>编辑器,支持使用<code> JFormattedTextField </code>显示和编辑<code> SpinnerDateModel </code>
+         * 的值。
+         *  <code>这个</code> <code> DateEditor </code>在新的<code> JFormattedTextField </code>上成为spinners模型上的<code> 
+         * ChangeListener </code>和<code> PropertyChangeListener </code>代码>。
+         * 
+         * 
          * @param spinner the spinner whose model <code>this</code> editor will monitor
          * @exception IllegalArgumentException if the spinners model is not
          *     an instance of <code>SpinnerDateModel</code>
@@ -986,6 +1260,13 @@ public class JSpinner extends JComponent implements Accessible
          * on the spinner and a <code>PropertyChangeListener</code>
          * on the new <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  构造一个<code> JSpinner </code>编辑器,支持使用<code> JFormattedTextField </code>显示和编辑<code> SpinnerDateModel </code>
+         * 的值。
+         *  <code>此</code> <code> DateEditor </code>成为微调器上的<code> ChangeListener </code>和新的<code> JFormattedText
+         * Field </code上的<code> PropertyChangeListener </code> >。
+         * 
+         * 
          * @param spinner the spinner whose model <code>this</code> editor will monitor
          * @param dateFormatPattern the initial pattern for the
          *     <code>SimpleDateFormat</code> object that's used to display
@@ -1011,6 +1292,13 @@ public class JSpinner extends JComponent implements Accessible
          * on the spinner and a <code>PropertyChangeListener</code>
          * on the new <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  构造一个<code> JSpinner </code>编辑器,支持使用<code> JFormattedTextField </code>显示和编辑<code> SpinnerDateModel </code>
+         * 的值。
+         *  <code>此</code> <code> DateEditor </code>成为微调器上的<code> ChangeListener </code>和新的<code> JFormattedText
+         * Field </code上的<code> PropertyChangeListener </code> >。
+         * 
+         * 
          * @param spinner the spinner whose model <code>this</code> editor
          *        will monitor
          * @param format <code>DateFormat</code> object that's used to display
@@ -1041,6 +1329,9 @@ public class JSpinner extends JComponent implements Accessible
             /* TBD - initializing the column width of the text field
              * is imprecise and doing it here is tricky because
              * the developer may configure the formatter later.
+             * <p>
+             *  是不精确的,这里做的是棘手的,因为开发人员可能以后配置格式化。
+             * 
              */
             try {
                 String maxString = formatter.valueToString(model.getStart());
@@ -1058,6 +1349,10 @@ public class JSpinner extends JComponent implements Accessible
          * <code>JFormattedTextField</code> uses to parse and format
          * numbers.
          *
+         * <p>
+         *  返回<code> java.text.SimpleDateFormat </code>对象<code> JFormattedTextField </code>用于解析和格式化数字。
+         * 
+         * 
          * @return the value of <code>getTextField().getFormatter().getFormat()</code>.
          * @see #getTextField
          * @see java.text.SimpleDateFormat
@@ -1070,6 +1365,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Return our spinner ancestor's <code>SpinnerDateModel</code>.
          *
+         * <p>
+         *  返回我们的微调器祖先的<code> SpinnerDateModel </code>。
+         * 
+         * 
          * @return <code>getSpinner().getModel()</code>
          * @see #getSpinner
          * @see #getTextField
@@ -1084,6 +1383,10 @@ public class JSpinner extends JComponent implements Accessible
      * This subclass of javax.swing.NumberFormatter maps the minimum/maximum
      * properties to a SpinnerNumberModel and initializes the valueClass
      * of the NumberFormatter to match the type of the initial models value.
+     * <p>
+     * javax.swing.NumberFormatter的此子类将最小/最大属性映射到SpinnerNumberModel,并初始化NumberFormatter的valueClass以匹配初始模型值的类
+     * 型。
+     * 
      */
     private static class NumberEditorFormatter extends NumberFormatter {
         private final SpinnerNumberModel model;
@@ -1120,6 +1423,13 @@ public class JSpinner extends JComponent implements Accessible
      * is defined by a <code>NumberFormatter</code> instance whose
      * <code>minimum</code> and <code>maximum</code> properties
      * are mapped to the <code>SpinnerNumberModel</code>.
+     * <p>
+     *  <code> JSpinner </code>的编辑器,其模型是<code> SpinnerNumberModel </code>。
+     * 编辑器的值用<code> JFormattedTextField </code>显示,其格式由<code> NumberFormatter </code>实例定义,其<code> minimum </code>
+     * 和<code> maximum </code>属性映射到<code> SpinnerNumberModel </code>。
+     *  <code> JSpinner </code>的编辑器,其模型是<code> SpinnerNumberModel </code>。
+     * 
+     * 
      * @since 1.4
      */
     // PENDING(hmuller): more example javadoc
@@ -1148,6 +1458,13 @@ public class JSpinner extends JComponent implements Accessible
          * on the spinner and a <code>PropertyChangeListener</code>
          * on the new <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  构造一个<code> JSpinner </code>编辑器,支持使用<code> JFormattedTextField </code>显示和编辑<code> SpinnerNumberModel 
+         * </code>的值。
+         *  <code>此</code> <code> NumberEditor </code>成为微调器上的<code> ChangeListener </code>和新的<code> JFormattedTe
+         * xtField </code上的<code> PropertyChangeListener </code> >。
+         * 
+         * 
          * @param spinner the spinner whose model <code>this</code> editor will monitor
          * @exception IllegalArgumentException if the spinners model is not
          *     an instance of <code>SpinnerNumberModel</code>
@@ -1168,6 +1485,13 @@ public class JSpinner extends JComponent implements Accessible
          * on the spinner and a <code>PropertyChangeListener</code>
          * on the new <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  构造一个<code> JSpinner </code>编辑器,支持使用<code> JFormattedTextField </code>显示和编辑<code> SpinnerNumberModel 
+         * </code>的值。
+         *  <code>此</code> <code> NumberEditor </code>成为微调器上的<code> ChangeListener </code>和新的<code> JFormattedTe
+         * xtField </code上的<code> PropertyChangeListener </code> >。
+         * 
+         * 
          * @param spinner the spinner whose model <code>this</code> editor will monitor
          * @param decimalFormatPattern the initial pattern for the
          *     <code>DecimalFormat</code> object that's used to display
@@ -1194,6 +1518,13 @@ public class JSpinner extends JComponent implements Accessible
          * on the spinner and a <code>PropertyChangeListener</code>
          * on the new <code>JFormattedTextField</code>.
          *
+         * <p>
+         * 构造一个<code> JSpinner </code>编辑器,支持使用<code> JFormattedTextField </code>显示和编辑<code> SpinnerNumberModel </code>
+         * 的值。
+         *  <code>此</code> <code> NumberEditor </code>成为微调器上的<code> ChangeListener </code>和新的<code> JFormattedTe
+         * xtField </code上的<code> PropertyChangeListener </code> >。
+         * 
+         * 
          * @param spinner the spinner whose model <code>this</code> editor will monitor
          * @param decimalFormatPattern the initial pattern for the
          *     <code>DecimalFormat</code> object that's used to display
@@ -1225,6 +1556,9 @@ public class JSpinner extends JComponent implements Accessible
             /* TBD - initializing the column width of the text field
              * is imprecise and doing it here is tricky because
              * the developer may configure the formatter later.
+             * <p>
+             *  是不精确的,这里做的是棘手的,因为开发人员可能以后配置格式化。
+             * 
              */
             try {
                 String maxString = formatter.valueToString(model.getMinimum());
@@ -1244,6 +1578,10 @@ public class JSpinner extends JComponent implements Accessible
          * <code>JFormattedTextField</code> uses to parse and format
          * numbers.
          *
+         * <p>
+         *  返回<code> java.text.DecimalFormat </code>对象<code> JFormattedTextField </code>用于解析和格式化数字。
+         * 
+         * 
          * @return the value of <code>getTextField().getFormatter().getFormat()</code>.
          * @see #getTextField
          * @see java.text.DecimalFormat
@@ -1256,6 +1594,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Return our spinner ancestor's <code>SpinnerNumberModel</code>.
          *
+         * <p>
+         *  返回我们的微调器祖先的<code> SpinnerNumberModel </code>。
+         * 
+         * 
          * @return <code>getSpinner().getModel()</code>
          * @see #getSpinner
          * @see #getTextField
@@ -1269,6 +1611,10 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * An editor for a <code>JSpinner</code> whose model is a
      * <code>SpinnerListModel</code>.
+     * <p>
+     *  <code> JSpinner </code>的编辑器,其模型是<code> SpinnerListModel </code>。
+     * 
+     * 
      * @since 1.4
      */
     public static class ListEditor extends DefaultEditor
@@ -1281,6 +1627,13 @@ public class JSpinner extends JComponent implements Accessible
          * on the spinner and a <code>PropertyChangeListener</code>
          * on the new <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  构造一个<code> JSpinner </code>编辑器,支持使用<code> JFormattedTextField </code>显示和编辑<code> SpinnerListModel </code>
+         * 的值。
+         *  <code>此</code> <code> ListEditor </code>成为微调器上的<code> ChangeListener </code>和新的<code> JFormattedText
+         * Field </code上的<code> PropertyChangeListener </code> >。
+         * 
+         * 
          * @param spinner the spinner whose model <code>this</code> editor will monitor
          * @exception IllegalArgumentException if the spinners model is not
          *     an instance of <code>SpinnerListModel</code>
@@ -1301,6 +1654,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Return our spinner ancestor's <code>SpinnerNumberModel</code>.
          *
+         * <p>
+         *  返回我们的微调器祖先的<code> SpinnerNumberModel </code>。
+         * 
+         * 
          * @return <code>getSpinner().getModel()</code>
          * @see #getSpinner
          * @see #getTextField
@@ -1315,6 +1672,10 @@ public class JSpinner extends JComponent implements Accessible
          * into the JFormattedTextField. Completion is only done if the
          * user is inserting text at the end of the document. Completion
          * is done by way of the SpinnerListModel method findNextMatch.
+         * <p>
+         *  ListFormatter在文本输入到JFormattedTextField时提供完成。仅在用户在文档末尾插入文本时才完成。
+         * 完成是通过SpinnerListModel方法findNextMatch完成的。
+         * 
          */
         private class ListFormatter extends
                           JFormattedTextField.AbstractFormatter {
@@ -1374,6 +1735,9 @@ public class JSpinner extends JComponent implements Accessible
 
     /**
      * An Action implementation that is always disabled.
+     * <p>
+     *  始终禁用的Action实现。
+     * 
      */
     private static class DisabledAction implements Action {
         public Object getValue(String key) {
@@ -1401,6 +1765,10 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * Gets the <code>AccessibleContext</code> for the <code>JSpinner</code>
      *
+     * <p>
+     * 获取<code> JSpinner </code>的<code> AccessibleContext </code>
+     * 
+     * 
      * @return the <code>AccessibleContext</code> for the <code>JSpinner</code>
      * @since 1.5
      */
@@ -1414,6 +1782,10 @@ public class JSpinner extends JComponent implements Accessible
     /**
      * <code>AccessibleJSpinner</code> implements accessibility
      * support for the <code>JSpinner</code> class.
+     * <p>
+     *  <code> AccessibleJSpinner </code>实现<code> JSpinner </code>类的辅助功能支持。
+     * 
+     * 
      * @since 1.5
      */
     protected class AccessibleJSpinner extends AccessibleJComponent
@@ -1424,6 +1796,9 @@ public class JSpinner extends JComponent implements Accessible
 
         /**
          * AccessibleJSpinner constructor
+         * <p>
+         *  AccessibleJSpinner构造函数
+         * 
          */
         protected AccessibleJSpinner() {
             // model is guaranteed to be non-null
@@ -1434,6 +1809,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Invoked when the target of the listener has changed its state.
          *
+         * <p>
+         *  当侦听器的目标已更改其状态时调用。
+         * 
+         * 
          * @param e  a <code>ChangeEvent</code> object. Must not be null.
          * @throws NullPointerException if the parameter is null.
          */
@@ -1469,6 +1848,15 @@ public class JSpinner extends JComponent implements Accessible
          * custom component developers can define their own AccessibleRole's
          * if the set of predefined roles is inadequate.
          *
+         * <p>
+         *  获取此对象的作用。对象的作用是该对象的类的通用目的或使用。例如,按钮的角色是AccessibleRole.PUSH_BUTTON。
+         * 提供了AccessibleRole中的角色,因此组件开发人员可以从一组预定义角色中进行选择。
+         * 这使得辅助技术能够为组件的各种调整子类提供一致的接口(例如,对于像按钮一样操作的所有组件使用AccessibleRole.PUSH_BUTTON),以及区分行为不同的子类(例如,用于复选框的Access
+         * ibleRole.CHECK_BOX和AccessibleRole.RADIO_BUTTON的单选按钮)。
+         * 提供了AccessibleRole中的角色,因此组件开发人员可以从一组预定义角色中进行选择。
+         *  <p>请注意,AccessibleRole类也是可扩展的,因此如果预定义角色集合不足,自定义组件开发人员可以定义自己的AccessibleRole。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the object
          * @see AccessibleRole
          */
@@ -1479,6 +1867,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the number of accessible children of the object.
          *
+         * <p>
+         *  返回对象的可访问子项数。
+         * 
+         * 
          * @return the number of accessible children of the object.
          */
         public int getAccessibleChildrenCount() {
@@ -1495,6 +1887,10 @@ public class JSpinner extends JComponent implements Accessible
          * of an Accessible child is at index 0, the second child is at index 1,
          * and so on.
          *
+         * <p>
+         *  返回对象的指定Accessible子项。可访问对象的可访问子对象是基于零的,因此可访问子对象的第一个子对象位于索引0,第二个子对象位于索引1,依此类推。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the Accessible child of the object
          * @see #getAccessibleChildrenCount
@@ -1516,6 +1912,10 @@ public class JSpinner extends JComponent implements Accessible
          * Gets the AccessibleAction associated with this object that supports
          * one or more actions.
          *
+         * <p>
+         *  获取与支持一个或多个操作的此对象关联的AccessibleAction。
+         * 
+         * 
          * @return AccessibleAction if supported by object; else return null
          * @see AccessibleAction
          */
@@ -1527,6 +1927,10 @@ public class JSpinner extends JComponent implements Accessible
          * Gets the AccessibleText associated with this object presenting
          * text on the display.
          *
+         * <p>
+         * 获取与此对象相关联的AccessibleText在显示器上显示文本。
+         * 
+         * 
          * @return AccessibleText if supported by object; else return null
          * @see AccessibleText
          */
@@ -1536,6 +1940,9 @@ public class JSpinner extends JComponent implements Accessible
 
         /*
          * Returns the AccessibleContext for the JSpinner editor
+         * <p>
+         *  返回JSpinner编辑器的AccessibleContext
+         * 
          */
         private AccessibleContext getEditorAccessibleContext() {
             if (editor instanceof DefaultEditor) {
@@ -1551,6 +1958,9 @@ public class JSpinner extends JComponent implements Accessible
 
         /*
          * Returns the AccessibleText for the JSpinner editor
+         * <p>
+         *  返回JSpinner编辑器的AccessibleText
+         * 
          */
         private AccessibleText getEditorAccessibleText() {
             AccessibleContext ac = getEditorAccessibleContext();
@@ -1562,6 +1972,9 @@ public class JSpinner extends JComponent implements Accessible
 
         /*
          * Returns the AccessibleEditableText for the JSpinner editor
+         * <p>
+         *  返回JSpinner编辑器的AccessibleEditableText
+         * 
          */
         private AccessibleEditableText getEditorAccessibleEditableText() {
             AccessibleText at = getEditorAccessibleText();
@@ -1574,6 +1987,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Gets the AccessibleValue associated with this object.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleValue。
+         * 
+         * 
          * @return AccessibleValue if supported by object; else return null
          * @see AccessibleValue
          *
@@ -1588,6 +2005,10 @@ public class JSpinner extends JComponent implements Accessible
          * Get the value of this object as a Number.  If the value has not been
          * set, the return value will be null.
          *
+         * <p>
+         *  获取此对象的值作为数字。如果未设置该值,则返回值将为null。
+         * 
+         * 
          * @return value of the object
          * @see #setCurrentAccessibleValue
          */
@@ -1602,6 +2023,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Set the value of this object as a Number.
          *
+         * <p>
+         *  将此对象的值设置为Number。
+         * 
+         * 
          * @param n the value to set for this object
          * @return true if the value was set; else False
          * @see #getCurrentAccessibleValue
@@ -1620,6 +2045,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Get the minimum value of this object as a Number.
          *
+         * <p>
+         *  获取此对象的最小值作为数字。
+         * 
+         * 
          * @return Minimum value of the object; null if this object does not
          * have a minimum value
          * @see #getMaximumAccessibleValue
@@ -1638,6 +2067,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Get the maximum value of this object as a Number.
          *
+         * <p>
+         *  获取此对象的最大值作为数字。
+         * 
+         * 
          * @return Maximum value of the object; null if this object does not
          * have a maximum value
          * @see #getMinimumAccessibleValue
@@ -1666,6 +2099,12 @@ public class JSpinner extends JComponent implements Accessible
          * increments the spinner value and AccessibleAction.DECREMENT
          * which decrements the spinner value
          *
+         * <p>
+         *  返回此对象中可用的可用操作数如果有多个,则第一个被视为对象的"默认"操作。
+         * 
+         *  支持两个操作：AccessibleAction.INCREMENT增加微调框值,AccessibleAction.DECREMENT减少微调框值
+         * 
+         * 
          * @return the zero-based number of Actions in this object
          */
         public int getAccessibleActionCount() {
@@ -1675,6 +2114,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns a description of the specified action of the object.
          *
+         * <p>
+         *  返回对象的指定操作的描述。
+         * 
+         * 
          * @param i zero-based index of the actions
          * @return a String description of the action
          * @see #getAccessibleActionCount
@@ -1691,6 +2134,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Performs the specified Action on the object
          *
+         * <p>
+         *  对对象执行指定的Action
+         * 
+         * 
          * @param i zero-based index of actions. The first action
          * (index 0) is AccessibleAction.INCREMENT and the second
          * action (index 1) is AccessibleAction.DECREMENT.
@@ -1724,6 +2171,9 @@ public class JSpinner extends JComponent implements Accessible
         /*
          * Returns whether source and destination components have the
          * same window ancestor
+         * <p>
+         *  返回源组件和目标组件是否具有相同的窗口祖先
+         * 
          */
         private boolean sameWindowAncestor(Component src, Component dest) {
             if (src == null || dest == null) {
@@ -1738,6 +2188,10 @@ public class JSpinner extends JComponent implements Accessible
          * of the character under that Point.  If the point is invalid,
          * this method returns -1.
          *
+         * <p>
+         *  给定一个点在局部坐标,返回该点下的字符的从零开始的索引。如果该点无效,则此方法返回-1。
+         * 
+         * 
          * @param p the Point in local coordinates
          * @return the zero-based index of the character under Point p; if
          * Point is invalid return -1.
@@ -1763,6 +2217,10 @@ public class JSpinner extends JComponent implements Accessible
          * coordinates.  If the index is invalid an empty rectangle is
          * returned.
          *
+         * <p>
+         *  确定给定索引处字符的边界框到字符串中。边界在本地坐标中返回。如果索引无效,则返回一个空的矩形。
+         * 
+         * 
          * @param i the index into the String
          * @return the screen coordinates of the character's bounding box,
          * if index is invalid return an empty rectangle.
@@ -1785,6 +2243,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the number of characters (valid indicies)
          *
+         * <p>
+         *  返回字符数(有效的标记)
+         * 
+         * 
          * @return the number of characters
          */
         public int getCharCount() {
@@ -1800,6 +2262,12 @@ public class JSpinner extends JComponent implements Accessible
          *
          * Note: That to the right of the caret will have the same index
          * value as the offset (the caret is between two characters).
+         * <p>
+         *  返回插入符号的从零开始的偏移量。
+         * 
+         * 注意：插入符右侧的索引值与偏移量相同(插入符号在两个字符之间)。
+         * 
+         * 
          * @return the zero-based offset of the caret.
          */
         public int getCaretPosition() {
@@ -1813,6 +2281,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the String at a given index.
          *
+         * <p>
+         *  返回给定索引处的String。
+         * 
+         * 
          * @param part the CHARACTER, WORD, or SENTENCE to retrieve
          * @param index an index within the text
          * @return the letter, word, or sentence
@@ -1828,6 +2300,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the String after a given index.
          *
+         * <p>
+         *  返回给定索引后的String。
+         * 
+         * 
          * @param part the CHARACTER, WORD, or SENTENCE to retrieve
          * @param index an index within the text
          * @return the letter, word, or sentence
@@ -1843,6 +2319,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the String before a given index.
          *
+         * <p>
+         *  返回给定索引之前的String。
+         * 
+         * 
          * @param part the CHARACTER, WORD, or SENTENCE to retrieve
          * @param index an index within the text
          * @return the letter, word, or sentence
@@ -1858,6 +2338,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the AttributeSet for a given character at a given index
          *
+         * <p>
+         *  返回给定字符在给定索引的AttributeSet
+         * 
+         * 
          * @param i the zero-based index into the text
          * @return the AttributeSet of the character
          */
@@ -1874,6 +2358,10 @@ public class JSpinner extends JComponent implements Accessible
          * If there is no selection, but there is
          * a caret, the start and end offsets will be the same.
          *
+         * <p>
+         *  返回所选文本内的起始偏移量。如果没有选择,但有一个插入符号,开始和结束偏移将是相同的。
+         * 
+         * 
          * @return the index into the text of the start of the selection
          */
         public int getSelectionStart() {
@@ -1889,6 +2377,10 @@ public class JSpinner extends JComponent implements Accessible
          * If there is no selection, but there is
          * a caret, the start and end offsets will be the same.
          *
+         * <p>
+         *  返回所选文本内的结束偏移量。如果没有选择,但有一个插入符号,开始和结束偏移将是相同的。
+         * 
+         * 
          * @return the index into the text of the end of the selection
          */
         public int getSelectionEnd() {
@@ -1902,6 +2394,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the portion of the text that is selected.
          *
+         * <p>
+         *  返回所选文本的部分。
+         * 
+         * 
          * @return the String portion of the text that is selected
          */
         public String getSelectedText() {
@@ -1920,6 +2416,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Sets the text contents to the specified string.
          *
+         * <p>
+         *  将文本内容设置为指定的字符串。
+         * 
+         * 
          * @param s the string to set the text contents
          */
         public void setTextContents(String s) {
@@ -1932,6 +2432,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Inserts the specified string at the given index/
          *
+         * <p>
+         *  将指定的字符串插入给定的索引/
+         * 
+         * 
          * @param index the index in the text where the string will
          * be inserted
          * @param s the string to insert in the text
@@ -1946,6 +2450,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Returns the text string between two indices.
          *
+         * <p>
+         *  返回两个索引之间的文本字符串。
+         * 
+         * 
          * @param startIndex the starting index in the text
          * @param endIndex the ending index in the text
          * @return the text string between the indices
@@ -1961,6 +2469,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Deletes the text between two indices
          *
+         * <p>
+         *  删除两个索引之间的文本
+         * 
+         * 
          * @param startIndex the starting index in the text
          * @param endIndex the ending index in the text
          */
@@ -1974,6 +2486,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Cuts the text between two indices into the system clipboard.
          *
+         * <p>
+         *  将两个索引之间的文本切换到系统剪贴板。
+         * 
+         * 
          * @param startIndex the starting index in the text
          * @param endIndex the ending index in the text
          */
@@ -1988,6 +2504,10 @@ public class JSpinner extends JComponent implements Accessible
          * Pastes the text from the system clipboard into the text
          * starting at the specified index.
          *
+         * <p>
+         *  将系统剪贴板中的文本粘贴到从指定索引开始的文本中。
+         * 
+         * 
          * @param startIndex the starting index in the text
          */
         public void paste(int startIndex) {
@@ -2001,6 +2521,10 @@ public class JSpinner extends JComponent implements Accessible
          * Replaces the text between two indices with the specified
          * string.
          *
+         * <p>
+         *  用指定的字符串替换两个索引之间的文本。
+         * 
+         * 
          * @param startIndex the starting index in the text
          * @param endIndex the ending index in the text
          * @param s the string to replace the text between two indices
@@ -2015,6 +2539,10 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Selects the text between two indices.
          *
+         * <p>
+         *  选择两个索引之间的文本。
+         * 
+         * 
          * @param startIndex the starting index in the text
          * @param endIndex the ending index in the text
          */
@@ -2028,6 +2556,9 @@ public class JSpinner extends JComponent implements Accessible
         /**
          * Sets attributes for the text between two indices.
          *
+         * <p>
+         *  在两个索引之间设置文本的属性。
+         * 
          * @param startIndex the starting index in the text
          * @param endIndex the ending index in the text
          * @param as the attribute set

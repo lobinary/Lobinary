@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -217,6 +218,110 @@ import java.util.Map;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>1081892073854801359L</code>.
  *
+ * <p>
+ *  <p>表示MBean的对象名称,或者表示可以匹配多个MBean的名称的模式。这个类的实例是不可变的。</p>
+ * 
+ *  <p>此类的实例可用于表示：</p>
+ * <ul>
+ *  <li>对象名称</li> <li>在查询上下文中的对象名称模式</li>
+ * </ul>
+ * 
+ *  <p>对象名称由两部分组成,即域和键属性。</p>
+ * 
+ *  <p> <em>域</em>是一个字符串,不包括字符冒号(<code>：</code>)。建议域不应包含字符串"{@code //}",保留以供将来使用。
+ * 
+ *  <p>如果域包含至少一个通配符星号(<code> * </code>)或问号(<code>?</code>),则对象名称为模式。星号匹配任何零个或多个字符的序列,而问号匹配任何单个字符。</p>
+ * 
+ *  <p>如果域为空,则在某些上下文中它将被使用ObjectName的MBean服务器的<em>默认域</em>替换。</p>
+ * 
+ *  <p> <em>键属性</em>是无序的键和相关值集合。</p>
+ * 
+ * <p>每个<em>键</em>是一个非空字符串,可能不包含任何逗号(<code>,</code>),equals(<code> = </code>冒号,星号或问号。
+ * 相同的键在给定的ObjectName中可能不会出现两次。</p>。
+ * 
+ *  <p>与键相关联的每个<em>值</em>是一个字符串,不带引号或引号。</p>
+ * 
+ *  <p>非引号值</em>是一个可能为空的字符串,可能不包含任何逗号,等号,冒号或引号。</p>
+ * 
+ *  <p>如果<em>无引号值</em>至少包含一个通配符星号或问号,则对象名称为<em>属性值模式</em>。星号匹配任何零个或多个字符的序列,而问号匹配任何单个字符。</p>
+ * 
+ *  <p>引用的值</em>由一个引号(<code>"</code>)组成,后面跟着一个可能为空的字符串,后跟另一个引号。
+ * 在字符串中,反斜杠(<code> \ </code>)具有特殊含义,必须后跟以下字符之一：</p>。
+ * 
+ * <ul>
+ *  <li>另一个反斜杠。第二个反斜杠没有特殊含义,两个字符表示一个反斜杠。</li>
+ * 
+ *  <li>字符"n"。这两个字符表示换行符(Java中为"\ n")。</li>
+ * 
+ * <li>报价。这两个字符表示一个引号,并且该引号不被认为终止引用的值。必须存在结束结束报价,以使引用的值有效。</li>
+ * 
+ *  <li>问号(?)或星号(*)。这两个字符分别表示问号或星号。</li>
+ * </ul>
+ * 
+ *  <p>除了紧接着奇数个连续反斜线之后,引号可能不会出现在引号中。</p>
+ * 
+ *  <p>引号值周围的引号以及该值中的任何反斜杠都被视为值的一部分。</p>
+ * 
+ *  <p>如果<em>引号的值</em>至少包含一个字符星号或问号,而且它们前面没有反斜杠,则它们被视为通配符,对象名称为<em >属性值模式</em>。
+ * 星号匹配任何零个或多个字符的序列,而问号匹配任何单个字符。</p>。
+ * 
+ *  <p> ObjectName可以是<em>属性列表模式</em>。在这种情况下,它可以具有零个或多个键和相关联的值。它匹配其域匹配且包含相同键和关联值以及可能其他键和值的非模式ObjectName。
+ * </p>。
+ * 
+ * <p>当至少其中一个引号</em>或<em>无引号</em>键属性值包含通配符星号或问题时,ObjectName是<em>属性值模式</em>标记如上所述。
+ * 在这种情况下,它具有一个或多个键和关联的值,其中至少一个值包含通配符。
+ * 它匹配域匹配的非模式ObjectName,并且包含其值匹配的相同键;如果属性值模式也是属性列表模式,则非模式ObjectName可以包含其他键和值。</p>。
+ * 
+ *  <p>如果对象名称是<em>属性列表模式</em>或<em>属性值模式</em>或两者,都是<em>属性模式</em>。</p>
+ * 
+ *  <p> ObjectName是一个模式,如果其域包含通配符或如果ObjectName是属性模式。</p>
+ * 
+ *  <p>如果ObjectName不是模式,则必须至少包含一个键及其关联值。</p>
+ * 
+ *  <p> ObjectName模式的示例有：</p>
+ * 
+ * <ul>
+ * <li> {@ code *：type = Foo,name = Bar}可匹配任何确切键为{@code type = Foo,name = Bar}的网域中的名称。
+ * </li> d：type = Foo,name = Bar,*}以匹配域{@code d}中具有键{@code type = Foo,name = Bar}加上零个或多个其他键的名称。
+ * </li> li> {@ code *：type = Foo,name = Bar,*}以匹配具有键{@code type = Foo,name = Bar}和零个或多个其他键的任何域中的名称。
+ * </li> li> {@ code d：type = F?o,name = Bar}会匹配eg {@code d：type = Foo,name = Bar}和{@code d：type = Fro,name = Bar}
+ * 。
+ * </li> li> {@ code *：type = Foo,name = Bar,*}以匹配具有键{@code type = Foo,name = Bar}和零个或多个其他键的任何域中的名称。
+ * </li> <li> {@ code d：type = F * o,name = Bar}将匹配例如{@code d：type = Fo,name = Bar}和{@code d：type = Frodo,name = Bar}
+ * 。
+ * </li> li> {@ code *：type = Foo,name = Bar,*}以匹配具有键{@code type = Foo,name = Bar}和零个或多个其他键的任何域中的名称。
+ * </li> <li> {@ code d：type = Foo,name ="B * }将匹配eg {@code d：type = Foo,name ="Bling"}。
+ * 通配符甚至可以在引号内识别,像其他特殊字符一样,可以使用{@code \}转义。</li>。
+ * </ul>
+ * 
+ *  <p> ObjectName可以写成一个字符串,其顺序如下：</p>
+ * 
+ * <ul>
+ *  <li>网域。 <li>冒号(<code>：</code>)。 <li>以下定义的关键媒体资源列表。
+ * </ul>
+ * 
+ *  <p>写为String的关键属性列表是逗号分隔的元素列表。每个元素都是星号或键属性。键属性由键,等号(<code> = </code>)和相关值组成。</p>
+ * 
+ *  <p>键属性列表的最多一个元素可能是星号。如果键属性列表包含星号元素,则ObjectName是属性列表模式。</p>
+ * 
+ * <p>空间在表示ObjectName的String中没有特殊意义。例如,String：
+ * <pre>
+ *  domain：key1 = value1,key2 = value2
+ * </pre>
+ *  表示具有两个键的ObjectName。每个键的名称包含六个字符,其中第一个和最后一个是空格。与键<code>"&nbsp; key1&quot;"</code>相关联的值也以空格开头和结尾。
+ * 
+ *  <p>除了上面阐述的字符限制之外,ObjectName的任何部分都不能包含换行符(<code>'\ n'</code>),无论是域,键还是值引号或不引号。
+ * 换行符可以用序列<code> \ n </code>在引号中表示。
+ * 
+ *  <p>特殊字符和引用的规则适用,无论使用哪个构造函数创建ObjectName。</p>
+ * 
+ *  <p>为避免不同供应商提供的MBeans之间发生冲突,一个有用的约定是使用指定MBean的组织的反向DNS名称开始域名,后跟一个句点和一个字符串,其解释由该组织确定。
+ * 例如,由<code> example.com </code>指定的MBean将具有例如<code> com.example.MyDomain </code>的域。这与Java语言包名称的约定基本相同。
+ * </p>。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> 1081892073854801359L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial") // don't complain serialVersionUID not constant
@@ -225,6 +330,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * A structure recording property structure and
      * proposing minimal services
+     * <p>
+     *  结构记录属性结构并提出最低限度的服务
+     * 
      */
     private static class Property {
 
@@ -234,6 +342,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
         /**
          * Constructor.
+         * <p>
+         *  构造函数。
+         * 
          */
         Property(int key_index, int key_length, int value_length) {
             _key_index = key_index;
@@ -243,6 +354,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
         /**
          * Assigns the key index of property
+         * <p>
+         *  分配属性的键索引
+         * 
          */
         void setKeyIndex(int key_index) {
             _key_index = key_index;
@@ -250,6 +364,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
         /**
          * Returns a key string for receiver key
+         * <p>
+         * 返回接收器密钥的密钥字符串
+         * 
          */
         String getKeyString(String name) {
             return name.substring(_key_index, _key_index + _key_length);
@@ -257,6 +374,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
         /**
          * Returns a value string for receiver key
+         * <p>
+         *  返回接收器键的值字符串
+         * 
          */
         String getValueString(String name) {
             int in_begin = _key_index + _key_length + 1;
@@ -267,10 +387,16 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
     /**
      * Marker class for value pattern property.
+     * <p>
+     *  值模式属性的标记类。
+     * 
      */
     private static class PatternProperty extends Property {
         /**
          * Constructor.
+         * <p>
+         *  构造函数。
+         * 
          */
         PatternProperty(int key_index, int key_length, int value_length) {
             super(key_index, key_length, value_length);
@@ -339,6 +465,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
     /**
      * a shared empty array for empty property lists
+     * <p>
+     *  空属性列表的共享空数组
+     * 
      */
     static final private Property[] _Empty_property_array = new Property[0];
 
@@ -349,23 +478,35 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
     /**
      * a String containing the canonical name
+     * <p>
+     *  包含规范名称的字符串
+     * 
      */
     private transient String _canonicalName;
 
 
     /**
      * An array of properties in the same seq order as time creation
+     * <p>
+     *  与时间创建相同顺序的属性数组
+     * 
      */
     private transient Property[] _kp_array;
 
     /**
      * An array of properties in the same seq order as canonical order
+     * <p>
+     *  与规范顺序相同seq顺序的属性数组
+     * 
      */
     private transient Property[] _ca_array;
 
 
     /**
      * The length of the domain part of built objectname
+     * <p>
+     *  构建的objectname的域部分的长度
+     * 
      */
     private transient int _domain_length = 0;
 
@@ -373,23 +514,35 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * The propertyList of built object name. Initialized lazily.
      * Table that contains all the pairs (key,value) for this ObjectName.
+     * <p>
+     *  构建对象名的propertyList。初始化懒惰。包含此ObjectName的所有对(键,值)的表。
+     * 
      */
     private transient Map<String,String> _propertyList;
 
     /**
      * boolean that declares if this ObjectName domain part is a pattern
+     * <p>
+     *  boolean,它声明这个ObjectName域部分是否是一个模式
+     * 
      */
     private transient boolean _domain_pattern = false;
 
     /**
      * boolean that declares if this ObjectName contains a pattern on the
      * key property list
+     * <p>
+     *  boolean,声明此ObjectName是否包含关键属性列表中的模式
+     * 
      */
     private transient boolean _property_list_pattern = false;
 
     /**
      * boolean that declares if this ObjectName contains a pattern on the
      * value of at least one key property
+     * <p>
+     *  布尔值,声明此ObjectName是否包含至少一个键属性值的模式
+     * 
      */
     private transient boolean _property_value_pattern = false;
 
@@ -406,6 +559,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * Initializes this {@link ObjectName} from the given string
      * representation.
      *
+     * <p>
+     *  从给定的字符串表示初始化此{@link ObjectName}。
+     * 
+     * 
      * @param name A string representation of the {@link ObjectName}
      *
      * @exception MalformedObjectNameException The string passed as a
@@ -664,6 +821,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Construct an ObjectName from a domain and a Hashtable.
      *
+     * <p>
+     *  从域和Hashtable构造ObjectName。
+     * 
+     * 
      * @param domain Domain of the ObjectName.
      * @param props  Map containing couples <i>key</i> {@literal ->} <i>value</i>.
      *
@@ -755,6 +916,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Add passed property to the list at the given index
      * for the passed key name
+     * <p>
+     *  将传递的属性添加到传递的键名称的给定索引的列表中
+     * 
      */
     private void addProperty(Property prop, int index,
                              Map<String,Property> keys_map, String key_name)
@@ -778,6 +942,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * Sets the canonical name of receiver from input 'specified_chars'
      * array, by filling 'canonical_chars' array with found 'nb-props'
      * properties starting at position 'prop_index'.
+     * <p>
+     *  通过使用在位置'prop_index'处开始的找到的'nb-props'属性填充'canonical_chars'数组来从输入'specified_chars'数组设置接收器的规范名称。
+     * 
      */
     private void setCanonicalName(char[] specified_chars,
                                   char[] canonical_chars,
@@ -838,6 +1005,13 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * <p>key starts at startKey (included), and ends at endKey (excluded).
      * If (startKey == endKey), then the key is empty.
      *
+     * <p>
+     *  解析键。
+     *  <pre> final int endKey = parseKey(s,startKey); </p> <p> key从startKey(included)开始,结束于endKey如果(startKe
+     * y == endKey),那么键是空的。
+     *  解析键。
+     * 
+     * 
      * @param s The char array of the original string.
      * @param startKey index at which to begin parsing.
      * @return The index following the last character of the key.
@@ -878,6 +1052,13 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * <p>value starts at startVal (included), and ends at endVal (excluded).
      * If (startVal == endVal), then the key is empty.
      *
+     * <p>
+     * 解析值。
+     *  <pre> final int endVal = parseValue(s,startVal); </pre> <p>值从startVal(included)开始,结束于endVal(excluded
+     * )。
+     * 解析值。如果(startVal == endVal),则键为空。
+     * 
+     * 
      * @param s The char array of the original string.
      * @param startValue index at which to begin parsing.
      * @return The first element of the int array indicates the index
@@ -990,6 +1171,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Check if the supplied value is a valid value.
      *
+     * <p>
+     *  检查所提供的值是否为有效值。
+     * 
+     * 
      * @return true if the value is a pattern, otherwise false.
      */
     private static boolean checkValue(String val)
@@ -1014,6 +1199,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
     /**
      * Check if the supplied key is a valid key.
+     * <p>
+     *  检查提供的密钥是否为有效密钥。
+     * 
      */
     private static void checkKey(String key)
         throws MalformedObjectNameException {
@@ -1038,6 +1226,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
     /**
      * Check if domain is a valid domain.  Set _domain_pattern if appropriate.
+     * <p>
+     *  检查域是否是有效的域。如果适用,请设置_domain_pattern。
+     * 
      */
     private boolean isDomain(String domain) {
         if (domain == null) return true;
@@ -1064,6 +1255,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
     /**
      * Deserializes an {@link ObjectName} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link ObjectName}。
+     * 
+     * 
      * @serialData <ul>
      *               <li>In the current serial form (value of property
      *                   <code>jmx.serial.form</code> differs from
@@ -1161,6 +1356,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
 
     /**
      * Serializes an {@link ObjectName} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link ObjectName}序列化为{@link ObjectOutputStream}。
+     * 
+     * 
      * @serialData <ul>
      *               <li>In the current serial form (value of property
      *                   <code>jmx.serial.form</code> differs from
@@ -1258,6 +1457,11 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * same parameters may return the same object or two equal but
      * not identical objects.</p>
      *
+     * <p>
+     *  <p>返回ObjectName的实例,可以在使用{@link #ObjectName(String)new ObjectName(name)}获得的对象的任何地方使用。
+     * 返回的对象可以是ObjectName的子类。使用相同的参数调用此方法两次可能会返回相同的对象或两个相同但不完全相同的对象。</p>。
+     * 
+     * 
      * @param name  A string representation of the object name.
      *
      * @return an ObjectName corresponding to the given String.
@@ -1281,6 +1485,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * this method twice with the same parameters may return the same
      * object or two equal but not identical objects.</p>
      *
+     * <p>
+     *  <p>返回一个ObjectName实例,可以在使用{@link #ObjectName(String,String,String)new ObjectName(domain,key,value)}获得
+     * 的对象的任何地方使用。
+     * 返回的对象可以是ObjectName的子类。使用相同的参数调用此方法两次可能会返回相同的对象或两个相同但不完全相同的对象。</p>。
+     * 
+     * 
      * @param domain  The domain part of the object name.
      * @param key  The attribute in the key property of the object name.
      * @param value The value in the key property of the object name.
@@ -1309,6 +1519,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * twice with the same parameters may return the same object or
      * two equal but not identical objects.</p>
      *
+     * <p>
+     * <p>返回一个ObjectName实例,可以在使用{@link #ObjectName(String,Hashtable)new ObjectName(domain,table)}获得的对象的任何地方使
+     * 用。
+     * 返回的对象可以是ObjectName的子类。使用相同的参数调用此方法两次可能会返回相同的对象或两个相同但不完全相同的对象。</p>。
+     * 
+     * 
      * @param domain  The domain part of the object name.
      * @param table A hash table containing one or more key
      * properties.  The key of each entry in the table is the key of a
@@ -1351,6 +1567,16 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * code.  Such code can call this method to obtain an ObjectName
      * that is known not to have surprising behavior.</p>
      *
+     * <p>
+     *  <p>返回ObjectName的实例,可以在可以使用给定对象的任何位置使用。返回的对象可以是ObjectName的子类。
+     * 如果<code> name </code>是ObjectName的子类,则不能保证返回的对象将是相同的类。</p>。
+     * 
+     *  <p>返回的值可能与<code> name </code>相同或不一致。使用相同的参数调用此方法两次可能会返回相同的对象或两个相同但不完全相同的对象。</p>
+     * 
+     *  <p>由于ObjectName是不可变的,因此创建ObjectName的副本通常不是有用的。这种方法的主要用途是防止恶意的调用者,其可能将具有惊人行为的子类的实例传递到敏感代码。
+     * 这样的代码可以调用这个方法来获得一个已知没有令人惊讶的行为的ObjectName。</p>。
+     * 
+     * 
      * @param name an instance of the ObjectName class or of a subclass
      *
      * @return an instance of ObjectName or a subclass that is known to
@@ -1370,6 +1596,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Construct an object name from the given string.
      *
+     * <p>
+     *  从给定字符串构造对象名称。
+     * 
+     * 
      * @param name  A string representation of the object name.
      *
      * @exception MalformedObjectNameException The string passed as a
@@ -1385,6 +1615,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Construct an object name with exactly one key property.
      *
+     * <p>
+     *  构造具有正确一个键属性的对象名称。
+     * 
+     * 
      * @param domain  The domain part of the object name.
      * @param key  The attribute in the key property of the object name.
      * @param value The value in the key property of the object name.
@@ -1407,6 +1641,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Construct an object name with several key properties from a Hashtable.
      *
+     * <p>
+     *  使用Hashtable中的几个关键属性构造对象名称。
+     * 
+     * 
      * @param domain  The domain part of the object name.
      * @param table A hash table containing one or more key
      * properties.  The key of each entry in the table is the key of a
@@ -1426,6 +1664,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
         /* The exception for when a key or value in the table is not a
            String is now ClassCastException rather than
            MalformedObjectNameException.  This was not previously
+        /* <p>
+        /*  String现在是ClassCastException,而不是MalformedObjectNameException。这不是以前
+        /* 
+        /* 
            specified.  */
     }
 
@@ -1440,6 +1682,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * An object name is a pattern if its domain contains a
      * wildcard or if the object name is a property pattern.
      *
+     * <p>
+     * 检查对象名称是否为模式。
+     * <p>
+     *  如果对象名称的域包含通配符或对象名称是属性模式,则对象名称是模式。
+     * 
+     * 
      * @return  True if the name is a pattern, otherwise false.
      */
     public boolean isPattern() {
@@ -1451,6 +1699,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Checks whether the object name is a pattern on the domain part.
      *
+     * <p>
+     *  检查对象名称是否是域部件上的模式。
+     * 
+     * 
      * @return  True if the name is a domain pattern, otherwise false.
      *
      */
@@ -1465,6 +1717,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * pattern on the key property list (e.g. "d:k=v,*") or on the
      * property values (e.g. "d:k=*") or on both (e.g. "d:k=*,*").
      *
+     * <p>
+     *  检查对象名称是否是键属性上的模式。
+     * <p>
+     *  对象名称是关键属性上的模式,如果它是关键属性列表上的模式(例如"d：k = v,*")或属性值(例如"d：k = *"), (例如"d：k = *,*")。
+     * 
+     * 
      * @return  True if the name is a property pattern, otherwise false.
      */
     public boolean isPropertyPattern() {
@@ -1477,6 +1735,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * For example, "d:k=v,*" and "d:k=*,*" are key property list patterns
      * whereas "d:k=*" is not.
      *
+     * <p>
+     *  检查对象名称是否为关键属性列表中的模式。
+     * <p>
+     *  例如,"d：k = v,*"和"d：k = *,*"是关键属性列表模式,而"d：k =
+     * 
+     * 
      * @return  True if the name is a property list pattern, otherwise false.
      *
      * @since 1.6
@@ -1492,6 +1756,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * For example, "d:k=*" and "d:k=*,*" are property value patterns
      * whereas "d:k=v,*" is not.
      *
+     * <p>
+     *  检查对象名称是否是至少一个键属性的值部分上的模式。
+     * <p>
+     *  例如,"d：k = *"和"d：k = *,*"是属性值模式,而"d：k = v,*"
+     * 
+     * 
      * @return  True if the name is a property value pattern, otherwise false.
      *
      * @since 1.6
@@ -1504,6 +1774,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * Checks whether the value associated with a key in a key
      * property is a pattern.
      *
+     * <p>
+     *  检查与键属性中的键相关联的值是否为模式。
+     * 
+     * 
      * @param property The property whose value is to be checked.
      *
      * @return True if the value associated with the given key property
@@ -1551,6 +1825,20 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * list pattern with at least one key.
      * </ul>
      *
+     * <p>
+     *  <p>返回名称的规范形式;即,字符串表示,其中按照词法顺序对属性进行排序。</p>
+     * 
+     *  <p>更精确地说,名称的规范形式是一个字符串,它由<em>域部分</em>,冒号(<code>：</code>), / em>和<em>模式指示</em>。</p>
+     * 
+     *  <p> <em> </em>标准键属性列表与{@link #getCanonicalKeyPropertyListString()}中所述的字符串相同。</p>
+     * 
+     *  <p> <em>模式指示</em>是：
+     * <ul>
+     * <li>对于不是属性列表模式的ObjectName,为空; <li> ObjectName的星号,它是没有键的属性列表模式;或对于具有至少一个键的属性列表模式的ObjectName,使用<li>逗号和星
+     * 号(<code>,* </code>)。
+     * </ul>
+     * 
+     * 
      * @return The canonical form of the name.
      */
     public String getCanonicalName()  {
@@ -1560,6 +1848,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Returns the domain part.
      *
+     * <p>
+     *  返回域部件。
+     * 
+     * 
      * @return The domain.
      */
     public String getDomain()  {
@@ -1569,6 +1861,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Obtains the value associated with a key in a key property.
      *
+     * <p>
+     *  获取与键属性中的键相关联的值。
+     * 
+     * 
      * @param property The property whose value is to be obtained.
      *
      * @return The value of the property, or null if there is no such
@@ -1588,6 +1884,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      *
      * <p>The returned value must not be modified.</p>
      *
+     * <p>
+     *  <p>以地图形式返回键属性。返回的值是一个Map,其中每个键是ObjectName的键属性列表中的键,每个值都是关联的值。</p>
+     * 
+     *  <p>不得修改返回的值。</p>
+     * 
+     * 
      * @return The table of key properties.
      */
     private Map<String,String> _getKeyPropertyList()  {
@@ -1617,6 +1919,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * <p>The returned value may be unmodifiable.  If it is
      * modifiable, changing it has no effect on this ObjectName.</p>
      *
+     * <p>
+     *  <p>将关键属性作为Hashtable返回。返回的值是一个Hashtable,其中每个键是ObjectName的键属性列表中的键,每个值都是关联的值。</p>
+     * 
+     *  <p>返回的值可能不可修改。如果是可修改的,更改它对此ObjectName没有影响。</p>
+     * 
+     * 
      * @return The table of key properties.
      */
     // CR 6441274 depends on the modification property defined above
@@ -1631,6 +1939,11 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * the key properties in the returned String will be in the same
      * order as in the argument to the constructor.</p>
      *
+     * <p>
+     *  <p>返回创建时指定的键属性列表的字符串表示形式。
+     * 如果这个ObjectName是使用构造函数{@link #ObjectName(String)}构造的,则返回的String中的键属性的顺序与构造函数的参数中的顺序相同。</p>。
+     * 
+     * 
      * @return The key property list string.  This string is
      * independent of whether the ObjectName is a pattern.
      */
@@ -1656,6 +1969,11 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * the key properties in the returned String will be in the same
      * order as in the argument to the constructor.</p>
      *
+     * <p>
+     *  <p>返回ObjectName的序列化字符串。在创建时指定的属性。
+     * 如果这个ObjectName是用构造函数{@link #ObjectName(String)}构造的,则返回的String中的键属性的顺序与构造函数的参数的顺序相同。</p>。
+     * 
+     * 
      * @return The key property list string.  This string is
      * independent of whether the ObjectName is a pattern.
      */
@@ -1697,6 +2015,11 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * the key properties in the returned String will be in the same
      * order as in the argument to the constructor.</p>
      *
+     * <p>
+     * <p>在指定的数组中,从指定的偏移量开始,写一个在创建时指定的键属性列表的字符串表示。
+     * 如果这个ObjectName是用构造函数{@link #ObjectName(String)}构造的,则返回的String中的键属性的顺序与构造函数的参数的顺序相同。</p>。
+     * 
+     * 
      * @return offset + #of chars written
      */
     private int writeKeyPropertyListString(char[] canonicalChars,
@@ -1730,6 +2053,11 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * is the order implied by {@link String#compareTo(String)
      * String.compareTo(String)}.
      *
+     * <p>
+     *  返回键属性列表的字符串表示形式,其中键属性按词汇顺序排序。这用于执行的词典比较,以便基于它们的关键属性列表选择MBean。
+     * 词法顺序是由{@link String#compareTo(String)String.compareTo(String)}隐含的顺序。
+     * 
+     * 
      * @return The canonical key property list string.  This string is
      * independent of whether the ObjectName is a pattern.
      */
@@ -1750,6 +2078,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * that two ObjectNames return the same string if and only if they
      * are equal.</p>
      *
+     * <p>
+     *  <p>返回对象名称的字符串表示形式。此字符串的格式未指定,但用户可以预期两个ObjectNames返回相同的字符串,如果且仅当它们相等。</p>
+     * 
+     * 
      * @return a string representation of this object name.
      */
     @Override
@@ -1763,6 +2095,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * forms are equal.  The canonical form is the string described
      * for {@link #getCanonicalName()}.
      *
+     * <p>
+     *  将当前对象名称与另一个对象名称进行比较。当且仅当它们的规范形式相等时,两个ObjectName实例是相等的。规范形式是{@link #getCanonicalName()}描述的字符串。
+     * 
+     * 
      * @param object  The object name that the current object name is to be
      *        compared with.
      *
@@ -1792,6 +2128,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Returns a hash code for this object name.
      *
+     * <p>
+     *  返回此对象名的哈希代码。
+     * 
      */
     @Override
     public int hashCode() {
@@ -1821,6 +2160,18 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * by a backslash followed by the character '\n'.</li>
      * </ul>
      *
+     * <p>
+     *  <p>返回给定String的引用形式,适合包含在ObjectName中。返回的值可以用作与ObjectName中的键相关联的值。字符串<code> s </code>可以包含任何字符。
+     * 适当的引用可确保返回的值在ObjectName中是合法的。</p>。
+     * 
+     * <p>返回值由一个引号('"'),一个与<code> s </code>的字符相对应的字符序列,以及另一个引号。<code> s </code>在以下范围内：</p>
+     * 
+     * <ul>
+     *  <li>引号('"')由反斜杠(\)后接引号替换。</li> <li>星号('*')由反斜杠(\)替代,后跟星号。 </li> <li>问号('?')由反斜杠(\)替换为问号。
+     * </li> <li>反斜杠('\')由两个反斜杠代替。 / li> <li>换行符(在Java中的字符'\ n')被反斜杠替换,后面跟着字符'\ n'。</li>。
+     * </ul>
+     * 
+     * 
      * @param s the String to be quoted.
      *
      * @return the quoted String.
@@ -1861,6 +2212,15 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * <p>These rules imply that there is a one-to-one mapping between
      * quoted and unquoted forms.</p>
      *
+     * <p>
+     *  <p>返回给定String的无引号形式。
+     * 如果<code> q </code>是{@link #quote quote(s)}返回的字符串,则<code> unquote(q).equals(s)</code>。
+     * 如果没有<code> quote(s).equals(q)</code>的String <code> s </code>,那么unquote(q)会抛出IllegalArgumentException。
+     * 如果<code> q </code>是{@link #quote quote(s)}返回的字符串,则<code> unquote(q).equals(s)</code>。</p>。
+     * 
+     *  <p>这些规则意味着引号和非引号形式之间存在一对一的映射。</p>
+     * 
+     * 
      * @param q the String to be unquoted.
      *
      * @return the unquoted String.
@@ -1915,6 +2275,10 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /**
      * Defines the wildcard "*:*" ObjectName.
      *
+     * <p>
+     *  定义通配符"*：*"ObjectName。
+     * 
+     * 
      * @since 1.6
      */
     public static final ObjectName WILDCARD = Util.newObjectName("*:*");
@@ -1933,6 +2297,12 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * ObjectNames are equal as described for the {@link
      * #equals(Object)} method.</p>
      *
+     * <p>
+     * <p>测试此ObjectName(可能是模式)是否与另一个ObjectName匹配。如果<code> name </code>是模式,则结果为false。
+     * 如果此ObjectName是一个模式,当且仅当<code> name </code>与模式匹配时,结果为true。
+     * 如果这个ObjectName和<code> name </code>都不是一个模式,当且仅当两个ObjectNames等于{@link #equals(Object)}方法时,结果才为真。</p>。
+     * 
+     * 
      * @param name The name of the MBean to compare to.
      *
      * @return True if <code>name</code> matches this ObjectName.
@@ -2020,6 +2390,9 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
     /* Method inherited from QueryExp, no implementation needed here
        because ObjectName is not relative to an MBeanServer and does
        not contain a subquery.
+    /* <p>
+    /*  因为ObjectName不是相对于MBeanServer的,并且不包含子查询。
+    /* 
     */
     public void setMBeanServer(MBeanServer mbs) { }
 
@@ -2062,6 +2435,17 @@ public class ObjectName implements Comparable<ObjectName>, QueryExp {
      * <li>Shapes:type=Triangle,side=isosceles,name=2</li>
      * </ul>
      *
+     * <p>
+     *  <p>比较两个ObjectName实例。 ObjectNames之间的排序关系没有完全指定,而是希望对象名称的排序列表将按照方便人们阅读的顺序显示。</p>
+     * 
+     *  <p>特别是,如果两个ObjectName实例具有不同的域,那么它们的顺序是域的词典顺序。关键属性列表的顺序仍未指定。</p>
+     * 
+     *  <p>例如,下面的ObjectName实例：</p>
+     * <ul>
+     *  <li>形状：type = Square,name = 3 </li> <li>颜色：type = Red,name = 2 </li> <li>形状：type = Triangle,side = i
+     * sosceles,name = li> <li>颜色：type = Blue,name = 1 </li> <li>形状：type = Square,name = 1 </li> <li>形状：type
+     *  = Square,name = 2 </li> <li> JMI实现：type = MBeanServerDelegate </li> <li>形状：type = Triangle,side = sc
+     * 
      * @param name the ObjectName to be compared.
      *
      * @return a negative integer, zero, or a positive integer as this

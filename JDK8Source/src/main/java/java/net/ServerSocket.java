@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,12 @@ import java.security.PrivilegedExceptionAction;
  * implementation to configure itself to create sockets
  * appropriate to the local firewall.
  *
+ * <p>
+ *  此类实现服务器套接字。服务器套接字等待通过网络进入的请求。它基于该请求执行一些操作,然后可能将结果返回给请求者。
+ * <p>
+ *  服务器套接字的实际工作由{@code SocketImpl}类的实例执行。应用程序可以更改创建套接字实现的套接字工厂,以便自己配置为创建适合本地防火墙的套接字。
+ * 
+ * 
  * @author  unascribed
  * @see     java.net.SocketImpl
  * @see     java.net.ServerSocket#setSocketFactory(java.net.SocketImplFactory)
@@ -52,6 +59,9 @@ public
 class ServerSocket implements java.io.Closeable {
     /**
      * Various states of this socket.
+     * <p>
+     *  此插座的各种状态。
+     * 
      */
     private boolean created = false;
     private boolean bound = false;
@@ -60,17 +70,26 @@ class ServerSocket implements java.io.Closeable {
 
     /**
      * The implementation of this Socket.
+     * <p>
+     *  这个Socket的实现。
+     * 
      */
     private SocketImpl impl;
 
     /**
      * Are we using an older SocketImpl?
+     * <p>
+     *  我们使用较老的SocketImpl吗?
+     * 
      */
     private boolean oldImpl = false;
 
     /**
      * Package-private constructor to create a ServerSocket associated with
      * the given SocketImpl.
+     * <p>
+     *  Package-private构造函数创建与给定SocketImpl相关联的ServerSocket。
+     * 
      */
     ServerSocket(SocketImpl impl) {
         this.impl = impl;
@@ -80,6 +99,10 @@ class ServerSocket implements java.io.Closeable {
     /**
      * Creates an unbound server socket.
      *
+     * <p>
+     *  创建未绑定的服务器套接字。
+     * 
+     * 
      * @exception IOException IO error when opening the socket.
      * @revised 1.4
      */
@@ -108,6 +131,17 @@ class ServerSocket implements java.io.Closeable {
      * This could result in a SecurityException.
      *
      *
+     * <p>
+     *  创建一个服务器套接字,绑定到指定的端口。端口号{@code 0}表示端口号被自动分配,通常来自临时端口范围。
+     * 然后可以通过调用{@link #getLocalPort getLocalPort}来检索此端口号。
+     * <p>
+     *  传入连接指示(连接请求)的最大队列长度设置为{@code 50}。如果在队列已满时连接指示到达,则拒绝连接。
+     * <p>
+     *  如果应用程序指定了一个服务器套接字工厂,则调用该工厂的{@code createSocketImpl}方法来创建实际的套接字实现。否则创建一个"纯"套接字。
+     * <p>
+     * 如果有安全管理器,则会调用其{@code checkListen}方法,并使用{@code port}参数作为其参数,以确保允许操作。这可能导致SecurityException。
+     * 
+     * 
      * @param      port  the port number, or {@code 0} to use a port
      *                   number that is automatically allocated.
      *
@@ -159,6 +193,21 @@ class ServerSocket implements java.io.Closeable {
      * {@code 0}, then an implementation specific default will be used.
      * <P>
      *
+     * <p>
+     *  创建服务器套接字并将其绑定到指定的本地端口号,以及指定的待办事项。端口号{@code 0}表示端口号被自动分配,通常来自临时端口范围。
+     * 然后可以通过调用{@link #getLocalPort getLocalPort}来检索此端口号。
+     * <p>
+     *  传入连接指示(连接请求)的最大队列长度设置为{@code backlog}参数。如果在队列已满时连接指示到达,则拒绝连接。
+     * <p>
+     *  如果应用程序指定了一个服务器套接字工厂,则调用该工厂的{@code createSocketImpl}方法来创建实际的套接字实现。否则创建一个"纯"套接字。
+     * <p>
+     *  如果有安全管理器,则会调用其{@code checkListen}方法,并使用{@code port}参数作为其参数,以确保允许操作。这可能导致SecurityException。
+     * 
+     * {@code backlog}参数是套接字上请求的最大挂起连接数。它的确切语义是实现特定的。具体地,实现可以施加最大长度,或者可以选择忽略参数等。提供的值应大于{@code 0}。
+     * 如果它小于或等于{@code 0},那么将使用特定于实现的默认值。
+     * <P>
+     * 
+     * 
      * @param      port     the port number, or {@code 0} to use a port
      *                      number that is automatically allocated.
      * @param      backlog  requested maximum length of the queue of incoming
@@ -207,6 +256,17 @@ class ServerSocket implements java.io.Closeable {
      * should be greater than {@code 0}. If it is less than or equal to
      * {@code 0}, then an implementation specific default will be used.
      * <P>
+     * <p>
+     *  创建具有指定端口,侦听待办事项和要绑定的本地IP地址的服务器。 <i> bindAddr </i>参数可用于多宿主主机上的ServerSocket,它只接受连接请求到它的一个地址。
+     * 如果<i> bindAddr </i>为空,它将默认接受任何/所有本地地址的连接。端口必须介于0和65535之间(包括0和65535)。
+     * 端口号{@code 0}表示端口号被自动分配,通常来自临时端口范围。然后可以通过调用{@link #getLocalPort getLocalPort}来检索此端口号。
+     * 
+     *  <P>如果有安全管理器,此方法将使用{@code port}参数作为其参数来调用其{@code checkListen}方法,以确保允许操作。这可能导致SecurityException。
+     * 
+     * {@code backlog}参数是套接字上请求的最大挂起连接数。它的确切语义是实现特定的。具体地,实现可以施加最大长度,或者可以选择忽略参数等。提供的值应大于{@code 0}。
+     * 如果它小于或等于{@code 0},那么将使用特定于实现的默认值。
+     * <P>
+     * 
      * @param port  the port number, or {@code 0} to use a port
      *              number that is automatically allocated.
      * @param backlog requested maximum length of the queue of incoming
@@ -248,6 +308,10 @@ class ServerSocket implements java.io.Closeable {
      * Get the {@code SocketImpl} attached to this socket, creating
      * it if necessary.
      *
+     * <p>
+     *  获取{@code SocketImpl}附加到此套接字,如果必要创建它。
+     * 
+     * 
      * @return  the {@code SocketImpl} attached to that ServerSocket.
      * @throws SocketException if creation fails.
      * @since 1.4
@@ -294,6 +358,10 @@ class ServerSocket implements java.io.Closeable {
     /**
      * Creates the socket implementation.
      *
+     * <p>
+     *  创建套接字实现。
+     * 
+     * 
      * @throws IOException if creation fails
      * @since 1.4
      */
@@ -316,6 +384,12 @@ class ServerSocket implements java.io.Closeable {
      * If the address is {@code null}, then the system will pick up
      * an ephemeral port and a valid local address to bind the socket.
      * <p>
+     * <p>
+     *  将{@code ServerSocket}绑定到特定地址(IP地址和端口号)。
+     * <p>
+     *  如果地址是{@code null},那么系统将拾取一个临时端口和一个有效的本地地址来绑定套接字。
+     * <p>
+     * 
      * @param   endpoint        The IP address and port number to bind to.
      * @throws  IOException if the bind operation fails, or if the socket
      *                     is already bound.
@@ -343,6 +417,15 @@ class ServerSocket implements java.io.Closeable {
      * or may choose to ignore the parameter altogther. The value provided
      * should be greater than {@code 0}. If it is less than or equal to
      * {@code 0}, then an implementation specific default will be used.
+     * <p>
+     *  将{@code ServerSocket}绑定到特定地址(IP地址和端口号)。
+     * <p>
+     *  如果地址是{@code null},那么系统将拾取一个临时端口和一个有效的本地地址来绑定套接字。
+     * <P>
+     *  {@code backlog}参数是套接字上请求的最大挂起连接数。它的确切语义是实现特定的。具体地,实现可以施加最大长度,或者可以选择忽略参数等。提供的值应大于{@code 0}。
+     * 如果它小于或等于{@code 0},那么将使用特定于实现的默认值。
+     * 
+     * 
      * @param   endpoint        The IP address and port number to bind to.
      * @param   backlog         requested maximum length of the queue of
      *                          incoming connections.
@@ -396,6 +479,15 @@ class ServerSocket implements java.io.Closeable {
      * if the operation is allowed. If the operation is not allowed,
      * the {@link InetAddress#getLoopbackAddress loopback} address is returned.
      *
+     * <p>
+     *  返回此服务器套接字的本地地址。
+     * <p>
+     * 如果套接字在{@link #close closed}之前被绑定,则该方法将在套接字关闭后继续返回本地地址。
+     * <p>
+     *  如果存在安全管理器集,则会使用本地地址和{@code -1}作为其参数来调用其{@code checkConnect}方法,以查看是否允许该操作。
+     * 如果不允许该操作,则返回{@link InetAddress#getLoopbackAddress loopback}地址。
+     * 
+     * 
      * @return  the address to which this socket is bound,
      *          or the loopback address if denied by the security manager,
      *          or {@code null} if the socket is unbound.
@@ -428,6 +520,12 @@ class ServerSocket implements java.io.Closeable {
      * then this method will continue to return the port number
      * after the socket is closed.
      *
+     * <p>
+     *  返回此套接字正在侦听的端口号。
+     * <p>
+     *  如果套接字在{@link #close closed}之前绑定,则此方法将在套接字关闭后继续返回端口号。
+     * 
+     * 
      * @return  the port number to which this socket is listening or
      *          -1 if the socket is not bound yet.
      */
@@ -458,6 +556,15 @@ class ServerSocket implements java.io.Closeable {
      * {@link InetAddress#getLoopbackAddress loopback} address and the local
      * port to which the socket is bound is returned.
      *
+     * <p>
+     *  返回此套接字绑定到的端点的地址。
+     * <p>
+     *  如果在{@link #close closed}之前绑定套接字,则该方法将在套接字关闭后继续返回端点的地址。
+     * <p>
+     *  如果存在安全管理器集,则会使用本地地址和{@code -1}作为其参数来调用其{@code checkConnect}方法,以查看是否允许该操作。
+     * 如果不允许该操作,则返回表示{@link InetAddress#getLoopbackAddress loopback}地址和套接字绑定到的本地端口的{@code SocketAddress}。
+     * 
+     * 
      * @return a {@code SocketAddress} representing the local endpoint of
      *         this socket, or a {@code SocketAddress} representing the
      *         loopback address if denied by the security manager,
@@ -488,6 +595,14 @@ class ServerSocket implements java.io.Closeable {
      * as its arguments to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  监听要对此套接字进行的连接并接受它。该方法阻塞直到建立连接。
+     * 
+     * <p>创建了一个新的Socket {@code s},如果有安全管理器,则使用{@code s.getInetAddress()。
+     * getHostAddress()}和{@ code}调用安全管理器的{@code checkAccept}代码s.getPort()}作为其参数,以确保允许操作。
+     * 这可能导致SecurityException。
+     * 
+     * 
      * @exception  IOException  if an I/O error occurs when waiting for a
      *               connection.
      * @exception  SecurityException  if a security manager exists and its
@@ -520,6 +635,11 @@ class ServerSocket implements java.io.Closeable {
      * will typically hand this method an <i>empty</i> FooSocket.  On
      * return from implAccept the FooSocket will be connected to a client.
      *
+     * <p>
+     *  ServerSocket的子类使用此方法重写accept()以返回其自己的套接字子类。所以一个FooServerSocket通常会把这个方法作为一个空的</i> FooSocket。
+     * 在从implAccept返回时,FooSocket将被连接到客户端。
+     * 
+     * 
      * @param s the Socket
      * @throws java.nio.channels.IllegalBlockingModeException
      *         if this socket has an associated channel,
@@ -573,6 +693,14 @@ class ServerSocket implements java.io.Closeable {
      * <p> If this socket has an associated channel then the channel is closed
      * as well.
      *
+     * <p>
+     *  关闭此套接字。
+     * 
+     *  任何当前在{@link #accept()}中屏蔽的帖子都会抛出{@link SocketException}。
+     * 
+     *  <p>如果此套接字具有相关联的频道,则频道也会关闭。
+     * 
+     * 
      * @exception  IOException  if an I/O error occurs when closing the socket.
      * @revised 1.4
      * @spec JSR-51
@@ -596,6 +724,13 @@ class ServerSocket implements java.io.Closeable {
      * java.nio.channels.ServerSocketChannel#open ServerSocketChannel.open}
      * method.
      *
+     * <p>
+     *  返回与此套接字关联的唯一{@link java.nio.channels.ServerSocketChannel}对象(如果有)。
+     * 
+     *  <p>当且仅当通道本身是通过{@link java.nio.channels.ServerSocketChannel#open ServerSocketChannel.open}方法创建时,服务器套接
+     * 字才有一个通道。
+     * 
+     * 
      * @return  the server-socket channel associated with this socket,
      *          or {@code null} if this socket was not created
      *          for a channel
@@ -610,6 +745,10 @@ class ServerSocket implements java.io.Closeable {
     /**
      * Returns the binding state of the ServerSocket.
      *
+     * <p>
+     *  返回ServerSocket的绑定状态。
+     * 
+     * 
      * @return true if the ServerSocket successfully bound to an address
      * @since 1.4
      */
@@ -621,6 +760,10 @@ class ServerSocket implements java.io.Closeable {
     /**
      * Returns the closed state of the ServerSocket.
      *
+     * <p>
+     *  返回ServerSocket的关闭状态。
+     * 
+     * 
      * @return true if the socket has been closed
      * @since 1.4
      */
@@ -640,6 +783,13 @@ class ServerSocket implements java.io.Closeable {
      * prior to entering the blocking operation to have effect.  The
      * timeout must be {@code > 0}.
      * A timeout of zero is interpreted as an infinite timeout.
+     * <p>
+     * 以指定的超时值(以毫秒为单位)启用/禁用{@link SocketOptions#SO_TIMEOUT SO_TIMEOUT}。
+     * 将此选项设置为非零超时,对此ServerSocket的accept()调用将仅阻止此时间量。
+     * 如果超时到期,则会引发一个<B> java.net.SocketTimeoutException </B>,虽然ServerSocket仍然有效。
+     * 必须先启用选项<B> </B>,然后才能进入阻止操作才能生效。超时必须为{@code> 0}。超时为零被解释为无限超时。
+     * 
+     * 
      * @param timeout the specified timeout, in milliseconds
      * @exception SocketException if there is an error in
      * the underlying protocol, such as a TCP error.
@@ -655,6 +805,10 @@ class ServerSocket implements java.io.Closeable {
     /**
      * Retrieve setting for {@link SocketOptions#SO_TIMEOUT SO_TIMEOUT}.
      * 0 returns implies that the option is disabled (i.e., timeout of infinity).
+     * <p>
+     *  检索{@link SocketOptions#SO_TIMEOUT SO_TIMEOUT}的设置。 0返回意味着该选项被禁用(即,无限超时)。
+     * 
+     * 
      * @return the {@link SocketOptions#SO_TIMEOUT SO_TIMEOUT} value
      * @exception IOException if an I/O error occurs
      * @since   JDK1.1
@@ -698,6 +852,21 @@ class ServerSocket implements java.io.Closeable {
      * enabled or disabled after a socket is bound (See {@link #isBound()})
      * is not defined.
      *
+     * <p>
+     *  启用/停用{@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}套接字选项。
+     * <p>
+     *  当TCP连接关闭时,连接可能在连接关闭后保持在超时状态一段时间(通常称为{@code TIME_WAIT}状态或{@code 2MSL}等待状态)。
+     * 对于使用众所周知的套接字地址或端口的应用程序,如果存在涉及套接字地址或端口的超时状态的连接,则可能无法将套接字绑定到所需的{@code SocketAddress}。
+     * <p>
+     *  在使用{@link #bind(SocketAddress)}绑定套接字之前启用{@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}允许绑定套接字,即使前一个
+     * 连接处于超时状态。
+     * <p>
+     * 当创建{@code ServerSocket}时,未定义{@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}的初始设置。
+     * 应用程序可以使用{@link #getReuseAddress()}确定{@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}的初始设置。
+     * <p>
+     *  在绑定套接字后启用或禁用{@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}时的行为(请参阅{@link #isBound()})未定义。
+     * 
+     * 
      * @param on  whether to enable or disable the socket option
      * @exception SocketException if an error occurs enabling or
      *            disabling the {@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}
@@ -717,6 +886,10 @@ class ServerSocket implements java.io.Closeable {
     /**
      * Tests if {@link SocketOptions#SO_REUSEADDR SO_REUSEADDR} is enabled.
      *
+     * <p>
+     *  测试是否启用{@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}。
+     * 
+     * 
      * @return a {@code boolean} indicating whether or not
      *         {@link SocketOptions#SO_REUSEADDR SO_REUSEADDR} is enabled.
      * @exception SocketException if there is an error
@@ -741,6 +914,13 @@ class ServerSocket implements java.io.Closeable {
      * {@link InetAddress#getLoopbackAddress loopback} address is returned as
      * the implementation address.
      *
+     * <p>
+     *  以{@code String}形式返回此套接字的实现地址和实现端口。
+     * <p>
+     *  如果存在安全管理器集,则会使用本地地址和{@code -1}作为其参数来调用其{@code checkConnect}方法,以查看是否允许该操作。
+     * 如果不允许该操作,则返回表示{@link InetAddress#getLoopbackAddress loopback}地址的{@code InetAddress}作为实现地址。
+     * 
+     * 
      * @return  a string representation of this socket.
      */
     public String toString() {
@@ -765,6 +945,9 @@ class ServerSocket implements java.io.Closeable {
 
     /**
      * The factory for all server sockets.
+     * <p>
+     *  所有服务器套接字的工厂。
+     * 
      */
     private static SocketImplFactory factory = null;
 
@@ -784,6 +967,16 @@ class ServerSocket implements java.io.Closeable {
      * to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  设置应用程序的服务器套接字实现工厂。工厂只能指定一次。
+     * <p>
+     *  当应用程序创建新的服务器套接字时,将调用套接字实现工厂的{@code createSocketImpl}方法来创建实际的套接字实现。
+     * <p>
+     *  将{@code null}传递给方法是一个无操作,除非工厂已经设置。
+     * <p>
+     * 如果有安全管理器,则此方法首先调用安全管理器的{@code checkSetFactory}方法,以确保允许操作。这可能导致SecurityException。
+     * 
+     * 
      * @param      fac   the desired factory.
      * @exception  IOException  if an I/O error occurs when setting the
      *               socket factory.
@@ -828,6 +1021,19 @@ class ServerSocket implements java.io.Closeable {
      * requested value but the TCP receive window in sockets accepted from
      * this ServerSocket will be no larger than 64K bytes.
      *
+     * <p>
+     *  为从{@code ServerSocket}接受的套接字设置{@link SocketOptions#SO_RCVBUF SO_RCVBUF}选项的默认建议值。
+     * 在套接字由{@link #accept()}返回之后,必须通过调用{@link Socket#getReceiveBufferSize()}来确定在接受的套接字中实际设置的值。
+     * <p>
+     *  {@link SocketOptions#SO_RCVBUF SO_RCVBUF}的值既用于设置内部套接字接收缓冲区的大小,也用于设置通告给远程对等体的TCP接收窗口的大小。
+     * <p>
+     *  可以通过调用{@link Socket#setReceiveBufferSize(int)}来随后更改该值。
+     * 但是,如果应用程序希望允许大于64K字节的接收窗口(如RFC1323定义的那样),那么在绑定到本地地址之前,必须在ServerSocket <B>之前设置建议的值。
+     * 这意味着ServerSocket必须使用无参数构造函数创建,然后必须调用setReceiveBufferSize(),最后通过调用bind()将ServerSocket绑定到地址。
+     * <p>
+     *  不这样做不会导致错误,并且缓冲区大小可以设置为请求的值,但从此ServerSocket接受的套接字中的TCP接收窗口将不大于64K字节。
+     * 
+     * 
      * @exception SocketException if there is an error
      * in the underlying protocol, such as a TCP error.
      *
@@ -856,6 +1062,13 @@ class ServerSocket implements java.io.Closeable {
      *
      * <p>Note, the value actually set in the accepted socket is determined by
      * calling {@link Socket#getReceiveBufferSize()}.
+     * <p>
+     * 获取此{@code ServerSocket}的{@link SocketOptions#SO_RCVBUF SO_RCVBUF}选项的值,这是将用于从此{@code ServerSocket}接受的套
+     * 接字的建议缓冲区大小。
+     * 
+     *  <p>注意,在接受的套接字中实际设置的值是通过调用{@link Socket#getReceiveBufferSize()}来确定的。
+     * 
+     * 
      * @return the value of the {@link SocketOptions#SO_RCVBUF SO_RCVBUF}
      *         option for this {@code Socket}.
      * @exception SocketException if there is an error
@@ -899,6 +1112,13 @@ class ServerSocket implements java.io.Closeable {
      * will have no effect. This implies that in order to use this capability
      * requires the socket to be created with the no-argument constructor.
      *
+     * <p>
+     *  设置此ServerSocket的性能首选项。
+     * 
+     *  <p>套接字默认使用TCP / IP协议。一些实现可以提供具有与TCP / IP不同的性能特征的替代协议。该方法允许应用表达其自己关于当实现从可用协议选择时如何进行这些折衷的偏好。
+     * 
+     *  <p>性能偏好由三个整数描述,其值指示短连接时间,低延迟和高带宽的相对重要性。整数的绝对值是不相关的;为了选择协议,简单地比较值,较大的值指示较强的偏好。
+     * 
      * @param  connectionTime
      *         An {@code int} expressing the relative importance of a short
      *         connection time

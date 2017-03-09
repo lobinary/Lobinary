@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -23,6 +24,8 @@ import com.sun.jmx.snmp.SnmpPduRequest;
 /**
  * This class is used to handle received inform request responses.
  * This classes parses the SNMP inform response packet to obtain the corresponding inform request.
+ * <p>
+ *  这个类用于处理接收到的通知请求响应。此类解析SNMP通知响应数据包以获取相应的通知请求。
  */
 
 class SnmpResponseHandler {

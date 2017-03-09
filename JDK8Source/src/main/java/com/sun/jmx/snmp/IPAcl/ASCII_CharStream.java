@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ package com.sun.jmx.snmp.IPAcl;
 /**
  * An implementation of interface CharStream, where the stream is assumed to
  * contain only ASCII characters (without unicode processing).
+ * <p>
+ *  接口CharStream的实现,其中流被假定为仅包含ASCII字符(没有unicode处理)。
+ * 
  */
 
 final class ASCII_CharStream
@@ -215,6 +219,8 @@ final class ASCII_CharStream
   }
 
   /**
+  /* <p>
+  /* 
    * @deprecated
    * @see #getEndColumn
    */
@@ -224,6 +230,8 @@ final class ASCII_CharStream
   }
 
   /**
+  /* <p>
+  /* 
    * @deprecated
    * @see #getEndLine
    */
@@ -353,6 +361,8 @@ final class ASCII_CharStream
 
   /**
    * Method to adjust line and column numbers for the start of a token.
+   * <p>
+   *  调整令牌开始的行号和列号的方法。
    */
   public void adjustBeginLineColumn(int newLine, int newCol)
   {

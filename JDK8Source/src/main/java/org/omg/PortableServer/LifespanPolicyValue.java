@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -16,6 +17,7 @@ package org.omg.PortableServer;
 	 * first created. 
 	 * PERSISTENT - The objects implemented in the POA can 
 	 * outlive the process in which they are first created. 
+	 * <p>
 	 */
 public class LifespanPolicyValue implements org.omg.CORBA.portable.IDLEntity
 {

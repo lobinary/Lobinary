@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,12 @@ import java.lang.ref.WeakReference;
  * This means that if the currently selected window is maximized
  * and another window is selected, that new window will be maximized.
  *
+ * <p>
+ *  这个类实现了一个DesktopManager,它比DefaultDesktopManager更紧密地跟随MDI模型。
+ * 与DefaultDesktopManager策略不同,MDI要求所选和已激活的子帧是相同的,并且该帧始终是最顶层的窗口。
+ * <p>
+ *  最大化的状态由DesktopManager与MDI管理,而不仅仅是单个子框架的属性。这意味着如果当前选择的窗口被最大化并且选择了另一个窗口,则该新窗口将被最大化。
+ * 
  * @see javax.swing.DefaultDesktopManager
  * @author Thomas Ball
  */
@@ -56,6 +63,8 @@ public class WindowsDesktopManager extends DefaultDesktopManager
 
     /* The frame which is currently selected/activated.
      * We store this value to enforce MDI's single-selection model.
+     * <p>
+     * 
      */
     private WeakReference<JInternalFrame> currentFrameRef;
 

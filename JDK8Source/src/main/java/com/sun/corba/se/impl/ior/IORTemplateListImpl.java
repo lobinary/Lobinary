@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,8 @@ public class IORTemplateListImpl extends FreezableList implements IORTemplateLis
     /* This class must override add( int, Object ) and set( int, Object )
      * so that adding an IORTemplateList to an IORTemplateList just results
      * in a list of TaggedProfileTemplates.
+     * <p>
+     *  所以将IORTemplateList添加到IORTemplateList只会导致TaggedProfileTemplates的列表。
      */
     public Object set( int index, Object element )
     {

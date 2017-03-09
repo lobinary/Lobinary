@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Param.java,v 1.2.4.1 2005/09/02 11:03:42 pvedula Exp $
+ * <p>
+ *  $ Id：Param.java,v 1.2.4.1 2005/09/02 11:03:42 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -43,6 +56,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -55,11 +70,17 @@ final class Param extends VariableBase {
      * True if this Param is declared in a simple named template.
      * This is used to optimize codegen for parameter passing
      * in named templates.
+     * <p>
+     *  如果此Param在简单命名模板中声明,则为True。这用于优化codegen以便在命名模板中传递参数。
+     * 
      */
     private boolean _isInSimpleNamedTemplate = false;
 
     /**
      * Display variable as single string
+     * <p>
+     *  将变量显示为单个字符串
+     * 
      */
     public String toString() {
         return "param(" + _name + ")";
@@ -68,6 +89,9 @@ final class Param extends VariableBase {
     /**
      * Set the instruction for loading the value of this variable onto the
      * JVM stack and returns the old instruction.
+     * <p>
+     *  设置将该变量的值加载到JVM堆栈的指令,并返回旧的指令。
+     * 
      */
     public Instruction setLoadInstruction(Instruction instruction) {
         Instruction tmp = _loadInstruction;
@@ -78,6 +102,9 @@ final class Param extends VariableBase {
     /**
      * Set the instruction for storing a value from the stack into this
      * variable and returns the old instruction.
+     * <p>
+     *  将用于将值从堆栈存储到该变量的指令设置为返回旧指令。
+     * 
      */
     public Instruction setStoreInstruction(Instruction instruction) {
         Instruction tmp = _storeInstruction;
@@ -87,6 +114,9 @@ final class Param extends VariableBase {
 
     /**
      * Display variable in a full AST dump
+     * <p>
+     *  在完全AST转储中显示变量
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -101,6 +131,9 @@ final class Param extends VariableBase {
     /**
      * Parse the contents of the <xsl:param> element. This method must read
      * the 'name' (required) and 'select' (optional) attributes.
+     * <p>
+     *  解析<xsl：param>元素的内容。此方法必须读取"name"(必需)和"select"(可选)属性。
+     * 
      */
     public void parseContents(Parser parser) {
 
@@ -152,6 +185,9 @@ final class Param extends VariableBase {
      * Type-checks the parameter. The parameter type is determined by the
      * 'select' expression (if present) or is a result tree if the parameter
      * element has a body and no 'select' expression.
+     * <p>
+     * 类型检查参数。参数类型由"select"表达式(如果存在)确定,或者如果参数元素具有主体且没有"select"表达式,则为结果树。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         if (_select != null) {
@@ -181,6 +217,9 @@ final class Param extends VariableBase {
          * To fix bug 24518 related to setting parameters of the form
          * {namespaceuri}localName which will get mapped to an instance
          * variable in the class.
+         * <p>
+         *  修复与设置{namespaceuri} localName形式的参数相关的错误24518,它将被映射到类中的一个实例变量。
+         * 
          */
         final String name = BasisLibrary.mapQNameToJavaName(_name.toString());
         final String signature = _type.toSignature();
@@ -191,6 +230,8 @@ final class Param extends VariableBase {
               * If simple named template then generate a conditional init of the
               * param using its default value:
               *       if (param == null) param = <default-value>
+              * <p>
+              *  如果简单命名模板然后使用其默认值生成param的条件init：if(param == null)param = <default-value>
               */
             if (_isInSimpleNamedTemplate) {
                 il.append(loadInstruction());

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -61,6 +71,28 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLConfigurationException;
  *  </ul>
  * </ul>
  *
+ * <p>
+ *  这是"标准"解析器配置。它使用标准的解析器组件集合扩展了DTD配置。解析器组件的标准集包括用DTD解析和验证所需的解析器组件,以及XML模式所需的解析器组件。</p>
+ * <p>
+ *  除了基本解析器配置识别的功能和属性之外,此类还识别这些附加的功能和属性：
+ * <ul>
+ *  <li>功能
+ * <ul>
+ *  <li> http://apache.org/xml/features/validation/schema </li> <li> http://apache.org/xml/features/vali
+ * dation/schema-full-checking </li> <li > http://apache.org/xml/features/validation/schema/normalized-v
+ * alue </li> <li> http://apache.org/xml/features/validation/schema/element-default </li>。
+ * </ul>
+ *  <li>属性
+ * <ul>
+ * <li> http://apache.org/xml/properties/internal/error-reporter </li> <li> http://apache.org/xml/proper
+ * ties/internal/entity-manager </li> <li > http://apache.org/xml/properties/internal/document-scanner </li>
+ *  <li> http://apache.org/xml/properties/internal/dtd-scanner </li> <li> HTTP ：//apache.org/xml/propert
+ * ies/internal/grammar-pool </li> <li> http://apache.org/xml/properties/internal/validator/dtd </li> <li>
+ *  HTTP：/ /apache.org/xml/properties/internal/datatype-validator-factory </li>。
+ * </ul>
+ * </ul>
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Andy Clark, IBM
  *
@@ -157,6 +189,8 @@ public class StandardParserConfiguration
     /**
      * Constructs a parser configuration using the specified symbol table.
      *
+     * <p>
+     * 
      * @param symbolTable The symbol table to use.
      */
     public StandardParserConfiguration(SymbolTable symbolTable) {
@@ -171,6 +205,10 @@ public class StandardParserConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表构造解析器配置。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      * @param grammarPool The grammar pool to use.
      */
@@ -187,6 +225,12 @@ public class StandardParserConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表和语法池构造解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable    The symbol table to use.
      * @param grammarPool    The grammar pool to use.
      * @param parentSettings The parent settings.
@@ -279,6 +323,12 @@ public class StandardParserConfiguration
      * Check a feature. If feature is know and supported, this method simply
      * returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  使用指定的符号表,语法池和父设置构造一个解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      *
      * @throws XMLConfigurationException Thrown for configuration error.
@@ -336,6 +386,10 @@ public class StandardParserConfiguration
      * Check a property. If the property is know and supported, this method
      * simply returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查功能。如果特性是知道和支持的,这个方法简单地返回。否则,抛出适当的异常。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      *

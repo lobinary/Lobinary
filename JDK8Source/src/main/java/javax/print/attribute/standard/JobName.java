@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,17 @@ import javax.print.attribute.PrintJobAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  JobName类是一个打印属性类,一个文本属性,用于指定打印作业的名称。作业名称是由客户端定义的任意字符串。它不需要在不同的工作之间是唯一的。
+ * 打印作业的JobName属性设置为客户端在打印请求属性集中提供的值。但是,如果客户端在打印请求中没有提供JobName属性,则打印机在创建打印作业时必须生成JobName。
+ * 打印机应从生成值的第一个源生成打印作业的JobName属性的值：(1)作业中第一个(或唯一)doc的{@link DocumentName DocumentName}属性,(2)如果文档的打印数据表示对
+ * 象是URL,则在作业中的第一(或仅有)文档的URL,或(3)任何其他打印作业特定和/或文档内容信息。
+ * 打印作业的JobName属性设置为客户端在打印请求属性集中提供的值。但是,如果客户端在打印请求中没有提供JobName属性,则打印机在创建打印作业时必须生成JobName。
+ * <P>
+ *  <B> IPP兼容性：</B>字符串值给出IPP名称值。语言环境提供IPP自然语言。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class JobName extends TextSyntax
@@ -60,6 +72,10 @@ public final class JobName extends TextSyntax
     /**
      * Constructs a new job name attribute with the given job name and locale.
      *
+     * <p>
+     *  使用给定的作业名称和区域设置构造新的作业名称属性。
+     * 
+     * 
      * @param  jobName  Job name.
      * @param  locale   Natural language of the text string. null
      * is interpreted to mean the default locale as returned
@@ -88,6 +104,19 @@ public final class JobName extends TextSyntax
      * equal.
      * </OL>
      *
+     * <p>
+     *  返回此作业名称属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     * <CODE>对象</CODE>是JobName类的实例。
+     * <LI>
+     *  此作业名称属性的底层字符串和<CODE>对象</CODE>的底层字符串是相等的。
+     * <LI>
+     *  此作业名称属性的区域设置和<CODE>对象</CODE>的区域设置相等。
+     * </OL>
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job name
@@ -103,6 +132,9 @@ public final class JobName extends TextSyntax
      * <P>
      * For class JobName, the category is class JobName itself.
      *
+     * <p>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -116,6 +148,12 @@ public final class JobName extends TextSyntax
      * <P>
      * For class JobName, the category name is <CODE>"job-name"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobName类,类别是JobName类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

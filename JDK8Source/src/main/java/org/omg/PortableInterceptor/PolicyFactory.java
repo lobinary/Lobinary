@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -20,6 +21,11 @@ package org.omg.PortableInterceptor;
    * any policy which is registered with <code>ORBInitInfo</code> in this 
    * manner.
    *
+   * <p>
+   *  允许使用<code> CORBA.ORB.create_policy </code>构建策略类型。
+   * <p>
+   *  便携式ORB服务实现在ORB初始化期间注册<code> PolicyFactory </code>接口的实例,以便使用<code> CORBA.ORB.create_policy </code>来构造
+   * 
    * @see ORBInitInfo#register_policy_factory
    */
 public interface PolicyFactory extends PolicyFactoryOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 

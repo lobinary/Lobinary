@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,8 @@ import com.sun.corba.se.impl.io.TypeMismatchException;
 /**
  * Factory methods for creating various repository ID strings
  * and instances.
+ * <p>
+ *  用于创建各种存储库ID字符串和实例的工厂方法。
  */
 public interface RepositoryIdStrings
 {

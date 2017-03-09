@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,9 @@ import java.io.Serializable;
  * Tests if an object can truly be serialized by serializing it to a null
  * OutputStream.
  *
+ * <p>
+ *  测试一个对象是否可以通过序列化到一个null OutputStream来真正地被序列化。
+ * 
  * @since 1.4
  */
 final class SerializationTester {

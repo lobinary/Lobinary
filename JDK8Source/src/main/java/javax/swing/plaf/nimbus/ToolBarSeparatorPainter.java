@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,9 @@ import javax.swing.JComponent;
  * When support is added to the design tool / code generator to deal with
  * repeated patterns, then we can remove this class.
  * <p>
+ * <p>
+ *  在Nimbus的工具栏分离器的特殊画家实现。设计器工具不支持渲染重复图案的画家,但这正是Nimbus的工具栏分隔符设计。这个定制画家旨在处理这种情况。
+ * 当支持被添加到设计工具/代码生成器以处理重复的模式时,我们可以删除这个类。
  */
 final class ToolBarSeparatorPainter extends AbstractRegionPainter {
     private static final int SPACE = 3;

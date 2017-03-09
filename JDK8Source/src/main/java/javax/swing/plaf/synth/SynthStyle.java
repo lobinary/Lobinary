@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,14 @@ import javax.swing.text.JTextComponent;
  * <a href="doc-files/synthFileFormat.html">Synth File Format file</a> into
  * <code>SynthLookAndFeel</code> that will create a set of SynthStyles.
  *
+ * <p>
+ *  <code> SynthStyle </code>是一组样式属性。
+ * 每个<code> SynthUI </code>引用使用<code> SynthStyleFactory </code>获得的至少一个<code> SynthStyle </code>。
+ * 您通常不需要直接与此类进行交互,而是将<a href="doc-files/synthFileFormat.html">合成文件格式文件</a>加载到<code> SynthLookAndFeel </code>
+ * 中将创建一组SynthStyles。
+ * 每个<code> SynthUI </code>引用使用<code> SynthStyleFactory </code>获得的至少一个<code> SynthStyle </code>。
+ * 
+ * 
  * @see SynthLookAndFeel
  * @see SynthStyleFactory
  *
@@ -52,17 +61,26 @@ import javax.swing.text.JTextComponent;
 public abstract class SynthStyle {
     /**
      * Contains the default values for certain properties.
+     * <p>
+     *  包含某些属性的默认值。
+     * 
      */
     private static Map<Object, Object> DEFAULT_VALUES;
 
     /**
      * Shared SynthGraphics.
+     * <p>
+     *  共享SynthGraphics。
+     * 
      */
     private static final SynthGraphicsUtils SYNTH_GRAPHICS =
                               new SynthGraphicsUtils();
 
     /**
      * Adds the default values that we know about to DEFAULT_VALUES.
+     * <p>
+     *  将我们知道的默认值添加到DEFAULT_VALUES。
+     * 
      */
     private static void populateDefaultValues() {
         Object buttonMap = new UIDefaults.LazyInputMap(new Object[] {
@@ -141,6 +159,12 @@ public abstract class SynthStyle {
                            "ctrl T", "next-link-action",
                      "ctrl shift T", "previous-link-action",
                        "ctrl SPACE", "activate-link-action",
+                  "ctrl BACK_SLASH", "unselect"/* <p>
+                  "ctrl BACK_SLASH", "unselect"/*  "ctrl HOME",DefaultEditorKit.selectionEndAction,"ctrl T","next-link-action","ctrl HOME",DefaultEdito
+                  "ctrl BACK_SLASH", "unselect"/* rKit.beginAction,"ctrl END",DefaultEditorKit.endAction,"ctrl shift HOME",DefaultEditorKit.selectionBe
+                  "ctrl BACK_SLASH", "unselect"/* ginAction, ,"ctrl shift T","上一链接动作","ctrl SPACE","activate-link-action"。
+                  "ctrl BACK_SLASH", "unselect"/* 
+                  "ctrl BACK_SLASH", "unselect"/* 
                    "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
         DEFAULT_VALUES.put("EditorPane.focusInputMap", multilineInputMap);
@@ -186,6 +210,8 @@ public abstract class SynthStyle {
                           "KP_LEFT", DefaultEditorKit.backwardAction,
                             "ENTER", JTextField.notifyAction,
                   "ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+                  "ctrl BACK_SLASH", "unselect"/* <p>
+                  "ctrl BACK_SLASH", "unselect"/* 
                    "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
         DEFAULT_VALUES.put("TextField.focusInputMap", fieldInputMap);
@@ -711,6 +737,9 @@ public abstract class SynthStyle {
     /**
      * Returns the default value for the specified property, or null if there
      * is no default for the specified value.
+     * <p>
+     *  返回指定属性的默认值,如果指定值没有默认值,则返回null。
+     * 
      */
     private static Object getDefaultValue(Object key) {
         synchronized(SynthStyle.class) {
@@ -729,6 +758,9 @@ public abstract class SynthStyle {
 
     /**
      * Constructs a SynthStyle.
+     * <p>
+     *  构造一个SynthStyle。
+     * 
      */
     public SynthStyle() {
     }
@@ -736,6 +768,10 @@ public abstract class SynthStyle {
     /**
      * Returns the <code>SynthGraphicUtils</code> for the specified context.
      *
+     * <p>
+     *  返回指定上下文的<code> SynthGraphicUtils </code>。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @return SynthGraphicsUtils
      */
@@ -751,6 +787,12 @@ public abstract class SynthStyle {
      * should generally not have to override this, instead override
      * {@link #getColorForState}.
      *
+     * <p>
+     * 返回指定状态的颜色。这给出了<code> JComponent </code>的前景和背景的优先级。
+     * 如果<code> JComponent </code>中的<code> Color </code>不合适或不使用,那么将调用<code> getColorForState </code>。
+     * 子类通常不必重写这个,而是重写{@link #getColorForState}。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @param type Type of color being requested.
      * @return Color
@@ -818,6 +860,10 @@ public abstract class SynthStyle {
      * Returns the color for the specified state. This should NOT call any
      * methods on the <code>JComponent</code>.
      *
+     * <p>
+     *  返回指定状态的颜色。这不应该调用<code> JComponent </code>上的任何方法。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @param type Type of color being requested.
      * @return Color to render with
@@ -831,6 +877,11 @@ public abstract class SynthStyle {
      * If this does not redirect
      * to the JComponent {@link #getFontForState} is invoked.
      *
+     * <p>
+     *  返回指定状态的字体。根据需要从<code>上下文</code>重定向到<code> JComponent </code>。
+     * 如果这没有重定向到JComponent {@link #getFontForState}被调用。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @return Font to render with
      */
@@ -850,6 +901,10 @@ public abstract class SynthStyle {
      * Returns the font for the specified state. This should NOT call any
      * method on the <code>JComponent</code>.
      *
+     * <p>
+     *  返回指定状态的字体。这不应该调用<code> JComponent </code>上的任何方法。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @return Font to render with
      */
@@ -858,6 +913,10 @@ public abstract class SynthStyle {
     /**
      * Returns the Insets that are used to calculate sizing information.
      *
+     * <p>
+     *  返回用于计算大小信息的Insets。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @param insets Insets to place return value in.
      * @return Sizing Insets.
@@ -874,6 +933,10 @@ public abstract class SynthStyle {
      * Returns the <code>SynthPainter</code> that will be used for painting.
      * This may return null.
      *
+     * <p>
+     *  返回将用于绘画的<code> SynthPainter </code>。这可能返回null。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @return SynthPainter to use
      */
@@ -884,6 +947,10 @@ public abstract class SynthStyle {
     /**
      * Returns true if the region is opaque.
      *
+     * <p>
+     *  如果区域不透明,则返回true。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @return true if region is opaque.
      */
@@ -894,6 +961,10 @@ public abstract class SynthStyle {
     /**
      * Getter for a region specific style property.
      *
+     * <p>
+     *  Getter用于区域特定样式属性。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @param key Property being requested.
      * @return Value of the named property
@@ -920,6 +991,10 @@ public abstract class SynthStyle {
      * Installs the necessary state from this Style on the
      * <code>JComponent</code> from <code>context</code>.
      *
+     * <p>
+     *  从此样式在<code> JComponent </code>从<code>上下文</code>安装必要的状态。
+     * 
+     * 
      * @param context SynthContext identifying component to install properties
      *        to.
      */
@@ -953,6 +1028,12 @@ public abstract class SynthStyle {
      * Styles should NOT depend upon this being called, in certain cases
      * it may never be called.
      *
+     * <p>
+     *  从<code>上下文</code>中的<code> JComponent </code>卸载此样式安装的任何状态。
+     * <p>
+     *  样式不应该依赖于被调用,在某些情况下它可能永远不被调用。
+     * 
+     * 
      * @param context SynthContext identifying component to install properties
      *        to.
      */
@@ -979,6 +1060,11 @@ public abstract class SynthStyle {
      * <code>intValue</code> is returned, otherwise <code>defaultValue</code>
      * is returned.
      *
+     * <p>
+     * 方便方法来获取值为<code> Number </code>的特定样式属性。
+     * 如果值是<code> Number </code>,则返回<code> intValue </code>,否则返回<code> defaultValue </code>。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @param key Property being requested.
      * @param defaultValue Value to return if the property has not been
@@ -998,6 +1084,10 @@ public abstract class SynthStyle {
      * Convenience method to get a specific style property whose value is
      * an Boolean.
      *
+     * <p>
+     *  方便方法来获取值为布尔值的特定样式属性。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @param key Property being requested.
      * @param defaultValue Value to return if the property has not been
@@ -1018,6 +1108,10 @@ public abstract class SynthStyle {
      * Convenience method to get a specific style property whose value is
      * an Icon.
      *
+     * <p>
+     *  方便方法来获取值为Icon的特定样式属性。
+     * 
+     * 
      * @param context SynthContext identifying requester
      * @param key Property being requested.
      * @return Value of the named property, or null if not specified
@@ -1035,6 +1129,9 @@ public abstract class SynthStyle {
      * Convenience method to get a specific style property whose value is
      * a String.
      *
+     * <p>
+     *  方便方法来获取值为String的特定样式属性。
+     * 
      * @param context SynthContext identifying requester
      * @param key Property being requested.
      * @param defaultValue Value to return if the property has not been

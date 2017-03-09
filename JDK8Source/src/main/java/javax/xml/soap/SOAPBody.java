@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,13 @@ import javax.xml.namespace.QName;
  * A <code>SOAPFault</code> object, which carries status and/or
  * error information, is an example of a <code>SOAPBodyElement</code> object.
  *
+ * <p>
+ *  表示SOAP消息中SOAP主体元素的内容的对象。 SOAP主体元素由影响应用程序特定内容处理方式的XML数据组成。
+ * <P>
+ *  <code> SOAPBody </code>对象包含<code> SOAPBodyElement </code>对象,它们具有SOAP主体的内容。
+ * 携带状态和/或错误信息的<code> SOAPFault </code>对象是<code> SOAPBodyElement </code>对象的示例。
+ * 
+ * 
  * @see SOAPFault
  */
 public interface SOAPBody extends SOAPElement {
@@ -56,6 +64,16 @@ public interface SOAPBody extends SOAPElement {
      * A <code>SOAPBody</code> may contain at most one <code>SOAPFault</code>
      * child element.
      *
+     * <p>
+     *  创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * 新的<code> SOAPFault </code>将为必需的子元素设置默认值。
+     * 根据在创建<code> MessageFactory </code>时指定的<code>协议</code>,<code> SOAPFault </code>的类型将是SOAP 1.1或SOAP 1.2 
+     * <code> SOAPFault </code>代码>实例。
+     * 新的<code> SOAPFault </code>将为必需的子元素设置默认值。
+     * <p>
+     *  <code> SOAPBody </code>最多可以包含一个<code> SOAPFault </code>子元素。
+     * 
+     * 
      * @return the new <code>SOAPFault</code> object
      * @exception SOAPException if there is a SOAP error
      */
@@ -79,6 +97,20 @@ public interface SOAPBody extends SOAPElement {
      * A <code>SOAPBody</code> may contain at most one <code>SOAPFault</code>
      * child element.
      *
+     * <p>
+     *  创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * 根据在创建<code> MessageFactory </code>时指定的<code>协议</code>,<code> SOAPFault </code>的类型将是SOAP 1.1或SOAP 1.2 
+     * <code> SOAPFault </code>代码>实例。
+     *  创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * <p>
+     * 对于SOAP 1.2,<code> faultCode </code>参数是<i> Fault / Code / Value </i>元素的值,<code> faultString </code>参数是
+     * <i>故障/原因/文本</i>元素。
+     * 对于SOAP 1.1,<code> faultCode </code>参数是<code> faultcode </code>元素的值,<code> faultString </code>参数是<code>
+     *  faultstring </code >元素。
+     * <p>
+     *  <code> SOAPBody </code>最多可以包含一个<code> SOAPFault </code>子元素。
+     * 
+     * 
      * @param faultCode a <code>Name</code> object giving the fault
      *         code to be set; must be one of the fault codes defined in the Version
      *         of SOAP specification in use
@@ -111,6 +143,20 @@ public interface SOAPBody extends SOAPElement {
      * A <code>SOAPBody</code> may contain at most one <code>SOAPFault</code>
      * child element.
      *
+     * <p>
+     *  创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * 根据在创建<code> MessageFactory </code>时指定的<code>协议</code>,<code> SOAPFault </code>的类型将是SOAP 1.1或SOAP 1.2 
+     * <code> SOAPFault </code>代码>实例。
+     *  创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * <p>
+     *  对于SOAP 1.2,<code> faultCode </code>参数是<i> Fault / Code / Value </i>元素的值,<code> faultString </code>参数
+     * 是<i>故障/原因/文本</i>元素。
+     * 对于SOAP 1.1,<code> faultCode </code>参数是<code> faultcode </code>元素的值,<code> faultString </code>参数是<code>
+     *  faultstring </code >元素。
+     * <p>
+     *  <code> SOAPBody </code>最多可以包含一个<code> SOAPFault </code>子元素。
+     * 
+     * 
      * @param faultCode
      *            a <code>QName</code> object giving the fault code to be
      *            set; must be one of the fault codes defined in the version
@@ -153,6 +199,23 @@ public interface SOAPBody extends SOAPElement {
      * A <code>SOAPBody</code> may contain at most one <code>SOAPFault</code>
      * child element.
      *
+     * <p>
+     * 创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * 根据在创建<code> MessageFactory </code>时指定的<code>协议</code>,<code> SOAPFault </code>的类型将是SOAP 1.1或SOAP 1.2 
+     * <code> SOAPFault </code>代码>实例。
+     * 创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * <p>
+     *  对于SOAP 1.2,<code> faultCode </code>参数是<i> Fault / Code / Value </i>元素的值,<code> faultString </code>参数
+     * 是<i>故障/原因/文本</i>元素。
+     * 对于SOAP 1.1,<code> faultCode </code>参数是<i> faultcode </i>元素的值,<code> faultString </code>参数是<i> faultst
+     * ring </i >元素。
+     * <p>
+     *  在SOAP 1.2故障的情况下,<i> Fault / Reason / Text </i>元素上的强制性<code> xml：lang </code>属性的默认值将设置为<code> java.ut
+     * il .Locale.getDefault()</code>。
+     * <p>
+     *  <code> SOAPBody </code>最多可以包含一个<code> SOAPFault </code>子元素。
+     * 
+     * 
      * @param faultCode
      *            a <code>Name</code> object giving the fault code to be set;
      *            must be one of the fault codes defined in the version of SOAP
@@ -190,6 +253,23 @@ public interface SOAPBody extends SOAPElement {
      * A <code>SOAPBody</code> may contain at most one <code>SOAPFault</code>
      * child element
      *
+     * <p>
+     *  创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * 根据在创建<code> MessageFactory </code>时指定的<code>协议</code>,<code> SOAPFault </code>的类型将是SOAP 1.1或SOAP 1.2 
+     * <code> SOAPFault </code>代码>实例。
+     *  创建一个新的<code> SOAPFault </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * <p>
+     * 对于SOAP 1.2,<code> faultCode </code>参数是<i> Fault / Code / Value </i>元素的值,<code> faultString </code>参数是
+     * <i>故障/原因/文本</i>元素。
+     * 对于SOAP 1.1,<code> faultCode </code>参数是<i> faultcode </i>元素的值,<code> faultString </code>参数是<i> faultst
+     * ring </i >元素。
+     * <p>
+     *  在SOAP 1.2故障的情况下,<i> Fault / Reason / Text </i>元素上的强制性<code> xml：lang </code>属性的默认值将设置为<code> java.ut
+     * il .Locale.getDefault()</code>。
+     * <p>
+     *  <code> SOAPBody </code>最多可以包含一个<code> SOAPFault </code>子元素
+     * 
+     * 
      * @param faultCode
      *            a <code>QName</code> object giving the fault code to be
      *            set; must be one of the fault codes defined in the version
@@ -211,6 +291,10 @@ public interface SOAPBody extends SOAPElement {
      * Indicates whether a <code>SOAPFault</code> object exists in this
      * <code>SOAPBody</code> object.
      *
+     * <p>
+     *  指示在此<code> SOAPBody </code>对象中是否存在<code> SOAPFault </code>对象。
+     * 
+     * 
      * @return <code>true</code> if a <code>SOAPFault</code> object exists
      *         in this <code>SOAPBody</code> object; <code>false</code>
      *         otherwise
@@ -221,6 +305,10 @@ public interface SOAPBody extends SOAPElement {
      * Returns the <code>SOAPFault</code> object in this <code>SOAPBody</code>
      * object.
      *
+     * <p>
+     *  返回<code> SOAPBody </code>对象中的<code> SOAPFault </code>对象。
+     * 
+     * 
      * @return the <code>SOAPFault</code> object in this <code>SOAPBody</code>
      *         object if present, null otherwise.
      */
@@ -230,6 +318,10 @@ public interface SOAPBody extends SOAPElement {
      * Creates a new <code>SOAPBodyElement</code> object with the specified
      * name and adds it to this <code>SOAPBody</code> object.
      *
+     * <p>
+     *  创建具有指定名称的新<object> SOAPBodyElement </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * 
+     * 
      * @param name
      *            a <code>Name</code> object with the name for the new <code>SOAPBodyElement</code>
      *            object
@@ -245,6 +337,10 @@ public interface SOAPBody extends SOAPElement {
      * Creates a new <code>SOAPBodyElement</code> object with the specified
      * QName and adds it to this <code>SOAPBody</code> object.
      *
+     * <p>
+     *  使用指定的QName创建一个新的<code> SOAPBodyElement </code>对象,并将其添加到此<code> SOAPBody </code>对象。
+     * 
+     * 
      * @param qname
      *            a <code>QName</code> object with the qname for the new
      *            <code>SOAPBodyElement</code> object
@@ -265,6 +361,13 @@ public interface SOAPBody extends SOAPElement {
      * and its contents upon calling <code>addDocument</code>. The behavior
      * of an application that continues to use such references is undefined.
      *
+     * <p>
+     *  将DOM <code> {@ link org.w3c.dom.Document} </code>的根节点添加到此<code> SOAPBody </code>对象。
+     * <p>
+     *  调用此方法会使<code> document </code>参数无效。
+     * 客户端应用程序应该在调用<code> addDocument </code>时丢弃对此<code> Document </code>及其内容的所有引用。继续使用此类引用的应用程序的行为是未定义的。
+     * 
+     * 
      * @param document
      *            the <code>Document</code> object whose root node will be
      *            added to this <code>SOAPBody</code>.
@@ -283,6 +386,8 @@ public interface SOAPBody extends SOAPElement {
      * element. The child <code>SOAPElement</code> is removed as part of the
      * process.
      *
+     * <p>
+     * 
      * @return the <code>{@link org.w3c.dom.Document}</code> representation
      *         of the <code>SOAPBody</code> content.
      *

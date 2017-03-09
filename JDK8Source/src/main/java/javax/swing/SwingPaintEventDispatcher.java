@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,9 @@ import sun.security.action.GetPropertyAction;
  * is a top level Swing component (JFrame, JWindow, JDialog, JApplet), this
  * will forward the request to the RepaintManager for eventual painting.
  *
+ * <p>
+ *  Swing的PaintEventDispatcher。
+ * 如果由PaintEvent指定的组件是顶级Swing组件(JFrame,JWindow,JDialog,JApplet),这将会将请求转发到RepaintManager以进行最终绘制。
  */
 class SwingPaintEventDispatcher extends sun.awt.PaintEventDispatcher {
     private static final boolean SHOW_FROM_DOUBLE_BUFFER;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,9 @@ public class ClassLogger {
            there is no java.util.logging.  The technique we use here is
            not strictly portable, but it does work with Sun's J2SE 1.3
            at least.  This is just a best effort: the Right Thing is for
+        /* <p>
+        /*  没有java.util.logging。我们在这里使用的技术不是严格的可移植,但它至少与Sun的J2SE 1.3工作。这只是一个最大的努力：正确的事情是
+        /* 
            people to use at least J2SE 1.4.  */
         boolean loaded = false;
         try {

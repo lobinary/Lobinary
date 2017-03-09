@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,10 @@ import sun.util.logging.PlatformLogger;
  * while still allowing {@code EventDispatchThread} to dispatch events.
  * The API methods of the class are thread-safe.
  *
+ * <p>
+ *  此实用程序类用于暂停在线程上的执行,同时仍允许{@code EventDispatchThread}分派事件。类的API方法是线程安全的。
+ * 
+ * 
  * @author Anton Tarasov, Artem Ananiev
  *
  * @since 1.7
@@ -76,6 +81,10 @@ class WaitDispatchSupport implements SecondaryLoop {
      * Creates a {@code WaitDispatchSupport} instance to
      * serve the given event dispatch thread.
      *
+     * <p>
+     *  创建一个{@code WaitDispatchSupport}实例来服务给定的事件分派线程。
+     * 
+     * 
      * @param dispatchThread An event dispatch thread that
      *        should not stop dispatching events while waiting
      *
@@ -89,6 +98,10 @@ class WaitDispatchSupport implements SecondaryLoop {
      * Creates a {@code WaitDispatchSupport} instance to
      * serve the given event dispatch thread.
      *
+     * <p>
+     *  创建一个{@code WaitDispatchSupport}实例来提供给定的事件分派线程。
+     * 
+     * 
      * @param dispatchThread An event dispatch thread that
      *        should not stop dispatching events while waiting
      * @param extCond A conditional object used to determine
@@ -136,6 +149,13 @@ class WaitDispatchSupport implements SecondaryLoop {
      * <p>
      *
      *
+     * <p>
+     *  创建一个{@code WaitDispatchSupport}实例来提供给定的事件分派线程。
+     * <p>
+     *  在等待时,{@link EventFilter}设置在{@code dispatchThread}。在完成等待过程时,过滤器被移除。
+     * <p>
+     * 
+     * 
      * @param dispatchThread An event dispatch thread that
      *        should not stop dispatching events while waiting
      * @param filter {@code EventFilter} to be set
@@ -162,6 +182,9 @@ class WaitDispatchSupport implements SecondaryLoop {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public boolean enter() {
@@ -282,6 +305,8 @@ class WaitDispatchSupport implements SecondaryLoop {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     public boolean exit() {
         if (log.isLoggable(PlatformLogger.Level.FINE)) {

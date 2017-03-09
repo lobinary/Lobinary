@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,15 @@ import javax.management.ReflectionException;
  * the MBean Server where it is registered (if registered as a MBean) to access
  * to its Relation Service.
  *
+ * <p>
+ *  RelationSupport对象由Relation Service内部使用,用于表示任何关系类型的无限数量角色的简单关系(仅角色,无属性或方法)。作为内部表示,它不暴露给用户。
+ *  <P> RelationSupport类符合标准MBean的设计模式。
+ * 因此,用户可以决定将RelationSupport对象本身实例化为MBean(因为它遵循MBean设计模式),将其注册到MBean Server中,然后将其添加到关系服务中。
+ *  <P>用户还可以在创建自己的MBean关系类时,扩展RelationSupport,以检索所需接口的实现(见下文)。
+ * 还可以在用户关系MBean类中具有作为RelationSupport对象的成员,并且通过将所有对象委托给该成员来实现所需的接口。 <P> RelationSupport实现关系接口(由关系服务处理)。
+ *  <P>它还实现MBeanRegistration接口,以便能够检索其注册(如果注册为MBean)以访问其关系服务的MBean服务器。
+ * 
+ * 
  * @since 1.5
  */
 public class RelationSupport
@@ -133,6 +143,14 @@ public class RelationSupport
      * to be added to the Relation Service using the Relation Service method
      * addRelation().
      *
+     * <p>
+     * 创建{@code RelationSupport}对象。
+     *  <P>当RelationSupport对象将被用户注册为MBean时,或者在创建其扩展了RelationSupport的用户关系MBean时,必须使用此构造函数。
+     *  <P>在关系服务级别没有做任何事,即{@code RelationSupport}对象未添加到{@code RelationService},并且不执行检查以查看提供的值是否正确。
+     * 对象始终是创建的,除非：<P>  - 任何必需的参数是{@code null}。 <P>  - 同一个名称用于两个角色。
+     *  <P>要作为关系处理,必须使用关系服务方法addRelation()将{@code RelationSupport}对象添加到关系服务。
+     * 
+     * 
      * @param relationId  relation identifier, to identify the relation in the
      * Relation Service.
      * <P>Expected to be unique in the given Relation Service.
@@ -200,6 +218,15 @@ public class RelationSupport
      * to be added to the Relation Service using the Relation Service method
      * addRelation().
      *
+     * <p>
+     * 创建{@code RelationSupport}对象。 <P>当用户关系MBean通过委托给RelationSupport对象来实现期望被关系支持的接口时,必须使用此构造函数。
+     *  <P>此对象需要知道期望处理关系的关系服务。所以它必须知道关系服务注册的MBean服务器。根据限制,关系MBean必须在与期望处理它的关系服务相同的MBean服务器中注册。
+     * 因此,必须创建和注册用户关系MBean,然后可以在标识的MBean服务器中创建包装的RelationSupport对象。
+     *  <P>在关系服务级别没有做任何事,即{@code RelationSupport}对象未添加到{@code RelationService},并且不执行检查以查看提供的值是否正确。
+     * 对象始终是创建的,除非：<P>  - 任何必需的参数是{@code null}。 <P>  - 同一个名称用于两个角色。
+     *  <P>要作为关系处理,必须使用关系服务方法addRelation()将{@code RelationSupport}对象添加到关系服务。
+     * 
+     * 
      * @param relationId  relation identifier, to identify the relation in the
      * Relation Service.
      * <P>Expected to be unique in the given Relation Service.
@@ -263,6 +290,10 @@ public class RelationSupport
      * <P>Checks if the role exists and is readable according to the relation
      * type.
      *
+     * <p>
+     *  检索给定角色名称的角色值。 <P>检查角色是否存在,并根据关系类型可读。
+     * 
+     * 
      * @param roleName  name of role
      *
      * @return the ArrayList of ObjectName objects being the role value
@@ -303,6 +334,10 @@ public class RelationSupport
      * <P>Checks for each role if it exists and is readable according to the
      * relation type.
      *
+     * <p>
+     *  检索具有给定名称的角色的值。 <P>检查每个角色是否存在,并根据关系类型可读。
+     * 
+     * 
      * @param roleNameArray  array of names of roles to be retrieved
      *
      * @return a RoleResult object, including a RoleList (for roles
@@ -336,6 +371,10 @@ public class RelationSupport
     /**
      * Returns all roles present in the relation.
      *
+     * <p>
+     *  返回关系中存在的所有角色。
+     * 
+     * 
      * @return a RoleResult object, including a RoleList (for roles
      * successfully retrieved) and a RoleUnresolvedList (for roles not
      * readable).
@@ -363,6 +402,10 @@ public class RelationSupport
     /**
      * Returns all roles in the relation without checking read mode.
      *
+     * <p>
+     * 返回关系中的所有角色,而不检查读取模式。
+     * 
+     * 
      * @return a RoleList
      */
     public RoleList retrieveAllRoles() {
@@ -384,6 +427,10 @@ public class RelationSupport
     /**
      * Returns the number of MBeans currently referenced in the given role.
      *
+     * <p>
+     *  返回当前在给定角色中引用的MBean数。
+     * 
+     * 
      * @param roleName  name of role
      *
      * @return the number of currently referenced MBeans in that role
@@ -439,6 +486,13 @@ public class RelationSupport
      * RELATION_BASIC_UPDATE or RELATION_MBEAN_UPDATE, depending if the
      * relation is a MBean or not).
      *
+     * <p>
+     *  设置给定的角色。
+     *  <P>将根据其关系类型中提供的相应角色定义检查角色<P>将发送通知(具有类型RELATION_BASIC_UPDATE或RELATION_MBEAN_UPDATE的RelationNotificati
+     * on,取决于该关系是否是MBean)。
+     *  设置给定的角色。
+     * 
+     * 
      * @param role  role to be set (name and new value)
      *
      * @exception IllegalArgumentException  if null role
@@ -494,6 +548,13 @@ public class RelationSupport
      * RELATION_BASIC_UPDATE or RELATION_MBEAN_UPDATE, depending if the
      * relation is a MBean or not) per updated role.
      *
+     * <p>
+     *  设置指定的角色。
+     *  <P>将根据每个更新的角色发送一个通知(关系类型为RELATION_BASIC_UPDATE或RELATION_MBEAN_UPDATE,取决于关系是否为MBean),根据关系类型<P>中提供的相应角
+     * 色定义检查角色。
+     *  设置指定的角色。
+     * 
+     * 
      * @param list  list of roles to be set
      *
      * @return a RoleResult object, including a RoleList (for roles
@@ -540,6 +601,11 @@ public class RelationSupport
      * (list of ObjectNames of referenced MBeans) without the unregistered
      * one.
      *
+     * <p>
+     *  在角色中引用的MBean未注册时,关系服务使用的回调。 <P>关系服务将调用此方法让关系采取行动以反映此类注销的影响。 <P>小心。用户不希望调用此方法。
+     *  <P>当前实现是使用其当前值(引用MBean的ObjectName的列表)设置角色,而不使用未注册的。
+     * 
+     * 
      * @param objectName  ObjectName of unregistered MBean
      * @param roleName  name of role where the MBean is referenced
      *
@@ -589,6 +655,10 @@ public class RelationSupport
     /**
      * Retrieves MBeans referenced in the various roles of the relation.
      *
+     * <p>
+     *  检索在关系的各种角色中引用的MBean。
+     * 
+     * 
      * @return a HashMap mapping:
      * <P> ObjectName {@literal ->} ArrayList of String (role names)
      */
@@ -635,6 +705,9 @@ public class RelationSupport
 
     /**
      * Returns name of associated relation type.
+     * <p>
+     *  返回关联关系类型的名称。
+     * 
      */
     public String getRelationTypeName() {
         return myRelTypeName;
@@ -643,6 +716,10 @@ public class RelationSupport
     /**
      * Returns ObjectName of the Relation Service handling the relation.
      *
+     * <p>
+     *  返回处理关系的关系服务的ObjectName。
+     * 
+     * 
      * @return the ObjectName of the Relation Service.
      */
     public ObjectName getRelationServiceName() {
@@ -653,6 +730,10 @@ public class RelationSupport
      * Returns relation identifier (used to uniquely identify the relation
      * inside the Relation Service).
      *
+     * <p>
+     *  返回关系标识符(用于唯一标识关系服务中的关系)。
+     * 
+     * 
      * @return the relation id.
      */
     public String getRelationId() {
@@ -700,6 +781,8 @@ public class RelationSupport
     /**
      * Returns an internal flag specifying if the object is still handled by
      * the Relation Service.
+     * <p>
+     *  返回一个内部标志,指定对象是否仍然由关系服务处理。
      */
     public Boolean isInRelationService() {
         return myInRelServFlg.get();

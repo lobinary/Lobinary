@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -75,6 +76,25 @@ import java.util.StringTokenizer;
  *
  * </table>
  *
+ * <p>
+ *  这个类用于Serializable权限。 SerializablePermission包含名称(也称为"目标名称"),但没有动作列表;你有命名的权限或你不。
+ * 
+ * <P>
+ *  目标名称是Serializable权限的名称(见下文)。
+ * 
+ * <P>
+ *  下表列出了所有可能的SerializablePermission目标名称,并为每个提供了权限允许的描述以及授予代码权限的风险的讨论。
+ * 
+ * <table border=1 cellpadding=5 summary="Permission target name, what the permission allows, and associated risks">
+ * <tr>
+ *  <th>权限目标名称</th> <th>权限允许</th> <th>允许此权限的风险</th>
+ * </tr>
+ * 
+ * <tr>
+ *  <td> enableSubclassImplementation </td> <td> ObjectOutputStream或ObjectInputStream的子类实现分别覆盖对象的默认序列化或反
+ * 序列化</td> <td>代码可以使用它以有意的恶意方式对类进行序列化或反序列化。
+ * 例如,在序列化期间,恶意代码可以使用它以攻击者容易访问的方式有目的地存储机密私有字段数据。或者,在反序列化期间,它可以,例如,反序列化具有所有其私有字段被归零的类。</td>。
+ * 
  * @see java.security.BasicPermission
  * @see java.security.Permission
  * @see java.security.Permissions
@@ -93,6 +113,17 @@ public final class SerializablePermission extends BasicPermission {
     private static final long serialVersionUID = 8537212141160296410L;
 
     /**
+    /* <p>
+    /* </tr>
+    /* 
+    /* <tr>
+    /* <td> enableSubstitution </td> <td>在序列化或反序列化期间将一个对象替换为另一个对象</td> <td>这是很危险的,因为恶意代码可以将实际对象替换为具有不正确或恶意数据
+    /* 的对象。
+    /*  td>。
+    /* </tr>
+    /* 
+    /* </table>
+    /* 
      * @serial
      */
     private String actions;
@@ -102,6 +133,9 @@ public final class SerializablePermission extends BasicPermission {
      * The name is the symbolic name of the SerializablePermission, such as
      * "enableSubstitution", etc.
      *
+     * <p>
+     * 
+     * 
      * @param name the name of the SerializablePermission.
      *
      * @throws NullPointerException if <code>name</code> is <code>null</code>.
@@ -117,6 +151,8 @@ public final class SerializablePermission extends BasicPermission {
      * The name is the symbolic name of the SerializablePermission, and the
      * actions String is currently unused and should be null.
      *
+     * <p>
+     * 
      * @param name the name of the SerializablePermission.
      * @param actions currently unused and must be set to null
      *

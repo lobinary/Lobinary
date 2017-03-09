@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,13 @@ import org.omg.CORBA.CompletionStatus;
  * first 16 bytes are written only using the write_octet, write_long or
  * write_ulong method calls.
  *
+ * <p>
+ *  对输出流使用Java序列化的实现类。这假设GIOP版本1.2消息格式。
+ * 
+ *  此类使用ByteArrayOutputStream作为底层缓冲区。前16个字节是直接写入底层缓冲区。这允许[GIOPHeader(12字节)+ requestID(4字节)]被写为字节。
+ * 对此输出流对象的后续写入操作使用ObjectOutputStream类写入缓冲区。这允许使用ObjectOutputStream实现封送复杂的类型和图形。
+ * 
+ * 
  * @author Ram Jeyaraman
  */
 final class IDLJavaSerializationOutputStream extends CDROutputStreamBase {
@@ -113,6 +121,9 @@ final class IDLJavaSerializationOutputStream extends CDROutputStreamBase {
         /**
          * Checks for objects that are instances of java.rmi.Remote
          * that need to be serialized as proxy (Stub) objects.
+         * <p>
+         *  注意,这个类假设一个GIOP 1.2样式的头。注意,我们期望前16个字节只使用write_octet,write_long或write_ulong方法调用写入。
+         * 
          */
         protected final Object replaceObject(Object obj) throws IOException {
             try {

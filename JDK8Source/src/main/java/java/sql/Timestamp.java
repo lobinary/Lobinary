@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,28 @@ import java.util.StringTokenizer;
  * inheritance relationship between <code>Timestamp</code>
  * and <code>java.util.Date</code> really
  * denotes implementation inheritance, and not type inheritance.
+ * <p>
+ *  <P> <code> java.util.Date </code>周围的一个薄包装,允许JDBC API将此标识为SQL <code> TIMESTAMP </code>值。
+ * 它通过允许小数秒的指定精确到纳秒,增加了保存SQL <code> TIMESTAMP </code>小数秒值的能力。时间戳还提供格式化和解析操作以支持时间戳值的JDBC转义语法。
+ * 
+ *  <p>时间戳记对象的精度计算为：
+ * <ul>
+ *  <li> <code> 19 </code>,这是yyyy-mm-dd hh：mm：ss <li> <code> 20 + s </code>中的字符数, yyyy-mm-dd hh：mm：ss。
+ * [fff ...]和<code> s </code>表示给定时间戳的比例,即其小数秒精度。
+ * /ul>
+ * 
+ * <P> <B>注意：</B>此类型是一个<code> java.util.Date </code>和一个单独的纳秒值的复合。
+ * 只有整数秒存储在<code> java.util.Date </code>组件中。分数秒 - 纳秒 - 是分开的。
+ * 当传递不是<code> java.sql.Timestamp </code>的实例的对象时,<code> Timestamp.equals(Object)</code>方法不会返回<code> true
+ *  </code>,因为日期的nanos分量是未知的。
+ * 只有整数秒存储在<code> java.util.Date </code>组件中。分数秒 - 纳秒 - 是分开的。
+ * 因此,<code> Timestamp.equals(Object)</code>方法对于<code> java.util.Date.equals(Object)</code>方法不是对称的。
+ * 此外,<code> hashCode </code>方法使用底层的<code> java.util.Date </code>实现,因此在其计算中不包括nanos。
+ * <P>
+ *  由于上述<code> Timestamp </code>类和<code> java.util.Date </code>类之间的差异,建议代码不能一般查看<code> Timestamp </code>
+ * 作为<code> java.util.Date </code>的实例。
+ *  <code> Timestamp </code>和<code> java.util.Date </code>之间的继承关系真正表示实现继承,而不是类型继承。
+ * 
  */
 public class Timestamp extends java.util.Date {
 
@@ -75,6 +98,10 @@ public class Timestamp extends java.util.Date {
      * Constructs a <code>Timestamp</code> object initialized
      * with the given values.
      *
+     * <p>
+     *  构造使用给定值初始化的<code> Timestamp </code>对象。
+     * 
+     * 
      * @param year the year minus 1900
      * @param month 0 to 11
      * @param date 1 to 31
@@ -102,6 +129,11 @@ public class Timestamp extends java.util.Date {
      * fractional seconds are stored in the <code>nanos</code> field of
      * the <code>Timestamp</code> object.
      *
+     * <p>
+     *  使用毫秒时间值构造一个<code> Timestamp </code>对象。
+     * 积分秒存储在基础日期值中;小数秒存储在<code> Timestamp </code>对象的<code> nanos </code>字段中。
+     * 
+     * 
      * @param time milliseconds since January 1, 1970, 00:00:00 GMT.
      *        A negative number is the number of milliseconds before
      *         January 1, 1970, 00:00:00 GMT.
@@ -120,6 +152,10 @@ public class Timestamp extends java.util.Date {
      * Sets this <code>Timestamp</code> object to represent a point in time that is
      * <tt>time</tt> milliseconds after January 1, 1970 00:00:00 GMT.
      *
+     * <p>
+     * 设置此<code> Timestamp </code>对象以表示1970年1月1日00:00:00 GMT后<tt>时</tt>毫秒的时间点。
+     * 
+     * 
      * @param time   the number of milliseconds.
      * @see #getTime
      * @see #Timestamp(long time)
@@ -138,6 +174,10 @@ public class Timestamp extends java.util.Date {
      * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT
      * represented by this <code>Timestamp</code> object.
      *
+     * <p>
+     *  返回自<code> Timestamp </code>对象表示的1970年1月1日,00:00:00 GMT以来的毫秒数。
+     * 
+     * 
      * @return  the number of milliseconds since January 1, 1970, 00:00:00 GMT
      *          represented by this date.
      * @see #setTime
@@ -149,6 +189,8 @@ public class Timestamp extends java.util.Date {
 
 
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private int nanos;
@@ -157,6 +199,10 @@ public class Timestamp extends java.util.Date {
      * Converts a <code>String</code> object in JDBC timestamp escape format to a
      * <code>Timestamp</code> value.
      *
+     * <p>
+     *  将JDBC时间戳转义格式中的<code> String </code>对象转换为<code> Timestamp </code>值。
+     * 
+     * 
      * @param s timestamp in format <code>yyyy-[m]m-[d]d hh:mm:ss[.f...]</code>.  The
      * fractional seconds may be omitted. The leading zero for <code>mm</code>
      * and <code>dd</code> may also be omitted.
@@ -270,6 +316,10 @@ public class Timestamp extends java.util.Date {
      *         <code>yyyy-mm-dd hh:mm:ss.fffffffff</code>,
      * where <code>ffffffffff</code> indicates nanoseconds.
      * <P>
+     * <p>
+     *  在JDBC时间戳转义格式中格式化时间戳。 <code> yyyy-mm-dd hh：mm：ss.fffffffff </code>,其中<code> ffffffffff </code>表示纳秒。
+     * <P>
+     * 
      * @return a <code>String</code> object in
      *           <code>yyyy-mm-dd hh:mm:ss.fffffffff</code> format
      */
@@ -368,6 +418,10 @@ public class Timestamp extends java.util.Date {
     /**
      * Gets this <code>Timestamp</code> object's <code>nanos</code> value.
      *
+     * <p>
+     *  获取此<code>时间戳</code>对象的<code> nanos </code>值。
+     * 
+     * 
      * @return this <code>Timestamp</code> object's fractional seconds component
      * @see #setNanos
      */
@@ -379,6 +433,10 @@ public class Timestamp extends java.util.Date {
      * Sets this <code>Timestamp</code> object's <code>nanos</code> field
      * to the given value.
      *
+     * <p>
+     *  将此<code> Timestamp </code>对象的<code> nanos </code>字段设置为给定值。
+     * 
+     * 
      * @param n the new fractional seconds component
      * @exception java.lang.IllegalArgumentException if the given argument
      *            is greater than 999999999 or less than 0
@@ -395,6 +453,10 @@ public class Timestamp extends java.util.Date {
      * Tests to see if this <code>Timestamp</code> object is
      * equal to the given <code>Timestamp</code> object.
      *
+     * <p>
+     *  测试此<code> Timestamp </code>对象是否等于给定的<code> Timestamp </code>对象。
+     * 
+     * 
      * @param ts the <code>Timestamp</code> value to compare with
      * @return <code>true</code> if the given <code>Timestamp</code>
      *         object is equal to this <code>Timestamp</code> object;
@@ -424,6 +486,14 @@ public class Timestamp extends java.util.Date {
      * Note: This method is not symmetric with respect to the
      * <code>equals(Object)</code> method in the base class.
      *
+     * <p>
+     *  测试这个<code> Timestamp </code>对象是否等于给定的对象。
+     * 
+     *  已添加此版本的方法<code> equals </code>以修复<code> Timestamp.equals(Timestamp)</code>的不正确的签名,并保留与现有类文件的向后兼容性。
+     * 
+     *  注意：此方法对于基类中的<code> equals(Object)</code>方法不是对称的。
+     * 
+     * 
      * @param ts the <code>Object</code> value to compare with
      * @return <code>true</code> if the given <code>Object</code> is an instance
      *         of a <code>Timestamp</code> that
@@ -442,6 +512,10 @@ public class Timestamp extends java.util.Date {
      * Indicates whether this <code>Timestamp</code> object is
      * earlier than the given <code>Timestamp</code> object.
      *
+     * <p>
+     *  指示此<code> Timestamp </code>对象是否早于给定的<code> Timestamp </code>对象。
+     * 
+     * 
      * @param ts the <code>Timestamp</code> value to compare with
      * @return <code>true</code> if this <code>Timestamp</code> object is earlier;
      *        <code>false</code> otherwise
@@ -454,6 +528,10 @@ public class Timestamp extends java.util.Date {
      * Indicates whether this <code>Timestamp</code> object is
      * later than the given <code>Timestamp</code> object.
      *
+     * <p>
+     *  指示此<code> Timestamp </code>对象是否晚于给定的<code> Timestamp </code>对象。
+     * 
+     * 
      * @param ts the <code>Timestamp</code> value to compare with
      * @return <code>true</code> if this <code>Timestamp</code> object is later;
      *        <code>false</code> otherwise
@@ -466,6 +544,10 @@ public class Timestamp extends java.util.Date {
      * Compares this <code>Timestamp</code> object to the given
      * <code>Timestamp</code> object.
      *
+     * <p>
+     *  将此<code>时间戳</code>对象与给定的<code> Timestamp </code>对象进行比较。
+     * 
+     * 
      * @param   ts   the <code>Timestamp</code> object to be compared to
      *                this <code>Timestamp</code> object
      * @return  the value <code>0</code> if the two <code>Timestamp</code>
@@ -493,6 +575,10 @@ public class Timestamp extends java.util.Date {
      * Compares this <code>Timestamp</code> object to the given
      * <code>Date</code> object.
      *
+     * <p>
+     * 将此<code> Timestamp </code>对象与给定的<code> Date </code>对象进行比较。
+     * 
+     * 
      * @param o the <code>Date</code> to be compared to
      *          this <code>Timestamp</code> object
      * @return  the value <code>0</code> if this <code>Timestamp</code> object
@@ -523,6 +609,11 @@ public class Timestamp extends java.util.Date {
      * The {@code hashCode} method uses the underlying {@code java.util.Date}
      * implementation and therefore does not include nanos in its computation.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  {@code hashCode}方法使用底层的{@code java.util.Date}实现,因此在其计算中不包括nanos。
+     * 
      */
     @Override
     public int hashCode() {
@@ -541,6 +632,13 @@ public class Timestamp extends java.util.Date {
      * The provided {@code LocalDateTime} is interpreted as the local
      * date-time in the local time zone.
      *
+     * <p>
+     *  从{@code LocalDateTime}对象中获取{@code LocalStateTime}对象的{@code LocalDateTime}对象的{@code LocalDateTime}实例,
+     * 具有相同的年,月,日,时,分,秒和纳秒日期时间值。
+     * <p>
+     *  所提供的{@code LocalDateTime}被解释为本地时区中的本地日期时间。
+     * 
+     * 
      * @param dateTime a {@code LocalDateTime} to convert
      * @return a {@code Timestamp} object
      * @exception NullPointerException if {@code dateTime} is null.
@@ -564,6 +662,12 @@ public class Timestamp extends java.util.Date {
      * same year, month, day of month, hours, minutes, seconds and nanos
      * date-time value as this {@code Timestamp} in the local time zone.
      *
+     * <p>
+     *  将此{@code Timestamp}对象转换为{@code LocalDateTime}。
+     * <p>
+     *  转换会创建一个{@code LocalDateTime},表示与当地时区的{@code Timestamp}相同的年,月,日,时,分,秒和纳秒日期时间值。
+     * 
+     * 
      * @return a {@code LocalDateTime} object representing the same date-time value
      * @since 1.8
      */
@@ -585,6 +689,12 @@ public class Timestamp extends java.util.Date {
      * and further in the past than {@code Date}. In this scenario, this method
      * will throw an exception.
      *
+     * <p>
+     *  从{@link Instant}对象获取{@code Timestamp}的实例。
+     * <p>
+     *  {@code Instant}可以在未来进一步在时间轴上存储点,而且比{@code Date}过去的点更多。在这种情况下,此方法将抛出异常。
+     * 
+     * 
      * @param instant  the instant to convert
      * @return an {@code Timestamp} representing the same point on the time-line as
      *  the provided instant
@@ -609,6 +719,10 @@ public class Timestamp extends java.util.Date {
      * The conversion creates an {@code Instant} that represents the same
      * point on the time-line as this {@code Timestamp}.
      *
+     * <p>
+     *  将此{@code Timestamp}对象转换为{@code Instant}。
+     * <p>
+     * 
      * @return an instant representing the same point on the time-line
      * @since 1.8
      */

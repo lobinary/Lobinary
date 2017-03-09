@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,24 @@ package java.io;
  * bytes that would then be written immediately to the file, which can be very
  * inefficient.
  *
+ * <p>
+ *  将文本写入字符输出流,缓冲字符以便提供单个字符,数组和字符串的有效写入。
+ * 
+ *  <p>可以指定缓冲区大小,也可以接受默认大小。默认值对于大多数用途都足够大。
+ * 
+ *  <p>提供了一个newLine()方法,它使用平台自己的由系统属性<tt> line.separator </tt>定义的行分隔符的概念。并非所有平台都使用换行符('\ n')来终止行。
+ * 因此,调用此方法来终止每个输出行都优于直接写入换行符。
+ * 
+ *  <p>通常,Writer将其输出立即发送到底层字符或字节流。
+ * 除非需要提示输出,否则建议在写入操作可能很昂贵的任何Writer(例如FileWriter和OutputStreamWriter)周围封装BufferedWriter。例如,。
+ * 
+ * <pre>
+ *  PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("foo.out")));
+ * </pre>
+ * 
+ *  将缓冲PrintWriter的输出到文件。没有缓冲,每次调用print()方法将导致字符被转换为字节,然后立即写入文件,这可能是非常低效的。
+ * 
+ * 
  * @see PrintWriter
  * @see FileWriter
  * @see OutputStreamWriter
@@ -75,6 +94,9 @@ public class BufferedWriter extends Writer {
     /**
      * Line separator string.  This is the value of the line.separator
      * property at the moment that the stream was created.
+     * <p>
+     *  行分隔符字符串。这是创建流时的line.separator属性的值。
+     * 
      */
     private String lineSeparator;
 
@@ -82,6 +104,10 @@ public class BufferedWriter extends Writer {
      * Creates a buffered character-output stream that uses a default-sized
      * output buffer.
      *
+     * <p>
+     * 创建使用默认大小的输出缓冲区的缓冲字符输出流。
+     * 
+     * 
      * @param  out  A Writer
      */
     public BufferedWriter(Writer out) {
@@ -92,6 +118,10 @@ public class BufferedWriter extends Writer {
      * Creates a new buffered character-output stream that uses an output
      * buffer of the given size.
      *
+     * <p>
+     *  创建使用给定大小的输出缓冲区的新缓冲字符输出流。
+     * 
+     * 
      * @param  out  A Writer
      * @param  sz   Output-buffer size, a positive integer
      *
@@ -120,6 +150,9 @@ public class BufferedWriter extends Writer {
      * Flushes the output buffer to the underlying character stream, without
      * flushing the stream itself.  This method is non-private only so that it
      * may be invoked by PrintStream.
+     * <p>
+     *  将输出缓冲区刷新到基础字符流,而不刷新流本身。这个方法是非私有的,所以它可以被PrintStream调用。
+     * 
      */
     void flushBuffer() throws IOException {
         synchronized (lock) {
@@ -134,6 +167,10 @@ public class BufferedWriter extends Writer {
     /**
      * Writes a single character.
      *
+     * <p>
+     *  写入单个字符。
+     * 
+     * 
      * @exception  IOException  If an I/O error occurs
      */
     public void write(int c) throws IOException {
@@ -148,6 +185,9 @@ public class BufferedWriter extends Writer {
     /**
      * Our own little min method, to avoid loading java.lang.Math if we've run
      * out of file descriptors and we're trying to print a stack trace.
+     * <p>
+     *  我们自己的小min方法,以避免加载java.lang.Math,如果我们用尽了文件描述符,我们试图打印一个堆栈跟踪。
+     * 
      */
     private int min(int a, int b) {
         if (a < b) return a;
@@ -164,6 +204,13 @@ public class BufferedWriter extends Writer {
      * directly to the underlying stream.  Thus redundant
      * <code>BufferedWriter</code>s will not copy data unnecessarily.
      *
+     * <p>
+     *  写入字符数组的一部分。
+     * 
+     *  通常这种方法将来自给定数组的字符存储到该流的缓冲区中,根据需要将缓冲区刷新到底层流。然而,如果所请求的长度至少与缓冲器一样大,则该方法将刷新缓冲器并将字符直接写入基础流。
+     * 因此,冗余的<code> BufferedWriter </code>将不会不必要地复制数据。
+     * 
+     * 
      * @param  cbuf  A character array
      * @param  off   Offset from which to start reading characters
      * @param  len   Number of characters to write
@@ -183,6 +230,10 @@ public class BufferedWriter extends Writer {
             if (len >= nChars) {
                 /* If the request length exceeds the size of the output buffer,
                    flush the buffer and then write the data directly.  In this
+                /* <p>
+                /*  刷新缓冲区,然后直接写入数据。在这里
+                /* 
+                /* 
                    way buffered streams will cascade harmlessly. */
                 flushBuffer();
                 out.write(cbuf, off, len);
@@ -210,6 +261,15 @@ public class BufferedWriter extends Writer {
      * superclass}, which requires that an {@link IndexOutOfBoundsException} be
      * thrown.
      *
+     * <p>
+     *  写入字符串的一部分。
+     * 
+     *  <p>如果<tt> len </tt>参数的值为负,则不会写入任何字符。
+     * 这与{@linkplain java.io.Writer#write(java.lang.String,int,int)superclass}中的这个方法的规范相反,这需要抛出一个{@link IndexOutOfBoundsException}
+     * 。
+     *  <p>如果<tt> len </tt>参数的值为负,则不会写入任何字符。
+     * 
+     * 
      * @param  s     String to be written
      * @param  off   Offset from which to start reading characters
      * @param  len   Number of characters to be written
@@ -237,6 +297,8 @@ public class BufferedWriter extends Writer {
      * system property <tt>line.separator</tt>, and is not necessarily a single
      * newline ('\n') character.
      *
+     * <p>
+     * 
      * @exception  IOException  If an I/O error occurs
      */
     public void newLine() throws IOException {
@@ -246,6 +308,10 @@ public class BufferedWriter extends Writer {
     /**
      * Flushes the stream.
      *
+     * <p>
+     * 写入行分隔符。行分隔符字符串由系统属性<tt> line.separator </tt>定义,不一定是单个换行符('\ n')字符。
+     * 
+     * 
      * @exception  IOException  If an I/O error occurs
      */
     public void flush() throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import sun.invoke.util.Wrapper;
 /**
  * The flavor of method handle which implements a constant reference
  * to a class member.
+ * <p>
+ *  方法句柄的风味,它实现了对类成员的常量引用。
+ * 
+ * 
  * @author jrose
  */
 class DirectMethodHandle extends MethodHandle {
@@ -155,6 +160,9 @@ class DirectMethodHandle extends MethodHandle {
      * Create a LF which can invoke the given method.
      * Cache and share this structure among all methods with
      * the same basicType and refKind.
+     * <p>
+     *  创建一个可以调用给定方法的LF。在具有相同basicType和refKind的所有方法之间缓存和共享此结构。
+     * 
      */
     private static LambdaForm preparedLambdaForm(MemberName m) {
         assert(m.isInvocable()) : m;  // call preparedFieldLambdaForm instead
@@ -273,6 +281,11 @@ class DirectMethodHandle extends MethodHandle {
 
     /** Static wrapper for DirectMethodHandle.internalMemberName.
      * This one also forces initialization.
+     * <p>
+     *  return((DirectMethodHandle)mh).member; }}
+     * 
+     *  / ** DirectMethodHandle.internalMemberName的静态包装器。这也强制初始化。
+     * 
      */
     /*non-public*/ static Object internalMemberNameEnsureInit(Object mh) {
         DirectMethodHandle dmh = (DirectMethodHandle)mh;
@@ -280,6 +293,10 @@ class DirectMethodHandle extends MethodHandle {
         return dmh.member;
     }
 
+    /* <p>
+    /*  DirectMethodHandle dmh =(DirectMethodHandle)mh; dmh.ensureInitialized(); return dmh.member; }}
+    /* 
+    /* 
     /*non-public*/ static
     boolean shouldBeInitialized(MemberName member) {
         switch (member.getReferenceKind()) {
@@ -357,10 +374,43 @@ class DirectMethodHandle extends MethodHandle {
         return true;
     }
 
+    /* <p>
+    /* boolean shouldBeInitialized(MemberName member){switch(member.getReferenceKind()){case REF_invokeStatic：case REF_getStatic：case REF_putStatic：case REF_newInvokeSpecial：break; default：//不需要初始化这类成员的类。
+    /*  return false; } class <?> cls = member.getDeclaringClass(); if(cls == ValueConversions.class || cls 
+    /* == MethodHandleImpl.class || cls == Invokers.class){//这些人有很多<clinit> DMH创建,但我们知道// MH不会被使用,直到系统将启动。
+    /*  return false; } if(VerifyAccess.isSamePackage(MethodHandle.class,cls)|| VerifyAccess.isSamePackage(V
+    /* alueConversions.class,cls)){//这是一个系统类。
+    /* 它可能正在被初始化的过程中,但我们将帮助它只是为了安全。
+    /*  if(UNSAFE.shouldBeInitialized(cls)){UNSAFE.ensureClassInitialized(cls); } return false; } return UNS
+    /* AFE.shouldBeInitialized(cls); }}。
+    /* 它可能正在被初始化的过程中,但我们将帮助它只是为了安全。
+    /* 
+    /*  private static class EnsureInitialized extends ClassValue <WeakReference <Thread >> {@Override protected WeakReference <Thread> computeValue(Class <?> type){UNSAFE.ensureClassInitialized(type); if(UNSAFE.shouldBeInitialized(type))//如果上一次调用没有阻塞,这可能发生。
+    /*  //我们在<clinit>中执行。
+    /*  return new WeakReference <>(Thread.currentThread()); return null; } static final EnsureInitialized I
+    /* NSTANCE = new EnsureInitialized(); }}。
+    /*  //我们在<clinit>中执行。
+    /* 
+    /* private void ensureInitialized(){if(checkInitialized(member)){//海岸清楚。删除<clinit>屏障。
+    /*  if(member.isField())updateForm(preparedFieldLambdaForm(member)); else updateForm(preparedLambdaForm(
+    /* member)); }} private static boolean checkInitialized(MemberName member){Class <?> defc = member.getDeclaringClass(); WeakReference <Thread> ref = EnsureInitialized.INSTANCE.get(defc); if(ref == null){return true; // the final state}
+    /* 线程clinitThread = ref.get(); //有人可能仍在运行defc。
+    /* private void ensureInitialized(){if(checkInitialized(member)){//海岸清楚。删除<clinit>屏障。<clinit>。
+    /*  if(clinitThread == Thread.currentThread()){//如果任何人正在运行defc。<clinit>,就是这个线程。
+    /*  if(UNSAFE.shouldBeInitialized(defc))//是的,我们正在运行它;现在保持屏障。 return false; } else {//我们在一个随机线程。块。
+    /*  UNSAFE.ensureClassInitialized(defc); } assert(！UNSAFE.shouldBeInitialized(defc)); // put it into the
+    /*  final state EnsureInitialized.INSTANCE.remove(defc); return true; }}。
+    /*  if(UNSAFE.shouldBeInitialized(defc))//是的,我们正在运行它;现在保持屏障。 return false; } else {//我们在一个随机线程。块。
+    /* 
+    /* 
     /*non-public*/ static void ensureInitialized(Object mh) {
         ((DirectMethodHandle)mh).ensureInitialized();
     }
 
+    /* <p>
+    /*  ((DirectMethodHandle)mh).ensureInitialized(); }}
+    /* 
+    /* 
     /** This subclass represents invokespecial instructions. */
     static class Special extends DirectMethodHandle {
         private Special(MethodType mtype, LambdaForm form, MemberName member) {
@@ -399,11 +449,19 @@ class DirectMethodHandle extends MethodHandle {
         return dmh.initMethod;
     }
 
+    /* <p>
+    /*  构造函数dmh =(Constructor)mh; return dmh.initMethod; }}
+    /* 
+    /* 
     /*non-public*/ static Object allocateInstance(Object mh) throws InstantiationException {
         Constructor dmh = (Constructor)mh;
         return UNSAFE.allocateInstance(dmh.instanceClass);
     }
 
+    /* <p>
+    /*  构造函数dmh =(Constructor)mh; return UNSAFE.allocateInstance(dmh.instanceClass); }}
+    /* 
+    /* 
     /** This subclass handles non-static field references. */
     static class Accessor extends DirectMethodHandle {
         final Class<?> fieldType;
@@ -432,6 +490,13 @@ class DirectMethodHandle extends MethodHandle {
     }
 
     @ForceInline
+    /* <p>
+    /*  //注意：我们返回一个long,因为这是Unsafe.getObject喜欢的。 //我们存储一个简单的int,因为它更紧凑。
+    /*  return((Accessor)accessorObj).fieldOffset; }}。
+    /* 
+    /*  @ForceInline
+    /* 
+    /* 
     /*non-public*/ static Object checkBase(Object obj) {
         // Note that the object's class has already been verified,
         // since the parameter type of the Accessor method handle
@@ -444,6 +509,13 @@ class DirectMethodHandle extends MethodHandle {
         return obj;
     }
 
+        // Since this check is * <p>
+        // Since this check is * //注意,对象的类已经被验证,//因为Accessor方法句柄的参数类型//是member.getDeclaringClass或者是一个子类。
+        // Since this check is *  //这已在DirectMethodHandle.make中验证。 //因此,唯一剩余的检查是null。
+        // Since this check is *  //因为这个检查是*不保证Unsafe.getInt //和它的兄弟姐妹,我们需要在这里做一个明确的。
+        // Since this check is *  obj.getClass(); // maybe throw NPE return obj; }}。
+        // Since this check is * 
+        // Since this check is * 
     /** This subclass handles static field references. */
     static class StaticAccessor extends DirectMethodHandle {
         final private Class<?> fieldType;
@@ -474,16 +546,34 @@ class DirectMethodHandle extends MethodHandle {
     }
 
     @ForceInline
+    /* <p>
+    /*  obj.getClass(); return obj; }}
+    /* 
+    /*  @ForceInline
+    /* 
+    /* 
     /*non-public*/ static Object staticBase(Object accessorObj) {
         return ((StaticAccessor)accessorObj).staticBase;
     }
 
     @ForceInline
+    /* <p>
+    /*  return((StaticAccessor)accessorObj).staticBase; }}
+    /* 
+    /*  @ForceInline
+    /* 
+    /* 
     /*non-public*/ static long staticOffset(Object accessorObj) {
         return ((StaticAccessor)accessorObj).staticOffset;
     }
 
     @ForceInline
+    /* <p>
+    /*  return((StaticAccessor)accessorObj).staticOffset; }}
+    /* 
+    /*  @ForceInline
+    /* 
+    /* 
     /*non-public*/ static Object checkCast(Object mh, Object obj) {
         return ((DirectMethodHandle) mh).checkCast(obj);
     }
@@ -528,6 +618,16 @@ class DirectMethodHandle extends MethodHandle {
      * Create a LF which can access the given field.
      * Cache and share this structure among all fields with
      * the same basicType and refKind.
+     * <p>
+     *  return((DirectMethodHandle)mh).checkCast(obj); }}
+     * 
+     *  Object checkCast(Object obj){return member.getReturnType()。cast(obj); }}
+     * 
+     * //现场访问缓存机械：私有静态字节AF_GETFIELD = 0,AF_PUTFIELD = 1,AF_GETSTATIC = 2 AF_PUTSTATIC = 3 AF_GETSTATIC_INIT 
+     * = 4,AF_PUTSTATIC_INIT = 5,AF_LIMIT = 6; //枚举不同领域的使用包装,//添加了托运引用一个额外的情况。
+     * 私有静态诠释FT_LAST_WRAPPER = Wrapper.values()长度1,FT_UNCHECKED_REF = Wrapper.OBJECT.ordinal()FT_CHECKED_REF
+     *  = FT_LAST_WRAPPER + 1 = FT_LIMIT + FT_LAST_WRAPPER 2。
+     * 私有静态诠释afIndex(字节formOp,布尔isVolatile,整数ftypeKind){返回((formOp * FT_LIMIT * 2)+(isVolatile FT_LIMIT：0)+ ftypeKind); }
      */
     private static LambdaForm preparedFieldLambdaForm(MemberName m) {
         Class<?> ftype = m.getFieldType();
@@ -646,6 +746,11 @@ class DirectMethodHandle extends MethodHandle {
     /**
      * Pre-initialized NamedFunctions for bootstrapping purposes.
      * Factored in an inner class to delay initialization until first usage.
+     * <p>
+     * 私人静态最终LambdaForm [] = ACCESSOR_FORMS新LambdaForm [afIndex(AF_LIMIT,假,0)];私有静态诠释ftypeKind(<?>类FTYPE){如果(ftype.isPrimitive())返回Wrapper.forPrimitiveType(FTYPE).ordinal();否则,如果(VerifyType.isNullReferenceConversion(Object.class,FTYPE))返回FT_UNCHECKED_REF;否则返回FT_CHECKED_REF; }
+     * 。
+     * 
+     *  / **创建一个LF索姆根访问给定的字段。高速缓存和共享相同的基本类型和refKind各个领域之间的这种结构。
      */
     private static class Lazy {
         static final NamedFunction

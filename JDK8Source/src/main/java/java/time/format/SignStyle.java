@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2008-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.format;
 
@@ -71,6 +90,14 @@ package java.time.format;
  * @implSpec
  * This is an immutable and thread-safe enum.
  *
+ * <p>
+ *  枚举处理正/负号的方式。
+ * <p>
+ *  格式化引擎允许使用此枚举来控制数字的正负号。有关使用方法,请参阅{@link DateTimeFormatterBuilder}。
+ * 
+ *  @implSpec这是一个不可变和线程安全的枚举。
+ * 
+ * 
  * @since 1.8
  */
 public enum SignStyle {
@@ -80,6 +107,11 @@ public enum SignStyle {
      * <p>
      * In strict parsing, the negative sign will be accepted and the positive sign rejected.
      * In lenient parsing, any sign will be accepted.
+     * <p>
+     *  仅当值为负时,才输出符号的样式。
+     * <p>
+     *  在严格解析中,将接受负号,并拒绝正号。在宽松解析中,任何符号将被接受。
+     * 
      */
     NORMAL,
     /**
@@ -88,6 +120,11 @@ public enum SignStyle {
      * In strict parsing, the absence of a sign will be rejected.
      * In lenient parsing, any sign will be accepted, with the absence
      * of a sign treated as a positive number.
+     * <p>
+     *  样式总是输出符号,其中零将输出'+'。
+     * <p>
+     *  在严格解析中,没有符号将被拒绝。在宽松解析中,任何符号将被接受,没有被视为正数的符号。
+     * 
      */
     ALWAYS,
     /**
@@ -95,6 +132,11 @@ public enum SignStyle {
      * <p>
      * In strict parsing, any sign will be rejected.
      * In lenient parsing, any sign will be accepted unless the width is fixed.
+     * <p>
+     * 风格从不输出符号,只输出绝对值。
+     * <p>
+     *  在严格解析中,任何符号都将被拒绝。在宽松解析中,任何符号将被接受,除非宽度是固定的。
+     * 
      */
     NEVER,
     /**
@@ -102,6 +144,11 @@ public enum SignStyle {
      * <p>
      * In strict parsing, any sign will be rejected.
      * In lenient parsing, any sign will be accepted unless the width is fixed.
+     * <p>
+     *  样式来阻止负值,在打印时抛出异常。
+     * <p>
+     *  在严格解析中,任何符号将被拒绝。在宽松解析中,任何符号将被接受,除非宽度是固定的。
+     * 
      */
     NOT_NEGATIVE,
     /**
@@ -111,12 +158,19 @@ public enum SignStyle {
      * In strict parsing, the sign will be rejected unless the pad width is exceeded.
      * In lenient parsing, any sign will be accepted, with the absence
      * of a sign treated as a positive number.
+     * <p>
+     *  如果值超过焊盘宽度,则总是输出符号的样式。负值将始终输出" - "符号。
+     * <p>
+     *  在严格解析中,符号将被拒绝,除非超过焊盘宽度。在宽松解析中,任何符号将被接受,没有被视为正数的符号。
+     * 
      */
     EXCEEDS_PAD;
 
     /**
      * Parse helper.
      *
+     * <p>
+     * 
      * @param positive  true if positive sign parsed, false for negative sign
      * @param strict  true if strict, false if lenient
      * @param fixedWidth  true if fixed width, false if not

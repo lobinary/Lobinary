@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,14 @@ import static sun.swing.SwingUtilities2.IMPLIED_CR;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  可以以类似于富文本格式的方式使用字符和段落样式进行标记的文档。此文档的元素结构表示样式运行的样式交叉。这些样式运行被映射到段落元素结构(其可以驻留在一些其他结构中)。
+ * 由于逻辑样式被分配给段边界,所以样式运行在段边界处断开。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     Document
  * @see     AbstractDocument
@@ -74,6 +83,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Constructs a styled document.
      *
+     * <p>
+     *  构造样式文档。
+     * 
+     * 
      * @param c  the container for the content
      * @param styles resources and style definitions which may
      *  be shared across documents
@@ -90,6 +103,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * Constructs a styled document with the default content
      * storage implementation and a shared set of styles.
      *
+     * <p>
+     *  构造具有默认内容存储实现和一组共享样式的样式文档。
+     * 
+     * 
      * @param styles the styles
      */
     public DefaultStyledDocument(StyleContext styles) {
@@ -101,6 +118,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * input content by a size of <em>BUFFER_SIZE_DEFAULT</em>
      * and has a style context that is scoped by the lifetime
      * of the document and is not shared with other documents.
+     * <p>
+     *  构造默认样式文档。这会将输入内容缓冲大小为<em> BUFFER_SIZE_DEFAULT </em>,并且具有由文档生命周期限定的样式上下文,并且不与其他文档共享。
+     * 
      */
     public DefaultStyledDocument() {
         this(new GapContent(BUFFER_SIZE_DEFAULT), new StyleContext());
@@ -109,6 +129,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Gets the default root element.
      *
+     * <p>
+     *  获取默认根元素。
+     * 
+     * 
      * @return the root
      * @see Document#getDefaultRootElement
      */
@@ -121,6 +145,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * structure (i.e. the structure reported by the
      * <code>getDefaultRootElement</code> method.  If the
      * document contained any data it will first be removed.
+     * <p>
+     * 初始化文档以反映给定的元素结构(即由<code> getDefaultRootElement </code>方法报告的结构)。如果文档包含任何数据,它将首先被删除。
+     * 
      */
     protected void create(ElementSpec[] data) {
         try {
@@ -176,6 +203,15 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  批量插入新元素。这对于允许解锁处于解锁状态的文档并准备元素结构修改是有用的。此方法接受一个记号数组,描述如何更新元素结构,以便在异步更新情况下大大减少写锁内的时间。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param offset the starting offset &gt;= 0
      * @param data the element data
      * @exception BadLocationException for an invalid starting offset
@@ -253,6 +289,23 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * IllegalArgumentException} is thrown.  If the current element structure is
      * invalid, {@code IllegalStateException} is thrown.</p>
      *
+     * <p>
+     *  从此文档中删除元素。
+     * 
+     *  <p>元素从其父元素中除去,以及由元素标识的范围中的文本。如果元素与文档没有关联,则会抛出{@code IllegalArgumentException}。</p>
+     * 
+     *  <p>由于文档中不允许有空的分支元素,如果该元素是唯一的子元素,则其父元素也将被递归地删除。这意味着,在替换特定元素的所有子元素时,应在</em>删除旧子元素之前添加新子元素。
+     * 
+     *  <p>元素移除导致两个事件被触发,{@code DocumentEvent}用于元素结构的更改,而{@code UndoableEditEvent}用于文档内容的更改。</p>
+     * 
+     * <p>如果元素包含内容结束标记(文档中的最后一个{@code"\ n"}字符),则不会删除此字符;相反,前面的叶元素被扩展以覆盖该字符。
+     * 如果最后一个树叶已经以{@code"\ n",}结尾,则它包含在内容删除中。</p>。
+     * 
+     *  <p>如果元素是{@code null,} {@code NullPointerException}被抛出。
+     * 如果元素结构在删除后变得无效,例如,如果元素是文档根元素,则抛出{@code IllegalArgumentException}。
+     * 如果当前元素结构无效,则抛出{@code IllegalStateException}。</p>。
+     * 
+     * 
      * @param  elem                      the element to remove
      * @throws NullPointerException      if the element is {@code null}
      * @throws IllegalArgumentException  if the element could not be removed
@@ -369,6 +422,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * resolve from bottom up so an attribute specified in a child
      * will override an attribute specified in the parent.
      *
+     * <p>
+     *  在逻辑样式层次结构中添加新样式。样式属性从下到上解析,因此子级中指定的属性将覆盖父级中指定的属性。
+     * 
+     * 
      * @param nm   the name of the style (must be unique within the
      *   collection of named styles).  The name may be null if the style
      *   is unnamed, but the caller is responsible
@@ -388,6 +445,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Removes a named style previously added to the document.
      *
+     * <p>
+     *  删除先前添加到文档中的命名样式。
+     * 
+     * 
      * @param nm  the name of the style to remove
      */
     public void removeStyle(String nm) {
@@ -398,6 +459,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Fetches a named style previously added.
      *
+     * <p>
+     *  获取先前添加的命名样式。
+     * 
+     * 
      * @param nm  the name of the style
      * @return the style
      */
@@ -410,6 +475,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Fetches the list of of style names.
      *
+     * <p>
+     *  获取样式名称列表。
+     * 
+     * 
      * @return all the style names
      */
     public Enumeration<?> getStyleNames() {
@@ -429,6 +498,15 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  设置用于给定位置的段落的逻辑样式。如果没有为字符和段落属性显式设置属性,则它们将通过分配给段落的逻辑样式解析,这又可以通过一些层次结构完全独立于文档中的元素层次结构来解析。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param pos the offset from the start of the document &gt;= 0
      * @param s  the logical style to assign to the paragraph, null if none
      */
@@ -457,6 +535,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * Fetches the logical style assigned to the paragraph
      * represented by the given position.
      *
+     * <p>
+     * 获取分配给由给定位置表示的段落的逻辑样式。
+     * 
+     * 
      * @param p the location to translate to a paragraph
      *  and determine the logical style assigned &gt;= 0.  This
      *  is an offset from the start of the document.
@@ -486,6 +568,15 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  设置文档某部分的属性。在进行更改时,此操作将保持写锁定,并且在成功完成更改后,会向侦听器发送DocumentEvent。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param offset the offset in the document &gt;= 0
      * @param length the length &gt;= 0
      * @param s the attributes
@@ -539,6 +630,15 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  设置段落的属性。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param offset the offset into the paragraph &gt;= 0
      * @param length the number of characters affected &gt;= 0
      * @param s the attributes
@@ -589,6 +689,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * A paragraph consists of at least one child Element, which is usually
      * a leaf.
      *
+     * <p>
+     *  获取偏移量<code> pos </code>处的段落元素。一个段由至少一个子元素组成,通常是一个叶子。
+     * 
+     * 
      * @param pos the starting offset &gt;= 0
      * @return the element
      */
@@ -606,6 +710,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Gets a character element based on a position.
      *
+     * <p>
+     *  基于位置获取字符元素。
+     * 
+     * 
      * @param pos the position in the document &gt;= 0
      * @return the element
      */
@@ -626,6 +734,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * parses the inserted content for line breaks and builds up a set
      * of instructions for the element buffer.
      *
+     * <p>
+     *  由于文本插入更新文档结构。这将发生在写锁定内。此实现简单地解析插入的换行符内容并为元素缓冲区构建一组指令。
+     * 
+     * 
      * @param chng a description of the document change
      * @param attr the attributes
      */
@@ -807,6 +919,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * position the stack in <code>paragraph</code>.<p>
      * It returns the direction the last StartSpec should have (this don't
      * necessarily create the last start spec).
+     * <p>
+     *  当在新行之后插入时,通过insertUpdate调用。它在<code> parseBuffer </code>中生成将在<code>段落</code>中定位堆栈的ElementSpecs。
+     * <p>它返回最后一个StartSpec应该有的方向(这不一定创建最后一个开始规格)。
+     * 
      */
     short createSpecsForInsertAfterNewline(Element paragraph,
             Element pParagraph, AttributeSet pattr, Vector<ElementSpec> parseBuffer,
@@ -877,6 +993,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Updates document structure as a result of text removal.
      *
+     * <p>
+     * 由于文本删除而更新文档结构。
+     * 
+     * 
      * @param chng a description of the document change
      */
     protected void removeUpdate(DefaultDocumentEvent chng) {
@@ -888,6 +1008,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * Creates the root element to be used to represent the
      * default document structure.
      *
+     * <p>
+     *  创建用于表示默认文档结构的根元素。
+     * 
+     * 
      * @return the element base
      */
     protected AbstractElement createDefaultRoot() {
@@ -913,6 +1037,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Gets the foreground color from an attribute set.
      *
+     * <p>
+     *  从属性集获取前景颜色。
+     * 
+     * 
      * @param attr the attribute set
      * @return the color
      */
@@ -924,6 +1052,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Gets the background color from an attribute set.
      *
+     * <p>
+     *  从属性集获取背景颜色。
+     * 
+     * 
      * @param attr the attribute set
      * @return the color
      */
@@ -935,6 +1067,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Gets the font from an attribute set.
      *
+     * <p>
+     *  从属性集获取字体。
+     * 
+     * 
      * @param attr the attribute set
      * @return the font
      */
@@ -947,6 +1083,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * Called when any of this document's styles have changed.
      * Subclasses may wish to be intelligent about what gets damaged.
      *
+     * <p>
+     *  当此文档的任何样式更改时调用。子类可能希望知道什么被损坏。
+     * 
+     * 
      * @param style The Style that has changed.
      */
     protected void styleChanged(Style style) {
@@ -971,6 +1111,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Adds a document listener for notification of any changes.
      *
+     * <p>
+     *  添加文档侦听器以通知任何更改。
+     * 
+     * 
      * @param listener the listener
      * @see Document#addDocumentListener
      */
@@ -1001,6 +1145,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Removes a document listener.
      *
+     * <p>
+     *  删除文档侦听器。
+     * 
+     * 
      * @param listener the listener
      * @see Document#removeDocumentListener
      */
@@ -1024,6 +1172,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
 
     /**
      * Returns a new instance of StyleChangeHandler.
+     * <p>
+     *  返回StyleChangeHandler的一个新实例。
+     * 
      */
     ChangeListener createStyleChangeListener() {
         return new StyleChangeHandler(this);
@@ -1031,6 +1182,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
 
     /**
      * Returns a new instance of StyleContextChangeHandler.
+     * <p>
+     *  返回StyleContextChangeHandler的一个新实例。
+     * 
      */
     ChangeListener createStyleContextChangeListener() {
         return new StyleContextChangeHandler(this);
@@ -1039,6 +1193,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Adds a ChangeListener to new styles, and removes ChangeListener from
      * old styles.
+     * <p>
+     *  将ChangeListener添加到新样式,并从旧样式中删除ChangeListener。
+     * 
      */
     void updateStylesListeningTo() {
         synchronized(listeningStyles) {
@@ -1098,6 +1255,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
 
     /**
      * The default size of the initial content buffer.
+     * <p>
+     *  初始内容缓冲区的默认大小。
+     * 
      */
     public static final int BUFFER_SIZE_DEFAULT = 4096;
 
@@ -1127,11 +1287,20 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  文档的默认根元素...映射包含的段落/行。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class SectionElement extends BranchElement {
 
         /**
          * Creates a new SectionElement.
+         * <p>
+         *  创建一个新的SectionElement。
+         * 
          */
         public SectionElement() {
             super(null, null);
@@ -1140,6 +1309,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Gets the name of the element.
          *
+         * <p>
+         *  获取元素的名称。
+         * 
+         * 
          * @return the name
          */
         public String getName() {
@@ -1158,6 +1331,12 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  建筑元素规范。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class ElementSpec {
 
@@ -1166,6 +1345,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * that this record type is a start tag and
          * represents markup that specifies the start
          * of an element.
+         * <p>
+         *  getType的可能值。这指定此记录类型是开始标记,并表示指定元素开始的标记。
+         * 
          */
         public static final short StartTagType = 1;
 
@@ -1174,12 +1356,18 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * that this record type is a end tag and
          * represents markup that specifies the end
          * of an element.
+         * <p>
+         *  getType的可能值。这指定此记录类型是结束标记,并且表示指定元素结尾的标记。
+         * 
          */
         public static final short EndTagType = 2;
 
         /**
          * A possible value for getType.  This specifies
          * that this record type represents content.
+         * <p>
+         *  getType的可能值。这指定此记录类型表示内容。
+         * 
          */
         public static final short ContentType = 3;
 
@@ -1187,6 +1375,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * A possible value for getDirection.  This specifies
          * that the data associated with this record should
          * be joined to what precedes it.
+         * <p>
+         *  getDirection的可能值。这指定与此记录关联的数据应连接到它之前的数据。
+         * 
          */
         public static final short JoinPreviousDirection = 4;
 
@@ -1194,6 +1385,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * A possible value for getDirection.  This specifies
          * that the data associated with this record should
          * be joined to what follows it.
+         * <p>
+         *  getDirection的可能值。这指定与此记录关联的数据应连接到它之后的数据。
+         * 
          */
         public static final short JoinNextDirection = 5;
 
@@ -1202,6 +1396,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * that the data associated with this record should
          * be used to originate a new element.  This would be
          * the normal value.
+         * <p>
+         *  getDirection的可能值。这指定与此记录相关联的数据应用于创建一个新元素。这将是正常值。
+         * 
          */
         public static final short OriginateDirection = 6;
 
@@ -1209,6 +1406,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * A possible value for getDirection.  This specifies
          * that the data associated with this record should
          * be joined to the fractured element.
+         * <p>
+         *  getDirection的可能值。这指定与此记录关联的数据应连接到断开的元素。
+         * 
          */
         public static final short JoinFractureDirection = 7;
 
@@ -1217,6 +1417,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * Constructor useful for markup when the markup will not
          * be stored in the document.
          *
+         * <p>
+         *  当标记不会存储在文档中时,构造器对标记非常有用。
+         * 
+         * 
          * @param a the attributes for the element
          * @param type the type of the element (StartTagType, EndTagType,
          *  ContentType)
@@ -1230,6 +1434,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * the data has already been added, but len information
          * is needed.
          *
+         * <p>
+         * 当已经添加数据时,在文档内解析的构造方法,但需要len信息。
+         * 
+         * 
          * @param a the attributes for the element
          * @param type the type of the element (StartTagType, EndTagType,
          *  ContentType)
@@ -1243,6 +1451,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * Constructor for creating a spec externally for batch
          * input of content and markup into the document.
          *
+         * <p>
+         *  用于在外部创建规范的批处理输入内容和标记到文档中的构造函数。
+         * 
+         * 
          * @param a the attributes for the element
          * @param type the type of the element (StartTagType, EndTagType,
          *  ContentType)
@@ -1263,6 +1475,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Sets the element type.
          *
+         * <p>
+         *  设置元素类型。
+         * 
+         * 
          * @param type the type of the element (StartTagType, EndTagType,
          *  ContentType)
          */
@@ -1273,6 +1489,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Gets the element type.
          *
+         * <p>
+         *  获取元素类型。
+         * 
+         * 
          * @return  the type of the element (StartTagType, EndTagType,
          *  ContentType)
          */
@@ -1283,6 +1503,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Sets the direction.
          *
+         * <p>
+         *  设定方向。
+         * 
+         * 
          * @param direction the direction (JoinPreviousDirection,
          *   JoinNextDirection)
          */
@@ -1293,6 +1517,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Gets the direction.
          *
+         * <p>
+         *  获取方向。
+         * 
+         * 
          * @return the direction (JoinPreviousDirection, JoinNextDirection)
          */
         public short getDirection() {
@@ -1302,6 +1530,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Gets the element attributes.
          *
+         * <p>
+         *  获取元素属性。
+         * 
+         * 
          * @return the attribute set
          */
         public AttributeSet getAttributes() {
@@ -1311,6 +1543,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Gets the array of characters.
          *
+         * <p>
+         *  获取字符数组。
+         * 
+         * 
          * @return the array
          */
         public char[] getArray() {
@@ -1321,6 +1557,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Gets the starting offset.
          *
+         * <p>
+         *  获取起始偏移量。
+         * 
+         * 
          * @return the offset &gt;= 0
          */
         public int getOffset() {
@@ -1330,6 +1570,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Gets the length.
          *
+         * <p>
+         *  获取长度。
+         * 
+         * 
          * @return the length &gt;= 0
          */
         public int getLength() {
@@ -1339,6 +1583,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Converts the element to a string.
          *
+         * <p>
+         *  将元素转换为字符串。
+         * 
+         * 
          * @return the string
          */
         public String toString() {
@@ -1393,12 +1641,22 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  管理对元素层次结构的更改的类。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public class ElementBuffer implements Serializable {
 
         /**
          * Creates a new ElementBuffer.
          *
+         * <p>
+         *  创建一个新的ElementBuffer。
+         * 
+         * 
          * @param root the root element
          * @since 1.4
          */
@@ -1411,6 +1669,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Gets the root element.
          *
+         * <p>
+         *  获取根元素。
+         * 
+         * 
          * @return the root element
          */
         public Element getRootElement() {
@@ -1420,6 +1682,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Inserts new content.
          *
+         * <p>
+         *  插入新内容。
+         * 
+         * 
          * @param offset the starting offset &gt;= 0
          * @param length the length &gt;= 0
          * @param data the data to insert
@@ -1500,6 +1766,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Removes content.
          *
+         * <p>
+         *  删除内容。
+         * 
+         * 
          * @param offset the starting offset &gt;= 0
          * @param length the length &gt;= 0
          * @param de the event capturing this edit
@@ -1513,6 +1783,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Changes content.
          *
+         * <p>
+         *  更改内容。
+         * 
+         * 
          * @param offset the starting offset &gt;= 0
          * @param length the length &gt;= 0
          * @param de the event capturing this edit
@@ -1526,6 +1800,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Inserts an update into the document.
          *
+         * <p>
+         *  在文档中插入更新。
+         * 
+         * 
          * @param data the elements to insert
          */
         protected void insertUpdate(ElementSpec[] data) {
@@ -1615,6 +1893,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * Updates the element structure in response to a removal from the
          * associated sequence in the document.  Any elements consumed by the
          * span of the removal are removed.
+         * <p>
+         *  更新元素结构以响应从文档中的关联序列中删除。将删除除去范围所消耗的任何元素。
+         * 
          */
         protected void removeUpdate() {
             removeElements(root, offset, offset + length);
@@ -1623,6 +1904,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Updates the element structure in response to a change in the
          * document.
+         * <p>
+         *  更新元素结构以响应文档中的更改。
+         * 
          */
         protected void changeUpdate() {
             boolean didEnd = split(offset, length);
@@ -1721,6 +2005,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Creates the UndoableEdit record for the edits made
          * in the buffer.
+         * <p>
+         *  为在缓冲区中进行的编辑创建UndoableEdit记录。
+         * 
          */
         void endEdits(DefaultDocumentEvent de) {
             int n = changes.size();
@@ -1757,11 +2044,23 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
                 }
                 System.err.println("");
             }
+            /* <p>
+            /* for(int i = 0; i <n; i ++){ElemChanges ec =(ElemChanges)changes.elementAt(i); System.err.print("edited："+ ec.parent +"at："+ ec.index +"removed"+ ec.removed.size()); if(ec.removed.size()> 0){int r0 =((Element)ec.removed.firstElement())。
+            /* getStartOffset(); int r1 =((Element)ec.removed.lastElement())。
+            /* getEndOffset(); System.err.print("["+ r0 +","+ r1 +"]"); } System.err.print("added"+ ec.added.size())
+            /* ; if(ec.added.size()> 0){int p0 =((Element)ec.added.firstElement())。
+            /* getStartOffset(); int r1 =((Element)ec.removed.lastElement())。
+            /* getStartOffset(); int p1 =((Element)ec.added.lastElement())。
+            /* getEndOffset(); System.err.print("["+ p0 +","+ p1 +"]"); } System.err.println(""); }}。
+            /* 
             */
         }
 
         /**
          * Initialize the buffer
+         * <p>
+         *  初始化缓冲区
+         * 
          */
         void beginEdits(int offset, int length) {
             this.offset = offset;
@@ -1786,6 +2085,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Pushes a new element onto the stack that represents
          * the current path.
+         * <p>
+         *  将新元素推送到表示当前路径的堆栈。
+         * 
+         * 
          * @param record Whether or not the push should be
          *  recorded as an element change or not.
          * @param isFracture true if pushing on an element that was created
@@ -1818,6 +2121,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
 
         /**
          * move the current offset forward by n.
+         * <p>
+         *  将当前偏移向前移动n。
+         * 
          */
         void advance(int n) {
             pos += n;
@@ -1924,6 +2230,11 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * <code>canJoin</code> and <code>join</code> to handle joining
          * the endpoints of the insertion.
          *
+         * <p>
+         *  从范围<code> rmOffs0 </code>,<code> rmOffs1 </code>中删除<code> elem </code>中的元素。
+         * 这使用<code> canJoin </code>和<code> join </code>来处理连接插入的端点。
+         * 
+         * 
          * @return true if elem will no longer have any elements.
          */
         boolean removeElements(Element elem, int rmOffs0, int rmOffs1) {
@@ -2015,6 +2326,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Can the two given elements be coelesced together
          * into one element?
+         * <p>
+         *  两个给定的元素是否可以共同组合成一个元素?
+         * 
          */
         boolean canJoin(Element e0, Element e1) {
             if ((e0 == null) || (e1 == null)) {
@@ -2049,6 +2363,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Joins the two elements carving out a hole for the
          * given removed range.
+         * <p>
+         *  连接两个元素为给定的删除范围雕刻一个洞。
+         * 
          */
         Element join(Element p, Element left, Element right, int rmOffs0, int rmOffs1) {
             if (left.isLeaf() && right.isLeaf()) {
@@ -2111,6 +2428,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * Creates a copy of this element, with a different
          * parent.
          *
+         * <p>
+         *  创建此元素的副本,具有不同的父级。
+         * 
+         * 
          * @param parent the parent element
          * @param clonee the element to be cloned
          * @return the copy
@@ -2135,6 +2456,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * Creates a copy of this element, with a different
          * parent. Children of this element included in the
          * removal range will be discarded.
+         * <p>
+         *  创建此元素的副本,具有不同的父级。包含在删除范围中的此元素的子项将被丢弃。
+         * 
          */
         Element cloneAsNecessary(Element parent, Element clonee, int rmOffs0, int rmOffs1) {
             if (clonee.isLeaf()) {
@@ -2167,6 +2491,11 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * of the root...
          * <p>This will invoke <code>fractureFrom</code> if it is determined
          * a fracture needs to happen.
+         * <p>
+         * 确定是否需要执行断裂。断裂可以被认为是将树的右侧部分移动到新位置,其中右侧部分由插入的部分确定。
+         *  <code> depth </code>用于表示深度<code> depth </code>的元素需要JoinToFracture。
+         * 其中根是0,1是根的孩子... <p>如果确定需要发生断裂,这将调用<code> fractureFrom </code>。
+         * 
          */
         void fracture(int depth) {
             int cLength = insertPath.length;
@@ -2217,6 +2546,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * point, until a depth of <code>endFractureIndex</code> is
          * reached, at which point only the elements to the right of
          * the insertion point are duplicated.
+         * <p>
+         *  重新创建插入点右侧的元素。它始于<code>已更改</code>中的<code> startIndex </code>,并调用重复以复制现有元素。
+         * 这也将重复沿着插入点的元素,直到达到<code> endFractureIndex </code>的深度,此时只有插入点右边的元素被复制。
+         * 
          */
         void fractureFrom(ElemChanges[] changed, int startIndex,
                           int endFractureIndex) {
@@ -2330,6 +2663,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * element needs to be created as the result of an insertion. This
          * will recurse and create all the children. This is similar to
          * <code>clone</code>, but deteremines the offsets differently.
+         * <p>
+         *  重新创建<code> toDuplicate </code>。当需要创建元素作为插入的结果时,调用此方法。这将递归和创建所有的孩子。
+         * 这类似于<code> clone </code>,但是以不同的方式确定偏移量。
+         * 
          */
         Element recreateFracturedElement(Element parent, Element toDuplicate) {
             if(toDuplicate.isLeaf()) {
@@ -2354,6 +2691,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Splits the bottommost leaf in <code>path</code>.
          * This is called from insert when the first element is NOT content.
+         * <p>
+         *  拆分<code> path </code>中的最底部的叶子。当第一个元素不是内容时,从插入调用。
+         * 
          */
         void fractureDeepestLeaf(ElementSpec[] specs) {
             // Split the bottommost leaf. It will be recreated elsewhere.
@@ -2379,6 +2719,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Inserts the first content. This needs to be separate to handle
          * joining.
+         * <p>
+         *  插入第一个内容。这需要单独处理连接。
+         * 
          */
         void insertFirstContent(ElementSpec[] specs) {
             ElementSpec firstSpec = specs[0];
@@ -2480,15 +2823,24 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /** Fractured child. */
         transient Element fracturedChild;
         /** Used to indicate when fracturing that the last leaf should be
+        /* <p>
+        /* 
          * skipped. */
         transient boolean offsetLastIndex;
         /** Used to indicate that the parent of the deepest leaf should
          * offset the index by 1 when adding/removing elements in an
+         * <p>
+         *  在添加/删除元素时将索引偏移1
+         * 
+         * 
          * insert. */
         transient boolean offsetLastIndexOnReplace;
 
         /*
          * Internal record used to hold element change specifications
+         * <p>
+         *  用于保存元素更改规范的内部记录
+         * 
          */
         class ElemChanges {
 
@@ -2516,6 +2868,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * An UndoableEdit used to remember AttributeSet changes to an
      * Element.
+     * <p>
+     *  UndoableEdit用于记住对Element的AttributeSet更改。
+     * 
      */
     public static class AttributeUndoableEdit extends AbstractUndoableEdit {
         public AttributeUndoableEdit(Element element, AttributeSet newAttributes,
@@ -2532,6 +2887,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Redoes a change.
          *
+         * <p>
+         *  重做更改。
+         * 
+         * 
          * @exception CannotRedoException if the change cannot be redone
          */
         public void redo() throws CannotRedoException {
@@ -2546,6 +2905,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Undoes a change.
          *
+         * <p>
+         * 撤消更改。
+         * 
+         * 
          * @exception CannotUndoException if the change cannot be undone
          */
         public void undo() throws CannotUndoException {
@@ -2567,6 +2930,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
 
     /**
      * UndoableEdit for changing the resolve parent of an Element.
+     * <p>
+     *  UndoableEdit用于更改元素的resolve parent。
+     * 
      */
     static class StyleChangeUndoableEdit extends AbstractUndoableEdit {
         public StyleChangeUndoableEdit(AbstractElement element,
@@ -2580,6 +2946,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Redoes a change.
          *
+         * <p>
+         *  重做更改。
+         * 
+         * 
          * @exception CannotRedoException if the change cannot be redone
          */
         public void redo() throws CannotRedoException {
@@ -2590,6 +2960,10 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
         /**
          * Undoes a change.
          *
+         * <p>
+         *  撤消更改。
+         * 
+         * 
          * @exception CannotUndoException if the change cannot be undone
          */
         public void undo() throws CannotUndoException {
@@ -2607,6 +2981,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
 
     /**
      * Base class for style change handlers with support for stale objects detection.
+     * <p>
+     *  用于样式更改处理程序的基类,支持陈旧的对象检测。
+     * 
      */
     abstract static class AbstractChangeHandler implements ChangeListener {
 
@@ -2619,6 +2996,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
 
             /**
              * Return a reference to the style change handler object.
+             * <p>
+             *  返回对样式更改处理程序对象的引用。
+             * 
              */
             ChangeListener getListener() {
                 return AbstractChangeHandler.this;
@@ -2649,6 +3029,11 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
          * Return a list of stale change listeners.
          *
          * A change listener becomes "stale" when its document is cleaned by GC.
+         * <p>
+         *  返回陈旧的更改侦听器的列表。
+         * 
+         *  当其文档由GC清除时,更改侦听器变为"stale"。
+         * 
          */
         static List<ChangeListener> getStaleListeners(ChangeListener l) {
             List<ChangeListener> staleListeners = new ArrayList<ChangeListener>();
@@ -2668,6 +3053,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
 
         /**
          * The ChangeListener wrapper which guards against dead documents.
+         * <p>
+         *  ChangeListener包装器,用于保护死文档。
+         * 
          */
         public void stateChanged(ChangeEvent e) {
             DefaultStyledDocument d = doc.get();
@@ -2683,6 +3071,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Added to all the Styles. When instances of this receive a
      * stateChanged method, styleChanged is invoked.
+     * <p>
+     *  添加到所有样式。当这个实例接收到一个stateChanged方法时,调用styleChanged。
+     * 
      */
     static class StyleChangeHandler extends AbstractChangeHandler {
 
@@ -2704,6 +3095,9 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * Added to the StyleContext. When the StyleContext changes, this invokes
      * <code>updateStylesListeningTo</code>.
+     * <p>
+     *  添加到StyleContext。当StyleContext更改时,它调用<code> updateStylesListeningTo </code>。
+     * 
      */
     static class StyleContextChangeHandler extends AbstractChangeHandler {
 
@@ -2720,6 +3114,8 @@ public class DefaultStyledDocument extends AbstractDocument implements StyledDoc
     /**
      * When run this creates a change event for the complete document
      * and fires it.
+     * <p>
+     *  运行时,将为整个文档创建一个更改事件并将其触发。
      */
     class ChangeUpdateRunnable implements Runnable {
         boolean isPending = false;

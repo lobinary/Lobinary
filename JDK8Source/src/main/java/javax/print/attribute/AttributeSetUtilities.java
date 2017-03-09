@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -63,16 +64,37 @@ import java.io.Serializable;
  * or at some later time. IllegalArgumentException and NullPointerException
  * are examples of typical and acceptable run time exceptions for such cases.
  *
+ * <p>
+ *  Class AttributeSetUtilities类提供了操作AttributeSet的静态方法。
+ * <ul>
+ *  <li>用于创建属性集的不可修改和同步视图的方法。 <li>用于构建接口{@link AttributeSet AttributeSet}的实现的操作
+ * </ul>
+ * <P>
+ *  AttributeSet <I> S </I>的<b>不可修改视图</>>向客户端提供对<I> S </I>的"只读"访问。
+ * 在<I> U </I>上的查询操作"读取"到<I> S </I>;因此,<I> S </I>的变化反映在<I> U </I>中。
+ * 然而,任何修改<I> U </I>的尝试都会导致UnmodifiableSetException。如果属性集对象<I> S </I>是可串行化的,则不可修改的视图对象</U>将是可串行化的。
+ * <P>
+ *  属性集<I> S </I>的<B>同步视图</>> </I>向客户端提供对<I> S </I>的同步(多线程安全) 。
+ * 使用<I> V </I>本身作为锁定对象来同步<I> V </I>的每个操作,然后仅仅调用<I> S </I>的相应操作。
+ * 为了保证互斥访问,关键是通过<I> V </I>完成对<I> S </I>的所有访问。如果属性集对象</u>是可串行化的,则同步视图对象</i>将是可串行化的。
+ * <P>
+ * 如javax.print的包描述中所述,除非在方法上明确记录为具有有意义的解释,否则方法的空引用参数是不正确的。相反的用法是不正确的编码,并且可能立即或在稍后的时间导致运行时异常。
+ *  IllegalArgumentException和NullPointerException是这种情况下典型和可接受的运行时异常的例子。
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class AttributeSetUtilities {
 
     /* Suppress default constructor, ensuring non-instantiability.
+    /* <p>
      */
     private AttributeSetUtilities() {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class UnmodifiableAttributeSet
@@ -81,6 +103,7 @@ public final class AttributeSetUtilities {
         private AttributeSet attrset;
 
         /* Unmodifiable view of the underlying attribute set.
+        /* <p>
          */
         public UnmodifiableAttributeSet(AttributeSet attributeSet) {
 
@@ -142,6 +165,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class UnmodifiableDocAttributeSet
@@ -155,6 +180,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class UnmodifiablePrintRequestAttributeSet
@@ -169,6 +196,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class UnmodifiablePrintJobAttributeSet
@@ -183,6 +212,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class UnmodifiablePrintServiceAttributeSet
@@ -199,6 +230,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates an unmodifiable view of the given attribute set.
      *
+     * <p>
+     *  创建给定属性集的不可更改视图。
+     * 
+     * 
      * @param  attributeSet  Underlying attribute set.
      *
      * @return  Unmodifiable view of <CODE>attributeSet</CODE>.
@@ -217,6 +252,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates an unmodifiable view of the given doc attribute set.
      *
+     * <p>
+     *  创建给定doc属性集的不可修改视图。
+     * 
+     * 
      * @param  attributeSet  Underlying doc attribute set.
      *
      * @return  Unmodifiable view of <CODE>attributeSet</CODE>.
@@ -235,6 +274,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates an unmodifiable view of the given print request attribute set.
      *
+     * <p>
+     *  创建给定打印请求属性集的不可修改视图。
+     * 
+     * 
      * @param  attributeSet  Underlying print request attribute set.
      *
      * @return  Unmodifiable view of <CODE>attributeSet</CODE>.
@@ -253,6 +296,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates an unmodifiable view of the given print job attribute set.
      *
+     * <p>
+     *  创建给定打印作业属性集的不可修改视图。
+     * 
+     * 
      * @param  attributeSet  Underlying print job attribute set.
      *
      * @return  Unmodifiable view of <CODE>attributeSet</CODE>.
@@ -271,6 +318,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates an unmodifiable view of the given print service attribute set.
      *
+     * <p>
+     *  创建给定打印服务属性集的不可修改视图。
+     * 
+     * 
      * @param  attributeSet  Underlying print service attribute set.
      *
      * @return  Unmodifiable view of <CODE>attributeSet</CODE>.
@@ -287,6 +338,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class SynchronizedAttributeSet
@@ -352,6 +405,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class SynchronizedDocAttributeSet
@@ -364,6 +419,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class SynchronizedPrintRequestAttributeSet
@@ -377,6 +434,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class SynchronizedPrintJobAttributeSet
@@ -390,6 +449,8 @@ public final class AttributeSetUtilities {
     }
 
     /**
+    /* <p>
+    /* 
       * @serial include
       */
     private static class SynchronizedPrintServiceAttributeSet
@@ -404,6 +465,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates a synchronized view of the given attribute set.
      *
+     * <p>
+     *  创建给定属性集的同步视图。
+     * 
+     * 
      * @param  attributeSet  Underlying attribute set.
      *
      * @return  Synchronized view of <CODE>attributeSet</CODE>.
@@ -422,6 +487,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates a synchronized view of the given doc attribute set.
      *
+     * <p>
+     *  创建给定doc属性集的同步视图。
+     * 
+     * 
      * @param  attributeSet  Underlying doc attribute set.
      *
      * @return  Synchronized view of <CODE>attributeSet</CODE>.
@@ -440,6 +509,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates a synchronized view of the given print request attribute set.
      *
+     * <p>
+     *  创建给定打印请求属性集的同步视图。
+     * 
+     * 
      * @param  attributeSet  Underlying print request attribute set.
      *
      * @return  Synchronized view of <CODE>attributeSet</CODE>.
@@ -458,6 +531,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates a synchronized view of the given print job attribute set.
      *
+     * <p>
+     *  创建给定打印作业属性集的同步视图。
+     * 
+     * 
      * @param  attributeSet  Underlying print job attribute set.
      *
      * @return  Synchronized view of <CODE>attributeSet</CODE>.
@@ -476,6 +553,10 @@ public final class AttributeSetUtilities {
     /**
      * Creates a synchronized view of the given print service attribute set.
      *
+     * <p>
+     *  创建给定打印服务属性集的同步视图。
+     * 
+     * 
      * @param  attributeSet  Underlying print service attribute set.
      *
      * @return  Synchronized view of <CODE>attributeSet</CODE>.
@@ -494,6 +575,10 @@ public final class AttributeSetUtilities {
      * implements the given interface, which is assumed to be interface {@link
      * Attribute Attribute} or a subinterface thereof.
      *
+     * <p>
+     *  验证给定对象是实现给定接口的{@link java.lang.Class Class},它假定为interface {@link Attribute Attribute}或其子接口。
+     * 
+     * 
      * @param  object     Object to test.
      * @param  interfaceName  Interface the object must implement.
      *
@@ -526,6 +611,10 @@ public final class AttributeSetUtilities {
      * is assumed to be interface {@link Attribute Attribute} or a subinterface
      * thereof.
      *
+     * <p>
+     *  验证给定对象是给定接口的一个实例,它假定为interface {@link Attribute Attribute}或其子接口。
+     * 
+     * 
      * @param  object     Object to test.
      * @param  interfaceName  Interface of which the object must be an instance.
      *
@@ -558,6 +647,9 @@ public final class AttributeSetUtilities {
      * category of the given attribute value object. If so, this method
      * returns doing nothing. If not, this method throws an exception.
      *
+     * <p>
+     * 验证给定的属性类别对象是否等于给定属性值对象的类别。如果是这样,此方法返回什么也不做。如果不是,此方法抛出异常。
+     * 
      * @param  category   Attribute category to test.
      * @param  attribute  Attribute value to test.
      *

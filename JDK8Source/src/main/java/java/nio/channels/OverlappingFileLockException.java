@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  *
@@ -36,6 +37,10 @@ package java.nio.channels;
  * virtual machine, or when another thread is already waiting to lock an
  * overlapping region of the same file.
  *
+ * <p>
+ *  当尝试获取与已由同一Java虚拟机锁定的区域重叠的文件区域上的锁定时,或者当另一个线程已在等待锁定同一文件的重叠区域时,抛出未经检查的异常。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -47,6 +52,8 @@ public class OverlappingFileLockException
 
     /**
      * Constructs an instance of this class.
+     * <p>
+     *  构造此类的实例。
      */
     public OverlappingFileLockException() { }
 

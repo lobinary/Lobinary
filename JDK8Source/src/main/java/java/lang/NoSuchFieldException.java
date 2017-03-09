@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ package java.lang;
 /**
  * Signals that the class doesn't have a field of a specified name.
  *
+ * <p>
+ *  表示类没有指定名称的字段。
+ * 
+ * 
  * @author  unascribed
  * @since   JDK1.1
  */
@@ -36,6 +41,9 @@ public class NoSuchFieldException extends ReflectiveOperationException {
 
     /**
      * Constructor.
+     * <p>
+     *  构造函数。
+     * 
      */
     public NoSuchFieldException() {
         super();
@@ -44,6 +52,9 @@ public class NoSuchFieldException extends ReflectiveOperationException {
     /**
      * Constructor with a detail message.
      *
+     * <p>
+     *  具有详细消息的构造函数。
+     * 
      * @param s the detail message
      */
     public NoSuchFieldException(String s) {

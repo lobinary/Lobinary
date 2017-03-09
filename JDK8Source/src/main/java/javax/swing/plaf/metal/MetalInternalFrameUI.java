@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,11 @@ import javax.swing.plaf.*;
  * Metal implementation of JInternalFrame.
  * <p>
  *
+ * <p>
+ *  金属实现的JInternalFrame。
+ * <p>
+ * 
+ * 
  * @author Steve Wilson
  */
 public class MetalInternalFrameUI extends BasicInternalFrameUI {
@@ -244,6 +250,8 @@ public class MetalInternalFrameUI extends BasicInternalFrameUI {
      * Returns the <code>MouseInputAdapter</code> that will be installed
      * on the TitlePane.
      *
+     * <p>
+     * 
      * @param w the <code>JInternalFrame</code>
      * @return the <code>MouseInputAdapter</code> that will be installed
      * on the TitlePane.

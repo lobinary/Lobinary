@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import java.util.Spliterator;
  * of the operation relative to a given stream source and set of intermediate
  * operations.
  *
+ * <p>
+ *  在流管道中的操作,其将流作为输入并产生结果或副作用。 {@code TerminalOp}具有输入类型和流形状以及结果类型。
+ *  {@code TerminalOp}还具有一组<em>操作标志</em>,其描述操作如何处理流的元素(例如短路或遵守遇到顺序;参见{@link StreamOpFlag})。
+ * 
+ *  <p> {@code TerminalOp}必须提供与给定流源和中间操作集相关的操作的顺序和并行实现。
+ * 
+ * 
  * @param <E_IN> the type of input elements
  * @param <R>    the type of the result
  * @since 1.8
@@ -48,6 +56,12 @@ interface TerminalOp<E_IN, R> {
      *
      * @implSpec The default returns {@code StreamShape.REFERENCE}.
      *
+     * <p>
+     *  获取此操作的输入类型的形状。
+     * 
+     *  @implSpec默认返回{@code StreamShape.REFERENCE}。
+     * 
+     * 
      * @return StreamShape of the input type of this operation
      */
     default StreamShape inputShape() { return StreamShape.REFERENCE; }
@@ -60,6 +74,12 @@ interface TerminalOp<E_IN, R> {
      *
      * @implSpec The default implementation returns zero.
      *
+     * <p>
+     *  获取操作的流标志。终端操作可以设置在{@link StreamOpFlag}中定义的流标志的有限子集,并且这些标志与用于流水线的先前组合的流和中间操作标志组合。
+     * 
+     *  @implSpec默认实现返回零。
+     * 
+     * 
      * @return the stream flags for this operation
      * @see StreamOpFlag
      */
@@ -73,6 +93,12 @@ interface TerminalOp<E_IN, R> {
      * @implSpec The default performs a sequential evaluation of the operation
      * using the specified {@code PipelineHelper}.
      *
+     * <p>
+     *  使用指定的{@code PipelineHelper}执行操作的并行计算,它描述了上游中间操作。
+     * 
+     *  @implSpec默认情况下使用指定的{@code PipelineHelper}执行操作的顺序评估。
+     * 
+     * 
      * @param helper the pipeline helper
      * @param spliterator the source spliterator
      * @return the result of the evaluation
@@ -89,6 +115,8 @@ interface TerminalOp<E_IN, R> {
      * {@code PipelineHelper}, which describes the upstream intermediate
      * operations.
      *
+     * <p>
+     * 
      * @param helper the pipeline helper
      * @param spliterator the source spliterator
      * @return the result of the evaluation

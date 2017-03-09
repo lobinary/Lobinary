@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Key.java,v 1.6 2006/04/25 02:25:08 jeffsuttor Exp $
+ * <p>
+ *  $ Id：Key.java,v 1.6 2006/04/25 02:25:08 jeffsuttor Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -51,6 +64,8 @@ import com.sun.org.apache.xml.internal.dtm.Axis;
 import com.sun.org.apache.xml.internal.utils.XML11Char;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  * @author Santiago Pericas-Geertsen
  */
@@ -58,26 +73,42 @@ final class Key extends TopLevelElement {
 
     /**
      * The name of this key as defined in xsl:key.
+     * <p>
+     *  xsl：key中定义的此键的名称。
+     * 
      */
     private QName _name;
 
     /**
      * The pattern to match starting at the root node.
+     * <p>
+     *  从根节点开始匹配的模式。
+     * 
      */
     private Pattern _match;
 
     /**
      * The expression that generates the values for this key.
+     * <p>
+     *  生成此密钥的值的表达式。
+     * 
      */
     private Expression _use;
 
     /**
      * The type of the _use expression.
+     * <p>
+     *  _use表达式的类型。
+     * 
      */
     private Type _useType;
 
     /**
      * Parse the <xsl:key> element and attributes
+     * <p>
+     *  解析<xsl：key>元素和属性
+     * 
+     * 
      * @param parser A reference to the stylesheet parser
      */
     public void parseContents(Parser parser) {
@@ -113,6 +144,10 @@ final class Key extends TopLevelElement {
 
     /**
      * Returns a String-representation of this key's name
+     * <p>
+     *  返回此键值名称的String表示形式
+     * 
+     * 
      * @return The key's name (from the <xsl:key> elements 'name' attribute).
      */
     public String getName() {
@@ -138,6 +173,9 @@ final class Key extends TopLevelElement {
      * This method is called if the "use" attribute of the key contains a
      * node set. In this case we must traverse all nodes in the set and
      * create one entry in this key's index for each node in the set.
+     * <p>
+     *  如果键的"use"属性包含节点集,则调用此方法。在这种情况下,我们必须遍历集合中的所有节点,并在集合中每个节点的此键索引中创建一个条目。
+     * 
      */
     public void traverseNodeSet(ClassGenerator classGen,
                                 MethodGenerator methodGen,
@@ -216,6 +254,8 @@ final class Key extends TopLevelElement {
     /**
      * Gather all nodes that match the expression in the attribute "match"
      * and add one (or more) entries in this key's index.
+     * <p>
+     *  收集与属性"匹配"中的表达式匹配的所有节点,并在此键的索引中添加一个(或多个)条目。
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
 

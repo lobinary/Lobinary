@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ class FactoryFinder {
      * Creates an instance of the specified class using the specified
      * <code>ClassLoader</code> object.
      *
+     * <p>
+     *  使用指定的<code> ClassLoader </code>对象创建指定类的实例。
+     * 
+     * 
      * @exception WebServiceException if the given class could not be found
      *            or could not be instantiated
      */
@@ -64,6 +69,12 @@ class FactoryFinder {
      * <P>
      * This method is package private so that this code can be shared.
      *
+     * <p>
+     *  找到给定工厂名称的实现<code> Class </code>对象,或者如果失败,找到给定备用类名称的<code> Class </code>对象。提供的参数必须按顺序使用。
+     * 如果使用第一个参数成功,第二个参数不会被使用。
+     * <P>
+     *  这个方法是包私人所以这个代码可以共享。
+     * 
      * @return the <code>Class</code> object of the specified message factory;
      *         may not be <code>null</code>
      *
@@ -163,6 +174,8 @@ class FactoryFinder {
 
     /**
      * Loads the class, provided that the calling thread has an access to the class being loaded.
+     * <p>
+     * 
      */
     private static Class safeLoadClass(String className, ClassLoader classLoader) throws ClassNotFoundException {
         try {

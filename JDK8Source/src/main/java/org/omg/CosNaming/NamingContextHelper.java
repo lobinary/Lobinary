@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 
@@ -17,6 +18,7 @@ package org.omg.CosNaming;
  * See <a href="http://www.omg.org/technology/documents/formal/naming_service.htm">
  * CORBA COS 
  * Naming Specification.</a>
+ * <p>
  */
 abstract public class NamingContextHelper
 {

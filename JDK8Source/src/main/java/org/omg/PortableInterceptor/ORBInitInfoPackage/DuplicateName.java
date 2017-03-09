@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor.ORBInitInfoPackage;
 
 
@@ -13,6 +14,8 @@ public final class DuplicateName extends org.omg.CORBA.UserException
 
   /** 
        * The name for which there was already an interceptor registered.
+       * <p>
+       * 
        */
   public String name = null;
 

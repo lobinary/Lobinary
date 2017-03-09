@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -21,6 +22,10 @@ public interface TAG_MULTIPLE_COMPONENTS
      * The <code>profile_data</code> for the 
      * <code>TAG_MULTIPLE_COMPONENTS</code> profile is a CDR encapsulation 
      * of the <code>MultipleComponentProfile</code> type shown above.
+     * <p>
+     *  表示封装的值类型为<code> MultipleComponentProfile </code>。在这种情况下,配置文件由协议组件列表组成,协议组件的使用必须由使用此配置文件的协议指定。
+     * 该轮廓可以用于承载IOR部件。
+     * <p>
      */
   public static final int value = (int)(1L);
 }

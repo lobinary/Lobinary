@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,39 @@ import static javax.management.monitor.MonitorNotification.*;
  * <CODE>Long</CODE>, <CODE>Float</CODE>, <CODE>Double</CODE>).
  *
  *
+ * <p>
+ *  定义一个监视器MBean,用于观察量规属性的值。
+ * 
+ *  <P>仪表监视器观察随时间连续变化的属性。仪表监视器发送通知,如下所示：
+ * 
+ * <UL>
+ * 
+ *  <LI>如果属性值增加并变得等于或大于高阈值,则发送{@link MonitorNotification#THRESHOLD_HIGH_VALUE_EXCEEDED阈值高通知}。
+ *  notify high标志必须设置为<CODE> true </CODE>。
+ * 
+ *  <BR>高阈值的后续交叉不会导致进一步通知,除非属性值变得等于或小于低阈值。</LI>
+ * 
+ *  <LI>如果属性值减小并变得等于或小于低阈值,则发送{@link MonitorNotification#THRESHOLD_LOW_VALUE_EXCEEDED threshold low notification}
+ * 。
+ * 通知低标志必须设置为<CODE> true </CODE>。
+ * 
+ *  <BR>低阈值的后续交叉不会导致进一步通知,除非属性值变得等于或大于高阈值。</LI>
+ * 
+ * </UL>
+ * 
+ *  这提供了滞后机制以避免当属性值在高或低阈值附近产生小振荡时重复触发通知。
+ * 
+ * <P>如果使用标准差模式,则导出的计量值的值被计算为两次连续观察的观察的计量值之间的差。
+ * 
+ *  <BR>导出的测量值(V [t])使用以下方法计算：
+ * <UL>
+ *  <LI> V [t] = gauge [t]  -  gauge [t-GP] </li>
+ * </UL>
+ * 
+ *  该监视器的这种实现要求观察属性是整数或浮点类型(<CODE>字节</CODE>,<CODE>整数</CODE>,<CODE> Short </CODE>,<CODE > Long </CODE>,<CODE>
+ *  Float </CODE>,<CODE> Double </CODE>)。
+ * 
+ * 
  * @since 1.5
  */
 public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
@@ -90,6 +124,9 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * ------------------------------------------
      *  PACKAGE CLASSES
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------包装类------------------------------------
+     * 
      */
 
     static class GaugeMonitorObservedObject extends ObservedObject {
@@ -135,12 +172,20 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * ------------------------------------------
      *  PRIVATE VARIABLES
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私人变数------ ------------------------------------
+     * 
      */
 
     /**
      * Gauge high threshold.
      *
      * <BR>The default value is a null Integer object.
+     * <p>
+     *  测量高阈值。
+     * 
+     *  <BR>默认值为null整数对象。
+     * 
      */
     private Number highThreshold = INTEGER_ZERO;
 
@@ -148,6 +193,11 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Gauge low threshold.
      *
      * <BR>The default value is a null Integer object.
+     * <p>
+     *  测量低阈值。
+     * 
+     *  <BR>默认值为null整数对象。
+     * 
      */
     private Number lowThreshold = INTEGER_ZERO;
 
@@ -156,6 +206,11 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * the high threshold.
      *
      * <BR>The default value is <CODE>false</CODE>.
+     * <p>
+     *  在超过高阈值时,指示仪表监视器是否通知的标志。
+     * 
+     *  <BR>默认值为<CODE> false </CODE>。
+     * 
      */
     private boolean notifyHigh = false;
 
@@ -164,6 +219,11 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * the low threshold.
      *
      * <BR>The default value is <CODE>false</CODE>.
+     * <p>
+     *  当超过低阈值时,指示计量器监视器是否通知的标志。
+     * 
+     *  <BR>默认值为<CODE> false </CODE>。
+     * 
      */
     private boolean notifyLow = false;
 
@@ -175,6 +235,11 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * attribute.
      *
      * <BR>The default value is set to <CODE>false</CODE>.
+     * <p>
+     *  表示是否使用标准差模式的标志。如果使用标准差模式,则导出的标准是两个连续观测值之间的差。否则,导出的量表直接是观察属性的值。
+     * 
+     *  <BR>默认值设置为<CODE> false </CODE>。
+     * 
      */
     private boolean differenceMode = false;
 
@@ -205,10 +270,16 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * ------------------------------------------
      *  CONSTRUCTORS
      * ------------------------------------------
+     * <p>
+     * ------------------------------------------建筑师------- -----------------------------------
+     * 
      */
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public GaugeMonitor() {
     }
@@ -217,10 +288,16 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * ------------------------------------------
      *  PUBLIC METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------公共方法------------------------------------
+     * 
      */
 
     /**
      * Starts the gauge monitor.
+     * <p>
+     *  启动仪表监视器。
+     * 
      */
     public synchronized void start() {
         if (isActive()) {
@@ -241,6 +318,9 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
 
     /**
      * Stops the gauge monitor.
+     * <p>
+     *  停止仪表监视器。
+     * 
      */
     public synchronized void stop() {
         doStop();
@@ -253,6 +333,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Gets the derived gauge of the specified object, if this object is
      * contained in the set of observed MBeans, or <code>null</code> otherwise.
      *
+     * <p>
+     *  获取指定对象的派生尺寸(如果此对象包含在观察MBean的集合中),否则返回<code> null </code>。
+     * 
+     * 
      * @param object the name of the MBean.
      *
      * @return The derived gauge of the specified object.
@@ -268,6 +352,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * this object is contained in the set of observed MBeans, or
      * <code>0</code> otherwise.
      *
+     * <p>
+     *  获取指定对象的派生标尺时间戳(如果此对象包含在观察MBean的集合中),否则为<code> 0 </code>。
+     * 
+     * 
      * @param object the name of the object whose derived gauge
      * timestamp is to be returned.
      *
@@ -283,6 +371,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Returns the derived gauge of the first object in the set of
      * observed MBeans.
      *
+     * <p>
+     *  返回观测MBean集合中第一个对象的导出标准。
+     * 
+     * 
      * @return The derived gauge.
      *
      * @deprecated As of JMX 1.2, replaced by
@@ -301,6 +393,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Gets the derived gauge timestamp of the first object in the set
      * of observed MBeans.
      *
+     * <p>
+     *  获取观察到的MBean集合中的第一个对象的导出度量标记时间戳。
+     * 
+     * 
      * @return The derived gauge timestamp.
      *
      * @deprecated As of JMX 1.2, replaced by
@@ -318,6 +414,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
     /**
      * Gets the high threshold value common to all observed MBeans.
      *
+     * <p>
+     *  获取所有观察到的MBean共有的高阈值。
+     * 
+     * 
      * @return The high threshold value.
      *
      * @see #setThresholds
@@ -329,6 +429,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
     /**
      * Gets the low threshold value common to all observed MBeans.
      *
+     * <p>
+     *  获取所有观察到的MBean公用的低阈值。
+     * 
+     * 
      * @return The low threshold value.
      *
      * @see #setThresholds
@@ -341,6 +445,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Sets the high and the low threshold values common to all
      * observed MBeans.
      *
+     * <p>
+     *  设置所有观察到的MBean公用的高阈值和低阈值。
+     * 
+     * 
      * @param highValue The high threshold value.
      * @param lowValue The low threshold value.
      *
@@ -390,6 +498,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Gets the high notification's on/off switch value common to all
      * observed MBeans.
      *
+     * <p>
+     *  获取所有观察到的MBean公用的高通知的开/关切换值。
+     * 
+     * 
      * @return <CODE>true</CODE> if the gauge monitor notifies when
      * exceeding the high threshold, <CODE>false</CODE> otherwise.
      *
@@ -403,6 +515,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Sets the high notification's on/off switch value common to all
      * observed MBeans.
      *
+     * <p>
+     *  设置所有观察到的MBean公用的高通知的开/关切换值。
+     * 
+     * 
      * @param value The high notification's on/off switch value.
      *
      * @see #getNotifyHigh
@@ -417,6 +533,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Gets the low notification's on/off switch value common to all
      * observed MBeans.
      *
+     * <p>
+     *  获取所有观察到的MBean公用的低通知的开/关切换值。
+     * 
+     * 
      * @return <CODE>true</CODE> if the gauge monitor notifies when
      * exceeding the low threshold, <CODE>false</CODE> otherwise.
      *
@@ -430,6 +550,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Sets the low notification's on/off switch value common to all
      * observed MBeans.
      *
+     * <p>
+     *  设置所有观察到的MBean公用的低通知的开/关切换值。
+     * 
+     * 
      * @param value The low notification's on/off switch value.
      *
      * @see #getNotifyLow
@@ -443,6 +567,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
     /**
      * Gets the difference mode flag value common to all observed MBeans.
      *
+     * <p>
+     *  获取所有观察到的MBean公用的差模式标志值。
+     * 
+     * 
      * @return <CODE>true</CODE> if the difference mode is used,
      * <CODE>false</CODE> otherwise.
      *
@@ -455,6 +583,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
     /**
      * Sets the difference mode flag value common to all observed MBeans.
      *
+     * <p>
+     *  将差值模式标志值设置为所有观察到的MBean的公共值。
+     * 
+     * 
      * @param value The difference mode flag value.
      *
      * @see #getDifferenceMode
@@ -478,6 +610,9 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Returns a <CODE>NotificationInfo</CODE> object containing the
      * name of the Java class of the notification and the notification
      * types sent by the gauge monitor.
+     * <p>
+     * 返回一个<CODE> NotificationInfo </CODE>对象,其中包含通知Java类的名称和测量仪监视器发送的通知类型。
+     * 
      */
     @Override
     public MBeanNotificationInfo[] getNotificationInfo() {
@@ -488,11 +623,18 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * ------------------------------------------
      *  PRIVATE METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私有方法------ ------------------------------------
+     * 
      */
 
     /**
      * Updates the derived gauge attribute of the observed object.
      *
+     * <p>
+     *  更新观察对象的派生规格属性。
+     * 
+     * 
      * @param scanGauge The value of the observed attribute.
      * @param o The observed object.
      * @return <CODE>true</CODE> if the derived gauge value is valid,
@@ -538,6 +680,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Updates the notification attribute of the observed object
      * and notifies the listeners only once if the notify flag
      * is set to <CODE>true</CODE>.
+     * <p>
+     *  更新观察对象的通知属性,如果通知标志设置为<CODE> true </CODE>,则通知侦听器一次。
+     * 
+     * 
      * @param o The observed object.
      */
     private synchronized MonitorNotification updateNotifications(
@@ -630,6 +776,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * <CODE>true</CODE>.  Both integer and floating-point types are
      * allowed.
      *
+     * <p>
+     *  当differenceMode标志设置为<CODE> true </CODE>时,设置派生量程。允许使用整数和浮点类型。
+     * 
+     * 
      * @param scanGauge The value of the observed attribute.
      * @param o The observed object.
      */
@@ -676,6 +826,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Tests if the first specified Number is greater than or equal to
      * the last.  Both integer and floating-point types are allowed.
      *
+     * <p>
+     *  测试第一个指定的Number是否大于或等于last。允许使用整数和浮点类型。
+     * 
+     * 
      * @param greater The first Number to compare with the second.
      * @param less The second Number to compare with the first.
      * @param type The number type.
@@ -709,6 +863,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * Tests if the first specified Number is strictly greater than the last.
      * Both integer and floating-point types are allowed.
      *
+     * <p>
+     *  测试第一个指定的Number是否严格大于最后一个。允许使用整数和浮点类型。
+     * 
+     * 
      * @param greater The first Number to compare with the second.
      * @param less The second Number to compare with the first.
      * @param className The number class name.
@@ -744,11 +902,18 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * ------------------------------------------
      *  PACKAGE METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------包装方法------ ------------------------------------
+     * 
      */
 
     /**
      * Factory method for ObservedObject creation.
      *
+     * <p>
+     *  ObservedObject创建的工厂方法。
+     * 
+     * 
      * @since 1.6
      */
     @Override
@@ -765,6 +930,9 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      * "object" and "attribute" after checking that the type of the
      * supplied observed attribute value is one of the value types
      * supported by this monitor.
+     * <p>
+     *  此方法在检查所提供的观察属性值的类型是此监视器支持的值类型之一之后,全局地为给定的"对象"和"属性"设置派生的量规类型。
+     * 
      */
     @Override
     synchronized boolean isComparableTypeValid(ObjectName object,
@@ -862,6 +1030,10 @@ public class GaugeMonitor extends Monitor implements GaugeMonitorMBean {
      *   initialized, their default value is an Integer object with
      *   a value equal to zero.
      *
+     * <p>
+     *  测试阈值高和阈值低是否与测量仪的类型相同。允许使用整数和浮点类型。
+     * 
+     * 
      * @param object The observed object.
      * @param attribute The observed attribute.
      * @param value The sample value.

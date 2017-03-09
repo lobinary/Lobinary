@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -63,6 +64,19 @@ import java.rmi.server.UID;
  * that takes the activation descriptor, object and port as arguments;
  * this method both registers and exports the object. </ul>
  *
+ * <p>
+ *  激活使用特殊标识符表示可以随时间激活的远程对象。激活标识符(<code> ActivationID </code>类的实例)包含激活对象所需的几个信息：
+ * <ul>
+ *  <li>对象激活程序的远程引用({@link java.rmi.server.RemoteRef RemoteRef}实例)和<li>唯一标识符({@link java.rmi.server.UID UID}
+ * 实例)为对象。
+ *  </ul> <p>。
+ * 
+ *  可以通过向激活系统注册对象来获得对象的激活标识符。
+ * 注册通过第一个<code> Activatable </code>构造函数(有三个参数和两个寄存器)通过<code> Activatable.register </code>方法<li>以几种方式完成注
+ * 册：<ul> <li>并通过以激活描述符,对象和端口作为参数的第一个<code> Activatable.exportObject </code>方法导出对象,</ul>。
+ *  可以通过向激活系统注册对象来获得对象的激活标识符。
+ * 
+ * 
  * @author      Ann Wollrath
  * @see         Activatable
  * @since       1.2
@@ -70,11 +84,17 @@ import java.rmi.server.UID;
 public class ActivationID implements Serializable {
     /**
      * the object's activator
+     * <p>
+     *  对象的激活器
+     * 
      */
     private transient Activator activator;
 
     /**
      * the object's unique id
+     * <p>
+     *  对象的唯一ID
+     * 
      */
     private transient UID uid = new UID();
 
@@ -88,6 +108,11 @@ public class ActivationID implements Serializable {
      * this identifier. An instance of <code>ActivationID</code> is globally
      * unique.
      *
+     * <p>
+     *  <code> ActivationID </code>的构造函数采用单个参数,激活器,其指定对激活与该标识符相关联的对象的激活器的远程引用。
+     *  <code> ActivationID </code>的实例是全局唯一的。
+     * 
+     * 
      * @param activator reference to the activator responsible for
      * activating the object
      * @throws UnsupportedOperationException if and only if activation is
@@ -101,6 +126,10 @@ public class ActivationID implements Serializable {
     /**
      * Activate the object for this id.
      *
+     * <p>
+     *  激活此ID的对象。
+     * 
+     * 
      * @param force if true, forces the activator to contact the group
      * when activating the object (instead of returning a cached reference);
      * if false, returning a cached value is acceptable.
@@ -131,6 +160,10 @@ public class ActivationID implements Serializable {
      * Returns a hashcode for the activation id.  Two identifiers that
      * refer to the same remote object will have the same hash code.
      *
+     * <p>
+     * 返回激活ID的哈希码。引用同一远程对象的两个标识符将具有相同的哈希码。
+     * 
+     * 
      * @see java.util.Hashtable
      * @since 1.2
      */
@@ -145,6 +178,10 @@ public class ActivationID implements Serializable {
      * 2) the activator specified in each identifier
      *    refers to the same remote object.
      *
+     * <p>
+     *  比较两个激活标识以获取内容相等性。如果以下两个条件都为真,则返回true：1)唯一标识符等效(按内容),2)每个标识符中指定的激活程序引用同一远程对象。
+     * 
+     * 
      * @param   obj     the Object to compare with
      * @return  true if these Objects are equal; false otherwise.
      * @see             java.util.Hashtable
@@ -180,6 +217,20 @@ public class ActivationID implements Serializable {
      * <code>RemoteRef</code> instance passing <code>out</code>
      * as the argument.
      *
+     * <p>
+     *  <code> writeObject </code>用于自定义序列化。
+     * 
+     *  <p>此方法将此对象的序列化表单写入此类,如下所示：
+     * 
+     *  <p> <code> writeObject </code>方法在传递此对象的唯一标识符({@link java.rmi.server.UID UID}实例)作为参数的<code> out </code>
+     * 上调用。
+     * 
+     *  <p>接下来,在激活器的<code> RemoteRef </code>实例上调用{@link java.rmi.server.RemoteRef#getRefClass(java.io.ObjectOutput)getRefClass}
+     * 方法以获取其外部引用类型名称。
+     * 接下来,使用<code> getRefClass </code>返回的值在<code> out </code>上调用<code> writeUTF </code>方法,然后<code> writeExt
+     * ernal </code>在<code> RemoteRef </code>实例上传递<code> out </code>作为参数时调用。
+     * 
+     * 
      * @serialData The serialized data for this class comprises a
      * <code>java.rmi.server.UID</code> (written with
      * <code>ObjectOutput.writeObject</code>) followed by the
@@ -262,6 +313,16 @@ public class ActivationID implements Serializable {
      * class corresponding to that external ref type name, in which
      * case the <code>RemoteRef</code> will be an instance of
      * that implementation-specific class.
+     * <p>
+     *  <code> readObject </code>用于自定义序列化。
+     * 
+     *  <p>此方法读取此对象的此类的序列化形式,如下所示：
+     * 
+     *  <p>在<code>中的<code>中调用<code> readObject </code>方法来读取此对象的唯一标识符({@link java.rmi.server.UID UID}实例)。
+     * 
+     * <p>接下来,在</code>中的<code>上调用<code> readUTF </code>方法来读取该对象的激活程序的<code> RemoteRef </code>实例的外部引用类型名称。
+     * 接下来,创建对应于外部引用类型名称(由<code> readUTF </code>返回)和<code> readExternal </code>的实现特定类的<code> RemoteRef </code>
+     * 方法在<code> RemoteRef </code>实例上被调用,以读取与外部引用类型名称相对应的外部表单。
      */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException

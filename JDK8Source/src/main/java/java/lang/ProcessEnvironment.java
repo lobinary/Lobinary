@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,17 @@
  * of the system-independent method of the same name.  Don't even
  * think of using this class unless your method's name appears below.
  *
+ * <p>
+ *  它看起来像一个像这样的jchars数组：
+ * 
+ *  FOO = BAR \ u0000 ... GORP = QUUX \ u0000 \ u0000
+ * 
+ *  这个数据结构具有我们必须应对的许多特性：(参见：http://windowssdk.msdn.microsoft.com/en-us/library/ms682009.aspx) -  NUL jch
+ * ar分隔符和一个双NUL jchar终止符。
+ * 看起来Windows实现需要双NUL终止,即使环境是空的。我们应该始终生成具有双NUL终止的环境,同时接受由单个NUL组成的空环境。
+ *  - 在Windows9x上,这实际上是一个8位字符的数组,而不是系统默认编码的jchars。 - 块必须按Unicode值排序,不区分大小写,如同折叠为大写。
+ *  - 有由Windows维护的魔术环境变量,以一个`='(！)字符开头。
+ * 
  * @author Martin Buchholz
  * @since 1.5
  */

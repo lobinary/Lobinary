@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,12 @@ import javax.management.ObjectName;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-48350262537070138L</code>.
  *
+ * <p>
+ *  表示未解析的角色：由于问题而未从关系检索的角色。它提供了角色名称,值(如果尝试设置角色时出现问题)和定义问题的整数(在RoleStatus中定义的常量)。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> -48350262537070138L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -86,6 +93,8 @@ public class RoleUnresolved implements Serializable {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /** @serialField roleName String Role name
+    /* <p>
+    /* 
      *  @serialField roleValue List Role value ({@link List} of {@link ObjectName} objects)
      *  @serialField problemType int Problem type
      */
@@ -115,16 +124,22 @@ public class RoleUnresolved implements Serializable {
     //
 
     /**
+    /* <p>
+    /* 
      * @serial Role name
      */
     private String roleName = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Role value ({@link List} of {@link ObjectName} objects)
      */
     private List<ObjectName> roleValue = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Problem type
      */
     private int problemType;
@@ -136,6 +151,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param name  name of the role
      * @param value  value of the role (if problem when setting the
      * role)
@@ -169,6 +188,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Retrieves role name.
      *
+     * <p>
+     *  检索角色名称。
+     * 
+     * 
      * @return the role name.
      *
      * @see #setRoleName
@@ -180,6 +203,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Retrieves role value.
      *
+     * <p>
+     *  检索角色值。
+     * 
+     * 
      * @return an ArrayList of ObjectName objects, the one provided to be set
      * in given role. Null if the unresolved role is returned for a read
      * access.
@@ -193,6 +220,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Retrieves problem type.
      *
+     * <p>
+     *  获取问题类型。
+     * 
+     * 
      * @return an integer corresponding to a problem, those being described as
      * static final members of current class.
      *
@@ -205,6 +236,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Sets role name.
      *
+     * <p>
+     *  设置角色名称。
+     * 
+     * 
      * @param name the new role name.
      *
      * @exception IllegalArgumentException  if null parameter
@@ -226,6 +261,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Sets role value.
      *
+     * <p>
+     *  设置角色值。
+     * 
+     * 
      * @param value  List of ObjectName objects for referenced
      * MBeans not set in role.
      *
@@ -244,6 +283,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Sets problem type.
      *
+     * <p>
+     *  设置问题类型。
+     * 
+     * 
      * @param pbType  integer corresponding to a problem. Must be one of
      * those described as static final members of current class.
      *
@@ -265,6 +308,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Clone this object.
      *
+     * <p>
+     *  克隆此对象。
+     * 
+     * 
      * @return an independent clone.
      */
     public Object clone() {
@@ -278,6 +325,10 @@ public class RoleUnresolved implements Serializable {
     /**
      * Return a string describing this object.
      *
+     * <p>
+     *  返回描述此对象的字符串。
+     * 
+     * 
      * @return a description of this RoleUnresolved object.
      */
     public String toString() {
@@ -300,6 +351,9 @@ public class RoleUnresolved implements Serializable {
 
     /**
      * Deserializes a {@link RoleUnresolved} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link RoleUnresolved}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -335,6 +389,8 @@ public class RoleUnresolved implements Serializable {
 
     /**
      * Serializes a {@link RoleUnresolved} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link RoleUnresolved}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -17,6 +18,7 @@ package org.omg.PortableServer;
 	 * policies to be set.
 	 * NO_IMPLICIT_ACTIVATION to indicate no implicit 
 	 * servant activation.
+	 * <p>
 	 */
 public class ImplicitActivationPolicyValue implements org.omg.CORBA.portable.IDLEntity
 {

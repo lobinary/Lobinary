@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,21 @@ package java.util;
  * exception for its correctness: <i>{@code ConcurrentModificationException}
  * should be used only to detect bugs.</i>
  *
+ * <p>
+ *  当不允许这种修改时,可能会由检测到对象的并发修改的方法抛出此异常。
+ * <p>
+ *  例如,通常不允许一个线程修改集合,而另一个线程正在迭代它。一般来说,迭代的结果在这些情况下是未定义的。
+ * 一些Iterator实现(包括JRE提供的所有通用集合实现的实现)可能会选择在检测到此行为时抛出此异常。
+ * 执行此操作的迭代器称为<i> fail-fast </i>迭代器,因为它们快速而干净地失败,而是冒着未来未确定时间的任意,非确定性行为的风险。
+ * <p>
+ *  请注意,此异常并不总是表示某个对象已被<i>不同的</i>线程同时修改。如果单个线程发出一系列违反对象契约的方法调用,那么对象可能会抛出此异常。
+ * 例如,如果线程在使用fail-fast迭代器迭代集合时直接修改集合,则迭代器将抛出此异常。
+ * 
+ * <p>请注意,不能保证故障快速行为,因为一般来说,在不同步并发修改的情况下不可能做出任何硬的保证。
+ * 故障快速操作以尽力而为的方式抛出{@code ConcurrentModificationException}。
+ * 因此,编写依赖于此异常的程序的正确性是错误的：<i> {@ code ConcurrentModificationException}应该仅用于检测错误。</i>。
+ * 
+ * 
  * @author  Josh Bloch
  * @see     Collection
  * @see     Iterator
@@ -73,6 +89,9 @@ public class ConcurrentModificationException extends RuntimeException {
     /**
      * Constructs a ConcurrentModificationException with no
      * detail message.
+     * <p>
+     *  构造一个没有详细消息的ConcurrentModificationException。
+     * 
      */
     public ConcurrentModificationException() {
     }
@@ -81,6 +100,10 @@ public class ConcurrentModificationException extends RuntimeException {
      * Constructs a {@code ConcurrentModificationException} with the
      * specified detail message.
      *
+     * <p>
+     *  构造具有指定详细消息的{@code ConcurrentModificationException}。
+     * 
+     * 
      * @param message the detail message pertaining to this exception.
      */
     public ConcurrentModificationException(String message) {
@@ -92,6 +115,10 @@ public class ConcurrentModificationException extends RuntimeException {
      * message of {@code (cause==null ? null : cause.toString())} (which
      * typically contains the class and detail message of {@code cause}.
      *
+     * <p>
+     *  使用指定的原因和{@code(cause == null?null：cause.toString())}(通常包含{@code cause}的类和详细信息)的详细消息构造新异常。
+     * 
+     * 
      * @param  cause the cause (which is saved for later retrieval by the
      *         {@link Throwable#getCause()} method).  (A {@code null} value is
      *         permitted, and indicates that the cause is nonexistent or
@@ -110,6 +137,10 @@ public class ConcurrentModificationException extends RuntimeException {
      * <i>not</i> automatically incorporated in this exception's detail
      * message.
      *
+     * <p>
+     *  构造具有指定的详细消息和原因的新异常。
+     * 
+     * 
      * @param  message the detail message (which is saved for later retrieval
      *         by the {@link Throwable#getMessage()} method).
      * @param  cause the cause (which is saved for later retrieval by the

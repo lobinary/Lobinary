@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,12 +29,18 @@ package java.io;
 /**
  * Utility methods for packing/unpacking primitive values in/out of byte arrays
  * using big-endian byte ordering.
+ * <p>
+ *  用于使用大端字节顺序打包/解包字节数组中的原始值的实用方法。
+ * 
  */
 class Bits {
 
     /*
      * Methods for unpacking primitive values from byte arrays starting at
      * given offsets.
+     * <p>
+     *  从给定偏移开始的字节数组中解压缩原始值的方法。
+     * 
      */
 
     static boolean getBoolean(byte[] b, int off) {
@@ -79,6 +86,8 @@ class Bits {
     /*
      * Methods for packing primitive values into byte arrays starting at given
      * offsets.
+     * <p>
+     *  将原始值打包到以给定偏移量开始的字节数组中的方法。
      */
 
     static void putBoolean(byte[] b, int off, boolean val) {

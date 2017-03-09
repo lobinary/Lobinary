@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ import java.time.LocalDate;
  * must be 'normalized' by setting the
  * hours, minutes, seconds, and milliseconds to zero in the particular
  * time zone with which the instance is associated.
+ * <p>
+ *  <P>一个大约为毫秒值的精简包装,允许JDBC将此标识为SQL <code> DATE </code>值。 A毫秒值表示自1970年1月1日00：00：00.000 GMT以来经过的毫秒数。
+ * <p>
+ *  为了符合SQL <code> DATE </code>的定义,由<code> java.sql.Date </code>实例包装的毫秒值必须通过设置小时,分钟,秒和在与该实例相关联的特定时区中,该时间
+ * 间隔为零。
+ * 
  */
 public class Date extends java.util.Date {
 
@@ -48,6 +55,12 @@ public class Date extends java.util.Date {
      * <P>
      * The result is undefined if a given argument is out of bounds.
      *
+     * <p>
+     *  构造使用给定的年,月和日初始化的<code> Date </code>对象。
+     * <P>
+     *  如果给定的参数超出范围,结果是未定义的。
+     * 
+     * 
      * @param year the year minus 1900; must be 0 to 8099. (Note that
      *        8099 is 9999 minus 1900.)
      * @param month 0 to 11
@@ -66,6 +79,11 @@ public class Date extends java.util.Date {
      * time in the default time zone (the time zone of the Java virtual
      * machine running the application) that corresponds to zero GMT.
      *
+     * <p>
+     *  使用给定的毫秒时间值构造一个<code> Date </code>对象。
+     * 如果给定的毫秒值包含时间信息,则驱动程序将时间组件设置为对应于零GMT的默认时区(运行应用程序的Java虚拟机的时区)中的时间。
+     * 
+     * 
      * @param date milliseconds since January 1, 1970, 00:00:00 GMT not
      *        to exceed the milliseconds representation for the year 8099.
      *        A negative number indicates the number of milliseconds
@@ -85,6 +103,11 @@ public class Date extends java.util.Date {
      * time in the default time zone (the time zone of the Java virtual
      * machine running the application) that corresponds to zero GMT.
      *
+     * <p>
+     *  使用给定的毫秒时间值设置现有的<code> Date </code>对象。
+     * 如果给定的毫秒值包含时间信息,则驱动程序将时间组件设置为对应于零GMT的默认时区(运行应用程序的Java虚拟机的时区)中的时间。
+     * 
+     * 
      * @param date milliseconds since January 1, 1970, 00:00:00 GMT not
      *        to exceed the milliseconds representation for the year 8099.
      *        A negative number indicates the number of milliseconds
@@ -99,6 +122,10 @@ public class Date extends java.util.Date {
      * Converts a string in JDBC date escape format to
      * a <code>Date</code> value.
      *
+     * <p>
+     * 将JDBC日期转义格式的字符串转换为<code> Date </code>值。
+     * 
+     * 
      * @param s a <code>String</code> object representing a date in
      *        in the format "yyyy-[m]m-[d]d". The leading zero for <code>mm</code>
      * and <code>dd</code> may also be omitted.
@@ -151,6 +178,10 @@ public class Date extends java.util.Date {
     /**
      * Formats a date in the date escape format yyyy-mm-dd.
      * <P>
+     * <p>
+     *  以日期转义格式yyyy-mm-dd格式化日期。
+     * <P>
+     * 
      * @return a String in yyyy-mm-dd format
      */
     @SuppressWarnings("deprecation")
@@ -178,6 +209,10 @@ public class Date extends java.util.Date {
     * This method is deprecated and should not be used because SQL Date
     * values do not have a time component.
     *
+    * <p>
+    *  此方法已弃用,不应该使用,因为SQL Date值没有时间组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this method is invoked
     * @see #setHours
@@ -191,6 +226,10 @@ public class Date extends java.util.Date {
     * This method is deprecated and should not be used because SQL Date
     * values do not have a time component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL Date值没有时间组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this method is invoked
     * @see #setMinutes
@@ -204,6 +243,10 @@ public class Date extends java.util.Date {
     * This method is deprecated and should not be used because SQL Date
     * values do not have a time component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL Date值没有时间组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this method is invoked
     * @see #setSeconds
@@ -217,6 +260,10 @@ public class Date extends java.util.Date {
     * This method is deprecated and should not be used because SQL Date
     * values do not have a time component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL Date值没有时间组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this method is invoked
     * @see #getHours
@@ -230,6 +277,10 @@ public class Date extends java.util.Date {
     * This method is deprecated and should not be used because SQL Date
     * values do not have a time component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL Date值没有时间组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this method is invoked
     * @see #getMinutes
@@ -243,6 +294,10 @@ public class Date extends java.util.Date {
     * This method is deprecated and should not be used because SQL Date
     * values do not have a time component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL Date值没有时间组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this method is invoked
     * @see #getSeconds
@@ -255,6 +310,9 @@ public class Date extends java.util.Date {
    /**
     * Private serial version unique ID to ensure serialization
     * compatibility.
+    * <p>
+    *  私有串口版本唯一的ID,以确保序列化兼容性。
+    * 
     */
     static final long serialVersionUID = 1511598038487230103L;
 
@@ -266,6 +324,12 @@ public class Date extends java.util.Date {
      * The provided {@code LocalDate} is interpreted as the local date
      * in the local time zone.
      *
+     * <p>
+     *  从{@link LocalDate}对象中获取{@code Date}的实例,该对象的年,月和日的值与给定的{@code LocalDate}相同。
+     * <p>
+     *  所提供的{@code LocalDate}会解释为本地时区中的本地日期。
+     * 
+     * 
      * @param date a {@code LocalDate} to convert
      * @return a {@code Date} object
      * @exception NullPointerException if {@code date} is null
@@ -283,6 +347,12 @@ public class Date extends java.util.Date {
      * The conversion creates a {@code LocalDate} that represents the same
      * date value as this {@code Date} in local time zone
      *
+     * <p>
+     *  将此{@code Date}对象转换为{@code LocalDate}
+     * <p>
+     *  转换会创建{@code LocalDate},表示与本地时区中的{@code Date}相同的日期值
+     * 
+     * 
      * @return a {@code LocalDate} object representing the same date value
      *
      * @since 1.8
@@ -297,6 +367,8 @@ public class Date extends java.util.Date {
     * not be used because SQL {@code Date} values do not have a time
     * component.
     *
+    * <p>
+    * 
     * @exception java.lang.UnsupportedOperationException if this method is invoked
     */
     @Override

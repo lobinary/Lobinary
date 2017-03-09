@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,8 @@ import javax.xml.stream.events.XMLEvent;
 
 
 /**
+/* <p>
+/* 
  * @author Padmaja Vedula
  * @author Sunitha Reddy
  */
@@ -122,6 +125,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
    /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void parse(String sysId) throws IOException, SAXException {
         throw new IOException("This method is not yet implemented.");
@@ -347,6 +353,10 @@ public class StAXStream2SAX implements XMLReader, Locator {
      * Get the attributes associated with the given START_ELEMENT or ATTRIBUTE
      * StAXevent.
      *
+     * <p>
+     *  获取与给定的START_ELEMENT或ATTRIBUTE StAXevent关联的属性。
+     * 
+     * 
      * @return the StAX attributes converted to an org.xml.sax.Attributes
      */
     private Attributes getAttributes() {
@@ -432,6 +442,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public DTDHandler getDTDHandler() {
         return null;
@@ -440,6 +453,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public ErrorHandler getErrorHandler() {
         return null;
@@ -448,6 +464,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public boolean getFeature(String name) throws SAXNotRecognizedException,
         SAXNotSupportedException
@@ -458,6 +477,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setFeature(String name, boolean value) throws
         SAXNotRecognizedException, SAXNotSupportedException
@@ -467,6 +489,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setDTDHandler(DTDHandler handler) throws NullPointerException {
     }
@@ -474,6 +499,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setEntityResolver(EntityResolver resolver) throws
         NullPointerException
@@ -483,6 +511,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public EntityResolver getEntityResolver() {
         return null;
@@ -491,6 +522,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setErrorHandler(ErrorHandler handler) throws
         NullPointerException
@@ -500,6 +534,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setProperty(String name, Object value) throws
         SAXNotRecognizedException, SAXNotSupportedException {
@@ -508,6 +545,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public Object getProperty(String name) throws SAXNotRecognizedException,
         SAXNotSupportedException
@@ -518,6 +558,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public int getColumnNumber() {
         return 0;
@@ -526,6 +569,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public int getLineNumber() {
         return 0;
@@ -534,6 +580,9 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public String getPublicId() {
         return null;
@@ -542,6 +591,8 @@ public class StAXStream2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
      */
     public String getSystemId() {
         return null;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,9 @@ import org.w3c.dom.Element;
  * KeyResolverSpi implementation which resolves public keys from a
  * <code>dsig11:DEREncodedKeyValue</code> element.
  *
+ * <p>
+ *  KeyResolverSpi实现,它解析来自<code> dsig11：DEREncodedKeyValue </code>元素的公钥。
+ * 
  * @author Brent Putman (putmanb@georgetown.edu)
  */
 public class DEREncodedKeyValueResolver extends KeyResolverSpi {

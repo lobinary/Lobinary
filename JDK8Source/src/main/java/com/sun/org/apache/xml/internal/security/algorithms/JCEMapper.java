@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.algorithms;
 
@@ -33,6 +42,9 @@ import org.w3c.dom.Element;
 
 /**
  * This class maps algorithm identifier URIs to JAVA JCE class names.
+ * <p>
+ *  此类将算法标识符URI映射到JAVA JCE类名称。
+ * 
  */
 public class JCEMapper {
 
@@ -48,6 +60,10 @@ public class JCEMapper {
     /**
      * Method register
      *
+     * <p>
+     *  方法寄存器
+     * 
+     * 
      * @param id
      * @param algorithm
      * @throws SecurityException if a security manager is installed and the
@@ -60,6 +76,9 @@ public class JCEMapper {
 
     /**
      * This method registers the default algorithms.
+     * <p>
+     *  此方法注册默认算法。
+     * 
      */
     public static void registerDefaultAlgorithms() {
         algorithmsMap.put(
@@ -219,6 +238,10 @@ public class JCEMapper {
     /**
      * Method translateURItoJCEID
      *
+     * <p>
+     *  方法translateURItoJCEID
+     * 
+     * 
      * @param algorithmURI
      * @return the JCE standard name corresponding to the given URI
      */
@@ -236,6 +259,10 @@ public class JCEMapper {
 
     /**
      * Method getAlgorithmClassFromURI
+     * <p>
+     *  方法getAlgorithmClassFromURI
+     * 
+     * 
      * @param algorithmURI
      * @return the class name that implements this algorithm
      */
@@ -254,6 +281,10 @@ public class JCEMapper {
     /**
      * Returns the keylength in bits for a particular algorithm.
      *
+     * <p>
+     *  返回特定算法的密钥长度(以位为单位)。
+     * 
+     * 
      * @param algorithmURI
      * @return The length of the key used in the algorithm
      */
@@ -271,6 +302,10 @@ public class JCEMapper {
     /**
      * Method getJCEKeyAlgorithmFromURI
      *
+     * <p>
+     *  方法getJCEKeyAlgorithmFromURI
+     * 
+     * 
      * @param algorithmURI
      * @return The KeyAlgorithm for the given URI.
      */
@@ -287,6 +322,10 @@ public class JCEMapper {
 
     /**
      * Gets the default Provider for obtaining the security algorithms
+     * <p>
+     *  获取用于获取安全算法的默认提供程序
+     * 
+     * 
      * @return the default providerId.
      */
     public static String getProviderId() {
@@ -295,6 +334,10 @@ public class JCEMapper {
 
     /**
      * Sets the default Provider for obtaining the security algorithms
+     * <p>
+     *  设置用于获取安全算法的默认提供程序
+     * 
+     * 
      * @param provider the default providerId.
      * @throws SecurityException if a security manager is installed and the
      *    caller does not have permission to set the JCE provider
@@ -306,6 +349,9 @@ public class JCEMapper {
 
     /**
      * Represents the Algorithm xml element
+     * <p>
+     *  表示Algorithm xml元素
+     * 
      */
     public static class Algorithm {
 
@@ -316,6 +362,9 @@ public class JCEMapper {
 
         /**
          * Gets data from element
+         * <p>
+         *  从元素获取数据
+         * 
          * @param el
          */
         public Algorithm(Element el) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Encodings.java,v 1.3 2005/09/28 13:49:04 pvedula Exp $
+ * <p>
+ *  $ Id：Encodings.java,v 1.3 2005/09/28 13:49:04 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -50,6 +63,10 @@ import com.sun.org.apache.xalan.internal.utils.SecuritySupport;
  * to override encoding names and provide the last printable character
  * for each encoding.
  *
+ * <p>
+ *  提供有关编码的信息。取决于Java运行时为不同编码提供写入器,但可以用于覆盖编码名称,并为每个编码提供最后一个可打印字符。
+ * 
+ * 
  * @version $Revision: 1.11 $ $Date: 2010-11-01 04:34:44 $
  * @author <a href="mailto:arkin@intalio.com">Assaf Arkin</a>
  */
@@ -59,16 +76,25 @@ public final class Encodings extends Object
 
     /**
      * The last printable character for unknown encodings.
+     * <p>
+     *  未知编码的最后一个可打印字符。
+     * 
      */
     private static final int m_defaultLastPrintable = 0x7F;
 
     /**
      * Standard filename for properties file with encodings data.
+     * <p>
+     *  带有编码数据的属性文件的标准文件名。
+     * 
      */
     private static final String ENCODINGS_FILE = "com/sun/org/apache/xml/internal/serializer/Encodings.properties";
 
     /**
      * Standard filename for properties file with encodings data.
+     * <p>
+     *  带有编码数据的属性文件的标准文件名。
+     * 
      */
     private static final String ENCODINGS_PROP = "com.sun.org.apache.xalan.internal.serialize.encodings";
 
@@ -77,6 +103,10 @@ public final class Encodings extends Object
      * Returns a writer for the specified encoding based on
      * an output stream.
      *
+     * <p>
+     *  返回基于输出流的指定编码的写入程序。
+     * 
+     * 
      * @param output The output stream
      * @param encoding The encoding
      * @return A suitable writer
@@ -105,6 +135,10 @@ public final class Encodings extends Object
      * Returns the last printable character for an unspecified
      * encoding.
      *
+     * <p>
+     *  返回未指定编码的最后一个可打印字符。
+     * 
+     * 
      * @return the default size
      */
     public static int getLastPrintable()
@@ -120,6 +154,12 @@ public final class Encodings extends Object
      * <p>
      * This is not a public API.
      *
+     * <p>
+     *  返回指定编码的EncodingInfo对象。
+     * <p>
+     *  这不是一个公共API。
+     * 
+     * 
      * @param encoding The encoding
      * @return The object that is used to determine if
      * characters are in the given encoding.
@@ -158,6 +198,12 @@ public final class Encodings extends Object
      * only made of printable ASCII characters.
      * <p>
      * This is not a public API.
+     * <p>
+     *  一种快速和便宜的方法来大写一个只由可打印的ASCII字符组成的字符串。
+     * <p>
+     * 这不是一个公共API。
+     * 
+     * 
      * @param s a String of ASCII characters
      * @return an uppercased version of the input String,
      * possibly the same String.
@@ -204,6 +250,13 @@ public final class Encodings extends Object
      * [XML]. If no encoding attribute is specified, then the XSLT processor should
      * use either UTF-8 or UTF-16."
      *
+     * <p>
+     *  获取正确的MIME编码。
+     * 从XSLT建议："encoding属性指定用于输出结果树的首选编码,XSLT处理器需要遵守UTF-8和UTF-16的值,对于其他值,如果XSLT处理器不支持指定的编码它可能会发出错误信号;如果它不发出错
+     * 误信号,它应该使用UTF-8或UTF-16。
+     *  获取正确的MIME编码。XSLT处理器不能使用其名称不匹配XML推荐[XML]的EncName生成的编码。如果未指定编码属性,则XSLT处理器应使用UTF-8或UTF-16。
+     * 
+     * 
      * @param encoding Reference to java-style encoding string, which may be null,
      * in which case a default will be found.
      *
@@ -231,6 +284,10 @@ public final class Encodings extends Object
                     * 8859_1 to "ISO-8859-1", which is not what we want,
                     * I think, and I don't think I want to alter the tables
                     * to convert everything to UTF-8.
+                    * <p>
+                    *  看看mime类型是否等于UTF8。
+                    * 如果你不这样做,那么convertJava2MimeEncoding将8859_1转换为"ISO-8859-1",这不是我们想要的,我想,我不认为我想改变表,将一切转换为UTF- 8。
+                    * 
                     */
                     String jencoding =
                         (encoding.equalsIgnoreCase("Cp1252")
@@ -264,6 +321,10 @@ public final class Encodings extends Object
     /**
      * Try the best we can to convert a Java encoding to a XML-style encoding.
      *
+     * <p>
+     *  尝试我们可以将Java编码转换为XML样式编码。
+     * 
+     * 
      * @param encoding non-null reference to encoding string, java style.
      *
      * @return ISO-style encoding string.
@@ -280,6 +341,10 @@ public final class Encodings extends Object
     /**
      * Try the best we can to convert a Java encoding to a XML-style encoding.
      *
+     * <p>
+     *  尝试我们可以将Java编码转换为XML样式编码。
+     * 
+     * 
      * @param encoding non-null reference to encoding string, java style.
      *
      * @return ISO-style encoding string.
@@ -434,6 +499,11 @@ public final class Encodings extends Object
          * System property "encodings" formatted using URL syntax may define an
          * external encodings list. Thanks to Sergey Ushakov for the code
          * contribution!
+         * <p>
+         *  加载所有支持的编码的列表。
+         * 
+         *  使用URL语法格式化的系统属性"编码"可以定义外部编码列表。感谢谢尔盖Ushakov代码贡献！
+         * 
          */
         private void loadEncodingInfo() {
             try {
@@ -516,6 +586,12 @@ public final class Encodings extends Object
      * Return true if the character is the high member of a surrogate pair.
      * <p>
      * This is not a public API.
+     * <p>
+     *  如果字符是代理对的高成员,则返回true。
+     * <p>
+     *  这不是一个公共API。
+     * 
+     * 
      * @param ch the character to test
      * @xsl.usage internal
      */
@@ -526,6 +602,12 @@ public final class Encodings extends Object
      * Return true if the character is the low member of a surrogate pair.
      * <p>
      * This is not a public API.
+     * <p>
+     *  如果字符是代理对的低成员,则返回true。
+     * <p>
+     *  这不是一个公共API。
+     * 
+     * 
      * @param ch the character to test
      * @xsl.usage internal
      */
@@ -536,6 +618,12 @@ public final class Encodings extends Object
      * Return the unicode code point represented by the high/low surrogate pair.
      * <p>
      * This is not a public API.
+     * <p>
+     * 返回由高/低代理对表示的unicode代码点。
+     * <p>
+     *  这不是一个公共API。
+     * 
+     * 
      * @param highSurrogate the high char of the high/low pair
      * @param lowSurrogate the low char of the high/low pair
      * @xsl.usage internal
@@ -553,6 +641,10 @@ public final class Encodings extends Object
      * but as an int value.
      * <p>
      * This is not a public API.
+     * <p>
+     *  返回由char表示的unicode代码点。一个伪方法的位,因为它所做的是返回char,但作为一个int值。
+     * <p>
+     * 
      * @param ch the char.
      * @xsl.usage internal
      */

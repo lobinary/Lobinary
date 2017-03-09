@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,13 @@ import static com.sun.java.swing.plaf.windows.XPStyle.Skin;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  一个Windows树。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Scott Violet
  */
 public class WindowsTreeUI extends BasicTreeUI {
@@ -64,6 +72,9 @@ public class WindowsTreeUI extends BasicTreeUI {
     /**
       * Ensures that the rows identified by beginRow through endRow are
       * visible.
+      * <p>
+      *  确保由beginRow到endRow标识的行可见。
+      * 
       */
     protected void ensureRowsAreVisible(int beginRow, int endRow) {
         if(tree != null && beginRow >= 0 && endRow < getRowCount(tree)) {
@@ -112,6 +123,9 @@ public class WindowsTreeUI extends BasicTreeUI {
     /**
      * Returns the default cell renderer that is used to do the
      * stamping of each node.
+     * <p>
+     *  返回用于对每个节点进行标记的默认单元格渲染器。
+     * 
      */
     protected TreeCellRenderer createDefaultCellRenderer() {
         return new WindowsTreeCellRenderer();
@@ -126,6 +140,12 @@ public class WindowsTreeUI extends BasicTreeUI {
      * for short term storage or RMI between applications running the same
      * version of Swing.  A future release of Swing will provide support for
      * long term persistence.
+     * <p>
+     *  减号按钮图标
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     * 未来的Swing版本将为长期持久性提供支持。
+     * 
      */
     public static class ExpandedIcon implements Icon, Serializable {
 
@@ -178,6 +198,12 @@ public class WindowsTreeUI extends BasicTreeUI {
      * for short term storage or RMI between applications running the same
      * version of Swing.  A future release of Swing will provide support for
      * long term persistence.
+     * <p>
+     *  加号按钮图标
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     * 未来的Swing版本将为长期持久性提供支持。
+     * 
      */
     public static class CollapsedIcon extends ExpandedIcon {
         static public Icon createCollapsedIcon() {
@@ -204,6 +230,7 @@ public class WindowsTreeUI extends BasicTreeUI {
          * <code>toString</code> on <code>value</code>.
          * The foreground color is set based on the selection and the icon
          * is set based on on leaf and expanded.
+         * <p>
          */
         public Component getTreeCellRendererComponent(JTree tree, Object value,
                                                       boolean sel,

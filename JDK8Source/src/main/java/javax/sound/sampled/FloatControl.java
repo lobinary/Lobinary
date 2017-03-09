@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,15 @@ package javax.sound.sampled;
  * includes methods that return string labels for the minimum, maximum, and midpoint
  * positions of the control.
  *
+ * <p>
+ *  <code> FloatControl </code>对象提供对一系列浮点值的控制。浮动控制通常通过诸如滑块或旋钮的连续可调节的对象在图形用户界面中表示。
+ *  <code> FloatControl </code>的具体子类实现了控件,例如增益和平移,它们以某种方式影响线的音频信号,应用程序可以操作它。
+ *  <code> {@ link FloatControl.Type} </code>内部类提供了用于标识一些常见类型的浮点控件的类型的静态实例。
+ * <p>
+ *  <code> FloatControl </code>抽象类提供了设置和获取控件当前浮点值的方法。其他方法获得可能的值范围和控件的分辨率(返回值之间的最小增量)。
+ * 一些浮动控件允许在指定的时间段内斜坡到一个新的值。 <code> FloatControl </code>还包括返回控件的最小,最大和中点位置的字符串标签的方法。
+ * 
+ * 
  * @see Line#getControls
  * @see Line#isControlSupported
  *
@@ -61,22 +71,34 @@ public abstract class FloatControl extends Control {
 
     /**
      * The minimum supported value.
+     * <p>
+     *  支持的最小值。
+     * 
      */
     private float minimum;
 
     /**
      * The maximum supported value.
+     * <p>
+     *  支持的最大值。
+     * 
      */
     private float maximum;
 
     /**
      * The control's precision.
+     * <p>
+     *  控制精度。
+     * 
      */
     private float precision;
 
     /**
      * The smallest time increment in which a value change
      * can be effected during a value shift, in microseconds.
+     * <p>
+     *  在值移位期间可以实现值改变的最小时间增量,以微秒为单位。
+     * 
      */
     private int updatePeriod;
 
@@ -84,21 +106,33 @@ public abstract class FloatControl extends Control {
     /**
      * A label for the units in which the control values are expressed,
      * such as "dB" for decibels.
+     * <p>
+     *  用于表示控制值的单位的标签,例如"dB"表示分贝。
+     * 
      */
     private final String units;
 
     /**
      * A label for the minimum value, such as "Left."
+     * <p>
+     * 最小值的标签,例如"左"。
+     * 
      */
     private final String minLabel;
 
     /**
      * A label for the maximum value, such as "Right."
+     * <p>
+     *  最大值的标签,例如"右"。
+     * 
      */
     private final String maxLabel;
 
     /**
      * A label for the mid-point value, such as "Center."
+     * <p>
+     *  中点值的标签,例如"中心"。
+     * 
      */
     private final String midLabel;
 
@@ -107,6 +141,9 @@ public abstract class FloatControl extends Control {
 
     /**
      * The current value.
+     * <p>
+     *  当前值。
+     * 
      */
     private float value;
 
@@ -118,6 +155,10 @@ public abstract class FloatControl extends Control {
     /**
      * Constructs a new float control object with the given parameters
      *
+     * <p>
+     *  使用给定的参数构造一个新的浮点控制对象
+     * 
+     * 
      * @param type the kind of control represented by this float control object
      * @param minimum the smallest value permitted for the control
      * @param maximum the largest value permitted for the control
@@ -175,6 +216,10 @@ public abstract class FloatControl extends Control {
      * The labels for the minimum, maximum, and mid-point values are set
      * to zero-length strings.
      *
+     * <p>
+     *  使用给定的参数构造一个新的浮点控制对象。最小值,最大值和中点值的标签设置为零长度字符串。
+     * 
+     * 
      * @param type the kind of control represented by this float control object
      * @param minimum the smallest value permitted for the control
      * @param maximum the largest value permitted for the control
@@ -208,6 +253,10 @@ public abstract class FloatControl extends Control {
      * IllegalArgumentException is thrown.
      * Some controls require that their line be open before they can be affected
      * by setting a value.
+     * <p>
+     *  设置控件的当前值。默认实现只是按照指示设置值。如果指示的值大于最大值或小于最小值,则抛出IllegalArgumentException。一些控件要求在设置值之前,它们的行被打开。
+     * 
+     * 
      * @param newValue desired new value
      * @throws IllegalArgumentException if the value indicated does not fall
      * within the allowable range
@@ -228,6 +277,10 @@ public abstract class FloatControl extends Control {
 
     /**
      * Obtains this control's current value.
+     * <p>
+     *  获取此控件的当前值。
+     * 
+     * 
      * @return the current value
      */
     public float getValue() {
@@ -237,6 +290,10 @@ public abstract class FloatControl extends Control {
 
     /**
      * Obtains the maximum value permitted.
+     * <p>
+     *  获取允许的最大值。
+     * 
+     * 
      * @return the maximum allowable value
      */
     public float getMaximum() {
@@ -246,6 +303,10 @@ public abstract class FloatControl extends Control {
 
     /**
      * Obtains the minimum value permitted.
+     * <p>
+     *  获取允许的最小值。
+     * 
+     * 
      * @return the minimum allowable value
      */
     public float getMinimum() {
@@ -256,6 +317,10 @@ public abstract class FloatControl extends Control {
     /**
      * Obtains the label for the units in which the control's values are expressed,
      * such as "dB" or "frames per second."
+     * <p>
+     *  获取表示控制值的单位的标签,例如"dB"或"每秒帧数"。
+     * 
+     * 
      * @return the units label, or a zero-length string if no label
      */
     public String getUnits() {
@@ -265,6 +330,10 @@ public abstract class FloatControl extends Control {
 
     /**
      * Obtains the label for the minimum value, such as "Left" or "Off."
+     * <p>
+     *  获取最小值的标签,例如"Left"或"Off"。
+     * 
+     * 
      * @return the minimum value label, or a zero-length string if no label      * has been set
      */
     public String getMinLabel() {
@@ -274,6 +343,10 @@ public abstract class FloatControl extends Control {
 
     /**
      * Obtains the label for the mid-point value, such as "Center" or "Default."
+     * <p>
+     *  获取中点值的标签,例如"中心"或"默认值"。
+     * 
+     * 
      * @return the mid-point value label, or a zero-length string if no label    * has been set
      */
     public String getMidLabel() {
@@ -283,6 +356,10 @@ public abstract class FloatControl extends Control {
 
     /**
      * Obtains the label for the maximum value, such as "Right" or "Full."
+     * <p>
+     *  获取最大值的标签,例如"Right"或"Full"。
+     * 
+     * 
      * @return the maximum value label, or a zero-length string if no label      * has been set
      */
     public String getMaxLabel() {
@@ -295,6 +372,10 @@ public abstract class FloatControl extends Control {
      * that the control measures.
      * The precision is the size of the increment between discrete valid values
      * for this control, over the set of supported floating-point values.
+     * <p>
+     *  在控制措施的单位中获得控制的分辨率或粒度。精度是在该控制的离散有效值之间的增量的大小,在支持的浮点值的集合上。
+     * 
+     * 
      * @return the control's precision
      */
     public float getPrecision() {
@@ -309,6 +390,10 @@ public abstract class FloatControl extends Control {
      * time, it should set the control's value to the final value immediately
      * and return -1 from this method.
      *
+     * <p>
+     * 获取控制值在移位期间可以更改的最小时间间隔(以微秒为单位)。更新周期是控制在移位期间更新其值的频率的倒数。如果实现不支持随时间的值移位,它应该立即将控件的值设置为最终值,并从此方法返回-1。
+     * 
+     * 
      * @return update period in microseconds, or -1 if shifting over time is unsupported
      * @see #shift
      */
@@ -325,6 +410,10 @@ public abstract class FloatControl extends Control {
      * specified.  The default implementation simply changes the value
      * to the final value immediately.
      *
+     * <p>
+     *  在指定的时间段内(以微秒为单位)线性地将控制值从初始值更改为最终值。这个方法返回没有阻塞;它不等待班完成。实现应在指定的时间内完成操作。默认实现只是立即将值更改为最终值。
+     * 
+     * 
      * @param from initial value at the beginning of the shift
      * @param to final value after the shift
      * @param microseconds maximum duration of the shift in microseconds
@@ -353,6 +442,10 @@ public abstract class FloatControl extends Control {
 
     /**
      * Provides a string representation of the control
+     * <p>
+     *  提供控件的字符串表示形式
+     * 
+     * 
      * @return a string description
      */
     public String toString() {
@@ -369,6 +462,10 @@ public abstract class FloatControl extends Control {
      * float control.  Static instances are provided for the
      * common types.
      *
+     * <p>
+     *  <code> FloatControl.Type </code>内部类的实例标识一种float控件。为常见类型提供静态实例。
+     * 
+     * 
      * @author Kara Kytle
      * @since 1.3
      */
@@ -410,6 +507,22 @@ public abstract class FloatControl extends Control {
          * a reverb return control, and, on each of its source lines, an individual aux
          * send and reverb send.
          *
+         * <p>
+         *  表示线路上总增益的控制。
+         * <p>
+         * 增益是以分贝(dB)为单位的数量,它被加到音频信号的固有分贝级,即在增益控制改变之前的信号电平。正增益放大(提升)信号的音量,负增益衰减(削减)。
+         * 增益设置默认为0.0 dB的值,这意味着信号的响度不受影响。注意增益测量dB,而不是幅度。分贝增益和相应的线性幅度乘数之间的关系为：。
+         * 
+         *  CENTER> <CODE> linearScalar = pow(10.0,gainDB / 20.0)</CODE> </CENTER>
+         * <p>
+         *  <code> FloatControl </code>类具有对增益施加最大和最小允许值的方法。
+         * 然而,由于音频信号可能已经处于高幅度,所以最大设置不能保证在对其应用增益时该信号不失真(除非最大值为零或负)。
+         * 为了避免来自过大增益设置的数字溢出,增益控制可以实现限幅,这意味着信号的幅度将被限制为其音频格式可表示的最大值,而不是环绕。
+         * <p>
+         *  这些注释通常适用于增益控制,而不仅仅适用于主增益控制。线可以有多个增益控制。
+         * 例如,混频器(其本身是线路)可以具有主增益控制,辅助返回控制,混响返回控制,并且在其每个源线上具有单独的辅助发送和混响发送。
+         * 
+         * 
          * @see #AUX_SEND
          * @see #AUX_RETURN
          * @see #REVERB_SEND
@@ -421,6 +534,10 @@ public abstract class FloatControl extends Control {
         /**
          * Represents a control for the auxiliary send gain on a line.
          *
+         * <p>
+         * 表示线路上辅助发送增益的控制。
+         * 
+         * 
          * @see #MASTER_GAIN
          * @see #AUX_RETURN
          */
@@ -429,6 +546,10 @@ public abstract class FloatControl extends Control {
         /**
          * Represents a control for the auxiliary return gain on a line.
          *
+         * <p>
+         *  表示线路上辅助返回增益的控制。
+         * 
+         * 
          * @see #MASTER_GAIN
          * @see #AUX_SEND
          */
@@ -439,6 +560,10 @@ public abstract class FloatControl extends Control {
          * This control may be used to affect how much
          * of a line's signal is directed to a mixer's internal reverberation unit.
          *
+         * <p>
+         *  表示线上预混音增益的控制。该控制可以用于影响线路的信号被引导到混频器的内部混响单元的多少。
+         * 
+         * 
          * @see #MASTER_GAIN
          * @see #REVERB_RETURN
          * @see EnumControl.Type#REVERB
@@ -450,6 +575,10 @@ public abstract class FloatControl extends Control {
          * This control may be used to control the relative amplitude
          * of the signal returned from an internal reverberation unit.
          *
+         * <p>
+         *  表示线上后混响增益的控制。该控制可以用于控制从内部混响单元返回的信号的相对幅度。
+         * 
+         * 
          * @see #MASTER_GAIN
          * @see #REVERB_SEND
          */
@@ -460,9 +589,15 @@ public abstract class FloatControl extends Control {
 
         /**
          * Represents a control for the volume on a line.
+         * <p>
+         *  表示线上的音量的控件。
+         * 
          */
         /*
          * $$kk: 08.30.99: ISSUE: what units?  linear or dB?
+         * <p>
+         *  $$ kk：08.30.99：ISSUE：什么单位?线性或dB?
+         * 
          */
         public static final Type VOLUME                         = new Type("Volume");
 
@@ -476,6 +611,10 @@ public abstract class FloatControl extends Control {
          * (left channel only) to 1.0 (right channel
          * only).  The default is 0.0 (centered).
          *
+         * <p>
+         *  表示信号的相对平移(左右定位)的控件。信号可以是单声道;平移设置会影响混音器在立体声混音中的分配方式。值的有效范围是-1.0(仅左通道)至1.0(仅右通道)。默认值为0.0(居中)。
+         * 
+         * 
          * @see #BALANCE
          */
         public static final Type PAN                            = new Type("Pan");
@@ -488,6 +627,10 @@ public abstract class FloatControl extends Control {
          * between two stereo speakers.  The valid range of values is -1.0 (left channel only) to 1.0 (right channel
          * only).  The default is 0.0 (centered).
          *
+         * <p>
+         *  表示两个立体声扬声器之间的立体声信号的相对平衡的控制。值的有效范围是-1.0(仅左通道)至1.0(仅右通道)。默认值为0.0(居中)。
+         * 
+         * 
          * @see #PAN
          */
         public static final Type BALANCE                        = new Type("Balance");
@@ -510,6 +653,11 @@ public abstract class FloatControl extends Control {
          * change in the sound's pitch results.  For example, doubling the sample
          * rate has the effect of doubling the frequencies in the sound's spectrum,
          * which raises the pitch by an octave.
+         * <p>
+         * 表示更改音频播放采样率的控件。更改采样率的净效果取决于介质的自然速率和通过此控制设置的速率之间的关系。自然率是在数据行的<code> AudioFormat </code>对象中指定的采样率。
+         * 例如,如果媒体的固有速率为每秒11025个样本,并且采样率设置为每秒22050个样本,则媒体将以正常速度的两倍进行回放。
+         * <p>
+         *  使用此控件更改采样率不会影响数据线的音频格式。还要注意,无论何时更改声音的采样率,都会导致声音音高的变化。例如,使采样率加倍具有使声音频谱中的频率加倍的效果,其将音调提高八度音阶。
          */
         public static final Type SAMPLE_RATE            = new Type("Sample Rate");
 
@@ -518,6 +666,9 @@ public abstract class FloatControl extends Control {
 
         /**
          * Constructs a new float control type.
+         * <p>
+         * 
+         * 
          * @param name  the name of the new float control type
          */
         protected Type(String name) {

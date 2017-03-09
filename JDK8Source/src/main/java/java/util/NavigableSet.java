@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,10 @@
  * Written by Doug Lea and Josh Bloch with assistance from members of JCP
  * JSR-166 Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea和Josh Bloch在JCP JSR-166专家组的成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/
+ * 1.0/。
+ * 
  */
 
 package java.util;
@@ -78,6 +83,29 @@ package java.util;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  {@link SortedSet}扩展了导航方法,报告了给定搜索目标的最接近的匹配项。
+ * 方法{@code lower},{@code floor},{@code ceiling}和{@code higher}返回元素分别小于,小于或等于,大于或等于和大于给定元素, @code null}如
+ * 果没有这样的元素。
+ *  {@link SortedSet}扩展了导航方法,报告了给定搜索目标的最接近的匹配项。可以按升序或降序访问和遍历{@code NavigableSet}。
+ *  {@code descendingSet}方法返回集合的视图,所有关系和方向方法的意义都反转。上升操作和视图的性能可能比下降操作和视图的性能更快。
+ * 此接口还定义返回和删除最低和最高元素(如果存在)的方法{@code pollFirst}和{@code pollLast},否则返回{@code null}。
+ * 方法{@code subSet},{@code headSet}和{@code tailSet}与类似命名的{@code SortedSet}方法在接受描述下限和上限是否是包含性与否的额外参数方面有所不
+ * 同。
+ * 此接口还定义返回和删除最低和最高元素(如果存在)的方法{@code pollFirst}和{@code pollLast},否则返回{@code null}。
+ * 任何{@code NavigableSet}的子集必须实现{@code NavigableSet}接口。
+ * 
+ * <p>导航方法的返回值在允许{@code null}元素的实现中可能是不明确的。然而,即使在这种情况下,可以通过检查{@code contains(null)}来对结果进行消歧。
+ * 为了避免这样的问题,鼓励该接口的实现</em> </em>允许插入{@code null}元素。 (注意,{@ link Comparable}元素的排序集本质上不允许{@code null}。)。
+ * 
+ *  <p>方法{@link #subSet(Object,Object)subSet(E,E)},{@link #headSet(Object)headSet(E)}和{@link #tailSet(Object)tailSet被指定为返回{@code SortedSet}
+ * 以允许现有的{@code SortedSet}实现被兼容地改进以实现{@code NavigableSet},但是鼓励这个接口的扩展和实现来覆盖这些方法以返回{@code NavigableSet }。
+ * 
+ *  <p>此接口是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @author Doug Lea
  * @author Josh Bloch
  * @param <E> the type of elements maintained by this set
@@ -88,6 +116,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * Returns the greatest element in this set strictly less than the
      * given element, or {@code null} if there is no such element.
      *
+     * <p>
+     *  返回此集合中最大的元素严格小于给定元素,或{@code null}(如果没有这样的元素)。
+     * 
+     * 
      * @param e the value to match
      * @return the greatest element less than {@code e},
      *         or {@code null} if there is no such element
@@ -102,6 +134,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * Returns the greatest element in this set less than or equal to
      * the given element, or {@code null} if there is no such element.
      *
+     * <p>
+     *  返回此集合中最小的元素小于或等于给定元素,或{@code null}(如果没有这样的元素)。
+     * 
+     * 
      * @param e the value to match
      * @return the greatest element less than or equal to {@code e},
      *         or {@code null} if there is no such element
@@ -116,6 +152,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * Returns the least element in this set greater than or equal to
      * the given element, or {@code null} if there is no such element.
      *
+     * <p>
+     *  返回此集合中大于或等于给定元素的最小元素,如果没有这样的元素,则返回{@code null}。
+     * 
+     * 
      * @param e the value to match
      * @return the least element greater than or equal to {@code e},
      *         or {@code null} if there is no such element
@@ -130,6 +170,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * Returns the least element in this set strictly greater than the
      * given element, or {@code null} if there is no such element.
      *
+     * <p>
+     *  返回此集合中的最小元素严格大于给定元素,如果没有此元素,则返回{@code null}。
+     * 
+     * 
      * @param e the value to match
      * @return the least element greater than {@code e},
      *         or {@code null} if there is no such element
@@ -144,6 +188,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * Retrieves and removes the first (lowest) element,
      * or returns {@code null} if this set is empty.
      *
+     * <p>
+     * 检索和删除第一个(最低)元素,如果此集合为空,则返回{@code null}。
+     * 
+     * 
      * @return the first element, or {@code null} if this set is empty
      */
     E pollFirst();
@@ -152,6 +200,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * Retrieves and removes the last (highest) element,
      * or returns {@code null} if this set is empty.
      *
+     * <p>
+     *  检索并删除最后一个(最高)元素,如果此集合为空,则返回{@code null}。
+     * 
+     * 
      * @return the last element, or {@code null} if this set is empty
      */
     E pollLast();
@@ -159,6 +211,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
     /**
      * Returns an iterator over the elements in this set, in ascending order.
      *
+     * <p>
+     *  以升序返回此集合中的元素的迭代器。
+     * 
+     * 
      * @return an iterator over the elements in this set, in ascending order
      */
     Iterator<E> iterator();
@@ -176,6 +232,15 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * The expression {@code s.descendingSet().descendingSet()} returns a
      * view of {@code s} essentially equivalent to {@code s}.
      *
+     * <p>
+     *  返回此集合中包含的元素的逆序视图。下降集由该集支持,因此对集的更改反映在下降集中,反之亦然。
+     * 如果在对任一集合的迭代正在进行时修改了任一集合(除非通过迭代器自己的{@code remove}操作),迭代的结果是未定义的。
+     * 
+     *  <p>返回的集合的顺序等同于<tt> {@ link Collections#reverseOrder(Comparator)Collections.reverseOrder}(comparator(
+     * ))</tt>。
+     * 表达式{@code s.descendingSet()。descendingSet()}返回基本上等同于{@code s}的{@code s}的视图。
+     * 
+     * 
      * @return a reverse order view of this set
      */
     NavigableSet<E> descendingSet();
@@ -184,6 +249,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * Returns an iterator over the elements in this set, in descending order.
      * Equivalent in effect to {@code descendingSet().iterator()}.
      *
+     * <p>
+     *  以此降序的方式返回此集合中的元素的迭代器。等效于{@code descendingSet()。iterator()}。
+     * 
+     * 
      * @return an iterator over the elements in this set, in descending order
      */
     Iterator<E> descendingIterator();
@@ -200,6 +269,14 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * <p>The returned set will throw an {@code IllegalArgumentException}
      * on an attempt to insert an element outside its range.
      *
+     * <p>
+     *  返回此集合中元素范围从{@code fromElement}到{@code toElement}的部分的视图。
+     * 如果{@code fromElement}和{@code toElement}相等,返回的集合为空,除非{@code fromInclusive}和{@code toInclusive}都为true。
+     * 返回的集合由此集合支持,因此返回集合中的更改反映在此集合中,反之亦然。返回的集合支持该集合支持的所有可选集合操作。
+     * 
+     * <p>返回的集合将尝试在其范围之外插入元素时抛出{@code IllegalArgumentException}。
+     * 
+     * 
      * @param fromElement low endpoint of the returned set
      * @param fromInclusive {@code true} if the low endpoint
      *        is to be included in the returned view
@@ -236,6 +313,13 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * <p>The returned set will throw an {@code IllegalArgumentException}
      * on an attempt to insert an element outside its range.
      *
+     * <p>
+     *  返回此元素的元素小于(或等于,如果{@code inclusive}为true){@code toElement}的部分的视图。返回的集合由此集合支持,因此返回集合中的更改反映在此集合中,反之亦然。
+     * 返回的集合支持该集合支持的所有可选集合操作。
+     * 
+     *  <p>返回的集合将尝试在其范围之外插入元素时抛出{@code IllegalArgumentException}。
+     * 
+     * 
      * @param toElement high endpoint of the returned set
      * @param inclusive {@code true} if the high endpoint
      *        is to be included in the returned view
@@ -265,6 +349,13 @@ public interface NavigableSet<E> extends SortedSet<E> {
      * <p>The returned set will throw an {@code IllegalArgumentException}
      * on an attempt to insert an element outside its range.
      *
+     * <p>
+     *  返回此集合的元素大于(或等于,如果{@code inclusive}为true){@code fromElement}的部分的视图。
+     * 返回的集合由此集合支持,因此返回集合中的更改反映在此集合中,反之亦然。返回的集合支持该集合支持的所有可选集合操作。
+     * 
+     *  <p>返回的集合将尝试在其范围之外插入元素时抛出{@code IllegalArgumentException}。
+     * 
+     * 
      * @param fromElement low endpoint of the returned set
      * @param inclusive {@code true} if the low endpoint
      *        is to be included in the returned view
@@ -289,6 +380,12 @@ public interface NavigableSet<E> extends SortedSet<E> {
      *
      * <p>Equivalent to {@code subSet(fromElement, true, toElement, false)}.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>等同于{@code subSet(fromElement,true,toElement,false)}。
+     * 
+     * 
      * @throws ClassCastException       {@inheritDoc}
      * @throws NullPointerException     {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
@@ -300,6 +397,12 @@ public interface NavigableSet<E> extends SortedSet<E> {
      *
      * <p>Equivalent to {@code headSet(toElement, false)}.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>等同于{@code headSet(toElement,false)}。
+     * 
+     * 
      * @throws ClassCastException       {@inheritDoc}
      * @throws NullPointerException     {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
@@ -311,6 +414,10 @@ public interface NavigableSet<E> extends SortedSet<E> {
      *
      * <p>Equivalent to {@code tailSet(fromElement, true)}.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws ClassCastException       {@inheritDoc}
      * @throws NullPointerException     {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}

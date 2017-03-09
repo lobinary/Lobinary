@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,9 @@ import javax.swing.plaf.*;
  * A default L&amp;F implementation of MenuBarUI.  This implementation
  * is a "combined" view/controller.
  *
+ * <p>
+ *  MenuBarUI的默认L&amp; F实现。这个实现是一个"组合"视图/控制器。
+ * 
  * @author Georges Saab
  * @author David Karlton
  * @author Arnaud Weber

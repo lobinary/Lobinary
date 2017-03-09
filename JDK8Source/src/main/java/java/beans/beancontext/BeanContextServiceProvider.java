@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,19 @@ import java.util.Iterator;
  * The ServcieProvider may always return the same instance, or it may
  * construct a new instance for each request.
  * </p>
+ * <p>
+ * <p>
+ *  BeanContext的主要功能之一是作为一个在JavaBeans和BeanContextServiceProviders之间的会合。
+ * </p>
+ * <p>
+ *  嵌套在BeanContext中的JavaBean可能要求BeanContext基于对表示该服务的Java类对象的引用来提供"服务"的实例。
+ * </p>
+ * <p>
+ *  如果这样的服务已经被上下文或其嵌套上下文中的一个注册,在上下文委托到其上下文以满足服务请求的情况下,则与该服务相关联的BeanContextServiceProvider被要求提供该服务的实例。
+ * </p>
+ * <p>
+ *  ServcieProvider可以总是返回相同的实例,或者它可以为每个请求构造一个新的实例。
+ * </p>
  */
 
 public interface BeanContextServiceProvider {
@@ -56,6 +70,8 @@ public interface BeanContextServiceProvider {
     * requests an instance of a
     * service from this <code>BeanContextServiceProvider</code>.
     *
+    * <p>
+    * 
     * @param bcs The <code>BeanContextServices</code> associated with this
     * particular request. This parameter enables the
     * <code>BeanContextServiceProvider</code> to distinguish service
@@ -78,6 +94,10 @@ public interface BeanContextServiceProvider {
      * (or any arbitrary object associated with a
      * <code>BeanContextChild</code>) reference to the specified service.
      *
+     * <p>
+     *  由<code> BeanContextServices </code>调用,此方法从此<code> BeanContextServiceProvider </code>请求服务的实例。
+     * 
+     * 
      * @param bcs the <code>BeanContextServices</code> associated with this
      * particular release request
      *
@@ -96,6 +116,11 @@ public interface BeanContextServiceProvider {
      * a value for a particular service's property, or a key into a
      * map of existing implementations.
      *
+     * <p>
+     *  由<code> BeanContextServices </code>调用,此方法释放对指定服务的嵌套<code> BeanContextChild </code>(或任何与<code> BeanCo
+     * ntextChild </code>关联的任何对象)引用。
+     * 
+     * 
      * @param bcs           the <code>BeanContextServices</code> for this request
      * @param serviceClass  the specified service
      * @return   the current service selectors for the specified serviceClass

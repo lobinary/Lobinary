@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,21 @@ import java.util.ServiceConfigurationError;
   * Services which are registered by registerService(PrintService)
   * will not be included in lookup results if a security manager is
   * installed and its checkPrintJobAccess() method denies access.
+  * <p>
+  *  打印服务(通常相当于打印机)。
+  * <p>
+  *  可以同时安装多个实现。所有实现必须能够将定位的打印机描述为PrintService的实例。通常,此服务类的实现会自动位于JAR文件中(请参阅SPI JAR文件规范)。
+  * 这些类必须使用默认构造函数实例化。或者,应用可以在运行时明确地注册实例。
+  * <p>
+  *  应用程序仅使用此抽象类的静态方法。实例方法由子类中的服务提供程序实现,并且来自所有安装的查找类的结果的统一由应用程序调用时由该类的静态方法报告。
+  * <p>
+  *  建议使用PrintServiceLookup实现器来检查SecurityManager.checkPrintJobAccess()是否拒绝访问不受信任的代码。
+  * 遵循此建议的策略意味着不受信任的代码可能无法找到任何打印服务。下载的小程序是不受信任的代码的最常见的例子。
+  * <p>
+  *  此检查是基于每个查找服务进行的,以允许策略的灵活性,以反映不同查找服务的需要。
+  * <p>
+  * 如果安装了安全管理器并且其checkPrintJobAccess()方法拒绝访问,则通过registerService(PrintService)注册的服务将不会包含在查找结果中。
+  * 
   */
 
 public abstract class PrintServiceLookup {
@@ -108,6 +124,10 @@ public abstract class PrintServiceLookup {
      * Locates print services capable of printing the specified
      * {@link DocFlavor}.
      *
+     * <p>
+     *  找到能够打印指定{@link DocFlavor}的打印服务。
+     * 
+     * 
      * @param flavor the flavor to print. If null, this constraint is not
      *        used.
      * @param attributes attributes that the print service must support.
@@ -134,6 +154,11 @@ public abstract class PrintServiceLookup {
      * on each <code>DocFlavor</code> in turn and collating the results,
      * but the lookup service may be able to do this more efficiently.
      *
+     * <p>
+     *  找到能够打印包含所有指定doc类型的MultiDoc的MultiDoc打印服务。 <P>此方法有助于定位可打印元素可能不同的<code> MultiDoc </code>的服务。
+     * 应用程序可以通过对每个<code> DocFlavor </code>依次进行多次查找并整理结果来执行此操作,但是查找服务可以更高效地执行此操作。
+     * 
+     * 
      * @param flavors the flavors to print. If null or empty this
      *        constraint is not used.
      * Otherwise return only multidoc print services that can print all
@@ -172,6 +197,14 @@ public abstract class PrintServiceLookup {
      * A service specified must be discovered to be valid and currently
      * available to be returned as the default.
      *
+     * <p>
+     *  找到此环境的默认打印服务。这可能返回null。如果多个查找服务每个指定默认值,则所选服务未精确定义,但平台本机服务(而不是已安装的服务)通常作为默认值返回。
+     * 如果没有可明确识别的平台本地默认打印服务,则默认是首先以实现相关的方式定位。
+     * <p>
+     *  这可以包括使用作为Java或本地平台的一部分可用的任何偏好API。此算法可以由用户设置属性javax.print.defaultPrinter覆盖。
+     * 必须发现指定的服务是有效的,并且当前可用作默认返回。
+     * 
+     * 
      * @return the default PrintService.
      */
 
@@ -202,6 +235,11 @@ public abstract class PrintServiceLookup {
      * the method returns false.
      * <p>
      *
+     * <p>
+     * 允许应用程序显式注册实现查找服务的类。注册将不会跨越VM调用持续。如果应用程序需要提供不属于安装的一部分的新服务,这将非常有用。如果查找服务已经注册,或者无法注册,则该方法返回false。
+     * <p>
+     * 
+     * 
      * @param sp an implementation of a lookup service.
      * @return <code>true</code> if the new lookup service is newly
      *         registered; <code>false</code> otherwise.
@@ -239,6 +277,12 @@ public abstract class PrintServiceLookup {
      * registered and is now successfully registered.
      * This method should not be called with StreamPrintService instances.
      * They will always fail to register and the method will return false.
+     * <p>
+     *  允许应用程序直接注册实现打印服务的类的实例。此服务的查找操作将由PrintServiceLookup类使用服务报告的属性值和类执行。这可能比为该服务调整的查找服务效率较低。
+     * 因此,建议注册<code> PrintServiceLookup </code>实例。如果此服务先前未注册并且现在已成功注册,则此方法返回true。
+     * 此方法不应使用StreamPrintService实例调用。它们将总是无法注册,并且方法将返回false。
+     * 
+     * 
      * @param service an implementation of a print service.
      * @return <code>true</code> if the service is newly
      *         registered; <code>false</code> otherwise.
@@ -278,6 +322,14 @@ public abstract class PrintServiceLookup {
     * efficient by taking advantage of the capabilities of lookup services
     * for the print services.
     *
+    * <p>
+    *  找到可以肯定确认支持指定的属性和DocFlavors组合的服务。此方法不是由应用程序直接调用。
+    * <p>
+    *  由服务提供程序实现,由此类的静态方法使用。
+    * <p>
+    * 结果应该与获取所有PrintServices相同,并且在支持指定的属性和风格时单独查询每个PrintServices,但是通过利用用于打印服务的查找服务的功能,该过程可以更高效。
+    * 
+    * 
     * @param flavor of document required.  If null it is ignored.
     * @param attributes required to be supported. If null this
     * constraint is not used.
@@ -291,6 +343,10 @@ public abstract class PrintServiceLookup {
      * Not called directly by applications.
      * Implemented by a service provider, used by the static methods
      * of this class.
+     * <p>
+     *  不直接由应用程序调用。由服务提供程序实现,由此类的静态方法使用。
+     * 
+     * 
      * @return array of all PrintServices known to this lookup service
      * class. If none are found, the array is zero-length.
      */
@@ -307,6 +363,13 @@ public abstract class PrintServiceLookup {
     * to support the combination of attributes and DocFlavors specified.
     * <p>
     *
+    * <p>
+    *  不直接由应用程序调用。
+    * <p>
+    *  由服务提供程序实现,由此类的静态方法使用。
+    * <p>
+    *  找到可以肯定确认支持属性和指定的DocFlavors组合的MultiDoc打印服务。
+    * 
     * @param flavors of documents required. If null or empty it is ignored.
     * @param attributes required to be supported. If null this
      * constraint is not used.
@@ -321,6 +384,10 @@ public abstract class PrintServiceLookup {
      * Not called directly by applications.
      * Implemented by a service provider, and called by the print lookup
      * service
+     * <p>
+     * <p>
+     * 
+     * 
      * @return the default PrintService for this lookup service.
      * If there is no default, returns null.
      */

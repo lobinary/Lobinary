@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -71,6 +81,21 @@ import java.util.Vector;
  *
  * @xerces.internal
  *
+ * <p>
+ *  这个类实现了DOM的NodeList行为Element.getElementsByTagName()
+ * <P>
+ *  DOM描述NodeList如下：
+ * <P>
+ *  1)它可以表示散布在子树(当由Element.getElementsByTagName返回时)的EITHER节点,或者只是直接子节点(当由Node.getChildNodes返回时)。
+ * 后者是容易的,但前者(这个类解决)是更具挑战性。
+ * <P>
+ *  2)它的行为是"活的" - 也就是说,它总是反映文档树的当前状态。换句话说,在一系列插入和删除之前和之后获得的NodeLists实际上是相同的(就用户而言,前者已经作出改变而被动态更新)。
+ * <P>
+ * 3)其API通过整数索引访问单个节点,其中列出的节点按照它们在树的预订深度优先从左到右搜索期间被找到的顺序按顺序编号。 (当然在getChildNodes的情况下,不涉及深度)。
+ * 由于节点在树中被插入或删除,因此节点列表,在节点列表中跟随它们的节点的编号将改变。
+ * <P>
+ *  在getElementsByTagName的情况下支持后两个是相当痛苦的。当前的解决方案是节点维护一个更改计数(最终可能是一个摘要),NodeList跟踪并使用它使自己无效。
+ * 
  * @since  PR-DOM-Level-1-19980818.
  */
 public class DeepNodeListImpl
@@ -162,6 +187,13 @@ public class DeepNodeListImpl
      * Iterative tree-walker. When you have a Parent link, there's often no
      * need to resort to recursion. NOTE THAT only Element nodes are matched
      * since we're specifically supporting getElementsByTagName().
+     * <p>
+     * <P>
+     *  不幸的是,这不会在动态行为应该解决的情况下有效地响应：在扩展时扫描树。这需要知道哪些子树已经改变,这可能成为一个任意复杂的问题。
+     * <P>
+     *  我们保存一些工作通过填充矢量只有当我们访问的item()s ...但我怀疑同样的用户要求基于索引访问也将开始通过做一个getLength()来控制他们的循环,吹出这个优化的水。
+     * <P>
+     *  注意：DOM的第2级可能不会使用NodeList作为其扩展搜索机制,部分原因是刚才讨论的原因。
      */
     protected Node nextMatchingElementAfter(Node current) {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import java.awt.AWTEvent;
  * dispatched anywhere in the AWT, that object's
  * <code>eventDispatched</code> method is invoked.
  *
+ * <p>
+ *  侦听器接口,用于接收分派到作为Component或MenuComponent或其子类的实例的对象的事件的通知。
+ * 与此包中的其他EventListeners不同,AWTEventListeners被动地观察在AWT(系统范围)中分派的事件。
+ * 大多数应用程序不应该使用这个类;可能使用AWTEventListeners的应用程序包括用于自动测试的事件记录器以及诸如Java辅助功能包之类的工具。
+ * <p>
+ *  对监视AWT事件感兴趣的类实现此接口,使用Toolkit的<code> addAWTEventListener </code>方法向Toolkit注册使用该类创建的对象。
+ * 
  * @see java.awt.AWTEvent
  * @see java.awt.Toolkit#addAWTEventListener
  * @see java.awt.Toolkit#removeAWTEventListener
@@ -56,6 +64,9 @@ public interface AWTEventListener extends EventListener {
 
     /**
      * Invoked when an event is dispatched in the AWT.
+     * <p>
+     * 当在AWT中的任何地方分派事件时,将调用该对象的<code> eventDispatched </code>方法。
+     * 
      */
     public void eventDispatched(AWTEvent event);
 

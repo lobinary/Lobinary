@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.net.URL;
  * An entity is described in a DTD using the ENTITY construct.
  * It defines the type and value of the the entity.
  *
+ * <p>
+ *  使用ENTITY构造在DTD中描述实体。它定义实体的类型和值。
+ * 
+ * 
  * @see DTD
  * @author Arthur van Hoff
  */
@@ -48,6 +53,10 @@ class Entity implements DTDConstants {
 
     /**
      * Creates an entity.
+     * <p>
+     *  创建实体。
+     * 
+     * 
      * @param name the name of the entity
      * @param type the type of the entity
      * @param data the char array of data
@@ -60,6 +69,10 @@ class Entity implements DTDConstants {
 
     /**
      * Gets the name of the entity.
+     * <p>
+     *  获取实体的名称。
+     * 
+     * 
      * @return the name of the entity, as a <code>String</code>
      */
     public String getName() {
@@ -68,6 +81,10 @@ class Entity implements DTDConstants {
 
     /**
      * Gets the type of the entity.
+     * <p>
+     *  获取实体的类型。
+     * 
+     * 
      * @return the type of the entity
      */
     public int getType() {
@@ -76,6 +93,10 @@ class Entity implements DTDConstants {
 
     /**
      * Returns <code>true</code> if it is a parameter entity.
+     * <p>
+     *  如果它是参数实体,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if it is a parameter entity
      */
     public boolean isParameter() {
@@ -84,6 +105,10 @@ class Entity implements DTDConstants {
 
     /**
      * Returns <code>true</code> if it is a general entity.
+     * <p>
+     *  如果是一般实体,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if it is a general entity
      */
     public boolean isGeneral() {
@@ -92,6 +117,10 @@ class Entity implements DTDConstants {
 
     /**
      * Returns the <code>data</code>.
+     * <p>
+     *  返回<code> data </code>。
+     * 
+     * 
      * @return the <code>data</code>
      */
     public char getData()[] {
@@ -100,6 +129,10 @@ class Entity implements DTDConstants {
 
     /**
      * Returns the data as a <code>String</code>.
+     * <p>
+     *  以<code> String </code>形式返回数据。
+     * 
+     * 
      * @return the data as a <code>String</code>
      */
     public String getString() {
@@ -128,6 +161,10 @@ class Entity implements DTDConstants {
      * Valid entity types are: "PUBLIC", "CDATA", "SDATA", "PI",
      * "STARTTAG", "ENDTAG", "MS", "MD", "SYSTEM".
      *
+     * <p>
+     *  将<code> nm </code>字符串转换为相应的实体类型。如果字符串没有对应的实体类型,则返回对应于"CDATA"的类型。
+     * 有效的实体类型是："PUBLIC","CDATA","SDATA","PI","STARTTAG","ENDTAG","MS","MD","SYSTEM"。
+     * 
      * @param nm the string to be converted
      * @return the corresponding entity type, or the type corresponding
      *   to "CDATA", if none exists

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,19 @@ import java.security.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  提供<code> RootPaneUI </code>的金属外观实现。
+ * <p>
+ *  <code> MetalRootPaneUI </code>提供对<code> JRootPane </code>的<code> windowDecorationStyle </code>属性的支持。
+ *  <code> MetalRootPaneUI </code>通过安装一个自定义的<code> LayoutManager </code>,一个私有的<code> Component </code>来渲
+ * 染相应的小部件,代码>。
+ * 无论<code> windowDecorationStyle </code>属性的值如何,<code> LayoutManager </code>始终安装,但<code> Border </code>和
+ * <code> Component </code>如果<code> windowDecorationStyle </code>不是<code> JRootPane.NONE </code>,则安装/添加。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Terry Kellerman
  * @since 1.4
  */
@@ -67,6 +81,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
 {
     /**
      * Keys to lookup borders in defaults table.
+     * <p>
+     *  在默认表中查找边框的键。
+     * 
      */
     private static final String[] borderKeys = new String[] {
         null, "RootPane.frameBorder", "RootPane.plainDialogBorder",
@@ -77,51 +94,78 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     };
     /**
      * The amount of space (in pixels) that the cursor is changed on.
+     * <p>
+     *  光标所在的空间量(以像素为单位)。
+     * 
      */
     private static final int CORNER_DRAG_WIDTH = 16;
 
     /**
      * Region from edges that dragging is active from.
+     * <p>
+     *  来自拖动的边缘的区域。
+     * 
      */
     private static final int BORDER_DRAG_THICKNESS = 5;
 
     /**
      * Window the <code>JRootPane</code> is in.
+     * <p>
+     *  窗口<code> JRootPane </code>在。
+     * 
      */
     private Window window;
 
     /**
      * <code>JComponent</code> providing window decorations. This will be
      * null if not providing window decorations.
+     * <p>
+     * <code> JComponent </code>提供窗口装饰。如果不提供窗口装饰,这将为null。
+     * 
      */
     private JComponent titlePane;
 
     /**
      * <code>MouseInputListener</code> that is added to the parent
      * <code>Window</code> the <code>JRootPane</code> is contained in.
+     * <p>
+     *  <code> Window </code> <code> JRootPane </code>中的<code> MouseInputListener </code>
+     * 
      */
     private MouseInputListener mouseInputListener;
 
     /**
      * The <code>LayoutManager</code> that is set on the
      * <code>JRootPane</code>.
+     * <p>
+     *  在<code> JRootPane </code>上设置的<code> LayoutManager </code>。
+     * 
      */
     private LayoutManager layoutManager;
 
     /**
      * <code>LayoutManager</code> of the <code>JRootPane</code> before we
      * replaced it.
+     * <p>
+     *  <code> JRootPane </code>之前的<code> LayoutManager </code>,我们才会替换它。
+     * 
      */
     private LayoutManager savedOldLayout;
 
     /**
      * <code>JRootPane</code> providing the look and feel for.
+     * <p>
+     *  <code> JRootPane </code>提供了外观和感觉。
+     * 
      */
     private JRootPane root;
 
     /**
      * <code>Cursor</code> used to track the cursor set by the user.
      * This is initially <code>Cursor.DEFAULT_CURSOR</code>.
+     * <p>
+     *  <code>光标</code>用于跟踪用户设置的游标。这是最初的<code> Cursor.DEFAULT_CURSOR </code>。
+     * 
      */
     private Cursor lastCursor =
             Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
@@ -129,6 +173,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Creates a UI for a <code>JRootPane</code>.
      *
+     * <p>
+     *  为<code> JRootPane </code>创建一个UI。
+     * 
+     * 
      * @param c the JRootPane the RootPaneUI will be created for
      * @return the RootPaneUI implementation for the passed in JRootPane
      */
@@ -148,6 +196,14 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * <code>Border</code> and <code>LayoutManager</code> on the
      * <code>JRootPane</code>.
      *
+     * <p>
+     *  调用超级实现<code> installUI </code>以将所需的状态安装到<code> JRootPane </code>中传递的必要状态,以渲染<code> RootPaneUI </code>
+     * 的金属外观实现。
+     * 如果<code> JRootPane </code>的<code> windowDecorationStyle </code>属性不是<code> JRootPane.NONE </code>,这将添加
+     * 一个自定义<code> Component </code>小部件到<code> JRootPane </code>,以及在<code> JRootPane </code>上安装自定义<code> Bor
+     * der </code>和<code> LayoutManager </code>。
+     * 
+     * 
      * @param c the JRootPane to install state onto
      */
     public void installUI(JComponent c) {
@@ -169,6 +225,12 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * <code>JRootPane</code> to what it was before <code>installUI</code>
      * was invoked.
      *
+     * <p>
+     * 调用超级实现来卸载其任何状态。这也将重置<code> JRootPane </code>的<code> LayoutManager </code>。
+     * 如果<code> Component </code>已添加到<code> JRootPane </code>以呈现窗口装饰样式,则此方法将删除它。
+     * 类似地,这会将<code> JRootPane </code>的Border和LayoutManager恢复为调用<code> installUI </code>之前的值。
+     * 
+     * 
      * @param c the JRootPane to uninstall state from
      */
     public void uninstallUI(JComponent c) {
@@ -183,6 +245,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Installs the appropriate <code>Border</code> onto the
      * <code>JRootPane</code>.
+     * <p>
+     *  在<code> JRootPane </code>上安装相应的<code> Border </code>。
+     * 
      */
     void installBorder(JRootPane root) {
         int style = root.getWindowDecorationStyle();
@@ -197,6 +262,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
 
     /**
      * Removes any border that may have been installed.
+     * <p>
+     *  删除可能已安装的任何边框。
+     * 
      */
     private void uninstallBorder(JRootPane root) {
         LookAndFeel.uninstallBorder(root);
@@ -210,6 +278,12 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * <code>removeNotify</code>, at which point the parent hasn't been
      * reset yet.
      *
+     * <p>
+     *  在父代码<code> Window </code>上安装必要的侦听器(如果有的话)。
+     * <p>
+     *  这需要父代,以便可以从<code> removeNotify </code>进行清除,此时父代尚未重置。
+     * 
+     * 
      * @param parent The parent of the JRootPane
      */
     private void installWindowListeners(JRootPane root, Component parent) {
@@ -231,6 +305,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Uninstalls the necessary Listeners on the <code>Window</code> the
      * Listeners were last installed on.
+     * <p>
+     *  在上次安装侦听器的<code> Window </code>上卸载必要的侦听器。
+     * 
      */
     private void uninstallWindowListeners(JRootPane root) {
         if (window != null) {
@@ -242,6 +319,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Installs the appropriate LayoutManager on the <code>JRootPane</code>
      * to render the window decorations.
+     * <p>
+     *  在<code> JRootPane </code>上安装相应的LayoutManager以渲染窗口装饰。
+     * 
      */
     private void installLayout(JRootPane root) {
         if (layoutManager == null) {
@@ -253,6 +333,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
 
     /**
      * Uninstalls the previously installed <code>LayoutManager</code>.
+     * <p>
+     *  卸载先前安装的<code> LayoutManager </code>。
+     * 
      */
     private void uninstallLayout(JRootPane root) {
         if (savedOldLayout != null) {
@@ -265,6 +348,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * Installs the necessary state onto the JRootPane to render client
      * decorations. This is ONLY invoked if the <code>JRootPane</code>
      * has a decoration style other than <code>JRootPane.NONE</code>.
+     * <p>
+     *  在JRootPane上安装必要的状态以渲染客户端装饰。
+     * 只有<code> JRootPane </code>具有除<code> JRootPane.NONE </code>之外的装饰样式时,才会调用此方法。
+     * 
      */
     private void installClientDecorations(JRootPane root) {
         installBorder(root);
@@ -286,6 +373,11 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * <p>
      * NOTE: This may be called if you haven't installed client decorations
      * yet (ie before <code>installClientDecorations</code> has been invoked).
+     * <p>
+     *  卸载<code> installClientDecorations </code>安装的任何状态。
+     * <p>
+     *  注意：如果您尚未安装客户端装饰(即在调用<code> installClientDecorations </code>之前),可能会调用此方法。
+     * 
      */
     private void uninstallClientDecorations(JRootPane root) {
         uninstallBorder(root);
@@ -313,6 +405,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Returns the <code>JComponent</code> to render the window decoration
      * style.
+     * <p>
+     * 返回<code> JComponent </code>以呈现窗口装饰样式。
+     * 
      */
     private JComponent createTitlePane(JRootPane root) {
         return new MetalTitlePane(root, this);
@@ -321,6 +416,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Returns a <code>MouseListener</code> that will be added to the
      * <code>Window</code> containing the <code>JRootPane</code>.
+     * <p>
+     *  返回将添加到包含<code> JRootPane </code>的<code> Window </code>中的<code> MouseListener </code>。
+     * 
      */
     private MouseInputListener createWindowMouseInputListener(JRootPane root) {
         return new MouseInputHandler();
@@ -329,6 +427,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Returns a <code>LayoutManager</code> that will be set on the
      * <code>JRootPane</code>.
+     * <p>
+     *  返回将在<code> JRootPane </code>上设置的<code> LayoutManager </code>。
+     * 
      */
     private LayoutManager createLayoutManager() {
         return new MetalRootLayout();
@@ -341,6 +442,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * and sets this value; the default is null, implying a native operating
      * system window title pane.
      *
+     * <p>
+     *  设置窗口标题窗格 -  JComponent用于提供一个方法来覆盖本机操作系统的窗口标题窗格,其外观和感觉由plaf控制。 plaf创建和设置此值;默认值为null,表示本机操作系统窗口标题窗格。
+     * 
+     * 
      * @param content the <code>JComponent</code> to use for the window title pane.
      */
     private void setTitlePane(JRootPane root, JComponent titlePane) {
@@ -362,6 +467,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * Returns the <code>JComponent</code> rendering the title pane. If this
      * returns null, it implies there is no need to render window decorations.
      *
+     * <p>
+     *  返回呈现标题窗格的<code> JComponent </code>。如果这返回null,它意味着没有必要渲染窗口装饰。
+     * 
+     * 
      * @return the current window title pane, or null
      * @see #setTitlePane
      */
@@ -372,6 +481,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Returns the <code>JRootPane</code> we're providing the look and
      * feel for.
+     * <p>
+     *  返回我们提供的外观和样式的<code> JRootPane </code>。
+     * 
      */
     private JRootPane getRootPane() {
         return root;
@@ -392,6 +504,19 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * as well resetting the Border to what it was before
      * <code>installUI</code> was invoked.
      *
+     * <p>
+     * 在属性更改时调用。
+     *  <code> MetalRootPaneUI </code>主要感兴趣来自<code> JRootPane </code>的事件,它已经在识别属性<code> windowDecorationStyl
+     * e </code>时安装。
+     * 在属性更改时调用。
+     * 如果<code> windowDecorationStyle </code>已更改为除<code> JRootPane.NONE </code>之外的值,则会向<code> JRootPane </code>
+     * 添加<code> Component </code>渲染窗口装饰,以及在<code> JRootPane </code>上安装<code> Border </code>。
+     * 在属性更改时调用。
+     * 另一方面,如果<code> windowDecorationStyle </code>更改为<code> JRootPane.NONE </code>,这将删除已添加到<code>组件</code> J
+     * RootPane </code>,并将边框重置为调用<code> installUI </code>之前的边框。
+     * 在属性更改时调用。
+     * 
+     * 
      * @param e A PropertyChangeEvent object describing the event source
      *          and the property that has changed.
      */
@@ -430,6 +555,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * A custom layout manager that is responsible for the layout of
      * layeredPane, glassPane, menuBar and titlePane, if one has been
      * installed.
+     * <p>
+     *  一个自定义布局管理器,负责对layeredPane,glassPane,menuBar和titlePane(如果已安装)的布局。
+     * 
      */
     // NOTE: Ideally this would extends JRootPane.RootLayout, but that
     //       would force this to be non-static.
@@ -437,6 +565,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
         /**
          * Returns the amount of space the layout would like to have.
          *
+         * <p>
+         *  返回布局想要拥有的空间量。
+         * 
+         * 
          * @param the Container for which this layout manager is being used
          * @return a Dimension object containing the layout's preferred size
          */
@@ -489,6 +621,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
         /**
          * Returns the minimum amount of space the layout needs.
          *
+         * <p>
+         *  返回布局需要的最小空间量。
+         * 
+         * 
          * @param the Container for which this layout manager is being used
          * @return a Dimension object containing the layout's minimum size
          */
@@ -540,6 +676,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
         /**
          * Returns the maximum amount of space the layout can use.
          *
+         * <p>
+         *  返回布局可以使用的最大空间大小。
+         * 
+         * 
          * @param the Container for which this layout manager is being used
          * @return a Dimension object containing the layout's maximum size
          */
@@ -604,6 +744,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
          * Instructs the layout manager to perform the layout for the specified
          * container.
          *
+         * <p>
+         *  指示布局管理器执行指定容器的布局。
+         * 
+         * 
          * @param the Container for which this layout manager is being used
          */
         public void layoutContainer(Container parent) {
@@ -659,6 +803,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
     /**
      * Maps from positions to cursor type. Refer to calculateCorner and
      * calculatePosition for details of this.
+     * <p>
+     *  从位置到光标类型的映射。有关详细信息,请参阅calculateCorner和calculatePosition。
+     * 
      */
     private static final int[] cursorMapping = new int[]
     { Cursor.NW_RESIZE_CURSOR, Cursor.NW_RESIZE_CURSOR, Cursor.N_RESIZE_CURSOR,
@@ -674,35 +821,56 @@ public class MetalRootPaneUI extends BasicRootPaneUI
      * MouseInputHandler is responsible for handling resize/moving of
      * the Window. It sets the cursor directly on the Window when then
      * mouse moves over a hot spot.
+     * <p>
+     *  MouseInputHandler负责处理窗口的大小调整/移动。当鼠标移动到热点上时,它直接在窗口上设置光标。
+     * 
      */
     private class MouseInputHandler implements MouseInputListener {
         /**
          * Set to true if the drag operation is moving the window.
+         * <p>
+         * 如果拖动操作正在移动窗口,请设置为true。
+         * 
          */
         private boolean isMovingWindow;
 
         /**
          * Used to determine the corner the resize is occurring from.
+         * <p>
+         *  用于确定调整大小发生的角。
+         * 
          */
         private int dragCursor;
 
         /**
          * X location the mouse went down on for a drag operation.
+         * <p>
+         *  X位置,鼠标拖动操作。
+         * 
          */
         private int dragOffsetX;
 
         /**
          * Y location the mouse went down on for a drag operation.
+         * <p>
+         *  Y位置,鼠标拖动操作。
+         * 
          */
         private int dragOffsetY;
 
         /**
          * Width of the window when the drag started.
+         * <p>
+         *  拖动开始时窗口的宽度。
+         * 
          */
         private int dragWidth;
 
         /**
          * Height of the window when the drag started.
+         * <p>
+         *  拖拽开始时窗口的高度。
+         * 
          */
         private int dragHeight;
 
@@ -935,6 +1103,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
         /**
          * Returns the corner that contains the point <code>x</code>,
          * <code>y</code>, or -1 if the position doesn't match a corner.
+         * <p>
+         *  返回包含点<code> x </code>,<code> y </code>的拐角,如果位置与拐角不匹配,则返回-1。
+         * 
          */
         private int calculateCorner(Window w, int x, int y) {
             Insets insets = w.getInsets();
@@ -952,6 +1123,9 @@ public class MetalRootPaneUI extends BasicRootPaneUI
         /**
          * Returns the Cursor to render for the specified corner. This returns
          * 0 if the corner doesn't map to a valid Cursor
+         * <p>
+         *  返回要为指定的角点渲染的光标。如果边角没有映射到有效的光标,则返回0
+         * 
          */
         private int getCursor(int corner) {
             if (corner == -1) {
@@ -969,6 +1143,10 @@ public class MetalRootPaneUI extends BasicRootPaneUI
          * 3 if >= width - CORNER_DRAG_WIDTH
          * 4 if >= width - BORDER_DRAG_THICKNESS
          * 5 otherwise
+         * <p>
+         *  返回一个整数,指示<code> spot </code>中<code> spot </code>的位置。
+         * 返回值为：0如果<BORDER_DRAG_THICKNESS 1,如果<CORNER_DRAG_WIDTH 2如果> = CORNER_DRAG_WIDTH && <width  -  BORDER_DRAG_THICKNESS 3如果>
+         *  = width  -  CORNER_DRAG_WIDTH 4如果> = width  -  BORDER_DRAG_THICKNESS 5。
          */
         private int calculatePosition(int spot, int width) {
             if (spot < BORDER_DRAG_THICKNESS) {

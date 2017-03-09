@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ import  java.security.ProtectionDomain;
 
 /*
  * Copyright 2003 Wily Technology, Inc.
+ * <p>
+ *  版权所有2003 Wily Technology,Inc.
+ * 
  */
 
 /**
@@ -41,6 +45,12 @@ import  java.security.ProtectionDomain;
  * to mean a sequence
  * of bytes in class file format, whether or not they reside in a file.
  *
+ * <p>
+ *  代理提供了此接口的实现,以便转换类文件。转换发生在JVM定义类之前。
+ * <P>
+ *  注意,术语<i>类文件</i>如<cite> Java&trade;虚拟机规范</cite>,表示类文件格式的字节序列,无论它们是否驻留在文件中。
+ * 
+ * 
  * @see     java.lang.instrument.Instrumentation
  * @see     java.lang.instrument.Instrumentation#addTransformer
  * @see     java.lang.instrument.Instrumentation#removeTransformer
@@ -161,6 +171,44 @@ public interface ClassFileTransformer {
      * while this has the same effect as returning null. it facilitates the
      * logging or debugging of format corruptions.
      *
+     * <p>
+     *  此方法的实现可以转换提供的类文件并返回一个新的替换类文件。
+     * 
+     * <P>
+     *  有两种变换器,由{@link java.lang.instrument.Instrumentation#addTransformer(ClassFileTransformer,boolean)}的<code>
+     *  canRetransform </code>参数确定：。
+     * <ul>
+     *  已将<code> canRetransform </code>添加为true的<li> </i>可重新转换的</i>
+     * </li>
+     *  <code> canRetransform </code>为false或添加了{@link java.lang.instrument.Instrumentation#addTransformer(ClassFileTransformer)}
+     * 的<li> </i>。
+     * </li>
+     * </ul>
+     * 
+     * <P>
+     * 一旦变换器已经注册了{@link java.lang.instrument.Instrumentation#addTransformer(ClassFileTransformer,boolean)addTransformer}
+     * ,变换器将被调用每个新的类定义和每个类重定义。
+     * 每个类重新转换也将调用具有重新转换能力的变换器。
+     * 使用{@link java.lang.ClassLoader#defineClass ClassLoader.defineClass}或其本机等效项来请求新的类定义。
+     * 类重定义的请求是通过{@link java.lang.instrument.Instrumentation#redefineClasses Instrumentation.redefineClasses}
+     * 或其本地等同物来完成的。
+     * 使用{@link java.lang.ClassLoader#defineClass ClassLoader.defineClass}或其本机等效项来请求新的类定义。
+     * 对类重新传输的请求使用{@link java.lang.instrument.Instrumentation#retransformClasses Instrumentation.retransformClasses}
+     * 或其本地等同物。
+     * 使用{@link java.lang.ClassLoader#defineClass ClassLoader.defineClass}或其本机等效项来请求新的类定义。
+     * 在处理请求期间,在类文件字节被验证或应用之前调用变换器。当有多个变换器时,通过链接<code> transform </code>调用来组成变换。
+     * 也就是说,一次调用<code> transform </code>返回的字节数组成为下一次调用的输入(通过<code> classfileBuffer </code>参数)。
+     * 
+     * <P>
+     *  转换按以下顺序应用：
+     * <ul>
+     *  <li>重新转换无效变压器
+     * </li>
+     *  <li>重新转换无法使用的本机变压器
+     * </li>
+     *  <li>支持重新转换的变压器
+     * </li>
+     * 
      * @param loader                the defining loader of the class to be transformed,
      *                              may be <code>null</code> if the bootstrap loader
      * @param className             the name of the class in the internal form of fully

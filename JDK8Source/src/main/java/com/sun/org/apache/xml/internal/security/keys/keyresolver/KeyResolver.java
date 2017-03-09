@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.keys.keyresolver;
 
@@ -49,6 +58,9 @@ import org.w3c.dom.Node;
 /**
  * KeyResolver is factory class for subclass of KeyResolverSpi that
  * represent child element of KeyInfo.
+ * <p>
+ *  KeyResolver是表示KeyInfo的子元素的KeyResolverSpi的子类的工厂类。
+ * 
  */
 public class KeyResolver {
 
@@ -65,6 +77,10 @@ public class KeyResolver {
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param keyResolverSpi a KeyResolverSpi instance
      */
     private KeyResolver(KeyResolverSpi keyResolverSpi) {
@@ -74,6 +90,10 @@ public class KeyResolver {
     /**
      * Method length
      *
+     * <p>
+     *  方法长度
+     * 
+     * 
      * @return the length of resolvers registered
      */
     public static int length() {
@@ -83,6 +103,10 @@ public class KeyResolver {
     /**
      * Method getX509Certificate
      *
+     * <p>
+     *  方法getX509Certificate
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -124,6 +148,10 @@ public class KeyResolver {
     /**
      * Method getPublicKey
      *
+     * <p>
+     *  方法getPublicKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -171,6 +199,15 @@ public class KeyResolver {
      * Please note that this method will create a new copy of the underlying array, as the
      * underlying collection is a CopyOnWriteArrayList.
      *
+     * <p>
+     * 此方法用于注册{@link KeyResolverSpi},这些对象可用于<I>全部</I> {@link com.sun.org.apache.xml.internal.security.keys.KeyInfo}
+     * 对象。
+     * 这意味着,只有使用{@link com.sun.org.apache)才能将个性化的{@link KeyResolverSpi}直接注册到{@link com.sun.org.apache.xml.internal.security.keys.KeyInfo}
+     * 。
+     *  xml.internal.security.keys.KeyInfo#registerInternalKeyResolver}。
+     * 请注意,此方法将创建底层数组的新副本,因为底层集合是一个CopyOnWriteArrayList。
+     * 
+     * 
      * @param className
      * @param globalResolver Whether the KeyResolverSpi is a global resolver or not
      * @throws InstantiationException
@@ -197,6 +234,15 @@ public class KeyResolver {
      * Please note that this method will create a new copy of the underlying array, as the
      * underlying collection is a CopyOnWriteArrayList.
      *
+     * <p>
+     *  此方法用于注册{@link KeyResolverSpi},这些对象可用于<I>全部</I> {@link com.sun.org.apache.xml.internal.security.keys.KeyInfo}
+     * 对象。
+     * 这意味着,只有使用{@link com.sun.org.apache)才能将个性化的{@link KeyResolverSpi}直接注册到{@link com.sun.org.apache.xml.internal.security.keys.KeyInfo}
+     * 。
+     *  xml.internal.security.keys.KeyInfo#registerInternalKeyResolver}。
+     * 请注意,此方法将创建底层数组的新副本,因为底层集合是一个CopyOnWriteArrayList。
+     * 
+     * 
      * @param className
      * @param globalResolver Whether the KeyResolverSpi is a global resolver or not
      * @throws SecurityException if a security manager is installed and the
@@ -233,6 +279,15 @@ public class KeyResolver {
      * Please note that this method will create a new copy of the underlying array, as the
      * underlying collection is a CopyOnWriteArrayList.
      *
+     * <p>
+     * 此方法用于注册{@link KeyResolverSpi},这些对象可用于<I>全部</I> {@link com.sun.org.apache.xml.internal.security.keys.KeyInfo}
+     * 对象。
+     * 这意味着,只有使用{@link com.sun.org.apache)才能将个性化的{@link KeyResolverSpi}直接注册到{@link com.sun.org.apache.xml.internal.security.keys.KeyInfo}
+     * 。
+     *  xml.internal.security.keys.KeyInfo#registerInternalKeyResolver}。
+     * 请注意,此方法将创建底层数组的新副本,因为底层集合是一个CopyOnWriteArrayList。
+     * 
+     * 
      * @param keyResolverSpi a KeyResolverSpi instance to register
      * @param start whether to register the KeyResolverSpi at the start of the list or not
      * @throws SecurityException if a security manager is installed and the
@@ -260,6 +315,14 @@ public class KeyResolver {
      * The KeyResolverSpi instances are not registered as a global resolver.
      *
      *
+     * <p>
+     *  此方法用于注册{@link KeyResolverSpi},这些对象可用于<I>全部</I> {@link com.sun.org.apache.xml.internal.security.keys.KeyInfo}
+     * 对象。
+     * 这意味着,只有使用{@link com.sun.org.apache)才能将个性化的{@link KeyResolverSpi}直接注册到{@link com.sun.org.apache.xml.internal.security.keys.KeyInfo}
+     * 。
+     *  xml.internal.security.keys.KeyInfo#registerInternalKeyResolver}。 KeyResolverSpi实例未注册为全局解析器。
+     * 
+     * 
      * @param classNames
      * @throws InstantiationException
      * @throws IllegalAccessException
@@ -282,6 +345,9 @@ public class KeyResolver {
 
     /**
      * This method registers the default resolvers.
+     * <p>
+     *  此方法注册默认解析器。
+     * 
      */
     public static void registerDefaultResolvers() {
 
@@ -303,6 +369,10 @@ public class KeyResolver {
     /**
      * Method resolvePublicKey
      *
+     * <p>
+     *  方法resolvePublicKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -319,6 +389,10 @@ public class KeyResolver {
     /**
      * Method resolveX509Certificate
      *
+     * <p>
+     *  方法resolveX509Certificate
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -333,6 +407,8 @@ public class KeyResolver {
     }
 
     /**
+    /* <p>
+    /* 
      * @param element
      * @param baseURI
      * @param storage
@@ -348,6 +424,10 @@ public class KeyResolver {
     /**
      * Method setProperty
      *
+     * <p>
+     *  方法setProperty
+     * 
+     * 
      * @param key
      * @param value
      */
@@ -358,6 +438,10 @@ public class KeyResolver {
     /**
      * Method getProperty
      *
+     * <p>
+     *  方法getProperty
+     * 
+     * 
      * @param key
      * @return the property set for this resolver
      */
@@ -369,6 +453,10 @@ public class KeyResolver {
     /**
      * Method understandsProperty
      *
+     * <p>
+     *  方法understandsProperty
+     * 
+     * 
      * @param propertyToTest
      * @return true if the resolver understands property propertyToTest
      */
@@ -380,6 +468,10 @@ public class KeyResolver {
     /**
      * Method resolverClassName
      *
+     * <p>
+     *  方法resolverClassName
+     * 
+     * 
      * @return the name of the resolver.
      */
     public String resolverClassName() {
@@ -388,6 +480,8 @@ public class KeyResolver {
 
     /**
      * Iterate over the KeyResolverSpi instances
+     * <p>
+     *  迭代KeyResolverSpi实例
      */
     static class ResolverIterator implements Iterator<KeyResolverSpi> {
         List<KeyResolver> res;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DOM2DTM.java,v 1.2.4.1 2005/09/15 08:15:10 suresh_emailid Exp $
+ * <p>
+ *  $ Id：DOM2DTM.java,v 1.2.4.1 2005/09/15 08:15:10 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref.dom2dtm;
 
@@ -64,6 +77,15 @@ import org.xml.sax.ContentHandler;
  * Note too that we do not currently attempt to track document
  * mutation. If you alter the DOM after wrapping DOM2DTM around it,
  * all bets are off.
+ * <p>
+ *  DTM API。
+ * 
+ *  请注意,它不一定代表一个完整的文档树。你可以围绕一个特定的节点和它的子树包裹DOM2DTM,正确的事情应该发生。
+ *  (我不_think_我们目前支持DocumentFrgment节点作为根,虽然这可能值得考虑。)。
+ * 
+ *  还要注意,我们目前没有尝试跟踪文档突变。如果您在围绕DOM2DTM环绕DOM后更改DOM,则所有投注均会关闭。
+ * 
+ * 
  * */
 public class DOM2DTM extends DTMDefaultBaseIterators
 {
@@ -71,29 +93,44 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   static final boolean JJK_NEWCODE=true;
 
   /** Manefest constant
+  /* <p>
    */
   static final String NAMESPACE_DECL_NS="http://www.w3.org/XML/1998/namespace";
 
   /** The current position in the DOM tree. Last node examined for
+  /* <p>
+  /* 
    * possible copying to DTM. */
   transient private Node m_pos;
   /** The current position in the DTM tree. Who children get appended to. */
   private int m_last_parent=0;
   /** The current position in the DTM tree. Who children reference as their
+  /* <p>
+  /* 
    * previous sib. */
   private int m_last_kid=NULL;
 
   /** The top of the subtree.
    * %REVIEW%: 'may not be the same as m_context if "//foo" pattern.'
+   * <p>
+   *  ％REVIEW％：'可能不同于m_context如果"// foo"模式。
+   * 
+   * 
    * */
   transient private Node m_root;
 
   /** True iff the first element has been processed. This is used to control
+  /* <p>
+  /* 
       synthesis of the implied xml: namespace declaration node. */
   boolean m_processedFirstElement=false;
 
   /** true if ALL the nodes in the m_root subtree have been processed;
    * false if our incremental build has not yet finished scanning the
+   * <p>
+   *  false如果我们的增量构建尚未完成扫描
+   * 
+   * 
    * DOM tree.  */
   transient private boolean m_nodesAreProcessed;
 
@@ -102,12 +139,20 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * composed of several DOM nodes (for example, if logically-adjacent
    * Text/CDATASection nodes in the DOM have been coalesced into a
    * single DTM Text node); this table points only to the first in
+   * <p>
+   * 直接进入这个向量。每个DTM节点实际上可以由多个DOM节点组成(例如,如果DOM中的逻辑上相邻的Text / CDATASection节点已经被合并到单个DTM Text节点中);这个表只指向第一个
+   * 
+   * 
    * that sequence. */
   protected Vector m_nodes = new Vector();
 
   /**
    * Construct a DOM2DTM object from a DOM node.
    *
+   * <p>
+   *  从DOM节点构造DOM2DTM对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param domSource the DOM source that this DTM will wrap.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -171,6 +216,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Construct the node map from the node.
    *
+   * <p>
+   *  从节点构造节点映射。
+   * 
+   * 
    * @param node The node that is to be added to the DTM.
    * @param parentIndex The current parent index.
    * @param previousSibling The previous sibling index.
@@ -311,6 +360,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators
 
   /**
    * Get the number of nodes that have been added.
+   * <p>
+   *  获取已添加的节点数。
+   * 
    */
   public int getNumberOfNodes()
   {
@@ -322,6 +374,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * Each call to this method adds a new node to the table, unless the end
    * is reached, in which case it returns null.
    *
+   * <p>
+   *  此方法循环到将添加到表中的下一个节点。每次调用此方法时,都会向表中添加一个新节点,除非达到结束,在这种情况下,它将返回null。
+   * 
+   * 
    * @return The true if a next node is found or false if
    *         there are no more nodes.
    */
@@ -598,6 +654,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Return an DOM node for the given node.
    *
+   * <p>
+   *  返回给定节点的DOM节点。
+   * 
+   * 
    * @param nodeHandle The node ID.
    *
    * @return A node representation of the DTM node.
@@ -613,6 +673,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Get a Node from an identity index.
    *
+   * <p>
+   *  从身份索引获取节点。
+   * 
+   * 
    * NEEDSDOC @param nodeIdentity
    *
    * NEEDSDOC ($objectName$) @return
@@ -626,6 +690,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * Get the next node identity value in the list, and call the iterator
    * if it hasn't been added yet.
    *
+   * <p>
+   *  获取列表中的下一个节点标识值,如果尚未添加迭代器,则调用迭代器。
+   * 
+   * 
    * @param identity The node identity (index).
    * @return identity+1, or DTM.NULL.
    */
@@ -658,6 +726,16 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * that doesn't work. DOM Level 3 will provide the isSameNode() method
    * to fix that, but until then this is going to be flaky.
    *
+   * <p>
+   *  从节点获取句柄。 <p>％OPT％这会很慢。</p>
+   * 
+   *  <p>％OPT％在大型文档中的后续节点上,类似XPath的搜索(向DOM走向根,跟踪路径;沿着DTM重建路径)可能会快得多。
+   * 这也可能意味着改进这个调用以处理将在这个DTM中但是还没有被构建的节点,这可能或可能不是好事。</p>。
+   * 
+   *  ％REVIEW％这依赖于能够通过对象标识测试节点标识。 DTM2DOM代理是一个很好的例子,它不工作。
+   *  DOM Level 3将提供isSameNode()方法来修复这个问题,但是直到那时这将是flaky。
+   * 
+   * 
    * @param node A node, which may be null.
    *
    * @return The node handle or <code>DTM.NULL</code>.
@@ -698,6 +776,15 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * that doesn't work. DOM Level 3 will provide the isSameNode() method
    * to fix that, but until then this is going to be flaky.
    *
+   * <p>
+   *  getHandleFromNode,旨在供公众使用。
+   * 
+   *  <p>％OPT％这会很慢。</p>
+   * 
+   * ％REVIEW％这依赖于能够通过对象标识测试节点标识。 DTM2DOM代理是一个很好的例子,它不工作。
+   *  DOM Level 3将提供isSameNode()方法来修复这个问题,但是直到那时这将是flaky。
+   * 
+   * 
    * @param node A node, which may be null.
    *
    * @return The node handle or <code>DTM.NULL</code>.  */
@@ -740,6 +827,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Retrieves an attribute node by by qualified name and namespace URI.
    *
+   * <p>
+   *  按限定名称和命名空间URI检索属性节点。
+   * 
+   * 
    * @param nodeHandle int Handle of the node upon which to look up this attribute..
    * @param namespaceURI The namespace URI of the attribute to
    *   retrieve, or null.
@@ -806,6 +897,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * (see http://www.w3.org/TR/xpath#data-model
    * for the definition of a node's string-value).
    *
+   * <p>
+   *  将节点的字符串值作为String对象获取(有关节点的字符串值的定义,请参阅http://www.w3.org/TR/xpath#data-model)。
+   * 
+   * 
    * @param nodeHandle The node ID.
    *
    * @return A string object that represents the string-value of the given node.
@@ -862,6 +957,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Determine if the string-value of a node is whitespace
    *
+   * <p>
+   *  确定节点的字符串值是否为空格
+   * 
+   * 
    * @param nodeHandle The node Handle.
    *
    * @return Return true if the given node is whitespace.
@@ -909,6 +1008,15 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * any special handling. The DOM does what the DOM does; if you want
    * DTM-level abstractions, use DTM-level methods.
    *
+   * <p>
+   *  检索DOM子树的文本内容,将其附加到用户提供的FastStringBuffer对象中。请注意,属性不被视为元素内容的一部分。
+   * <p>
+   *  有关于空白剥离的开放性问题。目前,我们在这方面没有做特别的努力,因为标准DOM还没有提供基于DTD的信息来区分元素上下文和真正的#PCDATA。
+   * 注意,我们应该也考虑xml：space if /当我们解决这个问题。 DOM Level 3可能为我们解决问题。
+   * <p>
+   *  ％REVIEW％实际上,由于此方法在fence的DOM边而不是在DTM边操作,因此它不应该做任何特殊的处理。 DOM做什么DOM做;如果您想要DTM级抽象,请使用DTM级方法。
+   * 
+   * 
    * @param node Node whose subtree is to be walked, gathering the
    * contents of all Text or CDATASection nodes.
    * @param buf FastStringBuffer into which the contents of the text
@@ -948,6 +1056,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * Given a node handle, return its DOM-style node name. This will
    * include names such as #text or #document.
    *
+   * <p>
+   *  给定一个节点句柄,返回其DOM样式的节点名称。这将包括诸如#text或#document的名称。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Name of this node, which may be an empty string.
    * %REVIEW% Document when empty string is possible...
@@ -967,6 +1079,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * the name as described by the XPath data model, NOT the DOM-style
    * name.
    *
+   * <p>
+   * 给定一个节点句柄,返回XPath节点名称。这应该是XPath数据模型描述的名称,而不是DOM风格的名称。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Name of this node, which may be an empty string.
    */
@@ -1017,6 +1133,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * (As defined in Namespaces, this is the portion of the name after any
    * colon character).
    *
+   * <p>
+   *  给定一个节点句柄,返回其XPath样式的本地名。 (如命名空间中定义,这是任何冒号字符后的名称部分)。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Local name of this node.
    */
@@ -1087,6 +1207,12 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * <p> %REVIEW% Are you sure you want "" for no prefix?  </p>
    * <p> %REVIEW-COMMENT% I think so... not totally sure. -sb  </p>
    *
+   * <p>
+   *  给定一个命名空间句柄,返回命名空间decl正在映射的前缀。给定一个节点句柄,返回用于映射到命名空间的前缀。
+   * 
+   *  <p>％REVIEW％您确定要""没有前缀吗? </p> <p>％REVIEW-COMMENT％我认为这样...不完全确定。 -sb </p>
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String prefix of this node's name, or "" if no explicit
    * namespace prefix was given.
@@ -1136,6 +1262,12 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * <p>%REVIEW% Null or ""? -sb</p>
    *
+   * <p>
+   *  给定一个节点句柄,返回它的DOM风格的命名空间URI(如命名空间中定义的,这是这个节点的前缀 - 或默认替代)被声明的URI。
+   * 
+   *  <p>％REVIEW％Null或""? -sb </p>
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String URI value of this node's namespace, or null if no
    * namespace was resolved.
@@ -1185,6 +1317,11 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * %REVIEW% DOM Level 3 is expected to add functionality which may
    * allow us to retire this.
+   * <p>
+   *  逻辑上跟随另一个Text或CDATASection节点。这可能涉及到遍历Entity引用。
+   * 
+   *  ％REVIEW％DOM级别3预计将添加功能,这可能允许我们淘汰这个功能。
+   * 
    */
   private Node logicalNextDOMTextNode(Node n)
   {
@@ -1225,6 +1362,11 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * as defined by the DOM, but may ignore some conveniences.
    * <p>
    *
+   * <p>
+   *  给定一个节点句柄,返回其节点值。这主要是由DOM定义的,但可能忽略一些方便。
+   * <p>
+   * 
+   * 
    * @param nodeHandle The node id.
    * @return String Value of this node, or null if not
    * meaningful for this node type.
@@ -1270,6 +1412,12 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *     1. [system identifier] The system identifier of the external subset, if
    *        it exists. Otherwise this property has no value.
    *
+   * <p>
+   *  文档类型声明信息项具有以下属性：
+   * 
+   *  1. [系统标识符]外部子集的系统标识符(如果存在)。否则此属性没有值。
+   * 
+   * 
    * @return the system identifier String object, or null if there is none.
    */
   public String getDocumentTypeDeclarationSystemIdentifier()
@@ -1301,6 +1449,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * no external subset or if it has no public identifier, this property
    * has no value.
    *
+   * <p>
+   *  返回外部子集的公共标识符,如4.2.2外部实体[XML]中所述进行规范化。如果没有外部子集或者没有公共标识符,则此属性没有值。
+   * 
+   * 
    * @return the public identifier String object, or null if there is none.
    */
   public String getDocumentTypeDeclarationPublicIdentifier()
@@ -1340,6 +1492,14 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * and this operation searches only within a single document, right?
    * Wouldn't want collisions between DTMs in the same process.</p>
    *
+   * <p>
+   * 返回<code> Element </code>,其<code> ID </code>由<code> elementId </code>给出。
+   * 如果没有这样的元素,返回<code> DTM.NULL </code>。如果多个元素具有此<code> ID </code>,则不定义行为。
+   * 属性(包括名称为"ID"的属性)不是类型ID,除非由DTM实现的DTD /模式信息如此定义。不知道属性是否为ID类型的实现应该返回<code> DTM.NULL </code>。
+   * 
+   *  <p>％REVIEW％推测ID仍然限于单个文档,此操作仅在单个文档中搜索,对吗?不希望在同一过程中DTM之间发生冲突。</p>
+   * 
+   * 
    * @param elementId The unique <code>id</code> value for an element.
    * @return The handle of the matching element.
    */
@@ -1405,6 +1565,18 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * to the DOM" refers only to parsed entities, not unparsed, and hence
    * doesn't affect this function.)
    *
+   * <p>
+   *  getUnparsedEntityURI函数返回在与上下文节点相同的文档中具有指定名称的未解析实体的URI(参见[3.3 Unparsed Entities])。如果没有这样的实体,它返回空字符串。
+   * <p>
+   *  XML处理器可以选择使用系统标识符(如果提供了一个)来解析实体,而不是公共标识符中的URI。细节取决于处理器,我们将不得不支持某种形式的插件解析器来正确处理这些。
+   * 目前,我们只返回系统标识符(如果存在),并希望它是一个可用的URI,或者我们的调用者可以将它映射到一个。 TODO：Resolve Public Identifiers ...或考虑更改函数名称。
+   * <p>
+   * 如果我们找到一个相对URI引用,XML期望它根据文档的基本URI解析。 DOM不为我们这样做,并不完全清楚是否应该在这里做;目前已经上升到我们的应用程序的更高水平。
+   *  (请注意,DOM级别1不存储文档的基本URI。)TODO：考虑解析相对URI。
+   * <p>
+   *  (DOM的声明"一个XML处理器可能选择在结构模型被传递给DOM之前完全展开实体"仅指解析的实体,而不是解析的,因此不影响这个函数)。
+   * 
+   * 
    * @param name A string containing the Entity Name of the unparsed
    * entity.
    *
@@ -1467,6 +1639,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *        specified in the start-tag of its element, or was defaulted from the
    *        DTD.
    *
+   * <p>
+   *  5. [specified]指示此属性是实际上在其元素的开始标签中指定的标志,还是来自DTD的标志。
+   * 
+   * 
    * @param attributeHandle the attribute handle
    * @return <code>true</code> if the attribute was specified;
    *         <code>false</code> if it was defaulted.
@@ -1486,6 +1662,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /** Bind an IncrementalSAXSource to this DTM. NOT RELEVANT for DOM2DTM, since
    * we're wrapped around an existing DOM.
    *
+   * <p>
+   *  我们围绕现有的DOM。
+   * 
+   * 
    * @param source The IncrementalSAXSource that we want to recieve events from
    * on demand.
    */
@@ -1497,6 +1677,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * someone else should send SAX events to in order to extend this
    * DTM model.
    *
+   * <p>
+   *  别人应该发送SAX事件为了扩展这个DTM模型。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX events,
    * "this" if the DTM object has a built-in SAX ContentHandler,
    * the IncrmentalSAXSource if we're bound to one and should receive
@@ -1512,6 +1696,12 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * %REVIEW% Should this return null if constrution already done/begun?
    *
+   * <p>
+   *  返回此DTM的词法处理程序。
+   * 
+   *  ％REVIEW％如果解析已经完成/开始,这应该返回null吗?
+   * 
+   * 
    * @return null if this model doesn't respond to lexical SAX events,
    * "this" if the DTM object has a built-in SAX ContentHandler,
    * the IncrementalSAXSource if we're bound to one and should receive
@@ -1527,6 +1717,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Return this DTM's EntityResolver.
    *
+   * <p>
+   *  返回此DTM的EntityResolver。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX entity ref events.
    */
   public org.xml.sax.EntityResolver getEntityResolver()
@@ -1538,6 +1732,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Return this DTM's DTDHandler.
    *
+   * <p>
+   *  返回此DTM的DTDHandler。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX dtd events.
    */
   public org.xml.sax.DTDHandler getDTDHandler()
@@ -1549,6 +1747,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Return this DTM's ErrorHandler.
    *
+   * <p>
+   *  返回此DTM的ErrorHandler。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX error events.
    */
   public org.xml.sax.ErrorHandler getErrorHandler()
@@ -1560,6 +1762,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Return this DTM's DeclHandler.
    *
+   * <p>
+   *  返回这个DTM的DeclHandler。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX Decl events.
    */
   public org.xml.sax.ext.DeclHandler getDeclHandler()
@@ -1572,6 +1778,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * we're partnered with a IncrementalSAXSource) and thus require that the
    * transformation and the parse run simultaneously. Guidance to the
    * DTMManager.
+   * <p>
+   *  我们与IncrementalSAXSource合作),因此要求转换和解析同时运行。指导DTMManager。
+   * 
+   * 
    * */
   public boolean needsTwoThreads()
   {
@@ -1584,6 +1794,11 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * Returns whether the specified <var>ch</var> conforms to the XML 1.0 definition
    * of whitespace.  Refer to <A href="http://www.w3.org/TR/1998/REC-xml-19980210#NT-S">
    * the definition of <CODE>S</CODE></A> for details.
+   * <p>
+   *  返回指定的<var> ch </var>是否符合空格的XML 1.0定义。
+   * 有关详细信息,请参阅<A href="http://www.w3.org/TR/1998/REC-xml-19980210#NT-S"> <CODE> S </CODE> </A>的定义。
+   * 
+   * 
    * @param   ch      Character to check as XML whitespace.
    * @return          =true if <var>ch</var> is XML whitespace; otherwise =false.
    */
@@ -1600,6 +1815,11 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * ContentHandler's characters methods may well occur for a single call to
    * this method.
    *
+   * <p>
+   * 在传递的ContentHandler上直接调用给定节点的字符串值的字符方法(有关节点的字符串值的定义,请参阅http://www.w3.org/TR/xpath#data-model)。
+   * 对ContentHandler的字符方法的多次调用很可能发生在对此方法的单个调用中。
+   * 
+   * 
    * @param nodeHandle The node ID.
    * @param ch A non-null reference to a ContentHandler.
    *
@@ -1650,6 +1870,15 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * does, and that whitespace stripping and so on belong at the DTM level.
    * If you want a stripped DOM view, wrap DTM2DOM around DOM2DTM.
    *
+   * <p>
+   *  检索DOM子树的文本内容,将其附加到用户提供的FastStringBuffer对象中。请注意,属性不被视为元素内容的一部分。
+   * <p>
+   *  有关于空白剥离的开放性问题。目前,我们在这方面没有做特别的努力,因为标准DOM还没有提供基于DTD的信息来区分元素上下文和真正的#PCDATA。
+   * 注意,我们应该也考虑xml：space if /当我们解决这个问题。 DOM Level 3可能为我们解决问题。
+   * <p>
+   *  ％REVIEW％请注意,作为DOM级别的操作,可以说,这个例程不能执行超出DOM已经做的任何处理,并且空白消除等属于DTM级别。如果你想要一个剥离的DOM视图,包装DTM2DOM围绕DOM2DTM。
+   * 
+   * 
    * @param node Node whose subtree is to be walked, gathering the
    * contents of all Text or CDATASection nodes.
    */
@@ -1693,6 +1922,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
       break;
 //    /* case Node.PROCESSING_INSTRUCTION_NODE :
 //      // warning(XPATHErrorResources.WG_PARSING_AND_PREPARING);
+//    /* <p>
+//    /*  // // warning(XPATHErrorResources.WG_PARSING_AND_PREPARING);
+//    /* 
+//    /* 
 //      break; */
     default :
       // ignore
@@ -1705,6 +1938,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Directly create SAX parser events from a subtree.
    *
+   * <p>
+   *  从子树直接创建SAX解析器事件。
+   * 
+   * 
    * @param nodeHandle The node ID.
    * @param ch A non-null reference to a ContentHandler.
    *
@@ -1743,6 +1980,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * For the moment all the run time properties are ignored by this
    * class.
    *
+   * <p>
+   *  目前所有的运行时属性都被这个类忽略。
+   * 
+   * 
    * @param property a <code>String</code> value
    * @param value an <code>Object</code> value
    */
@@ -1754,6 +1995,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * No source information is available for DOM2DTM, so return
    * <code>null</code> here.
    *
+   * <p>
+   *  DOM2DTM没有可用的源信息,因此在此返回<code> null </code>。
+   * 
    * @param node an <code>int</code> value
    * @return null
    */

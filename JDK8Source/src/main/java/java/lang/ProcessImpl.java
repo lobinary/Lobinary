@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,10 @@ import java.util.regex.Pattern;
 /* This class is for the exclusive use of ProcessBuilder.start() to
  * create new processes.
  *
+ * <p>
+ *  创建新流程。
+ * 
+ * 
  * @author Martin Buchholz
  * @since   1.5
  */
@@ -59,6 +64,10 @@ final class ProcessImpl extends Process {
      * with the resulting handle. This is because a FileOutputStream created
      * to append to a file does not open the file in a manner that guarantees
      * that writes by the child process will be atomic.
+     * <p>
+     *  打开一个文件进行写入。如果{@code append}是{@code true},那么将直接打开文件,并使用生成的句柄构建一个FileOutputStream。
+     * 这是因为创建为附加到文件的FileOutputStream不会以确保子进程的写入将是原子的方式打开该文件。
+     * 
      */
     private static FileOutputStream newFileOutputStream(File f, boolean append)
         throws IOException
@@ -161,6 +170,11 @@ final class ProcessImpl extends Process {
      * The command string is broken into tokens. The token separator is a space
      * or quota character. The space inside quotation is not a token separator.
      * There are no escape sequences.
+     * <p>
+     *  程序参数。
+     * 
+     *  命令字符串被分成符号。标记分隔符是空格或quota字符。引号内的空格不是标记分隔符。没有转义序列。
+     * 
      */
     private static String[] getTokensFromCommand(String command) {
         ArrayList<String> matchList = new ArrayList<>(8);
@@ -494,6 +508,10 @@ final class ProcessImpl extends Process {
      * The method is synchronized due to MS kb315939 problem.
      * All native handles should restore the inherit flag at the end of call.
      *
+     * <p>
+     *  使用win32函数CreateProcess创建进程。该方法由于MS kb315939问题而同步。所有本地句柄应在调用结束时恢复继承标志。
+     * 
+     * 
      * @param cmdstr the Windows command line
      * @param envblock NUL-separated, double-NUL-terminated list of
      *        environment strings in VAR=VALUE form
@@ -521,6 +539,9 @@ final class ProcessImpl extends Process {
      * Opens a file for atomic append. The file is created if it doesn't
      * already exist.
      *
+     * <p>
+     *  打开原子附加文件。如果文件不存在,则创建该文件。
+     * 
      * @param file the file to open or create
      * @return the native HANDLE
      */

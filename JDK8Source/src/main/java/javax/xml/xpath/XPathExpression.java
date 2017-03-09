@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -89,6 +90,58 @@ import javax.xml.namespace.QName;
  * the <code>evaluate</code> method.
  * <p>
  *
+ * <p>
+ *  <p> <code> XPathExpression </code>提供对已编译XPath表达式的访问。</p>
+ * 
+ * <a name="XPathExpression-evaluation"/>
+ * <table border="1" cellpadding="2">
+ * <thead>
+ * <tr>
+ *  <th colspan ="2"> XPath表达式的评估。</th>
+ * </tr>
+ * </thead>
+ * <tbody>
+ * <tr>
+ *  <td>上下文</td>
+ * <td>
+ *  如果在没有上下文项的情况下请求求值表达式,则将使用空文档节点作为上下文。为了评估XPath表达式,将DocumentFragment视为Document节点。
+ * </td>
+ * </tr>
+ * <tr>
+ *  <td>变量</td>
+ * <td>
+ *  如果表达式包含一个变量引用,它的值将通过{@link XPathVariableResolver}找到。
+ * 如果变量解析器未定义或解析器为变量返回<code> null </code>,则会引发{@link XPathExpressionException}。在任何单个评估过程中,变量的值必须是不可变的。
+ * </p>。
+ * </td>
+ * </tr>
+ * <tr>
+ *  <td>函数</td>
+ * <td>
+ *  如果表达式包含函数引用,则将通过{@link XPathFunctionResolver}找到该函数。
+ * 如果函数解析器未定义或函数解析器为函数返回<code> null </code>,则会引发{@link XPathExpressionException}。</p>。
+ * </td>
+ * </tr>
+ * <tr>
+ *  <td> QNames </td>
+ * <td>
+ *  表达式中的QNames是针对XPath命名空间上下文解析的。
+ * </td>
+ * </tr>
+ * <tr>
+ *  <td> result </td>
+ * <td>
+ * 评估表达式的结果将转换为所需返回类型的实例。有效的返回类型在{@link XPathConstants}中定义。转换为返回类型遵循XPath转换规则。</p>
+ * </td>
+ * </tr>
+ * </table>
+ * 
+ *  <p> XPath表达式不是线程安全的,不可重入。
+ * 换句话说,应用程序有责任确保一个{@link XPathExpression}对象在任何给定时间都不会从多个线程中使用,并且在调用<code> evaluate </code>方法时,应用程序可能不递归
+ * 调用<code> evaluate </code>方法。
+ *  <p> XPath表达式不是线程安全的,不可重入。
+ * <p>
+ * 
  * @author  <a href="mailto:Norman.Walsh@Sun.com">Norman Walsh</a>
  * @author  <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  * @see <a href="http://www.w3.org/TR/xpath#section-Expressions">XML Path Language (XPath) Version 1.0, Expressions</a>
@@ -110,6 +163,9 @@ public interface XPathExpression {
      * context.
      * If <code>returnType</code> is <code>null</code>, then a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     * 
+     * 
      * @param item The starting context (a node, for example).
      * @param returnType The desired return type.
      *
@@ -136,6 +192,19 @@ public interface XPathExpression {
      * <code>item</code>, an empty document will be used for the
      * context.
      *
+     * <p>
+     *  <p>在指定的上下文中评估编译的XPath表达式,并返回指定类型的结果。</p>
+     * 
+     *  <p>请参阅<a href="#XPathExpression-evaluation">评估XPath表达式</a>,了解上下文项评估,变量,函数和QName解析以及返回类型转换。</p>
+     * 
+     *  <p>如果<code> returnType </code>不是{@link XPathConstants}中定义的类型之一,则会抛出<code> IllegalArgumentException </code>
+     * 。
+     * </p>。
+     * 
+     *  <p>如果为<code> item </code>提供了<code> null </code>值,那么空文档将用于上下文。
+     * 如果<code> returnType </code>是<code> null </code>,那么会抛出<code> NullPointerException </code>。</p>。
+     * 
+     * 
      * @param item The starting context (a node, for example).
      *
      * @return The <code>String</code> that is the result of evaluating the expression and converting the result to a
@@ -162,6 +231,18 @@ public interface XPathExpression {
      * <p>If <code>source</code> or <code>returnType</code> is <code>null</code>,
      * then a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>在指定的上下文中评估编译的XPath表达式,并将结果返回为<code> String </code>。</p>
+     * 
+     * <p>此方法使用{@link XPathConstants#STRING}的<code> returnType </code>调用{@link #evaluate(Object item,QName returnType)}
+     * 。
+     * </p>。
+     * 
+     *  <p>请参阅<a href="#XPathExpression-evaluation">评估XPath表达式</a>,了解上下文项评估,变量,函数和QName解析以及返回类型转换。</p>
+     * 
+     *  <p>如果为<code> item </code>提供了<code> null </code>值,那么空文档将用于上下文。
+     * 
+     * 
      * @param source The <code>InputSource</code> of the document to evaluate over.
      * @param returnType The desired return type.
      *
@@ -187,6 +268,21 @@ public interface XPathExpression {
      *
      * <p>If <code>source</code> is <code>null</code>, then a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>在指定的<code> InputSource </code>上下文中评估编译的XPath表达式,并返回指定类型的结果。</p>
+     * 
+     *  <p>此方法在结果文档对象上构建{@link InputSource}的数据模型并调用{@link #evaluate(Object item,QName returnType)}。</p>
+     * 
+     *  <p>请参阅<a href="#XPathExpression-evaluation">评估XPath表达式</a>,了解上下文项评估,变量,函数和QName解析以及返回类型转换。</p>
+     * 
+     *  <p>如果<code> returnType </code>不是{@link XPathConstants}中定义的类型之一,则会抛出<code> IllegalArgumentException </code>
+     * 。
+     * </p>。
+     * 
+     *  <p>如果<code> source </code>或<code> returnType </code>为<code> null </code>,则会抛出<code> NullPointerExcep
+     * tion </code>。
+     * </p>。
+     * 
      * @param source The <code>InputSource</code> of the document to evaluate over.
      *
      * @return The <code>String</code> that is the result of evaluating the expression and converting the result to a

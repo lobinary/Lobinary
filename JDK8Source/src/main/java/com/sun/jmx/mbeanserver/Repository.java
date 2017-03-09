@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,10 @@ import javax.management.RuntimeOperationsException;
 /**
  * This repository does not support persistency.
  *
+ * <p>
+ *  此存储库不支持持久性。
+ * 
+ * 
  * @since 1.5
  */
 public class Repository {
@@ -54,6 +59,10 @@ public class Repository {
     /**
      * An interface that allows the caller to get some control
      * over the registration.
+     * <p>
+     *  允许呼叫者获得对注册的一些控制的接口。
+     * 
+     * 
      * @see #addMBean
      * @see #remove
      */
@@ -62,12 +71,18 @@ public class Repository {
          * Called by {@link #addMBean}.
          * Can throw a RuntimeOperationsException to cancel the
          * registration.
+         * <p>
+         *  由{@link #addMBean}调用。可以抛出一个RuntimeOperationsException来取消注册。
+         * 
          */
         public void registering();
 
         /**
          * Called by {@link #remove}.
          * Any exception thrown by this method will be ignored.
+         * <p>
+         *  由{@link #remove}呼叫。此方法抛出的任何异常都将被忽略。
+         * 
          */
         public void unregistered();
     }
@@ -80,11 +95,17 @@ public class Repository {
      * For each domain, a hashtable contains the instances with
      * canonical key property list string as key and named object
      * aggregated from given object name and mbean instance as value.
+     * <p>
+     *  用于存储对象的结构是非常基本的。 Hashtable用于存储不同的域对于每个域,哈希表包含实例,其中规范的关键属性列表字符串作为键,命名对象从给定对象名称和mbean实例聚合为值。
+     * 
      */
     private final Map<String,Map<String,NamedObject>> domainTb;
 
     /**
      * Number of elements contained in the Repository
+     * <p>
+     *  存储库中包含的元素数
+     * 
      */
     private volatile int nbElements = 0;
 
@@ -92,6 +113,9 @@ public class Repository {
      * Domain name of the server the repository is attached to.
      * It is quicker to store the information in the repository rather
      * than querying the framework each time the info is required.
+     * <p>
+     *  连接到存储库的服务器的域名。它更快地将信息存储在存储库中,而不是在每次需要信息时查询框架。
+     * 
      */
     private final String domain;
 
@@ -100,6 +124,10 @@ public class Repository {
      * This seems safer and more efficient: we are using Maps of Maps,
      * Guaranteing consistency while using Concurent objects at each level
      * may be more difficult.
+     * <p>
+     *  我们使用全局可重入读写锁来保护存储库。这似乎更安全和更有效：我们使用地图的地图,保证一致性,而在每个级别使用Concurent对象可能更困难。
+     * 
+     * 
      **/
     private final ReentrantReadWriteLock lock;
 
@@ -117,11 +145,19 @@ public class Repository {
 
         /**
          * The ObjectName pattern against which ObjectNames are matched.
+         * <p>
+         *  ObjectName与之匹配的ObjectName模式。
+         * 
+         * 
          **/
         public final ObjectName pattern;
 
         /**
          * Builds a new ObjectNamePattern object from an ObjectName pattern.
+         * <p>
+         *  从ObjectName模式构建一个新的ObjectNamePattern对象。
+         * 
+         * 
          * @param pattern The ObjectName pattern under examination.
          **/
         public ObjectNamePattern(ObjectName pattern) {
@@ -135,6 +171,10 @@ public class Repository {
         /**
          * Builds a new ObjectNamePattern object from an ObjectName pattern
          * constituents.
+         * <p>
+         *  从ObjectName模式构成一个新的ObjectNamePattern对象。
+         * 
+         * 
          * @param propertyListPattern pattern.isPropertyListPattern().
          * @param propertyValuePattern pattern.isPropertyValuePattern().
          * @param canonicalProps pattern.getCanonicalKeyPropertyListString().
@@ -167,6 +207,10 @@ public class Repository {
          * WARNING: domain name is not considered here because it is supposed
          *          not to be wildcard when called. PropertyList is also
          *          supposed not to be zero-length.
+         * <p>
+         * 如果给定的ObjectName与已构建此对象的ObjectName模式匹配,则返回true。警告：域名在这里不被考虑,因为它应该在调用时不是通配符。 PropertyList也不应该是零长度。
+         * 
+         * 
          * @param name The ObjectName we want to match against the pattern.
          * @return true if <code>name</code> matches the pattern.
          **/
@@ -222,6 +266,10 @@ public class Repository {
      * result set for the given ObjectNamePattern
      * Do not check whether the domains match (only check for matching
      * key property lists - see <i>matchKeys()</i>)
+     * <p>
+     *  在给定ObjectNamePattern的结果集中添加来自给定散列表的所有匹配对象不检查域是否匹配(仅检查匹配的关键属性列表,请参阅<i> matchKeys()</i>)
+     * 
+     * 
      **/
     private void addAllMatching(final Map<String,NamedObject> moiTb,
                                 final Set<NamedObject> result,
@@ -282,6 +330,9 @@ public class Repository {
     /**
      * Retrieves the named object contained in repository
      * from the given objectname.
+     * <p>
+     *  从给定的对象名称检索存储库中包含的命名对象。
+     * 
      */
     private NamedObject retrieveNamedObject(ObjectName name) {
 
@@ -314,6 +365,9 @@ public class Repository {
 
     /**
      * Construct a new repository with the given default domain.
+     * <p>
+     *  使用给定的默认域构造新的存储库。
+     * 
      */
     public Repository(String domain) {
         this(domain,true);
@@ -321,6 +375,9 @@ public class Repository {
 
     /**
      * Construct a new repository with the given default domain.
+     * <p>
+     *  使用给定的默认域构造新的存储库。
+     * 
      */
     public Repository(String domain, boolean fairLock) {
         lock = new ReentrantReadWriteLock(fairLock);
@@ -340,6 +397,9 @@ public class Repository {
      * Returns the list of domains in which any MBean is currently
      * registered.
      *
+     * <p>
+     *  返回当前注册了任何MBean的域的列表。
+     * 
      */
     public String[] getDomains() {
 
@@ -368,6 +428,10 @@ public class Repository {
     /**
      * Stores an MBean associated with its object name in the repository.
      *
+     * <p>
+     *  将与其对象名称相关联的MBean存储在存储库中。
+     * 
+     * 
      * @param object  MBean to be stored in the repository.
      * @param name    MBean object name.
      * @param context A registration context. If non null, the repository
@@ -450,6 +514,10 @@ public class Repository {
      * Checks whether an MBean of the name specified is already stored in
      * the repository.
      *
+     * <p>
+     *  检查指定名称的MBean是否已存储在存储库中。
+     * 
+     * 
      * @param name name of the MBean to find.
      *
      * @return  true if the MBean is stored in the repository,
@@ -472,6 +540,10 @@ public class Repository {
      * Retrieves the MBean of the name specified from the repository. The
      * object name must match exactly.
      *
+     * <p>
+     *  检索从存储库指定的名称的MBean。对象名称必须完全匹配。
+     * 
+     * 
      * @param name name of the MBean to retrieve.
      *
      * @return  The retrieved MBean if it is contained in the repository,
@@ -499,6 +571,10 @@ public class Repository {
      * object name pattern and which match the specified query expression
      * (optionally).
      *
+     * <p>
+     *  选择并检索名称与指定对象名称模式匹配且与指定查询表达式(可选)匹配的MBeans列表。
+     * 
+     * 
      * @param pattern The name of the MBean(s) to retrieve - may be a specific
      * object or a name pattern allowing multiple MBeans to be selected.
      * @param query query expression to apply when selecting objects - this
@@ -590,6 +666,10 @@ public class Repository {
     /**
      * Removes an MBean from the repository.
      *
+     * <p>
+     *  从存储库中删除MBean。
+     * 
+     * 
      * @param name name of the MBean to remove.
      * @param context A registration context. If non null, the repository
      *                will call {@link RegistrationContext#unregistered()
@@ -658,6 +738,10 @@ public class Repository {
     /**
      * Gets the number of MBeans stored in the repository.
      *
+     * <p>
+     *  获取存储在存储库中的MBean数。
+     * 
+     * 
      * @return  Number of MBeans.
      */
     public Integer getCount() {
@@ -668,6 +752,9 @@ public class Repository {
      * Gets the name of the domain currently used by default in the
      * repository.
      *
+     * <p>
+     *  获取存储库中默认情况下当前使用的域的名称。
+     * 
      * @return  A string giving the name of the default domain name.
      */
     public String getDefaultDomain() {

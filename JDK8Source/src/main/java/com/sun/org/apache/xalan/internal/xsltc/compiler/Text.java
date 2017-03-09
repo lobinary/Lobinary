@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Text.java,v 1.2.4.1 2005/09/12 11:33:09 pvedula Exp $
+ * <p>
+ *  $ Id：Text.java,v 1.2.4.1 2005/09/12 11:33:09 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -33,6 +46,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.MethodGenerator;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -46,6 +61,9 @@ final class Text extends Instruction {
 
     /**
      * Create a blank Text syntax tree node.
+     * <p>
+     *  创建一个空白文本语法树节点。
+     * 
      */
     public Text() {
         _textElement = true;
@@ -53,6 +71,10 @@ final class Text extends Instruction {
 
     /**
      * Create text syntax tree node.
+     * <p>
+     *  创建文本语法树节点。
+     * 
+     * 
      * @param text is the text to put in the node.
      */
     public Text(String text) {
@@ -61,6 +83,10 @@ final class Text extends Instruction {
 
     /**
      * Returns the text wrapped inside this node
+     * <p>
+     *  返回包装在此节点中的文本
+     * 
+     * 
      * @return The text wrapped inside this node
      */
     protected String getText() {
@@ -70,6 +96,10 @@ final class Text extends Instruction {
     /**
      * Set the text for this node. Appends the given text to any already
      * existing text (using string concatenation, so use only when needed).
+     * <p>
+     *  设置此节点的文本。将给定文本附加到任何已存在的文本(使用字符串连接,因此只在需要时使用)。
+     * 
+     * 
      * @param text is the text to wrap inside this node.
      */
     protected void setText(String text) {
@@ -201,6 +231,10 @@ final class Text extends Instruction {
     /**
      * Check whether this Text node can be stored in a char[] in the translet.
      * Calling this is precondition to calling loadAsArrayOffsetLength.
+     * <p>
+     *  检查此Text节点是否可以存储在translet中的char []中。调用这是调用loadAsArrayOffsetLength的前提条件。
+     * 
+     * 
      * @see #loadAsArrayOffsetLength(ClassGenerator,MethodGenerator)
      * @return true if this Text node can be
      */
@@ -223,6 +257,10 @@ final class Text extends Instruction {
      *
      * The pre-condition to calling this method is that
      * canLoadAsArrayOffsetLength() returns true.
+     * <p>
+     *  生成加载数组的代码,该数组将包含由此Text节点表示的字符数据,后跟数据从数组开始处的偏移量,然后是数据的长度。
+     * 
+     * 
      * @see #canLoadArrayOffsetLength()
      */
     public void loadAsArrayOffsetLength(ClassGenerator classGen,

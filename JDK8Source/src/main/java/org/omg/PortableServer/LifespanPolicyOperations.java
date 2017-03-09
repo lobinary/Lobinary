@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -13,12 +14,17 @@ package org.omg.PortableServer;
 	 * The LifespanPolicy specifies the lifespan of the 
 	 * objects implemented in the created POA. The default 
 	 * is TRANSIENT.
+	 * <p>
+	 *  LifespanPolicy指定在所创建的POA中实现的对象的生命周期。默认值为TRANSIENT。
+	 * 
 	 */
 public interface LifespanPolicyOperations  extends org.omg.CORBA.PolicyOperations
 {
 
   /**
 	 * specifies the policy value
+	 * <p>
+	 *  指定策略值
 	 */
   org.omg.PortableServer.LifespanPolicyValue value ();
 } // interface LifespanPolicyOperations

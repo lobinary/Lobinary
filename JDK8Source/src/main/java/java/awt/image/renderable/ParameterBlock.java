@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,6 +92,42 @@ import java.util.Vector;
  * ParameterBlock pb = new ParameterBlock();
  * op = new RenderableImageOp("operation", pb.add(arg1).add(arg2));
  * </pre>
+ * <p>
+ *  A <码>的ParameterBlock </code>的封装有关人士并通过RenderableImageOp所需的参数(对象),或者其他处理图像的类的信息。
+ * 
+ *  <P>虽然可以放置任意对象在源向量,这个类的用户可以并处语义约束,如要求所有的来源是的RenderedImage或RenderableImage的。
+ *  <code> ParameterBlock </code>本身只是一个容器,不执行对源或参数类型的检查。
+ * 
+ *  <p> <code> ParameterBlock </code>中的所有参数都是对象;方便的添加和设置方法可以接受基本类型的参数,并构造Number的适当子类(如Integer或Float)。
+ * 相应的get方法执行向下转换并具有基本类型的返回值;如果存储的值没有正确的类型,将抛出异常。没有办法区分"短添加(s)"和"添加(新短)"的结果。
+ * 
+ *  <p>请注意,get和set方法对引用操作。因此,当这不合适时,必须小心不要在<code> ParameterBlock </code>之间共享引用。
+ * 例如,要创建一个新的<code> ParameterBlock </code>等于除了添加的源之外的旧代码,可能会试图写：。
+ * 
+ * <pre>
+ * ParameterBlock addSource(ParameterBlock pb,RenderableImage im){ParameterBlock pb1 = new ParameterBlock(pb.getSources()); pb1.addSource(im); return pb1; }
+ * }。
+ * </pre>
+ * 
+ *  <p>这段代码会改变原来的&lt; code&gt; ParameterBlock&lt; / code&gt;的副作用,因为getSources操作返回了对其源向量的引用。
+ *  pb和pb1共享它们的源向量,并且两者中的改变是可见的。
+ * 
+ *  <p>编写addSource函数的正确方法是克隆源向量：
+ * 
+ * <pre>
+ *  ParameterBlock addSource(ParameterBlock pb,RenderableImage im){ParameterBlock pb1 = new ParameterBlock(pb.getSources()。
+ * clone()); pb1.addSource(im); return pb1; }}。
+ * </pre>
+ * 
+ *  <p> <code> ParameterBlock </code>的克隆方法已定义为执行源和参数向量的克隆。一个标准的浅克隆可以作为shallowClone。
+ * 
+ *  <p> addSource,setSource,add和set方法定义为在添加参数后返回'this'。这允许使用如下语法：
+ * 
+ * <pre>
+ *  ParameterBlock pb = new ParameterBlock(); op = new RenderableImageOp("operation",pb.add(arg1).add(ar
+ * g2));。
+ * </pre>
+ * 
  * */
 public class ParameterBlock implements Cloneable, Serializable {
     /** A Vector of sources, stored as arbitrary Objects. */
@@ -105,6 +142,10 @@ public class ParameterBlock implements Cloneable, Serializable {
     /**
      * Constructs a <code>ParameterBlock</code> with a given Vector
      * of sources.
+     * <p>
+     *  用给定的源向量构造一个<code> ParameterBlock </code>。
+     * 
+     * 
      * @param sources a <code>Vector</code> of source images
      */
     public ParameterBlock(Vector<Object> sources) {
@@ -114,6 +155,10 @@ public class ParameterBlock implements Cloneable, Serializable {
     /**
      * Constructs a <code>ParameterBlock</code> with a given Vector of sources and
      * Vector of parameters.
+     * <p>
+     *  使用给定的源向量和参数向量构造一个<code> ParameterBlock </code>。
+     * 
+     * 
      * @param sources a <code>Vector</code> of source images
      * @param parameters a <code>Vector</code> of parameters to be used in the
      *        rendering operation
@@ -130,6 +175,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * parameter Vectors are copied by reference -- additions or
      * changes will be visible to both versions.
      *
+     * <p>
+     *  创建<code> ParameterBlock </code>的浅副本。源和参数向量通过引用复制 - 添加或更改将对两个版本可见。
+     * 
+     * 
      * @return an Object clone of the <code>ParameterBlock</code>.
      */
     public Object shallowClone() {
@@ -149,6 +198,11 @@ public class ParameterBlock implements Cloneable, Serializable {
      * to the original <code>ParameterBlock</code>.  Changes to the shared sources or
      * parameters themselves will still be visible.
      *
+     * <p>
+     * 创建<code> ParameterBlock </code>的副本。克隆了源和参数矢量,但是通过引用复制实际的源和参数。
+     * 这允许对克隆中的源和参数的顺序和数量的修改对于原始的<code> ParameterBlock </code>是不可见的。对共享源或参数本身的更改仍然可见。
+     * 
+     * 
      * @return an Object clone of the <code>ParameterBlock</code>.
      */
     public Object clone() {
@@ -175,6 +229,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * stored as an object in order to allow new node types in the
      * future.
      *
+     * <p>
+     *  将图像添加到源列表的结尾。图像存储为对象,以便将来允许新的节点类型。
+     * 
+     * 
      * @param source an image object to be stored in the source list.
      * @return a new <code>ParameterBlock</code> containing the specified
      *         <code>source</code>.
@@ -188,6 +246,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Returns a source as a general Object.  The caller must cast it into
      * an appropriate type.
      *
+     * <p>
+     *  将一个源作为一般对象返回。调用者必须将其转换为适当的类型。
+     * 
+     * 
      * @param index the index of the source to be returned.
      * @return an <code>Object</code> that represents the source located
      *         at the specified index in the <code>sources</code>
@@ -202,6 +264,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an entry in the list of source with a new source.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  使用新源替换源列表中的条目。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param source the specified source image
      * @param index the index into the <code>sources</code>
      *              <code>Vector</code> at which to
@@ -226,6 +292,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * a convenience method.
      * An exception will be thrown if the source is not a RenderedImage.
      *
+     * <p>
+     *  以<code> RenderedImage </code>形式返回源。这种方法是一种方便的方法。如果源不是RenderedImage,将抛出异常。
+     * 
+     * 
      * @param index the index of the source to be returned
      * @return a <code>RenderedImage</code> that represents the source
      *         image that is at the specified index in the
@@ -240,6 +310,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * convenience method.
      * An exception will be thrown if the sources is not a RenderableImage.
      *
+     * <p>
+     *  将来源作为RenderableImage返回。这种方法是一种方便的方法。如果源不是RenderableImage,将抛出异常。
+     * 
+     * 
      * @param index the index of the source to be returned
      * @return a <code>RenderableImage</code> that represents the source
      *         image that is at the specified index in the
@@ -251,6 +325,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Returns the number of source images.
+     * <p>
+     *  返回源图像的数量。
+     * 
+     * 
      * @return the number of source images in the <code>sources</code>
      *         <code>Vector</code>.
      */
@@ -260,6 +338,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Returns the entire Vector of sources.
+     * <p>
+     *  返回整个Vector向量。
+     * 
+     * 
      * @return the <code>sources</code> <code>Vector</code>.
      * @see #setSources(Vector)
      */
@@ -269,6 +351,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Sets the entire Vector of sources to a given Vector.
+     * <p>
+     *  将源的整个向量设置为给定向量。
+     * 
+     * 
      * @param sources the <code>Vector</code> of source images
      * @see #getSources
      */
@@ -283,6 +369,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Returns the number of parameters (not including source images).
+     * <p>
+     *  返回参数数量(不包括源图像)。
+     * 
+     * 
      * @return the number of parameters in the <code>parameters</code>
      *         <code>Vector</code>.
      */
@@ -292,6 +382,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Returns the entire Vector of parameters.
+     * <p>
+     *  返回参数的整个Vector。
+     * 
+     * 
      * @return the <code>parameters</code> <code>Vector</code>.
      * @see #setParameters(Vector)
      */
@@ -301,6 +395,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Sets the entire Vector of parameters to a given Vector.
+     * <p>
+     *  将参数的整个向量设置为给定向量。
+     * 
+     * 
      * @param parameters the specified <code>Vector</code> of
      *        parameters
      * @see #getParameters
@@ -316,6 +414,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Adds an object to the list of parameters.
+     * <p>
+     *  将对象添加到参数列表。
+     * 
+     * 
      * @param obj the <code>Object</code> to add to the
      *            <code>parameters</code> <code>Vector</code>
      * @return a new <code>ParameterBlock</code> containing
@@ -328,6 +430,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Adds a Byte to the list of parameters.
+     * <p>
+     *  将一个字节添加到参数列表。
+     * 
+     * 
      * @param b the byte to add to the
      *            <code>parameters</code> <code>Vector</code>
      * @return a new <code>ParameterBlock</code> containing
@@ -339,6 +445,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Adds a Character to the list of parameters.
+     * <p>
+     *  向参数列表中添加一个字符。
+     * 
+     * 
      * @param c the char to add to the
      *            <code>parameters</code> <code>Vector</code>
      * @return a new <code>ParameterBlock</code> containing
@@ -350,6 +460,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Adds a Short to the list of parameters.
+     * <p>
+     * 在参数列表中添加一个Short。
+     * 
+     * 
      * @param s the short to add to the
      *            <code>parameters</code> <code>Vector</code>
      * @return a new <code>ParameterBlock</code> containing
@@ -361,6 +475,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Adds a Integer to the list of parameters.
+     * <p>
+     *  向参数列表中添加一个整数。
+     * 
+     * 
      * @param i the int to add to the
      *            <code>parameters</code> <code>Vector</code>
      * @return a new <code>ParameterBlock</code> containing
@@ -372,6 +490,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Adds a Long to the list of parameters.
+     * <p>
+     *  向参数列表中添加一个Long。
+     * 
+     * 
      * @param l the long to add to the
      *            <code>parameters</code> <code>Vector</code>
      * @return a new <code>ParameterBlock</code> containing
@@ -383,6 +505,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Adds a Float to the list of parameters.
+     * <p>
+     *  将浮点数添加到参数列表。
+     * 
+     * 
      * @param f the float to add to the
      *            <code>parameters</code> <code>Vector</code>
      * @return a new <code>ParameterBlock</code> containing
@@ -394,6 +520,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Adds a Double to the list of parameters.
+     * <p>
+     *  向参数列表中添加Double。
+     * 
+     * 
      * @param d the double to add to the
      *            <code>parameters</code> <code>Vector</code>
      * @return a new <code>ParameterBlock</code> containing
@@ -407,6 +537,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an Object in the list of parameters.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  替换参数列表中的对象。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param obj the parameter that replaces the
      *        parameter at the specified index in the
      *        <code>parameters</code> <code>Vector</code>
@@ -429,6 +563,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an Object in the list of parameters with a Byte.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  用一个字节替换参数列表中的一个对象。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param b the parameter that replaces the
      *        parameter at the specified index in the
      *        <code>parameters</code> <code>Vector</code>
@@ -445,6 +583,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an Object in the list of parameters with a Character.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  用参数替换参数列表中的对象。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param c the parameter that replaces the
      *        parameter at the specified index in the
      *        <code>parameters</code> <code>Vector</code>
@@ -461,6 +603,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an Object in the list of parameters with a Short.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  用Short替换参数列表中的对象。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param s the parameter that replaces the
      *        parameter at the specified index in the
      *        <code>parameters</code> <code>Vector</code>
@@ -477,6 +623,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an Object in the list of parameters with an Integer.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  用Integer替换参数列表中的对象。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param i the parameter that replaces the
      *        parameter at the specified index in the
      *        <code>parameters</code> <code>Vector</code>
@@ -493,6 +643,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an Object in the list of parameters with a Long.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  将参数列表中的对象替换为Long。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param l the parameter that replaces the
      *        parameter at the specified index in the
      *        <code>parameters</code> <code>Vector</code>
@@ -509,6 +663,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an Object in the list of parameters with a Float.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  用浮点数替换参数列表中的对象。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param f the parameter that replaces the
      *        parameter at the specified index in the
      *        <code>parameters</code> <code>Vector</code>
@@ -525,6 +683,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * Replaces an Object in the list of parameters with a Double.
      * If the index lies beyond the current source list,
      * the list is extended with nulls as needed.
+     * <p>
+     *  将参数列表中的对象替换为Double。如果索引位于当前源列表之外,则根据需要使用null扩展列表。
+     * 
+     * 
      * @param d the parameter that replaces the
      *        parameter at the specified index in the
      *        <code>parameters</code> <code>Vector</code>
@@ -539,6 +701,10 @@ public class ParameterBlock implements Cloneable, Serializable {
 
     /**
      * Gets a parameter as an object.
+     * <p>
+     *  获取参数作为对象。
+     * 
+     * 
      * @param index the index of the parameter to get
      * @return an <code>Object</code> representing the
      *         the parameter at the specified index
@@ -554,6 +720,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * exception is thrown if the parameter is
      * <code>null</code> or not a <code>Byte</code>.
      *
+     * <p>
+     * 一种方便的方法,以字节形式返回参数。如果参数为<code> null </code>或不是<code> Byte </code>,则抛出异常。
+     * 
+     * 
      * @param index the index of the parameter to be returned.
      * @return the parameter at the specified index
      *         as a <code>byte</code> value.
@@ -574,6 +744,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * exception is thrown if the parameter is
      * <code>null</code> or not a <code>Character</code>.
      *
+     * <p>
+     *  一个方便的方法来返回一个参数作为char。如果参数为<code> null </code>或不是<code> Character </code>,则抛出异常。
+     * 
+     * 
      * @param index the index of the parameter to be returned.
      * @return the parameter at the specified index
      *         as a <code>char</code> value.
@@ -594,6 +768,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * exception is thrown if the parameter is
      * <code>null</code> or not a <code>Short</code>.
      *
+     * <p>
+     *  一个方便的方法来返回一个短的参数。如果参数为<code> null </code>或不是<code> Short </code>,则抛出异常。
+     * 
+     * 
      * @param index the index of the parameter to be returned.
      * @return the parameter at the specified index
      *         as a <code>short</code> value.
@@ -614,6 +792,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * exception is thrown if the parameter is
      * <code>null</code> or not an <code>Integer</code>.
      *
+     * <p>
+     *  一个方便的方法来返回一个int参数。如果参数为<code> null </code>或不是<code> Integer </code>,则抛出异常。
+     * 
+     * 
      * @param index the index of the parameter to be returned.
      * @return the parameter at the specified index
      *         as a <code>int</code> value.
@@ -634,6 +816,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * exception is thrown if the parameter is
      * <code>null</code> or not a <code>Long</code>.
      *
+     * <p>
+     *  一个方便的方法来返回一个参数为long。如果参数为<code> null </code>或不是<code> Long </code>,则抛出异常。
+     * 
+     * 
      * @param index the index of the parameter to be returned.
      * @return the parameter at the specified index
      *         as a <code>long</code> value.
@@ -654,6 +840,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * exception is thrown if the parameter is
      * <code>null</code> or not a <code>Float</code>.
      *
+     * <p>
+     *  一个方便的方法来返回一个参数作为float。如果参数为<code> null </code>或不是<code> Float </code>,则抛出异常。
+     * 
+     * 
      * @param index the index of the parameter to be returned.
      * @return the parameter at the specified index
      *         as a <code>float</code> value.
@@ -674,6 +864,10 @@ public class ParameterBlock implements Cloneable, Serializable {
      * exception is thrown if the parameter is
      * <code>null</code> or not a <code>Double</code>.
      *
+     * <p>
+     *  一个方便的方法将参数返回为double。如果参数为<code> null </code>或不是<code> Double </code>,则抛出异常。
+     * 
+     * 
      * @param index the index of the parameter to be returned.
      * @return the parameter at the specified index
      *         as a <code>double</code> value.
@@ -692,6 +886,9 @@ public class ParameterBlock implements Cloneable, Serializable {
     /**
      * Returns an array of Class objects describing the types
      * of the parameters.
+     * <p>
+     *  返回描述参数类型的Class对象数组。
+     * 
      * @return an array of <code>Class</code> objects.
      */
     public Class [] getParamClasses() {

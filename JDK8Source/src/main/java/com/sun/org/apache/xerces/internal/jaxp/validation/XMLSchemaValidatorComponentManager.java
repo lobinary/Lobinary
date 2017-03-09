@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp.validation;
@@ -54,6 +64,10 @@ import org.xml.sax.ErrorHandler;
 /**
  * <p>An implementation of XMLComponentManager for a schema validator.</p>
  *
+ * <p>
+ *  <p>用于模式验证程序的XMLComponentManager的实现</p>
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  * @version $Id: XMLSchemaValidatorComponentManager.java,v 1.9 2010-11-01 04:40:08 joehw Exp $
  */
@@ -133,18 +147,27 @@ final class XMLSchemaValidatorComponentManager extends ParserConfigurationSettin
     //
     /**
      * <p>State of secure mode.</p>
+     * <p>
+     *  <p>安全模式的状态。</p>
+     * 
      */
     private boolean _isSecureMode = false;
 
     /**
      * fConfigUpdated is set to true if there has been any change to the configuration settings,
      * i.e a feature or a property was changed.
+     * <p>
+     *  如果配置设置有任何更改(即某个功能或属性已更改),则fConfigUpdated设置为true。
+     * 
      */
     private boolean fConfigUpdated = true;
 
     /**
      * Tracks whether the validator should use components from
      * the grammar pool to the exclusion of all others.
+     * <p>
+     *  跟踪验证器是否应使用语法池中的组件,排除所有其他组件。
+     * 
      */
     private boolean fUseGrammarPoolOnly;
 
@@ -260,6 +283,10 @@ final class XMLSchemaValidatorComponentManager extends ParserConfigurationSettin
     /**
      * Returns the state of a feature.
      *
+     * <p>
+     *  返回要素的状态。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @return true if the feature is supported
      *
@@ -292,6 +319,10 @@ final class XMLSchemaValidatorComponentManager extends ParserConfigurationSettin
     /**
      * Set the state of a feature.
      *
+     * <p>
+     *  设置要素的状态。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      * @param state The requested state of the feature (true or false).
      *
@@ -339,6 +370,10 @@ final class XMLSchemaValidatorComponentManager extends ParserConfigurationSettin
     /**
      * Returns the value of a property.
      *
+     * <p>
+     *  返回属性的值。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @return the value of the property
      *
@@ -366,6 +401,10 @@ final class XMLSchemaValidatorComponentManager extends ParserConfigurationSettin
     /**
      * Sets the state of a property.
      *
+     * <p>
+     *  设置属性的状态。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property.
      * @param value The requested state of the property.
      *
@@ -413,6 +452,9 @@ final class XMLSchemaValidatorComponentManager extends ParserConfigurationSettin
      * sets default values on the configuration for features and
      * properties which were previously absent from the configuration.
      *
+     * <p>
+     *  将所有组件的已识别要素和属性添加到默认已识别要素和属性的列表中,并在配置上设置先前在配置中不存在的要素和属性的默认值。
+     * 
      * @param component The component whose recognized features
      * and properties will be added to the configuration
      */

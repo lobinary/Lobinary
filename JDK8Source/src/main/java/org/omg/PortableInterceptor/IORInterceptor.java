@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -21,6 +22,11 @@ package org.omg.PortableInterceptor;
    * This is supported through the <code>IORInterceptor</code> and 
    * <code>IORInfo</code> interfaces. 
    *
+   * <p>
+   *  拦截器用于在IOR中的配置文件中建立标记的组件。
+   * <p>
+   *  在某些情况下,便携式ORB服务实现可能需要向对象引用添加描述服务器或对象的ORB服务相关功能的信息,以便使客户端中的ORB服务实现正常运行。
+   * 
    * @see IORInfo
    */
 public interface IORInterceptor extends IORInterceptorOperations, org.omg.PortableInterceptor.Interceptor, org.omg.CORBA.portable.IDLEntity 

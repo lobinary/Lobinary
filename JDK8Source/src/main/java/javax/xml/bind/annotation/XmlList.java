@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -103,6 +104,33 @@ import static java.lang.annotation.ElementType.PARAMETER;
  *         list just as {@link XmlAttribute} would. </li>
  *  </ul>
  *
+ * <p>
+ *  用于将属性映射到列表简单类型。
+ * 
+ *  <p> <b>使用</b> </p>
+ * <p>
+ *  <tt> @XmlList </tt>注释可以与以下程序元素一起使用：
+ * <ul>
+ *  <li> JavaBean属性</li> <li>字段</li>
+ * </ul>
+ * 
+ * <p>
+ *  当一个集合属性只用@XmlElement注释时,集合中的每个项目都将被一个元素包装。例如,
+ * 
+ * <pre>
+ *  @XmlRootElement class Foo {@XmlElement List&lt; String&gt; data; }}
+ * </pre>
+ * 
+ *  将生成XML像这样：
+ * 
+ * <pre>
+ * &lt;foo>
+ *  &lt; data&gt; abc </data>&lt; data> def </data>
+ * &lt;/foo>
+ * </pre>
+ * 
+ *  另一方面,@XmlList注释允许在单个元素中将多个值表示为空格分隔的令牌。例如,
+ * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @since JAXB2.0
  */

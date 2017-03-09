@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,8 @@ import com.sun.corba.se.impl.logging.OMGSystemException;
 import com.sun.corba.se.impl.orbutil.ORBUtility;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class CDRInputObject extends CDRInputStream
@@ -123,6 +126,10 @@ public class CDRInputObject extends CDRInputStream
      * NOTE: May be fragmented, so should not be called by the ReaderThread.
      * See CorbaResponseWaitingRoomImpl.waitForResponse.  It is done
      * there in the client thread.
+     * <p>
+     *  解组扩展的GIOP头注意：可能是分段的,因此不应该由ReaderThread调用。请参阅CorbaResponseWaitingRoomImpl.waitForResponse。
+     * 它在客户端线程中完成。
+     * 
      */
     public void unmarshalHeader()
     {
@@ -163,6 +170,10 @@ public class CDRInputObject extends CDRInputStream
      *
      * In the local case, there is no Connection, so use the
      * local code sets.
+     * <p>
+     *  覆盖默认CDR工厂行为以从连接获取协商的代码集。
+     * 
+     *  这些仅仅每个消息调用一次,第一次需要。
      */
     protected CodeSetConversion.BTCConverter createCharBTCConverter() {
         CodeSetComponentInfo.CodeSetContext codesets = getCodeSets();

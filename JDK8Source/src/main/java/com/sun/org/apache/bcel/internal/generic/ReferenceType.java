@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,33 @@ package com.sun.org.apache.bcel.internal.generic;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)2001 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得使用名称"Apache"和"Apache Software Foundation"和"Apache BCEL"来认可或推广从本软件衍生的产品。
+ * 如需书面许可,请联系apache@apache.org。
+ * 
+ * 未经Apache软件基金会事先书面许可,从本软件衍生的产品可能不会被称为"Apache","Apache BCEL",也不可能出现在他们的名字中。
+ * 
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款。有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 import com.sun.org.apache.bcel.internal.Constants;
@@ -65,6 +93,10 @@ import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 /**
  * Super class for object and array types.
  *
+ * <p>
+ *  对象和数组类型的超类。
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class ReferenceType extends Type {
@@ -73,6 +105,7 @@ public abstract class ReferenceType extends Type {
   }
 
   /** Class is non-abstract but not instantiable from the outside
+  /* <p>
    */
   ReferenceType() {
     super(Constants.T_OBJECT, "<null object>");
@@ -85,6 +118,10 @@ public abstract class ReferenceType extends Type {
    * However, because e.g. CHECKCAST doesn't throw a
    * ClassCastException when casting a null reference to any Object,
    * true is returned in this case.
+   * <p>
+   * 如果此类型可转换为JVM规范中定义的另一个类型t,则返回true。未定义此为Type.NULL的情况(请参阅JVM规范中的CHECKCAST定义)。
+   * 然而,当转换对任何对象的空引用时,CHECKCAST不抛出ClassCastException,在这种情况下返回true。
+   * 
    */
   public boolean isCastableTo(Type t) {
     if (this.equals(Type.NULL))
@@ -93,6 +130,9 @@ public abstract class ReferenceType extends Type {
     return isAssignmentCompatibleWith(t);
     /* Yes, it's true: It's the same definition.
      * See vmspec2 AASTORE / CHECKCAST definitions.
+     * <p>
+     *  请参见vmspec2 AASTORE / CHECKCAST定义。
+     * 
      */
   }
 
@@ -100,6 +140,9 @@ public abstract class ReferenceType extends Type {
    * Return true iff this is assignment compatible with another type t
    * as defined in the JVM specification; see the AASTORE definition
    * there.
+   * <p>
+   *  返回true iff这是与JVM规范中定义的另一个类型t兼容的赋值;看到AASTORE的定义。
+   * 
    */
   public boolean isAssignmentCompatibleWith(Type t) {
     if (!(t instanceof ReferenceType))
@@ -111,10 +154,14 @@ public abstract class ReferenceType extends Type {
       return true; // This is not explicitely stated, but clear. Isn't it?
 
     /* If this is a class type then
+    /* <p>
      */
     if ((this instanceof ObjectType) && (((ObjectType) this).referencesClass())) {
       /* If T is a class type, then this must be the same class as T,
          or this must be a subclass of T;
+      /* <p>
+      /*  或者这必须是T的子类;
+      /* 
       */
       if ((T instanceof ObjectType) && (((ObjectType) T).referencesClass())) {
         if (this.equals(T))
@@ -126,6 +173,7 @@ public abstract class ReferenceType extends Type {
       }
 
       /* If T is an interface type, this must implement interface T.
+      /* <p>
        */
       if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterface())) {
         if (Repository.implementationOf(((ObjectType) this).getClassName(),
@@ -135,9 +183,11 @@ public abstract class ReferenceType extends Type {
     }
 
     /* If this is an interface type, then:
+    /* <p>
      */
     if ((this instanceof ObjectType) && (((ObjectType) this).referencesInterface())) {
       /* If T is a class type, then T must be Object (2.4.7).
+      /* <p>
        */
       if ((T instanceof ObjectType) && (((ObjectType) T).referencesClass())) {
         if (T.equals(Type.OBJECT)) return true;
@@ -145,6 +195,9 @@ public abstract class ReferenceType extends Type {
 
       /* If T is an interface type, then T must be the same interface
        * as this or a superinterface of this (2.13.2).
+       * <p>
+       *  作为这个或这个的超级接口(2.13.2)。
+       * 
        */
       if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterface())) {
         if (this.equals(T)) return true;
@@ -156,9 +209,13 @@ public abstract class ReferenceType extends Type {
 
     /* If this is an array type, namely, the type SC[], that is, an
      * array of components of type SC, then:
+     * <p>
+     *  数组SC类型的组件,则：
+     * 
      */
     if (this instanceof ArrayType) {
       /* If T is a class type, then T must be Object (2.4.7).
+      /* <p>
        */
       if ((T instanceof ObjectType) && (((ObjectType) T).referencesClass())) {
         if (T.equals(Type.OBJECT)) return true;
@@ -166,9 +223,13 @@ public abstract class ReferenceType extends Type {
 
       /* If T is an array type TC[], that is, an array of components
        * of type TC, then one of the following must be true:
+       * <p>
+       *  的类型TC,则以下之一必须为真：
+       * 
        */
       if (T instanceof ArrayType) {
         /* TC and SC are the same primitive type (2.4.1).
+        /* <p>
          */
         Type sc = ((ArrayType) this).getElementType();
         Type tc = ((ArrayType) this).getElementType();
@@ -178,6 +239,9 @@ public abstract class ReferenceType extends Type {
 
         /* TC and SC are reference types (2.4.6), and type SC is
          * assignable to TC by these runtime rules.
+         * <p>
+         *  通过这些运行时规则可分配给TC。
+         * 
          */
         if (tc instanceof ReferenceType && sc instanceof ReferenceType &&
             ((ReferenceType) sc).isAssignmentCompatibleWith((ReferenceType) tc))
@@ -213,6 +277,12 @@ public abstract class ReferenceType extends Type {
    * If "this" or t is a ReferenceType referencing an interface, then Type.OBJECT is returned.
    * If not all of the two classes' superclasses cannot be found, "null" is returned.
    * See the JVM specification edition 2, "4.9.2 The Bytecode Verifier".
+   * <p>
+   * 此交换操作返回第一个公共超类(最窄的ReferenceType引用类,而不是接口)。如果其中一个类型是另一个的超类,则返回前者。如果"this"是Type.NULL,则返回t。
+   * 如果t是Type.NULL,则返回"this"。如果"this"等于t ['this.equals(t)'],则返回"this"。
+   * 如果"this"或t是一个ArrayType,则返回Type.OBJECT;除非它们的尺寸匹配。然后返回相同维数的ArrayType,其基本类型是"this"和t的基本类型的第一个公共超类。
+   * 如果"this"或t是引用接口的ReferenceType,则返回Type.OBJECT。如果不是所有的两个类的超类都找不到,则返回"null"。请参阅JVM规范版本2"4.9.2字节码验证程序"。
+   * 
    */
   public ReferenceType getFirstCommonSuperclass(ReferenceType t) {
     if (this.equals(Type.NULL)) return t;
@@ -224,6 +294,10 @@ public abstract class ReferenceType extends Type {
      * referenced by Type.NULL were derived from java.lang.Object.
      * However, the Java Language's "instanceof" operator proves us wrong:
      * "null" is not referring to an instance of java.lang.Object :)
+     * <p>
+     *  TODO：以上听起来有点随意。另一方面,没有被Type.NULL引用的对象,所以我们也可以说Type.NULL引用的所有对象都是从java.lang.Object派生的。
+     * 但是,Java语言的"instanceof"运算符证明我们错了："null"不是指java.lang.Object的一个实例:)。
+     * 
      */
 
     /* This code is from a bug report by Konstantin Shagin <konst@cs.technion.ac.il> */
@@ -295,6 +369,13 @@ public abstract class ReferenceType extends Type {
    * If not all of the two classes' superclasses cannot be found, "null" is returned.
    * See the JVM specification edition 2, "4.9.2 The Bytecode Verifier".
    *
+   * <p>
+   * 此交换操作返回第一个公共超类(最窄的ReferenceType引用类,而不是接口)。如果其中一个类型是另一个的超类,则返回前者。如果"this"是Type.NULL,则返回t。
+   * 如果t是Type.NULL,则返回"this"。如果"this"等于t ['this.equals(t)'],则返回"this"。
+   * 如果"this"或t是一个ArrayType,则返回Type.OBJECT。如果"this"或t是引用接口的ReferenceType,则返回Type.OBJECT。
+   * 如果不是所有的两个类的超类都找不到,则返回"null"。请参阅JVM规范版本2"4.9.2字节码验证程序"。
+   * 
+   * 
    * @deprecated use getFirstCommonSuperclass(ReferenceType t) which has
    *             slightly changed semantics.
    */
@@ -308,6 +389,7 @@ public abstract class ReferenceType extends Type {
      * referenced by Type.NULL were derived from java.lang.Object.
      * However, the Java Language's "instanceof" operator proves us wrong:
      * "null" is not referring to an instance of java.lang.Object :)
+     * <p>
      */
 
     if ((this instanceof ArrayType) || (t instanceof ArrayType))

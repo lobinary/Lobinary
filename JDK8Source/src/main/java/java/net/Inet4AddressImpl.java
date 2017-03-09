@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ import java.io.IOException;
 /*
  * Package private implementation of InetAddressImpl for IPv4.
  *
+ * <p>
+ *  用于IPv4的InetAddressImpl的软件包专用实现。
+ * 
+ * 
  * @since 1.4
  */
 class Inet4AddressImpl implements InetAddressImpl {
@@ -58,6 +63,8 @@ class Inet4AddressImpl implements InetAddressImpl {
       if (netif != null) {
           /*
            * Let's make sure we use an address of the proper family
+           * <p>
+           *  让我们确保我们使用正确家庭的地址
            */
           java.util.Enumeration<InetAddress> it = netif.getInetAddresses();
           InetAddress inetaddr = null;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dtd;
@@ -78,6 +88,23 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource;
  *
  * @xerces.internal
  *
+ * <p>
+ *  DTD验证器。验证器实现文档过滤器：从扫描器接收文档事件;验证内容和结构;扩充InfoSet(如果适用);以及向所述解析器通知从所述验证过程产生的信息。
+ *  <p>以前,这个组件还处理DTD事件和语法构造。为了便于开发有意义的DTD语法缓存/预处理框架,此功能已移至XMLDTDLoader类中。
+ * 因此,此类不再实现DTDFilter或DTDContentModelFilter接口。
+ * <p>
+ *  此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ * <li> http://xml.org/sax/features/namespaces </li> <li> http://xml.org/sax/features/validation </li> <li>
+ *  http://apache.org / xml / features / validation / dynamic </li> <li> http://apache.org/xml/propertie
+ * s/internal/symbol-table </li> <li> http://apache.org/xml/properties / internal / error-reporter </li>
+ *  <li> http://apache.org/xml/properties/internal/grammar-pool </li> <li> http://apache.org/xml/propert
+ * ies/internal / datatype-validator-factory </li>。
+ * </ul>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Eric Ye, IBM
  * @author Andy Clark, IBM
  * @author Jeffrey Rodriguez IBM
@@ -214,6 +241,9 @@ public class XMLDTDValidator
     /**
      * Dynamic validation. This state of this feature is only useful when
      * the validation feature is set to <code>true</code>.
+     * <p>
+     *  动态验证。此功能的此状态仅在验证功能设置为<code> true </code>时有用。
+     * 
      */
     protected boolean fDynamicValidation;
 
@@ -308,6 +338,13 @@ public class XMLDTDValidator
      * <strong>Note:</strong> The use of this data structure is for
      * validation "on the way out". If the validation model changes to
      * "on the way in", then this data structure is not needed.
+     * <p>
+     *  元素儿童。这个数据结构是一个不断增长的堆栈,它保存从根到当前元素深度的元素的子元素。这个结构从来不会比最深的元素"更深"。每次关闭元素后,都会重复使用空间。
+     * <p>
+     *  <strong>注意</strong>：与为每个元素深度创建新数组相比,这是更有效的内存使用。
+     * <p>
+     *  <strong>请注意</strong>：此数据结构的使用是验证"在出口"。如果验证模型更改为"在路上",则不需要此数据结构。
+     * 
      */
     private QName[] fElementChildren = new QName[32];
 
@@ -317,6 +354,10 @@ public class XMLDTDValidator
     /**
      * Element children offset stack. This stack refers to offsets
      * into the <code>fElementChildren</code> array.
+     * <p>
+     *  元素儿童偏移堆栈。这个堆栈指向<code> fElementChildren </code>数组的偏移量。
+     * 
+     * 
      * @see #fElementChildren
      */
     private int[] fElementChildrenOffsetStack = new int[32];
@@ -408,6 +449,10 @@ public class XMLDTDValidator
      * about any features and properties that affect the operation of the
      * component.
      *
+     * <p>
+     *  复位组件。组件可以向组件管理器查询影响组件操作的任何特征和属性。
+     * 
+     * 
      * @param componentManager The component manager.
      *
      * @throws SAXException Thrown by component on finitialization error.
@@ -477,6 +522,9 @@ public class XMLDTDValidator
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     * 返回此组件可识别的要素标识符列表。如果此组件未识别任何功能,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedFeatures() {
         return (String[])(RECOGNIZED_FEATURES.clone());
@@ -489,6 +537,12 @@ public class XMLDTDValidator
      * <strong>Note:</strong> Components should silently ignore features
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置要素的状态。当特性改变状态时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应默认忽略不影响组件操作的功能。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -505,6 +559,9 @@ public class XMLDTDValidator
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符列表。如果此组件未识别任何属性,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedProperties() {
         return (String[])(RECOGNIZED_PROPERTIES.clone());
@@ -517,6 +574,12 @@ public class XMLDTDValidator
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置属性的值。当属性更改值时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应静默忽略不影响组件操作的属性。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *
@@ -534,6 +597,10 @@ public class XMLDTDValidator
      * component does not want to report a default value for this
      * feature.
      *
+     * <p>
+     *  返回特征的默认状态,如果此组件不希望报告此特征的默认值,则返回null。
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @since Xerces 2.2.0
@@ -552,6 +619,10 @@ public class XMLDTDValidator
      * component does not want to report a default value for this
      * property.
      *
+     * <p>
+     *  返回属性的默认状态,如果此组件不希望报告此属性的默认值,则返回null。
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @since Xerces 2.2.0
@@ -597,6 +668,10 @@ public class XMLDTDValidator
     /**
      * The start of the document.
      *
+     * <p>
+     *  文档的开始。
+     * 
+     * 
      * @param locator The system identifier of the entity if the entity
      *                 is external, null otherwise.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -643,6 +718,10 @@ public class XMLDTDValidator
      * present, this method will be called immediately following the
      * startDocument call.
      *
+     * <p>
+     *  通知文档中存在XMLDecl行。如果存在,此方法将在startDocument调用后立即调用。
+     * 
+     * 
      * @param version    The XML version.
      * @param encoding   The IANA encoding name of the document, or null if
      *                   not specified.
@@ -667,6 +746,10 @@ public class XMLDTDValidator
     /**
      * Notifies of the presence of the DOCTYPE line in the document.
      *
+     * <p>
+     *  通知文档中DOCTYPE行的存在。
+     * 
+     * 
      * @param rootElement The name of the root element.
      * @param publicId    The public identifier if an external DTD or null
      *                    if the external DTD is specified using SYSTEM.
@@ -730,6 +813,10 @@ public class XMLDTDValidator
     /**
      * The start of an element.
      *
+     * <p>
+     *  元素的开始。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs   Additional information that may include infoset augmentations
@@ -751,6 +838,10 @@ public class XMLDTDValidator
     /**
      * An empty element.
      *
+     * <p>
+     *  空元素。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs   Additional information that may include infoset augmentations
@@ -775,6 +866,10 @@ public class XMLDTDValidator
     /**
      * Character content.
      *
+     * <p>
+     *  字符内容。
+     * 
+     * 
      * @param text The content.
      *
      * @param augs   Additional information that may include infoset augmentations
@@ -852,6 +947,10 @@ public class XMLDTDValidator
      * characters in the document are ignorable based on the element
      * content model.
      *
+     * <p>
+     * 可怕的空格。对于要调用的此方法,文档源必须具有某种方式确定仅包含空格字符的文本应该被视为可忽略。例如,验证器可以基于元素内容模型来确定文档中的空白字符的长度是否可忽略。
+     * 
+     * 
      * @param text The ignorable whitespace.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -869,6 +968,10 @@ public class XMLDTDValidator
     /**
      * The end of an element.
      *
+     * <p>
+     *  元素的结尾。
+     * 
+     * 
      * @param element The name of the element.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -882,6 +985,10 @@ public class XMLDTDValidator
 
     /**
      * The start of a CDATA section.
+     * <p>
+     *  CDATA节的开始。
+     * 
+     * 
      * @param augs   Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -901,6 +1008,10 @@ public class XMLDTDValidator
 
     /**
      * The end of a CDATA section.
+     * <p>
+     *  CDATA段的结尾。
+     * 
+     * 
      * @param augs   Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -917,6 +1028,10 @@ public class XMLDTDValidator
 
     /**
      * The end of the document.
+     * <p>
+     *  文档的结尾。
+     * 
+     * 
      * @param augs   Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -933,6 +1048,10 @@ public class XMLDTDValidator
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text The text in the comment.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -970,6 +1089,12 @@ public class XMLDTDValidator
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     *  一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augs   Additional information that may include infoset augmentations
@@ -1003,6 +1128,12 @@ public class XMLDTDValidator
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知一般实体的开始。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name     The name of the general entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -1043,6 +1174,12 @@ public class XMLDTDValidator
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知一般实体的结束。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name   The name of the entity.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -1063,6 +1200,12 @@ public class XMLDTDValidator
      * <strong>Note:</strong> This method is only called for external
      * parameter entities referenced in the DTD.
      *
+     * <p>
+     *  通知实体中存在TextDecl行。如果存在,此方法将在startParameterEntity调用后立即调用。
+     * <p>
+     *  <strong>注意</strong>：仅在DTD中引用的外部参数实体才调用此方法。
+     * 
+     * 
      * @param version  The XML version, or null if not specified.
      * @param encoding The IANA encoding name of the entity.
      * @param augs Additional information that may include infoset
@@ -1340,6 +1483,9 @@ public class XMLDTDValidator
 
     /**
      * Validate attributes in DTD fashion.
+     * <p>
+     * 以DTD方式验证属性。
+     * 
      */
     protected void validateDTDattribute(QName element, String attValue,
                                       XMLAttributeDecl attributeDecl)
@@ -1485,6 +1631,10 @@ public class XMLDTDValidator
           return false;
        }
        return getAttDefIsExternal(element, attribute);
+        /* <p>
+        /*  if(fStandaloneReader == -1){return false; } //我们正常化一个默认的att值...这个确定? if(element.rawname == -1){return false; }
+        /*  return getAttDefIsExternal(element,attribute);。
+        /* 
        */
         return state;
     }
@@ -1499,6 +1649,10 @@ public class XMLDTDValidator
      * Normalize the attribute value of a non CDATA attributes collapsing
      * sequences of space characters (x20)
      *
+     * <p>
+     *  规范化非CDATA属性的属性值折叠空格字符序列(x20)
+     * 
+     * 
      * @param attributes The list of attributes
      * @param index The index of the attribute to normalize
      */
@@ -1550,6 +1704,12 @@ public class XMLDTDValidator
                             attributes.setEntityOffset(index, j, offset);
                             attributes.setEntityLength(index, j, length);
                         }
+                        /* <p>
+                        /*  int entityCount = attributes.getEntityCount(index); for(int j = 0; j <entityCount; j ++){int offset = attributes.getEntityOffset(index,j); int length = attributes.getEntityLength(index,j); if(offset <= i-eaten + 1){if(offset + length> = i-eaten + 1){if(length> 0)length-- }
+                        /* } else {if(offset> 0)offset--; } attributes.setEntityOffset(index,j,offset); attributes.setEntityLeng
+                        /* th(index,j,length); }}。
+                        /* 
+                        /* 
                         /***/
                     }
                 }
@@ -1583,6 +1743,10 @@ public class XMLDTDValidator
                 attributes.setEntityOffset(index, j, offset);
                 attributes.setEntityLength(index, j, length);
             }
+            /* <p>
+            /*  int entityCount = attributes.getEntityCount(index); for(int j = 0; j <entityCount; j ++){int offset = attributes.getEntityOffset(index,j); int length = attributes.getEntityLength(index,j); if(offset <count-1){if(offset + length == count){length--; }} else {offset--; } attributes.setEntityOffset(index,j,offset); attributes.setEntityLength(index,j,length); }}。
+            /* 
+            /* 
             /***/
         }
         String newValue = fBuffer.toString();
@@ -1625,6 +1789,18 @@ public class XMLDTDValidator
      * zero, since some elements have the EMPTY content model and that must be
      * confirmed.
      *
+     * <p>
+     *  检查元素的内容是否有效。
+     * <p>
+     * 这是验证器主要关注的方法。当扫描器到达元素的结束标签时调用此方法。当时,元素的孩子必须在结构上验证,所以它调用这个方法。正在检查的元素的索引(在decl池中),以及子元素的元素名称索引的数组。
+     * 验证器必须确认此元素可以按此顺序具有这些子元素。
+     * <p>
+     *  这也可以被称为做内容模型的"假设"测试,只是为了看它们是否有效。
+     * <p>
+     *  请注意,元素索引是到元素声明池的索引,而子索引是名称索引,即到字符串池中。
+     * <p>
+     *  children数组中的值-1表示PCDATA节点。所有其他索引将为正,并表示子元素。计数可以为零,因为一些元素具有EMPTY内容模型并且必须被确认。
+     * 
      * @param elementIndex The index within the <code>ElementDeclPool</code> of this
      *                     element.
      * @param childCount The number of entries in the <code>children</code> array.
@@ -1685,6 +1861,9 @@ public class XMLDTDValidator
             reportRecoverableXMLError(XMLMessages.MSG_ELEMENT_NOT_DECLARED,
                                       XMLMessages.VC_ELEMENT_VALID,
                                       elementType);
+            /* <p>
+            /* 
+            /* 
             /****/
         }
         else if (contentType == XMLElementDecl.TYPE_SIMPLE) {
@@ -1702,6 +1881,11 @@ public class XMLDTDValidator
                                        0,
                                        null,
                                        XMLErrorReporter.ERRORTYPE_FATAL_ERROR);
+            /* <p>
+            /*  reportRecoverableXMLError(XMLMessages.MSG_ELEMENT_NOT_DECLARED,XMLMessages.VC_ELEMENT_VALID,elementT
+            /* ype);。
+            /* 
+            /* 
             /****/
         }
 
@@ -1840,6 +2024,10 @@ public class XMLDTDValidator
     //
 
     /** Handle element
+    /* <p>
+    /*  fErrorReporter.reportError(fErrorReporter.getLocator(),ImplementationMessages.XERCES_IMPLEMENTATION_
+    /* DOMAIN,ImplementationMessages.VAL_CST,0,null,XMLErrorReporter.ERRORTYPE_FATAL_ERROR);。
+    /* 
      * @return true if validator is removed from the pipeline
      */
     protected boolean handleStartElement(QName element, XMLAttributes attributes, Augmentations augs)

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -63,6 +64,26 @@ import java.awt.dnd.DropTargetDropEvent;
  * respective listener's method and all the necessary data should be retrieved
  * from the returned <code>Transferable</code> before that method returns.
  *
+ * <p>
+ *  <code> DropTargetListener </code>接口是由<code> DropTarget </code>类使用的回调接口,用于提供涉及主题<​​code> DropTarget </code>
+ * 的DnD操作的通知。
+ * 该接口的方法可以被实现为在整个拖放操作中向用户提供"拖下"视觉反馈。
+ * <p>
+ *  通过实现接口创建一个监听器对象,然后注册一个<code> DropTarget </code>。
+ * 当拖动操作改变时,拖动进入,移动或退出对于<code> DropTarget </code>的拖放站点的可操作部分,并且当发生拖放时,调用侦听器对象中的相关方法,并将<code> DropTargetE
+ * vent </code>传递给它。
+ *  通过实现接口创建一个监听器对象,然后注册一个<code> DropTarget </code>。
+ * <p>
+ *  <code> DropTarget </code>的放置站点的可操作部分是关联的<code> Component </code>的几何的一部分,它不被重叠的顶级窗口或另一个<代码>组件</code>在
+ * 具有相关联的活动<code> DropTarget </code>的Z顺序中更高。
+ * <p>
+ *  在拖动期间,可以通过在传递到侦听器方法的<code> DropTargetDragEvent </code>实例上调用<code> getTransferable()</code>来检索与当前拖动操作
+ * 相关联的数据。
+ * <p>
+ * 注意,<code> DropTargetDragEvent </code>实例上的<code> getTransferable()</code>应该只在相应的监听器的方法中调用,并且所有必要的数据都应该
+ * 从返回的<code> Transferable </code >之前的方法返回。
+ * 
+ * 
  * @since 1.2
  */
 
@@ -73,6 +94,10 @@ public interface DropTargetListener extends EventListener {
      * the operable part of the drop site for the <code>DropTarget</code>
      * registered with this listener.
      *
+     * <p>
+     *  在拖动操作正在进行时调用,当鼠标指针为注册到此侦听器的<code> DropTarget </code>输入放置站点的可操作部分时。
+     * 
+     * 
      * @param dtde the <code>DropTargetDragEvent</code>
      */
 
@@ -83,6 +108,10 @@ public interface DropTargetListener extends EventListener {
      * over the operable part of the drop site for the <code>DropTarget</code>
      * registered with this listener.
      *
+     * <p>
+     *  当拖动操作正在进行时调用,而鼠标指针仍然位于向此侦听器注册的<code> DropTarget </code>的放置站点的可操作部分。
+     * 
+     * 
      * @param dtde the <code>DropTargetDragEvent</code>
      */
 
@@ -92,6 +121,10 @@ public interface DropTargetListener extends EventListener {
      * Called if the user has modified
      * the current drop gesture.
      * <P>
+     * <p>
+     *  如果用户已修改当前放置手势,则调用。
+     * <P>
+     * 
      * @param dtde the <code>DropTargetDragEvent</code>
      */
 
@@ -102,6 +135,10 @@ public interface DropTargetListener extends EventListener {
      * exited the operable part of the drop site for the
      * <code>DropTarget</code> registered with this listener.
      *
+     * <p>
+     *  在拖动操作正在进行时调用,当鼠标指针已退出向此侦听器注册的<code> DropTarget </code>的放置站点的可操作部分时。
+     * 
+     * 
      * @param dte the <code>DropTargetEvent</code>
      */
 
@@ -145,6 +182,18 @@ public interface DropTargetListener extends EventListener {
      * <code>true</code>. Otherwise, the behavior of the call is
      * implementation-dependent.
      * <P>
+     * <p>
+     *  当拖动操作已终止,并且已在注册到此侦听器的<code> DropTarget </code>的放置站点的可操作部分上终止时调用。
+     * <p>
+     *  该方法负责进行与姿势相关联的数据的传送。 <code> DropTargetDropEvent </code>提供了一种获取代表要传输的数据对象的<code>可传递</code>对象的方法。
+     * 从此方法,<code> DropTargetListener < code>应通过<code> DropTargetDropEvent </code>参数的acceptDrop(int dropActi
+     * on)或rejectDrop()方法接受或拒绝该删除。
+     *  该方法负责进行与姿势相关联的数据的传送。 <code> DropTargetDropEvent </code>提供了一种获取代表要传输的数据对象的<code>可传递</code>对象的方法。
+     * <P>
+     * 在acceptDrop()之后但不是之前,可以调用DropTargetDropEvent </code>的getTransferable()方法,并且可以通过返回的<code> Transferable
+     *  </code> getTransferData方法。
+     * <P>
+     * 
      * @param dtde the <code>DropTargetDropEvent</code>
      */
 

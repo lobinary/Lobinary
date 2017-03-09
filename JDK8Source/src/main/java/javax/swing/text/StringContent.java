@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,12 +49,24 @@ import javax.swing.SwingUtilities;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  AbstractDocument.Content接口的实现,它是一个强力实现,对于相对较小的文档和/或调试非常有用。它将字符内容作为一个简单的字符数组来管理。这也是相当低效率。
+ * <p>
+ *  通常建议使用间隙缓冲区或片表实现。此缓冲区不会扩展到大型。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public final class StringContent implements AbstractDocument.Content, Serializable {
 
     /**
      * Creates a new StringContent object.  Initial size defaults to 10.
+     * <p>
+     *  创建一个新的StringContent对象。初始大小默认为10。
+     * 
      */
     public StringContent() {
         this(10);
@@ -63,6 +76,10 @@ public final class StringContent implements AbstractDocument.Content, Serializab
      * Creates a new StringContent object, with the initial
      * size specified.  If the length is &lt; 1, a size of 1 is used.
      *
+     * <p>
+     *  创建一个新的StringContent对象,指定初始大小。如果长度< 1,使用1的大小。
+     * 
+     * 
      * @param initialLength the initial size
      */
     public StringContent(int initialLength) {
@@ -77,6 +94,10 @@ public final class StringContent implements AbstractDocument.Content, Serializab
     /**
      * Returns the length of the content.
      *
+     * <p>
+     *  返回内容的长度。
+     * 
+     * 
      * @return the length &gt;= 1
      * @see AbstractDocument.Content#length
      */
@@ -87,6 +108,10 @@ public final class StringContent implements AbstractDocument.Content, Serializab
     /**
      * Inserts a string into the content.
      *
+     * <p>
+     *  在内容中插入字符串。
+     * 
+     * 
      * @param where the starting position &gt;= 0 &amp;&amp; &lt; length()
      * @param str the non-null string to insert
      * @return an UndoableEdit object for undoing
@@ -108,6 +133,10 @@ public final class StringContent implements AbstractDocument.Content, Serializab
     /**
      * Removes part of the content.  where + nitems must be &lt; length().
      *
+     * <p>
+     *  删除部分内容。其中+长度()。
+     * 
+     * 
      * @param where the starting position &gt;= 0
      * @param nitems the number of characters to remove &gt;= 0
      * @return an UndoableEdit object for undoing
@@ -131,6 +160,10 @@ public final class StringContent implements AbstractDocument.Content, Serializab
     /**
      * Retrieves a portion of the content.  where + len must be &lt;= length().
      *
+     * <p>
+     *  检索内容的一部分。其中+ len必须<= length()。
+     * 
+     * 
      * @param where the starting position &gt;= 0
      * @param len the length to retrieve &gt;= 0
      * @return a string representing the content; may be empty
@@ -147,6 +180,10 @@ public final class StringContent implements AbstractDocument.Content, Serializab
     /**
      * Retrieves a portion of the content.  where + len must be &lt;= length()
      *
+     * <p>
+     *  检索内容的一部分。其中+ len必须<= length()
+     * 
+     * 
      * @param where the starting position &gt;= 0
      * @param len the number of characters to retrieve &gt;= 0
      * @param chars the Segment object to return the characters in
@@ -166,6 +203,10 @@ public final class StringContent implements AbstractDocument.Content, Serializab
      * Creates a position within the content that will
      * track change as the content is mutated.
      *
+     * <p>
+     * 在内容中创建一个位置,以便在内容发生改变时跟踪更改。
+     * 
+     * 
      * @param offset the offset to create a position for &gt;= 0
      * @return the position
      * @exception BadLocationException if the specified position is invalid
@@ -183,6 +224,10 @@ public final class StringContent implements AbstractDocument.Content, Serializab
 
     /**
      * Replaces some of the characters in the array
+     * <p>
+     *  替换数组中的一些字符
+     * 
+     * 
      * @param offset  offset into the array to start the replace
      * @param length  number of characters to remove
      * @param replArray replacement array
@@ -265,6 +310,13 @@ public final class StringContent implements AbstractDocument.Content, Serializab
      * This is meant for internal usage, and is generally not of interest
      * to subclasses.
      *
+     * <p>
+     *  返回包含范围<code> offset </code>到<code> offset </code> + <code> length </code>中的位置的UndoPosRef实例的向量。
+     * 如果<code> v </code>不为空,则匹配的位置被放置在其中。返回具有所得到的位置的向量。
+     * <p>
+     *  这是为了内部使用,并且通常不是子类感兴趣。
+     * 
+     * 
      * @param v the Vector to use, with a new one created on null
      * @param offset the starting offset &gt;= 0
      * @param length the length &gt;= 0
@@ -295,6 +347,12 @@ public final class StringContent implements AbstractDocument.Content, Serializab
      * This is meant for internal usage, and is generally not of interest
      * to subclasses.
      *
+     * <p>
+     *  重置<code>位置</code>中所有UndoPosRef实例的位置。
+     * <p>
+     *  这是为了内部使用,并且通常不是子类感兴趣。
+     * 
+     * 
      * @param positions the positions of the instances
      */
     protected void updateUndoPositions(Vector positions) {
@@ -320,6 +378,9 @@ public final class StringContent implements AbstractDocument.Content, Serializab
      * collected if there are no more references to
      * it.... the update table holds only a reference
      * to this grungy thing.
+     * <p>
+     *  保持标记的数据...与真正的标记分开,使得如果没有更多的引用则可以收集真正的标记....更新表仅保持对该球衣事物的引用。
+     * 
      */
     final class PosRec {
 
@@ -336,6 +397,9 @@ public final class StringContent implements AbstractDocument.Content, Serializab
      * in 1.1 we don't have a 100% pure solution for
      * this... so this class trys to hack a solution
      * to causing the marks to be collected.
+     * <p>
+     *  这真的想成为一个弱的参考,但在1.1我们没有一个100％的纯解决方案为此...所以这个类trys来破解一个解决方案,导致标记被收集。
+     * 
      */
     final class StickyPosition implements Position {
 
@@ -364,6 +428,9 @@ public final class StringContent implements AbstractDocument.Content, Serializab
     /**
      * Used to hold a reference to a Position that is being reset as the
      * result of removing from the content.
+     * <p>
+     *  用于保存对从内容中删除的结果重置的位置的引用。
+     * 
      */
     final class UndoPosRef {
         UndoPosRef(PosRec rec) {
@@ -374,6 +441,9 @@ public final class StringContent implements AbstractDocument.Content, Serializab
         /**
          * Resets the location of the Position to the offset when the
          * receiver was instantiated.
+         * <p>
+         *  将接收器实例化时,将Position的位置重置为偏移。
+         * 
          */
         protected void resetLocation() {
             rec.offset = undoLocation;
@@ -387,6 +457,9 @@ public final class StringContent implements AbstractDocument.Content, Serializab
 
     /**
      * UnoableEdit created for inserts.
+     * <p>
+     *  为插入创建UnoableEdit。
+     * 
      */
     class InsertUndo extends AbstractUndoableEdit {
         protected InsertUndo(int offset, int length) {
@@ -442,6 +515,8 @@ public final class StringContent implements AbstractDocument.Content, Serializab
 
     /**
      * UndoableEdit created for removes.
+     * <p>
+     *  为删除创建了UndoableEdit。
      */
     class RemoveUndo extends AbstractUndoableEdit {
         protected RemoveUndo(int offset, String string) {

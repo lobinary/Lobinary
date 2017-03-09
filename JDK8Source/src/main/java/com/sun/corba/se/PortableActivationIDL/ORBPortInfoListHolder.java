@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -10,6 +11,9 @@ package com.sun.corba.se.PortableActivationIDL;
 
 
 /** A list of ORB and port information for a particular endpoint type.
+/* <p>
+/* com / sun / corba / se / PortableActivationIDL / ORBPortInfoListHolder.java。
+/* 
     */
 public final class ORBPortInfoListHolder implements org.omg.CORBA.portable.Streamable
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -37,6 +47,14 @@ import java.util.Arrays;
  * convenience methods. There is one exception: check the comments
  * for the <code>isValid</code> method for details.
  *
+ * <p>
+ *  此类定义基本的XML字符属性。此类中的数据可用于验证字符是否是有效的XML字符,或者该字符是空格,名称开始还是名称字符。
+ * <p>
+ *  提供了一系列方便的方法以减轻开发人员的负担。因为内联检查可以提高每个字符的性能,字符属性的表是公共的。
+ * 使用字符作为索引到<code> CHARS </code>数组中并应用适当的掩码标志(例如<code> MASK_VALID </code>),产生与调用方便方法相同的结果。
+ * 有一个例外：检查<code> isValid </code>方法的注释以了解详细信息。
+ * 
+ * 
  * @author Glenn Marcy, IBM
  * @author Andy Clark, IBM
  * @author Eric Ye, IBM
@@ -77,6 +95,11 @@ public class XMLChar {
      * All other valid XML characters can be considered content.
      * <p>
      * This is an optimization for the inner loop of character scanning.
+     * <p>
+     * 内容字符掩码。特殊字符是可以被认为是标记的开始的字符,例如'&lt;'和"&amp;"。各种换行字符也被认为是特殊的。所有其他有效的XML字符都可以视为内容。
+     * <p>
+     *  这是字符扫描的内循环的优化。
+     * 
      */
     public static final int MASK_CONTENT = 0x20;
 
@@ -724,6 +747,10 @@ public class XMLChar {
     /**
      * Returns true if the specified character is a supplemental character.
      *
+     * <p>
+     *  如果指定的字符是补充字符,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isSupplemental(int c) {
@@ -734,6 +761,10 @@ public class XMLChar {
      * Returns true the supplemental character corresponding to the given
      * surrogates.
      *
+     * <p>
+     *  返回true对应于给定代理的补充字符。
+     * 
+     * 
      * @param h The high surrogate.
      * @param l The low surrogate.
      */
@@ -744,6 +775,10 @@ public class XMLChar {
     /**
      * Returns the high surrogate of a supplemental character
      *
+     * <p>
+     *  返回补充字符的高代理
+     * 
+     * 
      * @param c The supplemental character to "split".
      */
     public static char highSurrogate(int c) {
@@ -753,6 +788,10 @@ public class XMLChar {
     /**
      * Returns the low surrogate of a supplemental character
      *
+     * <p>
+     *  返回补充字符的低代理
+     * 
+     * 
      * @param c The supplemental character to "split".
      */
     public static char lowSurrogate(int c) {
@@ -762,6 +801,10 @@ public class XMLChar {
     /**
      * Returns whether the given character is a high surrogate
      *
+     * <p>
+     *  返回给定字符是否为高代理
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isHighSurrogate(int c) {
@@ -771,6 +814,10 @@ public class XMLChar {
     /**
      * Returns whether the given character is a low surrogate
      *
+     * <p>
+     *  返回给定字符是否为低代理
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isLowSurrogate(int c) {
@@ -786,6 +833,12 @@ public class XMLChar {
      * <code>CHARS</code> array, then they are responsible for checking
      * the surrogate character range.
      *
+     * <p>
+     *  如果指定的字符有效,则返回true。此方法还检查从0x10000到0x10FFFF的替代字符范围。
+     * <p>
+     *  如果程序选择将掩码直接应用到<code> CHARS </code>数组,那么它们负责检查替代字符范围。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isValid(int c) {
@@ -796,6 +849,10 @@ public class XMLChar {
     /**
      * Returns true if the specified character is invalid.
      *
+     * <p>
+     *  如果指定的字符无效,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isInvalid(int c) {
@@ -805,6 +862,10 @@ public class XMLChar {
     /**
      * Returns true if the specified character can be considered content.
      *
+     * <p>
+     *  如果指定的字符可以被视为内容,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isContent(int c) {
@@ -816,6 +877,10 @@ public class XMLChar {
      * Returns true if the specified character can be considered markup.
      * Markup characters include '&lt;', '&amp;', and '%'.
      *
+     * <p>
+     *  如果指定的字符可以被认为是标记,则返回true。标记字符包括'&lt;','&amp;'和'％'。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isMarkup(int c) {
@@ -826,6 +891,10 @@ public class XMLChar {
      * Returns true if the specified character is a space character
      * as defined by production [3] in the XML 1.0 specification.
      *
+     * <p>
+     *  如果指定的字符是XML 1.0规范中production [3]定义的空格字符,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isSpace(int c) {
@@ -837,6 +906,10 @@ public class XMLChar {
      * character as defined by production [5] in the XML 1.0
      * specification.
      *
+     * <p>
+     *  如果指定的字符是XML 1.0规范中的production [5]定义的有效名称开始字符,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isNameStart(int c) {
@@ -848,6 +921,10 @@ public class XMLChar {
      * character as defined by production [4] in the XML 1.0
      * specification.
      *
+     * <p>
+     * 如果指定的字符是XML 1.0规范中的production [4]定义的有效名称字符,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isName(int c) {
@@ -859,6 +936,10 @@ public class XMLChar {
      * character as defined by production [4] in Namespaces in XML
      * recommendation.
      *
+     * <p>
+     *  如果指定的字符是一个有效的NCName开始字符,则返回true,如XML中的Namespaces中的production [4]定义。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isNCNameStart(int c) {
@@ -870,6 +951,10 @@ public class XMLChar {
      * character as defined by production [5] in Namespaces in XML
      * recommendation.
      *
+     * <p>
+     *  如果指定的字符是一个有效的NCName字符,则返回true,如XML中的Namespaces中的production [5]定义。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isNCName(int c) {
@@ -881,6 +966,10 @@ public class XMLChar {
      * character as defined by production [13] in the XML 1.0
      * specification.
      *
+     * <p>
+     *  如果指定的字符是XML 1.0规范中的production [13]定义的有效的Pubid字符,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isPubid(int c) {
@@ -889,11 +978,18 @@ public class XMLChar {
 
     /*
      * [5] Name ::= (Letter | '_' | ':') (NameChar)*
+     * <p>
+     *  [5] Name :: =(Letter |'_'|'：')(NameChar)*
+     * 
      */
     /**
      * Check to see if a string is a valid Name according to [5]
      * in the XML 1.0 Recommendation
      *
+     * <p>
+     *  根据XML 1.0建议书中的[5],检查字符串是否是有效的名称
+     * 
+     * 
      * @param name string to check
      * @return true if name is a valid Name
      */
@@ -918,11 +1014,18 @@ public class XMLChar {
     /*
      * from the namespace rec
      * [4] NCName ::= (Letter | '_') (NCNameChar)*
+     * <p>
+     *  从命名空间rec [4] NCName :: =(Letter |'_')(NCNameChar)*
+     * 
      */
     /**
      * Check to see if a string is a valid NCName according to [4]
      * from the XML Namespaces 1.0 Recommendation
      *
+     * <p>
+     *  根据[4]从XML命名空间1.0推荐,检查字符串是否是有效的NCName
+     * 
+     * 
      * @param ncName string to check
      * @return true if name is a valid NCName
      */
@@ -946,11 +1049,18 @@ public class XMLChar {
 
     /*
      * [7] Nmtoken ::= (NameChar)+
+     * <p>
+     *  [7] Nmtoken :: =(NameChar)+
+     * 
      */
     /**
      * Check to see if a string is a valid Nmtoken according to [7]
      * in the XML 1.0 Recommendation
      *
+     * <p>
+     *  根据XML 1.0建议书中的[7],检查字符串是否是有效的Nmtoken
+     * 
+     * 
      * @param nmtoken string to check
      * @return true if nmtoken is a valid Nmtoken
      */
@@ -980,6 +1090,10 @@ public class XMLChar {
      * for this encoding, only that the characters are valid for an
      * IANA encoding name.
      *
+     * <p>
+     *  如果编码名称是有效的IANA编码,则返回true。此方法不验证是否有可用于此编码的解码器,只有字符对于IANA编码名称有效。
+     * 
+     * 
      * @param ianaEncoding The IANA encoding name.
      */
     public static boolean isValidIANAEncoding(String ianaEncoding) {
@@ -1009,6 +1123,10 @@ public class XMLChar {
      * for this encoding, only that the characters are valid for an
      * Java encoding name.
      *
+     * <p>
+     *  如果编码名称是有效的Java编码,则返回true。此方法不验证是否有可用于此编码的解码器,只有字符对于Java编码名称有效。
+     * 
+     * 
      * @param javaEncoding The Java encoding name.
      */
     public static boolean isValidJavaEncoding(String javaEncoding) {
@@ -1035,6 +1153,9 @@ public class XMLChar {
      * Trims space characters as defined by production [3] in
      * the XML 1.0 specification from both ends of the given string.
      *
+     * <p>
+     *  在XML 1.0规范中,从给定字符串的两端修剪由production [3]定义的空格字符。
+     * 
      * @param value the string to be trimmed
      * @return the given string with the space characters trimmed
      * from both ends

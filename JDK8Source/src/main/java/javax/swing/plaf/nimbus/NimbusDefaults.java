@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,10 @@ import javax.swing.plaf.UIResource;
  * as well as for selecting
  * a SynthStyle based on a JComponent/Region pair.
  *
+ * <p>
+ *  此类包含与Nimbus相关的所有实现细节。它包含用于初始化UIDefaults表以及基于JComponent / Region对选择SynthStyle的所有代码。
+ * 
+ * 
  * @author Richard Bair
  */
 final class NimbusDefaults {
@@ -80,6 +85,11 @@ final class NimbusDefaults {
      * There can be more than one LazyStyle for a single Region if there is more
      * than one prefix defined for a given region. For example, both Button and
      * "MyButton" might be prefixes assigned to the Region.Button region.
+     * <p>
+     *  SynthStyles的地图。该地图由Region键入。每个区域映射到LazyStyles列表。每个LazyStyle都有一个对它注册的前缀的引用。然后可以检查此引用以查看它是否是适当的惰性风格。
+     * <p/>
+     *  如果为给定区域定义了多个前缀,则对于单个区域可以有多个LazyStyle。例如,Button和"MyButton"都可能是分配给Region.Button区域的前缀。
+     * 
      */
     private Map<Region, List<LazyStyle>> m;
     /**
@@ -87,6 +97,9 @@ final class NimbusDefaults {
      * This mapping is maintained so that the Region can be found based on
      * prefix in a very fast manner. This is used in the "matches" method of
      * LazyStyle.
+     * <p>
+     *  已注册的地区的地图。维持该映射,使得可以以非常快的方式基于前缀来找到区域。这在LazyStyle的"matches"方法中使用。
+     * 
      */
     private Map<String, Region> registeredRegions =
             new HashMap<String, Region>();
@@ -97,11 +110,17 @@ final class NimbusDefaults {
     /**
      * Our fallback style to avoid NPEs if the proper style cannot be found in
      * this class. Not sure if relying on DefaultSynthStyle is the best choice.
+     * <p>
+     *  我们的后备风格,以避免NPE,如果在这个类中找不到合适的风格。不确定是否依赖于DefaultSynthStyle是最好的选择。
+     * 
      */
     private DefaultSynthStyle defaultStyle;
     /**
      * The default font that will be used. I store this value so that it can be
      * set in the UIDefaults when requested.
+     * <p>
+     *  将使用的默认字体。我存储此值,以便可以在请求时在UIDefaults中设置。
+     * 
      */
     private FontUIResource defaultFont;
 
@@ -127,6 +146,9 @@ final class NimbusDefaults {
     /**
      * Create a new NimbusDefaults. This constructor is only called from
      * within NimbusLookAndFeel.
+     * <p>
+     *  创建一个新的NimbusDefaults。这个构造函数只从NimbusLookAndFeel中调用。
+     * 
      */
     NimbusDefaults() {
         m = new HashMap<Region, List<LazyStyle>>();
@@ -236,6 +258,10 @@ final class NimbusDefaults {
     /**
      * Called from NimbusLookAndFeel to initialize the UIDefaults.
      *
+     * <p>
+     *  从NimbusLookAndFeel调用以初始化UIDefaults。
+     * 
+     * 
      * @param d UIDefaults table to initialize. This will never be null.
      *          If listeners are attached to <code>d</code>, then you will
      *          only receive notification of LookAndFeel level defaults, not
@@ -1082,6 +1108,12 @@ final class NimbusDefaults {
      * it will not be registered twice. The second registration attempt will
      * fail silently.</p>
      *
+     * <p>
+     * <p>注册给定的区域和前缀。前缀(如果包含带引号的部分)指的是某些命名的组件。如果没有引用段,则前缀是指通用组件类型。</p>
+     * 
+     *  <p>如果给定区域/前缀组合已经注册,则它不会被注册两次。第二次注册尝试将以默默方式失败。</p>
+     * 
+     * 
      * @param region The Synth Region that is being registered. Such as Button,
      *        or ScrollBarThumb.
      * @param prefix The UIDefault prefix. For example, could be ComboBox, or if
@@ -1128,6 +1160,13 @@ final class NimbusDefaults {
      * for the best match, based on prefix. If a match was made, then return
      * that SynthStyle. Otherwise, return the defaultStyle.</p>
      *
+     * <p>
+     *  <p>找到与给定区域和组件关联的样式。这在SynthStyleFactory实现中从NimbusLookAndFeel调用。</p>
+     * 
+     *  <p>查找的方式如下：<br/>查看样式<code> m </code>的地图。如果地图根本没有样式,那么只需返回defaultStyle。
+     * 如果地图包含样式,则迭代Region <code> r </code>的所有样式,寻找基于前缀的最佳匹配。如果匹配,则返回SynthStyle。否则,返回defaultStyle。</p>。
+     * 
+     * 
      * @param comp The component associated with this region. For example, if
      *        the Region is Region.Button then the component will be a JButton.
      *        If the Region is a subregion, such as ScrollBarThumb, then the
@@ -1181,6 +1220,9 @@ final class NimbusDefaults {
     /*
         Various public helper classes.
         These may be used to register 3rd party values into UIDefaults
+    /* <p>
+    /*  各种公共助手类。这些可用于将第三方值注册到UIDefault中
+    /* 
     */
 
     /**
@@ -1194,6 +1236,12 @@ final class NimbusDefaults {
      * UI defaults table from which to derive this font, along with a size
      * offset (if any), and whether it is to be bold, italic, or left in its
      * default form.</p>
+     * <p>
+     *  <p>根据父字体和一组偏移量和属性导出其字体值。这个类是一个ActiveValue,意味着它将在每次从UIDefaults请求时重新计算它的值。
+     * 因此,建议读取一次此值并将其缓存在UI委托类中,直到要求重新初始化。</p>。
+     * 
+     * <p>要使用此类,请使用UI默认值表中的字体键来创建实例,从中派生此字体以及大小偏移量(如果有),以及是否为粗体,斜体或保留其默认形式。</p>
+     * 
      */
     static final class DerivedFont implements UIDefaults.ActiveValue {
         private float sizeOffset;
@@ -1204,6 +1252,10 @@ final class NimbusDefaults {
         /**
          * Create a new DerivedFont.
          *
+         * <p>
+         *  创建新的DerivedFont。
+         * 
+         * 
          * @param key The UIDefault key associated with this derived font's
          *            parent or source. If this key leads to a null value, or a
          *            value that is not a font, then null will be returned as
@@ -1238,6 +1290,9 @@ final class NimbusDefaults {
 
         /**
          * @inheritDoc
+         * <p>
+         *  @inheritDoc
+         * 
          */
         @Override
         public Object createValue(UIDefaults defaults) {
@@ -1277,6 +1332,11 @@ final class NimbusDefaults {
      * LazyPainter is a LazyValue class. It will create the
      * AbstractRegionPainter lazily, when asked. It uses reflection to load the
      * proper class and invoke its constructor.
+     * <p>
+     *  这个类是私有的,因为它依赖于自动生成的AbstractRegionPainter子类的构造函数。因此,它通常不是有用的,并且是私有的。
+     * <p/>
+     *  LazyPainter是一个LazyValue类。它会创建AbstractRegionPainter懒惰,当问。它使用反射加载适当的类并调用其构造函数。
+     * 
      */
     private static final class LazyPainter implements UIDefaults.LazyValue {
         private int which;
@@ -1357,15 +1417,29 @@ final class NimbusDefaults {
      *       constituent parts to facilitate quicker matching</li>
      *   <li>Creating and vending a NimbusStyle lazily.</li>
      * </ul>
+     * <p>
+     *  一个类,它创建与它相关联的NimbusStyle懒惰,但也管理很多关于风格的信息。
+     * 它不是LazyValue类型的类,而是更多的Entry或Item类型的类,因为它表示地图m中的LazyStyles列表中的条目。
+     * 
+     *  这个班的主要职责包括：
+     * <ul>
+     *  <li>确定给定的组件/区域对是否与此样式匹配</li> <li>将构造函数中指定的前缀拆分为其组成部分以便更快地匹配</li> <li>延迟创建和自动销售NimbusStyle。 </li>
+     * </ul>
      */
     private final class LazyStyle {
         /**
          * The prefix this LazyStyle was registered with. Something like
          * Button or ComboBox:"ComboBox.arrowButton"
+         * <p>
+         *  这个LazyStyle注册的前缀。像Button或ComboBox："ComboBox.arrowButton"
+         * 
          */
         private String prefix;
         /**
          * Whether or not this LazyStyle represents an unnamed component
+         * <p>
+         *  此LazyStyle是否表示未命名的组件
+         * 
          */
         private boolean simple = true;
         /**
@@ -1375,16 +1449,28 @@ final class NimbusDefaults {
          *
          * will be broken into two parts,
          *     ComboBox and "ComboBox.arrowButton"
+         * <p>
+         *  前缀的各个部分或部分。例如,前缀：ComboBox："ComboBox.arrowButton"
+         * 
+         * 将被分成两部分,ComboBox和"ComboBox.arrowButton"
+         * 
          */
         private Part[] parts;
         /**
          * Cached shared style.
+         * <p>
+         *  缓存共享风格。
+         * 
          */
         private NimbusStyle style;
 
         /**
          * Create a new LazyStyle.
          *
+         * <p>
+         *  创建一个新的LazyStyle。
+         * 
+         * 
          * @param prefix The prefix associated with this style. Cannot be null.
          */
         private LazyStyle(String prefix) {
@@ -1426,6 +1512,10 @@ final class NimbusDefaults {
 
         /**
          * Gets the style. Creates it if necessary.
+         * <p>
+         *  获取风格。如有必要,创建它。
+         * 
+         * 
          * @return the style
          */
         SynthStyle getStyle(JComponent c, Region r) {
@@ -1462,6 +1552,10 @@ final class NimbusDefaults {
          * c.getName() must equals "b"
          * c.getParent() can be anything
          * c.getParent().getParent().getName() must equal "a".
+         * <p>
+         *  这个LazyStyle是给定组件的匹配,如果且仅当前缀的每个部分的组件层次完全匹配。
+         * 也就是说,如果给定"a"：something："b",则：c.getName()必须等于"b"c.getParent()可以是任何c.getParent()。getParent "一个"。
+         * 
          */
         boolean matches(JComponent c) {
             return matches(c, parts.length - 1);
@@ -1508,6 +1602,10 @@ final class NimbusDefaults {
          * Given some dot separated prefix, split on the colons that are
          * not within quotes, and not within brackets.
          *
+         * <p>
+         *  给定一些点分隔的前缀,拆分在不在引号内的冒号上,而不在括号内。
+         * 
+         * 
          * @param prefix
          * @return
          */
@@ -1598,6 +1696,10 @@ final class NimbusDefaults {
      * Get a derived color, derived colors are shared instances and will be
      * updated when its parent UIDefault color changes.
      *
+     * <p>
+     *  获取派生颜色,派生颜色是共享实例,并且将在其父UIDefault颜色更改时更新。
+     * 
+     * 
      * @param uiDefaultParentName The parent UIDefault key
      * @param hOffset The hue offset
      * @param sOffset The saturation offset
@@ -1716,6 +1818,8 @@ final class NimbusDefaults {
 
     /**
      * Listener to update derived colors on UIManager Defaults changes
+     * <p>
+     *  监听器更新UIManager上的派生颜色默认值更改
      */
     private class DefaultsListener implements PropertyChangeListener {
         @Override

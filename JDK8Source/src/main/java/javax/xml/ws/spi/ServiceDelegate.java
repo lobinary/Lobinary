@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,13 @@ import javax.xml.ws.WebServiceException;
  * the {@link javax.xml.ws.spi.Provider#createServiceDelegate} method. A <code>Service</code>
  * object delegates all of its instance methods to its delegate.
  *
+ * <p>
+ *  服务代理在<code> Service </code>对象内部使用,以允许JAX-WS实现的可插入性。
+ * <p>
+ *  每个<code> Service </code>对象都有自己的委托,使用{@link javax.xml.ws.spi.Provider#createServiceDelegate}方法创建。
+ *  <code> Service </code>对象将其所有实例方法委托给它的委托。
+ * 
+ * 
  * @see javax.xml.ws.Service
  * @see javax.xml.ws.spi.Provider
  *
@@ -61,6 +69,11 @@ public abstract class ServiceDelegate {
      * specifies the service endpoint interface that is supported by
      * the created dynamic proxy instance.
      *
+     * <p>
+     *  <code> getPort </code>方法返回一个代理。服务客户端使用此代理调用目标服务端点上的操作。
+     *  <code> serviceEndpointInterface </code>指定所创建的动态代理实例支持的服务端点接口。
+     * 
+     * 
      * @param portName  Qualified name of the service endpoint in
      *                  the WSDL service description
      * @param serviceEndpointInterface Service endpoint interface
@@ -92,6 +105,11 @@ public abstract class ServiceDelegate {
      * specifies the service endpoint interface that is supported by
      * the created dynamic proxy instance.
      *
+     * <p>
+     *  <code> getPort </code>方法返回一个代理。服务客户端使用此代理调用目标服务端点上的操作。
+     *  <code> serviceEndpointInterface </code>指定所创建的动态代理实例支持的服务端点接口。
+     * 
+     * 
      * @param portName  Qualified name of the service endpoint in
      *                  the WSDL service description
      * @param serviceEndpointInterface Service endpoint interface
@@ -164,6 +182,28 @@ public abstract class ServiceDelegate {
      * <code>serviceEndpointInterface</code> and the WSDL
      * associated with this <code>Service</code> instance.
      *
+     * <p>
+     * <code> getPort </code>方法返回一个代理。参数<code> endpointReference </code>指定将由返回的代理调用的端点。
+     * 如果在<code> endpointReference </code>中有任何引用参数,那么这些引用参数必须作为SOAP头部显示,表明它们是发送到端点的所有消息的引用参数。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 参数<code> serviceEndpointInterface </code>指定返回的代理支持的服务端点接口。
+     * 在该方法的实现中,JAX-WS运行时系统负责选择协议绑定(和端口)并相应地从与此<code> Service </code>实例相关联的WSDL或从元数据从<code> endpointReferenc
+     * e </code>。
+     * 参数<code> serviceEndpointInterface </code>指定返回的代理支持的服务端点接口。
+     * 如果这个<code> Service </code>实例有一个WSDL并且<code> endpointReference </code>元数据也有一个WSDL,那么必须使用这个实例的WSDL。
+     * 如果这个<code> Service </code>实例没有WSDL并且<code> endpointReference </code>有一个WSDL,那么可以使用<code> endpointRefe
+     * rence </code>中的WSDL。
+     * 如果这个<code> Service </code>实例有一个WSDL并且<code> endpointReference </code>元数据也有一个WSDL,那么必须使用这个实例的WSDL。
+     * 返回的代理不应该由客户端重新配置。如果此<code> Service </code>实例具有与WSDL中包含的信息匹配的已知代理端口,则返回该代理,否则抛出WebServiceException。
+     * <p>
+     * 调用此方法具有与以下相同的行为
+     * <pre>
+     *  <code> port = service.getPort(portName,serviceEndpointInterface); </code>
+     * </pre>
+     *  其中从<code> endpointReference </code>或从<code> serviceEndpointInterface </code>的元数据和与此<code> Service </code>
+     * 关联的WSDL检索<code> portName </code>实例。
+     * 
+     * 
      * @param endpointReference  The <code>EndpointReference</code>
      * for the target service endpoint that will be invoked by the
      * returned proxy.
@@ -209,6 +249,11 @@ public abstract class ServiceDelegate {
      * binding (and a port) and configuring the proxy accordingly.
      * The returned proxy should not be reconfigured by the client.
      *
+     * <p>
+     *  <code> getPort </code>方法返回一个代理。参数<code> serviceEndpointInterface </code>指定返回的代理支持的服务端点接口。
+     * 在该方法的实现中,JAX-WS运行时系统负责选择协议绑定(和端口)并相应地配置代理。返回的代理不应该由客户端重新配置。
+     * 
+     * 
      * @param serviceEndpointInterface Service endpoint interface
      * @return Object instance that supports the
      *                  specified service endpoint interface
@@ -235,6 +280,11 @@ public abstract class ServiceDelegate {
      * binding (and a port) and configuring the proxy accordingly.
      * The returned proxy should not be reconfigured by the client.
      *
+     * <p>
+     *  <code> getPort </code>方法返回一个代理。参数<code> serviceEndpointInterface </code>指定返回的代理支持的服务端点接口。
+     * 在该方法的实现中,JAX-WS运行时系统负责选择协议绑定(和端口)并相应地配置代理。返回的代理不应该由客户端重新配置。
+     * 
+     * 
      * @param serviceEndpointInterface Service endpoint interface
      * @param features  An array of <code>WebServiceFeatures</code> to configure on the
      *                proxy.  Supported features not in the <code>features
@@ -267,6 +317,10 @@ public abstract class ServiceDelegate {
      * no WSDL port type information and can only be used for creating
      * <code>Dispatch</code>instances.
      *
+     * <p>
+     *  为服务创建新端口。以这种方式创建的端口不包含WSDL端口类型信息,并且只能用于创建<code> Dispatch </code>实例。
+     * 
+     * 
      * @param portName  Qualified name for the target service endpoint
      * @param bindingId A URI identifier of a binding.
      * @param endpointAddress Address of the target service endpoint as a URI
@@ -286,6 +340,10 @@ public abstract class ServiceDelegate {
      * Creates a <code>Dispatch</code> instance for use with objects of
      * the user's choosing.
      *
+     * <p>
+     *  创建用于与用户选择的对象一起使用的<code> Dispatch </code>实例。
+     * 
+     * 
      * @param portName  Qualified name for the target service endpoint
      * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
@@ -310,6 +368,10 @@ public abstract class ServiceDelegate {
      * Creates a <code>Dispatch</code> instance for use with objects of
      * the user's choosing.
      *
+     * <p>
+     * 创建用于与用户选择的对象一起使用的<code> Dispatch </code>实例。
+     * 
+     * 
      * @param portName  Qualified name for the target service endpoint
      * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
@@ -369,6 +431,27 @@ public abstract class ServiceDelegate {
      * where the <code>portName</code> is retrieved from the
      * WSDL or <code>EndpointReference</code> metadata.
      *
+     * <p>
+     *  创建用于与用户选择的对象一起使用的<code> Dispatch </code>实例。
+     * 如果在<code> endpointReference </code>中有任何引用参数,那么这些引用参数必须作为SOAP头部显示,表明它们是发送到端点的所有消息的引用参数。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 在该方法的实现中,JAX-WS运行时系统负责选择协议绑定(和端口)并相应地从与此<code> Service </code>实例相关联的WSDL或从元数据从<code> endpointReferenc
+     * e </code>。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 如果这个<code> Service </code>实例有一个WSDL并且<code> endpointReference </code>在它的元数据中也有一个WSDL,那么必须使用这个实例的WSDL。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 如果这个<code> Service </code>实例没有WSDL并且<code> endpointReference </code>有一个WSDL,那么可以使用<code> endpointRefe
+     * rence </code>中的WSDL。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 实现必须能够从<code> endpointReference </code>元数据中检索<code> portName </code>。
+     * <p>
+     *  此方法的行为与调用相同
+     * <pre>
+     *  <code> dispatch = service.createDispatch(portName,type,mode,features); </code>
+     * </pre>
+     *  其中从WSDL或<code> EndpointReference </code>元数据检索<code> portName </code>。
+     * 
+     * 
      * @param endpointReference  The <code>EndpointReference</code>
      * for the target service endpoint that will be invoked by the
      * returned <code>Dispatch</code> object.
@@ -418,6 +501,10 @@ public abstract class ServiceDelegate {
      * Creates a <code>Dispatch</code> instance for use with JAXB
      * generated objects.
      *
+     * <p>
+     * 创建用于JAXB生成对象的<code> Dispatch </code>实例。
+     * 
+     * 
      * @param portName  Qualified name for the target service endpoint
      * @param context The JAXB context used to marshall and unmarshall
      * messages or message payloads.
@@ -441,6 +528,10 @@ public abstract class ServiceDelegate {
      * Creates a <code>Dispatch</code> instance for use with JAXB
      * generated objects.
      *
+     * <p>
+     *  创建用于JAXB生成对象的<code> Dispatch </code>实例。
+     * 
+     * 
      * @param portName  Qualified name for the target service endpoint
      * @param context The JAXB context used to marshall and unmarshall
      * messages or message payloads.
@@ -498,6 +589,27 @@ public abstract class ServiceDelegate {
      * where the <code>portName</code> is retrieved from the
      * WSDL or <code>endpointReference</code> metadata.
      *
+     * <p>
+     *  创建用于JAXB生成对象的<code> Dispatch </code>实例。
+     * 如果在<code> endpointReference </code>中有任何引用参数,那么这些引用参数必须作为SOAP头部显示,表明它们是发送到端点的所有消息的引用参数。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 在该方法的实现中,JAX-WS运行时系统负责选择协议绑定(和端口)并相应地从与此<code> Service </code>实例相关联的WSDL或从元数据从<code> endpointReferenc
+     * e </code>。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 如果这个<code> Service </code>实例有一个WSDL并且<code> endpointReference </code>在它的元数据中也有一个WSDL,那么必须使用这个实例的WSDL。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 如果这个<code> Service </code>实例没有WSDL并且<code> endpointReference </code>有一个WSDL,那么可以使用<code> endpointRefe
+     * rence </code>中的WSDL。
+     *  <code> endpointReference的</code>地址必须用于端点上的调用。
+     * 实现必须能够从<code> endpointReference </code>元数据中检索<code> portName </code>。
+     * <p>
+     *  此方法的行为与调用相同
+     * <pre>
+     *  <code> dispatch = service.createDispatch(portName,context,mode,features); </code>
+     * </pre>
+     * 其中从WSDL或<code> endpointReference </code>元数据检索<code> portName </code>。
+     * 
+     * 
      * @param endpointReference  The <code>EndpointReference</code>
      * for the target service endpoint that will be invoked by the
      * returned <code>Dispatch</code> object.
@@ -541,6 +653,10 @@ public abstract class ServiceDelegate {
 
     /**
      * Gets the name of this service.
+     * <p>
+     *  获取此服务的名称。
+     * 
+     * 
      * @return Qualified name of this service
      **/
     public abstract QName getServiceName();
@@ -550,6 +666,10 @@ public abstract class ServiceDelegate {
      * <code>QName</code>s of service endpoints grouped by this
      * service
      *
+     * <p>
+     *  对于按此服务分组的服务端点的<code> QName </code>列表,返回<code>迭代器</code>
+     * 
+     * 
      * @return Returns <code>java.util.Iterator</code> with elements
      *         of type <code>javax.xml.namespace.QName</code>
      * @throws WebServiceException If this Service class does not
@@ -560,6 +680,10 @@ public abstract class ServiceDelegate {
     /**
      * Gets the location of the WSDL document for this Service.
      *
+     * <p>
+     *  获取此服务的WSDL文档的位置。
+     * 
+     * 
      * @return URL for the location of the WSDL document for
      *         this service
      **/
@@ -568,6 +692,10 @@ public abstract class ServiceDelegate {
     /**
      * Returns the configured handler resolver.
      *
+     * <p>
+     *  返回配置的处理程序解析器。
+     * 
+     * 
      * @return HandlerResolver The <code>HandlerResolver</code> being
      *         used by this <code>Service</code> instance, or <code>null</code>
      *         if there isn't one.
@@ -582,6 +710,12 @@ public abstract class ServiceDelegate {
      * proxy or dispatch instance that is created, and the handler chain
      * returned by the resolver will be set on the instance.
      *
+     * <p>
+     *  为<code> Service </code>实例设置<code> HandlerResolver </code>。
+     * <p>
+     *  处理程序解析器(如果存在)将为创建的每个代理或分派实例调用一次,并且解析器返回的处理程序链将在实例上设置。
+     * 
+     * 
      * @param handlerResolver The <code>HandlerResolver</code> to use
      *        for all subsequently created proxy/dispatch objects.
      *
@@ -595,6 +729,12 @@ public abstract class ServiceDelegate {
      * The executor is used for all asynchronous invocations that
      * require callbacks.
      *
+     * <p>
+     *  返回此<> Service </code>实例的执行程序。
+     * 
+     *  执行器用于所有需要回调的异步调用。
+     * 
+     * 
      * @return The <code>java.util.concurrent.Executor</code> to be
      *         used to invoke a callback.
      *
@@ -608,6 +748,10 @@ public abstract class ServiceDelegate {
      * The executor is used for all asynchronous invocations that
      * require callbacks.
      *
+     * <p>
+     *  设置此<code> Service </code>实例的执行程序。
+     * 
+     * 
      * @param executor The <code>java.util.concurrent.Executor</code>
      *        to be used to invoke a callback.
      *

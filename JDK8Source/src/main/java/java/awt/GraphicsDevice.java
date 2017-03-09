@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -72,6 +73,24 @@ import sun.awt.SunToolkit;
  * <a href="https://docs.oracle.com/javase/tutorial/extra/fullscreen/index.html">
  * Full-Screen Exclusive Mode API Tutorial</a>.
  *
+ * <p>
+ *  <code> GraphicsDevice </code>类描述了可能在特定图形环境中可用的图形设备。这些包括屏幕和打印机设备。
+ * 请注意,{@link GraphicsEnvironment}的实例中可能有许多屏幕和许多打印机。每个图形设备具有一个或多个与其相关联的{@link GraphicsConfiguration}对象。
+ * 这些对象指定可以使用<code> GraphicsDevice </code>的不同配置。
+ * <p>
+ *  在多屏幕环境中,<code> GraphicsConfiguration </code>对象可用于在多个屏幕上渲染组件。
+ * 以下代码示例演示如何在<code> GraphicsEnvironment </code>中的每个屏幕设备上为每个<code> GraphicsConfiguration </code>创建<code>
+ *  JFrame </code>对象：<pre> {@ code GraphicsEnvironment ge = GraphicsEnvironment。
+ *  在多屏幕环境中,<code> GraphicsConfiguration </code>对象可用于在多个屏幕上渲染组件。
+ *  getLocalGraphicsEnvironment(); GraphicsDevice [] gs = ge.getScreenDevices(); for(int j = 0; j <gs.length; j ++){GraphicsDevice gd = gs [j]; GraphicsConfiguration [] gc = gd.getConfigurations(); for(int i = 0; i <gc.length; i ++){JFrame f = new JFrame(gs [j] .getDefaultConfiguration()); Canvas c = new Canvas(gc [i]); Rectangle gcBounds = gc [i] .getBounds(); int xoffs = gcBounds.x; int yoffs = gcBounds.y; f.getContentPane()。
+ *  在多屏幕环境中,<code> GraphicsConfiguration </code>对象可用于在多个屏幕上渲染组件。
+ * add(c); f.setLocation((i * 50)+ xoffs,(i * 60)+ yoffs); f.show(); }}} </pre>。
+ * <p>
+ * 有关全屏独占模式API的更多信息,请参阅
+ * <a href="https://docs.oracle.com/javase/tutorial/extra/fullscreen/index.html">
+ *  全屏独占模式API教程</a>。
+ * 
+ * 
  * @see GraphicsEnvironment
  * @see GraphicsConfiguration
  */
@@ -89,6 +108,10 @@ public abstract class GraphicsDevice {
     /**
      * This is an abstract class that cannot be instantiated directly.
      * Instances must be obtained from a suitable factory or query method.
+     * <p>
+     *  这是一个不能直接实例化的抽象类。实例必须从适当的工厂或查询方法获取。
+     * 
+     * 
      * @see GraphicsEnvironment#getScreenDevices
      * @see GraphicsEnvironment#getDefaultScreenDevice
      * @see GraphicsConfiguration#getDevice
@@ -98,23 +121,36 @@ public abstract class GraphicsDevice {
 
     /**
      * Device is a raster screen.
+     * <p>
+     *  设备是一个光栅屏幕。
+     * 
      */
     public final static int TYPE_RASTER_SCREEN          = 0;
 
     /**
      * Device is a printer.
+     * <p>
+     *  设备是打印机。
+     * 
      */
     public final static int TYPE_PRINTER                = 1;
 
     /**
      * Device is an image buffer.  This buffer can reside in device
      * or system memory but it is not physically viewable by the user.
+     * <p>
+     *  设备是一个图像缓冲区。该缓冲器可以驻留在设备或系统存储器中,但是用户不能物理地看到它。
+     * 
      */
     public final static int TYPE_IMAGE_BUFFER           = 2;
 
     /**
      * Kinds of translucency supported by the underlying system.
      *
+     * <p>
+     *  底层系统支持的半透明种类。
+     * 
+     * 
      * @see #isWindowTranslucencySupported
      *
      * @since 1.7
@@ -125,24 +161,37 @@ public abstract class GraphicsDevice {
          * of which is guaranteed to be either completely opaque, with
          * an alpha value of 1.0, or completely transparent, with an alpha
          * value of 0.0.
+         * <p>
+         *  表示在底层系统中的支持,每个像素的窗口保证是完全不透明的,alpha值为1.0,或者完全透明,alpha值为0.0。
+         * 
          */
         PERPIXEL_TRANSPARENT,
         /**
          * Represents support in the underlying system for windows all of
          * the pixels of which have the same alpha value between or including
          * 0.0 and 1.0.
+         * <p>
+         *  表示在底层系统中对所有像素的所有像素具有相同的α值(包括0.0和1.0之间)的支持。
+         * 
          */
         TRANSLUCENT,
         /**
          * Represents support in the underlying system for windows that
          * contain or might contain pixels with arbitrary alpha values
          * between and including 0.0 and 1.0.
+         * <p>
+         *  表示在底层系统中对包含或可能包含任意α值介于0.0和1.0之间的像素的窗口的支持。
+         * 
          */
         PERPIXEL_TRANSLUCENT;
     }
 
     /**
      * Returns the type of this <code>GraphicsDevice</code>.
+     * <p>
+     *  返回此<code> GraphicsDevice </code>的类型。
+     * 
+     * 
      * @return the type of this <code>GraphicsDevice</code>, which can
      * either be TYPE_RASTER_SCREEN, TYPE_PRINTER or TYPE_IMAGE_BUFFER.
      * @see #TYPE_RASTER_SCREEN
@@ -169,6 +218,17 @@ public abstract class GraphicsDevice {
      * your program, call the
      * {@link System#getProperty(String) getProperty} method of the
      * System class with "java.vendor".
+     * <p>
+     *  返回与此<code> GraphicsDevice </code>关联的标识字符串。
+     * <p>
+     * 特定程序可能在<code> GraphicsEnvironment </code>中使用多个<code> GraphicsDevice </code>。
+     * 此方法返回<code> String </code>,用于标识本地<code> GraphicsEnvironment </code>中的特定<code> GraphicsDevice </code>。
+     * 特定程序可能在<code> GraphicsEnvironment </code>中使用多个<code> GraphicsDevice </code>。
+     * 虽然没有公共方法来设置<code> String </code>,但是程序员可以使用<code> String </code>进行调试。
+     *  Java和贸易的供应商;运行时环境可以格式化<code> String </code>的返回值。要确定如何解释<code> String </code>的值,请与Java运行时的供应商联系。
+     * 要从程序中找出供应商是谁,请使用"java.vendor"调用System类的{@link System#getProperty(String)getProperty}方法。
+     * 
+     * 
      * @return a <code>String</code> that is the identification
      * of this <code>GraphicsDevice</code>.
      */
@@ -177,6 +237,10 @@ public abstract class GraphicsDevice {
     /**
      * Returns all of the <code>GraphicsConfiguration</code>
      * objects associated with this <code>GraphicsDevice</code>.
+     * <p>
+     *  返回与此<code> GraphicsDevice </code>关联的所有<code> GraphicsConfiguration </code>对象。
+     * 
+     * 
      * @return an array of <code>GraphicsConfiguration</code>
      * objects that are associated with this
      * <code>GraphicsDevice</code>.
@@ -186,6 +250,10 @@ public abstract class GraphicsDevice {
     /**
      * Returns the default <code>GraphicsConfiguration</code>
      * associated with this <code>GraphicsDevice</code>.
+     * <p>
+     *  返回与此<code> GraphicsDevice </code>关联的默认<code> GraphicsConfiguration </code>。
+     * 
+     * 
      * @return the default <code>GraphicsConfiguration</code>
      * of this <code>GraphicsDevice</code>.
      */
@@ -194,6 +262,10 @@ public abstract class GraphicsDevice {
     /**
      * Returns the "best" configuration possible that passes the
      * criteria defined in the {@link GraphicsConfigTemplate}.
+     * <p>
+     *  返回通过{@link GraphicsConfigTemplate}中定义的条件的"最佳"配置。
+     * 
+     * 
      * @param gct the <code>GraphicsConfigTemplate</code> object
      * used to obtain a valid <code>GraphicsConfiguration</code>
      * @return a <code>GraphicsConfiguration</code> that passes
@@ -215,6 +287,14 @@ public abstract class GraphicsDevice {
      * with <code>AWTPermission("fullScreenExclusive")</code>.
      * <code>isFullScreenSupported</code> returns true only if
      * that permission is granted.
+     * <p>
+     *  如果此<code> GraphicsDevice </code>支持全屏独占模式,则返回<code> true </code>。
+     * 如果安装了SecurityManager,将使用<code> AWTPermission("fullScreenExclusive")</code>来调用其<code> checkPermission 
+     * </code>方法。
+     *  如果此<code> GraphicsDevice </code>支持全屏独占模式,则返回<code> true </code>。
+     * 仅当授予该权限时,<code> isFullScreenSupported </code>才会返回true。
+     * 
+     * 
      * @return whether full-screen exclusive mode is available for
      * this graphics device
      * @see java.awt.AWTPermission
@@ -266,6 +346,27 @@ public abstract class GraphicsDevice {
      * any display changes made by calling {@code setDisplayMode} are
      * automatically restored to their original state.
      *
+     * <p>
+     * 进入全屏模式,或返回窗口模式。输入的全屏模式可以是排他的或模拟的。独占模式仅在<code> isFullScreenSupported </code>返回<code> true </code>时可用。
+     * <p>
+     *  独占模式意味着：
+     * <ul>
+     *  <li> Windows不能与全屏窗口重叠。所有其他应用程序窗口将始终显示在全屏窗口的Z顺序下方。
+     *  <li>设备上随时只能有一个全屏窗口,因此在存在现有全屏窗口的情况下调用此方法将导致现有全屏窗口返回窗口模式。 <li>输入法窗口已停用。
+     * 建议调用<code> Component.enableInputMethods(false)</code>以使组件成为输入法框架的非客户端。
+     * </ul>
+     * <p>
+     *  模拟全屏模式将窗口放置并调整窗口大小到屏幕最大可能的可见区域。然而,本地窗口系统可以修改所请求的几何相关数据,使得{@code Window}对象以与桌面设置紧密对应的方式放置和调整尺寸。
+     * <p>
+     *  当进入全屏模式时,如果用作全屏窗口的窗口不可见,此方法将使其可见。当返回窗口模式时,它将保持可见。
+     * <p>
+     * 进入全屏模式时,窗口的所有半透明效果都会重置。它的形状设置为{@code null},不透明度值设置为1.0f,背景颜色alpha设置为255(完全不透明)。返回窗口模式时,不会恢复这些值。
+     * <p>
+     *  它是未指定和平台依赖如何装饰的窗口在全屏模式下操作。因此,建议使用{@code setUndecorated}方法关闭{@code Frame}或{@code Dialog}对象中的装饰。
+     * <p>
+     *  当从独占全屏窗口返回到窗口模式时,通过调用{@code setDisplayMode}所做的任何显示更改将自动恢复到其原始状态。
+     * 
+     * 
      * @param w a window to use as the full-screen window; {@code null}
      * if returning to windowed mode.  Some platforms expect the
      * fullscreen window to be a top-level component (i.e., a {@code Frame});
@@ -344,6 +445,10 @@ public abstract class GraphicsDevice {
      * Returns the <code>Window</code> object representing the
      * full-screen window if the device is in full-screen mode.
      *
+     * <p>
+     *  如果设备处于全屏模式,则返回表示全屏窗口的<code> Window </code>对象。
+     * 
+     * 
      * @return the full-screen window, or <code>null</code> if the device is
      * not in full-screen mode.
      * @see #setFullScreenWindow(Window)
@@ -368,6 +473,13 @@ public abstract class GraphicsDevice {
      * full-screen exclusive mode (i.e., if {@link #isFullScreenSupported()}
      * returns {@code true} and the application has already entered
      * full-screen mode using {@link #setFullScreenWindow}).
+     * <p>
+     *  如果此<code> GraphicsDevice </code>支持低级显示更改,则返回<code> true </code>。
+     * 在某些平台上,只能在全屏独占模式下允许低级显示更改(例如,如果{@link #isFullScreenSupported()}返回{@code true},并且应用程序已使用{@link #setFullScreenWindow}
+     * )。
+     *  如果此<code> GraphicsDevice </code>支持低级显示更改,则返回<code> true </code>。
+     * 
+     * 
      * @return whether low-level display changes are supported for this
      * graphics device.
      * @see #isFullScreenSupported
@@ -419,6 +531,26 @@ public abstract class GraphicsDevice {
      * }
      * </code></pre>
      *
+     * <p>
+     * 设置此图形设备的显示模式。
+     * 只有{@link #isDisplayChangeSupported()}返回{@code true},并且可能需要使用{@link #setFullScreenWindow}首次进入全屏独占模式,前提
+     * 是支持全屏独占模式(例如{@ link #isFullScreenSupported()}返回{@code true})。
+     * 设置此图形设备的显示模式。
+     * <p>
+     * 
+     *  显示模式必须是{@link #getDisplayModes()}返回的显示模式之一,但有一个例外：使用{@link DisplayMode#REFRESH_RATE_UNKNOWN}刷新率的显示模式
+     * 将导致从列表中选择显示模式具有匹配的宽度,高度和位深度的可用显示模式。
+     * 但是,只有在{@link #getDisplayModes()}返回的列表中存在此类模式时,才允许使用{@link DisplayMode#BIT_DEPTH_MULTI}传递位深度的显示模式。
+     * <p>
+     *  示例代码：<pre> <code>框架; DisplayMode newDisplayMode;图形设备//创建一个框架,从模式列表中选择所需的DisplayMode //由gd.getDisplay
+     * Modes()返回...。
+     * 
+     *  if(gd.isFullScreenSupported()){gd.setFullScreenWindow(frame); } else {//以非全屏模式进行frame.setSize(...); frame.setLocation(...); frame.setVisible(true); }
+     * }。
+     * 
+     *  if(gd.isDisplayChangeSupported()){gd.setDisplayMode(newDisplayMode); } </code> </pre>
+     * 
+     * 
      * @param dm The new display mode of this graphics device.
      * @exception IllegalArgumentException if the <code>DisplayMode</code>
      * supplied is <code>null</code>, or is not available in the array returned
@@ -442,6 +574,12 @@ public abstract class GraphicsDevice {
      * Likewise, the returned display mode is allowed to have a bit depth
      * {@link DisplayMode#BIT_DEPTH_MULTI} if it is indeterminate or if multiple
      * bit depths are supported.
+     * <p>
+     * 返回此<code> GraphicsDevice </code>的当前显示模式。
+     * 如果返回的显示模式不确定,则允许其具有刷新率{@link DisplayMode#REFRESH_RATE_UNKNOWN}。
+     * 同样,如果返回的显示模式不确定或者如果支持多个位深度,则允许其具有位深度{@link DisplayMode#BIT_DEPTH_MULTI}。
+     * 
+     * 
      * @return the current display mode of this graphics device.
      * @see #setDisplayMode(DisplayMode)
      * @since 1.4
@@ -461,6 +599,12 @@ public abstract class GraphicsDevice {
      * Likewise, the returned display modes are allowed to have a bit depth
      * {@link DisplayMode#BIT_DEPTH_MULTI} if it is indeterminate or if multiple
      * bit depths are supported.
+     * <p>
+     *  返回此<c> GraphicsDevice </code>可用的所有显示模式。
+     * 如果返回的显示模式不确定,则允许其具有刷新率{@link DisplayMode#REFRESH_RATE_UNKNOWN}。
+     * 同样,如果返回的显示模式不确定或者如果支持多个位深度,则允许其具有位深度{@link DisplayMode#BIT_DEPTH_MULTI}。
+     * 
+     * 
      * @return all of the display modes available for this graphics device.
      * @since 1.4
      */
@@ -489,6 +633,14 @@ public abstract class GraphicsDevice {
      * associated with a VolatileImage that can be used to determine
      * whether a particular VolatileImage has been created in accelerated
      * memory.
+     * <p>
+     *  此方法返回此设备上的加速内存中可用的字节数。某些图像以先到先得的方式创建或缓存在加速内存中。在某些操作系统上,这个内存是有限的资源。
+     * 调用此方法并仔细调度图像的创建和刷新可以使应用程序能够最有效地使用该有限资源。
+     * <br>
+     * 请注意,返回的数字是可用内存量的快照;某些图像可能仍有问题分配到该存储器中。例如,根据操作系统,驱动程序,内存配置和线程情况,报告的大小的完整范围可能不适用于给定的图像。
+     * 对与VolatileImage相关联的{@link ImageCapabilities}对象还有其他查询方法,可以用于确定特定VolatileImage是否已在加速内存中创建。
+     * 
+     * 
      * @return number of bytes available in accelerated memory.
      * A negative return value indicates that the amount of accelerated memory
      * on this GraphicsDevice is indeterminate.
@@ -504,6 +656,10 @@ public abstract class GraphicsDevice {
      * Returns whether the given level of translucency is supported by
      * this graphics device.
      *
+     * <p>
+     *  返回此图形设备是否支持给定的半透明级别。
+     * 
+     * 
      * @param translucencyKind a kind of translucency support
      * @return whether the given translucency kind is supported
      *
@@ -527,6 +683,9 @@ public abstract class GraphicsDevice {
      * Note that this method may sometimes return true, but the native
      * windowing system may still not support the concept of
      * shaping (due to the bugs in the windowing system).
+     * <p>
+     *  返回窗口系统是否支持更改顶级窗口的形状。注意,该方法有时可能返回真,但是本地窗口系统可能仍然不支持整形的概念(由于窗口系统中的错误)。
+     * 
      */
     static boolean isWindowShapingSupported() {
         Toolkit curToolkit = Toolkit.getDefaultToolkit();
@@ -542,6 +701,9 @@ public abstract class GraphicsDevice {
      * Note that this method may sometimes return true, but the native
      * windowing system may still not support the concept of
      * translucency (due to the bugs in the windowing system).
+     * <p>
+     *  返回窗口系统是否支持更改顶级窗口的不透明度值。注意,该方法有时可能返回真,但是本地窗口系统可能仍然不支持半透明的概念(由于窗口系统中的错误)。
+     * 
      */
     static boolean isWindowOpacitySupported() {
         Toolkit curToolkit = Toolkit.getDefaultToolkit();
@@ -559,6 +721,9 @@ public abstract class GraphicsDevice {
          *        (isWindowTranslucencySupported())
          *    3. There's at least one translucency-capable
          *        GraphicsConfiguration
+         * <p>
+         *  如果所有条件都为真,则支持每像素alpha：1.工具包是一种SunToolkit 2.该工具包一般支持半透明(isWindowTranslucencySupported())3.至少有一个半透明的Gr
+         * aphicsConfiguration。
          */
         Toolkit curToolkit = Toolkit.getDefaultToolkit();
         if (!(curToolkit instanceof SunToolkit)) {

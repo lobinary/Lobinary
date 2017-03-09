@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp.validation;
@@ -36,6 +46,11 @@ import com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarPool;
  * of <code>XMLSchemaDescription</code>s is determined using both
  * the target namespace for the schema and schema location.</p>
  *
+ * <p>
+ *  <p>此语法池是一个内存敏感缓存。存储在池中的语法是可轻易到达的,并且可以由垃圾收集器响应于存储器需求来清除。
+ * 使用模式和模式位置的目标命名空间确定<code> XMLSchemaDescription </code>的平等性。</p>。
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  */
 final class SoftReferenceGrammarPool implements XMLGrammarPool {
@@ -91,6 +106,10 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
      * can provide an initial set of grammars available to the current
      * validation attempt. </p>
      *
+     * <p>
+     *  在验证开始之前由验证器调用。应用程序可以提供可用于当前验证尝试的语法的初始集合。 </p>
+     * 
+     * 
      * @param grammarType The type of the grammar, from the
      *                    <code>com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarDescription</code>
      *                    interface.
@@ -114,6 +133,11 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
      * is "locked"--that is, whether the application has instructed
      * us not to accept any new grammars.</p>
      *
+     * <p>
+     *  与。此方法在验证完成后调用。然后应用程序可以选择缓存一些返回的语法。</p> <p>在这个实现中,我们根据这个对象是否被"锁定"来做出选择 - 也就是说,应用程序是否指示我们不要接受任何新语法。
+     * </p>。
+     * 
+     * 
      * @param grammarType The type of the grammars being returned;
      * @param grammars    An array containing the set of grammars being
      *                    returned; order is not significant.
@@ -136,6 +160,13 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
      * This implementation chooses to use the root element name to identify a DTD grammar
      * and the target namespace to identify a Schema grammar.
      *
+     * <p>
+     * 对应于来自其缓存的给定语法标识符。如果它不能这样做,它必须返回null;解析器将调用EntityResolver。
+     *  </p> <strong>应用程序不能从此方法调用其EntityResolver本身;这可能会导致无限递归。</strong>。
+     * 
+     *  此实现选择使用根元素名称来标识DTD语法,并使用目标命名空间来标识模式语法。
+     * 
+     * 
      * @param desc The description of the Grammar being requested.
      * @return     The Grammar corresponding to this description or null if
      *             no such Grammar is known.
@@ -152,6 +183,10 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
      * Puts the specified grammar into the grammar pool and associates it to
      * its root element name or its target namespace.
      *
+     * <p>
+     *  将指定的语法放入语法池,并将其关联到其根元素名称或其目标命名空间。
+     * 
+     * 
      * @param grammar The Grammar.
      */
     public void putGrammar(Grammar grammar) {
@@ -182,6 +217,10 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
      * Currently, the root element name is used as the key for DTD grammars
      * and the target namespace  is used as the key for Schema grammars.
      *
+     * <p>
+     *  返回与指定的语法描述关联的语法。目前,根元素名称用作DTD语法的键,目标命名空间用作模式语法的键。
+     * 
+     * 
      * @param desc The Grammar Description.
      */
     public Grammar getGrammar(XMLGrammarDescription desc) {
@@ -209,6 +248,10 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
      * is used as the key for DTD grammars and the target namespace  is used
      * as the key for Schema grammars.
      *
+     * <p>
+     *  从语法池中删除与指定的语法描述相关联的语法,并返回已删除的语法。目前,根元素名称用作DTD语法的键,目标命名空间用作模式语法的键。
+     * 
+     * 
      * @param desc The Grammar Description.
      * @return     The removed grammar.
      */
@@ -232,6 +275,10 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
      * is used as the key for DTD grammars and the target namespace  is used
      * as the key for Schema grammars.
      *
+     * <p>
+     *  如果语法池包含与指定的语法描述关联的语法,则返回true。目前,根元素名称用作DTD语法的键,目标命名空间用作模式语法的键。
+     * 
+     * 
      * @param desc The Grammar Description.
      */
     public boolean containsGrammar(XMLGrammarDescription desc) {
@@ -255,6 +302,9 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
 
     /* <p> Sets this grammar pool to a "locked" state--i.e.,
      * no new grammars will be added until it is "unlocked".
+     * <p>
+     *  没有新的语法将被添加,直到它"解锁"。
+     * 
      */
     public void lockPool() {
         fPoolIsLocked = true;
@@ -263,6 +313,9 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
     /* <p> Sets this grammar pool to an "unlocked" state--i.e.,
      * new grammars will be added when putGrammar or cacheGrammars
      * are called.
+     * <p>
+     *  当调用putGrammar或cacheGrammars时,将添加新的语法。
+     * 
      */
     public void unlockPool() {
         fPoolIsLocked = false;
@@ -271,6 +324,9 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
     /*
      * <p>This method clears the pool-i.e., removes references
      * to all the grammars in it.</p>
+     * <p>
+     *  <p>此方法清除池,即删除对其中所有语法的引用。</p>
+     * 
      */
     public void clear() {
         for (int i=0; i<fGrammars.length; i++) {
@@ -287,6 +343,10 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
      * the root element names for DTD grammars and the target namespaces for Schema grammars.
      * The application can override this behaviour and add its own logic.
      *
+     * <p>
+     * 此方法检查两个语法是否相同。目前,我们比较DTD语法的根元素名称和模式语法的目标命名空间。应用程序可以覆盖此行为并添加自己的逻辑。
+     * 
+     * 
      * @param desc1 The grammar description
      * @param desc2 The grammar description of the grammar to be compared to
      * @return      True if the grammars are equal, otherwise false
@@ -329,6 +389,10 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
     /**
      * Returns the hash code value for the given grammar description.
      *
+     * <p>
+     *  返回给定语法描述的哈希码值。
+     * 
+     * 
      * @param desc The grammar description
      * @return     The hash code value
      */
@@ -347,6 +411,10 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
     /**
      * Removes the given entry from the pool
      *
+     * <p>
+     *  从池中删除给定的条目
+     * 
+     * 
      * @param entry the entry to remove
      * @return The grammar attached to this entry
      */
@@ -367,6 +435,9 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
 
     /**
      * Removes stale entries from the pool.
+     * <p>
+     *  从池中删除失效的条目。
+     * 
      */
     private void clean() {
         Reference ref = fReferenceQueue.poll();
@@ -382,6 +453,9 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
     /**
      * This class is a grammar pool entry. Each entry acts as a node
      * in a doubly linked list.
+     * <p>
+     *  这个类是一个语法池条目。每个条目充当双向链表中的节点。
+     * 
      */
     static final class Entry {
 
@@ -420,6 +494,8 @@ final class SoftReferenceGrammarPool implements XMLGrammarPool {
     /**
      * This class stores a soft reference to a grammar object. It keeps a reference
      * to its associated entry, so that it can be easily removed from the pool.
+     * <p>
+     *  这个类存储对语法对象的软引用。它保持对其相关条目的引用,以便它可以容易地从池中移除。
      */
     static final class SoftGrammarReference extends SoftReference {
 

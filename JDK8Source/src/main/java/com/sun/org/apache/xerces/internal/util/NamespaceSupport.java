@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,33 @@
  * Business Machines, Inc., http://www.apache.org.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)2000-2002 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得将"Xerces"和"Apache Software Foundation"名称用于支持或推广从本软件衍生的产品。如需书面许可,请联系apache@apache.org。
+ * 
+ *  未经Apache软件基金会事先书面许可,从本软件派生的产品可能不会被称为"Apache",也不可能出现在他们的名字中。
+ * 
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款,最初是基于软件版权(c)1999,国际商业机器公司,http://www.apache.org。
+ * 有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -74,6 +102,10 @@ import com.sun.org.apache.xerces.internal.xni.NamespaceContext;
  * as arguments to methods are unique symbols. The SymbolTable class
  * can be used for this purpose.
  *
+ * <p>
+ *  命名空间支持XML文档处理程序。此类不执行任何错误检查,并假定作为参数传递给方法的所有字符串都是唯一符号。 SymbolTable类可以用于此目的。
+ * 
+ * 
  * @author Andy Clark, IBM
  *
  */
@@ -89,6 +121,10 @@ public class NamespaceSupport implements NamespaceContext {
      * &lt;prefix, uri&gt;. The default size can be set to anything
      * as long as it is a power of 2 greater than 1.
      *
+     * <p>
+     * 命名空间绑定信息。此数组由一系列包含命名空间绑定信息的元组组成：&lt; prefix,uri&gt ;.默认大小可以设置为任何值,只要它是大于1的2的幂。
+     * 
+     * 
      * @see #fNamespaceSize
      * @see #fContext
      */
@@ -106,6 +142,10 @@ public class NamespaceSupport implements NamespaceContext {
      * index of declared namespace bindings and runs to the size of the
      * namespace information array.
      *
+     * <p>
+     *  上下文索引。此数组包含命名空间信息数组中的索引。当前上下文的索引是已声明的命名空间绑定的开始索引,并运行到命名空间信息数组的大小。
+     * 
+     * 
      * @see #fNamespaceSize
      */
     protected int[] fContext = new int[8];
@@ -126,6 +166,9 @@ public class NamespaceSupport implements NamespaceContext {
     /**
      * Constructs a namespace context object and initializes it with
      * the prefixes declared in the specified context.
+     * <p>
+     *  构造命名空间上下文对象,并使用在指定上下文中声明的前缀来初始化它。
+     * 
      */
     public NamespaceSupport(NamespaceContext context) {
         pushContext();
@@ -144,6 +187,8 @@ public class NamespaceSupport implements NamespaceContext {
     //
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#reset()
      */
     public void reset() {
@@ -167,6 +212,8 @@ public class NamespaceSupport implements NamespaceContext {
 
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#pushContext()
      */
     public void pushContext() {
@@ -185,6 +232,8 @@ public class NamespaceSupport implements NamespaceContext {
 
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#popContext()
      */
     public void popContext() {
@@ -193,6 +242,8 @@ public class NamespaceSupport implements NamespaceContext {
     } // popContext()
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#declarePrefix(String, String)
      */
     public boolean declarePrefix(String prefix, String uri) {
@@ -231,6 +282,8 @@ public class NamespaceSupport implements NamespaceContext {
     } // declarePrefix(String,String):boolean
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#getURI(String)
      */
     public String getURI(String prefix) {
@@ -249,6 +302,8 @@ public class NamespaceSupport implements NamespaceContext {
 
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#getPrefix(String)
      */
     public String getPrefix(String uri) {
@@ -267,6 +322,8 @@ public class NamespaceSupport implements NamespaceContext {
     } // getPrefix(String):String
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#getDeclaredPrefixCount()
      */
     public int getDeclaredPrefixCount() {
@@ -274,6 +331,8 @@ public class NamespaceSupport implements NamespaceContext {
     } // getDeclaredPrefixCount():int
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#getDeclaredPrefixAt(int)
      */
     public String getDeclaredPrefixAt(int index) {
@@ -305,6 +364,8 @@ public class NamespaceSupport implements NamespaceContext {
         return new IteratorPrefixes(fPrefixes, count);
     }//getPrefixes
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#getAllPrefixes()
      */
     public Enumeration getAllPrefixes() {
@@ -348,12 +409,19 @@ public class NamespaceSupport implements NamespaceContext {
 
     /*
      * non-NamespaceContext methods
+     * <p>
+     *  非NamespaceContext方法
+     * 
      */
 
     /**
      * Checks whether a binding or unbinding for
      * the given prefix exists in the context.
      *
+     * <p>
+     *  检查上下文中是否存在给定前缀的绑定或取消绑定。
+     * 
+     * 
      * @param prefix The prefix to look up.
      *
      * @return true if the given prefix exists in the context
@@ -375,6 +443,10 @@ public class NamespaceSupport implements NamespaceContext {
      * Checks whether a binding or unbinding for
      * the given prefix exists in the current context.
      *
+     * <p>
+     *  检查当前上下文中是否存在给定前缀的绑定或取消绑定。
+     * 
+     * 
      * @param prefix The prefix to look up.
      *
      * @return true if the given prefix exists in the current context
@@ -399,6 +471,9 @@ public class NamespaceSupport implements NamespaceContext {
 
         /**
          * Constructor for Prefixes.
+         * <p>
+         *  前缀的构造函数。
+         * 
          */
         public IteratorPrefixes(String [] prefixes, int size) {
             this.prefixes = prefixes;
@@ -406,6 +481,8 @@ public class NamespaceSupport implements NamespaceContext {
         }
 
         /**
+        /* <p>
+        /* 
          * @see java.util.Enumeration#hasMoreElements()
          */
         public boolean hasNext() {
@@ -413,6 +490,8 @@ public class NamespaceSupport implements NamespaceContext {
         }
 
         /**
+        /* <p>
+        /* 
          * @see java.util.Enumeration#nextElement()
          */
         public Object next() {
@@ -445,6 +524,9 @@ public class NamespaceSupport implements NamespaceContext {
 
         /**
          * Constructor for Prefixes.
+         * <p>
+         *  前缀的构造函数。
+         * 
          */
         public Prefixes(String [] prefixes, int size) {
             this.prefixes = prefixes;
@@ -452,6 +534,8 @@ public class NamespaceSupport implements NamespaceContext {
         }
 
         /**
+        /* <p>
+        /* 
          * @see java.util.Enumeration#hasMoreElements()
          */
         public boolean hasMoreElements() {
@@ -459,6 +543,8 @@ public class NamespaceSupport implements NamespaceContext {
         }
 
         /**
+        /* <p>
+        /* 
          * @see java.util.Enumeration#nextElement()
          */
         public Object nextElement() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import java.util.List;
  * Represents a cache response originally retrieved through secure
  * means, such as TLS.
  *
+ * <p>
+ *  表示最初通过安全方式(如TLS)检索的缓存响应。
+ * 
+ * 
  * @since 1.5
  */
 public abstract class SecureCacheResponse extends CacheResponse {
@@ -41,6 +46,10 @@ public abstract class SecureCacheResponse extends CacheResponse {
      * Returns the cipher suite in use on the original connection that
      * retrieved the network resource.
      *
+     * <p>
+     *  返回检索网络资源的原始连接上使用的加密套件。
+     * 
+     * 
      * @return a string representing the cipher suite
      */
     public abstract String getCipherSuite();
@@ -51,6 +60,10 @@ public abstract class SecureCacheResponse extends CacheResponse {
      * network resource.  Note: This method is useful only
      * when using certificate-based cipher suites.
      *
+     * <p>
+     *  返回在检索网络资源的原始连接的握手期间发送到服务器的证书链。注意：此方法仅在使用基于证书的密码套件时有用。
+     * 
+     * 
      * @return an immutable List of Certificate representing the
      *           certificate chain that was sent to the server. If no
      *           certificate chain was sent, null will be returned.
@@ -66,6 +79,11 @@ public abstract class SecureCacheResponse extends CacheResponse {
      * using it with non-certificate-based cipher suites, such as
      * Kerberos, will throw an SSLPeerUnverifiedException.
      *
+     * <p>
+     *  返回服务器的证书链,该证书链是在从缓存中检索网络资源的原始连接中定义会话的一部分而建立的。
+     * 注意：此方法只能在使用基于证书的密码套件时使用;使用它与非基于证书的密码套件(如Kerberos)将抛出SSLPeerUnverifiedException。
+     * 
+     * 
      * @return an immutable List of Certificate representing the server's
      *         certificate chain.
      * @throws SSLPeerUnverifiedException if the peer is not verified.
@@ -79,6 +97,10 @@ public abstract class SecureCacheResponse extends CacheResponse {
      * defining the session during the original connection that
      * retrieved the network resource.
      *
+     * <p>
+     *  返回在检索网络资源的原始连接期间作为定义会话的一部分而建立的服务器的主体。
+     * 
+     * 
      * @return the server's principal. Returns an X500Principal of the
      * end-entity certiticate for X509-based cipher suites, and
      * KerberosPrincipal for Kerberos cipher suites.
@@ -96,6 +118,9 @@ public abstract class SecureCacheResponse extends CacheResponse {
       * handshaking in the original connection that retrieved the
       * network resource.
       *
+      * <p>
+      *  返回在检索网络资源的原始连接中握手期间发送到服务器的主体。
+      * 
       * @return the principal sent to the server. Returns an X500Principal
       * of the end-entity certificate for X509-based cipher suites, and
       * KerberosPrincipal for Kerberos cipher suites. If no principal was

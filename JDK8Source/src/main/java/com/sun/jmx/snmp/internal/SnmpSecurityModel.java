@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,12 +34,21 @@ import com.sun.jmx.snmp.SnmpSecurityParameters;
  * Security model interface. Any security model implementation must implement this interface in order to be integrated in the engine framework. Security models are called when SNMP messages are received or sent. They deal with security (authentication and privacy).
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  安全模型接口。任何安全模型实现都必须实现此接口,以便集成到引擎框架中。在接收或发送SNMP消息时调用安全模型。它们处理安全(身份验证和隐私)。
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
+ * 
  * @since 1.5
  */
 public interface SnmpSecurityModel extends SnmpModel {
     /**
      * Called when a request is to be sent to the network. It must be securized.
      * <BR>The specified parameters are defined in RFC 2572 (see also the {@link com.sun.jmx.snmp.SnmpV3Message} class).
+     * <p>
+     *  当请求发送到网络时调用。它必须得到安全。 <BR>指定的参数在RFC 2572中定义(另请参阅{@link com.sun.jmx.snmp.SnmpV3Message}类)。
+     * 
+     * 
      * @param cache The cache that has been created by calling <CODE>createSecurityCache</CODE> on this model.
      * @param version The SNMP protocol version.
      * @param msgID The current request id.
@@ -71,6 +81,10 @@ public interface SnmpSecurityModel extends SnmpModel {
     /**
      * Called when a response is to be sent to the network. It must be securized.
      * <BR>The specified parameters are defined in RFC 2572 (see also the {@link com.sun.jmx.snmp.SnmpV3Message} class).
+     * <p>
+     *  当响应发送到网络时调用。它必须得到安全。 <BR>指定的参数在RFC 2572中定义(另请参阅{@link com.sun.jmx.snmp.SnmpV3Message}类)。
+     * 
+     * 
      * @param cache The cache that has been created by calling <CODE>createSecurityCache</CODE> on this model.
      * @param version The SNMP protocol version.
      * @param msgID The current request id.
@@ -102,6 +116,10 @@ public interface SnmpSecurityModel extends SnmpModel {
     /**
      * Called when a request is received from the network. It handles authentication and privacy.
      * <BR>The specified parameters are defined in RFC 2572 (see also the {@link com.sun.jmx.snmp.SnmpV3Message} class).
+     * <p>
+     *  当从网络接收到请求时调用。它处理身份验证和隐私。 <BR>指定的参数在RFC 2572中定义(另请参阅{@link com.sun.jmx.snmp.SnmpV3Message}类)。
+     * 
+     * 
      * @param cache The cache that has been created by calling <CODE>createSecurityCache</CODE> on this model.
      * @param version The SNMP protocol version.
      * @param msgID The current request id.
@@ -134,6 +152,10 @@ public interface SnmpSecurityModel extends SnmpModel {
  /**
      * Called when a response is received from the network. It handles authentication and privacy.
      * <BR>The specified parameters are defined in RFC 2572 (see also the {@link com.sun.jmx.snmp.SnmpV3Message} class).
+     * <p>
+     *  从网络接收到响应时调用。它处理身份验证和隐私。 <BR>指定的参数在RFC 2572中定义(另请参阅{@link com.sun.jmx.snmp.SnmpV3Message}类)。
+     * 
+     * 
      * @param cache The cache that has been created by calling <CODE>createSecurityCache</CODE> on this model.
      * @param version The SNMP protocol version.
      * @param msgID The current request id.
@@ -165,11 +187,18 @@ public interface SnmpSecurityModel extends SnmpModel {
 
     /**
      * Instantiate an <CODE>SnmpSecurityCache</CODE> that is dependant to the model implementation.
+     * <p>
+     *  实例化依赖于模型实现的<CODE> SnmpSecurityCache </CODE>。
+     * 
+     * 
      * @return The model dependant security cache.
      */
     public SnmpSecurityCache createSecurityCache();
     /**
      * Release the previously created cache.
+     * <p>
+     *  释放以前创建的缓存。
+     * 
      * @param cache The security cache to release.
      */
     public void releaseSecurityCache(SnmpSecurityCache cache);

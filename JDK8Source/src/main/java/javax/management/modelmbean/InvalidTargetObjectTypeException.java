@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -44,6 +47,12 @@ import java.security.AccessController;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>1190536278266811217L</code>.
  *
+ * <p>
+ *  指定无效的目标对象类型时抛出异常。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> 1190536278266811217L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -78,6 +87,8 @@ public class InvalidTargetObjectTypeException  extends Exception
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField exception Exception Encapsulated {@link Exception}
      */
     private static final ObjectStreamField[] serialPersistentFields;
@@ -102,6 +113,8 @@ public class InvalidTargetObjectTypeException  extends Exception
     // END Serialization compatibility stuff
 
     /**
+    /* <p>
+    /* 
      * @serial Encapsulated {@link Exception}
      */
     Exception exception;
@@ -109,6 +122,9 @@ public class InvalidTargetObjectTypeException  extends Exception
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public InvalidTargetObjectTypeException ()
     {
@@ -120,6 +136,10 @@ public class InvalidTargetObjectTypeException  extends Exception
     /**
      * Constructor from a string.
      *
+     * <p>
+     *  从字符串构造。
+     * 
+     * 
      * @param s String value that will be incorporated in the message for
      *    this exception.
      */
@@ -134,6 +154,10 @@ public class InvalidTargetObjectTypeException  extends Exception
     /**
      * Constructor taking an exception and a string.
      *
+     * <p>
+     *  构造方法接受异常和字符串。
+     * 
+     * 
      * @param e Exception that we may have caught to reissue as an
      *    InvalidTargetObjectTypeException.  The message will be used, and we may want to
      *    consider overriding the printStackTrace() methods to get data
@@ -152,6 +176,9 @@ public class InvalidTargetObjectTypeException  extends Exception
 
     /**
      * Deserializes an {@link InvalidTargetObjectTypeException} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link InvalidTargetObjectTypeException}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -177,6 +204,8 @@ public class InvalidTargetObjectTypeException  extends Exception
 
     /**
      * Serializes an {@link InvalidTargetObjectTypeException} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link InvalidTargetObjectTypeException}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,15 @@ import javax.swing.KeyStroke;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  一个Action实现,对于跨多个不同文本组件共享的键绑定很有用。因为行动是共享的,它必须有一种方式获得它的目标行动。这个类提供了支持来尝试和找到一个文本组件来操作。
+ * 使组件采取行动的首选方式是通过接收到的ActionEvent。如果getSource返回的对象可以缩小到一个文本组件,它将被使用。如果操作事件为null或无法缩小,则尝试最后一个聚焦的文本组件。
+ * 这是通过与JTextController结合使用来确定的,JTextController安排与TextAction共享该信息。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public abstract class TextAction extends AbstractAction {
@@ -63,6 +73,10 @@ public abstract class TextAction extends AbstractAction {
     /**
      * Creates a new JTextAction object.
      *
+     * <p>
+     *  创建一个新的JTextAction对象。
+     * 
+     * 
      * @param name the name of the action
      */
     public TextAction(String name) {
@@ -75,6 +89,10 @@ public abstract class TextAction extends AbstractAction {
      * if it's not null and can be narrowed.  Otherwise,
      * the last focused component is used.
      *
+     * <p>
+     *  确定要用于操作的组件。如果从ActionEvent的源获取,如果它不为null并且可以缩小。否则,使用最后聚焦的组件。
+     * 
+     * 
      * @param e the ActionEvent
      * @return the component
      */
@@ -96,6 +114,10 @@ public abstract class TextAction extends AbstractAction {
      * contain a command with the same name, the command
      * from the second list is used.
      *
+     * <p>
+     * 获取一个命令列表,并用另一个命令列表来增加它。第二个列表优先于第一个列表;也就是说,当两个列表都包含具有相同名称的命令时,使用来自第二个列表的命令。
+     * 
+     * 
      * @param list1 the first list, may be empty but not
      *              <code>null</code>
      * @param list2 the second list, may be empty but not
@@ -127,6 +149,9 @@ public abstract class TextAction extends AbstractAction {
      * actions are defined, but generally used the same way
      * across many different components.
      *
+     * <p>
+     *  获取当前具有焦点的文本组件。这允许跨文本组件共享操作,这对于定义大量操作的键绑定是有用的,但通常在许多不同组件中使用相同的方式。
+     * 
      * @return the component
      */
     protected final JTextComponent getFocusedComponent() {

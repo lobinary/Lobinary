@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -17,6 +18,9 @@ import org.w3c.dom.Element;
 
 /**
  * Resolves a single Key based on the KeyName.
+ * <p>
+ *  基于KeyName解析单个密钥。
+ * 
  */
 public class SingleKeyResolver extends KeyResolverSpi
 {
@@ -31,6 +35,10 @@ public class SingleKeyResolver extends KeyResolverSpi
 
     /**
      * Constructor.
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param keyName
      * @param publicKey
      */
@@ -41,6 +49,10 @@ public class SingleKeyResolver extends KeyResolverSpi
 
     /**
      * Constructor.
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param keyName
      * @param privateKey
      */
@@ -51,6 +63,10 @@ public class SingleKeyResolver extends KeyResolverSpi
 
     /**
      * Constructor.
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param keyName
      * @param secretKey
      */
@@ -62,6 +78,10 @@ public class SingleKeyResolver extends KeyResolverSpi
     /**
      * This method returns whether the KeyResolverSpi is able to perform the requested action.
      *
+     * <p>
+     *  此方法返回KeyResolverSpi是否能够执行请求的操作。
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @param storage
@@ -74,6 +94,10 @@ public class SingleKeyResolver extends KeyResolverSpi
     /**
      * Method engineLookupAndResolvePublicKey
      *
+     * <p>
+     *  方法engineLookupAndResolvePublicKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -102,6 +126,10 @@ public class SingleKeyResolver extends KeyResolverSpi
     /**
      * Method engineResolveX509Certificate
      * @inheritDoc
+     * <p>
+     *  方法engineResolveX509Certificate @inheritDoc
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -116,6 +144,10 @@ public class SingleKeyResolver extends KeyResolverSpi
     /**
      * Method engineResolveSecretKey
      *
+     * <p>
+     *  方法engineResolveSecretKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -145,6 +177,9 @@ public class SingleKeyResolver extends KeyResolverSpi
     /**
      * Method engineResolvePrivateKey
      * @inheritDoc
+     * <p>
+     *  方法engineResolvePrivateKey @inheritDoc
+     * 
      * @param element
      * @param baseURI
      * @param storage

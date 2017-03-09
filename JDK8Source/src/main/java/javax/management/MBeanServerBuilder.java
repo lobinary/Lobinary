@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ import com.sun.jmx.mbeanserver.JmxMBeanServer;
  * applications to provide their custom MBeanServer
  * implementation by providing a subclass of this class.</p>
  *
+ * <p>
+ *  <p>此类表示一个创建默认{@link javax.management.MBeanServer}实现的构建器。
+ *  JMX {@link javax.management.MBeanServerFactory}允许应用程序通过提供此类的子类来提供其自定义MBeanServer实现。</p>。
+ * 
+ * 
  * @see MBeanServer
  * @see MBeanServerFactory
  *
@@ -42,6 +48,10 @@ import com.sun.jmx.mbeanserver.JmxMBeanServer;
 public class MBeanServerBuilder {
     /**
      * Public default constructor.
+     * <p>
+     *  公共默认构造函数。
+     * 
+     * 
      **/
     public MBeanServerBuilder() {
     }
@@ -60,6 +70,15 @@ public class MBeanServerBuilder {
      * be, for instance, a new object wrapping the previously
      * returned object.
      *
+     * <p>
+     *  此方法为新的MBeanServer创建新的MBeanServerDelegate。
+     * 在创建新的MBeanServer时,{@link javax.management.MBeanServerFactory}首先调用此方法以创建新的MBeanServerDelegate。
+     *  <br>然后调用<code> newMBeanServer(defaultDomain,outer,delegate)</code>传递应该由MBeanServer实现使用的<var> delegat
+     * e </var>。
+     * 在创建新的MBeanServer时,{@link javax.management.MBeanServerFactory}首先调用此方法以创建新的MBeanServerDelegate。
+     *  <p>请注意,传递的<var> delegate </var>可能不是由此方法返回的MBeanServerDelegate。它可以是,例如,一个新对象包裹先前返回的对象。
+     * 
+     * 
      * @return A new {@link javax.management.MBeanServerDelegate}.
      **/
     public MBeanServerDelegate newMBeanServerDelegate() {
@@ -91,6 +110,16 @@ public class MBeanServerBuilder {
      * security checks, or to prevent access to the actual MBeanServer
      * implementation by returning a pointer to a wrapping object.
      *
+     * <p>
+     * 此方法创建一个新的MBeanServer实现对象。
+     * 在创建新的MBeanServer时,{@link javax.management.MBeanServerFactory}首先调用<code> newMBeanServerDelegate()</code>
+     * ,以便为新的MBeanServer获取新的{@link javax.management.MBeanServerDelegate}。
+     * 此方法创建一个新的MBeanServer实现对象。
+     * 然后调用<code> newMBeanServer(defaultDomain,outer,delegate)</code>传递应该由MBeanServer实现使用的<var> delegate </var>
+     * 。
+     * 此方法创建一个新的MBeanServer实现对象。 <p>请注意,传递的<var> delegate </var>可能不是此实现返回的MBeanServerDelegate。
+     * 它可以是,例如,一个新对象包裹先前返回的代理。
+     * 
      * @param defaultDomain Default domain of the new MBeanServer.
      * @param outer A pointer to the MBeanServer object that must be
      *        passed to the MBeans when invoking their

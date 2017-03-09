@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,11 @@ import java.rmi.RemoteException;
  * exported is not found.  Skeletons are no longer required, so this
  * exception is never thrown.
  *
+ * <p>
+ *  如果未找到与正在导出的远程对象相对应的<code> Skeleton </code>,则会抛出<code> SkeletonNotFoundException </code>。
+ * 不再需要骷髅,所以这个异常从不会抛出。
+ * 
+ * 
  * @since   JDK1.1
  * @deprecated no replacement.  Skeletons are no longer required for remote
  * method calls in the Java 2 platform v1.2 and greater.
@@ -47,6 +53,10 @@ public class SkeletonNotFoundException extends RemoteException {
      * Constructs a <code>SkeletonNotFoundException</code> with the specified
      * detail message.
      *
+     * <p>
+     *  构造具有指定详细消息的<code> SkeletonNotFoundException </code>。
+     * 
+     * 
      * @param s the detail message.
      * @since JDK1.1
      */
@@ -58,6 +68,9 @@ public class SkeletonNotFoundException extends RemoteException {
      * Constructs a <code>SkeletonNotFoundException</code> with the specified
      * detail message and nested exception.
      *
+     * <p>
+     *  构造具有指定的详细消息和嵌套异常的<code> SkeletonNotFoundException </code>。
+     * 
      * @param s the detail message.
      * @param ex the nested exception
      * @since JDK1.1

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp;
@@ -38,6 +48,10 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource;
  * declared in the DTD and provides this information to a ValidationManager.
  * Events are forwarded to the registered XMLDTDHandler without modification.</p>
  *
+ * <p>
+ *  <p>此过滤器记录在DTD中声明的未解析实体,并将此信息提供给ValidationManager。事件将被转发到注册的XMLDTDHandler而不进行修改。</p>
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  * @version $Id: UnparsedEntityHandler.java,v 1.6 2010-11-01 04:40:07 joehw Exp $
  */
@@ -59,6 +73,9 @@ final class UnparsedEntityHandler implements XMLDTDFilter, EntityState {
 
     /*
      * XMLDTDHandler methods
+     * <p>
+     *  XMLDTDHandler方法
+     * 
      */
 
     public void startDTD(XMLLocator locator, Augmentations augmentations)
@@ -224,6 +241,9 @@ final class UnparsedEntityHandler implements XMLDTDFilter, EntityState {
 
     /*
      * XMLDTDSource methods
+     * <p>
+     *  XMLDTDSource方法
+     * 
      */
 
     public void setDTDHandler(XMLDTDHandler handler) {
@@ -236,6 +256,9 @@ final class UnparsedEntityHandler implements XMLDTDFilter, EntityState {
 
     /*
      * EntityState methods
+     * <p>
+     *  EntityState方法
+     * 
      */
 
     public boolean isEntityDeclared(String name) {
@@ -251,6 +274,8 @@ final class UnparsedEntityHandler implements XMLDTDFilter, EntityState {
 
     /*
      * Other methods
+     * <p>
+     *  其他方法
      */
 
     public void reset() {

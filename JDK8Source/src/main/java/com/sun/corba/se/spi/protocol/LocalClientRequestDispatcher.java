@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,8 @@ package com.sun.corba.se.spi.protocol;
 import org.omg.CORBA.portable.ServantObject;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 
@@ -46,6 +49,10 @@ public interface LocalClientRequestDispatcher
      * the servant field to the expected type, and then invoke the operation
      * directly.
      *
+     * <p>
+     *  返回对此请求应使用的服务方的Java引用。 servant_preinvoke()由本地存根调用。
+     * 如果返回ServantObject对象,那么它的servant字段已设置为期望类型的对象(注意：对象可能是也可能不是实际的servant实例)。
+     * 
      * @param self The object reference which delegated to this delegate.
      *
      * @param operation a string containing the operation name.

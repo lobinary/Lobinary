@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import java.awt.event.*;
  * MotifCheckboxMenuItem implementation
  * <p>
  *
+ * <p>
+ *  MotifCheckboxMenuItem实现
+ * <p>
+ * 
  * @author Georges Saab
  * @author Rich Schiavi
  */

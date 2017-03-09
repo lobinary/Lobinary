@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@ import java.util.Objects;
  * <p>This is a <a href="package-summary.html">functional interface</a>
  * whose functional method is {@link #test(double)}.
  *
+ * <p>
+ *  表示一个{@code double}值参数的谓词(布尔值函数)。这是{@code Predicate}的{@code double}  - 消费原语类型专门化。
+ * 
+ *  <p>这是一个<a href="package-summary.html">功能介面</a>,其功能方法为{@link #test(double)}。
+ * 
+ * 
  * @see Predicate
  * @since 1.8
  */
@@ -43,6 +50,10 @@ public interface DoublePredicate {
     /**
      * Evaluates this predicate on the given argument.
      *
+     * <p>
+     *  根据给定的参数评估此谓词。
+     * 
+     * 
      * @param value the input argument
      * @return {@code true} if the input argument matches the predicate,
      * otherwise {@code false}
@@ -59,6 +70,12 @@ public interface DoublePredicate {
      * to the caller; if evaluation of this predicate throws an exception, the
      * {@code other} predicate will not be evaluated.
      *
+     * <p>
+     *  返回一个组合谓词,表示此谓词与另一个谓词之间的短路逻辑AND。当评估组合谓词时,如果此谓词是{@code false},则不会评估{@code other}谓词。
+     * 
+     *  <p>任何谓词评估期间抛出的任何异常都会传递给调用者;如果对此谓词的求值抛出异常,则不会评估{@code other}谓词。
+     * 
+     * 
      * @param other a predicate that will be logically-ANDed with this
      *              predicate
      * @return a composed predicate that represents the short-circuiting logical
@@ -74,6 +91,10 @@ public interface DoublePredicate {
      * Returns a predicate that represents the logical negation of this
      * predicate.
      *
+     * <p>
+     *  返回表示此谓词的逻辑否定的谓词。
+     * 
+     * 
      * @return a predicate that represents the logical negation of this
      * predicate
      */
@@ -91,6 +112,10 @@ public interface DoublePredicate {
      * to the caller; if evaluation of this predicate throws an exception, the
      * {@code other} predicate will not be evaluated.
      *
+     * <p>
+     *  返回一个组合谓词,表示此谓词与另一个谓词之间的短路逻辑或。当评估组合谓词时,如果此谓词是{@code true},则不会评估{@code other}谓词。
+     * 
+     * 
      * @param other a predicate that will be logically-ORed with this
      *              predicate
      * @return a composed predicate that represents the short-circuiting logical

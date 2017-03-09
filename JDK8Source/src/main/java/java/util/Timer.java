@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -80,6 +81,33 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * <p>Implementation note: All constructors start a timer thread.
  *
+ * <p>
+ *  线程调度任务以便将来在后台线程中执行的工具。可以将任务调度为一次性执行,或者以固定间隔重复执行。
+ * 
+ *  <p>与每个<tt> Timer </tt>对象相对应的是单个后台线程,用于顺序执行所有计时器的任务。计时器任务应该快速完成。如果计时器任务花费过多的时间来完成,则它"计数"计时器的任务执行线程。
+ * 这又可以延迟后续任务的执行,这些任务可能"成堆"并且在该违规任务(并且如果)最终完成时快速连续地执行。
+ * 
+ *  <p>在对<tt> Timer </tt>对象的最后一次实时引用消失<i>和</i>所有未完成的任务已完成执行后,计时器的任务执行线程会正常终止(并受到垃圾回收)。然而,这可能需要任意长的时间。
+ * 默认情况下,任务执行线程不作为<i>守护线程</i>运行,因此它能够阻止应用程序终止。如果调用者想要快速终止定时器的任务执行线程,调用者应该调用定时器的<tt> cancel </tt>方法。
+ * 
+ * <p>如果定时器的任务执行线程意外终止,例如因为<tt>停止</tt>方法被调用,任何进一步尝试在定时器上调度任务将导致<tt> IllegalStateException </tt >,如同定时器的<tt>
+ *  cancel </tt>方法已被调用。
+ * 
+ *  <p>此类是线程安全的：多个线程可以共享一个<tt> Timer </tt>对象,而无需外部同步。
+ * 
+ *  <p>此类不会</i>提供实时保证：它使用<tt> Object.wait(long)</tt>方法计划任务。
+ * 
+ *  <p> Java 5.0引入了{@code java.util.concurrent}包,其中的一个并发实用程序是{@link java.util.concurrent.ScheduledThreadPoolExecutor ScheduledThreadPoolExecutor}
+ * ,它是一个线程池,用于在给定的速率或延迟。
+ * 它实际上是一个更通用的替代{@code Timer} / {@ code TimerTask}组合,因为它允许多个服务线程,接受各种时间单位,不需要子类{@code TimerTask}(只是实现{@代码Runnable}
+ * )。
+ * 用一个线程配置{@code ScheduledThreadPoolExecutor}使它等同于{@code Timer}。
+ * 
+ *  <p>实现注意：这个类可以扩展到大量的并行计划任务(千个应该没有问题)。在内部,它使用二进制堆来表示其任务队列,因此调度任务的成本是O(log n),其中n是并发计划任务的数量。
+ * 
+ * <p>实现注意：所有构造函数都启动计时器线程。
+ * 
+ * 
  * @author  Josh Bloch
  * @see     TimerTask
  * @see     Object#wait(long)
@@ -92,11 +120,17 @@ public class Timer {
      * thread.  The timer produces tasks, via its various schedule calls,
      * and the timer thread consumes, executing timer tasks as appropriate,
      * and removing them from the queue when they're obsolete.
+     * <p>
+     *  计时器任务队列。此数据结构与定时器线程共享。定时器通过其各种调度调用产生任务,定时器线程消耗,根据需要执行定时器任务,并且当它们过时时将其从队列中移除。
+     * 
      */
     private final TaskQueue queue = new TaskQueue();
 
     /**
      * The timer thread.
+     * <p>
+     *  定时器线程。
+     * 
      */
     private final TimerThread thread = new TimerThread(queue);
 
@@ -106,6 +140,9 @@ public class Timer {
      * tasks in the timer queue.  It is used in preference to a finalizer on
      * Timer as such a finalizer would be susceptible to a subclass's
      * finalizer forgetting to call it.
+     * <p>
+     *  当没有对Timer对象的实时引用和定时器队列中的任何任务时,此对象使定时器的任务执行线程正常退出。它用于优先于定时器上的终结器,因为这样的终结器将容易受到子类的终结器忘记调用它。
+     * 
      */
     private final Object threadReaper = new Object() {
         protected void finalize() throws Throwable {
@@ -118,6 +155,9 @@ public class Timer {
 
     /**
      * This ID is used to generate thread names.
+     * <p>
+     *  此ID用于生成线程名称。
+     * 
      */
     private final static AtomicInteger nextSerialNumber = new AtomicInteger(0);
     private static int serialNumber() {
@@ -127,6 +167,9 @@ public class Timer {
     /**
      * Creates a new timer.  The associated thread does <i>not</i>
      * {@linkplain Thread#setDaemon run as a daemon}.
+     * <p>
+     *  创建新的计时器。相关联的线程</i>不会</i> {@linkplain线程#setDaemon作为守护程序运行}。
+     * 
      */
     public Timer() {
         this("Timer-" + serialNumber());
@@ -140,6 +183,11 @@ public class Timer {
      * performed as long as the application is running, but should not
      * prolong the lifetime of the application.
      *
+     * <p>
+     *  创建一个新的计时器,其相关的线程可以被指定为{@linkplain Thread#setDaemon run as a daemon}。
+     * 如果定时器将被用于调度重复的"维护活动",则必须使用守护线程,该维护活动必须在应用程序运行时执行,但不应该延长应用程序的生命周期。
+     * 
+     * 
      * @param isDaemon true if the associated thread should run as a daemon.
      */
     public Timer(boolean isDaemon) {
@@ -151,6 +199,10 @@ public class Timer {
      * The associated thread does <i>not</i>
      * {@linkplain Thread#setDaemon run as a daemon}.
      *
+     * <p>
+     *  创建一个新的计时器,其相关联的线程具有指定的名称。相关联的线程</i>不会</i> {@linkplain线程#setDaemon作为守护程序运行}。
+     * 
+     * 
      * @param name the name of the associated thread
      * @throws NullPointerException if {@code name} is null
      * @since 1.5
@@ -165,6 +217,10 @@ public class Timer {
      * and may be specified to
      * {@linkplain Thread#setDaemon run as a daemon}.
      *
+     * <p>
+     *  创建一个新的计时器,其相关联的线程具有指定的名称,并且可以指定为{@linkplain Thread#setDaemon作为守护程序运行}。
+     * 
+     * 
      * @param name the name of the associated thread
      * @param isDaemon true if the associated thread should run as a daemon
      * @throws NullPointerException if {@code name} is null
@@ -179,6 +235,10 @@ public class Timer {
     /**
      * Schedules the specified task for execution after the specified delay.
      *
+     * <p>
+     *  在指定的延迟后,调度指定的任务以执行。
+     * 
+     * 
      * @param task  task to be scheduled.
      * @param delay delay in milliseconds before task is to be executed.
      * @throws IllegalArgumentException if <tt>delay</tt> is negative, or
@@ -197,6 +257,10 @@ public class Timer {
      * Schedules the specified task for execution at the specified time.  If
      * the time is in the past, the task is scheduled for immediate execution.
      *
+     * <p>
+     * 在指定时间计划要执行的指定任务。如果时间是过去的,则调度任务以立即执行。
+     * 
+     * 
      * @param task task to be scheduled.
      * @param time time at which task is to be executed.
      * @throws IllegalArgumentException if <tt>time.getTime()</tt> is negative.
@@ -230,6 +294,16 @@ public class Timer {
      * input, such as automatically repeating a character as long as a key
      * is held down.
      *
+     * <p>
+     *  在指定的延迟后开始,为重复的<i>固定延迟执行</i>调度指定的任务。后续执行以大约固定的时间间隔分开指定的时间段。
+     * 
+     *  <p>在固定延迟执行中,相对于前一个执行的实际执行时间,调度每个执行。如果执行由于任何原因(例如垃圾回收或其他后台活动)而延迟,后续执行也将被延迟。
+     * 从长远来看,执行频率通常会略低于指定周期的倒数(假设底层<tt> Object.wait(long)</tt>的系统时钟是准确的)。
+     * 
+     *  <p>固定延迟执行适用于需要"平滑"的重复活动。换句话说,它适用于在短期内保持频率比长期保持更为重要的活动。这包括大多数动画任务,例如以固定间隔闪烁光标。
+     * 它还包括其中响应于人类输入执行常规活动的任务,例如只要按住键就自动重复字符。
+     * 
+     * 
      * @param task   task to be scheduled.
      * @param delay  delay in milliseconds before task is to be executed.
      * @param period time in milliseconds between successive task executions.
@@ -272,6 +346,16 @@ public class Timer {
      * input, such as automatically repeating a character as long as a key
      * is held down.
      *
+     * <p>
+     * 从指定时间开始,为指定的任务重复<i>固定延迟执行</i>。后续执行以大约固定的时间间隔进行,以指定的时间间隔分隔。
+     * 
+     *  <p>在固定延迟执行中,相对于前一个执行的实际执行时间,调度每个执行。如果执行由于任何原因(例如垃圾回收或其他后台活动)而延迟,后续执行也将被延迟。
+     * 从长远来看,执行频率通常会略低于指定周期的倒数(假设底层<tt> Object.wait(long)</tt>的系统时钟是准确的)。作为上述的结果,如果调度的第一时间是过去的,则调度它立即执行。
+     * 
+     *  <p>固定延迟执行适用于需要"平滑"的重复活动。换句话说,它适用于在短期内保持频率比长期保持更为重要的活动。这包括大多数动画任务,例如以固定间隔闪烁光标。
+     * 它还包括其中响应于人类输入执行常规活动的任务,例如只要按住键就自动重复字符。
+     * 
+     * 
      * @param task   task to be scheduled.
      * @param firstTime First time at which task is to be executed.
      * @param period time in milliseconds between successive task executions.
@@ -310,6 +394,16 @@ public class Timer {
      * scheduling multiple repeating timer tasks that must remain synchronized
      * with respect to one another.
      *
+     * <p>
+     * 在指定的延迟后开始,为重复的<i>固定速率执行</i>调度指定的任务。后续执行以大约固定的时间间隔进行,以指定的时间间隔分隔。
+     * 
+     *  <p>在固定速率执行中,相对于初始执行的预定执行时间,调度每个执行。如果执行由于任何原因(例如垃圾收集或其他后台活动)而延迟,则两个或更多个执行将快速连续地发生以"赶上"。
+     * 从长远看,执行的频率将恰好是指定周期的倒数(假设底层<tt> Object.wait(long)</tt>的系统时钟是准确的)。
+     * 
+     *  <p>固定费率执行适用于对<i>绝对时间敏感的周期性活动,例如每小时每小时响一个钟声,或在特定时间每天运行定期维护。
+     * 它也适用于重复活动,其中执行固定数量的执行的总时间是重要的,例如每秒钟每秒钟进行10秒钟的倒计时定时器。最后,固定速率执行适用于调度必须保持彼此同步的多个重复定时器任务。
+     * 
+     * 
      * @param task   task to be scheduled.
      * @param delay  delay in milliseconds before task is to be executed.
      * @param period time in milliseconds between successive task executions.
@@ -354,6 +448,17 @@ public class Timer {
      * scheduling multiple repeating timer tasks that must remain synchronized
      * with respect to one another.
      *
+     * <p>
+     *  从指定的时间开始,为重复的<i>固定速率执行</i>调度指定的任务。后续执行以大约固定的时间间隔进行,以指定的时间间隔分隔。
+     * 
+     * <p>在固定速率执行中,相对于初始执行的预定执行时间,调度每个执行。如果执行由于任何原因(例如垃圾收集或其他后台活动)而延迟,则两个或更多个执行将快速连续地发生以"赶上"。
+     * 从长远看,执行的频率将恰好是指定周期的倒数(假设底层<tt> Object.wait(long)</tt>的系统时钟是准确的)。
+     * 作为上述的结果,如果调度的第一时间是过去的,则将调度任何"未命中"执行以立即"追赶"执行。
+     * 
+     *  <p>固定费率执行适用于对<i>绝对时间敏感的周期性活动,例如每小时每小时响一个钟声,或在特定时间每天运行定期维护。
+     * 它也适用于重复活动,其中执行固定数量的执行的总时间是重要的,例如每秒钟每秒钟进行10秒钟的倒计时定时器。最后,固定速率执行适用于调度必须保持彼此同步的多个重复定时器任务。
+     * 
+     * 
      * @param task   task to be scheduled.
      * @param firstTime First time at which task is to be executed.
      * @param period time in milliseconds between successive task executions.
@@ -378,6 +483,11 @@ public class Timer {
      * in Date.getTime() format.  This method checks timer state, task state,
      * and initial execution time, but not period.
      *
+     * <p>
+     * 在指定的时间以指定的时间段(以毫秒为单位)计划要执行的指定计时器任务。如果周期为正,则任务被安排重复执行;如果周期为零,则将任务调度为一次性执行。时间以Date.getTime()格式指定。
+     * 此方法检查计时器状态,任务状态和初始执行时间,但不检查周期。
+     * 
+     * 
      * @throws IllegalArgumentException if <tt>time</tt> is negative.
      * @throws IllegalStateException if task was already scheduled or
      *         cancelled, timer was cancelled, or timer thread terminated.
@@ -424,6 +534,13 @@ public class Timer {
      *
      * <p>This method may be called repeatedly; the second and subsequent
      * calls have no effect.
+     * <p>
+     *  终止此计时器,丢弃任何当前计划的任务。不干扰当前正在执行的任务(如果存在)。一旦定时器被终止,它的执行线程被正常终止,并且不能在它上面安排更多的任务。
+     * 
+     *  <p>请注意,从此计时器调用的计时器任务的run方法中调用此方法绝对保证正在进行的任务执行是此计时器将执行的最后一个任务执行。
+     * 
+     *  <p>此方法可以重复调用;第二个和后续呼叫没有效果。
+     * 
      */
     public void cancel() {
         synchronized(queue) {
@@ -450,6 +567,14 @@ public class Timer {
      * <p>Note that it is permissible to call this method from within a
      * a task scheduled on this timer.
      *
+     * <p>
+     *  从此计时器的任务队列中删除所有已取消的任务。 <i>调用此方法对计时器</i>的行为没有影响,但会从队列中删除对已取消任务的引用。如果没有对这些任务的外部引用,它们将成为垃圾收集的资格。
+     * 
+     * <p>大多数程序不需要调用此方法。它被设计为由消除大量任务的罕见应用程序使用。调用此方法会占用空间时间：方法的运行时间可能与n + c log n成正比,其中n是队列中的任务数量,c是取消任务的数量。
+     * 
+     *  <p>请注意,允许从此计时器上调度的任务中调用此方法。
+     * 
+     * 
      * @return the number of tasks removed from the queue.
      * @since 1.5
      */
@@ -477,6 +602,9 @@ public class Timer {
  * waits for tasks on the timer queue, executions them when they fire,
  * reschedules repeating tasks, and removes cancelled tasks and spent
  * non-repeating tasks from the queue.
+ * <p>
+ *  这个"帮助类"实现定时器的任务执行线程,该线程等待定时器队列上的任务,当它们触发时执行它们,重新调度重复任务,并且从队列中移除取消的任务和花费非重复任务。
+ * 
  */
 class TimerThread extends Thread {
     /**
@@ -485,6 +613,10 @@ class TimerThread extends Thread {
      * is true and there are no more tasks in our queue, there is no
      * work left for us to do, so we terminate gracefully.  Note that
      * this field is protected by queue's monitor!
+     * <p>
+     *  这个标志被收集器设置为false,通知我们没有更多的对我们的Timer对象的实时引用。一旦这个标志是真的,我们的队列中没有更多的任务,我们没有剩下的工作,所以我们终止了。
+     * 请注意,此字段受队列的监视器保护！。
+     * 
      */
     boolean newTasksMayBeScheduled = true;
 
@@ -493,6 +625,9 @@ class TimerThread extends Thread {
      * a reference to the Timer so the reference graph remains acyclic.
      * Otherwise, the Timer would never be garbage-collected and this
      * thread would never go away.
+     * <p>
+     *  我们的计时器的队列。我们存储此引用优先于定时器的引用,因此引用图形保持非循环。否则,定时器永远不会被垃圾回收,这个线程永远不会消失。
+     * 
      */
     private TaskQueue queue;
 
@@ -514,6 +649,9 @@ class TimerThread extends Thread {
 
     /**
      * The main timer loop.  (See class comment.)
+     * <p>
+     *  主定时器循环。 (见班级评论。)
+     * 
      */
     private void mainLoop() {
         while (true) {
@@ -565,6 +703,10 @@ class TimerThread extends Thread {
  * shares with its TimerThread.  Internally this class uses a heap, which
  * offers log(n) performance for the add, removeMin and rescheduleMin
  * operations, and constant time performance for the getMin operation.
+ * <p>
+ * 此类表示一个计时器任务队列：TimerTasks的优先级队列,在nextExecutionTime上排序。每个Timer对象都有其中的一个,它与它的TimerThread共享。
+ * 在内部,这个类使用一个堆,它为add,removeMin和rescheduleMin操作提供log(n)性能,并为getMin操作提供恒定时间性能。
+ * 
  */
 class TaskQueue {
     /**
@@ -574,17 +716,28 @@ class TaskQueue {
      * nextExecutionTime is in queue[1] (assuming the queue is nonempty).  For
      * each node n in the heap, and each descendant of n, d,
      * n.nextExecutionTime <= d.nextExecutionTime.
+     * <p>
+     *  表示为平衡二进制堆的优先级队列：队列[n]的两个子队列是队列[2 * n]和队列[2 * n + 1]。
+     * 优先级队列在nextExecutionTime字段上排序：具有最低nextExecutionTime的TimerTask在队列[1]中(假设队列是非空的)。
+     * 对于堆中的每个节点n,以及n,d,n.nextExecutionTime <= d.nextExecutionTime的每个后代。
+     * 
      */
     private TimerTask[] queue = new TimerTask[128];
 
     /**
      * The number of tasks in the priority queue.  (The tasks are stored in
      * queue[1] up to queue[size]).
+     * <p>
+     *  优先级队列中的任务数。 (任务存储在队列[1]到队列[size])。
+     * 
      */
     private int size = 0;
 
     /**
      * Returns the number of tasks currently on the queue.
+     * <p>
+     *  返回当前在队列上的任务数。
+     * 
      */
     int size() {
         return size;
@@ -592,6 +745,9 @@ class TaskQueue {
 
     /**
      * Adds a new task to the priority queue.
+     * <p>
+     *  将新任务添加到优先级队列。
+     * 
      */
     void add(TimerTask task) {
         // Grow backing store if necessary
@@ -605,6 +761,9 @@ class TaskQueue {
     /**
      * Return the "head task" of the priority queue.  (The head task is an
      * task with the lowest nextExecutionTime.)
+     * <p>
+     *  返回优先级队列的"头部任务"。 (头任务是具有最低nextExecutionTime的任务。)
+     * 
      */
     TimerTask getMin() {
         return queue[1];
@@ -614,6 +773,9 @@ class TaskQueue {
      * Return the ith task in the priority queue, where i ranges from 1 (the
      * head task, which is returned by getMin) to the number of tasks on the
      * queue, inclusive.
+     * <p>
+     *  返回优先级队列中的第i个任务,其中i的范围为1(由getMin返回的头任务)到队列上的任务数(含)。
+     * 
      */
     TimerTask get(int i) {
         return queue[i];
@@ -621,6 +783,9 @@ class TaskQueue {
 
     /**
      * Remove the head task from the priority queue.
+     * <p>
+     *  从优先级队列中删除头任务。
+     * 
      */
     void removeMin() {
         queue[1] = queue[size];
@@ -632,6 +797,9 @@ class TaskQueue {
      * Removes the ith element from queue without regard for maintaining
      * the heap invariant.  Recall that queue is one-based, so
      * 1 <= i <= size.
+     * <p>
+     *  从队列中删除第i个元素,而不考虑保持堆不变。回想一下,队列是基于1的,所以1 <= i <= size。
+     * 
      */
     void quickRemove(int i) {
         assert i <= size;
@@ -643,6 +811,9 @@ class TaskQueue {
     /**
      * Sets the nextExecutionTime associated with the head task to the
      * specified value, and adjusts priority queue accordingly.
+     * <p>
+     * 将与头任务相关联的nextExecutionTime设置为指定的值,并相应地调整优先级队列。
+     * 
      */
     void rescheduleMin(long newTime) {
         queue[1].nextExecutionTime = newTime;
@@ -651,6 +822,9 @@ class TaskQueue {
 
     /**
      * Returns true if the priority queue contains no elements.
+     * <p>
+     *  如果优先级队列不包含元素,则返回true。
+     * 
      */
     boolean isEmpty() {
         return size==0;
@@ -658,6 +832,9 @@ class TaskQueue {
 
     /**
      * Removes all elements from the priority queue.
+     * <p>
+     *  从优先级队列中删除所有元素。
+     * 
      */
     void clear() {
         // Null out task references to prevent memory leak
@@ -675,6 +852,11 @@ class TaskQueue {
      * This method functions by "promoting" queue[k] up the hierarchy
      * (by swapping it with its parent) repeatedly until queue[k]'s
      * nextExecutionTime is greater than or equal to that of its parent.
+     * <p>
+     *  建立堆不变量(如上所述),假设堆满足不变量,除了可能用于由k索引的叶节点(其可能具有小于其父节点的nextExecutionTime)。
+     * 
+     *  这个方法通过重复地"提升"队列[k]在层次结构中(通过与其父进行交换)来运行,直到queue [k]的nextExecutionTime大于或等于其父值。
+     * 
      */
     private void fixUp(int k) {
         while (k > 1) {
@@ -695,6 +877,11 @@ class TaskQueue {
      * This method functions by "demoting" queue[k] down the hierarchy
      * (by swapping it with its smaller child) repeatedly until queue[k]'s
      * nextExecutionTime is less than or equal to those of its children.
+     * <p>
+     *  在以k为根的子树中建立堆不变量(如上所述),假设其满足堆不变量,除了可能对节点k本身(其可能具有大于其子节点的nextExecutionTime)。
+     * 
+     *  该方法通过重复地将层次结构中的"降级"队列[k](通过用其较小的子交换它)来运行,直到队列[k]的nextExecutionTime小于或等于其子节点的nextExecutionTime。
+     * 
      */
     private void fixDown(int k) {
         int j;
@@ -712,6 +899,7 @@ class TaskQueue {
     /**
      * Establishes the heap invariant (described above) in the entire tree,
      * assuming nothing about the order of the elements prior to the call.
+     * <p>
      */
     void heapify() {
         for (int i = size/2; i >= 1; i--)

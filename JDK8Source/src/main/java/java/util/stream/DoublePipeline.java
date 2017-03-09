@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,10 @@ import java.util.function.Supplier;
  * Abstract base class for an intermediate pipeline stage or pipeline source
  * stage implementing whose elements are of type {@code double}.
  *
+ * <p>
+ *  抽象基类,用于实现其中元素类型为{@code double}的中间流水线阶段或流水线源阶段。
+ * 
+ * 
  * @param <E_IN> type of elements in the upstream source
  *
  * @since 1.8
@@ -58,6 +63,10 @@ abstract class DoublePipeline<E_IN>
     /**
      * Constructor for the head of a stream pipeline.
      *
+     * <p>
+     *  流管道头的构造函数。
+     * 
+     * 
      * @param source {@code Supplier<Spliterator>} describing the stream source
      * @param sourceFlags the source flags for the stream source, described in
      * {@link StreamOpFlag}
@@ -70,6 +79,10 @@ abstract class DoublePipeline<E_IN>
     /**
      * Constructor for the head of a stream pipeline.
      *
+     * <p>
+     *  流管道头的构造函数。
+     * 
+     * 
      * @param source {@code Spliterator} describing the stream source
      * @param sourceFlags the source flags for the stream source, described in
      * {@link StreamOpFlag}
@@ -83,6 +96,10 @@ abstract class DoublePipeline<E_IN>
      * Constructor for appending an intermediate operation onto an existing
      * pipeline.
      *
+     * <p>
+     *  用于将中间操作附加到现有管道上的构造函数。
+     * 
+     * 
      * @param upstream the upstream element source.
      * @param opFlags the operation flags
      */
@@ -93,6 +110,9 @@ abstract class DoublePipeline<E_IN>
     /**
      * Adapt a {@code Sink<Double> to a {@code DoubleConsumer}, ideally simply
      * by casting.
+     * <p>
+     *  将{@code Sink <Double>修改为{@code DoubleConsumer},最好只需通过投射即可。
+     * 
      */
     private static DoubleConsumer adapt(Sink<Double> sink) {
         if (sink instanceof DoubleConsumer) {
@@ -111,6 +131,11 @@ abstract class DoublePipeline<E_IN>
      * @implNote
      * The implementation attempts to cast to a Spliterator.OfDouble, and throws
      * an exception if this cast is not possible.
+     * <p>
+     *  将{@code Spliterator <Double>}修改为{@code Spliterator.OfDouble}。
+     * 
+     *  @implNote实现尝试强制转换为Spliterator.OfDouble,如果不可能转换,则抛出异常。
+     * 
      */
     private static Spliterator.OfDouble adapt(Spliterator<Double> s) {
         if (s instanceof Spliterator.OfDouble) {
@@ -384,6 +409,9 @@ abstract class DoublePipeline<E_IN>
          * summation, and index 2 holds the simple sum used to compute
          * the proper result if the stream contains infinite values of
          * the same sign.
+         * <p>
+         *  在为收集操作分配的数组中,索引0保存运行总和的高阶位,索引1保存通过补偿求和计算出的和的低阶位,索引2保存用于计算正确如果流包含相同符号的无限值,则返回结果。
+         * 
          */
         double[] summation = collect(() -> new double[3],
                                (ll, d) -> {
@@ -417,6 +445,12 @@ abstract class DoublePipeline<E_IN>
      * 2<sup>53</sup>. If the pipeline has more than 2<sup>53</sup>
      * values, the divisor in the average computation will saturate at
      * 2<sup>53</sup>, leading to additional numerical errors.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implNote {@code double}格式可以表示-2 <sup> 53 </sup>到2 <sup> 53 </sup>范围内的所有连续整数。
+     * 如果流水线具有多于2个</sup>值,则平均计算中的除数将在2 <53> </sup>饱和,导致附加的数字误差。
+     * 
      */
     @Override
     public final OptionalDouble average() {
@@ -426,6 +460,9 @@ abstract class DoublePipeline<E_IN>
          * the low-order bits of the sum computed via compensated
          * summation, index 2 holds the number of values seen, index 3
          * holds the simple sum.
+         * <p>
+         * 在为收集操作分配的数组中,索引0保存运行总和的高阶位,索引1保存通过补偿求和计算的和的低阶位,索引2保持看到的值的数量,索引3保持简单的和。
+         * 
          */
         double[] avg = collect(() -> new double[4],
                                (ll, d) -> {
@@ -512,12 +549,20 @@ abstract class DoublePipeline<E_IN>
     /**
      * Source stage of a DoubleStream
      *
+     * <p>
+     *  DoubleStream的源阶段
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      */
     static class Head<E_IN> extends DoublePipeline<E_IN> {
         /**
          * Constructor for the source stage of a DoubleStream.
          *
+         * <p>
+         *  DoubleStream的源阶段的构造方法。
+         * 
+         * 
          * @param source {@code Supplier<Spliterator>} describing the stream
          *               source
          * @param sourceFlags the source flags for the stream source, described
@@ -532,6 +577,10 @@ abstract class DoublePipeline<E_IN>
         /**
          * Constructor for the source stage of a DoubleStream.
          *
+         * <p>
+         *  DoubleStream的源阶段的构造方法。
+         * 
+         * 
          * @param source {@code Spliterator} describing the stream source
          * @param sourceFlags the source flags for the stream source, described
          *                    in {@link StreamOpFlag}
@@ -579,6 +628,10 @@ abstract class DoublePipeline<E_IN>
     /**
      * Base class for a stateless intermediate stage of a DoubleStream.
      *
+     * <p>
+     *  DoubleStream的无状态中间阶段的基类。
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      * @since 1.8
      */
@@ -587,6 +640,10 @@ abstract class DoublePipeline<E_IN>
          * Construct a new DoubleStream by appending a stateless intermediate
          * operation to an existing stream.
          *
+         * <p>
+         *  通过将无状态中间操作附加到现有流来构造新的DoubleStream。
+         * 
+         * 
          * @param upstream the upstream pipeline stage
          * @param inputShape the stream shape for the upstream pipeline stage
          * @param opFlags operation flags for the new stage
@@ -607,6 +664,10 @@ abstract class DoublePipeline<E_IN>
     /**
      * Base class for a stateful intermediate stage of a DoubleStream.
      *
+     * <p>
+     *  DoubleStream的有状态中间阶段的基类。
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      * @since 1.8
      */
@@ -615,6 +676,9 @@ abstract class DoublePipeline<E_IN>
          * Construct a new DoubleStream by appending a stateful intermediate
          * operation to an existing stream.
          *
+         * <p>
+         *  通过将有状态中间操作附加到现有流来构造新的DoubleStream。
+         * 
          * @param upstream the upstream pipeline stage
          * @param inputShape the stream shape for the upstream pipeline stage
          * @param opFlags operation flags for the new stage

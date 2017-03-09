@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Process.java,v 1.2.4.2 2005/09/15 18:21:57 jeffsuttor Exp $
+ * <p>
+ *  $ Id：Process.java,v 1.2.4.2 2005/09/15 18:21:57 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.xslt;
 
@@ -64,6 +77,10 @@ import com.sun.org.apache.xalan.internal.utils.SecuritySupport;
 import com.sun.org.apache.xalan.internal.trace.PrintTraceListener;
 import com.sun.org.apache.xalan.internal.trace.TraceManager;
 import com.sun.org.apache.xalan.internal.transformer.XalanProperties;
+/* <p>
+/*  import com.sun.org.apache.xalan.internal.trace.PrintTraceListener; import com.sun.org.apache.xalan.i
+/* nternal.trace.TraceManager; import com.sun.org.apache.xalan.internal.transformer.XalanProperties;。
+/* 
 */
 
 import com.sun.org.apache.xml.internal.utils.DefaultErrorHandler;
@@ -80,12 +97,19 @@ import org.xml.sax.helpers.XMLReaderFactory;
 /**
  * The main() method handles the Xalan command-line interface.
  * @xsl.usage general
+ * <p>
+ *  main()方法处理Xalan命令行界面。 @ xsl.usage general
+ * 
  */
 public class Process
 {
   /**
    * Prints argument options.
    *
+   * <p>
+   *  打印参数选项。
+   * 
+   * 
    * @param resbundle Resource bundle
    */
   protected static void printArgOptions(ResourceBundle resbundle)
@@ -132,6 +156,14 @@ public class Process
     System.out.println(resbundle.getString("optionINCREMENTAL"));
     System.out.println(resbundle.getString("optionNOOPTIMIMIZE"));
     System.out.println(resbundle.getString("optionRL"));
+    /* <p>
+    /*  System.out.println("\ n \ t \ t \ t"+ resbundle.getString("xslProc_xalan_options")+"\ n");
+    /* 
+    /*  System.out.println(resbundle.getString("optionQC")); //"[-QC(Quiet Pattern Conflicts Warnings)]");
+    /* 
+    /* // System.out.println(resbundle.getString("optionQ")); //"[-Q(Quiet Mode)]"); // sc 28-Feb-01 comment
+    /* ed out System.out.println(resbundle.getString("optionTT")); 。
+    /* 
     */
 
     System.out.println("\n\t\t\t" + resbundle.getString("xslProc_xsltc_options") + "\n");
@@ -158,6 +190,12 @@ public class Process
    * the value has spaces in it, you may need to quote it depending
    * on your shell environment).</p>
    *
+   * <p>
+   * 根据XSL样式表中的指令转换XML文档的命令行界面。 <p> Process类提供了从命令行执行转换的基本功能。要查看支持的参数列表,请调用零参数。
+   * </p> <p>要从命令行设置样式表参数,请使用<code> -PARAM名称表达式</code>。如果要将参数设置为字符串值,只需按原样传递字符串值,它将被解释为字符串。
+   *  (注意：如果值中有空格,您可能需要根据您的shell环境来引用它)。</p>。
+   * 
+   * 
    * @param argv Input parameters from command line
    */
   // J2SE does not support Xalan interpretive
@@ -177,6 +215,9 @@ public class Process
 
     /**
      * The default diagnostic writer...
+     * <p>
+     *  默认诊断书写器...
+     * 
      */
     java.io.PrintWriter diagnosticsWriter = new PrintWriter(System.err, true);
     java.io.PrintWriter dumpWriter = diagnosticsWriter;
@@ -240,6 +281,9 @@ public class Process
       // J2SE does not support Xalan interpretive
       /*
       PrintTraceListener tracer = null;
+      /* <p>
+      /*  PrintTraceListener tracer = null;
+      /* 
       */
       String outputType = null;
       String media = null;
@@ -314,6 +358,25 @@ public class Process
 
           // tfactory.setTraceTemplateChildren(true);
         }
+        /* <p>
+        /*  else if("-TT".equalsIgnoreCase(argv [i])){if(！useXSLTC){if(null == tracer)tracer = new PrintTraceListener(diagnosticsWriter);。
+        /* 
+        /*  tracer.m_traceTemplates = true; } else printInvalidXSLTCOption(" -  TT");
+        /* 
+        /*  // tfactory.setTraceTemplates(true); };} if("-TG".equalsIgnoreCase(argv [i])){if(！useXSLTC){if(null == tracer)tracer = new PrintTraceListener(diagnosticsWriter);。
+        /* 
+        /*  tracer.m_traceGeneration = true; } else printInvalidXSLTCOption(" -  TG");
+        /* 
+        /*  // tfactory.setTraceSelect(true); }; if("-TS".equalsIgnoreCase(argv [i])){if(！useXSLTC){if(null == tracer)tracer = new PrintTraceListener(diagnosticsWriter);。
+        /* 
+        /*  tracer.m_traceSelection = true; } else printInvalidXSLTCOption(" -  TS");
+        /* 
+        /* // tfactory.setTraceTemplates(true); }; if("-TTC".equalsIgnoreCase(argv [i])){if(！useXSLTC){if(null == tracer)tracer = new PrintTraceListener(diagnosticsWriter);。
+        /* 
+        /*  tracer.m_traceElements = true; } else printInvalidXSLTCOption(" -  TTC");
+        /* 
+        /*  // tfactory.setTraceTemplateChildren(true); }}
+        /* 
         */
         else if ("-INDENT".equalsIgnoreCase(argv[i]))
         {
@@ -424,6 +487,10 @@ public class Process
           else
             printInvalidXSLTCOption("-QC");
         }
+        /* <p>
+        /*  否则if("-QC".equalsIgnoreCase(argv [i])){if(！useXSLTC)quietConflictWarnings = true; else printInvalidXSLTCOption(" -  QC"); }
+        /* }。
+        /* 
         */
         else if ("-Q".equalsIgnoreCase(argv[i]))
         {
@@ -588,6 +655,18 @@ public class Process
             printInvalidXSLTCOption("-RL");
           }
         }
+        /* <p>
+        /* else if("-L".equalsIgnoreCase(argv [i])){if(！useXSLTC)tfactory.setAttribute(XalanProperties.SOURCE_LOCATION,Boolean.TRUE); else printInvalidXSLTCOption(" -  L"); }
+        /*  else if("-INCREMENTAL".equalsIgnoreCase(argv [i])){if(！useXSLTC)tfactory.setAttribute("http://xml.apache.org/xalan/features/incremental",java.lang.Boolean 。
+        /* 真正); else printInvalidXSLTCOption(" -  INCREMENTAL"); } else if("-NOOPTIMIZE".equalsIgnoreCase(argv [
+        /* i])){//默认为true。
+        /*  // //％REVIEW％我们应该有一个用于负//开关的泛化语法...并且如果它是默认的,可能应该接受逆。
+        /*  if(！useXSLTC)tfactory.setAttribute("http://xml.apache.org/xalan/features/optimize",java.lang.Boolean
+        /* .FALSE); else printInvalidXSLTCOption(" -  NOOPTIMIZE"); } else if("-RL".equalsIgnoreCase(argv [i])){if(！useXSLTC){if(i + 1 <argv.length)recursionLimit = Integer.parseInt(argv [++ i]); else System.err.println(XSLMessages.createMessage(XSLTErrorResources.ER_MISSING_ARG_FOR_OPTION,new Object [] {"-rl"})); //"Missing argument for);} else {if(i + 1 <argv.length && argv [i + 1] .charAt(0)！=' - ')i ++;。
+        /*  // //％REVIEW％我们应该有一个用于负//开关的泛化语法...并且如果它是默认的,可能应该接受逆。
+        /* 
+        /*  printInvalidXSLTCOption(" -  RL"); }}
+        /* 
         */
         // Generate the translet class and optionally specify the name
         // of the translet class.
@@ -808,6 +887,10 @@ public class Process
                 // This is currently controlled via TransformerFactoryImpl.
         if (!useXSLTC && useSourceLocation)
            stf.setAttribute(XalanProperties.SOURCE_LOCATION, Boolean.TRUE);
+        /* <p>
+        /*  //这当前是通过TransformerFactoryImpl控制。
+        /*  if(！useXSLTC && useSourceLocation)stf.setAttribute(XalanProperties.SOURCE_LOCATION,Boolean.TRUE);。
+        /* 
         */
 
         // Did they pass in a stylesheet, or should we get it from the
@@ -865,6 +948,21 @@ public class Process
             // sc 28-Feb-01 if we re-implement this, please uncomment helpmsg in printArgOptions
             // impl.setDiagnosticsOutput( setQuietMode ? null : diagnosticsWriter );
           }
+          /* <p>
+          /* if(transformer instanceof com.sun.org.apache.xalan.internal.transformer.TransformerImpl){com.sun.org.apache.xalan.internal.transformer.TransformerImpl impl =(com.sun.org.apache.xalan.internal变压器;变压器; TraceManager tm = impl.getTraceManager();。
+          /* 
+          /*  if(null！= tracer)tm.addTraceListener(tracer);
+          /* 
+          /*  impl.setQuietConflictWarnings(quietConflictWarnings);
+          /* 
+          /*  //这当前是通过TransformerFactoryImpl控制。
+          /*  if(useSourceLocation)impl.setProperty(XalanProperties.SOURCE_LOCATION,Boolean.TRUE);。
+          /* 
+          /*  if(recursionLimit> 0)impl.setRecursionLimit(recursionLimit);
+          /* 
+          /*  // sc 28-Feb-01如果我们重新实现这个,请取消注释helpmsg在printArgOptions // impl.setDiagnosticsOutput(setQuietMo​​de?n
+          /* ull：diagnosticsWriter); }}。
+          /* 
           */
 
           int nParams = params.size();
@@ -981,6 +1079,10 @@ public class Process
               if (!useXSLTC)
                 stf.setAttribute(com.sun.org.apache.xalan.internal.processor.TransformerFactoryImpl.FEATURE_INCREMENTAL,
                    Boolean.TRUE);
+              /* <p>
+              /*  if(！useXSLTC)stf.setAttribute(com.sun.org.apache.xalan.internal.processor.TransformerFactoryImpl.FEA
+              /* TURE_INCREMENTAL,Boolean.TRUE);。
+              /* 
               */
 
               TransformerHandler th = stf.newTransformerHandler(stylesheet);
@@ -1183,6 +1285,10 @@ public class Process
   /** It is _much_ easier to debug under VJ++ if I can set a single breakpoint
    * before this blows itself out of the water...
    * (I keep checking this in, it keeps vanishing. Grr!)
+   * <p>
+   *  在这之前,它自己从水里吹出来...(我不断检查这里,它不断消失Grr！)
+   * 
+   * 
    * */
   static void doExit(String msg)
   {
@@ -1192,6 +1298,10 @@ public class Process
   /**
    * Wait for a return key to continue
    *
+   * <p>
+   *  等待返回键继续
+   * 
+   * 
    * @param resbundle The resource bundle
    */
   private static void waitForReturnKey(ResourceBundle resbundle)
@@ -1207,6 +1317,10 @@ public class Process
   /**
    * Print a message if an option cannot be used with -XSLTC.
    *
+   * <p>
+   *  如果某个选项无法与-XSLTC一起使用,请打印消息。
+   * 
+   * 
    * @param option The option String
    */
   private static void printInvalidXSLTCOption(String option)
@@ -1217,6 +1331,9 @@ public class Process
   /**
    * Print a message if an option can only be used with -XSLTC.
    *
+   * <p>
+   *  如果选项只能与-XSLTC一起使用,请打印消息。
+   * 
    * @param option The option String
    */
   private static void printInvalidXalanOption(String option)

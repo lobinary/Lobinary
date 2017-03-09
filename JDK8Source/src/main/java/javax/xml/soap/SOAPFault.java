@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,13 @@ import javax.xml.namespace.QName;
  * Depending on the <code>protocol</code> specified while creating the
  * <code>MessageFactory</code> instance,  a <code>SOAPFault</code> has
  * sub-elements as defined in the SOAP 1.1/SOAP 1.2 specification.
+ * <p>
+ *  包含错误和/或状态信息的<code> SOAPBody </code>对象中的元素。此信息可能与<code> SOAPMessage </code>对象中的错误或与消息本身中的内容无关的问题有关。
+ * 与消息本身无关的问题通常是处理中的错误,例如不能与上游服务器通信。
+ * <P>
+ *  根据在创建<code> MessageFactory </code>实例时指定的<code>协议</code>,<code> SOAPFault </code>具有SOAP 1.1 / SOAP 1.
+ * 2规范中定义的子元素。
+ * 
  */
 public interface SOAPFault extends SOAPBodyElement {
 
@@ -65,6 +73,19 @@ public interface SOAPFault extends SOAPBodyElement {
      * </PRE>
      * It is preferable to use this method over {@link #setFaultCode(String)}.
      *
+     * <p>
+     *  使用给定的故障代码设置此<code> SOAPFault </code>对象。
+     * 
+     *  <p>提供故障信息的故障代码在SOAP 1.1规范中定义。故障代码是必需的,并且必须是类型<code> Name </code>。这种方法提供了一种方便的方法来设置故障代码。例如,
+     * 
+     * <PRE>
+     *  SOAPEnvelope se = ...; //在SOAP命名空间中使用localName //"Client"创建限定名。注意,prefix参数是可选的,并且为空//这里使得实现使用适当的前缀。
+     * 名称qname = se.createName("Client",null,SOAPConstants.URI_NS_SOAP_ENVELOPE); SOAPFault fault = ...; fau
+     * lt.setFaultCode(qname);。
+     * </PRE>
+     *  最好在{@link #setFaultCode(String)}上使用此方法。
+     * 
+     * 
      * @param faultCodeQName a <code>Name</code> object giving the fault
      * code to be set. It must be namespace qualified.
      * @see #getFaultCodeAsName
@@ -81,6 +102,12 @@ public interface SOAPFault extends SOAPBodyElement {
      *
      * It is preferable to use this method over {@link #setFaultCode(Name)}.
      *
+     * <p>
+     * 使用给定的故障代码设置此<code> SOAPFault </code>对象。
+     * 
+     *  最好在{@link #setFaultCode(Name)}上使用此方法。
+     * 
+     * 
      * @param faultCodeQName a <code>QName</code> object giving the fault
      * code to be set. It must be namespace qualified.
      * @see #getFaultCodeAsQName
@@ -103,6 +130,13 @@ public interface SOAPFault extends SOAPBodyElement {
      * Because the fault code is required to be a QName it is preferable to
      * use the {@link #setFaultCode(Name)} form of this method.
      *
+     * <p>
+     *  使用给出的故障代码设置此<code> SOAPFault </code>对象。
+     * <P>
+     *  给出关于故障的信息的故障代码在SOAP 1.1规范中定义。此元素在SOAP 1.1中是必需的。
+     * 因为故障代码需要是QName,所以最好使用此方法的{@link #setFaultCode(Name)}形式。
+     * 
+     * 
      * @param faultCode a <code>String</code> giving the fault code to be set.
      *         It must be of the form "prefix:localName" where the prefix has
      *         been defined in a namespace declaration.
@@ -125,6 +159,12 @@ public interface SOAPFault extends SOAPBodyElement {
      * it allows applications to easily access the namespace name without
      * additional parsing.
      *
+     * <p>
+     *  将此<<code> SOAPFault </code>对象的强制性SOAP 1.1错误代码作为SAAJ <code> Name </code>对象获取。
+     *  SOAP 1.1规范要求"faultcode"元素的值为类型QName。此方法以SAAJ Name对象的形式返回元素的内容作为QName。
+     * 应该使用此方法而不是<code> getFaultCode </code>方法,因为它允许应用程序轻松访问命名空间名称,而无需额外的解析。
+     * 
+     * 
      * @return a <code>Name</code> representing the faultcode
      * @see #setFaultCode(Name)
      *
@@ -137,6 +177,10 @@ public interface SOAPFault extends SOAPBodyElement {
      * Gets the fault code for this
      * <code>SOAPFault</code> object as a <code>QName</code> object.
      *
+     * <p>
+     *  将<code> SOAPFault </code>对象的故障代码作为<code> QName </code>对象获取。
+     * 
+     * 
      * @return a <code>QName</code> representing the faultcode
      *
      * @see #setFaultCode(QName)
@@ -149,6 +193,10 @@ public interface SOAPFault extends SOAPBodyElement {
      * Gets the Subcodes for this <code>SOAPFault</code> as an iterator over
      * <code>QNames</code>.
      *
+     * <p>
+     *  获取<code> SOAPFault </code>的子代码作为<code> QNames </code>的迭代器。
+     * 
+     * 
      * @return an <code>Iterator</code> that accesses a sequence of
      *      <code>QNames</code>. This <code>Iterator</code> should not support
      *      the optional <code>remove</code> method. The order in which the
@@ -168,6 +216,11 @@ public interface SOAPFault extends SOAPBodyElement {
      * <code>getFaultSubcodes</code> will return an empty iterator until a call
      * to <code>appendFaultSubcode</code> is made.
      *
+     * <p>
+     *  删除此<code> SOAPFault </code>可能包含的任何子代码。
+     * 对<code> getFaultSubcodes </code>的后续调用将返回一个空迭代器,直到调用<code> appendFaultSubcode </code>。
+     * 
+     * 
      * @exception UnsupportedOperationException if this message does not
      *      support the SOAP 1.2 concept of Subcode.
      *
@@ -181,6 +234,10 @@ public interface SOAPFault extends SOAPBodyElement {
      * represented by a recursive sequence of subelements rooted in the
      * mandatory Code subelement of a SOAP Fault.
      *
+     * <p>
+     * 在此<code> SOAPFault </code>包含的子代码序列的末尾添加一个子代码。在SOAP 1.2中引入的子代码由基于SOAP故障的强制性代码子元素的子元素的递归序列表示。
+     * 
+     * 
      * @param subcode a QName containing the Value of the Subcode.
      *
      * @exception SOAPException if there was an error in setting the Subcode
@@ -194,6 +251,10 @@ public interface SOAPFault extends SOAPBodyElement {
     /**
      * Gets the fault code for this <code>SOAPFault</code> object.
      *
+     * <p>
+     *  获取此<> SOAPFault </code>对象的故障代码。
+     * 
+     * 
      * @return a <code>String</code> with the fault code
      * @see #getFaultCodeAsName
      * @see #setFaultCode
@@ -209,6 +270,14 @@ public interface SOAPFault extends SOAPBodyElement {
      * If this <code>SOAPFault</code> supports SOAP 1.2 then this call is
      * equivalent to {@link #setFaultRole(String)}
      *
+     * <p>
+     *  使用给定的fault actor设置此<code> SOAPFault </code>对象。
+     * <P>
+     *  故障代理是导致故障发生的消息路径中的接收者。
+     * <P>
+     *  如果这个<code> SOAPFault </code>支持SOAP 1.2,那么这个调用相当于{@link #setFaultRole(String)}
+     * 
+     * 
      * @param faultActor a <code>String</code> identifying the actor that
      *        caused this <code>SOAPFault</code> object
      * @see #getFaultActor
@@ -224,6 +293,12 @@ public interface SOAPFault extends SOAPBodyElement {
      * If this <code>SOAPFault</code> supports SOAP 1.2 then this call is
      * equivalent to {@link #getFaultRole()}
      *
+     * <p>
+     *  获取此<> SOAPFault </code>对象的故障代理。
+     * <P>
+     *  如果这个<code> SOAPFault </code>支持SOAP 1.2,那么这个调用相当于{@link #getFaultRole()}
+     * 
+     * 
      * @return a <code>String</code> giving the actor in the message path
      *         that caused this <code>SOAPFault</code> object
      * @see #setFaultActor
@@ -241,6 +316,15 @@ public interface SOAPFault extends SOAPBodyElement {
      *      addFaultReasonText(faultString, Locale.getDefault());
      * </pre>
      *
+     * <p>
+     *  将<code> SOAPFault </code>对象的故障字符串设置为给定字符串。
+     * <P>
+     *  如果这个<code> SOAPFault </code>是支持SOAP 1.2的消息的一部分,则此调用等效于：
+     * <pre>
+     *  addFaultReasonText(faultString,Locale.getDefault());
+     * </pre>
+     * 
+     * 
      * @param faultString a <code>String</code> giving an explanation of
      *        the fault
      * @see #getFaultString
@@ -261,6 +345,15 @@ public interface SOAPFault extends SOAPBodyElement {
      *      addFaultReasonText(faultString, locale);
      * </pre>
      *
+     * <p>
+     *  将<code> SOAPFault </code>对象的故障字符串设置为给定字符串并本地化到给定的语言环境。
+     * <P>
+     *  如果这个<code> SOAPFault </code>是支持SOAP 1.2的消息的一部分,则此调用等效于：
+     * <pre>
+     *  addFaultReasonText(faultString,locale);
+     * </pre>
+     * 
+     * 
      * @param faultString a <code>String</code> giving an explanation of
      *         the fault
      * @param locale a {@link java.util.Locale Locale} object indicating
@@ -289,6 +382,16 @@ public interface SOAPFault extends SOAPBodyElement {
      *    return reason;
      * </pre>
      *
+     * <p>
+     *  获取此<> SOAPFault </code>对象的故障字符串。
+     * <P>
+     *  如果这个<code> SOAPFault </code>是支持SOAP 1.2的消息的一部分,则此调用等效于：
+     * <pre>
+     * String reason = null; try {reason =(String)getFaultReasonTexts()。
+     * next(); } catch(SOAPException e){} return reason;。
+     * </pre>
+     * 
+     * 
      * @return a <code>String</code> giving an explanation of
      *        the fault
      * @see #setFaultString(String)
@@ -311,6 +414,16 @@ public interface SOAPFault extends SOAPBodyElement {
      *    return locale;
      * </pre>
      *
+     * <p>
+     *  获取此<<code> SOAPFault </code>对象的故障字符串的区域设置。
+     * <P>
+     *  如果这个<code> SOAPFault </code>是支持SOAP 1.2的消息的一部分,则此调用等效于：
+     * <pre>
+     *  Locale locale = null; try {locale =(Locale)getFaultReasonLocales()。
+     * next(); } catch(SOAPException e){} return locale;。
+     * </pre>
+     * 
+     * 
      * @return a <code>Locale</code> object indicating the native language of
      *          the fault string or <code>null</code> if no locale was specified
      * @see #setFaultString(String, Locale)
@@ -324,6 +437,11 @@ public interface SOAPFault extends SOAPBodyElement {
      * subelement and false otherwise. Equivalent to
      * <code>(getDetail()!=null)</code>.
      *
+     * <p>
+     *  如果此<code> SOAPFault </code>具有<code> Detail </code>子元素,则返回true,否则返回false。
+     * 等同于<code>(getDetail()！= null)</code>。
+     * 
+     * 
      * @return true if this <code>SOAPFault</code> has a <code>Detail</code>
      * subelement and false otherwise.
      *
@@ -340,6 +458,13 @@ public interface SOAPFault extends SOAPBodyElement {
      * faults in the <code>SOAPBodyElement</code> objects if this is a
      * SOAP 1.1 Fault.
      *
+     * <p>
+     *  返回此<> SOAPFault </code>对象的可选详细信息元素。
+     * <P>
+     *  <code> Detail </code>对象包含应用程序特定的错误信息,如果这是SOAP 1.1 Fault,则错误信息的范围限制在<code> SOAPBodyElement </code>对象中
+     * 的错误。
+     * 
+     * 
      * @return a <code>Detail</code> object with application-specific
      *         error information if present, null otherwise
      */
@@ -354,6 +479,12 @@ public interface SOAPFault extends SOAPBodyElement {
      * contains a detail. Therefore, this method should be called
      * only after the existing detail has been removed.
      *
+     * <p>
+     *  创建一个可选的<code> Detail </code>对象,并将其设置为<code> SOAPFault </code>对象的<code> Detail </code>对象。
+     * <P>
+     *  当故障已包含详细信息时添加详细信息是非法的。因此,只有在删除现有细节之后才应调用此方法。
+     * 
+     * 
      * @return the new <code>Detail</code> object
      *
      * @exception SOAPException if this
@@ -369,6 +500,11 @@ public interface SOAPFault extends SOAPBodyElement {
      * <code>getFaultReasonText</code> in order to obtain a localized version
      * of the Reason Text string.
      *
+     * <p>
+     *  在具有相关联的原因文本项的<code> Locale </code>的不同序列上返回<code>迭代器</code>。
+     * 这些<code> Locale </code>中的任何一个都可以用于调用<code> getFaultReasonText </code>,以获取原因文本字符串的本地化版本。
+     * 
+     * 
      * @return an <code>Iterator</code> over a sequence of <code>Locale</code>
      *      objects for which there are associated Reason Text items.
      *
@@ -386,6 +522,10 @@ public interface SOAPFault extends SOAPBodyElement {
      * <code>String</code> objects containing all of the Reason Text items for
      * this <code>SOAPFault</code>.
      *
+     * <p>
+     * 在包含此<code> SOAPFault </code>的所有原因文本项的<code> String </code>对象序列中返回<code>迭代器</code>。
+     * 
+     * 
      * @return an <code>Iterator</code> over env:Fault/env:Reason/env:Text items.
      *
      * @exception SOAPException if there was an error in retrieving
@@ -402,6 +542,10 @@ public interface SOAPFault extends SOAPBodyElement {
      * If more than one such Reason Text exists the first matching Text is
      * returned
      *
+     * <p>
+     *  返回与给定的<code> Locale </code>关联的原因文本。如果存在多于一个这样的原因文本,则返回第一匹配的文本
+     * 
+     * 
      * @param locale -- the <code>Locale</code> for which a localized
      *      Reason Text is desired
      *
@@ -433,6 +577,18 @@ public interface SOAPFault extends SOAPBodyElement {
      * fault.addFaultReasonText("Version Mismatch", Locale.ENGLISH);
      * </PRE>
      *
+     * <p>
+     *  附加或替换包含指定文本消息和源自<code> locale </code>的<i> xml：lang </i>的原因文本项。
+     * 如果包含此<i> xml：lang </i>的原因文本项目已存在,则其文本值将替换为<code> text </code>。
+     *  <code> locale </code>参数不应为<code> null </code>。
+     * <P>
+     *  代码示例：
+     * 
+     * <PRE>
+     *  SOAPFault fault = ...; fault.addFaultReasonText("Version Mismatch",Locale.ENGLISH);
+     * </PRE>
+     * 
+     * 
      * @param text -- reason message string
      * @param locale -- Locale object representing the locale of the message
      *
@@ -451,6 +607,10 @@ public interface SOAPFault extends SOAPBodyElement {
      * <code>SOAPFault</code> object. The Node element is
      * optional in SOAP 1.2.
      *
+     * <p>
+     *  返回此<> SOAPFault </code>对象的可选Node元素值。 Node元素在SOAP 1.2中是可选的。
+     * 
+     * 
      * @return Content of the env:Fault/env:Node element as a String
      * or <code>null</code> if none
      *
@@ -466,6 +626,10 @@ public interface SOAPFault extends SOAPBodyElement {
      * this <code>SOAPFault</code> object. The Node element
      * is optional in SOAP 1.2.
      *
+     * <p>
+     *  为此<code> SOAPFault </code>对象创建或替换任何现有的Node元素值。 Node元素在SOAP 1.2中是可选的。
+     * 
+     * 
      * @exception SOAPException  if there was an error in setting the
      *            Node for this  <code>SOAPFault</code> object.
      * @exception UnsupportedOperationException if this message does not
@@ -481,6 +645,10 @@ public interface SOAPFault extends SOAPBodyElement {
      * <code>SOAPFault</code> object. The Role element is
      * optional in SOAP 1.2.
      *
+     * <p>
+     *  返回此<> SOAPFault </code>对象的可选Role元素值。 Role元素在SOAP 1.2中是可选的。
+     * 
+     * 
      * @return Content of the env:Fault/env:Role element as a String
      * or <code>null</code> if none
      *
@@ -496,6 +664,9 @@ public interface SOAPFault extends SOAPBodyElement {
      * this <code>SOAPFault</code> object. The Role element
      * is optional in SOAP 1.2.
      *
+     * <p>
+     *  为此<code> SOAPFault </code>对象创建或替换任何现有的Role元素值。 Role元素在SOAP 1.2中是可选的。
+     * 
      * @param uri - the URI of the Role
      *
      * @exception SOAPException  if there was an error in setting the

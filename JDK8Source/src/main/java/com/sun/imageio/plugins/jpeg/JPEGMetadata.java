@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,9 @@ import java.awt.Point;
 
 /**
  * Metadata for the JPEG plug-in.
+ * <p>
+ *  JPEG插件的元数据。
+ * 
  */
 public class JPEGMetadata extends IIOMetadata implements Cloneable {
 
@@ -68,6 +72,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * A copy of <code>markerSequence</code>, created the first time the
      * <code>markerSequence</code> is modified.  This is used by reset
      * to restore the original state.
+     * <p>
+     *  <code> markerSequence </code>的副本,在第一次修改<code> markerSequence </code>时创建。这通过复位来使用以恢复原始状态。
+     * 
      */
     private List resetSequence = null;
 
@@ -76,6 +83,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * JPEG.  This is used to enforce the prohibition of JFIF thumbnails
      * containing any JFIF marker segments, and to ensure generation of
      * a correct native subtree during <code>getAsTree</code>.
+     * <p>
+     *  读取存储为JPEG的缩略图时,设置为<code> true </code>。
+     * 这用于强制禁止包含任何JFIF标记段的JFIF缩略图,并确保在<code> getAsTree </code>期间生成正确的本地子树。
+     * 
      */
     private boolean inThumb = false;
 
@@ -84,6 +95,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * presence or absence of an alpha channel to the transparency
      * node construction method.  Used only when constructing a
      * standard metadata tree.
+     * <p>
+     *  由色度节点构造方法设置以向透明节点构建方法发信号通知存在或不存在α通道。仅在构建标准元数据树时使用。
+     * 
      */
     private boolean hasAlpha;
 
@@ -98,6 +112,11 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * of the list if it is present, and any JFXX or APP2ICC marker
      * segments are subordinate to the JFIF marker segment.  This
      * list is package visible so that the writer can access it.
+     * <p>
+     *  所有数据都是<code> MarkerSegment </code>对象的列表。当访问列表时,使用标签来标识特定的子类。
+     * 任何JFIF标记段必须是列表的第一个元素(如果它存在),并且任何JFXX或APP2ICC标记段从属于JFIF标记段。此列表是可见的,以便作者可以访问它。
+     * 
+     * 
      * @see #MarkerSegment
      */
     List markerSequence = new ArrayList();
@@ -105,6 +124,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
     /**
      * Indicates whether this object represents stream or image
      * metadata.  Package-visible so the writer can see it.
+     * <p>
+     *  指示此对象是否表示流或图像元数据。软件包可见,所以作家可以看到它。
+     * 
      */
     final boolean isStream;
 
@@ -114,6 +136,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
 
     /**
      * Constructor containing code shared by other constructors.
+     * <p>
+     *  包含由其他构造函数共享的代码的构造方法。
+     * 
      */
     JPEGMetadata(boolean isStream, boolean inThumb) {
         super(true,  // Supports standard format
@@ -135,6 +160,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * contents of an <code>ImageInputStream</code>.  Has package-only
      * access.
      *
+     * <p>
+     *  通过读取<code> ImageInputStream </code>的内容构造一个<code> JPEGMetadata </code>对象。有包只读访问。
+     * 
+     * 
      * @param isStream A boolean indicating whether this object will be
      * stream or image metadata.
      * @param isThumb A boolean indicating whether this metadata object
@@ -366,6 +395,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
     /**
      * Constructs a default stream <code>JPEGMetadata</code> object appropriate
      * for the given write parameters.
+     * <p>
+     * 构造适合于给定写入参数的默认流<code> JPEGMetadata </code>对象。
+     * 
      */
     JPEGMetadata(ImageWriteParam param, JPEGImageWriter writer) {
         this(true, false);
@@ -399,6 +431,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
     /**
      * Constructs a default image <code>JPEGMetadata</code> object appropriate
      * for the given image type and write parameters.
+     * <p>
+     *  构造与给定图像类型和写入参数相对应的默认图像<code> JPEGMetadata </code>对象。
+     * 
      */
     JPEGMetadata(ImageTypeSpecifier imageType,
                  ImageWriteParam param,
@@ -643,6 +678,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
     /**
      * Returns the first MarkerSegment object in the list
      * with the given tag, or null if none is found.
+     * <p>
+     *  返回列表中带有给定标记的第一个MarkerSegment对象,如果没有找到则返回null。
+     * 
      */
     MarkerSegment findMarkerSegment(int tag) {
         Iterator iter = markerSequence.iterator();
@@ -658,6 +696,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
     /**
      * Returns the first or last MarkerSegment object in the list
      * of the given class, or null if none is found.
+     * <p>
+     *  返回给定类的列表中的第一个或最后一个MarkerSegment对象,如果找不到则返回null。
+     * 
      */
     MarkerSegment findMarkerSegment(Class cls, boolean first) {
         if (first) {
@@ -683,6 +724,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
     /**
      * Returns the index of the first or last MarkerSegment in the list
      * of the given class, or -1 if none is found.
+     * <p>
+     *  返回给定类的列表中的第一个或最后一个MarkerSegment的索引,如果找不到,则返回-1。
+     * 
      */
     private int findMarkerSegmentPosition(Class cls, boolean first) {
         if (first) {
@@ -732,6 +776,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
 
     /**
      * Returns a deep copy of the current marker sequence.
+     * <p>
+     *  返回当前标记序列的深度副本。
+     * 
      */
     private List cloneSequence() {
         if (markerSequence == null) {
@@ -1117,6 +1164,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * If a JFIF marker exists, update it from the subtree.
      * If none exists, create one from the subtree and insert it at the
      * beginning of the marker sequence.
+     * <p>
+     *  如果子树是非空的,则将JFIF子树合并到标记序列中。如果存在JFIF标记,请从子树更新它。如果不存在,请从子树创建一个,并将其插入标记序列的开头。
+     * 
      */
     private void mergeJFIFsubtree(Node JPEGvariety)
         throws IIOInvalidTreeException {
@@ -1178,6 +1228,11 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * the first SOS segment, if there is one.
      * If there is no SOS segment, the new DQT segment is added to the end
      * of the sequence.
+     * <p>
+     * 将给定的DQT节点合并到标记序列中。如果序列中已存在DQT标记段,则节点中的每个表将在任何DQT段中用相同的表id替换第一个表。
+     * 如果现有DQT段中没有一个包含具有相同id的表,则将该表添加到最后一个现有DQT段。如果没有DQT段,则创建并添加如下的新段：如果存在DHT段,则新的DQT段在第一个之前插入。
+     * 如果没有DHT段,则新的DQT段在SOF段之前插入,如果有的话。如果没有SOF段,则新的DQT段在第一个SOS段之前插入,如果有的话。如果没有SOS段,则将新的DQT段添加到序列的末尾。
+     * 
      */
     private void mergeDQTNode(Node node) throws IIOInvalidTreeException {
         // First collect any existing DQT nodes into a local list
@@ -1254,6 +1309,11 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * the first SOS segment, if there is one.
      * If there is no SOS segment, the new DHT segment is added to the end
      * of the sequence.
+     * <p>
+     * 将给定的DHT节点合并到标记序列中。如果在序列中已经存在DHT标记段,则节点中的每个表将在任何DHT段中用相同的表类和表id替换第一个表。
+     * 如果现有DHT段中没有一个包含具有相同类和id的表,则将该表添加到最后存在的DHT段。如果没有DHT段,则创建并添加如下的新段：如果存在DQT段,则新的DHT段紧接在最后的DQT段之后被插入。
+     * 如果没有DQT段,则新的DHT段在SOF段之前插入,如果有的话。如果没有SOF段,则新的DHT段在第一个SOS段之前插入,如果有的话。如果没有SOS段,则将新的DHT段添加到序列的末尾。
+     * 
      */
     private void mergeDHTNode(Node node) throws IIOInvalidTreeException {
         // First collect any existing DQT nodes into a local list
@@ -1332,6 +1392,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * the first SOS segment, if there is one.
      * If there is no SOS segment, the new DRI segment is added to the end
      * of the sequence.
+     * <p>
+     *  将给定的DRI节点合并到标记序列中。如果已存在DRI标记段,则会更新重新启动间隔值。如果没有DRI段,则创建并添加新的DRI段如下：如果存在SOF段,则在其之前插入新的DRI段。
+     * 如果没有SOF段,则新的DRI段在第一SOS段之前插入,如果有的话。如果没有SOS段,则将新的DRI段添加到序列的末尾。
+     * 
      */
     private void mergeDRINode(Node node) throws IIOInvalidTreeException {
         DRIMarkerSegment dri =
@@ -1356,6 +1420,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * Merge the given COM node into the marker sequence.
      * A new COM marker segment is created and added to the sequence
      * using insertCOMMarkerSegment.
+     * <p>
+     *  将给定的COM节点合并到标记序列中。将创建一个新的COM标记段,并使用insertCOMMarkerSegment将其添加到序列中。
+     * 
      */
     private void mergeCOMNode(Node node) throws IIOInvalidTreeException {
         COMMarkerSegment newGuy = new COMMarkerSegment(node);
@@ -1373,6 +1440,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
       * Adobe marker segment, if there is one.
       * If there is no Adobe segment, the new COM segment is inserted
       * at the beginning of the sequence.
+      * <p>
+      * 将新的COM标记段插入标记序列中的适当位置,如下所示：如果已经存在COM标记段,则新的COM标记段将插入到最后一个之后。如果没有COM段,则新的COM段将插入JFIF段之后(如果有)。
+      * 如果没有JFIF段,则新的COM段将插入到Adobe标记段(如果有)之后。如果没有Adobe段,则新的COM段将插入到序列的开头。
+      * 
       */
     private void insertCOMMarkerSegment(COMMarkerSegment newGuy) {
         int lastCOM = findMarkerSegmentPosition(COMMarkerSegment.class, false);
@@ -1395,6 +1466,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * are updated from the node.
      * If there is no Adobe segment, then a new one is created and added
      * using insertAdobeMarkerSegment.
+     * <p>
+     *  将给定的Adobe APP14节点合并到标记序列中。如果已经存在Adobe标记段,则其属性从该节点更新。
+     * 如果没有Adobe细分,则使用insertAdobeMarkerSegment创建并添加一个新细分。
+     * 
      */
     private void mergeAdobeNode(Node node) throws IIOInvalidTreeException {
         AdobeMarkerSegment adobe =
@@ -1416,6 +1491,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * last Unknown segment, if there are any.
      * If there are no Unknown segments, the new Adobe segment is inserted
      * at the beginning of the sequence.
+     * <p>
+     *  将给定的AdobeMarkerSegment插入到标记序列中,如下所示(我们假设还没有Adobe段)：如果有一个JFIF段,则在其后面插入新的Adobe段。
+     * 如果没有JFIF段,则新的Adobe段将插入到最后一个未知段之后(如果有)。如果没有未知段,则新的Adobe段将插入到序列的开头。
+     * 
      */
     private void insertAdobeMarkerSegment(AdobeMarkerSegment newGuy) {
         boolean hasJFIF =
@@ -1442,6 +1521,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * the Adobe marker segment, if there is one.
      * If there is no Adobe segment, the new Unknown segment is inserted
      * at the beginning of the sequence.
+     * <p>
+     * 将给定的未知节点合并到标记序列中。将创建一个新的未知标记段,并将其添加到序列中,如下所示：如果已存在未知标记段,则新的未标记段将插入到最后一个标记段之后。
+     * 如果没有未知标记段,则新的未知标记段将插入JFIF段之后(如果有)。如果没有JFIF段,则新的未知段会在Adobe标记段之前插入,如果有的话。如果没有Adobe段,则新的未知段将插入到序列的开头。
+     * 
      */
     private void mergeUnknownNode(Node node) throws IIOInvalidTreeException {
         MarkerSegment newGuy = new MarkerSegment(node);
@@ -1470,6 +1553,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * If there is no SOS segment, the new SOF segment is added to the end
      * of the sequence.
      *
+     * <p>
+     *  将给定的SOF节点合并到标记序列中。如果序列中已经存在SOF标记段,则从该节点更新其值。如果没有SOF段,则创建并添加如下的SOF段：如果存在任何SOS段,则在第一个之前插入新的SOF段。
+     * 如果没有SOS段,则将新的SOF段添加到序列的末尾。
+     * 
      */
     private void mergeSOFNode(Node node) throws IIOInvalidTreeException {
         SOFMarkerSegment sof =
@@ -1496,6 +1583,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * into a set of progressive scans.
      * If there are no SOS marker segments, a new one is created and added
      * to the end of the sequence.
+     * <p>
+     *  将给定的SOS节点合并到标记序列中。如果已经存在单个SOS标记段,则从节点更新值。
+     * 如果有多个现有的SOS标记段,则抛出IIOInvalidTreeException,因为SOS段不能合并到一组逐行扫描中。如果没有SOS标记段,则创建一个新的标记段并将其添加到序列的末尾。
+     * 
      */
     private void mergeSOSNode(Node node) throws IIOInvalidTreeException {
         SOSMarkerSegment firstSOS =
@@ -1548,6 +1639,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * creating a defacto extension to JPEG metadata capabilities.  This is
      * probably best avoided, so the following convert only text nodes to
      * comments, and lose the keywords as well.
+     * <p>
+     * 一般来说,可以将所有非像素数据转换为一些文本形式,并将其包括在注释中,但是这将产生这些期望,即这些注释形式被读者识别,从而创建对JPEG元数据能力的错误扩展。
+     * 这可能是最好避免的,所以以下仅将文本节点转换为注释,并丢失关键字。
+     * 
      */
 
     private void mergeStandardChromaNode(Node node, NodeList siblings)
@@ -1990,6 +2085,9 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
     /*
      * Return a pair of integers whose ratio (x/y) approximates the given
      * float value.
+     * <p>
+     *  返回一对整数,其比率(x / y)接近给定的浮点值。
+     * 
      */
     private static Point findIntegerRatio(float value) {
         float epsilon = 0.005F;
@@ -2247,6 +2345,10 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
      * otherwise.  All the constructors and modifiers should call
      * this method at the end to guarantee that the data is always
      * consistent, as the writer relies on this.
+     * <p>
+     *  检查此元数据对象是否处于一致状态,如果是,返回<code> true </code>,否则返回<code> false </code>。
+     * 所有的构造函数和修饰符应该在最后调用这个方法,以保证数据总是一致的,因为作者依赖于这一点。
+     * 
      */
     private boolean isConsistent() {
         SOFMarkerSegment sof =
@@ -2308,6 +2410,7 @@ public class JPEGMetadata extends IIOMetadata implements Cloneable {
     /**
      * Returns the total number of bands referenced in all SOS marker
      * segments, including 0 if there are no SOS marker segments.
+     * <p>
      */
     private int countScanBands() {
         List ids = new ArrayList();

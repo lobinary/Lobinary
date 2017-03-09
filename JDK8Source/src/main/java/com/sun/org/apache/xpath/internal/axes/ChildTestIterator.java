@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ChildTestIterator.java,v 1.2.4.2 2005/09/14 19:45:20 jeffsuttor Exp $
+ * <p>
+ *  $ Id：ChildTestIterator.java,v 1.2.4.2 2005/09/14 19:45:20 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -31,6 +44,10 @@ import com.sun.org.apache.xpath.internal.compiler.Compiler;
 /**
  * This class implements an optimized iterator for
  * children patterns that have a node test, and possibly a predicate.
+ * <p>
+ *  这个类为具有节点测试的子模式实现了一个优化的迭代器,可能还有一个谓词。
+ * 
+ * 
  * @see com.sun.org.apache.xpath.internal.axes.BasicTestIterator
  * @xsl.usage advanced
  */
@@ -47,6 +64,10 @@ public class ChildTestIterator extends BasicTestIterator
   /**
    * Create a ChildTestIterator object.
    *
+   * <p>
+   *  创建ChildTestIterator对象。
+   * 
+   * 
    * @param compiler A reference to the Compiler that contains the op map.
    * @param opPos The position within the op map, which contains the
    * location path expression for this itterator.
@@ -62,6 +83,10 @@ public class ChildTestIterator extends BasicTestIterator
   /**
    * Create a ChildTestIterator object.
    *
+   * <p>
+   *  创建ChildTestIterator对象。
+   * 
+   * 
    * @param traverser Traverser that tells how the KeyIterator is to be handled.
    *
    * @throws javax.xml.transform.TransformerException
@@ -76,6 +101,10 @@ public class ChildTestIterator extends BasicTestIterator
 
   /**
    * Get the next node via getNextXXX.  Bottlenecked for derived class override.
+   * <p>
+   *  通过getNextXXX获取下一个节点。瓶颈为派生类覆盖。
+   * 
+   * 
    * @return The next node on the axis, or DTM.NULL.
    */
   protected int getNextNode()
@@ -102,6 +131,16 @@ public class ChildTestIterator extends BasicTestIterator
    *  Get a cloned Iterator that is reset to the beginning
    *  of the query.
    *
+   * <p>
+   *  {m_lastFetched =(DTM.NULL == m_lastFetched)? m_traverser.first(m_context)：m_traverser.next(m_context,m_lastFetched); }
+   *  // else // {// m_lastFetched =(DTM.NULL == m_lastFetched)//? m_traverser.first(m_context,m_extendedTypeID)//：m_traverser.next(m_context,m_lastFetched,// m_extendedTypeID); //}
+   * 。
+   * 
+   *  return m_lastFetched; }}
+   * 
+   * / **获取被复位到查询开始的克隆迭代器。
+   * 
+   * 
    *  @return A cloned NodeIterator set of the start of the query.
    *
    *  @throws CloneNotSupportedException
@@ -120,6 +159,10 @@ public class ChildTestIterator extends BasicTestIterator
    * Initialize the context values for this expression
    * after it is cloned.
    *
+   * <p>
+   *  在克隆后,对此表达式的上下文值进行初始化。
+   * 
+   * 
    * @param context The XPath runtime context for this
    * transformation.
    */
@@ -151,6 +194,10 @@ public class ChildTestIterator extends BasicTestIterator
   /**
    * Returns the axis being iterated, if it is known.
    *
+   * <p>
+   *  返回正在迭代的轴(如果已知)。
+   * 
+   * 
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
@@ -165,6 +212,9 @@ public class ChildTestIterator extends BasicTestIterator
    * state. After<code>detach</code> has been invoked, calls to
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
+   * <p>
+   *  从迭代的集合中分离迭代器,释放任何计算资源并将迭代器置于INVALID状态。
+   * 调用<code> detach </code>后,调用<code> nextNode </code>或<code> previousNode </code>会引发异常INVALID_STATE_ERR。
    */
   public void detach()
   {

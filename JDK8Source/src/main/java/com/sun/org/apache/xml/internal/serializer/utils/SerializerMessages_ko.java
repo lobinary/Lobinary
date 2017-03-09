@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer.utils;
 
@@ -39,6 +49,17 @@ import java.util.ResourceBundle;
  * used in com.sun.org.apache.xml.internal.serializer.
  *
  * @xsl.usage internal
+ * <p>
+ *  此类的实例是ListResourceBundle,它具有返回消息键/消息关联数组的所需getContents()方法。
+ * <p>
+ *  消息键在{@link MsgKey}中定义。这些键映射到的消息在此定义。
+ * <p>
+ *  英语版本中的消息旨在翻译。
+ * 
+ *  此类不是公共API,它只是公共的,因为它在com.sun.org.apache.xml.internal.serializer中使用。
+ * 
+ *  @ xsl.usage internal
+ * 
  */
 public class SerializerMessages_ko extends ListResourceBundle {
 
@@ -64,6 +85,18 @@ public class SerializerMessages_ko extends ListResourceBundle {
      *     namespace.
      *
      *
+     * <p>
+     *  此文件包含与串行器错误处理相关的错误和警告消息。
+     * 
+     *  翻译者的一般注意事项：
+     * 
+     *  1)样式表是如何将输入XML文档转换为结果XML文档(或HTML文档或文本)的描述。样式表本身以XML文档的形式描述。
+     * 
+     * 2)元素是XML文档中的标记标记;属性是标记上的修饰符。
+     * 例如,在<elem attr ='val'attr2 ='val2'>"elem"是元素名称,"attr"和"attr2"分别是具有值"val"和"val2"的属性名称。
+     * 
+     *  3)命名空间声明是一个特殊属性,用于将前缀与URI(命名空间)相关联。使用该前缀的元素名称和属性名称的含义是相对于该命名空间定义的。
+     * 
      */
 
     /** The lookup table for error messages.   */
@@ -100,6 +133,9 @@ public class SerializerMessages_ko extends ListResourceBundle {
              * Note to translators:  The stylesheet contained a reference to a
              * namespace prefix that was undefined.  The value of the substitution
              * text is the name of the prefix.
+             * <p>
+             *  翻译者注意：样式表包含对未定义的命名空间前缀的引用。替换文本的值是前缀的名称。
+             * 
              */
             {   MsgKey.ER_NAMESPACE_PREFIX,
                 "''{0}'' \uC811\uB450\uC5B4\uC5D0 \uB300\uD55C \uB124\uC784\uC2A4\uD398\uC774\uC2A4\uAC00 \uC120\uC5B8\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4." },
@@ -109,6 +145,9 @@ public class SerializerMessages_ko extends ListResourceBundle {
              * being processed attempted to construct an XML document with an
              * attribute in a place other than on an element.  The substitution text
              * specifies the name of the attribute.
+             * <p>
+             *  翻译者注意：如果正在处理的样式表试图在一个元素之外的地方构造一个具有属性的XML文档,则会报告此消息。替换文本指定属性的名称。
+             * 
              */
             {   MsgKey.ER_STRAY_ATTRIBUTE,
                 "''{0}'' \uC18D\uC131\uC774 \uC694\uC18C\uC5D0 \uD3EC\uD568\uB418\uC5B4 \uC788\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4." },
@@ -119,6 +158,9 @@ public class SerializerMessages_ko extends ListResourceBundle {
              * appear on an element.  The substitution text {0} is the namespace
              * prefix and {1} is the URI that was being used in the erroneous
              * namespace declaration.
+             * <p>
+             *  对翻译者的注意：与前面的消息一样,命名空间声明具有属性的形式,并且只允许出现在元素上。替换文本{0}是命名空间前缀,{1}是在错误的命名空间声明中使用的URI。
+             * 
              */
             {   MsgKey.ER_STRAY_NAMESPACE,
                 "\uB124\uC784\uC2A4\uD398\uC774\uC2A4 \uC120\uC5B8 ''{0}''=''{1}''\uC774(\uAC00) \uC694\uC18C\uC5D0 \uD3EC\uD568\uB418\uC5B4 \uC788\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4." },
@@ -190,6 +232,8 @@ public class SerializerMessages_ko extends ListResourceBundle {
              * Note to translators:  The words 'Properties' and
              * 'SerializerFactory' in this message are Java class names
              * and should not be translated.
+             * <p>
+             *  注意翻译者：此消息中的'Properties'和'SerializerFactory'字是Java类名,不应翻译。
              */
             {   MsgKey.ER_FACTORY_PROPERTY_MISSING,
                 "SerializerFactory\uC5D0 \uC804\uB2EC\uB41C Properties \uAC1D\uCCB4\uC5D0 ''{0}'' \uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4." },

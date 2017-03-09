@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import java.util.Collection;
  * which represent <i>composite data</i> structures.
  *
  *
+ * <p>
+ *  <tt> CompositeData </tt>接口指定表示复合数据</i>结构的特定类型的复杂<i>开放数据</i>对象的行为。
+ * 
+ * 
  * @since 1.5
  */
 public interface CompositeData {
@@ -48,6 +53,10 @@ public interface CompositeData {
     /**
      * Returns the <i>composite type </i> of this <i>composite data</i> instance.
      *
+     * <p>
+     *  返回此<i>复合数据</i>实例的<i>复合类型</i>。
+     * 
+     * 
      * @return the type of this CompositeData.
      */
     public CompositeType getCompositeType();
@@ -55,6 +64,10 @@ public interface CompositeData {
     /**
      * Returns the value of the item whose name is <tt>key</tt>.
      *
+     * <p>
+     *  返回名称为<tt>键</tt>的项目的值。
+     * 
+     * 
      * @param key the name of the item.
      *
      * @return the value associated with this key.
@@ -68,6 +81,10 @@ public interface CompositeData {
     /**
      * Returns an array of the values of the items whose names are specified by <tt>keys</tt>, in the same order as <tt>keys</tt>.
      *
+     * <p>
+     *  以与<tt>键</tt>相同的顺序返回其名称由<tt>键</tt>指定的项目的值的数组。
+     * 
+     * 
      * @param keys the names of the items.
      *
      * @return the values corresponding to the keys.
@@ -83,6 +100,11 @@ public interface CompositeData {
      * an item whose name is <tt>key</tt>.
      * If <tt>key</tt> is a null or empty String, this method simply returns false.
      *
+     * <p>
+     *  当且仅当此<tt> CompositeData </tt>实例包含名称为<tt>键</tt>的项目时,返回<tt> true </tt>。
+     * 如果<tt>键</tt>是空或空字符串,此方法只返回false。
+     * 
+     * 
      * @param key the key to be tested.
      *
      * @return true if this <tt>CompositeData</tt> contains the key.
@@ -93,6 +115,10 @@ public interface CompositeData {
      * Returns <tt>true</tt> if and only if this <tt>CompositeData</tt> instance contains an item
      * whose value is <tt>value</tt>.
      *
+     * <p>
+     *  当且仅当此<tt> CompositeData </tt>实例包含值为<tt> value </tt>的项目时,返回<tt> true </tt>。
+     * 
+     * 
      * @param value the value to be tested.
      *
      * @return true if this <tt>CompositeData</tt> contains the value.
@@ -104,6 +130,10 @@ public interface CompositeData {
      * The returned collection's iterator will return the values in the ascending lexicographic order of the corresponding
      * item names.
      *
+     * <p>
+     *  返回此<tt> CompositeData </tt>实例中包含的项值的不可修改的Collection视图。返回的集合的迭代器将以相应项目名称的升序字典顺序返回值。
+     * 
+     * 
      * @return the values.
      */
     public Collection<?> values() ;
@@ -130,6 +160,21 @@ public interface CompositeData {
      * {@link java.util.Collection#equals(Object) equals}
      * method of the <tt>java.util.Collection</tt> interface.
      *
+     * <p>
+     *  将指定的<var> obj </var>参数与此<code> CompositeData </code>实例进行比较以确保相等。
+     * <p>
+     *  当且仅当所有以下语句都为真时返回<tt> true </tt>：
+     * <ul>
+     * <li> <var> obj </var>不为空,</li> <li> <var> obj </var>也实现<code> CompositeData </code>它们的复合类型是相等的</li> <li>
+     * 它们的内容,即(名称,值)对是相等的。
+     * 如果内容中包含的值是数组,则值比较是通过为对象引用类型数组调用{@link java.util.Arrays#deepEquals(Object [],Object [])deepEquals}对原始类
+     * 型数组{@code Arrays.equals(e1,e2)}的适当重载</li>。
+     * </ul>
+     * <p>
+     *  这可以确保<tt>等于</tt>方法适用于<var> obj </var>参数,这是<code> CompositeData </code>接口的不同实现,具有{@link java.util.Collection#equals(Object)equals}
+     * 方法的<tt> java.util.Collection </tt>接口。
+     * 
+     * 
      * @param  obj  the object to be compared for equality with this
      * <code>CompositeData</code> instance.
      * @return  <code>true</code> if the specified object is equal to this
@@ -156,6 +201,17 @@ public interface CompositeData {
      * for arrays of object reference types or the appropriate overloading
      * of {@code Arrays.hashCode(e)} for arrays of primitive types.
      *
+     * <p>
+     *  返回此<> CompositeData </code>实例的哈希码值。
+     * <p>
+     *  <code> CompositeData </code>实例的哈希码是<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即：其<i>复合类型</i>和所有项目值)。
+     * <p>
+     *  这确保<code> t1.equals(t2)</code>意味着任何两个<code> CompositeData </code>实例的<code> t1.hashCode()== t2.hashCo
+     * de()</代码> t1 </code>和<code> t2 </code>,这是方法{@link Object#hashCode()Object.hashCode()}的一般合同的要求。
+     * <p>
+     * 每个项的值的哈希码被添加到返回的哈希码。
+     * 如果一个项目值是一个数组,它的哈希码是通过调用对象引用类型数组的{@link java.util.Arrays#deepHashCode(Object [])deepHashCode}方法或{@code Arrays.hashCode(e)}
+     * 
      * @return the hash code value for this <code>CompositeData</code> instance
      */
     public int hashCode() ;
@@ -167,6 +223,11 @@ public interface CompositeData {
      * the string representation of the composite type of this instance, and the string representation of the contents
      * (ie list the itemName=itemValue mappings).
      *
+     * <p>
+     * 。
+     * 每个项的值的哈希码被添加到返回的哈希码。
+     * 
+     * 
      * @return  a string representation of this <code>CompositeData</code> instance
      */
     public String toString() ;

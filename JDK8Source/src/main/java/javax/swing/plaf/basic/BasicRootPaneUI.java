@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,10 @@ import sun.swing.UIAction;
  * Basic implementation of RootPaneUI, there is one shared between all
  * JRootPane instances.
  *
+ * <p>
+ *  RootPaneUI的基本实现,有一个在所有JRootPane实例之间共享。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.3
  */
@@ -134,6 +139,9 @@ public class BasicRootPaneUI extends RootPaneUI implements
      * Invoked when the default button property has changed. This reloads
      * the bindings from the defaults table with name
      * <code>RootPane.defaultButtonWindowKeyBindings</code>.
+     * <p>
+     *  当默认按钮属性更改时调用。这将使用名称<code> RootPane.defaultButtonWindowKeyBindings </code>重新加载来自defaults表的绑定。
+     * 
      */
     void updateDefaultButtonBindings(JRootPane root) {
         InputMap km = SwingUtilities.getUIInputMap(root, JComponent.
@@ -157,6 +165,8 @@ public class BasicRootPaneUI extends RootPaneUI implements
      * Invoked when a property changes on the root pane. If the event
      * indicates the <code>defaultButton</code> has changed, this will
      * reinstall the keyboard actions.
+     * <p>
+     *  在根窗格上的属性更改时调用。如果事件指示<code> defaultButton </code>已更改,则将重新安装键盘操作。
      */
     public void propertyChange(PropertyChangeEvent e) {
         if(e.getPropertyName().equals("defaultButton")) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,9 @@ import javax.naming.directory.ModificationItem;
 /**
   * This class is the continuation context for invoking DirContext methods.
   *
+  * <p>
+  *  这个类是调用DirContext方法的继续上下文。
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @since 1.3

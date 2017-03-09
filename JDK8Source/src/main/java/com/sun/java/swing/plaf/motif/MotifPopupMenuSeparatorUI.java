@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import javax.swing.plaf.*;
  * A Motif L&F implementation of PopupMenuSeparatorUI.  This implementation
  * is a "combined" view/controller.
  *
+ * <p>
+ *  一个Motif L&F实现PopupMenuSeparatorUI。这个实现是一个"组合"视图/控制器。
+ * 
  * @author Jeff Shapiro
  */
 

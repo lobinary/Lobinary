@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,8 @@ import com.sun.corba.se.impl.orbutil.ORBConstants ;
 
 /** Policy used to support the request partitioning feature and to
  *  specify the partition to use.
+ * <p>
+ *  指定要使用的分区。
 */
 public class RequestPartitioningPolicy extends LocalObject implements Policy
 {

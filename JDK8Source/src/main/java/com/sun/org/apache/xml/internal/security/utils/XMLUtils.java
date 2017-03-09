@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils;
 
@@ -47,6 +56,10 @@ import org.w3c.dom.Text;
 /**
  * DOM and XML accessibility and comfort functions.
  *
+ * <p>
+ *  DOM和XML可访问性和舒适功能。
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  */
 public class XMLUtils {
@@ -72,6 +85,9 @@ public class XMLUtils {
     /**
      * Constructor XMLUtils
      *
+     * <p>
+     *  构造函数XMLUtils
+     * 
      */
     private XMLUtils() {
         // we don't allow instantiation
@@ -79,6 +95,10 @@ public class XMLUtils {
 
     /**
      * Set the prefix for the digital signature namespace
+     * <p>
+     *  设置数字签名命名空间的前缀
+     * 
+     * 
      * @param prefix the new prefix for the digital signature namespace
      * @throws SecurityException if a security manager is installed and the
      *    caller does not have permission to set the prefix
@@ -90,6 +110,10 @@ public class XMLUtils {
 
     /**
      * Set the prefix for the digital signature 1.1 namespace
+     * <p>
+     *  设置数字签名1.1命名空间的前缀
+     * 
+     * 
      * @param prefix the new prefix for the digital signature 1.1 namespace
      * @throws SecurityException if a security manager is installed and the
      *    caller does not have permission to set the prefix
@@ -101,6 +125,10 @@ public class XMLUtils {
 
     /**
      * Set the prefix for the encryption namespace
+     * <p>
+     *  设置加密命名空间的前缀
+     * 
+     * 
      * @param prefix the new prefix for the encryption namespace
      * @throws SecurityException if a security manager is installed and the
      *    caller does not have permission to set the prefix
@@ -112,6 +140,10 @@ public class XMLUtils {
 
     /**
      * Set the prefix for the encryption namespace 1.1
+     * <p>
+     *  设置加密命名空间1.1的前缀
+     * 
+     * 
      * @param prefix the new prefix for the encryption namespace 1.1
      * @throws SecurityException if a security manager is installed and the
      *    caller does not have permission to set the prefix
@@ -130,6 +162,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param rootNode
      * @param result
      * @param exclude
@@ -189,6 +223,10 @@ public class XMLUtils {
     /**
      * Outputs a DOM tree to an {@link OutputStream}.
      *
+     * <p>
+     *  将DOM树输出到{@link OutputStream}。
+     * 
+     * 
      * @param contextNode root node of the DOM tree
      * @param os the {@link OutputStream}
      */
@@ -201,6 +239,10 @@ public class XMLUtils {
      * thrown during execution, it's StackTrace is output to System.out, but the
      * Exception is not re-thrown.</I>
      *
+     * <p>
+     *  将DOM树输出到{@link OutputStream}。 <I>如果在执行期间抛出异常,则StackTrace将输出到System.out,但异常不会重新抛出。</I>
+     * 
+     * 
      * @param contextNode root node of the DOM tree
      * @param os the {@link OutputStream}
      * @param addPreamble
@@ -240,6 +282,13 @@ public class XMLUtils {
      * be used in a production environment, simply use the code inside the
      * <code>try{}</code> statement, but handle the Exceptions appropriately.</I>
      *
+     * <p>
+     *  将<CODE> contextNode </CODE>序列化为OutputStream,<I>,但抑制所有异常</I>。
+     * <BR />
+     * 注意：<I>这应该只用于调试目的,而不是在生产环境中;此方法忽略所有异常,因此您不会注意到是否出现错误。
+     * 如果你想要在生产环境中使用什么,只需使用<code> try {} </code>语句中的代码,但适当处理异常。</I>。
+     * 
+     * 
      * @param contextNode
      * @param os
      */
@@ -269,6 +318,10 @@ public class XMLUtils {
     /**
      * Method getFullTextChildrenFromElement
      *
+     * <p>
+     *  方法getFullTextChildrenFromElement
+     * 
+     * 
      * @param element
      * @return the string of children
      */
@@ -289,6 +342,10 @@ public class XMLUtils {
     /**
      * Creates an Element in the XML Signature specification namespace.
      *
+     * <p>
+     *  在XML签名规范命名空间中创建一个元素。
+     * 
+     * 
      * @param doc the factory Document
      * @param elementName the local name of the Element
      * @return the Element
@@ -307,6 +364,10 @@ public class XMLUtils {
     /**
      * Creates an Element in the XML Signature 1.1 specification namespace.
      *
+     * <p>
+     *  在XML签名1.1规范命名空间中创建一个元素。
+     * 
+     * 
      * @param doc the factory Document
      * @param elementName the local name of the Element
      * @return the Element
@@ -325,6 +386,10 @@ public class XMLUtils {
     /**
      * Creates an Element in the XML Encryption specification namespace.
      *
+     * <p>
+     *  在XML加密规范命名空间中创建一个元素。
+     * 
+     * 
      * @param doc the factory Document
      * @param elementName the local name of the Element
      * @return the Element
@@ -346,6 +411,10 @@ public class XMLUtils {
     /**
      * Creates an Element in the XML Encryption 1.1 specification namespace.
      *
+     * <p>
+     *  在XML Encryption 1.1规范命名空间中创建一个元素。
+     * 
+     * 
      * @param doc the factory Document
      * @param elementName the local name of the Element
      * @return the Element
@@ -368,6 +437,10 @@ public class XMLUtils {
      * Returns true if the element is in XML Signature namespace and the local
      * name equals the supplied one.
      *
+     * <p>
+     *  如果元素在XML签名命名空间中,并且本地名称等于提供的名称空间,则返回true。
+     * 
+     * 
      * @param element
      * @param localName
      * @return true if the element is in XML Signature namespace and the local name equals
@@ -386,6 +459,10 @@ public class XMLUtils {
      * Returns true if the element is in XML Signature 1.1 namespace and the local
      * name equals the supplied one.
      *
+     * <p>
+     *  如果元素位于XML Signature 1.1命名空间中,并且本地名称等于提供的名称空间,则返回true。
+     * 
+     * 
      * @param element
      * @param localName
      * @return true if the element is in XML Signature namespace and the local name equals
@@ -404,6 +481,10 @@ public class XMLUtils {
      * Returns true if the element is in XML Encryption namespace and the local
      * name equals the supplied one.
      *
+     * <p>
+     *  如果元素在XML加密命名空间中,并且本地名称等于提供的名称空间,则返回true。
+     * 
+     * 
      * @param element
      * @param localName
      * @return true if the element is in XML Encryption namespace and the local name
@@ -421,6 +502,10 @@ public class XMLUtils {
      * Returns true if the element is in XML Encryption 1.1 namespace and the local
      * name equals the supplied one.
      *
+     * <p>
+     *  如果元素在XML Encryption 1.1命名空间中,并且本地名称等于提供的名称空间,则返回true。
+     * 
+     * 
      * @param element
      * @param localName
      * @return true if the element is in XML Encryption 1.1 namespace and the local name
@@ -440,6 +525,11 @@ public class XMLUtils {
      * {@link Document}. {@link Node#getOwnerDocument} returns <CODE>null</CODE>
      * if the {@link Node} is a {@link Document}.
      *
+     * <p>
+     *  此方法返回特定节点的所有者文档。此方法是必要的,因为它总是</I>返回一个{@link Document}。
+     * 如果{@link Node}是{@link Document},{@link Node#getOwnerDocument}会返回<CODE> null </CODE>。
+     * 
+     * 
      * @param node
      * @return the owner document of the node
      */
@@ -462,6 +552,11 @@ public class XMLUtils {
      * {@link Document}. {@link Node#getOwnerDocument} returns <CODE>null</CODE>
      * if the {@link Node} is a {@link Document}.
      *
+     * <p>
+     * 此方法返回此集合中节点的第一个非空所有者文档。此方法是必要的,因为它总是</I>返回一个{@link Document}。
+     * 如果{@link Node}是{@link Document},{@link Node#getOwnerDocument}会返回<CODE> null </CODE>。
+     * 
+     * 
      * @param xpathNodeSet
      * @return the owner document
      */
@@ -490,6 +585,10 @@ public class XMLUtils {
     /**
      * Method createDSctx
      *
+     * <p>
+     *  方法createDSctx
+     * 
+     * 
      * @param doc
      * @param prefix
      * @param namespace
@@ -510,6 +609,10 @@ public class XMLUtils {
     /**
      * Method addReturnToElement
      *
+     * <p>
+     *  方法addReturnToElement
+     * 
+     * 
      * @param e
      */
     public static void addReturnToElement(Element e) {
@@ -535,6 +638,10 @@ public class XMLUtils {
     /**
      * Method convertNodelistToSet
      *
+     * <p>
+     *  方法convertNodelistToSet
+     * 
+     * 
      * @param xpathNodeSet
      * @return the set with the nodelist
      */
@@ -561,6 +668,11 @@ public class XMLUtils {
      * not fully visible in the Xalan XPath model, so we have to do this by
      * hand in DOM spaces so that the nodes become visible in XPath space.
      *
+     * <p>
+     *  此方法将DOM文档中的所有命名空间属性分布到其子代。这是因为XML签名XPath转换必须针对输入中的所有节点评估XPath,甚至针对XPath命名空间节点。
+     * 通过XalanJ2中的一个错误,命名空间节点在Xalan XPath模型中不是完全可见的,因此我们必须在DOM空间中手动完成,以便节点在XPath空间中可见。
+     * 
+     * 
      * @param doc
      * @see <A HREF="http://nagoya.apache.org/bugzilla/show_bug.cgi?id=2650">
      * Namespace axis resolution is not XPath compliant </A>
@@ -583,6 +695,10 @@ public class XMLUtils {
     /**
      * This is the work horse for {@link #circumventBug2650}.
      *
+     * <p>
+     *  这是{@link#circumventBug2650}的工作马。
+     * 
+     * 
      * @param node
      * @see <A HREF="http://nagoya.apache.org/bugzilla/show_bug.cgi?id=2650">
      * Namespace axis resolution is not XPath compliant </A>
@@ -646,6 +762,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param nodeName
      * @param number
@@ -666,6 +784,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param nodeName
      * @param number
@@ -686,6 +806,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param nodeName
      * @param number
@@ -707,6 +829,8 @@ public class XMLUtils {
 
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param nodeName
      * @param number
@@ -725,6 +849,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param nodeName
      * @param number
@@ -743,6 +869,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param uri
      * @param nodeName
@@ -762,6 +890,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param uri
      * @param nodeName
@@ -783,6 +913,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param nodeName
      * @return nodes with the constrain
@@ -792,6 +924,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param nodeName
      * @return nodes with the constrain
@@ -801,6 +935,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param sibling
      * @param uri
      * @param nodeName
@@ -819,6 +955,8 @@ public class XMLUtils {
     }
 
     /**
+    /* <p>
+    /* 
      * @param signatureElement
      * @param inputSet
      * @return nodes with the constrain
@@ -840,6 +978,10 @@ public class XMLUtils {
     /**
      * Method getStrFromNode
      *
+     * <p>
+     *  方法getStrFromNode
+     * 
+     * 
      * @param xpathnode
      * @return the string for the node.
      */
@@ -871,6 +1013,10 @@ public class XMLUtils {
      * Returns true if the descendantOrSelf is on the descendant-or-self axis
      * of the context node.
      *
+     * <p>
+     *  如果descendantOrSelf在上下文节点的后代或自身轴上,则返回true。
+     * 
+     * 
      * @param ctx
      * @param descendantOrSelf
      * @return true if the node is descendant
@@ -913,6 +1059,12 @@ public class XMLUtils {
      * between an unspecified attribute and an attribute with a value of
      * "" (it returns "" for both cases).
      *
+     * <p>
+     *  返回具有指定名称的属性的属性值。如果没有这样的属性,则返回null,如果属性值为空,则返回空字符串。
+     * 
+     *  <p>这解决了DOM <code> Element.getAttributeNode </code>方法的限制,该方法不区分未指定的属性和值为""的属性(两种情况下都返回"")。
+     * 
+     * 
      * @param elem the element containing the attribute
      * @param name the name of the attribute
      * @return the attribute value (may be null if unspecified)
@@ -927,6 +1079,10 @@ public class XMLUtils {
      * two Elements have ID Attributes that match the "value" argument, if this is the case then
      * "false" is returned. Note that a return value of "true" does not necessarily mean that
      * a matching Element has been found, just that no wrapping attack has been detected.
+     * <p>
+     * 此方法是一个树搜索,以帮助防止包裹攻击。它检查没有两个元素具有匹配"value"参数的ID属性,如果是这种情况,则返回"false"。
+     * 注意,返回值"true"不一定意味着已经找到匹配的元素,只是没有检测到包绕攻击。
+     * 
      */
     public static boolean protectAgainstWrappingAttack(Node startNode, String value) {
         Node startParent = startNode.getParentNode();
@@ -986,6 +1142,9 @@ public class XMLUtils {
      * This method is a tree-search to help prevent against wrapping attacks. It checks that no other
      * Element than the given "knownElement" argument has an ID attribute that matches the "value"
      * argument, which is the ID value of "knownElement". If this is the case then "false" is returned.
+     * <p>
+     *  此方法是一种树搜索,以帮助防止包裹攻击。它检查没有给定的"knownElement"参数的其他元素具有与"value"参数匹配的ID属性,该值是"knownElement"的ID值。
+     * 如果是这种情况,则返回"false"。
      */
     public static boolean protectAgainstWrappingAttack(
         Node startNode, Element knownElement, String value

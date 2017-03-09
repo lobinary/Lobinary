@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996,1997  - 保留所有权利(C)版权所有IBM Corp. 1996-1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.text;
@@ -101,6 +108,47 @@ import sun.text.normalizer.NormalizerBase;
  * <code>RuleBasedCollator</code> implementation. It is only usable
  * with <code>RuleBasedCollator</code> instances.
  *
+ * <p>
+ *  <code> Collat​​ionElementIterator </code>类用作遍历国际字符串的每个字符的迭代器。使用迭代器返回定位字符的排序优先级。
+ * 字符的排序优先级,我们称为键,定义了如何在给定的排序规则对象中整理字符。
+ * 
+ * <p>
+ *  例如,考虑以下西班牙语：
+ * <blockquote>
+ * <pre>
+ *  "ca"&rarr;第一个键是键('c'),第二个键是键('a')。 "cha"&rarr;第一个键是键('ch'),第二个键是键('a')。
+ * </pre>
+ * </blockquote>
+ *  而在德语,
+ * <blockquote>
+ * <pre>
+ *  "\ u00e4b"&rarr;第一个键是键('a'),第二个键是键('e'),第三个键是键('b')。
+ * </pre>
+ * </blockquote>
+ * 字符的键是由一阶(短),二阶(字节)和三阶(字节)组成的整数。 Java严格定义其原始数据类型的大小和签名。
+ * 因此,静态函数<code> primaryOrder </code>,<code> secondaryOrder </code>和<code> tertiaryOrder </code>返回<code>
+ *  int </code>和<code> short </code>,以确保键值的正确性。
+ * 字符的键是由一阶(短),二阶(字节)和三阶(字节)组成的整数。 Java严格定义其原始数据类型的大小和签名。
+ * 
+ * <p>
+ *  迭代器使用示例,
+ * <blockquote>
+ * <pre>
+ * 
+ *  String testString ="This is a test"; Collat​​or col = Collat​​or.getInstance(); if(col instanceof Ru
+ * leBasedCollat​​or){RuleBasedCollat​​or ruleBasedCollat​​or =(RuleBasedCollat​​or)col; Collat​​ionElementIterator collat​​ionElementIterator = ruleBasedCollat​​or.getCollat​​ionElementIterator(testString); int primaryOrder = Collat​​ionElementIterator.primaryOrder(collat​​ionElementIterator.next()); ：}
+ * 。
+ * </pre>
+ * </blockquote>
+ * 
+ * <p>
+ *  <code> Collat​​ionElementIterator.next </code>返回下一个字符的排序规则顺序。归类顺序由主订单,辅助订单和第三级订单组成。
+ * 整理顺序的数据类型为<strong> int </strong>。归类顺序的前16位是其主顺序;接下来的8位是次级,而后8位是第三级。
+ * 
+ *  <p> <b>注意：</b> <code> Collat​​ionElementIterator </code>是<code> RuleBasedCollat​​or </code>实现的一部分。
+ * 它只能用于<code> RuleBasedCollat​​or </code>实例。
+ * 
+ * 
  * @see                Collator
  * @see                RuleBasedCollator
  * @author             Helena Shih, Laura Werner, Richard Gillam
@@ -110,6 +158,9 @@ public final class CollationElementIterator
     /**
      * Null order which indicates the end of string is reached by the
      * cursor.
+     * <p>
+     *  表示字符串结束的空顺序由光标到达。
+     * 
      */
     public final static int NULLORDER = 0xffffffff;
 
@@ -118,6 +169,10 @@ public final class CollationElementIterator
      * the collation object.  The cursor will walk thru the source string based
      * on the predefined collation rules.  If the source string is empty,
      * NULLORDER will be returned on the calls to next().
+     * <p>
+     * Collat​​ionElementIterator构造函数。这需要源字符串和排序规则对象。游标将根据预定义的排序规则遍历源字符串。如果源字符串为空,则在调用next()时将返回NULLORDER。
+     * 
+     * 
      * @param sourceText the source string.
      * @param owner the collation object.
      */
@@ -136,6 +191,10 @@ public final class CollationElementIterator
      * the collation object.  The cursor will walk thru the source string based
      * on the predefined collation rules.  If the source string is empty,
      * NULLORDER will be returned on the calls to next().
+     * <p>
+     *  Collat​​ionElementIterator构造函数。这需要源字符串和排序规则对象。游标将根据预定义的排序规则遍历源字符串。如果源字符串为空,则在调用next()时将返回NULLORDER。
+     * 
+     * 
      * @param sourceText the source string.
      * @param owner the collation object.
      */
@@ -150,6 +209,9 @@ public final class CollationElementIterator
     /**
      * Resets the cursor to the beginning of the string.  The next call
      * to next() will return the first collation element in the string.
+     * <p>
+     *  将光标重置为字符串的开头。下一次调用next()将返回字符串中的第一个排序规则元素。
+     * 
      */
     public void reset()
     {
@@ -178,6 +240,13 @@ public final class CollationElementIterator
      * then call previous(), or call previous() and then call next()), you'll get
      * back the same element twice.</p>
      *
+     * <p>
+     *  获取字符串中的下一个排序规则元素。 <p>此迭代器迭代从字符串构建的排序规则元素序列。
+     * 因为没有必要从字符到排序规则元素的一对一映射,这并不意味着与"返回字符串中下一个字符的排序规则元素[或排序优先级]"相同的事情。
+     * </p > <p>此函数返回迭代器当前指向的排序规则元素,然后更新内部指针以指向下一个元素。 previous()先更新指针,然后返回元素。
+     * 这意味着当你改变方向迭代(即调用next(),然后调用previous(),或调用previous()然后调用next()),你会得到相同的元素两次。</p>。
+     * 
+     * 
      * @return the next collation element
      */
     public int next()
@@ -275,6 +344,13 @@ public final class CollationElementIterator
      * iterating (i.e., call next() and then call previous(), or call previous()
      * and then call next()), you'll get back the same element twice.</p>
      *
+     * <p>
+     * 获取字符串中的上一个排序规则元素。 <p>此迭代器迭代从字符串构建的排序规则元素序列。
+     * 因为不必从字符到排序规则元素的一对一映射,这并不意味着与"返回字符串中前一个字符的排序规则元素[或排序优先级]"相同的事情。
+     * </p > <p>此函数更新迭代器的内部指针,指向当前指向的排序规则元素,然后返回该元素,而next()返回当前元素,然后更新该指针。
+     * 这意味着当你改变方向迭代(即调用next(),然后调用previous(),或调用previous()然后调用next()),你会得到相同的元素两次。</p>。
+     * 
+     * 
      * @return the previous collation element
      * @since 1.2
      */
@@ -355,6 +431,10 @@ public final class CollationElementIterator
 
     /**
      * Return the primary component of a collation element.
+     * <p>
+     *  返回归类元素的主要组件。
+     * 
+     * 
      * @param order the collation element
      * @return the element's primary component
      */
@@ -365,6 +445,10 @@ public final class CollationElementIterator
     }
     /**
      * Return the secondary component of a collation element.
+     * <p>
+     *  返回归类元素的辅助组件。
+     * 
+     * 
      * @param order the collation element
      * @return the element's secondary component
      */
@@ -375,6 +459,10 @@ public final class CollationElementIterator
     }
     /**
      * Return the tertiary component of a collation element.
+     * <p>
+     *  返回归类元素的第三个组件。
+     * 
+     * 
      * @param order the collation element
      * @return the element's tertiary component
      */
@@ -386,6 +474,10 @@ public final class CollationElementIterator
     /**
      *  Get the comparison order in the desired strength.  Ignore the other
      *  differences.
+     * <p>
+     *  获得所需强度的比较顺序。忽略其他差异。
+     * 
+     * 
      *  @param order The order value
      */
     final int strengthOrder(int order)
@@ -413,6 +505,12 @@ public final class CollationElementIterator
      * is not guaranteed to return the same value as was passed to a preceding
      * call to setOffset().
      *
+     * <p>
+     * 将迭代器设置为指向与指定字符对应的排序规则元素(参数是原始字符串中的CHARACTER偏移量,而不是其对应的排序规则元素序列中的偏移量)。
+     * 下一次调用next()返回的值将是与文本中指定位置对应的排序规则元素。如果该位置在收缩字符序列的中间,则next()的下一个调用的结果是该序列的排序规则元素。
+     * 这意味着getOffset()不能保证返回与传递给之前对setOffset()的调用相同的值。
+     * 
+     * 
      * @param newOffset The new character offset into the original text.
      * @since 1.2
      */
@@ -467,6 +565,12 @@ public final class CollationElementIterator
      * This means if you do setOffset(x) followed immediately by getOffset(), getOffset()
      * won't necessarily return x.
      *
+     * <p>
+     *  返回与下一个排序规则元素对应的原始文本中的字符偏移量。 (也就是说,getOffset()返回与下一次调用next()时返回的排序规则元素对应的文本中的位置。
+     * )该值将始终是与排序规则元素对应的FIRST字符的索引(a收缩字符序列是当两个或多个字符都对应于相同的排序规则元素时)。
+     * 这意味着如果你做setOffset(x),紧接着getOffset(),getOffset()不一定返回x。
+     * 
+     * 
      * @return The character offset in the original text corresponding to the collation
      * element that will be returned by the next call to next().
      * @since 1.2
@@ -480,6 +584,10 @@ public final class CollationElementIterator
     /**
      * Return the maximum length of any expansion sequences that end
      * with the specified comparison order.
+     * <p>
+     *  返回以指定比较顺序结束的任何扩展序列的最大长度。
+     * 
+     * 
      * @param order a collation order returned by previous or next.
      * @return the maximum length of any expansion sequences ending
      *         with the specified order.
@@ -493,6 +601,10 @@ public final class CollationElementIterator
     /**
      * Set a new string over which to iterate.
      *
+     * <p>
+     *  设置要迭代的新字符串。
+     * 
+     * 
      * @param source  the new source text
      * @since 1.2
      */
@@ -514,6 +626,10 @@ public final class CollationElementIterator
     /**
      * Set a new string over which to iterate.
      *
+     * <p>
+     *  设置要迭代的新字符串。
+     * 
+     * 
      * @param source  the new source text.
      * @since 1.2
      */
@@ -539,6 +655,9 @@ public final class CollationElementIterator
     /**
      * Determine if a character is a Thai vowel (which sorts after
      * its base consonant).
+     * <p>
+     *  确定一个字符是否是一个泰国元音(在它的基础辅音之后排序)。
+     * 
      */
     private final static boolean isThaiPreVowel(int ch) {
         return (ch >= 0x0e40) && (ch <= 0x0e44);
@@ -546,6 +665,9 @@ public final class CollationElementIterator
 
     /**
      * Determine if a character is a Thai base consonant
+     * <p>
+     * 确定字符是否是泰语基础辅音
+     * 
      */
     private final static boolean isThaiBaseConsonant(int ch) {
         return (ch >= 0x0e01) && (ch <= 0x0e2e);
@@ -554,6 +676,9 @@ public final class CollationElementIterator
     /**
      * Determine if a character is a Lao vowel (which sorts after
      * its base consonant).
+     * <p>
+     *  确定字符是否是老挝元音(在其基音辅音之后排序)。
+     * 
      */
     private final static boolean isLaoPreVowel(int ch) {
         return (ch >= 0x0ec0) && (ch <= 0x0ec4);
@@ -561,6 +686,9 @@ public final class CollationElementIterator
 
     /**
      * Determine if a character is a Lao base consonant
+     * <p>
+     *  确定字符是否是老挝辅音
+     * 
      */
     private final static boolean isLaoBaseConsonant(int ch) {
         return (ch >= 0x0e81) && (ch <= 0x0eae);
@@ -575,6 +703,11 @@ public final class CollationElementIterator
      * computed.  If this char has a single element it is passed to this
      * method as lastValue, and lastExpansion is null.  If it has an
      * expansion it is passed in lastExpansion, and colLastValue is ignored.
+     * <p>
+     *  此方法产生一个缓冲区,其中包含两个字符的排序规则元素,其中colFirst的值在另一个字符的前面。大概,另一个字符在逻辑顺序前面的colFirst(否则你不需要这个方法,你会吗?)。
+     * 假设其他char的值已经计算。如果此char具有单个元素,则将其作为lastValue传递到此方法,并且lastExpansion为null。
+     * 如果它有扩展,它在lastExpansion中传递,并且colLastValue被忽略。
+     * 
      */
     private int[] makeReorderedBuffer(int colFirst,
                                       int lastValue,
@@ -632,6 +765,10 @@ public final class CollationElementIterator
 
     /**
      *  Check if a comparison order is ignorable.
+     * <p>
+     *  检查比较订单是否可忽略。
+     * 
+     * 
      *  @return true if a character is ignorable, false otherwise.
      */
     final static boolean isIgnorable(int order)
@@ -642,6 +779,10 @@ public final class CollationElementIterator
     /**
      * Get the ordering priority of the next contracting character in the
      * string.
+     * <p>
+     *  获取字符串中下一个合同字符的排序优先级。
+     * 
+     * 
      * @param ch the starting character of a contracting character token
      * @return the next contracting character's ordering.  Returns NULLORDER
      * if the end of string is reached.
@@ -714,6 +855,9 @@ public final class CollationElementIterator
     /**
      * Get the ordering priority of the previous contracting character in the
      * string.
+     * <p>
+     *  获取字符串中先前签约字符的排序优先级。
+     * 
      * @param ch the starting character of a contracting character token
      * @return the next contracting character's ordering.  Returns NULLORDER
      * if the end of string is reached.

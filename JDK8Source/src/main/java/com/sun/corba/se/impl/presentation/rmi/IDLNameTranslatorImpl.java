@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,9 @@ import com.sun.corba.se.impl.orbutil.ObjectUtility ;
 /**
  * Bidirectional translator between RMI-IIOP interface methods and
  * and IDL Names.
+ * <p>
+ *  RMI-IIOP接口方法和IDL名称之间的双向转换器。
+ * 
  */
 public class IDLNameTranslatorImpl implements IDLNameTranslator {
 
@@ -136,6 +140,10 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
     /**
      * Return an IDLNameTranslator for the given interface.
      *
+     * <p>
+     *  返回给定接口的IDLNameTranslator。
+     * 
+     * 
      * @throws IllegalStateException if given class is not a valid
      *         RMI/IIOP Remote Interface
      */
@@ -149,6 +157,10 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
     /**
      * Return an IDLNameTranslator for the given interfacex.
      *
+     * <p>
+     *  返回给定interfacex的IDLNameTranslator。
+     * 
+     * 
      * @throws IllegalStateException if given classes are not  valid
      *         RMI/IIOP Remote Interfaces
      */
@@ -196,6 +208,10 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
     /**
      * Initialize an IDLNameTranslator for the given interface.
      *
+     * <p>
+     *  初始化给定接口的IDLNameTranslator。
+     * 
+     * 
      * @throws IllegalStateException if given class is not a valid
      *         RMI/IIOP Remote Interface
      */
@@ -417,6 +433,10 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
      * else but the identifier itself.  This covers sections 1.3.2.2, 1.3.2.3,
      * and 1.3.2.4 of the Java2IDL spec.  Method overloading and
      * case-sensitivity checks are handled elsewhere.
+     * <p>
+     *  对要转换为IDL名称的Java标识符执行所有必需的独立标识符压缩操作。也就是说,不需要查看任何其他标识符本身的标记操作。
+     * 这包括Java2IDL规范的1.3.2.2节,1.3.2.3节和1.3.2.4节。方法重载和区分大小写检查在其他地方处理。
+     * 
      */
 
     private static String mangleIdentifier(String identifier) {
@@ -477,6 +497,11 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
      * comparison.
      *
      * Used to implement section 1.3.2.2 of Java2IDL spec.
+     * <p>
+     *  检查Java标识符是否与IDL关键字冲突。注意,这是一个不区分大小写的比较。
+     * 
+     *  用于实现Java2IDL规范的1.3.2.2节。
+     * 
      */
     static boolean isIDLKeyword(String identifier) {
 
@@ -496,6 +521,9 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
     /**
      * Checks whether a java identifier starts with an underscore.
      * Used to implement section 1.3.2.3 of Java2IDL spec.
+     * <p>
+     *  检查Java标识符以下划线开头。用于实现Java2IDL规范的1.3.2.3节。
+     * 
      */
     private static boolean hasLeadingUnderscore(String identifier) {
         return identifier.startsWith(UNDERSCORE);
@@ -505,6 +533,9 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
      * Implements Section 1.3.2.4 of Java2IDL Mapping.
      * All non-IDL identifier characters must be replaced
      * with their Unicode representation.
+     * <p>
+     *  实现Java2IDL映射的第1.3.2.4节。所有非IDL标识符字符必须替换为其Unicode表示形式。
+     * 
      */
     static String mangleUnicodeChars(String identifier) {
         StringBuffer mangledIdentifier = new StringBuffer();
@@ -534,6 +565,11 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
      * into the string, where the indices identify all the upper case
      * characters in the original string. Indices are zero based."
      *
+     * <p>
+     *  实现Java2IDL规范的第1.3.2.7节的修改部分。这种方法只处理实际的损坏。在其他地方做出关于是否需要区分大小写的碰撞修正的决定。
+     * 
+     * "...生成一个复合名称,其中包含原始名称,后跟一个下划线分隔的十进制索引列表到字符串中,其中索引标识原始字符串中的所有大写字符。
+     * 
      */
     String mangleCaseSensitiveCollision(String identifier) {
 
@@ -571,6 +607,9 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
      * Implements Section 1.3.2.9 of Java2IDL Mapping. Container in this
      * context means the name of the java Class(excluding package) in which
      * the identifier is defined.  Comparison is case-insensitive.
+     * <p>
+     *  实现Java2IDL映射的第1.3.2.9节。在此上下文中的容器是指定义标识符的Java类(不包括包)的名称。比较不区分大小写。
+     * 
      */
     private static boolean identifierClashesWithContainer
         (String mappedContainerName, String identifier) {
@@ -588,6 +627,12 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
      * 4 hexadecimal characters(in upper case) representing the Unicode
      * value.  So, the Java name a$b is mapped to aU0024b and
      * x\u03bCy is mapped to xU03BCy."
+     * <p>
+     *  返回Java2IDL规范的第1.3.2.4节中定义的Unicode调试。
+     * 
+     *  "对于包含非法OMG IDL标识符字符(例如ISO Latin 1以外的"$"或Unicode字符)的Java标识符,任何此类非法字符都将替换为"U",后跟4个表示Unicode值的十六进制字符(大写
+     * )因此,Java名称a $ b映射到u0024b,x \ u03bCy映射到xU03BCy。
+     * 
      */
     public static String charToUnicodeRepresentation(char c) {
 
@@ -640,6 +685,9 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
     /**
      * True if character is one of 114 Alphabetic characters as
      * specified in Table 2 of Chapter 3 in CORBA spec.
+     * <p>
+     *  如果字符是CORBA规范中第3章表2中指定的114个字母字符之一,则为真。
+     * 
      */
     private static boolean isIDLAlphabeticChar(char c) {
 
@@ -672,6 +720,9 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
     /**
      * True if character is one of 10 Decimal Digits
      * specified in Table 3 of Chapter 3 in CORBA spec.
+     * <p>
+     *  如果字符是CORBA规范中第3章的表3中指定的10个十进制数字之一,则为True。
+     * 
      */
     private static boolean isIDLDecimalDigit(char c) {
         return ( (c >= 0x0030) && (c <= 0x0039) );
@@ -686,6 +737,9 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
      * Java2IDL spec.  Current value of method name is passed in as argument.
      * We can't start from original method name since the name might have
      * been partially mangled as a result of the other rules.
+     * <p>
+     *  修改Java2IDL规范的第1.3.2.6节中定义的重载方法名称。方法名的当前值作为参数传递。我们不能从原始方法名称开始,因为名称可能已被其他规则的结果部分破坏。
+     * 
      */
     private static String mangleOverloadedMethod(String mangledName, Method m) {
 
@@ -818,6 +872,9 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
 
     /**
      * Return Class' package name or null if there is no package.
+     * <p>
+     *  返回类"包名称,如果没有包则返回null。
+     * 
      */
     private static String getPackageName(Class c) {
         Package thePackage = c.getPackage();
@@ -845,6 +902,9 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
 
     /**
      * Return portion of class name excluding package name.
+     * <p>
+     *  返回类名称的部分,不包括包名称。
+     * 
      */
     private static String getUnmappedContainerName(Class c) {
 
@@ -867,6 +927,8 @@ public class IDLNameTranslatorImpl implements IDLNameTranslator {
     /**
      * Internal helper class for tracking information related to each
      * interface method while we're building the name translation table.
+     * <p>
+     * 内部辅助类,用于在构建名称转换表时跟踪与每个接口方法相关的信息。
      */
     private static class IDLMethodInfo
     {

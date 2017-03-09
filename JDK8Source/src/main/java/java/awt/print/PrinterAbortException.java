@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ package java.awt.print;
  * {@link PrinterException} and is used to indicate that a user
  * or application has terminated the print job while it was in
  * the process of printing.
+ * <p>
+ *  <code> PrinterAbortException </code>类是{@link PrinterException}的子类,用于表示用户或应用程序在打印过程中终止了打印作业。
+ * 
  */
 
 public class PrinterAbortException extends PrinterException {
@@ -37,6 +41,9 @@ public class PrinterAbortException extends PrinterException {
     /**
      * Constructs a new <code>PrinterAbortException</code> with no
      * detail message.
+     * <p>
+     *  构造新的没有详细消息的<code> PrinterAbortException </code>。
+     * 
      */
     public PrinterAbortException() {
         super();
@@ -45,6 +52,9 @@ public class PrinterAbortException extends PrinterException {
     /**
      * Constructs a new <code>PrinterAbortException</code> with
      * the specified detail message.
+     * <p>
+     *  使用指定的详细消息构造新的<code> PrinterAbortException </code>。
+     * 
      * @param msg the message to be generated when a
      * <code>PrinterAbortException</code> is thrown
      */

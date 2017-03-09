@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.locks;
@@ -116,6 +120,41 @@ import sun.misc.Unsafe;
  *     LockSupport.unpark(waiters.peek());
  *   }
  * }}</pre>
+ * <p>
+ *  用于创建锁和其他同步类的基本线程阻塞原语。
+ * 
+ *  <p>此类与使用它的每个线程相关联,一个permit(在{@link java.util.concurrent.Semaphore Semaphore}类的意义上)。
+ * 如果许可证可用,则对{@code park}的调用将立即返回,在此过程中消耗它;否则可能会</em>阻止。调用{@code unpark}会使许可证可用,如果它不可用。
+ *  (与Semaphores不同,许可不累积,最多有一个。)。
+ * 
+ * <p>方法{@code park}和{@code unpark}提供了有效的方法来阻止和取消阻止不会导致已弃用的方法{@code Thread.suspend}和{@code Thread.resume}
+ * 的问题的线程不可用于这样的目的：一个线程调用{@code park}和另一个线程试图{@code unpark}之间的竞争将保持活力,由于许可。
+ * 此外,如果调用者的线程中断,并且支持超时版本,则{@code park}将返回。 {@code park}方法也可以在任何其他时间返回,因为"无理由",因此一般必须在返回时重新检查条件的循环中调用。
+ * 从这个意义上说,{@code park}是一个"忙等待"的优化,不会浪费太多时间,但必须配合{@code unpark}才能有效。
+ * 
+ *  <p> {@code park}的三种形式也支持{@code blocker}对象参数。在线程被阻塞时记录此对象,以允许监视和诊断工具识别线程被阻止的原因。
+ *  (这样的工具可以使用方法{@link #getBlocker(Thread)}访问阻止程序。)强烈鼓励使用这些形式而不是没有此参数的原始表单。
+ * 在锁实现中作为{@code blocker}提供的正常参数是{@code this}。
+ * 
+ * <p>这些方法被设计为用作创建更高级别同步实用程序的工具,本身对大多数并发控制应用程序不是有用的。 {@code park}方法仅适用于以下形式的构建：
+ * 
+ *  <pre> {@code while(！canProceed()){... LockSupport.park(this); }} </pre>
+ * 
+ *  其中{@code canProceed}或任何其他操作在调用{@code park}之前必须锁定或阻止。
+ * 因为只有一个许可证与每个线程相关联,所以{@code park}的任何中间使用都可能干扰其预期效果。
+ * 
+ *  <p> <b>示例用法</b>这是先进先出的非重入锁类的草图：<pre> {@code class FIFOMutex {private final AtomicBoolean locked = new AtomicBoolean ); private final Queue <Thread> waiters = new ConcurrentLinkedQueue <Thread>();。
+ * 
+ *  public void lock(){boolean wasInterrupted = false;线程电流= Thread.currentThread(); waiters.add(current);。
+ * 
+ *  // block while not first in queue or can not acquire lock while(waiters.peek()！= current ||！locked.c
+ * ompareAndSet(false,true)){LockSupport.park(this); if(Thread.interrupted())//等待时忽略中断wasInterrupted = true; }
+ * }。
+ * 
+ *  waiters.remove(); if(wasInterrupted)//在退出时重新设置中断状态current.interrupt(); }}
+ * 
+ *  public void unlock(){locked.set(false); LockSupport.unpark(waiters.peek()); }}} </pre>
+ * 
  */
 public class LockSupport {
     private LockSupport() {} // Cannot be instantiated.
@@ -133,6 +172,11 @@ public class LockSupport {
      * is not guaranteed to have any effect at all if the given
      * thread has not been started.
      *
+     * <p>
+     * 使给定线程的许可证(如果它不可用)可用。如果该线程在{@code park}上被阻止,那么它将被取消阻止。否则,它对{@code park}的下一次调用将保证不会阻止。
+     * 如果给定的线程尚未启动,这个操作不能保证有任何效果。
+     * 
+     * 
      * @param thread the thread to unpark, or {@code null}, in which case
      *        this operation has no effect
      */
@@ -165,6 +209,22 @@ public class LockSupport {
      * the thread to park in the first place. Callers may also determine,
      * for example, the interrupt status of the thread upon return.
      *
+     * <p>
+     *  除非许可证可用,否则禁用当前线程以进行线程调度。
+     * 
+     *  <p>如果许可证可用,则它被使用,并且呼叫立即返回;否则当前线程变为禁用线程调度目的,并处于休眠状态,直到发生以下三种情况之一：
+     * 
+     * <ul>
+     *  <li>其他一些线程调用{@link #unpark unpark}以当前线程为目标;要么
+     * 
+     *  <li>一些其他线程{@linkplain线程#中断中断}当前线程;要么
+     * 
+     *  <li>无谓地(也就是说,没有理由)返回。
+     * </ul>
+     * 
+     *  <p>此方法不会</em>报告其中哪些导致方法返回。调用者应该重新检查导致线程停在第一位置的条件。调用者还可以例如确定返回时线程的中断状态。
+     * 
+     * 
      * @param blocker the synchronization object responsible for this
      *        thread parking
      * @since 1.6
@@ -203,6 +263,24 @@ public class LockSupport {
      * for example, the interrupt status of the thread, or the elapsed time
      * upon return.
      *
+     * <p>
+     *  为线程调度目的禁用当前线程,直到指定的等待时间,除非许可证可用。
+     * 
+     *  <p>如果许可证可用,则它被使用,并且呼叫立即返回;否则当前线程变为禁用线程调度目的,并休眠,直到四件事之一发生：
+     * 
+     * <ul>
+     * <li>其他一些线程调用{@link #unpark unpark}以当前线程为目标;要么
+     * 
+     *  <li>一些其他线程{@linkplain线程#中断中断}当前线程;要么
+     * 
+     *  <li>指定的等待时间已过;要么
+     * 
+     *  <li>无谓地(也就是说,没有理由)返回。
+     * </ul>
+     * 
+     *  <p>此方法不会</em>报告其中哪些导致方法返回。调用者应该重新检查导致线程停在第一位置的条件。调用者还可以确定例如线程的中断状态或返回时的经过时间。
+     * 
+     * 
      * @param blocker the synchronization object responsible for this
      *        thread parking
      * @param nanos the maximum number of nanoseconds to wait
@@ -244,6 +322,24 @@ public class LockSupport {
      * for example, the interrupt status of the thread, or the current time
      * upon return.
      *
+     * <p>
+     *  为线程调度目的禁用当前线程,直到指定的截止日期,除非许可证可用。
+     * 
+     *  <p>如果许可证可用,则它被使用,并且呼叫立即返回;否则当前线程变为禁用线程调度目的,并休眠,直到四件事之一发生：
+     * 
+     * <ul>
+     *  <li>其他一些线程调用{@link #unpark unpark}以当前线程为目标;要么
+     * 
+     *  <li>一些其他线程{@linkplain线程#中断中断}当前线程;要么
+     * 
+     *  <li>指定的截止日期通过;要么
+     * 
+     *  <li>无谓地(也就是说,没有理由)返回。
+     * </ul>
+     * 
+     *  <p>此方法不会</em>报告其中哪些导致方法返回。调用者应该重新检查导致线程停在第一位置的条件。调用者还可以确定例如线程的中断状态或返回时的当前时间。
+     * 
+     * 
      * @param blocker the synchronization object responsible for this
      *        thread parking
      * @param deadline the absolute time, in milliseconds from the Epoch,
@@ -264,6 +360,10 @@ public class LockSupport {
      * snapshot -- the thread may have since unblocked or blocked on a
      * different blocker object.
      *
+     * <p>
+     * 返回提供给尚未解除阻塞的park方法的最近一次调用的阻塞程序对象,如果未阻塞,则返回null。返回的值只是一个短暂的快照 - 线程可能已经在不同的阻止程序对象上解除阻塞或阻塞。
+     * 
+     * 
      * @param t the thread
      * @return the blocker
      * @throws NullPointerException if argument is null
@@ -299,6 +399,22 @@ public class LockSupport {
      * method to return. Callers should re-check the conditions which caused
      * the thread to park in the first place. Callers may also determine,
      * for example, the interrupt status of the thread upon return.
+     * <p>
+     *  除非许可证可用,否则禁用当前线程以进行线程调度。
+     * 
+     *  <p>如果许可证可用,则它被使用,并且呼叫立即返回;否则当前线程变为禁用线程调度目的,并处于休眠状态,直到发生以下三种情况之一：
+     * 
+     * <ul>
+     * 
+     *  <li>其他一些线程调用{@link #unpark unpark}以当前线程为目标;要么
+     * 
+     *  <li>一些其他线程{@linkplain线程#中断中断}当前线程;要么
+     * 
+     *  <li>无谓地(也就是说,没有理由)返回。
+     * </ul>
+     * 
+     *  <p>此方法不会</em>报告其中哪些导致方法返回。调用者应该重新检查导致线程停在第一位置的条件。调用者还可以例如确定返回时线程的中断状态。
+     * 
      */
     public static void park() {
         UNSAFE.park(false, 0L);
@@ -331,6 +447,24 @@ public class LockSupport {
      * for example, the interrupt status of the thread, or the elapsed time
      * upon return.
      *
+     * <p>
+     *  为线程调度目的禁用当前线程,直到指定的等待时间,除非许可证可用。
+     * 
+     *  <p>如果许可证可用,则它被使用,并且呼叫立即返回;否则当前线程变为禁用线程调度目的,并休眠,直到四件事之一发生：
+     * 
+     * <ul>
+     * <li>其他一些线程调用{@link #unpark unpark}以当前线程为目标;要么
+     * 
+     *  <li>一些其他线程{@linkplain线程#中断中断}当前线程;要么
+     * 
+     *  <li>指定的等待时间已过;要么
+     * 
+     *  <li>无谓地(也就是说,没有理由)返回。
+     * </ul>
+     * 
+     *  <p>此方法不会</em>报告其中哪些导致方法返回。调用者应该重新检查导致线程停在第一位置的条件。调用者还可以确定例如线程的中断状态或返回时的经过时间。
+     * 
+     * 
      * @param nanos the maximum number of nanoseconds to wait
      */
     public static void parkNanos(long nanos) {
@@ -365,6 +499,18 @@ public class LockSupport {
      * for example, the interrupt status of the thread, or the current time
      * upon return.
      *
+     * <p>
+     *  为线程调度目的禁用当前线程,直到指定的截止日期,除非许可证可用。
+     * 
+     *  <p>如果许可证可用,则它被使用,并且呼叫立即返回;否则当前线程变为禁用线程调度目的,并休眠,直到四件事之一发生：
+     * 
+     * <ul>
+     *  <li>其他一些线程调用{@link #unpark unpark}以当前线程为目标;要么
+     * 
+     *  <li>一些其他线程{@linkplain线程#中断中断}当前线程;要么
+     * 
+     *  <li>指定的截止日期通过;要么
+     * 
      * @param deadline the absolute time, in milliseconds from the Epoch,
      *        to wait until
      */
@@ -375,6 +521,12 @@ public class LockSupport {
     /**
      * Returns the pseudo-randomly initialized or updated secondary seed.
      * Copied from ThreadLocalRandom due to package access restrictions.
+     * <p>
+     * 
+     *  <li>无谓地(也就是说,没有理由)返回。
+     * </ul>
+     * 
+     *  <p>此方法不会</em>报告其中哪些导致方法返回。调用者应该重新检查导致线程停在第一位置的条件。调用者还可以确定例如线程的中断状态或返回时的当前时间。
      */
     static final int nextSecondarySeed() {
         int r;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: LoadDocument.java,v 1.2.4.1 2005/09/06 07:14:12 pvedula Exp $
+ * <p>
+ *  $ Id：LoadDocument.java,v 1.2.4.1 2005/09/06 07:14:12 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -47,6 +60,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  */
 public final class LoadDocument {
@@ -60,6 +75,11 @@ public final class LoadDocument {
      * iterator containing the requested nodes. Builds a union-iterator if
      * several documents are requested.
      * 2 arguments arg1 and arg2.  document(Obj, node-set) call
+     * <p>
+     *  解释从document()函数传递的参数(请参阅com / sun / org / apache / xalan / internal / xsltc / compiler / DocumentCal
+     * l.java),并返回包含请求的节点的迭代器。
+     * 如果请求了多个文档,则构建union-iterator。 2参数arg1和arg2。文档(Obj,节点集)调用。
+     * 
      */
     public static DTMAxisIterator documentF(Object arg1, DTMAxisIterator arg2,
                             String xslURI, AbstractTranslet translet, DOM dom)
@@ -101,6 +121,11 @@ public final class LoadDocument {
      * iterator containing the requested nodes. Builds a union-iterator if
      * several documents are requested.
      * 1 arguments arg.  document(Obj) call
+     * <p>
+     *  解释从document()函数传递的参数(请参阅com / sun / org / apache / xalan / internal / xsltc / compiler / DocumentCal
+     * l.java),并返回包含请求的节点的迭代器。
+     * 如果请求了多个文档,则构建union-iterator。 1参数arg。文档(Obj)调用。
+     * 
      */
     public static DTMAxisIterator documentF(Object arg, String xslURI,
                     AbstractTranslet translet, DOM dom)
@@ -272,6 +297,8 @@ public final class LoadDocument {
      * Create a DTMAxisIterator for the newdom. This is currently only
      * used to create an iterator for the cached stylesheet DOM.
      *
+     * <p>
+     * 
      * @param newdom the cached stylesheet DOM
      * @param translet the translet
      * @param the main dom (should be a MultiDOM)

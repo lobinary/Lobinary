@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,16 @@ import javax.print.attribute.SupportedValuesAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  JobKOctetsSupported类是一个打印属性类,一组整数,给出{@link JobKOctets JobKOctets}属性支持的值。它限于单个连续的整数范围;不允许多个不重叠范围。
+ * 这给出了打印机将接受的K个字节(1024个八位字节)为单位的打印作业的总大小的下限和上限。
+ * <P>
+ *  <B> IPP兼容性：</B> JobKOctetsSupported属性的规范数组形式给出了要包括在IPP"job-k-octets-supported"属性中的值范围的下限和上限。
+ * 有关规范数组形式的解释,请参阅{@link javax.print.attribute.SetOfIntegerSyntax SetOfIntegerSyntax}类。
+ * 由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class JobKOctetsSupported extends SetOfIntegerSyntax
@@ -56,6 +67,10 @@ public final class JobKOctetsSupported extends SetOfIntegerSyntax
      * range of integers. That is, only those values of JobKOctets in the one
      * range are supported.
      *
+     * <p>
+     *  构造一个新的作业K个字节支持的属性,包含单个整数范围。也就是说,只支持一个范围中的JobKOctets的那些值。
+     * 
+     * 
      * @param  lowerBound  Lower bound of the range.
      * @param  upperBound  Upper bound of the range.
      *
@@ -88,6 +103,18 @@ public final class JobKOctetsSupported extends SetOfIntegerSyntax
      * <CODE>object</CODE>'s members are the same.
      * </OL>
      *
+     * <p>
+     *  返回此作业的K个八位字节支持的属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是JobKOctetsSupported类的实例。
+     * <LI>
+     *  这个作业K字节支持的属性成员和<CODE>对象</CODE>的成员是一样的。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job K
@@ -105,6 +132,8 @@ public final class JobKOctetsSupported extends SetOfIntegerSyntax
      * For class JobKOctetsSupported, the category is class
      * JobKOctetsSupported itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -119,6 +148,12 @@ public final class JobKOctetsSupported extends SetOfIntegerSyntax
      * For class JobKOctetsSupported, the category name is
      * <CODE>"job-k-octets-supported"</CODE>.
      *
+     * <p>
+     * 获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobKOctetsSupported类,类别是JobKOctetsSupported类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

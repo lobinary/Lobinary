@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,17 @@ import javax.print.attribute.Attribute;
  * <a HREF="http://www.ietf.org/rfc/rfc2911.txt">RFC 2911</a>
  * <P>
  *
+ * <p>
+ *  MediaSizeName类是Media的子类。
+ * <P>
+ *  可以使用此属性,而不是指定MediaName或MediaTray。
+ * <p>
+ *  MediaSizeName类目前声明几个标准媒体名称值。
+ * <P>
+ *  <B> IPP兼容性：</B> MediaSizeName是用于命名介质大小的IPP"media"属性的值的表示类。
+ * 介质大小的名称对应于IPP 1.1 RFC <a HREF="http://www.ietf.org/rfc/rfc2911.txt"> RFC 2911 </a>中的介质大小。
+ * <P>
+ * 
  */
 public class MediaSizeName extends Media {
 
@@ -50,335 +62,554 @@ public class MediaSizeName extends Media {
 
     /**
      * A0 size.
+     * <p>
+     *  A0大小。
+     * 
      */
     public static final MediaSizeName ISO_A0 = new MediaSizeName(0);
     /**
      * A1 size.
+     * <p>
+     *  A1尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A1 = new MediaSizeName(1);
     /**
      * A2 size.
+     * <p>
+     *  A2尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A2 = new MediaSizeName(2);
     /**
      * A3 size.
+     * <p>
+     *  A3尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A3 = new MediaSizeName(3);
     /**
      * A4 size.
+     * <p>
+     *  A4尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A4 = new MediaSizeName(4);
     /**
      * A5 size.
+     * <p>
+     *  A5尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A5 = new MediaSizeName(5);
     /**
      * A6 size.
+     * <p>
+     *  A6尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A6 = new MediaSizeName(6);
     /**
      * A7 size.
+     * <p>
+     *  A7尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A7 = new MediaSizeName(7);
     /**
      * A8 size.
+     * <p>
+     *  A8尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A8 = new MediaSizeName(8);
     /**
      * A9 size.
+     * <p>
+     *  A9尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A9 = new MediaSizeName(9);
     /**
      * A10 size.
+     * <p>
+     *  A10尺寸。
+     * 
      */
     public static final MediaSizeName ISO_A10 = new MediaSizeName(10);
 
    /**
      * ISO B0 size.
+     * <p>
+     *  ISO B0尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B0 = new MediaSizeName(11);
     /**
      * ISO B1 size.
+     * <p>
+     *  ISO B1尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B1 = new MediaSizeName(12);
     /**
      * ISO B2 size.
+     * <p>
+     *  ISO B2尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B2 = new MediaSizeName(13);
     /**
      * ISO B3 size.
+     * <p>
+     *  ISO B3尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B3 = new MediaSizeName(14);
     /**
      * ISO B4 size.
+     * <p>
+     *  ISO B4尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B4 = new MediaSizeName(15);
     /**
      * ISO B5 size.
+     * <p>
+     *  ISO B5尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B5 = new MediaSizeName(16);
     /**
      * ISO B6 size.
+     * <p>
+     *  ISO B6尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B6 = new MediaSizeName(17);
     /**
      * ISO B7 size.
+     * <p>
+     *  ISO B7尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B7 = new MediaSizeName(18);
     /**
      * ISO B8 size.
+     * <p>
+     *  ISO B8尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B8 = new MediaSizeName(19);
     /**
      * ISO B9 size.
+     * <p>
+     *  ISO B9尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B9 = new MediaSizeName(20);
     /**
      * ISO B10 size.
+     * <p>
+     *  ISO B10尺寸。
+     * 
      */
     public static final MediaSizeName ISO_B10 = new MediaSizeName(21);
 
    /**
      * JIS B0 size.
+     * <p>
+     *  JIS B0尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B0 = new MediaSizeName(22);
     /**
      * JIS B1 size.
+     * <p>
+     *  JIS B1尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B1 = new MediaSizeName(23);
     /**
      * JIS B2 size.
+     * <p>
+     *  JIS B2尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B2 = new MediaSizeName(24);
     /**
      * JIS B3 size.
+     * <p>
+     *  JIS B3尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B3 = new MediaSizeName(25);
     /**
      * JIS B4 size.
+     * <p>
+     *  JIS B4尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B4 = new MediaSizeName(26);
     /**
      * JIS B5 size.
+     * <p>
+     *  JIS B5尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B5 = new MediaSizeName(27);
     /**
      * JIS B6 size.
+     * <p>
+     *  JIS B6尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B6 = new MediaSizeName(28);
     /**
      * JIS B7 size.
+     * <p>
+     *  JIS B7尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B7 = new MediaSizeName(29);
     /**
      * JIS B8 size.
+     * <p>
+     *  JIS B8尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B8 = new MediaSizeName(30);
     /**
      * JIS B9 size.
+     * <p>
+     *  JIS B9尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B9 = new MediaSizeName(31);
     /**
      * JIS B10 size.
+     * <p>
+     *  JIS B10尺寸。
+     * 
      */
     public static final MediaSizeName JIS_B10 = new MediaSizeName(32);
 
     /**
      * ISO C0 size.
+     * <p>
+     *  ISO C0尺寸。
+     * 
      */
     public static final MediaSizeName ISO_C0 = new MediaSizeName(33);
     /**
      * ISO C1 size.
+     * <p>
+     *  ISO C1尺寸。
+     * 
      */
     public static final MediaSizeName ISO_C1 = new MediaSizeName(34);
     /**
      * ISO C2 size.
+     * <p>
+     *  ISO C2尺寸。
+     * 
      */
     public static final MediaSizeName ISO_C2 = new MediaSizeName(35);
     /**
      * ISO C3 size.
+     * <p>
+     *  ISO C3尺寸。
+     * 
      */
     public static final MediaSizeName ISO_C3 = new MediaSizeName(36);
     /**
      * ISO C4 size.
+     * <p>
+     *  ISO C4尺寸。
+     * 
      */
     public static final MediaSizeName ISO_C4 = new MediaSizeName(37);
     /**
      * ISO C5 size.
+     * <p>
+     *  ISO C5尺寸。
+     * 
      */
     public static final MediaSizeName ISO_C5 = new MediaSizeName(38);
     /**
      *   letter size.
+     * <p>
+     *  字母大小。
+     * 
      */
     public static final MediaSizeName ISO_C6 = new MediaSizeName(39);
     /**
      *   letter size.
+     * <p>
+     *  字母大小。
+     * 
      */
     public static final MediaSizeName NA_LETTER = new MediaSizeName(40);
 
     /**
      *  legal size .
+     * <p>
+     *  法律规模。
+     * 
      */
     public static final MediaSizeName NA_LEGAL = new MediaSizeName(41);
 
     /**
      *  executive size .
+     * <p>
+     *  执行尺寸。
+     * 
      */
     public static final MediaSizeName EXECUTIVE = new MediaSizeName(42);
 
     /**
      *  ledger size .
+     * <p>
+     *  分类帐大小。
+     * 
      */
     public static final MediaSizeName LEDGER = new MediaSizeName(43);
 
     /**
      *  tabloid size .
+     * <p>
+     *  小报大小。
+     * 
      */
     public static final MediaSizeName TABLOID = new MediaSizeName(44);
 
     /**
      *  invoice size .
+     * <p>
+     *  发票大小。
+     * 
      */
     public static final MediaSizeName INVOICE = new MediaSizeName(45);
 
     /**
      *  folio size .
+     * <p>
+     *  对开纸大小。
+     * 
      */
     public static final MediaSizeName FOLIO = new MediaSizeName(46);
 
     /**
      *  quarto size .
+     * <p>
+     *  四分尺寸。
+     * 
      */
     public static final MediaSizeName QUARTO = new MediaSizeName(47);
 
     /**
      *  Japanese Postcard size.
+     * <p>
+     *  日本明信片尺寸。
+     * 
      */
     public static final MediaSizeName
         JAPANESE_POSTCARD = new MediaSizeName(48);
    /**
      *  Japanese Double Postcard size.
+     * <p>
+     *  日本双明信片大小。
+     * 
      */
     public static final MediaSizeName
         JAPANESE_DOUBLE_POSTCARD = new MediaSizeName(49);
 
     /**
      *  A size .
+     * <p>
+     *  A尺寸。
+     * 
      */
     public static final MediaSizeName A = new MediaSizeName(50);
 
     /**
      *  B size .
+     * <p>
+     *  B尺寸。
+     * 
      */
     public static final MediaSizeName B = new MediaSizeName(51);
 
     /**
      *  C size .
+     * <p>
+     *  C尺寸。
+     * 
      */
     public static final MediaSizeName C = new MediaSizeName(52);
 
     /**
      *  D size .
+     * <p>
+     *  D尺寸。
+     * 
      */
     public static final MediaSizeName D = new MediaSizeName(53);
 
     /**
      *  E size .
+     * <p>
+     *  E尺寸。
+     * 
      */
     public static final MediaSizeName E = new MediaSizeName(54);
 
     /**
      *  ISO designated long size .
+     * <p>
+     *  ISO指定长尺寸。
+     * 
      */
     public static final MediaSizeName
         ISO_DESIGNATED_LONG = new MediaSizeName(55);
 
     /**
      *  Italy envelope size .
+     * <p>
+     *  意大利信封大小。
+     * 
      */
     public static final MediaSizeName
         ITALY_ENVELOPE = new MediaSizeName(56);  // DESIGNATED_LONG?
 
     /**
      *  monarch envelope size .
+     * <p>
+     *  君主信封大小。
+     * 
      */
     public static final MediaSizeName
         MONARCH_ENVELOPE = new MediaSizeName(57);
     /**
      * personal envelope size .
+     * <p>
+     *  个人信封尺寸。
+     * 
      */
     public static final MediaSizeName
         PERSONAL_ENVELOPE = new MediaSizeName(58);
     /**
      *  number 9 envelope size .
+     * <p>
+     *  9号信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_NUMBER_9_ENVELOPE = new MediaSizeName(59);
     /**
      *  number 10 envelope size .
+     * <p>
+     *  10号信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_NUMBER_10_ENVELOPE = new MediaSizeName(60);
     /**
      *  number 11 envelope size .
+     * <p>
+     * 11号信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_NUMBER_11_ENVELOPE = new MediaSizeName(61);
     /**
      *  number 12 envelope size .
+     * <p>
+     *  12号信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_NUMBER_12_ENVELOPE = new MediaSizeName(62);
     /**
      *  number 14 envelope size .
+     * <p>
+     *  14号信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_NUMBER_14_ENVELOPE = new MediaSizeName(63);
    /**
      *  6x9 North American envelope size.
+     * <p>
+     *  6x9北美信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_6X9_ENVELOPE = new MediaSizeName(64);
    /**
      *  7x9 North American envelope size.
+     * <p>
+     *  7x9北美信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_7X9_ENVELOPE = new MediaSizeName(65);
    /**
      *  9x11 North American envelope size.
+     * <p>
+     *  9x11北美信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_9X11_ENVELOPE = new MediaSizeName(66);
     /**
      *  9x12 North American envelope size.
+     * <p>
+     *  9x12北美信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_9X12_ENVELOPE = new MediaSizeName(67);
 
     /**
      *  10x13 North American envelope size .
+     * <p>
+     *  10x13北美信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_10X13_ENVELOPE = new MediaSizeName(68);
     /**
      *  10x14North American  envelope size .
+     * <p>
+     *  10x14North美国信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_10X14_ENVELOPE = new MediaSizeName(69);
     /**
      *  10x15 North American envelope size.
+     * <p>
+     *  10x15北美信封尺寸。
+     * 
      */
     public static final MediaSizeName
         NA_10X15_ENVELOPE = new MediaSizeName(70);
 
     /**
      *  5x7 North American paper.
+     * <p>
+     *  5x7北美纸。
+     * 
      */
     public static final MediaSizeName
         NA_5X7 = new MediaSizeName(71);
 
     /**
      *  8x10 North American paper.
+     * <p>
+     *  8x10北美纸。
+     * 
      */
     public static final MediaSizeName
         NA_8X10 = new MediaSizeName(72);
@@ -387,6 +618,10 @@ public class MediaSizeName extends Media {
      * Construct a new media size enumeration value with the given integer
      * value.
      *
+     * <p>
+     *  使用给定的整数值构造新的介质尺寸枚举值。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected MediaSizeName(int value) {
@@ -548,6 +783,9 @@ public class MediaSizeName extends Media {
 
     /**
      * Returns the string table for class MediaSizeName.
+     * <p>
+     *  返回类MediaSizeName的字符串表。
+     * 
      */
     protected String[] getStringTable()
     {
@@ -556,6 +794,8 @@ public class MediaSizeName extends Media {
 
     /**
      * Returns the enumeration value table for class MediaSizeName.
+     * <p>
+     *  返回类MediaSizeName的枚举值表。
      */
     protected EnumSyntax[] getEnumValueTable() {
         return (EnumSyntax[])myEnumValueTable.clone();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -25,6 +26,11 @@ package org.omg.PortableInterceptor;
    * A PICurrent can still be obtained via 
    * <code>resolve_initial_references</code>, but that is the Interceptor's 
    * thread scope PICurrent.
+   * <p>
+   *  便携式拦截器当前(也称为<code> PICurrent </code>)仅仅是一个时隙表,其时隙由每个服务用于在其上下文和请求或应答的服务上下文之间传输其上下文数据。
+   * 希望使用PICurrent的每个服务在初始化时保留一个或多个插槽,并在处理请求和回复期间使用这些插槽。
+   * <p>
+   *  在进行调用之前,通过调用<code> ORB.resolve_initial_references("PICurrent")</code>获得PICurrent。
    */
 abstract public class CurrentHelper
 {

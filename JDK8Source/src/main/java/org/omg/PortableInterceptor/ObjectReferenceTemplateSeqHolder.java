@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -11,6 +12,8 @@ package org.omg.PortableInterceptor;
 
 /** Sequence of object reference templates is used for reporting state
    * changes that do not occur on the adapter manager.
+   * <p>
+   * 
    */
 public final class ObjectReferenceTemplateSeqHolder implements org.omg.CORBA.portable.Streamable
 {

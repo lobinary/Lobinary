@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -175,6 +176,73 @@ import java.util.NoSuchElementException;
  * problem is to fix the misconfigured web server to return the correct
  * response code (HTTP 404) along with the HTML error page.
  *
+ * <p>
+ *  一个简单的服务提供商加载设施。
+ * 
+ *  <p> A <i>服务</i>是一组众所周知的接口和(通常是抽象的)类。服务提供商</i>是服务的具体实现。提供程序中的类通常实现接口并对服务本身中定义的类进行子类化。
+ * 服务提供程序可以以扩展的形式安装在Java平台的实现中,即,jar文件放置在任何通常的扩展目录中。提供者也可以通过将它们添加到应用程序的类路径或通过一些其他平台特定的手段。
+ * 
+ * <p>为了加载,服务由单一类型表示,即单个接口或抽象类。 (可以使用具体类,但不建议这样做。)给定服务的提供者包含一个或多个具体类,它们通过特定于提供者的数据和代码来扩展该<i>服务类型</i>。
+ *  <i>提供者类</i>通常不是整个提供者本身,而是包含足够信息的代理,以决定提供者是否能够满足特定请求以及可以根据需要创建实际提供者的代码。
+ * 提供者类的细节倾向于高度服务特定;没有单个类或接口可能统一它们,因此这里没有定义这样的类型。此工具强制实施的唯一要求是,提供程序类必须具有零参数构造函数,以便在加载过程中实例化它们。
+ * 
+ * <p> <a name="format">通过在资源目录<tt> META-INF / services </tt>中放置<i>提供程序配置文件</i>来标识服务提供商。
+ * </a >文件名称是服务类型的完全限定的<a href="../lang/ClassLoader.html#name">二进制名称</a>。该文件包含具体提供程序类的完全限定二进制名称列表,每行一个。
+ * 忽略每个名称周围的空格和制表符以及空行。
+ * 注释字符为<tt>'#'</tt>(<tt>'\ u0023'</tt>,<font style ="font-size：smaller;"> NUMBER SIGN </font>);在每行上,忽略第
+ * 一个注释字符后面的所有字符。
+ * 忽略每个名称周围的空格和制表符以及空行。该文件必须以UTF-8编码。
+ * 
+ *  <p>如果特定的具体提供程序类在多个配置文件中命名,或者在同一配置文件中多次命名,那么将忽略重复项。指定特定提供者的配置文件不需要位于与提供者本身相同的jar文件或其他分发单元中。
+ * 提供程序必须可以从最初查询以查找配置文件的同一类加载器访问;请注意,这不一定是实际加载文件的类加载器。
+ * 
+ * <p>提供者可以懒惰地定位和实例化,即按需。服务加载器维护迄今为止已加载的提供程序的高速缓存。
+ * 每次调用{@link #iterator iterator}方法都会返回一个迭代器,该迭代器首先以实例化顺序生成高速缓存的所有元素,然后延迟定位并实例化任何剩余的提供程序,依次将每个提供程序添加到高速缓
+ * 存中。
+ * <p>提供者可以懒惰地定位和实例化,即按需。服务加载器维护迄今为止已加载的提供程序的高速缓存。可以通过{@link #reload reload}方法清除缓存。
+ * 
+ *  <p>服务加载器总是在调用者的安全上下文中执行。可信系统代码通常应该在特权安全上下文中调用此类中的方法,以及它们返回的迭代器的方法。
+ * 
+ *  <p>此类的实例不适合由多个并发线程使用。
+ * 
+ *  <p>除非另有说明,否则将<tt> null </tt>参数传递给此类中的任何方法都会导致抛出{@link NullPointerException}。
+ * 
+ *  <p> <span style ="font-weight：bold; padding-right：1em">示例</span>假设我们有一个服务类型<tt> com.example.CodecSet
+ *  </tt>的编码器/解码器对的一些协议。
+ * 在这种情况下,它是一个抽象类,有两个抽象方法：。
+ * 
+ *  <blockquote> <pre> public abstract Encoder getEncoder(String encodingName); public abstract Decoder 
+ * getDecoder(String encodingName); </pre> </blockquote>。
+ * 
+ * 如果提供程序不支持给定的编码,则每个方法都返回一个适当的对象或<tt> null </tt>。典型的提供程序支持多个编码。
+ * 
+ *  <p>如果<tt> com.example.impl.StandardCodecs </tt>是<tt> CodecSet </tt>服务的实现,那么它的jar文件还包含一个名为
+ * 
+ *  <blockquote> <pre> META-INF / services / com.example.CodecSet </pre> </blockquote>
+ * 
+ *  <p>此文件包含单行：
+ * 
+ *  <blockquote> <pre> com.example.impl.StandardCodecs#标准编解码器</pre> </blockquote>
+ * 
+ *  <p> <tt> CodecSet </tt>类在初始化时创建并保存单个服务实例：
+ * 
+ *  <blockquote> <pre> private static ServiceLoader&lt; CodecSet&gt; codecSetLoader = ServiceLoader.load
+ * (CodecSet.class); </pre> </blockquote>。
+ * 
+ *  <p>要定位给定编码名称的编码器,它定义了一个静态工厂方法,它迭代已知和可用的提供程序,只有当它找到一个合适的编码器或已经耗尽提供程序时才返回。
+ * 
+ *  <blockquote> <pre> public static Encoder getEncoder(String encodingName){for(CodecSet cp：codecSetLoader){Encoder enc = cp.getEncoder(encodingName); if(enc！= null)return enc; }
+ *  return null; } </pre> </blockquote>。
+ * 
+ *  <p> A <tt> getDecoder </tt>方法的定义类似。
+ * 
+ * <p> <span style ="font-weight：bold; padding-right：1em">使用注意</span>如果用于提供商加载的类加载器的类路径包含远程网络URL,在搜索提供程序
+ * 配置文件的过程中被取消引用。
+ * 
+ *  <p>此活动是正常的,虽然它可能导致在Web服务器日志中创建令人费解的条目。但是,如果Web服务器配置不正确,则此活动可能会导致提供程序加载算法失败。
+ * 
+ *  <p>当请求的资源不存在时,网络服务器应返回HTTP 404(未找到)响应。然而,有时,Web服务器被错误地配置为在这种情况下返回HTTP 200(OK)响应以及有用的HTML错误页面。
+ * 
  * @param  <S>
  *         The type of the service to be loaded by this loader
  *
@@ -213,6 +281,10 @@ public final class ServiceLoader<S>
      *
      * <p> This method is intended for use in situations in which new providers
      * can be installed into a running Java virtual machine.
+     * <p>
+     * 当此类尝试将HTML页面解析为提供程序配置文件时,将导致{@link ServiceConfigurationError}被抛出。
+     * 此问题的最佳解决方案是修复错误配置的Web服务器以返回正确的响应代码(HTTP 404)以及HTML错误页面。
+     * 
      */
     public void reload() {
         providers.clear();
@@ -459,6 +531,14 @@ public final class ServiceLoader<S>
      * ClassLoader.getResources(String)} method finds the service configuration
      * files.
      *
+     * <p>
+     *  清除此加载程序的提供程序缓存,以便重新加载所有提供程序。
+     * 
+     *  <p>调用此方法后,{@link #iterator()iterator}方法的后续调用将懒洋洋地查找并从头开始实例化提供程序,就像新创建的加载程序所做的那样。
+     * 
+     *  <p>此方法适用于新的提供程序可以安装到正在运行的Java虚拟机中的情况。
+     * 
+     * 
      * @return  An iterator that lazily loads providers for this loader's
      *          service
      */
@@ -491,6 +571,32 @@ public final class ServiceLoader<S>
      * Creates a new service loader for the given service type and class
      * loader.
      *
+     * <p>
+     * Lazily加载此加载器的服务的可用提供程序。
+     * 
+     *  <p>此方法返回的迭代器首先按实例化顺序生成提供程序缓存的所有元素。然后它懒惰加载和实例化任何剩余的提供程序,依次将每个提交到缓存。
+     * 
+     *  <p>为了实现惰性,解析可用的提供程序配置文件和实例化提供程序的实际工作必须由迭代器本身完成。
+     * 因此,如果提供程序配置文件违反指定的格式,则它的{@link java.util.Iterator#hasNext hasNext}和{@link java.util.Iterator#next next}
+     * 方法可能会引发{@link ServiceConfigurationError}命名无法找到和实例化的提供程序类,或者实例化该类的结果不能分配给服务类型,或者在下一个提供者被定位和实例化时抛出任何其他种
+     * 类的异常或错误。
+     *  <p>为了实现惰性,解析可用的提供程序配置文件和实例化提供程序的实际工作必须由迭代器本身完成。
+     * 要编写健壮的代码,只需要在使用服务迭代器时捕获{@link ServiceConfigurationError}。
+     * 
+     *  <p>如果抛出这样的错误,则迭代器的后续调用将尽最大努力来定位和实例化下一个可用的提供程序,但是通常不能保证这种恢复。
+     * 
+     * <blockquote style ="font-size：smaller; line-height：1.2"> <span style ="padding-right：1em; font-weight：bold">
+     * 设计注意</span>在这些情况下抛出错误极端。
+     * 此行为的基本原理是,格式不正确的提供程序配置文件(如格式不正确的类文件)表明Java虚拟机配置或正在使用的方式存在严重问题。因此,最好抛出一个错误,而不是试图恢复,或者更糟糕的是,默默失败。
+     * </blockquote>。
+     * 
+     *  <p>此方法返回的迭代器不支持删除。
+     * 调用其{@link java.util.Iterator#remove()remove}方法将导致抛出{@link UnsupportedOperationException}。
+     * 
+     *  @implNote当将提供者添加到缓存时,{@link #iterator迭代器}会按照{@link java.lang.ClassLoader#getResources(java.lang.String)ClassLoader.getResources(String)}
+     * 方法找到的顺序处理资源服务配置文件。
+     * 
+     * 
      * @param  <S> the class of the service type
      *
      * @param  service
@@ -526,6 +632,10 @@ public final class ServiceLoader<S>
      * ServiceLoader.load(<i>service</i>,
      *                    Thread.currentThread().getContextClassLoader())</pre></blockquote>
      *
+     * <p>
+     *  为给定的服务类型和类装入器创建一个新的服务加载器。
+     * 
+     * 
      * @param  <S> the class of the service type
      *
      * @param  service
@@ -557,6 +667,19 @@ public final class ServiceLoader<S>
      * have been installed into the current Java virtual machine; providers on
      * the application's class path will be ignored.
      *
+     * <p>
+     *  使用当前线程的{@linkplain java.lang.Thread#getContextClassLoader上下文类加载器}为给定的服务类型创建一个新的服务加载器。
+     * 
+     *  <p>表单的这个方便方法的调用
+     * 
+     *  <blockquote> <pre> ServiceLoader.load(<i> service </i>)</pre> </blockquote>
+     * 
+     *  相当于
+     * 
+     *  <blockquote> <pre> ServiceLoader.load(<i> service </i>,Thread.currentThread()。
+     * getContextClassLoader())</pre> </blockquote>。
+     * 
+     * 
      * @param  <S> the class of the service type
      *
      * @param  service
@@ -577,6 +700,15 @@ public final class ServiceLoader<S>
     /**
      * Returns a string describing this service.
      *
+     * <p>
+     * 使用扩展类加载器为给定的服务类型创建一个新的服务加载器。
+     * 
+     *  <p>这种方便的方法只需定位扩展类​​加载器,调用<tt> <i> extClassLoader </i> </tt>,然后返回
+     * 
+     *  <blockquote> <pre> ServiceLoader.load(<i> service </i>,<i> extClassLoader </i>)</pre> </blockquote>。
+     * 
+     *  <p>如果无法找到扩展类加载器,则使用系统类加载器;如果没有系统类加载器,则使用引导类加载器。
+     * 
      * @return  A descriptive string
      */
     public String toString() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: LiteralAttribute.java,v 1.2.4.1 2005/09/12 10:38:03 pvedula Exp $
+ * <p>
+ *  $ Id：LiteralAttribute.java,v 1.2.4.1 2005/09/12 10:38:03 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -36,6 +49,8 @@ import com.sun.org.apache.xml.internal.serializer.ElemDesc;
 import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -47,6 +62,10 @@ final class LiteralAttribute extends Instruction {
 
     /**
      * Creates a new literal attribute (but does not insert it into the AST).
+     * <p>
+     *  创建一个新的文本属性(但不会将其插入到AST中)。
+     * 
+     * 
      * @param name the attribute name (incl. prefix) as a String.
      * @param value the attribute value.
      * @param parser the XSLT parser (wraps XPath parser).
@@ -130,6 +149,9 @@ final class LiteralAttribute extends Instruction {
      * or greater than 126,
      * or it is one of '<', '>', '&' or '\"'.
      * This helps the serializer to decide whether the String needs to be escaped.
+     * <p>
+     *  如果字符串中至少有一个字符被认为是"坏"字符,则返回true。坏字符的代码是：小于32(空格)或大于126,或者是'<','>','&'或'\"之一。这有助于序列化程序决定是否需要转义字符串。
+     * 
      */
     private boolean hasBadChars(String value) {
         char[] chars = value.toCharArray();
@@ -144,6 +166,9 @@ final class LiteralAttribute extends Instruction {
 
     /**
      * Return the name of the attribute
+     * <p>
+     *  返回属性的名称
+     * 
      */
     public String getName() {
         return _name;
@@ -151,6 +176,8 @@ final class LiteralAttribute extends Instruction {
 
     /**
      * Return the value of the attribute
+     * <p>
+     *  返回属性的值
      */
     public AttributeValue getValue() {
         return _value;

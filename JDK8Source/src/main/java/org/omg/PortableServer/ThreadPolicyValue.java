@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -15,6 +16,7 @@ package org.omg.PortableServer;
 	 * requests for an ORB- controlled POA to threads. 
 	 * SINGLE_THREAD_MODEL - Requests for a single-threaded 
 	 * POA are processed sequentially. 
+	 * <p>
 	 */
 public class ThreadPolicyValue implements org.omg.CORBA.portable.IDLEntity
 {

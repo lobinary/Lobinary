@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,37 +33,58 @@ class TokenMgrError extends Error
 
    /*
     * Ordinals for various reasons why an Error of this type can be thrown.
+    * <p>
+    *  由于各种原因,为什么可以抛出此类型的错误的顺序。
+    * 
     */
 
    /**
     * Lexical error occurred.
+    * <p>
+    *  发生词法错误。
+    * 
     */
    static final int LEXICAL_ERROR = 0;
 
    /**
     * An attempt wass made to create a second instance of a static token manager.
+    * <p>
+    *  尝试创建静态令牌管理器的第二个实例。
+    * 
     */
    static final int STATIC_LEXER_ERROR = 1;
 
    /**
     * Tried to change to an invalid lexical state.
+    * <p>
+    *  试图更改为无效的词汇状态。
+    * 
     */
    static final int INVALID_LEXICAL_STATE = 2;
 
    /**
     * Detected (and bailed out of) an infinite loop in the token manager.
+    * <p>
+    *  在令牌管理器中检测到(和退出)无限循环。
+    * 
     */
    static final int LOOP_DETECTED = 3;
 
    /**
     * Indicates the reason why the exception is thrown. It will have
     * one of the above 4 values.
+    * <p>
+    *  指示抛出异常的原因。它将具有以上4个值之一。
+    * 
     */
    int errorCode;
 
    /**
     * Replaces unprintable characters by their espaced (or unicode escaped)
     * equivalents in the given string
+    * <p>
+    *  通过其在给定字符串中的间距(或unicode转义)等效替换不可打印字符
+    * 
     */
    protected static final String addEscapes(String str) {
       StringBuffer retval = new StringBuffer();
@@ -120,6 +142,12 @@ class TokenMgrError extends Error
     *    errorAfter  : prefix that was seen before this error occurred
     *    curchar     : the offending character
     * Note: You can customize the lexical error message by modifying this method.
+    * <p>
+    *  返回错误的详细消息,当它由令牌管理器抛出以指示词汇错误。
+    * 参数：EOFSeen：指示EOF是否导致lexicl错误curLexState：发生此错误的词法状态errorLine：发生错误时的行号errorColumn：发生错误时的列号errorAfter：在发
+    * 生此错误之前看到的前缀curchar：字符注意：您可以通过修改此方法自定义词法错误消息。
+    *  返回错误的详细消息,当它由令牌管理器抛出以指示词汇错误。
+    * 
     */
    private static final String LexicalError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar) {
       return("Lexical error at line " +
@@ -137,6 +165,12 @@ class TokenMgrError extends Error
     *     "Internal Error : Please file a bug report .... "
     *
     * from this method for such cases in the release version of your parser.
+    * <p>
+    *  您还可以修改此方法的正文以自定义错误消息。例如,像LOOP_DETECTED和INVALID_LEXICAL_STATE这样的情况不是最终用户关心的,因此您可以返回类似的内容：
+    * 
+    *  "内部错误：请提交错误报告...."
+    * 
+    *  从这种方法为这种情况下在发布版本的解析器。
     */
    public String getMessage() {
       return super.getMessage();
@@ -144,6 +178,8 @@ class TokenMgrError extends Error
 
    /*
     * Constructors of various flavors follow.
+    * <p>
+    * 
     */
 
    public TokenMgrError() {

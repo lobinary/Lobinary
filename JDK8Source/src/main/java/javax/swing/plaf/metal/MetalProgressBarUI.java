@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,13 @@ import java.awt.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  ProgressBarUI的Metal实现。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Michael C. Albers
  */
 public class MetalProgressBarUI extends BasicProgressBarUI {
@@ -57,6 +65,10 @@ public class MetalProgressBarUI extends BasicProgressBarUI {
      * Draws a bit of special highlighting on the progress bar.
      * The core painting is deferred to the BasicProgressBar's
      * <code>paintDeterminate</code> method.
+     * <p>
+     *  在进度条上绘制一些特殊的突出显示。核心绘画被推迟到BasicProgressBar的<code> paintDeterminate </code>方法。
+     * 
+     * 
      * @since 1.4
      */
     public void paintDeterminate(Graphics g, JComponent c) {
@@ -137,6 +149,9 @@ public class MetalProgressBarUI extends BasicProgressBarUI {
      * and bouncing box.
      * The core painting is deferred to the BasicProgressBar's
      * <code>paintIndeterminate</code> method.
+     * <p>
+     *  在进度条和弹跳框上绘制一些特殊的突出显示。核心绘画推迟到BasicProgressBar的<code> paintIndeterminate </code>方法。
+     * 
      * @since 1.4
      */
     public void paintIndeterminate(Graphics g, JComponent c) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,10 @@ import java.util.Set;
  * The <tt>TabularDataSupport</tt> class is the <i>open data</i> class which implements the <tt>TabularData</tt>
  * and the <tt>Map</tt> interfaces, and which is internally based on a hash map data structure.
  *
+ * <p>
+ *  <tt> TabularDataSupport </tt>类是实现<tt> TabularData </tt>和<tt> Map </tt>接口的<i>开放数据</i>类,在散列图数据结构上。
+ * 
+ * 
  * @since 1.5
  */
 /* It would make much more sense to implement
@@ -70,6 +75,13 @@ import java.util.Set;
    it would (a) no longer compile and (b) not actually override
    CompositeData remove(Object)
    in binaries compiled before the change.
+/* <p>
+/*  地图<List <?>,CompositeData>这里,但不幸的是我们不能为兼容性的原因。如果我们这样做,那么我们必须定义例如。
+/*  CompositeData remove(Object)而不是Object remove(Object)。
+/* 
+/*  这意味着如果任何现有的代码子类化TabularDataSupport和overrode Object remove(Object),它将(a)不再编译和(b)实际上不会覆盖在更改之前编译的二进制文件中
+/* 的CompositeData remove(Object)。
+/* 
 */
 public class TabularDataSupport
     implements TabularData, Map<Object,Object>,
@@ -81,18 +93,25 @@ public class TabularDataSupport
 
 
     /**
+    /* <p>
+    /* 
      * @serial This tabular data instance's contents: a {@link HashMap}
      */
     // field cannot be final because of clone method
     private Map<Object,CompositeData> dataMap;
 
     /**
+    /* <p>
+    /* 
      * @serial This tabular data instance's tabular type
      */
     private final TabularType tabularType;
 
     /**
      * The array of item names that define the index used for rows (convenience field)
+     * <p>
+     *  定义用于行的索引的项名称数组(便利字段)
+     * 
      */
     private transient String[] indexNamesArray;
 
@@ -107,6 +126,13 @@ public class TabularDataSupport
      * <p>
      * This constructor simply calls <tt>this(tabularType, 101, 0.75f);</tt>
      *
+     * <p>
+     *  创建其开放类型为<var> tabularType </var>且底层<tt> HashMap </tt>具有默认初始容量(101)和默认负载系数(101)的空的<tt> TabularDataSup
+     * port </tt> 0.75)。
+     * <p>
+     *  这个构造函数简单地调用<tt> this(tabularType,101,0.75f); </tt>
+     * 
+     * 
      * @param  tabularType               the <i>tabular type</i> describing this <tt>TabularData</tt> instance;
      *                                   cannot be null.
      *
@@ -121,6 +147,11 @@ public class TabularDataSupport
      * Creates an empty <tt>TabularDataSupport</tt> instance whose open-type is <var>tabularType</var>,
      * and whose underlying <tt>HashMap</tt> has the specified initial capacity and load factor.
      *
+     * <p>
+     *  创建一个空的<tt> TabularDataSupport </tt>实例,其开放类型为<var> tabularType </var>,其底层<tt> HashMap </tt>具有指定的初始容量和
+     * 负载系数。
+     * 
+     * 
      * @param  tabularType               the <i>tabular type</i> describing this <tt>TabularData</tt> instance;
      *                           cannot be null.
      *
@@ -168,6 +199,9 @@ public class TabularDataSupport
 
     /**
      * Returns the <i>tabular type</i> describing this <tt>TabularData</tt> instance.
+     * <p>
+     *  返回描述此<tt> TabularData </tt>实例的<i>表格类型</i>。
+     * 
      */
     public TabularType getTabularType() {
 
@@ -180,6 +214,11 @@ public class TabularDataSupport
      * This method checks for the type validity of the specified <var>value</var>,
      * but does not check if the calculated index is already used to refer to a value in this <tt>TabularData</tt> instance.
      *
+     * <p>
+     * 计算要在此<tt> TabularData </tt>实例中使用的索引,以指向指定的复合数据<var> value </var>参数(如果已添加到此实例)。
+     * 此方法检查指定<var> value </var>的类型有效性,但不检查计算的索引是否已用于引用此<tt> TabularData </tt>实例中的值。
+     * 
+     * 
      * @param  value                      the composite data value whose index in this
      *                                    <tt>TabularData</tt> instance is to be calculated;
      *                                    must be of the same composite type as this instance's row type;
@@ -215,6 +254,13 @@ public class TabularDataSupport
      * of Object instances, this method simply returns <tt>false</tt>; otherwise it returns the the result of the call to
      * <tt>this.containsKey((Object[]) key)</tt>.
      *
+     * <p>
+     *  当且仅当此<tt> TabularData </tt>实例包含其索引为指定<var> key </tt>的<tt> CompositeData </tt>值(即行)时,返回<tt> true </tt>
+     *  var>。
+     * 如果<var> key </var>无法转换为Object实例的一维数组,则此方法只返回<tt> false </tt>;否则返回调用<tt> this.containsKey((Object [])k
+     * ey)</tt>的结果。
+     * 
+     * 
      * @param  key  the index value whose presence in this <tt>TabularData</tt> instance is to be tested.
      *
      * @return  <tt>true</tt> if this <tt>TabularData</tt> indexes a row value with the specified key.
@@ -238,6 +284,12 @@ public class TabularDataSupport
      * (ie a row) whose index is the specified <var>key</var>. If <var>key</var> is <tt>null</tt> or does not conform to
      * this <tt>TabularData</tt> instance's <tt>TabularType</tt> definition, this method simply returns <tt>false</tt>.
      *
+     * <p>
+     *  当且仅当此<tt> TabularData </tt>实例包含其索引为指定<var> key </tt>的<tt> CompositeData </tt>值(即行)时,返回<tt> true </tt>
+     *  var>。
+     * 如果<var> key </var>是<tt> null </tt>或不符合此<tt> TabularData </tt>实例的<tt> TabularType </tt> false </tt>。
+     * 
+     * 
      * @param  key  the index value whose presence in this <tt>TabularData</tt> instance is to be tested.
      *
      * @return  <tt>true</tt> if this <tt>TabularData</tt> indexes a row value with the specified key.
@@ -252,6 +304,11 @@ public class TabularDataSupport
      * <tt>CompositeData</tt> value. If <var>value</var> is <tt>null</tt> or does not conform to
      * this <tt>TabularData</tt> instance's row type definition, this method simply returns <tt>false</tt>.
      *
+     * <p>
+     *  当且仅当此<tt> TabularData </tt>实例包含指定的<tt> CompositeData </tt>值时,返回<tt> true </tt>。
+     * 如果<var> value </var>为<tt> null </tt>或不符合此<tt> TabularData </tt>实例的行类型定义,此方法只返回<tt> false </tt>。
+     * 
+     * 
      * @param  value  the row value whose presence in this <tt>TabularData</tt> instance is to be tested.
      *
      * @return  <tt>true</tt> if this <tt>TabularData</tt> instance contains the specified row value.
@@ -265,6 +322,10 @@ public class TabularDataSupport
      * Returns <tt>true</tt> if and only if this <tt>TabularData</tt> instance contains the specified
      * value.
      *
+     * <p>
+     *  当且仅当此<tt> TabularData </tt>实例包含指定的值时,返回<tt> true </tt>。
+     * 
+     * 
      * @param  value  the row value whose presence in this <tt>TabularData</tt> instance is to be tested.
      *
      * @return  <tt>true</tt> if this <tt>TabularData</tt> instance contains the specified row value.
@@ -277,6 +338,10 @@ public class TabularDataSupport
     /**
      * This method simply calls <tt>get((Object[]) key)</tt>.
      *
+     * <p>
+     * 这个方法只需调用<tt> get((Object [])key)</tt>。
+     * 
+     * 
      * @throws NullPointerException  if the <var>key</var> is <tt>null</tt>
      * @throws ClassCastException    if the <var>key</var> is not of the type <tt>Object[]</tt>
      * @throws InvalidKeyException   if the <var>key</var> does not conform to this <tt>TabularData</tt> instance's
@@ -292,6 +357,11 @@ public class TabularDataSupport
      * <var>key</var>, or <tt>null</tt> if there is no value mapping
      * to <var>key</var>, in this <tt>TabularData</tt> instance.
      *
+     * <p>
+     *  如果没有值映射到<var> key </var>,则返回其索引为<var> key </var>或<tt> null </tt>的<tt> CompositeData </tt> <tt> Tabul
+     * arData </tt>实例。
+     * 
+     * 
      * @param key the index of the value to get in this
      * <tt>TabularData</tt> instance; * must be valid with this
      * <tt>TabularData</tt> instance's row type definition; * must not
@@ -325,6 +395,10 @@ public class TabularDataSupport
      * This method simply calls <tt>put((CompositeData) value)</tt> and
      * therefore ignores its <var>key</var> parameter which can be <tt>null</tt>.
      *
+     * <p>
+     *  此方法简单地调用<tt> put((CompositeData)value)</tt>,因此忽略其<var> key </var>参数,可以是<tt> null </tt>。
+     * 
+     * 
      * @param key an ignored parameter.
      * @param value the {@link CompositeData} to put.
      *
@@ -365,6 +439,10 @@ public class TabularDataSupport
     /**
      * This method simply calls <tt>remove((Object[]) key)</tt>.
      *
+     * <p>
+     *  这个方法只需调用<tt> remove((Object [])key)</tt>。
+     * 
+     * 
      * @param key an <tt>Object[]</tt> representing the key to remove.
      *
      * @return previous value associated with specified key, or <tt>null</tt>
@@ -384,6 +462,11 @@ public class TabularDataSupport
      * Removes the <tt>CompositeData</tt> value whose index is <var>key</var> from this <tt>TabularData</tt> instance,
      * and returns the removed value, or returns <tt>null</tt> if there is no value whose index is <var>key</var>.
      *
+     * <p>
+     *  从此<tt> TabularData </tt>实例中删除其索引为<var> key </var>的<tt> CompositeData </tt>值,并返回<tt> null </tt>如果没有其索
+     * 引为<var> key </var>的值。
+     * 
+     * 
      * @param  key  the index of the value to get in this <tt>TabularData</tt> instance;
      *              must be valid with this <tt>TabularData</tt> instance's row type definition;
      *              must not be null.
@@ -423,6 +506,12 @@ public class TabularDataSupport
      * <tt>TabularData</tt> instance with the same row type (but
      * possibly different index names) into this instance.
      *
+     * <p>
+     *  将指定映射<var> t </var>中包含的所有值添加到此<tt> TabularData </tt>实例。
+     * 此方法将此映射中包含的值的集合转换为<tt> CompositeData </tt>值的数组(如果可能),然后调用方法<tt> putAll(CompositeData [])</tt>。
+     * 请注意,指定映射<var> t </var>中使用的键将被忽略。此方法允许例如将具有相同行类型(但可能不同的索引名称)的另一个<tt> TabularData </tt>实例的内容添加到此实例中。
+     * 
+     * 
      * @param t the map whose values are to be added as new rows to
      * this <tt>TabularData</tt> instance; if <var>t</var> is
      * <tt>null</tt> or empty, this method returns without doing
@@ -476,6 +565,14 @@ public class TabularDataSupport
      * added, thus leaving this <tt>TabularData</tt> instance
      * unchanged.
      *
+     * <p>
+     * 将<var> values </var>中的所有元素添加到此<tt> TabularData </tt>实例。
+     * 如果<var> values </var>中的任何元素不满足{@link #put(CompositeData)<tt> put </tt>}中定义的约束,或者<var> values </var >具
+     * 有根据此<tt> TabularData </tt>实例的<tt> TabularType </tt>定义计算的相同索引,则抛出描述失败的异常,并且不添加任何<var>值</var>的元素,因此使此<tt>
+     *  TabularData </tt>实例保持不变。
+     * 将<var> values </var>中的所有元素添加到此<tt> TabularData </tt>实例。
+     * 
+     * 
      * @param values the array of composite data values to be added as
      * new rows to this <tt>TabularData</tt> instance; if
      * <var>values</var> is <tt>null</tt> or empty, this method
@@ -530,6 +627,9 @@ public class TabularDataSupport
 
     /**
      * Removes all rows from this <code>TabularDataSupport</code> instance.
+     * <p>
+     *  从此<code> TabularDataSupport </code>实例中删除所有行。
+     * 
      */
     public void clear() {
 
@@ -543,6 +643,10 @@ public class TabularDataSupport
     /**
      * Returns the number of rows in this <code>TabularDataSupport</code> instance.
      *
+     * <p>
+     *  返回此<et> TabularDataSupport </code>实例中的行数。
+     * 
+     * 
      * @return the number of rows in this <code>TabularDataSupport</code> instance.
      */
     public int size() {
@@ -553,6 +657,10 @@ public class TabularDataSupport
     /**
      * Returns <tt>true</tt> if this <code>TabularDataSupport</code> instance contains no rows.
      *
+     * <p>
+     *  如果此<> TabularDataSupport </code>实例不包含任何行,则返回<tt> true </tt>。
+     * 
+     * 
      * @return <tt>true</tt> if this <code>TabularDataSupport</code> instance contains no rows.
      */
     public boolean isEmpty() {
@@ -581,6 +689,18 @@ public class TabularDataSupport
      * {@link Set#retainAll}, and {@link Set#clear} operations. It does
      *  not support the {@link Set#add} or {@link Set#addAll} operations.
      *
+     * <p>
+     *  返回此{@code TabularDataSupport}实例的基础映射中包含的键的集视图,用于对行进行索引。
+     * 此{@code Set}中包含的每个键都是不可修改的{@code List <?>},因此返回的设置视图是{@code Set <List <?>>},但被声明为{@code Set <Object >}
+     * 出于兼容性原因。
+     *  返回此{@code TabularDataSupport}实例的基础映射中包含的键的集视图,用于对行进行索引。
+     * 该集合由此{@code TabularDataSupport}实例的底层地图提供支持,因此对{@code TabularDataSupport}实例的更改会反映在集合中,反之亦然。
+     * 
+     * 该集合支持元素删除,通过{@link Iterator#remove},{@link Set#remove},{@link Set#removeAll},{@link Set}删除{@code TabularDataSupport}
+     * 实例中的相应行#retainAll}和{@link Set#clear}操作。
+     * 它不支持{@link Set#add}或{@link Set#addAll}操作。
+     * 
+     * 
      * @return a set view ({@code Set<List<?>>}) of the keys used to index
      * the rows of this {@code TabularDataSupport} instance.
      */
@@ -606,6 +726,16 @@ public class TabularDataSupport
      * and {@link Collection#clear} operations. It does not support
      * the {@link Collection#add} or {@link Collection#addAll} operations.
      *
+     * <p>
+     *  返回此{@code TabularDataSupport}实例中包含的行的集合视图。
+     * 返回的{@code Collection}是一个{@code Collection <CompositeData>},但出于兼容性原因被声明为{@code Collection <Object>}。
+     * 返回的集合可以用于对值进行迭代。该集合由底层地图提供支持,因此对{@code TabularDataSupport}实例的更改会反映在集合中,反之亦然。
+     * 
+     *  该集合支持元素删除,通过{@link Iterator#remove},{@link Collection#remove},{@link Collection#removeAll},{@link Collection#removeAll}
+     * 删除{@code TabularDataSupport}实例中相应的行映射索引@link Collection#retainAll}和{@link Collection#clear}操作。
+     * 它不支持{@link Collection#add}或{@link Collection#addAll}操作。
+     * 
+     * 
      * @return a collection view ({@code Collection<CompositeData>}) of
      * the values contained in this {@code TabularDataSupport} instance.
      */
@@ -641,6 +771,21 @@ public class TabularDataSupport
      * Doing so would corrupt the index to row mappings contained in this
      * {@code TabularDataSupport} instance.
      *
+     * <p>
+     * 返回此{@code TabularDataSupport}实例中包含的行映射的索引的集合视图。
+     * 为了兼容性原因,返回的集合中的每个元素是{@code Map.Entry <List <?>,CompositeData>},但被声明为{@code Map.Entry <Object,Object>}
+     * 。
+     * 返回此{@code TabularDataSupport}实例中包含的行映射的索引的集合视图。每个映射条目键是不可修改的{@code List <?>}。
+     * 该集合由此{@code TabularDataSupport}实例的底层地图提供支持,因此对{@code TabularDataSupport}实例的更改会反映在集合中,反之亦然。
+     * 该集合支持元素删除,它通过{@link迭代#remove},{@link集合#remove},{@link集合#removeAll},{@link集合#retainAll}和{@link Collection#clear}
+     * 操作。
+     * 该集合由此{@code TabularDataSupport}实例的底层地图提供支持,因此对{@code TabularDataSupport}实例的更改会反映在集合中,反之亦然。
+     * 它不支持{@link Collection#add}或{@link Collection#addAll}操作。
+     * <p>
+     *  <b>重要通知</b>：不要使用返回的集合视图中包含的{@code Map.Entry}元素的{@code setValue}方法。
+     * 这样做会损坏此{@code TabularDataSupport}实例中包含的行映射的索引。
+     * 
+     * 
      * @return a collection view ({@code Set<Map.Entry<List<?>,CompositeData>>})
      * of the mappings contained in this map.
      * @see java.util.Map.Entry
@@ -659,10 +804,18 @@ public class TabularDataSupport
      * Returns a clone of this <code>TabularDataSupport</code> instance:
      * the clone is obtained by calling <tt>super.clone()</tt>, and then cloning the underlying map.
      * Only a shallow clone of the underlying map is made, i.e. no cloning of the indexes and row values is made as they are immutable.
+     * <p>
+     *  返回此<code> TabularDataSupport </code>实例的克隆：通过调用<tt> super.clone()</tt>获取克隆,然后克隆底层地图。
+     * 只有底层映射的浅克隆,即不会克隆索引和行值,因为它们是不可变的。
+     * 
      */
     /* We cannot use covariance here and return TabularDataSupport
        because this would fail with existing code that subclassed
        TabularDataSupport and overrode Object clone().  It would not
+    /* <p>
+    /* 因为这会失败与现有的代码,它是继承了TabularDataSupport和overrode Object clone()。它不会
+    /* 
+    /* 
        override the new clone().  */
     public Object clone() {
         try {
@@ -689,6 +842,18 @@ public class TabularDataSupport
      * This ensures that this <tt>equals</tt> method works properly for <var>obj</var> parameters which are
      * different implementations of the <code>TabularData</code> interface.
      * <br>&nbsp;
+     * <p>
+     *  将指定的<var> obj </var>参数与此<code> TabularDataSupport </code>实例相比较。
+     * <p>
+     *  当且仅当所有以下语句都为真时返回<tt> true </tt>：
+     * <ul>
+     *  <li> <var> obj </var>不为空,</li> <li> <var> obj </var>也实现<code> TabularData </code>它们的表格类型相等</li> <li>
+     * 它们的内容(即所有CompositeData值)相等。
+     * </li>。
+     * </ul>
+     *  这可以确保<tt> equals </tt>方法对<var> obj </var>参数正常工作,这些参数是<code> TabularData </code>接口的不同实现。 <br>&nbsp;
+     * 
+     * 
      * @param  obj  the object to be compared for equality with this <code>TabularDataSupport</code> instance;
      *
      * @return  <code>true</code> if the specified object is equal to this <code>TabularDataSupport</code> instance.
@@ -753,6 +918,19 @@ public class TabularDataSupport
      * may be equal to this <code>TabularDataSupport</code> instance as defined by {@link #equals},
      * but may have a different hash code if it is calculated differently.
      *
+     * <p>
+     *  返回此<strong> TabularDataSupport </code>实例的哈希码值。
+     * <p>
+     *  <code> TabularDataSupport </code>实例的哈希码是<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即：其<i>表格类型</i>及其内容,
+     * 其中内容定义为所有CompositeData值)。
+     * <p>
+     *  这确保<code> t1.equals(t2)</code>意味着任何两个<code> TabularDataSupport </code>实例的<code> t1.hashCode()== t2.h
+     * ashCode()</代码> t1 </code>和<code> t2 </code>,这是方法{@link Object#hashCode()Object.hashCode()}的一般合同的要求。
+     * <p>
+     * 但是,请注意,实现<code> TabularData </code>接口的类的另一个实例可能等于{@link #equals}定义的此<code> TabularDataSupport </code>
+     * 实例,代码,如果它是不同的计算。
+     * 
+     * 
      * @return  the hash code value for this <code>TabularDataSupport</code> instance
      */
    public int hashCode() {
@@ -775,6 +953,14 @@ public class TabularDataSupport
      * (ie list the key=value mappings as returned by a call to
      * <tt>dataMap.</tt>{@link java.util.HashMap#toString() toString()}).
      *
+     * <p>
+     *  返回此<?> TabularDataSupport </code>实例的字符串表示形式。
+     * <p>
+     *  字符串表示由此类的名称(即<code> javax.management.openmbean.TabularDataSupport </code>),此实例的表格类型的字符串表示形式和内容的字符串表示
+     * 形式(即列出key =通过调用<tt> dataMap返回的值映射。
+     * </tt> {@ link java.util.HashMap#toString()toString()})。
+     * 
+     * 
      * @return  a string representation of this <code>TabularDataSupport</code> instance
      */
     public String toString() {
@@ -804,6 +990,13 @@ public class TabularDataSupport
      *
      * The returned List is unmodifiable so that once a row has been put into the dataMap, its index cannot be modified,
      * for example by a user that would attempt to modify an index contained in the Set returned by keySet().
+     * <p>
+     *  返回值的索引,假设值对此<tt> TabularData </tt>实例有效(即值不为null,其复合类型等于行类型)。
+     * 
+     *  索引是一个List,而不是一个数组,因此index.equals(otherIndex)调用将实际比较内容,而不仅仅是对象引用,如对数组对象做的。
+     * 
+     *  返回的List是不可修改的,所以一旦一行已经被放入dataMap,它的索引不能被修改,例如,用户试图修改由keySet()返回的Set中包含的索引。
+     * 
      */
     private List<?> internalCalculateIndex(CompositeData value) {
 
@@ -813,6 +1006,10 @@ public class TabularDataSupport
     /**
      * Checks if the specified key is valid for this <tt>TabularData</tt> instance.
      *
+     * <p>
+     *  检查指定的键是否对此<tt> TabularData </tt>实例有效。
+     * 
+     * 
      * @throws  NullPointerException
      * @throws  InvalidOpenTypeException
      */
@@ -851,6 +1048,10 @@ public class TabularDataSupport
      * Checks the specified value's type is valid for this <tt>TabularData</tt> instance
      * (ie value is not null, and its composite type is equal to row type).
      *
+     * <p>
+     *  检查指定值的类型对此<tt> TabularData </tt>实例有效(即值不为null,其复合类型等于行类型)。
+     * 
+     * 
      * @throws  NullPointerException
      * @throws  InvalidOpenTypeException
      */
@@ -879,6 +1080,12 @@ public class TabularDataSupport
      * The index is a List, and not an array, so that an index.equals(otherIndex) call will actually compare contents,
      * not just the objects references as is done for an array object.
      *
+     * <p>
+     * 检查指定的值是否可以放置(即添加)在此<tt> TabularData </tt>实例中(即值不为null,其复合类型等于行类型,并且其索引尚未使用),并返回为该值计算的索引。
+     * 
+     *  索引是一个List,而不是一个数组,因此index.equals(otherIndex)调用将实际比较内容,而不仅仅是对象引用,如对数组对象做的。
+     * 
+     * 
      * @throws  NullPointerException
      * @throws  InvalidOpenTypeException
      * @throws  KeyAlreadyExistsException
@@ -906,6 +1113,7 @@ public class TabularDataSupport
 
     /**
      * Deserializes a {@link TabularDataSupport} from an {@link ObjectInputStream}.
+     * <p>
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {

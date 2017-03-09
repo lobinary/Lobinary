@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.util.Objects;
  * class are immutable.  Subclasses may be mutable but this is not
  * recommended.
  *
+ * <p>
+ *  描述MBean公开的构造函数。这个类的实例是不可变的。子类可以是可变的,但这不是推荐。
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable {
@@ -50,6 +55,8 @@ public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable 
     private final transient boolean arrayGettersSafe;
 
     /**
+    /* <p>
+    /* 
      * @serial The signature of the method, that is, the class names of the arguments.
      */
     private final MBeanParameterInfo[] signature;
@@ -61,6 +68,11 @@ public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable 
      * Constructor} object that contain the {@link DescriptorKey}
      * meta-annotation.
      *
+     * <p>
+     *  构造一个<CODE> MBeanConstructorInfo </CODE>对象。
+     * 构造对象的{@link描述符}将包含由包含{@link DescriptorKey}元注释的{@code Constructor}对象上的任何注释贡献的字段。
+     * 
+     * 
      * @param description A human readable description of the operation.
      * @param constructor The <CODE>java.lang.reflect.Constructor</CODE>
      * object describing the MBean constructor.
@@ -74,6 +86,10 @@ public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable 
     /**
      * Constructs an <CODE>MBeanConstructorInfo</CODE> object.
      *
+     * <p>
+     *  构造一个<CODE> MBeanConstructorInfo </CODE>对象。
+     * 
+     * 
      * @param name The name of the constructor.
      * @param signature <CODE>MBeanParameterInfo</CODE> objects
      * describing the parameters(arguments) of the constructor.  This
@@ -89,6 +105,10 @@ public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable 
     /**
      * Constructs an <CODE>MBeanConstructorInfo</CODE> object.
      *
+     * <p>
+     *  构造一个<CODE> MBeanConstructorInfo </CODE>对象。
+     * 
+     * 
      * @param name The name of the constructor.
      * @param signature <CODE>MBeanParameterInfo</CODE> objects
      * describing the parameters(arguments) of the constructor.  This
@@ -125,6 +145,12 @@ public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable 
      *
      * <p>Since this class is immutable, cloning is chiefly of
      * interest to subclasses.</p>
+     * <p>
+     *  <p>返回此实例的浅克隆。通过简单调用<tt> super.clone()</tt>获得克隆,从而调用由<tt> Object.clone()</tt>实现的默认本机浅克隆机制。
+     * 不会对任何内部字段进行更深层次的克隆。</p>。
+     * 
+     *  <p>由于这个类是不可变的,克隆主要是子类的兴趣。</p>
+     * 
      */
      public Object clone () {
          try {
@@ -146,6 +172,14 @@ public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable 
      * that each referenced <CODE>MBeanParameterInfo</CODE> object is
      * not copied.</p>
      *
+     * <p>
+     *  <p>返回此构造函数的参数列表。每个参数由<CODE> MBeanParameterInfo </CODE>对象描述。</p>
+     * 
+     *  <p>返回的数组是内部数组的浅拷贝,这意味着它是对<CODE> MBeanParameterInfo </CODE>对象的引用的内部数组的副本,但每个引用<CODE> MBeanParameterIn
+     * fo </CODE >对象未被复制。
+     * </p>。
+     * 
+     * 
      * @return  An array of <CODE>MBeanParameterInfo</CODE> objects.
      */
     public MBeanParameterInfo[] getSignature() {
@@ -175,6 +209,8 @@ public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable 
     /**
      * Compare this MBeanConstructorInfo to another.
      *
+     * <p>
+     * 
      * @param o the object to compare to.
      *
      * @return true if and only if <code>o</code> is an MBeanConstructorInfo such
@@ -202,6 +238,10 @@ public class MBeanConstructorInfo extends MBeanFeatureInfo implements Cloneable 
        description, so we include the parameter array in the hashcode.
        We don't include the description, though, because it could be
        quite long and yet the same between constructors.  Likewise for
+    /* <p>
+    /*  将此MBeanConstructorInfo与另一个比较。
+    /* 
+    /* 
        the descriptor.  */
     public int hashCode() {
         return Objects.hash(getName()) ^ Arrays.hashCode(fastGetSignature());

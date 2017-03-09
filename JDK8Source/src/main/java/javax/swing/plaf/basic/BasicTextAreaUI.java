@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import javax.swing.plaf.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  提供纯文本编辑器的外观和感觉。在此实现中,默认UI被扩展为充当一个简单的视图工厂。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class BasicTextAreaUI extends BasicTextUI {
@@ -54,6 +62,10 @@ public class BasicTextAreaUI extends BasicTextUI {
     /**
      * Creates a UI for a JTextArea.
      *
+     * <p>
+     *  创建JTextArea的UI。
+     * 
+     * 
      * @param ta a text area
      * @return the UI
      */
@@ -63,6 +75,9 @@ public class BasicTextAreaUI extends BasicTextUI {
 
     /**
      * Constructs a new BasicTextAreaUI object.
+     * <p>
+     *  构造一个新的BasicTextAreaUI对象。
+     * 
      */
     public BasicTextAreaUI() {
         super();
@@ -73,6 +88,10 @@ public class BasicTextAreaUI extends BasicTextUI {
      * UIManager.  This is used as a prefix to all the standard
      * text properties.
      *
+     * <p>
+     *  获取用作通过UIManager查找属性的键的名称。这用作所有标准文本属性的前缀。
+     * 
+     * 
      * @return the name ("TextArea")
      */
     protected String getPropertyPrefix() {
@@ -92,6 +111,11 @@ public class BasicTextAreaUI extends BasicTextUI {
      * This is implemented to rebuild the View when the
      * <em>WrapLine</em> or the <em>WrapStyleWord</em> property changes.
      *
+     * <p>
+     *  当在相关联的JTextComponent上更改绑定属性时,将调用此方法。这是一个钩子,UI实现可以改变以反映UI如何显示JTextComponent子类的绑定属性。
+     * 这是为了在<em> WrapLine </em>或<em> WrapStyleWord </em>属性更改时重建视图。
+     * 
+     * 
      * @param evt the property change event
      */
     protected void propertyChange(PropertyChangeEvent evt) {
@@ -110,6 +134,10 @@ public class BasicTextAreaUI extends BasicTextUI {
     /**
      * The method is overridden to take into account caret width.
      *
+     * <p>
+     *  覆盖该方法以考虑插入符宽度。
+     * 
+     * 
      * @param c the editor component
      * @return the preferred size
      * @throws IllegalArgumentException if invalid value is passed
@@ -124,6 +152,10 @@ public class BasicTextAreaUI extends BasicTextUI {
     /**
      * The method is overridden to take into account caret width.
      *
+     * <p>
+     *  覆盖该方法以考虑插入符宽度。
+     * 
+     * 
      * @param c the editor component
      * @return the minimum size
      * @throws IllegalArgumentException if invalid value is passed
@@ -139,6 +171,10 @@ public class BasicTextAreaUI extends BasicTextUI {
      * Creates the view for an element.  Returns a WrappedPlainView or
      * PlainView.
      *
+     * <p>
+     *  创建元素的视图。返回WrappedPlainView或PlainView。
+     * 
+     * 
      * @param elem the element
      * @return the view
      */
@@ -179,6 +215,18 @@ public class BasicTextAreaUI extends BasicTextUI {
     /**
      * Returns the baseline.
      *
+     * <p>
+     * if((i18nFlag！= null)&& i18nFlag.equals(Boolean.TRUE)){//构建一个支持bidi的视图return createI18N(elem); } else 
+     * {JTextComponent c = getComponent(); if(c instanceof JTextArea){JTextArea area =(JTextArea)c;查看v; if(area.getLineWrap()){v = new WrappedPlainView(elem,area.getWrapStyleWord()); }
+     *  else {v = new PlainView(elem); } return v; }} return null; }}。
+     * 
+     *  查看createI18N(Element elem){String kind = elem.getName(); if(kind！= null){if(kind.equals(AbstractDocument.ContentElementName)){return new PlainParagraph(elem); }
+     *  else if(kind.equals(AbstractDocument.ParagraphElementName)){return new BoxView(elem,View.Y_AXIS); }}
+     *  return null; }}。
+     * 
+     *  / **返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -212,6 +260,10 @@ public class BasicTextAreaUI extends BasicTextUI {
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -226,6 +278,9 @@ public class BasicTextAreaUI extends BasicTextUI {
     /**
      * Paragraph for representing plain-text lines that support
      * bidirectional text.
+     * <p>
+     *  用于表示支持双向文本的纯文本行的段落。
+     * 
      */
     static class PlainParagraph extends ParagraphView {
 
@@ -254,6 +309,9 @@ public class BasicTextAreaUI extends BasicTextUI {
         /**
          * Fetch the constraining span to flow against for
          * the given child index.
+         * <p>
+         *  获取针对给定子索引的约束范围。
+         * 
          */
         public int getFlowSpan(int index) {
             Component c = getContainer();
@@ -294,6 +352,10 @@ public class BasicTextAreaUI extends BasicTextUI {
          * is redone.  The size is the full size of the view including
          * the inset areas.
          *
+         * <p>
+         *  设置视图的大小。如果大小已更改,则会重做布局。大小是视图的完整大小,包括插入区域。
+         * 
+         * 
          * @param width the width >= 0
          * @param height the height >= 0
          */
@@ -310,6 +372,9 @@ public class BasicTextAreaUI extends BasicTextUI {
          * of the model, gives the logical child views access to the
          * view hierarchy, and calculates a preferred span.  It doesn't
          * do any rendering, layout, or model/view translation.
+         * <p>
+         *  此类可用于表示流的逻辑视图。它保持孩子更新以反映模型的状态,给予逻辑子视图访问视图层次结构,并计算首选跨度。它不做任何渲染,布局或模型/视图转换。
+         * 
          */
         static class LogicalView extends CompositeView {
 
@@ -355,6 +420,9 @@ public class BasicTextAreaUI extends BasicTextUI {
              * if they fit without breaking) and then execute the superclass
              * behavior.
              *
+             * <p>
+             * 将DocumentEvent转发给给定的子视图。这被实现为将子视图重新显示为逻辑视图(如果它们适合而没有断开,则子项可能已经由流中的行进行了父项),然后执行超类行为。
+             * 
              * @param v the child view to forward the event to.
              * @param e the change information from the associated document
              * @param a the current allocation of the view

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,18 @@ import sun.management.LockInfoCompositeData;
  * <tt>LockInfo</tt> is mapped to a {@link CompositeData CompositeData}
  * as specified in the {@link #from from} method.
  *
+ * <p>
+ *  有关<em>锁定的信息</em>。锁可以是内置对象监视器,可拥有的同步器</em>或与同步器关联的{@link条件条件}对象。
+ * <p>
+ *  <a name="OwnableSynchronizer">可拥有的同步器</a>是一个同步器,可以由线程独占,并使用{@link AbstractOwnableSynchronizer AbstractOwnableSynchronizer}
+ * (或其子类)来实现其同步属性。
+ *  {@link ReentrantLock ReentrantLock}和{@link ReentrantReadWriteLock ReentrantReadWriteLock}是平台提供的可拥有同步
+ * 器的两个示例。
+ * 
+ *  <h3> <a name="MappedType"> MXBean映射</a> </h3> <tt> LockInfo </tt>映射到{@link #from from}中指定的{@link CompositeData CompositeData}
+ * 方法。
+ * 
+ * 
  * @see java.util.concurrent.locks.AbstractOwnableSynchronizer
  * @see java.util.concurrent.locks.Condition
  *
@@ -61,6 +74,10 @@ public class LockInfo {
     /**
      * Constructs a <tt>LockInfo</tt> object.
      *
+     * <p>
+     *  构造<tt> LockInfo </tt>对象。
+     * 
+     * 
      * @param className the fully qualified name of the class of the lock object.
      * @param identityHashCode the {@link System#identityHashCode
      *                         identity hash code} of the lock object.
@@ -75,6 +92,9 @@ public class LockInfo {
 
     /**
      * package-private constructors
+     * <p>
+     *  package-private构造函数
+     * 
      */
     LockInfo(Object lock) {
         this.className = lock.getClass().getName();
@@ -84,6 +104,10 @@ public class LockInfo {
     /**
      * Returns the fully qualified name of the class of the lock object.
      *
+     * <p>
+     *  返回锁定对象的类的完全限定名称。
+     * 
+     * 
      * @return the fully qualified name of the class of the lock object.
      */
     public String getClassName() {
@@ -94,6 +118,10 @@ public class LockInfo {
      * Returns the identity hash code of the lock object
      * returned from the {@link System#identityHashCode} method.
      *
+     * <p>
+     *  返回从{@link System#identityHashCode}方法返回的锁对象的标识哈希码。
+     * 
+     * 
      * @return the identity hash code of the lock object.
      */
     public int getIdentityHashCode() {
@@ -121,6 +149,20 @@ public class LockInfo {
      * </table>
      * </blockquote>
      *
+     * <p>
+     *  返回由给定的{@code CompositeData}表示的{@code LockInfo}对象。给定的{@code CompositeData}必须包含以下属性：
+     * <blockquote>
+     * <table border summary="The attributes and the types the given CompositeData contains">
+     * <tr>
+     *  <th align = left>属性名称</th> <th align = left>键入</th>
+     * </tr>
+     * <tr>
+     *  <td> className </td> <td> <tt> java.lang.String </tt> </td>
+     * </tr>
+     * <tr>
+     *  <td> identityHashCode </td> <td> <tt> java.lang.Integer </tt> </td>
+     * </tr>
+     * 
      * @param cd {@code CompositeData} representing a {@code LockInfo}
      *
      * @throws IllegalArgumentException if {@code cd} does not
@@ -156,6 +198,11 @@ public class LockInfo {
      * </pre></blockquote>
      * where <tt>lock</tt> is the lock object.
      *
+     * <p>
+     * </table>
+     * </blockquote>
+     * 
+     * 
      * @return the string representation of a lock.
      */
     public String toString() {

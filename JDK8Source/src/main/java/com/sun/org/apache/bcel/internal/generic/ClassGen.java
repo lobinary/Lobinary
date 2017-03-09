@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,33 @@ package com.sun.org.apache.bcel.internal.generic;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)2001 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得使用名称"Apache"和"Apache Software Foundation"和"Apache BCEL"来认可或推广从本软件衍生的产品。
+ * 如需书面许可,请联系apache@apache.org。
+ * 
+ * 未经Apache软件基金会事先书面许可,从本软件衍生的产品可能不会被称为"Apache","Apache BCEL",也不可能出现在他们的名字中。
+ * 
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款。有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 import com.sun.org.apache.bcel.internal.Constants;
@@ -67,11 +95,16 @@ import java.util.Iterator;
  * Template class for building up a java class. May be initialized with an
  * existing java class (file).
  *
+ * <p>
+ *  用于构建一个java类的模板类。可以使用现有的java类(文件)进行初始化。
+ * 
+ * 
  * @see JavaClass
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public class ClassGen extends AccessFlags implements Cloneable {
   /* Corresponds to the fields found in a JavaClass object.
+  /* <p>
    */
   private String   class_name, super_class_name, file_name;
   private int      class_name_index = -1, superclass_name_index = -1;
@@ -87,6 +120,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /** Convenience constructor to set up some important values initially.
    *
+   * <p>
+   * 
    * @param class_name fully qualified class name
    * @param super_class_name fully qualified superclass name
    * @param file_name source file name
@@ -117,6 +152,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /** Convenience constructor to set up some important values initially.
    *
+   * <p>
+   * 
    * @param class_name fully qualified class name
    * @param super_class_name fully qualified superclass name
    * @param file_name source file name
@@ -131,6 +168,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /**
    * Initialize with existing class.
+   * <p>
+   *  用现有类初始化。
+   * 
+   * 
    * @param clazz JavaClass object (e.g. read from file)
    */
   public ClassGen(JavaClass clazz) {
@@ -163,6 +204,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return the (finally) built up Java class object.
    */
   public JavaClass getJavaClass() {
@@ -181,6 +224,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /**
    * Add an interface to this class, i.e., this class has to implement it.
+   * <p>
+   *  给这个类添加一个接口,即这个类必须实现它。
+   * 
+   * 
    * @param name interface to implement (fully qualified class name)
    */
   public void addInterface(String name) {
@@ -189,6 +236,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /**
    * Remove an interface from this class.
+   * <p>
+   *  从此类中删除一个接口。
+   * 
+   * 
    * @param name interface to remove (fully qualified name)
    */
   public void removeInterface(String name) {
@@ -196,11 +247,15 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return major version number of class file
    */
   public int  getMajor()      { return major; }
 
   /** Set major version number of class file, default value is 45 (JDK 1.1)
+  /* <p>
+  /* 
    * @param major major version number
    */
   public void setMajor(int major) {
@@ -208,6 +263,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   /** Set minor version number of class file, default value is 3 (JDK 1.1)
+  /* <p>
+  /* 
    * @param minor minor version number
    */
   public void setMinor(int minor) {
@@ -215,18 +272,28 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return minor version number of class file
    */
   public int  getMinor()      { return minor; }
 
   /**
    * Add an attribute to this class.
+   * <p>
+   *  向此类中添加一个属性。
+   * 
+   * 
    * @param a attribute to add
    */
   public void addAttribute(Attribute a)    { attribute_vec.add(a); }
 
   /**
    * Add a method to this class.
+   * <p>
+   * 向此类添加一个方法。
+   * 
+   * 
    * @param m method to add
    */
   public void addMethod(Method m)          { method_vec.add(m); }
@@ -235,6 +302,12 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * Convenience method.
    *
    * Add an empty constructor to this class that does nothing but calling super().
+   * <p>
+   *  方便的方法。
+   * 
+   *  给这个类添加一个空的构造函数,除了调用super()。
+   * 
+   * 
    * @param access rights for constructor
    */
   public void addEmptyConstructor(int access_flags) {
@@ -252,6 +325,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /**
    * Add a field to this class.
+   * <p>
+   *  向此类添加字段。
+   * 
+   * 
    * @param f field to add
    */
   public void addField(Field f)            { field_vec.add(f); }
@@ -259,6 +336,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
   public boolean containsField(Field f)    { return field_vec.contains(f); }
 
   /** @return field object with given name, or null
+  /* <p>
    */
   public Field containsField(String name) {
     for(Iterator e=field_vec.iterator(); e.hasNext(); ) {
@@ -271,6 +349,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   /** @return method object with given name and signature, or null
+  /* <p>
    */
   public Method containsMethod(String name, String signature) {
     for(Iterator e=method_vec.iterator(); e.hasNext();) {
@@ -284,18 +363,29 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /**
    * Remove an attribute from this class.
+   * <p>
+   *  从此类中删除一个属性。
+   * 
+   * 
    * @param a attribute to remove
    */
   public void removeAttribute(Attribute a) { attribute_vec.remove(a); }
 
   /**
    * Remove a method from this class.
+   * <p>
+   *  从此类中删除一个方法。
+   * 
+   * 
    * @param m method to remove
    */
   public void removeMethod(Method m)       { method_vec.remove(m); }
 
   /** Replace given method with new one. If the old one does not exist
    * add the new_ method to the class anyway.
+   * <p>
+   *  将new_方法添加到类中。
+   * 
    */
   public void replaceMethod(Method old, Method new_) {
     if(new_ == null)
@@ -311,6 +401,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /** Replace given field with new one. If the old one does not exist
    * add the new_ field to the class anyway.
+   * <p>
+   *  添加new_字段到类无论如何。
+   * 
    */
   public void replaceField(Field old, Field new_) {
     if(new_ == null)
@@ -326,6 +419,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   /**
    * Remove a field to this class.
+   * <p>
+   *  删除此类的字段。
+   * 
+   * 
    * @param f field to remove
    */
   public void removeField(Field f)         { field_vec.remove(f); }
@@ -418,6 +515,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
   private ArrayList observers;
 
   /** Add observer for this object.
+  /* <p>
    */
   public void addObserver(ClassObserver o) {
     if(observers == null)
@@ -427,6 +525,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   /** Remove observer for this object.
+  /* <p>
    */
   public void removeObserver(ClassObserver o) {
     if(observers != null)
@@ -436,6 +535,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
   /** Call notify() method on all observers. This method is not called
    * automatically whenever the state has changed, but has to be
    * called by the user after he has finished editing the object.
+   * <p>
+   *  每当状态改变时自动地,但是在用户完成编辑对象之后必须被用户调用。
    */
   public void update() {
     if(observers != null)

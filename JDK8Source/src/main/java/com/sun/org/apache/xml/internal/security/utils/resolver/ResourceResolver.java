@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils.resolver;
 
@@ -39,6 +48,10 @@ import org.w3c.dom.Attr;
  * This is done by retrieving a Resolver. The resolver needs two arguments: The
  * URI in which the link to the new resource is defined and the baseURI of the
  * file/entity in which the URI occurs (the baseURI is the same as the SystemId).
+ * <p>
+ *  在参考验证期间,我们必须从某处检索资源。这是通过检索Resolver来完成的。
+ * 解析器需要两个参数：定义到新资源的链接的URI和其中发生URI的文件/实体的baseURI(baseURI与SystemId相同)。
+ * 
  */
 public class ResourceResolver {
 
@@ -55,6 +68,10 @@ public class ResourceResolver {
     /**
      * Constructor ResourceResolver
      *
+     * <p>
+     *  构造函数ResourceResolver
+     * 
+     * 
      * @param resourceResolver
      */
     public ResourceResolver(ResourceResolverSpi resourceResolver) {
@@ -64,6 +81,10 @@ public class ResourceResolver {
     /**
      * Method getInstance
      *
+     * <p>
+     *  方法getInstance
+     * 
+     * 
      * @param uri
      * @param baseURI
      * @return the instance
@@ -78,6 +99,10 @@ public class ResourceResolver {
     /**
      * Method getInstance
      *
+     * <p>
+     *  方法getInstance
+     * 
+     * 
      * @param uri
      * @param baseURI
      * @param secureValidation
@@ -138,6 +163,10 @@ public class ResourceResolver {
     /**
      * Method getInstance
      *
+     * <p>
+     *  方法getInstance
+     * 
+     * 
      * @param uri
      * @param baseURI
      * @param individualResolvers
@@ -154,6 +183,10 @@ public class ResourceResolver {
     /**
      * Method getInstance
      *
+     * <p>
+     *  方法getInstance
+     * 
+     * 
      * @param uri
      * @param baseURI
      * @param individualResolvers
@@ -199,6 +232,10 @@ public class ResourceResolver {
      * Registers a ResourceResolverSpi class. This method logs a warning if
      * the class cannot be registered.
      *
+     * <p>
+     *  注册ResourceResolverSpi类。如果类无法注册,此方法将记录警告。
+     * 
+     * 
      * @param className the name of the ResourceResolverSpi class to be registered
      * @throws SecurityException if a security manager is installed and the
      *    caller does not have permission to register a resource resolver
@@ -219,6 +256,10 @@ public class ResourceResolver {
      * Registers a ResourceResolverSpi class at the beginning of the provider
      * list. This method logs a warning if the class cannot be registered.
      *
+     * <p>
+     * 在提供程序列表的开始处注册ResourceResolverSpi类。如果类无法注册,此方法将记录警告。
+     * 
+     * 
      * @param className the name of the ResourceResolverSpi class to be registered
      * @throws SecurityException if a security manager is installed and the
      *    caller does not have permission to register a resource resolver
@@ -238,6 +279,10 @@ public class ResourceResolver {
     /**
      * Registers a ResourceResolverSpi class. This method logs a warning if the class
      * cannot be registered.
+     * <p>
+     *  注册ResourceResolverSpi类。如果类无法注册,此方法将记录警告。
+     * 
+     * 
      * @param className
      * @param start
      * @throws SecurityException if a security manager is installed and the
@@ -258,6 +303,10 @@ public class ResourceResolver {
     /**
      * Registers a ResourceResolverSpi instance. This method logs a warning if the class
      * cannot be registered.
+     * <p>
+     *  注册ResourceResolverSpi实例。如果类无法注册,此方法将记录警告。
+     * 
+     * 
      * @param resourceResolverSpi
      * @param start
      * @throws SecurityException if a security manager is installed and the
@@ -279,6 +328,9 @@ public class ResourceResolver {
 
     /**
      * This method registers the default resolvers.
+     * <p>
+     *  此方法注册默认解析器。
+     * 
      */
     public static void registerDefaultResolvers() {
         synchronized(resolverList) {
@@ -290,6 +342,8 @@ public class ResourceResolver {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated New clients should use {@link #resolve(Attr, String, boolean)}
      */
     @Deprecated
@@ -301,6 +355,10 @@ public class ResourceResolver {
     /**
      * Method resolve
      *
+     * <p>
+     *  方法解析
+     * 
+     * 
      * @param uri
      * @param baseURI
      * @return the resource
@@ -316,6 +374,10 @@ public class ResourceResolver {
     /**
      * Method setProperty
      *
+     * <p>
+     *  方法setProperty
+     * 
+     * 
      * @param key
      * @param value
      */
@@ -326,6 +388,10 @@ public class ResourceResolver {
     /**
      * Method getProperty
      *
+     * <p>
+     *  方法getProperty
+     * 
+     * 
      * @param key
      * @return the value of the property
      */
@@ -336,6 +402,10 @@ public class ResourceResolver {
     /**
      * Method addProperties
      *
+     * <p>
+     *  方法addProperties
+     * 
+     * 
      * @param properties
      */
     public void addProperties(Map<String, String> properties) {
@@ -345,6 +415,10 @@ public class ResourceResolver {
     /**
      * Method getPropertyKeys
      *
+     * <p>
+     *  方法getPropertyKeys
+     * 
+     * 
      * @return all property keys.
      */
     public String[] getPropertyKeys() {
@@ -354,6 +428,10 @@ public class ResourceResolver {
     /**
      * Method understandsProperty
      *
+     * <p>
+     *  方法understandsProperty
+     * 
+     * 
      * @param propertyToTest
      * @return true if the resolver understands the property
      */
@@ -364,6 +442,9 @@ public class ResourceResolver {
     /**
      * Method canResolve
      *
+     * <p>
+     *  方法canResolve
+     * 
      * @param uri
      * @param baseURI
      * @return true if it can resolve the uri

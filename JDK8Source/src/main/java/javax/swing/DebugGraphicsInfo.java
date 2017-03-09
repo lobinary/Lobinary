@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import java.util.*;
 /** Class used by DebugGraphics for maintaining information about how
   * to render graphics calls.
   *
+  * <p>
+  *  以呈现图形调用。
+  * 
   * @author Dave Karlton
   */
 class DebugGraphicsInfo {

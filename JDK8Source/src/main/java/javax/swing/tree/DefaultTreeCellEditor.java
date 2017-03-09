@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,15 @@ import java.util.Vector;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> TreeCellEditor </code>。您需要提供<code> DefaultTreeCellRenderer </code>的实例,以便可以获取图标。
+ * 您可以选择提供<code> TreeCellEditor </code>,它将根据<code> DefaultTreeCellRenderer </code>中的图标布局。
+ * 如果不提供<code> TreeCellEditor </code>,将使用<code> TextField </code>。编辑是在三次鼠标单击,或单击,暂停,单击和延迟1200毫秒后开始。
+ * p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see javax.swing.JTree
  *
  * @author Scott Violet
@@ -74,6 +84,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Component used in editing, obtained from the
      * <code>editingContainer</code>.
+     * <p>
+     *  编辑中使用的组件,从<code> editingContainer </code>获取。
+     * 
      */
     transient protected Component          editingComponent;
 
@@ -81,12 +94,18 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * As of Java 2 platform v1.4 this field should no longer be used. If
      * you wish to provide similar behavior you should directly override
      * <code>isCellEditable</code>.
+     * <p>
+     *  从Java 2平台v1.4开始,此字段不应再使用。如果你想提供类似的行为,你应该直接覆盖<code> isCellEditable </code>。
+     * 
      */
     protected boolean                      canEdit;
 
     /**
      * Used in editing. Indicates x position to place
      * <code>editingComponent</code>.
+     * <p>
+     *  用于编辑。表示要放置<code> editingComponent </code>的x位置。
+     * 
      */
     protected transient int                offset;
 
@@ -102,6 +121,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Row that was last passed into
      * <code>getTreeCellEditorComponent</code>.
+     * <p>
+     *  最后一次传入<code> getTreeCellEditorComponent </code>的行。
+     * 
      */
     protected transient int                lastRow;
 
@@ -114,6 +136,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Font to paint with, <code>null</code> indicates
      * font of renderer is to be used.
+     * <p>
+     * 要绘制的字体,<code> null </code>表示要使用渲染器的字体。
+     * 
      */
     protected Font                         font;
 
@@ -123,6 +148,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * object for a JTree using the specified renderer and
      * a default editor. (Use this constructor for normal editing.)
      *
+     * <p>
+     *  使用指定的渲染器和默认编辑器为JTree构造一个<code> DefaultTreeCellEditor </code>对象。 (使用此构造函数进行正常编辑。)
+     * 
+     * 
      * @param tree      a <code>JTree</code> object
      * @param renderer  a <code>DefaultTreeCellRenderer</code> object
      */
@@ -137,6 +166,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * specified renderer and the specified editor. (Use this constructor
      * for specialized editing.)
      *
+     * <p>
+     *  使用指定的渲染器和指定的编辑器为<code> JTree </code>构造<code> DefaultTreeCellEditor </code>对象。 (使用此构造函数进行专门的编辑。)
+     * 
+     * 
      * @param tree      a <code>JTree</code> object
      * @param renderer  a <code>DefaultTreeCellRenderer</code> object
      * @param editor    a <code>TreeCellEditor</code> object
@@ -155,6 +188,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
       * Sets the color to use for the border.
+      * <p>
+      *  设置边框使用的颜色。
+      * 
+      * 
       * @param newColor the new border color
       */
     public void setBorderSelectionColor(Color newColor) {
@@ -163,6 +200,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
       * Returns the color the border is drawn.
+      * <p>
+      *  返回绘制边框的颜色。
+      * 
+      * 
       * @return the border selection color
       */
     public Color getBorderSelectionColor() {
@@ -177,6 +218,11 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * for an editor was passed in a default editor will be
      * created that will pick up this font.
      *
+     * <p>
+     *  设置要编辑的字体。 <code> null </code>表示应该使用渲染器字体。这将不会覆盖您在接收器实例化的编辑器中设置的任何字体。
+     * 如果编辑器的<code> null </code>在默认编辑器中传递,将创建将拾取此字体。
+     * 
+     * 
      * @param font  the editing <code>Font</code>
      * @see #getFont
      */
@@ -187,6 +233,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Gets the font used for editing.
      *
+     * <p>
+     *  获取用于编辑的字体。
+     * 
+     * 
      * @return the editing <code>Font</code>
      * @see #setFont
      */
@@ -200,6 +250,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
      * Configures the editor.  Passed onto the <code>realEditor</code>.
+     * <p>
+     *  配置编辑器。传递到<code> realEditor </code>。
+     * 
      */
     public Component getTreeCellEditorComponent(JTree tree, Object value,
                                                 boolean isSelected,
@@ -238,6 +291,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
      * Returns the value currently being edited.
+     * <p>
+     *  返回当前正在编辑的值。
+     * 
+     * 
      * @return the value currently being edited
      */
     public Object getCellEditorValue() {
@@ -248,6 +305,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * If the <code>realEditor</code> returns true to this
      * message, <code>prepareForEditing</code>
      * is messaged and true is returned.
+     * <p>
+     *  如果<code> realEditor </code>对此消息返回true,则<code> prepareForEditing </code>为messaged,并返回true。
+     * 
      */
     public boolean isCellEditable(EventObject event) {
         boolean            retValue = false;
@@ -291,6 +351,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
      * Messages the <code>realEditor</code> for the return value.
+     * <p>
+     *  向<code> realEditor </code>发送返回值的消息。
+     * 
      */
     public boolean shouldSelectCell(EventObject event) {
         return realEditor.shouldSelectCell(event);
@@ -300,6 +363,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * If the <code>realEditor</code> will allow editing to stop,
      * the <code>realEditor</code> is removed and true is returned,
      * otherwise false is returned.
+     * <p>
+     *  如果<code> realEditor </code>将允许编辑停止,则会删除<code> realEditor </code>,返回true,否则返回false。
+     * 
      */
     public boolean stopCellEditing() {
         if(realEditor.stopCellEditing()) {
@@ -312,6 +378,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Messages <code>cancelCellEditing</code> to the
      * <code>realEditor</code> and removes it from this instance.
+     * <p>
+     *  将<code> cancelCellEditing </code>的消息发送到<code> realEditor </code>并将其从此实例中删除。
+     * 
      */
     public void cancelCellEditing() {
         realEditor.cancelCellEditing();
@@ -320,6 +389,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
      * Adds the <code>CellEditorListener</code>.
+     * <p>
+     *  添加<code> CellEditorListener </code>。
+     * 
+     * 
      * @param l the listener to be added
      */
     public void addCellEditorListener(CellEditorListener l) {
@@ -328,6 +401,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
       * Removes the previously added <code>CellEditorListener</code>.
+      * <p>
+      *  删除先前添加的<code> CellEditorListener </code>。
+      * 
+      * 
       * @param l the listener to be removed
       */
     public void removeCellEditorListener(CellEditorListener l) {
@@ -338,6 +415,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * Returns an array of all the <code>CellEditorListener</code>s added
      * to this DefaultTreeCellEditor with addCellEditorListener().
      *
+     * <p>
+     * 返回通过addCellEditorListener()添加到此DefaultTreeCellEditor的所有<code> CellEditorListener </code>的数组。
+     * 
+     * 
      * @return all of the <code>CellEditorListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -352,6 +433,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
      * Resets <code>lastPath</code>.
+     * <p>
+     *  重置<code> lastPath </code>。
+     * 
      */
     public void valueChanged(TreeSelectionEvent e) {
         if(tree != null) {
@@ -372,6 +456,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Messaged when the timer fires, this will start the editing
      * session.
+     * <p>
+     *  定时器触发时发送消息,这将启动编辑会话。
+     * 
      */
     public void actionPerformed(ActionEvent e) {
         if(tree != null && lastPath != null) {
@@ -386,6 +473,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Sets the tree currently editing for. This is needed to add
      * a selection listener.
+     * <p>
+     *  设置当前正在编辑的树。这是添加选择侦听器所需要的。
+     * 
+     * 
      * @param newTree the new tree to be edited
      */
     protected void setTree(JTree newTree) {
@@ -404,6 +495,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Returns true if <code>event</code> is a <code>MouseEvent</code>
      * and the click count is 1.
+     * <p>
+     *  如果<code> event </code>是<code> MouseEvent </code>,点击计数为1,则返回true。
+     * 
+     * 
      * @param event  the event being studied
      */
     protected boolean shouldStartEditingTimer(EventObject event) {
@@ -419,6 +514,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
      * Starts the editing timer.
+     * <p>
+     *  启动编辑计时器。
+     * 
      */
     protected void startEditingTimer() {
         if(timer == null) {
@@ -432,6 +530,11 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * Returns true if <code>event</code> is <code>null</code>,
      * or it is a <code>MouseEvent</code> with a click count &gt; 2
      * and <code>inHitRegion</code> returns true.
+     * <p>
+     *  如果<code> event </code>是<code> null </code>,则返回true,或者它是一个具有点击计数&gt;的<code> MouseEvent </code> 2和<code>
+     *  inHitRegion </code>返回true。
+     * 
+     * 
      * @param event the event being studied
      */
     protected boolean canEditImmediately(EventObject event) {
@@ -452,6 +555,11 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * by the renderer. In other words this returns true if the user
      * clicks over the text part displayed by the renderer, and false
      * otherwise.
+     * <p>
+     *  如果传入的位置是从开始编辑的有效鼠标位置,则返回true。这被实现为如果<code> x </code> <=由渲染器显示的图标和图标间隙的宽度,则返回false。
+     * 换句话说,如果用户点击渲染器显示的文本部分,则返回true,否则返回false。
+     * 
+     * 
      * @param x the x-coordinate of the point
      * @param y the y-coordinate of the point
      * @return true if the passed in location is a valid mouse location
@@ -502,6 +610,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * Invoked just before editing is to start. Will add the
      * <code>editingComponent</code> to the
      * <code>editingContainer</code>.
+     * <p>
+     *  在编辑之前调用是开始。将<code> editingComponent </code>添加到<code> editingContainer </code>。
+     * 
      */
     protected void prepareForEditing() {
         if (editingComponent != null) {
@@ -512,6 +623,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Creates the container to manage placement of
      * <code>editingComponent</code>.
+     * <p>
+     *  创建容器以管理<code> editingComponent </code>的位置。
+     * 
      */
     protected Container createContainer() {
         return new EditorContainer();
@@ -521,6 +635,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * This is invoked if a <code>TreeCellEditor</code>
      * is not supplied in the constructor.
      * It returns a <code>TextField</code> editor.
+     * <p>
+     *  如果在构造函数中没有提供<code> TreeCellEditor </code>,则调用此方法。它返回一个<code> TextField </code>编辑器。
+     * 
+     * 
      * @return a new <code>TextField</code> editor
      */
     protected TreeCellEditor createTreeCellEditor() {
@@ -541,6 +659,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
     /**
      * Cleans up any state after editing has completed. Removes the
      * <code>editingComponent</code> the <code>editingContainer</code>.
+     * <p>
+     *  编辑完成后清除任何状态。删除<code> editingComponent </code> <code> editingContainer </code>。
+     * 
      */
     private void cleanupAfterEditing() {
         if (editingComponent != null) {
@@ -584,6 +705,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
      * It also prefers its parents font over its font. And if the
      * renderer is not <code>null</code> and no font
      * has been specified the preferred height is that of the renderer.
+     * <p>
+     * <code> TextField </code>在未提供编辑器时使用。此文本字段锁定到其构造的边框。它也喜欢它的父母字体超过其字体。
+     * 如果渲染器不是<code> null </code>并且没有指定字体,则首选高度是渲染器的高度。
+     * 
      */
     public class DefaultTextField extends JTextField {
         /** Border to use. */
@@ -593,6 +718,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
          * Constructs a
          * <code>DefaultTreeCellEditor.DefaultTextField</code> object.
          *
+         * <p>
+         *  构造一个<code> DefaultTreeCellEditor.DefaultTextField </code>对象。
+         * 
+         * 
          * @param border  a <code>Border</code> object
          * @since 1.4
          */
@@ -604,6 +733,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
          * Sets the border of this component.<p>
          * This is a bound property.
          *
+         * <p>
+         *  设置此组件的边框。<p>这是一个bound属性。
+         * 
+         * 
          * @param border the border to be rendered for this component
          * @see Border
          * @see CompoundBorder
@@ -621,6 +754,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
         /**
          * Overrides <code>JComponent.getBorder</code> to
          * returns the current border.
+         * <p>
+         *  覆盖<code> JComponent.getBorder </code>以返回当前边框。
+         * 
          */
         public Border getBorder() {
             return border;
@@ -645,6 +781,10 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
          * Overrides <code>JTextField.getPreferredSize</code> to
          * return the preferred size based on current font, if set,
          * or else use renderer's font.
+         * <p>
+         *  覆盖<code> JTextField.getPreferredSize </code>以根据当前字体返回首选大小(如果设置),否则使用渲染器的字体。
+         * 
+         * 
          * @return a <code>Dimension</code> object containing
          *   the preferred size
          */
@@ -665,10 +805,16 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
     /**
      * Container responsible for placing the <code>editingComponent</code>.
+     * <p>
+     *  容器负责放置<code> editingComponent </code>。
+     * 
      */
     public class EditorContainer extends Container {
         /**
          * Constructs an <code>EditorContainer</code> object.
+         * <p>
+         *  构造一个<code> EditorContainer </code>对象。
+         * 
          */
         public EditorContainer() {
             setLayout(null);
@@ -683,6 +829,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
         /**
          * Overrides <code>Container.paint</code> to paint the node's
          * icon and use the selection color for the background.
+         * <p>
+         *  覆盖<code> Container.paint </code>以绘制节点的图标,并使用背景的选择颜色。
+         * 
          */
         public void paint(Graphics g) {
             int width = getWidth();
@@ -714,6 +863,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
          * Lays out this <code>Container</code>.  If editing,
          * the editor will be placed at
          * <code>offset</code> in the x direction and 0 for y.
+         * <p>
+         *  退出此<code>容器</code>。如果编辑,编辑器将放置在x方向上的<code> offset </code>和y的0。
+         * 
          */
         public void doLayout() {
             if(editingComponent != null) {
@@ -731,6 +883,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
 
         /**
          * Calculate the y location for the icon.
+         * <p>
+         *  计算图标的y位置。
+         * 
          */
         private int calculateIconY(Icon icon) {
             // To make sure the icon position matches that of the
@@ -750,6 +905,9 @@ public class DefaultTreeCellEditor implements ActionListener, TreeCellEditor,
          * Returns the preferred size for the <code>Container</code>.
          * This will be at least preferred size of the editor plus
          * <code>offset</code>.
+         * <p>
+         *  返回<code> Container </code>的首选大小。这将至少是编辑器的首选大小加上<code> offset </code>。
+         * 
          * @return a <code>Dimension</code> containing the preferred
          *   size for the <code>Container</code>; if
          *   <code>editingComponent</code> is <code>null</code> the

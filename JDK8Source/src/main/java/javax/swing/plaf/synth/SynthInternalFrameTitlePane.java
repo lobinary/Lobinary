@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import sun.swing.SwingUtilities2;
 /**
  * The class that manages a synth title bar
  *
+ * <p>
+ *  管理合成标题栏的类
+ * 
+ * 
  * @author David Kloba
  * @author Joshua Outwater
  * @author Steve Wilson
@@ -339,6 +344,8 @@ class SynthInternalFrameTitlePane extends BasicInternalFrameTitlePane
 
     /**
      * Resets the menuButton icon to match that of the frame.
+     * <p>
+     *  重置menuButton图标以匹配框架的图标。
      */
     private void updateMenuIcon() {
         Icon frameIcon = frame.getFrameIcon();

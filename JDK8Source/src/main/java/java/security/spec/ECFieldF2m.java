@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import java.util.Arrays;
  * This immutable class defines an elliptic curve (EC)
  * characteristic 2 finite field.
  *
+ * <p>
+ *  这个不可变类定义了椭圆曲线(EC)特性2有限域。
+ * 
+ * 
  * @see ECField
  *
  * @author Valerie Peng
@@ -46,6 +51,10 @@ public class ECFieldF2m implements ECField {
     /**
      * Creates an elliptic curve characteristic 2 finite
      * field which has 2^{@code m} elements with normal basis.
+     * <p>
+     *  创建椭圆曲线特征2有限域,其具有正常基础的2 ^ {@ code m}个元素。
+     * 
+     * 
      * @param m with 2^{@code m} being the number of elements.
      * @exception IllegalArgumentException if {@code m}
      * is not positive.
@@ -73,6 +82,13 @@ public class ECFieldF2m implements ECField {
      * + X^{@code k2} + X^{@code k1} + 1 with
      * {@code m} &gt; {@code k3} &gt; {@code k2}
      * &gt; {@code k1} &gt;= 1).
+     * <p>
+     *  创建一个椭圆曲线特征2有限域,有多项式基础的2 ^ {@代码m}元素。该字段的缩减多项式基于{@code rp},其第i个比特对应于缩减多项式的第i个系数。
+     * 注意：有效的缩减多项式是三项式(X ^ {@ code具有{@code m}> {@code k}> = 1)或五项式(X ^ {@ code m} + X ^ {@ code k3} +具有{@code m}
+     * &gt; {@code k3}&gt; {@code k2}&gt; {@code k1}&gt; = 1)的X ^ {@ code k2} + X ^ {@ code k1} + 1。
+     *  创建一个椭圆曲线特征2有限域,有多项式基础的2 ^ {@代码m}元素。该字段的缩减多项式基于{@code rp},其第i个比特对应于缩减多项式的第i个系数。
+     * 
+     * 
      * @param m with 2^{@code m} being the number of elements.
      * @param rp the BigInteger whose i-th bit corresponds to
      * the i-th coefficient of the reduction polynomial.
@@ -119,6 +135,14 @@ public class ECFieldF2m implements ECField {
      * {@code m} &gt; {@code k3} &gt; {@code k2}
      * &gt; {@code k1} &gt;= 1), so {@code ks} should
      * have length 1 or 3.
+     * <p>
+     *  创建一个椭圆曲线特征2有限域,有多项式基础的2 ^ {@代码m}元素。该字段的缩减多项式基于{@code ks},其内容包含缩减多项式的中间项的顺序。
+     * 注意：有效的缩减多项式是三项式(X ^ {@ code m} + X ^ {@ code k} + 1,其中{@code m}&gt; {@code k}&gt; = 1) X ^ {@ code m}
+     *  + X ^ {@ code k3} + X ^ {@ code k2} + X ^ {@ code k1} + 1 with {@code m}&gt; {@code k3}&gt; {@代码k2}&
+     * gt; {@code k1}&gt; = 1),所以{@code ks}应该具有长度1或3。
+     *  创建一个椭圆曲线特征2有限域,有多项式基础的2 ^ {@代码m}元素。该字段的缩减多项式基于{@code ks},其内容包含缩减多项式的中间项的顺序。
+     * 
+     * 
      * @param m with 2^{@code m} being the number of elements.
      * @param ks the order of the middle term(s) of the
      * reduction polynomial. Contents of this array are copied
@@ -162,6 +186,10 @@ public class ECFieldF2m implements ECField {
     /**
      * Returns the field size in bits which is {@code m}
      * for this characteristic 2 finite field.
+     * <p>
+     * 返回对于该特征2有限域,为{@code m}的字段大小(以位为单位)。
+     * 
+     * 
      * @return the field size in bits.
      */
     public int getFieldSize() {
@@ -171,6 +199,10 @@ public class ECFieldF2m implements ECField {
     /**
      * Returns the value {@code m} of this characteristic
      * 2 finite field.
+     * <p>
+     *  返回此特征2有限域的值{@code m}。
+     * 
+     * 
      * @return {@code m} with 2^{@code m} being the
      * number of elements.
      */
@@ -182,6 +214,10 @@ public class ECFieldF2m implements ECField {
      * Returns a BigInteger whose i-th bit corresponds to the
      * i-th coefficient of the reduction polynomial for polynomial
      * basis or null for normal basis.
+     * <p>
+     *  返回一个BigInteger,其第i位对应于多项式基础的缩减多项式的第i个系数,或者为正常基础的null。
+     * 
+     * 
      * @return a BigInteger whose i-th bit corresponds to the
      * i-th coefficient of the reduction polynomial for polynomial
      * basis or null for normal basis.
@@ -194,6 +230,10 @@ public class ECFieldF2m implements ECField {
      * Returns an integer array which contains the order of the
      * middle term(s) of the reduction polynomial for polynomial
      * basis or null for normal basis.
+     * <p>
+     *  返回一个整数数组,该数组包含多项式基准的归一化多项式的中间项的顺序或正常基础的空值。
+     * 
+     * 
      * @return an integer array which contains the order of the
      * middle term(s) of the reduction polynomial for polynomial
      * basis or null for normal basis. A new array is returned
@@ -210,6 +250,10 @@ public class ECFieldF2m implements ECField {
     /**
      * Compares this finite field for equality with the
      * specified object.
+     * <p>
+     *  比较此有限字段与指定对象的相等性。
+     * 
+     * 
      * @param obj the object to be compared.
      * @return true if {@code obj} is an instance
      * of ECFieldF2m and both {@code m} and the reduction
@@ -229,6 +273,9 @@ public class ECFieldF2m implements ECField {
     /**
      * Returns a hash code value for this characteristic 2
      * finite field.
+     * <p>
+     *  返回此特性2有限域的哈希码值。
+     * 
      * @return a hash code value.
      */
     public int hashCode() {

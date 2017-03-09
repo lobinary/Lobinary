@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -100,6 +101,45 @@ import sun.security.util.ResourcesMgr;
  * "a.b.Principal" with the name, "duke", and "c.d.Principal", with the name,
  * "dukette".
  *
+ * <p>
+ *  此类用于保护对属于特定{@code Subject}的私有凭据的访问。 {@code主题}由一组主体表示。
+ * 
+ *  <p>此{@code Permission}的目标名称指定了凭据类名称和一组原则。此权限操作的唯一有效值是"读取"。目标名称必须遵守以下语法：
+ * 
+ * <pre>
+ *  CredentialClass {PrincipalClass"PrincipalName"} *
+ * </pre>
+ * 
+ *  例如,以下权限授予对拥有com.sun.Principal名称为"duke"的主题拥有的com.sun.PrivateCredential的访问权限。
+ * 请注意,虽然此示例以及以下所有示例在grant语句中不包含Codebase,SignedBy或Principal信息(为了简单起见),但实际策略配置应在适当时指定该信息。
+ * 
+ * <pre>
+ * 
+ *  grant {permission javax.security.auth.PrivateCredentialPermission"com.sun.PrivateCredential com.sun.Principal \"duke \"","read"; }
+ * ;。
+ * </pre>
+ * 
+ * 如果CredentialClass为"*",则授予属于指定{@code Subject}的所有私有凭据的访问权限。
+ * 如果"PrincipalName"是"*",则授予对具有指定的{@code Principal}(实际PrincipalName无关紧要)的任何{@code Subject}拥有的指定凭证的访问权。
+ * 例如,以下授权访问由具有a.b.Principal的任何{@code Subject}拥有的a.b.Credential。
+ * 
+ * <pre>
+ *  grant {permission javax.security.auth.PrivateCredentialPermission"a.b.Credential a.b.Principal"*"","read"; }
+ * ;。
+ * </pre>
+ * 
+ *  如果PrincipalClass和"PrincipalName"都是"*",则访问被授予任何{@code Subject}所拥有的指定凭证。
+ * 
+ *  <p>此外,PrincipalClass / PrincipalName配对可以重复：
+ * 
+ * <pre>
+ *  grant {permission javax.security.auth.PrivateCredentialPermission"a.b.Credential a.b.Principal"duke"c.d.Principal"dukette"","read"; }
+ * ;。
+ * </pre>
+ * 
+ *  以上授权访问属于具有至少两个关联主体的{@code Subject}的私有Credential"abCredential"：具有名称"duke"和"cdPrincipal"的"abPrincipal"
+ * ,其名称,"dukette"。
+ * 
  */
 public final class PrivateCredentialPermission extends Permission {
 
@@ -108,11 +148,15 @@ public final class PrivateCredentialPermission extends Permission {
     private static final CredOwner[] EMPTY_PRINCIPALS = new CredOwner[0];
 
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private String credentialClass;
 
     /**
+    /* <p>
+    /* 
      * @serial The Principals associated with this permission.
      *          The set contains elements of type,
      *          {@code PrivateCredentialPermission.CredOwner}.
@@ -121,6 +165,8 @@ public final class PrivateCredentialPermission extends Permission {
     private transient CredOwner[] credOwners;
 
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private boolean testing = false;
@@ -128,6 +174,9 @@ public final class PrivateCredentialPermission extends Permission {
     /**
      * Create a new {@code PrivateCredentialPermission}
      * with the specified {@code credentialClass} and Principals.
+     * <p>
+     *  使用指定的{@code credentialClass}和主体创建新的{@code PrivateCredentialPermission}。
+     * 
      */
     PrivateCredentialPermission(String credentialClass,
                         Set<Principal> principals) {
@@ -159,6 +208,13 @@ public final class PrivateCredentialPermission extends Permission {
      *
      * <p>
      *
+     * <p>
+     *  使用指定的{@code name}创建新的{@code PrivateCredentialPermission}。
+     *  {@code name}指定Credential类和{@code Principal} Set。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the name specifying the Credential class and
      *          {@code Principal} Set. <p>
      *
@@ -182,6 +238,12 @@ public final class PrivateCredentialPermission extends Permission {
      *
      * <p>
      *
+     * <p>
+     * 返回与此{@code PrivateCredentialPermission}关联的Credential的类名。
+     * 
+     * <p>
+     * 
+     * 
      * @return the Class name of the Credential associated with this
      *          {@code PrivateCredentialPermission}.
      */
@@ -204,6 +266,16 @@ public final class PrivateCredentialPermission extends Permission {
      *
      * <p>
      *
+     * <p>
+     *  返回与此{@code PrivateCredentialPermission}相关联的{@code Principal}类和名称。信息作为二维数组(array [x] [y])返回。
+     *  'x'值对应于{@code Principal}类和名称对的数量。
+     * 当(y == 0)时,它对应于{@code Principal}类值,当(y == 1)时,它对应于{@code Principal}名称值。
+     * 例如,array [0] [0]对应于数组中第一个{@code Principal}的类名。
+     *  array [0] [1]对应于数组中第一个{@code Principal}的{@code Principal}名称。
+     * 
+     * <p>
+     * 
+     * 
      * @return the {@code Principal} class and names associated
      *          with this {@code PrivateCredentialPermission}.
      */
@@ -241,6 +313,23 @@ public final class PrivateCredentialPermission extends Permission {
      *
      * <p>
      *
+     * <p>
+     *  检查此{@code PrivateCredentialPermission}是否暗示指定的{@code权限}。
+     * 
+     * <p>
+     * 
+     *  此方法返回true如果：
+     * <ul>
+     *  <li> <i> p </i>是PrivateCredentialPermission的实例,<li>该对象的目标名称隐含了<i> p </i>的目标名称。例如：
+     * <pre>
+     *  [* P1"duke"]暗示[a.b.Credential P1"duke"]。 [C1 P1"duke"]表示[C1 P1"duke"P2"dukette"]。
+     *  [C1 P2"dukette"]表示[C1 P1"duke"P2"dukette"]。
+     * </pre>
+     * </ul>
+     * 
+     * <p>
+     * 
+     * 
      * @param p the {@code Permission} to check against.
      *
      * @return true if this {@code PrivateCredentialPermission} implies
@@ -270,6 +359,13 @@ public final class PrivateCredentialPermission extends Permission {
      *
      * <p>
      *
+     * <p>
+     *  检查两个{@code PrivateCredentialPermission}对象是否相等。
+     * 检查<i> obj </i>是否为{@code PrivateCredentialPermission},并且具有与此对象相同的凭据类,以及与此对象相同的原则。各个权限的目标名称中的主体的顺序不相关。
+     * 
+     * <p>
+     * 
+     * 
      * @param obj the object we are testing for equality with this object.
      *
      * @return true if obj is a {@code PrivateCredentialPermission},
@@ -291,6 +387,10 @@ public final class PrivateCredentialPermission extends Permission {
     /**
      * Returns the hash code value for this object.
      *
+     * <p>
+     *  返回此对象的哈希码值。
+     * 
+     * 
      * @return a hash code value for this object.
      */
     public int hashCode() {
@@ -303,6 +403,12 @@ public final class PrivateCredentialPermission extends Permission {
      *
      * <p>
      *
+     * <p>
+     * 返回操作的"规范字符串表示"。这个方法总是返回String,"read"。
+     * 
+     * <p>
+     * 
+     * 
      * @return the actions (always returns "read").
      */
     public String getActions() {
@@ -317,6 +423,13 @@ public final class PrivateCredentialPermission extends Permission {
      *
      * <p>
      *
+     * <p>
+     *  在{@code PermissionCollection}中返回PrivateCredentialPermissions的同质集合。
+     * 没有定义这样的{@code PermissionCollection},所以这个方法总是返回{@code null}。
+     * 
+     * <p>
+     * 
+     * 
      * @return null in all cases.
      */
     public PermissionCollection newPermissionCollection() {
@@ -446,12 +559,19 @@ public final class PrivateCredentialPermission extends Permission {
         /**
          * XXX let's not enable this for now --
          *      if people want it, we'll enable it later
+         * <p>
+         *  XXX现在不能启用此功能 - 如果有人想要,我们稍后将启用它
+         * 
          */
         /*
         if (thisC.endsWith("*")) {
             String cClass = thisC.substring(0, thisC.length() - 2);
             return thatC.startsWith(cClass);
         }
+        if (thisC.endsWith("* <p>
+        if (thisC.endsWith("*  if(thisC.endsWith("*")){String cClass = thisC.substring(0,thisC.length() -  2); return c.CstartWith(cClass); }
+        if (thisC.endsWith("* }。
+        if (thisC.endsWith("* 
         */
 
         return thisC.equals(thatC);
@@ -486,6 +606,9 @@ public final class PrivateCredentialPermission extends Permission {
 
     /**
      * Reads this object from a stream (i.e., deserializes it)
+     * <p>
+     *  从流中读取此对象(即,对其进行反序列化)
+     * 
      */
     private void readObject(java.io.ObjectInputStream s) throws
                                         java.io.IOException,
@@ -509,6 +632,8 @@ public final class PrivateCredentialPermission extends Permission {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CredOwner implements java.io.Serializable {
@@ -516,10 +641,14 @@ public final class PrivateCredentialPermission extends Permission {
         private static final long serialVersionUID = -5607449830436408266L;
 
         /**
+        /* <p>
+        /* 
          * @serial
          */
         String principalClass;
         /**
+        /* <p>
+        /* 
          * @serial
          */
         String principalName;
@@ -546,6 +675,8 @@ public final class PrivateCredentialPermission extends Permission {
 
             /**
              * XXX no code yet to support a.b.*
+             * <p>
+             *  XXX没有代码尚未支持a.b. *
              */
 
             return false;

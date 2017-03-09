@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,18 @@ import java.io.IOException;
  *
  * A <code>MemoryCache</code> may be reused after a call
  * to <code>reset()</code>.
+ * <p>
+ *  Package-visible类合并<code> MemoryCacheImageInputStream </code>和<code> MemoryCacheImageOutputStream </code>
+ * 的通用代码。
+ * 这个类保持一个8K块的<code> ArrayList </code>,顺序加载。块只能从索引0向前处理。
+ * 当块被释放时,数组列表中的相应条目被设置为<code> null </code>,但不执行压缩。这允许每个块的索引从不改变,并且高速缓存的长度总是与被高速缓存的数据的总量相同。
+ * 因此,高速缓存的数据总是从最后处理点到当前长度是连续的。
+ * 
+ *  <p>高速缓存中驻留的块的总数不能超过<code> Integer.MAX_VALUE </code>。
+ * 实际上,在这成为问题之前,将会超过可用内存的限制,因为完整缓存将包含8192 * 2 ^ 31 = 16太字节的数据。
+ * 
+ *  在调用<code> reset()</code>之后,可以重用<code> MemoryCache </code>。
+ * 
  */
 class MemoryCache {
 
@@ -64,6 +77,9 @@ class MemoryCache {
 
     /**
      * The largest position ever written to the cache.
+     * <p>
+     *  已写入缓存的最大位置。
+     * 
      */
     private long length = 0L;
 
@@ -82,6 +98,9 @@ class MemoryCache {
      * or the end of the source is reached.  The return value
      * is equal to the smaller of <code>pos</code> and the
      * length of the source.
+     * <p>
+     *  确保至少<code> pos </code>字节已缓存,或达到源的结尾。返回值等于<code> pos </code>和源的长度中的较小值。
+     * 
      */
     public long loadFromStream(InputStream stream, long pos)
         throws IOException {
@@ -139,6 +158,11 @@ class MemoryCache {
      * not dispose of any blocks containing bytes written.  To dispose
      * blocks, use {@link #disposeBefore <code>disposeBefore()</code>}.
      *
+     * <p>
+     * 将缓存的一部分写入<code> OutputStream </code>。此方法不保留关于输出流的状态,并且不处理包含写入的字节的任何块。
+     * 要处理块,请使用{@link #disposeBefore <code> disposeBefore()</code>}。
+     * 
+     * 
      * @exception IndexOutOfBoundsException if any portion of
      * the requested data is not in the cache (including if <code>pos</code>
      * is in a block already disposed), or if either <code>pos</code> or
@@ -177,6 +201,9 @@ class MemoryCache {
 
     /**
      * Ensure that there is space to write a byte at the given position.
+     * <p>
+     *  确保有空间在给定位置写入一个字节。
+     * 
      */
     private void pad(long pos) throws IOException {
         long currIndex = cacheStart + cache.size() - 1;
@@ -196,6 +223,10 @@ class MemoryCache {
      * The length of the cache will be extended as needed to hold
      * the incoming data.
      *
+     * <p>
+     *  从字节数组覆盖和/或追加缓存。缓存的长度将根据需要进行扩展,以保存传入数据。
+     * 
+     * 
      * @param b an array of bytes containing data to be written.
      * @param off the starting offset withing the data array.
      * @param len the number of bytes to be written.
@@ -243,6 +274,10 @@ class MemoryCache {
      * The length of the cache will be extended as needed to hold
      * the incoming data.
      *
+     * <p>
+     *  覆盖或附加一个字节到缓存。缓存的长度将根据需要进行扩展,以保存传入数据。
+     * 
+     * 
      * @param b an <code>int</code> whose 8 least significant bits
      * will be written.
      * @param pos the cache position at which to begin writing.
@@ -270,6 +305,9 @@ class MemoryCache {
      * Returns the total length of data that has been cached,
      * regardless of whether any early blocks have been disposed.
      * This value will only ever increase.
+     * <p>
+     *  返回已缓存的数据的总长度,而不管是否已处理任何早期块。这个值只会增加。
+     * 
      */
     public long getLength() {
         return length;
@@ -279,6 +317,9 @@ class MemoryCache {
      * Returns the single byte at the given position, as an
      * <code>int</code>.  Returns -1 if this position has
      * not been cached or has been disposed.
+     * <p>
+     *  返回给定位置的单个字节,作为<code> int </code>。如果此位置未缓存或已处理,则返回-1。
+     * 
      */
     public int read(long pos) throws IOException {
         if (pos >= length) {
@@ -298,6 +339,10 @@ class MemoryCache {
      * at cache position <code>pos</code>, into the array
      * <code>b</code> at offset <code>off</code>.
      *
+     * <p>
+     *  从缓存位置<code> pos </code>开始,将<code> len </code>字节复制到偏移量<code> off </code>的数组<code> b </code>中。
+     * 
+     * 
      * @exception NullPointerException if b is <code>null</code>
      * @exception IndexOutOfBoundsException if <code>off</code>,
      * <code>len</code> or <code>pos</code> are negative or if
@@ -336,6 +381,10 @@ class MemoryCache {
      * Free the blocks up to the position <code>pos</code>.
      * The byte at <code>pos</code> remains available.
      *
+     * <p>
+     *  释放位置<code> pos </code>的块。 <code> pos </code>处的字节仍然可用。
+     * 
+     * 
      * @exception IndexOutOfBoundsException if <code>pos</code>
      * is in a block that has already been disposed.
      */
@@ -355,6 +404,8 @@ class MemoryCache {
      * Erase the entire cache contents and reset the length to 0.
      * The cache object may subsequently be reused as though it had just
      * been allocated.
+     * <p>
+     *  擦除整个缓存内容并将长度重置为0.缓存对象可以随后被重新使用,就像它刚刚被分配一样。
      */
     public void reset() {
         cache.clear();

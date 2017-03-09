@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,12 @@ import java.util.List;
  *    {@code @}<em>annotationType</em> ( <em>arguments</em> ) <em>Date</em>
  * </pre>
  *
+ * <p>
+ *  注释类型的树节点
+ * 
+ *  例如：
+ * <pre>
+ * 
  * @see "JSR 308: Annotations on Java Types"
  *
  * @author Mahmood Ali

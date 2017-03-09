@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 // $Id: XPathImpl.java,v 1.2 2005/08/16 22:41:08 jeffsuttor Exp $
 
@@ -54,6 +64,10 @@ import java.io.IOException;
  * of an XPath expression.
  *
  *
+ * <p>
+ *  XPathImpl类为javax.xml.xpath.XPath接口中定义的方法提供实现。这提供对XPath表达式的结果的简单访问。
+ * 
+ * 
  * @version $Revision: 1.10 $
  * @author  Ramesh Mandava
  */
@@ -90,6 +104,10 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     /**
      * <p>Establishes a variable resolver.</p>
      *
+     * <p>
+     *  <p>建立一个变量解析器。</p>
+     * 
+     * 
      * @param resolver Variable Resolver
      */
     public void setXPathVariableResolver(XPathVariableResolver resolver) {
@@ -105,6 +123,10 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     /**
      * <p>Returns the current variable resolver.</p>
      *
+     * <p>
+     *  <p>返回当前变量解析器。</p>
+     * 
+     * 
      * @return Current variable resolver
      */
     public XPathVariableResolver getXPathVariableResolver() {
@@ -114,6 +136,10 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     /**
      * <p>Establishes a function resolver.</p>
      *
+     * <p>
+     *  <p>建立函数解析器。</p>
+     * 
+     * 
      * @param resolver XPath function resolver
      */
     public void setXPathFunctionResolver(XPathFunctionResolver resolver) {
@@ -129,6 +155,10 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     /**
      * <p>Returns the current function resolver.</p>
      *
+     * <p>
+     *  <p>返回当前函数解析器。</p>
+     * 
+     * 
      * @return Current function resolver
      */
     public XPathFunctionResolver getXPathFunctionResolver() {
@@ -138,6 +168,10 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     /**
      * <p>Establishes a namespace context.</p>
      *
+     * <p>
+     *  <p>建立命名空间上下文。</p>
+     * 
+     * 
      * @param nsContext Namespace context to use
      */
     public void setNamespaceContext(NamespaceContext nsContext) {
@@ -154,6 +188,10 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     /**
      * <p>Returns the current namespace context.</p>
      *
+     * <p>
+     *  <p>返回当前的命名空间上下文。</p>
+     * 
+     * 
      * @return Current Namespace context
      */
     public NamespaceContext getNamespaceContext() {
@@ -235,6 +273,22 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      * If <code>expression</code> or <code>returnType</code> is <code>null</code>, then a
      * <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>在指定的上下文中评估<code> XPath </code>表达式,并返回指定类型的结果。</p>
+     * 
+     *  <p>有关上下文项评估,变量,函数和<code> QName </code>解析和返回类型转换的JAXP 1.3规范的"XPath表达式评估"部分。</p>
+     * 
+     * <p>如果<code> returnType </code>不是{@link XPathConstants}({@link XPathConstants#NUMBER NUMBER},{@link XPathConstants#STRING STRING}
+     * ,{@link XPathConstants#BOOLEAN BOOLEAN},{@link XPathConstants#NODE NODE}或{@link XPathConstants#NODESET NODESET}
+     * ),则会抛出<code> IllegalArgumentException </code>。
+     * </p>。
+     * 
+     *  <p>如果为<code> item </code>提供了<code> null </code>值,那么空文档将用于上下文。
+     * 如果<code> expression </code>或<code> returnType </code>是<code> null </code>,那么会抛出<code> NullPointerExce
+     * ption </code>。
+     *  <p>如果为<code> item </code>提供了<code> null </code>值,那么空文档将用于上下文。</p>。
+     * 
+     * 
      * @param expression The XPath expression.
      * @param item The starting context (node or node list, for example).
      * @param returnType The desired return type.
@@ -349,6 +403,19 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      * context.
      * If <code>expression</code> is <code>null</code>, then a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>在指定的上下文中评估XPath表达式,并将结果作为<code> String </code>返回。</p>
+     * 
+     *  <p>此方法使用{@link XPathConstants#STRING}的<code> returnType </code>调用{@link #evaluate(String expression,Object item,QName returnType)}
+     * 。
+     * </p>。
+     * 
+     *  <p>有关上下文项评估,变量,函数和QName解析以及返回类型转换的JAXP 1.3规范的"XPath表达式评估"。</p>
+     * 
+     *  <p>如果为<code> item </code>提供了<code> null </code>值,那么空文档将用于上下文。
+     * 如果<code> expression </code>是<code> null </code>,那么会抛出<code> NullPointerException </code>。</p>。
+     * 
+     * 
      * @param expression The XPath expression.
      * @param item The starting context (node or node list, for example).
      *
@@ -373,6 +440,17 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      *
      * <p>If <code>expression</code> is <code>null</code>, a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>编译XPath表达式以供以后评估。</p>
+     * 
+     * <p>如果<code> expression </code>包含任何{@link XPathFunction},它们必须通过{@link XPathFunctionResolver}可用。
+     * 如果<code> XPathFunction </code>无法使用<code> XPathFunctionResolver </code>重新移动,则会抛出{@link XPathExpressionException}
+     * 。
+     * <p>如果<code> expression </code>包含任何{@link XPathFunction},它们必须通过{@link XPathFunctionResolver}可用。</p>。
+     * 
+     *  <p>如果<code> expression </code>是<code> null </code>,则会抛出<code> NullPointerException </code>。</p>
+     * 
+     * 
      * @param expression The XPath expression.
      *
      * @return Compiled XPath expression.
@@ -419,6 +497,24 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      * <p>If <code>expression</code>, <code>source</code> or <code>returnType</code> is <code>null</code>,
      * then a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>在指定的<code> InputSource </code>上下文中评估XPath表达式,并返回指定类型的结果。</p>
+     * 
+     *  <p>此方法会在结果文档对象上构建{@link InputSource}的数据模型并调用{@link #evaluate(String expression,Object item,QName returnType)}
+     * 。
+     * </p>。
+     * 
+     *  <p>有关上下文项评估,变量,函数和QName解析以及返回类型转换的JAXP 1.3规范的"XPath表达式评估"部分。</p>
+     * 
+     *  <p>如果<code> returnType </code>不是{@link XPathConstants}中定义的类型之一,则会抛出<code> IllegalArgumentException </code>
+     * 。
+     * </p>。
+     * 
+     *  <p>如果<code> expression </code>,<code> source </code>或<code> returnType </code>是<code> null </code>,那
+     * 么<code> NullPointerException </code>被抛出。
+     * </p>。
+     * 
+     * 
      * @param expression The XPath expression.
      * @param source The input source of the document to evaluate over.
      * @param returnType The desired return type.
@@ -499,6 +595,20 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      * <p>If <code>expression</code> or <code>source</code> is <code>null</code>,
      * then a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>在指定的<code> InputSource </code>的上下文中评估XPath表达式,并将结果作为<code> String </code>返回。</p>
+     * 
+     *  <p>此方法使用{@link XPathConstants#STRING}的<code> returnType </code>调用{@link #evaluate(String expression,InputSource source,QName returnType)}
+     * 。
+     * </p>。
+     * 
+     * <p>有关上下文项评估,变量,函数和QName解析以及返回类型转换的JAXP 1.3规范的"XPath表达式评估"部分。</p>
+     * 
+     *  <p>如果<code> expression </code>或<code> source </code>是<code> null </code>,那么会抛出<code> NullPointerExce
+     * ption </code>。
+     * </p>。
+     * 
+     * 
      * @param expression The XPath expression.
      * @param source The <code>InputSource</code> of the document to evaluate over.
      *
@@ -527,6 +637,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      * It is guaranteed to have a functionally equal <code>XPathFunctionResolver</code>,
      * <code>XPathVariableResolver</code>
      * and <code>NamespaceContext</code>.</p>
+     * <p>
      */
     public void reset() {
         this.variableResolver = this.origVariableResolver;

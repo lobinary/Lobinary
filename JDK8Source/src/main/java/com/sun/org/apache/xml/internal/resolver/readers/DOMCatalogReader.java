@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会或其许可方(如适用)。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.resolver.readers;
@@ -58,6 +68,17 @@ import sun.reflect.misc.ReflectUtil;
  * of the root element of the document.</p>
  *
  *
+ * <p>
+ *  基于DOM的CatalogReader。
+ * 
+ *  <p>此类用于使用DOM读取XML目录。此读取器具有优于基于SAX的读取器的优点,其可以分析DOM树而不是简单地一系列SAX事件。它的缺点是它需要构建和遍历DOM树所需的所有代码。</p>
+ * 
+ *  <p>由于CatalogReaders(在InputStream情况下)的选择只能基于MIME类型,所以会出现以下问题：对于所有XML MIME类型,只能存在一个CatalogReader。
+ * 为了解决这个问题,DOMCatalogReader依赖一组外部CatalogParsers来实际构建目录。</p>。
+ * 
+ * <p> CatalogParsers的选择基于文档根元素的QName。</p>
+ * 
+ * 
  * @see Catalog
  * @see CatalogReader
  * @see SAXCatalogReader
@@ -75,6 +96,11 @@ public class DOMCatalogReader implements CatalogReader {
    * <p>Each key in this hash table has the form "elementname"
    * or "{namespaceuri}elementname". The former is used if the
    * namespace URI is null.</p>
+   * <p>
+   *  从QNames到CatalogParser类的映射表。
+   * 
+   *  <p>此哈希表中的每个键都具有"elementname"或"{namespaceuri} elementname"的形式。如果命名空间URI为空,则使用前者。</p>
+   * 
    */
   protected Hashtable namespaceMap = new Hashtable();
 
@@ -84,6 +110,12 @@ public class DOMCatalogReader implements CatalogReader {
    * <p>This method associates the specified parserClass with the
    * namespaceURI/rootElement names specified.</p>
    *
+   * <p>
+   *  向阅读器添加一个新的解析器。
+   * 
+   *  <p>此方法将指定的parserClass与指定的namespaceURI / rootElement名称相关联。</p>
+   * 
+   * 
    * @param namespaceURI The namespace URI. <em>Not</em> the prefix.
    * @param rootElement The name of the root element.
    * @param parserClass The name of the parserClass to instantiate
@@ -105,6 +137,12 @@ public class DOMCatalogReader implements CatalogReader {
    * <p>This method returns the parserClass associated with the
    * namespaceURI/rootElement names specified.</p>
    *
+   * <p>
+   *  获取给定目录类型的解析器类的名称。
+   * 
+   *  <p>此方法返回与指定的namespaceURI / rootElement名称关联的parserClass。</p>
+   * 
+   * 
    * @param namespaceURI The namespace URI. <em>Not</em> the prefix.
    * @param rootElement The name of the root element.
    * @return The parser class.
@@ -120,6 +158,9 @@ public class DOMCatalogReader implements CatalogReader {
 
   /**
    * Null constructor; something for subclasses to call.
+   * <p>
+   *  空构造函数;东西为子类调用。
+   * 
    */
   public DOMCatalogReader() { }
 
@@ -140,6 +181,14 @@ public class DOMCatalogReader implements CatalogReader {
    * wandering arbitrarily throughout the tree).</li>
    * </ul>
    *
+   * <p>
+   *  从输入流读取目录。
+   * 
+   *  <p>此类从输入流中读取目录：</p>
+   * 
+   * <ul>
+   *  <li>根据根元素的QName,它会确定要为此目录实例化的解析器。</li> <li>从目录中构建DOM文档,</li> <li>根节点,它调用解析器的parseCatalogEntry方法。
+   * 
    * @param catalog The catalog for which this reader is called.
    * @param is The input stream that is to be read.
    * @throws IOException if the URL cannot be read.
@@ -220,6 +269,11 @@ public class DOMCatalogReader implements CatalogReader {
   /**
    * Read the catalog behind the specified URL.
    *
+   * <p>
+   * 此方法需要适当回调到目录中以为目录中的条目添加条目。它可以自由地以任何适当的方式(或许只使用传递的节点,也许在整个树中随意漫游)。</li>。
+   * </ul>
+   * 
+   * 
    * @see #readCatalog(Catalog, InputStream)
    *
    * @param catalog The catalog for which we are reading.

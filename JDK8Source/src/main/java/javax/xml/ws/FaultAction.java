@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -145,6 +146,50 @@ import java.lang.annotation.Target;
  *   &lt;/definitions>
  * </pre>
  *
+ * <p>
+ *  在{@link Action}注释中使用<code> FaultAction </code>注释,以允许将WS-Addressing <code> Action </code>消息寻址属性与<code>
+ *  fault </code >从异常类映射的WSDL操作的消息。
+ * <p>
+ *  对于<code> className </code>类映射的生成的WSDL操作中的<code> fault </code>消息中的<code> wsam：Action </code>属性值等于<code>
+ *  > FaultAction </code>。
+ * 要精确计算故障消息的<code> wsam：Action </code>值,请参阅JAX-WS规范中的算法。
+ * 
+ * <p>
+ *  <b>示例1 </b>：指定<code>输入</code>,<code>输出</code>和<code>错误</code> / code>消息,如果Java方法只引发一个服务特定的异常。
+ * 
+ * <pre>
+ *  @WebService(targetNamespace ="http://example.com/numbers")public class AddNumbersImpl {@Action(fault = {<b> @FaultAction(className = AddNumbersException.class,value ="http://example.com/ faultAction")</b>}
+ * )public int addNumbers(int number1,int number2)throws AddNumbersException {return number1 + number2; }
+ * }。
+ * </pre>
+ * 
+ *  生成的WSDL如下所示：
+ * 
+ * <pre>
+ * &lt;definitions targetNamespace="http://example.com/numbers" ...>
+ *  ... ...
+ * &lt;portType name="AddNumbersPortType">
+ * &lt;operation name="AddNumbers">
+ * ...&lt; fault message ="tns：AddNumbersException"name ="AddNumbersException"<b> wsam：Action ="http://e
+ * xample.com/faultAction"</b> />。
+ * &lt;/operation>
+ * &lt;/portType>
+ *  ... ...
+ * &lt;/definitions>
+ * </pre>
+ * 
+ * <p>
+ *  示例2：这是一个示例,显示是否不存在针对服务特定异常的<code> Action </code>消息寻址属性的显式值。
+ * 
+ * <pre>
+ *  @WebService(targetNamespace ="http://example.com/numbers")public class AddNumbersImpl {public int addNumbers(int number1,int number2)throws AddNumbersException {return number1 + number2; }
+ * }。
+ * </pre>
+ * 
+ *  生成的WSDL如下所示：
+ * 
+ * <pre>
+ * 
  * @since JAX-WS 2.1
  */
 
@@ -154,11 +199,45 @@ import java.lang.annotation.Target;
 public @interface FaultAction {
     /**
      * Name of the exception class
+     * <p>
+     * &lt;definitions targetNamespace="http://example.com/numbers" ...>
+     *  ... ...
+     * &lt;portType name="AddNumbersPortType">
+     * &lt;operation name="AddNumbers">
+     *  ...&lt; fault message ="tns：addNumbersFault"name ="InvalidNumbers"<b> wsam：Action ="http://example.c
+     * om/numbers/AddNumbersPortType/AddNumbers/Fault/AddNumbersException"</。
+     * &lt;/operation>
+     * &lt;/portType>
+     *  ... ...
+     * &lt;/definitions>
+     * </pre>
+     * 
+     * <p>
+     *  示例3：这是一个示例,显示如果Java方法抛出多个服务特定异常,如何为<code> Action </code>消息寻址属性指定显式值。
+     * 
+     * <pre>
+     *  @WebService(targetNamespace ="http://example.com/numbers")public class AddNumbersImpl {@Action(fault = {<b> @FaultAction(className = AddNumbersException.class,value ="http://example.com/ public int addNumbers(int number1,int number2)throws AddNumbersException,TooBigNumbersException {return number1()返回一个值,返回true,否则返回false。
+     *  + number2; }}。
+     * </pre>
+     * 
+     *  生成的WSDL如下所示：
      */
     Class<? extends Exception> className();
 
     /**
      * Value of WS-Addressing <code>Action</code> message addressing property for the exception
+     * <p>
+     * 
+     * <pre>
+     * &lt;definitions targetNamespace="http://example.com/numbers" ...>
+     *  ... ...
+     * &lt;portType name="AddNumbersPortType">
+     * &lt;operation name="AddNumbers">
+     * ...&lt; fault message ="tns：addNumbersFault"name ="AddNumbersException"<b> wsam：Action ="http://examp
+     * le.com/addFaultAction"</b> />&lt; fault message ="tns： tooBigNumbersFault"name ="TooBigNumbersExcepti
+     * on"<b> wsam：Action ="http://example.com/toobigFaultAction"</b> />。
+     * &lt;/operation>
+     * &lt;/portType>
      */
     String value() default "";
 }

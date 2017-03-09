@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dv.util;
@@ -34,6 +44,16 @@ package com.sun.org.apache.xerces.internal.impl.dv.util;
  *
  * @xerces.internal
  *
+ * <p>
+ *  这个类提供RFC 2045 Base64的编码/解码,如RFC 2045,N.Freed和N.Borenstein定义。
+ *  RFC 2045：多用途Internet邮件扩展(MIME)第一部分：Internet邮件正文的格式。
+ * 参考1996可在：http://www.ietf.org/rfc/rfc2045.txt此类由XML Schema二进制格式验证。
+ * 
+ *  该实现不对流数据进行编码/解码。你需要的数据,你将编码/解码已经在一个字节arrray。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Jeffrey Rodriguez
  * @author Sandy Gao
  */
@@ -103,6 +123,10 @@ public final class  Base64 {
     /**
      * Encodes hex octects into Base64
      *
+     * <p>
+     *  将十六进制十六进制编码为Base64
+     * 
+     * 
      * @param binaryData Array containing binaryData
      * @return Encoded Base64 array
      */
@@ -194,6 +218,10 @@ public final class  Base64 {
     /**
      * Decodes Base64 data into octects
      *
+     * <p>
+     *  将Base64数据解码为octect
+     * 
+     * 
      * @param encoded string containing Base64 data
      * @return Array containind decoded data.
      */
@@ -288,6 +316,9 @@ public final class  Base64 {
     /**
      * remove WhiteSpace from MIME containing encoded Base64 data.
      *
+     * <p>
+     *  从包含编码的Base64数据的MIME中删除WhiteSpace。
+     * 
      * @param data  the byte array of base64 data (with WS)
      * @return      the new length
      */

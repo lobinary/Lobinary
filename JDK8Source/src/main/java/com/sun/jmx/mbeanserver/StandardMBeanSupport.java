@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import javax.management.ObjectName;
 /**
  * Base class for Standard MBeans.
  *
+ * <p>
+ *  标准MBeans的基类。
+ * 
+ * 
  * @since 1.6
  */
 public class StandardMBeanSupport extends MBeanSupport<Method> {
@@ -43,6 +48,10 @@ public class StandardMBeanSupport extends MBeanSupport<Method> {
      * <p>Construct a Standard MBean that wraps the given resource using the
      * given Standard MBean interface.</p>
      *
+     * <p>
+     *  <p>使用给定的标准MBean接口构造包装给定资源的标准MBean。</p>
+     * 
+     * 
      * @param resource the underlying resource for the new MBean.
      * @param mbeanInterfaceType the class or interface to be used to determine
      *       the MBean's management interface.  An interface if this is a
@@ -79,6 +88,8 @@ public class StandardMBeanSupport extends MBeanSupport<Method> {
     /* Standard MBeans that are NotificationBroadcasters can return a different
      * MBeanNotificationInfo[] every time getMBeanInfo() is called, so we have
      * to reconstruct this MBeanInfo if necessary.
+     * <p>
+     *  MBeanNotificationInfo []每次调用getMBeanInfo(),所以我们必须重建这个MBeanInfo如果必要。
      */
     @Override
     public MBeanInfo getMBeanInfo() {

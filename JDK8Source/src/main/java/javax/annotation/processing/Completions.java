@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ package javax.annotation.processing;
 /**
  * Utility class for assembling {@link Completion} objects.
  *
+ * <p>
+ *  用于组装{@link Completion}对象的实用程序类。
+ * 
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;
@@ -67,6 +72,10 @@ public class Completions {
     /**
      * Returns a completion of the value and message.
      *
+     * <p>
+     *  返回值和消息的完成。
+     * 
+     * 
      * @param value the text of the completion
      * @param message a message about the completion
      * @return a completion of the provided value and message
@@ -78,6 +87,9 @@ public class Completions {
     /**
      * Returns a completion of the value and an empty message
      *
+     * <p>
+     *  返回值的完成和空消息
+     * 
      * @param value the text of the completion
      * @return a completion of the value and an empty message
      */

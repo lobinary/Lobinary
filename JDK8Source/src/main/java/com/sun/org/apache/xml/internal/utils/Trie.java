@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Trie.java,v 1.2.4.1 2005/09/15 08:15:59 suresh_emailid Exp $
+ * <p>
+ *  $ Id：Trie.java,v 1.2.4.1 2005/09/15 08:15:59 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -28,6 +41,10 @@ package com.sun.org.apache.xml.internal.utils;
  * The key must be a 7-bit ASCII string
  * The value may be any Java Object
  * @xsl.usage internal
+ * <p>
+ *  用于7位ASCII文本的数字搜索trie API是java.util.Hashtable的子集。键必须是7位ASCII字符串。
+ * 值可以是任何Java Object @ xsl.usage internal。
+ * 
  */
 public class Trie
 {
@@ -43,6 +60,9 @@ public class Trie
 
   /**
    * Construct the trie.
+   * <p>
+   *  构造特里结构。
+   * 
    */
   public Trie()
   {
@@ -52,6 +72,10 @@ public class Trie
   /**
    * Put an object into the trie for lookup.
    *
+   * <p>
+   *  将一个对象放入trie中进行查找。
+   * 
+   * 
    * @param key must be a 7-bit ASCII string
    * @param value any java object.
    *
@@ -101,6 +125,10 @@ public class Trie
   /**
    * Get an object that matches the key.
    *
+   * <p>
+   *  获取与该键匹配的对象。
+   * 
+   * 
    * @param key must be a 7-bit ASCII string
    *
    * @return The object that matches the key, or null.
@@ -112,6 +140,9 @@ public Object get(final String key)
 
     /* If the name is too long, we won't find it, this also keeps us
      * from overflowing m_charBuffer
+     * <p>
+     *  从溢出m_charBuffer
+     * 
      */
     if (m_charBuffer.length < len)
         return null;
@@ -185,12 +216,17 @@ public Object get(final String key)
   /**
    * The node representation for the trie.
    * @xsl.usage internal
+   * <p>
+   *  trie的节点表示。 @ xsl.usage internal
+   * 
    */
   class Node
   {
 
     /**
      * Constructor, creates a Node[ALPHA_SIZE].
+     * <p>
+     *  构造函数,创建一个节点[ALPHA_SIZE]。
      */
     Node()
     {

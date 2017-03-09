@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.beans.*;
 /**
  * Basic L&amp;F for a minimized window on a desktop.
  *
+ * <p>
+ *  基本L&amp; F用于桌面上最小化的窗口。
+ * 
+ * 
  * @author David Kloba
  * @author Steve Wilson
  * @author Rich Schiavi
@@ -48,6 +53,10 @@ public class BasicDesktopIconUI extends DesktopIconUI {
     /**
      * The title pane component used in the desktop icon.
      *
+     * <p>
+     *  桌面图标中使用的标题窗格组件。
+     * 
+     * 
      * @since 1.5
      */
     protected JComponent iconPane;
@@ -164,6 +173,10 @@ public class BasicDesktopIconUI extends DesktopIconUI {
      * Desktop icons can not be resized.  Therefore, we should always
      * return the minimum size of the desktop icon.
      *
+     * <p>
+     *  无法调整桌面图标。因此,我们应该总是返回桌面图标的最小大小。
+     * 
+     * 
      * @see #getMinimumSize
      */
     public Dimension getMaximumSize(JComponent c){
@@ -188,6 +201,9 @@ public class BasicDesktopIconUI extends DesktopIconUI {
      *
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicDesktopIconUI}.
+     * <p>
+     *  监听鼠标移动并对它们进行操作。
+     * 
      */
     public class MouseInputHandler extends MouseInputAdapter
     {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,8 @@ import com.sun.corba.se.impl.util.JDKBridge;
 import com.sun.corba.se.impl.logging.IORSystemException;
 
 /**
+/* <p>
+/* 
  * @author
  */
 public class IIOPProfileImpl extends IdentifiableBase implements IIOPProfile
@@ -278,6 +281,8 @@ public class IIOPProfileImpl extends IdentifiableBase implements IIOPProfile
     }
 
     /**
+    /* <p>
+    /* 
      * @return the ORBVersion associated with the object key in the IOR.
      */
     public ORBVersion getORBVersion() {
@@ -306,6 +311,9 @@ public class IIOPProfileImpl extends IdentifiableBase implements IIOPProfile
      * invocation.
      * XXX revisit: do we want this at all?  If we do, it might move to the
      * ObjectKeyTemplate instead.
+     * <p>
+     *  实现这个objref支持直接访问调用外的服务。 XXX revisit：我们想要这个吗?如果我们这样做,它可能会移动到ObjectKeyTemplate。
+     * 
      */
     public java.lang.Object getServant()
     {
@@ -338,6 +346,8 @@ public class IIOPProfileImpl extends IdentifiableBase implements IIOPProfile
      * Return GIOPVersion for this IOR.
      * Requests created against this IOR will be of the
      * return Version.
+     * <p>
+     *  返回此IOR的GIOP版本。针对此IOR创建的请求将为返回版本。
      */
     public synchronized GIOPVersion getGIOPVersion()
     {

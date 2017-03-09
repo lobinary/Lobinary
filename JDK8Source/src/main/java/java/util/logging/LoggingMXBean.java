@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,26 @@ package java.util.logging;
  * The instance registered in the platform {@code MBeanServer}
  * is also a {@link java.lang.management.PlatformLoggingMXBean}.
  *
+ * <p>
+ *  日志记录工具的管理界面。
+ * 建议使用{@link java.lang.management.PlatformLoggingMXBean}管理接口,该接口实现此{@code LoggingMXBean}中定义的所有属性。
+ *  {@link java.lang.management.ManagementFactory#getPlatformMXBean(Class)ManagementFactory.getPlatformMXBean}
+ * 方法可用于获取表示用于日志记录的管理界面的{@code PlatformLoggingMXBean}对象。
+ * 建议使用{@link java.lang.management.PlatformLoggingMXBean}管理接口,该接口实现此{@code LoggingMXBean}中定义的所有属性。
+ * 
+ *  <p> <tt> LoggingMXBean </tt>有一个全局实例。
+ * 此实例是{@link javax.management.MXBean MXBean},可以通过调用{@link LogManager#getLoggingMXBean}方法或从{@linkplain java.lang.management.ManagementFactory#getPlatformMBeanServer platform <tt> MBeanServer < / tt>}
+ * 。
+ *  <p> <tt> LoggingMXBean </tt>有一个全局实例。
+ * <p>
+ *  唯一标识用于在{@code MBeanServer}中进行日志记录的管理界面的{@link javax.management.ObjectName ObjectName}是：
+ * <pre>
+ *  {@link LogManager#LOGGING_MXBEAN_NAME java.util.logging：type = Logging}
+ * </pre>
+ * <p>
+ *  在平台{@code MBeanServer}中注册的实例也是一个{@link java.lang.management.PlatformLoggingMXBean}。
+ * 
+ * 
  * @author  Ron Mann
  * @author  Mandy Chung
  * @since   1.5
@@ -65,6 +86,10 @@ public interface LoggingMXBean {
      * calls {@link LogManager#getLoggerNames} and returns a list
      * of the logger names.
      *
+     * <p>
+     *  返回当前注册的记录器名称列表。此方法调用{@link LogManager#getLoggerNames}并返回记录器名称列表。
+     * 
+     * 
      * @return A list of <tt>String</tt> each of which is a
      *         currently registered <tt>Logger</tt> name.
      */
@@ -85,6 +110,16 @@ public interface LoggingMXBean {
      * which means that this logger's effective level is inherited
      * from its parent, an empty string will be returned.
      *
+     * <p>
+     * 获取与指定记录器关联的日志级别的名称。如果指定的记录器不存在,则返回<tt> null </tt>。此方法首先查找给定名称的记录器,然后通过调用返回日志级别的名称：
+     * <blockquote>
+     *  {@link Logger#getLevel Logger.getLevel()}。{@ link Level#getName getName()};
+     * </blockquote>
+     * 
+     * <p>
+     *  如果指定记录器的<tt> Level </tt>为<tt> null </tt>,表示此记录器的有效级别从其父级继承,则将返回一个空字符串。
+     * 
+     * 
      * @param loggerName The name of the <tt>Logger</tt> to be retrieved.
      *
      * @return The name of the log level of the specified logger; or
@@ -106,6 +141,8 @@ public interface LoggingMXBean {
      * the effective level of the logger is inherited from
      * its nearest ancestor with a specific (non-null) level value.
      *
+     * <p>
+     * 
      * @param loggerName The name of the <tt>Logger</tt> to be set.
      *                   Must be non-null.
      * @param levelName The name of the level to set on the specified logger,
@@ -128,6 +165,11 @@ public interface LoggingMXBean {
      * If the specified logger is the root <tt>Logger</tt> in the namespace,
      * the result will be an empty string.
      *
+     * <p>
+     *  将指定的记录器设置为指定的新级别。如果<tt> levelName </tt>不是<tt> null </tt>,则指定记录器的级别设置为匹配<tt> levelName </tt> 。
+     * 如果<tt> levelName </tt>为<tt> null </tt>,则指定记录器的级别设置为<tt> null </tt>,并且记录器的有效级别从其最近的祖先与特定(非空)级别值。
+     * 
+     * 
      * @param loggerName The name of a <tt>Logger</tt>.
      *
      * @return the name of the nearest existing parent logger;

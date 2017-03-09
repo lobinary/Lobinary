@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,11 @@ import java.util.function.LongFunction;
  * for collecting output from a {@link PipelineHelper} to a {@link Node} and
  * flattening {@link Node}s.
  *
+ * <p>
+ *  用于构造{@link Node}和{@link Node.Builder}及其原始特化的实现的工厂方法。
+ *  Fork / Join任务,用于从{@link PipelineHelper}到{@link Node}和展开{@link Node}的输出。
+ * 
+ * 
  * @since 1.8
  */
 final class Nodes {
@@ -57,6 +63,9 @@ final class Nodes {
 
     /**
      * The maximum size of an array that can be allocated.
+     * <p>
+     *  可分配的数组的最大大小。
+     * 
      */
     static final long MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
@@ -74,6 +83,10 @@ final class Nodes {
     /**
      * Produces an empty node whose count is zero, has no children and no content.
      *
+     * <p>
+     *  生成一个空节点,其计数为零,没有子节点,没有内容。
+     * 
+     * 
      * @param <T> the type of elements of the created node
      * @param shape the shape of the node to be created
      * @return an empty node.
@@ -101,6 +114,13 @@ final class Nodes {
      * <p>The result may be a concatenated node, the input sole node if the size
      * of the list is 1, or an empty node.
      *
+     * <p>
+     *  生成具有两个或多个子节点的连接{@link Node}。 <p>连接节点的计数等于每个子节点的计数总和。连接节点的遍历遍历子节点列表的遇到顺序中的每个子节点的内容。
+     * 拆分从连接节点获得的拆分器保留子节点列表的遭遇顺序。
+     * 
+     *  <p>结果可以是连接节点,如果列表的大小为1,则输入单独节点,或空节点。
+     * 
+     * 
      * @param <T> the type of elements of the concatenated node
      * @param shape the shape of the concatenated node to be created
      * @param left the left input node
@@ -132,6 +152,12 @@ final class Nodes {
      *
      * <p>The node will hold a reference to the array and will not make a copy.
      *
+     * <p>
+     *  生成描述数组的{@link Node}。
+     * 
+     *  <p>节点将保存对数组的引用,并且不会进行复制。
+     * 
+     * 
      * @param <T> the type of elements held by the node
      * @param array the array
      * @return a node holding an array
@@ -145,6 +171,12 @@ final class Nodes {
      * <p>
      * The node will hold a reference to the collection and will not make a copy.
      *
+     * <p>
+     *  产生描述{@link集合}的{@link Node}。
+     * <p>
+     *  该节点将保存对集合的引用,并且不会进行复制。
+     * 
+     * 
      * @param <T> the type of elements held by the node
      * @param c the collection
      * @return a node holding a collection
@@ -156,6 +188,10 @@ final class Nodes {
     /**
      * Produces a {@link Node.Builder}.
      *
+     * <p>
+     *  生成{@link Node.Builder}。
+     * 
+     * 
      * @param exactSizeIfKnown -1 if a variable size builder is requested,
      * otherwise the exact capacity desired.  A fixed capacity builder will
      * fail if the wrong number of elements are added to the builder.
@@ -172,6 +208,10 @@ final class Nodes {
     /**
      * Produces a variable size @{link Node.Builder}.
      *
+     * <p>
+     *  产生一个可变大小@ {link Node.Builder}。
+     * 
+     * 
      * @param <T> the type of elements of the node builder
      * @return a {@code Node.Builder}
      */
@@ -186,6 +226,12 @@ final class Nodes {
      *
      * <p>The node will hold a reference to the array and will not make a copy.
      *
+     * <p>
+     *  生成描述int []数组的{@link Node.OfInt}。
+     * 
+     *  <p>节点将保存对数组的引用,并且不会进行复制。
+     * 
+     * 
      * @param array the array
      * @return a node holding an array
      */
@@ -196,6 +242,10 @@ final class Nodes {
     /**
      * Produces a {@link Node.Builder.OfInt}.
      *
+     * <p>
+     * 生成{@link Node.Builder.OfInt}。
+     * 
+     * 
      * @param exactSizeIfKnown -1 if a variable size builder is requested,
      * otherwise the exact capacity desired.  A fixed capacity builder will
      * fail if the wrong number of elements are added to the builder.
@@ -210,6 +260,10 @@ final class Nodes {
     /**
      * Produces a variable size @{link Node.Builder.OfInt}.
      *
+     * <p>
+     *  产生一个可变大小@ {link Node.Builder.OfInt}。
+     * 
+     * 
      * @return a {@code Node.Builder.OfInt}
      */
     static Node.Builder.OfInt intBuilder() {
@@ -223,6 +277,12 @@ final class Nodes {
      * <p>
      * The node will hold a reference to the array and will not make a copy.
      *
+     * <p>
+     *  生成描述long []数组的{@link Node.OfLong}。
+     * <p>
+     *  该节点将保存对数组的引用,并且不会进行复制。
+     * 
+     * 
      * @param array the array
      * @return a node holding an array
      */
@@ -233,6 +293,10 @@ final class Nodes {
     /**
      * Produces a {@link Node.Builder.OfLong}.
      *
+     * <p>
+     *  产生{@link Node.Builder.OfLong}。
+     * 
+     * 
      * @param exactSizeIfKnown -1 if a variable size builder is requested,
      * otherwise the exact capacity desired.  A fixed capacity builder will
      * fail if the wrong number of elements are added to the builder.
@@ -247,6 +311,10 @@ final class Nodes {
     /**
      * Produces a variable size @{link Node.Builder.OfLong}.
      *
+     * <p>
+     *  产生一个可变大小@ {link Node.Builder.OfLong}。
+     * 
+     * 
      * @return a {@code Node.Builder.OfLong}
      */
     static Node.Builder.OfLong longBuilder() {
@@ -260,6 +328,12 @@ final class Nodes {
      *
      * <p>The node will hold a reference to the array and will not make a copy.
      *
+     * <p>
+     *  生成描述double []数组的{@link Node.OfDouble}。
+     * 
+     *  <p>节点将保存对数组的引用,并且不会进行复制。
+     * 
+     * 
      * @param array the array
      * @return a node holding an array
      */
@@ -270,6 +344,10 @@ final class Nodes {
     /**
      * Produces a {@link Node.Builder.OfDouble}.
      *
+     * <p>
+     *  产生{@link Node.Builder.OfDouble}。
+     * 
+     * 
      * @param exactSizeIfKnown -1 if a variable size builder is requested,
      * otherwise the exact capacity desired.  A fixed capacity builder will
      * fail if the wrong number of elements are added to the builder.
@@ -284,6 +362,10 @@ final class Nodes {
     /**
      * Produces a variable size @{link Node.Builder.OfDouble}.
      *
+     * <p>
+     *  产生一个可变大小@ {link Node.Builder.OfDouble}。
+     * 
+     * 
      * @return a {@code Node.Builder.OfDouble}
      */
     static Node.Builder.OfDouble doubleBuilder() {
@@ -307,6 +389,14 @@ final class Nodes {
      * of the computation. This conc-node can then be flattened in
      * parallel to produce a flat {@code Node} if desired.
      *
+     * <p>
+     *  并行地收集从流水线输出的元素,并用{@link Node}描述这些元素。
+     * 
+     *  @implSpec如果已知流水线的输出的确切大小,并且源{@link Spliterator}具有{@link Spliterator#SUBSIZED}特性,则将返回一个内容为数组的平面{@link Node}
+     * 因为大小是已知的,所以可以提前构造该阵列,并且可以通过正确偏移的叶任务同时将输出元素放入阵列中。
+     * 如果不知道确切的大小,输出元素被收集到其形状反映计算的形状的节点。然后,如果需要,这个节点可以平行平展以产生一个平面{@code节点}。
+     * 
+     * 
      * @param helper the pipeline helper describing the pipeline
      * @param flattenTree whether a conc node should be flattened into a node
      *                    describing an array before returning
@@ -345,6 +435,14 @@ final class Nodes {
      * of the computation. This conc-node can then be flattened in
      * parallel to produce a flat {@code Node.OfInt} if desired.
      *
+     * <p>
+     *  并行地收集从一个定值流水线输出的元素,并用{@link Node.OfInt}描述这些元素。
+     * 
+     * @implSpec如果已知流水线的输出的确切大小,并且源{@link Spliterator}具有{@link Spliterator#SUBSIZED}特性,则将返回一个内容为数组的平面{@link Node}
+     * 因为大小是已知的,所以可以提前构造该阵列,并且可以通过正确偏移的叶任务同时将输出元素放入阵列中。
+     * 如果不知道确切的大小,输出元素被收集到其形状反映计算的形状的节点。然后,如果需要,这个conc节点可以平行平展以产生一个平面{@code Node.OfInt}。
+     * 
+     * 
      * @param <P_IN> the type of elements from the source Spliterator
      * @param helper the pipeline helper describing the pipeline
      * @param flattenTree whether a conc node should be flattened into a node
@@ -383,6 +481,14 @@ final class Nodes {
      * of the computation. This conc-node can then be flattened in
      * parallel to produce a flat {@code Node.OfLong} if desired.
      *
+     * <p>
+     *  并行地收集从长值管道输出的元素,并用{@link Node.OfLong}描述这些元素。
+     * 
+     *  @implSpec如果已知流水线的输出的确切大小,并且源{@link Spliterator}具有{@link Spliterator#SUBSIZED}特性,则将返回一个内容为数组的平面{@link Node}
+     * 因为大小是已知的,所以可以提前构造该阵列,并且可以通过正确偏移的叶任务同时将输出元素放入阵列中。
+     * 如果不知道确切的大小,输出元素被收集到其形状反映计算的形状的节点。然后,如果需要,这个conc节点可以平行平展以产生一个平面{@code Node.OfLong}。
+     * 
+     * 
      * @param <P_IN> the type of elements from the source Spliterator
      * @param helper the pipeline helper describing the pipeline
      * @param flattenTree whether a conc node should be flattened into a node
@@ -421,6 +527,14 @@ final class Nodes {
      * of the computation. This conc-node can then be flattened in
      * parallel to produce a flat {@code Node.OfDouble} if desired.
      *
+     * <p>
+     *  并行地收集从n个双值流水线输出的元素,并用{@link Node.OfDouble}描述这些元素。
+     * 
+     * @implSpec如果已知流水线的输出的确切大小,并且源{@link Spliterator}具有{@link Spliterator#SUBSIZED}特性,则将返回一个内容为数组的平面{@link Node}
+     * 因为大小是已知的,所以可以提前构造该阵列,并且可以通过正确偏移的叶任务同时将输出元素放入阵列中。
+     * 如果不知道确切的大小,输出元素被收集到其形状反映计算的形状的节点。然后可以平行地将该节点平坦化以产生平坦的{@code Node.OfDouble}。
+     * 
+     * 
      * @param <P_IN> the type of elements from the source Spliterator
      * @param helper the pipeline helper describing the pipeline
      * @param flattenTree whether a conc node should be flattened into a node
@@ -456,6 +570,12 @@ final class Nodes {
      * and leaf node elements are placed in the array concurrently by leaf tasks
      * at the correct offsets.
      *
+     * <p>
+     *  平行地,一个{@link Node}。扁平节点是没有子节点的节点。如果节点已经平坦,则简单地返回。
+     * 
+     *  @implSpec如果要创建一个新节点,则生成器用于创建长度为{@link Node#count()}的数组。然后遍历节点树,并且叶子节点元素通过正确偏移处的叶子任务同时放置在数组中。
+     * 
+     * 
      * @param <T> type of elements contained by the node
      * @param node the node to flatten
      * @param generator the array factory used to create array instances
@@ -484,6 +604,12 @@ final class Nodes {
      * elements are placed in the array concurrently by leaf tasks at the
      * correct offsets.
      *
+     * <p>
+     *  平行,并行,{@link Node.OfInt}。扁平节点是没有子节点的节点。如果节点已经平坦,则简单地返回。
+     * 
+     *  @implSpec如果要创建一个新节点,将创建一个长度为{@link Node#count()}的新int []数组。然后遍历节点树,并且叶子节点元素通过正确偏移处的叶子任务同时放置在数组中。
+     * 
+     * 
      * @param node the node to flatten
      * @return a flat {@code Node.OfInt}
      */
@@ -510,6 +636,12 @@ final class Nodes {
      * elements are placed in the array concurrently by leaf tasks at the
      * correct offsets.
      *
+     * <p>
+     * 平行地,一个{@link Node.OfLong}。扁平节点是没有子节点的节点。如果节点已经平坦,则简单地返回。
+     * 
+     *  @implSpec如果要创建一个新节点,将创建一个长度为{@link Node#count()}的新long []数组。然后遍历节点树,并且叶子节点元素通过正确偏移处的叶子任务同时放置在数组中。
+     * 
+     * 
      * @param node the node to flatten
      * @return a flat {@code Node.OfLong}
      */
@@ -536,6 +668,12 @@ final class Nodes {
      * elements are placed in the array concurrently by leaf tasks at the
      * correct offsets.
      *
+     * <p>
+     *  平行地,一个{@link Node.OfDouble}。扁平节点是没有子节点的节点。如果节点已经平坦,则简单地返回。
+     * 
+     *  @implSpec如果要创建一个新节点,将创建一个长度为{@link Node#count()}的新double []数组。然后遍历节点树,并且叶子节点元素通过正确偏移处的叶子任务同时放置在数组中。
+     * 
+     * 
      * @param node the node to flatten
      * @return a flat {@code Node.OfDouble}
      */
@@ -741,6 +879,9 @@ final class Nodes {
 
     /**
      * Node class for an internal node with two or more children
+     * <p>
+     *  具有两个或多个子节点的内部节点的节点类
+     * 
      */
     private static abstract class AbstractConcNode<T, T_NODE extends Node<T>> implements Node<T> {
         protected final T_NODE left;
@@ -955,6 +1096,9 @@ final class Nodes {
         /**
          * Initiate a stack containing, in left-to-right order, the child nodes
          * covered by this spliterator
+         * <p>
+         *  启动一个堆栈,包含从左到右的顺序,这个spliterator覆盖的子节点
+         * 
          */
         @SuppressWarnings("unchecked")
         protected final Deque<N> initStack() {
@@ -969,6 +1113,9 @@ final class Nodes {
         /**
          * Depth first search, in left-to-right order, of the node tree, using
          * an explicit stack, to find the next non-empty leaf node.
+         * <p>
+         *  深度首先以从左到右的顺序搜索节点树,使用显式堆栈来查找下一个非空叶节点。
+         * 
          */
         @SuppressWarnings("unchecked")
         protected final N findNextLeafNode(Deque<N> stack) {
@@ -1190,6 +1337,9 @@ final class Nodes {
 
     /**
      * Fixed-sized builder class for reference nodes
+     * <p>
+     *  引用节点的固定大小的构建器类
+     * 
      */
     private static final class FixedNodeBuilder<T>
             extends ArrayNode<T>
@@ -1242,6 +1392,9 @@ final class Nodes {
 
     /**
      * Variable-sized builder class for reference nodes
+     * <p>
+     *  引用节点的可变大小的构建器类
+     * 
      */
     private static final class SpinedNodeBuilder<T>
             extends SpinedBuffer<T>
@@ -1817,6 +1970,8 @@ final class Nodes {
 
     /*
      * This and subclasses are not intended to be serializable
+     * <p>
+     *  这个和子类不是可序列化的
      */
     @SuppressWarnings("serial")
     private static abstract class SizedCollectorTask<P_IN, P_OUT, T_SINK extends Sink<P_OUT>,

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.models;
@@ -28,6 +38,12 @@ import com.sun.org.apache.xerces.internal.impl.dtd.models.CMStateSet;
  *
  * @xerces.internal
  *
+ * <p>
+ *  内容模型叶节点。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neil Graham, IBM
  */
 public class XSCMLeaf
@@ -42,6 +58,9 @@ public class XSCMLeaf
 
     /**
      * Identify the particle: for UPA checking
+     * <p>
+     *  识别粒子：用于UPA检查
+     * 
      */
     private int fParticleId = -1;
 
@@ -49,6 +68,8 @@ public class XSCMLeaf
      * Part of the algorithm to convert a regex directly to a DFA
      * numbers each leaf sequentially. If its -1, that means its an
      * epsilon node. Zero and greater are non-epsilon positions.
+     * <p>
+     *  将正则表达式直接转换为DFA的算法的一部分顺序地对每个叶进行编号。如果它的-1,这意味着它的一个epsilon节点。零和更大的是非ε位置。
      */
     private int fPosition = -1;
 

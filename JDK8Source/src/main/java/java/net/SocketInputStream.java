@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import sun.net.ConnectionResetException;
  * SocketInputStream. Note that this class should <b>NOT</b> be
  * public.
  *
+ * <p>
+ *  此流扩展FileInputStream以实现SocketInputStream。请注意,此类应<b>不</b>为公开。
+ * 
+ * 
  * @author      Jonathan Payne
  * @author      Arthur van Hoff
  */
@@ -55,6 +60,10 @@ class SocketInputStream extends FileInputStream
      * Creates a new SocketInputStream. Can only be called
      * by a Socket. This method needs to hang on to the owner Socket so
      * that the fd will not be closed.
+     * <p>
+     *  创建一个新的SocketInputStream。只能通过Socket调用。此方法需要挂起所有者Socket以使fd不会关闭。
+     * 
+     * 
      * @param impl the implemented socket input stream
      */
     SocketInputStream(AbstractPlainSocketImpl impl) throws IOException {
@@ -70,6 +79,12 @@ class SocketInputStream extends FileInputStream
      * The {@code getChannel} method of {@code SocketInputStream}
      * returns {@code null} since it is a socket based stream.</p>
      *
+     * <p>
+     *  返回与此文件输入流相关联的唯一{@link java.nio.channels.FileChannel FileChannel}对象。</p>
+     * 
+     *  {@code SocketInputStream}的{@code getChannel}方法返回{@code null},因为它是基于套接字的流。</p>
+     * 
+     * 
      * @return  the file channel associated with this file input stream
      *
      * @since 1.4
@@ -82,6 +97,10 @@ class SocketInputStream extends FileInputStream
     /**
      * Reads into an array of bytes at the specified offset using
      * the received socket primitive.
+     * <p>
+     *  使用接收的套接字基元读取指定偏移量的字节数组。
+     * 
+     * 
      * @param fd the FileDescriptor
      * @param b the buffer into which the data is read
      * @param off the start offset of the data
@@ -100,6 +119,10 @@ class SocketInputStream extends FileInputStream
     /**
      * Reads into an array of bytes at the specified offset using
      * the received socket primitive.
+     * <p>
+     *  使用接收的套接字基元读取指定偏移量的字节数组。
+     * 
+     * 
      * @param fd the FileDescriptor
      * @param b the buffer into which the data is read
      * @param off the start offset of the data
@@ -118,6 +141,10 @@ class SocketInputStream extends FileInputStream
 
     /**
      * Reads into a byte array data from the socket.
+     * <p>
+     *  从套接字读入字节数组数据。
+     * 
+     * 
      * @param b the buffer into which the data is read
      * @return the actual number of bytes read, -1 is
      *          returned when the end of the stream is reached.
@@ -130,6 +157,10 @@ class SocketInputStream extends FileInputStream
     /**
      * Reads into a byte array <i>b</i> at offset <i>off</i>,
      * <i>length</i> bytes of data.
+     * <p>
+     *  读取在偏移<i> off </i>,<i>长度</i>字节数据的字节数组</i>。
+     * 
+     * 
      * @param b the buffer into which the data is read
      * @param off the start offset of the data
      * @param length the maximum number of bytes read
@@ -180,6 +211,9 @@ class SocketInputStream extends FileInputStream
         /*
          * We receive a "connection reset" but there may be bytes still
          * buffered on the socket
+         * <p>
+         *  我们收到一个"连接复位",但可能有一些字节缓冲在套接字上
+         * 
          */
         if (gotReset) {
             impl.setConnectionResetPending();
@@ -198,6 +232,9 @@ class SocketInputStream extends FileInputStream
         /*
          * If we get here we are at EOF, the socket has been closed,
          * or the connection has been reset.
+         * <p>
+         *  如果我们到达这里,我们在EOF,套接字已经关闭,或者连接已经重置。
+         * 
          */
         if (impl.isClosedOrPending()) {
             throw new SocketException("Socket closed");
@@ -214,6 +251,9 @@ class SocketInputStream extends FileInputStream
 
     /**
      * Reads a single byte from the socket.
+     * <p>
+     *  从套接字读取单个字节。
+     * 
      */
     public int read() throws IOException {
         if (eof) {
@@ -229,6 +269,10 @@ class SocketInputStream extends FileInputStream
 
     /**
      * Skips n bytes of input.
+     * <p>
+     *  跳过n个字节的输入。
+     * 
+     * 
      * @param numbytes the number of bytes to skip
      * @return  the actual number of bytes skipped.
      * @exception IOException If an I/O error has occurred.
@@ -252,6 +296,10 @@ class SocketInputStream extends FileInputStream
 
     /**
      * Returns the number of bytes that can be read without blocking.
+     * <p>
+     *  返回可以无阻塞地读取的字节数。
+     * 
+     * 
      * @return the number of immediately available bytes
      */
     public int available() throws IOException {
@@ -260,6 +308,9 @@ class SocketInputStream extends FileInputStream
 
     /**
      * Closes the stream.
+     * <p>
+     *  关闭流。
+     * 
      */
     private boolean closing = false;
     public void close() throws IOException {
@@ -281,11 +332,16 @@ class SocketInputStream extends FileInputStream
 
     /**
      * Overrides finalize, the fd is closed by the Socket.
+     * <p>
+     *  覆盖finalize,fd由Socket关闭。
+     * 
      */
     protected void finalize() {}
 
     /**
      * Perform class load-time initializations.
+     * <p>
+     *  执行类装入时初始化。
      */
     private native static void init();
 }

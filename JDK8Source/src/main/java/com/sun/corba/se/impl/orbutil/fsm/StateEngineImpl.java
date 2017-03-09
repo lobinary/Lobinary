@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,9 @@ import com.sun.corba.se.impl.orbutil.fsm.GuardedAction ;
 /**
  * Encodes the state transition function for a finite state machine.
  *
+ * <p>
+ *  对有限状态机的状态转换函数进行编码。
+ * 
  * @author Ken Cavanaugh
  */
 public class StateEngineImpl implements StateEngine

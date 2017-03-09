@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ import java.util.function.LongConsumer;
  * sequential stream can be transformed into a parallel stream by calling the
  * {@code parallel()} method on the created stream.
  *
+ * <p>
+ *  用于操作和创建流的实用方法。
+ * 
+ *  <p>除非另有说明,否则流将创建为顺序流。通过在创建的流上调用{@code parallel()}方法,可以将顺序流转换为并行流。
+ * 
+ * 
  * @since 1.8
  */
 final class Streams {
@@ -52,11 +59,17 @@ final class Streams {
      * data element of a stream.  Used when processing streams that can contain
      * {@code null} elements to distinguish between a {@code null} value and no
      * value.
+     * <p>
+     *  不表示值的对象实例,不能是流的实际数据元素。用于处理可以包含{@code null}元素的流以区分{@code null}值和无值。
+     * 
      */
     static final Object NONE = new Object();
 
     /**
      * An {@code int} range spliterator.
+     * <p>
+     *  一个{@code int}范围拆分器。
+     * 
      */
     static final class RangeIntSpliterator implements Spliterator.OfInt {
         // Can never be greater that upTo, this avoids overflow if upper bound
@@ -158,12 +171,22 @@ final class Streams {
          * implemented as range of 0 to Integer.MAX_VALUE but is likely to be
          * augmented with a limit operation that limits the number of elements
          * to a count lower than this threshold.
+         * <p>
+         *  分裂器尺寸低于该值时,分裂器将在中点分裂以产生平衡分裂。高于此大小时,分割器将以1：(RIGHT_BALANCED_SPLIT_RATIO  -  1)的比率分割,以产生右平衡分割。
+         * 
+         *  这种分割确保对于非常大的范围,范围的左侧将更可能在比平衡树更低的深度处以该范围的右侧的更高深度为代价来处理。
+         * 
+         *  <p>这是针对诸如IntStream.ints()之类的实现为0到Integer.MAX_VALUE的范围的情况进行优化的,但是很可能会增加一个限制操作,限制元素的数量低于此阈值。
+         * 
          */
         private static final int BALANCED_SPLIT_THRESHOLD = 1 << 24;
 
         /**
          * The split ratio of the left and right split when the spliterator
          * size is above BALANCED_SPLIT_THRESHOLD.
+         * <p>
+         *  当分割器大小高于BALANCED_SPLIT_THRESHOLD时,左右分割的分割比。
+         * 
          */
         private static final int RIGHT_BALANCED_SPLIT_RATIO = 1 << 3;
 
@@ -181,6 +204,11 @@ final class Streams {
      *
      * This implementation cannot be used for ranges whose size is greater
      * than Long.MAX_VALUE
+     * <p>
+     *  一个{@code long}范围拆分器。
+     * 
+     * 此实现不能用于大小大于Long.MAX_VALUE的范围
+     * 
      */
     static final class RangeLongSpliterator implements Spliterator.OfLong {
         // Can never be greater that upTo, this avoids overflow if upper bound
@@ -282,12 +310,22 @@ final class Streams {
          * implemented as range of 0 to Long.MAX_VALUE but is likely to be
          * augmented with a limit operation that limits the number of elements
          * to a count lower than this threshold.
+         * <p>
+         *  分裂器尺寸低于该值时,分裂器将在中点分裂以产生平衡分裂。高于此大小时,分割器将以1：(RIGHT_BALANCED_SPLIT_RATIO  -  1)的比率分割,以产生右平衡分割。
+         * 
+         *  这种分割确保对于非常大的范围,范围的左侧将更可能在比平衡树更低的深度处以该范围的右侧的更高深度为代价来处理。
+         * 
+         *  <p>这是针对诸如LongStream.longs()之类的情况进行优化的,实现范围为0到Long.MAX_VALUE,但很可能会增加一个限制操作,限制元素数量低于此阈值。
+         * 
          */
         private static final long BALANCED_SPLIT_THRESHOLD = 1 << 24;
 
         /**
          * The split ratio of the left and right split when the spliterator
          * size is above BALANCED_SPLIT_THRESHOLD.
+         * <p>
+         *  当分割器大小高于BALANCED_SPLIT_THRESHOLD时,左右分割的分割比。
+         * 
          */
         private static final long RIGHT_BALANCED_SPLIT_RATIO = 1 << 3;
 
@@ -339,12 +377,19 @@ final class Streams {
 
         /**
          * Constructor for building a stream of 0 or more elements.
+         * <p>
+         *  用于构建0个或更多元素的流的构造函数。
+         * 
          */
         StreamBuilderImpl() { }
 
         /**
          * Constructor for a singleton stream.
          *
+         * <p>
+         *  单个流的构造函数。
+         * 
+         * 
          * @param t the single element
          */
         StreamBuilderImpl(T t) {
@@ -435,12 +480,19 @@ final class Streams {
 
         /**
          * Constructor for building a stream of 0 or more elements.
+         * <p>
+         *  用于构建0个或更多元素的流的构造函数。
+         * 
          */
         IntStreamBuilderImpl() { }
 
         /**
          * Constructor for a singleton stream.
          *
+         * <p>
+         *  单个流的构造函数。
+         * 
+         * 
          * @param t the single element
          */
         IntStreamBuilderImpl(int t) {
@@ -526,12 +578,19 @@ final class Streams {
 
         /**
          * Constructor for building a stream of 0 or more elements.
+         * <p>
+         *  用于构建0个或更多元素的流的构造函数。
+         * 
          */
         LongStreamBuilderImpl() { }
 
         /**
          * Constructor for a singleton stream.
          *
+         * <p>
+         *  单个流的构造函数。
+         * 
+         * 
          * @param t the single element
          */
         LongStreamBuilderImpl(long t) {
@@ -617,12 +676,19 @@ final class Streams {
 
         /**
          * Constructor for building a stream of 0 or more elements.
+         * <p>
+         *  用于构建0个或更多元素的流的构造函数。
+         * 
          */
         DoubleStreamBuilderImpl() { }
 
         /**
          * Constructor for a singleton stream.
          *
+         * <p>
+         *  单个流的构造函数。
+         * 
+         * 
          * @param t the single element
          */
         DoubleStreamBuilderImpl(double t) {
@@ -841,6 +907,9 @@ final class Streams {
      * Given two Runnables, return a Runnable that executes both in sequence,
      * even if the first throws an exception, and if both throw exceptions, add
      * any exceptions thrown by the second as suppressed exceptions of the first.
+     * <p>
+     *  给定两个Runnables,返回一个Runnable按顺序执行,即使第一个抛出异常,如果两个抛出异常,添加第二个作为抑制的异常抛出的第一个异常。
+     * 
      */
     static Runnable composeWithExceptions(Runnable a, Runnable b) {
         return new Runnable() {
@@ -870,6 +939,8 @@ final class Streams {
      * executes both of their {@link BaseStream#close} methods in sequence,
      * even if the first throws an exception, and if both throw exceptions, add
      * any exceptions thrown by the second as suppressed exceptions of the first.
+     * <p>
+     * 给定两个流,返回一个Runnable顺序执行它们的两个{@link BaseStream#close}方法,即使第一个抛出异常,如果两个抛出异常,添加第二个抛出的任何异常作为第一个。
      */
     static Runnable composedClose(BaseStream<?, ?> a, BaseStream<?, ?> b) {
         return new Runnable() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import java.util.*;
  * JTextComponent the view is contained in is editable. The min/pref/max
  * size is 0 when not visible.
  *
+ * <p>
+ *  EditableView将其包含的视图设置为仅当包含视图的JTextComponent是可编辑的时才可见。不可见时,min / pref / max大小为0。
+ * 
+ * 
  * @author  Scott Violet
  */
 class EditableView extends ComponentView {
@@ -89,6 +94,10 @@ class EditableView extends ComponentView {
          * after calling createComponent().   We therefore
          * use this flag in the paint() method to
          * setVisible() to true if required.
+         * <p>
+         *  注意：我们不能在createComponent()中调整组件的可见状态,即使它在调用布尔值的setParent()之后调用。
+         * 这是因为,超类中的setComponentParent()在调用createComponent()之后总是执行setVisible(false)。
+         * 因此,如果需要,我们使用paint()方法中的这个标志将setVisible()设置为true。
          */
         if (isVisible) {
             super.paint(g, allocation);
@@ -116,6 +125,9 @@ class EditableView extends ComponentView {
     }
 
     /**
+    /* <p>
+    /* 
+    /* 
      * @return true if the Component is visible.
      */
     public boolean isVisible() {
@@ -123,6 +135,8 @@ class EditableView extends ComponentView {
     }
 
     /** Set to true if the component is visible. This is based off the
+    /* <p>
+    /* 
      * editability of the container. */
     private boolean isVisible;
 } // End of EditableView

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,33 @@
  * Business Machines, Inc., http://www.apache.org.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)1999-2002 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得将"Xerces"和"Apache Software Foundation"名称用于支持或推广从本软件衍生的产品。如需书面许可,请联系apache@apache.org。
+ * 
+ *  未经Apache软件基金会事先书面许可,从本软件派生的产品可能不会被称为"Apache",也不可能出现在他们的名字中。
+ * 
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款,最初是基于软件版权(c)1999,国际商业机器公司,http://www.apache.org。
+ * 有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dtd.models;
@@ -68,6 +96,8 @@ import com.sun.org.apache.xerces.internal.xni.QName;
 
 /**
 
+/* <p>
+/* 
  * @version $Id: DFAContentModel.java,v 1.4 2010/08/06 23:49:43 joehw Exp $
  * DFAContentModel is the derivative of ContentModel that does
  * all of the non-trivial element content validation. This class does
@@ -121,12 +151,18 @@ public class DFAContentModel
      * each state's per-input symbol transition table entry. This is part
      * of the built DFA information that must be kept around to do the
      * actual validation.
+     * <p>
+     *  这是唯一输入符号元素到每个状态的每输入符号转换表条目的索引的映射。这是已构建的DFA信息的一部分,必须保留这些信息才能进行实际验证。
+     * 
      */
     private QName fElemMap[] = null;
 
     /**
      * This is a map of whether the element map contains information
      * related to ANY models.
+     * <p>
+     *  这是元素映射是否包含与ANY模型相关的信息的映射。
+     * 
      */
     private int fElemMapType[] = null;
 
@@ -139,6 +175,9 @@ public class DFAContentModel
     /**
      * The NFA position of the special EOC (end of content) node. This
      * is saved away since it's used during the DFA build.
+     * <p>
+     * 特殊EOC(内容结束)节点的NFA位置。由于它在DFA构建期间使用,因此已保存。
+     * 
      */
     private int fEOCPos = 0;
 
@@ -147,6 +186,9 @@ public class DFAContentModel
      * This is an array of booleans, one per state (there are
      * fTransTableSize states in the DFA) that indicates whether that
      * state is a final state.
+     * <p>
+     *  这是一个布尔数组,每个状态一个(在DFA中有fTransTableSize状态),指示该状态是否为最终状态。
+     * 
      */
     private boolean fFinalStateFlags[] = null;
 
@@ -154,6 +196,9 @@ public class DFAContentModel
      * The list of follow positions for each NFA position (i.e. for each
      * non-epsilon leaf node.) This is only used during the building of
      * the DFA, and is let go afterwards.
+     * <p>
+     *  每个NFA位置的跟随位置列表(即,对于每个非epsilon叶节点)。这仅在DFA的构建期间使用,并且随后放行。
+     * 
      */
     private CMStateSet fFollowList[] = null;
 
@@ -162,18 +207,27 @@ public class DFAContentModel
      * only non-null during the building of the DFA (just so that it
      * does not have to be passed all around.) Once the DFA is built,
      * this is no longer required so its nulled out.
+     * <p>
+     *  这是我们的中间表示的头节点。在DFA构建期间,它只是非null(只是为了不必将其全部传递)。构建DFA后,就不再需要这样做,因此将其置零。
+     * 
      */
     private CMNode fHeadNode = null;
 
     /**
      * The count of leaf nodes. This is an important number that set some
      * limits on the sizes of data structures in the DFA process.
+     * <p>
+     *  叶节点的计数。这是一个重要的数字,对DFA过程中的数据结构的大小设置了一些限制。
+     * 
      */
     private int fLeafCount = 0;
 
     /**
      * An array of non-epsilon leaf nodes, which is used during the DFA
      * build operation, then dropped.
+     * <p>
+     *  在DFA构建操作期间使用的非epsilon叶节点的数组,然后删除。
+     * 
      */
     private CMLeaf fLeafList[] = null;
 
@@ -185,6 +239,9 @@ public class DFAContentModel
     /**
      * The string pool of our parser session. This is set during construction
      * and kept around.
+     * <p>
+     *  我们的解析器会话的字符串池。这是在施工期间设置和保持周围。
+     * 
      */
     //private StringPool fStringPool = null;
 
@@ -199,12 +256,21 @@ public class DFAContentModel
      * <p>
      * The fElemMap array handles mapping from element indexes to
      * positions in the second dimension of the transition table.
+     * <p>
+     *  这是转换表,这是所有努力的主要副产品。它是一个int数组的数组。第一个维度是我们在DFA中结束的状态数。第二个维度是内容模型中的唯一元素的数量(fElemMapSize)。
+     * 第二维中的每个条目指示给定第一维的开始状态的输入的新状态。
+     * <p>
+     *  fElemMap数组处理从元素索引到转换表的第二维中的位置的映射。
+     * 
      */
     private int fTransTable[][] = null;
 
     /**
      * The number of valid entries in the transition table, and in the other
      * related tables such as fFinalStateFlags.
+     * <p>
+     * 转换表中的有效条目数,以及其他相关表(如fFinalStateFlags)中的有效条目数。
+     * 
      */
     private int fTransTableSize = 0;
 
@@ -214,6 +280,11 @@ public class DFAContentModel
      * all parts of the content model are optional. For example:
      * <pre>
      *      &lt;!ELEMENT AllOptional (Optional*,NotRequired?)&gt;
+     * </pre>
+     * <p>
+     *  标志,表示即使我们有一个"复杂"的内容模型,它是有效的没有内容。换句话说,内容模型的所有部分都是可选的。例如：
+     * <pre>
+     *  &lt;！ELEMENT AllOptional(Optional *,NotRequired?)&gt;
      * </pre>
      */
     private boolean fEmptyContentIsValid = false;
@@ -235,6 +306,10 @@ public class DFAContentModel
     /**
      * Constructs a DFA content model.
      *
+     * <p>
+     *  构造DFA内容模型。
+     * 
+     * 
      * @param syntaxTree    The syntax tree of the content model.
      * @param leafCount     The number of leaves.
      * @param mixed
@@ -275,6 +350,12 @@ public class DFAContentModel
      * zero, since some elements have the EMPTY content model and that must be
      * confirmed.
      *
+     * <p>
+     *  根据此内容模型检查指定的内容是否有效。这个方法也可以被调用来做内容模型的"what if"测试,以查看它们是否有效。
+     * <p>
+     *  children数组中的值-1表示PCDATA节点。所有其他索引将为正,并表示子元素。计数可以为零,因为一些元素具有EMPTY内容模型并且必须被确认。
+     * 
+     * 
      * @param children The children of this element.  Each integer is an index within
      *                 the <code>StringPool</code> of the child element name.  An index
      *                 of -1 is used to indicate an occurrence of non-whitespace character
@@ -423,6 +504,10 @@ public class DFAContentModel
     /**
      * Builds the internal DFA transition table from the given syntax tree.
      *
+     * <p>
+     *  根据给定的语法树构建内部DFA转换表。
+     * 
+     * 
      * @param syntaxTree The syntax tree.
      *
      * @exception CMException Thrown if DFA cannot be built.
@@ -468,6 +553,13 @@ public class DFAContentModel
          *
          * The modification drastically reduces computation time of
          * "(a, (b, a+, (c, (b, a+)+, a+, (d,  (c, (b, a+)+, a+)+, (b, a+)+, a+)+)+)+)+"
+         * <p>
+         *  使用以下规则。可空(x +)：= nullable(x),first(x +)：= first(x),last(x +)： x),last(x?)：= last(x)
+         * 
+         *  与x *相同的计算结果应用于x +
+         * 
+         *  修改大大减少了"(a,(b,a +),a +,(d,(c,(b,a +)+,a +)+,(b,a +) +,a +)+)+)+)+"
+         * 
          */
 
         fQName.setValues(null, fEOCString, fEOCString, null);
@@ -540,6 +632,11 @@ public class DFAContentModel
                     fLeafNameTypeVector = new ContentLeafNameTypeVector();
                 }
             }
+            /* <p>
+            /*  if((fLeafListType [outIndex]&0x0f)！= 0){if(fLeafNameTypeVector == null){fLeafNameTypeVector = new ContentLeafNameTypeVector(); }
+            /* }。
+            /* 
+            /* 
             /****/
 
             // Get the current leaf's element index
@@ -571,6 +668,13 @@ public class DFAContentModel
         * Optimization(Jan, 2001); We sort fLeafList according to
         * elemIndex which is *uniquely* associated to each leaf.
         * We are *assuming* that each element appears in at least one leaf.
+        * <p>
+        *  if(fLeafNameTypeVector！= null){fLeafNameTypeVector.setValues(fElemMap,fElemMapType,fElemMapSize); }}
+        * 。
+        * 
+        * / *** Optimization(Jan,2001);我们根据elemIndex对fLeafList进行排序,这是与每个叶子唯一关联的。我们*假设*每个元素出现在至少一个叶子。
+        * 
+        * 
         **/
 
         int[] fLeafSorter = new int[fLeafCount + fElemMapSize];
@@ -635,6 +739,9 @@ public class DFAContentModel
 
             /* Optimization(Jan, 2001); This is faster for
              * a large content model such as, "(t001+|t002+|.... |t500+)".
+             * <p>
+             *  诸如"(t001 + | t002 + | .... | t500 +)"的大内容模型。
+             * 
              */
 
         HashMap stateTable = new HashMap();
@@ -794,6 +901,10 @@ public class DFAContentModel
     /**
      * Calculates the follow list of the current node.
      *
+     * <p>
+     *  计算当前节点的跟随列表。
+     * 
+     * 
      * @param nodeCur The curent node.
      *
      * @exception CMException Thrown if follow list cannot be calculated.
@@ -861,6 +972,16 @@ public class DFAContentModel
         {
             throw new RuntimeException("ImplementationMessages.VAL_NIICM");
         }
+         /* <p>
+         /*  else if(nodeCur.type()== XMLContentSpec.CONTENTSPECNODE_ZERO_OR_MORE){// Recurse first calcFollowList(((CMUniOp)nodeCur).getChild());。
+         /* 
+         /*  // //现在处理我们的级别。我们使用我们自己的第一和最后一个位置//集,所以让他们前面。
+         /*  // final CMStateSet first = nodeCur.firstPos(); final CMStateSet last = nodeCur.lastPos();。
+         /* 
+         /*  // //对于我们最后一个位置集合中的每个位置,将我们的第一个位置状态的所有//添加到//位置的跟随集合。
+         /*  // for(int index = 0; index <fLeafCount; index ++){if(last.getBit(index))fFollowList [index] .union(first); }} else if((nodeCur.type()== XMLContentSpec.CONTENTSPECNODE_ONE_OR_MORE)||(nodeCur.type()== XMLContentSpec.CONTENTSPECNODE_ZERO_OR_ONE)){throw new RuntimeException("ImplementationMessages.VAL_NIICM"); }}。
+         /*  // //对于我们最后一个位置集合中的每个位置,将我们的第一个位置状态的所有//添加到//位置的跟随集合。
+         /* 
         /***/
          else if (nodeCur.type() == XMLContentSpec.CONTENTSPECNODE_ZERO_OR_MORE
             || nodeCur.type() == XMLContentSpec.CONTENTSPECNODE_ONE_OR_MORE)
@@ -897,6 +1018,9 @@ public class DFAContentModel
     /**
      * Dumps the tree of the current node to standard output.
      *
+     * <p>
+     * 
+     * 
      * @param nodeCur The current node.
      * @param level   The maximum levels to output.
      *
@@ -973,6 +1097,9 @@ public class DFAContentModel
      * -1 is used to represent bad transitions in the transition table
      * entry for each state. So each entry is initialized to an all -1
      * array. This method creates a new entry and initializes it.
+     * <p>
+     *  将当前节点的树转储到标准输出。
+     * 
      */
     private int[] makeDefStateList()
     {

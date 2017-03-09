@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -259,6 +263,94 @@ import java.util.stream.Stream;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  支持完全并发检索和更高的预期并发的哈希表。这个类遵守与{@link java.util.Hashtable}相同的功能规范,并包括与{@code Hashtable}的每个方法相对应的方法版本。
+ * 然而,即使所有操作都是线程安全的,检索操作不会</em>需要锁定,并且不支持以阻止所有访问的方式锁定整个表。
+ * 这个类在程序中与{@code Hashtable}是完全可互操作的,这些程序依赖于它的线程安全性,而不是它的同步细节。
+ * 
+ * <p>检索操作(包括{@code get})一般不会阻塞,因此可能与更新操作(包括{@code put}和{@code remove})重叠。检索结果反映了最近完成的</em>更新操作的结果。
+ *  (更正式地,给定密钥的更新操作承载与报告更新值的该密钥的任何(非空)检索之间的<em> happens-before </em>关系。
+ * )对于诸如{@code putAll }和{@code clear},并发检索可能反映只插入或删除一些条目。类似地,迭代器,拆分器和枚举返回反映在创建迭代器/枚举之后的某个点处的散列表的状态的元素。
+ * 他们</em>不会</em>抛出{@link java.util.ConcurrentModificationException ConcurrentModificationException}。
+ * 然而,迭代器被设计为一次仅由一个线程使用。
+ * 请注意,包括{@code size},{@code isEmpty}和{@code containsValue}的聚合状态方法的结果通常仅在地图未在其他线程中进行并发更新时有用。
+ * 否则,这些方法的结果反映了足以用于监视或估计目的的瞬态,而不是程序控制。
+ * 
+ * <p>当存在太多冲突(即,具有不同散列码但落入与表大小相同的同一时隙中的键)时,表被动态扩展,其中每个映射维持大致两个bin的预期平均效果(对应于用于调整大小的0.75负载系数阈值)。
+ * 由于映射被添加和删除,所以在该平均值周围可能有很大的变化,但是总体上,这保持了对于散列表的公认的时间/空间权衡。然而,调整此或任何其他种类的散列表的大小可以是相对较慢的操作。
+ * 如果可能,最好提供一个大小估计作为可选的{@code initialCapacity}构造函数参数。
+ * 另一个可选的{@code loadFactor}构造函数参数提供了另一种方法,通过指定用于计算为给定数量的元素分配的空间量而使用的表密度来自定义初始表容量。
+ * 此外,为了与此类的先前版本兼容,构造函数可以可选地指定期望的{@code concurrencyLevel}作为内部大小的附加提示。
+ * 注意,使用具有完全相同的{@code hashCode()}的许多键是减慢任何散列表的性能的确定方法。
+ * 为了改善影响,当键是{@link Comparable}时,此类可以使用键之间的比较顺序来帮助断开关系。
+ * 
+ * <p>可以创建ConcurrentHashMap的{@link Set}投影(使用{@link #newKeySet()}或{@link #newKeySet(int)}),或者使用{@link #keySet }
+ * 当只有键感兴趣,并且映射值(可能暂时)不使用或全部采用相同的映射值。
+ * 
+ *  <p>使用{@link java.util.concurrent.atomic.LongAdder}值并通过{@link #computeIfAbsent computeIfAbsent}初始化,可以
+ * 将ConcurrentHashMap用作可扩展频率图(直方图或多重集的一种形式)。
+ * 例如,要向{@code ConcurrentHashMap <String,LongAdder> freqs}添加计数,可以使用{@code freqs.computeIfAbsent(k-> new LongAdder())。
+ * increment。
+ * 
+ *  <p>此类及其视图和迭代器实现{@link Map}和{@link Iterator}接口的所有<em>可选</em>方法。
+ * 
+ *  <p>与{@link Hashtable}类似,但与{@link HashMap}不同,此类不会</em>允许{@code null}用作键或值。
+ * 
+ * <p> ConcurrentHashMaps支持一系列顺序和并行批量操作,与大多数{@link Stream}方法不同,它们被设计为安全且经常明智地应用即使是由其他线程同时更新的映射;例如,当计算共享注
+ * 册表中的值的快照摘要时。
+ * 有三种操作,每种具有四种形式,使用键,值,条目和(键,值)参数和/或返回值接受函数。
+ * 因为ConcurrentHashMap的元素不是以任何特定方式排序的,并且可以在不同的并行执行中以不同的顺序处理,所提供的函数的正确性不应该取决于任何顺序,或者取决于可以暂时改变的任何其他对象或值计算正
+ * 在进行;并且除了forEach动作之外,理想地应该是无副作用的。
+ * 有三种操作,每种具有四种形式,使用键,值,条目和(键,值)参数和/或返回值接受函数。 {@link java.util.Map.Entry}对象的批量操作不支持方法{@code setValue}。
+ * 
+ * <ul>
+ *  <li> forEach：对每个元素执行给定的操作。变体形式在执行操作之前对每个元素应用给定的变换。</li>
+ * 
+ *  <li> search：返回对每个元素应用给定函数的第一个可用非空结果;在找到结果时跳过进一步搜索。</li>
+ * 
+ *  <li> reduce：累积每个元素。提供的缩减函数不能依赖于排序(更正式地,它应该是关联和交换的)。有五个变体：
+ * 
+ * <ul>
+ * 
+ * <li>平滑缩小。 (由于没有相应的返回类型,(key,value)函数参数没有这种方法的形式。)</li>
+ * 
+ *  <li>映射的缩减,累积应用于每个元素的给定函数的结果。</li>
+ * 
+ *  <li>使用给定的基准值减少标量双精度,长整数和整数。</li>
+ * 
+ * </ul>
+ * </li>
+ * </ul>
+ * 
+ *  <p>这些批量操作接受{@code parallelismThreshold}参数。如果当前地图大小被估计为小于给定阈值,则方法继续进行。
+ * 使用{@code Long.MAX_VALUE}的值可抑制所有并行性。
+ * 使用{@code 1}的值通过划分足够的子任务来实现最大并行性,以充分利用用于所有并行计算的{@link ForkJoinPool#commonPool()}。
+ * 通常,您最初将选择这些极值中的一个,然后测量使用中间值的交换开销与吞吐量的性能。
+ * 
+ * <p>批量操作的并发属性遵循ConcurrentHashMap的并发属性：从{@code get(key)}返回的任何非null结果和相关的访问方法都与关联的插入或更新具有发生前的关系。
+ * 任何批量操作的结果反映了这些每个元素关系的组成(但不一定是关于整个映射的原子,除非它以某种方式已知是静止的)。相反,因为映射中的键和值从不为空,所以null用作当前缺少任何结果的可靠的原子指示符。
+ * 为了维护此属性,null用作所有非标量还原操作的隐式基础。对于double,long和int版本,基础应该是当与任何其他值组合时,返回其他值(更正式地,它应该是减少的标识元素)。
+ * 最常见的减少有这些属性;例如,计算基础0的或与基础MAX_VALUE的最小值。
+ * 
+ * <p>作为参数提供的搜索和转换函数应该类似地返回null以指示缺少任何结果(在这种情况下不使用它)。
+ * 在映射缩减的情况下,这还使得变换能够用作过滤器,如果元素不应该被组合,则返回null(或者在基本特化的情况下,基于身份)。
+ * 您可以通过在"null意味着现在没有什么"规则之前自己组合它们来创建复合变换和过滤,然后在搜索或减少操作中使用它们。
+ * 
+ *  <p>方法接受和/或返回条目参数维护键值关联。例如,当找到最大价值的关键字时,它们可能是有用的。
+ * 注意,可以使用{@code new AbstractMap.SimpleEntry(k,v)}提供"plain"Entry参数。
+ * 
+ *  <p>批量操作可能突然完成,抛出在提供的函数的应用程序中遇到的异常。记住当处理这样的异常,其他并发执行的函数也可能抛出异常,或者如果没有发生第一个异常,这样做。
+ * 
+ * <p>与顺序表格相比,并行的加速比较常见,但不能保证。如果并行计算的基本工作比计算本身昂贵,则涉及小地图上的简要功能的并行操作可以比顺序形式执行得更慢。
+ * 类似地,如果所有处理器都忙于执行无关的任务,并行化可能不会导致太多的实际并行性。
+ * 
+ *  <p>所有任务方法的所有参数必须为非空。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  * @param <K> the type of keys maintained by this map
@@ -497,6 +589,90 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * methods (with a few factorings of multiple public methods into
      * internal ones), then sizing methods, trees, traversers, and
      * bulk operations.
+     * <p>
+     *  概述：
+     * 
+     *  此散列表的主要设计目标是保持并发可读性(通常为方法get(),但也包括迭代器和相关方法),同时最小化更新争用。
+     * 次要目标是保持空间消耗大约与java.util.HashMap相同或更好,并支持许多线程对空表的高初始插入率。
+     * 
+     * 这个映射通常作为一个binned(bucketed)哈希表。每个键值映射都保存在一个节点中。大多数节点是基本的Node类的实例,具有hash,key,value和next字段。
+     * 但是,存在各种子类：TreeNodes布置在平衡树中,而不是列表中。 TreeBins保存TreeNodes集的根。在调整大小期间,转发节点放置在仓的前端。
+     *  ReservationNodes用作占位符,同时在computeIfAbent和相关方法中设置值。
+     * 类型TreeBin,ForwardingNode和ReservationNode不包含正常的用户键,值或哈希,并且在搜索等期间容易区分,因为它们具有负散列字段和空键和值字段。
+     *  (这些特殊节点是不常见或短暂的,所以携带一些未使用的字段的影响是微不足道的。)。
+     * 
+     *  在第一次插入时,表被懒惰地初始化为二次方的大小。表中的每个bin通常包含一个节点列表(通常,列表只有零个或一个Node)。表访问需要易失性/原子读取,写入和CAS。
+     * 因为没有其他方法来安排这一点,而不添加进一步的间接,我们使用内在函数(sun.misc.Unsafe)操作。
+     * 
+     *  我们使用Node哈希字段的顶部(符号)位作为控制目的 - 它由于寻址约束而可用。具有负散列字段的节点在映射方法中被特别处理或忽略。
+     * 
+     * 第一个节点在空仓中的插入(通过put或其变体)只是通过将其插入到仓中来执行。这是迄今为止在大多数键/散列分布下的put操作最常见的情况。其他更新操作(插入,删除和替换)需要锁。
+     * 我们不想浪费将不同的锁对象与每个bin相关联所需的空间,因此要使用bin列表本身的第一个节点作为锁。这些锁的锁定支持依赖于内置的"同步"监视器。
+     * 
+     *  使用列表的第一个节点作为锁本身并不足够：当一个节点被锁定时,任何更新必须首先验证它在锁定后仍然是第一个节点,如果没有,则重试。
+     * 因为新节点总是附加到列表,一旦节点首先在仓中,它首先保留,直到被删除或者仓变得无效(在调整大小时)。
+     * 
+     * 每个bin锁的主要缺点是对由相同锁保护的bin列表中的其他节点的其他更新操作可能会停止,例如,当用户equals()或映射函数需要很长时间时。然而,在统计学上,在随机散列码下,这不是常见的问题。
+     * 理想地,在调整大小阈值为0.75的情况下,箱中的节点的频率遵循泊松分布(http://en.wikipedia.org/wiki/Poisson_distribution),平均具有约0.5的参数,尽管
+     * 具有大的方差,因为调整粒度。
+     * 每个bin锁的主要缺点是对由相同锁保护的bin列表中的其他节点的其他更新操作可能会停止,例如,当用户equals()或映射函数需要很长时间时。然而,在统计学上,在随机散列码下,这不是常见的问题。
+     * 忽略方差,列表大小k的预期出现是(exp(-0.5)* pow(0.5,k)/ factorial(k))。第一个值是：。
+     * 
+     *  0：0.60653066 1：0.30326533 2：0.07581633 3：0.01263606 4：0.00157952 5：0.00015795 6：0.00001316 7：0.00000
+     * 094 8：0.00000006更多：少于1000万。
+     * 
+     *  锁定两个线程访问不同元素的争用概率在随机散列下大致为1 /(8 * #elements)。
+     * 
+     * 在实践中遇到的实际哈希码分布有时会偏离均匀随机性。这包括当N>(1 << 30)时的情况,因此一些键必须冲突。
+     * 类似地,对于其中多个密钥被设计为具有相同的散列码或仅在被屏蔽的高位上不同的密钥的愚钝或敌意用法。因此,我们使用第二策略,当仓中的节点数超过阈值时应用。
+     * 这些TreeBins使用平衡树来保存节点(特殊形式的红黑树),将搜索时间限制在O(log N)。
+     *  TreeBin中的每个搜索步骤至少是常规列表中的两倍,但是由于N不能超过(1 << 64)(在地址用尽之前),这将搜索步骤,锁定保持时间等限制到合理只要键是Comparable(这是非常常见的 - 字符串,长等),常量(大约100个节点检查每个操作最坏情况)。
+     * 这些TreeBins使用平衡树来保存节点(特殊形式的红黑树),将搜索时间限制在O(log N)。
+     *  TreeBin节点(TreeNodes)也保持相同的"下一个"遍历指针作为常规节点,因此可以以相同的方式遍历迭代器。
+     * 
+     * 当占用率超过百分比阈值(名义上,0.75,但见下文)时,该表被调整大小。任何线程注意到过满的bin可能有助于在启动线程分配和设置替换数组后调整大小。然而,这些其他线程不是停止,而是插入等。
+     * 使用TreeBin保护我们免受过度填充的最坏情况的影响,同时调整大小正在进行中。调整大小通过将bin逐个传递到下一个表来进行。
+     * 然而,线程在这样做之前要求小的索引块传输(通过字段transferIndex),从而减少争用。字段sizeCtl中的生成戳记确保重置不重叠。
+     * 因为我们使用两次幂扩展,来自每个bin的元素必须保持在相同的索引,或者以两个偏移的幂移动。我们通过捕获旧节点可以重用的情况来消除不必要的节点创建,因为它们的下一个字段不会改变。
+     * 平均而言,只有约六分之一的人需要克隆,而表格翻倍。它们替换的节点将是垃圾可收集的,只要它们不再被可能在同时遍历表中的任何读取器线程引用。
+     * 在转移时,旧表bin仅包含包含作为其关键字的下一个表的特殊转发节点(具有散列字段"MOVED")。遇到转发节点时,使用新表重新启动访问和更新操作。
+     * 
+     * 每个bin传输需要它的bin锁,在调整大小时可能会等待锁。但是,因为其他线程可以加入并帮助调整大小而不是争用锁,平均聚合等待随着调整大小进展而变短。
+     * 传输操作还必须确保旧表和新表中的所有可访问的容器都可以被任何遍历使用。这部分通过从最后一个bin(table.length-1)向上到第一个。
+     * 在看到转发节点时,遍历(参见类Traverser)安排移动到新表而不重新访问节点。
+     * 为了确保即使在移动时也不跳过中间节点,在遍历期间第一次遇到转发节点时创建堆栈(参见类TableStack),以便在稍后处理当前表时维持其位置。
+     * 对这些保存/恢复机制的需求相对较少,但是当遇到一个转发节点时,通常会有更多的转发节点。所以Traversers使用一个简单的缓存方案,以避免创建这么多新的TableStack节点。
+     *  (感谢Peter Levart建议在这里使用堆栈。)。
+     * 
+     *  遍历方案也适用于仓的范围的部分遍历(通过替代Traverser构造器)以支持分区聚合操作。此外,只读操作放弃,如果转发到一个空表,这提供了关闭式清除的支持,这也是目前没有实现。
+     * 
+     * 延迟表初始化最小化了第一次使用之前的占用空间,并且还避免了当第一个操作来自putAll,具有map参数的构造函数或反序列化时的重定位。这些情况试图覆盖初始容量设置,但是在比赛的情况下无害地失效。
+     * 
+     *  元素计数使用LongAdder的特殊化来维护。我们需要合并一个特殊化,而不仅仅使用一个LongAdder来访问隐式争用感应,导致创建多个CounterCells。
+     * 计数器机制避免对更新的争用,但如果在并发访问期间读取太频繁,可能会遇到缓存抖动。为了避免如此频繁地读取,只有在添加到已经拥有两个或更多节点的容器时,才尝试在争用下调整大小。
+     * 在均匀散列分布下,在阈值处发生的概率大约为13％,这意味着在8中只有大约1个放置检查阈值(并且在调整大小之后,这么少)。
+     * 
+     * TreeBins使用特殊的比较形式进行搜索和相关操作(这是我们不能使用现有集合(如TreeMaps)的主要原因)。
+     *  TreeBins包含可比较元素,但可能包含其他元素,以及可比较但不一定是可比较的元素,因此我们无法在它们之间调用compareTo。
+     * 为了处理这个,树主要由哈希值排序,然后由Comparable.compareTo顺序(如果适用)排序。在节点上查找时,如果元素不可比较或者比较为0,则在绑定哈希值的情况下可能需要搜索左和右孩子。
+     *  (这对应于如果所有元素都是不可比较的并且具有绑定的哈希值,那么将需要的完整列表搜索。
+     * )在插入时,为了保持在重新平衡中的总排序(或者在这里需要接近),我们比较类和identityHashCodes作为断路器。
+     * 红黑平衡代码从pre-jdk-collections(http://gee.cs.oswego.edu/dl/classes/collections/RBCell.java)更新,依次是Cormen,L
+     * eiserson和Rivest"Introduction to算法"(CLR)。
+     * )在插入时,为了保持在重新平衡中的总排序(或者在这里需要接近),我们比较类和identityHashCodes作为断路器。
+     * 
+     * TreeBins还需要一个额外的锁定机制。虽然列表遍历总是可能由读者甚至在更新期间,树遍历不是,主要是因为树旋转可能改变根节点和/或其链接。
+     *  TreeBins包括寄生在主bin同步策略上的简单的读写锁定机制：与插入或删除相关联的结构调整已经被bin锁定(因此不能与其他写入者冲突),但必须等待正在进行的读取器完成。
+     * 由于只有一个这样的服务员,我们使用一个简单的方案,使用单个"服务员"字段来阻止写者。但是,读者不需要阻止。
+     * 如果根锁定被保持,则它们沿着慢遍历路径(经由下一指针)继续,直到锁变得可用或者列表耗尽(以先到者为准)。这些情况不快,但最大化总预期吞吐量。
+     * 
+     *  维护API和序列化与此类的先前版本的兼容性引入了几个怪异。主要：我们保留未触及但未使用的构造函数参数引用并发级别。
+     * 我们接受一个loadFactor构造函数参数,但只应用于初始表容量(这是我们唯一可以保证尊重它的时间。)我们还声明一个未使用的"Segment"类,只有在序列化时才以最小的形式实例化。
+     * 
+     * 此外,仅仅为了与此类的先前版本的兼容性,它扩展了AbstractMap,即使它的所有方法被覆盖,所以它只是无用的行李。
+     * 
+     *  这个文件被组织起来,使事情在阅读时比他们可能更容易一些：首先是主静态声明和实用程序,然后字段,然后主要的公共方法(有几个因素的多个公共方法到内部),然后调整大小方法,树,遍历器和批量操作。
+     * 
      */
 
     /* ---------------- Constants -------------- */
@@ -507,24 +683,36 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * bounds for power of two table sizes, and is further required
      * because the top two bits of 32bit hash fields are used for
      * control purposes.
+     * <p>
+     *  最大可能的表容量。此值必须正好为1 << 30,以保持Java数组分配和两个表大小的幂的索引界限,并且进一步需要此值,因为32位散列字段的前两位用于控制目的。
+     * 
      */
     private static final int MAXIMUM_CAPACITY = 1 << 30;
 
     /**
      * The default initial table capacity.  Must be a power of 2
      * (i.e., at least 1) and at most MAXIMUM_CAPACITY.
+     * <p>
+     *  默认初始表容量。必须是2的幂(即,至少1),最多MAXIMUM_CAPACITY。
+     * 
      */
     private static final int DEFAULT_CAPACITY = 16;
 
     /**
      * The largest possible (non-power of two) array size.
      * Needed by toArray and related methods.
+     * <p>
+     *  最大可能(2的非幂)数组大小。需要由toArray和相关方法。
+     * 
      */
     static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
     /**
      * The default concurrency level for this table. Unused but
      * defined for compatibility with previous versions of this class.
+     * <p>
+     *  此表的默认并行级别。未使用但定义为与此类的先前版本的兼容性。
+     * 
      */
     private static final int DEFAULT_CONCURRENCY_LEVEL = 16;
 
@@ -534,6 +722,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * actual floating point value isn't normally used -- it is
      * simpler to use expressions such as {@code n - (n >>> 2)} for
      * the associated resizing threshold.
+     * <p>
+     *  此表的负载系数。在构造函数中覆盖此值仅影响初始表容量。实际的浮点值通常不被使用 - 对于相关的调整大小阈值使用诸如{@code n  - (n >>> 2)}的表达式更为简单。
+     * 
      */
     private static final float LOAD_FACTOR = 0.75f;
 
@@ -544,6 +735,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * than 2, and should be at least 8 to mesh with assumptions in
      * tree removal about conversion back to plain bins upon
      * shrinkage.
+     * <p>
+     * 使用树的bin计数阈值,而不是bin的列表。当将元素添加到具有至少这么多节点的仓中时,仓被转换为树。该值必须大于2,并且应该至少为8,以与树删除中的假设相关联,以关于在收缩时转换回平面仓。
+     * 
      */
     static final int TREEIFY_THRESHOLD = 8;
 
@@ -551,6 +745,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * The bin count threshold for untreeifying a (split) bin during a
      * resize operation. Should be less than TREEIFY_THRESHOLD, and at
      * most 6 to mesh with shrinkage detection under removal.
+     * <p>
+     *  用于在调整大小操作期间取消(拆分)bin的bin计数阈值。应小于TREEIFY_THRESHOLD,且最多6个网格与移除下的收缩检测。
+     * 
      */
     static final int UNTREEIFY_THRESHOLD = 6;
 
@@ -559,6 +756,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * (Otherwise the table is resized if too many nodes in a bin.)
      * The value should be at least 4 * TREEIFY_THRESHOLD to avoid
      * conflicts between resizing and treeification thresholds.
+     * <p>
+     *  容器的树最小的表容量。 (否则,如果bin中节点太多,则会调整表的大小。)值应至少为4 * TREEIFY_THRESHOLD,以避免调整大小和树化阈值之间的冲突。
+     * 
      */
     static final int MIN_TREEIFY_CAPACITY = 64;
 
@@ -568,28 +768,43 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * serves as a lower bound to avoid resizers encountering
      * excessive memory contention.  The value should be at least
      * DEFAULT_CAPACITY.
+     * <p>
+     *  每个传输步骤的最小重组次数。范围细分为允许多个resizer线程。此值用作下限,以避免重置器遇到过多的内存争用。该值至少应为DEFAULT_CAPACITY。
+     * 
      */
     private static final int MIN_TRANSFER_STRIDE = 16;
 
     /**
      * The number of bits used for generation stamp in sizeCtl.
      * Must be at least 6 for 32bit arrays.
+     * <p>
+     *  在sizeCtl中用于生成戳的位数。对于32位数组必须至少为6。
+     * 
      */
     private static int RESIZE_STAMP_BITS = 16;
 
     /**
      * The maximum number of threads that can help resize.
      * Must fit in 32 - RESIZE_STAMP_BITS bits.
+     * <p>
+     *  可以帮助调整大小的最大线程数。必须适合32  -  RESIZE_STAMP_BITS位。
+     * 
      */
     private static final int MAX_RESIZERS = (1 << (32 - RESIZE_STAMP_BITS)) - 1;
 
     /**
      * The bit shift for recording size stamp in sizeCtl.
+     * <p>
+     *  记录尺寸标记的位移位为sizeCtl。
+     * 
      */
     private static final int RESIZE_STAMP_SHIFT = 32 - RESIZE_STAMP_BITS;
 
     /*
      * Encodings for Node hash fields. See above for explanation.
+     * <p>
+     *  节点哈希字段的编码。见上面的解释。
+     * 
      */
     static final int MOVED     = -1; // hash for forwarding nodes
     static final int TREEBIN   = -2; // hash for roots of trees
@@ -615,6 +830,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * in bulk tasks.  Subclasses of Node with a negative hash field
      * are special, and contain null keys and values (but are never
      * exported).  Otherwise, keys and vals are never null.
+     * <p>
+     * 键值输入。该类永远不会作为用户可变的Map.Entry(即,支持setValue;请参见下面的MapEntry)导出,但可以用于批量任务中使用的只读遍历。
+     * 具有负散列字段的Node的子类是特殊的,并且包含空密钥和值(但不会导出)。否则,键和val永远不为空。
+     * 
      */
     static class Node<K,V> implements Map.Entry<K,V> {
         final int hash;
@@ -648,6 +867,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Virtualized support for map.get(); overridden in subclasses.
+         * <p>
+         *  map.get()的虚拟化支持;在子类中覆盖。
+         * 
          */
         Node<K,V> find(int h, Object k) {
             Node<K,V> e = this;
@@ -680,6 +902,13 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * cheapest possible way to reduce systematic lossage, as well as
      * to incorporate impact of the highest bits that would otherwise
      * never be used in index calculations because of table bounds.
+     * <p>
+     *  散布(XOR)将较高位的散列降低,并且也将顶部位强制为0.因为表使用二次幂屏蔽,所以只在当前掩码之上的位变化的散列的集合将总是冲突。 (在已知的示例中是在小表中保持连续整数的浮点键的集合。
+     * )因此,我们应用将较高位的影响向下扩展的变换。在速度,效用和比特扩展的质量之间存在权衡。
+     * 因为许多常见的哈希集合已经合理分布(所以不受益于扩展),并且因为我们使用树来处理bin中的大量冲突,我们只是以最便宜的方式对一些移位进行XOR以减少系统性损失,以及合并最高位的影响,否则由于表边界,其本
+     * 来不会用于索引计算中。
+     * )因此,我们应用将较高位的影响向下扩展的变换。在速度,效用和比特扩展的质量之间存在权衡。
+     * 
      */
     static final int spread(int h) {
         return (h ^ (h >>> 16)) & HASH_BITS;
@@ -688,6 +917,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Returns a power of two table size for the given desired capacity.
      * See Hackers Delight, sec 3.2
+     * <p>
+     *  返回给定所需容量的两个表大小的乘方。参见黑客喜悦,第3.2节
+     * 
      */
     private static final int tableSizeFor(int c) {
         int n = c - 1;
@@ -702,6 +934,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Returns x's Class if it is of the form "class C implements
      * Comparable<C>", else null.
+     * <p>
+     *  返回x的类,如果它的形式是"类C实现可比较<C>",否则为null。
+     * 
      */
     static Class<?> comparableClassFor(Object x) {
         if (x instanceof Comparable) {
@@ -725,6 +960,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Returns k.compareTo(x) if x matches kc (k's screened comparable
      * class), else 0.
+     * <p>
+     * 返回k.compareTo(x)如果x匹配kc(k的筛选的可比类),否则为0。
+     * 
      */
     @SuppressWarnings({"rawtypes","unchecked"}) // for cast to Comparable
     static int compareComparables(Class<?> kc, Object k, Object x) {
@@ -748,6 +986,12 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * and so in principle require only release ordering, not
      * full volatile semantics, but are currently coded as volatile
      * writes to be conservative.
+     * <p>
+     *  在调整大小时,挥发性访问方法用于表元素以及正在进行的下一个表的元素。选项卡参数的所有使用必须由调用者检查为空。
+     * 所有调用者也在paranoically预检查tab的长度不为零(或等效检查),从而确保任何索引参数采取哈希值形式与(length  -  1)是一个有效的索引。
+     * 注意,为了正确wrt用户的任意并发错误,这些检查必须对局部变量操作,这在下面考虑了一些奇怪的内联赋值。
+     * 请注意,对setTabAt的调用总是发生在锁定区域内,因此原则上只需要释放顺序,而不是完全易失性语义,但是当前被编码为易失性写入以保守。
+     * 
      */
 
     @SuppressWarnings("unchecked")
@@ -769,11 +1013,17 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * The array of bins. Lazily initialized upon first insertion.
      * Size is always a power of two. Accessed directly by iterators.
+     * <p>
+     *  仓的数组。在首次插入时进行初始化。尺寸总是二的幂。直接由迭代器访问。
+     * 
      */
     transient volatile Node<K,V>[] table;
 
     /**
      * The next table to use; non-null only while resizing.
+     * <p>
+     *  下一个表要使用;非null仅在调整大小时。
+     * 
      */
     private transient volatile Node<K,V>[] nextTable;
 
@@ -781,6 +1031,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Base counter value, used mainly when there is no contention,
      * but also as a fallback during table initialization
      * races. Updated via CAS.
+     * <p>
+     *  基本计数器值,主要用于没有争用时,也作为表初始化过程中的回退。通过CAS更新。
+     * 
      */
     private transient volatile long baseCount;
 
@@ -791,21 +1044,34 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * when table is null, holds the initial table size to use upon
      * creation, or 0 for default. After initialization, holds the
      * next element count value upon which to resize the table.
+     * <p>
+     * 表初始化和调整大小控制。当为负时,表正在初始化或调整大小：-1用于初始化,否则 - (1 +活动调整大小的线程数)。否则,当表为null时,保存创建时要使用的初始表大小,或默认值为0。
+     * 初始化后,保存要调整表格大小的下一个元素计数值。
+     * 
      */
     private transient volatile int sizeCtl;
 
     /**
      * The next table index (plus one) to split while resizing.
+     * <p>
+     *  下一个表索引(加一)在调整大小时拆分。
+     * 
      */
     private transient volatile int transferIndex;
 
     /**
      * Spinlock (locked via CAS) used when resizing and/or creating CounterCells.
+     * <p>
+     *  在调整和/或创建CounterCells时使用的锁定(通过CAS锁定)。
+     * 
      */
     private transient volatile int cellsBusy;
 
     /**
      * Table of counter cells. When non-null, size is a power of 2.
+     * <p>
+     *  计数器单元表。当非null时,size是2的幂。
+     * 
      */
     private transient volatile CounterCell[] counterCells;
 
@@ -819,6 +1085,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Creates a new, empty map with the default initial table size (16).
+     * <p>
+     *  创建具有默认初始表大小的新的空白地图(16)。
+     * 
      */
     public ConcurrentHashMap() {
     }
@@ -828,6 +1097,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * accommodating the specified number of elements without the need
      * to dynamically resize.
      *
+     * <p>
+     *  创建一个新的空白映射,初始表大小适应指定数量的元素,而不需要动态调整大小。
+     * 
+     * 
      * @param initialCapacity The implementation performs internal
      * sizing to accommodate this many elements.
      * @throws IllegalArgumentException if the initial capacity of
@@ -845,6 +1118,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Creates a new map with the same mappings as the given map.
      *
+     * <p>
+     *  创建与给定地图具有相同映射的新地图。
+     * 
+     * 
      * @param m the map
      */
     public ConcurrentHashMap(Map<? extends K, ? extends V> m) {
@@ -857,6 +1134,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * the given number of elements ({@code initialCapacity}) and
      * initial table density ({@code loadFactor}).
      *
+     * <p>
+     *  根据给定的元素数({@code initialCapacity})和初始表密度({@code loadFactor})创建一个带有初始表大小的新空白映射。
+     * 
+     * 
      * @param initialCapacity the initial capacity. The implementation
      * performs internal sizing to accommodate this many elements,
      * given the specified load factor.
@@ -877,6 +1158,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * density ({@code loadFactor}), and number of concurrently
      * updating threads ({@code concurrencyLevel}).
      *
+     * <p>
+     *  根据给定的元素数({@code initialCapacity}),表密度({@code loadFactor})和并发更新线程数({@code concurrencyLevel})创建一个带有初始表
+     * 大小的新空白映射。
+     * 
+     * 
      * @param initialCapacity the initial capacity. The implementation
      * performs internal sizing to accommodate this many elements,
      * given the specified load factor.
@@ -905,6 +1191,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public int size() {
         long n = sumCount();
@@ -915,6 +1204,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public boolean isEmpty() {
         return sumCount() <= 0L; // ignore transient negative values
@@ -929,6 +1221,13 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * then this method returns {@code v}; otherwise it returns
      * {@code null}.  (There can be at most one such mapping.)
      *
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回{@code null}。
+     * 
+     * 更正式地说,如果该映射包含从密钥{@code k}到值{@code v}(使得{@codekey.equals(k)})的映射,则该方法返回{@code v} ;否则返回{@code null}。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     * 
      * @throws NullPointerException if the specified key is null
      */
     public V get(Object key) {
@@ -954,6 +1253,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Tests if the specified object is a key in this table.
      *
+     * <p>
+     *  测试指定的对象是否为此表中的键。
+     * 
+     * 
      * @param  key possible key
      * @return {@code true} if and only if the specified object
      *         is a key in this table, as determined by the
@@ -969,6 +1272,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * specified value. Note: This method may require a full traversal
      * of the map, and is much slower than method {@code containsKey}.
      *
+     * <p>
+     *  如果此映射将一个或多个键映射到指定的值,则返回{@code true}。注意：此方法可能需要完全遍历地图,并且比方法{@code containsKey}慢得多。
+     * 
+     * 
      * @param value value whose presence in this map is to be tested
      * @return {@code true} if this map maps one or more keys to the
      *         specified value
@@ -996,6 +1303,12 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * <p>The value can be retrieved by calling the {@code get} method
      * with a key that is equal to the original key.
      *
+     * <p>
+     *  将指定的键映射到此表中的指定值。键和值都不能为空。
+     * 
+     *  <p>可以通过使用等于原始键的键调用{@code get}方法来检索该值。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param value value to be associated with the specified key
      * @return the previous value associated with {@code key}, or
@@ -1076,6 +1389,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * These mappings replace any mappings that this map had for any of the
      * keys currently in the specified map.
      *
+     * <p>
+     *  将指定映射中的所有映射复制到此映射。这些映射替换该映射对于当前在指定映射中的任何键的任何映射。
+     * 
+     * 
      * @param m mappings to be stored in this map
      */
     public void putAll(Map<? extends K, ? extends V> m) {
@@ -1088,6 +1405,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Removes the key (and its corresponding value) from this map.
      * This method does nothing if the key is not in the map.
      *
+     * <p>
+     *  从此地图中删除键(及其相应的值)。如果键不在地图中,此方法不执行任何操作。
+     * 
+     * 
      * @param  key the key that needs to be removed
      * @return the previous value associated with {@code key}, or
      *         {@code null} if there was no mapping for {@code key}
@@ -1101,6 +1422,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Implementation for the four public remove/replace methods:
      * Replaces node value with v, conditional upon match of cv if
      * non-null.  If resulting value is null, delete.
+     * <p>
+     *  四个公共删除/替换方法的实现：用v替换节点值,条件是如果非空则匹配cv。如果结果值为null,请删除。
+     * 
      */
     final V replaceNode(Object key, V value, Object cv) {
         int hash = spread(key.hashCode());
@@ -1175,6 +1499,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Removes all of the mappings from this map.
+     * <p>
+     *  从此地图中删除所有映射。
+     * 
      */
     public void clear() {
         long delta = 0L; // negative number of deletions
@@ -1224,6 +1551,18 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * <p>The view's {@code spliterator} reports {@link Spliterator#CONCURRENT},
      * {@link Spliterator#DISTINCT}, and {@link Spliterator#NONNULL}.
      *
+     * <p>
+     * 返回此地图中包含的键的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 集合支持元素删除,它通过{@code Iterator.remove},{@code Set.remove},{@code removeAll},{@code retainAll}和{@code clearAll}
+     * 从此地图中删除相应的映射}操作。
+     * 返回此地图中包含的键的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。它不支持{@code add}或{@code addAll}操作。
+     * 
+     *  <p>视图的迭代器和分隔符为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     *  <p>视图的{@code spliterator}报告{@link Spliterator#CONCURRENT},{@link Spliterator#DISTINCT}和{@link Spliterator#NONNULL}
+     * 。
+     * 
+     * 
      * @return the set view
      */
     public KeySetView<K,V> keySet() {
@@ -1247,6 +1586,17 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * <p>The view's {@code spliterator} reports {@link Spliterator#CONCURRENT}
      * and {@link Spliterator#NONNULL}.
      *
+     * <p>
+     *  返回此地图中包含的值的{@link Collection}视图。集合由地图支持,因此对地图的更改会反映在集合中,反之亦然。
+     * 集合支持元素删除,通过{@code Iterator.remove},{@code Collection.remove},{@code removeAll},{@code retainAll}和{@code clearAll}
+     * 从此地图中删除相应的映射}操作。
+     *  返回此地图中包含的值的{@link Collection}视图。集合由地图支持,因此对地图的更改会反映在集合中,反之亦然。它不支持{@code add}或{@code addAll}操作。
+     * 
+     *  <p>视图的迭代器和分隔符为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     *  <p>视图的{@code spliterator}报告{@link Spliterator#CONCURRENT}和{@link Spliterator#NONNULL}。
+     * 
+     * 
      * @return the collection view
      */
     public Collection<V> values() {
@@ -1269,6 +1619,18 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * <p>The view's {@code spliterator} reports {@link Spliterator#CONCURRENT},
      * {@link Spliterator#DISTINCT}, and {@link Spliterator#NONNULL}.
      *
+     * <p>
+     * 返回此地图中包含的映射的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 集合支持元素删除,通过{@code Iterator.remove},{@code Set.remove},{@code removeAll},{@code retainAll}和{@code clearAll}
+     * 删除地图中的相应映射}操作。
+     * 返回此地图中包含的映射的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 
+     *  <p>视图的迭代器和分隔符为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     *  <p>视图的{@code spliterator}报告{@link Spliterator#CONCURRENT},{@link Spliterator#DISTINCT}和{@link Spliterator#NONNULL}
+     * 。
+     * 
+     * 
      * @return the set view
      */
     public Set<Map.Entry<K,V>> entrySet() {
@@ -1281,6 +1643,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * the sum of, for each key-value pair in the map,
      * {@code key.hashCode() ^ value.hashCode()}.
      *
+     * <p>
+     *  返回此{@link Map}的哈希码值,即地图中每个键值对{@code key.hashCode()^ value.hashCode()}的和。
+     * 
+     * 
      * @return the hash code value for this map
      */
     public int hashCode() {
@@ -1303,6 +1669,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * followed by an equals sign ("{@code =}") followed by the
      * associated value.
      *
+     * <p>
+     *  返回此地图的字符串表示形式。字符串表示形式由括在大括号("{@code {}}")中的键值映射列表(无特定顺序)组成。相邻的映射由字符{@code","}(逗号和空格)分隔。
+     * 每个键值映射都呈现为键,后跟一个等号("{@code =}"),后跟相关联的值。
+     * 
+     * 
      * @return a string representation of this map
      */
     public String toString() {
@@ -1334,6 +1705,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * results if either map is concurrently modified during execution
      * of this method.
      *
+     * <p>
+     *  将指定的对象与此映射进行比较以实现相等性。如果给定对象是与此地图具有相同映射的地图,则返回{@code true}。如果在执行此方法期间同时修改任一映射,此操作可能返回误导结果。
+     * 
+     * 
      * @param o object to be compared for equality with this map
      * @return {@code true} if the specified object is equal to this map
      */
@@ -1366,6 +1741,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Stripped-down version of helper class used in previous version,
      * declared for the sake of serialization compatibility
+     * <p>
+     * 在之前的版本中使用的帮助类的剥离版本,为了序列化兼容性而声明
+     * 
      */
     static class Segment<K,V> extends ReentrantLock implements Serializable {
         private static final long serialVersionUID = 2249069246763182397L;
@@ -1376,6 +1754,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Saves the state of the {@code ConcurrentHashMap} instance to a
      * stream (i.e., serializes it).
+     * <p>
+     *  将{@code ConcurrentHashMap}实例的状态保存到流(即将其序列化)。
+     * 
+     * 
      * @param s the stream
      * @throws java.io.IOException if an I/O error occurs
      * @serialData
@@ -1420,6 +1802,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Reconstitutes the instance from a stream (that is, deserializes it).
+     * <p>
+     *  从流重构实例(即,反序列化它)。
+     * 
+     * 
      * @param s the stream
      * @throws ClassNotFoundException if the class of a serialized object
      *         could not be found
@@ -1433,6 +1819,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * However, we must also validate uniqueness and deal with
          * overpopulated bins while doing so, which requires
          * specialized versions of putVal mechanics.
+         * <p>
+         *  为了在典型情况下提高性能,我们在读取时创建节点,然后一旦知道大小就放入表中。然而,我们还必须验证唯一性和处理过多的垃圾桶,这样做,这需要专门版本的putVal力学。
+         * 
          */
         sizeCtl = -1; // force exclusion for table construction
         s.defaultReadObject();
@@ -1527,6 +1916,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @return the previous value associated with the specified key,
      *         or {@code null} if there was no mapping for the key
      * @throws NullPointerException if the specified key or value is null
@@ -1538,6 +1931,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException if the specified key is null
      */
     public boolean remove(Object key, Object value) {
@@ -1549,6 +1946,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException if any of the arguments are null
      */
     public boolean replace(K key, V oldValue, V newValue) {
@@ -1560,6 +1961,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @return the previous value associated with the specified key,
      *         or {@code null} if there was no mapping for the key
      * @throws NullPointerException if the specified key or value is null
@@ -1577,6 +1982,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * given default value if this map contains no mapping for the
      * key.
      *
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回给定的默认值。
+     * 
+     * 
      * @param key the key whose associated value is to be returned
      * @param defaultValue the value to return if this map contains
      * no mapping for the given key
@@ -1628,6 +2037,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * is in progress, so the computation should be short and simple,
      * and must not attempt to update any other mappings of this map.
      *
+     * <p>
+     *  如果指定的键尚未与某个值关联,则尝试使用给定的映射函数计算其值,并将其输入到此映射中,除非{@code null}。整个方法调用以原子方式执行,因此每个键最多应用一次函数。
+     * 在计算正在进行时,由其他线程在该映射上进行的一些尝试的更新操作可能被阻塞,因此计算应当简短且简单,并且不得尝试更新该映射的任何其他映射。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param mappingFunction the function to compute a value
      * @return the current (existing or computed) value associated with
@@ -1730,6 +2144,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * computation should be short and simple, and must not attempt to
      * update any other mappings of this map.
      *
+     * <p>
+     * 如果指定键的值存在,则尝试计算给定键及其当前映射值的新映射。整个方法调用以原子方式执行。
+     * 在计算正在进行时,由其他线程在该映射上进行的一些尝试的更新操作可能被阻塞,因此计算应当简短且简单,并且不得尝试更新该映射的任何其他映射。
+     * 
+     * 
      * @param key key with which a value may be associated
      * @param remappingFunction the function to compute a value
      * @return the new value associated with the specified key, or null if none
@@ -1820,6 +2239,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * computation should be short and simple, and must not attempt to
      * update any other mappings of this Map.
      *
+     * <p>
+     *  尝试计算指定键及其当前映射值的映射(如果没有当前映射,则为{@code null})。整个方法调用以原子方式执行。
+     * 在计算正在进行时,其他线程在该映射上的一些尝试更新操作可能被阻止,因此计算应当简短且简单,并且不得尝试更新此映射的任何其它映射。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param remappingFunction the function to compute a value
      * @return the new value associated with the specified key, or null if none
@@ -1948,6 +2372,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * short and simple, and must not attempt to update any other
      * mappings of this Map.
      *
+     * <p>
+     *  如果指定的键尚未与(非空)值关联,则将其与给定值相关联。否则,将该值替换为给定重映射函数的结果,或者删除{@code null}。整个方法调用以原子方式执行。
+     * 在计算正在进行时,其他线程在该映射上的一些尝试更新操作可能被阻止,因此计算应当简短且简单,并且不得尝试更新此映射的任何其它映射。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param value the value to use if absent
      * @param remappingFunction the function to recompute a value if present
@@ -2056,6 +2485,13 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * which supported this method prior to introduction of the
      * Java Collections framework.
      *
+     * <p>
+     * 传统方法测试某些键是否映射到此表中的指定值。
+     * 此方法在功能上与{@link #containsValue(Object)}完全相同,仅存在于与{{link} java.util.Hashtable类完全兼容,该类在引入Java Collection
+     * s框架之前支持此方法。
+     * 传统方法测试某些键是否映射到此表中的指定值。
+     * 
+     * 
      * @param  value a value to search for
      * @return {@code true} if and only if some key maps to the
      *         {@code value} argument in this table as
@@ -2070,6 +2506,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Returns an enumeration of the keys in this table.
      *
+     * <p>
+     *  返回此表中键的枚举。
+     * 
+     * 
      * @return an enumeration of the keys in this table
      * @see #keySet()
      */
@@ -2082,6 +2522,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Returns an enumeration of the values in this table.
      *
+     * <p>
+     *  返回此表中的值的枚举。
+     * 
+     * 
      * @return an enumeration of the values in this table
      * @see #values()
      */
@@ -2100,6 +2544,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * value returned is an estimate; the actual count may differ if
      * there are concurrent insertions or removals.
      *
+     * <p>
+     *  返回映射的数量。应该使用此方法而不是{@link #size},因为ConcurrentHashMap可能包含的映射比可以表示为int的映射更多。
+     * 返回的值是估计值;如果存在并发插入或删除,则实际计数可能不同。
+     * 
+     * 
      * @return the number of mappings
      * @since 1.8
      */
@@ -2112,6 +2561,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Creates a new {@link Set} backed by a ConcurrentHashMap
      * from the given type to {@code Boolean.TRUE}.
      *
+     * <p>
+     *  创建一个由ConcurrentHashMap支持的从给定类型到{@code Boolean.TRUE}的新{@link Set}。
+     * 
+     * 
      * @param <K> the element type of the returned set
      * @return the new set
      * @since 1.8
@@ -2125,6 +2578,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Creates a new {@link Set} backed by a ConcurrentHashMap
      * from the given type to {@code Boolean.TRUE}.
      *
+     * <p>
+     *  创建一个由ConcurrentHashMap支持的从给定类型到{@code Boolean.TRUE}的新{@link Set}。
+     * 
+     * 
      * @param initialCapacity The implementation performs internal
      * sizing to accommodate this many elements.
      * @param <K> the element type of the returned set
@@ -2145,6 +2602,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * This is of course only appropriate if it is acceptable to use
      * the same value for all additions from this view.
      *
+     * <p>
+     *  使用给定的公共映射值(即{@link Collection#add}和{@link Collection#addAll(Collection)})返回此地图中的键的{@link Set}视图。
+     * 这当然只是适当的,如果对于来自该视图的所有添加使用相同的值是可接受的。
+     * 
+     * 
      * @param mappedValue the mapped value to use for any additions
      * @return the set view
      * @throws NullPointerException if the mappedValue is null
@@ -2159,6 +2621,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * A node inserted at head of bins during transfer operations.
+     * <p>
+     *  在传送操作期间插入到仓的头部的节点。
+     * 
      */
     static final class ForwardingNode<K,V> extends Node<K,V> {
         final Node<K,V>[] nextTable;
@@ -2196,6 +2661,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * A place-holder node used in computeIfAbsent and compute
+     * <p>
+     *  在computeIfAbsent和compute中使用的占位符节点
+     * 
      */
     static final class ReservationNode<K,V> extends Node<K,V> {
         ReservationNode() {
@@ -2212,6 +2680,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Returns the stamp bits for resizing a table of size n.
      * Must be negative when shifted left by RESIZE_STAMP_SHIFT.
+     * <p>
+     *  返回用于调整大小为n的表的大小的戳位。向左移动RESIZE_STAMP_SHIFT时必须为负值。
+     * 
      */
     static final int resizeStamp(int n) {
         return Integer.numberOfLeadingZeros(n) | (1 << (RESIZE_STAMP_BITS - 1));
@@ -2219,6 +2690,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Initializes table, using the size recorded in sizeCtl.
+     * <p>
+     * 使用sizeCtl中记录的大小初始化表。
+     * 
      */
     private final Node<K,V>[] initTable() {
         Node<K,V>[] tab; int sc;
@@ -2250,6 +2724,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * after a transfer to see if another resize is already needed
      * because resizings are lagging additions.
      *
+     * <p>
+     *  添加到计数,如果表太小并且尚未调整大小,则启动传输。如果已经调整大小,如果有工作,帮助执行传输。在转移后重新检查占用情况,查看是否已需要另一个调整大小,因为调整是滞后的添加。
+     * 
+     * 
      * @param x the count to add
      * @param check if <0, don't check resize, if <= 1 only check if uncontended
      */
@@ -2293,6 +2771,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Helps transfer if a resize is in progress.
+     * <p>
+     *  如果调整大小正在进行,则帮助传输。
+     * 
      */
     final Node<K,V>[] helpTransfer(Node<K,V>[] tab, Node<K,V> f) {
         Node<K,V>[] nextTab; int sc;
@@ -2317,6 +2798,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Tries to presize table to accommodate the given number of elements.
      *
+     * <p>
+     *  尝试预定表以容纳给定数量的元素。
+     * 
+     * 
      * @param size number of elements (doesn't need to be perfectly accurate)
      */
     private final void tryPresize(int size) {
@@ -2363,6 +2848,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Moves and/or copies the nodes in each bin to new table. See
      * above for explanation.
+     * <p>
+     *  将每个bin中的节点移动和/或复制到新表。见上面的解释。
+     * 
      */
     private final void transfer(Node<K,V>[] tab, Node<K,V>[] nextTab) {
         int n = tab.length, stride;
@@ -2502,6 +2990,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * A padded cell for distributing counts.  Adapted from LongAdder
      * and Striped64.  See their internal docs for explanation.
+     * <p>
+     *  用于分配计数的填充单元。改编自LongAdder和Striped64。有关说明,请参阅其内部文档。
+     * 
      */
     @sun.misc.Contended static final class CounterCell {
         volatile long value;
@@ -2607,6 +3098,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Replaces all linked nodes in bin at given index unless table is
      * too small, in which case resizes instead.
+     * <p>
+     *  在给定索引处替换bin中的所有链接节点,除非表太小,在这种情况下调整大小。
+     * 
      */
     private final void treeifyBin(Node<K,V>[] tab, int index) {
         Node<K,V> b; int n, sc;
@@ -2636,6 +3130,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Returns a list on non-TreeNodes replacing those in given list.
+     * <p>
+     *  返回非TreeNodes上的列表,替换给定列表中的那些。
+     * 
      */
     static <K,V> Node<K,V> untreeify(Node<K,V> b) {
         Node<K,V> hd = null, tl = null;
@@ -2654,6 +3151,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Nodes for use in TreeBins
+     * <p>
+     *  用于TreeBins的节点
+     * 
      */
     static final class TreeNode<K,V> extends Node<K,V> {
         TreeNode<K,V> parent;  // red-black tree links
@@ -2675,6 +3175,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         /**
          * Returns the TreeNode (or null if not found) for the given key
          * starting at given root.
+         * <p>
+         *  返回从给定根开始的给定键的TreeNode(或者如果没有找到则为null)。
+         * 
          */
         final TreeNode<K,V> findTreeNode(int h, Object k, Class<?> kc) {
             if (k != null) {
@@ -2714,6 +3217,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * their root. They also maintain a parasitic read-write lock
      * forcing writers (who hold bin lock) to wait for readers (who do
      * not) to complete before tree restructuring operations.
+     * <p>
+     *  树节点使用的树节点。 TreeBins不包含用户键或值,而是指向TreeNode及其根的列表。它们还维护寄生读写锁,迫使写入器(持有bin锁)等待读取器(没有)在树重构操作之前完成。
+     * 
      */
     static final class TreeBin<K,V> extends Node<K,V> {
         TreeNode<K,V> root;
@@ -2731,6 +3237,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * order, just a consistent insertion rule to maintain
          * equivalence across rebalancings. Tie-breaking further than
          * necessary simplifies testing a bit.
+         * <p>
+         *  用于在相等的hashCode和不可比较时用于排序插入的连接实用程序。我们不需要总订单,只是一个一致的插入规则来保持重新平衡的等价性。连接断开比必要的简化了一点测试。
+         * 
          */
         static int tieBreakOrder(Object a, Object b) {
             int d;
@@ -2744,6 +3253,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Creates bin with initial set of nodes headed by b.
+         * <p>
+         * 创建以b为头的初始节点集合的bin。
+         * 
          */
         TreeBin(TreeNode<K,V> b) {
             super(TREEBIN, null, null, null);
@@ -2791,6 +3303,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Acquires write lock for tree restructuring.
+         * <p>
+         *  获取树重组的写锁定。
+         * 
          */
         private final void lockRoot() {
             if (!U.compareAndSwapInt(this, LOCKSTATE, 0, WRITER))
@@ -2799,6 +3314,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Releases write lock for tree restructuring.
+         * <p>
+         *  释放用于树重组的写锁定。
+         * 
          */
         private final void unlockRoot() {
             lockState = 0;
@@ -2806,6 +3324,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Possibly blocks awaiting root lock.
+         * <p>
+         *  可能阻止等待根锁定。
+         * 
          */
         private final void contendedLock() {
             boolean waiting = false;
@@ -2832,6 +3353,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * Returns matching node or null if none. Tries to search
          * using tree comparisons from root, but continues linear
          * search when lock not available.
+         * <p>
+         *  返回匹配节点或null(如果没有)。尝试使用树比较从根搜索,但在锁不可用时继续线性搜索。
+         * 
          */
         final Node<K,V> find(int h, Object k) {
             if (k != null) {
@@ -2864,6 +3388,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Finds or adds a node.
+         * <p>
+         *  查找或添加节点。
+         * 
+         * 
          * @return null if added
          */
         final TreeNode<K,V> putTreeVal(int h, K k, V v) {
@@ -2931,6 +3459,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * that are accessible independently of lock. So instead we
          * swap the tree linkages.
          *
+         * <p>
+         *  删除在此调用之前必须存在的给定节点。这比典型的红黑删除代码更杂乱,因为我们不能交换内部节点的内容与由后续指针锁定的叶后继,可以独立于锁访问。所以,我们互换树链接。
+         * 
+         * 
          * @return true if now too small, so should be untreeified
          */
         final boolean removeTreeNode(TreeNode<K,V> p) {
@@ -3217,6 +3749,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Recursive invariant check
+         * <p>
+         *  递归不变检查
+         * 
          */
         static <K,V> boolean checkInvariants(TreeNode<K,V> t) {
             TreeNode<K,V> tp = t.parent, tl = t.left, tr = t.right,
@@ -3260,6 +3795,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Records the table, its length, and current traversal index for a
      * traverser that must process a region of a forwarded table before
      * proceeding with current table.
+     * <p>
+     *  记录在继续当前表之前必须处理转发表的区域的运行程序的表,其长度和当前遍历索引。
+     * 
      */
     static final class TableStack<K,V> {
         int length;
@@ -3288,6 +3826,15 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * paranoically cope with potential sharing by users of iterators
      * across threads, iteration terminates if a bounds checks fails
      * for a table read.
+     * <p>
+     *  封装遍历方法,如containsValue;也用作其他迭代器和分裂器的基类。
+     * 
+     *  方法对迭代器构建时可达的每个仍然有效的节点提前访问。它可能会错过一些在bin被访问之后添加到bin,这是OK wrt一致性保证。
+     * 在面对可能持续调整大小的情况下维护此属性需要相当多的记帐状态,其难以在易失性访问中优化。即使如此,遍历仍保持合理的吞吐量。
+     * 
+     * 通常,迭代按照bin-by-bin遍历列表进行。但是,如果表已调整大小,则所有未来步骤必须遍历当前索引处的bin以及(index + baseSize);等等进一步调整。
+     * 为了以跨线程处理跨线程的迭代器的用户的潜在共享,如果对于表读取的边界检查失败,则迭代终止。
+     * 
      */
     static class Traverser<K,V> {
         Node<K,V>[] tab;        // current table; updated if resized
@@ -3308,6 +3855,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Advances if possible, returning next valid node, or null if none.
+         * <p>
+         *  如果可能,前进,返回下一个有效节点,如果没有,则返回null。
+         * 
          */
         final Node<K,V> advance() {
             Node<K,V> e;
@@ -3341,6 +3891,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Saves traversal state upon encountering a forwarding node.
+         * <p>
+         *  在遇到转发节点时保存遍历状态。
+         * 
          */
         private void pushState(Node<K,V>[] t, int i, int n) {
             TableStack<K,V> s = spare;  // reuse if possible
@@ -3358,6 +3911,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         /**
          * Possibly pops traversal state.
          *
+         * <p>
+         *  可能弹出遍历状态。
+         * 
+         * 
          * @param n length of current table
          */
         private void recoverState(int n) {
@@ -3380,6 +3937,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Base of key, value, and entry Iterators. Adds fields to
      * Traverser to support iterator.remove.
+     * <p>
+     *  键,值和入口的基础迭代器。向Traverser添加字段以支持iterator.remove。
+     * 
      */
     static class BaseIterator<K,V> extends Traverser<K,V> {
         final ConcurrentHashMap<K,V> map;
@@ -3464,6 +4024,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Exported Entry for EntryIterator
+     * <p>
+     *  EntryIterator的导出条目
+     * 
      */
     static final class MapEntry<K,V> implements Map.Entry<K,V> {
         final K key; // non-null
@@ -3495,6 +4058,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * "previous" value could be different from what we return (or
          * could even have been removed, in which case the put will
          * re-establish). We do not and cannot guarantee more.
+         * <p>
+         *  设置条目的值并写入地图。返回的值在这里有点武断。由于我们不一定跟踪异步更改,因此最近的"previous"值可能与我们返回的值不同(或者甚至可能已被删除,在这种情况下put将重新建立)。
+         * 我们不能,也不能保证更多。
+         * 
          */
         public V setValue(V value) {
             if (value == null) throw new NullPointerException();
@@ -3632,6 +4199,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * faster to compute and more convenient to use as a guide to
      * splitting than is the depth, since it is used while dividing by
      * two anyway.
+     * <p>
+     *  计算批量任务的初始批量值。在执行叶子操作之前,返回值大约为将任务拆分两次的次数exp2(减去1)。此值比计算深度更容易计算,更方便用作分割的指导,因为它被用于除以2。
+     * 
      */
     final int batchFor(long b) {
         long n;
@@ -3644,6 +4214,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Performs the given action for each (key, value).
      *
+     * <p>
+     *  对每个(键,值)执行给定的操作。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param action the action
@@ -3661,6 +4235,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Performs the given action for each non-null transformation
      * of each (key, value).
      *
+     * <p>
+     *  对每个(键,值)的每个非空变换执行给定的操作。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3687,6 +4265,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * results of any other parallel invocations of the search
      * function are ignored.
      *
+     * <p>
+     * 通过对每个(键,值)应用给定的搜索函数返回非空结果,如果没有,则返回null。成功时,抑制进一步的元素处理,并且忽略搜索函数的任何其他并行调用的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param searchFunction a function returning a non-null
@@ -3709,6 +4291,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all (key, value) pairs using the given reducer to
      * combine values, or null if none.
      *
+     * <p>
+     *  返回使用给定的reducer组合值来累积给定的所有(键,值)对的变换的结果,如果没有,则返回null。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3735,6 +4321,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all (key, value) pairs using the given reducer to
      * combine values, and the given basis as an identity value.
      *
+     * <p>
+     *  返回使用给定的reducer组合值和给定的基础作为标识值累积给定的所有(键,值)对的变换的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3761,6 +4351,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all (key, value) pairs using the given reducer to
      * combine values, and the given basis as an identity value.
      *
+     * <p>
+     *  返回使用给定的reducer组合值和给定的基础作为标识值累积给定的所有(键,值)对的变换的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3787,6 +4381,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all (key, value) pairs using the given reducer to
      * combine values, and the given basis as an identity value.
      *
+     * <p>
+     *  返回使用给定的reducer组合值和给定的基础作为标识值累积给定的所有(键,值)对的变换的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3811,6 +4409,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Performs the given action for each key.
      *
+     * <p>
+     *  对每个键执行给定的操作。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param action the action
@@ -3828,6 +4430,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Performs the given action for each non-null transformation
      * of each key.
      *
+     * <p>
+     *  对每个键的每个非空变换执行给定的操作。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3854,6 +4460,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * any other parallel invocations of the search function are
      * ignored.
      *
+     * <p>
+     *  通过对每个键应用给定的搜索函数返回非空结果,如果没有,则返回null。成功时,抑制进一步的元素处理,并且忽略搜索函数的任何其他并行调用的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param searchFunction a function returning a non-null
@@ -3875,6 +4485,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Returns the result of accumulating all keys using the given
      * reducer to combine values, or null if none.
      *
+     * <p>
+     *  返回累积所有键的结果,使用给定的reducer组合值,如果没有,则返回null。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param reducer a commutative associative combining function
@@ -3895,6 +4509,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all keys using the given reducer to combine values, or
      * null if none.
      *
+     * <p>
+     *  返回使用给定的reducer组合值来累积给定变换的结果,如果没有,则返回null。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3921,6 +4539,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all keys using the given reducer to combine values, and
      * the given basis as an identity value.
      *
+     * <p>
+     * 返回累加给定变换的结果,使用给定的reducer组合值,以及给定的基础作为标识值。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3947,6 +4569,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all keys using the given reducer to combine values, and
      * the given basis as an identity value.
      *
+     * <p>
+     *  返回累加给定变换的结果,使用给定的reducer组合值,以及给定的基础作为标识值。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3973,6 +4599,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all keys using the given reducer to combine values, and
      * the given basis as an identity value.
      *
+     * <p>
+     *  返回累加给定变换的结果,使用给定的reducer组合值,以及给定的基础作为标识值。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -3997,6 +4627,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Performs the given action for each value.
      *
+     * <p>
+     *  对每个值执行给定的操作。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param action the action
@@ -4015,6 +4649,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Performs the given action for each non-null transformation
      * of each value.
      *
+     * <p>
+     *  对每个值的每个非空变换执行给定的操作。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4041,6 +4679,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * any other parallel invocations of the search function are
      * ignored.
      *
+     * <p>
+     *  通过对每个值应用给定的搜索函数返回非空结果,如果没有,则返回null。成功时,抑制进一步的元素处理,并且忽略搜索函数的任何其他并行调用的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param searchFunction a function returning a non-null
@@ -4062,6 +4704,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Returns the result of accumulating all values using the
      * given reducer to combine values, or null if none.
      *
+     * <p>
+     *  返回累积所有值的结果,使用给定的reducer组合值,如果没有,则返回null。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param reducer a commutative associative combining function
@@ -4081,6 +4727,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all values using the given reducer to combine values, or
      * null if none.
      *
+     * <p>
+     *  返回使用给定的reducer组合值累积给定变换的结果,如果没有,则返回null。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4107,6 +4757,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all values using the given reducer to combine values,
      * and the given basis as an identity value.
      *
+     * <p>
+     *  返回使用给定的reducer组合值和给定的基础作为标识值累积给定变换的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4133,6 +4787,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all values using the given reducer to combine values,
      * and the given basis as an identity value.
      *
+     * <p>
+     *  返回使用给定的reducer组合值和给定的基础作为标识值累积给定变换的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4159,6 +4817,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all values using the given reducer to combine values,
      * and the given basis as an identity value.
      *
+     * <p>
+     * 返回使用给定的reducer组合值和给定的基础作为标识值累积给定变换的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4183,6 +4845,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Performs the given action for each entry.
      *
+     * <p>
+     *  对每个条目执行给定的操作。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param action the action
@@ -4199,6 +4865,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Performs the given action for each non-null transformation
      * of each entry.
      *
+     * <p>
+     *  对每个条目的每个非空变换执行给定的操作。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4225,6 +4895,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * any other parallel invocations of the search function are
      * ignored.
      *
+     * <p>
+     *  通过对每个条目应用给定的搜索函数返回非空结果,如果没有,则返回null。成功时,抑制进一步的元素处理,并且忽略搜索函数的任何其他并行调用的结果。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param searchFunction a function returning a non-null
@@ -4246,6 +4920,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * Returns the result of accumulating all entries using the
      * given reducer to combine values, or null if none.
      *
+     * <p>
+     *  返回使用给定的reducer组合值累积所有条目的结果,如果没有,则返回null。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param reducer a commutative associative combining function
@@ -4265,6 +4943,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all entries using the given reducer to combine values,
      * or null if none.
      *
+     * <p>
+     *  返回使用给定的reducer组合值累积给定变换的结果,如果没有,则返回null。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4291,6 +4973,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all entries using the given reducer to combine values,
      * and the given basis as an identity value.
      *
+     * <p>
+     *  返回累积给定变换的结果,使用给定的reducer组合值,并将给定的基础作为标识值。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4317,6 +5003,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all entries using the given reducer to combine values,
      * and the given basis as an identity value.
      *
+     * <p>
+     *  返回累积给定变换的结果,使用给定的reducer组合值,并将给定的基础作为标识值。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4343,6 +5033,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * of all entries using the given reducer to combine values,
      * and the given basis as an identity value.
      *
+     * <p>
+     *  返回累积给定变换的结果,使用给定的reducer组合值,并将给定的基础作为标识值。
+     * 
+     * 
      * @param parallelismThreshold the (estimated) number of elements
      * needed for this operation to be executed in parallel
      * @param transformer a function returning the transformation
@@ -4369,6 +5063,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Base class for views.
+     * <p>
+     *  视图的基类。
+     * 
      */
     abstract static class CollectionView<K,V,E>
         implements Collection<E>, java.io.Serializable {
@@ -4379,6 +5076,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         /**
          * Returns the map backing this view.
          *
+         * <p>
+         *  返回支持此视图的地图。
+         * 
+         * 
          * @return the map backing this view
          */
         public ConcurrentHashMap<K,V> getMap() { return map; }
@@ -4386,6 +5087,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         /**
          * Removes all of the elements from this view, by removing all
          * the mappings from the map backing this view.
+         * <p>
+         *  通过从支持此视图的映射中删除所有映射,从此视图中删除所有元素。
+         * 
          */
         public final void clear()      { map.clear(); }
         public final int size()        { return map.size(); }
@@ -4399,6 +5103,12 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * <p>The returned iterator is
          * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
          *
+         * <p>
+         *  在此集合中的元素上返回一个迭代器。
+         * 
+         * <p>返回的迭代器为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+         * 
+         * 
          * @return an iterator over the elements in this collection
          */
         public abstract Iterator<E> iterator();
@@ -4468,6 +5178,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * (comma and space).  Elements are converted to strings as by
          * {@link String#valueOf(Object)}.
          *
+         * <p>
+         *  返回此集合的字符串表示形式。字符串表示形式由集合的元素的字符串表示形式组成,它们由迭代器返回的顺序括在方括号({@code"[]"})中。相邻的元素由字符{@code","}(逗号和空格)分隔。
+         * 元素通过{@link String#valueOf(Object)}转换为字符串。
+         * 
+         * 
          * @return a string representation of this collection
          */
         public final String toString() {
@@ -4531,6 +5246,13 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * {@link #newKeySet() newKeySet()},
      * {@link #newKeySet(int) newKeySet(int)}.
      *
+     * <p>
+     *  作为{@link Set}键的ConcurrentHashMap视图,其中可以通过映射到公共值来可选地启用添加。此类不能直接实例化。
+     * 参见{@link #keySet()keySet()},{@link #keySet(Object)keySet(V)},{@link #newKeySet()newKeySet()},{@link #newKeySet(int)newKeySet )}
+     * 。
+     *  作为{@link Set}键的ConcurrentHashMap视图,其中可以通过映射到公共值来可选地启用添加。此类不能直接实例化。
+     * 
+     * 
      * @since 1.8
      */
     public static class KeySetView<K,V> extends CollectionView<K,V,K>
@@ -4546,6 +5268,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * Returns the default mapped value for additions,
          * or {@code null} if additions are not supported.
          *
+         * <p>
+         *  返回添加的默认映射值,如果不支持添加,则返回{@code null}。
+         * 
+         * 
          * @return the default mapped value for additions, or {@code null}
          * if not supported
          */
@@ -4553,6 +5279,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @throws NullPointerException if the specified key is null
          */
         public boolean contains(Object o) { return map.containsKey(o); }
@@ -4562,6 +5292,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * corresponding value) from the backing map.  This method does
          * nothing if the key is not in the map.
          *
+         * <p>
+         *  通过从背景图中删除键(及其相应的值),从此地图视图中删除键。如果键不在地图中,此方法不执行任何操作。
+         * 
+         * 
          * @param  o the key to be removed from the backing map
          * @return {@code true} if the backing map contained the specified key
          * @throws NullPointerException if the specified key is null
@@ -4569,6 +5303,8 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         public boolean remove(Object o) { return map.remove(o) != null; }
 
         /**
+        /* <p>
+        /* 
          * @return an iterator over the keys of the backing map
          */
         public Iterator<K> iterator() {
@@ -4582,6 +5318,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * Adds the specified key to this set view by mapping the key to
          * the default mapped value in the backing map, if defined.
          *
+         * <p>
+         *  通过将键映射到背景图中的默认映射值(如果已定义),将指定的键添加到此集合视图。
+         * 
+         * 
          * @param e key to be added
          * @return {@code true} if this set changed as a result of the call
          * @throws NullPointerException if the specified key is null
@@ -4599,6 +5339,10 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
          * Adds all of the elements in the specified collection to this set,
          * as if by calling {@link #add} on each one.
          *
+         * <p>
+         *  将指定集合中的所有元素添加到此集合,就像在每个元素上调用{@link #add}。
+         * 
+         * 
          * @param c the elements to be inserted into this set
          * @return {@code true} if this set changed as a result of the call
          * @throws NullPointerException if the collection or any of its
@@ -4655,6 +5399,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * A view of a ConcurrentHashMap as a {@link Collection} of
      * values, in which additions are disabled. This class cannot be
      * directly instantiated. See {@link #values()}.
+     * <p>
+     *  作为{@link Collection}值的ConcurrentHashMap视图,其中禁用添加。此类不能直接实例化。请参阅{@link #values()}。
+     * 
      */
     static final class ValuesView<K,V> extends CollectionView<K,V,V>
         implements Collection<V>, java.io.Serializable {
@@ -4713,6 +5460,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * A view of a ConcurrentHashMap as a {@link Set} of (key, value)
      * entries.  This class cannot be directly instantiated. See
      * {@link #entrySet()}.
+     * <p>
+     * ConcurrentHashMap作为{@link Set} of(键,值)条目的视图。此类不能直接实例化。请参阅{@link #entrySet()}。
+     * 
      */
     static final class EntrySetView<K,V> extends CollectionView<K,V,Map.Entry<K,V>>
         implements Set<Map.Entry<K,V>>, java.io.Serializable {
@@ -4737,6 +5487,8 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         }
 
         /**
+        /* <p>
+        /* 
          * @return an iterator over the entries of the backing map
          */
         public Iterator<Map.Entry<K,V>> iterator() {
@@ -4803,6 +5555,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /**
      * Base class for bulk tasks. Repeats some fields and code from
      * class Traverser, because we need to subclass CountedCompleter.
+     * <p>
+     *  批量任务的基类。重复来自类Traverser的一些字段和代码,因为我们需要将CountedCompleter子类化。
+     * 
      */
     @SuppressWarnings("serial")
     abstract static class BulkTask<K,V,R> extends CountedCompleter<R> {
@@ -4831,6 +5586,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
         /**
          * Same as Traverser version
+         * <p>
+         *  与Traverser版本相同
+         * 
          */
         final Node<K,V> advance() {
             Node<K,V> e;
@@ -4898,6 +5656,9 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      * others. The null screenings exist because compilers cannot tell
      * that we've already null-checked task arguments, so we force
      * simplest hoisted bypass to help avoid convoluted traps.
+     * <p>
+     *  任务类。以规则但丑陋的格式/样式编码,以简化检查每个变体在正确的方式与其他变体不同。
+     *  null筛选存在,因为编译器不能告诉我们已经null检查任务参数,所以我们强制最简单的提升绕过帮助避免复杂的陷阱。
      */
     @SuppressWarnings("serial")
     static final class ForEachKeyTask<K,V>

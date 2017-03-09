@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ import javax.swing.plaf.UIResource;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  JButton对象在一个基本方向上绘制缩放的箭头。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  */
 public class BasicArrowButton extends JButton implements SwingConstants
@@ -51,6 +59,12 @@ public class BasicArrowButton extends JButton implements SwingConstants
          * The direction of the arrow. One of
          * {@code SwingConstants.NORTH}, {@code SwingConstants.SOUTH},
          * {@code SwingConstants.EAST} or {@code SwingConstants.WEST}.
+         * <p>
+         *  箭头的方向。
+         *  {@code SwingConstants.NORTH},{@code SwingConstants.SOUTH},{@code SwingConstants.EAST}或{@code SwingConstants.WEST}
+         * 之一。
+         *  箭头的方向。
+         * 
          */
         protected int direction;
 
@@ -63,6 +77,10 @@ public class BasicArrowButton extends JButton implements SwingConstants
          * is drawn in the specified direction and with the specified
          * colors.
          *
+         * <p>
+         *  创建一个{@code BasicArrowButton},它的箭头是在指定的方向和指定的颜色绘制的。
+         * 
+         * 
          * @param direction the direction of the arrow; one of
          *        {@code SwingConstants.NORTH}, {@code SwingConstants.SOUTH},
          *        {@code SwingConstants.EAST} or {@code SwingConstants.WEST}
@@ -87,6 +105,10 @@ public class BasicArrowButton extends JButton implements SwingConstants
          * Creates a {@code BasicArrowButton} whose arrow
          * is drawn in the specified direction.
          *
+         * <p>
+         *  创建在指定方向上绘制箭头的{@code BasicArrowButton}。
+         * 
+         * 
          * @param direction the direction of the arrow; one of
          *        {@code SwingConstants.NORTH}, {@code SwingConstants.SOUTH},
          *        {@code SwingConstants.EAST} or {@code SwingConstants.WEST}
@@ -98,6 +120,9 @@ public class BasicArrowButton extends JButton implements SwingConstants
 
         /**
          * Returns the direction of the arrow.
+         * <p>
+         *  返回箭头的方向。
+         * 
          */
         public int getDirection() {
             return direction;
@@ -106,6 +131,10 @@ public class BasicArrowButton extends JButton implements SwingConstants
         /**
          * Sets the direction of the arrow.
          *
+         * <p>
+         *  设置箭头的方向。
+         * 
+         * 
          * @param direction the direction of the arrow; one of
          *        of {@code SwingConstants.NORTH},
          *        {@code SwingConstants.SOUTH},
@@ -180,6 +209,10 @@ public class BasicArrowButton extends JButton implements SwingConstants
         /**
          * Returns the preferred size of the {@code BasicArrowButton}.
          *
+         * <p>
+         *  返回{@code BasicArrowButton}的首选大小。
+         * 
+         * 
          * @return the preferred size
          */
         public Dimension getPreferredSize() {
@@ -189,6 +222,10 @@ public class BasicArrowButton extends JButton implements SwingConstants
         /**
          * Returns the minimum size of the {@code BasicArrowButton}.
          *
+         * <p>
+         *  返回{@code BasicArrowButton}的最小大小。
+         * 
+         * 
          * @return the minimum size
          */
         public Dimension getMinimumSize() {
@@ -198,6 +235,10 @@ public class BasicArrowButton extends JButton implements SwingConstants
         /**
          * Returns the maximum size of the {@code BasicArrowButton}.
          *
+         * <p>
+         *  返回{@code BasicArrowButton}的最大大小。
+         * 
+         * 
          * @return the maximum size
          */
         public Dimension getMaximumSize() {
@@ -211,6 +252,11 @@ public class BasicArrowButton extends JButton implements SwingConstants
          * {@code JComboBox}. Since the composite component typically gets the
          * focus, this method is overriden to return {@code false}.
          *
+         * <p>
+         * 返回箭头按钮是否应该获得焦点。 {@code BasicArrowButton}用作复合组件的子组件,例如{@code JScrollBar}和{@code JComboBox}。
+         * 由于复合组件通常获取焦点,此方法被覆盖以返回{@code false}。
+         * 
+         * 
          * @return {@code false}
          */
         public boolean isFocusTraversable() {
@@ -220,6 +266,8 @@ public class BasicArrowButton extends JButton implements SwingConstants
         /**
          * Paints a triangle.
          *
+         * <p>
+         * 
          * @param g the {@code Graphics} to draw to
          * @param x the x coordinate
          * @param y the y coordinate

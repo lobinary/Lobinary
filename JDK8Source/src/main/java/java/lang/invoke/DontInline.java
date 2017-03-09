@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,8 @@ import java.lang.annotation.*;
 
 /**
  * Internal marker for some methods in the JSR 292 implementation.
+ * <p>
+ *  JSR 292实现中的一些方法的内部标记。
  */
 /*non-public*/
 @Target({ElementType.METHOD, ElementType.CONSTRUCTOR})

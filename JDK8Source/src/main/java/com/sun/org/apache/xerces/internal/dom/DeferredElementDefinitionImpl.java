@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -31,6 +41,12 @@ import org.w3c.dom.Node;
  *
  * @xerces.internal
  *
+ * <p>
+ *  非DOM类：描述在此文档类型中定义的一个元素(及其关联的属性)。
+ * <p>
+ *  我把它包含在等级1中作为默认属性的锚点。在级别2它应该启用ChildRule支持。
+ * 
+ *  @ xerces.internal
  */
 public class DeferredElementDefinitionImpl
     extends ElementDefinitionImpl
@@ -57,6 +73,8 @@ public class DeferredElementDefinitionImpl
     /**
      * This is the deferred constructor. Only the fNodeIndex is given here.
      * All other data, can be requested from the ownerDocument via the index.
+     * <p>
+     * 
      */
     DeferredElementDefinitionImpl(DeferredDocumentImpl ownerDocument,
                                   int nodeIndex) {

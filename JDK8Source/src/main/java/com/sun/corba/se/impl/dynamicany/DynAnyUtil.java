@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -130,6 +131,10 @@ public class DynAnyUtil
         // Moved this functionality into AnyImpl because it is needed for Any.equal()
         return ((AnyImpl)any).extractAny(memberType, orb);
     }
+/* <p>
+/*  静态任何extractAnyFromAny(TypeCode memberType,Any any,ORB orb){//将此功能移动到AnyImpl中,因为它是Any.equal()所必需的return((AnyImpl)any).extractAny(memberType, }
+/* }。
+/* 
 */
 
     // Extracts a member value according to the given TypeCode from the given complex Any
@@ -276,6 +281,10 @@ public class DynAnyUtil
         }
         return value;
     }
+/* <p>
+/*  static任何setTypeOfAny(TypeCode typeCode,Any value){if(value！= null){value.read_value(value.create_input_stream(),typeCode); }
+/*  return value; }}。
+/* 
 */
     static Any copy(Any inAny, ORB orb) {
         return new AnyImpl(orb, inAny);
@@ -291,6 +300,9 @@ public class DynAnyUtil
         }
         return outAny;
     }
+/* <p>
+/*  static任何副本(任何inAny,ORB orb){任何outAny = null; if(inAny！= null && orb！= null){outAny = orb.create_any(); outAny.read_value(inAny.create_input_stream(),inAny.type()); // isInitialized设置为true}
+/*  return outAny; }}。
 */
 
     static DynAny convertToNative(DynAny dynAny, ORB orb) {

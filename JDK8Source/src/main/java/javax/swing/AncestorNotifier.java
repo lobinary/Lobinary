@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,8 @@ import java.io.Serializable;
 
 
 /**
+/* <p>
+/* 
  * @author Dave Moore
  */
 
@@ -71,6 +74,10 @@ class AncestorNotifier implements ComponentListener, PropertyChangeListener, Ser
      * notification on this event type.  The event instance
      * is lazily created using the parameters passed into
      * the fire method.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireAncestorAdded(JComponent source, int id, Container ancestor, Container ancestorParent) {
@@ -93,6 +100,10 @@ class AncestorNotifier implements ComponentListener, PropertyChangeListener, Ser
      * notification on this event type.  The event instance
      * is lazily created using the parameters passed into
      * the fire method.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireAncestorRemoved(JComponent source, int id, Container ancestor, Container ancestorParent) {
@@ -114,6 +125,9 @@ class AncestorNotifier implements ComponentListener, PropertyChangeListener, Ser
      * notification on this event type.  The event instance
      * is lazily created using the parameters passed into
      * the fire method.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
      * @see EventListenerList
      */
     protected void fireAncestorMoved(JComponent source, int id, Container ancestor, Container ancestorParent) {

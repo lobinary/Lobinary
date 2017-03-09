@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DescendantIterator.java,v 1.2.4.2 2005/09/14 19:45:21 jeffsuttor Exp $
+ * <p>
+ *  $ Id：DescendantIterator.java,v 1.2.4.2 2005/09/14 19:45:21 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -38,6 +51,10 @@ import org.w3c.dom.DOMException;
 /**
  * This class implements an optimized iterator for
  * descendant, descendant-or-self, or "//foo" patterns.
+ * <p>
+ *  这个类为子孙,后代或自身或"// foo"模式实现了一个优化的迭代器。
+ * 
+ * 
  * @see com.sun.org.apache.xpath.internal.axes.LocPathIterator
  * @xsl.usage advanced
  */
@@ -47,6 +64,10 @@ public class DescendantIterator extends LocPathIterator
   /**
    * Create a DescendantIterator object.
    *
+   * <p>
+   *  创建DescendantIterator对象。
+   * 
+   * 
    * @param compiler A reference to the Compiler that contains the op map.
    * @param opPos The position within the op map, which contains the
    * location path expression for this itterator.
@@ -131,6 +152,9 @@ public class DescendantIterator extends LocPathIterator
   /**
    * Create a DescendantIterator object.
    *
+   * <p>
+   *  创建DescendantIterator对象。
+   * 
    */
   public DescendantIterator()
   {
@@ -145,6 +169,10 @@ public class DescendantIterator extends LocPathIterator
    *  Get a cloned Iterator that is reset to the beginning
    *  of the query.
    *
+   * <p>
+   *  获取复位到查询开头的克隆迭代器。
+   * 
+   * 
    *  @return A cloned NodeIterator set of the start of the query.
    *
    *  @throws CloneNotSupportedException
@@ -165,6 +193,10 @@ public class DescendantIterator extends LocPathIterator
    * iterator in the set. After a NodeIterator is created, the first call
    * to nextNode() returns the first node in the set.
    *
+   * <p>
+   *  返回集合中的下一个节点,并推进迭代器在集合中的位置。创建NodeIterator之后,第一次调用nextNode()返回集合中的第一个节点。
+   * 
+   * 
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    *
@@ -258,6 +290,10 @@ public class DescendantIterator extends LocPathIterator
    * Initialize the context values for this expression
    * after it is cloned.
    *
+   * <p>
+   *  在克隆后,对此表达式的上下文值进行初始化。
+   * 
+   * 
    * @param context The XPath runtime context for this
    * transformation.
    */
@@ -290,6 +326,10 @@ public class DescendantIterator extends LocPathIterator
    * a nodeset expression.  This is the default implementation for
    * nodesets.
    * <p>WARNING: Do not mutate this class from this function!</p>
+   * <p>
+   *  如果此表达式是节点集表达式,则将第一个节点返回节点集。这是节点集的默认实现。 <p>警告：不要将此课程从此功能改变！</p>
+   * 
+   * 
    * @param xctxt The XPath runtime context.
    * @return the first node out of the nodeset, or DTM.NULL.
    */
@@ -332,6 +372,11 @@ public class DescendantIterator extends LocPathIterator
    * state. After<code>detach</code> has been invoked, calls to
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
+   * <p>
+   * 从迭代的集合中分离迭代器,释放任何计算资源并将迭代器置于INVALID状态。
+   * 调用<code> detach </code>后,调用<code> nextNode </code>或<code> previousNode </code>会引发异常INVALID_STATE_ERR。
+   * 从迭代的集合中分离迭代器,释放任何计算资源并将迭代器置于INVALID状态。
+   * 
    */
   public void detach()
   {
@@ -347,6 +392,8 @@ public class DescendantIterator extends LocPathIterator
   /**
    * Returns the axis being iterated, if it is known.
    *
+   * <p>
+   * 
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
@@ -366,6 +413,10 @@ public class DescendantIterator extends LocPathIterator
   protected int m_extendedTypeID;
 
   /**
+  /* <p>
+  /*  返回正在迭代的轴(如果已知)。
+  /* 
+  /* 
    * @see Expression#deepEquals(Expression)
    */
   public boolean deepEquals(Expression expr)

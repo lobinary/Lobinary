@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dv.dtd;
@@ -40,6 +50,13 @@ import com.sun.org.apache.xerces.internal.util.XMLChar;
  *
  * @xerces.internal
  *
+ * <p>
+ *  <P> IDDatatypeValidator  -  ID表示来自XML 1.0 Recommendation的ID属性类型。
+ * 值空间od ID是与NCName生产匹配且已在XML文档中使用的所有字符串的集合。 ID的词汇空间是与NCName生产匹配的所有字符串的集合。</P> <P> ID的值空间限定到特定实例文档。
+ * </P> <P>以下约束适用： ID不能在XML文档中多次出现作为此类型的值;即ID值必须唯一地标识承载它们的元素。
+ * 
+ *  @ xerces.internal
+ * 
  * @author Jeffrey Rodriguez, IBM
  * @author Sandy Gao, IBM
  *
@@ -54,6 +71,9 @@ public class IDDatatypeValidator implements DatatypeValidator {
      * Checks that "content" string is valid ID value.
      * If invalid a Datatype validation exception is thrown.
      *
+     * <p>
+     * 
+     * 
      * @param content       the string value that needs to be validated
      * @param context       the validation context
      * @throws InvalidDatatypeException if the content is

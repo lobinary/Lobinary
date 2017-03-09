@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import java.util.*;
  * A utility class to iterate over the path segments of an arc
  * through the PathIterator interface.
  *
+ * <p>
+ *  一个实用程序类,通过PathIterator接口对弧的路径段进行迭代。
+ * 
+ * 
  * @author      Jim Graham
  */
 class ArcIterator implements PathIterator {
@@ -84,6 +89,10 @@ class ArcIterator implements PathIterator {
     /**
      * Return the winding rule for determining the insideness of the
      * path.
+     * <p>
+     *  返回绕组规则以确定路径的隐藏性。
+     * 
+     * 
      * @see #WIND_EVEN_ODD
      * @see #WIND_NON_ZERO
      */
@@ -93,6 +102,10 @@ class ArcIterator implements PathIterator {
 
     /**
      * Tests if there are more points to read.
+     * <p>
+     *  测试是否有更多的要读取的点。
+     * 
+     * 
      * @return true if there are more points to read
      */
     public boolean isDone() {
@@ -103,6 +116,9 @@ class ArcIterator implements PathIterator {
      * Moves the iterator to the next segment of the path forwards
      * along the primary direction of traversal as long as there are
      * more points in that direction.
+     * <p>
+     *  只要在该方向上有更多的点,将迭代器沿着遍历的主要方向向前移动到路径的下一段。
+     * 
      */
     public void next() {
         index++;
@@ -184,6 +200,33 @@ class ArcIterator implements PathIterator {
      *     = sin(angb)^2 / sin(angb)*(1 + cos(angb)) =
      *     = sin(angb) / (1 + cos(angb))
      *
+     * <p>
+     *  btan计算在近似具有小于或等于90度的范围的弧的段的三次贝塞尔的开始和结束处的控制段的长度(k)。该长度(k)将用于为这样的段生成2个贝塞尔控制点。
+     * 
+     *  假设：a)弧以1.0为中心,半径为1.0 b)弧度小于90度c)控制点应保留切线d)控制段应具有相等的长度
+     * 
+     *  初始数据：起始角：ang1结束角：ang2 = ang1 +范围起点：P1 =(x1,y1)=(cos(ang1),sin(ang1))终点：P4 =(x4,y4)= (ang2),sin(ang2)
+     * )。
+     * 
+     *  控制点：P2 =(x2,y2)| x2 = x1-k * sin(ang1)= cos(ang1)-k * sin(ang1)| y2 = y1 + k * cos(ang1)= sin(ang1)+
+     *  k * cos(ang1)。
+     * 
+     *  P3 =(x3,y3)| x3 = x4 + k * sin(ang2)= cos(ang2)+ k * sin(ang2)| y3 = y4-k * cos(ang2)= sin(ang2)-k *
+     *  cos(ang2)。
+     * 
+     *  该长度(k)的公式可以使用以下推导找到：
+     * 
+     * 中点：a)bezier(t = 1/2)bPm = P1 *(1-t)^ 3 + 3 * P2 * t *(1-t)^ 2 + 3 * P3 * t ^ 2 * )+ P4 * t ^ 3 = =(P1
+     *  + 3P2 + 3P3 + P4)/ 8。
+     * 
+     *  b)arc aPm =(cos((ang1 + ang2)/ 2),sin((ang1 + ang2)/ 2))
+     * 
+     *  令angb =(ang2-ang1)/ 2; angb是ang1和ang2之间的角度的一半。
+     * 
+     *  求解方程bPm == aPm
+     * 
+     *  a)对于xm坐标：x1 + 3 * x2 + 3 * x3 + x4 = 8 * cos((ang1 + ang2)/ 2)
+     * 
      */
     private static double btan(double increment) {
         increment /= 2.0;
@@ -202,6 +245,21 @@ class ArcIterator implements PathIterator {
      * SEG_QUADTO will return two points,
      * SEG_CUBICTO will return 3 points
      * and SEG_CLOSE will not return any points.
+     * <p>
+     *  cos(ang1)+ 3 * cos(ang1)-3 * k * sin(ang1)+ 3 * cos(ang2)+ 3 * k * sin(ang2)+ cos ang2)/ 2)
+     * 
+     *  4×cos(ang1)+ 4×cos(ang2)+ 3×k×(sin(ang2)-sin(ang1))= 8×cos((ang1 + ang2)/ 2)
+     * 
+     *  8 * cos((ang1-ang1)/ 2)* cos((ang2-ang1)/ 2)+ 6 * k * = 8 * cos((ang1 + ang2)/ 2)
+     * 
+     *  4 * cos(angb)+ 3 * k * sin(angb)= 4
+     * 
+     *  k = 4/3 *(1-cos(angb))/ sin(angb)
+     * 
+     *  b)对于ym坐标,我们得到相同的公式。
+     * 
+     *  由于这个公式可以为小角度产生"NaN"值,我们将导出一个更安全的形式,它不涉及除以非常小的值：(1  -  cos(angb))/ sin(angb)= =(1  -  cos ))*(1 + cos
+     * 
      * @see #SEG_MOVETO
      * @see #SEG_LINETO
      * @see #SEG_QUADTO
@@ -262,6 +320,10 @@ class ArcIterator implements PathIterator {
      * SEG_QUADTO will return two points,
      * SEG_CUBICTO will return 3 points
      * and SEG_CLOSE will not return any points.
+     * <p>
+     * (angb))/ sin(angb)*(1 + cos(angb))= )= = sin(angb)^ 2 / sin(angb)*(1 + cos(angb))=。
+     * 
+     * 
      * @see #SEG_MOVETO
      * @see #SEG_LINETO
      * @see #SEG_QUADTO

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,8 @@ public abstract class StubConnectImpl
         CORBALogDomains.RMIIIOP ) ;
 
     /** Connect the stub to the orb if necessary.
+    /* <p>
+    /* 
     * @param ior The StubIORImpl for this stub (may be null)
     * @param proxy The externally visible stub seen by the user (may be the same as stub)
     * @param stub The stub implementation that extends ObjectImpl

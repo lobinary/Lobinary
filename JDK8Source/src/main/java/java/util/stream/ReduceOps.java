@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,10 @@ import java.util.function.Supplier;
  * Factory for creating instances of {@code TerminalOp} that implement
  * reductions.
  *
+ * <p>
+ *  用于创建实施缩减的{@code TerminalOp}实例的工厂。
+ * 
+ * 
  * @since 1.8
  */
 final class ReduceOps {
@@ -56,6 +61,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a functional reduce on
      * reference values.
      *
+     * <p>
+     *  构造一个{@code TerminalOp},实现对引用值的功能性减少。
+     * 
+     * 
      * @param <T> the type of the input elements
      * @param <U> the type of the result
      * @param seed the identity element for the reduction
@@ -97,6 +106,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a functional reduce on
      * reference values producing an optional reference result.
      *
+     * <p>
+     *  构造{@code TerminalOp},实现对引用值的函数reduce,生成可选的引用结果。
+     * 
+     * 
      * @param <T> The type of the input elements, and the type of the result
      * @param operator The reducing function
      * @return A {@code TerminalOp} implementing the reduction
@@ -147,6 +160,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a mutable reduce on
      * reference values.
      *
+     * <p>
+     *  构造一个{@code TerminalOp},实现对引用值的可变减少。
+     * 
+     * 
      * @param <T> the type of the input elements
      * @param <I> the type of the intermediate reduction result
      * @param collector a {@code Collector} defining the reduction
@@ -193,6 +210,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a mutable reduce on
      * reference values.
      *
+     * <p>
+     *  构造一个{@code TerminalOp},实现对引用值的可变减少。
+     * 
+     * 
      * @param <T> the type of the input elements
      * @param <R> the type of the result
      * @param seedFactory a factory to produce a new base accumulator
@@ -237,6 +258,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a functional reduce on
      * {@code int} values.
      *
+     * <p>
+     *  构造一个{@code TerminalOp},实现{@code int}值的函数reduce。
+     * 
+     * 
      * @param identity the identity for the combining function
      * @param operator the combining function
      * @return a {@code TerminalOp} implementing the reduction
@@ -280,6 +305,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a functional reduce on
      * {@code int} values, producing an optional integer result.
      *
+     * <p>
+     *  构造{@code TerminalOp},实现对{@code int}值的功能reduce,产生可选的整数结果。
+     * 
+     * 
      * @param operator the combining function
      * @return a {@code TerminalOp} implementing the reduction
      */
@@ -330,6 +359,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a mutable reduce on
      * {@code int} values.
      *
+     * <p>
+     *  构造一个{@code TerminalOp},实现对{@code int}值的可变减少。
+     * 
+     * 
      * @param <R> The type of the result
      * @param supplier a factory to produce a new accumulator of the result type
      * @param accumulator a function to incorporate an int into an
@@ -373,6 +406,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a functional reduce on
      * {@code long} values.
      *
+     * <p>
+     *  构造一个{@code TerminalOp},对{@code long}值实现功能性减少。
+     * 
+     * 
      * @param identity the identity for the combining function
      * @param operator the combining function
      * @return a {@code TerminalOp} implementing the reduction
@@ -416,6 +453,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a functional reduce on
      * {@code long} values, producing an optional long result.
      *
+     * <p>
+     *  构造{@code TerminalOp},对{@code long}值实现函数reduce,生成可选的长结果。
+     * 
+     * 
      * @param operator the combining function
      * @return a {@code TerminalOp} implementing the reduction
      */
@@ -466,6 +507,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a mutable reduce on
      * {@code long} values.
      *
+     * <p>
+     *  构造{@code TerminalOp},对{@code long}值实现可变减少。
+     * 
+     * 
      * @param <R> the type of the result
      * @param supplier a factory to produce a new accumulator of the result type
      * @param accumulator a function to incorporate an int into an
@@ -509,6 +554,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a functional reduce on
      * {@code double} values.
      *
+     * <p>
+     *  构造一个{@code TerminalOp},实现对{@code double}值的功能性减少。
+     * 
+     * 
      * @param identity the identity for the combining function
      * @param operator the combining function
      * @return a {@code TerminalOp} implementing the reduction
@@ -552,6 +601,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a functional reduce on
      * {@code double} values, producing an optional double result.
      *
+     * <p>
+     *  构造{@code TerminalOp},对{@code double}值实现函数reduce,生成可选的双精度结果。
+     * 
+     * 
      * @param operator the combining function
      * @return a {@code TerminalOp} implementing the reduction
      */
@@ -602,6 +655,10 @@ final class ReduceOps {
      * Constructs a {@code TerminalOp} that implements a mutable reduce on
      * {@code double} values.
      *
+     * <p>
+     * 构造一个{@code TerminalOp},实现对{@code double}值的可变减少。
+     * 
+     * 
      * @param <R> the type of the result
      * @param supplier a factory to produce a new accumulator of the result type
      * @param accumulator a function to incorporate an int into an
@@ -646,6 +703,10 @@ final class ReduceOps {
      * operation on elements of type {@code T} and producing a result of type
      * {@code R}.
      *
+     * <p>
+     *  一种{@code TerminalSink}类型,对类型为{@code T}的元素实现关联缩减操作,并生成类型为{@code R}的结果。
+     * 
+     * 
      * @param <T> the type of input element to the combining operation
      * @param <R> the result type
      * @param <K> the type of the {@code AccumulatingSink}.
@@ -659,6 +720,10 @@ final class ReduceOps {
      * State box for a single state element, used as a base class for
      * {@code AccumulatingSink} instances
      *
+     * <p>
+     *  用于单个状态元素的状态框,用作{@code AccumulatingSink}实例的基类
+     * 
+     * 
      * @param <U> The type of the state element
      */
     private static abstract class Box<U> {
@@ -677,6 +742,11 @@ final class ReduceOps {
      * operation. The {@code AccumulatingSink} must represent an associative
      * reducing operation.
      *
+     * <p>
+     *  {@code TerminalOp},用于评估流管道,并将输出发送到{@code AccumulatingSink},执行reduce操作。
+     *  {@code AccumulatingSink}必须表示关联缩减操作。
+     * 
+     * 
      * @param <T> the output type of the stream pipeline
      * @param <R> the result type of the reducing operation
      * @param <S> the type of the {@code AccumulatingSink}
@@ -689,6 +759,10 @@ final class ReduceOps {
          * Create a {@code ReduceOp} of the specified stream shape which uses
          * the specified {@code Supplier} to create accumulating sinks.
          *
+         * <p>
+         *  创建指定流形状的{@code ReduceOp},它使用指定的{@code Supplier}创建累积汇。
+         * 
+         * 
          * @param shape The shape of the stream pipeline
          */
         ReduceOp(StreamShape shape) {
@@ -717,6 +791,8 @@ final class ReduceOps {
 
     /**
      * A {@code ForkJoinTask} for performing a parallel reduce operation.
+     * <p>
+     *  用于执行并行缩减操作的{@code ForkJoinTask}。
      */
     @SuppressWarnings("serial")
     private static final class ReduceTask<P_IN, P_OUT, R,

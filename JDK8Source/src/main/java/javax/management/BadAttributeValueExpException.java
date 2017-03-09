@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import java.io.ObjectInputStream;
  * during the evaluation of a query.  User code does not usually
  * see it.
  *
+ * <p>
+ *  当无效的MBean属性传递给查询构造方法时抛出。此异常在评估查询期间由JMX在内部使用。用户代码通常不会看到它。
+ * 
+ * 
  * @since 1.5
  */
 public class BadAttributeValueExpException extends Exception   {
@@ -44,6 +49,8 @@ public class BadAttributeValueExpException extends Exception   {
     private static final long serialVersionUID = -3105272988410493376L;
 
     /**
+    /* <p>
+    /* 
      * @serial A string representation of the attribute that originated this exception.
      * for example, the string value can be the return of {@code attribute.toString()}
      */
@@ -53,6 +60,10 @@ public class BadAttributeValueExpException extends Exception   {
      * Constructs a BadAttributeValueExpException using the specified Object to
      * create the toString() value.
      *
+     * <p>
+     *  构造BadAttributeValueExpException以使用指定的对象创建toString()值。
+     * 
+     * 
      * @param val the inappropriate value.
      */
     public BadAttributeValueExpException (Object val) {
@@ -62,6 +73,8 @@ public class BadAttributeValueExpException extends Exception   {
 
     /**
      * Returns the string representing the object.
+     * <p>
+     *  返回表示对象的字符串。
      */
     public String toString()  {
         return "BadAttributeValueException: " + val;

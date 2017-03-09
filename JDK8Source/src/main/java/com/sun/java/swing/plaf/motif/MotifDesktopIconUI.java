@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import java.io.Serializable;
 /**
  * Motif rendition of the component.
  *
+ * <p>
+ *  组件的主题表达。
+ * 
+ * 
  * @author Thomas Ball
  * @author Rich Schiavi
  */
@@ -188,6 +193,9 @@ public class MotifDesktopIconUI extends BasicDesktopIconUI
 
     /**
       * Returns the default desktop icon.
+      * <p>
+      *  返回默认桌面图标。
+      * 
       */
     public Icon getDefaultIcon() {
         return defaultIcon;
@@ -195,6 +203,9 @@ public class MotifDesktopIconUI extends BasicDesktopIconUI
 
     /**
       * Sets the icon used as the default desktop icon.
+      * <p>
+      *  设置用作默认桌面图标的图标。
+      * 
       */
     public void setDefaultIcon(Icon newIcon) {
         defaultIcon = newIcon;
@@ -357,6 +368,9 @@ public class MotifDesktopIconUI extends BasicDesktopIconUI
                 /* the mouse release will not get reported correctly,
                    because the icon will no longer be in the hierarchy;
                    maybe that should be fixed, but until it is, we need
+                /* <p>
+                /*  因为图标将不再在层次结构中;也许这应该是固定的,但直到它是,我们需要
+                /* 
                    to do the required cleanup here. */
                 getFrame().getDesktopPane().getDesktopManager().endDraggingFrame((JComponent)e.getSource());
             }

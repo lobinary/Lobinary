@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -110,6 +111,40 @@ import sun.util.logging.PlatformLogger;
  *
  * <p>The implementation conforms to <a href="http://www.ietf.org/rfc/rfc2965.txt">RFC 2965</a>, section 3.3.
  *
+ * <p>
+ *  CookieManager提供了{@link CookieHandler}的具体实现,它将cookie的存储与接受和拒绝cookie的策略分开。
+ *  CookieManager使用管理存储的{@link CookieStore}和{@link CookiePolicy}对象进行初始化,该对象对Cookie接受/拒绝进行策略决策。
+ * 
+ *  <p> java.net包中的HTTP cookie管理如下：
+ * <blockquote>
+ *  <pre> {@ code use CookieHandler <------- HttpURLConnection ^ | impl |使用CookieManager -------> CookiePolicy |使用| --------> HttpCookie | ^ | |使用|使用| | --------> CookieStore ^ | impl |内部内存实现}
+ *  </pre>。
+ * <ul>
+ * <li>
+ *  CookieHandler是cookie管理的核心。用户可以调用CookieHandler.setDefault设置一个具体的CookieHanlder实现来使用。
+ * </li>
+ * <li>
+ *  CookiePolicy.shouldAccept将被CookieManager.put调用以查看是否应接受一个cookie并将其放入Cookie存储中。
+ * 用户可以使用三个预定义的CookiePolicy中的任何一个,即ACCEPT_ALL,ACCEPT_NONE和ACCEPT_ORIGINAL_SERVER,或者用户可以定义自己的CookiePolicy
+ * 实现,并告诉CookieManager使用它。
+ *  CookiePolicy.shouldAccept将被CookieManager.put调用以查看是否应接受一个cookie并将其放入Cookie存储中。
+ * </li>
+ * <li>
+ * CookieStore是存储任何接受的HTTP cookie的地方。如果在创建时未指定,CookieManager实例将使用内部内存实现。或者用户可以实现一个并告诉CookieManager使用它。
+ * </li>
+ * <li>
+ *  目前,CookieManager只使用CookieStore.add(URI,HttpCookie)和CookieStore.get(URI)。
+ * 其他是为了完整性,可能需要更复杂的CookieStore实现,例如。一个NetscapeCookieSotre。
+ * </li>
+ * </ul>
+ * </blockquote>
+ * 
+ *  <p>用户可以通过各种方式连接自己的HTTP Cookie管理行为,例如
+ * <blockquote>
+ * <ul>
+ *  <li>使用CookieHandler.setDefault设置全新的{@link CookieHandler}实施<li>让CookieManager成为默认的{@link CookieHandler}
+ * 实现,但实现用户自己的{@link CookieStore}和{@link CookiePolicy}默认CookieManager使用它们：<blockquote> <pre> //这应该在HTTP会
+ * 
  * @see CookiePolicy
  * @author Edward Wang
  * @since 1.6
@@ -132,6 +167,16 @@ public class CookieManager extends CookieHandler
      * <p>This constructor will create new cookie manager with default
      * cookie store and accept policy. The effect is same as
      * {@code CookieManager(null, null)}.
+     * <p>
+     * 话开始时完成CookieHandler.setDefault(new CookieManager(new MyCookieStore(),new MyCookiePolicy())); </pre> </blockquote>
+     *  <li>让CookieManager成为默认的{@link CookieHandler}实现,但使用自定义的{@link CookiePolicy}：<blockquote> <pre> //这应该在
+     * HTTP的开头session CookieHandler.setDefault(new CookieManager()); //这可以在HTTP会话的任何时候完成((CookieManager)Cook
+     * ieHandler.getDefault())setCookiePolicy(new MyCookiePolicy()); </pre> </blockquote>。
+     * </ul>
+     * </blockquote>
+     * 
+     * <p>此实施符合<a href="http://www.ietf.org/rfc/rfc2965.txt"> RFC 2965 </a>第3.3节的规定。
+     * 
      */
     public CookieManager() {
         this(null, null);
@@ -141,6 +186,12 @@ public class CookieManager extends CookieHandler
     /**
      * Create a new cookie manager with specified cookie store and cookie policy.
      *
+     * <p>
+     *  创建新的Cookie管理器。
+     * 
+     *  <p>此构造函数将创建具有默认Cookie存储和接受策略的新Cookie管理器。效果与{@code CookieManager(null,null)}相同。
+     * 
+     * 
      * @param store     a {@code CookieStore} to be used by cookie manager.
      *                  if {@code null}, cookie manager will use a default one,
      *                  which is an in-memory CookieStore implementation.
@@ -174,6 +225,10 @@ public class CookieManager extends CookieHandler
      * cookie policy ACCEPT_ORIGINAL_SERVER by default. Users always
      * can call this method to set another cookie policy.
      *
+     * <p>
+     *  使用指定的Cookie存储和Cookie策略创建新的Cookie管理器。
+     * 
+     * 
      * @param cookiePolicy      the cookie policy. Can be {@code null}, which
      *                          has no effects on current cookie policy.
      */
@@ -185,6 +240,12 @@ public class CookieManager extends CookieHandler
     /**
      * To retrieve current cookie store.
      *
+     * <p>
+     *  设置此Cookie管理器的Cookie策略。
+     * 
+     *  <p> {@code CookieManager}的实例默认情况下会有Cookie政策ACCEPT_ORIGINAL_SERVER。用户总是可以调用此方法来设置另一个cookie策略。
+     * 
+     * 
      * @return  the cookie store currently used by cookie manager.
      */
     public CookieStore getCookieStore() {
@@ -391,6 +452,9 @@ public class CookieManager extends CookieHandler
 
     /*
      * path-matches algorithm, as defined by RFC 2965
+     * <p>
+     *  检索当前的Cookie存储。
+     * 
      */
     private boolean pathMatches(String path, String pathToMatchWith) {
         if (path == pathToMatchWith)
@@ -407,6 +471,9 @@ public class CookieManager extends CookieHandler
     /*
      * sort cookies with respect to their path: those with more specific Path attributes
      * precede those with less specific, as defined in RFC 2965 sec. 3.3.4
+     * <p>
+     *  路径匹配算法,由RFC 2965定义
+     * 
      */
     private List<String> sortByPath(List<HttpCookie> cookies) {
         Collections.sort(cookies, new CookiePathComparator());

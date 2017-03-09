@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xerces.internal.xpointer;
 
@@ -33,6 +43,13 @@ import com.sun.org.apache.xerces.internal.xni.XNIException;
  *
  * @xerces.internal
  *
+ * <p>
+ * <p>
+ *  用于方案特定的XPointer表达式解析和评估。此接口适用于ShortHand和SchemeBased XPointer表达式。
+ * </p>
+ * 
+ *  @ xerces.internal
+ * 
  */
 public interface XPointerPart {
 
@@ -49,6 +66,10 @@ public interface XPointerPart {
      * Provides scheme specific parsing of a XPointer expression i.e.
      * the PointerPart or ShortHandPointer.
      *
+     * <p>
+     *  提供XPointer表达式(即PointerPart或ShortHandPointer)的方案特定解析。
+     * 
+     * 
      * @param  xpointer A String representing the PointerPart or ShortHandPointer.
      * @throws XNIException Thrown if the PointerPart string does not conform to
      *         the syntax defined by its scheme.
@@ -61,6 +82,10 @@ public interface XPointerPart {
      * by checking if it's element and attributes parameters match the
      * criteria specified in the xpointer expression.
      *
+     * <p>
+     *  通过检查XPointer表达式的元素和属性参数是否与xpointer表达式中指定的条件匹配,来评估XPointer表达式的XML资源。
+     * 
+     * 
      * @param element - The name of the element.
      * @param attributes - The element attributes.
      * @param augs - Additional information that may include infoset augmentations
@@ -78,6 +103,10 @@ public interface XPointerPart {
      * Returns true if the XPointer expression resolves to a resource fragment
      * specified as input else returns false.
      *
+     * <p>
+     *  如果XPointer表达式解析为指定为input else的返回false的资源片段,则返回true。
+     * 
+     * 
      * @return True if the xpointer expression matches a fragment in the resource
      *         else returns false.
      * @throws XNIException Thrown to signal an error
@@ -89,6 +118,10 @@ public interface XPointerPart {
      * Returns true if the XPointer expression resolves to a non-element child
      * of the current resource fragment.
      *
+     * <p>
+     *  如果XPointer表达式解析为当前资源片段的非元素子元素,则返回true。
+     * 
+     * 
      * @return True if the XPointer expression resolves to a non-element child
      *         of the current resource fragment.
      * @throws XNIException Thrown to signal an error
@@ -100,6 +133,10 @@ public interface XPointerPart {
      * Returns a String containing the scheme name of the PointerPart
      * or the name of the ShortHand Pointer.
      *
+     * <p>
+     *  返回一个字符串,其中包含PointerPart的方案名称或ShortHand指针的名称。
+     * 
+     * 
      * @return A String containing the scheme name of the PointerPart.
      *
      */
@@ -108,6 +145,10 @@ public interface XPointerPart {
     /**
      * Returns a String containing the scheme data of the PointerPart.
      *
+     * <p>
+     * 返回一个包含PointerPart的方案数据的字符串。
+     * 
+     * 
      * @return A String containing the scheme data of the PointerPart.
      *
      */
@@ -116,6 +157,10 @@ public interface XPointerPart {
     /**
      * Sets the scheme name of the PointerPart or the ShortHand Pointer name.
      *
+     * <p>
+     *  设置PointerPart的方案名称或ShortHand指针名称。
+     * 
+     * 
      * @param schemeName A String containing the scheme name of the PointerPart.
      *
      */
@@ -124,6 +169,9 @@ public interface XPointerPart {
     /**
      * Sets the scheme data of the PointerPart.
      *
+     * <p>
+     *  设置PointerPart的方案数据。
+     * 
      * @param schemeData A String containing the scheme data of the PointerPart.
      *
      */

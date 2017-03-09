@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,13 @@ import java.lang.annotation.AnnotationFormatError;
  * constructor's formal parameters, but throws an
  * {@code IllegalArgumentException} if a narrowing conversion would occur.
  *
+ * <p>
+ *  {@code Constructor}提供关于类的单个构造函数的信息和访问。
+ * 
+ *  <p> {@ code Constructor}允许在使用底层构造函数的形式参数将实际参数与newInstance()匹配时发生转换,但如果发生缩小转换,则会抛出{@code IllegalArgumentException}
+ * 。
+ * 
+ * 
  * @param <T> the class in which the constructor is declared
  *
  * @see Member
@@ -101,6 +109,9 @@ public final class Constructor<T> extends Executable {
 
     /**
      * Used by Excecutable for annotation sharing.
+     * <p>
+     *  由Excecutable用于注释共享。
+     * 
      */
     @Override
     Executable getRoot() {
@@ -111,6 +122,9 @@ public final class Constructor<T> extends Executable {
      * Package-private constructor used by ReflectAccess to enable
      * instantiation of these objects in Java code from the java.lang
      * package via sun.reflect.LangReflectAccess.
+     * <p>
+     *  Package-private构造函数,由ReflectAccess用于通过sun.reflect.LangReflectAccess从java.lang包中启用Java代码中的这些对象的实例化。
+     * 
      */
     Constructor(Class<T> declaringClass,
                 Class<?>[] parameterTypes,
@@ -134,6 +148,9 @@ public final class Constructor<T> extends Executable {
      * Package-private routine (exposed to java.lang.Class via
      * ReflectAccess) which returns a copy of this Constructor. The copy's
      * "root" field points to this Constructor.
+     * <p>
+     *  Package-private例程(通过ReflectAccess暴露给java.lang.Class),它返回此构造函数的副本。副本的"根"字段指向此构造函数。
+     * 
      */
     Constructor<T> copy() {
         // This routine enables sharing of ConstructorAccessor objects
@@ -170,6 +187,9 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Class<T> getDeclaringClass() {
@@ -179,6 +199,9 @@ public final class Constructor<T> extends Executable {
     /**
      * Returns the name of this constructor, as a string.  This is
      * the binary name of the constructor's declaring class.
+     * <p>
+     *  以字符串形式返回此构造函数的名称。这是构造函数的声明类的二进制名称。
+     * 
      */
     @Override
     public String getName() {
@@ -187,6 +210,9 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public int getModifiers() {
@@ -195,6 +221,10 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws GenericSignatureFormatError {@inheritDoc}
      * @since 1.5
      */
@@ -210,6 +240,9 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Class<?>[] getParameterTypes() {
@@ -218,11 +251,18 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public int getParameterCount() { return parameterTypes.length; }
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws GenericSignatureFormatError {@inheritDoc}
      * @throws TypeNotPresentException {@inheritDoc}
      * @throws MalformedParameterizedTypeException {@inheritDoc}
@@ -235,6 +275,9 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Class<?>[] getExceptionTypes() {
@@ -244,6 +287,10 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws GenericSignatureFormatError {@inheritDoc}
      * @throws TypeNotPresentException {@inheritDoc}
      * @throws MalformedParameterizedTypeException {@inheritDoc}
@@ -259,6 +306,10 @@ public final class Constructor<T> extends Executable {
      * Returns true if the objects are the same.  Two {@code Constructor} objects are
      * the same if they were declared by the same class and have the
      * same formal parameter types.
+     * <p>
+     *  将此{@code Constructor}与指定的对象进行比较。如果对象相同,则返回true。
+     * 如果两个{@code Constructor}对象由相同的类声明并具有相同的形参参数类型,则它们是相同的。
+     * 
      */
     public boolean equals(Object obj) {
         if (obj != null && obj instanceof Constructor) {
@@ -274,6 +325,9 @@ public final class Constructor<T> extends Executable {
      * Returns a hashcode for this {@code Constructor}. The hashcode is
      * the same as the hashcode for the underlying constructor's
      * declaring class name.
+     * <p>
+     *  返回此{@code Constructor}的哈希码。哈希码与底层构造函数声明类名的哈希码相同。
+     * 
      */
     public int hashCode() {
         return getDeclaringClass().getName().hashCode();
@@ -294,6 +348,16 @@ public final class Constructor<T> extends Executable {
      * {@code private}.  Only one of these may appear, or none if the
      * constructor has default (package) access.
      *
+     * <p>
+     * 返回描述此{@code Constructor}的字符串。字符串被格式化为构造函数访问修饰符(如果有的话),后面是声明类的完全限定名称,后面是括号,逗号分隔的构造函数形式参数类型的列表。例如：
+     * <pre>
+     *  public java.util.Hashtable(int,float)
+     * </pre>
+     * 
+     *  <p>构造函数的唯一可能的修饰符是访问修饰符{@code public},{@code protected}或{@code private}。
+     * 只有其中一个可能出现,或者如果构造函数具有默认(包)访问权限,则不显示。
+     * 
+     * 
      * @return a string describing this {@code Constructor}
      * @jls 8.8.3. Constructor Modifiers
      */
@@ -337,6 +401,19 @@ public final class Constructor<T> extends Executable {
      * {@code private}.  Only one of these may appear, or none if the
      * constructor has default (package) access.
      *
+     * <p>
+     *  返回描述此{@code Constructor}的字符串,包括类型参数。
+     * 该字符串被格式化为构造函数访问修饰符(如果有的话),后面是构造函数类型参数(如果有)的角括号逗号分隔列表,后面是声明类的完全限定名称,后跟括号,逗号分隔,分隔的构造函数的通用形式参数类型列表。
+     * 
+     *  如果此构造函数声明为采用可变数量的参数,而不是将最后一个参数表示为"<tt> <i>键入</i> [] </tt>",则表示为"<tt> <i >类型</i> ... </tt>"。
+     * 
+     * 空格用于将访问修饰符彼此分开,并与类型参数或返回类型分开。如果没有类型参数,则省略类型参数列表;如果存在类型参数列表,则空格将列表与类名称分隔开。
+     * 如果构造函数被声明为抛出异常,参数列表后跟一个空格,后跟一个单词"{@code throws}",后面是逗号分隔的抛出的异常类型列表。
+     * 
+     *  <p>构造函数的唯一可能的修饰符是访问修饰符{@code public},{@code protected}或{@code private}。
+     * 只有其中一个可能出现,或者如果构造函数具有默认(包)访问权限,则不显示。
+     * 
+     * 
      * @return a string describing this {@code Constructor},
      * include type parameters
      *
@@ -376,6 +453,19 @@ public final class Constructor<T> extends Executable {
      * <p>If the constructor completes normally, returns the newly
      * created and initialized instance.
      *
+     * <p>
+     *  使用由此{@code Constructor}对象表示的构造函数,使用指定的初始化参数创建和初始化构造函数的声明类的新实例。
+     * 单独的参数被自动展开以匹配原始形式参数,并且原始和参考参数都根据需要进行方法调用转换。
+     * 
+     *  <p>如果底层构造函数所需的形式参数数量为0,则提供的{@code initargs}数组的长度可能为0或null。
+     * 
+     *  <p>如果构造函数的声明类是非静态上下文中的内部类,构造函数的第一个参数需要是封闭的实例;参见<cite> Java&trade;的第15.9.3节;语言规范</cite>。
+     * 
+     * <p>如果所需的访问和参数检查成功,并且实例化将继续,则构造函数的声明类在未初始化的情况下被初始化。
+     * 
+     *  <p>如果构造函数正常完成,则返回新创建和初始化的实例。
+     * 
+     * 
      * @param initargs array of objects to be passed as arguments to
      * the constructor call; values of primitive types are wrapped in
      * a wrapper object of the appropriate type (e.g. a {@code float}
@@ -425,6 +515,10 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.5
      */
     @Override
@@ -435,6 +529,10 @@ public final class Constructor<T> extends Executable {
     /**
      * {@inheritDoc}
      * @jls 13.1 The Form of a Binary
+     * <p>
+     *  {@inheritDoc} @jls 13.1二进制的形式
+     * 
+     * 
      * @since 1.5
      */
     @Override
@@ -498,6 +596,10 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException  {@inheritDoc}
      * @since 1.5
      */
@@ -507,6 +609,10 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.5
      */
     public Annotation[] getDeclaredAnnotations()  {
@@ -515,6 +621,10 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.5
      */
     @Override
@@ -544,6 +654,10 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.8
      */
     @Override
@@ -553,6 +667,9 @@ public final class Constructor<T> extends Executable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      * @since 1.8
      */
     @Override

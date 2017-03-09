@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -123,6 +124,50 @@ import java.util.function.Consumer;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  基于哈希表的实现<tt> Map </tt>界面,使用<em>弱键</em>。 <tt> WeakHashMap </tt>中的条目将在其密钥不再正常使用时自动删除。
+ * 更确切地说,给定键的映射的存在不会防止密钥被垃圾收集器丢弃,即,可被确定,完成,然后被回收。
+ * 当某个键已被废弃时,其条目将有效地从映射中删除,因此此类的行为与其他<tt> Map </tt>实施有些不同。
+ * 
+ *  <p>支持空值和null键。此类具有类似于<tt> HashMap </tt>类的性能特性,并具有相同的效率参数<em>初始容量</em>和<em>负载因子</em>。
+ * 
+ *  <p>与大多数集合类一样,此类不同步。
+ * 可以使用{@link Collections#synchronizeMap Collections.synchronizedMap}方法构造同步的<tt> WeakHashMap </tt>。
+ * 
+ * <p>此类主要用于<tt>等于</tt>方法使用<tt> == </tt>运算符测试对象身份的关键对象。
+ * 一旦这样的密钥被丢弃,它就永远不能被重新创建,因此在以后的某个时间里不可能在<tt> WeakHashMap </tt>中查找该密钥,并且令人惊讶的是它的条目已经被删除。
+ * 对于<tt>等于</tt>方法不是基于对象标识的关键对象,例如<tt> String </tt>实例,此类将非常适合。
+ * 然而,对于这种可重现的键对象,自动删除其键被丢弃的<tt> WeakHashMap </tt>条目可能会令人困惑。
+ * 
+ * <p> <tt> WeakHashMap </tt>类的行为部分地取决于垃圾收集器的行为,因此一些熟悉的(虽然不是必需的)<tt> Map </tt>不变式不适用于此类。
+ * 因为垃圾收集器可以随时丢弃密钥,所以<tt> WeakHashMap </tt>可能表现得好像未知的线程静默地删除条目。
+ * 特别是,即使您在<tt> WeakHashMap </tt>实例上同步并且不调用其任何mutator方法,<tt> size </tt>方法也可能随时间返回较小的值, tt> isEmpty </tt>
+ * 方法返回<tt> true </tt>,然后<tt> true </tt>和<tt> false </tt>,对于<tt> get </tt>方法返回给定键的值,但稍后返回<tt> null </tt>
+ *  > put </tt>方法返回<tt> null </tt>和<tt> remove </tt>方法返回<tt> false </tt>以及用于连续检查密钥集,值集合和条目集以产生连续较小数量的元素。
+ * 因为垃圾收集器可以随时丢弃密钥,所以<tt> WeakHashMap </tt>可能表现得好像未知的线程静默地删除条目。
+ * 
+ *  <p> <tt> WeakHashMap </tt>中的每个键对象间接存储为弱引用的指示。因此,只有在对映射内部和外部的弱引用已被垃圾收集器清除后,键才会自动删除。
+ * 
+ * <p> <strong>实施注意事项</strong>：<tt> WeakHashMap </tt>中的值对象由普通强引用来保存。
+ * 因此,应该注意确保值对象不直接或间接地强烈引用它们自己的键,因为这将防止键被丢弃。
+ * 注意,值对象可以通过<tt> WeakHashMap </tt>本身间接引用它的键;也就是说,值对象可以强烈地引用某些其他关键对象,其关联值对象反过来强烈地引用第一个值对象的关键字。
+ * 如果映射中的值不依赖于强烈引用它们的映射,那么处理这种情况的一种方法是在插入之前在<tt> WeakReferences </tt>中封装值本身,如：<tt> m.put (key,new WeakRe
+ * ference(value))</tt>,然后展开每个<tt> get </tt>。
+ * 注意,值对象可以通过<tt> WeakHashMap </tt>本身间接引用它的键;也就是说,值对象可以强烈地引用某些其他关键对象,其关联值对象反过来强烈地引用第一个值对象的关键字。
+ * 
+ *  <p>由所有此类的"集合视图方法"返回的集合的<tt> iterator </tt>方法返回的迭代器<i> fail-fast </i>：如果地图在结构上被修改在创建迭代器之后的任何时候,除了通过迭代
+ * 器自己的<tt> remove </tt>方法,迭代器将抛出一个{@link ConcurrentModificationException}。
+ * 因此,面对并发修改,迭代器快速而干净地失败,而不是在将来的未确定时间冒任意的,非确定性行为的风险。
+ * 
+ * <p>请注意,迭代器的故障快速行为不能得到保证,因为一般来说,在不同步并发修改的情况下不可能做出任何硬的保证。
+ * 故障快速迭代器在尽力而为的基础上抛出<tt> ConcurrentModificationException </tt>。
+ * 因此,编写依赖于此异常的程序的正确性是错误的：<i>迭代器的故障快速行为应该仅用于检测错误。</i>。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @param <K> the type of keys maintained by this map
  * @param <V> the type of mapped values
  *
@@ -139,6 +184,9 @@ public class WeakHashMap<K,V>
 
     /**
      * The default initial capacity -- MUST be a power of two.
+     * <p>
+     *  默认的初始容量 - 必须是2的幂。
+     * 
      */
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
@@ -146,36 +194,57 @@ public class WeakHashMap<K,V>
      * The maximum capacity, used if a higher value is implicitly specified
      * by either of the constructors with arguments.
      * MUST be a power of two <= 1<<30.
+     * <p>
+     *  最大容量,如果较高的值由具有参数的任何构造函数隐式指定,则使用此容量。必须是二的幂<= 1 << 30。
+     * 
      */
     private static final int MAXIMUM_CAPACITY = 1 << 30;
 
     /**
      * The load factor used when none specified in constructor.
+     * <p>
+     *  在构造函数中未指定时使用的负载系数。
+     * 
      */
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
     /**
      * The table, resized as necessary. Length MUST Always be a power of two.
+     * <p>
+     *  该表,必要时调整大小。长度必须始终为二的幂。
+     * 
      */
     Entry<K,V>[] table;
 
     /**
      * The number of key-value mappings contained in this weak hash map.
+     * <p>
+     *  此弱散列映射中包含的键值映射的数量。
+     * 
      */
     private int size;
 
     /**
      * The next size value at which to resize (capacity * load factor).
+     * <p>
+     *  调整大小的下一个大小值(容量*负载系数)。
+     * 
      */
     private int threshold;
 
     /**
      * The load factor for the hash table.
+     * <p>
+     *  哈希表的负载系数。
+     * 
      */
     private final float loadFactor;
 
     /**
      * Reference queue for cleared WeakEntries
+     * <p>
+     *  清除WeakEntries的引用队列
+     * 
      */
     private final ReferenceQueue<Object> queue = new ReferenceQueue<>();
 
@@ -186,6 +255,10 @@ public class WeakHashMap<K,V>
      * (e.g., rehash).  This field is used to make iterators on
      * Collection-views of the map fail-fast.
      *
+     * <p>
+     *  此WeakHashMap已结构修改的次数。结构修改是改变映射中的映射的数量或以其它方式修改其内部结构(例如,重新哈希)的修改。此字段用于对映射的集合视图使故障快速的迭代器。
+     * 
+     * 
      * @see ConcurrentModificationException
      */
     int modCount;
@@ -199,6 +272,10 @@ public class WeakHashMap<K,V>
      * Constructs a new, empty <tt>WeakHashMap</tt> with the given initial
      * capacity and the given load factor.
      *
+     * <p>
+     *  用给定的初始容量和给定的负载因子构造一个新的空的<tt> WeakHashMap </tt>。
+     * 
+     * 
      * @param  initialCapacity The initial capacity of the <tt>WeakHashMap</tt>
      * @param  loadFactor      The load factor of the <tt>WeakHashMap</tt>
      * @throws IllegalArgumentException if the initial capacity is negative,
@@ -226,6 +303,10 @@ public class WeakHashMap<K,V>
      * Constructs a new, empty <tt>WeakHashMap</tt> with the given initial
      * capacity and the default load factor (0.75).
      *
+     * <p>
+     * 使用给定的初始容量和默认负载系数(0.75)构造一个新的空的<tt> WeakHashMap </tt>。
+     * 
+     * 
      * @param  initialCapacity The initial capacity of the <tt>WeakHashMap</tt>
      * @throws IllegalArgumentException if the initial capacity is negative
      */
@@ -236,6 +317,9 @@ public class WeakHashMap<K,V>
     /**
      * Constructs a new, empty <tt>WeakHashMap</tt> with the default initial
      * capacity (16) and load factor (0.75).
+     * <p>
+     *  使用默认初始容量(16)和负载系数(0.75)构造一个新的空的<tt> WeakHashMap </tt>。
+     * 
      */
     public WeakHashMap() {
         this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
@@ -247,6 +331,10 @@ public class WeakHashMap<K,V>
      * load factor (0.75) and an initial capacity sufficient to hold the
      * mappings in the specified map.
      *
+     * <p>
+     *  使用与指定地图相同的映射构造新的<tt> WeakHashMap </tt>。 <tt> WeakHashMap </tt>是使用默认负载系数(0.75)和足以在指定映射中保存映射的初始容量创建的。
+     * 
+     * 
      * @param   m the map whose mappings are to be placed in this map
      * @throws  NullPointerException if the specified map is null
      * @since   1.3
@@ -262,11 +350,17 @@ public class WeakHashMap<K,V>
 
     /**
      * Value representing null keys inside tables.
+     * <p>
+     *  表示表中的空键的值。
+     * 
      */
     private static final Object NULL_KEY = new Object();
 
     /**
      * Use NULL_KEY for key if it is null.
+     * <p>
+     *  如果键为空,请使用NULL_KEY。
+     * 
      */
     private static Object maskNull(Object key) {
         return (key == null) ? NULL_KEY : key;
@@ -274,6 +368,9 @@ public class WeakHashMap<K,V>
 
     /**
      * Returns internal representation of null key back to caller as null.
+     * <p>
+     *  将null键的内部表示返回给调用者为null。
+     * 
      */
     static Object unmaskNull(Object key) {
         return (key == NULL_KEY) ? null : key;
@@ -282,6 +379,9 @@ public class WeakHashMap<K,V>
     /**
      * Checks for equality of non-null reference x and possibly-null y.  By
      * default uses Object.equals.
+     * <p>
+     *  检查非空引用x和可能为null的y的相等性。默认情况下使用Object.equals。
+     * 
      */
     private static boolean eq(Object x, Object y) {
         return x == y || x.equals(y);
@@ -293,6 +393,9 @@ public class WeakHashMap<K,V>
      * critical because HashMap uses power-of-two length hash tables, that
      * otherwise encounter collisions for hashCodes that do not differ
      * in lower bits.
+     * <p>
+     *  检索对象哈希码,并对结果哈希应用补充哈希函数,该哈希函数防御质量差的哈希函数。这是至关重要的,因为HashMap使用两个长度的乘方哈希表,否则会遇到在低位方面没有差异的hashCodes的冲突。
+     * 
      */
     final int hash(Object k) {
         int h = k.hashCode();
@@ -306,6 +409,9 @@ public class WeakHashMap<K,V>
 
     /**
      * Returns index for hash code h.
+     * <p>
+     *  返回哈希码h的索引。
+     * 
      */
     private static int indexFor(int h, int length) {
         return h & (length-1);
@@ -313,6 +419,9 @@ public class WeakHashMap<K,V>
 
     /**
      * Expunges stale entries from the table.
+     * <p>
+     *  从表中清除失效的条目。
+     * 
      */
     private void expungeStaleEntries() {
         for (Object x; (x = queue.poll()) != null; ) {
@@ -345,6 +454,9 @@ public class WeakHashMap<K,V>
 
     /**
      * Returns the table after first expunging stale entries.
+     * <p>
+     *  首先清除失效条目后返回表。
+     * 
      */
     private Entry<K,V>[] getTable() {
         expungeStaleEntries();
@@ -356,6 +468,9 @@ public class WeakHashMap<K,V>
      * This result is a snapshot, and may not reflect unprocessed
      * entries that will be removed before next attempted access
      * because they are no longer referenced.
+     * <p>
+     *  返回此地图中的键值映射的数量。此结果是快照,并且可能不反映在下次尝试访问之前将被删除的未处理条目,因为它们不再被引用。
+     * 
      */
     public int size() {
         if (size == 0)
@@ -369,6 +484,9 @@ public class WeakHashMap<K,V>
      * This result is a snapshot, and may not reflect unprocessed
      * entries that will be removed before next attempted access
      * because they are no longer referenced.
+     * <p>
+     * 如果此地图不包含键值映射,则返回<tt> true </tt>。此结果是快照,并且可能不反映在下次尝试访问之前将被删除的未处理条目,因为它们不再被引用。
+     * 
      */
     public boolean isEmpty() {
         return size() == 0;
@@ -389,6 +507,17 @@ public class WeakHashMap<K,V>
      * The {@link #containsKey containsKey} operation may be used to
      * distinguish these two cases.
      *
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回{@code null}。
+     * 
+     *  更正式地说,如果此映射包含从密钥{@code k}到值{@code v}的映射,使得{@code(key == null?k == null：key.equals(k) )},那么这个方法返回{@code v}
+     * ;否则返回{@code null}。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     *  <p> {@code null}的返回值不一定</i>表示地图不包含键的映射;也有可能映射将键明确映射到{@code null}。
+     *  {@link #containsKey containsKey}操作可用于区分这两种情况。
+     * 
+     * 
      * @see #put(Object, Object)
      */
     public V get(Object key) {
@@ -409,6 +538,10 @@ public class WeakHashMap<K,V>
      * Returns <tt>true</tt> if this map contains a mapping for the
      * specified key.
      *
+     * <p>
+     *  如果此地图包含指定键的映射,则返回<tt> true </tt>。
+     * 
+     * 
      * @param  key   The key whose presence in this map is to be tested
      * @return <tt>true</tt> if there is a mapping for <tt>key</tt>;
      *         <tt>false</tt> otherwise
@@ -420,6 +553,9 @@ public class WeakHashMap<K,V>
     /**
      * Returns the entry associated with the specified key in this map.
      * Returns null if the map contains no mapping for this key.
+     * <p>
+     *  返回与此地图中指定键相关联的条目。如果映射不包含此键的映射,则返回null。
+     * 
      */
     Entry<K,V> getEntry(Object key) {
         Object k = maskNull(key);
@@ -437,6 +573,10 @@ public class WeakHashMap<K,V>
      * If the map previously contained a mapping for this key, the old
      * value is replaced.
      *
+     * <p>
+     *  将指定的值与此映射中的指定键相关联。如果映射先前包含此键的映射,则替换旧值。
+     * 
+     * 
      * @param key key with which the specified value is to be associated.
      * @param value value to be associated with the specified key.
      * @return the previous value associated with <tt>key</tt>, or
@@ -476,6 +616,12 @@ public class WeakHashMap<K,V>
      * resize the map, but sets threshold to Integer.MAX_VALUE.
      * This has the effect of preventing future calls.
      *
+     * <p>
+     *  将此映射的内容重新加热为具有更大容量的新阵列。当此映射中的键数达到其阈值时,将自动调用此方法。
+     * 
+     * 如果当前容量为MAXIMUM_CAPACITY,则此方法不会调整映射的大小,而是将阈值设置为Integer.MAX_VALUE。这具有防止未来呼叫的效果。
+     * 
+     * 
      * @param newCapacity the new capacity, MUST be a power of two;
      *        must be greater than current capacity unless current
      *        capacity is MAXIMUM_CAPACITY (in which case value
@@ -497,6 +643,9 @@ public class WeakHashMap<K,V>
          * If ignoring null elements and processing ref queue caused massive
          * shrinkage, then restore old table.  This should be rare, but avoids
          * unbounded expansion of garbage-filled tables.
+         * <p>
+         *  如果忽略空元素和处理ref队列导致大量收缩,那么恢复旧表。这应该是很少见的,但是避免了垃圾填充表的无界扩展。
+         * 
          */
         if (size >= threshold / 2) {
             threshold = (int)(newCapacity * loadFactor);
@@ -534,6 +683,10 @@ public class WeakHashMap<K,V>
      * These mappings will replace any mappings that this map had for any
      * of the keys currently in the specified map.
      *
+     * <p>
+     *  将指定映射中的所有映射复制到此映射。这些映射将替换该映射对于当前在指定映射中的任何键的任何映射。
+     * 
+     * 
      * @param m mappings to be stored in this map.
      * @throws  NullPointerException if the specified map is null.
      */
@@ -550,6 +703,11 @@ public class WeakHashMap<K,V>
          * if the keys to be added overlap with the keys already in this map.
          * By using the conservative calculation, we subject ourself
          * to at most one extra resize.
+         * <p>
+         *  如果映射的数量大于或等于阈值,则展开映射。
+         * 这是保守的;明显的条件是(m.size()+ size)> = threshold,但是如果要添加的键与已经在此映射中的键重叠,则该条件可以产生具有两倍适当容量的映射。
+         * 通过使用保守的计算,我们自己最多一个额外的调整大小。
+         * 
          */
         if (numKeysToBeAdded > threshold) {
             int targetCapacity = (int)(numKeysToBeAdded / loadFactor + 1);
@@ -582,6 +740,18 @@ public class WeakHashMap<K,V>
      * <p>The map will not contain a mapping for the specified key once the
      * call returns.
      *
+     * <p>
+     *  从该弱散列映射中删除该映射(如果存在)。
+     * 更正式地,如果该映射包含从键<tt> k </tt>到值<tt> v </tt>的映射,使得<code>(key == null?k == null：key.equals ))</code>,则删除该映
+     * 射。
+     *  从该弱散列映射中删除该映射(如果存在)。 (地图最多只能包含一个这样的映射。)。
+     * 
+     * <p>返回此地图先前与键相关联的值,如果地图未包含键的映射,则返回<tt> null </tt>。
+     * 返回值<tt> null </tt>不一定表示该映射不包含键的映射;还有可能映射将键明确映射到<tt> null </tt>。
+     * 
+     *  <p>在调用返回后,地图将不包含指定键的映射。
+     * 
+     * 
      * @param key key whose mapping is to be removed from the map
      * @return the previous value associated with <tt>key</tt>, or
      *         <tt>null</tt> if there was no mapping for <tt>key</tt>
@@ -645,6 +815,9 @@ public class WeakHashMap<K,V>
     /**
      * Removes all of the mappings from this map.
      * The map will be empty after this call returns.
+     * <p>
+     *  从此地图中删除所有映射。此调用返回后,地图将为空。
+     * 
      */
     public void clear() {
         // clear out ref queue. We don't need to expunge entries
@@ -667,6 +840,10 @@ public class WeakHashMap<K,V>
      * Returns <tt>true</tt> if this map maps one or more keys to the
      * specified value.
      *
+     * <p>
+     *  如果此映射将一个或多个键映射到指定的值,则返回<tt> true </tt>。
+     * 
+     * 
      * @param value value whose presence in this map is to be tested
      * @return <tt>true</tt> if this map maps one or more keys to the
      *         specified value
@@ -685,6 +862,9 @@ public class WeakHashMap<K,V>
 
     /**
      * Special-case code for containsValue with null argument
+     * <p>
+     *  包含null参数的containsValue的特殊情况代码
+     * 
      */
     private boolean containsNullValue() {
         Entry<K,V>[] tab = getTable();
@@ -698,6 +878,9 @@ public class WeakHashMap<K,V>
     /**
      * The entries in this hash table extend WeakReference, using its main ref
      * field as the key.
+     * <p>
+     *  此哈希表中的条目扩展WeakReference,使用其主ref字段作为键。
+     * 
      */
     private static class Entry<K,V> extends WeakReference<Object> implements Map.Entry<K,V> {
         V value;
@@ -706,6 +889,9 @@ public class WeakHashMap<K,V>
 
         /**
          * Creates new entry.
+         * <p>
+         *  创建新条目。
+         * 
          */
         Entry(Object key, V value,
               ReferenceQueue<Object> queue,
@@ -766,12 +952,18 @@ public class WeakHashMap<K,V>
         /**
          * Strong reference needed to avoid disappearance of key
          * between hasNext and next
+         * <p>
+         *  强参考需要避免hasNext和next之间的键消失
+         * 
          */
         private Object nextKey;
 
         /**
          * Strong reference needed to avoid disappearance of key
          * between nextEntry() and any use of the entry
+         * <p>
+         *  强引用需要避免在nextEntry()和任何使用条目之间的键消失
+         * 
          */
         private Object currentKey;
 
@@ -862,6 +1054,13 @@ public class WeakHashMap<K,V>
      * <tt>removeAll</tt>, <tt>retainAll</tt>, and <tt>clear</tt>
      * operations.  It does not support the <tt>add</tt> or <tt>addAll</tt>
      * operations.
+     * <p>
+     * 返回此地图中包含的键的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在迭代集合的过程中修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>操作。
+     * 如果在迭代集合的过程中修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
      */
     public Set<K> keySet() {
         Set<K> ks = keySet;
@@ -911,6 +1110,13 @@ public class WeakHashMap<K,V>
      * <tt>Collection.remove</tt>, <tt>removeAll</tt>,
      * <tt>retainAll</tt> and <tt>clear</tt> operations.  It does not
      * support the <tt>add</tt> or <tt>addAll</tt> operations.
+     * <p>
+     *  返回此地图中包含的值的{@link Collection}视图。集合由地图支持,因此对地图的更改会反映在集合中,反之亦然。
+     * 如果在集合的迭代正在进行时修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。
+     * 集合支持元素删除,通过<tt> Iterator.remove </tt>,<tt> Collection.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射>
+     *  retainAll </tt>和<tt>清除</tt>操作。
+     * 如果在集合的迭代正在进行时修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
      */
     public Collection<V> values() {
         Collection<V> vs = values;
@@ -952,6 +1158,12 @@ public class WeakHashMap<K,V>
      * <tt>Set.remove</tt>, <tt>removeAll</tt>, <tt>retainAll</tt> and
      * <tt>clear</tt> operations.  It does not support the
      * <tt>add</tt> or <tt>addAll</tt> operations.
+     * <p>
+     * 返回此地图中包含的映射的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在对迭代器执行迭代(即通过迭代器自己的<tt> remove </tt>操作,或通过对迭代器返回的映射条目执行<tt> setValue </tt>操作) )迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>操作。
+     * 如果在对迭代器执行迭代(即通过迭代器自己的<tt> remove </tt>操作,或通过对迭代器返回的映射条目执行<tt> setValue </tt>操作) )迭代的结果是未定义的。
      */
     public Set<Map.Entry<K,V>> entrySet() {
         Set<Map.Entry<K,V>> es = entrySet;
@@ -1050,6 +1262,9 @@ public class WeakHashMap<K,V>
     /**
      * Similar form as other hash Spliterators, but skips dead
      * elements.
+     * <p>
+     * 它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
      */
     static class WeakHashMapSpliterator<K,V> {
         final WeakHashMap<K,V> map;

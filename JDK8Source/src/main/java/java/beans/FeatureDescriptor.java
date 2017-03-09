@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,13 @@ import java.util.Map.Entry;
  * <p>
  * In addition it provides an extension mechanism so that arbitrary
  * attribute/value pairs can be associated with a design feature.
+ * <p>
+ *  FeatureDescriptor类是PropertyDescriptor,EventSetDescriptor和MethodDescriptor等的公共基类。
+ * <p>
+ *  它支持一些常见的信息,可以为任何内省描述符设置和检索。
+ * <p>
+ *  此外,它提供了扩展机制,使得任意属性/值对可以与设计特征相关联。
+ * 
  */
 
 public class FeatureDescriptor {
@@ -55,6 +63,9 @@ public class FeatureDescriptor {
 
     /**
      * Constructs a <code>FeatureDescriptor</code>.
+     * <p>
+     *  构造<code> FeatureDescriptor </code>。
+     * 
      */
     public FeatureDescriptor() {
     }
@@ -62,6 +73,10 @@ public class FeatureDescriptor {
     /**
      * Gets the programmatic name of this feature.
      *
+     * <p>
+     *  获取此功能的程序化名称。
+     * 
+     * 
      * @return The programmatic name of the property/method/event
      */
     public String getName() {
@@ -71,6 +86,10 @@ public class FeatureDescriptor {
     /**
      * Sets the programmatic name of this feature.
      *
+     * <p>
+     *  设置此功能的程序化名称。
+     * 
+     * 
      * @param name  The programmatic name of the property/method/event
      */
     public void setName(String name) {
@@ -80,6 +99,10 @@ public class FeatureDescriptor {
     /**
      * Gets the localized display name of this feature.
      *
+     * <p>
+     *  获取此功能的本地化显示名称。
+     * 
+     * 
      * @return The localized display name for the property/method/event.
      *  This defaults to the same as its programmatic name from getName.
      */
@@ -93,6 +116,10 @@ public class FeatureDescriptor {
     /**
      * Sets the localized display name of this feature.
      *
+     * <p>
+     *  设置此功能的本地化显示名称。
+     * 
+     * 
      * @param displayName  The localized display name for the
      *          property/method/event.
      */
@@ -104,6 +131,10 @@ public class FeatureDescriptor {
      * The "expert" flag is used to distinguish between those features that are
      * intended for expert users from those that are intended for normal users.
      *
+     * <p>
+     *  "专家"标志用于区分专门用于专用用户的那些特征和用于普通用户的那些特征。
+     * 
+     * 
      * @return True if this feature is intended for use by experts only.
      */
     public boolean isExpert() {
@@ -114,6 +145,10 @@ public class FeatureDescriptor {
      * The "expert" flag is used to distinguish between features that are
      * intended for expert users from those that are intended for normal users.
      *
+     * <p>
+     *  "专家"标志用于区分专用用户的特征和正常用户的特征。
+     * 
+     * 
      * @param expert True if this feature is intended for use by experts only.
      */
     public void setExpert(boolean expert) {
@@ -124,6 +159,10 @@ public class FeatureDescriptor {
      * The "hidden" flag is used to identify features that are intended only
      * for tool use, and which should not be exposed to humans.
      *
+     * <p>
+     *  "隐藏"标志用于识别仅用于工具使用且不应暴露于人的特征。
+     * 
+     * 
      * @return True if this feature should be hidden from human users.
      */
     public boolean isHidden() {
@@ -134,6 +173,10 @@ public class FeatureDescriptor {
      * The "hidden" flag is used to identify features that are intended only
      * for tool use, and which should not be exposed to humans.
      *
+     * <p>
+     *  "隐藏"标志用于识别仅用于工具使用且不应暴露于人的特征。
+     * 
+     * 
      * @param hidden  True if this feature should be hidden from human users.
      */
     public void setHidden(boolean hidden) {
@@ -144,6 +187,10 @@ public class FeatureDescriptor {
      * The "preferred" flag is used to identify features that are particularly
      * important for presenting to humans.
      *
+     * <p>
+     *  "优选"标志用于识别对于向人类呈现特别重要的特征。
+     * 
+     * 
      * @return True if this feature should be preferentially shown to human users.
      */
     public boolean isPreferred() {
@@ -154,6 +201,10 @@ public class FeatureDescriptor {
      * The "preferred" flag is used to identify features that are particularly
      * important for presenting to humans.
      *
+     * <p>
+     * "优选"标志用于识别对于向人类呈现特别重要的特征。
+     * 
+     * 
      * @param preferred  True if this feature should be preferentially shown
      *                   to human users.
      */
@@ -164,6 +215,10 @@ public class FeatureDescriptor {
     /**
      * Gets the short description of this feature.
      *
+     * <p>
+     *  获取此功能的简短说明。
+     * 
+     * 
      * @return  A localized short description associated with this
      *   property/method/event.  This defaults to be the display name.
      */
@@ -177,6 +232,10 @@ public class FeatureDescriptor {
     /**
      * You can associate a short descriptive string with a feature.  Normally
      * these descriptive strings should be less than about 40 characters.
+     * <p>
+     *  您可以将简短的描述性字符串与要素关联。通常这些描述性字符串应小于约40个字符。
+     * 
+     * 
      * @param text  A (localized) short description to be associated with
      * this property/method/event.
      */
@@ -187,6 +246,10 @@ public class FeatureDescriptor {
     /**
      * Associate a named attribute with this feature.
      *
+     * <p>
+     *  将命名属性与此功能关联。
+     * 
+     * 
      * @param attributeName  The locale-independent name of the attribute
      * @param value  The value.
      */
@@ -197,6 +260,10 @@ public class FeatureDescriptor {
     /**
      * Retrieve a named attribute with this feature.
      *
+     * <p>
+     *  使用此功能检索命名属性。
+     * 
+     * 
      * @param attributeName  The locale-independent name of the attribute
      * @return  The value of the attribute.  May be null if
      *     the attribute is unknown.
@@ -211,6 +278,10 @@ public class FeatureDescriptor {
      * Gets an enumeration of the locale-independent names of this
      * feature.
      *
+     * <p>
+     *  获取此功能的与语言环境无关的名称的枚举。
+     * 
+     * 
      * @return  An enumeration of the locale-independent names of any
      *    attributes that have been registered with setValue.
      */
@@ -225,6 +296,10 @@ public class FeatureDescriptor {
      * In the event of other conflicts, the second argument (y) is
      * given priority over the first argument (x).
      *
+     * <p>
+     *  Package-private构造函数,合并来自两个FeatureDescriptors的信息。合并的隐藏和专家标志由值形成。在其他冲突的情况下,第二自变量(y)被赋予优先于第一自变量(x)。
+     * 
+     * 
      * @param x  The first (lower priority) MethodDescriptor
      * @param y  The second (higher priority) MethodDescriptor
      */
@@ -252,6 +327,9 @@ public class FeatureDescriptor {
     /*
      * Package-private dup constructor
      * This must isolate the new object from any changes to the old object.
+     * <p>
+     *  Package-private dup constructor这必须将新对象与对旧对象的任何更改隔离开来。
+     * 
      */
     FeatureDescriptor(FeatureDescriptor old) {
         expert = old.expert;
@@ -269,6 +347,10 @@ public class FeatureDescriptor {
      * Copies all values from the specified attribute table.
      * If some attribute is exist its value should be overridden.
      *
+     * <p>
+     *  从指定的属性表复制所有值。如果某个属性存在,则其值应被覆盖。
+     * 
+     * 
      * @param table  the attribute table with new values
      */
     private void addTable(Hashtable<String, Object> table) {
@@ -280,6 +362,10 @@ public class FeatureDescriptor {
     /**
      * Returns the initialized attribute table.
      *
+     * <p>
+     *  返回初始化的属性表。
+     * 
+     * 
      * @return the initialized attribute table
      */
     private Hashtable<String, Object> getTable() {
@@ -294,6 +380,10 @@ public class FeatureDescriptor {
      * If the "transient" attribute is already set
      * it should not be changed.
      *
+     * <p>
+     *  根据注释设置"transient"属性。如果"transient"属性已设置,则不应更改。
+     * 
+     * 
      * @param annotation  the annotation of the element of the feature
      */
     void setTransient(Transient annotation) {
@@ -305,6 +395,10 @@ public class FeatureDescriptor {
     /**
      * Indicates whether the feature is transient.
      *
+     * <p>
+     *  指示功能是否为暂时的。
+     * 
+     * 
      * @return {@code true} if the feature is transient,
      *         {@code false} otherwise
      */
@@ -330,6 +424,10 @@ public class FeatureDescriptor {
     /**
      * Creates a new soft reference that refers to the given object.
      *
+     * <p>
+     *  创建引用给定对象的新软引用。
+     * 
+     * 
      * @return a new soft reference or <code>null</code> if object is <code>null</code>
      *
      * @see SoftReference
@@ -343,6 +441,10 @@ public class FeatureDescriptor {
     /**
      * Creates a new weak reference that refers to the given object.
      *
+     * <p>
+     *  创建一个引用给定对象的新弱引用。
+     * 
+     * 
      * @return a new weak reference or <code>null</code> if object is <code>null</code>
      *
      * @see WeakReference
@@ -356,6 +458,10 @@ public class FeatureDescriptor {
     /**
      * Resolves the return type of the method.
      *
+     * <p>
+     *  解析方法的返回类型。
+     * 
+     * 
      * @param base    the class that contains the method in the hierarchy
      * @param method  the object that represents the method
      * @return a class identifying the return type of the method
@@ -373,6 +479,10 @@ public class FeatureDescriptor {
     /**
      * Resolves the parameter types of the method.
      *
+     * <p>
+     *  解析方法的参数类型。
+     * 
+     * 
      * @param base    the class that contains the method in the hierarchy
      * @param method  the object that represents the method
      * @return an array of classes identifying the parameter types of the method
@@ -398,6 +508,9 @@ public class FeatureDescriptor {
     /**
      * Returns a string representation of the object.
      *
+     * <p>
+     *  返回对象的字符串表示形式。
+     * 
      * @return a string representation of the object
      *
      * @since 1.7

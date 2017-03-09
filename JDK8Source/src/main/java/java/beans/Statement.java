@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,11 @@ import sun.reflect.misc.MethodUtil;
  * with its environment as a simple set of values:
  * the target and an array of argument values.
  *
+ * <p>
+ *  一个<code> Statement </code>对象表示一个原始语句,其中单个方法应用于目标和一组参数 - 如<code>"a.setFoo(b)"</code>。
+ * 请注意,在此示例使用名称来表示目标及其参数时,语句对象不需要命名空间,并使用值本身构造。语句对象将命名方法与其环境关联为一组简单的值：目标和参数值数组。
+ * 
+ * 
  * @since 1.4
  *
  * @author Philip Milne
@@ -84,6 +90,14 @@ public class Statement {
      * If the {@code arguments} value is {@code null},
      * an empty array is used as the value of the {@code arguments} property.
      *
+     * <p>
+     *  为指定的目标对象创建一个新的{@link Statement}对象,以调用由名称和参数数组指定的方法。
+     * <p>
+     *  {@code target}和{@code methodName}值不应为{@code null}。
+     * 否则,尝试执行此{@code Expression}将导致{@code NullPointerException}。
+     * 如果{@code arguments}值是{@code null},则使用空数组作为{@code arguments}属性的值。
+     * 
+     * 
      * @param target  the target object of this statement
      * @param methodName  the name of the method to invoke on the specified target
      * @param arguments  the array of arguments to invoke the specified method
@@ -101,6 +115,10 @@ public class Statement {
      * the {@link #execute} method
      * throws a {@code NullPointerException}.
      *
+     * <p>
+     *  返回此语句的目标对象。如果此方法返回{@code null},则{@link #execute}方法会抛出一个{@code NullPointerException}。
+     * 
+     * 
      * @return the target object of this statement
      */
     public Object getTarget() {
@@ -113,6 +131,10 @@ public class Statement {
      * the {@link #execute} method
      * throws a {@code NullPointerException}.
      *
+     * <p>
+     *  返回要调用的方法的名称。如果此方法返回{@code null},则{@link #execute}方法会抛出一个{@code NullPointerException}。
+     * 
+     * 
      * @return the name of the method
      */
     public String getMethodName() {
@@ -125,6 +147,10 @@ public class Statement {
      * must match the method being  called.
      * {@code null} can be used as a synonym of an empty array.
      *
+     * <p>
+     * 返回要调用的方法的参数。参数的数量及其类型必须与正在调用的方法匹配。 {@code null}可以用作空数组的同义词。
+     * 
+     * 
      * @return the array of arguments
      */
     public Object[] getArguments() {
@@ -160,6 +186,22 @@ public class Statement {
      * the static methods of the same name in the {@code Array} class.
      * </ul>
      *
+     * <p>
+     *  {@code execute}方法找到一个名称与{@code methodName}属性相同的方法,并调用目标上的方法。
+     * 
+     *  当目标的类定义了许多具有给定名称的方法时,实现应该使用Java语言规范(15.11)中指定的算法来选择最具体的方法。
+     * 目标和参数的动态类用于代替编译时类型信息,像{@link java.lang.reflect.Method}类本身,在原始值和它们相关的包装器类之间的转换是在内部处理的。
+     * <p>
+     *  以下方法类型作为特殊情况处理：
+     * <ul>
+     * <li>
+     *  可以通过使用类对象作为目标来调用静态方法。
+     * <li>
+     *  保留的方法名"new"可以用于调用类的构造函数,好像所有类定义了静态"新"方法。
+     * 构造函数调用通常被认为是{@code Expression}而不是{@code Statement},因为它们返回一个值。
+     * <li>
+     *  在{@link java.util.List}接口中定义的方法名"get"和"set"也可以应用于数组实例,映射到{@code Array}类中同名的静态方法。
+     * 
      * @throws NullPointerException if the value of the {@code target} or
      *                              {@code methodName} property is {@code null}
      * @throws NoSuchMethodException if a matching method is not found
@@ -228,6 +270,9 @@ public class Statement {
             This way "System.class", for example, will perform both
             the static method getProperties() and the instance method
             getSuperclass() defined in "Class.class".
+            /* <p>
+            /* </ul>
+            /* 
             */
             if (methodName.equals("new")) {
                 methodName = "newInstance";
@@ -272,6 +317,10 @@ public class Statement {
             changing the state of an instance. Normally statements with side
             effects on objects are instance methods of the objects themselves
             and we reinstate this rule (perhaps temporarily) by special-casing arrays.
+            /* <p>
+            /* 对于类方法,通过采用实际类的静态方法的并集,使用"Class.class"的实例方法和构造函数定义的重载的"newInstance"方法来模拟元类的效果。
+            /* 这种方式"System.class",例如,将执行静态方法getProperties()和在"Class.class"中定义的实例方法getSuperclass()。
+            /* 
             */
             if (target.getClass().isArray() &&
                 (methodName.equals("set") || methodName.equals("get"))) {
@@ -331,6 +380,10 @@ public class Statement {
 
     /**
      * Prints the value of this statement using a Java-style syntax.
+     * <p>
+     *  这种数组的特殊外壳不是必要的,但是使涉及数组的文件更短并简化了存档基础。 Array.set()方法引入了一个不寻常的想法 - 静态方法改变实例的状态。
+     * 通常,对对象有副作用的语句是对象本身的实例方法,我们通过专用数组来恢复这个规则(可能是暂时的)。
+     * 
      */
     public String toString() {
         // Respect a subclass's implementation here.

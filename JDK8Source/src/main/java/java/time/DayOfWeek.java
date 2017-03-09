@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time;
 
@@ -104,6 +123,23 @@ import java.util.Locale;
  * @implSpec
  * This is an immutable and thread-safe enum.
  *
+ * <p>
+ *  星期几,例如"星期二"。
+ * <p>
+ *  {@code DayOfWeek}是表示一周中的7天的枚举 - 星期一,星期二,星期三,星期四,星期五,星期六和星期日。
+ * <p>
+ *  除了文本枚举名称外,每个星期几都有一个{@code int}值。 {@code int}值遵循ISO-8601标准,从1(星期一)到7(星期日)。
+ * 建议应用程序使用枚举而不是{@code int}值来确保代码的清晰度。
+ * <p>
+ *  此枚举允许访问星期几的本地化文本形式。一些区域设置也为这些天分配不同的数字值,声明Sunday的值为1,但是此类不提供此支持。有关本地化的星期编号,请参阅{@link WeekFields}。
+ * <p>
+ * <b>不要使用{@code ordinal()}获取{@code DayOfWeek}的数字表示形式。请改用{@code getValue()}。</b>
+ * <p>
+ *  这个枚举表示在许多日历系统中找到的常见概念。因此,该枚举可以由具有与ISO日历系统完全等效的星期几概念的任何日历系统使用。
+ * 
+ *  @implSpec这是一个不可变和线程安全的枚举。
+ * 
+ * 
  * @since 1.8
  */
 public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
@@ -111,40 +147,64 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
     /**
      * The singleton instance for the day-of-week of Monday.
      * This has the numeric value of {@code 1}.
+     * <p>
+     *  星期一的星期几的单例实例。它具有{@code 1}的数值。
+     * 
      */
     MONDAY,
     /**
      * The singleton instance for the day-of-week of Tuesday.
      * This has the numeric value of {@code 2}.
+     * <p>
+     *  星期二的星期几的单例实例。它具有{@code 2}的数值。
+     * 
      */
     TUESDAY,
     /**
      * The singleton instance for the day-of-week of Wednesday.
      * This has the numeric value of {@code 3}.
+     * <p>
+     *  星期三的星期几的单例实例。它具有{@code 3}的数值。
+     * 
      */
     WEDNESDAY,
     /**
      * The singleton instance for the day-of-week of Thursday.
      * This has the numeric value of {@code 4}.
+     * <p>
+     *  星期四的星期几的单例实例。它的数值为{@code 4}。
+     * 
      */
     THURSDAY,
     /**
      * The singleton instance for the day-of-week of Friday.
      * This has the numeric value of {@code 5}.
+     * <p>
+     *  星期五的星期几的单例实例。它具有{@code 5}的数值。
+     * 
      */
     FRIDAY,
     /**
      * The singleton instance for the day-of-week of Saturday.
      * This has the numeric value of {@code 6}.
+     * <p>
+     *  星期六的星期几的单例实例。它具有{@code 6}的数值。
+     * 
      */
     SATURDAY,
     /**
      * The singleton instance for the day-of-week of Sunday.
      * This has the numeric value of {@code 7}.
+     * <p>
+     *  星期日的星期几的单例实例。它的数值为{@code 7}。
+     * 
      */
     SUNDAY;
     /**
      * Private cache of all the constants.
+     * <p>
+     *  所有常量的私有缓存。
+     * 
      */
     private static final DayOfWeek[] ENUMS = DayOfWeek.values();
 
@@ -156,6 +216,12 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * This factory allows the enum to be obtained from the {@code int} value.
      * The {@code int} value follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday).
      *
+     * <p>
+     *  从{@code int}值获取{@code DayOfWeek}的实例。
+     * <p>
+     *  {@code DayOfWeek}是表示一周7天的枚举。此工厂允许从{@code int}值获取枚举。 {@code int}值遵循ISO-8601标准,从1(星期一)到7(星期日)。
+     * 
+     * 
      * @param dayOfWeek  the day-of-week to represent, from 1 (Monday) to 7 (Sunday)
      * @return the day-of-week singleton, not null
      * @throws DateTimeException if the day-of-week is invalid
@@ -180,6 +246,16 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code DayOfWeek::from}.
      *
+     * <p>
+     *  从临时对象获取{@code DayOfWeek}的实例。
+     * <p>
+     * 这基于指定的时间获得星期几。 {@code TemporalAccessor}表示一组任意的日期和时间信息,此工厂将其转换为{@code DayOfWeek}的实例。
+     * <p>
+     *  转换会提取{@link ChronoField#DAY_OF_WEEK DAY_OF_WEEK}字段。
+     * <p>
+     *  此方法匹配功能接口{@link TemporalQuery}的签名,允许它通过方法引用{@code DayOfWeek :: from}用作查询。
+     * 
+     * 
      * @param temporal  the temporal object to convert, not null
      * @return the day-of-week, not null
      * @throws DateTimeException if unable to convert to a {@code DayOfWeek}
@@ -203,6 +279,12 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * The values are numbered following the ISO-8601 standard, from 1 (Monday) to 7 (Sunday).
      * See {@link WeekFields#dayOfWeek} for localized week-numbering.
      *
+     * <p>
+     *  获取星期几{@code int}值。
+     * <p>
+     *  这些值按照ISO-8601标准编号,从1(星期一)到7(星期日)。有关本地化的星期编号,请参阅{@link WeekFields#dayOfWeek}。
+     * 
+     * 
      * @return the day-of-week, from 1 (Monday) to 7 (Sunday)
      */
     public int getValue() {
@@ -219,6 +301,14 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * <p>
      * If no textual mapping is found then the {@link #getValue() numeric value} is returned.
      *
+     * <p>
+     *  获取文本表示形式,例如"星期一"或"星期五"。
+     * <p>
+     *  这返回用于标识星期几的文本名称,适合于向用户呈现。参数控制返回的文本和语言环境的样式。
+     * <p>
+     *  如果没有找到文本映射,则返回{@link #getValue()数字值}。
+     * 
+     * 
      * @param style  the length of the text required, not null
      * @param locale  the locale to use, not null
      * @return the text value of the day-of-week, not null
@@ -244,6 +334,19 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * passing {@code this} as the argument.
      * Whether the field is supported is determined by the field.
      *
+     * <p>
+     *  检查是否支持指定的字段。
+     * <p>
+     *  这将检查是否可以查询指定字段的星期几。
+     * 如果为false,则调用{@link #range(TemporalField)range}和{@link #get(TemporalField)get}方法将抛出异常。
+     * <p>
+     *  如果字段为{@link ChronoField#DAY_OF_WEEK DAY_OF_WEEK},则此方法返回true。所有其他{@code ChronoField}实例将返回false。
+     * <p>
+     * 如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.isSupportedBy(TemporalAccessor)}传递{@code this}作为
+     * 参数来获得此方法的结果。
+     * 字段是否受支持由字段确定。
+     * 
+     * 
      * @param field  the field to check, null returns false
      * @return true if the field is supported on this day-of-week, false if not
      */
@@ -272,6 +375,19 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * passing {@code this} as the argument.
      * Whether the range can be obtained is determined by the field.
      *
+     * <p>
+     *  获取指定字段的有效值范围。
+     * <p>
+     *  范围对象表示字段的最小和最大有效值。这个星期用于提高返回范围的准确性。如果不可能返回范围,因为该字段不受支持或由于某种其他原因,将抛出异常。
+     * <p>
+     *  如果该字段为{@link ChronoField#DAY_OF_WEEK DAY_OF_WEEK},则将返回星期几的范围(从1到7)。
+     * 所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.rangeRefinedBy(TemporalAccessor)}传递{@code this}
+     * 作为参数来获得此方法的结果。
+     * 是否可以获得范围由字段确定。
+     * 
+     * 
      * @param field  the field to query the range for, not null
      * @return the range of valid values for the field, not null
      * @throws DateTimeException if the range for the field cannot be obtained
@@ -302,6 +418,19 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * passing {@code this} as the argument. Whether the value can be obtained,
      * and what the value represents, is determined by the field.
      *
+     * <p>
+     *  从这个星期中获取指定字段的值作为{@code int}。
+     * <p>
+     *  这将查询指定字段的值的星期几。返回的值将始终在字段的有效值范围内。如果不可能返回值,因为该字段不受支持或由于某种其他原因,将抛出异常。
+     * <p>
+     * 如果该字段为{@link ChronoField#DAY_OF_WEEK DAY_OF_WEEK},则将返回星期几的值(从1到7)。
+     * 所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.getFrom(TemporalAccessor)}传递{@code this}作为参数来获得
+     * 此方法的结果。
+     * 是否可以获取该值以及该值表示什么,由字段确定。
+     * 
+     * 
      * @param field  the field to get, not null
      * @return the value for the field, within the valid range of values
      * @throws DateTimeException if a value for the field cannot be obtained or
@@ -334,6 +463,19 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * passing {@code this} as the argument. Whether the value can be obtained,
      * and what the value represents, is determined by the field.
      *
+     * <p>
+     *  从这个星期中获取指定字段的值为{@code long}。
+     * <p>
+     *  这将查询指定字段的值的星期几。如果不可能返回值,因为该字段不受支持或由于某种其他原因,将抛出异常。
+     * <p>
+     *  如果该字段为{@link ChronoField#DAY_OF_WEEK DAY_OF_WEEK},则将返回星期几的值(从1到7)。
+     * 所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.getFrom(TemporalAccessor)}传递{@code this}作为参数来获得
+     * 此方法的结果。
+     * 是否可以获取该值以及该值表示什么,由字段确定。
+     * 
+     * 
      * @param field  the field to get, not null
      * @return the value for the field
      * @throws DateTimeException if a value for the field cannot be obtained
@@ -359,6 +501,14 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回在此日之后指定天数的星期几。
+     * <p>
+     *  计算从周日到周一结束。指定的期间可以为负。
+     * <p>
+     * 此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param days  the days to add, positive or negative
      * @return the resulting day-of-week, not null
      */
@@ -375,6 +525,14 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回在此日期之前指定天数的星期几。
+     * <p>
+     *  计算在周一到周日的年初开始。指定的期间可以为负。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param days  the days to subtract, positive or negative
      * @return the resulting day-of-week, not null
      */
@@ -395,6 +553,14 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * {@link TemporalQuery#queryFrom(TemporalAccessor)} method on the
      * specified query passing {@code this} as the argument.
      *
+     * <p>
+     *  使用指定的查询查询此星期几。
+     * <p>
+     *  这将使用指定的查询策略对象查询此星期几。 {@code TemporalQuery}对象定义用于获取结果的逻辑。阅读查询的文档以了解此方法的结果。
+     * <p>
+     *  此方法的结果是通过对指定的查询调用{@link TemporalQuery#queryFrom(TemporalAccessor)}方法传递{@code this}作为参数来获得的。
+     * 
+     * 
      * @param <R> the type of the result
      * @param query  the query to invoke, not null
      * @return the query result, null may be returned (defined by the query)
@@ -444,6 +610,20 @@ public enum DayOfWeek implements TemporalAccessor, TemporalAdjuster {
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  将指定的时间对象调整为具有此星期几。
+     * <p>
+     *  这返回一个与输入相同的observable类型的时间对象,其中星期更改为与此相同。
+     * <p>
+     *  该调整等同于使用{@link Temporal#with(TemporalField,long)}传递{@link ChronoField#DAY_OF_WEEK}作为字段。
+     * 请注意,这是在星期一至星期日向前或向后调整。有关本地化周开始日期,请参阅{@link WeekFields#dayOfWeek}。
+     * 有关更多控制项的其他调整项(例如{@code next(MONDAY)}),请参阅{@code TemporalAdjuster}。
+     * <p>
+     *  在大多数情况下,通过使用{@link Temporal#with(TemporalAdjuster)}来反转呼叫模式是更清楚的：
+     * <pre>
+     * //这两行是等价的,但第二种方法是推荐temporal = thisDayOfWeek.adjustInto(temporal); temporal = temporal.with(thisDayOfW
+     * eek);。
+     * 
      * @param temporal  the target object to be adjusted, not null
      * @return the adjusted object, not null
      * @throws DateTimeException if unable to make the adjustment

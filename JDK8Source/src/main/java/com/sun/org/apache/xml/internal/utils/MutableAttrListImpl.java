@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: MutableAttrListImpl.java,v 1.2.4.1 2005/09/15 08:15:47 suresh_emailid Exp $
+ * <p>
+ *  $ Id：MutableAttrListImpl.java,v 1.2.4.1 2005/09/15 08:15:47 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -30,6 +43,9 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * Mutable version of AttributesImpl.
  * @xsl.usage advanced
+ * <p>
+ *  AttributesImpl的可变版本。 @ xsl.usage advanced
+ * 
  */
 public class MutableAttrListImpl extends AttributesImpl
         implements Serializable
@@ -38,6 +54,9 @@ public class MutableAttrListImpl extends AttributesImpl
 
 /**
  * Construct a new, empty AttributesImpl object.
+ * <p>
+ *  构造一个新的,空的AttributesImpl对象。
+ * 
  */
 
 public MutableAttrListImpl()
@@ -51,6 +70,12 @@ public MutableAttrListImpl()
    * <p>This constructor is especially useful inside a start
    * element event.</p>
    *
+   * <p>
+   *  复制现有的Attributes对象。
+   * 
+   *  <p>此构造函数在start元素事件内特别有用。</p>
+   * 
+   * 
    * @param atts The existing Attributes object.
    */
   public MutableAttrListImpl(Attributes atts)
@@ -65,6 +90,12 @@ public MutableAttrListImpl()
    * to see if the attribute is already in the list: that is
    * the responsibility of the application.</p>
    *
+   * <p>
+   *  将属性添加到列表的末尾。
+   * 
+   *  <p>为了速度,此方法不检查属性是否已在列表中：这是应用程序的职责。</p>
+   * 
+   * 
    * @param uri The Namespace URI, or the empty string if
    *        none is available or Namespace processing is not
    *        being performed.
@@ -98,6 +129,10 @@ public MutableAttrListImpl()
   /**
    * Add the contents of the attribute list to this list.
    *
+   * <p>
+   *  将属性列表的内容添加到此列表。
+   * 
+   * 
    * @param atts List of attributes to add to this list
    */
   public void addAttributes(Attributes atts)
@@ -128,6 +163,9 @@ public MutableAttrListImpl()
   /**
    * Return true if list contains the given (raw) attribute name.
    *
+   * <p>
+   *  如果列表包含给定(原始)属性名称,则返回true。
+   * 
    * @param name Raw name of attribute to look for
    *
    * @return true if an attribute is found with this name

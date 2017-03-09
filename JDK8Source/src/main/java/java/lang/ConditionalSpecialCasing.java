@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,12 @@ import sun.text.Normalizer;
  * <p>
  * Note that the unconditional case mappings (including 1:M mappings)
  * are handled in <code>Character.toLower/UpperCase()</code>.
+ * <p>
+ *  这是<code> String.toLowerCase()</code>和<code> String.toUpperCase()</code>的一个实用程序类,用于处理具有条件的特殊外壳。
+ * 换句话说,它处理在<a href="http://www.unicode.org/Public/UNIDATA/SpecialCasing.txt">特殊案例属性</a>文件中定义的条件的映射。
+ * <p>
+ *  注意,无条件大小写映射(包括1：M映射)在<code> Character.toLower / UpperCase()</code>中处理。
+ * 
  */
 final class ConditionalSpecialCasing {
 
@@ -201,6 +208,13 @@ final class ConditionalSpecialCasing {
      * Regular Expression:
      *   Before C: [{cased==true}][{wordBoundary!=true}]*
      *   After C: !([{wordBoundary!=true}]*[{cased}])
+     * <p>
+     *  实现"Final_Cased"条件
+     * 
+     *  规范：在包含C的最近单词边界内,在C之前有一个套管字母,并且在C之后没有套管字母。
+     * 
+     *  正则表达式：C之前：[{cased == true}] [{wordBoundary！= true}] * C：！([{wordBoundary！= true}] *
+     * 
      */
     private static boolean isFinalCased(String src, int index, Locale locale) {
         BreakIterator wordBoundary = BreakIterator.getWordInstance(locale);
@@ -241,6 +255,13 @@ final class ConditionalSpecialCasing {
      *
      * Regular Expression:
      *   Before C: [I]([{cc!=230}&{cc!=0}])*
+     * <p>
+     *  实现"After_I"条件
+     * 
+     *  规范：最后一个前面的基本字符是大写的I,没有居间的组合字符类230(ABOVE)。
+     * 
+     *  正则表达式：C：[I]([{cc！= 230}&{cc！= 0}])*
+     * 
      */
     private static boolean isAfterI(String src, int index) {
         int ch;
@@ -273,6 +294,13 @@ final class ConditionalSpecialCasing {
      *
      * Regular Expression:
      *   Before C: [{Soft_Dotted==true}]([{cc!=230}&{cc!=0}])*
+     * <p>
+     *  实现"After_Soft_Dotted"条件
+     * 
+     *  规范：最后一个前面的字符,在C之前的组合类零是Soft_Dotted,并且没有居间组合字符类230(ABOVE)。
+     * 
+     *  正则表达式：C之前：[{Soft_Dotted == true}]([{cc！= 230}&{cc！= 0}])*
+     * 
      */
     private static boolean isAfterSoftDotted(String src, int index) {
         int ch;
@@ -304,6 +332,13 @@ final class ConditionalSpecialCasing {
      *
      * Regular Expression:
      *   After C: [{cc!=0}]*[{cc==230}]
+     * <p>
+     *  实现"More_Above"条件
+     * 
+     * 规范：C后面是组合字符序列中的组合类230(ABOVE)的一个或多个字符。
+     * 
+     *  正则表达式：C之后：[{cc！= 0}] * [{cc == 230}]
+     * 
      */
     private static boolean isMoreAbove(String src, int index) {
         int ch;
@@ -337,6 +372,13 @@ final class ConditionalSpecialCasing {
      *
      * Regular Expression:
      *   After C: ([{cc!=230}&{cc!=0}])*[\u0307]
+     * <p>
+     *  实现"Before_Dot"条件
+     * 
+     *  规格：C后面跟着<code> U + 0307 Comboto DOT ABOVE </code>。具有不是0或230的组合类的任何字符序列可以介于当前字符和上面的组合点之间。
+     * 
+     *  正则表达式：C：([{cc！= 230}&{cc！= 0}])* [\ u0307]
+     * 
      */
     private static boolean isBeforeDot(String src, int index) {
         int ch;
@@ -371,6 +413,12 @@ final class ConditionalSpecialCasing {
      *
      * The uppercase and lowercase property values are specified in the data
      * file DerivedCoreProperties.txt in the Unicode Character Database.
+     * <p>
+     *  检查字符是否"套上"。
+     * 
+     *  当且仅当以下至少一个对于C：大写==真或小写==真或general_category == titlecase_letter为真时,字符C被定义为"套用"。
+     * 
+     *  大写和小写属性值在Unicode字符数据库中的数据文件DerivedCoreProperties.txt中指定。
      */
     private static boolean isCased(int ch) {
         int type = Character.getType(ch);
@@ -433,6 +481,8 @@ final class ConditionalSpecialCasing {
 
     /**
      * An internal class that represents an entry in the Special Casing Properties.
+     * <p>
+     * 
      */
     static class Entry {
         int ch;

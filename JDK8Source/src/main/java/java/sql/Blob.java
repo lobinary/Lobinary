@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,22 @@ import java.io.InputStream;
  * All methods on the <code>Blob</code> interface must be fully implemented if the
  * JDBC driver supports the data type.
  *
+ * <p>
+ *  Java和贸易中的表示(映射) SQL <code> BLOB </code>值的编程语言。
+ *  SQL <code> BLOB </code>是一种内置类型,它将二进制大对象作为列值存储在数据库表的行中。
+ * 默认驱动程序使用SQL <code>定位器(BLOB)</code>实现<code> Blob </code>,这意味着<code> Blob </code>对象包含SQL < BLOB </code>
+ * 数据,而不是数据本身。
+ *  SQL <code> BLOB </code>是一种内置类型,它将二进制大对象作为列值存储在数据库表的行中。 <code> Blob </code>对象在创建其中的事务的有效期内有效。
+ * 
+ *  <P>接口{@link ResultSet},{@link CallableStatement}和{@link PreparedStatement}中的方法(如<code> getBlob </code>
+ * 和<code> setBlob </code>)允许程序员访问一个SQL <code> BLOB </code>值。
+ *  <code> Blob </code>接口提供了获取SQL <code> BLOB </code>(二进制大对象)值长度的方法,用于在客户端上实现<code> BLOB </code>并且用于确定<code>
+ *  BLOB </code>值内的字节模式的位置。
+ * 此外,该接口具有用于更新<code> BLOB </code>值的方法。
+ * <p>
+ *  如果JDBC驱动程序支持数据类型,则必须完全实现<code> Blob </code>接口上的所有方法。
+ * 
+ * 
  * @since 1.2
  */
 
@@ -62,6 +79,10 @@ public interface Blob {
   /**
    * Returns the number of bytes in the <code>BLOB</code> value
    * designated by this <code>Blob</code> object.
+   * <p>
+   *  返回由<code> Blob </code>对象指定的<code> BLOB </code>值中的字节数。
+   * 
+   * 
    * @return length of the <code>BLOB</code> in bytes
    * @exception SQLException if there is an error accessing the
    * length of the <code>BLOB</code>
@@ -77,6 +98,11 @@ public interface Blob {
    * bytes.  This <code>byte</code> array contains up to <code>length</code>
    * consecutive bytes starting at position <code>pos</code>.
    *
+   * <p>
+   * 撷取这个<code> Blob </code>物件代表的全部或部分<code> BLOB </code>值,作为一个字节数组。
+   * 这个<code> byte </code>数组包含从<code> pos </code>开始的<code> length </code>个连续字节。
+   * 
+   * 
    * @param pos the ordinal position of the first byte in the
    *        <code>BLOB</code> value to be extracted; the first byte is at
    *        position 1
@@ -100,6 +126,10 @@ public interface Blob {
    * Retrieves the <code>BLOB</code> value designated by this
    * <code>Blob</code> instance as a stream.
    *
+   * <p>
+   *  撷取由此<code> Blob </code>实例指定为作为流的<code> BLOB </code>值。
+   * 
+   * 
    * @return a stream containing the <code>BLOB</code> data
    * @exception SQLException if there is an error accessing the
    *            <code>BLOB</code> value
@@ -117,6 +147,11 @@ public interface Blob {
    * search for <code>pattern</code> begins at position
    * <code>start</code>.
    *
+   * <p>
+   *  检索指定的字节数组<code>模式</code>在<code> Blob </code>对象表示的<code> BLOB </code>值中开始的字节位置。
+   * 搜索<code> pattern </code>开始于<code> start </code>。
+   * 
+   * 
    * @param pattern the byte array for which to search
    * @param start the position at which to begin searching; the
    *        first position is 1
@@ -135,6 +170,10 @@ public interface Blob {
    * <code>pattern</code> begins.  The search begins at position
    * <code>start</code>.
    *
+   * <p>
+   *  检索由<code>模式</code>开始的<code> Blob </code>对象指定的<code> BLOB </code>值中的字节位置。搜索从<code> start </code>开始。
+   * 
+   * 
    * @param pattern the <code>Blob</code> object designating
    * the <code>BLOB</code> value for which to search
    * @param start the position in the <code>BLOB</code> value
@@ -166,6 +205,15 @@ public interface Blob {
      * <code>SQLException</code> while other drivers may support this
      * operation.
      *
+     * <p>
+     *  将给定的字节数组写入这个<code> Blob </code>对象表示的<code> BLOB </code>值,从位置<code> pos </code>开始,并返回写入的字节数。
+     * 字节数组将覆盖<code> Blob </code>对象中起始于<code> pos </code>位置的现有字节。
+     * 如果在写入字节数组时达到<code> Blob </code>值的结尾,则<code> Blob </code>值的长度将增加以容纳额外的字节。
+     * <p>
+     * <b>注意：</b>如果<code> pos </code>指定的值大于<code> BLOB </code>值的长度+1,那么行为是未定义的。
+     * 一些JDBC驱动程序可能会抛出一个<code> SQLException </code>,而其他驱动程序可能支持此操作。
+     * 
+     * 
      * @param pos the position in the <code>BLOB</code> object at which
      *        to start writing; the first position is 1
      * @param bytes the array of bytes to be written to the <code>BLOB</code>
@@ -198,6 +246,16 @@ public interface Blob {
      * <code>SQLException</code> while other drivers may support this
      * operation.
      *
+     * <p>
+     *  将给定<code> byte </code>数组的全部或部分写入此<b> </code>对象表示的<code> BLOB </code>值,并返回写入的字节数。
+     * 写入从<code> BLOB </code>值中的<code> pos </code>位置开始;来自给定字节数组的<code> len </code>字节被写入。
+     * 字节数组将覆盖<code> Blob </code>对象中起始于<code> pos </code>位置的现有字节。
+     * 如果在写入字节数组时达到<code> Blob </code>值的结尾,则<code> Blob </code>值的长度将增加以容纳额外的字节。
+     * <p>
+     *  <b>注意：</b>如果<code> pos </code>指定的值大于<code> BLOB </code>值的长度+1,那么行为是未定义的。
+     * 一些JDBC驱动程序可能会抛出一个<code> SQLException </code>,而其他驱动程序可能支持此操作。
+     * 
+     * 
      * @param pos the position in the <code>BLOB</code> object at which
      *        to start writing; the first position is 1
      * @param bytes the array of bytes to be written to this <code>BLOB</code>
@@ -232,6 +290,15 @@ public interface Blob {
      * <code>SQLException</code> while other drivers may support this
      * operation.
      *
+     * <p>
+     * 检索可用于写入此<b> <b> </code>对象表示的<code> BLOB </code>值的流。流开始于位置<code> pos </code>。
+     * 写入流的字节将覆盖从<code> pos </code>位置开始的<code> Blob </code>对象中的现有字节。
+     * 如果在写入流时达到<code> Blob </code>值的结尾,则<code> Blob </code>值的长度将增加以容纳额外的字节。
+     * <p>
+     *  <b>注意：</b>如果<code> pos </code>指定的值大于<code> BLOB </code>值的长度+1,那么行为是未定义的。
+     * 一些JDBC驱动程序可能会抛出一个<code> SQLException </code>,而其他驱动程序可能支持此操作。
+     * 
+     * 
      * @param pos the position in the <code>BLOB</code> value at which
      *        to start writing; the first position is 1
      * @return a <code>java.io.OutputStream</code> object to which data can
@@ -255,6 +322,13 @@ public interface Blob {
      * <code>SQLException</code> while other drivers may support this
      * operation.
      *
+     * <p>
+     *  截断<code> BLOB </code>值,这个<code> Blob </code>对象表示长度为<code> len </code>个字节。
+     * <p>
+     *  <b>注意：</b>如果<code> pos </code>指定的值大于<code> BLOB </code>值的长度+1,那么行为是未定义的。
+     * 一些JDBC驱动程序可能会抛出一个<code> SQLException </code>,而其他驱动程序可能支持此操作。
+     * 
+     * 
      * @param len the length, in bytes, to which the <code>BLOB</code> value
      *        that this <code>Blob</code> object represents should be truncated
      * @exception SQLException if there is an error accessing the
@@ -276,6 +350,13 @@ public interface Blob {
      * calls to <code>free</code> are treated as a no-op.
      *<p>
      *
+     * <p>
+     *  此方法释放<code> Blob </code>对象并释放其保存的资源。一旦调用<code> free </code>方法,对象就无效。
+     * p>
+     * 在调用<code> free </code>之后,任何调用除<code> free </code>之外的方法的尝试都会导致抛出<code> SQLException </code>。
+     * 如果多次调用<code> free </code>,则对<code> free </code>的后续调用将被视为无操作。
+     * p>
+     * 
      * @throws SQLException if an error occurs releasing
      * the Blob's resources
      * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -288,6 +369,9 @@ public interface Blob {
      * Returns an <code>InputStream</code> object that contains a partial <code>Blob</code> value,
      * starting  with the byte specified by pos, which is length bytes in length.
      *
+     * <p>
+     * 
+     * 
      * @param pos the offset to the first byte of the partial value to be retrieved.
      *  The first byte in the <code>Blob</code> is at position 1
      * @param length the length in bytes of the partial value to be retrieved

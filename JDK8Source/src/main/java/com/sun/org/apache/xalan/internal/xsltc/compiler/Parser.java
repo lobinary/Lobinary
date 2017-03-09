@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Parser.java,v 1.2.4.1 2005/09/13 12:14:32 pvedula Exp $
+ * <p>
+ *  $ Id：Parser.java,v 1.2.4.1 2005/09/13 12:14:32 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -59,6 +72,8 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author G. Todd Miller
@@ -360,6 +375,9 @@ public class Parser implements Constants, ContentHandler {
      * Create an instance of the <code>Stylesheet</code> class,
      * and then parse, typecheck and compile the instance.
      * Must be called after <code>parse()</code>.
+     * <p>
+     *  创建<代码>的实例样式表</code>类,然后解析,类型检测,并编译实例。必须在<code> parse()</code>之后调用。
+     * 
      */
     public Stylesheet makeStylesheet(SyntaxTreeNode element)
         throws CompilerException {
@@ -391,6 +409,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Instanciates a SAX2 parser and generate the AST from the input.
+     * <p>
+     *  创建一个SAX2解析器并从输入生成AST。
+     * 
      */
     public void createAST(Stylesheet stylesheet) {
         try {
@@ -419,6 +440,10 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Parses a stylesheet and builds the internal abstract syntax tree
+     * <p>
+     *  解析样式表并构建内部抽象语法树
+     * 
+     * 
      * @param reader A SAX2 SAXReader (parser)
      * @param input A SAX2 InputSource can be passed to a SAX reader
      * @return The root of the abstract syntax tree
@@ -456,6 +481,10 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Parses a stylesheet and builds the internal abstract syntax tree
+     * <p>
+     *  解析样式表并构建内部抽象语法树
+     * 
+     * 
      * @param input A SAX2 InputSource can be passed to a SAX reader
      * @return The root of the abstract syntax tree
      */
@@ -529,6 +558,10 @@ public class Parser implements Constants, ContentHandler {
      * Set the parameters to use to locate the correct <?xml-stylesheet ...?>
      * processing instruction in the case where the input document is an
      * XML document with one or more references to a stylesheet.
+     * <p>
+     *  设置参数来使用以定位正确<?xml样式表...?>在输入文件是与一个或多个引用到一个样式表将XML文档的情况下的处理的指令。
+     * 
+     * 
      * @param media The media attribute to be matched. May be null, in which
      * case the prefered templates will be used (i.e. alternate = no).
      * @param title The value of the title attribute to match. May be null.
@@ -548,6 +581,10 @@ public class Parser implements Constants, ContentHandler {
      * instruction (P.I.). In the xml-stylesheet P.I. the value is labeled
      * as the 'href' data of the P.I. The extracted DOM representing the
      * stylesheet is returned as an Element object.
+     * <p>
+     * 提取样式表的DOM。在嵌入样式表的情况下,它提取对应于具有'id'属性的嵌入样式表的DOM子树,该属性的值与在<?xml-stylesheet ...?>处理指令)。
+     * 在xml样式表该值被标记为P.I.的"href"数据。提取的表示样式表的DOM作为Element对象返回。
+     * 
      */
     private SyntaxTreeNode getStylesheet(SyntaxTreeNode root)
         throws CompilerException {
@@ -600,6 +637,9 @@ public class Parser implements Constants, ContentHandler {
      * Find a Stylesheet element with a specific ID attribute value.
      * This method is used to find a Stylesheet node that is referred
      * in a <?xml-stylesheet ... ?> processing instruction.
+     * <p>
+     *  查找具有特定ID属性值的样式表元素。此方法用于查找在<?xml-stylesheet ...?>处理指令中引用的样式表节点。
+     * 
      */
     private SyntaxTreeNode findStylesheet(SyntaxTreeNode root, String href) {
 
@@ -623,6 +663,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * For embedded stylesheets: Load an external file with stylesheet
+     * <p>
+     *  对于嵌入式样式表：使用样式表加载外部文件
+     * 
      */
     private SyntaxTreeNode loadExternalStylesheet(String location)
         throws CompilerException {
@@ -706,6 +749,9 @@ public class Parser implements Constants, ContentHandler {
     /**
      * Initialize the _instructionClasses Hashtable, which maps XSL element
      * names to Java classes in this package.
+     * <p>
+     *  初始化_instructionClasses Hashtable,它将XSL元素名称映射到此包中的Java类。
+     * 
      */
     private void initStdClasses() {
         initStdClass("template", "Template");
@@ -775,6 +821,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Add primops and base functions to the symbol table.
+     * <p>
+     *  将primops和基函数添加到符号表。
+     * 
      */
     private void initSymbolTable() {
         MethodType I_V  = new MethodType(Type.Int, Type.Void);
@@ -832,6 +881,9 @@ public class Parser implements Constants, ContentHandler {
          * Standard functions: implemented but not in this table concat().
          * When adding a new function make sure to uncomment
          * the corresponding line in <tt>FunctionAvailableCall</tt>.
+         * <p>
+         *  标准函数：实现但不在此表concat()。添加新函数时,请务必取消注释<tt> FunctionAvailableCall </tt>中的相应行。
+         * 
          */
 
         // The following functions are inlined
@@ -960,6 +1012,12 @@ public class Parser implements Constants, ContentHandler {
      * Unsupported elements do not directly generate an error. We have to wait
      * until we have received all child elements of an unsupported element to
      * see if any <xsl:fallback> elements exist.
+     * <p>
+     *  在抽象语法树中创建一个新节点。
+     * 此节点可以是o)支持的XSLT 1.0元素o)不支持的XSLT元素(post 1.0)o)支持的XSLT扩展o)不支持的XSLT扩展o)文字结果元素(不是XSLT元素而不是扩展)不支持元素不会直接生成错
+     * 误。
+     *  在抽象语法树中创建一个新节点。我们必须等待,直到我们收到一个不支持的元素的所有子元素,以查看是否存在任何<xsl：fallback>元素。
+     * 
      */
 
     private boolean versionIsOne = true;
@@ -1046,6 +1104,9 @@ public class Parser implements Constants, ContentHandler {
     /**
      * checks the list of attributes against a list of allowed attributes
      * for a particular element node.
+     * <p>
+     * 根据特定元素节点的允许属性列表检查属性列表。
+     * 
      */
     private void checkForSuperfluousAttributes(SyntaxTreeNode node,
         Attributes attrs)
@@ -1088,6 +1149,10 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Parse an XPath expression:
+     * <p>
+     *  解析XPath表达式：
+     * 
+     * 
      *  @param parent - XSL element where the expression occured
      *  @param exp    - textual representation of the expression
      */
@@ -1097,6 +1162,10 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Parse an XPath expression:
+     * <p>
+     *  解析XPath表达式：
+     * 
+     * 
      *  @param parent - XSL element where the expression occured
      *  @param attr   - name of this element's attribute to get expression from
      *  @param def    - default expression (if the attribute was not found)
@@ -1113,6 +1182,10 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Parse an XPath pattern:
+     * <p>
+     *  解析XPath模式：
+     * 
+     * 
      *  @param parent  - XSL element where the pattern occured
      *  @param pattern - textual representation of the pattern
      */
@@ -1122,6 +1195,10 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Parse an XPath pattern:
+     * <p>
+     *  解析XPath模式：
+     * 
+     * 
      *  @param parent - XSL element where the pattern occured
      *  @param attr   - name of this element's attribute to get pattern from
      *  @param def    - default pattern (if the attribute was not found)
@@ -1139,6 +1216,9 @@ public class Parser implements Constants, ContentHandler {
     /**
      * Parse an XPath expression or pattern using the generated XPathParser
      * The method will return a Dummy node if the XPath parser fails.
+     * <p>
+     *  使用生成的XPathParser解析XPath表达式或模式如果XPath解析器失败,该方法将返回Dummy节点。
+     * 
      */
     private SyntaxTreeNode parseTopLevel(SyntaxTreeNode parent, String text,
                                          String expression) {
@@ -1175,6 +1255,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Returns true if there were any errors during compilation
+     * <p>
+     *  如果在编译期间有任何错误,则返回true
+     * 
      */
     public boolean errorsFound() {
         return _errors.size() > 0;
@@ -1182,6 +1265,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Prints all compile-time errors
+     * <p>
+     *  打印所有编译时错误
+     * 
      */
     public void printErrors() {
         final int size = _errors.size();
@@ -1195,6 +1281,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Prints all compile-time warnings
+     * <p>
+     *  打印所有编译时警告
+     * 
      */
     public void printWarnings() {
         final int size = _warnings.size();
@@ -1208,6 +1297,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * Common error/warning message handler
+     * <p>
+     *  常见错误/警告消息处理程序
+     * 
      */
     public void reportError(final int category, final ErrorMsg error) {
         switch (category) {
@@ -1254,6 +1346,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * SAX2: Receive notification of the beginning of a document.
+     * <p>
+     *  SAX2：接收文档开头的通知。
+     * 
      */
     public void startDocument() {
         _root = null;
@@ -1264,6 +1359,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * SAX2: Receive notification of the end of a document.
+     * <p>
+     *  SAX2：接收文档结束的通知。
+     * 
      */
     public void endDocument() { }
 
@@ -1271,6 +1369,9 @@ public class Parser implements Constants, ContentHandler {
     /**
      * SAX2: Begin the scope of a prefix-URI Namespace mapping.
      *       This has to be passed on to the symbol table!
+     * <p>
+     *  SAX2：开始前缀-URI命名空间映射的范围。这必须传递到符号表！
+     * 
      */
     public void startPrefixMapping(String prefix, String uri) {
         if (_prefixMapping == null) {
@@ -1282,6 +1383,9 @@ public class Parser implements Constants, ContentHandler {
     /**
      * SAX2: End the scope of a prefix-URI Namespace mapping.
      *       This has to be passed on to the symbol table!
+     * <p>
+     *  SAX2：结束前缀URI范围的命名空间映射。这必须传递到符号表！
+     * 
      */
     public void endPrefixMapping(String prefix) { }
 
@@ -1289,6 +1393,9 @@ public class Parser implements Constants, ContentHandler {
      * SAX2: Receive notification of the beginning of an element.
      *       The parser may re-use the attribute list that we're passed so
      *       we clone the attributes in our own Attributes implementation
+     * <p>
+     *  SAX2：接收元素开头的通知。解析器可以重用我们传递的属性列表,因此我们在我们自己的Attributes实现中克隆属性
+     * 
      */
     public void startElement(String uri, String localname,
                              String qname, Attributes attributes)
@@ -1336,6 +1443,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * SAX2: Receive notification of the end of an element.
+     * <p>
+     *  SAX2：接收元素结束的通知。
+     * 
      */
     public void endElement(String uri, String localname, String qname) {
         _parentStack.pop();
@@ -1343,6 +1453,9 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * SAX2: Receive notification of character data.
+     * <p>
+     *  SAX2：接收字符数据的通知。
+     * 
      */
     public void characters(char[] ch, int start, int length) {
         String string = new String(ch, start, length);
@@ -1384,6 +1497,9 @@ public class Parser implements Constants, ContentHandler {
     /**
      * SAX2: Receive notification of a processing instruction.
      *       These require special handling for stylesheet PIs.
+     * <p>
+     *  SAX2：接收处理指令的通知。这些需要对样式表PI进行特殊处理。
+     * 
      */
     public void processingInstruction(String name, String value) {
         // We only handle the <?xml-stylesheet ...?> PI
@@ -1420,17 +1536,26 @@ public class Parser implements Constants, ContentHandler {
 
     /**
      * IGNORED - all ignorable whitespace is ignored
+     * <p>
+     *  IGNORED  - 忽略所有可忽略的空格
+     * 
      */
     public void ignorableWhitespace(char[] ch, int start, int length) { }
 
     /**
      * IGNORED - we do not have to do anything with skipped entities
+     * <p>
+     *  忽略 - 我们不必对跳过的实体执行任何操作
+     * 
      */
     public void skippedEntity(String name) { }
 
     /**
      * Store the document locator to later retrieve line numbers of all
      * elements from the stylesheet
+     * <p>
+     *  存储文档定位器以稍后从样式表中检索所有元素的行号
+     * 
      */
     public void setDocumentLocator(Locator locator) {
         _locator = locator;
@@ -1439,6 +1564,8 @@ public class Parser implements Constants, ContentHandler {
     /**
      * Get the line number, or zero
      * if there is no _locator.
+     * <p>
+     *  获取行号,如果没有_locator,则为零。
      */
     private int getLineNumber() {
         int line = 0;

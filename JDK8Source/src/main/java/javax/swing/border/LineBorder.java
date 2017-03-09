@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,13 @@ import java.beans.ConstructorProperties;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  实现任意厚度和单一颜色的线边界的类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  */
 public class LineBorder extends AbstractBorder
@@ -60,6 +68,7 @@ public class LineBorder extends AbstractBorder
     protected boolean roundedCorners;
 
     /** Convenience method for getting the Color.black LineBorder of thickness 1.
+    /* <p>
       */
     public static Border createBlackLineBorder() {
         if (blackLine == null) {
@@ -69,6 +78,7 @@ public class LineBorder extends AbstractBorder
     }
 
     /** Convenience method for getting the Color.gray LineBorder of thickness 1.
+    /* <p>
       */
     public static Border createGrayLineBorder() {
         if (grayLine == null) {
@@ -80,6 +90,10 @@ public class LineBorder extends AbstractBorder
     /**
      * Creates a line border with the specified color and a
      * thickness = 1.
+     * <p>
+     *  创建具有指定颜色和厚度= 1的线条边框。
+     * 
+     * 
      * @param color the color for the border
      */
     public LineBorder(Color color) {
@@ -88,6 +102,10 @@ public class LineBorder extends AbstractBorder
 
     /**
      * Creates a line border with the specified color and thickness.
+     * <p>
+     *  创建具有指定颜色和粗细的线边框。
+     * 
+     * 
      * @param color the color of the border
      * @param thickness the thickness of the border
      */
@@ -98,6 +116,10 @@ public class LineBorder extends AbstractBorder
     /**
      * Creates a line border with the specified color, thickness,
      * and corner shape.
+     * <p>
+     *  创建具有指定颜色,厚度和角形状的线边框。
+     * 
+     * 
      * @param color the color of the border
      * @param thickness the thickness of the border
      * @param roundedCorners whether or not border corners should be round
@@ -113,6 +135,10 @@ public class LineBorder extends AbstractBorder
     /**
      * Paints the border for the specified component with the
      * specified position and size.
+     * <p>
+     *  以指定的位置和大小绘制指定组件的边框。
+     * 
+     * 
      * @param c the component for which this border is being painted
      * @param g the paint graphics
      * @param x the x position of the painted border
@@ -151,6 +177,10 @@ public class LineBorder extends AbstractBorder
 
     /**
      * Reinitialize the insets parameter with this Border's current Insets.
+     * <p>
+     *  使用此Border的当前Insets重新初始化insets参数。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
      */
@@ -161,6 +191,9 @@ public class LineBorder extends AbstractBorder
 
     /**
      * Returns the color of the border.
+     * <p>
+     *  返回边框的颜色。
+     * 
      */
     public Color getLineColor()     {
         return lineColor;
@@ -168,6 +201,9 @@ public class LineBorder extends AbstractBorder
 
     /**
      * Returns the thickness of the border.
+     * <p>
+     *  返回边框的粗细。
+     * 
      */
     public int getThickness()       {
         return thickness;
@@ -175,6 +211,10 @@ public class LineBorder extends AbstractBorder
 
     /**
      * Returns whether this border will be drawn with rounded corners.
+     * <p>
+     *  返回此边框是否将使用圆角绘制。
+     * 
+     * 
      * @since 1.3
      */
     public boolean getRoundedCorners() {
@@ -183,6 +223,8 @@ public class LineBorder extends AbstractBorder
 
     /**
      * Returns whether or not the border is opaque.
+     * <p>
+     *  返回边框是否不透明。
      */
     public boolean isBorderOpaque() {
         return !roundedCorners;

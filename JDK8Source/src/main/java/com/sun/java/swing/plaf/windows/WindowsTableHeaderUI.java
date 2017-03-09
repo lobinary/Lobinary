@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -110,6 +111,9 @@ public class WindowsTableHeaderUI extends BasicTableHeaderUI {
              * HP_HEADERITEM content. It does not seem to come from
              * Prop.CONTENTMARGINS. Do not know where it is defined.
              * using some hardcoded values.
+             * <p>
+             *  在Vista和XP上都有一些偏移到HP_HEADERITEM的内容。它似乎不是来自Prop.CONTENTMARGINS。不知道它在哪里定义。使用一些硬编码值。
+             * 
              */
             contentLeft += 5;
             contentBottom += 4;
@@ -117,6 +121,9 @@ public class WindowsTableHeaderUI extends BasicTableHeaderUI {
 
             /* On Vista sortIcon is painted above the header's text.
              * We use border to paint it.
+             * <p>
+             *  我们使用边框来绘制它。
+             * 
              */
             Icon sortIcon;
             if (WindowsLookAndFeel.isOnVista()
@@ -210,6 +217,9 @@ public class WindowsTableHeaderUI extends BasicTableHeaderUI {
     /**
      * A border with an Icon at the middle of the top side.
      * Outer insets can be provided for this border.
+     * <p>
+     *  顶部中间有一个Icon的边框。可以为此边框提供外部插页。
+     * 
      */
     private static class IconBorder implements Border, UIResource{
         private final Icon icon;
@@ -219,6 +229,9 @@ public class WindowsTableHeaderUI extends BasicTableHeaderUI {
         private final int right;
         /**
          * Creates this border;
+         * <p>
+         *  创建此边框;
+         * 
          * @param icon - icon to paint for this border
          * @param top, left, bottom, right - outer insets for this border
          */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import sun.misc.SignalHandler;
  * Package-private utility class for setting up and tearing down
  * platform-specific support for termination-triggered shutdowns.
  *
+ * <p>
+ *  Package-private实用程序类,用于设置和删除终止触发关闭的平台特定支持。
+ * 
+ * 
  * @author   Mark Reinhold
  * @since    1.3
  */
@@ -43,6 +48,9 @@ class Terminator {
 
     /* Invocations of setup and teardown are already synchronized
      * on the shutdown lock, so no further synchronization is needed here
+     * <p>
+     *  在关闭锁定,因此在这里不需要进一步的同步
+     * 
      */
 
     static void setup() {
@@ -70,6 +78,8 @@ class Terminator {
     static void teardown() {
         /* The current sun.misc.Signal class does not support
          * the cancellation of handlers
+         * <p>
+         *  取消处理程序
          */
     }
 

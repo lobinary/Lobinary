@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,35 @@ import java.util.stream.DoubleStream;
  * seed unless the {@linkplain System#getProperty system property}
  * {@code java.util.secureRandomSeed} is set to {@code true}.
  *
+ * <p>
+ *  可用于(在其他上下文中)可能生成子任务的隔离并行计算的均匀伪随机值的生成器。
+ * 类{@code SplittableRandom}支持使用类{@link java.util.Random}的类似用法生成类型为{@code int},{@code long}和{@code double}
+ * 的伪随机数的方法,方法如下：。
+ *  可用于(在其他上下文中)可能生成子任务的隔离并行计算的均匀伪随机值的生成器。
+ * 
+ * <ul>
+ * 
+ *  <li>系列生成的值通过DieHarder套件测试随机数生成器的独立性和一致性属性。
+ *  (最近通过<a href="http://www.phy.duke.edu/~rgb/General/dieharder.php">版本3.31.1 </a>验证)。
+ * 这些测试仅验证某些类型和范围,但是类似的性质预期至少近似地保持对于其他人。 <em>周期</em>(重复之前的任何系列生成值的长度)至少为2 <sup> 64 </sup>。 </li>。
+ * 
+ *  <li>方法{@link #split}构造并返回与当前实例不共享可变状态的新SplittableRandom实例。
+ * 然而,以非常高的概率,由两个对象共同生成的值具有相同的统计性质,如同相同数量的值是由单个线程使用单个{@code SplittableRandom}对象生成的。 </li>。
+ * 
+ * <li> SplittableRandom的实例<em>不是</em>线程安全的。它们设计为跨线程分裂,而不是共享。
+ * 例如,使用随机数的{@link java.util.concurrent.ForkJoinTask fork / join-style}计算可能包括{@code new Subtask(aSplittableRandom.split())。
+ * <li> SplittableRandom的实例<em>不是</em>线程安全的。它们设计为跨线程分裂,而不是共享。fork()}形式的构造。
+ * 
+ *  <li>此类提供了用于生成随机流的其他方法,它们在{@code stream.parallel()}模式中使用时采用上述技术。</li>
+ * 
+ * </ul>
+ * 
+ *  <p> {@code SplittableRandom}实例的加密安全性不高。请考虑在安全敏感的应用程序中使用{@link java.security.SecureRandom}。
+ * 此外,默认构造的实例不使用加密随机种子,除非{@linkplain System#getProperty系统属性} {@code java.util.secureRandomSeed}设置为{@code true}
+ * 。
+ *  <p> {@code SplittableRandom}实例的加密安全性不高。请考虑在安全敏感的应用程序中使用{@link java.security.SecureRandom}。
+ * 
+ * 
  * @author  Guy Steele
  * @author  Doug Lea
  * @since   1.8
@@ -152,32 +182,80 @@ public final class SplittableRandom {
      * File organization: First the non-public methods that constitute
      * the main algorithm, then the main public methods, followed by
      * some custom spliterator classes needed for stream methods.
+     * <p>
+     *  实施概述。
+     * 
+     *  该算法的灵感来自Leiserson,Schardl和Sukha的"Deterministic Parallel Random-Number Generation for Dynamic-Multith
+     * reading Platforms"的PPMPP 2012的"DotMix"算法,以及"Parallel random numbers：as easy as 1,2 ,3",Salmon,Morae,D
+     * ror和Shaw,SC 2011.它主要在简化和廉价操作中不同。
+     * 
+     *  主更新步骤(方法nextSeed())是向当前(64位)种子添加常数("伽玛"),形成简单序列。任何两个SplittableRandom实例的种子和gamma值很可能不同。
+     * 
+     * 方法nextLong,nextInt和导数不返回序列(种子)值,而是它们的位的类似哈希的比特混合,产生更多的独立分布的序列。
+     * 对于nextLong,mix64函数基于David Stafford(http://zimbry.blogspot.com/2011/09/better-bit-mixing-improving-on.
+     * html)"64位终结器"的"Mix13"变体,函数在Austin Appleby的MurmurHash3算法(见http://code.google.com/p/smhasher/wiki/Murmu
+     * rHash3)。
+     * 方法nextLong,nextInt和导数不返回序列(种子)值,而是它们的位的类似哈希的比特混合,产生更多的独立分布的序列。
+     *  mix32函数基于Stafford的Mix04混合函数,但返回高32位转换为int。
+     * 
+     *  分割操作使用电流发生器形成另一个SplittableRandom的种子和伽马。
+     * 为了保守地避免种子和值生成之间的潜在相关性,γ选择(方法mixGamma)使用不同的(Murmurhash3's)混合常数。
+     * 为了避免比特混合变换中的潜在弱点,我们将至少24 0-1或1-0比特转换的增益限制为奇数值。
+     * 而不是拒绝具有太少或太多比特集的候选者,方法mixGamma翻转一些比特(其具有将至多4个映射到任何给定伽马值的效果)。
+     * 这将64位奇数伽玛值的有效集减少约2％,并且用作序列常数选择的自动筛选,其留作在一些其他散列和密码算法中作为经验决定。
+     * 
+     * 因此,所得到的生成器利用具有良好(但是小于加密安全)的雪崩的廉价混频器变换其中(通常)许多比特在每个步骤上改变的序列。
+     * 
+     *  默认的(无参数)构造函数,实质上,调用split()为一个通用的"defaultGen"SplittableRandom。
+     * 与其他情况不同,此拆分必须以线程安全的方式执行,因此我们使用AtomicLong来表示种子,而不是使用显式的SplittableRandom。
+     * 要引导defaultGen,我们首先使用基于当前时间的种子,除非设置了java.util.secureRandomSeed属性。
+     * 这充当SecureRandom的一个减少(和不安全)的变体,也避免了使用/ dev / random时可能发生的停顿。
+     * 
+     *  这里应用基本设计来使用128位种子是相对简单的事情。然而,模拟128位算术和携带两倍的状态添加更多的开销比目前的使用保证。
+     * 
+     *  文件组织：首先是非公有的方法构成主要的算法,然后是主要的公共方法,其次是流方法所需的一些自定义分割器类。
+     * 
      */
 
     /**
      * The golden ratio scaled to 64bits, used as the initial gamma
      * value for (unsplit) SplittableRandoms.
+     * <p>
+     *  黄金比例缩放到64位,用作(unsplit)SplittableRandoms的初始伽马值。
+     * 
      */
     private static final long GOLDEN_GAMMA = 0x9e3779b97f4a7c15L;
 
     /**
      * The least non-zero value returned by nextDouble(). This value
      * is scaled by a random value of 53 bits to produce a result.
+     * <p>
+     *  由nextDouble()返回的最小非零值。该值由53位的随机值进行缩放以产生结果。
+     * 
      */
     private static final double DOUBLE_UNIT = 0x1.0p-53; // 1.0 / (1L << 53);
 
     /**
      * The seed. Updated only via method nextSeed.
+     * <p>
+     *  种子。仅通过方法nextSeed更新。
+     * 
      */
     private long seed;
 
     /**
      * The step value.
+     * <p>
+     *  步长值。
+     * 
      */
     private final long gamma;
 
     /**
      * Internal constructor used by all others except default constructor.
+     * <p>
+     *  除了默认构造函数,所有其他的内部构造函数。
+     * 
      */
     private SplittableRandom(long seed, long gamma) {
         this.seed = seed;
@@ -186,6 +264,9 @@ public final class SplittableRandom {
 
     /**
      * Computes Stafford variant 13 of 64bit mix function.
+     * <p>
+     * 计算64bit混合函数的Stafford variant 13。
+     * 
      */
     private static long mix64(long z) {
         z = (z ^ (z >>> 30)) * 0xbf58476d1ce4e5b9L;
@@ -195,6 +276,9 @@ public final class SplittableRandom {
 
     /**
      * Returns the 32 high bits of Stafford variant 4 mix64 function as int.
+     * <p>
+     *  返回Stafford变量4 mix64函数的32位高位为int。
+     * 
      */
     private static int mix32(long z) {
         z = (z ^ (z >>> 33)) * 0x62a9d9ed799705f5L;
@@ -203,6 +287,9 @@ public final class SplittableRandom {
 
     /**
      * Returns the gamma value to use for a new split instance.
+     * <p>
+     *  返回用于新拆分实例的gamma值。
+     * 
      */
     private static long mixGamma(long z) {
         z = (z ^ (z >>> 33)) * 0xff51afd7ed558ccdL; // MurmurHash3 mix constants
@@ -214,6 +301,9 @@ public final class SplittableRandom {
 
     /**
      * Adds gamma to seed.
+     * <p>
+     *  为种子添加伽玛。
+     * 
      */
     private long nextSeed() {
         return seed += gamma;
@@ -221,6 +311,9 @@ public final class SplittableRandom {
 
     /**
      * The seed generator for default constructors.
+     * <p>
+     *  用于默认构造函数的种子生成器。
+     * 
      */
     private static final AtomicLong defaultGen = new AtomicLong(initialSeed());
 
@@ -249,6 +342,9 @@ public final class SplittableRandom {
      * the public nextX(origin, bound) methods.  These exist mainly to
      * avoid the need for multiple versions of stream spliterators
      * across the different exported forms of streams.
+     * <p>
+     *  stream使用的nextX方法的内部版本,以及public nextX(origin,bound)方法。这些存在主要是为了避免跨越流的不同导出形式的流拆分器的多个版本的需要。
+     * 
      */
 
     /**
@@ -256,6 +352,10 @@ public final class SplittableRandom {
      * origin is greater than bound, acts as unbounded form of
      * nextLong, else as bounded form.
      *
+     * <p>
+     *  LongStream Spliterators使用的nextLong的形式。如果origin大于bound,则作为nextLong的无界形式,否则作为有界形式。
+     * 
+     * 
      * @param origin the least value, unless greater than bound
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
@@ -285,6 +385,18 @@ public final class SplittableRandom {
          * long.  The loop repeatedly generates unbounded longs until
          * obtaining a candidate meeting constraints (with an expected
          * number of iterations of less than two).
+         * <p>
+         *  四个案例：
+         * 
+         *  如果参数指示无界形式,则充当nextLong()。
+         * 
+         *  2.如果范围是2的精确次数,则应用相关的位掩码。
+         * 
+         *  3.如果范围为正,则当隐式nextLong()绑定(2 <sup> 64 </sup>)不能被范围均分除时,循环可避免潜在偏差。循环拒绝从其他过表示值计算的候选。
+         * 理想发生器下的期望迭代次数根据界限从1变化到2。循环本身采取不可发布的形式。因为第一个候选项已经可用,所以我们需要一个中间中间构造,它在简洁的环境中的while条件下进行简洁但是隐蔽的执行。
+         * 
+         * 否则,范围不能表示为正长。该循环重复地生成无界长的直到获得候选会议约束(具有小于2的预期迭代数)。
+         * 
          */
 
         long r = mix64(nextSeed());
@@ -311,6 +423,10 @@ public final class SplittableRandom {
      * The form of nextInt used by IntStream Spliterators.
      * Exactly the same as long version, except for types.
      *
+     * <p>
+     *  IntStream Spliterators使用的nextInt的形式。完全与长版本相同,除了类型。
+     * 
+     * 
      * @param origin the least value, unless greater than bound
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
@@ -339,6 +455,10 @@ public final class SplittableRandom {
     /**
      * The form of nextDouble used by DoubleStream Spliterators.
      *
+     * <p>
+     *  DoubleStream Spliterators使用的nextDouble的形式。
+     * 
+     * 
      * @param origin the least value, unless greater than bound
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
@@ -360,6 +480,10 @@ public final class SplittableRandom {
      * initial seed. SplittableRandom instances created with the same
      * seed in the same program generate identical sequences of values.
      *
+     * <p>
+     *  使用指定的初始种子创建新的SplittableRandom实例。在同一程序中使用相同种子创建的SplittableRandom实例生成相同的值序列。
+     * 
+     * 
      * @param seed the initial seed
      */
     public SplittableRandom(long seed) {
@@ -371,6 +495,9 @@ public final class SplittableRandom {
      * generate sequences of values that are statistically independent
      * of those of any other instances in the current program; and
      * may, and typically does, vary across program invocations.
+     * <p>
+     *  创建一个新的SplittableRandom实例,该实例很可能生成统计上独立于当前程序中任何其他实例的值序列;并且可以并且通常确实在程序调用之间变化。
+     * 
      */
     public SplittableRandom() { // emulate defaultGen.split()
         long s = defaultGen.getAndAdd(2 * GOLDEN_GAMMA);
@@ -390,6 +517,12 @@ public final class SplittableRandom {
      * entire set of generators constructed by such recursive
      * splitting.
      *
+     * <p>
+     *  构造并返回与此实例不共享可变状态的新SplittableRandom实例。
+     * 然而,以非常高的概率,由两个对象共同生成的值的集合具有与使用单个SplittableRandom对象由单个线程生成相同数量的值相同的统计特性。
+     * 可以使用{@code split()}方法进一步拆分两个对象中的任一个或两者,并且相同的期望统计特性应用于由这种递归分裂构造的整个生成器集合。
+     * 
+     * 
      * @return the new SplittableRandom instance
      */
     public SplittableRandom split() {
@@ -399,6 +532,10 @@ public final class SplittableRandom {
     /**
      * Returns a pseudorandom {@code int} value.
      *
+     * <p>
+     *  返回伪随机{@code int}值。
+     * 
+     * 
      * @return a pseudorandom {@code int} value
      */
     public int nextInt() {
@@ -409,6 +546,10 @@ public final class SplittableRandom {
      * Returns a pseudorandom {@code int} value between zero (inclusive)
      * and the specified bound (exclusive).
      *
+     * <p>
+     * 返回零(包括)和指定的bound(exclusive)之间的伪随机{@code int}值。
+     * 
+     * 
      * @param bound the upper bound (exclusive).  Must be positive.
      * @return a pseudorandom {@code int} value between zero
      *         (inclusive) and the bound (exclusive)
@@ -435,6 +576,10 @@ public final class SplittableRandom {
      * Returns a pseudorandom {@code int} value between the specified
      * origin (inclusive) and the specified bound (exclusive).
      *
+     * <p>
+     *  返回指定原点(包括)和指定的bound(exclusive)之间的伪随机{@code int}值。
+     * 
+     * 
      * @param origin the least value returned
      * @param bound the upper bound (exclusive)
      * @return a pseudorandom {@code int} value between the origin
@@ -451,6 +596,10 @@ public final class SplittableRandom {
     /**
      * Returns a pseudorandom {@code long} value.
      *
+     * <p>
+     *  返回伪随机{@code long}值。
+     * 
+     * 
      * @return a pseudorandom {@code long} value
      */
     public long nextLong() {
@@ -461,6 +610,10 @@ public final class SplittableRandom {
      * Returns a pseudorandom {@code long} value between zero (inclusive)
      * and the specified bound (exclusive).
      *
+     * <p>
+     *  返回零(包括)和指定的bound(exclusive)之间的伪随机{@code long}值。
+     * 
+     * 
      * @param bound the upper bound (exclusive).  Must be positive.
      * @return a pseudorandom {@code long} value between zero
      *         (inclusive) and the bound (exclusive)
@@ -487,6 +640,10 @@ public final class SplittableRandom {
      * Returns a pseudorandom {@code long} value between the specified
      * origin (inclusive) and the specified bound (exclusive).
      *
+     * <p>
+     *  返回指定的原点(包括)和指定的bound(exclusive)之间的伪随机{@code long}值。
+     * 
+     * 
      * @param origin the least value returned
      * @param bound the upper bound (exclusive)
      * @return a pseudorandom {@code long} value between the origin
@@ -504,6 +661,10 @@ public final class SplittableRandom {
      * Returns a pseudorandom {@code double} value between zero
      * (inclusive) and one (exclusive).
      *
+     * <p>
+     *  返回零(包括)和一(不包括)之间的伪随机{@code double}值。
+     * 
+     * 
      * @return a pseudorandom {@code double} value between zero
      *         (inclusive) and one (exclusive)
      */
@@ -515,6 +676,10 @@ public final class SplittableRandom {
      * Returns a pseudorandom {@code double} value between 0.0
      * (inclusive) and the specified bound (exclusive).
      *
+     * <p>
+     *  返回0.0(包括)和指定的bound(exclusive)之间的伪随机{@code double}值。
+     * 
+     * 
      * @param bound the upper bound (exclusive).  Must be positive.
      * @return a pseudorandom {@code double} value between zero
      *         (inclusive) and the bound (exclusive)
@@ -532,6 +697,10 @@ public final class SplittableRandom {
      * Returns a pseudorandom {@code double} value between the specified
      * origin (inclusive) and bound (exclusive).
      *
+     * <p>
+     *  返回指定原点(包括)和bound(exclusive)之间的伪随机{@code double}值。
+     * 
+     * 
      * @param origin the least value returned
      * @param bound the upper bound (exclusive)
      * @return a pseudorandom {@code double} value between the origin
@@ -548,6 +717,10 @@ public final class SplittableRandom {
     /**
      * Returns a pseudorandom {@code boolean} value.
      *
+     * <p>
+     *  返回伪随机{@code boolean}值。
+     * 
+     * 
      * @return a pseudorandom {@code boolean} value
      */
     public boolean nextBoolean() {
@@ -562,6 +735,10 @@ public final class SplittableRandom {
      * of pseudorandom {@code int} values from this generator and/or
      * one split from it.
      *
+     * <p>
+     *  返回一个流,生成给定的{@code streamSize}伪随机{@code int}值从此生成器和/或从它的一个拆分。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @return a stream of pseudorandom {@code int} values
      * @throws IllegalArgumentException if {@code streamSize} is
@@ -583,6 +760,12 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * ints(Long.MAX_VALUE)}.
      *
+     * <p>
+     *  从这个生成器和/或从它的一个拆分返回一个有效无限的伪随机{@code int}值流。
+     * 
+     *  @implNote此方法实现为等效于{@code ints(Long.MAX_VALUE)}。
+     * 
+     * 
      * @return a stream of pseudorandom {@code int} values
      */
     public IntStream ints() {
@@ -598,6 +781,10 @@ public final class SplittableRandom {
      * from it; each value conforms to the given origin (inclusive) and bound
      * (exclusive).
      *
+     * <p>
+     *  返回一个流,生成给定的{@code streamSize}伪随机{@code int}值从此生成器和/或从它的一个拆分;每个值符合给定原点(包括)和bound(exclusive)。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
@@ -627,6 +814,12 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * ints(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      *
+     * <p>
+     * 返回来自此生成器和/或其中一个分裂的无效的伪随机{@code int}值流;每个值符合给定原点(包括)和bound(exclusive)。
+     * 
+     *  @implNote此方法实现为等同于{@code ints(Long.MAX_VALUE,randomNumberOrigin,randomNumberBound)}。
+     * 
+     * 
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
      * @return a stream of pseudorandom {@code int} values,
@@ -648,6 +841,10 @@ public final class SplittableRandom {
      * of pseudorandom {@code long} values from this generator and/or
      * one split from it.
      *
+     * <p>
+     *  返回生成来自此生成器的给定{@code streamSize}伪随机{@code long}值的流和/或从其生成的一个分割。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @return a stream of pseudorandom {@code long} values
      * @throws IllegalArgumentException if {@code streamSize} is
@@ -669,6 +866,12 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * longs(Long.MAX_VALUE)}.
      *
+     * <p>
+     *  返回来自此生成器和/或其中一个分割的有效无限的伪随机{@code long}值流。
+     * 
+     *  @implNote此方法实现为等效于{@code longs(Long.MAX_VALUE)}。
+     * 
+     * 
      * @return a stream of pseudorandom {@code long} values
      */
     public LongStream longs() {
@@ -684,6 +887,10 @@ public final class SplittableRandom {
      * from it; each value conforms to the given origin (inclusive) and bound
      * (exclusive).
      *
+     * <p>
+     *  返回生成来自此生成器的给定{@code streamSize}伪随机{@code long}值的流和/或从其生成的一个分割;每个值符合给定原点(包括)和bound(exclusive)。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
@@ -713,6 +920,12 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * longs(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      *
+     * <p>
+     *  从此生成器和/或从其中拆分一个有效的无序流的伪随机{@code long}值;每个值符合给定原点(包括)和bound(exclusive)。
+     * 
+     *  @implNote此方法实现为等效于{@code longs(Long.MAX_VALUE,randomNumberOrigin,randomNumberBound)}。
+     * 
+     * 
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
      * @return a stream of pseudorandom {@code long} values,
@@ -734,6 +947,10 @@ public final class SplittableRandom {
      * pseudorandom {@code double} values from this generator and/or one split
      * from it; each value is between zero (inclusive) and one (exclusive).
      *
+     * <p>
+     *  返回生成来自此生成器的给定{@code streamSize}伪随机{@code double}值的流和/或从其生成的一个分割;每个值在零(包括)和一(不包括)之间。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @return a stream of {@code double} values
      * @throws IllegalArgumentException if {@code streamSize} is
@@ -756,6 +973,12 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * doubles(Long.MAX_VALUE)}.
      *
+     * <p>
+     * 从此生成器和/或从其中拆分一个有效的无序的伪随机流{@code double}值;每个值在零(包括)和一(不包括)之间。
+     * 
+     *  @implNote此方法实现为等效于{@code doubles(Long.MAX_VALUE)}。
+     * 
+     * 
      * @return a stream of pseudorandom {@code double} values
      */
     public DoubleStream doubles() {
@@ -771,6 +994,10 @@ public final class SplittableRandom {
      * from it; each value conforms to the given origin (inclusive) and bound
      * (exclusive).
      *
+     * <p>
+     *  返回生成来自此生成器的给定{@code streamSize}伪随机{@code double}值的流和/或从其生成的一个分割;每个值符合给定原点(包括)和bound(exclusive)。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
@@ -801,6 +1028,12 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * doubles(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      *
+     * <p>
+     *  从此生成器和/或从其中拆分一个有效的无序的伪随机流{@code double}值;每个值符合给定原点(包括)和bound(exclusive)。
+     * 
+     *  @implNote这个方法被实现为等同于{@code doubles(Long.MAX_VALUE,randomNumberOrigin,randomNumberBound)}。
+     * 
+     * 
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
      * @return a stream of pseudorandom {@code double} values,
@@ -824,6 +1057,10 @@ public final class SplittableRandom {
      * Long.MAX_VALUE. For splits, it uses the standard divide-by-two
      * approach. The long and double versions of this class are
      * identical except for types.
+     * <p>
+     *  用于int流的分割器。我们将四个int版本复用到一个类中,通过将一个小于origin的bound作为无界处理,还将"infinite"视为等同于Long.MAX_VALUE。
+     * 对于分割,它使用标准的二分法。除类型外,此类的long和double版本是相同的。
+     * 
      */
     static final class RandomIntsSpliterator implements Spliterator.OfInt {
         final SplittableRandom rng;
@@ -879,6 +1116,9 @@ public final class SplittableRandom {
 
     /**
      * Spliterator for long streams.
+     * <p>
+     *  长流的分离器。
+     * 
      */
     static final class RandomLongsSpliterator implements Spliterator.OfLong {
         final SplittableRandom rng;
@@ -935,6 +1175,8 @@ public final class SplittableRandom {
 
     /**
      * Spliterator for double streams.
+     * <p>
+     *  双流的分离器。
      */
     static final class RandomDoublesSpliterator implements Spliterator.OfDouble {
         final SplittableRandom rng;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -100,21 +101,41 @@ import java.beans.PropertyChangeEvent;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  用于创建Swing外观的基类。
+ * <p>
+ *  {@code BasicLookAndFeel}提供的每个{@code ComponentUI}从默认表中导出其行为。
+ * 除非另有说明,这个包中的每个{@code ComponentUI}实现都记录了他们使用的一组默认值。
+ * 除非另有说明,默认值是在调用{@code installUI}时安装的,并且遵循{@code LookAndFeel}中列出的建议来安装默认值。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author unattributed
  */
 public abstract class BasicLookAndFeel extends LookAndFeel implements Serializable
 {
     /**
      * Whether or not the developer has created a JPopupMenu.
+     * <p>
+     *  是否开发人员已创建JPopupMenu。
+     * 
      */
     static boolean needsEventHelper;
 
     /**
      * Lock used when manipulating clipPlaying.
+     * <p>
+     *  操作clipPlay时使用的锁。
+     * 
      */
     private transient Object audioLock = new Object();
     /**
      * The Clip that is currently playing (set in AudioAction).
+     * <p>
+     *  当前正在播放的剪辑(在AudioAction中设置)。
+     * 
      */
     private Clip clipPlaying;
 
@@ -122,6 +143,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
 
     /*
      * Listen for our AppContext being disposed
+     * <p>
+     *  听我们的AppContext被处置
+     * 
      */
     private PropertyChangeListener disposer = null;
 
@@ -134,6 +158,15 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * {@code UIManager} when the look and feel is set as the current
      * look and feel and after {@code initialize} has been invoked.
      *
+     * <p>
+     *  返回外观和感觉默认值。
+     * 通过依次调用{@code initClassDefaults},{@code initSystemColorDefaults}和{@code initComponentDefaults}来填充返回的{@code UIDefaults}
+     * 。
+     *  返回外观和感觉默认值。
+     * <p>
+     * 虽然此方法是公开的,但只有当外观和感觉设置为当前外观和调用{@code initialize}后,才应由{@code UIManager}调用。
+     * 
+     * 
      * @return the look and feel defaults
      *
      * @see #initClassDefaults
@@ -152,6 +185,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void initialize() {
         if (needsEventHelper) {
@@ -180,6 +216,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void uninitialize() {
         AppContext context = AppContext.getAppContext();
@@ -221,6 +260,12 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * value for the {@code uiClassID} {@code TreeUI} is {@code
      * "javax.swing.plaf.basic.BasicTreeUI"}.
      *
+     * <p>
+     *  填充{@code table}与{@code uiClassID}的映射到ui类的完全限定名称。
+     * 特定{@code uiClassID}的值是{@code"javax.swing.plaf.basic.Basic + uiClassID"}。
+     * 例如,{@code uiClassID} {@code TreeUI}的值为{@code"javax.swing.plaf.basic.BasicTreeUI"}。
+     * 
+     * 
      * @param table the {@code UIDefaults} instance the entries are
      *        added to
      * @throws NullPointerException if {@code table} is {@code null}
@@ -312,6 +357,27 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * used. This method passes the value of {@code
      * isNativeLookAndFeel()} as the last argument to {@code loadSystemColors}.
      *
+     * <p>
+     *  使用系统颜色填充{@code table}。这将创建一个{@code name-color}对数组,并调用{@code loadSystemColors}。
+     * <p>
+     *  名称是一个{@code String},对应于{@code SystemColor}类中的一个静态{@code SystemColor}字段的名称。
+     * 为每个这样的{@code SystemColor}字段创建一个名称 - 颜色对。
+     * <p>
+     *  {@code color}对应于{@code Color.decode}所了解的十六进制{@code String}。
+     * 例如,{@code name-color}对中的一个是{@code"desktop" - "#005C5C"}。
+     * 这对应于{@code SystemColor}字段{@code desktop},颜色值为{@code new Color(0x005C5C)}。
+     * <p>
+     *  下面显示了两个{@code name-color}对：
+     * <pre>
+     *  String [] nameColorPairs = new String [] {"desktop","#005C5C","activeCaption","#000080"}; loadSystem
+     * Colors(table,nameColorPairs,isNativeLookAndFeel());。
+     * </pre>
+     * 
+     * 如前所述,它使用提供的{@code table}和{@code name-color}对数组调用{@code loadSystemColors}。
+     *  {@code loadSystemColors}的最后一个参数指示是否应该使用{@code SystemColor}中的字段的值。
+     * 此方法将{@code isNativeLookAndFeel()}的值作为{@code loadSystemColors}的最后一个参数传递。
+     * 
+     * 
      * @param table the {@code UIDefaults} object the values are added to
      * @throws NullPointerException if {@code table} is {@code null}
      *
@@ -381,6 +447,25 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * the {@code name} of the {@code name-color} pair. If the field
      * is not valid, a {@code ColorUIResource} of black is used.
      *
+     * <p>
+     *  使用{@code systemColors}中的{@code name-color}对填充{@code table}。
+     * 有关{@code systemColors}格式的详细信息,请参阅{@link #initSystemColorDefaults(UIDefaults)}。
+     * <p>
+     *  对{@code systemColors}中的每个{@code name-color}对,将一个条目添加到{@code table}。
+     * 输入键是{@code name-color}对的{@code name}。
+     * <p>
+     *  该条目的值对应于{@code name-color}对的{@code color}。以两种方式之一计算条目的值。对于任一方法,值总是一个{@code ColorUIResource}。
+     * <p>
+     *  如果{@code useNative}为{@code false},则会使用{@code Color.decode}将{@code String}转换为{@code Color}来创建{@code color}
+     * 。
+     * 如果{@code decode}无法将{@code String}转换为{@code Color}({@code NumberFormatException}),那么将使用黑色的{@code ColorUIResource}
+     * 。
+     * <p>
+     * 如果{@code useNative}为{@code true},{@code color}是{@code SystemColor}中与{@code name-color}的{@code name}同名
+     * 的字段的值}对。
+     * 如果字段无效,则使用黑色的{@code ColorUIResource}。
+     * 
+     * 
      * @param table the {@code UIDefaults} object the values are added to
      * @param systemColors array of {@code name-color} pairs as described
      *        in {@link #initSystemColorDefaults(UIDefaults)}
@@ -404,6 +489,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
         /* PENDING(hmuller) We don't load the system colors below because
          * they're not reliable.  Hopefully we'll be able to do better in
          * a future version of AWT.
+         * <p>
+         *  他们不可靠。希望我们能够在未来的AWT版本中做得更好。
+         * 
          */
         if (useNative) {
             for(int i = 0; i < systemColors.length; i += 2) {
@@ -434,6 +522,10 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * locale used when no locale is passed into UIDefaults.get().  The
      * default locale should generally not be relied upon. It is here for
      * compatibility with releases prior to 1.4.
+     * <p>
+     *  使用用于获取本地化默认值的ResourceBundle的名称初始化defaults表。还初始化没有区域设置传递到UIDefaults.get()时使用的默认区域设置。通常不应依赖默认语言环境。
+     * 这是为了与1.4之前的版本兼容。
+     * 
      */
     private void initResourceBundle(UIDefaults table) {
         table.setDefaultLocale( Locale.getDefault() );
@@ -444,6 +536,10 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * Populates {@code table} with the defaults for the basic look and
      * feel.
      *
+     * <p>
+     *  使用默认值填充{@code table}的基本外观和风格。
+     * 
+     * 
      * @param table the {@code UIDefaults} to add the values to
      * @throws NullPointerException if {@code table} is {@code null}
      */
@@ -1927,6 +2023,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
     /**
      * Returns the ui that is of type <code>klass</code>, or null if
      * one can not be found.
+     * <p>
+     *  返回类型为<code> klass </code>的ui,如果找不到,则返回null。
+     * 
      */
     static Object getUIOfType(ComponentUI ui, Class klass) {
         if (klass.isInstance(ui)) {
@@ -1976,6 +2075,31 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * {@code ActionMapUIResource} is created.
      *
      *
+     * <p>
+     *  返回包含此外观的音频操作的<code> ActionMap </code>。
+     * <P>
+     *  返回的<code> ActionMap </code>包含<code> Actions </code>,其体现了呈现听觉提示的能力。
+     * 这些听觉线索映射到可能对最终用户知道(例如出现对话框)有用的用户和系统活动。
+     * <P>
+     *  在适当的时候,{@code ComponentUI}负责从<code> ActionMap </code>中获得<code> Action </code>并将其传递给<code> playSound 
+     * </code>。
+     * <P>
+     *  此方法首先使用键{@code"AuditoryCues.actionMap"}从默认值查找{@code ActionMap}。
+     * <p>
+     * 如果值为{@code non-null},则返回。
+     * 如果默认{@code"AuditoryCues.actionMap"}的值为{@code null},默认{@code"AuditoryCues.cueList"}的值为{@code非null},则{@code ActionMapUIResource }
+     * 已创建并填充。
+     * 如果值为{@code non-null},则返回。
+     * 通过迭代{@code"AuditoryCues.cueList"}数组的每个元素,并调用{@code createAudioAction()}为每个元素创建一个{@code Action}来完成。
+     * 生成的{@code Action}放置在{@code ActionMapUIResource}中,使用数组元素作为键。
+     * 例如,如果{@code"AuditoryCues.cueList"}数组包含单元素{@code"audioKey"},则会创建{@code ActionMapUIResource},然后通过{@code actionMap.put cueList [0],createAudioAction(cueList [0]))}
+     * 。
+     * 生成的{@code Action}放置在{@code ActionMapUIResource}中,使用数组元素作为键。
+     * <p>
+     *  如果默认的{@code"AuditoryCues.actionMap"}的值是{@code null},默认的{@code"AuditoryCues.cueList"}的值是{@code null},
+     * 一个空的{@code ActionMapUIResource}创建。
+     * 
+     * 
      * @return      an ActionMap containing {@code Actions}
      *              responsible for playing auditory cues
      * @throws ClassCastException if the value of the
@@ -2014,6 +2138,14 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * sound resource is loaded into a {@code byte[]} by way of
      * {@code getClass().getResourceAsStream()}.
      *
+     * <p>
+     *  创建并返回用于播放声音的{@code Action}。
+     * <p>
+     *  如果{@code key}为{@code non-null},则使用键{@code key}的默认值创建{@code Action}。
+     * 该值标识在{@code Action}上调用{@code actionPerformed}时加载的声音资源。声音资源通过{@code getClass()。
+     * getResourceAsStream()}加载到{@code byte []}中。
+     * 
+     * 
      * @param key the key identifying the audio action
      * @return      an {@code Action} used to play the source, or {@code null}
      *              if {@code key} is {@code null}
@@ -2036,6 +2168,10 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * not. Store the resource String. I is used to get the audio
      * resource. In this case, the resource is an audio file.
      *
+     * <p>
+     * 将名称String传递给超级构造函数。这用于以后识别Action并决定是否播放它。存储资源String。我用来获取音频资源。在这种情况下,资源是音频文件。
+     * 
+     * 
      * @since 1.4
      */
     private class AudioAction extends AbstractAction implements LineListener {
@@ -2051,6 +2187,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
          * The String is the name of the Action and
          * points to the audio resource.
          * The byte[] is a buffer of the audio bits.
+         * <p>
+         *  String是Action的名称,并指向音频资源。字节[]是音频位的缓冲区。
+         * 
          */
         public AudioAction(String name, String resource) {
             super(name);
@@ -2091,6 +2230,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
         /**
          * If the parameter is null, or equal to the currently
          * playing sound, then cancel the currently playing sound.
+         * <p>
+         *  如果参数为null,或等于当前播放的声音,则取消当前播放的声音。
+         * 
          */
         private void cancelCurrentSound(Clip clip) {
             Clip lastClip = null;
@@ -2116,6 +2258,11 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * <code>soundFile</code> passed into this method, it will
      * return <code>null</code>.
      *
+     * <p>
+     *  加载指定<code> soundFile </code>文件名的音频位的实用方法。
+     * 如果此方法无法从传递到此方法的<code> baseClass </code>和<code> soundFile </code>构建可行的路径名,则它将返回<code> null </code>。
+     * 
+     * 
      * @param soundFile    the name of the audio file to be retrieved
      *                     from disk
      * @return             A byte[] with audio data or null
@@ -2131,6 +2278,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
          * can be used to load additional classes.
          * Class.getResourceAsStream just returns raw
          * bytes, which we can convert to a sound.
+         * <p>
+         *  必要,因为几个浏览器认为Class.getResource是一个安全风险,因为它可以用于加载其他类。 Class.getResourceAsStream只是返回原始字节,我们可以转换为声音。
+         * 
          */
         byte[] buffer = AccessController.doPrivileged(
                                                  new PrivilegedAction<byte[]>() {
@@ -2181,6 +2331,13 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
      * non-null} {@code Object[]} containing a {@code String} entry
      * equal to the name of the {@code audioAction}.
      *
+     * <p>
+     *  如有必要,请在{@code audioAction}上调用{@code actionPerformed}播放声音。
+     * 如果{@code"AuditoryCues.playList"}默认值的值为包含{@code String}条目的{@code非空} {@code Object []},则调用{@code actionPerformed}
+     *  {@code audioAction}的名称。
+     *  如有必要,请在{@code audioAction}上调用{@code actionPerformed}播放声音。
+     * 
+     * 
      * @param audioAction an Action that knows how to render the audio
      *                    associated with the system or user activity
      *                    that is occurring; a value of {@code null}, is
@@ -2216,6 +2373,9 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
     /**
      * Sets the parent of the passed in ActionMap to be the audio action
      * map.
+     * <p>
+     *  将在ActionMap中传递的父项设置为音频操作映射。
+     * 
      */
     static void installAudioActionMap(ActionMap map) {
         LookAndFeel laf = UIManager.getLookAndFeel();
@@ -2228,6 +2388,10 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
     /**
      * Helper method to play a named sound.
      *
+     * <p>
+     *  帮助方法播放命名的声音。
+     * 
+     * 
      * @param c JComponent to play the sound for.
      * @param actionKey Key for the sound.
      */
@@ -2248,6 +2412,8 @@ public abstract class BasicLookAndFeel extends LookAndFeel implements Serializab
     /**
      * This class contains listener that watches for all the mouse
      * events that can possibly invoke popup on the component
+     * <p>
+     *  此类包含监视器,监视所有可能调用组件上的弹出窗口的鼠标事件
      */
     class AWTEventHelper implements AWTEventListener,PrivilegedAction<Object> {
         AWTEventHelper() {

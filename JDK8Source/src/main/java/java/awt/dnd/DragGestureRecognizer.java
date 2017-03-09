@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,24 @@ import java.io.Serializable;
  * <code>DragSource</code> to start the Drag and Drop operation (if
  * appropriate).
  * <P>
+ * <p>
+ *  <code> DragGestureRecognizer </code>是用于指定与平台相关的监听器的抽象基类,其可以与特定的<code> Component </code>相关联,以便识别依赖于平台
+ * 的拖动发起手势。
+ * <p>
+ *  适当的<code> DragGestureRecognizer </code>子类实例是从与特定<code> Component </code>相关联的{@link DragSource}或通过其{@链接java.awt.Toolkit#createDragGestureRecognizer createDragGestureRecognizer()}
+ * 方法。
+ * <p>
+ *  一旦<code> DragGestureRecognizer </code>与特定<code> Component </code>相关联,它将在<code> Component </code>上注册适
+ * 当的侦听器接口,以跟踪传递到<code>组件</code>。
+ * <p>
+ *  一旦<code> DragGestureRecognizer </code>将<code> Component </code>上的事件序列识别为拖动发起手势,它就会通过调用其{@link)来通知其单播<code> DragGestureListener </code> java.awt.dnd.DragGestureListener#dragGestureRecognized gestureRecognized()}
+ * 方法。
+ * <P>
+ * 当具体的<code> DragGestureRecognizer </code>实例检测到与它相关联的<code> Component </code>上的拖动启动手势时,会向{code} DragGes
+ * tureListener </code>在其单播事件源上注册<code> DragGestureListener </code>事件。
+ * 此<code> DragGestureListener </code>负责使关联的<code> DragSource </code>启动拖放操作(如果适用)。
+ * <P>
+ * 
  * @author Laurence P. G. Cable
  * @see java.awt.dnd.DragGestureListener
  * @see java.awt.dnd.DragGestureEvent
@@ -97,6 +116,12 @@ public abstract class DragGestureRecognizer implements Serializable {
      * <code>DragGestureListener</code> to notify
      * once a drag initiating gesture has been detected.
      * <P>
+     * <p>
+     *  构造一个新的<code> DragGestureRecognizer </code>给定</code> DragSource </code>以用于此拖放操作,<code> Component </code>
+     *  this <code> DragGestureRecognizer </code> "观察"拖动发起手势,该拖放操作支持的动作,以及一旦检测到拖动发起手势就通知<code> DragGestureLi
+     * stener </code>。
+     * <P>
+     * 
      * @param ds  the <code>DragSource</code> this
      * <code>DragGestureRecognizer</code>
      * will use to process the Drag and Drop operation
@@ -145,6 +170,11 @@ public abstract class DragGestureRecognizer implements Serializable {
      * for drag initiating gestures, and the action(s)
      * supported for this Drag and Drop operation.
      * <P>
+     * <p>
+     *  构造一个新的<code> DragGestureRecognizer </code>给定</code> DragSource </code>以用于此拖放操作,<code> Component </code>
+     *  this <code> DragGestureRecognizer </code> "观察"拖动发起手势,以及此拖放操作支持的操作。
+     * <P>
+     * 
      * @param ds  the <code>DragSource</code> this
      * <code>DragGestureRecognizer</code> will use to
      * process the Drag and Drop operation
@@ -175,6 +205,11 @@ public abstract class DragGestureRecognizer implements Serializable {
      * <code>DragGestureRecognizer</code>
      * should "observe" for drag initiating gestures.
      * <P>
+     * <p>
+     *  给定在此拖放操作中使用的<code> DragSource </code>以及<code> Component </code>此<code> DragGestureRecognizer </code>
+     * 构造新的<code> DragGestureRecognizer </code>应该"观察"拖动发起手势。
+     * <P>
+     * 
      * @param ds the <code>DragSource</code> this
      * <code>DragGestureRecognizer</code>
      * will use to process the Drag and Drop operation
@@ -200,6 +235,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * given the <code>DragSource</code> to be used in this
      * Drag and Drop operation.
      * <P>
+     * <p>
+     * 构造一个新的&lt; code&gt; DragGestureRecognizer&lt; / code&gt;给定用于拖放操作的<code> DragSource </code>。
+     * <P>
+     * 
      * @param ds the <code>DragSource</code> this
      * <code>DragGestureRecognizer</code> will
      * use to process the Drag and Drop operation
@@ -216,6 +255,11 @@ public abstract class DragGestureRecognizer implements Serializable {
      * register this DragGestureRecognizer's Listeners with the Component
      *
      * subclasses must override this method
+     * <p>
+     *  使用Component注册此DragGestureRecognizer的Listeners
+     * 
+     *  子类必须重写此方法
+     * 
      */
 
     protected abstract void registerListeners();
@@ -224,6 +268,11 @@ public abstract class DragGestureRecognizer implements Serializable {
      * unregister this DragGestureRecognizer's Listeners with the Component
      *
      * subclasses must override this method
+     * <p>
+     *  请使用Component取消注册此DragGestureRecognizer的侦听器
+     * 
+     *  子类必须重写此方法
+     * 
      */
 
     protected abstract void unregisterListeners();
@@ -234,6 +283,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * will use in order to process the Drag and Drop
      * operation.
      * <P>
+     * <p>
+     *  此方法返回<code> DragSource </code>此<code> DragGestureRecognizer </code>将使用为了处理拖放操作。
+     * <P>
+     * 
      * @return the DragSource
      */
 
@@ -245,6 +298,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * <code>DragGestureRecognizer</code>
      * for drag initiating gestures.
      * <P>
+     * <p>
+     *  此方法返回由<code> DragGestureRecognizer </code>"监视"的用于拖动启动手势的<code> Component </code>。
+     * <P>
+     * 
      * @return The Component this DragGestureRecognizer
      * is associated with
      */
@@ -257,6 +314,12 @@ public abstract class DragGestureRecognizer implements Serializable {
      * registerListeners() and unregisterListeners() are called as a side
      * effect as appropriate.
      * <P>
+     * <p>
+     *  设置DragGestureRecognizer所关联的组件
+     * 
+     *  registerListeners()和unregisterListeners()作为副作用调用。
+     * <P>
+     * 
      * @param c The <code>Component</code> or <code>null</code>
      */
 
@@ -275,6 +338,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * type of action(s) this Drag and Drop
      * operation will support.
      * <P>
+     * <p>
+     *  此方法返回一个int,表示此拖放操作将支持的操作类型。
+     * <P>
+     * 
      * @return the currently permitted source action(s)
      */
 
@@ -284,6 +351,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * This method sets the permitted source drag action(s)
      * for this Drag and Drop operation.
      * <P>
+     * <p>
+     *  此方法为此拖放操作设置允许的源拖曳动作。
+     * <P>
+     * 
      * @param actions the permitted source drag action(s)
      */
 
@@ -296,6 +367,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * series of events that initiated
      * the Drag and Drop operation.
      * <P>
+     * <p>
+     *  此方法返回启动拖放操作的一系列事件中的第一个事件。
+     * <P>
+     * 
      * @return the initial event that triggered the drag gesture
      */
 
@@ -304,6 +379,9 @@ public abstract class DragGestureRecognizer implements Serializable {
     /**
      * Reset the Recognizer, if its currently recognizing a gesture, ignore
      * it.
+     * <p>
+     *  重置识别器,如果它当前识别一个手势,忽略它。
+     * 
      */
 
     public void resetRecognizer() { events.clear(); }
@@ -311,6 +389,10 @@ public abstract class DragGestureRecognizer implements Serializable {
     /**
      * Register a new <code>DragGestureListener</code>.
      * <P>
+     * <p>
+     *  注册新的<code> DragGestureListener </code>。
+     * <P>
+     * 
      * @param dgl the <code>DragGestureListener</code> to register
      * with this <code>DragGestureRecognizer</code>.
      * <P>
@@ -331,6 +413,10 @@ public abstract class DragGestureRecognizer implements Serializable {
     /**
      * unregister the current DragGestureListener
      * <P>
+     * <p>
+     *  注销当前DragGestureListener
+     * <P>
+     * 
      * @param dgl the <code>DragGestureListener</code> to unregister
      * from this <code>DragGestureRecognizer</code>
      * <P>
@@ -352,6 +438,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * Notify the DragGestureListener that a Drag and Drop initiating
      * gesture has occurred. Then reset the state of the Recognizer.
      * <P>
+     * <p>
+     *  通知DragGestureListener已发生拖放启动手势。然后重置识别器的状态。
+     * <P>
+     * 
      * @param dragAction The action initially selected by the users gesture
      * @param p          The point (in Component coords) where the gesture originated
      */
@@ -377,6 +467,13 @@ public abstract class DragGestureRecognizer implements Serializable {
      * to the array of events that this
      * <code>DragGestureRecognizer</code> maintains internally.
      * <P>
+     * <p>
+     * 此识别器在组件上注册的侦听器应记录所有被识别为通过此API构成拖放启动手势的事件系列的一部分的事件。
+     * P>
+     *  这个方法被一个<code> DragGestureRecognizer </code>实现使用来添加一个<code> InputEvent </code>子类(它认为是一系列包含拖放操作的事件中的一个
+     * )到数组这个<code> DragGestureRecognizer </code>内部维护的事件。
+     * <P>
+     * 
      * @param awtie the <code>InputEvent</code>
      * to add to this <code>DragGestureRecognizer</code>'s
      * internal array of events. Note that <code>null</code>
@@ -393,6 +490,11 @@ public abstract class DragGestureRecognizer implements Serializable {
      * <code>DragGestureListener</code> is written out if and only if it can be
      * serialized. If not, <code>null</code> is written instead.
      *
+     * <p>
+     *  序列化此<code> DragGestureRecognizer </code>。此方法首先执行默认序列化。
+     * 然后,当且仅当它可以被序列化时,该对象的<code> DragGestureListener </code>被写出。如果不是,写入<code> null </code>。
+     * 
+     * 
      * @serialData The default serializable fields, in alphabetical order,
      *             followed by either a <code>DragGestureListener</code>, or
      *             <code>null</code>.
@@ -411,6 +513,11 @@ public abstract class DragGestureRecognizer implements Serializable {
      * fields. This object's <code>DragGestureListener</code> is then
      * deserialized as well by using the next object in the stream.
      *
+     * <p>
+     *  反序列化此<code> DragGestureRecognizer </code>。该方法首先对所有非<code> transient </code>字段执行默认反序列化。
+     * 然后,通过使用流中的下一个对象,该对象的<code> DragGestureListener </code>也被反序列化。
+     * 
+     * 
      * @since 1.4
      */
     @SuppressWarnings("unchecked")
@@ -434,6 +541,9 @@ public abstract class DragGestureRecognizer implements Serializable {
 
     /*
      * fields
+     * <p>
+     *  字段
+     * 
      */
 
     /**
@@ -441,6 +551,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * associated with this
      * <code>DragGestureRecognizer</code>.
      *
+     * <p>
+     *  与此<code> DragGestureRecognizer </code>关联的<code> DragSource </code>。
+     * 
+     * 
      * @serial
      */
     protected DragSource          dragSource;
@@ -449,6 +563,10 @@ public abstract class DragGestureRecognizer implements Serializable {
      * The <code>Component</code>
      * associated with this <code>DragGestureRecognizer</code>.
      *
+     * <p>
+     *  与此<code> DragGestureRecognizer </code>关联的<code>组件</code>。
+     * 
+     * 
      * @serial
      */
     protected Component           component;
@@ -456,6 +574,9 @@ public abstract class DragGestureRecognizer implements Serializable {
     /**
      * The <code>DragGestureListener</code>
      * associated with this <code>DragGestureRecognizer</code>.
+     * <p>
+     *  与此<code> DragGestureRecognizer </code>关联的<code> DragGestureListener </code>。
+     * 
      */
     protected transient DragGestureListener dragGestureListener;
 
@@ -464,6 +585,10 @@ public abstract class DragGestureRecognizer implements Serializable {
    * the type(s) of action(s) used
    * in this Drag and Drop operation.
    *
+   * <p>
+   *  表示此拖放操作中使用的操作类型的<code> int </code>。
+   * 
+   * 
    * @serial
    */
   protected int  sourceActions;
@@ -473,6 +598,9 @@ public abstract class DragGestureRecognizer implements Serializable {
     * the <code>DragGestureRecognizer</code>
     * "recognized" as a "gesture" that triggers a drag.
     *
+    * <p>
+    * 事件列表(按顺序),将<code> DragGestureRecognizer </code>"识别为"触发拖动的"手势"。
+    * 
     * @serial
     */
    protected ArrayList<InputEvent> events = new ArrayList<InputEvent>(1);

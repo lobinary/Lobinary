@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,16 @@ import java.lang.reflect.InvocationTargetException;
  * <p>This code is designed to compile and run on JDK version 1.1 and later
  * including versions of Java 2.</p>
  *
+ * <p>
+ *  按名称创建类的新实例。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保修</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p>此类包含用于从显式类名创建类的实例的静态方法。它尝试使用线程的上下文ClassLoader如果可能的话,并回到使用Class.forName(String)。</p>
+ * 
  * @author Edwin Goei, David Brownell
  * @version 2.0.1 (sax2r2)
  */
@@ -62,6 +73,10 @@ class NewInstance {
      * Creates a new instance of the specified class name
      *
      * Package private so this code is not exposed at the API level.
+     * <p>
+     * 
+     *  <p>此代码旨在在JDK版本1.1及更高版本(包括Java 2版本)上编译和运行。</p>
+     * 
      */
     static Object newInstance (ClassLoader classLoader, String className)
         throws ClassNotFoundException, IllegalAccessException,

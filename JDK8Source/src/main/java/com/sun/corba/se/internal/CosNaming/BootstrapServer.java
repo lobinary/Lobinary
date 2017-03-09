@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,9 @@ import com.sun.corba.se.impl.orbutil.ORBConstants;
  * implementation.  The BootstrapServer makes all object references
  * defined in a configurable file available using the old
  * naming bootstrap protocol.
+ * <p>
+ *  BootstrapServer类是引导服务器实现的主要入口点。 BootstrapServer使用旧的命名引导协议使可配置文件中定义的所有对象引用可用。
+ * 
  */
 public class BootstrapServer
 {
@@ -56,6 +60,9 @@ public class BootstrapServer
      * specified file is available, and then creates the resolver
      * that will be used to service the requests in the
      * BootstrapServerRequestDispatcher.
+     * <p>
+     *  引导服务器的主启动例程。它首先确定要侦听的端口,检查指定的文件是否可用,然后创建将用于为BootstrapServerRequestDispatcher中的请求提供服务的解析器。
+     * 
      * @param args the command-line arguments to the main program.
      */
     public static final void main(String[] args)

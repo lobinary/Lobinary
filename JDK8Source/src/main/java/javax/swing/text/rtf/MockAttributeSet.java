@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,8 @@ import javax.swing.text.MutableAttributeSet;
 
 
 /* This AttributeSet is made entirely out of tofu and Ritz Crackers
+/* <p>
+/* 
    and yet has a remarkably attribute-set-like interface! */
 class MockAttributeSet
     implements AttributeSet, MutableAttributeSet

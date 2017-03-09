@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ package com.sun.javadoc;
  * The first release subsequent to this with language changes
  * affecting doclets is 1.5.
  *
+ * <p>
+ *  Java编程语言版本。此枚举的常量标识包含与doclet相关的语言更改的JDK和J2SE版本。
+ * <p>
+ * 
  * @since 1.5
  */
 public enum LanguageVersion {

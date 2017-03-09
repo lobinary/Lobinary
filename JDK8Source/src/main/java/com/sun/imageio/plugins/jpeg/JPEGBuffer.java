@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,9 @@ import java.io.IOException;
 /**
  * A class wrapping a buffer and its state.  For efficiency,
  * the members are made visible to other classes in this package.
+ * <p>
+ *  一个类包装一个缓冲区及其状态。为了效率,成员对此包中的其他类可见。
+ * 
  */
 class JPEGBuffer {
 
@@ -41,17 +45,26 @@ class JPEGBuffer {
     /**
      * The size of the buffer.  This is large enough to hold all
      * known marker segments (other than thumbnails and icc profiles)
+     * <p>
+     *  缓冲区的大小。这足够大以容纳所有已知的标记段(缩略图和icc配置文件除外)
+     * 
      */
     final int BUFFER_SIZE = 4096;
 
     /**
      * The actual buffer.
+     * <p>
+     *  实际缓冲区。
+     * 
      */
     byte [] buf;
 
     /**
      * The number of bytes available for reading from the buffer.
      * Anytime data is read from the buffer, this should be updated.
+     * <p>
+     *  可用于从缓冲区读取的字节数。从缓冲区读取任何时间的数据,应该更新。
+     * 
      */
     int bufAvail;
 
@@ -59,11 +72,17 @@ class JPEGBuffer {
      * A pointer to the next available byte in the buffer.  This is
      * used to read data from the buffer and must be updated to
      * move through the buffer.
+     * <p>
+     *  指向缓冲区中下一个可用字节的指针。这用于从缓冲区读取数据,必须更新以通过缓冲区。
+     * 
      */
     int bufPtr;
 
     /**
      * The ImageInputStream buffered.
+     * <p>
+     *  缓冲的ImageInputStream。
+     * 
      */
     ImageInputStream iis;
 
@@ -82,6 +101,10 @@ class JPEGBuffer {
      * If the end of the stream is encountered before a non-0 count can
      * be satisfied, an <code>IIOException</code> is thrown with the
      * message "Image Format Error".
+     * <p>
+     *  确保缓冲区中至少有<code> count </code>个字节可用,加载更多数据并将任何剩余字节移到前面。计数0意味着只填充缓冲区。如果计数大于缓冲区大小,则只填充缓冲区。
+     * 如果在满足非0计数之前遇到流的结尾,则在消息"图像格式错误"中引发<code> IIOException </code>。
+     * 
      */
     void loadBuf(int count) throws IOException {
         if (debug) {
@@ -124,6 +147,10 @@ class JPEGBuffer {
      * state.  If the end of the stream is encountered, an
      * <code>IIOException</code> is thrown with the
      * message "Image Format Error".
+     * <p>
+     *  从流中填充数据数组,从缓冲区开始,然后如果需要,直接从流中读取。缓冲器处于适当的状态。
+     * 如果遇到流的结尾,则会在消息"Image Format Error"中抛出<code> IIOException </code>。
+     * 
      */
     void readData(byte [] data) throws IOException {
         int count = data.length;
@@ -153,6 +180,10 @@ class JPEGBuffer {
      * in an appropriate state.  If the end of the stream is
      * encountered, an <code>IIOException</code> is thrown with the
      * message "Image Format Error".
+     * <p>
+     * 跳过<code> count </code>字节,使缓冲区处于适当的状态。
+     * 如果遇到流的结尾,则会在消息"Image Format Error"中抛出<code> IIOException </code>。
+     * 
      */
     void skipData(int count) throws IOException {
         // First see what's left in the buffer.
@@ -175,6 +206,9 @@ class JPEGBuffer {
     /**
      * Push back the remaining contents of the buffer by
      * repositioning the input stream.
+     * <p>
+     *  通过重新定位输入流来推回缓冲区的剩余内容。
+     * 
      */
     void pushBack() throws IOException {
         iis.seek(iis.getStreamPosition()-bufAvail);
@@ -185,6 +219,9 @@ class JPEGBuffer {
     /**
      * Return the stream position corresponding to the next
      * available byte in the buffer.
+     * <p>
+     *  返回对应于缓冲区中下一个可用字节的流位置。
+     * 
      */
     long getStreamPosition() throws IOException {
         return (iis.getStreamPosition()-bufAvail);
@@ -197,6 +234,10 @@ class JPEGBuffer {
      * 0xff bytes.  If the end of the stream is encountered,
      * an EOI marker is inserted into the buffer and <code>true</code>
      * is returned.  Otherwise returns <code>false</code>.
+     * <p>
+     *  扫描缓冲区,直到下一个0xff字节,根据需要重新加载缓冲区。在运行0xff字节后,缓冲器位置指向第一个非0xff字节。
+     * 如果遇到流的结尾,则将EOI标记插入到缓冲器中,并返回<code> true </code>。否则返回<code> false </code>。
+     * 
      */
     boolean scanForFF(JPEGImageReader reader) throws IOException {
         boolean retval = false;
@@ -234,6 +275,8 @@ class JPEGBuffer {
 
     /**
      * Prints the contents of the buffer, in hex.
+     * <p>
+     * 
      * @param count the number of bytes to print,
      * starting at the current available byte.
      */

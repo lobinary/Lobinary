@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package java.io;
  * Indicates that one or more deserialized objects failed validation
  * tests.  The argument should provide the reason for the failure.
  *
+ * <p>
+ *  表示一个或多个反序列化对象未通过验证测试。论证应该提供失败的原因。
+ * 
+ * 
  * @see ObjectInputValidation
  * @since JDK1.1
  *
@@ -41,6 +46,9 @@ public class InvalidObjectException extends ObjectStreamException {
 
     /**
      * Constructs an <code>InvalidObjectException</code>.
+     * <p>
+     *  构造一个<code> InvalidObjectException </code>。
+     * 
      * @param reason Detailed message explaining the reason for the failure.
      *
      * @see ObjectInputValidation

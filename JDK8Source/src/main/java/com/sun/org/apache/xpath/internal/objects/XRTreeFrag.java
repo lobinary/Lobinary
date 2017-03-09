@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XRTreeFrag.java,v 1.2.4.1 2005/09/14 20:44:48 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XRTreeFrag.java,v 1.2.4.1 2005/09/14 20:44:48 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.objects;
 
@@ -36,6 +49,9 @@ import org.w3c.dom.NodeList;
  * This class represents an XPath result tree fragment object, and is capable of
  * converting the RTF to other types, such as a string.
  * @xsl.usage general
+ * <p>
+ *  此类表示XPath结果树片段对象,并且能够将RTF转换为其他类型,例如字符串。 @ xsl.usage general
+ * 
  */
 public class XRTreeFrag extends XObject implements Cloneable
 {
@@ -48,6 +64,9 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Create an XRTreeFrag Object.
    *
+   * <p>
+   *  创建XRTreeFrag对象。
+   * 
    */
   public XRTreeFrag(int root, XPathContext xctxt, ExpressionNode parent)
   {
@@ -59,6 +78,9 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Create an XRTreeFrag Object.
    *
+   * <p>
+   *  创建XRTreeFrag对象。
+   * 
    */
   public XRTreeFrag(int root, XPathContext xctxt)
   {
@@ -78,6 +100,10 @@ public class XRTreeFrag extends XObject implements Cloneable
    * Return a java object that's closest to the representation
    * that should be handed to an extension.
    *
+   * <p>
+   *  返回最接近应该传递给扩展的表示的java对象。
+   * 
+   * 
    * @return The object that this class wraps
    */
   public Object object()
@@ -91,6 +117,9 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Create an XRTreeFrag Object.
    *
+   * <p>
+   *  创建XRTreeFrag对象。
+   * 
    */
   public XRTreeFrag(Expression expr)
   {
@@ -100,6 +129,10 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Specify if it's OK for detach to release the iterator for reuse.
    *
+   * <p>
+   *  指定detach是否可以释放迭代器以便重用。
+   * 
+   * 
    * @param allowRelease true if it is OK for detach to release this iterator
    * for pooling.
    */
@@ -116,6 +149,12 @@ public class XRTreeFrag extends XObject implements Cloneable
    * raise a runtime exception.
    *
    * In general, detach should only be called once on the object.
+   * <p>
+   *  从迭代的集合中分离<code> DTMIterator </code>,释放任何计算资源并将迭代器置于INVALID状态。
+   * 调用<code> detach </code>后,对<code> nextNode </code>或<code> previousNode </code>的调用将引发运行时异常。
+   * 
+   * 一般来说,detach只应该在对象上调用一次。
+   * 
    */
   public void detach(){
     if(m_allowRelease){
@@ -127,6 +166,10 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Tell what kind of class this is.
    *
+   * <p>
+   *  告诉这是什么类的类。
+   * 
+   * 
    * @return type CLASS_RTREEFRAG
    */
   public int getType()
@@ -138,6 +181,10 @@ public class XRTreeFrag extends XObject implements Cloneable
    * Given a request type, return the equivalent string.
    * For diagnostic purposes.
    *
+   * <p>
+   *  给定一个请求类型,返回等效的字符串。用于诊断目的。
+   * 
+   * 
    * @return type string "#RTREEFRAG"
    */
   public String getTypeString()
@@ -148,6 +195,10 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Cast result object to a number.
    *
+   * <p>
+   *  将结果对象转换为数字。
+   * 
+   * 
    * @return The result tree fragment as a number or NaN
    */
   public double num()
@@ -163,6 +214,10 @@ public class XRTreeFrag extends XObject implements Cloneable
    * Cast result object to a boolean.  This always returns true for a RTreeFrag
    * because it is treated like a node-set with a single root node.
    *
+   * <p>
+   *  将结果对象转换为布尔值。这对于RTreeFrag总是返回true,因为它被视为具有单个根节点的节点集。
+   * 
+   * 
    * @return true
    */
   public boolean bool()
@@ -175,6 +230,10 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Cast result object to an XMLString.
    *
+   * <p>
+   *  将结果对象强制转换为XMLString。
+   * 
+   * 
    * @return The document fragment node data or the empty string.
    */
   public XMLString xstr()
@@ -188,6 +247,10 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Cast result object to a string.
    *
+   * <p>
+   *  将结果对象转换为字符串。
+   * 
+   * 
    * @return The string this wraps or the empty string if null
    */
   public void appendToFsb(com.sun.org.apache.xml.internal.utils.FastStringBuffer fsb)
@@ -200,6 +263,10 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Cast result object to a string.
    *
+   * <p>
+   *  将结果对象转换为字符串。
+   * 
+   * 
    * @return The document fragment node data or the empty string.
    */
   public String str()
@@ -212,6 +279,10 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Cast result object to a result tree fragment.
    *
+   * <p>
+   *  将结果对象强制转换到结果树片段。
+   * 
+   * 
    * @return The document fragment this wraps
    */
   public int rtf()
@@ -224,6 +295,11 @@ public class XRTreeFrag extends XObject implements Cloneable
    * dml - modified to return an RTFIterator for
    * benefit of EXSLT object-type function in
    * {@link com.sun.org.apache.xalan.internal.lib.ExsltCommon}.
+   * <p>
+   *  将结果对象转换为DTMIterator。
+   *  dml  - 修改为返回一个RTFIterator以利于{@link com.sun.org.apache.xalan.internal.lib.ExsltCommon}中的EXSLT对象类型函数。
+   * 
+   * 
    * @return The document fragment as a DTMIterator
    */
   public DTMIterator asNodeIterator()
@@ -234,6 +310,10 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Cast result object to a nodelist. (special function).
    *
+   * <p>
+   *  将结果对象转换为节点列表。 (特殊功能)。
+   * 
+   * 
    * @return The document fragment as a nodelist
    */
   public NodeList convertToNodeset()
@@ -248,6 +328,9 @@ public class XRTreeFrag extends XObject implements Cloneable
   /**
    * Tell if two objects are functionally equal.
    *
+   * <p>
+   *  告诉两个对象在功能上是否相等。
+   * 
    * @param obj2 Object to compare this to
    *
    * @return True if the two objects are equal

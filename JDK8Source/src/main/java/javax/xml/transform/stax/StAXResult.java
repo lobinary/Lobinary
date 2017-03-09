@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import javax.xml.transform.Result;
  * {@link javax.xml.validation.Validator} which accept
  * <code>Result</code> as input.
  *
+ * <p>
+ *  <p>以StAX作者的形式作为XML {@link Result}的持有者,即{@link XMLStreamWriter}或{@link XMLEventWriter}。
+ *  <code> StAXResult </code>可用于所有接受<code> Result </code>的情况,例如{@link javax.xml.transform.Transformer},{@link javax.xml.validation.Validator}
+ * ,它接受​​<code> Result </code>作为输入。
+ *  <p>以StAX作者的形式作为XML {@link Result}的持有者,即{@link XMLStreamWriter}或{@link XMLEventWriter}。
+ * 
+ * 
  * @author <a href="mailto:Neeraj.Bajaj@Sun.com">Neeraj Bajaj</a>
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  *
@@ -52,6 +60,9 @@ public class StAXResult implements Result {
     /** If {@link javax.xml.transform.TransformerFactory#getFeature(String name)}
      * returns true when passed this value as an argument,
      * the Transformer supports Result output of this type.
+     * <p>
+     *  当传递此值作为参数时返回true,Transformer支持此类型的Result输出。
+     * 
      */
     public static final String FEATURE =
         "http://javax.xml.transform.stax.StAXResult/feature";
@@ -59,12 +70,18 @@ public class StAXResult implements Result {
     /**
      * <p><code>XMLEventWriter</code> to be used for
      * <code>Result</code> output.</p>
+     * <p>
+     *  <p> <code> XMLEventWriter </code>用于<code> Result </code>输出。</p>
+     * 
      */
     private XMLEventWriter xmlEventWriter = null;
 
     /**
      * <p><code>XMLStreamWriter</code> to be used for
      * <code>Result</code> output.</p>
+     * <p>
+     *  <p> <code> XMLStreamWriter </code>用于<code> Result </code>输出。</p>
+     * 
      */
     private XMLStreamWriter xmlStreamWriter = null;
 
@@ -78,6 +95,12 @@ public class StAXResult implements Result {
      * <p><code>XMLEventWriter</code> must be a
      * non-<code>null</code> reference.</p>
      *
+     * <p>
+     *  <p>通过提供{@link XMLEventWriter}来创建<code> StAXResult </code>的新实例。</p>
+     * 
+     *  <p> <code> XMLEventWriter </code>必须是非<code> null </code>参考。</p>
+     * 
+     * 
      * @param xmlEventWriter <code>XMLEventWriter</code> used to create
      *   this <code>StAXResult</code>.
      *
@@ -101,6 +124,12 @@ public class StAXResult implements Result {
      * <p><code>XMLStreamWriter</code> must be a
      * non-<code>null</code> reference.</p>
      *
+     * <p>
+     *  <p>通过提供{@link XMLStreamWriter}来创建<code> StAXResult </code>的新实例。</p>
+     * 
+     *  <p> <code> XMLStreamWriter </code>必须是非<code> null </code>参考。</p>
+     * 
+     * 
      * @param xmlStreamWriter <code>XMLStreamWriter</code> used to create
      *   this <code>StAXResult</code>.
      *
@@ -125,6 +154,12 @@ public class StAXResult implements Result {
      * if this <code>StAXResult</code> was created with a
      * <code>XMLStreamWriter</code>.</p>
      *
+     * <p>
+     *  <p>取得此<code> StAXResult </code>使用的<code> XMLEventWriter </code>。</p>
+     * 
+     *  如果使用<code> XMLStreamWriter </code>创建了<code> StAXResult </code>,则</p> <code> XMLEventWriter </code>
+     * 
+     * 
      * @return <code>XMLEventWriter</code> used by this
      *   <code>StAXResult</code>.
      */
@@ -141,6 +176,13 @@ public class StAXResult implements Result {
      * if this <code>StAXResult</code> was created with a
      * <code>XMLEventWriter</code>.</p>
      *
+     * <p>
+     *  <p>获取此<code> StAXResult </code>使用的<code> XMLStreamWriter </code>。</p>
+     * 
+     * 如果<code> StAXResult </code>是使用<code> XMLEventWriter </code>创建的</p>,则XMLStreamWriter </code>将为<code> n
+     * ull </code>。
+     * 
+     * 
      * @return <code>XMLStreamWriter</code> used by this
      *   <code>StAXResult</code>.
      */
@@ -159,6 +201,13 @@ public class StAXResult implements Result {
      * <p>An {@link UnsupportedOperationException} is <strong>always</strong>
      * thrown by this method.</p>
      *
+     * <p>
+     *  <p>在<code> StAXResult </code>的上下文中,不适合显式设置系统标识符。
+     * 用于构造此<code> StAXResult </code>的<code> XMLEventWriter </code>或<code> XMLStreamWriter </code>确定XML结果的系统
+     * 标识符。
+     *  <p>在<code> StAXResult </code>的上下文中,不适合显式设置系统标识符。</p>。
+     * 
+     * 
      * @param systemId Ignored.
      *
      * @throws UnsupportedOperationException Is <strong>always</strong>
@@ -174,6 +223,10 @@ public class StAXResult implements Result {
     /**
      * <p>The returned system identifier is always <code>null</code>.</p>
      *
+     * <p>
+     *  <p>此方法会导致{@link UnsupportedOperationException} <strong>始终</strong>。</p>
+     * 
+     * 
      * @return The returned system identifier is always <code>null</code>.
      */
     public String getSystemId() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,22 @@ import java.text.AttributedCharacterIterator.Attribute;
  *     of the context that the text is input into.
  * </ul>
  *
+ * <p>
+ *  InputMethodRequests定义文本编辑组件为了处理输入方法而必须处理的请求。组件可以实现此接口本身或使用实现它的单独的对象。
+ * 实现此接口的对象必须从组件的getInputMethodRequests方法返回。
+ * 
+ * <p>
+ *  文本编辑组件还必须提供一个输入法事件侦听器。
+ * 
+ * <p>
+ *  该接口被设计为支持两个输入用户接口之一：
+ * <ul>
+ *  <li>现场</em>输入,其中组合文本显示为文本组件文本正文的一部分。
+ *  <li> <em> below-the-spot </em>输入,其中组合文本显示在插入点正下方的单独合成窗口中,在插入点提交时将插入文本。
+ * 请注意,如果在组件的文本正文中选择了文本,则该文本将在承诺时由已提交的文本替换;因此它不被认为是文本被输入的上下文的一部分。
+ * </ul>
+ * 
+ * 
  * @see java.awt.Component#getInputMethodRequests
  * @see java.awt.event.InputMethodListener
  *
@@ -93,6 +110,20 @@ public interface InputMethodRequests {
      * horizontal or vertical orientation. The rectangle uses absolute screen
      * coordinates.
      *
+     * <p>
+     *  获取当前组合文本中或指定文本中选择的指定偏移的位置。例如,该信息用于将候选窗口放置在组合文本附近,或者在将插入确认文本的位置附近的合成窗口。
+     * 
+     * <p>
+     * 如果组件具有组合文本(因为发送给它的最新InputMethodEvent包含组合文本),则偏移量相对于组合文本 - 偏移量0表示组合文本中的第一个字符。返回的位置应该是此字符。
+     * 
+     * <p>
+     *  如果组件没有组合文本,则应忽略偏移,并且返回的位置应反映包含所选文本的最后一行中高亮的开始(行方向)。例如,对于从左到右的水平文本(例如英语),返回包含所选文本的最后一行上最左边字符左侧的位置。
+     * 对于垂直从上到下的文本,从右到左的行,返回包含所选文本的最左行顶部的位置。
+     * 
+     * <p>
+     *  该位置表示为0厚度插入符号,即,如果文本是水平绘制,则其宽度为0,如果垂直绘制文本,则为0高度。其他文本取向需要被映射到水平或垂直取向。矩形使用绝对屏幕坐标。
+     * 
+     * 
      * @param offset the offset within the composed text, if there is composed
      * text; null otherwise
      * @return a rectangle representing the screen location of the offset
@@ -110,6 +141,13 @@ public interface InputMethodRequests {
      * Return null if the location is outside the area occupied by the composed
      * text.
      *
+     * <p>
+     *  获取屏幕上指定的绝对x和y坐标的组合文本内的偏移量。此信息用于例如处理鼠标点击和鼠标光标。偏移量相对于组合文本,因此偏移量0表示组合文本的开始。
+     * 
+     * <p>
+     *  如果位置在组合文本占据的区域之外,则返回null。
+     * 
+     * 
      * @param x the absolute x coordinate on screen
      * @param y the absolute y coordinate on screen
      * @return a text hit info describing the offset in the composed text.
@@ -123,6 +161,10 @@ public interface InputMethodRequests {
      * by an input method, for example, to examine the text surrounding the
      * insert position.
      *
+     * <p>
+     * 获取文本编辑组件中包含的已提交文本中插入位置的偏移量。这是插入通过输入法输入的字符的偏移量。此信息由输入法使用,例如,以检查插入位置周围的文本。
+     * 
+     * 
      * @return the offset of the insert position
      */
     int getInsertPositionOffset();
@@ -140,6 +182,13 @@ public interface InputMethodRequests {
      * iterator. If the list is null, all available attribute information
      * should be made accessible.
      *
+     * <p>
+     *  获取迭代器,提供对包含在文本编辑组件中的整个文本和属性的访问,但未提交的文本除外。对于索引计算,应忽略未提交(组合)文本,并且不应通过迭代器访问。
+     * 
+     * <p>
+     *  输入方法可以提供其感兴趣的属性的列表。在这种情况下,关于实现者可能不需要通过迭代器可访问的其他属性的信息。如果列表为空,则应使所有可用的属性信息可访问。
+     * 
+     * 
      * @param beginIndex the index of the first character
      * @param endIndex the index of the character following the last character
      * @param attributes a list of attributes that the input method is
@@ -153,6 +202,10 @@ public interface InputMethodRequests {
      * Gets the length of the entire text contained in the text
      * editing component except for uncommitted (composed) text.
      *
+     * <p>
+     *  获取文本编辑组件中包含的整个文本的长度,但未提交(合成)文本除外。
+     * 
+     * 
      * @return the length of the text except for uncommitted text
      */
     int getCommittedTextLength();
@@ -176,6 +229,16 @@ public interface InputMethodRequests {
      * iterator. If the list is null, all available attribute information
      * should be made accessible.
      *
+     * <p>
+     *  从文本编辑组件获取最新提交的文本,并将其从组件的文本正文中删除。这用于一些输入方法中的"撤消提交"功能,其中已提交的文本恢复到其先前的组合状态。
+     * 组合文本将使用InputMethodEvent发送到组件。
+     * 
+     * <p>
+     *  通常,此功能只应在文本提交后立即支持,而不是在用户对文本执行其他操作后支持。当不支持该功能时,返回null。
+     * 
+     * <p>
+     * 输入方法可以提供其感兴趣的属性的列表。在这种情况下,关于实现者可能不需要通过迭代器可访问的其他属性的信息。如果列表为空,则应使所有可用的属性信息可访问。
+     * 
      * @param attributes a list of attributes that the input method is
      * interested in
      * @return the latest committed text, or null when the "Undo Commit"
@@ -200,6 +263,9 @@ public interface InputMethodRequests {
      * iterator. If the list is null, all available attribute information
      * should be made accessible.
      *
+     * <p>
+     * 
+     * 
      * @param attributes a list of attributes that the input method is
      * interested in
      * @return the currently selected text

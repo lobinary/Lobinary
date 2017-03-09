@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,12 @@ package java.util.function;
  * <p>This is a <a href="package-summary.html">functional interface</a>
  * whose functional method is {@link #apply(Object)}.
  *
+ * <p>
+ *  表示对产生与其操作数具有相同类型的结果的单个操作数的操作。这是{@code Function}的一个特殊化,对于操作数和结果是相同类型的情况。
+ * 
+ *  <p>这是一个<a href="package-summary.html">功能介面</a>,其功能方法是{@link #apply(Object)}。
+ * 
+ * 
  * @param <T> the type of the operand and result of the operator
  *
  * @see Function
@@ -43,6 +50,8 @@ public interface UnaryOperator<T> extends Function<T, T> {
     /**
      * Returns a unary operator that always returns its input argument.
      *
+     * <p>
+     * 
      * @param <T> the type of the input and output of the operator
      * @return a unary operator that always returns its input argument
      */

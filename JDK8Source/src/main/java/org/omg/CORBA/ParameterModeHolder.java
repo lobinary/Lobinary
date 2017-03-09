@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CORBA;
 
 /**
@@ -15,6 +16,7 @@ package org.omg.CORBA;
    *   <li>PARAM_OUT - Represents an "out" parameter.</li>
    *   <li>PARAM_INOUT - Represents an "inout" parameter.</li>
    * </ul>
+   * <p>
    */
 public final class ParameterModeHolder implements org.omg.CORBA.portable.Streamable
 {

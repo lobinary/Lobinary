@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,16 @@ import sun.security.util.ObjectIdentifier;
  * The GSSName name class contains public static Oid objects
  * representing the standard name types defined in GSS-API.
  *
+ * <p>
+ *  此类表示通用对象标识符(Oids)及其关联的操作。<p>
+ * 
+ *  Oids是在GSS-API框架内用于识别机制和名称格式的层次化全局可解释标识符。<p>
+ * 
+ *  Oid的结构和编码在ISOIEC-8824和ISOIEC-8825中定义。例如,Kerberos V5机制的Oid表示是"1.2.840.113554.1.2.2"<p>
+ * 
+ *  GSSName名称类包含表示GSS-API中定义的标准名称类型的公共静态Oid对象。
+ * 
+ * 
  * @author Mayank Upadhyay
  * @since 1.4
  */
@@ -57,6 +68,10 @@ public class Oid {
      * Constructs an Oid object from a string representation of its
      * integer components.
      *
+     * <p>
+     *  从其整数组件的字符串表示构造Oid对象。
+     * 
+     * 
      * @param strOid the dot separated string representation of the oid.
      * For instance, "1.2.840.113554.1.2.2".
      * @exception GSSException may be thrown when the string is incorrectly
@@ -80,6 +95,10 @@ public class Oid {
      * encoding of Oids is defined in ISOIEC-8824 and ISOIEC-8825.  This
      * method is identical in functionality to its byte array counterpart.
      *
+     * <p>
+     *  从其ASN.1 DER编码创建Oid对象。这是指包括标签和长度的完整编码。 Oid的结构和编码在ISOIEC-8824和ISOIEC-8825中定义。此方法在功能上与其字节数组对应相同。
+     * 
+     * 
      * @param derOid stream containing the DER encoded oid
      * @exception GSSException may be thrown when the DER encoding does not
      *  follow the prescribed format.
@@ -102,6 +121,11 @@ public class Oid {
      * encoding of Oids is defined in ISOIEC-8824 and ISOIEC-8825.  This
      * method is identical in functionality to its InputStream conterpart.
      *
+     * <p>
+     *  从其ASN.1 DER编码创建Oid对象。这是指包括标签和长度的完整编码。 Oid的结构和编码在ISOIEC-8824和ISOIEC-8825中定义。
+     * 此方法在功能上与其InputStream conterpart相同。
+     * 
+     * 
      * @param data byte array containing the DER encoded oid
      * @exception GSSException may be thrown when the DER encoding does not
      *     follow the prescribed format.
@@ -120,6 +144,10 @@ public class Oid {
     /**
      * Only for calling by initializators used with declarations.
      *
+     * <p>
+     *  只有通过与声明一起使用的初始化器调用。
+     * 
+     * 
      * @param strOid
      */
     static Oid getInstance(String strOid) {
@@ -136,6 +164,10 @@ public class Oid {
      * Returns a string representation of the oid's integer components
      * in dot separated notation.
      *
+     * <p>
+     *  以点分隔符号形式返回oid的整数组件的字符串表示形式。
+     * 
+     * 
      * @return string representation in the following format: "1.2.3.4.5"
      */
     public String toString() {
@@ -146,6 +178,10 @@ public class Oid {
      * Tests if two Oid objects represent the same Object identifier
      * value.
      *
+     * <p>
+     *  测试两个Oid对象是否表示相同的对象标识符值。
+     * 
+     * 
      * @return <code>true</code> if the two Oid objects represent the same
      * value, <code>false</code> otherwise.
      * @param other the Oid object that has to be compared to this one
@@ -169,6 +205,10 @@ public class Oid {
      * Returns the full ASN.1 DER encoding for this oid object, which
      * includes the tag and length.
      *
+     * <p>
+     * 返回此oid对象的完整ASN.1 DER编码,其中包括标记和长度。
+     * 
+     * 
      * @return byte array containing the DER encoding of this oid object.
      * @exception GSSException may be thrown when the oid can't be encoded
      */
@@ -191,6 +231,10 @@ public class Oid {
      * A utility method to test if this Oid value is contained within the
      * supplied Oid array.
      *
+     * <p>
+     *  用于测试此Oid值是否包含在提供的Oid数组中的实用程序方法。
+     * 
+     * 
      * @param oids the array of Oid's to search
      * @return true if the array contains this Oid value, false otherwise
      */
@@ -208,6 +252,9 @@ public class Oid {
     /**
      * Returns a hashcode value for this Oid.
      *
+     * <p>
+     *  返回此Oid的哈希码值。
+     * 
      * @return a hashCode value
      */
     public int hashCode() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,12 +48,19 @@ import sun.swing.SwingUtilities2;
  * A collection of methods to deal with various text
  * related activities.
  *
+ * <p>
+ *  处理各种文本相关活动的方法集合。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class Utilities {
     /**
      * If <code>view</code>'s container is a <code>JComponent</code> it
      * is returned, after casting.
+     * <p>
+     *  如果<code> view </code>的容器是<code> JComponent </code>,则在转换后返回。
+     * 
      */
     static JComponent getJComponent(View view) {
         if (view != null) {
@@ -70,6 +78,10 @@ public class Utilities {
      * implementation renders in a 1.1 style coordinate system
      * where ints are used and 72dpi is assumed.
      *
+     * <p>
+     *  绘制给定的文本,扩展使用给定的选项卡扩展技术包含的任何选项卡。这个特定的实现呈现在1.1样式的坐标系统中,其中使用int和假定72dpi。
+     * 
+     * 
      * @param s  the source of the text
      * @param x  the X origin &gt;= 0
      * @param y  the Y origin &gt;= 0
@@ -90,6 +102,10 @@ public class Utilities {
      * implementation renders in a 1.1 style coordinate system
      * where ints are used and 72dpi is assumed.
      *
+     * <p>
+     *  绘制给定的文本,扩展使用给定的选项卡扩展技术包含的任何选项卡。这个特定的实现呈现在1.1样式的坐标系统中,其中使用int和假定72dpi。
+     * 
+     * 
      * @param view View requesting rendering, may be null.
      * @param s  the source of the text
      * @param x  the X origin &gt;= 0
@@ -195,6 +211,10 @@ public class Utilities {
      * into consideration.  This is implemented in a 1.1 style coordinate
      * system where ints are used and 72dpi is assumed.
      *
+     * <p>
+     *  考虑到选项卡,确定给定文本段的宽度。这是在1.1样式的坐标系统中实现的,其中使用int,并假设为72dpi。
+     * 
+     * 
      * @param s  the source of the text
      * @param metrics the font metrics to use for the calculation
      * @param x  the X origin &gt;= 0
@@ -286,6 +306,10 @@ public class Utilities {
      * system.  This is implemented in a 1.1 style coordinate
      * system where ints are used and 72dpi is assumed.
      *
+     * <p>
+     *  确定最佳表示视图坐标系中给定跨度的给定文本的相对偏移。这是在1.1样式的坐标系统中实现的,其中使用int,并假设为72dpi。
+     * 
+     * 
      * @param s  the source of the text
      * @param metrics the font metrics to use for the calculation
      * @param x0 the starting view location representing the start
@@ -435,6 +459,10 @@ public class Utilities {
     /**
      * Determine where to break the given text to fit
      * within the given span. This tries to find a word boundary.
+     * <p>
+     *  确定在给定的范围内打破给定文本的位置。这试图找到一个字边界。
+     * 
+     * 
      * @param s  the source of the text
      * @param metrics the font metrics to use for the calculation
      * @param x0 the starting view location representing the start
@@ -487,6 +515,10 @@ public class Utilities {
      * size to compute the result.  If the component doesn't have a size
      * a value of -1 will be returned.
      *
+     * <p>
+     *  确定包含指定模型位置的行的起始行模型位置。给定的组件必须具有计算结果的大小。如果组件没有大小,将返回值-1。
+     * 
+     * 
      * @param c the editor
      * @param offs the offset in the document &gt;= 0
      * @return the position &gt;= 0 if the request can be computed, otherwise
@@ -517,6 +549,10 @@ public class Utilities {
      * size to compute the result.  If the component doesn't have a size
      * a value of -1 will be returned.
      *
+     * <p>
+     * 确定包含指定模型位置的行的结束行模型位置。给定的组件必须具有计算结果的大小。如果组件没有大小,将返回值-1。
+     * 
+     * 
      * @param c the editor
      * @param offs the offset in the document &gt;= 0
      * @return the position &gt;= 0 if the request can be computed, otherwise
@@ -548,6 +584,10 @@ public class Utilities {
      * size to compute the result.  If the component doesn't have a size
      * a value of -1 will be returned.
      *
+     * <p>
+     *  确定模型中最靠近上面行中给定视图位置的位置。给定的组件必须具有计算结果的大小。如果组件没有大小,将返回值-1。
+     * 
+     * 
      * @param c the editor
      * @param offs the offset in the document &gt;= 0
      * @param x the X coordinate &gt;= 0
@@ -585,6 +625,10 @@ public class Utilities {
      * size to compute the result.  If the component doesn't have a size
      * a value of -1 will be returned.
      *
+     * <p>
+     *  确定模型中距离下面一行中给定视图位置最近的位置。给定的组件必须具有计算结果的大小。如果组件没有大小,将返回值-1。
+     * 
+     * 
      * @param c the editor
      * @param offs the offset in the document &gt;= 0
      * @param x the X coordinate &gt;= 0
@@ -621,6 +665,10 @@ public class Utilities {
      * Determines the start of a word for the given model location.
      * Uses BreakIterator.getWordInstance() to actually get the words.
      *
+     * <p>
+     *  确定给定模型位置的单词的开始。使用BreakIterator.getWordInstance()来实际获取单词。
+     * 
+     * 
      * @param c the editor
      * @param offs the offset in the document &gt;= 0
      * @return the location in the model of the word start &gt;= 0
@@ -655,6 +703,10 @@ public class Utilities {
      * Determines the end of a word for the given location.
      * Uses BreakIterator.getWordInstance() to actually get the words.
      *
+     * <p>
+     *  确定给定位置的单词的结尾。使用BreakIterator.getWordInstance()来实际获取单词。
+     * 
+     * 
      * @param c the editor
      * @param offs the offset in the document &gt;= 0
      * @return the location in the model of the word end &gt;= 0
@@ -688,6 +740,10 @@ public class Utilities {
      * Determines the start of the next word for the given location.
      * Uses BreakIterator.getWordInstance() to actually get the words.
      *
+     * <p>
+     *  确定给定位置的下一个字的开始。使用BreakIterator.getWordInstance()来实际获取单词。
+     * 
+     * 
      * @param c the editor
      * @param offs the offset in the document &gt;= 0
      * @return the location in the model of the word start &gt;= 0
@@ -713,6 +769,9 @@ public class Utilities {
      * the first offset is desired.
      * Returns the offset of the next word, or BreakIterator.DONE
      * if there are no more words in the element.
+     * <p>
+     *  查找给定元素文本中的下一个单词。第一个参数允许搜索多个段落,其中甚至需要第一个偏移。返回下一个单词的偏移量,如果元素中没有更多单词,则返回BreakIterator.DONE。
+     * 
      */
     static int getNextWordInParagraph(JTextComponent c, Element line, int offs, boolean first) throws BadLocationException {
         if (line == null) {
@@ -766,6 +825,10 @@ public class Utilities {
      * Determine the start of the prev word for the given location.
      * Uses BreakIterator.getWordInstance() to actually get the words.
      *
+     * <p>
+     *  确定给定位置的前一个词的开始。使用BreakIterator.getWordInstance()来实际获取单词。
+     * 
+     * 
      * @param c the editor
      * @param offs the offset in the document &gt;= 0
      * @return the location in the model of the word start &gt;= 0
@@ -791,6 +854,9 @@ public class Utilities {
      * the first offset is desired.
      * Returns the offset of the next word, or BreakIterator.DONE
      * if there are no more words in the element.
+     * <p>
+     * 查找给定元素文本中的上一个单词。第一个参数允许搜索多个段落,其中甚至需要第一个偏移。返回下一个单词的偏移量,如果元素中没有更多单词,则返回BreakIterator.DONE。
+     * 
      */
     static int getPrevWordInParagraph(JTextComponent c, Element line, int offs) throws BadLocationException {
         if (line == null) {
@@ -840,6 +906,10 @@ public class Utilities {
     /**
      * Determines the element to use for a paragraph/line.
      *
+     * <p>
+     *  确定要用于段落/线的元素。
+     * 
+     * 
      * @param c the editor
      * @param offs the starting offset in the document &gt;= 0
      * @return the element
@@ -879,6 +949,10 @@ public class Utilities {
     /**
      * Draws the given composed text passed from an input method.
      *
+     * <p>
+     *  绘制从输入法传递的给定组合文本。
+     * 
+     * 
      * @param view View hosting text
      * @param attr the attributes containing the composed text
      * @param g  the graphics context
@@ -906,6 +980,9 @@ public class Utilities {
 
     /**
      * Paints the composed text in a GlyphView
+     * <p>
+     *  将组合文本绘制在GlyphView中
+     * 
      */
     static void paintComposedText(Graphics g, Rectangle alloc, GlyphView v) {
         if (g instanceof Graphics2D) {
@@ -951,6 +1028,9 @@ public class Utilities {
     /*
      * Convenience function for determining ComponentOrientation.  Helps us
      * avoid having Munge directives throughout the code.
+     * <p>
+     *  用于确定ComponentOrientation的便捷功能。帮助我们避免在整个代码中有Munge指令。
+     * 
      */
     static boolean isLeftToRight( java.awt.Component c ) {
         return c.getComponentOrientation().isLeftToRight();
@@ -971,6 +1051,11 @@ public class Utilities {
      * <code>CompositeView</code>. The <code>CompositeView</code>
      * must then override the <code>flipEastAndWestAtEnds</code> method.
      *
+     * <p>
+     *  提供一种方法来确定下一个可视地表示的模型位置,人们可以放置插入符号。某些视图可能不可见,它们可能不是在模型中找到的相同顺序,或者它们可能不允许访问模型中的一些位置。
+     * <p>
+     *  此实现假设视图以逻辑方式布置。也就是说,索引x + 1处的视图在视觉上在索引x处的视图之后,并且索引x-1处的视图在视觉上位于x处的视图之前。
+     * 
      * @param v View to query
      * @param pos the position to convert &gt;= 0
      * @param a the allocated region to render into

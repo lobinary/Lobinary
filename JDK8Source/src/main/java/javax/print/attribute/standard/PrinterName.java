@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,14 @@ import javax.print.attribute.PrintServiceAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  PrinterName类是一个打印属性类,一个文本属性,用于指定打印机的名称。它是一个比URI更加最终用户友好的名称。管理员确定打印机的名称,并将此属性设置为该名称。
+ * 此名称可能是打印机URI的最后一部分,也可能不相关。在非美国英语区域设置中,名称可能包含URI中不允许使用的字符。
+ * <P>
+ *  <B> IPP兼容性：</B>字符串值给出IPP名称值。语言环境提供IPP自然语言。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class PrinterName extends TextSyntax
@@ -53,6 +62,10 @@ public final class PrinterName extends TextSyntax
     /**
      * Constructs a new printer name attribute with the given name and locale.
      *
+     * <p>
+     *  构造具有给定名称和区域设置的新打印机名称属性。
+     * 
+     * 
      * @param  printerName  Printer name.
      * @param  locale       Natural language of the text string. null
      * is interpreted to mean the default locale as returned
@@ -82,6 +95,19 @@ public final class PrinterName extends TextSyntax
      * are equal.
      * </OL>
      *
+     * <p>
+     *  返回此打印机名称属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是PrinterName类的实例。
+     * <LI>
+     *  此打印机名称属性的底层字符串和<CODE>对象</CODE>的底层字符串是相等的。
+     * <LI>
+     *  此打印机名称属性的区域设置和<CODE>对象</CODE>的区域设置相等。
+     * </OL>
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this printer
@@ -98,6 +124,9 @@ public final class PrinterName extends TextSyntax
      * For class PrinterName, the category is
      * class PrinterName itself.
      *
+     * <p>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -112,6 +141,12 @@ public final class PrinterName extends TextSyntax
      * For class PrinterName, the category
      * name is <CODE>"printer-name"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于PrinterName类,类别是PrinterName类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

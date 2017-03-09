@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,14 @@ import java.security.Principal;
  * PosixFileAttributeView} provide access to a file's {@link
  * PosixFileAttributes#owner owner}.
  *
+ * <p>
+ *  表示用于确定对文件系统中对象的访问权限的身份的{@code Principal}。
+ * 
+ *  <p>在许多平台和文件系统上,实体需要适当的访问权限或权限才能访问文件系统中的对象。访问权限通常通过检查实体的身份来执行。
+ * 例如,在使用访问控制列表(ACL)强制执行权限分离的实现上,文件系统中的文件可以具有确定在ACL中指定的标识的访问权限的关联ACL。
+ * 
+ *  <p> {@code UserPrincipal}对象是身份的抽象表示。它有一个{@link #getName()name},通常是它所代表的用户名或帐户名。
+ * 
  * @since 1.7
  */
 

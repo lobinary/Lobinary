@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,15 @@ import java.io.IOException;
  * This is a class, not an interface so as to allow future versions to evolve
  * without breaking the compatibility.
  *
+ * <p>
+ *  控制JAXB实现将生成模式文件的位置。
+ * 
+ * <p>
+ *  这个抽象类的实现必须由调用应用程序提供以生成模式。
+ * 
+ * <p>
+ *  这是一个类,而不是一个接口,以便允许未来的版本进化而不破坏兼容性。
+ * 
  * @author
  *     Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  */
@@ -53,6 +63,9 @@ public abstract class SchemaOutputResolver {
      * IOW, all the components in one namespace is always written
      * into the same schema document.
      *
+     * <p>
+     * 
+     * 
      * @param namespaceUri
      *      The namespace URI that the schema declares.
      *      Can be the empty string, but never be null.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -78,6 +81,22 @@ import sun.reflect.misc.ReflectUtil;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-6292969195866300415L</code>.
  *
+ * <p>
+ *  此类表示ModelMBean元素的元数据集。
+ * 描述符是ModelMBeanInfo,ModelMBeanNotificationInfo,ModelMBeanAttributeInfo,ModelMBeanConstructorInfo和Model
+ * MBeanParameterInfo的一部分。
+ *  此类表示ModelMBean元素的元数据集。
+ * <P>
+ *  描述符由字段的集合组成。每个字段都是fieldname = fieldvalue格式。字段名不区分大小写,大小写将保留在字段值上。
+ * <P>
+ *  所有字段名称和值都未预定义。新字段可以由任何程序定义和添加。
+ * 一些字段已经被预定义为通过ModelMBeanInfo,ModelMBeanAttributeInfo,ModelMBeanConstructorInfo,ModelMBeanNotificationI
+ * nfo,ModelMBeanOperationInfo和ModelMBean类的实现和支持的一致性。
+ *  所有字段名称和值都未预定义。新字段可以由任何程序定义和添加。
+ * 
+ *  <p>此类别的<b> serialVersionUID </b>是<code> -6292969195866300415L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -113,6 +132,8 @@ public class DescriptorSupport
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField descriptor HashMap The collection of fields representing this descriptor
      */
     private static final ObjectStreamField[] serialPersistentFields;
@@ -150,6 +171,12 @@ public class DescriptorSupport
        hard to reconcile with the required semantics, so we fabricate
        that field virtually during serialization and deserialization
        but keep the real information in descriptorMap.
+    /* <p>
+    /*  保留。这意味着我们需要能够从可能与HashMap中使用的实际名称不同的名称进行映射。因此,descriptorMap是一个具有忽略大小写的Comparator的TreeMap。
+    /* 
+    /*  此类的先前版本有一个称为"描述符"的类型为HashMap的字段,其中键是直接字符串。
+    /* 这很难与所需的语义协调,所以我们在序列化和反序列化期间虚拟地构建该字段,但在descriptorMap中保留真实信息。
+    /* 
     */
     private transient SortedMap<String, Object> descriptorMap;
 
@@ -161,6 +188,9 @@ public class DescriptorSupport
      * Default initial descriptor size is 20.  It will grow as needed.<br>
      * Note that the created empty descriptor is not a valid descriptor
      * (the method {@link #isValid isValid} returns <CODE>false</CODE>)
+     * <p>
+     * 描述符默认构造函数。 <br>请注意,创建的空描述符不是有效的描述符(方法{@link #isValid isValid}返回<CODE> false </CODE>)
+     * 
      */
     public DescriptorSupport() {
         if (MODELMBEAN_LOGGER.isLoggable(Level.FINEST)) {
@@ -178,6 +208,11 @@ public class DescriptorSupport
      * descriptor is not a valid descriptor (the method {@link
      * #isValid isValid} returns <CODE>false</CODE>).
      *
+     * <p>
+     *  描述符构造函数。将参数作为存储描述符字段的Map的初始容量。
+     *  <br>请注意,创建的空描述符不是有效的描述符(方法{@link #isValid isValid}返回<CODE> false </CODE>)。
+     * 
+     * 
      * @param initNumFields The initial capacity of the Map that
      * stores the descriptor fields.
      *
@@ -213,6 +248,10 @@ public class DescriptorSupport
      * Creates a new descriptor initialized to the values of the
      * descriptor passed in parameter.
      *
+     * <p>
+     *  以描述符为参数的描述符构造函数。创建一个新的描述符,初始化为在参数中传递的描述符的值。
+     * 
+     * 
      * @param inDescr the descriptor to be used to initialize the
      * constructed descriptor. If it is null or contains no descriptor
      * fields, an empty Descriptor will be created.
@@ -244,6 +283,14 @@ public class DescriptorSupport
      * programmer will have to reset or convert these fields
      * correctly.</p>
      *
+     * <p>
+     *  <p>描述符构造函数接受XML字符串。</p>
+     * 
+     *  <p> XML字符串的格式未定义,但实现必须确保现有描述符上的{@link #toXMLString()toXMLString()}返回的字符串可用于使用此构造函数实例化等效描述符。 </p>
+     * 
+     *  <p>在此实现中,所有字段值都将创建为字符串。如果字段值不是字符串,程序员将必须正确地重置或转换这些字段。</p>
+     * 
+     * 
      * @param inStr An XML-formatted string used to populate this
      * Descriptor.  The format is not defined, but any
      * implementation must ensure that the string returned by
@@ -261,11 +308,17 @@ public class DescriptorSupport
        a StringTokenizer as we do means, first, that we accept a lot of
        bogus strings without noticing they are bogus, and second, that we
        split the string being parsed at characters like > even if they
+    /* <p>
+    /*  一个StringTokenizer,因为我们的意思,首先,我们接受了很多假的字符串,而没有注意到他们是假的,其次,我们分割字符串解析的字符像>,即使他们
+    /* 
+    /* 
        occur in the middle of a field value. */
     public DescriptorSupport(String inStr)
             throws MBeanException, RuntimeOperationsException,
                    XMLParseException {
         /* parse an XML-formatted string and populate internal
+        /* <p>
+        /* 
          * structure with it */
         if (MODELMBEAN_LOGGER.isLoggable(Level.FINEST)) {
             MODELMBEAN_LOGGER.logp(Level.FINEST,
@@ -360,6 +413,10 @@ public class DescriptorSupport
      * Constructor taking field names and field values.  Neither array
      * can be null.
      *
+     * <p>
+     *  构造函数获取字段名称和字段值。两个数组都不能为空。
+     * 
+     * 
      * @param fieldNames String array of field names.  No elements of
      * this array can be null.
      * @param fieldValues Object array of the corresponding field
@@ -418,6 +475,10 @@ public class DescriptorSupport
      * Constructor taking fields in the <i>fieldName=fieldValue</i>
      * format.
      *
+     * <p>
+     *  构造函数以<i> fieldName = fieldValue </i>格式输入字段。
+     * 
+     * 
      * @param fields String array with each element containing a
      * field name and value.  If this array is null or empty, then the
      * default constructor will be executed. Null strings or empty
@@ -771,6 +832,10 @@ public class DescriptorSupport
     /**
      * Returns a new Descriptor which is a duplicate of the Descriptor.
      *
+     * <p>
+     * 返回与描述符重复的新描述符。
+     * 
+     * 
      * @exception RuntimeOperationsException for illegal value for
      * field Names or field Values.  If the descriptor construction
      * fails for any reason, this exception will be thrown.
@@ -811,6 +876,18 @@ public class DescriptorSupport
      * <li>Otherwise {@link Object#equals(Object)} must return true.</li>
      * </ul>
      *
+     * <p>
+     *  将此描述符与给定对象进行比较。如果给定对象也是描述符,并且如果两个描述符具有相同的字段名(在情况下可能不同)和相同的关联值,则对象是相等的。如果以下条件成立,则两个描述符中的字段的相应值相等：
+     * 
+     * <ul>
+     *  <li>如果一个值为null,那么另一个值也必须为空。</li> <li>如果一个值是基本数组,则另一个值必须是具有相同元素的相同类型的基本数组。
+     * </li> <li>如果一个值是对象数组,则另一个值也必须是对象数组,而{@ link java.util.Arrays#deepEquals(Object [],Object [])Arrays.deepEquals}
+     * 必须返回true。
+     *  <li>如果一个值为null,那么另一个值也必须为空。</li> <li>如果一个值是基本数组,则另一个值必须是具有相同元素的相同类型的基本数组。
+     * </li> <li >否则{@link Object#equals(Object)}必须返回true。</li>。
+     * </ul>
+     * 
+     * 
      * @param o the object to compare with.
      *
      * @return {@code true} if the objects are the same; {@code false}
@@ -847,6 +924,20 @@ public class DescriptorSupport
      * <li>Otherwise {@code h} is {@code v.hashCode()}.</li>
      * </ul>
      *
+     * <p>
+     *  <p>返回此描述符的哈希码值。哈希码被计算为描述符中的每个字段的哈希码的和。名为{@code n}和值{@code v}的字段的哈希码是{@code n.toLowerCase()。
+     * hashCode()^ h}。这里{@code h}是{@code v}的哈希码,计算如下：</p>。
+     * 
+     * <ul>
+     * <li>如果{@code v}为null,则{@code h}为0。
+     * </li> <li>如果{@code v}是原始数组,则{@code h} {@code java.util.Arrays.hashCode}。
+     * </li> <li>如果{@code v}是一个对象数组,那么{@code h}是使用{@link java.util.Arrays#deepHashCode [])Arrays.deepHashCode}
+     * 。
+     * </li> <li>如果{@code v}是原始数组,则{@code h} {@code java.util.Arrays.hashCode}。
+     * </li> <li>否则{@code h}是{@code v.hashCode()}。</li>。
+     * </ul>
+     * 
+     * 
      * @return A hash code value for this object.
      *
      */
@@ -892,6 +983,25 @@ public class DescriptorSupport
      *   "Never". These String values must not be case sensitive.<br>
      * </UL>
      *
+     * <p>
+     *  如果所有字段都具有指定名称的合法值,则返回true。
+     * <P>
+     *  此实现不支持与目录或查找服务的互操作。因此,符合规范,不对</i>"export"</i>字段进行检查。
+     * <P>
+     *  否则,此实现返回false如果：
+     * <UL>
+     * <LI> name和descriptorType fieldNames未定义,或为null或空,或不为String。
+     * String <li> class,role,getMethod,setMethod fieldNames,如果定义,为null或不为String StringPeriod,currencyTimeLi
+     * mit,lastUpdatedTimeStamp,lastReturnedTimeStamp如果定义,则为null,或不是数字字符串或不是数字值{@literal> = -1} <li>如果定义了log
+     * 字段名称,则为null,或不是布尔值或不是值为"t" "f","true","false"。
+     * <LI> name和descriptorType fieldNames未定义,或为null或空,或不为String。这些String值不能区分大小写。
+     *  <LI> visibility fieldName(如果已定义)为null,或不是数字字符串或非数值值{@literal> = 1和<= 4} <LI> severity fieldName(如果已定
+     * 义)为null,或者不是数字值{@literal> = 0和<= 6} <br> <li>如果定义了persistPolicy fieldName,则为null或不是以下字符串之一：<br>"OnUpd
+     * ate","OnTimer" "NoMoreOftenThan","OnUnregister","Always","Never"。
+     * <LI> name和descriptorType fieldNames未定义,或为null或空,或不为String。这些String值不能区分大小写。这些String值不能区分大小写。<br>。
+     * </UL>
+     * 
+     * 
      * @exception RuntimeOperationsException If the validity checking
      * fails for any reason, this exception will be thrown.
      */
@@ -1072,6 +1182,19 @@ public class DescriptorSupport
      * <p>If the descriptor is empty the following String is
      * returned: &lt;Descriptor&gt;&lt;/Descriptor&gt;</p>
      *
+     * <p>
+     *  <p>返回表示描述符的XML字符串。</p>
+     * 
+     *  <p>格式未定义,但实现必须确保此方法返回的字符串可用于在使用构造函数{@link #DescriptorSupport(String)DescriptorSupport(String inStr)}
+     * 实例化时构建等效描述符。
+     *  / p>。
+     * 
+     * <p>不是String对象的字段将有toString()调用它们来创建值。该值将括在括号中。
+     * 不能保证您可以重建这些对象,除非它们已被专门设置为以有意义的格式支持toString(),并且具有接受相同格式的字符串的匹配构造函数。</p>。
+     * 
+     *  <p>如果描述符为空,则返回以下String：&lt; Descriptor&gt;&lt; / Descriptor&gt; </p>
+     * 
+     * 
      * @return the XML string.
      *
      * @exception RuntimeOperationsException for illegal value for
@@ -1090,6 +1213,10 @@ public class DescriptorSupport
                cannot be confused with the encoding of an object.  If it
                could be so confused (surrounded by parentheses) then we
                call makeFieldValue as for any non-String object and end
+            /* <p>
+            /*  不能与对象的编码混淆。如果它可能如此混淆(由括号括起来),那么我们调用makeFieldValue作为任何非String对象和结束
+            /* 
+            /* 
                up with an encoding like "(java.lang.String/(thing))".  */
             if (value instanceof String) {
                 final String svalue = (String) value;
@@ -1146,6 +1273,10 @@ public class DescriptorSupport
      * stupid, we're obliged to quote apparently innocuous characters like
      * space, <, and >.  In a future version, we should rewrite the parser
      * and only quote " plus either \ or & (depending on the quote syntax).
+     * <p>
+     *  引用字符串,以便它可以接受(String)构造函数。由于在构造函数中的解析代码是相当愚蠢的,我们不得不引用明显无害的字符,如空格,<和>。
+     * 在将来的版本中,我们应该重写解析器,并且只引用"加上\或&(取决于引用语法)。
+     * 
      */
     private static String quote(String s) {
         boolean found = false;
@@ -1192,6 +1323,10 @@ public class DescriptorSupport
     /**
      * Make the string that will go inside "..." for a value that is not
      * a plain String.
+     * <p>
+     *  为不是纯String的值创建将在"..."内部的字符串。
+     * 
+     * 
      * @throws RuntimeOperationsException if the value cannot be encoded.
      */
     private static String makeFieldValue(Object value) {
@@ -1230,6 +1365,12 @@ public class DescriptorSupport
      * result is equivalent to `new some.class.name("xxx")';
      * - some other string, in which case the result is that string,
      * without the parentheses.
+     * <p>
+     * 从由toXMLString()生成的XML中解析字段值。给定包含<field name ="nnn"value ="vvv">的描述符XML,此方法的参数将为"vvv"(包含引号字符的字符串)。
+     * 如果vvv以括号开头和结尾,则它可能包含： - 字符"null",在这种情况下,结果为null; - 形式"some.class.name/xxx"的值,在这种情况下,结果等同于new some.cla
+     * ss.name("xxx")'; - 一些其他字符串,在这种情况下的结果是字符串,没有括号。
+     * 从由toXMLString()生成的XML中解析字段值。给定包含<field name ="nnn"value ="vvv">的描述符XML,此方法的参数将为"vvv"(包含引号字符的字符串)。
+     * 
      */
     private static Object parseQuotedFieldValue(String s)
             throws XMLParseException {
@@ -1280,6 +1421,14 @@ public class DescriptorSupport
      * called on it and its returned value is used as the value for
      * the field enclosed in parenthesis.
      *
+     * <p>
+     *  返回一个表示描述符的可读字符串。该字符串的格式为"fieldName = fieldValue,fieldName2 = fieldValue2,..."<br>
+     * 
+     *  如果描述符中没有字段,则返回一个空字符串。<br>
+     * 
+     *  如果fieldValue是一个对象,那么将调用toString()方法,其返回值将用作括号中的字段的值。
+     * 
+     * 
      * @exception RuntimeOperationsException for illegal value for
      * field Names or field Values.  If the descriptor string fails
      * for any reason, this exception will be thrown.
@@ -1341,6 +1490,9 @@ public class DescriptorSupport
     /**
      * Deserializes a {@link DescriptorSupport} from an {@link
      * ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link DescriptorSupport}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -1355,6 +1507,9 @@ public class DescriptorSupport
 
     /**
      * Serializes a {@link DescriptorSupport} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link DescriptorSupport}序列化为{@link ObjectOutputStream}。
+     * 
      */
     /* If you set jmx.serial.form to "1.2.0" or "1.2.1", then we are
        bug-compatible with those versions.  Specifically, field names
@@ -1366,6 +1521,10 @@ public class DescriptorSupport
        lower case.  Those versions expect this to have happened to a
        descriptor they deserialize and e.g. getFieldValue will not
        find a field whose name is spelt with a different case.
+    /* <p>
+    /* bug与这些版本兼容。具体来说,字段名称在写入之前强制为小写。这与规范相矛盾,虽然它没有明确提及序列化,但确实保留了字段名的情况。但是在1.2.0和1.2.1中,这个要求没有得到满足。
+    /* 相反,描述符映射中的字段名被强制为小写。这些版本期望这发生在他们反序列化的描述符上。 getFieldValue将不会找到一个名称拼写与不同大小写的字段。
+    /* 
     */
     private void writeObject(ObjectOutputStream out) throws IOException {
         ObjectOutputStream.PutField fields = out.putFields();
@@ -1378,6 +1537,7 @@ public class DescriptorSupport
          * serializable.  We do this here rather than purging the "descriptor"
          * variable below because that HashMap doesn't do case-insensitivity.
          * See CR 6332962.
+         * <p>
          */
         SortedMap<String, Object> startMap = descriptorMap;
         if (startMap.containsKey("targetObject")) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,14 @@ import sun.swing.DefaultLookup;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  BasicSplitPaneUI使用的分隔符。子类可能希望覆盖paint来做一些更有趣的事情。边框效果在BasicSplitPaneUI中绘制,因此如果您不喜欢该边框,请重置它。
+ * 有条件地从某些区域拖动mousePressed子类,并在您希望拖动开始时调用super。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Scott Violet
  */
 public class BasicSplitPaneDivider extends Container
@@ -65,32 +74,50 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Width or height of the divider based on orientation
      * BasicSplitPaneUI adds two to this.
+     * <p>
+     *  基于方向的分隔线的宽度或高度BasicSplitPaneUI添加两个到此。
+     * 
      */
     protected static final int ONE_TOUCH_SIZE = 6;
     protected static final int ONE_TOUCH_OFFSET = 2;
 
     /**
      * Handles mouse dragging message to do the actual dragging.
+     * <p>
+     *  处理鼠标拖动消息以进行实际拖动。
+     * 
      */
     protected DragController dragger;
 
     /**
      * UI this instance was created from.
+     * <p>
+     *  UI创建自此实例。
+     * 
      */
     protected BasicSplitPaneUI splitPaneUI;
 
     /**
      * Size of the divider.
+     * <p>
+     *  分隔器的尺寸。
+     * 
      */
     protected int dividerSize = 0; // default - SET TO 0???
 
     /**
      * Divider that is used for noncontinuous layout mode.
+     * <p>
+     *  用于非连续布局模式的分隔线。
+     * 
      */
     protected Component hiddenDivider;
 
     /**
      * JSplitPane the receiver is contained in.
+     * <p>
+     *  JSplitPane的接收器是包含的。
+     * 
      */
     protected JSplitPane splitPane;
 
@@ -99,21 +126,33 @@ public class BasicSplitPaneDivider extends Container
      * Mouse events are handled for the splitpane since you want to be able
      * to drag when clicking on the border of the divider, which is not
      * drawn by the divider.
+     * <p>
+     *  从此类和拆分窗格处理鼠标事件。鼠标事件是为分割窗格处理的,因为您想要在单击分隔符边框时可以拖动,而不是由分隔符绘制。
+     * 
      */
     protected MouseHandler mouseHandler;
 
     /**
      * Orientation of the JSplitPane.
+     * <p>
+     *  JSplitPane的方向。
+     * 
      */
     protected int orientation;
 
     /**
      * Button for quickly toggling the left component.
+     * <p>
+     *  快速切换左侧组件的按钮。
+     * 
      */
     protected JButton leftButton;
 
     /**
      * Button for quickly toggling the right component.
+     * <p>
+     * 快速切换正确组件的按钮。
+     * 
      */
     protected JButton rightButton;
 
@@ -122,6 +161,9 @@ public class BasicSplitPaneDivider extends Container
 
     /**
      * Is the mouse over the divider?
+     * <p>
+     *  鼠标在分隔线上吗?
+     * 
      */
     private boolean mouseOver;
 
@@ -130,6 +172,9 @@ public class BasicSplitPaneDivider extends Container
 
     /**
      * If true the one touch buttons are centered on the divider.
+     * <p>
+     *  如果为真,则单触按钮位于分隔线的中心。
+     * 
      */
     private boolean centerOneTouchButtons;
 
@@ -137,6 +182,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Creates an instance of BasicSplitPaneDivider. Registers this
      * instance for mouse events and mouse dragged events.
+     * <p>
+     *  创建BasicSplitPaneDivider的实例。为鼠标事件和鼠标拖动事件注册此实例。
+     * 
      */
     public BasicSplitPaneDivider(BasicSplitPaneUI ui) {
         oneTouchSize = DefaultLookup.getInt(ui.getSplitPane(), ui,
@@ -163,6 +211,9 @@ public class BasicSplitPaneDivider extends Container
 
     /**
      * Sets the SplitPaneUI that is using the receiver.
+     * <p>
+     *  设置使用接收器的SplitPaneUI。
+     * 
      */
     public void setBasicSplitPaneUI(BasicSplitPaneUI newUI) {
         if (splitPane != null) {
@@ -199,6 +250,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Returns the <code>SplitPaneUI</code> the receiver is currently
      * in.
+     * <p>
+     *  返回接收器当前所在的<code> SplitPaneUI </code>。
+     * 
      */
     public BasicSplitPaneUI getBasicSplitPaneUI() {
         return splitPaneUI;
@@ -209,6 +263,10 @@ public class BasicSplitPaneDivider extends Container
      * Sets the size of the divider to <code>newSize</code>. That is
      * the width if the splitpane is <code>HORIZONTAL_SPLIT</code>, or
      * the height of <code>VERTICAL_SPLIT</code>.
+     * <p>
+     *  将分隔符的大小设置为<code> newSize </code>。
+     * 如果splitpane是<code> HORIZONTAL_SPLIT </code>,或者是<code> VERTICAL_SPLIT </code>的高度,那么就是宽度。
+     * 
      */
     public void setDividerSize(int newSize) {
         dividerSize = newSize;
@@ -218,6 +276,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Returns the size of the divider, that is the width if the splitpane
      * is HORIZONTAL_SPLIT, or the height of VERTICAL_SPLIT.
+     * <p>
+     *  返回分隔符的大小,即分裂窗格为HORIZONTAL_SPLIT时的宽度或VERTICAL_SPLIT的高度。
+     * 
      */
     public int getDividerSize() {
         return dividerSize;
@@ -226,6 +287,10 @@ public class BasicSplitPaneDivider extends Container
 
     /**
      * Sets the border of this component.
+     * <p>
+     *  设置此组件的边框。
+     * 
+     * 
      * @since 1.3
      */
     public void setBorder(Border border) {
@@ -238,6 +303,10 @@ public class BasicSplitPaneDivider extends Container
      * Returns the border of this component or null if no border is
      * currently set.
      *
+     * <p>
+     *  返回此组件的边框或null(如果当前未设置边框)。
+     * 
+     * 
      * @return the border object for this component
      * @see #setBorder
      * @since 1.3
@@ -250,6 +319,10 @@ public class BasicSplitPaneDivider extends Container
      * If a border has been set on this component, returns the
      * border's insets, else calls super.getInsets.
      *
+     * <p>
+     *  如果在此组件上设置了边框,则返回边框的insets,否则调用super.getInsets。
+     * 
+     * 
      * @return the value of the insets property.
      * @see #setBorder
      */
@@ -265,6 +338,10 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Sets whether or not the mouse is currently over the divider.
      *
+     * <p>
+     *  设置鼠标当前是否超过分频器。
+     * 
+     * 
      * @param mouseOver whether or not the mouse is currently over the divider
      * @since 1.5
      */
@@ -275,6 +352,10 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Returns whether or not the mouse is currently over the divider
      *
+     * <p>
+     *  返回鼠标当前是否超出分隔符
+     * 
+     * 
      * @return whether or not the mouse is currently over the divider
      * @since 1.5
      */
@@ -284,6 +365,9 @@ public class BasicSplitPaneDivider extends Container
 
     /**
      * Returns dividerSize x dividerSize
+     * <p>
+     *  返回dividerSize x dividerSize
+     * 
      */
     public Dimension getPreferredSize() {
         // Ideally this would return the size from the layout manager,
@@ -298,6 +382,9 @@ public class BasicSplitPaneDivider extends Container
 
     /**
      * Returns dividerSize x dividerSize
+     * <p>
+     *  返回dividerSize x dividerSize
+     * 
      */
     public Dimension getMinimumSize() {
         return getPreferredSize();
@@ -307,6 +394,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Property change event, presumably from the JSplitPane, will message
      * updateOrientation if necessary.
+     * <p>
+     *  属性更改事件,大概从JSplitPane,将消息updateOrientation如果必要。
+     * 
      */
     public void propertyChange(PropertyChangeEvent e) {
         if (e.getSource() == splitPane) {
@@ -327,6 +417,9 @@ public class BasicSplitPaneDivider extends Container
 
     /**
      * Paints the divider.
+     * <p>
+     *  涂抹分隔线。
+     * 
      */
     public void paint(Graphics g) {
       super.paint(g);
@@ -347,6 +440,10 @@ public class BasicSplitPaneDivider extends Container
      * receiver is contained in changes. Will create the
      * <code>leftButton</code> and <code>rightButton</code> if they
      * are null. invalidates the receiver as well.
+     * <p>
+     *  当JSplitPane的oneTouchExpandable值包含在更改中时,消息被接收。
+     * 将创建<code> leftButton </code>和<code> rightButton </code>(如果它们为空)。也使接收器失效。
+     * 
      */
     protected void oneTouchExpandableChanged() {
         if (!DefaultLookup.getBoolean(splitPane, splitPaneUI,
@@ -358,6 +455,8 @@ public class BasicSplitPaneDivider extends Container
             leftButton == null &&
             rightButton == null) {
             /* Create the left button and add an action listener to
+            /* <p>
+            /* 
                expand/collapse it. */
             leftButton = createLeftOneTouchButton();
             if (leftButton != null)
@@ -365,6 +464,8 @@ public class BasicSplitPaneDivider extends Container
 
 
             /* Create the right button and add an action listener to
+            /* <p>
+            /* 
                expand/collapse it. */
             rightButton = createRightOneTouchButton();
             if (rightButton != null)
@@ -383,6 +484,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Creates and return an instance of JButton that can be used to
      * collapse the left component in the split pane.
+     * <p>
+     * 创建并返回JButton的实例,可用于折叠拆分窗格中的左侧组件。
+     * 
      */
     protected JButton createLeftOneTouchButton() {
         JButton b = new JButton() {
@@ -439,6 +543,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Creates and return an instance of JButton that can be used to
      * collapse the right component in the split pane.
+     * <p>
+     *  创建并返回JButton的实例,可用于在拆分窗格中折叠正确的组件。
+     * 
      */
     protected JButton createRightOneTouchButton() {
         JButton b = new JButton() {
@@ -493,6 +600,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Message to prepare for dragging. This messages the BasicSplitPaneUI
      * with startDragging.
+     * <p>
+     *  准备拖动的消息。这将使用startDragging消息BasicSplitPaneUI。
+     * 
      */
     protected void prepareForDragging() {
         splitPaneUI.startDragging();
@@ -502,6 +612,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Messages the BasicSplitPaneUI with dragDividerTo that this instance
      * is contained in.
+     * <p>
+     *  使用此实例包含的dragDividerTo消息BasicSplitPaneUI。
+     * 
      */
     protected void dragDividerTo(int location) {
         splitPaneUI.dragDividerTo(location);
@@ -511,6 +624,9 @@ public class BasicSplitPaneDivider extends Container
     /**
      * Messages the BasicSplitPaneUI with finishDraggingTo that this instance
      * is contained in.
+     * <p>
+     *  使用此实例包含的finishDraggingTo消息BasicSplitPaneUI。
+     * 
      */
     protected void finishDraggingTo(int location) {
         splitPaneUI.finishDraggingTo(location);
@@ -522,6 +638,9 @@ public class BasicSplitPaneDivider extends Container
      * (released, dragged...) into the appropriate DragController
      * methods.
      *
+     * <p>
+     *  MouseHandler负责将鼠标事件(释放,拖动...)转换为适当的DragController方法。
+     * 
      */
     protected class MouseHandler extends MouseAdapter
             implements MouseMotionListener
@@ -529,6 +648,9 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Starts the dragging session by creating the appropriate instance
          * of DragController.
+         * <p>
+         *  通过创建DragController的相应实例来启动拖动会话。
+         * 
          */
         public void mousePressed(MouseEvent e) {
             if ((e.getSource() == BasicSplitPaneDivider.this ||
@@ -571,6 +693,9 @@ public class BasicSplitPaneDivider extends Container
 
         /**
          * If dragger is not null it is messaged with completeDrag.
+         * <p>
+         *  如果dragger不为null,它会与completeDrag发送消息。
+         * 
          */
         public void mouseReleased(MouseEvent e) {
             if (dragger != null) {
@@ -602,6 +727,9 @@ public class BasicSplitPaneDivider extends Container
 
         /**
          * If dragger is not null it is messaged with continueDrag.
+         * <p>
+         *  如果dragger不为null,它将与continueDrag发送。
+         * 
          */
         public void mouseDragged(MouseEvent e) {
             if (dragger != null) {
@@ -628,6 +756,9 @@ public class BasicSplitPaneDivider extends Container
 
         /**
          *  Resets the cursor based on the orientation.
+         * <p>
+         *  根据方向重置光标。
+         * 
          */
         public void mouseMoved(MouseEvent e) {
         }
@@ -635,6 +766,10 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Invoked when the mouse enters a component.
          *
+         * <p>
+         *  当鼠标进入组件时调用。
+         * 
+         * 
          * @param e MouseEvent describing the details of the enter event.
          * @since 1.5
          */
@@ -647,6 +782,10 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Invoked when the mouse exits a component.
          *
+         * <p>
+         *  在鼠标退出组件时调用。
+         * 
+         * 
          * @param e MouseEvent describing the details of the exit event.
          * @since 1.5
          */
@@ -674,21 +813,38 @@ public class BasicSplitPaneDivider extends Container
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  在面向HORIZONTAL_SPLIT的拆分窗格的拖动会话期间处理事件。
+     * 这不断地消息<code> dragDividerTo </code>,然后完成消息<code> finishDraggingTo </code>。
+     * 当创建一个实例时,应该使用<code> isValid </code>来确保拖动可以发生(如果两个视图不能调整大小,则不允许拖动)。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class DragController
     {
         /**
          * Initial location of the divider.
+         * <p>
+         *  分隔符的初始位置。
+         * 
          */
         int initialX;
 
         /**
          * Maximum and minimum positions to drag to.
+         * <p>
+         *  要拖动到的最大和最小位置。
+         * 
          */
         int maxX, minX;
 
         /**
          * Initial location the mouse down happened at.
+         * <p>
+         *  初始位置鼠标按下发生在。
+         * 
          */
         int offset;
 
@@ -740,6 +896,9 @@ public class BasicSplitPaneDivider extends Container
 
         /**
          * Returns true if the dragging session is valid.
+         * <p>
+         *  如果拖动会话有效,则返回true。
+         * 
          */
         protected boolean isValid() {
             return (maxX > 0);
@@ -749,6 +908,9 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Returns the new position to put the divider at based on
          * the passed in MouseEvent.
+         * <p>
+         *  返回新位置以根据在MouseEvent中传递的分隔符。
+         * 
          */
         protected int positionForMouseEvent(MouseEvent e) {
             int newX = (e.getSource() == BasicSplitPaneDivider.this) ?
@@ -762,6 +924,9 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Returns the x argument, since this is used for horizontal
          * splits.
+         * <p>
+         *  返回x参数,因为它用于水平拆分。
+         * 
          */
         protected int getNeededLocation(int x, int y) {
             int newX;
@@ -779,6 +944,9 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Messages dragDividerTo with the new location for the mouse
          * event.
+         * <p>
+         *  消息dragDividerTo与鼠标事件的新位置。
+         * 
          */
         protected void continueDrag(MouseEvent e) {
             dragDividerTo(positionForMouseEvent(e));
@@ -793,6 +961,9 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Messages finishDraggingTo with the new location for the mouse
          * event.
+         * <p>
+         *  消息finishDraggingTo与鼠标事件的新位置。
+         * 
          */
         protected void completeDrag(MouseEvent e) {
             finishDraggingTo(positionForMouseEvent(e));
@@ -807,6 +978,11 @@ public class BasicSplitPaneDivider extends Container
      * <code>finishDraggingTo</code>. When an instance is created it should be
      * messaged with <code>isValid</code> to insure that dragging can happen
      * (dragging won't be allowed if the two views can not be resized).
+     * <p>
+     *  在拖动会话期间处理面向VERTICAL_SPLIT的拆分窗格中的事件。
+     * 这不断地消息<code> dragDividerTo </code>,然后完成消息<code> finishDraggingTo </code>。
+     * 当创建一个实例时,应该使用<code> isValid </code>来确保拖动可以发生(如果两个视图不能调整大小,则不允许拖动)。
+     * 
      */
     protected class VerticalDragController extends DragController
     {
@@ -862,6 +1038,9 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Returns the y argument, since this is used for vertical
          * splits.
+         * <p>
+         *  返回y参数,因为它用于垂直拆分。
+         * 
          */
         protected int getNeededLocation(int x, int y) {
             int newY;
@@ -874,6 +1053,9 @@ public class BasicSplitPaneDivider extends Container
         /**
          * Returns the new position to put the divider at based on
          * the passed in MouseEvent.
+         * <p>
+         *  返回新位置以根据在MouseEvent中传递的分隔符。
+         * 
          */
         protected int positionForMouseEvent(MouseEvent e) {
             int newY = (e.getSource() == BasicSplitPaneDivider.this) ?
@@ -891,6 +1073,9 @@ public class BasicSplitPaneDivider extends Container
      * Layout for the divider
      * involves appropriately moving the left/right buttons around.
      *
+     * <p>
+     * 用于布局<code> BasicSplitPaneDivider </code>。分隔线的布局包括适当地移动左/右按钮。
+     * 
      */
     protected class DividerLayout implements LayoutManager
     {
@@ -1008,10 +1193,15 @@ public class BasicSplitPaneDivider extends Container
 
     /**
      * Listeners installed on the one touch expandable buttons.
+     * <p>
+     *  监听器安装在单触式可扩展按钮上。
+     * 
      */
     private class OneTouchActionHandler implements ActionListener {
         /** True indicates the resize should go the minimum (top or left)
          * vs false which indicates the resize should go to the maximum.
+         * <p>
+         *  vs false表示调整大小应该达到最大值。
          */
         private boolean toMinimum;
 

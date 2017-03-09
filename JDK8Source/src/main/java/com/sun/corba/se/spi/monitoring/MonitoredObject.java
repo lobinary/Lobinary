@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.util.Collection;
 /**
  * <p>
  *
+ * <p>
+ * <p>
+ * 
+ * 
  * @author Hemanth Puttaswamy
  * </p>
  * <p>
@@ -49,6 +54,11 @@ public interface MonitoredObject {
  * Gets the name of this MonitoredObject
  * </p><p>
  *
+ * <p>
+ * <p>
+ *  获取此监控对象的名称</p> <p>
+ * 
+ * 
  * @return a String with name of this Monitored Object
  * </p>
  */
@@ -58,6 +68,11 @@ public interface MonitoredObject {
  * Gets the description of MonitoredObject
  * </p><p>
  *
+ * <p>
+ * <p>
+ *  获取MonitoredObject的描述</p> <p>
+ * 
+ * 
  * @return a String with Monitored Object Description.
  * </p>
  */
@@ -68,6 +83,12 @@ public interface MonitoredObject {
  * </p>
  * <p>
  * </p>
+ * <p>
+ * <p>
+ *  此方法将向此受监控对象添加子监控对象。
+ * </p>
+ * <p>
+ * </p>
  */
     public void addChild( MonitoredObject m );
 /**
@@ -75,6 +96,12 @@ public interface MonitoredObject {
  * This method will remove child Monitored Object identified by the given name
  * </p>
  * <p>
+ * <p>
+ * <p>
+ *  此方法将删除由给定名称标识的子监视对象
+ * </p>
+ * <p>
+ * 
  * @param name of the ChildMonitored Object
  * </p>
  */
@@ -88,6 +115,13 @@ public interface MonitoredObject {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  使用名称作为键,获取与此MonitoredObject实例关联的子MonitoredObject。名称应该是完全限定名,如orb.connectionmanager
+ * </p>
+ * <p>
+ * 
+ * 
  * @return a MonitoredObject identified by the given name
  * </p>
  * <p>
@@ -102,6 +136,13 @@ public interface MonitoredObject {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  获取在此监视对象实例下注册的所有子项。
+ * </p>
+ * <p>
+ * 
+ * 
  * @return Collection of immediate Children associated with this MonitoredObject.
  * </p>
  */
@@ -109,6 +150,12 @@ public interface MonitoredObject {
 /**
  * <p>
  * Sets the parent for this Monitored Object.
+ * </p>
+ * <p>
+ * </p>
+ * <p>
+ * <p>
+ *  设置此受监控对象的父代。
  * </p>
  * <p>
  * </p>
@@ -121,6 +168,13 @@ public interface MonitoredObject {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  MontoredObject的实例只有一个父对象,此调用将获取父对象,并且如果受监控对象是根,则返回null。
+ * </p>
+ * <p>
+ * 
+ * 
  * @return a MonitoredObject which is a Parent of this Monitored Object instance
  * </p>
  */
@@ -134,6 +188,15 @@ public interface MonitoredObject {
  *
  * </p>
  * <p>
+ * <p>
+ * <p>
+ *  添加具有给定名称的属性。
+ * </p>
+ * <p>
+ * 
+ * </p>
+ * <p>
+ * 
  * @param value is the MonitoredAttribute which will be set as one of the
  * attribute of this MonitoredObject.
  * </p>
@@ -147,6 +210,15 @@ public interface MonitoredObject {
  *
  * </p>
  * <p>
+ * <p>
+ * <p>
+ *  删除具有给定名称的属性。
+ * </p>
+ * <p>
+ * 
+ * </p>
+ * <p>
+ * 
  * @param name is the MonitoredAttribute name
  * </p>
  */
@@ -158,6 +230,13 @@ public interface MonitoredObject {
  * </p>
  *
  * <p>
+ * <p>
+ * <p>
+ *  获取由给定名称注册的监视对象
+ * </p>
+ * 
+ * <p>
+ * 
  * @return a MonitoredAttribute identified by the given name
  * </p>
  * <p>
@@ -173,6 +252,13 @@ public interface MonitoredObject {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  获取此受监控对象的所有受监视属性。它不包括子监视对象,需要使用getChild()或getChildren()调用遍历。
+ * </p>
+ * <p>
+ * 
+ * 
  * @return Collection of all the Attributes for this MonitoredObject
  * </p>
  */
@@ -185,6 +271,7 @@ public interface MonitoredObject {
  * CORBAMBean.startMonitoring() call.
  * </p>
  *
+ * <p>
  */
     public void clearState();
 

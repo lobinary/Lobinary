@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.c14n.implementations;
 
@@ -35,6 +44,10 @@ import org.w3c.dom.Node;
  * A stack based Symbol Table.
  *<br>For speed reasons all the symbols are introduced in the same map,
  * and at the same time in a list so it can be removed when the frame is pop back.
+ * <p>
+ *  基于堆栈的符号表。 br>为了速度的原因,所有的符号在同一个地图中被引入,同时在一个列表中,所以当框架被弹回时它可以被删除。
+ * 
+ * 
  * @author Raul Benito
  */
 public class NameSpaceSymbTable {
@@ -57,6 +70,10 @@ public class NameSpaceSymbTable {
 
     /**
      * Default constractor
+     * <p>
+     *  默认constractor
+     * 
+     * 
      **/
     public NameSpaceSymbTable() {
         level = new ArrayList<SymbMap>();
@@ -67,6 +84,10 @@ public class NameSpaceSymbTable {
     /**
      * Get all the unrendered nodes in the name space.
      * For Inclusive rendering
+     * <p>
+     *  获取名称空间中的所有未渲染节点。包含渲染
+     * 
+     * 
      * @param result the list where to fill the unrendered xmlns definitions.
      **/
     public void getUnrenderedNodes(Collection<Attr> result) {
@@ -89,6 +110,10 @@ public class NameSpaceSymbTable {
     /**
      * Push a frame for visible namespace.
      * For Inclusive rendering.
+     * <p>
+     *  为可见命名空间推一个框架。包含渲染。
+     * 
+     * 
      **/
     public void outputNodePush() {
         push();
@@ -96,6 +121,10 @@ public class NameSpaceSymbTable {
 
     /**
      * Pop a frame for visible namespace.
+     * <p>
+     *  弹出可见命名空间的框架。
+     * 
+     * 
      **/
     public void outputNodePop() {
         pop();
@@ -104,6 +133,10 @@ public class NameSpaceSymbTable {
     /**
      * Push a frame for a node.
      * Inclusive or Exclusive.
+     * <p>
+     *  推送节点的帧。包括或独家。
+     * 
+     * 
      **/
     public void push() {
         //Put the number of namespace definitions in the stack.
@@ -114,6 +147,10 @@ public class NameSpaceSymbTable {
     /**
      * Pop a frame.
      * Inclusive or Exclusive.
+     * <p>
+     *  弹出框架。包括或独家。
+     * 
+     * 
      **/
     public void pop() {
         int size = level.size() - 1;
@@ -141,6 +178,10 @@ public class NameSpaceSymbTable {
 
     /**
      * Gets the attribute node that defines the binding for the prefix.
+     * <p>
+     *  获取定义前缀绑定的属性节点。
+     * 
+     * 
      * @param prefix the prefix to obtain the attribute.
      * @return null if there is no need to render the prefix. Otherwise the node of
      * definition.
@@ -168,6 +209,10 @@ public class NameSpaceSymbTable {
     /**
      * Gets a definition without mark it as render.
      * For render in exclusive c14n the namespaces in the include prefixes.
+     * <p>
+     * 获取一个定义而不标记为render。对于在独占c14n中的包含前缀中的命名空间。
+     * 
+     * 
      * @param prefix The prefix whose definition is neaded.
      * @return the attr to render, null if there is no need to render
      **/
@@ -184,6 +229,10 @@ public class NameSpaceSymbTable {
 
     /**
      * Adds the mapping for a prefix.
+     * <p>
+     *  添加前缀的映射。
+     * 
+     * 
      * @param prefix the prefix of definition
      * @param uri the Uri of the definition
      * @param n the attribute that have the definition
@@ -214,6 +263,10 @@ public class NameSpaceSymbTable {
     /**
      * Adds a definition and mark it as render.
      * For inclusive c14n.
+     * <p>
+     *  添加一个定义并将其标记为render。包含c14n。
+     * 
+     * 
      * @param prefix the prefix of definition
      * @param uri the Uri of the definition
      * @param n the attribute that have the definition
@@ -280,6 +333,10 @@ public class NameSpaceSymbTable {
 
 /**
  * The internal structure of NameSpaceSymbTable.
+ * <p>
+ *  NameSpaceSymbTable的内部结构。
+ * 
+ * 
  **/
 class NameSpaceSymbEntry implements Cloneable {
 
@@ -367,6 +424,9 @@ class SymbMap implements Cloneable {
     /**
      * rehashes the map to the new capacity.
      *
+     * <p>
+     *  将地图重新​​定价为新容量。
+     * 
      * @param newCapacity an <code>int</code> value
      */
     protected void rehash(int newCapacity) {

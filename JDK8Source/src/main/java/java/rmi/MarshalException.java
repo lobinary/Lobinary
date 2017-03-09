@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,14 @@ package java.rmi;
  * retransmitted after a <code>MarshalException</code> and reliably preserve
  * "at most once" call semantics.
  *
+ * <p>
+ *  如果在为远程方法调用编组远程调用头,参数或返回值时发生<code> java.io.IOException </code>,则会抛出<code> MarshalException </code>。
+ * 如果接收者不支持发送者的协议版本,还会抛出<code> MarshalException </code>。
+ * 
+ *  <p>如果在远程方法调用期间发生<code> MarshalException </code>,则调用可能或可能未到达服务器。如果呼叫到达服务器,参数可能已反序列化。
+ * 在<code> MarshalException </code>之后,可能不会重新传输调用,并且可靠地保留"至多一次"调用语义。
+ * 
+ * 
  * @author  Ann Wollrath
  * @since   JDK1.1
  */
@@ -50,6 +59,8 @@ public class MarshalException extends RemoteException {
      * Constructs a <code>MarshalException</code> with the specified
      * detail message.
      *
+     * <p>
+     * 
      * @param s the detail message
      * @since JDK1.1
      */
@@ -61,6 +72,10 @@ public class MarshalException extends RemoteException {
      * Constructs a <code>MarshalException</code> with the specified
      * detail message and nested exception.
      *
+     * <p>
+     *  使用指定的详细消息构造<code> MarshalException </code>。
+     * 
+     * 
      * @param s the detail message
      * @param ex the nested exception
      * @since JDK1.1

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -30,6 +31,11 @@ public interface ExceptionDetailMessage
      * unmarshaling a System Exception on the client side, the wstring from
      * any ExceptionDetailMessage service context shall become the Java error
      * message in the unmarshaled exception object.
+     * <p>
+     *  CORBA formal / 02-06-01：13.7.1：ExceptionDetailMessage标识使用UTF-16的TCS-W的GIOP 1.2编码的wstring的CDR封装。
+     * 此服务上下文可以在reply_status为SYSTEM_EXCEPTION或USER_EXCEPTION的reply消息上发送。此服务上下文的用法由语言映射定义。 <br/> <br/>。
+     * 
+     *  IDL / Java：ptc / 02-01-22：1.15.2：当系统异常被编组时,其GIOP应答消息将包括一个相关的ExceptionDetailMessage服务上下文。
      */
   public static final int value = (int)(14L);
 }

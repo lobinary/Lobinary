@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import com.sun.corba.se.spi.ior.iiop.GIOPVersion;
 /**
  * This implements the GIOP 1.2 Fragment header.
  *
+ * <p>
+ *  这实现GIOP 1.2 Fragment标头。
+ * 
+ * 
  * @author Ram Jeyaraman 05/14/2000
  */
 
@@ -89,6 +94,8 @@ public final class FragmentMessage_1_2 extends Message_1_2
     /* This will never be called, since we do not currently read the
      * request_id from an CDRInputStream. Instead we use the
      * readGIOP_1_2_requestId to read the requestId from a byte buffer.
+     * <p>
+     *  request_id来自CDRInputStream。相反,我们使用readGIOP_1_2_requestId从字节缓冲区读取requestId。
      */
     public void read(org.omg.CORBA.portable.InputStream istream) {
         super.read(istream);

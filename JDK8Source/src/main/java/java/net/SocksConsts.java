@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -26,6 +27,8 @@ package java.net;
 
 /**
  * Constants used by the SOCKS protocol implementation.
+ * <p>
+ *  SOCKS协议实现使用的常量。
  */
 
 interface SocksConsts {

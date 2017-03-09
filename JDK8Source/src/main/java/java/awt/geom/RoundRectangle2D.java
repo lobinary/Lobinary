@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,12 @@ import java.io.Serializable;
  * The actual storage representation of the coordinates is left to
  * the subclass.
  *
+ * <p>
+ *  <code> RoundRectangle2D </code>类定义了一个由位置{@code(x,y)},维度{@code(wxh)}定义的圆角的矩形,以及圆弧的宽度和高度以圆角。
+ * <p>
+ *  这个类是存储2D圆角矩形的所有对象的抽象超类。坐标的实际存储表示是留给子类的。
+ * 
+ * 
  * @author      Jim Graham
  * @since 1.2
  */
@@ -46,6 +53,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
     /**
      * The <code>Float</code> class defines a rectangle with rounded
      * corners all specified in <code>float</code> coordinates.
+     * <p>
+     *  <code> Float </code>类定义了一个在<code> float </code>坐标中指定的具有圆角的矩形。
+     * 
+     * 
      * @since 1.2
      */
     public static class Float extends RoundRectangle2D
@@ -53,6 +64,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
     {
         /**
          * The X coordinate of this <code>RoundRectangle2D</code>.
+         * <p>
+         *  此<code> RoundRectangle2D </code>的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -60,6 +75,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The Y coordinate of this <code>RoundRectangle2D</code>.
+         * <p>
+         *  此<code> RoundRectangle2D </code>的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -67,6 +86,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The width of this <code>RoundRectangle2D</code>.
+         * <p>
+         *  这个<code> RoundRectangle2D </code>的宽度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -74,6 +97,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The height of this <code>RoundRectangle2D</code>.
+         * <p>
+         *  这个<code> RoundRectangle2D </code>的高度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -81,6 +108,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The width of the arc that rounds off the corners.
+         * <p>
+         *  圆角的圆弧的宽度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -88,6 +119,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The height of the arc that rounds off the corners.
+         * <p>
+         *  圆角的圆弧的高度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -97,6 +132,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
          * Constructs a new <code>RoundRectangle2D</code>, initialized to
          * location (0.0,&nbsp;0.0), size (0.0,&nbsp;0.0), and corner arcs
          * of radius 0.0.
+         * <p>
+         *  构造一个新的<code> RoundRectangle2D </code>,初始化为位置(0.0,&nbsp; 0.0),大小(0.0,0.0)和半径为0.0的拐角圆弧。
+         * 
+         * 
          * @since 1.2
          */
         public Float() {
@@ -106,6 +145,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
          * Constructs and initializes a <code>RoundRectangle2D</code>
          * from the specified <code>float</code> coordinates.
          *
+         * <p>
+         *  从指定的<code> float </code>坐标构造并初始化<code> RoundRectangle2D </code>。
+         * 
+         * 
          * @param x the X coordinate of the newly
          *          constructed <code>RoundRectangle2D</code>
          * @param y the Y coordinate of the newly
@@ -130,6 +173,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX() {
@@ -138,6 +185,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY() {
@@ -146,6 +197,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getWidth() {
@@ -154,6 +209,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getHeight() {
@@ -162,6 +221,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getArcWidth() {
@@ -170,6 +233,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getArcHeight() {
@@ -178,6 +245,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public boolean isEmpty() {
@@ -189,6 +260,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
          * <code>RoundRectangle2D</code> to the specified
          * <code>float</code> values.
          *
+         * <p>
+         *  将<code> RoundRectangle2D </code>的位置,大小和角半径设置为指定的<code> float </code>值。
+         * 
+         * 
          * @param x the X coordinate to which to set the
          *          location of this <code>RoundRectangle2D</code>
          * @param y the Y coordinate to which to set the
@@ -216,6 +291,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setRoundRect(double x, double y, double w, double h,
@@ -231,6 +310,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setRoundRect(RoundRectangle2D rr) {
@@ -244,6 +327,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -252,6 +339,9 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         * JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -3423150618393866922L;
     }
@@ -259,6 +349,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
     /**
      * The <code>Double</code> class defines a rectangle with rounded
      * corners all specified in <code>double</code> coordinates.
+     * <p>
+     *  <code> Double </code>类定义了在<code> double </code>坐标中指定的具有圆角的矩形。
+     * 
+     * 
      * @since 1.2
      */
     public static class Double extends RoundRectangle2D
@@ -266,6 +360,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
     {
         /**
          * The X coordinate of this <code>RoundRectangle2D</code>.
+         * <p>
+         *  此<code> RoundRectangle2D </code>的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -273,6 +371,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The Y coordinate of this <code>RoundRectangle2D</code>.
+         * <p>
+         *  此<code> RoundRectangle2D </code>的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -280,6 +382,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The width of this <code>RoundRectangle2D</code>.
+         * <p>
+         *  这个<code> RoundRectangle2D </code>的宽度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -287,6 +393,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The height of this <code>RoundRectangle2D</code>.
+         * <p>
+         *  这个<code> RoundRectangle2D </code>的高度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -294,6 +404,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The width of the arc that rounds off the corners.
+         * <p>
+         *  圆角的圆弧的宽度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -301,6 +415,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * The height of the arc that rounds off the corners.
+         * <p>
+         *  圆角的圆弧的高度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -310,6 +428,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
          * Constructs a new <code>RoundRectangle2D</code>, initialized to
          * location (0.0,&nbsp;0.0), size (0.0,&nbsp;0.0), and corner arcs
          * of radius 0.0.
+         * <p>
+         *  构造一个新的<code> RoundRectangle2D </code>,初始化为位置(0.0,&nbsp; 0.0),大小(0.0,0.0)和半径为0.0的拐角圆弧。
+         * 
+         * 
          * @since 1.2
          */
         public Double() {
@@ -319,6 +441,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
          * Constructs and initializes a <code>RoundRectangle2D</code>
          * from the specified <code>double</code> coordinates.
          *
+         * <p>
+         *  从指定的<code> double </code>坐标构造并初始化<code> RoundRectangle2D </code>。
+         * 
+         * 
          * @param x the X coordinate of the newly
          *          constructed <code>RoundRectangle2D</code>
          * @param y the Y coordinate of the newly
@@ -343,6 +469,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX() {
@@ -351,6 +481,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY() {
@@ -359,6 +493,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getWidth() {
@@ -367,6 +505,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getHeight() {
@@ -375,6 +517,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getArcWidth() {
@@ -383,6 +529,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getArcHeight() {
@@ -391,6 +541,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public boolean isEmpty() {
@@ -399,6 +553,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setRoundRect(double x, double y, double w, double h,
@@ -414,6 +572,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setRoundRect(RoundRectangle2D rr) {
@@ -427,6 +589,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -435,6 +601,9 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 1048939333485206117L;
     }
@@ -446,6 +615,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
      * the information necessary to satisfy the various accessor
      * methods below.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类。类型特定的实现子类可用于实例化并且提供用于存储满足下面的各种存取器方法所必需的信息的多种格式。
+     * 
+     * 
      * @see java.awt.geom.RoundRectangle2D.Float
      * @see java.awt.geom.RoundRectangle2D.Double
      * @since 1.2
@@ -455,6 +628,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
     /**
      * Gets the width of the arc that rounds off the corners.
+     * <p>
+     *  获取圆角四舍五入的弧的宽度。
+     * 
+     * 
      * @return the width of the arc that rounds off the corners
      * of this <code>RoundRectangle2D</code>.
      * @since 1.2
@@ -463,6 +640,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
     /**
      * Gets the height of the arc that rounds off the corners.
+     * <p>
+     *  获取圆角四舍五入的弧的高度。
+     * 
+     * 
      * @return the height of the arc that rounds off the corners
      * of this <code>RoundRectangle2D</code>.
      * @since 1.2
@@ -474,6 +655,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
      * <code>RoundRectangle2D</code> to the specified
      * <code>double</code> values.
      *
+     * <p>
+     *  将<code> RoundRectangle2D </code>的位置,大小和角半径设置为指定的<code> double </code>值。
+     * 
+     * 
      * @param x the X coordinate to which to set the
      *          location of this <code>RoundRectangle2D</code>
      * @param y the Y coordinate to which to set the
@@ -494,6 +679,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
     /**
      * Sets this <code>RoundRectangle2D</code> to be the same as the
      * specified <code>RoundRectangle2D</code>.
+     * <p>
+     *  将<code> RoundRectangle2D </code>设置为与指定的<code> RoundRectangle2D </code>相同。
+     * 
+     * 
      * @param rr the specified <code>RoundRectangle2D</code>
      * @since 1.2
      */
@@ -504,6 +693,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
     /**
      * {@inheritDoc}
+     * <p>
+     * {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public void setFrame(double x, double y, double w, double h) {
@@ -512,6 +705,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y) {
@@ -559,6 +756,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(double x, double y, double w, double h) {
@@ -602,6 +803,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y, double w, double h) {
@@ -622,6 +827,13 @@ public abstract class RoundRectangle2D extends RectangularShape {
      * modifications to the geometry of this <code>RoundRectangle2D</code>
      * object do not affect any iterations of that geometry that
      * are already in process.
+     * <p>
+     *  返回一个迭代对象,它定义了这个<code> RoundRectangle2D </code>的边界。
+     * 这个类的迭代器是多线程安全的,这意味着这个<code> RoundRectangle2D </code>类保证对这个<code> RoundRectangle2D </code>对象的几何形状的修改不会
+     * 影响该几何的任何迭代已经在进行中。
+     *  返回一个迭代对象,它定义了这个<code> RoundRectangle2D </code>的边界。
+     * 
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to
      * the coordinates as they are returned in the iteration, or
      * <code>null</code> if untransformed coordinates are desired
@@ -636,6 +848,10 @@ public abstract class RoundRectangle2D extends RectangularShape {
 
     /**
      * Returns the hashcode for this <code>RoundRectangle2D</code>.
+     * <p>
+     *  返回此<c> RoundRectangle2D </code>的哈希码。
+     * 
+     * 
      * @return the hashcode for this <code>RoundRectangle2D</code>.
      * @since 1.6
      */
@@ -656,6 +872,11 @@ public abstract class RoundRectangle2D extends RectangularShape {
      * if it is an instance of <code>RoundRectangle2D</code> and if its
      * location, size, and corner arc dimensions are the same as this
      * <code>RoundRectangle2D</code>.
+     * <p>
+     *  确定指定的<code> Object </code>是否等于此<code> RoundRectangle2D </code>。
+     * 如果它是<code> RoundRectangle2D </code>的一个实例,并且它的位置,大小和角弧尺寸是相同的,则指定的<code> Object </code>等于这个<code> Round
+     * Rectangle2D </code>作为<code> RoundRectangle2D </code>。
+     * 
      * @param obj  an <code>Object</code> to be compared with this
      *             <code>RoundRectangle2D</code>.
      * @return  <code>true</code> if <code>obj</code> is an instance

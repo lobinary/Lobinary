@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import java.awt.Dimension;
  * so that pluggable L&amp;Fs can distinguish it from user-installed
  * layout managers on menus.
  *
+ * <p>
+ *  弹出菜单和菜单栏的默认布局管理器。这个类是BoxLayout的扩展,它添加了UIResource标签,以便可插入的L&amp; Fs可以将其与菜单上的用户安装的布局管理器区分开来。
+ * 
  * @author Georges Saab
  */
 

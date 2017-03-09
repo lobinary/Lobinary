@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -72,6 +82,20 @@ import org.w3c.dom.traversal.TreeWalker;
  *
  * @xerces.internal
  *
+ * <p>
+ *  Document接口表示整个HTML或XML文档。从概念上讲,它是文档树的根,并提供对文档数据的主要访问。
+ * <P>
+ *  由于元素,文本节点,注释,处理指令等不能存在于Document的上下文之外,因此Document接口还包含创建这些对象所需的工厂方法。
+ * 创建的Node对象具有ownerDocument属性,将其与在其上下文中创建的文档相关联。
+ * <p>
+ * DocumentImpl类还实现了DOM Level 2 DocumentTraversal接口。此接口由创建NodeIterators和TreeWalker所需的工厂方法组成。
+ * 创建NodeIterator对象的过程也将这些引用添加到此文档。完成迭代器后,使用此实现中的remove方法删除对象很重要。这允许将引用从迭代器对象释放到DOM节点。
+ * <p>
+ *  <b>注意：</b>当文档中的任何节点序列化时,整个文档将与其一起序列化。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Joe Kesselman, IBM
  * @author Andy Clark, IBM
@@ -115,6 +139,9 @@ public class DocumentImpl
     /**
      * NON-DOM: Actually creating a Document is outside the DOM's spec,
      * since it has to operate in terms of a particular implementation.
+     * <p>
+     *  NON-DOM：实际创建一个文档是在DOM规范之外,因为它必须根据特定的实现操作。
+     * 
      */
     public DocumentImpl() {
         super();
@@ -128,6 +155,9 @@ public class DocumentImpl
     /**
      * For DOM2 support.
      * The createDocument factory method is in DOMImplementation.
+     * <p>
+     *  对于DOM2支持。 createDocument工厂方法在DOMImplementation中。
+     * 
      */
     public DocumentImpl(DocumentType doctype)
     {
@@ -149,6 +179,10 @@ public class DocumentImpl
      * protection. I've chosen to implement it by calling importNode
      * which is DOM Level 2.
      *
+     * <p>
+     *  深度克隆文档,包括为克隆的孩子固定ownerDoc。请注意,这需要绕过WRONG_DOCUMENT_ERR保护。我选择实现它通过调用importNode是DOM级别2。
+     * 
+     * 
      * @return org.w3c.dom.Node
      * @param deep boolean, iff true replicate children
      */
@@ -170,6 +204,9 @@ public class DocumentImpl
      * DOM implementation. Intended to support applications that may be
      * using DOMs retrieved from several different sources, potentially
      * with different underlying representations.
+     * <p>
+     *  检索描述此特定DOM实现的能力的信息。旨在支持可能使用从几个不同来源检索的DOM的应用程序,可能具有不同的底层表示。
+     * 
      */
     public DOMImplementation getImplementation() {
         // Currently implemented as a singleton, since it's hardcoded
@@ -187,6 +224,10 @@ public class DocumentImpl
      * added to a list of NodeIterators so that it can be
      * removed to free up the DOM Nodes it references.
      *
+     * <p>
+     *  NON-DOM扩展：创建并返回一个NodeIterator。 NodeIterator被添加到NodeIterators的列表中,以便可以删除它以释放它引用的DOM节点。
+     * 
+     * 
      * @param root The root of the iterator.
      * @param whatToShow The whatToShow mask.
      * @param filter The NodeFilter installed. Null means no filter.
@@ -203,6 +244,10 @@ public class DocumentImpl
      * added to a list of NodeIterators so that it can be
      * removed to free up the DOM Nodes it references.
      *
+     * <p>
+     * 创建并返回一个NodeIterator。 NodeIterator被添加到NodeIterators的列表中,以便可以删除它以释放它引用的DOM节点。
+     * 
+     * 
      * @param root The root of the iterator.
      * @param whatToShow The whatToShow mask.
      * @param filter The NodeFilter installed. Null means no filter.
@@ -239,6 +284,10 @@ public class DocumentImpl
      * NON-DOM extension:
      * Create and return a TreeWalker.
      *
+     * <p>
+     *  NON-DOM扩展：创建并返回一个TreeWalker。
+     * 
+     * 
      * @param root The root of the iterator.
      * @param whatToShow The whatToShow mask.
      * @param filter The NodeFilter installed. Null means no filter.
@@ -252,6 +301,10 @@ public class DocumentImpl
     /**
      * Create and return a TreeWalker.
      *
+     * <p>
+     *  创建并返回一个TreeWalker。
+     * 
+     * 
      * @param root The root of the iterator.
      * @param whatToShow The whatToShow mask.
      * @param filter The NodeFilter installed. Null means no filter.
@@ -281,6 +334,11 @@ public class DocumentImpl
      *  NodeIterator itself. <p>
      *
      *  This function is called from the NodeIterator#detach().
+     * <p>
+     *  开发人员客户端使用NodeIterator本身上的detach()函数。 <p>
+     * 
+     *  此函数从NodeIterator#detach()调用。
+     * 
      */
      void removeNodeIterator(NodeIterator nodeIterator) {
 
@@ -294,6 +352,7 @@ public class DocumentImpl
     // DocumentRange methods
     //
     /**
+    /* <p>
      */
     public Range createRange() {
 
@@ -312,6 +371,9 @@ public class DocumentImpl
     /** Not a client function. Called by Range.detach(),
      *  so a Range can remove itself from the list of
      *  Ranges.
+     * <p>
+     *  因此一个Range可以从Ranges列表中删除它自己。
+     * 
      */
     void removeRange(Range range) {
 
@@ -324,6 +386,9 @@ public class DocumentImpl
     /**
      * A method to be called when some text was changed in a text node,
      * so that live objects can be notified.
+     * <p>
+     *  当在文本节点中更改某些文本时调用的方法,以便可以通知活动对象。
+     * 
      */
     void replacedText(NodeImpl node) {
         // notify ranges
@@ -338,6 +403,9 @@ public class DocumentImpl
     /**
      * A method to be called when some text was deleted from a text node,
      * so that live objects can be notified.
+     * <p>
+     *  从文本节点删除某些文本时调用的方法,以便可以通知活动对象。
+     * 
      */
     void deletedText(NodeImpl node, int offset, int count) {
         // notify ranges
@@ -353,6 +421,9 @@ public class DocumentImpl
     /**
      * A method to be called when some text was inserted into a text node,
      * so that live objects can be notified.
+     * <p>
+     *  当某些文本插入到文本节点时调用的方法,以便可以通知活动对象。
+     * 
      */
     void insertedText(NodeImpl node, int offset, int count) {
         // notify ranges
@@ -368,6 +439,9 @@ public class DocumentImpl
     /**
      * A method to be called when a text node has been split,
      * so that live objects can be notified.
+     * <p>
+     *  当文本节点拆分时调用的方法,以便可以通知活动对象。
+     * 
      */
     void splitData(Node node, Node newNode, int offset) {
         // notify ranges
@@ -388,6 +462,10 @@ public class DocumentImpl
      * Introduced in DOM Level 2. Optional. <p>
      * Create and return Event objects.
      *
+     * <p>
+     *  在DOM级别2中引入。可选。 <p>创建并返回Event对象。
+     * 
+     * 
      * @param type The eventType parameter specifies the type of Event
      * interface to be created.  If the Event interface specified is supported
      * by the implementation this method will return a new Event of the
@@ -419,6 +497,9 @@ public class DocumentImpl
     /**
      * Sets whether the DOM implementation generates mutation events
      * upon operations.
+     * <p>
+     *  设置DOM实现是否在操作时生成突变事件。
+     * 
      */
     void setMutationEvents(boolean set) {
         mutationEvents = set;
@@ -426,6 +507,9 @@ public class DocumentImpl
 
     /**
      * Returns true if the DOM implementation generates mutation events.
+     * <p>
+     *  如果DOM实施生成突变事件,则返回true。
+     * 
      */
     boolean getMutationEvents() {
         return mutationEvents;
@@ -436,6 +520,9 @@ public class DocumentImpl
      * This is another place where we could use weak references! Indeed, the
      * node here won't be GC'ed as long as some listener is registered on it,
      * since the eventsListeners table will have a reference to the node.
+     * <p>
+     *  存储事件监听器注册在给定的节点这是另一个地方,我们可以使用弱引用！事实上,这里的节点将不会被GC'ed,只要一些监听器被注册在它上面,因为eventsListeners表将具有对该节点的引用。
+     * 
      */
     protected void setEventListeners(NodeImpl n, Vector listeners) {
         if (eventListeners == null) {
@@ -456,6 +543,9 @@ public class DocumentImpl
 
     /**
      * Retreive event listener registered on a given node
+     * <p>
+     *  在给定节点上注册的Retreive事件侦听器
+     * 
      */
     protected Vector getEventListeners(NodeImpl n) {
         if (eventListeners == null) {
@@ -481,6 +571,11 @@ public class DocumentImpl
      * one for bubble -- but decided that since the list of listeners
      * is probably short in most cases, it might not be worth spending
      * the space. ***** REVISIT WHEN WE HAVE MORE EXPERIENCE.
+     * <p>
+     * NON-DOM INTERNAL：Class LEntry只是一个用于表示向此节点注册的事件侦听器的结构。此对象的副本悬挂在nodeListeners Vector中。
+     * <p>
+     *  我认为使用两个向量 - 一个用于捕获,一个用于泡沫 - 但是决定,因为在大多数情况下,监听器列表可能很短,可能不值得花费空间。 ***** REVISIT当我们有更多的经验。
+     * 
      */
     class LEntry implements Serializable {
 
@@ -490,6 +585,8 @@ public class DocumentImpl
         boolean useCapture;
 
         /** NON-DOM INTERNAL: Constructor for Listener list Entry
+        /* <p>
+        /* 
          * @param type Event name (NOT event group!) to listen for.
          * @param listener Who gets called when event is dispatched
          * @param useCaptue True iff listener is registered on
@@ -509,6 +606,10 @@ public class DocumentImpl
      * Node. A listener may be independently registered as both Capturing and
      * Bubbling, but may only be registered once per role; redundant
      * registrations are ignored.
+     * <p>
+     *  在DOM级别2中引入。<p>使用此节点注册事件侦听器。侦听器可以独立注册为捕获和冒泡,但每个角色只能注册一次;冗余注册将被忽略。
+     * 
+     * 
      * @param node node to add listener to
      * @param type Event name (NOT event group!) to listen for.
      * @param listener Who gets called when event is dispatched
@@ -552,6 +653,10 @@ public class DocumentImpl
      * registered with this Node.  A listener must be independently removed
      * from the Capturing and Bubbling roles. Redundant removals (of listeners
      * not currently registered for this role) are ignored.
+     * <p>
+     *  在DOM级别2中引入。<p>注销先前向此节点注册的事件侦听器。侦听器必须从捕获和冒泡角色中独立删除。冗余删除(当前未注册此角色的侦听器)将被忽略。
+     * 
+     * 
      * @param node node to remove listener from
      * @param type Event name (NOT event group!) to listen for.
      * @param listener Who gets called when event is dispatched
@@ -649,6 +754,26 @@ public class DocumentImpl
      * when dispatch begins.
      * I believe the DOM's intent is that event objects be redispatchable,
      * though it isn't stated in those terms.
+     * <p>
+     *  在DOM级别2中引入。<p> DOM Level 2事件的分发引擎。
+     * <p>
+     *  事件传播运行如下：
+     * <ol>
+     * <li>将事件分派到特定的目标节点,调用此代码。注意事件的stopPropagation标志在分派开始时被清除;此后,如果它在节点的处理开始之前已经被设置,则立即前进到DEFAULT阶段。
+     *  <li>节点的祖先被设置为事件的目的地。对于捕获和冒泡目的,在分派开始时确定节点祖先。如果事件处理程序更改文档树,那么不会更改将通知哪个节点的事件。
+     *  <li> CAPTURING_PHASE：根据目标对祖先进行扫描,以捕获侦听器。如果找到,它们被调用(见下文)。
+     *  <li> AT_TARGET：将事件分派到目标节点上的NON-CAPTURING侦听器。请注意,在此节点上捕获侦听器是_not_调用的。
+     *  <li> BUBBLING_PHASE：针对非捕获侦听器扫描祖先,定位到根目录。 <li>默认处理：某些DOM具有绑定到特定节点的默认行为。
+     * 如果此DOM确实存在,并且事件的preventDefault标志尚未设置,我们现在返回到目标节点并处理该事件的默认处理程序(如果有)。
+     * </ol>
+     * <p>
+     *  注意事件处理期间处理程序的注册在此事件的这个阶段不生效;它们将不会被调用,直到下一次此节点被dispatchEvent访问。另一方面,删除会立即生效。
+     * <p>
+     * 如果事件处理程序本身导致事件被调度,它们将被同步处理,然后处理恢复触发它们的事件。请注意,这可能导致事件到达听众相对于实际的请求序列"乱序"。
+     * <p>
+     *  注意,当dispatch开始时,我们的实现重置事件的stop / prevent标志。我相信DOM的意图是事件对象是可重新分派的,虽然它没有在这些术语中说明。
+     * 
+     * 
      * @param node node to dispatch to
      * @param event the event object to be dispatched to
      *              registered EventListeners
@@ -823,6 +948,14 @@ public class DocumentImpl
      * capture dispatcher on every node. This could be optimized hugely
      * by writing a capture engine that tracks our position in the tree to
      * update the capture chain without repeated chases up to root.
+     * <p>
+     *  NON-DOM INTERNAL：DOMNodeInsertedIntoDocument和... RemovedFrom ...被分派到整个子树。这是其分发代码。他们不要泡,谢谢,但可能被捕获。
+     * <p>
+     *  与dispatchingEventToSubtree中的代码类似,但是此方法仅用于目标节点,并且不会在目标节点的同级节点上启动分派链,因为这不是子树的一部分*****此时,我是马虎并在每个节点上使用正
+     * 常的捕获分派器。
+     * 这可以通过编写一个捕获引擎来跟踪我们在树中的位置,以更新捕获链,而不重复追踪到根,可以大大优化。
+     * 
+     * 
      * @param n target node (that was directly inserted or removed)
      * @param e event to be sent to that node and its subtree
      */
@@ -842,6 +975,10 @@ public class DocumentImpl
     /**
      * Dispatches event to the target node's descendents recursively
      *
+     * <p>
+     *  以递归方式将事件分派给目标节点的派生节点
+     * 
+     * 
      * @param n node to dispatch to
      * @param e event to be sent to that node and its subtree
      */
@@ -866,6 +1003,9 @@ public class DocumentImpl
      * NON-DOM INTERNAL: Return object for getEnclosingAttr. Carries
      * (two values, the Attr node affected (if any) and its previous
      * string value. Simple struct, no methods.
+     * <p>
+     *  NON-DOM INTERNAL：getEnclosingAttr的返回对象。携带(两个值,受影响的Attr节点(如果有)及其以前的字符串值。简单结构,无方法。
+     * 
      */
     class EnclosingAttr implements Serializable {
         private static final long serialVersionUID = 5208387723391647216L;
@@ -879,6 +1019,10 @@ public class DocumentImpl
      * NON-DOM INTERNAL: Convenience wrapper for calling
      * dispatchAggregateEvents when the context was established
      * by <code>savedEnclosingAttr</code>.
+     * <p>
+     * NON-DOM INTERNAL：当上下文由<code> savedEnclosingAttr </code>建立时,调用dispatchAggregateEvents的便利包装器。
+     * 
+     * 
      * @param node node to dispatch to
      * @param ea description of Attr affected by current operation
      */
@@ -907,6 +1051,16 @@ public class DocumentImpl
      * with MUTATION_LOCAL, then make an explicit call to this routine
      * at the higher level. Some examples now exist in our code.
      *
+     * <p>
+     *  NON-DOM INTERNAL：生成"聚合"的突变后事件DOMAttrModified和DOMSubtreeModified。
+     * 对于每个用户请求的变异操作,这两个都应该只发出一次,即使这涉及DOM的多个更改。
+     * 例如,如果DOM操作在返回之前对单个Attr进行多个更改,那么只生成一个DOMAttrModified是很好的,并且在更大的范围内但是在可识别的单个子树内的多个更改可能只想生成一个DOMSubtreeM
+     * odified,发送到它们最低共同祖先。
+     * 对于每个用户请求的变异操作,这两个都应该只发出一次,即使这涉及DOM的多个更改。
+     * <p>
+     *  要管理这个,使用插入和删除的"内部"版本与MUTATION_LOCAL,然后在较高级别显式调用此例程。现在我们的代码中存在一些例子。
+     * 
+     * 
      * @param node The node to dispatch to
      * @param enclosingAttr The Attr node (if any) whose value has been changed
      * as a result of the DOM operation. Null if none such.
@@ -964,6 +1118,10 @@ public class DocumentImpl
      * NON-DOM INTERNAL: Pre-mutation context check, in
      * preparation for later generating DOMAttrModified events.
      * Determines whether this node is within an Attr
+     * <p>
+     *  NON-DOM INTERNAL：变异前上下文检查,为稍后生成DOMAttrModified事件做准备。确定此节点是否在Attr中
+     * 
+     * 
      * @param node node to get enclosing attribute for
      * @return either a description of that Attr, or null if none such.
      */
@@ -1000,6 +1158,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a character data node has been modified
+     * <p>
+     *  在字符数据节点已修改时调用的方法
+     * 
      */
     void modifyingCharacterData(NodeImpl node, boolean replace) {
         if (mutationEvents) {
@@ -1011,6 +1172,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a character data node has been modified
+     * <p>
+     *  在字符数据节点已修改时调用的方法
+     * 
      */
     void modifiedCharacterData(NodeImpl node, String oldvalue, String value, boolean replace) {
         if (mutationEvents) {
@@ -1036,6 +1200,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a character data node has been replaced
+     * <p>
+     *  当字符数据节点被替换时被调用的方法
+     * 
      */
     void replacedCharacterData(NodeImpl node, String oldvalue, String value) {
         //now that we have finished replacing data, we need to perform the same actions
@@ -1049,6 +1216,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a node is about to be inserted in the tree.
+     * <p>
+     *  当节点即将插入树中时要调用的方法。
+     * 
      */
     void insertingNode(NodeImpl node, boolean replace) {
         if (mutationEvents) {
@@ -1060,6 +1230,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a node has been inserted in the tree.
+     * <p>
+     *  当节点已插入树中时调用的方法。
+     * 
      */
     void insertedNode(NodeImpl node, NodeImpl newInternal, boolean replace) {
         if (mutationEvents) {
@@ -1125,6 +1298,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a node is about to be removed from the tree.
+     * <p>
+     *  当节点即将从树中删除时要调用的方法。
+     * 
      */
     void removingNode(NodeImpl node, NodeImpl oldChild, boolean replace) {
 
@@ -1192,6 +1368,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a node has been removed from the tree.
+     * <p>
+     * 当节点已从树中删除时要调用的方法。
+     * 
      */
     void removedNode(NodeImpl node, boolean replace) {
         if (mutationEvents) {
@@ -1206,6 +1385,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a node is about to be replaced in the tree.
+     * <p>
+     *  当树中的节点即将被替换时要调用的方法。
+     * 
      */
     void replacingNode(NodeImpl node) {
         if (mutationEvents) {
@@ -1215,6 +1397,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when character data is about to be replaced in the tree.
+     * <p>
+     *  当要在树中替换字符数据时调用的方法。
+     * 
      */
     void replacingData (NodeImpl node) {
         if (mutationEvents) {
@@ -1224,6 +1409,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when a node has been replaced in the tree.
+     * <p>
+     *  在树中已替换节点时调用的方法。
+     * 
      */
     void replacedNode(NodeImpl node) {
         if (mutationEvents) {
@@ -1233,6 +1421,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when an attribute value has been modified
+     * <p>
+     *  修改属性值时调用的方法
+     * 
      */
     void modifiedAttrValue(AttrImpl attr, String oldvalue) {
         if (mutationEvents) {
@@ -1244,6 +1435,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when an attribute node has been set
+     * <p>
+     *  设置属性节点时调用的方法
+     * 
      */
     void setAttrNode(AttrImpl attr, AttrImpl previous) {
         if (mutationEvents) {
@@ -1262,6 +1456,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when an attribute node has been removed
+     * <p>
+     *  删除属性节点时调用的方法
+     * 
      */
     void removedAttrNode(AttrImpl attr, NodeImpl oldOwner, String name) {
         // We can't use the standard dispatchAggregate, since it assumes
@@ -1290,6 +1487,9 @@ public class DocumentImpl
 
     /**
      * A method to be called when an attribute node has been renamed
+     * <p>
+     *  当属性节点已重命名时调用的方法
+     * 
      */
     void renamedAttrNode(Attr oldAt, Attr newAt) {
         // REVISIT: To be implemented!!!
@@ -1297,6 +1497,8 @@ public class DocumentImpl
 
     /**
      * A method to be called when an element has been renamed
+     * <p>
+     *  当元素已重命名时调用的方法
      */
     void renamedElement(Element oldEl, Element newEl) {
         // REVISIT: To be implemented!!!

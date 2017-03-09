@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -19,6 +20,7 @@ package org.omg.PortableServer;
 	 * ServantLocators. A ServantManager object must be 
 	 * local to the process containing the POA objects 
 	 * it is registered with.
+	 * <p>
 	 */
 public interface ServantManagerOperations 
 {

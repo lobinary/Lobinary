@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,15 @@ import com.sun.corba.se.impl.logging.NamingSystemException;
  * (-ORBInitialPort), and if not set, defaults to the standard port number.
  * The BootstrapServer is created supplying the Properties object, using no
  * external File object for storage, and the derived initial port number.
+ * <p>
+ *  TransientNameServer类是一个实现临时名称服务的独立应用程序。
+ * 它使用TransientNameService类用于名称服务实现,BootstrapServer用于实现引导,即获取初始NamingContext。
+ * <p>
+ *  BootstrapServer使用一个Properties对象指定支持的初始服务对象引用;例如Properties对象被创建为仅包含"NameService"条目以及初始NamingContext的字
+ * 符串对象引用。
+ *  BootstrapServer的侦听端口是通过首先检查提供给名称服务器的参数(-ORBInitialPort)来设置的,如果未设置,则默认为标准端口号。
+ * 创建BootstrapServer时,将提供Properties对象,不使用外部File对象进行存储,以及派生的初始端口号。
+ * 
  * @see TransientNameService
  * @see BootstrapServer
  */
@@ -101,6 +111,9 @@ public class TransientNameServer
      * Main startup routine. It instantiates a TransientNameService
      * object and a BootstrapServer object, and then allows invocations to
      * happen.
+     * <p>
+     * 
+     * 
      * @param args an array of strings representing the startup arguments.
      */
     public static void main(String args[]) {
@@ -231,6 +244,9 @@ public class TransientNameServer
 
     /**
      * Private constructor since no object of this type should be instantiated.
+     * <p>
+     *  主启动例程。它实例化一个TransientNameService对象和一个BootstrapServer对象,然后允许调用发生。
+     * 
      */
     private TransientNameServer() {}
 }

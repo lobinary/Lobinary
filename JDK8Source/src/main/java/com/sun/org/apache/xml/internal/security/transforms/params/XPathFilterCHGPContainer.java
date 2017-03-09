@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.transforms.params;
 
@@ -35,6 +44,10 @@ import org.w3c.dom.Node;
  * Implements the parameters for a custom Transform which has a better performance
  * than the xfilter2.
  *
+ * <p>
+ *  实现自定义Transform的参数,它的性能比xfilter2更好。
+ * 
+ * 
  * @author $Author: coheigea $
  */
 public class XPathFilterCHGPContainer extends ElementProxy implements TransformParam {
@@ -66,6 +79,9 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Constructor XPathFilterCHGPContainer
      *
+     * <p>
+     *  构造函数XPathFilterCHGPContainer
+     * 
      */
     private XPathFilterCHGPContainer() {
         // no instantiation
@@ -74,6 +90,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Constructor XPathFilterCHGPContainer
      *
+     * <p>
+     *  构造函数XPathFilterCHGPContainer
+     * 
+     * 
      * @param doc
      * @param includeSlashPolicy
      * @param includeButSearch
@@ -138,6 +158,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method indentXPathText
      *
+     * <p>
+     *  方法indentXPathText
+     * 
+     * 
      * @param xp
      * @return the string with enters
      */
@@ -151,6 +175,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Constructor XPathFilterCHGPContainer
      *
+     * <p>
+     *  构造函数XPathFilterCHGPContainer
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @throws XMLSecurityException
@@ -163,6 +191,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Creates a new XPathFilterCHGPContainer; needed for generation.
      *
+     * <p>
+     *  创建一个新的XPathFilterCHGPContainer;需要生成。
+     * 
+     * 
      * @param doc
      * @param includeSlashPolicy
      * @param includeButSearch
@@ -181,6 +213,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Creates a XPathFilterCHGPContainer from an existing Element; needed for verification.
      *
+     * <p>
+     *  从现有元素创建XPathFilterCHGPContainer;需要验证。
+     * 
+     * 
      * @param element
      * @param BaseURI
      *
@@ -196,6 +232,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method getXStr
      *
+     * <p>
+     *  方法getXStr
+     * 
+     * 
      * @param type
      * @return The Xstr
      */
@@ -215,6 +255,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method getIncludeButSearch
      *
+     * <p>
+     *  方法getIncludeButSearch
+     * 
+     * 
      * @return the string
      */
     public String getIncludeButSearch() {
@@ -224,6 +268,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method getExcludeButSearch
      *
+     * <p>
+     *  方法getExcludeButSearch
+     * 
+     * 
      * @return the string
      */
     public String getExcludeButSearch() {
@@ -233,6 +281,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method getExclude
      *
+     * <p>
+     *  方法getExclude
+     * 
+     * 
      * @return the string
      */
     public String getExclude() {
@@ -242,6 +294,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method getIncludeSlashPolicy
      *
+     * <p>
+     *  方法getIncludeSlashPolicy
+     * 
+     * 
      * @return the string
      */
     public boolean getIncludeSlashPolicy() {
@@ -255,6 +311,12 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
      * to work.
      *
      * $todo$ I dunno whether this crashes: <XPath> he<!-- comment -->re()/ds:Signature[1]</XPath>
+     * <p>
+     * 返回包含来自XPath过滤器字符串信息的第一个Text节点。我们必须使用这个愚蠢的钩子来启用here()函数。
+     * 
+     *  $ todo $ I dunno是否崩溃：<XPath> he <！ -  comment  - > re()/ ds：Signature [1] </XPath>
+     * 
+     * 
      * @param type
      * @return the first Text node which contains information from the XPath 2 Filter String
      */
@@ -272,6 +334,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method getHereContextNodeIncludeButSearch
      *
+     * <p>
+     *  方法getHereContextNodeIncludeButSearch
+     * 
+     * 
      * @return the string
      */
     public Node getHereContextNodeIncludeButSearch() {
@@ -281,6 +347,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method getHereContextNodeExcludeButSearch
      *
+     * <p>
+     *  方法getHereContextNodeExcludeButSearch
+     * 
+     * 
      * @return the string
      */
     public Node getHereContextNodeExcludeButSearch() {
@@ -290,6 +360,10 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
     /**
      * Method getHereContextNodeExclude
      *
+     * <p>
+     *  方法getHereContextNodeExclude
+     * 
+     * 
      * @return the string
      */
     public Node getHereContextNodeExclude() {
@@ -300,6 +374,11 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
      * Method getBaseLocalName
      *
      * @inheritDoc
+     * <p>
+     *  方法getBaseLocalName
+     * 
+     *  @inheritDoc
+     * 
      */
     public final String getBaseLocalName() {
         return XPathFilterCHGPContainer._TAG_XPATHCHGP;
@@ -309,6 +388,9 @@ public class XPathFilterCHGPContainer extends ElementProxy implements TransformP
      * Method getBaseNamespace
      *
      * @inheritDoc
+     * <p>
+     *  方法getBaseNamespace
+     * 
      */
     public final String getBaseNamespace() {
         return TRANSFORM_XPATHFILTERCHGP;

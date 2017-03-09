@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -99,6 +100,35 @@ import sun.swing.DefaultLookup;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  在树中显示条目。 <code> DefaultTreeCellRenderer </code>不是不透明的,除非你的子类绘制你不应该改变这。
+ * 有关示例,请参阅<em> Java教程</em>中的<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/tree.html">
+ * 如何使用树</a>使用此类定制节点显示。
+ *  在树中显示条目。 <code> DefaultTreeCellRenderer </code>不是不透明的,除非你的子类绘制你不应该改变这。
+ * <p>
+ *  {@code DefaultTreeCellRenderer}使用的一组图标和颜色可以使用各种setter方法进行配置。每个属性的值从defaults表初始化。
+ * 当外观和感觉变化(调用{@code updateUI})时,任何属性类型为{@code UIResource}的属性都将从默认表中刷新。
+ * 下表列出了{@code DefaultTreeCellRenderer}属性和默认表键之间的映射：。
+ * <table border="1" cellpadding="1" cellspacing="0" summary="">
+ * <tr valign="top"  align="left">
+ *  <th style ="background-color：#CCCCFF"align ="left">属性：<th style ="background-color：#CCCCFF"align ="left">
+ * 键：<tr> <td>"leafIcon"< td>"Tree.leafIcon"<tr> <td>"closedIcon"<td>"Tree.closedIcon"<tr> <td>"openIcon
+ * "<td>"Tree.openIcon"<tr> <td>"textSelectionColor" <td>"Tree.selectionForeground"<tr> <td>"textNonSele
+ * ctionColor"<td>"Tree.textForeground"<tr> <td>"backgroundSelectionColor"<td>"Tree.selectionBackground"
+ * <tr> <td>"backgroundNonSelectionColor "<td>"Tree.textBackground"<tr> <td>"borderSelectionColor"<td>"T
+ * ree.selectionBorderColor"。
+ * </table>
+ * <p>
+ * <strong> <a name="override"> Implementation Note：</a> </strong>此类覆盖<code> invalidate </code>,<code> v
+ * alidate </code>,<code> revalidate </code >,<code> repaint </code>和<code> firePropertyChange </code>,以
+ * 提高性能。
+ * 如果不被覆盖,这些经常被调用的方法将执行默认树细胞渲染器不必要的代码路径。如果你编写自己的渲染器,注意权衡覆盖这些方法的好处和缺点。
+ * 
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Rob Davis
  * @author Ray Ryan
  * @author Scott Violet
@@ -120,11 +150,17 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     // If drawDashedFocusIndicator is true, the following are used.
     /**
      * Background color of the tree.
+     * <p>
+     *  树的背景颜色。
+     * 
      */
     private Color treeBGColor;
     /**
      * Color to draw the focus indicator in, determined from the background.
      * color.
+     * <p>
+     *  绘制焦点指示符的颜色,从背景确定。颜色。
+     * 
      */
     private Color focusBGColor;
 
@@ -159,12 +195,18 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
      * Set to true after the constructor has run.
+     * <p>
+     *  在构造函数运行后设置为true。
+     * 
      */
     private boolean inited;
 
     /**
      * Creates a {@code DefaultTreeCellRenderer}. Icons and text color are
      * determined from the {@code UIManager}.
+     * <p>
+     *  创建{@code DefaultTreeCellRenderer}。图标和文本颜色由{@code UIManager}确定。
+     * 
      */
     public DefaultTreeCellRenderer() {
         inited = true;
@@ -173,6 +215,10 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.7
      */
     public void updateUI() {
@@ -233,6 +279,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     /**
       * Returns the default icon, for the current laf, that is used to
       * represent non-leaf nodes that are expanded.
+      * <p>
+      *  返回当前laf的默认图标,用于表示展开的非叶节点。
+      * 
       */
     public Icon getDefaultOpenIcon() {
         return DefaultLookup.getIcon(this, ui, "Tree.openIcon");
@@ -241,6 +290,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     /**
       * Returns the default icon, for the current laf, that is used to
       * represent non-leaf nodes that are not expanded.
+      * <p>
+      *  返回当前laf的默认图标,用于表示未展开的非叶节点。
+      * 
       */
     public Icon getDefaultClosedIcon() {
         return DefaultLookup.getIcon(this, ui, "Tree.closedIcon");
@@ -249,6 +301,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     /**
       * Returns the default icon, for the current laf, that is used to
       * represent leaf nodes.
+      * <p>
+      *  返回用于表示叶节点的当前laf的默认图标。
+      * 
       */
     public Icon getDefaultLeafIcon() {
         return DefaultLookup.getIcon(this, ui, "Tree.leafIcon");
@@ -256,6 +311,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Sets the icon used to represent non-leaf nodes that are expanded.
+      * <p>
+      * 设置用于表示扩展的非叶节点的图标。
+      * 
       */
     public void setOpenIcon(Icon newIcon) {
         openIcon = newIcon;
@@ -263,6 +321,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Returns the icon used to represent non-leaf nodes that are expanded.
+      * <p>
+      *  返回用于表示展开的非叶节点的图标。
+      * 
       */
     public Icon getOpenIcon() {
         return openIcon;
@@ -270,6 +331,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Sets the icon used to represent non-leaf nodes that are not expanded.
+      * <p>
+      *  设置用于表示未扩展的非叶节点的图标。
+      * 
       */
     public void setClosedIcon(Icon newIcon) {
         closedIcon = newIcon;
@@ -278,6 +342,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     /**
       * Returns the icon used to represent non-leaf nodes that are not
       * expanded.
+      * <p>
+      *  返回用于表示未扩展的非叶节点的图标。
+      * 
       */
     public Icon getClosedIcon() {
         return closedIcon;
@@ -285,6 +352,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Sets the icon used to represent leaf nodes.
+      * <p>
+      *  设置用于表示叶节点的图标。
+      * 
       */
     public void setLeafIcon(Icon newIcon) {
         leafIcon = newIcon;
@@ -292,6 +362,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Returns the icon used to represent leaf nodes.
+      * <p>
+      *  返回用于表示叶节点的图标。
+      * 
       */
     public Icon getLeafIcon() {
         return leafIcon;
@@ -299,6 +372,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Sets the color the text is drawn with when the node is selected.
+      * <p>
+      *  设置选择节点时绘制文本的颜色。
+      * 
       */
     public void setTextSelectionColor(Color newColor) {
         textSelectionColor = newColor;
@@ -306,6 +382,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Returns the color the text is drawn with when the node is selected.
+      * <p>
+      *  返回选择节点时绘制文本的颜色。
+      * 
       */
     public Color getTextSelectionColor() {
         return textSelectionColor;
@@ -313,6 +392,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Sets the color the text is drawn with when the node isn't selected.
+      * <p>
+      *  设置未选择节点时绘制文本的颜色。
+      * 
       */
     public void setTextNonSelectionColor(Color newColor) {
         textNonSelectionColor = newColor;
@@ -320,6 +402,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Returns the color the text is drawn with when the node isn't selected.
+      * <p>
+      *  返回未选择节点时绘制文本的颜色。
+      * 
       */
     public Color getTextNonSelectionColor() {
         return textNonSelectionColor;
@@ -327,6 +412,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Sets the color to use for the background if node is selected.
+      * <p>
+      *  设置在选择节点时用于背景的颜色。
+      * 
       */
     public void setBackgroundSelectionColor(Color newColor) {
         backgroundSelectionColor = newColor;
@@ -335,6 +423,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Returns the color to use for the background if node is selected.
+      * <p>
+      *  如果选择了节点,则返回用于背景的颜色。
+      * 
       */
     public Color getBackgroundSelectionColor() {
         return backgroundSelectionColor;
@@ -342,6 +433,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Sets the background color to be used for non selected nodes.
+      * <p>
+      *  设置要用于非选定节点的背景颜色。
+      * 
       */
     public void setBackgroundNonSelectionColor(Color newColor) {
         backgroundNonSelectionColor = newColor;
@@ -349,6 +443,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Returns the background color to be used for non selected nodes.
+      * <p>
+      *  返回用于非选定节点的背景颜色。
+      * 
       */
     public Color getBackgroundNonSelectionColor() {
         return backgroundNonSelectionColor;
@@ -356,6 +453,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Sets the color to use for the border.
+      * <p>
+      *  设置边框使用的颜色。
+      * 
       */
     public void setBorderSelectionColor(Color newColor) {
         borderSelectionColor = newColor;
@@ -363,6 +463,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Returns the color the border is drawn.
+      * <p>
+      *  返回绘制边框的颜色。
+      * 
       */
     public Color getBorderSelectionColor() {
         return borderSelectionColor;
@@ -374,6 +477,11 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
      * has the effect of letting the font of the JTree show
      * through. On the other hand, if <code>font</code> is non-null, and not
      * a <code>FontUIResource</code>, the font becomes <code>font</code>.
+     * <p>
+     *  子类化以将<code> FontUIResource </code>映射为null。
+     * 如果<code> font </code>为null或<code> FontUIResource </code>,这会让JTree的字体显示出来。
+     * 另一方面,如果<code> font </code>是非空的,而不是<code> FontUIResource </code>,则字体变为<code> font </code>。
+     * 
      */
     public void setFont(Font font) {
         if(font instanceof FontUIResource)
@@ -383,6 +491,10 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
      * Gets the font of this component.
+     * <p>
+     *  获取此组件的字体。
+     * 
+     * 
      * @return this component's font; if a font has not been set
      * for this component, the font of its parent is returned
      */
@@ -404,6 +516,11 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
      * through. On the other hand, if <code>color</code> is non-null, and not
      * a <code>ColorUIResource</code>, the background becomes
      * <code>color</code>.
+     * <p>
+     * 子类化以将<code> ColorUIResource </code>映射到null。
+     * 如果<code> color </code>为null或<code> ColorUIResource </code>,这会产生JTree的背景颜色。
+     * 另一方面,如果<code> color </code>是非空的,而不是<code> ColorUIResource </code>,则后台变为<code> color </code>。
+     * 
      */
     public void setBackground(Color color) {
         if(color instanceof ColorUIResource)
@@ -419,6 +536,11 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
       * The foreground color is set based on the selection and the icon
       * is set based on the <code>leaf</code> and <code>expanded</code>
       * parameters.
+      * <p>
+      *  根据传入的组件配置渲染器。
+      * 该值是从与<code> convertValueToText </code>的消息树设置的,它最终调用<code> value </code>上的<code> toString </code>。
+      * 根据选择设置前景颜色,并且基于<code> leaf </code>和<code> expanded </code>参数设置图标。
+      * 
       */
     public Component getTreeCellRendererComponent(JTree tree, Object value,
                                                   boolean sel,
@@ -484,6 +606,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
 
     /**
       * Paints the value.  The background is filled based on selected.
+      * <p>
+      *  绘制值。背景根据选择填充。
+      * 
       */
     public void paint(Graphics g) {
         Color bColor;
@@ -560,6 +685,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     /**
      * Overrides <code>JComponent.getPreferredSize</code> to
      * return slightly wider preferred size value.
+     * <p>
+     *  覆盖<code> JComponent.getPreferredSize </code>以返回稍宽的首选大小值。
+     * 
      */
     public Dimension getPreferredSize() {
         Dimension        retDimension = super.getPreferredSize();
@@ -574,6 +702,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void validate() {}
 
@@ -582,6 +713,10 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * See the <a href="#override">Implementation Note</a>
     * for more information.
     *
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
+    * 
     * @since 1.5
     */
     public void invalidate() {}
@@ -590,6 +725,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void revalidate() {}
 
@@ -597,6 +735,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void repaint(long tm, int x, int y, int width, int height) {}
 
@@ -604,6 +745,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void repaint(Rectangle r) {}
 
@@ -612,6 +756,10 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * See the <a href="#override">Implementation Note</a>
     * for more information.
     *
+    * <p>
+    * 由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
+    * 
     * @since 1.5
     */
     public void repaint() {}
@@ -620,6 +768,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         // Strings get interned...
@@ -636,6 +787,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void firePropertyChange(String propertyName, byte oldValue, byte newValue) {}
 
@@ -643,6 +797,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void firePropertyChange(String propertyName, char oldValue, char newValue) {}
 
@@ -650,6 +807,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void firePropertyChange(String propertyName, short oldValue, short newValue) {}
 
@@ -657,6 +817,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void firePropertyChange(String propertyName, int oldValue, int newValue) {}
 
@@ -664,6 +827,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void firePropertyChange(String propertyName, long oldValue, long newValue) {}
 
@@ -671,6 +837,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void firePropertyChange(String propertyName, float oldValue, float newValue) {}
 
@@ -678,6 +847,9 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     public void firePropertyChange(String propertyName, double oldValue, double newValue) {}
 
@@ -685,6 +857,8 @@ public class DefaultTreeCellRenderer extends JLabel implements TreeCellRenderer
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
     */
     public void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {}
 

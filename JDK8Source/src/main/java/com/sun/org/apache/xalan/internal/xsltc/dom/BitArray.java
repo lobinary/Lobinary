@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: BitArray.java,v 1.2.4.1 2005/09/06 05:56:52 pvedula Exp $
+ * <p>
+ *  $ Id：BitArray.java,v 1.2.4.1 2005/09/06 05:56:52 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -32,6 +45,8 @@ import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  */
 public class BitArray implements Externalizable {
@@ -58,6 +73,9 @@ public class BitArray implements Externalizable {
 
     /**
      * Constructor. Defines the initial size of the bit array (in bits).
+     * <p>
+     *  构造函数。定义位数组的初始大小(以位为单位)。
+     * 
      */
     public BitArray() {
         this(32);
@@ -80,6 +98,9 @@ public class BitArray implements Externalizable {
     /**
      * Set the mask for this bit array. The upper 8 bits of this mask
      * indicate the DOM in which the nodes in this array belong.
+     * <p>
+     *  设置此位数组的掩码。此掩码的高8位指示此数组中的节点所属的DOM。
+     * 
      */
     public void setMask(int mask) {
         _mask = mask;
@@ -87,6 +108,9 @@ public class BitArray implements Externalizable {
 
     /**
      * See setMask()
+     * <p>
+     *  请参见setMask()
+     * 
      */
     public int getMask() {
         return(_mask);
@@ -94,6 +118,9 @@ public class BitArray implements Externalizable {
 
     /**
      * Returns the size of this bit array (in bits).
+     * <p>
+     *  返回此位数组的大小(以位为单位)。
+     * 
      */
     public final int size() {
         return(_bitSize);
@@ -101,6 +128,9 @@ public class BitArray implements Externalizable {
 
     /**
      * Returns true if the given bit is set
+     * <p>
+     *  如果给定位被设置,则返回true
+     * 
      */
     public final boolean getBit(int bit) {
         if (DEBUG_ASSERTIONS) {
@@ -115,6 +145,9 @@ public class BitArray implements Externalizable {
 
     /**
      * Returns the next set bit from a given position
+     * <p>
+     *  返回给定位置的下一个设置位
+     * 
      */
     public final int getNextBit(int startBit) {
         for (int i = (startBit >>> 5) ; i<=_intSize; i++) {
@@ -136,6 +169,9 @@ public class BitArray implements Externalizable {
      * current position is cached in the following 4 variables and will
      * help speed up a sequence of next() call in an index iterator. This
      * method is a mess, but it is fast and it works, so don't fuck with it.
+     * <p>
+     *  此方法返回在位数组中设置的第N位。当前位置缓存在以下4个变量中,并且将有助于加快索引迭代器中的next()调用序列。这种方法是一个烂摊子,但它是快速,它的工作,所以不要他妈的。
+     * 
      */
     private int _pos = Integer.MAX_VALUE;
     private int _node = 0;
@@ -173,6 +209,9 @@ public class BitArray implements Externalizable {
 
     /**
      * Returns the integer array in which the bit array is contained
+     * <p>
+     *  返回包含位数组的整数数组
+     * 
      */
     public final int[] data() {
         return(_bits);
@@ -183,6 +222,9 @@ public class BitArray implements Externalizable {
 
     /**
      * Sets a given bit
+     * <p>
+     *  设置给定位
+     * 
      */
     public final void setBit(int bit) {
         if (DEBUG_ASSERTIONS) {
@@ -202,6 +244,9 @@ public class BitArray implements Externalizable {
     /**
      * Merge two bit arrays. This currently only works for nodes from
      * a single DOM (because there is only one _mask per array).
+     * <p>
+     * 合并两个位数组。这目前仅适用于来自单个DOM的节点(因为每个数组只有一个_mask)。
+     * 
      */
     public final BitArray merge(BitArray other) {
         // Take other array's bits if we have node set
@@ -232,6 +277,9 @@ public class BitArray implements Externalizable {
 
     /**
      * Resizes the bit array - try to avoid using this method!!!
+     * <p>
+     *  调整位数组大小 - 尽量避免使用此方法！
+     * 
      */
     public final void resize(int newSize) {
         if (newSize > _bitSize) {
@@ -256,6 +304,8 @@ public class BitArray implements Externalizable {
 
     /**
      * Read the whole tree from a file (serialized)
+     * <p>
+     *  从文件中读取整个树(序列化)
      */
     public void readExternal(ObjectInput in)
         throws IOException, ClassNotFoundException {

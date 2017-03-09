@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: IncrementalSAXSource_Xerces.java,v 1.2.4.1 2005/09/15 08:15:08 suresh_emailid Exp $
+ * <p>
+ *  $ Id：IncrementalSAXSource_Xerces.java,v 1.2.4.1 2005/09/15 08:15:08 suresh_emailid Exp $
+ * 
  */
 
 package com.sun.org.apache.xml.internal.dtm.ref;
@@ -44,6 +57,14 @@ import org.xml.sax.XMLReader;
  * <p>Usage example: See main().</p>
  *
  * <p>Status: Passes simple main() unit-test. NEEDS JAVADOC.</p>
+ * <p>
+ *  增量模式已经是一个协程,只是将我们的IncrementalSAXSource API包裹起来。</p>
+ * 
+ *  <p>使用示例：请参阅main()。</p>
+ * 
+ *  <p>状态：通过simple main()unit-test。 NEEDS JAVADOC。</p>
+ * 
+ * 
  * */
 public class IncrementalSAXSource_Xerces
   implements IncrementalSAXSource
@@ -81,6 +102,11 @@ public class IncrementalSAXSource_Xerces
    * this constructor is used, due to limitations in the Xerces2 API (as of
    * Beta 3). If you don't like that restriction, tell the Xerces folks that
    * there should be a simpler way to request incremental SAX parsing.
+   * <p>
+   *  去与它。仅当使用此构造函数时,Xerces2增量解析才受支持,这是由于Xerces2 API(从Beta 3开始)的限制。
+   * 如果你不喜欢这种限制,告诉Xerces的人,应该有一个更简单的方法来请求增量SAX解析。
+   * 
+   * 
    * */
   public IncrementalSAXSource_Xerces()
                 throws NoSuchMethodException
@@ -159,6 +185,11 @@ public class IncrementalSAXSource_Xerces
    * limitations in the API exposed by Xerces-2 Beta 3; see the
    * no-args constructor for that code.
    *
+   * <p>
+   * 现有的SAXParser。目前,这只适用于最近发布的Xerces-1。
+   *  Xerces-2增量是目前可能的,只有当我们被允许创建解析器实例时,由于Xerces-2 Beta 3暴露的API的限制;请参阅该代码的无参数构造函数。
+   * 
+   * 
    * @exception if the SAXParser class doesn't support the Xerces
    * incremental parse operations. In that case, caller should
    * fall back upon the IncrementalSAXSource_Filter approach.
@@ -261,6 +292,10 @@ public class IncrementalSAXSource_Xerces
   /** startParse() is a simple API which tells the IncrementalSAXSource
    * to begin reading a document.
    *
+   * <p>
+   *  开始阅读文档。
+   * 
+   * 
    * @throws SAXException is parse thread is already in progress
    * or parsing can not be started.
    * */
@@ -292,6 +327,10 @@ public class IncrementalSAXSource_Xerces
    * from one of our partner routines, and serves to encapsulate the
    * details of how incremental parsing has been achieved.
    *
+   * <p>
+   *  解析器我们需要更多的节点。这旨在从我们的合作伙伴例程中调用,并用于封装已实现增量解析的详细信息。
+   * 
+   * 
    * @param parsemore If true, tells the incremental parser to generate
    * another chunk of output. If false, tells the parser that we're
    * satisfied and it can terminate parsing of this document.
@@ -384,6 +423,8 @@ public class IncrementalSAXSource_Xerces
   //================================================================
   /** Simple unit test. Attempt coroutine parsing of document indicated
    * by first argument (as a URI), report progress.
+   * <p>
+   *  通过第一个参数(作为URI),报告进度。
    */
   public static void _main(String args[])
   {

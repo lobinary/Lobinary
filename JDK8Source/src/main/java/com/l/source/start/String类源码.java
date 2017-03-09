@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.l.source.start;
 
 /**
@@ -16,6 +17,9 @@ package com.l.source.start;
 public class String类源码 {
 
 	/**
+	 * 
+	 * <p>
+	 * 
 	 * 
 	 * @param args
 	 */

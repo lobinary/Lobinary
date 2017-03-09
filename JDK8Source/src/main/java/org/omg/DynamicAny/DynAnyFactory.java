@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -29,6 +30,13 @@ package org.omg.DynamicAny;
     * the complex types, such as DynStruct, if appropriate. Then, the value can be initialized by means of
     * invoking operations on the resulting object. Finally, the to_any operation can be invoked
     * to create an any value from the constructed DynAny.
+    * <p>
+    *  DynAny对象可以通过调用DynAnyFactory对象上的操作来创建。通常只有两种方法来创建DynAny对象：
+    * <UL>
+    *  <LI>调用对现有DynAny对象的操作<LI>调用对DynAnyFactory对象的操作
+    * </UL>
+    * 构造的DynAny对象支持操作,这些操作允许创建新的DynAny对象,封装对某些组成部分的值的访问。 DynAny对象还支持用于创建新DynAny对象的复制操作。
+    * 通过调用具有设置为字符串常量"DynAnyFactory"的identifier参数的ORB.resolve_initial_references(),可以获得对DynAnyFactory对象的引用。
     */
 public interface DynAnyFactory extends DynAnyFactoryOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
 {

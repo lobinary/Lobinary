@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -10,21 +11,28 @@ package com.sun.corba.se.PortableActivationIDL;
 
 
 /** Server callback interface, passed to Activator in registerServer method.
+/* <p>
     */
 public interface ServerProxyOperations 
 {
 
   /** Shutdown this server.  Returns after orb.shutdown() completes.
+  /* <p>
 	*/
   void shutdown ();
 
   /** Install the server.  Returns after the install hook completes
 	* execution in the server.
+	* <p>
+	*  执行在服务器。
+	* 
 	*/
   void install ();
 
   /** Uninstall the server.  Returns after the uninstall hook
 	* completes execution.
+	* <p>
+	*  完成执行。
 	*/
   void uninstall ();
 } // interface ServerProxyOperations

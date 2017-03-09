@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,10 @@ class CharArrayIterator implements CharacterIterator {
     /**
      * Sets the position to getBeginIndex() and returns the character at that
      * position.
+     * <p>
+     *  将位置设置为getBeginIndex()并返回该位置的字符。
+     * 
+     * 
      * @return the first character in the text, or DONE if the text is empty
      * @see getBeginIndex
      */
@@ -58,6 +63,10 @@ class CharArrayIterator implements CharacterIterator {
     /**
      * Sets the position to getEndIndex()-1 (getEndIndex() if the text is empty)
      * and returns the character at that position.
+     * <p>
+     *  将位置设置为getEndIndex() -  1(getEndIndex(),如果文本为空),并返回该位置处的字符。
+     * 
+     * 
      * @return the last character in the text, or DONE if the text is empty
      * @see getEndIndex
      */
@@ -74,6 +83,10 @@ class CharArrayIterator implements CharacterIterator {
 
     /**
      * Gets the character at the current position (as returned by getIndex()).
+     * <p>
+     *  获取当前位置的字符(由getIndex()返回)。
+     * 
+     * 
      * @return the character at the current position or DONE if the current
      * position is off the end of the text.
      * @see getIndex
@@ -93,6 +106,10 @@ class CharArrayIterator implements CharacterIterator {
      * at the new index.  If the resulting index is greater or equal
      * to getEndIndex(), the current index is reset to getEndIndex() and
      * a value of DONE is returned.
+     * <p>
+     *  将迭代器的索引增加1,并在新索引处返回字符。如果结果索引大于或等于getEndIndex(),则当前索引将重置为getEndIndex(),并返回DONE的值。
+     * 
+     * 
      * @return the character at the new position or DONE if the new
      * position is off the end of the text range.
      */
@@ -112,6 +129,10 @@ class CharArrayIterator implements CharacterIterator {
      * Decrements the iterator's index by one and returns the character
      * at the new index. If the current index is getBeginIndex(), the index
      * remains at getBeginIndex() and a value of DONE is returned.
+     * <p>
+     *  将迭代器的索引递减1,并在新索引处返回字符。如果当前索引是getBeginIndex(),则索引保留在getBeginIndex(),并返回DONE的值。
+     * 
+     * 
      * @return the character at the new position or DONE if the current
      * position is equal to getBeginIndex().
      */
@@ -130,6 +151,10 @@ class CharArrayIterator implements CharacterIterator {
     /**
      * Sets the position to the specified position in the text and returns that
      * character.
+     * <p>
+     *  将位置设置为文本中指定的位置,并返回该字符。
+     * 
+     * 
      * @param position the position within the text.  Valid values range from
      * getBeginIndex() to getEndIndex().  An IllegalArgumentException is thrown
      * if an invalid value is supplied.
@@ -147,6 +172,10 @@ class CharArrayIterator implements CharacterIterator {
 
     /**
      * Returns the start index of the text.
+     * <p>
+     *  返回文本的开始索引。
+     * 
+     * 
      * @return the index at which the text begins.
      */
     public int getBeginIndex() {
@@ -156,6 +185,10 @@ class CharArrayIterator implements CharacterIterator {
     /**
      * Returns the end index of the text.  This index is the index of the first
      * character following the end of the text.
+     * <p>
+     *  返回文本的结束索引。此索引是文本结束后的第一个字符的索引。
+     * 
+     * 
      * @return the index after the last character in the text
      */
     public int getEndIndex() {
@@ -164,6 +197,10 @@ class CharArrayIterator implements CharacterIterator {
 
     /**
      * Returns the current index.
+     * <p>
+     *  返回当前索引。
+     * 
+     * 
      * @return the current index.
      */
     public int getIndex() {
@@ -172,6 +209,9 @@ class CharArrayIterator implements CharacterIterator {
 
     /**
      * Create a copy of this iterator
+     * <p>
+     *  创建此迭代器的副本
+     * 
      * @return A copy of this
      */
     public Object clone() {

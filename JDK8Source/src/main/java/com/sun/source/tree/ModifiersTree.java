@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,14 @@ import javax.lang.model.element.Modifier;
  *
  * @jls sections 8.1.1, 8.3.1, 8.4.3, 8.5.1, 8.8.3, 9.1.1, and 9.7
  *
+ * <p>
+ *  声明的修饰符(包括注释)的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  <em>标志</em>
+ * 
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

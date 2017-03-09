@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -18,6 +19,10 @@ package org.omg.DynamicAny;
     * </UL>
     * The component_count value for a union depends on the current discriminator:
     * it is 2 for a union whose discriminator indicates a named member, and 1 otherwise.
+    * <p>
+    *  DynUnion对象支持操作IDL联合。联合只能有两个有效的当前位置：
+    * <UL>
+    *  <LI>零,其表示鉴别符<LI>一,其表示活动成员
     */
 abstract public class DynUnionHelper
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -97,6 +98,9 @@ import sun.corba.SharedSecrets;
 /**
  * Implementation of the RequestInfo interface as specified in
  * orbos/99-12-02 section 5.4.1.
+ * <p>
+ *  按照orbos / 99-12-02第5.4.1节中的规定实现RequestInfo接口。
+ * 
  */
 public abstract class RequestInfoImpl
     extends LocalObject
@@ -179,6 +183,9 @@ public abstract class RequestInfoImpl
     /**
      * Reset the info object so that it can be reused for a retry,
      * for example.
+     * <p>
+     *  重置信息对象,以便它可以重新用于重试,例如。
+     * 
      */
     void reset() {
 
@@ -206,6 +213,10 @@ public abstract class RequestInfoImpl
     /*
      **********************************************************************
      * Access protection
+     * <p>
+     *  **************************************************** ******************访问保护
+     * 
+     * 
      **********************************************************************/
 
     // Method IDs for all methods in RequestInfo.  This allows for a
@@ -230,10 +241,17 @@ public abstract class RequestInfoImpl
     /*
      **********************************************************************
      * Public interfaces
+     * <p>
+     *  **************************************************** ******************公共接口
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Creates a new RequestInfoImpl object.
+     * <p>
+     *  创建一个新的RequestInfoImpl对象。
+     * 
      */
     public RequestInfoImpl( ORB myORB ) {
         super();
@@ -256,6 +274,11 @@ public abstract class RequestInfoImpl
      * Uniquely identifies an active request/reply sequence.  Once a
      * request/reply sequence is concluded this ID may be reused.  (this
      * is NOT necessarily the same as the GIOP request_id).
+     * <p>
+     *  request_id()的实现对于客户端和服务器实现不同。
+     * 
+     *  唯一标识活动的请求/回复序列。一旦请求/应答序列被结束,则该ID可以被重新使用。 (这不一定与GIOP request_id相同)。
+     * 
      */
     abstract public int request_id ();
 
@@ -264,6 +287,11 @@ public abstract class RequestInfoImpl
      * implementations.
      *
      * The name of the operation being invoked.
+     * <p>
+     *  对于客户端和服务器实现,operation()的实现不同。
+     * 
+     *  被调用的操作的名称。
+     * 
      */
     abstract public String operation ();
 
@@ -272,6 +300,9 @@ public abstract class RequestInfoImpl
      * This method returns the list of arguments for the operation that was
      * invoked. It raises NO_RESOURCES exception if the operation is not invoked
      * by using DII mechanism.
+     * <p>
+     *  此方法返回调用的操作的参数列表。如果未使用DII机制调用操作,则会引发NO_RESOURCES异常。
+     * 
      */
     abstract public Parameter[] arguments ();
 
@@ -279,6 +310,9 @@ public abstract class RequestInfoImpl
      * This method returns the list of exceptios  that was raised when the
      * operation was invoked. It raises NO_RESOURCES exception if the operation
      * is not invoked by using DII mechanism.
+     * <p>
+     *  此方法返回调用操作时引发的异常列表。如果未使用DII机制调用操作,则会引发NO_RESOURCES异常。
+     * 
      */
     abstract public TypeCode[] exceptions ();
 
@@ -286,6 +320,9 @@ public abstract class RequestInfoImpl
      * This method returns the list of contexts for the DII operation.
      * It raises NO_RESOURCES exception if the operation is not invoked by
      * using DII mechanism.
+     * <p>
+     *  此方法返回DII操作的上下文列表。如果未使用DII机制调用操作,则会引发NO_RESOURCES异常。
+     * 
      */
     abstract public String[] contexts ();
 
@@ -293,6 +330,9 @@ public abstract class RequestInfoImpl
      * This method returns the list of operation_context for the DII operation.
      * It raises NO_RESOURCES exception if the operation is not invoked by
      * using DII mechanism.
+     * <p>
+     * 此方法返回DII操作的operation_context列表。如果未使用DII机制调用操作,则会引发NO_RESOURCES异常。
+     * 
      */
     abstract public String[] operation_context ();
 
@@ -300,6 +340,9 @@ public abstract class RequestInfoImpl
      * This method returns the result from the invoked DII operation.
      * It raises NO_RESOURCES exception if the operation is not invoked by
      * using DII mechanism.
+     * <p>
+     *  此方法从调用的DII操作返回结果。如果未使用DII机制调用操作,则会引发NO_RESOURCES异常。
+     * 
      */
     abstract public Any result ();
 
@@ -312,6 +355,12 @@ public abstract class RequestInfoImpl
      * be called.  receive_other is called unless an exception occurs, in
      * which case receive_exception is called.  On the client, within
      * send_poll, this attribute is true.
+     * <p>
+     *  response_expected()的实现因客户端和服务器实现而异。
+     * 
+     *  指示是否需要响应。在客户端上,当response_expected为false时,不返回应答,因此无法调用receive_reply。
+     *  receive_other被调用,除非发生异常,在这种情况下调用receive_exception。在客户端上,在send_poll中,此属性为true。
+     * 
      */
     abstract public boolean response_expected ();
 
@@ -326,6 +375,13 @@ public abstract class RequestInfoImpl
      *   <li>Messaging::SYNC_WITH_TRANSPORT</li>
      *   <li>Messaging::SYNC_WITH_SERVER</li>
      *   <li>Messaging::SYNC_WITH_TARGET</li>
+     * </ul>
+     * <p>
+     *  在消息传递规范中定义。仅当response_expected为false时才适用。如果response_expected为true,则sync_scope的值未定义。
+     * 它定义了在控制返回到客户端之前请求进行到什么程度。此属性可能具有以下值之一：。
+     * <ul>
+     *  <li> Messaging :: SYNC_NONE </li> <li> Messaging :: SYNC_WITH_TRANSPORT </li> <li> Messaging :: SYNC
+     * _WITH_SERVER </li> <li> Messaging :: SYNC_WITH_TARGET </li>。
      * </ul>
      */
     public short sync_scope (){
@@ -343,6 +399,13 @@ public abstract class RequestInfoImpl
      *   <li>PortableInterceptor::LOCATION_FORWARD</li>
      *   <li>PortableInterceptor::TRANSPORT_RETRY</li>
      * </ul>
+     * <p>
+     *  描述操作调用的结果的状态。其值可以是以下之一：
+     * <ul>
+     *  <li> PortableInterceptor :: SUCCESSFUL </li> <li> PortableInterceptor :: SYSTEM_EXCEPTION </li> <li>
+     *  PortableInterceptor :: USER_EXCEPTION </li> <li> PortableInterceptor :: LOCATION_FORWARD </li> <li> 
+     * PortableInterceptor :: TRANSPORT_RETRY </li>。
+     * </ul>
      */
     public short reply_status (){
         checkAccess( MID_REPLY_STATUS );
@@ -357,6 +420,11 @@ public abstract class RequestInfoImpl
      * then this attribute will contain the object
      * to which the request will be forwarded.  It is indeterminate whether a
      * forwarded request will actually occur.
+     * <p>
+     * 对于客户端和服务器实现,forward_reference()的实现不同。
+     * 
+     *  如果reply_status属性是LOCATION_FORWARD,则该属性将包含请求将被转发到的对象。它不确定转发的请求是否实际发生。
+     * 
      */
     abstract public Object forward_reference ();
 
@@ -369,6 +437,13 @@ public abstract class RequestInfoImpl
      * with a TCKind value of tk_null is returned.
      * <p>
      * If the ID does not define an allocated slot, InvalidSlot is raised.
+     * <p>
+     *  返回来自请求范围内的PortableInterceptor :: Current的给定插槽的数据。
+     * <p>
+     *  如果未设置给定时隙,则返回包含TCKind值为tk_null的类型代码的任何时隙。
+     * <p>
+     *  如果ID未定义分配的时隙,则会引发InvalidSlot。
+     * 
      */
     public Any get_slot (int id)
         throws InvalidSlot
@@ -388,6 +463,11 @@ public abstract class RequestInfoImpl
      * that is associated with the request.  If the request's service context
      * does not contain an etry for that ID, BAD_PARAM with a minor code of
      * TBD_BP is raised.
+     * <p>
+     *  对于客户端和服务器实现,get_request_service_context()的实现不同。
+     * 
+     *  此操作将返回具有与请求相关联的给定ID的服务上下文的副本。如果请求的服务上下文不包含该ID的etry,则引发具有次要代码TBD_BP的BAD_PARAM。
+     * 
      */
     abstract public org.omg.IOP.ServiceContext
         get_request_service_context(int id);
@@ -400,6 +480,11 @@ public abstract class RequestInfoImpl
      * that is associated with the reply.  IF the request's service context
      * does not contain an entry for that ID, BAD_PARAM with a minor code of
      * TBD_BP is raised.
+     * <p>
+     *  对于客户端和服务器实现,get_reply_service_context()的实现不同。
+     * 
+     *  此操作返回具有与应答相关联的给定ID的服务上下文的副本。如果请求的服务上下文不包含该ID的条目,则引发具有次要代码TBD_BP的BAD_PARAM。
+     * 
      */
     abstract public org.omg.IOP.ServiceContext
         get_reply_service_context (int id);
@@ -416,9 +501,15 @@ public abstract class RequestInfoImpl
     /*
      **********************************************************************
      * Proprietary methods
+     * <p>
+     *  **************************************************** ******************专有方法
+     * 
+     * 
      **********************************************************************/
 
     /**
+    /* <p>
+    /* 
      * @return The connection on which the request is made.
      *
      * Note: we store the connection as an internal type but
@@ -432,6 +523,10 @@ public abstract class RequestInfoImpl
     /*
      **********************************************************************
      * Private utility methods
+     * <p>
+     *  **************************************************** ******************私有实用方法
+     * 
+     * 
      **********************************************************************/
 
     /**
@@ -439,6 +534,10 @@ public abstract class RequestInfoImpl
      * into the given Any.  Throws an UNKNOWN with minor code
      * OMGSYstemException.UNKNOWN_USER_EXCEPTION if the Helper class could not be
      * found to insert it with.
+     * <p>
+     * 将给定ApplicationException中的UserException插入给定的Any。
+     * 如果找不到用于插入辅助类的辅助类,则抛出UNKNOWN,并使用次要代码OMGSYstemException.UNKNOWN_USER_EXCEPTION。
+     * 
      */
     private void insertApplicationException( ApplicationException appException,
                                              Any result )
@@ -503,6 +602,10 @@ public abstract class RequestInfoImpl
      * Throws an UNKNOWN with minor code
      * OMGSYstemException.UNKNOWN_USER_EXCEPTION if the Helper class could not be
      * found to insert it with.
+     * <p>
+     *  将UserException插入给定的Any。
+     * 如果找不到用于插入辅助类的辅助类,则抛出UNKNOWN,并使用次要代码OMGSYstemException.UNKNOWN_USER_EXCEPTION。
+     * 
      */
     private void insertUserException( UserException userException, Any result )
         throws UNKNOWN
@@ -549,10 +652,17 @@ public abstract class RequestInfoImpl
     /*
      **********************************************************************
      * Protected utility methods
+     * <p>
+     *  **************************************************** ******************受保护的实用程序方法
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Internal utility method to convert an NVList into a PI Parameter[]
+     * <p>
+     *  内部实用程序方法将NVList转换为PI参数[]
+     * 
      */
     protected Parameter[] nvListToParameterArray( NVList parNVList ) {
 
@@ -588,6 +698,9 @@ public abstract class RequestInfoImpl
      * If the exception is a UserException which cannot be inserted into
      * an any, then this returns an Any containing the system exception
      * UNKNOWN.
+     * <p>
+     *  实用程序将给定的Exception包装在Any对象中并返回它。如果异常是无法插入到任何中的UserException,则返回一个包含系统异常UNKNOWN的Any。
+     * 
      */
     protected Any exceptionToAny( Exception exception ){
         Any result = myORB.create_any();
@@ -633,6 +746,9 @@ public abstract class RequestInfoImpl
      * Utility method to look up a service context with the given id and
      * convert it to an IOP.ServiceContext.  Uses the given HashMap as
      * a cache.  If not found in cache, the result is inserted in the cache.
+     * <p>
+     *  实用方法查找具有给定id的服务上下文并将其转换为IOP.ServiceContext。使用给定的HashMap作为缓存。如果在缓存中找不到,则结果将插入缓存中。
+     * 
      */
     protected org.omg.IOP.ServiceContext
         getServiceContext ( HashMap cachedServiceContexts,
@@ -687,6 +803,13 @@ public abstract class RequestInfoImpl
      * <p>
      * Uses the given HashMap as a cache.  If a service context is placed
      * in the container, it goes in the HashMap as well.
+     * <p>
+     *  实用方法添加一个IOP.ServiceContext到一个core.ServiceContexts对象。如果replace为true,则将替换具有给定id的任何服务上下文。
+     * <p>
+     *  如果replace为false并且具有给定ID的服务上下文已存在,则提升BAD_INV_ORDER。
+     * <p>
+     *  使用给定的HashMap作为缓存。如果服务上下文放置在容器中,它也会进入HashMap。
+     * 
      */
     protected void addServiceContext(
         HashMap cachedServiceContexts,
@@ -731,6 +854,11 @@ public abstract class RequestInfoImpl
      * so we know not to execute the corresponding ending interception
      * points for the interceptors whose starting interception points
      * were not completed.  This simulates the "Flow Stack Visual Model"
+     * <p>
+     * 设置在此客户端调用上成功调用其开始拦截点的拦截器数。如orbos / 99-12-02第5.2.1节中所述,如果出现ForwardRequest异常或系统异常,则不会调用所有拦截器。
+     * 这跟踪了多少被成功执行,所以我们知道不执行其开始拦截点未完成的拦截器的相应结束拦截点。这模拟了"流栈可视模型"。
+     * 
+     * 
      * presented in section 5.1.3.*/
     protected void setFlowStackIndex(int num ) {
         this.flowStackIndex = num;
@@ -740,6 +868,9 @@ public abstract class RequestInfoImpl
      * Returns the number of interceptors whose starting interception
      * points were actually invoked on this client request.  See
      * setFlowStackIndex for more details.
+     * <p>
+     *  返回在此客户端请求上实际调用其开始拦截点的拦截器数。有关更多详细信息,请参阅setFlowStackIndex。
+     * 
      */
     protected int getFlowStackIndex() {
         return this.flowStackIndex;
@@ -748,6 +879,9 @@ public abstract class RequestInfoImpl
     /**
      * Sets which ending interception point should be called
      * for each interceptor in the virtual flow stack.
+     * <p>
+     *  设置应该为虚拟流堆栈中的每个拦截器调用结束拦截点。
+     * 
      */
     protected void setEndingPointCall( int call ) {
         this.endingPointCall = call;
@@ -756,6 +890,9 @@ public abstract class RequestInfoImpl
     /**
      * Retrieves the current ending point call type (see
      * setEndingPointCall for more details).
+     * <p>
+     *  检索当前的结束点调用类型(有关更多详细信息,请参阅setEndingPointCall)。
+     * 
      */
     protected int getEndingPointCall() {
         return this.endingPointCall;
@@ -764,6 +901,9 @@ public abstract class RequestInfoImpl
     /**
      * Sets which intermediate interception point should be called
      * for each interceptor in the virtual flow stack.
+     * <p>
+     *  设置应为虚拟流堆栈中的每个拦截器调用中间拦截点。
+     * 
      */
     protected void setIntermediatePointCall( int call ) {
         this.intermediatePointCall = call;
@@ -772,6 +912,9 @@ public abstract class RequestInfoImpl
     /**
      * Retrieves the current intermediate point call type (see
      * setEndingPointCall for more details).
+     * <p>
+     *  检索当前中间点调用类型(有关更多详细信息,请参阅setEndingPointCall)。
+     * 
      */
     protected int getIntermediatePointCall() {
         return this.intermediatePointCall;
@@ -780,6 +923,9 @@ public abstract class RequestInfoImpl
     /**
      * Sets which starting interception point should be called
      * for each interceptor in the virtual flow stack.
+     * <p>
+     *  设置应该为虚拟流堆栈中的每个拦截器调用开始拦截点。
+     * 
      */
     protected void setStartingPointCall( int call ) {
         this.startingPointCall = call;
@@ -788,6 +934,9 @@ public abstract class RequestInfoImpl
     /**
      * Retrieves the current starting point call type (see
      * setStartingPointCall for more details).
+     * <p>
+     *  检索当前起始点调用类型(有关详细信息,请参阅setStartingPointCall)。
+     * 
      */
     protected int getStartingPointCall() {
         return this.startingPointCall;
@@ -796,6 +945,9 @@ public abstract class RequestInfoImpl
     /**
      * Returns true if all interceptors' starting and ending points
      * have already executed to completion, or false if not yet.
+     * <p>
+     *  如果所有拦截器的开始点和结束点都已执行完成,则返回true,如果尚未执行,则返回false。
+     * 
      */
     protected boolean getAlreadyExecuted() {
         return this.alreadyExecuted;
@@ -804,6 +956,9 @@ public abstract class RequestInfoImpl
     /**
      * Sets whether all interceotrs' starting and ending points
      * have already been executed to completion.
+     * <p>
+     *  设置是否所有摄像机的开始点和结束点已经执行完成。
+     * 
      */
     protected void setAlreadyExecuted( boolean alreadyExecuted ) {
         this.alreadyExecuted = alreadyExecuted;
@@ -811,6 +966,9 @@ public abstract class RequestInfoImpl
 
     /**
      * Sets the value to be returned by reply_status
+     * <p>
+     * 设置由reply_status返回的值
+     * 
      */
     protected void setReplyStatus( short replyStatus ) {
         this.replyStatus = replyStatus;
@@ -819,6 +977,9 @@ public abstract class RequestInfoImpl
     /**
      * Gets the current reply_status without doing an access check
      * (available only to package and subclasses)
+     * <p>
+     *  获取当前reply_status而不进行访问检查(仅适用于包和子类)
+     * 
      */
     protected short getReplyStatus() {
         return this.replyStatus;
@@ -827,6 +988,9 @@ public abstract class RequestInfoImpl
     /**
      * Stores the given ForwardRequest object for later analysis.
      * This version supplements setForwardRequest( IOR );
+     * <p>
+     *  存储给定的ForwardRequest对象以供以后分析。此版本补充setForwardRequest(IOR);
+     * 
      */
     protected void setForwardRequest( ForwardRequest forwardRequest ) {
         this.forwardRequest = forwardRequest;
@@ -836,6 +1000,9 @@ public abstract class RequestInfoImpl
     /**
      * Stores the given IOR for later forward request analysis.
      * This version supplements setForwardRequest( ForwardRequest );
+     * <p>
+     *  存储给定的IOR用于稍后的转发请求分析。此版本补充setForwardRequest(ForwardRequest);
+     * 
      */
     protected void setForwardRequest( IOR ior ) {
         this.forwardRequestIOR = ior;
@@ -844,6 +1011,9 @@ public abstract class RequestInfoImpl
 
     /**
      * Retrieves the ForwardRequest object as a ForwardRequest exception.
+     * <p>
+     *  作为ForwardRequest异常检索ForwardRequest对象。
+     * 
      */
     protected ForwardRequest getForwardRequestException() {
         if( this.forwardRequest == null ) {
@@ -860,6 +1030,9 @@ public abstract class RequestInfoImpl
 
     /**
      * Retrieves the IOR of the ForwardRequest exception.
+     * <p>
+     *  检索ForwardRequest异常的IOR。
+     * 
      */
     protected IOR getForwardRequestIOR() {
         if( this.forwardRequestIOR == null ) {
@@ -875,6 +1048,9 @@ public abstract class RequestInfoImpl
     /**
      * Sets the exception to be returned by received_exception and
      * received_exception_id.
+     * <p>
+     *  设置由received_exception和received_exception_id返回的异常。
+     * 
      */
     protected void setException( Exception exception ) {
         this.exception = exception;
@@ -883,6 +1059,9 @@ public abstract class RequestInfoImpl
     /**
      * Returns the exception to be returned by received_exception and
      * received_exception_id.
+     * <p>
+     *  返回由received_exception和received_exception_id返回的异常。
+     * 
      */
     Exception getException() {
         return this.exception;
@@ -892,6 +1071,9 @@ public abstract class RequestInfoImpl
      * Sets the execution point that we are currently executing
      * (starting points, intermediate points, or ending points).
      * This allows us to enforce the validity table.
+     * <p>
+     *  设置我们当前正在执行的执行点(起点,中间点或终点)。这允许我们强制执行有效性表。
+     * 
      */
     protected void setCurrentExecutionPoint( int executionPoint ) {
         this.currentExecutionPoint = executionPoint;
@@ -905,6 +1087,11 @@ public abstract class RequestInfoImpl
      * forbidden at this time, BAD_INV_ORDER is raised with a minor code of
      * TBD_BIO.
      *
+     * <p>
+     *  检查呼叫者是否被允许在此特定时间访问此方法。这在子类中被覆盖以实现在ptc / 00-04-05,表21-1和21-2中指定的有效性表。
+     * 检查currentExecutionPoint属性,并且如果此时禁止访问,则使用次要代码TBD_BIO引发BAD_INV_ORDER。
+     * 
+     * 
      * @param methodID The ID of this method, one of the MID_* constants.
      *     This allows us to easily look up the method access in a table.
      *     Note that method ids may overlap between subclasses.
@@ -916,6 +1103,7 @@ public abstract class RequestInfoImpl
      * The server side does an explicit set rather than taking the
      * current PICurrent table as is done in the general RequestInfoImpl
      * constructor.
+     * <p>
      */
     void setSlotTable(SlotTable slotTable)
     {

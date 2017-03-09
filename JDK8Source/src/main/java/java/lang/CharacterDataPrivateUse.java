@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -26,6 +27,8 @@
 package java.lang;
 
 /** The CharacterData class encapsulates the large tables found in
+/* <p>
+/* 
     Java.lang.Character. */
 
 class CharacterDataPrivateUse extends CharacterData {

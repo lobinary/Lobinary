@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * A simple in-memory java.net.CookieStore implementation
  *
+ * <p>
+ *  一个简单的内存中java.net.CookieStore实现
+ * 
+ * 
  * @author Edward Wang
  * @since 1.6
  */
@@ -60,6 +65,9 @@ class InMemoryCookieStore implements CookieStore {
 
     /**
      * The default ctor
+     * <p>
+     *  默认ctor
+     * 
      */
     public InMemoryCookieStore() {
         cookieJar = new ArrayList<HttpCookie>();
@@ -71,6 +79,9 @@ class InMemoryCookieStore implements CookieStore {
 
     /**
      * Add one cookie into cookie store.
+     * <p>
+     *  将一个Cookie添加到Cookie存储中。
+     * 
      */
     public void add(URI uri, HttpCookie cookie) {
         // pre-condition : argument can't be null
@@ -108,6 +119,9 @@ class InMemoryCookieStore implements CookieStore {
      *     given uri when added to the cookie store.
      *  3) not expired.
      * See RFC 2965 sec. 3.3.4 for more detail.
+     * <p>
+     *  获取所有cookie,其中：1)当添加到cookie存储区时,给定uri与给定uri的域匹配或关联。 3)未过期。参见RFC 2965 sec。 3.3.4更多细节。
+     * 
      */
     public List<HttpCookie> get(URI uri) {
         // argument can't be null
@@ -132,6 +146,9 @@ class InMemoryCookieStore implements CookieStore {
 
     /**
      * Get all cookies in cookie store, except those have expired
+     * <p>
+     *  获取Cookie存储区中的所有Cookie,但已过期的除外
+     * 
      */
     public List<HttpCookie> getCookies() {
         List<HttpCookie> rt;
@@ -155,6 +172,9 @@ class InMemoryCookieStore implements CookieStore {
     /**
      * Get all URIs, which are associated with at least one cookie
      * of this cookie store.
+     * <p>
+     *  获取所有与此Cookie存储区的至少一个Cookie相关联的URI。
+     * 
      */
     public List<URI> getURIs() {
         List<URI> uris = new ArrayList<URI>();
@@ -182,6 +202,9 @@ class InMemoryCookieStore implements CookieStore {
 
     /**
      * Remove a cookie from store
+     * <p>
+     *  从商店删除Cookie
+     * 
      */
     public boolean remove(URI uri, HttpCookie ck) {
         // argument can't be null
@@ -203,6 +226,9 @@ class InMemoryCookieStore implements CookieStore {
 
     /**
      * Remove all cookies in this cookie store.
+     * <p>
+     *  删除此Cookie存储中的所有Cookie。
+     * 
      */
     public boolean removeAll() {
         lock.lock();
@@ -234,6 +260,9 @@ class InMemoryCookieStore implements CookieStore {
      * some sites, like yahoo.com do actually expect these cookies to be
      * passed along.
      * And should be used for 'old' style cookies (aka Netscape type of cookies)
+     * <p>
+     *  这几乎与HttpCookie.domainMatches相同,除了一个区别：当域的"H"部分包含点('。')时,它不会拒绝Cookie。
+     *  I.E：RFC 2965第3.3.2节说,如果host是x.y.domain.com,cookie域是.domain.com,那么它应该被拒绝。然而,这不是真实世界的工作原理。
      */
     private boolean netscapeDomainMatches(String domain, String host)
     {

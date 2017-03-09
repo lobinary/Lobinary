@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ import java.io.Serializable;
  * It also stores the initial state of the JList, to ensure an
  * accurate reset, if the user requests a reset of the form.
  *
+ * <p>
+ *  这个类扩展了DefaultListModel,并且实现了ListSelectionModel接口,允许它存储与作为List实现的SELECT表单元素相关的状态。
+ * 如果SELECT具有值大于1的size属性,或者允许多选,则使用JList来表示它,并使用OptionListModel作为其模型。它还存储JList的初始状态,以确保精确复位,如果用户请求复位表单。
+ * 
+ * 
   @author Sunita Mani
  */
 
@@ -102,6 +108,10 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
      * Returns an array of all the <code>ListSelectionListener</code>s added
      * to this OptionListModel with addListSelectionListener().
      *
+     * <p>
+     *  返回使用addListSelectionListener()添加到此OptionListModel的所有<code> ListSelectionListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ListSelectionListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -113,6 +123,9 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
     /**
      * Notify listeners that we are beginning or ending a
      * series of value changes
+     * <p>
+     *  通知侦听器我们正在开始或结束一系列值更改
+     * 
      */
     protected void fireValueChanged(boolean isAdjusting) {
         fireValueChanged(getMinSelectionIndex(), getMaxSelectionIndex(), isAdjusting);
@@ -122,12 +135,17 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
     /**
      * Notify ListSelectionListeners that the value of the selection,
      * in the closed interval firstIndex,lastIndex, has changed.
+     * <p>
+     *  通知ListSelectionListeners选择的值在关闭间隔firstIndex,lastIndex中已更改。
+     * 
      */
     protected void fireValueChanged(int firstIndex, int lastIndex) {
         fireValueChanged(firstIndex, lastIndex, getValueIsAdjusting());
     }
 
     /**
+    /* <p>
+    /* 
      * @param firstIndex The first index in the interval.
      * @param lastIndex The last index in the interval.
      * @param isAdjusting True if this is the final change in a series of them.
@@ -155,6 +173,9 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
         /* Change the values before sending the event to the
          * listeners in case the event causes a listener to make
          * another change to the selection.
+         * <p>
+         *  如果事件导致侦听器对选择进行另一个更改,则可以使用侦听器。
+         * 
          */
         int oldFirstChangedIndex = firstChangedIndex;
         int oldLastChangedIndex = lastChangedIndex;
@@ -201,6 +222,9 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
            The case (r < minIndex) is not possible because r'th value was set.
            We only need to check for the case when lowest entry has been cleared,
            and in this case we need to search for the first value set above it.
+        /* <p>
+        /*  如果(r> minIndex)的最小值没有改变。情况(r <minIndex)不可能,因为设置了r'th值。我们只需要检查最低条目已被清除的情况,在这种情况下,我们需要搜索上面的第一个值集合。
+        /* 
         */
         if (r == minIndex) {
             for(minIndex = minIndex + 1; minIndex <= maxIndex; minIndex++) {
@@ -214,6 +238,9 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
            The case (r > maxIndex) is not possible because r'th value was set.
            We only need to check for the case when highest entry has been cleared,
            and in this case we need to search for the first value set below it.
+        /* <p>
+        /* 如果(r <maxIndex)的最大值没有改变。情况(r> maxIndex)是不可能的,因为设置了r'th值。我们只需要检查最高条目被清除的情况,在这种情况下,我们需要搜索下面设置的第一个值。
+        /* 
         */
         if (r == maxIndex) {
             for(maxIndex = maxIndex - 1; minIndex <= maxIndex; maxIndex--) {
@@ -236,6 +263,13 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
            If we have cleared the whole selection, set the minIndex and maxIndex
            to their cannonical values so that the next set command always works
            just by using Math.min and Math.max.
+        /* <p>
+        /*  changeSelection(),但是我们只会在每个取消选择的单元格的一次迭代的基础上迭代上面的循环。也就是说。下次调用此方法时,以前取消选择的工作将不会重复。
+        /* 
+        /*  我们也不需要担心最小和最大值处于未分配状态的情况。这不可能发生,因为此方法的初始检查确保选择不为空,因此minIndex和maxIndex具有"真实"值。
+        /* 
+        /*  如果我们清除了整个选择,将minIndex和maxIndex设置为它们的大炮值,以便下一个设置命令总是使用Math.min和Math.max工作。
+        /* 
         */
         if (isSelectionEmpty()) {
             minIndex = MAX;
@@ -245,6 +279,10 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
 
     /**
      * Sets the value of the leadAnchorNotificationEnabled flag.
+     * <p>
+     *  设置leadAnchorNotificationEnabled标志的值。
+     * 
+     * 
      * @see             #isLeadAnchorNotificationEnabled()
      */
     public void setLeadAnchorNotificationEnabled(boolean flag) {
@@ -260,6 +298,12 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
      * include only the elements that have been selected or deselected since
      * the last change. Either way, the model continues to maintain the lead
      * and anchor variables internally. The default is true.
+     * <p>
+     *  返回leadAnchorNotificationEnabled标志的值。
+     * 当leadAnchorNotificationEnabled为true时,模型生成具有边界的通知事件,该边界覆盖对选择的所有更改以及前导和锚索引的更改。
+     * 将标志设置为false将导致事件边界的去除仅包括自上次更改以来已选择或取消选择的元素。无论哪种方式,模型继续在内部维护前导和锚定变量。默认值为true。
+     * 
+     * 
      * @return          the value of the leadAnchorNotificationEnabled flag
      * @see             #setLeadAnchorNotificationEnabled(boolean)
      */
@@ -321,6 +365,9 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
     *   in the inclusive range [clearMin, clearMax] then setting the values
     *   in the inclusive range [setMin, setMax]. Do this in one pass so
     *   that no values are cleared if they would later be set.
+    * <p>
+    * 在包含范围[clearMin,clearMax]中,然后设置包含范围[setMin,setMax]中的值。在一遍中执行此操作,以便如果稍后将设置值,则不清除任何值。
+    * 
     */
     private void changeSelection(int clearMin, int clearMax, int setMin, int setMax) {
         changeSelection(clearMin, clearMax, setMin, setMax, true);
@@ -399,11 +446,17 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
      * items, otherwise leave them unselected. This method is typically
      * called to sync the selection model with a corresponding change
      * in the data model.
+     * <p>
+     *  插入在索引之前/之后开始的长度索引。如果索引处的值本身被选择,则设置所有新插入的项目,否则不选择它们。通常调用此方法以使选择模型与数据模型中的对应变化同步。
+     * 
      */
     public void insertIndexInterval(int index, int length, boolean before)
     {
         /* The first new index will appear at insMinIndex and the last
          * one will appear at insMaxIndex
+         * <p>
+         *  一个将出现在insMaxIndex
+         * 
          */
         int insMinIndex = (before) ? index : index + 1;
         int insMaxIndex = (insMinIndex + length) - 1;
@@ -411,12 +464,16 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
         /* Right shift the entire bitset by length, beginning with
          * index-1 if before is true, index+1 if it's false (i.e. with
          * insMinIndex).
+         * <p>
+         *  index-1如果before为true,则索引+ 1如果为假(即使用insMinIndex)。
+         * 
          */
         for(int i = maxIndex; i >= insMinIndex; i--) {
             setState(i + length, value.get(i));
         }
 
         /* Initialize the newly inserted indices.
+        /* <p>
          */
         boolean setInsertedValues = value.get(index);
         for(int i = insMinIndex; i <= insMaxIndex; i++) {
@@ -430,6 +487,9 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
      * the selection model.  This is typically called to sync the selection
      * model width a corresponding change in the data model.  Note
      * that (as always) index0 can be greater than index1.
+     * <p>
+     *  从选择模型中删除区间index0,index1(包括)中的索引。这通常被称为将选择模型宽度与数据模型中的对应变化同步。注意(一如既往)index0可以大于index1。
+     * 
      */
     public void removeIndexInterval(int index0, int index1)
     {
@@ -439,6 +499,9 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
 
         /* Shift the entire bitset to the left to close the index0, index1
          * gap.
+         * <p>
+         *  间隙。
+         * 
          */
         for(int i = rmMinIndex; i <= maxIndex; i++) {
             setState(i, value.get(i + gapLength));
@@ -463,6 +526,10 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
      * Returns a clone of the receiver with the same selection.
      * <code>listenerLists</code> are not duplicated.
      *
+     * <p>
+     *  返回具有相同选择的接收器的克隆。 <code> listenerLists </code>不重复。
+     * 
+     * 
      * @return a clone of the receiver
      * @exception CloneNotSupportedException if the receiver does not
      *    both (a) implement the <code>Cloneable</code> interface
@@ -486,6 +553,10 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
     /**
      * Set the anchor selection index, leaving all selection values unchanged.
      *
+     * <p>
+     *  设置锚选择索引,保留所有选择值不变。
+     * 
+     * 
      * @see #getAnchorSelectionIndex
      * @see #setLeadSelectionIndex
      */
@@ -517,6 +588,17 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
      * This method can be used in the mouseDragged() method of a UI class
      * to extend a selection.
      *
+     * <p>
+     *  设置潜在客户选择索引,确保锚定和新潜在客户之间的值全部选中或全部取消选择。
+     * 如果选择锚索引的值,首先清除[anchor,oldLeadIndex]范围内的所有值,然后选择[anchor,newLeadIndex]范围内的所有值,其中oldLeadIndex是旧的leadInde
+     * x,newLeadIndex是新的一。
+     *  设置潜在客户选择索引,确保锚定和新潜在客户之间的值全部选中或全部取消选择。
+     * <p>
+     * 如果未选择锚索引处的值,则反向执行相同的操作,选择旧范围中的值,并取消选择新值中的值。
+     * <p>
+     *  为此更改生成单个事件,并通知所有侦听器。为了在此事件中生成最小边界,在单次通过中执行操作;那样广播的ListSelectionEvent中的第一个和最后一个索引将引用由于此方法实际更改值的单元格。
+     * 如果相反,该操作在两个步骤中完成,则对选择状态的影响将是相同的,但是将生成两个事件,并且围绕所改变的值的边界将更宽,包括首先被清除并且稍后将被清除的单元组。
+     * 
      * @see #getLeadSelectionIndex
      * @see #setAnchorSelectionIndex
      */
@@ -547,6 +629,10 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
      * is the default, i.e allowing only for SINGLE_SELECTION,
      * then the very last OPTION that has the selected
      * attribute set wins.
+     * <p>
+     * <p>
+     *  此方法可以在UI类的mouseDragged()方法中使用,以扩展选择。
+     * 
      */
     public void setInitialSelection(int i) {
         if (initialValue.get(i)) {
@@ -562,6 +648,9 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
     /**
      * Fetches the BitSet that represents the initial
      * set of selected items in the list.
+     * <p>
+     *  此方法负责存储初始选择的状态。如果selectionMode是默认值,即只允许SINGLE_SELECTION,那么具有所选属性的最后一个OPTION设置为wins。
+     * 
      */
     public BitSet getInitialSelection() {
         return initialValue;

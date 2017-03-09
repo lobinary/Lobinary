@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import com.sun.corba.se.spi.transport.SocketInfo;
  * <code>ORBSocketFactory.getEndPointInfo</code> again with the
  * given <code>socketInfo</code> object as an argument (i.e., a cookie).
  *
+ * <p>
+ *  此异常由<code> ORBSocketFactory.createSocket </code>引发。
+ * 它通知ORB它应该以给定的<code> socketInfo </code>对象作为参数(即cookie)再次调用<code> ORBSocketFactory.getEndPointInfo </code>
+ * 。
  */
 
 public class GetEndPointInfoAgainException

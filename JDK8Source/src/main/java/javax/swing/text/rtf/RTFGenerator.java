@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,13 @@ import javax.swing.text.*;
  * <p>Note that this is a lossy conversion since RTF's model of
  * text does not exactly correspond with LightText's.
  *
+ * <p>
+ *  从富文本(通过一系列LTTextAcceptor调用传递)生成RTF输出流(java.io.OutputStream)。
+ * 可以用于从知道如何写入文本接受器(例如,LTAttributedText和LTRTFFilter)的任何对象生成RTF。
+ * 
+ *  <p>请注意,这是一个有损的转换,因为RTF的文本模型不完全对应于LightText。
+ * 
+ * 
  * @see LTAttributedText
  * @see LTRTFFilter
  * @see LTTextAcceptor
@@ -51,6 +59,8 @@ import javax.swing.text.*;
 class RTFGenerator extends Object
 {
     /* These dictionaries map Colors, font names, or Style objects
+    /* <p>
+    /* 
        to Integers */
     Dictionary<Object, Integer> colorTable;
     int colorCount;
@@ -75,6 +85,8 @@ class RTFGenerator extends Object
     int[] outputConversion;
 
     /** The default color, used for text without an explicit color
+    /* <p>
+    /* 
      *  attribute. */
     static public final Color defaultRTFColor = Color.black;
 
@@ -88,6 +100,10 @@ class RTFGenerator extends Object
     /* An array of character-keyword pairs. This could be done
        as a dictionary (and lookup would be quicker), but that
        would require allocating an object for every character
+    /* <p>
+    /*  作为字典(和查找会更快),但这将需要为每个字符分配一个对象
+    /* 
+    /* 
        written (slow!). */
     static class CharacterKeywordPair
       { public char character; public String keyword; }
@@ -123,6 +139,8 @@ static public void writeDocument(Document d, OutputStream to)
     gen.writeDocumentProperties(d);
 
     /* TODO this assumes a particular element structure; is there
+    /* <p>
+    /* 
        a way to iterate more generically ? */
     int max = root.getElementCount();
     for(int idx = 0; idx < max; idx++)
@@ -310,6 +328,10 @@ public void writeRTFHeader()
        document? (currently the writer always uses the ansi character
        set, which is roughly ISO-8859 Latin-1, and uses Unicode escapes
        for all other characters. However Unicode is a relatively
+    /* <p>
+    /*  并选择最紧凑地表示文档的字符集? (目前作者总是使用ansi字符集,这大致是ISO-8859 Latin-1,并且对所有其他字符使用Unicode转义符,但是Unicode是一个相对
+    /* 
+    /* 
        recent addition to RTF, and not all readers will understand it.) */
     writeBegingroup();
     writeControlWord("rtf", 1);
@@ -562,6 +584,10 @@ void updateParagraphAttributes(MutableAttributeSet current,
     /* The only way to get rid of tabs or styles is with the \pard keyword,
        emitted by resetParagraphAttributes(). Ideally we should avoid
        emitting \pard if the new paragraph's tabs are a superset of the old
+    /* <p>
+    /*  由resetParagraphAttributes()发出。理想情况下,如果新段落的选项卡是旧的超集,我们应避免发出\ pard
+    /* 
+    /* 
        paragraph's tabs. */
 
     if (emitStyleChanges) {
@@ -678,6 +704,15 @@ private static String tabdump(Object tso)
     }
     return buf + "]";
 }
+/* <p>
+/*  private static String tabdump(Object tso){String buf; int i;
+/* 
+/*  if(tso == null)return"[none]";
+/* 
+/*  TabStop [] ts =(TabStop [])tso;
+/* 
+/*  buf ="["; }}
+/* 
 */
 
 protected void resetParagraphAttributes(MutableAttributeSet currentAttributes)
@@ -872,6 +907,8 @@ public void writeCharacter(char ch)
     throws IOException
 {
     /* Nonbreaking space is in most RTF encodings, but the keyword is
+    /* <p>
+    /* 
        preferable; same goes for tabs */
     if (ch == 0xA0) { /* nonbreaking space */
         outputStream.write(0x5C);  /* backslash */
@@ -902,8 +939,14 @@ public void writeCharacter(char ch)
         }
         /* In some cases it would be reasonable to check to see if the
            glyph being written out is in the Symbol encoding, and if so,
+        /* <p>
+        /*  被写出的字形是在符号编码中,如果是,
+        /* 
+        /* 
            to switch to the Symbol font for this character. TODO. */
         /* Currently all unrepresentable characters are written as
+        /* <p>
+        /* 
            Unicode escapes. */
         String approximation = approximationForUnicode(ch);
         if (approximation.length() != unicodeCount) {
@@ -949,15 +992,25 @@ public void writeCharacter(char ch)
 String approximationForUnicode(char ch)
 {
     /* TODO: Find reasonable approximations for all Unicode characters
+    /* <p>
+    /* 
        in all RTF code pages... heh, heh... */
     return "?";
 }
 
 /** Takes a translation table (a 256-element array of characters)
  * and creates an output conversion table for use by
+ * <p>
+ *  并创建用于使用的输出转换表
+ * 
+ * 
  * convertCharacter(). */
     /* Not very efficient at all. Could be changed to sort the table
        for binary search. TODO. (Even though this is inefficient however,
+    /* <p>
+    /*  二进制搜索。去做。 (尽管这是低效的,
+    /* 
+    /* 
        writing RTF is still much faster than reading it.) */
 static int[] outputConversionFromTranslationTable(char[] table)
 {
@@ -984,6 +1037,8 @@ static int[] outputConversionForName(String name)
  * implementation, but conversion tables should be treated as an opaque
  * type) and returns the
  * corresponding byte value (as an int, since bytes are signed).
+ * <p>
+ * 实现,但转换表应该被视为不透明类型),并返回相应的字节值(作为int,因为字节是有符号的)。
  */
     /* Not very efficient. TODO. */
 static protected int convertCharacter(int[] conversion, char ch)

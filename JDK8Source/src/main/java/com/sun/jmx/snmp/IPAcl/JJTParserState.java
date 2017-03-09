@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,12 +45,18 @@ class JJTParserState {
 
   /* Determines whether the current node was actually closed and
      pushed.  This should only be called in the final user action of a
+  /* <p>
+  /*  推。这只应该在a的最终用户操作中调用
+  /* 
+  /* 
      node scope.  */
   boolean nodeCreated() {
     return node_created;
   }
 
   /* Call this to reinitialize the node stack.  It is called
+  /* <p>
+  /* 
      automatically by the parser's ReInit() method. */
   void reset() {
     nodes.removeAllElements();
@@ -59,6 +66,8 @@ class JJTParserState {
   }
 
   /* Returns the root node of the AST.  It only makes sense to call
+  /* <p>
+  /* 
      this after a successful parse. */
   Node rootNode() {
     return nodes.elementAt(0);
@@ -71,6 +80,8 @@ class JJTParserState {
   }
 
   /* Returns the node on the top of the stack, and remove it from the
+  /* <p>
+  /* 
      stack.  */
   Node popNode() {
     if (--sp < mk) {
@@ -85,6 +96,8 @@ class JJTParserState {
   }
 
   /* Returns the number of children on the stack in the current node
+  /* <p>
+  /* 
      scope. */
   int nodeArity() {
     return sp - mk;
@@ -109,6 +122,10 @@ class JJTParserState {
   /* A definite node is constructed from a specified number of
      children.  That number of nodes are popped from the stack and
      made the children of the definite node.  Then the definite node
+  /* <p>
+  /*  儿童。这个数量的节点从堆栈中弹出,并成为定义节点的子节点。然后定义节点
+  /* 
+  /* 
      is pushed on to the stack. */
   void closeNodeScope(Node n, int num) {
     mk = marks.pop().intValue();
@@ -127,6 +144,9 @@ class JJTParserState {
      the nodes that have been pushed since the node was opened are
      made children of the the conditional node, which is then pushed
      on to the stack.  If the condition is false the node is not
+  /* <p>
+  /*  从节点被打开以来被推送的节点被作为条件节点的子节点,然后被推送到堆栈。如果条件为假,则节点不是
+  /* 
      constructed and they are left on the stack. */
   void closeNodeScope(Node n, boolean condition) {
     if (condition) {

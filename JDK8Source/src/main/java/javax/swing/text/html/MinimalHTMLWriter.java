@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,6 +63,18 @@ import javax.swing.text.*;
  * &lt;/html&gt;
  * </pre>
  *
+ * <p>
+ *  MinimalHTMLWriter是由HTMLEditorKit使用的后备写入器,用于为非由EditorKit生成的文档写入HTML。
+ * 
+ *  文档的格式为：
+ * <pre>
+ *  &lt; html&gt; &lt; head&gt; &lt; style&gt; &lt;！ - 命名样式列表p.normal {font-family：SansSerif; margin-height：0; font-size：14}
+ *   - &gt; &lt; / style&gt; &lt; / head&gt; &lt; body&gt; &lt; p style = normal&gt; <b>运行的粗体,斜体和下划线属性作为
+ * HTML标记发出。
+ * 其余属性作为&lt; span&gt;的样式属性的一部分发出。标签。语法类似于内联样式。</b>&lt; / p&gt; &lt; / body&gt; &lt; / html&gt;。
+ * </pre>
+ * 
+ * 
  * @author Sunita Mani
  */
 
@@ -72,6 +85,9 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * tweak and query the fontMask about which
      * of these tags need to be generated or
      * terminated.
+     * <p>
+     *  这些静态决赛用来调整和查询fontMask关于哪些标签需要生成或终止。
+     * 
      */
     private static final int BOLD = 0x01;
     private static final int ITALIC = 0x02;
@@ -90,18 +106,28 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Used to compare with the current run's
      * attributeset.  If identical, then a
      * &lt;span&gt; tag is not emitted.
+     * <p>
+     *  存储先前运行的属性。用于与当前运行的属性集进行比较。如果相同,则&lt; span&gt;标签不发射。
+     * 
      */
     private AttributeSet fontAttributes;
 
     /**
      * Maps from style name as held by the Document, to the archived
      * style name (style name written out). These may differ.
+     * <p>
+     *  从文档所持有的样式名称到归档样式名称(样式名称已写出)的映射。这些可能不同。
+     * 
      */
     private Hashtable<String, String> styleNameMapping;
 
     /**
      * Creates a new MinimalHTMLWriter.
      *
+     * <p>
+     *  创建一个新的MinimalHTMLWriter。
+     * 
+     * 
      * @param w  Writer
      * @param doc StyledDocument
      *
@@ -113,6 +139,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
     /**
      * Creates a new MinimalHTMLWriter.
      *
+     * <p>
+     *  创建一个新的MinimalHTMLWriter。
+     * 
+     * 
      * @param w  Writer
      * @param doc StyledDocument
      * @param pos The location in the document to fetch the
@@ -128,6 +158,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Generates HTML output
      * from a StyledDocument.
      *
+     * <p>
+     *  从StyledDocument生成HTML输出。
+     * 
+     * 
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
      *            location within the document.
@@ -152,6 +186,12 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * The attribute name and value are separated by a colon.
      * Each pair is separated by a semicolon.
      *
+     * <p>
+     * 写出以下类型的所有属性：StyleConstants.ParagraphConstants,StyleConstants.CharacterConstants,StyleConstants.FontCo
+     * nstants,StyleConstants.ColorConstants。
+     * 属性名称和值由冒号分隔。每对由分号分隔。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeAttributes(AttributeSet attr) throws IOException {
@@ -178,6 +218,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
     /**
      * Writes out text.
      *
+     * <p>
+     *  写出文本。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void text(Element elem) throws IOException, BadLocationException {
@@ -195,6 +239,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Writes out a start tag appropriately
      * indented.  Also increments the indent level.
      *
+     * <p>
+     *  写出一个适当缩进的开始标签。还增加缩进级别。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeStartTag(String tag) throws IOException {
@@ -209,6 +257,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Writes out an end tag appropriately
      * indented.  Also decrements the indent level.
      *
+     * <p>
+     *  写出一个适当缩进的结束标签。也递减缩进级别。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeEndTag(String endTag) throws IOException {
@@ -228,6 +280,11 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * document is viewable in applications/browsers
      * that do not support the tag.
      *
+     * <p>
+     *  写出&lt; head&gt;和&lt; style&gt;标签,然后调用writeStyles()来写出所有命名的样式作为&lt; style&gt;标签。
+     * 内容由有效的HTML注释标记包围,以确保文档在不支持标记的应用程序/浏览器中可见。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeHeader() throws IOException {
@@ -246,6 +303,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Writes out all the named styles as the
      * content of the &lt;style&gt; tag.
      *
+     * <p>
+     *  将所有命名的样式写为&lt; style&gt;的内容。标签。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeStyles() throws IOException {
@@ -253,6 +314,9 @@ public class MinimalHTMLWriter extends AbstractWriter {
          *  Access to DefaultStyledDocument done to workaround
          *  a missing API in styled document to access the
          *  stylenames.
+         * <p>
+         *  访问DefaultStyledDocument完成以解决样式文档中缺少的API,以访问样式名。
+         * 
          */
         DefaultStyledDocument styledDoc =  ((DefaultStyledDocument)getDocument());
         Enumeration styleNames = styledDoc.getStyleNames();
@@ -261,6 +325,8 @@ public class MinimalHTMLWriter extends AbstractWriter {
             Style s = styledDoc.getStyle((String)styleNames.nextElement());
 
             /** PENDING: Once the name attribute is removed
+            /* <p>
+            /* 
                 from the list we check check for 0. **/
             if (s.getAttributeCount() == 1 &&
                 s.isDefined(StyleConstants.NameAttribute)) {
@@ -284,6 +350,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * branch elements or leaf elements.  This method specially handles
      * leaf elements that are text.
      *
+     * <p>
+     *  迭代文档中的元素,并根据元素是分支元素还是叶元素来处理元素。此方法专门处理文本的叶元素。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeBody() throws IOException, BadLocationException {
@@ -293,6 +363,9 @@ public class MinimalHTMLWriter extends AbstractWriter {
           This will be a section element for a styled document.
           We represent this element in HTML as the body tags.
           Therefore we ignore it.
+        /* <p>
+        /*  这将是样式文档的节元素。我们在HTML中表示这个元素作为body标签。因此我们忽略它。
+        /* 
          */
         it.current();
 
@@ -334,6 +407,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * that all other tags that have been opened are
      * appropriately closed off.
      *
+     * <p>
+     *  发出&lt; p&gt;的结束标记标签。在写出标签之前,此方法确保已经打开的所有其他标签被适当地关闭。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeEndParagraph() throws IOException {
@@ -354,6 +431,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * &lt;p&gt; tag and sets its value to be the name of the
      * style.
      *
+     * <p>
+     * 发出段落的开始标签。如果段落具有与其相关联的命名样式,则该方法还生成用于&lt; p&gt;的类属性。标记并将其值设置为样式的名称。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeStartParagraph(Element elem) throws IOException {
@@ -371,6 +452,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Responsible for writing out other non-text leaf
      * elements.
      *
+     * <p>
+     *  负责写出其他非文本叶元素。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeLeaf(Element elem) throws IOException {
@@ -392,6 +477,11 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * In certain cases it could be a URL, in others it could
      * be read from a stream.
      *
+     * <p>
+     *  负责处理图标元素;故意未执行。如何实现这种方法是一个政策问题。
+     * 例如,如果您生成&lt; img&gt;标签,你应该如何表示src属性(图像的位置)?在某些情况下,它可以是一个URL,在其他情况下,它可以从流中读取。
+     * 
+     * 
      * @param elem element of type StyleConstants.IconElementName
      */
     protected void writeImage(Element elem) throws IOException {
@@ -402,6 +492,9 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Responsible for handling Component Elements;
      * deliberately unimplemented.
      * How this method is implemented is a matter of policy.
+     * <p>
+     *  负责处理组件元素;故意未执行。如何实施这种方法是一个政策问题。
+     * 
      */
     protected void writeComponent(Element elem) throws IOException {
     }
@@ -410,6 +503,9 @@ public class MinimalHTMLWriter extends AbstractWriter {
     /**
      * Returns true if the element is a text element.
      *
+     * <p>
+     *  如果元素是文本元素,则返回true。
+     * 
      */
     protected boolean isText(Element elem) {
         return (elem.getName() == AbstractDocument.ContentElementName);
@@ -420,6 +516,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Writes out the attribute set
      * in an HTML-compliant manner.
      *
+     * <p>
+     *  以符合HTML的方式写入设置的属性。
+     * 
+     * 
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
      *            location within the document.
@@ -442,6 +542,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * bold &lt;b&gt;, italic &lt;i&gt;, and &lt;u&gt; tags for the
      * text based on its attribute settings.
      *
+     * <p>
+     *  生成粗体&lt; b&gt;,italic&lt; i&gt;和&lt; u&标签的文本基于其属性设置。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
 
@@ -485,6 +589,9 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * to reflect whether the text is to be displayed in
      * bold, italic, and/or with an underline.
      *
+     * <p>
+     *  调整fontMask的相应位,以反映文本是以粗体,斜体和/或下划线显示。
+     * 
      */
     private void setFontMask(AttributeSet attr) {
         if (StyleConstants.isBold(attr)) {
@@ -507,6 +614,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Writes out start tags &lt;u&gt;, &lt;i&gt;, and &lt;b&gt; based on
      * the mask settings.
      *
+     * <p>
+     *  写出开始标签&lt; u&gt;,&lt; i&gt;和&lt; b&gt;基于掩模设置。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     private void writeStartMask(int mask) throws IOException  {
@@ -527,6 +638,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Writes out end tags for &lt;u&gt;, &lt;i&gt;, and &lt;b&gt; based on
      * the mask settings.
      *
+     * <p>
+     *  写出&lt; u&gt;,&lt; i&gt;和&lt; b&gt;的结束标记基于掩模设置。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     private void writeEndMask(int mask) throws IOException {
@@ -553,6 +668,11 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * style attribute is set to contain the list of remaining
      * attributes just like inline styles.
      *
+     * <p>
+     * 以HTML兼容方式写出其余字符级属性(粗体,斜体和下划线以外的属性)。
+     * 假定诸如字体族和字体大小的属性没有直接映射到HTML标签,则&lt; span&gt;标签,并且其样式属性设置为包含剩余属性的列表,就像内联样式一样。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeNonHTMLAttributes(AttributeSet attr) throws IOException {
@@ -608,6 +728,9 @@ public class MinimalHTMLWriter extends AbstractWriter {
 
     /**
      * Returns true if we are currently in a &lt;font&gt; tag.
+     * <p>
+     *  如果我们目前位于&lt; font&gt;标签。
+     * 
      */
     protected boolean inFontTag() {
         return (fontAttributes != null);
@@ -618,6 +741,12 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * <p>
      * Writes out an end tag for the &lt;font&gt; tag.
      *
+     * <p>
+     *  这已不再使用,而是&lt; span&gt;将被写出。
+     * <p>
+     *  写出&lt; font&gt;的结束标记标签。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void endFontTag() throws IOException {
@@ -636,6 +765,12 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * any enclosing font tag before writing out a
      * new start tag.
      *
+     * <p>
+     *  这已不再使用,而是&lt; span&gt;将被写出。
+     * <p>
+     *  为&lt; font&gt;写入一个开始标签。标签。因为字体标记不能嵌套,所以在写出新的开始标记之前,此方法会关闭任何封闭的字体标记。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void startFontTag(String style) throws IOException {
@@ -657,6 +792,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * any enclosing font tag before writing out a
      * new start tag.
      *
+     * <p>
+     *  为&lt; font&gt;写入一个开始标签。标签。因为字体标记不能嵌套,所以在写出新的开始标记之前,此方法会关闭任何封闭的字体标记。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     private void startSpanTag(String style) throws IOException {
@@ -674,6 +813,10 @@ public class MinimalHTMLWriter extends AbstractWriter {
     /**
      * Writes out an end tag for the &lt;span&gt; tag.
      *
+     * <p>
+     *  为&lt; span&gt;写入结束标记标签。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     private void endSpanTag() throws IOException {
@@ -686,6 +829,9 @@ public class MinimalHTMLWriter extends AbstractWriter {
      * Adds the style named <code>style</code> to the style mapping. This
      * returns the name that should be used when outputting. CSS does not
      * allow the full Unicode set to be used as a style name.
+     * <p>
+     *  将名为<code> style </code>的样式添加到样式映射中。这将返回在输出时应使用的名称。 CSS不允许将完整的Unicode集用作样式名称。
+     * 
      */
     private String addStyleName(String style) {
         if (styleNameMapping == null) {
@@ -710,6 +856,8 @@ public class MinimalHTMLWriter extends AbstractWriter {
 
     /**
      * Returns the mapped style name corresponding to <code>style</code>.
+     * <p>
+     *  返回与<code> style </code>对应的映射样式名称。
      */
     private String mapStyleName(String style) {
         if (styleNameMapping == null) {

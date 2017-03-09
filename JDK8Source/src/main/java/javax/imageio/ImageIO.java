@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,9 @@ import sun.security.action.GetPropertyAction;
  * <code>ImageReader</code>s and <code>ImageWriter</code>s, and
  * performing simple encoding and decoding.
  *
+ * <p>
+ *  包含用于定位<code> ImageReader </code>和<code> ImageWriter </code>的静态便利方法并执行简单编码和解码的类。
+ * 
  */
 public final class ImageIO {
 
@@ -67,6 +71,9 @@ public final class ImageIO {
 
     /**
      * Constructor is private to prevent instantiation.
+     * <p>
+     *  构造函数是私有的,以防止实例化。
+     * 
      */
     private ImageIO() {}
 
@@ -104,6 +111,22 @@ public final class ImageIO {
      * <p> The exact set of locations searched depends on the
      * implementation of the Java runtime environment.
      *
+     * <p>
+     *  扫描应用程序类路径上的插件,加载其服务提供程序类,并为使用<code> IIORegistry </code>找到的每个注册一个服务提供程序实例。
+     * 
+     *  <p>需要此方法,因为应用程序类路径在理论上可能会更改,或者其他插件可能变得可用。不是在每次调用API时重新扫描类路径,而是仅在第一次调用时自动扫描类路径。客户端可以调用此方法来提示重新扫描。
+     * 因此,这种方法只需要由运行时动态使新插件可用的复杂应用程序调用。
+     * 
+     *  <p>使用上下文<code> ClassLoader </code>的<code> getResources </code>方法定位包含名为<code> META-INF / services / j
+     * avax.imageio.spi的文件的JAR文件。
+     * </code > </class> </i>,其中<class> </i>是<code> ImageReaderSpi </code>,<code> ImageWriterSpi </code>,<code>
+     *  ImageTranscoderSpi </code>代码> ImageInputStreamSpi </code>或<code> ImageOutputStreamSpi </code>。
+     * 
+     * <p>所定位文件的内容指示实现上述服务提供者接口的实际实现类的名称;然后使用默认类加载器加载这些类中的每一个并实例化每个类的实例,然后将其放入注册表中以供稍后检索。
+     * 
+     *  <p>搜索的位置的确切集合取决于Java运行时环境的实现。
+     * 
+     * 
      * @see ClassLoader#getResources
      */
     public static void scanForPlugins() {
@@ -116,6 +139,9 @@ public final class ImageIO {
      * A class to hold information about caching.  Each
      * <code>ThreadGroup</code> will have its own copy
      * via the <code>AppContext</code> mechanism.
+     * <p>
+     *  保存有关缓存的信息的类。每个<code> ThreadGroup </code>将通过<code> AppContext </code>机制拥有自己的副本。
+     * 
      */
     static class CacheInfo {
         boolean useCache = true;
@@ -152,6 +178,9 @@ public final class ImageIO {
     /**
      * Returns the <code>CacheInfo</code> object associated with this
      * <code>ThreadGroup</code>.
+     * <p>
+     *  返回与此<code> ThreadGroup </code>关联的<code> CacheInfo </code>对象。
+     * 
      */
     private static synchronized CacheInfo getCacheInfo() {
         AppContext context = AppContext.getAppContext();
@@ -166,6 +195,9 @@ public final class ImageIO {
     /**
      * Returns the default temporary (cache) directory as defined by the
      * java.io.tmpdir system property.
+     * <p>
+     *  返回由java.io.tmpdir系统属性定义的缺省临时(高速缓存)目录。
+     * 
      */
     private static String getTempDir() {
         GetPropertyAction a = new GetPropertyAction("java.io.tmpdir");
@@ -178,6 +210,10 @@ public final class ImageIO {
      * and returns the decision.  This method helps to prevent mysterious
      * SecurityExceptions to be thrown when this convenience class is used
      * in an applet, for example.
+     * <p>
+     *  确定调用者是否对缓存目录具有写访问权,将结果存储在<code> CacheInfo </code>对象中,并返回决定。
+     * 例如,当在一个applet中使用此方便类时,此方法有助于防止神秘的SecurityExceptions被抛出。
+     * 
      */
     private static boolean hasCachePermission() {
         Boolean hasPermission = getCacheInfo().getHasPermission();
@@ -244,6 +280,17 @@ public final class ImageIO {
      *
      * <p> On startup, the value is set to <code>true</code>.
      *
+     * <p>
+     *  设置一个标志,指示在创建<code> ImageInputStream </code>和<code> ImageOutputStream </code>时是否应使用基于磁盘的高速缓存文件。
+     * 
+     * <p>从标准<code> InputStream </code>读取时,可能需要将先前读取的信息保存在缓存中,因为底层流不允许重新读取数据。
+     * 类似地,当写入到标准<code> OutputStream </code>时,可以使用高速缓存来允许先前写入的值在将其刷新到最终目的地之前被改变。
+     * 
+     *  <p>缓存可能位于主内存或磁盘上。将此标志设置为<code> false </code>不允许对未来的流使用磁盘,这在使用小图像时可能是有利的,因为去除了创建和破坏文件的开销。
+     * 
+     *  <p>启动时,值设置为<code> true </code>。
+     * 
+     * 
      * @param useCache a <code>boolean</code> indicating whether a
      * cache file should be used, in cases where it is optional.
      *
@@ -257,6 +304,10 @@ public final class ImageIO {
      * Returns the current value set by <code>setUseCache</code>, or
      * <code>true</code> if no explicit setting has been made.
      *
+     * <p>
+     *  如果未进行显式设置,则返回由<code> setUseCache </code>或<code> true </code>设置的当前值。
+     * 
+     * 
      * @return true if a disk-based cache may be used for
      * <code>ImageInputStream</code>s and
      * <code>ImageOutputStream</code>s.
@@ -273,6 +324,10 @@ public final class ImageIO {
      * default temporary-file directory is to be used.  If
      * <code>getUseCache</code> returns false, this value is ignored.
      *
+     * <p>
+     *  设置要创建缓存文件的目录。值<code> null </code>表示要使用系统相关的默认临时文件目录。如果<code> getUseCache </code>返回false,则忽略此值。
+     * 
+     * 
      * @param cacheDirectory a <code>File</code> specifying a directory.
      *
      * @see File#createTempFile(String, String, File)
@@ -297,6 +352,10 @@ public final class ImageIO {
      * <code>setCacheDirectory</code>, or <code>null</code> if no
      * explicit setting has been made.
      *
+     * <p>
+     *  如果未进行显式设置,则返回由<code> setCacheDirectory </code>或<code> null </code>设置的当前值。
+     * 
+     * 
      * @return a <code>File</code> indicating the directory where
      * cache files will be created, or <code>null</code> to indicate
      * the system-dependent default temporary-file directory.
@@ -320,6 +379,16 @@ public final class ImageIO {
      * <p> The current cache settings from <code>getUseCache</code>and
      * <code>getCacheDirectory</code> will be used to control caching.
      *
+     * <p>
+     * 返回一个<code> ImageInputStream </code>,它将从给定的<code> Object </code>中获取输入。
+     * 查询注册到<code> IIORegistry </code>类中的<code> ImageInputStreamSpi </code>集合,并且可以从提供的对象接受输入的第一个用于创建返回的<code>
+     *  ImageInputStream </code>。
+     * 返回一个<code> ImageInputStream </code>,它将从给定的<code> Object </code>中获取输入。
+     * 如果没有合适的<code> ImageInputStreamSpi </code>,则返回<code> null </code>。
+     * 
+     *  <p>来自<code> getUseCache </code>和<code> getCacheDirectory </code>的当前缓存设置将用于控制缓存。
+     * 
+     * 
      * @param input an <code>Object</code> to be used as an input
      * source, such as a <code>File</code>, readable
      * <code>RandomAccessFile</code>, or <code>InputStream</code>.
@@ -381,6 +450,16 @@ public final class ImageIO {
      * <p> The current cache settings from <code>getUseCache</code>and
      * <code>getCacheDirectory</code> will be used to control caching.
      *
+     * <p>
+     *  返回一个<code> ImageOutputStream </code>,它会将其输出发送给给定的<code> Object </code>。
+     * 查询注册到<code> IIORegistry </code>类中的<code> ImageOutputStreamSpi </code>集合,并且能够从提供的对象发送输出的第一个用于创建返回的<code>
+     *  ImageOutputStream </code>。
+     *  返回一个<code> ImageOutputStream </code>,它会将其输出发送给给定的<code> Object </code>。
+     * 如果没有合适的<code> ImageOutputStreamSpi </code>,则返回<code> null </code>。
+     * 
+     *  <p>来自<code> getUseCache </code>和<code> getCacheDirectory </code>的当前缓存设置将用于控制缓存。
+     * 
+     * 
      * @param output an <code>Object</code> to be used as an output
      * destination, such as a <code>File</code>, writable
      * <code>RandomAccessFile</code>, or <code>OutputStream</code>.
@@ -478,6 +557,10 @@ public final class ImageIO {
      * informal format names understood by the current set of registered
      * readers.
      *
+     * <p>
+     *  返回一个<code> String </code>的数组,其中列出了当前注册读者组理解的所有非正式格式名称。
+     * 
+     * 
      * @return an array of <code>String</code>s.
      */
     public static String[] getReaderFormatNames() {
@@ -490,6 +573,10 @@ public final class ImageIO {
      * MIME types understood by the current set of registered
      * readers.
      *
+     * <p>
+     *  返回一个<code> String </code>数组,其中列出了当前注册读者集中理解的所有MIME类型。
+     * 
+     * 
      * @return an array of <code>String</code>s.
      */
     public static String[] getReaderMIMETypes() {
@@ -502,6 +589,10 @@ public final class ImageIO {
      * file suffixes associated with the formats understood
      * by the current set of registered readers.
      *
+     * <p>
+     * 返回一个<code> String </code>的数组,其中列出了与当前注册读者组理解的格式相关联的所有文件后缀。
+     * 
+     * 
      * @return an array of <code>String</code>s.
      * @since 1.6
      */
@@ -626,6 +717,13 @@ public final class ImageIO {
      * <p> The stream position is left at its prior position upon
      * exit from this method.
      *
+     * <p>
+     *  返回一个包含所有当前注册的<code> ImageReader </code>的<code>迭代器</code>,声明能够解码提供的<code> Object </code>,通常是<code> Im
+     * ageInputStream </code >。
+     * 
+     *  <p>退出此方法时,流位置会保留在其先前位置。
+     * 
+     * 
      * @param input an <code>ImageInputStream</code> or other
      * <code>Object</code> containing encoded image data.
      *
@@ -685,6 +783,10 @@ public final class ImageIO {
      * registered <code>ImageReader</code>s that claim to be able to
      * decode the named format.
      *
+     * <p>
+     *  返回一个包含所有当前注册的<code> ImageReader </code>的<code>迭代器</code>,它声称能够解析命名格式。
+     * 
+     * 
      * @param formatName a <code>String</code> containing the informal
      * name of a format (<i>e.g.</i>, "jpeg" or "tiff".
      *
@@ -720,6 +822,10 @@ public final class ImageIO {
      * registered <code>ImageReader</code>s that claim to be able to
      * decode files with the given suffix.
      *
+     * <p>
+     *  返回一个包含所有当前注册的<code> ImageReader </code>的<code>迭代器</code>,它声称能够解码具有给定后缀的文件。
+     * 
+     * 
      * @param fileSuffix a <code>String</code> containing a file
      * suffix (<i>e.g.</i>, "jpg" or "tiff").
      *
@@ -755,6 +861,10 @@ public final class ImageIO {
      * registered <code>ImageReader</code>s that claim to be able to
      * decode files with the given MIME type.
      *
+     * <p>
+     *  返回一个包含所有当前注册的<code> ImageReader </code>的<code>迭代器</code>,它声称能够解码具有给定MIME类型的文件。
+     * 
+     * 
      * @param MIMEType a <code>String</code> containing a file
      * suffix (<i>e.g.</i>, "image/jpeg" or "image/x-bmp").
      *
@@ -792,6 +902,10 @@ public final class ImageIO {
      * informal format names understood by the current set of registered
      * writers.
      *
+     * <p>
+     *  返回一个<code> String </code>的数组,其中列出了当前注册写入器集合所理解的所有非正式格式名称。
+     * 
+     * 
      * @return an array of <code>String</code>s.
      */
     public static String[] getWriterFormatNames() {
@@ -804,6 +918,10 @@ public final class ImageIO {
      * MIME types understood by the current set of registered
      * writers.
      *
+     * <p>
+     *  返回一个<code> String </code>的数组,列出当前注册写入器集合所理解的所有MIME类型。
+     * 
+     * 
      * @return an array of <code>String</code>s.
      */
     public static String[] getWriterMIMETypes() {
@@ -816,6 +934,10 @@ public final class ImageIO {
      * file suffixes associated with the formats understood
      * by the current set of registered writers.
      *
+     * <p>
+     *  返回一个<code> String </code>数组,其中列出了与当前注册写者组理解的格式相关的所有文件后缀。
+     * 
+     * 
      * @return an array of <code>String</code>s.
      * @since 1.6
      */
@@ -868,6 +990,10 @@ public final class ImageIO {
      * registered <code>ImageWriter</code>s that claim to be able to
      * encode the named format.
      *
+     * <p>
+     *  返回一个包含所有当前注册的<code> ImageWriter </code>的<code>迭代器</code>,声明能够对指定格式进行编码。
+     * 
+     * 
      * @param formatName a <code>String</code> containing the informal
      * name of a format (<i>e.g.</i>, "jpeg" or "tiff".
      *
@@ -903,6 +1029,10 @@ public final class ImageIO {
      * registered <code>ImageWriter</code>s that claim to be able to
      * encode files with the given suffix.
      *
+     * <p>
+     * 返回一个包含所有当前注册的<code> ImageWriter </code>的<code>迭代器</code>,它声称能够使用给定的后缀对文件进行编码。
+     * 
+     * 
      * @param fileSuffix a <code>String</code> containing a file
      * suffix (<i>e.g.</i>, "jpg" or "tiff").
      *
@@ -937,6 +1067,10 @@ public final class ImageIO {
      * registered <code>ImageWriter</code>s that claim to be able to
      * encode files with the given MIME type.
      *
+     * <p>
+     *  返回一个包含所有当前注册的<code> ImageWriter </code>的<code>迭代器</code>,它声称能够对给定MIME类型的文件进行编码。
+     * 
+     * 
      * @param MIMEType a <code>String</code> containing a file
      * suffix (<i>e.g.</i>, "image/jpeg" or "image/x-bmp").
      *
@@ -985,6 +1119,17 @@ public final class ImageIO {
      * "preferred" writer, which is the first in the list returned by
      * <code>javax.imageio.spi.ImageReaderSpi.getImageWriterSpiNames()</code>.
      *
+     * <p>
+     *  返回与给定的<code> ImageReader </code>对应的<code> ImageWriter </code>(如果有),或<code> null </code>代码>没有指定相应的<code>
+     *  ImageWriter </code>,或者如果给定的<code> ImageReader </code>未注册。
+     * 这种机制可以用于获得将理解由<code> ImageReader </code>生成的非像素元数据(由<code> IIOMetadata </code>对象编码)的内部结构的<code> ImageW
+     * riter </code>代码>。
+     * 通过从<code> ImageReader </code>获得该数据并将其传递给使用该方法获得的<code> ImageWriter </code>,客户端程序可以读取图像,以某种方式修改它,退出保留所
+     * 有元数据,而不必理解关于元数据的结构或甚至关于图像格式的任何内容。
+     * 请注意,此方法返回"首选"写入器,它是由<code> javax.imageio.spi.ImageReaderSpi.getImageWriterSpiNames()</code>返回的列表中的第一个
+     * 。
+     * 
+     * 
      * @param reader an instance of a registered <code>ImageReader</code>.
      *
      * @return an <code>ImageWriter</code>, or null.
@@ -1065,6 +1210,14 @@ public final class ImageIO {
      * the list returned by
      * javax.imageio.spi.ImageWriterSpi.<code>getImageReaderSpiNames()</code>.
      *
+     * <p>
+     * 返回与给定的<code> ImageWriter </code>对应的<code> ImageReader </code>(如果有),或<code> null </code>代码>没有指定相应的<code>
+     *  ImageReader </code>,或者如果给定的<code> ImageWriter </code>未注册。
+     * 该方法主要用于与<code> getImageWriter(ImageReader)</code>对称。
+     * 请注意,此方法返回"首选"阅读器,这是javax.imageio.spi.ImageWriterSpi。
+     * <code> getImageReaderSpiNames()</code>返回的列表中的第一个阅读器。
+     * 
+     * 
      * @param writer an instance of a registered <code>ImageWriter</code>.
      *
      * @return an <code>ImageReader</code>, or null.
@@ -1139,6 +1292,11 @@ public final class ImageIO {
      * encode images of the given layout (specified using an
      * <code>ImageTypeSpecifier</code>) in the given format.
      *
+     * <p>
+     *  返回一个包含所有当前注册的<code> ImageWriter </code>的<code>迭代器</code>,声明能够编码给定布局(使用<code> ImageTypeSpecifier </code>
+     * 给定格式。
+     * 
+     * 
      * @param type an <code>ImageTypeSpecifier</code> indicating the
      * layout of the image to be written.
      * @param formatName the informal name of the <code>format</code>.
@@ -1226,6 +1384,11 @@ public final class ImageIO {
      * able to transcode between the metadata of the given
      * <code>ImageReader</code> and <code>ImageWriter</code>.
      *
+     * <p>
+     *  返回一个包含所有当前注册的<code> ImageTranscoder </code>的<code>迭代器</code>,它声称能够在给定的<code> ImageReader </code>和<code>
+     *  ImageWriter < / code>。
+     * 
+     * 
      * @param reader an <code>ImageReader</code>.
      * @param writer an <code>ImageWriter</code>.
      *
@@ -1284,6 +1447,21 @@ public final class ImageIO {
      * <code>File</code>; that may be accomplished using
      * <code>IIORegistry</code> and <code>ImageReaderSpi</code>.
      *
+     * <p>
+     *  使用自动从当前注册的<code> ImageReader </code>中选择的<code> ImageReader </code>解码提供的<code> File </code>,返回<code> 
+     * BufferedImage </code>。
+     *  <code> File </code>包装在<code> ImageInputStream </code>中。
+     * 如果没有注册的<code> ImageReader </code>声称能够读取结果流,则返回<code> null </code>。
+     * 
+     * <p>来自<code> getUseCache </code>和<code> getCacheDirectory </code>的当前缓存设置将用于控制创建的<code> ImageInputStrea
+     * m </code>中的缓存。
+     * 
+     *  <p>请注意,没有<code> read </code>方法将文件名作为<code> String </code>;请在从文件名创建<code> File </code>之后改用此方法。
+     * 
+     *  <p>此方法不会尝试找到可直接从<code> File </code>读取的<code> ImageReader </code>;这可以使用<code> IIORegistry </code>和<code>
+     *  ImageReaderSpi </code>来完成。
+     * 
+     * 
      * @param input a <code>File</code> to read from.
      *
      * @return a <code>BufferedImage</code> containing the decoded
@@ -1334,6 +1512,21 @@ public final class ImageIO {
      * <code>InputStream</code> after the read operation has completed;
      * it is the responsibility of the caller to close the stream, if desired.
      *
+     * <p>
+     *  返回一个<code> BufferedImage </code>作为解码一个提供的<code> InputStream </code>与从当前注册的那些中自动选择的<code> ImageReader
+     *  </code>的结果。
+     *  <code> InputStream </code>包装在<code> ImageInputStream </code>中。
+     * 如果没有注册的<code> ImageReader </code>声称能够读取结果流,则返回<code> null </code>。
+     * 
+     *  <p>来自<code> getUseCache </code>和<code> getCacheDirectory </code>的当前缓存设置将用于控制创建的<code> ImageInputStre
+     * am </code>中的缓存。
+     * 
+     *  <p>此方法不会尝试找到可直接从<code> InputStream </code>读取的<code> ImageReader </code>;这可以使用<code> IIORegistry </code>
+     * 和<code> ImageReaderSpi </code>来完成。
+     * 
+     * <p>此方法</em>在读取操作完成后不会</em>关闭提供的<code> InputStream </code>;如果需要,调用者有责任关闭流。
+     * 
+     * 
      * @param input an <code>InputStream</code> to read from.
      *
      * @return a <code>BufferedImage</code> containing the decoded
@@ -1374,6 +1567,19 @@ public final class ImageIO {
      * <code>URL</code>; that may be accomplished using
      * <code>IIORegistry</code> and <code>ImageReaderSpi</code>.
      *
+     * <p>
+     *  返回一个<code> BufferedImage </code>作为解码提供的<code> URL </code>与从当前注册的那些中自动选择的<code> ImageReader </code>的结
+     * 果。
+     * 从<code> URL </code>获得<code> InputStream </code>,它包裹在<code> ImageInputStream </code>中。
+     * 如果没有注册的<code> ImageReader </code>声称能够读取结果流,则返回<code> null </code>。
+     * 
+     *  <p>来自<code> getUseCache </code>和<code> getCacheDirectory </code>的当前缓存设置将用于控制创建的<code> ImageInputStre
+     * am </code>中的缓存。
+     * 
+     *  <p>此方法不会尝试找到可直接从<code> URL </code>读取的<code> ImageReader </code>;这可以使用<code> IIORegistry </code>和<code>
+     *  ImageReaderSpi </code>来完成。
+     * 
+     * 
      * @param input a <code>URL</code> to read from.
      *
      * @return a <code>BufferedImage</code> containing the decoded
@@ -1420,6 +1626,15 @@ public final class ImageIO {
      * operation has completed, unless <code>null</code> is returned,
      * in which case this method <em>does not</em> close the stream.
      *
+     * <p>
+     *  返回一个<code> BufferedImage </code>作为解码一个提供的<code> ImageInputStream </code>与自动从当前注册的<code> ImageReader 
+     * </code>选择的结果。
+     * 如果没有注册的<code> ImageReader </code>声称能够读取流,则返回<code> null </code>。
+     * 
+     * <p>与此类中的大多数其他方法不同,除非返回<code> null </code>,此方法</em>会在读取操作完成后关闭提供的<code> ImageInputStream </code> ,在这种情
+     * 况下,此方法<em>不会</em>关闭流。
+     * 
+     * 
      * @param stream an <code>ImageInputStream</code> to read from.
      *
      * @return a <code>BufferedImage</code> containing the decoded
@@ -1465,6 +1680,13 @@ public final class ImageIO {
      * <code>ImageOutputStream</code> after the write operation has completed;
      * it is the responsibility of the caller to close the stream, if desired.
      *
+     * <p>
+     *  使用支持给定格式的任意<code> ImageWriter </code>写入图像到<code> ImageOutputStream </code>。
+     * 图像从当前流指针开始写入<code> ImageOutputStream </code>,覆盖来自该点的现有流数据(如果存在)。
+     * 
+     *  <p>在写入操作完成后,此方法</em>不会关闭所提供的<code> ImageOutputStream </code>;如果需要,调用者有责任关闭流。
+     * 
+     * 
      * @param im a <code>RenderedImage</code> to be written.
      * @param formatName a <code>String</code> containing the informal
      * name of the format.
@@ -1498,6 +1720,10 @@ public final class ImageIO {
      * there is already a <code>File</code> present, its contents are
      * discarded.
      *
+     * <p>
+     *  使用支持给定格式的任意<code> ImageWriter </code>将图像写入<code> File </code>。如果已存在<code> File </code>,则其内容将被丢弃。
+     * 
+     * 
      * @param im a <code>RenderedImage</code> to be written.
      * @param formatName a <code>String</code> containing the informal
      * name of the format.
@@ -1521,6 +1747,9 @@ public final class ImageIO {
         if (writer == null) {
             /* Do not make changes in the file system if we have
              * no appropriate writer.
+             * <p>
+             *  没有适当的作家。
+             * 
              */
             return false;
         }
@@ -1550,6 +1779,14 @@ public final class ImageIO {
      * <p> The current cache settings from <code>getUseCache</code>and
      * <code>getCacheDirectory</code> will be used to control caching.
      *
+     * <p>
+     *  使用支持给定格式的任意<code> ImageWriter </code>将图像写入<code> OutputStream </code>。
+     * 
+     *  <p>此方法</em>不会在写入操作完成后关闭提供的<code> OutputStream </code>;如果需要,调用者有责任关闭流。
+     * 
+     *  <p>来自<code> getUseCache </code>和<code> getCacheDirectory </code>的当前缓存设置将用于控制缓存。
+     * 
+     * 
      * @param im a <code>RenderedImage</code> to be written.
      * @param formatName a <code>String</code> containing the informal
      * name of the format.
@@ -1585,6 +1822,7 @@ public final class ImageIO {
      * Returns <code>ImageWriter</code> instance according to given
      * rendered image and image format or <code>null</code> if there
      * is no appropriate writer.
+     * <p>
      */
     private static ImageWriter getWriter(RenderedImage im,
                                          String formatName) {
@@ -1601,6 +1839,9 @@ public final class ImageIO {
 
     /**
      * Writes image to output stream  using given image writer.
+     * <p>
+     * 根据给定的渲染图像和图像格式返回<code> ImageWriter </code>实例,如果没有适当的writer,则返回<code> null </code>。
+     * 
      */
     private static boolean doWrite(RenderedImage im, ImageWriter writer,
                                  ImageOutputStream output) throws IOException {

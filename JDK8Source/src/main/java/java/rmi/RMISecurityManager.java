@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,15 @@ import java.security.*;
  *    }
  * }</pre>
  *
+ * <p>
+ *  {@code RMISecurityManager}实施与{@link SecurityManager}实施的策略相同的策略。
+ *  RMI应用程序应该使用{@code SecurityManager}类或另一个适当的{@code SecurityManager}实现,而不是此类。
+ *  RMI的类装载器只有在设置了安全管理器时才从远程位置下载类。
+ * 
+ *  @implNote <p> Applet通常在已经具有安全管理器的容器中运行,因此通常不需要applet来设置安全管理器。
+ * 如果您有独立应用程序,则可能需要设置{@code SecurityManager}才能启用类下载。这可以通过在代码中添加以下代码来实现。
+ *  (它需要在RMI可以从远程主机下载代码之前执行,因此很可能需要显示在应用程序的{@code main}方法中。)。
+ * 
  * @author  Roger Riggs
  * @author  Peter Jones
  * @since JDK1.1
@@ -60,6 +70,12 @@ public class RMISecurityManager extends SecurityManager {
 
     /**
      * Constructs a new {@code RMISecurityManager}.
+     * <p>
+     * 
+     *  <pre> {@ code if(System.getSecurityManager()== null){System.setSecurityManager(new SecurityManager()); }
+     * } </pre>。
+     * 
+     * 
      * @since JDK1.1
      */
     public RMISecurityManager() {

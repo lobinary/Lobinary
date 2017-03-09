@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,17 @@ import java.io.Closeable;
  * and implement this interface.
  *
  *
+ * <p>
+ *  I / O操作的关联。
+ * 
+ *  信道表示到诸如硬件设备,文件,网络套接字或能够执行一个或多个不同的I / O操作(例如读或写)的程序组件的实体的打开连接。
+ * 
+ *  <p>频道已开启或已关闭。通道在创建时打开,一旦关闭,它保持关闭。一旦频道关闭,任何调用I / O操作的尝试都会导致{@link ClosedChannelException}被抛出。
+ * 可以通过调用其{@link #isOpen isOpen}方法来测试频道是否打开。
+ * 
+ *  <p>一般来说,通道对于多线程访问是安全的,如扩展和实现此接口的接口和类的规范中所述。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -58,6 +70,10 @@ public interface Channel extends Closeable {
     /**
      * Tells whether or not this channel is open.
      *
+     * <p>
+     *  指出此频道是否已打开。
+     * 
+     * 
      * @return <tt>true</tt> if, and only if, this channel is open
      */
     public boolean isOpen();
@@ -77,6 +93,12 @@ public interface Channel extends Closeable {
      * the first invocation is complete, after which it will return without
      * effect. </p>
      *
+     * <p>
+     *  关闭此频道。
+     * 
+     *  <p>频道关闭后,任何进一步尝试调用I / O操作会导致{@link ClosedChannelException}被抛出。
+     * 
+     * 
      * @throws  IOException  If an I/O error occurs
      */
     public void close() throws IOException;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -225,6 +226,13 @@ public class ServerNotifForwarder {
      * which is why listenerMap is a Map<ObjectName, Set<IdAndFilter>> and
      * why we add the found notifications to a supplied List rather than
      * just returning a boolean.
+     * <p>
+     *  通知。首先,如果没有针对通知来自的ObjectName的监听器,我们不再进一步。然后,对于每个侦听器,我们必须应用相应的过滤器(如果有的话),如果过滤器拒绝,则忽略侦听器。
+     * 最后,我们应用一些访问检查,也可能拒绝监听器。
+     * 
+     *  给定的通知可以在同一MBean上触发多个侦听器,这就是为什么listenerMap是Map <ObjectName,Set <IdAndFilter >>以及为什么我们将发现的通知添加到提供的List
+     * 而不是返回布尔值。
+     * 
      */
     private final NotifForwarderBufferFilter bufferFilter = new NotifForwarderBufferFilter();
 
@@ -366,6 +374,9 @@ public class ServerNotifForwarder {
     /**
      * Explicitly check the MBeanPermission for
      * the current access control context.
+     * <p>
+     *  显式检查当前访问控制上下文的MBeanPermission。
+     * 
      */
     public final void checkMBeanPermission(
             final ObjectName name, final String actions)
@@ -404,6 +415,9 @@ public class ServerNotifForwarder {
 
     /**
      * Check if the caller has the right to get the following notifications.
+     * <p>
+     *  检查呼叫者是否有权获得以下通知。
+     * 
      */
     private boolean allowNotificationEmission(ObjectName name,
                                               TargetedNotification tn) {
@@ -436,6 +450,8 @@ public class ServerNotifForwarder {
     /**
      * Iterate until we extract the real exception
      * from a stack of PrivilegedActionExceptions.
+     * <p>
+     *  迭代,直到我们从PrivilegedActionExceptions的堆栈中提取真正的异常。
      */
     private static Exception extractException(Exception e) {
         while (e instanceof PrivilegedActionException) {

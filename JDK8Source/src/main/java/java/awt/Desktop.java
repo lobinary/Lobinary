@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -73,6 +74,25 @@ import sun.security.util.SecurityConstants;
  * application is executed, it will be executed on the same system as
  * the one on which the Java application was launched.
  *
+ * <p>
+ *  {@code Desktop}类允许Java应用程序启动在本地桌面上注册的关联应用程序来处理{@link java.net.URI}或文件。
+ * 
+ *  <p>支持的操作包括：
+ * <ul>
+ *  <li>启动用户默认浏览器以显示指定的URI; </li> <li>使用可选的{@code mailto} URI启动用户默认邮件客户端; </li> <li>启动已注册的应用程序以打开,编辑或打印指
+ * 定的文件。
+ * </li>。
+ * </ul>
+ * 
+ *  <p>此类提供了与这些操作相对应的方法。这些方法查找在当前平台上注册的关联应用程序,并启动它来处理URI或文件。如果没有关联的应用程序或相关应用程序无法启动,则抛出异常。
+ * 
+ *  <p>应用程序已注册到URI或文件类型;例如,{@code"sxi"}文件扩展名通常注册到StarSuite。注册,访问和启动相关联的应用程序的机制是平台相关的。
+ * 
+ *  <p>每个操作都是由{@link Desktop.Action}类表示的操作类型。
+ * 
+ *  <p>注意：当一些操作被调用并且关联的应用程序被执行时,它将在与启动Java应用程序的系统相同的系统上执行。
+ * 
+ * 
  * @since 1.6
  * @author Armin Chen
  * @author George Zhang
@@ -84,33 +104,57 @@ public class Desktop {
      * set of actions.  You may use the {@link Desktop#isSupported}
      * method to determine if the given action is supported by the
      * current platform.
+     * <p>
+     * 表示操作类型。每个平台支持一组不同的操作。您可以使用{@link Desktop#isSupported}方法来确定当前平台是否支持给定的操作。
+     * 
+     * 
      * @see java.awt.Desktop#isSupported(java.awt.Desktop.Action)
      * @since 1.6
      */
     public static enum Action {
         /**
          * Represents an "open" action.
+         * <p>
+         *  表示"打开"操作。
+         * 
+         * 
          * @see Desktop#open(java.io.File)
          */
         OPEN,
         /**
          * Represents an "edit" action.
+         * <p>
+         *  表示"编辑"操作。
+         * 
+         * 
          * @see Desktop#edit(java.io.File)
          */
         EDIT,
         /**
          * Represents a "print" action.
+         * <p>
+         *  表示"打印"操作。
+         * 
+         * 
          * @see Desktop#print(java.io.File)
          */
         PRINT,
         /**
          * Represents a "mail" action.
+         * <p>
+         *  表示"邮件"操作。
+         * 
+         * 
          * @see Desktop#mail()
          * @see Desktop#mail(java.net.URI)
          */
         MAIL,
         /**
          * Represents a "browse" action.
+         * <p>
+         *  表示"浏览"操作。
+         * 
+         * 
          * @see Desktop#browse(java.net.URI)
          */
         BROWSE
@@ -120,6 +164,9 @@ public class Desktop {
 
     /**
      * Suppresses default constructor for noninstantiability.
+     * <p>
+     *  抑制默认构造函数的非不可置性。
+     * 
      */
     private Desktop() {
         peer = Toolkit.getDefaultToolkit().createDesktopPeer(this);
@@ -130,6 +177,11 @@ public class Desktop {
      * browser context.  On some platforms the Desktop API may not be
      * supported; use the {@link #isDesktopSupported} method to
      * determine if the current desktop is supported.
+     * <p>
+     *  返回当前浏览器上下文的<code> Desktop </code>实例。
+     * 在某些平台上,可能不支持Desktop API;请使用{@link #isDesktopSupported}方法确定是否支持当前桌面。
+     * 
+     * 
      * @return the Desktop instance of the current browser context
      * @throws HeadlessException if {@link
      * GraphicsEnvironment#isHeadless()} returns {@code true}
@@ -161,6 +213,10 @@ public class Desktop {
      * If it's supported, use {@link #getDesktop()} to retrieve an
      * instance.
      *
+     * <p>
+     *  测试当前平台是否支持此类。如果支持,请使用{@link #getDesktop()}检索实例。
+     * 
+     * 
      * @return <code>true</code> if this class is supported on the
      *         current platform; <code>false</code> otherwise
      * @see #getDesktop()
@@ -184,6 +240,14 @@ public class Desktop {
      * #isSupported} may return {@code true}, but the corresponding
      * action method will throw an {@link IOException}.
      *
+     * <p>
+     *  测试当前平台上是否支持某个操作。
+     * 
+     *  <p>即使平台支持某个操作,文件或URI也可能没有注册的操作应用程序。例如,大多数平台都支持{@link Desktop.Action#OPEN}操作。
+     * 但对于一个特定的文件,可能没有一个注册的应用程序打开它。
+     * 在这种情况下,{@link #isSupported}可能会返回{@code true},但相应的操作方法将抛出{@link IOException}。
+     * 
+     * 
      * @param action the specified {@link Action}
      * @return <code>true</code> if the specified action is supported on
      *         the current platform; <code>false</code> otherwise
@@ -196,6 +260,10 @@ public class Desktop {
     /**
      * Checks if the file is a valid file and readable.
      *
+     * <p>
+     *  检查文件是否是有效的文件并且可读。
+     * 
+     * 
      * @throws SecurityException If a security manager exists and its
      *         {@link SecurityManager#checkRead(java.lang.String)} method
      *         denies read access to the file
@@ -216,6 +284,10 @@ public class Desktop {
     /**
      * Checks if the action type is supported.
      *
+     * <p>
+     *  检查操作类型是否受支持。
+     * 
+     * 
      * @param actionType the action type in question
      * @throws UnsupportedOperationException if the specified action type is not
      *         supported on the current platform
@@ -232,6 +304,10 @@ public class Desktop {
      *  Calls to the security manager's <code>checkPermission</code> method with
      *  an <code>AWTPermission("showWindowWithoutWarningBanner")</code>
      *  permission.
+     * <p>
+     *  使用<code> AWTPermission("showWindowWithoutWarningBanner")</code>权限调用安全管理器的<code> checkPermission </code>
+     * 方法。
+     * 
      */
     private void checkAWTPermission(){
         SecurityManager sm = System.getSecurityManager();
@@ -247,6 +323,12 @@ public class Desktop {
      * <p> If the specified file is a directory, the file manager of
      * the current platform is launched to open it.
      *
+     * <p>
+     * 启动相关应用程序以打开文件。
+     * 
+     *  <p>如果指定的文件是目录,则启动当前平台的文件管理器以将其打开。
+     * 
+     * 
      * @param file the file to be opened with the associated application
      * @throws NullPointerException if {@code file} is {@code null}
      * @throws IllegalArgumentException if the specified file doesn't
@@ -276,6 +358,10 @@ public class Desktop {
      * Launches the associated editor application and opens a file for
      * editing.
      *
+     * <p>
+     *  启动关联的编辑器应用程序,并打开一个文件进行编辑。
+     * 
+     * 
      * @param file the file to be opened for editing
      * @throws NullPointerException if the specified file is {@code null}
      * @throws IllegalArgumentException if the specified file doesn't
@@ -308,6 +394,10 @@ public class Desktop {
      * Prints a file with the native desktop printing facility, using
      * the associated application's print command.
      *
+     * <p>
+     *  使用相关应用程序的打印命令使用本地桌面打印设备打印文件。
+     * 
+     * 
      * @param file the file to be printed
      * @throws NullPointerException if the specified file is {@code
      * null}
@@ -351,6 +441,14 @@ public class Desktop {
      * a Java Web Started application, {@code BasicService.showDocument()}
      * is used.
      *
+     * <p>
+     *  启动默认浏览器以显示{@code URI}。如果默认浏览器无法处理指定的{@code URI},则会调用为处理指定类型的{@code URIs}而注册的应用程序。
+     * 应用程序根据{@code URI}类定义的{@code URI}的协议和路径确定。
+     * <p>
+     *  如果调用线程没有必要的权限,并且这是从一个applet中调用,则使用{@code AppletContext.showDocument()}。
+     * 同样,如果调用没有必要的权限,并且这是从Java Web Started应用程序中调用,则使用{@code BasicService.showDocument()}。
+     * 
+     * 
      * @param uri the URI to be displayed in the user default browser
      * @throws NullPointerException if {@code uri} is {@code null}
      * @throws UnsupportedOperationException if the current platform
@@ -408,6 +506,10 @@ public class Desktop {
      * Launches the mail composing window of the user default mail
      * client.
      *
+     * <p>
+     *  启动用户默认邮件客户端的邮件编写窗口。
+     * 
+     * 
      * @throws UnsupportedOperationException if the current platform
      * does not support the {@link Desktop.Action#MAIL} action
      * @throws IOException if the user default mail client is not
@@ -444,6 +546,12 @@ public class Desktop {
      * scheme (RFC 2368)</a> for the {@code mailto:} URI specification
      * details.
      *
+     * <p>
+     *  启动用户默认邮件客户端的邮件编写窗口,填写{@code mailto：} URI指定的邮件字段。
+     * 
+     *  <p> <code> mailto：</code> URI可以指定包含<i>"至"</i>,<i>"cc"</i>,<i> >,<i>"body"</i>等。
+     * 请参阅<a href="http://www.ietf.org/rfc/rfc2368.txt"> mailto URL方案(RFC 2368)</a>用于{@code mailto：} URI规范详细
+     * 
      * @param mailtoURI the specified {@code mailto:} URI
      * @throws NullPointerException if the specified URI is {@code
      * null}

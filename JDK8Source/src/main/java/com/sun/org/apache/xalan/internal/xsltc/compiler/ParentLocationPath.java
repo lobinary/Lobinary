@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ParentLocationPath.java,v 1.2.4.1 2005/09/12 10:56:30 pvedula Exp $
+ * <p>
+ *  $ Id：ParentLocationPath.java,v 1.2.4.1 2005/09/12 10:56:30 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -41,6 +54,8 @@ import com.sun.org.apache.xml.internal.dtm.Axis;
 import com.sun.org.apache.xml.internal.dtm.DTM;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
@@ -110,6 +125,9 @@ final class ParentLocationPath extends RelativeLocationPath {
      * This method is used to determine if this parent location path is a
      * combination of two step's with axes that will create duplicate or
      * unordered nodes.
+     * <p>
+     *  此方法用于确定此父位置路径是否是两个步骤与轴的组合,这些轴将创建重复节点或无序节点。
+     * 
      */
     public boolean checkAxisMismatch() {
 
@@ -238,6 +256,11 @@ final class ParentLocationPath extends RelativeLocationPath {
          * run the risk of returning the same node several times. We put
          * a new iterator on top of the existing one to assure node order
          * and prevent returning a single node multiple times.
+         * <p>
+         *  表达式stp = _step; if(stp instanceof ParentLocationPath)stp =((ParentLocationPath)stp).getStep();
+         * 
+         *  if((_path instanceof Step)&&(stp instanceof Step)){final int path =((Step)_path).getAxis(); final int step =((Step)stp).getAxis(); if((path == Axis.DESCENDANTORSELF && step == Axis.CHILD)||(path == Axis.PRECEDING && step == Axis.PARENT)){final int incl = cpg.addMethodref(NODE_ITERATOR_BASE,"includeSelf" "()"+ NODE_ITERATOR_SIG); il.append(new INVOKEVIRTUAL(incl)); }
+         * }。
          */
         if (_orderNodes) {
             final int order = cpg.addInterfaceMethodref(DOM_INTF,

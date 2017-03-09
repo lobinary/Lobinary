@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import com.sun.java.swing.plaf.windows.XPStyle.Skin;
 /**
  * Windows L&F implementation of PopupMenuSeparatorUI.
  *
+ * <p>
+ *  Windows L&F实现PopupMenuSeparatorUI。
+ * 
+ * 
  * @author Leif Samuelsson
  * @author Igor Kushnirskiy
  */
@@ -63,6 +68,8 @@ public class WindowsPopupMenuSeparatorUI extends BasicPopupMenuSeparatorUI {
                      * gutter offset is in parent's coordinates.
                      * See comment in
                      * WindowsPopupMenuUI.getTextOffset(JComponent)
+                     * <p>
+                     *  gutter offset是父节点的坐标。请参阅WindowsPopupMenuUI.getTextOffset中的注释(JComponent)
                      */
                     x = ((Integer) gutterOffsetObject).intValue() - c.getX();
                     x += WindowsPopupMenuUI.getGutterWidth();

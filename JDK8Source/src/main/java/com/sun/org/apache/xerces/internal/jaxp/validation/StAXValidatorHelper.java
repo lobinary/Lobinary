@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,9 @@ import org.xml.sax.SAXException;
 /**
  * <p>A validator helper for <code>StAXSource</code>s.</p>
  *
+ * <p>
+ *  <p> <code> StAXSource </code>的验证工具助手。</p>
+ * 
  * @author <a href="mailto:Sunitha.Reddy@Sun.com">Sunitha Reddy</a>
  */
 public final class StAXValidatorHelper implements ValidatorHelper {

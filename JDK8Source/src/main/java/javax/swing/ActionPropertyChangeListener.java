@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,15 @@ import java.lang.ref.ReferenceQueue;
  * a strong reference will be held to the containing class, which in most
  * cases defeats the purpose of this class.
  *
+ * <p>
+ *  一个package-private PropertyChangeListener,用于监听Action上的属性更改,并更新ActionEvent源的属性。
+ * <p>
+ *  子类必须重写actionPropertyChanged方法,该方法从propertyChange方法调用,只要目标仍然有效。
+ * </p>
+ * <p>
+ *  警告警告警告警告警告警告：<br>不要创建一个扩展这个的匿名内部类！如果你做一个强引用将被持有到包含的类,这在大多数情况下失败这个类的目的。
+ * 
+ * 
  * @param T the type of JComponent the underlying Action is attached to
  *
  * @author Georges Saab
@@ -79,6 +89,7 @@ abstract class ActionPropertyChangeListener<T extends JComponent>
      * PropertyChangeListener method.  If the target has been gc'ed this
      * will remove the <code>PropertyChangeListener</code> from the Action,
      * otherwise this will invoke actionPropertyChanged.
+     * <p>
      */
     public final void propertyChange(PropertyChangeEvent e) {
         T target = getTarget();
@@ -92,6 +103,10 @@ abstract class ActionPropertyChangeListener<T extends JComponent>
     /**
      * Invoked when a property changes on the Action and the target
      * still exists.
+     * <p>
+     *  PropertyChangeListener方法。
+     * 如果目标已经gc'ed这将从Action中删除<code> PropertyChangeListener </code>,否则将调用actionPropertyChanged。
+     * 
      */
     protected abstract void actionPropertyChanged(T target, Action action,
                                                   PropertyChangeEvent e);

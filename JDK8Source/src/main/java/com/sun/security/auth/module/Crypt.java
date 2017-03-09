@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,18 @@
  * alphabet as the salt.  The first two characters are the salt
  * itself.
  *
+ * <p>
+ *  实现UNIX crypt(3)函数,基于libc crypt函数的直接端口。
+ * 
+ * <p>
+ *  从土窖手册页：
+ * <p>
+ *  crypt()是基于NBS数据加密标准的密码加密例程,其中旨在(除其他之外)阻碍对用于密钥搜索的DES的硬件实现的使用的变化。
+ * <p>
+ *  crypt()的第一个参数通常是用户输入的密码。第二个是从字符集[a-zA-Z0-9./]中选择的2个字符的字符串。
+ * 盐串用于以4096种不同的方式之一干扰DES算法,之后密码用作重复加密恒定字符串的密钥。返回的值指向加密的密码,与盐的字母表相同。前两个字符是盐本身。
+ * 
+ * 
  * @author Roland Schemers
  */
 
@@ -278,6 +291,9 @@ class Crypt {
     /**
      * Creates a new Crypt object for use with the crypt method.
      *
+     * <p>
+     *  创建一个新的Crypt对象用于crypt方法。
+     * 
      */
 
     public Crypt()
@@ -289,6 +305,10 @@ class Crypt {
     /**
      * Implements the libc crypt(3) function.
      *
+     * <p>
+     *  实现libc crypt(3)函数。
+     * 
+     * 
      * @param pw the password to "encrypt".
      *
      * @param salt the salt to use.
@@ -373,6 +393,10 @@ class Crypt {
      * the salt to use. The salt should be two characters from the
      * set [a-zA-Z0-9./]. Outputs the crypt result.
      *
+     * <p>
+     *  程序来测试crypt例程。
+     * 
+     * 
      * @param arg command line arguments.
      *
      */

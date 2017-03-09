@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XNodeSet.java,v 1.2.4.2 2005/09/14 20:34:45 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XNodeSet.java,v 1.2.4.2 2005/09/14 20:34:45 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.objects;
 
@@ -36,12 +49,18 @@ import org.w3c.dom.traversal.NodeIterator;
  * This class represents an XPath nodeset object, and is capable of
  * converting the nodeset to other types, such as a string.
  * @xsl.usage general
+ * <p>
+ *  此类表示XPath nodeset对象,并且能够将节点集转换为其他类型,例如字符串。 @ xsl.usage general
+ * 
  */
 public class XNodeSet extends NodeSequence
 {
     static final long serialVersionUID = 1916026368035639667L;
   /**
    * Default constructor for derived objects.
+   * <p>
+   *  派生对象的默认构造函数。
+   * 
    */
   protected XNodeSet()
   {
@@ -50,6 +69,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Construct a XNodeSet object.
    *
+   * <p>
+   *  构造一个XNodeSet对象。
+   * 
+   * 
    * @param val Value of the XNodeSet object
    */
   public XNodeSet(DTMIterator val)
@@ -76,6 +99,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Construct a XNodeSet object.
    *
+   * <p>
+   *  构造一个XNodeSet对象。
+   * 
+   * 
    * @param val Value of the XNodeSet object
    */
   public XNodeSet(XNodeSet val)
@@ -93,6 +120,9 @@ public class XNodeSet extends NodeSequence
   /**
    * Construct an empty XNodeSet object.  This is used to create a mutable
    * nodeset to which random nodes may be added.
+   * <p>
+   *  构造一个空的XNodeSet对象。这用于创建可以添加随机节点的可变节点集。
+   * 
    */
   public XNodeSet(DTMManager dtmMgr)
   {
@@ -102,6 +132,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Construct a XNodeSet object for one node.
    *
+   * <p>
+   *  为一个节点构造XNodeSet对象。
+   * 
+   * 
    * @param n Node to add to the new XNodeSet object
    */
   public XNodeSet(int n, DTMManager dtmMgr)
@@ -122,6 +156,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Tell that this is a CLASS_NODESET.
    *
+   * <p>
+   *  告诉这是一个CLASS_NODESET。
+   * 
+   * 
    * @return type CLASS_NODESET
    */
   public int getType()
@@ -133,6 +171,10 @@ public class XNodeSet extends NodeSequence
    * Given a request type, return the equivalent string.
    * For diagnostic purposes.
    *
+   * <p>
+   *  给定一个请求类型,返回等效的字符串。用于诊断目的。
+   * 
+   * 
    * @return type string "#NODESET"
    */
   public String getTypeString()
@@ -143,6 +185,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Get numeric value of the string conversion from a single node.
    *
+   * <p>
+   *  从单个节点获取字符串转换的数值。
+   * 
+   * 
    * @param n Node to convert
    *
    * @return numeric value of the string conversion from a single node.
@@ -156,6 +202,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a number.
    *
+   * <p>
+   *  将结果对象转换为数字。
+   * 
+   * 
    * @return numeric value of the string conversion from the
    * next node in the NodeSetDTM, or NAN if no node was found
    */
@@ -170,6 +220,10 @@ public class XNodeSet extends NodeSequence
    * Cast result object to a number, but allow side effects, such as the
    * incrementing of an iterator.
    *
+   * <p>
+   *  将结果对象转换为数字,但允许出现副作用,例如迭代器的递增。
+   * 
+   * 
    * @return numeric value of the string conversion from the
    * next node in the NodeSetDTM, or NAN if no node was found
    */
@@ -184,6 +238,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a boolean.
    *
+   * <p>
+   * 将结果对象转换为布尔值。
+   * 
+   * 
    * @return True if there is a next node in the nodeset
    */
   public boolean bool()
@@ -195,6 +253,10 @@ public class XNodeSet extends NodeSequence
    * Cast result object to a boolean, but allow side effects, such as the
    * incrementing of an iterator.
    *
+   * <p>
+   *  将结果对象转换为布尔值,但允许副作用,例如迭代器的递增。
+   * 
+   * 
    * @return True if there is a next node in the nodeset
    */
   public boolean boolWithSideEffects()
@@ -206,6 +268,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Get the string conversion from a single node.
    *
+   * <p>
+   *  从单个节点获取字符串转换。
+   * 
+   * 
    * @param n Node to convert
    *
    * @return the string conversion from a single node.
@@ -231,6 +297,10 @@ public class XNodeSet extends NodeSequence
    * ContentHandler's characters methods may well occur for a single call to
    * this method.
    *
+   * <p>
+   *  直接调用传递的ContentHandler中的字符方法的字符串值。对ContentHandler的字符方法的多次调用很可能发生在对此方法的单个调用中。
+   * 
+   * 
    * @param ch A non-null reference to a ContentHandler.
    *
    * @throws org.xml.sax.SAXException
@@ -250,6 +320,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to an XMLString.
    *
+   * <p>
+   *  将结果对象强制转换为XMLString。
+   * 
+   * 
    * @return The document fragment node data or the empty string.
    */
   public XMLString xstr()
@@ -261,6 +335,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a string.
    *
+   * <p>
+   *  将结果对象转换为字符串。
+   * 
+   * 
    * @return The string this wraps or the empty string if null
    */
   public void appendToFsb(com.sun.org.apache.xml.internal.utils.FastStringBuffer fsb)
@@ -273,6 +351,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a string.
    *
+   * <p>
+   *  将结果对象转换为字符串。
+   * 
+   * 
    * @return the string conversion from the next node in the nodeset
    * or "" if there is no next node
    */
@@ -286,6 +368,10 @@ public class XNodeSet extends NodeSequence
    * Return a java object that's closest to the representation
    * that should be handed to an extension.
    *
+   * <p>
+   *  返回最接近应该传递给扩展的表示的java对象。
+   * 
+   * 
    * @return The object that this class wraps
    */
   public Object object()
@@ -301,6 +387,10 @@ public class XNodeSet extends NodeSequence
 //  /**
 //   * Cast result object to a result tree fragment.
 //   *
+//   * <p>
+//   *  // *将结果对象转换为结果树片段。 // *
+//   * 
+//   * 
 //   * @param support The XPath context to use for the conversion
 //   *
 //   * @return the nodeset as a result tree fragment.
@@ -327,6 +417,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a nodelist.
    *
+   * <p>
+   *  将结果对象转换为节点列表。
+   * 
+   * 
    * @return a NodeIterator.
    *
    * @throws javax.xml.transform.TransformerException
@@ -339,6 +433,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a nodelist.
    *
+   * <p>
+   *  将结果对象转换为节点列表。
+   * 
+   * 
    * @return a NodeList.
    *
    * @throws javax.xml.transform.TransformerException
@@ -360,6 +458,10 @@ public class XNodeSet extends NodeSequence
 //   * Return a java object that's closest to the representation
 //   * that should be handed to an extension.
 //   *
+//   * <p>
+//   *  // *返回一个最接近于应该传递给扩展的表示形式// *的java对象。 // *
+//   * 
+//   * 
 //   * @return The object that this class wraps
 //   */
 //  public Object object()
@@ -369,6 +471,9 @@ public class XNodeSet extends NodeSequence
 
   /**
    * Return the iterator without cloning, etc.
+   * <p>
+   *  返回迭代器而不克隆等。
+   * 
    */
   public DTMIterator iterRaw()
   {
@@ -382,6 +487,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a nodelist.
    *
+   * <p>
+   *  将结果对象转换为节点列表。
+   * 
+   * 
    * @return The nodeset as a nodelist
    */
   public DTMIterator iter()
@@ -402,6 +511,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Get a fresh copy of the object.  For use with variables.
    *
+   * <p>
+   *  获取对象的新副本。用于变量。
+   * 
+   * 
    * @return A fresh nodelist.
    */
   public XObject getFresh()
@@ -422,6 +535,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a mutableNodeset.
    *
+   * <p>
+   *  将结果对象转换为mutableNodeset。
+   * 
+   * 
    * @return The nodeset as a mutableNodeset
    */
   public NodeSetDTM mutableNodeset()
@@ -464,6 +581,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Tell if one object is less than the other.
    *
+   * <p>
+   *  告诉一个对象是否小于另一个对象。
+   * 
+   * 
    * @param obj2 Object to compare this nodeset to
    * @param comparator Comparator to use
    *
@@ -637,6 +758,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Tell if one object is less than the other.
    *
+   * <p>
+   *  告诉一个对象是否小于另一个对象。
+   * 
+   * 
    * @param obj2 object to compare this nodeset to
    *
    * @return see this.compare(...)
@@ -651,6 +776,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Tell if one object is less than or equal to the other.
    *
+   * <p>
+   *  告诉一个对象是否小于或等于另一个对象。
+   * 
+   * 
    * @param obj2 object to compare this nodeset to
    *
    * @return see this.compare(...)
@@ -665,6 +794,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Tell if one object is less than the other.
    *
+   * <p>
+   *  告诉一个对象是否小于另一个对象。
+   * 
+   * 
    * @param obj2 object to compare this nodeset to
    *
    * @return see this.compare(...)
@@ -679,6 +812,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Tell if one object is less than the other.
    *
+   * <p>
+   *  告诉一个对象是否小于另一个对象。
+   * 
+   * 
    * @param obj2 object to compare this nodeset to
    *
    * @return see this.compare(...)
@@ -694,6 +831,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Tell if two objects are functionally equal.
    *
+   * <p>
+   *  告诉两个对象在功能上是否相等。
+   * 
+   * 
    * @param obj2 object to compare this nodeset to
    *
    * @return see this.compare(...)
@@ -715,6 +856,10 @@ public class XNodeSet extends NodeSequence
   /**
    * Tell if two objects are functionally not equal.
    *
+   * <p>
+   *  告诉两个对象在功能上是否不相等。
+   * 
+   * 
    * @param obj2 object to compare this nodeset to
    *
    * @return see this.compare(...)
@@ -729,6 +874,9 @@ public class XNodeSet extends NodeSequence
 
 /**
  * compares nodes for various boolean operations.
+ * <p>
+ *  比较各种布尔运算的节点。
+ * 
  */
 abstract class Comparator
 {
@@ -737,6 +885,10 @@ abstract class Comparator
    * Compare two strings
    *
    *
+   * <p>
+   *  比较两个字符串
+   * 
+   * 
    * @param s1 First string to compare
    * @param s2 Second String to compare
    *
@@ -748,6 +900,10 @@ abstract class Comparator
    * Compare two numbers
    *
    *
+   * <p>
+   *  比较两个数字
+   * 
+   * 
    * @param n1 First number to compare
    * @param n2 Second number to compare
    *
@@ -758,6 +914,9 @@ abstract class Comparator
 
 /**
  * Compare strings or numbers for less than.
+ * <p>
+ *  比较字符串或数字小于。
+ * 
  */
 class LessThanComparator extends Comparator
 {
@@ -766,6 +925,10 @@ class LessThanComparator extends Comparator
    * Compare two strings for less than.
    *
    *
+   * <p>
+   *  比较两个字符串小于。
+   * 
+   * 
    * @param s1 First string to compare
    * @param s2 Second String to compare
    *
@@ -781,6 +944,10 @@ class LessThanComparator extends Comparator
    * Compare two numbers for less than.
    *
    *
+   * <p>
+   * 比较两个数字小于。
+   * 
+   * 
    * @param n1 First number to compare
    * @param n2 Second number to compare
    *
@@ -794,6 +961,9 @@ class LessThanComparator extends Comparator
 
 /**
  * Compare strings or numbers for less than or equal.
+ * <p>
+ *  比较字符串或数字小于或等于。
+ * 
  */
 class LessThanOrEqualComparator extends Comparator
 {
@@ -802,6 +972,10 @@ class LessThanOrEqualComparator extends Comparator
    * Compare two strings for less than or equal.
    *
    *
+   * <p>
+   *  比较两个字符串小于或等于。
+   * 
+   * 
    * @param s1 First string to compare
    * @param s2 Second String to compare
    *
@@ -817,6 +991,10 @@ class LessThanOrEqualComparator extends Comparator
    * Compare two numbers for less than or equal.
    *
    *
+   * <p>
+   *  比较两个数小于或等于。
+   * 
+   * 
    * @param n1 First number to compare
    * @param n2 Second number to compare
    *
@@ -830,6 +1008,9 @@ class LessThanOrEqualComparator extends Comparator
 
 /**
  * Compare strings or numbers for greater than.
+ * <p>
+ *  比较字符串或数字大于。
+ * 
  */
 class GreaterThanComparator extends Comparator
 {
@@ -838,6 +1019,10 @@ class GreaterThanComparator extends Comparator
    * Compare two strings for greater than.
    *
    *
+   * <p>
+   *  比较两个字符串是否大于。
+   * 
+   * 
    * @param s1 First string to compare
    * @param s2 Second String to compare
    *
@@ -853,6 +1038,10 @@ class GreaterThanComparator extends Comparator
    * Compare two numbers for greater than.
    *
    *
+   * <p>
+   *  比较两个数字大于。
+   * 
+   * 
    * @param n1 First number to compare
    * @param n2 Second number to compare
    *
@@ -866,6 +1055,9 @@ class GreaterThanComparator extends Comparator
 
 /**
  * Compare strings or numbers for greater than or equal.
+ * <p>
+ *  比较字符串或数字大于或等于。
+ * 
  */
 class GreaterThanOrEqualComparator extends Comparator
 {
@@ -874,6 +1066,10 @@ class GreaterThanOrEqualComparator extends Comparator
    * Compare two strings for greater than or equal.
    *
    *
+   * <p>
+   *  比较两个字符串是否大于或等于。
+   * 
+   * 
    * @param s1 First string to compare
    * @param s2 Second String to compare
    *
@@ -889,6 +1085,10 @@ class GreaterThanOrEqualComparator extends Comparator
    * Compare two numbers for greater than or equal.
    *
    *
+   * <p>
+   *  比较两个数字大于或等于。
+   * 
+   * 
    * @param n1 First number to compare
    * @param n2 Second number to compare
    *
@@ -902,6 +1102,9 @@ class GreaterThanOrEqualComparator extends Comparator
 
 /**
  * Compare strings or numbers for equality.
+ * <p>
+ *  比较字符串或数字的相等性。
+ * 
  */
 class EqualComparator extends Comparator
 {
@@ -910,6 +1113,10 @@ class EqualComparator extends Comparator
    * Compare two strings for equality.
    *
    *
+   * <p>
+   *  比较两个字符串的相等性。
+   * 
+   * 
    * @param s1 First string to compare
    * @param s2 Second String to compare
    *
@@ -924,6 +1131,10 @@ class EqualComparator extends Comparator
    * Compare two numbers for equality.
    *
    *
+   * <p>
+   *  比较两个数字是否相等。
+   * 
+   * 
    * @param n1 First number to compare
    * @param n2 Second number to compare
    *
@@ -937,6 +1148,9 @@ class EqualComparator extends Comparator
 
 /**
  * Compare strings or numbers for non-equality.
+ * <p>
+ *  比较字符串或数字不相等。
+ * 
  */
 class NotEqualComparator extends Comparator
 {
@@ -945,6 +1159,10 @@ class NotEqualComparator extends Comparator
    * Compare two strings for non-equality.
    *
    *
+   * <p>
+   *  比较两个字符串是否不相等。
+   * 
+   * 
    * @param s1 First string to compare
    * @param s2 Second String to compare
    *
@@ -959,6 +1177,9 @@ class NotEqualComparator extends Comparator
    * Compare two numbers for non-equality.
    *
    *
+   * <p>
+   *  比较两个数字不相等。
+   * 
    * @param n1 First number to compare
    * @param n2 Second number to compare
    *

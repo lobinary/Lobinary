@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,10 @@
  * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
  * PURPOSE.
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ * <p>
+ *  版权所有(c)2000万维网联盟,(马萨诸塞理工学院,庆应义藩大学信息自动化研究所)。版权所有。该程序根据W3C的软件知识产权许可证分发。
+ * 这个程序是分发的,希望它将是有用的,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证。有关详细信息,请参阅W3C许可证http://www.w3.org/Consortium/Legal/。
+ * 
  */
 
 package org.w3c.dom.traversal;
@@ -53,12 +58,23 @@ import org.w3c.dom.DOMException;
  * Traversal feature, <code>DocumentTraversal</code> will be implemented by
  * the same objects that implement the Document interface.
  * <p>See also the <a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113'>Document Object Model (DOM) Level 2 Traversal and Range Specification</a>.
+ * <p>
+ *  <code> DocumentTraversal </code>包含创建<code> NodeIterators </code>和<code> TreeWalkers </code>以文档顺序遍历节点
+ * 及其子节点的方法(深度优先,预订遍历等价于文档的文本表示中开始标签出现的顺序)。
+ * 在支持遍历功能的DOM中,<code> DocumentTraversal </code>将由实现Document接口的相同对象实现。
+ *  <p>另请参阅<a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Taversal-Range-20001113'>文档对象模型(DOM)2级遍历和范
+ * 围规范</a>。
+ * 在支持遍历功能的DOM中,<code> DocumentTraversal </code>将由实现Document接口的相同对象实现。
+ * 
+ * 
  * @since DOM Level 2
  */
 public interface DocumentTraversal {
     /**
      * Create a new <code>NodeIterator</code> over the subtree rooted at the
      * specified node.
+     * <p>
+     * 
      * @param root The node which will be iterated together with its
      *   children. The <code>NodeIterator</code> is initially positioned
      *   just before this node. The <code>whatToShow</code> flags and the
@@ -88,6 +104,10 @@ public interface DocumentTraversal {
     /**
      * Create a new <code>TreeWalker</code> over the subtree rooted at the
      * specified node.
+     * <p>
+     *  在以指定节点为根的子树上创建一个新的<code> NodeIterator </code>。
+     * 
+     * 
      * @param root The node which will serve as the <code>root</code> for the
      *   <code>TreeWalker</code>. The <code>whatToShow</code> flags and the
      *   <code>NodeFilter</code> are not considered when setting this value;

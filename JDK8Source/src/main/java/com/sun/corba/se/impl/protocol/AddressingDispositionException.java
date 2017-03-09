@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,11 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.KeyAddr;
  * which the client ORB shall use to transparently retry the request
  * with the correct disposition.
  *
+ * <p>
+ *  读取GIOP 1.2 Request,LocateRequest以指示TargetAddress处置是不可接受的时抛出此异常。如果明确捕获此异常,则需要重新引用。
+ * 这最终在RequestPRocessor中处理,并且适当的答复被发送回客户端。
+ * 
+ *  GIOP 1.2允许三种配置：KeyAddr(ObjectKey),ProfileAddr(ior profile),IORAddressingInfo(IOR)。
  */
 public class AddressingDispositionException extends RuntimeException {
 

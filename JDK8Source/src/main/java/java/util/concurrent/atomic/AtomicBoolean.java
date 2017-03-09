@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.atomic;
@@ -44,6 +48,11 @@ import sun.misc.Unsafe;
  * updated flags, and cannot be used as a replacement for a
  * {@link java.lang.Boolean}.
  *
+ * <p>
+ *  可以原子方式更新的{@code boolean}值。有关原子变量属性的描述,请参阅{@link java.util.concurrent.atomic}包规范。
+ *  {@code AtomicBoolean}用于应用程序中,例如原子更新的标志,不能用作{@link java.lang.Boolean}的替代。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -65,6 +74,10 @@ public class AtomicBoolean implements java.io.Serializable {
     /**
      * Creates a new {@code AtomicBoolean} with the given initial value.
      *
+     * <p>
+     *  创建具有给定初始值的新{@code AtomicBoolean}。
+     * 
+     * 
      * @param initialValue the initial value
      */
     public AtomicBoolean(boolean initialValue) {
@@ -73,6 +86,9 @@ public class AtomicBoolean implements java.io.Serializable {
 
     /**
      * Creates a new {@code AtomicBoolean} with initial value {@code false}.
+     * <p>
+     *  创建一个带有初始值{@code false}的新{@code AtomicBoolean}。
+     * 
      */
     public AtomicBoolean() {
     }
@@ -80,6 +96,10 @@ public class AtomicBoolean implements java.io.Serializable {
     /**
      * Returns the current value.
      *
+     * <p>
+     *  返回当前值。
+     * 
+     * 
      * @return the current value
      */
     public final boolean get() {
@@ -90,6 +110,10 @@ public class AtomicBoolean implements java.io.Serializable {
      * Atomically sets the value to the given updated value
      * if the current value {@code ==} the expected value.
      *
+     * <p>
+     *  如果当前值{@code ==}为期望值,则将该值原子地设置为给定的更新值。
+     * 
+     * 
      * @param expect the expected value
      * @param update the new value
      * @return {@code true} if successful. False return indicates that
@@ -109,6 +133,13 @@ public class AtomicBoolean implements java.io.Serializable {
      * spuriously and does not provide ordering guarantees</a>, so is
      * only rarely an appropriate alternative to {@code compareAndSet}.
      *
+     * <p>
+     *  如果当前值{@code ==}为期望值,则将该值原子地设置为给定的更新值。
+     * 
+     *  <p> <a href="package-summary.html#weakCompareAndSet">可能会失败,并且不提供排序保证</a>,因此很少是{@code compareAndSet}的
+     * 适当替代品。
+     * 
+     * 
      * @param expect the expected value
      * @param update the new value
      * @return {@code true} if successful
@@ -122,6 +153,10 @@ public class AtomicBoolean implements java.io.Serializable {
     /**
      * Unconditionally sets to the given value.
      *
+     * <p>
+     *  无条件设置为给定值。
+     * 
+     * 
      * @param newValue the new value
      */
     public final void set(boolean newValue) {
@@ -131,6 +166,10 @@ public class AtomicBoolean implements java.io.Serializable {
     /**
      * Eventually sets to the given value.
      *
+     * <p>
+     *  最终设置为给定值。
+     * 
+     * 
      * @param newValue the new value
      * @since 1.6
      */
@@ -142,6 +181,10 @@ public class AtomicBoolean implements java.io.Serializable {
     /**
      * Atomically sets to the given value and returns the previous value.
      *
+     * <p>
+     *  原子设置为给定值,并返回上一个值。
+     * 
+     * 
      * @param newValue the new value
      * @return the previous value
      */
@@ -155,6 +198,9 @@ public class AtomicBoolean implements java.io.Serializable {
 
     /**
      * Returns the String representation of the current value.
+     * <p>
+     *  返回当前值的字符串表示形式。
+     * 
      * @return the String representation of the current value
      */
     public String toString() {

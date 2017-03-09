@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import javax.management.Notification;
  * <p>This class is used to associate an emitted notification
  *    with the listener ID to which it is targeted.</p>
  *
+ * <p>
+ *  <p> A(通知,侦听器ID)对。</p> <p>此类用于将发出的通知与其定位的侦听器ID相关联。</p>
+ * 
+ * 
  * @since 1.5
  */
 public class TargetedNotification implements Serializable {
@@ -51,6 +56,12 @@ public class TargetedNotification implements Serializable {
 //      * notification is targeted. The client listener ID is one
 //      * previously returned by the connector server in response to an
 //      * <code>addNotificationListener</code> request.</p>
+//      * <p>
+//      *  // * <p>构造一个<code> TargetedNotification </code>对象。 // *对象包含一个对(Notification,Listener ID)。
+//      *  // *侦听器ID标识// *通知所针对的客户端侦听器。
+//      * 客户端侦听器ID是连接器服务器响应于// * <code> addNotificationListener </code>请求而先前返回的一个// *。</p>。
+//      * 
+//      * 
 //      * @param notification Notification emitted from the MBean server.
 //      * @param listenerID   The ID of the listener to which this
 //      *        notification is targeted.
@@ -68,6 +79,11 @@ public class TargetedNotification implements Serializable {
      * notification is targeted. The client listener ID is one
      * previously returned by the connector server in response to an
      * <code>addNotificationListener</code> request.</p>
+     * <p>
+     *  <p>构造一个<code> TargetedNotification </code>对象。对象包含一个对(通知,侦听器ID)。侦听器ID标识该通知所针对的客户端侦听器。
+     * 客户端侦听器ID是由连接器服务器先前为响应<code> addNotificationListener </code>请求而返回的一个。</p>。
+     * 
+     * 
      * @param notification Notification emitted from the MBean server.
      * @param listenerID   The ID of the listener to which this
      *        notification is targeted.
@@ -86,6 +102,10 @@ public class TargetedNotification implements Serializable {
     /**
      * <p>The emitted notification.</p>
      *
+     * <p>
+     *  <p>发出的通知。</p>
+     * 
+     * 
      * @return The notification.
      */
     public Notification getNotification() {
@@ -96,6 +116,10 @@ public class TargetedNotification implements Serializable {
      * <p>The ID of the listener to which the notification is
      *    targeted.</p>
      *
+     * <p>
+     *  <p>通知所针对的侦听器的ID。</p>
+     * 
+     * 
      * @return The listener ID.
      */
     public Integer getListenerID() {
@@ -105,6 +129,10 @@ public class TargetedNotification implements Serializable {
     /**
      * Returns a textual representation of this Targeted Notification.
      *
+     * <p>
+     *  返回此定位通知的文本表示。
+     * 
+     * 
      * @return a String representation of this Targeted Notification.
      **/
     public String toString() {
@@ -112,11 +140,15 @@ public class TargetedNotification implements Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial A notification to transmit to the other side.
      * @see #getNotification()
      **/
     private Notification notif;
     /**
+    /* <p>
+    /* 
      * @serial The ID of the listener to which the notification is
      *         targeted.
      * @see #getListenerID()

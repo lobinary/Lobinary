@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,10 @@ import java.util.function.ToLongFunction;
  * Abstract base class for an intermediate pipeline stage or pipeline source
  * stage implementing whose elements are of type {@code U}.
  *
+ * <p>
+ *  抽象基类,用于实现其元素类型为{@code U}的中间流水线阶段或流水线源阶段。
+ * 
+ * 
  * @param <P_IN> type of elements in the upstream source
  * @param <P_OUT> type of elements in produced by this stage
  *
@@ -61,6 +66,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
     /**
      * Constructor for the head of a stream pipeline.
      *
+     * <p>
+     *  流管道头的构造函数。
+     * 
+     * 
      * @param source {@code Supplier<Spliterator>} describing the stream source
      * @param sourceFlags the source flags for the stream source, described in
      *        {@link StreamOpFlag}
@@ -74,6 +83,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
     /**
      * Constructor for the head of a stream pipeline.
      *
+     * <p>
+     *  流管道头的构造函数。
+     * 
+     * 
      * @param source {@code Spliterator} describing the stream source
      * @param sourceFlags The source flags for the stream source, described in
      *        {@link StreamOpFlag}
@@ -88,6 +101,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
      * Constructor for appending an intermediate operation onto an existing
      * pipeline.
      *
+     * <p>
+     *  用于将中间操作附加到现有管道上的构造函数。
+     * 
+     * 
      * @param upstream the upstream element source.
      */
     ReferencePipeline(AbstractPipeline<?, P_IN, ?> upstream, int opFlags) {
@@ -532,6 +549,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
     /**
      * Source stage of a ReferencePipeline.
      *
+     * <p>
+     *  ReferencePipeline的源阶段。
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      * @param <E_OUT> type of elements in produced by this stage
      * @since 1.8
@@ -540,6 +561,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
         /**
          * Constructor for the source stage of a Stream.
          *
+         * <p>
+         *  Stream的源阶段的构造函数。
+         * 
+         * 
          * @param source {@code Supplier<Spliterator>} describing the stream
          *               source
          * @param sourceFlags the source flags for the stream source, described
@@ -553,6 +578,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
         /**
          * Constructor for the source stage of a Stream.
          *
+         * <p>
+         *  Stream的源阶段的构造函数。
+         * 
+         * 
          * @param source {@code Spliterator} describing the stream source
          * @param sourceFlags the source flags for the stream source, described
          *                    in {@link StreamOpFlag}
@@ -598,6 +627,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
     /**
      * Base class for a stateless intermediate stage of a Stream.
      *
+     * <p>
+     *  流的无状态中间阶段的基类。
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      * @param <E_OUT> type of elements in produced by this stage
      * @since 1.8
@@ -608,6 +641,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
          * Construct a new Stream by appending a stateless intermediate
          * operation to an existing stream.
          *
+         * <p>
+         *  通过将无状态中间操作附加到现有流来构造新流。
+         * 
+         * 
          * @param upstream The upstream pipeline stage
          * @param inputShape The stream shape for the upstream pipeline stage
          * @param opFlags Operation flags for the new stage
@@ -628,6 +665,10 @@ abstract class ReferencePipeline<P_IN, P_OUT>
     /**
      * Base class for a stateful intermediate stage of a Stream.
      *
+     * <p>
+     *  流的有状态中间阶段的基类。
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      * @param <E_OUT> type of elements in produced by this stage
      * @since 1.8
@@ -637,6 +678,9 @@ abstract class ReferencePipeline<P_IN, P_OUT>
         /**
          * Construct a new Stream by appending a stateful intermediate operation
          * to an existing stream.
+         * <p>
+         *  通过将有状态中间操作附加到现有流来构造新流。
+         * 
          * @param upstream The upstream pipeline stage
          * @param inputShape The stream shape for the upstream pipeline stage
          * @param opFlags Operation flags for the new stage

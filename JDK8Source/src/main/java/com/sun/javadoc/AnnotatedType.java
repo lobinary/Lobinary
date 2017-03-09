@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ package com.sun.javadoc;
  *      {@code @Positive int}
  * </pre>
  *
+ * <p>
+ *  表示带注释的类型。例如：
+ * <pre>
+ *  {@code @NonNull String} {@code @Positive int}
+ * 
  * @author Mahmood Ali
  * @since 1.8
  */

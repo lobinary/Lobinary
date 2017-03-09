@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,13 @@ import javax.swing.border.*;
  to Use Borders</a>,
  * a section in <em>The Java Tutorial</em>.
  *
+ * <p>
+ *  自动售货标准<code>边框</code>对象的工厂类。只要有可能,这个工厂将提交对共享<code> Border </code>实例的引用。
+ * 有关详细信息和示例,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/border.htmll">如何使用边框
+ * </a>,<em>中的一节。
+ *  自动售货标准<code>边框</code>对象的工厂类。只要有可能,这个工厂将提交对共享<code> Border </code>实例的引用。 Java教程</em>。
+ * 
+ * 
  * @author David Kloba
  */
 public class BorderFactory
@@ -53,6 +61,10 @@ public class BorderFactory
     /**
      * Creates a line border withe the specified color.
      *
+     * <p>
+     *  用指定的颜色创建线边框。
+     * 
+     * 
      * @param color  a <code>Color</code> to use for the line
      * @return the <code>Border</code> object
      */
@@ -67,6 +79,11 @@ public class BorderFactory
      * bottom, left, and right, use
      * {@link #createMatteBorder(int,int,int,int,Color)}.
      *
+     * <p>
+     *  创建具有指定颜色和宽度的线边框。宽度适用于边框的所有四边。
+     * 要单独指定顶部,底部,左侧和右侧的宽度,请使用{@link #createMatteBorder(int,int,int,int,Color)}。
+     * 
+     * 
      * @param color  a <code>Color</code> to use for the line
      * @param thickness  an integer specifying the width in pixels
      * @return the <code>Border</code> object
@@ -78,6 +95,10 @@ public class BorderFactory
     /**
      * Creates a line border with the specified color, thickness, and corner shape.
      *
+     * <p>
+     *  创建具有指定颜色,厚度和角形状的线边框。
+     * 
+     * 
      * @param color      the color of the border
      * @param thickness  the thickness of the border
      * @param rounded    whether or not border corners should be round
@@ -102,6 +123,10 @@ public class BorderFactory
      * (In a raised border, highlights are on top and shadows
      *  are underneath.)
      *
+     * <p>
+     *  创建带有凸起斜面边缘的边框,使用组件当前背景颜色的较亮阴影来突出显示,为阴影使用较暗的阴影。 (在凸起的边框中,高光在顶部,阴影在底部。)
+     * 
+     * 
      * @return the <code>Border</code> object
      */
     public static Border createRaisedBevelBorder() {
@@ -115,6 +140,10 @@ public class BorderFactory
      * (In a lowered border, shadows are on top and highlights
      *  are underneath.)
      *
+     * <p>
+     *  创建具有降低的斜面边缘的边框,使用组件当前背景颜色的较亮阴影来突出显示,为阴影使用较暗的阴影。 (在降低的边框中,阴影位于顶部,高光位于下方。)
+     * 
+     * 
      * @return the <code>Border</code> object
      */
     public static Border createLoweredBevelBorder() {
@@ -128,6 +157,10 @@ public class BorderFactory
      * (In a lowered border, shadows are on top and highlights
      *  are underneath.)
      *
+     * <p>
+     * 创建指定类型的斜角边框,使用组件当前背景颜色的较亮阴影进行突出显示,为阴影使用较深阴影。 (在降低的边框中,阴影位于顶部,高光位于下方。)
+     * 
+     * 
      * @param type  an integer specifying either
      *                  <code>BevelBorder.LOWERED</code> or
      *                  <code>BevelBorder.RAISED</code>
@@ -144,6 +177,10 @@ public class BorderFactory
      * the highlight color. The inner edge of the shadow area
      * uses a brighter shade of the shadow color.
      *
+     * <p>
+     *  使用指定的突出显示和阴影创建指定类型的斜角边框。突出显示区域的外边缘使用突出显示颜色的较亮阴影。阴影区域的内边缘使用阴影颜色的较亮阴影。
+     * 
+     * 
      * @param type  an integer specifying either
      *                  <code>BevelBorder.LOWERED</code> or
      *                  <code>BevelBorder.RAISED</code>
@@ -160,6 +197,10 @@ public class BorderFactory
      * the specified colors for the inner and outer highlight
      * and shadow areas.
      *
+     * <p>
+     *  使用指定的颜色为内部和外部高亮和阴影区域创建指定类型的斜角边框。
+     * 
+     * 
      * @param type  an integer specifying either
      *          <code>BevelBorder.LOWERED</code> or
      *          <code>BevelBorder.RAISED</code>
@@ -201,6 +242,10 @@ public class BorderFactory
      * for highlighting, and darker shading for shadows.
      * In a raised border, highlights are on top and shadows are underneath.
      *
+     * <p>
+     *  创建具有凸起边缘和软化角的斜角边框,使用组件当前背景颜色的较亮阴影来突出显示,为阴影使用较暗的阴影。在凸起的边框中,高光在顶部,阴影在底部。
+     * 
+     * 
      * @return the {@code Border} object
      *
      * @since 1.7
@@ -218,6 +263,10 @@ public class BorderFactory
      * for highlighting, and darker shading for shadows.
      * In a lowered border, shadows are on top and highlights are underneath.
      *
+     * <p>
+     *  创建具有降低的边缘和软化的角的斜面边框,使用组件当前背景颜色的较亮阴影来突出显示,为阴影使用较暗的阴影。在降低的边框中,阴影位于顶部,突出显示在底部。
+     * 
+     * 
      * @return the {@code Border} object
      *
      * @since 1.7
@@ -235,6 +284,11 @@ public class BorderFactory
      * for highlighting, and darker shading for shadows.
      * The type is either {@link BevelBorder#RAISED} or {@link BevelBorder#LOWERED}.
      *
+     * <p>
+     *  使用软化的角创建指定类型的斜角边框,使用组件当前背景颜色的较亮阴影来突出显示,为阴影使用较暗的阴影。
+     * 类型为{@link BevelBorder#RAISED}或{@link BevelBorder#LOWERED}。
+     * 
+     * 
      * @param type  a type of a bevel
      * @return the {@code Border} object or {@code null}
      *         if the specified type is not valid
@@ -261,6 +315,11 @@ public class BorderFactory
      * The inner edge of the shadow area uses
      * a brighter shade of the {@code shadow} color.
      *
+     * <p>
+     * 使用指定的突出显示和阴影,创建具有软化角的指定类型的斜角边框。类型为{@link BevelBorder#RAISED}或{@link BevelBorder#LOWERED}。
+     * 高亮区域的外边缘使用{@code highlight}颜色的较亮阴影。阴影区域的内边缘使用{@code shadow}颜色的较亮阴影。
+     * 
+     * 
      * @param type       a type of a bevel
      * @param highlight  a basic color of the highlight area
      * @param shadow     a basic color of the shadow area
@@ -281,6 +340,11 @@ public class BorderFactory
      * Note: The shadow inner and outer colors are switched
      * for a lowered bevel border.
      *
+     * <p>
+     *  使用指定的颜色为高亮和阴影区域的内部和外部边缘创建具有软化角的指定类型的斜角边框。类型为{@link BevelBorder#RAISED}或{@link BevelBorder#LOWERED}。
+     * 注意：阴影内部和外部颜色会切换为降低的斜角边框。
+     * 
+     * 
      * @param type            a type of a bevel
      * @param highlightOuter  a color of the outer edge of the highlight area
      * @param highlightInner  a color of the inner edge of the highlight area
@@ -305,6 +369,10 @@ public class BorderFactory
      * the component's current background color for
      * highlighting and shading.
      *
+     * <p>
+     *  使用组件的当前背景颜色突出显示和着色,创建带有"蚀刻"外观的边框。
+     * 
+     * 
      * @return the <code>Border</code> object
      */
     public static Border createEtchedBorder()    {
@@ -315,6 +383,10 @@ public class BorderFactory
      * Creates a border with an "etched" look using
      * the specified highlighting and shading colors.
      *
+     * <p>
+     *  使用指定的突出显示和阴影颜色创建具有"蚀刻"外观的边框。
+     * 
+     * 
      * @param highlight  a <code>Color</code> object for the border highlights
      * @param shadow     a <code>Color</code> object for the border shadows
      * @return the <code>Border</code> object
@@ -328,6 +400,10 @@ public class BorderFactory
      * the component's current background color for
      * highlighting and shading.
      *
+     * <p>
+     *  使用组件的当前背景颜色突出显示和着色,创建带有"蚀刻"外观的边框。
+     * 
+     * 
      * @param type      one of <code>EtchedBorder.RAISED</code>, or
      *                  <code>EtchedBorder.LOWERED</code>
      * @return the <code>Border</code> object
@@ -355,6 +431,10 @@ public class BorderFactory
      * Creates a border with an "etched" look using
      * the specified highlighting and shading colors.
      *
+     * <p>
+     *  使用指定的突出显示和阴影颜色创建具有"蚀刻"外观的边框。
+     * 
+     * 
      * @param type      one of <code>EtchedBorder.RAISED</code>, or
      *                  <code>EtchedBorder.LOWERED</code>
      * @param highlight  a <code>Color</code> object for the border highlights
@@ -375,6 +455,10 @@ public class BorderFactory
      * the default justification (leading), and the default
      * font and text color (determined by the current look and feel).
      *
+     * <p>
+     *  创建具有指定标题,默认边框类型(由当前外观和感觉确定),默认文本位置(由当前外观和感觉确定),默认对齐方式(前导)和默认字体的新标题边框,文本颜色(由当前外观和感觉确定)。
+     * 
+     * 
      * @param title      a <code>String</code> containing the text of the title
      * @return the <code>TitledBorder</code> object
      */
@@ -389,6 +473,10 @@ public class BorderFactory
      * the default justification (leading), and the default
      * font and text color (determined by the current look and feel).
      *
+     * <p>
+     * 创建具有空标题,指定的边框对象,默认文本位置(由当前外观和感觉确定),默认对齐方式(前导)和默认字体和文本颜色(由当前外观和感觉)。
+     * 
+     * 
      * @param border     the <code>Border</code> object to add the title to; if
      *                   <code>null</code> the <code>Border</code> is determined
      *                   by the current look and feel.
@@ -404,6 +492,10 @@ public class BorderFactory
      * default justification (leading) and the default
      * font and text color (determined by the current look and feel).
      *
+     * <p>
+     *  向现有边框添加标题,默认定位(由当前外观和感觉确定),默认对齐(前导)和默认字体和文本颜色(由当前外观和感觉确定)。
+     * 
+     * 
      * @param border     the <code>Border</code> object to add the title to
      * @param title      a <code>String</code> containing the text of the title
      * @return the <code>TitledBorder</code> object
@@ -418,6 +510,10 @@ public class BorderFactory
      * positioning and using the default
      * font and text color (determined by the current look and feel).
      *
+     * <p>
+     *  将标题添加到现有边框,使用指定的定位并使用默认字体和文本颜色(由当前外观和感觉确定)。
+     * 
+     * 
      * @param border      the <code>Border</code> object to add the title to
      * @param title       a <code>String</code> containing the text of the title
      * @param titleJustification  an integer specifying the justification
@@ -457,6 +553,10 @@ public class BorderFactory
      * positioning and font, and using the default text color
      * (determined by the current look and feel).
      *
+     * <p>
+     *  将标题添加到现有边框,使用指定的定位和字体,并使用默认文字颜色(由当前外观和感觉确定)。
+     * 
+     * 
      * @param border      the <code>Border</code> object to add the title to
      * @param title       a <code>String</code> containing the text of the title
      * @param titleJustification  an integer specifying the justification
@@ -497,6 +597,10 @@ public class BorderFactory
      * Adds a title to an existing border, with the specified
      * positioning, font and color.
      *
+     * <p>
+     *  向现有边框添加标题,指定的位置,字体和颜色。
+     * 
+     * 
      * @param border      the <code>Border</code> object to add the title to
      * @param title       a <code>String</code> containing the text of the title
      * @param titleJustification  an integer specifying the justification
@@ -541,6 +645,10 @@ public class BorderFactory
      * Creates an empty border that takes up no space. (The width
      * of the top, bottom, left, and right sides are all zero.)
      *
+     * <p>
+     *  创建不占用空间的空边框。 (顶部,底部,左侧和右侧的宽度都为零。)
+     * 
+     * 
      * @return the <code>Border</code> object
      */
     public static Border createEmptyBorder() {
@@ -552,6 +660,10 @@ public class BorderFactory
      * no drawing, specifying the width of the top, left, bottom, and
      * right sides.
      *
+     * <p>
+     *  创建一个占用空间但没有绘图的空边框,指定顶部,左侧,底部和右侧的宽度。
+     * 
+     * 
      * @param top     an integer specifying the width of the top,
      *                  in pixels
      * @param left    an integer specifying the width of the left side,
@@ -572,6 +684,10 @@ public class BorderFactory
      * Creates a compound border with a <code>null</code> inside edge and a
      * <code>null</code> outside edge.
      *
+     * <p>
+     *  创建一个带有<code> null </code>内边缘和<code> null </code>外边缘的复合边框。
+     * 
+     * 
      * @return the <code>CompoundBorder</code> object
      */
     public static CompoundBorder createCompoundBorder() {
@@ -582,6 +698,10 @@ public class BorderFactory
      * Creates a compound border specifying the border objects to use
      * for the outside and inside edges.
      *
+     * <p>
+     *  创建复合边框,指定要用于外边缘和内边缘的边框对象。
+     * 
+     * 
      * @param outsideBorder  a <code>Border</code> object for the outer
      *                          edge of the compound border
      * @param insideBorder   a <code>Border</code> object for the inner
@@ -599,6 +719,10 @@ public class BorderFactory
      * this border and a line border is that you can specify the individual
      * border dimensions.)
      *
+     * <p>
+     *  使用纯色创建遮罩边框。 (此边框和线边框之间的区别是您可以指定单个边框尺寸。)
+     * 
+     * 
      * @param top     an integer specifying the width of the top,
      *                          in pixels
      * @param left    an integer specifying the width of the left side,
@@ -623,6 +747,12 @@ public class BorderFactory
      * Note:<br>
      * If the icon doesn't load, the border area is painted gray.
      *
+     * <p>
+     * 创建由指定图标的多个图块组成的遮罩边框。图标的多个副本并排放置以填充边框区域。
+     * <p>
+     *  注意：<br>如果未加载图标,则边框区域将绘制为灰色。
+     * 
+     * 
      * @param top     an integer specifying the width of the top,
      *                          in pixels
      * @param left    an integer specifying the width of the left side,
@@ -646,6 +776,10 @@ public class BorderFactory
      * Creates a border of the specified {@code stroke}.
      * The component's foreground color will be used to render the border.
      *
+     * <p>
+     *  创建指定{@code stroke}的边框。组件的前景颜色将用于渲染边框。
+     * 
+     * 
      * @param stroke  the {@link BasicStroke} object used to stroke a shape
      * @return the {@code Border} object
      *
@@ -662,6 +796,10 @@ public class BorderFactory
      * If the specified {@code paint} is {@code null},
      * the component's foreground color will be used to render the border.
      *
+     * <p>
+     *  创建指定的{@code stroke}和{@code paint}的边框。如果指定的{@code paint}是{@code null},组件的前景颜色将用于渲染边框。
+     * 
+     * 
      * @param stroke  the {@link BasicStroke} object used to stroke a shape
      * @param paint   the {@link Paint} object used to generate a color
      * @return the {@code Border} object
@@ -688,6 +826,11 @@ public class BorderFactory
      * the relative spacing between dash lines are equal to {@code 1}.
      * A dash line is not rounded.
      *
+     * <p>
+     *  创建指定的{@code paint}的虚线边框。如果指定的{@code paint}是{@code null},组件的前景颜色将用于渲染边框。虚线的宽度等于{@code 1}。
+     * 虚线的相对长度和虚线之间的相对间距等于{@code 1}。虚线不是圆的。
+     * 
+     * 
      * @param paint  the {@link Paint} object used to generate a color
      * @return the {@code Border} object
      *
@@ -705,6 +848,11 @@ public class BorderFactory
      * The width of a dash line is equal to {@code 1}.
      * A dash line is not rounded.
      *
+     * <p>
+     *  创建指定的{@code paint},相对{@code length}和相对{@code spacing}的虚线边框。
+     * 如果指定的{@code paint}是{@code null},组件的前景颜色将用于渲染边框。虚线的宽度等于{@code 1}。虚线不是圆的。
+     * 
+     * 
      * @param paint    the {@link Paint} object used to generate a color
      * @param length   the relative length of a dash line
      * @param spacing  the relative spacing between dash lines
@@ -724,6 +872,10 @@ public class BorderFactory
      * If the specified {@code paint} is {@code null},
      * the component's foreground color will be used to render the border.
      *
+     * <p>
+     *  创建指定的{@code paint},{@code thickness},线形,相对{@code length}和相对{@code spacing}的虚线边框。
+     * 如果指定的{@code paint}是{@code null},组件的前景颜色将用于渲染边框。
+     * 
      * @param paint      the {@link Paint} object used to generate a color
      * @param thickness  the width of a dash line
      * @param length     the relative length of a dash line

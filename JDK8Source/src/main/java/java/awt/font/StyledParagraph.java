@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -26,6 +27,9 @@
 
 /*
  * (C) Copyright IBM Corp. 1999,  All rights reserved.
+ * <p>
+ *  (C)版权所有IBM Corp. 1999,保留所有权利。
+ * 
  */
 package java.awt.font;
 
@@ -48,6 +52,11 @@ import sun.text.CodePointIterator;
  * <p>
  * Currently, this class is optimized for a small number of intervals
  * (preferrably 1).
+ * <p>
+ *  这个类在字体文本的段落上存储Font,GraphicAttribute和Decoration interval。
+ * <p>
+ *  目前,该类针对少量间隔(优选为1)进行了优化。
+ * 
  */
 final class StyledParagraph {
 
@@ -88,6 +97,10 @@ final class StyledParagraph {
 
     /**
      * Create a new StyledParagraph over the given styled text.
+     * <p>
+     *  在给定的样式文本上创建一个新的StyledParagraph。
+     * 
+     * 
      * @param aci an iterator over the text
      * @param chars the characters extracted from aci
      */
@@ -137,6 +150,9 @@ final class StyledParagraph {
     /**
      * Adjust indices in starts to reflect an insertion after pos.
      * Any index in starts greater than pos will be increased by 1.
+     * <p>
+     *  在开始时调整索引以反映位置后的插入。任何大于pos的开头的索引将增加1。
+     * 
      */
     private static void insertInto(int pos, int[] starts, int numStarts) {
 
@@ -149,6 +165,10 @@ final class StyledParagraph {
      * Return a StyledParagraph reflecting the insertion of a single character
      * into the text.  This method will attempt to reuse the given paragraph,
      * but may create a new paragraph.
+     * <p>
+     *  返回一个StyledParagraph,反映将单个字符插入到文本中。此方法将尝试重用给定段落,但可能会创建一个新段落。
+     * 
+     * 
      * @param aci an iterator over the text.  The text should be the same as the
      *     text used to create (or most recently update) oldParagraph, with
      *     the exception of inserting a single character at insertPos.
@@ -205,6 +225,9 @@ final class StyledParagraph {
      * Any index in starts greater than deleteAt will be increased by 1.
      * It is the caller's responsibility to make sure that no 0-length
      * runs result.
+     * <p>
+     *  在开始时调整索引以反映deleteAt后的删除。任何大于deleteAt的开始的索引都会增加1.调用者负责确保没有0长度的运行结果。
+     * 
      */
     private static void deleteFrom(int deleteAt, int[] starts, int numStarts) {
 
@@ -217,6 +240,10 @@ final class StyledParagraph {
      * Return a StyledParagraph reflecting the insertion of a single character
      * into the text.  This method will attempt to reuse the given paragraph,
      * but may create a new paragraph.
+     * <p>
+     *  返回一个StyledParagraph,反映将单个字符插入到文本中。此方法将尝试重用给定段落,但可能会创建一个新段落。
+     * 
+     * 
      * @param aci an iterator over the text.  The text should be the same as the
      *     text used to create (or most recently update) oldParagraph, with
      *     the exception of deleting a single character at deletePos.
@@ -263,6 +290,10 @@ final class StyledParagraph {
     /**
      * Return the index at which there is a different Font, GraphicAttribute, or
      * Dcoration than at the given index.
+     * <p>
+     *  返回存在与给定索引不同的Font,GraphicAttribute或Dcoration的索引。
+     * 
+     * 
      * @param index a valid index in the paragraph
      * @return the first index where there is a change in attributes from
      *      those at index
@@ -287,6 +318,10 @@ final class StyledParagraph {
 
     /**
      * Return the Decoration in effect at the given index.
+     * <p>
+     *  返回在给定索引处生效的装饰。
+     * 
+     * 
      * @param index a valid index in the paragraph
      * @return the Decoration at index.
      */
@@ -306,6 +341,10 @@ final class StyledParagraph {
      * Return the Font or GraphicAttribute in effect at the given index.
      * The client must test the type of the return value to determine what
      * it is.
+     * <p>
+     *  返回在给定索引处有效的字体或GraphicAttribute。客户端必须测试返回值的类型以确定它是什么。
+     * 
+     * 
      * @param index a valid index in the paragraph
      * @return the Font or GraphicAttribute at index.
      */
@@ -325,6 +364,9 @@ final class StyledParagraph {
      * Return i such that starts[i] &lt;= index &lt; starts[i+1].  starts
      * must be in increasing order, with at least one element greater
      * than index.
+     * <p>
+     * 返回i,使得starts [i] <= index <开始[i + 1]。启动必须按升序排列,至少有一个元素大于索引。
+     * 
      */
     private static int findRunContaining(int index, int[] starts) {
 
@@ -340,6 +382,9 @@ final class StyledParagraph {
      * the given index to the given starts array.  If the
      * starts array does not have room for the index, a
      * new array is created and returned.
+     * <p>
+     *  将给定的Object附加到给定的Vector。将给定的索引添加到给定的starts数组。如果starts数组没有空间用于索引,则会创建并返回一个新数组。
+     * 
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     private static int[] addToVector(Object obj,
@@ -363,6 +408,9 @@ final class StyledParagraph {
     /**
      * Add a new Decoration run with the given Decoration at the
      * given index.
+     * <p>
+     *  添加一个新的装饰运行与给定的装饰在给定的索引。
+     * 
      */
     private void addDecoration(Decoration d, int index) {
 
@@ -390,6 +438,9 @@ final class StyledParagraph {
     /**
      * Add a new Font/GraphicAttribute run with the given object at the
      * given index.
+     * <p>
+     *  添加一个新的Font / GraphicAttribute运行给定的对象在给定的索引。
+     * 
      */
     private void addFont(Object f, int index) {
 
@@ -414,6 +465,9 @@ final class StyledParagraph {
     /**
      * Resolve the given chars into Fonts using FontResolver, then add
      * font runs for each.
+     * <p>
+     *  使用FontResolver将给定的字符解析为字体,然后为每个字体添加字体。
+     * 
      */
     private void addFonts(char[] chars, Map<? extends Attribute, ?> attributes,
                           int start, int limit) {
@@ -429,6 +483,9 @@ final class StyledParagraph {
     /**
      * Return a Map with entries from oldStyles, as well as input
      * method entries, if any.
+     * <p>
+     *  返回包含来自oldStyles的条目的映射,以及输入法条目(如果有)。
+     * 
      */
     static Map<? extends Attribute, ?>
            addInputMethodAttrs(Map<? extends Attribute, ?> oldStyles) {
@@ -476,6 +533,8 @@ final class StyledParagraph {
      * Extract a GraphicAttribute or Font from the given attributes.
      * If attributes does not contain a GraphicAttribute, Font, or
      * Font family entry this method returns null.
+     * <p>
+     *  从给定的属性中提取GraphicAttribute或Font。如果属性不包含GraphicAttribute,Font或Font family条目,此方法将返回null。
      */
     private static Object getGraphicOrFont(
             Map<? extends Attribute, ?> attributes) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.util;
@@ -265,6 +269,9 @@ public class RepositoryId {
 
     /**
      * Used to convert ascii to hex.
+     * <p>
+     *  用于将ASCII转换为十六进制。
+     * 
      */
     private static final byte ASCII_HEX[] =     {
         (byte)'0',
@@ -556,6 +563,10 @@ public class RepositoryId {
 
     /**
      * Checks to see if the FullValueDescription should be retrieved.
+     * <p>
+     *  检查是否应检索FullValueDescription。
+     * 
+     * 
      * @exception Throws IOException if suids do not match or if the repositoryID
      * is not an RMIValueType
      */
@@ -645,6 +656,10 @@ public class RepositoryId {
      * this method assumes the object passed is an array.  If passed an object
      * that is not an array, it will produce a rep id for a sequence of zero
      * length.  This would be an error.
+     * <p>
+     *  为序列创建存储库ID。这只适用于专家用户,因为此方法假定传递的对象是数组。如果传递的对象不是数组,它将为零长度的序列生成一个rep id。这将是一个错误。
+     * 
+     * 
      * @param ser The Java object to create a repository ID for
      **/
     public static String createSequenceRepID(java.lang.Object ser){
@@ -655,6 +670,10 @@ public class RepositoryId {
      * Creates a repository ID for a sequence.  This is for expert users only as
      * this method assumes the object passed is an array.  If passed an object
      * that is not an array, it will produce a malformed rep id.
+     * <p>
+     *  为序列创建存储库ID。这只适用于专家用户,因为此方法假定传递的对象是数组。如果传递的对象不是数组,它将产生一个格式错误的rep id。
+     * 
+     * 
      * @param clazz The Java class to create a repository ID for
      **/
     public static String createSequenceRepID(java.lang.Class clazz){
@@ -715,6 +734,10 @@ public class RepositoryId {
 
     /**
      * Creates a repository ID for a normal Java Type.
+     * <p>
+     *  为普通Java类型创建存储库ID。
+     * 
+     * 
      * @param ser The Java object to create a repository ID for
      * @exception com.sun.corba.se.impl.io.TypeMismatchException if ser implements the
      * org.omg.CORBA.portable.IDLEntity interface which indicates it is an IDL Value type.
@@ -743,6 +766,10 @@ public class RepositoryId {
 
     /**
      * Creates a repository ID for a normal Java Type.
+     * <p>
+     *  为普通Java类型创建存储库ID。
+     * 
+     * 
      * @param clz The Java class to create a repository ID for
      * @exception com.sun.corba.se.impl.io.TypeMismatchException if ser implements the
      * org.omg.CORBA.portable.IDLEntity interface which indicates it is an IDL Value type.
@@ -770,6 +797,10 @@ public class RepositoryId {
 
     /**
      * Creates a repository ID for an IDL Java Type.
+     * <p>
+     *  为IDL Java类型创建存储库ID。
+     * 
+     * 
      * @param ser The IDL Value object to create a repository ID for
      * @param major The major version number
      * @param minor The minor version number
@@ -819,6 +850,10 @@ public class RepositoryId {
     /**
      * Createa a repository ID for the type if it is either a java type
      * or an IDL type.
+     * <p>
+     *  如果类型是Java类型或IDL类型,则创建该类型的存储库ID。
+     * 
+     * 
      * @param type The type to create rep. id for
      * @return The rep. id.
      **/
@@ -867,6 +902,11 @@ public class RepositoryId {
      * Convert strings with illegal IDL identifier characters.
      * <p>
      * Section 5.5.7 of OBV spec.
+     * <p>
+     *  转换具有非法IDL标识符字符的字符串。
+     * <p>
+     *  OBV规范第5.5.7节。
+     * 
      */
     public static String convertToISOLatin1 (String name) {
 
@@ -917,6 +957,9 @@ public class RepositoryId {
      * Convert strings with ISO Latin 1 escape sequences back to original strings.
      * <p>
      * Section 5.5.7 of OBV spec.
+     * <p>
+     *  将具有ISO Latin 1转义序列的字符串转换回原始字符串。
+     * <p>
      */
     private static String convertFromISOLatin1 (String name) {
 

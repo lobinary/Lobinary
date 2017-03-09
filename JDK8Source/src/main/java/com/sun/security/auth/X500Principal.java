@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,15 @@ import sun.security.x509.X500Name;
  * on how to achieve this.  Authorization decisions can then be based upon
  * the Principals associated with a <code>Subject</code>.
  *
+ * <p>
+ *  <p>此类表示X.500 <code> Principal </code>。
+ *  X500Principals具有诸如"CN = Duke,OU = JavaSoft,O = Sun Microsystems,C = US"(RFC 1779风格)的名称。
+ * 
+ *  <p>诸如此<code> X500Principal </code>之类的主体可能与特定的<code> Subject </code>相关联,以增加具有附加标识的<code> Subject </code>
+ * 。
+ * 有关如何实现这一点的更多信息,请参阅<code> Subject </code>类。授权决定可以基于与<code> Subject </code>相关联的主体。
+ * 
+ * 
  * @see java.security.Principal
  * @see javax.security.auth.Subject
  * @deprecated A new X500Principal class is available in the Java platform.
@@ -65,6 +75,8 @@ public class X500Principal implements Principal, java.io.Serializable {
         });
 
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private String name;
@@ -78,6 +90,12 @@ public class X500Principal implements Principal, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  创建具有X.500名称的X500Principal,例如"CN = Duke,OU = JavaSoft,O = Sun Microsystems,C = US"(RFC 1779样式)。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the X.500 name
      *
      * @exception NullPointerException if the <code>name</code>
@@ -104,6 +122,12 @@ public class X500Principal implements Principal, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  返回此<code> X500Principal </code>的Unix用户名。
+     * 
+     * <p>
+     * 
+     * 
      * @return the Unix username for this <code>X500Principal</code>
      */
     public String getName() {
@@ -115,6 +139,12 @@ public class X500Principal implements Principal, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  返回此<code> X500Principal </code>的字符串表示形式。
+     * 
+     * <p>
+     * 
+     * 
      * @return a string representation of this <code>X500Principal</code>.
      */
     public String toString() {
@@ -127,6 +157,12 @@ public class X500Principal implements Principal, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  将指定的对象与此<code> X500Principal </code>进行比较以确保相等。
+     * 
+     * <p>
+     * 
+     * 
      * @param o Object to be compared for equality with this
      *          <code>X500Principal</code>.
      *
@@ -163,6 +199,12 @@ public class X500Principal implements Principal, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  返回此<code> X500Principal </code>的哈希码。
+     * 
+     * <p>
+     * 
+     * 
      * @return a hash code for this <code>X500Principal</code>.
      */
     public int hashCode() {
@@ -171,6 +213,7 @@ public class X500Principal implements Principal, java.io.Serializable {
 
     /**
      * Reads this object from a stream (i.e., deserializes it)
+     * <p>
      */
     private void readObject(java.io.ObjectInputStream s) throws
                                         java.io.IOException,

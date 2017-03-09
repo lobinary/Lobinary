@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,8 @@ import com.sun.corba.se.spi.orb.ORB ;
 /** OADefault provides methods to create the standard ObjectAdapterFactory
  * instances for this version of the ORB.  These methods are generally
  * used in ORBConfigurator instances to construct an ORB instance.
+ * <p>
+ *  这个版本的ORB的实例。这些方法通常用于ORBConfigurator实例中以构造ORB实例。
  */
 public class OADefault {
     public static ObjectAdapterFactory makePOAFactory( ORB orb )

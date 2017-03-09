@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.encoding;
@@ -1451,6 +1455,12 @@ public class CDROutputStream_1_0 extends CDROutputStreamBase
      * If talking a newer or foreign ORB, or if the orb
      * instance is null, write the end flag that only takes
      * into account the enclosing chunked valuetypes.
+     * <p>
+     *  处理结束标签的ORB版本。应该只调用如果分块。
+     * 
+     *  如果与我们较老的ORB(标准扩展,Kestrel和Ladybird)交谈,写入考虑所有封闭值类型的结束标志。
+     * 
+     *  如果谈到一个更新的或外部的ORB,或者如果orb实例为null,则写出只考虑封闭分块值类型的结束标志。
      */
     private void writeNestingLevel() {
         if (orb == null ||
@@ -1788,6 +1798,8 @@ public class CDROutputStream_1_0 extends CDROutputStreamBase
         System.out.println("CDROutputStream_1_0 writing indirection pos " + posIndirectedTo +
                            " - real index " + parent.getRealIndex(get_offset()) + " = " +
                            (posIndirectedTo - parent.getRealIndex(get_offset())));
+/* <p>
+/* 
 */
         write_long(posIndirectedTo - parent.getRealIndex(get_offset()));
 

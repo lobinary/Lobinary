@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import java.security.PrivilegedAction;
  * TCP implementation. Otherwise we create an instance of
  * TwoStacksPlainSocketImpl and delegate to it.
  *
+ * <p>
+ *  这个类PlainSocketImpl只是委托给相应的真正的SocketImpl。我们这样做是因为PlainSocketImpl已经由SocksSocketImpl扩展。
+ * <p>
+ *  对于真正的SocketImpl,TwoStacksPlainSocketImpl或DualStackPlainSocketImpl有两种可能性。
+ * 我们在具有双栈TCP实现的系统上使用DualStackPlainSocketImpl。否则,我们创建一个TwoStacksPlainSocketImpl的实例并委托它。
+ * 
+ * 
  * @author Chris Hegarty
  */
 
@@ -91,6 +99,9 @@ class PlainSocketImpl extends AbstractPlainSocketImpl
 
     /**
      * Constructs an empty instance.
+     * <p>
+     *  构造一个空实例。
+     * 
      */
     PlainSocketImpl() {
         if (useDualStackImpl) {
@@ -102,6 +113,8 @@ class PlainSocketImpl extends AbstractPlainSocketImpl
 
     /**
      * Constructs an instance with the given file descriptor.
+     * <p>
+     *  构造具有给定文件描述符的实例。
      */
     PlainSocketImpl(FileDescriptor fd) {
         if (useDualStackImpl) {

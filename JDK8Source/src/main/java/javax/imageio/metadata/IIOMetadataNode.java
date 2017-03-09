@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -88,6 +89,9 @@ class IIONamedNodeMap implements NamedNodeMap {
 
     /**
      * Equivalent to <code>getNamedItem(localName)</code>.
+     * <p>
+     *  等同于<code> getNamedItem(localName)</code>。
+     * 
      */
     public Node getNamedItemNS(String namespaceURI, String localName) {
         return getNamedItem(localName);
@@ -95,6 +99,9 @@ class IIONamedNodeMap implements NamedNodeMap {
 
     /**
      * Equivalent to <code>setNamedItem(arg)</code>.
+     * <p>
+     *  等同于<code> setNamedItem(arg)</code>。
+     * 
      */
     public Node setNamedItemNS(Node arg) {
         return setNamedItem(arg);
@@ -102,6 +109,9 @@ class IIONamedNodeMap implements NamedNodeMap {
 
     /**
      * Equivalent to <code>removeNamedItem(localName)</code>.
+     * <p>
+     *  等效于<code> removeNamedItem(localName)</code>。
+     * 
      */
     public Node removeNamedItemNS(String namespaceURI, String localName) {
         return removeNamedItem(localName);
@@ -186,6 +196,11 @@ class IIOAttr extends IIOMetadataNode implements Attr {
      * way to document this exception, since this class, IIOAttr,
      * is not a public class. The rest of the methods that throw
      * DOMException are publically documented as such on IIOMetadataNode.
+     * <p>
+     *  这里可能抛出DOMException,但它可能确定总是返回false。这个的一个原因是,我们没有好的办法记录这个异常,因为这个类,IIOAttr,不是一个公共类。
+     * 其他抛出DOMException的方法在IIOMetadataNode上被公开记录。
+     * 
+     * 
      * @return false
      */
     public boolean isId() {
@@ -222,6 +237,24 @@ class IIOAttr extends IIOMetadataNode implements Attr {
  * instance returned from an {@code IIOMetadataNode} will result in a
  * {@code DOMException} being thrown.
  *
+ * <p>
+ *  表示元数据树中的节点的类,其实现<a
+ * href="../../../../api/org/w3c/dom/Element.html">
+ *  <code> org.w3c.dom.Element </code> </a>接口,并且还允许通过<code> getUserObject </code>和<code> setUserObject </code>
+ * 方法存储非文本对象。
+ * 
+ *  <p>此类不适用于一般的XML处理。
+ * 特别地,在Image I / O API中创建的<code> Element </code>节点与由Sun的标准实现<code> org.w3.dom </code> API创建的节点不兼容。
+ * 特别地,该实现被调谐用于简单的使用,并且可能不能很好地用于强化处理。
+ * 
+ *  <p>此实现中忽略命名空间。术语"标签名称"和"节点名称"总是被认为是同义的。
+ * 
+ * </em>注意：</em> DOM Level 3规范在{@code Node},{@code Element}和{@code Attr}接口中添加了许多新方法, IIOMetadataNode}实现或
+ * 规范。
+ * 
+ *  在{@code IIOMetadataNode}上调用此类方法或从{@code IIOMetadataNode}返回的{@code Attr}实例将导致抛出{@code DOMException}。
+ * 
+ * 
  * @see IIOMetadata#getAsTree
  * @see IIOMetadata#setFromTree
  * @see IIOMetadata#mergeTree
@@ -231,63 +264,96 @@ public class IIOMetadataNode implements Element, NodeList {
 
     /**
      * The name of the node as a <code>String</code>.
+     * <p>
+     *  节点的名称为<code> String </code>。
+     * 
      */
     private String nodeName = null;
 
     /**
      * The value of the node as a <code>String</code>.  The Image I/O
      * API typically does not make use of the node value.
+     * <p>
+     *  节点的值为<code> String </code>。图像I / O API通常不使用节点值。
+     * 
      */
     private String nodeValue = null;
 
     /**
      * The <code>Object</code> value associated with this node.
+     * <p>
+     *  与此节点相关联的<code> Object </code>值。
+     * 
      */
     private Object userObject = null;
 
     /**
      * The parent node of this node, or <code>null</code> if this node
      * forms the root of its own tree.
+     * <p>
+     *  此节点的父节点,或<code> null </code>(如果此节点形成其自己的树的根)。
+     * 
      */
     private IIOMetadataNode parent = null;
 
     /**
      * The number of child nodes.
+     * <p>
+     *  子节点的数量。
+     * 
      */
     private int numChildren = 0;
 
     /**
      * The first (leftmost) child node of this node, or
      * <code>null</code> if this node is a leaf node.
+     * <p>
+     *  此节点的第一个(最左侧)子节点,如果此节点是叶节点,则为<code> null </code>。
+     * 
      */
     private IIOMetadataNode firstChild = null;
 
     /**
      * The last (rightmost) child node of this node, or
      * <code>null</code> if this node is a leaf node.
+     * <p>
+     *  此节点的最后一个(最右边的)子节点,如果此节点是叶节点,则为<code> null </code>。
+     * 
      */
     private IIOMetadataNode lastChild = null;
 
     /**
      * The next (right) sibling node of this node, or
      * <code>null</code> if this node is its parent's last child node.
+     * <p>
+     *  如果此节点是其父节点的最后一个子节点,则此节点的下一个(右)兄弟节点,或<code> null </code>。
+     * 
      */
     private IIOMetadataNode nextSibling = null;
 
     /**
      * The previous (left) sibling node of this node, or
      * <code>null</code> if this node is its parent's first child node.
+     * <p>
+     *  如果此节点是其父节点的第一个子节点,则此节点的上一个(左)兄弟节点,或<code> null </code>。
+     * 
      */
     private IIOMetadataNode previousSibling = null;
 
     /**
      * A <code>List</code> of <code>IIOAttr</code> nodes representing
      * attributes.
+     * <p>
+     *  表示属性的<code> IIOAttr </code>节点的<code> List </code>。
+     * 
      */
     private List attributes = new ArrayList();
 
     /**
      * Constructs an empty <code>IIOMetadataNode</code>.
+     * <p>
+     *  构造一个空的<code> IIOMetadataNode </code>。
+     * 
      */
     public IIOMetadataNode() {}
 
@@ -295,6 +361,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Constructs an <code>IIOMetadataNode</code> with a given node
      * name.
      *
+     * <p>
+     *  用给定的节点名构造一个<code> IIOMetadataNode </code>。
+     * 
+     * 
      * @param nodeName the name of the node, as a <code>String</code>.
      */
     public IIOMetadataNode(String nodeName) {
@@ -304,6 +374,9 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Check that the node is either <code>null</code> or an
      * <code>IIOMetadataNode</code>.
+     * <p>
+     *  检查节点是<code> null </code>还是<code> IIOMetadataNode </code>。
+     * 
      */
     private void checkNode(Node node) throws DOMException {
         if (node == null) {
@@ -320,6 +393,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Returns the node name associated with this node.
      *
+     * <p>
+     *  返回与此节点关联的节点名称。
+     * 
+     * 
      * @return the node name, as a <code>String</code>.
      */
     public String getNodeName() {
@@ -329,6 +406,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Returns the value associated with this node.
      *
+     * <p>
+     * 返回与此节点关联的值。
+     * 
+     * 
      * @return the node value, as a <code>String</code>.
      */
     public String getNodeValue(){
@@ -337,6 +418,9 @@ public class IIOMetadataNode implements Element, NodeList {
 
     /**
      * Sets the <code>String</code> value associated with this node.
+     * <p>
+     *  设置与此节点相关联的<code> String </code>值。
+     * 
      */
     public void setNodeValue(String nodeValue) {
         this.nodeValue = nodeValue;
@@ -346,6 +430,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Returns the node type, which is always
      * <code>ELEMENT_NODE</code>.
      *
+     * <p>
+     *  返回节点类型,始终为<code> ELEMENT_NODE </code>。
+     * 
+     * 
      * @return the <code>short</code> value <code>ELEMENT_NODE</code>.
      */
     public short getNodeType() {
@@ -359,6 +447,11 @@ public class IIOMetadataNode implements Element, NodeList {
      * <code>insertBefore</code>, <code>replaceChild</code>, or
      * <code>appendChild</code> methods.
      *
+     * <p>
+     *  返回此节点的父代。 <code> null </code>值表示该节点是其自己的树的根。
+     * 要向现有树添加节点,请使用<code> insertBefore </code>,<code> replaceChild </code>或<code> appendChild </code>方法之一。
+     * 
+     * 
      * @return the parent, as a <code>Node</code>.
      *
      * @see #insertBefore
@@ -374,6 +467,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * If there are no children, this is a <code>NodeList</code> containing
      * no nodes.
      *
+     * <p>
+     *  返回一个包含此节点的所有子节点的<code> NodeList </code>。如果没有子节点,这是一个不包含节点的<code> NodeList </code>。
+     * 
+     * 
      * @return the children as a <code>NodeList</code>
      */
     public NodeList getChildNodes() {
@@ -384,6 +481,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Returns the first child of this node, or <code>null</code> if
      * the node has no children.
      *
+     * <p>
+     *  返回此节点的第一个子节点,如果节点没有子节点,则返回<code> null </code>。
+     * 
+     * 
      * @return the first child, as a <code>Node</code>, or
      * <code>null</code>
      */
@@ -395,6 +496,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Returns the last child of this node, or <code>null</code> if
      * the node has no children.
      *
+     * <p>
+     *  返回此节点的最后一个子节点,如果节点没有子节点,则返回<code> null </code>。
+     * 
+     * 
      * @return the last child, as a <code>Node</code>, or
      * <code>null</code>.
      */
@@ -406,6 +511,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Returns the previous sibling of this node, or <code>null</code>
      * if this node has no previous sibling.
      *
+     * <p>
+     *  返回此节点的上一个兄弟节点,如果此节点没有先前的兄弟节点,则返回<code> null </code>。
+     * 
+     * 
      * @return the previous sibling, as a <code>Node</code>, or
      * <code>null</code>.
      */
@@ -417,6 +526,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Returns the next sibling of this node, or <code>null</code> if
      * the node has no next sibling.
      *
+     * <p>
+     *  返回此节点的下一个兄弟节点,如果节点没有下一个兄弟节点,则返回<code> null </code>。
+     * 
+     * 
      * @return the next sibling, as a <code>Node</code>, or
      * <code>null</code>.
      */
@@ -428,6 +541,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Returns a <code>NamedNodeMap</code> containing the attributes of
      * this node.
      *
+     * <p>
+     *  返回包含此节点的属性的<code> NamedNodeMap </code>。
+     * 
+     * 
      * @return a <code>NamedNodeMap</code> containing the attributes of
      * this node.
      */
@@ -439,6 +556,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Returns <code>null</code>, since <code>IIOMetadataNode</code>s
      * do not belong to any <code>Document</code>.
      *
+     * <p>
+     *  返回<code> null </code>,因为<code> IIOMetadataNode </code>不属于任何<code> Document </code>。
+     * 
+     * 
      * @return <code>null</code>.
      */
     public Document getOwnerDocument() {
@@ -451,6 +572,11 @@ public class IIOMetadataNode implements Element, NodeList {
      * <code>null</code>, insert <code>newChild</code> at the end of
      * the list of children.
      *
+     * <p>
+     *  在现有子节点<code> refChild </code>之前插入节点<code> newChild </code>。
+     * 如果<code> refChild </code>是<code> null </code>,请在子元素列表的末尾插入<code> newChild </code>。
+     * 
+     * 
      * @param newChild the <code>Node</code> to insert.
      * @param refChild the reference <code>Node</code>.
      *
@@ -509,6 +635,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * <code>newChild</code> in the list of children, and returns the
      * <code>oldChild</code> node.
      *
+     * <p>
+     *  在子节点列表中替换子节点<code> oldChild </code>与<code> newChild </code>,并返回<code> oldChild </code>节点。
+     * 
+     * 
      * @param newChild the <code>Node</code> to insert.
      * @param oldChild the <code>Node</code> to be replaced.
      *
@@ -561,6 +691,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Removes the child node indicated by <code>oldChild</code> from
      * the list of children, and returns it.
      *
+     * <p>
+     * 从子元素列表中删除由<code> oldChild </code>指示的子节点,并返回它。
+     * 
+     * 
      * @param oldChild the <code>Node</code> to be removed.
      *
      * @return the node removed.
@@ -605,6 +739,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Adds the node <code>newChild</code> to the end of the list of
      * children of this node.
      *
+     * <p>
+     *  将节点<code> newChild </code>添加到此节点的子节点列表的末尾。
+     * 
+     * 
      * @param newChild the <code>Node</code> to insert.
      *
      * @return the node added.
@@ -625,6 +763,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Returns <code>true</code> if this node has child nodes.
      *
+     * <p>
+     *  如果此节点具有子节点,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if this node has children.
      */
     public boolean hasChildNodes() {
@@ -639,6 +781,11 @@ public class IIOMetadataNode implements Element, NodeList {
      * siblings.  If a deep clone is being performed, the new node
      * will form the root of a complete cloned subtree.
      *
+     * <p>
+     *  返回此节点的副本。重复节点没有父(<code> getParentNode </code>返回<code> null </code>)。
+     * 如果正在执行浅克隆(<code> deep </code> <code> false </code>),则新节点将不会有任何子节点或兄弟节点。如果正在执行深层克隆,则新节点将形成完整克隆子树的根。
+     * 
+     * 
      * @param deep if <code>true</code>, recursively clone the subtree
      * under the specified node; if <code>false</code>, clone only the
      * node itself.
@@ -664,6 +811,9 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Does nothing, since <code>IIOMetadataNode</code>s do not
      * contain <code>Text</code> children.
+     * <p>
+     *  什么都不做,因为<code> IIOMetadataNode </code>不包含<code> Text </code> children。
+     * 
      */
     public void normalize() {
     }
@@ -672,6 +822,10 @@ public class IIOMetadataNode implements Element, NodeList {
      * Returns <code>false</code> since DOM features are not
      * supported.
      *
+     * <p>
+     *  由于不支持DOM功能,因此返回<code> false </code>。
+     * 
+     * 
      * @return <code>false</code>.
      *
      * @param feature a <code>String</code>, which is ignored.
@@ -683,6 +837,9 @@ public class IIOMetadataNode implements Element, NodeList {
 
     /**
      * Returns <code>null</code>, since namespaces are not supported.
+     * <p>
+     *  返回<code> null </code>,因为不支持命名空间。
+     * 
      */
     public String getNamespaceURI() throws DOMException {
         return null;
@@ -691,6 +848,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Returns <code>null</code>, since namespaces are not supported.
      *
+     * <p>
+     *  返回<code> null </code>,因为不支持命名空间。
+     * 
+     * 
      * @return <code>null</code>.
      *
      * @see #setPrefix
@@ -702,6 +863,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Does nothing, since namespaces are not supported.
      *
+     * <p>
+     *  什么也不做,因为不支持命名空间。
+     * 
+     * 
      * @param prefix a <code>String</code>, which is ignored.
      *
      * @see #getPrefix
@@ -712,6 +877,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Equivalent to <code>getNodeName</code>.
      *
+     * <p>
+     *  等同于<code> getNodeName </code>。
+     * 
+     * 
      * @return the node name, as a <code>String</code>.
      */
     public String getLocalName() {
@@ -724,6 +893,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Equivalent to <code>getNodeName</code>.
      *
+     * <p>
+     *  等同于<code> getNodeName </code>。
+     * 
+     * 
      * @return the node name, as a <code>String</code>
      */
     public String getTagName() {
@@ -732,6 +905,10 @@ public class IIOMetadataNode implements Element, NodeList {
 
     /**
      * Retrieves an attribute value by name.
+     * <p>
+     *  按名称检索属性值。
+     * 
+     * 
      * @param name The name of the attribute to retrieve.
      * @return The <code>Attr</code> value as a string, or the empty string
      * if that attribute does not have a specified or default value.
@@ -747,6 +924,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Equivalent to <code>getAttribute(localName)</code>.
      *
+     * <p>
+     *  等同于<code> getAttribute(localName)</code>。
+     * 
+     * 
      * @see #setAttributeNS
      */
     public String getAttributeNS(String namespaceURI, String localName) {
@@ -774,6 +955,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Equivalent to <code>setAttribute(qualifiedName, value)</code>.
      *
+     * <p>
+     *  等同于<code> setAttribute(qualifiedName,value)</code>。
+     * 
+     * 
      * @see #getAttributeNS
      */
     public void setAttributeNS(String namespaceURI,
@@ -805,6 +990,9 @@ public class IIOMetadataNode implements Element, NodeList {
 
     /**
      * Equivalent to <code>removeAttribute(localName)</code>.
+     * <p>
+     *  等效于<code> removeAttribute(localName)</code>。
+     * 
      */
     public void removeAttributeNS(String namespaceURI,
                                   String localName) {
@@ -819,6 +1007,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Equivalent to <code>getAttributeNode(localName)</code>.
      *
+     * <p>
+     *  等同于<code> getAttributeNode(localName)</code>。
+     * 
+     * 
      * @see #setAttributeNodeNS
      */
    public Attr getAttributeNodeNS(String namespaceURI,
@@ -860,6 +1052,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Equivalent to <code>setAttributeNode(newAttr)</code>.
      *
+     * <p>
+     *  等同于<code> setAttributeNode(newAttr)</code>。
+     * 
+     * 
      * @see #getAttributeNodeNS
      */
     public Attr setAttributeNodeNS(Attr newAttr) {
@@ -891,6 +1087,9 @@ public class IIOMetadataNode implements Element, NodeList {
 
     /**
      * Equivalent to <code>getElementsByTagName(localName)</code>.
+     * <p>
+     *  等同于<code> getElementsByTagName(localName)</code>。
+     * 
      */
     public NodeList getElementsByTagNameNS(String namespaceURI,
                                            String localName) {
@@ -907,6 +1106,9 @@ public class IIOMetadataNode implements Element, NodeList {
 
     /**
      * Equivalent to <code>hasAttribute(localName)</code>.
+     * <p>
+     *  等效于<code> hasAttribute(localName)</code>。
+     * 
      */
     public boolean hasAttributeNS(String namespaceURI,
                                   String localName) {
@@ -934,6 +1136,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Returns the <code>Object</code> value associated with this node.
      *
+     * <p>
+     * 返回与此节点相关联的<code> Object </code>值。
+     * 
+     * 
      * @return the user <code>Object</code>.
      *
      * @see #setUserObject
@@ -945,6 +1151,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * Sets the value associated with this node.
      *
+     * <p>
+     *  设置与此节点关联的值。
+     * 
+     * 
      * @param userObject the user <code>Object</code>.
      *
      * @see #getUserObject
@@ -958,6 +1168,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public void setIdAttribute(String name,
@@ -970,6 +1184,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public void setIdAttributeNS(String namespaceURI,
@@ -983,6 +1201,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public void setIdAttributeNode(Attr idAttr,
@@ -995,6 +1217,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public TypeInfo getSchemaTypeInfo() throws DOMException {
@@ -1005,6 +1231,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public Object setUserData(String key,
@@ -1017,6 +1247,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public Object getUserData(String key) throws DOMException {
@@ -1027,6 +1261,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public Object getFeature(String feature, String version)
@@ -1038,6 +1276,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public boolean isSameNode(Node node) throws DOMException {
@@ -1048,6 +1290,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public boolean isEqualNode(Node node) throws DOMException {
@@ -1058,6 +1304,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public String lookupNamespaceURI(String prefix) throws DOMException {
@@ -1068,6 +1318,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public boolean isDefaultNamespace(String namespaceURI)
@@ -1079,6 +1333,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public String lookupPrefix(String namespaceURI) throws DOMException {
@@ -1089,6 +1347,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     * {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public String getTextContent() throws DOMException {
@@ -1099,6 +1361,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public void setTextContent(String textContent) throws DOMException {
@@ -1109,6 +1375,10 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
+     * 
      * @throws DOMException - always.
      */
     public short compareDocumentPosition(Node other)
@@ -1120,6 +1390,9 @@ public class IIOMetadataNode implements Element, NodeList {
     /**
      * This DOM Level 3 method is not supported for {@code IIOMetadataNode}
      * and will throw a {@code DOMException}.
+     * <p>
+     *  {@code IIOMetadataNode}不支持此DOM级别3方法,并会抛出{@code DOMException}。
+     * 
      * @throws DOMException - always.
      */
     public String getBaseURI() throws DOMException {

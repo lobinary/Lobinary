@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,10 @@ import sun.awt.AppContext;
 /**
  * A collection of utility methods for Swing.
  *
+ * <p>
+ *  Swing的实用程序方法的集合。
+ * 
+ * 
  * @author unknown
  */
 public class SwingUtilities implements SwingConstants
@@ -59,12 +64,18 @@ public class SwingUtilities implements SwingConstants
     /**
      * Indicates if we should change the drop target when a
      * {@code TransferHandler} is set.
+     * <p>
+     *  指示在设置{@code TransferHandler}时是否应更改放置目标。
+     * 
      */
     private static boolean suppressDropSupport;
 
     /**
      * Indiciates if we've checked the system property for suppressing
      * drop support.
+     * <p>
+     *  指示是否已检查系统属性以抑制拖放支持。
+     * 
      */
     private static boolean checkedSuppressDropSupport;
 
@@ -72,6 +83,9 @@ public class SwingUtilities implements SwingConstants
     /**
      * Returns true if <code>setTransferHandler</code> should change the
      * <code>DropTarget</code>.
+     * <p>
+     *  如果<code> setTransferHandler </code>应该更改<code> DropTarget </code>,则返回true。
+     * 
      */
     private static boolean getSuppressDropTarget() {
         if (!checkedSuppressDropSupport) {
@@ -86,6 +100,9 @@ public class SwingUtilities implements SwingConstants
     /**
      * Installs a {@code DropTarget} on the component as necessary for a
      * {@code TransferHandler} change.
+     * <p>
+     *  根据需要在组件上安装{@code DropTarget}以进行{@code TransferHandler}更改。
+     * 
      */
     static void installSwingDropTargetAsNecessary(Component c,
                                                          TransferHandler t) {
@@ -104,6 +121,9 @@ public class SwingUtilities implements SwingConstants
 
     /**
      * Return true if <code>a</code> contains <code>b</code>
+     * <p>
+     *  如果<code> a </code>包含<code> b </code>,则返回true
+     * 
      */
     public static final boolean isRectangleContainingRectangle(Rectangle a,Rectangle b) {
         return b.x >= a.x && (b.x + b.width) <= (a.x + a.width) &&
@@ -112,6 +132,9 @@ public class SwingUtilities implements SwingConstants
 
     /**
      * Return the rectangle (0,0,bounds.width,bounds.height) for the component <code>aComponent</code>
+     * <p>
+     *  返回组件的矩形(0,0,bounds.width,bounds.height)<code> aComponent </code>
+     * 
      */
     public static Rectangle getLocalBounds(Component aComponent) {
         Rectangle b = new Rectangle(aComponent.getBounds());
@@ -124,6 +147,10 @@ public class SwingUtilities implements SwingConstants
      * Returns the first <code>Window </code> ancestor of <code>c</code>, or
      * {@code null} if <code>c</code> is not contained inside a <code>Window</code>.
      *
+     * <p>
+     *  如果<code> Window </code>中不包含<code> c </code>,则返回<code> c </code>的第一个<code> Window </code>祖先, 。
+     * 
+     * 
      * @param c <code>Component</code> to get <code>Window</code> ancestor
      *        of.
      * @return the first <code>Window </code> ancestor of <code>c</code>, or
@@ -143,6 +170,9 @@ public class SwingUtilities implements SwingConstants
     /**
      * Converts the location <code>x</code> <code>y</code> to the
      * parents coordinate system, returning the location.
+     * <p>
+     *  将位置<code> x </code> <code> y </code>转换为父级坐标系,返回位置。
+     * 
      */
     static Point convertScreenLocationToParent(Container parent,int x, int y) {
         for (Container p = parent; p != null; p = p.getParent()) {
@@ -165,6 +195,12 @@ public class SwingUtilities implements SwingConstants
      * root component coordinate system.
      * If both <code>source</code> and <code>destination</code> are {@code null}, return <code>aPoint</code>
      * without any conversion.
+     * <p>
+     *  将<code>源</code>坐标系中的<code> aPoint </code>转换为<code>目标</code>坐标系。
+     * 如果<code> source </code>是{@code null},则假定<code> aPoint </code>在<code>目标</code>的根组件坐标系中。
+     * 如果<code> destination </code>是{@code null},则<code> aPoint </code>将转换为<code> source </code>的根组件坐标系。
+     * 如果<code> source </code>和<code> destination </code>都是{@code null},则返回<code> aPoint </code>。
+     * 
      */
     public static Point convertPoint(Component source,Point aPoint,Component destination) {
         Point p;
@@ -196,6 +232,12 @@ public class SwingUtilities implements SwingConstants
      * root component coordinate system.
      * If both <code>source</code> and <code>destination</code> are {@code null}, return <code>(x,y)</code>
      * without any conversion.
+     * <p>
+     * 将<code>源</code>坐标系中的<code>(x,y)</code>转换为<code>目标</code>坐标系。
+     * 如果<code> source </code>是{@code null},则假定<code>(x,y)</code>在<code>目标</code>的根组件坐标系中。
+     * 如果<code> destination </code>为{@code null},则<code>(x,y)</code>将转换为<code> source </code>的根组件坐标系。
+     * 如果<code> source </code>和<code> destination </code>都是{@code null},则返回<code>(x,y)</code>。
+     * 
      */
     public static Point convertPoint(Component source,int x, int y,Component destination) {
         Point point = new Point(x,y);
@@ -211,6 +253,13 @@ public class SwingUtilities implements SwingConstants
      * root component coordinate system.
      * If both <code>source</code> and <code>destination</code> are {@code null}, return <code>aRectangle</code>
      * without any conversion.
+     * <p>
+     *  将<code> source </code>坐标系中的矩形<code> aRectangle </code>转换为<code>目标</code>坐标系。
+     * 如果<code> source </code>是{@code null},则假设<code> aRectangle </code>在<code>目标</code>的根组件坐标系中。
+     * 如果<code> destination </code>是{@code null},则<code> aRectangle </code>将转换为<code> source </code>的根组件坐标系。
+     * 如果<code> source </code>是{@code null},则假设<code> aRectangle </code>在<code>目标</code>的根组件坐标系中。
+     * 如果<code> source </code>和<code> destination </code>都是{@code null},则返回<code> aRectangle </code>。
+     * 
      */
     public static Rectangle convertRectangle(Component source,Rectangle aRectangle,Component destination) {
         Point point = new Point(aRectangle.x,aRectangle.y);
@@ -222,6 +271,10 @@ public class SwingUtilities implements SwingConstants
      * Convenience method for searching above <code>comp</code> in the
      * component hierarchy and returns the first object of class <code>c</code> it
      * finds. Can return {@code null}, if a class <code>c</code> cannot be found.
+     * <p>
+     *  用于在组件层次结构中搜索<code> comp </code>上方的方便方法,并返回它找到的<code> c </code>类的第一个对象。
+     * 如果无法找到<code> c </code>类,则可以返回{@code null}。
+     * 
      */
     public static Container getAncestorOfClass(Class<?> c, Component comp)
     {
@@ -238,6 +291,10 @@ public class SwingUtilities implements SwingConstants
      * Convenience method for searching above <code>comp</code> in the
      * component hierarchy and returns the first object of <code>name</code> it
      * finds. Can return {@code null}, if <code>name</code> cannot be found.
+     * <p>
+     * 用于在组件层次结构中搜索<code> comp </code>上方的方便方法,并返回其找到的<code> name </code>的第一个对象。
+     * 如果找不到<code> name </code>,可以返回{@code null}。
+     * 
      */
     public static Container getAncestorNamed(String name, Component comp) {
         if(comp == null || name == null)
@@ -257,6 +314,12 @@ public class SwingUtilities implements SwingConstants
      * container, or none of <code>parent</code>'s visible descendents
      * contain the specified location, <code>parent</code> is returned.
      *
+     * <p>
+     *  返回包含位置<code> x </code>,<code> y </code>的<code> parent </code>的最深可见的后代组件。
+     * 如果<code> parent </code>不包含指定的位置,则返回<code> null </code>。
+     * 如果<code> parent </code>不是容器,或者<code> parent </code>的可见后代都不包含指定的位置,则返回<code> parent </code>。
+     * 
+     * 
      * @param parent the root component to begin the search
      * @param x the x target location
      * @param y the y target location
@@ -297,6 +360,15 @@ public class SwingUtilities implements SwingConstants
      * to <code>destination</code> if destination is non-{@code null}
      * use the translateMouseEvent() method to translate a mouse event from
      * one component to another without changing the source.
+     * <p>
+     *  返回类似于<code> sourceEvent </code>的MouseEvent,除了它的x和y成员已经转换为<code> destination </code>的坐标系。
+     * 如果<code> source </code>是{@code null},则假设<code> sourceEvent </code> x和y成员进入<code>目标</code>的根组件坐标系。
+     * 如果<code> destination </code>是<code> null </code>,则返回的MouseEvent将在<code> source </code>的坐标系中。
+     *  <code> sourceEvent </code>不会被改变。返回一个新事件。
+     * 如果目标不是 -  {@ code null},则使用translateMouseEvent()方法从一个组件翻译鼠标事件,则返回事件的<code> source </code>字段将设置为<code>
+     *  destination </code>到另一个没有改变源。
+     *  <code> sourceEvent </code>不会被改变。返回一个新事件。
+     * 
      */
     public static MouseEvent convertMouseEvent(Component source,
                                                MouseEvent sourceEvent,
@@ -364,6 +436,10 @@ public class SwingUtilities implements SwingConstants
      * Convert a point from a component's coordinate system to
      * screen coordinates.
      *
+     * <p>
+     *  将点从组件的坐标系转换为屏幕坐标。
+     * 
+     * 
      * @param p  a Point object (converted to the new coordinate system)
      * @param c  a Component object
      */
@@ -403,6 +479,10 @@ public class SwingUtilities implements SwingConstants
      * Convert a point from a screen coordinates to a component's
      * coordinate system
      *
+     * <p>
+     * 将点从屏幕坐标转换为组件的坐标系
+     * 
+     * 
      * @param p  a Point object (converted to the new coordinate system)
      * @param c  a Component object
      */
@@ -445,6 +525,12 @@ public class SwingUtilities implements SwingConstants
      * Note: This method provides the same functionality as
      * <code>getWindowAncestor</code>.
      *
+     * <p>
+     *  如果<code> Window </code>中不包含<code> c </code>,则返回<code> c </code>的第一个<code> Window </code>祖先, 。
+     * <p>
+     *  注意：此方法提供与<code> getWindowAncestor </code>相同的功能。
+     * 
+     * 
      * @param c <code>Component</code> to get <code>Window</code> ancestor
      *        of.
      * @return the first <code>Window </code> ancestor of <code>c</code>, or
@@ -457,6 +543,9 @@ public class SwingUtilities implements SwingConstants
 
     /**
      * Return <code>true</code> if a component <code>a</code> descends from a component <code>b</code>
+     * <p>
+     *  返回<code> true </code>如果组件<code> a </code>从组件下降<code> b </code>
+     * 
      */
     public static boolean isDescendingFrom(Component a,Component b) {
         if(a == b)
@@ -475,6 +564,10 @@ public class SwingUtilities implements SwingConstants
      * then the returned rectangle begins at (0,0)
      * and has zero width and height.
      *
+     * <p>
+     *  方便计算两个矩形的交叉,而不分配一个新的矩形。如果两个矩形不相交,则返回的矩形从(0,0)开始并且具有零宽度和高度。
+     * 
+     * 
      * @param x       the X coordinate of the first rectangle's top-left point
      * @param y       the Y coordinate of the first rectangle's top-left point
      * @param width   the width of the first rectangle
@@ -506,6 +599,10 @@ public class SwingUtilities implements SwingConstants
      * Convenience method that calculates the union of two rectangles
      * without allocating a new rectangle.
      *
+     * <p>
+     *  便利方法计算两个矩形的并集,而不分配新的矩形。
+     * 
+     * 
      * @param x the x-coordinate of the first rectangle
      * @param y the y-coordinate of the first rectangle
      * @param width the width of the first rectangle
@@ -531,6 +628,9 @@ public class SwingUtilities implements SwingConstants
      * Convenience returning an array of rect representing the regions within
      * <code>rectA</code> that do not overlap with <code>rectB</code>. If the
      * two Rects do not overlap, returns an empty array
+     * <p>
+     *  方便地返回一个rect数组,表示<code> rectA </code>中不与<code> rectB </code>重叠的区域。如果两个Rect不重叠,则返回一个空数组
+     * 
      */
     public static Rectangle[] computeDifference(Rectangle rectA,Rectangle rectB) {
         if (rectB == null || !rectA.intersects(rectB) || isRectangleContainingRectangle(rectB,rectA)) {
@@ -789,6 +889,10 @@ public class SwingUtilities implements SwingConstants
     /**
      * Returns true if the mouse event specifies the left mouse button.
      *
+     * <p>
+     *  如果鼠标事件指定了鼠标左键,则返回true。
+     * 
+     * 
      * @param anEvent  a MouseEvent object
      * @return true if the left mouse button was active
      */
@@ -800,6 +904,10 @@ public class SwingUtilities implements SwingConstants
     /**
      * Returns true if the mouse event specifies the middle mouse button.
      *
+     * <p>
+     *  如果鼠标事件指定中间鼠标按钮,则返回true。
+     * 
+     * 
      * @param anEvent  a MouseEvent object
      * @return true if the middle mouse button was active
      */
@@ -811,6 +919,10 @@ public class SwingUtilities implements SwingConstants
     /**
      * Returns true if the mouse event specifies the right mouse button.
      *
+     * <p>
+     *  如果鼠标事件指定了鼠标右键,则返回true。
+     * 
+     * 
      * @param anEvent  a MouseEvent object
      * @return true if the right mouse button was active
      */
@@ -823,6 +935,10 @@ public class SwingUtilities implements SwingConstants
      * Compute the width of the string using a font with the specified
      * "metrics" (sizes).
      *
+     * <p>
+     *  使用具有指定"指标"(大小)的字体计算字符串的宽度。
+     * 
+     * 
      * @param fm   a FontMetrics object to compute with
      * @param str  the String to compute
      * @return an int containing the string width
@@ -841,6 +957,10 @@ public class SwingUtilities implements SwingConstants
      * relative to the viewR rectangle.
      * The JComponents orientation (LEADING/TRAILING) will also be taken
      * into account and translated into LEFT/RIGHT values accordingly.
+     * <p>
+     * 计算并返回图标原点的位置,文本基线的原点位置,以及复合标签字符串的可能剪切版本。相对于viewR矩形计算位置。
+     *  JComponents方向(LEADING / TRAILING)也将被考虑,并相应地转换为LEFT / RIGHT值。
+     * 
      */
     public static String layoutCompoundLabel(JComponent c,
                                              FontMetrics fm,
@@ -910,6 +1030,12 @@ public class SwingUtilities implements SwingConstants
      * values in horizontalTextPosition (they will default to RIGHT) and in
      * horizontalAlignment (they will default to CENTER).
      * Use the other version of layoutCompoundLabel() instead.
+     * <p>
+     *  计算并返回图标原点的位置,文本基线的原点位置,以及复合标签字符串的可能剪切版本。相对于viewR矩形计算位置。
+     * 这个layoutCompoundLabel()不知道如何处理horizo​​ntalTextPosition中的LEADING / TRAILING值(它们将默认为RIGHT)和horizo​​ntal
+     * Alignment(它们将默认为CENTER)。
+     *  计算并返回图标原点的位置,文本基线的原点位置,以及复合标签字符串的可能剪切版本。相对于viewR矩形计算位置。请改用其他版本的layoutCompoundLabel()。
+     * 
      */
     public static String layoutCompoundLabel(
         FontMetrics fm,
@@ -941,6 +1067,12 @@ public class SwingUtilities implements SwingConstants
      * values in horizontalTextPosition (they will default to RIGHT) and in
      * horizontalAlignment (they will default to CENTER).
      * Use the other version of layoutCompoundLabel() instead.
+     * <p>
+     *  计算并返回图标原点的位置,文本基线的原点位置,以及复合标签字符串的可能剪切版本。相对于viewR矩形计算位置。
+     * 这个layoutCompoundLabel()不知道如何处理horizo​​ntalTextPosition中的LEADING / TRAILING值(它们将默认为RIGHT)和horizo​​ntal
+     * Alignment(它们将默认为CENTER)。
+     *  计算并返回图标原点的位置,文本基线的原点位置,以及复合标签字符串的可能剪切版本。相对于viewR矩形计算位置。请改用其他版本的layoutCompoundLabel()。
+     * 
      */
     private static String layoutCompoundLabelImpl(
         JComponent c,
@@ -957,6 +1089,7 @@ public class SwingUtilities implements SwingConstants
         int textIconGap)
     {
         /* Initialize the icon bounds rectangle iconR.
+        /* <p>
          */
 
         if (icon != null) {
@@ -970,6 +1103,9 @@ public class SwingUtilities implements SwingConstants
         /* Initialize the text bounds rectangle textR.  If a null
          * or and empty String was specified we substitute "" here
          * and use 0,0,0,0 for textR.
+         * <p>
+         *  或者指定空字符串,我们用""替换,并为textR使用0,0,0,0。
+         * 
          */
 
         boolean textIsEmpty = (text == null) || text.equals("");
@@ -977,6 +1113,9 @@ public class SwingUtilities implements SwingConstants
         int rsb = 0;
         /* Unless both text and icon are non-null, we effectively ignore
          * the value of textIconGap.
+         * <p>
+         *  textIconGap的值。
+         * 
          */
         int gap;
 
@@ -1029,6 +1168,9 @@ public class SwingUtilities implements SwingConstants
 
         /* Compute textR.x,y given the verticalTextPosition and
          * horizontalTextPosition properties
+         * <p>
+         *  horizo​​ntalTextPosition属性
+         * 
          */
 
         if (verticalTextPosition == TOP) {
@@ -1071,6 +1213,11 @@ public class SwingUtilities implements SwingConstants
          *
          * To avoid actually allocating a Rectangle, Rectangle.union
          * has been inlined below.
+         * <p>
+         *  给定labelAlignment属性,将其移动到正确的位置。
+         * 
+         * 为了避免实际分配一个Rectangle,Rectangle.union已经在下面内联。
+         * 
          */
         int labelR_x = Math.min(iconR.x, textR.x);
         int labelR_width = Math.max(iconR.x + iconR.width,
@@ -1103,6 +1250,7 @@ public class SwingUtilities implements SwingConstants
         }
 
         /* Translate textR and glypyR by dx,dy.
+        /* <p>
          */
 
         textR.x += dx;
@@ -1160,6 +1308,24 @@ public class SwingUtilities implements SwingConstants
      * is true. If the Component is not lightweight, bad things map happen:
      * crashes, exceptions, painting problems...
      *
+     * <p>
+     *  将组件绘制到指定的<code> Graphics </code>。此方法主要用于呈现不存在作为可见的包含层次结构的一部分但用于呈现的<code> Component </code>。
+     * 例如,如果你正在做自己的渲染,并想渲染一些文本(甚至HTML),你可以使用<code> JLabel </code>的文本渲染支持,并直接通过这种方法,而不将标签添加到可见的包含层次结构中。
+     * <p>
+     *  此方法使用<code> CellRendererPane </code>来处理实际绘制,并且仅在使用一个组件进行渲染时才推荐。
+     * 如果你使用多个组件来处理渲染,就像<code> JTable </code>那样,直接使用<code> CellRendererPane </code>。
+     * 否则,如下所述,你最终可以用<code> CellRendererPane </code>每个<code> Component </code>。
+     * <p>
+     *  如果<code> c </code>的父代不是<code> CellRendererPane </code>,则创建新的<code> CellRendererPane </code>,<code> c
+     *  </code>并将<code> CellRendererPane </code>添加到<code> p </code>。
+     * 如果<code> c </code>的父代码是<code> CellRendererPane </code>,而<code> CellRendererPane </code>的父代码不是<code> p
+     *  </code> code> p </code>。
+     * <p>
+     * 该组件应该从<code> JComponent </code>下降,或者是另一种轻量级组件。
+     * 轻量级组件是其"轻量级"属性(由<code> Component </code> <code> isLightweight </code>方法返回)为true的组件。
+     * 如果组件不是轻量级的,坏东西映射发生：崩溃,异常,绘画问题...。
+     * 
+     * 
      * @param g  the <code>Graphics</code> object to draw on
      * @param c  the <code>Component</code> to draw
      * @param p  the intermediate <code>Container</code>
@@ -1183,6 +1349,11 @@ public class SwingUtilities implements SwingConstants
      * {@link #paintComponent(Graphics,Component,Container,int,int,int,int)}.
      * Refer to it for more information.
      *
+     * <p>
+     *  将组件绘制到指定的<code> Graphics </code>。
+     * 这是{@link #paintComponent(Graphics,Component,Container,int,int,int,int)}的覆盖方法。有关详细信息,请参阅。
+     * 
+     * 
      * @param g  the <code>Graphics</code> object to draw on
      * @param c  the <code>Component</code> to draw
      * @param p  the intermediate <code>Container</code>
@@ -1200,6 +1371,9 @@ public class SwingUtilities implements SwingConstants
      * Ensures that cell renderer <code>c</code> has a
      * <code>ComponentShell</code> parent and that
      * the shell's parent is p.
+     * <p>
+     *  确保单元格渲染器<code> c </code>有一个<code> ComponentShell </code>父类,shell的父类为p。
+     * 
      */
     private static CellRendererPane getCellRendererPane(Component c, Container p) {
         Container shell = c.getParent();
@@ -1219,6 +1393,9 @@ public class SwingUtilities implements SwingConstants
      * A simple minded look and feel change: ask each node in the tree
      * to <code>updateUI()</code> -- that is, to initialize its UI property
      * with the current look and feel.
+     * <p>
+     *  一个简单的头脑外观和感觉的变化：问树中的每个节点<code> updateUI()</code>  - 也就是,用当前的外观和感觉来初始化其UI属性。
+     * 
      */
     public static void updateComponentTreeUI(Component c) {
         updateComponentTreeUI0(c);
@@ -1284,6 +1461,28 @@ public class SwingUtilities implements SwingConstants
      * <p>
      * Unlike the rest of Swing, this method can be invoked from any thread.
      *
+     * <p>
+     *  导致在AWT事件分派线程上异步执行<i> doRun.run()</i>。这将在所有待处理的AWT事件被处理后发生。当应用程序线程需要更新GUI时,应使用此方法。
+     * 在以下示例中,<code> invokeLater </code>调用将事件分派线程上的<code> Runnable </code>对象<code> doHelloWorld </code>排队,然后
+     * 打印一条消息。
+     *  导致在AWT事件分派线程上异步执行<i> doRun.run()</i>。这将在所有待处理的AWT事件被处理后发生。当应用程序线程需要更新GUI时,应使用此方法。
+     * <pre>
+     *  Runnable doHelloWorld = new Runnable(){public void run(){System.out.println("Hello World on"+ Thread.currentThread()); }
+     * };。
+     * 
+     * SwingUtilities.invokeLater(doHelloWorld); System.out.println("这可能会显示在其他消息之前。
+     * </pre>
+     *  如果从事件分派线程调用​​invokeLater(例如,从JButton的ActionListener调用),则仍将推迟<i> doRun.run()</i>,直到所有挂起的事件都被处理。
+     * 注意,如果<i> doRun.run()</i>抛出未捕获的异常,事件分派线程将会解开(而不是当前线程)。
+     * <p>
+     *  有关此方法的其他文档和示例,请参见<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> S
+     * wing中的并发</a>。
+     * <p>
+     *  从1.3开始,这个方法只是一个覆盖<code> java.awt.EventQueue.invokeLater()</code>。
+     * <p>
+     *  与Swing的其余部分不同,此方法可以从任何线程调用。
+     * 
+     * 
      * @see #invokeAndWait
      */
     public static void invokeLater(Runnable doRun) {
@@ -1334,6 +1533,27 @@ public class SwingUtilities implements SwingConstants
      * As of 1.3 this method is just a cover for
      * <code>java.awt.EventQueue.invokeAndWait()</code>.
      *
+     * <p>
+     *  导致<code> doRun.run()</code>在AWT事件分派线程上同步执行。此调用阻塞,直到所有待处理的AWT事件被处理,然后<code> doRun.run()</code>返回。
+     * 当应用程序线程需要更新GUI时,应使用此方法。它不应该从事件调度线程调用。
+     * 这里有一个例子,创建一个新的应用程序线程,使用<code> invokeAndWait </code>从事件分发线程打印一个字符串,然后,当它完成后,从应用程序线程打印一个字符串。
+     * <pre>
+     * 最后Runnable doHelloWorld = new Runnable(){public void run(){System.out.println("Hello World on"+ Thread.currentThread()); }
+     * };。
+     * 
+     *  线程appThread = new Thread(){public void run(){try {SwingUtilities.invokeAndWait(doHelloWorld); } catc
+     * h(Exception e){e.printStackTrace(); } System.out.println("Finished on"+ Thread.currentThread()); }}; 
+     * appThread.start();。
+     * </pre>
+     *  注意,如果<code> Runnable.run </code>方法抛出一个未捕获的异常(在事件分派线程上),它会作为<code> InvocationTargetException </code>在
+     * 调用者的线程上被捕获和重新抛出。
+     * <p>
+     *  有关此方法的其他文档和示例,请参见<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> S
+     * wing中的并发</a>。
+     * <p>
+     *  从1.3开始,这个方法只是一个覆盖<code> java.awt.EventQueue.invokeAndWait()</code>。
+     * 
+     * 
      * @exception  InterruptedException if we're interrupted while waiting for
      *             the event dispatching thread to finish executing
      *             <code>doRun.run()</code>
@@ -1354,6 +1574,12 @@ public class SwingUtilities implements SwingConstants
      * As of 1.3 this method is just a cover for
      * <code>java.awt.EventQueue.isDispatchThread()</code>.
      *
+     * <p>
+     *  如果当前线程是AWT事件分派线程,则返回true。
+     * <p>
+     *  从1.3开始,这个方法只是一个覆盖<code> java.awt.EventQueue.isDispatchThread()</code>。
+     * 
+     * 
      * @return true if the current thread is an AWT event dispatching thread
      */
     public static boolean isEventDispatchThread()
@@ -1365,6 +1591,9 @@ public class SwingUtilities implements SwingConstants
     /*
      * --- Accessibility Support ---
      *
+     * <p>
+     *  ---辅助功能
+     * 
      */
 
     /**
@@ -1374,6 +1603,12 @@ public class SwingUtilities implements SwingConstants
      * Component.AccessibleAWTComponent.getAccessibleIndexInParent() instead
      * of using this method.
      *
+     * <p>
+     *  在其可访问的父代中获取此对象的索引。<p>
+     * 
+     *  注意：从Java 2平台v1.3开始,建议开发人员调用Component.AccessibleAWTComponent.getAccessibleIndexInParent(),而不是使用此方法。
+     * 
+     * 
      * @return -1 of this object does not have an accessible parent.
      * Otherwise, the index of the child in its accessible parent.
      */
@@ -1386,6 +1621,10 @@ public class SwingUtilities implements SwingConstants
      * local coordinate <code>Point</code>, if one exists.
      * Otherwise returns <code>null</code>.
      *
+     * <p>
+     *  返回包含在本地坐标<code> Point </code>(如果存在)中的<code> Accessible </code>子代。否则返回<code> null </code>。
+     * 
+     * 
      * @return the <code>Accessible</code> at the specified location,
      *    if it exists; otherwise <code>null</code>
      */
@@ -1431,6 +1670,12 @@ public class SwingUtilities implements SwingConstants
      * Component.AccessibleAWTComponent.getAccessibleIndexInParent() instead
      * of using this method.
      *
+     * <p>
+     *  获取此对象的状态。 <p>
+     * 
+     * 注意：从Java 2平台v1.3开始,建议开发人员调用Component.AccessibleAWTComponent.getAccessibleIndexInParent(),而不是使用此方法。
+     * 
+     * 
      * @return an instance of AccessibleStateSet containing the current state
      * set of the object
      * @see AccessibleState
@@ -1448,6 +1693,12 @@ public class SwingUtilities implements SwingConstants
      * Component.AccessibleAWTComponent.getAccessibleIndexInParent() instead
      * of using this method.
      *
+     * <p>
+     *  返回对象中可访问的子项数。如果这个对象的所有子对象实现Accessible,那么这个方法应该返回这个对象的子对象数。 <p>
+     * 
+     *  注意：从Java 2平台v1.3开始,建议开发人员调用Component.AccessibleAWTComponent.getAccessibleIndexInParent(),而不是使用此方法。
+     * 
+     * 
      * @return the number of accessible children in the object.
      */
     public static int getAccessibleChildrenCount(Component c) {
@@ -1461,6 +1712,12 @@ public class SwingUtilities implements SwingConstants
      * Component.AccessibleAWTComponent.getAccessibleIndexInParent() instead
      * of using this method.
      *
+     * <p>
+     *  返回对象的第n个Accessible子项。 <p>
+     * 
+     *  注意：从Java 2平台v1.3开始,建议开发人员调用Component.AccessibleAWTComponent.getAccessibleIndexInParent(),而不是使用此方法。
+     * 
+     * 
      * @param i zero-based index of child
      * @return the nth Accessible child of the object
      */
@@ -1472,6 +1729,10 @@ public class SwingUtilities implements SwingConstants
      * Return the child <code>Component</code> of the specified
      * <code>Component</code> that is the focus owner, if any.
      *
+     * <p>
+     *  返回指定的<code> Component </code>(即焦点所有者)(如果有的话)的<code> Component </code>
+     * 
+     * 
      * @param c the root of the <code>Component</code> hierarchy to
      *        search for the focus owner
      * @return the focus owner, or <code>null</code> if there is no focus
@@ -1502,6 +1763,10 @@ public class SwingUtilities implements SwingConstants
     /**
      * If c is a JRootPane descendant return its JRootPane ancestor.
      * If c is a RootPaneContainer then return its JRootPane.
+     * <p>
+     *  如果c是JRootPane后代,则返回其JRootPane祖先。如果c是RootPaneContainer,则返回其JRootPane。
+     * 
+     * 
      * @return the JRootPane for Component c or {@code null}.
      */
     public static JRootPane getRootPane(Component c) {
@@ -1519,6 +1784,10 @@ public class SwingUtilities implements SwingConstants
 
     /**
      * Returns the root component for the current component tree.
+     * <p>
+     *  返回当前组件树的根组件。
+     * 
+     * 
      * @return the first ancestor of c that's a Window or the last Applet ancestor
      */
     public static Component getRoot(Component c) {
@@ -1556,6 +1825,14 @@ public class SwingUtilities implements SwingConstants
      * <code>processKeyEvent</code> method, hence you rarely need
      * to directly invoke this method.
      *
+     * <p>
+     * 处理与<code> event </code>关联的<code> Component </code>的键绑定。
+     * 此方法仅在<code> event.getComponent()</code>不从<code> JComponent </code>下降时才有用,或者您没有从</code>中调用<code> super
+     * .processKeyEvent </code>代码> JComponent </code>子类。
+     * 处理与<code> event </code>关联的<code> Component </code>的键绑定。
+     *  <code> JComponent </code>自动处理其<code> processKeyEvent </code>方法中的绑定,因此很少需要直接调用此方法。
+     * 
+     * 
      * @param event KeyEvent used to identify which bindings to process, as
      *              well as which Component has focus.
      * @return true if a binding has found and processed
@@ -1596,6 +1873,9 @@ public class SwingUtilities implements SwingConstants
     /**
      * Returns true if the <code>e</code> is a valid KeyEvent to use in
      * processing the key bindings associated with JComponents.
+     * <p>
+     *  如果<code> e </code>是用于处理与JComponent相关联的键绑定的有效KeyEvent,则返回true。
+     * 
      */
     static boolean isValidKeyEventForKeyBindings(KeyEvent e) {
         return true;
@@ -1616,6 +1896,18 @@ public class SwingUtilities implements SwingConstants
      * This will return true if <code>action</code> is non-{@code null} and
      * actionPerformed is invoked on it.
      *
+     * <p>
+     *  如果启用了<code> action </code>(以及非 -  {@ code null}),则在<code> action </code>上调用<code> actionPerformed </code>
+     * 。
+     *  ActionEvent的命令由下式确定：。
+     * <ol>
+     *  <li>如果操作是通过<code> registerKeyboardAction </code>注册的,那么如果传递{@code null},将使用传递的命令字符串({@code null})。
+     *  <li>操作值为Action.ACTION_COMMAND_KEY,除非{@code null}。
+     *  <li> KeyEvent的字符串值,除非<code> getKeyChar </code>返回KeyEvent.CHAR_UNDEFINED ..。
+     * </ol>
+     *  如果<code> action </code>为非 -  {@ code null}并且调用了actionPerformed,则此操作将返回true。
+     * 
+     * 
      * @since 1.3
      */
     public static boolean notifyAction(Action action, KeyStroke ks,
@@ -1672,6 +1964,11 @@ public class SwingUtilities implements SwingConstants
      * to <code>uiInputMap</code>. If <code>uiInputMap</code> is {@code null},
      * this removes any previously installed UI InputMap.
      *
+     * <p>
+     *  方便方法将<code> component </code>的InputMap更改为<code> uiInputMap </code>。
+     * 如果<code> uiInputMap </code>是{@code null},则会删除任何以前安装的UI InputMap。
+     * 
+     * 
      * @since 1.3
      */
     public static void replaceUIInputMap(JComponent component, int type,
@@ -1694,6 +1991,11 @@ public class SwingUtilities implements SwingConstants
      * to <code>uiActionMap</code>. If <code>uiActionMap</code> is {@code null},
      * this removes any previously installed UI ActionMap.
      *
+     * <p>
+     * 方便方法将<code> component </code>的ActionMap更改为<code> uiActionMap </code>。
+     * 如果<code> uiActionMap </code>是{@code null},则会删除任何先前安装的UI ActionMap。
+     * 
+     * 
      * @since 1.3
      */
     public static void replaceUIActionMap(JComponent component,
@@ -1717,6 +2019,11 @@ public class SwingUtilities implements SwingConstants
      * <p>This will return {@code null} if the UI has not installed a InputMap
      * of the specified type.
      *
+     * <p>
+     *  返回由组件<code>组件</code>中条件<code> condition </code>的UI提供的InputMap。
+     *  <p>如果UI尚未安装指定类型的InputMap,此操作将返回{@code null}。
+     * 
+     * 
      * @since 1.3
      */
     public static InputMap getUIInputMap(JComponent component, int condition) {
@@ -1736,6 +2043,10 @@ public class SwingUtilities implements SwingConstants
      * in component <code>component</code>.
      * <p>This will return {@code null} if the UI has not installed an ActionMap.
      *
+     * <p>
+     *  返回UI在组件<code> component </code>中提供的ActionMap。 <p>如果UI尚未安装ActionMap,此操作将返回{@code null}。
+     * 
+     * 
      * @since 1.3
      */
     public static ActionMap getUIActionMap(JComponent component) {
@@ -1763,6 +2074,9 @@ public class SwingUtilities implements SwingConstants
 
         /**
          * Install window listeners on owned windows to watch for displayability changes
+         * <p>
+         *  在拥有的窗口上安装窗口侦听器以监视可显示性更改
+         * 
          */
         void installListeners() {
             Window[] windows = getOwnedWindows();
@@ -1777,6 +2091,9 @@ public class SwingUtilities implements SwingConstants
         /**
          * Watches for displayability changes and disposes shared instance if there are no
          * displayable children left.
+         * <p>
+         *  如果没有可显示的儿童离开,可显示性的手表会更改并处理共享实例。
+         * 
          */
         public void windowClosed(WindowEvent e) {
             synchronized(getTreeLock()) {
@@ -1822,6 +2139,10 @@ public class SwingUtilities implements SwingConstants
      * Returns a toolkit-private, shared, invisible Frame
      * to be the owner for JDialogs and JWindows created with
      * {@code null} owners.
+     * <p>
+     *  返回一个工具箱 - 私有,共享,不可见框架是使用{@code null}所有者创建的JDialogs和JWindows的所有者。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true.
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -1840,6 +2161,10 @@ public class SwingUtilities implements SwingConstants
     /**
      * Returns a SharedOwnerFrame's shutdown listener to dispose the SharedOwnerFrame
      * if it has no more displayable children.
+     * <p>
+     *  返回一个SharedOwnerFrame的关闭监听器来处理SharedOwnerFrame,如果它没有更多可显示的孩子。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true.
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -1852,6 +2177,9 @@ public class SwingUtilities implements SwingConstants
     /* Don't make these AppContext accessors public or protected --
      * since AppContext is in sun.awt in 1.2, we shouldn't expose it
      * even indirectly with a public API.
+     * <p>
+     *  因为AppContext在1.2中的sun.awt中,我们不应该使用公共API间接暴露它。
+     * 
      */
     // REMIND(aim): phase out use of 4 methods below since they
     // are just private covers for AWT methods (?)
@@ -1879,6 +2207,9 @@ public class SwingUtilities implements SwingConstants
    /*
      * Convenience function for determining ComponentOrientation.  Helps us
      * avoid having Munge directives throughout the code.
+     * <p>
+     *  用于确定ComponentOrientation的便捷功能。帮助我们避免在整个代码中有Munge指令。
+     * 
      */
     static boolean isLeftToRight( Component c ) {
         return c.getComponentOrientation().isLeftToRight();
@@ -1890,6 +2221,9 @@ public class SwingUtilities implements SwingConstants
     /**
      * Returns true if the Icon <code>icon</code> is an instance of
      * ImageIcon, and the image it contains is the same as <code>image</code>.
+     * <p>
+     *  如果Icon <code>图标</code>是ImageIcon的实例,则返回true,并且其包含的图像与<code> image </code>相同。
+     * 
      */
     static boolean doesIconReferenceImage(Icon icon, Image image) {
         Image iconImage = (icon != null && (icon instanceof ImageIcon)) ?
@@ -1902,6 +2236,10 @@ public class SwingUtilities implements SwingConstants
      * within string <code>text</code>. Matching algorithm is not
      * case-sensitive.
      *
+     * <p>
+     *  返回字符串<code> text </code>中<code>助记符</code>第一次出现的索引。匹配算法不区分大小写。
+     * 
+     * 
      * @param text The text to search through, may be {@code null}
      * @param mnemonic The mnemonic to find the character for.
      * @return index into the string if exists, otherwise -1
@@ -1935,6 +2273,11 @@ public class SwingUtilities implements SwingConstants
      * This method is useful for classes
      * that implement painting code.
      *
+     * <p>
+     * 在<code> r </code>中存储指定组件的内部绘画区域的位置和大小,并返回<code> r </code>。位置和大小指定组件的边界,调整为不包括边框区域(插入)。
+     * 此方法对于实现绘制代码的类非常有用。
+     * 
+     * 
      * @param c  the JComponent in question; if {@code null}, this method returns {@code null}
      * @param r  the Rectangle instance to be modified;
      *           may be {@code null}
@@ -1986,6 +2329,10 @@ public class SwingUtilities implements SwingConstants
      * Returns the first ancestor of the {@code component}
      * which is not an instance of {@link JLayer}.
      *
+     * <p>
+     *  返回{@code component}的第一个祖先,它不是{@link JLayer}的实例。
+     * 
+     * 
      * @param component {@code Component} to get
      * the first ancestor of, which is not a {@link JLayer} instance.
      *
@@ -2016,6 +2363,13 @@ public class SwingUtilities implements SwingConstants
      * otherwise {@link JLayer#getView()} will be recursively
      * called on all descending {@code JLayer}s.
      *
+     * <p>
+     *  返回不是{@code JLayer}的实例的第一个{@code JViewport}的后代。如果找不到这样的后代,则返回{@code null}。
+     * 
+     *  如果{@code viewport}的视图组件不是{@code JLayer},此方法相当于{@link JViewport#getView()},否则{@link JLayer#getView()}
+     * 将被递归调用所有降序{@code JLayer}。
+     * 
+     * 
      * @param viewport {@code JViewport} to get the first descendant of,
      * which in not a {@code JLayer} instance.
      *
@@ -2052,6 +2406,12 @@ public class SwingUtilities implements SwingConstants
      * root and all its parents up to the toplevel component must also be
      * visible. Otherwise this method returns {@code null}.
      *
+     * <p>
+     *  检索给定容器的有效根。
+     * 
+     *  如果容器包含在{@code CellRendererPane}中,由于{@code CellRendererPane}的综合性质,此方法返回{@code null}。
+     * <p>
+     * 
      * @return the validate root of the given container or null
      * @see java.awt.Component#isDisplayable()
      * @see java.awt.Component#isVisible()

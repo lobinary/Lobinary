@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -79,6 +80,34 @@ assertEquals("Wilma, dear?", (String) worker2.invokeExact());
  * <p>
  * For target values which will be frequently updated, consider using
  * a {@linkplain VolatileCallSite volatile call site} instead.
+ * <p>
+ *  {@code MutableCallSite}是一个{@link CallSite},其目标变量的行为类似于普通字段。
+ * 链接到{@code MutableCallSite}的{@code invokedynamic}指令会将所有调用委派给网站的当前目标。
+ * 可变调用网站的{@linkplain CallSite#dynamicInvoker动态调用器}还将每个调用委派给网站的当前目标。
+ * <p>
+ *  这里有一个可变调用站点的例子,它将状态变量引入到方法句柄链中。
+ * <!-- JavaDocExamplesTest.testMutableCallSite -->
+ *  <blockquote> <pre> {@ code MutableCallSite name = new MutableCallSite(MethodType.methodType(String.class)); MethodHandle MH_name = name.dynamicInvoker(); MethodType MT_str1 = MethodType.methodType(String.class); MethodHandle MH_upcase = MethodHandles.lookup().findVirtual(String.class,"toUpperCase",MT_str1); MethodHandle worker1 = MethodHandles.filterReturnValue(MH_name,MH_upcase); name.setTarget(MethodHandles.constant(String.class,"Rocky")); assertEquals("ROCKY",(String)worker1.invokeExact()); name.setTarget(MethodHandles.constant(String.class,"Fred")); assertEquals("FRED",(String)worker1.invokeExact()); //(突变可以无限期地继续)}
+ *  </pre> </blockquote>。
+ * <p>
+ * 同一呼叫站点可以在多个地方同时使用。
+ *  <blockquote> <pre> {@ code MethodType MT_str2 = MethodType.methodType(String.class,String.class); MethodHandle MH_cat = lookup()。
+ * 同一呼叫站点可以在多个地方同时使用。
+ * findVirtual(String.class,"concat",methodType(String.class,String.class)); MethodHandle MH_dear = Meth
+ * odHandles.insertArguments(MH_cat,1,",dear?"); MethodHandle worker2 = MethodHandles.filterReturnValue(
+ * MH_name,MH_dear); assertEquals("Fred,dear?",(String)worker2.invokeExact()); name.setTarget(MethodHand
+ * les.constant(String.class,"Wilma")); assertEquals("WILMA",(String)worker1.invokeExact()); assertEqual
+ * s("Wilma,dear?",(String)worker2.invokeExact()); } </pre> </blockquote>。
+ * 同一呼叫站点可以在多个地方同时使用。
+ * <p>
+ *  <em>目标值的不同步：</em>对可变调用调用网站的目标的写入不会强制其他线程意识到更新的值。不相对于更新的调用点执行合适的同步动作的线程可以缓存旧的目标值并且无限期地延迟它们对新目标值的使用。
+ *  (这是Java内存模型应用于对象字段的正常结果。)。
+ * <p>
+ *  {@link #syncAll syncAll}操作提供了一种强制线程接受新目标值的方法,即使没有其他同步也是如此。
+ * <p>
+ *  对于将频繁更新的目标值,请考虑使用{@linkplain VolatileCallSite volatile调用站点}。
+ * 
+ * 
  * @author John Rose, JSR 292 EG
  */
 public class MutableCallSite extends CallSite {
@@ -93,6 +122,15 @@ public class MutableCallSite extends CallSite {
      * or invoked in some other manner,
      * it is usually provided with a more useful target method,
      * via a call to {@link CallSite#setTarget(MethodHandle) setTarget}.
+     * <p>
+     * 使用给定方法类型创建空白调用站点对象。初始目标被设置为给定类型的方法句柄,如果被调用,它将抛出一个{@link IllegalStateException}。
+     * <p>
+     *  呼叫站点的类型永久设置为给定类型。
+     * <p>
+     *  在此{@code CallSite}对象从引导方法返回或以其他方式调用之前,通常通过调用{@link CallSite#setTarget(MethodHandle)setTarget}来提供更有用的
+     * 目标方法。
+     * 
+     * 
      * @param type the method type that this call site will have
      * @throws NullPointerException if the proposed type is null
      */
@@ -103,6 +141,10 @@ public class MutableCallSite extends CallSite {
     /**
      * Creates a call site object with an initial target method handle.
      * The type of the call site is permanently set to the initial target's type.
+     * <p>
+     *  使用初始目标方法句柄创建调用站点对象。呼叫站点的类型永久设置为初始目标的类型。
+     * 
+     * 
      * @param target the method handle that will be the initial target of the call site
      * @throws NullPointerException if the proposed target is null
      */
@@ -122,6 +164,14 @@ public class MutableCallSite extends CallSite {
      * of a previous read of the target from memory, and may fail to see
      * a recent update to the target by another thread.
      *
+     * <p>
+     *  返回调用网站的目标方法,其行为类似于{@code MutableCallSite}的常规字段。
+     * <p>
+     *  {@code getTarget}与存储器的交互与从普通变量(例如数组元素或非易失性,非最终字段)的读取相同。
+     * <p>
+     *  具体地,当前线程可以选择重用来自存储器的目标的先前读取的结果,并且可能未能看到另一线程对目标的最近更新。
+     * 
+     * 
      * @return the linkage state of this call site, a method handle which can change over time
      * @see #setTarget
      */
@@ -143,6 +193,14 @@ public class MutableCallSite extends CallSite {
      * into the bootstrap method and/or the target methods used
      * at any given call site.
      *
+     * <p>
+     *  将此调用网站的目标方法更新为正常变量。新目标的类型必须与旧目标的类型一致。
+     * <p>
+     *  与对存储器的交互与对普通变量(例如数组元素或非易失性,非最终字段)的写入相同。
+     * <p>
+     * 特别地,不相关的线程可能无法看到更新的目标,直到它们执行从存储器的读取。可以通过将适当的操作放入引导方法和/或在任何给定调用站点使用的目标方法来创建更强的保证。
+     * 
+     * 
      * @param newTarget the new target
      * @throws NullPointerException if the proposed new target is null
      * @throws WrongMethodTypeException if the proposed new target
@@ -156,6 +214,9 @@ public class MutableCallSite extends CallSite {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public final MethodHandle dynamicInvoker() {
@@ -267,6 +328,31 @@ public class MutableCallSite extends CallSite {
      * In such an implementation, the {@code syncAll} method can be a no-op,
      * and yet it will conform to the JMM behavior documented above.
      *
+     * <p>
+     *  对给定数组中的每个调用站点执行同步操作,强制所有其他线程丢弃先前从任何调用站点的目标加载的任何缓存值。
+     * <p>
+     *  此操作不会反转已在旧目标值上启动的任何呼叫。 (Java仅支持{@linkplain java.lang.Object#wait()forward time travel}。)
+     * <p>
+     *  总体效果是强制每个调用点的目标的所有未来读者接受最近存储的值。 ("最近"相对于{@code syncAll}本身。
+     * )相反,{@code syncAll}调用可能会阻塞,直到所有读者都以某种方式解析了每个调用网站的目标的所有先前版本。
+     * <p>
+     *  为了避免竞争条件,对{@code setTarget}和{@code syncAll}的调用通常应在某种互斥的情况下执行。
+     * 请注意,读取器线程可以在安装该值的{@code setTarget}调用(以及确认该值的{@code syncAll}之前)观察更新的目标。
+     * 另一方面,读取器线程可以观察目标的先前版本,直到{@code syncAll}调用返回(并且在尝试传送更新版本的{@code setTarget}之后)。
+     * <p>
+     * 这种操作可能是昂贵的,应该谨慎使用。如果可能,应缓冲它用于批次处理一组调用站点。
+     * <p>
+     *  如果{@code sites}包含一个空元素,将会引发{@code NullPointerException}。在这种情况下,可以在该方法异常返回之前处理数组中的一些非空元素。
+     * 这些元素(如果有的话)是与实现相关的。
+     * 
+     *  <h1> Java内存模型详细信息</h1>在Java内存模型方面,此操作执行的同步操作在效果上与当前线程写入volatile变量的效果相当,并且每隔一个线程,可以访问受影响的调用站点之一。
+     * <p>
+     *  对于每个个别电话网站{@code S},以下效果是显而易见的：
+     * <ul>
+     * <li>创建了一个新的易失性变量{@code V},由当前线程写入。如JMM定义的,这个写是一个全局同步事件。
+     *  <li>与写事件的线程本地排序一样,当前线程已经执行的每个操作都发生在对{@code V}的易失性写操作之前。 (在某些实现中,这意味着当前线程执行全局释放操作。
+     * )<li>具体来说,对{@code S}的当前目标的写入在对{@code V}的易失性写入之前发生。 <li>对{@code V}的易失性写入(以实现特定的方式)放置在全局同步顺序中。
+     * 
      * @param sites an array of call sites to be synchronized
      * @throws NullPointerException if the {@code sites} array reference is null
      *                              or the array contains a null

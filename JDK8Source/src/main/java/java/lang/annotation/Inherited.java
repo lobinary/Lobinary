@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,11 @@ package java.lang.annotation;
  * from superclasses; annotations on implemented interfaces have no
  * effect.
  *
+ * <p>
+ *  表示注释类型是自动继承的。如果在注释类型声明上存在继承元注释,并且用户在类声明中查询注释类型,并且类声明没有该类型的注释,那么将自动查询该类的超类以获取注释类型。
+ * 此过程将重复,直到找到此类型的注释,或达到类层次结构(Object)的顶部。如果没有超类具有此类型的注释,则查询将指示所讨论的类没有这样的注释。
+ * 
+ * 
  * @author  Joshua Bloch
  * @since 1.5
  * @jls 9.6.3.3 @Inherited

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -63,6 +64,19 @@ import java.util.stream.StreamSupport;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  这个类包含了操作数组的各种方法(如排序和搜索)。这个类还包含一个静态工厂,允许数组被视为列表。
+ * 
+ *  <p>如果指定的数组引用为空,则此类中的方法都会抛出{@code NullPointerException},除非另有说明。
+ * 
+ *  <p>此类中包含的方法的文档包括<i>实现</i>的简要说明。这样的描述应当被视为<i>实现注释</i>,而不是<i>规范</i>的部分。实现者应该随意替换其他算法,只要遵守规范本身。
+ *  (例如,{@code sort(Object [])}使用的算法不一定是MergeSort,但它必须<i>稳定</i>。)。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @author Josh Bloch
  * @author Neal Gafter
  * @author John Rose
@@ -75,6 +89,9 @@ public class Arrays {
      * algorithm will not further partition the sorting task. Using
      * smaller sizes typically results in memory contention across
      * tasks that makes parallel speedups unlikely.
+     * <p>
+     *  最小数组长度,低于该最小数组长度,并行排序算法将不会进一步分割排序任务。使用较小的大小通常导致跨任务的内存争用,使得并行加速不太可能。
+     * 
      */
     private static final int MIN_ARRAY_SORT_GRAN = 1 << 13;
 
@@ -95,6 +112,12 @@ public class Arrays {
      * empirical case for separating them for parallel sorting, so all
      * public Object parallelSort methods use the same comparator
      * based implementation.
+     * <p>
+     *  实现一组相互可比较的元素的自然排序的比较器。当提供的比较器为空时,可以使用。为了简化底层实现中的代码共享,compare方法只声明Object的第二个参数。
+     * 
+     * Arrays类实现者的注意事项：ComparableTimSort是否比使用此比较器的TimSort提供任何性能优势是一个经验问题。如果没有,你最好删除或绕过ComparableTimSort。
+     * 目前没有将它们分离用于并行排序的经验情况,因此所有公共对象parallelSort方法使用相同的基于比较器的实现。
+     * 
      */
     static final class NaturalOrder implements Comparator<Object> {
         @SuppressWarnings("unchecked")
@@ -107,6 +130,9 @@ public class Arrays {
     /**
      * Checks that {@code fromIndex} and {@code toIndex} are in
      * the range and throws an exception if they aren't.
+     * <p>
+     *  检查{@code fromIndex}和{@code toIndex}是否在范围内,如果没有,则抛出异常。
+     * 
      */
     private static void rangeCheck(int arrayLength, int fromIndex, int toIndex) {
         if (fromIndex > toIndex) {
@@ -127,6 +153,9 @@ public class Arrays {
      * expanding arguments into those required for the internal
      * implementation methods residing in other package-private
      * classes (except for legacyMergeSort, included in this class).
+     * <p>
+     *  排序方法。注意,所有公共"排序"方法都采用相同的形式：如果必要,执行参数检查,然后将参数扩展为驻留在其他包专用类(除了包括在此类中的legacyMergeSort)的内部实现方法所需的参数。
+     * 
      */
 
     /**
@@ -138,6 +167,13 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      */
     public static void sort(int[] a) {
@@ -156,6 +192,14 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按照升序对数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     * <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -178,6 +222,13 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      */
     public static void sort(long[] a) {
@@ -196,6 +247,14 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按照升序对数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -218,6 +277,13 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     * <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      */
     public static void sort(short[] a) {
@@ -236,6 +302,14 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按照升序对数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -258,6 +332,13 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      */
     public static void sort(char[] a) {
@@ -276,6 +357,14 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     * 按照升序对数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -298,6 +387,13 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      */
     public static void sort(byte[] a) {
@@ -316,6 +412,14 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按照升序对数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     * <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -346,6 +450,17 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  <p> {@code <}关系不会对所有浮点值提供总订单：{@code -0.0f == 0.0f}为{@code true},而且{@code Float.NaN}值不会同时小于,大于,也不等于任何值,甚至其本身。
+     * 此方法使用方法{@link Float#compareTo}强加的总顺序：{@code -0.0f}被视为小于值{@code 0.0f},{@code Float.NaN}被认为大于任何其他值和所有{@code Float.NaN}
+     * 值被视为相等。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      */
     public static void sort(float[] a) {
@@ -372,6 +487,18 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按照升序对数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     * <p> {@code <}关系不会对所有浮点值提供总订单：{@code -0.0f == 0.0f}为{@code true},而且{@code Float.NaN}值不会同时小于,大于,也不等于任何值,甚至其本身。
+     * 此方法使用方法{@link Float#compareTo}强加的总顺序：{@code -0.0f}被视为小于值{@code 0.0f},{@code Float.NaN}被认为大于任何其他值和所有{@code Float.NaN}
+     * 值被视为相等。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -402,6 +529,17 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  <p> {@code <}关系不会对所有double值提供总订单：{@code -0.0d == 0.0d}是{@code true},而且{@code Double.NaN}值不会同时小于,大于,也不等于任何值,甚至其本身。
+     * 此方法使用{@link Double#compareTo}方法强加的总顺序：{@code -0.0d}被视为小于值{@code 0.0d},{@code Double.NaN}被视为大于任何其他值和所有
+     * {@code Double.NaN}值被视为相等。
+     * 
+     * <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      */
     public static void sort(double[] a) {
@@ -428,6 +566,18 @@ public class Arrays {
      * quicksorts to degrade to quadratic performance, and is typically
      * faster than traditional (one-pivot) Quicksort implementations.
      *
+     * <p>
+     *  按照升序对数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     *  <p> {@code <}关系不会对所有double值提供总订单：{@code -0.0d == 0.0d}是{@code true},而且{@code Double.NaN}值不会同时小于,大于,也不等于任何值,甚至其本身。
+     * 此方法使用{@link Double#compareTo}方法强加的总顺序：{@code -0.0d}被视为小于值{@code 0.0d},{@code Double.NaN}被视为大于任何其他值和所有
+     * {@code Double.NaN}值被视为相等。
+     * 
+     *  <p>实施注意事项：排序算法是Vladimir Yaroslavskiy,Jon Bentley和Joshua Bloch的Dual-Pivot Quicksort。
+     * 此算法在许多数据集上提供O(n log(n))性能,导致其他快速排序降级为二次性能,并且通常比传统(单点)Quicksort实现更快。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -455,6 +605,15 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些数组本身已经排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(byte [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(byte [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      *
      * @since 1.8
@@ -488,6 +647,16 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     *  按照数字升序将数组的指定范围排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(byte [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(byte [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -525,6 +694,15 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(char [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(char [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      *
      * @since 1.8
@@ -558,6 +736,16 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     * 按照数字升序将数组的指定范围排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     *  @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些数组本身已经排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(char [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(char [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -595,6 +783,15 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些数组本身已经排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(short [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(short [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      *
      * @since 1.8
@@ -628,6 +825,16 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     *  按照数字升序将数组的指定范围排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(short [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(short [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -665,6 +872,15 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(int [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(int [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      *
      * @since 1.8
@@ -698,6 +914,16 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     * 按照数字升序将数组的指定范围排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     *  @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些数组本身已经排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(int [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(int [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -735,6 +961,15 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些数组本身已经排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(long [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(long [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      *
      * @since 1.8
@@ -768,6 +1003,16 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     *  按照数字升序将数组的指定范围排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(long [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(long [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -813,6 +1058,19 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  <p> {@code <}关系不会对所有浮点值提供总订单：{@code -0.0f == 0.0f}为{@code true},而且{@code Float.NaN}值不会同时小于,大于,也不等于任何值,甚至其本身。
+     * 此方法使用方法{@link Float#compareTo}强加的总顺序：{@code -0.0f}被视为小于值{@code 0.0f},{@code Float.NaN}被认为大于任何其他值和所有{@code Float.NaN}
+     * 值被视为相等。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(float [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(float [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      *
      * @since 1.8
@@ -854,6 +1112,20 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     *  按照数字升序将数组的指定范围排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     *  <p> {@code <}关系不会对所有浮点值提供总订单：{@code -0.0f == 0.0f}为{@code true},而且{@code Float.NaN}值不会同时小于,大于,也不等于任何值,甚至其本身。
+     * 此方法使用方法{@link Float#compareTo}强加的总顺序：{@code -0.0f}被视为小于值{@code 0.0f},{@code Float.NaN}被认为大于任何其他值和所有{@code Float.NaN}
+     * 值被视为相等。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(float [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(float [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -899,6 +1171,19 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  按指定的数字顺序将数组排序。
+     * 
+     *  <p> {@code <}关系不会对所有double值提供总订单：{@code -0.0d == 0.0d}是{@code true},而且{@code Double.NaN}值不会同时小于,大于,也不等于任何值,甚至其本身。
+     * 此方法使用{@link Double#compareTo}方法强加的总顺序：{@code -0.0d}被视为小于值{@code 0.0d},{@code Double.NaN}被视为大于任何其他值和所有
+     * {@code Double.NaN}值被视为相等。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(double [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(double [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      *
      * @since 1.8
@@ -940,6 +1225,20 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     *  按照数字升序将数组的指定范围排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex}(排除)。
+     * 如果{@code fromIndex == toIndex},要排序的范围为空。
+     * 
+     *  <p> {@code <}关系不会对所有double值提供总订单：{@code -0.0d == 0.0d}是{@code true},而且{@code Double.NaN}值不会同时小于,大于,也不等于任何值,甚至其本身。
+     * 此方法使用{@link Double#compareTo}方法强加的总顺序：{@code -0.0d}被视为小于值{@code 0.0d},{@code Double.NaN}被视为大于任何其他值和所有
+     * {@code Double.NaN}值被视为相等。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(double [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(double [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element, inclusive, to be sorted
      * @param toIndex the index of the last element, exclusive, to be sorted
@@ -986,6 +1285,20 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  根据其元素的{@linkplain Comparable natural ordering}将对象的指定数组按升序排序。数组中的所有元素都必须实现{@link Comparable}接口。
+     * 此外,数组中的所有元素必须<i>相互比较</i>(即{@code e1.compareTo(e2)}不得为任何元素{@code e1}抛出{@code ClassCastException} {@code e2}
+     * 在数组中)。
+     *  根据其元素的{@linkplain Comparable natural ordering}将对象的指定数组按升序排序。数组中的所有元素都必须实现{@link Comparable}接口。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(Object [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(Object [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param <T> the class of the objects to be sorted
      * @param a the array to be sorted
      *
@@ -1038,6 +1351,22 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     *  根据其元素的{@linkplain Comparable natural ordering},将指定的对象数组的指定范围按升序排序。
+     * 要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex},排除。 (如果{@code fromIndex == toIndex},要排序的范围为空。
+     * )此范围中的所有元素必须实现{@link Comparable}接口。
+     * 此外,此范围中的所有元素必须<i>相互比较</i>(即{@code e1.compareTo(e2)}不得为任何元素{@code e1}抛出{@code ClassCastException} {@code e2}
+     * 在数组中)。
+     * )此范围中的所有元素必须实现{@link Comparable}接口。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(Object [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(Object [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param <T> the class of the objects to be sorted
      * @param a the array to be sorted
      * @param fromIndex the index of the first element (inclusive) to be
@@ -1091,6 +1420,20 @@ public class Arrays {
      * {@link ForkJoinPool#commonPool() ForkJoin common pool} is used to
      * execute any parallel tasks.
      *
+     * <p>
+     *  根据指定的比较器引起的顺序对指定的对象数组进行排序。
+     * 数组中的所有元素必须通过指定的比较器</i> </i>相互比较(即{@code c.compare(e1,e2)}不能为任何元素{@code ClassCastException}代码e1}和{@code e2}
+     * )。
+     *  根据指定的比较器引起的顺序对指定的对象数组进行排序。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(Object [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(Object [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param <T> the class of the objects to be sorted
      * @param a the array to be sorted
      * @param cmp the comparator to determine the order of the array.  A
@@ -1143,6 +1486,21 @@ public class Arrays {
      * array. The {@link ForkJoinPool#commonPool() ForkJoin common pool} is
      * used to execute any parallel tasks.
      *
+     * <p>
+     *  根据指定比较器引起的顺序对指定的对象数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex},排除。
+     *  (如果{@code fromIndex == toIndex},则要排序的范围为空。
+     * )范围中的所有元素必须通过指定的比较器<i>互相比较</i>(即{@code c.compare (e1,e2)}不能为范围内的任何元素{@code e1}和{@code e2}抛出{@code ClassCastException}
+     * 。
+     *  (如果{@code fromIndex == toIndex},则要排序的范围为空。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     * @implNote排序算法是一个并行排序合并,将数组分割为子数组,这些子数组本身已排序,然后合并。
+     * 当子数组长度达到最小粒度时,使用适当的{@link Arrays#sort(Object [])Arrays.sort}方法对子数组进行排序。
+     * 如果指定数组的长度小于最小粒度,则使用适当的{@link Arrays#sort(Object [])Arrays.sort}方法对其进行排序。该算法需要不大于原始数组的指定范围的大小的工作空间。
+     *  {@link ForkJoinPool#commonPool()ForkJoin common pool}用于执行任何并行任务。
+     * 
+     * 
      * @param <T> the class of the objects to be sorted
      * @param a the array to be sorted
      * @param fromIndex the index of the first element (inclusive) to be
@@ -1182,6 +1540,9 @@ public class Arrays {
 
     /*
      * Sorting of complex type arrays.
+     * <p>
+     *  复杂类型数组的排序。
+     * 
      */
 
     /**
@@ -1189,6 +1550,9 @@ public class Arrays {
      * compatibility with broken comparators) using a system property.
      * Cannot be a static boolean in the enclosing class due to
      * circular dependencies. To be removed in a future release.
+     * <p>
+     *  可以使用系统属性选择旧合并排序实现(以与已损坏的比较器兼容)。由于循环依赖性,不能是封闭类中的静态布尔值。将在以后的版本中删除。
+     * 
      */
     static final class LegacyMergeSort {
         private static final boolean userRequested =
@@ -1232,6 +1596,25 @@ public class Arrays {
      * Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474,
      * January 1993.
      *
+     * <p>
+     *  根据其元素的{@linkplain Comparable natural ordering}将对象的指定数组按升序排序。数组中的所有元素都必须实现{@link Comparable}接口。
+     * 此外,数组中的所有元素必须<i>相互比较</i>(即{@code e1.compareTo(e2)}不得为任何元素{@code e1}抛出{@code ClassCastException} {@code e2}
+     * 在数组中)。
+     *  根据其元素的{@linkplain Comparable natural ordering}将对象的指定数组按升序排序。数组中的所有元素都必须实现{@link Comparable}接口。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     * <p>实现注意：这个实现是一个稳定的,自适应的迭代合并集,当输入数组被部分排序时,需要远小于n lg(n)的比较,同时在输入数组随机排序时提供传统合并集的性能。
+     * 如果输入数组接近排序,实现需要大约n个比较。临时存储要求从随机排序的输入数组的小常数到随机排序的输入数组的n / 2对象引用。
+     * 
+     *  <p>实现在其输入数组中具有升序和降序的同等优点,并且可以利用同一输入数组的不同部分中的升序和降序顺序。它非常适合合并两个或多个排序的数组：简单地连接数组并对结果数组进行排序。
+     * 
+     *  <p>实施方案改编自Tim Peters的Python列表排序(<a href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">
+     *  TimSort </a>)。
+     * 它使用来自Peter McIlroy的"Optimistic Sorting and Information Theoretic Complexity",Proceedings of the Fourt
+     * h Annual ACM-SIAM Symposium on Discrete Algorithms,pp 467-474,1993年1月的技术。
+     * 
+     * 
      * @param a the array to be sorted
      * @throws ClassCastException if the array contains elements that are not
      *         <i>mutually comparable</i> (for example, strings and integers)
@@ -1291,6 +1674,27 @@ public class Arrays {
      * Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474,
      * January 1993.
      *
+     * <p>
+     * 根据其元素的{@linkplain Comparable natural ordering},将指定的对象数组的指定范围按升序排序。
+     * 要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex},排除。 (如果{@code fromIndex == toIndex},要排序的范围为空。
+     * )此范围中的所有元素必须实现{@link Comparable}接口。
+     * 此外,此范围中的所有元素必须<i>相互比较</i>(即{@code e1.compareTo(e2)}不得为任何元素{@code e1}抛出{@code ClassCastException} {@code e2}
+     * 在数组中)。
+     * )此范围中的所有元素必须实现{@link Comparable}接口。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     *  <p>实现注意：这个实现是一个稳定的,自适应的迭代合并集,当输入数组被部分排序时,需要远小于n lg(n)的比较,同时在输入数组随机排序时提供传统合并集的性能。
+     * 如果输入数组接近排序,实现需要大约n个比较。临时存储要求从随机排序的输入数组的小常数到随机排序的输入数组的n / 2对象引用。
+     * 
+     * <p>实现在其输入数组中具有升序和降序的同等优点,并且可以利用同一输入数组的不同部分中的升序和降序顺序。它非常适合合并两个或多个排序的数组：简单地连接数组并对结果数组进行排序。
+     * 
+     *  <p>实施方案改编自Tim Peters的Python列表排序(<a href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">
+     *  TimSort </a>)。
+     * 它使用来自Peter McIlroy的"Optimistic Sorting and Information Theoretic Complexity",Proceedings of the Fourt
+     * h Annual ACM-SIAM Symposium on Discrete Algorithms,pp 467-474,1993年1月的技术。
+     * 
+     * 
      * @param a the array to be sorted
      * @param fromIndex the index of the first element (inclusive) to be
      *        sorted
@@ -1323,6 +1727,9 @@ public class Arrays {
      * Tuning parameter: list size at or below which insertion sort will be
      * used in preference to mergesort.
      * To be removed in a future release.
+     * <p>
+     *  调整参数：列表大小等于或低于将使用插入排序优先于mergesort。将在以后的版本中删除。
+     * 
      */
     private static final int INSERTIONSORT_THRESHOLD = 7;
 
@@ -1333,6 +1740,9 @@ public class Arrays {
      * high is the end index in dest to end sorting
      * off is the offset to generate corresponding low, high in src
      * To be removed in a future release.
+     * <p>
+     *  Src是在索引0处开始的源阵列Dest是具有可能的偏移的(可能较大的)数组目的地低是在dest中开始排序的索引高是在dest中结束排序的结束索引是生成相应的低,高在src中要在将来的版本中删除。
+     * 
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static void mergeSort(Object[] src,
@@ -1378,6 +1788,9 @@ public class Arrays {
 
     /**
      * Swaps x[a] with x[b].
+     * <p>
+     *  用x [b]交换x [a]。
+     * 
      */
     private static void swap(Object[] x, int a, int b) {
         Object t = x[a];
@@ -1418,6 +1831,25 @@ public class Arrays {
      * Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474,
      * January 1993.
      *
+     * <p>
+     *  根据指定的比较器引起的顺序对指定的对象数组进行排序。
+     * 数组中的所有元素必须通过指定的比较器</i> </i>相互比较(即{@code c.compare(e1,e2)}不能为任何元素{@code ClassCastException}代码e1}和{@code e2}
+     * )。
+     *  根据指定的比较器引起的顺序对指定的对象数组进行排序。
+     * 
+     * <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     *  <p>实现注意：这个实现是一个稳定的,自适应的迭代合并集,当输入数组被部分排序时,需要远小于n lg(n)的比较,同时在输入数组随机排序时提供传统合并集的性能。
+     * 如果输入数组接近排序,实现需要大约n个比较。临时存储要求从随机排序的输入数组的小常数到随机排序的输入数组的n / 2对象引用。
+     * 
+     *  <p>实现在其输入数组中具有升序和降序的同等优点,并且可以利用同一输入数组的不同部分中的升序和降序顺序。它非常适合合并两个或多个排序的数组：简单地连接数组并对结果数组进行排序。
+     * 
+     *  <p>实施方案改编自Tim Peters的Python列表排序(<a href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">
+     *  TimSort </a>)。
+     * 它使用来自Peter McIlroy的"Optimistic Sorting and Information Theoretic Complexity",Proceedings of the Fourt
+     * h Annual ACM-SIAM Symposium on Discrete Algorithms,pp 467-474,1993年1月的技术。
+     * 
+     * 
      * @param <T> the class of the objects to be sorted
      * @param a the array to be sorted
      * @param c the comparator to determine the order of the array.  A
@@ -1484,6 +1916,26 @@ public class Arrays {
      * Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474,
      * January 1993.
      *
+     * <p>
+     * 根据指定比较器引起的顺序对指定的对象数组的指定范围进行排序。要排序的范围从索引{@code fromIndex}(包括)到索引{@code toIndex},排除。
+     *  (如果{@code fromIndex == toIndex},则要排序的范围为空。
+     * )范围中的所有元素必须通过指定的比较器<i>互相比较</i>(即{@code c.compare (e1,e2)}不能为范围内的任何元素{@code e1}和{@code e2}抛出{@code ClassCastException}
+     * 。
+     *  (如果{@code fromIndex == toIndex},则要排序的范围为空。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     *  <p>实现注意：这个实现是一个稳定的,自适应的迭代合并集,当输入数组被部分排序时,需要远小于n lg(n)的比较,同时在输入数组随机排序时提供传统合并集的性能。
+     * 如果输入数组接近排序,实现需要大约n个比较。临时存储要求从随机排序的输入数组的小常数到随机排序的输入数组的n / 2对象引用。
+     * 
+     *  <p>实现在其输入数组中具有升序和降序的同等优点,并且可以利用同一输入数组的不同部分中的升序和降序顺序。它非常适合合并两个或多个排序的数组：简单地连接数组并对结果数组进行排序。
+     * 
+     * <p>实施方案改编自Tim Peters的Python列表排序(<a href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">
+     *  TimSort </a>)。
+     * 它使用来自Peter McIlroy的"Optimistic Sorting and Information Theoretic Complexity",Proceedings of the Fourt
+     * h Annual ACM-SIAM Symposium on Discrete Algorithms,pp 467-474,1993年1月的技术。
+     * 
+     * 
      * @param <T> the class of the objects to be sorted
      * @param a the array to be sorted
      * @param fromIndex the index of the first element (inclusive) to be
@@ -1530,6 +1982,9 @@ public class Arrays {
      * high is the end index in dest to end sorting
      * off is the offset into src corresponding to low in dest
      * To be removed in a future release.
+     * <p>
+     *  Src是从索引0开始的源数组Dest是可能的偏移量的(可能更大的)数组目标低是dest开始排序的索引高是dest到结束排序的结束索引是到src的偏移量,对应于低的dest在将来的版本中删除。
+     * 
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     private static void mergeSort(Object[] src,
@@ -1581,6 +2036,11 @@ public class Arrays {
      * Parallel prefix computation is usually more efficient than
      * sequential loops for large arrays.
      *
+     * <p>
+     *  使用提供的函数,并行地累积给定数组的每个元素。例如,如果数组最初保存{@code [2,1,0,3]}并且操作执行添加,则返回时数组保存{@code [2,3,3,6]}。
+     * 并行前缀计算通常比大数组的顺序循环更有效。
+     * 
+     * 
      * @param <T> the class of the objects in the array
      * @param array the array, which is modified in-place by this method
      * @param op a side-effect-free, associative function to perform the
@@ -1599,6 +2059,10 @@ public class Arrays {
      * Performs {@link #parallelPrefix(Object[], BinaryOperator)}
      * for the given subrange of the array.
      *
+     * <p>
+     *  对数组的给定子范围执行{@link #parallelPrefix(Object [],BinaryOperator)}。
+     * 
+     * 
      * @param <T> the class of the objects in the array
      * @param array the array
      * @param fromIndex the index of the first element, inclusive
@@ -1628,6 +2092,11 @@ public class Arrays {
      * Parallel prefix computation is usually more efficient than
      * sequential loops for large arrays.
      *
+     * <p>
+     *  使用提供的函数,并行地累积给定数组的每个元素。例如,如果数组最初保存{@code [2,1,0,3]}并且操作执行添加,则返回时数组保存{@code [2,3,3,6]}。
+     * 并行前缀计算通常比大数组的顺序循环更有效。
+     * 
+     * 
      * @param array the array, which is modified in-place by this method
      * @param op a side-effect-free, associative function to perform the
      * cumulation
@@ -1645,6 +2114,10 @@ public class Arrays {
      * Performs {@link #parallelPrefix(long[], LongBinaryOperator)}
      * for the given subrange of the array.
      *
+     * <p>
+     * 对数组的给定子范围执行{@link #parallelPrefix(long [],LongBinaryOperator)}。
+     * 
+     * 
      * @param array the array
      * @param fromIndex the index of the first element, inclusive
      * @param toIndex the index of the last element, exclusive
@@ -1677,6 +2150,13 @@ public class Arrays {
      * the returned result may not be identical to the value that would be
      * obtained if the operation was performed sequentially.
      *
+     * <p>
+     *  使用提供的函数,并行地累积给定数组的每个元素。
+     * 例如,如果数组最初保存{@code [2.0,1.0,0.0,3.0]}并且操作执行添加,则返回时数组保存{@code [2.0,3.0,3.0,6.0]}。并行前缀计算通常比大数组的顺序循环更有效。
+     * 
+     *  <p>因为浮点运算可能不是严格关联的,所以返回的结果可能与在顺序执行操作时获得的值不同。
+     * 
+     * 
      * @param array the array, which is modified in-place by this method
      * @param op a side-effect-free function to perform the cumulation
      * @throws NullPointerException if the specified array or function is null
@@ -1693,6 +2173,10 @@ public class Arrays {
      * Performs {@link #parallelPrefix(double[], DoubleBinaryOperator)}
      * for the given subrange of the array.
      *
+     * <p>
+     *  对数组的给定子范围执行{@link #parallelPrefix(double [],DoubleBinaryOperator)}。
+     * 
+     * 
      * @param array the array
      * @param fromIndex the index of the first element, inclusive
      * @param toIndex the index of the last element, exclusive
@@ -1721,6 +2205,11 @@ public class Arrays {
      * Parallel prefix computation is usually more efficient than
      * sequential loops for large arrays.
      *
+     * <p>
+     *  使用提供的函数,并行地累积给定数组的每个元素。例如,如果数组最初保存{@code [2,1,0,3]}并且操作执行添加,则返回时数组保存{@code [2,3,3,6]}。
+     * 并行前缀计算通常比大数组的顺序循环更有效。
+     * 
+     * 
      * @param array the array, which is modified in-place by this method
      * @param op a side-effect-free, associative function to perform the
      * cumulation
@@ -1738,6 +2227,10 @@ public class Arrays {
      * Performs {@link #parallelPrefix(int[], IntBinaryOperator)}
      * for the given subrange of the array.
      *
+     * <p>
+     *  对数组的给定子范围执行{@link #parallelPrefix(int [],IntBinaryOperator)}。
+     * 
+     * 
      * @param array the array
      * @param fromIndex the index of the first element, inclusive
      * @param toIndex the index of the last element, exclusive
@@ -1768,6 +2261,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     * 使用二分查找算法搜索指定值的指定long数组。在进行此调用之前,必须对数组进行排序(如通过{@link #sort(long [])}方法)。如果没有排序,结果是未定义的。
+     * 如果数组包含具有指定值的多个元素,则不能保证找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param key the value to be searched for
      * @return index of the search key, if it is contained in the array;
@@ -1794,6 +2292,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的longs指定数组的范围。在进行此调用之前,范围必须排序(如通过{@link #sort(long [],int,int)}方法)。如果没有排序,结果是未定义的。
+     * 如果范围包含具有指定值的多个元素,则不能保证将找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
      *          searched
@@ -1849,6 +2352,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定数组。在进行此调用之前,必须对数组进行排序(如通过{@link #sort(int [])}方法)。如果没有排序,结果是未定义的。
+     * 如果数组包含具有指定值的多个元素,则不能保证找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param key the value to be searched for
      * @return index of the search key, if it is contained in the array;
@@ -1875,6 +2383,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定数组的范围。在进行此调用之前,范围必须排序(如通过{@link #sort(int [],int,int)}方法)。如果没有排序,结果是未定义的。
+     * 如果范围包含具有指定值的多个元素,则不能保证将找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
      *          searched
@@ -1930,6 +2443,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     * 使用二分查找算法搜索指定值的指定指定数组。在进行此调用之前,必须对数组进行排序(如通过{@link #sort(short [])}方法)。如果没有排序,结果是未定义的。
+     * 如果数组包含具有指定值的多个元素,则不能保证找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param key the value to be searched for
      * @return index of the search key, if it is contained in the array;
@@ -1956,6 +2474,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定指定数组的范围。在进行此调用之前,范围必须排序(如通过{@link #sort(short [],int,int)}方法)。如果没有排序,结果是未定义的。
+     * 如果范围包含具有指定值的多个元素,则不能保证将找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
      *          searched
@@ -2011,6 +2534,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定字符数组。在进行此调用之前,必须对数组进行排序(如通过{@link #sort(char [])}方法)。如果没有排序,结果是未定义的。
+     * 如果数组包含具有指定值的多个元素,则不能保证找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param key the value to be searched for
      * @return index of the search key, if it is contained in the array;
@@ -2037,6 +2565,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定字符数组的范围。在进行此调用之前,范围必须排序(如通过{@link #sort(char [],int,int)}方法)。如果没有排序,结果是未定义的。
+     * 如果范围包含具有指定值的多个元素,则不能保证将找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
      *          searched
@@ -2092,6 +2625,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     * 使用二分查找算法搜索指定值的指定字节数组。在进行此调用之前,必须对数组进行排序(如通过{@link #sort(byte [])}方法)。如果没有排序,结果是未定义的。
+     * 如果数组包含具有指定值的多个元素,则不能保证找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param key the value to be searched for
      * @return index of the search key, if it is contained in the array;
@@ -2118,6 +2656,11 @@ public class Arrays {
      * multiple elements with the specified value, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定字节数组的范围。在进行此调用之前,范围必须排序(如通过{@link #sort(byte [],int,int)}方法)。如果没有排序,结果是未定义的。
+     * 如果范围包含具有指定值的多个元素,则不能保证将找到哪个元素。
+     * 
+     * 
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
      *          searched
@@ -2174,6 +2717,11 @@ public class Arrays {
      * one will be found.  This method considers all NaN values to be
      * equivalent and equal.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定的双精度数组。在进行此调用之前,数组必须排序(如通过{@link #sort(double [])}方法)。如果没有排序,结果是未定义的。
+     * 如果数组包含具有指定值的多个元素,则不能保证找到哪个元素。该方法考虑所有NaN值是等效和相等的。
+     * 
+     * 
      * @param a the array to be searched
      * @param key the value to be searched for
      * @return index of the search key, if it is contained in the array;
@@ -2201,6 +2749,11 @@ public class Arrays {
      * one will be found.  This method considers all NaN values to be
      * equivalent and equal.
      *
+     * <p>
+     * 使用二分查找算法搜索指定值的指定的双精度数组的范围。在进行此调用之前,范围必须排序(如通过{@link #sort(double [],int,int)}方法)。如果没有排序,结果是未定义的。
+     * 如果范围包含具有指定值的多个元素,则不能保证将找到哪个元素。该方法考虑所有NaN值是等效和相等的。
+     * 
+     * 
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
      *          searched
@@ -2265,6 +2818,11 @@ public class Arrays {
      * one will be found. This method considers all NaN values to be
      * equivalent and equal.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定浮点数组。在进行此调用之前,必须对数组进行排序(如通过{@link #sort(float [])}方法)。如果没有排序,结果是未定义的。
+     * 如果数组包含具有指定值的多个元素,则不能保证找到哪个元素。该方法考虑所有NaN值是等效和相等的。
+     * 
+     * 
      * @param a the array to be searched
      * @param key the value to be searched for
      * @return index of the search key, if it is contained in the array;
@@ -2292,6 +2850,11 @@ public class Arrays {
      * one will be found. This method considers all NaN values to be
      * equivalent and equal.
      *
+     * <p>
+     *  使用二分查找算法搜索指定值的指定浮点数组的范围。在进行此调用之前,范围必须排序(如通过{@link #sort(float [],int,int)}方法)。如果没有排序,结果是未定义的。
+     * 如果范围包含具有指定值的多个元素,则不能保证将找到哪个元素。该方法考虑所有NaN值是等效和相等的。
+     * 
+     * 
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
      *          searched
@@ -2362,6 +2925,12 @@ public class Arrays {
      * elements equal to the specified object, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     * 使用二分查找算法搜索指定对象的指定数组。
+     * 在进行此调用之前,数组必须根据其元素的{@linkplain Comparable natural ordering}(如{@link #sort(Object [])}方法)按升序排序。
+     * 如果没有排序,结果是未定义的。 (如果数组包含不可相互比较的元素(例如,字符串和整数),则它不能根据其元素的自然排序进行排序,因此结果未定义。)如果数组包含多个元素等于指定的对象,不能保证找到哪一个。
+     * 
+     * 
      * @param a the array to be searched
      * @param key the value to be searched for
      * @return index of the search key, if it is contained in the array;
@@ -2396,6 +2965,14 @@ public class Arrays {
      * elements equal to the specified object, there is no guarantee which
      * one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定对象的指定数组的范围。
+     * 在进行此调用之前,范围必须根据其元素的{@linkplain Comparable natural ordering}(如{@link #sort(Object [],int,int)}方法按升序排序)
+     * 。
+     *  使用二分查找算法搜索指定对象的指定数组的范围。如果没有排序,结果是未定义的。 (如果范围包含不可相互比较的元素(例如,字符串和整数),则<i>不能根据其元素的自然排序进行排序,因此结果是未定义的。
+     * )如果范围包含多个元素等于指定的对象,不能保证找到哪一个。
+     * 
+     * 
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
      *          searched
@@ -2459,6 +3036,12 @@ public class Arrays {
      * elements equal to the specified object, there is no guarantee which one
      * will be found.
      *
+     * <p>
+     * 使用二分查找算法搜索指定对象的指定数组。
+     * 在进行此调用之前,数组必须根据指定的比较器(如通过{@link #sort(Object [],Comparator)sort(T [],Comparator)}方法按升序排序。
+     * 如果没有排序,结果是未定义的。如果数组包含等于指定对象的多个元素,则不能保证将找到哪个元素。
+     * 
+     * 
      * @param <T> the class of the objects in the array
      * @param a the array to be searched
      * @param key the value to be searched for
@@ -2495,6 +3078,12 @@ public class Arrays {
      * If the range contains multiple elements equal to the specified object,
      * there is no guarantee which one will be found.
      *
+     * <p>
+     *  使用二分查找算法搜索指定对象的指定数组的范围。
+     * 范围必须根据指定的比较器(如{@link #sort(Object [],int,int,Comparator)sort(T [],int,int,Comparator)}方法进行此调用。
+     * 如果没有排序,结果是未定义的。如果范围包含等于指定对象的多个元素,则不能保证将找到哪个元素。
+     * 
+     * 
      * @param <T> the class of the objects in the array
      * @param a the array to be searched
      * @param fromIndex the index of the first element (inclusive) to be
@@ -2563,6 +3152,11 @@ public class Arrays {
      * are equal if they contain the same elements in the same order.  Also,
      * two array references are considered equal if both are <tt>null</tt>.<p>
      *
+     * <p>
+     *  如果两个指定的longs数组彼此<i>等于</i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则它们是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2592,6 +3186,11 @@ public class Arrays {
      * are equal if they contain the same elements in the same order.  Also,
      * two array references are considered equal if both are <tt>null</tt>.<p>
      *
+     * <p>
+     * 如果两个指定的int数组彼此<i>等于</i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则它们是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2621,6 +3220,11 @@ public class Arrays {
      * are equal if they contain the same elements in the same order.  Also,
      * two array references are considered equal if both are <tt>null</tt>.<p>
      *
+     * <p>
+     *  如果两个指定的shorts数组彼此<i>等于</i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则它们是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2650,6 +3254,11 @@ public class Arrays {
      * are equal if they contain the same elements in the same order.  Also,
      * two array references are considered equal if both are <tt>null</tt>.<p>
      *
+     * <p>
+     *  如果两个指定的字符数组彼此<i>等于</i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则它们是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2679,6 +3288,11 @@ public class Arrays {
      * are equal if they contain the same elements in the same order.  Also,
      * two array references are considered equal if both are <tt>null</tt>.<p>
      *
+     * <p>
+     * 如果两个指定的字节数组彼此<i>等于</i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则它们是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2708,6 +3322,11 @@ public class Arrays {
      * are equal if they contain the same elements in the same order.  Also,
      * two array references are considered equal if both are <tt>null</tt>.<p>
      *
+     * <p>
+     *  如果两个指定的布尔数组彼此<i>等于</i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则它们是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2742,6 +3361,15 @@ public class Arrays {
      * (Unlike the <tt>==</tt> operator, this method considers
      * <tt>NaN</tt> equals to itself, and 0.0d unequal to -0.0d.)
      *
+     * <p>
+     *  如果两个指定的双精度数组彼此<i>等于</i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则它们是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     *  如果：<pre> <tt> new Double(d1).equals(new Double(d2))</tt> </tt>,则两个双精度<tt> d1 </tt>和<tt> pre>(与<tt> =
+     * = </tt>运算符不同,此方法将<tt> NaN </tt>等于自身,0.0d不等于-0.0d。
+     * )。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2777,6 +3405,14 @@ public class Arrays {
      * (Unlike the <tt>==</tt> operator, this method considers
      * <tt>NaN</tt> equals to itself, and 0.0f unequal to -0.0f.)
      *
+     * <p>
+     * 如果两个指定的浮点数据彼此<i>等于<i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则它们是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     *  如果：<pre> <tt> new Float(f1).equals(new Float(f2))</tt> </tt>,则两个浮点<tt> f1 </tt>和<tt> f2 </tt> pre>(与
+     * <tt> == </tt>运算符不同,此方法认为<tt> NaN </tt>等于其自身,0.0f不等于-0.0f)。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2809,6 +3445,12 @@ public class Arrays {
      * they contain the same elements in the same order.  Also, two array
      * references are considered equal if both are <tt>null</tt>.<p>
      *
+     * <p>
+     *  如果两个指定的对象数组彼此<i>等于</i>,则返回<tt> true </tt>。如果两个阵列包含相同数量的元素,并且两个阵列中的所有相应元素对相等,则认为两个阵列相等。
+     * 如果<tt>(e1 == null?e2 == null：e1.equals(e2)),则认为两个对象<tt> e1 </tt>和<tt> e2 </tt> )</tt>。
+     * 换句话说,如果两个数组包含相同顺序的相同元素,则这两个数组是相等的。此外,如果两个数组引用都是<tt> null </tt>。<p>,则两个数组引用被视为相等。
+     * 
+     * 
      * @param a one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -2839,6 +3481,10 @@ public class Arrays {
      * Assigns the specified long value to each element of the specified array
      * of longs.
      *
+     * <p>
+     *  将指定的long值分配给指定的longs数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      */
@@ -2854,6 +3500,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     * 将指定的long值分配给指定的longs数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -2874,6 +3525,10 @@ public class Arrays {
      * Assigns the specified int value to each element of the specified array
      * of ints.
      *
+     * <p>
+     *  将指定的int值分配给指定的int数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      */
@@ -2889,6 +3544,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     *  将指定的int值分配给指定的int数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -2909,6 +3569,10 @@ public class Arrays {
      * Assigns the specified short value to each element of the specified array
      * of shorts.
      *
+     * <p>
+     *  将指定的短值分配给指定的短缺数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      */
@@ -2924,6 +3588,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     *  将指定的短值分配给指定的短缺数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -2944,6 +3613,10 @@ public class Arrays {
      * Assigns the specified char value to each element of the specified array
      * of chars.
      *
+     * <p>
+     *  将指定的char值分配给指定的字符数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      */
@@ -2959,6 +3632,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     *  将指定的char值分配给指定的字符数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -2979,6 +3657,10 @@ public class Arrays {
      * Assigns the specified byte value to each element of the specified array
      * of bytes.
      *
+     * <p>
+     *  将指定的字节值分配给指定的字节数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      */
@@ -2994,6 +3676,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     * 将指定的字节值分配给指定字节数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -3014,6 +3701,10 @@ public class Arrays {
      * Assigns the specified boolean value to each element of the specified
      * array of booleans.
      *
+     * <p>
+     *  将指定的布尔值分配给指定的布尔数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      */
@@ -3029,6 +3720,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     *  将指定的布尔值分配给指定的布尔数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -3050,6 +3746,10 @@ public class Arrays {
      * Assigns the specified double value to each element of the specified
      * array of doubles.
      *
+     * <p>
+     *  将指定的double值分配给指定的双精度数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      */
@@ -3065,6 +3765,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     *  将指定的double值分配给指定的double数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -3085,6 +3790,10 @@ public class Arrays {
      * Assigns the specified float value to each element of the specified array
      * of floats.
      *
+     * <p>
+     *  将指定的浮点值分配给指定的浮点数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      */
@@ -3100,6 +3809,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     *  将指定的浮点值分配给指定的浮点数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -3120,6 +3834,10 @@ public class Arrays {
      * Assigns the specified Object reference to each element of the specified
      * array of Objects.
      *
+     * <p>
+     * 将指定的对象引用分配给指定的对象数组的每个元素。
+     * 
+     * 
      * @param a the array to be filled
      * @param val the value to be stored in all elements of the array
      * @throws ArrayStoreException if the specified value is not of a
@@ -3137,6 +3855,11 @@ public class Arrays {
      * <tt>toIndex</tt>, exclusive.  (If <tt>fromIndex==toIndex</tt>, the
      * range to be filled is empty.)
      *
+     * <p>
+     *  将指定的Object引用分配给指定的对象数组的指定范围的每个元素。要填充的范围从索引<tt> fromIndex </tt>(包括)到索引<tt>到Index</tt>,排除。
+     *  (如果<tt> fromIndex == toIndex </tt>,则要填充的范围为空。)。
+     * 
+     * 
      * @param a the array to be filled
      * @param fromIndex the index of the first element (inclusive) to be
      *        filled with the specified value
@@ -3167,6 +3890,11 @@ public class Arrays {
      * is greater than that of the original array.
      * The resulting array is of exactly the same class as the original array.
      *
+     * <p>
+     *  复制指定的数组,使用空值进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt> null </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。结果数组与原始数组的类完全相同。
+     * 
+     * 
      * @param <T> the class of the objects in the array
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
@@ -3191,6 +3919,11 @@ public class Arrays {
      * is greater than that of the original array.
      * The resulting array is of the class <tt>newType</tt>.
      *
+     * <p>
+     *  复制指定的数组,使用空值进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt> null </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。生成的数组是<tt> newType </tt>类。
+     * 
+     * 
      * @param <U> the class of the objects in the original array
      * @param <T> the class of the objects in the returned array
      * @param original the array to be copied
@@ -3224,6 +3957,11 @@ public class Arrays {
      * Such indices will exist if and only if the specified length
      * is greater than that of the original array.
      *
+     * <p>
+     * 复制指定的数组,使用零进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效而不是原始有效的任何索引,副本将包含<tt>(byte)0 </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。
+     * 
+     * 
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
      * @return a copy of the original array, truncated or padded with zeros
@@ -3248,6 +3986,11 @@ public class Arrays {
      * Such indices will exist if and only if the specified length
      * is greater than that of the original array.
      *
+     * <p>
+     *  复制指定的数组,使用零进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt>(short)0 </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。
+     * 
+     * 
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
      * @return a copy of the original array, truncated or padded with zeros
@@ -3272,6 +4015,11 @@ public class Arrays {
      * Such indices will exist if and only if the specified length
      * is greater than that of the original array.
      *
+     * <p>
+     *  复制指定的数组,使用零进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt> 0 </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。
+     * 
+     * 
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
      * @return a copy of the original array, truncated or padded with zeros
@@ -3296,6 +4044,11 @@ public class Arrays {
      * Such indices will exist if and only if the specified length
      * is greater than that of the original array.
      *
+     * <p>
+     * 复制指定的数组,使用零进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt> 0L </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。
+     * 
+     * 
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
      * @return a copy of the original array, truncated or padded with zeros
@@ -3320,6 +4073,11 @@ public class Arrays {
      * will exist if and only if the specified length is greater than that of
      * the original array.
      *
+     * <p>
+     *  复制指定的数组,使用空字符进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt>'\\ u000'</tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。
+     * 
+     * 
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
      * @return a copy of the original array, truncated or padded with null characters
@@ -3344,6 +4102,11 @@ public class Arrays {
      * Such indices will exist if and only if the specified length
      * is greater than that of the original array.
      *
+     * <p>
+     *  复制指定的数组,使用零进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt> 0f </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。
+     * 
+     * 
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
      * @return a copy of the original array, truncated or padded with zeros
@@ -3368,6 +4131,11 @@ public class Arrays {
      * Such indices will exist if and only if the specified length
      * is greater than that of the original array.
      *
+     * <p>
+     * 复制指定的数组,使用零进行截断或填充(如果需要),以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt> 0d </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。
+     * 
+     * 
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
      * @return a copy of the original array, truncated or padded with zeros
@@ -3392,6 +4160,11 @@ public class Arrays {
      * Such indices will exist if and only if the specified length
      * is greater than that of the original array.
      *
+     * <p>
+     *  复制指定的数组,使用<tt> false </tt>(如果必要)截断或填充,以便副本具有指定的长度。对于在原始数组和副本中都有效的所有索引,这两个数组将包含相同的值。
+     * 对于在副本中有效但不是原始有效的任何索引,副本将包含<tt> false </tt>。当且仅当指定的长度大于原始数组的长度时,这样的索引才会存在。
+     * 
+     * 
      * @param original the array to be copied
      * @param newLength the length of the copy to be returned
      * @return a copy of the original array, truncated or padded with false elements
@@ -3423,6 +4196,17 @@ public class Arrays {
      * <p>
      * The resulting array is of exactly the same class as the original array.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt> null </tt>放置在索引大于或等于<tt> o
+     * riginal.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * <p>
+     *  结果数组与原始数组的类完全相同。
+     * 
+     * 
      * @param <T> the class of the objects in the array
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
@@ -3456,6 +4240,15 @@ public class Arrays {
      * of the returned array will be <tt>to - from</tt>.
      * The resulting array is of the class <tt>newType</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt> null </tt>放置在索引大于或等于<tt> o
+     * riginal.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。生成的数组是<tt> newType </tt>类。
+     * 
+     * 
      * @param <U> the class of the objects in the original array
      * @param <T> the class of the objects in the returned array
      * @param original the array from which a range is to be copied
@@ -3501,6 +4294,15 @@ public class Arrays {
      * greater than or equal to <tt>original.length - from</tt>.  The length
      * of the returned array will be <tt>to - from</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt>(字节)0 </tt>放置在其索引大于或等于<tt> 
+     * original.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * 
+     * 
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
      * @param to the final index of the range to be copied, exclusive.
@@ -3537,6 +4339,15 @@ public class Arrays {
      * greater than or equal to <tt>original.length - from</tt>.  The length
      * of the returned array will be <tt>to - from</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt>(short)0 </tt>放置在其索引大于或等于<tt>
+     *  original.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * 
+     * 
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
      * @param to the final index of the range to be copied, exclusive.
@@ -3573,6 +4384,15 @@ public class Arrays {
      * greater than or equal to <tt>original.length - from</tt>.  The length
      * of the returned array will be <tt>to - from</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt> 0 </tt>放置在其索引大于或等于<tt> ori
+     * ginal.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * 
+     * 
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
      * @param to the final index of the range to be copied, exclusive.
@@ -3609,6 +4429,15 @@ public class Arrays {
      * greater than or equal to <tt>original.length - from</tt>.  The length
      * of the returned array will be <tt>to - from</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt> 0L </tt>放置在索引大于或等于<tt> ori
+     * ginal.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * 
+     * 
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
      * @param to the final index of the range to be copied, exclusive.
@@ -3645,6 +4474,15 @@ public class Arrays {
      * greater than or equal to <tt>original.length - from</tt>.  The length
      * of the returned array will be <tt>to - from</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt>'\\ u000'</tt>放置在其索引大于或等于<tt>
+     *  original.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * 
+     * 
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
      * @param to the final index of the range to be copied, exclusive.
@@ -3681,6 +4519,15 @@ public class Arrays {
      * greater than or equal to <tt>original.length - from</tt>.  The length
      * of the returned array will be <tt>to - from</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt> 0f </tt>放置在其索引大于或等于<tt> or
+     * iginal.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * 
+     * 
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
      * @param to the final index of the range to be copied, exclusive.
@@ -3717,6 +4564,15 @@ public class Arrays {
      * greater than or equal to <tt>original.length - from</tt>.  The length
      * of the returned array will be <tt>to - from</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt>起始于</tt>)必须介于零和<tt> original.length </tt>之间(含)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>到</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt> 0d </tt>放置在其索引大于或等于<tt> or
+     * iginal.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * 
+     * 
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
      * @param to the final index of the range to be copied, exclusive.
@@ -3753,6 +4609,15 @@ public class Arrays {
      * greater than or equal to <tt>original.length - from</tt>.  The length
      * of the returned array will be <tt>to - from</tt>.
      *
+     * <p>
+     * 将指定数组的指定范围复制到新数组中。范围的初始索引(<tt> from </tt>)必须介于零和<tt> original.length </tt>之间(含首尾)。
+     *  <tt> original [from] </tt>的值放入副本的初始元素(除非<tt> from == original.length </tt>或<tt> from ==到</tt> )。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。
+     * 范围(<tt>至</tt>)的最终索引必须大于或等于<tt>来自</tt>,可能大于<tt> original.length </tt>其中<tt> false </tt>放置在其索引大于或等于<tt>
+     *  original.length  -  from </tt>的副本的所有元素中。
+     * 来自原始数组中后续元素的值将放入副本中的后续元素中。返回的数组的长度为<tt> to  -  from </tt>。
+     * 
+     * 
      * @param original the array from which a range is to be copied
      * @param from the initial index of the range to be copied, inclusive
      * @param to the final index of the range to be copied, exclusive.
@@ -3790,6 +4655,16 @@ public class Arrays {
      *     List&lt;String&gt; stooges = Arrays.asList("Larry", "Moe", "Curly");
      * </pre>
      *
+     * <p>
+     *  返回由指定数组支持的固定大小的列表。 (对返回的列表的更改"写入"到数组。)此方法作为基于数组和基于集合的API之间的桥梁,与{@link Collection#toArray}结合使用。
+     * 返回的列表是可序列化的,并实现{@link RandomAccess}。
+     * 
+     *  <p>此方法还提供了一种方便的方法来创建一个初始化为包含多个元素的固定大小的列表：
+     * <pre>
+     *  List&lt; String&gt; stooges = Arrays.asList("Larry","Moe","Curly");
+     * </pre>
+     * 
+     * 
      * @param <T> the class of the objects in the array
      * @param a the array by which the list will be backed
      * @return a list view of the specified array
@@ -3801,6 +4676,8 @@ public class Arrays {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class ArrayList<E> extends AbstractList<E>
@@ -3908,6 +4785,17 @@ public class Arrays {
      * instances representing the elements of <tt>a</tt> in the same order.
      * If <tt>a</tt> is <tt>null</tt>, this method returns 0.
      *
+     * <p>
+     * 基于指定数组的内容返回哈希代码。
+     * 对于任何两个<tt> long </tt>数组<tt> a </tt>和<tt> b </tt>,使得<tt> Arrays.equals(a,b)</tt> <tt> Arrays.hashCode(
+     * a)== Arrays.hashCode(b)</tt>的情况。
+     * 基于指定数组的内容返回哈希代码。
+     * 
+     *  <p>此方法返回的值与在{@link List}上调用{@link List#hashCode()<tt> hashCode </tt>}方法获得的值相同, @link Long}实例以相同的顺序表示
+     * <tt> a </tt>的元素。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose hash value to compute
      * @return a content-based hash code for <tt>a</tt>
      * @since 1.5
@@ -3937,6 +4825,17 @@ public class Arrays {
      * instances representing the elements of <tt>a</tt> in the same order.
      * If <tt>a</tt> is <tt>null</tt>, this method returns 0.
      *
+     * <p>
+     *  基于指定数组的内容返回哈希代码。
+     * 对于任何两个非空的<tt> int </tt>数组<tt> a </tt>和<tt> b </tt>,以使<tt> Arrays.equals(a,b)</tt>也是<tt> Arrays.hashCo
+     * de(a)== Arrays.hashCode(b)</tt>的情况。
+     *  基于指定数组的内容返回哈希代码。
+     * 
+     *  <p>此方法返回的值与在{@link List}上调用{@link List#hashCode()<tt> hashCode </tt>}方法获得的值相同, @link Integer}实例以相同的顺
+     * 序表示<tt> a </tt>的元素。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose hash value to compute
      * @return a content-based hash code for <tt>a</tt>
      * @since 1.5
@@ -3964,6 +4863,17 @@ public class Arrays {
      * instances representing the elements of <tt>a</tt> in the same order.
      * If <tt>a</tt> is <tt>null</tt>, this method returns 0.
      *
+     * <p>
+     *  基于指定数组的内容返回哈希代码。
+     * 对于任何两个<tt> short </tt>数组<tt> a </tt>和<tt> b </tt>,使得<tt> Arrays.equals(a,b)</tt> <tt> Arrays.hashCode
+     * (a)== Arrays.hashCode(b)</tt>的情况。
+     *  基于指定数组的内容返回哈希代码。
+     * 
+     * <p>此方法返回的值与在{@link List}上调用{@link List#hashCode()<tt> hashCode </tt>}方法获得的值相同, @link Short}实例以相同的顺序表示
+     * <tt> a </tt>的元素。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose hash value to compute
      * @return a content-based hash code for <tt>a</tt>
      * @since 1.5
@@ -3991,6 +4901,17 @@ public class Arrays {
      * instances representing the elements of <tt>a</tt> in the same order.
      * If <tt>a</tt> is <tt>null</tt>, this method returns 0.
      *
+     * <p>
+     *  基于指定数组的内容返回哈希代码。
+     * 对于任何两个<tt> char </tt>数组<tt> a </tt>和<tt> b </tt>,使得<tt> Arrays.equals(a,b)</tt> <tt> Arrays.hashCode(
+     * a)== Arrays.hashCode(b)</tt>的情况。
+     *  基于指定数组的内容返回哈希代码。
+     * 
+     *  <p>此方法返回的值与在{@link List}上调用{@link List#hashCode()<tt> hashCode </tt>}方法获得的值相同, @link Character}实例以相同
+     * 的顺序表示<tt> a </tt>的元素。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose hash value to compute
      * @return a content-based hash code for <tt>a</tt>
      * @since 1.5
@@ -4018,6 +4939,17 @@ public class Arrays {
      * instances representing the elements of <tt>a</tt> in the same order.
      * If <tt>a</tt> is <tt>null</tt>, this method returns 0.
      *
+     * <p>
+     *  基于指定数组的内容返回哈希代码。
+     * 对于任何两个<tt>字节</tt>数组<tt> a </tt>和<tt> b </tt>,使得<tt> Arrays.equals(a,b)</tt> <tt> Arrays.hashCode(a)==
+     *  Arrays.hashCode(b)</tt>的情况。
+     *  基于指定数组的内容返回哈希代码。
+     * 
+     *  <p>此方法返回的值与在{@link List}上调用{@link List#hashCode()<tt> hashCode </tt>}方法获得的值相同, @link Byte}实例以相同的顺序表示
+     * <tt> a </tt>的元素。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose hash value to compute
      * @return a content-based hash code for <tt>a</tt>
      * @since 1.5
@@ -4045,6 +4977,17 @@ public class Arrays {
      * instances representing the elements of <tt>a</tt> in the same order.
      * If <tt>a</tt> is <tt>null</tt>, this method returns 0.
      *
+     * <p>
+     * 基于指定数组的内容返回哈希代码。
+     * 对于任何两个<tt>布尔</tt>数组<tt> a </tt>和<tt> b </tt>,使得<tt> Arrays.equals(a,b)</tt> <tt> Arrays.hashCode(a)==
+     *  Arrays.hashCode(b)</tt>的情况。
+     * 基于指定数组的内容返回哈希代码。
+     * 
+     *  <p>此方法返回的值与在{@link List}上调用{@link List#hashCode()<tt> hashCode </tt>}方法获得的值相同, @link Boolean}实例以相同的顺
+     * 序表示<tt> a </tt>的元素。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose hash value to compute
      * @return a content-based hash code for <tt>a</tt>
      * @since 1.5
@@ -4072,6 +5015,17 @@ public class Arrays {
      * instances representing the elements of <tt>a</tt> in the same order.
      * If <tt>a</tt> is <tt>null</tt>, this method returns 0.
      *
+     * <p>
+     *  基于指定数组的内容返回哈希代码。
+     * 对于任何两个<tt> float </tt>数组<tt> a </tt>和<tt> b </tt>,使得<tt> Arrays.equals(a,b)</tt> <tt> Arrays.hashCode
+     * (a)== Arrays.hashCode(b)</tt>的情况。
+     *  基于指定数组的内容返回哈希代码。
+     * 
+     *  <p>此方法返回的值与在{@link List}上调用{@link List#hashCode()<tt> hashCode </tt>}方法获得的值相同, @link Float}实例以相同的顺序表
+     * 示<tt> a </tt>的元素。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose hash value to compute
      * @return a content-based hash code for <tt>a</tt>
      * @since 1.5
@@ -4099,6 +5053,17 @@ public class Arrays {
      * instances representing the elements of <tt>a</tt> in the same order.
      * If <tt>a</tt> is <tt>null</tt>, this method returns 0.
      *
+     * <p>
+     *  基于指定数组的内容返回哈希代码。
+     * 对于任何两个<tt> double </tt>数组<tt> a </tt>和<tt> b </tt>,使得<tt> Arrays.equals(a,b)</tt> <tt> Arrays.hashCod
+     * e(a)== Arrays.hashCode(b)</tt>的情况。
+     *  基于指定数组的内容返回哈希代码。
+     * 
+     * <p>此方法返回的值与在{@link List}上调用{@link List#hashCode()<tt> hashCode </tt>}方法获得的值相同, @link Double}实例以相同的顺序表
+     * 示<tt> a </tt>的元素。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose hash value to compute
      * @return a content-based hash code for <tt>a</tt>
      * @since 1.5
@@ -4131,6 +5096,16 @@ public class Arrays {
      * be returned by <tt>Arrays.asList(a).hashCode()</tt>, unless <tt>a</tt>
      * is <tt>null</tt>, in which case <tt>0</tt> is returned.
      *
+     * <p>
+     *  基于指定数组的内容返回哈希代码。如果数组包含其他数组作为元素,则哈希码基于其身份而不是其内容。因此,可以在包含自身作为元素的数组上直接或间接通过一个或多个数组级别调用此方法。
+     * 
+     *  <p>对于任何两个数组<tt> a </tt>和<tt> b </tt>,使<tt> Arrays.equals(a,b)</tt>,<tt > Arrays.hashCode(a)== Arrays
+     * .hashCode(b)</tt>。
+     * 
+     *  <p>此方法返回的值等于<tt> Arrays.asList(a).hashCode()</tt>返回的值,除非<tt> a </tt>为<tt> null </tt>,在这种情况下返回<tt> 0 
+     * </tt>。
+     * 
+     * 
      * @param a the array whose content-based hash code to compute
      * @return a content-based hash code for <tt>a</tt>
      * @see #deepHashCode(Object[])
@@ -4172,6 +5147,19 @@ public class Arrays {
      * of a reference type.  If <tt>a</tt> is <tt>null</tt>, this method
      * returns 0.
      *
+     * <p>
+     *  根据指定数组的"深度内容"返回哈希码。如果数组包含其他数组作为元素,则哈希码基于它们的内容,等等,无限。因此,在包含自身作为元素的数组上直接或间接通过一个或多个数组级别调用此方法是不可接受的。
+     * 这种调用的行为是未定义的。
+     * 
+     * <p>对于任何两个数组<tt> a </tt>和<tt> b </tt>,使<tt> Arrays.deepEquals(a,b)</tt> > Arrays.deepHashCode(a)== Arr
+     * ays.deepHashCode(b)</tt>。
+     * 
+     *  <p>此方法返回的值的计算类似于在包含与<tt> a </tt>相同元素的列表中以相同顺序由{@link List#hashCode()}返回的值的计算,有一个区别：如果<tt> a </tt>的元素
+     * <tt> e </tt>本身就是一个数组,则不会通过调用<tt> e.hashCode()</tt> ,而是通过调用<tt> Arrays.hashCode(e)</tt>的适当重载,如果<tt> e 
+     * </tt>是原始类型的数组,或者通过调用<tt> Arrays.deepHashCode e)</tt>递归,如果<tt> e </tt>是引用类型的数组。
+     * 如果<tt> a </tt>是<tt> null </tt>,则此方法返回0。
+     * 
+     * 
      * @param a the array whose deep-content-based hash code to compute
      * @return a deep-content-based hash code for <tt>a</tt>
      * @see #hashCode(Object[])
@@ -4240,6 +5228,22 @@ public class Arrays {
      * either directly or indirectly through one or more levels of arrays,
      * the behavior of this method is undefined.
      *
+     * <p>
+     *  如果两个指定的数组<i>彼此深度相等,则返回<tt> true </tt>。与{@link #equals(Object [],Object [])}方法不同,此方法适用于任意深度的嵌套数组。
+     * 
+     *  <p>如果两个数组引用都是<tt> null </tt>,或者如果它们引用包含相同数量的元素的数组,并且两个数组中所有相应的元素对都是相等的,则两个数组引用被认为是相等的。
+     * 
+     *  <p>如果满足以下任一条件,则两个可能的<tt> null </tt>元素<tt> e1 </tt>和<tt> e2 </tt>
+     * <ul>
+     * <li> <tt> e1 </tt>和<tt> e2 </tt>都是对象引用类型的数组,<tt> Arrays.deepEquals(e1,e2)将返回true </tt> <li> <tt> e1 </tt>
+     * 和<tt> e2 </tt>是相同基本类型的数组,<tt> Arrays.equals(e1,e2)</tt>的适当重载将返回true。
+     *  <li> <tt> e1 == e2 </tt> <li> <tt> e1.equals(e2)</tt>将返回true。
+     * </ul>
+     *  请注意,此定义允许任何深度的<tt> null </tt>元素。
+     * 
+     *  <p>如果指定数组中的任何一个直接或间接地通过一个或多个数组级别将其自身作为元素,则此方法的行为是未定义的。
+     * 
+     * 
      * @param a1 one array to be tested for equality
      * @param a2 the other array to be tested for equality
      * @return <tt>true</tt> if the two arrays are equal
@@ -4309,6 +5313,11 @@ public class Arrays {
      * <tt>String.valueOf(long)</tt>.  Returns <tt>"null"</tt> if <tt>a</tt>
      * is <tt>null</tt>.
      *
+     * <p>
+     *  返回指定数组的内容的字符串表示形式。字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(long)</tt>转换为字符串。如果<tt> a </tt>是<tt> null </tt>,则返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @since 1.5
@@ -4339,6 +5348,11 @@ public class Arrays {
      * <tt>String.valueOf(int)</tt>.  Returns <tt>"null"</tt> if <tt>a</tt> is
      * <tt>null</tt>.
      *
+     * <p>
+     *  返回指定数组的内容的字符串表示形式。字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(int)</tt>转换为字符串。如果<tt> a </tt>是<tt> null </tt>,则返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @since 1.5
@@ -4369,6 +5383,11 @@ public class Arrays {
      * <tt>String.valueOf(short)</tt>.  Returns <tt>"null"</tt> if <tt>a</tt>
      * is <tt>null</tt>.
      *
+     * <p>
+     * 返回指定数组的内容的字符串表示形式。字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(short)</tt>转换为字符串。如果<tt> a </tt>是<tt> null </tt>,则返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @since 1.5
@@ -4399,6 +5418,11 @@ public class Arrays {
      * <tt>String.valueOf(char)</tt>.  Returns <tt>"null"</tt> if <tt>a</tt>
      * is <tt>null</tt>.
      *
+     * <p>
+     *  返回指定数组的内容的字符串表示形式。字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(char)</tt>转换为字符串。如果<tt> a </tt>是<tt> null </tt>,则返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @since 1.5
@@ -4429,6 +5453,11 @@ public class Arrays {
      * <tt>String.valueOf(byte)</tt>.  Returns <tt>"null"</tt> if
      * <tt>a</tt> is <tt>null</tt>.
      *
+     * <p>
+     *  返回指定数组的内容的字符串表示形式。字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(byte)</tt>转换为字符串。如果<tt> a </tt>是<tt> null </tt>,则返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @since 1.5
@@ -4459,6 +5488,11 @@ public class Arrays {
      * <tt>String.valueOf(boolean)</tt>.  Returns <tt>"null"</tt> if
      * <tt>a</tt> is <tt>null</tt>.
      *
+     * <p>
+     * 返回指定数组的内容的字符串表示形式。字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(boolean)</tt>转换为字符串。如果<tt> a </tt>是<tt> null </tt>,则返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @since 1.5
@@ -4489,6 +5523,11 @@ public class Arrays {
      * <tt>String.valueOf(float)</tt>.  Returns <tt>"null"</tt> if <tt>a</tt>
      * is <tt>null</tt>.
      *
+     * <p>
+     *  返回指定数组的内容的字符串表示形式。字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(float)</tt>转换为字符串。如果<tt> a </tt>是<tt> null </tt>,则返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @since 1.5
@@ -4520,6 +5559,11 @@ public class Arrays {
      * <tt>String.valueOf(double)</tt>.  Returns <tt>"null"</tt> if <tt>a</tt>
      * is <tt>null</tt>.
      *
+     * <p>
+     *  返回指定数组的内容的字符串表示形式。字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(double)</tt>转换为字符串。如果<tt> a </tt>是<tt> null </tt>,则返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @since 1.5
@@ -4552,6 +5596,15 @@ public class Arrays {
      * be returned by <tt>Arrays.asList(a).toString()</tt>, unless <tt>a</tt>
      * is <tt>null</tt>, in which case <tt>"null"</tt> is returned.
      *
+     * <p>
+     * 返回指定数组的内容的字符串表示形式。
+     * 如果数组包含其他数组作为元素,则通过继承自<tt> Object </tt>的{@link Object#toString}方法将其转换为字符串,该方法描述了它们的<i>标识</i>,而不是它们的内容。
+     * 返回指定数组的内容的字符串表示形式。
+     * 
+     *  <p>此方法返回的值等于<tt> Arrays.asList(a).toString()</tt>返回的值,除非<tt> a </tt>为<tt> null </tt>,在这种情况下返回<tt>"nu
+     * ll"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @see #deepToString(Object[])
@@ -4603,6 +5656,21 @@ public class Arrays {
      * <p>This method returns <tt>"null"</tt> if the specified array
      * is <tt>null</tt>.
      *
+     * <p>
+     *  返回指定数组的"深度内容"的字符串表示形式。如果数组包含其他数组作为元素,则字符串表示包含其内容等。此方法设计用于将多维数组转换为字符串。
+     * 
+     *  <p>字符串表示形式由括在方括号(<tt>"[]"</tt>)中的数组元素的列表组成。相邻的元素由字符<tt>","</tt>(逗号后跟空格)分隔。
+     * 元素通过<tt> String.valueOf(Object)</tt>转换为字符串,除非它们是数组。
+     * 
+     *  <p>如果元素<tt> e </tt>是基本类型的数组,则通过调用<tt> Arrays.toString(e)</tt>的适当重载将其转换为字符串。
+     * 如果元素<tt> e </tt>是引用类型的数组,则会通过递归调用此方法将其转换为字符串。
+     * 
+     * <p>为避免无限递归,如果指定的数组包含自身作为元素,或包含通过一个或多个数组级别对其自身的间接引用,则自引用将转换为字符串<tt>"[... 例如,只包含对自身的引用的数组将呈现为<tt>"[[...
+     * ]]"</tt>。
+     * 
+     *  <p>如果指定的数组为<tt> null </tt>,此方法返回<tt>"null"</tt>。
+     * 
+     * 
      * @param a the array whose string representation to return
      * @return a string representation of <tt>a</tt>
      * @see #toString(Object[])
@@ -4685,6 +5753,12 @@ public class Arrays {
      * <p>If the generator function throws an exception, it is relayed to
      * the caller and the array is left in an indeterminate state.
      *
+     * <p>
+     *  设置指定数组的所有元素,使用提供的生成函数计算每个元素。
+     * 
+     *  <p>如果生成器函数抛出异常,它将被传递给调用者,并且数组将保持不确定状态。
+     * 
+     * 
      * @param <T> type of elements of the array
      * @param array array to be initialized
      * @param generator a function accepting an index and producing the desired
@@ -4706,6 +5780,12 @@ public class Arrays {
      * is thrown from {@code parallelSetAll} and the array is left in an
      * indeterminate state.
      *
+     * <p>
+     *  使用提供的生成函数并行地设置指定数组的所有元素,以计算每个元素。
+     * 
+     *  <p>如果生成器函数抛出异常,则会从{@code parallelSetAll}抛出未检查的异常,并且数组保持不确定状态。
+     * 
+     * 
      * @param <T> type of elements of the array
      * @param array array to be initialized
      * @param generator a function accepting an index and producing the desired
@@ -4725,6 +5805,12 @@ public class Arrays {
      * <p>If the generator function throws an exception, it is relayed to
      * the caller and the array is left in an indeterminate state.
      *
+     * <p>
+     *  设置指定数组的所有元素,使用提供的生成函数计算每个元素。
+     * 
+     *  <p>如果生成器函数抛出异常,它将被传递给调用者,并且数组将保持不确定状态。
+     * 
+     * 
      * @param array array to be initialized
      * @param generator a function accepting an index and producing the desired
      *        value for that position
@@ -4745,6 +5831,12 @@ public class Arrays {
      * is thrown from {@code parallelSetAll} and the array is left in an
      * indeterminate state.
      *
+     * <p>
+     *  使用提供的生成函数并行地设置指定数组的所有元素,以计算每个元素。
+     * 
+     *  <p>如果生成器函数抛出异常,则会从{@code parallelSetAll}抛出未检查的异常,并且数组保持不确定状态。
+     * 
+     * 
      * @param array array to be initialized
      * @param generator a function accepting an index and producing the desired
      * value for that position
@@ -4763,6 +5855,12 @@ public class Arrays {
      * <p>If the generator function throws an exception, it is relayed to
      * the caller and the array is left in an indeterminate state.
      *
+     * <p>
+     * 设置指定数组的所有元素,使用提供的生成函数计算每个元素。
+     * 
+     *  <p>如果生成器函数抛出异常,它将被传递给调用者,并且数组将保持不确定状态。
+     * 
+     * 
      * @param array array to be initialized
      * @param generator a function accepting an index and producing the desired
      *        value for that position
@@ -4783,6 +5881,12 @@ public class Arrays {
      * is thrown from {@code parallelSetAll} and the array is left in an
      * indeterminate state.
      *
+     * <p>
+     *  使用提供的生成函数并行地设置指定数组的所有元素,以计算每个元素。
+     * 
+     *  <p>如果生成器函数抛出异常,则会从{@code parallelSetAll}抛出未检查的异常,并且数组保持不确定状态。
+     * 
+     * 
      * @param array array to be initialized
      * @param generator a function accepting an index and producing the desired
      *        value for that position
@@ -4801,6 +5905,12 @@ public class Arrays {
      * <p>If the generator function throws an exception, it is relayed to
      * the caller and the array is left in an indeterminate state.
      *
+     * <p>
+     *  设置指定数组的所有元素,使用提供的生成函数计算每个元素。
+     * 
+     *  <p>如果生成器函数抛出异常,它将被传递给调用者,并且数组将保持不确定状态。
+     * 
+     * 
      * @param array array to be initialized
      * @param generator a function accepting an index and producing the desired
      *        value for that position
@@ -4821,6 +5931,12 @@ public class Arrays {
      * is thrown from {@code parallelSetAll} and the array is left in an
      * indeterminate state.
      *
+     * <p>
+     *  使用提供的生成函数并行地设置指定数组的所有元素,以计算每个元素。
+     * 
+     *  <p>如果生成器函数抛出异常,则会从{@code parallelSetAll}抛出未检查的异常,并且数组保持不确定状态。
+     * 
+     * 
      * @param array array to be initialized
      * @param generator a function accepting an index and producing the desired
      *        value for that position
@@ -4839,6 +5955,13 @@ public class Arrays {
      * {@link Spliterator#SUBSIZED}, {@link Spliterator#ORDERED}, and
      * {@link Spliterator#IMMUTABLE}.
      *
+     * <p>
+     *  返回覆盖所有指定数组的{@link Spliterator}。
+     * 
+     *  <p>分割器报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED},{@link Spliterator#ORDERED}和{@link Spliterator#IMMUTABLE}
+     * 。
+     * 
+     * 
      * @param <T> type of elements
      * @param array the array, assumed to be unmodified during use
      * @return a spliterator for the array elements
@@ -4857,6 +5980,13 @@ public class Arrays {
      * {@link Spliterator#SUBSIZED}, {@link Spliterator#ORDERED}, and
      * {@link Spliterator#IMMUTABLE}.
      *
+     * <p>
+     *  返回覆盖指定数组的指定范围的{@link Spliterator}。
+     * 
+     *  <p>分割器报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED},{@link Spliterator#ORDERED}和{@link Spliterator#IMMUTABLE}
+     * 。
+     * 
+     * 
      * @param <T> type of elements
      * @param array the array, assumed to be unmodified during use
      * @param startInclusive the first index to cover, inclusive
@@ -4880,6 +6010,13 @@ public class Arrays {
      * {@link Spliterator#SUBSIZED}, {@link Spliterator#ORDERED}, and
      * {@link Spliterator#IMMUTABLE}.
      *
+     * <p>
+     * 返回覆盖所有指定数组的{@link Spliterator.OfInt}。
+     * 
+     *  <p>分割器报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED},{@link Spliterator#ORDERED}和{@link Spliterator#IMMUTABLE}
+     * 。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @return a spliterator for the array elements
      * @since 1.8
@@ -4897,6 +6034,13 @@ public class Arrays {
      * {@link Spliterator#SUBSIZED}, {@link Spliterator#ORDERED}, and
      * {@link Spliterator#IMMUTABLE}.
      *
+     * <p>
+     *  返回覆盖指定数组的指定范围的{@link Spliterator.OfInt}。
+     * 
+     *  <p>分割器报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED},{@link Spliterator#ORDERED}和{@link Spliterator#IMMUTABLE}
+     * 。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @param startInclusive the first index to cover, inclusive
      * @param endExclusive index immediately past the last index to cover
@@ -4919,6 +6063,13 @@ public class Arrays {
      * {@link Spliterator#SUBSIZED}, {@link Spliterator#ORDERED}, and
      * {@link Spliterator#IMMUTABLE}.
      *
+     * <p>
+     *  返回覆盖所有指定数组的{@link Spliterator.OfLong}。
+     * 
+     *  <p>分割器报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED},{@link Spliterator#ORDERED}和{@link Spliterator#IMMUTABLE}
+     * 。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @return the spliterator for the array elements
      * @since 1.8
@@ -4936,6 +6087,13 @@ public class Arrays {
      * {@link Spliterator#SUBSIZED}, {@link Spliterator#ORDERED}, and
      * {@link Spliterator#IMMUTABLE}.
      *
+     * <p>
+     *  返回覆盖指定数组的指定范围的{@link Spliterator.OfLong}。
+     * 
+     *  <p>分割器报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED},{@link Spliterator#ORDERED}和{@link Spliterator#IMMUTABLE}
+     * 。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @param startInclusive the first index to cover, inclusive
      * @param endExclusive index immediately past the last index to cover
@@ -4959,6 +6117,13 @@ public class Arrays {
      * {@link Spliterator#SUBSIZED}, {@link Spliterator#ORDERED}, and
      * {@link Spliterator#IMMUTABLE}.
      *
+     * <p>
+     *  返回覆盖所有指定数组的{@link Spliterator.OfDouble}。
+     * 
+     *  <p>分割器报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED},{@link Spliterator#ORDERED}和{@link Spliterator#IMMUTABLE}
+     * 。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @return a spliterator for the array elements
      * @since 1.8
@@ -4976,6 +6141,13 @@ public class Arrays {
      * {@link Spliterator#SUBSIZED}, {@link Spliterator#ORDERED}, and
      * {@link Spliterator#IMMUTABLE}.
      *
+     * <p>
+     *  返回覆盖指定数组的指定范围的{@link Spliterator.OfDouble}。
+     * 
+     *  <p>分割器报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED},{@link Spliterator#ORDERED}和{@link Spliterator#IMMUTABLE}
+     * 。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @param startInclusive the first index to cover, inclusive
      * @param endExclusive index immediately past the last index to cover
@@ -4995,6 +6167,10 @@ public class Arrays {
      * Returns a sequential {@link Stream} with the specified array as its
      * source.
      *
+     * <p>
+     *  返回具有指定数组作为其源的序列{@link Stream}。
+     * 
+     * 
      * @param <T> The type of the array elements
      * @param array The array, assumed to be unmodified during use
      * @return a {@code Stream} for the array
@@ -5008,6 +6184,10 @@ public class Arrays {
      * Returns a sequential {@link Stream} with the specified range of the
      * specified array as its source.
      *
+     * <p>
+     * 返回具有指定数组的指定范围作为其源的序列{@link Stream}。
+     * 
+     * 
      * @param <T> the type of the array elements
      * @param array the array, assumed to be unmodified during use
      * @param startInclusive the first index to cover, inclusive
@@ -5027,6 +6207,10 @@ public class Arrays {
      * Returns a sequential {@link IntStream} with the specified array as its
      * source.
      *
+     * <p>
+     *  返回具有指定数组作为其源的序列{@link IntStream}。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @return an {@code IntStream} for the array
      * @since 1.8
@@ -5039,6 +6223,10 @@ public class Arrays {
      * Returns a sequential {@link IntStream} with the specified range of the
      * specified array as its source.
      *
+     * <p>
+     *  返回具有指定数组的指定范围作为其源的序列{@link IntStream}。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @param startInclusive the first index to cover, inclusive
      * @param endExclusive index immediately past the last index to cover
@@ -5057,6 +6245,10 @@ public class Arrays {
      * Returns a sequential {@link LongStream} with the specified array as its
      * source.
      *
+     * <p>
+     *  返回具有指定数组作为其源的序列{@link LongStream}。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @return a {@code LongStream} for the array
      * @since 1.8
@@ -5069,6 +6261,10 @@ public class Arrays {
      * Returns a sequential {@link LongStream} with the specified range of the
      * specified array as its source.
      *
+     * <p>
+     *  返回具有指定数组的指定范围作为其源的序列{@link LongStream}。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @param startInclusive the first index to cover, inclusive
      * @param endExclusive index immediately past the last index to cover
@@ -5087,6 +6283,10 @@ public class Arrays {
      * Returns a sequential {@link DoubleStream} with the specified array as its
      * source.
      *
+     * <p>
+     *  返回具有指定数组作为其源的序列{@link DoubleStream}。
+     * 
+     * 
      * @param array the array, assumed to be unmodified during use
      * @return a {@code DoubleStream} for the array
      * @since 1.8
@@ -5099,6 +6299,9 @@ public class Arrays {
      * Returns a sequential {@link DoubleStream} with the specified range of the
      * specified array as its source.
      *
+     * <p>
+     *  返回具有指定数组的指定范围作为其源的序列{@link DoubleStream}。
+     * 
      * @param array the array, assumed to be unmodified during use
      * @param startInclusive the first index to cover, inclusive
      * @param endExclusive index immediately past the last index to cover

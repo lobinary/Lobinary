@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import org.xml.sax.SAXNotSupportedException;
  * Defines a factory API that enables applications to configure and
  * obtain a SAX based parser to parse XML documents.
  *
+ * <p>
+ *  定义工厂API,使应用程序能够配置和获取基于SAX的解析器来解析XML文档。
+ * 
+ * 
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  * @author <a href="mailto:Neeraj.Bajaj@sun.com">Neeraj Bajaj</a>
  *
@@ -44,16 +49,25 @@ public abstract class SAXParserFactory {
 
     /**
      * <p>Should Parsers be validating?</p>
+     * <p>
+     *  <p>应该解析器是否正在验证?</p>
+     * 
      */
     private boolean validating = false;
 
     /**
      * <p>Should Parsers be namespace aware?</p>
+     * <p>
+     *  <p>应该解析命名空间吗?</p>
+     * 
      */
     private boolean namespaceAware = false;
 
     /**
      * <p>Protected constructor to force use of {@link #newInstance()}.</p>
+     * <p>
+     *  <p>受保护的构造函数强制使用{@link #newInstance()}。</p>
+     * 
      */
     protected SAXParserFactory () {
 
@@ -116,6 +130,44 @@ public abstract class SAXParserFactory {
      * </pre>
      *
      *
+     * <p>
+     *  获取<code> SAXParserFactory </code>的新实例。
+     * 此静态方法创建一个新的工厂实例此方法使用以下有序查找过程来确定要加载的<code> SAXParserFactory </code>实现类：。
+     * <ul>
+     * <li>
+     *  使用<code> javax.xml.parsers.SAXParserFactory </code>系统属性。
+     * </li>
+     * <li>
+     *  使用JRE目录中的属性文件"lib / jaxp.properties"。
+     * 此配置文件采用标准的<code> java.util.Properties </code>格式,并包含实现类的完全限定名,键是上面定义的系统属性。
+     * 
+     *  jaxp.properties文件由JAXP实现只读一次,然后将其值缓存以供将来使用。如果文件在第一次尝试读取文件时不存在,则不会进一步尝试检查其是否存在。
+     * 在首次读取jaxp.properties后,无法更改任何属性的值。
+     * </li>
+     * <li>
+     * 使用由{@link java.util.ServiceLoader}类定义的服务提供程序加载工具,尝试使用{@linkplain java.util.ServiceLoader#load(java.lang。
+     * )来定位和加载服务的实现。
+     * 类)默认加载机制}：service-provider加载工具将使用{@linkplain java.lang.Thread#getContextClassLoader()当前线程的上下文类加载器}来尝试
+     * 加载服务。
+     * )来定位和加载服务的实现。如果上下文类加载器为null,将使用{@linkplain ClassLoader#getSystemClassLoader()系统类加载器}。
+     * </li>
+     * <li>
+     *  否则返回系统默认实现。
+     * </li>
+     * </ul>
+     * 
+     *  一旦应用程序获得了对<code> SAXParserFactory </code>的引用,它就可以使用工厂来配置和获取解析器实例。
+     * 
+     *  <h2>故障排除提示</h2> <p>设置<code> jaxp.debug </code>系统属性将导致此方法将大量调试消息打印到<code> System.err </code >关于它在做什么,
+     * 它在看什么。
+     * </p>。
+     * 
+     *  <p>如果您在载入{@link SAXParser}时遇到问题,请尝试：</p>
+     * <pre>
+     *  java -Djaxp.debug = 1 YourProgram ....
+     * </pre>
+     * 
+     * 
      * @return A new instance of a SAXParserFactory.
      *
      * @throws FactoryConfigurationError in case of {@linkplain
@@ -151,6 +203,22 @@ public abstract class SAXParserFactory {
      * java -Djaxp.debug=1 YourProgram ....
      * </pre>
      *
+     * <p>
+     *  <p>从类名获取<code> SAXParserFactory </code>的新实例。当类路径中有多个提供程序时,此函数很有用。它为应用程序提供了更多的控制,因为它可以指定应该加载哪个提供程序。
+     * </p>。
+     * 
+     *  <p>一旦应用程序获得对<code> SAXParserFactory </code>的引用,它就可以使用工厂来配置和获取解析器实例。</p>
+     * 
+     * <h2>故障排除提示</h2> <p>设置<code> jaxp.debug </code>系统属性将导致此方法将大量调试消息打印到<code> System.err </code >关于它在做什么,它
+     * 在看什么。
+     * </p>。
+     * 
+     *  <p>如果您遇到问题,请尝试：</p>
+     * <pre>
+     *  java -Djaxp.debug = 1 YourProgram ....
+     * </pre>
+     * 
+     * 
      * @param factoryClassName fully qualified factory class name that provides implementation of <code>javax.xml.parsers.SAXParserFactory</code>.
      *
      * @param classLoader <code>ClassLoader</code> used to load the factory class. If <code>null</code>
@@ -175,6 +243,10 @@ public abstract class SAXParserFactory {
      * <p>Creates a new instance of a SAXParser using the currently
      * configured factory parameters.</p>
      *
+     * <p>
+     *  <p>使用当前配置的出厂参数创建SAXParser的新实例。</p>
+     * 
+     * 
      * @return A new instance of a SAXParser.
      *
      * @throws ParserConfigurationException if a parser cannot
@@ -191,6 +263,10 @@ public abstract class SAXParserFactory {
      * provide support for XML namespaces. By default the value of this is set
      * to <code>false</code>.
      *
+     * <p>
+     *  指定由此代码生成的解析器将为XML命名空间提供支持。默认情况下,此值设置为<code> false </code>。
+     * 
+     * 
      * @param awareness true if the parser produced by this code will
      *                  provide support for XML namespaces; false otherwise.
      */
@@ -220,6 +296,20 @@ public abstract class SAXParserFactory {
      * method to associate a schema to a parser.
      * </p>
      *
+     * <p>
+     *  指定由此代码生成的解析器将在解析文档时验证文档。默认情况下,此值设置为<code> false </code>。
+     * 
+     * <p>
+     *  请注意,这里的"验证"是指XML建议中定义的<a href="http://www.w3.org/TR/REC-xml#proc-types">验证解析器</a>。
+     * 换句话说,它本质上只是控制DTD验证。 (除了在JAXP 1.2中定义的遗留两个属性)。
+     * </p>
+     * 
+     * <p>
+     *  要使用现代模式语言(如W3C XML Schema或RELAX NG而不是DTD),可以将解析器配置为非验证解析器,方法是保留{@link #setValidating(boolean)}方法<code>
+     *  false </code> ,然后使用{@link #setSchema(Schema)}方法将模式关联到解析器。
+     * </p>
+     * 
+     * 
      * @param validating true if the parser produced by this code will
      *                   validate documents as they are parsed; false otherwise.
      */
@@ -232,6 +322,10 @@ public abstract class SAXParserFactory {
      * Indicates whether or not the factory is configured to produce
      * parsers which are namespace aware.
      *
+     * <p>
+     *  指示工厂是否配置为生成可识别命名空间的解析器。
+     * 
+     * 
      * @return true if the factory is configured to produce
      *         parsers which are namespace aware; false otherwise.
      */
@@ -244,6 +338,10 @@ public abstract class SAXParserFactory {
      * Indicates whether or not the factory is configured to produce
      * parsers which validate the XML content during parse.
      *
+     * <p>
+     *  指示工厂是否配置为生成在解析期间验证XML内容的解析器。
+     * 
+     * 
      * @return true if the factory is configured to produce parsers which validate
      *         the XML content during parse; false otherwise.
      */
@@ -275,6 +373,25 @@ public abstract class SAXParserFactory {
      *   </li>
      * </ul>
      *
+     * <p>
+     * <p>设置org.xml.sax.XMLReader的底层实现中的特定功能。
+     * 有关核心功能和属性的列表,请访问<a href="http://www.saxproject.org/"> http://www.saxproject.org/ </a> </p>。
+     * 
+     *  <p>所有实现都需要支持{@link javax.xml.XMLConstants#FEATURE_SECURE_PROCESSING}功能。功能为</p>时
+     * <ul>
+     * <li>
+     *  <code> true </code>：实现将限制XML处理以符合实现限制。示例包括将消耗大量资源的实体扩展限制和XML模式构造。
+     * 如果XML处理由于安全原因而受到限制,则将通过调用注册的{@link org.xml.sax.ErrorHandler#fatalError(SAXParseException exception)}来
+     * 报告。
+     *  <code> true </code>：实现将限制XML处理以符合实现限制。示例包括将消耗大量资源的实体扩展限制和XML模式构造。
+     * 有关处理程序规范,请参见{@link SAXParser} <code> parse </code>方法。
+     * </li>
+     * <li>
+     *  当特征是<code> false </code>时,实现将根据XML规范处理XML,而不考虑可能的实现限制。
+     * </li>
+     * </ul>
+     * 
+     * 
      * @param name The name of the feature to be set.
      * @param value The value of the feature to be set.
      *
@@ -298,6 +415,10 @@ public abstract class SAXParserFactory {
      * <p>Returns the particular property requested for in the underlying
      * implementation of org.xml.sax.XMLReader.</p>
      *
+     * <p>
+     *  <p>返回在org.xml.sax.XMLReader的底层实现中请求的特定属性。</p>
+     * 
+     * 
      * @param name The name of the property to be retrieved.
      *
      * @return Value of the requested property.
@@ -318,6 +439,10 @@ public abstract class SAXParserFactory {
      * the {@link #setSchema(Schema schema)} method.
      *
      *
+     * <p>
+     *  获取通过{@link #setSchema(Schema schema)}方法指定的{@link Schema}对象。
+     * 
+     * 
      * @throws UnsupportedOperationException When implementation does not
      *   override this method
      *
@@ -379,6 +504,26 @@ public abstract class SAXParserFactory {
      * as long as they yield the result described in the specification.
      * </p>
      *
+     * <p>
+     *  <p>设置要从此工厂创建的解析器使用的{@link Schema}。</p>
+     * 
+     *  <p>当{@link Schema}不为null时,解析器将使用从其创建的验证器来验证文档,然后将信息传递给应用程序。</p>
+     * 
+     * <p>当验证器发现警告/错误/致命错误时,解析器必须处理它们,就像解析器本身发现这些错误一样。
+     * 换句话说,如果设置了用户指定的{@link org.xml.sax.ErrorHandler},它必须接收这些错误,如果没有,则必须根据实现特定的默认错误处理规则来对待它们。
+     * 
+     *  <p>验证程序可以修改SAX事件流(例如通过添加文档中缺少的默认值),并且解析器负责确保应用程序将接收到这些修改的事件流。</p>
+     * 
+     *  <p>初始化,<code> null </code>设置为{@link Schema}。</p>
+     * 
+     *  <p>即使{@link #isValidating()}方法返回<code> false </code>,此处理也会生效。
+     * 
+     *  <p>使用<code> http://java.sun.com/xml/jaxp/properties/schemaSource </code>属性和/或<code> http：//java.sun是
+     * 一个错误。
+     *  com / xml / jaxp / properties / schemaLanguage </code>属性与非空{@link Schema}对象结合使用。
+     * 当在{@link SAXParser}上设置这些属性时,此类配置将导致{@link SAXException}异常。</p>。
+     * 
+     * 
      * @param schema <code>Schema</code> to use, <code>null</code> to remove a schema.
      *
      * @throws UnsupportedOperationException When implementation does not
@@ -405,6 +550,13 @@ public abstract class SAXParserFactory {
      *
      * <p>XInclude processing defaults to <code>false</code>.</p>
      *
+     * <p>
+     *  <h4>实施者注意事项</h4>
+     * <p>
+     *  解析器必须能够使用任何{@link Schema}实现。然而,解析器和模式允许使用实现特定的自定义机制,只要它们产生规范中描述的结果。
+     * </p>
+     * 
+     * 
      * @param state Set XInclude processing to <code>true</code> or
      *   <code>false</code>
      *
@@ -424,6 +576,14 @@ public abstract class SAXParserFactory {
     /**
      * <p>Get state of XInclude processing.</p>
      *
+     * <p>
+     *  <p>设置XInclude处理的状态。</p>
+     * 
+     * <p>如果在文档实例中找到XInclude标记,则应按<a href="http://www.w3.org/TR/xinclude/"> XML Inclusions(XInclude)版本1.0中的指
+     * 定处理。
+     *  a>。</p>。
+     * 
+     * 
      * @return current state of XInclude processing
      *
      * @throws UnsupportedOperationException When implementation does not

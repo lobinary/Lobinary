@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.keys.storage.implementations;
 
@@ -44,6 +53,10 @@ import com.sun.org.apache.xml.internal.security.utils.Base64;
  * This {@link StorageResolverSpi} makes all raw (binary) {@link X509Certificate}s
  * which reside as files in a single directory available to the
  * {@link com.sun.org.apache.xml.internal.security.keys.storage.StorageResolver}.
+ * <p>
+ *  此{@link StorageResolverSpi}可将{@link X509Certificate}(位于单个目录中的文件)提供给{@link com.sun.org.apache.xml.internal.security.keys.storage。
+ *  StorageResolver}。
+ * 
  */
 public class CertsInFilesystemDirectoryResolver extends StorageResolverSpi {
 
@@ -60,6 +73,8 @@ public class CertsInFilesystemDirectoryResolver extends StorageResolverSpi {
     private List<X509Certificate> certs = new ArrayList<X509Certificate>();
 
     /**
+    /* <p>
+    /* 
      * @param directoryName
      * @throws StorageResolverException
      */
@@ -73,6 +88,10 @@ public class CertsInFilesystemDirectoryResolver extends StorageResolverSpi {
     /**
      * Method readCertsFromHarddrive
      *
+     * <p>
+     *  方法readCertsFromHarddrive
+     * 
+     * 
      * @throws StorageResolverException
      */
     private void readCertsFromHarddrive() throws StorageResolverException {
@@ -160,6 +179,9 @@ public class CertsInFilesystemDirectoryResolver extends StorageResolverSpi {
 
     /**
      * Class FilesystemIterator
+     * <p>
+     *  Class FilesystemIterator
+     * 
      */
     private static class FilesystemIterator implements Iterator<Certificate> {
 
@@ -172,6 +194,10 @@ public class CertsInFilesystemDirectoryResolver extends StorageResolverSpi {
         /**
          * Constructor FilesystemIterator
          *
+         * <p>
+         *  构造函数FilesystemIterator
+         * 
+         * 
          * @param certs
          */
         public FilesystemIterator(List<X509Certificate> certs) {
@@ -192,6 +218,9 @@ public class CertsInFilesystemDirectoryResolver extends StorageResolverSpi {
         /**
          * Method remove
          *
+         * <p>
+         *  方法删除
+         * 
          */
         public void remove() {
             throw new UnsupportedOperationException("Can't remove keys from KeyStore");
@@ -201,6 +230,9 @@ public class CertsInFilesystemDirectoryResolver extends StorageResolverSpi {
     /**
      * Method main
      *
+     * <p>
+     *  方法主
+     * 
      * @param unused
      * @throws Exception
      */

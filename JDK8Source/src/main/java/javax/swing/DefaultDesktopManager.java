@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,12 @@ import java.beans.PropertyVetoException;
   * <p>This class provides a policy for the various JInternalFrame methods,
   * it is not meant to be called directly rather the various JInternalFrame
   * methods will call into the DesktopManager.</p>
+  * <p>
+  *  它目前实现在任意父亲中管理<code> JInternalFrame </code>的基本行为。
+  * 不是<code> JDesktop </code>子代的<code> JInternalFrame </code>将使用此组件来处理类似桌面的操作。
+  *  <p>此类为各种JInternalFrame方法提供了一个策略,它不是直接调用,而是各种JInternalFrame方法将调用到DesktopManager中。</p>。
+  * 
+  * 
   * @see JDesktopPane
   * @see JInternalFrame
   * @author David Kloba
@@ -65,12 +72,18 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
      * Set to true when the user actually drags a frame vs clicks on it
      * to start the drag operation.  This is only used when dragging with
      * FASTER_DRAG_MODE.
+     * <p>
+     *  设置为true时,用户实际拖动框架vs点击它开始拖动操作。这仅在使用FASTER_DRAG_MODE进行拖动时使用。
+     * 
      */
     private transient boolean didDrag;
 
     /** Normally this method will not be called. If it is, it
       * try to determine the appropriate parent from the desktopIcon of the frame.
       * Will remove the desktopIcon from its parent if it successfully adds the frame.
+      * <p>
+      *  尝试从框架的desktopIcon确定适当的父。如果desktopIcon成功添加框架,将从其父级删除。
+      * 
       */
     public void openFrame(JInternalFrame f) {
         if(f.getDesktopIcon().getParent() != null) {
@@ -82,6 +95,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
     /**
      * Removes the frame, and, if necessary, the
      * <code>desktopIcon</code>, from its parent.
+     * <p>
+     *  删除框架,如果需要,从其父级删除<code> desktopIcon </code>。
+     * 
+     * 
      * @param f the <code>JInternalFrame</code> to be removed
      */
     public void closeFrame(JInternalFrame f) {
@@ -116,6 +133,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
 
     /**
      * Resizes the frame to fill its parents bounds.
+     * <p>
+     *  调整框架大小以填充其父范围。
+     * 
+     * 
      * @param f the frame to be resized
      */
     public void maximizeFrame(JInternalFrame f) {
@@ -143,6 +164,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
     /**
      * Restores the frame back to its size and position prior
      * to a <code>maximizeFrame</code> call.
+     * <p>
+     *  在<code> maximizeFrame </code>调用之前将帧恢复到其大小和位置。
+     * 
+     * 
      * @param f the <code>JInternalFrame</code> to be restored
      */
     public void minimizeFrame(JInternalFrame f) {
@@ -163,6 +188,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
     /**
      * Removes the frame from its parent and adds its
      * <code>desktopIcon</code> to the parent.
+     * <p>
+     *  从其父级删除该框架,并将其<code> desktopIcon </code>添加到父级。
+     * 
+     * 
      * @param f the <code>JInternalFrame</code> to be iconified
      */
     public void iconifyFrame(JInternalFrame f) {
@@ -211,6 +240,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
     /**
      * Removes the desktopIcon from its parent and adds its frame
      * to the parent.
+     * <p>
+     *  从其父代删除desktopIcon并将其框架添加到父代。
+     * 
+     * 
      * @param f the <code>JInternalFrame</code> to be de-iconified
      */
     public void deiconifyFrame(JInternalFrame f) {
@@ -247,6 +280,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
       * set the current active frame's (if any)
       * <code>IS_SELECTED_PROPERTY</code> to <code>false</code>.
       * There can be only one active frame across all Layers.
+      * <p>
+      *  将当前活动帧的(如果有)<code> IS_SELECTED_PROPERTY </code>设置为<code> false </code>。所有图层中只能有一个活动帧。
+      * 
+      * 
       * @param f the <code>JInternalFrame</code> to be activated
       */
     public void activateFrame(JInternalFrame f) {
@@ -347,6 +384,9 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
       * to the location specified.  The means by which this occurs can vary depending
       * on the dragging algorithm being used.  The actual logical location of the frame
       * might not change until <code>endDraggingFrame</code> is called.
+      * <p>
+      * 将正拖动的框架的可见位置移动到指定的位置。发生这种情况的手段可以根据所使用的拖动算法而变化。在调用<code> endDraggingFrame </code>之前,帧的实际逻辑位置可能不会改变。
+      * 
       */
     public void dragFrame(JComponent f, int newX, int newY) {
 
@@ -369,6 +409,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
               * its now got a new clean surface without that rect,
               * so drawing it "out" in fact draws it on, leaving garbage.
               * So only update/set currentLoc if the draw completed.
+              * <p>
+              *  Swing不希望它的XOR drawRect没有完成,所以相信在下一个更新位置重新进入时,有一个XOR rect在"currentLoc"中绘制。
+              * 但事实上,它现在得到了一个新的干净的表面没有该rect,所以绘制它"出"事实上吸引它,留下垃圾。所以只有更新/设置currentLoc如果绘制完成。
+              * 
               */
               sun.java2d.SurfaceData sData =
                   ((sun.java2d.SunGraphics2D)g).getSurfaceData();
@@ -409,6 +453,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
 
     /**
      * Calls <code>setBoundsForFrame</code> with the new values.
+     * <p>
+     *  使用新值调用<code> setBoundsForFrame </code>。
+     * 
+     * 
      * @param f the component to be resized
      * @param newX the new x-coordinate
      * @param newY the new y-coordinate
@@ -472,6 +520,9 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
 
     /** The iconifyFrame() code calls this to determine the proper bounds
       * for the desktopIcon.
+      * <p>
+      *  为desktopIcon。
+      * 
       */
 
     protected Rectangle getBoundsForIconOf(JInternalFrame f) {
@@ -536,6 +587,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
                an icon. I don't believe this should happen, but at
                present it does and causes a null pointer exception.
                Even when that gets fixed, this code protects against
+            /* <p>
+            /*  一个图标。我不相信这应该发生,但目前它确实并导致一个空指针异常。即使这是固定的,这段代码保护
+            /* 
+            /* 
                the npe. hania */
             continue;
 
@@ -554,6 +609,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
         if (currentIcon == null)
           /* didn't find any useful children above. This probably shouldn't
            happen, but this check protects against an npe if it ever does
+          /* <p>
+          /*  发生,但这个检查保护对npe,如果它有
+          /* 
+          /* 
            (and it's happening now) */
           return availableRectangle;
 
@@ -570,6 +629,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
 
     /**
      * Stores the bounds of the component just before a maximize call.
+     * <p>
+     *  在最大化调用之前存储组件的边界。
+     * 
+     * 
      * @param f the component about to be resized
      * @param r the normal bounds to be saved away
      */
@@ -580,6 +643,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
     /**
      * Gets the normal bounds of the component prior to the component
      * being maximized.
+     * <p>
+     *  在组件最大化之前获取组件的法线边界。
+     * 
+     * 
      * @param f the <code>JInternalFrame</code> of interest
      * @return the normal bounds of the component
      */
@@ -590,6 +657,9 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
     /**
      * Sets that the component has been iconized and the bounds of the
      * <code>desktopIcon</code> are valid.
+     * <p>
+     *  设置组件已被图标化,并且<code> desktopIcon </code>的边界有效。
+     * 
      */
     protected void setWasIcon(JInternalFrame f, Boolean value)  {
         if (value != null) {
@@ -602,6 +672,10 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
      * and the bounds of the <code>desktopIcon</code> are valid,
      * otherwise returns <code>false</code>.
      *
+     * <p>
+     *  如果组件已被图标化并且<code> desktopIcon </code>的边界有效,则返回<code> true </code>,否则返回<code> false </code>。
+     * 
+     * 
      * @param f the <code>JInternalFrame</code> of interest
      * @return <code>true</code> if the component has been iconized;
      *    otherwise returns <code>false</code>
@@ -788,6 +862,8 @@ public class DefaultDesktopManager implements DesktopManager, java.io.Serializab
      * with a race condition which can occur when the full contents
      * of a copyArea's source argument is not available onscreen.
      * This uses brute force to clean up in case of possible damage
+     * <p>
+     * 此方法在这里清除与竞争条件相关的问题,当copyArea的源参数的全部内容在屏幕上不可用时可能发生。在可能损坏的情况下,使用强力进行清洁
      */
    private void emergencyCleanup(final JComponent f) {
 

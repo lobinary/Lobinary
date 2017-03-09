@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,25 @@ package java.sql;
  * directly, and the <code>SQLInput</code> and <code>SQLOutput</code> methods
  * are called internally by <code>SQLData</code> methods, not by application code.
  *
+ * <p>
+ *  用于将SQL用户定义类型(UDT)定制映射到Java编程语言中的类的接口。
+ * 实现<code> SQLData </code>接口的类的类对象将与适用于其自定义映射的UDT的SQL名称一起输入到相应的<code> Connection </code>对象的类型映射中。
+ * <P>
+ *  通常,<code> SQLData </code>实现将为SQL结构类型的每个属性或SQL <code> DISTINCT </code>类型的单个字段定义一个字段。
+ * 当使用<code> ResultSet.getObject </code>方法从数据源检索UDT时,它将被映射为此类的实例。
+ * 程序员可以像在Java编程语言中的任何其他对象一样对这个类实例进行操作,然后通过调用<code> PreparedStatement.setObject </code>方法存储对它所做的任何更改,这将把
+ * 它映射回SQL类型。
+ * 当使用<code> ResultSet.getObject </code>方法从数据源检索UDT时,它将被映射为此类的实例。
+ * <p>
+ * 期望自定义映射的类的实现将由工具完成。在典型的实现中,程序员将简单地提供SQL UDT的名称,它被映射到的类的名称,以及要映射UDT的每个属性的字段的名称。
+ * 该工具将使用此信息来实现<code> SQLData.readSQL </code>和<code> SQLData.writeSQL </code>方法。
+ *  <code> readSQL </code>方法调用适当的<code> SQLInput </code>方法从<code> SQLInput </code>对象读取每个属性,并且<code> writ
+ * eSQL </code> <code> SQLOutput </code>方法通过<code> SQLOutput </code>对象将每个属性写回数据源。
+ * 该工具将使用此信息来实现<code> SQLData.readSQL </code>和<code> SQLData.writeSQL </code>方法。
+ * <P>
+ *  应用程序员通常不会直接调用<code> SQLData </code>方法,<code> SQLInput </code>和<code> SQLOutput </code>方法,而不是应用程序代码。
+ * 
+ * 
  * @since 1.2
  */
 public interface SQLData {
@@ -70,6 +90,10 @@ public interface SQLData {
   * UDT instance that is being mapped to this instance of
   * <code>SQLData</code>.
   *
+  * <p>
+  *  返回此对象表示的SQL用户定义类型的完全限定名称。此方法由JDBC驱动程序调用,以获取要映射到<code> SQLData </code>的此实例的UDT实例的名称。
+  * 
+  * 
   * @return the type name that was passed to the method <code>readSQL</code>
   *            when this object was constructed and populated
   * @exception SQLException if there is a database access error
@@ -101,6 +125,17 @@ public interface SQLData {
   * before calling this method, which is used by the appropriate
   * <code>SQLInput</code> reader method on the stream.
   *
+  * <p>
+  *  使用从数据库读取的数据填充此对象。该方法的实现必须遵循此协议：
+  * <UL>
+  * <LI>它必须从给定的输入流读取SQL类型的每个属性或元素。这是通过调用输入流的方法来读取每个项,按它们出现在类型的SQL定义中的顺序来完成的。
+  *  <LI>然后,方法<code> readSQL </code>将数据分配给相应的字段或元素(此对象或其他对象)。
+  * 具体来说,它必须调用适当的<i> reader </i>方法(<code> SQLInput.readString </code>,<code> SQLInput.readBigDecimal </code>
+  * ,等等)如下：对于不同类型,读取其单个数据元素;对于结构化类型,请读取SQL类型的每个属性的值。
+  *  <LI>然后,方法<code> readSQL </code>将数据分配给相应的字段或元素(此对象或其他对象)。
+  * </UL>
+  *  JDBC驱动程序在调用此方法之前使用类型映射初始化输入流,该方法由流上的相应<code> SQLInput </code>读取器方法使用。
+  * 
   * @param stream the <code>SQLInput</code> object from which to read the data for
   * the value that is being custom mapped
   * @param typeName the SQL type name of the value on the data stream
@@ -125,6 +160,9 @@ public interface SQLData {
   * to do the following: for a Distinct Type, write its single data element;
   * for a Structured Type, write a value for each attribute of the SQL type.
   *
+  * <p>
+  * 
+  * 
   * @param stream the <code>SQLOutput</code> object to which to write the data for
   * the value that was custom mapped
   * @exception SQLException if there is a database access error

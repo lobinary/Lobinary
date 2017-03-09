@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -71,6 +72,28 @@ import com.sun.imageio.plugins.common.StandardMetadataFormat;
  * <code>getElementDescription</code> and
  * <code>getAttributeDescription</code>.
  *
+ * <p>
+ *  一个具体的类提供了可重用的<code> IIOMetadataFormat </code>接口实现。
+ * 此外,代表标准,插件中性<code> javax_imageio_1.0 </code>格式的静态实例由<code> getStandardFormatInstance </code>方法提供。
+ * 
+ *  <p>为了提供元素和属性的本地化描述,基本名称为<code> this.getClass()。
+ * getName()+"Resources"</code>的<code> ResourceBundle </code>通过<code> ResourceBundle.getBundle </code>使用
+ * 的通常机制提供。
+ *  <p>为了提供元素和属性的本地化描述,基本名称为<code> this.getClass()。
+ * 简而言之,子类提供根据命名约定的一个或多个附加类(默认情况下,扩展<code> IIMetadataFormatImpl </code>的子类的完全限定名称加上字符串"Resources",加上国家,和
+ * 由下划线分隔的变量代码)。
+ *  <p>为了提供元素和属性的本地化描述,基本名称为<code> this.getClass()。
+ * 在运行时,对<code> getElementDescription </code>或<code> getAttributeDescription </code>的调用将尝试根据提供的语言环境动态加载这
+ * 些类,并将使用元素名称或元素名称后跟一个'/'字符后跟属性名作为键。
+ *  <p>为了提供元素和属性的本地化描述,基本名称为<code> this.getClass()。
+ * 此密钥将提供给<code> ResourceBundle </code>的<code> getString </code>方法,并返回结果的节点或属性的本地化描述。
+ * 
+ * <p>子类可以使用<code> setResourceBaseName </code>方法为资源束提供不同的基本名称。
+ * 
+ *  <p>如果需要,子类可以通过覆盖<code> getElementDescription </code>和<code> getAttributeDescription </code>的提供的实现来选择
+ * 其自己的本地化机制。
+ * 
+ * 
  * @see ResourceBundle#getBundle(String,Locale)
  *
  */
@@ -79,6 +102,9 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
     /**
      * A <code>String</code> constant containing the standard format
      * name, <code>"javax_imageio_1.0"</code>.
+     * <p>
+     *  包含标准格式名称<code>"javax_imageio_1.0"</code>的<code> String </code>常量。
+     * 
      */
     public static final String standardMetadataFormatName =
         "javax_imageio_1.0";
@@ -157,6 +183,11 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * their attributes and <code>Object</code> reference information
      * may be added using the various <code>add</code> methods.
      *
+     * <p>
+     *  使用给定的根元素名称和子策略(除了<code> CHILD_POLICY_REPEAT </code>)构造一个空白的<code> IIOMetadataFormatImpl </code>实例。
+     * 可以使用各种<code> add </code>方法添加附加元素及其属性和<code> Object </code>引用信息。
+     * 
+     * 
      * @param rootName the name of the root element.
      * @param childPolicy one of the <code>CHILD_POLICY_*</code> constants,
      * other than <code>CHILD_POLICY_REPEAT</code>.
@@ -193,6 +224,11 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * their attributes and <code>Object</code> reference information
      * may be added using the various <code>add</code> methods.
      *
+     * <p>
+     *  构造一个空白的<code> IIOMetadataFormatImpl </code>实例,具有给定的根元素名称和子策略为<code> CHILD_POLICY_REPEAT </code>。
+     * 可以使用各种<code> add </code>方法添加附加元素及其属性和<code> Object </code>引用信息。
+     * 
+     * 
      * @param rootName the name of the root element.
      * @param minChildren the minimum number of children of the node.
      * @param maxChildren the maximum number of children of the node.
@@ -234,6 +270,12 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * name will be equal to <code>this.getClass().getName() +
      * "Resources"</code>.
      *
+     * <p>
+     *  设置用于定位<code> ResourceBundle </code>的新基本名称,其中包含此格式的元素和属性的描述。
+     * 
+     *  <p>在第一次调用此方法之前,基本名称将等于<code> this.getClass()。getName()+"Resources"</code>。
+     * 
+     * 
      * @param resourceBaseName a <code>String</code> containing the new
      * base name.
      *
@@ -253,6 +295,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Returns the currently set base name for locating
      * <code>ResourceBundle</code>s.
      *
+     * <p>
+     *  返回当前设置的用于定位<code> ResourceBundle </code>的基本名称。
+     * 
+     * 
      * @return a <code>String</code> containing the base name.
      *
      * @see #setResourceBaseName
@@ -264,6 +310,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
     /**
      * Utility method for locating an element.
      *
+     * <p>
+     *  用于定位元素的实用方法。
+     * 
+     * 
      * @param mustAppear if <code>true</code>, throw an
      * <code>IllegalArgumentException</code> if no such node exists;
      * if <code>false</code>, just return null.
@@ -301,6 +351,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Adds a new element type to this metadata document format with a
      * child policy other than <code>CHILD_POLICY_REPEAT</code>.
      *
+     * <p>
+     * 使用<code> CHILD_POLICY_REPEAT </code>之外的子策略将新的元素类型添加到此元数据文档格式。
+     * 
+     * 
      * @param elementName the name of the new element.
      * @param parentName the name of the element that will be the
      * parent of the new element.
@@ -339,6 +393,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Adds a new element type to this metadata document format with a
      * child policy of <code>CHILD_POLICY_REPEAT</code>.
      *
+     * <p>
+     *  使用子策略<code> CHILD_POLICY_REPEAT </code>向此元数据文档格式添加新的元素类型。
+     * 
+     * 
      * @param elementName the name of the new element.
      * @param parentName the name of the element that will be the
      * parent of the new element.
@@ -379,6 +437,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Adds an existing element to the list of legal children for a
      * given parent node type.
      *
+     * <p>
+     *  将现有元素添加到给定父节点类型的合法子项列表中。
+     * 
+     * 
      * @param parentName the name of the element that will be the
      * new parent of the element.
      * @param elementName the name of the element to be added as a
@@ -403,6 +465,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * given name was present, nothing happens and no exception is
      * thrown.
      *
+     * <p>
+     *  从格式中删除元素。如果没有具有给定名称的元素,则不发生任何事情,并且不抛出异常。
+     * 
+     * 
      * @param elementName the name of the element to be removed.
      */
     protected void removeElement(String elementName) {
@@ -424,6 +490,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Adds a new attribute to a previously defined element that may
      * be set to an arbitrary value.
      *
+     * <p>
+     *  向先前定义的元素添加一个新属性,该属性可以设置为任意值。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param attrName the name of the attribute being added.
      * @param dataType the data type (string format) of the attribute,
@@ -468,6 +538,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Adds a new attribute to a previously defined element that will
      * be defined by a set of enumerated values.
      *
+     * <p>
+     *  向先前定义的元素添加一个新属性,该元素将由一组枚举值定义。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param attrName the name of the attribute being added.
      * @param dataType the data type (string format) of the attribute,
@@ -543,6 +617,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Adds a new attribute to a previously defined element that will
      * be defined by a range of values.
      *
+     * <p>
+     *  将新属性添加到将由一定范围的值定义的先前定义的元素。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param attrName the name of the attribute being added.
      * @param dataType the data type (string format) of the attribute,
@@ -609,6 +687,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Adds a new attribute to a previously defined element that will
      * be defined by a list of values.
      *
+     * <p>
+     *  将新属性添加到将由值列表定义的先前定义的元素。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param attrName the name of the attribute being added.
      * @param dataType the data type (string format) of the attribute,
@@ -663,6 +745,11 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * <code>FALSE</code>, with a datatype of
      * <code>DATATYPE_BOOLEAN</code>.
      *
+     * <p>
+     *  向先前定义的元素添加一个新属性,该元素将由枚举值<code> TRUE </code>和<code> FALSE </code>定义,数据类型为<code> DATATYPE_BOOLEAN </code>
+     * 。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param attrName the name of the attribute being added.
      * @param hasDefaultValue <code>true</code> if a default value
@@ -702,6 +789,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * attribute with the given name was present in the given element,
      * nothing happens and no exception is thrown.
      *
+     * <p>
+     *  从先前定义的元素中删除属性。如果在给定元素中没有给定名称的属性,则不会发生任何事情,也不会抛出异常。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param attrName the name of the attribute being removed.
      *
@@ -723,6 +814,12 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * <p> If an <code>Object</code> reference was previously allowed,
      * the previous settings are overwritten.
      *
+     * <p>
+     *  允许将给定类类型的<code> Object </code>引用存储在实现指定元素的节点中。除了类类型之外,<code> Object </code>的值不受约束。
+     * 
+     * <p>如果之前允许使用<code> Object </code>引用,则之前的设置将被覆盖。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param classType a <code>Class</code> variable indicating the
      * legal class type for the object value.
@@ -757,6 +854,13 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * <p> If an <code>Object</code> reference was previously allowed,
      * the previous settings are overwritten.
      *
+     * <p>
+     *  允许将给定类类型的<code> Object </code>引用存储在实现指定元素的节点中。
+     *  <code> Object </code>的值必须是<code> enumeratedValues </code>给出的值之一。
+     * 
+     *  <p>如果之前允许使用<code> Object </code>引用,则之前的设置将被覆盖。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param classType a <code>Class</code> variable indicating the
      * legal class type for the object value.
@@ -824,6 +928,14 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * <p> If an <code>Object</code> reference was previously allowed,
      * the previous settings are overwritten.
      *
+     * <p>
+     *  允许将给定类类型的<code> Object </code>引用存储在实现指定元素的节点中。
+     *  <code> Object </code>的值必须在<code> minValue </code>和<code> maxValue </code>给出的范围内。
+     * 此外,类类型必须实现<code> Comparable </code>接口。
+     * 
+     *  <p>如果之前允许使用<code> Object </code>引用,则之前的设置将被覆盖。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param classType a <code>Class</code> variable indicating the
      * legal class type for the object value.
@@ -881,6 +993,15 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * <p> If an <code>Object</code> reference was previously allowed,
      * the previous settings are overwritten.
      *
+     * <p>
+     *  允许将给定类类型的<code> Object </code>引用存储在实现指定元素的节点中。
+     *  <code> Object </code>的值必须是由<code> classType </code>给出的类型类型对象的数组,至少<code> arrayMinLength </code>,最多<code>
+     *  arrayMaxLength < / code>元素。
+     *  允许将给定类类型的<code> Object </code>引用存储在实现指定元素的节点中。
+     * 
+     *  <p>如果之前允许使用<code> Object </code>引用,则之前的设置将被覆盖。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param classType a <code>Class</code> variable indicating the
      * legal class type for the object value.
@@ -908,6 +1029,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * Disallows an <code>Object</code> reference from being stored in
      * nodes implementing the named element.
      *
+     * <p>
+     *  不允许将<code> Object </code>引用存储在实现指定元素的节点中。
+     * 
+     * 
      * @param elementName the name of the element.
      *
      * @exception IllegalArgumentException if <code>elementName</code> is
@@ -961,6 +1086,10 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
          * class loader to locate the resource bundle.
          * If that throws MissingResourceException, then try the
          * system class loader.
+         * <p>
+         * 如果applet提供了一个IIOMetadataFormat和资源束的实现,那么资源束将需要通过applet类加载器来访问。所以首先尝试上下文类加载器来定位资源束。
+         * 如果抛出MissingResourceException,那么尝试系统类加载器。
+         * 
          */
         ClassLoader loader = (ClassLoader)
             java.security.AccessController.doPrivileged(
@@ -1008,6 +1137,18 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * default <code>Locale</code> returned by <code>Locale.getLocale</code>
      * will be used.
      *
+     * <p>
+     *  返回包含指定元素或<code> null </code>的描述的<code> String </code>。如果可能,将对提供的<code> Locale </code>进行本地化描述。
+     * 
+     *  <p>默认实现将首先使用由<code> setResourceBaseName </code>设置的当前资源库名称和提供的<code> Locale </code>来定位<code> Resource
+     * Bundle </code>在<code> ResourceBundle.getBundle </code>的注释中描述。
+     * 如果找到一个<code> ResourceBundle </code>,则元素名称将被用作<code> getString </code>方法的键,并返回结果。
+     * 如果没有找到<code> ResourceBundle </code>,或者不存在这样的密钥,则将返回<code> null </code>。
+     * 
+     *  <p>如果<code> locale </code>是<code> null </code>,则会使用<code> Locale.getLocale </code>返回的当前默认<code> Loca
+     * le </code>。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param locale the <code>Locale</code> for which localization
      * will be attempted.
@@ -1148,6 +1289,16 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * default <code>Locale</code> returned by <code>Locale.getLocale</code>
      * will be used.
      *
+     * <p>
+     *  返回包含指定属性或<code> null </code>的描述的<code> String </code>。如果可能,将对提供的<code> Locale </code>进行本地化描述。
+     * 
+     * <p>默认实现将首先使用由<code> setResourceBaseName </code>设置的当前资源库名称和提供的<code> Locale </code>来定位<code> ResourceB
+     * undle </code>在<code> ResourceBundle.getBundle </code>的注释中描述。
+     * 如果找到<code> ResourceBundle </code>,则后面跟着属性名称(<code> elementName +"/"+ attrName </code>)的"/"字符的元素名称将被用作
+     * 键到其<code> getString </code>方法,并返回结果。
+     * 如果没有找到<code> ResourceBundle </code>,或者不存在这样的密钥,则将返回<code> null </code>。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param attrName the name of the attribute.
      * @param locale the <code>Locale</code> for which localization
@@ -1264,6 +1415,11 @@ public abstract class IIOMetadataFormatImpl implements IIOMetadataFormat {
      * metadata document format described in the comment of the
      * <code>javax.imageio.metadata</code> package.
      *
+     * <p>
+     *  <p>如果<code> locale </code>是<code> null </code>,则会使用<code> Locale.getLocale </code>返回的当前默认<code> Loca
+     * le </code>。
+     * 
+     * 
      * @return a predefined <code>IIOMetadataFormat</code> instance.
      */
     public static IIOMetadataFormat getStandardFormatInstance() {

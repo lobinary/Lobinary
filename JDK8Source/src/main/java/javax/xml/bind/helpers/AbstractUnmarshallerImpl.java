@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,17 @@ import java.net.URL;
  * unmarshal(Node), unmarshal(XMLReader,InputSource),
  * unmarshal(XMLStreamReader), and unmarshal(XMLEventReader).
  *
+ * <p>
+ *  部分默认<tt>取消合并器</tt>实施。
+ * 
+ * <p>
+ *  此类为{@link javax.xml.bind.Unmarshaller}接口提供了部分默认实现。
+ * 
+ * <p>
+ *  JAXB提供程序必须实现五个方法(getUnmarshallerHandler,unmarshal(Node),unmarshal(XMLReader,InputSource),unmarshal(X
+ * MLStreamReader)和unmarshal(XMLEventReader)。
+ * 
+ * 
  * @author <ul>
  *         <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
  *         </ul>
@@ -81,6 +93,9 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
 
     /**
      * XMLReader that will be used to parse a document.
+     * <p>
+     *  将用于解析文档的XMLReader。
+     * 
      */
     private XMLReader reader = null;
 
@@ -92,6 +107,13 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      *
      * {@link Unmarshaller} is not re-entrant, so we will
      * only use one instance of XMLReader.
+     * <p>
+     *  获取已配置的XMLReader。
+     * 
+     *  当客户指定的{@link SAXSource}对象没有XMLReader时,使用此方法。
+     * 
+     *  {@link Unmarshaller}不是重入的,所以我们将只使用XMLReader的一个实例。
+     * 
      */
     protected XMLReader getXMLReader() throws JAXBException {
         if(reader==null) {
@@ -145,6 +167,11 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      *
      * The callee should call the setErrorHandler method of the XMLReader
      * so that errors are passed to the client-specified ValidationEventHandler.
+     * <p>
+     *  通过使用指定的XMLReader和InputSource来取消编组对象。
+     * 
+     *  被调用者应该调用XMLReader的setErrorHandler方法,以便将错误传递给客户端指定的ValidationEventHandler。
+     * 
      */
     protected abstract Object unmarshal( XMLReader reader, InputSource source ) throws JAXBException;
 
@@ -232,6 +259,12 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * <i><b>Note:</b> I named this method isValidating() to stay in-line
      * with JAXP, as opposed to naming it getValidating(). </i>
      *
+     * <p>
+     *  指示Unmarshaller是否配置为在取消编组操作期间进行验证。
+     * <p>
+     *  <i> <b>注意：</b>我命名这个方法isValidating()与JAXP保持一致,而不是命名为getValidating()。 </i>
+     * 
+     * 
      * @return true if the Unmarshaller is configured to validate during
      *        unmarshal operations, false otherwise
      * @throws JAXBException if an error occurs while retrieving the validating
@@ -251,6 +284,13 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * all validation events will be silently ignored and may result in
      * unexpected behaviour.
      *
+     * <p>
+     *  允许应用程序注册验证事件处理程序。
+     * <p>
+     * 如果在调用任何<tt> unmarshal </tt>方法时遇到任何验证错误,JAXB提供程序将调用验证事件处理程序。
+     * 如果客户端应用程序在调用解组方法之前未注册验证事件处理程序,则所有验证事件将被静默忽略,并可能导致意外的行为。
+     * 
+     * 
      * @param handler the validation event handler
      * @throws JAXBException if an error was encountered while setting the
      *        event handler
@@ -273,6 +313,12 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * This method may only be invoked before or after calling one of the
      * unmarshal methods.
      *
+     * <p>
+     *  指定Unmarshaller在解组操作期间是否应验证。默认情况下,<tt>取消绑定器</tt>不验证。
+     * <p>
+     *  此方法只能在调用其中一个解组方法之前或之后调用。
+     * 
+     * 
      * @param validating true if the Unmarshaller should validate during
      *       unmarshal, false otherwise
      * @throws JAXBException if an error occurred while enabling or disabling
@@ -286,6 +332,10 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * Return the current event handler or the default event handler if one
      * hasn't been set.
      *
+     * <p>
+     *  返回当前事件处理程序或默认事件处理程序(如果尚未设置)。
+     * 
+     * 
      * @return the current ValidationEventHandler or the default event handler
      *        if it hasn't been set
      * @throws JAXBException if an error was encountered while getting the
@@ -313,6 +363,18 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * This method checks the nested exception of SAXException
      * and reduce those excessive wrapping.
      *
+     * <p>
+     *  从SAXException创建UnmarshalException。
+     * 
+     *  这是为派生类提供的实用程序方法。
+     * 
+     * <p>
+     *  当提供者实现的ContentHandler想要抛出一个JAXBException时,它需要通过SAXException包装异常。
+     * 如果unmarshaller实现盲目地通过JAXBException包装SAXException,这样的异常将是由另一个JAXBException包装的SAXException包装的JAXBExcept
+     * ion。
+     *  当提供者实现的ContentHandler想要抛出一个JAXBException时,它需要通过SAXException包装异常。这是愚蠢的。
+     * 
+     * 
      * @return the resulting UnmarshalException
      */
     protected UnmarshalException createUnmarshalException( SAXException e ) {
@@ -340,6 +402,10 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * throws PropertyException since there are no required
      * properties. If a provider needs to handle additional
      * properties, it should override this method in a derived class.
+     * <p>
+     * <p>
+     *  此方法检查SAXException的嵌套异常,并减少这些过度包装。
+     * 
      */
     public void setProperty( String name, Object value )
         throws PropertyException {
@@ -357,6 +423,9 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * throws PropertyException since there are no required
      * properties. If a provider needs to handle additional
      * properties, it should override this method in a derived class.
+     * <p>
+     *  setProperty方法的默认实现总是抛出PropertyException,因为没有必需的属性。如果提供程序需要处理其他属性,它应该在派生类中覆盖此方法。
+     * 
      */
     public Object getProperty( String name )
         throws PropertyException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,11 @@ import javax.swing.undo.UndoableEdit;
  * generally cheap and moving the gap is generally cheaper than
  * moving the array contents directly to accommodate the change.
  *
+ * <p>
+ *  类似于emacs使用的有缺口缓冲区的实现。底层存储是某种类型的java数组,只有该类的子类才知道。数组在某处有一个缺口。间隙移动到更改的位置,以利用大多数更改发生在同一位置的常见行为。
+ * 在间隙边界处发生的变化通常是便宜的,并且移动间隙通常比直接移动阵列内容以便适应变化更便宜。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see GapContent
  */
@@ -46,6 +52,9 @@ abstract class GapVector implements Serializable {
 
     /**
      * Creates a new GapVector object.  Initial size defaults to 10.
+     * <p>
+     *  创建一个新的GapVector对象。初始大小默认为10。
+     * 
      */
     public GapVector() {
         this(10);
@@ -55,6 +64,10 @@ abstract class GapVector implements Serializable {
      * Creates a new GapVector object, with the initial
      * size specified.
      *
+     * <p>
+     *  创建一个新的GapVector对象,并指定初始大小。
+     * 
+     * 
      * @param initialLength the initial size
      */
     public GapVector(int initialLength) {
@@ -66,17 +79,26 @@ abstract class GapVector implements Serializable {
     /**
      * Allocate an array to store items of the type
      * appropriate (which is determined by the subclass).
+     * <p>
+     *  分配数组以存储适当类型的项(由子类确定)。
+     * 
      */
     protected abstract Object allocateArray(int len);
 
     /**
      * Get the length of the allocated array
+     * <p>
+     *  获取分配的数组的长度
+     * 
      */
     protected abstract int getArrayLength();
 
     /**
      * Access to the array.  The actual type
      * of the array is known only by the subclass.
+     * <p>
+     *  访问数组。数组的实际类型只有子类才知道。
+     * 
      */
     protected final Object getArray() {
         return array;
@@ -84,6 +106,9 @@ abstract class GapVector implements Serializable {
 
     /**
      * Access to the start of the gap.
+     * <p>
+     *  访问间隙的开始。
+     * 
      */
     protected final int getGapStart() {
         return g0;
@@ -91,6 +116,9 @@ abstract class GapVector implements Serializable {
 
     /**
      * Access to the end of the gap.
+     * <p>
+     *  访问到间隙的尽头。
+     * 
      */
     protected final int getGapEnd() {
         return g1;
@@ -100,16 +128,25 @@ abstract class GapVector implements Serializable {
 
     /**
      * The array of items.  The type is determined by the subclass.
+     * <p>
+     *  项目数组。类型由子类确定。
+     * 
      */
     private Object array;
 
     /**
      * start of gap in the array
+     * <p>
+     *  数组中间隙的开始
+     * 
      */
     private int g0;
 
     /**
      * end of gap in the array
+     * <p>
+     *  阵列中的间隙末端
+     * 
      */
     private int g1;
 
@@ -122,6 +159,10 @@ abstract class GapVector implements Serializable {
      * being changed if the gap is not currently located at the
      * change location.
      *
+     * <p>
+     *  用给定的新项替换存储中的给定逻辑位置。如果间隙当前不位于更改位置,则这将将间隙移动到正在更改的区域。
+     * 
+     * 
      * @param position the location to make the replacement.  This
      *  is not the location in the underlying storage array, but
      *  the location in the contiguous space being modeled.
@@ -152,6 +193,9 @@ abstract class GapVector implements Serializable {
      * the gap to the best place by minimizing it's
      * overall movement.  The gap must intersect the
      * target block.
+     * <p>
+     * 删除位置的nItems。将删除区域中的任何标记压缩到位置。这通过最小化它的整体运动将差距移动到最佳位置。间隙必须与目标块相交。
+     * 
      */
     void close(int position, int nItems) {
         if (nItems == 0)  return;
@@ -184,6 +228,10 @@ abstract class GapVector implements Serializable {
      * Make space for the given number of items at the given
      * location.
      *
+     * <p>
+     *  在给定位置为给定数量的项目留出空间。
+     * 
+     * 
      * @return the location that the caller should fill in
      */
     int open(int position, int nItems) {
@@ -209,6 +257,9 @@ abstract class GapVector implements Serializable {
     /**
      * resize the underlying storage array to the
      * given new size
+     * <p>
+     *  将底层存储阵列的大小调整为给定的新大小
+     * 
      */
     void resize(int nsize) {
         Object narray = allocateArray(nsize);
@@ -219,6 +270,9 @@ abstract class GapVector implements Serializable {
     /**
      * Make the gap bigger, moving any necessary data and updating
      * the appropriate marks
+     * <p>
+     *  使间隙更大,移动任何必要的数据和更新适当的标记
+     * 
      */
     protected void shiftEnd(int newSize) {
         int oldSize = getArrayLength();
@@ -238,6 +292,10 @@ abstract class GapVector implements Serializable {
     /**
      * Calculates a new size of the storage array depending on required
      * capacity.
+     * <p>
+     *  根据所需容量计算存储阵列的新大小。
+     * 
+     * 
      * @param reqSize the size which is necessary for new content
      * @return the new size of the storage array
      */
@@ -250,6 +308,9 @@ abstract class GapVector implements Serializable {
      * without changing the size of the gap.  This
      * moves the data in the array and updates the
      * marks accordingly.
+     * <p>
+     *  将间隙的开始移动到新位置,而不更改间隙的大小。这将移动数组中的数据并相应地更新标记。
+     * 
      */
     protected void shiftGap(int newGapStart) {
         if (newGapStart == g0) {
@@ -279,6 +340,9 @@ abstract class GapVector implements Serializable {
      * gap start down to the new gap start are squeezed
      * to the end of the gap (their location has been
      * removed).
+     * <p>
+     *  向下调整间隙端。这不会移动任何数据,但它会更新受边界变化影响的任何标记。从旧的差距开始到新的差距开始的所有标记被挤压到差距的末端(他们的位置已被删除)。
+     * 
      */
     protected void shiftGapStartDown(int newGapStart) {
         g0 = newGapStart;
@@ -291,6 +355,8 @@ abstract class GapVector implements Serializable {
      * gap end up to the new gap end are squeezed
      * to the end of the gap (their location has been
      * removed).
+     * <p>
+     *  向上调整间隙端。这不会移动任何数据,但它会更新受边界变化影响的任何标记。从旧间隙到新间隙端的所有标记被挤压到间隙的末端(它们的位置已被移除)。
      */
     protected void shiftGapEndUp(int newGapEnd) {
         g1 = newGapEnd;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import javax.swing.plaf.UIResource;
  * A transferable implementation for the default data transfer of some Swing
  * components.
  *
+ * <p>
+ *  用于一些Swing组件的默认数据传输的可转移实现。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 class BasicTransferable implements Transferable, UIResource {
@@ -76,6 +81,10 @@ class BasicTransferable implements Transferable, UIResource {
      * Returns an array of DataFlavor objects indicating the flavors the data
      * can be provided in.  The array should be ordered according to preference
      * for providing the data (from most richly descriptive to least descriptive).
+     * <p>
+     *  返回一个DataFlavor对象的数组,指示可以提供数据的风格。数组应根据提供数据的优先级排序(从最丰富描述到最不描述)。
+     * 
+     * 
      * @return an array of data flavors in which this data can be transferred
      */
     public DataFlavor[] getTransferDataFlavors() {
@@ -111,6 +120,10 @@ class BasicTransferable implements Transferable, UIResource {
     /**
      * Returns whether or not the specified data flavor is supported for
      * this object.
+     * <p>
+     *  返回此对象是否支持指定的数据flavor。
+     * 
+     * 
      * @param flavor the requested flavor for the data
      * @return boolean indicating whether or not the data flavor is supported
      */
@@ -128,6 +141,10 @@ class BasicTransferable implements Transferable, UIResource {
      * Returns an object which represents the data to be transferred.  The class
      * of the object returned is defined by the representation class of the flavor.
      *
+     * <p>
+     *  返回表示要传输的数据的对象。返回的对象的类由flavor的表示类定义。
+     * 
+     * 
      * @param flavor the requested flavor for the data
      * @see DataFlavor#getRepresentationClass
      * @exception IOException                if the data is no longer available
@@ -196,6 +213,9 @@ class BasicTransferable implements Transferable, UIResource {
      * Some subclasses will have flavors that are more descriptive than HTML
      * or plain text.  If this method returns a non-null value, it will be
      * placed at the start of the array of supported flavors.
+     * <p>
+     *  一些子类将具有比HTML或纯文本更具描述性的风格。如果此方法返回非空值,它将放在支持的flavor的数组的开头。
+     * 
      */
     protected DataFlavor[] getRicherFlavors() {
         return null;
@@ -210,6 +230,10 @@ class BasicTransferable implements Transferable, UIResource {
     /**
      * Returns whether or not the specified data flavor is an HTML flavor that
      * is supported.
+     * <p>
+     *  返回指定的数据flavor是否是受支持的HTML flavor。
+     * 
+     * 
      * @param flavor the requested flavor for the data
      * @return boolean indicating whether or not the data flavor is supported
      */
@@ -226,6 +250,9 @@ class BasicTransferable implements Transferable, UIResource {
     /**
      * Should the HTML flavors be offered?  If so, the method
      * getHTMLData should be implemented to provide something reasonable.
+     * <p>
+     *  应该提供HTML风味吗?如果是这样,方法getHTMLData应该实现提供一些合理的。
+     * 
      */
     protected boolean isHTMLSupported() {
         return htmlData != null;
@@ -233,6 +260,9 @@ class BasicTransferable implements Transferable, UIResource {
 
     /**
      * Fetch the data in a text/html format
+     * <p>
+     *  以text / html格式获取数据
+     * 
      */
     protected String getHTMLData() {
         return htmlData;
@@ -243,6 +273,10 @@ class BasicTransferable implements Transferable, UIResource {
     /**
      * Returns whether or not the specified data flavor is an plain flavor that
      * is supported.
+     * <p>
+     *  返回指定的数据flavor是否为受支持的纯风格。
+     * 
+     * 
      * @param flavor the requested flavor for the data
      * @return boolean indicating whether or not the data flavor is supported
      */
@@ -259,6 +293,9 @@ class BasicTransferable implements Transferable, UIResource {
     /**
      * Should the plain text flavors be offered?  If so, the method
      * getPlainData should be implemented to provide something reasonable.
+     * <p>
+     *  应该提供纯文本口味吗?如果是这样,getPlainData方法应该实现提供一些合理的东西。
+     * 
      */
     protected boolean isPlainSupported() {
         return plainData != null;
@@ -266,6 +303,9 @@ class BasicTransferable implements Transferable, UIResource {
 
     /**
      * Fetch the data in a text/plain format.
+     * <p>
+     *  以文本/纯格式提取数据。
+     * 
      */
     protected String getPlainData() {
         return plainData;
@@ -276,6 +316,9 @@ class BasicTransferable implements Transferable, UIResource {
     /**
      * Returns whether or not the specified data flavor is a String flavor that
      * is supported.
+     * <p>
+     *  返回指定的数据flavor是否为受支持的String flavor。
+     * 
      * @param flavor the requested flavor for the data
      * @return boolean indicating whether or not the data flavor is supported
      */

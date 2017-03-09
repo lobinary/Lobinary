@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -197,6 +198,86 @@ import sun.security.util.SecurityConstants;
  * the JDK and advice regarding porting of 1.1-style security managers,
  * see the <a href="../../../technotes/guides/security/index.html">security documentation</a>.
  *
+ * <p>
+ *  安全管理器是一种允许应用程序实现安全策略的类。它允许应用在执行可能不安全或敏感的操作之前确定操作是什么以及它是否正在允许执行操作的安全上下文中被尝试。应用程序可以允许或禁止操作。
+ * <p>
+ *  <code> SecurityManager </code>类包含许多以<code> check </code>开头的名称的方法。
+ * 在这些方法执行某些潜在敏感操作之前,Java库中的各种方法调用这些方法。
+ * 调用这种<code>检查</code>方法通常看起来像这样：<blockquote> <pre> SecurityManager security = System.getSecurityManager
+ * (); if(security！= null){security.check <i> XXX </i>(argument,&nbsp;。
+ * 在这些方法执行某些潜在敏感操作之前,Java库中的各种方法调用这些方法。&nbsp;。&nbsp;。&nbsp;); } </pre> </blockquote>。
+ * <p>
+ *  由此,安全管理器被给予通过抛出异常来防止操作完成的机会。如果操作被允许,安全管理器例程简单地返回,但是如果不允许该操作,则抛出一个<code> SecurityException </code>。
+ * 这个约定的唯一例外是<code> checkTopLevelWindow </code>,它返回一个<code> boolean </code>值。
+ * <p>
+ * 当前安全管理器由<code> System </code>类中的<code> setSecurityManager </code>方法设置。
+ * 当前安全管理器是通过<code> getSecurityManager </code>方法获取的。
+ * <p>
+ *  特殊方法{@link SecurityManager#checkPermission(java.security.Permission)}确定是否应授予或拒绝由指定的权限指示的访问请求。
+ * 默认实现调用。
+ * 
+ * <pre>
+ *  AccessController.checkPermission(perm);
+ * </pre>
+ * 
+ * <p>
+ *  如果允许请求访问,<code> checkPermission </code>会安静返回。如果拒绝,将抛出<code> SecurityException </code>。
+ * <p>
+ *  从Java 2 SDK v1.2开始,<code> SecurityManager </code>中每个其他<code>检查</code>方法的默认实现是调用<code> SecurityManage
+ * r checkPermission </code>方法确定调用线程是否具有执行所请求的操作的许可。
+ * <p>
+ * 注意,只有一个权限参数的<code> checkPermission </code>方法总是在当前正在执行的线程的上下文中执行安全检查。
+ * 有时,应该在给定上下文中进行的安全检查实际上需要在<i>不同的上下文(例如,从工作者线程内)中完成。
+ * 为此情况提供了{@link SecurityManager#getSecurityContext getSecurityContext}方法和包含上下文参数的{@link SecurityManager#checkPermission(java.security.Permission,java.lang.Object)checkPermission}
+ * 方法。
+ * 有时,应该在给定上下文中进行的安全检查实际上需要在<i>不同的上下文(例如,从工作者线程内)中完成。
+ *  <code> getSecurityContext </code>方法返回当前调用上下文的"快照"。 (默认实现返回一个AccessControlContext对象。)示例调用如下：。
+ * 
+ * <pre>
+ *  Object context = null; SecurityManager sm = System.getSecurityManager(); if(sm！= null)context = sm.g
+ * etSecurityContext();。
+ * </pre>
+ * 
+ * <p>
+ *  除了权限之外还需要一个上下文对象的<code> checkPermission </code>方法基于该上下文而不是当前执行线程的访问决策。
+ * 不同上下文中的代码因此可以调用该方法,传递许可和先前保存的上下文对象。使用上一个示例中获取的SecurityManager <code> sm </code>进行示例调用如下：。
+ * 
+ * <pre>
+ *  if(sm！= null)sm.checkPermission(permission,context);
+ * </pre>
+ * 
+ * <p>权限属于以下类别：文件,套接字,网络,安全,运行时,属性,AWT,反映和可序列化。
+ * 管理这些不同权限类别的类是<code> java.io.FilePermission </code>,<code> java.net.SocketPermission </code>,<code> ja
+ * va.net.NetPermission </code> java.security.SecurityPermission </code>,<code> java.lang.RuntimePermiss
+ * ion </code>,<code> java.util.PropertyPermission </code>,<code> java.awt.AWTPermission </code>代码> java
+ * .lang.reflect.ReflectPermission </code>和<code> java.io.SerializablePermission </code>。
+ * <p>权限属于以下类别：文件,套接字,网络,安全,运行时,属性,AWT,反映和可序列化。
+ * 
+ *  <p>除了前两个(FilePermission和SocketPermission)是<code> java.security.BasicPermission </code>的子类,它本身是一个顶级类的
+ * 权限的抽象子类,它是<code> java .security.Permission </code>。
+ *  BasicPermission定义了包含遵循层次属性命名约定的名称(例如,"exitVM","setFactory","queuePrintJob"等)的所有权限所需的功能。
+ * 星号可以出现在名称的末尾,后面跟着"。",或者表示一个通配符匹配。例如："a。*"或"*"有效,"* a"或"a * b"无效。
+ * 
+ * <p> FilePermission和SocketPermission是顶级类的权限子类(<code> java.security.Permission </code>)。
+ * 类似这样的类具有比由BasicPermission子类直接从Permission而不是从BasicPermission使用更复杂的名称语法。
+ * 例如,对于<code> java.io.FilePermission </code>对象,权限名称是文件(或目录)的路径名。
+ * 
+ *  <p>一些权限类具有一个"动作"列表,用于说明对象允许的操作。
+ * 例如,对于<code> java.io.FilePermission </code>对象,操作列表(例如"读取,写入")​​指定为指定的文件(或指定目录中的文件)授予哪些操作。
+ * 
+ *  <p>其他权限类用于"命名"权限 - 包含名称但没有操作列表的权限;你有命名的权限或你不。
+ * 
+ *  <p>注意：还有一个<code> java.security.AllPermission </code>权限,表示所有权限。
+ * 它可以简化系统管理员的工作,系统管理员可能需要执行需要所有(或多个)权限的多个任务。
+ * <p>
+ * 有关权限相关信息,请参见<a href="../../../technotes/guides/security/permissions.html"> JDK中的权限</a>。
+ * 该文档包括例如列出各种SecurityManager <code>检查</code>方法的表格和每个这样的方法所需的默认实现的权限。
+ * 它还包含需要权限的所有版本1.2方法的表,并且每个这样的方法告诉它需要哪个权限。
+ * <p>
+ *  有关在JDK中进行的<code> SecurityManager </code>更改和有关移植1.1样式安全管理器的建议的详细信息,请参阅<a href ="../../../ technotes / guides / security / index.html">
+ * 安全文档</a>。
+ * 
+ * 
  * @author  Arthur van Hoff
  * @author  Roland Schemers
  *
@@ -230,6 +311,10 @@ class SecurityManager {
      * This field is <code>true</code> if there is a security check in
      * progress; <code>false</code> otherwise.
      *
+     * <p>
+     *  如果正在进行安全检查,则此字段为<code> true </code>; <code> false </code>。
+     * 
+     * 
      * @deprecated This type of security checking is not recommended.
      *  It is recommended that the <code>checkPermission</code>
      *  call be used instead.
@@ -239,12 +324,18 @@ class SecurityManager {
 
     /*
      * Have we been initialized. Effective against finalizer attacks.
+     * <p>
+     *  我们已经初始化。有效对抗终结者攻击。
+     * 
      */
     private boolean initialized = false;
 
 
     /**
      * returns true if the current context has been granted AllPermission
+     * <p>
+     *  如果当前上下文已授予AllPermission,则返回true
+     * 
      */
     private boolean hasAllPermission()
     {
@@ -259,6 +350,10 @@ class SecurityManager {
     /**
      * Tests if there is a security check in progress.
      *
+     * <p>
+     *  测试是否存在正在进行的安全检查。
+     * 
+     * 
      * @return the value of the <code>inCheck</code> field. This field
      *          should contain <code>true</code> if a security check is
      *          in progress,
@@ -283,6 +378,14 @@ class SecurityManager {
      * security manager.
      * This may result in throwing a <code>SecurityException</code>.
      *
+     * <p>
+     *  构造一个新的<code> SecurityManager </code>。
+     * 
+     *  <p>如果已经安装了安全管理器,此方法首先使用<code> RuntimePermission("createSecurityManager")</code>权限调用安全管理器的<code> chec
+     * kPermission </code>方法,创建新安全管理器的权限。
+     * 这可能会导致抛出一个<code> SecurityException </code>。
+     * 
+     * 
      * @exception  java.lang.SecurityException if a security manager already
      *             exists and its <code>checkPermission</code> method
      *             doesn't allow creation of a new security manager.
@@ -311,6 +414,12 @@ class SecurityManager {
      * currently executing method, the element at index <code>1</code> is
      * the class of that method's caller, and so on.
      *
+     * <p>
+     *  将当前执行堆栈作为类数组返回。
+     * <p>
+     * 数组的长度是执行堆栈上的方法数。索引<code> 0 </code>处的元素是当前执行方法的类,索引<code> 1 </code>处的元素是该方法调用者的类,等等。
+     * 
+     * 
      * @return  the execution stack.
      */
     protected native Class[] getClassContext();
@@ -340,6 +449,23 @@ class SecurityManager {
      *
      * </ol>
      *
+     * <p>
+     *  从使用非系统类加载器定义的类中返回最近执行的方法的类加载器。
+     * 非系统类加载器被定义为不等于系统类加载器(由{@link ClassLoader#getSystemClassLoader}返回)或其祖先之一的类加载器。
+     * <p>
+     *  此方法将在以下三种情况下返回<code> null </code>：
+     * <ol>
+     *  <li>执行堆栈上的所有方法都来自使用系统类装入器或其祖先之一定义的类。
+     * 
+     *  <li>执行堆栈上的所有方法,直到第一个"特权"调用者(参见{@link java.security.AccessController#doPrivileged})来自使用系统类加载器或其祖先之一定义
+     * 的类。
+     * 
+     *  <li>对<code> checkPermission </code>与<code> java.security.AllPermission </code>的调用不会导致SecurityExcepti
+     * on。
+     * 
+     * </ol>
+     * 
+     * 
      * @return  the class loader of the most recent occurrence on the stack
      *          of a method from a class defined using a non-system class
      *          loader.
@@ -387,6 +513,23 @@ class SecurityManager {
      *
      * </ol>
      *
+     * <p>
+     *  返回从使用非系统类加载器定义的类中最近执行的方法的类。
+     * 非系统类加载器被定义为不等于系统类加载器(由{@link ClassLoader#getSystemClassLoader}返回)或其祖先之一的类加载器。
+     * <p>
+     *  此方法将在以下三种情况下返回<code> null </code>：
+     * <ol>
+     * <li>执行堆栈上的所有方法都来自使用系统类装入器或其祖先之一定义的类。
+     * 
+     *  <li>执行堆栈上的所有方法,直到第一个"特权"调用者(参见{@link java.security.AccessController#doPrivileged})来自使用系统类加载器或其祖先之一定义
+     * 的类。
+     * 
+     *  <li>对<code> checkPermission </code>与<code> java.security.AllPermission </code>的调用不会导致SecurityExcepti
+     * on。
+     * 
+     * </ol>
+     * 
+     * 
      * @return  the class  of the most recent occurrence on the stack
      *          of a method from a class defined using a non-system class
      *          loader.
@@ -409,6 +552,10 @@ class SecurityManager {
     /**
      * Returns the stack depth of the specified class.
      *
+     * <p>
+     *  返回指定类的堆栈深度。
+     * 
+     * 
      * @param   name   the fully qualified name of the class to search for.
      * @return  the depth on the stack frame of the first occurrence of a
      *          method from a class with the specified name;
@@ -446,6 +593,23 @@ class SecurityManager {
      *
      * </ol>
      *
+     * <p>
+     *  从使用非系统类加载器定义的类返回最近执行的方法的堆栈深度。
+     * 非系统类加载器被定义为不等于系统类加载器(由{@link ClassLoader#getSystemClassLoader}返回)或其祖先之一的类加载器。
+     * <p>
+     *  此方法将在以下三种情况下返回-1：
+     * <ol>
+     *  <li>执行堆栈上的所有方法都来自使用系统类装入器或其祖先之一定义的类。
+     * 
+     *  <li>执行堆栈上的所有方法,直到第一个"特权"调用者(参见{@link java.security.AccessController#doPrivileged})来自使用系统类加载器或其祖先之一定义
+     * 的类。
+     * 
+     *  <li>对<code> checkPermission </code>与<code> java.security.AllPermission </code>的调用不会导致SecurityExcepti
+     * on。
+     * 
+     * </ol>
+     * 
+     * 
      * @return the depth on the stack frame of the most recent occurrence of
      *          a method from a class defined using a non-system class loader.
      *
@@ -475,6 +639,10 @@ class SecurityManager {
      * Tests if a method from a class with the specified
      *         name is on the execution stack.
      *
+     * <p>
+     *  测试来自具有指定名称的类的方法是否在执行堆栈上。
+     * 
+     * 
      * @param  name   the fully qualified name of the class.
      * @return <code>true</code> if a method from a class with the specified
      *         name is on the execution stack; <code>false</code> otherwise.
@@ -491,6 +659,10 @@ class SecurityManager {
      * Basically, tests if a method from a class defined using a
      *          class loader is on the execution stack.
      *
+     * <p>
+     * 基本上,测试来自使用类加载器定义的类的方法是否在执行堆栈上。
+     * 
+     * 
      * @return  <code>true</code> if a call to <code>currentClassLoader</code>
      *          has a non-null return value.
      *
@@ -517,6 +689,12 @@ class SecurityManager {
      * <p> The default implementation of this method is to return
      * an <code>AccessControlContext</code> object.
      *
+     * <p>
+     *  创建封装当前执行环境的对象。该方法的结果例如由三参数<code> checkConnect </code>方法和两参数<code> checkRead </code>方法使用。
+     * 需要这些方法是因为可以调用可信方法来代表另一方法读取文件或打开套接字。可信方法需要确定是否允许另一个(可能不可信的)方法自己执行操作。
+     *  <p>此方法的默认实现是返回一个<code> AccessControlContext </code>对象。
+     * 
+     * 
      * @return  an implementation-dependent object that encapsulates
      *          sufficient information about the current execution environment
      *          to perform some security checks later.
@@ -538,6 +716,12 @@ class SecurityManager {
      * This method calls <code>AccessController.checkPermission</code>
      * with the given permission.
      *
+     * <p>
+     *  如果根据当前有效的安全策略,不允许由给定权限指定的请求访问,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法调用具有给定权限的<code> AccessController.checkPermission </code>。
+     * 
+     * 
      * @param     perm   the requested permission.
      * @exception SecurityException if access is not permitted based on
      *            the current security policy.
@@ -568,6 +752,17 @@ class SecurityManager {
      * <code>AccessControlContext</code> then a
      * <code>SecurityException</code> is thrown.
      *
+     * <p>
+     *  如果指定的安全上下文被拒绝访问由给定权限指定的资源,则抛出<code> SecurityException </code>。
+     * 上下文必须是先前调用<code> getSecurityContext </code>返回的安全上下文,并且访问控制决策基于为该安全上下文配置的安全策略。
+     * <p>
+     *  如果<code> context </code>是<code> AccessControlContext </code>的实例,则使用指定的权限调用<code> AccessControlContex
+     * t.checkPermission </code>方法。
+     * <p>
+     * 如果<code> context </code>不是<code> AccessControlContext </code>的实例,那么会抛出<code> SecurityException </code>
+     * 。
+     * 
+     * 
      * @param      perm      the specified permission
      * @param      context   a system-dependent security context.
      * @exception  SecurityException  if the specified security context
@@ -601,6 +796,14 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许创建新的类加载器,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> RuntimePermission("createClassLoader")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkCreateClassLoader </code>,在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @exception SecurityException if the calling thread does not
      *             have permission
      *             to create a new class loader.
@@ -614,6 +817,9 @@ class SecurityManager {
     /**
      * reference to the root thread group, used for the checkAccess
      * methods.
+     * <p>
+     *  引用根线程组,用于checkAccess方法。
+     * 
      */
 
     private static ThreadGroup rootGroup = getRootGroup();
@@ -655,6 +861,23 @@ class SecurityManager {
      * be called by the first statement in the overridden method, or the
      * equivalent security check should be placed in the overridden method.
      *
+     * <p>
+     *  如果调用线程不允许修改线程参数,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法由当前安全管理器通过<code> stop </code>,<code> suspend </code>,<code> resume </code>,<code> setPriority </code>
+     *  setName </code>方法和<code> Thread </code>类的<code> setDaemon </code>方法。
+     * <p>
+     *  如果线程参数是系统线程(属于具有<code> null </code> parent的线程组),则此方法使用<code> RuntimePermission("modifyThread")调用<code>
+     *  checkPermission </code> / code>权限。
+     * 如果线程参数<i>不是</i>一个系统线程,这个方法只是静默返回。
+     * <p>
+     * 需要更严格策略的应用程序应覆盖此方法。
+     * 如果覆盖此方法,覆盖它的方法应另外检查调用线程是否具有<code> RuntimePermission("modifyThread")</code>权限,如果是,则以静默方式返回。
+     * 这是为了确保授予该权限的代码(例如JDK本身)被允许操作任何线程。
+     * <p>
+     *  如果这个方法被覆盖,那么被覆盖的方法中的第一个语句应该调用<code> super.checkAccess </code>,或者应该在覆盖的方法中放置等效的安全检查。
+     * 
+     * 
      * @param      t   the thread to be checked.
      * @exception  SecurityException  if the calling thread does not have
      *             permission to modify the thread.
@@ -708,6 +931,24 @@ class SecurityManager {
      * be called by the first statement in the overridden method, or the
      * equivalent security check should be placed in the overridden method.
      *
+     * <p>
+     *  如果调用线程不允许修改线程组参数,则抛出<code> SecurityException </code>。
+     * <p>
+     *  在创建新的子线程或子线程组时,通过<code> setDaemon </code>,<code> setMaxPriority </code>,<code> stop </code>,调用当前安全管理
+     * 器的此方法。
+     *  ,<code> suspend </code>,<code> resume </code>和<code> destroy </code>的方法。
+     * <p>
+     *  如果线程组参数是系统线程组(具有<code> null </code> parent),则此方法使用<code> RuntimePermission("modifyThreadGroup")</code>
+     * 调用<code> checkPermission </code>允许。
+     * 如果线程组参数<i>不是</i>系统线程组,此方法只是静默返回。
+     * <p>
+     * 需要更严格策略的应用程序应覆盖此方法。
+     * 如果覆盖此方法,覆盖它的方法应另外检查调用线程是否具有<code> RuntimePermission("modifyThreadGroup")</code>权限,如果是,则以静默方式返回。
+     * 这是为了确保授予该权限的代码(例如JDK本身)被允许操作任何线程。
+     * <p>
+     *  如果这个方法被覆盖,那么被覆盖的方法中的第一个语句应该调用<code> super.checkAccess </code>,或者应该在覆盖的方法中放置等效的安全检查。
+     * 
+     * 
      * @param      g   the thread group to be checked.
      * @exception  SecurityException  if the calling thread does not have
      *             permission to modify the thread group.
@@ -750,6 +991,16 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许使用指定的状态代码停止Java虚拟机,则抛出<code> SecurityException </code>。
+     * <p>
+     *  通过<code> Runtime </code>类的<code> exit </code>方法为当前安全管理器调用此方法。状态<code> 0 </code>表示成功;其他值表示各种错误。
+     * <p>
+     *  此方法使用<code> RuntimePermission("exitVM。"+ status)</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkExit </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      status   the exit status.
      * @exception SecurityException if the calling thread does not have
      *              permission to halt the Java Virtual Machine with
@@ -779,6 +1030,17 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许创建子进程,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法由<code> Runtime </code>类的<code> exec </code>方法调用当前安全管理器。
+     * <p>
+     * 如果cmd是绝对路径,此方法调用<code> checkPermission </code>与<code> FilePermission(cmd,"execute")</code>权限,否则调用<code>
+     *  checkPermission </code> > FilePermission("&lt;&lt; ALL FILES&gt;&gt;","execute")</code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkExec </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      cmd   the specified system command.
      * @exception  SecurityException if the calling thread does not have
      *             permission to create a subprocess.
@@ -819,6 +1081,16 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许动态链接由字符串参数文件指定的库代码,则抛出<code> SecurityException </code>。参数是一个简单的库名或一个完整的文件名。
+     * <p>
+     *  通过<code> Runtime </code>类的方法<code> load </code>和<code> loadLibrary </code>,调用当前安全管理器的此方法。
+     * <p>
+     *  此方法使用<code> RuntimePermission("loadLibrary。"+ lib)</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkLink </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      lib   the name of the library.
      * @exception  SecurityException if the calling thread does not have
      *             permission to dynamically link the library.
@@ -849,6 +1121,14 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许从指定的文件描述符读取,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> RuntimePermission("readFileDescriptor")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkRead </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      fd   the system-dependent file descriptor.
      * @exception  SecurityException  if the calling thread does not have
      *             permission to access the specified file descriptor.
@@ -877,6 +1157,14 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     * 如果调用线程不允许读取由字符串参数指定的文件,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> FilePermission(file,"read")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkRead </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      file   the system-dependent file name.
      * @exception  SecurityException if the calling thread does not have
      *             permission to access the specified file.
@@ -908,6 +1196,19 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果指定的安全上下文不允许读取由字符串参数指定的文件,则抛出<code> SecurityException </code>。
+     * 上下文必须是先前调用<code> getSecurityContext </code>返回的安全上下文。
+     *  <p>如果<code> context </code>是<code> AccessControlContext </code>的实例,那么<code> AccessControlContext.che
+     * ckPermission </code>方法将使用<code> FilePermission读")</code>权限。
+     * 上下文必须是先前调用<code> getSecurityContext </code>返回的安全上下文。
+     *  <p>如果<code> context </code>不是<code> AccessControlContext </code>的实例,则会抛出<code> SecurityException </code>
+     * 。
+     * 上下文必须是先前调用<code> getSecurityContext </code>返回的安全上下文。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkRead </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      file      the system-dependent filename.
      * @param      context   a system-dependent security context.
      * @exception  SecurityException  if the specified security context
@@ -939,6 +1240,14 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许写入指定的文件描述符,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> RuntimePermission("writeFileDescriptor")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     * 如果你重写这个方法,你应该调用<code> super.checkWrite </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      fd   the system-dependent file descriptor.
      * @exception SecurityException  if the calling thread does not have
      *             permission to access the specified file descriptor.
@@ -968,6 +1277,14 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许写入由字符串参数指定的文件,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> FilePermission(file,"write")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkWrite </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      file   the system-dependent filename.
      * @exception  SecurityException  if the calling thread does not
      *             have permission to access the specified file.
@@ -995,6 +1312,16 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许删除指定的文件,则抛出<code> SecurityException </code>。
+     * <p>
+     *  通过<code> File </code>类的<code> delete </code>方法为当前安全管理器调用此方法。
+     * <p>
+     *  此方法使用<code> FilePermission(file,"delete")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkDelete </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      file   the system-dependent filename.
      * @exception  SecurityException if the calling thread does not
      *             have permission to delete the file.
@@ -1028,6 +1355,17 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许打开到指定主机和端口号的套接字连接,则抛出<code> SecurityException </code>。
+     * <p>
+     *  端口号<code> -1 </code>表示调用方法正在尝试确定指定主机名的IP地址。
+     * <p>
+     * 如果端口不等于-1,则此方法使用<code> SocketPermission(host +"："+ port,"connect")</code>权限调用<code> checkPermission </code>
+     * 如果端口等于-1,则它使用<code> SocketPermission(host,"resolve")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkConnect </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      host   the host name port to connect to.
      * @param      port   the protocol port to connect to.
      * @exception  SecurityException  if the calling thread does not have
@@ -1079,6 +1417,25 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果指定的安全上下文不允许打开到指定的主机和端口号的套接字连接,则抛出<code> SecurityException </code>。
+     * <p>
+     *  端口号<code> -1 </code>表示调用方法正在尝试确定指定主机名的IP地址。
+     *  <p>如果<code> context </code>不是<code> AccessControlContext </code>的实例,则会抛出<code> SecurityException </code>
+     * 。
+     *  端口号<code> -1 </code>表示调用方法正在尝试确定指定主机名的IP地址。
+     * <p>
+     *  否则,将检查端口号。
+     * 如果不等于-1,则使用<code> SocketPermission(host +"："+ port,"connect")方法调用<code> context </code>的<code> checkP
+     * ermission </code> / code>权限。
+     *  否则,将检查端口号。
+     * 如果端口等于-1,则使用<code> SocketPermission(host,"resolve")</code>权限调用<code> context </code>的<code> checkPerm
+     * ission </code> 。
+     *  否则,将检查端口号。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkConnect </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      host      the host name port to connect to.
      * @param      port      the protocol port to connect to.
      * @param      context   a system-dependent security context.
@@ -1122,6 +1479,14 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     * 如果调用线程不允许在指定的本地端口号上等待连接请求,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> SocketPermission("localhost："+ port,"listen")</code>调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkListen </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      port   the local port.
      * @exception  SecurityException  if the calling thread does not have
      *             permission to listen on the specified port.
@@ -1148,6 +1513,16 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许从指定的主机和端口号接受套接字连接,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法由当前安全管理器通过<code> ServerSocket </code>类的<code> accept </code>方法调用。
+     * <p>
+     *  此方法使用<code> SocketPermission(host +"："+ port,"accept")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkAccept </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      host   the host name of the socket connection.
      * @param      port   the port number of the socket connection.
      * @exception  SecurityException  if the calling thread does not have
@@ -1182,6 +1557,15 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许使用(加入/离开/发送/接收)IP多播,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> java.net.SocketPermission(maddr.getHostAddress(),"accept,connect")</code>权限调用<code> chec
+     * kPermission </code>。
+     * <p>
+     *  如果你重写这个方法,那么你应该在被覆盖的方法通常抛出异常的时候调用<code> super.checkMulticast </code>。
+     * 
+     * 
      * @param      maddr  Internet group address to be used.
      * @exception  SecurityException  if the calling thread is not allowed to
      *  use (join/leave/send/receive) IP multicast.
@@ -1213,6 +1597,15 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     * 如果调用线程不允许使用(加入/离开/发送/接收)IP多播,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> java.net.SocketPermission(maddr.getHostAddress(),"accept,connect")</code>权限调用<code> chec
+     * kPermission </code>。
+     * <p>
+     *  如果你重写这个方法,那么你应该在被覆盖的方法通常抛出异常的时候调用<code> super.checkMulticast </code>。
+     * 
+     * 
      * @param      maddr  Internet group address to be used.
      * @param      ttl        value in use, if it is multicast send.
      * Note: this particular implementation does not use the ttl
@@ -1252,6 +1645,17 @@ class SecurityManager {
      * exception.
      * <p>
      *
+     * <p>
+     *  如果调用线程不允许访问或修改系统属性,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法由<code> System </code>类的<code> getProperties </code>和<code> setProperties </code>方法使用。
+     * <p>
+     *  此方法使用<code> PropertyPermission("*","read,write")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkPropertiesAccess </code>在被覆盖的方法通常会抛出异常。
+     * <p>
+     * 
+     * 
      * @exception  SecurityException  if the calling thread does not have
      *             permission to access or modify the system properties.
      * @see        java.lang.System#getProperties()
@@ -1279,6 +1683,16 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许访问具有指定的<code>键</code>名称的系统属性,则会抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法由<code> System </code>类的<code> getProperty </code>方法使用。
+     * <p>
+     *  此方法使用<code> PropertyPermission(key,"read")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkPropertyAccess </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @param      key   a system property key.
      *
      * @exception  SecurityException  if the calling thread does not have
@@ -1323,6 +1737,22 @@ class SecurityManager {
      * <code>super.checkTopLevelWindow</code> should
      * be returned.
      *
+     * <p>
+     * 如果调用线程不受信任,则返回<code> false </code>,以显示由<code> window </code>参数指示的顶级窗口。
+     * 在这种情况下,调用者仍然可以决定显示窗口,但窗口应该包括某种视觉警告。如果方法返回<code> true </code>,那么可以显示窗口而没有任何特殊限制。
+     * <p>
+     *  有关可信和不可信窗口的更多信息,请参阅类<code> Window </code>。
+     * <p>
+     *  此方法使用<code> AWTPermission("showWindowWithoutWarningBanner")</code>权限调用<code> checkPermission </code>
+     * ,如果未抛出SecurityException,则返回<code> true </code>,否则返回<code > false </code>。
+     * 在Java SE的子集Profiles不包括{@code java.awt}包的情况下,将调用{@code checkPermission}来检查权限{@code java.security.AllPermission}
+     * 。
+     * <p>
+     *  如果你重写这个方法,那么你应该调用<code> super.checkTopLevelWindow </code>,在重写的方法通常返回<code> false </code>和<code> supe
+     * r的值。
+     * 应返回checkTopLevelWindow </code>。
+     * 
+     * 
      * @param      window   the new window that is being created.
      * @return     <code>true</code> if the calling thread is trusted to put up
      *             top-level windows; <code>false</code> otherwise.
@@ -1369,6 +1799,15 @@ class SecurityManager {
      * exception.
      * <p>
      *
+     * <p>
+     *  如果调用线程不允许启动打印作业请求,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> RuntimePermission("queuePrintJob")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     * 如果你重写这个方法,你应该调用<code> super.checkPrintJobAccess </code>在被覆盖的方法通常会抛出异常。
+     * <p>
+     * 
+     * 
      * @exception  SecurityException  if the calling thread does not have
      *             permission to initiate a print job request.
      * @since   JDK1.1
@@ -1394,6 +1833,17 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许访问系统剪贴板,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> AWTPermission("accessClipboard")</code>权限调用<code> checkPermission </code>。
+     * 在Java SE的子集Profiles不包括{@code java.awt}包的情况下,将调用{@code checkPermission}来检查权限{@code java.security.AllPermission}
+     * 。
+     *  此方法使用<code> AWTPermission("accessClipboard")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkSystemClipboardAccess </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @since   JDK1.1
      * @exception  SecurityException  if the calling thread does not have
      *             permission to access the system clipboard.
@@ -1430,6 +1880,18 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  如果调用线程不允许访问AWT事件队列,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法使用<code> AWTPermission("accessEventQueue")</code>权限调用<code> checkPermission </code>。
+     * 在Java SE的子集Profiles不包括{@code java.awt}包的情况下,将调用{@code checkPermission}来检查权限{@code java.security.AllPermission}
+     * 。
+     *  此方法使用<code> AWTPermission("accessEventQueue")</code>权限调用<code> checkPermission </code>。
+     * 
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkAwtEventQueueAccess </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @since   JDK1.1
      * @exception  SecurityException  if the calling thread does not have
      *             permission to access the AWT event queue.
@@ -1465,6 +1927,14 @@ class SecurityManager {
      * happens without using these locks, so there may be a delay between
      * when a thread updates the property and when other threads updates
      * the cache.
+     * <p>
+     * 我们有一个初始的无效位(最初为false)用于告诉缓存是否有效的类变量。
+     * 如果基础java.security.Security属性通过setProperty()更改,则Security类使用反射来更改变量,从而使缓存失效。
+     * 
+     *  锁定是通过同步到packageAccessLock / packageDefinitionLock对象来处理的。它们只用在这个类中。
+     * 
+     *  请注意,由于属性更改而导致的高速缓存失效不使用这些锁,因此在线程更新属性和其他线程更新高速缓存时之间可能会有延迟。
+     * 
      */
     private static boolean packageAccessValid = false;
     private static String[] packageAccess;
@@ -1517,6 +1987,19 @@ class SecurityManager {
      * <code>super.checkPackageAccess</code> should be called
      * as the first line in the overridden method.
      *
+     * <p>
+     *  如果调用线程不允许访问参数指定的包,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法由类装载器的<code> loadClass </code>方法使用。
+     * <p>
+     *  此方法首先通过从调用<code> java.security.Security.getProperty("package.access")</code>获取逗号分隔列表来获取受限包的列表,并检查<code>
+     *  pkg </code>开头为或等于任何受限包。
+     * 如果是,则使用<code> RuntimePermission("accessClassInPackage。
+     * "+ pkg)</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果覆盖此方法,则应将<code> super.checkPackageAccess </code>调用为覆盖方法中的第一行。
+     * 
+     * 
      * @param      pkg   the package name.
      * @exception  SecurityException  if the calling thread does not have
      *             permission to access the specified package.
@@ -1536,6 +2019,9 @@ class SecurityManager {
         synchronized (packageAccessLock) {
             /*
              * Do we need to update our property array?
+             * <p>
+             *  我们需要更新属性数组吗?
+             * 
              */
             if (!packageAccessValid) {
                 String tmpPropertyStr =
@@ -1558,6 +2044,9 @@ class SecurityManager {
 
         /*
          * Traverse the list of packages, check for any matches.
+         * <p>
+         *  遍历包的列表,检查任何匹配。
+         * 
          */
         for (int i = 0; i < pkgs.length; i++) {
             if (pkg.startsWith(pkgs[i]) || pkgs[i].equals(pkg + ".")) {
@@ -1589,6 +2078,19 @@ class SecurityManager {
      * <code>super.checkPackageDefinition</code> should be called
      * as the first line in the overridden method.
      *
+     * <p>
+     * 如果调用线程不允许在参数指定的包中定义类,则抛出<code> SecurityException </code>。
+     * <p>
+     *  此方法由一些类加载器的<code> loadClass </code>方法使用。
+     * <p>
+     *  此方法首先通过从调用<code> java.security.Security.getProperty("package.definition")</code>获取逗号分隔列表来获取受限包的列表,并检
+     * 查<code> pkg </code>开头为或等于任何受限包。
+     * 如果是,则使用<code> RuntimePermission("defineClassInPackage。
+     * "+ pkg)</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果这个方法被覆盖,那么<code> super.checkPackageDefinition </code>应该被调用作为覆盖方法中的第一行。
+     * 
+     * 
      * @param      pkg   the package name.
      * @exception  SecurityException  if the calling thread does not have
      *             permission to define classes in the specified package.
@@ -1605,6 +2107,9 @@ class SecurityManager {
         synchronized (packageDefinitionLock) {
             /*
              * Do we need to update our property array?
+             * <p>
+             *  我们需要更新属性数组吗?
+             * 
              */
             if (!packageDefinitionValid) {
                 String tmpPropertyStr =
@@ -1626,6 +2131,9 @@ class SecurityManager {
 
         /*
          * Traverse the list of packages, check for any matches.
+         * <p>
+         *  遍历包的列表,检查任何匹配。
+         * 
          */
         for (int i = 0; i < pkgs.length; i++) {
             if (pkg.startsWith(pkgs[i]) || pkgs[i].equals(pkg + ".")) {
@@ -1651,6 +2159,16 @@ class SecurityManager {
      * exception.
      * <p>
      *
+     * <p>
+     *  如果调用线程不允许设置<code> ServerSocket </code>或<code> Socket </code>使用的套接字工厂,或者</code>使用的流处理程序工厂,则抛出<code> S
+     * ecurityException </code>代码> URL </code>。
+     * <p>
+     *  此方法使用<code> RuntimePermission("setFactory")</code>权限调用<code> checkPermission </code>。
+     * <p>
+     *  如果你重写这个方法,你应该调用<code> super.checkSetFactory </code>在被覆盖的方法通常会抛出异常。
+     * <p>
+     * 
+     * 
      * @exception  SecurityException  if the calling thread does not have
      *             permission to specify a socket factory or a stream
      *             handler factory.
@@ -1680,6 +2198,18 @@ class SecurityManager {
      * relies on the code being checked being at a stack depth of
      * 4.
      *
+     * <p>
+     *  如果调用线程不允许访问成员,则抛出<code> SecurityException </code>。
+     * <p>
+     * 默认策略是允许访问PUBLIC成员,以及访问具有与调用者相同的类加载器的类。
+     * 在所有其他情况下,此方法使用<code> RuntimePermission("accessDeclaredMembers")</code>权限调用<code> checkPermission </code>
+     * 。
+     * 默认策略是允许访问PUBLIC成员,以及访问具有与调用者相同的类加载器的类。
+     * <p>
+     *  如果这个方法被覆盖,则不能调用<code> super.checkMemberAccess </code>,因为<code> checkMemberAccess </code>的默认实现依赖于被检查的
+     * 代码处于堆栈深度4 。
+     * 
+     * 
      * @param clazz the class that reflection is to be performed on.
      *
      * @param which type of access, PUBLIC or DECLARED.
@@ -1717,6 +2247,12 @@ class SecurityManager {
              * java.lang.Class.checkMemberAccess [1]
              * SecurityManager.checkMemberAccess [0]
              *
+             * <p>
+             *  堆栈深度为4应该是java.lang.Class中调用checkMember访问的方法之一的调用者。堆栈应该看起来像：
+             * 
+             *  someCaller [3] java.lang.Class.someReflectionAPI [2] java.lang.Class.checkMemberAccess [1] SecurityM
+             * anager.checkMemberAccess [0]。
+             * 
              */
             if ((stack.length<4) ||
                 (stack[3].getClassLoader() != clazz.getClassLoader())) {
@@ -1745,6 +2281,15 @@ class SecurityManager {
      * at the point the overridden method would normally throw an
      * exception.
      *
+     * <p>
+     *  确定是否应授予或拒绝具有指定的权限目标名称的权限。
+     * 
+     *  <p>如果允许所请求的权限,此方法会静静返回。如果拒绝,则引发SecurityException。
+     * 
+     *  <p>此方法为给定的权限目标名称创建一个<code> SecurityPermission </code>对象,并使用它调用<code> checkPermission </code>。
+     * 
+     *  <p>有关可能的权限目标名称列表,请参阅<code> {@ link java.security.SecurityPermission} </code>的文档。
+     * 
      * @param target the target name of the <code>SecurityPermission</code>.
      *
      * @exception SecurityException if the calling thread does not have
@@ -1768,6 +2313,11 @@ class SecurityManager {
      * thread. This should be overridden by a specific security
      * manager to return the appropriate thread group.
      *
+     * <p>
+     * 
+     *  <p>如果你重写这个方法,你应该调用<code> super.checkSecurityAccess </code>在被覆盖的方法通常会抛出异常。
+     * 
+     * 
      * @return  ThreadGroup that new threads are instantiated into
      * @since   JDK1.1
      * @see     java.lang.ThreadGroup

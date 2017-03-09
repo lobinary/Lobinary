@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,11 @@ package javax.script;
  * <code>ScriptException</code>.  The class has members to store line and column numbers and
  * filenames if this information is available.
  *
+ * <p>
+ *  脚本API的通用<code>异常</code>类。底层脚本实现抛出的检查异常类型必须封装在<code> ScriptException </code>的实例中。
+ * 如果此信息可用,该类具有存储行号,列号和文件名的成员。
+ * 
+ * 
  * @author Mike Grogan
  * @since 1.6
  */
@@ -46,6 +52,10 @@ public class ScriptException extends Exception {
      * Creates a <code>ScriptException</code> with a String to be used in its message.
      * Filename, and line and column numbers are unspecified.
      *
+     * <p>
+     *  使用要在其消息中使用的字符串创建<code> ScriptException </code>。文件名,行号和列号未指定。
+     * 
+     * 
      * @param s The String to use in the message.
      */
     public ScriptException(String s) {
@@ -59,6 +69,10 @@ public class ScriptException extends Exception {
      * Creates a <code>ScriptException</code> wrapping an <code>Exception</code> thrown by an underlying
      * interpreter.  Line and column numbers and filename are unspecified.
      *
+     * <p>
+     *  创建<code> ScriptException </code>包装由底层解释器抛出的<code>异常</code>。行和列号和文件名未指定。
+     * 
+     * 
      * @param e The wrapped <code>Exception</code>.
      */
     public ScriptException(Exception e) {
@@ -72,6 +86,10 @@ public class ScriptException extends Exception {
      * Creates a <code>ScriptException</code> with message, filename and linenumber to
      * be used in error messages.
      *
+     * <p>
+     *  在错误消息中使用消息,文件名和线程数创建<code> ScriptException </code>。
+     * 
+     * 
      * @param message The string to use in the message
      *
      * @param fileName The file or resource name describing the location of a script error
@@ -90,6 +108,10 @@ public class ScriptException extends Exception {
     /**
      * <code>ScriptException</code> constructor specifying message, filename, line number
      * and column number.
+     * <p>
+     *  <code> ScriptException </code>构造函数,指定消息,文件名,行号和列号。
+     * 
+     * 
      * @param message The message.
      * @param fileName The filename
      * @param lineNumber the line number.
@@ -108,6 +130,10 @@ public class ScriptException extends Exception {
     /**
      * Returns a message containing the String passed to a constructor as well as
      * line and column numbers and filename if any of these are known.
+     * <p>
+     *  返回一条消息,其中包含传递给构造函数的字符串以及行号和列号以及文件名(如果已知其中任何一个)。
+     * 
+     * 
      * @return The error message.
      */
     public String getMessage() {
@@ -128,6 +154,10 @@ public class ScriptException extends Exception {
 
     /**
      * Get the line number on which an error occurred.
+     * <p>
+     *  获取发生错误的行号。
+     * 
+     * 
      * @return The line number.  Returns -1 if a line number is unavailable.
      */
     public int getLineNumber() {
@@ -136,6 +166,10 @@ public class ScriptException extends Exception {
 
     /**
      * Get the column number on which an error occurred.
+     * <p>
+     *  获取发生错误的列号。
+     * 
+     * 
      * @return The column number.  Returns -1 if a column number is unavailable.
      */
     public int getColumnNumber() {
@@ -144,6 +178,9 @@ public class ScriptException extends Exception {
 
     /**
      * Get the source of the script causing the error.
+     * <p>
+     *  获取导致错误的脚本的源。
+     * 
      * @return The file name of the script or some other string describing the script
      * source.  May return some implementation-defined string such as <i>&lt;unknown&gt;</i>
      * if a description of the source is unavailable.

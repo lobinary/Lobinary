@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,14 @@ import sun.security.util.SecurityConstants;
  * The classes that are loaded are by default granted permission only to
  * access the URLs specified when the URLClassLoader was created.
  *
+ * <p>
+ *  此类加载器用于从引用JAR文件和目录的URL的搜索路径加载类和资源。以"/"结尾的任何URL都假定指向一个目录。否则,URL被假定为引用将根据需要打开的JAR文件。
+ * <p>
+ *  创建URLClassLoader实例的线程的AccessControlContext将在后续加载类和资源时使用。
+ * <p>
+ *  默认情况下,加载的类仅授予访问URLClassLoader创建时指定的URL的权限。
+ * 
+ * 
  * @author  David Connelly
  * @since   1.2
  */
@@ -88,6 +97,13 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * calls the security manager's {@code checkCreateClassLoader} method
      * to ensure creation of a class loader is allowed.
      *
+     * <p>
+     *  为给定的URL构造一个新的URLClassLoader。在首次在指定的父类装入器中搜索之后,将按照为类和资源指定的顺序搜索URL。以"/"结尾的任何URL都假定指向一个目录。
+     * 否则,URL被假定为引用将根据需要下载和打开的JAR文件。
+     * 
+     *  <p>如果有安全管理员,此方法首先会调用安全管理员的{@code checkCreateClassLoader}方法,以确保允许创建类加载器。
+     * 
+     * 
      * @param urls the URLs from which to load classes and resources
      * @param parent the parent class loader for delegation
      * @exception  SecurityException  if a security manager exists and its
@@ -132,6 +148,13 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * calls the security manager's {@code checkCreateClassLoader} method
      * to ensure creation of a class loader is allowed.
      *
+     * <p>
+     * 使用默认委托父代{@code ClassLoader}为指定的URL构造一个新的URLClassLoader。在首次在父类加载器中搜索之后,将按照为类和资源指定的顺序搜索URL。
+     * 以"/"结尾的任何URL都假定指向一个目录。否则,URL被假定为引用将根据需要下载和打开的JAR文件。
+     * 
+     *  <p>如果有安全管理员,此方法首先会调用安全管理员的{@code checkCreateClassLoader}方法,以确保允许创建类加载器。
+     * 
+     * 
      * @param urls the URLs from which to load classes and resources
      *
      * @exception  SecurityException  if a security manager exists and its
@@ -173,6 +196,13 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * calls the security manager's {@code checkCreateClassLoader} method
      * to ensure creation of a class loader is allowed.
      *
+     * <p>
+     *  为指定的URL,父类加载器和URLStreamHandlerFactory构造新的URLClassLoader。父参数将用作委派的父类装入器。
+     * 工厂参数将用作流处理程序工厂来在创建新的jar URL时获取协议处理程序。
+     * 
+     *  <p>如果有安全管理员,此方法首先会调用安全管理员的{@code checkCreateClassLoader}方法,以确保允许创建类加载器。
+     * 
+     * 
      * @param urls the URLs from which to load classes and resources
      * @param parent the parent class loader for delegation
      * @param factory the URLStreamHandlerFactory to use when creating URLs
@@ -207,6 +237,14 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      *
      * For file resources, which is probably a less common situation
      * we have to keep a weak reference to each stream.
+     * <p>
+     *  (JarFiles或FileInputStreams)。我们不关心Http资源,因为他们不需要关闭。
+     * 
+     *  如果资源来自一个jar文件,我们保留对JarFile对象的一个​​(weak)引用,如果URLClassLoader.close()调用它可以关闭。
+     * 由于jar文件缓存,每个底层jar文件通常只有一个JarFile对象。
+     * 
+     * 对于文件资源,这可能是一个不太常见的情况,我们必须保持对每个流的弱引用。
+     * 
      */
 
     private WeakHashMap<Closeable,Void>
@@ -220,6 +258,12 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * <p> The search order is described in the documentation for {@link
      * #getResource(String)}.  </p>
      *
+     * <p>
+     *  返回读取指定资源的输入流。如果此加载程序已关闭,则此方法打开的任何资源将关闭。
+     * 
+     *  <p>搜索顺序在{@link #getResource(String)}的文档中有描述。 </p>
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -272,6 +316,14 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
     * and errors are not caught. Calling close on an already closed
     * loader has no effect.
     * <p>
+    * <p>
+    *  关闭此URLClassLoader,以便它不能再用于加载由此加载器定义的新类或资源。仍然可以访问在委托层次结构中由任何此加载器父类定义的类和资源。此外,任何已经加载的类或资源仍然可以访问。
+    * <p>
+    *  在jar：和file：URL的情况下,它也关闭它打开的任何文件。如果另一个线程在调用{@code close}方法时加载一个类,那么该加载的结果是未定义的。
+    * <p>
+    *  该方法尽力尝试通过在内部捕获{@link IOException}来关闭所有打开的文件。未捕获的未经检查的异常和错误。在已经关闭的加载器上调用关闭没有效果。
+    * <p>
+    * 
     * @exception IOException if closing any file opened by this class loader
     * resulted in an IOException. Any such exceptions are caught internally.
     * If only one is caught, then it is re-thrown. If more than one exception
@@ -326,6 +378,12 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * list of URLs, or if this loader is closed, then invoking this
      * method has no effect.
      *
+     * <p>
+     *  将指定的URL附加到URL列表中以搜索类和资源。
+     * <p>
+     *  如果指定的URL是{@code null}或已经在URL列表中,或者此加载器已关闭,则调用此方法不会生效。
+     * 
+     * 
      * @param url the URL to be added to the search path of URLs
      */
     protected void addURL(URL url) {
@@ -336,6 +394,10 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * Returns the search path of URLs for loading classes and resources.
      * This includes the original list of URLs specified to the constructor,
      * along with any URLs subsequently appended by the addURL() method.
+     * <p>
+     * 返回用于加载类和资源的网址的搜索路径。这包括指定给构造函数的原始URL列表,以及随后由addURL()方法附加的任何URL。
+     * 
+     * 
      * @return the search path of URLs for loading classes and resources.
      */
     public URL[] getURLs() {
@@ -347,6 +409,10 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * path. Any URLs referring to JAR files are loaded and opened as needed
      * until the class is found.
      *
+     * <p>
+     *  从URL搜索路径中查找并加载具有指定名称的类。任何引用JAR文件的URL都会根据需要加载和打开,直到找到类为止。
+     * 
+     * 
      * @param name the name of the class
      * @return the resulting class
      * @exception ClassNotFoundException if the class could not be found,
@@ -387,6 +453,9 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * Retrieve the package using the specified package name.
      * If non-null, verify the package using the specified code
      * source and manifest.
+     * <p>
+     *  使用指定的包名称检索包。如果为非空,请使用指定的代码源和清单验证包。
+     * 
      */
     private Package getAndVerifyPackage(String pkgname,
                                         Manifest man, URL url) {
@@ -439,6 +508,9 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * Defines a Class using the class bytes obtained from the specified
      * Resource. The resulting Class must be resolved before it can be
      * used.
+     * <p>
+     *  使用从指定资源获取的类字节定义类。生成的类必须先解析才能使用。
+     * 
      */
     private Class<?> defineClass(String name, Resource res) throws IOException {
         long t0 = System.nanoTime();
@@ -474,6 +546,10 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * version and sealing information. For sealed packages, the additional
      * URL specifies the code source URL from which the package was loaded.
      *
+     * <p>
+     *  在此ClassLoader中按名称定义一个新包。包含在指定清单中的属性将用于获取软件包版本和密封信息。对于密封包,附加URL指定从其加载包的代码源URL。
+     * 
+     * 
      * @param name  the package name
      * @param man   the Manifest containing package version and sealing
      *              information
@@ -536,6 +612,9 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
     /*
      * Returns true if the specified package name is sealed according to the
      * given manifest.
+     * <p>
+     *  如果指定的包名称根据给定的清单密封,则返回true。
+     * 
      */
     private boolean isSealed(String name, Manifest man) {
         String path = name.replace('.', '/').concat("/");
@@ -555,6 +634,10 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
     /**
      * Finds the resource with the specified name on the URL search path.
      *
+     * <p>
+     *  在URL搜索路径上查找具有指定名称的资源。
+     * 
+     * 
      * @param name the name of the resource
      * @return a {@code URL} for the resource, or {@code null}
      * if the resource could not be found, or if the loader is closed.
@@ -562,6 +645,9 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
     public URL findResource(final String name) {
         /*
          * The same restriction to finding classes applies to resources
+         * <p>
+         *  发现类的同样的限制适用于资源
+         * 
          */
         URL url = AccessController.doPrivileged(
             new PrivilegedAction<URL>() {
@@ -577,6 +663,10 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * Returns an Enumeration of URLs representing all of the resources
      * on the URL search path having the specified name.
      *
+     * <p>
+     *  返回表示URL搜索路径上具有指定名称的所有资源的URL的枚举。
+     * 
+     * 
      * @param name the resource name
      * @exception IOException if an I/O exception occurs
      * @return an {@code Enumeration} of {@code URL}s
@@ -645,6 +735,17 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * <p>
      * If the protocol is not "file", then permission
      * to connect to and accept connections from the URL's host is granted.
+     * <p>
+     *  返回给定codesource对象的权限。该方法的实现首先调用super.getPermissions,然后根据codesource的URL添加权限。
+     * <p>
+     * 如果此URL的协议是"jar",则授予的权限基于Jar文件的URL所需的权限。
+     * <p>
+     *  如果协议是"文件"并且存在授权组件,则可以授权连接到并接受来自该授权的连接。如果协议是"file"并且路径指定了一个文件,则授予读取该文件的权限。
+     * 如果协议是"文件"并且路径是目录,则授予读取所有文件和(递归地)包含在该目录中的所有文件和子目录的权限。
+     * <p>
+     *  如果协议不是"文件",则授予连接到并接受来自URL的主机的连接的权限。
+     * 
+     * 
      * @param codesource the codesource
      * @exception NullPointerException if {@code codesource} is {@code null}.
      * @return the permissions granted to the codesource
@@ -686,6 +787,9 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
              * Not loading from a 'file:' URL so we want to give the class
              * permission to connect to and accept from the remote host
              * after we've made sure the host is the correct one and is valid.
+             * <p>
+             *  不从'file：'URL加载,所以我们希望在我们确定主机是正确的并且有效后,给予类连接到远程主机并接受它的权限。
+             * 
              */
             URL locUrl = url;
             if (urlConnection instanceof JarURLConnection) {
@@ -724,6 +828,13 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * {@code SecurityManager.checkPackageAccess} method before
      * loading the class.
      *
+     * <p>
+     *  为指定的URL和父类装入器创建URLClassLoader的新实例。
+     * 如果安装了安全管理器,则此方法返回的URLClassLoader的{@code loadClass}方法将在加载类之前调用​​{@code SecurityManager.checkPackageAccess}
+     * 方法。
+     *  为指定的URL和父类装入器创建URLClassLoader的新实例。
+     * 
+     * 
      * @param urls the URLs to search for classes and resources
      * @param parent the parent class loader for delegation
      * @exception  NullPointerException if {@code urls} is {@code null}.
@@ -751,6 +862,11 @@ public class URLClassLoader extends SecureClassLoader implements Closeable {
      * {@code SecurityManager.checkPackageAccess} before
      * loading the class.
      *
+     * <p>
+     *  为指定的URL和默认父类装入器创建URLClassLoader的新实例。
+     * 如果安装了安全管理器,则此方法返回的URLClassLoader的{@code loadClass}方法将在加载类之前调用​​{@code SecurityManager.checkPackageAccess}
+     * 。
+     * 
      * @param urls the URLs to search for classes and resources
      * @exception  NullPointerException if {@code urls} is {@code null}.
      * @return the resulting class loader

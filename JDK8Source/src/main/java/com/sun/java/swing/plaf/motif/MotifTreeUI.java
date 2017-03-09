@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,13 @@ import javax.swing.plaf.basic.*;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  树组件的主题表达。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class MotifTreeUI extends BasicTreeUI
@@ -55,6 +63,9 @@ public class MotifTreeUI extends BasicTreeUI
 
     /**
      * creates a UI object to represent a Motif Tree widget
+     * <p>
+     *  创建一个UI对象以表示Motif Tree小部件
+     * 
      */
     public MotifTreeUI() {
         super();
@@ -90,6 +101,12 @@ public class MotifTreeUI extends BasicTreeUI
      * for short term storage or RMI between applications running the same
      * version of Swing.  A future release of Swing will provide support for
      * long term persistence.
+     * <p>
+     *  减号按钮图标。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     * 未来的Swing版本将为长期持久性提供支持。
+     * 
      */
     public static class MotifExpandedIcon implements Icon, Serializable {
         static Color bg;
@@ -138,6 +155,11 @@ public class MotifTreeUI extends BasicTreeUI
      * for short term storage or RMI between applications running the same
      * version of Swing.  A future release of Swing will provide support for
      * long term persistence.
+     * <p>
+     *  加号按钮图标。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     * 未来的Swing版本将为长期持久性提供支持。
      */
     public static class MotifCollapsedIcon extends MotifExpandedIcon {
         public static Icon createCollapsedIcon() {
@@ -158,6 +180,8 @@ public class MotifTreeUI extends BasicTreeUI
     /**
      * Returns the default cell renderer that is used to do the
      * stamping of each node.
+     * <p>
+     * 
      */
     public TreeCellRenderer createDefaultCellRenderer() {
         return new MotifTreeCellRenderer();

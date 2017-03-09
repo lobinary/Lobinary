@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -13,6 +14,9 @@ public interface ENCODING_CDR_ENCAPS
 
   /**
    * The CDR Encapsulation encoding.
+   * <p>
+   * 
+   * 
    * @see CodecFactory
    */
   public static final short value = (short)(0);

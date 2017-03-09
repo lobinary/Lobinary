@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Lexer.java,v 1.2.4.1 2005/09/10 03:55:45 jeffsuttor Exp $
+ * <p>
+ *  $ Id：Lexer.java,v 1.2.4.1 2005/09/10 03:55:45 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.compiler;
 
@@ -30,28 +43,43 @@ import com.sun.org.apache.xpath.internal.res.XPATHErrorResources;
 /**
  * This class is in charge of lexical processing of the XPath
  * expression into tokens.
+ * <p>
+ *  这个类负责将XPath表达式的词法处理转换为令牌。
+ * 
  */
 class Lexer
 {
 
   /**
    * The target XPath.
+   * <p>
+   *  目标XPath。
+   * 
    */
   private Compiler m_compiler;
 
   /**
    * The prefix resolver to map prefixes to namespaces in the XPath.
+   * <p>
+   *  前缀解析器将前缀映射到XPath中的命名空间。
+   * 
    */
   PrefixResolver m_namespaceContext;
 
   /**
    * The XPath processor object.
+   * <p>
+   *  XPath处理器对象。
+   * 
    */
   XPathParser m_processor;
 
   /**
    * This value is added to each element name in the TARGETEXTRA
    * that is a 'target' (right-most top-level element name).
+   * <p>
+   *  此值将添加到TARGETEXTRA中的每个元素名称,即"目标"(最右边的顶级元素名称)。
+   * 
    */
   static final int TARGETEXTRA = 10000;
 
@@ -62,18 +90,29 @@ class Lexer
    * Each element that is a 'target', (right-most top level element name) has
    * TARGETEXTRA added to it.
    *
+   * <p>
+   *  忽略这一点,它会消失。它保存了一个映射到m_tokenQueue,它告诉顶级元素的位置。它用于模式匹配,所以m_tokenQueue可以向后走。
+   * 作为"目标"的每个元素(最右边的顶级元素名称)都添加了TARGETEXTRA。
+   * 
    */
   private int m_patternMap[] = new int[100];
 
   /**
    * Ignore this, it is going away.
    * The number of elements that m_patternMap maps;
+   * <p>
+   *  忽略这一点,它会消失。 m_patternMap映射的元素数量;
+   * 
    */
   private int m_patternMapSize;
 
   /**
    * Create a Lexer object.
    *
+   * <p>
+   *  创建一个Lexer对象。
+   * 
+   * 
    * @param compiler The owning compiler for this lexer.
    * @param resolver The prefix resolver for mapping qualified name prefixes
    *                 to namespace URIs.
@@ -91,6 +130,10 @@ class Lexer
   /**
    * Walk through the expression and build a token queue, and a map of the top-level
    * elements.
+   * <p>
+   * 遍历表达式并构建令牌队列,以及顶级元素的映射。
+   * 
+   * 
    * @param pat XSLT Expression.
    *
    * @throws javax.xml.transform.TransformerException
@@ -103,6 +146,10 @@ class Lexer
   /**
    * Walk through the expression and build a token queue, and a map of the top-level
    * elements.
+   * <p>
+   *  遍历表达式并构建令牌队列,以及顶级元素的映射。
+   * 
+   * 
    * @param pat XSLT Expression.
    * @param targetStrings Vector to hold Strings, may be null.
    *
@@ -382,6 +429,10 @@ class Lexer
    * this is a top-level element.  Must be called before the
    * next token is added to the m_tokenQueue.
    *
+   * <p>
+   *  记录令牌队列上的当前位置,只要这是一个顶级元素。必须在将下一个标记添加到m_tokenQueue之前调用。
+   * 
+   * 
    * @param nesting The nesting count for the pattern element.
    * @param isStart true if this is the start of a pattern.
    * @param isAttrName true if we have determined that this is an attribute name.
@@ -419,6 +470,10 @@ class Lexer
   /**
    * Given a map pos, return the corresponding token queue pos.
    *
+   * <p>
+   *  给定一个map pos,返回相应的令牌队列pos。
+   * 
+   * 
    * @param i The index in the m_patternMap.
    *
    * @return the token queue position.
@@ -434,6 +489,10 @@ class Lexer
   /**
    * Reset token queue mark and m_token to a
    * given position.
+   * <p>
+   *  将令牌队列标记和m_token重置为给定位置。
+   * 
+   * 
    * @param mark The new position.
    */
   private final void resetTokenMark(int mark)
@@ -460,6 +519,10 @@ class Lexer
   /**
    * Given a string, return the corresponding keyword token.
    *
+   * <p>
+   *  给定一个字符串,返回相应的关键字token。
+   * 
+   * 
    * @param key The keyword.
    *
    * @return An opcode value.
@@ -490,6 +553,10 @@ class Lexer
   /**
    * Record the current token in the passed vector.
    *
+   * <p>
+   *  在传递的向量中记录当前令牌。
+   * 
+   * 
    * @param targetStrings Vector of string.
    */
   private void recordTokenString(Vector targetStrings)
@@ -549,6 +616,10 @@ class Lexer
    * Add a token to the token queue.
    *
    *
+   * <p>
+   *  将令牌添加到令牌队列。
+   * 
+   * 
    * @param s The token.
    */
   private final void addToTokenQueue(String s)
@@ -560,6 +631,10 @@ class Lexer
    * When a seperator token is found, see if there's a element name or
    * the like to map.
    *
+   * <p>
+   *  当发现分隔符令牌时,请查看是否有要映射的元素名称等。
+   * 
+   * 
    * @param pat The XPath name string.
    * @param startSubstring The start of the name string.
    * @param posOfNSSep The position of the namespace seperator (':').
@@ -646,6 +721,10 @@ class Lexer
 // error("Could not locate namespace for prefix: "+prefix);
 //                m_processor.error(XPATHErrorResources.ER_PREFIX_MUST_RESOLVE,
 //                                       new String[] {prefix});  //"Prefix must resolve to a namespace: {0}";
+/* <p>
+/*  // error("Could not locate namespace for prefix："+ prefix); // m_processor.error(XPATHErrorResources
+/* .ER_PREFIX_MUST_RESOLVE,// new String [] {prefix}); //"前缀必须解析为命名空间：{0}";。
+/* 
 */
 
       /***  Old code commented out 10-Jan-2001
@@ -656,6 +735,11 @@ class Lexer
 
       if (s.length() > 0)
         addToTokenQueue(s);
+      /* <p>
+      /*  addToTokenQueue(prefix); addToTokenQueue("：");
+      /* 
+      /*  String s = pat.substring(posOfNSSep + 1,posOfScan);
+      /* 
       ***/
     }
 

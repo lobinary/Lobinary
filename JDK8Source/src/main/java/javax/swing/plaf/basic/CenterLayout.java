@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import java.io.*;
 
 /**
   * Center-positioning layout manager.
+  * <p>
+  *  中心定位布局管理器。
+  * 
   * @author Tom Santos
   * @author Steve Wilson
   */

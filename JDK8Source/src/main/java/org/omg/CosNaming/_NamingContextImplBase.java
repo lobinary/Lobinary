@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,10 @@
  * From: nameservice.idl
  * Date: Tue Aug 11 03:12:09 1998
  *   By: idltojava Java IDL 1.2 Aug 11 1998 02:00:18
+ * <p>
+ *  文件：./org/omg/CosNaming/_NamingContextImplBase.java发件人：nameservice.idl日期：Tue Aug 11 03:12:09由By：idlto
+ * java Java IDL 1.2 Aug 11 1998 02:00:18。
+ * 
  * @deprecated Deprecated in JDK 1.4.
  */
 

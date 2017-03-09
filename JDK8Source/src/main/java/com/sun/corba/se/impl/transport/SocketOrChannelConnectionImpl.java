@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -90,6 +91,8 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase;
 import com.sun.corba.se.impl.transport.CorbaResponseWaitingRoomImpl;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class SocketOrChannelConnectionImpl
@@ -726,6 +729,10 @@ public class SocketOrChannelConnectionImpl
             if (byteBuffer.hasArray()) {
                 throw wrapper.unexpectedNonDirectByteBufferWithChannelSocket();
             }
+            /* <p>
+            /*  ByteBuffer从池中大于由池管理的ByteBuffers的大小,那么池将返回一个HeapByteBuffer。
+            /*  if(byteBuffer.hasArray()){throw wrapper.unexpectedNonDirectByteBufferWithChannelSocket(); }}。
+            /* 
             */
             // IMPORTANT: For non-blocking SocketChannels, there's no guarantee
             //            all bytes are written on first write attempt.
@@ -751,6 +758,9 @@ public class SocketOrChannelConnectionImpl
 
     /**
      * Note:it is possible for this to be called more than once
+     * <p>
+     *  注意：它可以被多次调用
+     * 
      */
     public synchronized void close()
     {
@@ -910,6 +920,10 @@ public class SocketOrChannelConnectionImpl
      * writeLock is released and can set by us.
      * IMPORTANT: this connection's lock must be acquired before
      * setting the writeLock and must be unlocked after setting the writeLock.
+     * <p>
+     *  设置此连接的writeLock。如果writeLock已经由其他人设置,阻塞直到writeLock被释放并且可以由我们设置。
+     * 重要信息：在设置writeLock之前必须获取此连接的锁定,并且必须在设置writeLock后将其解锁。
+     * 
      */
     public void writeLock()
     {
@@ -1039,6 +1053,9 @@ public class SocketOrChannelConnectionImpl
             /*
              * ADDED(Ram J) 10/13/2000 In the event of an IOException, try
              * sending a CancelRequest for regular requests / locate requests
+             * <p>
+             *  ADDED(Ram J)10/13/2000如果发生IOException,请尝试为常规请求/定位请求发送CancelRequest
+             * 
              */
 
             // Since IIOPOutputStream's msgheader is set only once, and not
@@ -1062,6 +1079,14 @@ public class SocketOrChannelConnectionImpl
 
                 }
             }
+            /* <p>
+            /*  消息msg = os.getMessage(); if(msg.getType()== Message.GIOPRequest || msg.getType()== Message.GIOPLocat
+            /* eRequest){GIOPVersion requestVersion = msg.getGIOPVersion(); int requestId = MessageBase.getRequestId(msg); try {sendCancelRequest(requestVersion,requestId); }
+            /*  catch(IOException e2){//很可能是一个无效的连接闭包。
+            /*  //忽略,因为没有更多的可以做。 if(orb.transportDebugFlag){。
+            /* 
+            /*  }}
+            /* 
             */
 
             // REVISIT When a send failure happens, purgeCalls() need to be
@@ -1307,6 +1332,11 @@ public class SocketOrChannelConnectionImpl
      ** is closed before the request is processed. This is o.k because
      ** it is a boundary condition. To prevent it we would have to add
      ** more locks which would reduce performance in the normal case.
+     * <p>
+     * 发送到这里,但我们不会检查这个。在处理传入请求后,即使在处理请求之前关闭连接,将在Worker线程中抛出"延迟"异常。这是o.k因为它是一个边界条件。
+     * 为了防止它,我们必须添加更多的锁,这将降低性能在正常情况下。
+     * 
+     * 
      **/
     public synchronized void serverRequestProcessingBegins()
     {
@@ -1452,6 +1482,14 @@ public class SocketOrChannelConnectionImpl
      * Note that this should only ever be called by the Reader thread for
      * this connection.
      *
+     * <p>
+     *  唤醒连接上的未完成请求,并将COMM_FAILURE异常传递给给定的次要代码。
+     * 
+     *  此外,从连接表中删除连接并停止读取器线程。
+     * 
+     *  注意,这应该只有由读取器线程为此连接调用。
+     * 
+     * 
      * @param minor_code The minor code for the COMM_FAILURE major code.
      * @param die Kill the reader thread (this thread) before exiting.
      */
@@ -1553,6 +1591,8 @@ public class SocketOrChannelConnectionImpl
     /*************************************************************************
     * The following methods are for dealing with Connection cleaning for
     * better scalability of servers in high network load conditions.
+    * <p>
+    * 
     **************************************************************************/
 
     public void sendCloseConnection(GIOPVersion giopVersion)
@@ -1572,6 +1612,10 @@ public class SocketOrChannelConnectionImpl
     /**
      * Send a CancelRequest message. This does not lock the connection, so the
      * caller needs to ensure this method is called appropriately.
+     * <p>
+     *  以下方法用于处理连接清理,以便在高网络负载条件下实现服务器的更好的可扩展性。
+     * 
+     * 
      * @exception IOException - could be due to abortive connection closure.
      */
     public void sendCancelRequest(GIOPVersion giopVersion, int requestId)

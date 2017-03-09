@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -49,6 +53,14 @@ import java.security.ProtectionDomain;
  * custom {@link ForkJoinPool.ForkJoinWorkerThreadFactory} to
  * {@linkplain ForkJoinPool#ForkJoinPool use it} in a {@code ForkJoinPool}.
  *
+ * <p>
+ *  由{@link ForkJoinPool}管理的线程,它执行{@link ForkJoinTask}。这个类只是为了添加功能而子类化 - 没有可重用的方法处理调度或执行。
+ * 但是,您可以覆盖主任务处理循环周围的初始化和终止方法。
+ * 如果你创建这样的子类,你还需要在{@code ForkJoinPool}中提供一个自定义的{@link ForkJoinPool.ForkJoinWorkerThreadFactory}到{@linkplain ForkJoinPool#ForkJoinPool使用它}
+ * 。
+ * 但是,您可以覆盖主任务处理循环周围的初始化和终止方法。
+ * 
+ * 
  * @since 1.7
  * @author Doug Lea
  */
@@ -68,6 +80,14 @@ public class ForkJoinWorkerThread extends Thread {
      * Support for (non-public) subclass InnocuousForkJoinWorkerThread
      * requires that we break quite a lot of encapsulation (via Unsafe)
      * both here and in the subclass to access and set Thread fields.
+     * <p>
+     *  ForkJoinWorkerThreads由ForkJoinPools管理并执行ForkJoinTasks。有关说明,请参阅ForkJoinPool类的内部文档。
+     * 
+     *  这个类只保留到其池和WorkQueue的链接。池字段在构建后立即设置,但在调用registerWorker完成之前,workQueue字段不会设置。
+     * 这导致可见性竞争,其通过要求workQueue字段仅由拥有线程访问来容忍。
+     * 
+     *  支持(非公共)子类InnocuousForkJoinWorkerThread要求我们在这里和子类中打破很多封装(通过Unsafe)来访问和设置Thread字段。
+     * 
      */
 
     final ForkJoinPool pool;                // the pool this thread works in
@@ -76,6 +96,10 @@ public class ForkJoinWorkerThread extends Thread {
     /**
      * Creates a ForkJoinWorkerThread operating in the given pool.
      *
+     * <p>
+     * 创建在给定池中操作的ForkJoinWorkerThread。
+     * 
+     * 
      * @param pool the pool this thread works in
      * @throws NullPointerException if pool is null
      */
@@ -88,6 +112,9 @@ public class ForkJoinWorkerThread extends Thread {
 
     /**
      * Version for InnocuousForkJoinWorkerThread
+     * <p>
+     *  InnocuousForkJoinWorkerThread的版本
+     * 
      */
     ForkJoinWorkerThread(ForkJoinPool pool, ThreadGroup threadGroup,
                          AccessControlContext acc) {
@@ -101,6 +128,10 @@ public class ForkJoinWorkerThread extends Thread {
     /**
      * Returns the pool hosting this thread.
      *
+     * <p>
+     *  返回托管此线程的池。
+     * 
+     * 
      * @return the pool
      */
     public ForkJoinPool getPool() {
@@ -115,6 +146,10 @@ public class ForkJoinWorkerThread extends Thread {
      * useful for applications that track status or collect results
      * per-worker-thread rather than per-task.
      *
+     * <p>
+     *  返回其池中此线程的唯一索引号。返回值的范围从0到可能存在于池中的最大线程数(减1),并且在线程的生存期内不更改。此方法可能对跟踪状态或收集结果每个工作者线程而不是每个任务的应用程序有用。
+     * 
+     * 
      * @return the index number
      */
     public int getPoolIndex() {
@@ -129,6 +164,10 @@ public class ForkJoinWorkerThread extends Thread {
      * default values, to ensure that attempted accesses from other
      * threads work correctly even before this thread starts
      * processing tasks.
+     * <p>
+     *  在构建之后但在处理任何任务之前初始化内部状态。如果覆盖此方法,则必须在方法开头调用{@code super.onStart()}。
+     * 初始化需要小心：大多数字段必须具有合法的默认值,以确保即使在此线程开始处理任务之前,来自其他线程的尝试访问也能正常工作。
+     * 
      */
     protected void onStart() {
     }
@@ -138,6 +177,10 @@ public class ForkJoinWorkerThread extends Thread {
      * thread.  If you override this method, you must invoke
      * {@code super.onTermination} at the end of the overridden method.
      *
+     * <p>
+     *  执行与终止此工作程序线程相关联的清除。如果覆盖此方法,则必须在覆盖方法结束时调用{@code super.onTermination}。
+     * 
+     * 
      * @param exception the exception causing this thread to abort due
      * to an unrecoverable error, or {@code null} if completed normally
      */
@@ -148,6 +191,9 @@ public class ForkJoinWorkerThread extends Thread {
      * This method is required to be public, but should never be
      * called explicitly. It performs the main run loop to execute
      * {@link ForkJoinTask}s.
+     * <p>
+     *  此方法需要是公共的,但不应明确调用。它执行主运行循环以执行{@link ForkJoinTask}。
+     * 
      */
     public void run() {
         if (workQueue.array == null) { // only run once
@@ -172,6 +218,9 @@ public class ForkJoinWorkerThread extends Thread {
 
     /**
      * Erases ThreadLocals by nulling out Thread maps.
+     * <p>
+     *  通过清零线程映射来清除ThreadLocals。
+     * 
      */
     final void eraseThreadLocals() {
         U.putObject(this, THREADLOCALS, null);
@@ -180,6 +229,9 @@ public class ForkJoinWorkerThread extends Thread {
 
     /**
      * Non-public hook method for InnocuousForkJoinWorkerThread
+     * <p>
+     *  InnocuousForkJoinWorkerThread的非公共hook方法
+     * 
      */
     void afterTopLevelExec() {
     }
@@ -209,6 +261,9 @@ public class ForkJoinWorkerThread extends Thread {
      * A worker thread that has no permissions, is not a member of any
      * user-defined ThreadGroup, and erases all ThreadLocals after
      * running each top-level task.
+     * <p>
+     *  没有权限的工作线程不是任何用户定义的线程组的成员,并且在运行每个顶级任务后将擦除所有ThreadLocals。
+     * 
      */
     static final class InnocuousForkJoinWorkerThread extends ForkJoinWorkerThread {
         /** The ThreadGroup for all InnocuousForkJoinWorkerThreads */
@@ -248,6 +303,8 @@ public class ForkJoinWorkerThread extends Thread {
          * Returns a new group with the system ThreadGroup (the
          * topmost, parent-less group) as parent.  Uses Unsafe to
          * traverse Thread.group and ThreadGroup.parent fields.
+         * <p>
+         * 返回具有系统ThreadGroup(最顶层,无父组)作为父项的新组。使用Unsafe来遍历Thread.group和ThreadGroup.parent字段。
          */
         private static ThreadGroup createThreadGroup() {
             try {

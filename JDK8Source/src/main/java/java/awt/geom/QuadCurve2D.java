@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ import sun.awt.geom.Curve;
  * The actual storage representation of the coordinates is left to
  * the subclass.
  *
+ * <p>
+ *  <code> QuadCurve2D </code>类定义{@code(x,y)}坐标空间中的二次参数曲线段。
+ * <p>
+ *  这个类只是存储2D二次曲线段的所有对象的抽象超类。坐标的实际存储表示是留给子类的。
+ * 
+ * 
  * @author      Jim Graham
  * @since 1.2
  */
@@ -48,12 +55,20 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * A quadratic parametric curve segment specified with
      * {@code float} coordinates.
      *
+     * <p>
+     *  用{@code float}坐标指定的二次参数曲线段。
+     * 
+     * 
      * @since 1.2
      */
     public static class Float extends QuadCurve2D implements Serializable {
         /**
          * The X coordinate of the start point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段起点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -62,6 +77,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the start point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段起点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -70,6 +89,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the control point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段的控制点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -78,6 +101,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the control point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段控制点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -86,6 +113,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the end point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段的终点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -94,6 +125,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the end point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段的终点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -102,6 +137,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * Constructs and initializes a <code>QuadCurve2D</code> with
          * coordinates (0, 0, 0, 0, 0, 0).
+         * <p>
+         *  用坐标(0,0,0,0,0,0)构造并初始化一个<code> QuadCurve2D </code>。
+         * 
+         * 
          * @since 1.2
          */
         public Float() {
@@ -111,6 +150,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
          * Constructs and initializes a <code>QuadCurve2D</code> from the
          * specified {@code float} coordinates.
          *
+         * <p>
+         *  从指定的{@code float}坐标构造并初始化一个<code> QuadCurve2D </code>。
+         * 
+         * 
          * @param x1 the X coordinate of the start point
          * @param y1 the Y coordinate of the start point
          * @param ctrlx the X coordinate of the control point
@@ -128,6 +171,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX1() {
@@ -136,6 +183,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY1() {
@@ -144,6 +195,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP1() {
@@ -152,6 +207,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlX() {
@@ -160,6 +219,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlY() {
@@ -168,6 +231,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getCtrlPt() {
@@ -176,6 +243,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX2() {
@@ -184,6 +255,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY2() {
@@ -192,6 +267,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP2() {
@@ -200,6 +279,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setCurve(double x1, double y1,
@@ -218,6 +301,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
          * Sets the location of the end points and control point of this curve
          * to the specified {@code float} coordinates.
          *
+         * <p>
+         *  将此曲线的端点和控制点的位置设置为指定的{@code float}坐标。
+         * 
+         * 
          * @param x1 the X coordinate of the start point
          * @param y1 the Y coordinate of the start point
          * @param ctrlx the X coordinate of the control point
@@ -240,6 +327,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -253,6 +344,9 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -8511188402130719609L;
     }
@@ -261,12 +355,20 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * A quadratic parametric curve segment specified with
      * {@code double} coordinates.
      *
+     * <p>
+     * 用{@code double}坐标指定的二次参数曲线段。
+     * 
+     * 
      * @since 1.2
      */
     public static class Double extends QuadCurve2D implements Serializable {
         /**
          * The X coordinate of the start point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段起点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -275,6 +377,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the start point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段起点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -283,6 +389,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the control point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段的控制点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -291,6 +401,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the control point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段控制点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -299,6 +413,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the end point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段的终点的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -307,6 +425,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the end point of the quadratic curve
          * segment.
+         * <p>
+         *  二次曲线段的终点的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -315,6 +437,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
         /**
          * Constructs and initializes a <code>QuadCurve2D</code> with
          * coordinates (0, 0, 0, 0, 0, 0).
+         * <p>
+         *  用坐标(0,0,0,0,0,0)构造并初始化一个<code> QuadCurve2D </code>。
+         * 
+         * 
          * @since 1.2
          */
         public Double() {
@@ -324,6 +450,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
          * Constructs and initializes a <code>QuadCurve2D</code> from the
          * specified {@code double} coordinates.
          *
+         * <p>
+         *  从指定的{@code double}坐标构造并初始化<code> QuadCurve2D </code>。
+         * 
+         * 
          * @param x1 the X coordinate of the start point
          * @param y1 the Y coordinate of the start point
          * @param ctrlx the X coordinate of the control point
@@ -341,6 +471,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX1() {
@@ -349,6 +483,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY1() {
@@ -357,6 +495,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP1() {
@@ -365,6 +507,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlX() {
@@ -373,6 +519,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlY() {
@@ -381,6 +531,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getCtrlPt() {
@@ -389,6 +543,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX2() {
@@ -397,6 +555,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY2() {
@@ -405,6 +567,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP2() {
@@ -413,6 +579,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setCurve(double x1, double y1,
@@ -429,6 +599,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -442,6 +616,9 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 4217149928428559721L;
     }
@@ -453,6 +630,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * the information necessary to satisfy the various accessor
      * methods below.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类。类型特定的实现子类可用于实例化并且提供用于存储满足下面的各种存取器方法所必需的信息的多种格式。
+     * 
+     * 
      * @see java.awt.geom.QuadCurve2D.Float
      * @see java.awt.geom.QuadCurve2D.Double
      * @since 1.2
@@ -463,6 +644,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
     /**
      * Returns the X coordinate of the start point in
      * <code>double</code> in precision.
+     * <p>
+     *  以<code> double </code>的精度返回起点的X坐标。
+     * 
+     * 
      * @return the X coordinate of the start point.
      * @since 1.2
      */
@@ -471,6 +656,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
     /**
      * Returns the Y coordinate of the start point in
      * <code>double</code> precision.
+     * <p>
+     *  返回<code> double </code>精度中起点的Y坐标。
+     * 
+     * 
      * @return the Y coordinate of the start point.
      * @since 1.2
      */
@@ -478,6 +667,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the start point.
+     * <p>
+     *  返回起点。
+     * 
+     * 
      * @return a <code>Point2D</code> that is the start point of this
      *          <code>QuadCurve2D</code>.
      * @since 1.2
@@ -487,6 +680,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
     /**
      * Returns the X coordinate of the control point in
      * <code>double</code> precision.
+     * <p>
+     *  以<code> double </code>精度返回控制点的X坐标。
+     * 
+     * 
      * @return X coordinate the control point
      * @since 1.2
      */
@@ -495,6 +692,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
     /**
      * Returns the Y coordinate of the control point in
      * <code>double</code> precision.
+     * <p>
+     *  以<code> double </code>精度返回控制点的Y坐标。
+     * 
+     * 
      * @return the Y coordinate of the control point.
      * @since 1.2
      */
@@ -502,6 +703,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the control point.
+     * <p>
+     * 返回控制点。
+     * 
+     * 
      * @return a <code>Point2D</code> that is the control point of this
      *          <code>Point2D</code>.
      * @since 1.2
@@ -511,6 +716,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
     /**
      * Returns the X coordinate of the end point in
      * <code>double</code> precision.
+     * <p>
+     *  以<code> double </code>精度返回终点的X坐标。
+     * 
+     * 
      * @return the x coordinate of the end point.
      * @since 1.2
      */
@@ -519,6 +728,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
     /**
      * Returns the Y coordinate of the end point in
      * <code>double</code> precision.
+     * <p>
+     *  以<code> double </code>精度返回终点的Y坐标。
+     * 
+     * 
      * @return the Y coordinate of the end point.
      * @since 1.2
      */
@@ -526,6 +739,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the end point.
+     * <p>
+     *  返回结束点。
+     * 
+     * 
      * @return a <code>Point</code> object that is the end point
      *          of this <code>Point2D</code>.
      * @since 1.2
@@ -536,6 +753,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Sets the location of the end points and control point of this curve
      * to the specified <code>double</code> coordinates.
      *
+     * <p>
+     *  将曲线的终点和控制点的位置设置为指定的<code> double </code>坐标。
+     * 
+     * 
      * @param x1 the X coordinate of the start point
      * @param y1 the Y coordinate of the start point
      * @param ctrlx the X coordinate of the control point
@@ -552,6 +773,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Sets the location of the end points and control points of this
      * <code>QuadCurve2D</code> to the <code>double</code> coordinates at
      * the specified offset in the specified array.
+     * <p>
+     *  将<code> QuadCurve2D </code>的终点和控制点的位置设置为指定数组中指定偏移处的<code> double </code>坐标。
+     * 
+     * 
      * @param coords the array containing coordinate values
      * @param offset the index into the array from which to start
      *          getting the coordinate values and assigning them to this
@@ -568,6 +793,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Sets the location of the end points and control point of this
      * <code>QuadCurve2D</code> to the specified <code>Point2D</code>
      * coordinates.
+     * <p>
+     *  将<code> QuadCurve2D </code>的终点和控制点的位置设置为指定的<code> Point2D </code>坐标。
+     * 
+     * 
      * @param p1 the start point
      * @param cp the control point
      * @param p2 the end point
@@ -584,6 +813,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * <code>QuadCurve2D</code> to the coordinates of the
      * <code>Point2D</code> objects at the specified offset in
      * the specified array.
+     * <p>
+     *  将<code> QuadCurve2D </code>的终点和控制点的位置设置为指定数组中指定偏移处的<code> Point2D </code>对象的坐标。
+     * 
+     * 
      * @param pts an array containing <code>Point2D</code> that define
      *          coordinate values
      * @param offset the index into <code>pts</code> from which to start
@@ -601,6 +834,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Sets the location of the end points and control point of this
      * <code>QuadCurve2D</code> to the same as those in the specified
      * <code>QuadCurve2D</code>.
+     * <p>
+     *  将<code> QuadCurve2D </code>的终点和控制点的位置设置为与指定的<code> QuadCurve2D </code>中的位置相同。
+     * 
+     * 
      * @param c the specified <code>QuadCurve2D</code>
      * @since 1.2
      */
@@ -615,6 +852,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * control point from the line connecting the end points, of the
      * quadratic curve specified by the indicated control points.
      *
+     * <p>
+     *  返回由指示的控制点指定的二次曲线的平坦度或连接端点的线的控制点的最大距离的平方。
+     * 
+     * 
      * @param x1 the X coordinate of the start point
      * @param y1 the Y coordinate of the start point
      * @param ctrlx the X coordinate of the control point
@@ -636,6 +877,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * control point from the line connecting the end points, of the
      * quadratic curve specified by the indicated control points.
      *
+     * <p>
+     *  返回由所指示的控制点指定的二次曲线的平坦度或连接端点的线的控制点的最大距离。
+     * 
+     * 
      * @param x1 the X coordinate of the start point
      * @param y1 the Y coordinate of the start point
      * @param ctrlx the X coordinate of the control point
@@ -657,6 +902,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * control point from the line connecting the end points, of the
      * quadratic curve specified by the control points stored in the
      * indicated array at the indicated index.
+     * <p>
+     * 返回控制点与连接端点的线之间的平坦度的平方,由指定数组中指定索引处存储的控制点指定的二次曲线。
+     * 
+     * 
      * @param coords an array containing coordinate values
      * @param offset the index into <code>coords</code> from which to
      *          to start getting the values from the array
@@ -675,6 +924,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * control point from the line connecting the end points, of the
      * quadratic curve specified by the control points stored in the
      * indicated array at the indicated index.
+     * <p>
+     *  返回控制点与连接端点的直线的平坦度或最大距离,由指定数组中指定索引处存储的控制点指定的二次曲线。
+     * 
+     * 
      * @param coords an array containing coordinate values
      * @param offset the index into <code>coords</code> from which to
      *          start getting the coordinate values
@@ -692,6 +945,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Returns the square of the flatness, or maximum distance of a
      * control point from the line connecting the end points, of this
      * <code>QuadCurve2D</code>.
+     * <p>
+     *  返回此<code> QuadCurve2D </code>的平坦度或连接端点的线的控制点的最大距离的平方。
+     * 
+     * 
      * @return the square of the flatness of this
      *          <code>QuadCurve2D</code>.
      * @since 1.2
@@ -706,6 +963,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Returns the flatness, or maximum distance of a
      * control point from the line connecting the end points, of this
      * <code>QuadCurve2D</code>.
+     * <p>
+     *  返回此<code> QuadCurve2D </code>的控制点与连接端点的线的平坦度或最大距离。
+     * 
+     * 
      * @return the flatness of this <code>QuadCurve2D</code>.
      * @since 1.2
      */
@@ -722,6 +983,13 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Either or both of the <code>left</code> and <code>right</code>
      * objects can be the same as this <code>QuadCurve2D</code> or
      * <code>null</code>.
+     * <p>
+     *  细分这个<code> QuadCurve2D </code>并将生成的两个细分的曲线存储到<code> left </code>和<code> right </code>曲线参数中。
+     *  <code> left </code>和<code> right </code>对象中的任何一个或两者可以与此<code> QuadCurve2D </code>或<code> null </code>
+     * 相同。
+     *  细分这个<code> QuadCurve2D </code>并将生成的两个细分的曲线存储到<code> left </code>和<code> right </code>曲线参数中。
+     * 
+     * 
      * @param left the <code>QuadCurve2D</code> object for storing the
      * left or first half of the subdivided curve
      * @param right the <code>QuadCurve2D</code> object for storing the
@@ -739,6 +1007,11 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Either or both of the <code>left</code> and <code>right</code>
      * objects can be the same as the <code>src</code> object or
      * <code>null</code>.
+     * <p>
+     *  细分由<code> src </code>参数指定的二次曲线,并将生成的两个细分曲线存储到<code> left </code>和<code>右</code>曲线参数中。
+     *  <code>左</code>和<code>右</code>对象中的任一个或两者可以与<code> src </code>对象或<code> null </code>相同。
+     * 
+     * 
      * @param src the quadratic curve to be subdivided
      * @param left the <code>QuadCurve2D</code> object for storing the
      *          left or first half of the subdivided curve
@@ -784,6 +1057,17 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * <code>right</code> and to use offsets such that
      * <code>rightoff</code> equals <code>leftoff</code> + 4 in order
      * to avoid allocating extra storage for this common point.
+     * <p>
+     * 细分由存储在<code> src </code>数组中的索引<code> srcoff </code>到<code> srcoff </code>&nbsp; + 5指定的二次曲线,将细分的曲线划分为在
+     * 相应索引处的两个结果数组。
+     *  <code> left </code>和<code> right </code>数组中的一个或两个可以是<code> null </code>或者是对与<code> src </code>相同的数组和
+     * 偏移量的引用,代码>数组。
+     * 注意,第一细分曲线中的最后一点与第二细分曲线中的第一点相同。
+     * 因此,可以为<code> left </code>和<code> right </code>传递相同的数组,并使用偏移量,使<code> rightoff </code>等于<code> leftoff
+     *  </code > + 4,以避免为此公共点分配额外的存储空间。
+     * 注意,第一细分曲线中的最后一点与第二细分曲线中的第一点相同。
+     * 
+     * 
      * @param src the array holding the coordinates for the source curve
      * @param srcoff the offset into the array of the beginning of the
      * the 6 source coordinates
@@ -846,6 +1130,14 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * A return value of <code>-1</code> is used to distinguish a constant
      * equation, which might be always 0 or never 0, from an equation that
      * has no zeroes.
+     * <p>
+     *  求解其系数在<code> eqn </code>数组中的二次方程,并将非复杂根返回到同一数组,返回根数。二次求解由以下等式表示：
+     * <pre>
+     *  eqn = {C,B,A}; ax ^ 2 + bx + c = 0
+     * </pre>
+     *  使用<code> -1 </code>的返回值来区分可能始终为0或永不为0的常数方程与没有零的方程。
+     * 
+     * 
      * @param eqn the array that contains the quadratic coefficients
      * @return the number of roots, or <code>-1</code> if the equation is
      *          a constant
@@ -867,6 +1159,14 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * A return value of <code>-1</code> is used to distinguish a constant
      * equation, which might be always 0 or never 0, from an equation that
      * has no zeroes.
+     * <p>
+     *  求解其系数位于<code> eqn </code>数组中的二次项,并将非复数根放置到<code> res </code>数组中,返回根数。二次求解由以下等式表示：
+     * <pre>
+     *  eqn = {C,B,A}; ax ^ 2 + bx + c = 0
+     * </pre>
+     * 使用<code> -1 </code>的返回值来区分可能始终为0或永不为0的常数方程与没有零的方程。
+     * 
+     * 
      * @param eqn the specified array of coefficients to use to solve
      *        the quadratic equation
      * @param res the array that contains the non-complex roots
@@ -915,6 +1215,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y) {
@@ -991,6 +1295,48 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
          * zero, then the points must be collinear and so the
          * curve is degenerate and encloses no area.  Thus the
          * result is false.
+         * <p>
+         *  我们具有由四线曲线Pc(t)和ine P1(t)界定的凸形形状。
+         * 
+         *  P1 =(x1,y1) - 曲线的起始点P2 =(x2,y2) - 曲线的终点Pc =(xc,yc) - 控制点
+         * 
+         *  Pq(t)= P1 *(1-t)^ 2 + 2 * Pc * t *(1-t)+ P2 * t ^ 2 = (Pc-P1)* t + P1 P1(t)= P1 *(1-t)+ P2 * tt = [0
+         * ：1]。
+         * 
+         *  P =(x,y) - 兴趣点
+         * 
+         *  让我们看看四次方程的二阶导数：
+         * 
+         *  Pq"(t)= 2 *(P1-2 * Pc + P2)= Pq"这是常数向量。
+         * 
+         *  让我们画一条线通过P平行于这个向量,找到四边形曲线和线的交点。
+         * 
+         *  如果下面的方程组具有解,则P q(t)是交点。
+         * 
+         *  L(s)= P + Pq"* s == Pq(t)Pq"* s +(P-Pq
+         * 
+         *  | xq"* s +(x-xq(t))== 0 | yq"* s +(y-yq(t))== 0
+         * 
+         *  如果矩阵的秩等于1,则该系统具有解。即,矩阵的行列式应该为零。
+         * 
+         *  (y-yq(t))* xq"==(x-xq(t))* yq"
+         * 
+         *  让我们用't'变量来解这个方程。还令kx = x1-2 * xc + x2 ky = y1-2 * yc + y2
+         * 
+         *  t0q =(1/2)*((x-x1)* ky-(y-y1)* kx)/((xc-x1)* ky-(yc-y1)* kx)
+         * 
+         *  让我们对我们的线Pl(t)做同样的：
+         * 
+         *  t0l =((x-x1)* ky-(y-y1)* kx)/((x2-x1)* ky-(y2-y1)* kx)
+         * 
+         *  很容易检查t0q == t0l。这个事实意味着我们只能计算t0一次。
+         * 
+         * 在t0 <0或t0> 1的情况下,我们有一个形状边界外的交点。所以,P绝对不成形。
+         * 
+         *  在t0在[0：1]内的情况下,我们应该计算Pq(t0)和P1(t0)。我们现在有三点,所有的都在一条线上。所以,我们只需要检测,是我们的兴趣点之间的交叉点或不。
+         * 
+         *  如果t0q和t0l方程中的分母为零,则点必须是共线的,因此曲线是退化的并且不包含区域。因此结果是假的。
+         * 
          */
         double kx = x1 - 2 * xc + x2;
         double ky = y1 - 2 * yc + y2;
@@ -1017,6 +1363,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Point2D p) {
@@ -1035,6 +1385,14 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      *     C = C1 - val
      *     B = 2*CP - 2*C1
      *     A = C1 - 2*CP + C2
+     * <p>
+     *  用t中的参数方程的系数填充数组,准备用solveQuadratic解决val。
+     * 我们当前具有：val = Py(t)= C1 *(1-t)^ 2 + 2 * CP * t *(1-t)+ C2 * t ^ 2 = C1-2 * C1 * t + C1 * t ^ 2 + 2 * C
+     * P * t-2 * CP * t ^ 2 + C2 * t ^ 2 = C1 +(2 * CP-2 * C1)* t +(C1-2 * CP + C2)* t ^ 2 0 =(C1-val)+(2 * 
+     * CP-2 * C1)* t +(C1-2 * CP + C2)* t ^ 2 0 = C + Bt + At ^ 2 C = C1-val B = 2 * CP-2 * C1 A = C1-2 * CP
+     *  + C2。
+     *  用t中的参数方程的系数填充数组,准备用solveQuadratic解决val。
+     * 
      */
     private static void fillEqn(double eqn[], double val,
                                 double c1, double cp, double c2) {
@@ -1052,6 +1410,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * booleans are true.  If an "inflection" equation is handed in,
      * then any points which represent a point of inflection for that
      * quadratic equation are also ignored.
+     * <p>
+     *  评估vals []数组的第一个num槽中的t值,并将评估值放回同一个数组。只有当include0或include1布尔值为真时,才评估范围<0,1>内的t值,包括范围的0和1端。
+     * 如果递归"拐点"方程,则表示该二次方程的拐点的任何点也被忽略。
+     * 
      */
     private static int evalQuadratic(double vals[], int num,
                                      boolean include0,
@@ -1084,6 +1446,9 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * low to high.  It is assumed that low &lt;= high.  The return
      * value is one of the 5 values BELOW, LOWEDGE, INSIDE, HIGHEDGE,
      * or ABOVE.
+     * <p>
+     * 确定关于从低到高的范围的坐标。假设低<=高。返回值是以下5个值之一：BELOW,LOWEDGE,INSIDE,HIGHEDGE或ABOVE。
+     * 
      */
     private static int getTag(double coord, double low, double high) {
         if (coord <= low) {
@@ -1101,6 +1466,9 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * opttags representing another coordinate that is "towards the
      * inside" of that test range.  In other words, are either of the
      * two "opt" points "drawing the pt inward"?
+     * <p>
+     *  确定pttag是否表示已经位于其测试范围内的坐标,或者是否位于表示另一个坐标(该测试范围为"朝内")的两个opttag中的任一个上。换句话说,是两个"选择"点"绘制pt向内"?
+     * 
      */
     private static boolean inwards(int pttag, int opt1tag, int opt2tag) {
         switch (pttag) {
@@ -1119,6 +1487,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(double x, double y, double w, double h) {
@@ -1303,6 +1675,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(Rectangle2D r) {
@@ -1311,6 +1687,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y, double w, double h) {
@@ -1327,6 +1707,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Rectangle2D r) {
@@ -1335,6 +1719,10 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public Rectangle getBounds() {
@@ -1349,6 +1737,13 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * guarantee that modifications to the geometry of this
      * <code>QuadCurve2D</code> object do not affect any iterations of
      * that geometry that are already in process.
+     * <p>
+     *  返回定义此<code> QuadCurve2D </code>形状边界的迭代对象。
+     * 这个类的迭代器不是多线程安全的,这意味着这个<code> QuadCurve2D </code>类不保证对这个<code> QuadCurve2D </code>对象的几何形状的修改不影响任何迭代该几何
+     * 已经在处理中。
+     *  返回定义此<code> QuadCurve2D </code>形状边界的迭代对象。
+     * 
+     * 
      * @param at an optional {@link AffineTransform} to apply to the
      *          shape boundary
      * @return a {@link PathIterator} object that defines the boundary
@@ -1367,6 +1762,12 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * guarantee that modifications to the geometry of this
      * <code>QuadCurve2D</code> object do not affect any iterations of
      * that geometry that are already in process.
+     * <p>
+     *  返回定义此<code> QuadCurve2D </code>的扁平形状的边界的迭代对象。
+     * 这个类的迭代器不是多线程安全的,这意味着这个<code> QuadCurve2D </code>类不保证对这个<code> QuadCurve2D </code>对象的几何形状的修改不影响任何迭代该几何
+     * 已经在处理中。
+     *  返回定义此<code> QuadCurve2D </code>的扁平形状的边界的迭代对象。
+     * 
      * @param at an optional <code>AffineTransform</code> to apply
      *          to the boundary of the shape
      * @param flatness the maximum distance that the control points for a
@@ -1385,6 +1786,9 @@ public abstract class QuadCurve2D implements Shape, Cloneable {
      * Creates a new object of the same class and with the same contents
      * as this object.
      *
+     * <p>
+     * 
+     * 
      * @return     a clone of this instance.
      * @exception  OutOfMemoryError            if there is not enough memory.
      * @see        java.lang.Cloneable

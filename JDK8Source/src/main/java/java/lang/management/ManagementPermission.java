@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,24 @@ package java.lang.management;
  * Instead they are created by the security policy code based on reading
  * the security policy file.
  *
+ * <p>
+ *  SecurityManager将在使用SecurityManager运行的代码调用Java平台的管理接口中定义的方法时检查的权限。
+ * <P>
+ *  下表提供了权限允许的摘要说明,并讨论了授予代码权限的风险。
+ * 
+ * <table border=1 cellpadding=5 summary="Table shows permission target name, what the permission allows, and associated risks">
+ * <tr>
+ *  <th>权限目标名称</th> <th>权限允许</th> <th>允许此权限的风险</th>
+ * </tr>
+ * 
+ * <tr>
+ *  <td>控制</td> <td>能够控制Java虚拟机的运行时特征,例如,启用和禁用类加载或内存系统的详细输出,设置内存池的阈值,以及启用以及禁用所述线程争用监视支持。
+ * 由此权限控制的某些操作可以公开有关正在运行的应用程序的信息,如-verbose：class标志。
+ * </td>
+ *  <td>这允许攻击者控制Java虚拟机的运行时特性,并导致系统运行不正常。攻击者还可以访问与正在运行的应用程序相关的一些信息。
+ * </td>
+ * </tr>
+ * 
  * @author  Mandy Chung
  * @since   1.5
  *
@@ -91,6 +110,16 @@ public final class ManagementPermission extends java.security.BasicPermission {
     /**
      * Constructs a ManagementPermission with the specified name.
      *
+     * <p>
+     * <tr>
+     * <td> monitor </td> <td>能够检索有关Java虚拟机的运行时信息,例如线程堆栈跟踪,所有已加载类名的列表以及Java虚拟机的输入参数。
+     * </td> <td >这允许恶意代码监视运行时信息和发现漏洞。</td>。
+     * </tr>
+     * 
+     * </table>
+     * 
+     * <p>
+     * 
      * @param name Permission name. Must be either "monitor" or "control".
      *
      * @throws NullPointerException if <code>name</code> is <code>null</code>.
@@ -106,6 +135,10 @@ public final class ManagementPermission extends java.security.BasicPermission {
     /**
      * Constructs a new ManagementPermission object.
      *
+     * <p>
+     *  程序员通常不直接创建ManagementPermission对象。相反,它们由基于读取安全策略文件的安全策略代码创建。
+     * 
+     * 
      * @param name Permission name. Must be either "monitor" or "control".
      * @param actions Must be either null or the empty string.
      *

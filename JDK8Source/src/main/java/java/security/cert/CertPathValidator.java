@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -94,6 +95,44 @@ import sun.security.jca.GetInstance.Instance;
  * threads each manipulating a different {@code CertPathValidator}
  * instance need not synchronize.
  *
+ * <p>
+ *  用于验证证书路径(也称为证书链)的类。
+ * <p>
+ *  此类使用基于提供程序的体系结构。
+ * 要创建{@code CertPathValidator},请调用其中一个静态{@code getInstance}方法,传入所需的{@code CertPathValidator}的算法名称和可选的所需
+ * 提供程序的名称。
+ *  此类使用基于提供程序的体系结构。
+ * 
+ *  <p>一旦创建了{@code CertPathValidator}对象,就可以通过调用{@link #validate validate}方法并将其传递给要验证的{@code CertPath}来验证
+ * 证书路径,特定的参数集。
+ * 如果成功,将在实现{@code CertPathValidatorResult}接口的对象中返回结果。
+ * 
+ *  <p> {@link #getRevocationChecker}方法允许应用程序在检查证书的吊销状态时指定{@code CertPathValidator}使用的其他算法特定的参数和选项。
+ * 这里是一个例子演示如何使用PKIX算法：。
+ * 
+ * <pre>
+ *  CertPathValidator cpv = CertPathValidator.getInstance("PKIX"); PKIXRevocationChecker rc =(PKIXRevoca
+ * tionChecker)cpv.getRevocationChecker(); rc.setOptions(EnumSet.of(Option.SOFT_FAIL)); params.addCertPa
+ * thChecker(rc); CertPathValidatorResult cpvr = cpv.validate(path,params);。
+ * </pre>
+ * 
+ * <p>每个Java平台的实施都需要支持以下标准{@code CertPathValidator}算法：
+ * <ul>
+ *  <li> {@ code PKIX} </li>
+ * </ul>
+ *  此算法在<a href =中描述
+ * "{@docRoot}/../technotes/guides/security/StandardNames.html#CertPathValidator">
+ *  Java Cryptography Architecture标准算法名称文档的CertPathValidator部分</a>。有关实现的信息,请参阅发行文档,以了解是否支持任何其他算法。
+ * 
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  这个类的静态方法被保证是线程安全的。多线程可以同时调用这个类中定义的静态方法,没有不良影响。
+ * <p>
+ *  然而,这不是真的这个类定义的非静态方法。除非特定提供程序另有说明,需要同时访问单个{@code CertPathValidator}实例的线程应在它们之间同步并提供必要的锁定。
+ * 每个操作不同{@code CertPathValidator}实例的多个线程不需要同步。
+ * 
+ * 
  * @see CertPath
  *
  * @since       1.4
@@ -108,6 +147,11 @@ public class CertPathValidator {
      * <pre>
      * certpathvalidator.type=PKIX
      * </pre>
+     * <p>
+     *  在安全属性文件中查找的常量以确定缺省certpathvalidator类型。在安全属性文件中,缺省certpathvalidator类型为：
+     * <pre>
+     *  certpathvalidator.type = PKIX
+     * </pre>
      */
     private static final String CPV_TYPE = "certpathvalidator.type";
     private final CertPathValidatorSpi validatorSpi;
@@ -118,6 +162,10 @@ public class CertPathValidator {
      * Creates a {@code CertPathValidator} object of the given algorithm,
      * and encapsulates the given provider implementation (SPI object) in it.
      *
+     * <p>
+     *  创建给定算法的{@code CertPathValidator}对象,并将给定的提供程序实现(SPI对象)封装在其中。
+     * 
+     * 
      * @param validatorSpi the provider implementation
      * @param provider the provider
      * @param algorithm the algorithm name
@@ -143,6 +191,15 @@ public class CertPathValidator {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回实现指定算法的{@code CertPathValidator}对象。
+     * 
+     * <p>此方法遍历注册的安全提供程序列表,从最常用的提供程序开始。
+     * 将返回一个新的CertPathValidator对象,该对象封装来自支持指定算法的第一个Provider的CertPathValidatorSpi实现。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the name of the requested {@code CertPathValidator}
      *  algorithm. See the CertPathValidator section in the <a href=
      *  "{@docRoot}/../technotes/guides/security/StandardNames.html#CertPathValidator">
@@ -178,6 +235,14 @@ public class CertPathValidator {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回实现指定算法的{@code CertPathValidator}对象。
+     * 
+     *  <p>将返回一封新的CertPathValidator对象,该对象封装来自指定提供程序的CertPathValidatorSpi实现。指定的提供程序必须在安全提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the name of the requested {@code CertPathValidator}
      *  algorithm. See the CertPathValidator section in the <a href=
      *  "{@docRoot}/../technotes/guides/security/StandardNames.html#CertPathValidator">
@@ -219,6 +284,13 @@ public class CertPathValidator {
      * object is returned.  Note that the specified Provider object
      * does not have to be registered in the provider list.
      *
+     * <p>
+     *  返回实现指定算法的{@code CertPathValidator}对象。
+     * 
+     *  <p>返回一个新的CertPathValidator对象,该对象封装来自指定的Provider对象的CertPathValidatorSpi实现。
+     * 请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     * 
      * @param algorithm the name of the requested {@code CertPathValidator}
      * algorithm. See the CertPathValidator section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#CertPathValidator">
@@ -251,6 +323,10 @@ public class CertPathValidator {
      * Returns the {@code Provider} of this
      * {@code CertPathValidator}.
      *
+     * <p>
+     *  返回此{@code CertPathValidator}的{@code Provider}。
+     * 
+     * 
      * @return the {@code Provider} of this {@code CertPathValidator}
      */
     public final Provider getProvider() {
@@ -260,6 +336,10 @@ public class CertPathValidator {
     /**
      * Returns the algorithm name of this {@code CertPathValidator}.
      *
+     * <p>
+     *  返回此{@code CertPathValidator}的算法名称。
+     * 
+     * 
      * @return the algorithm name of this {@code CertPathValidator}
      */
     public final String getAlgorithm() {
@@ -276,6 +356,13 @@ public class CertPathValidator {
      * example, a {@code CertPathValidator} that implements the PKIX
      * algorithm validates {@code CertPath} objects of type X.509.
      *
+     * <p>
+     *  使用指定的算法参数集验证指定的认证路径。
+     * <p>
+     * 指定的{@code CertPath}必须是验证算法支持的类型,否则将抛出{@code InvalidAlgorithmParameterException}。
+     * 例如,实现PKIX算法的{@code CertPathValidator}会验证类型X.509的{@code CertPath}对象。
+     * 
+     * 
      * @param certPath the {@code CertPath} to be validated
      * @param params the algorithm parameters
      * @return the result of the validation algorithm
@@ -306,6 +393,15 @@ public class CertPathValidator {
      * setting the value of the {@code certpathvalidator.type} security
      * property to the desired type.
      *
+     * <p>
+     *  返回由{@code certpathvalidator.type}安全属性指定的默认{@code CertPathValidator}类型,如果没有此类属性,则返回字符串{@literal"PKIX"}
+     * 。
+     * 
+     *  <p>默认的{@code CertPathValidator}类型可以由不想在调用{@code getInstance}方法时使用硬编码类型的应用程序使用,并且希望提供默认类型以防用户没有指定自己的。
+     * 
+     *  <p>可以通过将{@code certpathvalidator.type}安全属性的值设置为所需类型来更改默认的{@code CertPathValidator}类型。
+     * 
+     * 
      * @see java.security.Security security properties
      * @return the default {@code CertPathValidator} type as specified
      * by the {@code certpathvalidator.type} security property, or the string
@@ -332,6 +428,8 @@ public class CertPathValidator {
      * additional input parameters and options specific to revocation checking.
      * See the class description for an example.
      *
+     * <p>
+     * 
      * @return a {@code CertPathChecker}
      * @throws UnsupportedOperationException if the service provider does not
      *         support this method

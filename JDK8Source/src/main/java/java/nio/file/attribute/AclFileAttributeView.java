@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -134,6 +135,57 @@ import java.io.IOException;
  * any attempt to create a file that would be less secure as a result of the
  * translation.
  *
+ * <p>
+ *  支持读取或更新文件的访问控制列表(ACL)或文件所有者属性的文件属性视图。
+ * 
+ *  <p> ACL用于指定对文件系统对象的访问权限。
+ *  ACL是{@link AclEntry access-control-entries}的有序列表,每个都指定一个{@link UserPrincipal}和该用户主体的访问级别。
+ * 此文件属性视图定义基于<a href ="http：// www中指定的ACL模型来读取和写入ACL的{@link #getAcl()getAcl}和{@link #setAcl(List)setAcl}方法.ietf.org / rfc / rfc3530.txt">
+ *  <i> RFC 3533：网络文件系统(NFS)版本4协议</i> </a>。
+ *  ACL是{@link AclEntry access-control-entries}的有序列表,每个都指定一个{@link UserPrincipal}和该用户主体的访问级别。
+ * 此文件属性视图适用于支持NFSv4 ACL模型或在NFSv4 ACL模型和文件系统使用的ACL模型之间具有明确定义的</em>映射的文件系统实现。这种映射的细节是实现相关的,因此未指定。
+ * 
+ *  <p>此类还扩展了{@code FileOwnerAttributeView},以便定义获取和设置文件所有者的方法。
+ * 
+ *  <p>当文件系统提供对不是同类的一组{@link FileStore文件系统}的访问时,只有一些文件系统可能支持ACL。
+ *  {@link FileStore#supportsFileAttributeView supportsFileAttributeView}方法可用于测试文件系统是否支持ACL。
+ * 
+ * <h2>互操作性</h2>
+ * 
+ *  RFC&nbsp; 3530允许在支持POSIX定义的访问权限的平台上使用特殊用户身份。
+ * 特殊用户身份是"{@code OWNER @}","{@code GROUP @}"和"{@code EVERYONE @}"。
+ * 当支持{@code AclFileAttributeView}和{@link PosixFileAttributeView}时,这些特殊用户标识可能包含在读取或写入的ACL {@link AclEntry entries}
+ * 中。
+ * 特殊用户身份是"{@code OWNER @}","{@code GROUP @}"和"{@code EVERYONE @}"。
+ * 文件系统的{@link UserPrincipalLookupService}可用于通过调用{@link UserPrincipalLookupService#lookupPrincipalByName lookupPrincipalByName}
+ * 方法来获取{@link UserPrincipal}来表示这些特殊标识。
+ * 特殊用户身份是"{@code OWNER @}","{@code GROUP @}"和"{@code EVERYONE @}"。
+ * 
+ *  <p> <b>使用示例：</b>假设我们希望向现有ACL添加条目以授予"joe"访问权限：
+ * <pre>
+ *  // lookup"joe"UserPrincipal joe = file.getFileSystem()。
+ * getUserPrincipalLookupService().lookupPrincipalByName("joe");。
+ * 
+ *  // get view AclFileAttributeView view = Files.getFileAttributeView(file,AclFileAttributeView.class);
+ * 。
+ * 
+ *  //创建ACE以授予"joe"读访问权。
+ * AclEntry entry = AclEntry.newBuilder().setType(AclEntryType.ALLOW).setPrincipal(joe).setPermissions(A
+ * clEntryPermission.READ_DATA,AclEntryPermission.READ_ATTRIBUTES).build。
+ *  //创建ACE以授予"joe"读访问权。
+ * 
+ *  //读取ACL,插入ACE,重写ACL列表&lt; AclEntry&gt; acl = view.getAcl(); acl.add(0,entry); // insert before any D
+ * ENY entries view.setAcl(acl);。
+ * </pre>
+ * 
+ * <h2>动态访问</h2> <p>在需要对文件属性进行动态访问时,此属性视图支持的属性如下：
+ * <blockquote>
+ * <table border="1" cellpadding="8" summary="Supported attributes">
+ * <tr>
+ *  <th>名称</th> <th>键入</th>
+ * </tr>
+ * <tr>
+ * 
  * @since 1.7
  */
 
@@ -143,6 +195,31 @@ public interface AclFileAttributeView
     /**
      * Returns the name of the attribute view. Attribute views of this type
      * have the name {@code "acl"}.
+     * <p>
+     *  <td>"acl"</td> <td> {@link List}&lt; {@ link AclEntry}&gt; </td>
+     * </tr>
+     * <tr>
+     *  <td>"owner"</td> <td> {@link UserPrincipal} </td>
+     * </tr>
+     * </table>
+     * </blockquote>
+     * 
+     *  <p> {@link Files#getAttribute getAttribute}方法可用于读取ACL或所有者属性,就像调用{@link #getAcl getAcl}或{@link #getOwner getOwner}
+     * 方法一样。
+     * 
+     *  <p> {@link Files#setAttribute setAttribute}方法可用于更新ACL或所有者属性,就像调用{@link #setAcl setAcl}或{@link #setOwner setOwner}
+     * 方法一样。
+     * 
+     *  <h2>在创建文件时设置ACL </h2>
+     * 
+     *  <p>支持此属性视图的实现也可以支持在创建文件或目录时设置初始ACL。
+     * 可以使用{@link FileAttribute#name name} {@code"acl：acl)将初始ACL提供给诸如{@link Files#createFile createFile}或{@link Files#createDirectory createDirectory}
+     * 之类的方法作为{@link FileAttribute} "}和{@link FileAttribute#value value},它是{@code AclEntry}对象的列表。
+     *  <p>支持此属性视图的实现也可以支持在创建文件或目录时设置初始ACL。
+     * 
+     * <p>如果实施支持与NFSv4定义的ACL模型不同的ACL模型,则在创建文件时设置初始ACL必须将ACL转换为文件系统支持的模型。
+     * 创建文件的方法应拒绝(通过抛出{@link IOException IOException})任何尝试创建一个由于翻译结果不安全的文件。
+     * 
      */
     @Override
     String name();
@@ -158,6 +235,8 @@ public interface AclFileAttributeView
      * existing ACL. The {@link #setAcl setAcl} method is used to update
      * the file's ACL attribute.
      *
+     * <p>
+     * 
      * @return  an ordered list of {@link AclEntry entries} representing the
      *          ACL
      *
@@ -194,6 +273,10 @@ public interface AclFileAttributeView
      * access-permissions} for example), the updating the access control list
      * may also cause these security related attributes to be updated.
      *
+     * <p>
+     *  返回属性视图的名称。此类型的属性视图名称为{@code"acl"}。
+     * 
+     * 
      * @param   acl
      *          the new access control list
      *

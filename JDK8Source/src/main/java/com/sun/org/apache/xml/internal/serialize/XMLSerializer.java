@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 
@@ -85,6 +95,22 @@ import org.xml.sax.helpers.AttributesImpl;
  * boundaries, indent lines, and serialize elements on separate
  * lines. Line terminators will be regarded as spaces, and
  * spaces at beginning of line will be stripped.
+ * <p>
+ *  实现一个XML序列化器支持DOM和SAX相当序列化。有关使用说明,请参阅{@link Serializer}。
+ * <p>
+ *  如果使用输出流,则从输出格式(默认为<tt> UTF-8 </tt>)获取编码。如果使用写入程序,请确保写入程序使用与输出格式中指定的相同的编码(如果适用)。
+ * <p>
+ *  序列化器支持DOM和SAX。 SAX序列化是通过触发SAX事件并使用序列化器作为文档处理程序来完成的。
+ *  DOM序列化是通过调用{@link #serialize(Document)}或使用DOM Level 3 {@link org.w3c.dom.ls.DOMSerializer}并使用{@link org.w3c.dom.ls.DOMSerializer#写}
+ * ,{@link org.w3c.dom.ls.DOMSerializer#writeToString}。
+ *  序列化器支持DOM和SAX。 SAX序列化是通过触发SAX事件并使用序列化器作为文档处理程序来完成的。
+ * <p>
+ * 如果在序列化时发生I / O异常,则序列化器不会直接抛出异常,而只是在序列化结束时抛出异常(DOM或SAX的{@link org.xml.sax.DocumentHandler#endDocument}
+ * 。
+ * <p>
+ *  对于未指定为空白保留的元素,序列化程序可能会在空格边界,缩进行和序列化元素在单独的行上断开长文本行。行终止符将被视为空格,行开始处的空格将被删除。
+ * 
+ * 
  * @author <a href="mailto:arkin@intalio.com">Assaf Arkin</a>
  * @author <a href="mailto:rahul.srivastava@sun.com">Rahul Srivastava</a>
  * @author Elena Litani IBM
@@ -124,11 +150,20 @@ extends BaseMarkupSerializer {
      * NOTE: if this field is set to true the following
      * fields need to be initialized: fNSBinder, fLocalNSBinder, fSymbolTable,
      * XMLSymbols.EMPTY_STRING, fXmlSymbol, fXmlnsSymbol
+     * <p>
+     *  控制是否应在序列化期间执行命名空间fixup。
+     * 注意：如果此字段设置为true,则需要初始化以下字段：fNSBinder,fLocalNSBinder,fSymbolTable,XMLSymbols.EMPTY_STRING,fXmlSymbol,f
+     * XmlnsSymbol。
+     *  控制是否应在序列化期间执行命名空间fixup。
+     * 
      */
     protected boolean fNamespaces = false;
 
     /**
      * Controls whether namespace prefixes will be printed out during serialization
+     * <p>
+     *  控制是否在序列化期间打印命名空间前缀
+     * 
      */
     protected boolean fNamespacePrefixes = true;
 
@@ -140,6 +175,9 @@ extends BaseMarkupSerializer {
      * Constructs a new serializer. The serializer cannot be used without
      * calling {@link #setOutputCharStream} or {@link #setOutputByteStream}
      * first.
+     * <p>
+     *  构造新的序列化程序。不调用{@link #setOutputCharStream}或{@link #setOutputByteStream}时,不能使用序列化器。
+     * 
      */
     public XMLSerializer() {
         super( new OutputFormat( Method.XML, null, false ) );
@@ -150,6 +188,9 @@ extends BaseMarkupSerializer {
      * Constructs a new serializer. The serializer cannot be used without
      * calling {@link #setOutputCharStream} or {@link #setOutputByteStream}
      * first.
+     * <p>
+     *  构造新的序列化程序。不调用{@link #setOutputCharStream}或{@link #setOutputByteStream}时,不能使用序列化器。
+     * 
      */
     public XMLSerializer( OutputFormat format ) {
         super( format != null ? format : new OutputFormat( Method.XML, null, false ) );
@@ -162,6 +203,10 @@ extends BaseMarkupSerializer {
      * using the specified output format. If <tt>format</tt> is null,
      * will use a default output format.
      *
+     * <p>
+     *  构造使用指定的输出格式写入指定的写入程序的新序列化程序。如果<tt>格式</tt>为空,将使用默认输出格式。
+     * 
+     * 
      * @param writer The writer to use
      * @param format The output format to use, null for the default
      */
@@ -177,6 +222,10 @@ extends BaseMarkupSerializer {
      * stream using the specified output format. If <tt>format</tt>
      * is null, will use a default output format.
      *
+     * <p>
+     *  构造新的序列化器,使用指定的输出格式写入指定的输出流。如果<tt>格式</tt>为空,将使用默认输出格式。
+     * 
+     * 
      * @param output The output stream to use
      * @param format The output format to use, null for the default
      */
@@ -195,6 +244,10 @@ extends BaseMarkupSerializer {
     /**
      * This methods turns on namespace fixup algorithm during
      * DOM serialization.
+     * <p>
+     * 这种方法在DOM序列化过程中打开命名空间fixup算法。
+     * 
+     * 
      * @see org.w3c.dom.ls.DOMSerializer
      *
      * @param namespaces
@@ -542,6 +595,12 @@ extends BaseMarkupSerializer {
      * pre-root comments and PIs that were accumulated in the document
      * (see {@link #serializePreRoot}). Pre-root will be serialized even if
      * this is not the first root element of the document.
+     * <p>
+     *  调用通过根元素序列化文档的DOCTYPE。文档类型声明必须命名根元素,但只有当该元素被序列化时才知道根元素,而不是在文档的开头。
+     * <p>
+     *  此方法将检查它是否尚未被调用({@link #_started}),将序列化文档类型声明,并将序列化所有在根文档中累积的注释和PI(参见{@link #serializePreRoot })。
+     * 预根将被序列化,即使这不是文档的第一个根元素。
+     * 
      */
     protected void startDocument( String rootTagName )
     throws IOException
@@ -629,6 +688,9 @@ extends BaseMarkupSerializer {
      * Called to serialize a DOM element. Equivalent to calling {@link
      * #startElement}, {@link #endElement} and serializing everything
      * inbetween, but better optimized.
+     * <p>
+     *  被称为序列化DOM元素。相当于调用{@link #startElement},{@link #endElement}并将其中的所有内容序列化,但进行了更好的优化。
+     * 
      */
     protected void serializeElement( Element elem )
     throws IOException
@@ -1099,6 +1161,10 @@ extends BaseMarkupSerializer {
      * Serializes a namespace attribute with the given prefix and value for URI.
      * In case prefix is empty will serialize default namespace declaration.
      *
+     * <p>
+     *  使用给定的URI前缀和值序列化命名空间属性。如果前缀为空,将序列化默认的命名空间声明。
+     * 
+     * 
      * @param prefix
      * @param uri
      * @exception IOException
@@ -1128,6 +1194,10 @@ extends BaseMarkupSerializer {
      * Prints attribute.
      * NOTE: xml:space attribute modifies output format
      *
+     * <p>
+     *  打印属性。注意：xml：space属性修改输出格式
+     * 
+     * 
      * @param name
      * @param value
      * @param isSpecified
@@ -1188,6 +1258,7 @@ extends BaseMarkupSerializer {
 
     /** Retrieve and remove the namespaces declarations from the list of attributes.
      *
+     * <p>
      */
     private Attributes extractNamespaces( Attributes attrs )
     throws SAXException
@@ -1386,6 +1457,9 @@ extends BaseMarkupSerializer {
     * DOM Level 3:
     * Check a node to determine if it contains unbound namespace prefixes.
     *
+    * <p>
+    *  DOM级别3：检查节点以确定其是否包含未绑定的命名空间前缀。
+    * 
     * @param node The node to check for unbound namespace prefices
     */
         protected void checkUnboundNamespacePrefixedNode (Node node) throws IOException{

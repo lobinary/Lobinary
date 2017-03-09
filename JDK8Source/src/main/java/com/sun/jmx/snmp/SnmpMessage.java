@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,22 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_LOGGER;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  是SNMP数据包的部分解码表示。
+ * <P>
+ *  通常不需要使用此类,除非您决定实现自己的{@link com.sun.jmx.snmp.SnmpPduFactory SnmpPduFactory}对象。
+ * <P>
+ *  <CODE> SnmpMessage </CODE>类直接映射到RFC1157和RFC1902中定义的<CODE> Message </CODE>语法。
+ * <BLOCKQUOTE>
+ * <PRE>
+ *  Message :: = SEQUENCE {version INTEGER {version(1)}, -  SNMPv2社区OCTET STRING, - 团体名称数据ANY  -  SNMPv2
+ *  PDU}。
+ * </PRE>
+ * </BLOCKQUOTE>
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @see SnmpPduFactory
  * @see SnmpPduPacket
  *
@@ -64,6 +81,9 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_LOGGER;
 public class SnmpMessage extends SnmpMsg implements SnmpDefinitions {
     /**
      * Community name.
+     * <p>
+     *  社区名字。
+     * 
      */
     public byte[] community ;
 
@@ -71,6 +91,10 @@ public class SnmpMessage extends SnmpMsg implements SnmpDefinitions {
      * Encodes this message and puts the result in the specified byte array.
      * For internal use only.
      *
+     * <p>
+     *  对此消息进行编码,并将结果放入指定的字节数组中。仅限内部使用。
+     * 
+     * 
      * @param outputBytes An array to receive the resulting encoding.
      *
      * @exception ArrayIndexOutOfBoundsException If the result does not fit
@@ -101,6 +125,10 @@ public class SnmpMessage extends SnmpMsg implements SnmpDefinitions {
     }
     /**
      * Returns the associated request ID.
+     * <p>
+     *  返回关联的请求ID。
+     * 
+     * 
      * @param inputBytes The flat message.
      * @return The request ID.
      *
@@ -141,6 +169,10 @@ public class SnmpMessage extends SnmpMsg implements SnmpDefinitions {
      * Decodes the specified bytes and initializes this message.
      * For internal use only.
      *
+     * <p>
+     *  解码指定的字节并初始化此消息。仅限内部使用。
+     * 
+     * 
      * @param inputBytes The bytes to be decoded.
      *
      * @exception SnmpStatusException If the specified bytes are not a valid encoding.
@@ -172,6 +204,18 @@ public class SnmpMessage extends SnmpMsg implements SnmpDefinitions {
      * If the encoding length exceeds <CODE>maxDataLength</CODE>,
      * the method throws an exception.
      *
+     * <p>
+     *  bdec.openSequence(); version = bdec.fetchInteger(); community = bdec.fetchOctetString(); data = bdec
+     * .fetchAny(); dataLength = data.length; bdec.closeSequence(); } catch(BerException x){throw new SnmpStatusException("Invalid encoding"); }
+     * }。
+     * 
+     *  / **使用指定的<CODE> pdu </CODE>初始化此消息。
+     * <P>
+     * 此方法使用<CODE> maxDataLength </CODE>字节数组初始化数据字段。它编码<CODE> pdu </CODE>。
+     * 所得到的编码存储在数据字段中,并且编码的长度存储在<CODE> dataLength </CODE>中。
+     * <p>
+     *  如果编码长度超过<CODE> maxDataLength </CODE>,则该方法将抛出异常。
+     * 
      * @param pdu The PDU to be encoded.
      * @param maxDataLength The maximum length permitted for the data field.
      *
@@ -257,6 +301,9 @@ public class SnmpMessage extends SnmpMsg implements SnmpDefinitions {
      * <P>
      * This method decodes the data field and returns the resulting PDU.
      *
+     * <p>
+     * 
+     * 
      * @return The resulting PDU.
      * @exception SnmpStatusException If the encoding is not valid.
      *
@@ -344,6 +391,12 @@ public class SnmpMessage extends SnmpMsg implements SnmpDefinitions {
     /**
      * Dumps this message in a string.
      *
+     * <p>
+     *  获取此消息中编码的PDU。
+     * <P>
+     *  此方法解码数据字段并返回生成的PDU。
+     * 
+     * 
      * @return The string containing the dump.
      */
     public String printMessage() {

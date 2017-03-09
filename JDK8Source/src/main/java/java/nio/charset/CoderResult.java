@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,34 @@ import java.util.HashMap;
  * conditions.  </p>
  *
  *
+ * <p>
+ *  编码器的结果状态的描述。
+ * 
+ *  <p>字符集编码器,即解码器或编码器,消耗来自输入缓冲器的字节(或字符),翻译它们,并将结果字符(或字节)写入输出缓冲区。编码过程终止于四个类别的原因之一,这由该类的实例描述：
+ * 
+ * <ul>
+ * 
+ *  当没有更多要处理的输入,或输入不足且需要额外输入时,将报告<li> <p> <i>下溢</i>。
+ * 此条件由唯一结果对象{@link #UNDERFLOW}表示,其{@link #isUnderflow()isUnderflow}方法返回<tt> true </tt>。 </p> </li>。
+ * 
+ *  <li> <p> <i>当输出缓冲区中没有足够的空间时,报告溢出</i>。
+ * 此条件由唯一结果对象{@link #OVERFLOW}表示,其{@link #isOverflow()isOverflow}方法返回<tt> true </tt>。 </p> </li>。
+ * 
+ *  <li> <p>当输入单元序列的格式不正确时,会报告错误输入错误</i>。
+ * 这种错误由其{@link #isMalformed()isMalformed}方法返回<tt> true </tt>并且其{@link #length()length}方法返回格式错误序列长度的类的实例
+ * 描述。
+ *  <li> <p>当输入单元序列的格式不正确时,会报告错误输入错误</i>。对于给定长度的所有格式错误输入错误,都有一个此类的唯一实例。 </p> </li>。
+ * 
+ * <li> <p>当输入单元序列表示无法在输出字符集中表示的字符时,会报告一个<i>不可映射字符错误</i>。
+ * 这种错误由{@link #isUnmappable()isUnmappable}方法返回<tt> true </tt>的类的实例描述,其{@link #length()length}方法返回输入序列的长
+ * 度,不可映射的字符。
+ * <li> <p>当输入单元序列表示无法在输出字符集中表示的字符时,会报告一个<i>不可映射字符错误</i>。对于给定长度的所有不可映射字符错误,都有一个此类的唯一实例。 </p> </li>。
+ * 
+ * </ul>
+ * 
+ *  <p>为方便起见,{@ link #isError()isError}方法对描述格式错误输入和不可映射字符错误的结果对象返回<tt> true </tt>,但对于那些描述下溢或溢出条件。 </p>
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -104,6 +133,10 @@ public class CoderResult {
     /**
      * Returns a string describing this coder result.
      *
+     * <p>
+     *  返回描述此编码器结果的字符串。
+     * 
+     * 
      * @return  A descriptive string
      */
     public String toString() {
@@ -114,6 +147,10 @@ public class CoderResult {
     /**
      * Tells whether or not this object describes an underflow condition.
      *
+     * <p>
+     *  告诉这个对象是否描述了下溢条件。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this object denotes underflow
      */
     public boolean isUnderflow() {
@@ -123,6 +160,10 @@ public class CoderResult {
     /**
      * Tells whether or not this object describes an overflow condition.
      *
+     * <p>
+     *  告诉这个对象是否描述了溢出条件。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this object denotes overflow
      */
     public boolean isOverflow() {
@@ -132,6 +173,10 @@ public class CoderResult {
     /**
      * Tells whether or not this object describes an error condition.
      *
+     * <p>
+     *  告诉这个对象是否描述了错误条件。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this object denotes either a
      *          malformed-input error or an unmappable-character error
      */
@@ -142,6 +187,10 @@ public class CoderResult {
     /**
      * Tells whether or not this object describes a malformed-input error.
      *
+     * <p>
+     *  告诉这个对象是否描述了格式不正确的输入错误。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this object denotes a
      *          malformed-input error
      */
@@ -153,6 +202,10 @@ public class CoderResult {
      * Tells whether or not this object describes an unmappable-character
      * error.
      *
+     * <p>
+     *  指示此对象是否描述不可映射字符错误。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this object denotes an
      *          unmappable-character error
      */
@@ -164,6 +217,10 @@ public class CoderResult {
      * Returns the length of the erroneous input described by this
      * object&nbsp;&nbsp;<i>(optional operation)</i>.
      *
+     * <p>
+     *  返回此对象&nbsp;&nbsp; <i>(可选操作)</i>描述的错误输入的长度。
+     * 
+     * 
      * @return  The length of the erroneous input, a positive integer
      *
      * @throws  UnsupportedOperationException
@@ -180,6 +237,9 @@ public class CoderResult {
      * Result object indicating underflow, meaning that either the input buffer
      * has been completely consumed or, if the input buffer is not yet empty,
      * that additional input is required.
+     * <p>
+     *  指示下溢的结果对象,意味着输入缓冲区已完全耗尽,或者如果输入缓冲区尚未为空,则需要附加输入。
+     * 
      */
     public static final CoderResult UNDERFLOW
         = new CoderResult(CR_UNDERFLOW, 0);
@@ -187,6 +247,9 @@ public class CoderResult {
     /**
      * Result object indicating overflow, meaning that there is insufficient
      * room in the output buffer.
+     * <p>
+     * 结果对象指示溢出,表示输出缓冲区中没有足够的空间。
+     * 
      */
     public static final CoderResult OVERFLOW
         = new CoderResult(CR_OVERFLOW, 0);
@@ -227,6 +290,10 @@ public class CoderResult {
      * Static factory method that returns the unique object describing a
      * malformed-input error of the given length.
      *
+     * <p>
+     *  静态工厂方法返回描述给定长度的格式错误的唯一对象。
+     * 
+     * 
      * @param   length
      *          The given length
      *
@@ -246,6 +313,10 @@ public class CoderResult {
      * Static factory method that returns the unique result object describing
      * an unmappable-character error of the given length.
      *
+     * <p>
+     *  静态工厂方法返回描述给定长度的不可映射字符错误的唯一结果对象。
+     * 
+     * 
      * @param   length
      *          The given length
      *
@@ -258,6 +329,9 @@ public class CoderResult {
     /**
      * Throws an exception appropriate to the result described by this object.
      *
+     * <p>
+     *  抛出适用于此对象描述的结果的异常。
+     * 
      * @throws  BufferUnderflowException
      *          If this object is {@link #UNDERFLOW}
      *

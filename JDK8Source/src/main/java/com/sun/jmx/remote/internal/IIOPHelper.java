@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,9 @@ import java.security.PrivilegedAction;
 
 /**
  * A helper class for RMI-IIOP and CORBA APIs.
+ * <p>
+ *  RMI-IIOP和CORBA API的助手类。
+ * 
  */
 
 public final class IIOPHelper {
@@ -61,6 +65,9 @@ public final class IIOPHelper {
 
     /**
      * Returns true if RMI-IIOP and CORBA is available.
+     * <p>
+     *  如果RMI-IIOP和CORBA可用,则返回true。
+     * 
      */
     public static boolean isAvailable() {
         return proxy != null;
@@ -73,6 +80,9 @@ public final class IIOPHelper {
 
     /**
      * Returns true if the given object is a Stub.
+     * <p>
+     *  如果给定对象是存根,则返回true。
+     * 
      */
     public static boolean isStub(Object obj) {
         return (proxy == null) ? false : proxy.isStub(obj);
@@ -80,6 +90,9 @@ public final class IIOPHelper {
 
     /**
      * Returns the Delegate to which the given Stub delegates.
+     * <p>
+     *  返回给定Stub委派给的委托。
+     * 
      */
     public static Object getDelegate(Object stub) {
         ensureAvailable();
@@ -88,6 +101,9 @@ public final class IIOPHelper {
 
     /**
      * Sets the Delegate for a given Stub.
+     * <p>
+     *  为给定的存根设置代理。
+     * 
      */
     public static void setDelegate(Object stub, Object delegate) {
         ensureAvailable();
@@ -97,6 +113,10 @@ public final class IIOPHelper {
     /**
      * Returns the ORB associated with the given stub
      *
+     * <p>
+     *  返回与给定存根相关联的ORB
+     * 
+     * 
      * @throws  UnsupportedOperationException
      *          if the object does not support the operation that
      *          was invoked
@@ -108,6 +128,9 @@ public final class IIOPHelper {
 
     /**
      * Connects the Stub to the given ORB.
+     * <p>
+     *  将Stub连接到给定的ORB。
+     * 
      */
     public static void connect(Object stub, Object orb)
         throws IOException
@@ -119,6 +142,9 @@ public final class IIOPHelper {
 
     /**
      * Returns true if the given object is an ORB.
+     * <p>
+     *  如果给定的对象是ORB,则返回true。
+     * 
      */
     public static boolean isOrb(Object obj) {
         return (proxy == null) ? false : proxy.isOrb(obj);
@@ -126,6 +152,9 @@ public final class IIOPHelper {
 
     /**
      * Creates, and returns, a new ORB instance.
+     * <p>
+     *  创建并返回一个新的ORB实例。
+     * 
      */
     public static Object createOrb(String[] args, Properties props)
         throws IOException
@@ -138,6 +167,9 @@ public final class IIOPHelper {
     /**
      * Converts a string, produced by the object_to_string method, back
      * to a CORBA object reference.
+     * <p>
+     *  将由object_to_string方法生成的字符串转换回CORBA对象引用。
+     * 
      */
     public static Object stringToObject(Object orb, String str) {
         ensureAvailable();
@@ -146,6 +178,9 @@ public final class IIOPHelper {
 
     /**
      * Converts the given CORBA object reference to a string.
+     * <p>
+     *  将给定的CORBA对象引用转换为字符串。
+     * 
      */
     public static String objectToString(Object orb, Object obj) {
         ensureAvailable();
@@ -155,6 +190,9 @@ public final class IIOPHelper {
     /**
      * Checks to ensure that an object of a remote or abstract interface
      * type can be cast to a desired type.
+     * <p>
+     *  检查以确保远程或抽象接口类型的对象可以转换为所需类型。
+     * 
      */
     public static <T> T narrow(Object narrowFrom, Class<T> narrowTo) {
         ensureAvailable();
@@ -163,6 +201,9 @@ public final class IIOPHelper {
 
     /**
      * Makes a server object ready to receive remote calls
+     * <p>
+     *  使服务器对象准备好接收远程调用
+     * 
      */
     public static void exportObject(Remote obj) throws IOException {
         if (proxy == null)
@@ -172,6 +213,9 @@ public final class IIOPHelper {
 
     /**
      * Deregisters a server object from the runtime.
+     * <p>
+     *  从运行时注销一个服务器对象。
+     * 
      */
     public static void unexportObject(Remote obj) throws IOException {
         if (proxy == null)
@@ -181,6 +225,8 @@ public final class IIOPHelper {
 
     /**
      * Returns a stub for the given server object.
+     * <p>
+     *  返回给定服务器对象的存根。
      */
     public static Remote toStub(Remote obj) throws IOException {
         if (proxy == null)

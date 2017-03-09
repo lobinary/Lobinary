@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import sun.awt.shell.ShellFolder;
 /**
  * Basic implementation of a file list.
  *
+ * <p>
+ *  文件列表的基本实现。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class BasicDirectoryModel extends AbstractListModel<Object> implements PropertyChangeListener {
@@ -83,6 +88,9 @@ public class BasicDirectoryModel extends AbstractListModel<Object> implements Pr
 
     /**
      * This method is used to interrupt file loading thread.
+     * <p>
+     *  此方法用于中断文件加载线程。
+     * 
      */
     public void invalidateFileCache() {
         if (loadThread != null) {
@@ -144,6 +152,10 @@ public class BasicDirectoryModel extends AbstractListModel<Object> implements Pr
     /**
      * Renames a file in the underlying file system.
      *
+     * <p>
+     *  重命名底层文件系统中的文件。
+     * 
+     * 
      * @param oldFile a <code>File</code> object representing
      *        the existing file
      * @param newFile a <code>File</code> object representing
@@ -186,12 +198,18 @@ public class BasicDirectoryModel extends AbstractListModel<Object> implements Pr
 
     /**
      * Obsolete - not used.
+     * <p>
+     *  已废弃 - 未使用。
+     * 
      */
     public void intervalAdded(ListDataEvent e) {
     }
 
     /**
      * Obsolete - not used.
+     * <p>
+     *  已废弃 - 未使用。
+     * 
      */
     public void intervalRemoved(ListDataEvent e) {
     }
@@ -355,6 +373,12 @@ public class BasicDirectoryModel extends AbstractListModel<Object> implements Pr
      * If <code>listener</code> is <code>null</code>,
      * no exception is thrown and no action is performed.
      *
+     * <p>
+     *  将PropertyChangeListener添加到侦听器列表。侦听器为此类的所有绑定属性注册。
+     * <p>
+     *  如果<code> listener </code>是<code> null </code>,则不会抛出任何异常,并且不执行任何操作。
+     * 
+     * 
      * @param    listener  the property change listener to be added
      *
      * @see #removePropertyChangeListener
@@ -374,6 +398,12 @@ public class BasicDirectoryModel extends AbstractListModel<Object> implements Pr
      * <p>
      * If listener is null, no exception is thrown and no action is performed.
      *
+     * <p>
+     *  从侦听器列表中删除PropertyChangeListener。
+     * <p>
+     *  如果侦听器为null,则不抛出异常,并且不执行任何操作。
+     * 
+     * 
      * @param listener the PropertyChangeListener to be removed
      *
      * @see #addPropertyChangeListener
@@ -391,6 +421,10 @@ public class BasicDirectoryModel extends AbstractListModel<Object> implements Pr
      * Returns an array of all the property change listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有属性更改侦听器的数组。
+     * 
+     * 
      * @return all of this component's <code>PropertyChangeListener</code>s
      *         or an empty array if no property change
      *         listeners are currently registered
@@ -414,6 +448,10 @@ public class BasicDirectoryModel extends AbstractListModel<Object> implements Pr
      * send the appropriate PropertyChangeEvent to any registered
      * PropertyChangeListeners.
      *
+     * <p>
+     *  支持报告布尔属性的绑定属性更改。当绑定属性发生变化时,可以调用此方法,并且它会向适当的PropertyChangeListener发送适当的PropertyChangeEvent。
+     * 
+     * 
      * @param propertyName the property whose value has changed
      * @param oldValue the property's previous value
      * @param newValue the property's new value
@@ -433,6 +471,8 @@ public class BasicDirectoryModel extends AbstractListModel<Object> implements Pr
      * Set the busy state for the model. The model is considered
      * busy when it is running a separate (interruptable)
      * thread in order to load the contents of a directory.
+     * <p>
+     *  设置模型的忙状态。当模型运行单独的(可中断的)线程以加载目录的内容时,该模型被认为是繁忙的。
      */
     private synchronized void setBusy(final boolean busy, int fid) {
         if (fid == fetchID) {

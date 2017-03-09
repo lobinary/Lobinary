@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,14 @@ import java.sql.Clob;
  * All methods on the <code>NClob</code> interface must be fully implemented if the
  * JDBC driver supports the data type.
  *
+ * <p>
+ *  Java和trade中的映射;用于SQL <code> NCLOB </code>类型的编程语言。
+ *  SQL <code> NCLOB </code>是一种内置类型,用于存储使用国家字符集作为数据库表行中的列值的字符大对象。
+ *  <code> NClob </code>接口扩展了<code> Clob </code>接口,该接口提供了获取SQL <code> NCLOB </code>值的长度的方法, > NCLOB </code>
+ * 值,并在<code> NCLOB </code>值中搜索子串或<code> NCLOB </code>对象。
+ *  SQL <code> NCLOB </code>是一种内置类型,用于存储使用国家字符集作为数据库表行中的列值的字符大对象。
+ * 一个<code> NClob </code>对象,就像一个<code> Clob </code>对象,在创建它的事务的有效期。
+ * 
  * @since 1.6
  */
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.keys.storage.implementations;
 
@@ -35,6 +44,10 @@ import com.sun.org.apache.xml.internal.security.keys.storage.StorageResolverSpi;
 /**
  * Makes the Certificates from a JAVA {@link KeyStore} object available to the
  * {@link com.sun.org.apache.xml.internal.security.keys.storage.StorageResolver}.
+ * <p>
+ *  使来自JAVA {@link KeyStore}对象的证书可用于{@link com.sun.org.apache.xml.internal.security.keys.storage.StorageResolver}
+ * 。
+ * 
  */
 public class KeyStoreResolver extends StorageResolverSpi {
 
@@ -44,6 +57,10 @@ public class KeyStoreResolver extends StorageResolverSpi {
     /**
      * Constructor KeyStoreResolver
      *
+     * <p>
+     *  构造函数KeyStoreResolver
+     * 
+     * 
      * @param keyStore is the keystore which contains the Certificates
      * @throws StorageResolverException
      */
@@ -64,6 +81,9 @@ public class KeyStoreResolver extends StorageResolverSpi {
 
     /**
      * Class KeyStoreIterator
+     * <p>
+     *  KeyStoreIterator类
+     * 
      */
     static class KeyStoreIterator implements Iterator<Certificate> {
 
@@ -79,6 +99,10 @@ public class KeyStoreResolver extends StorageResolverSpi {
         /**
          * Constructor KeyStoreIterator
          *
+         * <p>
+         *  构造函数KeyStoreIterator
+         * 
+         * 
          * @param keyStore
          */
         public KeyStoreIterator(KeyStore keyStore) {
@@ -125,6 +149,8 @@ public class KeyStoreResolver extends StorageResolverSpi {
 
         /**
          * Method remove
+         * <p>
+         *  方法删除
          */
         public void remove() {
             throw new UnsupportedOperationException("Can't remove keys from KeyStore");

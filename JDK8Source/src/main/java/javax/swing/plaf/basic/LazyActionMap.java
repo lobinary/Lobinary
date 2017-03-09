@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,12 +34,19 @@ import javax.swing.plaf.*;
  * contents are populated by invoking the <code>loadActionMap</code>
  * method on the passed in Object.
  *
+ * <p>
+ *  根据需要填充其内容的ActionMap。通过在传递的对象中调用<code> loadActionMap </code>方法来填充内容。
+ * 
+ * 
  * @author Scott Violet
  */
 class LazyActionMap extends ActionMapUIResource {
     /**
      * Object to invoke <code>loadActionMap</code> on. This may be
      * a Class object.
+     * <p>
+     *  调用<code> loadActionMap </code>的对象。这可能是一个Class对象。
+     * 
      */
     private transient Object _loader;
 
@@ -49,6 +57,12 @@ class LazyActionMap extends ActionMapUIResource {
      * <p>
      * This should be used if the ActionMap can be shared.
      *
+     * <p>
+     *  安装ActionMap,如果需要,将通过在指定的类上调用<code> loadActionMap </code>方法来填充ActionMap。
+     * <p>
+     *  如果ActionMap可以共享,则应使用此选项。
+     * 
+     * 
      * @param c JComponent to install the ActionMap on.
      * @param loaderClass Class object that gets loadActionMap invoked
      *                    on.
@@ -72,6 +86,10 @@ class LazyActionMap extends ActionMapUIResource {
      * <p>
      * This should be used if the ActionMap can be shared.
      *
+     * <p>
+     *  返回一个ActionMap,如有必要,将通过调用指定类上的<code> loadActionMap </code>方法来填充ActionMap。
+     * <p>
+     * 
      * @param c JComponent to install the ActionMap on.
      * @param loaderClass Class object that gets loadActionMap invoked
      *                    on.

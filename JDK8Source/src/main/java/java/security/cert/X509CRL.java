@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -101,6 +102,35 @@ import sun.security.x509.X509CRLImpl;
  * }
  * }</pre>
  *
+ * <p>
+ * <p>
+ *  X.509证书吊销列表(CRL)的抽象类。 CRL是标识撤销的证书的带时间戳的列表。它由证书颁发机构(CA)签名并在公共存储库中免费提供。
+ * 
+ *  <p>每个撤销的证书在CRL中通过其证书序列号进行标识。
+ * 当证书使用系统使用证书(例如,用于验证远程用户的数字签名)时,该系统不仅检查证书签名和有效性,而且还获取适当最近的CRL,并检查证书序列号不在CRL。
+ *  "适当地最近"的含义可能随着本地策略而变化,但它通常意味着最近发布的CRL。 CA定期(例如,每小时,每天或每周)发布新的CRL。
+ * 当撤消发生时,条目将添加到CRL中,并且在达到证书到期日期时可能会删除条目。
+ * <p>
+ *  X.509 v2 CRL格式在ASN.1中描述如下：
+ * <pre>
+ *  CertificateList :: = SEQUENCE {tbsCertList TBSCertList,signatureAlgorithm AlgorithmIdentifier,signature BIT STRING}
+ * 。
+ * </pre>
+ * <p>
+ *  有关详情,请参阅<a href="http://www.ietf.org/rfc/rfc3280.txt"> RFC 3280：Internet X.509公钥基础结构证书和CRL配置文件</a>。
+ * <p>
+ *  {@code tbsCertList}的ASN.1定义是：
+ * <pre>
+ * TBSCertList :: = SEQUENCE {版本版本可选,如果存在,必须是v2签名AlgorithmIdentifier,issuer名称,thisUpdate ChoiceOfTime,nextUpdate ChoiceOfTime可选,revokedCertificates SEQUENCE OF SEQUENCE {userCertificate CertificateSerialNumber,revocationDate ChoiceOfTime,crlEntryExtensions Extensions可选 - 如果存在,必须是v2}
+ * 可选,crlExtensions [0] EXPLICIT扩展可选 - 如果存在,必须是v2}。
+ * </pre>
+ * <p>
+ *  CRL使用证书工厂实例化。
+ * 下面是如何实例化X.509 CRL的示例：<pre> {@ code try(InputStream inStream = new FileInputStream("fileName-of-crl")){CertificateFactory cf = CertificateFactory.getInstance("X.509 "); X509CRL crl =(X509CRL)cf.enerateCRL(inStream); }
+ * } </pre>。
+ *  CRL使用证书工厂实例化。
+ * 
+ * 
  * @author Hemma Prafullchandra
  *
  *
@@ -115,6 +145,9 @@ public abstract class X509CRL extends CRL implements X509Extension {
 
     /**
      * Constructor for X.509 CRLs.
+     * <p>
+     *  X.509 CRL的构造函数。
+     * 
      */
     protected X509CRL() {
         super("X.509");
@@ -127,6 +160,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * its encoded form is retrieved and compared with the
      * encoded form of this CRL.
      *
+     * <p>
+     *  比较此CRL与给定对象的相等性。如果{@code other}对象是{@code X509CRL}的{@code instanceof},则会检索其编码形式,并与此CRL的编码形式进行比较。
+     * 
+     * 
      * @param other the object to test for equality with this CRL.
      *
      * @return true iff the encoded forms of the two CRLs
@@ -153,6 +190,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * Returns a hashcode value for this CRL from its
      * encoded form.
      *
+     * <p>
+     *  从其编码形式返回此CRL的哈希码值。
+     * 
+     * 
      * @return the hashcode value.
      */
     public int hashCode() {
@@ -171,6 +212,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
     /**
      * Returns the ASN.1 DER-encoded form of this CRL.
      *
+     * <p>
+     *  返回此CRL的ASN.1 DER编码形式。
+     * 
+     * 
      * @return the encoded form of this certificate
      * @exception CRLException if an encoding error occurs.
      */
@@ -181,6 +226,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * Verifies that this CRL was signed using the
      * private key that corresponds to the given public key.
      *
+     * <p>
+     *  验证此CRL是否使用与给定公钥相对应的私钥进行签名。
+     * 
+     * 
      * @param key the PublicKey used to carry out the verification.
      *
      * @exception NoSuchAlgorithmException on unsupported signature
@@ -201,6 +250,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * This method uses the signature verification engine
      * supplied by the given provider.
      *
+     * <p>
+     * 验证此CRL是否使用与给定公钥相对应的私钥进行签名。此方法使用由给定提供者提供的签名验证引擎。
+     * 
+     * 
      * @param key the PublicKey used to carry out the verification.
      * @param sigProvider the name of the signature provider.
      *
@@ -228,6 +281,12 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * service providers, this method is not {@code abstract}
      * and it provides a default implementation.
      *
+     * <p>
+     *  验证此CRL是否使用与给定公钥相对应的私钥进行签名。此方法使用由给定提供者提供的签名验证引擎。请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     *  此方法已添加到Java Platform Standard Edition的1.8版本中。为了保持与现有服务提供程序的向后兼容性,此方法不是{@code abstract},它提供了一个默认实现。
+     * 
+     * 
      * @param key the PublicKey used to carry out the verification.
      * @param sigProvider the signature provider.
      *
@@ -256,6 +315,15 @@ public abstract class X509CRL extends CRL implements X509Extension {
      *             -- with definition of Version for certs
      * </pre>
      *
+     * <p>
+     *  从CRL获取{@code版本}(版本号)值。对此的ASN.1定义是：
+     * <pre>
+     *  version版本可选, - 如果存在,必须是v2
+     * 
+     *  Version :: = INTEGER {v1(0),v2(1),v3(2)}  -  v3不适用于CRL,但出现一致性 - 
+     * </pre>
+     * 
+     * 
      * @return the version number, i.e. 1 or 2.
      */
     public abstract int getVersion();
@@ -297,6 +365,28 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * one of {@code PrintableString},
      * {@code TeletexString} or {@code UniversalString}.
      *
+     * <p>
+     *  <strong>已拒绝</strong>,替换为{@linkplain#getIssuerX500Principal()}。
+     * 此方法返回{@code issuer}作为实现特定的Principal对象,不应依赖于可移植代码。
+     * 
+     * <p>
+     *  从CRL获取{@code issuer}(颁发者专有名称)值。发放者名称标识签署(并颁发)CRL的实体。
+     * 
+     *  <p>发行者名称字段包含X.500可分辨名称(DN)。对此的ASN.1定义是：
+     * <pre>
+     *  发行人名称
+     * 
+     * Name :: = CHOICE {RDNSequence} RDNSequence :: = SEQUENCE OF RelativeDistinguishedName RelativeDisting
+     * uishedName :: = SET OF AttributeValueAssertion。
+     * 
+     *  AttributeValueAssertion :: = SEQUENCE {AttributeType,AttributeValue} AttributeType :: = OBJECT IDENT
+     * IFIER AttributeValue :: = ANY。
+     * </pre>
+     *  {@code Name}描述了由属性组成的分层名称,例如国家/地区名称和相应的值,例如US。
+     *  {@code AttributeValue}组件的类型由{@code AttributeType}确定;一般来说它会是一个{@code directoryString}。
+     *  {@code directoryString}通常是{@code PrintableString},{@code TeletexString}或{@code UniversalString}之一。
+     * 
+     * 
      * @return a Principal whose name is the issuer distinguished name.
      */
     public abstract Principal getIssuerDN();
@@ -307,6 +397,12 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * <p>
      * It is recommended that subclasses override this method.
      *
+     * <p>
+     *  将CRL中的颁发者(签发者可分辨名称)值作为{@code X500Principal}返回。
+     * <p>
+     *  建议子类重写此方法。
+     * 
+     * 
      * @return an {@code X500Principal} representing the issuer
      *          distinguished name
      * @since 1.4
@@ -328,6 +424,13 @@ public abstract class X509CRL extends CRL implements X509Extension {
      *     generalTime    GeneralizedTime }
      * </pre>
      *
+     * <p>
+     *  从CRL获取{@code thisUpdate}日期。对此的ASN.1定义是：
+     * <pre>
+     *  thisUpdate ChoiceOfTime ChoiceOfTime :: = CHOICE {utcTime UTCTime,generalTime GeneralizedTime}
+     * </pre>
+     * 
+     * 
      * @return the {@code thisUpdate} date from the CRL.
      */
     public abstract Date getThisUpdate();
@@ -335,6 +438,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
     /**
      * Gets the {@code nextUpdate} date from the CRL.
      *
+     * <p>
+     *  从CRL获取{@code nextUpdate}日期。
+     * 
+     * 
      * @return the {@code nextUpdate} date from the CRL, or null if
      * not present.
      */
@@ -343,6 +450,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
     /**
      * Gets the CRL entry, if any, with the given certificate serialNumber.
      *
+     * <p>
+     *  获取具有给定证书serialNumber的CRL条目(如果有)。
+     * 
+     * 
      * @param serialNumber the serial number of the certificate for which a CRL entry
      * is to be looked up
      * @return the entry with the given serial number, or null if no such entry
@@ -361,6 +472,12 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * certificates issued by the CRL issuer. Subclasses that wish to
      * support indirect CRLs should override this method.
      *
+     * <p>
+     *  获取给定证书的CRL条目(如果有)。
+     * 
+     * <p>此方法可用于在间接CRL中查找CRL条目,这意味着包含来自CRL发布者以外的发布者的条目的CRL。默认实现将仅返回由CRL颁发者颁发的证书的条目。希望支持间接CRL的子类应该覆盖此方法。
+     * 
+     * 
      * @param certificate the certificate for which a CRL entry is to be looked
      *   up
      * @return the entry for the given certificate, or null if no such entry
@@ -382,6 +499,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * Gets all the entries from this CRL.
      * This returns a Set of X509CRLEntry objects.
      *
+     * <p>
+     *  获取此CRL的所有条目。这将返回一组X509CRLEntry对象。
+     * 
+     * 
      * @return all the entries or null if there are none present.
      * @see X509CRLEntry
      */
@@ -392,6 +513,10 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * {@code tbsCertList} from this CRL.
      * This can be used to verify the signature independently.
      *
+     * <p>
+     *  获取DER编码的CRL信息,来自此CRL的{@code tbsCertList}。这可以用于独立地验证签名。
+     * 
+     * 
      * @return the DER-encoded CRL information.
      * @exception CRLException if an encoding error occurs.
      */
@@ -405,6 +530,13 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * signature     BIT STRING
      * </pre>
      *
+     * <p>
+     *  从CRL获取{@code signature}值(原始签名位)。对此的ASN.1定义是：
+     * <pre>
+     *  签名BIT STRING
+     * </pre>
+     * 
+     * 
      * @return the signature.
      */
     public abstract byte[] getSignature();
@@ -427,6 +559,18 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * <p>The algorithm name is determined from the {@code algorithm}
      * OID string.
      *
+     * <p>
+     *  获取CRL签名算法的签名算法名称。一个例子是字符串"SHA256withRSA"。对此的ASN.1定义是：
+     * <pre>
+     *  signatureAlgorithm AlgorithmIdentifier
+     * 
+     *  AlgorithmIdentifier :: = SEQUENCE {algorithm OBJECT IDENTIFIER,parameters ANY DEFINED BY algorithm OPTIONAL}
+     *   - 包含类型的值 - 注册用于 - 算法对象标识符值。
+     * </pre>
+     * 
+     *  <p>算法名称由{@code algorithm} OID字符串确定。
+     * 
+     * 
      * @return the signature algorithm name.
      */
     public abstract String getSigAlgName();
@@ -444,6 +588,15 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * <p>See {@link #getSigAlgName() getSigAlgName} for
      * relevant ASN.1 definitions.
      *
+     * <p>
+     * 从CRL获取签名算法OID字符串。 OID由一组由周期分隔的非负整数表示。
+     * 例如,字符串"1.2.840.10040.4.3"标识了在<a href="http://www.ietf.org/rfc/rfc3279.txt"> RFC 3279：算法中定义的具有DSA签名算法的
+     * SHA-1, Internet的X.509公钥基础设施证书和CRL配置文件的标识符</a>。
+     * 从CRL获取签名算法OID字符串。 OID由一组由周期分隔的非负整数表示。
+     * 
+     *  <p>有关ASN.1定义,请参阅{@link #getSigAlgName()getSigAlgName}。
+     * 
+     * 
      * @return the signature algorithm OID string.
      */
     public abstract String getSigAlgOID();
@@ -461,6 +614,12 @@ public abstract class X509CRL extends CRL implements X509Extension {
      * <p>See {@link #getSigAlgName() getSigAlgName} for
      * relevant ASN.1 definitions.
      *
+     * <p>
+     *  从此CRL的签名算法获取DER编码的签名算法参数。在大多数情况下,签名算法参数为null;这些参数通常与公钥一起提供。
+     * 如果需要访问单个参数值,请使用{@link java.security.AlgorithmParameters AlgorithmParameters}并使用{@link #getSigAlgName()getSigAlgName}
+     * 返回的名称实例化。
+     *  从此CRL的签名算法获取DER编码的签名算法参数。在大多数情况下,签名算法参数为null;这些参数通常与公钥一起提供。
+     * 
      * @return the DER-encoded signature algorithm parameters, or
      *         null if no parameters are present.
      */

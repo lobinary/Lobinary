@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import java.awt.color.ICC_ColorSpace;
  * A class containing JPEG-related constants, definitions, and
  * static methods.  This class and its constants must be public so that
  * <code>JPEGImageWriteParam</code> can see it.
+ * <p>
+ *  包含与JPEG相关的常量,定义和静态方法的类。这个类及其常量必须是public的,这样<code> JPEGImageWriteParam </code>可以看到它。
+ * 
  */
 public class JPEG {
 
@@ -208,6 +212,9 @@ public class JPEG {
     /* These are kept in the inner class to avoid static initialization
      * of the CMM class until someone actually needs it.
      * (e.g. do not init CMM on the request for jpeg mime types)
+     * <p>
+     *  的CMM类,直到有人真正需要它。 (例如对jpeg mime类型的请求不要初始化CMM)
+     * 
      */
     public static class JCS {
         public static final ColorSpace sRGB =
@@ -238,6 +245,10 @@ public class JPEG {
      * object is an instance of ICC_ColorSpace but is not one of the
      * standard <code>ColorSpaces</code> returned by
      * <code>ColorSpace.getInstance()</code>.
+     * <p>
+     *  如果给定的<code> ColorSpace </code>对象是ICC_ColorSpace的实例,但不是由<code> ColorSpace.getInstance()返回的标准<code> Co
+     * lorSpaces </code>之一,则返回<code> true </code> )</code>。
+     * 
      */
     static boolean isNonStandardICC(ColorSpace cs) {
         boolean retval = false;
@@ -258,6 +269,9 @@ public class JPEG {
      * Returns <code>true</code> if the given imageType can be used
      * in a JFIF file.  If <code>input</code> is true, then the
      * image type is considered before colorspace conversion.
+     * <p>
+     *  如果给定的imageType可以在JFIF文件中使用,则返回<code> true </code>。如果<code> input </code>为true,则在颜色空间转换之前考虑图像类型。
+     * 
      */
     static boolean isJFIFcompliant(ImageTypeSpecifier imageType,
                                    boolean input) {
@@ -297,6 +311,10 @@ public class JPEG {
      * that type, or ADOBE_IMPOSSIBLE if the image type is incompatible
      * with an Adobe marker segment.  If <code>input</code> is true, then
      * the image type is considered before colorspace conversion.
+     * <p>
+     *  给定图像类型,返回与该类型相对应的Adobe变换,如果图像类型与Adobe标记段不兼容,则返回ADOBE_IMPOSSIBLE。
+     * 如果<code> input </code>为true,则在颜色空间转换之前考虑图像类型。
+     * 
      */
     static int transformForType(ImageTypeSpecifier imageType, boolean input) {
         int retval = ADOBE_IMPOSSIBLE;
@@ -320,6 +338,9 @@ public class JPEG {
     /**
      * Converts an ImageWriteParam (i.e. IJG) non-linear quality value
      * to a float suitable for passing to JPEGQTable.getScaledInstance().
+     * <p>
+     *  将ImageWriteParam(即IJG)非线性质量值转换为适合传递到JPEGQTable.getScaledInstance()的浮点。
+     * 
      */
     static float convertToLinearQuality(float quality) {
         // The following is converted from the IJG code.
@@ -342,6 +363,9 @@ public class JPEG {
 
     /**
      * Return an array of default, visually lossless quantization tables.
+     * <p>
+     *  返回一个默认的,可视化无损量化表的数组。
+     * 
      */
     static JPEGQTable [] getDefaultQTables() {
         JPEGQTable [] qTables = new JPEGQTable[2];
@@ -352,6 +376,8 @@ public class JPEG {
 
     /**
      * Return an array of default Huffman tables.
+     * <p>
+     *  返回一个默认的霍夫曼表数组。
      */
     static JPEGHuffmanTable [] getDefaultHuffmanTables(boolean wantDC) {
         JPEGHuffmanTable [] tables = new JPEGHuffmanTable[2];

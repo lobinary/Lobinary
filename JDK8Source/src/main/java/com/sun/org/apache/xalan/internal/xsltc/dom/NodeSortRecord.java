@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: NodeSortRecord.java,v 1.5 2005/09/28 13:48:36 pvedula Exp $
+ * <p>
+ *  $ Id：NodeSortRecord.java,v 1.5 2005/09/28 13:48:36 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -37,6 +50,9 @@ import com.sun.org.apache.xalan.internal.utils.SecuritySupport;
 
 /**
  * Base class for sort records containing application specific sort keys
+ * <p>
+ *  包含应用程序特定排序键的排序记录的基类
+ * 
  */
 public abstract class NodeSortRecord {
     public static final int COMPARE_STRING     = 0;
@@ -48,6 +64,10 @@ public abstract class NodeSortRecord {
     /**
      * A reference to a collator. May be updated by subclass if the stylesheet
      * specifies a different language (will be updated iff _locale is updated).
+     * <p>
+     *  对整理程序的引用。如果样式表指定了不同的语言(如果_locale被更新,将被更新),可以通过子类更新。
+     * 
+     * 
      * @deprecated This field continues to exist for binary compatibility.
      *             New code should not refer to it.
      */
@@ -55,6 +75,10 @@ public abstract class NodeSortRecord {
 
     /**
      * A reference to the first Collator
+     * <p>
+     *  对第一个Collat​​or的引用
+     * 
+     * 
      * @deprecated This field continues to exist for binary compatibility.
      *             New code should not refer to it.
      */
@@ -63,6 +87,10 @@ public abstract class NodeSortRecord {
 
     /**
      * A locale field that might be set by an instance of a subclass.
+     * <p>
+     *  可以由子类的实例设置的语言环境字段。
+     * 
+     * 
      * @deprecated This field continues to exist for binary compatibility.
      *             New code should not refer to it.
      */
@@ -84,6 +112,10 @@ public abstract class NodeSortRecord {
      * makeNodeSortRecord method in the NodeSortRecordFactory class. Since we
      * cannot pass any parameters to the constructor in that case we just set
      * the default values here and wait for new values through initialize().
+     * <p>
+     *  此构造函数通过调用NodeSortRecordFactory类中的makeNodeSortRecord方法中的ClassLoader运行。
+     * 因为在这种情况下我们不能传递任何参数到构造函数,我们只是在这里设置默认值,并通过initialize()等待新的值。
+     * 
      */
     public NodeSortRecord(int node) {
         _node = node;
@@ -96,6 +128,9 @@ public abstract class NodeSortRecord {
     /**
      * This method allows the caller to set the values that could not be passed
      * to the default constructor.
+     * <p>
+     *  此方法允许调用者设置不能传递到默认构造函数的值。
+     * 
      */
     public final void initialize(int node, int last, DOM dom,
          SortSettings settings)
@@ -140,6 +175,9 @@ public abstract class NodeSortRecord {
 
     /**
      * Returns the node for this sort object
+     * <p>
+     * 返回此排序对象的节点
+     * 
      */
     public final int getNode() {
         return _node;
@@ -147,6 +185,7 @@ public abstract class NodeSortRecord {
 
     /**
      *
+     * <p>
      */
     public final int compareDocOrder(NodeSortRecord other) {
         return _node - other._node;
@@ -156,6 +195,9 @@ public abstract class NodeSortRecord {
      * Get the string or numeric value of a specific level key for this sort
      * element. The value is extracted from the DOM if it is not already in
      * our sort key vector.
+     * <p>
+     *  获取此排序元素的特定级别键的字符串或数值。如果值尚未在排序键向量中,则从DOM中提取值。
+     * 
      */
     private final Comparable stringValue(int level) {
         // Get value from our array if possible
@@ -205,6 +247,11 @@ public abstract class NodeSortRecord {
      * identical (and so the key values may not even be extracted from the DOM)
      *
      * !!!!MUST OPTIMISE - THIS IS REALLY, REALLY SLOW!!!!
+     * <p>
+     *  比较这个排序元素到另一个。首先检查第一级别,并且仅当第一级别键相同(因此甚至可能甚至不能从DOM提取键值)时我们才进行下一级别,
+     * 
+     *  !!!!必须优化 - 这是真的,真的慢！
+     * 
      */
     public int compareTo(NodeSortRecord other) {
         int cmp, level;
@@ -237,6 +284,9 @@ public abstract class NodeSortRecord {
     /**
      * Returns the array of Collators used for text comparisons in this object.
      * May be overridden by inheriting classes
+     * <p>
+     *  返回此对象中用于文本比较的Collat​​or数组。可以通过继承类覆盖
+     * 
      */
     public Collator[] getCollator() {
         return _collators;
@@ -244,6 +294,8 @@ public abstract class NodeSortRecord {
 
     /**
      * Extract the sort value for a level of this key.
+     * <p>
+     *  提取此键级别的排序值。
      */
     public abstract String extractValueFromDOM(DOM dom, int current, int level,
                                                AbstractTranslet translet,

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,9 @@ import com.sun.jmx.snmp.internal.SnmpEngineImpl;
 /**
  * This list is used in order to construct the OID during the getnext.
  * The constructed oid is checked by the checker AcmChecker.
+ * <p>
+ *  此列表用于在getnext期间构造OID。构造的oid由检查器AcmChecker检查。
+ * 
  */
 final class LongList {
 
@@ -65,6 +69,10 @@ final class LongList {
      * The list content. Any access to this variable must be protected
      * by a synchronized block on the LongList object.
      * Only read-only action should be performed on this object.
+     * <p>
+     *  列表内容。对此变量的任何访问必须由LongList对象上的同步块保护。只对此对象执行只读操作。
+     * 
+     * 
      **/
     public  long[] list;
 
@@ -84,6 +92,10 @@ final class LongList {
 
     /**
      * Same behaviour than size() in {@link java.util.List}.
+     * <p>
+     *  与{@link java.util.List}中的size()行为相同。
+     * 
+     * 
      **/
     public final int size() { return size;}
 
@@ -91,6 +103,10 @@ final class LongList {
      * Same behaviour than add(long o) in {@link java.util.List}.
      * Any access to this method should be protected in a synchronized
      * block on the LongList object.
+     * <p>
+     *  与{@link java.util.List}中的add(long o)相同的行为。对此方法的任何访问都应在LongList对象的同步块中受到保护。
+     * 
+     * 
      **/
     public final boolean add(final long o) {
         if (size >= list.length)
@@ -104,6 +120,10 @@ final class LongList {
      * {@link java.util.List}.
      * Any access to this method should be protected in a synchronized
      * block on the LongList object.
+     * <p>
+     *  与{@link java.util.List}中的add(int index,long o)行为相同。对此方法的任何访问都应在LongList对象的同步块中受到保护。
+     * 
+     * 
      **/
     public final void add(final int index, final long o) {
         if (index >  size) throw new IndexOutOfBoundsException();
@@ -120,6 +140,10 @@ final class LongList {
 
     /**
      * Adds <var>count</var> elements to the list.
+     * <p>
+     *  将<var> count </var>元素添加到列表中。
+     * 
+     * 
      * @param at index at which the elements must be inserted. The
      *        first element will be inserted at this index.
      * @param src  An array containing the elements we want to insert.
@@ -144,6 +168,10 @@ final class LongList {
     /**
      * Any access to this method should be protected in a synchronized
      * block on the LongList object.
+     * <p>
+     *  对此方法的任何访问都应在LongList对象的同步块中受到保护。
+     * 
+     * 
      **/
     public final long remove(final int from, final int count) {
         if (count < 1 || from < 0) return -1;
@@ -164,6 +192,10 @@ final class LongList {
      * Same behaviour than remove(int index) in {@link java.util.List}.
      * Any access to this method should be protected in a synchronized
      * block on the LongList object.
+     * <p>
+     *  与{@link java.util.List}中的remove(int index)相同的行为。对此方法的任何访问都应在LongList对象的同步块中受到保护。
+     * 
+     * 
      **/
     public final long remove(final int index) {
         if (index >= size) return -1;
@@ -181,6 +213,10 @@ final class LongList {
      * {@link java.util.List}.
      * Any access to this method should be protected in a synchronized
      * block on the LongList object.
+     * <p>
+     *  与{@link java.util.List}中的toArray(long [] a)方法相同的行为。对此方法的任何访问都应在LongList对象的同步块中受到保护。
+     * 
+     * 
      **/
     public final long[] toArray(long[] a) {
         java.lang.System.arraycopy(list,0,a,0,size);
@@ -192,6 +228,10 @@ final class LongList {
      * {@link java.util.List}.
      * Any access to this method should be protected in a synchronized
      * block on the LongList object.
+     * <p>
+     *  与{@link java.util.List}中的toArray()方法相同的行为。对此方法的任何访问都应在LongList对象的同步块中受到保护。
+     * 
+     * 
      **/
     public final long[] toArray() {
         return toArray(new long[size]);
@@ -201,6 +241,10 @@ final class LongList {
      * Resize the list. Increase its capacity by DELTA elements.
      * Any call to this method must be protected by a synchronized
      * block on this LongList.
+     * <p>
+     * 调整列表大小。通过DELTA元素增加其容量。对此方法的任何调用必须由此LongList上的同步块保护。
+     * 
+     * 
      **/
     private final void resize() {
         final long[] newlist = allocate(list.length + DELTA);
@@ -211,6 +255,10 @@ final class LongList {
     /**
      * Resize the list. Insure that the new length will be at
      * least equal to <var>length</var>.
+     * <p>
+     *  调整列表大小。确保新长度将至少等于<var> length </var>。
+     * 
+     * 
      * @param length new minimal length requested.
      * Any call to this method must be protected by a synchronized
      * block on this LongList.
@@ -227,6 +275,9 @@ final class LongList {
 
     /**
      * Allocate a new array of object of specified length.
+     * <p>
+     *  分配一个指定长度的对象的新数组。
+     * 
      **/
     private final long[] allocate(final int length) {
         return new long[length];

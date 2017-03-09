@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.signature;
 
@@ -100,6 +109,36 @@ import org.w3c.dom.Text;
  *  &lt;/complexType&gt;
  * </pre>
  *
+ * <p>
+ *  Handles <code>&lt; ds：Reference&gt; </code>元素。
+ * 
+ *  这包括：
+ * 
+ *  从{@link org.w3c.dom.Element}构造一个<CODE> ds：Reference </CODE>。
+ * 
+ *  <p>创建新参考</p>
+ * <pre>
+ *  文档doc; MessageDigestAlgorithm sha1 = MessageDigestAlgorithm.getInstance("http：//#sha1");参考ref = new 
+ * Reference(new XMLSignatureInput(new FileInputStream("1.gif"),"http：//localhost/1.gif",(Transforms)nul
+ * l,sha1); Element refElem = ref.toElement(doc);。
+ * </pre>
+ * 
+ *  <p>验证参考</p>
+ * <pre>
+ * Element refElem = doc.getElement("Reference"); // PSEUDO reference ref = new Reference(refElem); Stri
+ * ng url = ref.getURI(); ref.setData(new XMLSignatureInput(new FileInputStream(url))); if(ref.verify())
+ * {System.out.println("verified"); }}。
+ * </pre>
+ * 
+ * <pre>
+ *  &lt; element name ="Reference"type ="ds：ReferenceType"/&gt; &lt; complexType name ="ReferenceType"&g
+ * t; &lt; sequence&gt; &lt; element ref ="ds：Transforms"minOccurs ="0"/&gt; &lt; element ref ="ds：Diges
+ * tMethod"/&gt; &lt; element ref ="ds：DigestValue"/&gt; &lt; / sequence&gt; &lt; attribute name ="Id"ty
+ * pe ="ID"use ="optional"/&gt; &lt; attribute name ="URI"type ="anyURI"use ="optional"/&gt; &lt; attrib
+ * ute name ="Type"type ="anyURI"use ="optional"/&gt; &lt; / complexType&gt;。
+ * </pre>
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  * @see ObjectContainer
  * @see Manifest
@@ -114,6 +153,9 @@ public class Reference extends SignatureElementProxy {
 
     /**
      * The maximum number of transforms per reference, if secure validation is enabled.
+     * <p>
+     *  如果启用了安全验证,则每个引用的最大转换数。
+     * 
      */
     public static final int MAXIMUM_TRANSFORM_COUNT = 5;
 
@@ -123,6 +165,10 @@ public class Reference extends SignatureElementProxy {
      * Look up useC14N11 system property. If true, an explicit C14N11 transform
      * will be added if necessary when generating the signature. See section
      * 3.1.1 of http://www.w3.org/2007/xmlsec/Drafts/xmldsig-core/ for more info.
+     * <p>
+     *  查找useC14N11系统属性。如果为true,则在生成签名时,如果需要,将添加显式C14N11变换。
+     * 有关详细信息,请参阅http://www.w3.org/2007/xmlsec/Drafts/xmldsig-core/的第3.1.1节。
+     * 
      */
     private static boolean useC14N11 = (
         AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
@@ -149,6 +195,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Constructor Reference
      *
+     * <p>
+     *  构造函数参考
+     * 
+     * 
      * @param doc the {@link Document} in which <code>XMLsignature</code> is placed
      * @param baseURI the URI of the resource where the XML instance will be stored
      * @param referenceURI URI indicate where is data which will digested
@@ -200,6 +250,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Build a {@link Reference} from an {@link Element}
      *
+     * <p>
+     *  从{@link Element}构建{@link参考}
+     * 
+     * 
      * @param element <code>Reference</code> element
      * @param baseURI the URI of the resource where the XML instance was stored
      * @param manifest is the {@link Manifest} of {@link SignedInfo} in which the Reference occurs.
@@ -214,6 +268,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Build a {@link Reference} from an {@link Element}
      *
+     * <p>
+     *  从{@link Element}构建{@link参考}
+     * 
+     * 
      * @param element <code>Reference</code> element
      * @param baseURI the URI of the resource where the XML instance was stored
      * @param manifest is the {@link Manifest} of {@link SignedInfo} in which the Reference occurs.
@@ -248,6 +306,10 @@ public class Reference extends SignatureElementProxy {
      * Returns {@link MessageDigestAlgorithm}
      *
      *
+     * <p>
+     *  返回{@link MessageDigestAlgorithm}
+     * 
+     * 
      * @return {@link MessageDigestAlgorithm}
      *
      * @throws XMLSignatureException
@@ -275,6 +337,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Sets the <code>URI</code> of this <code>Reference</code> element
      *
+     * <p>
+     *  设置此<code>引用</code>元素的<code> URI </code>
+     * 
+     * 
      * @param uri the <code>URI</code> of this <code>Reference</code> element
      */
     public void setURI(String uri) {
@@ -286,6 +352,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Returns the <code>URI</code> of this <code>Reference</code> element
      *
+     * <p>
+     *  返回此<code>引用</code>元素的<code> URI </code>
+     * 
+     * 
      * @return URI the <code>URI</code> of this <code>Reference</code> element
      */
     public String getURI() {
@@ -295,6 +365,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Sets the <code>Id</code> attribute of this <code>Reference</code> element
      *
+     * <p>
+     *  设置此<code>引用</code>元素的<code> Id </code>属性
+     * 
+     * 
      * @param id the <code>Id</code> attribute of this <code>Reference</code> element
      */
     public void setId(String id) {
@@ -307,6 +381,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Returns the <code>Id</code> attribute of this <code>Reference</code> element
      *
+     * <p>
+     *  返回此<code>引用</code>元素的<code> Id </code>属性
+     * 
+     * 
      * @return Id the <code>Id</code> attribute of this <code>Reference</code> element
      */
     public String getId() {
@@ -318,6 +396,11 @@ public class Reference extends SignatureElementProxy {
      * <code>ds:Object</code>, <code>ds:SignatureProperty</code>, or <code>ds:Manifest</code>
      * element.
      *
+     * <p>
+     * 设置引用的<code> type </code> atttibute指示<code> ds：Object </code>,<code> ds：SignatureProperty </code>或<code>
+     *  ds：Manifest </code>元件。
+     * 
+     * 
      * @param type the <code>type</code> attribute of the Reference
      */
     public void setType(String type) {
@@ -331,6 +414,11 @@ public class Reference extends SignatureElementProxy {
      * <code>ds:Object</code>, <code>ds:SignatureProperty</code>, or <code>ds:Manifest</code>
      * element
      *
+     * <p>
+     *  返回参考的<code> type </code> atttibute指示是否<code> ds：Object </code>,<code> ds：SignatureProperty </code>或<code>
+     *  ds：Manifest </code>元件。
+     * 
+     * 
      * @return the <code>type</code> attribute of the Reference
      */
     public String getType() {
@@ -343,6 +431,12 @@ public class Reference extends SignatureElementProxy {
      * This returns true if the <CODE>Type</CODE> attribute of the
      * <CODE>Reference</CODE> element points to a <CODE>#Object</CODE> element
      *
+     * <p>
+     *  方法isReferenceToObject
+     * 
+     *  如果<CODE>引用</CODE>元素的<CODE>类型</CODE>属性指向<CODE> #Object </CODE>元素
+     * 
+     * 
      * @return true if the Reference type indicates that this Reference points to an
      * <code>Object</code>
      */
@@ -360,6 +454,12 @@ public class Reference extends SignatureElementProxy {
      * This returns true if the <CODE>Type</CODE> attribute of the
      * <CODE>Reference</CODE> element points to a <CODE>#Manifest</CODE> element
      *
+     * <p>
+     *  方法isReferenceToManifest
+     * 
+     *  如果<CODE>引用</CODE>元素的<CODE>类型</CODE>属性指向<CODE> #Manifest </CODE>元素
+     * 
+     * 
      * @return true if the Reference type indicates that this Reference points to a
      * {@link Manifest}
      */
@@ -374,6 +474,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Method setDigestValueElement
      *
+     * <p>
+     *  方法setDigestValueElement
+     * 
+     * 
      * @param digestValue
      */
     private void setDigestValueElement(byte[] digestValue) {
@@ -392,6 +496,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Method generateDigestValue
      *
+     * <p>
+     *  方法generateDigestValue
+     * 
+     * 
      * @throws ReferenceNotInitializedException
      * @throws XMLSignatureException
      */
@@ -402,6 +510,10 @@ public class Reference extends SignatureElementProxy {
 
     /**
      * Returns the XMLSignatureInput which is created by de-referencing the URI attribute.
+     * <p>
+     *  返回通过解除引用URI属性创建的XMLSignatureInput。
+     * 
+     * 
      * @return the XMLSignatureInput of the source of this reference
      * @throws ReferenceNotInitializedException If the resolver found any
      * problem resolving the reference
@@ -456,6 +568,10 @@ public class Reference extends SignatureElementProxy {
 
     /**
      * Returns the XMLSignatureInput which is the result of the Transforms.
+     * <p>
+     *  返回XMLSignatureInput,这是Transforms的结果。
+     * 
+     * 
      * @return a XMLSignatureInput with all transformations applied.
      * @throws XMLSignatureException
      */
@@ -470,6 +586,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * This method returns the XMLSignatureInput which represents the node set before
      * some kind of canonicalization is applied for the first time.
+     * <p>
+     *  此方法返回XMLSignatureInput,它表示在第一次应用某种规范化之前设置的节点。
+     * 
+     * 
      * @return Gets a the node doing everything till the first c14n is needed
      *
      * @throws XMLSignatureException
@@ -517,6 +637,10 @@ public class Reference extends SignatureElementProxy {
 
     /**
      * Method getHTMLRepresentation
+     * <p>
+     *  方法getHTMLRepresentation
+     * 
+     * 
      * @return The HTML of the transformation
      * @throws XMLSignatureException
      */
@@ -572,6 +696,10 @@ public class Reference extends SignatureElementProxy {
 
     /**
      * This method only works works after a call to verify.
+     * <p>
+     *  此方法只有在调用验证后才能工作。
+     * 
+     * 
      * @return the transformed output(i.e. what is going to be digested).
      */
     public XMLSignatureInput getTransformsOutput() {
@@ -581,6 +709,9 @@ public class Reference extends SignatureElementProxy {
     /**
      * Get the ReferenceData that corresponds to the cached representation of the dereferenced
      * object before transformation.
+     * <p>
+     *  在转换之前获取与取消引用的对象的高速缓存表示对应的ReferenceData。
+     * 
      */
     public ReferenceData getReferenceData() {
         return referenceData;
@@ -589,6 +720,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * This method returns the {@link XMLSignatureInput} which is referenced by the
      * <CODE>URI</CODE> Attribute.
+     * <p>
+     *  此方法返回由<CODE> URI </CODE>属性引用的{@link XMLSignatureInput}。
+     * 
+     * 
      * @param os where to write the transformation can be null.
      * @return the element to digest
      *
@@ -611,6 +746,9 @@ public class Reference extends SignatureElementProxy {
 
     /**
      * Store the dereferenced Element(s) so that it/they can be retrieved later.
+     * <p>
+     *  存储取消引用的元素,以便以后可以检索它们。
+     * 
      */
     private void cacheDereferencedElement(XMLSignatureInput input) {
         if (input.isNodeSet()) {
@@ -658,6 +796,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Method getTransforms
      *
+     * <p>
+     *  方法getTransforms
+     * 
+     * 
      * @return The transforms that applied this reference.
      * @throws InvalidTransformException
      * @throws TransformationException
@@ -673,6 +815,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Method getReferencedBytes
      *
+     * <p>
+     *  方法getReferencedBytes
+     * 
+     * 
      * @return the bytes that will be used to generated digest.
      * @throws ReferenceNotInitializedException
      * @throws XMLSignatureException
@@ -693,6 +839,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Method calculateDigest
      *
+     * <p>
+     *  方法calculateDigest
+     * 
+     * 
      * @param validating true if validating the reference
      * @return reference Calculate the digest of this reference.
      * @throws ReferenceNotInitializedException
@@ -750,6 +900,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Returns the digest value.
      *
+     * <p>
+     * 返回摘要值。
+     * 
+     * 
      * @return the digest value.
      * @throws Base64DecodingException if Reference contains no proper base64 encoded data.
      * @throws XMLSecurityException if the Reference does not contain a DigestValue element
@@ -769,6 +923,10 @@ public class Reference extends SignatureElementProxy {
     /**
      * Tests reference validation is success or false
      *
+     * <p>
+     *  测试引用验证是成功还是假
+     * 
+     * 
      * @return true if reference validation is success, otherwise false
      * @throws ReferenceNotInitializedException
      * @throws XMLSecurityException
@@ -795,6 +953,8 @@ public class Reference extends SignatureElementProxy {
     /**
      * Method getBaseLocalName
      * @inheritDoc
+     * <p>
+     *  方法getBaseLocalName @inheritDoc
      */
     public String getBaseLocalName() {
         return Constants._TAG_REFERENCE;

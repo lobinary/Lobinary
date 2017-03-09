@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,14 @@
  * {@code <java-home>/lib/security} and failing that, in an OS-specific
  * location.<p>
  *
+ * <p>
+ *  此程序包包含与Kerberos网络身份验证协议相关的实用程序类。他们自己不提供很多Kerberos支持。<p>
+ * 
+ *  Kerberos网络身份验证协议在<a href=http://www.ietf.org/rfc/rfc4120.txt> RFC 4120 </a>中定义。
+ *  Java平台通过{@link org.ietf.jgss}包支持Kerberos的客户端。
+ * 也可能有一个登录模块实现{@link javax.security.auth.spi.LoginModule LoginModule}来验证Kerberos主体。<p>。
+ * 
+ * 
  * @since JDK1.4
  */
 package javax.security.auth.kerberos;

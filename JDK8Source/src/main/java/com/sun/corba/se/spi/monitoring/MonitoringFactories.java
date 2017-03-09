@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import com.sun.corba.se.impl.monitoring.MonitoringManagerFactoryImpl;
 /**
  * <p>
  *
+ * <p>
+ * <p>
+ * 
+ * 
  * @author Hemanth Puttaswamy
  * </p>
  * <p>
@@ -62,6 +67,13 @@ public class MonitoringFactories {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  获取MonitoredObjectFactory
+ * </p>
+ * <p>
+ * 
+ * 
  * @return a MonitoredObjectFactory
  * </p>
  */
@@ -82,6 +94,18 @@ public class MonitoringFactories {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  获取MonitoredAttributeInfoFactory。
+ * 用户不希望使用此工厂,因为MonitoredAttributeInfo在内部由StringMonitoredAttributeBase,LongMonitoredAttributeBase和Statis
+ * ticMonitoredAttribute创建。
+ *  获取MonitoredAttributeInfoFactory。
+ * 如果用户想要创建一个类似DoubleMonitoredAttribute这样的其他特殊类型的MonitoredAttribute,他们可以像LongMonitoredAttributeBase一样构建一
+ * 个DoubleMonitoredAttributeBase,并通过使用这个Factory在内部构建MonitoredAttributeBase所需的MonitoredAttributeInfo。
+ *  获取MonitoredAttributeInfoFactory。
+ * </p>
+ * <p>
+ * 
  * @return a MonitoredAttributeInfoFactory
  * </p>
  */
@@ -102,6 +126,9 @@ public class MonitoringFactories {
  * </p>
  * <p>
  *
+ * <p>
+ * 
+ * 
  * @return a MonitoredManagerFactory
  * </p>
  */

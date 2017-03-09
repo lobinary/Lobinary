@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import java.lang.Integer;
  * A view implementation to display an html horizontal
  * rule.
  *
+ * <p>
+ *  用于显示html水平规则的视图实现。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @author  Sara Swanson
  */
@@ -42,6 +47,10 @@ class HRuleView extends View  {
     /**
      * Creates a new view that represents an &lt;hr&gt; element.
      *
+     * <p>
+     *  创建一个新视图,表示&lt; hr&gt;元件。
+     * 
+     * 
      * @param elem the element to create a view for
      */
     public HRuleView(Element elem) {
@@ -51,6 +60,9 @@ class HRuleView extends View  {
 
     /**
      * Update any cached values that come from attributes.
+     * <p>
+     *  更新来自属性的任何缓存值。
+     * 
      */
     protected void setPropertiesFromAttributes() {
         StyleSheet sheet = ((HTMLDocument)getDocument()).getStyleSheet();
@@ -107,6 +119,10 @@ class HRuleView extends View  {
     /**
      * Paints the view.
      *
+     * <p>
+     *  绘制视图。
+     * 
+     * 
      * @param g the graphics context
      * @param a the allocation region for the view
      * @see View#paint
@@ -170,6 +186,10 @@ class HRuleView extends View  {
      * Calculates the desired shape of the rule... this is
      * basically the preferred size of the border.
      *
+     * <p>
+     *  计算规则的所需形状...这基本上是边框的首选大小。
+     * 
+     * 
      * @param axis may be either X_AXIS or Y_AXIS
      * @return the desired span
      * @see View#getPreferredSpan
@@ -199,6 +219,10 @@ class HRuleView extends View  {
      * Gets the resize weight for the axis.
      * The rule is: rigid vertically and flexible horizontally.
      *
+     * <p>
+     *  获取轴的调整大小权重。规则是：垂直刚性,水平柔性。
+     * 
+     * 
      * @param axis may be either X_AXIS or Y_AXIS
      * @return the weight
      */
@@ -216,6 +240,10 @@ class HRuleView extends View  {
      * Determines how attractive a break opportunity in
      * this view is.  This is implemented to request a forced break.
      *
+     * <p>
+     *  确定此视图中的休息机会的吸引力。这被实现以请求强制中断。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @param pos the potential location of the start of the
      *   broken view (greater than or equal to zero).
@@ -242,6 +270,10 @@ class HRuleView extends View  {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param pos the position to convert
      * @param a the allocated region to render into
      * @return the bounding box of the given position
@@ -267,6 +299,10 @@ class HRuleView extends View  {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param x the X coordinate
      * @param y the Y coordinate
      * @param a the allocated region to render into
@@ -288,6 +324,8 @@ class HRuleView extends View  {
      * Fetches the attributes to use when rendering.  This is
      * implemented to multiplex the attributes specified in the
      * model with a StyleSheet.
+     * <p>
+     *  获取渲染时要使用的属性。这被实现为将在模型中指定的属性与StyleSheet复用。
      */
     public AttributeSet getAttributes() {
         return attr;

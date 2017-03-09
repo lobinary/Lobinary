@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2009-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.zone;
 
@@ -105,67 +124,122 @@ import java.util.concurrent.ConcurrentMap;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  定义区域偏移对于单个时区如何变化的规则。
+ * <p>
+ *  规则模拟时区的所有历史和未来转换。 {@link ZoneOffsetTransition}用于已知的转换,通常是历史的。
+ *  {@link ZoneOffsetTransitionRule}用于基于算法结果的未来转换。
+ * <p>
+ *  规则通过{@link ZoneRulesProvider}使用{@link ZoneId}加载。相同的规则可以在多个区域ID之间内部共享。
+ * <p>
+ *  序列化{@code ZoneRules}的实例将存储整个规则集。它不存储区域ID,因为它不是此对象的状态的一部分。
+ * <p>
+ * 规则实现可以或可以不存储关于历史和未来转换的完整信息,并且所存储的信息仅与由规则提供者提供给实现的信息一样精确。应用程序应将提供的数据视为实施本规则可用的最佳信息。
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 public final class ZoneRules implements Serializable {
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 3044319355680032515L;
     /**
      * The last year to have its transitions cached.
+     * <p>
+     *  最后一年缓存其转换。
+     * 
      */
     private static final int LAST_CACHED_YEAR = 2100;
 
     /**
      * The transitions between standard offsets (epoch seconds), sorted.
+     * <p>
+     *  标准偏移(epoch秒)之间的转换,排序。
+     * 
      */
     private final long[] standardTransitions;
     /**
      * The standard offsets.
+     * <p>
+     *  标准偏移。
+     * 
      */
     private final ZoneOffset[] standardOffsets;
     /**
      * The transitions between instants (epoch seconds), sorted.
+     * <p>
+     *  时刻之间的转换(时代秒),排序。
+     * 
      */
     private final long[] savingsInstantTransitions;
     /**
      * The transitions between local date-times, sorted.
      * This is a paired array, where the first entry is the start of the transition
      * and the second entry is the end of the transition.
+     * <p>
+     *  本地日期时间之间的过渡,排序。这是一个配对数组,其中第一个条目是转换的开始,第二个条目是转换的结束。
+     * 
      */
     private final LocalDateTime[] savingsLocalTransitions;
     /**
      * The wall offsets.
+     * <p>
+     *  墙壁偏移。
+     * 
      */
     private final ZoneOffset[] wallOffsets;
     /**
      * The last rule.
+     * <p>
+     *  最后一条规则。
+     * 
      */
     private final ZoneOffsetTransitionRule[] lastRules;
     /**
      * The map of recent transitions.
+     * <p>
+     *  最近转换的地图。
+     * 
      */
     private final transient ConcurrentMap<Integer, ZoneOffsetTransition[]> lastRulesCache =
                 new ConcurrentHashMap<Integer, ZoneOffsetTransition[]>();
     /**
      * The zero-length long array.
+     * <p>
+     *  零长度长阵列。
+     * 
      */
     private static final long[] EMPTY_LONG_ARRAY = new long[0];
     /**
      * The zero-length lastrules array.
+     * <p>
+     *  零长度的lastrules数组。
+     * 
      */
     private static final ZoneOffsetTransitionRule[] EMPTY_LASTRULES =
         new ZoneOffsetTransitionRule[0];
     /**
      * The zero-length ldt array.
+     * <p>
+     *  零长度ldt数组。
+     * 
      */
     private static final LocalDateTime[] EMPTY_LDT_ARRAY = new LocalDateTime[0];
 
     /**
      * Obtains an instance of a ZoneRules.
      *
+     * <p>
+     *  获取ZoneRules的实例。
+     * 
+     * 
      * @param baseStandardOffset  the standard offset to use before legal rules were set, not null
      * @param baseWallOffset  the wall offset to use before legal rules were set, not null
      * @param standardOffsetTransitionList  the list of changes to the standard offset, not null
@@ -190,6 +264,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Obtains an instance of ZoneRules that has fixed zone rules.
      *
+     * <p>
+     *  获取具有固定区域规则的ZoneRules的实例。
+     * 
+     * 
      * @param offset  the offset this fixed zone rules is based on, not null
      * @return the zone rules, not null
      * @see #isFixedOffset()
@@ -202,6 +280,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Creates an instance.
      *
+     * <p>
+     *  创建实例。
+     * 
+     * 
      * @param baseStandardOffset  the standard offset to use before legal rules were set, not null
      * @param baseWallOffset  the wall offset to use before legal rules were set, not null
      * @param standardOffsetTransitionList  the list of changes to the standard offset, not null
@@ -259,6 +341,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param standardTransitions  the standard transitions, not null
      * @param standardOffsets  the standard offsets, not null
      * @param savingsInstantTransitions  the standard transitions, not null
@@ -302,6 +388,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Creates an instance of ZoneRules that has fixed zone rules.
      *
+     * <p>
+     *  创建具有固定区域规则的ZoneRules的实例。
+     * 
+     * 
      * @param offset  the offset this fixed zone rules is based on, not null
      * @return the zone rules, not null
      * @see #isFixedOffset()
@@ -319,6 +409,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */
@@ -329,6 +423,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Writes the object using a
      * <a href="../../../serialized-form.html#java.time.zone.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.zone.Ser">专用序列化表单</a>写入对象。
+     * 
+     * 
      * @serialData
      * <pre style="font-size:1.0em">{@code
      *
@@ -395,6 +493,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Writes the state to the stream.
      *
+     * <p>
+     *  将状态写入流。
+     * 
+     * 
      * @param out  the output stream, not null
      * @throws IOException if an error occurs
      */
@@ -422,6 +524,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Reads the state from the stream.
      *
+     * <p>
+     *  从流中读取状态。
+     * 
+     * 
      * @param in  the input stream, not null
      * @return the created object, not null
      * @throws IOException if an error occurs
@@ -459,6 +565,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Checks of the zone rules are fixed, such that the offset never varies.
      *
+     * <p>
+     *  区域规则的检查是固定的,使得偏移从不改变。
+     * 
+     * 
      * @return true if the time-zone is fixed and the offset never changes
      */
     public boolean isFixedOffset() {
@@ -472,6 +582,12 @@ public final class ZoneRules implements Serializable {
      * one valid offset for each instant.
      * This method returns that offset.
      *
+     * <p>
+     *  获取这些规则中指定时刻适用的偏移量。
+     * <p>
+     * 从瞬时到偏移的映射是简单的,每个时刻只有一个有效偏移。此方法返回该偏移量。
+     * 
+     * 
      * @param instant  the instant to find the offset for, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the offset, not null
@@ -529,6 +645,21 @@ public final class ZoneRules implements Serializable {
      * about the correct offset should use a combination of this method,
      * {@link #getValidOffsets(LocalDateTime)} and {@link #getTransition(LocalDateTime)}.
      *
+     * <p>
+     *  在这些规则中为指定的本地日期时间获取适当的偏移量。
+     * <p>
+     *  从本地日期时间到偏移的映射不是简单的。有三种情况：
+     * <ul>
+     *  <li>正常,具有一个有效偏移量。对于绝大多数年份,正常情况适用,其中本地日期时间存在单个有效偏移量。</li> <li> Gap,零有效偏移量。
+     * 这是当时钟向前跳跃通常由于春天夏令时从"冬天"改变为"夏天"。在间隙中存在没有有效偏移的本地日期时间值。</li> <li>重叠,具有两个有效偏移量。
+     * 这是当时钟被放回,通常由于秋季夏令从"夏季"改变为"冬季"。在重叠中,存在具有两个有效偏移量的本地日期时间值。</li>。
+     * </ul>
+     *  因此,对于任何给定的本地日期时间,可以存在零个,一个或两个有效偏移量。此方法在Normal情况下返回单个偏移量,在Gap或Overlap情况下,它返回转移前的偏移量。
+     * <p>
+     *  因为在Gap和重叠的情况下,返回的偏移量是"最佳"值,而不是"正确"值,所以应该小心对待。
+     * 关心正确偏移的应用程序应结合使用此方法{@link #getValidOffsets(LocalDateTime)}和{@link #getTransition(LocalDateTime)}。
+     * 
+     * 
      * @param localDateTime  the local date-time to query, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the best available offset for the local date-time, not null
@@ -579,6 +710,28 @@ public final class ZoneRules implements Serializable {
      * This has never happened in the history of time-zones and thus has no special handling.
      * However, if it were to happen, then the list would return more than 2 entries.
      *
+     * <p>
+     * 获取这些规则中指定的本地日期时间适用的偏移量。
+     * <p>
+     *  从本地日期时间到偏移的映射不是简单的。有三种情况：
+     * <ul>
+     *  <li>正常,具有一个有效偏移量。对于绝大多数年份,正常情况适用,其中本地日期时间存在单个有效偏移量。</li> <li> Gap,零有效偏移量。
+     * 这是当时钟向前跳跃通常由于春天夏令时从"冬天"改变为"夏天"。在间隙中存在没有有效偏移的本地日期时间值。</li> <li>重叠,具有两个有效偏移量。
+     * 这是当时钟被放回,通常由于秋季夏令从"夏季"改变为"冬季"。在重叠中,存在具有两个有效偏移量的本地日期时间值。</li>。
+     * </ul>
+     *  因此,对于任何给定的本地日期时间,可以存在零个,一个或两个有效偏移量。此方法返回有效偏移量的列表,其是大小为0,1或2的列表。
+     * 在存在两个偏移量的情况下,较早的偏移量在索引0处返回,而较晚的偏移量在索引1处返回。
+     * <p>
+     *  有多种方法来处理从{@code LocalDateTime}的转换。一种技术,使用这种方法,将是：
+     * <pre>
+     *  List&lt; ZoneOffset&gt; validOffsets = rules.getOffset(localDT); if(validOffsets.size()== 1){//正常情况：只有一个有效的偏移zoneOffset = validOffsets.get(0); }
+     *  else {// Gap or Overlap：确定从transition中做什么(这将是非null)ZoneOffsetTransition trans = rules.getTransition(localDT); }
+     * }。
+     * </pre>
+     * <p>
+     * 在理论上,有可能有两个以上的有效偏移。如果时钟快速连续被多次回放,就会发生这种情况。这从来没有发生在时区的历史,因此没有特殊的处理。然而,如果它发生,那么列表将返回多于2个条目。
+     * 
+     * 
      * @param localDateTime  the local date-time to query for valid offsets, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the list of valid offsets, may be immutable, not null
@@ -622,6 +775,24 @@ public final class ZoneRules implements Serializable {
      *  }
      * </pre>
      *
+     * <p>
+     *  获取在这些规则中指定的本地日期时间适用的偏移转换。
+     * <p>
+     *  从本地日期时间到偏移的映射不是简单的。有三种情况：
+     * <ul>
+     *  <li>正常,具有一个有效偏移量。对于绝大多数年份,正常情况适用,其中本地日期时间存在单个有效偏移量。</li> <li> Gap,零有效偏移量。
+     * 这是当时钟向前跳跃通常由于春天夏令时从"冬天"改变为"夏天"。在间隙中存在没有有效偏移的本地日期时间值。</li> <li>重叠,具有两个有效偏移量。
+     * 这是当时钟被放回,通常由于秋季夏令从"夏季"改变为"冬季"。在重叠中,存在具有两个有效偏移量的本地日期时间值。</li>。
+     * </ul>
+     *  转换用于模拟间隙或重叠的情况。正常情况将返回null。
+     * <p>
+     *  有多种方法来处理从{@code LocalDateTime}的转换。一种技术,使用这种方法,将是：
+     * <pre>
+     * ZoneOffsetTransition trans = rules.getTransition(localDT); if(trans == null){//间隙或重叠：确定从转换做什么} else {//正常情况：只有一个有效的偏移zoneOffset = rule.getOffset(localDT); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @param localDateTime  the local date-time to query for offset transition, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the offset transition, null if the local date-time is not in transition
@@ -685,6 +856,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Finds the offset info for a local date-time and transition.
      *
+     * <p>
+     *  查找本地日期时间和转换的偏移量信息。
+     * 
+     * 
      * @param dt  the date-time, not null
      * @param trans  the transition, not null
      * @return the offset info, not null
@@ -715,6 +890,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Finds the appropriate transition array for the given year.
      *
+     * <p>
+     *  找到给定年份的适当转换数组。
+     * 
+     * 
      * @param year  the year, not null
      * @return the transition array, not null
      */
@@ -743,6 +922,12 @@ public final class ZoneRules implements Serializable {
      * The standard offset is the offset before any daylight saving time is applied.
      * This is typically the offset applicable during winter.
      *
+     * <p>
+     *  获取此区域中指定时刻的标准偏移量。
+     * <p>
+     *  这提供了对标准偏移随时间变化的历史信息的访问。标准偏移是应用任何夏令时之前的偏移。这通常是冬季适用的偏移量。
+     * 
+     * 
      * @param instant  the instant to find the offset information for, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the standard offset, not null
@@ -773,6 +958,15 @@ public final class ZoneRules implements Serializable {
      * {@link #getOffset(java.time.Instant) actual} and
      * {@link #getStandardOffset(java.time.Instant) standard} offsets.
      *
+     * <p>
+     *  获取此区域中指定时刻正在使用的夏令时数量。
+     * <p>
+     *  这提供了有关夏令时量如何随时间变化的历史信息。这是标准偏移和实际偏移之间的差异。通常该量在冬季为零,在夏季为一小时。时区是基于秒的,因此持续时间的纳秒部分将为零。
+     * <p>
+     *  此默认实施方案根据{@link #getOffset(java.time.Instant)actual}和{@link #getStandardOffset(java.time.Instant)standard}
+     * 偏移量计算持续时间。
+     * 
+     * 
      * @param instant  the instant to find the daylight savings for, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the difference between the standard and actual offset, not null
@@ -796,6 +990,15 @@ public final class ZoneRules implements Serializable {
      * This default implementation compares the {@link #getOffset(java.time.Instant) actual}
      * and {@link #getStandardOffset(java.time.Instant) standard} offsets.
      *
+     * <p>
+     *  检查指定的时间是否为夏令时。
+     * <p>
+     *  这将检查标准偏移和实际偏移在指定时刻是否相同。如果不是,则假定夏令时运行。
+     * <p>
+     * 此默认实现将{@link #getOffset(java.time.Instant)actual}和{@link #getStandardOffset(java.time.Instant)standard}
+     * 偏移量进行比较。
+     * 
+     * 
      * @param instant  the instant to find the offset information for, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the standard offset, not null
@@ -813,6 +1016,14 @@ public final class ZoneRules implements Serializable {
      * This default implementation checks if {@link #getValidOffsets(java.time.LocalDateTime)}
      * contains the specified offset.
      *
+     * <p>
+     *  检查偏移日期时间对这些规则是否有效。
+     * <p>
+     *  为了有效,本地日期时间不能在间隙中,并且偏移必须与有效偏移之一匹配。
+     * <p>
+     *  此默认实现检查{@link #getValidOffsets(java.time.LocalDateTime)}是否包含指定的偏移量。
+     * 
+     * 
      * @param localDateTime  the date-time to check, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @param offset  the offset to check, null returns false
@@ -829,6 +1040,12 @@ public final class ZoneRules implements Serializable {
      * For example, if the instant represents a point where "Summer" daylight savings time
      * applies, then the method will return the transition to the next "Winter" time.
      *
+     * <p>
+     *  获取指定时刻后的下一个转换。
+     * <p>
+     *  这将返回指定时刻之后的下一个转换的详细信息。例如,如果该时刻表示应用"夏季"夏令时的点,则该方法将返回到下一个"冬季"时间的转换。
+     * 
+     * 
      * @param instant  the instant to get the next transition after, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the next transition after the specified instant, null if this is after the last transition
@@ -876,6 +1093,12 @@ public final class ZoneRules implements Serializable {
      * For example, if the instant represents a point where "summer" daylight saving time
      * applies, then the method will return the transition from the previous "winter" time.
      *
+     * <p>
+     *  获取指定时刻之前的转换。
+     * <p>
+     *  这将返回指定时刻之后的上一个转换的详细信息。例如,如果瞬时表示"夏季"夏令时适用的点,则该方法将返回从前一"冬季"时间的转变。
+     * 
+     * 
      * @param instant  the instant to get the previous transition after, not null, but null
      *  may be ignored if the rules have a single offset for all instants
      * @return the previous transition after the specified instant, null if this is before the first transition
@@ -938,6 +1161,14 @@ public final class ZoneRules implements Serializable {
      * The list will be empty for fixed offset rules and for any time-zone where there has
      * only ever been a single offset. The list will also be empty if the transition rules are unknown.
      *
+     * <p>
+     *  获取完全定义的转换的完整列表。
+     * <p>
+     *  此规则实例的完整转换集由此方法和{@link #getTransitionRules()}定义。此方法返回已完全定义的那些转换。这些通常是历史的,但可能在未来。
+     * <p>
+     * 对于固定偏移规则和任何只有单个偏移的时区,该列表将为空。如果转换规则未知,列表也将为空。
+     * 
+     * 
      * @return an immutable list of fully defined transitions, not null
      */
     public List<ZoneOffsetTransition> getTransitions() {
@@ -967,6 +1198,18 @@ public final class ZoneRules implements Serializable {
      * The list will be empty for fixed offset rules and for any time-zone where there is no
      * daylight saving time. The list will also be empty if the transition rules are unknown.
      *
+     * <p>
+     *  获取超出转换列表中定义的转换规则的列表。
+     * <p>
+     *  此规则实例的完整转换集由此方法和{@link #getTransitions()}定义。此方法返回{@link ZoneOffsetTransitionRule}的实例,定义将发生转换的算法。
+     * <p>
+     *  对于任何给定的{@code ZoneRules},此列表包含已经完全定义的年份之后的年份的转换规则。这些规则通常指未来的夏令时规则更改。
+     * <p>
+     *  如果区域将夏令时定义为未来,则列表通常为大小2,并保存有关进入和退出夏令时的信息。如果区域没有夏令时,或关于未来变化的信息不确定,则列表将为空。
+     * <p>
+     *  对于固定偏移规则和没有夏令时的任何时区,该列表将为空。如果转换规则未知,列表也将为空。
+     * 
+     * 
      * @return an immutable list of transition rules, not null
      */
     public List<ZoneOffsetTransitionRule> getTransitionRules() {
@@ -982,6 +1225,14 @@ public final class ZoneRules implements Serializable {
      * <p>
      * This definition should result in implementations comparing their entire state.
      *
+     * <p>
+     *  检查这组规则是否等同于另一个。
+     * <p>
+     *  如果对于任何给定的输入即时或本地日期时间它们将总是导致相同的输出,则两个规则集是相等的。来自两个不同组的规则可能返回假,即使它们实际上是相同的。
+     * <p>
+     * 这个定义应该导致实现比较它们的整个状态。
+     * 
+     * 
      * @param otherRules  the other rules, null returns false
      * @return true if this rules is the same as that specified
      */
@@ -1004,6 +1255,8 @@ public final class ZoneRules implements Serializable {
     /**
      * Returns a suitable hash code given the definition of {@code #equals}.
      *
+     * <p>
+     * 
      * @return the hash code
      */
     @Override
@@ -1018,6 +1271,10 @@ public final class ZoneRules implements Serializable {
     /**
      * Returns a string describing this object.
      *
+     * <p>
+     *  给定{@code #equals}的定义,返回一个合适的哈希码。
+     * 
+     * 
      * @return a string for debugging, not null
      */
     @Override

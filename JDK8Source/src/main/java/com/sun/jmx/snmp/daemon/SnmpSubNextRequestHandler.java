@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,9 @@ class SnmpSubNextRequestHandler extends SnmpSubRequestHandler {
     /**
      * The constructor initialize the subrequest with the whole varbind
      * list contained in the original request.
+     * <p>
+     *  构造函数使用原始请求中包含的整个varbind列表初始化子请求。
+     * 
      */
     protected SnmpSubNextRequestHandler(SnmpAdaptorServer server,
                                         SnmpMibAgent agent,
@@ -146,6 +150,9 @@ class SnmpSubNextRequestHandler extends SnmpSubRequestHandler {
 
     /**
      * The method updates the varbind list of the subrequest.
+     * <p>
+     *  该方法更新子请求的varbind列表。
+     * 
      */
     protected  void updateRequest(SnmpVarBind var, int pos) {
         if (SNMP_ADAPTOR_LOGGER.isLoggable(Level.FINEST)) {
@@ -169,6 +176,9 @@ class SnmpSubNextRequestHandler extends SnmpSubRequestHandler {
      * Prior to calling the method, one must make sure that the operation was
      * successful. As such the method getErrorIndex or getErrorStatus should be
      * called.
+     * <p>
+     *  该方法使用预先调用的操作的结果更新给定的var绑定列表。在调用该方法之前,必须确保操作成功。因此应该调用getErrorIndex或getErrorStatus方法。
+     * 
      */
     protected void updateResult(SnmpVarBind[] result) {
 
@@ -264,6 +274,11 @@ class SnmpSubNextRequestHandler extends SnmpSubRequestHandler {
                       realValue.value);
 
                       result[index].value = realValue.value;
+                    /* <p>
+                    /*  Vector v = new Vector(); SnmpMibRequest getReq = createMibRequest(v,version,null); SnmpVarBind realV
+                    /* alue = new SnmpVarBind(oid); getReq.addVarBind(trueValue); try {deeperAgent.get(getReq); } catch(Snmp
+                    /* StatusException e){e.printStackTrace(); }}。
+                    /* 
                     */
                 }
             }

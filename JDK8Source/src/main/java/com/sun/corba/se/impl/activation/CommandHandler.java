@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,8 @@ import org.omg.CORBA.ORB;
 import java.io.PrintStream;
 
 /**
+/* <p>
+/* 
  * @author      Rohit Garg
  * @since       JDK1.2
  */

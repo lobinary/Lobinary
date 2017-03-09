@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,15 @@ import javax.xml.datatype.DatatypeConstants;
  * </p>
  *
  *
+ * <p>
+ *  <p>代表<a href ="http://www.w3.org/TR/xpath-datamodel#中指定的<code> Duration </code>的子类型<code> xdt：yearMo
+ * nthDuration </code> yearMonthDuration"> XQuery 1.0和XPath 2.0数据模型,xdt：yearMonthDuration </a>。
+ * </p>。
+ * 
+ *  <p> DurationYearMonth对象表示Gregorian时间段,其中包含仅包含年份和月份组成部分的词汇表达式"<em> PnYnM </em>"。
+ * </p>
+ * 
+ * 
  * @author <a href="mailto:Vikram.Aroskar@Sun.COM">Vikram Aroskar</a>
  * @author <a href="mailto:Huizhe.wang@oracle.com">Joe Wang</a>
  * @version $Revision: 1.1 $, $Date: 2010/05/19 05:02:55 $
@@ -57,6 +67,12 @@ class DurationYearMonthImpl
      * <p>All the parameters are optional as long as at least one field is present.
      * If specified, parameters have to be zero or positive.</p>
      *
+     * <p>
+     *  <p>通过单独指定每个字段构造一个新的Duration对象。</p>
+     * 
+     *  <p>只要至少有一个字段存在,所有参数都是可选的。如果指定,参数必须为零或正数。</p>
+     * 
+     * 
      * @param isPositive Set to <code>false</code> to create a negative duration. When the length
      *   of the duration is zero, this parameter will be ignored.
      * @param years of this <code>Duration</code>
@@ -82,6 +98,15 @@ class DurationYearMonthImpl
          *
      * <p>A {@link DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.</p>
      *
+     * <p>
+     *  <p>使用<code>年</code>和<code>月</code>定义的<code> xdt：yearMonthDuration </code>类型构造<code> Duration </code>
+     * 。
+     * <a href="http://www.w3.org/TR/xpath-datamodel#yearMonthDuration">
+     *  XQuery 1.0和XPath 2.0数据模型,xdt：yearMonthDuration </a>。</p>
+     * 
+     *  <p> {@link DatatypeConstants#FIELD_UNDEFINED}值表示未设置字段。</p>
+     * 
+     * 
      * @param isPositive Set to <code>false</code> to create a negative duration. When the length
      *   of the duration is zero, this parameter will be ignored.
          * @param year Year of <code>Duration</code>.
@@ -133,6 +158,28 @@ class DurationYearMonthImpl
          *
      * <p>Any remaining milliseconds after determining the year and month are discarded.</p>
          *
+         * <p>
+         *  <p>使用指定的毫秒数构建<code> xdt：yearMonthDuration </code>类型的<code> Duration </code>
+         * <a href="http://www.w3.org/TR/xpath-datamodel#yearMonthDuration">
+         *  XQuery 1.0和XPath 2.0数据模型,xdt：yearMonthDuration </a>。</p>
+         * 
+         * <p>数据类型<code> xdt：yearMonthDuration </code>是<code> xs：duration </code>的子类型,其词法表示仅包含年份和月份组件。
+         * 此数据类型位于命名空间{@link javax.xml.XMLConstants#W3C_XPATH_DATATYPE_NS_URI}中。</p>。
+         * 
+         *  <p>这两个值都是通过从指定的毫秒计算它们的值来设置的,并且可以使用所创建的{@link Duration}的<code> get </code>方法。值符合并由以下定义：</p>
+         * <ul>
+         *  <li> ISO 8601：2000(E)第5.5.3.2节替代格式</li> <li> <a href="http://www.w3.org/TR/xmlschema-2/#isoformats">
+         *  W3C XML Schema 1.0第2部分,附录D,ISO 8601日期和时间格式</a>。
+         * </li>
+         *  <li> {@ link XMLGregorianCalendar}日期/时间XML模式1.0与Java表示之间的数据类型字段映射</li>
+         * </ul>
+         * 
+         *  <p>默认的开始实例由{@link GregorianCalendar}使用时代的开始来定义：例如{@link java.util.Calendar#YEAR} = 1970,{@link java.util.Calendar# MONTH}
+         *  = {@link java.util.Calendar#JANUARY},{@link java.util.Calendar#DATE} = 1等。
+         * 这很重要,因为公历日历中有变化,例如闰年在不同的日期= {@link java.util.Calendar#FEBRUARY},因此{@link Duration#getMonths()}的结果可能会受
+         * 到影响。
+         * </p>。
+         * 
          * @param durationInMilliseconds Milliseconds of <code>Duration</code> to create.
          */
     protected DurationYearMonthImpl(long durationInMilliseconds) {
@@ -164,6 +211,11 @@ class DurationYearMonthImpl
      * An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
      * if implementation capacities are exceeded.</p>
      *
+     * <p>
+     * 
+     *  <p>确定年份和月份后的任何剩余毫秒将被舍弃。</p>
+     * 
+     * 
          * @param lexicalRepresentation Lexical representation of a duration.
          *
          * @throws IllegalArgumentException If <code>lexicalRepresentation</code> is not a valid representation of a <code>Duration</code> expressed only in terms of years and months.
@@ -184,6 +236,16 @@ class DurationYearMonthImpl
 
     /**
      * The value space of xs:yearMonthDuration is the set of xs:integer month values.
+     * <p>
+     * <p>通过解析其<code> String </code>表示形式,"<em> PnYnM </em>",</code>来构造类型<code> xdt：yearMonthDuration </code>
+     * 的< a href ="http://www.w3.org/TR/xpath-datamodel#yearMonthDuration"> XQuery 1.0和XPath 2.0数据模型,xdt：yea
+     * rMonthDuration </a>。
+     * </p>。
+     * 
+     *  <p>数据类型<code> xdt：yearMonthDuration </code>是<code> xs：duration </code>的子类型,其词法表示仅包含年份和月份组件。
+     * 此数据类型位于命名空间{@link javax.xml.XMLConstants#W3C_XPATH_DATATYPE_NS_URI}中。</p>。
+     * 
+     * 
      * @return the value of yearMonthDuration
      */
     public int getValue() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ import java.net.URL;
  * that are subsequently received on those channels will be played using
  * the sound of the selected instrument.
  *
+ * <p>
+ *  仪器是具有某些参数设置的声音合成算法,通常被设计为模拟特定的真实世界乐器或实现特定类型的声音效果。仪器通常存储在称为声库的集合中。
+ * 在仪器可用于播放音符之前,必须首先将其加载到合成器上,然后必须通过程序更改命令选择在一个或多个通道上使用。随后在这些通道上接收的MIDI音符将使用所选乐器的声音播放。
+ * 
+ * 
  * @see Soundbank
  * @see Soundbank#getInstruments
  * @see Patch
@@ -53,6 +59,9 @@ public abstract class Instrument extends SoundbankResource {
 
     /**
      * Instrument patch
+     * <p>
+     *  仪器补丁
+     * 
      */
     private final Patch patch;
 
@@ -63,6 +72,11 @@ public abstract class Instrument extends SoundbankResource {
      * instrument, the sound bank will search its contents for this instrument's <code>Patch</code>,
      * and the instrument will be loaded into the synthesizer at the
      * bank and program location indicated by the <code>Patch</code> object.
+     * <p>
+     *  从指定的<code> Patch </code>构造一个新的MIDI乐器。
+     * 当随后请求加载仪器时,声音库将搜索其仪器的<code> Patch </code>的内容,仪器将被加载到合并器中由<code>指示的库和程序位置> Patch </code>对象。
+     * 
+     * 
      * @param soundbank sound bank containing the instrument
      * @param patch the patch of this instrument
      * @param name the name of this instrument
@@ -80,6 +94,8 @@ public abstract class Instrument extends SoundbankResource {
     /**
      * Obtains the <code>Patch</code> object that indicates the bank and program
      * numbers where this instrument is to be stored in the synthesizer.
+     * <p>
+     * 
      * @return this instrument's patch
      */
     public Patch getPatch() {

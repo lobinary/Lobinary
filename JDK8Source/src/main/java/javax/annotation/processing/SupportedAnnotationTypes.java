@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,12 @@ import static java.lang.annotation.ElementType.*;
  * Processor#getSupportedAnnotationTypes strings conforming to the
  * grammar} should be used as values.
  *
+ * <p>
+ *  用于指示注释处理器支持的注释类型的注释。
+ *  {@link Processor#getSupportedAnnotationTypes}方法可以根据此注释的值构造其结果,如{@link AbstractProcessor#getSupportedAnnotationTypes}
+ * 所做。
+ *  用于指示注释处理器支持的注释类型的注释。只应使用符合语法的{@linkplain Processor#getSupportedAnnotationTypes字符串}作为值。
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;
@@ -49,6 +56,9 @@ import static java.lang.annotation.ElementType.*;
 public @interface SupportedAnnotationTypes {
     /**
      * Returns the names of the supported annotation types.
+     * <p>
+     * 
+     * 
      * @return the names of the supported annotation types
      */
     String [] value();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,9 @@ import javax.print.attribute.PrintRequestAttributeSet;
  * specified collection of documents as a single print job with a set of
  * job attributes.
  * <P>
+ * <p>
+ *  从MultiDocPrintService获取,MultiDocPrintJob可以将指定的文档集合作为具有一组作业属性的单个打印作业打印。
+ * <P>
  */
 
 public interface MultiDocPrintJob extends DocPrintJob {
@@ -46,6 +50,10 @@ public interface MultiDocPrintJob extends DocPrintJob {
      * want to monitor the success or failure should register a
      * PrintJobListener.
      *
+     * <p>
+     *  使用指定的作业属性打印MultiDoc。对于给定的打印作业,此方法只应调用一次。再次调用它不会导致将新作业假脱机到打印机。服务实现将定义用于服务中断和恢复的策略。
+     * 要监视成功或失败的应用程序客户端应注册一个PrintJobListener。
+     * 
      * @param multiDoc The documents to be printed. ALL must be a flavor
      *        supported by the PrintJob {@literal &} PrintService.
      *

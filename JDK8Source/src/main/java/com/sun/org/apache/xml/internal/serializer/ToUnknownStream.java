@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ToUnknownStream.java,v 1.3 2005/09/28 13:49:08 pvedula Exp $
+ * <p>
+ *  $ Id：ToUnknownStream.java,v 1.3 2005/09/28 13:49:08 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -52,84 +65,139 @@ import org.xml.sax.SAXException;
  *
  * This class is not a public API, it is public because it is used within Xalan.
  * @xsl.usage internal
+ * <p>
+ *  他的类包装另一个SerializationHandler。被包装的对象将处理XML或HTML,直到稍后当第一个XML标签被看到时才知道。
+ * 如果第一个标签是<html>,则被包装的对象是一个HTML处理程序,否则它是一个XML处理程序。
+ * 
+ *  这个类有效地缓存了前几个调用,然后将它们传递到包装的处理程序(一旦存在)。之后,后续调用简单地直接传递到包装的处理程序。
+ * 
+ *  此类的用户不知道输出是ultimatley XML还是HTML。
+ * 
+ *  这个类不是公共API,它是公共的,因为它在Xalan内使用。 @ xsl.usage internal
+ * 
  */
 public final class ToUnknownStream extends SerializerBase
 {
 
     /**
      * The wrapped handler, initially XML but possibly switched to HTML
+     * <p>
+     *  包装的处理程序,最初是XML,但可能切换到HTML
+     * 
      */
     private SerializationHandler m_handler;
 
     /**
      * A String with no characters
+     * <p>
+     * 没有字符的字符串
+     * 
      */
     private static final String EMPTYSTRING = "";
 
     /**
      * true if the underlying handler (XML or HTML) is fully initialized
+     * <p>
+     *  如果底层处理程序(XML或HTML)完全初始化,则为true
+     * 
      */
     private boolean m_wrapped_handler_not_initialized = false;
 
 
     /**
      * the prefix of the very first tag in the document
+     * <p>
+     *  文档中第一个标记的前缀
+     * 
      */
     private String m_firstElementPrefix;
     /**
      * the element name (including any prefix) of the very first tag in the document
+     * <p>
+     *  文档中第一个标记的元素名称(包括任何前缀)
+     * 
      */
     private String m_firstElementName;
 
     /**
      * the namespace URI associated with the first element
+     * <p>
+     *  与第一个元素相关联的命名空间URI
+     * 
      */
     private String m_firstElementURI;
 
     /**
      * the local name (no prefix) associated with the first element
+     * <p>
+     *  与第一个元素相关联的本地名称(无前缀)
+     * 
      */
     private String m_firstElementLocalName = null;
 
     /**
      * true if the first tag has been emitted to the wrapped handler
+     * <p>
+     *  如果第一个标签已发送到包装的处理程序,则为true
+     * 
      */
     private boolean m_firstTagNotEmitted = true;
 
     /**
      * A collection of namespace URI's (only for first element).
      * _namespacePrefix has the matching prefix for these URI's
+     * <p>
+     *  命名空间URI的集合(仅适用于第一个元素)。 _namespacePrefix具有这些URI的匹配前缀
+     * 
      */
     private Vector m_namespaceURI = null;
     /**
      * A collection of namespace Prefix (only for first element)
      * _namespaceURI has the matching URIs for these prefix'
+     * <p>
+     *  命名空间前缀(仅适用于第一个元素)的集合_namespaceURI具有匹配的URIs这些前缀'
+     * 
      */
     private Vector m_namespacePrefix = null;
 
     /**
      * true if startDocument() was called before the underlying handler
      * was initialized
+     * <p>
+     *  true如果在初始化底层处理程序之前调用startDocument()
+     * 
      */
     private boolean m_needToCallStartDocument = false;
     /**
      * true if setVersion() was called before the underlying handler
      * was initialized
+     * <p>
+     *  true如果setVersion()在底层处理程序初始化之前调用
+     * 
      */
     private boolean m_setVersion_called = false;
     /**
      * true if setDoctypeSystem() was called before the underlying handler
      * was initialized
+     * <p>
+     *  true如果setDoctypeSystem()在底层处理程序初始化之前调用
+     * 
      */
     private boolean m_setDoctypeSystem_called = false;
     /**
      * true if setDoctypePublic() was called before the underlying handler
      * was initialized
+     * <p>
+     *  true如果setDoctypePublic()在底层处理程序初始化之前调用
+     * 
      */
     private boolean m_setDoctypePublic_called = false;
     /**
      * true if setMediaType() was called before the underlying handler
      * was initialized
+     * <p>
+     *  true如果setMediaType()在底层处理程序初始化之前调用
+     * 
      */
     private boolean m_setMediaType_called = false;
 
@@ -137,6 +205,9 @@ public final class ToUnknownStream extends SerializerBase
      * Default constructor.
      * Initially this object wraps an XML Stream object, so _handler is never null.
      * That may change later to an HTML Stream object.
+     * <p>
+     *  默认构造函数。最初,此对象包装一个XML Stream对象,因此_handler永远不为null。这可能稍后更改为HTML Stream对象。
+     * 
      */
     public ToUnknownStream()
     {
@@ -144,6 +215,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#asContentHandler()
      * @return the wrapped XML or HTML handler
      */
@@ -153,11 +226,16 @@ public final class ToUnknownStream extends SerializerBase
          * that would expose the real handler to the outside.
          * Keep m_handler private so it can be internally swapped
          * to an HTML handler.
+         * <p>
+         *  这将暴露真正的处理程序到外面。保持m_handler的私有,所以它可以在内部交换到一个HTML处理程序。
+         * 
          */
         return this;
     }
 
     /**
+    /* <p>
+    /* 
      * @see SerializationHandler#close()
      */
     public void close()
@@ -166,6 +244,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#getOutputFormat()
      * @return the properties of the underlying handler
      */
@@ -175,6 +255,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#getOutputStream()
      * @return the OutputStream of the underlying XML or HTML handler
      */
@@ -184,6 +266,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#getWriter()
      * @return the Writer of the underlying XML or HTML handler
      */
@@ -194,6 +278,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * passes the call on to the underlying HTML or XML handler
+     * <p>
+     *  将调用传递到底层的HTML或XML处理程序
+     * 
+     * 
      * @see Serializer#reset()
      * @return ???
      */
@@ -204,6 +292,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Converts the DOM node to output
+     * <p>
+     *  将DOM节点转换为输出
+     * 
+     * 
      * @param node the DOM node to transform to output
      * @see DOMSerializer#serialize(Node)
      *
@@ -218,6 +310,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see SerializationHandler#setEscaping(boolean)
      */
     public boolean setEscaping(boolean escape) throws SAXException
@@ -227,6 +321,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Set the properties of the handler
+     * <p>
+     *  设置处理程序的属性
+     * 
+     * 
      * @param format the output properties to set
      * @see Serializer#setOutputFormat(Properties)
      */
@@ -237,6 +335,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Sets the output stream to write to
+     * <p>
+     *  设置要写入的输出流
+     * 
+     * 
      * @param output the OutputStream to write to
      * @see Serializer#setOutputStream(OutputStream)
      */
@@ -247,6 +349,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Sets the writer to write to
+     * <p>
+     * 将写入设置为写入
+     * 
+     * 
      * @param writer the writer to write to
      * @see Serializer#setWriter(Writer)
      */
@@ -257,6 +363,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Adds an attribute to the currenly open tag
+     * <p>
+     *  向currenly打开的标签添加属性
+     * 
+     * 
      * @param uri the URI of a namespace
      * @param localName the attribute name, without prefix
      * @param rawName the attribute name, with prefix (if any)
@@ -278,6 +388,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Adds an attribute to the currenly open tag
+     * <p>
+     *  向currenly打开的标签添加属性
+     * 
+     * 
      * @param uri the URI of a namespace
      * @param localName the attribute name, without prefix
      * @param rawName the attribute name, with prefix (if any)
@@ -303,6 +417,10 @@ public final class ToUnknownStream extends SerializerBase
     }
     /**
      * Adds an attribute to the currenly open tag
+     * <p>
+     *  向currenly打开的标签添加属性
+     * 
+     * 
      * @param rawName the attribute name, with prefix (if any)
      * @param value the value of the parameter
      * @see ExtendedContentHandler#addAttribute(String, String)
@@ -319,6 +437,9 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Adds a unique attribute to the currenly open tag
+     * <p>
+     *  向currenly打开的标记添加唯一属性
+     * 
      */
     public void addUniqueAttribute(String rawName, String value, int flags)
         throws SAXException
@@ -335,6 +456,10 @@ public final class ToUnknownStream extends SerializerBase
      * Converts the String to a character array and calls the SAX method
      * characters(char[],int,int);
      *
+     * <p>
+     *  将字符串转换为字符数组,并调用SAX方法字符(char [],int,int);
+     * 
+     * 
      * @see ExtendedContentHandler#characters(String)
      */
     public void characters(String chars) throws SAXException
@@ -350,6 +475,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see ExtendedContentHandler#endElement(String)
      */
     public void endElement(String elementName) throws SAXException
@@ -363,6 +492,8 @@ public final class ToUnknownStream extends SerializerBase
 
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ContentHandler#startPrefixMapping(String, String)
      * @param prefix The prefix that maps to the URI
      * @param uri The URI for the namespace
@@ -378,6 +509,11 @@ public final class ToUnknownStream extends SerializerBase
      * startElement() and before and endElement().
      * startPrefixMapping(prefix,uri) would be used before the
      * startElement() call.
+     * <p>
+     *  在使用startElement()和before和endElement()启动元素之后指示前缀/ uri命名空间映射时,将使用此方法。
+     *  startPrefixMapping(prefix,uri)将在startElement()调用之前使用。
+     * 
+     * 
      * @param uri the URI of the namespace
      * @param prefix the prefix associated with the given URI.
      *
@@ -413,6 +549,9 @@ public final class ToUnknownStream extends SerializerBase
                 /* we've already seen a startElement, and this is a prefix mapping
                  * for the up coming element, so flush the old element
                  * then send this event on its way.
+                 * <p>
+                 *  对于上来的元素,所以刷新旧元素,然后发送这个事件的方式。
+                 * 
                  */
                 flush();
                 pushed = m_handler.startPrefixMapping(prefix, uri, shouldFlush);
@@ -445,6 +584,9 @@ public final class ToUnknownStream extends SerializerBase
     /**
       * This method cannot be cached because default is different in
       * HTML and XML (we need more than a boolean).
+      * <p>
+      *  此方法无法缓存,因为默认值在HTML和XML中不同(我们需要一个布尔值)。
+      * 
       */
 
     public void setVersion(String version)
@@ -457,6 +599,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ContentHandler#startDocument()
      */
     public void startDocument() throws SAXException
@@ -497,6 +641,9 @@ public final class ToUnknownStream extends SerializerBase
                 /* this is not the first element, but a later one.
                  * But we have the old element pending, so flush it out,
                  * then send this one on its way.
+                 * <p>
+                 *  但是我们有旧元素待处理,所以冲洗出来,然后发送这个在它的路上。
+                 * 
                  */
                 flush();
                 m_handler.startElement(namespaceURI, localName, elementName,  atts);
@@ -506,6 +653,9 @@ public final class ToUnknownStream extends SerializerBase
                 /* this is the very first element that we have seen,
                  * so save it for flushing later.  We may yet get to know its
                  * URI due to added attributes.
+                 * <p>
+                 *  所以保存为稍后刷新。由于添加的属性,我们可能还是知道它的URI。
+                 * 
                  */
 
                 m_wrapped_handler_not_initialized = true;
@@ -529,6 +679,10 @@ public final class ToUnknownStream extends SerializerBase
                  * addAttributes() In this case m_attributes is only used for the
                  * first element, after that this class totally delegates to the
                  * wrapped handler which is either XML or HTML.
+                 * <p>
+                 *  只是委托给包装的处理程序,但我们要将这些属性添加到m_attributes。所以我必须调用super。
+                 *  addAttributes()在这种情况下,m_attributes只用于第一个元素,之后这个类完全委托给包装处理程序,它是XML或HTML。
+                 * 
                  */
                 if (atts != null)
                     super.addAttributes(atts);
@@ -551,6 +705,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see ExtendedLexicalHandler#comment(String)
      */
     public void comment(String comment) throws SAXException
@@ -570,6 +728,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getDoctypePublic()
      */
     public String getDoctypePublic()
@@ -580,6 +742,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getDoctypeSystem()
      */
     public String getDoctypeSystem()
@@ -589,6 +755,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getEncoding()
      */
     public String getEncoding()
@@ -598,6 +768,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getIndent()
      */
     public boolean getIndent()
@@ -607,6 +781,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getIndentAmount()
      */
     public int getIndentAmount()
@@ -616,6 +794,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     * 将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getMediaType()
      */
     public String getMediaType()
@@ -625,6 +807,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getOmitXMLDeclaration()
      */
     public boolean getOmitXMLDeclaration()
@@ -634,6 +820,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getStandalone()
      */
     public String getStandalone()
@@ -643,6 +833,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#getVersion()
      */
     public String getVersion()
@@ -651,6 +845,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see XSLOutputAttributes#setDoctype(String, String)
      */
     public void setDoctype(String system, String pub)
@@ -662,6 +858,10 @@ public final class ToUnknownStream extends SerializerBase
     /**
      * Set the doctype in the underlying XML handler. Remember that this method
      * was called, just in case we need to transfer this doctype to an HTML handler
+     * <p>
+     *  在底层XML处理程序中设置doctype。记住这个方法被调用,只是为了防止我们需要将这个doctype传递给HTML处理程序
+     * 
+     * 
      * @param doctype the public doctype to set
      * @see XSLOutputAttributes#setDoctypePublic(String)
      */
@@ -674,6 +874,10 @@ public final class ToUnknownStream extends SerializerBase
     /**
      * Set the doctype in the underlying XML handler. Remember that this method
      * was called, just in case we need to transfer this doctype to an HTML handler
+     * <p>
+     *  在底层XML处理程序中设置doctype。记住这个方法被调用,只是为了防止我们需要将这个doctype传递给HTML处理程序
+     * 
+     * 
      * @param doctype the system doctype to set
      * @see XSLOutputAttributes#setDoctypeSystem(String)
      */
@@ -685,6 +889,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#setEncoding(String)
      */
     public void setEncoding(String encoding)
@@ -694,6 +902,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#setIndent(boolean)
      */
     public void setIndent(boolean indent)
@@ -703,6 +915,9 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
      */
     public void setIndentAmount(int value)
     {
@@ -710,6 +925,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see XSLOutputAttributes#setMediaType(String)
      */
     public void setMediaType(String mediaType)
@@ -720,6 +937,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#setOmitXMLDeclaration(boolean)
      */
     public void setOmitXMLDeclaration(boolean b)
@@ -729,6 +950,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see XSLOutputAttributes#setStandalone(String)
      */
     public void setStandalone(String standalone)
@@ -737,11 +962,17 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see XSLOutputAttributes#setVersion(String)
      */
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.DeclHandler#attributeDecl(String, String, String, String, String)
      */
     public void attributeDecl(
@@ -757,6 +988,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.DeclHandler#elementDecl(String, String)
      */
     public void elementDecl(String arg0, String arg1) throws SAXException
@@ -770,6 +1005,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.DeclHandler#externalEntityDecl(String, String, String)
      */
     public void externalEntityDecl(
@@ -787,6 +1026,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.DeclHandler#internalEntityDecl(String, String)
      */
     public void internalEntityDecl(String arg0, String arg1)
@@ -801,6 +1044,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#characters(char[], int, int)
      */
     public void characters(char[] characters, int offset, int length)
@@ -817,6 +1064,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#endDocument()
      */
     public void endDocument() throws SAXException
@@ -833,6 +1084,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#endElement(String, String, String)
      */
     public void endElement(String namespaceURI, String localName, String qName)
@@ -854,6 +1109,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#endPrefixMapping(String)
      */
     public void endPrefixMapping(String prefix) throws SAXException
@@ -863,6 +1122,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
      */
     public void ignorableWhitespace(char[] ch, int start, int length)
@@ -877,6 +1140,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#processingInstruction(String, String)
      */
     public void processingInstruction(String target, String data)
@@ -892,6 +1159,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#setDocumentLocator(Locator)
      */
     public void setDocumentLocator(Locator locator)
@@ -902,6 +1173,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#skippedEntity(String)
      */
     public void skippedEntity(String name) throws SAXException
@@ -913,6 +1188,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#comment(char[], int, int)
      */
     public void comment(char[] ch, int start, int length) throws SAXException
@@ -927,6 +1206,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#endCDATA()
      */
     public void endCDATA() throws SAXException
@@ -937,6 +1220,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#endDTD()
      */
     public void endDTD() throws SAXException
@@ -947,6 +1234,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#endEntity(String)
      */
     public void endEntity(String name) throws SAXException
@@ -960,6 +1251,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#startCDATA()
      */
     public void startCDATA() throws SAXException
@@ -969,6 +1264,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     *  将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#startDTD(String, String, String)
      */
     public void startDTD(String name, String publicId, String systemId)
@@ -979,6 +1278,10 @@ public final class ToUnknownStream extends SerializerBase
 
     /**
      * Pass the call on to the underlying handler
+     * <p>
+     * 将调用传递给底层处理程序
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#startEntity(String)
      */
     public void startEntity(String name) throws SAXException
@@ -992,6 +1295,9 @@ public final class ToUnknownStream extends SerializerBase
      * an HTML handler. After than send the starting method calls that were cached
      * to the wrapped handler.
      *
+     * <p>
+     *  初始化包装的输出流(XML或HTML)。如果流处理程序应该是HTML,则用HTML处理程序替换XML处理程序。之后发送启动方法调用被缓存到被包装的处理程序。
+     * 
      */
     private void initStreamOutput() throws SAXException
     {
@@ -1009,6 +1315,9 @@ public final class ToUnknownStream extends SerializerBase
             /* We have to make sure we get an output properties with the proper
              * defaults for the HTML method.  The easiest way to do this is to
              * have the OutputProperties class do it.
+             * <p>
+             *  HTML方法的默认值。最简单的方法是使OutputProperties类实现它。
+             * 
              */
 
             Properties htmlProperties =
@@ -1059,6 +1368,9 @@ public final class ToUnknownStream extends SerializerBase
 
         /* Now that we have a real wrapped handler (XML or HTML) lets
          * pass any cached calls to it
+         * <p>
+         *  将任何缓存的调用传递给它
+         * 
          */
         // Call startDocument() if necessary
         if (m_needToCallStartDocument)
@@ -1108,6 +1420,11 @@ public final class ToUnknownStream extends SerializerBase
      *
      * Don't want to override static function on SerializerBase
      * So added Unknown suffix to method name.
+     * <p>
+     *  用于对local-name()的调用的实用程序函数。
+     * 
+     *  不想覆盖SerializerBase上的静态函数所以向方法名添加了未知后缀。
+     * 
      */
     private String getLocalNameUnknown(String value)
     {
@@ -1125,6 +1442,11 @@ public final class ToUnknownStream extends SerializerBase
          *
          * Don't want to override static function on SerializerBase
          * So added Unknown suffix to method name.
+         * <p>
+         *  效用函数返回前缀
+         * 
+         *  不想覆盖SerializerBase上的静态函数所以向方法名添加了未知后缀。
+         * 
          */
     private String getPrefixPartUnknown(String qname)
     {
@@ -1137,6 +1459,10 @@ public final class ToUnknownStream extends SerializerBase
      * This uses the cached first element name, first element prefix and the
      * cached namespaces from previous method calls
      *
+     * <p>
+     *  确定文档中的firts元素是<html>还是<HTML>这使用缓存的第一个元素名称,第一个元素前缀和来自以前的方法调用的缓存名称空间
+     * 
+     * 
      * @return true if the first element is an opening <html> tag
      */
     private boolean isFirstElemHTML()
@@ -1161,6 +1487,9 @@ public final class ToUnknownStream extends SerializerBase
             /* the first element has a name of "html", but lets check the prefix.
              * If the prefix points to a namespace with a URL that is not ""
              * then the doecument doesn't start with an <html> tag, and isn't html
+             * <p>
+             *  如果前缀指向具有不是""的URL的命名空间,则该doecument不以<html>标签开始,并且不是html
+             * 
              */
             final int max = m_namespacePrefix.size();
             for (int i = 0; i < max; i++)
@@ -1182,6 +1511,8 @@ public final class ToUnknownStream extends SerializerBase
         return isHTML;
     }
     /**
+    /* <p>
+    /* 
      * @see Serializer#asDOMSerializer()
      */
     public DOMSerializer asDOMSerializer() throws IOException
@@ -1190,6 +1521,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @param URI_and_localNames Vector a list of pairs of URI/localName
      * specified in the cdata-section-elements attribute.
      * @see SerializationHandler#setCdataSectionElements(java.util.Vector)
@@ -1199,6 +1532,8 @@ public final class ToUnknownStream extends SerializerBase
         m_handler.setCdataSectionElements(URI_and_localNames);
     }
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#addAttributes(org.xml.sax.Attributes)
      */
     public void addAttributes(Attributes atts) throws SAXException
@@ -1209,6 +1544,10 @@ public final class ToUnknownStream extends SerializerBase
     /**
      * Get the current namespace mappings.
      * Simply returns the mappings of the wrapped handler.
+     * <p>
+     *  获取当前的命名空间映射。简单地返回包装的处理程序的映射。
+     * 
+     * 
      * @see ExtendedContentHandler#getNamespaceMappings()
      */
     public NamespaceMappings getNamespaceMappings()
@@ -1221,6 +1560,8 @@ public final class ToUnknownStream extends SerializerBase
         return mappings;
     }
     /**
+    /* <p>
+    /* 
      * @see SerializationHandler#flushPending()
      */
     public void flushPending() throws SAXException
@@ -1254,6 +1595,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#getPrefix
      */
     public String getPrefix(String namespaceURI)
@@ -1261,6 +1604,8 @@ public final class ToUnknownStream extends SerializerBase
         return m_handler.getPrefix(namespaceURI);
     }
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#entityReference(java.lang.String)
      */
     public void entityReference(String entityName) throws SAXException
@@ -1269,6 +1614,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#getNamespaceURI(java.lang.String, boolean)
      */
     public String getNamespaceURI(String qname, boolean isElement)
@@ -1297,6 +1644,8 @@ public final class ToUnknownStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see SerializationHandler#setContentHandler(org.xml.sax.ContentHandler)
      */
     public void setContentHandler(ContentHandler ch)
@@ -1306,6 +1655,9 @@ public final class ToUnknownStream extends SerializerBase
     /**
      * This method is used to set the source locator, which might be used to
      * generated an error message.
+     * <p>
+     *  此方法用于设置源定位符,可能用于生成错误消息。
+     * 
      * @param locator the source locator
      *
      * @see ExtendedContentHandler#setSourceLocator(javax.xml.transform.SourceLocator)

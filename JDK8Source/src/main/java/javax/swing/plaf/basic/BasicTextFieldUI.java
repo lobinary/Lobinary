@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,13 @@ import sun.swing.DefaultLookup;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  JTextField的外观和感觉的基础。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class BasicTextFieldUI extends BasicTextUI {
@@ -56,6 +64,10 @@ public class BasicTextFieldUI extends BasicTextUI {
     /**
      * Creates a UI for a JTextField.
      *
+     * <p>
+     *  为JTextField创建一个UI。
+     * 
+     * 
      * @param c the text field
      * @return the UI
      */
@@ -65,6 +77,9 @@ public class BasicTextFieldUI extends BasicTextUI {
 
     /**
      * Creates a new BasicTextFieldUI.
+     * <p>
+     *  创建一个新的BasicTextFieldUI。
+     * 
      */
     public BasicTextFieldUI() {
         super();
@@ -75,6 +90,10 @@ public class BasicTextFieldUI extends BasicTextUI {
      * UIManager.  This is used as a prefix to all the standard
      * text properties.
      *
+     * <p>
+     *  获取用作通过UIManager查找属性的键的名称。这用作所有标准文本属性的前缀。
+     * 
+     * 
      * @return the name ("TextField")
      */
     protected String getPropertyPrefix() {
@@ -84,6 +103,10 @@ public class BasicTextFieldUI extends BasicTextUI {
     /**
      * Creates a view (FieldView) based on an element.
      *
+     * <p>
+     *  基于元素创建视图(FieldView)。
+     * 
+     * 
      * @param elem the element
      * @return the view
      */
@@ -109,6 +132,16 @@ public class BasicTextFieldUI extends BasicTextUI {
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  if(Boolean.TRUE.equals(i18nFlag)){//为了支持双向文本,我们构建一个更重的//表示的字段。
+     *  String kind = elem.getName(); if(kind！= null){if(kind.equals(AbstractDocument.ContentElementName)){return new GlyphView(elem); }
+     *  else if(kind.equals(AbstractDocument.ParagraphElementName)){return new I18nFieldView(elem); }} //这不应
+     * 该发生,应该在这种情况下抛出。
+     *  if(Boolean.TRUE.equals(i18nFlag)){//为了支持双向文本,我们构建一个更重的//表示的字段。 } return new FieldView(elem); }}。
+     * 
+     *  / **返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -151,6 +184,10 @@ public class BasicTextFieldUI extends BasicTextUI {
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -165,6 +202,9 @@ public class BasicTextFieldUI extends BasicTextUI {
     /**
      * A field view that support bidirectional text via the
      * support provided by ParagraphView.
+     * <p>
+     * 通过ParagraphView提供的支持支持双向文本的字段视图。
+     * 
      */
     static class I18nFieldView extends ParagraphView {
 
@@ -177,6 +217,9 @@ public class BasicTextFieldUI extends BasicTextUI {
          * the given child index.  There is no limit for
          * a field since it scrolls, so this is implemented to
          * return <code>Integer.MAX_VALUE</code>.
+         * <p>
+         *  获取针对给定子索引的约束范围。一个字段没有限制,因为它滚动,所以这是实现返回<code> Integer.MAX_VALUE </code>。
+         * 
          */
         public int getFlowSpan(int index) {
             return Integer.MAX_VALUE;
@@ -201,6 +244,11 @@ public class BasicTextFieldUI extends BasicTextUI {
          * alignment property set on the associated JTextField
          * (if that is the type of the hosting component).
          *
+         * <p>
+         *  将为视图分配的分配调整为文本字段的合适分配。如果视图已被垂直分配超过首选跨度,则分配将更改为垂直居中。
+         * 水平地根据在相关联的JTextField上设置的水平对齐属性来调整视图(如果这是主机组件的类型)。
+         * 
+         * 
          * @param a the allocation given to the view, which may need
          *  to be adjusted.
          * @return the allocation that the superclass should use.
@@ -279,6 +327,9 @@ public class BasicTextFieldUI extends BasicTextUI {
          * range properties are updated.  If the view hasn't yet been
          * shown the extent will be zero and we just set it to be full
          * until determined otherwise.
+         * <p>
+         *  使用关联的JTextField(如果有)来更新可见性模型,以反映作为文档模型更改结果的当前可见性。有界范围属性已更新。如果视图尚未显示,则范围将为零,并且我们将其设置为完全,直到确定为否。
+         * 
          */
         void updateVisibilityModel() {
             Component c = getContainer();
@@ -306,6 +357,10 @@ public class BasicTextFieldUI extends BasicTextUI {
          * The view may need to do layout and create child views to enable
          * itself to render into the given allocation.
          *
+         * <p>
+         *  使用给定的渲染表面和该表面上的区域渲染。视图可能需要进行布局和创建子视图,以使自身能够呈现给定的分配。
+         * 
+         * 
          * @param g the rendering surface to use
          * @param a the allocated region to render into
          *
@@ -321,6 +376,10 @@ public class BasicTextFieldUI extends BasicTextUI {
          * Determines the resizability of the view along the
          * given axis.  A value of 0 or less is not resizable.
          *
+         * <p>
+         *  确定沿给定轴的视图的可重新调整性。值为0或更小不可调整大小。
+         * 
+         * 
          * @param axis View.X_AXIS or View.Y_AXIS
          * @return the weight -> 1 for View.X_AXIS, else 0
          */
@@ -335,6 +394,10 @@ public class BasicTextFieldUI extends BasicTextUI {
          * Provides a mapping from the document model coordinate space
          * to the coordinate space of the view mapped to it.
          *
+         * <p>
+         *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+         * 
+         * 
          * @param pos the position to convert >= 0
          * @param a the allocated region to render into
          * @return the bounding box of the given position
@@ -350,6 +413,10 @@ public class BasicTextFieldUI extends BasicTextUI {
          * Provides a mapping from the document model coordinate space
          * to the coordinate space of the view mapped to it.
          *
+         * <p>
+         *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+         * 
+         * 
          * @param p0 the position to convert >= 0
          * @param b0 the bias toward the previous character or the
          *  next character represented by p0, in case the
@@ -376,6 +443,10 @@ public class BasicTextFieldUI extends BasicTextUI {
          * Provides a mapping from the view coordinate space to the logical
          * coordinate space of the model.
          *
+         * <p>
+         * 提供从视图坐标空间到模型的逻辑坐标空间的映射。
+         * 
+         * 
          * @param fx the X coordinate >= 0.0f
          * @param fy the Y coordinate >= 0.0f
          * @param a the allocated region to render into
@@ -391,6 +462,10 @@ public class BasicTextFieldUI extends BasicTextUI {
          * Gives notification that something was inserted into the document
          * in a location that this view is responsible for.
          *
+         * <p>
+         *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。
+         * 
+         * 
          * @param changes the change information from the associated document
          * @param a the current allocation of the view
          * @param f the factory to use to rebuild if the view has children
@@ -405,6 +480,9 @@ public class BasicTextFieldUI extends BasicTextUI {
          * Gives notification that something was removed from the document
          * in a location that this view is responsible for.
          *
+         * <p>
+         *  提供通知,说明该视图负责的位置中的文档被删除了。
+         * 
          * @param changes the change information from the associated document
          * @param a the current allocation of the view
          * @param f the factory to use to rebuild if the view has children

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.serialize;
@@ -29,6 +39,10 @@ import com.sun.org.apache.xerces.internal.util.EncodingMap;
 /**
  * This class represents an encoding.
  *
+ * <p>
+ *  这个类表示一个编码。
+ * 
+ * 
  * @version $Id: EncodingInfo.java,v 1.6 2007/10/18 03:39:08 joehw Exp $
  */
 public class EncodingInfo {
@@ -58,6 +72,9 @@ public class EncodingInfo {
 
     /**
      * Creates new <code>EncodingInfo</code> instance.
+     * <p>
+     *  创建新的<code> EncodingInfo </code>实例。
+     * 
      */
     public EncodingInfo(String ianaName, String javaName, int lastPrintable) {
         this.ianaName = ianaName;
@@ -67,6 +84,9 @@ public class EncodingInfo {
 
     /**
      * Returns a MIME charset name of this encoding.
+     * <p>
+     *  返回此编码的MIME字符集名称。
+     * 
      */
     public String getIANAName() {
         return this.ianaName;
@@ -76,6 +96,10 @@ public class EncodingInfo {
      * Returns a writer for this encoding based on
      * an output stream.
      *
+     * <p>
+     *  基于输出流返回此编码的写入程序。
+     * 
+     * 
      * @return A suitable writer
      * @exception UnsupportedEncodingException There is no convertor
      *  to support this encoding
@@ -95,6 +119,10 @@ public class EncodingInfo {
     /**
      * Checks whether the specified character is printable or not in this encoding.
      *
+     * <p>
+     *  在此编码中检查指定的字符是否可打印。
+     * 
+     * 
      * @param ch a code point (0-0x10ffff)
      */
     public boolean isPrintable(char ch) {
@@ -109,6 +137,10 @@ public class EncodingInfo {
      * This method accomplishes this using a java.nio.CharsetEncoder. If NIO isn't
      * available it will attempt use a sun.io.CharToByteConverter.
      *
+     * <p>
+     *  在此编码中检查指定的字符是否可打印。此方法使用java.nio.CharsetEncoder实现此操作。如果NIO不可用,它将尝试使用sun.io.CharToByteConverter。
+     * 
+     * 
      * @param ch a code point (0-0x10ffff)
      */
     private boolean isPrintable0(char ch) {
@@ -192,6 +224,9 @@ public class EncodingInfo {
 
     /**
      * Holder of methods from java.nio.charset.Charset and java.nio.charset.CharsetEncoder.
+     * <p>
+     *  java.nio.charset.Charset和java.nio.charset.CharsetEncoder方法的持有者。
+     * 
      */
     static class CharsetMethods {
 
@@ -237,6 +272,8 @@ public class EncodingInfo {
 
     /**
      * Holder of methods from sun.io.CharToByteConverter.
+     * <p>
+     *  持有者方法from sun.io.CharToByteConverter。
      */
     static class CharToByteConverterMethods {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,17 @@ import org.xml.sax.SAXNotSupportedException;
  * <p>
  *
  *
+ * <p>
+ *  <p>一种处理器,用于根据{@link Schema}检查XML文档。</p>
+ * 
+ * <p>
+ *  验证器对象不是线程安全的,不可重入。
+ * 换句话说,应用程序有责任确保一个{@link Validator}对象在任何给定时间都不会从多个线程中使用,并且在调用<code> validate </code>方法时,应用程序可能不递归调用<code>
+ *  validate </code>方法。
+ *  验证器对象不是线程安全的,不可重入。
+ * <p>
+ * 
+ * 
  * @author  <a href="mailto:Kohsuke.Kawaguchi@Sun.com">Kohsuke Kawaguchi</a>
  * @since 1.5
  */
@@ -62,6 +74,14 @@ public abstract class Validator {
      * <p>Derived classes must create {@link Validator} objects that have
      * <code>null</code> {@link ErrorHandler} and
      * <code>null</code> {@link LSResourceResolver}.
+     * </p>
+     * <p>
+     *  派生类的构造方法。
+     * 
+     *  <p>构造函数不执行任何操作。</p>
+     * 
+     *  <p>派生类必须创建具有<code> null </code> {@link ErrorHandler}和<code> null </code> {@link LSResourceResolver}的
+     * {@link Validator}对象。
      * </p>
      */
     protected Validator() {
@@ -78,6 +98,16 @@ public abstract class Validator {
          * <p>The reset <code>Validator</code> is not guaranteed to have the same {@link LSResourceResolver} or {@link ErrorHandler}
          * <code>Object</code>s, e.g. {@link Object#equals(Object obj)}.  It is guaranteed to have a functionally equal
          * <code>LSResourceResolver</code> and <code>ErrorHandler</code>.</p>
+         * <p>
+         *  <p>将此<code>验证程序</code>重置为其原始配置。</p>
+         * 
+         *  <p> <code>验证程序</code>被重置为与使用{@link Schema#newValidator()}创建时相同的状态。
+         *  <code> reset()</code>旨在允许重用现有的<code> Validator </code>,从而节省与创建新的<code> Validator </code>相关联的资源。
+         * 
+         *  <p>重置<code>验证程序</code>不保证具有相同的{@link LSResourceResolver}或{@link ErrorHandler} <code> Object </code>,
+         * 例如{@link Object#equals(Object obj)}。
+         * 它保证有一个功能相等的<code> LSResourceResolver </code>和<code> ErrorHandler </code>。</p>。
+         * 
          */
         public abstract void reset();
 
@@ -88,6 +118,12 @@ public abstract class Validator {
      * {@link #validate(Source source, Result result)}
      * with <code>result</code> of <code>null</code>.</p>
      *
+     * <p>
+     *  验证指定的输入。
+     * 
+     * <p>这只是一个{@ link #validate(源代码,结果结果)}的方便方法,<code> result </code>为<code> null </code>。</p>
+     * 
+     * 
      * @param source
      *      XML to be validated. Must be an XML document or
      *      XML element and must not be null. For backwards compatibility,
@@ -194,6 +230,58 @@ public abstract class Validator {
      * but none of them were fatal and the <code>ErrorHandler</code> didn't
      * throw any exception, then the method returns normally.</p>
      *
+     * <p>
+     *  <p>验证指定的输入,并将增强的验证结果发送到指定的输出。</p>
+     * 
+     *  <p>此方法对接受的{@link Source} / {@ link Result}的类型设置了以下限制。</p>
+     * 
+     * <table border=1>
+     * <thead>
+     * <tr>
+     *  <th colspan ="5"> <code> Source </code> / <code>结果</code>接受</th>
+     * </tr>
+     * <tr>
+     *  <th> </th> <th> {@ link javax.xml.transform.stream.StreamSource} </th> <th> {@ link javax.xml.transform.sax.SAXSource}
+     *  </th> <th> {@link javax.xml.transform.dom.DOMSource} </th> <th> {@ link javax.xml.transform.stax.StAXSource}
+     *  </th>。
+     * </tr>
+     * </thead>
+     * <tbody align="center">
+     * <tr>
+     *  <td> <td> OK </td> <td> </td> </td> </td>
+     * </tr>
+     * <tr>
+     *  <th> {@ link javax.xml.transform.stream.StreamResult} </th> <td> OK </td> <td> <code> IllegalArgumen
+     * tException </code> </td> <td> <code> IllegalArgumentException </code> </td> <td> <code> IllegalArgume
+     * ntException </code> </td>。
+     * </tr>
+     * <tr>
+     *  <th> {@ link javax.xml.transform.sax.SAXResult} </th> <td> <code> IllegalArgumentException </code> </td>
+     *  <td> OK </td> <td> <code> IllegalArgumentException </code> </td> <td> <code> IllegalArgumentExceptio
+     * n </code> </td>。
+     * </tr>
+     * <tr>
+     *  <th> {@ link javax.xml.transform.dom.DOMResult} </th> <td> <code> IllegalArgumentException </code> </td>
+     *  <td> <code> IllegalArgumentException </code> </td> <td> OK </td> <td> <code> IllegalArgumentExceptio
+     * n </code> </td>。
+     * </tr>
+     * <tr>
+     * <th> {@ link javax.xml.transform.stax.StAXResult} </th> <td> <code> IllegalArgumentException </code> 
+     * </td> <td> <code> IllegalArgumentException </code> </td> <td> <code> IllegalArgumentException </code>
+     *  </td> <td>确定</td>。
+     * </tr>
+     * </tbody>
+     * </table>
+     * 
+     *  <p>要将一个<code> Source </code>验证为另一种<code> Result </code>,请使用身份转换器(参见{@link javax.xml.transform.TransformerFactory#newTransformer()}
+     * )。
+     *  </p>。
+     * 
+     *  <p>验证期间发现的错误会发送到指定的{@link ErrorHandler}。</p>
+     * 
+     *  <p>如果文档有效,或者文档包含一些错误,但没有一个是致命错误,并且<code> ErrorHandler </code>没有抛出任何异常,则该方法将正常返回。</p>
+     * 
+     * 
      * @param source
      *      XML to be validated. Must be an XML document or
      *      XML element and must not be null. For backwards compatibility,
@@ -284,6 +372,36 @@ public abstract class Validator {
      * When a new {@link Validator} object is created, initially
      * this field is set to null.
      *
+     * <p>
+     *  设置{@link ErrorHandler}以接收在<code> validate </code>方法调用期间遇到的错误。
+     * 
+     * <p>
+     *  错误处理程序可用于在验证期间自定义错误处理过程。当设置{@link ErrorHandler}时,验证期间发现的错误将首先发送到{@link ErrorHandler}。
+     * 
+     * <p>
+     *  错误处理程序可以通过从处理程序抛出{@link SAXException}来立即中止进一步的验证。
+     * 或者例如,它可以打印一个错误到屏幕,并尝试继续验证通常返回从{@link ErrorHandler}。
+     * 
+     * <p>
+     *  如果从{@link ErrorHandler}抛出任何{@link Throwable},则<code> validate </code>方法的调用者将抛出相同的{@link Throwable}对象
+     * 。
+     * 
+     * <p>
+     * {@link Validator}不允许抛出{@link SAXException},而不先将其报告给{@link ErrorHandler}。
+     * 
+     * <p>
+     *  当{@link ErrorHandler}为null时,实现将如同设置以下{@link ErrorHandler}：
+     * <pre>
+     *  类DraconianErrorHandler实现{@link ErrorHandler} {public void fatalError({@link org.xml.sax.SAXParseException}
+     *  e)throws {@link SAXException} {throw e; } public void error({@link org.xml.sax.SAXParseException} e)
+     * throws {@link SAXException} {throw e; } public void warning({@link org.xml.sax.SAXParseException} e)t
+     * hrows {@link SAXException} {// noop}}。
+     * </pre>
+     * 
+     * <p>
+     *  创建新的{@link Validator}对象时,最初此字段设置为null。
+     * 
+     * 
      * @param   errorHandler
      *      A new error handler to be set. This parameter can be null.
      */
@@ -292,6 +410,10 @@ public abstract class Validator {
     /**
      * Gets the current {@link ErrorHandler} set to this {@link Validator}.
      *
+     * <p>
+     *  获取设置为此{@link Validator}的当前{@link ErrorHandler}。
+     * 
+     * 
      * @return
      *      This method returns the object that was last set through
      *      the {@link #setErrorHandler(ErrorHandler)} method, or null
@@ -336,6 +458,29 @@ public abstract class Validator {
      * When a new {@link Validator} object is created, initially
      * this field is set to null.
      *
+     * <p>
+     *  设置{@link LSResourceResolver}以在验证剧集中自定义资源解析。
+     * 
+     * <p>
+     *  {@link Validator}在验证时需要定位外部资源时使用{@link LSResourceResolver},虽然"定位外部资源"是什么构成了每种模式语言。
+     * 
+     * <p>
+     *  当{@link LSResourceResolver}为null时,实现将如同设置以下{@link LSResourceResolver}：
+     * <pre>
+     *  类DumbLSResourceResolver实现{@link LSResourceResolver} {public {@link org.w3c.dom.ls.LSInput} resolveRe
+     * source(String publicId,String systemId,String baseURI){。
+     * 
+     *  return null; // always return null}}
+     * </pre>
+     * 
+     * <p>
+     * 如果{@link LSResourceResolver}抛出{@link RuntimeException}(或其派生类的实例),则{@link Validator}将中止解析,并且<code> val
+     * idate </code>方法的调用者将接收相同的{@link RuntimeException}。
+     * 
+     * <p>
+     *  创建新的{@link Validator}对象时,最初此字段设置为null。
+     * 
+     * 
      * @param   resourceResolver
      *      A new resource resolver to be set. This parameter can be null.
      */
@@ -344,6 +489,10 @@ public abstract class Validator {
     /**
      * Gets the current {@link LSResourceResolver} set to this {@link Validator}.
      *
+     * <p>
+     *  获取设置为此{@link Validator}的当前{@link LSResourceResolver}。
+     * 
+     * 
      * @return
      *      This method returns the object that was last set through
      *      the {@link #setResourceResolver(LSResourceResolver)} method, or null
@@ -368,6 +517,14 @@ public abstract class Validator {
      * <p>Implementors are free (and encouraged) to invent their own features,
      * using names built on their own URIs.</p>
      *
+     * <p>
+     *  查找特征标志的值。
+     * 
+     *  <p>地图项名称是任何完全限定的URI。 {@link Validator}可能会识别功能名称,但暂时无法返回其值。一些特征值可能仅在特定上下文中可用,例如在验证之前,期间或之后。
+     * 
+     *  <p>实施者可以自由地(并鼓励)使用自己的URI创建自己的特征。</p>
+     * 
+     * 
      * @param name The feature name, which is a non-null fully-qualified URI.
      *
      * @return The current value of the feature (true or false).
@@ -407,6 +564,16 @@ public abstract class Validator {
      * in specific contexts, such as before, during, or after
      * a validation.</p>
      *
+     * <p>
+     *  设置功能标志的值。
+     * 
+     * <p>
+     *  功能可用于控制{@link Validator}解析模式的方式,尽管{@link Validator}不需要识别任何特定的功能名称。</p>
+     * 
+     *  <p>地图项名称是任何完全限定的URI。 {@link Validator}可能会显示一个特征值,但无法更改当前值。某些特征值可能仅在特定上下文中是不可变的或可变的,例如在验证之前,期间或之后。
+     * </p>。
+     * 
+     * 
      * @param name The feature name, which is a non-null fully-qualified URI.
      * @param value The requested value of the feature (true or false).
      *
@@ -462,6 +629,22 @@ public abstract class Validator {
      *   </li>
      * </ul>
      *
+     * <p>
+     *  设置属性的值。
+     * 
+     * <p>属性名称是任何完全限定的URI。 {@link Validator}可能会识别属性名称,但无法更改当前值。某些属性值可能仅在特定上下文中是不可变的或可变的,例如在验证之前,期间或之后。</p>
+     * 
+     * <p>
+     *  实现JAXP 1.5或更高版本的所有实现都需要支持{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_DTD}和{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_SCHEMA}
+     * 属性。
+     * </p>
+     * <ul>
+     * <li>
+     *  <p>在源或模式文件中访问外部DTD仅限于{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_DTD}属性指定的协议。
+     * 如果由于此属性的限制而在验证期间拒绝访问,{@link org.xml.sax.SAXException}将由{@link #validate(Source)}方法抛出。</p>。
+     * 
+     *  <p>由schemaLocation属性设置的对外部引用的访问仅限于{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_SCHEMA}属性指定的协议。
+     * 
      * @param name The property name, which is a non-null fully-qualified URI.
      * @param object The requested value for the property.
      *
@@ -498,6 +681,12 @@ public abstract class Validator {
      * <p>Implementors are free (and encouraged) to invent their own properties,
      * using names built on their own URIs.</p>
      *
+     * <p>
+     * 如果由于此属性的限制而在验证期间拒绝访问,{@link org.xml.sax.SAXException}将由{@link #validate(Source)}方法抛出。</p>。
+     * </li>
+     * </ul>
+     * 
+     * 
      * @param name The property name, which is a non-null fully-qualified URI.
      *
      * @return The current value of the property.

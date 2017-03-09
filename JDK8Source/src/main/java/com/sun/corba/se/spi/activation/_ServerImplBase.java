@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.spi.activation;
 
 
@@ -10,6 +11,7 @@ package com.sun.corba.se.spi.activation;
 
 
 /** Server callback API, passed to Activator in active method.
+/* <p>
     */
 public abstract class _ServerImplBase extends org.omg.CORBA.portable.ObjectImpl
                 implements com.sun.corba.se.spi.activation.Server, org.omg.CORBA.portable.InvokeHandler
@@ -41,6 +43,7 @@ public abstract class _ServerImplBase extends org.omg.CORBA.portable.ObjectImpl
     {
 
   /** Shutdown this server.  Returns after orb.shutdown() completes.
+  /* <p>
 	*/
        case 0:  // activation/Server/shutdown
        {
@@ -52,6 +55,9 @@ public abstract class _ServerImplBase extends org.omg.CORBA.portable.ObjectImpl
 
   /** Install the server.  Returns after the install hook completes
 	* execution in the server.
+	* <p>
+	*  执行在服务器。
+	* 
 	*/
        case 1:  // activation/Server/install
        {
@@ -63,6 +69,8 @@ public abstract class _ServerImplBase extends org.omg.CORBA.portable.ObjectImpl
 
   /** Uninstall the server.  Returns after the uninstall hook
 	* completes execution.
+	* <p>
+	*  完成执行。
 	*/
        case 2:  // activation/Server/uninstall
        {

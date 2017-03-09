@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -13,12 +14,17 @@ package org.omg.PortableServer;
 	 * The ThreadPolicy specifies the threading model 
 	 * used with the created POA. The default is 
 	 * ORB_CTRL_MODEL.
+	 * <p>
+	 *  ThreadPolicy指定与创建的POA一起使用的线程模型。默认值为ORB_CTRL_MODEL。
+	 * 
 	 */
 public interface ThreadPolicyOperations  extends org.omg.CORBA.PolicyOperations
 {
 
   /**
 	 * specifies the policy value
+	 * <p>
+	 *  指定策略值
 	 */
   org.omg.PortableServer.ThreadPolicyValue value ();
 } // interface ThreadPolicyOperations

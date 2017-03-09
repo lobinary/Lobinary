@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package javax.rmi.CORBA;
@@ -56,6 +60,9 @@ import com.sun.corba.se.impl.orbutil.GetPropertyAction;
 /**
  * Provides utility methods that can be used by stubs and ties to
  * perform common operations.
+ * <p>
+ *  提供可由存根和连接用于执行常见操作的实用程序方法。
+ * 
  */
 public class Util {
 
@@ -71,6 +78,10 @@ public class Util {
 
     /**
      * Maps a SystemException to a RemoteException.
+     * <p>
+     *  将SystemException映射到RemoteException。
+     * 
+     * 
      * @param ex the SystemException to map.
      * @return the mapped exception.
      */
@@ -84,6 +95,10 @@ public class Util {
 
     /**
      * Writes any java.lang.Object as a CORBA any.
+     * <p>
+     *  将任何java.lang.Object写为CORBA any。
+     * 
+     * 
      * @param out the stream in which to write the any.
      * @param obj the object to write as an any.
      */
@@ -96,6 +111,10 @@ public class Util {
 
     /**
      * Reads a java.lang.Object as a CORBA any.
+     * <p>
+     *  将java.lang.Object读为CORBA any。
+     * 
+     * 
      * @param in the stream from which to read the any.
      * @return the object read from the stream.
      */
@@ -114,6 +133,14 @@ public class Util {
 <code>out.write_Object(org.omg.CORBA.Object)</code>.
      * If <code>obj</code> is a CORBA Object, it is written to
      * <code>out.write_Object(org.omg.CORBA.Object)</code>.
+     * <p>
+     *  将java.lang.Object写为CORBA对象。
+     * 如果<code> obj </code>是导出的RMI-IIOP服务器对象,则找到连接并连接到<code> obj </code>,然后写入<code> out.write_Object(org.omg
+     * .CORBA。
+     *  将java.lang.Object写为CORBA对象。对象)</code>。
+     * 如果<code> obj </code>是一个CORBA对象,它被写入<code> out.write_Object(org.omg.CORBA.Object)</code>。
+     * 
+     * 
      * @param out the stream in which to write the object.
      * @param obj the object to write.
      */
@@ -134,6 +161,14 @@ is
 an exported
      * RMI-IIOP server object, the tie is found and wired to <code>obj</code>,
      * then written to <code>out.write_abstract_interface(java.lang.Object)</code>.
+     * <p>
+     *  将java.lang.Object写为值或CORBA对象。
+     * 如果<code> obj </code>是一个值对象或存根对象,它被写入<code> out.write_abstract_interface(java.lang.Object)</code>。
+     * 如果<code> obj </code>是导出的RMI-IIOP服务器对象,则找到并连接到<code> obj </code>,然后写入<code> out.write_abstract_interfa
+     * ce(java.lang.Object) </code>。
+     * 如果<code> obj </code>是一个值对象或存根对象,它被写入<code> out.write_abstract_interface(java.lang.Object)</code>。
+     * 
+     * 
      * @param out the stream in which to write the object.
      * @param obj the object to write.
      */
@@ -148,6 +183,10 @@ an exported
     /**
      * Registers a target for a tie. Adds the tie to an internal table and calls
      * {@link Tie#setTarget} on the tie object.
+     * <p>
+     *  注册领带的目标。将tie绑定到内部表,并在tie对象上调用{@link Tie#setTarget}。
+     * 
+     * 
      * @param tie the tie to register.
      * @param target the target for the tie.
      */
@@ -164,6 +203,10 @@ an exported
      * Removes the associated tie from an internal table and calls {@link
 Tie#deactivate}
      * to deactivate the object.
+     * <p>
+     *  从内部表中删除关联的绑定,并调用{@link Tie#deactivate}以停用对象。
+     * 
+     * 
      * @param target the object to unexport.
      */
     public static void unexportObject(java.rmi.Remote target)
@@ -178,6 +221,10 @@ Tie#deactivate}
 
     /**
      * Returns the tie (if any) for a given target object.
+     * <p>
+     *  返回给定目标对象的tie(如果有)。
+     * 
+     * 
      * @return the tie or null if no tie is registered for the given target.
      */
     public static Tie getTie (Remote target) {
@@ -192,6 +239,10 @@ Tie#deactivate}
     /**
      * Returns a singleton instance of a class that implements the
      * {@link ValueHandler} interface.
+     * <p>
+     * 返回实现{@link ValueHandler}接口的类的单例实例。
+     * 
+     * 
      * @return a class which implements the ValueHandler interface.
      */
     public static ValueHandler createValueHandler() {
@@ -204,6 +255,10 @@ Tie#deactivate}
 
     /**
      * Returns the codebase, if any, for the given class.
+     * <p>
+     *  返回给定类的代码库(如果有)。
+     * 
+     * 
      * @param clz the class to get a codebase for.
      * @return a space-separated list of URLs, or null.
      */
@@ -232,6 +287,20 @@ Tie#deactivate}
      * and <tt>loader</tt> is non-null, then call <tt>loader.loadClass(className)</tt>.
      * <LI>If a class was successfully loaded by step 1, 2, 3, or 4, then
      *  return the loaded class, else throw <tt>ClassNotFoundException</tt>.
+     * <p>
+     *  返回指定类的类实例。 <P>此方法的规范是"Java到IDL语言映射",ptc / 00-01-06。
+     * 在Java SE平台中,此方法的工作方式如下：<UL> <LI>在调用堆栈上查找第一个非空<tt> ClassLoader </tt>,并尝试使用此类加载类<tt> ClassLoader </tt>。
+     *  返回指定类的类实例。 <P>此方法的规范是"Java到IDL语言映射",ptc / 00-01-06。
+     *  <LI>如果第一步失败,并且<tt> remoteCodebase </tt>为非空且<tt> useCodebaseOnly </tt>为false,则调用<tt> java.rmi.server.
+     * RMIClassLoader.loadClass remoteCodebase,className)</tt>。
+     *  返回指定类的类实例。 <P>此方法的规范是"Java到IDL语言映射",ptc / 00-01-06。
+     *  <LI>如果<tt> remoteCodebase </tt>为null或<tt> useCodebaseOnly </tt>为true,则调用<tt> java.rmi.server.RMIClas
+     * sLoader.loadClass(className)</tt>。
+     *  返回指定类的类实例。 <P>此方法的规范是"Java到IDL语言映射",ptc / 00-01-06。
+     *  <LI>如果类未通过步骤1,2或3成功加载,并且<tt>加载程序</tt>为非空,则调用<tt> loader.loadClass(className)</tt>。
+     *  <LI>如果类通过步骤1,2,3或4成功加载,则返回加载的类,否则throw <tt> ClassNotFoundException </tt>。
+     * 
+     * 
      * @param className the name of the class.
      * @param remoteCodebase a space-separated list of URLs at which
      * the class might be found. May be null.
@@ -260,6 +329,12 @@ Tie#deactivate}
      * particular object is implemented by a local servant and hence local
      * invocation APIs may be used.
      *
+     * <p>
+     *  <tt> isLocal </tt>方法与<tt> ObjectImpl._is_local </tt>方法具有相同的语义,除了它可以抛出一个<tt> RemoteException </tt>。
+     * 
+     *  提供了<tt> _is_local()</tt>方法,以便存根可以确定特定对象是否由本地服务方实现,因此可以使用本地调用API。
+     * 
+     * 
      * @param stub the stub to test.
      *
      * @return The <tt>_is_local()</tt> method returns true if
@@ -283,6 +358,10 @@ Tie#deactivate}
     /**
      * Wraps an exception thrown by an implementation
      * method.  It returns the corresponding client-side exception.
+     * <p>
+     * 封装实现方法抛出的异常。它返回相应的客户端异常。
+     * 
+     * 
      * @param orig the exception to wrap.
      * @return the wrapped exception.
      */
@@ -299,6 +378,10 @@ Tie#deactivate}
      * Copies or connects an array of objects. Used by local stubs
      * to copy any number of actual parameters, preserving sharing
      * across parameters as necessary to support RMI semantics.
+     * <p>
+     *  复制或连接对象数组。由本地存根使用以复制任何数量的实际参数,根据需要保留跨参数的共享以支持RMI语义。
+     * 
+     * 
      * @param obj the objects to copy or connect.
      * @param orb the ORB.
      * @return the copied or connected objects.
@@ -317,6 +400,10 @@ Tie#deactivate}
     /**
      * Copies or connects an object. Used by local stubs to copy
      * an actual parameter, result object, or exception.
+     * <p>
+     *  复制或连接对象。由本地存根使用以复制实际参数,结果对象或异常。
+     * 
+     * 
      * @param obj the object to copy.
      * @param orb the ORB.
      * @return the copy or connected object.
@@ -381,6 +468,8 @@ Tie#deactivate}
     }
     /**
      * Load the orb.properties file.
+     * <p>
+     *  加载orb.properties文件。
      */
     private static Properties getORBPropertiesFile ()
     {

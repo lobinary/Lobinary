@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -80,6 +81,8 @@ public abstract class EventHandlerBase
      * This is not thread-safe by design.
      * Only one thread should call it - a reader/listener/select thread.
      * Not stateless: interest ops, registration.
+     * <p>
+     *  注意：这不是线程安全的设计。只有一个线程应该调用它 - 一个reader / listener / select线程。不是无国籍的：利息操作,注册。
      */
     public void handleEvent()
     {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import org.w3c.dom.Node;
  * should merely be considered as a clue to the actual nature of the
  * problem.
  *
+ * <p>
+ *  当<code> IIOMetadata </code>对象解析<code> IIOMetadataNode </code>的树失败时,会抛出<code> IIOInvalidTreeException
+ *  </code>。
+ * 可以存储导致解析错误的节点。与任何解析错误一样,实际错误可能发生在与检测到它的地方不同的点。
+ * 由<code> getOffendingNode </code>返回的节点应该仅仅被认为是对问题的实际性质的线索。
+ * 
+ * 
  * @see IIOMetadata#setFromTree
  * @see IIOMetadata#mergeTree
  * @see IIOMetadataNode
@@ -48,6 +56,9 @@ public class IIOInvalidTreeException extends IIOException {
     /**
      * The <code>Node</code> that led to the parsing error, or
      * <code>null</code>.
+     * <p>
+     *  导致解析错误的<code> Node </code>或<code> null </code>。
+     * 
      */
     protected Node offendingNode = null;
 
@@ -56,6 +67,10 @@ public class IIOInvalidTreeException extends IIOException {
      * message string and a reference to the <code>Node</code> that
      * caused the parsing error.
      *
+     * <p>
+     *  构造具有消息字符串和对引起解析错误的<code> Node </code>的引用的<code> IIOInvalidTreeException </code>。
+     * 
+     * 
      * @param message a <code>String</code> containing the reason for
      * the parsing failure.
      * @param offendingNode the DOM <code>Node</code> that caused the
@@ -72,6 +87,10 @@ public class IIOInvalidTreeException extends IIOException {
      * exception, and a reference to the <code>Node</code> that caused
      * the parsing error.
      *
+     * <p>
+     *  使用消息字符串,对引起此异常的异常的引用以及引起解析错误的<code> Node </code>的引用构造<code> IIOInvalidTreeException </code>。
+     * 
+     * 
      * @param message a <code>String</code> containing the reason for
      * the parsing failure.
      * @param cause the <code>Throwable</code> (<code>Error</code> or
@@ -89,6 +108,9 @@ public class IIOInvalidTreeException extends IIOException {
     /**
      * Returns the <code>Node</code> that caused the error in parsing.
      *
+     * <p>
+     *  返回导致解析错误的<code> Node </code>。
+     * 
      * @return the offending <code>Node</code>.
      */
     public Node getOffendingNode() {

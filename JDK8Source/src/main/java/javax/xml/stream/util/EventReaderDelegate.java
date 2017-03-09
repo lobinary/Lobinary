@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -24,6 +25,9 @@
 
 /*
  * Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
+ * <p>
+ *  Oracle Corporation的版权所有(c)2009。版权所有。
+ * 
  */
 
 package javax.xml.stream.util;
@@ -44,6 +48,12 @@ import javax.xml.stream.XMLStreamException;
  * does nothing but call the corresponding method on the
  * parent interface.
  *
+ * <p>
+ *  这是用于派生XMLEventReader过滤器的基类。
+ * 
+ *  此类设计为位于XMLEventReader和应用程序的XMLEventReader之间。默认情况下,每个方法只调用父接口上的相应方法。
+ * 
+ * 
  * @version 1.0
  * @author Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
  * @see javax.xml.stream.XMLEventReader
@@ -56,11 +66,18 @@ public class EventReaderDelegate implements XMLEventReader {
 
   /**
    * Construct an empty filter with no parent.
+   * <p>
+   *  构造一个没有父类的空过滤器。
+   * 
    */
   public EventReaderDelegate(){}
 
   /**
    * Construct an filter with the specified parent.
+   * <p>
+   *  构造具有指定父级的过滤器。
+   * 
+   * 
    * @param reader the parent
    */
   public EventReaderDelegate(XMLEventReader reader) {
@@ -69,6 +86,10 @@ public class EventReaderDelegate implements XMLEventReader {
 
   /**
    * Set the parent of this instance.
+   * <p>
+   *  设置此实例的父级。
+   * 
+   * 
    * @param reader the new parent
    */
   public void setParent(XMLEventReader reader) {
@@ -77,6 +98,9 @@ public class EventReaderDelegate implements XMLEventReader {
 
   /**
    * Get the parent of this instance.
+   * <p>
+   *  获取此实例的父级。
+   * 
    * @return the parent or null if none is set
    */
   public XMLEventReader getParent() {

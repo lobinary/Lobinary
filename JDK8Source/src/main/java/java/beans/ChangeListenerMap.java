@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,11 @@ import java.util.Set;
  * for the {@link PropertyChangeSupport PropertyChangeSupport} class
  * and the {@link VetoableChangeSupport VetoableChangeSupport} class.
  *
+ * <p>
+ *  这是一个抽象类,为{@link PropertyChangeSupport PropertyChangeSupport}类和{@link VetoableChangeSupport VetoableChangeSupport}
+ * 类提供基本功能。
+ * 
+ * 
  * @see PropertyChangeListenerMap
  * @see VetoableChangeListenerMap
  *
@@ -53,6 +59,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
      * the same instance of the empty array
      * when {@code length} is equal to {@code 0}.
      *
+     * <p>
+     *  创建一个侦听器数组。当{@code length}等于{@code 0}时,可以通过使用空数组的相同实例来优化此方法。
+     * 
+     * 
      * @param length  the array length
      * @return        an array with specified length
      */
@@ -61,6 +71,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
     /**
      * Creates a proxy listener for the specified property.
      *
+     * <p>
+     *  为指定的属性创建代理侦听器。
+     * 
+     * 
      * @param name      the name of the property to listen on
      * @param listener  the listener to process events
      * @return          a proxy listener
@@ -71,6 +85,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
      * Adds a listener to the list of listeners for the specified property.
      * This listener is called as many times as it was added.
      *
+     * <p>
+     *  将侦听器添加到指定属性的侦听器列表。此侦听器的调用次数与添加的次数相同。
+     * 
+     * 
      * @param name      the name of the property to listen on
      * @param listener  the listener to process events
      */
@@ -96,6 +114,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
      * If the listener was added more than once to the same event source,
      * this listener will be notified one less time after being removed.
      *
+     * <p>
+     *  从指定属性的侦听器列表中删除侦听器。如果侦听器被多次添加到同一个事件源,则该侦听器在被删除后将被少一点时间通知。
+     * 
+     * 
      * @param name      the name of the property to listen on
      * @param listener  the listener to process events
      */
@@ -128,6 +150,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
     /**
      * Returns the list of listeners for the specified property.
      *
+     * <p>
+     *  返回指定属性的侦听器列表。
+     * 
+     * 
      * @param name  the name of the property
      * @return      the corresponding list of listeners
      */
@@ -140,6 +166,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
     /**
      * Sets new list of listeners for the specified property.
      *
+     * <p>
+     *  为指定的属性设置新的侦听器列表。
+     * 
+     * 
      * @param name       the name of the property
      * @param listeners  new list of listeners
      */
@@ -161,6 +191,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
     /**
      * Returns all listeners in the map.
      *
+     * <p>
+     *  返回地图中的所有侦听器。
+     * 
+     * 
      * @return an array of all listeners
      */
     public final synchronized L[] getListeners() {
@@ -189,6 +223,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
     /**
      * Returns listeners that have been associated with the named property.
      *
+     * <p>
+     *  返回与命名属性关联的侦听器。
+     * 
+     * 
      * @param name  the name of the property
      * @return an array of listeners for the named property
      */
@@ -206,6 +244,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
      * Indicates whether the map contains
      * at least one listener to be notified.
      *
+     * <p>
+     *  指示地图是否包含至少一个要通知的侦听器。
+     * 
+     * 
      * @param name  the name of the property
      * @return      {@code true} if at least one listener exists or
      *              {@code false} otherwise
@@ -223,6 +265,10 @@ abstract class ChangeListenerMap<L extends EventListener> {
      * Each entry is a pair consisted of the property name
      * and the corresponding list of listeners.
      *
+     * <p>
+     *  从地图返回一组条目。每个条目是由属性名称和相应的侦听器列表组成的对。
+     * 
+     * 
      * @return a set of entries from the map
      */
     public final Set<Entry<String, L[]>> getEntries() {
@@ -235,6 +281,9 @@ abstract class ChangeListenerMap<L extends EventListener> {
      * Extracts a real listener from the proxy listener.
      * It is necessary because default proxy class is not serializable.
      *
+     * <p>
+     *  从代理侦听器提取真实的侦听器。这是必要的,因为默认代理类不是可序列化的。
+     * 
      * @return a real listener
      */
     public abstract L extract(L listener);

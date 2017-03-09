@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,12 @@ import java.io.IOException;
  * loopbackAddress(), and localHost() will return IPv6 addresses,
  * otherwise IPv4 addresses.
  *
+ * <p>
+ *  用于双IPv4 / IPv6堆栈的InetAddressImpl的软件包专用实现。
+ * <p>
+ *  如果InetAddress.preferIPv6Address为true,那么anyLocalAddress(),loopbackAddress()和localHost()将返回IPv6地址,否则返回
+ * IPv4地址。
+ * 
  * @since 1.4
  */
 
@@ -53,6 +60,8 @@ class Inet6AddressImpl implements InetAddressImpl {
              * Which means same family as addr because at this point it could
              * be either an IPv6 address or an IPv4 address (case of a dual
              * stack system).
+             * <p>
+             * 
              */
             java.util.Enumeration<InetAddress> it = netif.getInetAddresses();
             InetAddress inetaddr = null;

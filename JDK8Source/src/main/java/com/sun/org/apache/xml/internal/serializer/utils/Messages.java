@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Messages.java,v 1.1.4.1 2005/09/08 11:03:10 suresh_emailid Exp $
+ * <p>
+ *  $ Id：Messages.java,v 1.1.4.1 2005/09/08 11:03:10 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer.utils;
 
@@ -93,6 +106,37 @@ import java.util.ResourceBundle;
  * used in com.sun.org.apache.xml.internal.serializer.
  *
  *  @xsl.usage internal
+ * <p>
+ *  用于发出错误消息的实用程序类。
+ * 
+ *  这个类的用户通常会创建这个类的单例实例,在构造函数上传递消息类的名称。例如：
+ * <CODE>
+ *  static消息x =新消息("org.package.MyMessages");
+ * </CODE>
+ *  稍后,如果没有替换参数,则通常以这种方式生成消息：
+ * <CODE>
+ *  String msg = x.createMessage(org.package.MyMessages.KEY_ONE,null);
+ * </CODE>
+ *  如果有参数替换,那么这样的：
+ * <CODE>
+ *  String filename = ...; String directory = ...; String msg = x.createMessage(org.package.MyMessages.K
+ * EY_TWO,new Object [] {filename,directory));。
+ * </CODE>
+ * 
+ * 这个类的实例的构造函数必须被赋予一个扩展java.util.ListResourceBundle(上例中的"org.package.MyMessages")的类的类名。
+ * 名称不应该有任何语言后缀,将由此实用程序类自动添加。
+ * 
+ *  消息类("org.package.MyMessages")必须定义在其基类中声明的抽象方法getContents(),例如：
+ * <CODE>
+ *  public Object [] [] getContents(){return content;}
+ * </CODE>
+ * 
+ *  建议消息类公开其消息键,如下所示：
+ * <CODE>
+ *  public static final String KEY_ONE ="KEY1"; public static final String KEY_TWO ="KEY2"; 。 。 。
+ * </CODE>
+ *  并通过他们的名字(KEY_ONE ...)而不是它们的值("KEY1"...)使用。
+ * 
  */
 public final class Messages
 {
@@ -109,6 +153,20 @@ public final class Messages
 
     /**
      * Constructor.
+     * <p>
+     *  字段内容(由getContents()返回)应该初始化为这样：
+     * <CODE>
+     *  public static final Object [] [] content = {{KEY_ONE,"出了点问题！ },{KEY_TWO,"文件"{0}"不存在于目录"{1}"中。 },。 。
+     *  。 {KEY_N,"Message N"}}。
+     * </CODE>
+     * 
+     *  在具有KEY到消息映射(其中消息类的内容字段被初始化)的代码段可以具有以具有语言后缀的errorResourceClass中的替换语言来翻译消息字符串。
+     * 
+     *  此类不是公共API,它只是公共的,因为它在com.sun.org.apache.xml.internal.serializer中使用。
+     * 
+     *  @ xsl.usage internal
+     * 
+     * 
      * @param resourceBundle the class name of the ListResourceBundle
      * that the instance of this class is associated with and will use when
      * creating messages.
@@ -128,6 +186,10 @@ public final class Messages
     /**
      * Get the Locale object that is being used.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @return non-null reference to Locale object.
      * @xsl.usage internal
      */
@@ -140,6 +202,10 @@ public final class Messages
      * Creates a message from the specified key and replacement
      * arguments, localized to the given locale.
      *
+     * <p>
+     *  获取正在使用的Locale对象。
+     * 
+     * 
      * @param msgKey  The key for the message text.
      * @param args    The arguments to be used as replacement text
      * in the message created.
@@ -164,6 +230,10 @@ public final class Messages
      * Creates a message from the specified key and replacement
      * arguments, localized to the given locale.
      *
+     * <p>
+     * 从指定的键和替换参数创建消息,本地化到给定的语言环境。
+     * 
+     * 
      * @param errorCode The key for the message text.
      *
      * @param fResourceBundle The resource bundle to use.
@@ -194,6 +264,9 @@ public final class Messages
             throwex = true;
             /* The message is not in the bundle . . . this is bad,
              * so try to get the message that the message is not in the bundle
+             * <p>
+             *  从指定的键和替换参数创建消息,本地化到给定的语言环境。
+             * 
              */
             try
             {
@@ -207,6 +280,9 @@ public final class Messages
             {
                 /* even the message that the message is not in the bundle is
                  * not there ... this is really bad
+                 * <p>
+                 *  因此尝试获取消息不在包中的消息
+                 * 
                  */
                 msg =
                     "The message key '"

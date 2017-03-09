@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,12 @@ import java.util.ServiceLoader;
  * <p>This class is duplicated for each JAXP subpackage so keep it in
  * sync.  It is package private for secure class loading.</p>
  *
+ * <p>
+ *  <p>实现可插拔数据类型。</p>
+ * 
+ *  <p>此类与每个JAXP子包重复,因此保持同步。它是专用于安全类加载的包。</p>
+ * 
+ * 
  * @author Santiago.PericasGeertsen@sun.com
  * @author Huizhe.Wang@oracle.com
  */
@@ -49,23 +56,35 @@ class FactoryFinder {
 
     /**
      * Internal debug flag.
+     * <p>
+     *  内部调试标志。
+     * 
      */
     private static boolean debug = false;
 
     /**
      * Cache for properties in java.home/lib/jaxp.properties
+     * <p>
+     *  缓存java.home / lib / jaxp.properties中的属性
+     * 
      */
     private final static Properties cacheProps = new Properties();
 
     /**
      * Flag indicating if properties from java.home/lib/jaxp.properties
      * have been cached.
+     * <p>
+     *  指示来自java.home / lib / jaxp.properties的属性是否已缓存的标志。
+     * 
      */
     static volatile boolean firstTime = true;
 
     /**
      * Security support class use to check access control before
      * getting certain system resources.
+     * <p>
+     *  安全支持类用于在获取某些系统资源之前检查访问控制。
+     * 
      */
     private final static SecuritySupport ss = new SecuritySupport();
 
@@ -99,6 +118,13 @@ class FactoryFinder {
      * loader.
      *
      * Use bootstrap classLoader if cl = null and useBSClsLoader is true
+     * <p>
+     *  尝试使用提供的类加载器加载类。如果失败并且回退被启用,则尝试当前(即引导)类装载器。
+     * 
+     *  如果提供的类加载器是<code> null </code>,首先尝试使用上下文类加载器,后跟当前(即引导)类加载器。
+     * 
+     *  如果cl = null并且useBSClsLoader为true,请使用bootstrap classLoader
+     * 
      */
     static private Class<?> getProviderClass(String className, ClassLoader cl,
             boolean doFallback, boolean useBSClsLoader) throws ClassNotFoundException
@@ -136,6 +162,10 @@ class FactoryFinder {
      * Create an instance of a class. Delegates to method
      * <code>getProviderClass()</code> in order to load the class.
      *
+     * <p>
+     *  创建类的实例。代理方法<code> getProviderClass()</code>以加载类。
+     * 
+     * 
      * @param type Base class / Service interface  of the factory to
      *             instantiate.
      *
@@ -196,6 +226,9 @@ class FactoryFinder {
     /**
      * Try to construct using newTransformerFactoryNoServiceLoader
      *   method if available.
+     * <p>
+     *  尝试使用newTransformerFactoryNoServiceLoader方法(如果可用)。
+     * 
      */
     private static <T> T newInstanceNoServiceLoader(Class<T> type, Class<?> providerClass) {
         // Retain maximum compatibility if no security manager.
@@ -238,6 +271,10 @@ class FactoryFinder {
     /**
      * Finds the implementation Class object in the specified order.  Main
      * entry point.
+     * <p>
+     *  按指定的顺序查找实现Class对象。主入口点。
+     * 
+     * 
      * @return Class object of factory, never null
      *
      * @param type                  Base class / Service interface  of the
@@ -312,6 +349,9 @@ class FactoryFinder {
     /*
      * Try to find provider using the ServiceLoader.
      *
+     * <p>
+     *  尝试使用ServiceLoader查找提供程序。
+     * 
      * @param type Base class / Service interface  of the factory to find.
      *
      * @return instance of provider class if found or null

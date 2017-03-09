@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -120,6 +121,55 @@ import java.io.IOException;
  *   attribute: isContainer false
  * description: A multi-line area that displays plain text.
  *
+ * <p>
+ *  <code> JTextArea </code>是一个显示纯文本的多行区域。
+ * 它旨在是一个轻量级组件,它提供源代码与<code> java.awt.TextArea </code>类的兼容性,它可以合理地这样做。
+ * 您可以在<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/text.html">使用文本组件</a>中找到使用所有文
+ * 本组件的信息和示例, Java教程</em>中的<em>部分。
+ * 它旨在是一个轻量级组件,它提供源代码与<code> java.awt.TextArea </code>类的兼容性,它可以合理地这样做。
+ * 
+ * <p>
+ *  此组件具有<code> java.awt.TextArea </code>类中找不到的功能。应该咨询超类以获得更多功能。
+ * 具有更多功能的替代多行文本类是<code> JTextPane </code>和<code> JEditorPane </code>。
+ * <p>
+ *  <code> java.awt.TextArea </code>在内部处理滚动。
+ *  <code> JTextArea </code>的不同之处在于它不管理滚动,而是实现swing <code> Scrollable </code>接口。
+ * 这允许它被放置在<code> JScrollPane </code>内,如果需要滚动行为,并直接使用,如果不需要滚动。
+ * <p>
+ * <code> java.awt.TextArea </code>有能力做线包装。这是由水平滚动策略控制的。
+ * 由于滚动不是由<code> JTextArea </code>直接完成的,因此必须以另一种方式提供向后兼容性。
+ *  <code> JTextArea </code>具有用于换行的bound属性,用于控制是否换行。默认情况下,行包装属性设置为false(不包装)。
+ * <p>
+ *  <code> java.awt.TextArea </code>有两个属性<code> rows </code>和<code> columns </code>,用于确定首选大小。
+ *  <code> JTextArea </code>使用这些属性来指示当放置在<code> JScrollPane </code>中以匹配<code> java.awt.TextArea </code>提
+ * 供的功能时视口的首选大小。
+ *  <code> java.awt.TextArea </code>有两个属性<code> rows </code>和<code> columns </code>,用于确定首选大小。
+ *  <code> JTextArea </code>具有显示所有文本所需的大小,以使其在<code> JScrollPane </code>中正常工作。
+ * 如果<code> rows </code>或<code> columns </code>的值等于零,则沿着该轴的首选大小将用于沿同一轴的视口首选大小。
+ * <p>
+ * 可以通过为<code> TextEvent </code>添加<code> TextListener </code>来监视<code> java.awt.TextArea </code>在基于<code>
+ *  JTextComponent </code>的组件中,通过<code> DocumentEvent </code>到<code> DocumentListeners </code>从模型广播更改。
+ *  <code> DocumentEvent </code>给出更改的位置和更改的类型(如果需要)。代码片段可能如下所示：。
+ * <pre>
+ *  DocumentListener myListener = ??; JTextArea myArea = ??; myArea.getDocument()。
+ * addDocumentListener(myListener);。
+ * </pre>
+ * 
+ * <dl>
+ *  <dt> <b> <font size = + 1>换行符</font> </b>
+ * <dd>
+ *  有关如何处理新行的讨论,请参见<a href="text/DefaultEditorKit.html"> DefaultEditorKit </a>。
+ * </dl>
+ * 
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ *  @beaninfo属性：isContainer false description：显示纯文本的多行区域。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see JTextPane
  * @see JEditorPane
@@ -127,6 +177,8 @@ import java.io.IOException;
 public class JTextArea extends JTextComponent {
 
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -135,6 +187,9 @@ public class JTextArea extends JTextComponent {
     /**
      * Constructs a new TextArea.  A default model is set, the initial string
      * is null, and rows/columns are set to 0.
+     * <p>
+     *  构造新的TextArea。设置默认模型,初始字符串为null,并且rows / columns设置为0。
+     * 
      */
     public JTextArea() {
         this(null, null, 0, 0);
@@ -144,6 +199,10 @@ public class JTextArea extends JTextComponent {
      * Constructs a new TextArea with the specified text displayed.
      * A default model is created and rows/columns are set to 0.
      *
+     * <p>
+     * 构造具有指定文本显示的新TextArea。创建默认模型,并将行/列设置为0。
+     * 
+     * 
      * @param text the text to be displayed, or null
      */
     public JTextArea(String text) {
@@ -155,6 +214,10 @@ public class JTextArea extends JTextComponent {
      * rows and columns.  A default model is created, and the initial
      * string is null.
      *
+     * <p>
+     *  构造具有指定行数和列数的新的空TextArea。将创建一个默认模型,并且初始字符串为null。
+     * 
+     * 
      * @param rows the number of rows &gt;= 0
      * @param columns the number of columns &gt;= 0
      * @exception IllegalArgumentException if the rows or columns
@@ -168,6 +231,10 @@ public class JTextArea extends JTextComponent {
      * Constructs a new TextArea with the specified text and number
      * of rows and columns.  A default model is created.
      *
+     * <p>
+     *  构造具有指定文本和行数和列数的新TextArea。创建默认模型。
+     * 
+     * 
      * @param text the text to be displayed, or null
      * @param rows the number of rows &gt;= 0
      * @param columns the number of columns &gt;= 0
@@ -182,6 +249,10 @@ public class JTextArea extends JTextComponent {
      * Constructs a new JTextArea with the given document model, and defaults
      * for all of the other arguments (null, 0, 0).
      *
+     * <p>
+     *  使用给定的文档模型构造新的JTextArea,并为所有其他参数(null,0,0)默认。
+     * 
+     * 
      * @param doc  the model to use
      */
     public JTextArea(Document doc) {
@@ -193,6 +264,10 @@ public class JTextArea extends JTextComponent {
      * and columns, and the given model.  All of the constructors
      * feed through this constructor.
      *
+     * <p>
+     *  构造具有指定行数和列数以及给定模型的新JTextArea。所有的构造函数都通过这个构造函数。
+     * 
+     * 
      * @param doc the model to use, or create a default one if null
      * @param text the text to be displayed, null if none
      * @param rows the number of rows &gt;= 0
@@ -231,6 +306,10 @@ public class JTextArea extends JTextComponent {
     /**
      * Returns the class ID for the UI.
      *
+     * <p>
+     *  返回UI的类ID。
+     * 
+     * 
      * @return the ID ("TextAreaUI")
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -244,6 +323,10 @@ public class JTextArea extends JTextComponent {
      * to be used at construction if one isn't explicitly
      * given.  A new instance of PlainDocument is returned.
      *
+     * <p>
+     *  如果没有明确给出,则创建要在构建时使用的模型的默认实现。返回一个PlainDocument的新实例。
+     * 
+     * 
      * @return the default document model
      */
     protected Document createDefaultModel() {
@@ -256,6 +339,10 @@ public class JTextArea extends JTextComponent {
      * variable width fonts.  A PropertyChange event ("tabSize") is fired
      * when the tab size changes.
      *
+     * <p>
+     *  设置要将标签扩展到的字符数。这将乘以可变宽度字体的最大提前量。当标签大小更改时,会触发PropertyChange事件("tabSize")。
+     * 
+     * 
      * @param size number of characters to expand to
      * @see #getTabSize
      * @beaninfo
@@ -276,6 +363,10 @@ public class JTextArea extends JTextComponent {
      * Gets the number of characters used to expand tabs.  If the document is
      * null or doesn't have a tab setting, return a default of 8.
      *
+     * <p>
+     *  获取用于扩展选项卡的字符数。如果文档为null或没有制表符设置,则返回默认值8。
+     * 
+     * 
      * @return the number of characters
      */
     public int getTabSize() {
@@ -298,6 +389,11 @@ public class JTextArea extends JTextComponent {
      * event ("lineWrap") is fired when the policy is changed.
      * By default this property is false.
      *
+     * <p>
+     *  设置文本区域的换行策略。如果设置为true,那么如果它们太长以至于不能在分配的宽度内,则线将被包装。如果设置为false,那些行总是被解开。
+     * 更改策略时会触发<code> PropertyChange </code>事件("lineWrap")。默认情况下,此属性为false。
+     * 
+     * 
      * @param wrap indicates if lines should be wrapped
      * @see #getLineWrap
      * @beaninfo
@@ -317,6 +413,10 @@ public class JTextArea extends JTextComponent {
      * to fit within the allocated width.  If set to false,
      * the lines will always be unwrapped.
      *
+     * <p>
+     * 获取文本区域的换行策略。如果设置为true,那么如果它们太长以至于不能在分配的宽度内,则线将被包装。如果设置为false,那些行总是被解开。
+     * 
+     * 
      * @return if lines will be wrapped
      */
     public boolean getLineWrap() {
@@ -331,6 +431,11 @@ public class JTextArea extends JTextComponent {
      * the lines will be wrapped at character boundaries.
      * By default this property is false.
      *
+     * <p>
+     *  设置在文本区域换行时使用的换行方式。如果设置为true,如果它们太长以至于不能在分配的宽度内,则行将被包裹在字边界(空白)。如果设置为false,那么行将在字符边界处包装。
+     * 默认情况下,此属性为false。
+     * 
+     * 
      * @param word indicates if word boundaries should be used
      *   for line wrapping
      * @see #getWrapStyleWord
@@ -352,6 +457,10 @@ public class JTextArea extends JTextComponent {
      * to fit within the allocated width.  If set to false,
      * the lines will be wrapped at character boundaries.
      *
+     * <p>
+     *  如果文本区域包裹换行,获取使用的换行样式。如果设置为true,那么行将被包裹在字边界(即空格),如果它们太长以至于不能在分配的宽度内。如果设置为false,那么行将在字符边界处包装。
+     * 
+     * 
      * @return if the wrap style should be word boundaries
      *  instead of character boundaries
      * @see #setWrapStyleWord
@@ -364,6 +473,10 @@ public class JTextArea extends JTextComponent {
      * Translates an offset into the components text to a
      * line number.
      *
+     * <p>
+     *  将偏移转换为组件文本到行号。
+     * 
+     * 
      * @param offset the offset &gt;= 0
      * @return the line number &gt;= 0
      * @exception BadLocationException thrown if the offset is
@@ -384,6 +497,10 @@ public class JTextArea extends JTextComponent {
     /**
      * Determines the number of lines contained in the area.
      *
+     * <p>
+     *  确定区域中包含的线数。
+     * 
+     * 
      * @return the number of lines &gt; 0
      */
     public int getLineCount() {
@@ -394,6 +511,10 @@ public class JTextArea extends JTextComponent {
     /**
      * Determines the offset of the start of the given line.
      *
+     * <p>
+     *  确定给定行开始的偏移量。
+     * 
+     * 
      * @param line  the line number to translate &gt;= 0
      * @return the offset &gt;= 0
      * @exception BadLocationException thrown if the line is
@@ -417,6 +538,10 @@ public class JTextArea extends JTextComponent {
     /**
      * Determines the offset of the end of the given line.
      *
+     * <p>
+     *  确定给定行结束的偏移量。
+     * 
+     * 
      * @param line  the line &gt;= 0
      * @return the offset &gt;= 0
      * @exception BadLocationException Thrown if the line is
@@ -445,6 +570,10 @@ public class JTextArea extends JTextComponent {
      * Inserts the specified text at the specified position.  Does nothing
      * if the model is null or if the text is null or empty.
      *
+     * <p>
+     *  在指定位置插入指定的文本。如果模型为null或文本为空或为空,则不执行任何操作。
+     * 
+     * 
      * @param str the text to insert
      * @param pos the position at which to insert &gt;= 0
      * @exception IllegalArgumentException  if pos is an
@@ -467,6 +596,10 @@ public class JTextArea extends JTextComponent {
      * Appends the given text to the end of the document.  Does nothing if
      * the model is null or the string is null or empty.
      *
+     * <p>
+     *  将给定文本附加到文档的末尾。如果模型为null或字符串为null或空,则不执行任何操作。
+     * 
+     * 
      * @param str the text to insert
      * @see #insert
      */
@@ -485,6 +618,10 @@ public class JTextArea extends JTextComponent {
      * new text specified.  Does nothing if the model is null.  Simply
      * does a delete if the new string is null or empty.
      *
+     * <p>
+     *  使用指定的新文本替换指定的开始到结束位置的文本。如果模型为null,则不执行任何操作。只要做一个删除,如果新的字符串为null或空。
+     * 
+     * 
      * @param str the text to use as the replacement
      * @param start the start position &gt;= 0
      * @param end the end position &gt;= start
@@ -517,6 +654,10 @@ public class JTextArea extends JTextComponent {
     /**
      * Returns the number of rows in the TextArea.
      *
+     * <p>
+     *  返回TextArea中的行数。
+     * 
+     * 
      * @return the number of rows &gt;= 0
      */
     public int getRows() {
@@ -527,6 +668,10 @@ public class JTextArea extends JTextComponent {
      * Sets the number of rows for this TextArea.  Calls invalidate() after
      * setting the new value.
      *
+     * <p>
+     * 设置此TextArea的行数。设置新值后调用invalidate()。
+     * 
+     * 
      * @param rows the number of rows &gt;= 0
      * @exception IllegalArgumentException if rows is less than 0
      * @see #getRows
@@ -548,6 +693,10 @@ public class JTextArea extends JTextComponent {
      * Defines the meaning of the height of a row.  This defaults to
      * the height of the font.
      *
+     * <p>
+     *  定义行的高度的含义。默认为字体的高度。
+     * 
+     * 
      * @return the height &gt;= 1
      */
     protected int getRowHeight() {
@@ -561,6 +710,10 @@ public class JTextArea extends JTextComponent {
     /**
      * Returns the number of columns in the TextArea.
      *
+     * <p>
+     *  返回TextArea中的列数。
+     * 
+     * 
      * @return number of columns &gt;= 0
      */
     public int getColumns() {
@@ -571,6 +724,10 @@ public class JTextArea extends JTextComponent {
      * Sets the number of columns for this TextArea.  Does an invalidate()
      * after setting the new value.
      *
+     * <p>
+     *  设置此TextArea的列数。在设置新值后设置invalidate()。
+     * 
+     * 
      * @param columns the number of columns &gt;= 0
      * @exception IllegalArgumentException if columns is less than 0
      * @see #getColumns
@@ -596,6 +753,10 @@ public class JTextArea extends JTextComponent {
      * character <em>m</em> for the font used.  This method can be
      * redefined to be some alternative amount.
      *
+     * <p>
+     *  获取列宽。列的含义对于某些字体可以被认为是一个相当弱的概念。此方法用于定义列的宽度。默认情况下,这被定义为所使用的字体的字符宽度<em> m </em>。这种方法可以重新定义为一些替代量。
+     * 
+     * 
      * @return the column width &gt;= 1
      */
     protected int getColumnWidth() {
@@ -613,6 +774,10 @@ public class JTextArea extends JTextComponent {
      * maximum of the size needed to display the text and the
      * size requested for the viewport.
      *
+     * <p>
+     *  返回TextArea的首选大小。这是显示文本和视口所需大小所需的最大大小。
+     * 
+     * 
      * @return the size
      */
     public Dimension getPreferredSize() {
@@ -635,6 +800,10 @@ public class JTextArea extends JTextComponent {
      * Sets the current font.  This removes cached row height and column
      * width so the new font will be reflected, and calls revalidate().
      *
+     * <p>
+     *  设置当前字体。这将删除缓存的行高度和列宽度,以便反映新的字体,并调用revalidate()。
+     * 
+     * 
      * @param f the font to use as the current font
      */
     public void setFont(Font f) {
@@ -651,6 +820,10 @@ public class JTextArea extends JTextComponent {
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此JTextArea的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this JTextArea.
      */
     protected String paramString() {
@@ -676,6 +849,10 @@ public class JTextArea extends JTextComponent {
      * to return true if the line wrapping policy is true, and false
      * if lines are not being wrapped.
      *
+     * <p>
+     *  如果视口应始终强制此Scrollable的宽度与视口的宽度匹配,则返回true。如果行包装策略为true,则返回true,如果没有包装行,则返回false。
+     * 
+     * 
      * @return true if a viewport should force the Scrollables width
      * to match its own.
      */
@@ -689,6 +866,10 @@ public class JTextArea extends JTextComponent {
      * and row settings if they have been set, otherwise the superclass
      * behavior is used.
      *
+     * <p>
+     * 如果此组件嵌入在JScrollPane中,则返回视口的首选大小。如果已设置它们,则使用所需的列和行设置,否则使用超类行为。
+     * 
+     * 
      * @return The preferredSize of a JViewport whose view is this Scrollable.
      * @see JViewport#getPreferredSize
      */
@@ -714,6 +895,13 @@ public class JTextArea extends JTextComponent {
      * Scrolling containers, like JScrollPane, will use this method
      * each time the user requests a unit scroll.
      *
+     * <p>
+     *  显示逻辑行或列的组件应计算滚动增量,这将完全暴露一个新行或列,具体取决于定向值。
+     * 这被实现为使用<code> getRowHeight </code>和<code> getColumnWidth </code>方法返回的值。
+     * <p>
+     *  滚动容器(如JScrollPane)将在每次用户请求单元滚动时使用此方法。
+     * 
+     * 
      * @param visibleRect the view area visible within the viewport
      * @param orientation Either SwingConstants.VERTICAL or
      *   SwingConstants.HORIZONTAL.
@@ -739,6 +927,9 @@ public class JTextArea extends JTextComponent {
     /**
      * See readObject() and writeObject() in JComponent for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅JComponent中的readObject()和writeObject()。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -762,6 +953,11 @@ public class JTextArea extends JTextComponent {
      * AccessibleJTextArea.
      * A new AccessibleJTextArea instance is created if necessary.
      *
+     * <p>
+     *  获取与此JTextArea关联的AccessibleContext。对于JTextAreas,AccessibleContext采用AccessibleJTextArea的形式。
+     * 如果需要,将创建一个新的AccessibleJTextArea实例。
+     * 
+     * 
      * @return an AccessibleJTextArea that serves as the
      *         AccessibleContext of this JTextArea
      */
@@ -786,12 +982,20 @@ public class JTextArea extends JTextComponent {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现对<code> JTextArea </code>类的辅助功能支持。它提供了适用于文本区域用户界面元素的Java辅助功能API的实现。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
      */
     protected class AccessibleJTextArea extends AccessibleJTextComponent {
 
         /**
          * Gets the state set of this object.
          *
+         * <p>
+         * 
+         * 
          * @return an instance of AccessibleStateSet describing the states
          * of the object
          * @see AccessibleStateSet

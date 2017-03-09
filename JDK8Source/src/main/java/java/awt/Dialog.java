@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -87,6 +88,34 @@ import java.security.AccessControlException;
  * <code>WindowDeactivated</code>, <code>WindowGainedFocus</code>,
  * <code>WindowLostFocus</code>.
  *
+ * <p>
+ *  对话框是具有标题和边框的顶级窗口,通常用于从用户采取某种形式的输入。
+ * 
+ *  对话框的大小包括为边框指定的任何区域。
+ * 边界区域的尺寸可以使用<code> getInsets </code>方法获得,但是,因为这些维度是平台相关的,所以在通过调用<code>可以显示对话框之前,不能获得有效的insets值。
+ *  pack </code>或<code> show </code>。
+ * 由于边界区域被包括在对话的整体大小中,所以边界有效地遮蔽对话的一部分,限制可用于呈现和/或显示具有<code>的左上角位置的矩形的子组件的区域, (insets.left,insets.top)</code>
+ * ,并且<code> height  - (insets.top + insets)的大小为<code> width  - (insets.left + insets.right)</code>底部)</code>
+ * 。
+ *  pack </code>或<code> show </code>。
+ * <p>
+ *  对话框的默认布局为<code> BorderLayout </code>。
+ * <p>
+ *  对话框可以通过<code> setUndecorated </code>关闭其本机装饰(即Frame&amp; Titlebar)。
+ * 这只能在对话框不是{@link Component#isDisplayable()displayable}时才能完成。
+ * <p>
+ * 构建对话框时,可能有另一个窗口作为其所有者。当可见对话框的所有者窗口最小化时,对话框将自动从用户隐藏。当随后恢复所有者窗口时,对话框再次对用户可见。
+ * <p>
+ *  在多屏环境中,您可以在与其所有者不同的屏幕设备上创建<code> Dialog </code>。有关详细信息,请参阅{@link java.awt.Frame}。
+ * <p>
+ *  对话框可以是无模式(默认)或模态。模态对话框阻止对应用程序中某些其他顶级窗口的输入,除了使用对话框作为其所有者创建的任何窗口。
+ * 有关详细信息,请参见<a href="doc-files/Modality.html"> AWT模式</a>规范。
+ * <p>
+ *  对话框能够生成以下<code> WindowEvents </code>：<code> WindowOpened </code>,<code> WindowClosing </code>,<code>
+ *  WindowClosed </code> >,<code> WindowDeactivated </code>,<code> WindowGainedFocus </code>,<code> Wind
+ * owLostFocus </code>。
+ * 
+ * 
  * @see WindowEvent
  * @see Window#addWindowListener
  *
@@ -109,6 +138,10 @@ public class Dialog extends Window {
      * if the Dialog is to be resizable, otherwise
      * it will be false.
      *
+     * <p>
+     *  对话框的可调整大小的属性。如果对话框是可调整大小,将是真的,否则将是假的。
+     * 
+     * 
      * @serial
      * @see #setResizable(boolean)
      */
@@ -121,6 +154,10 @@ public class Dialog extends Window {
      * <code>undecorated</code> will be true if the dialog is
      * undecorated, otherwise it will be false.
      *
+     * <p>
+     *  此字段指示对话框是否未装饰。只有在对话框不可显示时,才能更改此属性。如果对话框未装饰,<code> undecorated </code>将为true,否则为false。
+     * 
+     * 
      * @serial
      * @see #setUndecorated(boolean)
      * @see #isUndecorated()
@@ -138,6 +175,10 @@ public class Dialog extends Window {
      * <code>ModalityType</code> enum specifies modal types and their
      * associated scopes.
      *
+     * <p>
+     * 模态对话框阻止所有输入到一些顶级窗口。特定窗口是否被阻塞取决于对话框的模态类型;这被称为"阻塞范围"。 <code> ModalityType </code>枚举指定模态类型及其关联的范围。
+     * 
+     * 
      * @see Dialog#getModalityType
      * @see Dialog#setModalityType
      * @see Toolkit#isModalityTypeSupported
@@ -147,6 +188,9 @@ public class Dialog extends Window {
     public static enum ModalityType {
         /**
          * <code>MODELESS</code> dialog doesn't block any top-level windows.
+         * <p>
+         *  <code> MODELESS </code>对话框不会阻止任何顶级窗口。
+         * 
          */
         MODELESS,
         /**
@@ -156,6 +200,10 @@ public class Dialog extends Window {
          * windows that, together with the top-level window are treated as a single
          * solid document. Since every top-level window must belong to some
          * document, its root can be found as the top-nearest window without an owner.
+         * <p>
+         *  <code> DOCUMENT_MODAL </code>对话框阻止对来自同一文档的所有顶级窗口的输入,除了来自其自己的子层次结构的窗口。文档是没有所有者的顶级窗口。
+         * 它可能包含子窗口,与顶层窗口一起被视为单个实体文档。由于每个顶级窗口必须属于某个文档,所以它的根可以被找到为没有所有者的最近的窗口。
+         * 
          */
         DOCUMENT_MODAL,
         /**
@@ -164,6 +212,10 @@ public class Dialog extends Window {
          * If there are several applets launched in a browser, they can be
          * treated either as separate applications or a single one. This behavior
          * is implementation-dependent.
+         * <p>
+         *  一个<code> APPLICATION_MODAL </code>对话框阻止来自同一Java应用程序的所有顶级窗口,除了来自它自己的子层次结构的窗口。
+         * 如果在浏览器中启动了几个applet,它们可以作为单独的应用程序或单个应用程序。此行为是实现相关的。
+         * 
          */
         APPLICATION_MODAL,
         /**
@@ -180,6 +232,13 @@ public class Dialog extends Window {
          * to <code>TOOLKIT_MODAL</code> and this permission is not granted, a
          * <code>SecurityException</code> will be thrown, and the modality type will
          * be left unchanged.
+         * <p>
+         * 一个<code> TOOLKIT_MODAL </code>对话框阻止所有顶级窗口从相同的工具包运行,除了它们自己的子层次结构。
+         * 如果在浏览器中启动了几个applet,它们都使用相同的工具包运行;因此,由小应用程序显示的工具包模态对话可以影响嵌入用于该工具包的Java运行时环境的浏览器实例的其他小应用程序和所有窗口。
+         * 必须授予特殊<code> AWTPermission </code>"toolkitModality"才能使用工具包模式对话框。
+         * 如果正在创建<code> TOOLKIT_MODAL </code>对话框,并且未授予此权限,则会抛出<code> SecurityException </code>,并且不会创建任何对话框。
+         * 如果模态类型更改为<code> TOOLKIT_MODAL </code>,并且未授予此权限,则会抛出<code> SecurityException </code>,并且模态类型将保持不变。
+         * 
          */
         TOOLKIT_MODAL
     };
@@ -189,6 +248,11 @@ public class Dialog extends Window {
      * <code>APPLICATION_MODAL</code>. Calling the oldstyle <code>setModal(true)</code>
      * is equal to <code>setModalityType(DEFAULT_MODALITY_TYPE)</code>.
      *
+     * <p>
+     *  模态对话框的默认模态类型。默认模态类型为<code> APPLICATION_MODAL </code>。
+     * 调用oldstyle <code> setModal(true)</code>等于<code> setModalityType(DEFAULT_MODALITY_TYPE)</code>。
+     * 
+     * 
      * @see java.awt.Dialog.ModalityType
      * @see java.awt.Dialog#setModal
      *
@@ -202,6 +266,11 @@ public class Dialog extends Window {
      * windows. This field is kept only for backwards compatibility. Use the
      * {@link Dialog.ModalityType ModalityType} enum instead.
      *
+     * <p>
+     *  如果此对话框是模态,则为true,false为对话框为无模式。模态对话框阻止用户对某些应用程序顶级窗口的输入。此字段仅用于向后兼容性。
+     * 请改用{@link Dialog.ModalityType ModalityType}枚举。
+     * 
+     * 
      * @serial
      *
      * @see #isModal
@@ -219,6 +288,11 @@ public class Dialog extends Window {
      * {@link Dialog.ModalityType#MODELESS ModalityType.MODELESS}, it blocks all
      * user input to some application top-level windows.
      *
+     * <p>
+     * 此对话框的模态类型。
+     * 如果对话框的模态类型不是{@link Dialog.ModalityType#MODELESS ModalityType.MODELESS},它会阻止所有用户对某些应用程序顶级窗口的输入。
+     * 
+     * 
      * @serial
      *
      * @see ModalityType
@@ -234,6 +308,10 @@ public class Dialog extends Window {
      * dialogs. This is called "modal exclusion". This enum specifies
      * the possible modal exclusion types.
      *
+     * <p>
+     *  任何顶级窗口都可以被标记为不被模态对话框阻止。这被称为"模态排除"。此枚举指定可能的模态排除类型。
+     * 
+     * 
      * @see Window#getModalExclusionType
      * @see Window#setModalExclusionType
      * @see Toolkit#isModalExclusionTypeSupported
@@ -243,12 +321,18 @@ public class Dialog extends Window {
     public static enum ModalExclusionType {
         /**
          * No modal exclusion.
+         * <p>
+         *  没有模态排除。
+         * 
          */
         NO_EXCLUDE,
         /**
          * <code>APPLICATION_EXCLUDE</code> indicates that a top-level window
          * won't be blocked by any application-modal dialogs. Also, it isn't
          * blocked by document-modal dialogs from outside of its child hierarchy.
+         * <p>
+         *  <code> APPLICATION_EXCLUDE </code>表示顶层窗口不会被任何应用程序模式对话框阻止。此外,它不会被来自其子层次结构外部的文档模式对话框阻止。
+         * 
          */
         APPLICATION_EXCLUDE,
         /**
@@ -261,6 +345,11 @@ public class Dialog extends Window {
          * <code>TOOLKIT_EXCLUDE</code> and this permission is not granted, a
          * <code>SecurityEcxeption</code> will be thrown, and the exclusion
          * property will be left unchanged.
+         * <p>
+         *  <code> TOOLKIT_EXCLUDE </code>表示顶层窗口不会被应用程序模式或工具包模式对话框阻止。此外,它不会被来自其子层次结构外部的文档模式对话框阻止。
+         * 必须为此排除授予"toolkitModality"<code> AWTPermission </code>。
+         * 如果将排除属性更改为<code> TOOLKIT_EXCLUDE </code>并且未授予此权限,则会抛出<code> SecurityEcxeption </code>,并且排除属性将保持不变。
+         * 
          */
         TOOLKIT_EXCLUDE
     };
@@ -274,6 +363,10 @@ public class Dialog extends Window {
      * Specifies the title of the Dialog.
      * This field can be null.
      *
+     * <p>
+     *  指定对话框的标题。此字段可以为null。
+     * 
+     * 
      * @serial
      * @see #getTitle()
      * @see #setTitle(String)
@@ -287,6 +380,10 @@ public class Dialog extends Window {
      * Indicates that this dialog is being hidden. This flag is set to true at
      * the beginning of hide() and to false at the end of hide().
      *
+     * <p>
+     *  表示此对话框正在被隐藏。此标志在hide()开始时设置为true,在hide()结束时设置为false。
+     * 
+     * 
      * @see #hide()
      * @see #hideAndDisposePreHandler()
      * @see #hideAndDisposeHandler()
@@ -298,6 +395,10 @@ public class Dialog extends Window {
      * Indicates that this dialog is being disposed. This flag is set to true at
      * the beginning of doDispose() and to false at the end of doDispose().
      *
+     * <p>
+     *  表示正在处理此对话框。此标志在doDispose()的开头设置为true,在doDispose()的末尾设置为false。
+     * 
+     * 
      * @see #hide()
      * @see #hideAndDisposePreHandler()
      * @see #hideAndDisposeHandler()
@@ -310,6 +411,9 @@ public class Dialog extends Window {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 5920926903803293709L;
 
@@ -317,6 +421,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible, modeless <code>Dialog</code> with
      * the specified owner <code>Frame</code> and an empty title.
      *
+     * <p>
+     * 用指定的所有者<code> Frame </code>构造一个初始不可见的无模式<code>对话框</code>和一个空标题。
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if
      *     this dialog has no owner
      * @exception java.lang.IllegalArgumentException if the <code>owner</code>'s
@@ -336,6 +444,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible <code>Dialog</code> with the specified
      * owner <code>Frame</code> and modality and an empty title.
      *
+     * <p>
+     *  构造与指定所有者<code>框架</code>和模态的初始不可见的<code>对话框</code>和空标题。
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if
      *     this dialog has no owner
      * @param modal specifies whether dialog blocks user input to other top-level
@@ -362,6 +474,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible, modeless <code>Dialog</code> with
      * the specified owner <code>Frame</code> and title.
      *
+     * <p>
+     *  用指定的所有者<code> Frame </code>和标题构造一个初始不可见的无模式<code>对话框</code>。
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if
      *     this dialog has no owner
      * @param title the title of the dialog or <code>null</code> if this dialog
@@ -383,6 +499,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible <code>Dialog</code> with the
      * specified owner <code>Frame</code>, title and modality.
      *
+     * <p>
+     *  用指定的所有者<code>框架</code>,标题和模态构造一个初始不可见的<code>对话框</code>。
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if
      *     this dialog has no owner
      * @param title the title of the dialog or <code>null</code> if this dialog
@@ -412,6 +532,10 @@ public class Dialog extends Window {
     /**
      * Constructs an initially invisible <code>Dialog</code> with the specified owner
      * <code>Frame</code>, title, modality, and <code>GraphicsConfiguration</code>.
+     * <p>
+     *  用指定的所有者<code> Frame </code>,标题,模式和<code> GraphicsConfiguration </code>构造一个初始不可见的<code>对话框</code>。
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if this dialog
      *     has no owner
      * @param title the title of the dialog or <code>null</code> if this dialog
@@ -447,6 +571,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible, modeless <code>Dialog</code> with
      * the specified owner <code>Dialog</code> and an empty title.
      *
+     * <p>
+     *  用指定的所有者<code> Dialog </code>构造一个初始不可见的无模式<code>对话框</code>和一个空标题。
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if this
      *     dialog has no owner
      * @exception java.lang.IllegalArgumentException if the <code>owner</code>'s
@@ -464,6 +592,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible, modeless <code>Dialog</code>
      * with the specified owner <code>Dialog</code> and title.
      *
+     * <p>
+     *  用指定的所有者<code> Dialog </code>和标题构造一个初始不可见的无模式<code>对话框</code>。
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if this
      *     has no owner
      * @param title the title of the dialog or <code>null</code> if this dialog
@@ -484,6 +616,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible <code>Dialog</code> with the
      * specified owner <code>Dialog</code>, title, and modality.
      *
+     * <p>
+     *  用指定的所有者<code>对话框</code>,标题和模态构造一个初始不可见的<code>对话框</code>
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if this
      *     dialog has no owner
      * @param title the title of the dialog or <code>null</code> if this
@@ -515,6 +651,10 @@ public class Dialog extends Window {
      * specified owner <code>Dialog</code>, title, modality and
      * <code>GraphicsConfiguration</code>.
      *
+     * <p>
+     *  用指定的所有者<code> Dialog </code>,标题,模态和<code> GraphicsConfiguration </code>构造一个初始不可见的<code>对话框</code>。
+     * 
+     * 
      * @param owner the owner of the dialog or <code>null</code> if this
      *     dialog has no owner
      * @param title the title of the dialog or <code>null</code> if this
@@ -551,6 +691,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible, modeless <code>Dialog</code> with the
      * specified owner <code>Window</code> and an empty title.
      *
+     * <p>
+     *  用指定的所有者<code> Window </code>构造一个初始不可见的无模式<code>对话框</code>和一个空标题。
+     * 
+     * 
      * @param owner the owner of the dialog. The owner must be an instance of
      *     {@link java.awt.Dialog Dialog}, {@link java.awt.Frame Frame}, any
      *     of their descendents or <code>null</code>
@@ -575,6 +719,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible, modeless <code>Dialog</code> with
      * the specified owner <code>Window</code> and title.
      *
+     * <p>
+     *  用指定的所有者<code> Window </code>和标题构造一个初始不可见的无模式<code>对话框</code>。
+     * 
+     * 
      * @param owner the owner of the dialog. The owner must be an instance of
      *    {@link java.awt.Dialog Dialog}, {@link java.awt.Frame Frame}, any
      *    of their descendents or <code>null</code>
@@ -601,6 +749,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible <code>Dialog</code> with the
      * specified owner <code>Window</code> and modality and an empty title.
      *
+     * <p>
+     * 使用指定的所有者<code> Window </code>和模式构建一个初始不可见的<code>对话框</code>和一个空标题。
+     * 
+     * 
      * @param owner the owner of the dialog. The owner must be an instance of
      *    {@link java.awt.Dialog Dialog}, {@link java.awt.Frame Frame}, any
      *    of their descendents or <code>null</code>
@@ -634,6 +786,10 @@ public class Dialog extends Window {
      * Constructs an initially invisible <code>Dialog</code> with the
      * specified owner <code>Window</code>, title and modality.
      *
+     * <p>
+     *  构造与指定所有者<code> Window </code>,标题和模态的初始不可见的<code>对话框</code>
+     * 
+     * 
      * @param owner the owner of the dialog. The owner must be an instance of
      *     {@link java.awt.Dialog Dialog}, {@link java.awt.Frame Frame}, any
      *     of their descendents or <code>null</code>
@@ -682,6 +838,11 @@ public class Dialog extends Window {
      * specified owner <code>Window</code>, title, modality and
      * <code>GraphicsConfiguration</code>.
      *
+     * <p>
+     *  用指定的所有者<code> Window </code>,标题,模态和<code> GraphicsConfiguration </code>构造一个初始不可见的<code> Dialog </code>
+     * 。
+     * 
+     * 
      * @param owner the owner of the dialog. The owner must be an instance of
      *     {@link java.awt.Dialog Dialog}, {@link java.awt.Frame Frame}, any
      *     of their descendents or <code>null</code>
@@ -732,6 +893,9 @@ public class Dialog extends Window {
     /**
      * Construct a name for this component.  Called by getName() when the
      * name is null.
+     * <p>
+     *  构造此组件的名称。当名称为null时由getName()调用。
+     * 
      */
     String constructComponentName() {
         synchronized (Dialog.class) {
@@ -745,6 +909,10 @@ public class Dialog extends Window {
      * cause any of its children to be made displayable.
      * This method is called internally by the toolkit and should
      * not be called directly by programs.
+     * <p>
+     *  将此对话框连接到本机屏幕资源,使其显示。使对话框可显示将使其任何子对象可显示。此方法由工具包在内部调用,不应由程序直接调用。
+     * 
+     * 
      * @see Component#isDisplayable
      * @see #removeNotify
      */
@@ -767,6 +935,12 @@ public class Dialog extends Window {
      * This method is obsolete and is kept for backwards compatibility only.
      * Use {@link #getModalityType getModalityType()} instead.
      *
+     * <p>
+     *  指示对话框是否为模态。
+     * <p>
+     *  此方法已过时,仅用于向后兼容。请改用{@link #getModalityType getModalityType()}。
+     * 
+     * 
      * @return    <code>true</code> if this dialog window is modal;
      *            <code>false</code> otherwise
      *
@@ -792,6 +966,14 @@ public class Dialog extends Window {
      * Note: changing modality of the visible dialog may have no effect
      * until it is hidden and then shown again.
      *
+     * <p>
+     *  指定此对话框是否应为模态。
+     * <p>
+     *  此方法已过时,仅用于向后兼容。请改用{@link #setModalityType setModalityType()}。
+     * <p>
+     *  注意：更改可见对话框的模式可能没有效果,直到它被隐藏,然后再次显示。
+     * 
+     * 
      * @param modal specifies whether dialog blocks input to other windows
      *     when shown; calling to <code>setModal(true)</code> is equivalent to
      *     <code>setModalityType(Dialog.DEFAULT_MODALITY_TYPE)</code>, and
@@ -814,6 +996,10 @@ public class Dialog extends Window {
     /**
      * Returns the modality type of this dialog.
      *
+     * <p>
+     *  返回此对话框的模态类型。
+     * 
+     * 
      * @return modality type of this dialog
      *
      * @see java.awt.Dialog#setModalityType
@@ -835,6 +1021,14 @@ public class Dialog extends Window {
      * Note: changing modality of the visible dialog may have no effect
      * until it is hidden and then shown again.
      *
+     * <p>
+     *  设置此对话框的模态类型。有关可能的模态类型,请参阅{@link java.awt.Dialog.ModalityType ModalityType}。
+     * <p>
+     * 如果不支持给定的模态类型,则使用<code> MODELESS </code>。在调用此方法后,您可能需要调用<code> getModalityType()</code>以确保模态类型已设置。
+     * <p>
+     *  注意：更改可见对话框的模式可能没有效果,直到它被隐藏,然后再次显示。
+     * 
+     * 
      * @param type specifies whether dialog blocks input to other
      *     windows when shown. <code>null</code> value and unsupported modality
      *     types are equivalent to <code>MODELESS</code>
@@ -866,6 +1060,10 @@ public class Dialog extends Window {
     /**
      * Gets the title of the dialog. The title is displayed in the
      * dialog's border.
+     * <p>
+     *  获取对话框的标题。标题显示在对话框的边框中。
+     * 
+     * 
      * @return    the title of this dialog window. The title may be
      *            <code>null</code>.
      * @see       java.awt.Dialog#setTitle
@@ -876,6 +1074,10 @@ public class Dialog extends Window {
 
     /**
      * Sets the title of the Dialog.
+     * <p>
+     *  设置对话框的标题。
+     * 
+     * 
      * @param title the title displayed in the dialog's border;
          * a null value results in an empty title
      * @see #getTitle
@@ -894,6 +1096,8 @@ public class Dialog extends Window {
     }
 
     /**
+    /* <p>
+    /* 
      * @return true if we actually showed, false if we just called toFront()
      */
     private boolean conditionalShow(Component toFocus, AtomicLong time) {
@@ -975,6 +1179,10 @@ public class Dialog extends Window {
     /**
      * Shows or hides this {@code Dialog} depending on the value of parameter
      * {@code b}.
+     * <p>
+     *  根据参数{@code b}的值显示或隐藏此{@code对话框}。
+     * 
+     * 
      * @param b if {@code true}, makes the {@code Dialog} visible,
      * otherwise hides the {@code Dialog}.
      * If the dialog and/or its owner
@@ -1017,6 +1225,12 @@ public class Dialog extends Window {
      * dispose. It is permissible to show modal dialogs from the event
      * dispatching thread because the toolkit will ensure that another
      * event pump runs while the one which invoked this method is blocked.
+     * <p>
+     *  使{@code对话框}可见。如果对话框和/或其所有者不可显示,则两者都是可显示的。对话框将在被显示之前被验证。如果对话框已经可见,这将使对话框在前面。
+     * <p>
+     *  如果对话框是模态的并且不可见,则在调用hide或dispose隐藏对话框之前,此调用不会返回。允许从事件分派线程显示模式对话框,因为工具包将确保另一个事件泵运行,而调用此方法的对象被阻止。
+     * 
+     * 
      * @see Component#hide
      * @see Component#isDisplayable
      * @see Component#validate
@@ -1169,6 +1383,10 @@ public class Dialog extends Window {
     /**
      * Hides the Dialog and then causes {@code show} to return if it is currently
      * blocked.
+     * <p>
+     *  隐藏对话框,然后导致{@code show}返回,如果它当前被阻止。
+     * 
+     * 
      * @see Window#show
      * @see Window#dispose
      * @see Window#setVisible(boolean)
@@ -1190,6 +1408,9 @@ public class Dialog extends Window {
     /**
      * Disposes the Dialog and then causes show() to return if it is currently
      * blocked.
+     * <p>
+     *  处理对话框,然后如果它当前被阻止,则使show()返回。
+     * 
      */
     void doDispose() {
         // fix for 5048370: set isInDispose flag to true to prevent calling
@@ -1206,6 +1427,12 @@ public class Dialog extends Window {
      * If this dialog is modal and blocks some windows, then all of them are
      * also sent to the back to keep them below the blocking dialog.
      *
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     *  如果此对话框是模态的并且阻止某些窗口,则所有这些窗口也被发送到后面以使它们低于阻塞对话框。
+     * 
+     * 
      * @see java.awt.Window#toBack
      */
     public void toBack() {
@@ -1222,6 +1449,10 @@ public class Dialog extends Window {
     /**
      * Indicates whether this dialog is resizable by the user.
      * By default, all dialogs are initially resizable.
+     * <p>
+     *  指示此对话框是否可由用户调整大小。默认情况下,所有对话框最初都可以调整大小。
+     * 
+     * 
      * @return    <code>true</code> if the user can resize the dialog;
      *            <code>false</code> otherwise.
      * @see       java.awt.Dialog#setResizable
@@ -1232,6 +1463,10 @@ public class Dialog extends Window {
 
     /**
      * Sets whether this dialog is resizable by the user.
+     * <p>
+     * 设置此对话框是否可由用户调整大小。
+     * 
+     * 
      * @param     resizable <code>true</code> if the user can
      *                 resize this dialog; <code>false</code> otherwise.
      * @see       java.awt.Dialog#isResizable
@@ -1267,6 +1502,13 @@ public class Dialog extends Window {
      * Refer to {@link Window#setShape}, {@link Window#setOpacity} and {@link
      * Window#setBackground} for details
      *
+     * <p>
+     *  禁用或启用此对话框的装饰。
+     * <p>
+     *  此方法只能在对话框无法显示时调用。要使此对话框装饰,它必须是不透明的,并具有默认形状,否则将抛出{@code IllegalComponentStateException}。
+     * 有关详情,请参阅{@link Window#setShape},{@link Window#setOpacity}和{@link Window#setBackground}。
+     * 
+     * 
      * @param  undecorated {@code true} if no dialog decorations are to be
      *         enabled; {@code false} if dialog decorations are to be enabled
      *
@@ -1312,6 +1554,10 @@ public class Dialog extends Window {
     /**
      * Indicates whether this dialog is undecorated.
      * By default, all dialogs are initially decorated.
+     * <p>
+     *  指示此对话框是否未装饰。默认情况下,所有对话框都是最初装饰的。
+     * 
+     * 
      * @return    <code>true</code> if dialog is undecorated;
      *                        <code>false</code> otherwise.
      * @see       java.awt.Dialog#setUndecorated
@@ -1323,6 +1569,9 @@ public class Dialog extends Window {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void setOpacity(float opacity) {
@@ -1336,6 +1585,9 @@ public class Dialog extends Window {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void setShape(Shape shape) {
@@ -1349,6 +1601,9 @@ public class Dialog extends Window {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void setBackground(Color bgColor) {
@@ -1367,6 +1622,10 @@ public class Dialog extends Window {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     *  返回一个表示此对话框状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return    the parameter string of this dialog window.
      */
     protected String paramString() {
@@ -1379,12 +1638,18 @@ public class Dialog extends Window {
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
     /*
      * --- Modality support ---
      *
+     * <p>
+     *  ---模态支持---
+     * 
      */
 
     /*
@@ -1395,6 +1660,11 @@ public class Dialog extends Window {
      * blocked by this dialog and all others. Then blocks this dialog
      * by first met dialog from the first group (if any) and blocks all
      * the windows from the second group.
+     * <p>
+     *  此方法仅用于模态对话框。
+     * 
+     *  浏览所有可见顶级窗口的列表,并将其分为三个不同的组：此对话框的阻止程序,此对话框和所有其他阻止。然后通过第一组的第一个会话对话框(如果有)阻止此对话框,并阻止来自第二组的所有窗口。
+     * 
      */
     void modalShow() {
         // find all the dialogs that block this one
@@ -1465,6 +1735,11 @@ public class Dialog extends Window {
      * Unblocks all the windows blocked by this modal dialog. After
      * each of them has been unblocked, it is checked to be blocked by
      * any other modal dialogs.
+     * <p>
+     *  此方法仅用于模态对话框。
+     * 
+     *  取消阻止此模态对话框阻止的所有窗口。在它们中的每一个被解除阻塞之后,检查它是否被任何其它模态对话阻塞。
+     * 
      */
     void modalHide() {
         // we should unblock all the windows first...
@@ -1496,6 +1771,11 @@ public class Dialog extends Window {
      * modalShow() and modalHide() methods).
      *
      * This method should be called on the getTreeLock() lock.
+     * <p>
+     * 返回此对话框是否应阻止给定的顶级窗口。注意,给定的窗口也可以是一个模态对话框,它应该阻止这个对话框,但是这种方法不考虑这样的情况(这种检查在modalShow()和modalHide()方法中执行)。
+     * 
+     *  这个方法应该在getTreeLock()锁上调用。
+     * 
      */
     boolean shouldBlock(Window w) {
         if (!isVisible_NoClientCode() ||
@@ -1553,6 +1833,9 @@ public class Dialog extends Window {
      * windows for this dialog and marks it as modal blocked.
      * If the window is already blocked by some modal dialog,
      * does nothing.
+     * <p>
+     *  将给定的顶级窗口添加到此对话框的已阻止窗口列表,并将其标记为模态阻止。如果窗口已经被一些模态对话框阻塞,什么也不做。
+     * 
      */
     void blockWindow(Window w) {
         if (!w.isModalBlocked()) {
@@ -1583,6 +1866,9 @@ public class Dialog extends Window {
      * Removes the given top-level window from the list of blocked
      * windows for this dialog and marks it as unblocked. If the
      * window is not modal blocked, does nothing.
+     * <p>
+     *  从此对话框的已阻止窗口列表中删除给定的顶级窗口,并将其标记为未阻止。如果窗口没有模态阻塞,什么都不做。
+     * 
      */
     void unblockWindow(Window w) {
         if (w.isModalBlocked() && blockedWindows.contains(w)) {
@@ -1594,6 +1880,9 @@ public class Dialog extends Window {
     /*
      * Checks if any other modal dialog D blocks the given window.
      * If such D exists, mark the window as blocked by D.
+     * <p>
+     *  检查是否有其他模态对话框D阻塞给定窗口。如果存在这样的D,则将窗口标记为被D阻塞。
+     * 
      */
     static void checkShouldBeBlocked(Window w) {
         synchronized (w.getTreeLock()) {
@@ -1657,6 +1946,9 @@ public class Dialog extends Window {
     /*
      * --- Accessibility Support ---
      *
+     * <p>
+     *  ---辅助功能
+     * 
      */
 
     /**
@@ -1665,6 +1957,11 @@ public class Dialog extends Window {
      * AccessibleAWTDialog.
      * A new AccessibleAWTDialog instance is created if necessary.
      *
+     * <p>
+     *  获取与此对话框相关联的AccessibleContext。对于对话框,AccessibleContext采用AccessibleAWTDialog的形式。
+     * 如果需要,将创建一个新的AccessibleAWTDialog实例。
+     * 
+     * 
      * @return an AccessibleAWTDialog that serves as the
      *         AccessibleContext of this Dialog
      * @since 1.3
@@ -1680,18 +1977,29 @@ public class Dialog extends Window {
      * This class implements accessibility support for the
      * <code>Dialog</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to dialog user-interface elements.
+     * <p>
+     *  此类实现<code> Dialog </code>类的辅助功能支持。它提供了适用于对话框用户界面元素的Java可访问性API的实现。
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTDialog extends AccessibleAWTWindow
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 1.3 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 4837230331833941201L;
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -1703,6 +2011,9 @@ public class Dialog extends Window {
         /**
          * Get the state of this object.
          *
+         * <p>
+         *  获取此对象的状态。
+         * 
          * @return an instance of AccessibleStateSet containing the current
          * state set of the object
          * @see AccessibleState

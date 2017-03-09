@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -115,6 +116,47 @@ import java.util.TreeMap;
  * but the list of states is empty or null, then the standard synth states
  * will be assumed.</p>
  *
+ * <p>
+ *  <p> Nimbus使用的SynthStyle实现。已经注册到NimbusLookAndFeel的每个区域将具有关联的NimbusStyle。
+ * 因此,向NimbusLookAndFeel注册的第三方组件将使用#getStyle(JComponent,Region)方法的外观和感觉来传递NimbusStyle。</p>。
+ * 
+ *  <p>此类根据标准Nimbus命名约定,正确读取并检索放置在UIDefault中的值。它将创建和检索画家,字体,颜色和存储在那里的其他数据。</p>
+ * 
+ *  <p> NimbusStyle还支持基于每个组件覆盖设置的功能。 NimbusStyle检查组件的客户端属性映射"Nimbus.Overrides"。
+ * 如果与此键相关联的值是UIDefaults的实例,那么该默认值表中的值将覆盖UIManager中的标准Nimbus默认值,但仅限该组件实例。</p>。
+ * 
+ *  <p>(可选)您可以指定客户端属性"Nimbus.Overrides.InheritDefaults"。
+ * 如果为true,此客户端属性指示应首先读取位于UIManager中的默认值,然后替换为位于组件客户端属性中的默认值。如果为false,则只使用位于组件客户端属性映射中的默认值。
+ * 如果未指定,则假设为true。</p>。
+ * 
+ * <p>您必须为"Nimbus.Overrides.InheritDefaults"指定"Nimbus.Overrides"才能生效。
+ *  "Nimbus.Overrides"指示是否存在任何覆盖,而"Nimbus.Overrides.InheritDefaults"指示是否应首先使用来自UIManager的默认值初始化这些覆盖。
+ * </p>。
+ * 
+ *  <p>每当针对"Nimbus.Overrides"或"Nimbus.Overrides.InheritDefaults"的组件触发属性更改事件时,将重新装入NimbusStyle。
+ * 因此,例如,在组件上设置新的UID默认值将导致样式重新加载。</p>。
+ * 
+ *  <p>这些值只会从UIManager读取一次,然后缓存。
+ * 如果你需要再次读取值(例如,如果UI被重新加载),然后丢弃这个NimbusStyle,并使用NimbusLookAndFeel.getStyle从NimbusLookAndFeel读取一个新的。
+ * </p>。
+ * 
+ *  <p>第三方组件作者的此类感兴趣的主要API是检索画家的三个方法：#getBackgroundPainter,#getForegroundPainter和#getBorderPainter。
+ * </p>。
+ * 
+ *  <p> NimbusStyle允许您指定自定义状态,或修改状态的顺序。合成器(因此Nimbus)具有"状态"的概念。
+ * 例如,JButton可能处于"MOUSE_OVER"状态或"ENABLED"状态或"DISABLED"状态。这些都是在合成中定义的"标准"状态,适用于所有合成器区域。</p>。
+ * 
+ * <p>然而,有时候,您需要有一个自定义状态。例如,如果父对象是JToolbar,则希望JButton呈现不同。在Nimbus中,通过在UIDefaults中包含特殊键来指定这些自定义状态。
+ * 以下UIDefaults条目定义此按钮的三种状态：</p>。
+ * 
+ *  <pre> <code> JButton.States = Enabled,Disabled,Toolbar JButton [Enabled] .backgroundPainter = somePa
+ * inter JButton [Disabled] .background = BLUE JButton [Toolbar] .backgroundPainter = someOtherPaint </code>
+ * 。
+ * 
+ *  <p>如您所见,<code> JButton.States </code>条目列出了JButton样式将支持的状态。然后指定每个状态的设置。
+ * 如果不指定<code> JButton.States </code>条目,那么将假定标准的Synth状态。如果指定条目但状态列表为空或为空,则将假定标准合成状态。</p>。
+ * 
+ * 
  * @author Richard Bair
  * @author Jasper Potts
  */
@@ -133,6 +175,10 @@ public final class NimbusStyle extends SynthStyle {
      * there is no value, then NULL will be placed into the values map. This way
      * on subsequent lookups it will simply extract NULL, see it, and return
      * null rather than continuing the lookup procedure.
+     * <p>
+     *  在get()方法期间用于性能原因的特殊常量。如果get()遍历所有搜索位置并确定没有值,那么NULL将被放入值映射中。
+     * 这样在后续查找时,它将简单地提取NULL,查看它,并返回null,而不是继续查找过程。
+     * 
      */
     private static final Object NULL = '\0';
     /**
@@ -146,11 +192,21 @@ public final class NimbusStyle extends SynthStyle {
      * states or on LAF changes or updates. This DEFAULT_COLOR is used to
      * ensure that a ColorUIResource is always returned from
      * getColorForState.</p>
+     * <p>
+     *  <p>从getColorForState返回的颜色,否则返回null。</p>
+     * 
+     * <p>从getColorForState返回null是一件非常糟糕的事情,因为它导致组件的AWT对等体安装SystemColor,而不是UIResource。
+     * 因此,如果从getColorForState返回<code> null </code>,则此后不会为其他状态或LAF更改或更新更新颜色。
+     * 这个DEFAULT_COLOR用于确保ColorUIResource总是从getColorForState返回。</p>。
+     * 
      */
     private static final Color DEFAULT_COLOR = new ColorUIResource(Color.BLACK);
     /**
      * Simple Comparator for ordering the RuntimeStates according to their
      * rank.
+     * <p>
+     *  简单比较器,用于根据RuntimeStates的排名对RuntimeStates进行排序。
+     * 
      */
     private static final Comparator<RuntimeState> STATE_COMPARATOR =
         new Comparator<RuntimeState>() {
@@ -164,6 +220,10 @@ public final class NimbusStyle extends SynthStyle {
      * represents. This prefix is used to lookup state in the UIManager.
      * It should be something like Button or Slider.Thumb or "MyButton" or
      * ComboBox."ComboBox.arrowButton" or "MyComboBox"."ComboBox.arrowButton"
+     * <p>
+     *  此NimbusStyle表示的组件或区域的前缀。此前缀用于查找UIManager中的状态。它应该是类似Button或Slider.Thumb或"MyButton"或ComboBox。
+     * "ComboBox.arrowButton"或"MyComboBox"。"ComboBox.arrowButton"。
+     * 
      */
     private String prefix;
     /**
@@ -171,6 +231,10 @@ public final class NimbusStyle extends SynthStyle {
      * SynthPainter returned will be a SynthPainterImpl, which will in turn
      * delegate back to this NimbusStyle for the proper Painter (not
      * SynthPainter) to use for painting the foreground, background, or border.
+     * <p>
+     *  将从此NimbusStyle返回的SynthPainter。
+     * 返回的SynthPainter将是一个SynthPainterImpl,它将委托回到这个NimbusStyle为正确的Painter(不是SynthPainter)用于绘制前景,背景或边框。
+     * 
      */
     private SynthPainter painter;
     /**
@@ -179,12 +243,18 @@ public final class NimbusStyle extends SynthStyle {
      * values, and are used when no overrides are discovered in the client
      * properties of a component. These values are lazily created on first
      * access.
+     * <p>
+     *  数据结构,包含与此样式关联的所有默认值,插入值,状态和其他值。此实例引用默认值,并且在组件的客户端属性中未发现覆盖时使用。这些值是在第一次访问时延迟创建的。
+     * 
      */
     private Values values;
 
     /**
      * A temporary CacheKey used to perform lookups. This pattern avoids
      * creating useless garbage keys, or concatenating strings, etc.
+     * <p>
+     *  用于执行查找的临时CacheKey。此模式避免创建无用的垃圾密钥或连接字符串等。
+     * 
      */
     private CacheKey tmpKey = new CacheKey("", 0);
 
@@ -193,6 +263,9 @@ public final class NimbusStyle extends SynthStyle {
      * this happens whenever the component has as a client property a
      * UIDefaults which overrides (or supplements) those defaults found in
      * UIManager.
+     * <p>
+     * 一些NimbusStyles仅为特定组件创建。在Nimbus中,只要组件具有作为客户端属性的UIDefaults,这会覆盖(或补充)在UIManager中找到的默认值。
+     * 
      */
     private WeakReference<JComponent> component;
 
@@ -202,6 +275,10 @@ public final class NimbusStyle extends SynthStyle {
      * the state information will be pulled from UIManager and stored locally
      * within this style.
      *
+     * <p>
+     *  创建一个新的NimbusStyle。仅必须提供前缀。在适当的时间,将调用installDefaults。在这一点上,所有的状态信息将从UIManager中拉出并在本地存储在这个样式中。
+     * 
+     * 
      * @param prefix Something like Button or Slider.Thumb or
      *        org.jdesktop.swingx.JXStatusBar or ComboBox."ComboBox.arrowButton"
      * @param c an optional reference to a component that this NimbusStyle
@@ -222,6 +299,11 @@ public final class NimbusStyle extends SynthStyle {
      *
      * Overridden to cause this style to populate itself with data from
      * UIDefaults, if necessary.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  覆盖以使此样式使用UIDefaults中的数据填充自己,如果需要。
+     * 
      */
     @Override public void installDefaults(SynthContext ctx) {
         validate();
@@ -234,6 +316,9 @@ public final class NimbusStyle extends SynthStyle {
     /**
      * Pulls data out of UIDefaults, if it has not done so already, and sets
      * up the internal state.
+     * <p>
+     *  从UIDefaults中提取数据,如果它还没有这样做,并设置内部状态。
+     * 
      */
     private void validate() {
         // a non-null values object is the flag we use to determine whether
@@ -476,6 +561,11 @@ public final class NimbusStyle extends SynthStyle {
      *
      * Overridden to cause this style to populate itself with data from
      * UIDefaults, if necessary.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  覆盖以使此样式使用UIDefaults中的数据填充自己,如果必要。
+     * 
      */
     @Override public Insets getInsets(SynthContext ctx, Insets in) {
         if (in == null) {
@@ -536,6 +626,18 @@ public final class NimbusStyle extends SynthStyle {
      *  <li>ColorType.TEXT_FOREGROUND will equate to the color stored in
      *      UIDefaults named "textForeground".</li>
      * </ul>
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>如有必要,覆盖此类型以使用此样式填充来自UIDefaults的数据。</p>
+     * 
+     *  <p>此外,NimbusStyle处理ColorTypes与Synth稍有不同。</p>
+     * <ul>
+     *  <li> ColorType.BACKGROUND将等同于存储在名为"background"的UIDefault中的颜色。
+     * </li> <li> ColorType.TEXT_BACKGROUND将等同于存储在名为"textBackground"的UIDefault中的颜色。
+     * </li> <li> ColorType .FOREGROUND将等同于存储在名为"textForeground"的UIDefault中的颜色。
+     * </li> <li> ColorType.TEXT_FOREGROUND将等同于存储在名为"textForeground"的UIDefault中的颜色。
+     * </ul>
      */
     @Override protected Color getColorForState(SynthContext ctx, ColorType type) {
         String key = null;
@@ -568,6 +670,11 @@ public final class NimbusStyle extends SynthStyle {
      * UIDefaults, if necessary. If a value named "font" is not found in
      * UIDefaults, then the "defaultFont" font in UIDefaults will be returned
      * instead.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 覆盖以使此样式使用UIDefaults中的数据填充自己,如果必要。如果在UIDefaults中找不到名为"font"的值,则将返回UIDefaults中的"defaultFont"字体。
+     * 
      */
     @Override protected Font getFontForState(SynthContext ctx) {
         Font f = (Font)get(ctx, "font");
@@ -594,6 +701,11 @@ public final class NimbusStyle extends SynthStyle {
      *
      * Returns the SynthPainter for this style, which ends up delegating to
      * the Painters installed in this style.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  返回此样式的SynthPainter,最终委派给以此样式安装的Painters。
+     * 
      */
     @Override public SynthPainter getPainter(SynthContext ctx) {
         return painter;
@@ -605,6 +717,11 @@ public final class NimbusStyle extends SynthStyle {
      * Overridden to cause this style to populate itself with data from
      * UIDefaults, if necessary. If opacity is not specified in UI defaults,
      * then it defaults to being non-opaque.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  覆盖以使此样式使用UIDefaults中的数据填充自己,如果必要。如果未在UI默认值中指定透明度,则默认为非不透明。
+     * 
      */
     @Override public boolean isOpaque(SynthContext ctx) {
         // Force Table CellRenderers to be opaque
@@ -645,6 +762,26 @@ public final class NimbusStyle extends SynthStyle {
      * passed to the NimbusStyle constructor. In either case, it looks for
      * "background".</p>
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>如有必要,覆盖此类型以使用此样式填充来自UIDefaults的数据。</p>
+     * 
+     *  <p> UIDefaults中的属性可以以链接方式指定。例如：
+     * <pre>
+     *  后台Button.opacity Button.Enabled.foreground Button.Enabled + Selected.background
+     * </pre>
+     * 
+     *  <p>在此示例中,假设您处于Enabled + Selected状态并搜索"foreground"。
+     * 在这种情况下,我们首先检查Button.Enabled + Selected.foreground,但没有这样的颜色存在。
+     * 然后我们回到下一个有效状态,在这种情况下,Button.Enabled.foreground,并有一个匹配。所以我们返回。</p>。
+     * 
+     *  <p>同样,如果我们处于"启用"状态并查找"背景",我们将无法在Button.Enabled或Button中找到它,但会在UIManager的顶级。因此我们返回该值。</p>
+     * 
+     * <p>一个特别的注意事项：传递给此方法的"键"可以是"background"或"Button.background"形式,其中"Button"等于传递给NimbusStyle构造函数的前缀。
+     * 无论在哪种情况下,它都会查找"背景"。</p>。
+     * 
+     * 
      * @param ctx
      * @param key must not be null
      */
@@ -694,6 +831,10 @@ public final class NimbusStyle extends SynthStyle {
      * specified in the given SynthContext. This method does appropriate
      * fallback searching, as described in #get.
      *
+     * <p>
+     *  获取适当的背景画家,如果有一个,为给定的SynthContext指定的状态。此方法会执行适当的后备搜索,如#get中所述。
+     * 
+     * 
      * @param ctx The SynthContext. Must not be null.
      * @return The background painter associated for the given state, or null if
      * none could be found.
@@ -729,6 +870,10 @@ public final class NimbusStyle extends SynthStyle {
      * specified in the given SynthContext. This method does appropriate
      * fallback searching, as described in #get.
      *
+     * <p>
+     *  获取适当的前台画笔,如果有一个,为给定的SynthContext中指定的状态。此方法会执行适当的后备搜索,如#get中所述。
+     * 
+     * 
      * @param ctx The SynthContext. Must not be null.
      * @return The foreground painter associated for the given state, or null if
      * none could be found.
@@ -764,6 +909,10 @@ public final class NimbusStyle extends SynthStyle {
      * specified in the given SynthContext. This method does appropriate
      * fallback searching, as described in #get.
      *
+     * <p>
+     *  获取适当的边框画笔,如果有一个,为给定的SynthContext指定的状态。此方法会执行适当的后备搜索,如#get中所述。
+     * 
+     * 
      * @param ctx The SynthContext. Must not be null.
      * @return The border painter associated for the given state, or null if
      * none could be found.
@@ -799,6 +948,10 @@ public final class NimbusStyle extends SynthStyle {
      * SynthContext. Ensures that parsing of the values has occurred, or
      * reoccurs as necessary.
      *
+     * <p>
+     *  实用程序方法根据给定的SynthContext返回正确的值。确保对值进行解析,或根据需要重新发生。
+     * 
+     * 
      * @param ctx The SynthContext
      * @return a non-null values reference
      */
@@ -814,6 +967,11 @@ public final class NimbusStyle extends SynthStyle {
      * in (ie, has "wedged" the component in that state) by specifying
      * they client property "Nimbus.State".
      *
+     * <p>
+     *  简单实用程序方法搜索给定字符串数组的给定字符串。
+     * 如果开发人员通过指定它们的客户端属性"Nimbus.State"来指定要在其中的组件的特定状态(即,已经"处于该状态的组件"),则该方法仅从getExtendedState调用。
+     * 
+     * 
      * @param names a non-null array of strings
      * @param name the name to look for in the array
      * @return true or false based on whether the given name is in the array
@@ -847,6 +1005,16 @@ public final class NimbusStyle extends SynthStyle {
      * <p>The string associated with "Nimbus.State" would be of the form:
      * <pre>Enabled+CustomState+MouseOver</pre></p>
      *
+     * <p>
+     * <p>获取给定合成上下文的扩展状态。 Nimbus支持定义自定义状态的能力。用于选择为给定状态使用什么样式信息的算法需要一个整数位字符串,其中整数中的每个位表示组件所处的不同状态。
+     * 此方法使用SynthContext中报告的componentState,此外,自定义状态,以确定此扩展状态是什么。</p>。
+     * 
+     *  <p>此外,此方法在给定上下文中检查名为"Nimbus.State"的客户端属性的组件。如果存在,那么它将分解与该属性相关联的字符串,以确定返回什么状态。
+     * 这样,无论组件的"真实"状态如何,开发人员都可以强制组件处于特定状态。</p>。
+     * 
+     *  <p>与"Nimbus.State"相关联的字符串的形式如下：<pre> Enabled + CustomState + MouseOver </pre> </p>
+     * 
+     * 
      * @param ctx
      * @param v
      * @return
@@ -919,6 +1087,21 @@ public final class NimbusStyle extends SynthStyle {
      * <p>The actual code path for determining the proper state is the same as
      * in Synth.</p>
      *
+     * <p>
+     *  <p>获取与给定上下文中的状态最接近匹配的RuntimeState,但不如给定的"lastState"特定。基本上,这允许您搜索下一个最佳状态。</p>
+     * 
+     *  <p>例如,如果您具有以下三个状态：
+     * <pre>
+     *  启用启用+按下禁用
+     * </pre>
+     * 并且你想找到最好地表示ENABLED + PRESSED + FOCUSED和<code> lastState </code>为null(或一个空数组,或一个单一的int与索引== -1的数组)的状态,
+     * 然后Enabled +按下将返回。
+     * 如果然后再次调用此方法,但将"Enabled + Pressed"的索引作为"lastState"传递,则将返回"Enabled"。
+     * 如果你第三次调用这个方法,并传递Enabled的索引作为<code> lastState </code>,那么将返回null。</p>。
+     * 
+     *  <p>确定适当状态的实际代码路径与Synth。</p>中的相同
+     * 
+     * 
      * @param ctx
      * @param lastState a 1 element array, allowing me to do pass-by-reference.
      * @return
@@ -1015,6 +1198,10 @@ public final class NimbusStyle extends SynthStyle {
      * component can be in (such as Enabled), this class represents the colors,
      * fonts, painters, etc associated with some state for this
      * style.
+     * <p>
+     *  包含与状态关联的UIDefaults和painter等值。
+     * 而<code> State </code>表示组件可以处于不同状态(如Enabled),此类表示与此样式的某些状态相关联的颜色,字体,画家等。
+     * 
      */
     private final class RuntimeState implements Cloneable {
         int state;
@@ -1049,25 +1236,40 @@ public final class NimbusStyle extends SynthStyle {
      * Essentially a struct of data for a style. A default instance of this
      * class is used by NimbusStyle. Additional instances exist for each
      * component that has overrides.
+     * <p>
+     *  基本上是一个样式的数据结构。此类的默认实例由NimbusStyle使用。每个具有覆盖的组件都存在其他实例。
+     * 
      */
     private static final class Values {
         /**
          * The list of State types. A State represents a type of state, such
          * as Enabled, Default, WindowFocused, etc. These can be custom states.
+         * <p>
+         *  状态类型列表。状态表示状态的类型,例如Enabled,Default,WindowFocused等。这些可以是自定义状态。
+         * 
          */
         State[] stateTypes = null;
         /**
          * The list of actual runtime state representations. These can represent things such
          * as Enabled + Focused. Thus, they differ from States in that they contain
          * several states together, and have associated properties, data, etc.
+         * <p>
+         *  实际运行时状态表示的列表。这些可以表示诸如Enabled + Focused等。因此,它们与国家不同,它们包含几个状态在一起,并具有相关的属性,数据等。
+         * 
          */
         RuntimeState[] states = null;
         /**
          * The content margins for this region.
+         * <p>
+         *  此区域的内容边距。
+         * 
          */
         Insets contentMargins;
         /**
          * Defaults on the region/component level.
+         * <p>
+         *  在区域/组件级别上的默认值。
+         * 
          */
         UIDefaults defaults = new UIDefaults(10, .7f);
         /**
@@ -1077,6 +1279,11 @@ public final class NimbusStyle extends SynthStyle {
          * state. So for example:
          *
          * foo.bar$$2353
+         * <p>
+         * 简单缓存。在查找一个值之后,它被存储在这个高速缓存中以供稍后检索。关键是被查找的属性,两个美元符号和扩展状态的级联。例如：
+         * 
+         *  foo.bar $$ 2353
+         * 
          */
         Map<CacheKey,Object> cache = new HashMap<CacheKey,Object>();
     }
@@ -1084,6 +1291,7 @@ public final class NimbusStyle extends SynthStyle {
     /**
      * This implementation presupposes that key is never null and that
      * the two keys being checked for equality are never null
+     * <p>
      */
     private static final class CacheKey {
         private String key;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,13 @@ import java.awt.event.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  ScrollPaneUI的Metal L&amp; F实现。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Steve Wilson
  */
 public class MetalScrollPaneUI extends BasicScrollPaneUI
@@ -89,6 +97,9 @@ public class MetalScrollPaneUI extends BasicScrollPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     protected void uninstallListeners(JComponent c) {
         super.uninstallListeners(c);
@@ -96,6 +107,8 @@ public class MetalScrollPaneUI extends BasicScrollPaneUI
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated - Replaced by {@link #uninstallListeners(JComponent)}
      */
     @Deprecated
@@ -109,6 +122,9 @@ public class MetalScrollPaneUI extends BasicScrollPaneUI
      * <code>MetalBorders.ScrollPaneBorder</code>, the client property
      * <code>FREE_STANDING_PROP</code> of the scrollbars
      * is set to false, otherwise it is set to true.
+     * <p>
+     *  如果滚动条的边框是<code> MetalBorders.ScrollPaneBorder </code>的实例,滚动条的客户端属性<code> FREE_STANDING_PROP </code>设
+     * 置为false,否则设置为true。
      */
     private void updateScrollbarsFreeStanding() {
         if (scrollpane == null) {

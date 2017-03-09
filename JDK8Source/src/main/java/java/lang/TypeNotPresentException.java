@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,14 @@ package java.lang;
  * java.lang.reflect.AnnotatedElement API used to read annotations
  * reflectively}.
  *
+ * <p>
+ *  当应用程序尝试使用表示类型名称的字符串访问类型时抛出,但不能找到具有指定名称的类型的定义。
+ * 此异常与{@link ClassNotFoundException}不同,因为<tt> ClassNotFoundException </tt>是一个已检查的异常,而此异常未选中。
+ * 
+ *  <p>请注意,当访问未定义的类型变量以及加载类型(例如类,接口或注释类型)时,可以使用此异常。
+ * 特别是,这个异常可以由{@linkplain java.lang.reflect.AnnotatedElement API用来反映读取注释}抛出。
+ * 
+ * 
  * @author  Josh Bloch
  * @see     java.lang.reflect.AnnotatedElement
  * @since 1.5
@@ -52,6 +61,8 @@ public class TypeNotPresentException extends RuntimeException {
      * Constructs a <tt>TypeNotPresentException</tt> for the named type
      * with the specified cause.
      *
+     * <p>
+     * 
      * @param typeName the fully qualified name of the unavailable type
      * @param cause the exception that was thrown when the system attempted to
      *    load the named type, or <tt>null</tt> if unavailable or inapplicable
@@ -64,6 +75,10 @@ public class TypeNotPresentException extends RuntimeException {
     /**
      * Returns the fully qualified name of the unavailable type.
      *
+     * <p>
+     *  为具有指定原因的命名类型构造<tt> TypeNotPresentException </tt>。
+     * 
+     * 
      * @return the fully qualified name of the unavailable type
      */
     public String typeName() { return typeName;}

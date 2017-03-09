@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,8 @@ import com.sun.corba.se.spi.ior.iiop.GIOPVersion ;
 import com.sun.corba.se.spi.orb.ORB ;
 
 /**
+/* <p>
+/* 
  * @author
  * If getMinorVersion==0, this does not contain any tagged components
  */
@@ -144,6 +147,7 @@ public class IIOPProfileTemplateImpl extends TaggedProfileTemplateBase
     }
 
     /** Write out this IIOPProfileTemplateImpl only.
+    /* <p>
     */
     public void writeContents( OutputStream os)
     {

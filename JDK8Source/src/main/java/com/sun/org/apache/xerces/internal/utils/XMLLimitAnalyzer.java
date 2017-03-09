@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
@@ -48,6 +49,10 @@ import java.util.Map;
 /**
  * A helper for analyzing entity expansion limits
  *
+ * <p>
+ *  用于分析实体扩展限制的帮助程序
+ * 
+ * 
  * @author Joe Wang Oracle Corp.
  *
  */
@@ -55,6 +60,9 @@ public final class XMLLimitAnalyzer {
 
     /**
      * Map old property names with the new ones
+     * <p>
+     *  使用新的属性名称映射旧的属性名称
+     * 
      */
     public static enum NameMap {
         ENTITY_EXPANSION_LIMIT(Constants.SP_ENTITY_EXPANSION_LIMIT, Constants.ENTITY_EXPANSION_LIMIT),
@@ -79,19 +87,31 @@ public final class XMLLimitAnalyzer {
 
     /**
      * Max value accumulated for each property
+     * <p>
+     *  每个属性累积的最大值
+     * 
      */
     private final int[] values;
     /**
      * Names of the entities corresponding to their max values
+     * <p>
+     *  与其最大值对应的实体的名称
+     * 
      */
     private final String[] names;
     /**
      * Total value of accumulated entities
+     * <p>
+     *  累计实体的总价值
+     * 
      */
     private final int[] totalValue;
 
     /**
      * Maintain values of the top 10 elements in the process of parsing
+     * <p>
+     *  在解析过程中保持前10个元素的值
+     * 
      */
     private final Map[] caches;
 
@@ -99,6 +119,9 @@ public final class XMLLimitAnalyzer {
     /**
      * Default constructor. Establishes default values for known security
      * vulnerabilities.
+     * <p>
+     *  默认构造函数。建立已知安全漏洞的默认值。
+     * 
      */
     public XMLLimitAnalyzer() {
         values = new int[Limit.values().length];
@@ -111,6 +134,10 @@ public final class XMLLimitAnalyzer {
      * Add the value to the current max count for the specified property
      * To find the max value of all entities, set no limit
      *
+     * <p>
+     *  将值添加到指定属性的当前最大计数要查找所有实体的最大值,请设置无限制
+     * 
+     * 
      * @param limit the type of the property
      * @param entityName the name of the entity
      * @param value the value of the entity
@@ -121,6 +148,10 @@ public final class XMLLimitAnalyzer {
 
     /**
      * Add the value to the current count by the index of the property
+     * <p>
+     *  通过属性的索引将值添加到当前计数
+     * 
+     * 
      * @param index the index of the property
      * @param entityName the name of the entity
      * @param value the value of the entity
@@ -168,6 +199,10 @@ public final class XMLLimitAnalyzer {
     /**
      * Return the value of the current max count for the specified property
      *
+     * <p>
+     *  返回指定属性的当前最大计数的值
+     * 
+     * 
      * @param limit the property
      * @return the value of the property
      */
@@ -181,6 +216,10 @@ public final class XMLLimitAnalyzer {
     /**
      * Return the total value accumulated so far
      *
+     * <p>
+     *  返回累积的总值
+     * 
+     * 
      * @param limit the property
      * @return the accumulated value of the property
      */
@@ -193,6 +232,10 @@ public final class XMLLimitAnalyzer {
     }
     /**
      * Return the current max value (count or length) by the index of a property
+     * <p>
+     *  通过属性的索引返回当前最大值(计数或长度)
+     * 
+     * 
      * @param index the index of a property
      * @return count of a property
      */
@@ -212,6 +255,9 @@ public final class XMLLimitAnalyzer {
     }
     /**
      * Stop tracking the entity
+     * <p>
+     *  停止跟踪实体
+     * 
      * @param limit the limit property
      * @param name the name of an entity
      */

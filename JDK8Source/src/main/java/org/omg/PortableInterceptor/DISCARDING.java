@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -12,6 +13,9 @@ public interface DISCARDING
 {
 
   /** Object adapter state that causes all requests to be discarded.
+  /* <p>
+  /* org / omg / PortableInterceptor / DISCARDING.java。
+  /* 
    */
   public static final short value = (short)(2);
 }

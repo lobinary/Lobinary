@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,11 @@ package java.lang.invoke;
  * A {@code ConstantCallSite} is a {@link CallSite} whose target is permanent, and can never be changed.
  * An {@code invokedynamic} instruction linked to a {@code ConstantCallSite} is permanently
  * bound to the call site's target.
+ * <p>
+ *  {@code ConstantCallSite}是一个{@link CallSite},其目标是永久的,永远不能更改。
+ * 与{@code ConstantCallSite}相关联的{@code invokedynamic}指令将永久绑定到调用网站的目标。
+ * 
+ * 
  * @author John Rose, JSR 292 EG
  */
 public class ConstantCallSite extends CallSite {
@@ -36,6 +42,10 @@ public class ConstantCallSite extends CallSite {
 
     /**
      * Creates a call site with a permanent target.
+     * <p>
+     *  创建具有永久目标的调用网站。
+     * 
+     * 
      * @param target the target to be permanently associated with this call site
      * @throws NullPointerException if the proposed target is null
      */
@@ -69,6 +79,20 @@ public class ConstantCallSite extends CallSite {
      * will result in an {@code IllegalStateException}.
      * It is legal at all times to obtain the call site's type using the {@code type} method.
      *
+     * <p>
+     *  创建具有永久目标的调用网站,可能绑定到调用网站本身。
+     * <p>
+     *  在构建调用站点期间,调用{@code createTargetHook}以产生实际的目标,就像通过{@code(MethodHandle)createTargetHook.invoke(this)}形
+     * 式的调用。
+     * <p>
+     *  注意,用户代码不能直接在子类构造函数中执行这样的动作,因为目标必须在{@code ConstantCallSite}构造函数返回之前固定。
+     * <p>
+     *  钩子被称为将调用站点绑定到目标方法句柄,典型的动作是{@code someTarget.bindTo(this)}。然而,钩子可以自由地采取任何动作,包括忽略调用点并返回一个恒定的目标。
+     * <p>
+     *  钩子返回的结果必须是与调用站点完全相同类型的方法句柄。
+     * <p>
+     * 当钩子被调用时,新的{@code ConstantCallSite}对象处于部分构造状态。
+     * 
      * @param targetType the type of the method handle to be permanently associated with this call site
      * @param createTargetHook a method handle to invoke (on the call site) to produce the call site's target
      * @throws WrongMethodTypeException if the hook cannot be invoked on the required arguments,
@@ -88,6 +112,11 @@ public class ConstantCallSite extends CallSite {
      * That is, the target is always the original value passed
      * to the constructor call which created this instance.
      *
+     * <p>
+     * 在此状态下,调用{@code getTarget}或任何其他尝试使用目标的操作都会导致{@code IllegalStateException}。
+     * 始终使用{@code type}方法获取调用网站的类型是合法的。
+     * 
+     * 
      * @return the immutable linkage state of this call site, a constant method handle
      * @throws IllegalStateException if the {@code ConstantCallSite} constructor has not completed
      */
@@ -99,6 +128,10 @@ public class ConstantCallSite extends CallSite {
     /**
      * Always throws an {@link UnsupportedOperationException}.
      * This kind of call site cannot change its target.
+     * <p>
+     *  返回调用网站的目标方法,其行为类似于{@code ConstantCallSite}的{@code final}字段。也就是说,目标始终是传递给创建此实例的构造函数调用的原始值。
+     * 
+     * 
      * @param ignore a new target proposed for the call site, which is ignored
      * @throws UnsupportedOperationException because this kind of call site cannot change its target
      */
@@ -110,6 +143,10 @@ public class ConstantCallSite extends CallSite {
      * Returns this call site's permanent target.
      * Since that target will never change, this is a correct implementation
      * of {@link CallSite#dynamicInvoker CallSite.dynamicInvoker}.
+     * <p>
+     *  始终抛出{@link UnsupportedOperationException}。这种呼叫站点不能改变其目标。
+     * 
+     * 
      * @return the immutable linkage state of this call site, a constant method handle
      * @throws IllegalStateException if the {@code ConstantCallSite} constructor has not completed
      */

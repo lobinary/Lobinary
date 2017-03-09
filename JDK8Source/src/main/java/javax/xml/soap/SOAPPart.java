@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,31 @@ import javax.xml.transform.Source;
  * The <code>SOAPPart</code> method <code>getEnvelope</code> can be used
  * to retrieve the <code>SOAPEnvelope</code> object.
  * <P>
+ * <p>
+ *  用于<code> SOAPMessage </code>对象的SOAP特定部分的容器。
+ * 所有消息都需要有一个SOAP部分,因此当创建一个<code> SOAPMessage </code>对象时,它将自动具有一个<code> SOAPPart </code>对象。
+ * P>
+ *  <code> SOAPPart </code>对象是MIME部分,具有MIME标题Content-Id,Content-Location和Content-Type。
+ * 因为Content-Type的值必须是"text / xml",所以<code> SOAPPart </code>对象会自动具有Content-Type的MIME标题,其值设置为"text / xml"
+ * 。
+ *  <code> SOAPPart </code>对象是MIME部分,具有MIME标题Content-Id,Content-Location和Content-Type。
+ * 该值必须为"text / xml",因为消息的SOAP部分中的内容必须是XML格式。
+ * 不是"text / xml"类型的内容必须位于<code> AttachmentPart </code>对象中,而不是在<code> SOAPPart </code>对象中。
+ * <P>
+ *  发送消息时,其SOAP部分必须将MIME标题Content-Type设置为"text / xml"。
+ * 或者,从另一个角度来看,接收的任何消息的SOAP部分必须具有值为"text / xml"的MIME头Con​​tent-Type。
+ * <P>
+ *  客户端可以通过调用<code> SOAPMessage.getSOAPPart </code>方法访问<code> SOAPMessage </code>对象的<code> SOAPPart </code>
+ * 对象。
+ * 以下代码行(其中<code> message </code>是<code> SOAPMessage </code>对象)检索消息的SOAP部分。
+ * <PRE>
+ *  SOAPPart soapPart = message.getSOAPPart();
+ * </PRE>
+ * <P>
+ * 一个<code> SOAPPart </code>对象包含一个<code> SOAPEnvelope </code>对象,它又包含一个<code> SOAPBody </code>对象和一个<code>
+ *  SOAPHeader </code>对象。
+ * 可以使用<code> SOAPPart </code>方法<code> getEnvelope </code>来检索<code> SOAPEnvelope </code>对象。
+ * <P>
  */
 public abstract class SOAPPart implements org.w3c.dom.Document, Node {
 
@@ -72,6 +98,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * <code>SOAPPart</code> object. Once the SOAP envelope is obtained, it
      * can be used to get its contents.
      *
+     * <p>
+     *  获取与此<code> SOAPPart </code>对象关联的<code> SOAPEnvelope </code>对象。一旦获得SOAP包络,它就可以用于获取其内容。
+     * 
+     * 
      * @return the <code>SOAPEnvelope</code> object for this
      *           <code>SOAPPart</code> object
      * @exception SOAPException if there is a SOAP error
@@ -81,6 +111,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
     /**
      * Retrieves the value of the MIME header whose name is "Content-Id".
      *
+     * <p>
+     *  检索名称为"Content-Id"的MIME标题的值。
+     * 
+     * 
      * @return a <code>String</code> giving the value of the MIME header
      *         named "Content-Id"
      * @see #setContentId
@@ -95,6 +129,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
     /**
      * Retrieves the value of the MIME header whose name is "Content-Location".
      *
+     * <p>
+     *  检索名称为"Content-Location"的MIME标题的值。
+     * 
+     * 
      * @return a <code>String</code> giving the value of the MIME header whose
      *          name is "Content-Location"
      * @see #setContentLocation
@@ -110,6 +148,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * Sets the value of the MIME header named "Content-Id"
      * to the given <code>String</code>.
      *
+     * <p>
+     *  将名为"Content-Id"的MIME标头的值设置为给定的<code> String </code>。
+     * 
+     * 
      * @param contentId a <code>String</code> giving the value of the MIME
      *        header "Content-Id"
      *
@@ -125,6 +167,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * Sets the value of the MIME header "Content-Location"
      * to the given <code>String</code>.
      *
+     * <p>
+     *  将MIME标题"Content-Location"的值设置为给定的<code> String </code>。
+     * 
+     * 
      * @param contentLocation a <code>String</code> giving the value
      *        of the MIME
      *        header "Content-Location"
@@ -139,6 +185,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
     /**
      * Removes all MIME headers that match the given name.
      *
+     * <p>
+     *  删除与给定名称匹配的所有MIME标题。
+     * 
+     * 
      * @param header a <code>String</code> giving the name of the MIME header(s) to
      *               be removed
      */
@@ -147,6 +197,9 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
     /**
      * Removes all the <code>MimeHeader</code> objects for this
      * <code>SOAPEnvelope</code> object.
+     * <p>
+     *  删除此<code> SOAPEnvelope </code>对象的所有<code> MimeHeader </code>对象。
+     * 
      */
     public abstract void removeAllMimeHeaders();
 
@@ -155,6 +208,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * in this <code>SOAPPart</code> object that
      * is identified by the given <code>String</code>.
      *
+     * <p>
+     *  获取由给定的<code> String </code>标识的<code> SOAPPart </code>对象中的<code> MimeHeader </code>对象的所有值。
+     * 
+     * 
      * @param name the name of the header; example: "Content-Type"
      * @return a <code>String</code> array giving all the values for the
      *         specified header
@@ -174,6 +231,13 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * <P>
      * Note that RFC822 headers can contain only US-ASCII characters.
      *
+     * <p>
+     *  更改与给定标题名称匹配的第一个标题条目,以使其值为给定值,如果没有现有标题匹配,则添加具有给定名称和值的新标题。如果存在匹配,此方法将清除匹配并设置给定值的第一个标头的所有现有值。
+     * 如果多个头具有给定名称,则此方法将删除第一个头之后的所有匹配头。
+     * <P>
+     * 请注意,RFC822标头只能包含US-ASCII字符。
+     * 
+     * 
      * @param   name    a <code>String</code> giving the header name
      *                  for which to search
      * @param   value   a <code>String</code> giving the value to be set.
@@ -197,6 +261,13 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * <P>
      * Note that RFC822 headers can contain only US-ASCII characters.
      *
+     * <p>
+     *  创建具有指定名称和值的<code> MimeHeader </code>对象,并将其添加到此<code> SOAPPart </code>对象。
+     * 如果具有指定名称的<code> MimeHeader </code>已存在,则此方法将指定的值添加到已经存在的值。
+     * <P>
+     *  请注意,RFC822标头只能包含US-ASCII字符。
+     * 
+     * 
      * @param   name    a <code>String</code> giving the header name
      * @param   value   a <code>String</code> giving the value to be set
      *                  or added
@@ -209,6 +280,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * Retrieves all the headers for this <code>SOAPPart</code> object
      * as an iterator over the <code>MimeHeader</code> objects.
      *
+     * <p>
+     *  将<code> SOAPPart </code>对象的所有头作为迭代器检索到<code> MimeHeader </code>对象。
+     * 
+     * 
      * @return  an <code>Iterator</code> object with all of the Mime
      *          headers for this <code>SOAPPart</code> object
      */
@@ -218,6 +293,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * Retrieves all <code>MimeHeader</code> objects that match a name in
      * the given array.
      *
+     * <p>
+     *  检索与给定数组中的名称匹配的所有<code> MimeHeader </code>对象。
+     * 
+     * 
      * @param names a <code>String</code> array with the name(s) of the
      *        MIME headers to be returned
      * @return  all of the MIME headers that match one of the names in the
@@ -229,6 +308,10 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * Retrieves all <code>MimeHeader</code> objects whose name does
      * not match a name in the given array.
      *
+     * <p>
+     *  检索其名称与给定数组中的名称不匹配的所有<code> MimeHeader </code>对象。
+     * 
+     * 
      * @param names a <code>String</code> array with the name(s) of the
      *        MIME headers not to be returned
      * @return  all of the MIME headers in this <code>SOAPPart</code> object
@@ -243,6 +326,11 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * from the given <code>Source</code> object. This <code>Source</code>
      * must contain a valid SOAP document.
      *
+     * <p>
+     *  使用给定的<code> Source </code>对象中的数据设置<code> SOAPEnvelope </code>对象的内容。
+     * 此<code> Source </code>必须包含有效的SOAP文档。
+     * 
+     * 
      * @param source the <code>javax.xml.transform.Source</code> object with the
      *        data to be set
      *
@@ -255,6 +343,8 @@ public abstract class SOAPPart implements org.w3c.dom.Document, Node {
      * Returns the content of the SOAPEnvelope as a JAXP <code>Source</code>
      * object.
      *
+     * <p>
+     * 
      * @return the content as a <code>javax.xml.transform.Source</code> object
      *
      * @exception SOAPException if the implementation cannot convert

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,12 +69,37 @@ import javax.swing.UIManager;
  *
  * </dl>
  *
+ * <p>
+ *  这是文本组件需要的一组事物,它是一些<em>类型</em>文本文档的合理功能的编辑器。此实现提供了一个默认实现,将文本视为纯文本,并为简单编辑器提供了一组最小的操作。
+ * 
+ * <dl>
+ *  <dt> <b> <font size = + 1>换行符</font> </b>
+ * <dd>
+ * 有两个属性处理换行符。系统属性<code> line.separator </code>定义为与平台相关的"\ n","\ r"或"\ r \ n"。
+ * 在<code> DefaultEditorKit </code>中还定义了一个属性,名为<a href=#EndOfLineStringProperty> <code> EndOfLineStringP
+ * roperty </code> </a>,它在文档加载时自动定义为首次出现任何换行符。
+ * 有两个属性处理换行符。系统属性<code> line.separator </code>定义为与平台相关的"\ n","\ r"或"\ r \ n"。
+ * 当加载文档时,适当地设置<code> EndOfLineStringProperty </code>,并且当文档被写回时,使用<code> EndOfLineStringProperty </code>
+ * 。
+ * 有两个属性处理换行符。系统属性<code> line.separator </code>定义为与平台相关的"\ n","\ r"或"\ r \ n"。
+ * 但是当文档在内存中时,"\ n"字符用于定义换行符,而不管当文档在磁盘上时如何定义换行符。因此,为了搜索的目的,应始终使用"\ n"。
+ * 当创建一个新文档,并且未定义<code> EndOfLineStringProperty </code>时,在写出文档时将使用System属性。
+ *  <p>请注意,<code> EndOfLineStringProperty </code>是在<code> Document </code>上使用<code> get / putProperty </code>
+ * 方法设置的。
+ * 当创建一个新文档,并且未定义<code> EndOfLineStringProperty </code>时,在写出文档时将使用System属性。子类可以覆盖此行为。
+ * 
+ * </dl>
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class DefaultEditorKit extends EditorKit {
 
     /**
      * default constructor for DefaultEditorKit
+     * <p>
+     *  DefaultEditorKit的默认构造函数
+     * 
      */
     public DefaultEditorKit() {
     }
@@ -83,6 +109,10 @@ public class DefaultEditorKit extends EditorKit {
      * kit represents support for.  The default
      * is <code>text/plain</code>.
      *
+     * <p>
+     *  获取此套件表示支持的数据的MIME类型。默认值为<code> text / plain </code>。
+     * 
+     * 
      * @return the type
      */
     public String getContentType() {
@@ -95,6 +125,10 @@ public class DefaultEditorKit extends EditorKit {
      * kit.  The default is to have the UI produce the
      * factory, so this method has no implementation.
      *
+     * <p>
+     * 获取适合于生产此套件生产的任何型号视图的工厂。默认是让UI产生工厂,所以这个方法没有实现。
+     * 
+     * 
      * @return the view factory
      */
     public ViewFactory getViewFactory() {
@@ -106,6 +140,10 @@ public class DefaultEditorKit extends EditorKit {
      * on a text component that is using a model and
      * view produced by this kit.
      *
+     * <p>
+     *  获取可以在使用此套件生成的模型和视图的文本组件上使用的一组命令。
+     * 
+     * 
      * @return the command list
      */
     public Action[] getActions() {
@@ -116,6 +154,10 @@ public class DefaultEditorKit extends EditorKit {
      * Fetches a caret that can navigate through views
      * produced by the associated ViewFactory.
      *
+     * <p>
+     *  获取可以浏览相关ViewFactory生成的视图的插入符号。
+     * 
+     * 
      * @return the caret
      */
     public Caret createCaret() {
@@ -126,6 +168,10 @@ public class DefaultEditorKit extends EditorKit {
      * Creates an uninitialized text storage model (PlainDocument)
      * that is appropriate for this type of editor.
      *
+     * <p>
+     *  创建适合此类型编辑器的未初始化文本存储模型(PlainDocument)。
+     * 
+     * 
      * @return the model
      */
     public Document createDefaultDocument() {
@@ -137,6 +183,10 @@ public class DefaultEditorKit extends EditorKit {
      * to be in a format appropriate for this kind of content
      * handler.
      *
+     * <p>
+     *  插入来自给定流的内容,期望该内容是适合于这种类型的内容处理器的格式。
+     * 
+     * 
      * @param in  The stream to read from
      * @param doc The destination for the insertion.
      * @param pos The location in the document to place the
@@ -155,6 +205,10 @@ public class DefaultEditorKit extends EditorKit {
      * Writes content from a document to the given stream
      * in a format appropriate for this kind of content handler.
      *
+     * <p>
+     *  以适合此类内容处理程序的格式将文档中的内容写入给定流。
+     * 
+     * 
      * @param out The stream to write to
      * @param doc The source for the write.
      * @param pos The location in the document to fetch the
@@ -178,6 +232,10 @@ public class DefaultEditorKit extends EditorKit {
      * pick up the correct attributes to apply to inserted text.
      * This class's implementation simply returns null.
      *
+     * <p>
+     *  获取窗格的输入属性。此方法的存在是为了StyledEditorKit的好处,以便读取方法将拾取正确的属性应用于插入的文本。这个类的实现只返回null。
+     * 
+     * 
      * @return null
      */
     MutableAttributeSet getInputAttributes() {
@@ -188,6 +246,10 @@ public class DefaultEditorKit extends EditorKit {
      * Inserts content from the given stream, which will be
      * treated as plain text.
      *
+     * <p>
+     *  插入来自给定流的内容,将其视为纯文本。
+     * 
+     * 
      * @param in  The stream to read from
      * @param doc The destination for the insertion.
      * @param pos The location in the document to place the
@@ -297,6 +359,10 @@ public class DefaultEditorKit extends EditorKit {
      * Writes content from a document to the given stream
      * as plain text.
      *
+     * <p>
+     *  将文档中的内容以纯文本形式写入给定流。
+     * 
+     * 
      * @param out  The stream to write to
      * @param doc The source for the write.
      * @param pos The location in the document to fetch the
@@ -371,6 +437,9 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * When reading a document if a CRLF is encountered a property
      * with this name is added and the value will be "\r\n".
+     * <p>
+     *  在读取文档时,如果遇到CRLF,将添加具有此名称的属性,值将为"\ r \ n"。
+     * 
      */
     public static final String EndOfLineStringProperty = "__EndOfLine__";
 
@@ -380,6 +449,10 @@ public class DefaultEditorKit extends EditorKit {
      * Name of the action to place content into the associated
      * document.  If there is a selection, it is removed before
      * the new content is added.
+     * <p>
+     *  将内容放置到关联文档中的操作的名称。如果有选择,则在添加新内容之前将其删除。
+     * 
+     * 
      * @see #getActions
      */
     public static final String insertContentAction = "insert-content";
@@ -388,6 +461,10 @@ public class DefaultEditorKit extends EditorKit {
      * Name of the action to place a line/paragraph break into
      * the document.  If there is a selection, it is removed before
      * the break is added.
+     * <p>
+     * 将线/段落插入文档的操作的名称。如果有选择,则在添加中断之前将其删除。
+     * 
+     * 
      * @see #getActions
      */
     public static final String insertBreakAction = "insert-break";
@@ -396,6 +473,10 @@ public class DefaultEditorKit extends EditorKit {
      * Name of the action to place a tab character into
      * the document.  If there is a selection, it is removed before
      * the tab is added.
+     * <p>
+     *  将制表符放入文档的操作名称。如果有选择,它会在添加选项卡之前删除。
+     * 
+     * 
      * @see #getActions
      */
     public static final String insertTabAction = "insert-tab";
@@ -403,6 +484,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to delete the character of content that
      * precedes the current caret position.
+     * <p>
+     *  要删除当前插入符位置之前的内容字符的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String deletePrevCharAction = "delete-previous";
@@ -410,6 +495,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to delete the character of content that
      * follows the current caret position.
+     * <p>
+     *  删除当前插入符位置后面的内容字符的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String deleteNextCharAction = "delete-next";
@@ -417,6 +506,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to delete the word that
      * follows the beginning of the selection.
+     * <p>
+     *  要删除选择开始之后的单词的操作名称。
+     * 
+     * 
      * @see #getActions
      * @see JTextComponent#getSelectionStart
      * @since 1.6
@@ -426,6 +519,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to delete the word that
      * precedes the beginning of the selection.
+     * <p>
+     *  要删除选择开始之前的单词的操作名称。
+     * 
+     * 
      * @see #getActions
      * @see JTextComponent#getSelectionStart
      * @since 1.6
@@ -435,6 +532,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to set the editor into read-only
      * mode.
+     * <p>
+     *  将编辑器设置为只读模式的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String readOnlyAction = "set-read-only";
@@ -442,6 +543,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to set the editor into writeable
      * mode.
+     * <p>
+     *  将编辑器设置为可写模式的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String writableAction = "set-writable";
@@ -449,6 +554,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to cut the selected region
      * and place the contents into the system clipboard.
+     * <p>
+     *  剪切所选区域的操作的名称,并将内容放入系统剪贴板。
+     * 
+     * 
      * @see JTextComponent#cut
      * @see #getActions
      */
@@ -457,6 +566,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to copy the selected region
      * and place the contents into the system clipboard.
+     * <p>
+     *  复制所选区域并将内容放入系统剪贴板的操作名称。
+     * 
+     * 
      * @see JTextComponent#copy
      * @see #getActions
      */
@@ -466,6 +579,10 @@ public class DefaultEditorKit extends EditorKit {
      * Name of the action to paste the contents of the
      * system clipboard into the selected region, or before the
      * caret if nothing is selected.
+     * <p>
+     *  将系统剪贴板的内容粘贴到所选区域中的操作名称,如果未选择任何内容,则在插入符之前。
+     * 
+     * 
      * @see JTextComponent#paste
      * @see #getActions
      */
@@ -473,18 +590,30 @@ public class DefaultEditorKit extends EditorKit {
 
     /**
      * Name of the action to create a beep.
+     * <p>
+     *  创建哔声的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String beepAction = "beep";
 
     /**
      * Name of the action to page up vertically.
+     * <p>
+     *  垂直向上翻页的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String pageUpAction = "page-up";
 
     /**
      * Name of the action to page down vertically.
+     * <p>
+     *  垂直向下翻页的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String pageDownAction = "page-down";
@@ -492,6 +621,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to page up vertically, and move the
      * selection.
+     * <p>
+     *  垂直翻页的操作名称,并移动选择。
+     * 
+     * 
      * @see #getActions
      */
     /*public*/ static final String selectionPageUpAction = "selection-page-up";
@@ -499,6 +632,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to page down vertically, and move the
      * selection.
+     * <p>
+     *  / **垂直向下翻页的操作名称,并移动选择。
+     * 
+     * 
      * @see #getActions
      */
     /*public*/ static final String selectionPageDownAction = "selection-page-down";
@@ -506,6 +643,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to page left horizontally, and move the
      * selection.
+     * <p>
+     *  / **水平向左翻页的动作的名称,并移动选择。
+     * 
+     * 
      * @see #getActions
      */
     /*public*/ static final String selectionPageLeftAction = "selection-page-left";
@@ -513,6 +654,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the action to page right horizontally, and move the
      * selection.
+     * <p>
+     *  / **水平向右翻页的动作名称,并移动选择。
+     * 
+     * 
      * @see #getActions
      */
     /*public*/ static final String selectionPageRightAction = "selection-page-right";
@@ -520,6 +665,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * logically forward one position.
+     * <p>
+     * / **移动插入符逻辑前进一个位置的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String forwardAction = "caret-forward";
@@ -527,6 +676,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * logically backward one position.
+     * <p>
+     *  用于将插入符逻辑后移一个位置的操作的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String backwardAction = "caret-backward";
@@ -534,6 +687,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for extending the selection
      * by moving the caret logically forward one position.
+     * <p>
+     *  通过移动插入符逻辑前进一个位置来扩展选择的操作的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionForwardAction = "selection-forward";
@@ -541,6 +698,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for extending the selection
      * by moving the caret logically backward one position.
+     * <p>
+     *  通过将插入符逻辑后移一个位置来扩展选择的操作。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionBackwardAction = "selection-backward";
@@ -548,6 +709,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * logically upward one position.
+     * <p>
+     *  将逻辑上向上移动一个位置的插入符的动作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String upAction = "caret-up";
@@ -555,6 +720,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * logically downward one position.
+     * <p>
+     *  将光标逻辑向下移动一个位置的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String downAction = "caret-down";
@@ -562,6 +731,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * logically upward one position, extending the selection.
+     * <p>
+     *  将逻辑上向上移动一个位置的插入符的名称,扩展选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionUpAction = "selection-up";
@@ -569,6 +742,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * logically downward one position, extending the selection.
+     * <p>
+     *  将插入符逻辑向下移动一个位置,扩展选择的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionDownAction = "selection-down";
@@ -576,6 +753,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the beginning of a word.
+     * <p>
+     *  用于将插入符号移动到单词开头的<code> Action </code>的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String beginWordAction = "caret-begin-word";
@@ -583,6 +764,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * to the end of a word.
+     * <p>
+     *  将插入符移动到单词结尾的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String endWordAction = "caret-end-word";
@@ -590,6 +775,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the beginning of a word, extending the selection.
+     * <p>
+     *  用于将插入符移动到单词开头的<code> Action </code>的名称,扩展选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionBeginWordAction = "selection-begin-word";
@@ -597,6 +786,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * to the end of a word, extending the selection.
+     * <p>
+     *  将插入符移动到单词结尾的操作名称,扩展选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionEndWordAction = "selection-end-word";
@@ -604,6 +797,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret to the
      * beginning of the previous word.
+     * <p>
+     *  用于将插入符号移动到上一个字符开头的<code> Action </code>的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String previousWordAction = "caret-previous-word";
@@ -611,6 +808,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret to the
      * beginning of the next word.
+     * <p>
+     *  将插入符移动到下一个字的开头的<code> Action </code>的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String nextWordAction = "caret-next-word";
@@ -618,6 +819,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the selection to the
      * beginning of the previous word, extending the selection.
+     * <p>
+     *  <code> Action </code>的名称,用于将选择移动到上一个单词的开头,扩展选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionPreviousWordAction = "selection-previous-word";
@@ -625,6 +830,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the selection to the
      * beginning of the next word, extending the selection.
+     * <p>
+     *  <code> Action </code>的名称,用于将选择移动到下一个单词的开头,扩展选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionNextWordAction = "selection-next-word";
@@ -632,6 +841,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the beginning of a line.
+     * <p>
+     * 用于将插入符移动到行首的<code> Action </code>的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String beginLineAction = "caret-begin-line";
@@ -639,6 +852,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the end of a line.
+     * <p>
+     *  用于将插入符号移动到行尾的<code> Action </code>的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String endLineAction = "caret-end-line";
@@ -646,6 +863,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the beginning of a line, extending the selection.
+     * <p>
+     *  用于将插入符号移动到行首的<code> Action </code>的名称,扩展选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionBeginLineAction = "selection-begin-line";
@@ -653,6 +874,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the end of a line, extending the selection.
+     * <p>
+     *  用于将插入符移动到行尾的<code> Action </code>的名称,扩展选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionEndLineAction = "selection-end-line";
@@ -660,6 +885,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the beginning of a paragraph.
+     * <p>
+     *  将插入符号移动到段落开头的<code> Action </code>名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String beginParagraphAction = "caret-begin-paragraph";
@@ -667,6 +896,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the end of a paragraph.
+     * <p>
+     *  用于将插入符号移动到段落末尾的<code> Action </code>名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String endParagraphAction = "caret-end-paragraph";
@@ -674,6 +907,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the beginning of a paragraph, extending the selection.
+     * <p>
+     *  用于将插入符移动到段落开头的<code> Action </code>的名称,扩展选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionBeginParagraphAction = "selection-begin-paragraph";
@@ -681,6 +918,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the end of a paragraph, extending the selection.
+     * <p>
+     *  用于将插入符号移动到段落末尾的<code> Action </code>名称,扩展了选择。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionEndParagraphAction = "selection-end-paragraph";
@@ -688,6 +929,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the beginning of the document.
+     * <p>
+     *  将插入符号移动到文档开头的<code> Action </code>的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String beginAction = "caret-begin";
@@ -695,6 +940,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the end of the document.
+     * <p>
+     *  将插入符号移动到文档末尾的<code> Action </code>的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String endAction = "caret-end";
@@ -702,6 +951,10 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the <code>Action</code> for moving the caret
      * to the beginning of the document.
+     * <p>
+     *  将插入符号移动到文档开头的<code> Action </code>的名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionBeginAction = "selection-begin";
@@ -709,42 +962,70 @@ public class DefaultEditorKit extends EditorKit {
     /**
      * Name of the Action for moving the caret
      * to the end of the document.
+     * <p>
+     *  将插入符移动到文档末尾的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectionEndAction = "selection-end";
 
     /**
      * Name of the Action for selecting a word around the caret.
+     * <p>
+     *  选择插入点周围字词的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectWordAction = "select-word";
 
     /**
      * Name of the Action for selecting a line around the caret.
+     * <p>
+     *  选择插入点周围线条的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectLineAction = "select-line";
 
     /**
      * Name of the Action for selecting a paragraph around the caret.
+     * <p>
+     *  选择插入点周围段落的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectParagraphAction = "select-paragraph";
 
     /**
      * Name of the Action for selecting the entire document
+     * <p>
+     *  选择整个文档的操作名称
+     * 
+     * 
      * @see #getActions
      */
     public static final String selectAllAction = "select-all";
 
     /**
      * Name of the Action for removing selection
+     * <p>
+     *  用于删除选择的操作的名称
+     * 
+     * 
      * @see #getActions
      */
     /*public*/ static final String unselectAction = "unselect";
 
     /**
      * Name of the Action for toggling the component's orientation.
+     * <p>
+     *  / **用于切换组件方向的动作的名称。
+     * 
+     * 
      * @see #getActions
      */
     /*public*/ static final String toggleComponentOrientationAction
@@ -754,6 +1035,12 @@ public class DefaultEditorKit extends EditorKit {
      * Name of the action that is executed by default if
      * a <em>key typed event</em> is received and there
      * is no keymap entry.
+     * <p>
+     *  ="toggle-componentOrientation";
+     * 
+     * / **如果接收到<em>键入的事件</em>且没有键映射条目,则默认执行的操作名称。
+     * 
+     * 
      * @see #getActions
      */
     public static final String defaultKeyTypedAction = "default-typed";
@@ -844,6 +1131,17 @@ public class DefaultEditorKit extends EditorKit {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  接收到<em>键类型事件</em>时默认执行的操作,并且没有键映射条目。在发送为<em>键类型</em>事件的不同VM之间存在差异,此操作尝试过滤掉不需要的事件。
+     * 这将过滤控制字符和带有ALT修饰符的字符。它允许Control-Alt序列通过,因为这些在一些PC键盘上形成合法的unicode字符。
+     * <p>
+     *  如果事件未被过滤,它将尝试将内容插入文本编辑器。内容从ActionEvent的命令字符串中获取。文本条目通过目标文本组件上的<code> replaceSelection </code>方法完成。
+     * 这是将对大多数文本输入任务触发的操作。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see DefaultEditorKit#defaultKeyTypedAction
      * @see DefaultEditorKit#getActions
      * @see Keymap#setDefaultAction
@@ -853,6 +1151,9 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Creates this object with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此对象。
+         * 
          */
         public DefaultKeyTypedAction() {
             super(defaultKeyTypedAction);
@@ -861,6 +1162,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -903,6 +1208,13 @@ public class DefaultEditorKit extends EditorKit {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     * 将内容放置到关联的文档中。如果有选择,则在添加新内容之前将其删除。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see DefaultEditorKit#insertContentAction
      * @see DefaultEditorKit#getActions
      */
@@ -910,6 +1222,9 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Creates this object with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此对象。
+         * 
          */
         public InsertContentAction() {
             super(insertContentAction);
@@ -918,6 +1233,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -951,6 +1270,13 @@ public class DefaultEditorKit extends EditorKit {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  在文档中放置一行/段落。如果有选择,则在添加中断之前将其删除。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see DefaultEditorKit#insertBreakAction
      * @see DefaultEditorKit#getActions
      */
@@ -958,6 +1284,9 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Creates this object with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此对象。
+         * 
          */
         public InsertBreakAction() {
             super(insertBreakAction);
@@ -966,6 +1295,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -993,6 +1326,13 @@ public class DefaultEditorKit extends EditorKit {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  在文档中放置制表符。如果有选择,它会在添加选项卡之前删除。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see DefaultEditorKit#insertTabAction
      * @see DefaultEditorKit#getActions
      */
@@ -1000,6 +1340,9 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Creates this object with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此对象。
+         * 
          */
         public InsertTabAction() {
             super(insertTabAction);
@@ -1008,6 +1351,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1025,6 +1372,10 @@ public class DefaultEditorKit extends EditorKit {
     /*
      * Deletes the character of content that precedes the
      * current caret position.
+     * <p>
+     *  删除当前插入符位置之前的内容的字符。
+     * 
+     * 
      * @see DefaultEditorKit#deletePrevCharAction
      * @see DefaultEditorKit#getActions
      */
@@ -1032,6 +1383,9 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Creates this object with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此对象。
+         * 
          */
         DeletePrevCharAction() {
             super(deletePrevCharAction);
@@ -1040,6 +1394,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1083,6 +1441,10 @@ public class DefaultEditorKit extends EditorKit {
     /*
      * Deletes the character of content that follows the
      * current caret position.
+     * <p>
+     *  删除当前插入符位置后面的内容的字符。
+     * 
+     * 
      * @see DefaultEditorKit#deleteNextCharAction
      * @see DefaultEditorKit#getActions
      */
@@ -1135,6 +1497,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Deletes the word that precedes/follows the beginning of the selection.
+     * <p>
+     *  删除选择开始之前/之后的单词。
+     * 
+     * 
      * @see DefaultEditorKit#getActions
      */
     static class DeleteWordAction extends TextAction {
@@ -1146,6 +1512,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1208,6 +1578,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Sets the editor into read-only mode.
+     * <p>
+     *  将编辑器设置为只读模式。
+     * 
+     * 
      * @see DefaultEditorKit#readOnlyAction
      * @see DefaultEditorKit#getActions
      */
@@ -1221,6 +1595,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1233,6 +1611,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Sets the editor into writeable mode.
+     * <p>
+     *  将编辑器设置为可写模式。
+     * 
+     * 
      * @see DefaultEditorKit#writableAction
      * @see DefaultEditorKit#getActions
      */
@@ -1246,6 +1628,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1269,6 +1655,13 @@ public class DefaultEditorKit extends EditorKit {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  剪切所选区域,并将其内容放入系统剪贴板。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see DefaultEditorKit#cutAction
      * @see DefaultEditorKit#getActions
      */
@@ -1282,6 +1675,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1305,6 +1702,13 @@ public class DefaultEditorKit extends EditorKit {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  复制所选区域,并将其内容放入系统剪贴板。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see DefaultEditorKit#copyAction
      * @see DefaultEditorKit#getActions
      */
@@ -1318,6 +1722,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1342,6 +1750,13 @@ public class DefaultEditorKit extends EditorKit {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  将系统剪贴板的内容粘贴到所选区域中,如果没有选择,则在插入符之前。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see DefaultEditorKit#pasteAction
      * @see DefaultEditorKit#getActions
      */
@@ -1355,6 +1770,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1377,6 +1796,13 @@ public class DefaultEditorKit extends EditorKit {
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  创建哔声。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see DefaultEditorKit#beepAction
      * @see DefaultEditorKit#getActions
      */
@@ -1390,6 +1816,10 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * The operation to perform when this action is triggered.
          *
+         * <p>
+         *  触发此操作时执行的操作。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1402,6 +1832,10 @@ public class DefaultEditorKit extends EditorKit {
      * Scrolls up/down vertically.  The select version of this action extends
      * the selection, instead of simply moving the caret.
      *
+     * <p>
+     *  垂直向上/向下滚动。此操作的选择版本扩展了选择,而不是简单地移动插入符号。
+     * 
+     * 
      * @see DefaultEditorKit#pageUpAction
      * @see DefaultEditorKit#pageDownAction
      * @see DefaultEditorKit#getActions
@@ -1498,6 +1932,9 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * Makes sure <code>y</code> is a valid location in
          * <code>target</code>.
+         * <p>
+         *  确保<code> y </code>是<code> target </code>中的有效位置。
+         * 
          */
         private int constrainY(JTextComponent target, int y, int vis) {
             if (y < 0) {
@@ -1512,6 +1949,9 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * Ensures that <code>offset</code> is a valid offset into the
          * model for <code>text</code>.
+         * <p>
+         *  确保<code> offset </code>是<code> text </code>的模型中的有效偏移量。
+         * 
          */
         private int constrainOffset(JTextComponent text, int offset) {
             Document doc = text.getDocument();
@@ -1528,6 +1968,9 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * Returns adjustsed {@code y} position that indicates the location to scroll to
          * after selecting <code>index</code>.
+         * <p>
+         *  返回调整的{@code y}位置,指示选择<code> index </code>后要滚动到的位置。
+         * 
          */
         private int getAdjustedY(JTextComponent text, Rectangle visible, int index) {
             int result = visible.y;
@@ -1552,11 +1995,17 @@ public class DefaultEditorKit extends EditorKit {
         /**
          * Adjusts the Rectangle to contain the bounds of the character at
          * <code>index</code> in response to a page up.
+         * <p>
+         *  调整矩形以包含<code> index </code>处字符的边界,以响应向上翻页。
+         * 
          */
         private boolean select;
 
         /**
          * Direction to scroll, 1 is down, -1 is up.
+         * <p>
+         *  滚动方向,1向下,-1向上。
+         * 
          */
         private int direction;
     }
@@ -1564,6 +2013,9 @@ public class DefaultEditorKit extends EditorKit {
 
     /**
      * Pages one view to the left or right.
+     * <p>
+     * 向左或向右浏览一个视图。
+     * 
      */
     static class PageAction extends TextAction {
 
@@ -1640,11 +2092,18 @@ public class DefaultEditorKit extends EditorKit {
      * Action to move the selection by way of the
      * getNextVisualPositionFrom method. Constructor indicates direction
      * to use.
+     * <p>
+     *  通过getNextVisualPositionFrom方法移动选择的操作。构造函数指示使用的方向。
+     * 
      */
     static class NextVisualPositionAction extends TextAction {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -1724,6 +2183,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Position the caret to the beginning of the word.
+     * <p>
+     *  将插入符号放在单词的开头。
+     * 
+     * 
      * @see DefaultEditorKit#beginWordAction
      * @see DefaultEditorKit#selectBeginWordAction
      * @see DefaultEditorKit#getActions
@@ -1732,6 +2195,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -1764,6 +2231,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Position the caret to the end of the word.
+     * <p>
+     *  将插入符号定位到单词的结尾。
+     * 
+     * 
      * @see DefaultEditorKit#endWordAction
      * @see DefaultEditorKit#selectEndWordAction
      * @see DefaultEditorKit#getActions
@@ -1772,6 +2243,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -1804,6 +2279,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Position the caret to the beginning of the previous word.
+     * <p>
+     *  将插入符号定位到上一个单词的开头。
+     * 
+     * 
      * @see DefaultEditorKit#previousWordAction
      * @see DefaultEditorKit#selectPreviousWordAction
      * @see DefaultEditorKit#getActions
@@ -1812,6 +2291,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -1863,6 +2346,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Position the caret to the next of the word.
+     * <p>
+     *  将插入符号放在单词的下一个位置。
+     * 
+     * 
      * @see DefaultEditorKit#nextWordAction
      * @see DefaultEditorKit#selectNextWordAction
      * @see DefaultEditorKit#getActions
@@ -1871,6 +2358,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -1928,6 +2419,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Position the caret to the beginning of the line.
+     * <p>
+     *  将插入符号放在行的开头。
+     * 
+     * 
      * @see DefaultEditorKit#beginLineAction
      * @see DefaultEditorKit#selectBeginLineAction
      * @see DefaultEditorKit#getActions
@@ -1936,6 +2431,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -1968,6 +2467,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Position the caret to the end of the line.
+     * <p>
+     *  将插入符号定位到行尾。
+     * 
+     * 
      * @see DefaultEditorKit#endLineAction
      * @see DefaultEditorKit#selectEndLineAction
      * @see DefaultEditorKit#getActions
@@ -1976,6 +2479,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -2008,6 +2515,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Position the caret to the beginning of the paragraph.
+     * <p>
+     *  将插入符号放在段落的开头。
+     * 
+     * 
      * @see DefaultEditorKit#beginParagraphAction
      * @see DefaultEditorKit#selectBeginParagraphAction
      * @see DefaultEditorKit#getActions
@@ -2016,6 +2527,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -2045,6 +2560,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Position the caret to the end of the paragraph.
+     * <p>
+     *  将插入符号放在段落的末尾。
+     * 
+     * 
      * @see DefaultEditorKit#endParagraphAction
      * @see DefaultEditorKit#selectEndParagraphAction
      * @see DefaultEditorKit#getActions
@@ -2053,6 +2572,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -2083,6 +2606,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Move the caret to the beginning of the document.
+     * <p>
+     *  将插入符号移动到文档的开头。
+     * 
+     * 
      * @see DefaultEditorKit#beginAction
      * @see DefaultEditorKit#getActions
      */
@@ -2111,6 +2638,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Move the caret to the end of the document.
+     * <p>
+     *  将插入符号移动到文档的结尾。
+     * 
+     * 
      * @see DefaultEditorKit#endAction
      * @see DefaultEditorKit#getActions
      */
@@ -2141,6 +2672,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Select the word around the caret
+     * <p>
+     *  选择插入符号周围的字词
+     * 
+     * 
      * @see DefaultEditorKit#endAction
      * @see DefaultEditorKit#getActions
      */
@@ -2148,6 +2683,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -2170,6 +2709,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Select the line around the caret
+     * <p>
+     *  选择插入符号周围的行
+     * 
+     * 
      * @see DefaultEditorKit#endAction
      * @see DefaultEditorKit#getActions
      */
@@ -2177,6 +2720,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -2199,6 +2746,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Select the paragraph around the caret
+     * <p>
+     *  选择插入符号周围的段落
+     * 
+     * 
      * @see DefaultEditorKit#endAction
      * @see DefaultEditorKit#getActions
      */
@@ -2206,6 +2757,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -2228,6 +2783,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Select the entire document
+     * <p>
+     *  选择整个文档
+     * 
+     * 
      * @see DefaultEditorKit#endAction
      * @see DefaultEditorKit#getActions
      */
@@ -2235,6 +2794,10 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
+         * 
+         * 
          * @param nm  the name of the action, Action.NAME.
          * @param select whether to extend the selection when
          *  changing the caret position.
@@ -2257,6 +2820,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Remove the selection, if any.
+     * <p>
+     *  删除选择(如果有)。
+     * 
+     * 
      * @see DefaultEditorKit#unselectAction
      * @see DefaultEditorKit#getActions
      */
@@ -2264,6 +2831,9 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         * 使用适当的标识符创建此操作。
+         * 
          */
         UnselectAction() {
             super(unselectAction);
@@ -2281,6 +2851,10 @@ public class DefaultEditorKit extends EditorKit {
 
     /*
      * Toggles the ComponentOrientation of the text component.
+     * <p>
+     *  切换文本组件的ComponentOrientation。
+     * 
+     * 
      * @see DefaultEditorKit#toggleComponentOrientationAction
      * @see DefaultEditorKit#getActions
      */
@@ -2288,6 +2862,8 @@ public class DefaultEditorKit extends EditorKit {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作。
          */
         ToggleComponentOrientationAction() {
             super(toggleComponentOrientationAction);

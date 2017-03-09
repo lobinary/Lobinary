@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,11 @@ import sun.swing.UIAction;
  * is a "combined" view/controller.
  * <p>
  *
+ * <p>
+ *  ToolBarUI的基本L&amp; F实现。这个实现是一个"组合"视图/控制器。
+ * <p>
+ * 
+ * 
  * @author Georges Saab
  * @author Jeff Shapiro
  */
@@ -93,6 +99,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -103,6 +113,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -113,6 +127,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -123,6 +141,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -412,6 +434,12 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * <p>
      * Override this method to provide an alternate rollover border.
      *
+     * <p>
+     *  为工具栏组件创建滚动边框。如果启用了滚动边框,则会安装滚动边框。
+     * <p>
+     *  覆盖此方法以提供替代滚动边框。
+     * 
+     * 
      * @since 1.4
      */
     protected Border createRolloverBorder() {
@@ -435,6 +463,12 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * <p>
      * Override this method to provide an alternate rollover border.
      *
+     * <p>
+     *  为工具栏组件创建非翻转边框。如果未启用滚动边框,则此边框将安装为添加到工具栏的组件的边框。
+     * <p>
+     *  覆盖此方法以提供替代滚动边框。
+     * 
+     * 
      * @since 1.4
      */
     protected Border createNonRolloverBorder() {
@@ -453,6 +487,9 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
 
     /**
      * Creates a non rollover border for Toggle buttons in the toolbar.
+     * <p>
+     * 为工具栏中的切换按钮创建非翻转边框。
+     * 
      */
     private Border createNonRolloverToggleBorder() {
         UIDefaults table = UIManager.getLookAndFeelDefaults();
@@ -466,6 +503,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
 
     /**
      * No longer used, use BasicToolBarUI.createFloatingWindow(JToolBar)
+     * <p>
+     *  不再使用,使用BasicToolBarUI.createFloatingWindow(JToolBar)
+     * 
+     * 
      * @see #createFloatingWindow
      */
     protected JFrame createFloatingFrame(JToolBar toolbar) {
@@ -501,6 +542,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
     /**
      * Creates a window which contains the toolbar after it has been
      * dragged out from its container
+     * <p>
+     *  创建一个窗口,其中包含已从其容器中拖出的工具栏
+     * 
+     * 
      * @return a <code>RootPaneContainer</code> object, containing the toolbar.
      * @since 1.4
      */
@@ -573,6 +618,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * Returns a flag to determine whether rollover button borders
      * are enabled.
      *
+     * <p>
+     *  返回一个标志以确定是否启用滚动按钮边框。
+     * 
+     * 
      * @return true if rollover borders are enabled; false otherwise
      * @see #setRolloverBorders
      * @since 1.4
@@ -585,6 +634,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * Sets the flag for enabling rollover borders on the toolbar and it will
      * also install the appropriate border depending on the state of the flag.
      *
+     * <p>
+     *  设置在工具栏上启用翻转边框的标志,它还将根据标志的状态安装适当的边框。
+     * 
+     * 
      * @param rollover if true, rollover borders are installed.
      *        Otherwise non-rollover borders are installed
      * @see #isRolloverBorders
@@ -606,6 +659,12 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * This is a convenience method to call <code>setBorderToRollover</code>
      * for each child component.
      *
+     * <p>
+     *  在JComponent的所有子组件上安装滚动边框。
+     * <p>
+     *  这是一个方便的方法为每个子组件调用<code> setBorderToRollover </code>。
+     * 
+     * 
      * @param c container which holds the child components (usually a JToolBar)
      * @see #setBorderToRollover
      * @since 1.4
@@ -630,6 +689,12 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * This is a convenience method to call <code>setBorderToNonRollover</code>
      * for each child component.
      *
+     * <p>
+     *  在JComponent的所有子组件上安装非滚动边框。非滚动边框是子组件在工具栏中时安装的边框。
+     * <p>
+     *  这是一个方便的方法为每个子组件调用<code> setBorderToNonRollover </code>。
+     * 
+     * 
      * @param c container which holds the child components (usually a JToolBar)
      * @see #setBorderToNonRollover
      * @since 1.4
@@ -654,6 +719,12 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * This is a convenience method to call <code>setBorderNormal</code>
      * for each child component.
      *
+     * <p>
+     *  在JComponent的所有子组件上安装正常边框。正常边框是在添加到工具栏之前安装在子组件上的原始边框。
+     * <p>
+     *  这是一个方便的方法为每个子组件调用<code> setBorderNormal </code>。
+     * 
+     * 
      * @param c container which holds the child components (usually a JToolBar)
      * @see #setBorderToNonRollover
      * @since 1.4
@@ -671,6 +742,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * Sets the border of the component to have a rollover border which
      * was created by the {@link #createRolloverBorder} method.
      *
+     * <p>
+     *  将组件的边框设置为具有由{@link #createRolloverBorder}方法创建的滚动边框。
+     * 
+     * 
      * @param c component which will have a rollover border installed
      * @see #createRolloverBorder
      * @since 1.4
@@ -698,6 +773,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
     /**
      * Returns a rollover border for the button.
      *
+     * <p>
+     *  返回按钮的翻转边框。
+     * 
+     * 
      * @param b the button to calculate the rollover border for
      * @return the rollover border
      * @see #setBorderToRollover
@@ -711,6 +790,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * Sets the border of the component to have a non-rollover border which
      * was created by the {@link #createNonRolloverBorder} method.
      *
+     * <p>
+     *  将组件的边框设置为具有由{@link #createNonRolloverBorder}方法创建的非翻转边框。
+     * 
+     * 
      * @param c component which will have a non-rollover border installed
      * @see #createNonRolloverBorder
      * @since 1.4
@@ -737,6 +820,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
     /**
      * Returns a non-rollover border for the button.
      *
+     * <p>
+     * 返回按钮的非翻转边框。
+     * 
+     * 
      * @param b the button to calculate the non-rollover border for
      * @return the non-rollover border
      * @see #setBorderToNonRollover
@@ -755,6 +842,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * A normal border is the original border that was installed on the child
      * component before it was added to the toolbar.
      *
+     * <p>
+     *  将组件的边框设置为具有正常边框。正常边框是在添加到工具栏之前安装在子组件上的原始边框。
+     * 
+     * 
      * @param c component which will have a normal border re-installed
      * @see #createNonRolloverBorder
      * @since 1.4
@@ -870,6 +961,9 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
 
     /**
      * Gets the color displayed when over a docking area
+     * <p>
+     *  获取停靠区域上方显示的颜色
+     * 
      */
     public Color getDockingColor() {
         return dockingColor;
@@ -877,6 +971,9 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
 
     /**
      * Sets the color displayed when over a docking area
+     * <p>
+     *  设置在停靠区域上显示的颜色
+     * 
      */
    public void setDockingColor(Color c) {
         this.dockingColor = c;
@@ -884,6 +981,9 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
 
     /**
      * Gets the color displayed when over a floating area
+     * <p>
+     *  获取在浮动区域上显示的颜色
+     * 
      */
     public Color getFloatingColor() {
         return floatingColor;
@@ -891,6 +991,9 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
 
     /**
      * Sets the color displayed when over a floating area
+     * <p>
+     *  设置在浮动区域上显示的颜色
+     * 
      */
     public void setFloatingColor(Color c) {
         this.floatingColor = c;
@@ -1068,6 +1171,10 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
     /**
      * Paints the contents of the window used for dragging.
      *
+     * <p>
+     *  绘制用于拖动的窗口的内容。
+     * 
+     * 
      * @param g Graphics to paint to.
      * @throws NullPointerException is <code>g</code> is null
      * @since 1.5
@@ -1315,6 +1422,9 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicToolBarUI.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicToolBarUI的子类中。
+     * 
      */
     public class DockingListener implements MouseInputListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -1385,6 +1495,9 @@ public class BasicToolBarUI extends ToolBarUI implements SwingConstants
      * floating. The orientation is either one of <code>JToolBar.HORIZONTAL</code>
      * or <code>JToolBar.VERTICAL</code>.
      *
+     * <p>
+     *  返回工具栏浮动时工具栏窗口的方向。方向是<code> JToolBar.HORIZONTAL </code>或<code> JToolBar.VERTICAL </code>中的一个。
+     * 
      * @return the orientation of the toolbar window
      * @since 1.6
      */

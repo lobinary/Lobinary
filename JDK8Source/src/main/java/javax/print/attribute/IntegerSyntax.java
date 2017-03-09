@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,14 @@ import java.io.Serializable;
  * value is immutable.
  * <P>
  *
+ * <p>
+ *  Class IntegerSyntax是一个抽象基类,提供了所有带有整数值的属性的通用实现。
+ * <P>
+ *  在引擎盖下,整数属性只是一个整数。您可以通过调用{@link #getValue()getValue()}获取整数属性的整数值。
+ * 整数属性的整数值在构造时建立(参见{@link #IntegerSyntax(int)IntegerSyntax(int)})。一旦构造,整数属性的值是不可变的。
+ * <P>
+ * 
+ * 
  * @author  David Mendenhall
  * @author  Alan Kaminsky
  */
@@ -48,6 +57,10 @@ public abstract class IntegerSyntax implements Serializable, Cloneable {
 
     /**
      * This integer attribute's integer value.
+     * <p>
+     *  此整数属性的整数值。
+     * 
+     * 
      * @serial
      */
     private int value;
@@ -55,6 +68,10 @@ public abstract class IntegerSyntax implements Serializable, Cloneable {
     /**
      * Construct a new integer attribute with the given integer value.
      *
+     * <p>
+     *  构造具有给定整数值的新整数属性。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected IntegerSyntax(int value) {
@@ -65,6 +82,10 @@ public abstract class IntegerSyntax implements Serializable, Cloneable {
      * Construct a new integer attribute with the given integer value, which
      * must lie within the given range.
      *
+     * <p>
+     *  构造具有给定整数值的新整数属性,该整数值必须在给定范围内。
+     * 
+     * 
      * @param  value       Integer value.
      * @param  lowerBound  Lower bound.
      * @param  upperBound  Upper bound.
@@ -85,6 +106,10 @@ public abstract class IntegerSyntax implements Serializable, Cloneable {
 
     /**
      * Returns this integer attribute's integer value.
+     * <p>
+     *  返回此整数属性的整数值。
+     * 
+     * 
      * @return the integer value
      */
     public int getValue() {
@@ -104,6 +129,16 @@ public abstract class IntegerSyntax implements Serializable, Cloneable {
      * equal.
      * </OL>
      *
+     * <p>
+     *  返回此整数属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是类IntegerSyntax的一个实例。
+     * <LI>
+     *  此整数属性的值和<CODE>对象</CODE>的值相等。
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this integer
@@ -118,6 +153,9 @@ public abstract class IntegerSyntax implements Serializable, Cloneable {
     /**
      * Returns a hash code value for this integer attribute. The hash code is
      * just this integer attribute's integer value.
+     * <p>
+     * </OL>
+     * 
      */
     public int hashCode() {
         return value;
@@ -127,6 +165,9 @@ public abstract class IntegerSyntax implements Serializable, Cloneable {
      * Returns a string value corresponding to this integer attribute. The
      * string value is just this integer attribute's integer value converted to
      * a string.
+     * <p>
+     *  返回此整数属性的哈希码值。哈希码只是这个整数属性的整数值。
+     * 
      */
     public String toString() {
         return "" + value;

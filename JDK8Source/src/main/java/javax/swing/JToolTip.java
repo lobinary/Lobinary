@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,6 +63,22 @@ import java.util.Objects;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  用于显示组件的"提示"。通常组件提供api来自动使用<code> ToolTip </code>的过程。
+ * 例如,任何Swing组件都可以使用<code> JComponent </code> <code> setToolTipText </code>方法来指定标准工具提示的文本。
+ * 想要创建自定义<code> ToolTip </code>显示的组件可以覆盖<code> JComponent </code>的<code> createToolTip </code>方法,并使用此类的
+ * 子类。
+ * 例如,任何Swing组件都可以使用<code> JComponent </code> <code> setToolTipText </code>方法来指定标准工具提示的文本。
+ * <p>
+ *  请参阅<em> Java教程</em>中的<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/tooltip.html">
+ * 如何使用工具提示</a>进一步文档。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see JComponent#setToolTipText
  * @see JComponent#createToolTip
  * @author Dave Moore
@@ -70,6 +87,8 @@ import java.util.Objects;
 @SuppressWarnings("serial")
 public class JToolTip extends JComponent implements Accessible {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -87,6 +106,10 @@ public class JToolTip extends JComponent implements Accessible {
     /**
      * Returns the L&amp;F object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @return the <code>ToolTipUI</code> object that renders this component
      */
     public ToolTipUI getUI() {
@@ -96,6 +119,10 @@ public class JToolTip extends JComponent implements Accessible {
     /**
      * Resets the UI property to a value from the current look and feel.
      *
+     * <p>
+     *  将UI属性重置为当前外观的值。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -106,6 +133,10 @@ public class JToolTip extends JComponent implements Accessible {
     /**
      * Returns the name of the L&amp;F class that renders this component.
      *
+     * <p>
+     * 返回呈现此组件的L&amp; F类的名称。
+     * 
+     * 
      * @return the string "ToolTipUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -119,6 +150,10 @@ public class JToolTip extends JComponent implements Accessible {
      * Sets the text to show when the tool tip is displayed.
      * The string <code>tipText</code> may be <code>null</code>.
      *
+     * <p>
+     *  设置显示工具提示时显示的文本。字符串<code> tipText </code>可以是<code> null </code>。
+     * 
+     * 
      * @param tipText the <code>String</code> to display
      * @beaninfo
      *    preferred: true
@@ -140,6 +175,10 @@ public class JToolTip extends JComponent implements Accessible {
      * Returns the text that is shown when the tool tip is displayed.
      * The returned value may be <code>null</code>.
      *
+     * <p>
+     *  返回显示工具提示时显示的文本。返回的值可以是<code> null </code>。
+     * 
+     * 
      * @return the <code>String</code> that is displayed
      */
     public String getTipText() {
@@ -153,6 +192,12 @@ public class JToolTip extends JComponent implements Accessible {
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  指定工具提示描述的组件。组件<code> c </code>可能是<code> null </code>,并且没有效果。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param c the <code>JComponent</code> being described
      * @see JComponent#createToolTip
      * @beaninfo
@@ -170,6 +215,10 @@ public class JToolTip extends JComponent implements Accessible {
      * Returns the component the tooltip applies to.
      * The returned value may be <code>null</code>.
      *
+     * <p>
+     *  返回工具提示适用于的组件。返回的值可以是<code> null </code>。
+     * 
+     * 
      * @return the component that the tooltip describes
      *
      * @see JComponent#createToolTip
@@ -181,6 +230,9 @@ public class JToolTip extends JComponent implements Accessible {
     /**
      * Always returns true since tooltips, by definition,
      * should always be on top of all other windows.
+     * <p>
+     *  始终返回true,因为根据定义,工具提示应始终在所有其他窗口之上。
+     * 
      */
     // package private
     boolean alwaysOnTop() {
@@ -192,6 +244,10 @@ public class JToolTip extends JComponent implements Accessible {
      * See <code>readObject</code> and <code>writeObject</code>
      * in <code>JComponent</code> for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅<code> readComponent </code>中的<code> readObject </code>和<code> writeObject </code>
+     * 。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -213,6 +269,11 @@ public class JToolTip extends JComponent implements Accessible {
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JToolTip </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JToolTip</code>
      */
     protected String paramString() {
@@ -234,6 +295,11 @@ public class JToolTip extends JComponent implements Accessible {
      * AccessibleJToolTip.
      * A new AccessibleJToolTip instance is created if necessary.
      *
+     * <p>
+     *  获取与此JToolTip相关联的AccessibleContext。对于工具提示,AccessibleContext采用AccessibleJToolTip的形式。
+     * 如果需要,将创建一个新的AccessibleJToolTip实例。
+     * 
+     * 
      * @return an AccessibleJToolTip that serves as the
      *         AccessibleContext of this JToolTip
      */
@@ -257,6 +323,12 @@ public class JToolTip extends JComponent implements Accessible {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现了对<code> JToolTip </code>类的辅助功能支持。它提供了适用于工具提示用户界面元素的Java辅助功能API的实现。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     @SuppressWarnings("serial")
     protected class AccessibleJToolTip extends AccessibleJComponent {
@@ -264,6 +336,10 @@ public class JToolTip extends JComponent implements Accessible {
         /**
          * Get the accessible description of this object.
          *
+         * <p>
+         *  获取此对象的可访问描述。
+         * 
+         * 
          * @return a localized String describing this object.
          */
         public String getAccessibleDescription() {
@@ -282,6 +358,9 @@ public class JToolTip extends JComponent implements Accessible {
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Predicate.java,v 1.2.4.1 2005/09/12 11:02:18 pvedula Exp $
+ * <p>
+ *  $ Id：Predicate.java,v 1.2.4.1 2005/09/12 11:02:18 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -51,6 +64,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.Operators;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -59,6 +74,9 @@ final class Predicate extends Expression implements Closure {
 
     /**
      * The predicate's expression.
+     * <p>
+     *  谓词的表达式。
+     * 
      */
     private Expression _exp = null;
 
@@ -66,53 +84,83 @@ final class Predicate extends Expression implements Closure {
      * This flag indicates if optimizations are turned on. The
      * method <code>dontOptimize()</code> can be called to turn
      * optimizations off.
+     * <p>
+     *  此标志指示是否启用优化。可以调用方法<code> dontOptimize()</code>关闭优化。
+     * 
      */
     private boolean _canOptimize = true;
 
     /**
      * Flag indicatig if the nth position optimization is on. It
      * is set in <code>typeCheck()</code>.
+     * <p>
+     *  标志指示如果第n个位置优化开启。它设置在<code> typeCheck()</code>中。
+     * 
      */
     private boolean _nthPositionFilter = false;
 
     /**
      * Flag indicatig if the nth position descendant is on. It
      * is set in <code>typeCheck()</code>.
+     * <p>
+     *  标志指示第n个位置后代是否开启。它设置在<code> typeCheck()</code>中。
+     * 
      */
     private boolean _nthDescendant = false;
 
     /**
      * Cached node type of the expression that owns this predicate.
+     * <p>
+     *  拥有此谓词的表达式的高速缓存节点类型。
+     * 
      */
     int _ptype = -1;
 
     /**
      * Name of the inner class.
+     * <p>
+     *  内部类的名称。
+     * 
      */
     private String _className = null;
 
     /**
      * List of variables in closure.
+     * <p>
+     *  闭包中的变量列表。
+     * 
      */
     private ArrayList _closureVars = null;
 
     /**
      * Reference to parent closure.
+     * <p>
+     *  引用父闭包。
+     * 
      */
     private Closure _parentClosure = null;
 
     /**
      * Cached value of method <code>getCompareValue()</code>.
+     * <p>
+     *  方法的缓存值<code> getCompareValue()</code>。
+     * 
      */
     private Expression _value = null;
 
     /**
      * Cached value of method <code>getCompareValue()</code>.
+     * <p>
+     *  方法的缓存值<code> getCompareValue()</code>。
+     * 
      */
     private Step _step = null;
 
     /**
      * Initializes a predicate.
+     * <p>
+     *  初始化谓词。
+     * 
      */
     public Predicate(Expression exp) {
         _exp = exp;
@@ -122,6 +170,9 @@ final class Predicate extends Expression implements Closure {
 
     /**
      * Set the parser for this expression.
+     * <p>
+     *  设置此表达式的解析器。
+     * 
      */
     public void setParser(Parser parser) {
         super.setParser(parser);
@@ -131,6 +182,9 @@ final class Predicate extends Expression implements Closure {
     /**
      * Returns a boolean value indicating if the nth position optimization
      * is on. Must be call after type checking!
+     * <p>
+     * 返回一个布尔值,表示第n个位置优化是否开启。必须在类型检查后调用！
+     * 
      */
     public boolean isNthPositionFilter() {
         return _nthPositionFilter;
@@ -139,6 +193,9 @@ final class Predicate extends Expression implements Closure {
     /**
      * Returns a boolean value indicating if the nth descendant optimization
      * is on. Must be call after type checking!
+     * <p>
+     *  返回一个布尔值,指示是否启用了第n个子级优化。必须在类型检查后调用！
+     * 
      */
     public boolean isNthDescendant() {
         return _nthDescendant;
@@ -146,6 +203,9 @@ final class Predicate extends Expression implements Closure {
 
     /**
      * Turns off all optimizations for this predicate.
+     * <p>
+     *  关闭此谓词的所有优化。
+     * 
      */
     public void dontOptimize() {
         _canOptimize = false;
@@ -154,6 +214,9 @@ final class Predicate extends Expression implements Closure {
     /**
      * Returns true if the expression in this predicate contains a call
      * to position().
+     * <p>
+     *  如果此谓词中的表达式包含对position()的调用,则返回true。
+     * 
      */
     public boolean hasPositionCall() {
         return _exp.hasPositionCall();
@@ -162,6 +225,9 @@ final class Predicate extends Expression implements Closure {
     /**
      * Returns true if the expression in this predicate contains a call
      * to last().
+     * <p>
+     *  如果此谓词中的表达式包含对last()的调用,则返回true。
+     * 
      */
     public boolean hasLastCall() {
         return _exp.hasLastCall();
@@ -172,6 +238,9 @@ final class Predicate extends Expression implements Closure {
     /**
      * Returns true if this closure is compiled in an inner class (i.e.
      * if this is a real closure).
+     * <p>
+     *  如果此闭包在内部类中编译(即如果这是一个真正的闭包),则返回true。
+     * 
      */
     public boolean inInnerClass() {
         return (_className != null);
@@ -179,6 +248,9 @@ final class Predicate extends Expression implements Closure {
 
     /**
      * Returns a reference to its parent closure or null if outermost.
+     * <p>
+     *  返回对其父闭包的引用,如果最外层则返回null。
+     * 
      */
     public Closure getParentClosure() {
         if (_parentClosure == null) {
@@ -200,6 +272,9 @@ final class Predicate extends Expression implements Closure {
     /**
      * Returns the name of the auxiliary class or null if this predicate
      * is compiled inside the Translet.
+     * <p>
+     *  返回辅助类的名称,如果此谓词在Translet中编译,则返回null。
+     * 
      */
     public String getInnerClassName() {
         return _className;
@@ -207,6 +282,9 @@ final class Predicate extends Expression implements Closure {
 
     /**
      * Add new variable to the closure.
+     * <p>
+     *  向闭包添加新变量。
+     * 
      */
     public void addVariable(VariableRefBase variableRef) {
         if (_closureVars == null) {
@@ -230,6 +308,9 @@ final class Predicate extends Expression implements Closure {
     /**
      * Returns the node type of the expression owning this predicate. The
      * return value is cached in <code>_ptype</code>.
+     * <p>
+     *  返回拥有此谓词的表达式的节点类型。返回值缓存在<code> _ptype </code>中。
+     * 
      */
     public int getPosType() {
         if (_ptype == -1) {
@@ -281,6 +362,12 @@ final class Predicate extends Expression implements Closure {
      * This method may be called twice, before and after calling
      * <code>dontOptimize()</code>. If so, the second time it should honor
      * the new value of <code>_canOptimize</code>.
+     * <p>
+     *  类型检查谓词表达式。如果表达式的类型为数字,则通过与position()进行比较来将其转换为布尔值。注意,如果表达式是一个参数,我们不能在编译时区分它的类型是否是数字。
+     * 因此,引用类型的表达式总是转换为布尔值。
+     * 
+     *  此方法可以调用两次,之前和之后调用<code> dontOptimize()</code>。如果是这样,第二次它应该尊重<code> _canOptimize </code>的新值。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         Type texp = _exp.typeCheck(stable);
@@ -352,6 +439,10 @@ final class Predicate extends Expression implements Closure {
      * <code>CurrentNodeListFilter</code>. Allocate registers for local
      * variables and local parameters passed in the closure to test().
      * Notice that local variables need to be "unboxed".
+     * <p>
+     * 创建一个新的"Filter"类,实现<code> CurrentNodeListFilter </code>。为局部变量和在闭包中传递的局部参数分配寄存器到test()。
+     * 注意局部变量需要"unboxed"。
+     * 
      */
     private void compileFilter(ClassGenerator classGen,
                                MethodGenerator methodGen) {
@@ -430,6 +521,9 @@ final class Predicate extends Expression implements Closure {
      * Returns true if the predicate is a test for the existance of an
      * element or attribute. All we have to do is to get the first node
      * from the step, check if it is there, and then return true/false.
+     * <p>
+     *  如果谓词是对元素或属性的存在性的测试,则返回true。我们所要做的就是从步骤中获取第一个节点,检查它是否存在,然后返回true / false。
+     * 
      */
     public boolean isBooleanTest() {
         return (_exp instanceof BooleanExpr);
@@ -439,6 +533,9 @@ final class Predicate extends Expression implements Closure {
      * Method to see if we can optimise the predicate by using a specialised
      * iterator for expressions like '/foo/bar[@attr = $var]', which are
      * very common in many stylesheets
+     * <p>
+     *  查看是否可以通过对诸如'/ foo / bar [@attr = $ var]'等表达式使用专用迭代器来优化谓词的方法,这在很多样式表中非常常见
+     * 
      */
     public boolean isNodeValueTest() {
         if (!_canOptimize) return false;
@@ -449,6 +546,9 @@ final class Predicate extends Expression implements Closure {
      * Returns the step in an expression of the form 'step = value'.
      * Null is returned if the expression is not of the right form.
      * Optimization if off if null is returned.
+     * <p>
+     *  返回形式为"step = value"的表达式中的步长。如果表达式不是正确的形式,则返回Null。如果返回null则返回优化。
+     * 
      */
     public Step getStep() {
         // Returned cached value if called more than once
@@ -490,6 +590,9 @@ final class Predicate extends Expression implements Closure {
      * Returns the value in an expression of the form 'step = value'.
      * A value may be either a literal string or a variable whose
      * type is string. Optimization if off if null is returned.
+     * <p>
+     *  返回'step = value'形式的表达式中的值。值可以是文字字符串或类型为字符串的变量。如果返回null则返回优化。
+     * 
      */
     public Expression getCompareValue() {
         // Returned cached value if called more than once
@@ -541,6 +644,9 @@ final class Predicate extends Expression implements Closure {
      * Translate a predicate expression. This translation pushes
      * two references on the stack: a reference to a newly created
      * filter object and a reference to the predicate's closure.
+     * <p>
+     *  翻译谓词表达式。这个翻译在堆栈上推送两个引用：对新创建的过滤器对象的引用和对谓词的闭包的引用。
+     * 
      */
     public void translateFilter(ClassGenerator classGen,
                                 MethodGenerator methodGen)
@@ -598,6 +704,8 @@ final class Predicate extends Expression implements Closure {
      * then this translation pushes two references on the stack: a reference
      * to a newly created filter object and a reference to the predicate's
      * closure. See class <code>Step</code> for further details.
+     * <p>
+     *  翻译谓词表达式。如果没有优化应用,那么这个翻译在栈上推送两个引用：对新创建的过滤器对象的引用和对谓词的闭包的引用。有关详细信息,请参见<code> Step </code>。
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
 

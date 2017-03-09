@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming.NamingContextExtPackage;
 
 
@@ -12,6 +13,8 @@ package org.omg.CosNaming.NamingContextExtPackage;
 /** 
  * StringName is the Stringified Name, Array of Name Components 
  * represented as a String.
+ * <p>
+ * 
  */
 abstract public class StringNameHelper
 {

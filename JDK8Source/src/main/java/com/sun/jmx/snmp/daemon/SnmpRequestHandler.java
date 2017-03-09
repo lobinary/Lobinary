@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,11 +78,17 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
 
     /**
      * Contains the list of sub-requests associated to the current request.
+     * <p>
+     *  包含与当前请求相关联的子请求的列表。
+     * 
      */
     private transient Hashtable<SnmpMibAgent, SnmpSubRequestHandler> subs = null;
 
     /**
      * Reference on the MIBS
+     * <p>
+     *  参考MIBS
+     * 
      */
     private transient SnmpMibTree root;
 
@@ -91,6 +98,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     private transient SnmpAdaptorServer adaptor = null;
     /**
      * Full constructor
+     * <p>
+     *  完全构造函数
+     * 
      */
     public SnmpRequestHandler(SnmpAdaptorServer server, int id,
                               DatagramSocket s, DatagramPacket p,
@@ -121,6 +131,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
      * Treat the request available in 'packet' and send the result
      * back to the client.
      * Note: we overwrite 'packet' with the response bytes.
+     * <p>
+     *  处理"packet"中可用的请求,并将结果发送回客户端。注意：我们用响应字节覆盖"packet"。
+     * 
      */
     @Override
     public void doRun() {
@@ -177,6 +190,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * Here we make a response packet from a request packet.
      * We return null if there no response packet to sent.
+     * <p>
+     *  这里我们从请求数据包中产生一个响应数据包。如果没有响应数据包发送,我们返回null。
+     * 
      */
     private DatagramPacket makeResponsePacket(DatagramPacket reqPacket) {
         DatagramPacket respPacket = null ;
@@ -239,6 +255,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * Here we make a response message from a request message.
      * We return null if there is no message to reply.
+     * <p>
+     *  这里我们从请求消息中做出响应消息。如果没有消息要回复,我们返回null。
+     * 
      */
     private SnmpMessage makeResponseMessage(SnmpMessage reqMsg) {
         SnmpMessage respMsg = null ;
@@ -379,6 +398,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * Here we make a response pdu from a request pdu.
      * We return null if there is no pdu to reply.
+     * <p>
+     *  这里我们从请求pdu做出响应pdu。如果没有pdu要回复,我们返回null。
+     * 
      */
     private SnmpPduPacket makeResponsePdu(SnmpPduPacket reqPdu,
                                           Object userData) {
@@ -525,6 +547,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * Here we make the response pdu from a get/set request pdu.
      * At this level, the result is never null.
+     * <p>
+     *  这里我们从get / set请求pdu做出响应pdu。在这个级别,结果永远不为null。
+     * 
      */
     private SnmpPduPacket makeGetSetResponsePdu(SnmpPduRequest req,
                                                 Object userData) {
@@ -577,6 +602,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * The method runs all the sub-requests associated to the current
      * instance of SnmpRequestHandler.
+     * <p>
+     *  该方法运行与SnmpRequestHandler的当前实例相关联的所有子请求。
+     * 
      */
     private SnmpPduPacket executeSubRequest(SnmpPduPacket req,
                                             Object userData) {
@@ -646,6 +674,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
 
     /**
      * Optimize when there is only one sub request
+     * <p>
+     *  当只有一个子请求时优化
+     * 
      */
     private SnmpPduPacket turboProcessingGetSet(SnmpPduRequest req,
                                                 Object userData) {
@@ -703,6 +734,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * Here we make the response pdu for a bulk request.
      * At this level, the result is never null.
+     * <p>
+     *  这里我们做一个批量请求的响应pdu。在这个级别,结果永远不为null。
+     * 
      */
     private SnmpPduPacket makeGetBulkResponsePdu(SnmpPduBulk req,
                                                  Object userData) {
@@ -758,6 +792,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * Check the type of the pdu: only the get/set/bulk request
      * are accepted.
+     * <p>
+     *  检查pdu的类型：只接受get / set / bulk请求。
+     * 
      */
     private boolean checkPduType(SnmpPduPacket pdu) {
 
@@ -788,6 +825,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
      * Check if the specified pdu is conform to the ACL.
      * This method returns null if the pdu is ok. If not, it returns
      * the response pdu to be replied.
+     * <p>
+     *  检查指定的pdu是否符合ACL。如果pdu确定,此方法返回null。如果不是,则它返回要回复的响应pdu。
+     * 
      */
     private SnmpPduPacket checkAcl(SnmpPduPacket pdu) {
         SnmpPduPacket response = null ;
@@ -863,6 +903,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * Make a response pdu with the specified error status and index.
      * NOTE: the response pdu share its varBindList with the request pdu.
+     * <p>
+     *  使用指定的错误状态和索引进行响应pdu。注意：响应pdu与请求pdu共享其varBindList。
+     * 
      */
     private SnmpPduRequest newValidResponsePdu(SnmpPduPacket reqPdu,
                                                SnmpVarBind[] varBindList) {
@@ -887,6 +930,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * Make a response pdu with the specified error status and index.
      * NOTE: the response pdu share its varBindList with the request pdu.
+     * <p>
+     * 使用指定的错误状态和索引进行响应pdu。注意：响应pdu与请求pdu共享其varBindList。
+     * 
      */
     private SnmpPduRequest newErrorResponsePdu(SnmpPduPacket req,int s,int i) {
         SnmpPduRequest result = newValidResponsePdu(req, null) ;
@@ -993,6 +1039,9 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
 
     /**
      * The method takes the incoming requests and split it into subrequests.
+     * <p>
+     *  该方法接收传入请求并将其分成子请求。
+     * 
      */
     private void splitRequest(SnmpPduRequest req) {
 
@@ -1039,6 +1088,8 @@ class SnmpRequestHandler extends ClientHandler implements SnmpDefinitions {
     /**
      * The method takes the incoming get bulk requests and split it into
      * subrequests.
+     * <p>
+     *  该方法接收传入的get批量请求,并将其分割为子请求。
      */
     private void splitBulkRequest(SnmpPduBulk req,
                                   int nonRepeaters,

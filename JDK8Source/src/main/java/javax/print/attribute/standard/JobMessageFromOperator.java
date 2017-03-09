@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,17 @@ import javax.print.attribute.PrintJobAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  类JobMessageFromOperator是打印属性类,文本属性,其提供来自操作者,系统管理员或"智能"过程的消息以向最终用户指示对作业采取的修改或其他管理动作的原因。
+ * <P>
+ *  打印作业的属性集包括零个实例或JobMessageFromOperator属性的一个实例,不超过一个实例。
+ * 新的JobMessageFromOperator属性替换现有的JobMessageFromOperator属性(如果有)。换句话说,JobMessageFromOperator不打算作为历史日志。
+ * 如果愿意,客户端可以检测对打印作业的JobMessageFromOperator属性的更改,并维护客户端自己的JobMessageFromOperator属性值的历史日志。
+ * <P>
+ *  <B> IPP兼容性：</B>字符串值给出IPP名称值。语言环境提供IPP自然语言。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class JobMessageFromOperator extends TextSyntax
@@ -60,6 +72,10 @@ public final class JobMessageFromOperator extends TextSyntax
      * Constructs a new job message from operator attribute with the given
      * message and locale.
      *
+     * <p>
+     *  使用给定的消息和区域设置构造来自操作员属性的新作业消息。
+     * 
+     * 
      * @param  message  Message.
      * @param  locale   Natural language of the text string. null
      * is interpreted to mean the default locale as returned
@@ -89,6 +105,19 @@ public final class JobMessageFromOperator extends TextSyntax
      * <CODE>object</CODE>'s locale are equal.
      * </OL>
      *
+     * <p>
+     *  返回此作业消息是否来自operator属性等同于传入的in对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是JobMessageFromOperator类的实例。
+     * <LI>
+     * 来自运算符属性的底层字符串和<CODE>对象</CODE>的底层字符串的此作业消息是相等的。
+     * <LI>
+     *  来自运算符属性的区域设置和<CODE>对象</CODE>的此作业消息是相等的。
+     * </OL>
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job
@@ -106,6 +135,9 @@ public final class JobMessageFromOperator extends TextSyntax
      * For class JobMessageFromOperator, the
      * category is class JobMessageFromOperator itself.
      *
+     * <p>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -120,6 +152,12 @@ public final class JobMessageFromOperator extends TextSyntax
      * For class JobMessageFromOperator, the
      * category name is <CODE>"job-message-from-operator"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobMessageFromOperator类,类别是JobMessageFromOperator类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

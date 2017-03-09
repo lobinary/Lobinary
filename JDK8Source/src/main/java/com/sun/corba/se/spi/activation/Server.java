@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.spi.activation;
 
 
@@ -10,6 +11,9 @@ package com.sun.corba.se.spi.activation;
 
 
 /** Server callback API, passed to Activator in active method.
+/* <p>
+/* com / sun / corba / se / spi / activation / Server.java。
+/* 
     */
 public interface Server extends ServerOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,17 @@ package javax.swing.plaf;
  * }
  * </pre>
  *
+ * <p>
+ *  此接口用于标记由ComponentUI代理创建的对象。
+ *  <code> ComponentUI.installUI()</code>和<code> ComponentUI.uninstallUI()</code>方法可以使用此接口来决定属性值是否被覆盖。
+ * 例如,JList cellRenderer属性由BasicListUI.installUI()初始化,只有当它的初始值为null时：。
+ * <pre>
+ *  if(list.getCellRenderer()== null){list.setCellRenderer((ListCellRenderer)(UIManager.get("List.cellRenderer"))); }
+ * }。
+ * </pre>
+ *  在uninstallUI()时间,如果它的值是UIResource的一个实例,我们将该属性重置为null：
+ * <pre>
+ * 
  * @see ComponentUI
  * @author Hans Muller
  *

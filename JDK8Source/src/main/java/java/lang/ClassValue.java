@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,11 @@ import static java.lang.ClassValue.ClassValueMap.probeBackupLocations;
  * table for each class encountered at a message send call site,
  * it can use a {@code ClassValue} to cache information needed to
  * perform the message send quickly, for each class encountered.
+ * <p>
+ *  将计算值与(可能)每个类型进行关联。
+ * 例如,如果动态语言需要为消息发送调用站点处遇到的每个类构建消息分派表,则对于遇到的每个类,它可以使用{@code ClassValue}来缓存执行消息快速发送所需的信息。
+ * 
+ * 
  * @author John Rose, JSR 292 EG
  * @since 1.7
  */
@@ -46,6 +52,9 @@ public abstract class ClassValue<T> {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
      */
     protected ClassValue() {
     }
@@ -63,6 +72,16 @@ public abstract class ClassValue<T> {
      * If this method throws an exception, the corresponding call to {@code get}
      * will terminate abnormally with that exception, and no class value will be recorded.
      *
+     * <p>
+     *  计算此{@code ClassValue}的给定类的派生值。
+     * <p>
+     *  此方法将在使用{@link #get get}方法访问值的第一个线程中调用。
+     * <p>
+     *  通常,每个类最多调用此方法,但如果调用{@link #remove remove},则可能会再次调用此方法。
+     * <p>
+     *  如果这个方法抛出一个异常,对{@code get}的相应调用将异常终止异常,并且不会记录任何类值。
+     * 
+     * 
      * @param type the type whose class value must be computed
      * @return the newly computed value associated with this {@code ClassValue}, for the given class or interface
      * @see #get
@@ -90,6 +109,17 @@ public abstract class ClassValue<T> {
      * the rules for value observation are more complex.
      * See the documentation for {@link #remove remove} for more information.
      *
+     * <p>
+     *  返回给定类的值。如果尚未计算任何值,则通过调用{@link #computeValue computeValue}方法获取该值。
+     * <p>
+     *  类上的值的实际安装是以原子方式执行的。在这一点上,如果多个比赛线程已经计算值,则选择一个,并且返回到所有比赛线程。
+     * <p>
+     * {@code type}参数通常是一个类,但它可以是任何类型,例如接口,原始类型(如{@code int.class})或{@code void.class}。
+     * <p>
+     *  在没有{@code remove}调用的情况下,类值有一个简单的状态图：未初始化和初始化。当{@code remove}调用时,值观察的规则更复杂。
+     * 有关详细信息,请参阅{@link #remove remove}的文档。
+     * 
+     * 
      * @param type the type whose class value must be computed or retrieved
      * @return the current value associated with this {@code ClassValue}, for the given class or interface
      * @throws NullPointerException if the argument is null
@@ -165,6 +195,33 @@ public abstract class ClassValue<T> {
      * between the return of {@code computeValue} in {@code T} and the installation
      * of the the new value.  No user synchronization is possible during this time.
      *
+     * <p>
+     *  删除给定类的关联值。如果此值随后为同一类的{@linkplain #get read},则其值将通过调用其{@link #computeValue computeValue}方法重新初始化。
+     * 这可能导致对给定类的{@code computeValue}方法的额外调用。
+     * <p>
+     *  为了解释{@code get}和{@code remove}调用之间的交互,我们必须对类值的状态转换进行建模,以考虑未初始化和初始化状态之间的交替。
+     * 为此,从0开始顺序地对这些状态进行编号,并且注意,未初始化(或去除)状态用偶数编号,而初始化(或重新初始化)状态具有奇数。
+     * <p>
+     *  当线程{@code T}删除状态{@code 2N}中的类值时,没有任何反应,因为类值已经未初始化。否则,状态以原子方式前进到{@code 2N + 1}。
+     * <p>
+     * 当线程{@code T}查询状态{@code 2N}中的类值时,线程首先尝试通过调用{@code computeValue}并安装结果值来初始化类值为{@code 2N + 1} 。
+     * <p>
+     *  当{@code T}尝试安装新计算的值时,如果状态仍在{@code 2N},则类值将使用计算值初始化,将其推进到状态{@code 2N + 1}。
+     * <p>
+     *  否则,无论新状态是偶数还是奇数,{@code T}将丢弃新计算的值,然后重试{@code get}操作。
+     * <p>
+     *  放弃和重试是一个重要的条件,因为否则{@code T}可能会安装一个灾难性的陈旧的值。例如：
+     * <ul>
+     *  <li> {@ code T}调用{@code CV.get(C)}并查看状态{@code 2N} <li> {@ code T}快速计算与时间相关的值{@code V0}安装它<li> {@ code T}
+     * 被一个不幸的分页或调度事件击中,并长时间进入休眠<li> ...同时,{@code T2}也调用{@code CV.get (C)}并且看到状态{@code 2N} <li> {@ code T2}快速
+     * 计算类似的时间依赖值{@code V1}并安装在{@code CV.get(C)} <li> {@code T2}(或第三个线程)然后调用{@code CV.remove(C)},撤消{@code T2}
+     * 的工作<li> {@code T2} li>也,相关的计算值随时间而变化：{@code V1},{@code V2},... <li> ...同时,{@code T}醒来并尝试安装{@code V0 }
+     * ; <em>这必须失败</em>。
+     * </ul>
+     * 在上面的场景中,我们可以假设{@code CV.computeValue}在计算{@code V1}等时使用锁定来正确地观察时间相关状态。
+     * 这不会消除失效值的威胁,因为有在{@code T}中返回{@code computeValue}和安装新值之间的时间窗口。在此期间无法进行用户同步。
+     * 
+     * 
      * @param type the type whose class value must be removed
      * @throws NullPointerException if the argument is null
      */
@@ -183,6 +240,12 @@ public abstract class ClassValue<T> {
     /// Implementation...
     /// --------
 
+    /* <p>
+    /*  ClassValueMap map = getMap(type); map.changeEntry(this,value); }}
+    /* 
+    /*  /// -------- /// Implementation ... /// --------
+    /* 
+    /* 
     /** Return the cache, if it exists, else a dummy empty cache. */
     private static Entry<?>[] getCacheCarefully(Class<?> type) {
         // racing type.classValueMap{.cacheArray} : null => new Entry[X] <=> new Entry[Y]
@@ -201,6 +264,9 @@ public abstract class ClassValue<T> {
      * or take a slow lock and check the hash table.
      * Called only if the first probe was empty or a collision.
      * This is a separate method, so compilers can process it independently.
+     * <p>
+     *  ClassValue.get的慢尾部在缓存中的附近位置重试,或者进行慢速锁定并检查哈希表。仅当第一个探针为空或碰撞时调用。这是一个单独的方法,因此编译器可以独立处理它。
+     * 
      */
     private T getFromBackup(Entry<?>[] cache, Class<?> type) {
         Entry<T> e = probeBackupLocations(cache, this);
@@ -214,6 +280,7 @@ public abstract class ClassValue<T> {
     Entry<T> castEntry(Entry<?> e) { return (Entry<T>) e; }
 
     /** Called when the fast path of get fails, and cache reprobe also fails.
+    /* <p>
      */
     private T getFromHashMap(Class<?> type) {
         // The fail-safe recovery is to fall back to the underlying classValueMap.
@@ -259,6 +326,9 @@ public abstract class ClassValue<T> {
 
     /**
      * Private key for retrieval of this object from ClassValueMap.
+     * <p>
+     *  用于从ClassValueMap检索此对象的私钥。
+     * 
      */
     static class Identity {
     }
@@ -267,6 +337,10 @@ public abstract class ClassValue<T> {
      * The main object {@code ClassValue.this} is incorrect since
      * subclasses may override {@code ClassValue.equals}, which
      * could confuse keys in the ClassValueMap.
+     * <p>
+     *  这个ClassValue的标识,表示为一个不透明的对象。
+     * 主对象{@code ClassValue.this}不正确,因为子类可能会覆盖{@code ClassValue.equals},这可能会混淆ClassValueMap中的键。
+     * 
      */
     final Identity identity = new Identity();
 
@@ -296,6 +370,18 @@ public abstract class ClassValue<T> {
      * be hoisted out of a loop (by an optimizing JIT) or otherwise cached.
      * Some machines may also require a barrier instruction to execute
      * before this.version.
+     * <p>
+     *  用于从高速缓存检索此类值的当前版本。任何数量的computeValue调用都可以与一个版本关联进行缓存。但是当执行删除(任何类型)时,版本会更改。
+     * 版本更改通过将其标记为失效,使受影响的ClassValue的所有高速缓存条目无效。陈旧的高速缓存条目不会强制对computeValue的另一个调用,但它们需要同步访问后备映射。
+     * <p>
+     * ClassValue上的所有用户可见状态更改都发生在ClassValueMap的synchronized方法内的锁下。
+     * 当this.version被碰到一个新的令牌时,读取器(ClassValue.get的)被通知这样的状态变化。此变量必须是易失性的,以便不同步的读取器将毫无延迟地接收通知。
+     * <p>
+     *  如果版本不易变,一个线程T1可以持久保持一个陈旧的值this.value == V1,而另一个线程T2前进(在锁定下)this.value == V2。
+     * 这通常是无害的,但是如果T1和T2因果地通过一些其他信道交互,使得T1的进一步动作被约束(在JMM中)发生在V2事件之后,则T1对V1的观察将是错误。
+     * <p>
+     *  使这个版本变得易失的实际效果是,它不能被提升出循环(通过优化JIT)或者被高速缓存。一些机器还可能需要屏障指令以在该版本之前执行。
+     * 
      */
     private volatile Version<T> version = new Version<>(this);
     Version<T> version() { return version; }
@@ -319,6 +405,11 @@ public abstract class ClassValue<T> {
      *  backing map while a computeValue call is in flight.
      *  Once an entry goes stale, it can be reset at any time
      *  into the dead state.
+     * <p>
+     *  状态是：<ul> <li>如果value == Entry.this <li>,则为promise;如果version == null,则为promise;否则为true;否则为true;否则为tru
+     * e。
+     * </ul>从不放入缓存;它们只在computeValue调用正在运行时位于后备映射中。一旦条目变得陈旧,它可以在任何时间被重置为死状态。
+     * 
      */
     static class Entry<T> extends WeakReference<Version<T>> {
         final Object value;  // usually of type T, but sometimes (Entry)this
@@ -401,6 +492,9 @@ public abstract class ClassValue<T> {
     /** A backing map for all ClassValues, relative a single given type.
      *  Gives a fully serialized "true state" for each pair (ClassValue cv, Class type).
      *  Also manages an unserialized fast-path cache.
+     * <p>
+     *  为每个对提供完全序列化的"真实状态"(ClassValue cv,Class类型)。还管理非序列化的快速路径缓存。
+     * 
      */
     static class ClassValueMap extends WeakHashMap<ClassValue.Identity, Entry<?>> {
         private final Class<?> type;
@@ -410,11 +504,17 @@ public abstract class ClassValue<T> {
         /** Number of entries initially allocated to each type when first used with any ClassValue.
          *  It would be pointless to make this much smaller than the Class and ClassValueMap objects themselves.
          *  Must be a power of 2.
+         * <p>
+         * 使它远小于Class和ClassValueMap对象本身是毫无意义的。必须是2的幂。
+         * 
          */
         private static final int INITIAL_ENTRIES = 32;
 
         /** Build a backing map for ClassValues, relative the given type.
          *  Also, create an empty cache array and install it on the class.
+         * <p>
+         *  另外,创建一个空缓存数组并将其安装在类上。
+         * 
          */
         ClassValueMap(Class<?> type) {
             this.type = type;
@@ -622,6 +722,9 @@ public abstract class ClassValue<T> {
 
         /** Remove stale entries in the given range.
          *  Should be executed under a Map lock.
+         * <p>
+         *  应该在Map锁下执行。
+         * 
          */
         private void removeStaleEntries(Entry<?>[] cache, int begin, int count) {
             if (PROBE_LIMIT <= 0)  return;
@@ -646,6 +749,9 @@ public abstract class ClassValue<T> {
          *  from the head of a non-null run, which would allow them
          *  to be found via reprobes.  Find an entry after cache[begin]
          *  to plug into the hole, or return null if none is needed.
+         * <p>
+         *  从非空运行的头部,这将允许通过reprobes找到它们。在缓存[begin]后找到一个条目以插入洞,或者如果不需要则返回null。
+         * 
          */
         private Entry<?> findReplacement(Entry<?>[] cache, int home1) {
             Entry<?> replacement = null;
@@ -727,6 +833,9 @@ public abstract class ClassValue<T> {
 
         /** Store the given entry.  Update cacheLoad, and return any live victim.
          *  'Gently' means return self rather than dislocating a live victim.
+         * <p>
+         *  "轻轻地"意味着返回自我,而不是脱离活的受害者。
+         * 
          */
         private Entry<?> placeInCache(Entry<?>[] cache, int pos, Entry<?> e, boolean gently) {
             Entry<?> e2 = overwrittenEntry(cache[pos]);
@@ -744,6 +853,8 @@ public abstract class ClassValue<T> {
          *  If it is an actual null, increment cacheLoad,
          *  because the caller is going to store something
          *  in its place.
+         * <p>
+         *  如果它不是活的,静默地替换为null。如果它是一个实际的null,增加cacheLoad,因为调用者将要存储的东西在它的位置。
          */
         private <T> Entry<T> overwrittenEntry(Entry<T> e2) {
             if (e2 == null)  cacheLoad += 1;

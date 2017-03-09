@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,9 @@ import org.w3c.dom.NamedNodeMap;
 
 /**
  * An SOF (Start Of Frame)  marker segment.
+ * <p>
+ *  一个SOF(帧起始)标记段。
+ * 
  */
 class SOFMarkerSegment extends MarkerSegment {
     int samplePrecision;
@@ -153,6 +157,9 @@ class SOFMarkerSegment extends MarkerSegment {
     /**
      * Writes the data for this segment to the stream in
      * valid JPEG format.
+     * <p>
+     *  以有效的JPEG格式将此段的数据写入流。
+     * 
      */
     void write(ImageOutputStream ios) throws IOException {
         // We don't write SOF segments; the IJG library does.
@@ -216,6 +223,8 @@ class SOFMarkerSegment extends MarkerSegment {
 
     /**
      * A component spec within an SOF marker segment.
+     * <p>
+     *  SOF标记段中的组件规格。
      */
     class ComponentSpec implements Cloneable {
         int componentId;

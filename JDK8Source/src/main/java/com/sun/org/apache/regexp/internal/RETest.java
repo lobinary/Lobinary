@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.regexp.internal;
@@ -37,6 +47,10 @@ import java.io.IOException;
  * Data driven (and optionally interactive) testing harness to exercise regular
  * expression compiler and matching engine.
  *
+ * <p>
+ *  数据驱动(和可选交互式)测试利用来运行正则表达式编译器和匹配引擎。
+ * 
+ * 
  * @author <a href="mailto:jonl@muppetlabs.com">Jonathan Locke</a>
  * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
  * @author <a href="mailto:gholam@xtra.co.nz">Michael McCallum</a>
@@ -56,6 +70,10 @@ public class RETest
      * Main program entrypoint.  If an argument is given, it will be compiled
      * and interactive matching will ensue.  If no argument is given, the
      * file RETest.txt will be used as automated testing input.
+     * <p>
+     *  主程序入口。如果给出一个参数,它将被编译并且将进行交互式匹配。如果没有给出参数,文件RETest.txt将被用作自动测试输入。
+     * 
+     * 
      * @param args Command line arguments (optional regular expression)
      */
     public static void main(String[] args)
@@ -75,6 +93,10 @@ public class RETest
 
     /**
      * Testing entrypoint.
+     * <p>
+     *  测试入口点。
+     * 
+     * 
      * @param args Command line arguments
      * @exception Exception thrown in case of error
      */
@@ -103,6 +125,9 @@ public class RETest
 
     /**
      * Constructor
+     * <p>
+     *  构造函数
+     * 
      */
     public RETest()
     {
@@ -110,6 +135,10 @@ public class RETest
 
     /**
      * Compile and test matching against a single expression
+     * <p>
+     *  针对单个表达式编译和测试匹配
+     * 
+     * 
      * @param expr Expression to compile and test
      */
     void runInteractiveTests(String expr)
@@ -169,6 +198,10 @@ public class RETest
 
     /**
      * Exit with a fatal error.
+     * <p>
+     *  退出时出现致命错误。
+     * 
+     * 
      * @param s Last famous words before exiting
      */
     void die(String s)
@@ -180,6 +213,10 @@ public class RETest
     /**
      * Fail with an error. Will print a big failure message to System.out.
      *
+     * <p>
+     *  失败,出现错误。将打印一个大失败消息到System.out。
+     * 
+     * 
      * @param log Output before failure
      * @param s Failure description
      */
@@ -192,6 +229,10 @@ public class RETest
     /**
      * Fail with an error. Will print a big failure message to System.out.
      *
+     * <p>
+     *  失败,出现错误。将打印一个大失败消息到System.out。
+     * 
+     * 
      * @param s Failure description
      */
     void fail(String s)
@@ -215,6 +256,10 @@ public class RETest
 
     /**
      * Say something to standard out
+     * <p>
+     *  说出标准的东西
+     * 
+     * 
      * @param s What to say
      */
     void say(String s)
@@ -224,6 +269,10 @@ public class RETest
 
     /**
      * Dump parenthesized subexpressions found by a regular expression matcher object
+     * <p>
+     *  转储由正则表达式匹配器对象找到的带圆括号的子表达式
+     * 
+     * 
      * @param r Matcher object with results to show
      */
     void showParens(RE r)
@@ -238,16 +287,26 @@ public class RETest
 
     /*
      * number in automated test
+     * <p>
+     *  数字在自动化测试
+     * 
      */
     int testCount = 0;
 
     /*
      * Count of failures in automated test
+     * <p>
+     *  自动测试中的故障计数
+     * 
      */
     int failures = 0;
 
     /**
      * Run automated tests in RETest.txt file (from Perl 4.0 test battery)
+     * <p>
+     * 在RETest.txt文件中运行自动化测试(从Perl 4.0测试电池)
+     * 
+     * 
      * @exception Exception thrown in case of error
      */
     void runAutomatedTests(String testDocument) throws Exception
@@ -295,6 +354,10 @@ public class RETest
 
     /**
      * Run automated unit test
+     * <p>
+     *  运行自动单元测试
+     * 
+     * 
      * @exception Exception thrown in case of error
      */
     void testOther() throws Exception
@@ -546,6 +609,10 @@ public class RETest
 
     /**
      * Converts yesno string to boolean.
+     * <p>
+     *  将yesno字符串转换为boolean。
+     * 
+     * 
      * @param yesno string representation of expected result
      * @return true if yesno is "YES", false if yesno is "NO"
      *         stops program otherwise.
@@ -570,6 +637,10 @@ public class RETest
 
     /**
      * Finds next test description in a given script.
+     * <p>
+     *  在给定的脚本中查找下一个测试描述。
+     * 
+     * 
      * @param br <code>BufferedReader</code> for a script file
      * @return strign tag for next test description
      * @exception IOException if some io problems occured
@@ -601,6 +672,10 @@ public class RETest
 
     /**
      * Creates testcase for the next test description in the script file.
+     * <p>
+     *  为脚本文件中的下一个测试描述创建测试用例。
+     * 
+     * 
      * @param br <code>BufferedReader</code> for script file.
      * @return a new tescase or null.
      * @exception IOException if some io problems occured
@@ -869,6 +944,9 @@ final class RETestCase
 
     /**
      * Show a success
+     * <p>
+     *  显示成功
+     * 
      * @param s Success story
      */
     void success(String s)

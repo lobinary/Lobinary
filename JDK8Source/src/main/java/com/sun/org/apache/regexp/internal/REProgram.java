@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.regexp.internal;
@@ -28,6 +38,10 @@ import java.io.Serializable;
  * REProgram objects). You should not otherwise need to work directly with
  * this class.
 *
+* <p>
+*  保存已编译正则表达式的类。这暴露主要是为重新编译实用程序(它帮助您生成预编译的REProgram对象)使用。你不应该另外需要直接与这个类工作。
+* 
+* 
  * @see RE
  * @see RECompiler
  *
@@ -45,6 +59,10 @@ public class REProgram implements Serializable
 
     /**
      * Constructs a program object from a character array
+     * <p>
+     *  从字符数组构造一个程序对象
+     * 
+     * 
      * @param instruction Character array with RE opcode instructions in it
      */
     public REProgram(char[] instruction)
@@ -54,6 +72,10 @@ public class REProgram implements Serializable
 
     /**
      * Constructs a program object from a character array
+     * <p>
+     *  从字符数组构造一个程序对象
+     * 
+     * 
      * @param parens Count of parens in the program
      * @param instruction Character array with RE opcode instructions in it
      */
@@ -65,6 +87,10 @@ public class REProgram implements Serializable
 
     /**
      * Constructs a program object from a character array
+     * <p>
+     *  从字符数组构造一个程序对象
+     * 
+     * 
      * @param instruction Character array with RE opcode instructions in it
      * @param lenInstruction Amount of instruction array in use
      */
@@ -77,6 +103,10 @@ public class REProgram implements Serializable
      * Returns a copy of the current regular expression program in a character
      * array that is exactly the right length to hold the program.  If there is
      * no program compiled yet, getInstructions() will return null.
+     * <p>
+     *  以字符数组返回当前正则表达式程序的副本,该字符数组的长度正好适合保存程序。如果没有编译程序,getInstructions()将返回null。
+     * 
+     * 
      * @return A copy of the current compiled RE program
      */
     public char[] getInstructions()
@@ -99,6 +129,10 @@ public class REProgram implements Serializable
      * (so that they can be lazily allocated) and another which attempts to
      * find an prefix anchor string so that substantial amounts of input can
      * potentially be skipped without running the actual program.
+     * <p>
+     * 设置要运行的新正则表达式程序。这是执行任何特殊编译时搜索优化的方法。
+     * 目前只有两个优化 - 一个检查反向引用(以便它们可以被懒惰地分配),另一个尝试找到前缀锚字符串,使得大量的输入可能被跳过,而不运行实际的程序。
+     * 
      * @param instruction Program instruction buffer
      * @param lenInstruction Length of instruction buffer in use
      */

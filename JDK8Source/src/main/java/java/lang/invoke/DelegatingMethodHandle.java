@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import static java.lang.invoke.MethodHandleStatics.*;
 /**
  * A method handle whose invocation behavior is determined by a target.
  * The delegating MH itself can hold extra "intentions" beyond the simple behavior.
+ * <p>
+ *  调用行为由目标确定的方法句柄。委托MH本身可以拥有超出简单行为的额外"意图"。
+ * 
  * @author jrose
  */
 /*non-public*/

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.swing.plaf.basic.BasicMenuItemUI;
  * MotifMenuItem implementation
  * <p>
  *
+ * <p>
+ *  MotifMenuItem实现
+ * <p>
+ * 
  * @author Rich Schiavi
  * @author Georges Saab
  */

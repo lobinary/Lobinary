@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -66,6 +67,10 @@ import org.w3c.dom.NamedNodeMap;
  * marker segments, for different varieties of thumbnails, and for
  * ICC Profile APP2 marker segments.  Any of these secondary types
  * that occur are kept as members of a single JFIFMarkerSegment object.
+ * <p>
+ *  JFIF(JPEG文件交换格式)APP0(应用程序特定)标记段。内部类包括JFXX扩展标记段,不同种类的缩略图和ICC Profile APP2标记段。
+ * 发生的任何这些辅助类型都保留为单个JFIFMarkerSegment对象的成员。
+ * 
  */
 class JFIFMarkerSegment extends MarkerSegment {
     int majorVersion;
@@ -95,6 +100,9 @@ class JFIFMarkerSegment extends MarkerSegment {
      * "segment" containing all the chunks.  This flag is a state
      * variable identifying whether to construct a new segment or
      * append to an old one.
+     * <p>
+     *  读取ICC配置文件的块时设置为<code> true </code>。所有块被合并以创建包含所有块的单个"段"。此标志是一个状态变量,标识是构造新段还是附加到旧段。
+     * 
      */
     private boolean inICC = false;
 
@@ -102,12 +110,18 @@ class JFIFMarkerSegment extends MarkerSegment {
      * A placeholder for an ICC profile marker segment under
      * construction.  The segment is not added to the list
      * until all chunks have been read.
+     * <p>
+     *  正在建设的ICC配置文件标记段的占位符。在读取所有块之前,该段不会添加到列表中。
+     * 
      */
     private ICCMarkerSegment tempICCSegment = null;
 
 
     /**
      * Default constructor.  Used to create a default JFIF header
+     * <p>
+     *  默认构造函数。用于创建默认JFIF头
+     * 
      */
     JFIFMarkerSegment() {
         super(JPEG.APP0);
@@ -123,6 +137,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * Constructs a JFIF header by reading from a stream wrapped
      * in a JPEGBuffer.
+     * <p>
+     *  通过从包装在JPEGBuffer中的流读取来构造JFIF头。
+     * 
      */
     JFIFMarkerSegment(JPEGBuffer buffer) throws IOException {
         super(buffer);
@@ -145,6 +162,9 @@ class JFIFMarkerSegment extends MarkerSegment {
 
     /**
      * Constructs a JFIF header from a DOM Node.
+     * <p>
+     *  从DOM节点构造JFIF头。
+     * 
      */
     JFIFMarkerSegment(Node node) throws IIOInvalidTreeException {
         this();
@@ -153,6 +173,9 @@ class JFIFMarkerSegment extends MarkerSegment {
 
     /**
      * Returns a deep-copy clone of this object.
+     * <p>
+     *  返回此对象的深复制克隆。
+     * 
      */
     protected Object clone() {
         JFIFMarkerSegment newGuy = (JFIFMarkerSegment) super.clone();
@@ -173,6 +196,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * Add an JFXX extension marker segment from the stream wrapped
      * in the JPEGBuffer to the list of extension segments.
+     * <p>
+     *  从包含在JPEGBuffer中的流中将JFXX扩展标记段添加到扩展段列表。
+     * 
      */
     void addJFXX(JPEGBuffer buffer, JPEGImageReader reader)
         throws IOException {
@@ -182,6 +208,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * Adds an ICC Profile APP2 segment from the stream wrapped
      * in the JPEGBuffer.
+     * <p>
+     *  从包含在JPEGBuffer中的流中添加ICC配置文件APP2段。
+     * 
      */
     void addICC(JPEGBuffer buffer) throws IOException {
         if (inICC == false) {
@@ -205,6 +234,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * Add an ICC Profile APP2 segment by constructing it from
      * the given ICC_ColorSpace object.
+     * <p>
+     *  通过从给定的ICC_ColorSpace对象构造ICC配置文件APP2段来添加ICC配置文件APP2段。
+     * 
      */
     void addICC(ICC_ColorSpace cs) throws IOException {
         if (iccSegment != null) {
@@ -217,6 +249,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * Returns a tree of DOM nodes representing this object and any
      * subordinate JFXX extension or ICC Profile segments.
+     * <p>
+     *  返回表示此对象和任何从属JFXX扩展或ICC配置文件段的DOM节点的树。
+     * 
      */
     IIOMetadataNode getNativeNode() {
         IIOMetadataNode node = new IIOMetadataNode("app0JFIF");
@@ -249,6 +284,9 @@ class JFIFMarkerSegment extends MarkerSegment {
      * Otherwise an existing object is being modified.
      * Throws an IIOInvalidTreeException if the tree is invalid in
      * any way.
+     * <p>
+     * 从给定的DOM节点树更新此对象中的数据。如果fromScratch为true,则正在构建此对象。否则,正在修改现有对象。如果树以任何方式无效,则抛出IIOInvalidTreeException。
+     * 
      */
     void updateFromNativeNode(Node node, boolean fromScratch)
         throws IIOInvalidTreeException {
@@ -352,6 +390,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * Writes the data for this segment to the stream in
      * valid JPEG format.  Assumes that there will be no thumbnail.
+     * <p>
+     *  以有效的JPEG格式将此段的数据写入流。假设没有缩略图。
+     * 
      */
     void write(ImageOutputStream ios,
                JPEGImageWriter writer) throws IOException {
@@ -365,6 +406,9 @@ class JFIFMarkerSegment extends MarkerSegment {
      * width and height into account.  If necessary, the thumbnail
      * is clipped to 255 x 255 and a warning is sent to the writer
      * argument.  Progress updates are sent to the writer argument.
+     * <p>
+     *  以有效的JPEG格式将此段的数据写入流。写入的长度考虑了缩略图的宽度和高度。如果需要,缩略图将被裁剪为255 x 255,并向编写器参数发送警告。进度更新发送到writer参数。
+     * 
      */
     void write(ImageOutputStream ios,
                BufferedImage thumb,
@@ -409,6 +453,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /*
      * Write out the values in the integer array as a sequence of bytes,
      * reporting progress to the writer argument.
+     * <p>
+     *  将整数数组中的值写为字节序列,将进度报告给writer参数。
+     * 
      */
     void writeThumbnailData(ImageOutputStream ios,
                             int [] thumbData,
@@ -434,6 +481,10 @@ class JFIFMarkerSegment extends MarkerSegment {
      * segments, if any, in order to determine how to encode the
      * thumbnails.  If there are more thumbnails than metadata segments,
      * default encoding is used for the extra thumbnails.
+     * <p>
+     *  写出此JFIF标记段,包括缩略图或附加一系列JFXX标记段,视情况而定。警告和进度报告发送给作者参数。缩略图列表与JFXX扩展段列表(如果有)相匹配,以确定如何对缩略图进行编码。
+     * 如果有比元数据段更多的缩略图,默认编码用于额外的缩略图。
+     * 
      */
     void writeWithThumbs(ImageOutputStream ios,
                          List thumbnails,
@@ -562,6 +613,9 @@ class JFIFMarkerSegment extends MarkerSegment {
 
     /**
      * Writes out a new JFXX extension segment, without saving it.
+     * <p>
+     *  写出一个新的JFXX扩展段,而不保存。
+     * 
      */
     private void writeJFXXSegment(int index,
                                   BufferedImage thumbnail,
@@ -584,6 +638,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * Return an RGB image that is the expansion of the given grayscale
      * image.
+     * <p>
+     *  返回作为给定灰度图像的扩展的RGB图像。
+     * 
      */
     private static BufferedImage expandGrayThumb(BufferedImage thumb) {
         BufferedImage ret = new BufferedImage(thumb.getWidth(),
@@ -602,6 +659,10 @@ class JFIFMarkerSegment extends MarkerSegment {
      * If <code>iccProfile</code> is not <code>null</code>,
      * writes out the profile after the JFIF segment using as many APP2
      * marker segments as necessary.
+     * <p>
+     * 将默认的JFIF标记段写入给定的输出流。如果<code>缩略图</code>不是<code> null </code>,则将缩略图集合写为JFXX标记段,或合并到JFIF段中。
+     * 如果<code> iccProfile </code>不是<code> null </code>,则在JFIF段之后使用尽可能多的APP2标记段来写出配置文件。
+     * 
      */
     static void writeDefaultJFIF(ImageOutputStream ios,
                                  List thumbnails,
@@ -618,6 +679,9 @@ class JFIFMarkerSegment extends MarkerSegment {
 
     /**
      * Prints out the contents of this object to System.out for debugging.
+     * <p>
+     *  将此对象的内容打印到System.out进行调试。
+     * 
      */
     void print() {
         printTag("JFIF");
@@ -649,6 +713,9 @@ class JFIFMarkerSegment extends MarkerSegment {
 
     /**
      * A JFIF extension APP0 marker segment.
+     * <p>
+     *  一个JFIF扩展APP0标记段。
+     * 
      */
     class JFIFExtensionMarkerSegment extends MarkerSegment {
         int code;
@@ -802,6 +869,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * A superclass for the varieties of thumbnails that can
      * be stored in a JFIF extension marker segment.
+     * <p>
+     *  可以存储在JFIF扩展标记段中的各种缩略图的超类。
+     * 
      */
     abstract class JFIFThumb implements Cloneable {
         long streamPos = -1L;  // Save the thumbnail pos when reading
@@ -961,6 +1031,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * A JFIF thumbnail stored as RGB, one byte per channel,
      * interleaved.
+     * <p>
+     *  存储为RGB的JFIF缩略图,每个通道一个字节,交错。
+     * 
      */
     class JFIFThumbRGB extends JFIFThumbUncompressed {
 
@@ -1025,6 +1098,9 @@ class JFIFMarkerSegment extends MarkerSegment {
     /**
      * A JFIF thumbnail stored as an indexed palette image
      * using an RGB palette.
+     * <p>
+     *  使用RGB调色板存储为索引调色板图像的JFIF缩略图。
+     * 
      */
     class JFIFThumbPalette extends JFIFThumbUncompressed {
         private static final int PALETTE_SIZE = 768;
@@ -1119,6 +1195,9 @@ class JFIFMarkerSegment extends MarkerSegment {
      * JFIF extension markers are permitted.  There is no need
      * to clip these, but the entire image must fit into a
      * single JFXX marker segment.
+     * <p>
+     *  存储为JPEG流的JFIF缩略图。不允许使用JFIF或JFIF扩展标记。没有必要剪辑这些,但整个图像必须适合单个JFXX标记段。
+     * 
      */
     class JFIFThumbJPEG extends JFIFThumb {
         JPEGMetadata thumbMetadata = null;
@@ -1206,6 +1285,18 @@ class JFIFMarkerSegment extends MarkerSegment {
                 parent.removeChild(jfif);
 
                 metadata.setFromTree(format, tree);
+                /* <p>
+                /*  //获取树String format = metadata.getNativeMetadataFormatName(); IIOMetadataNode tree =(IIOMetadataNode)
+                /* metadata.getAsTree(format);。
+                /* 
+                /*  //如果没有app0jfif节点,图像是坏的NodeList jfifs = tree.getElementsByTagName("app0JFIF"); if(jfifs.getLength()==
+                /*  0){throw new IllegalThumbException(); }}。
+                /* 
+                /*  //删除app0jfif节点Node jfif = jfifs.item(0); Node parent = jfif.getParentNode(); parent.removeChild(jfif
+                /* );。
+                /* 
+                /*  metadata.setFromTree(format,tree);
+                /* 
                 */
 
                 thumbWriter.write(new IIOImage(thumb, null, metadata));
@@ -1332,6 +1423,9 @@ class JFIFMarkerSegment extends MarkerSegment {
      * the necessary number of APP2 segments, per the ICC spec.
      * This is the only mechanism for writing an ICC profile
      * to a stream.
+     * <p>
+     * 根据ICC规范,将给定的配置文件写入流中,嵌入必要数量的APP2段。这是将ICC配置文件写入流的唯一机制。
+     * 
      */
     static void writeICC(ICC_Profile profile, ImageOutputStream ios)
         throws IOException {
@@ -1370,6 +1464,9 @@ class JFIFMarkerSegment extends MarkerSegment {
      * a profile larger than 64K is broken up into a series of chunks.
      * This inner class represents the complete profile as a single object,
      * combining chunks as necessary.
+     * <p>
+     *  包含ICC配置文件的APP2标记段。在流中,大于64K的分布被分解成一系列块。这个内部类将整个配置文件表示为单个对象,根据需要组合块。
+     * 
      */
     class ICCMarkerSegment extends MarkerSegment {
         ArrayList chunks = null;
@@ -1398,6 +1495,9 @@ class JFIFMarkerSegment extends MarkerSegment {
              * Reduce the stored length by the id size.  The stored
              * length is used to store the length of the profile
              * data only.
+             * <p>
+             *  按id大小减少存储的长度。存储的长度用于仅存储配置文件数据的长度。
+             * 
              */
             length -= ID_SIZE;
 
@@ -1473,6 +1573,9 @@ class JFIFMarkerSegment extends MarkerSegment {
              * Reduce the stored length by the id size.  The stored
              * length is used to store the length of the profile
              * data only.
+             * <p>
+             *  按id大小减少存储的长度。存储的长度用于仅存储配置文件数据的长度。
+             * 
              */
             dataLen -= ID_SIZE;
 
@@ -1552,6 +1655,8 @@ class JFIFMarkerSegment extends MarkerSegment {
         /**
          * No-op.  Profiles are never written from metadata.
          * They are written from the ColorSpace of the image.
+         * <p>
+         *  无操作。配置文件绝不会从元数据中写入。它们是从图像的ColorSpace写的。
          */
         void write(ImageOutputStream ios) throws IOException {
             // No-op

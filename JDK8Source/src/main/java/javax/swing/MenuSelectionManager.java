@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import sun.swing.SwingUtilities2;
 /**
  * A MenuSelectionManager owns the selection in menu hierarchy.
  *
+ * <p>
+ *  MenuSelectionManager拥有菜单层次结构中的选择。
+ * 
+ * 
  * @author Arnaud Weber
  */
 public class MenuSelectionManager {
@@ -51,6 +56,10 @@ public class MenuSelectionManager {
     /**
      * Returns the default menu selection manager.
      *
+     * <p>
+     *  返回默认菜单选择管理器。
+     * 
+     * 
      * @return a MenuSelectionManager object
      */
     public static MenuSelectionManager defaultManager() {
@@ -77,6 +86,9 @@ public class MenuSelectionManager {
      * Only one ChangeEvent is needed per button model instance since the
      * event's only state is the source property.  The source of events
      * generated is always "this".
+     * <p>
+     *  由于事件的唯一状态是源属性,因此每个按钮模型实例只需要一个ChangeEvent。生成的事件的源始终是"this"。
+     * 
      */
     protected transient ChangeEvent changeEvent = null;
     protected EventListenerList listenerList = new EventListenerList();
@@ -89,6 +101,12 @@ public class MenuSelectionManager {
      * Note that this method is public but is used by the look and
      * feel engine and should not be called by client applications.
      *
+     * <p>
+     *  更改菜单层次结构中的选择。数组中的元素按照从根菜单元素到当前选择的菜单元素的顺序排序。
+     * <p>
+     *  请注意,此方法是公开的,但由外观和引擎引擎使用,不应由客户端应用程序调用。
+     * 
+     * 
      * @param path  an array of <code>MenuElement</code> objects specifying
      *        the selected path
      */
@@ -132,6 +150,10 @@ public class MenuSelectionManager {
     /**
      * Returns the path to the currently selected menu item
      *
+     * <p>
+     *  返回当前所选菜单项的路径
+     * 
+     * 
      * @return an array of MenuElement objects representing the selected path
      */
     public MenuElement[] getSelectedPath() {
@@ -145,6 +167,9 @@ public class MenuSelectionManager {
     /**
      * Tell the menu selection to close and unselect all the menu components. Call this method
      * when a choice has been made
+     * <p>
+     *  通过菜单选择关闭和取消选择所有菜单组件。当做出选择时调用此方法
+     * 
      */
     public void clearSelectedPath() {
         if (selection.size() > 0) {
@@ -155,6 +180,10 @@ public class MenuSelectionManager {
     /**
      * Adds a ChangeListener to the button.
      *
+     * <p>
+     *  向按钮添加ChangeListener。
+     * 
+     * 
      * @param l the listener to add
      */
     public void addChangeListener(ChangeListener l) {
@@ -164,6 +193,10 @@ public class MenuSelectionManager {
     /**
      * Removes a ChangeListener from the button.
      *
+     * <p>
+     *  从按钮中删除ChangeListener。
+     * 
+     * 
      * @param l the listener to remove
      */
     public void removeChangeListener(ChangeListener l) {
@@ -174,6 +207,10 @@ public class MenuSelectionManager {
      * Returns an array of all the <code>ChangeListener</code>s added
      * to this MenuSelectionManager with addChangeListener().
      *
+     * <p>
+     *  返回使用addChangeListener()添加到此MenuSelectionManager的所有<code> ChangeListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ChangeListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -187,6 +224,10 @@ public class MenuSelectionManager {
      * notification on this event type.  The event instance
      * is created lazily.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例是懒惰创建的。
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireStateChanged() {
@@ -208,6 +249,10 @@ public class MenuSelectionManager {
      * When a MenuElement receives an event from a MouseListener, it should never process the event
      * directly. Instead all MenuElements should call this method with the event.
      *
+     * <p>
+     *  当MenuElement从MouseListener接收到一个事件时,它不应该直接处理事件。相反,所有MenuElements应该调用此方法与事件。
+     * 
+     * 
      * @param event  a MouseEvent object
      */
     public void processMouseEvent(MouseEvent event) {
@@ -277,6 +322,9 @@ public class MenuSelectionManager {
 
                 /** Send the event to visible menu element if menu element currently in
                  *  the selected path or contains the event location
+                 * <p>
+                 *  所选路径或包含事件位置
+                 * 
                  */
                 if(
                    (p.x >= 0 && p.x < cWidth && p.y >= 0 && p.y < cHeight)) {
@@ -367,6 +415,10 @@ public class MenuSelectionManager {
      * Returns the component in the currently selected path
      * which contains sourcePoint.
      *
+     * <p>
+     *  返回当前所选路径中包含sourcePoint的组件。
+     * 
+     * 
      * @param source The component in whose coordinate space sourcePoint
      *        is given
      * @param sourcePoint The point which is being tested
@@ -418,6 +470,9 @@ public class MenuSelectionManager {
 
                 /** Return the deepest component on the selection
                  *  path in whose bounds the event's point occurs
+                 * <p>
+                 * 路径在其边界中发生事件的点
+                 * 
                  */
                 if (p.x >= 0 && p.x < cWidth && p.y >= 0 && p.y < cHeight) {
                     return mc;
@@ -431,6 +486,10 @@ public class MenuSelectionManager {
      * When a MenuElement receives an event from a KeyListener, it should never process the event
      * directly. Instead all MenuElements should call this method with the event.
      *
+     * <p>
+     *  当MenuElement从KeyListener接收到一个事件时,它不应该直接处理事件。相反,所有MenuElements应该调用此方法与事件。
+     * 
+     * 
      * @param e  a KeyEvent object
      */
     public void processKeyEvent(KeyEvent e) {
@@ -477,6 +536,8 @@ public class MenuSelectionManager {
 
     /**
      * Return true if c is part of the currently used menu
+     * <p>
+     *  如果c是当前使用的菜单的一部分,则返回true
      */
     public boolean isComponentPartOfCurrentMenu(Component c) {
         if(selection.size() > 0) {

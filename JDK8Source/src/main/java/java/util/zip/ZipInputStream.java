@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import static java.util.zip.ZipUtils.*;
  * ZIP file format. Includes support for both compressed and uncompressed
  * entries.
  *
+ * <p>
+ *  这个类实现了一个输入流过滤器,用于读取ZIP文件格式的文件。包括对压缩和未压缩条目的支持。
+ * 
+ * 
  * @author      David Connelly
  */
 public
@@ -61,6 +66,9 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
 
     /**
      * Check to make sure that this stream has not been closed
+     * <p>
+     *  请检查以确保此流未关闭
+     * 
      */
     private void ensureOpen() throws IOException {
         if (closed) {
@@ -74,6 +82,12 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
      * <p>The UTF-8 {@link java.nio.charset.Charset charset} is used to
      * decode the entry names.
      *
+     * <p>
+     *  创建新的ZIP输入流。
+     * 
+     *  <p> UTF-8 {@link java.nio.charset.Charset charset}用于解码条目名称。
+     * 
+     * 
      * @param in the actual input stream
      */
     public ZipInputStream(InputStream in) {
@@ -83,6 +97,10 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
     /**
      * Creates a new ZIP input stream.
      *
+     * <p>
+     *  创建新的ZIP输入流。
+     * 
+     * 
      * @param in the actual input stream
      *
      * @param charset
@@ -108,6 +126,10 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
     /**
      * Reads the next ZIP file entry and positions the stream at the
      * beginning of the entry data.
+     * <p>
+     *  读取下一个ZIP文件条目,并将流定位在条目数据的开头。
+     * 
+     * 
      * @return the next ZIP file entry, or null if there are no more entries
      * @exception ZipException if a ZIP file error has occurred
      * @exception IOException if an I/O error has occurred
@@ -132,6 +154,10 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
     /**
      * Closes the current ZIP entry and positions the stream for reading the
      * next entry.
+     * <p>
+     *  关闭当前ZIP条目并定位流以读取下一个条目。
+     * 
+     * 
      * @exception ZipException if a ZIP file error has occurred
      * @exception IOException if an I/O error has occurred
      */
@@ -148,6 +174,12 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
      * Programs should not count on this method to return the actual number
      * of bytes that could be read without blocking.
      *
+     * <p>
+     *  在当前条目数据达到EOF后返回0,否则始终返回1。
+     * <p>
+     *  程序不应该依赖此方法返回可以无阻塞地读取的实际字节数。
+     * 
+     * 
      * @return     1 before EOF and 0 after EOF has reached for current entry.
      * @exception  IOException  if an I/O error occurs.
      *
@@ -166,6 +198,10 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
      * If <code>len</code> is not zero, the method
      * blocks until some input is available; otherwise, no
      * bytes are read and <code>0</code> is returned.
+     * <p>
+     *  从当前ZIP条目读取一个字节数组。如果<code> len </code>不为零,则该方法阻塞,直到某些输入可用;否则,不读取任何字节,并返回<code> 0 </code>。
+     * 
+     * 
      * @param b the buffer into which the data is read
      * @param off the start offset in the destination array <code>b</code>
      * @param len the maximum number of bytes read
@@ -228,6 +264,10 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
 
     /**
      * Skips specified number of bytes in the current ZIP entry.
+     * <p>
+     *  跳过当前ZIP条目中指定的字节数。
+     * 
+     * 
      * @param n the number of bytes to skip
      * @return the actual number of bytes skipped
      * @exception ZipException if a ZIP file error has occurred
@@ -259,6 +299,10 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
     /**
      * Closes this input stream and releases any system resources associated
      * with the stream.
+     * <p>
+     *  关闭此输入流,并释放与流相关联的任何系统资源。
+     * 
+     * 
      * @exception IOException if an I/O error has occurred
      */
     public void close() throws IOException {
@@ -272,6 +316,9 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
 
     /*
      * Reads local file (LOC) header for next entry.
+     * <p>
+     *  读取下一个条目的本地文件(LOC)标题。
+     * 
      */
     private ZipEntry readLOC() throws IOException {
         try {
@@ -329,6 +376,10 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
      * Creates a new <code>ZipEntry</code> object for the specified
      * entry name.
      *
+     * <p>
+     *  为指定的条目名称创建新的<code> ZipEntry </code>对象。
+     * 
+     * 
      * @param name the ZIP file entry name
      * @return the ZipEntry just created
      */
@@ -338,6 +389,9 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
 
     /*
      * Reads end of deflated entry as well as EXT descriptor if present.
+     * <p>
+     *  读取放气条目的结束以及EXT描述符(如果存在)。
+     * 
      */
     private void readEnd(ZipEntry e) throws IOException {
         int n = inf.getRemaining();
@@ -397,6 +451,8 @@ class ZipInputStream extends InflaterInputStream implements ZipConstants {
 
     /*
      * Reads bytes, blocking until all bytes are read.
+     * <p>
+     *  读取字节,阻塞直到读取所有字节。
      */
     private void readFully(byte[] b, int off, int len) throws IOException {
         while (len > 0) {

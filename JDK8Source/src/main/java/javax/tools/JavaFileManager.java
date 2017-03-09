@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -96,6 +97,42 @@ import static javax.tools.JavaFileObject.Kind;
  * <p>Unless explicitly allowed, all methods in this interface might
  * throw a NullPointerException if given a {@code null} argument.
  *
+ * <p>
+ *  Java和贸易上运行的工具的文件管理器;编程语言源和类文件。在此上下文中,<em> </em>文件意味着常规文件和其他数据源的抽象。
+ * 
+ *  <p>在构建新的JavaFileObjects时,文件管理器必须确定在何处创建它们。例如,如果文件管理器管理文件系统上的常规文件,则它很可能具有当前/工作目录以在创建或查找文件时用作默认位置。
+ * 可以向文件管理器提供关于在哪里创建文件的多个提示。任何文件管理器可能会选择忽略这些提示。
+ * 
+ *  <p>此接口中的一些方法使用类名称。这些类名必须在Java虚拟机内部形式的完全限定类和接口名中给出。为了方便 '。'和"/"可以互换。
+ * 内部形式在<cite> Java&trade;虚拟机规范</cite>。
+ * 
+ *  <blockquote> <p> <i>讨论：</i>这意味着名称"java / lang.package-info","java / lang / package-info","java.lang.
+ * package-是有效和等效的。
+ * 与<cite> Java&trade;中定义的二进制名称进行比较;语言规范</cite>,第13.1节"二进制的形式"。 </p> </blockquote>。
+ * 
+ * <p>名称的情况很重要。所有名称都应视为区分大小写。例如,某些文件系统具有区分大小写,区分大小写的文件名。
+ * 表示此类文件的文件对象应注意使用{@link java.io.File#getCanonicalFile}或类似方法保留大小写。如果系统不区分大小写,则文件对象必须使用其他方式保留大小写。
+ * 
+ *  <p> <em> <a name="relative_name">相对名称</a>：</em>此界面中的一些方法使用相对名称。相对名称是由"/"分隔的路径段的非空,非空序列。 ''。
+ * 或".."是无效路径段。
+ * 有效的相对名称必须与<a href="http://www.ietf.org/rfc/rfc3986.txt"> RFC&nbsp; 3986 </a>(第3.3节)的"无pathless"规则匹配。
+ * 非正式地,这应该是真的：。
+ * 
+ * <!-- URI.create(relativeName).normalize().getPath().equals(relativeName) -->
+ *  <pre> URI.{@linkplain java.net.URI#create create}(relativeName)。
+ * {@ linkplain java.net.URI#normalize normalize}()。
+ * {@ linkplain java.net.URI#getPath getPath}() .equals(relativeName)</pre>。
+ * 
+ *  <p>此接口中的所有方法都可能抛出SecurityException。
+ * 
+ *  <p>此接口的对象不需要支持多线程访问,也就是同步。但是,它必须支持对由此对象创建的不同文件对象的并发访问。
+ * 
+ * <p> <em>实现说明：</em>此要求的后果是,对{@linkplain java.util.jar.JarOutputStream}的输出的一个小的实现不是一个足够的实现。
+ * 也就是说,不是创建直接返回JarOutputStream的JavaFileObject,内容必须缓存,直到关闭,然后写入JarOutputStream。
+ * 
+ *  <p>除非明确允许,否则如果给定{@code null}参数,此接口中的所有方法都可能抛出NullPointerException。
+ * 
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @see JavaFileObject
@@ -107,11 +144,18 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
     /**
      * Interface for locations of file objects.  Used by file managers
      * to determine where to place or search for file objects.
+     * <p>
+     *  文件对象的位置接口。由文件管理器用于确定在哪里放置或搜索文件对象。
+     * 
      */
     interface Location {
         /**
          * Gets the name of this location.
          *
+         * <p>
+         *  获取此位置的名称。
+         * 
+         * 
          * @return a name
          */
         String getName();
@@ -121,6 +165,10 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
          * location is a location that is conventionally used for
          * output.
          *
+         * <p>
+         *  确定这是否是输出位置。输出位置是通常用于输出的位置。
+         * 
+         * 
          * @return true if this is an output location, false otherwise
          */
         boolean isOutputLocation();
@@ -133,6 +181,13 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * StandardLocation#ANNOTATION_PROCESSOR_PATH
      * ANNOTATION_PROCESSOR_PATH} location.
      *
+     * <p>
+     *  获取从给定位置加载插件的类加载器。
+     * 例如,要加载注释处理器,编译器将为{@link StandardLocation#ANNOTATION_PROCESSOR_PATH ANNOTATION_PROCESSOR_PATH}位置请求类加载器
+     * 。
+     *  获取从给定位置加载插件的类加载器。
+     * 
+     * 
      * @param location a location
      * @return a class loader for the given location; or {@code null}
      * if loading plug-ins from the given location is disabled or if
@@ -153,6 +208,12 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * manager, it may not return {@code null}.  Also, an unknown
      * location may not cause an exception.
      *
+     * <p>
+     *  列出与给定位置中的给定条件匹配的所有文件对象。如果recurse为true,则列出"subpackages"中的文件对象。
+     * 
+     *  <p>注意：即使该文件管理器未知给定位置,也不能返回{@code null}。此外,未知位置可能不会导致异常。
+     * 
+     * 
      * @param location     a location
      * @param packageName  a package name
      * @param kinds        return objects only of these kinds
@@ -175,6 +236,10 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * binary name returned might not be a valid binary name according to
      * <cite>The Java&trade; Language Specification</cite>.
      *
+     * <p>
+     *  基于位置来表示文件对象的二进制名称。返回的二进制名称可能不是有效的二进制名称,根据<cite> Java&trade;语言规范</cite>。
+     * 
+     * 
      * @param location a location
      * @param file a file object
      * @return a binary name or {@code null} the file object is not
@@ -188,6 +253,10 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * Compares two file objects and return true if they represent the
      * same underlying object.
      *
+     * <p>
+     * 比较两个文件对象,如果它们表示相同的基础对象,则返回true。
+     * 
+     * 
      * @param a a file object
      * @param b a file object
      * @return true if the given file objects represent the same
@@ -204,6 +273,10 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * file manager it will consume any arguments to that option from
      * {@code remaining} and return true, otherwise return false.
      *
+     * <p>
+     *  处理一个选项。如果{@code current}是这个文件管理器的一个选项,它将从{@code remaining}消耗该选项的任何参数,并返回true,否则返回false。
+     * 
+     * 
      * @param current current option
      * @param remaining remaining options
      * @return true if this option was handled by this file manager,
@@ -218,6 +291,10 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
     /**
      * Determines if a location is known to this file manager.
      *
+     * <p>
+     *  确定该文件管理器是否知道位置。
+     * 
+     * 
      * @param location a location
      * @return true if the location is known
      */
@@ -228,6 +305,10 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * representing the specified class of the specified kind in the
      * given location.
      *
+     * <p>
+     *  获取表示给定位置中指定类型的指定类的输入的{@linkplain JavaFileObject文件对象}。
+     * 
+     * 
      * @param location a location
      * @param className the name of a class
      * @param kind the kind of file, must be one of {@link
@@ -263,6 +344,13 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * the originating source file as sibling when calling this
      * method.
      *
+     * <p>
+     *  获取表示给定位置中指定类型的指定类的输出的{@linkplain JavaFileObject文件对象}。
+     * 
+     *  <p>(可选)此文件管理器可能会将同级视为提示放置输出的位置。这个提示的确切语义是未指定的。例如,JDK编译器javac将类文件放置在与源文件相同的目录中,除非提供类文件输出目录。
+     * 为了方便此行为,javac可能在调用此方法时将源文件提供为同级。
+     * 
+     * 
      * @param location a location
      * @param className the name of a class
      * @param kind the kind of file, must be one of {@link
@@ -312,6 +400,25 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * a valid result would be a file object representing the file
      * <code>"C:\Documents&nbsp;and&nbsp;Settings\UncleBob\src\share\classes\com\sun\tools\javac\resources\compiler.properties"</code>.
      *
+     * <p>
+     *  获取表示给定位置中指定包中指定的<a href="JavaFileManager.html#relative_name">相对名称</a>的输入的{@linkplain FileObject文件对象}
+     * 。
+     * 
+     *  <p>如果返回的对象代表{@linkplain JavaFileObject.Kind#SOURCE source}或{@linkplain JavaFileObject.Kind#CLASS class}
+     * 文件,则它必须是{@link JavaFileObject}的实例。
+     * 
+     * <p>非正式地,此方法返回的文件对象位于位置,包名称和相对名称的并置中。
+     * 例如,要在{@linkplain StandardLocation#SOURCE_PATH SOURCE_PATH}位置的软件包"com.sun.tools.javac"中找到属性文件"resource
+     * s / compiler.properties",可能会调用此方法,如下所示：。
+     * <p>非正式地,此方法返回的文件对象位于位置,包名称和相对名称的并置中。
+     * 
+     *  <pre> getFileForInput(SOURCE_PATH,"com.sun.tools.javac","resources / compiler.properties"); </pre>
+     * 
+     *  <p>如果在Windows上执行调用,并且SOURCE_PATH设置为<code>"C：\ Documents&nbsp;和Settings \ UncleBob \ src \ share \ cl
+     * asses"</code>,则有效的结果将是表示文件<code>"C：\ Documents&nbsp;和Settings \ UncleBob \ src \ share \ classes \ co
+     * m \ sun \ tools \ javac \ resources \ compiler.properties"</code>。
+     * 
+     * 
      * @param location a location
      * @param packageName a package name
      * @param relativeName a relative name
@@ -355,6 +462,17 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * relative name or next to the sibling argument.  See {@link
      * #getFileForInput getFileForInput} for an example.
      *
+     * <p>
+     *  获取表示给定位置中指定包中指定的<a href="JavaFileManager.html#relative_name">相对名称</a>的输出的{@linkplain FileObject文件对象}
+     * 。
+     * 
+     *  <p>(可选)此文件管理器可能会将同级视为提示放置输出的位置。这个提示的确切语义是未指定的。例如,JDK编译器javac将类文件放置在与源文件相同的目录中,除非提供类文件输出目录。
+     * 为了方便此行为,javac可能在调用此方法时将源文件提供为同级。
+     * 
+     * <p>如果返回的对象代表{@linkplain JavaFileObject.Kind#SOURCE source}或{@linkplain JavaFileObject.Kind#CLASS class}
+     * 文件,则它必须是{@link JavaFileObject}的实例。
+     * 
+     * 
      * @param location a location
      * @param packageName a package name
      * @param relativeName a relative name
@@ -382,6 +500,10 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * directly or indirectly.  Flushing a closed file manager has no
      * effect.
      *
+     * <p>
+     *  <p>非正式地,此方法返回的文件对象位于位置,包名称和相对名称的并置中,或位于兄弟参数旁边。有关示例,请参见{@link #getFileForInput getFileForInput}。
+     * 
+     * 
      * @throws IOException if an I/O error occurred
      * @see #close
      */
@@ -395,6 +517,10 @@ public interface JavaFileManager extends Closeable, Flushable, OptionChecker {
      * explicitly allowed.  However, closing a file manager which has
      * already been closed has no effect.
      *
+     * <p>
+     *  清除由此文件管理器直接或间接打开以输出的任何资源。刷新已关闭的文件管理器没有任何效果。
+     * 
+     * 
      * @throws IOException if an I/O error occurred
      * @see #flush
      */

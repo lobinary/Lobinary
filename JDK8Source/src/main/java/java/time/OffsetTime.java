@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time;
 
@@ -113,6 +132,20 @@ import java.util.Objects;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  在ISO-8601日历系统中偏离UTC / Greenwich的时间,例如{@code 10：15：30 + 01：00}。
+ * <p>
+ *  {@code OffsetTime}是一个不可变的日期时间对象,表示时间,通常被视为小时分钟 - 秒偏移。此类存储所有时间字段,精度为纳秒,以及区域偏移。
+ * 例如,值"13：45.30.123456789 + 02：00"可以存储在{@code OffsetTime}中。
+ * 
+ * <p>
+ * 这是<a href="{@docRoot}/java/lang/doc-files/ValueBased.html">以价值为基础的</a>类;在{@code OffsetTime}的实例上使用身份敏感
+ * 操作(包括引用相等({@code ==}),身份哈希码或同步)可能会产生不可预测的结果,应该避免使用。
+ * 应该使用{@code equals}方法进行比较。
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 public final class OffsetTime
@@ -124,6 +157,10 @@ public final class OffsetTime
      * (larger offsets are earlier on the time-line).
      * This combines {@link LocalTime#MIN} and {@link ZoneOffset#MAX}.
      * This could be used by an application as a "far past" date.
+     * <p>
+     *  最低支持{@code OffsetTime},'00：00：00 + 18：00'。这是最大偏移量在一天开始时的午夜时间(较大的偏移量在时间线上较早)。
+     * 结合{@link LocalTime#MIN}和{@link ZoneOffset#MAX}。这可以被应用程序用作"过去"日期。
+     * 
      */
     public static final OffsetTime MIN = LocalTime.MIN.atOffset(ZoneOffset.MAX);
     /**
@@ -132,20 +169,33 @@ public final class OffsetTime
      * (larger negative offsets are later on the time-line).
      * This combines {@link LocalTime#MAX} and {@link ZoneOffset#MIN}.
      * This could be used by an application as a "far future" date.
+     * <p>
+     *  最大支持的{@code OffsetTime},'23：59：59.999999999-18：00'。这是恰好在午夜之前在最小偏移量的结尾的时间(较大的负偏移在时间线上较晚)。
+     * 这结合了{@link LocalTime#MAX}和{@link ZoneOffset#MIN}。这可以被应用程序用作"远期"日期。
+     * 
      */
     public static final OffsetTime MAX = LocalTime.MAX.atOffset(ZoneOffset.MIN);
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 7264499704384272492L;
 
     /**
      * The local date-time.
+     * <p>
+     *  本地日期时间。
+     * 
      */
     private final LocalTime time;
     /**
      * The offset from UTC/Greenwich.
+     * <p>
+     *  偏离UTC /格林威治。
+     * 
      */
     private final ZoneOffset offset;
 
@@ -160,6 +210,14 @@ public final class OffsetTime
      * Using this method will prevent the ability to use an alternate clock for testing
      * because the clock is hard-coded.
      *
+     * <p>
+     *  在默认时区中从系统时钟获取当前时间。
+     * <p>
+     *  这将在默认时区中查询{@link java.time.Clock#systemDefaultZone()系统时钟}以获取当前时间。偏移将根据时钟中的时区计算。
+     * <p>
+     * 使用此方法将会阻止使用备用时钟进行测试,因为时钟是硬编码的。
+     * 
+     * 
      * @return the current time using the system clock, not null
      */
     public static OffsetTime now() {
@@ -176,6 +234,14 @@ public final class OffsetTime
      * Using this method will prevent the ability to use an alternate clock for testing
      * because the clock is hard-coded.
      *
+     * <p>
+     *  在指定的时区中从系统时钟获取当前时间。
+     * <p>
+     *  这将查询{@link Clock#system(java.time.ZoneId)系统时钟}以获取当前时间。指定时区避免了对默认时区的依赖。将根据指定的时区计算偏移量。
+     * <p>
+     *  使用此方法将会阻止使用备用时钟进行测试,因为时钟是硬编码的。
+     * 
+     * 
      * @param zone  the zone ID to use, not null
      * @return the current time using the system clock, not null
      */
@@ -192,6 +258,14 @@ public final class OffsetTime
      * Using this method allows the use of an alternate clock for testing.
      * The alternate clock may be introduced using {@link Clock dependency injection}.
      *
+     * <p>
+     *  从指定的时钟获取当前时间。
+     * <p>
+     *  这将查询指定的时钟以获取当前时间。偏移将根据时钟中的时区计算。
+     * <p>
+     *  使用此方法允许使用替代时钟进行测试。可以使用{@link时钟依赖注入}来引入替代时钟。
+     * 
+     * 
      * @param clock  the clock to use, not null
      * @return the current time, not null
      */
@@ -205,6 +279,10 @@ public final class OffsetTime
     /**
      * Obtains an instance of {@code OffsetTime} from a local time and an offset.
      *
+     * <p>
+     *  从本地时间和偏移获取{@code OffsetTime}的实例。
+     * 
+     * 
      * @param time  the local time, not null
      * @param offset  the zone offset, not null
      * @return the offset time, not null
@@ -224,6 +302,14 @@ public final class OffsetTime
      * equivalent factory method taking fewer arguments.
      * They are not provided here to reduce the footprint of the API.
      *
+     * <p>
+     *  从小时,分钟,秒和纳秒获取{@code OffsetTime}的实例。
+     * <p>
+     *  这将使用四个指定字段创建一个偏移时间。
+     * <p>
+     *  这种方法主要用于写测试用例。非测试代码通常将使用其他方法来创建偏移时间。 {@code LocalTime}有两个额外的方便变体的等效工厂方法,使用较少的参数。这里不提供它们来减少API的占用空间。
+     * 
+     * 
      * @param hour  the hour-of-day to represent, from 0 to 23
      * @param minute  the minute-of-hour to represent, from 0 to 59
      * @param second  the second-of-minute to represent, from 0 to 59
@@ -248,6 +334,14 @@ public final class OffsetTime
      * This means that the conversion can never fail due to the instant being
      * out of the valid range of dates.
      *
+     * <p>
+     *  从{@code Instant}和区域ID获取{@code OffsetTime}的实例。
+     * <p>
+     * 这将创建一个与指定的时刻相同的偏移时间。从UTC / Greenwich找到偏移是很简单的,因为每个时刻只有一个有效的偏移。
+     * <p>
+     *  在转换期间删除即时的日期分量。这意味着转换永远不会失败,因为即时在有效的日期范围之外。
+     * 
+     * 
      * @param instant  the instant to create the time from, not null
      * @param zone  the time-zone, which may be an offset, not null
      * @return the offset time, not null
@@ -279,6 +373,16 @@ public final class OffsetTime
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used in queries via method reference, {@code OffsetTime::from}.
      *
+     * <p>
+     *  从临时对象获取{@code OffsetTime}的实例。
+     * <p>
+     *  这基于指定的时间获得偏移时间。 {@code TemporalAccessor}表示一组任意的日期和时间信息,此工厂将其转换为{@code OffsetTime}的实例。
+     * <p>
+     *  转换从时间对象提取和组合{@code ZoneOffset}和{@code LocalTime}。实现允许执行优化,例如访问等价于相关对象的那些字段。
+     * <p>
+     *  此方法匹配功能接口{@link TemporalQuery}的签名,允许它通过方法引用{@code OffsetTime :: from}在查询中使用。
+     * 
+     * 
      * @param temporal  the temporal object to convert, not null
      * @return the offset time, not null
      * @throws DateTimeException if unable to convert to an {@code OffsetTime}
@@ -304,6 +408,12 @@ public final class OffsetTime
      * The string must represent a valid time and is parsed using
      * {@link java.time.format.DateTimeFormatter#ISO_OFFSET_TIME}.
      *
+     * <p>
+     *  从文本字符串(例如{@code 10：15：30 + 01：00})获取{@code OffsetTime}的实例。
+     * <p>
+     *  该字符串必须表示有效时间,并使用{@link java.time.format.DateTimeFormatter#ISO_OFFSET_TIME}进行解析。
+     * 
+     * 
      * @param text  the text to parse such as "10:15:30+01:00", not null
      * @return the parsed local time, not null
      * @throws DateTimeParseException if the text cannot be parsed
@@ -317,6 +427,12 @@ public final class OffsetTime
      * <p>
      * The text is parsed using the formatter, returning a time.
      *
+     * <p>
+     *  使用特定格式化程序从文本字符串获取{@code OffsetTime}的实例。
+     * <p>
+     *  使用格式化程序解析文本,返回时间。
+     * 
+     * 
      * @param text  the text to parse, not null
      * @param formatter  the formatter to use, not null
      * @return the parsed offset time, not null
@@ -331,6 +447,10 @@ public final class OffsetTime
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param time  the local time, not null
      * @param offset  the zone offset, not null
      */
@@ -342,6 +462,10 @@ public final class OffsetTime
     /**
      * Returns a new time based on this one, returning {@code this} where possible.
      *
+     * <p>
+     *  返回基于此时间的新时间,尽可能返回{@code this}。
+     * 
+     * 
      * @param time  the time to create with, not null
      * @param offset  the zone offset to create with, not null
      */
@@ -388,6 +512,28 @@ public final class OffsetTime
      * passing {@code this} as the argument.
      * Whether the field is supported is determined by the field.
      *
+     * <p>
+     * 检查是否支持指定的字段。
+     * <p>
+     *  这将检查是否可以查询指定字段的此时间。
+     * 如果为false,则调用{@link #range(TemporalField)范围},{@link #get(TemporalField)get}和{@link #with(TemporalField,long)}
+     * 方法将抛出异常。
+     *  这将检查是否可以查询指定字段的此时间。
+     * <p>
+     *  如果字段是{@link ChronoField},则在此执行查询。支持的字段包括：
+     * <ul>
+     *  <li> {@ code NANO_OF_DAY} <li> {@ code MANI_OF_DAY} <li> {@ code MICRO_OF_DAY} <li> {@ code MICRO_OF_DAY}
+     *  > {@ code SECOND_OF_MINUTE} <li> {@ code SECOND_OF_DAY} <li> {@ code MINUTE_OF_HOUR} <li> {@ code MINUTE_OF_DAY}
+     *  <li> {@ code HOUR_OF_AMPM} <li> {@ code CLOCK_HOUR_OF_AMPM} @code HOUR_OF_DAY} <li> {@ code CLOCK_HOUR_OF_DAY}
+     *  <li> {@ code AMPM_OF_DAY} <li> {@ code OFFSET_SECONDS}。
+     * </ul>
+     *  所有其他{@code ChronoField}实例将返回false。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.isSupportedBy(TemporalAccessor)}传递{@code this}作
+     * 为参数来获得此方法的结果。
+     * 字段是否受支持由字段确定。
+     * 
+     * 
      * @param field  the field to check, null returns false
      * @return true if the field is supported on this time, false if not
      */
@@ -424,6 +570,24 @@ public final class OffsetTime
      * passing {@code this} as the argument.
      * Whether the unit is supported is determined by the unit.
      *
+     * <p>
+     *  检查是否支持指定的单元。
+     * <p>
+     *  这将检查指定的单位是否可以添加到此日期时间或从此日期时间中减去。
+     * 如果为false,则调用{@link #plus(long,TemporalUnit)}和{@link #minus(long,TemporalUnit)minus}方法将抛出异常。
+     * <p>
+     *  如果单位是{@link ChronoUnit},则在此执行查询。支持的单位有：
+     * <ul>
+     * <li> {@ code MINUTES} <li> {@ code MICROS} <li> {@ code MILLIS} <li> {@ code SECONDS} <li> {@ code MINUTES}
+     *  > {@ code HALF_DAYS}。
+     * </ul>
+     *  所有其他{@code ChronoUnit}实例将返回false。
+     * <p>
+     *  如果单元不是{@code ChronoUnit},那么通过调用{@code TemporalUnit.isSupportedBy(Temporal)}传递{@code this}作为参数来获得此方法的
+     * 结果。
+     * 单元是否受支持由单元确定。
+     * 
+     * 
      * @param unit  the unit to check, null returns false
      * @return true if the unit can be added/subtracted, false if not
      */
@@ -454,6 +618,19 @@ public final class OffsetTime
      * passing {@code this} as the argument.
      * Whether the range can be obtained is determined by the field.
      *
+     * <p>
+     *  获取指定字段的有效值范围。
+     * <p>
+     *  范围对象表示字段的最小和最大有效值。此时间用于提高返回范围的精度。如果不可能返回范围,因为该字段不受支持或由于某种其他原因,将抛出异常。
+     * <p>
+     *  如果字段是{@link ChronoField},则在此执行查询。 {@link #isSupported(TemporalField)supported fields}会传回适当的范围执行个体。
+     * 所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.rangeRefinedBy(TemporalAccessor)}传递{@code this}
+     * 作为参数来获得此方法的结果。
+     * 是否可以获得范围由字段确定。
+     * 
+     * 
      * @param field  the field to query the range for, not null
      * @return the range of valid values for the field, not null
      * @throws DateTimeException if the range for the field cannot be obtained
@@ -489,6 +666,22 @@ public final class OffsetTime
      * passing {@code this} as the argument. Whether the value can be obtained,
      * and what the value represents, is determined by the field.
      *
+     * <p>
+     *  从此时获取指定字段的值为{@code int}。
+     * <p>
+     * 这次查询指定字段的值。返回的值将始终在字段的有效值范围内。如果不可能返回值,因为该字段不受支持或由于某种其他原因,将抛出异常。
+     * <p>
+     *  如果字段是{@link ChronoField},则在此执行查询。
+     * 除非{@code NANO_OF_DAY}和{@code MICRO_OF_DAY}太大,无法容纳在{@code int}中,{@link #isSupported(TemporalField)支持的字段}
+     * 将返回基于此时间的有效值, @code DateTimeException}。
+     *  如果字段是{@link ChronoField},则在此执行查询。
+     * 所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.getFrom(TemporalAccessor)}传递{@code this}作为参数来获得
+     * 此方法的结果。
+     * 是否可以获取该值以及该值表示什么,由字段确定。
+     * 
+     * 
      * @param field  the field to get, not null
      * @return the value for the field
      * @throws DateTimeException if a value for the field cannot be obtained or
@@ -519,6 +712,19 @@ public final class OffsetTime
      * passing {@code this} as the argument. Whether the value can be obtained,
      * and what the value represents, is determined by the field.
      *
+     * <p>
+     *  从此时获取指定字段的值为{@code long}。
+     * <p>
+     *  这次查询指定字段的值。如果不可能返回值,因为该字段不受支持或由于某种其他原因,将抛出异常。
+     * <p>
+     *  如果字段是{@link ChronoField},则在此执行查询。 {@link #isSupported(TemporalField)supported fields}将根据此时间返回有效值。
+     * 所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}。
+     * <p>
+     * 如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.getFrom(TemporalAccessor)}传递{@code this}作为参数来获得此
+     * 方法的结果。
+     * 是否可以获取该值以及该值表示什么,由字段确定。
+     * 
+     * 
      * @param field  the field to get, not null
      * @return the value for the field
      * @throws DateTimeException if a value for the field cannot be obtained
@@ -542,6 +748,12 @@ public final class OffsetTime
      * <p>
      * This is the offset of the local time from UTC/Greenwich.
      *
+     * <p>
+     *  获取区域偏移量,例如"+01：00"。
+     * <p>
+     *  这是当地时间偏离UTC /格林威治。
+     * 
+     * 
      * @return the zone offset, not null
      */
     public ZoneOffset getOffset() {
@@ -562,6 +774,17 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回具有指定偏移量的{@code OffsetTime}的副本,以确保结果具有相同的本地时间。
+     * <p>
+     *  此方法返回具有相同{@code LocalTime}和指定的{@code ZoneOffset}的对象。不需要或不执行计算。
+     * 例如,如果这个时间代表{@code 10：30 + 02：00}并且指定的偏移量是{@code +03：00},那么这个方法将返回{@code 10：30 + 03：00}。
+     * <p>
+     *  要考虑偏移之间的差异,并调整时间字段,请使用{@link #withOffsetSameInstant}。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param offset  the zone offset to change to, not null
      * @return an {@code OffsetTime} based on this time with the requested offset, not null
      */
@@ -584,6 +807,18 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回具有指定偏移量的{@code OffsetTime}的副本,以确保结果在隐含日的同一时刻。
+     * <p>
+     * 此方法返回具有指定的{@code ZoneOffset}和{@code LocalTime}的对象,由两个偏移之间的差调整。这将导致表示相同时刻的旧对象和新对象是隐含的日子。
+     * 这对于在不同偏移中查找本地时间很有用。
+     * 例如,如果这个时间代表{@code 10：30 + 02：00}并且指定的偏移量是{@code +03：00},那么这个方法将返回{@code 11：30 + 03：00}。
+     * <p>
+     *  要更改偏移而不调整本地时间,请使用{@link #withOffsetSameLocal}。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param offset  the zone offset to change to, not null
      * @return an {@code OffsetTime} based on this time with the requested offset, not null
      */
@@ -603,6 +838,12 @@ public final class OffsetTime
      * This returns a {@code LocalTime} with the same hour, minute, second and
      * nanosecond as this date-time.
      *
+     * <p>
+     *  获取此日期时间的{@code LocalTime}部分。
+     * <p>
+     *  这会返回与此日期时间相同的小时,分​​钟,秒和纳秒的{@code LocalTime}。
+     * 
+     * 
      * @return the time part of this date-time, not null
      */
     public LocalTime toLocalTime() {
@@ -613,6 +854,10 @@ public final class OffsetTime
     /**
      * Gets the hour-of-day field.
      *
+     * <p>
+     *  获取日期字段。
+     * 
+     * 
      * @return the hour-of-day, from 0 to 23
      */
     public int getHour() {
@@ -622,6 +867,10 @@ public final class OffsetTime
     /**
      * Gets the minute-of-hour field.
      *
+     * <p>
+     *  获取小时字段。
+     * 
+     * 
      * @return the minute-of-hour, from 0 to 59
      */
     public int getMinute() {
@@ -631,6 +880,10 @@ public final class OffsetTime
     /**
      * Gets the second-of-minute field.
      *
+     * <p>
+     *  获取秒分秒字段。
+     * 
+     * 
      * @return the second-of-minute, from 0 to 59
      */
     public int getSecond() {
@@ -640,6 +893,10 @@ public final class OffsetTime
     /**
      * Gets the nano-of-second field.
      *
+     * <p>
+     *  获取纳秒二次场。
+     * 
+     * 
      * @return the nano-of-second, from 0 to 999,999,999
      */
     public int getNano() {
@@ -670,6 +927,23 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间的调整副本。
+     * <p>
+     *  这将返回一个{@code OffsetTime},基于这一个,调整时间。使用指定的调整器策略对象进行调整。阅读调整器的文档以了解将要进行的调整。
+     * <p>
+     *  简单的调整器可以简单地设置一个字段,例如小时字段。更复杂的调整器可以将时间设置为一天的最后一个小时。
+     * <p>
+     *  类{@link LocalTime}和{@link ZoneOffset}实现{@code TemporalAdjuster},因此这个方法可以用来改变时间或偏移：
+     * <pre>
+     * result = offsetTime.with(time); result = offsetTime.with(offset);
+     * </pre>
+     * <p>
+     *  此方法的结果是通过调用指定调整器的{@link TemporalAdjuster#adjustInto(Temporal)}方法传递{@code this}作为参数来获得的。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param adjuster the adjuster to use, not null
      * @return an {@code OffsetTime} based on {@code this} with the adjustment made, not null
      * @throws DateTimeException if the adjustment cannot be made
@@ -716,6 +990,28 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时的指定字段设置为新值的副本。
+     * <p>
+     *  这将返回一个{@code OffsetTime},基于此,指定字段的值已更改。这可以用于更改任何支持的字段,例如小时,分钟或秒。如果无法设置该值,因为该字段不受支持或由于某种其他原因,将抛出异常。
+     * <p>
+     *  如果字段是{@link ChronoField},那么在此处执行调整。
+     * <p>
+     *  {@code OFFSET_SECONDS}字段将返回具有指定偏移量的时间。当地时间不变。如果新的偏移值在有效范围之外,那么将抛出{@code DateTimeException}。
+     * <p>
+     *  其他{@link #isSupported(TemporalField)支持的字段}将按照{@link LocalTime#with(TemporalField,long)} LocalTime}中的
+     * 匹配方法进行操作。
+     * 在这种情况下,偏移量不是计算的一部分,并且不会改变。
+     * <p>
+     *  所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}。
+     * <p>
+     * 如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.adjustInto(Temporal,long)}传递{@code this}作为参数来获得此
+     * 方法的结果。
+     * 在这种情况下,字段确定是否以及如何调整时刻。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param field  the field to set in the result, not null
      * @param newValue  the new value of the field in the result
      * @return an {@code OffsetTime} based on {@code this} with the specified field set, not null
@@ -743,6 +1039,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本,其中日期值的值已更改。
+     * <p>
+     *  偏移不影响计算,并且在结果中将是相同的。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param hour  the hour-of-day to set in the result, from 0 to 23
      * @return an {@code OffsetTime} based on this time with the requested hour, not null
      * @throws DateTimeException if the hour value is invalid
@@ -758,6 +1062,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本,其中小时值的值已更改。
+     * <p>
+     *  偏移不影响计算,并且在结果中将是相同的。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param minute  the minute-of-hour to set in the result, from 0 to 59
      * @return an {@code OffsetTime} based on this time with the requested minute, not null
      * @throws DateTimeException if the minute value is invalid
@@ -773,6 +1085,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本,其中二分钟值已更改。
+     * <p>
+     *  偏移不影响计算,并且在结果中将是相同的。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param second  the second-of-minute to set in the result, from 0 to 59
      * @return an {@code OffsetTime} based on this time with the requested second, not null
      * @throws DateTimeException if the second value is invalid
@@ -788,6 +1108,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的纳秒值已更改的副本。
+     * <p>
+     *  偏移不影响计算,并且在结果中将是相同的。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param nanoOfSecond  the nano-of-second to set in the result, from 0 to 999,999,999
      * @return an {@code OffsetTime} based on this time with the requested nanosecond, not null
      * @throws DateTimeException if the nanos value is invalid
@@ -814,6 +1142,19 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本并截断时间。
+     * <p>
+     * 截断返回原始时间的副本,其中字段小于指定的单位设置为零。例如,使用{@link ChronoUnit#MINUTES分钟}单位进行截断将会将秒数和毫微秒字段设置为零。
+     * <p>
+     *  单位必须有一个{@linkplain TemporalUnit#getDuration()duration},它分成标准日的长度,没有余数。
+     * 这包括{@link ChronoUnit}和{@link ChronoUnit#DAYS DAYS}上提供的所有时间单位。其他单位抛出异常。
+     * <p>
+     *  偏移不影响计算,并且在结果中将是相同的。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param unit  the unit to truncate to, not null
      * @return an {@code OffsetTime} based on this time with the time truncated, not null
      * @throws DateTimeException if unable to truncate
@@ -839,6 +1180,17 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间的指定添加金额的副本。
+     * <p>
+     *  这将返回一个{@code OffsetTime},基于这一个,与指定的添加量。金额通常为{@link Duration},但可以是实现{@link TemporalAmount}界面的任何其他类型。
+     * <p>
+     *  通过调用{@link TemporalAmount#addTo(Temporal)}将计算委托给金额对象。
+     * 金额实现可以以任何希望的方式实现添加,但是它通常回调{@link #plus(long,TemporalUnit)}。请参阅金额实施的文档以确定是否可以成功添加。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param amountToAdd  the amount to add, not null
      * @return an {@code OffsetTime} based on this time with the addition made, not null
      * @throws DateTimeException if the addition cannot be made
@@ -867,6 +1219,19 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间的指定添加金额的副本。
+     * <p>
+     * 这将返回一个{@code OffsetTime},根据这一个,与添加的单位的金额。如果无法添加该金额,因为该单元不受支持或出于其他原因,将抛出异常。
+     * <p>
+     *  如果字段是{@link ChronoUnit},则通过{@link LocalTime#plus(long,TemporalUnit)}实现添加。偏移量不是计算的一部分,在结果中不会改变。
+     * <p>
+     *  如果字段不是{@code ChronoUnit},那么通过调用{@code TemporalUnit.addTo(Temporal,long)}传递{@code this}作为参数来获得此方法的结果。
+     * 在这种情况下,单元确定是否以及如何执行添加。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param amountToAdd  the amount of the unit to add to the result, may be negative
      * @param unit  the unit of the amount to add, not null
      * @return an {@code OffsetTime} based on this time with the specified amount added, not null
@@ -891,6 +1256,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以指定的周期(以小时为单位)返回此{@code OffsetTime}的副本。
+     * <p>
+     *  这将为此时间添加指定的小时数,返回新的时间。计算在午夜左右。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param hours  the hours to add, may be negative
      * @return an {@code OffsetTime} based on this time with the hours added, not null
      */
@@ -906,6 +1279,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以指定的周期(以分钟为单位)返回此{@code OffsetTime}的副本。
+     * <p>
+     *  这将为此时间添加指定的分钟数,返回一个新的时间。计算在午夜左右。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param minutes  the minutes to add, may be negative
      * @return an {@code OffsetTime} based on this time with the minutes added, not null
      */
@@ -921,6 +1302,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本,其中包含指定的周期(以秒为单位)。
+     * <p>
+     *  这将为此时间添加指定的秒数,返回新的时间。计算在午夜左右。
+     * <p>
+     * 此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param seconds  the seconds to add, may be negative
      * @return an {@code OffsetTime} based on this time with the seconds added, not null
      */
@@ -936,6 +1325,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本,其中指定的周期(以纳秒为单位)添加。
+     * <p>
+     *  这将为此时间添加指定的纳秒数,返回新的时间。计算在午夜左右。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param nanos  the nanos to add, may be negative
      * @return an {@code OffsetTime} based on this time with the nanoseconds added, not null
      */
@@ -959,6 +1356,17 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间减去指定金额的副本。
+     * <p>
+     *  这将返回一个{@code OffsetTime},基于此,减去指定的减去。金额通常为{@link Duration},但可以是实现{@link TemporalAmount}界面的任何其他类型。
+     * <p>
+     *  通过调用{@link TemporalAmount#subtractFrom(Temporal)}将计算委托给金额对象。
+     * 金额实现可以以任何方式自由实现减法,但它通常回调{@link #minus(long,TemporalUnit)}。请参阅金额实施的文档,以确定是否可以成功扣除。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param amountToSubtract  the amount to subtract, not null
      * @return an {@code OffsetTime} based on this time with the subtraction made, not null
      * @throws DateTimeException if the subtraction cannot be made
@@ -981,6 +1389,16 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间减去指定金额的副本。
+     * <p>
+     *  这将返回一个{@code OffsetTime},根据这一个,与减去单位的金额。如果不可能减去金额,因为该单元不受支持或由于某种其他原因,将抛出异常。
+     * <p>
+     * 此方法等效于{@link #plus(long,TemporalUnit)},其值为negated。请参阅该方法,了解如何添加和减少的工作原理的完整描述。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param amountToSubtract  the amount of the unit to subtract from the result, may be negative
      * @param unit  the unit of the amount to subtract, not null
      * @return an {@code OffsetTime} based on this time with the specified amount subtracted, not null
@@ -1002,6 +1420,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以减去的小时为单位返回此{@code OffsetTime}的副本。
+     * <p>
+     *  这将从此时间减去指定的小时数,返回一个新时间。计算在午夜左右。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param hours  the hours to subtract, may be negative
      * @return an {@code OffsetTime} based on this time with the hours subtracted, not null
      */
@@ -1017,6 +1443,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本,其中指定的周期(以分钟为单位)减去。
+     * <p>
+     *  这将从此时间减去指定的分钟数,返回一个新的时间。计算在午夜左右。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param minutes  the minutes to subtract, may be negative
      * @return an {@code OffsetTime} based on this time with the minutes subtracted, not null
      */
@@ -1032,6 +1466,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本,其中指定的周期(以秒为单位)减去。
+     * <p>
+     *  这将从此时间减去指定的秒数,返回一个新的时间。计算在午夜左右。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param seconds  the seconds to subtract, may be negative
      * @return an {@code OffsetTime} based on this time with the seconds subtracted, not null
      */
@@ -1047,6 +1489,14 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code OffsetTime}的副本,其中指定的周期减去纳秒。
+     * <p>
+     *  这从该时间减去指定的纳秒数,返回一个新的时间。计算在午夜左右。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param nanos  the nanos to subtract, may be negative
      * @return an {@code OffsetTime} based on this time with the nanoseconds subtracted, not null
      */
@@ -1067,6 +1517,14 @@ public final class OffsetTime
      * {@link TemporalQuery#queryFrom(TemporalAccessor)} method on the
      * specified query passing {@code this} as the argument.
      *
+     * <p>
+     *  此时使用指定的查询查询。
+     * <p>
+     * 此时使用指定的查询策略对象进行查询。 {@code TemporalQuery}对象定义用于获取结果的逻辑。阅读查询的文档以了解此方法的结果。
+     * <p>
+     *  此方法的结果是通过对指定的查询调用{@link TemporalQuery#queryFrom(TemporalAccessor)}方法传递{@code this}作为参数来获得的。
+     * 
+     * 
      * @param <R> the type of the result
      * @param query  the query to invoke, not null
      * @return the query result, null may be returned (defined by the query)
@@ -1111,6 +1569,23 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  将指定的时间对象调整为具有与此对象相同的偏移和时间。
+     * <p>
+     *  这返回与具有偏移的输入相同的可观察类型的时间对象,并且时间被改变为与此相同。
+     * <p>
+     *  该调整等同于使用{@link Temporal#with(TemporalField,long)}两次,将{@link ChronoField#NANO_OF_DAY}和{@link ChronoField#OFFSET_SECONDS}
+     * 作为字段。
+     * <p>
+     *  在大多数情况下,通过使用{@link Temporal#with(TemporalAdjuster)}来反转呼叫模式是更清楚的：
+     * <pre>
+     *  //这两行是等效的,但第二种方法是推荐temporal = thisOffsetTime.adjustInto(temporal); temporal = temporal.with(thisOffs
+     * etTime);。
+     * </pre>
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param temporal  the target object to be adjusted, not null
      * @return the adjusted object, not null
      * @throws DateTimeException if unable to make the adjustment
@@ -1165,6 +1640,34 @@ public final class OffsetTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以指定单位计算直到另一时间的时间量。
+     * <p>
+     * 这将根据单个{@code TemporalUnit}计算两个{@code OffsetTime}对象之间的时间量。起点和终点是{@code this}和指定的时间。如果结束在开始之前,结果将为负。
+     * 例如,可以使用{@code startTime.until(endTime,HOURS)}计算两个时间之间的小时数。
+     * <p>
+     *  传递给此方法的{@code Temporal}将使用{@link #from(TemporalAccessor)}转换为{@code OffsetTime}。
+     * 如果偏移在两个时间之间不同,则指定的结束时间被归一化为具有与该时间相同的偏移。
+     * <p>
+     *  计算返回一个整数,表示两个时间之间的完整单位数。例如,11：30Z和13：29Z之间的小时数将仅为一小时,因为它比两小时短一分钟。
+     * <p>
+     *  有两种等效的方法使用这种方法。第一个是调用这个方法。第二个是使用{@link TemporalUnit#between(Temporal,Temporal)}：
+     * <pre>
+     *  //这两行是等价的amount = start.until(end,MINUTES); amount = MINUTES.between(start,end);
+     * </pre>
+     *  应该基于哪个使得代码更可读的选择。
+     * <p>
+     *  该计算在{@link ChronoUnit}的此方法中实现。
+     * 支持{@code NANOS},{@code MICROS},{@code MILLIS},{@code SECONDS},{@code MINUTES},{@code HOURS}和{@code HALF_DAYS}
+     * 的单位。
+     *  该计算在{@link ChronoUnit}的此方法中实现。其他{@code ChronoUnit}值会抛出异常。
+     * <p>
+     * 如果单元不是{@code ChronoUnit},那么通过调用{@code TemporalUnit.between(Temporal,Temporal)}传递{@code this}作为第一个参数和转
+     * 换的输入时间为第二个参数。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param endExclusive  the end date, exclusive, which is converted to an {@code OffsetTime}, not null
      * @param unit  the unit to measure the amount in, not null
      * @return the amount of time between this time and the end time
@@ -1197,6 +1700,12 @@ public final class OffsetTime
      * <p>
      * This time will be passed to the formatter to produce a string.
      *
+     * <p>
+     *  此时使用指定的格式化程序格式化。
+     * <p>
+     *  这个时间将被传递给格式化程序以产生一个字符串。
+     * 
+     * 
      * @param formatter  the formatter to use, not null
      * @return the formatted time string, not null
      * @throws DateTimeException if an error occurs during printing
@@ -1213,6 +1722,12 @@ public final class OffsetTime
      * This returns an {@code OffsetDateTime} formed from this time and the specified date.
      * All possible combinations of date and time are valid.
      *
+     * <p>
+     *  将此时间与日期结合以创建{@code OffsetDateTime}。
+     * <p>
+     *  这将返回从此时间和指定日期形成的{@code OffsetDateTime}。所有可能的日期和时间组合都有效。
+     * 
+     * 
      * @param date  the date to combine with, not null
      * @return the offset date-time formed from this time and the specified date, not null
      */
@@ -1224,6 +1739,10 @@ public final class OffsetTime
     /**
      * Converts this time to epoch nanos based on 1970-01-01Z.
      *
+     * <p>
+     *  基于1970-01-01Z将此时间转换为epoch nanos。
+     * 
+     * 
      * @return the epoch nanos value
      */
     private long toEpochNano() {
@@ -1256,6 +1775,21 @@ public final class OffsetTime
      * To compare the underlying local time of two {@code TemporalAccessor} instances,
      * use {@link ChronoField#NANO_OF_DAY} as a comparator.
      *
+     * <p>
+     *  将此{@code OffsetTime}与另一个时间进行比较。
+     * <p>
+     *  比较首先基于UTC等效时间,然后基于本地时间。它是"与等号一致",由{@link Comparable}定义。
+     * <p>
+     *  例如,以下是比较器顺序：
+     * <ol>
+     *  <li> {@ code 10：30 + 01：00} </li> <li> {@ code 11：00 + 01：00} </li> <li> {@ code 12：00 + 02：00} </li>
+     *  <li> {@ code 11：30 + 01：00} </li> <li> {@ code 12：00 + 01：00} </li> 01:00} </li>。
+     * </ol>
+     *  值#2和#3表示时间线上的相同时刻。当两个值表示相同的时刻时,比较本地时间以区分它们。需要此步骤使排序与{@code equals()}一致。
+     * <p>
+     *  要比较两个{@code TemporalAccessor}实例的底层本地时间,请使用{@link ChronoField#NANO_OF_DAY}作为比较。
+     * 
+     * 
      * @param other  the other time to compare to, not null
      * @return the comparator value, negative if less, positive if greater
      * @throws NullPointerException if {@code other} is null
@@ -1281,6 +1815,12 @@ public final class OffsetTime
      * only compares the instant of the time. This is equivalent to converting both
      * times to an instant using the same date and comparing the instants.
      *
+     * <p>
+     * 检查此{@code OffsetTime}的时间是否超过将两次应用到共同日期的指定时间。
+     * <p>
+     *  此方法与{@link #compareTo}中的比较不同,它只比较时间的时间。这相当于使用相同的日期和比较时刻将两个时间转换为瞬时。
+     * 
+     * 
      * @param other  the other time to compare to, not null
      * @return true if this is after the instant of the specified time
      */
@@ -1296,6 +1836,12 @@ public final class OffsetTime
      * only compares the instant of the time. This is equivalent to converting both
      * times to an instant using the same date and comparing the instants.
      *
+     * <p>
+     *  检查此{@code OffsetTime}的时间是否早于将两次应用到共同日期的指定时间。
+     * <p>
+     *  此方法与{@link #compareTo}中的比较不同,它只比较时间的时间。这等效于使用相同的日期将两个时间转换为瞬时并比较时刻。
+     * 
+     * 
      * @param other  the other time to compare to, not null
      * @return true if this is before the instant of the specified time
      */
@@ -1311,6 +1857,12 @@ public final class OffsetTime
      * in that it only compares the instant of the time. This is equivalent to converting both
      * times to an instant using the same date and comparing the instants.
      *
+     * <p>
+     *  检查此{@code OffsetTime}的时间是否等于将两个时间应用于共同日期的指定时间的时间。
+     * <p>
+     *  此方法与{@link #compareTo}和{@link #equals}中的比较不同,它仅比较时间的时间。这相当于使用相同的日期和比较时刻将两个时间转换为瞬时。
+     * 
+     * 
      * @param other  the other time to compare to, not null
      * @return true if this is equal to the instant of the specified time
      */
@@ -1329,6 +1881,15 @@ public final class OffsetTime
      * To compare the underlying local time of two {@code TemporalAccessor} instances,
      * use {@link ChronoField#NANO_OF_DAY} as a comparator.
      *
+     * <p>
+     *  检查此时间是否等于另一时间。
+     * <p>
+     *  比较基于局部时间和偏移。要在时间线上的同一时刻进行比较,请使用{@link #isEqual(OffsetTime)}。
+     * <p>
+     *  仅比较{@code OffsetTime}类型的对象,其他类型返回false。
+     * 要比较两个{@code TemporalAccessor}实例的底层本地时间,请使用{@link ChronoField#NANO_OF_DAY}作为比较。
+     * 
+     * 
      * @param obj  the object to check, null returns false
      * @return true if this is equal to the other time
      */
@@ -1347,6 +1908,10 @@ public final class OffsetTime
     /**
      * A hash code for this time.
      *
+     * <p>
+     *  此时的哈希代码。
+     * 
+     * 
      * @return a suitable hash code
      */
     @Override
@@ -1369,6 +1934,16 @@ public final class OffsetTime
      * The format used will be the shortest that outputs the full value of
      * the time where the omitted parts are implied to be zero.
      *
+     * <p>
+     * 此时输出为{@code String},例如{@code 10：15：30 + 01：00}。
+     * <p>
+     *  输出将是以下ISO-8601格式之一：
+     * <ul>
+     *  <li> {@ code HH：mmXXXXX} </li> <li> {@ code HH：mm：ssXXXXX} </li> <li> {@ code HH：mm：ss.SSSXXXXX} > {@ code HH：mm：ss.SSSSSSXXXXX}
+     *  </li> <li> {@ code HH：mm：ss.SSSSSSSSSXXXXX} </li>。
+     * </ul>
+     *  所使用的格式将是输出完全值的时间的最短,其中省略的部分被暗示为零。
+     * 
      * @return a string representation of this time, not null
      */
     @Override
@@ -1380,6 +1955,9 @@ public final class OffsetTime
     /**
      * Writes the object using a
      * <a href="../../serialized-form.html#java.time.Ser">dedicated serialized form</a>.
+     * <p>
+     * 
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(9);  // identifies an OffsetTime
@@ -1396,6 +1974,10 @@ public final class OffsetTime
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  使用<a href="../../serialized-form.html#java.time.Ser">专用序列化表单</a>写入对象。
+     * 
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

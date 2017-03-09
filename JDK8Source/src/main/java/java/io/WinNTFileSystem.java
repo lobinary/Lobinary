@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import sun.security.action.GetPropertyAction;
 /**
  * Unicode-aware FileSystem for Windows NT/2000.
  *
+ * <p>
+ *  用于Windows NT / 2000的Unicode感知文件系统。
+ * 
+ * 
  * @author Konstantin Kladko
  * @since 1.4
  */
@@ -76,6 +81,10 @@ class WinNTFileSystem extends FileSystem {
 
     /* Check that the given pathname is normal.  If not, invoke the real
        normalizer on the part of the pathname that requires normalization.
+    /* <p>
+    /*  规范化器对需要规范化的路径名称部分。
+    /* 
+    /* 
        This way we iterate through the whole pathname string only once. */
     @Override
     public String normalize(String path) {
@@ -98,6 +107,8 @@ class WinNTFileSystem extends FileSystem {
     }
 
     /* Normalize the given pathname, whose length is len, starting at the given
+    /* <p>
+    /* 
        offset; everything before this offset is already normal. */
     private String normalize(String path, int len, int off) {
         if (len == 0) return path;
@@ -116,6 +127,8 @@ class WinNTFileSystem extends FileSystem {
         }
 
         /* Remove redundant slashes from the remainder of the path, forcing all
+        /* <p>
+        /* 
            slashes into the preferred slash */
         while (src < len) {
             char c = path.charAt(src++);
@@ -141,11 +154,17 @@ class WinNTFileSystem extends FileSystem {
                            is in order to be consistent with the win32 APIs,
                            which treat this case as an invalid UNC pathname
                            rather than as an alias for the root directory of
+                        /* <p>
+                        /*  UNC路径名的开头。即使它本身不是一个有效的UNC路径名,我们保留它为了与win32 API一致,这将这种情况作为无效的UNC路径名,而不是作为根目录的别名
+                        /* 
+                        /* 
                            the current drive. */
                         sb.append(slash);
                         break;
                     }
                     /* Path does not denote a root directory, so do not append
+                    /* <p>
+                    /* 
                        trailing slash */
                     break;
                 } else {
@@ -171,6 +190,11 @@ class WinNTFileSystem extends FileSystem {
            2  absolute UNC (if first char is '\\'),
                 else directory-relative (has form "z:foo")
            3  absolute local pathname (begins with "z:\\")
+    /* <p>
+    /*  对于UNC前缀,并且不以斜杠结尾。它可能是空字符串。规范化的Win32路径名具有方便的属性,前缀的长度几乎唯一地标识路径的类型,以及它是绝对的还是相对的：
+    /* 
+    /*  0相对于驱动器和目录1相对驱动器(以'\\'开头)2绝对UNC(如果第一个字符是'\\'),else目录相对(具有形式"z：foo")3绝对本地路径名(以"z：\\"开头)
+    /* 
      */
     private int normalizePrefix(String path, int len, StringBuffer sb) {
         int src = 0;
@@ -182,6 +206,10 @@ class WinNTFileSystem extends FileSystem {
             /* Remove leading slashes if followed by drive specifier.
                This hack is necessary to support file URLs containing drive
                specifiers (e.g., "file://c:/path").  As a side effect,
+            /* <p>
+            /*  此hack必须支持包含驱动器说明符的文件URL(例如,"file：// c：/ path")。作为副作用,
+            /* 
+            /* 
                "/c:/path" can be used as an alternative to "c:/path". */
             sb.append(c);
             sb.append(':');
@@ -195,6 +223,10 @@ class WinNTFileSystem extends FileSystem {
                    second slash so that further slashes will be collapsed
                    into the second slash.  The result will be a pathname
                    beginning with "\\\\" followed (most likely) by a host
+                /* <p>
+                /*  第二斜线,使得进一步的斜线将折叠成第二斜线。结果将是以"\\\\"开头的路径名,后跟(最可能)由主机
+                /* 
+                /* 
                    name. */
                 src = 1;
                 sb.append(slash);
@@ -324,6 +356,10 @@ class WinNTFileSystem extends FileSystem {
             if (dir != null) {
                 /* When resolving a directory-relative path that refers to a
                    drive other than the current drive, insist that the caller
+                /* <p>
+                /*  驱动器除当前驱动器外,坚持呼叫者
+                /* 
+                /* 
                    have read permission on the result */
                 String p = drive + (':' + dir + slashify(path.substring(2)));
                 SecurityManager security = System.getSecurityManager();
@@ -342,6 +378,8 @@ class WinNTFileSystem extends FileSystem {
 
     private String getUserPath() {
         /* For both compatibility and security,
+        /* <p>
+        /* 
            we must look this up every time */
         return normalize(System.getProperty("user.dir"));
     }
@@ -417,6 +455,8 @@ class WinNTFileSystem extends FileSystem {
                              * but we need to get the canonical name of the file
                              * in this directory to get the appropriate
                              * capitalization
+                             * <p>
+                             *  仅在前缀缓存中命中;完整路径是规范的,但是我们需要获取此目录中文件的规范名称,以获得适当的大小写
                              */
                             String filename = path.substring(1 + dir.length());
                             res = canonicalizeWithPrefix(resDir, filename);

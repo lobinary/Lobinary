@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,27 @@ import org.xml.sax.XMLFilter;
  * method shall be used only for being parsed by the XMLReader object
  * returned by the getXMLReader.
  *
+ * <p>
+ *  JAXP {@link javax.xml.transform.Source}实现,调度JAXB生成的对象。
+ * 
+ * <p>
+ *  此实用程序类有助于将JAXB与其他Java / XML技术相结合。
+ * 
+ * <p>
+ *  以下示例显示如何使用JAXB编组文档以供XSLT转换。
+ * 
+ * <blockquote>
+ * <pre>
+ *  MyObject o = //获取JAXB内容树
+ * 
+ *  // jaxbContext是一个JAXBContext对象,从中创建了"o"。 JAXBSource source = new JAXBSource(jaxbContext,o);
+ * 
+ *  //设置XSLT转换TransformerFactory tf = TransformerFactory.newInstance(); Transformer t = tf.newTransforme
+ * r(new StreamSource("test.xsl"));。
+ * 
+ *  // run transformation t.transform(source,new StreamResult(System.out));
+ * </pre>
+ * 
  * @author
  *      Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  */
@@ -93,6 +115,18 @@ public class JAXBSource extends SAXSource {
     /**
      * Creates a new {@link javax.xml.transform.Source} for the given content object.
      *
+     * <p>
+     * </blockquote>
+     * 
+     * <p>
+     *  JAXBSource派生自SAXSource的事实是一个实现细节。因此,在一般应用程序中,强烈阻止访问在SAXSource上定义的方法。
+     * 特别是,永远不会调用setXMLReader和setInputSource方法。
+     * 通过getXMLReader方法获取的XMLReader对象只能用于解析getInputSource方法返回的InputSource对象。
+     * 
+     * <p>
+     *  类似地,getInputSource方法获得的InputSource对象只能由getXMLReader返回的XMLReader对象进行解析。
+     * 
+     * 
      * @param   context
      *      JAXBContext that was used to create
      *      <code>contentObject</code>. This context is used
@@ -120,6 +154,8 @@ public class JAXBSource extends SAXSource {
     /**
      * Creates a new {@link javax.xml.transform.Source} for the given content object.
      *
+     * <p>
+     * 
      * @param   marshaller
      *      A marshaller instance that will be used to marshal
      *      <code>contentObject</code> into XML. This must be
@@ -263,6 +299,9 @@ public class JAXBSource extends SAXSource {
     /**
      * Hook to throw exception from the middle of a contructor chained call
      * to this
+     * <p>
+     *  为给定的内容对象创建一个新的{@link javax.xml.transform.Source}。
+     * 
      */
     private static Marshaller assertionFailed( String message )
         throws JAXBException {

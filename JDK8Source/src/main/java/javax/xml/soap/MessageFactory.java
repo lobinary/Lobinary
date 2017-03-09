@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -63,6 +64,29 @@ import java.io.InputStream;
  *        This method can be used internally by a service implementation to
  *        create a message that is a response to a request.
  * </UL>
+ * <p>
+ *  创建<code> SOAPMessage </code>对象的工厂。
+ * <P>
+ *  SAAJ客户端可以使用方法<code> newInstance </code>创建<code> MessageFactory </code>对象,如以下代码行所示。
+ * <PRE>
+ *  MessageFactory mf = MessageFactory.newInstance(); MessageFactory mf12 = MessageFactory.newInstance(S
+ * OAPConstants.SOAP_1_2_PROTOCOL);。
+ * </PRE>
+ * <P>
+ *  默认情况下,所有<code> MessageFactory </code>对象都将产生<code> SOAPMessage </code>对象,它们具有以下元素：
+ * <UL>
+ *  <LI> A <code> SOAPPart </code>对象<LI> A <code> SOAPEnvelope </code>对象</li> A <code> SOAPBody </code> 
+ * >对象。
+ * </UL>
+ *  在一些情况下,可以获得专门的MessageFactory对象,其产生预填充有<code> SOAPHeader </code>对象和<code> SOAPBody </code>对象中的附加条目的消息
+ * 。
+ * 新的<code> SOAPMessage </code>对象的内容取决于用于创建它的两个<code> MessageFactory </code>方法中的哪一个。
+ * <UL>
+ * <LI> <code> createMessage()</code> <BR>这是客户端通常用来创建请求消息的方法。
+ *  <li> <code> createMessage(MimeHeaders,java.io.InputStream)</code>  -  message具有来自<code> InputStream 
+ * </code>对象的内容和来自<code> MimeHeaders </code> BR>此方法可由服务实现在内部使用以创建作为对请求的响应的消息。
+ * <LI> <code> createMessage()</code> <BR>这是客户端通常用来创建请求消息的方法。
+ * </UL>
  */
 public abstract class MessageFactory {
 
@@ -88,6 +112,19 @@ public abstract class MessageFactory {
      * </UL>
 
      *
+     * <p>
+     *  创建一个新的<code> MessageFactory </code>对象,它是默认实现(SOAP 1.1)的一个实例,
+     * 
+     *  此方法使用以下有序查找过程来确定要加载的MessageFactory实现类：
+     * <UL>
+     *  <LI>使用javax.xml.soap.MessageFactory系统属性。 <LI>使用JRE目录中的属性文件"lib / jaxm.properties"。
+     * 此配置文件采用标准java.util.Properties格式,并包含实现类的完全限定名称,其中键是上面定义的系统属性。
+     *  <LI>使用Services API(如JAR规范中所述)(如果可用)来确定类名。
+     *  Services API将在运行时可用的jars中的文件META-INF / services / javax.xml.soap.MessageFactory中查找类名。
+     *  <LI>使用SAAJMetaFactory实例来定位MessageFactory实现类。
+     * </UL>
+     * 
+     * 
      * @return a new instance of a <code>MessageFactory</code>
      *
      * @exception SOAPException if there was an error in creating the
@@ -128,6 +165,13 @@ public abstract class MessageFactory {
      * This method uses the SAAJMetaFactory to locate the implementation class
      * and create the MessageFactory instance.
      *
+     * <p>
+     * 创建一个新的<code> MessageFactory </code>对象,它是指定实现的实例。可以是动态消息工厂,SOAP 1.1消息工厂或SOAP 1.2消息工厂。
+     * 动态消息工厂基于指定为<code> createMessage </code>方法的参数的MIME头创建消息。
+     * 
+     *  此方法使用SAAJMetaFactory来定位实现类并创建MessageFactory实例。
+     * 
+     * 
      * @return a new instance of a <code>MessageFactory</code>
      *
      * @param protocol  a string constant representing the class of the
@@ -160,6 +204,14 @@ public abstract class MessageFactory {
      * add them to itself. Any content that is not in XML format must be
      * in an <code>AttachmentPart</code> object.
      *
+     * <p>
+     *  使用默认<code> SOAPPart </code>,<code> SOAPEnvelope </code>,<code> SOAPBody </code>和<code> SOAPHeader </code创建新的<code>
+     *  SOAPMessage </code> >对象。
+     * 配置文件特定的消息工厂可以选择使用配置文件特定的头来预填充<code> SOAPMessage </code>对象。
+     * <P>
+     *  可以将内容添加到此消息的<code> SOAPPart </code>对象中,并且当仅包含SOAP部分的消息足够时,可以"按原样"发送消息。
+     * 否则,<code> SOAPMessage </code>对象需要创建一个或多个<code> AttachmentPart </code>对象,并将它们添加到自身。
+     * 
      * @return a new <code>SOAPMessage</code> object
      * @exception SOAPException if a SOAP error occurs
      * @exception UnsupportedOperationException if the protocol of this
@@ -173,6 +225,10 @@ public abstract class MessageFactory {
      * new <code>SOAPMessage</code> object and returns the <code>SOAPMessage</code>
      * object.
      *
+     * <p>
+     * 任何不是XML格式的内容必须位于<code> AttachmentPart </code>对象中。
+     * 
+     * 
      * @param in the <code>InputStream</code> object that contains the data
      *           for a message
      * @param headers the transport-specific headers passed to the

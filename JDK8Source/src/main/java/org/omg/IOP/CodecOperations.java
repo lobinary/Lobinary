@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -19,6 +20,13 @@ package org.omg.IOP;
    * A <code>Codec</code> is obtained from the <code>CodecFactory</code>. 
    * The <code>CodecFactory</code> is obtained through a call to 
    * <code>ORB.resolve_initial_references( "CodecFactory" )</code>.
+   * <p>
+   *  ORB服务使用的IOR组件和服务上下文数据的格式通常被定义为编码IDL定义的数据类型的实例的CDR封装。
+   *  <code> Codec </code>提供了一种在它们的IDL数据类型和它们的CDR封装表示之间传输这些组件的机制。
+   * <p>
+   *  从<code> CodecFactory </code>获得<code> Codec </code>。
+   * 通过调用<code> ORB.resolve_initial_references("CodecFactory")</code>获得<code> CodecFactory </code>。
+   * 
    */
 public interface CodecOperations 
 {
@@ -27,6 +35,10 @@ public interface CodecOperations
      * Converts the given any into a byte array based on the encoding 
      * format effective for this <code>Codec</code>. 
      *
+     * <p>
+     *  基于对此<code> Codec </code>有效的编码格式将给定的any转换为字节数组。
+     * 
+     * 
      * @param data The data, in the form of an any, to be encoded into 
      *     a byte array.
      * @return A byte array containing the encoded Any. This byte array 
@@ -39,6 +51,10 @@ public interface CodecOperations
   /**
      * Decodes the given byte array into an Any based on the encoding 
      * format effective for this <code>Codec</code>. 
+     * 
+     * <p>
+     *  基于对此<code> Codec </code>有效的编码格式,将给定的字节数组解码为Any。
+     * 
      * 
      * @param data The data, in the form of a byte array, to be decoded into 
      *     an Any. 
@@ -53,6 +69,10 @@ public interface CodecOperations
      * format effective for this Codec. Only the data from the Any is 
      * encoded, not the <code>TypeCode</code>. 
      *
+     * <p>
+     *  基于对此编解码器有效的编码格式将给定的any转换为字节数组。只有来自Any的数据被编码,而不是<code> TypeCode </code>。
+     * 
+     * 
      * @param data The data, in the form of an Any, to be encoded into 
      *     a byte array. 
      * @return A byte array containing the data from the encoded any.
@@ -66,6 +86,9 @@ public interface CodecOperations
      * <code>TypeCode</code> and the encoding format effective for 
      * this <code>Codec</code>. 
      *
+     * <p>
+     *  基于给定的<code> TypeCode </code>和对此<code> Codec </code>有效的编码格式,将给定的字节数组解码为Any。
+     * 
      * @param data The data, in the form of a byte array, to be decoded 
      *     into an Any. 
      * @param tc The TypeCode to be used to decode the data. 

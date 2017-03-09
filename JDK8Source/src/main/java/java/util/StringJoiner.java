@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,28 @@ package java.util;
  *     .collect(Collectors.joining(", "));
  * }</pre>
  *
+ * <p>
+ *  {@code StringJoiner}用于构造由定界符分隔的字符序列,并且可选地从提供的前缀开始并以提供的后缀结尾。
+ * <p>
+ *  在向{@code StringJoiner}添加内容之前,其{@code sj.toString()}方法将默认返回{@code prefix + suffix}。
+ * 但是,如果调用{@code setEmptyValue}方法,将返回提供的{@code emptyValue}。
+ * 例如,当使用set notation创建一个字符串以指示一个空集合,即<code>"{}"</code>时,可以使用这种方法,其中{@code prefix}是<code>"{"< code>,{@code suffix}
+ * 是<code>"}"</code>,并且没有向{@code StringJoiner}中添加任何内容。
+ * 但是,如果调用{@code setEmptyValue}方法,将返回提供的{@code emptyValue}。
+ * 
+ *  @apiNote <p>字符串{@code"[George：Sally：Fred]"}可以构造如下：
+ * 
+ *  <pre> {@code StringJoiner sj = new StringJoiner("：","[","]"); sj.add("George")。add("Sally")。
+ * add("Fred"); String desiredString = sj.toString(); } </pre>。
+ * <p>
+ *  可以使用{@code StringJoiner}来使用{@link java.util.stream.Collectors#joining(CharSequence)}从{@link java.util.stream.Stream}
+ * 创建格式化的输出。
+ * 例如：。
+ * 
+ *  <pre> {@code List <Integer> numbers = Arrays.asList(1,2,3,4); String commaSeparatedNumbers = numbers.stream().map(i  - > i.toString()).collect(Collectors.joining(",")); }
+ *  </pre>。
+ * 
+ * 
  * @see java.util.stream.Collectors#joining(CharSequence)
  * @see java.util.stream.Collectors#joining(CharSequence, CharSequence, CharSequence)
  * @since  1.8
@@ -72,6 +95,9 @@ public final class StringJoiner {
      * prefix, the added element separated by the delimiter, but without the
      * suffix, so that we can more easily add elements without having to jigger
      * the suffix each time.
+     * <p>
+     * StringBuilder值 - 在任何时候,从前缀构造的字符,添加的元素由分隔符分隔,但没有后缀,以便我们可以更容易地添加元素,而不必每次都跳过后缀。
+     * 
      */
     private StringBuilder value;
 
@@ -80,6 +106,9 @@ public final class StringJoiner {
      * toString(), or properties of value, when no elements have yet been added,
      * i.e. when it is empty.  This may be overridden by the user to be some
      * other value including the empty String.
+     * <p>
+     *  默认情况下,当没有元素被添加时,即当它为空时,由前缀+后缀,由toString()返回的字符串或值的属性。这可能被用户覆盖为包括空字符串的某个其他值。
+     * 
      */
     private String emptyValue;
 
@@ -92,6 +121,13 @@ public final class StringJoiner {
      * {@code prefix} or {@code suffix} (or properties thereof) in the result,
      * unless {@code setEmptyValue} has first been called.
      *
+     * <p>
+     *  构造一个不带任何字符的{@code StringJoiner},不带任何{@code prefix}或{@code suffix},以及提供的{@code delimiter}副本。
+     * 如果没有向{@code StringJoiner}中添加字符,并且访问它的值的方法被调用,它将不会在结果中返回{@code prefix}或{@code suffix}(或其属性),除非{@代码setEmptyValue}
+     * 已被第一次调用。
+     *  构造一个不带任何字符的{@code StringJoiner},不带任何{@code prefix}或{@code suffix},以及提供的{@code delimiter}副本。
+     * 
+     * 
      * @param  delimiter the sequence of characters to be used between each
      *         element added to the {@code StringJoiner} value
      * @throws NullPointerException if {@code delimiter} is {@code null}
@@ -108,6 +144,13 @@ public final class StringJoiner {
      * {@code prefix + suffix} (or properties thereof) in the result, unless
      * {@code setEmptyValue} has first been called.
      *
+     * <p>
+     *  使用提供的{@code prefix},{@code delimiter}和{@code suffix}的副本构造一个不带任何字符的{@code StringJoiner}。
+     * 如果没有向{@code StringJoiner}添加字符,并且访问它的字符串值的方法被调用,它将返回结果中的{@code prefix + suffix}(或其属性),除非{@code setEmptyValue}
+     * 第一次被叫。
+     *  使用提供的{@code prefix},{@code delimiter}和{@code suffix}的副本构造一个不带任何字符的{@code StringJoiner}。
+     * 
+     * 
      * @param  delimiter the sequence of characters to be used between each
      *         element added to the {@code StringJoiner}
      * @param  prefix the sequence of characters to be used at the beginning
@@ -136,6 +179,11 @@ public final class StringJoiner {
      * called, the {@code StringJoiner} is no longer considered empty, even if
      * the element(s) added correspond to the empty {@code String}.
      *
+     * <p>
+     * 设置确定此{@code StringJoiner}的字符串表示形式时使用的字符序列,并且尚未添加任何元素,即其为空时。为此目的创建{@code emptyValue}参数的副本。
+     * 注意,一旦调用了add方法,{@code StringJoiner}不再被认为是空的,即使添加的元素对应于空的{@code String}。
+     * 
+     * 
      * @param  emptyValue the characters to return as the value of an empty
      *         {@code StringJoiner}
      * @return this {@code StringJoiner} itself so the calls may be chained
@@ -154,6 +202,11 @@ public final class StringJoiner {
      * unless no elements have been added in which case, the
      * {@code prefix + suffix} or the {@code emptyValue} characters are returned
      *
+     * <p>
+     *  返回由{@code prefix},到目前为止由{@code delimiter}和{@code suffix}分隔的值组成的当前值,除非在这种情况下没有添加元素,{@code前缀+后缀}或{@code emptyValue}
+     * 字符。
+     * 
+     * 
      * @return the string representation of this {@code StringJoiner}
      */
     @Override
@@ -178,6 +231,11 @@ public final class StringJoiner {
      * element of the {@code StringJoiner} value. If {@code newElement} is
      * {@code null}, then {@code "null"} is added.
      *
+     * <p>
+     *  将给定的{@code CharSequence}值的副本添加为{@code StringJoiner}值的下一个元素。
+     * 如果{@code newElement}是{@code null},则会添加{@code"null"}。
+     * 
+     * 
      * @param  newElement The element to add
      * @return a reference to this {@code StringJoiner}
      */
@@ -200,6 +258,15 @@ public final class StringJoiner {
      * that delimiter and the result is appended to this {@code StringJoiner}
      * as a single element.
      *
+     * <p>
+     *  将不带前缀和后缀的给定{@code StringJoiner}的内容作为下一个元素(如果它是非空的)添加。如果给定的{@code StringJoiner}为空,则调用不起作用。
+     * 
+     *  <p>如果{@link #add(CharSequence)add()}从未被调用,并且{@code merge()}从未被非空{@code}调用,则{@code StringJoiner} Stri
+     * ngJoiner}参数。
+     * 
+     *  <p>如果其他{@code StringJoiner}使用不同的分隔符,则来自其他{@code StringJoiner}的元素将与该分隔符连接,并将结果作为单个元素附加到此{@code StringJoiner}
+     * 。
+     * 
      * @param other The {@code StringJoiner} whose contents should be merged
      *              into this one
      * @throws NullPointerException if the other {@code StringJoiner} is null
@@ -235,6 +302,9 @@ public final class StringJoiner {
      * will be returned. The value should be equivalent to
      * {@code toString().length()}.
      *
+     * <p>
+     * 
+     * 
      * @return the length of the current value of {@code StringJoiner}
      */
     public int length() {

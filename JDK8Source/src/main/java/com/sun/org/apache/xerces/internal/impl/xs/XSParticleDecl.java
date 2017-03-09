@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -32,6 +42,12 @@ import com.sun.org.apache.xerces.internal.xs.XSTerm;
  *
  * @xerces.internal
  *
+ * <p>
+ *  存储模式粒子声明。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  *
  * @version $Id: XSParticleDecl.java,v 1.7 2010-11-01 04:39:55 joehw Exp $
@@ -78,6 +94,9 @@ public class XSParticleDecl implements XSParticle {
     /**
      * 3.9.6 Schema Component Constraint: Particle Emptiable
      * whether this particle is emptible
+     * <p>
+     *  3.9.6模式组件约束：粒子显示此粒子是否可空
+     * 
      */
     public boolean emptiable() {
         return minEffectiveTotalRange() == 0;
@@ -99,6 +118,9 @@ public class XSParticleDecl implements XSParticle {
      * The following methods are used to return min/max range for a particle.
      * They are not exactly the same as it's described in the spec, but all the
      * values from the spec are retrievable by these methods.
+     * <p>
+     *  3.8.6有效总范围(全部和序列)和有效总范围(选择)以下方法用于返回粒子的最小/最大范围。它们与规范中描述的不完全相同,但规范中的所有值都可以通过这些方法检索。
+     * 
      */
     public int minEffectiveTotalRange() {
         if (fType == XSParticleDecl.PARTICLE_EMPTY) {
@@ -127,6 +149,9 @@ public class XSParticleDecl implements XSParticle {
 
     /**
      * get the string description of this particle
+     * <p>
+     *  获取此粒子的字符串描述
+     * 
      */
     private String fDescription = null;
     public String toString() {
@@ -150,6 +175,9 @@ public class XSParticleDecl implements XSParticle {
     /**
      * append the string description of this particle to the string buffer
      * this is for error message.
+     * <p>
+     *  将此粒子的字符串描述附加到字符串缓冲区,这是为错误消息。
+     * 
      */
     void appendParticle(StringBuffer buffer) {
         switch (fType) {
@@ -181,6 +209,9 @@ public class XSParticleDecl implements XSParticle {
 
     /**
      * Get the type of the object, i.e ELEMENT_DECLARATION.
+     * <p>
+     *  获取对象的类型,即ELEMENT_DECLARATION。
+     * 
      */
     public short getType() {
         return XSConstants.PARTICLE;
@@ -189,6 +220,9 @@ public class XSParticleDecl implements XSParticle {
     /**
      * The <code>name</code> of this <code>XSObject</code> depending on the
      * <code>XSObject</code> type.
+     * <p>
+     *  取决于<code> XSObject </code>类型的<code> XSObject </code>的<code> name </code>
+     * 
      */
     public String getName() {
         return null;
@@ -198,6 +232,9 @@ public class XSParticleDecl implements XSParticle {
      * The namespace URI of this node, or <code>null</code> if it is
      * unspecified.  defines how a namespace URI is attached to schema
      * components.
+     * <p>
+     * 此节点的名称空间URI,或<code> null </code>(如果未指定)。定义命名空间URI如何附加到模式组件。
+     * 
      */
     public String getNamespace() {
         return null;
@@ -205,6 +242,9 @@ public class XSParticleDecl implements XSParticle {
 
     /**
      * {min occurs} determines the minimum number of terms that can occur.
+     * <p>
+     *  {min occur}确定可能发生的最小数量的术语。
+     * 
      */
     public int getMinOccurs() {
         return fMinOccurs;
@@ -212,6 +252,9 @@ public class XSParticleDecl implements XSParticle {
 
     /**
      * {max occurs} whether the maxOccurs value is unbounded.
+     * <p>
+     *  {max occur} maxOccurs值是否无界。
+     * 
      */
     public boolean getMaxOccursUnbounded() {
         return fMaxOccurs == SchemaSymbols.OCCURRENCE_UNBOUNDED;
@@ -219,6 +262,9 @@ public class XSParticleDecl implements XSParticle {
 
     /**
      * {max occurs} determines the maximum number of terms that can occur.
+     * <p>
+     *  {max occur}决定可能发生的字词数量上限。
+     * 
      */
     public int getMaxOccurs() {
         return fMaxOccurs;
@@ -226,12 +272,17 @@ public class XSParticleDecl implements XSParticle {
 
     /**
      * {term} One of a model group, a wildcard, or an element declaration.
+     * <p>
+     *  {term}模型组,通配符或元素声明之一。
+     * 
      */
     public XSTerm getTerm() {
         return fValue;
     }
 
         /**
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.XSObject#getNamespaceItem()
          */
         public XSNamespaceItem getNamespaceItem() {
@@ -240,6 +291,8 @@ public class XSParticleDecl implements XSParticle {
 
     /**
      * Optional. Annotations.
+     * <p>
+     *  可选的。注释。
      */
     public XSObjectList getAnnotations() {
         return (fAnnotations != null) ? fAnnotations : XSObjectListImpl.EMPTY_LIST;

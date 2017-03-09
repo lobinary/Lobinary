@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,12 @@ import java.awt.RenderingHints;
  * to the destination object).  Note that the restriction to single-input
  * operations means that the values of destination pixels prior to the
  * operation are not used as input to the filter operation.
+ * <p>
+ *  此接口描述在Raster对象上执行的单输入/单输出操作。它由AffineTransformOp,ConvolveOp和LookupOp等类实现。源和目标对象必须包含实现此接口的特定类的适当数量的带。
+ * 否则,抛出异常。此接口不能用于描述更复杂的Ops,例如需要多个源的Ops。实现此接口的每个类将指定是否允许一个就地过滤操作(即源对象等于目标对象)。
+ * 注意,对单输入操作的限制意味着操作之前的目的地像素的值不被用作滤波器操作的输入。
+ * 
+ * 
  * @see AffineTransformOp
  * @see BandCombineOp
  * @see ColorConvertOp
@@ -56,6 +63,11 @@ public interface RasterOp {
      * new Raster will be created.  The IllegalArgumentException may be thrown
      * if the source and/or destination Raster is incompatible with the types
      * of Rasters allowed by the class implementing this filter.
+     * <p>
+     *  执行从源光栅到目标光栅的单输入/单输出操作。如果目标栅格为空,将创建一个新的栅格。
+     * 如果源和/或目标光栅与实现此过滤器的类所允许的栅格类型不兼容,则可能会抛出IllegalArgumentException。
+     * 
+     * 
      * @param src the source <code>Raster</code>
      * @param dest the destination <code>WritableRaster</code>
      * @return a <code>WritableRaster</code> that represents the result of
@@ -68,6 +80,10 @@ public interface RasterOp {
      * The IllegalArgumentException may be thrown if the source Raster
      * is incompatible with the types of Rasters allowed
      * by the class implementing this filter.
+     * <p>
+     *  返回过滤的目标栅格的边界框。如果源栅格与实现此过滤器的类所允许的栅格类型不兼容,则可能会抛出IllegalArgumentException。
+     * 
+     * 
      * @param src the source <code>Raster</code>
      * @return a <code>Rectangle2D</code> that is the bounding box of
      *         the <code>Raster</code> resulting from the filtering
@@ -81,6 +97,10 @@ public interface RasterOp {
      * The IllegalArgumentException may be thrown if the source Raster
      * is incompatible with the types of Rasters allowed
      * by the class implementing this filter.
+     * <p>
+     * 使用正确的大小和数量的波段创建一个归零目标光栅。如果源栅格与实现此过滤器的类所允许的栅格类型不兼容,则可能会抛出IllegalArgumentException。
+     * 
+     * 
      * @param src the source <code>Raster</code>
      * @return a <code>WritableRaster</code> that is compatible with
      *         <code>src</code>
@@ -91,6 +111,10 @@ public interface RasterOp {
      * Returns the location of the destination point given a
      * point in the source Raster.  If dstPt is non-null, it
      * will be used to hold the return value.
+     * <p>
+     *  返回给定源光栅中的点的目标点的位置。如果dstPt为非空,它将用于保存返回值。
+     * 
+     * 
      * @param srcPt the source <code>Point2D</code>
      * @param dstPt the destination <code>Point2D</code>
      * @return the location of the destination point.
@@ -100,6 +124,9 @@ public interface RasterOp {
     /**
      * Returns the rendering hints for this RasterOp.  Returns
      * null if no hints have been set.
+     * <p>
+     *  返回此RasterOp的渲染提示。如果没有设置提示,则返回null。
+     * 
      * @return the <code>RenderingHints</code> object of this
      *         <code>RasterOp</code>.
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -81,6 +82,35 @@ import javax.accessibility.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> JWindow </code>是一个容器,可以显示在用户桌面上的任何地方。
+ * 它没有与<code> JFrame </code>相关联的标题栏,窗口管理按钮或其他修剪,但它仍然是用户桌面的"一流公民",可以存在于任何地方。
+ * <p>
+ *  <code> JWindow </code>组件包含一个<code> JRootPane </code>作为其唯一的孩子。
+ *  <code> contentPane </code>应该是<code> JWindow </code>的任何子级的父级。
+ * 为方便起见,此类的{@code add},{@code remove}和{@code setLayout}方法被覆盖,因此它们将调用委派给{@code ContentPane}的相应方法。
+ * 例如,您可以将子组件添加到窗口,如下所示：。
+ * <pre>
+ *  window.add(child);
+ * </pre>
+ *  并且孩子将被添加到contentPane。 <code> contentPane </code>将始终为非<code> null </code>。
+ * 尝试将其设置为<code> null </code>会导致<code> JWindow </code>抛出异常。
+ * 默认的<code> contentPane </code>会有一个<code> BorderLayout </code>管理器。
+ * 有关添加,删除和设置<code> JWindow </code>的<code> LayoutManager </code>的详细信息,请参阅{@link javax.swing.RootPaneContainer}
+ * 。
+ * 默认的<code> contentPane </code>会有一个<code> BorderLayout </code>管理器。
+ * <p>
+ * 有关<code> contentPane </code>,<code> glassPane </code>和<code> layeredPane </code>组件的完整说明,请参阅{@link JRootPane}
+ * 文档。
+ * <p>
+ *  在多屏幕环境中,您可以在其他屏幕设备上创建<code> JWindow </code>。有关详细信息,请参阅{@link java.awt.Window}。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see JRootPane
  *
  * @beaninfo
@@ -101,6 +131,11 @@ public class JWindow extends Window implements Accessible,
      * and optional <code>menuBar</code> for this frame, as well as the
      * <code>glassPane</code>.
      *
+     * <p>
+     *  管理此框架的<code> contentPane </code>和可选<code> menuBar </code>以及<code> glassPane </code>的<code> JRootPane
+     *  </code>实例。
+     * 
+     * 
      * @see #getRootPane
      * @see #setRootPane
      */
@@ -111,6 +146,11 @@ public class JWindow extends Window implements Accessible,
      * will be forwarded to the <code>contentPane</code>. This is initially
      * false, but is set to true when the <code>JWindow</code> is constructed.
      *
+     * <p>
+     *  如果为true,那么对<code> add </code>和<code> setLayout </code>的调用将被转发到<code> contentPane </code>。
+     * 这最初是false,但在构建<code> JWindow </code>时设置为true。
+     * 
+     * 
      * @see #isRootPaneCheckingEnabled
      * @see #setRootPaneCheckingEnabled
      * @see javax.swing.RootPaneContainer
@@ -119,6 +159,9 @@ public class JWindow extends Window implements Accessible,
 
     /**
      * The <code>TransferHandler</code> for this window.
+     * <p>
+     *  此窗口的<code> TransferHandler </code>。
+     * 
      */
     private TransferHandler transferHandler;
 
@@ -129,6 +172,12 @@ public class JWindow extends Window implements Accessible,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  创建没有指定所有者的窗口。此窗口将不可对焦。
+     * <p>
+     * 此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @throws HeadlessException if
      *         <code>GraphicsEnvironment.isHeadless()</code> returns true.
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -146,6 +195,12 @@ public class JWindow extends Window implements Accessible,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  使用指定的屏幕设备的<code> GraphicsConfiguration </code>创建一个窗口。此窗口将不可对焦。
+     * <p>
+     *  此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @param gc the <code>GraphicsConfiguration</code> that is used
      *          to construct the new window with; if gc is <code>null</code>,
      *          the system default <code>GraphicsConfiguration</code>
@@ -176,6 +231,13 @@ public class JWindow extends Window implements Accessible,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  创建具有指定所有者框架的窗口。如果<code>所有者</code>为<code> null </code>,则将使用共享所有者,并且此窗口将无法聚焦。
+     * 此外,此窗口将不可焦点,除非其所有者显示在屏幕上。
+     * <p>
+     *  此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @param owner the frame from which the window is displayed
      * @throws HeadlessException if GraphicsEnvironment.isHeadless()
      *            returns true.
@@ -202,6 +264,12 @@ public class JWindow extends Window implements Accessible,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  创建具有指定所有者窗口的窗口。除非其所有者显示在屏幕上,否则此窗口将无法对焦。如果<code>所有者</code>为<code> null </code>,则将使用共享所有者,并且此窗口将无法聚焦。
+     * <p>
+     *  此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @param owner the window from which the window is displayed
      * @throws HeadlessException if
      *         <code>GraphicsEnvironment.isHeadless()</code> returns true.
@@ -229,6 +297,13 @@ public class JWindow extends Window implements Accessible,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  创建具有指定的所有者窗口和屏幕设备的<code> GraphicsConfiguration </code>的窗口。
+     * 如果<code>所有者</code>为<code> null </code>,则将使用共享所有者,并且此窗口将无法聚焦。
+     * <p>
+     *  此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @param owner the window from which the window is displayed
      * @param gc the <code>GraphicsConfiguration</code> that is used
      *          to construct the new window with; if gc is <code>null</code>,
@@ -260,6 +335,9 @@ public class JWindow extends Window implements Accessible,
 
     /**
      * Called by the constructors to init the <code>JWindow</code> properly.
+     * <p>
+     * 由构造函数调用以正确初始化<code> JWindow </code>。
+     * 
      */
     protected void windowInit() {
         setLocale( JComponent.getDefaultLocale() );
@@ -271,6 +349,9 @@ public class JWindow extends Window implements Accessible,
     /**
      * Called by the constructor methods to create the default
      * <code>rootPane</code>.
+     * <p>
+     *  通过构造方法调用来创建默认的<code> rootPane </code>。
+     * 
      */
     protected JRootPane createRootPane() {
         JRootPane rp = new JRootPane();
@@ -286,6 +367,10 @@ public class JWindow extends Window implements Accessible,
      * Returns whether calls to <code>add</code> and
      * <code>setLayout</code> are forwarded to the <code>contentPane</code>.
      *
+     * <p>
+     *  返回是否将对<code> add </code>和<code> setLayout </code>的调用转发到<code> contentPane </code>。
+     * 
+     * 
      * @return true if <code>add</code> and <code>setLayout</code>
      *         are forwarded; false otherwise
      *
@@ -319,6 +404,20 @@ public class JWindow extends Window implements Accessible,
      * How to Use Drag and Drop and Data Transfer</a>, a section in
      * <em>The Java Tutorial</em>, for more information.
      *
+     * <p>
+     *  设置{@code transferHandler}属性,这是一种支持将数据传输到此组件的机制。如果组件不支持数据传输操作,请使用{@code null}。
+     * <p>
+     *  如果系统属性{@code suppressSwingDropSupport}是{@code false}(默认值),并且此组件上的当前放置目标是{@code null}或不是用户设置放置目标,则此方法
+     * 将更改放置目标如下所示：如果{@code newHandler}是{@code null},它将清除放置目标。
+     * 如果不是{@code null},它会安装一个新的{@code DropTarget}。
+     * <p>
+     *  注意：与{@code JWindow}结合使用时,{@code TransferHandler}仅提供数据导入功能,因为数据导出相关方法目前类型为{@code JComponent}。
+     * <p>
+     *  请参见
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/dnd/index.html">
+     *  如何使用拖放和数据传输</a>,有关更多信息,请参阅<em> Java教程</em>中的一节。
+     * 
+     * 
      * @param newHandler the new {@code TransferHandler}
      *
      * @see TransferHandler
@@ -341,6 +440,10 @@ public class JWindow extends Window implements Accessible,
     /**
      * Gets the <code>transferHandler</code> property.
      *
+     * <p>
+     *  获取<code> transferHandler </code>属性。
+     * 
+     * 
      * @return the value of the <code>transferHandler</code> property
      *
      * @see TransferHandler
@@ -355,6 +458,10 @@ public class JWindow extends Window implements Accessible,
      * Calls <code>paint(g)</code>.  This method was overridden to
      * prevent an unnecessary call to clear the background.
      *
+     * <p>
+     *  调用<code> paint(g)</code>。此方法被覆盖,以防止不必要的调用清除背景。
+     * 
+     * 
      * @param g  the <code>Graphics</code> context in which to paint
      */
     public void update(Graphics g) {
@@ -365,6 +472,10 @@ public class JWindow extends Window implements Accessible,
      * Sets whether calls to <code>add</code> and
      * <code>setLayout</code> are forwarded to the <code>contentPane</code>.
      *
+     * <p>
+     *  设置是否将对<code> add </code>和<code> setLayout </code>的调用转发到<code> contentPane </code>。
+     * 
+     * 
      * @param enabled  true if <code>add</code> and <code>setLayout</code>
      *        are forwarded, false if they should operate directly on the
      *        <code>JWindow</code>.
@@ -390,6 +501,11 @@ public class JWindow extends Window implements Accessible,
      * of the frame, refer to {@link javax.swing.RootPaneContainer} for
      * details.
      *
+     * <p>
+     * 添加指定的子<code> Component </code>。将覆盖此方法以有条件地将调用转发到<code> contentPane </code>。
+     * 默认情况下,将子代添加到<code> contentPane </code>而不是框架中,有关详细信息,请参阅{@link javax.swing.RootPaneContainer}。
+     * 
+     * 
      * @param comp the component to be enhanced
      * @param constraints the constraints to be respected
      * @param index the index
@@ -418,6 +534,11 @@ public class JWindow extends Window implements Accessible,
      * <code>comp</code> is not a child of the <code>JWindow</code> or
      * <code>contentPane</code>.
      *
+     * <p>
+     *  从容器中删除指定的组件。如果<code> comp </code>不是<code> rootPane </code>,这将转发到<code> contentPane </code>的调用。
+     * 如果<code> comp </code>不是<code> JWindow </code>或<code> contentPane </code>的子级,则不会执行任何操作。
+     * 
+     * 
      * @param comp the component to be removed
      * @throws NullPointerException if <code>comp</code> is null
      * @see #add
@@ -439,6 +560,11 @@ public class JWindow extends Window implements Accessible,
      * Refer to {@link javax.swing.RootPaneContainer} for
      * more information.
      *
+     * <p>
+     *  设置<code> LayoutManager </code>。重写以有条件地将调用转发到<code> contentPane </code>。
+     * 有关详细信息,请参阅{@link javax.swing.RootPaneContainer}。
+     * 
+     * 
      * @param manager the <code>LayoutManager</code>
      * @see #setRootPaneCheckingEnabled
      * @see javax.swing.RootPaneContainer
@@ -455,6 +581,10 @@ public class JWindow extends Window implements Accessible,
 
     /**
      * Returns the <code>rootPane</code> object for this window.
+     * <p>
+     *  返回此窗口的<code> rootPane </code>对象。
+     * 
+     * 
      * @return the <code>rootPane</code> property for this window
      *
      * @see #setRootPane
@@ -469,6 +599,10 @@ public class JWindow extends Window implements Accessible,
      * Sets the new <code>rootPane</code> object for this window.
      * This method is called by the constructor.
      *
+     * <p>
+     *  为此窗口设置新的<code> rootPane </code>对象。此方法由构造函数调用。
+     * 
+     * 
      * @param root the new <code>rootPane</code> property
      * @see #getRootPane
      *
@@ -498,6 +632,10 @@ public class JWindow extends Window implements Accessible,
      * Returns the <code>Container</code> which is the <code>contentPane</code>
      * for this window.
      *
+     * <p>
+     *  返回<code> Container </code>这是此窗口的<code> contentPane </code>。
+     * 
+     * 
      * @return the <code>contentPane</code> property
      * @see #setContentPane
      * @see RootPaneContainer#getContentPane
@@ -510,6 +648,10 @@ public class JWindow extends Window implements Accessible,
      * Sets the <code>contentPane</code> property for this window.
      * This method is called by the constructor.
      *
+     * <p>
+     *  设置此窗口的<code> contentPane </code>属性。此方法由构造函数调用。
+     * 
+     * 
      * @param contentPane the new <code>contentPane</code>
      *
      * @exception IllegalComponentStateException (a runtime
@@ -529,6 +671,10 @@ public class JWindow extends Window implements Accessible,
     /**
      * Returns the <code>layeredPane</code> object for this window.
      *
+     * <p>
+     *  返回此窗口的<code> layeredPane </code>对象。
+     * 
+     * 
      * @return the <code>layeredPane</code> property
      * @see #setLayeredPane
      * @see RootPaneContainer#getLayeredPane
@@ -541,6 +687,10 @@ public class JWindow extends Window implements Accessible,
      * Sets the <code>layeredPane</code> property.
      * This method is called by the constructor.
      *
+     * <p>
+     *  设置<code> layeredPane </code>属性。此方法由构造函数调用。
+     * 
+     * 
      * @param layeredPane the new <code>layeredPane</code> object
      *
      * @exception IllegalComponentStateException (a runtime
@@ -559,6 +709,10 @@ public class JWindow extends Window implements Accessible,
     /**
      * Returns the <code>glassPane Component</code> for this window.
      *
+     * <p>
+     *  返回此窗口的<code> glassPane Component </code>。
+     * 
+     * 
      * @return the <code>glassPane</code> property
      * @see #setGlassPane
      * @see RootPaneContainer#getGlassPane
@@ -570,6 +724,10 @@ public class JWindow extends Window implements Accessible,
     /**
      * Sets the <code>glassPane</code> property.
      * This method is called by the constructor.
+     * <p>
+     *  设置<code> glassPane </code>属性。此方法由构造函数调用。
+     * 
+     * 
      * @param glassPane the <code>glassPane</code> object for this window
      *
      * @see #getGlassPane
@@ -586,6 +744,10 @@ public class JWindow extends Window implements Accessible,
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     public Graphics getGraphics() {
@@ -598,6 +760,10 @@ public class JWindow extends Window implements Accessible,
      * <code>time</code> milliseconds.  Refer to <code>RepaintManager</code>
      * for details on how the repaint is handled.
      *
+     * <p>
+     * 在<code> time </code>毫秒内重新绘制此组件的指定矩形。有关如何处理重绘的详细信息,请参阅<code> RepaintManager </code>。
+     * 
+     * 
      * @param     time   maximum time in milliseconds before update
      * @param     x    the <i>x</i> coordinate
      * @param     y    the <i>y</i> coordinate
@@ -624,6 +790,11 @@ public class JWindow extends Window implements Accessible,
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JWindow </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JWindow</code>
      */
     protected String paramString() {
@@ -648,6 +819,11 @@ public class JWindow extends Window implements Accessible,
      * AccessibleJWindow.
      * A new AccessibleJWindow instance is created if necessary.
      *
+     * <p>
+     *  获取与此JWindow相关联的AccessibleContext。对于JWindows,AccessibleContext采用AccessibleJWindow的形式。
+     * 如果需要,将创建一个新的AccessibleJWindow实例。
+     * 
+     * 
      * @return an AccessibleJWindow that serves as the
      *         AccessibleContext of this JWindow
      */
@@ -664,6 +840,7 @@ public class JWindow extends Window implements Accessible,
      * <code>JWindow</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to window user-interface
      * elements.
+     * <p>
      */
     @SuppressWarnings("serial")
     protected class AccessibleJWindow extends AccessibleAWTWindow {

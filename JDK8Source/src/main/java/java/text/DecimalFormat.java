@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996,1997  - 保留所有权利(C)版权所有IBM Corp. 1996  -  1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.text;
@@ -371,6 +378,158 @@ import sun.util.locale.provider.ResourceBundleBasedAdapter;
  * }
  * }</pre></blockquote>
  *
+ * <p>
+ *  <code> DecimalFormat </code>是一个格式化十进制数的<code> NumberFormat </code>的子类。
+ * 它具有各种功能,可以解析和格式化任何语言环境中的数字,包括支持西方,阿拉伯语和印度数字。
+ * 它还支持不同种类的数字,包括整数(123),定点数字(123.4),科学记数法(1.23E4),百分比(12％)和货币金额($ 123)。所有这些都可以本地化。
+ * 
+ * <p>要获取特定区域设置(包括默认区域设置)的<code> NumberFormat </code>,请调用<code> NumberFormat </code>的工厂方法之一,例如<code> get
+ * Instance代码>。
+ * 一般来说,不要直接调用<code> DecimalFormat </code>构造函数,因为<code> NumberFormat </code>工厂方法可能返回除<code> DecimalForma
+ * t </code>之外的子类。
+ * 如果你需要自定义格式对象,做这样的事情：。
+ * 
+ *  <blockquote> <pre> NumberFormat f = NumberFormat.getInstance(loc); if(f instanceof DecimalFormat){((DecimalFormat)f).setDecimalSeparatorAlwaysShown(true); }
+ *  </pre> </blockquote>。
+ * 
+ *  <p> <code> DecimalFormat </code>包含一个<em>模式</em>和一组<em>符号</em>。
+ * 模式可以使用<code> applyPattern()</code>直接设置,或者使用API​​方法间接设置。符号存储在<code> DecimalFormatSymbols </code>对象中。
+ * 当使用<code> NumberFormat </code>工厂方法时,模式和符号从本地化的<code> ResourceBundle </code>中读取。
+ * 
+ *  <h3>模式</h3>
+ * 
+ * <code> DecimalFormat </code>模式具有以下语法：<blockquote> <pre> <i> Pattern：</i> <i> PositivePattern </i> <i>
+ *  PositivePattern </i> <i> NegativePattern </i> <i> PositivePattern：</i> <i>前缀<sub> opt </sub> </i> <i>
+ *  / sub> </i> <i> NegativePattern：</i> <i>前缀<sub> opt </sub> </i> <i> </i>除了\ uFFFE,\ uFFFF和特殊字符之外的任何U
+ * nicode字符,除了\ uFFFE,\ uFFFF和特殊字符<i>后缀：</i> <i> Number：</i> <i> Integer </i> <i>指数<sub> opt </sub> </i>
+ *  <i> Integer </i>。
+ *  <i>部分</i> <i>指数<sub> opt </sub> </i> <i> Integer：</i> <i> MinimumInteger </i> >#,<i> Integer </i> <i>
+ *  MinimumInteger：</i> <0> <i> MinimumInteger </i> i> MinimumFraction <sub> opt </sub> </i> <i> Optiona
+ * lFraction <sub> opt </sub> </i> <i> MinimumFraction： / sub> </i> <i> Optionalifraction：</i>#<i> Optio
+ * nalFraction <sub> opt </sub> </i> <i>指数：</i> E <i> MinimumExponent </i > <i> MinimumExponent：</i> 0 <i>
+ *  MinimumExponent <sub> opt </sub> </i> </pre> </blockquote>。
+ * 
+ * <p> <code> DecimalFormat </code>模式包含正和负子模式,例如<code>"#,## 0.00;(#,## 0.00)"</code>。
+ * 每个子模式都有一个前缀,数字部分和后缀。负子模式是可选的;如果不存在,则使用本地化减号(在大多数语言环境中为<code>' - '</code>)作为前缀的正子模式作为负子模式。
+ * 也就是说,<code>"0.00"</code>单独相当于<code>"0.00; -0.00"</code>。
+ * 如果存在显式负子模式,则它仅用于指定负前缀和后缀;位数,最小位数和其他特性都与正模式相同。
+ * 这意味着<code>"#,## 0.0#;(#)"</code>产生与<code>"完全相同的行为：#,## 0.0#;(#,## 0.0#)"代码>。
+ * 
+ * <p>用于无穷大,数字,千位分隔符,十进制分隔符等的前缀,后缀和各种符号可以设置为任意值,并且在格式化期间它们将正确显示。但是,必须注意符号和字符串不冲突,否则解析将不可靠。
+ * 例如,对于<code> DecimalFormat.parse()</code>,正,负前缀或后缀必须是不同的,以便能够区分正值和负值。
+ *  (如果它们相同,那么<code> DecimalFormat </code>将表现为没有指定负子模式。)另一个例子是小数分隔符和千位分隔符应该是不同的字符,否则解析将是不可能的。
+ * 
+ *  <p>分组分隔符通常用于成千上万个分隔符,但在一些国家,分隔符分隔万。分组大小是分组字符之间的常数位数,例如3表示100,000,000,或4表示1,0000,0000。
+ * 如果提供具有多个分组字符的模式,则最后一个和整数结尾之间的间隔是使用的。
+ * 因此<code>"#,##,###,####"</code> == <code>"######,####"</code> == <code> "##,####,####"</code>。
+ * 
+ *  <h4>特殊模式字符</h4>
+ * 
+ * <p>模式中的许多字符都是字面上的;它们在解析期间匹配并且在格式化期间不改变地输出。另一方面,特殊字符代表其他字符,字符串或字符类。
+ * 除非另有说明,否则它们必须引用,如果它们要作为文字出现在前缀或后缀中。
+ * 
+ *  <p>此处列出的字符用于非本地化模式。本地化模式使用从此格式化程序的<code> DecimalFormatSymbols </code>对象取而代之的相应字符,这些字符失去其特殊状态。
+ * 两个例外是货币符号和报价,它们不是本地化的。
+ * 
+ * <blockquote>
+ *  <table border = 0 cellspacing = 3 cellpadding = 0 summary ="图表显示符号,
+ * location, localized, and meaning.">
+ * <tr style="background-color: rgb(204, 204, 255);">
+ *  <th align = left>符号<th align = left>位置<th align = left>本地化? <th align = left>含义
+ * <tr valign=top>
+ *  <td> <code> 0 </code> <td>号码<td>是<td>数字
+ * <tr style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <td> <code>#</code> <td>号码<td>是<td>数字,零显示为缺席
+ * <tr valign=top>
+ *  <td> <code>。</code> <td>数字<td>是<td>十进制分隔符或货币十进制分隔符
+ * <tr style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <td> <code>  -  </code> <td>号码<td>是<td>减号
+ * <tr valign=top>
+ *  <td> <code>,</code> <td>号码<td>是<td>分组分隔符
+ * <tr style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <td> <code> E </code> <td>数字<td>是<td>以科学计数法分隔尾数和指数。 <em>不需要以前缀或后缀引号。</em>
+ * <tr valign=top>
+ *  <td> <code>; </code> <td>子图元边界<td>是<td>分隔正和负子图案
+ * <tr style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <td> <code>％</code> <td>前缀或后缀<td>是<td>乘以100并显示为百分比
+ * <tr valign=top>
+ * <td> <code> \ u2030 </code> <td>前缀或后缀<td>是<td>乘以1000,并显示为每mille值
+ * <tr style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <td> <code>¤</code>(<code> \ u00A4 </code>)<td>前缀或后缀<td>否<td>货币符号,如果翻倍,换成国际货币符号。
+ * 如果存在于模式中,则使用货币十进制分隔符而不是小数分隔符。
+ * <tr valign=top>
+ *  <td> <code>'</code> <td>前缀或后缀<td>否<td>用于引用前缀或后缀中的特殊字符,例如<code>"'#'#"</code >格式123到<code>"#123"</code>
+ * 。
+ * 要创建单引号本身,请在行中使用两个：<code>"#o''clock"</code>。
+ * </table>
+ * </blockquote>
+ * 
+ *  <h4>科学记数法</h4>
+ * 
+ *  <p>科学记数法中的数字表示为尾数和十的幂的乘积,例如1234可以表示为1.234×10 ^ 3。尾数通常在1.0和1的范围内。 x {@literal <} 10.0,但它不需要。
+ *  <code> DecimalFormat </code>可以被指示仅通过模式格式化和分析科学记数法</em>;目前没有创建科学记数法格式的工厂方法。
+ * 在模式中,紧接着一个或多个数字字符的指数字符表示科学记数法。示例：<code>"0。### E0"</code>将数字1234格式化为<code>"1.234E3"</code>。
+ * 
+ * <ul>
+ * <li>指数字符后的数字字符数表示最小指数数字计数。没有最大值。负指数使用本地化减号格式化,<em>不是</em>模式的前缀和后缀。这允许诸如<code>"0。
+ * ### E0 m / s"</code>等模式。
+ * 
+ *  <li>整数位数的最小和最大数目一起解释：
+ * 
+ * <ul>
+ *  <li>如果整数位数的最大数目大于其最小数目且大于1,则它强制指数为最大整数数位数的倍数,最小整数位数应解释为1。
+ * 最常见的用法是生成<em>工程符号</em>,其中指数是三的倍数,例如<code>"## 0。##### E0"</code> 。
+ * 使用此模式,12345格式化为<code>"12.345E3"</code>,123456格式为<code>"123.456E3"</code>。
+ * 
+ *  <li>否则,通过调整指数实现最小的整数位数。示例：0.00123用<code>"00。### E0"</code>格式化,得到<code>"12.3E-4"</code>。
+ * </ul>
+ * 
+ *  <li>尾数中的有效位数是<em>最小整数</em>和<em>最大分数</em>数字的总和,不受最大整数数字的影响。例如,用<code>"## 0。
+ * ## E0"</code>格式化的12345是<code>"12.3E3"</code>。要显示所有数字,请将有效位数设置为零。有效数字位数不影响解析。
+ * 
+ * <li>指数模式不能包含分组分隔符。
+ * </ul>
+ * 
+ *  <h4>舍入</h4>
+ * 
+ *  <code> DecimalFormat </code>提供了在{@link java.math.RoundingMode}中定义的舍入模式,用于格式化。
+ * 默认情况下,它使用{@link java.math.RoundingMode#HALF_EVEN RoundingMode.HALF_EVEN}。
+ * 
+ *  <h4>数字</h4>
+ * 
+ *  对于格式化,<code> DecimalFormat </code>使用以<code> DecimalFormatSymbols </code>对象中定义的本地化零数位开始的十个连续字符作为数字。
+ * 对于解析,这些数字以及由{@link Character#digit Character.digit}定义的所有Unicode十进制数字都被识别。
+ * 
+ *  <h4>特殊值</h4>
+ * 
+ *  <p> <code> NaN </code>格式化为字符串,通常具有单个字符<code> \ uFFFD </code>。
+ * 此字符串由<code> DecimalFormatSymbols </code>对象确定。这是唯一不使用前缀和后缀的值。
+ * 
+ *  <p> Infinity格式化为字符串,通常具有单个字符<code> \ u221E </code>,应用正或负前缀和后缀。
+ * 无穷大字符串由<code> DecimalFormatSymbols </code>对象确定。
+ * 
+ *  <p>负零(<code>" -  0"</code>)解析到
+ * <ul>
+ * <li> <code> BigDecimal(0)</code>如果<code> isParseBigDecimal()</code>为true,<li> <code>如果<code> isParseB
+ * igDecimal()</code>和<code>是</code>,那么</code>为true且<code> isParseIntegerOnly()</isParseIntegerOnly()</code>
+ * 为false。
+ * </ul>
+ * 
+ *  <h4> <a name="synchronization">同步</a> </h4>
+ * 
+ * <p>
+ *  十进制格式通常不同步。建议为每个线程创建单独的格式实例。如果多个线程并发访问格式,则必须在外部同步。
+ * 
+ *  <h4>示例</h4>
+ * 
+ * <blockquote> <pre> {@ code <strong> //使用本地化的数字,整数,货币,//和每个区域设置的百分比格式打印一个数字</strong> Locale [] locale [Number] double myNumber = -1234.56; NumberFormat形式; for(int j = 0; j <4; ++ j){System.out.println("FORMAT"); for(int i = 0; i <locales.length; ++ i){if(locales [i] .getCountry()。
+ * length()== 0){continue; // Skip language-only locales} System.out.print(locales [i] .getDisplayName()
+ * ); switch(j){case 0：form = NumberFormat.getInstance(locales [i]);打破; case 1：form = NumberFormat.getIntegerInstance(locales [i]);打破; case 2：form = NumberFormat.getCurrencyInstance(locales [i]);打破; default：form = NumberFormat.getPercentInstance(locales [i]);打破; }
+ *  if(form instanceof DecimalFormat){System.out.print("："+((DecimalFormat)form).toPattern()); } System.
+ * out.print(" - >"+ form.format(myNumber)); try {System.out.println(" - >"+ form.parse(form.format(myNumber))); }
+ *  catch(ParseException e){}}}} </pre> </blockquote>。
+ * 
+ * 
  * @see          <a href="https://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html">Java Tutorial</a>
  * @see          NumberFormat
  * @see          DecimalFormatSymbols
@@ -391,6 +550,13 @@ public class DecimalFormat extends NumberFormat {
      * return the most appropriate sub-class of NumberFormat for a given
      * locale.
      *
+     * <p>
+     *  使用默认{@link java.util.Locale.Category#FORMAT FORMAT}语言环境的默认模式和符号创建DecimalFormat。
+     * 这是一个方便的方法来获得一个十进制格式,当国际化不是主要关注。
+     * <p>
+     *  要获取给定区域设置的标准格式,请在NumberFormat上使用工厂方法,例如getNumberInstance。这些工厂将返回给定语言环境的NumberFormat的最合适的子类。
+     * 
+     * 
      * @see java.text.NumberFormat#getInstance
      * @see java.text.NumberFormat#getNumberInstance
      * @see java.text.NumberFormat#getCurrencyInstance
@@ -422,6 +588,13 @@ public class DecimalFormat extends NumberFormat {
      * return the most appropriate sub-class of NumberFormat for a given
      * locale.
      *
+     * <p>
+     * 使用给定模式和默认{@link java.util.Locale.Category#FORMAT FORMAT}区域设置的符号创建DecimalFormat。
+     * 这是一个方便的方法来获得一个十进制格式,当国际化不是主要关注。
+     * <p>
+     *  要获取给定区域设置的标准格式,请在NumberFormat上使用工厂方法,例如getNumberInstance。这些工厂将返回给定语言环境的NumberFormat的最合适的子类。
+     * 
+     * 
      * @param pattern a non-localized pattern string.
      * @exception NullPointerException if <code>pattern</code> is null
      * @exception IllegalArgumentException if the given pattern is invalid.
@@ -448,6 +621,13 @@ public class DecimalFormat extends NumberFormat {
      * to a standard format, you can modify the format returned by
      * a NumberFormat factory method.
      *
+     * <p>
+     *  使用给定的模式和符号创建一个DecimalFormat。当您需要完全自定义格式的行为时使用此构造函数。
+     * <p>
+     *  要获取给定语言环境的标准格式,请在NumberFormat上使用工厂方法,例如getInstance或getCurrencyInstance。
+     * 如果只需要对标准格式进行细微调整,则可以修改NumberFormat工厂方法返回的格式。
+     * 
+     * 
      * @param pattern a non-localized pattern string
      * @param symbols the set of symbols to be used
      * @exception NullPointerException if any of the given arguments is null
@@ -472,6 +652,12 @@ public class DecimalFormat extends NumberFormat {
      * The number can be of any subclass of {@link java.lang.Number}.
      * <p>
      * This implementation uses the maximum precision permitted.
+     * <p>
+     *  格式化一个数字,并将结果文本附加到给定的字符串缓冲区。该数字可以是{@link java.lang.Number}的任何子类。
+     * <p>
+     *  此实现使用允许的最大精度。
+     * 
+     * 
      * @param number     the number to format
      * @param toAppendTo the <code>StringBuffer</code> to which the formatted
      *                   text is to be appended
@@ -510,6 +696,10 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Formats a double to produce a string.
+     * <p>
+     *  格式化一个double以产生一个字符串。
+     * 
+     * 
      * @param number    The double to format
      * @param result    where the text is to be appended
      * @param fieldPosition    On input: an alignment field, if desired.
@@ -546,6 +736,10 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Formats a double to produce a string.
+     * <p>
+     *  格式化一个double以产生一个字符串。
+     * 
+     * 
      * @param number    The double to format
      * @param result    where the text is to be appended
      * @param delegate notified of locations of sub fields
@@ -573,6 +767,11 @@ public class DecimalFormat extends NumberFormat {
          * ask, does it behave distinctly from +0.0?  Well, 1/(-0.0) ==
          * -Infinity.  Proper detection of -0.0 is needed to deal with the
          * issues raised by bugs 4106658, 4106667, and 4147706.  Liu 7/6/98.
+         * <p>
+         * 值为-0.0。这是一个具有零尾数(和指数),但是负号位的双精度。它在语义上不同于具有正符号位的零,并且这种区别对于某些种类的计算是重要的。
+         * 然而,检测有点棘手,因为(-0.0 == 0.0)和！( -  0.0 <0.0)。那么,你可能会问,它的行为是否明显地从+0.0?嗯,1 /( -  0.0)==  - 无穷大。
+         * 需要正确检测-0.0以处理由错误4106658,4106667和4147706引起的问题。Liu 7/6/98。
+         * 
          */
         boolean isNegative = ((number < 0.0) || (number == 0.0 && 1/number < 0.0)) ^ (multiplier < 0);
 
@@ -628,6 +827,10 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Format a long to produce a string.
+     * <p>
+     *  格式化一个long以产生一个字符串。
+     * 
+     * 
      * @param number    The long to format
      * @param result    where the text is to be appended
      * @param fieldPosition    On input: an alignment field, if desired.
@@ -648,6 +851,10 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Format a long to produce a string.
+     * <p>
+     *  格式化一个long以产生一个字符串。
+     * 
+     * 
      * @param number    The long to format
      * @param result    where the text is to be appended
      * @param delegate notified of locations of sub fields
@@ -716,6 +923,10 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Formats a BigDecimal to produce a string.
+     * <p>
+     *  格式化BigDecimal以生成字符串。
+     * 
+     * 
      * @param number    The BigDecimal to format
      * @param result    where the text is to be appended
      * @param fieldPosition    On input: an alignment field, if desired.
@@ -734,6 +945,10 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Formats a BigDecimal to produce a string.
+     * <p>
+     *  格式化BigDecimal以生成字符串。
+     * 
+     * 
      * @param number    The BigDecimal to format
      * @param result    where the text is to be appended
      * @param delegate notified of locations of sub fields
@@ -769,6 +984,10 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Format a BigInteger to produce a string.
+     * <p>
+     *  格式化BigInteger以生成字符串。
+     * 
+     * 
      * @param number    The BigInteger to format
      * @param result    where the text is to be appended
      * @param fieldPosition    On input: an alignment field, if desired.
@@ -788,6 +1007,10 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Format a BigInteger to produce a string.
+     * <p>
+     *  格式化BigInteger以生成字符串。
+     * 
+     * 
      * @param number    The BigInteger to format
      * @param result    where the text is to be appended
      * @param delegate notified of locations of sub fields
@@ -843,6 +1066,13 @@ public class DecimalFormat extends NumberFormat {
      * <code>NumberFormat.Field</code>, with the attribute value being the
      * same as the attribute key.
      *
+     * <p>
+     *  格式化产生<code> AttributedCharacterIterator </code>的对象。
+     * 您可以使用返回的<code> AttributedCharacterIterator </code>来构建生成的String,以及确定有关生成的String的信息。
+     * <p>
+     *  AttributedCharacterIterator的每个属性键的类型为<code> NumberFormat.Field </code>,属性值与属性键相同。
+     * 
+     * 
      * @exception NullPointerException if obj is null.
      * @exception IllegalArgumentException when the Format cannot format the
      *            given object.
@@ -941,6 +1171,32 @@ public class DecimalFormat extends NumberFormat {
      * relevant.  Therefore, some of the logic about whether or not to increment
      * the destination *decimal* value can occur based on tests of *binary*
      * computations of the binary input number.
+     * <p>
+     *  满足条件数(请参阅checkAndSetFastPathStatus())： - 仅当实例属性满足正确的预定义条件时。 -  double到格式的abs值为<= Integer.MAX_VALUE。
+     * 
+     * 基本方法是将二进制的二进制值转换为十进制值,转换为两个阶段：*双精度值的整数部分的转换。 *小数部分的转换(限于两位或三位数)。
+     * 
+     *  双重的整数部分的隔离和转换是直接的。分数的转换更微妙,并且依赖于对所讨论的十进制精度的两倍的一些舍入属性。
+     * 使用BigDecimal的术语,当双值的幅度小于Integer.MAX_VALUE并且舍入到最接近的偶数并且目标格式具有两个或三个数字* scale *(小数点后的数字)时,应用此快速路径算法)。
+     * 
+     *  在舍入到最接近偶数策略之下,返回的结果是最接近(在这种情况下为二进制)输入值的精确数值的(在这种情况下为十进制)目的地格式的数字串。如果两个目的地格式号码相等,则返回具有最后数字偶数的那一个。
+     * 为了计算这样正确舍入的值,需要查阅关于超过最小返回数位位置的数字的一些信息。
+     * 
+     * 通常,在返回的数字位置之外需要保护数字,圆形数字和粘性*位*。如果输入的丢弃部分足够大,则返回的数字串递增。在四舍五入到最接近的偶数中,这个增量的阈值出现在数字之间的中间点附近。
+     * 粘性位记录在新格式中是否存在精确输入值的任何剩余尾部数字;粘性位仅在接近中间舍入的情况下被查询。
+     * 
+     *  给定数字和位值的计算,舍入随后被减少到表查找问题。对于十进制,偶数/奇数情况看起来像这样：
+     * 
+     *  最后一轮粘6 5 0 => 6 //正好一半,返回偶数。 6 5 1 => 7 //有点多一半,向上。 7 5 0 => 8 //正好一半,向上舍入到偶数。
+     *  7 5 1 => 8 //有点多一半,向上。具有用于其他偶数和奇数最后返回数字的类似条目。
+     * 
+     *  然而,小于0.5的十进制负功率为*不是*可精确表示为二进制分数。特别地,不能表示0.005(两位数刻度的圆限制)和0.0005(三位刻度的圆限制)。
+     * 因此,对于接近这些情况的输入值,已知粘性位被设置,其将舍入逻辑减少为：。
+     * 
+     * 最后一轮粘6 5 1 => 7 //有点多一半,向上。 7 5 1 => 8 //有点多一半,向上。
+     * 
+     *  换句话说,如果圆数为5,则知道粘性位被设置。如果圆形数字不是5,粘性位不相关。因此,关于是否递增目的地*十进制*值的一些逻辑可以基于二进制输入数的*二进制*计算的测试而发生。
+     * 
      */
 
     /**
@@ -967,6 +1223,17 @@ public class DecimalFormat extends NumberFormat {
      *     Currency : min = max = 2.
      *     Decimal  : min = 0. max = 3.
      *
+     * <p>
+     *  检查此实例的快速路径的有效性。如果fast-path对此实例有效,请将快速路径状态设置为true,并根据需要初始化快速路径实用程序字段。
+     * 
+     *  这个方法应该很少被调用,否则会破坏快速路径的性能。这意味着避免频繁更改实例的属性,因为对于大多数属性,每次发生更改时,都需要在下一个格式调用时调用此方法。
+     * 
+     *  快速路径规则：类似于默认的DecimalFormat实例化情形。
+     * 更精确地： -  HALF_EVEN舍入模式, -  isGroupingUsed()为true, -  groupingSize为3, - 乘数为1, - 小数分隔符不是必须的, - 不使用指数符号,
+     *  -  minimumIntegerDigits正好为1,maximumIntegerDigits至少为10  -  For小数位数,默认情况下找到的精确值：Currency：min = max = 2
+     * . Decimal：min = 0 max = 3。
+     *  快速路径规则：类似于默认的DecimalFormat实例化情形。
+     * 
      */
     private void checkAndSetFastPathStatus() {
 
@@ -1094,6 +1361,26 @@ public class DecimalFormat extends NumberFormat {
      * like those described in Shewchuk's paper above. See comments in the code
      * below.
      *
+     * <p>
+     * 如果必须在{@code scaledFractionalPartAsInt}上进行向上舍入,则返回true,否则返回false。
+     * 
+     *  这是一种实用方法,当小数点后的近似小数部分正好为0.5d时,对小数点(货币情况下为2位,小数情况下为3)进行正确的半均值舍入决策。
+     * 这是通过对{@code fractionalPart}浮点值的精确计算来完成的。
+     * 
+     *  这个方法应该由私有{@code fastDoubleFormat}方法调用。
+     * 
+     *  用于精确计算的算法是：
+     * 
+     *  由Dekker在论文"用于扩展可用精度的浮点技术"中描述的来自TJDekker的<b> <i> FastTwoSum </i> </"<i> Adaptive Precision Floating-P
+     * oint Arithmetic and Fast Robust Geometric Predicates </i>",来自J.Shewchuk。
+     * 
+     *  在Takeshi Ogita和All的"<i> Accurate Sum and Dot Product </i>"中描述的<b> <i> Sum2S </i> </b>级联求和的修改版本。
+     * 正如Ogita在本文中所说的,这相当于Kahan-Babuska的求和算法,因为我们在对它们求和之前对这些项进行了大小排序。
+     * 为此,我们可以使用<i> FastTwoSum </i>算法,而不是更昂贵的Knuth的<i> TwoSum </i>。
+     * 
+     *  我们这样做是为了避免更昂贵的精确"<i> TwoProduct </i>"算法,如Shewchuk的上述论文中所述。请参阅下面的代码中的注释。
+     * 
+     * 
      * @param  fractionalPart The  fractional value  on which  we  take rounding
      * decision.
      * @param scaledFractionalPartAsInt The integral part of the scaled
@@ -1109,11 +1396,19 @@ public class DecimalFormat extends NumberFormat {
          * scaledFractionalPartAsInt ==
          *     (int) (fractionalPart * fastPathData.fractionalScaleFactor).
          * This is ensured by fastDoubleFormat() code.
+         * <p>
+         * 预期由传递的参数验证的前提条件是：scaledFractionalPartAsInt ==(int)(fractionalPart * fastPathData.fractionalScaleFacto
+         * r)。
+         * 这由fastDoubleFormat()代码来确保。
+         * 
          */
 
         /* We first calculate roundoff error made by fastDoubleFormat() on
          * the scaled fractional part. We do this with exact calculation on the
          * passed fractionalPart. Rounding decision will then be taken from roundoff.
+         * <p>
+         *  缩放的小数部分。我们对传递的fractionalPart进行精确计算。然后将从舍入中舍入舍入决定。
+         * 
          */
 
         /* ---- TwoProduct(fractionalPart, scale factor (i.e. 1000.0d or 100.0d)).
@@ -1138,6 +1433,19 @@ public class DecimalFormat extends NumberFormat {
          * - when 100,  we replace it by (128  - 32 + 4) =  100.
          * Every multiplication by a power of 2 (1024, 128, 32, 16, 8, 4) is exact.
          *
+         * <p>
+         *  下面是通过使用FastTwoSum(快得多)而不是Knuth的TwoSum,使用Ogita的Sum2S级联求和作为Kahan-Babuska等价函数的优化的精确的"TwoProduct"计算通过的分数
+         * 部分与比例因子。
+         * 
+         *  我们可以这样做,因为我们将求和从最小到最大,这样FastTwoSum可以使用没有任何额外的错误。
+         * 
+         *  "TwoProduct"精确计算需要17个flops。我们用FastTwoSum计算的级联求和来代替,每个计算涉及精确乘以2的幂。
+         * 
+         *  与使用传统的"TwoProduct"相比,这样做可以节省总共4次乘法和1次加法。
+         * 
+         *  比例因子为100(货币情况)或1000(十进制情况)。 - 当1000,我们用(1024  -  16  -  8)= 1000替换它。
+         *  - 当100,我们用(128  -  32 + 4)= 100替换它。每次乘以2(1024,128, 16,8,4)是精确的。
+         * 
          */
         double approxMax;    // Will always be positive.
         double approxMedium; // Will always be negative.
@@ -1207,6 +1515,15 @@ public class DecimalFormat extends NumberFormat {
          * - is zero,  thus scaled fractioanl == 0.5 ==> half-even rounding applies :
          *    we round-up only if the integral part of the scaled fractional is odd.
          *
+         * <p>
+         *  我们根据roundoff和half-even舍入规则进行舍入决策。
+         * 
+         * 上面的TwoProduct给出了我们对近似缩放分数的精确舍入,我们知道这个近似正好是0.5d,因为已经由调用者(fastDoubleFormat)测试。
+         * 
+         *  决策首先来自计算的精确舍入的符号。 - 由于是精确的四舍五入,它不能是正比小于0.5d的缩放分数,以及负的缩放分数大于0.5d。这让我们以下3例。
+         *  - 正,因此缩放的分数== 0.500 .... 0fff ==>上舍入。 - 负,因此缩放分数== 0.499 .... 9fff ==>不向上取整。
+         *  - 为零,因此缩放fractioanl == 0.5 ==>半 - 甚至舍入适用：仅当缩放的小数的整数部分为奇数时,向上舍入。
+         * 
          */
         if (scaledFractionalRoundoff > 0.0) {
             return true;
@@ -1227,6 +1544,12 @@ public class DecimalFormat extends NumberFormat {
      *
      * Loops downward starting from {@code backwardIndex} position (inclusive).
      *
+     * <p>
+     *  从传递的{@code number}中收集整数数字,同时根据需要设置分组字符。相应更新{@code firstUsedIndex}。
+     * 
+     *  从{@code backwardIndex}位置(包括)向下循环。
+     * 
+     * 
      * @param number  The int value from which we collect digits.
      * @param digitsBuffer The char array container where digits and grouping chars
      *  are stored.
@@ -1270,6 +1593,11 @@ public class DecimalFormat extends NumberFormat {
      * Updates {@code fastPathData.lastFreeIndex} accordingly.
      *
      *
+     * <p>
+     *  从传递的{@code number}开始,从{@code startIndex} position开始,收集2(货币)或3(小数)小数位数。这里没有设置标点符号(没有分组字符)。
+     * 相应地更新{@code fastPathData.lastFreeIndex}。
+     * 
+     * 
      * @param number  The int value from which we collect digits.
      * @param digitsBuffer The char array container where digits are stored.
      * @param startIndex the position from which we start storing digits in
@@ -1311,6 +1639,10 @@ public class DecimalFormat extends NumberFormat {
      * Internal utility.
      * Adds the passed {@code prefix} and {@code suffix} to {@code container}.
      *
+     * <p>
+     *  内部效用。将传递的{@code prefix}和{@code suffix}添加到{@code container}。
+     * 
+     * 
      * @param container  Char array container which to prepend/append the
      *  prefix/suffix.
      * @param prefix     Char sequence to prepend as a prefix.
@@ -1333,6 +1665,10 @@ public class DecimalFormat extends NumberFormat {
      * {@code container}.  Updates {@code fastPathData.firstUsedIndex}
      * accordingly.
      *
+     * <p>
+     *  将传递的{@code prefix}字符预置为给定结果{@code container}。相应地更新{@code fastPathData.firstUsedIndex}。
+     * 
+     * 
      * @param prefix The prefix characters to prepend to result.
      * @param len The number of chars to prepend.
      * @param container Char array container which to prepend the prefix
@@ -1370,6 +1706,10 @@ public class DecimalFormat extends NumberFormat {
      * {@code container}.  Updates {@code fastPathData.lastFreeIndex}
      * accordingly.
      *
+     * <p>
+     * 将传递的{@code suffix}字符附加到给定结果{@code container}。相应地更新{@code fastPathData.lastFreeIndex}。
+     * 
+     * 
      * @param suffix The suffix characters to append to result.
      * @param len The number of chars to append.
      * @param container Char array container which to append the suffix
@@ -1412,6 +1752,15 @@ public class DecimalFormat extends NumberFormat {
      *
      * We loop backward starting from last used index in {@code fastPathData}.
      *
+     * <p>
+     *  将数字字符从{@code digitsBuffer}转换为当前语言环境。
+     * 
+     *  在添加词缀之前必须调用,因为我们引用{@code fastPathData.firstUsedIndex}和{@code fastPathData.lastFreeIndex},并且不支持词缀(速度原
+     * 因)。
+     * 
+     *  我们从{@code fastPathData}中的最后使用的索引开始循环。
+     * 
+     * 
      * @param digitsBuffer The char array container where the digits are stored.
      */
     private void localizeDigits(char[] digitsBuffer) {
@@ -1449,6 +1798,12 @@ public class DecimalFormat extends NumberFormat {
      * This algorithm builds the formatted result and puts it in the dedicated
      * {@code fastPathData.fastPathContainer}.
      *
+     * <p>
+     *  这是快速路径格式算法的主要入口点。
+     * 
+     *  在这一点上我们肯定是在预期的条件下运行它。此算法构建格式化的结果并将其放在专用的{@code fastPathData.fastPathContainer}中。
+     * 
+     * 
      * @param d the double value to be formatted.
      * @param negative Flag precising if {@code d} is negative.
      */
@@ -1475,6 +1830,12 @@ public class DecimalFormat extends NumberFormat {
          *   parts, also setting the required grouping chars on the fly.
          * - Then we localize the collected digits if needed, and
          * - Finally prepend/append prefix/suffix if any is needed.
+         * <p>
+         * 算法的原理是： - 将传递的double中断为其整数和小数部分转换为整数。 - 然后,决定是否必须通过遵循半均值舍入规则来应用舍入,首先使用近似的缩放的小数部分。
+         *  - 对于困难情况(近似缩放的小数部分正好为0.5d),我们通过调用exactRoundUp实用程序方法细化舍入决策,这两种方法都计算近似值的精确舍入,并采取正确的舍入决策。
+         *  - 如果需要,我们舍入小数部分,如果我们满足缩放的小数部分的"全九"情况,可能将舍入传播到整数部分。 - 然后我们从结果积分和小数部分收集数字,同时设置所需的分组字符。
+         *  - 然后我们定位收集的数字,如果需要,和 - 最后prepend /追加前缀/后缀,如果需要任何。
+         * 
          */
 
         // Exact integral part of d.
@@ -1549,6 +1910,14 @@ public class DecimalFormat extends NumberFormat {
      *
      * Otherwise returns null by convention since fast-path can't be exercized.
      *
+     * <p>
+     *  由NumberFormat调用的格式(双精度)的快速路径快捷方式,或通过格式(双精度,...)公共方法调用。
+     * 
+     *  如果实例可以应用快速路径并且传递的double不是NaN或Infinity,则在整数范围内,如果需要,将{@code d}更改为其正值后,我们调用{@code fastDoubleFormat}。
+     * 
+     *  否则由于无法执行快速路径而按照惯例返回null。
+     * 
+     * 
      * @param d The double value to be formatted
      *
      * @return the formatted result for {@code d} as a string.
@@ -1595,6 +1964,9 @@ public class DecimalFormat extends NumberFormat {
     /**
      * Complete the formatting of a finite number.  On entry, the digitList must
      * be filled in with the correct digits.
+     * <p>
+     *  完成有限数字的格式化。在输入时,digitList必须用正确的数字填充。
+     * 
      */
     private StringBuffer subformat(StringBuffer result, FieldDelegate delegate,
                                    boolean isNegative, boolean isInteger,
@@ -1626,6 +1998,9 @@ public class DecimalFormat extends NumberFormat {
          * relations such as signum(1/x) = signum(x), where x is +Infinity or
          * -Infinity.  Prior to this fix, we always formatted zero values as if
          * they were positive.  Liu 7/6/98.
+         * <p>
+         * 格式为零。这允许敏感的计算并且保留诸如signum(1 / x)= signum(x)的关系,其中x是+无穷大或-Infinity。在此修复之前,我们总是格式化零值,如果他们是积极的。刘7/6/98。
+         * 
          */
         if (digitList.isZero()) {
             digitList.decimalAt = 0; // Normalize
@@ -1911,6 +2286,16 @@ public class DecimalFormat extends NumberFormat {
      * attribute as necessary.
      * <p>
      * This is used by <code>subformat</code> to add the prefix/suffix.
+     * <p>
+     *  将字符串<code>字符串</code>附加到<code> result </code>。
+     *  <code>委托</code>被通知在<code> positions </code>中的所有<code> FieldPosition </code>。
+     * <p>
+     *  如果<code> positions </code>中的<code> FieldPosition </code>之一标识了<code> SIGN </code>属性,则映射到<code> signAt
+     * tribute </code>。
+     * 这用于根据需要将<code> SIGN </code>属性映射到<code> EXPONENT </code>属性。
+     * <p>
+     *  这是由<code> subformat </code>用来添加前缀/后缀。
+     * 
      */
     private void append(StringBuffer result, String string,
                         FieldDelegate delegate,
@@ -1984,6 +2369,32 @@ public class DecimalFormat extends NumberFormat {
      * consecutive characters starting with the localized zero digit defined in
      * the <code>DecimalFormatSymbols</code> object.
      *
+     * <p>
+     *  从字符串解析文本以生成<code> Number </code>。
+     * <p>
+     *  该方法尝试解析从<code> pos </code>给出的索引开始的文本。
+     * 如果解析成功,则将<code> pos </code>的索引更新为使用最后一个字符后的索引(解析不一定使用直到字符串结尾的所有字符),并返回解析的数字。
+     * 更新的<code> pos </code>可用于指示下一次调用此方法的起点。
+     * 如果发生错误,则<code> pos </code>的索引不改变,<code> pos </code>的错误索引设置为发生错误的字符的索引,返回null 。
+     * <p>
+     * 返回的子类取决于{@link #isParseBigDecimal}的值以及要解析的字符串。
+     * <ul>
+     *  <li>如果<code> isParseBigDecimal()</code>为false(默认值),大多数整数值将作为<code> Long </code>对象返回,无论它们如何编写：<code>"
+     * 17" </code>和<code>"17.000"</code>都解析为<code> Long(17)</code>。
+     * 不能容纳在<code> Long </code>中的值将作为<code> Double </code>返回。这包括具有小数部分,无限值,<code> NaN </code>和值-0.0的值。
+     *  <code> DecimalFormat </code>不会</em>决定是否返回<code> Double </code>或<code> Long </code>源字符串。
+     * 这样做将防止溢出双精度数的尾数的整数,例如<code>" -  9,223,372,036,854,775,808.00"</code>,无法准确解析。
+     * <p>
+     *  调用者可以使用<code> Number </code>方法<code> doubleValue </code>,<code> longValue </code>等来获取他们想要的类型。
+     *  <li>如果<code> isParseBigDecimal()</code>为true,则值将作为<code> BigDecimal </code>对象返回。
+     * 值是由{@link java.math.BigDecimal#BigDecimal(String)}为语言环境无关格式的相应字符串构造的值。
+     * 特殊情况的负和正无穷大和NaN返回为<code> Double </code>实例,其中包含相应的<code> Double </code>常量的值。
+     * </ul>
+     * <p>
+     * <code> DecimalFormat </code>解析代表十进制数字的所有Unicode字符,由<code> Character.digit()</code>定义。
+     * 另外,<code> DecimalFormat </code>还将十个连续字符识别为数字,以<code> DecimalFormatSymbols </code>对象中定义的本地化零数字开始。
+     * 
+     * 
      * @param text the string to be parsed
      * @param pos  A <code>ParsePosition</code> object with index and error
      *             index information as described above.
@@ -2100,6 +2511,9 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Return a BigInteger multiplier.
+     * <p>
+     *  返回BigInteger乘数。
+     * 
      */
     private BigInteger getBigIntegerMultiplier() {
         if (bigIntegerMultiplier == null) {
@@ -2111,6 +2525,9 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Return a BigDecimal multiplier.
+     * <p>
+     *  返回一个BigDecimal乘数。
+     * 
      */
     private BigDecimal getBigDecimalMultiplier() {
         if (bigDecimalMultiplier == null) {
@@ -2127,6 +2544,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * Parse the given text into a number.  The text is parsed beginning at
      * parsePosition, until an unparseable character is seen.
+     * <p>
+     *  将给定的文本解析为数字。从parsePosition开始解析文本,直到看到不可解析的字符。
+     * 
+     * 
      * @param text The string to parse.
      * @param parsePosition The position at which to being parsing.  Upon
      * return, the first unparseable character.
@@ -2212,6 +2633,12 @@ public class DecimalFormat extends NumberFormat {
                  * this fails, try using the standard Unicode digit ranges by
                  * calling Character.digit().  If this also fails, digit will
                  * have a value outside the range 0..9.
+                 * <p>
+                 *  '0'...'9'。我们这样做通过使用Character.digit()方法,它将有效的Unicode数字转换为范围0..9。
+                 * 
+                 *  字符"ch"可以是数字。如果是,将其值从0到9放在'digit'中。首先尝试使用区域设置数字,这可能或可能不是标准的Unicode数字范围。
+                 * 如果失败,请尝试通过调用Character.digit()来使用标准的Unicode数字范围。如果这也失败,数字将具有在0..9范围之外的值。
+                 * 
                  */
                 int digit = ch - zero;
                 if (digit < 0 || digit > 9) {
@@ -2350,6 +2777,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * Returns a copy of the decimal format symbols, which is generally not
      * changed by the programmer or user.
+     * <p>
+     *  返回十进制格式符号的副本,通常不会被程序员或用户更改。
+     * 
+     * 
      * @return a copy of the desired DecimalFormatSymbols
      * @see java.text.DecimalFormatSymbols
      */
@@ -2366,6 +2797,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * Sets the decimal format symbols, which is generally not changed
      * by the programmer or user.
+     * <p>
+     *  设置十进制格式符号,通常不会被程序员或用户更改。
+     * 
+     * 
      * @param newSymbols desired DecimalFormatSymbols
      * @see java.text.DecimalFormatSymbols
      */
@@ -2384,6 +2819,10 @@ public class DecimalFormat extends NumberFormat {
      * Get the positive prefix.
      * <P>Examples: +123, $123, sFr123
      *
+     * <p>
+     *  获取正前缀。 <P>示例：+123,$ 123,sFr123
+     * 
+     * 
      * @return the positive prefix
      */
     public String getPositivePrefix () {
@@ -2394,6 +2833,10 @@ public class DecimalFormat extends NumberFormat {
      * Set the positive prefix.
      * <P>Examples: +123, $123, sFr123
      *
+     * <p>
+     *  设置正前缀。 <P>示例：+123,$ 123,sFr123
+     * 
+     * 
      * @param newValue the new positive prefix
      */
     public void setPositivePrefix (String newValue) {
@@ -2409,6 +2852,10 @@ public class DecimalFormat extends NumberFormat {
      * a positive prefix via <code>setPositivePrefix</code>. This is
      * lazily created.
      *
+     * <p>
+     *  返回用于正数的前缀中的字段的FieldPositions。如果用户通过<code> setPositivePrefix </code>明确设置了一个正前缀,则不会使用此方法。这是懒惰创建。
+     * 
+     * 
      * @return FieldPositions in positive prefix
      */
     private FieldPosition[] getPositivePrefixFieldPositions() {
@@ -2426,6 +2873,10 @@ public class DecimalFormat extends NumberFormat {
      * Get the negative prefix.
      * <P>Examples: -123, ($123) (with negative suffix), sFr-123
      *
+     * <p>
+     * 获取否定前缀。 <P>示例：-123,($ 123)(带负面后缀),sFr-123
+     * 
+     * 
      * @return the negative prefix
      */
     public String getNegativePrefix () {
@@ -2436,6 +2887,10 @@ public class DecimalFormat extends NumberFormat {
      * Set the negative prefix.
      * <P>Examples: -123, ($123) (with negative suffix), sFr-123
      *
+     * <p>
+     *  设置负前缀。 <P>示例：-123,($ 123)(带负面后缀),sFr-123
+     * 
+     * 
      * @param newValue the new negative prefix
      */
     public void setNegativePrefix (String newValue) {
@@ -2450,6 +2905,10 @@ public class DecimalFormat extends NumberFormat {
      * a negative prefix via <code>setNegativePrefix</code>. This is
      * lazily created.
      *
+     * <p>
+     *  返回用于负数的前缀中的字段的FieldPositions。如果用户通过<code> setNegativePrefix </code>明确设置了一个负前缀,则不会使用此方法。这是懒惰创建。
+     * 
+     * 
      * @return FieldPositions in positive prefix
      */
     private FieldPosition[] getNegativePrefixFieldPositions() {
@@ -2467,6 +2926,10 @@ public class DecimalFormat extends NumberFormat {
      * Get the positive suffix.
      * <P>Example: 123%
      *
+     * <p>
+     *  获得积极的后缀。 <P>示例：123％
+     * 
+     * 
      * @return the positive suffix
      */
     public String getPositiveSuffix () {
@@ -2477,6 +2940,10 @@ public class DecimalFormat extends NumberFormat {
      * Set the positive suffix.
      * <P>Example: 123%
      *
+     * <p>
+     *  设置正后缀。 <P>示例：123％
+     * 
+     * 
      * @param newValue the new positive suffix
      */
     public void setPositiveSuffix (String newValue) {
@@ -2491,6 +2958,10 @@ public class DecimalFormat extends NumberFormat {
      * a positive suffix via <code>setPositiveSuffix</code>. This is
      * lazily created.
      *
+     * <p>
+     *  返回用于正数的后缀中的字段的FieldPositions。如果用户通过<code> setPositiveSuffix </code>明确设置了正后缀,则不会使用此选项。这是懒惰创建。
+     * 
+     * 
      * @return FieldPositions in positive prefix
      */
     private FieldPosition[] getPositiveSuffixFieldPositions() {
@@ -2508,6 +2979,10 @@ public class DecimalFormat extends NumberFormat {
      * Get the negative suffix.
      * <P>Examples: -123%, ($123) (with positive suffixes)
      *
+     * <p>
+     *  获取负后缀。 <P>示例：-123％,($ 123)(带正号后缀)
+     * 
+     * 
      * @return the negative suffix
      */
     public String getNegativeSuffix () {
@@ -2518,6 +2993,10 @@ public class DecimalFormat extends NumberFormat {
      * Set the negative suffix.
      * <P>Examples: 123%
      *
+     * <p>
+     *  设置负后缀。 <P>示例：123％
+     * 
+     * 
      * @param newValue the new negative suffix
      */
     public void setNegativeSuffix (String newValue) {
@@ -2532,6 +3011,10 @@ public class DecimalFormat extends NumberFormat {
      * a negative suffix via <code>setNegativeSuffix</code>. This is
      * lazily created.
      *
+     * <p>
+     *  返回用于负数的后缀中的字段的FieldPositions。如果用户已经通过<code> setNegativeSuffix </code>明确设置了一个负后缀,则不会使用。这是懒惰创建。
+     * 
+     * 
      * @return FieldPositions in positive prefix
      */
     private FieldPosition[] getNegativeSuffixFieldPositions() {
@@ -2549,6 +3032,10 @@ public class DecimalFormat extends NumberFormat {
      * Gets the multiplier for use in percent, per mille, and similar
      * formats.
      *
+     * <p>
+     *  获取以百分比,每毫米和类似格式使用的乘数。
+     * 
+     * 
      * @return the multiplier
      * @see #setMultiplier(int)
      */
@@ -2567,6 +3054,13 @@ public class DecimalFormat extends NumberFormat {
      * <P>Example: with multiplier 100, 1.23 is formatted as "123", and
      * "123" is parsed into 1.23.
      *
+     * <p>
+     *  设置以百分比,每毫米和类似格式使用的乘数。对于百分比格式,将乘数设置为100,将后缀设置为"％"(对于阿拉伯语,请使用阿拉伯语百分号)。
+     * 对于每英寸格式,将乘数设置为1000,将后缀设置为"\ u2030"。
+     * 
+     *  <P>示例：使用乘法器100,1.23格式化为"123","123"解析为1.23。
+     * 
+     * 
      * @param newValue the new multiplier
      * @see #getMultiplier
      */
@@ -2579,6 +3073,9 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void setGroupingUsed(boolean newValue) {
@@ -2591,6 +3088,10 @@ public class DecimalFormat extends NumberFormat {
      * grouping separators in the integer portion of a number.  For example,
      * in the number "123,456.78", the grouping size is 3.
      *
+     * <p>
+     * 返回分组大小。分组大小是数字整数部分中分组分隔符之间的数字位数。例如,在数字"123,456.78"中,分组大小为3。
+     * 
+     * 
      * @return the grouping size
      * @see #setGroupingSize
      * @see java.text.NumberFormat#isGroupingUsed
@@ -2607,6 +3108,12 @@ public class DecimalFormat extends NumberFormat {
      * <br>
      * The value passed in is converted to a byte, which may lose information.
      *
+     * <p>
+     *  设置分组大小。分组大小是数字整数部分中分组分隔符之间的数字位数。例如,在数字"123,456.78"中,分组大小为3。
+     * <br>
+     *  传入的值将转换为字节,这可能会丢失信息。
+     * 
+     * 
      * @param newValue the new grouping size
      * @see #getGroupingSize
      * @see java.text.NumberFormat#setGroupingUsed
@@ -2622,6 +3129,10 @@ public class DecimalFormat extends NumberFormat {
      * (The decimal separator will always appear with decimals.)
      * <P>Example: Decimal ON: 12345 &rarr; 12345.; OFF: 12345 &rarr; 12345
      *
+     * <p>
+     *  允许您获取带有整数的小数分隔符的行为。 (小数分隔符将始终以小数形式出现。)<P>示例：十进制ON：12345&rarr; 12345。 OFF：12345&rarr; 12345
+     * 
+     * 
      * @return {@code true} if the decimal separator is always shown;
      *         {@code false} otherwise
      */
@@ -2634,6 +3145,10 @@ public class DecimalFormat extends NumberFormat {
      * (The decimal separator will always appear with decimals.)
      * <P>Example: Decimal ON: 12345 &rarr; 12345.; OFF: 12345 &rarr; 12345
      *
+     * <p>
+     *  允许您使用整数设置小数分隔符的行为。 (小数分隔符将始终以小数形式出现。)<P>示例：十进制ON：12345&rarr; 12345。 OFF：12345&rarr; 12345
+     * 
+     * 
      * @param newValue {@code true} if the decimal separator is always shown;
      *                 {@code false} otherwise
      */
@@ -2646,6 +3161,11 @@ public class DecimalFormat extends NumberFormat {
      * Returns whether the {@link #parse(java.lang.String, java.text.ParsePosition)}
      * method returns <code>BigDecimal</code>. The default value is false.
      *
+     * <p>
+     *  返回{@link #parse(java.lang.String,java.text.ParsePosition)}方法是否返回<code> BigDecimal </code>。
+     * 默认值为false。
+     * 
+     * 
      * @return {@code true} if the parse method returns BigDecimal;
      *         {@code false} otherwise
      * @see #setParseBigDecimal
@@ -2659,6 +3179,10 @@ public class DecimalFormat extends NumberFormat {
      * Sets whether the {@link #parse(java.lang.String, java.text.ParsePosition)}
      * method returns <code>BigDecimal</code>.
      *
+     * <p>
+     *  设置{@link #parse(java.lang.String,java.text.ParsePosition)}方法是否返回<code> BigDecimal </code>。
+     * 
+     * 
      * @param newValue {@code true} if the parse method returns BigDecimal;
      *                 {@code false} otherwise
      * @see #isParseBigDecimal
@@ -2670,6 +3194,9 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Standard override; no change in semantics.
+     * <p>
+     *  标准覆盖;没有语义的变化。
+     * 
      */
     @Override
     public Object clone() {
@@ -2695,6 +3222,9 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Overrides equals
+     * <p>
+     *  覆盖equals
+     * 
      */
     @Override
     public boolean equals(Object obj)
@@ -2737,6 +3267,9 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Overrides hashCode
+     * <p>
+     *  覆盖hashCode
+     * 
      */
     @Override
     public int hashCode() {
@@ -2748,6 +3281,10 @@ public class DecimalFormat extends NumberFormat {
      * Synthesizes a pattern string that represents the current state
      * of this Format object.
      *
+     * <p>
+     *  合成表示此Format对象的当前状态的模式字符串。
+     * 
+     * 
      * @return a pattern string
      * @see #applyPattern
      */
@@ -2759,6 +3296,10 @@ public class DecimalFormat extends NumberFormat {
      * Synthesizes a localized pattern string that represents the current
      * state of this Format object.
      *
+     * <p>
+     *  合成表示此Format对象的当前状态的本地化模式字符串。
+     * 
+     * 
      * @return a localized pattern string
      * @see #applyPattern
      */
@@ -2771,6 +3312,9 @@ public class DecimalFormat extends NumberFormat {
      * affix pattern string is null, do not expand it.  This method should be
      * called any time the symbols or the affix patterns change in order to keep
      * the expanded affix strings up to date.
+     * <p>
+     * 将拼音模式字符串展开为扩展的拼音字符串。如果任何affix模式字符串为null,请不要展开它。这个方法应该在符号或词缀模式改变时被调用,以便使扩展的词缀字符串保持最新。
+     * 
      */
     private void expandAffixes() {
         // Reuse one StringBuffer for better performance
@@ -2803,6 +3347,13 @@ public class DecimalFormat extends NumberFormat {
      * QUOTE must be followed by another character; QUOTE may not occur by
      * itself at the end of the pattern.
      *
+     * <p>
+     *  将affix模式展开为affix字符串。模式中的所有字符都是字面值的,除非以QUOTE作为前缀。
+     * 识别QUOTE之后的以下字符：PATTERN_PERCENT,PATTERN_PER_MILLE,PATTERN_MINUS和CURRENCY_SIGN。
+     * 如果CURRENCY_SIGN加倍(QUOTE + CURRENCY_SIGN + CURRENCY_SIGN),则会将其解释为ISO 4217货币代码。 QUOTE之后的任何其他字符表示自身。
+     *  QUOTE后面必须是另一个字符;在模式结束时,QUOTE可能不会自行发生。
+     * 
+     * 
      * @param pattern the non-null, possibly empty pattern
      * @param buffer a scratch StringBuffer; its contents will be lost
      * @return the expanded equivalent of pattern
@@ -2851,6 +3402,13 @@ public class DecimalFormat extends NumberFormat {
      * QUOTE must be followed by another character; QUOTE may not occur by
      * itself at the end of the pattern.
      *
+     * <p>
+     *  将一个affix模式展开为一个FieldPositions数组,描述模式如何展开。模式中的所有字符都是字面值的,除非以QUOTE作为前缀。
+     * 识别QUOTE之后的以下字符：PATTERN_PERCENT,PATTERN_PER_MILLE,PATTERN_MINUS和CURRENCY_SIGN。
+     * 如果CURRENCY_SIGN加倍(QUOTE + CURRENCY_SIGN + CURRENCY_SIGN),则会将其解释为ISO 4217货币代码。 QUOTE之后的任何其他字符表示自身。
+     *  QUOTE后面必须是另一个字符;在模式结束时,QUOTE可能不会自行发生。
+     * 
+     * 
      * @param pattern the non-null, possibly empty pattern
      * @return FieldPosition array of the resulting fields.
      */
@@ -2925,6 +3483,11 @@ public class DecimalFormat extends NumberFormat {
      * appended string will generate the same affix pattern (or literal affix)
      * when passed to toPattern().
      *
+     * <p>
+     * 将附加模式附加到给定的StringBuffer,根据需要引用特殊字符。使用内部绑定模式(如果存在)或文字绑定(如果内部绑定模式为null)。
+     * 附加的字符串在传递给toPattern()时将生成相同的附加模式(或文字附加)。
+     * 
+     * 
      * @param buffer the affix string is appended to this
      * @param affixPattern a pattern such as posPrefixPattern; may be null
      * @param expAffix a corresponding expanded affix, such as positivePrefix.
@@ -2981,6 +3544,9 @@ public class DecimalFormat extends NumberFormat {
      * Append an affix to the given StringBuffer, using quotes if
      * there are special characters.  Single quotes themselves must be
      * escaped in either case.
+     * <p>
+     *  向给定的StringBuffer附加一个affix,如果有特殊字符,使用引号。在任何情况下都必须转义单引号本身。
+     * 
      */
     private void appendAffix(StringBuffer buffer, String affix, boolean localized) {
         boolean needQuote;
@@ -3018,6 +3584,8 @@ public class DecimalFormat extends NumberFormat {
     }
 
     /**
+    /* <p>
+    /* 
      * Does the real work of generating a pattern.  */
     private String toPattern(boolean localized) {
         StringBuffer result = new StringBuffer();
@@ -3096,6 +3664,14 @@ public class DecimalFormat extends NumberFormat {
      * <p>In negative patterns, the minimum and maximum counts are ignored;
      * these are presumed to be set in the positive pattern.
      *
+     * <p>
+     *  将给定模式应用于此Format对象。模式是各种格式化属性的短手规范。这些属性也可以通过各种设置方法单独更改。
+     * <p>
+     *  由该例程设置的整数数字没有限制,因为这是典型的最终用户期望;如果要设置实际值,请使用setMaximumInteger。
+     * 对于负数,使用第二个模式,用分号<P>示例<code>"#,#00.0#"</code>&rarr; 1,234.56 <P>这意味着最少2个整数数字,1个小数位数和最多2个小数位数。
+     *  <p>示例：对于括号中的负值,<code>"#,#00.0#;(#,#00.0#)"</code> <p>在负模式中,忽略最小和最大计数;这些被假设设置在正模式中。
+     * 
+     * 
      * @param pattern a new pattern
      * @exception NullPointerException if <code>pattern</code> is null
      * @exception IllegalArgumentException if the given pattern is invalid.
@@ -3123,6 +3699,14 @@ public class DecimalFormat extends NumberFormat {
      * <p>In negative patterns, the minimum and maximum counts are ignored;
      * these are presumed to be set in the positive pattern.
      *
+     * <p>
+     * 将给定模式应用于此Format对象。假定该模式是以局部符号表示的。模式是各种格式化属性的短手规范。这些属性也可以通过各种设置方法单独更改。
+     * <p>
+     *  由该例程设置的整数数字没有限制,因为这是典型的最终用户期望;如果要设置实际值,请使用setMaximumInteger。
+     * 对于负数,使用第二个模式,用分号<P>示例<code>"#,#00.0#"</code>&rarr; 1,234.56 <P>这意味着最少2个整数数字,1个小数位数和最多2个小数位数。
+     *  <p>示例：对于括号中的负值,<code>"#,#00.0#;(#,#00.0#)"</code> <p>在负模式中,忽略最小和最大计数;这些被假设设置在正模式中。
+     * 
+     * 
      * @param pattern a new pattern
      * @exception NullPointerException if <code>pattern</code> is null
      * @exception IllegalArgumentException if the given pattern is invalid.
@@ -3133,6 +3717,9 @@ public class DecimalFormat extends NumberFormat {
 
     /**
      * Does the real work of applying a pattern.
+     * <p>
+     *  做应用模式的真正的工作。
+     * 
      */
     private void applyPattern(String pattern, boolean localized) {
         char zeroDigit         = PATTERN_ZERO_DIGIT;
@@ -3391,6 +3978,10 @@ public class DecimalFormat extends NumberFormat {
              * of zero, which allows proper round-trip patterns.  That is, we
              * don't want "#" to become "#0" when toPattern() is called (even
              * though that's what it really is, semantically).
+             * <p>
+             *  是什么意思?虽然这似乎可能使format()产生空字符串,format()检查这种情况,并在这种情况下输出一个零数字。 zeroDigitCount为零产生零的最小整数数字,这允许适当的往返模式。
+             * 也就是说,当调用toPattern()时,我们不希望"#"成为"#0"(即使这是真正的,语义)。
+             * 
              */
             if (zeroDigitCount == 0 && digitLeftCount > 0 && decimalPos >= 0) {
                 // Handle "###.###" and "###." and ".###"
@@ -3421,6 +4012,9 @@ public class DecimalFormat extends NumberFormat {
                 /* The effectiveDecimalPos is the position the decimal is at or
                  * would be at if there is no decimal. Note that if decimalPos<0,
                  * then digitTotalCount == digitLeftCount + zeroDigitCount.
+                 * <p>
+                 *  如果没有小数点则为。注意,如果decimalPos <0,那么digitTotalCount == digitLeftCount + zeroDigitCount。
+                 * 
                  */
                 int effectiveDecimalPos = decimalPos >= 0 ?
                     decimalPos : digitTotalCount;
@@ -3471,6 +4065,12 @@ public class DecimalFormat extends NumberFormat {
      * For formatting numbers other than <code>BigInteger</code> and
      * <code>BigDecimal</code> objects, the lower of <code>newValue</code> and
      * 309 is used. Negative input values are replaced with 0.
+     * <p>
+     * 设置数字的整数部分中允许的最大位数。
+     * 对于除<code> BigInteger </code>和<code> BigDecimal </code>对象以外的数字格式,使用<code> newValue </code>和309中的较低者。
+     * 负输入值替换为0。
+     * 
+     * 
      * @see NumberFormat#setMaximumIntegerDigits
      */
     @Override
@@ -3492,6 +4092,12 @@ public class DecimalFormat extends NumberFormat {
      * For formatting numbers other than <code>BigInteger</code> and
      * <code>BigDecimal</code> objects, the lower of <code>newValue</code> and
      * 309 is used. Negative input values are replaced with 0.
+     * <p>
+     *  设置数字的整数部分中允许的最小位数。
+     * 对于除<code> BigInteger </code>和<code> BigDecimal </code>对象以外的数字格式,使用<code> newValue </code>和309中的较低者。
+     * 负输入值替换为0。
+     * 
+     * 
      * @see NumberFormat#setMinimumIntegerDigits
      */
     @Override
@@ -3513,6 +4119,12 @@ public class DecimalFormat extends NumberFormat {
      * For formatting numbers other than <code>BigInteger</code> and
      * <code>BigDecimal</code> objects, the lower of <code>newValue</code> and
      * 340 is used. Negative input values are replaced with 0.
+     * <p>
+     *  设置数字小数部分中允许的最大位数。
+     * 对于除<code> BigInteger </code>和<code> BigDecimal </code>对象以外的格式,使用<code> newValue </code>和340中的较低者。
+     * 负输入值替换为0。
+     * 
+     * 
      * @see NumberFormat#setMaximumFractionDigits
      */
     @Override
@@ -3534,6 +4146,12 @@ public class DecimalFormat extends NumberFormat {
      * For formatting numbers other than <code>BigInteger</code> and
      * <code>BigDecimal</code> objects, the lower of <code>newValue</code> and
      * 340 is used. Negative input values are replaced with 0.
+     * <p>
+     *  设置数字小数部分中允许的最小位数。
+     * 对于除<code> BigInteger </code>和<code> BigDecimal </code>对象以外的格式,使用<code> newValue </code>和340中的较低者。
+     * 负输入值替换为0。
+     * 
+     * 
      * @see NumberFormat#setMinimumFractionDigits
      */
     @Override
@@ -3555,6 +4173,10 @@ public class DecimalFormat extends NumberFormat {
      * For formatting numbers other than <code>BigInteger</code> and
      * <code>BigDecimal</code> objects, the lower of the return value and
      * 309 is used.
+     * <p>
+     *  获取数字的整数部分中允许的最大位数。对于除<code> BigInteger </code>和<code> BigDecimal </code>对象以外的数字格式,使用返回值和309中的较低者。
+     * 
+     * 
      * @see #setMaximumIntegerDigits
      */
     @Override
@@ -3568,6 +4190,10 @@ public class DecimalFormat extends NumberFormat {
      * For formatting numbers other than <code>BigInteger</code> and
      * <code>BigDecimal</code> objects, the lower of the return value and
      * 309 is used.
+     * <p>
+     * 获取数字的整数部分中允许的最小位数。对于除<code> BigInteger </code>和<code> BigDecimal </code>对象以外的数字格式,使用返回值和309中的较低者。
+     * 
+     * 
      * @see #setMinimumIntegerDigits
      */
     @Override
@@ -3581,6 +4207,10 @@ public class DecimalFormat extends NumberFormat {
      * For formatting numbers other than <code>BigInteger</code> and
      * <code>BigDecimal</code> objects, the lower of the return value and
      * 340 is used.
+     * <p>
+     *  获取数字小数部分中允许的最大位数。对于除<code> BigInteger </code>和<code> BigDecimal </code>对象之外的数字格式,使用返回值和340中的较低者。
+     * 
+     * 
      * @see #setMaximumFractionDigits
      */
     @Override
@@ -3594,6 +4224,10 @@ public class DecimalFormat extends NumberFormat {
      * For formatting numbers other than <code>BigInteger</code> and
      * <code>BigDecimal</code> objects, the lower of the return value and
      * 340 is used.
+     * <p>
+     *  获取数字小数部分中允许的最小位数。对于除<code> BigInteger </code>和<code> BigDecimal </code>对象之外的数字格式,使用返回值和340中的较低者。
+     * 
+     * 
      * @see #setMinimumFractionDigits
      */
     @Override
@@ -3608,6 +4242,11 @@ public class DecimalFormat extends NumberFormat {
      * {@link DecimalFormatSymbols#getCurrency DecimalFormatSymbols.getCurrency}
      * on this number format's symbols.
      *
+     * <p>
+     *  格式化货币值时获取此十进制格式使用的货币。
+     * 货币是通过在此数字格式的符号上调用{@link DecimalFormatSymbols#getCurrency DecimalFormatSymbols.getCurrency}获得的。
+     * 
+     * 
      * @return the currency used by this decimal format, or <code>null</code>
      * @since 1.4
      */
@@ -3624,6 +4263,11 @@ public class DecimalFormat extends NumberFormat {
      * {@link DecimalFormatSymbols#setCurrency DecimalFormatSymbols.setCurrency}
      * on this number format's symbols.
      *
+     * <p>
+     *  设置格式化货币值时此数字格式使用的货币。这不会更新数字格式使用的小数位数的最小或最大数。
+     * 通过在此数字格式的符号上调用{@link DecimalFormatSymbols#setCurrency DecimalFormatSymbols.setCurrency}来设置货币。
+     * 
+     * 
      * @param currency the new currency to be used by this decimal format
      * @exception NullPointerException if <code>currency</code> is null
      * @since 1.4
@@ -3642,6 +4286,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * Gets the {@link java.math.RoundingMode} used in this DecimalFormat.
      *
+     * <p>
+     *  获取此DecimalFormat中使用的{@link java.math.RoundingMode}。
+     * 
+     * 
      * @return The <code>RoundingMode</code> used for this DecimalFormat.
      * @see #setRoundingMode(RoundingMode)
      * @since 1.6
@@ -3654,6 +4302,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * Sets the {@link java.math.RoundingMode} used in this DecimalFormat.
      *
+     * <p>
+     *  设置在此DecimalFormat中使用的{@link java.math.RoundingMode}。
+     * 
+     * 
      * @param roundingMode The <code>RoundingMode</code> to be used
      * @see #getRoundingMode()
      * @exception NullPointerException if <code>roundingMode</code> is null.
@@ -3712,6 +4364,32 @@ public class DecimalFormat extends NumberFormat {
      * to <code>null</code>, which means the affix strings will be taken as
      * literal values.  This is exactly what we want, since that corresponds to
      * the pre-version-2 behavior.
+     * <p>
+     * 从流中读取默认的可序列化字段,并对旧的序列化版本执行验证和调整。验证和调整是：
+     * <ol>
+     * <li>
+     *  验证超类的数字计数字段正确地反映了除<code> BigInteger </code>和<code> BigDecimal </code>对象之外的格式化数字的限制。
+     * 这些限制存储在超类中,用于与旧版本的序列化兼容性,而<code> BigInteger </code>和<code> BigDecimal </code>对象的限制保留在此类中。
+     * 如果在超类中,最小或最大整数位数大于<code> DOUBLE_INTEGER_DIGITS </code>,或者如果最小或最大小数位数大于<code> DOUBLE_FRACTION_DIGITS </code>
+     * ,则流数据为无效,并且此方法会抛出一个<code> InvalidObjectException </code>。
+     * 这些限制存储在超类中,用于与旧版本的序列化兼容性,而<code> BigInteger </code>和<code> BigDecimal </code>对象的限制保留在此类中。
+     * <li>
+     *  如果<code> serialVersionOnStream </code>小于4,则将<code> roundingMode </code>初始化为{@link java.math.RoundingMode#HALF_EVEN RoundingMode.HALF_EVEN}
+     * 。
+     * 此字段是版本4的新增内容。
+     * <li>
+     *  如果<code> serialVersionOnStream </code>小于3,则使用对应的超类getter的值调用setters的最小和最大整数和小数位数,以初始化此类中的字段。
+     * 此类中的字段是版本3中的新字段。
+     * <li>
+     * 如果<code> serialVersionOnStream </code>小于1,表示该流由JDK 1.1编写,则将<code> useExponentialNotation </code>初始化为f
+     * alse,因为它不存在于JDK 1.1中。
+     * <li>
+     *  将<code> serialVersionOnStream </code>设置为允许的最大值,以便如果此对象再次流出,则默认序列化将正常工作。
+     * </ol>
+     * 
+     *  <p>早于2的流版本将不会有加载模式变量<code> posPrefixPattern </code>等。因此,它们将被初始化为<code> null </code>,这意味着作为文字值。
+     * 这正是我们想要的,因为它对应于pre-version-2行为。
+     * 
      */
     private void readObject(ObjectInputStream stream)
          throws IOException, ClassNotFoundException
@@ -3760,6 +4438,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * The symbol used as a prefix when formatting positive numbers, e.g. "+".
      *
+     * <p>
+     *  在格式化正数时用作前缀的符号,例如"+"。
+     * 
+     * 
      * @serial
      * @see #getPositivePrefix
      */
@@ -3769,6 +4451,10 @@ public class DecimalFormat extends NumberFormat {
      * The symbol used as a suffix when formatting positive numbers.
      * This is often an empty string.
      *
+     * <p>
+     *  在格式化正数时用作后缀的符号。这通常是一个空字符串。
+     * 
+     * 
      * @serial
      * @see #getPositiveSuffix
      */
@@ -3777,6 +4463,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * The symbol used as a prefix when formatting negative numbers, e.g. "-".
      *
+     * <p>
+     *  在格式化负数时用作前缀的符号,例如" - "。
+     * 
+     * 
      * @serial
      * @see #getNegativePrefix
      */
@@ -3786,6 +4476,10 @@ public class DecimalFormat extends NumberFormat {
      * The symbol used as a suffix when formatting negative numbers.
      * This is often an empty string.
      *
+     * <p>
+     *  在格式化负数时用作后缀的符号。这通常是一个空字符串。
+     * 
+     * 
      * @serial
      * @see #getNegativeSuffix
      */
@@ -3803,6 +4497,14 @@ public class DecimalFormat extends NumberFormat {
      * <code>null</code> for <code>DecimalFormat</code> objects older than
      * stream version 2 restored from stream.
      *
+     * <p>
+     *  非负数的前缀模式。此变量对应于<code> positivePrefix </code>。
+     * 
+     * <p>此模式通过方法<code> expandAffix()</code>扩展为<code> positivePrefix </code>以更新后者,以反映<code>符号</code>中的更改。
+     * 如果这个变量是<code> null </code>,那么<code> positivePrefix </code>被视为一个文字值,当<code> symbols </code>更改时不会改变。
+     * 对于从流恢复的流版本2以前的<code> DecimalFormat </code>对象,此变量始终为<code> null </code>。
+     * 
+     * 
      * @serial
      * @since 1.3
      */
@@ -3814,6 +4516,10 @@ public class DecimalFormat extends NumberFormat {
      * <code>posPrefixPattern</code>; see that variable for further
      * documentation.
      *
+     * <p>
+     *  非负数的后缀模式。此变量对应于<code> positiveSuffix </code>。这个变量类似于<code> posPrefixPattern </code>;请参阅该变量以获取更多文档。
+     * 
+     * 
      * @serial
      * @since 1.3
      */
@@ -3825,6 +4531,10 @@ public class DecimalFormat extends NumberFormat {
      * <code>posPrefixPattern</code>; see that variable for further
      * documentation.
      *
+     * <p>
+     *  负数的前缀模式。此变量对应于<code> negativePrefix </code>。这个变量类似于<code> posPrefixPattern </code>;请参阅该变量以获取更多文档。
+     * 
+     * 
      * @serial
      * @since 1.3
      */
@@ -3836,6 +4546,10 @@ public class DecimalFormat extends NumberFormat {
      * <code>posPrefixPattern</code>; see that variable for further
      * documentation.
      *
+     * <p>
+     *  负数的后缀模式。此变量对应于<code> negativeSuffix </code>。这个变量类似于<code> posPrefixPattern </code>;请参阅该变量以获取更多文档。
+     * 
+     * 
      * @serial
      * @since 1.3
      */
@@ -3844,6 +4558,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * The multiplier for use in percent, per mille, etc.
      *
+     * <p>
+     *  用于百分比,每千米等的乘数
+     * 
+     * 
      * @serial
      * @see #getMultiplier
      */
@@ -3854,6 +4572,10 @@ public class DecimalFormat extends NumberFormat {
      * portion of a number.  Must be greater than 0 if
      * <code>NumberFormat.groupingUsed</code> is true.
      *
+     * <p>
+     *  在数字的整数部分中的分组分隔符之间的数字位数。如果<code> NumberFormat.groupingUsed </code>为true,则必须大于0。
+     * 
+     * 
      * @serial
      * @see #getGroupingSize
      * @see java.text.NumberFormat#isGroupingUsed
@@ -3864,6 +4586,10 @@ public class DecimalFormat extends NumberFormat {
      * If true, forces the decimal separator to always appear in a formatted
      * number, even if the fractional part of the number is zero.
      *
+     * <p>
+     *  如果为true,则强制小数分隔符始终以格式化的数字显示,即使数字的小数部分为零。
+     * 
+     * 
      * @serial
      * @see #isDecimalSeparatorAlwaysShown
      */
@@ -3872,6 +4598,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * If true, parse returns BigDecimal wherever possible.
      *
+     * <p>
+     *  如果为true,解析将尽可能返回BigDecimal。
+     * 
+     * 
      * @serial
      * @see #isParseBigDecimal
      * @since 1.5
@@ -3882,6 +4612,9 @@ public class DecimalFormat extends NumberFormat {
     /**
      * True if this object represents a currency format.  This determines
      * whether the monetary decimal separator is used instead of the normal one.
+     * <p>
+     * 如果此对象表示货币格式,则为True。这决定是否使用货币小数分隔符而不是正常货币小数分隔符。
+     * 
      */
     private transient boolean isCurrencyFormat = false;
 
@@ -3890,6 +4623,10 @@ public class DecimalFormat extends NumberFormat {
      * It contains the symbols used to format numbers, e.g. the grouping separator,
      * decimal separator, and so on.
      *
+     * <p>
+     *  该格式使用的<code> DecimalFormatSymbols </code>对象。它包含用于格式化数字的符号,例如分组分隔符,小数分隔符等。
+     * 
+     * 
      * @serial
      * @see #setDecimalFormatSymbols
      * @see java.text.DecimalFormatSymbols
@@ -3900,6 +4637,10 @@ public class DecimalFormat extends NumberFormat {
      * True to force the use of exponential (i.e. scientific) notation when formatting
      * numbers.
      *
+     * <p>
+     *  在格式化数字时强制使用指数(即科学)符号。
+     * 
+     * 
      * @serial
      * @since 1.2
      */
@@ -3909,6 +4650,9 @@ public class DecimalFormat extends NumberFormat {
      * FieldPositions describing the positive prefix String. This is
      * lazily created. Use <code>getPositivePrefixFieldPositions</code>
      * when needed.
+     * <p>
+     *  FieldPositions描述了正前缀String。这是懒惰创建。需要时使用<code> getPositivePrefixFieldPositions </code>。
+     * 
      */
     private transient FieldPosition[] positivePrefixFieldPositions;
 
@@ -3916,6 +4660,9 @@ public class DecimalFormat extends NumberFormat {
      * FieldPositions describing the positive suffix String. This is
      * lazily created. Use <code>getPositiveSuffixFieldPositions</code>
      * when needed.
+     * <p>
+     *  FieldPositions描述正后缀String。这是懒惰创建。需要时使用<code> getPositiveSuffixFieldPositions </code>。
+     * 
      */
     private transient FieldPosition[] positiveSuffixFieldPositions;
 
@@ -3923,6 +4670,9 @@ public class DecimalFormat extends NumberFormat {
      * FieldPositions describing the negative prefix String. This is
      * lazily created. Use <code>getNegativePrefixFieldPositions</code>
      * when needed.
+     * <p>
+     *  FieldPositions描述了否定前缀String。这是懒惰创建。需要时,使用<code> getNegativePrefixFieldPositions </code>。
+     * 
      */
     private transient FieldPosition[] negativePrefixFieldPositions;
 
@@ -3930,6 +4680,9 @@ public class DecimalFormat extends NumberFormat {
      * FieldPositions describing the negative suffix String. This is
      * lazily created. Use <code>getNegativeSuffixFieldPositions</code>
      * when needed.
+     * <p>
+     *  FieldPositions描述了负后缀String。这是懒惰创建。需要时使用<code> getNegativeSuffixFieldPositions </code>。
+     * 
      */
     private transient FieldPosition[] negativeSuffixFieldPositions;
 
@@ -3938,6 +4691,10 @@ public class DecimalFormat extends NumberFormat {
      * formatted in exponential notation.  This field is ignored if
      * <code>useExponentialNotation</code> is not true.
      *
+     * <p>
+     *  当以指数格式格式化数字时,用于显示指数的最小位数。如果<code> useExponentialNotation </code>不为true,则忽略此字段。
+     * 
+     * 
      * @serial
      * @since 1.2
      */
@@ -3949,6 +4706,11 @@ public class DecimalFormat extends NumberFormat {
      * <code>maximumIntegerDigits</code> must be greater than or equal to
      * <code>minimumIntegerDigits</code>.
      *
+     * <p>
+     *  在<code> BigInteger </code>或<code> BigDecimal </code>数字的整数部分中允许的最大位数。
+     *  <code> maximumIntegerDigits </code>必须大于或等于<code> minimumIntegerDigits </code>。
+     * 
+     * 
      * @serial
      * @see #getMaximumIntegerDigits
      * @since 1.5
@@ -3961,6 +4723,11 @@ public class DecimalFormat extends NumberFormat {
      * <code>minimumIntegerDigits</code> must be less than or equal to
      * <code>maximumIntegerDigits</code>.
      *
+     * <p>
+     * 在<code> BigInteger </code>或<code> BigDecimal </code>数字的整数部分中允许的最小位数。
+     *  <code> minimumIntegerDigits </code>必须小于或等于<code> maximumIntegerDigits </code>。
+     * 
+     * 
      * @serial
      * @see #getMinimumIntegerDigits
      * @since 1.5
@@ -3973,6 +4740,11 @@ public class DecimalFormat extends NumberFormat {
      * <code>maximumFractionDigits</code> must be greater than or equal to
      * <code>minimumFractionDigits</code>.
      *
+     * <p>
+     *  在<code> BigInteger </code>或<code> BigDecimal </code>数字的小数部分中允许的最大位数。
+     *  <code> maximumFractionDigits </code>必须大于或等于<code> minimumFractionDigits </code>。
+     * 
+     * 
      * @serial
      * @see #getMaximumFractionDigits
      * @since 1.5
@@ -3985,6 +4757,11 @@ public class DecimalFormat extends NumberFormat {
      * <code>minimumFractionDigits</code> must be less than or equal to
      * <code>maximumFractionDigits</code>.
      *
+     * <p>
+     *  在<code> BigInteger </code>或<code> BigDecimal </code>数字的小数部分中允许的最小位数。
+     *  <code> minimumFractionDigits </code>必须小于或等于<code> maximumFractionDigits </code>。
+     * 
+     * 
      * @serial
      * @see #getMinimumFractionDigits
      * @since 1.5
@@ -3994,6 +4771,10 @@ public class DecimalFormat extends NumberFormat {
     /**
      * The {@link java.math.RoundingMode} used in this DecimalFormat.
      *
+     * <p>
+     *  在此DecimalFormat中使用的{@link java.math.RoundingMode}。
+     * 
+     * 
      * @serial
      * @since 1.6
      */
@@ -4018,6 +4799,16 @@ public class DecimalFormat extends NumberFormat {
      * two fields that are used and modified while inside a call to
      * {@code fastDoubleFormat}.
      *
+     * <p>
+     *  辅助内部实用程序类,用于存储在快速路径算法中使用的数据。几乎所有与fast-path相关的字段都封装在这个类中。
+     * 
+     *  任何{@code DecimalFormat}实例都有一个{@code fastPathData}引用字段,该字段为空,除非实例的属性都是处于"fast-path"状态,且格式调用至少已完成一次在这种
+     * 状态。
+     * 
+     *  几乎所有字段仅与"快速路径"状态相关,并且在更改某个实例属性之前不会更改。
+     * 
+     *  {@code firstUsedIndex}和{@code lastFreeIndex}是在调用{@code fastDoubleFormat}时使用和修改的唯一两个字段。
+     * 
      */
     private static class FastPathData {
         // --- Temporary fields used in fast-path, shared by several methods.
@@ -4094,6 +4885,18 @@ public class DecimalFormat extends NumberFormat {
      * <li><b>4</b>: version for 1.6 and later, which adds one new field:
      *      <code>roundingMode</code>.
      * </ul>
+     * <p>
+     * 内部串行版本,说明哪个版本是写的。可能的值为：
+     * <ul>
+     *  <li> <b> 0 </b>(默认)：Java 2平台v1.2之前的版本<li> <b> 1 </b>：1.2版本,包括两个新字段<code> useExponentialNotation </code>
+     * 和<code> minExponentDigits </code>。
+     *  <li> <b> 2 </b>：1.3及更高版本的版本,它添加了四个新字段：<code> posPrefixPattern </code>,<code> posSuffixPattern </code>
+     * ,<code> negPrefixPattern </code> ,和<code> negSuffixPattern </code>。
+     *  <li> <b> 3 </b>：1.5版本和更高版本,增加了五个新字段：<code> maximumIntegerDigits </code>,<code> minimumIntegerDigits 
+     * </code>,<code> maximumFractionDigits </code> ,<code> minimumFractionDigits </code>和<code> parseBigDec
+     * imal </code>。
+     *  <li> <b> 4 </b>：1.6和更高版本,其中添加了一个新字段：<code> roundingMode </code>。
+     * 
      * @since 1.2
      * @serial
      */
@@ -4111,6 +4914,8 @@ public class DecimalFormat extends NumberFormat {
     /**
      * The digit arrays used in the fast-path methods for collecting digits.
      * Using 3 constants arrays of chars ensures a very fast collection of digits
+     * <p>
+     * </ul>
      */
     private static class DigitArrays {
         static final char[] DigitOnes1000 = new char[1000];
@@ -4170,6 +4975,9 @@ public class DecimalFormat extends NumberFormat {
      * replaced with the monetary decimal separator.
      *
      * The CURRENCY_SIGN is not localized.
+     * <p>
+     *  用于快速路径方法中用于收集数字的数字数组。使用3个常量字符数组确保数字的非常快速的收集
+     * 
      */
     private static final char       CURRENCY_SIGN = '\u00A4';
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -80,6 +81,32 @@ import java.util.Set;
  * provide the necessary locking. Multiple threads each manipulating
  * separate objects need not synchronize.
  *
+ * <p>
+ *  对{@code X509Certificate}执行一个或多个检查的抽象类。
+ * 
+ *  <p>可以创建{@code PKIXCertPathChecker}类的具体实现,以扩展PKIX认证路径验证算法。例如,实现可以检查和处理认证路径中的每个证书的关键私有扩展。
+ * 
+ *  <p> {@code PKIXCertPathChecker}的实例使用{@code PKIXParameters}和{@code PKIXBuilderParameters}类的{@link PKIXParameters#setCertPathCheckers setCertPathCheckers}
+ * 或{@link PKIXParameters#addCertPathChecker addCertPathChecker}方法作为参数传递。
+ * 对于由PKIX {@code CertPathValidator}或{@code CertPathBuilder}实施处理的每个证书,每个{@code PKIXCertPathChecker}的{@link #check检查}
+ * 方法将被调用。
+ * 
+ * <p> {@code PKIXCertPathChecker}可能在认证路径中的连续证书上被多次调用。预期具体子类保持检查连续证书所必需的任何内部状态。
+ *  {@link #init init}方法用于初始化检查设备的内部状态,以便可以检查新的认证路径的证书。
+ * 有状态实现<b>必须</b>覆盖{@link #clone clone}方法,以便允许PKIX {@code CertPathBuilder}有效地回溯并尝试其他路径。
+ * 在这些情况下,{@code CertPathBuilder}能够通过恢复克隆的{@code PKIXCertPathChecker}来恢复先前的路径验证状态。
+ * 
+ *  <p>证书呈现给{@code PKIXCertPathChecker}的顺序可以是正向(从目标到最可信的CA)或反向(从最可信的CA到目标)。
+ *  {@code PKIXCertPathChecker}实施<b>必须</b>支持反向检查(当证书以相反方向显示时执行检查的能力),<b>可</b>支持前向检查在向前方向上呈现证书时执行检查的能力)。
+ *  {@link #isForwardCheckingSupported isForwardCheckingSupported}方法表示是否支持转发检查。
+ * <p>
+ * 执行检查所需的附加输入参数可以通过该类的具体实现的构造器来指定。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  除非另有说明,否则此类中定义的方法不是线程安全的。需要并发访问单个对象的多个线程应在它们之间同步并提供必要的锁定。每个操作单独对象的多个线程不需要同步。
+ * 
+ * 
  * @see PKIXParameters
  * @see PKIXBuilderParameters
  *
@@ -92,6 +119,9 @@ public abstract class PKIXCertPathChecker
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     protected PKIXCertPathChecker() {}
 
@@ -103,6 +133,13 @@ public abstract class PKIXCertPathChecker
      * (forward or reverse). A {@code PKIXCertPathChecker} <b>must</b>
      * support reverse checking and <b>may</b> support forward checking.
      *
+     * <p>
+     *  初始化此{@code PKIXCertPathChecker}的内部状态。
+     * <p>
+     *  {@code forward}标志指定证书传递到{@link #check check}方法的顺序(正向或反向)。
+     *  {@code PKIXCertPathChecker} <b>必须</b>支持反向检查,<b>可</b>支持转发检查。
+     * 
+     * 
      * @param forward the order that certificates are presented to
      * the {@code check} method. If {@code true}, certificates
      * are presented from target to most-trusted CA (forward); if
@@ -122,6 +159,10 @@ public abstract class PKIXCertPathChecker
      * its checks when certificates are presented to the {@code check}
      * method in the forward direction (from target to most-trusted CA).
      *
+     * <p>
+     *  指示是否支持转发检查。转发检查是指{@code PKIXCertPathChecker}在向前(从目标到最可信CA)向{@code check}方法提交证书时执行检查的能力。
+     * 
+     * 
      * @return {@code true} if forward checking is supported,
      * {@code false} otherwise
      */
@@ -141,6 +182,14 @@ public abstract class PKIXCertPathChecker
      * All X.509 certificate extensions that a {@code PKIXCertPathChecker}
      * might possibly be able to process should be included in the set.
      *
+     * <p>
+     *  返回此{@code PKIXCertPathChecker}支持(即识别为能够处理)的X.509证书扩展的不可修改的{@code Set},如果不支持扩展,则返回{@code null}。
+     * <p>
+     *  集合的每个元素是一个{@code String},表示支持的X.509扩展的对象标识符(OID)。 OID由一组由周期分隔的非负整数表示。
+     * <p>
+     * {@code PKIXCertPathChecker}可能能够处理的所有X.509证书扩展名都应包含在集合中。
+     * 
+     * 
      * @return an immutable {@code Set} of X.509 extension OIDs (in
      * {@code String} format) supported by this
      * {@code PKIXCertPathChecker}, or {@code null} if no
@@ -155,6 +204,10 @@ public abstract class PKIXCertPathChecker
      * critical extensions. The certificates are presented in the order
      * specified by the {@code init} method.
      *
+     * <p>
+     *  使用其内部状态对指定的证书执行检查,并从表示未解决的关键扩展的指定OID字符串集合中删除它处理的任何关键扩展。证书按{@code init}方法指定的顺序显示。
+     * 
+     * 
      * @param cert the {@code Certificate} to be checked
      * @param unresolvedCritExts a {@code Collection} of OID strings
      * representing the current set of unresolved critical extensions
@@ -170,6 +223,11 @@ public abstract class PKIXCertPathChecker
      *
      * <p>This implementation calls
      * {@code check(cert, java.util.Collections.<String>emptySet())}.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实现调用{@code check(cert,java.util.Collections。<String> emptySet())}。
+     * 
      */
     @Override
     public void check(Certificate cert) throws CertPathValidatorException {
@@ -182,6 +240,8 @@ public abstract class PKIXCertPathChecker
      * All subclasses which maintain state must support and
      * override this method, if necessary.
      *
+     * <p>
+     * 
      * @return a copy of this {@code PKIXCertPathChecker}
      */
     @Override

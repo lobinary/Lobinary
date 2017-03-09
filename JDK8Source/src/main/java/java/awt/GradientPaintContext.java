@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -202,6 +203,9 @@ class GradientPaintContext implements PaintContext {
 
     /**
      * Release the resources allocated for the operation.
+     * <p>
+     *  释放为操作分配的资源。
+     * 
      */
     public void dispose() {
         if (saved != null) {
@@ -212,6 +216,9 @@ class GradientPaintContext implements PaintContext {
 
     /**
      * Return the ColorModel of the output.
+     * <p>
+     *  返回输出的ColorModel。
+     * 
      */
     public ColorModel getColorModel() {
         return model;
@@ -220,6 +227,9 @@ class GradientPaintContext implements PaintContext {
     /**
      * Return a Raster containing the colors generated for the graphics
      * operation.
+     * <p>
+     *  返回包含为图形操作生成的颜色的栅格。
+     * 
      * @param x,y,w,h The area in device space for which colors are
      * generated.
      */

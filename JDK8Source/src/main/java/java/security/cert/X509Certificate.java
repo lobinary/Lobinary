@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -94,6 +95,36 @@ import sun.security.x509.X509CertImpl;
  * }
  * </pre>
  *
+ * <p>
+ * <p>
+ *  X.509证书的抽象类。这提供了访问X.509证书的所有属性的标准方法。
+ * <p>
+ *  在1996年6月,基本的X.509 v3格式由ISO / IEC和ANSI X9完成,其在ASN.1中描述如下：
+ * <pre>
+ *  Certificate :: = SEQUENCE {tbsCertificate TBSCertificate,signatureAlgorithm AlgorithmIdentifier,signature BIT STRING}
+ * 。
+ * </pre>
+ * <p>
+ *  这些证书广泛用于支持Internet安全系统中的身份验证和其他功能。常见的应用包括隐私增强邮件(PEM),传输层安全(SSL),可信软件分发的代码签名和安全电子交易(SET)。
+ * <p>
+ *  这些证书由<em>证书颁发机构</em>(CA)管理和支持。 CA是通过以X.509标准格式放置数据然后对该数据进行数字签名来创建证书的服务。
+ *  CA作为受信任的第三方,在没有彼此直接了解的校长之间进行介绍。 CA证书由它们自己签名,或由一些其他CA签名,例如"根"CA。
+ * <p>
+ *  有关详情,请参阅<a href="http://www.ietf.org/rfc/rfc3280.txt"> RFC 3280：Internet X.509公钥基础结构证书和CRL配置文件</a>。
+ * <p>
+ *  {@code tbsCertificate}的ASN.1定义是：
+ * <pre>
+ * TBSCertificate :: = SEQUENCE {version [0] EXPLICIT版本DEFAULT v1,serialNumber CertificateSerialNumber,签名AlgorithmIdentifier,发布者名称,有效性有效性,主题名称,subjectPublicKeyInfo SubjectPublicKeyInfo,issuerUniqueID [1] IMPLICIT UniqueIdentifier可选, - 如果存在,版本必须为v2或v3 subjectUniqueID [2] IMPLICIT UniqueIdentifier可选, - 如果存在,版本必须是v2或v3扩展[3] EXPLICIT扩展可选 - 如果存在,版本必须为v3}
+ * 。
+ * </pre>
+ * <p>
+ *  证书使用证书工厂实例化。以下是如何实例化X.509证书的示例：
+ * <pre>
+ *  try(InputStream inStream = new FileInputStream("fileName-of-cert")){CertificateFactory cf = CertificateFactory.getInstance("X.509"); X509Certificate cert =(X509Certificate)cf.generateCertificate(inStream); }
+ * }。
+ * </pre>
+ * 
+ * 
  * @author Hemma Prafullchandra
  *
  *
@@ -111,6 +142,9 @@ implements X509Extension {
 
     /**
      * Constructor for X.509 certificates.
+     * <p>
+     *  X.509证书的构造函数。
+     * 
      */
     protected X509Certificate() {
         super("X.509");
@@ -137,6 +171,19 @@ implements X509Extension {
      *     generalTime    GeneralizedTime }
      * </pre>
      *
+     * <p>
+     *  检查证书当前是否有效。这是如果当前日期和时间在证书中给出的有效期内。
+     * <p>
+     *  有效期由两个日期/时间值组成：证书有效的第一个和最后一个日期(和时间)。它在ASN.1中定义为：
+     * <pre>
+     *  有效性
+     * 
+     *  Validity :: = SEQUENCE {不是CertificateValidityDate之前,不是CertificateValidityDate之后}
+     * 
+     *  CertificateValidityDate :: = CHOICE {utcTime UTCTime,generalTime GeneralizedTime}
+     * </pre>
+     * 
+     * 
      * @exception CertificateExpiredException if the certificate has expired.
      * @exception CertificateNotYetValidException if the certificate is not
      * yet valid.
@@ -149,6 +196,10 @@ implements X509Extension {
      * validity period. In other words, this determines whether the
      * certificate would be valid at the given date/time.
      *
+     * <p>
+     * 检查给定日期是否在证书的有效期内。换句话说,这确定证书在给定日期/时间是否有效。
+     * 
+     * 
      * @param date the Date to check against to see if this certificate
      *        is valid at that date/time.
      *
@@ -171,6 +222,14 @@ implements X509Extension {
      *
      * Version ::=  INTEGER  {  v1(0), v2(1), v3(2)  }
      * </pre>
+     * <p>
+     *  从证书获取{@code版本}(版本号)值。对此的ASN.1定义是：
+     * <pre>
+     *  version [0] EXPLICIT版本DEFAULT v1
+     * 
+     *  Version :: = INTEGER {v1(0),v2(1),v3(2)}
+     * </pre>
+     * 
      * @return the version number, i.e. 1, 2 or 3.
      */
     public abstract int getVersion();
@@ -188,6 +247,16 @@ implements X509Extension {
      * CertificateSerialNumber  ::=  INTEGER
      * </pre>
      *
+     * <p>
+     *  从证书获取{@code serialNumber}值。序列号是证书颁发机构为每个证书分配的整数。它必须对于由给定CA发布的每个证书是唯一的(即,发行者名称和序列号标识唯一证书)。
+     * 对此的ASN.1定义是：。
+     * <pre>
+     *  serialNumber CertificateSerialNumber
+     * 
+     *  CertificateSerialNumber :: = INTEGER
+     * </pre>
+     * 
+     * 
      * @return the serial number.
      */
     public abstract BigInteger getSerialNumber();
@@ -229,6 +298,28 @@ implements X509Extension {
      * one of {@code PrintableString},
      * {@code TeletexString} or {@code UniversalString}.
      *
+     * <p>
+     *  <strong>已拒绝</strong>,替换为{@linkplain#getIssuerX500Principal()}。
+     * 此方法返回{@code issuer}作为实现特定的Principal对象,不应依赖于可移植代码。
+     * 
+     * <p>
+     *  从证书获取{@code issuer}(颁发者专有名称)值。发放者名称标识签署(并颁发)证书的实体。
+     * 
+     *  <p>发行者名称字段包含X.500可分辨名称(DN)。对此的ASN.1定义是：
+     * <pre>
+     *  发行人名称
+     * 
+     *  Name :: = CHOICE {RDNSequence} RDNSequence :: = SEQUENCE OF RelativeDistinguishedName RelativeDistin
+     * guishedName :: = SET OF AttributeValueAssertion。
+     * 
+     * AttributeValueAssertion :: = SEQUENCE {AttributeType,AttributeValue} AttributeType :: = OBJECT IDENTI
+     * FIER AttributeValue :: = ANY。
+     * </pre>
+     *  {@code Name}描述了由属性组成的分层名称,例如国家/地区名称和相应的值,例如US。
+     *  {@code AttributeValue}组件的类型由{@code AttributeType}确定;一般来说它会是一个{@code directoryString}。
+     *  {@code directoryString}通常是{@code PrintableString},{@code TeletexString}或{@code UniversalString}之一。
+     * 
+     * 
      * @return a Principal whose name is the issuer distinguished name.
      */
     public abstract Principal getIssuerDN();
@@ -239,6 +330,12 @@ implements X509Extension {
      * <p>
      * It is recommended that subclasses override this method.
      *
+     * <p>
+     *  将证书中的颁发者(颁发者专有名称)值作为{@code X500Principal}返回。
+     * <p>
+     *  建议子类重写此方法。
+     * 
+     * 
      * @return an {@code X500Principal} representing the issuer
      *          distinguished name
      * @since 1.4
@@ -270,6 +367,22 @@ implements X509Extension {
      * <p>See {@link #getIssuerDN() getIssuerDN} for {@code Name}
      * and other relevant definitions.
      *
+     * <p>
+     *  <strong>已拒绝</strong>,替换为{@linkplain#getSubjectX500Principal()}。
+     * 此方法返回{@code subject}作为实现特定的Principal对象,不应依赖于可移植代码。
+     * 
+     * <p>
+     *  从证书获取{@code subject}(主题专有名称)值。
+     * 如果{@code subject}值为空,则返回的{@code Principal}对象的{@code getName()}方法返回一个空字符串("")。
+     * 
+     *  <p> ASN.1的定义是：
+     * <pre>
+     *  主题名称
+     * </pre>
+     * 
+     *  <p>有关{@code Name}和其他相关定义,请参阅{@link #getIssuerDN()getIssuerDN}。
+     * 
+     * 
      * @return a Principal whose name is the subject name.
      */
     public abstract Principal getSubjectDN();
@@ -282,6 +395,13 @@ implements X509Extension {
      * <p>
      * It is recommended that subclasses override this method.
      *
+     * <p>
+     * 将证书中的主题(主题可分辨名称)值作为{@code X500Principal}返回。
+     * 如果主题值为空,则返回的{@code X500Principal}对象的{@code getName()}方法返回一个空字符串("")。
+     * <p>
+     *  建议子类重写此方法。
+     * 
+     * 
      * @return an {@code X500Principal} representing the subject
      *          distinguished name
      * @since 1.4
@@ -309,6 +429,17 @@ implements X509Extension {
      *     generalTime    GeneralizedTime }
      * </pre>
      *
+     * <p>
+     *  从证书的有效期获取{@code notBefore}日期。相关的ASN.1定义是：
+     * <pre>
+     *  有效性
+     * 
+     *  Validity :: = SEQUENCE {不是CertificateValidityDate之前,不是CertificateValidityDate之后}
+     * 
+     *  CertificateValidityDate :: = CHOICE {utcTime UTCTime,generalTime GeneralizedTime}
+     * </pre>
+     * 
+     * 
      * @return the start date of the validity period.
      * @see #checkValidity
      */
@@ -319,6 +450,10 @@ implements X509Extension {
      * the certificate. See {@link #getNotBefore() getNotBefore}
      * for relevant ASN.1 definitions.
      *
+     * <p>
+     *  从证书的有效期获取{@code notAfter}日期。有关ASN.1定义,请参见{@link #getNotBefore()getNotBefore}。
+     * 
+     * 
      * @return the end date of the validity period.
      * @see #checkValidity
      */
@@ -329,6 +464,10 @@ implements X509Extension {
      * {@code tbsCertificate} from this certificate.
      * This can be used to verify the signature independently.
      *
+     * <p>
+     *  获取DER编码的证书信息,即此证书的{@code tbsCertificate}。这可以用于独立地验证签名。
+     * 
+     * 
      * @return the DER-encoded certificate information.
      * @exception CertificateEncodingException if an encoding error occurs.
      */
@@ -343,6 +482,13 @@ implements X509Extension {
      * signature     BIT STRING
      * </pre>
      *
+     * <p>
+     *  从证书获取{@code signature}值(原始签名位)。对此的ASN.1定义是：
+     * <pre>
+     *  签名BIT STRING
+     * </pre>
+     * 
+     * 
      * @return the signature.
      */
     public abstract byte[] getSignature();
@@ -365,6 +511,18 @@ implements X509Extension {
      * <p>The algorithm name is determined from the {@code algorithm}
      * OID string.
      *
+     * <p>
+     *  获取证书签名算法的签名算法名称。一个例子是字符串"SHA256withRSA"。对此的ASN.1定义是：
+     * <pre>
+     *  signatureAlgorithm AlgorithmIdentifier
+     * 
+     * AlgorithmIdentifier :: = SEQUENCE {algorithm OBJECT IDENTIFIER,parameters ANY DEFINED BY algorithm OPTIONAL}
+     *   - 包含类型的值 - 注册用于 - 算法对象标识符值。
+     * </pre>
+     * 
+     *  <p>算法名称由{@code algorithm} OID字符串确定。
+     * 
+     * 
      * @return the signature algorithm name.
      */
     public abstract String getSigAlgName();
@@ -382,6 +540,15 @@ implements X509Extension {
      * <p>See {@link #getSigAlgName() getSigAlgName} for
      * relevant ASN.1 definitions.
      *
+     * <p>
+     *  从证书获取签名算法OID字符串。 OID由一组由周期分隔的非负整数表示。
+     * 例如,字符串"1.2.840.10040.4.3"标识了在<a href="http://www.ietf.org/rfc/rfc3279.txt"> RFC 3279：算法中定义的具有DSA签名算法的
+     * SHA-1, Internet的X.509公钥基础设施证书和CRL配置文件的标识符</a>。
+     *  从证书获取签名算法OID字符串。 OID由一组由周期分隔的非负整数表示。
+     * 
+     *  <p>有关ASN.1定义,请参阅{@link #getSigAlgName()getSigAlgName}。
+     * 
+     * 
      * @return the signature algorithm OID string.
      */
     public abstract String getSigAlgOID();
@@ -399,6 +566,15 @@ implements X509Extension {
      * <p>See {@link #getSigAlgName() getSigAlgName} for
      * relevant ASN.1 definitions.
      *
+     * <p>
+     *  从此证书的签名算法获取DER编码的签名算法参数。在大多数情况下,签名算法参数为null;这些参数通常随证书的公钥提供。
+     * 如果需要访问单个参数值,请使用{@link java.security.AlgorithmParameters AlgorithmParameters}并使用{@link #getSigAlgName()getSigAlgName}
+     * 返回的名称实例化。
+     *  从此证书的签名算法获取DER编码的签名算法参数。在大多数情况下,签名算法参数为null;这些参数通常随证书的公钥提供。
+     * 
+     *  <p>有关ASN.1定义,请参阅{@link #getSigAlgName()getSigAlgName}。
+     * 
+     * 
      * @return the DER-encoded signature algorithm parameters, or
      *         null if no parameters are present.
      */
@@ -420,6 +596,18 @@ implements X509Extension {
      * UniqueIdentifier  ::=  BIT STRING
      * </pre>
      *
+     * <p>
+     * 从证书获取{@code issuerUniqueID}值。发行者唯一标识符存在于证书中以处理随时间重用发行者名称的可能性。 RFC 3280建议不要重复使用名称,并且符合证书不使用唯一标识符。
+     * 符合该配置文件的应用程序应该能够解析唯一标识符并进行比较。
+     * 
+     *  <p> ASN.1的定义是：
+     * <pre>
+     *  issuerUniqueID [1] IMPLICIT UniqueIdentifier可选
+     * 
+     *  UniqueIdentifier :: = BIT STRING
+     * </pre>
+     * 
+     * 
      * @return the issuer unique identifier or null if it is not
      * present in the certificate.
      */
@@ -435,6 +623,17 @@ implements X509Extension {
      * UniqueIdentifier  ::=  BIT STRING
      * </pre>
      *
+     * <p>
+     *  从证书获取{@code subjectUniqueID}值。
+     * 
+     *  <p> ASN.1的定义是：
+     * <pre>
+     *  subjectUniqueID [2] IMPLICIT UniqueIdentifier可选
+     * 
+     *  UniqueIdentifier :: = BIT STRING
+     * </pre>
+     * 
+     * 
      * @return the subject unique identifier or null if it is not
      * present in the certificate.
      */
@@ -462,6 +661,15 @@ implements X509Extension {
      * RFC 3280 recommends that when used, this be marked
      * as a critical extension.
      *
+     * <p>
+     *  获取表示{@code KeyUsage}扩展名(OID = 2.5.29.15)的位的布尔数组。密钥使用扩展定义证书中包含的密钥的目的(例如,加密,签名,证书签名)。对此的ASN.1定义是：
+     * <pre>
+     *  KeyUsage :: = BIT STRING {digitalSignature(0),nonRepudiation(1),keyEncipherment(2),dataEncipherment(3),keyAgreement(4),keyCertSign(5),cRLSign(6),encipherOnly(7),decipherOnly )}
+     * 。
+     * </pre>
+     *  RFC 3280建议在使用时将其标记为关键扩展。
+     * 
+     * 
      * @return the KeyUsage extension of this certificate, represented as
      * an array of booleans. The order of KeyUsage values in the array is
      * the same as in the above ASN.1 definition. The array will contain a
@@ -497,6 +705,20 @@ implements X509Extension {
      * and it provides a default implementation. Subclasses
      * should override this method with a correct implementation.
      *
+     * <p>
+     * 获取表示扩展密钥使用扩展的{@code ExtKeyUsageSyntax}字段(OID = 2.5.29.37)的OBJECT标识符的字符串的不可修改列表。
+     * 它指示除了或替代密钥使用扩展字段中指示的基本目的,可以使用经认证的公钥的一个或多个目的。对此的ASN.1定义是：。
+     * <pre>
+     *  ExtKeyUsageSyntax :: = SEQUENCE SIZE(1..MAX)OF KeyPurposeId
+     * 
+     *  KeyPurposeId :: = OBJECT IDENTIFIER
+     * </pre>
+     * 
+     *  主要目的可以由任何需要的组织定义。用于识别关键目的的对象标识符应根据IANA或ITU-T Rec。 X.660 | ISO / IEC / ITU 9834-1。
+     * <p>
+     *  此方法已添加到Java 2平台标准版的1.4版本。为了保持与现有服务提供程序的向后兼容性,此方法不是{@code abstract},它提供了一个默认实现。子类应该使用正确的实现覆盖此方法。
+     * 
+     * 
      * @return the ExtendedKeyUsage extension of this certificate,
      *         as an unmodifiable list of object identifiers represented
      *         as Strings. Returns null if this certificate does not
@@ -528,6 +750,19 @@ implements X509Extension {
      *     pathLenConstraint   INTEGER (0..MAX) OPTIONAL }
      * </pre>
      *
+     * <p>
+     *  从临界{@code BasicConstraints}扩展(OID = 2.5.29.19)获取证书约束路径长度。
+     * <p>
+     * 基本约束扩展标识证书的主题是否是证书颁发机构(CA)以及证书路径可能通过该CA存在多深。
+     * 只有{@code cA}设置为TRUE,{@code pathLenConstraint}字段(见下文)才有意义。在这种情况下,它会在认证路径中提供此证书后面的CA证书的最大数量。
+     * 值为零表示在路径中只能有一个终端实体证书。
+     * <p>
+     *  对此的ASN.1定义是：
+     * <pre>
+     *  BasicConstraints :: = SEQUENCE {cA BOOLEAN DEFAULT FALSE,pathLenConstraint INTEGER(0..MAX)OPTIONAL}。
+     * </pre>
+     * 
+     * 
      * @return the value of {@code pathLenConstraint} if the
      * BasicConstraints extension is present in the certificate and the
      * subject of the certificate is a CA, otherwise -1.
@@ -595,6 +830,33 @@ implements X509Extension {
      * and it provides a default implementation. Subclasses
      * should override this method with a correct implementation.
      *
+     * <p>
+     *  从{@code SubjectAltName}扩展名(OID = 2.5.29.17)获取主题备用名称的不可变集合。
+     * <p>
+     *  {@code SubjectAltName}扩展的ASN.1定义是：
+     * <pre>
+     *  SubjectAltName :: = GeneralNames
+     * 
+     *  GeneralName：= GeneralName的SEQUENCE SIZE(1..MAX)
+     * 
+     *  GeneralName :: = CHOICE {otherName [0] OtherName,rfc822Name [1] IA5String,dNSName [2] IA5String,x400Address [3] ORAddress,directoryName [4] Name,ediPartyName [5] EDIPartyName,uniformResourceIdentifier [6] IA5String,iPAddress [ 。
+     * </pre>
+     * <p>
+     * 如果此证书不包含{@code SubjectAltName}扩展名,则返回{@code null}。
+     * 否则,会返回一个{@code Collection},其中包含代表扩展程序中包含的每个{@code GeneralName}的条目。
+     * 每个条目是{@code List},其第一个条目是{@code Integer}(名称类型,0-8),其第二个条目是{@code String}或字节数组(名称,字符串或ASN.1 DER编码形式)。
+     * <p>
+     *  <a href="http://www.ietf.org/rfc/rfc822.txt"> RFC 822 </a>,DNS和URI名称将作为{@code String}返回,使用完备的字符串这些类型
+     * 的格式(受RFC 3280中包含的限制)。
+     *  IPv4地址名称使用点分四进制符号返回。 IPv6地址名称以"a1：a2：...：a8"的形式返回,其中a1-a8是表示该8个16位地址的十六进制值。
+     *  OID名称作为{@code String}返回,表示为以句点分隔的一系列非负整数。
+     * 目录名称(专有名称)以<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>字符串格式返回。
+     * 没有为otherNames,X.400名称,EDI方名称或任何其他类型的名称定义标准字符串格式。它们作为包含名称的ASN.1 DER编码形式的字节数组返回。
+     * <p>
+     * 请注意,返回的{@code Collection}可能包含多个相同类型的名称。另外,注意返回的{@code Collection}是不可变的,并且包含字节数组的任何条目都被克隆以防止后续修改。
+     * <p>
+     *  此方法已添加到Java 2平台标准版的1.4版本。为了保持与现有服务提供程序的向后兼容性,此方法不是{@code abstract},它提供了一个默认实现。子类应该使用正确的实现覆盖此方法。
+     * 
      * @return an immutable {@code Collection} of subject alternative
      * names (or {@code null})
      * @throws CertificateParsingException if the extension cannot be decoded
@@ -637,6 +899,9 @@ implements X509Extension {
      * and it provides a default implementation. Subclasses
      * should override this method with a correct implementation.
      *
+     * <p>
+     * 
+     * 
      * @return an immutable {@code Collection} of issuer alternative
      * names (or {@code null})
      * @throws CertificateParsingException if the extension cannot be decoded
@@ -659,6 +924,19 @@ implements X509Extension {
      * service providers, this method is not {@code abstract}
      * and it provides a default implementation.
      *
+     * <p>
+     *  从{@code IssuerAltName}扩展程序(OID = 2.5.29.18)获取不可变的发布者替代名称集合。
+     * <p>
+     *  {@code IssuerAltName}扩展的ASN.1定义是：
+     * <pre>
+     *  IssuerAltName :: = GeneralNames
+     * </pre>
+     *  {@code GeneralNames}的ASN.1定义在{@link #getSubjectAlternativeNames getSubjectAlternativeNames}中定义。
+     * <p>
+     *  如果此证书不包含{@code IssuerAltName}扩展,则返回{@code null}。
+     * 否则,会返回一个{@code Collection},其中包含代表扩展程序中包含的每个{@code GeneralName}的条目。
+     * 每个条目是{@code List},其第一个条目是{@code Integer}(名称类型,0-8),其第二个条目是{@code String}或字节数组(名称,字符串或ASN.1 DER编码形式)。
+     * 
      * @param key the PublicKey used to carry out the verification.
      * @param sigProvider the signature provider.
      *

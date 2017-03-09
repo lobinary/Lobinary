@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,25 @@ import org.xml.sax.SAXException;
  * nothing bound its class name to <code>org.xml.sax.driver</code> so
  * those configuration mechanisms would see it.</p>
  *
+ * <p>
+ *  用于创建XML阅读器的工厂。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保证</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p>此类包含用于从显式类名创建XML阅读器的静态方法,或基于运行时默认值：</p>
+ * 
+ * <pre>
+ *  try {XMLReader myReader = XMLReaderFactory.createXMLReader(); } catch(SAXException e){System.err.println(e.getMessage()); }
+ * }。
+ * </pre>
+ * 
+ *  <p> <strong>与解析器捆绑的分发的注意事项</strong>：您应该修改无参数<em> createXMLReader </em>的实现,以处理未设置外部配置机制的情况。
+ * 该方法应该尽量在类路径中返回一个解析器,即使没有绑定它的类名称到<code> org.xml.sax.driver </code>,所以这些配置机制会看到它。 p>。
+ * 
+ * 
  * @since SAX 2.0
  * @author David Megginson, David Brownell
  * @version 2.0.1 (sax2r2)
@@ -77,6 +97,11 @@ final public class XMLReaderFactory
      * Private constructor.
      *
      * <p>This constructor prevents the class from being instantiated.</p>
+     * <p>
+     *  私有构造函数。
+     * 
+     *  <p>此构造函数阻止类实例化。</p>
+     * 
      */
     private XMLReaderFactory ()
     {
@@ -124,6 +149,28 @@ final public class XMLReaderFactory
      * environments, with less robust implementations of this method.
      * </p>
      *
+     * <p>
+     *  尝试从系统默认值创建XMLReader。在可以支持它的环境中,XMLReader类的名称是通过按顺序尝试每个选项,并使用成功的第一个选项来确定的：</p> <ul>
+     * 
+     * <li>如果系统属性<code> org.xml.sax.driver </code>有一个值,用作XMLReader类名称。 </li>
+     * 
+     *  <li> JAR"Services API"用于在运行时可用的jarfiles中的<em> META-INF / services / org.xml.sax.driver </em>文件中查找类名。
+     * </li >。
+     * 
+     *  <li>强烈建议您提供默认的XMLReader类名称,该名称只有在以前的选项(此列表中)失败时才会生效。</li>
+     * 
+     *  <li>最后,如果{@link ParserFactory#makeParser()}可以返回系统默认的SAX1解析器,那么该解析器将包装在{@link ParserAdapter}中。
+     *  (这是对SAX1环境的迁移帮助,其中<code> org.xml.sax.parser </code>系统属性通常可用。)</li>。
+     * 
+     * </ul>
+     * 
+     *  <p>在小型嵌入式系统等不能支持灵活性的环境中,可以使用其他机制来确定默认值。 </p>
+     * 
+     *  <p>请注意,许多Java环境允许在命令行上初始化系统属性。这意味着<em>在大多数情况下</em>为该属性设置好的值可确保对此方法的调用将成功,除非安全策略干预。
+     * 这也将最大程度地提高应用程序对旧的SAX环境的可移植性,而这种方法的稳健性较低。
+     * </p>
+     * 
+     * 
      * @return A new XMLReader.
      * @exception org.xml.sax.SAXException If no default XMLReader class
      *            can be identified and instantiated.
@@ -210,6 +257,23 @@ final public class XMLReaderFactory
      * the caller (perhaps an applet) is not permitted to load classes
      * dynamically.</p>
      *
+     * <p>
+     *  // 2.如果失败,请尝试META-INF / services / if(className == null){if(！_jarread){_jarread = true; String service ="META-INF / services /"+ property; InputStream in; BufferedReader阅读器;。
+     * 
+     * try {if(cl！= null){in = ss.getResourceAsStream(cl,service);
+     * 
+     *  //如果没有提供者,那么尝试当前的ClassLoader if(in == null){cl = null; in = ss.getResourceAsStream(cl,service); }} e
+     * lse {//没有上下文ClassLoader,尝试当前的ClassLoader在= ss.getResourceAsStream(cl,service); }}。
+     * 
+     *  if(in！= null){reader = new BufferedReader(new InputStreamReader(in,"UTF8")); _clsFromJar = reader.readLine(); in.close(); }
+     * } catch(Exception e){}} className = _clsFromJar; }}。
+     * 
+     *  // 3.特定于发送的回退if(className == null){// BEGIN DISTRIBUTION-SPECIFIC
+     * 
+     *  // EXAMPLE：// className ="com.example.sax.XmlReader"; //或$ JAVA_HOME / jre / lib / *属性设置... classNam
+     * e ="com.sun.org.apache.xerces.internal.parsers.SAXParser";。
+     * 
+     * 
      * @return A new XML reader.
      * @exception org.xml.sax.SAXException If the class cannot be
      *            loaded, instantiated, and cast to XMLReader.

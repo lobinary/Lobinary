@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,29 @@ import javax.accessibility.*;
  * <code>addActionListener</code> method. The application can
  * make use of the button's action command as a messaging protocol.
  *
+ * <p>
+ *  此类创建一个带标签的按钮。应用程序可能会导致在按下按钮时发生一些操作。此图像描述了在Solaris操作系统下出现的"<code> Quit </code>"按钮的三个视图：
+ * <p>
+ *  <img src ="doc-files / Button-1.gif"alt ="以下上下文描述了图形"
+ * style="float:center; margin: 7px 10px;">
+ * <p>
+ *  第一个视图显示正常显示的按钮。第二个视图显示具有输入焦点的按钮。它的轮廓变暗,让用户知道它是一个活动对象。第三视图示出当用户将鼠标点击在按钮上时的按钮,并且因此请求执行动作。
+ * <p>
+ *  用鼠标点击按钮的手势与<code> ActionEvent </code>的一个实例相关联,当鼠标被按下并通过按钮释放时,它发出。
+ * 如果应用程序有兴趣知道按钮何时被按下但没有释放,作为单独的手势,它可以专门化<code> processMouseEvent </code>,或者它可以通过调用<code>注册自己作为鼠标事件的监听器,
+ *  addMouseListener </code>。
+ *  用鼠标点击按钮的手势与<code> ActionEvent </code>的一个实例相关联,当鼠标被按下并通过按钮释放时,它发出。
+ * 这两种方法都由<code> Component </code>定义,它是所有组件的抽象超类。
+ * <p>
+ * 当按下并释放按钮时,AWT通过在按钮上调用<code> processEvent </code>向该按钮发送<code> ActionEvent </code>的实例。
+ * 按钮的<code> processEvent </code>方法接收按钮的所有事件;它通过调用自己的<code> processActionEvent </code>方法传递一个动作事件。
+ * 后一种方法将动作事件传递给已经注册了对该按钮生成的动作事件感兴趣的任何动作侦听器。
+ * <p>
+ *  如果应用程序想要基于按钮被按下和释放来执行一些动作,则应该实现<code> ActionListener </code>并注册新的监听器以从该按钮接收事件,方法是调用按钮的<code> addActi
+ * onListener <代码>方法。
+ * 应用程序可以使用按钮的动作命令作为消息传递协议。
+ * 
+ * 
  * @author      Sami Shaio
  * @see         java.awt.event.ActionEvent
  * @see         java.awt.event.ActionListener
@@ -88,6 +112,10 @@ public class Button extends Component implements Accessible {
 
     /**
      * The button's label.  This value may be null.
+     * <p>
+     *  按钮的标签。此值可以为null。
+     * 
+     * 
      * @serial
      * @see #getLabel()
      * @see #setLabel(String)
@@ -97,6 +125,10 @@ public class Button extends Component implements Accessible {
     /**
      * The action to be performed once a button has been
      * pressed.  This value may be null.
+     * <p>
+     *  按下按钮后执行的操作。此值可以为null。
+     * 
+     * 
      * @serial
      * @see #getActionCommand()
      * @see #setActionCommand(String)
@@ -110,6 +142,9 @@ public class Button extends Component implements Accessible {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -8774683716313001058L;
 
@@ -125,12 +160,19 @@ public class Button extends Component implements Accessible {
     /**
      * Initialize JNI field and method IDs for fields that may be
      * accessed from C.
+     * <p>
+     *  初始化可从C访问的字段的JNI字段和方法ID。
+     * 
      */
     private static native void initIDs();
 
     /**
      * Constructs a button with an empty string for its label.
      *
+     * <p>
+     *  构造一个带有一个空字符串作为其标签的按钮。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -142,6 +184,10 @@ public class Button extends Component implements Accessible {
     /**
      * Constructs a button with the specified label.
      *
+     * <p>
+     *  构造具有指定标签的按钮。
+     * 
+     * 
      * @param label  a string label for the button, or
      *               <code>null</code> for no label
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -156,6 +202,9 @@ public class Button extends Component implements Accessible {
     /**
      * Construct a name for this component.  Called by getName() when the
      * name is null.
+     * <p>
+     *  构造此组件的名称。当名称为null时由getName()调用。
+     * 
      */
     String constructComponentName() {
         synchronized (Button.class) {
@@ -168,6 +217,10 @@ public class Button extends Component implements Accessible {
      * application to change the look of the button without changing
      * its functionality.
      *
+     * <p>
+     *  创建按钮的对等体。按钮的对等体允许应用程序改变按钮的外观,而不改变其功能。
+     * 
+     * 
      * @see     java.awt.Toolkit#createButton(java.awt.Button)
      * @see     java.awt.Component#getToolkit()
      */
@@ -182,6 +235,10 @@ public class Button extends Component implements Accessible {
     /**
      * Gets the label of this button.
      *
+     * <p>
+     *  获取此按钮的标签。
+     * 
+     * 
      * @return    the button's label, or <code>null</code>
      *                if the button has no label.
      * @see       java.awt.Button#setLabel
@@ -193,6 +250,10 @@ public class Button extends Component implements Accessible {
     /**
      * Sets the button's label to be the specified string.
      *
+     * <p>
+     *  将按钮的标签设置为指定的字符串。
+     * 
+     * 
      * @param     label   the new label, or <code>null</code>
      *                if the button has no label.
      * @see       java.awt.Button#getLabel
@@ -223,6 +284,10 @@ public class Button extends Component implements Accessible {
      * by this button. By default this action command is
      * set to match the label of the button.
      *
+     * <p>
+     * 设置此按钮触发的操作事件的命令名称。默认情况下,此操作命令设置为与按钮的标签匹配。
+     * 
+     * 
      * @param     command  a string used to set the button's
      *                  action command.
      *            If the string is <code>null</code> then the action command
@@ -238,6 +303,9 @@ public class Button extends Component implements Accessible {
      * Returns the command name of the action event fired by this button.
      * If the command name is <code>null</code> (default) then this method
      * returns the label of the button.
+     * <p>
+     *  返回此按钮触发的操作事件的命令名称。如果命令名为<code> null </code>(默认),则此方法返回按钮的标签。
+     * 
      */
     public String getActionCommand() {
         return (actionCommand == null? label : actionCommand);
@@ -251,6 +319,11 @@ public class Button extends Component implements Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的操作侦听器以从此按钮接收操作事件。当用户在该按钮上按下或释放鼠标时,操作事件发生。如果l为null,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param         l the action listener
      * @see           #removeActionListener
      * @see           #getActionListeners
@@ -273,6 +346,11 @@ public class Button extends Component implements Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的操作侦听器,以使其不再从此按钮接收操作事件。当用户在该按钮上按下或释放鼠标时,操作事件发生。如果l为null,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param           l     the action listener
      * @see             #addActionListener
      * @see             #getActionListeners
@@ -290,6 +368,10 @@ public class Button extends Component implements Accessible {
      * Returns an array of all the action listeners
      * registered on this button.
      *
+     * <p>
+     *  返回在此按钮上注册的所有操作侦听器的数组。
+     * 
+     * 
      * @return all of this button's <code>ActionListener</code>s
      *         or an empty array if no action
      *         listeners are currently registered
@@ -322,6 +404,19 @@ public class Button extends Component implements Accessible {
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此<code> Button </code>上注册为<code> <em> Foo </em> Listener </code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * 
+     * <p>
+     * 您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询<code> Button </code> <code> b </code>的操作侦听器：。
+     * 
+     *  <pre> ActionListener [] als =(ActionListener [])(b.getListeners(ActionListener.class)); </pre>
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -367,6 +462,11 @@ public class Button extends Component implements Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  在此按钮上处理事件。如果事件是<code> ActionEvent </code>的实例,则此方法调用<code> processActionEvent </code>方法。
+     * 否则,它在超类上调用<code> processEvent </code>。 <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param        e the event
      * @see          java.awt.event.ActionEvent
      * @see          java.awt.Button#processActionEvent
@@ -397,6 +497,17 @@ public class Button extends Component implements Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将它们分发到任何注册的<code> ActionListener </code>对象来处理在此按钮上发生的操作事件。
+     * <p>
+     *  除非为此按钮启用了操作事件,否则不会调用此方法。当发生以下情况之一时,将启用操作事件：
+     * <ul>
+     *  <li> <code> ActionListener </code>对象通过<code> addActionListener </code>注册。
+     *  <li>操作事件通过<code> enableEvents </code>启用。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the action event
      * @see         java.awt.event.ActionListener
      * @see         java.awt.Button#addActionListener
@@ -417,6 +528,11 @@ public class Button extends Component implements Accessible {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     * 返回一个表示此<code> Button </code>的状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return     the parameter string of this button
      */
     protected String paramString() {
@@ -425,10 +541,15 @@ public class Button extends Component implements Accessible {
 
 
     /* Serialization support.
+    /* <p>
      */
 
     /*
      * Button Serial Data Version.
+     * <p>
+     *  按钮序列数据版本。
+     * 
+     * 
      * @serial
      */
     private int buttonSerializedDataVersion = 1;
@@ -440,6 +561,11 @@ public class Button extends Component implements Accessible {
      * <code>ActionListeners</code> are detected and
      * no attempt is made to serialize them.
      *
+     * <p>
+     *  将缺省可序列化字段写入流。将可序列化<code> ActionListeners </code>的列表写为可选数据。
+     * 检测到不可序列化的<code> ActionListeners </code>,并且不尝试将它们序列化。
+     * 
+     * 
      * @serialData <code>null</code> terminated sequence of 0 or
      *   more pairs: the pair consists of a <code>String</code>
      *   and an <code>Object</code>; the <code>String</code>
@@ -467,6 +593,10 @@ public class Button extends Component implements Accessible {
      * receive action events fired by the button.
      * Unrecognized keys or values will be ignored.
      *
+     * <p>
+     *  读取<code> ObjectInputStream </code>,如果不是<code> null </code>添加一个监听器来接收按钮触发的动作事件。无法识别的键或值将被忽略。
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      * @exception HeadlessException if
      *   <code>GraphicsEnvironment.isHeadless</code> returns
@@ -508,6 +638,12 @@ public class Button extends Component implements Accessible {
      * A new <code>AccessibleAWTButton</code> instance is
      * created if necessary.
      *
+     * <p>
+     *  获取与此<code> Button </code>关联的<code> AccessibleContext </code>。
+     * 对于按钮,<code> AccessibleContext </code>采用<code> AccessibleAWTButton </code>的形式。
+     * 如有必要,将创建一个新的<code> AccessibleAWTButton </code>实例。
+     * 
+     * 
      * @return an <code>AccessibleAWTButton</code> that serves as the
      *         <code>AccessibleContext</code> of this <code>Button</code>
      * @beaninfo
@@ -526,6 +662,10 @@ public class Button extends Component implements Accessible {
      * This class implements accessibility support for the
      * <code>Button</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to button user-interface elements.
+     * <p>
+     *  此类实现<code> Button </code>类的辅助功能支持。它提供了适用于按钮用户界面元素的Java辅助功能API的实现。
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTButton extends AccessibleAWTComponent
@@ -533,12 +673,19 @@ public class Button extends Component implements Accessible {
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 1.3 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -5932203980244017102L;
 
         /**
          * Get the accessible name of this object.
          *
+         * <p>
+         *  获取此对象的可访问名称。
+         * 
+         * 
          * @return the localized name of the object -- can be null if this
          * object does not have a name
          */
@@ -560,6 +707,10 @@ public class Button extends Component implements Accessible {
          * return this object, which is responsible for implementing the
          * AccessibleAction interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleAction。在为该类实现Java辅助功能API时,返回此对象,该对象负责代表自身实现AccessibleAction接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleAction getAccessibleAction() {
@@ -572,6 +723,10 @@ public class Button extends Component implements Accessible {
          * return this object, which is responsible for implementing the
          * AccessibleValue interface on behalf of itself.
          *
+         * <p>
+         * 获取与此对象关联的AccessibleValue。在为该类实现Java Accessibility API时,返回此对象,该对象负责代表自身实现AccessibleValue接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleValue getAccessibleValue() {
@@ -583,6 +738,10 @@ public class Button extends Component implements Accessible {
          * default behavior of a button is to have one action - toggle
          * the button.
          *
+         * <p>
+         *  返回此对象中可用的操作数。按钮的默认行为是具有一个动作 - 切换按钮。
+         * 
+         * 
          * @return 1, the number of Actions in this object
          */
         public int getAccessibleActionCount() {
@@ -592,6 +751,10 @@ public class Button extends Component implements Accessible {
         /**
          * Return a description of the specified action of the object.
          *
+         * <p>
+         *  返回对象的指定操作的描述。
+         * 
+         * 
          * @param i zero-based index of the actions
          */
         public String getAccessibleActionDescription(int i) {
@@ -606,6 +769,10 @@ public class Button extends Component implements Accessible {
         /**
          * Perform the specified Action on the object
          *
+         * <p>
+         *  对对象执行指定的Action
+         * 
+         * 
          * @param i zero-based index of actions
          * @return true if the the action was performed; else false.
          */
@@ -625,6 +792,10 @@ public class Button extends Component implements Accessible {
         /**
          * Get the value of this object as a Number.
          *
+         * <p>
+         *  将此对象的值作为数字获取。
+         * 
+         * 
          * @return An Integer of 0 if this isn't selected or an Integer of 1 if
          * this is selected.
          * @see javax.swing.AbstractButton#isSelected()
@@ -636,6 +807,10 @@ public class Button extends Component implements Accessible {
         /**
          * Set the value of this object as a Number.
          *
+         * <p>
+         *  将此对象的值设置为Number。
+         * 
+         * 
          * @return True if the value was set.
          */
         public boolean setCurrentAccessibleValue(Number n) {
@@ -645,6 +820,10 @@ public class Button extends Component implements Accessible {
         /**
          * Get the minimum value of this object as a Number.
          *
+         * <p>
+         *  获取此对象的最小值作为数字。
+         * 
+         * 
          * @return An Integer of 0.
          */
         public Number getMinimumAccessibleValue() {
@@ -654,6 +833,10 @@ public class Button extends Component implements Accessible {
         /**
          * Get the maximum value of this object as a Number.
          *
+         * <p>
+         *  获取此对象的最大值作为数字。
+         * 
+         * 
          * @return An Integer of 0.
          */
         public Number getMaximumAccessibleValue() {
@@ -663,6 +846,9 @@ public class Button extends Component implements Accessible {
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole

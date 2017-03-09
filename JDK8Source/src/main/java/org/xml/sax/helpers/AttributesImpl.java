@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,29 @@ import org.xml.sax.Attributes;
  * AttributeList} interface, it also includes a much more efficient
  * implementation using a single array rather than a set of Vectors.</p>
  *
+ * <p>
+ *  属性接口的默认实现。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保证</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p>此类提供了SAX2 {@link org.xml.sax.Attributes Attributes}接口的默认实现,添加了操纵器,以便可以修改或重用列表。</p>
+ * 
+ *  <p>这个类有两种典型用法：</p>
+ * 
+ * <ol>
+ *  <li>在{@link org.xml.sax.ContentHandler#startElement startElement}事件中获取一个Attributes对象的持久性快照;或</li> <li>
+ * 在SAX2驱动程序或过滤器中构造或修改Attributes对象。
+ * </li>。
+ * </ol>
+ * 
+ *  <p>此类替换现在已弃用的SAX1 {@link org.xml.sax.helpers.AttributeListImpl AttributeListImpl}类;除了支持更新的Attributes
+ * 接口,而不是支持弃用的{@link org.xml.sax.AttributeList AttributeList}接口,它还包括使用单个数组而不是一组Vectors的更高效的实现。
+ * </p>。
+ * 
+ * 
  * @since SAX 2.0
  * @author David Megginson
  */
@@ -78,6 +102,9 @@ public class AttributesImpl implements Attributes
 
     /**
      * Construct a new, empty AttributesImpl object.
+     * <p>
+     *  构造一个新的,空的AttributesImpl对象。
+     * 
      */
     public AttributesImpl ()
     {
@@ -92,6 +119,12 @@ public class AttributesImpl implements Attributes
      * <p>This constructor is especially useful inside a
      * {@link org.xml.sax.ContentHandler#startElement startElement} event.</p>
      *
+     * <p>
+     *  复制现有的Attributes对象。
+     * 
+     *  <p>此构造函数在{@link org.xml.sax.ContentHandler#startElement startElement}事件中特别有用。</p>
+     * 
+     * 
      * @param atts The existing Attributes object.
      */
     public AttributesImpl (Attributes atts)
@@ -109,6 +142,10 @@ public class AttributesImpl implements Attributes
     /**
      * Return the number of attributes in the list.
      *
+     * <p>
+     * 返回列表中的属性数。
+     * 
+     * 
      * @return The number of attributes in the list.
      * @see org.xml.sax.Attributes#getLength
      */
@@ -121,6 +158,10 @@ public class AttributesImpl implements Attributes
     /**
      * Return an attribute's Namespace URI.
      *
+     * <p>
+     *  返回属性的命名空间URI。
+     * 
+     * 
      * @param index The attribute's index (zero-based).
      * @return The Namespace URI, the empty string if none is
      *         available, or null if the index is out of range.
@@ -139,6 +180,10 @@ public class AttributesImpl implements Attributes
     /**
      * Return an attribute's local name.
      *
+     * <p>
+     *  返回属性的本地名称。
+     * 
+     * 
      * @param index The attribute's index (zero-based).
      * @return The attribute's local name, the empty string if
      *         none is available, or null if the index if out of range.
@@ -157,6 +202,10 @@ public class AttributesImpl implements Attributes
     /**
      * Return an attribute's qualified (prefixed) name.
      *
+     * <p>
+     *  返回属性的限定(前缀)名称。
+     * 
+     * 
      * @param index The attribute's index (zero-based).
      * @return The attribute's qualified name, the empty string if
      *         none is available, or null if the index is out of bounds.
@@ -175,6 +224,10 @@ public class AttributesImpl implements Attributes
     /**
      * Return an attribute's type by index.
      *
+     * <p>
+     *  按索引返回属性的类型。
+     * 
+     * 
      * @param index The attribute's index (zero-based).
      * @return The attribute's type, "CDATA" if the type is unknown, or null
      *         if the index is out of bounds.
@@ -193,6 +246,10 @@ public class AttributesImpl implements Attributes
     /**
      * Return an attribute's value by index.
      *
+     * <p>
+     *  按索引返回属性的值。
+     * 
+     * 
      * @param index The attribute's index (zero-based).
      * @return The attribute's value or null if the index is out of bounds.
      * @see org.xml.sax.Attributes#getValue(int)
@@ -214,6 +271,12 @@ public class AttributesImpl implements Attributes
      * use the index query methods rather than using the name query methods
      * repeatedly.</p>
      *
+     * <p>
+     *  按名称空间名称查找属性的索引。
+     * 
+     *  <p>在许多情况下,查找名称一次并使用索引查询方法而不是重复使用名称查询方法会更有效。</p>
+     * 
+     * 
      * @param uri The attribute's Namespace URI, or the empty
      *        string if none is available.
      * @param localName The attribute's local name.
@@ -235,6 +298,10 @@ public class AttributesImpl implements Attributes
     /**
      * Look up an attribute's index by qualified (prefixed) name.
      *
+     * <p>
+     *  通过限定(前缀)名称查找属性的索引。
+     * 
+     * 
      * @param qName The qualified name.
      * @return The attribute's index, or -1 if none matches.
      * @see org.xml.sax.Attributes#getIndex(java.lang.String)
@@ -254,6 +321,10 @@ public class AttributesImpl implements Attributes
     /**
      * Look up an attribute's type by Namespace-qualified name.
      *
+     * <p>
+     *  按命名空间限定名称查找属性的类型。
+     * 
+     * 
      * @param uri The Namespace URI, or the empty string for a name
      *        with no explicit Namespace URI.
      * @param localName The local name.
@@ -276,6 +347,10 @@ public class AttributesImpl implements Attributes
     /**
      * Look up an attribute's type by qualified (prefixed) name.
      *
+     * <p>
+     *  通过限定(前缀)名称查找属性的类型。
+     * 
+     * 
      * @param qName The qualified name.
      * @return The attribute's type, or null if there is no
      *         matching attribute.
@@ -296,6 +371,10 @@ public class AttributesImpl implements Attributes
     /**
      * Look up an attribute's value by Namespace-qualified name.
      *
+     * <p>
+     *  按名称空间限定名称查找属性的值。
+     * 
+     * 
      * @param uri The Namespace URI, or the empty string for a name
      *        with no explicit Namespace URI.
      * @param localName The local name.
@@ -318,6 +397,10 @@ public class AttributesImpl implements Attributes
     /**
      * Look up an attribute's value by qualified (prefixed) name.
      *
+     * <p>
+     *  通过限定(前缀)名称查找属性的值。
+     * 
+     * 
      * @param qName The qualified name.
      * @return The attribute's value, or null if there is no
      *         matching attribute.
@@ -347,6 +430,11 @@ public class AttributesImpl implements Attributes
      * <p>Note that little memory is freed by this call:
      * the current array is kept so it can be
      * reused.</p>
+     * <p>
+     *  清除属性列表以便重复使用。
+     * 
+     *  <p>请注意,此调用释放了很少的内存：当前数组被保留,以便可以重用。</p>
+     * 
      */
     public void clear ()
     {
@@ -364,6 +452,12 @@ public class AttributesImpl implements Attributes
      * <p>It may be more efficient to reuse an existing object
      * rather than constantly allocating new ones.</p>
      *
+     * <p>
+     *  复制整个Attributes对象。
+     * 
+     *  <p>重用现有对象而不是不断分配新对象可能更有效。</p>
+     * 
+     * 
      * @param atts The attributes to copy.
      */
     public void setAttributes (Attributes atts)
@@ -390,6 +484,12 @@ public class AttributesImpl implements Attributes
      * to see if the attribute is already in the list: that is
      * the responsibility of the application.</p>
      *
+     * <p>
+     *  将属性添加到列表的末尾。
+     * 
+     *  <p>为了速度,此方法不检查属性是否已在列表中：这是应用程序的职责。</p>
+     * 
+     * 
      * @param uri The Namespace URI, or the empty string if
      *        none is available or Namespace processing is not
      *        being performed.
@@ -420,6 +520,12 @@ public class AttributesImpl implements Attributes
      * for name conflicts or well-formedness: such checks are the
      * responsibility of the application.</p>
      *
+     * <p>
+     *  在列表中设置属性。
+     * 
+     *  <p>为了速度的缘故,此方法不检查名称冲突或良好的结构：这样的检查是应用程序的责任。</p>
+     * 
+     * 
      * @param index The index of the attribute (zero-based).
      * @param uri The Namespace URI, or the empty string if
      *        none is available or Namespace processing is not
@@ -452,6 +558,10 @@ public class AttributesImpl implements Attributes
     /**
      * Remove an attribute from the list.
      *
+     * <p>
+     *  从列表中删除属性。
+     * 
+     * 
      * @param index The index of the attribute (zero-based).
      * @exception java.lang.ArrayIndexOutOfBoundsException When the
      *            supplied index does not point to an attribute
@@ -480,6 +590,10 @@ public class AttributesImpl implements Attributes
     /**
      * Set the Namespace URI of a specific attribute.
      *
+     * <p>
+     *  设置特定属性的命名空间URI。
+     * 
+     * 
      * @param index The index of the attribute (zero-based).
      * @param uri The attribute's Namespace URI, or the empty
      *        string for none.
@@ -500,6 +614,10 @@ public class AttributesImpl implements Attributes
     /**
      * Set the local name of a specific attribute.
      *
+     * <p>
+     * 设置特定属性的本地名称。
+     * 
+     * 
      * @param index The index of the attribute (zero-based).
      * @param localName The attribute's local name, or the empty
      *        string for none.
@@ -520,6 +638,10 @@ public class AttributesImpl implements Attributes
     /**
      * Set the qualified name of a specific attribute.
      *
+     * <p>
+     *  设置特定属性的限定名称。
+     * 
+     * 
      * @param index The index of the attribute (zero-based).
      * @param qName The attribute's qualified name, or the empty
      *        string for none.
@@ -540,6 +662,10 @@ public class AttributesImpl implements Attributes
     /**
      * Set the type of a specific attribute.
      *
+     * <p>
+     *  设置特定属性的类型。
+     * 
+     * 
      * @param index The index of the attribute (zero-based).
      * @param type The attribute's type.
      * @exception java.lang.ArrayIndexOutOfBoundsException When the
@@ -559,6 +685,10 @@ public class AttributesImpl implements Attributes
     /**
      * Set the value of a specific attribute.
      *
+     * <p>
+     *  设置特定属性的值。
+     * 
+     * 
      * @param index The index of the attribute (zero-based).
      * @param value The attribute's value.
      * @exception java.lang.ArrayIndexOutOfBoundsException When the
@@ -584,6 +714,10 @@ public class AttributesImpl implements Attributes
     /**
      * Ensure the internal array's capacity.
      *
+     * <p>
+     *  确保内部阵列的容量。
+     * 
+     * 
      * @param n The minimum number of attributes that the array must
      *        be able to hold.
      */
@@ -616,6 +750,9 @@ public class AttributesImpl implements Attributes
     /**
      * Report a bad array index in a manipulator.
      *
+     * <p>
+     *  在操纵器中报告错误的数组索引。
+     * 
      * @param index The index to report.
      * @exception java.lang.ArrayIndexOutOfBoundsException Always.
      */

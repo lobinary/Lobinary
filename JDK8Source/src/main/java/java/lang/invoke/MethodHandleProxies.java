@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,9 @@ import static java.lang.invoke.MethodHandleStatics.*;
 /**
  * This class consists exclusively of static methods that help adapt
  * method handles to other JVM types, such as interfaces.
+ * <p>
+ *  此类仅由静态方法组成,有助于将方法句柄适配于其他JVM类型,例如接口。
+ * 
  */
 public class MethodHandleProxies {
 
@@ -114,6 +118,32 @@ public class MethodHandleProxies {
      * the original creator of the wrapper (the caller) will be visible
      * to context checks requested by the security manager.
      *
+     * <p>
+     *  生成给定的单一方法接口的实例,它将其调用重定向到给定的方法句柄。
+     * <p>
+     *  单方法接口是声明唯一命名方法的接口。
+     * 当确定单一方法接口的唯一命名方法时,公共的{@code Object}方法({@code toString},{@code equals},{@code hashCode})被忽略。
+     * 例如,{@link java.util.Comparator}是一个单方法接口,即使它重新声明了{@code Object.equals}方法。
+     * <p>
+     *  接口必须是公共的。不执行其他访问检查。
+     * <p>
+     *  所需类型的结果实例将响应调用类型的唯一命名方法,通过调用传入的参数上的给定目标,并返回或抛出任何目标返回或抛出。调用将像{@code target.invoke}一样。
+     * 目标的类型将在创建实例之前检查,就像调用{@code asType}一样,这可能会导致{@code WrongMethodTypeException}。
+     * <p>
+     * 唯一命名的方法允许乘法声明,具有不同的类型描述符。 (例如,它可以被重载,或者可以拥有桥接方法。)所有这样的声明直接连接到目标方法句柄。
+     * 参数和返回类型由{@code asType}为每个单独的声明调整。
+     * <p>
+     *  包装器实例将实现请求的接口及其超类型,但没有其他单方法接口。这意味着该实例不会意外地传递任何未请求类型的{@code instanceof}测试。
+     * <p style="font-size:smaller;">
+     *  <em>实现注意事项：</em>因此,每个实例必须实现唯一的单一方法接口。
+     * 实现不能以{@link java.awt.AWTEventMulticaster}的样式将多个单一方法接口捆绑到单个实现类上。
+     * <p>
+     *  方法句柄可能会抛出一个未声明的异常</em>,这意味着任何未被请求类型的单一抽象方法声明的被检查的异常(或其他被检查的throwable)。
+     * 如果发生这种情况,throwable将被包装在{@link java.lang.reflect.UndeclaredThrowableException UndeclaredThrowableException}
+     * 的一个实例中,并以包装形式抛出。
+     *  方法句柄可能会抛出一个未声明的异常</em>,这意味着任何未被请求类型的单一抽象方法声明的被检查的异常(或其他被检查的throwable)。
+     * <p>
+     * 
      * @param <T> the desired type of the wrapper, a single-method interface
      * @param intfc a class object representing {@code T}
      * @param target the method handle to invoke from the wrapper
@@ -227,6 +257,20 @@ public class MethodHandleProxies {
 
     /**
      * Determines if the given object was produced by a call to {@link #asInterfaceInstance asInterfaceInstance}.
+     * <p>
+     *  像{@link java.lang.Integer#valueOf Integer.valueOf},{@code asInterfaceInstance}是一个工厂方法,其结果由其行为定义。
+     * 它不能保证为每个调用返回一个新的实例。
+     * <p>
+     * 由于{@linkplain java.lang.reflect.Method#isBridge bridge methods}和其他角落情况的可能性,接口也可能有几个具有相同名称但具有不同描述符(返回类
+     * 型和参数)的抽象方法。
+     * 在这种情况下,所有的方法都被共同绑定到一个给定的目标。类型检查和有效的{@code asType}转换应用于每个方法类型描述符,并且所有抽象方法都与目标绑定。
+     * 除此类型检查之外,不进行进一步检查以确定抽象方法以任何方式相关。
+     * <p>
+     *  此API的未来版本可以接受其他类型,例如具有单个抽象方法的抽象类。此API的未来版本还可以为包装器实例提供一个或多个附加的公共"标记"接口。
+     * <p>
+     *  如果安装了安全管理器,则此方法对呼叫者敏感。在通过返回的包装器调用目标方法句柄期间,包装器(调用者)的原始创建者对于安全管理器请求的上下文检查是可见的。
+     * 
+     * 
      * @param x any reference
      * @return true if the reference is not null and points to an object produced by {@code asInterfaceInstance}
      */
@@ -249,6 +293,8 @@ public class MethodHandleProxies {
      * equivalent to the unique method of this wrapper instance.
      * The object {@code x} must have been produced by a call to {@link #asInterfaceInstance asInterfaceInstance}.
      * This requirement may be tested via {@link #isWrapperInstance isWrapperInstance}.
+     * <p>
+     * 
      * @param x any reference
      * @return a method handle implementing the unique method
      * @throws IllegalArgumentException if the reference x is not to a wrapper instance
@@ -262,6 +308,10 @@ public class MethodHandleProxies {
      * Recovers the unique single-method interface type for which this wrapper instance was created.
      * The object {@code x} must have been produced by a call to {@link #asInterfaceInstance asInterfaceInstance}.
      * This requirement may be tested via {@link #isWrapperInstance isWrapperInstance}.
+     * <p>
+     *  确定给定对象是否由调用{@link #asInterfaceInstance asInterfaceInstance}生成​​。
+     * 
+     * 
      * @param x any reference
      * @return the single-method interface type for which the wrapper was created
      * @throws IllegalArgumentException if the reference x is not to a wrapper instance

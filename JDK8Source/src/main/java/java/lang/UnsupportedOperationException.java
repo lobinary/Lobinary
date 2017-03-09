@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,12 +33,23 @@ package java.lang;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  抛出以表示不支持请求的操作。<p>
+ * 
+ *  这个类是成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @author  Josh Bloch
  * @since   1.2
  */
 public class UnsupportedOperationException extends RuntimeException {
     /**
      * Constructs an UnsupportedOperationException with no detail message.
+     * <p>
+     *  构造不带详细消息的UnsupportedOperationException。
+     * 
      */
     public UnsupportedOperationException() {
     }
@@ -46,6 +58,10 @@ public class UnsupportedOperationException extends RuntimeException {
      * Constructs an UnsupportedOperationException with the specified
      * detail message.
      *
+     * <p>
+     *  使用指定的详细消息构造UnsupportedOperationException。
+     * 
+     * 
      * @param message the detail message
      */
     public UnsupportedOperationException(String message) {
@@ -60,6 +76,12 @@ public class UnsupportedOperationException extends RuntimeException {
      * <i>not</i> automatically incorporated in this exception's detail
      * message.
      *
+     * <p>
+     *  构造具有指定的详细消息和原因的新异常。
+     * 
+     *  <p>请注意,与<code> cause </code>关联的详细信息</i>不会自动并入此例外的详细信息中。
+     * 
+     * 
      * @param  message the detail message (which is saved for later retrieval
      *         by the {@link Throwable#getMessage()} method).
      * @param  cause the cause (which is saved for later retrieval by the
@@ -80,6 +102,8 @@ public class UnsupportedOperationException extends RuntimeException {
      * wrappers for other throwables (for example, {@link
      * java.security.PrivilegedActionException}).
      *
+     * <p>
+     * 
      * @param  cause the cause (which is saved for later retrieval by the
      *         {@link Throwable#getCause()} method).  (A <tt>null</tt> value is
      *         permitted, and indicates that the cause is nonexistent or

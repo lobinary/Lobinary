@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.atomic;
@@ -43,6 +47,12 @@ package java.util.concurrent.atomic;
  * references by creating internal objects representing "boxed"
  * [reference, boolean] pairs.
  *
+ * <p>
+ *  {@code AtomicMarkableReference}维护一个对象引用以及一个可以原子更新的标记位。
+ * 
+ *  <p>实现注意事项：此实现通过创建表示"boxed"[引用,布尔]对的内部对象来维护可标记引用。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  * @param <V> The type of object referred to by this reference
@@ -67,6 +77,10 @@ public class AtomicMarkableReference<V> {
      * Creates a new {@code AtomicMarkableReference} with the given
      * initial values.
      *
+     * <p>
+     *  使用给定的初始值创建新的{@code AtomicMarkableReference}。
+     * 
+     * 
      * @param initialRef the initial reference
      * @param initialMark the initial mark
      */
@@ -77,6 +91,10 @@ public class AtomicMarkableReference<V> {
     /**
      * Returns the current value of the reference.
      *
+     * <p>
+     *  返回引用的当前值。
+     * 
+     * 
      * @return the current value of the reference
      */
     public V getReference() {
@@ -86,6 +104,10 @@ public class AtomicMarkableReference<V> {
     /**
      * Returns the current value of the mark.
      *
+     * <p>
+     *  返回标记的当前值。
+     * 
+     * 
      * @return the current value of the mark
      */
     public boolean isMarked() {
@@ -96,6 +118,10 @@ public class AtomicMarkableReference<V> {
      * Returns the current values of both the reference and the mark.
      * Typical usage is {@code boolean[1] holder; ref = v.get(holder); }.
      *
+     * <p>
+     *  返回参考和标记的当前值。典型用法是{@code boolean [1] holder; ref = v.get(holder); }。
+     * 
+     * 
      * @param markHolder an array of size of at least one. On return,
      * {@code markholder[0]} will hold the value of the mark.
      * @return the current value of the reference
@@ -116,6 +142,13 @@ public class AtomicMarkableReference<V> {
      * spuriously and does not provide ordering guarantees</a>, so is
      * only rarely an appropriate alternative to {@code compareAndSet}.
      *
+     * <p>
+     *  如果当前引用是{@code ==}到期望的引用,并且当前标记等于预期标记,则将引用和标记的值原子地设置为给定的更新值。
+     * 
+     *  <p> <a href="package-summary.html#weakCompareAndSet">可能会失败,并且不提供排序保证</a>,因此很少是{@code compareAndSet}的
+     * 适当替代品。
+     * 
+     * 
      * @param expectedReference the expected value of the reference
      * @param newReference the new value for the reference
      * @param expectedMark the expected value of the mark
@@ -136,6 +169,10 @@ public class AtomicMarkableReference<V> {
      * current reference is {@code ==} to the expected reference
      * and the current mark is equal to the expected mark.
      *
+     * <p>
+     *  如果当前引用是{@code ==}到期望的引用,并且当前标记等于预期标记,则将引用和标记的值原子地设置为给定的更新值。
+     * 
+     * 
      * @param expectedReference the expected value of the reference
      * @param newReference the new value for the reference
      * @param expectedMark the expected value of the mark
@@ -158,6 +195,10 @@ public class AtomicMarkableReference<V> {
     /**
      * Unconditionally sets the value of both the reference and mark.
      *
+     * <p>
+     *  无条件设置引用和标记的值。
+     * 
+     * 
      * @param newReference the new value for the reference
      * @param newMark the new value for the mark
      */
@@ -176,6 +217,10 @@ public class AtomicMarkableReference<V> {
      * thread is also attempting to set the value will eventually
      * succeed.
      *
+     * <p>
+     * 如果当前引用是{@code ==}到期望的引用,则以原子方式将标记的值设置为给定的更新值。
+     * 该操作的任何给定的调用可能失败(返回{@code false}),但是当当前值保持期望值时重复调用,并且没有其他线程也试图设置该值将最终成功。
+     * 
      * @param expectedReference the expected value of the reference
      * @param newMark the new value for the mark
      * @return {@code true} if successful

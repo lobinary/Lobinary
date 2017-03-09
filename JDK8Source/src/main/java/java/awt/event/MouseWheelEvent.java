@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -90,6 +91,37 @@ import java.lang.annotation.Native;
  * mouse wheel events more precisely, and thus, making visual perception
  * smoother.
  *
+ * <p>
+ *  指示鼠标滚轮在组件中旋转的事件。
+ * <P>
+ *  轮鼠标是具有轮代替中间按钮的鼠标。该轮可以朝向或远离用户旋转。鼠标滚轮最常用于滚动,虽然其他用途是可能的。
+ * <P>
+ *  MouseWheelEvent对象被传递到每个使用组件的<code> addMouseWheelListener </code>方法注册接收"有趣"鼠标事件的每个<code> MouseWheelLi
+ * stener </code>对象。
+ * 每个这样的监听器对象获取一个包含鼠标事件的<code> MouseEvent </code>。
+ * <P>
+ *  由于鼠标滚轮与滚动组件的特殊关系,MouseWheelEvents与其他MouseEvents有所不同。
+ * 这是因为虽然其他MouseEvents通常影响组件直接在鼠标光标下的更改(例如,当单击按钮),MouseWheelEvents通常有远离鼠标光标的效果(移动滚轮,而在ScrollPane内的组件滚动Sc
+ * rollPane上的滚动条之一)。
+ *  由于鼠标滚轮与滚动组件的特殊关系,MouseWheelEvents与其他MouseEvents有所不同。
+ * <P>
+ * MouseWheelEvents从组件的鼠标光标下方开始传递。如果组件上未启用MouseWheelEvents,则事件将传递到启用了MouseWheelEvents的第一个祖先容器。
+ * 这通常是启用滚轮滚动的ScrollPane。源组件和x,y坐标将相对于事件的最终目的地(ScrollPane)。
+ * 这允许复杂的GUI被安装而不修改到ScrollPane中,并且所有MouseWheelEvents被传递到ScrollPane用于滚动。
+ * <P>
+ *  一些AWT组件是使用本地窗口小部件实现的,它们显示自己的滚动条并处理自己的滚动。这是真实的特定组件将随平台而变化。当鼠标滚轮在其中一个组件上移动时,事件会直接传递到本地窗口小部件,而不会传播到祖先。
+ * <P>
+ *  平台提供定制鼠标滚轮移动时应进行的滚动量。两个最常见的设置是滚动一定数量的"单位"(通常是基于文本的组件中的文本行)或整个"块"(类似于向上翻页/向下翻页)。
+ *  MouseWheelEvent提供了符合底层平台设置的方法。这些平台设置可以随时由用户更改。 MouseWheelEvents反映最近的设置。
+ * <P>
+ * <code> MouseWheelEvent </code>类包括获取鼠标滚轮旋转的"点击"数量的方法。
+ *  {@link #getWheelRotation}方法返回与轮子旋转的刻度数对应的"点击次数"的整数。
+ * 除了此方法,<code> MouseWheelEvent </code>类提供了{@link #getPreciseWheelRotation}方法,该方法在发生部分轮播的情况下返回双倍的"点击次数"。
+ *  {@link #getWheelRotation}方法返回与轮子旋转的刻度数对应的"点击次数"的整数。
+ * 如果鼠标支持高分辨率轮,如{@link #getPreciseWheelRotation}方法可以自由旋转,没有凹口的轮。
+ * 应用程序可以通过使用此方法更精确地处理鼠标滚轮事件,从而使视觉感知更平滑,从中受益。
+ * 
+ * 
  * @author Brent Christian
  * @see MouseWheelListener
  * @see java.awt.ScrollPane
@@ -105,6 +137,10 @@ public class MouseWheelEvent extends MouseEvent {
      * Constant representing scrolling by "units" (like scrolling with the
      * arrow keys)
      *
+     * <p>
+     *  常量表示按"单位"滚动(如使用箭头键滚动)
+     * 
+     * 
      * @see #getScrollType
      */
     @Native public static final int WHEEL_UNIT_SCROLL = 0;
@@ -113,6 +149,10 @@ public class MouseWheelEvent extends MouseEvent {
      * Constant representing scrolling by a "block" (like scrolling
      * with page-up, page-down keys)
      *
+     * <p>
+     *  常量表示通过"块"滚动(例如,使用向上翻页,向下翻页键滚动)
+     * 
+     * 
      * @see #getScrollType
      */
     @Native public static final int WHEEL_BLOCK_SCROLL = 1;
@@ -125,6 +165,13 @@ public class MouseWheelEvent extends MouseEvent {
      * <li> WHEEL_BLOCK_SCROLL
      * </ul>
      *
+     * <p>
+     *  根据平台设置指示应对此事件进行哪种滚动。法律价值包括：
+     * <ul>
+     *  <li> WHEEL_UNIT_SCROLL <li> WHEEL_BLOCK_SCROLL
+     * </ul>
+     * 
+     * 
      * @see #getScrollType
      */
     int scrollType;
@@ -134,6 +181,10 @@ public class MouseWheelEvent extends MouseEvent {
      * Indicates number of units that should be scrolled per
      * click of mouse wheel rotation, based on platform settings.
      *
+     * <p>
+     *  仅适用于scrollType WHEEL_UNIT_SCROLL。表示根据平台设置,每次鼠标滚轮旋转时应滚动的单位数。
+     * 
+     * 
      * @see #getScrollAmount
      * @see #getScrollType
      */
@@ -142,6 +193,10 @@ public class MouseWheelEvent extends MouseEvent {
     /**
      * Indicates how far the mouse wheel was rotated.
      *
+     * <p>
+     *  指示鼠标滚轮旋转的距离。
+     * 
+     * 
      * @see #getWheelRotation
      */
     int wheelRotation;
@@ -149,12 +204,19 @@ public class MouseWheelEvent extends MouseEvent {
     /**
      * Indicates how far the mouse wheel was rotated.
      *
+     * <p>
+     *  指示鼠标滚轮旋转的距离。
+     * 
+     * 
      * @see #getPreciseWheelRotation
      */
     double preciseWheelRotation;
 
     /*
      * serialVersionUID
+     * <p>
+     *  serialVersionUID
+     * 
      */
 
     private static final long serialVersionUID = 6459879390515399677L;
@@ -170,6 +232,12 @@ public class MouseWheelEvent extends MouseEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     * 构造具有指定源组件,类型,修饰符,坐标,滚动类型,滚动量和滚轮旋转的<code> MouseWheelEvent </code>对象。
+     *  <p>绝对坐标xAbs和yAbs设置为源在屏幕上的位置加上相对坐标x和y。如果源不显示,xAbs和yAbs设置为零。 <p>请注意,传入无效的<code> id </code>会导致未指定的行为。
+     * 如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source         the <code>Component</code> that originated
      *                       the event
      * @param id             the integer that identifies the event
@@ -214,6 +282,13 @@ public class MouseWheelEvent extends MouseEvent {
      * passed to the constructor, the MouseWheelEvent instance is still
      * created and no exception is thrown.
      *
+     * <p>
+     *  构造具有指定源组件,类型,修饰符,坐标,绝对坐标,滚动类型,滚动量和滚轮旋转的<code> MouseWheelEvent </code>对象。
+     *  <p>请注意,传入无效的<code> id </code>会导致未指定的行为。
+     * 如果<code> source </code>是<code> null </code>,则此方法会抛出<code> IllegalArgumentException </code>。
+     * <p>即使将相对和绝对坐标的不一致值传递给构造函数,仍然创建MouseWheelEvent实例,并且不抛出异常。
+     * 
+     * 
      * @param source         the <code>Component</code> that originated
      *                       the event
      * @param id             the integer that identifies the event
@@ -263,6 +338,13 @@ public class MouseWheelEvent extends MouseEvent {
      * are passed to the constructor, a <code>MouseWheelEvent</code> instance
      * is still created and no exception is thrown.
      *
+     * <p>
+     * 构造具有指定源组件,类型,修饰符,坐标,绝对坐标,滚动类型,滚动量和滚轮旋转的<code> MouseWheelEvent </code>对象。
+     *  <p>请注意,传递无效的<code> id </code>参数会导致未指定的行为。
+     * 如果<code> source </code>等于<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     *  <p>即使将相对和绝对坐标的不一致值传递给构造函数,仍会创建一个<code> MouseWheelEvent </code>实例,并且不会抛出任何异常。
+     * 
+     * 
      * @param source         the <code>Component</code> that originated the event
      * @param id             the integer value that identifies the event
      * @param when           a long value that gives the time when the event occurred
@@ -317,6 +399,13 @@ public class MouseWheelEvent extends MouseEvent {
      * <li> MouseWheelEvent.WHEEL_BLOCK_SCROLL
      * </ul>
      *
+     * <p>
+     *  返回响应此事件时应进行的滚动类型。这由本机平台决定。法律价值包括：
+     * <ul>
+     *  <li> MouseWheelEvent.WHEEL_UNIT_SCROLL <li> MouseWheelEvent.WHEEL_BLOCK_SCROLL
+     * </ul>
+     * 
+     * 
      * @return either MouseWheelEvent.WHEEL_UNIT_SCROLL or
      *  MouseWheelEvent.WHEEL_BLOCK_SCROLL, depending on the configuration of
      *  the native platform.
@@ -335,6 +424,11 @@ public class MouseWheelEvent extends MouseEvent {
      * Only valid if <code>getScrollType</code> returns
      * <code>MouseWheelEvent.WHEEL_UNIT_SCROLL</code>
      *
+     * <p>
+     *  返回每次单击鼠标滚轮旋转时应滚动的单位数。
+     * 仅在<code> getScrollType </code>返回<code> MouseWheelEvent.WHEEL_UNIT_SCROLL </code>时有效。
+     * 
+     * 
      * @return number of units to scroll, or an undefined value if
      *  <code>getScrollType</code> returns
      *  <code>MouseWheelEvent.WHEEL_BLOCK_SCROLL</code>
@@ -349,6 +443,10 @@ public class MouseWheelEvent extends MouseEvent {
      * A partial rotation may occur if the mouse supports a high-resolution wheel.
      * In this case, the method returns zero until a full "click" has been accumulated.
      *
+     * <p>
+     *  返回鼠标滚轮旋转的"点击次数"的整数。如果鼠标支持高分辨率轮,可能会发生部分旋转。在这种情况下,该方法返回零,直到累积完整的"点击"。
+     * 
+     * 
      * @return negative values if the mouse wheel was rotated up/away from
      * the user, and positive values if the mouse wheel was rotated down/
      * towards the user
@@ -363,6 +461,10 @@ public class MouseWheelEvent extends MouseEvent {
      * A partial rotation may occur if the mouse supports a high-resolution wheel.
      * In this case, the return value will include a fractional "click".
      *
+     * <p>
+     *  返回鼠标滚轮旋转的"点击次数"作为双精度值。如果鼠标支持高分辨率轮,可能会发生部分旋转。在这种情况下,返回值将包括小数点击。
+     * 
+     * 
      * @return negative values if the mouse wheel was rotated up or away from
      * the user, and positive values if the mouse wheel was rotated down or
      * towards the user
@@ -405,6 +507,17 @@ public class MouseWheelEvent extends MouseEvent {
      *  }
      * </pre>
      *
+     * <p>
+     * 这是一个方便的方法来帮助实现常见的MouseWheelListener  - 滚动ScrollPane或JScrollPane一个符合平台设置的金额。
+     *  (但请注意,<code> ScrollPane </code>和<code> JScrollPane </code>已内置此功能)。
+     * <P>
+     *  当滚动类型为MouseWheelEvent.WHEEL_UNIT_SCROLL时,此方法返回要滚动的单位数,并且应该仅在<code> getScrollType </code>返回MouseWheel
+     * Event.WHEEL_UNIT_SCROLL时调用。
+     * <P>
+     *  所有考虑滚动方向,车轮移动量和用于车轮滚动的平台设置。此方法不会,也不能考虑可调整/可滚动单位增量的值,因为这将在滚动组件之间变化。
+     * <P>
+     *  关于如何在侦听器中使用此方法的简化示例：
+     * 
      * @return the number of units to scroll based on the direction and amount
      *  of mouse wheel rotation, and on the wheel scrolling settings of the
      *  native platform
@@ -428,6 +541,12 @@ public class MouseWheelEvent extends MouseEvent {
      * Returns a parameter string identifying this event.
      * This method is useful for event-logging and for debugging.
      *
+     * <p>
+     * <pre>
+     *  mouseWheelMoved(MouseWheelEvent event){ScrollPane sp = getScrollPaneFromSomewhere();可调整adj = sp.getVAdjustable()if(MouseWheelEvent.getScrollType()== WHEEL_UNIT_SCROLL){int totalScrollAmount = event.getUnitsToScroll()* adj.getUnitIncrement(); adj.setValue(adj.getValue()+ totalScrollAmount); }
+     * }。
+     * </pre>
+     * 
      * @return a string identifying the event and its attributes
      */
     public String paramString() {

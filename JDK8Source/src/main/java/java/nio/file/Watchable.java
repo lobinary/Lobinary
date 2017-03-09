@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ import java.io.IOException;
  * watch service. Registration with a watch service is cancelled by invoking the
  * key's {@link WatchKey#cancel cancel} method.
  *
+ * <p>
+ *  可以向手表服务注册的对象,以便可以对其进行更改和查看</em>。
+ * 
+ *  <p>此接口定义{@link #register register}方法,使用{@link WatchService}返回{@link WatchKey}来表示注册的对象。
+ * 对象可以向多个监视服务注册。通过调用密钥的{@link WatchKey#cancel cancel}方法,可以取消注册监视服务。
+ * 
+ * 
  * @since 1.7
  *
  * @see Path#register
@@ -63,6 +71,17 @@ public interface Watchable {
      * <p> Implementations of this interface should specify the events they
      * support.
      *
+     * <p>
+     *  使用手表服务注册对象。
+     * 
+     *  <p>如果此对象标识的文件系统对象当前已在watch服务中注册,则将事件集或修饰符更改为{@code events}和{@代码修改符}参数。更改事件集不会导致对象的待处理事件被丢弃。
+     * 对象将自动注册{@link StandardWatchEventKinds#OVERFLOW OVERFLOW}事件。此事件不需要存在于事件数组中。
+     * 
+     *  <p>否则,文件系统对象尚未向给定监视服务注册,因此它已注册,并返回生成的新密钥。
+     * 
+     *  <p>此接口的实现应指定它们支持的事件。
+     * 
+     * 
      * @param   watcher
      *          the watch service to which this object is to be registered
      * @param   events
@@ -101,6 +120,13 @@ public interface Watchable {
      *     watchable.{@link #register(WatchService,WatchEvent.Kind[],WatchEvent.Modifier[]) register}(watcher, events, new WatchEvent.Modifier[0]);
      * </pre>
      *
+     * <p>
+     *  使用手表服务注册对象。
+     * 
+     * <p>此方法的调用行为与调用完全相同
+     * <pre>
+     *  看门人。
+     * 
      * @param   watcher
      *          the watch service to which this object is to be registered
      * @param   events

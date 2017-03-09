@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -93,6 +94,34 @@ import java.io.IOException;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> JSplitPane </code>用于分割两个(只有两个)<code> Component </code>。
+ * 基于外观和感觉实现图形地划分两个<code> Component </code>,然后用户可以交互地调整两个<code> Component </code>。
+ * 有关使用<code> JSplitPane </code>的信息,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html">
+ * 如何使用拆分窗格</a>在Java教程</em>中。
+ * 基于外观和感觉实现图形地划分两个<code> Component </code>,然后用户可以交互地调整两个<code> Component </code>。
+ * <p>
+ *  拆分窗格中的两个<code> Component </code>可以使用<code> JSplitPane.HORIZONTAL_SPLIT </code>从左到右排列,或使用<code> JSpli
+ * tPane.VERTICAL_SPLIT </code>从上到下排列。
+ * 更改<code> Component </code>的大小的首选方法是调用<code> setDividerLocation </code>,其中<code> location </code>是新的x或
+ * y位置, <code> JSplitPane </code>的方向。
+ * <p>
+ *  要将<code> Component </code>调整为其首选大小,请调用<code> resetToPreferredSizes </code>。
+ * <p>
+ * 当用户调整<code> Component </code>的大小时,<code> Components </code>的最小大小用于确定<code> Component </code>可设置的最大/最小
+ * 位置至。
+ * 如果两个组件的最小大小大于拆分窗格的大小,则分隔符将不允许您调整其大小。
+ * 要更改<code> JComponent </code>的最小大小,请参阅{@link JComponent#setMinimumSize}。
+ * <p>
+ *  当用户调整拆分窗格时,基于<code> resizeWeight </code>属性在两个组件之间分配新空间。
+ * 值为0,默认值,表示right / bottom组件获取所有空间,其中值为1表示left / top组件获取所有空间。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see #setDividerLocation
  * @see #resetToPreferredSizes
  *
@@ -101,6 +130,8 @@ import java.io.IOException;
 public class JSplitPane extends JComponent implements Accessible
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -110,6 +141,9 @@ public class JSplitPane extends JComponent implements Accessible
      * Vertical split indicates the <code>Component</code>s are
      * split along the y axis.  For example the two
      * <code>Component</code>s will be split one on top of the other.
+     * <p>
+     *  垂直拆分表示<code>组件</code>沿y轴分割。例如,两个<code> Component </code>将被分割在另一个之上。
+     * 
      */
     public final static int VERTICAL_SPLIT = 0;
 
@@ -118,100 +152,156 @@ public class JSplitPane extends JComponent implements Accessible
      * split along the x axis.  For example the two
      * <code>Component</code>s will be split one to the left of the
      * other.
+     * <p>
+     * 水平拆分表示<code> Component </code>沿x轴分割。例如,两个<code> Component </code>将被分割到另一个的左边。
+     * 
      */
     public final static int HORIZONTAL_SPLIT = 1;
 
     /**
      * Used to add a <code>Component</code> to the left of the other
      * <code>Component</code>.
+     * <p>
+     *  用于在另一个<code> Component </code>的左侧添加<code> Component </code>。
+     * 
      */
     public final static String LEFT = "left";
 
     /**
      * Used to add a <code>Component</code> to the right of the other
      * <code>Component</code>.
+     * <p>
+     *  用于在另一个<code> Component </code>的右侧添加<code> Component </code>。
+     * 
      */
     public final static String RIGHT = "right";
 
     /**
      * Used to add a <code>Component</code> above the other
      * <code>Component</code>.
+     * <p>
+     *  用于在另一个<code> Component </code>之上添加<code> Component </code>。
+     * 
      */
     public final static String TOP = "top";
 
     /**
      * Used to add a <code>Component</code> below the other
      * <code>Component</code>.
+     * <p>
+     *  用于在另一个<code> Component </code>下添加<code> Component </code>。
+     * 
      */
     public final static String BOTTOM = "bottom";
 
     /**
      * Used to add a <code>Component</code> that will represent the divider.
+     * <p>
+     *  用于添加代表分隔符的<code> Component </code>。
+     * 
      */
     public final static String DIVIDER = "divider";
 
     /**
      * Bound property name for orientation (horizontal or vertical).
+     * <p>
+     *  定向的绑定属性名称(水平或垂直)。
+     * 
      */
     public final static String ORIENTATION_PROPERTY = "orientation";
 
     /**
      * Bound property name for continuousLayout.
+     * <p>
+     *  continuousLayout的绑定属性名。
+     * 
      */
     public final static String CONTINUOUS_LAYOUT_PROPERTY = "continuousLayout";
 
     /**
      * Bound property name for border.
+     * <p>
+     *  边框的边界属性名称。
+     * 
      */
     public final static String DIVIDER_SIZE_PROPERTY = "dividerSize";
 
     /**
      * Bound property for oneTouchExpandable.
+     * <p>
+     *  oneTouchExpandable的绑定属性。
+     * 
      */
     public final static String ONE_TOUCH_EXPANDABLE_PROPERTY =
                                "oneTouchExpandable";
 
     /**
      * Bound property for lastLocation.
+     * <p>
+     *  lastLocation的绑定属性。
+     * 
      */
     public final static String LAST_DIVIDER_LOCATION_PROPERTY =
                                "lastDividerLocation";
 
     /**
      * Bound property for the dividerLocation.
+     * <p>
+     *  dividerRocation的绑定属性。
+     * 
+     * 
      * @since 1.3
      */
     public final static String DIVIDER_LOCATION_PROPERTY = "dividerLocation";
 
     /**
      * Bound property for weight.
+     * <p>
+     *  重量的绑定属性。
+     * 
+     * 
      * @since 1.3
      */
     public final static String RESIZE_WEIGHT_PROPERTY = "resizeWeight";
 
     /**
      * How the views are split.
+     * <p>
+     *  视图如何拆分。
+     * 
      */
     protected int orientation;
 
     /**
      * Whether or not the views are continuously redisplayed while
      * resizing.
+     * <p>
+     *  在调整大小时是否连续重新显示视图。
+     * 
      */
     protected boolean continuousLayout;
 
     /**
      * The left or top component.
+     * <p>
+     *  左或顶部组件。
+     * 
      */
     protected Component leftComponent;
 
     /**
      * The right or bottom component.
+     * <p>
+     *  右侧或底部组件。
+     * 
      */
     protected Component rightComponent;
 
     /**
      * Size of the divider.
+     * <p>
+     *  分隔器的尺寸。
+     * 
      */
     protected int dividerSize;
     private boolean dividerSizeSet = false;
@@ -219,23 +309,35 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Is a little widget provided to quickly expand/collapse the
      * split pane?
+     * <p>
+     *  是否提供了一个小部件来快速展开/折叠拆分窗格?
+     * 
      */
     protected boolean oneTouchExpandable;
     private boolean oneTouchExpandableSet;
 
     /**
      * Previous location of the split pane.
+     * <p>
+     *  拆分窗格的上一个位置。
+     * 
      */
     protected int lastDividerLocation;
 
     /**
      * How to distribute extra space.
+     * <p>
+     *  如何分配额外的空间。
+     * 
      */
     private double resizeWeight;
 
     /**
      * Location of the divider, at least the value that was set, the UI may
      * have a different value.
+     * <p>
+     *  分隔符的位置,至少是设置的值,UI可能有不同的值。
+     * 
      */
     private int dividerLocation;
 
@@ -243,6 +345,9 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Creates a new <code>JSplitPane</code> configured to arrange the child
      * components side-by-side horizontally, using two buttons for the components.
+     * <p>
+     *  创建一个新的<code> JSplitPane </code>,用于使用两个组件按钮来水平排列子组件。
+     * 
      */
     public JSplitPane() {
         this(JSplitPane.HORIZONTAL_SPLIT,
@@ -256,6 +361,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Creates a new <code>JSplitPane</code> configured with the
      * specified orientation.
      *
+     * <p>
+     *  创建使用指定方向配置的新<code> JSplitPane </code>。
+     * 
+     * 
      * @param newOrientation  <code>JSplitPane.HORIZONTAL_SPLIT</code> or
      *                        <code>JSplitPane.VERTICAL_SPLIT</code>
      * @exception IllegalArgumentException if <code>orientation</code>
@@ -272,6 +381,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Creates a new <code>JSplitPane</code> with the specified
      * orientation and redrawing style.
      *
+     * <p>
+     * 使用指定的方向和重绘样式创建新的<code> JSplitPane </code>。
+     * 
+     * 
      * @param newOrientation  <code>JSplitPane.HORIZONTAL_SPLIT</code> or
      *                        <code>JSplitPane.VERTICAL_SPLIT</code>
      * @param newContinuousLayout  a boolean, true for the components to
@@ -290,6 +403,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Creates a new <code>JSplitPane</code> with the specified
      * orientation and the specified components.
      *
+     * <p>
+     *  使用指定的方向和指定的组件创建新的<code> JSplitPane </code>。
+     * 
+     * 
      * @param newOrientation  <code>JSplitPane.HORIZONTAL_SPLIT</code> or
      *                        <code>JSplitPane.VERTICAL_SPLIT</code>
      * @param newLeftComponent the <code>Component</code> that will
@@ -317,6 +434,10 @@ public class JSplitPane extends JComponent implements Accessible
      * orientation and
      * redrawing style, and with the specified components.
      *
+     * <p>
+     *  使用指定的方向和重绘样式以及指定的组件创建新的<code> JSplitPane </code>。
+     * 
+     * 
      * @param newOrientation  <code>JSplitPane.HORIZONTAL_SPLIT</code> or
      *                        <code>JSplitPane.VERTICAL_SPLIT</code>
      * @param newContinuousLayout  a boolean, true for the components to
@@ -361,6 +482,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Sets the L&amp;F object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @param ui  the <code>SplitPaneUI</code> L&amp;F object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -381,6 +506,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Returns the <code>SplitPaneUI</code> that is providing the
      * current look and feel.
      *
+     * <p>
+     *  返回提供当前外观的<code> SplitPaneUI </code>。
+     * 
+     * 
      * @return the <code>SplitPaneUI</code> object that renders this component
      * @beaninfo
      *       expert: true
@@ -396,6 +525,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Replaces the current UI object with the latest version from the
      * <code>UIManager</code>.
      *
+     * <p>
+     *  来自<code> UIManager </code>的通知表示L&amp; F已更改。使用<code> UIManager </code>中的最新版本替换当前的UI对象。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -407,6 +540,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Returns the name of the L&amp;F class that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F类的名称。
+     * 
+     * 
      * @return the string "SplitPaneUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -422,6 +559,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Sets the size of the divider.
      *
+     * <p>
+     *  设置分隔符的大小。
+     * 
+     * 
      * @param newSize an integer giving the size of the divider in pixels
      * @beaninfo
      *        bound: true
@@ -441,6 +582,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Returns the size of the divider.
      *
+     * <p>
+     *  返回分隔符的大小。
+     * 
+     * 
      * @return an integer giving the size of the divider in pixels
      */
     public int getDividerSize() {
@@ -451,6 +596,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Sets the component to the left (or above) the divider.
      *
+     * <p>
+     *  将组件设置为分隔符的左侧(或上方)。
+     * 
+     * 
      * @param comp the <code>Component</code> to display in that position
      */
     public void setLeftComponent(Component comp) {
@@ -468,6 +617,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Returns the component to the left (or above) the divider.
      *
+     * <p>
+     *  将组件返回到分隔符的左侧(或上方)。
+     * 
+     * 
      * @return the <code>Component</code> displayed in that position
      * @beaninfo
      *    preferred: true
@@ -481,6 +634,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Sets the component above, or to the left of the divider.
      *
+     * <p>
+     *  设置上面的组件,或者在分频器的左边。
+     * 
+     * 
      * @param comp the <code>Component</code> to display in that position
      * @beaninfo
      *  description: The component above, or to the left of the divider.
@@ -493,6 +650,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Returns the component above, or to the left of the divider.
      *
+     * <p>
+     *  返回上面的组件或分隔符的左侧。
+     * 
+     * 
      * @return the <code>Component</code> displayed in that position
      */
     public Component getTopComponent() {
@@ -503,6 +664,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Sets the component to the right (or below) the divider.
      *
+     * <p>
+     *  将组件设置为分隔符的右侧(或下侧)。
+     * 
+     * 
      * @param comp the <code>Component</code> to display in that position
      * @beaninfo
      *    preferred: true
@@ -523,6 +688,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Returns the component to the right (or below) the divider.
      *
+     * <p>
+     *  将组件返回到右侧(或下方)的分隔符。
+     * 
+     * 
      * @return the <code>Component</code> displayed in that position
      */
     public Component getRightComponent() {
@@ -533,6 +702,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Sets the component below, or to the right of the divider.
      *
+     * <p>
+     *  将组件设置在下方或分频器的右侧。
+     * 
+     * 
      * @param comp the <code>Component</code> to display in that position
      * @beaninfo
      *  description: The component below, or to the right of the divider.
@@ -545,6 +718,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Returns the component below, or to the right of the divider.
      *
+     * <p>
+     *  返回下面或分隔符右侧的组件。
+     * 
+     * 
      * @return the <code>Component</code> displayed in that position
      */
     public Component getBottomComponent() {
@@ -561,6 +738,12 @@ public class JSplitPane extends JComponent implements Accessible
      * Some look and feels might not support one-touch expanding;
      * they will ignore this property.
      *
+     * <p>
+     * 设置<code> oneTouchExpandable </code>属性的值,对于<code> JSplitPane </code>必须是<code> true </code>才能在分隔符上提供一个U
+     * I窗口小部件以快速展开/分频器。
+     * 此属性的默认值为<code> false </code>。一些外观和感觉可能不支持一触式扩展;他们将忽略此属性。
+     * 
+     * 
      * @param newValue <code>true</code> to specify that the split pane should provide a
      *        collapse/expand widget
      * @beaninfo
@@ -583,6 +766,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Gets the <code>oneTouchExpandable</code> property.
      *
+     * <p>
+     *  获取<code> oneTouchExpandable </code>属性。
+     * 
+     * 
      * @return the value of the <code>oneTouchExpandable</code> property
      * @see #setOneTouchExpandable
      */
@@ -595,6 +782,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Sets the last location the divider was at to
      * <code>newLastLocation</code>.
      *
+     * <p>
+     *  设置分隔符到<code> newLastLocation </code>的最后一个位置。
+     * 
+     * 
      * @param newLastLocation an integer specifying the last divider location
      *        in pixels, from the left (or upper) edge of the pane to the
      *        left (or upper) edge of the divider
@@ -614,6 +805,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Returns the last location the divider was at.
      *
+     * <p>
+     *  返回分隔符的最后一个位置。
+     * 
+     * 
      * @return an integer specifying the last divider location as a count
      *       of pixels from the left (or upper) edge of the pane to the
      *       left (or upper) edge of the divider
@@ -630,6 +825,12 @@ public class JSplitPane extends JComponent implements Accessible
      * <li>JSplitPane.HORIZONTAL_SPLIT  (left/right orientation of components)
      * </ul>
      *
+     * <p>
+     *  设置方向,或如何分割分割。
+     * 选项为：<ul> <li> JSplitPane.VERTICAL_SPLIT(组件方向上方/下方)<li> JSplitPane.HORIZONTAL_SPLIT(组件的左/右方向)。
+     * </ul>
+     * 
+     * 
      * @param orientation an integer specifying the orientation
      * @exception IllegalArgumentException if orientation is not one of:
      *        HORIZONTAL_SPLIT or VERTICAL_SPLIT.
@@ -658,6 +859,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Returns the orientation.
      *
+     * <p>
+     *  返回方向。
+     * 
+     * 
      * @return an integer giving the orientation
      * @see #setOrientation
      */
@@ -675,6 +880,11 @@ public class JSplitPane extends JComponent implements Accessible
      * Some look and feels might not support continuous layout;
      * they will ignore this property.
      *
+     * <p>
+     *  设置<code> continuousLayout </code>属性的值,必须<code> true </code>才能在用户干预期间连续重新显示和布置子组件。此属性的默认值与外观相关。
+     * 一些外观和感觉可能不支持连续布局;他们将忽略此属性。
+     * 
+     * 
      * @param newContinuousLayout  <code>true</code> if the components
      *        should continuously be redrawn as the divider changes position
      * @beaninfo
@@ -696,6 +906,10 @@ public class JSplitPane extends JComponent implements Accessible
     /**
      * Gets the <code>continuousLayout</code> property.
      *
+     * <p>
+     *  获取<code> continuousLayout </code>属性。
+     * 
+     * 
      * @return the value of the <code>continuousLayout</code> property
      * @see #setContinuousLayout
      */
@@ -713,6 +927,11 @@ public class JSplitPane extends JComponent implements Accessible
      * extra space and the right/bottom component gets (1 - weight) * diff
      * extra space.
      *
+     * <p>
+     * 指定当拆分窗格的大小更改时如何分配额外的空间。值为0,默认值表示右/底组件获得所有额外的空间(左/顶组件行为固定),其中值1指定左/顶组件获得所有额外的空间(右/底部组件行为固定)。
+     * 具体来说,左/顶分量获得(weight * diff)额外空间,右/底分量获得(1-重量)* diff额外空间。
+     * 
+     * 
      * @param value as described above
      * @exception IllegalArgumentException if <code>value</code> is &lt; 0 or &gt; 1
      * @since 1.3
@@ -733,6 +952,10 @@ public class JSplitPane extends JComponent implements Accessible
 
     /**
      * Returns the number that determines how extra space is distributed.
+     * <p>
+     *  返回确定如何分配额外空间的数字。
+     * 
+     * 
      * @return how extra space is to be distributed on a resize of the
      *         split pane
      * @since 1.3
@@ -745,6 +968,9 @@ public class JSplitPane extends JComponent implements Accessible
      * Lays out the <code>JSplitPane</code> layout based on the preferred size
      * of the children components. This will likely result in changing
      * the divider location.
+     * <p>
+     *  根据子组件的首选大小放出<code> JSplitPane </code>布局。这可能会导致更改分隔符位置。
+     * 
      */
     public void resetToPreferredSizes() {
         SplitPaneUI         ui = getUI();
@@ -766,6 +992,13 @@ public class JSplitPane extends JComponent implements Accessible
      * screen, this method will have no effect (new divider location will
      * become (current size * proportionalLocation) which is 0).
      *
+     * <p>
+     *  将分隔符位置设置为<code> JSplitPane </code>大小的百分比。
+     * <p>
+     *  这个方法是根据<code> setDividerLocation(int)</code>来实现的。此方法根据当前大小立即更改拆分窗格的大小。
+     * 如果分割窗格没有正确实现和在屏幕上,这种方法将没有效果(新的分隔符位置将变为(当前大小* proportionalLocation)为0)。
+     * 
+     * 
      * @param proportionalLocation  a double-precision floating point value
      *        that specifies a percentage, from zero (top/left) to 1.0
      *        (bottom/right)
@@ -798,6 +1031,11 @@ public class JSplitPane extends JComponent implements Accessible
      * After notifying the listeners, the last divider location is updated,
      * via <code>setLastDividerLocation</code>.
      *
+     * <p>
+     *  设置分隔符的位置。这被传递给外观和感觉实现,然后通知侦听器。小于0的值意味着分频器应该重置为尝试满足左/顶分量的优选大小的值。
+     * 在通知监听器之后,通过<code> setLastDividerLocation </code>更新最后的分频器位置。
+     * 
+     * 
      * @param location an int specifying a UI-specific value (typically a
      *        pixel count)
      * @beaninfo
@@ -830,6 +1068,11 @@ public class JSplitPane extends JComponent implements Accessible
      * divider location (if <code>setDividerLocation</code> was passed a
      * value bigger than the current size).
      *
+     * <p>
+     * 返回传递给<code> setDividerLocation </code>的最后一个值。
+     * 从此方法返回的值可能与实际分隔符位置不同(如果<code> setDividerLocation </code>传递的值大于当前大小)。
+     * 
+     * 
      * @return an integer specifying the location of the divider
      */
     public int getDividerLocation() {
@@ -841,6 +1084,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Returns the minimum location of the divider from the look and feel
      * implementation.
      *
+     * <p>
+     *  从外观实现返回分隔符的最小位置。
+     * 
+     * 
      * @return an integer specifying a UI-specific value for the minimum
      *          location (typically a pixel count); or -1 if the UI is
      *          <code>null</code>
@@ -861,6 +1108,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Returns the maximum location of the divider from the look and feel
      * implementation.
      *
+     * <p>
+     *  返回从外观和感觉实现的分隔符的最大位置。
+     * 
+     * 
      * @return an integer specifying a UI-specific value for the maximum
      *          location (typically a pixel count); or -1 if the  UI is
      *          <code>null</code>
@@ -880,6 +1131,10 @@ public class JSplitPane extends JComponent implements Accessible
      * pane. Resets the <code>leftComponent</code> or
      * <code>rightComponent</code> instance variable, as necessary.
      *
+     * <p>
+     *  从窗格中删除子组件<code>组件</code>。根据需要重置<code> leftComponent </code>或<code> rightComponent </code>实例变量。
+     * 
+     * 
      * @param component the <code>Component</code> to remove
      */
     public void remove(Component component) {
@@ -901,6 +1156,11 @@ public class JSplitPane extends JComponent implements Accessible
      * Updates the <code>leftComponent</code> and <code>rightComponent</code>
      * instance variables as necessary, and then messages super.
      *
+     * <p>
+     *  删除指定索引处的<code> Component </code>。
+     * 根据需要更新<code> leftComponent </code>和<code> rightComponent </code>实例变量,然后更新消息super。
+     * 
+     * 
      * @param index an integer specifying the component to remove, where
      *        1 specifies the left/top component and 2 specifies the
      *        bottom/right component
@@ -925,6 +1185,9 @@ public class JSplitPane extends JComponent implements Accessible
      * Removes all the child components from the split pane. Resets the
      * <code>leftComonent</code> and <code>rightComponent</code>
      * instance variables.
+     * <p>
+     *  从拆分窗格中删除所有子组件。重置<code> leftComonent </code>和<code> rightComponent </code>实例变量。
+     * 
      */
     public void removeAll() {
         leftComponent = rightComponent = null;
@@ -942,6 +1205,11 @@ public class JSplitPane extends JComponent implements Accessible
      * will cause a request to be queued that
      * will validate the <code>JSplitPane</code> and all its descendants.
      *
+     * <p>
+     *  返回true,因此对<code> JSplitPane </code>的任何后代调用<code> revalidate </code>会导致请求排队,将验证<code> JSplitPane </code>
+     * 后人。
+     * 
+     * 
      * @return true
      * @see JComponent#revalidate
      * @see java.awt.Container#isValidateRoot
@@ -975,6 +1243,17 @@ public class JSplitPane extends JComponent implements Accessible
      * the component is added in the
      * first available position (left/top if open, else right/bottom).
      *
+     * <p>
+     * 将指定的组件添加到此拆分窗格。如果<code>约束</code>标识左/上或右/下子组件,并且之前添加了具​​有该标识符的组件,则它将被删除,然后<code> comp </code>地点。
+     * 如果<code>约束</code>不是已知标识符之一,布局管理器可能会抛出一个<code> IllegalArgumentException </code>。
+     * <p>
+     *  可能的约束对象(Strings)是：
+     * <ul>
+     *  <li> JSplitPane.TOP <li> JSplitPane.LEFT <li> JSplitPane.BOTTOM <li> JSplitPane.RIGHT
+     * </ul>
+     *  如果<code>约束</code>对象是<code> null </code>,则组件将添加到第一个可用位置(如果打开,则为left / top,否则为right / bottom)。
+     * 
+     * 
      * @param comp        the component to add
      * @param constraints an <code>Object</code> specifying the
      *                    layout constraints
@@ -996,6 +1275,8 @@ public class JSplitPane extends JComponent implements Accessible
         }
 
         /* If the constraints are null and the left/right component is
+        /* <p>
+        /* 
            invalid, add it at the left/right component. */
         if (constraints == null) {
             if (getLeftComponent() == null) {
@@ -1041,6 +1322,10 @@ public class JSplitPane extends JComponent implements Accessible
      * Subclassed to message the UI with <code>finishedPaintingChildren</code>
      * after super has been messaged, as well as painting the border.
      *
+     * <p>
+     *  子类化为在超级消息发送之后用<code> finishedPaintingChildren </code>消息UI,以及绘制边框。
+     * 
+     * 
      * @param g the <code>Graphics</code> context within which to paint
      */
     protected void paintChildren(Graphics g) {
@@ -1060,6 +1345,10 @@ public class JSplitPane extends JComponent implements Accessible
      * See <code>readObject</code> and <code>writeObject</code> in
      * <code>JComponent</code> for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅<code> readComponent </code>中的<code> readObject </code>和<code> writeObject </code>
+     * 。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -1097,6 +1386,11 @@ public class JSplitPane extends JComponent implements Accessible
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JSplitPane </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JSplitPane</code>.
      */
     protected String paramString() {
@@ -1128,6 +1422,11 @@ public class JSplitPane extends JComponent implements Accessible
      * AccessibleJSplitPane.
      * A new AccessibleJSplitPane instance is created if necessary.
      *
+     * <p>
+     *  获取与此JSplitPane相关联的AccessibleContext。对于分割窗格,AccessibleContext采用AccessibleJSplitPane的形式。
+     * 如果需要,将创建一个新的AccessibleJSplitPane实例。
+     * 
+     * 
      * @return an AccessibleJSplitPane that serves as the
      *         AccessibleContext of this JSplitPane
      * @beaninfo
@@ -1155,12 +1454,22 @@ public class JSplitPane extends JComponent implements Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 此类实现<code> JSplitPane </code>类的辅助功能支持。它提供了适用于拆分窗格用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class AccessibleJSplitPane extends AccessibleJComponent
         implements AccessibleValue {
         /**
          * Gets the state set of this object.
          *
+         * <p>
+         *  获取此对象的状态集。
+         * 
+         * 
          * @return an instance of AccessibleState containing the current state
          * of the object
          * @see AccessibleState
@@ -1185,6 +1494,10 @@ public class JSplitPane extends JComponent implements Accessible
          * return this object, which is responsible for implementing the
          * AccessibleValue interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleValue。在为该类实现Java Accessibility API时,返回此对象,该对象负责代表自身实现AccessibleValue接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleValue getAccessibleValue() {
@@ -1195,6 +1508,10 @@ public class JSplitPane extends JComponent implements Accessible
         /**
          * Gets the accessible value of this object.
          *
+         * <p>
+         *  获取此对象的可访问值。
+         * 
+         * 
          * @return a localized String describing the value of this object
          */
         public Number getCurrentAccessibleValue() {
@@ -1205,6 +1522,10 @@ public class JSplitPane extends JComponent implements Accessible
         /**
          * Sets the value of this object as a Number.
          *
+         * <p>
+         *  将此对象的值设置为Number。
+         * 
+         * 
          * @return True if the value was set.
          */
         public boolean setCurrentAccessibleValue(Number n) {
@@ -1220,6 +1541,10 @@ public class JSplitPane extends JComponent implements Accessible
         /**
          * Gets the minimum accessible value of this object.
          *
+         * <p>
+         *  获取此对象的最小可访问值。
+         * 
+         * 
          * @return The minimum value of this object.
          */
         public Number getMinimumAccessibleValue() {
@@ -1231,6 +1556,10 @@ public class JSplitPane extends JComponent implements Accessible
         /**
          * Gets the maximum accessible value of this object.
          *
+         * <p>
+         *  获取此对象的最大可访问值。
+         * 
+         * 
          * @return The maximum value of this object.
          */
         public Number getMaximumAccessibleValue() {
@@ -1242,6 +1571,9 @@ public class JSplitPane extends JComponent implements Accessible
         /**
          * Gets the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
          * @return an instance of AccessibleRole describing the role of
          * the object
          * @see AccessibleRole

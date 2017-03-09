@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,10 @@ import static javax.management.openmbean.OpenMBeanAttributeInfoSupport.*;
  * constructors of an open MBean.
  *
  *
+ * <p>
+ *  描述在打开的MBean的一个或多个操作或构造函数中使用的参数。
+ * 
+ * 
  * @since 1.5
  */
 public class OpenMBeanParameterInfoSupport
@@ -56,27 +61,37 @@ public class OpenMBeanParameterInfoSupport
     static final long serialVersionUID = -7235016873758443122L;
 
     /**
+    /* <p>
+    /* 
      * @serial The open mbean parameter's <i>open type</i>
      */
     private OpenType<?>    openType;
 
     /**
+    /* <p>
+    /* 
      * @serial The open mbean parameter's default value
      */
     private Object      defaultValue    = null;
 
     /**
+    /* <p>
+    /* 
      * @serial The open mbean parameter's legal values. This {@link
      * Set} is unmodifiable
      */
     private Set<?> legalValues     = null;  // to be constructed unmodifiable
 
     /**
+    /* <p>
+    /* 
      * @serial The open mbean parameter's min value
      */
     private Comparable<?> minValue        = null;
 
     /**
+    /* <p>
+    /* 
      * @serial The open mbean parameter's max value
      */
     private Comparable<?> maxValue        = null;
@@ -94,6 +109,11 @@ public class OpenMBeanParameterInfoSupport
      * constructors of a class of open MBeans, with the specified
      * {@code name}, {@code openType} and {@code description}.
      *
+     * <p>
+     *  构造{@code OpenMBeanParameterInfoSupport}实例,该实例描述在指定的{@code name},{@code openType}和{@code description}
+     * 的开放MBean类的一个或多个操作或构造函数中使用的参数。
+     * 
+     * 
      * @param name  cannot be a null or empty string.
      *
      * @param description  cannot be a null or empty string.
@@ -122,6 +142,13 @@ public class OpenMBeanParameterInfoSupport
      * explained in the <a href="package-summary.html#constraints">
      * package description</a>.
      *
+     * <p>
+     *  构造{@code OpenMBeanParameterInfoSupport}实例,该实例描述在指定的{@code name},{@code openType},{@code description}
+     * 和一组开放MBean的一个或多个操作或构造函数中使用的参数{@code descriptor}。
+     * 
+     *  <p> {@code descriptor}可以包含定义此类的某些方法返回的值的条目,如<a href="package-summary.html#constraints">包描述</a>中所述。
+     * 
+     * 
      * @param name  cannot be a null or empty string.
      *
      * @param description  cannot be a null or empty string.
@@ -178,6 +205,11 @@ public class OpenMBeanParameterInfoSupport
      * {@code name}, {@code openType}, {@code description} and {@code
      * defaultValue}.
      *
+     * <p>
+     *  构造一个{@code OpenMBeanParameterInfoSupport}实例,该实例描述在开放MBean类的一个或多个操作或构造函数中使用的参数,指定的{@code name},{@code openType}
+     * ,{@code description}和{ @code defaultValue}。
+     * 
+     * 
      * @param name  cannot be a null or empty string.
      *
      * @param description  cannot be a null or empty string.
@@ -221,6 +253,16 @@ public class OpenMBeanParameterInfoSupport
      * have no impact on this {@code OpenMBeanParameterInfoSupport}
      * instance.</p>
      *
+     * <p>
+     *  <p>构造{@code OpenMBeanParameterInfoSupport}实例,该实例描述在开放MBean类的一个或多个操作或构造函数中使用的参数,具有指定的{@code name},{@code openType}
+     * ,{@code description },{@code defaultValue}和{@code legalValues}。
+     * </p>。
+     * 
+     * <p>复制{@code legalValues}的内容,因此对{@code legalValues}引用的数组的后续修改对此{@code OpenMBeanParameterInfoSupport}实例
+     * 没有影响。
+     * </p>。
+     * 
+     * 
      * @param name  cannot be a null or empty string.
      *
      * @param description  cannot be a null or empty string.
@@ -276,6 +318,13 @@ public class OpenMBeanParameterInfoSupport
      * It is possible to specify minimal and maximal values only for
      * an open type whose values are {@code Comparable}.
      *
+     * <p>
+     *  构造一个{@code OpenMBeanParameterInfoSupport}实例,该实例描述在一个或多个操作或开放MBeans类的构造函数中使用的参数,指定的{@code name},{@code openType}
+     * ,{@code description} @code defaultValue},{@code minValue}和{@code maxValue}。
+     * 
+     *  可以为值为{@code Comparable}的开放类型指定最小值和最大值。
+     * 
+     * 
      * @param name  cannot be a null or empty string.
      *
      * @param description  cannot be a null or empty string.
@@ -361,6 +410,11 @@ public class OpenMBeanParameterInfoSupport
      * behavior in this version, we must replace the object with one
      * where the Descriptors reflect the same values of openType, defaultValue,
      * etc.
+     * <p>
+     *  在将描述符添加到此类之前,在API版本中序列化的对象将具有空或空描述符。
+     * 为了与我们在这个版本中的行为一致,我们必须将对象替换为一个对象,其中描述符反映了openType,defaultValue等的相同值。
+     * 
+     * 
      **/
     private Object readResolve() {
         if (getDescriptor().getFieldNames().length == 0) {
@@ -381,6 +435,9 @@ public class OpenMBeanParameterInfoSupport
     /**
      * Returns the open type for the values of the parameter described
      * by this {@code OpenMBeanParameterInfoSupport} instance.
+     * <p>
+     *  返回此{@code OpenMBeanParameterInfoSupport}实例描述的参数值的打开类型。
+     * 
      */
     public OpenType<?> getOpenType() {
         return openType;
@@ -390,6 +447,9 @@ public class OpenMBeanParameterInfoSupport
      * Returns the default value for the parameter described by this
      * {@code OpenMBeanParameterInfoSupport} instance, if specified,
      * or {@code null} otherwise.
+     * <p>
+     *  返回此{@code OpenMBeanParameterInfoSupport}实例(如果指定)所描述的参数的默认值,否则返回{@code null}。
+     * 
      */
     public Object getDefaultValue() {
 
@@ -406,6 +466,9 @@ public class OpenMBeanParameterInfoSupport
      * Returns an unmodifiable Set of legal values for the parameter
      * described by this {@code OpenMBeanParameterInfoSupport}
      * instance, if specified, or {@code null} otherwise.
+     * <p>
+     *  返回此{@code OpenMBeanParameterInfoSupport}实例(如果指定)描述的参数的不可修改的合法值集合,否则返回{@code null}。
+     * 
      */
     public Set<?> getLegalValues() {
 
@@ -423,6 +486,9 @@ public class OpenMBeanParameterInfoSupport
      * Returns the minimal value for the parameter described by this
      * {@code OpenMBeanParameterInfoSupport} instance, if specified,
      * or {@code null} otherwise.
+     * <p>
+     * 返回此{@code OpenMBeanParameterInfoSupport}实例(如果指定)描述的参数的最小值,否则返回{@code null}。
+     * 
      */
     public Comparable<?> getMinValue() {
 
@@ -436,6 +502,9 @@ public class OpenMBeanParameterInfoSupport
      * Returns the maximal value for the parameter described by this
      * {@code OpenMBeanParameterInfoSupport} instance, if specified,
      * or {@code null} otherwise.
+     * <p>
+     *  返回此{@code OpenMBeanParameterInfoSupport}实例(如果指定)所描述的参数的最大值,否则返回{@code null}。
+     * 
      */
     public Comparable<?> getMaxValue() {
 
@@ -450,6 +519,9 @@ public class OpenMBeanParameterInfoSupport
      * OpenMBeanParameterInfoSupport} instance specifies a non-null
      * default value for the described parameter, {@code false}
      * otherwise.
+     * <p>
+     *  如果此{@code OpenMBeanParameterInfoSupport}实例为所描述的参数指定非空默认值,则返回{@code true},否则返回{@code false}。
+     * 
      */
     public boolean hasDefaultValue() {
 
@@ -461,6 +533,9 @@ public class OpenMBeanParameterInfoSupport
      * OpenMBeanParameterInfoSupport} instance specifies a non-null
      * set of legal values for the described parameter, {@code false}
      * otherwise.
+     * <p>
+     *  如果此{@code OpenMBeanParameterInfoSupport}实例为所描述的参数指定一组非法的合法值,则返回{@code true},否则返回{@code false}。
+     * 
      */
     public boolean hasLegalValues() {
 
@@ -472,6 +547,9 @@ public class OpenMBeanParameterInfoSupport
      * OpenMBeanParameterInfoSupport} instance specifies a non-null
      * minimal value for the described parameter, {@code false}
      * otherwise.
+     * <p>
+     *  如果此{@code OpenMBeanParameterInfoSupport}实例为所描述的参数指定非空的最小值,则返回{@code true},否则返回{@code false}。
+     * 
      */
     public boolean hasMinValue() {
 
@@ -483,6 +561,9 @@ public class OpenMBeanParameterInfoSupport
      * OpenMBeanParameterInfoSupport} instance specifies a non-null
      * maximal value for the described parameter, {@code false}
      * otherwise.
+     * <p>
+     *  如果此{@code OpenMBeanParameterInfoSupport}实例为所描述的参数指定非空的最大值,则返回{@code true},否则返回{@code false}。
+     * 
      */
     public boolean hasMaxValue() {
 
@@ -494,6 +575,10 @@ public class OpenMBeanParameterInfoSupport
      * Tests whether {@code obj} is a valid value for the parameter
      * described by this {@code OpenMBeanParameterInfo} instance.
      *
+     * <p>
+     *  测试{@code obj}是否为此{@code OpenMBeanParameterInfo}实例描述的参数的有效值。
+     * 
+     * 
      * @param obj the object to be tested.
      *
      * @return {@code true} if {@code obj} is a valid value
@@ -534,6 +619,23 @@ public class OpenMBeanParameterInfoSupport
      * {@link DescriptorRead#getDescriptor() getDescriptor()} method must
      * also return the same value as for this object.</p>
      *
+     * <p>
+     *  <p>比较指定的{@code obj}参数与此{@code OpenMBeanParameterInfoSupport}实例的相等性。</p>
+     * 
+     *  <p>当且仅当所有以下语句都为真时返回{@code true}：
+     * 
+     * <ul>
+     * <li> {@ code obj}非零,</li> <li> {@ code obj}也实现{@code OpenMBeanParameterInfo}接口,</li> <li> li>其开放类型相等</li>
+     *  <li>其默认值,最小值,最大值和法定值相等。
+     * </li>。
+     * </ul>
+     *  这确保了{@code equals}方法对于{@code obj}参数正常工作,这些参数是{@code OpenMBeanParameterInfo}接口的不同实现。
+     * 
+     *  <p>如果{@code obj}也实现了{@link DescriptorRead},那么它的{@link DescriptorRead#getDescriptor()getDescriptor()}
+     * 方法也必须返回与此对象相同的值。
+     * </p>。
+     * 
+     * 
      * @param obj the object to be compared for equality with this
      * {@code OpenMBeanParameterInfoSupport} instance.
      *
@@ -576,6 +678,19 @@ public class OpenMBeanParameterInfoSupport
      * on the first call to {@code hashCode}, and then the same value
      * is returned for subsequent calls.
      *
+     * <p>
+     *  <p>返回此{@code OpenMBeanParameterInfoSupport}实例的哈希码值。</p>
+     * 
+     *  <p> {@code OpenMBeanParameterInfoSupport}实例的哈希码是{@code equals}比较中使用的所有信息元素的哈希码的总和(即：其名称,其<i>开放类型</i>
+     *  ,其默认值,最小值,最大值和合法值,及其描述符)。
+     * 
+     *  <p>这确保{@code t1.equals(t2)}意味着任何两个{@code OpenMBeanParameterInfoSupport}实例{@code t1}的{@code t1.hashCode()== t2.hashCode @code t2}
+     * ,根据方法{@link Object#hashCode()Object.hashCode()}的一般合同的要求。
+     * 
+     * <p>但是,请注意,实现{@code OpenMBeanParameterInfo}接口的类的另一个实例可能等于{@link OpenStateParameterInfoSupport}实例(由{@link #equals(java.lang.Object)}
+     * 定义),但可能如果计算不同,则具有不同的散列码。
+     * 
+     * 
      * @return the hash code value for this {@code
      * OpenMBeanParameterInfoSupport} instance
      */
@@ -607,6 +722,10 @@ public class OpenMBeanParameterInfoSupport
      * on the first call to {@code toString}, and then the same value
      * is returned for subsequent calls.
      *
+     * <p>
+     *  <p>由于{@code OpenMBeanParameterInfoSupport}实例不可变,在第一次调用{@code hashCode}时,此实例的哈希码计算一次,然后为后续调用返回相同的值。
+     * 
+     * 
      * @return a string representation of this
      * {@code OpenMBeanParameterInfoSupport} instance.
      */

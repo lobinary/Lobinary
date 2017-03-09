@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,9 @@ import org.omg.CORBA.LocalObject;
 /**
  * CodecFactoryImpl is the implementation of the Codec Factory, as described
  * in orbos/99-12-02.
+ * <p>
+ *  CodecFactoryImpl是Codec Factory的实现,如orbos / 99-12-02中所述。
+ * 
  */
 public final class CodecFactoryImpl
     extends org.omg.CORBA.LocalObject
@@ -61,6 +65,9 @@ public final class CodecFactoryImpl
     /**
      * Creates a new CodecFactory implementation.  Stores the ORB that
      * created this factory, for later use by the Codec.
+     * <p>
+     *  创建新的CodecFactory实现。存储创建此工厂的ORB,以供以后由Codec使用。
+     * 
      */
     public CodecFactoryImpl( ORB orb ) {
         this.orb = orb;
@@ -83,6 +90,10 @@ public final class CodecFactoryImpl
      * by this factory is ENCODING_CDR_ENCAPS, versions 1.0 through
      * 1.(MAX_MINOR_VERSION_SUPPORTED).
      *
+     * <p>
+     *  创建给定编码的编解码器。该工厂识别的唯一格式是ENCODING_CDR_ENCAPS,版本1.0到1.(MAX_MINOR_VERSION_SUPPORTED)。
+     * 
+     * 
      * @exception UnknownEncoding Thrown if this factory cannot create a
      *   Codec of the given encoding.
      */
@@ -114,6 +125,8 @@ public final class CodecFactoryImpl
     /**
      * Called when an invalid null parameter was passed.  Throws a
      * BAD_PARAM with a minor code of 1
+     * <p>
+     *  当传递无效的空参数时调用。投掷BAD_PARAM,次要代码为1
      */
     private void nullParam()
     {

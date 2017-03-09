@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -109,6 +110,39 @@ import sun.security.util.Password;
  *      privateKeyPasswordURL must not be specified.</dd>
  *
  * </dl>
+ * <p>
+ *  提供一个JAAS登录模块,提示输入密钥库别名,并使用别名的主体和凭据填充主题。
+ * 为主体主体中的别名凭证中的第一个证书的主题专有名称,主体公共凭证中别名的证书路径以及其证书的<code> X500PrivateCredential </code>存储<code> X500Princi
+ * pal </code>是别名的证书路径中的第一个证书,其私钥是主体的私有凭证中的别名的私钥。
+ *  提供一个JAAS登录模块,提示输入密钥库别名,并使用别名的主体和凭据填充主题。 <p>。
+ * 
+ *  识别配置文件中的以下选项：
+ * <dl>
+ * 
+ *  <dt> <code> keyStoreURL </code> </dt> <dd>指定密钥库位置的URL。
+ * 默认为指向由<code> user.home </code>系统属性指定的目录中的.keystore文件的URL。
+ * 来自此URL的输入流传递到<code> KeyStore.load </code>方法。
+ * 如果必须将<code> null </code>流传递给<code> KeyStore.load </code>方法,则可以指定"NONE"。
+ * 如果KeyStore驻留在硬件令牌设备上,则应指定"NONE"。</dd>。
+ * 
+ * <dt> <code> keyStoreType </code> </dt> <dd>密钥库类型。
+ * 如果未指定,则默认为调用<code> KeyStore.getDefaultType()</code>的结果。
+ * 如果类型为"PKCS11",则keyStoreURL必须为"NONE",并且不得指定privateKeyPasswordURL。</dd>。
+ * 
+ *  <dt> <code> keyStoreProvider </code> </dt> <dd>密钥库提供程序。如果未指定,则使用标准搜索顺序查找提供程序。 </dd>
+ * 
+ *  <dt> <code> keyStoreAlias </code> </dt> <dd>密钥库中用于登录的别名。当没有提供回调处理程序时需要。无默认值。 </dd>
+ * 
+ *  <dt> <code> keyStorePasswordURL </code> </dt> <dd>指定密钥库密码位置的URL。
+ * 当没有提供回调处理程序并且<code> protected </code>为false时需要。无默认值。 </dd>。
+ * 
+ *  <dt> <code> privateKeyPasswordURL </code> </dt> <dd>一个URL,指定访问此别名的私钥所需的特定私钥密码的位置。
+ * 如果需要并且未指定此值,那么将使用密钥库密码。 </dd>。
+ * 
+ *  <dt> <code> protected </code> </dt> <dd>如果KeyStore具有单独的受保护的身份验证路径,则此值应设置为"true"(例如,卡)。默认为"false"。
+ * 如果不能指定"true"keyStorePasswordURL和privateKeyPasswordURL。</dd>。
+ * 
+ * </dl>
  */
 @jdk.Exported
 public class KeyStoreLoginModule implements LoginModule {
@@ -178,6 +212,12 @@ public class KeyStoreLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  初始化此<code> LoginModule </code>。
+     * 
+     * <p>
+     * 
+     * 
      * @param subject the <code>Subject</code> to be authenticated. <p>
      *
      * @param callbackHandler a <code>CallbackHandler</code> for communicating
@@ -260,6 +300,14 @@ public class KeyStoreLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  验证用户。
+     * 
+     * <p>获取密钥库别名和相关密码。从密钥库检索别名的主体和凭据。
+     * 
+     * <p>
+     * 
+     * 
      * @exception FailedLoginException if the authentication fails. <p>
      *
      * @return true in all cases (this <code>LoginModule</code>
@@ -572,6 +620,9 @@ public class KeyStoreLoginModule implements LoginModule {
             /*
              * Use keystore password if no private key password is
              * specified.
+             * <p>
+             *  如果未指定私钥密码,请使用密钥库密码。
+             * 
              */
             privateKeyPassword = keyStorePassword;
         }
@@ -732,6 +783,19 @@ public class KeyStoreLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  抽象方法提交认证过程(阶段2)。
+     * 
+     *  <p>如果LoginContext的整体认证成功(相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules成功),则调用此方法。
+     * 
+     *  <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>方法保存的私有状态进行检查),则此方法将主体专有名称的<code> X500Principa
+     * l </code>主体的主体中的别名凭证中的第一个证书,主体的公共凭证中的别名的证书路径以及其证书是别名的证书路径中的第一个证书并且其私钥是别名的证书的<code> X500PrivateCredent
+     * ial </code>私钥在主体的私人凭据。
+     * 如果此LoginModule自己的身份验证尝试失败,则此方法将删除最初保存的任何状态。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the commit fails
      *
      * @return true if this LoginModule's own login and commit
@@ -761,6 +825,9 @@ public class KeyStoreLoginModule implements LoginModule {
     private boolean commitInternal() throws LoginException {
         /* If the subject is not readonly add to the principal and credentials
          * set; otherwise just return true
+         * <p>
+         *  组;否则只是返回true
+         * 
          */
         if (subject.isReadOnly()) {
             throw new LoginException ("Subject is set readonly");
@@ -790,6 +857,17 @@ public class KeyStoreLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  <p>如果LoginContext的整体身份验证失败,则会调用此方法。 (相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules没有成功)。
+     * 
+     * <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>和<code> commit </code>方法保存的私有状态进行检查),则此方法将清除原来保
+     * 存。
+     * 
+     *  <p>如果加载的KeyStore的提供程序扩展了<code> java.security.AuthProvider </code>,那么将调用提供程序的<code> logout </code>方法。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the abort fails.
      *
      * @return false if this LoginModule's own login and/or commit attempts
@@ -823,6 +901,8 @@ public class KeyStoreLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     * 
      * @exception LoginException if the logout fails.
      *
      * @return true in all cases since this <code>LoginModule</code>

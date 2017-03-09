@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,33 @@ package com.sun.org.apache.bcel.internal.generic;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)2001 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得使用名称"Apache"和"Apache Software Foundation"和"Apache BCEL"来认可或推广从本软件衍生的产品。
+ * 如需书面许可,请联系apache@apache.org。
+ * 
+ * 未经Apache软件基金会事先书面许可,从本软件衍生的产品可能不会被称为"Apache","Apache BCEL",也不可能出现在他们的名字中。
+ * 
+ *  本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ *  本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款。有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 import com.sun.org.apache.bcel.internal.Constants;
@@ -79,6 +107,14 @@ import java.util.ArrayList;
  * A list is finally dumped to a byte code array with <a
  * href="#getByteCode()">getByteCode</a>.
  *
+ * <p>
+ * 此类是<a href="Instruction.html">指令</a>对象列表的容器。指令可以被附加,插入,移动,删除等。
+ * 指令被包装到在附加/插入操作时返回的<a href="InstructionHandle.html"> InstructionHandles </a>对象中。
+ * 它们给予用户(只读)对列表结构的访问,使得它可以以受控的方式被遍历和操纵。
+ * 
+ *  最终将列表转储到具有<a href="#getByteCode()"> getByteCode </a>的字节代码数组。
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see     Instruction
  * @see     InstructionHandle
@@ -91,11 +127,18 @@ public class InstructionList implements Serializable {
 
   /**
    * Create (empty) instruction list.
+   * <p>
+   *  创建(空)指令列表。
+   * 
    */
   public InstructionList() {}
 
   /**
    * Create instruction list containing one instruction.
+   * <p>
+   *  创建包含一条指令的指令列表。
+   * 
+   * 
    * @param i initial instruction
    */
   public InstructionList(Instruction i) {
@@ -104,6 +147,10 @@ public class InstructionList implements Serializable {
 
   /**
    * Create instruction list containing one instruction.
+   * <p>
+   *  创建包含一条指令的指令列表。
+   * 
+   * 
    * @param i initial instruction
    */
   public InstructionList(BranchInstruction i) {
@@ -114,6 +161,10 @@ public class InstructionList implements Serializable {
    * Initialize list with (nonnull) compound instruction. Consumes argument
    * list, i.e., it becomes empty.
    *
+   * <p>
+   *  使用(非空)复合指令初始化列表。使用参数列表,即它变为空。
+   * 
+   * 
    * @param c compound instruction (list)
    */
   public InstructionList(CompoundInstruction c) {
@@ -122,6 +173,9 @@ public class InstructionList implements Serializable {
 
   /**
    * Test for empty list.
+   * <p>
+   *  测试空列表。
+   * 
    */
   public boolean isEmpty() { return start == null; } // && end == null
 
@@ -129,6 +183,10 @@ public class InstructionList implements Serializable {
    * Find the target instruction (handle) that corresponds to the given target
    * position (byte code offset).
    *
+   * <p>
+   *  找到与给定目标位置(字节代码偏移量)相对应的目标指令(句柄)。
+   * 
+   * 
    * @param ihs array of instruction handles, i.e. il.getInstructionHandles()
    * @param pos array of positions corresponding to ihs, i.e. il.getInstructionPositions()
    * @param count length of arrays
@@ -141,6 +199,7 @@ public class InstructionList implements Serializable {
     int l=0, r = count - 1;
 
     /* Do a binary search since the pos array is orderd.
+    /* <p>
      */
     do {
       int i = (l + r) / 2;
@@ -162,6 +221,10 @@ public class InstructionList implements Serializable {
    * This only works properly, if the list is freshly initialized from a byte array or
    * setPositions() has been called before this method.
    *
+   * <p>
+   *  获取字节码位置pos处的指令的指令句柄。这只能正常工作,如果列表刚刚从字节数组初始化或setPositions()在此方法之前被调用。
+   * 
+   * 
    * @param pos byte code position to search for
    * @return target position's instruction handle if available
    */
@@ -173,6 +236,10 @@ public class InstructionList implements Serializable {
   /**
    * Initialize instruction list from byte array.
    *
+   * <p>
+   *  从字节数组初始化指令列表。
+   * 
+   * 
    * @param code byte array containing the instructions
    */
   public InstructionList(byte[] code) {
@@ -183,6 +250,9 @@ public class InstructionList implements Serializable {
 
     /* Pass 1: Create an object for each byte code and append them
      * to the list.
+     * <p>
+     *  到列表。
+     * 
      */
     try {
       while(bytes.available() > 0) {
@@ -192,6 +262,9 @@ public class InstructionList implements Serializable {
 
         /* Read one instruction from the byte stream, the byte position is set
          * accordingly.
+         * <p>
+         *  因此。
+         * 
          */
         Instruction       i = Instruction.readInstruction(bytes);
         InstructionHandle ih;
@@ -212,11 +285,16 @@ public class InstructionList implements Serializable {
 
     /* Pass 2: Look for BranchInstruction and update their targets, i.e.,
      * convert offsets to instruction handles.
+     * <p>
+     *  将偏移转换为指令句柄。
+     * 
      */
     for(int i=0; i < count; i++) {
       if(ihs[i] instanceof BranchHandle) {
         BranchInstruction bi = (BranchInstruction)ihs[i].instruction;
         int target = bi.position + bi.getIndex(); /* Byte code position:
+        int target = bi.position + bi.getIndex(); /* <p>
+        int target = bi.position + bi.getIndex(); /* 
                                                    * relative -> absolute. */
         // Search for target position
         InstructionHandle ih = findHandle(ihs, pos, count, target);
@@ -249,6 +327,10 @@ public class InstructionList implements Serializable {
    * Append another list after instruction (handle) ih contained in this list.
    * Consumes argument list, i.e., it becomes empty.
    *
+   * <p>
+   *  在此列表中包含的指令(句柄)ih之后附加另一个列表。使用参数列表,即它变为空。
+   * 
+   * 
    * @param ih where to append the instruction list
    * @param il Instruction list to append to this one
    * @return instruction handle pointing to the <B>first</B> appended instruction
@@ -283,6 +365,10 @@ public class InstructionList implements Serializable {
    * Append another list after instruction i contained in this list.
    * Consumes argument list, i.e., it becomes empty.
    *
+   * <p>
+   *  在此列表中包含的指令i之后附加另一个列表。使用参数列表,即它变为空。
+   * 
+   * 
    * @param i  where to append the instruction list
    * @param il Instruction list to append to this one
    * @return instruction handle pointing to the <B>first</B> appended instruction
@@ -301,6 +387,10 @@ public class InstructionList implements Serializable {
    * Append another list to this one.
    * Consumes argument list, i.e., it becomes empty.
    *
+   * <p>
+   * 将另一个列表附加到此列表。使用参数列表,即它变为空。
+   * 
+   * 
    * @param il list to append to end of this list
    * @return instruction handle of the <B>first</B> appended instruction
    */
@@ -326,6 +416,10 @@ public class InstructionList implements Serializable {
   /**
    * Append an instruction to the end of this list.
    *
+   * <p>
+   *  将指令附加到此列表的末尾。
+   * 
+   * 
    * @param ih instruction to append
    */
   private void append(InstructionHandle ih) {
@@ -346,6 +440,10 @@ public class InstructionList implements Serializable {
   /**
    * Append an instruction to the end of this list.
    *
+   * <p>
+   *  将指令附加到此列表的末尾。
+   * 
+   * 
    * @param i instruction to append
    * @return instruction handle of the appended instruction
    */
@@ -359,6 +457,10 @@ public class InstructionList implements Serializable {
   /**
    * Append a branch instruction to the end of this list.
    *
+   * <p>
+   *  将分支指令附加到此列表的结尾。
+   * 
+   * 
    * @param i branch instruction to append
    * @return branch instruction handle of the appended instruction
    */
@@ -373,6 +475,10 @@ public class InstructionList implements Serializable {
    * Append a single instruction j after another instruction i, which
    * must be in this list of course!
    *
+   * <p>
+   *  在另一个指令i后附加单个指令j,这必须在这个列表中！
+   * 
+   * 
    * @param i Instruction in list
    * @param j Instruction to append after i in list
    * @return instruction handle of the first appended instruction
@@ -384,6 +490,10 @@ public class InstructionList implements Serializable {
   /**
    * Append a compound instruction, after instruction i.
    *
+   * <p>
+   *  在指令i后附加复合指令。
+   * 
+   * 
    * @param i Instruction in list
    * @param c The composite instruction (containing an InstructionList)
    * @return instruction handle of the first appended instruction
@@ -395,6 +505,10 @@ public class InstructionList implements Serializable {
   /**
    * Append a compound instruction.
    *
+   * <p>
+   *  附加复合指令。
+   * 
+   * 
    * @param c The composite instruction (containing an InstructionList)
    * @return instruction handle of the first appended instruction
    */
@@ -405,6 +519,10 @@ public class InstructionList implements Serializable {
   /**
    * Append a compound instruction.
    *
+   * <p>
+   *  附加复合指令。
+   * 
+   * 
    * @param ih where to append the instruction list
    * @param c The composite instruction (containing an InstructionList)
    * @return instruction handle of the first appended instruction
@@ -416,6 +534,10 @@ public class InstructionList implements Serializable {
   /**
    * Append an instruction after instruction (handle) ih contained in this list.
    *
+   * <p>
+   *  在此列表中包含的指令(句柄)ih之后附加指令。
+   * 
+   * 
    * @param ih where to append the instruction list
    * @param i Instruction to append
    * @return instruction handle pointing to the <B>first</B> appended instruction
@@ -427,6 +549,10 @@ public class InstructionList implements Serializable {
   /**
    * Append an instruction after instruction (handle) ih contained in this list.
    *
+   * <p>
+   *  在此列表中包含的指令(句柄)ih之后附加指令。
+   * 
+   * 
    * @param ih where to append the instruction list
    * @param i Instruction to append
    * @return instruction handle pointing to the <B>first</B> appended instruction
@@ -445,6 +571,10 @@ public class InstructionList implements Serializable {
    * Insert another list before Instruction handle ih contained in this list.
    * Consumes argument list, i.e., it becomes empty.
    *
+   * <p>
+   *  在此列表中包含的指令句柄ih之前插入另一个列表。使用参数列表,即它变为空。
+   * 
+   * 
    * @param i  where to append the instruction list
    * @param il Instruction list to insert
    * @return instruction handle of the first inserted instruction
@@ -478,6 +608,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert another list.
    *
+   * <p>
+   *  插入另一个列表。
+   * 
+   * 
    * @param il list to insert before start of this list
    * @return instruction handle of the first inserted instruction
    */
@@ -493,6 +627,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert an instruction at start of this list.
    *
+   * <p>
+   *  在此列表的开始处插入指令。
+   * 
+   * 
    * @param ih instruction to insert
    */
   private void insert(InstructionHandle ih) {
@@ -513,6 +651,10 @@ public class InstructionList implements Serializable {
    * Insert another list before Instruction i contained in this list.
    * Consumes argument list, i.e., it becomes empty.
    *
+   * <p>
+   *  在此列表中包含的指令i之前插入另一个列表。使用参数列表,即它变为空。
+   * 
+   * 
    * @param i  where to append the instruction list
    * @param il Instruction list to insert
    * @return instruction handle pointing to the first inserted instruction,
@@ -531,6 +673,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert an instruction at start of this list.
    *
+   * <p>
+   *  在此列表的开始处插入指令。
+   * 
+   * 
    * @param i instruction to insert
    * @return instruction handle of the inserted instruction
    */
@@ -544,6 +690,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert a branch instruction at start of this list.
    *
+   * <p>
+   *  在此列表的开始处插入分支指令。
+   * 
+   * 
    * @param i branch instruction to insert
    * @return branch instruction handle of the appended instruction
    */
@@ -557,6 +707,10 @@ public class InstructionList implements Serializable {
    * Insert a single instruction j before another instruction i, which
    * must be in this list of course!
    *
+   * <p>
+   *  在另一个指令i之前插入单个指令j,它必须在此列表中！
+   * 
+   * 
    * @param i Instruction in list
    * @param j Instruction to insert before i in list
    * @return instruction handle of the first inserted instruction
@@ -568,6 +722,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert a compound instruction before instruction i.
    *
+   * <p>
+   *  在指令i前插入复合指令。
+   * 
+   * 
    * @param i Instruction in list
    * @param c The composite instruction (containing an InstructionList)
    * @return instruction handle of the first inserted instruction
@@ -579,6 +737,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert a compound instruction.
    *
+   * <p>
+   *  插入复合指令。
+   * 
+   * 
    * @param c The composite instruction (containing an InstructionList)
    * @return instruction handle of the first inserted instruction
    */
@@ -589,6 +751,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert an instruction before instruction (handle) ih contained in this list.
    *
+   * <p>
+   *  在此列表中包含的指令(句柄)ih之前插入指令。
+   * 
+   * 
    * @param ih where to insert to the instruction list
    * @param i Instruction to insert
    * @return instruction handle of the first inserted instruction
@@ -600,6 +766,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert a compound instruction.
    *
+   * <p>
+   *  插入复合指令。
+   * 
+   * 
    * @param ih where to insert the instruction list
    * @param c The composite instruction (containing an InstructionList)
    * @return instruction handle of the first inserted instruction
@@ -611,6 +781,10 @@ public class InstructionList implements Serializable {
   /**
    * Insert an instruction before instruction (handle) ih contained in this list.
    *
+   * <p>
+   *  在此列表中包含的指令(句柄)ih之前插入指令。
+   * 
+   * 
    * @param ih where to insert to the instruction list
    * @param i Instruction to insert
    * @return instruction handle of the first inserted instruction
@@ -632,6 +806,11 @@ public class InstructionList implements Serializable {
    * the list use null as value for target.<br>
    * Any instruction targeters pointing to handles within the block, keep their targets.
    *
+   * <p>
+   * 将所有指令(句柄)从"开始"到"结束",并将它们附加到新位置"目标"之后。当然,"结束"必须在"开始"之后,并且目标不能与该范围一起定位。
+   * 如果你想将某个东西移动到列表的开头,请使用null作为目标的值。<br>任何指令指向程序块中的句柄,保留它们的目标。
+   * 
+   * 
    * @param start  of moved block
    * @param end    of moved block
    * @param target of moved block
@@ -690,6 +869,10 @@ public class InstructionList implements Serializable {
   /**
    * Move a single instruction (handle) to a new location.
    *
+   * <p>
+   *  将单个指令(句柄)移动到新位置。
+   * 
+   * 
    * @param ih     moved instruction
    * @param target new location of moved instruction
    */
@@ -702,6 +885,10 @@ public class InstructionList implements Serializable {
    * in this list. Throws TargetLostException when one of the removed instruction handles
    * is still being targeted.
    *
+   * <p>
+   *  从指令`prev'移除到此列表中包含的指令`next'。当其中一个已删除的指令句柄仍在定向时抛出TargetLostException。
+   * 
+   * 
    * @param prev where to start deleting (predecessor, exclusive)
    * @param next where to end deleting (successor, exclusive)
    */
@@ -765,6 +952,10 @@ public class InstructionList implements Serializable {
    * Remove instruction from this list. The corresponding Instruction
    * handles must not be reused!
    *
+   * <p>
+   *  从此列表中删除指令。相应的指令句柄不能重复使用！
+   * 
+   * 
    * @param ih instruction (handle) to remove
    */
   public void delete(InstructionHandle ih) throws TargetLostException {
@@ -775,6 +966,10 @@ public class InstructionList implements Serializable {
    * Remove instruction from this list. The corresponding Instruction
    * handles must not be reused!
    *
+   * <p>
+   *  从此列表中删除指令。相应的指令句柄不能重复使用！
+   * 
+   * 
    * @param i instruction to remove
    */
   public void delete(Instruction i) throws TargetLostException {
@@ -791,6 +986,10 @@ public class InstructionList implements Serializable {
    * in this list. The user must ensure that `from' is an instruction before
    * `to', or risk havoc. The corresponding Instruction handles must not be reused!
    *
+   * <p>
+   *  删除包含在此列表中的指令"从"到指令"到"的指令。用户必须确保`from'是在`to'之前的一条指令,或危险的危险。相应的指令句柄不能重复使用！
+   * 
+   * 
    * @param from where to start deleting (inclusive)
    * @param to   where to end deleting (inclusive)
    */
@@ -805,6 +1004,10 @@ public class InstructionList implements Serializable {
    * in this list. The user must ensure that `from' is an instruction before
    * `to', or risk havoc. The corresponding Instruction handles must not be reused!
    *
+   * <p>
+   *  删除包含在此列表中的指令"从"到指令"到"的指令。用户必须确保`from'是在`to'之前的一条指令,或危险的危险。相应的指令句柄不能重复使用！
+   * 
+   * 
    * @param from where to start deleting (inclusive)
    * @param to   where to end deleting (inclusive)
    */
@@ -824,6 +1027,10 @@ public class InstructionList implements Serializable {
   /**
    * Search for given Instruction reference, start at beginning of list.
    *
+   * <p>
+   *  搜索给定的指令引用,从列表的开始处开始。
+   * 
+   * 
    * @param i instruction to search for
    * @return instruction found on success, null otherwise
    */
@@ -838,6 +1045,10 @@ public class InstructionList implements Serializable {
   /**
    * Search for given Instruction reference, start at end of list
    *
+   * <p>
+   *  搜索给定的指令引用,从列表的结尾开始
+   * 
+   * 
    * @param i instruction to search for
    * @return instruction found on success, null otherwise
    */
@@ -872,6 +1083,10 @@ public class InstructionList implements Serializable {
    * Give all instructions their position number (offset in byte stream), i.e.,
    * make the list ready to be dumped.
    *
+   * <p>
+   *  给所有指令它们的位置号(字节流中的偏移量),即使该列表准备被转储。
+   * 
+   * 
    * @param check Perform sanity checks, e.g. if all targeted instructions really belong
    * to this list
    */
@@ -881,6 +1096,7 @@ public class InstructionList implements Serializable {
     int[] pos = new int[length];
 
     /* Pass 0: Sanity checks
+    /* <p>
      */
     if(check) {
       for(InstructionHandle ih=start; ih != null; ih = ih.next) {
@@ -916,6 +1132,9 @@ public class InstructionList implements Serializable {
 
     /* Pass 1: Set position numbers and sum up the maximum number of bytes an
      * instruction may be shifted.
+     * <p>
+     * 指令可以被移位。
+     * 
      */
     for(InstructionHandle ih=start; ih != null; ih = ih.next) {
       Instruction i = ih.instruction;
@@ -927,6 +1146,9 @@ public class InstructionList implements Serializable {
        * BranchInstructions may have variable length depending on the target
        * offset (short vs. int) or alignment issues (TABLESWITCH and
        * LOOKUPSWITCH).
+       * <p>
+       *  BranchInstructions可以具有可变长度,这取决于目标偏移(短与int)或对齐问题(TABLESWITCH和LOOKUPSWITCH)。
+       * 
        */
       switch(i.getOpcode()) {
       case Constants.JSR: case Constants.GOTO:
@@ -944,12 +1166,18 @@ public class InstructionList implements Serializable {
     /* Pass 2: Expand the variable-length (Branch)Instructions depending on
      * the target offset (short or int) and ensure that branch targets are
      * within this list.
+     * <p>
+     *  目标偏移(short或int),并确保分支目标在此列表内。
+     * 
      */
     for(InstructionHandle ih=start; ih != null; ih = ih.next)
       additional_bytes += ih.updatePosition(additional_bytes, max_additional_bytes);
 
     /* Pass 3: Update position numbers (which may have changed due to the
      * preceding expansions), like pass 1.
+     * <p>
+     *  之前的扩展),如通过1。
+     * 
      */
     index=count=0;
     for(InstructionHandle ih=start; ih != null; ih = ih.next) {
@@ -968,6 +1196,10 @@ public class InstructionList implements Serializable {
    * When everything is finished, use this method to convert the instruction
    * list into an array of bytes.
    *
+   * <p>
+   *  当一切完成后,使用此方法将指令列表转换为字节数组。
+   * 
+   * 
    * @return the byte code ready to be dumped
    */
   public byte[] getByteCode() {
@@ -991,6 +1223,8 @@ public class InstructionList implements Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return an array of instructions without target information for branch instructions.
    */
   public Instruction[] getInstructions() {
@@ -1013,6 +1247,8 @@ public class InstructionList implements Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @param verbose toggle output format
    * @return String containing all instructions in this list.
    */
@@ -1027,6 +1263,8 @@ public class InstructionList implements Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return Enumeration that lists all instructions (handles)
    */
   public Iterator iterator() {
@@ -1048,6 +1286,8 @@ public class InstructionList implements Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return array containing all instructions (handles)
    */
   public InstructionHandle[] getInstructionHandles() {
@@ -1067,11 +1307,17 @@ public class InstructionList implements Serializable {
    * the list has been freshly created from an byte code array, or that setPositions()
    * has been called. Otherwise this may be inaccurate.
    *
+   * <p>
+   *  获取列表中所有指令的位置(偏移量)。这依赖于列表是从字节代码数组新创建的,或者setPositions()已被调用。否则,这可能不准确。
+   * 
+   * 
    * @return array containing all instruction's offset in byte code
    */
   public int[] getInstructionPositions() { return byte_positions; }
 
   /**
+  /* <p>
+  /* 
    * @return complete, i.e., deep copy of this list
    */
   public InstructionList copy() {
@@ -1081,6 +1327,9 @@ public class InstructionList implements Serializable {
     /* Pass 1: Make copies of all instructions, append them to the new list
      * and associate old instruction references with the new ones, i.e.,
      * a 1:1 mapping.
+     * <p>
+     *  并将旧的指令引用与新的指令引用相关联,即1：1映射。
+     * 
      */
     for(InstructionHandle ih=start; ih != null; ih = ih.next) {
       Instruction i = ih.instruction;
@@ -1093,6 +1342,7 @@ public class InstructionList implements Serializable {
     }
 
     /* Pass 2: Update branch targets.
+    /* <p>
      */
     InstructionHandle ih=start;
     InstructionHandle ch=il.start;
@@ -1128,6 +1378,9 @@ public class InstructionList implements Serializable {
 
   /** Replace all references to the old constant pool with references to the new
    *  constant pool
+   * <p>
+   *  常数池
+   * 
    */
   public void replaceConstantPool(ConstantPoolGen old_cp, ConstantPoolGen new_cp) {
     for(InstructionHandle ih=start; ih != null; ih = ih.next) {
@@ -1151,12 +1404,19 @@ public class InstructionList implements Serializable {
    * because the system then may reuse the instruction handles. This
    * method is typically called right after
    * <href="MethodGen.html#getMethod()">MethodGen.getMethod()</a>.
+   * <p>
+   *  删除列表的内容。提供besser内存利用,因为系统然后可以重用指令句柄。
+   * 此方法通常在<href ="MethodGen.html#getMethod()"> MethodGen.getMethod()</a>之后调用。
+   * 
    */
   public void dispose() {
     // Traverse in reverse order, because ih.next is overwritten
     for(InstructionHandle ih=end; ih != null; ih = ih.prev)
       /* Causes BranchInstructions to release target and targeters, because it
        * calls dispose() on the contained instruction.
+       * <p>
+       *  在包含的指令上调用dispose()。
+       * 
        */
       ih.dispose();
 
@@ -1164,21 +1424,29 @@ public class InstructionList implements Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return start of list
    */
   public InstructionHandle getStart() { return start; }
 
   /**
+  /* <p>
+  /* 
    * @return end of list
    */
   public InstructionHandle getEnd()   { return end; }
 
   /**
+  /* <p>
+  /* 
    * @return length of list (Number of instructions, not bytes)
    */
   public int getLength() { return length; }
 
   /**
+  /* <p>
+  /* 
    * @return length of list (Number of instructions, not bytes)
    */
   public int size() { return length; }
@@ -1187,6 +1455,10 @@ public class InstructionList implements Serializable {
    * Redirect all references from old_target to new_target, i.e., update targets
    * of branch instructions.
    *
+   * <p>
+   *  将所有引用从old_target重定向到new_target,即更新分支指令的目标。
+   * 
+   * 
    * @param old_target the old target instruction handle
    * @param new_target the new target instruction handle
    */
@@ -1216,6 +1488,10 @@ public class InstructionList implements Serializable {
   /**
    * Redirect all references of local variables from old_target to new_target.
    *
+   * <p>
+   *  将局部变量的所有引用从old_target重定向到new_target。
+   * 
+   * 
    * @param lg array of local variables
    * @param old_target the old target instruction handle
    * @param new_target the new target instruction handle
@@ -1239,6 +1515,10 @@ public class InstructionList implements Serializable {
   /**
    * Redirect all references of exception handlers from old_target to new_target.
    *
+   * <p>
+   *  将异常处理程序的所有引用从old_target重定向到new_target。
+   * 
+   * 
    * @param exceptions array of exception handlers
    * @param old_target the old target instruction handle
    * @param new_target the new target instruction handle
@@ -1262,6 +1542,7 @@ public class InstructionList implements Serializable {
   private ArrayList observers;
 
   /** Add observer for this object.
+  /* <p>
    */
   public void addObserver(InstructionListObserver o) {
     if(observers == null)
@@ -1271,6 +1552,7 @@ public class InstructionList implements Serializable {
   }
 
   /** Remove observer for this object.
+  /* <p>
    */
   public void removeObserver(InstructionListObserver o) {
     if(observers != null)
@@ -1280,6 +1562,8 @@ public class InstructionList implements Serializable {
   /** Call notify() method on all observers. This method is not called
    * automatically whenever the state has changed, but has to be
    * called by the user after he has finished editing the object.
+   * <p>
+   *  每当状态改变时自动地,但是在用户完成编辑对象之后必须被用户调用。
    */
   public void update() {
     if(observers != null)

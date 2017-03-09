@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: FilterExpr.java,v 1.2.4.1 2005/09/12 10:22:50 pvedula Exp $
+ * <p>
+ *  $ Id：FilterExpr.java,v 1.2.4.1 2005/09/12 10:22:50 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -45,6 +58,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -53,11 +68,17 @@ class FilterExpr extends Expression {
 
     /**
      * Primary expression of this filter. I.e., 'e' in '(e)[p1]...[pn]'.
+     * <p>
+     *  此过滤器的主表达式。即,'e'在'(e)[p1] ... [pn]'。
+     * 
      */
     private Expression   _primary;
 
     /**
      * Array of predicates in '(e)[p1]...[pn]'.
+     * <p>
+     *  '(e)[p1] ... [pn]'中的谓词数组。
+     * 
      */
     private final Vector _predicates;
 
@@ -97,6 +118,10 @@ class FilterExpr extends Expression {
      * is needed for expressions like $x where $x is a parameter reference.
      * All optimizations are turned off before type checking underlying
      * predicates.
+     * <p>
+     *  类型检查FilterParentPath。如果过滤器不是节点集,那么仅当它是引用类型时才将转换添加到节点集。对于$ x这样的表达式,这种类型强制是必需的,其中$ x是参数引用。
+     * 在检查基础谓词之前,将关闭所有优化。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         Type ptype = _primary.typeCheck(stable);
@@ -127,6 +152,9 @@ class FilterExpr extends Expression {
     /**
      * Translate a filter expression by pushing the appropriate iterator
      * onto the stack.
+     * <p>
+     *  通过将适当的迭代器推送到堆栈来翻译过滤器表达式。
+     * 
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         translateFilterExpr(classGen, methodGen, _predicates == null ? -1 : _predicates.size() - 1);
@@ -148,6 +176,9 @@ class FilterExpr extends Expression {
      * by constructing an instance of <code>CurrentNodeListIterator</code>
      * which is initialized from another iterator (recursive call), a
      * filter and a closure (call to translate on the predicate) and "this".
+     * <p>
+     * 翻译谓词序列。
+     * 每个谓词通过构造从另一个迭代器(递归调用),过滤器和闭包(对谓词的translate)和"this"初始化的<code> CurrentNodeListIterator </code>实例进行转换。
      */
     public void translatePredicates(ClassGenerator classGen,
                                     MethodGenerator methodGen,

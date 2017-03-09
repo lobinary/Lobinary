@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,37 @@ import java.io.Serializable;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  为了方便布局管理器,计算关于组件的大小和位置的信息。所有大小和位置计算方法都是将SizeRequirements数组作为参数的类方法。 SizeRequirements类支持两种类型的布局：
+ * 
+ * <blockquote>
+ * <dl>
+ *  <dt> tiled <dd>组件从头到尾放置,从坐标0(最左或最高位置)开始,或者在表示分配的间距(最右或最低位置)结束的坐标处开始。
+ * 
+ *  <dt> aligned <dd>组件按照每个组件的X或Y对齐值指定进行对齐。
+ * </dl>
+ * </blockquote>
+ * 
+ * <p>
+ * 
+ *  每个SizeRequirements对象包含有关单个组件或一组组件的宽度(和X对齐)或高度(和Y对齐)的信息：
+ * 
+ * <blockquote>
+ * <dl>
+ *  <dt> <code> minimum </code> <dd>组件或组件组的最小合理宽度/高度,以像素为单位。
+ * 
+ *  <dt> <code> preferred </code> <dd>组件或组件组的自然宽度/高度,以像素为单位。
+ * 
+ *  <dt> <code> maximum </code> <dd>组件或组件组的最大合理宽度/高度,以像素为单位。
+ * 
+ *  <dt> <code> alignment </code> <dd>组件或组件组的X / Y对齐。
+ * </dl>
+ * </blockquote>
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see Component#getMinimumSize
  * @see Component#getPreferredSize
  * @see Component#getMaximumSize
@@ -100,6 +132,10 @@ public class SizeRequirements implements Serializable {
      * For a component <code>comp</code>, this should be equal to either
      * <code>comp.getMinimumSize().width</code> or
      * <code>comp.getMinimumSize().height</code>.
+     * <p>
+     *  所需的最小大小。对于组件<code> comp </code>,这应该等于<code> comp.getMinimumSize()。
+     * width </code>或<code> comp.getMinimumSize()。height </code>。
+     * 
      */
     public int minimum;
 
@@ -108,6 +144,10 @@ public class SizeRequirements implements Serializable {
      * For a component <code>comp</code>, this should be equal to either
      * <code>comp.getPreferredSize().width</code> or
      * <code>comp.getPreferredSize().height</code>.
+     * <p>
+     *  优选(自然)尺寸。对于组件<code> comp </code>,这应该等于<code> comp.getPreferredSize()。
+     * width </code>或<code> comp.getPreferredSize()。height </code>。
+     * 
      */
     public int preferred;
 
@@ -116,6 +156,10 @@ public class SizeRequirements implements Serializable {
      * For a component <code>comp</code>, this should be equal to either
      * <code>comp.getMaximumSize().width</code> or
      * <code>comp.getMaximumSize().height</code>.
+     * <p>
+     *  允许的最大大小。对于组件<code> comp </code>,这应该等于<code> comp.getMaximumSize()。
+     * width </code>或<code> comp.getMaximumSize()。height </code>。
+     * 
      */
     public int maximum;
 
@@ -123,6 +167,9 @@ public class SizeRequirements implements Serializable {
      * The alignment, specified as a value between 0.0 and 1.0,
      * inclusive.
      * To specify centering, the alignment should be 0.5.
+     * <p>
+     *  对齐,指定为介于0.0和1.0(含)之间的值。要指定居中,对齐应为0.5。
+     * 
      */
     public float alignment;
 
@@ -130,6 +177,9 @@ public class SizeRequirements implements Serializable {
      * Creates a SizeRequirements object with the minimum, preferred,
      * and maximum sizes set to zero and an alignment value of 0.5
      * (centered).
+     * <p>
+     *  创建SizeRequirements对象,其最小值,首选值和最大值大小设置为零,对齐值为0.5(居中)。
+     * 
      */
     public SizeRequirements() {
         minimum = 0;
@@ -142,6 +192,10 @@ public class SizeRequirements implements Serializable {
      * Creates a SizeRequirements object with the specified minimum, preferred,
      * and maximum sizes and the specified alignment.
      *
+     * <p>
+     *  创建具有指定的最小,首选和最大大小以及指定对齐方式的SizeRequirements对象。
+     * 
+     * 
      * @param min the minimum size &gt;= 0
      * @param pref the preferred size &gt;= 0
      * @param max the maximum size &gt;= 0
@@ -158,6 +212,10 @@ public class SizeRequirements implements Serializable {
      * Returns a string describing the minimum, preferred, and maximum
      * size requirements, along with the alignment.
      *
+     * <p>
+     *  返回描述最小,首选和最大大小要求的字符串,以及对齐。
+     * 
+     * 
      * @return the string
      */
     public String toString() {
@@ -173,6 +231,11 @@ public class SizeRequirements implements Serializable {
      * (centered).  The space requirement is never more than
      * Integer.MAX_VALUE.
      *
+     * <p>
+     * 确定将一组组件端到端放置所需的总空间。集合中每个组件的需求由传入的SizeRequirements数组中的一个条目表示。返回的SizeRequirements对象的对齐方式为0.5(居中)。
+     * 空间需求永远不会超过Integer.MAX_VALUE。
+     * 
+     * 
      * @param children  the space requirements for a set of components.
      *   The vector may be of zero length, which will result in a
      *   default SizeRequirements object instance being passed back.
@@ -197,6 +260,10 @@ public class SizeRequirements implements Serializable {
      * passed-in SizeRequirements array.  The total space required will
      * never be more than Integer.MAX_VALUE.
      *
+     * <p>
+     *  确定对齐一组组件所需的总空间。集合中每个组件的需求由传入的SizeRequirements数组中的一个条目表示。所需的总空间不会超过Integer.MAX_VALUE。
+     * 
+     * 
      * @param children  the set of child requirements.  If of zero length,
      *  the returns result will be a default instance of SizeRequirements.
      * @return  the total space requirements.
@@ -246,6 +313,11 @@ public class SizeRequirements implements Serializable {
      * by invoking the getTiledSizeRequirements method.  The components
      * will be tiled in the forward direction with offsets increasing from 0.
      *
+     * <p>
+     *  创建一组偏移/跨度对,表示如何端对端地布置一组部件。此方法要求您指定要分配的总空间量,要放置的每个组件的大小要求(指定为SizeRequirements的数组)以及组件集合的总大小要求。
+     * 您可以通过调用getTiledSizeRequirements方法来获取总大小要求。组件将以正向方向平铺,偏移量从0增加。
+     * 
+     * 
      * @param allocated the total span to be allocated &gt;= 0.
      * @param total     the total of the children requests.  This argument
      *  is optional and may be null.
@@ -282,6 +354,13 @@ public class SizeRequirements implements Serializable {
      * reverse direction represents components tiled from right to left
      * or bottom to top.
      *
+     * <p>
+     *  创建一组偏移/跨度对,表示如何端对端地布置一组部件。此方法要求您指定要分配的总空间量,要放置的每个组件的大小要求(指定为SizeRequirements的数组)以及组件集合的总大小要求。
+     * 您可以通过调用getTiledSizeRequirements方法来获取总大小要求。
+     * 
+     * 该方法还需要指示是否应当在正向方向(从0增加的偏移)或反方向(从所分配的空间的结尾减小的偏移)上分量的分量的标志。前向表示从左到右或从上到下平铺的组件。反向表示从右到左或从下到上平铺的组件。
+     * 
+     * 
      * @param allocated the total span to be allocated &gt;= 0.
      * @param total     the total of the children requests.  This argument
      *  is optional and may be null.
@@ -405,6 +484,14 @@ public class SizeRequirements implements Serializable {
      * Normal alignment will be done with an alignment value of 0.0f
      * representing the left/top edge of a component.
      *
+     * <p>
+     *  创建一组偏移/跨度对,指定如何使用指定的对齐方式布置一组组件。结果跨度分配将重叠,每个拟合都尽可能地适合给定的总分配。
+     * 此方法要求您指定要分配的总空间量,要放置的每个组件的大小要求(指定为SizeRequirements的数组)和组件集合的总大小要求(仅对齐字段实际使用)。
+     * 您可以通过调用getAlignedSizeRequirements来获取总大小要求。
+     * 
+     *  正常对齐将使用对齐值0.0f表示组件的左/上边缘。
+     * 
+     * 
      * @param allocated the total span to be allocated &gt;= 0.
      * @param total     the total of the children requests.
      * @param children  the size requirements for each component.
@@ -441,6 +528,13 @@ public class SizeRequirements implements Serializable {
      * to be aligned.  With reverse alignment, 0.0f represents the
      * right/bottom edge.
      *
+     * <p>
+     * 创建一组偏移/跨度对,指定如何使用指定的对齐方式布置一组零部件。结果跨度分配将重叠,每个拟合都尽可能地适合给定的总分配。
+     * 此方法要求您指定要分配的总空间量,要放置的每个组件的大小要求(指定为SizeRequirements的数组)和组件集合的总大小要求(仅对齐字段实际使用)您可以通过调用getAlignedSizeRequ
+     * irements来获得总大小要求。
+     * 创建一组偏移/跨度对,指定如何使用指定的对齐方式布置一组零部件。结果跨度分配将重叠,每个拟合都尽可能地适合给定的总分配。
+     * 
+     * 
      * @param allocated the total span to be allocated &gt;= 0.
      * @param total     the total of the children requests.
      * @param children  the size requirements for each component.
@@ -478,6 +572,10 @@ public class SizeRequirements implements Serializable {
     /**
      * Adjust a specified array of sizes by a given amount.
      *
+     * <p>
+     *  该方法还需要指示是否应当执行正常或反向对准的标志。对于正常对齐,值0.0f表示要对齐的组件的左/上边缘。使用反向对齐时,0.0f表示右边/底边。
+     * 
+     * 
      * @param delta     an int specifying the size difference
      * @param children  an array of SizeRequirements objects
      * @return an array of ints containing the final size for each item

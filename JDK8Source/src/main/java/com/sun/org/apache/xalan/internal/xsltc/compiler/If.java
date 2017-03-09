@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: If.java,v 1.2.4.1 2005/09/01 15:39:47 pvedula Exp $
+ * <p>
+ *  $ Id：If.java,v 1.2.4.1 2005/09/01 15:39:47 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -34,6 +47,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -45,6 +60,9 @@ final class If extends Instruction {
 
     /**
      * Display the contents of this element
+     * <p>
+     *  显示此元素的内容
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -57,6 +75,9 @@ final class If extends Instruction {
 
     /**
      * Parse the "test" expression and contents of this element.
+     * <p>
+     *  解析"测试"表达式和此元素的内容。
+     * 
      */
     public void parseContents(Parser parser) {
         // Parse the "test" expression
@@ -81,6 +102,9 @@ final class If extends Instruction {
     /**
      * Type-check the "test" expression and contents of this element.
      * The contents will be ignored if we know the test will always fail.
+     * <p>
+     *  键入 - 检查"测试"表达式和此元素的内容。如果我们知道测试总是失败,内容将被忽略。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         // Type-check the "test" expression
@@ -97,6 +121,8 @@ final class If extends Instruction {
     /**
      * Translate the "test" expression and contents of this element.
      * The contents will be ignored if we know the test will always fail.
+     * <p>
+     *  翻译"测试"表达式和此元素的内容。如果我们知道测试总是失败,内容将被忽略。
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         final InstructionList il = methodGen.getInstructionList();

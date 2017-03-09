@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -98,6 +99,27 @@
  * <a href="../../../../technotes/guides/security/sasl/sasl-refguide.html">Java
  * SASL Programming Guide</a> for information on how to use this API.
  *
+ * <p>
+ *  包含用于支持SASL的类和接口。
+ * 
+ *  这个包定义了SASL机制的类和接口。开发人员使用它来为使用SASL的基于连接的协议添加认证支持。
+ * 
+ *  <h3> SASL概述</h3>
+ * 
+ *  简单认证和安全层(SASL)规定了挑战 - 响应协议,其中在客户端和服务器之间交换数据,以用于认证和(可选)建立在其上进行后续通信的安全层。
+ * 它与基于连接的协议(如LDAPv3或IMAPv4)一起使用。
+ *  SASL在<A HREF="http://www.ietf.org/rfc/rfc2222.txt"> RFC 2222 </A>中进行了说明。
+ * 
+ *  为SASL定义了各种<em>机制</em>。每个机制定义必须在客户端和服务器之间交换的数据,以便认证成功。特定机制所需的这种数据交换被称为其协议简档</em>。
+ * 以下是互联网标准界定义的机制的一些示例。
+ * <ul>
+ * <li> DIGEST-MD5(<A HREF="http://www.ietf.org/rfc/rfc2831.txt"> RFC 2831 </a>)。
+ * 此机制定义了如何将HTTP摘要身份验证用作SASL机制。 <li>匿名(<A HREF="http://www.ietf.org/rfc/rfc2245.txt"> RFC 2245 </a>)。
+ * 这种机制是匿名认证,其中不需要凭证。 <li>外部(<A HREF="http://www.ietf.org/rfc/rfc2222.txt"> RFC 2222 </A>)。
+ * 此机制从外部源(例如TLS或IPsec)获取认证信息。 <li> S /键(<A HREF="http://www.ietf.org/rfc/rfc2222.txt"> RFC 2222 </A>)。
+ * 此机制使用MD4摘要算法基于共享密钥交换数据。 <li> GSSAPI(<A HREF="http://www.ietf.org/rfc/rfc2222.txt"> RFC 2222 </A>)。
+ * 此机制使用<A HREF="http://www.ietf.org/rfc/rfc2078.txt"> GSSAPI </A>来获取身份验证信息。
+ * 
  * @since 1.5
  */
 package javax.security.sasl;

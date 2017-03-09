@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.signature;
 
@@ -48,6 +57,10 @@ import org.xml.sax.SAXException;
  * This <code>SignedInfo<code> element includes the canonicalization algorithm,
  * a signature algorithm, and one or more references.
  *
+ * <p>
+ *  句柄<code>&lt; ds：SignedInfo&gt; </code>元素此<code> SignedInfo <code>元素包括规范化算法,签名算法和一个或多个引用。
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  */
 public class SignedInfo extends Manifest {
@@ -65,6 +78,10 @@ public class SignedInfo extends Manifest {
      * Overwrites {@link Manifest#addDocument} because it creates another
      * Element.
      *
+     * <p>
+     *  覆盖{@link Manifest#addDocument},因为它会创建另一个元素。
+     * 
+     * 
      * @param doc the {@link Document} in which <code>XMLsignature</code> will
      *    be placed
      * @throws XMLSecurityException
@@ -78,6 +95,10 @@ public class SignedInfo extends Manifest {
      * Constructs {@link SignedInfo} using given Canonicalization algorithm and
      * Signature algorithm.
      *
+     * <p>
+     *  使用给定的规范化算法和签名算法构造{@link SignedInfo}。
+     * 
+     * 
      * @param doc <code>SignedInfo</code> is placed in this document
      * @param signatureMethodURI URI representation of the Digest and
      *    Signature algorithm
@@ -94,6 +115,10 @@ public class SignedInfo extends Manifest {
     /**
      * Constructor SignedInfo
      *
+     * <p>
+     *  构造函数SignedInfo
+     * 
+     * 
      * @param doc <code>SignedInfo</code> is placed in this document
      * @param signatureMethodURI URI representation of the Digest and
      *    Signature algorithm
@@ -128,6 +153,8 @@ public class SignedInfo extends Manifest {
     }
 
     /**
+    /* <p>
+    /* 
      * @param doc
      * @param signatureMethodElem
      * @param canonicalizationMethodElem
@@ -154,6 +181,10 @@ public class SignedInfo extends Manifest {
     /**
      * Build a {@link SignedInfo} from an {@link Element}
      *
+     * <p>
+     *  使用{@link Element}建立{@link SignedInfo}
+     * 
+     * 
      * @param element <code>SignedInfo</code>
      * @param baseURI the URI of the resource where the XML instance was stored
      * @throws XMLSecurityException
@@ -169,6 +200,10 @@ public class SignedInfo extends Manifest {
     /**
      * Build a {@link SignedInfo} from an {@link Element}
      *
+     * <p>
+     *  使用{@link Element}建立{@link SignedInfo}
+     * 
+     * 
      * @param element <code>SignedInfo</code>
      * @param baseURI the URI of the resource where the XML instance was stored
      * @param secureValidation whether secure validation is enabled or not
@@ -197,6 +232,9 @@ public class SignedInfo extends Manifest {
          * ds:SignedInfo, reparse it into a new document
          * and replace the original not-canonicalized ds:SignedInfo by
          * the re-parsed canonicalized one.
+         * <p>
+         * 如果使用自定义canonicalizationMethod,则对ds：SignedInfo进行规范化,将其重新解析为新文档,并通过重新解析的规范化代码替换原始的非规范化ds：SignedInfo。
+         * 
          */
         Element c14nMethod = XMLUtils.getNextElement(element.getFirstChild());
         String c14nMethodURI =
@@ -241,6 +279,10 @@ public class SignedInfo extends Manifest {
     /**
      * Tests core validation process
      *
+     * <p>
+     *  测试核心验证过程
+     * 
+     * 
      * @return true if verification was successful
      * @throws MissingResourceFailureException
      * @throws XMLSecurityException
@@ -253,6 +295,10 @@ public class SignedInfo extends Manifest {
     /**
      * Tests core validation process
      *
+     * <p>
+     *  测试核心验证过程
+     * 
+     * 
      * @param followManifests defines whether the verification process has to verify referenced <CODE>ds:Manifest</CODE>s, too
      * @return true if verification was successful
      * @throws MissingResourceFailureException
@@ -266,6 +312,10 @@ public class SignedInfo extends Manifest {
     /**
      * Returns getCanonicalizedOctetStream
      *
+     * <p>
+     *  返回getCanonicalizedOctetStream
+     * 
+     * 
      * @return the canonicalization result octet stream of <code>SignedInfo</code> element
      * @throws CanonicalizationException
      * @throws InvalidCanonicalizerException
@@ -287,6 +337,10 @@ public class SignedInfo extends Manifest {
 
     /**
      * Output the C14n stream to the given OutputStream.
+     * <p>
+     *  将C14n流输出到给定的OutputStream。
+     * 
+     * 
      * @param os
      * @throws CanonicalizationException
      * @throws InvalidCanonicalizerException
@@ -317,6 +371,10 @@ public class SignedInfo extends Manifest {
     /**
      * Returns the Canonicalization method URI
      *
+     * <p>
+     *  返回规范化方法URI
+     * 
+     * 
      * @return the Canonicalization method URI
      */
     public String getCanonicalizationMethodURI() {
@@ -326,6 +384,10 @@ public class SignedInfo extends Manifest {
     /**
      * Returns the Signature method URI
      *
+     * <p>
+     *  返回签名方法URI
+     * 
+     * 
      * @return the Signature method URI
      */
     public String getSignatureMethodURI() {
@@ -340,6 +402,10 @@ public class SignedInfo extends Manifest {
 
     /**
      * Method getSignatureMethodElement
+     * <p>
+     *  方法getSignatureMethodElement
+     * 
+     * 
      * @return returns the SignatureMethod Element
      *
      */
@@ -351,6 +417,10 @@ public class SignedInfo extends Manifest {
      * Creates a SecretKey for the appropriate Mac algorithm based on a
      * byte[] array password.
      *
+     * <p>
+     *  基于byte []数组密码为适当的Mac算法创建SecretKey。
+     * 
+     * 
      * @param secretKeyBytes
      * @return the secret key for the SignedInfo element.
      */
@@ -366,6 +436,8 @@ public class SignedInfo extends Manifest {
      * Method getBaseLocalName
      * @inheritDoc
      *
+     * <p>
+     *  方法getBaseLocalName @inheritDoc
      */
     public String getBaseLocalName() {
         return Constants._TAG_SIGNEDINFO;

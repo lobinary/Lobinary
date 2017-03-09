@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,15 @@ import sun.swing.SwingLazyValue;
  * All colors returned by {@code OceanTheme} are completely
  * opaque.
  *
+ * <p>
+ *  {@code MetalLookAndFeel}的默认主题。
+ * <p>
+ *  金属外观和感觉的设计师努力保持默认看起来最新,可能通过在未来使用新的主题。因此,开发人员只有在希望自定义"海洋"外观时,才直接使用这个类,或者强制它成为当前主题,而不考虑未来的更新。
+ * 
+ * <p>
+ *  {@code OceanTheme}返回的所有颜色都是完全不透明的。
+ * 
+ * 
  * @since 1.5
  * @see MetalLookAndFeel#setCurrentTheme
  */
@@ -118,6 +128,9 @@ public class OceanTheme extends DefaultMetalTheme {
 
     /**
      * Creates an instance of <code>OceanTheme</code>
+     * <p>
+     *  创建<code> OceanTheme </code>的实例
+     * 
      */
     public OceanTheme() {
     }
@@ -125,6 +138,10 @@ public class OceanTheme extends DefaultMetalTheme {
     /**
      * Add this theme's custom entries to the defaults table.
      *
+     * <p>
+     *  将此主题的自定义条目添加到defaults表。
+     * 
+     * 
      * @param table the defaults table, non-null
      * @throws NullPointerException if {@code table} is {@code null}
      */
@@ -315,6 +332,9 @@ public class OceanTheme extends DefaultMetalTheme {
 
     /**
      * Overriden to enable picking up the system fonts, if applicable.
+     * <p>
+     *  覆盖以启用拾取系统字体(如果适用)。
+     * 
      */
     boolean isSystemTheme() {
         return true;
@@ -323,6 +343,10 @@ public class OceanTheme extends DefaultMetalTheme {
     /**
      * Return the name of this theme, "Ocean".
      *
+     * <p>
+     *  返回这个主题的名称,"海洋"。
+     * 
+     * 
      * @return "Ocean"
      */
     public String getName() {
@@ -333,6 +357,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the primary 1 color. This returns a color with an rgb hex value
      * of {@code 0x6382BF}.
      *
+     * <p>
+     *  返回主1颜色。这返回一个颜色,rgb十六进制值为{@code 0x6382BF}。
+     * 
+     * 
      * @return the primary 1 color
      * @see java.awt.Color#decode
      */
@@ -344,6 +372,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the primary 2 color. This returns a color with an rgb hex value
      * of {@code 0xA3B8CC}.
      *
+     * <p>
+     *  返回主2颜色。这返回一个rgb十六进制值为{@code 0xA3B8CC}的颜色。
+     * 
+     * 
      * @return the primary 2 color
      * @see java.awt.Color#decode
      */
@@ -355,6 +387,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the primary 3 color. This returns a color with an rgb hex value
      * of {@code 0xB8CFE5}.
      *
+     * <p>
+     *  返回主3颜色。这返回一个颜色,rgb十六进制值为{@code 0xB8CFE5}。
+     * 
+     * 
      * @return the primary 3 color
      * @see java.awt.Color#decode
      */
@@ -366,6 +402,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the secondary 1 color. This returns a color with an rgb hex
      * value of {@code 0x7A8A99}.
      *
+     * <p>
+     *  返回辅助1颜色。这返回一个rgb十六进制值为{@code 0x7A8A99}的颜色。
+     * 
+     * 
      * @return the secondary 1 color
      * @see java.awt.Color#decode
      */
@@ -377,6 +417,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the secondary 2 color. This returns a color with an rgb hex
      * value of {@code 0xB8CFE5}.
      *
+     * <p>
+     *  返回辅助2颜色。这返回一个颜色,rgb十六进制值为{@code 0xB8CFE5}。
+     * 
+     * 
      * @return the secondary 2 color
      * @see java.awt.Color#decode
      */
@@ -388,6 +432,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the secondary 3 color. This returns a color with an rgb hex
      * value of {@code 0xEEEEEE}.
      *
+     * <p>
+     *  返回辅助3颜色。这将返回一个颜色,rgb十六进制值为{@code 0xEEEEEE}。
+     * 
+     * 
      * @return the secondary 3 color
      * @see java.awt.Color#decode
      */
@@ -399,6 +447,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the black color. This returns a color with an rgb hex
      * value of {@code 0x333333}.
      *
+     * <p>
+     *  返回黑色。这将返回一个颜色,rgb十六进制值为{@code 0x333333}。
+     * 
+     * 
      * @return the black color
      * @see java.awt.Color#decode
      */
@@ -410,6 +462,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the desktop color. This returns a color with an rgb hex
      * value of {@code 0xFFFFFF}.
      *
+     * <p>
+     * 返回桌面颜色。这返回一个rgb十六进制值为{@code 0xFFFFFF}的颜色。
+     * 
+     * 
      * @return the desktop color
      * @see java.awt.Color#decode
      */
@@ -421,6 +477,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the inactive control text color. This returns a color with an
      * rgb hex value of {@code 0x999999}.
      *
+     * <p>
+     *  返回非活动控件文本颜色。这将返回一个颜色,rgb十六进制值为{@code 0x999999}。
+     * 
+     * 
      * @return the inactive control text color
      */
     public ColorUIResource getInactiveControlTextColor() {
@@ -431,6 +491,10 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the control text color. This returns a color with an
      * rgb hex value of {@code 0x333333}.
      *
+     * <p>
+     *  返回控件文本颜色。这将返回一个颜色,rgb十六进制值为{@code 0x333333}。
+     * 
+     * 
      * @return the control text color
      */
     public ColorUIResource getControlTextColor() {
@@ -441,6 +505,9 @@ public class OceanTheme extends DefaultMetalTheme {
      * Returns the menu disabled foreground color. This returns a color with an
      * rgb hex value of {@code 0x999999}.
      *
+     * <p>
+     *  返回菜单禁用的前景色。这将返回一个颜色,rgb十六进制值为{@code 0x999999}。
+     * 
      * @return the menu disabled foreground color
      */
     public ColorUIResource getMenuDisabledForeground() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package javax.management;
 /**
  * The specified MBean does not exist in the repository.
  *
+ * <p>
+ *  指定的MBean不存在于存储库中。
+ * 
+ * 
  * @since 1.5
  */
 public class InstanceNotFoundException extends OperationsException   {
@@ -38,6 +43,9 @@ public class InstanceNotFoundException extends OperationsException   {
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public InstanceNotFoundException() {
         super();
@@ -46,6 +54,9 @@ public class InstanceNotFoundException extends OperationsException   {
     /**
      * Constructor that allows a specific error message to be specified.
      *
+     * <p>
+     *  允许指定特定错误消息的构造方法。
+     * 
      * @param message the detail message.
      */
     public InstanceNotFoundException(String message) {

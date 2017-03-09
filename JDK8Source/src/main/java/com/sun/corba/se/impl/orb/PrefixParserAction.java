@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,8 @@ public class PrefixParserAction extends ParserActionBase {
      * and add the result to an Object[]
      * which forms the result of apply.  Returns null if there are no
      * matches.
+     * <p>
+     *  将getOperation()应用于{suffix(s),value},并将结果添加到形成apply结果的Object []。如果没有匹配,则返回null。
      */
     public Object apply( Properties props )
     {

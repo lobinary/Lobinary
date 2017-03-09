@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,13 @@ import sun.security.util.SecurityConstants;
  * on a Button component will prevent the Button from being
  * activated.
  *
+ * <p>
+ *  所有组件级输入事件的根事件类。
+ * 
+ *  输入事件在它们由源发出的源正常处理之前传递给侦听器。这允许侦听器和组件子类"消费"事件,以便源不会以它们的默认方式处理它们。
+ * 例如,在Button组件上使用mousePressed事件将阻止Button被激活。
+ * 
+ * 
  * @author Carl Quinn
  *
  * @see KeyEvent
@@ -63,35 +71,53 @@ public abstract class InputEvent extends ComponentEvent {
     /**
      * The Shift key modifier constant.
      * It is recommended that SHIFT_DOWN_MASK be used instead.
+     * <p>
+     *  Shift键修饰符常数。建议使用SHIFT_DOWN_MASK。
+     * 
      */
     public static final int SHIFT_MASK = Event.SHIFT_MASK;
 
     /**
      * The Control key modifier constant.
      * It is recommended that CTRL_DOWN_MASK be used instead.
+     * <p>
+     *  控制键修改常量。建议使用CTRL_DOWN_MASK。
+     * 
      */
     public static final int CTRL_MASK = Event.CTRL_MASK;
 
     /**
      * The Meta key modifier constant.
      * It is recommended that META_DOWN_MASK be used instead.
+     * <p>
+     *  元键修改常量。建议使用META_DOWN_MASK。
+     * 
      */
     public static final int META_MASK = Event.META_MASK;
 
     /**
      * The Alt key modifier constant.
      * It is recommended that ALT_DOWN_MASK be used instead.
+     * <p>
+     *  Alt键修饰符常数。建议使用ALT_DOWN_MASK。
+     * 
      */
     public static final int ALT_MASK = Event.ALT_MASK;
 
     /**
      * The AltGraph key modifier constant.
+     * <p>
+     *  AltGraph键修改常量。
+     * 
      */
     public static final int ALT_GRAPH_MASK = 1 << 5;
 
     /**
      * The Mouse Button1 modifier constant.
      * It is recommended that BUTTON1_DOWN_MASK be used instead.
+     * <p>
+     *  鼠标Button1修改常数。建议使用BUTTON1_DOWN_MASK。
+     * 
      */
     public static final int BUTTON1_MASK = 1 << 4;
 
@@ -99,6 +125,9 @@ public abstract class InputEvent extends ComponentEvent {
      * The Mouse Button2 modifier constant.
      * It is recommended that BUTTON2_DOWN_MASK be used instead.
      * Note that BUTTON2_MASK has the same value as ALT_MASK.
+     * <p>
+     *  鼠标Button2修饰符常数。建议使用BUTTON2_DOWN_MASK。请注意,BUTTON2_MASK具有与ALT_MASK相同的值。
+     * 
      */
     public static final int BUTTON2_MASK = Event.ALT_MASK;
 
@@ -106,59 +135,98 @@ public abstract class InputEvent extends ComponentEvent {
      * The Mouse Button3 modifier constant.
      * It is recommended that BUTTON3_DOWN_MASK be used instead.
      * Note that BUTTON3_MASK has the same value as META_MASK.
+     * <p>
+     *  鼠标Button3修改常数。建议使用BUTTON3_DOWN_MASK。请注意,BUTTON3_MASK具有与META_MASK相同的值。
+     * 
      */
     public static final int BUTTON3_MASK = Event.META_MASK;
 
     /**
      * The Shift key extended modifier constant.
+     * <p>
+     *  Shift键扩展修饰符常量。
+     * 
+     * 
      * @since 1.4
      */
     public static final int SHIFT_DOWN_MASK = 1 << 6;
 
     /**
      * The Control key extended modifier constant.
+     * <p>
+     *  Control键扩展修饰符常量。
+     * 
+     * 
      * @since 1.4
      */
     public static final int CTRL_DOWN_MASK = 1 << 7;
 
     /**
      * The Meta key extended modifier constant.
+     * <p>
+     *  Meta键扩展修饰符常量。
+     * 
+     * 
      * @since 1.4
      */
     public static final int META_DOWN_MASK = 1 << 8;
 
     /**
      * The Alt key extended modifier constant.
+     * <p>
+     * Alt键扩展修饰符常数。
+     * 
+     * 
      * @since 1.4
      */
     public static final int ALT_DOWN_MASK = 1 << 9;
 
     /**
      * The Mouse Button1 extended modifier constant.
+     * <p>
+     *  鼠标Button1扩展修饰符常数。
+     * 
+     * 
      * @since 1.4
      */
     public static final int BUTTON1_DOWN_MASK = 1 << 10;
 
     /**
      * The Mouse Button2 extended modifier constant.
+     * <p>
+     *  鼠标Button2扩展修饰符常量。
+     * 
+     * 
      * @since 1.4
      */
     public static final int BUTTON2_DOWN_MASK = 1 << 11;
 
     /**
      * The Mouse Button3 extended modifier constant.
+     * <p>
+     *  Mouse Button3扩展修饰符常量。
+     * 
+     * 
      * @since 1.4
      */
     public static final int BUTTON3_DOWN_MASK = 1 << 12;
 
     /**
      * The AltGraph key extended modifier constant.
+     * <p>
+     *  AltGraph键扩展修饰符常量。
+     * 
+     * 
      * @since 1.4
      */
     public static final int ALT_GRAPH_DOWN_MASK = 1 << 13;
 
     /**
      * An array of extended modifiers for additional buttons.
+     * <p>
+     *  附加按钮的扩展修饰符数组。
+     * 
+     * 
      * @see getButtonDownMasks
      * There are twenty buttons fit into 4byte space.
      * one more bit is reserved for FIRST_HIGH_BIT.
@@ -187,6 +255,10 @@ public abstract class InputEvent extends ComponentEvent {
 
     /**
      * A method to access an array of extended modifiers for additional buttons.
+     * <p>
+     *  访问其他按钮的扩展修饰符数组的方法。
+     * 
+     * 
      * @since 7.0
      */
     private static int [] getButtonDownMasks(){
@@ -203,6 +275,14 @@ public abstract class InputEvent extends ComponentEvent {
      * <li> as a {@code modifiers} parameter when creating a new {@link MouseEvent} instance
      * <li> to check {@link MouseEvent#getModifiersEx() modifiersEx} of existing {@code MouseEvent}
      * </ul>
+     * <p>
+     *  获得任何现有鼠标按钮的掩码的方法。返回的掩码可以用于不同的目的。以下是其中一些：
+     * <ul>
+     *  <li> {@link java.awt.Robot#mousePress(int)mousePress(buttons)}和{@link java.awt.Robot#mouseRelease(int)mouseRelease(buttons)}
+     *  <li>创建新的{@link MouseEvent}实例<li>以检查现有{@code MouseEvent}的{@link MouseEvent#getModifiersEx()modifiersEx}
+     * 。
+     * </ul>
+     * 
      * @param button is a number to represent a button starting from 1.
      * For example,
      * <pre>
@@ -263,6 +343,10 @@ public abstract class InputEvent extends ComponentEvent {
      * The input event's Time stamp in UTC format.  The time stamp
      * indicates when the input event was created.
      *
+     * <p>
+     *  输入事件的时间戳,采用UTC格式。时间戳指示创建输入事件的时间。
+     * 
+     * 
      * @serial
      * @see #getWhen()
      */
@@ -272,6 +356,10 @@ public abstract class InputEvent extends ComponentEvent {
      * The state of the modifier mask at the time the input
      * event was fired.
      *
+     * <p>
+     *  输入事件触发时修改程序掩码的状态。
+     * 
+     * 
      * @serial
      * @see #getModifiers()
      * @see #getModifiersEx()
@@ -283,6 +371,9 @@ public abstract class InputEvent extends ComponentEvent {
     /*
      * A flag that indicates that this instance can be used to access
      * the system clipboard.
+     * <p>
+     *  指示此实例可用于访问系统剪贴板的标志。
+     * 
      */
     private transient boolean canAccessSystemClipboard;
 
@@ -303,6 +394,9 @@ public abstract class InputEvent extends ComponentEvent {
     /**
      * Initialize JNI field and method IDs for fields that may be
        accessed from C.
+     * <p>
+     *  初始化可从C访问的字段的JNI字段和方法ID。
+     * 
      */
     private static native void initIDs();
 
@@ -313,6 +407,11 @@ public abstract class InputEvent extends ComponentEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造具有指定源组件,修饰符和类型的InputEvent对象。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source the object where the event originated
      * @param id           the integer that identifies the event type.
      *                     It is allowed to pass as parameter any value that
@@ -368,6 +467,9 @@ public abstract class InputEvent extends ComponentEvent {
 
     /**
      * Returns whether or not the Shift modifier is down on this event.
+     * <p>
+     *  返回此事件上的Shift修饰符是否关闭。
+     * 
      */
     public boolean isShiftDown() {
         return (modifiers & SHIFT_MASK) != 0;
@@ -375,6 +477,9 @@ public abstract class InputEvent extends ComponentEvent {
 
     /**
      * Returns whether or not the Control modifier is down on this event.
+     * <p>
+     *  返回此事件上的"控制"修改器是否关闭。
+     * 
      */
     public boolean isControlDown() {
         return (modifiers & CTRL_MASK) != 0;
@@ -382,6 +487,9 @@ public abstract class InputEvent extends ComponentEvent {
 
     /**
      * Returns whether or not the Meta modifier is down on this event.
+     * <p>
+     * 返回此事件的"元变量"是否关闭。
+     * 
      */
     public boolean isMetaDown() {
         return (modifiers & META_MASK) != 0;
@@ -389,6 +497,9 @@ public abstract class InputEvent extends ComponentEvent {
 
     /**
      * Returns whether or not the Alt modifier is down on this event.
+     * <p>
+     *  返回此修饰符是否在此事件上关闭。
+     * 
      */
     public boolean isAltDown() {
         return (modifiers & ALT_MASK) != 0;
@@ -396,6 +507,9 @@ public abstract class InputEvent extends ComponentEvent {
 
     /**
      * Returns whether or not the AltGraph modifier is down on this event.
+     * <p>
+     *  返回此事件的AltGraph修改器是否关闭。
+     * 
      */
     public boolean isAltGraphDown() {
         return (modifiers & ALT_GRAPH_MASK) != 0;
@@ -404,6 +518,9 @@ public abstract class InputEvent extends ComponentEvent {
     /**
      * Returns the difference in milliseconds between the timestamp of when this event occurred and
      * midnight, January 1, 1970 UTC.
+     * <p>
+     *  返回此事件发生时的时间戳与1970年1月1日午夜(UTC)之间的时间差(毫秒)。
+     * 
      */
     public long getWhen() {
         return when;
@@ -411,6 +528,9 @@ public abstract class InputEvent extends ComponentEvent {
 
     /**
      * Returns the modifier mask for this event.
+     * <p>
+     *  返回此事件的修饰符掩码。
+     * 
      */
     public int getModifiers() {
         return modifiers & (JDK_1_3_MODIFIERS | HIGH_MODIFIERS);
@@ -451,6 +571,25 @@ public abstract class InputEvent extends ComponentEvent {
      * </PRE>
      * The above code will work even if new modifiers are added.
      *
+     * <p>
+     *  返回此事件的扩展修饰符掩码。
+     * <P>
+     *  扩展修饰符是以_DOWN_MASK后缀结尾的修饰符,例如ALT_DOWN_MASK,BUTTON1_DOWN_MASK和其他。
+     * <P>
+     *  扩展修饰符表示所有模态键的状态,例如ALT,CTRL,META和事件发生后的鼠标按钮。
+     * <P>
+     *  例如,如果用户按<b>按钮1 </b>后跟<b>按钮2 </b>,然后按相同顺序释放它们,则会生成以下事件序列：
+     * <PRE>
+     *  <code> MOUSE_PRESSED </code>：<code> BUTTON1_DOWN_MASK </code> <code> MOUSE_PRESSED </code>：<code> BU
+     * TTON1_DOWN_MASK | BUTTON2_DOWN_MASK </code> <code> MOUSE_RELEASED </code>：<code> MOUSE_RELEASED </code>
+     * ：<code> BUTTON2_DOWN_MASK </code> <code> MOUSE_CLICKED </code>：<code> BUTTON2_DOWN_MASK </code> > MOU
+     * SE_CLICKED </code>：。
+     * </PRE>
+     * <P>
+     *  不建议使用<code> == </code>比较此方法的返回值,因为以后可以添加新的修饰符。例如,以下代码演示了检查SHIFT和BUTTON1是否已关闭,但CTRL已关闭的适当方法：
+     * <PRE>
+     * int onmask = SHIFT_DOWN_MASK | BUTTON1_DOWN_MASK; int offmask = CTRL_DOWN_MASK; if((event.getModifier
+     * 
      * @since 1.4
      */
     public int getModifiersEx() {
@@ -460,6 +599,11 @@ public abstract class InputEvent extends ComponentEvent {
     /**
      * Consumes this event so that it will not be processed
      * in the default manner by the source which originated it.
+     * <p>
+     * sEx()&amp;(onmask | offmask))== onmask){...}。
+     * </PRE>
+     *  上面的代码将工作,即使添加了新的修饰符。
+     * 
      */
     public void consume() {
         consumed = true;
@@ -467,6 +611,10 @@ public abstract class InputEvent extends ComponentEvent {
 
     /**
      * Returns whether or not this event has been consumed.
+     * <p>
+     *  使用此事件,以使其不会由源于其的源以默认方式处理。
+     * 
+     * 
      * @see #consume
      */
     public boolean isConsumed() {
@@ -487,6 +635,10 @@ public abstract class InputEvent extends ComponentEvent {
      * Zero parameter means that no modifiers were passed and will
      * cause the returning an empty string.
      *
+     * <p>
+     *  返回此事件是否已使用。
+     * 
+     * 
      * @param modifiers a modifier mask describing the extended
      *                modifier keys and mouse buttons for the event
      * @return a text description of the combination of extended

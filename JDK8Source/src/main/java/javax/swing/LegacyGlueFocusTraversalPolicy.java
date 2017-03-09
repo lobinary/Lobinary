@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import java.io.*;
  * been hard coded, then that traversal is provided either by the custom
  * DefaultFocusManager, or by a wrapped FocusTraversalPolicy instance.
  *
+ * <p>
+ *  FocusTraversalPolicy,为通过JComponent.setNextFocusableComponent处理焦点遍历的遗留应用程序或通过安装自定义DefaultFocusManager
+ * 提供支持。
+ * 
  * @author David Mendenhall
  */
 final class LegacyGlueFocusTraversalPolicy extends FocusTraversalPolicy

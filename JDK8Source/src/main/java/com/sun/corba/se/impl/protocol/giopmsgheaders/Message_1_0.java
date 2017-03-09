@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException ;
 /*
  * This implements the GIOP 1.0 Message header.
  *
+ * <p>
+ *  这实现GIOP 1.0消息头。
+ * 
+ * 
  * @author Ram Jeyaraman 05/14/2000
  */
 
@@ -128,6 +133,10 @@ public class Message_1_0
         this.byte_order = istream.read_boolean();
         this.message_type = istream.read_octet();
         this.message_size = istream.read_ulong();
+        /* <p>
+        /*  this.magic = istream.read_long(); this.GIOP_version =(new GIOPVersion())。
+        /* read(istream); this.byte_order = istream.read_boolean(); this.message_type = istream.read_octet(); th
+        /* is.message_size = istream.read_ulong();。
         */
     }
 

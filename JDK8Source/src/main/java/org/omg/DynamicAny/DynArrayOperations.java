@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -13,18 +14,28 @@ package org.omg.DynamicAny;
     * DynArray objects support the manipulation of IDL arrays.
     * Note that the dimension of the array is contained in the TypeCode which is accessible
     * through the type attribute. It can also be obtained by calling the component_count operation.
+    * <p>
+    *  DynArray对象支持对IDL数组的操作。请注意,数组的维度包含在可通过type属性访问的TypeCode中。它也可以通过调用component_count操作获得。
+    * 
     */
 public interface DynArrayOperations  extends org.omg.DynamicAny.DynAnyOperations
 {
 
   /**
         * Returns the elements of the DynArray.
+        * <p>
+        *  返回DynArray的元素。
+        * 
         */
   org.omg.CORBA.Any[] get_elements ();
 
   /**
         * Sets the DynArray to contain the passed elements.
         *
+        * <p>
+        *  将DynArray设置为包含传递的元素。
+        * 
+        * 
         * @exception TypeMismatch if one or more elements have a type that is inconsistent with the DynArrays TypeCode
         * @exception InvalidValue if the sequence does not contain the same number of elements as the array dimension
         */
@@ -32,12 +43,18 @@ public interface DynArrayOperations  extends org.omg.DynamicAny.DynAnyOperations
 
   /**
         * Returns the elements of the DynArray as DynAnys.
+        * <p>
+        *  以DynAnys形式返回DynArray的元素。
+        * 
         */
   org.omg.DynamicAny.DynAny[] get_elements_as_dyn_any ();
 
   /**
         * Sets the DynArray to contain the passed elements.
         *
+        * <p>
+        *  将DynArray设置为包含传递的元素。
+        * 
         * @exception TypeMismatch if one or more elements have a type that is inconsistent with the DynArrays TypeCode
         * @exception InvalidValue if the sequence does not contain the same number of elements as the array dimension
         */

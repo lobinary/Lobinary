@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,14 @@ package com.sun.source.tree;
  *
  * @jls section 14.9
  *
+ * <p>
+ *  "if"语句的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  if(<em> condition </em>)<em> thenStatement </em>
+ * 
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6
@@ -50,6 +59,11 @@ public interface IfTree extends StatementTree {
     ExpressionTree getCondition();
     StatementTree getThenStatement();
     /**
+    /* <p>
+    /*  if(<em> condition </em>)<em> thenStatement </em> else <em> elseStatement </em>
+    /* </pre>
+    /* 
+    /* 
      * @return null if this if statement has no else branch.
      */
     StatementTree getElseStatement();

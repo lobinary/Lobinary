@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -26,6 +27,12 @@ package org.omg.PortableServer;
 	 * with the POA using the set_servant_manager operation, 
 	 * the servant manager is given the opportunity to 
 	 * locate a servant or raise an exception. 
+	 * <p>
+	 *  RequestProcessingPolicyValue可以具有以下值。
+	 *  USE_ACTIVE_OBJECT_MAP_ONLY  - 如果在活动对象映射中未找到对象标识,则会向客户端返回OBJECT_NOT_EXIST异常。还需要RETAIN策略。
+	 *  USE_DEFAULT_SERVANT  - 如果在活动对象映射中找不到对象标识,或者存在NON_RETAIN策略,并且已使用set_servant操作向POA注册了缺省服务方,则会将该请求分派给缺省
+	 * 服务方。
+	 *  USE_ACTIVE_OBJECT_MAP_ONLY  - 如果在活动对象映射中未找到对象标识,则会向客户端返回OBJECT_NOT_EXIST异常。还需要RETAIN策略。
 	 */
 public class RequestProcessingPolicyValue implements org.omg.CORBA.portable.IDLEntity
 {

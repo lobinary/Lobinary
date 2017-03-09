@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 /**
  * This utility class draws the horizontal bars which indicate a MetalComboBox
  *
+ * <p>
+ *  这个实用程序类绘制水平条,表示MetalComboBox
+ * 
+ * 
  * @see MetalComboBoxUI
  * @author Tom Santos
  */
@@ -44,6 +49,9 @@ public class MetalComboBoxIcon implements Icon, Serializable {
 
     /**
      * Paints the horizontal bars for the
+     * <p>
+     *  绘制水平条
+     * 
      */
     public void paintIcon(Component c, Graphics g, int x, int y){
         JComponent component = (JComponent)c;
@@ -63,11 +71,16 @@ public class MetalComboBoxIcon implements Icon, Serializable {
 
     /**
      * Created a stub to satisfy the interface.
+     * <p>
+     *  创建一个存根以满足接口。
+     * 
      */
     public int getIconWidth() { return 10; }
 
     /**
      * Created a stub to satisfy the interface.
+     * <p>
+     *  创建一个存根以满足接口。
      */
     public int getIconHeight()  { return 5; }
 

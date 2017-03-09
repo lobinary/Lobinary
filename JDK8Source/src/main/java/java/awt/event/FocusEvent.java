@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,21 @@ import sun.awt.SunToolkit;
  * of any particular {@code FocusEvent} instance is not
  * in the range from {@code FOCUS_FIRST} to {@code FOCUS_LAST}.
  *
+ * <p>
+ *  指示组件已获得或失去输入焦点的低级事件。此低级事件由组件(如TextField)生成。
+ * 事件传递到使用组件的<code> addFocusListener </code>方法注册接收此类事件的每个<code> FocusListener </code>或<code> FocusAdapte
+ * r </code>对象。
+ *  指示组件已获得或失去输入焦点的低级事件。此低级事件由组件(如TextField)生成。
+ *  (<code> FocusAdapter </code>对象实现<code> FocusListener </code>接口。
+ * )当事件发生时,每个这样的监听器对象都会获得这个<code> FocusEvent </code>。
+ * <p>
+ *  有两个级别的焦点事件：永久和临时。当焦点从一个组件直接移动到另一个组件时,例如通过调用requestFocus()或用户使用TAB键遍历组件时,将发生永久焦点更改事件。
+ * 当组件暂时失去焦点作为另一个操作(例如窗口停用或滚动条拖动)的间接结果时,会发生临时焦点更改事件。在这种情况下,一旦该操作完成,或者对于窗口去激活的情况,当窗口被重新激活时,原始聚焦状态将自动恢复。
+ * 使用FOCUS_GAINED和FOCUS_LOST事件ID来传递永久和临时焦点事件;可以在使用isTemporary()方法的事件中区分级别。
+ * <p>
+ * 如果任何特定{@code FocusEvent}实例的{@code id}参数不在{@code FOCUS_FIRST}到{@code FOCUS_LAST}的范围内,则会导致未指定的行为。
+ * 
+ * 
  * @see FocusAdapter
  * @see FocusListener
  * @see <a href="https://docs.oracle.com/javase/tutorial/uiswing/events/focuslistener.html">Tutorial: Writing a Focus Listener</a>
@@ -67,21 +83,33 @@ public class FocusEvent extends ComponentEvent {
 
     /**
      * The first number in the range of ids used for focus events.
+     * <p>
+     *  用于焦点事件的ids范围中的第一个数字。
+     * 
      */
     public static final int FOCUS_FIRST         = 1004;
 
     /**
      * The last number in the range of ids used for focus events.
+     * <p>
+     *  用于焦点事件的ids范围中的最后一个数字。
+     * 
      */
     public static final int FOCUS_LAST          = 1005;
 
     /**
      * This event indicates that the Component is now the focus owner.
+     * <p>
+     *  此事件指示组件现在是焦点所有者。
+     * 
      */
     public static final int FOCUS_GAINED = FOCUS_FIRST; //Event.GOT_FOCUS
 
     /**
      * This event indicates that the Component is no longer the focus owner.
+     * <p>
+     *  此事件指示组件不再是焦点所有者。
+     * 
      */
     public static final int FOCUS_LOST = 1 + FOCUS_FIRST; //Event.LOST_FOCUS
 
@@ -91,6 +119,10 @@ public class FocusEvent extends ComponentEvent {
      * temporarily and intends on getting it back once the event is completed.
      * Otherwise it will be set to false.
      *
+     * <p>
+     *  焦点事件可以具有两个不同的级别,永久和临时。如果某些操作暂时取消了焦点,并且打算在事件完成后返回,它将设置为true。否则它将被设置为false。
+     * 
+     * 
      * @serial
      * @see #isTemporary
      */
@@ -103,6 +135,11 @@ public class FocusEvent extends ComponentEvent {
      * with a native application, a Java application in a different VM, or with
      * no other Component, then the opposite Component is null.
      *
+     * <p>
+     *  参与这个焦点变化的另一个组件。对于FOCUS_GAINED事件,这是失去焦点的组件。对于FOCUS_LOST事件,这是获得焦点的组件。
+     * 如果本地应用程序,不同VM中的Java应用程序或没有其他组件发生此焦点更改,则相对的组件为null。
+     * 
+     * 
      * @see #getOppositeComponent
      * @since 1.4
      */
@@ -110,6 +147,9 @@ public class FocusEvent extends ComponentEvent {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 523753786457416396L;
 
@@ -129,6 +169,15 @@ public class FocusEvent extends ComponentEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     * 构造具有指定的临时状态和<code> Component </code>对象的<code> FocusEvent </code>对象。
+     * 相反的<code> Component </code>是此焦点更改中涉及的另一个<code> Component </code>。
+     * 对于<code> FOCUS_GAINED </code>事件,这是失去焦点的<code> Component </code>。
+     * 对于<code> FOCUS_LOST </code>事件,这是获得焦点的<code> Component </code>。
+     * 如果本地应用程序,Java应用程序在不同VM中或没有其他<code> Component </code>时发生此焦点更改,则相反的<code> Component </code>代码>。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source     The <code>Component</code> that originated the event
      * @param id         An integer indicating the type of event.
      *                     For information on allowable values, see
@@ -158,6 +207,11 @@ public class FocusEvent extends ComponentEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造一个<code> FocusEvent </code>对象,并标识该更改是否是临时的。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source    The <code>Component</code> that originated the event
      * @param id        An integer indicating the type of event.
      *                     For information on allowable values, see
@@ -180,6 +234,11 @@ public class FocusEvent extends ComponentEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造<code> FocusEvent </code>对象并将其标识为焦点的永久更改。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source    The <code>Component</code> that originated the event
      * @param id        An integer indicating the type of event.
      *                     For information on allowable values, see
@@ -195,6 +254,10 @@ public class FocusEvent extends ComponentEvent {
     /**
      * Identifies the focus change event as temporary or permanent.
      *
+     * <p>
+     *  将焦点更改事件标识为临时或永久。
+     * 
+     * 
      * @return <code>true</code> if the focus change is temporary;
      *         <code>false</code> otherwise
      */
@@ -210,6 +273,11 @@ public class FocusEvent extends ComponentEvent {
      * in a different VM or context, or with no other Component, then null is
      * returned.
      *
+     * <p>
+     * 返回此焦点更改中涉及的其他组件。对于FOCUS_GAINED事件,这是失去焦点的组件。对于FOCUS_LOST事件,这是获得焦点的组件。
+     * 如果本地应用程序发生此焦点更改,Java应用程序位于不同的VM或上下文中,或没有其他组件,则返回null。
+     * 
+     * 
      * @return the other Component involved in the focus change, or null
      * @since 1.4
      */
@@ -228,6 +296,8 @@ public class FocusEvent extends ComponentEvent {
      * Returns a parameter string identifying this event.
      * This method is useful for event-logging and for debugging.
      *
+     * <p>
+     * 
      * @return a string identifying the event and its attributes
      */
     public String paramString() {

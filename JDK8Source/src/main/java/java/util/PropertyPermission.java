@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -75,6 +76,26 @@ import sun.security.util.SecurityConstants;
  * malevolent code sensitive information about the user environment
  * (the user's account name and home directory).
  *
+ * <p>
+ *  此类用于属性权限。
+ * 
+ * <P>
+ *  名称是属性的名称("java.home","os.name"等)。命名约定遵循分层属性命名约定。此外,星号可能出现在名称的末尾,跟在"。"后面,或者它本身,表示通配符匹配。例如："java。
+ * *"和"*"表示通配符匹配,而"* java"和"a * b"则不匹配。
+ * <P>
+ *  要授予的操作将在包含一个或多个逗号分隔关键字列表的字符串中传递给构造函数。可能的关键字是"读取"和"写入"。它们的含义定义如下：
+ * 
+ * <DL>
+ *  <DT>读取<DD>读取权限。允许调用<code> System.getProperty </code>。 <DT>写<DD>写权限。
+ * 允许调用<code> System.setProperty </code>。
+ * </DL>
+ * <P>
+ *  在处理之前,操作字符串将转换为小写。
+ * <P>
+ *  在授予代码权限以访问某些系统属性之前,应小心。例如,授予访问"java.home"系统属性的权限可能会给系统环境(Java安装目录)带来恶意的代码敏感信息。
+ * 另外,授予访问"user.name"和"user.home"系统属性的权限给出了关于用户环境(用户的帐户名和主目录)的潜在恶意代码敏感信息。
+ * 
+ * 
  * @see java.security.BasicPermission
  * @see java.security.Permission
  * @see java.security.Permissions
@@ -92,31 +113,50 @@ public final class PropertyPermission extends BasicPermission {
 
     /**
      * Read action.
+     * <p>
+     *  读取操作。
+     * 
      */
     private final static int READ    = 0x1;
 
     /**
      * Write action.
+     * <p>
+     * 写操作。
+     * 
      */
     private final static int WRITE   = 0x2;
     /**
      * All actions (read,write);
+     * <p>
+     *  所有操作(读,写);
+     * 
      */
     private final static int ALL     = READ|WRITE;
     /**
      * No actions.
+     * <p>
+     *  无操作。
+     * 
      */
     private final static int NONE    = 0x0;
 
     /**
      * The actions mask.
      *
+     * <p>
+     *  动作掩码。
+     * 
      */
     private transient int mask;
 
     /**
      * The actions string.
      *
+     * <p>
+     *  操作字符串。
+     * 
+     * 
      * @serial
      */
     private String actions; // Left null as long as possible, then
@@ -126,6 +166,10 @@ public final class PropertyPermission extends BasicPermission {
      * initialize a PropertyPermission object. Common to all constructors.
      * Also called during de-serialization.
      *
+     * <p>
+     *  初始化PropertyPermission对象。所有构造函数的公共。在反序列化期间也调用。
+     * 
+     * 
      * @param mask the actions mask to use.
      *
      */
@@ -149,6 +193,10 @@ public final class PropertyPermission extends BasicPermission {
      * desired actions granted on the property. Possible actions are
      * "read" and "write".
      *
+     * <p>
+     *  创建具有指定名称的新PropertyPermission对象。名称是系统属性的名称,<i> actions </i>包含在属性上授予的所需操作的逗号分隔列表。可能的操作是"读取"和"写入"。
+     * 
+     * 
      * @param name the name of the PropertyPermission.
      * @param actions the actions string.
      *
@@ -173,6 +221,15 @@ public final class PropertyPermission extends BasicPermission {
      * <li> <i>p</i>'s name is implied by this object's
      *      name. For example, "java.*" implies "java.home".
      * </ul>
+     * <p>
+     *  检查此PropertyPermission对象是否"暗示"指定的权限。
+     * <P>
+     *  更具体地说,这个方法返回true如果：
+     * <ul>
+     *  <li> <i> p </i>是PropertyPermission的实例,<li> <i> p </i>的操作是此对象操作的子集,<li> <i> p </i>该名称由该对象的名称隐含。
+     * 例如,"java。*"意味着"java.home"。
+     * </ul>
+     * 
      * @param p the permission to check against.
      *
      * @return true if the specified permission is implied by this object,
@@ -194,6 +251,10 @@ public final class PropertyPermission extends BasicPermission {
      * Checks two PropertyPermission objects for equality. Checks that <i>obj</i> is
      * a PropertyPermission, and has the same name and actions as this object.
      * <P>
+     * <p>
+     *  检查两个PropertyPermission对象是否相等。检查<i> obj </i>是否是PropertyPermission,并且具有与此对象相同的名称和操作。
+     * <P>
+     * 
      * @param obj the object we are testing for equality with this object.
      * @return true if obj is a PropertyPermission, and has the same name and
      * actions as this PropertyPermission object.
@@ -217,6 +278,11 @@ public final class PropertyPermission extends BasicPermission {
      * <code>getName().hashCode()</code>, where <code>getName</code> is
      * from the Permission superclass.
      *
+     * <p>
+     *  返回此对象的哈希码值。使用的哈希码是此权限名称的哈希码,即<code> getName()。
+     * hashCode()</code>,其中<code> getName </code>来自Permission超类。
+     * 
+     * 
      * @return a hash code value for this object.
      */
     public int hashCode() {
@@ -226,6 +292,10 @@ public final class PropertyPermission extends BasicPermission {
     /**
      * Converts an actions String to an actions mask.
      *
+     * <p>
+     *  将操作字符串转换为操作掩码。
+     * 
+     * 
      * @param actions the action string.
      * @return the actions mask.
      */
@@ -321,6 +391,10 @@ public final class PropertyPermission extends BasicPermission {
      * Always returns present actions in the following order:
      * read, write.
      *
+     * <p>
+     *  返回操作的规范字符串表示形式。始终按以下顺序返回当前操作：读取,写入。
+     * 
+     * 
      * @return the canonical string representation of the actions.
      */
     static String getActions(int mask) {
@@ -347,6 +421,11 @@ public final class PropertyPermission extends BasicPermission {
      * allows both write and read actions, a call to <code>getActions</code>
      * will return the string "read,write".
      *
+     * <p>
+     * 返回操作的"规范字符串表示"。也就是说,此方法总是按以下顺序返回当前操作：读取,写入。
+     * 例如,如果此PropertyPermission对象允许写入和读取操作,则调用<code> getActions </code>将返回字符串"read,write"。
+     * 
+     * 
      * @return the canonical string representation of the actions.
      */
     public String getActions() {
@@ -360,6 +439,10 @@ public final class PropertyPermission extends BasicPermission {
      * Return the current action mask.
      * Used by the PropertyPermissionCollection
      *
+     * <p>
+     *  返回当前操作掩码。由PropertyPermissionCollection使用
+     * 
+     * 
      * @return the actions mask.
      */
     int getMask() {
@@ -371,6 +454,11 @@ public final class PropertyPermission extends BasicPermission {
      * PropertyPermission objects.
      * <p>
      *
+     * <p>
+     *  返回用于存储PropertyPermission对象的新PermissionCollection对象。
+     * <p>
+     * 
+     * 
      * @return a new PermissionCollection object suitable for storing
      * PropertyPermissions.
      */
@@ -385,6 +473,9 @@ public final class PropertyPermission extends BasicPermission {
      * WriteObject is called to save the state of the PropertyPermission
      * to a stream. The actions are serialized, and the superclass
      * takes care of the name.
+     * <p>
+     *  WriteObject被调用以将PropertyPermission的状态保存到流。操作是序列化的,超类负责处理名称。
+     * 
      */
     private synchronized void writeObject(java.io.ObjectOutputStream s)
         throws IOException
@@ -399,6 +490,9 @@ public final class PropertyPermission extends BasicPermission {
     /**
      * readObject is called to restore the state of the PropertyPermission from
      * a stream.
+     * <p>
+     *  readObject被调用以从流中恢复PropertyPermission的状态。
+     * 
      */
     private synchronized void readObject(java.io.ObjectInputStream s)
          throws IOException, ClassNotFoundException
@@ -413,6 +507,10 @@ public final class PropertyPermission extends BasicPermission {
  * A PropertyPermissionCollection stores a set of PropertyPermission
  * permissions.
  *
+ * <p>
+ *  PropertyPermissionCollection存储一组PropertyPermission权限。
+ * 
+ * 
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.PermissionCollection
@@ -429,12 +527,19 @@ final class PropertyPermissionCollection extends PermissionCollection
     /**
      * Key is property name; value is PropertyPermission.
      * Not serialized; see serialization section at end of class.
+     * <p>
+     *  Key是属性名;值为PropertyPermission。未序列化;请参见类末尾的序列化部分。
+     * 
      */
     private transient Map<String, PropertyPermission> perms;
 
     /**
      * Boolean saying if "*" is in the collection.
      *
+     * <p>
+     *  布尔说如果"*"在集合中。
+     * 
+     * 
      * @see #serialPersistentFields
      */
     // No sync access; OK for this to be stale.
@@ -442,6 +547,9 @@ final class PropertyPermissionCollection extends PermissionCollection
 
     /**
      * Create an empty PropertyPermissionCollection object.
+     * <p>
+     *  创建一个空PropertyPermissionCollection对象。
+     * 
      */
     public PropertyPermissionCollection() {
         perms = new HashMap<>(32);     // Capacity for default policy
@@ -452,6 +560,10 @@ final class PropertyPermissionCollection extends PermissionCollection
      * Adds a permission to the PropertyPermissions. The key for the hash is
      * the name.
      *
+     * <p>
+     *  向PropertyPermissions添加权限。哈希的键是名称。
+     * 
+     * 
      * @param permission the Permission object to add.
      *
      * @exception IllegalArgumentException - if the permission is not a
@@ -497,6 +609,10 @@ final class PropertyPermissionCollection extends PermissionCollection
      * Check and see if this set of permissions implies the permissions
      * expressed in "permission".
      *
+     * <p>
+     *  检查并确定这组权限是否意味着在"权限"中表达的权限。
+     * 
+     * 
      * @param permission the Permission object to compare
      *
      * @return true if "permission" is a proper subset of a permission in
@@ -572,6 +688,10 @@ final class PropertyPermissionCollection extends PermissionCollection
      * Returns an enumeration of all the PropertyPermission objects in the
      * container.
      *
+     * <p>
+     *  返回容器中所有PropertyPermission对象的枚举。
+     * 
+     * 
      * @return an enumeration of all the PropertyPermission objects.
      */
     @SuppressWarnings("unchecked")
@@ -581,6 +701,9 @@ final class PropertyPermissionCollection extends PermissionCollection
             /**
              * Casting to rawtype since Enumeration<PropertyPermission>
              * cannot be directly cast to Enumeration<Permission>
+             * <p>
+             *  因为枚举<PropertyPermission>不能直接转换为枚举<Permission>
+             * 
              */
             return (Enumeration)Collections.enumeration(perms.values());
         }
@@ -597,6 +720,8 @@ final class PropertyPermissionCollection extends PermissionCollection
     //
     // private Hashtable permissions;
     /**
+    /* <p>
+    /* 
      * @serialField permissions java.util.Hashtable
      *     A table of the PropertyPermissions.
      * @serialField all_allowed boolean
@@ -608,12 +733,17 @@ final class PropertyPermissionCollection extends PermissionCollection
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData Default fields.
      */
     /*
      * Writes the contents of the perms field out as a Hashtable for
      * serialization compatibility with earlier releases. all_allowed
      * unchanged.
+     * <p>
+     *  将perms字段的内容作为Hashtable写入,以便与早期版本的序列化兼容性。 all_allowed不变。
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -635,6 +765,8 @@ final class PropertyPermissionCollection extends PermissionCollection
     /*
      * Reads in a Hashtable of PropertyPermissions and saves them in the
      * perms field. Reads in all_allowed.
+     * <p>
+     * 读取PropertyPermissions的Hashtable并将其保存在perms字段中。在all_allowed中读取。
      */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException

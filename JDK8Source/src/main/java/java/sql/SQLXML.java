@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -182,6 +183,102 @@ import javax.xml.transform.Source;
  * All methods on the <code>SQLXML</code> interface must be fully implemented if the
  * JDBC driver supports the data type.
  *
+ * <p>
+ *  Java™编程语言中用于SQL XML类型的映射。 XML是一种内置类型,它将XML值作为列值存储在数据库表的行中。
+ * 默认情况下,驱动程序实现一个SQLXML对象作为指向XML数据的逻辑指针,而不是数据本身。 SQLXML对象在创建它的事务的持续时间内有效。
+ * <p>
+ *  SQLXML接口提供了作为String,Reader或Writer或Stream访问XML值的方法。
+ *  XML值还可以通过源访问或设置为结果,它们与XML解析器API(如DOM,SAX和StAX)以及XSLT转换和XPath评估一起使用。
+ * <p>
+ *  接口中的方法ResultSet,CallableStatement和PreparedStatement,例如getSQLXML允许程序员访问XML值。此外,此接口具有用于更新XML值的方法。
+ * <p>
+ *  SQLXML实例的XML值可以作为BinaryStream使用来获取
+ * <pre>
+ *  SQLXML sqlxml = resultSet.getSQLXML(column); InputStream binaryStream = sqlxml.getBinaryStream();
+ * </pre>
+ *  例如,要使用DOM解析器解析XML值：
+ * <pre>
+ *  DocumentBuilder parser = DocumentBuilderFactory.newInstance()。
+ * newDocumentBuilder();文档result = parser.parse(binaryStream);。
+ * </pre>
+ *  或者使用SAX解析器将XML值解析到您的处理程序：
+ * <pre>
+ * SAXParser parser = SAXParserFactory.newInstance()。
+ * newSAXParser(); parser.parse(binaryStream,myHandler);。
+ * </pre>
+ *  或使用StAX解析器解析XML值：
+ * <pre>
+ *  XMLInputFactory factory = XMLInputFactory.newInstance(); XMLStreamReader streamReader = factory.crea
+ * teXMLStreamReader(binaryStream);。
+ * </pre>
+ * <p>
+ *  因为数据库可能使用XML的优化表示,通过getSource()和setResult()访问值可以导致提高的处理性能,而不需要序列化到流表示和解析XML。
+ * <p>
+ *  例如,要获取DOM文档节点：
+ * <pre>
+ *  DOMSource domSource = sqlxml.getSource(DOMSource.class);文档文档=(文档)domSource.getNode();
+ * </pre>
+ *  或将DOM文档节点的值设置为myNode：
+ * <pre>
+ *  DOMResult domResult = sqlxml.setResult(DOMResult.class); domResult.setNode(myNode);
+ * </pre>
+ *  或者,向您的处理程序发送SAX事件：
+ * <pre>
+ *  SAXSource saxSource = sqlxml.getSource(SAXSource.class); XMLReader xmlReader = saxSource.getXMLReade
+ * r(); xmlReader.setContentHandler(myHandler); xmlReader.parse(saxSource.getInputSource());。
+ * </pre>
+ *  或,设置SAX事件的结果值：
+ * <pre>
+ *  SAXResult saxResult = sqlxml.setResult(SAXResult.class); ContentHandler contentHandler = saxResult.g
+ * etHandler(); contentHandler.startDocument(); //将XML元素和属性设置为结果contentHandler.endDocument();。
+ * </pre>
+ *  或者,获取StAX事件：
+ * <pre>
+ *  StAXSource staxSource = sqlxml.getSource(StAXSource.class); XMLStreamReader streamReader = staxSourc
+ * e.getXMLStreamReader();。
+ * </pre>
+ * 或,设置StAX事件的结果值：
+ * <pre>
+ *  StAXResult staxResult = sqlxml.setResult(StAXResult.class); XMLStreamWriter streamWriter = staxResul
+ * t.getXMLStreamWriter();。
+ * </pre>
+ *  或者,使用xsltFile输出中的XSLT对文件resultFile执行对XML值的XSLT转换：
+ * <pre>
+ *  文件xsltFile =新文件("a.xslt"); File myFile = new File("result.xml"); Transformer xslt = TransformerFacto
+ * ry.newInstance()。
+ * newTransformer(new StreamSource(xsltFile));源代码= sqlxml.getSource(null);结果result = new StreamResult(my
+ * File); xslt.transform(source,result);。
+ * </pre>
+ *  或者,评估XML值上的XPath表达式：
+ * <pre>
+ *  XPath xpath = XPathFactory.newInstance()。
+ * newXPath(); DOMSource domSource = sqlxml.getSource(DOMSource.class);文档文档=(文档)domSource.getNode(); Str
+ * ing expression ="/ foo / @ bar"; String barValue = xpath.evaluate(expression,document);。
+ *  XPath xpath = XPathFactory.newInstance()。
+ * </pre>
+ *  要将XML值设置为XSLT变换的结果：
+ * <pre>
+ *  File sourceFile = new File("source.xml"); Transformer xslt = TransformerFactory.newInstance()。
+ * newTransformer(new StreamSource(xsltFile)); source streamSource = new StreamSource(sourceFile);结果resu
+ * lt = sqlxml.setResult(null); xslt.transform(streamSource,result);。
+ *  File sourceFile = new File("source.xml"); Transformer xslt = TransformerFactory.newInstance()。
+ * </pre>
+ *  任何源都可以使用通过调用newTransformer()指定的标识转换转换为结果：
+ * <pre>
+ * Transformer identity = TransformerFactory.newInstance()。
+ * newTransformer();源代码= sqlxml.getSource(null); File myFile = new File("result.xml");结果result = new Str
+ * eamResult(myFile); identity.transform(source,result);。
+ * Transformer identity = TransformerFactory.newInstance()。
+ * </pre>
+ *  将源的内容写入标准输出：
+ * <pre>
+ *  Transformer identity = TransformerFactory.newInstance()。
+ * newTransformer();源代码= sqlxml.getSource(null);结果result = new StreamResult(System.out); identity.transf
+ * orm(source,result);。
+ *  Transformer identity = TransformerFactory.newInstance()。
+ * </pre>
+ *  从DOMResult创建DOMSource：
+ * 
  * @see javax.xml.parsers
  * @see javax.xml.stream
  * @see javax.xml.transform
@@ -199,6 +296,25 @@ public interface SQLXML
    * method other than <code>free</code> will result in a <code>SQLException</code>
    * being thrown.  If <code>free</code> is called multiple times, the subsequent
    * calls to <code>free</code> are treated as a no-op.
+   * <p>
+   * <pre>
+   *  DOMSource domSource = new DOMSource(domResult.getNode());
+   * </pre>
+   * <p>
+   *  不完整或无效的XML值可能会在设置时导致SQLException,或者在发生execute()时可能会发生异常。所有流必须在execute()发生或抛出SQLException之前关闭。
+   * <p>
+   *  向或从SQLXML对象读取和写入XML值最多只能发生一次。可读和不可读的概念状态确定读取API之一是否将返回值或抛出异常。可写和不可写的概念状态决定了写API之一是否将设置值或抛出异常。
+   * <p>
+   *  当free()或任何读取API被调用时,状态从可读到不可读：getBinaryStream(),getCharacterStream(),getSource()和getString()。
+   * 当发生这种情况时,实现也可能将状态更改为不可写。
+   * <p>
+   * 当free()或任何编写的API被调用时,状态从可写到不可写：setBinaryStream(),setCharacterStream(),setResult()和setString()。
+   * 当发生这种情况时,实现也可能将状态改变为不可读。
+   * 
+   * <p>
+   *  如果JDBC驱动程序支持数据类型,则必须完全实现<code> SQLXML </code>接口上的所有方法。
+   * 
+   * 
    * @throws SQLException if there is an error freeing the XML value.
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
    * this method
@@ -215,6 +331,13 @@ public interface SQLXML
    * The SQL XML object becomes not readable when this method is called and
    * may also become not writable depending on implementation.
    *
+   * <p>
+   *  此方法关闭此对象并释放它保存的资源。调用此方法时,SQL XML对象变得无效,既不可读也不可写。
+   * 
+   *  在调用<code> free </code>之后,任何试图调用<code> free </code>以外的方法都会导致抛出<code> SQLException </code>。
+   * 如果多次调用<code> free </code>,则对<code> free </code>的后续调用将被视为无操作。
+   * 
+   * 
    * @return a stream containing the XML data.
    * @throws SQLException if there is an error processing the XML value.
    *   An exception is thrown if the state is not readable.
@@ -234,6 +357,13 @@ public interface SQLXML
    * The SQL XML object becomes not writeable when this method is called and
    * may also become not readable depending on implementation.
    *
+   * <p>
+   *  将此SQLXML实例指定的XML值作为流检索。根据XML 1.0规范的附录F解释输入流的字节。
+   * 当ResultSet的指定列具有SQLXML的类型java.sql.Types时,此方法的行为与ResultSet.getBinaryStream()相同。
+   * <p>
+   *  调用此方法时,SQL XML对象变得不可读,并且根据实现方式也可能变得不可写。
+   * 
+   * 
    * @return a stream to which data can be written.
    * @throws SQLException if there is an error processing the XML value.
    *   An exception is thrown if the state is not writable.
@@ -256,6 +386,13 @@ public interface SQLXML
    * The SQL XML object becomes not readable when this method is called and
    * may also become not writable depending on implementation.
    *
+   * <p>
+   * 检索可用于写入此SQLXML实例表示的XML值的流。流从0开始。根据XML 1.0规范的附录F解释流的字节。
+   * 当ResultSet的指定列具有类型java.sql时,此方法的行为与ResultSet.updateBinaryStream()的行为相同。SQLXML的类型。
+   * <p>
+   *  调用此方法时,SQL XML对象变得不可写,并且根据实现可能也变得不可读。
+   * 
+   * 
    * @return a stream containing the XML data.
    * @throws SQLException if there is an error processing the XML value.
    *   The getCause() method of the exception may provide a more detailed exception, for example,
@@ -280,6 +417,15 @@ public interface SQLXML
    * The SQL XML object becomes not writeable when this method is called and
    * may also become not readable depending on implementation.
    *
+   * <p>
+   *  将此SQLXML实例指定的XML值作为java.io.Reader对象检索。
+   * 此流的格式由org.xml.sax.InputSource定义,其中根据XML 1.0规范的第2节和附录B,流中的字符表示XML的Unicode代码点。
+   * 虽然可能存在除了unicode之外的编码声明,但是流的编码是unicode。
+   * 当ResultSet的指定列具有SQLXML的类型java.sql.Types时,此方法的行为与ResultSet.getCharacterStream()相同。
+   * <p>
+   *  调用此方法时,SQL XML对象变得不可读,并且根据实现方式也可能变得不可写。
+   * 
+   * 
    * @return a stream to which data can be written.
    * @throws SQLException if there is an error processing the XML value.
    *   The getCause() method of the exception may provide a more detailed exception, for example,
@@ -304,6 +450,15 @@ public interface SQLXML
    * The SQL XML object becomes not readable when this method is called and
    * may also become not writable depending on implementation.
    *
+   * <p>
+   * 检索要用于写入此SQLXML实例表示的XML值的流。
+   * 此流的格式由org.xml.sax.InputSource定义,其中根据XML 1.0规范的第2节和附录B,流中的字符表示XML的Unicode代码点。
+   * 虽然可能存在除了unicode之外的编码声明,但是流的编码是unicode。
+   * 当ResultSet的指定列具有SQLXML的类型java.sql.Types时,此方法的行为与ResultSet.updateCharacterStream()相同。
+   * <p>
+   *  调用此方法时,SQL XML对象变得不可写,并且根据实现可能也变得不可读。
+   * 
+   * 
    * @return a string representation of the XML value designated by this SQLXML instance.
    * @throws SQLException if there is an error processing the XML value.
    *   The getCause() method of the exception may provide a more detailed exception, for example,
@@ -328,6 +483,15 @@ public interface SQLXML
    * The SQL XML object becomes not writeable when this method is called and
    * may also become not readable depending on implementation.
    *
+   * <p>
+   *  返回此SQLXML实例指定的XML值的字符串表示形式。
+   * 此String的格式由org.xml.sax.InputSource定义,其中根据XML 1.0规范的第2节和附录B,流中的字符表示XML的Unicode代码点。
+   * 虽然可能存在除unicode之外的编码声明,但String的编码是unicode。
+   * 当ResultSet的指定列具有SQLXML的类型java.sql.Types时,此方法的行为与ResultSet.getString()相同。
+   * <p>
+   *  调用此方法时,SQL XML对象变得不可读,并且根据实现方式也可能变得不可写。
+   * 
+   * 
    * @param value the XML value
    * @throws SQLException if there is an error processing the XML value.
    *   The getCause() method of the exception may provide a more detailed exception, for example,
@@ -360,6 +524,15 @@ public interface SQLXML
    *   xmlReader.parse(saxSource.getInputSource());
    * </pre>
    *
+   * <p>
+   * 将此SQLXML实例指定的XML值设置为给定的String表示形式。
+   * 此String的格式由org.xml.sax.InputSource定义,其中根据XML 1.0规范的第2节和附录B,流中的字符表示XML的Unicode代码点。
+   * 虽然可能存在除unicode之外的编码声明,但String的编码是unicode。
+   * 当ResultSet的指定列具有SQLXML的类型java.sql.Types时,此方法的行为与ResultSet.updateString()相同。
+   * <p>
+   *  调用此方法时,SQL XML对象变得不可写,并且根据实现可能也变得不可读。
+   * 
+   * 
    * @param <T> the type of the class modeled by this Class object
    * @param sourceClass The class of the source, or null.
    * If the class is null, a vendor specific Source implementation will be returned.
@@ -402,6 +575,20 @@ public interface SQLXML
    *   contentHandler.endDocument();
    * </pre>
    *
+   * <p>
+   *  返回一个Source,用于读取此SQLXML实例指定的XML值。源用作XML解析器和XSLT变换器的输入。
+   * <p>
+   *  默认情况下,XML解析器的源将启用命名空间处理。源的systemID是依赖于实现的。
+   * <p>
+   *  调用此方法时,SQL XML对象变得不可读,并且根据实现方式也可能变得不可写。
+   * <p>
+   *  注意,SAX是一个回调体系结构,所以一个返回的SAXSource应该设置一个内容处理程序,它将从解析接收SAX事件。内容处理程序将基于XML的内容接收回调。
+   * <pre>
+   * SAXSource saxSource = sqlxml.getSource(SAXSource.class); XMLReader xmlReader = saxSource.getXMLReader
+   * (); xmlReader.setContentHandler(myHandler); xmlReader.parse(saxSource.getInputSource());。
+   * </pre>
+   * 
+   * 
    * @param <T> the type of the class modeled by this Class object
    * @param resultClass The class of the result, or null.
    * If resultClass is null, a vendor specific Result implementation will be returned.

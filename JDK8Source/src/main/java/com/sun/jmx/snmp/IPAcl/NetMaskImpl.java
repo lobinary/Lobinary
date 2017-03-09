@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,10 @@ import java.security.acl.Group;
  * This class is used to represent a subnet mask (a group of hosts matching the same
  * IP mask).
  *
+ * <p>
+ *  此类用于表示子网掩码(匹配同一IP掩码的一组主机)。
+ * 
+ * 
  * @see java.security.acl.Group
  */
 
@@ -52,6 +57,10 @@ class NetMaskImpl extends PrincipalImpl implements Group, Serializable {
     protected int prefix = -1;
     /**
      * Constructs an empty group.
+     * <p>
+     *  构造一个空组。
+     * 
+     * 
      * @exception UnknownHostException Not implemented
      */
     public NetMaskImpl () throws UnknownHostException {
@@ -156,6 +165,10 @@ class NetMaskImpl extends PrincipalImpl implements Group, Serializable {
    * Constructs a group using the specified subnet mask.
    * THIS ALGORITHM IS V4 and V6 compatible.
    *
+   * <p>
+   *  使用指定的子网掩码构造组。此算法与V4和V6兼容。
+   * 
+   * 
    * @exception UnknownHostException if the subnet mask cann't be built.
    */
   public NetMaskImpl (String a, int prefix) throws UnknownHostException {
@@ -167,6 +180,10 @@ class NetMaskImpl extends PrincipalImpl implements Group, Serializable {
   /**
    * Adds the specified member to the group.
    *
+   * <p>
+   *  将指定的成员添加到组。
+   * 
+   * 
    * @param p the principal to add to this group.
    * @return true if the member was successfully added, false if the
    *      principal was already a member.
@@ -184,6 +201,10 @@ class NetMaskImpl extends PrincipalImpl implements Group, Serializable {
    * Compares this group to the specified object. Returns true if the object
    * passed in matches the group represented.
    *
+   * <p>
+   *  将此组与指定的对象进行比较。如果传入的对象与表示的组匹配,则返回true。
+   * 
+   * 
    * @param p the object to compare with.
    * @return true if the object passed in matches the subnet mask,
    *    false otherwise.
@@ -225,6 +246,10 @@ class NetMaskImpl extends PrincipalImpl implements Group, Serializable {
   /**
    * Returns true if the passed principal is a member of the group.
    *
+   * <p>
+   *  如果传递的主体是组的成员,那么返回true。
+   * 
+   * 
    * @param p the principal whose membership is to be checked.
    * @return true if the principal is a member of this group, false otherwise.
    */
@@ -236,6 +261,10 @@ class NetMaskImpl extends PrincipalImpl implements Group, Serializable {
   /**
    * Returns an enumeration which contains the subnet mask.
    *
+   * <p>
+   *  返回包含子网掩码的枚举。
+   * 
+   * 
    * @return an enumeration which contains the subnet mask.
    */
   public Enumeration<? extends Principal> members(){
@@ -247,6 +276,10 @@ class NetMaskImpl extends PrincipalImpl implements Group, Serializable {
   /**
    * Removes the specified member from the group. (Not implemented)
    *
+   * <p>
+   *  从组中删除指定的成员。 (未实现)
+   * 
+   * 
    * @param p the principal to remove from this group.
    * @return allways return true.
    */
@@ -257,6 +290,9 @@ class NetMaskImpl extends PrincipalImpl implements Group, Serializable {
   /**
    * Prints a string representation of this group.
    *
+   * <p>
+   *  打印此组的字符串表示形式。
+   * 
    * @return  a string representation of this group.
    */
   public String toString() {

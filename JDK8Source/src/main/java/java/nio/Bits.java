@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import sun.misc.VM;
 
 /**
  * Access to bits, native and otherwise.
+ * <p>
+ *  访问位,本机和其他。
+ * 
  */
 
 class Bits {                            // package-private
@@ -730,6 +734,10 @@ class Bits {                            // package-private
     /**
      * Copy from given source array to destination address.
      *
+     * <p>
+     *  从给定源数组复制到目标地址。
+     * 
+     * 
      * @param   src
      *          source array
      * @param   srcBaseOffset
@@ -757,6 +765,9 @@ class Bits {                            // package-private
     /**
      * Copy from source address into given destination array.
      *
+     * <p>
+     *  从源地址复制到给定的目标数组。
+     * 
      * @param   srcAddr
      *          source address
      * @param   dst

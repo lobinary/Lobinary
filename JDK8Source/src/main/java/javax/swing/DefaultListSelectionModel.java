@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import javax.swing.event.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  用于列表选择的默认数据模型。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Philip Milne
  * @author Hans Muller
  * @see ListSelectionModel
@@ -85,6 +93,10 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IllegalArgumentException {@inheritDoc}
      */
     public void setSelectionMode(int selectionMode) {
@@ -123,6 +135,10 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * Returns an array of all the list selection listeners
      * registered on this <code>DefaultListSelectionModel</code>.
      *
+     * <p>
+     *  返回在此<code> DefaultListSelectionModel </code>上注册的所有列表选择侦听器的数组。
+     * 
+     * 
      * @return all of this model's <code>ListSelectionListener</code>s
      *         or an empty
      *         array if no list selection listeners are currently registered
@@ -138,6 +154,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
 
     /**
      * Notifies listeners that we have ended a series of adjustments.
+     * <p>
+     *  通知听众我们已结束一系列调整。
+     * 
      */
     protected void fireValueChanged(boolean isAdjusting) {
         if (lastChangedIndex == MIN) {
@@ -146,6 +165,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
         /* Change the values before sending the event to the
          * listeners in case the event causes a listener to make
          * another change to the selection.
+         * <p>
+         *  如果事件导致侦听器对选择进行另一个更改,则可以使用侦听器。
+         * 
          */
         int oldFirstChangedIndex = firstChangedIndex;
         int oldLastChangedIndex = lastChangedIndex;
@@ -159,12 +181,18 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * Notifies <code>ListSelectionListeners</code> that the value
      * of the selection, in the closed interval <code>firstIndex</code>,
      * <code>lastIndex</code>, has changed.
+     * <p>
+     *  通知<code> ListSelectionListeners </code>,在关闭间隔<code> firstIndex </code>,<code> lastIndex </code>中的选择值
+     * 已更改。
+     * 
      */
     protected void fireValueChanged(int firstIndex, int lastIndex) {
         fireValueChanged(firstIndex, lastIndex, getValueIsAdjusting());
     }
 
     /**
+    /* <p>
+    /* 
      * @param firstIndex the first index in the interval
      * @param lastIndex the last index in the interval
      * @param isAdjusting true if this is the final change in a series of
@@ -194,6 +222,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
          * record the bounds of the changes so that, when the drag finishes (and
          * setValueAdjusting(false) is called) we can post a single event
          * with bounds covering all of these individual adjustments.
+         * <p>
+         *  记录更改的边界,以便当拖动完成(和调用setValueAdjusting(false))时,我们可以发布一个包含所有这些单独调整的单个事件。
+         * 
          */
         if (getValueIsAdjusting()) {
             firstChangedIndex = Math.min(firstChangedIndex, firstAdjustedIndex);
@@ -202,6 +233,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
         /* Change the values before sending the event to the
          * listeners in case the event causes a listener to make
          * another change to the selection.
+         * <p>
+         *  如果事件导致侦听器对选择进行另一个更改,则可以使用侦听器。
+         * 
          */
         int oldFirstAdjustedIndex = firstAdjustedIndex;
         int oldLastAdjustedIndex = lastAdjustedIndex;
@@ -230,6 +264,19 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * If no such listeners exist,
      * this method returns an empty array.
      *
+     * <p>
+     * 返回当前在此模型上注册为<code> <em> Foo </em> Listener </code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * <p>
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询<list> DefaultListSelectionModel </code>实例<code> m </code>作为其列表选择侦听器：。
+     * 
+     *  <pre> ListSelectionListener [] lsls =(ListSelectionListener [])(m.getListeners(ListSelectionListener
+     * .class)); </pre>。
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType  the type of listeners requested;
      *          this parameter should specify an interface
      *          that descends from <code>java.util.EventListener</code>
@@ -287,6 +334,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
            The case (r < minIndex) is not possible because r'th value was set.
            We only need to check for the case when lowest entry has been cleared,
            and in this case we need to search for the first value set above it.
+        /* <p>
+        /*  如果(r> minIndex)的最小值没有改变。情况(r <minIndex)不可能,因为设置了r'th值。我们只需要检查最低条目已被清除的情况,在这种情况下,我们需要搜索上面的第一个值集合。
+        /* 
         */
         if (r == minIndex) {
             for(minIndex = minIndex + 1; minIndex <= maxIndex; minIndex++) {
@@ -300,6 +350,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
            The case (r > maxIndex) is not possible because r'th value was set.
            We only need to check for the case when highest entry has been cleared,
            and in this case we need to search for the first value set below it.
+        /* <p>
+        /*  如果(r <maxIndex)的最大值没有改变。情况(r> maxIndex)是不可能的,因为设置了r'th值。我们只需要检查最高条目被清除的情况,在这种情况下,我们需要搜索下面设置的第一个值。
+        /* 
         */
         if (r == maxIndex) {
             for(maxIndex = maxIndex - 1; minIndex <= maxIndex; maxIndex--) {
@@ -322,6 +375,13 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
            If we have cleared the whole selection, set the minIndex and maxIndex
            to their cannonical values so that the next set command always works
            just by using Math.min and Math.max.
+        /* <p>
+        /*  changeSelection(),但是我们只会在每个取消选择的单元格的一次迭代的基础上迭代上面的循环。也就是说。下次调用此方法时,先前取消选择的工作将不会重复。
+        /* 
+        /* 我们也不需要担心最小和最大值处于未分配状态的情况。这不可能发生,因为此方法的初始检查确保选择不为空,因此minIndex和maxIndex具有"真实"值。
+        /* 
+        /*  如果我们清除了整个选择,将minIndex和maxIndex设置为它们的大炮值,以便下一个设置命令总是使用Math.min和Math.max工作。
+        /* 
         */
         if (isSelectionEmpty()) {
             minIndex = MAX;
@@ -331,6 +391,10 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
 
     /**
      * Sets the value of the leadAnchorNotificationEnabled flag.
+     * <p>
+     *  设置leadAnchorNotificationEnabled标志的值。
+     * 
+     * 
      * @see             #isLeadAnchorNotificationEnabled()
      */
     public void setLeadAnchorNotificationEnabled(boolean flag) {
@@ -352,6 +416,14 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * important, such as when the new lead or anchor needs to be updated in
      * the view. Therefore, caution is urged when changing the default value.
      *
+     * <p>
+     *  返回<code> leadAnchorNotificationEnabled </code>标志的值。
+     * 当<code> leadAnchorNotificationEnabled </code>为true时,模型生成具有边界的通知事件,该边界覆盖对选择的所有更改以及前导和锚索引的更改。
+     * 将标志设置为false会导致事件边界变窄,仅包括自上次更改以来已选择或取消选择的元素。无论哪种方式,模型继续内部保持引导和锚定变量。默认值为true。
+     * <p>
+     *  注意：可以更改导联或锚定,而不更改选择。这些更改的通知通常很重要,例如需要在视图中更新新潜在客户或锚点时。因此,在更改默认值时,请务必小心。
+     * 
+     * 
      * @return  the value of the <code>leadAnchorNotificationEnabled</code> flag
      * @see             #setLeadAnchorNotificationEnabled(boolean)
      */
@@ -410,6 +482,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
     * in the inclusive range [clearMin, clearMax] then setting the values
     * in the inclusive range [setMin, setMax]. Do this in one pass so
     * that no values are cleared if they would later be set.
+    * <p>
+    * 更改选择的效果是首先清除包含范围[clearMin,clearMax]中的值,然后设置包含范围[setMin,setMax]中的值。在一遍中执行此操作,以便如果稍后将设置值,则不清除任何值。
+    * 
     */
     private void changeSelection(int clearMin, int clearMax, int setMin, int setMax) {
         changeSelection(clearMin, clearMax, setMin, setMax, true);
@@ -435,6 +510,16 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * without exception. Otherwise, if either index is less than {@code -1},
      * an {@code IndexOutOfBoundsException} is thrown.
      *
+     * <p>
+     *  将选择更改为{@code index0}和{@code index1}(含)之间。 {@code index0}不必小于或等于{@code index1}。
+     * <p>
+     *  在{@code SINGLE_SELECTION}选择模式中,仅使用第二个索引。
+     * <p>
+     *  如果这代表对当前选择的更改,则会向每个{@code ListSelectionListener}通知更改。
+     * <p>
+     *  如果任一索引是{@code -1},此方法不执行任何操作,并且没有异常返回。否则,如果任一索引小于{@code -1},则抛出{@code IndexOutOfBoundsException}。
+     * 
+     * 
      * @param index0 one end of the interval.
      * @param index1 other end of the interval
      * @throws IndexOutOfBoundsException if either index is less than {@code -1}
@@ -478,6 +563,19 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * without exception. Otherwise, if either index is less than {@code -1},
      * an {@code IndexOutOfBoundsException} is thrown.
      *
+     * <p>
+     *  将选择更改为{@code index0}和{@code index1}(含)之间的当前选择和索引的集合并集。
+     * <p>
+     *  在{@code SINGLE_SELECTION}选择模式下,这相当于调用{@code setSelectionInterval},并且仅使用第二个索引。
+     * 在{@code SINGLE_INTERVAL_SELECTION}选择模式中,此方法的行为类似于{@code setSelectionInterval},除非给定的间隔与现有选择直接相邻或重叠,因此可
+     * 用于增长。
+     *  在{@code SINGLE_SELECTION}选择模式下,这相当于调用{@code setSelectionInterval},并且仅使用第二个索引。
+     * <p>
+     * 如果这代表对当前选择的更改,则会向每个{@code ListSelectionListener}通知更改。请注意,{@code index0}不必小于或等于{@code index1}。
+     * <p>
+     *  如果任一索引是{@code -1},此方法不执行任何操作,并且没有异常返回。否则,如果任一索引小于{@code -1},则抛出{@code IndexOutOfBoundsException}。
+     * 
+     * 
      * @param index0 one end of the interval.
      * @param index1 other end of the interval
      * @throws IndexOutOfBoundsException if either index is less than {@code -1}
@@ -537,6 +635,17 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * without exception. Otherwise, if either index is less than {@code -1},
      * an {@code IndexOutOfBoundsException} is thrown.
      *
+     * <p>
+     *  将选择更改为当前选择和{@code index0}和{@code index1}(含)之间的索引的设置差异。 {@code index0}不必小于或等于{@code index1}。
+     * <p>
+     *  在{@code SINGLE_INTERVAL_SELECTION}选择模式中,如果移除会产生两个不相交的选择,则移除会延伸到选择的较大一端。
+     * 例如,如果选择是{@code 0-10},并且提供索引{@code 5,6}(以任何顺序),结果选择是{@code 0-4}。
+     * <p>
+     *  如果这代表对当前选择的更改,则会向每个{@code ListSelectionListener}通知更改。
+     * <p>
+     *  如果任一索引是{@code -1},此方法不执行任何操作,并且没有异常返回。否则,如果任一索引小于{@code -1},则抛出{@code IndexOutOfBoundsException}。
+     * 
+     * 
      * @param index0 one end of the interval
      * @param index1 other end of the interval
      * @throws IndexOutOfBoundsException if either index is less than {@code -1}
@@ -592,11 +701,18 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * Otherwise leave them unselected. This method is typically
      * called to sync the selection model with a corresponding change
      * in the data model.
+     * <p>
+     * 插入在索引之前/之后开始的长度索引。如果索引处的值本身被选择,并且选择模式不是SINGLE_SELECTION,则将所有新插入的项目设置为选定的。否则不要选择它们。
+     * 通常调用此方法以使选择模型与数据模型中的对应变化同步。
+     * 
      */
     public void insertIndexInterval(int index, int length, boolean before)
     {
         /* The first new index will appear at insMinIndex and the last
          * one will appear at insMaxIndex
+         * <p>
+         *  一个将出现在insMaxIndex
+         * 
          */
         int insMinIndex = (before) ? index : index + 1;
         int insMaxIndex = (insMinIndex + length) - 1;
@@ -604,12 +720,16 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
         /* Right shift the entire bitset by length, beginning with
          * index-1 if before is true, index+1 if it's false (i.e. with
          * insMinIndex).
+         * <p>
+         *  index-1如果before为true,则索引+ 1如果为假(即使用insMinIndex)。
+         * 
          */
         for(int i = maxIndex; i >= insMinIndex; i--) {
             setState(i + length, value.get(i));
         }
 
         /* Initialize the newly inserted indices.
+        /* <p>
          */
         boolean setInsertedValues = ((getSelectionMode() == SINGLE_SELECTION) ?
                                         false : value.get(index));
@@ -638,6 +758,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * the selection model.  This is typically called to sync the selection
      * model width a corresponding change in the data model.  Note
      * that (as always) index0 need not be &lt;= index1.
+     * <p>
+     *  从选择模型中删除区间index0,index1(包括)中的索引。这通常被称为将选择模型宽度与数据模型中的对应变化同步。注意(一如既往)index0不需要<= index1。
+     * 
      */
     public void removeIndexInterval(int index0, int index1)
     {
@@ -647,6 +770,9 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
 
         /* Shift the entire bitset to the left to close the index0, index1
          * gap.
+         * <p>
+         *  间隙。
+         * 
          */
         for(int i = rmMinIndex; i <= maxIndex; i++) {
             setState(i, value.get(i + gapLength));
@@ -691,6 +817,10 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * Returns a string that displays and identifies this
      * object's properties.
      *
+     * <p>
+     *  返回显示和标识此对象属性的字符串。
+     * 
+     * 
      * @return a <code>String</code> representation of this object
      */
     public String toString() {
@@ -702,6 +832,10 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * Returns a clone of this selection model with the same selection.
      * <code>listenerLists</code> are not duplicated.
      *
+     * <p>
+     *  返回具有相同选择的此选择模型的克隆。 <code> listenerLists </code>不重复。
+     * 
+     * 
      * @exception CloneNotSupportedException if the selection model does not
      *    both (a) implement the Cloneable interface and (b) define a
      *    <code>clone</code> method.
@@ -730,6 +864,10 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * If leadAnchorNotificationEnabled is true, send a notification covering
      * the old and new anchor cells.
      *
+     * <p>
+     *  设置锚选择索引,保留所有选择值不变。如果leadAnchorNotificationEnabled为true,则发送覆盖旧锚点和新锚点的通知。
+     * 
+     * 
      * @see #getAnchorSelectionIndex
      * @see #setLeadSelectionIndex
      */
@@ -743,6 +881,10 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * If leadAnchorNotificationEnabled is true, send a notification covering
      * the old and new lead cells.
      *
+     * <p>
+     *  设置前导选择索引,保留所有选择值不变。如果leadAnchorNotificationEnabled为true,则发送覆盖旧的和新的潜在客户单元的通知。
+     * 
+     * 
      * @param leadIndex the new lead selection index
      *
      * @see #setAnchorSelectionIndex
@@ -769,6 +911,11 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
         // otherwise, don't do anything if the anchor is -1
         } else if (this.anchorIndex == -1) {
             return;
+/* <p>
+/* setLeadSelectionIndex。然而,这不是绝对必要的：可以通过将锚设置为有效的,修改线索,然后将锚移动到-1来解决它。因此,在这个时候添加它是没有意义的,因为这将需要更新规范并正式承诺。
+/* 
+/*  //否则,如果锚是-1,不要做任何事情} else if(this.anchorIndex == -1){return;
+/* 
 */
 
         }
@@ -802,6 +949,14 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
      * This method can be used in the <code>mouseDragged</code> method
      * of a UI class to extend a selection.
      *
+     * <p>
+     *  设置前导选择索引,确保锚点和新前导值之间的值全部选中或全部取消选择。
+     * 如果选择锚索引的值,首先清除[anchor,oldLeadIndex]范围内的所有值,然后选择[anchor,newLeadIndex]范围内的所有值,其中oldLeadIndex是旧的leadInde
+     * x,newLeadIndex是新的一。
+     *  设置前导选择索引,确保锚点和新前导值之间的值全部选中或全部取消选择。
+     * <p>
+     *  如果未选择锚索引处的值,请在反向选择旧范围中的值并取消选择新值中的值时执行相同的操作。
+     * 
      * @see #getLeadSelectionIndex
      * @see #setAnchorSelectionIndex
      */

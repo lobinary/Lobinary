@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
  * The JVM interface for the method handles package is all here.
  * This is an interface internal and private to an implementation of JSR 292.
  * <em>This class is not part of the JSR 292 standard.</em>
+ * <p>
+ *  方法处理包的JVM接口都在这里。这是JSR 292实现的内部和私有接口。<em>此类不是JSR 292标准的一部分。</em>
+ * 
+ * 
  * @author jrose
  */
 class MethodHandleNatives {
@@ -60,6 +65,9 @@ class MethodHandleNatives {
     /** Fetch MH-related JVM parameter.
      *  which=0 retrieves MethodHandlePushLimit
      *  which=1 retrieves stack slot push size (in address units)
+     * <p>
+     *  which = 0检索MethodHandlePushLimit which = 1检索堆栈插槽推入大小(以地址单位)
+     * 
      */
     static native int getConstant(int which);
 
@@ -111,6 +119,9 @@ class MethodHandleNatives {
          * Basic types as encoded in the JVM.  These code values are not
          * intended for use outside this class.  They are used as part of
          * a private interface between the JVM and this class.
+         * <p>
+         *  在JVM中编码的基本类型。这些代码值不适用于此类外部。它们用作JVM和此类之间的私有接口的一部分。
+         * 
          */
         static final int
             T_BOOLEAN  =  4,
@@ -129,6 +140,9 @@ class MethodHandleNatives {
 
         /**
          * Constant pool entry types.
+         * <p>
+         *  常量池条目类型。
+         * 
          */
         static final byte
             CONSTANT_Utf8                = 1,
@@ -149,6 +163,9 @@ class MethodHandleNatives {
 
         /**
          * Access modifier flags.
+         * <p>
+         *  访问修饰符标志。
+         * 
          */
         static final char
             ACC_PUBLIC                 = 0x0001,
@@ -173,6 +190,9 @@ class MethodHandleNatives {
 
         /**
          * Constant pool reference-kind codes, as used by CONSTANT_MethodHandle CP entries.
+         * <p>
+         *  常量池引用类型代码,由CONSTANT_MethodHandle CP条目使用。
+         * 
          */
         static final byte
             REF_NONE                    = 0,  // null value
@@ -283,6 +303,9 @@ class MethodHandleNatives {
 
     /**
      * The JVM is linking an invokedynamic instruction.  Create a reified call site for it.
+     * <p>
+     *  JVM正在链接被调用的动态指令。为其创建一个已识别的呼叫站点。
+     * 
      */
     static MemberName linkCallSite(Object callerObj,
                                    Object bootstrapMethodObj,
@@ -344,6 +367,9 @@ class MethodHandleNatives {
 
     /**
      * The JVM wants a pointer to a MethodType.  Oblige it by finding or creating one.
+     * <p>
+     *  JVM需要一个指向MethodType的指针。通过发现或创建一个义务。
+     * 
      */
     static MethodType findMethodHandleType(Class<?> rtype, Class<?>[] ptypes) {
         return MethodType.makeImpl(rtype, ptypes, true);
@@ -415,6 +441,26 @@ class MethodHandleNatives {
      * Therefore, use cases for {@code linkMethod} tend to correspond to
      * special cases in reflective code such as {@code findVirtual}
      * or {@code revealDirect}.
+     * <p>
+     *  JVM希望链接需要动态类型检查的调用站点。 Name是一个类型检查调用器,invokeExact或invoke。返回一个JVM方法(MemberName)来处理调用。
+     * 该方法假定堆栈上有以下参数：0：调用的方法句柄1-N：方法句柄调用的参数N + 1：可选的,隐式添加的参数(通常是给定的MethodType)。
+     * <p>
+     * 这种调用点的标称方法是签名多态方法的一个实例(参见@PolymorphicSignature)。
+     * 这样的方法实例是用户可见的实体,它们与{@code MethodHandle}中的通用占位符方法"分离"。
+     *  (请注意,占位符方法与其任何实例不相同,如果以反射方式调用,则保证会抛出一个{@code UnsupportedOperationException}。
+     * )如果签名多态方法实例被重写,它将显示为"副本"原始占位符({@code MethodHandle}的原生最终成员),除了它的类型描述符具有实例所需的形状,方法实例不是</em> varargs。
+     * 方法实例也标记为合成,因为方法(按定义)不会出现在Java源代码中。
+     * <p>
+     *  允许JVM将此方法重定义为实例元数据。例如,{@code invokeBasic}总是reified。但是JVM可以调用{@code linkMethod}。
+     * 如果结果是{@code(method,appendix)}的*有序对,则该方法将获取所有参数(包括0..N)加上附录(N + 1),并使用附录完成调用。
+     * 以这种方式,一个可重用的方法(称为"链接器方法")可以执行任何数量的多态实例方法的功能。
+     * <p>
+     * 链接器方法允许弱类型,任何或所有引用重写为{@code Object}和任何原语({@code long} / {@ code float} / {@ code double})改写为{@code int }
+     * 。
+     * 根据被模拟的签名多态实例的特定方法类型描述符,链接器方法被信任返回强类型化结果。这可能涉及(如有必要)使用从附录参数提取的数据进行动态检查。
+     * <p>
+     *  JVM不检查附录,除非在每次调用时将其逐字传递给链接器方法。这意味着JDK运行时具有很大的自由度来选择每个链接器方法的形状及其相应的附录。
+     * 链接器方法应该从{@code LambdaForm}生成,以便它们不会在堆栈跟踪上可见。
      */
     static MemberName linkMethod(Class<?> callerClass, int refKind,
                                  Class<?> defc, String name, Object type,
@@ -468,6 +514,14 @@ class MethodHandleNatives {
      * <p>
      * Recent versions of the JVM may also pass a resolved MemberName for the type.
      * In that case, the name is ignored and may be null.
+     * <p>
+     * <p>
+     *  {@code linkMethod}调用可以省略附录(返回null),而是在链接器方法中完全模拟所需的函数。作为一个角落情况,如果N == 255,没有附录是可能的。
+     * 在这种情况下,返回的方法必须是定制生成的,以执行任何所需的类型检查。
+     * <p>
+     *  如果JVM不在调用站点重定一个方法,而是调用{@code linkMethod},则字节码中表示的相应调用可能提到一个不能用{@code MemberName}表示的有效方法。
+     * 因此,{@code linkMethod}的用例通常对应于反射代码中的特殊情况,例如{@code findVirtual}或{@code revealDirect}。
+     * 
      */
     static MethodHandle linkMethodHandleConstant(Class<?> callerClass, int refKind,
                                                  Class<?> defc, String name, Object type) {
@@ -498,6 +552,11 @@ class MethodHandleNatives {
     /**
      * Use best possible cause for err.initCause(), substituting the
      * cause for err itself if the cause has the same (or better) type.
+     * <p>
+     * JVM正在解析一个CONSTANT_MethodHandle CP条目。它希望我们的帮助。它将对此方法进行向上调用。 (不要更改名称或签名。)类型参数是字段请求的类和非字段的MethodType。
+     * <p>
+     *  最近的JVM版本也可能传递一个解析的MemberName作为类型。在这种情况下,名称将被忽略,并且可以为null。
+     * 
      */
     static private Error initCauseFrom(Error err, Exception ex) {
         Throwable th = ex.getCause();
@@ -511,6 +570,9 @@ class MethodHandleNatives {
      * Is this method a caller-sensitive method?
      * I.e., does it call Reflection.getCallerClass or a similer method
      * to ask about the identity of its caller?
+     * <p>
+     *  使用err.initCause()的最佳可能原因,如果原因具有相同(或更好)类型,则用原因替换err本身。
+     * 
      */
     static boolean isCallerSensitive(MemberName mem) {
         if (!mem.isInvocable())  return false;  // fields are not caller sensitive

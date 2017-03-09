@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import com.sun.corba.se.impl.orbutil.ORBConstants;
  *  from the -ORBInitDef and -ORBDefaultInitDef definitions.
  *
  *  @Author Hemanth
+ * <p>
+ *  EndpointInfo由CorbaLoc对象内部使用,用于存储从-ORBInitDef和-ORBDefaultInitDef定义创建服务对象引用时使用的主机信息。
+ * 
+ *  @作者Hemanth
  */
 public class IIOPEndpointInfo
 {
@@ -83,6 +88,8 @@ public class IIOPEndpointInfo
     }
 
     /** Internal Debug Method.
+    /* <p>
+    /* 
      */
     public void dump( ) {
         System.out.println( " Major -> " + major + " Minor -> " + minor );

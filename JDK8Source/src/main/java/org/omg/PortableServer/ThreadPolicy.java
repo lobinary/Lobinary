@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -13,6 +14,8 @@ package org.omg.PortableServer;
 	 * The ThreadPolicy specifies the threading model 
 	 * used with the created POA. The default is 
 	 * ORB_CTRL_MODEL.
+	 * <p>
+	 * 
 	 */
 public interface ThreadPolicy extends ThreadPolicyOperations, org.omg.CORBA.Policy, org.omg.CORBA.portable.IDLEntity 
 {

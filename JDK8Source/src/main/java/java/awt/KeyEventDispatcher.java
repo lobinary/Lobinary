@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,19 @@ import java.awt.event.KeyEvent;
  * KeyboardFocusManager as a KeyEventDispatcher one or more times, this is
  * usually unnecessary and not recommended.)
  *
+ * <p>
+ *  KeyEventDispatcher在目标和分派所有KeyEvents时与当前的KeyboardFocusManager合作。
+ * 使用当前KeyboardFocusManager注册的KeyEventDispatchers将在分派到其目标之前接收KeyEvent,从而允许每个KeyEventDispatcher重新定位事件,使用它
+ * ,调度事件本身或进行其他更改。
+ *  KeyEventDispatcher在目标和分派所有KeyEvents时与当前的KeyboardFocusManager合作。
+ * <p>
+ *  注意,KeyboardFocusManager本身实现了KeyEventDispatcher。
+ * 默认情况下,当前KeyboardFocusManager将是所有未由注册的KeyEventDispatchers分派的KeyEvent的接收器。
+ * 当前KeyboardFocusManager无法完全取消注册为KeyEventDispatcher。
+ * 但是,如果一个KeyEventDispatcher报告它调度了KeyEvent,无论是否实际这样做,KeyboardFocusManager将不会对KeyEvent采取进一步的操作。
+ *  (虽然客户端代码可能将当前的KeyboardFocusManager注册为一个或多个KeyEventDispatcher,但这通常是不必要的,因此不推荐。
+ * 
+ * 
  * @author David Mendenhall
  *
  * @see KeyboardFocusManager#addKeyEventDispatcher
@@ -81,6 +95,15 @@ public interface KeyEventDispatcher {
      * dispatching it to a target. By default, the current KeyboardFocusManager
      * will not dispatch a consumed KeyEvent.
      *
+     * <p>
+     * 此方法由当前KeyboardFocusManager调用,请求此KeyEventDispatcher代表其调度指定的事件。
+     * 此KeyEventDispatcher可以自由重定向事件,使用它,调度它自己或进行其他更改。此功能通常用于将KeyEvent传递给除焦点所有者之外的组件。
+     * 例如,当在可访问的环境中导航非可聚焦Windows的孩子时,这可能很有用。
+     * 注意,如果KeyEventDispatcher调度KeyEvent本身,它必须使用<code> redispatchEvent </code>来阻止当前的KeyboardFocusManager递归地请
+     * 求此KeyEventDispatcher再次分派事件。
+     * 例如,当在可访问的环境中导航非可聚焦Windows的孩子时,这可能很有用。
+     * <p>
+     * 
      * @param e the KeyEvent to dispatch
      * @return <code>true</code> if the KeyboardFocusManager should take no
      *         further action with regard to the KeyEvent; <code>false</code>

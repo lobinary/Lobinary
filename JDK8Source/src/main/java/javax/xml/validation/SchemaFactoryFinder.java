@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import java.util.ServiceLoader;
 /**
  * Implementation of {@link SchemaFactory#newInstance(String)}.
  *
+ * <p>
+ *  实现{@link SchemaFactory#newInstance(String)}。
+ * 
+ * 
  * @author <a href="Kohsuke.Kawaguchi@Sun.com">Kohsuke Kawaguchi</a>
  * @version $Revision: 1.8 $, $Date: 2010-11-01 04:36:13 $
  * @since 1.5
@@ -49,16 +54,25 @@ class SchemaFactoryFinder  {
     private static boolean debug = false;
     /**
      *<p> Take care of restrictions imposed by java security model </p>
+     * <p>
+     *  p>处理由java安全模型施加的限制</p>
+     * 
      */
     private static final SecuritySupport ss = new SecuritySupport();
     private static final String DEFAULT_PACKAGE = "com.sun.org.apache.xerces.internal";
     /**
      * <p>Cache properties for performance.</p>
+     * <p>
+     *  <p>性能的缓存属性。</p>
+     * 
      */
     private static final Properties cacheProps = new Properties();
 
     /**
      * <p>First time requires initialization overhead.</p>
+     * <p>
+     *  <p>首次需要初始化开销。</p>
+     * 
      */
     private static volatile boolean firstTime = true;
 
@@ -74,6 +88,10 @@ class SchemaFactoryFinder  {
     /**
      * <p>Conditional debug printing.</p>
      *
+     * <p>
+     *  <p>条件调试打印。</p>
+     * 
+     * 
      * @param msg to print
      */
     private static void debugPrintln(String msg) {
@@ -84,6 +102,9 @@ class SchemaFactoryFinder  {
 
     /**
      * <p><code>ClassLoader</code> to use to find <code>SchemaFactory</code>.</p>
+     * <p>
+     *  <p> <code> ClassLoader </code>用于查找<code> SchemaFactory </code>。</p>
+     * 
      */
     private final ClassLoader classLoader;
 
@@ -91,6 +112,10 @@ class SchemaFactoryFinder  {
      * <p>Constructor that specifies <code>ClassLoader</code> to use
      * to find <code>SchemaFactory</code>.</p>
      *
+     * <p>
+     *  <p>指定<code> ClassLoader </code>以用于查找<code> SchemaFactory </code>的构造方法。</p>
+     * 
+     * 
      * @param loader
      *      to be used to load resource, {@link SchemaFactory}, and
      *      {@link SchemaFactoryLoader} implementations during
@@ -127,6 +152,10 @@ class SchemaFactoryFinder  {
      * <p>Creates a new {@link SchemaFactory} object for the specified
      * schema language.</p>
      *
+     * <p>
+     *  <p>为指定的模式语言创建一个新的{@link SchemaFactory}对象。</p>
+     * 
+     * 
      * @param schemaLanguage
      *      See {@link SchemaFactory Schema Language} table in <code>SchemaFactory</code>
      *      for the list of available schema languages.
@@ -154,6 +183,10 @@ class SchemaFactoryFinder  {
     /**
      * <p>Lookup a <code>SchemaFactory</code> for the given <code>schemaLanguage</code>.</p>
      *
+     * <p>
+     *  <p>为给定的<code> schemaLanguage </code>查找<code> SchemaFactory </code>。</p>
+     * 
+     * 
      * @param schemaLanguage Schema language to lookup <code>SchemaFactory</code> for.
      *
      * @return <code>SchemaFactory</code> for the given <code>schemaLanguage</code>.
@@ -237,6 +270,8 @@ class SchemaFactoryFinder  {
 
     /** <p>Create class using appropriate ClassLoader.</p>
      *
+     * <p>
+     * 
      * @param className Name of class to create.
      * @return Created class or <code>null</code>.
      */
@@ -269,6 +304,10 @@ class SchemaFactoryFinder  {
     /**
      * <p>Creates an instance of the specified and returns it.</p>
      *
+     * <p>
+     *  <p>创建指定的实例并返回它。</p>
+     * 
+     * 
      * @param className
      *      fully qualified class name to be instantiated.
      *
@@ -330,6 +369,9 @@ class SchemaFactoryFinder  {
     /**
      * Try to construct using newXMLSchemaFactoryNoServiceLoader
      *   method if available.
+     * <p>
+     *  尝试使用newXMLSchemaFactoryNoServiceLoader方法(如果可用)构造。
+     * 
      */
     private static SchemaFactory newInstanceNoServiceLoader(
          Class<?> providerClass
@@ -386,6 +428,10 @@ class SchemaFactoryFinder  {
      * Finds a service provider subclass of SchemaFactory that supports the
      * given schema language using the ServiceLoader.
      *
+     * <p>
+     *  使用ServiceLoader查找支持给定模式语言的SchemaFactory的服务提供者子类。
+     * 
+     * 
      * @param schemaLanguage The schema language for which we seek a factory.
      * @return A SchemaFactory supporting the specified schema language, or null
      *         if none is found.
@@ -426,6 +472,9 @@ class SchemaFactoryFinder  {
     /**
      * <p>Search the specified classloader for the given classname.</p>
      *
+     * <p>
+     *  <p>在指定的classloader中搜索给定的类名。</p>
+     * 
      * @param classname the fully qualified name of the class to search for
      * @param loader the classloader to search
      *

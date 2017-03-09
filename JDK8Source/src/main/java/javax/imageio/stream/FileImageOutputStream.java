@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,9 @@ import sun.java2d.Disposer;
  * output directly to a <code>File</code> or
  * <code>RandomAccessFile</code>.
  *
+ * <p>
+ *  <code> ImageOutputStream </code>的实现,将其输出直接写入<code> File </code>或<code> RandomAccessFile </code>。
+ * 
  */
 public class FileImageOutputStream extends ImageOutputStreamImpl {
 
@@ -53,6 +57,10 @@ public class FileImageOutputStream extends ImageOutputStreamImpl {
      * Constructs a <code>FileImageOutputStream</code> that will write
      * to a given <code>File</code>.
      *
+     * <p>
+     *  构造将写入给定<code> File </code>的<code> FileImageOutputStream </code>。
+     * 
+     * 
      * @param f a <code>File</code> to write to.
      *
      * @exception IllegalArgumentException if <code>f</code> is
@@ -73,6 +81,10 @@ public class FileImageOutputStream extends ImageOutputStreamImpl {
      * Constructs a <code>FileImageOutputStream</code> that will write
      * to a given <code>RandomAccessFile</code>.
      *
+     * <p>
+     *  构造将写入给定<code> RandomAccessFile </code>的<code> FileImageOutputStream </code>。
+     * 
+     * 
      * @param raf a <code>RandomAccessFile</code> to write to.
      *
      * @exception IllegalArgumentException if <code>raf</code> is
@@ -141,6 +153,10 @@ public class FileImageOutputStream extends ImageOutputStreamImpl {
      * performed.  The file length will not be increased until a write
      * is performed.
      *
+     * <p>
+     *  设置当前流的位置,并将位偏移重置为0.这是合法的寻求超过文件的结尾;只有在执行读取时才会抛出<code> EOFException </code>。在执行写操作之前,文件长度不会增加。
+     * 
+     * 
      * @exception IndexOutOfBoundsException if <code>pos</code> is smaller
      * than the flushed position.
      * @exception IOException if any other I/O error occurs.
@@ -163,6 +179,8 @@ public class FileImageOutputStream extends ImageOutputStreamImpl {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     protected void finalize() throws Throwable {
         // Empty finalizer: for performance reasons we instead use the

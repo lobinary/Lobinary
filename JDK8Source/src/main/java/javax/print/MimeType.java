@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,31 @@ import java.util.Vector;
  * </UL>
  * <P>
  *
+ * <p>
+ *  类MimeType封装了<A HREF="http://www.ietf.org/rfc/rfc2045.txt"> RFC 2045 </A>和<A HREF ="中定义的多用途互联网邮件扩展(MIME)媒体类型http://www.ietf.org/rfc/rfc2046.txt">
+ *  RFC 2046 </A>。
+ *  MIME类型对象是{@link DocFlavor DocFlavor}对象的一部分,并指定打印数据的格式。
+ * <P>
+ *  类MimeType类似于{@link java.awt.datatransfer java.awt.datatransfer}中类似命名的类。
+ *  java.awt.datatransfer.MimeType类未在Jini Print Service API中使用,原因如下：。
+ * <OL TYPE=1>
+ * <LI>
+ *  由于并非所有Java配置文件都包含AWT,因此Jini打印服务不应依赖于AWT类。
+ * <P>
+ * <LI>
+ *  类java.awt.datatransfer.MimeType的实现不保证等价的MIME类型将具有相同的序列化表示。
+ * 因此,由于Jini查找服务(JLUS)基于序列化表示的等同性匹配服务属性,因此涉及封装在类java.awt.datatransfer.MimeType中的MIME类型的JLUS搜索可能不正确地匹配失败。
+ *  类java.awt.datatransfer.MimeType的实现不保证等价的MIME类型将具有相同的序列化表示。
+ * </OL>
+ * <P>
+ *  MimeType类的序列化表示基于MIME类型字符串的以下规范形式。因此,两个不相同但相同(具有相同的规范形式)的MIME类型将被JLUS的匹配算法视为相等。
+ * <UL>
+ * <LI>保留媒体类型,媒体子类型和参数,但是所有注释和空格字符都将被丢弃。 <LI>媒体类型,媒体子类型和参数名称将转换为小写。
+ *  <LI>除了文本媒体类型的charset参数值转换为小写之外,参数值保留其原始大小写。 <LI>删除周围参数值的引用字符。 <LI>删除参数值中引号反斜杠字符。 <LI>参数按参数名称的升序排列。
+ * </UL>
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 class MimeType implements Serializable, Cloneable {
@@ -95,27 +121,45 @@ class MimeType implements Serializable, Cloneable {
      * <BR>Index 2<I>i</I>+3 -- Value of parameter <I>i</I>,
      * <I>i</I>=0,1,...,<I>n</I>-1.
      * <BR>Parameters are arranged in ascending order of parameter name.
+     * <p>
+     *  包含此MIME类型的规范形式的部分的字符串数组。如果MIME类型具有<I> n </I>参数,则<I> n </I>&gt; = 0,则数组中的字符串是：<BR>索引0-媒体类型。
+     *  <BR>索引1  - 媒体子类型。 <BR>索引2 <i> i </i> +2  - 参数名称<i> i <i>,<i> i <= i, </I> -1。
+     *  <BR> Index 2 <i> i </i> +3  - 参数的值<i> i <i>,<i> i = 0,1,..., </I> -1。 <BR>参数按参数名称的升序排列。
+     * 
+     * 
      * @serial
      */
     private String[] myPieces;
 
     /**
      * String value for this MIME type. Computed when needed and cached.
+     * <p>
+     *  此MIME类型的字符串值。计算时需要和缓存。
+     * 
      */
     private transient String myStringValue = null;
 
     /**
      * Parameter map entry set. Computed when needed and cached.
+     * <p>
+     *  参数映射条目集。计算时需要和缓存。
+     * 
      */
     private transient ParameterMapEntrySet myEntrySet = null;
 
     /**
      * Parameter map. Computed when needed and cached.
+     * <p>
+     *  参数图。计算时需要和缓存。
+     * 
      */
     private transient ParameterMap myParameterMap = null;
 
     /**
      * Parameter map entry.
+     * <p>
+     *  参数映射条目。
+     * 
      */
     private class ParameterMapEntry implements Map.Entry {
         private int myIndex;
@@ -144,6 +188,9 @@ class MimeType implements Serializable, Cloneable {
 
     /**
      * Parameter map entry set iterator.
+     * <p>
+     *  参数映射条目集迭代器。
+     * 
      */
     private class ParameterMapEntrySetIterator implements Iterator {
         private int myIndex = 2;
@@ -166,6 +213,9 @@ class MimeType implements Serializable, Cloneable {
 
     /**
      * Parameter map entry set.
+     * <p>
+     *  参数映射条目集。
+     * 
      */
     private class ParameterMapEntrySet extends AbstractSet {
         public Iterator iterator() {
@@ -178,6 +228,9 @@ class MimeType implements Serializable, Cloneable {
 
     /**
      * Parameter map.
+     * <p>
+     *  参数图。
+     * 
      */
     private class ParameterMap extends AbstractMap {
         public Set entrySet() {
@@ -192,6 +245,10 @@ class MimeType implements Serializable, Cloneable {
      * Construct a new MIME type object from the given string. The given
      * string is converted into canonical form and stored internally.
      *
+     * <p>
+     *  从给定的字符串构造一个新的MIME类型对象。给定的字符串被转换为规范形式并在内部存储。
+     * 
+     * 
      * @param  s  MIME media type string.
      *
      * @exception  NullPointerException
@@ -207,6 +264,9 @@ class MimeType implements Serializable, Cloneable {
     /**
      * Returns this MIME type object's MIME type string based on the canonical
      * form. Each parameter value is enclosed in quotes.
+     * <p>
+     * 基于规范形式返回此MIME类型对象的MIME类型字符串。每个参数值都用引号括起来。
+     * 
      */
     public String getMimeType() {
         return getStringValue();
@@ -214,6 +274,9 @@ class MimeType implements Serializable, Cloneable {
 
     /**
      * Returns this MIME type object's media type.
+     * <p>
+     *  返回此MIME类型对象的媒体类型。
+     * 
      */
     public String getMediaType() {
         return myPieces[0];
@@ -221,6 +284,9 @@ class MimeType implements Serializable, Cloneable {
 
     /**
      * Returns this MIME type object's media subtype.
+     * <p>
+     *  返回此MIME类型对象的媒体子类型。
+     * 
      */
     public String getMediaSubtype() {
         return myPieces[1];
@@ -232,6 +298,10 @@ class MimeType implements Serializable, Cloneable {
      * name String (key) mapping to a parameter value String. If this MIME
      * type object has no parameters, an empty map is returned.
      *
+     * <p>
+     *  返回此MIME类型对象中的参数的不可修改的地图视图。参数映射视图中的每个条目由参数名称String(键)映射到参数值String组成。如果此MIME类型对象没有参数,则返回空映射。
+     * 
+     * 
      * @return  Parameter map for this MIME type object.
      */
     public Map getParameterMap() {
@@ -244,6 +314,10 @@ class MimeType implements Serializable, Cloneable {
     /**
      * Converts this MIME type object to a string.
      *
+     * <p>
+     *  将此MIME类型对象转换为字符串。
+     * 
+     * 
      * @return  MIME type string based on the canonical form. Each parameter
      *          value is enclosed in quotes.
      */
@@ -253,6 +327,9 @@ class MimeType implements Serializable, Cloneable {
 
     /**
      * Returns a hash code for this MIME type object.
+     * <p>
+     *  返回此MIME类型对象的哈希代码。
+     * 
      */
     public int hashCode() {
         return getStringValue().hashCode();
@@ -269,6 +346,13 @@ class MimeType implements Serializable, Cloneable {
      * the same media type (because the default character set for plain text is
      * US-ASCII).
      *
+     * <p>
+     *  确定此MIME类型对象是否等于给定对象。
+     * 如果给定对象不为null,那么这两个是相等的,是类net.jini.print.data.MimeType的实例,并且具有与此MIME类型对象相同的规范形式(即,具有相同的类型,子类型和参数)。
+     * 因此,如果两个MIME类型对象是相同的,除了注释,它们被认为是相等的。
+     * 但是,"text / plain"和"text / plain; charset = us-ascii"不被视为相等,即使它们表示相同的媒体类型(因为纯文本的默认字符集为US-ASCII)。
+     * 
+     * 
      * @param  obj  Object to test.
      *
      * @return  True if this MIME type object equals <CODE>obj</CODE>, false
@@ -282,6 +366,9 @@ class MimeType implements Serializable, Cloneable {
 
     /**
      * Returns this MIME type's string value in canonical form.
+     * <p>
+     *  以规范形式返回此MIME类型的字符串值。
+     * 
      */
     private String getStringValue() {
         if (myStringValue == null) {
@@ -473,6 +560,10 @@ class MimeType implements Serializable, Cloneable {
      * Unicode. This mapping is the same regardless of locale, whereas the
      * mapping of String.toLowerCase() may be different depending on the
      * default locale.
+     * <p>
+     * 返回给定字符串的小写版本。小写版本通过将Character.toLowerCase()应用于给定字符串的每个字符来构造,该字符使用Unicode的规则将字符映射为小写。
+     * 无论区域设置如何,此映射都是相同的,而String.toLowerCase()的映射可能根据默认语言环境而不同。
+     * 
      */
     private static String toUnicodeLowerCase(String s) {
         int n = s.length();
@@ -485,6 +576,9 @@ class MimeType implements Serializable, Cloneable {
 
     /**
      * Returns a version of the given string with backslashes removed.
+     * <p>
+     *  返回已删除反斜杠的给定字符串的版本。
+     * 
      */
     private static String removeBackslashes(String s) {
         int n = s.length();
@@ -505,6 +599,9 @@ class MimeType implements Serializable, Cloneable {
     /**
      * Returns a version of the string surrounded by quotes and with interior
      * quotes preceded by a backslash.
+     * <p>
+     *  返回由引号和前面带有反斜杠的内部引号括起来的字符串的版本。
+     * 
      */
     private static String addQuotes(String s) {
         int n = s.length();
@@ -533,6 +630,12 @@ class MimeType implements Serializable, Cloneable {
      *      converted to lowercase.
      * </UL>
      *
+     * <p>
+     *  将给定的字符串解析为规范片段,并将片段存储在{@link #myPieces <CODE> myPieces </CODE>}中。
+     * <P>
+     *  应用特殊规则：
+     * <UL>
+     * 
      * @param  s  MIME media type string.
      *
      * @exception  NullPointerException

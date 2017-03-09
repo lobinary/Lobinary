@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.opti;
@@ -43,6 +53,10 @@ import org.w3c.dom.Document;
 /**
  * @xerces.internal
  *
+ * <p>
+ *  @ xerces.internal
+ * 
+ * 
  * @author Rahul Srivastava, Sun Microsystems Inc.
  * @author Sandy Gao, IBM
  *
@@ -127,6 +141,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * The end of the document.
+     * <p>
+     *  文档的结尾。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -140,6 +158,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text   The text in the comment.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -163,6 +185,12 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     *  一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augs   Additional information that may include infoset augmentations
@@ -180,6 +208,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     /**
      * Character content.
      *
+     * <p>
+     *  字符内容。
+     * 
+     * 
      * @param text   The content.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -219,6 +251,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     /**
      * The start of an element.
      *
+     * <p>
+     *  元素的开始。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs       Additional information that may include infoset augmentations
@@ -277,6 +313,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     /**
      * An empty element.
      *
+     * <p>
+     *  空元素。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs       Additional information that may include infoset augmentations
@@ -352,6 +392,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     /**
      * The end of an element.
      *
+     * <p>
+     *  元素的结尾。
+     * 
+     * 
      * @param element The name of the element.
      * @param augs    Additional information that may include infoset augmentations
      *
@@ -396,6 +440,8 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     }
 
     /**
+    /* <p>
+    /* 
      * @param attributes
      * @return
      */
@@ -421,6 +467,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
      * characters in the document are ignorable based on the element
      * content model.
      *
+     * <p>
+     * 可怕的空格。对于要调用的此方法,文档源必须具有某种方式确定仅包含空格字符的文本应该被视为可忽略。例如,验证器可以基于元素内容模型来确定文档中的空白字符的长度是否可忽略。
+     * 
+     * 
      * @param text   The ignorable whitespace.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -437,6 +487,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     /**
      * The start of a CDATA section.
      *
+     * <p>
+     *  CDATA节的开始。
+     * 
+     * 
      * @param augs   Additional information that may include infoset augmentations
      *
      * @exception XNIException
@@ -452,6 +506,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     /**
      * The end of a CDATA section.
      *
+     * <p>
+     *  CDATA段的结尾。
+     * 
+     * 
      * @param augs   Additional information that may include infoset augmentations
      *
      * @exception XNIException
@@ -471,6 +529,9 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * Returns the DOM document object.
+     * <p>
+     *  返回DOM文档对象。
+     * 
      */
     public Document getDocument() {
         return schemaDOM;
@@ -478,6 +539,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * Delegates to SchemaParsingConfig.setFeature
+     * <p>
+     *  委派给SchemaParsingConfig.setFeature
+     * 
+     * 
      * @param featureId
      * @param state
      */
@@ -487,6 +552,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * Delegates to SchemaParsingConfig.getFeature
+     * <p>
+     *  委派给SchemaParsingConfig.getFeature
+     * 
+     * 
      * @param featureId
      * @return boolean
      */
@@ -496,6 +565,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * Delegates to SchemaParsingConfig.setProperty.
+     * <p>
+     *  委派给SchemaParsingConfig.setProperty。
+     * 
+     * 
      * @param propertyId
      * @param value
      */
@@ -505,6 +578,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * Delegates to SchemaParsingConfig.getProperty.
+     * <p>
+     *  代理SchemaParsingConfig.getProperty。
+     * 
+     * 
      * @param propertyId
      * @return Object
      */
@@ -514,6 +591,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * Delegates to SchemaParsingConfig.setEntityResolver.
+     * <p>
+     *  委派给SchemaParsingConfig.setEntityResolver。
+     * 
+     * 
      * @param er XMLEntityResolver
      */
     public void setEntityResolver(XMLEntityResolver er) {
@@ -523,6 +604,10 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
     /**
      * Delegates parsing to SchemaParsingConfig
      *
+     * <p>
+     *  代理解析到SchemaParsingConfig
+     * 
+     * 
      * @param inputSource
      * @throws IOException
      */
@@ -532,6 +617,9 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * Reset SchemaParsingConfig
+     * <p>
+     *  重置SchemaParsingConfig
+     * 
      */
     public void reset() {
         ((SchemaParsingConfig)config).reset();
@@ -539,6 +627,9 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
 
     /**
      * ResetNodePool on SchemaParsingConfig
+     * <p>
+     *  ResetNodePool on SchemaParsingConfig
+     * 
      */
     public void resetNodePool() {
         ((SchemaParsingConfig)config).resetNodePool();
@@ -548,6 +639,9 @@ public class SchemaDOMParser extends DefaultXMLDocumentHandler {
      * A simple boolean based stack.
      *
      * @xerces.internal
+     * <p>
+     *  一个简单的基于布尔的堆栈。
+     * 
      */
     private static final class BooleanStack {
 

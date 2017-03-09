@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,13 @@ import java.awt.*;
  * of JMenus and JMenuItems, we only need to allow enough space for
  * max(maxAccelerator, maxArrow), and both accelerators and arrow icons
  * can occupy the same "column" of space in the menu.
+ * <p>
+ *  计算优选大小和布局合成菜单项。
+ * 
+ *  所有JMenuItem(和JMenus)包含足够的空间用于插入加上一个或多个元素。当我们说下面的"标签"时,我们是指"图标和/或文本"。
+ * 
+ *  考虑SynthMenuItemUI的情况(这里以LTR方向可视化; RTL情况将被颠倒)：标签检查图标+标签检查图标+标签+加速器标签+加速器
+ * 
  */
 class SynthMenuItemLayoutHelper extends MenuItemLayoutHelper {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ package java.lang.annotation;
  * java.lang.reflect.AnnotatedElement API used to read annotations
  * reflectively}.
  *
+ * <p>
+ *  抛出以指示程序已尝试访问在批注被编译(或串行化)之后添加到批注类型定义的批注类型的元素。如果新元素具有默认值,则不会抛出此异常。
+ * 此异常可由{@linkplain java.lang.reflect.AnnotatedElement API用于反映读取注释}抛出。
+ * 
+ * 
  * @author  Josh Bloch
  * @see     java.lang.reflect.AnnotatedElement
  * @since 1.5
@@ -48,6 +54,10 @@ public class IncompleteAnnotationException extends RuntimeException {
      * Constructs an IncompleteAnnotationException to indicate that
      * the named element was missing from the specified annotation type.
      *
+     * <p>
+     *  构造IncompleteAnnotationException以指示指定的注释类型中缺少指定的元素。
+     * 
+     * 
      * @param annotationType the Class object for the annotation type
      * @param elementName the name of the missing element
      * @throws NullPointerException if either parameter is {@code null}
@@ -66,6 +76,10 @@ public class IncompleteAnnotationException extends RuntimeException {
      * Returns the Class object for the annotation type with the
      * missing element.
      *
+     * <p>
+     *  返回具有缺少元素的注释类型的Class对象。
+     * 
+     * 
      * @return the Class object for the annotation type with the
      *     missing element
      */
@@ -76,6 +90,9 @@ public class IncompleteAnnotationException extends RuntimeException {
     /**
      * Returns the name of the missing element.
      *
+     * <p>
+     *  返回缺少的元素的名称。
+     * 
      * @return the name of the missing element
      */
     public String elementName() {

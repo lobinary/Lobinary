@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -197,6 +198,103 @@ import sun.reflect.misc.ReflectUtil;
  * Further details on these mechanisms are available in the
  * <code>javax.sql.rowset.spi</code> package specification.
  *
+ * <p>
+ *  生成要由断开的<code> RowSet </code>对象使用的<code> SyncProvider </code>实例的服务提供程序接口(SPI)机制。
+ *  <code> SyncProvider </code>实例反过来提供<code> javax.sql.RowSetReader </code>对象,<code> RowSet </code>对象需要用
+ * 数据和<code> javax填充自身。
+ *  生成要由断开的<code> RowSet </code>对象使用的<code> SyncProvider </code>实例的服务提供程序接口(SPI)机制。
+ *  sql.RowSetWriter </code>对象,它需要将对其数据的更改传播回基础数据源。
+ * <P>
+ *  因为<code> SyncFactory </code>类中的方法都是静态的,所以每个Java VM只能有一个<code> SyncFactory </code>对象。
+ * 这确保存在单个源,其中<code> RowSet </code>实现可以获得其<code> SyncProvider </code>实现。
+ * 
+ *  <h3> 1.0概述</h3> <code> SyncFactory </code>类提供可用的同步提供程序实现(<code> SyncProvider </code>对象)的内部注册表。
+ * 可以查询此注册表以确定哪些同步提供程序可用。以下代码行获取当前注册的提供程序的枚举。
+ * <PRE>
+ *  java.util.Enumeration e = SyncFactory.getRegisteredProviders();
+ * </PRE>
+ *  所有标准<code> RowSet </code>实现必须至少提供两个提供程序：
+ * <UL>
+ * <LI>用于<code> CachedRowSet </code>实现或从其派生的实现的乐观提供者</li> XML提供程序,用于读取和写入XML,例如使用<code> WebRowSet <代码>对象
+ * 。
+ * </UL>
+ *  注意,JDBC RowSet实现包括满足这个要求的<code> SyncProvider </code>实现<code> RIOptimisticProvider </code>和<code> RIX
+ * mlProvider </code>。
+ * <P>
+ *  <code> SyncFactory </code>类提供了访问器方法来帮助应用程序确定哪些同步提供程序当前注册到<code> SyncFactory </code>。
+ * <p>
+ *  其他方法让<code> RowSet </code>持久性提供程序使用工厂机制注册或注销。这允许额外的同步提供程序实现在运行时可用于<code> RowSet </code>对象。
+ * <p>
+ *  应用程序可以应用一定程度的过滤以确定<code> SyncProvider </code>实现提供的同步水平。以下标准确定提供程序是否可用于<code> RowSet </code>对象：
+ * <ol>
+ *  <li>如果某个提供者由<code> RowSet </code>对象指定,而<code> SyncFactory </code>不包含对此提供者的引用,则<code> SyncFactoryExce
+ * ption </code>抛出表明无法找到同步提供程序。
+ * 
+ * <li>如果<code> RowSet </code>实现由指定的提供程序实例化,并且指定的提供程序已正确注册,则提供所请求的提供程序。
+ * 否则会抛出<code> SyncFactoryException </code>。
+ * 
+ *  <li>如果<code> RowSet </code>对象未指定<code> SyncProvider </code>实现,并且没有其他<code> SyncProvider </code>实现可用,
+ * 则提供引用实现提供程序。
+ * </ol>
+ *  <h3> 2.0注册<code> SyncProvider </code>实现</h3>
+ * <p>
+ *  供应商和开发人员都可以使用以下机制之一注册<code> SyncProvider </code>实现。
+ * <ul>
+ *  <LI> <B>使用命令行</B> <BR>提供程序的名称在命令行中提供,这将将提供程序添加到系统属性。例如：
+ * <PRE>
+ *  -Drowset.provider.classname = com.fred.providers.HighAvailabilityProvider
+ * </PRE>
+ *  <li> <b>使用标准属性文件</b> <BR>参考实现的目标是使用J2SE 1.5发布,其中包括可以手动编辑的其他资源文件。下面是参考实现中包含的属性文件的示例：
+ * <PRE>
+ *  #Default JDBC RowSet同步提供程序列表#
+ * 
+ *  #乐观同步提供程序rowset.provider.classname.0 = com.sun.rowset.providers.RIOptimisticProvider rowset.provider
+ * .vendor.0 = Oracle公司rowset.provider.version.0 = 1.0。
+ * 
+ * #XML Provider使用标准XML模式rowset.provider.classname.1 = com.sun.rowset.providers.RIXMLProvider rowset.pro
+ * vider.vendor.1 = Oracle公司rowset.provider.version.1 = 1.0。
+ * </PRE>
+ *  <code> SyncFactory </code>检查此文件并注册它包含的<code> SyncProvider </code>实现。开发人员或供应商可以向此文件添加其他实现。
+ * 例如,这里是可能的添加：。
+ * <PRE>
+ *  rowset.provider.classname.2 = com.fred.providers.HighAvailabilityProvider rowset.provider.vendor.2 =
+ *  Fred,Inc. rowset.provider.version.2 = 1.0。
+ * </PRE>
+ * 
+ *  <li> <b>使用JNDI上下文</b> <BR>可以在JNDI上下文中注册可用的提供程序,并且<code> SyncFactory </code>将尝试加载<code> SyncProvider 
+ * </code>实现从JNDI上下文。
+ * 例如,以下代码片段在JNDI上下文中注册提供程序实现。这是部署者通常会做的。
+ * 在这个例子中,<code> MyProvider </code>正在CosNaming命名空间上注册,这是J2EE资源使用的命名空间。
+ * <PRE>
+ *  import javax.naming。*;
+ * 
+ *  Hashtable svrEnv = new Hashtable(); srvEnv.put(Context.INITIAL_CONTEXT_FACTORY,"CosNaming");
+ * 
+ *  上下文ctx = new InitialContext(svrEnv); com.fred.providers.MyProvider = new MyProvider(); ctx.rebind("p
+ * roviders / MyProvider",syncProvider);。
+ * </PRE>
+ * </ul>
+ * 接下来,应用程序将向<code> SyncFactory </code>实例注册JNDI上下文。
+ * 这允许<code> SyncFactory </code>在JNDI上下文中浏览,寻找<code> SyncProvider </code>实现。
+ * <PRE>
+ *  Hashtable appEnv = new Hashtable(); appEnv.put(Context.INITIAL_CONTEXT_FACTORY,"CosNaming"); appEnv.
+ * put(Context.PROVIDER_URL,"iiop：// hostname / providers");上下文ctx = new InitialContext(appEnv);。
+ * 
+ *  SyncFactory.registerJNDIContext(ctx);
+ * </PRE>
+ *  如果<code> RowSet </code>对象尝试获取<code> MyProvider </code>对象,则<code> SyncFactory </code>会尝试找到它。
+ * 首先它在系统属性中搜索它,然后查找资源文件,最后它检查已设置的JNDI上下文。
+ *  <code> SyncFactory </code>实例验证所请求的提供程序是<code> SyncProvider </code>抽象类的有效扩展,然后将其提供给<code> RowSet </code>
+ * 对象。
+ * 首先它在系统属性中搜索它,然后查找资源文件,最后它检查已设置的JNDI上下文。
+ * 在下面的代码片段中,创建一个新的<code> CachedRowSet </code>对象并使用<i> env </i>进行初始化,它包含对<code> MyProvider </code>的绑定。
+ * <PRE>
+ *  Hashtable env = new Hashtable(); env.put(SyncFactory.ROWSET_SYNC_PROVIDER,"com.fred.providers.MyProv
+ * ider"); CachedRowSet crs = new com.sun.rowset.CachedRowSetImpl(env);。
+ * </PRE>
+ *  有关这些机制的更多详细信息,请参阅<code> javax.sql.rowset.spi </code>包规范。
+ * 
+ * 
  * @author  Jonathan Bruce
  * @see javax.sql.rowset.spi.SyncProvider
  * @see javax.sql.rowset.spi.SyncFactoryException
@@ -208,6 +306,9 @@ public class SyncFactory {
      * instance.
      * Having a private constructor guarantees that no more than
      * one <code>SyncProvider</code> object can exist at a time.
+     * <p>
+     * 创建一个新的<code> SyncFactory </code>对象,这是单例实例。具有私有构造函数保证一次只能存在一个<code> SyncProvider </code>对象。
+     * 
      */
     private SyncFactory() {
     }
@@ -215,38 +316,59 @@ public class SyncFactory {
     /**
      * The standard property-id for a synchronization provider implementation
      * name.
+     * <p>
+     *  同步提供程序实现名称的标准属性ID。
+     * 
      */
     public static final String ROWSET_SYNC_PROVIDER =
             "rowset.provider.classname";
     /**
      * The standard property-id for a synchronization provider implementation
      * vendor name.
+     * <p>
+     *  同步提供程序实现供应商名称的标准属性ID。
+     * 
      */
     public static final String ROWSET_SYNC_VENDOR =
             "rowset.provider.vendor";
     /**
      * The standard property-id for a synchronization provider implementation
      * version tag.
+     * <p>
+     *  同步提供程序实现版本标记的标准属性ID。
+     * 
      */
     public static final String ROWSET_SYNC_PROVIDER_VERSION =
             "rowset.provider.version";
     /**
      * The standard resource file name.
+     * <p>
+     *  标准资源文件名。
+     * 
      */
     private static String ROWSET_PROPERTIES = "rowset.properties";
 
     /**
      *  Permission required to invoke setJNDIContext and setLogger
+     * <p>
+     *  调用setJNDIContext和setLogger所需的权限
+     * 
      */
     private static final SQLPermission SET_SYNCFACTORY_PERMISSION =
             new SQLPermission("setSyncFactory");
     /**
      * The initial JNDI context where <code>SyncProvider</code> implementations can
      * be stored and from which they can be invoked.
+     * <p>
+     *  可以存储并从中调用<code> SyncProvider </code>实现的初始JNDI上下文。
+     * 
      */
     private static Context ic;
     /**
      * The <code>Logger</code> object to be used by the <code>SyncFactory</code>.
+     * <p>
+     *  SyncFactory </code>使用的<code> Logger </code>对象。
+     * 
      */
     private static volatile Logger rsLogger;
 
@@ -254,6 +376,9 @@ public class SyncFactory {
      * The registry of available <code>SyncProvider</code> implementations.
      * See section 2.0 of the class comment for <code>SyncFactory</code> for an
      * explanation of how a provider can be added to this registry.
+     * <p>
+     *  可用的<code> SyncProvider </code>实现的注册表。有关如何将提供程序添加到此注册表的说明,请参阅<code> SyncFactory </code>的类注释的2.0节。
+     * 
      */
     private static Hashtable<String, SyncProvider> implementations;
 
@@ -279,6 +404,19 @@ public class SyncFactory {
      * available <code>SyncProvider</code> objects bound to the JNDI
      * context and its child nodes.
      *
+     * <p>
+     *  将给定的同步提供程序添加到出厂寄存器。在<code> SyncProvider </code>规范中为<code> SyncProvider </code>实现所需的命名约定提供了指导。
+     * <p>
+     *  可以通过将SyncProvider实例绑定到JNDI命名空间来注册绑定到JNDI上下文的同步提供程序。
+     * 
+     * <pre>
+     *  {@code SyncProvider p = new MySyncProvider(); InitialContext ic = new InitialContext(); ic.bind("jdbc / rowset / MySyncProvider",p); }
+     *  </pre>。
+     * 
+     * 此外,应当使用<code> setJNDIContext </code>方法用<code> SyncFactory </code>来设置初始JNDI上下文。
+     *  <code> SyncFactory </code>利用此上下文来搜索绑定到JNDI上下文及其子节点的可用<code> SyncProvider </code>对象。
+     * 
+     * 
      * @param providerID A <code>String</code> object with the unique ID of the
      *             synchronization provider being registered
      * @throws SyncFactoryException if an attempt is made to supply an empty
@@ -298,6 +436,10 @@ public class SyncFactory {
     /**
      * Returns the <code>SyncFactory</code> singleton.
      *
+     * <p>
+     *  返回<code> SyncFactory </code>单例。
+     * 
+     * 
      * @return the <code>SyncFactory</code> instance
      */
     public static SyncFactory getSyncFactory() {
@@ -305,6 +447,9 @@ public class SyncFactory {
          * Using Initialization on Demand Holder idiom as
          * Effective Java 2nd Edition,ITEM 71, indicates it is more performant
          * than the Double-Check Locking idiom.
+         * <p>
+         *  使用Initialization on Demand Holder惯用法作为有效的Java第2版,ITEM 71,表明它比双重检查锁定习语更有效。
+         * 
          */
         return SyncFactoryHolder.factory;
     }
@@ -313,6 +458,10 @@ public class SyncFactory {
      * Removes the designated currently registered synchronization provider from the
      * Factory SPI register.
      *
+     * <p>
+     *  从工厂SPI寄存器中删除指定的当前注册的同步提供程序。
+     * 
+     * 
      * @param providerID The unique-id of the synchronization provider
      * @throws SyncFactoryException If an attempt is made to
      * unregister a SyncProvider implementation that was not registered.
@@ -352,6 +501,9 @@ public class SyncFactory {
 
                 /*
                  * Dependent on application
+                 * <p>
+                 *  取决于应用程序
+                 * 
                  */
                 String strRowsetProperties;
                 try {
@@ -377,6 +529,9 @@ public class SyncFactory {
 
                 /*
                  * Always available
+                 * <p>
+                 *  始终可用
+                 * 
                  */
                 ROWSET_PROPERTIES = "javax" + strFileSep + "sql" +
                         strFileSep + "rowset" + strFileSep +
@@ -420,6 +575,9 @@ public class SyncFactory {
             /*
              * Now deal with -Drowset.provider.classname
              * load additional properties from -D command line
+             * <p>
+             *  现在处理-Drowset.provider.classname从-D命令行加载额外的属性
+             * 
              */
             properties.clear();
             String providerImpls;
@@ -451,17 +609,26 @@ public class SyncFactory {
 
     /**
      * The internal debug switch.
+     * <p>
+     *  内部调试开关。
+     * 
      */
     private static boolean debug = false;
     /**
      * Internal registry count for the number of providers contained in the
      * registry.
+     * <p>
+     *  注册表中包含的提供程序数量的内部注册表计数。
+     * 
      */
     private static int providerImplIndex = 0;
 
     /**
      * Internal handler for all standard property parsing. Parses standard
      * ROWSET properties and stores lazy references into the the internal registry.
+     * <p>
+     *  所有标准属性解析的内部处理程序。解析标准ROWSET属性并将延迟引用存储到内部注册表中。
+     * 
      */
     private static void parseProperties(Properties p) {
 
@@ -499,6 +666,9 @@ public class SyncFactory {
 
     /**
      * Used by the parseProperties methods to disassemble each property tuple.
+     * <p>
+     *  由parseProperties方法使用来反汇编每个属性元组。
+     * 
      */
     private static String[] getPropertyNames(boolean append) {
         return getPropertyNames(append, null);
@@ -507,6 +677,9 @@ public class SyncFactory {
     /**
      * Disassembles each property and its associated value. Also handles
      * overloaded property names that contain indexes.
+     * <p>
+     *  拆分每个属性及其关联值。还处理包含索引的重载属性名称。
+     * 
      */
     private static String[] getPropertyNames(boolean append,
             String propertyIndex) {
@@ -529,6 +702,9 @@ public class SyncFactory {
 
     /**
      * Internal debug method that outputs the registry contents.
+     * <p>
+     *  输出注册表内容的内部调试方法。
+     * 
      */
     private static void showImpl(ProviderImpl impl) {
         System.out.println("Provider implementation:");
@@ -541,6 +717,10 @@ public class SyncFactory {
     /**
      * Returns the <code>SyncProvider</code> instance identified by <i>providerID</i>.
      *
+     * <p>
+     *  返回由<i> providerID </i>标识的<code> SyncProvider </code>实例。
+     * 
+     * 
      * @param providerID the unique identifier of the provider
      * @return a <code>SyncProvider</code> implementation
      * @throws SyncFactoryException If the SyncProvider cannot be found,
@@ -582,6 +762,10 @@ public class SyncFactory {
              * the classpath. We need to find the ClassLoader which loads
              * this SyncFactory and try to load the SyncProvider class from
              * there.
+             * <p>
+             *  用户的SyncProvider实现将在类路径中。我们需要找到加载此SyncFactory并尝试从那里加载SyncProvider类的ClassLoader。
+             * 
+             * 
              **/
             c = Class.forName(providerID, true, cl);
 
@@ -609,6 +793,12 @@ public class SyncFactory {
      * RowSet content data to be stored using a JDBC driver should be
      * possible.
      *
+     * <p>
+     * 返回当前注册的同步提供程序的枚举。 <code> RowSet </code>实现可以使用枚举中的任何提供程序作为其<code> SyncProvider </code>对象。
+     * <p>
+     *  至少,允许使用JDBC驱动程序存储RowSet内容数据的引用同步提供程序应该是可能的。
+     * 
+     * 
      * @return Enumeration  A enumeration of available synchronization
      * providers that are registered with this Factory
      * @throws SyncFactoryException If an error occurs obtaining the registered
@@ -637,6 +827,16 @@ public class SyncFactory {
      * this method throws a
      * {@code java.lang.SecurityException}.
      *
+     * <p>
+     *  设置由<code> SyncFactory </code>提供的<code> SyncProvider </code>实现使用的日志对象。
+     * 所有<code> SyncProvider </code>实现都可以将它们的事件记录到这个对象,应用程序可以使用<code> getLogger </code>方法检索这个对象的句柄。
+     * <p>
+     *  此方法检查以查看是否有一个{@code SQLPermission}对象,在允许方法成功之前授予{@code setSyncFactory}权限。
+     * 如果存在{@code SecurityManager}并且其{@code checkPermission}方法拒绝调用{@code setLogger},则此方法会抛出{@code java.lang.SecurityException}
+     * 。
+     *  此方法检查以查看是否有一个{@code SQLPermission}对象,在允许方法成功之前授予{@code setSyncFactory}权限。
+     * 
+     * 
      * @param logger A Logger object instance
      * @throws java.lang.SecurityException if a security manager exists and its
      *   {@code checkPermission} method denies calling {@code setLogger}
@@ -671,6 +871,16 @@ public class SyncFactory {
      * this method throws a
      * {@code java.lang.SecurityException}.
      *
+     * <p>
+     *  设置由<code> SyncFactory </code> SPI提供的<code> SyncProvider </code>实现使用的日志对象。
+     * 所有<code> SyncProvider </code>实现都可以将它们的事件记录到这个对象,应用程序可以使用<code> getLogger </code>方法检索这个对象的句柄。
+     * <p>
+     * 此方法检查以查看是否有一个{@code SQLPermission}对象,在允许方法成功之前授予{@code setSyncFactory}权限。
+     * 如果存在{@code SecurityManager}并且其{@code checkPermission}方法拒绝调用{@code setLogger},则此方法会抛出{@code java.lang.SecurityException}
+     * 。
+     * 此方法检查以查看是否有一个{@code SQLPermission}对象,在允许方法成功之前授予{@code setSyncFactory}权限。
+     * 
+     * 
      * @param logger a Logger object instance
      * @param level a Level object instance indicating the degree of logging
      * required
@@ -697,6 +907,10 @@ public class SyncFactory {
     /**
      * Returns the logging object for applications to retrieve
      * synchronization events posted by SyncProvider implementations.
+     * <p>
+     *  返回应用程序检索由SyncProvider实现发布的同步事件的日志对象。
+     * 
+     * 
      * @return The {@code Logger} that has been specified for use by
      * {@code SyncProvider} implementations
      * @throws SyncFactoryException if no logging object has been set.
@@ -724,6 +938,15 @@ public class SyncFactory {
      * this method throws a
      * {@code java.lang.SecurityException}.
      *
+     * <p>
+     *  设置可以从JNDI命名空间检索SyncProvider实现的初始JNDI上下文
+     * <p>
+     *  此方法检查以查看是否有一个{@code SQLPermission}对象,在允许方法成功之前授予{@code setSyncFactory}权限。
+     * 如果{@code SecurityManager}存在且其{@code checkPermission}方法拒绝调用{@code setJNDIContext},此方法会抛出{@code java.lang.SecurityException}
+     * 。
+     *  此方法检查以查看是否有一个{@code SQLPermission}对象,在允许方法成功之前授予{@code setSyncFactory}权限。
+     * 
+     * 
      * @param ctx a valid JNDI context
      * @throws SyncFactoryException if the supplied JNDI context is null
      * @throws java.lang.SecurityException if a security manager exists and its
@@ -745,6 +968,10 @@ public class SyncFactory {
     /**
      * Controls JNDI context initialization.
      *
+     * <p>
+     *  控制JNDI上下文初始化。
+     * 
+     * 
      * @throws SyncFactoryException if an error occurs parsing the JNDI context
      */
     private static synchronized void initJNDIContext() throws SyncFactoryException {
@@ -764,12 +991,18 @@ public class SyncFactory {
     }
     /**
      * Internal switch indicating whether the JNDI namespace should be re-read.
+     * <p>
+     *  内部开关,指示是否应重新读取JNDI命名空间。
+     * 
      */
     private static boolean lazyJNDICtxRefresh = false;
 
     /**
      * Parses the set JNDI Context and passes bindings to the enumerateBindings
      * method when complete.
+     * <p>
+     *  解析集合JNDI上下文,并在完成后将绑定传递给enumerateBindings方法。
+     * 
      */
     private static Properties parseJNDIContext() throws NamingException {
 
@@ -787,6 +1020,9 @@ public class SyncFactory {
      * instance of SyncProvider, if so, add this to the registry and continue to
      * scan the current context using a re-entrant call to this method until all
      * bindings have been enumerated.
+     * <p>
+     *  扫描JNDI上下文中的每个绑定,并确定是否有任何绑定是SyncProvider的实例,如果是,则将其添加到注册表中,并使用对此方法的重入调用继续扫描当前上下文,直到所有绑定都已枚举。
+     * 
      */
     private static void enumerateBindings(NamingEnumeration<?> bindings,
             Properties properties) throws NamingException {
@@ -826,6 +1062,9 @@ public class SyncFactory {
 
     /**
      * Lazy initialization Holder class used by {@code getSyncFactory}
+     * <p>
+     *  Lazy初始化{@code getSyncFactory}使用的Holder类
+     * 
      */
     private static class SyncFactoryHolder {
         static final SyncFactory factory = new SyncFactory();
@@ -835,6 +1074,9 @@ public class SyncFactory {
 /**
  * Internal class that defines the lazy reference construct for each registered
  * SyncProvider implementation.
+ * <p>
+ * 为每个注册的SyncProvider实现定义延迟引用构造的内部类。
+ * 
  */
 class ProviderImpl extends SyncProvider {
 
@@ -914,6 +1156,9 @@ class ProviderImpl extends SyncProvider {
     //
     }
     }
+    /* <p>
+    /*  public javax.sql.RowSetInternal getRowSetInternal(){try {return SyncFactory.getInstance(className).getRowSetInternal(); }
+    /*  catch(SyncFactoryException sfEx){//}}。
      */
     public javax.sql.RowSetReader getRowSetReader() {
 

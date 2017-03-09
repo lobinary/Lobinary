@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,18 @@ import javax.lang.model.element.Name;
  *
  * @jls section 4.4
  *
+ * <p>
+ *  类型参数的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  <em>名称</em>
+ * 
+ *  <em> <em> <em> <em> <em> </em>
+ * 
+ *  <em>注释</em> <em> </em>
+ * </pre>
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6
@@ -59,6 +72,11 @@ public interface TypeParameterTree extends Tree {
      * {@link java.lang.annotation.ElementType#TYPE_USE}
      * to appear in this position.
      *
+     * <p>
+     * 
+     *  @jls section 4.4
+     * 
+     * 
      * @return annotations on the type parameter declaration
      * @since 1.8
      */

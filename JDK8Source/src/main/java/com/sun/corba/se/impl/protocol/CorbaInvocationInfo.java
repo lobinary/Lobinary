@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,8 @@ import com.sun.corba.se.pept.protocol.MessageMediator;
 import com.sun.corba.se.pept.protocol.ClientRequestDispatcher;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class CorbaInvocationInfo implements ClientInvocationInfo

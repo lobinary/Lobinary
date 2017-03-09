@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ package org.omg.CORBA.portable;
  * indirectly by implementing either the
  * StreamableValue or CustomValue interface.
  *
+ * <p>
+ *  定义未自定义封送的所有非盒装IDL值类型的基本类型。
+ * 
+ * 
  * @author OMG
  */
 public interface StreamableValue extends Streamable, ValueBase {

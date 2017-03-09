@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -80,6 +81,17 @@ import sun.security.action.GetBooleanAction;
  * <a href="../../java/awt/doc-files/FocusSpec.html">Focus Specification</a>
  * for more information.
  *
+ * <p>
+ *  通用抽象窗口工具包(AWT)容器对象是可以包含其他AWT组件的组件。
+ * <p>
+ *  添加到容器的组件在列表中跟踪。列表的顺序将定义容器内组件的前后堆叠顺序。如果在将组件添加到容器时未指定索引,则它将被添加到列表的末尾(因此添加到堆叠顺序的底部)。
+ * <p>
+ *  <b>注意</b>：有关焦点子系统的详细信息,请参阅
+ * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+ *  如何使用焦点子系统</a>,<em> Java教程</em>和<a href ="../../ java / awt / doc-files / FocusSpec.html" >聚焦规格</a>了解
+ * 更多信息。
+ * 
+ * 
  * @author      Arthur van Hoff
  * @author      Sami Shaio
  * @see       #add(java.awt.Component, int)
@@ -96,6 +108,10 @@ public class Container extends Component {
 
     /**
      * The components in this container.
+     * <p>
+     *  此容器中的组件。
+     * 
+     * 
      * @see #add
      * @see #getComponents
      */
@@ -103,6 +119,10 @@ public class Container extends Component {
 
     /**
      * Layout manager for this container.
+     * <p>
+     *  此容器的布局管理器。
+     * 
+     * 
      * @see #doLayout
      * @see #setLayout
      * @see #getLayout
@@ -114,6 +134,9 @@ public class Container extends Component {
      * is native, this dispatcher takes care of forwarding and
      * retargeting the events to lightweight components contained
      * (if any).
+     * <p>
+     *  轻量级组件的事件路由器。如果此容器是本机的,则此调度程序负责将事件转发和重定向到包含的轻量级组件(如果有)。
+     * 
      */
     private LightweightDispatcher dispatcher;
 
@@ -131,6 +154,14 @@ public class Container extends Component {
      * remembered, but will not be used or inherited by this or any other
      * Containers until this Container is made a focus cycle root.
      *
+     * <p>
+     * 焦点遍历策略,将管理键盘遍历这个容器的孩子,如果这个容器是焦点循环根。如果值为null,则此Container从其焦点循环根祖先中继承其策略。
+     * 如果此容器的所有这些祖先都有空策略,则使用当前KeyboardFocusManager的默认策略。
+     * 如果值为非空,则此策略将由没有自己的键盘遍历策略的所有焦点循环根孩子继承(因为它们将递归地调用它们的焦点循环根孩子)。
+     * <p>
+     *  如果此容器不是焦点循环根,则该值将被记住,但在此容器成为焦点循环根之前不会被此容器或任何其他容器使用或继承。
+     * 
+     * 
      * @see #setFocusTraversalPolicy
      * @see #getFocusTraversalPolicy
      * @since 1.4
@@ -145,6 +176,10 @@ public class Container extends Component {
      * Container's descendants that are not descendants of inferior focus cycle
      * roots.
      *
+     * <p>
+     *  指示此组件是否为焦点遍历循环的根。一旦焦点进入遍历循环,通常不能通过焦点遍历离开它,除非按下一个向上或向下循环键。正常遍历仅限于此容器,并且所有此Container的后代不是下级焦点循环根的后代。
+     * 
+     * 
      * @see #setFocusCycleRoot
      * @see #isFocusCycleRoot
      * @since 1.4
@@ -154,6 +189,10 @@ public class Container extends Component {
 
     /**
      * Stores the value of focusTraversalPolicyProvider property.
+     * <p>
+     *  存储focusTraversalPolicyProvider属性的值。
+     * 
+     * 
      * @since 1.5
      * @see #setFocusTraversalPolicyProvider
      */
@@ -176,6 +215,9 @@ public class Container extends Component {
 
     /**
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 4613797578919906343L;
 
@@ -185,6 +227,10 @@ public class Container extends Component {
      * the method can return the Container on which it is originally called
      * in case if none of its children are the current mouse event targets.
      *
+     * <p>
+     *  一个常数,用于切换<code> getMouseEventTarget </code>的可控行为之一。它用于指定方法是否可以返回最初调用它的Container,以防它的子项不是当前鼠标事件目标。
+     * 
+     * 
      * @see #getMouseEventTarget(int, int, boolean)
      */
     static final boolean INCLUDE_SELF = true;
@@ -194,6 +240,10 @@ public class Container extends Component {
      * of <code>getMouseEventTarget</code>. It is used to specify whether
      * the method should search only lightweight components.
      *
+     * <p>
+     * 一个常数,用于切换<code> getMouseEventTarget </code>的可控行为之一。它用于指定方法是否只搜索轻量级组件。
+     * 
+     * 
      * @see #getMouseEventTarget(int, int, boolean)
      */
     static final boolean SEARCH_HEAVYWEIGHTS = true;
@@ -201,6 +251,9 @@ public class Container extends Component {
     /*
      * Number of HW or LW components in this container (including
      * all descendant containers).
+     * <p>
+     *  此容器中的HW或LW组件数(包括所有子系容器)。
+     * 
      */
     private transient int numOfHWComponents = 0;
     private transient int numOfLWComponents = 0;
@@ -208,6 +261,8 @@ public class Container extends Component {
     private static final PlatformLogger mixingLog = PlatformLogger.getLogger("java.awt.mixing.Container");
 
     /**
+    /* <p>
+    /* 
      * @serialField ncomponents                     int
      *       The number of components in this container.
      *       This value can be null.
@@ -269,6 +324,9 @@ public class Container extends Component {
     /**
      * Initialize JNI field and method IDs for fields that may be
        called from C.
+     * <p>
+     *  初始化可从C调用的字段的JNI字段和方法ID。
+     * 
      */
     private static native void initIDs();
 
@@ -277,6 +335,9 @@ public class Container extends Component {
      * but are lightweight in this case and must be contained by a parent
      * somewhere higher up in the component tree that is native.
      * (such as Frame for example).
+     * <p>
+     *  构造一个新的容器。容器可以直接扩展,但在这种情况下是轻量级的,并且必须由在本地组件树中更高层的父级包含。 (例如Frame)。
+     * 
      */
     public Container() {
     }
@@ -290,6 +351,12 @@ public class Container extends Component {
      * <p>
      * Note: This method should be called under AWT tree lock.
      *
+     * <p>
+     *  获取此面板中的组件数。
+     * <p>
+     *  注意：这个方法应该在AWT树锁下被调用。
+     * 
+     * 
      * @return    the number of components in this panel.
      * @see       #getComponent
      * @since     JDK1.1
@@ -300,6 +367,8 @@ public class Container extends Component {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by getComponentCount().
      */
@@ -316,6 +385,12 @@ public class Container extends Component {
      * <p>
      * Note: This method should be called under AWT tree lock.
      *
+     * <p>
+     *  获取此容器中的第n个组件。
+     * <p>
+     *  注意：这个方法应该在AWT树锁下被调用。
+     * 
+     * 
      * @param      n   the index of the component to get.
      * @return     the n<sup>th</sup> component in this container.
      * @exception  ArrayIndexOutOfBoundsException
@@ -338,6 +413,12 @@ public class Container extends Component {
      * <p>
      * Note: This method should be called under AWT tree lock.
      *
+     * <p>
+     *  获取此容器中的所有组件。
+     * <p>
+     *  注意：这个方法应该在AWT树锁下被调用。
+     * 
+     * 
      * @return    an array of all the components in this container.
      * @see Component#getTreeLock()
      */
@@ -358,6 +439,9 @@ public class Container extends Component {
 
     /*
      * Wrapper for getComponents() method with a proper synchronization.
+     * <p>
+     *  具有适当同步的getComponents()方法的包装器。
+     * 
      */
     Component[] getComponentsSync() {
         synchronized (getTreeLock()) {
@@ -371,6 +455,12 @@ public class Container extends Component {
      * <p>
      * A <code>Frame</code> object, for example, has a top inset that
      * corresponds to the height of the frame's title bar.
+     * <p>
+     *  确定此容器的插入,其指示容器边框的大小。
+     * <p>
+     *  例如,一个<code> Frame </code>对象有一个顶部插入,对应于框架标题栏的高度。
+     * 
+     * 
      * @return    the insets of this container.
      * @see       Insets
      * @see       LayoutManager
@@ -381,6 +471,8 @@ public class Container extends Component {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getInsets()</code>.
      */
@@ -403,6 +495,12 @@ public class Container extends Component {
      * displayed, the hierarchy must be validated thereafter in order to
      * display the added component.
      *
+     * <p>
+     *  将指定的组件附加到此容器的末尾。这是{@link #addImpl}的一个方便的方法。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以便显示添加的组件。
+     * 
+     * 
      * @param     comp   the component to be added
      * @exception NullPointerException if {@code comp} is {@code null}
      * @see #addImpl
@@ -428,6 +526,14 @@ public class Container extends Component {
      * displayed, the hierarchy must be validated thereafter in order to
      * display the added component.
      *
+     * <p>
+     * 将指定的组件添加到此容器。这是{@link #addImpl}的一个方便的方法。
+     * <p>
+     *  此方法自1.1版过时。请改用<code> add(Component,Object)</code>方法。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以便显示添加的组件。
+     * 
+     * 
      * @exception NullPointerException if {@code comp} is {@code null}
      * @see #add(Component, Object)
      * @see #invalidate
@@ -448,6 +554,12 @@ public class Container extends Component {
      * display the added component.
      *
      *
+     * <p>
+     *  将指定的组件添加到此容器的给定位置。这是{@link #addImpl}的一个方便的方法。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以便显示添加的组件。
+     * 
+     * 
      * @param     comp   the component to be added
      * @param     index    the position at which to insert the component,
      *                   or <code>-1</code> to append the component to the end
@@ -469,6 +581,9 @@ public class Container extends Component {
     /**
      * Checks that the component
      * isn't supposed to be added into itself.
+     * <p>
+     *  检查组件是否应该添加到自身中。
+     * 
      */
     private void checkAddToSelf(Component comp){
         if (comp instanceof Container) {
@@ -482,6 +597,9 @@ public class Container extends Component {
 
     /**
      * Checks that the component is not a Window instance.
+     * <p>
+     *  检查组件不是Window实例。
+     * 
      */
     private void checkNotAWindow(Component comp){
         if (comp instanceof Window) {
@@ -498,6 +616,11 @@ public class Container extends Component {
      * if comp is container, all sub-components must be on
      * same GraphicsDevice.
      *
+     * <p>
+     *  检查组件comp是否可以添加到此容器中Checks：index在容器大小的边界中,comp不是此容器的父项之一,comp不是一个窗口。 Comp和容器必须在同一个GraphicsDevice上。
+     * 如果comp是容器,则所有子组件必须在相同的GraphicsDevice上。
+     * 
+     * 
      * @since 1.5
      */
     private void checkAdding(Component comp, int index) {
@@ -534,6 +657,11 @@ public class Container extends Component {
      * index without calling removeNotify.
      * Note: Should be called while holding treeLock
      * Returns whether removeNotify was invoked
+     * <p>
+     * 从此容器中删除组件comp,而不进行不必要的更改和生成不必要的事件。此函数旨在执行优化的删除,例如,如果newParent和当前父级相同,它只是更改索引而不调用removeNotify。
+     * 注意：应该在持有treeLock时调用返回是否调用removeNotify。
+     * 
+     * 
      * @since: 1.5
      */
     private boolean removeDelicately(Component comp, Container newParent, int newIndex) {
@@ -594,6 +722,10 @@ public class Container extends Component {
      * Checks whether this container can contain component which is focus owner.
      * Verifies that container is enable and showing, and if it is focus cycle root
      * its FTP allows component to be focus owner
+     * <p>
+     *  检查此容器是否可以包含作为焦点所有者的组件。验证容器是否启用和显示,如果它是焦点循环根它的FTP允许组件是焦点所有者
+     * 
+     * 
      * @since 1.5
      */
     boolean canContainFocusOwner(Component focusOwnerCandidate) {
@@ -621,6 +753,10 @@ public class Container extends Component {
     /**
      * Checks whether or not this container has heavyweight children.
      * Note: Should be called while holding tree lock
+     * <p>
+     *  检查此容器是否包含重量级子项。注意：在持有树锁时应该调用
+     * 
+     * 
      * @return true if there is at least one heavyweight children in a container, false otherwise
      * @since 1.5
      */
@@ -632,6 +768,10 @@ public class Container extends Component {
     /**
      * Checks whether or not this container has lightweight children.
      * Note: Should be called while holding tree lock
+     * <p>
+     *  检查此容器是否具有轻量级子项。注意：在持有树锁时应该调用
+     * 
+     * 
      * @return true if there is at least one lightweight children in a container, false otherwise
      * @since 1.7
      */
@@ -643,6 +783,10 @@ public class Container extends Component {
     /**
      * Returns closest heavyweight component to this container. If this container is heavyweight
      * returns this.
+     * <p>
+     *  返回此容器最接近的重量级组件。如果这个容器是重量级的,返回这个。
+     * 
+     * 
      * @since 1.5
      */
     Container getHeavyweightContainer() {
@@ -659,6 +803,11 @@ public class Container extends Component {
      * removeNotify on the component. Since removeNotify destroys native window this might (not)
      * be required. For example, if new container and old containers are the same we don't need to
      * destroy native window.
+     * <p>
+     *  检测是否从当前父级删除并添加到新父级需要在组件上调用removeNotify。由于removeNotify销毁本机窗口,这可能(不)是必需的。
+     * 例如,如果新容器和旧容器是相同的,我们不需要销毁本机窗口。
+     * 
+     * 
      * @since: 1.5
      */
     private static boolean isRemoveNotifyNeeded(Component comp, Container oldContainer, Container newContainer) {
@@ -732,6 +881,22 @@ public class Container extends Component {
      * whether a platform supports this, so developers shouldn't make
      * any assumptions.
      *
+     * <p>
+     * 将指定的组件移动到容器中指定的z顺序索引。 z顺序决定了组件的绘制顺序;具有最高z次序的成分首先和具有最低z次序的成分最后。在组件重叠的地方,具有较低z次序的组件比具有较高z次序的组件。
+     * <p>
+     *  如果组件是某个其他容器的子容器,则在添加到此容器之前,该容器将从该容器中删除。
+     * 此方法和<code> java.awt.Container.add(Component,int)</code>之间的重要区别是,此方法不会在组件上调用<code> removeNotify </code>
+     * 以前的容器,除非有必要,并且当底层本地窗口系统允许时。
+     *  如果组件是某个其他容器的子容器,则在添加到此容器之前,该容器将从该容器中删除。这样,如果组件具有键盘焦点,则在移动到新位置时保持焦点。
+     * <p>
+     *  此属性保证仅适用于轻量级非<code> Container </code>组件。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * <p>
+     *  <b>注意</b>：并非所有平台都支持将重量级组件的z顺序从一个容器更改为另一个,而不调用<code> removeNotify </code>。
+     * 没有办法检测一个平台是否支持这一点,所以开发者不应该做任何假设。
+     * 
+     * 
      * @param     comp the component to be moved
      * @param     index the position in the container's list to
      *            insert the component, where <code>getComponentCount()</code>
@@ -784,6 +949,10 @@ public class Container extends Component {
     /**
      * Traverses the tree of components and reparents children heavyweight component
      * to new heavyweight parent.
+     * <p>
+     *  遍历组件和reparents儿童重量级组件的树到新的重量级父。
+     * 
+     * 
      * @since 1.5
      */
     private void reparentTraverse(ContainerPeer parentPeer, Container child) {
@@ -807,6 +976,10 @@ public class Container extends Component {
     /**
      * Reparents child component peer to this container peer.
      * Container must be heavyweight.
+     * <p>
+     * Reparents子组件对等到此容器对等体。容器必须重量级。
+     * 
+     * 
      * @since 1.5
      */
     private void reparentChild(Component comp) {
@@ -828,6 +1001,10 @@ public class Container extends Component {
     /**
      * Adds component to this container. Tries to minimize side effects of this adding -
      * doesn't call remove notify if it is not required.
+     * <p>
+     *  将组件添加到此容器。尝试最小化此添加的副作用 - 不调用remove notify如果不是必需的。
+     * 
+     * 
      * @since 1.5
      */
     private void addDelicately(Component comp, Container curParent, int index) {
@@ -924,6 +1101,10 @@ public class Container extends Component {
      * its index.  The component with the lowest z-order index is
      * painted last, above all other child components.
      *
+     * <p>
+     *  返回容器中组件的z序索引。 z顺序层次结构中的组件越高,其索引越低。具有最低z序索引的组件最后绘制,高于所有其他子组件。
+     * 
+     * 
      * @param comp the component being queried
      * @return  the z-order index of the component; otherwise
      *          returns -1 if the component is <code>null</code>
@@ -956,6 +1137,12 @@ public class Container extends Component {
      * display the added component.
      *
      *
+     * <p>
+     *  将指定的组件添加到此容器的末尾。还通知布局管理器使用指定的约束对象将组件添加到此容器的布局。这是{@link #addImpl}的一个方便的方法。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以便显示添加的组件。
+     * 
+     * 
      * @param     comp the component to be added
      * @param     constraints an object expressing
      *                  layout constraints for this component
@@ -984,6 +1171,12 @@ public class Container extends Component {
      * display the added component.
      *
      *
+     * <p>
+     *  将指定的组件添加到具有指定索引的指定约束的此容器。还通知布局管理器使用指定的约束对象将组件添加到此容器的布局。这是{@link #addImpl}的一个方便的方法。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以便显示添加的组件。
+     * 
+     * 
      * @param comp the component to be added
      * @param constraints an object expressing layout constraints for this
      * @param index the position in the container's list at which to insert
@@ -1046,6 +1239,34 @@ public class Container extends Component {
      * displayed, the hierarchy must be validated thereafter in order to
      * display the added component.
      *
+     * <p>
+     * 将指定的组件以指定的索引添加到此容器。此方法还通知布局管理器使用指定的约束对象通过<code> addLayoutComponent </code>方法将组件添加到此容器的布局。
+     * <p>
+     *  约束由正在使用的特定布局管理器定义。
+     * 例如,<code> BorderLayout </code>类定义了五个约束：<code> BorderLayout.NORTH </code>,<code> BorderLayout.SOUTH </code>
+     * ,<code> BorderLayout.EAST </code> <code> BorderLayout.WEST </code>和<code> BorderLayout.CENTER </code>
+     * 。
+     *  约束由正在使用的特定布局管理器定义。
+     * <p>
+     *  <code> GridBagLayout </code>类需要一个<code> GridBagConstraints </code>对象。
+     * 未能传递正确类型的约束对象会导致<code> IllegalArgumentException </code>。
+     * <p>
+     *  如果当前布局管理器实现{@code LayoutManager2},则调用{@link LayoutManager2#addLayoutComponent(Component,Object)}。
+     * 如果当前布局管理器没有实现{@code LayoutManager2},并且约束是{@code String},则调用{@link LayoutManager#addLayoutComponent(String,Component)}
+     * 。
+     *  如果当前布局管理器实现{@code LayoutManager2},则调用{@link LayoutManager2#addLayoutComponent(Component,Object)}。
+     * <p>
+     *  如果组件不是此容器的祖代并且具有非空父级,则在将其添加到此容器之前,它将从其当前父级删除。
+     * <p>
+     *  这是覆盖如果程序需要跟踪每个添加请求到容器的方法,因为所有其他添加方法推迟到这一个。重写方法通常应该包括调用超类的方法版本：
+     * 
+     * <blockquote>
+     * <code> super.addImpl(comp,constraints,index)</code>
+     * </blockquote>
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以便显示添加的组件。
+     * 
+     * 
      * @param     comp       the component to be added
      * @param     constraints an object expressing layout constraints
      *                 for this component
@@ -1078,6 +1299,10 @@ public class Container extends Component {
              * comp and container must be on the same GraphicsDevice.
              * if comp is container, all sub-components must be on
              * same GraphicsDevice.
+             * <p>
+             *  comp不能是这个容器的父类之一,并且comp不能是一个窗口。 comp和container必须在同一个GraphicsDevice上。
+             * 如果comp是容器,则所有子组件必须在相同的GraphicsDevice上。
+             * 
              */
             GraphicsConfiguration thisGC = this.getGraphicsConfiguration();
 
@@ -1163,6 +1388,9 @@ public class Container extends Component {
      * Checks that all Components that this Container contains are on
      * the same GraphicsDevice as this Container.  If not, throws an
      * IllegalArgumentException.
+     * <p>
+     *  检查此容器包含的所有组件是否在与此容器相同的GraphicsDevice上。如果没有,则抛出IllegalArgumentException。
+     * 
      */
     void checkGD(String stringID) {
         for (Component comp : component) {
@@ -1185,6 +1413,12 @@ public class Container extends Component {
      * reflect the changes.
      *
      *
+     * <p>
+     *  从此容器中删除由<code> index </code>指定的组件。此方法还通知布局管理器通过<code> removeLayoutComponent </code>方法从此容器的布局中删除组件。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以反映更改。
+     * 
+     * 
      * @param     index   the index of the component to be removed
      * @throws ArrayIndexOutOfBoundsException if {@code index} is not in
      *         range {@code [0, getComponentCount()-1]}
@@ -1247,6 +1481,12 @@ public class Container extends Component {
      * displayed, the hierarchy must be validated thereafter in order to
      * reflect the changes.
      *
+     * <p>
+     *  从此容器中删除指定的组件。此方法还通知布局管理器通过<code> removeLayoutComponent </code>方法从此容器的布局中删除组件。
+     * <p>
+     * 此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以反映更改。
+     * 
+     * 
      * @param comp the component to be removed
      * @throws NullPointerException if {@code comp} is {@code null}
      * @see #add
@@ -1276,6 +1516,12 @@ public class Container extends Component {
      * displayed, the hierarchy must be validated thereafter in order to
      * reflect the changes.
      *
+     * <p>
+     *  从此容器中删除所有组件。此方法还通知布局管理器通过<code> removeLayoutComponent </code>方法从此容器的布局中删除组件。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。如果容器已经显示,则必须在此后验证层次结构,以反映更改。
+     * 
+     * 
      * @see #add
      * @see #remove
      * @see #invalidate
@@ -1461,6 +1707,10 @@ public class Container extends Component {
 
     /**
      * Gets the layout manager for this container.
+     * <p>
+     *  获取此容器的布局管理器。
+     * 
+     * 
      * @see #doLayout
      * @see #setLayout
      */
@@ -1474,6 +1724,12 @@ public class Container extends Component {
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  设置此容器的布局管理器。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param mgr the specified layout manager
      * @see #doLayout
      * @see #getLayout
@@ -1488,6 +1744,10 @@ public class Container extends Component {
      * Causes this container to lay out its components.  Most programs
      * should not call this method directly, but should invoke
      * the <code>validate</code> method instead.
+     * <p>
+     *  导致此容器布局其组件。大多数程序不应该直接调用这个方法,而应该调用<code> validate </code>方法。
+     * 
+     * 
      * @see LayoutManager#layoutContainer
      * @see #setLayout
      * @see #validate
@@ -1498,6 +1758,8 @@ public class Container extends Component {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>doLayout()</code>.
      */
@@ -1531,6 +1793,19 @@ public class Container extends Component {
      * The {@code Window} class and the {@code Applet} class are the validate
      * roots in AWT.  Swing introduces more validate roots.
      *
+     * <p>
+     *  指示此容器是否为<i>验证根</i>。
+     * <p>
+     * 与布局相关的更改(例如验证根后代的边界)不会影响有效的根父亲的布局。这种特殊性使得{@code invalidate()}方法在方法遇到验证根时停止使组件层次结构无效。
+     * 但是,为了保持向后兼容性,仅当{@code java.awt.smartInvalidate}系统属性值设置为{@code true}时,才会启用新的优化行为。
+     * <p>
+     *  如果组件层次结构包含validate根并且启用了新的优化的{@code invalidate()}行为,则必须在先前失效的组件的validate根上调用{@code validate()}方法,以恢复
+     * 该层次结构的有效性后来。
+     * 否则,调用顶层容器(例如{@code Frame}对象)上的{@code validate()}方法应该用于恢复组件层次结构的有效性。
+     * <p>
+     *  {@code Window}类和{@code Applet}类是AWT的有效根。 Swing引入了更多的有效根。
+     * 
+     * 
      * @return whether this container is a validate root
      * @see #invalidate
      * @see java.awt.Component#invalidate
@@ -1552,6 +1827,9 @@ public class Container extends Component {
     /**
      * Invalidates the parent of the container unless the container
      * is a validate root.
+     * <p>
+     *  使容器的父项无效,除非容器是有效的根。
+     * 
      */
     @Override
     void invalidateParent() {
@@ -1571,6 +1849,15 @@ public class Container extends Component {
      * Afterwards this method marks this container invalid, and invalidates its
      * ancestors. See the {@link Component#invalidate} method for more details.
      *
+     * <p>
+     *  使容器无效。
+     * <p>
+     *  如果安装在此容器上的{@code LayoutManager}是{@code LayoutManager2}界面的实例,则会调用{@link LayoutManager2#invalidateLayout(Container)}
+     * 方法,并提供此{@code Container}作为参数。
+     * <p>
+     * 之后,此方法将此容器标记为无效,并使其祖先无效。有关更多详细信息,请参阅{@link Component#invalidate}方法。
+     * 
+     * 
      * @see #validate
      * @see #layout
      * @see LayoutManager2
@@ -1606,6 +1893,17 @@ public class Container extends Component {
      * the {@code validateTree} method and marks this {@code Container}
      * as valid. Otherwise, no action is performed.
      *
+     * <p>
+     *  验证此容器及其所有子组件。
+     * <p>
+     *  验证容器意味着布置其子组件。与布局相关的更改(例如设置组件的边界或向容器添加组件)会自动使容器无效。请注意,容器的祖先也可能无效(参见{@link Component#invalidate})。
+     * 因此,为了恢复层次结构的有效性,应该在顶层调用{@code validate()最无效的容器的层次结构。
+     * <p>
+     *  验证容器可能是相当费时的操作。出于性能原因,开发者可以推迟层次结构的验证,直到一组与布局相关的操作完成为止。后添加所有的孩子到容器。
+     * <p>
+     *  如果此{@code Container}无效,则此方法调用{@code validateTree}方法,并将此{@code Container}标记为有效。否则,不执行任何操作。
+     * 
+     * 
      * @see #add(java.awt.Component)
      * @see #invalidate
      * @see Container#isValidateRoot
@@ -1650,12 +1948,23 @@ public class Container extends Component {
      * The field is allowed to be static as long as the TreeLock itself is
      * static.
      *
+     * <p>
+     *  指示有效容器是否也应遍历其子代并对它们调用validateTree()方法。
+     * 
+     *  同步：TreeLock。
+     * 
+     *  只要TreeLock本身是静态的,该字段就是静态的。
+     * 
+     * 
      * @see #validateUnconditionally()
      */
     private static boolean descendUnconditionallyWhenValidating = false;
 
     /**
      * Unconditionally validate the component hierarchy.
+     * <p>
+     *  无条件验证组件层次结构。
+     * 
      */
     final void validateUnconditionally() {
         boolean updateCur = false;
@@ -1680,6 +1989,10 @@ public class Container extends Component {
      * invalid).  Synchronization should be provided by the method
      * that calls this one:  <code>validate</code>.
      *
+     * <p>
+     * 递归下降容器树,并为标记为需要它的那些子树(标记为无效的子树)重新计算布局。同步应该由调用此方法的方法提供：<code> validate </code>。
+     * 
+     * 
      * @see #doLayout
      * @see #validate
      */
@@ -1714,6 +2027,9 @@ public class Container extends Component {
     /**
      * Recursively descends the container tree and invalidates all
      * contained components.
+     * <p>
+     *  递归下降容器树并使所有包含的组件无效。
+     * 
      */
     void invalidateTree() {
         synchronized (getTreeLock()) {
@@ -1736,6 +2052,12 @@ public class Container extends Component {
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  设置此容器的字体。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param f The font to become this container's font.
      * @see Component#getFont
      * @see #invalidate
@@ -1766,6 +2088,18 @@ public class Container extends Component {
      * this method is invoked, rather the {@code LayoutManager} will only
      * be queried after the {@code Container} becomes invalid.
      *
+     * <p>
+     *  返回此容器的首选大小。
+     * 如果未通过{@link Component#setPreferredSize(Dimension)}显式设置首选大小,并且此{@code Container}具有{@code非空} {@link LayoutManager}
+     * ,则{@link LayoutManager#preferredLayoutSize Container)}用于计算首选大小。
+     *  返回此容器的首选大小。
+     * 
+     *  <p>注意：一些实现可能缓存从{@code LayoutManager}返回的值。
+     * 缓存无需在每次调用此方法时都调用{@code LayoutManager}上的{@code preferredLayoutSize},而只有在{@code Container}无效后才会查询{@code LayoutManager}
+     * 。
+     *  <p>注意：一些实现可能缓存从{@code LayoutManager}返回的值。
+     * 
+     * 
      * @return    an instance of <code>Dimension</code> that represents
      *                the preferred size of this container.
      * @see       #getMinimumSize
@@ -1779,6 +2113,8 @@ public class Container extends Component {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getPreferredSize()</code>.
      */
@@ -1786,6 +2122,9 @@ public class Container extends Component {
     public Dimension preferredSize() {
         /* Avoid grabbing the lock if a reasonable cached size value
          * is available.
+         * <p>
+         *  可用。
+         * 
          */
         Dimension dim = prefSize;
         if (dim == null || !(isPreferredSizeSet() || isValid())) {
@@ -1817,6 +2156,18 @@ public class Container extends Component {
      * this method is invoked, rather the {@code LayoutManager} will only
      * be queried after the {@code Container} becomes invalid.
      *
+     * <p>
+     *  返回此容器的最小大小。
+     * 如果{@link Component#setMinimumSize(Dimension)}没有明确设置最小尺寸,而且这个{@code Container}有一个{@code非null} {@link LayoutManager}
+     * ,那么{@link LayoutManager#minimumLayoutSize Container)}用于计算最小大小。
+     *  返回此容器的最小大小。
+     * 
+     * <p>注意：一些实现可能缓存从{@code LayoutManager}返回的值。
+     * 缓存无需在每次调用此方法时都调用{@code LayoutManager}上的{@code minimumLayoutSize},而{@code LayoutManager}只有在{@code Container}
+     * 无效后才会被查询。
+     * <p>注意：一些实现可能缓存从{@code LayoutManager}返回的值。
+     * 
+     * 
      * @return    an instance of <code>Dimension</code> that represents
      *                the minimum size of this container.
      * @see       #getPreferredSize
@@ -1831,6 +2182,8 @@ public class Container extends Component {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getMinimumSize()</code>.
      */
@@ -1838,6 +2191,9 @@ public class Container extends Component {
     public Dimension minimumSize() {
         /* Avoid grabbing the lock if a reasonable cached size value
          * is available.
+         * <p>
+         *  可用。
+         * 
          */
         Dimension dim = minSize;
         if (dim == null || !(isMinimumSizeSet() || isValid())) {
@@ -1870,6 +2226,18 @@ public class Container extends Component {
      * this method is invoked, rather the {@code LayoutManager2} will only
      * be queried after the {@code Container} becomes invalid.
      *
+     * <p>
+     *  返回此容器的最大大小。
+     * 如果未通过{@link Component#setMaximumSize(Dimension)}显式设置最大大小,并且此{@code Container}上安装的{@link LayoutManager}
+     * 是{@link LayoutManager2}的实例,则{@link LayoutManager2 #maximumLayoutSize(Container)}用于计算最大大小。
+     *  返回此容器的最大大小。
+     * 
+     *  <p>注意：一些实现可能缓存从{@code LayoutManager2}返回的值。
+     * 缓存无需在每次调用此方法时都调用{@code LayoutManager2}上的{@code maximumLayoutSize},而只有在{@code Container}无效后才会查询{@code LayoutManager2}
+     * 。
+     *  <p>注意：一些实现可能缓存从{@code LayoutManager2}返回的值。
+     * 
+     * 
      * @return    an instance of <code>Dimension</code> that represents
      *                the maximum size of this container.
      * @see       #getPreferredSize
@@ -1881,6 +2249,9 @@ public class Container extends Component {
     public Dimension getMaximumSize() {
         /* Avoid grabbing the lock if a reasonable cached size value
          * is available.
+         * <p>
+         *  可用。
+         * 
          */
         Dimension dim = maxSize;
         if (dim == null || !(isMaximumSizeSet() || isValid())) {
@@ -1908,6 +2279,9 @@ public class Container extends Component {
      * components.  The value should be a number between 0 and 1
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
+     * <p>
+     *  返回沿x轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
      */
     public float getAlignmentX() {
         float xAlign;
@@ -1928,6 +2302,9 @@ public class Container extends Component {
      * components.  The value should be a number between 0 and 1
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
+     * <p>
+     * 返回沿y轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
      */
     public float getAlignmentY() {
         float yAlign;
@@ -1950,6 +2327,11 @@ public class Container extends Component {
      * clipped by the current clipping setting in g, paint() will not be
      * forwarded to that child.
      *
+     * <p>
+     *  油漆容器。这将油漆转发到任何轻量级组件,这是这个容器的子级。如果重新实现此方法,则应调用super.paint(g),以便轻松组件正确呈现。
+     * 如果子组件被g中的当前剪辑设置完全剪切,paint()将不会被转发到该子组件。
+     * 
+     * 
      * @param g the specified Graphics window
      * @see   Component#update(Graphics)
      */
@@ -1982,6 +2364,11 @@ public class Container extends Component {
      * clipped by the current clipping setting in g, update() will not be
      * forwarded to that child.
      *
+     * <p>
+     *  更新该容器。这会将更新转发到作为此容器的子级的任何轻量级组件。如果重新实现此方法,应调用super.update(g),以便轻松组件正确呈现。
+     * 如果子组件被g中的当前剪辑设置完全剪切,update()将不会转发给该子组件。
+     * 
+     * 
      * @param g the specified Graphics window
      * @see   Component#update(Graphics)
      */
@@ -2002,6 +2389,11 @@ public class Container extends Component {
      * clipped by the current clipping setting in g, print() will not be
      * forwarded to that child.
      *
+     * <p>
+     *  打印容器。这将转发打印到任何轻量级组件,这个容器的子级。如果重新实现此方法,应调用super.print(g),以便轻松组件正确呈现。
+     * 如果子组件被g中的当前剪切设置完全剪切,则print()将不会转发给该子组件。
+     * 
+     * 
      * @param g the specified Graphics window
      * @see   Component#update(Graphics)
      */
@@ -2031,6 +2423,10 @@ public class Container extends Component {
 
     /**
      * Paints each of the components in this container.
+     * <p>
+     *  在此容器中绘制每个组件。
+     * 
+     * 
      * @param     g   the graphics context.
      * @see       Component#paint
      * @see       Component#paintAll
@@ -2045,6 +2441,10 @@ public class Container extends Component {
     /**
      * Simulates the peer callbacks into java.awt for printing of
      * lightweight Containers.
+     * <p>
+     * 将对等体回调模拟为java.awt以便打印轻量级容器。
+     * 
+     * 
      * @param     g   the graphics context to use for printing.
      * @see       Component#printAll
      * @see       #printComponents
@@ -2056,6 +2456,9 @@ public class Container extends Component {
 
     /**
      * Prints all the heavyweight subcomponents.
+     * <p>
+     *  打印所有重量级子组件。
+     * 
      */
     void paintHeavyweightComponents(Graphics g) {
         if (isShowing()) {
@@ -2067,6 +2470,10 @@ public class Container extends Component {
 
     /**
      * Prints each of the components in this container.
+     * <p>
+     *  打印此容器中的每个组件。
+     * 
+     * 
      * @param     g   the graphics context.
      * @see       Component#print
      * @see       Component#printAll
@@ -2081,6 +2488,10 @@ public class Container extends Component {
     /**
      * Simulates the peer callbacks into java.awt for printing of
      * lightweight Containers.
+     * <p>
+     *  将对等体回调模拟为java.awt以便打印轻量级容器。
+     * 
+     * 
      * @param     g   the graphics context to use for printing.
      * @see       Component#printAll
      * @see       #printComponents
@@ -2092,6 +2503,9 @@ public class Container extends Component {
 
     /**
      * Prints all the heavyweight subcomponents.
+     * <p>
+     *  打印所有重量级子组件。
+     * 
      */
     void printHeavyweightComponents(Graphics g) {
         if (isShowing()) {
@@ -2108,6 +2522,11 @@ public class Container extends Component {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的容器侦听器以从此容器接收容器事件。如果l为null,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l the container listener
      *
      * @see #removeContainerListener
@@ -2128,6 +2547,11 @@ public class Container extends Component {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的容器侦听器,使其不再从此容器接收容器事件。如果l为null,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param   l the container listener
      *
      * @see #addContainerListener
@@ -2144,6 +2568,10 @@ public class Container extends Component {
      * Returns an array of all the container listeners
      * registered on this container.
      *
+     * <p>
+     *  返回在此容器上注册的所有容器侦听器的数组。
+     * 
+     * 
      * @return all of this container's <code>ContainerListener</code>s
      *         or an empty array if no container
      *         listeners are currently registered
@@ -2175,6 +2603,20 @@ public class Container extends Component {
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此<code> Container </code>上注册为<code> <em> Foo </em>侦听器</code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * 
+     * <p>
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询其容器侦听器的<code> Container </code> <code> c </code>：。
+     * 
+     * <pre> ContainerListener [] cls =(ContainerListener [])(c.getListeners(ContainerListener.class)); </pre>
+     * 。
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -2224,6 +2666,13 @@ public class Container extends Component {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  处理此容器上的事件。
+     * 如果事件是一个<code> ContainerEvent </code>,它调用<code> processContainerEvent </code>方法,否则调用它的超类的<code> proces
+     * sEvent </code>。
+     *  处理此容器上的事件。 <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param e the event
      */
     protected void processEvent(AWTEvent e) {
@@ -2249,6 +2698,15 @@ public class Container extends Component {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将容器事件分派到任何已注册的ContainerListener对象来处理此容器上发生的容器事件。注意：除非为此组件启用容器事件,否则不会调用此方法;当发生以下情况之一时会发生这种情况：
+     * <ul>
+     *  <li> ContainerListener对象通过<code> addContainerListener注册</code> <li>容器事件通过<code> enableEvents </code>
+     * 。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param e the container event
      * @see Component#enableEvents
      */
@@ -2272,6 +2730,11 @@ public class Container extends Component {
      * COMPONENT_RESIZED and COMPONENT_MOVED events. We have to do this
      * here instead of in processComponentEvent because ComponentEvents
      * may not be enabled for this Container.
+     * <p>
+     *  将事件分派到此组件或其某个子组件。创建ANCESTOR_RESIZED和ANCESTOR_MOVED事件以响应COMPONENT_RESIZED和COMPONENT_MOVED事件。
+     * 我们必须在这里这里,而不是在processComponentEvent,因为ComponentEvents可能未启用此容器。
+     * 
+     * 
      * @param e the event
      */
     void dispatchEventImpl(AWTEvent e) {
@@ -2310,6 +2773,10 @@ public class Container extends Component {
     /*
      * Dispatches an event to this component, without trying to forward
      * it to any subcomponents
+     * <p>
+     *  将事件分派到此组件,而不尝试将其转发到任何子组件
+     * 
+     * 
      * @param e the event
      */
     void dispatchEventToSelf(AWTEvent e) {
@@ -2319,6 +2786,9 @@ public class Container extends Component {
     /**
      * Fetchs the top-most (deepest) lightweight component that is interested
      * in receiving mouse events.
+     * <p>
+     * 获取有意接收鼠标事件的最顶层(最深)轻量级组件。
+     * 
      */
     Component getMouseEventTarget(int x, int y, boolean includeSelf) {
         return getMouseEventTarget(x, y, includeSelf,
@@ -2328,6 +2798,9 @@ public class Container extends Component {
 
     /**
      * Fetches the top-most (deepest) component to receive SunDropTargetEvents.
+     * <p>
+     *  获取最顶层(最深)组件以接收SunDropTargetEvents。
+     * 
      */
     Component getDropTargetEventTarget(int x, int y, boolean includeSelf) {
         return getMouseEventTarget(x, y, includeSelf,
@@ -2342,6 +2815,11 @@ public class Container extends Component {
      * and is accepted by the given filter. The search will be constrained to
      * lightweight descendants if the last argument is <code>false</code>.
      *
+     * <p>
+     *  getMouseEventTarget的私有版本,它有两个额外的可控行为。此方法搜索此容器的最上层后代,该容器包含给定的坐标,并被给定的过滤器接受。
+     * 如果最后一个参数是<code> false </code>,搜索将被限制为轻量级后代。
+     * 
+     * 
      * @param filter EventTargetFilter instance to determine whether the
      *        given component is a valid target for this event.
      * @param searchHeavyweights if <code>false</code>, the method
@@ -2376,6 +2854,12 @@ public class Container extends Component {
      * be constrained to only lightweight descendants of the searched children
      * of this container if searchHeavyweightDescendants is <code>false</code>.
      *
+     * <p>
+     *  getMouseEventTarget的私有版本,具有三个可控行为。此方法搜索此容器的最上层后代,该容器包含给定的坐标,并被给定的过滤器接受。
+     * 搜索将限制为只有轻量级子代的子代,或者只限于此容器的重量级子代,具体取决于searchHeavyweightChildren。
+     * 如果searchHeavyweightDescendants为<code> false </code>,那么搜索将仅限于此容器的搜索子级的轻量级后代。
+     * 
+     * 
      * @param filter EventTargetFilter instance to determine whether the
      *        selected component is a valid target for this event.
      * @param searchHeavyweightChildren if <code>true</code>, the method
@@ -2478,6 +2962,9 @@ public class Container extends Component {
      * This is needed for events that are normally only dispatched to
      * windows to be accepted so that they can be forwarded downward to
      * the lightweight component that has enabled them.
+     * <p>
+     *  这由需要包含窗口的父代为他们启用某种类型的事件的轻量组件调用。这对于通常只被分派到要被接受的窗口的事件是需要的,使得它们可以被向下转发到已经启用它们的轻量组件。
+     * 
      */
     void proxyEnableEvents(long events) {
         if (peer instanceof LightweightPeer) {
@@ -2499,6 +2986,8 @@ public class Container extends Component {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>dispatchEvent(AWTEvent e)</code>
      */
@@ -2522,6 +3011,11 @@ public class Container extends Component {
      * which have native peers take precedence over those which do not
      * (i.e., lightweight Components).
      *
+     * <p>
+     * 找到包含x,y位置的组件。在组件中存在重叠的情况下返回最顶层子组件。
+     * 这是通过找到最靠近通过Component.contains()声明包含给定点的索引0的组件来确定的,除了具有本地对等体的组件优先于没有组件(即轻量组件)的组件。
+     * 
+     * 
      * @param x the <i>x</i> coordinate
      * @param y the <i>y</i> coordinate
      * @return null if the component does not contain the position.
@@ -2536,6 +3030,8 @@ public class Container extends Component {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getComponentAt(int, int)</code>.
      */
@@ -2570,6 +3066,10 @@ public class Container extends Component {
 
     /**
      * Gets the component that contains the specified point.
+     * <p>
+     *  获取包含指定点的组件。
+     * 
+     * 
      * @param      p   the point.
      * @return     returns the component that contains the point,
      *                 or <code>null</code> if the component does
@@ -2594,6 +3094,16 @@ public class Container extends Component {
      * a non-null value if the mouse pointer is above <code>Container</code> or any
      * of its descendants.
      *
+     * <p>
+     *  如果<code> Container </code>在鼠标指针下,则返回此<; </span> </code>坐标空间中鼠标指针的位置,否则返回<code> null </code>。
+     * 此方法类似于{@link Component#getMousePosition()},但可以考虑<code> Container </code>的子代。
+     * 如果<code> allowChildren </code>是<code> false </code>,那么只有当鼠标指针直接位于<code> Container </code>之上时,此方法才会返回非
+     * 空值被儿童遮蔽。
+     * 此方法类似于{@link Component#getMousePosition()},但可以考虑<code> Container </code>的子代。
+     * 如果<code> allowChildren </code>是<code> true </code>,如果鼠标指针在<code> Container </code>或其任何后代之上,此方法将返回非空值。
+     * 此方法类似于{@link Component#getMousePosition()},但可以考虑<code> Container </code>的子代。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless() returns true
      * @param     allowChildren true if children should be taken into account
      * @see       Component#getMousePosition
@@ -2637,6 +3147,13 @@ public class Container extends Component {
      * children; if the containing component is a Container,
      * findComponentAt will search that child to find a nested component.
      *
+     * <p>
+     * 找到包含指定位置的可见子组件。在组件中存在重叠的情况下返回最顶层子组件。如果包含的子组件是Container,此方法将继续搜索最深的嵌套子组件。在搜索过程中将忽略不可见的组件。<p>
+     * 
+     *  findComponentAt方法不同于getComponentAt,因为getComponentAt只搜索Container的直接子项;如果包含的组件是Container,findComponent
+     * At将搜索该子节点以查找嵌套的组件。
+     * 
+     * 
      * @param x the <i>x</i> coordinate
      * @param y the <i>y</i> coordinate
      * @return null if the component does not contain the position.
@@ -2659,6 +3176,12 @@ public class Container extends Component {
      *
      * The addition of this feature is temporary, pending the
      * adoption of new, public API which exports this feature.
+     * <p>
+     *  findComponentAt的私有版本,它具有可控行为。将'ignoreEnabled'设置为'false'在搜索期间绕过禁用的组件。
+     * 此行为由sun.awt.GlobalCursorManager中的轻量级光标支持使用。
+     * 
+     *  此功能的添加是临时的,等待采用导出此功能的新的公共API。
+     * 
      */
     final Component findComponentAt(int x, int y, boolean ignoreEnabled) {
         synchronized (getTreeLock()) {
@@ -2730,6 +3253,13 @@ public class Container extends Component {
      * children; if the containing component is a Container,
      * findComponentAt will search that child to find a nested component.
      *
+     * <p>
+     *  找到包含指定点的可见子组件。在组件中存在重叠的情况下返回最顶层子组件。如果包含的子组件是Container,此方法将继续搜索最深的嵌套子组件。在搜索过程中将忽略不可见的组件。<p>
+     * 
+     * findComponentAt方法不同于getComponentAt,因为getComponentAt只搜索Container的直接子项;如果包含的组件是Container,findComponentA
+     * t将搜索该子节点以查找嵌套的组件。
+     * 
+     * 
      * @param      p   the point.
      * @return null if the component does not contain the position.
      * If there is no child component at the requested point and the
@@ -2750,6 +3280,10 @@ public class Container extends Component {
      * cause all of its children to be made displayable.
      * This method is called internally by the toolkit and should
      * not be called directly by programs.
+     * <p>
+     *  将此容器连接到本机屏幕资源,使其显示。使容器可显示将使其所有的孩子都可显示。此方法由工具包在内部调用,不应由程序直接调用。
+     * 
+     * 
      * @see Component#isDisplayable
      * @see #removeNotify
      */
@@ -2781,6 +3315,10 @@ public class Container extends Component {
      * will cause all of its children to be made undisplayable.
      * This method is called by the toolkit internally and should
      * not be called directly by programs.
+     * <p>
+     *  通过删除其与其本机屏幕资源的连接,使此容器不可显示。使容器不可显示将导致其所有的孩子被设置为不可显示。此方法由内部工具包调用,不应由程序直接调用。
+     * 
+     * 
      * @see Component#isDisplayable
      * @see #addNotify
      */
@@ -2824,6 +3362,10 @@ public class Container extends Component {
     /**
      * Checks if the component is contained in the component hierarchy of
      * this container.
+     * <p>
+     *  检查组件是否包含在此容器的组件层次结构中。
+     * 
+     * 
      * @param c the component
      * @return     <code>true</code> if it is an ancestor;
      *             <code>false</code> otherwise.
@@ -2854,6 +3396,13 @@ public class Container extends Component {
      *
      * In the case of nested Modal components, we store the previous
      * modal component in the new modal components value of modalComp;
+     * <p>
+     *  添加以下代码以支持modal JInternalFrames不幸的是,此代码必须在此处添加,以便我们可以访问一些私有AWT类,如SequencedEvent。
+     * 
+     *  LW组件的本机容器有此字段设置告诉它应该阻止除模态组件之外的所有LW孩子的鼠标事件。
+     * 
+     *  在嵌套Modal组件的情况下,我们将先前的模态组件存储在modalComp的新模态组件值中;
+     * 
      */
 
     transient Component modalComp;
@@ -2978,6 +3527,11 @@ public class Container extends Component {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     * 返回一个表示此<code> Container </code>的状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return    the parameter string of this container
      */
     protected String paramString() {
@@ -2998,6 +3552,12 @@ public class Container extends Component {
      * of those children are printed at <code>indent+2</code>
      * and so on.
      *
+     * <p>
+     *  将此容器的列表打印到指定的输出流。列表从指定的缩进开始。
+     * <p>
+     *  容器的直接子项打印有缩进的<code>缩进+ 1 </code>。这些孩子的孩子以<code>缩进+ 2 </code>打印,依此类推。
+     * 
+     * 
      * @param    out      a print stream
      * @param    indent   the number of spaces to indent
      * @throws   NullPointerException if {@code out} is {@code null}
@@ -3025,6 +3585,12 @@ public class Container extends Component {
      * of those children are printed at <code>indent+2</code>
      * and so on.
      *
+     * <p>
+     *  从指定的缩进打印出指定的打印作者的列表。
+     * <p>
+     *  容器的直接子项打印有缩进的<code>缩进+ 1 </code>。这些孩子的孩子以<code>缩进+ 2 </code>打印,依此类推。
+     * 
+     * 
      * @param    out      a print writer
      * @param    indent   the number of spaces to indent
      * @throws   NullPointerException if {@code out} is {@code null}
@@ -3101,6 +3667,42 @@ public class Container extends Component {
      * This method may throw a {@code ClassCastException} if any {@code Object}
      * in {@code keystrokes} is not an {@code AWTKeyStroke}.
      *
+     * <p>
+     *  为此容器的给定遍历操作设置焦点遍历键。
+     * <p>
+     *  Container的焦点遍历键的默认值是与实现相关的。 Sun建议特定本机平台的所有实现使用相同的默认值。下面列出了对Windows和Unix的建议。这些建议在Sun AWT实现中使用。
+     * 
+     * <table border=1 summary="Recommended default values for a Container's focus traversal keys">
+     * <tr>
+     *  <th>标识符</th> <th>含义</th> <th>默认</th>
+     * </tr>
+     * <tr>
+     *  <td> KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS </td> <td>正向向前键盘遍历</td> <td> TAB在KEY_PRESSED上,CTRL-
+     * TAB在KEY_PRESSED上</td>。
+     * </tr>
+     * <tr>
+     * <td> KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS </td> <td>正常反向键盘遍历</td> <td> SHIFT-TAB在KEY_PRESSED上
+     * ,CTRL-SHIFT-TAB在KEY_PRESSED上</td>。
+     * </tr>
+     * <tr>
+     *  <td> KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS </td> <td>向上移动一个焦点遍历周期</td> <td> none </td>
+     * </tr>
+     * <tr>
+     *  <td> KeyboardFocusManager.DOWN_CYCLE_TRAVERSAL_KEYS <td> <td>下移一个焦点遍历周期</td> <td> none </td>
+     * </tr>
+     * </table>
+     * 
+     *  要禁用遍历键,请使用空的Set;建议使用Collections.EMPTY_SET。
+     * <p>
+     *  使用AWTKeyStroke API,客户端代码可以指定两个特定的KeyEvent(KEY_PRESSED或KEY_RELEASED)中的哪一个,焦点遍历操作将发生。
+     * 然而,无论指定了哪个KeyEvent,与焦点遍历键相关的所有KeyEvent(包括相关联的KEY_TYPED事件)都将被使用,并且不会被分派到任何Container。
+     * 将运行时错误指定为映射到焦点遍历操作的KEY_TYPED事件,或将同一事件映射到多个默认焦点遍历操作。
+     * <p>
+     *  如果为集指定了值为null,则此容器从其父代继承集合。如果此容器的所有祖先都为集指定了空值,则使用当前KeyboardFocusManager的默认Set。
+     * <p>
+     *  如果{@code keystrokes}中的任何{@code Object}不是{@code AWTKeyStroke},此方法可能会抛出{@code ClassCastException}。
+     * 
+     * 
      * @param id one of KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS, or
@@ -3145,6 +3747,13 @@ public class Container extends Component {
      * has been explicitly defined for any of this Container's ancestors, then
      * the current KeyboardFocusManager's default Set is returned.
      *
+     * <p>
+     * 返回此Container的给定遍历操作的焦点遍历键集合。 (有关每个键的完整说明,请参阅<code> setFocusTraversalKeys </code>)。
+     * <p>
+     *  如果未为此Container明确定义一组遍历键,则返回此Container的父级Set。
+     * 如果没有为这个Container的任何祖先显式地定义Set,则返回当前KeyboardFocusManager的默认Set。
+     * 
+     * 
      * @param id one of KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS, or
@@ -3180,6 +3789,11 @@ public class Container extends Component {
      * this method returns <code>false</code>, this Container is inheriting the
      * Set from an ancestor, or from the current KeyboardFocusManager.
      *
+     * <p>
+     *  返回是否已为此Container明确定义了给定焦点遍历操作的焦点遍历键集合。
+     * 如果此方法返回<code> false </code>,此Container从祖先继承Set,或从当前KeyboardFocusManager继承Set。
+     * 
+     * 
      * @param id one of KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS, or
@@ -3212,6 +3826,11 @@ public class Container extends Component {
      * ancestor. This method will return <code>true</code> for both such
      * Containers in this case.
      *
+     * <p>
+     *  返回指定的Container是否为此Container的焦点遍历循环的焦点循环根。每个焦点遍历周期仅具有单个焦点周期根,并且不是焦点周期根的每个容器仅属于单个焦点遍历周期。
+     * 是焦点循环根的容器属于两个循环：一个根在容器本身,一个根在容器的最近的焦点循环根祖先。在这种情况下,此方法将为这些容器返回<code> true </code>。
+     * 
+     * 
      * @param container the Container to be tested
      * @return <code>true</code> if the specified Container is a focus-cycle-
      *         root of this Container; <code>false</code> otherwise
@@ -3264,6 +3883,10 @@ public class Container extends Component {
      * Check if this component is the child of this container or its children.
      * Note: this function acquires treeLock
      * Note: this function traverses children tree only in one Window.
+     * <p>
+     *  检查此组件是否为此容器或其子项的子项。注意：此函数获取treeLock注意：此函数仅在一个窗口中遍历子树。
+     * 
+     * 
      * @param comp a component in test, must not be null
      */
     private boolean isParentOf(Component comp) {
@@ -3341,6 +3964,13 @@ public class Container extends Component {
      * remembered, but will not be used or inherited by this or any other
      * Containers until this Container is made a focus cycle root.
      *
+     * <p>
+     * 设置焦点遍历策略,如果此容器是焦点循环根,它将管理此容器的子项的键盘遍历。如果参数为null,则此Container从其focus-cycle-root祖先继承其策略。
+     * 如果参数是非空的,这个策略将被没有自己的键盘遍历策略的所有焦点循环根孩子继承(就像递归一样,它们的焦点循环根孩子)。
+     * <p>
+     *  如果此容器不是焦点循环根,则策略将被记住,但在此容器成为焦点循环根之前不会被此容器或任何其他容器使用或继承。
+     * 
+     * 
      * @param policy the new focus traversal policy for this Container
      * @see #getFocusTraversalPolicy
      * @see #setFocusCycleRoot
@@ -3365,6 +3995,10 @@ public class Container extends Component {
      * Container, then this Container's focus-cycle-root ancestor's policy is
      * returned.
      *
+     * <p>
+     *  返回将管理此Container的子项的键盘遍历的焦点遍历策略,如果此Container不是焦点循环根,则返回null。如果没有为此容器显式设置遍历策略,则返回此容器的焦点循环根祖先的策略。
+     * 
+     * 
      * @return this Container's focus traversal policy, or null if this
      *         Container is not a focus cycle root.
      * @see #setFocusTraversalPolicy
@@ -3396,6 +4030,10 @@ public class Container extends Component {
      * this Container. If this method returns <code>false</code>, this
      * Container will inherit its focus traversal policy from an ancestor.
      *
+     * <p>
+     *  返回是否已为此Container明确设置焦点遍历策略。如果此方法返回<code> false </code>,此Container将从祖先继承其焦点遍历策略。
+     * 
+     * 
      * @return <code>true</code> if the focus traversal policy has been
      *         explicitly set for this Container; <code>false</code> otherwise.
      * @since 1.4
@@ -3418,6 +4056,15 @@ public class Container extends Component {
      * children is to make this Container a
      * <a href="doc-files/FocusSpec.html#FocusTraversalPolicyProviders">focus traversal policy provider</a>.
      *
+     * <p>
+     * 设置此Container是否为焦点遍历循环的根。一旦焦点进入遍历循环,通常不能通过焦点遍历离开它,除非按下一个向上或向下循环键。
+     * 正常遍历仅限于此容器,并且所有此Container的后代不是下级焦点循环根的后代。注意,FocusTraversalPolicy可能会弯曲这些限制。
+     * 例如,ContainerOrderFocusTraversalPolicy支持隐式向下循环遍历。
+     * <p>
+     *  指定此Container的子项的遍历顺序的另一种方法是使此容器成为<a href="doc-files/FocusSpec.html#FocusTraversalPolicyProviders">焦点
+     * 遍历策略提供程序</a>。
+     * 
+     * 
      * @param focusCycleRoot indicates whether this Container is the root of a
      *        focus traversal cycle
      * @see #isFocusCycleRoot()
@@ -3449,6 +4096,12 @@ public class Container extends Component {
      * restrictions, however. For example, ContainerOrderFocusTraversalPolicy
      * supports implicit down-cycle traversal.
      *
+     * <p>
+     *  返回此Container是否为焦点遍历循环的根。一旦焦点进入遍历循环,通常不能通过焦点遍历离开它,除非按下一个向上或向下循环键。
+     * 正常遍历仅限于此容器,并且所有此Container的后代不是下级焦点循环根的后代。注意,FocusTraversalPolicy可能会弯曲这些限制。
+     * 例如,ContainerOrderFocusTraversalPolicy支持隐式向下循环遍历。
+     * 
+     * 
      * @return whether this Container is the root of a focus traversal cycle
      * @see #setFocusCycleRoot
      * @see #setFocusTraversalPolicy
@@ -3465,6 +4118,10 @@ public class Container extends Component {
      * traversal policy. Container with this property as
      * <code>true</code> will be used to acquire focus traversal policy
      * instead of closest focus cycle root ancestor.
+     * <p>
+     *  设置此容器是否将用于提供焦点遍历策略。具有<code> true </code>属性的容器将用于获取焦点遍历策略,而不是最近的焦点循环根祖先。
+     * 
+     * 
      * @param provider indicates whether this container will be used to
      *                provide focus traversal policy
      * @see #setFocusTraversalPolicy
@@ -3491,6 +4148,13 @@ public class Container extends Component {
      * container with this property as true or focus cycle roots then
      * its focus traversal policy will be used instead of focus cycle
      * root's policy.
+     * <p>
+     * 返回此容器是否提供焦点遍历策略。
+     * 如果此属性设置为<code> true </code>,则当键盘焦点管理器搜索焦点遍历策略的容器层次结构时,遇到此容器,在任何其他具有此属性的容器为true或焦点循环根之前,则其焦点遍历策略将而不是焦点
+     * 循环根的策略。
+     * 返回此容器是否提供焦点遍历策略。
+     * 
+     * 
      * @see #setFocusTraversalPolicy
      * @see #getFocusTraversalPolicy
      * @see #setFocusCycleRoot
@@ -3512,6 +4176,10 @@ public class Container extends Component {
      * this Container. If this Container is not a focus cycle root, then no
      * focus traversal operation occurs.
      *
+     * <p>
+     *  将焦点转移到一个焦点遍历周期。如果此容器是焦点循环根,则焦点所有者将设置为此容器的默认组件以进行焦点,并将当前焦点循环根设置为此容器。如果此容器不是焦点循环根,则不会发生焦点遍历操作。
+     * 
+     * 
      * @see       Component#requestFocus()
      * @see       #isFocusCycleRoot
      * @see       #setFocusCycleRoot
@@ -3554,6 +4222,12 @@ public class Container extends Component {
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  设置此容器及其中包含的所有组件的<code> ComponentOrientation </code>属性。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param o the new component orientation of this container and
      *        the components contained within it.
      * @exception NullPointerException if <code>orientation</code> is null.
@@ -3600,6 +4274,21 @@ public class Container extends Component {
      * <p>
      * If listener is null, no exception is thrown and no action is performed.
      *
+     * <p>
+     *  将PropertyChangeListener添加到侦听器列表。侦听器为此类的所有绑定属性注册,包括以下内容：
+     * <ul>
+     * </li> <li>此容器的前景颜色("前景")</li> <li>此容器的前景颜色</li> <li>此容器的FORWARD_TRAVERSAL_KEYS("forwardFocusTraversal
+     * Keys")集</li> <li>此容器的焦点遍历键启用状态("focusTraversalKeysEnabled" </li> </li> </li> </li>此容器的集合为DOWN_CYCLE_T
+     * RAVERSAL_KEYS("downCycleFocusTraversalKeys")</li> </li>此容器的集合为BACKWARD_TRAVERSAL_KEYS("backwardFocusT
+     * raversalKeys" li>此容器的焦点遍历策略("focusTraversalPolicy")。
+     * </li>
+     *  <li>此容器的焦点循环根状态("focusCycleRoot")</li>
+     * </ul>
+     *  请注意,如果此Container继承了绑定属性,则不会触发任何事件以响应继承属性中的更改。
+     * <p>
+     *  如果侦听器为null,则不抛出异常,并且不执行任何操作。
+     * 
+     * 
      * @param    listener  the PropertyChangeListener to be added
      *
      * @see Component#removePropertyChangeListener
@@ -3639,6 +4328,22 @@ public class Container extends Component {
      * <p>
      * If listener is null, no exception is thrown and no action is performed.
      *
+     * <p>
+     *  将PropertyChangeListener添加到特定属性的侦听器列表。指定的属性可以是用户定义的,也可以是以下默认值之一：
+     * <ul>
+     * </li> <li>此容器的前景颜色("前景")</li> <li>此容器的前景颜色</li> <li>此容器的FORWARD_TRAVERSAL_KEYS("forwardFocusTraversal
+     * Keys")集</li> <li>此容器的焦点遍历键启用状态("focusTraversalKeysEnabled" </li> </li> </li> </li>此容器的集合为DOWN_CYCLE_T
+     * RAVERSAL_KEYS("downCycleFocusTraversalKeys")</li> </li>此容器的集合为BACKWARD_TRAVERSAL_KEYS("backwardFocusT
+     * raversalKeys" li>此容器的焦点遍历策略("focusTraversalPolicy")。
+     * </li>
+     *  <li>此容器的焦点循环根状态("focusCycleRoot")</li> <li>此容器的焦点遍历策略提供程序状态("focusTraversalPolicyProvider")</li> <li>
+     *  -policy-provider状态("focusTraversalPolicyProvider")</li>。
+     * </ul>
+     *  请注意,如果此Container继承了绑定属性,则不会触发任何事件以响应继承属性中的更改。
+     * <p>
+     *  如果侦听器为null,则不抛出异常,并且不执行任何操作。
+     * 
+     * 
      * @param propertyName one of the property names listed above
      * @param listener the PropertyChangeListener to be added
      *
@@ -3655,6 +4360,9 @@ public class Container extends Component {
 
     /**
      * Container Serial Data Version.
+     * <p>
+     *  容器串行数据版本。
+     * 
      */
     private int containerSerializedDataVersion = 1;
 
@@ -3670,6 +4378,14 @@ public class Container extends Component {
      *        is Serializable; otherwise, <code>null</code> is written.</li>
      * </ul>
      *
+     * <p>
+     *  将<code> Container </code>序列化为指定的<code> ObjectOutputStream </code>。
+     * <ul>
+     * <li>将默认可序列化字段写入流。</li> <li>将可序列化ContainerListener列表作为可选数据。检测到不可序列化的ContainerListner,并且不尝试将它们序列化。
+     * </li> <li>如果且仅当它是Serializable时,编写此Container的FocusTraversalPolicy;否则,写入<code> null </code>。</li>。
+     * </ul>
+     * 
+     * 
      * @param s the <code>ObjectOutputStream</code> to write
      * @serialData <code>null</code> terminated sequence of 0 or more pairs;
      *   the pair consists of a <code>String</code> and <code>Object</code>;
@@ -3717,6 +4433,14 @@ public class Container extends Component {
      *        as optional data.</li>
      * </ul>
      *
+     * <p>
+     *  将指定的<code> ObjectInputStream </code>中的<code> Container </code>反序列化。
+     * <ul>
+     *  <li>从流中读取默认的可序列化字段。</li> <li>读取可序列化ContainerListener的列表作为可选数据。如果列表为null,则不安装侦听器。
+     * </li> <li>读取此Container的FocusTraversalPolicy(可能为空)作为可选数据。</li>。
+     * </ul>
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      * @serial
      * @see #addContainerListener
@@ -3783,6 +4507,9 @@ public class Container extends Component {
 
     /*
      * --- Accessibility Support ---
+     * <p>
+     *  ---辅助功能
+     * 
      */
 
     /**
@@ -3794,12 +4521,21 @@ public class Container extends Component {
      * The class used to obtain the accessible role for this object,
      * as well as implementing many of the methods in the
      * AccessibleContainer interface.
+     * <p>
+     *  内部类Container用于提供对辅助功能的默认支持。这个类不是直接由应用程序开发人员使用,而是意味着只能由容器开发人员进行子类化。
+     * <p>
+     *  用于获取此对象的可访问角色的类,以及在AccessibleContainer接口中实现许多方法。
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTContainer extends AccessibleAWTComponent {
 
         /**
          * JDK1.3 serialVersionUID
+         * <p>
+         *  JDK1.3 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 5081320404842566097L;
 
@@ -3808,6 +4544,10 @@ public class Container extends Component {
          * of the children of this object implement <code>Accessible</code>,
          * then this method should return the number of children of this object.
          *
+         * <p>
+         *  返回对象中可访问的子项数。如果这个对象的所有子实现<code> Accessible </code>,那么这个方法应该返回这个对象的子数。
+         * 
+         * 
          * @return the number of accessible children in the object
          */
         public int getAccessibleChildrenCount() {
@@ -3817,6 +4557,10 @@ public class Container extends Component {
         /**
          * Returns the nth <code>Accessible</code> child of the object.
          *
+         * <p>
+         *  返回对象的第n个<code> Accessible </code>子对象。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the nth <code>Accessible</code> child of the object
          */
@@ -3828,6 +4572,10 @@ public class Container extends Component {
          * Returns the <code>Accessible</code> child, if one exists,
          * contained at the local coordinate <code>Point</code>.
          *
+         * <p>
+         * 返回包含在本地坐标<code> Point </code>处的<code> Accessible </code>子代(如果存在)。
+         * 
+         * 
          * @param p the point defining the top-left corner of the
          *    <code>Accessible</code>, given in the coordinate space
          *    of the object's parent
@@ -3841,6 +4589,9 @@ public class Container extends Component {
         /**
          * Number of PropertyChangeListener objects registered. It's used
          * to add/remove ContainerListener to track target Container's state.
+         * <p>
+         *  已注册的PropertyChangeListener对象数。它用于添加/删除ContainerListener以跟踪目标容器的状态。
+         * 
          */
         private volatile transient int propertyListenersCount = 0;
 
@@ -3849,6 +4600,10 @@ public class Container extends Component {
         /**
          * Fire <code>PropertyChange</code> listener, if one is registered,
          * when children are added or removed.
+         * <p>
+         *  Fire <code> PropertyChange </code>侦听器(如果已注册),当添加或删除子代时。
+         * 
+         * 
          * @since 1.3
          */
         protected class AccessibleContainerHandler
@@ -3874,6 +4629,10 @@ public class Container extends Component {
         /**
          * Adds a PropertyChangeListener to the listener list.
          *
+         * <p>
+         *  将PropertyChangeListener添加到侦听器列表。
+         * 
+         * 
          * @param listener  the PropertyChangeListener to be added
          */
         public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -3891,6 +4650,10 @@ public class Container extends Component {
          * This removes a PropertyChangeListener that was registered
          * for all properties.
          *
+         * <p>
+         *  从侦听器列表中删除PropertyChangeListener。这将删除为所有属性注册的PropertyChangeListener。
+         * 
+         * 
          * @param listener the PropertyChangeListener to be removed
          */
         public void removePropertyChangeListener(PropertyChangeListener listener) {
@@ -3907,6 +4670,10 @@ public class Container extends Component {
      * coordinate <code>Point</code>, if one exists.  Otherwise
      * returns <code>null</code>.
      *
+     * <p>
+     *  返回包含在本地坐标<code> Point </code>(如果存在)中的<code> Accessible </code>子代。否则返回<code> null </code>。
+     * 
+     * 
      * @param p the point defining the top-left corner of the
      *    <code>Accessible</code>, given in the coordinate space
      *    of the object's parent
@@ -3970,6 +4737,10 @@ public class Container extends Component {
      * of the children of this object implement <code>Accessible</code>,
      * then this method should return the number of children of this object.
      *
+     * <p>
+     *  返回对象中可访问的子项数。如果这个对象的所有子实现<code> Accessible </code>,那么这个方法应该返回这个对象的子数。
+     * 
+     * 
      * @return the number of accessible children in the object
      */
     int getAccessibleChildrenCount() {
@@ -3988,6 +4759,10 @@ public class Container extends Component {
     /**
      * Returns the nth <code>Accessible</code> child of the object.
      *
+     * <p>
+     *  返回对象的第n个<code> Accessible </code>子对象。
+     * 
+     * 
      * @param i zero-based index of child
      * @return the nth <code>Accessible</code> child of the object
      */
@@ -4085,6 +4860,9 @@ public class Container extends Component {
     /*
      * This method is overriden to handle opaque children in non-opaque
      * containers.
+     * <p>
+     *  这个方法被覆盖以处理不透明容器中的不透明孩子。
+     * 
      */
     @Override
     final Region getOpaqueShape() {
@@ -4248,6 +5026,13 @@ public class Container extends Component {
      * automatically. Therefore we care of LW containers' visibility only.
      *
      * This method MUST be invoked under the TreeLock.
+     * <p>
+     *  检查容器及其直接轻量级容器是否可见。
+     * 
+     *  考虑重型容器隐藏或自动显示HW后代。因此,我们关心LW集装箱的可见性。
+     * 
+     *  此方法必须在TreeLock下调用。
+     * 
      */
     final boolean isRecursivelyVisibleUpToHeavyweightContainer() {
         if (!isLightweight()) {
@@ -4395,17 +5180,29 @@ public class Container extends Component {
  * NOTE: the class name is not appropriate anymore, but we cannot change it
  * because we must keep serialization compatibility.
  *
+ * <p>
+ *  类来管理将MouseEvents分派给轻量级后代和SunDropTargetEvents分派给本地容器包含的轻量级和重量级后代。
+ * 
+ * 注意：类名不再适用,但我们不能更改它,因为我们必须保持序列化兼容性。
+ * 
+ * 
  * @author Timothy Prinzing
  */
 class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 5184291520170872969L;
     /*
      * Our own mouse event for when we're dragged over from another hw
      * container
+     * <p>
+     *  当我们从另一个hw容器拖拽时,我们自己的鼠标事件
+     * 
      */
     private static final int  LWD_MOUSE_DRAGGED_OVER = 1500;
 
@@ -4420,6 +5217,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
     /*
      * Clean up any resources allocated when dispatcher was created;
      * should be called from Container.removeNotify
+     * <p>
+     *  清除创建调度程序时分配的任何资源;应该从Container.removeNotify中调用
+     * 
      */
     void dispose() {
         //System.out.println("Disposing lw dispatcher");
@@ -4431,6 +5231,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
 
     /**
      * Enables events to subcomponents.
+     * <p>
+     *  启用事件到子组件。
+     * 
      */
     void enableEvents(long events) {
         eventMask |= events;
@@ -4441,6 +5244,10 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
      * returns whether or not the event was forwarded to a
      * sub-component.
      *
+     * <p>
+     *  如果需要,将事件分派给子组件,并返回事件是否转发到子组件。
+     * 
+     * 
      * @param e the event
      */
     boolean dispatchEvent(AWTEvent e) {
@@ -4450,6 +5257,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
          * Fix for BugTraq Id 4389284.
          * Dispatch SunDropTargetEvents regardless of eventMask value.
          * Do not update cursor on dispatching SunDropTargetEvents.
+         * <p>
+         *  修复BugTraq Id 4389284.调度SunDropTargetEvents而不考虑eventMask值。在分派SunDropTargetEvents时不要更新游标。
+         * 
          */
         if (e instanceof SunDropTargetEvent) {
 
@@ -4473,6 +5283,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
     /* This method effectively returns whether or not a mouse button was down
      * just BEFORE the event happened.  A better method name might be
      * wasAMouseButtonDownBeforeThisEvent().
+     * <p>
+     *  只是事件发生之前。更好的方法名称可能是AMouseButtonDownBeforeThisEvent()。
+     * 
      */
     private boolean isMouseGrab(MouseEvent e) {
         int modifiers = e.getModifiersEx();
@@ -4504,6 +5317,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
      * into the component tree to minimize the overhead of determining
      * where to route the event, since mouse movement events tend to
      * come in large and frequent amounts.
+     * <p>
+     *  此方法尝试将鼠标事件分发到轻量级组件。它试图避免向组件树中进行任何不必要的探测,以最小化确定在何处路由事件的开销,因为鼠标移动事件趋向于以大且频繁的量出现。
+     * 
      */
     private boolean processMouseEvent(MouseEvent e) {
         int id = e.getID();
@@ -4583,6 +5399,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
          * Fix for BugTraq ID 4395290.
          * It is possible that SunDropTargetEvent's Point is outside of the
          * native container bounds. In this case we truncate coordinates.
+         * <p>
+         *  修复BugTraq ID 4395290.可能SunDropTargetEvent的Point在本地容器界限之外。在这种情况下,我们截断坐标。
+         * 
          */
         if (!nativeContainer.contains(x, y)) {
             final Dimension d = nativeContainer.getSize();
@@ -4618,6 +5437,10 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
 
     /*
      * Generates dnd enter/exit events as mouse moves over lw components
+     * <p>
+     *  当鼠标移动到lw组件上时生成dnd输入/退出事件
+     * 
+     * 
      * @param targetOver       Target mouse is over (including native container)
      * @param e                SunDropTarget mouse event in native container
      */
@@ -4641,6 +5464,10 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
 
     /*
      * Generates enter/exit events as mouse moves over lw components
+     * <p>
+     *  当鼠标移动到lw组件上时生成进入/退出事件
+     * 
+     * 
      * @param targetOver        Target mouse is over (including native container)
      * @param e                 Mouse event in native container
      */
@@ -4697,6 +5524,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
      * Listens to global mouse drag events so even drags originating
      * from other heavyweight containers will generate enter/exit
      * events in this container
+     * <p>
+     *  监听全局鼠标拖动事件,所以即使来自其他重量级容器的拖动也会在此容器中生成进入/退出事件
+     * 
      */
     private void startListeningForOtherDrags() {
         //System.out.println("Adding AWTEventListener");
@@ -4729,6 +5559,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
      * (Implementation of AWTEventListener)
      * Listen for drag events posted in other hw components so we can
      * track enter/exit regardless of where a drag originated
+     * <p>
+     * (AWTEventListener的实现)监听在其他hw组件中发布的拖动事件,这样我们可以跟踪进入/退出,而不管拖动起始位置
+     * 
      */
     public void eventDispatched(AWTEvent e) {
         boolean isForeignDrag = (e instanceof MouseEvent) &&
@@ -4827,6 +5660,9 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
      * coordinates of the event are translated to those of the target.
      * If the target has been removed, we don't bother to send the
      * message.
+     * <p>
+     *  使用给定事件(发送到窗口化主机)作为srcEvent将鼠标事件发送到当前鼠标事件收件人。如果鼠标事件目标仍在组件树中,则事件的坐标将转换为目标的坐标。如果目标已被删除,我们不打扰发送消息。
+     * 
      */
     void retargetMouseEvent(Component target, int id, MouseEvent e) {
         if (target == null) {
@@ -4912,11 +5748,17 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
     /**
      * The windowed container that might be hosting events for
      * subcomponents.
+     * <p>
+     *  可以托管子组件的事件的窗口容器。
+     * 
      */
     private Container nativeContainer;
 
     /**
      * This variable is not used, but kept for serialization compatibility
+     * <p>
+     *  此变量未使用,但保留序列化兼容性
+     * 
      */
     private Component focus;
 
@@ -4925,36 +5767,57 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
      * component that has events being forwarded to it.  If this
      * is null, there are currently no events being forwarded to
      * a subcomponent.
+     * <p>
+     *  当前子组件由此窗口化组件托管,其中事件已转发给它。如果此值为null,则当前没有事件转发到子组件。
+     * 
      */
     private transient Component mouseEventTarget;
 
     /**
      * The last component entered by the {@code MouseEvent}.
+     * <p>
+     *  {@code MouseEvent}输入的最后一个组件。
+     * 
      */
     private transient Component targetLastEntered;
 
     /**
      * The last component entered by the {@code SunDropTargetEvent}.
+     * <p>
+     *  {@code SunDropTargetEvent}输入的最后一个组件。
+     * 
      */
     private transient Component targetLastEnteredDT;
 
     /**
      * Indicates whether {@code mouseEventTarget} was removed and nulled
+     * <p>
+     *  指示{@code mouseEventTarget}是否已删除并清空
+     * 
      */
     private transient boolean isCleaned;
 
     /**
      * Is the mouse over the native container.
+     * <p>
+     *  是鼠标在本机容器上。
+     * 
      */
     private transient boolean isMouseInNativeContainer = false;
 
     /**
      * Is DnD over the native container.
+     * <p>
+     *  是DnD超过本机容器。
+     * 
      */
     private transient boolean isMouseDTInNativeContainer = false;
 
     /**
      * This variable is not used, but kept for serialization compatibility
+     * <p>
+     *  此变量未使用,但保留序列化兼容性
+     * 
      */
     private Cursor nativeCursor;
 
@@ -4964,12 +5827,17 @@ class LightweightDispatcher implements java.io.Serializable, AWTEventListener {
      * events.  This separate mask indicates events that have been
      * requested by contained lightweight components without effecting
      * the mask of the windowed component itself.
+     * <p>
+     *  包含轻量级组件的事件掩码。轻量级组件需要一个窗口容器来托管与窗口相关的事件。此单独的掩码指示已被包含的轻量组件请求的事件,而不影响加窗组件本身的掩码。
+     * 
      */
     private long eventMask;
 
     /**
      * The kind of events routed to lightweight components from windowed
      * hosts.
+     * <p>
+     * 从窗口式主机路由到轻型组件的事件类型。
      */
     private static final long PROXY_EVENT_MASK =
         AWTEvent.FOCUS_EVENT_MASK |

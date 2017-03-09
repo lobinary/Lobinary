@@ -23,11 +23,11 @@ public class GTU {
 
 	private final static Logger log = LoggerFactory.getLogger(GTU.class);
 	
-	private static boolean 秘钥加载完毕 = true;
+	private static boolean 秘钥加载完毕 = false;
 	private static long a = 4217964721L;
 	private static long b = -3320670651L;
 	private static int r = 413550;
-	private static int 每次翻译的长度 = 1600;
+	public static int 每次翻译的长度 = 1500;
 	private static Invocable invocable;
 	static {
 		try {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ObjectFactory.java,v 1.2.4.1 2005/09/15 02:39:54 jeffsuttor Exp $
+ * <p>
+ *  $ Id：ObjectFactory.java,v 1.2.4.1 2005/09/15 02:39:54 jeffsuttor Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.utils;
@@ -32,6 +45,12 @@ package com.sun.org.apache.xalan.internal.utils;
  * class and modified to be used as a general utility for creating objects
  * dynamically.
  *
+ * <p>
+ *  这个类被复制到每个JAXP子包,所以保持同步。它是包私有的,因此不作为JAXP API的一部分公开。
+ * <p>
+ *  此类从<code> javax.xml.parsers.ObjectFactory </code>类中移除,并修改为用作动态创建对象的通用实用程序。
+ * 
+ * 
  * @version $Id: ObjectFactory.java,v 1.11 2010-11-01 04:34:25 joehw Exp $
  */
 public class ObjectFactory {
@@ -56,6 +75,9 @@ public class ObjectFactory {
     /**
      * Figure out which ClassLoader to use.  For JDK 1.2 and later use
      * the context ClassLoader.
+     * <p>
+     *  确定使用哪个ClassLoader。对于JDK 1.2和更高版本,使用上下文ClassLoader。
+     * 
      */
     public static ClassLoader findClassLoader()
     {
@@ -118,6 +140,9 @@ public class ObjectFactory {
     /**
      * Create an instance of a class using the same class loader for the ObjectFactory by default
      * or boot class loader when Security Manager is in place
+     * <p>
+     *  在安全管理器就位时,使用默认的ObjectFactory或引导类加载器使用相同的类加载器创建类的实例
+     * 
      */
     public static Object newInstance(String className, boolean doFallback)
         throws ConfigurationError
@@ -132,6 +157,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of a class using the specified ClassLoader
+     * <p>
+     *  使用指定的ClassLoader创建类的实例
+     * 
      */
     static Object newInstance(String className, ClassLoader cl,
                                       boolean doFallback)
@@ -157,6 +185,9 @@ public class ObjectFactory {
     /**
      * Find a Class using the same class loader for the ObjectFactory by default
      * or boot class loader when Security Manager is in place
+     * <p>
+     * 当安全管理器到位时,默认情况下使用相同的类加载器为ObjectFactory或引导类加载器查找类
+     * 
      */
     public static Class<?> findProviderClass(String className, boolean doFallback)
         throws ClassNotFoundException, ConfigurationError
@@ -167,6 +198,8 @@ public class ObjectFactory {
 
     /**
      * Find a Class using the specified ClassLoader
+     * <p>
+     *  使用指定的ClassLoader查找类
      */
     private static Class<?> findProviderClass(String className, ClassLoader cl,
                                            boolean doFallback)

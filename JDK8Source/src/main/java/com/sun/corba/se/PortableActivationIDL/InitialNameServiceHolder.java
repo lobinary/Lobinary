@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 /**
@@ -10,6 +11,8 @@ package com.sun.corba.se.PortableActivationIDL;
 
 /** Interface used to support binding references in the bootstrap name
     * service.
+    * <p>
+    * 
     */
 public final class InitialNameServiceHolder implements org.omg.CORBA.portable.Streamable
 {

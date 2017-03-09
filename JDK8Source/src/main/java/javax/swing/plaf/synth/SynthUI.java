@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import javax.swing.JComponent;
 /**
  * SynthUI is used to fetch the SynthContext for a particular Component.
  *
+ * <p>
+ *  SynthUI用于获取特定组件的SynthContext。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.7
  */
@@ -38,6 +43,10 @@ public interface SynthUI extends SynthConstants {
     /**
      * Returns the Context for the specified component.
      *
+     * <p>
+     *  返回指定组件的上下文。
+     * 
+     * 
      * @param c Component requesting SynthContext.
      * @return SynthContext describing component.
      */
@@ -46,6 +55,9 @@ public interface SynthUI extends SynthConstants {
     /**
      * Paints the border.
      *
+     * <p>
+     *  画边框。
+     * 
      * @param context a component context
      * @param g {@code Graphics} to paint on
      * @param x the X coordinate

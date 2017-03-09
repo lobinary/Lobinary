@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -98,6 +99,33 @@ import java.net.*;
  * \n, \r or \r\n, which ever is encountered the most in parsing the
  * stream.
  *
+ * <p>
+ *  HTML文档的解析器(实际上,你可以指定一个DTD,但你应该真的只使用这个类与html dtd在swing)。读取HTML的InputStream并调用ParserCallback类中的相应方法。
+ * 这是HTMLEditorKit用来解析HTML网址的默认解析器。 <p>这会回覆所有有效标记的回呼,以及隐含但未明确指定的标记。
+ * 例如,html字符串(&lt; p&gt; blah)仅具有定义的p标签。
+ * 回调将看到以下方法：<ol> <li> <i> handleStartTag(html,...)</i> </li> <li> <i> handleStartTag(head,...)</i > </li>
+ *  <li> </li> handleEndTag(head)</i> </li> <li> <i> handleStartTag(body,...) > handleStartTag(p,...)</li>
+ *  </li> <li> </li> > </li> </li> handleEndTag(html)</li> </li>。
+ * 例如,html字符串(&lt; p&gt; blah)仅具有定义的p标签。
+ * </ol>
+ * <i> italic </i>中的项目是隐含的,也就是说,虽然它们没有明确指定,但是它们应该是正确的html(head不是必需的,但它仍然是生成的)。
+ * 对于隐含的标签,AttributeSet参数对于键<code> HTMLEditorKit.ParserCallback.IMPLIED </code>的值为<code> Boolean.TRUE </code>
+ * 。
+ * <i> italic </i>中的项目是隐含的,也就是说,虽然它们没有明确指定,但是它们应该是正确的html(head不是必需的,但它仍然是生成的)。
+ *  <p> HTML.Attributes定义了html属性的类型安全枚举。如果在HTML.Attribute中定义了标签的属性键,则HTML.Attribute将用作键,否则将使用String。
+ * 例如&lt; p foo = bar class = neat&gt;有两个属性。
+ *  foo不是在HTML.Attribute中定义的,因为在类中,AttributeSet将有两个值,HTML.Attribute.CLASS的String值为'neat',String键'foo'的St
+ * ring值为'酒吧'。
+ * 例如&lt; p foo = bar class = neat&gt;有两个属性。 <p> position参数将指示标记,注释或文本的开始。
+ * 与数组类似,流中的第一个字符的位置为0.对于隐含的标记,位置将指示下一个遇到的标记的位置。
+ * 在第一个例子中,隐含的开始体和html标签将具有与p标签相同的位置,隐含的结束p,html和body标签都将具有相同的位置。
+ *  <p>当html跳过空格时,文本的位置将是第一个有效字符的位置,例如在字符串'\ n \ n \ nblah'中,文本'blah'的位置为3,跳过新行。
+ * <p>
+ * 对于没有值的属性,例如在html字符串<code>&lt; foo blah&gt; </code>中,属性<code> blah </code>没有值,有两个可能的值放置在AttributeSet的值
+ * 中：。
+ * <ul>
+ *  <li>如果DTD不包含元素的定义,或者定义没有显式值,那么AttributeSet中的值将为<code> HTML.NULL_ATTRIBUTE_VALUE </code>。
+ * 
  * @author      Sunita Mani
  */
 public class DocumentParser extends javax.swing.text.html.parser.Parser {
@@ -126,6 +154,14 @@ public class DocumentParser extends javax.swing.text.html.parser.Parser {
 
     /**
      * Handle Start Tag.
+     * <p>
+     *  <li>如果DTD包含显式值,如：<code>&lt;！ATTLIST OPTION selected(selected)#IMPLIED&gt; </code>将使用来自dtd(在本例中为选中)的值
+     * 。
+     *  <li>如果DTD不包含元素的定义,或者定义没有显式值,那么AttributeSet中的值将为<code> HTML.NULL_ATTRIBUTE_VALUE </code>。
+     * </ul>
+     * <p>
+     *  一旦流已经被解析,回调被通知最可能的行结束字符串。行结束字符串将是\ n,\ r或\ r \ n之一,在解析流时遇到最多。
+     * 
      */
     protected void handleStartTag(TagElement tag) {
 
@@ -174,6 +210,9 @@ public class DocumentParser extends javax.swing.text.html.parser.Parser {
 
     /**
      * Handle Empty Tag.
+     * <p>
+     *  处理开始标签。
+     * 
      */
     protected void handleEmptyTag(TagElement tag) throws ChangedCharSetException {
 
@@ -219,6 +258,9 @@ public class DocumentParser extends javax.swing.text.html.parser.Parser {
 
     /**
      * Handle End Tag.
+     * <p>
+     *  处理空标签。
+     * 
      */
     protected void handleEndTag(TagElement tag) {
         Element elem = tag.getElement();
@@ -243,6 +285,9 @@ public class DocumentParser extends javax.swing.text.html.parser.Parser {
 
     /**
      * Handle Text.
+     * <p>
+     *  句柄结束标签。
+     * 
      */
     protected void handleText(char data[]) {
         if (data != null) {
@@ -262,6 +307,9 @@ public class DocumentParser extends javax.swing.text.html.parser.Parser {
 
     /*
      * Error handling.
+     * <p>
+     *  处理文本。
+     * 
      */
     protected void handleError(int ln, String errorMsg) {
         if (debugFlag) {
@@ -274,6 +322,9 @@ public class DocumentParser extends javax.swing.text.html.parser.Parser {
 
     /*
      * debug messages
+     * <p>
+     *  错误处理。
+     * 
      */
     private void debug(String msg) {
         System.out.println(msg);

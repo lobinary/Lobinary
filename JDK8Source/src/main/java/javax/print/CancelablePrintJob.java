@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,15 @@ package javax.print;
  * implementation of this method may be made from a separate client thread
  * than that which made the print request.  Thus the implementation of
  * this interface must be made thread safe.
+ * <p>
+ *  此接口由打印应用程序使用以取消打印作业。此界面扩展{@link DocPrintJob}。从打印服务返回的<code> DocPrintJob </code>实现实现此接口,如果可以取消打印作业。
+ * 在尝试取消打印作业之前,客户端需要测试从打印服务返回的<code> DocPrintJob </code>对象是否实际实现了此接口。
+ * 客户端不应该假设<code> DocPrintJob </code>实现此接口。打印服务可能仅支持取消某些类型的打印数据和表示类名称。
+ * 这意味着只有从服务返回的一些<code> DocPrintJob </code>对象将实现此接口。
+ * <p>
+ *  鼓励服务实现者实现此可选接口,并且如果使用此接口的实现成功取消作业,则向任何侦听器传递javax.print.event.PrintJobEvent.JOB_CANCELLED事件。
+ * 服务还应该注意,该方法的实现可以从与发出打印请求的客户机线程不同的客户机线程来进行。因此这个接口的实现必须使线程安全。
+ * 
  */
 
 public interface CancelablePrintJob extends DocPrintJob {
@@ -70,6 +80,12 @@ public interface CancelablePrintJob extends DocPrintJob {
      * requests to a server and processing of its print queue. Clients
      * may wish to execute cancel in a thread which does not affect
      * application execution.
+     * <p>
+     *  停止打印作业的进一步处理。
+     * <p>
+     * 如果服务支持此方法,则不能断定作业取消将总是成功。作业可能无法在其处理中达到并通过某个点后被取消。成功取消仅意味着整个作业不被打印,当取消返回时,某些部分可能已经打印。
+     * <p>
+     * 
      * @throws PrintException if the job could not be successfully cancelled.
      */
     public void cancel() throws PrintException;

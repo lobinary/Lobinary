@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996,1997  - 保留所有权利(C)版权所有IBM Corp. 1996-1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.text;
@@ -59,6 +66,15 @@ import sun.text.normalizer.NormalizerImpl;
  * This class isn't just an inner class of RBCollationTables itself because
  * of its large size.  For source-code readability, it seemed better for the
  * builder to have its own source file.
+ * <p>
+ * 此类包含解析RuleBasedCollat​​or模式并从中构建RBCollat​​ionTables对象的所有代码。
+ *  tis类的特定实例仅在实际构建过程中存在 - 一旦构建了RBCollat​​ionTables对象,RBTableBuilder对象就会消失。
+ * 这个对象携带所有只在构建过程中需要的状态,以及将进入表对象本身的所有状态的"阴影"副本。
+ * 此对象通过单独的类RBCollat​​ionTables.BuildAPI与RBCollat​​ionTables进行通信,这是RBCollat​​ionTables的内部类,并提供了一个单独的专用AP
+ * I用于与RBTableBuilder通信。
+ * 这个对象携带所有只在构建过程中需要的状态,以及将进入表对象本身的所有状态的"阴影"副本。这个类不仅仅是RBCollat​​ionTables本身的内部类,因为它的大小。
+ * 为了源代码的可读性,似乎更好的是构建器有自己的源文件。
+ * 
  */
 final class RBTableBuilder {
 
@@ -71,6 +87,10 @@ final class RBTableBuilder {
      * This is the main function that actually builds the tables and
      * stores them back in the RBCollationTables object.  It is called
      * ONLY by the RBCollationTables constructor.
+     * <p>
+     *  使用给定的规则创建基于表的排序规则对象。这是实际构建表并将它们存回RBCollat​​ionTables对象的主函数。它只由RBCollat​​ionTables构造函数调用。
+     * 
+     * 
      * @see RuleBasedCollator#RuleBasedCollator
      * @exception ParseException If the rules format is incorrect.
      */
@@ -167,6 +187,9 @@ final class RBTableBuilder {
                 System.out.println("index=" + Integer.toString(j, 16)
                            + ", value=" + Integer.toString(value, 16));
         }
+        /* <p>
+        /*  System.out.println("mappingSize ="+ mapping.getKSize()); for(int j = 0; j <0xffff; j ++){int value = mapping.elementAt(j); if(value！= RBCollat​​ionTables.UNMAPPED)System.out.println("index ="+ Integer.toString(j,16)+",value ="+ Integer.toString(value,16) }}。
+        /* 
         */
         tables.fillInTables(frenchSec, seAsianSwapping, mapping, contractTable, expandTable,
                     contractFlags, maxSecOrder, maxTerOrder);
@@ -174,6 +197,9 @@ final class RBTableBuilder {
 
     /** Add expanding entries for pre-composed unicode characters so that this
      * collator can be used reasonably well with decomposition turned off.
+     * <p>
+     *  collat​​or可以合理地使用分解关闭。
+     * 
      */
     private void addComposedChars() throws ParseException {
         // Iterate through all of the pre-composed characters in Unicode
@@ -258,6 +284,12 @@ final class RBTableBuilder {
      * that character to see what its real collation order is and
      * stick that into the expansion table.  That lets us avoid doing
      * a two-stage lookup later.
+     * <p>
+     *  在展开的字符表中查找未映射的值。
+     * 
+     * 当扩展字符表由addExpandOrder构建时,它不知道扩展中每个字符的最终排序是什么。相反,它只是将原始字符代码放入表中,将CHARINDEX添加为标志。
+     * 现在我们已经完成了映射表的构建,我们可以回去查找该字符来查看它的实际排序顺序,并将其粘贴到扩展表中。这使我们避免以后进行两阶段查找。
+     * 
      */
     private final void commit()
     {
@@ -287,6 +319,9 @@ final class RBTableBuilder {
     }
     /**
      *  Increment of the last order based on the comparison level.
+     * <p>
+     *  基于比较级别增加最后一个订单。
+     * 
      */
     private final int increment(int aStrength, int lastValue)
     {
@@ -319,6 +354,9 @@ final class RBTableBuilder {
 
     /**
      *  Adds a character and its designated order into the collation table.
+     * <p>
+     *  将字符及其指定的顺序添加到排序规则表中。
+     * 
      */
     private final void addOrder(int ch, int anOrder)
     {
@@ -349,6 +387,9 @@ final class RBTableBuilder {
 
     /**
      *  Adds the contracting string into the collation table.
+     * <p>
+     *  将合同字符串添加到排序规则表中。
+     * 
      */
     private final void addContractOrder(String groupChars, int anOrder,
                                           boolean fwd)
@@ -363,6 +404,10 @@ final class RBTableBuilder {
         char ch0 = groupChars.charAt(0);
         int ch = Character.isHighSurrogate(ch0)?
           Character.toCodePoint(ch0, groupChars.charAt(1)):ch0;
+        /* <p>
+        /*  char ch0 = groupChars.charAt(0); int ch = Character.isHighSurrogate(ch0)? Character.toCodePoint(ch0,
+        /* groupChars.charAt(1))：ch0;。
+        /* 
           */
         // See if the initial character of the string already has a contract table.
         int entry = mapping.elementAt(ch);
@@ -415,6 +460,9 @@ final class RBTableBuilder {
      * If the given string has been specified as a contracting string
      * in this collation table, return its ordering.
      * Otherwise return UNMAPPED.
+     * <p>
+     *  如果给定字符串已在此归类表中指定为合同字符串,则返回其排序。否则返回UNMAPPED。
+     * 
      */
     private int getContractOrder(String groupChars)
     {
@@ -425,6 +473,10 @@ final class RBTableBuilder {
             char ch0 = groupChars.charAt(0);
             int ch = Character.isHighSurrogate(ch0)?
               Character.toCodePoint(ch0, groupChars.charAt(1)):ch0;
+            /* <p>
+            /*  char ch0 = groupChars.charAt(0); int ch = Character.isHighSurrogate(ch0)? Character.toCodePoint(ch0,
+            /* groupChars.charAt(1))：ch0;。
+            /* 
               */
             Vector<EntryPair> entryTable = getContractValues(ch);
             if (entryTable != null) {
@@ -452,6 +504,10 @@ final class RBTableBuilder {
     /**
      *  Get the entry of hash table of the contracting string in the collation
      *  table.
+     * <p>
+     *  在排序规则表中获取合同字符串的哈希表的条目。
+     * 
+     * 
      *  @param ch the starting character of the contracting string
      */
     private Vector<EntryPair> getContractValues(int ch)
@@ -474,6 +530,9 @@ final class RBTableBuilder {
 
     /**
      *  Adds the expanding string into the collation table.
+     * <p>
+     *  将扩展字符串添加到排序规则表中。
+     * 
      */
     private final void addExpandOrder(String contractChars,
                                 String expandChars,
@@ -510,6 +569,8 @@ final class RBTableBuilder {
      * Create a new entry in the expansion table that contains the orderings
      * for the given characers.  If anOrder is valid, it is added to the
      * beginning of the expanded list of orders.
+     * <p>
+     *  在扩展表中创建一个新条目,其中包含给定字符集的排序。如果anOrder有效,它将被添加到扩展订单列表的开头。
      */
     private int addExpansion(int anOrder, String expandChars) {
         if (expandTable == null) {

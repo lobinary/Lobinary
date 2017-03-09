@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,16 @@ import javax.print.attribute.PrintRequestAttribute;
  * <P>
  * <B>IPP Compatibility:</B> This is not an IPP attribute.
  * <P>
+ * <p>
+ *  类DialogTypeSelection是一个打印属性类,枚举,指示用于指定打印选项的用户对话框类型。如果指定了{@code NATIVE},那么在可用的情况下,将显示本机平台对话框。
+ * 如果指定了{@code COMMON},将显示跨平台打印对话框。
+ * 
+ *  指定用于IPP属性集的本地对话框的此选项提供了将用户对设置和选项更改反映回调用应用程序的标准方法,并将本机对话框集成到Java打印API中。
+ * 但请注意,原生对话框中的某些选项和设置可能不一定映射到IPP属性,因为它们可能是非标准平台,甚至是特定于打印机的选项。
+ * <P>
+ *  <B> IPP兼容性：</B>这不是IPP属性。
+ * <P>
+ * 
  * @since 1.7
  *
  */
@@ -56,12 +67,14 @@ public final class DialogTypeSelection extends EnumSyntax
 
     /**
      *
+     * <p>
      */
     public static final DialogTypeSelection
         NATIVE = new DialogTypeSelection(0);
 
     /**
      *
+     * <p>
      */
     public static final DialogTypeSelection
         COMMON = new DialogTypeSelection(1);
@@ -70,6 +83,10 @@ public final class DialogTypeSelection extends EnumSyntax
      * Construct a new dialog type selection enumeration value with the
      * given integer value.
      *
+     * <p>
+     *  使用给定的整数值构造新的对话框类型选择枚举值。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected DialogTypeSelection(int value) {
@@ -87,6 +104,9 @@ public final class DialogTypeSelection extends EnumSyntax
 
     /**
      * Returns the string table for class DialogTypeSelection.
+     * <p>
+     *  返回类DialogTypeSelection的字符串表。
+     * 
      */
     protected String[] getStringTable() {
         return myStringTable;
@@ -94,6 +114,9 @@ public final class DialogTypeSelection extends EnumSyntax
 
     /**
      * Returns the enumeration value table for class DialogTypeSelection.
+     * <p>
+     *  返回类DialogTypeSelection的枚举值表。
+     * 
      */
     protected EnumSyntax[] getEnumValueTable() {
         return myEnumValueTable;
@@ -107,6 +130,12 @@ public final class DialogTypeSelection extends EnumSyntax
      * For class DialogTypeSelection the category is class
      * DialogTypeSelection itself.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于类DialogTypeSelection类别是类DialogTypeSelection本身。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -122,6 +151,10 @@ public final class DialogTypeSelection extends EnumSyntax
      * For class DialogTypeSelection the category name is
      * <CODE>"dialog-type-selection"</CODE>.
      *
+     * <p>
+     *  获取此属性值为实例的类别的名称。
+     * <P>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

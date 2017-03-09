@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,12 @@ package java.util.function;
  * <p>This is a <a href="package-summary.html">functional interface</a>
  * whose functional method is {@link #applyAsInt(double)}.
  *
+ * <p>
+ *  表示接受双值参数并生成一个int值结果的函数。这是{@link Function}的{@code double} -to  -  {@ code int}基本特化。
+ * 
+ *  <p>这是<a href="package-summary.html">功能介面</a>,其功能方法为{@link #applyAsInt(double)}。
+ * 
+ * 
  * @see Function
  * @since 1.8
  */
@@ -41,6 +48,8 @@ public interface DoubleToIntFunction {
     /**
      * Applies this function to the given argument.
      *
+     * <p>
+     * 
      * @param value the function argument
      * @return the function result
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -200,6 +201,95 @@ import static javax.swing.SwingConstants.VERTICAL;
  *       use the create methods of {@code GroupLayout}.
  * </ul>
  *
+ * <p>
+ *  {@code GroupLayout}是一个{@code LayoutManager},对分组进行分层分组,以便将它们放置在{@code Container}中。
+ *  {@code GroupLayout}适用于构建者使用,但也可以手动编码。分组由{@link Group Group}类的实例完成。 {@code GroupLayout}支持两种类型的组。
+ * 顺序组按顺序依次对其子元素进行定位。并行组以四种方式之一对齐其子元素。
+ * <p>
+ *  每个组可以包含任意数量的元素,其中元素是{@code Group},{@code Component}或gap。间隙可以被认为是具有最小,优选和最大尺寸的不可见组件。
+ * 此外,{@code GroupLayout}支持首选间隔,其值来自{@code LayoutStyle}。
+ * <p>
+ * 元素类似于弹簧。每个元素具有由最小值,优选值和最大值指定的范围。间隙具有开发人员指定的范围,或由{@code LayoutStyle}确定的范围。
+ *  {@code Component}的范围由{@code Component}的{@code getMinimumSize},{@code getPreferredSize}和{@code getMaximumSize}
+ * 方法确定。
+ * 元素类似于弹簧。每个元素具有由最小值,优选值和最大值指定的范围。间隙具有开发人员指定的范围,或由{@code LayoutStyle}确定的范围。
+ * 此外,当添加{@code Component}时,您可以指定要使用的特定范围,而不是组件中的范围。 {@code Group}的范围由组的类型决定。
+ *  {@code ParallelGroup}的范围是其元素范围的最大值。 {@code SequentialGroup}的范围是其元素范围的总和。
+ * <p>
+ *  {@code GroupLayout}单独处理每个轴。也就是说,存在表示水平轴的组和表示垂直轴的组。水平组负责确定沿水平轴的最小,优选和最大尺寸,以及设置其中包含的分量的x和宽度。
+ * 垂直组负责确定沿着垂直轴的最小,优选和最大尺寸,以及设置其中包含的分量的y和高度。
+ * 每个{@code Component}必须同时存在于水平和垂直组中,否则在布局期间或在请求最小,首选或最大大小时会抛出{@code IllegalStateException}。
+ * <p>
+ * 下图显示了沿水平轴的顺序组。顺序组包含三个组件。沿着垂直轴使用平行组。
+ * <p style="text-align:center">
+ * <img src="doc-files/groupLayout.1.gif" alt="Sequential group along the horizontal axis in three components">
+ * <p>
+ *  为了强化每个轴被独立地处理,该图示出了沿着每个轴的每个组和元素的范围。每个分量的范围已经投影到轴上,并且分组以蓝色(水平)和红色(垂直)呈现。为了可读性,在顺序组中的每个元素之间存在间隙。
+ * <p>
+ *  沿着水平轴的顺序组被呈现为纯蓝色线。请注意,序列组是其包含的子元素的总和。
+ * <p>
+ *  沿着垂直轴,平行组是每个部件的高度的最大值。由于所有三个部件具有相同的高度,平行组具有相同的高度。
+ * <p>
+ *  下图显示相同的三个组件,但并行组沿水平轴,顺序组沿垂直轴。
+ * 
+ * <p style="text-align:center">
+ * <img src="doc-files/groupLayout.2.gif" alt="Sequential group along the vertical axis in three components">
+ * <p>
+ * 由于{@code c1}是三个组件中最大的,因此并行组的大小为{@code c1}。
+ * 由于{@code c2}和{@code c3}小于{@code c1},因此会根据为组件指定的对齐方式(如果指定)或并行组的默认对齐方式进行对齐。
+ * 在图表中,{@code c2}和{@code c3}的对齐方式为{@code LEADING}。如果组件方向是从右到左,则{@code c2}和{@code c3}将位于相反的一侧。
+ * <p>
+ *  下图显示了沿水平轴和垂直轴的顺序组。
+ * <p style="text-align:center">
+ * <img src="doc-files/groupLayout.3.gif" alt="Sequential group along both the horizontal and vertical axis in three components">
+ * <p>
+ *  {@code GroupLayout}提供了在{@code Component}之间插入间隙的能力。间隙的大小由{@code LayoutStyle}的实例确定。
+ * 这可以使用{@code setAutoCreateGaps}方法打开。同样,您可以使用{@code setAutoCreateContainerGaps}方法在接触父容器和容器边缘的组件之间插入间隙。
+ * <p>
+ *  以下内容构建了一个面板,其中包含一列中的两个标签,后面是下一列中的两个文本字段：
+ * <pre>
+ *  JComponent panel = ...; GroupLayout layout = new GroupLayout(panel); panel.setLayout(layout);
+ * 
+ *  //打开自动添加组件之间的间隙layout.setAutoCreateGaps(true);
+ * 
+ *  //打开会自动在触摸容器边缘和容器的组件之间创建间隙。 layout.setAutoCreateContainerGaps(true);
+ * 
+ *  //为水平轴创建顺序组。
+ * 
+ * GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
+ * 
+ *  //顺序组又包含两个并行组。 //一个并行组包含标签,另一个并行组包含文本字段。 //将标签放在水平轴的平行组中//将它们定位在同一个x位置。 // //变量缩进用于加强分组的级别。
+ *  hGroup.addGroup(layout.createParallelGroup()。
+ * addComponent(label1).addComponent(label2)); hGroup.addGroup(layout.createParallelGroup()。
+ * addComponent(tf1).addComponent(tf2)); layout.setHorizo​​ntalGroup(hGroup);。
+ * 
+ *  //为垂直轴创建顺序组。 GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
+ * 
+ *  //顺序组包含两个平行组,用于沿着基线对齐//内容。第一个并行组包含//第一个标签和文本字段,第二个并行组包含//第二个标签和文本字段。通过使用顺序组//标签和文本字段相互垂直放置。
+ *  vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE)。
+ * addComponent(label1).addComponent(tf1)); vGroup.addGroup(layout.createParallelGroup(Alignment.BASELIN
+ * E)。
+ *  vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE)。
+ * addComponent(label2).addComponent(tf2)); layout.setVerticalGroup(vGroup);。
+ * </pre>
+ * <p>
+ *  运行时生成以下内容。
+ * <p style="text-align:center">
+ * <img src="doc-files/groupLayout.example.png" alt="Produced horizontal/vertical form">
+ * <p>
+ * 此布局包括以下内容。 <ul> <li>横轴由包含两个平行组的顺序组组成。第一个并行组包含标签,第二个并行组包含文本字段。 <li>纵轴由包含两个平行组的顺序组组成。并行组配置为沿着基线对齐其组件。
+ * 第一并行组包含第一标签和第一文本字段,并且第二组包括第二标签和第二文本字段。
+ * </ul>
+ *  在这段代码中有几个要注意的事情：
+ * <ul>
+ *  <li>您无需将组件显式添加到容器;这是通过使用{@code Group}的{@code add}方法之一间接完成的。 <li>各种{@code add}方法返回调用者。这允许容易地链接调用。
+ * 例如,{@code group.addComponent(label1).addComponent(label2);}等价于{@code group.addComponent(label1); group.addComponent(label2);}
+ * 。
+ *  <li>您无需将组件显式添加到容器;这是通过使用{@code Group}的{@code add}方法之一间接完成的。 <li>各种{@code add}方法返回调用者。这允许容易地链接调用。
+ *  <li> {@code Group}没有公共建构函式;而是使用{@code GroupLayout}的create方法。
+ * </ul>
+ * 
+ * 
  * @author Tomas Pavek
  * @author Jan Stola
  * @author Scott Violet
@@ -222,6 +312,10 @@ public class GroupLayout implements LayoutManager2 {
      * Indicates the size from the component or gap should be used for a
      * particular range value.
      *
+     * <p>
+     *  指示来自组件或间隙的大小应用于特定范围值。
+     * 
+     * 
      * @see Group
      */
     public static final int DEFAULT_SIZE = -1;
@@ -230,6 +324,10 @@ public class GroupLayout implements LayoutManager2 {
      * Indicates the preferred size from the component or gap should
      * be used for a particular range value.
      *
+     * <p>
+     *  指示来自组件或间隙的首选大小应用于特定范围值。
+     * 
+     * 
      * @see Group
      */
     public static final int PREFERRED_SIZE = -2;
@@ -246,12 +344,18 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Group responsible for layout along the horizontal axis.  This is NOT
      * the user specified group, use getHorizontalGroup to dig that out.
+     * <p>
+     *  负责沿水平轴布置的组。这不是用户指定的组,使用getHorizo​​ntalGroup来挖掘它。
+     * 
      */
     private Group horizontalGroup;
 
     /**
      * Group responsible for layout along the vertical axis.  This is NOT
      * the user specified group, use getVerticalGroup to dig that out.
+     * <p>
+     * 负责沿垂直轴布置的组。这不是用户指定的组,请使用getVerticalGroup来挖掘它。
+     * 
      */
     private Group verticalGroup;
 
@@ -277,12 +381,18 @@ public class GroupLayout implements LayoutManager2 {
 
     /**
      * The LayoutStyle instance to use, if null the sharedInstance is used.
+     * <p>
+     *  要使用的LayoutStyle实例,如果为null,则使用sharedInstance。
+     * 
      */
     private LayoutStyle layoutStyle;
 
     /**
      * If true, components that are not visible are treated as though they
      * aren't there.
+     * <p>
+     *  如果为true,那么不可见的组件将被视为不存在。
+     * 
      */
     private boolean honorsVisibility;
 
@@ -291,6 +401,10 @@ public class GroupLayout implements LayoutManager2 {
      * Enumeration of the possible ways {@code ParallelGroup} can align
      * its children.
      *
+     * <p>
+     *  枚举可能的方式{@code ParallelGroup}可以对齐它的孩子。
+     * 
+     * 
      * @see #createParallelGroup(Alignment)
      * @since 1.6
      */
@@ -301,6 +415,10 @@ public class GroupLayout implements LayoutManager2 {
          * right orientation this means aligned to the left edge. For the
          * vertical axis leading means aligned to the top edge.
          *
+         * <p>
+         *  表示元素应该与原点对齐。对于具有从左到右方向的水平轴,这意味着与左边缘对齐。对于垂直轴导向装置对准顶部边缘。
+         * 
+         * 
          * @see #createParallelGroup(Alignment)
          */
         LEADING,
@@ -311,6 +429,10 @@ public class GroupLayout implements LayoutManager2 {
          * orientation this means aligned to the right edge. For the
          * vertical axis trailing means aligned to the bottom edge.
          *
+         * <p>
+         *  表示元素应该对齐到区域的末尾。对于具有从左到右方向的水平轴,这意味着与右边缘对齐。对于垂直轴拖尾装置与底边对齐。
+         * 
+         * 
          * @see #createParallelGroup(Alignment)
          */
         TRAILING,
@@ -319,6 +441,10 @@ public class GroupLayout implements LayoutManager2 {
          * Indicates the elements should be centered in
          * the region.
          *
+         * <p>
+         *  表示元素应在区域中居中。
+         * 
+         * 
          * @see #createParallelGroup(Alignment)
          */
         CENTER,
@@ -327,6 +453,10 @@ public class GroupLayout implements LayoutManager2 {
          * Indicates the elements should be aligned along
          * their baseline.
          *
+         * <p>
+         *  表示元素应沿其基线对齐。
+         * 
+         * 
          * @see #createParallelGroup(Alignment)
          * @see #createBaselineGroup(boolean,boolean)
          */
@@ -365,6 +495,10 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Creates a {@code GroupLayout} for the specified {@code Container}.
      *
+     * <p>
+     *  为指定的{@code Container}创建{@code GroupLayout}。
+     * 
+     * 
      * @param host the {@code Container} the {@code GroupLayout} is
      *        the {@code LayoutManager} for
      * @throws IllegalArgumentException if host is {@code null}
@@ -397,6 +531,16 @@ public class GroupLayout implements LayoutManager2 {
      * <p>
      * The default is {@code true}.
      *
+     * <p>
+     *  设置在调整和定位组件时是否考虑组件可见性。值为{@code true}表示不可见的组件不应被视为布局的一部分。值为{@code false}表示无论可见性如何,组件应该被定位和调整大小。
+     * <p>
+     *  当组件的可见性被动态调整,并且您不想让周围组件和大小更改时,{@code false}的值很有用。
+     * <p>
+     * 指定的值用于没有指定显式可见性的组件。
+     * <p>
+     *  默认值为{@code true}。
+     * 
+     * 
      * @param honorsVisibility whether component visibility is considered when
      *                         sizing and positioning components
      * @see #setHonorsVisibility(Component,Boolean)
@@ -414,6 +558,10 @@ public class GroupLayout implements LayoutManager2 {
      * Returns whether component visibility is considered when sizing and
      * positioning components.
      *
+     * <p>
+     *  返回在调整和定位组件时是否考虑组件可见性。
+     * 
+     * 
      * @return whether component visibility is considered when sizing and
      *         positioning components
      */
@@ -435,6 +583,14 @@ public class GroupLayout implements LayoutManager2 {
      * {@code GroupLayout} is managing, it will be added to the
      * {@code Container}.
      *
+     * <p>
+     *  设置是否考虑组件的可见性用于大小和定位。值为{@code Boolean.TRUE}表示如果{@code component}不可见,则不应将其视为布局的一部分。
+     * 值为{@code false}表示{@code component}的位置和大小,无论其可见性如何。
+     * 值为{@code null}表示应使用单一参数方法{@code setHonorsVisibility}指定的值。
+     * <p>
+     *  如果{@code Component}不是{@code GroupLayout}正在管理的{@code Container}的子级,则会将其添加到{@code Container}中。
+     * 
+     * 
      * @param component the component
      * @param honorsVisibility whether visibility of this {@code component} should be
      *              considered for sizing and positioning
@@ -459,6 +615,11 @@ public class GroupLayout implements LayoutManager2 {
      * two components is automatically be created.  The default is
      * {@code false}.
      *
+     * <p>
+     *  设置是否应自动创建组件之间的间隙。例如,如果这是{@code true},并且向{@code SequentialGroup}添加两个组件,则会自动创建两个组件之间的间隙。
+     * 默认值为{@code false}。
+     * 
+     * 
      * @param autoCreatePadding whether a gap between components is
      *        automatically created
      */
@@ -473,6 +634,10 @@ public class GroupLayout implements LayoutManager2 {
      * Returns {@code true} if gaps between components are automatically
      * created.
      *
+     * <p>
+     *  如果自动创建组件之间的间隙,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if gaps between components are automatically
      *         created
      */
@@ -485,6 +650,10 @@ public class GroupLayout implements LayoutManager2 {
      * touch the border of the container should automatically be
      * created. The default is {@code false}.
      *
+     * <p>
+     *  设置是否应自动创建容器和触及容器边框的组件之间的间隙。默认值为{@code false}。
+     * 
+     * 
      * @param autoCreateContainerPadding whether a gap between the container and
      *        components that touch the border of the container should
      *        automatically be created
@@ -502,6 +671,10 @@ public class GroupLayout implements LayoutManager2 {
      * Returns {@code true} if gaps between the container and components that
      * border the container are automatically created.
      *
+     * <p>
+     *  如果容器和与该容器边界的组件之间的间隙自动创建,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if gaps between the container and components that
      *         border the container are automatically created
      */
@@ -513,6 +686,10 @@ public class GroupLayout implements LayoutManager2 {
      * Sets the {@code Group} that positions and sizes
      * components along the horizontal axis.
      *
+     * <p>
+     * 沿水平轴设置位置和大小组件的{@code Group}。
+     * 
+     * 
      * @param group the {@code Group} that positions and sizes
      *        components along the horizontal axis
      * @throws IllegalArgumentException if group is {@code null}
@@ -529,6 +706,10 @@ public class GroupLayout implements LayoutManager2 {
      * Returns the {@code Group} that positions and sizes components
      * along the horizontal axis.
      *
+     * <p>
+     *  返回沿水平轴定位和缩放组件的{@code Group}。
+     * 
+     * 
      * @return the {@code Group} responsible for positioning and
      *         sizing component along the horizontal axis
      */
@@ -544,6 +725,10 @@ public class GroupLayout implements LayoutManager2 {
      * Sets the {@code Group} that positions and sizes
      * components along the vertical axis.
      *
+     * <p>
+     *  沿垂直轴设置位置和大小组件的{@code Group}。
+     * 
+     * 
      * @param group the {@code Group} that positions and sizes
      *        components along the vertical axis
      * @throws IllegalArgumentException if group is {@code null}
@@ -560,6 +745,10 @@ public class GroupLayout implements LayoutManager2 {
      * Returns the {@code Group} that positions and sizes components
      * along the vertical axis.
      *
+     * <p>
+     *  返回沿纵轴的位置和大小组件的{@code Group}。
+     * 
+     * 
      * @return the {@code Group} responsible for positioning and
      *         sizing component along the vertical axis
      */
@@ -575,6 +764,9 @@ public class GroupLayout implements LayoutManager2 {
      * Wraps the user specified group in a sequential group.  If
      * container gaps should be generated the necessary springs are
      * added.
+     * <p>
+     *  将用户指定的组包含在顺序组中。如果应该产生容器间隙,则添加必要的弹簧。
+     * 
      */
     private Group createTopLevelGroup(Group specifiedGroup) {
         SequentialGroup group = createSequentialGroup();
@@ -591,6 +783,10 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Creates and returns a {@code SequentialGroup}.
      *
+     * <p>
+     *  创建并返回{@code SequentialGroup}。
+     * 
+     * 
      * @return a new {@code SequentialGroup}
      */
     public SequentialGroup createSequentialGroup() {
@@ -602,6 +798,11 @@ public class GroupLayout implements LayoutManager2 {
      * {@code Alignment.LEADING}.  This is a cover method for the more
      * general {@code createParallelGroup(Alignment)} method.
      *
+     * <p>
+     *  创建并返回{@code ParallelGroup},对齐方式为{@code Alignment.LEADING}。
+     * 这是一个更通用的{@code createParallelGroup(Alignment)}方法的覆盖方法。
+     * 
+     * 
      * @return a new {@code ParallelGroup}
      * @see #createParallelGroup(Alignment)
      */
@@ -615,6 +816,11 @@ public class GroupLayout implements LayoutManager2 {
      * createParallelGroup(Alignment,boolean)} method with {@code true}
      * supplied for the second argument.
      *
+     * <p>
+     *  创建并返回具有指定对齐的{@code ParallelGroup}。
+     * 这是一个更通用的{@code createParallelGroup(Alignment,boolean)}方法的覆盖方法,为第二个参数提供了{@code true}。
+     * 
+     * 
      * @param alignment the alignment for the elements of the group
      * @throws IllegalArgumentException if {@code alignment} is {@code null}
      * @return a new {@code ParallelGroup}
@@ -642,6 +848,15 @@ public class GroupLayout implements LayoutManager2 {
      * Refer to {@link GroupLayout.ParallelGroup ParallelGroup} for details on
      * the behavior of baseline groups.
      *
+     * <p>
+     *  创建并返回具有指定对齐和调整行为的{@code ParallelGroup}。 {@code alignment}参数指定如何定位不填充组的子元素。
+     * 例如,如果{@code TRAILING}对齐的{@code ParallelGroup}给定为100,并且子级只需要50,则子级位于位置50(组件方向为从左到右)。
+     * <p>
+     * 基线对齐仅在沿垂直轴使用时有用。沿着水平轴以基线对齐创建的{@code ParallelGroup}被视为{@code LEADING}。
+     * <p>
+     *  有关基线组行为的详细信息,请参阅{@link GroupLayout.ParallelGroup ParallelGroup}。
+     * 
+     * 
      * @param alignment the alignment for the elements of the group
      * @param resizable {@code true} if the group is resizable; if the group
      *        is not resizable the preferred size is used for the
@@ -667,6 +882,10 @@ public class GroupLayout implements LayoutManager2 {
      * Creates and returns a {@code ParallelGroup} that aligns it's
      * elements along the baseline.
      *
+     * <p>
+     *  创建并返回一个{@code ParallelGroup},它沿着基线对齐它的元素。
+     * 
+     * 
      * @param resizable whether the group is resizable
      * @param anchorBaselineToTop whether the baseline is anchored to
      *        the top or bottom of the group
@@ -690,6 +909,14 @@ public class GroupLayout implements LayoutManager2 {
      * <p>
      * Linked Components are not be resizable.
      *
+     * <p>
+     *  强制指定的组件具有相同的大小,而不考虑其首选,最小或最大大小。链接的组件给出每个链接组件的优选大小的最大值。例如,如果链接具有首选宽度10和20的两个组件,则两个组件的宽度为20。
+     * <p>
+     *  这可以多次使用以强制任何数量的组件共享相同的大小。
+     * <p>
+     *  链接的组件不可调整大小。
+     * 
+     * 
      * @param components the {@code Component}s that are to have the same size
      * @throws IllegalArgumentException if {@code components} is
      *         {@code null}, or contains {@code null}
@@ -714,6 +941,14 @@ public class GroupLayout implements LayoutManager2 {
      * <p>
      * Linked {@code Component}s are not be resizable.
      *
+     * <p>
+     *  强制指定的组件沿指定轴具有相同的大小,而不考虑其首选,最小或最大大小。链接的组件给出每个链接组件的优选大小的最大值。例如,如果沿水平轴链接两个组件,首选宽度为10和20,则两个组件的宽度为20。
+     * <p>
+     *  这可以多次使用以强制任何数量的组件共享相同的大小。
+     * <p>
+     *  链接的{@code Component}不可调整大小。
+     * 
+     * 
      * @param components the {@code Component}s that are to have the same size
      * @param axis the axis to link the size along; one of
      *             {@code SwingConstants.HORIZONTAL} or
@@ -756,6 +991,10 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Replaces an existing component with a new one.
      *
+     * <p>
+     *  用新的组件替换现有组件。
+     * 
+     * 
      * @param existingComponent the component that should be removed
      *        and replaced with {@code newComponent}
      * @param newComponent the component to put in
@@ -792,6 +1031,10 @@ public class GroupLayout implements LayoutManager2 {
      * gaps between components. A value of {@code null} indicates the
      * shared instance of {@code LayoutStyle} should be used.
      *
+     * <p>
+     * 设置用于计算组件之间的首选间隙的{@code LayoutStyle}。值为{@code null}表示应使用{@code LayoutStyle}的共享实例。
+     * 
+     * 
      * @param layoutStyle the {@code LayoutStyle} to use
      * @see LayoutStyle
      */
@@ -805,6 +1048,10 @@ public class GroupLayout implements LayoutManager2 {
      * gap between components. This returns the value specified to
      * {@code setLayoutStyle}, which may be {@code null}.
      *
+     * <p>
+     *  返回用于计算组件之间首选间隙的{@code LayoutStyle}。这会返回指定给{@code setLayoutStyle}的值,它可能是{@code null}。
+     * 
+     * 
      * @return the {@code LayoutStyle} used for calculating the preferred
      *         gap between components
      */
@@ -838,6 +1085,10 @@ public class GroupLayout implements LayoutManager2 {
      * directly, instead you should use one of the {@code Group}
      * methods to add a {@code Component}.
      *
+     * <p>
+     *  通知{@code Component}已添加到父容器。您不应该直接调用此方法,而应该使用{@code Group}方法之一添加{@code Component}。
+     * 
+     * 
      * @param name the string to be associated with the component
      * @param component the {@code Component} to be added
      */
@@ -850,6 +1101,10 @@ public class GroupLayout implements LayoutManager2 {
      * directly, instead invoke {@code remove} on the parent
      * {@code Container}.
      *
+     * <p>
+     *  通知{@code Component}已从父容器中移除。您不应直接调用此方法,而是在父级{@code Container}上调用{@code remove}。
+     * 
+     * 
      * @param component the component to be removed
      * @see java.awt.Component#remove
      */
@@ -865,6 +1120,10 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Returns the preferred size for the specified container.
      *
+     * <p>
+     *  返回指定容器的首选大小。
+     * 
+     * 
      * @param parent the container to return the preferred size for
      * @return the preferred size for {@code parent}
      * @throws IllegalArgumentException if {@code parent} is not
@@ -883,6 +1142,10 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Returns the minimum size for the specified container.
      *
+     * <p>
+     *  返回指定容器的最小大小。
+     * 
+     * 
      * @param parent the container to return the size for
      * @return the minimum size for {@code parent}
      * @throws IllegalArgumentException if {@code parent} is not
@@ -901,6 +1164,10 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Lays out the specified container.
      *
+     * <p>
+     *  退出指定的容器。
+     * 
+     * 
      * @param parent the container to be laid out
      * @throws IllegalStateException if any of the components added to
      *         this layout are not in both a horizontal and vertical group
@@ -938,6 +1205,10 @@ public class GroupLayout implements LayoutManager2 {
      * directly, instead you should use one of the {@code Group}
      * methods to add a {@code Component}.
      *
+     * <p>
+     *  通知{@code Component}已添加到父容器。您不应该直接调用此方法,而应该使用{@code Group}方法之一添加{@code Component}。
+     * 
+     * 
      * @param component the component added
      * @param constraints description of where to place the component
      */
@@ -947,6 +1218,10 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Returns the maximum size for the specified container.
      *
+     * <p>
+     *  返回指定容器的最大大小。
+     * 
+     * 
      * @param parent the container to return the size for
      * @return the maximum size for {@code parent}
      * @throws IllegalArgumentException if {@code parent} is not
@@ -969,6 +1244,10 @@ public class GroupLayout implements LayoutManager2 {
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
      *
+     * <p>
+     *  返回沿x轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
+     * 
      * @param parent the {@code Container} hosting this {@code LayoutManager}
      * @throws IllegalArgumentException if {@code parent} is not
      *         the same {@code Container} that this was created with
@@ -986,6 +1265,10 @@ public class GroupLayout implements LayoutManager2 {
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
      *
+     * <p>
+     * 返回沿y轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
+     * 
      * @param parent the {@code Container} hosting this {@code LayoutManager}
      * @throws IllegalArgumentException if {@code parent} is not
      *         the same {@code Container} that this was created with
@@ -1000,6 +1283,10 @@ public class GroupLayout implements LayoutManager2 {
      * Invalidates the layout, indicating that if the layout manager
      * has cached information it should be discarded.
      *
+     * <p>
+     *  使布局无效,指示如果布局管理器具有缓存的信息,它应该被丢弃。
+     * 
+     * 
      * @param parent the {@code Container} hosting this LayoutManager
      * @throws IllegalArgumentException if {@code parent} is not
      *         the same {@code Container} that this was created with
@@ -1121,6 +1408,9 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Returns the {@code ComponentInfo} for the specified Component,
      * creating one if necessary.
+     * <p>
+     *  返回指定组件的{@code ComponentInfo},如果需要,创建一个。
+     * 
      */
     private ComponentInfo getComponentInfo(Component component) {
         ComponentInfo info = componentInfos.get(component);
@@ -1139,6 +1429,9 @@ public class GroupLayout implements LayoutManager2 {
      * groups.  If {@code insert} is {@code true} this will insert auto padding
      * springs, otherwise this will only adjust the springs that
      * comprise auto preferred padding springs.
+     * <p>
+     *  调整水平和垂直组的自动装载弹簧。如果{@code insert}是{@code true},这将插入自动填充弹簧,否则只会调整包含自动首选填充弹簧的弹簧。
+     * 
      */
     private void insertAutopadding(boolean insert) {
         horizontalGroup.insertAutopadding(HORIZONTAL,
@@ -1156,6 +1449,9 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Returns {@code true} if the two Components have a common ParallelGroup
      * ancestor along the particular axis.
+     * <p>
+     *  如果两个组件具有沿特定轴的公共ParallelGroup祖先,则返回{@code true}。
+     * 
      */
     private boolean areParallelSiblings(Component source, Component target,
             int axis) {
@@ -1205,6 +1501,10 @@ public class GroupLayout implements LayoutManager2 {
      * and the content and format of the returned string may vary
      * between implementations.
      *
+     * <p>
+     *  返回此{@code GroupLayout}的字符串表示形式。此方法旨在用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 
+     * 
      * @return a string representation of this {@code GroupLayout}
      **/
     public String toString() {
@@ -1263,6 +1563,10 @@ public class GroupLayout implements LayoutManager2 {
      * the middle of that, and a location. Spring caches the
      * min/max/pref.  If the min/pref/max has internally changes, or needs
      * to be updated you must invoke clear.
+     * <p>
+     *  Spring由一个范围：min,pref和max,一个值,在那里的中间,和一个位置。 Spring缓存min / max / pref。
+     * 如果min / pref / max有内部改变,或者需要更新,你必须调用clear。
+     * 
      */
     private abstract class Spring {
         private int size;
@@ -1280,6 +1584,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Calculates and returns the minimum size.
          *
+         * <p>
+         *  计算并返回最小大小。
+         * 
+         * 
          * @param axis the axis of layout; one of HORIZONTAL or VERTICAL
          * @return the minimum size
          */
@@ -1288,6 +1596,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Calculates and returns the preferred size.
          *
+         * <p>
+         *  计算并返回首选大小。
+         * 
+         * 
          * @param axis the axis of layout; one of HORIZONTAL or VERTICAL
          * @return the preferred size
          */
@@ -1296,6 +1608,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Calculates and returns the minimum size.
          *
+         * <p>
+         *  计算并返回最小大小。
+         * 
+         * 
          * @param axis the axis of layout; one of HORIZONTAL or VERTICAL
          * @return the minimum size
          */
@@ -1303,6 +1619,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Sets the parent of this Spring.
+         * <p>
+         *  设置此Spring的父级。
+         * 
          */
         void setParent(Spring parent) {
             this.parent = parent;
@@ -1310,6 +1629,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Returns the parent of this spring.
+         * <p>
+         *  返回此弹簧的父级。
+         * 
          */
         Spring getParent() {
             return parent;
@@ -1323,6 +1645,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Alignment for this Spring, this may be null.
+         * <p>
+         * 对于这个Spring,这可能为null。
+         * 
          */
         Alignment getAlignment() {
             return alignment;
@@ -1330,6 +1655,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Returns the minimum size.
+         * <p>
+         *  返回最小大小。
+         * 
          */
         final int getMinimumSize(int axis) {
             if (min == UNSET) {
@@ -1340,6 +1668,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Returns the preferred size.
+         * <p>
+         *  返回首选大小。
+         * 
          */
         final int getPreferredSize(int axis) {
             if (pref == UNSET) {
@@ -1350,6 +1681,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Returns the maximum size.
+         * <p>
+         *  返回最大大小。
+         * 
          */
         final int getMaximumSize(int axis) {
             if (max == UNSET) {
@@ -1362,6 +1696,10 @@ public class GroupLayout implements LayoutManager2 {
          * Sets the value and location of the spring.  Subclasses
          * will want to invoke super, then do any additional sizing.
          *
+         * <p>
+         *  设置弹簧的值和位置。子类将要调用super,然后做任何额外的大小调整。
+         * 
+         * 
          * @param axis HORIZONTAL or VERTICAL
          * @param origin of this Spring
          * @param size of the Spring.  If size is UNSET, this invokes
@@ -1376,6 +1714,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Resets the cached min/max/pref.
+         * <p>
+         *  重置缓存的最小/最大/预置。
+         * 
          */
         void unset() {
             size = min = pref = max = UNSET;
@@ -1383,6 +1724,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Returns the current size.
+         * <p>
+         *  返回当前大小。
+         * 
          */
         int getSize() {
             return size;
@@ -1412,6 +1756,10 @@ public class GroupLayout implements LayoutManager2 {
          * meant to quickly test if this Spring will always have a
          * zero size.
          *
+         * <p>
+         *  返回{@code true}如果这个spring总是为零大小。这不应该检查当前的大小,而是它的意思是快速测试,如果这个Spring将总是一个零大小。
+         * 
+         * 
          * @param treatAutopaddingAsZeroSized if {@code true}, auto padding
          *        springs should be treated as having a size of {@code 0}
          * @return {@code true} if this spring will have a zero size,
@@ -1472,6 +1820,36 @@ public class GroupLayout implements LayoutManager2 {
      * that take a {@code Group} throw an {@code NullPointerException} if
      * passed {@code null}.
      *
+     * <p>
+     *  {@code Group}为{@code GroupLayout}支持的两种类型的操作提供了基础：一个接一个地布置组件({@link SequentialGroup SequentialGroup})
+     * 或对齐({@link ParallelGroup ParallelGroup})。
+     *  {@code Group}及其子类没有公共构造函数;创建一个使用{@code createSequentialGroup}或{@code createParallelGroup}之一。
+     * 此外,从一个{@code GroupLayout}创建的{@code Group}并与另一个{@code GroupLayout}一起使用会产生未定义的结果。
+     * <p>
+     * {@code Group}及其子类中的各种方法允许您显式指定范围。
+     * 这些方法的参数可以采用两种形式,要么是大于等于0的值,要么是{@code DEFAULT_SIZE}或{@code PREFERRED_SIZE}之一。大于或等于{@code 0}的值表示特定大小。
+     *  {@code DEFAULT_SIZE}表示应使用组件对应的大小。
+     * 例如,如果{@code DEFAULT_SIZE}作为最小大小参数传递,则最小大小通过调用组件上的{@code getMinimumSize}获得。
+     * 同样,{@code PREFERRED_SIZE}表示应使用{@code getPreferredSize}的值。
+     * 以下示例将{@code myComponent}添加到具有该范围的特定值的{@code group}。也就是说,最小值被明确指定为100,优选为200,最大值为300。
+     * <pre>
+     *  group.addComponent(myComponent,100,200,300);
+     * </pre>
+     *  以下示例使用表单的组合将{@code myComponent}添加到{@code group}。
+     * 最小大小被强制为与首选大小相同,首选大小通过使用{@code myComponent.getPreferredSize}确定,最大大小由组件上调用{@code getMaximumSize}确定。
+     * <pre>
+     *  group.addComponent(myComponent,GroupLayout.PREFERRED_SIZE,GroupLayout.PREFERRED_SIZE,GroupLayout.DEF
+     * AULT_SIZE);。
+     * </pre>
+     * <p>
+     * 除非另有说明,{@code Group}及其子类的所有允许指定范围的方法如果传递的范围无效,都会抛出{@code IllegalArgumentException}。
+     * 无效范围是其中任何值< 0,而不是{@code PREFERRED_SIZE}或{@code DEFAULT_SIZE}中的一个,或者不满足以下条件(针对特定值)：{@code min} <= {@code pref}&lt; = {@code max} 。
+     * 除非另有说明,{@code Group}及其子类的所有允许指定范围的方法如果传递的范围无效,都会抛出{@code IllegalArgumentException}。
+     * <p>
+     *  类似的任何方法,{@code组件}抛出一个{@code IllegalArgumentException}如果传递{@code null}和任何方法{@code组}抛出一个{@code NullPointerException}
+     * 如果传递{@code null} 。
+     * 
+     * 
      * @see #createSequentialGroup
      * @see #createParallelGroup
      * @since 1.6
@@ -1488,6 +1866,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Adds a {@code Group} to this {@code Group}.
          *
+         * <p>
+         *  在此{@code Group}中添加{@code Group}。
+         * 
+         * 
          * @param group the {@code Group} to add
          * @return this {@code Group}
          */
@@ -1498,6 +1880,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Adds a {@code Component} to this {@code Group}.
          *
+         * <p>
+         *  在此{@code Group}中添加{@code Component}。
+         * 
+         * 
          * @param component the {@code Component} to add
          * @return this {@code Group}
          */
@@ -1510,6 +1896,10 @@ public class GroupLayout implements LayoutManager2 {
          * Adds a {@code Component} to this {@code Group}
          * with the specified size.
          *
+         * <p>
+         *  在指定大小的{@code Group}中添加{@code Component}。
+         * 
+         * 
          * @param component the {@code Component} to add
          * @param min the minimum size or one of {@code DEFAULT_SIZE} or
          *            {@code PREFERRED_SIZE}
@@ -1527,6 +1917,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Adds a rigid gap to this {@code Group}.
          *
+         * <p>
+         *  在此{@code Group}中添加一个严格的间隙。
+         * 
+         * 
          * @param size the size of the gap
          * @return this {@code Group}
          * @throws IllegalArgumentException if {@code size} is less than
@@ -1539,6 +1933,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Adds a gap to this {@code Group} with the specified size.
          *
+         * <p>
+         *  向此{@code Group}的指定大小添加一个空格。
+         * 
+         * 
          * @param min the minimum size of the gap
          * @param pref the preferred size of the gap
          * @param max the maximum size of the gap
@@ -1561,6 +1959,9 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Adds the Spring to the list of {@code Spring}s and returns
          * the receiver.
+         * <p>
+         *  将Spring添加到{@code Spring}的列表中并返回接收器。
+         * 
          */
         Group addSpring(Spring spring) {
             springs.add(spring);
@@ -1591,6 +1992,9 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * This is invoked from {@code setSize} if passed a value
          * other than UNSET.
+         * <p>
+         *  如果传递的值不是UNSET,则从{@code setSize}调用此方法。
+         * 
          */
         abstract void setValidSize(int axis, int origin, int size);
 
@@ -1612,6 +2016,10 @@ public class GroupLayout implements LayoutManager2 {
          * {@code getPreferredSize0} or
          * {@code getMaximumSize0} methods.  This will invoke
          * to {@code operator} to combine the values.
+         * <p>
+         *  计算指定的大小。这是从{@code getMinimumSize0},{@code getPreferredSize0}或{@code getMaximumSize0}方法之一调用的。
+         * 这将调用{@code operator}来组合这些值。
+         * 
          */
         int calculateSize(int axis, int type) {
             int count = springs.size();
@@ -1647,6 +2055,9 @@ public class GroupLayout implements LayoutManager2 {
          * Used to compute how the two values representing two springs
          * will be combined.  For example, a group that layed things out
          * one after the next would return {@code a + b}.
+         * <p>
+         *  用于计算表示两个弹簧的两个值的组合方式。例如,一个接一个地放置一个东西的组将返回{@code a + b}。
+         * 
          */
         abstract int operator(int a, int b);
 
@@ -1660,6 +2071,10 @@ public class GroupLayout implements LayoutManager2 {
          * springs, otherwise this will only adjust the springs that
          * comprise auto preferred padding springs.
          *
+         * <p>
+         * 调整此组中的自动装载弹簧及其子装置。如果{@code insert}为true,这将插入自动填充弹簧,否则这将只调整包含自动首选填充弹簧的弹簧。
+         * 
+         * 
          * @param axis the axis of the springs; HORIZONTAL or VERTICAL
          * @param leadingPadding List of AutopaddingSprings that occur before
          *                       this Group
@@ -1679,6 +2094,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * Removes any AutopaddingSprings for this Group and its children.
+         * <p>
+         *  删除此组及其子组的任何AutopaddingSprings。
+         * 
          */
         void removeAutopadding() {
             unset();
@@ -1752,6 +2170,14 @@ public class GroupLayout implements LayoutManager2 {
      * {@code true} for {@code useAsBaseline} is used to calculate the
      * baseline.
      *
+     * <p>
+     *  一个{@code Group},按顺序依次定位和调整其元素的大小。这个类没有公共构造函数,使用{@code createSequentialGroup}方法创建一个。
+     * <p>
+     *  为了沿着基线对齐{@code ParallelGroup}的基线对齐{@code SequentialGroup},您需要指定{@code SequentialGroup}的哪些元素用于确定基线。
+     * 用于计算基线的元素使用采用{@code boolean}的{@code add}方法之一指定。
+     * 对于{@code useAsBaseline},添加了值为{@code true}的最后一个元素用于计算基线。
+     * 
+     * 
      * @see #createSequentialGroup
      * @since 1.6
      */
@@ -1763,6 +2189,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public SequentialGroup addGroup(Group group) {
             return (SequentialGroup)super.addGroup(group);
@@ -1771,6 +2200,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Adds a {@code Group} to this {@code Group}.
          *
+         * <p>
+         *  在此{@code Group}中添加{@code Group}。
+         * 
+         * 
          * @param group the {@code Group} to add
          * @param useAsBaseline whether the specified {@code Group} should
          *        be used to calculate the baseline for this {@code Group}
@@ -1786,6 +2219,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public SequentialGroup addComponent(Component component) {
             return (SequentialGroup)super.addComponent(component);
@@ -1794,6 +2230,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Adds a {@code Component} to this {@code Group}.
          *
+         * <p>
+         *  在此{@code Group}中添加{@code Component}。
+         * 
+         * 
          * @param useAsBaseline whether the specified {@code Component} should
          *        be used to calculate the baseline for this {@code Group}
          * @param component the {@code Component} to add
@@ -1810,6 +2250,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public SequentialGroup addComponent(Component component, int min,
                 int pref, int max) {
@@ -1821,6 +2264,10 @@ public class GroupLayout implements LayoutManager2 {
          * Adds a {@code Component} to this {@code Group}
          * with the specified size.
          *
+         * <p>
+         *  在指定大小的{@code Group}中添加{@code Component}。
+         * 
+         * 
          * @param useAsBaseline whether the specified {@code Component} should
          *        be used to calculate the baseline for this {@code Group}
          * @param component the {@code Component} to add
@@ -1843,6 +2290,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public SequentialGroup addGap(int size) {
             return (SequentialGroup)super.addGap(size);
@@ -1850,6 +2300,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public SequentialGroup addGap(int min, int pref, int max) {
             return (SequentialGroup)super.addGap(min, pref, max);
@@ -1860,6 +2313,10 @@ public class GroupLayout implements LayoutManager2 {
          * components. The element created to represent the gap is not
          * resizable.
          *
+         * <p>
+         *  添加表示两个组件之间的首选间隙的元素。创建用于表示间隙的元素不可调整大小。
+         * 
+         * 
          * @param comp1 the first component
          * @param comp2 the second component
          * @param type the type of gap; one of the constants defined by
@@ -1879,6 +2336,10 @@ public class GroupLayout implements LayoutManager2 {
          * Adds an element representing the preferred gap between two
          * components.
          *
+         * <p>
+         *  添加表示两个组件之间的首选间隙的元素。
+         * 
+         * 
          * @param comp1 the first component
          * @param comp2 the second component
          * @param type the type of gap
@@ -1917,6 +2378,12 @@ public class GroupLayout implements LayoutManager2 {
          * The element created to represent the gap is not
          * resizable.
          *
+         * <p>
+         * 添加表示最近组件之间的首选间隙的元素。在布局期间,找到相邻的部件,并且基于部件之间的优选间隙设置添加的间隙的尺寸。如果没有找到相邻组件,则间隙具有{@code 0}的大小。
+         * <p>
+         *  创建用于表示间隙的元素不可调整大小。
+         * 
+         * 
          * @param type the type of gap; one of
          *        {@code LayoutStyle.ComponentPlacement.RELATED} or
          *        {@code LayoutStyle.ComponentPlacement.UNRELATED}
@@ -1938,6 +2405,10 @@ public class GroupLayout implements LayoutManager2 {
          * neighboring components.  If no neighboring components are found the
          * minimum size is set to 0.
          *
+         * <p>
+         *  添加表示最近组件之间的首选间隙的元素。在布局期间,找到相邻分量,并且基于相邻分量之间的优选间隙的大小来设置该间隙的最小值。如果没有找到相邻组件,则最小大小被设置为0。
+         * 
+         * 
          * @param type the type of gap; one of
          *        {@code LayoutStyle.ComponentPlacement.RELATED} or
          *        {@code LayoutStyle.ComponentPlacement.UNRELATED}
@@ -1976,6 +2447,12 @@ public class GroupLayout implements LayoutManager2 {
          * The element created to represent the gap is not
          * resizable.
          *
+         * <p>
+         *  添加表示容器和触及容器边框的组件之间的首选间隙的元素。如果添加的间隙不接触父容器的边缘,则这没有效果。
+         * <p>
+         *  创建用于表示间隙的元素不可调整大小。
+         * 
+         * 
          * @return this {@code SequentialGroup}
          */
         public SequentialGroup addContainerGap() {
@@ -1990,6 +2467,11 @@ public class GroupLayout implements LayoutManager2 {
          * Component} and does not touch one edge of the parent
          * container.
          *
+         * <p>
+         *  添加表示容器的一个边缘和具有指定大小的下一个或上一个{@code Component}之间的首选间隙的元素。
+         * 如果下一个或上一个元素不是{@code Component},并且不接触父容器的一个边缘,则这没有效果。
+         * 
+         * 
          * @param pref the preferred size; one of {@code DEFAULT_SIZE} or a
          *              value &gt;= 0
          * @param max the maximum size; one of {@code DEFAULT_SIZE},
@@ -2111,6 +2593,9 @@ public class GroupLayout implements LayoutManager2 {
          * Returns the sorted list of SpringDelta's for the current set of
          * Springs. The list is ordered based on the amount of flexibility of
          * the springs.
+         * <p>
+         *  返回当前Springs集合的SpringDelta的排序列表。该列表基于弹簧的柔性量来排序。
+         * 
          */
         private List<SpringDelta> buildResizableList(int axis,
                 boolean useMin) {
@@ -2346,6 +2831,9 @@ public class GroupLayout implements LayoutManager2 {
 
     /**
      * Used by SequentialGroup in calculating resizability of springs.
+     * <p>
+     *  由SequentialGroup用于计算弹簧的可重新调整。
+     * 
      */
     private static final class SpringDelta implements Comparable<SpringDelta> {
         // Original index.
@@ -2447,6 +2935,43 @@ public class GroupLayout implements LayoutManager2 {
      * to add an element specifying a baseline alignment, an
      * {@code IllegalArgumentException} is thrown.
      *
+     * <p>
+     * {@code Group},用于对齐和缩放它的子项。 {@code ParallelGroup}以四种可能的方式对齐它的孩子：沿着基线,居中,锚定到前缘或锚定到后缘。
+     *  <h3>基线</h3>沿着基线对齐子节点的{@code ParallelGroup}必须首先决定基线的锚定位置。基线可以锚定到顶部,或锚定到组的底部。
+     * 也就是说,基线与组的开始之间的距离可以是恒定距离,或者组的末端和基线之间的距离可以是恒定距离。
+     * 可能的选项对应于{@code BaselineResizeBehavior}常数{@link java.awt.Component.BaselineResizeBehavior#CONSTANT_ASCENT CONSTANT_ASCENT}
+     * 和{@link java.awt.Component.BaselineResizeBehavior#CONSTANT_DESCENT CONSTANT_DESCENT}。
+     * 也就是说,基线与组的开始之间的距离可以是恒定距离,或者组的末端和基线之间的距离可以是恒定距离。
+     * <p>
+     *  基线锚可以由{@code createBaselineGroup}方法显式指定,或者基于元素确定。
+     * 如果没有明确指定,如果所有具有基线并且与基线对齐的元素都具有{@code CONSTANT_DESCENT}的基线调整大小行为,则基线将锚定到底部;否则基线会锚定到组的顶部。
+     * <p>
+     * 与基线对齐的元素如果具有{@code CONSTANT_ASCENT}或{@code CONSTANT_DESCENT}的基线调整大小行为,则可调整大小。
+     * 具有{@code OTHER}或{@code CENTER_OFFSET}的基线调整大小行为的元素无法调整大小。
+     * <p>
+     *  基线是基于具有基线的每个元素的优选高度计算的。
+     * 使用以下算法计算基线：{@code max(maxNonBaselineHeight,maxAscent + maxDescent)},其中{@code maxNonBaselineHeight}是没有
+     * 基线或未沿基线对齐的所有元素的最大高度。
+     *  基线是基于具有基线的每个元素的优选高度计算的。 {@code maxAscent}是具有基线并沿基线对齐的所有元素的最大上升(基线)。
+     *  {@code maxDescent}是所有具有基线并沿基线对齐的元素的最大下降(首选高度 - 基线)。
+     * <p>
+     *  沿着基线对齐其元素的{@code ParallelGroup}仅在垂直轴上有用。
+     * 如果创建基准组并沿水平轴使用它,则当您询问{@code GroupLayout}的最小,首选或最大大小或尝试布局组件时,将抛出{@code IllegalStateException}。
+     * <p>
+     *  未与基线对齐且小于{@code ParallelGroup}的大小的元素以三种方式定位：居中,锚定到前边缘或锚定到后边缘。
+     * 
+     * 使用非{@code BASELINE}的对齐方式创建的{@code ParallelGroup} {@code ParallelGroup}非基线{@code ParallelGroup}对齐元素小于组
+     * 大小的三种方式之一：居中,锚定到前缘,或锚定到后缘。
+     * <p>
+     *  前沿基于轴和{@code ComponentOrientation}。对于垂直轴,上边缘始终是前边缘,并且下边缘始终是后边缘。
+     * 当{@code ComponentOrientation}为{@code LEFT_TO_RIGHT}时,前边缘是左边缘,后边缘是右边缘。
+     *  {@code RIGHT_TO_LEFT}的{@code ComponentOrientation}会翻转左右边缘。子元素根据元素添加的指定对齐方式进行对齐。
+     * 如果不指定对齐,则使用为{@code ParallelGroup}指定的对齐。
+     * <p>
+     *  要沿着基线({@code createBaselineGroup}或{@code createParallelGroup})对齐{@code BASELINE}的对齐方式对齐元素。
+     * 如果未使用基准对齐创建组,并且尝试添加指定基准对齐的元素,则会抛出{@code IllegalArgumentException}。
+     * 
+     * 
      * @see #createParallelGroup()
      * @see #createBaselineGroup(boolean,boolean)
      * @since 1.6
@@ -2464,6 +2989,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public ParallelGroup addGroup(Group group) {
             return (ParallelGroup)super.addGroup(group);
@@ -2471,6 +2999,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public ParallelGroup addComponent(Component component) {
             return (ParallelGroup)super.addComponent(component);
@@ -2478,6 +3009,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public ParallelGroup addComponent(Component component, int min, int pref,
                 int max) {
@@ -2486,6 +3020,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public ParallelGroup addGap(int pref) {
             return (ParallelGroup)super.addGap(pref);
@@ -2493,6 +3030,9 @@ public class GroupLayout implements LayoutManager2 {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
          */
         public ParallelGroup addGap(int min, int pref, int max) {
             return (ParallelGroup)super.addGap(min, pref, max);
@@ -2504,6 +3044,10 @@ public class GroupLayout implements LayoutManager2 {
          * {@code Group} it is aligned based on the specified
          * alignment.
          *
+         * <p>
+         *  使用指定的对齐方式将{@code Group}添加到此{@code ParallelGroup}。如果子元素小于{@code Group},它将根据指定的对齐方式对齐。
+         * 
+         * 
          * @param alignment the alignment
          * @param group the {@code Group} to add
          * @return this {@code ParallelGroup}
@@ -2520,6 +3064,10 @@ public class GroupLayout implements LayoutManager2 {
          * Adds a {@code Component} to this {@code ParallelGroup} with
          * the specified alignment.
          *
+         * <p>
+         * 使用指定的对齐向此{@code ParallelGroup}添加一个{@code Component}。
+         * 
+         * 
          * @param alignment the alignment
          * @param component the {@code Component} to add
          * @return this {@code Group}
@@ -2536,6 +3084,10 @@ public class GroupLayout implements LayoutManager2 {
          * Adds a {@code Component} to this {@code ParallelGroup} with the
          * specified alignment and size.
          *
+         * <p>
+         *  将{@code Component}添加到具有指定对齐和大小的此{@code ParallelGroup}。
+         * 
+         * 
          * @param alignment the alignment
          * @param component the {@code Component} to add
          * @param min the minimum size
@@ -2650,6 +3202,9 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * An extension of {@code ParallelGroup} that aligns its
      * constituent {@code Spring}s along the baseline.
+     * <p>
+     *  {@code ParallelGroup}的扩展,它沿着基线对齐其组成部分{@code Spring}。
+     * 
      */
     private class BaselineGroup extends ParallelGroup {
         // Whether or not all child springs have a baseline
@@ -2852,6 +3407,9 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Lays out springs that have a baseline along the baseline.  All
          * others are centered.
+         * <p>
+         *  放出沿基线具有基线的弹簧。所有其他人都居中。
+         * 
          */
         private void baselineLayout(int origin, int size) {
             int ascent;
@@ -3106,6 +3664,9 @@ public class GroupLayout implements LayoutManager2 {
 
     /**
      * Spring representing the preferred distance between two components.
+     * <p>
+     *  弹簧表示两个组件之间的优选距离。
+     * 
      */
     private class PreferredGapSpring extends Spring {
         private final JComponent source;
@@ -3163,6 +3724,9 @@ public class GroupLayout implements LayoutManager2 {
 
     /**
      * Spring represented a certain amount of space.
+     * <p>
+     *  Spring代表了一定的空间。
+     * 
      */
     private class GapSpring extends Spring {
         private final int min;
@@ -3206,6 +3770,9 @@ public class GroupLayout implements LayoutManager2 {
      * targets.  The targets and sources are computed during layout.  An
      * instance of this can either be dynamically created when
      * autocreatePadding is true, or explicitly created by the developer.
+     * <p>
+     *  春天代表任何数量的源和目标之间的距离。在布局期间计算目标和源。这个实例可以在autocreatePadding为true时动态创建,也可以由开发人员明确创建。
+     * 
      */
     private class AutoPreferredGapSpring extends Spring {
         List<ComponentSpring> sources;
@@ -3387,6 +3954,9 @@ public class GroupLayout implements LayoutManager2 {
     /**
      * Represents two springs that should have autopadding inserted between
      * them.
+     * <p>
+     *  代表应该在它们之间插入自动填充的两个弹簧。
+     * 
      */
     private final static class AutoPreferredGapMatch {
         public final ComponentSpring source;
@@ -3409,6 +3979,9 @@ public class GroupLayout implements LayoutManager2 {
 
     /**
      * An extension of AutopaddingSpring used for container level padding.
+     * <p>
+     *  用于容器级填充的AutopaddingSpring的扩展。
+     * 
      */
     private class ContainerAutoPreferredGapSpring extends
             AutoPreferredGapSpring {
@@ -3581,6 +4154,9 @@ public class GroupLayout implements LayoutManager2 {
      * Tracks the horizontal/vertical Springs for a Component.
      * This class is also used to handle Springs that have their sizes
      * linked.
+     * <p>
+     *  跟踪组件的水平/垂直弹簧。这个类也用于处理其大小被链接的Springs。
+     * 
      */
     private class ComponentInfo {
         // Component being layed out
@@ -3635,6 +4211,10 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Updates the cached visibility.
          *
+         * <p>
+         *  更新缓存的可见性。
+         * 
+         * 
          * @return true if the visibility changed
          */
         boolean updateVisibility() {
@@ -3682,6 +4262,8 @@ public class GroupLayout implements LayoutManager2 {
         /**
          * Returns true if this component has its size linked to
          * other components.
+         * <p>
+         *  如果此组件的大小链接到其他组件,则返回true。
          */
         public boolean isLinked(int axis) {
             if (axis == HORIZONTAL) {

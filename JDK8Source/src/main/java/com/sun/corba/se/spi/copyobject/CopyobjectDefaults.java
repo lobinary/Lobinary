@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,9 @@ public abstract class CopyobjectDefaults
      * than the others: each ObjectCopier produced by the factory only preserves aliasing
      * within a single call to copy.  The others copiers all preserve aliasing across
      * all calls to copy (on the same ObjectCopier instance).
+     * <p>
+     *  比其他：工厂生产的每个ObjectCopier只保留在单个调用复制的别名。其他复制器都保留所有调用复制(在同一ObjectCopier实例上)的别名。
+     * 
      */
     public static ObjectCopierFactory makeORBStreamObjectCopierFactory( final ORB orb )
     {
@@ -73,6 +77,9 @@ public abstract class CopyobjectDefaults
 
     /** Obtain the reference object "copier".  This does no copies: it just
      * returns whatever is passed to it.
+     * <p>
+     *  返回任何传递给它的东西。
+     * 
      */
     public static ObjectCopierFactory getReferenceObjectCopierFactory()
     {
@@ -84,6 +91,10 @@ public abstract class CopyobjectDefaults
      * instances of a fallback copier that first tries an ObjectCopier
      * created from f1, then tries one created from f2, if the first
      * throws a ReflectiveCopyException.
+     * <p>
+     *  参数。
+     * 这个复制器创建一个ObjectCopierFactory,创建一个备用复制器的实例,首先尝试从f1创建的ObjectCopier,然后尝试从f2创建的一个ObjectCopier,如果第一个抛出一个Re
+     * flectiveCopyException。
      */
     public static ObjectCopierFactory makeFallbackObjectCopierFactory(
         final ObjectCopierFactory f1, final ObjectCopierFactory f2 )

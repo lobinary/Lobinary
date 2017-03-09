@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,14 @@ package java.util.logging;
  * and tail strings around a set of formatted records. The getHeader
  * and getTail methods can be used to obtain these strings.
  *
+ * <p>
+ *  Formatter提供对格式化LogRecords的支持。
+ * <p>
+ *  通常每个日志处理程序将有一个与它相关联的格式化程序。 Formatter采用LogRecord并将其转换为字符串。
+ * <p>
+ *  一些格式化器(例如XMLFormatter)需要在一组格式化记录周围包装头和尾字符串。 getHeader和getTail方法可以用来获取这些字符串。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -44,6 +53,9 @@ public abstract class Formatter {
 
     /**
      * Construct a new formatter.
+     * <p>
+     *  构造一个新的格式化程序。
+     * 
      */
     protected Formatter() {
     }
@@ -56,6 +68,12 @@ public abstract class Formatter {
      * It is recommended to use the {@link Formatter#formatMessage}
      * convenience method to localize and format the message field.
      *
+     * <p>
+     *  格式化给定的日志记录并返回格式化的字符串。
+     * <p>
+     *  生成的格式化String通常包括LogRecord消息字段的本地化和格式化版本。建议使用{@link Formatter#formatMessage}便利方法来本地化和格式化消息字段。
+     * 
+     * 
      * @param record the log record to be formatted.
      * @return the formatted log record
      */
@@ -68,6 +86,12 @@ public abstract class Formatter {
      * This base class returns an empty string, but this may be
      * overridden by subclasses.
      *
+     * <p>
+     *  返回一组格式化记录的头字符串。
+     * <p>
+     *  这个基类返回一个空字符串,但这可能被子类覆盖。
+     * 
+     * 
      * @param   h  The target handler (can be null)
      * @return  header string
      */
@@ -81,6 +105,12 @@ public abstract class Formatter {
      * This base class returns an empty string, but this may be
      * overridden by subclasses.
      *
+     * <p>
+     *  返回一组格式化记录的尾部字符串。
+     * <p>
+     *  这个基类返回一个空字符串,但这可能被子类覆盖。
+     * 
+     * 
      * @param   h  The target handler (can be null)
      * @return  tail string
      */
@@ -107,6 +137,13 @@ public abstract class Formatter {
      * </ul>
      * <p>
      *
+     * <p>
+     *  本地化和格式化日志记录中的消息字符串。提供此方法是为了方便格式化子类在执行格式化时使用。
+     * <p>
+     * 消息字符串首先使用记录的ResourceBundle本地化为格式字符串。 (如果没有ResourceBundle,或者没有找到消息键,则该键用作格式字符串。
+     * )格式String使用java.text样式格式。
+     * <ul>
+     * 
      * @param  record  the log record containing the raw message
      * @return   a localized and formatted message
      */

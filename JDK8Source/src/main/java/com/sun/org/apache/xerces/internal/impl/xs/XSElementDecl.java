@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -41,6 +51,12 @@ import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
  *
  * @xerces.internal
  *
+ * <p>
+ *  元素声明模式组件的XML表示是一个<element>元素信息项
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Elena Litani, IBM
  * @author Sandy Gao, IBM
  * @version $Id: XSElementDecl.java,v 1.7 2010-11-01 04:39:55 joehw Exp $
@@ -132,6 +148,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * get the string description of this element
+     * <p>
+     *  获取此元素的字符串描述
+     * 
      */
     private String fDescription = null;
     public String toString() {
@@ -156,6 +175,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * get the hash code
+     * <p>
+     *  获取哈希码
+     * 
      */
     public int hashCode() {
         int code = fName.hashCode();
@@ -166,6 +188,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * whether two decls are the same
+     * <p>
+     *  是否两个decls相同
+     * 
      */
     public boolean equals(Object o) {
         return o == this;
@@ -173,6 +198,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
       * Reset current element declaration
+      * <p>
+      *  重置当前元素声明
+      * 
       */
     public void reset(){
         fScope = XSConstants.SCOPE_ABSENT;
@@ -196,6 +224,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * Get the type of the object, i.e ELEMENT_DECLARATION.
+     * <p>
+     *  获取对象的类型,即ELEMENT_DECLARATION。
+     * 
      */
     public short getType() {
         return XSConstants.ELEMENT_DECLARATION;
@@ -204,6 +235,9 @@ public class XSElementDecl implements XSElementDeclaration {
     /**
      * The <code>name</code> of this <code>XSObject</code> depending on the
      * <code>XSObject</code> type.
+     * <p>
+     *  取决于<code> XSObject </code>类型的<code> XSObject </code>的<code> name </code>
+     * 
      */
     public String getName() {
         return fName;
@@ -213,6 +247,9 @@ public class XSElementDecl implements XSElementDeclaration {
      * The namespace URI of this node, or <code>null</code> if it is
      * unspecified.  defines how a namespace URI is attached to schema
      * components.
+     * <p>
+     *  此节点的名称空间URI,或<code> null </code>(如果未指定)。定义命名空间URI如何附加到模式组件。
+     * 
      */
     public String getNamespace() {
         return fTargetNamespace;
@@ -220,6 +257,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * Either a simple type definition or a complex type definition.
+     * <p>
+     *  可以是简单类型定义或复杂类型定义。
+     * 
      */
     public XSTypeDefinition getTypeDefinition() {
         return fType;
@@ -231,6 +271,9 @@ public class XSElementDecl implements XSElementDeclaration {
      * declarations within named model groups: their scope will be
      * determined when they are used in the construction of complex type
      * definitions.
+     * <p>
+     * 可选的。全局或复杂类型定义(<code> ctDefinition </code>)。在命名模型组中的声明的情况下,此属性不存在：当它们用于构造复杂类型定义时,它们的范围将被确定。
+     * 
      */
     public short getScope() {
         return fScope;
@@ -240,6 +283,9 @@ public class XSElementDecl implements XSElementDeclaration {
      * Locally scoped declarations are available for use only within the
      * complex type definition identified by the <code>scope</code>
      * property.
+     * <p>
+     *  局部范围声明仅可用于由<code> scope </code>属性标识的复杂类型定义中。
+     * 
      */
     public XSComplexTypeDefinition getEnclosingCTDefinition() {
         return fEnclosingCT;
@@ -247,6 +293,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * A value constraint: one of default, fixed.
+     * <p>
+     *  值约束：默认值之一,固定。
+     * 
      */
     public short getConstraintType() {
         return (short)(fMiscFlags & CONSTRAINT_MASK);
@@ -255,6 +304,9 @@ public class XSElementDecl implements XSElementDeclaration {
     /**
      * A value constraint: The actual value (with respect to the {type
      * definition})
+     * <p>
+     *  值约束：实际值(相对于{类型定义})
+     * 
      */
     public String getConstraintValue() {
         // REVISIT: SCAPI: what's the proper representation
@@ -269,6 +321,10 @@ public class XSElementDecl implements XSElementDeclaration {
      * namespace http://www.w3.org/2001/XMLSchema-instance and value true
      * (see xsi:nil (2.6.2)) even if it has no text or element content
      * despite a {content type} which would otherwise require content.
+     * <p>
+     *  如果{nillable}为true,那么如果元素携带来自命名空间http://www.w3.org/2001/XMLSchema-instance中的[local name] nil的命名空间限定属性
+     * ,值为true(见xsi ：nil(2.6.2)),即使它没有文本或元素内容,尽管否则需要内容的{content type}。
+     * 
      */
     public boolean getNillable() {
         return ((fMiscFlags & NILLABLE) != 0);
@@ -276,6 +332,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * {identity-constraint definitions} A set of constraint definitions.
+     * <p>
+     *  {identity-constraint definitions}一组约束定义。
+     * 
      */
     public XSNamedMap getIdentityConstraints() {
         return new XSNamedMapImpl(fIDConstraints, fIDCPos);
@@ -284,6 +343,9 @@ public class XSElementDecl implements XSElementDeclaration {
     /**
      * {substitution group affiliation} Optional. A top-level element
      * definition.
+     * <p>
+     *  {substitute group affiliation}可选。顶级元素定义。
+     * 
      */
     public XSElementDeclaration getSubstitutionGroupAffiliation() {
         return fSubGroup;
@@ -292,6 +354,10 @@ public class XSElementDecl implements XSElementDeclaration {
     /**
      * Convenience method. Check if <code>exclusion</code> is a substitution
      * group exclusion for this element declaration.
+     * <p>
+     *  方便的方法。检查<code>排除</code>是否为此元素声明的替代组排除。
+     * 
+     * 
      * @param exclusion Extension, restriction or none. Represents final
      *   set for the element.
      * @return True if <code>exclusion</code> is a part of the substitution
@@ -307,6 +373,10 @@ public class XSElementDecl implements XSElementDeclaration {
      * element declarations having the same {type definition}
      * or types derived therefrom.
      *
+     * <p>
+     *  指定此声明是否可以被指定为具有相同{类型定义}或其派生类型的其他元素声明的{替换组附属}。
+     * 
+     * 
      * @return A bit flag representing {extension, restriction} or NONE.
      */
     public short getSubstitutionGroupExclusions() {
@@ -316,6 +386,10 @@ public class XSElementDecl implements XSElementDeclaration {
     /**
      * Convenience method. Check if <code>disallowed</code> is a disallowed
      * substitution for this element declaration.
+     * <p>
+     *  方便的方法。检查<code>不允许</code>是否不允许替换此元素声明。
+     * 
+     * 
      * @param disallowed Substitution, extension, restriction or none.
      *   Represents a block set for the element.
      * @return True if <code>disallowed</code> is a part of the substitution
@@ -328,6 +402,10 @@ public class XSElementDecl implements XSElementDeclaration {
     /**
      * The supplied values for {disallowed substitutions}
      *
+     * <p>
+     *  提供的{disallowed substitution}
+     * 
+     * 
      * @return A bit flag representing {substitution, extension, restriction} or NONE.
      */
     public short getDisallowedSubstitutions() {
@@ -336,6 +414,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * {abstract} A boolean.
+     * <p>
+     *  {abstract}布尔值。
+     * 
      */
     public boolean getAbstract() {
         return ((fMiscFlags & ABSTRACT) != 0);
@@ -343,6 +424,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * Optional. Annotation.
+     * <p>
+     * 可选的。注解。
+     * 
      */
     public XSAnnotation getAnnotation() {
         return (fAnnotations != null) ? (XSAnnotation) fAnnotations.item(0) : null;
@@ -350,6 +434,9 @@ public class XSElementDecl implements XSElementDeclaration {
 
     /**
      * Optional. Annotations.
+     * <p>
+     *  可选的。注释。
+     * 
      */
     public XSObjectList getAnnotations() {
         return (fAnnotations != null) ? fAnnotations : XSObjectListImpl.EMPTY_LIST;
@@ -357,6 +444,8 @@ public class XSElementDecl implements XSElementDeclaration {
 
 
     /**
+    /* <p>
+    /* 
      * @see org.apache.xerces.xs.XSObject#getNamespaceItem()
      */
     public XSNamespaceItem getNamespaceItem() {

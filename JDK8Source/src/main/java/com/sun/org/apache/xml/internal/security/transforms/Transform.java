@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.transforms;
 
@@ -63,6 +72,14 @@ import org.xml.sax.SAXException;
  * algorithm</a>.
  * Implements the Factory and Proxy pattern for ds:Transform algorithms.
  *
+ * <p>
+ *  实现<code> ds：Transform </code>元素的行为。
+ * 
+ *  这个<code> Transform </code>(Factory)类作为实现类的工厂和代理,支持<a href = http：//www.w3.org/TR/xmldsig-core/#sec -TransformAlg>
+ * 变换算法</a>。
+ * 实现ds：Transform算法的工厂和代理模式。
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  * @see Transforms
  * @see TransformSpi
@@ -83,6 +100,10 @@ public final class Transform extends SignatureElementProxy {
      * Generates a Transform object that implements the specified
      * <code>Transform algorithm</code> URI.
      *
+     * <p>
+     *  生成实现指定的<code> Transform algorithm </code> URI的Transform对象。
+     * 
+     * 
      * @param doc the proxy {@link Document}
      * @param algorithmURI <code>Transform algorithm</code> URI representation,
      * such as specified in
@@ -97,6 +118,10 @@ public final class Transform extends SignatureElementProxy {
      * Generates a Transform object that implements the specified
      * <code>Transform algorithm</code> URI.
      *
+     * <p>
+     *  生成实现指定的<code> Transform algorithm </code> URI的Transform对象。
+     * 
+     * 
      * @param algorithmURI <code>Transform algorithm</code> URI representation,
      * such as specified in
      * <a href=http://www.w3.org/TR/xmldsig-core/#sec-TransformAlg>Transform algorithm </a>
@@ -123,6 +148,10 @@ public final class Transform extends SignatureElementProxy {
     /**
      * Constructs {@link Transform}
      *
+     * <p>
+     *  构造{@link Transform}
+     * 
+     * 
      * @param doc the {@link Document} in which <code>Transform</code> will be
      * placed
      * @param algorithmURI URI representation of <code>Transform algorithm</code>
@@ -136,6 +165,8 @@ public final class Transform extends SignatureElementProxy {
     }
 
     /**
+    /* <p>
+    /* 
      * @param element <code>ds:Transform</code> element
      * @param BaseURI the URI of the resource where the XML instance was stored
      * @throws InvalidTransformException
@@ -177,6 +208,10 @@ public final class Transform extends SignatureElementProxy {
     /**
      * Registers implementing class of the Transform algorithm with algorithmURI
      *
+     * <p>
+     * 使用algorithmURI实现Transform算法类的寄存器
+     * 
+     * 
      * @param algorithmURI algorithmURI URI representation of <code>Transform algorithm</code>
      * @param implementingClass <code>implementingClass</code> the implementing
      * class of {@link TransformSpi}
@@ -205,6 +240,10 @@ public final class Transform extends SignatureElementProxy {
     /**
      * Registers implementing class of the Transform algorithm with algorithmURI
      *
+     * <p>
+     *  使用algorithmURI实现Transform算法类的寄存器
+     * 
+     * 
      * @param algorithmURI algorithmURI URI representation of <code>Transform algorithm</code>
      * @param implementingClass <code>implementingClass</code> the implementing
      * class of {@link TransformSpi}
@@ -227,6 +266,9 @@ public final class Transform extends SignatureElementProxy {
 
     /**
      * This method registers the default algorithms.
+     * <p>
+     *  此方法注册默认算法。
+     * 
      */
     public static void registerDefaultAlgorithms() {
         transformSpiHash.put(
@@ -267,6 +309,10 @@ public final class Transform extends SignatureElementProxy {
     /**
      * Returns the URI representation of Transformation algorithm
      *
+     * <p>
+     *  返回转换算法的URI表示形式
+     * 
+     * 
      * @return the URI representation of Transformation algorithm
      */
     public String getURI() {
@@ -276,6 +322,10 @@ public final class Transform extends SignatureElementProxy {
     /**
      * Transforms the input, and generates {@link XMLSignatureInput} as output.
      *
+     * <p>
+     *  转换输入,并生成{@link XMLSignatureInput}作为输出。
+     * 
+     * 
      * @param input input {@link XMLSignatureInput} which can supplied Octet
      * Stream and NodeSet as Input of Transformation
      * @return the {@link XMLSignatureInput} class as the result of
@@ -294,6 +344,10 @@ public final class Transform extends SignatureElementProxy {
     /**
      * Transforms the input, and generates {@link XMLSignatureInput} as output.
      *
+     * <p>
+     *  转换输入,并生成{@link XMLSignatureInput}作为输出。
+     * 
+     * 
      * @param input input {@link XMLSignatureInput} which can supplied Octect
      * Stream and NodeSet as Input of Transformation
      * @param os where to output the result of the last transformation
@@ -332,6 +386,8 @@ public final class Transform extends SignatureElementProxy {
 
     /**
      * Initialize the transform object.
+     * <p>
+     *  初始化变换对象。
      */
     private TransformSpi initializeTransform(String algorithmURI, NodeList contextNodes)
         throws InvalidTransformException {

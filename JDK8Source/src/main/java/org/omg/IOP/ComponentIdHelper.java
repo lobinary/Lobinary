@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -12,6 +13,8 @@ package org.omg.IOP;
 /**
      * Standard way of representing multicomponent profiles.
      * This would be encapsulated in a TaggedProfile.
+     * <p>
+     * 
      */
 abstract public class ComponentIdHelper
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,13 @@ import java.beans.ConstructorProperties;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  实现具有软化角的升高或降低的斜面的类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Amy Fowler
  * @author Chester Rose
  */
@@ -54,6 +62,10 @@ public class SoftBevelBorder extends BevelBorder
      * Creates a bevel border with the specified type and whose
      * colors will be derived from the background color of the
      * component passed into the paintBorder method.
+     * <p>
+     *  创建具有指定类型的斜角边框,其颜色将从传递到paintBorder方法的组件的背景颜色派生。
+     * 
+     * 
      * @param bevelType the type of bevel for the border
      */
     public SoftBevelBorder(int bevelType) {
@@ -63,6 +75,10 @@ public class SoftBevelBorder extends BevelBorder
     /**
      * Creates a bevel border with the specified type, highlight and
      * shadow colors.
+     * <p>
+     *  创建具有指定类型,高亮和阴影颜色的斜角边框。
+     * 
+     * 
      * @param bevelType the type of bevel for the border
      * @param highlight the color to use for the bevel highlight
      * @param shadow the color to use for the bevel shadow
@@ -74,6 +90,10 @@ public class SoftBevelBorder extends BevelBorder
     /**
      * Creates a bevel border with the specified type, highlight
      * shadow colors.
+     * <p>
+     *  创建具有指定类型的斜角边框,高亮阴影颜色。
+     * 
+     * 
      * @param bevelType the type of bevel for the border
      * @param highlightOuterColor the color to use for the bevel outer highlight
      * @param highlightInnerColor the color to use for the bevel inner highlight
@@ -91,6 +111,10 @@ public class SoftBevelBorder extends BevelBorder
     /**
      * Paints the border for the specified component with the specified
      * position and size.
+     * <p>
+     *  以指定的位置和大小绘制指定组件的边框。
+     * 
+     * 
      * @param c the component for which this border is being painted
      * @param g the paint graphics
      * @param x the x position of the painted border
@@ -149,6 +173,10 @@ public class SoftBevelBorder extends BevelBorder
 
     /**
      * Reinitialize the insets parameter with this Border's current Insets.
+     * <p>
+     *  使用此Border的当前Insets重新初始化insets参数。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
      */
@@ -159,6 +187,8 @@ public class SoftBevelBorder extends BevelBorder
 
     /**
      * Returns whether or not the border is opaque.
+     * <p>
+     *  返回边框是否不透明。
      */
     public boolean isBorderOpaque() { return false; }
 

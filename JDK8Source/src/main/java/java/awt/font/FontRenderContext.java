@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,8 @@
  */
 
 /*
+/* <p>
+/* 
  * @author Charlton Innovations, Inc.
  */
 
@@ -57,6 +60,18 @@ import java.awt.geom.AffineTransform;
 *   <code>FontRenderContext</code> which is directly constructed will
 *   most likely not represent any actual graphics device, and may lead
 *   to unexpected or incorrect results.
+* <p>
+*  <code> FontRenderContext </code>类是正确测量文本所需信息的容器。文本的测量可以变化,因为将轮廓映射到像素的规则以及由应用提供的呈现提示。
+* <p>
+*  一个这样的信息是将排版点缩放到像素的变换。 (点被定义为精确的1/72英寸,这与点的传统机械测量略有不同。
+* )在600dpi设备上以12pt渲染的字符可能具有与渲染的相同字符不同的大小在72dpi设备上的12pt,因为诸如舍入到像素边界和提示字体设计者可能已经指定的因素。
+* <p>
+*  由应用程序指定的消除锯齿和小数度量也可能影响字符的大小,因为四舍五入到像素边界。
+* <p>
+*  通常,从{@link java.awt.Graphics2D Graphics2D}对象获取<code> FontRenderContext </code>的实例。
+* 直接构造的<code> FontRenderContext </code>很可能不代表任何实际的图形设备,并且可能导致意外或不正确的结果。
+* 
+* 
 *   @see java.awt.RenderingHints#KEY_TEXT_ANTIALIASING
 *   @see java.awt.RenderingHints#KEY_FRACTIONALMETRICS
 *   @see java.awt.Graphics2D#getFontRenderContext()
@@ -73,6 +88,9 @@ public class FontRenderContext {
      * Constructs a new <code>FontRenderContext</code>
      * object.
      *
+     * <p>
+     *  构造一个新的<code> FontRenderContext </code>对象。
+     * 
      */
     protected FontRenderContext() {
         aaHintValue = VALUE_TEXT_ANTIALIAS_DEFAULT;
@@ -92,6 +110,14 @@ public class FontRenderContext {
      * To specify other hint values, use the constructor which
      * specifies the rendering hint values as parameters :
      * {@link #FontRenderContext(AffineTransform, Object, Object)}.
+     * <p>
+     * 从可选的{@link AffineTransform}和两个<code>布尔</code>值构造一个<code> FontRenderContext </code>对象,用于确定新构造的对象是否具有抗锯
+     * 齿或分数度量。
+     * 在每种情况下,布尔值<CODE> true </CODE>和<CODE> false </CODE>分别对应于渲染提示值<CODE> ON </CODE>和<CODE> OFF </CODE>。
+     * <p>
+     *  要指定其他提示值,请使用指定渲染提示值作为参数的构造函数：{@link #FontRenderContext(AffineTransform,Object,Object)}。
+     * 
+     * 
      * @param tx the transform which is used to scale typographical points
      * to pixels in this <code>FontRenderContext</code>.  If null, an
      * identity transform is used.
@@ -123,6 +149,11 @@ public class FontRenderContext {
      * optional {@link AffineTransform} and two <code>Object</code>
      * values that determine if the newly constructed object has
      * anti-aliasing or fractional metrics.
+     * <p>
+     *  从可选的{@link AffineTransform}和两个<code> Object </code>值构造一个<code> FontRenderContext </code>对象,以确定新构造的对象
+     * 是否具有抗锯齿或分数度量。
+     * 
+     * 
      * @param tx the transform which is used to scale typographical points
      * to pixels in this <code>FontRenderContext</code>.  If null, an
      * identity transform is used.
@@ -169,6 +200,10 @@ public class FontRenderContext {
     /**
      * Indicates whether or not this <code>FontRenderContext</code> object
      * measures text in a transformed render context.
+     * <p>
+     *  表示这个<code> FontRenderContext </code>对象是否在转换的渲染上下文中测量文本。
+     * 
+     * 
      * @return  <code>true</code> if this <code>FontRenderContext</code>
      *          object has a non-identity AffineTransform attribute.
      *          <code>false</code> otherwise.
@@ -187,6 +222,10 @@ public class FontRenderContext {
      * Returns the integer type of the affine transform for this
      * <code>FontRenderContext</code> as specified by
      * {@link java.awt.geom.AffineTransform#getType()}
+     * <p>
+     *  返回由{@link java.awt.geom.AffineTransform#getType()}指定的<code> FontRenderContext </code>的仿射变换的整数类型
+     * 
+     * 
      * @return the type of the transform.
      * @see AffineTransform
      * @since 1.6
@@ -206,6 +245,10 @@ public class FontRenderContext {
     /**
     *   Gets the transform that is used to scale typographical points
     *   to pixels in this <code>FontRenderContext</code>.
+    * <p>
+    *  获取用于将排版点缩放到此<code> FontRenderContext </code>中的像素的变换。
+    * 
+    * 
     *   @return the <code>AffineTransform</code> of this
     *    <code>FontRenderContext</code>.
     *   @see AffineTransform
@@ -219,6 +262,11 @@ public class FontRenderContext {
     * antialiasing is specified by this <code>FontRenderContext</code>.
     * Call {@link #getAntiAliasingHint() getAntiAliasingHint()}
     * for the specific rendering hint value.
+    * <p>
+    *  返回一个布尔值,表示是否由此<code> FontRenderContext </code>指定某种形式的抗锯齿。
+    * 为特定的渲染提示值调用{@link #getAntiAliasingHint()getAntiAliasingHint()}。
+    * 
+    * 
     *   @return    <code>true</code>, if text is anti-aliased in this
     *   <code>FontRenderContext</code>; <code>false</code> otherwise.
     *   @see        java.awt.RenderingHints#KEY_TEXT_ANTIALIASING
@@ -235,6 +283,11 @@ public class FontRenderContext {
     * is used in this <code>FontRenderContext</code>.
     * Call {@link #getFractionalMetricsHint() getFractionalMetricsHint()}
     * to obtain the corresponding rendering hint value.
+    * <p>
+    * 返回一个布尔值,它是否在此<code> FontRenderContext </code>中使用文本小数度量模式。
+    * 调用{@link #getFractionalMetricsHint()getFractionalMetricsHint()}以获取相应的呈现提示值。
+    * 
+    * 
     *   @return    <code>true</code>, if layout should be performed with
     *   fractional metrics; <code>false</code> otherwise.
     *               in this <code>FontRenderContext</code>.
@@ -252,6 +305,11 @@ public class FontRenderContext {
      * <code>FontRenderContext</code>.
      * This will be one of the text antialiasing rendering hint values
      * defined in {@link java.awt.RenderingHints java.awt.RenderingHints}.
+     * <p>
+     *  返回在此<code> FontRenderContext </code>中使用的文本反锯齿渲染模式提示。
+     * 这将是{@link java.awt.RenderingHints java.awt.RenderingHints}中定义的文本抗锯齿渲染提示值之一。
+     * 
+     * 
      * @return  text anti-aliasing rendering mode hint used in this
      * <code>FontRenderContext</code>.
      * @since 1.6
@@ -272,6 +330,11 @@ public class FontRenderContext {
      * <code>FontRenderContext</code>.
      * This will be one of the text fractional metrics rendering hint values
      * defined in {@link java.awt.RenderingHints java.awt.RenderingHints}.
+     * <p>
+     *  返回在此<code> FontRenderContext </code>中使用的文本小数度量呈现模式提示。
+     * 这将是在{@link java.awt.RenderingHints java.awt.RenderingHints}中定义的文本分数度量值之一。
+     * 
+     * 
      * @return the text fractional metrics rendering mode hint used in this
      * <code>FontRenderContext</code>.
      * @since 1.6
@@ -290,6 +353,10 @@ public class FontRenderContext {
     /**
      * Return true if obj is an instance of FontRenderContext and has the same
      * transform, antialiasing, and fractional metrics values as this.
+     * <p>
+     *  如果obj是FontRenderContext的实例,并且具有与此相同的变换,抗锯齿和分数度量值,则返回true。
+     * 
+     * 
      * @param obj the object to test for equality
      * @return <code>true</code> if the specified object is equal to
      *         this <code>FontRenderContext</code>; <code>false</code>
@@ -307,6 +374,10 @@ public class FontRenderContext {
     /**
      * Return true if rhs has the same transform, antialiasing,
      * and fractional metrics values as this.
+     * <p>
+     *  如果rhs具有与此相同的变换,抗锯齿和小数度量值,则返回true。
+     * 
+     * 
      * @param rhs the <code>FontRenderContext</code> to test for equality
      * @return <code>true</code> if <code>rhs</code> is equal to
      *         this <code>FontRenderContext</code>; <code>false</code>
@@ -339,11 +410,16 @@ public class FontRenderContext {
 
     /**
      * Return a hashcode for this FontRenderContext.
+     * <p>
+     *  返回此FontRenderContext的哈希码。
+     * 
      */
     public int hashCode() {
         int hash = tx == null ? 0 : tx.hashCode();
         /* SunHints value objects have identity hashcode, so we can rely on
          * this to ensure that two equal FRC's have the same hashcode.
+         * <p>
+         *  这确保两个相等的FRC具有相同的哈希码。
          */
         if (defaulting) {
             hash += getAntiAliasingHint().hashCode();

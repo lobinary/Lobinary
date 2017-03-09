@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -23,6 +24,11 @@ public interface TAG_JAVA_CODEBASE
      * profile, where the <code>component_data</code> is a CDR encapsulation 
      * of the codebase written as an IDL string. The codebase is a 
      * space-separated list of one or more URLs.
+     * <p>
+     *  存根,关系,值和值助手支持类下载。该规范允许在存根和绑定的线路上传输代码库信息,并且在相关时允许使用预先存在的ClassLoaders。
+     * <p>
+     *  对于值和值辅助函数,代码库在值标记之后传输。
+     * 对于存根和联系,代码库作为IOR配置文件中的TaggedComponent <code> TAG_JAVA_CODEBASE </code>进行传输,其中<code> component_data </code>
      */
   public static final int value = (int)(25L);
 }

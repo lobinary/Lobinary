@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -71,32 +72,50 @@ public class GIFImageWriter extends ImageWriter {
 
     /**
      * The <code>output</code> case to an <code>ImageOutputStream</code>.
+     * <p>
+     *  <code>输出</code>案例到<code> ImageOutputStream </code>。
+     * 
      */
     private ImageOutputStream stream = null;
 
     /**
      * Whether a sequence is being written.
+     * <p>
+     *  序列是否正在写入。
+     * 
      */
     private boolean isWritingSequence = false;
 
     /**
      * Whether the header has been written.
+     * <p>
+     *  标题是否已写入。
+     * 
      */
     private boolean wroteSequenceHeader = false;
 
     /**
      * The stream metadata of a sequence.
+     * <p>
+     *  序列的流元数据。
+     * 
      */
     private GIFWritableStreamMetadata theStreamMetadata = null;
 
     /**
      * The index of the image being written.
+     * <p>
+     *  正在写入的图像的索引。
+     * 
      */
     private int imageIndex = 0;
 
     /**
      * The number of bits represented by the value which should be a
      * legal length for a color table.
+     * <p>
+     *  由值表示的位数,该值应为颜色表的合法长度。
+     * 
      */
     private static int getNumBits(int value) throws IOException {
         int numBits;
@@ -135,6 +154,9 @@ public class GIFImageWriter extends ImageWriter {
     /**
      * Compute the source region and destination dimensions taking any
      * parameter settings into account.
+     * <p>
+     *  考虑任何参数设置,计算源区域和目标尺寸。
+     * 
      */
     private static void computeRegions(Rectangle sourceBounds,
                                        Dimension destSize,
@@ -181,6 +203,9 @@ public class GIFImageWriter extends ImageWriter {
 
     /**
      * Create a color table from the image ColorModel and SampleModel.
+     * <p>
+     *  从图像ColorModel和SampleModel创建颜色表。
+     * 
      */
     private static byte[] createColorTable(ColorModel colorModel,
                                            SampleModel sampleModel)
@@ -194,6 +219,9 @@ public class GIFImageWriter extends ImageWriter {
              * The GIF image format assumes that size of image palette
              * is power of two. We will use closest larger power of two
              * as size of color table.
+             * <p>
+             *  GIF图像格式假定图像调色板的大小是2的幂。我们将使用最接近的两个大的功率作为颜色表的大小。
+             * 
              */
             int ctSize = getGifPaletteSize(mapSize);
 
@@ -207,6 +235,9 @@ public class GIFImageWriter extends ImageWriter {
             /**
              * fill tail of color component arrays by replica of first color
              * in order to avoid appearance of extra colors in the color table
+             * <p>
+             *  通过第一颜色的复制来填充颜色分量阵列的尾部,以避免在颜色表中出现额外的颜色
+             * 
              */
             for (int i = mapSize; i < ctSize; i++) {
                 reds[i] = reds[0];
@@ -244,6 +275,9 @@ public class GIFImageWriter extends ImageWriter {
     /**
      * According do GIF specification size of clor table (palette here)
      * must be in range from 2 to 256 and must be power of 2.
+     * <p>
+     *  根据GIF规格,clor表(调色板)的大小必须在2到256的范围内,并且必须为2的幂。
+     * 
      */
     private static int getGifPaletteSize(int x) {
         if (x <= 2) {
@@ -275,6 +309,9 @@ public class GIFImageWriter extends ImageWriter {
      * Merges <code>inData</code> into <code>outData</code>. The supplied
      * metadata format name is attempted first and failing that the standard
      * metadata format name is attempted.
+     * <p>
+     *  将<code> inData </code>合并到<code> outData </code>中。首先尝试提供的元数据格式名称,但未能尝试标准元数据格式名称。
+     * 
      */
     private void convertMetadata(String metadataFormatName,
                                  IIOMetadata inData,
@@ -316,6 +353,9 @@ public class GIFImageWriter extends ImageWriter {
     /**
      * Creates a default stream metadata object and merges in the
      * supplied metadata.
+     * <p>
+     *  创建默认流元数据对象,并在提供的元数据中进行合并。
+     * 
      */
     public IIOMetadata convertStreamMetadata(IIOMetadata inData,
                                              ImageWriteParam param) {
@@ -333,6 +373,9 @@ public class GIFImageWriter extends ImageWriter {
     /**
      * Creates a default image metadata object and merges in the
      * supplied metadata.
+     * <p>
+     *  创建默认图像元数据对象,并在提供的元数据中进行合并。
+     * 
      */
     public IIOMetadata convertImageMetadata(IIOMetadata inData,
                                             ImageTypeSpecifier imageType,
@@ -462,6 +505,9 @@ public class GIFImageWriter extends ImageWriter {
 
     /**
      * Resets locally defined instance variables.
+     * <p>
+     *  重置本地定义的实例变量。
+     * 
      */
     private void resetLocal() {
         this.isWritingSequence = false;
@@ -552,6 +598,10 @@ public class GIFImageWriter extends ImageWriter {
      * and optionally the header (Signature and Logical Screen Descriptor)
      * and trailer (Block Terminator).
      *
+     * <p>
+     * 写入任何扩展块,图像描述符,图像数据,以及可选的头(签名和逻辑屏幕描述符)和尾部(块终止符)。
+     * 
+     * 
      * @param writeHeader Whether to write the header.
      * @param writeTrailer Whether to write the trailer.
      * @param sm The stream metadata or <code>null</code> if
@@ -627,6 +677,9 @@ public class GIFImageWriter extends ImageWriter {
                        is potentially not right thing to do until we have way
                        to find whether current value was explicitly set by
                        the user.
+                    /* <p>
+                    /*  灰度图像,但明确地重新在这里是潜在不是正确的事情要做,直到我们有办法找到当前值是否由用户明确设置。
+                    /* 
                     */
                 }
             }
@@ -730,6 +783,10 @@ public class GIFImageWriter extends ImageWriter {
     /**
      * Writes any extension blocks, the Image Descriptor, and the image data
      *
+     * <p>
+     *  写入任何扩展块,图像描述符和图像数据
+     * 
+     * 
      * @param iioimage The image and image metadata.
      * @param param The write parameters.
      * @param globalColorTable The Global Color Table.
@@ -912,6 +969,9 @@ public class GIFImageWriter extends ImageWriter {
          *   - we can access data directly (image is non-tiled,
          *     i.e. image data are in single block)
          *   - we can calculate offset in data buffer (next 3 lines)
+         * <p>
+         *  我们可以直接复制数据iff： - 不需要子采样(periodX = 1,periodY = 0) - 我们可以直接访问数据(图像是非平铺的,即图像数据在单个块中) - 我们可以计算数据缓冲区接下来3行
+         * )。
          */
         boolean isOptimizedCase =
             periodX == 1 && periodY == 1 &&

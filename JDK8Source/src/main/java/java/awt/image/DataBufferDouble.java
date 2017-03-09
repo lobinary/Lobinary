@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,15 @@ import static sun.java2d.StateTrackable.State.*;
  * documentation for those methods.
  * </a>
  *
+ * <p>
+ *  这个类扩展了<code> DataBuffer </code>,并在<code> double </code>形式内部存储数据。
+ * <p>
+ * <a name="optimizations">
+ *  注意,如果一些实现可以保持对如何存储图像的数据的控制,则它们可以更有效地工作。例如,诸如在视频存储器中高速缓存图像的优化需要实现跟踪对该数据的所有修改。
+ * 如果其他实现可以将数据存储在除Java数组之外的位置中,则可以更好地操作。为了保持与各种优化的最佳兼容性,最好避免将底层存储暴露为Java数组的构造函数和方法,如下面在这些方法的文档中所述。
+ * </a>
+ * 
+ * 
  * @since 1.4
  */
 
@@ -61,6 +71,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Constructs a <code>double</code>-based <code>DataBuffer</code>
      * with a specified size.
      *
+     * <p>
+     *  构造具有指定大小的<code> double </code>  - 基于<code> DataBuffer </code>。
+     * 
+     * 
      * @param size The number of elements in the <code>DataBuffer</code>.
      */
     public DataBufferDouble(int size) {
@@ -75,6 +89,10 @@ public final class DataBufferDouble extends DataBuffer {
      * with a specified number of banks, all of which are of a
      * specified size.
      *
+     * <p>
+     *  构造一个<code> double </code>  - 基于<code> DataBuffer </code>的指定数量的bank,所有这些都是指定大小。
+     * 
+     * 
      * @param size The number of elements in each bank of the
      *        <code>DataBuffer</code>.
      * @param numBanks The number of banks in the <code>DataBuffer</code>.
@@ -100,6 +118,13 @@ public final class DataBufferDouble extends DataBuffer {
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  使用指定的数据数组构造<code> double </code> -based <code> DataBuffer </code>。
+     * 只有第一个<code> size </code>元素可供此<code> DataBuffer </code>使用。数组必须足够大以容纳<code> size </code>元素。
+     * <p>
+     * 请注意,由此构造函数创建的{@code DataBuffer}对象可能与某些实施所使用的<a href="#optimizations">性能优化</a>不兼容(例如缓存视频内存中的关联图像)。
+     * 
+     * 
      * @param dataArray An array of <code>double</code>s to be used as the
      *                  first and only bank of this <code>DataBuffer</code>.
      * @param size The number of elements of the array to be used.
@@ -123,6 +148,14 @@ public final class DataBufferDouble extends DataBuffer {
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  使用指定的数据数组构造<code> double </code> -based <code> DataBuffer </code>。
+     * 只有<code> offset </code>和<code> offset + size  -  1 </code>之间的元素可供此<code> DataBuffer </code>使用。
+     * 数组必须足够大以容纳<code> offset + size </code>元素。
+     * <p>
+     *  请注意,由此构造函数创建的{@code DataBuffer}对象可能与某些实施所使用的<a href="#optimizations">性能优化</a>不兼容(例如缓存视频内存中的关联图像)。
+     * 
+     * 
      * @param dataArray An array of <code>double</code>s to be used as the
      *                  first and only bank of this <code>DataBuffer</code>.
      * @param size The number of elements of the array to be used.
@@ -148,6 +181,14 @@ public final class DataBufferDouble extends DataBuffer {
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  使用指定的数据数组构造<code> double </code> -based <code> DataBuffer </code>。
+     * 只有每个数组的第一个<code> size </code>元素可供此<code> DataBuffer </code>使用。
+     * 存储区数将等于<code>到dataArray.length </code>。
+     * <p>
+     *  请注意,由此构造函数创建的{@code DataBuffer}对象可能与某些实施所使用的<a href="#optimizations">性能优化</a>不兼容(例如缓存视频内存中的关联图像)。
+     * 
+     * 
      * @param dataArray An array of arrays of <code>double</code>s to be
      *        used as the banks of this <code>DataBuffer</code>.
      * @param size The number of elements of each array to be used.
@@ -171,6 +212,13 @@ public final class DataBufferDouble extends DataBuffer {
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     * 使用指定的数据数组,大小和每个库偏移构造一个<code> double </code>  - 基于<code> DataBuffer </code>。存储区数等于dataArray.length。
+     * 每个数组必须至少与<code> size </code>一样大,加上相应的偏移量。在每个数据数组的<code> offsets </code>数组中必须有一个条目。
+     * <p>
+     *  请注意,由此构造函数创建的{@code DataBuffer}对象可能与某些实施所使用的<a href="#optimizations">性能优化</a>不兼容(例如缓存视频内存中的关联图像)。
+     * 
+     * 
      * @param dataArray An array of arrays of <code>double</code>s to be
      *        used as the banks of this <code>DataBuffer</code>.
      * @param size The number of elements of each array to be used.
@@ -190,6 +238,12 @@ public final class DataBufferDouble extends DataBuffer {
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  返回默认(第一个)<code> double </code>数据数组。
+     * <p>
+     *  请注意,调用此方法可能会导致{@code DataBuffer}对象与某些实施(例如缓存视频内存中的关联图像)所使用的<a href="#optimizations">性能优化</a>不兼容。
+     * 
+     * 
      * @return the first double data array.
      */
     public double[] getData() {
@@ -205,6 +259,12 @@ public final class DataBufferDouble extends DataBuffer {
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  返回指定库的数据数组。
+     * <p>
+     *  请注意,调用此方法可能会导致{@code DataBuffer}对象与某些实施(例如缓存视频内存中的关联图像)所使用的<a href="#optimizations">性能优化</a>不兼容。
+     * 
+     * 
      * @param bank the data array
      * @return the data array specified by <code>bank</code>.
      */
@@ -221,6 +281,12 @@ public final class DataBufferDouble extends DataBuffer {
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  返回所有库的数据数组。
+     * <p>
+     *  请注意,调用此方法可能会导致{@code DataBuffer}对象与某些实施(例如缓存视频内存中的关联图像)所使用的<a href="#optimizations">性能优化</a>不兼容。
+     * 
+     * 
      * @return all data arrays from this data buffer.
      */
     public double[][] getBankData() {
@@ -232,6 +298,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Returns the requested data array element from the first
      * (default) bank as an <code>int</code>.
      *
+     * <p>
+     * 将第一个(默认)库中请求的数据数组元素作为<code> int </code>返回。
+     * 
+     * 
      * @param i The desired data array element.
      * @return The data entry as an <code>int</code>.
      * @see #setElem(int, int)
@@ -245,6 +315,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Returns the requested data array element from the specified
      * bank as an <code>int</code>.
      *
+     * <p>
+     *  将指定库中请求的数据数组元素作为<code> int </code>返回。
+     * 
+     * 
      * @param bank The bank number.
      * @param i The desired data array element.
      *
@@ -260,6 +334,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Sets the requested data array element in the first (default)
      * bank to the given <code>int</code>.
      *
+     * <p>
+     *  将第一个(默认)库中请求的数据数组元素设置为给定的<code> int </code>。
+     * 
+     * 
      * @param i The desired data array element.
      * @param val The value to be set.
      * @see #getElem(int)
@@ -274,6 +352,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Sets the requested data array element in the specified bank
      * to the given <code>int</code>.
      *
+     * <p>
+     *  将指定库中请求的数据数组元素设置为给定的<code> int </code>。
+     * 
+     * 
      * @param bank The bank number.
      * @param i The desired data array element.
      * @param val The value to be set.
@@ -289,6 +371,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Returns the requested data array element from the first
      * (default) bank as a <code>float</code>.
      *
+     * <p>
+     *  将第一个(默认)库中请求的数据数组元素作为<code> float </code>返回。
+     * 
+     * 
      * @param i The desired data array element.
      *
      * @return The data entry as a <code>float</code>.
@@ -303,6 +389,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Returns the requested data array element from the specified
      * bank as a <code>float</code>.
      *
+     * <p>
+     *  将指定库中请求的数据数组元素作为<code> float </code>返回。
+     * 
+     * 
      * @param bank The bank number.
      * @param i The desired data array element.
      *
@@ -318,6 +408,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Sets the requested data array element in the first (default)
      * bank to the given <code>float</code>.
      *
+     * <p>
+     *  将第一个(默认)库中请求的数据数组元素设置为给定的<code> float </code>。
+     * 
+     * 
      * @param i The desired data array element.
      * @param val The value to be set.
      * @see #getElemFloat(int)
@@ -332,6 +426,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Sets the requested data array element in the specified bank to
      * the given <code>float</code>.
      *
+     * <p>
+     *  将指定库中请求的数据数组元素设置为给定的<code> float </code>。
+     * 
+     * 
      * @param bank The bank number.
      * @param i The desired data array element.
      * @param val The value to be set.
@@ -347,6 +445,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Returns the requested data array element from the first
      * (default) bank as a <code>double</code>.
      *
+     * <p>
+     *  将第一个(默认)库中请求的数据数组元素作为<code> double </code>返回。
+     * 
+     * 
      * @param i The desired data array element.
      *
      * @return The data entry as a <code>double</code>.
@@ -361,6 +463,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Returns the requested data array element from the specified
      * bank as a <code>double</code>.
      *
+     * <p>
+     *  将指定库中请求的数据数组元素作为<code> double </code>返回。
+     * 
+     * 
      * @param bank The bank number.
      * @param i The desired data array element.
      *
@@ -376,6 +482,10 @@ public final class DataBufferDouble extends DataBuffer {
      * Sets the requested data array element in the first (default)
      * bank to the given <code>double</code>.
      *
+     * <p>
+     *  将第一个(默认)库中请求的数据数组元素设置为给定的<code> double </code>。
+     * 
+     * 
      * @param i The desired data array element.
      * @param val The value to be set.
      * @see #getElemDouble(int)
@@ -390,6 +500,9 @@ public final class DataBufferDouble extends DataBuffer {
      * Sets the requested data array element in the specified bank to
      * the given <code>double</code>.
      *
+     * <p>
+     *  将指定库中请求的数据数组元素设置为给定的<code> double </code>。
+     * 
      * @param bank The bank number.
      * @param i The desired data array element.
      * @param val The value to be set.

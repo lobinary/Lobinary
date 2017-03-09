@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,10 @@ import sun.swing.DefaultLookup;
 /**
  * The default Spinner UI delegate.
  *
+ * <p>
+ *  默认的Spinner UI委托。
+ * 
+ * 
  * @author Hans Muller
  * @since 1.4
  */
@@ -54,6 +59,10 @@ public class BasicSpinnerUI extends SpinnerUI
      * the <code>installUI</code> method, and reset to null
      * by <code>uninstallUI</code>.
      *
+     * <p>
+     *  我们是一个UI代理的微调框。通过<code> installUI </code>方法初始化,并通过<code> uninstallUI </code>重置为null。
+     * 
+     * 
      * @see #installUI
      * @see #uninstallUI
      */
@@ -66,6 +75,10 @@ public class BasicSpinnerUI extends SpinnerUI
      * arrow buttons.  These listeners are shared by all
      * spinner arrow buttons.
      *
+     * <p>
+     *  添加到微调框的箭头按钮的鼠标/动作侦听器。这些侦听器由所有旋钮箭头按钮共享。
+     * 
+     * 
      * @see #createNextButton
      * @see #createPreviousButton
      */
@@ -77,6 +90,9 @@ public class BasicSpinnerUI extends SpinnerUI
     /**
      * Used by the default LayoutManager class - SpinnerLayout for
      * missing (null) editor/nextButton/previousButton children.
+     * <p>
+     *  由默认的LayoutManager类 -  SpinnerLayout用于缺少(null)编辑器/ nextButton / previousButton孩子。
+     * 
      */
     private static final Dimension zeroSize = new Dimension(0, 0);
 
@@ -85,6 +101,10 @@ public class BasicSpinnerUI extends SpinnerUI
      * Returns a new instance of BasicSpinnerUI.  SpinnerListUI
      * delegates are allocated one per JSpinner.
      *
+     * <p>
+     *  返回BasicSpinnerUI的一个新实例。每个JSpinner分配一个SpinnerListUI代理。
+     * 
+     * 
      * @param c the JSpinner (not used)
      * @see ComponentUI#createUI
      * @return a new BasicSpinnerUI object
@@ -106,6 +126,11 @@ public class BasicSpinnerUI extends SpinnerUI
      * and then adds the components returned by <code>createNextButton</code>,
      * <code>createPreviousButton</code>, and <code>createEditor</code>.
      *
+     * <p>
+     *  调用<code> installDefaults </code>,<code> installListeners </code>,然后添加<code> createNextButton </code>
+     * ,<code> createPreviousButton </code> / code>。
+     * 
+     * 
      * @param c the JSpinner
      * @see #installDefaults
      * @see #installListeners
@@ -129,6 +154,10 @@ public class BasicSpinnerUI extends SpinnerUI
      * Calls <code>uninstallDefaults</code>, <code>uninstallListeners</code>,
      * and then removes all of the spinners children.
      *
+     * <p>
+     *  调用<code> uninstallDefaults </code>,<code> uninstallListeners </code>,然后删除所有的旋转孩子。
+     * 
+     * 
      * @param c the JSpinner (not used)
      */
     public void uninstallUI(JComponent c) {
@@ -146,6 +175,12 @@ public class BasicSpinnerUI extends SpinnerUI
      * <p>
      * This method is called by <code>installUI</code>.
      *
+     * <p>
+     *  使用将有趣的PropertyChangeEvents委托给受保护方法的共享对象来初始化<code> PropertyChangeListener </code>。
+     * <p>
+     *  此方法由<code> installUI </code>调用。
+     * 
+     * 
      * @see #replaceEditor
      * @see #uninstallListeners
      */
@@ -173,6 +208,12 @@ public class BasicSpinnerUI extends SpinnerUI
      * <p>
      * This method is called by <code>uninstallUI</code>.
      *
+     * <p>
+     *  删除由installListeners添加的<code> PropertyChangeListener </code>。
+     * <p>
+     *  此方法由<code> uninstallUI </code>调用。
+     * 
+     * 
      * @see #installListeners
      */
     protected void uninstallListeners() {
@@ -199,6 +240,14 @@ public class BasicSpinnerUI extends SpinnerUI
      * The <code>JSpinners</code> layout is set to the value returned by
      * <code>createLayout</code>.  This method is called by <code>installUI</code>.
      *
+     * <p>
+     * 根据相应的"Spinner。
+     * *"属性初始化<code> JSpinner </code> <code> border </code>,<code> foreground </code>和<code> background </code>
+     * 默认表。
+     * 根据相应的"Spinner。 <code> JSpinners </code>布局设置为<code> createLayout </code>返回的值。
+     * 此方法由<code> installUI </code>调用。
+     * 
+     * 
      * @see #uninstallDefaults
      * @see #installUI
      * @see #createLayout
@@ -217,6 +266,10 @@ public class BasicSpinnerUI extends SpinnerUI
      * Sets the <code>JSpinner's</code> layout manager to null.  This
      * method is called by <code>uninstallUI</code>.
      *
+     * <p>
+     *  将<code> JSpinner的</code>布局管理器设置为null。此方法由<code> uninstallUI </code>调用。
+     * 
+     * 
      * @see #installDefaults
      * @see #uninstallUI
      */
@@ -237,6 +290,10 @@ public class BasicSpinnerUI extends SpinnerUI
      * Installs the necessary listeners on the next button, <code>c</code>,
      * to update the <code>JSpinner</code> in response to a user gesture.
      *
+     * <p>
+     *  在下一个按钮<code> c </code>上安装必要的侦听器,以响应用户手势更新<code> JSpinner </code>。
+     * 
+     * 
      * @param c Component to install the listeners on
      * @throws NullPointerException if <code>c</code> is null.
      * @see #createNextButton
@@ -250,6 +307,10 @@ public class BasicSpinnerUI extends SpinnerUI
      * Installs the necessary listeners on the previous button, <code>c</code>,
      * to update the <code>JSpinner</code> in response to a user gesture.
      *
+     * <p>
+     *  在上一个按钮<code> c </code>上安装必要的侦听器,以响应用户手势更新<code> JSpinner </code>。
+     * 
+     * 
      * @param c Component to install the listeners on.
      * @throws NullPointerException if <code>c</code> is null.
      * @see #createPreviousButton
@@ -275,6 +336,12 @@ public class BasicSpinnerUI extends SpinnerUI
      * "Editor", "Next", and "Previous". The default layout manager
      * can handle the absence of any of these children.
      *
+     * <p>
+     *  创建管理JSpinner的<code>编辑器</code>,<code> nextButton </code>和<code> previousButton </code>子代的<code> Layou
+     * tManager </code>这三个孩子必须添加一个约束来标识他们的角色："编辑器","下一步"和"上一个"。
+     * 默认布局管理器可以处理这些子项中没有任何子项。
+     * 
+     * 
      * @return a LayoutManager for the editor, next button, and previous button.
      * @see #createNextButton
      * @see #createPreviousButton
@@ -293,6 +360,12 @@ public class BasicSpinnerUI extends SpinnerUI
      * add the editor to the JSpinner (and remove the old one).
      * This method is called by <code>installListeners</code>.
      *
+     * <p>
+     *  创建一个可以添加到JSpinner本身的<code> PropertyChangeListener </code>。
+     * 通常,当"editor"属性改变时,这个侦听器将调用replaceEditor,因为它是将编辑器添加到JSpinner(并删除旧的)的<code> SpinnerUI的</code>责任。
+     * 此方法由<code> installListeners </code>调用。
+     * 
+     * 
      * @return A PropertyChangeListener for the JSpinner itself
      * @see #installListeners
      */
@@ -307,6 +380,11 @@ public class BasicSpinnerUI extends SpinnerUI
      * By default the <code>previousButton</code> is a {@code JButton}. If the
      * decrement button is not needed this method should return {@code null}.
      *
+     * <p>
+     * 创建一个减量按钮,即用<code> spinner.getPreviousValue </code>返回的对象替换微调框值的组件。
+     * 默认情况下,<code> previousButton </code>是一个{@code JButton}。如果不需要递减按钮,这个方法应该返回{@code null}。
+     * 
+     * 
      * @return a component that will replace the spinner's value with the
      *     previous value in the sequence, or {@code null}
      * @see #installUI
@@ -327,6 +405,11 @@ public class BasicSpinnerUI extends SpinnerUI
      * By default the <code>nextButton</code> is a {@code JButton}. If the
      * increment button is not needed this method should return {@code null}.
      *
+     * <p>
+     *  创建一个增量按钮,即用<code> spinner.getNextValue </code>返回的对象替换微调框值的组件。
+     * 默认情况下,<code> nextButton </code>是一个{@code JButton}。如果不需要增加按钮,这个方法应该返回{@code null}。
+     * 
+     * 
      * @return a component that will replace the spinner's value with the
      *     next value in the sequence, or {@code null}
      * @see #installUI
@@ -373,6 +456,18 @@ public class BasicSpinnerUI extends SpinnerUI
      * overriden this method, then you'll probably want to override
      * <code>replaceEditor</code> as well.
      *
+     * <p>
+     *  此方法由installUI调用以获取<code> JSpinner </code>的编辑器组件。默认情况下,它只返回<code> JSpinner.getEditor()</code>。
+     * 子类可以覆盖<code> createEditor </code>以返回一个包含微调器编辑器或null的组件,如果他们要处理将编辑器添加到<code> installspo </code> / code
+     * > override。
+     *  此方法由installUI调用以获取<code> JSpinner </code>的编辑器组件。默认情况下,它只返回<code> JSpinner.getEditor()</code>。
+     * <p>
+     *  通常,将覆盖此方法以使用具有自定义边框的容器包装编辑器,因为不能假设可以直接设置编辑器边框。
+     * <p>
+     *  当使用<code> JSpinner.setEditor </code>更改旋转编辑器时,会调用<code> replaceEditor </code>方法。
+     * 如果你已经覆盖了这个方法,那么你可能想重写<code> replaceEditor </code>。
+     * 
+     * 
      * @return the JSpinners editor JComponent, spinner.getEditor() by default
      * @see #installUI
      * @see #replaceEditor
@@ -400,6 +495,15 @@ public class BasicSpinnerUI extends SpinnerUI
      * The implementation of <code>replaceEditor</code> should be coordinated
      * with the <code>createEditor</code> method.
      *
+     * <p>
+     * 当<code> JSpinner </code>编辑器属性更改时,由<code> PropertyChangeListener </code>调用。这个方法的责任是删除旧的编辑器并添加新的编辑器。
+     * 默认情况下,此操作只是：。
+     * <pre>
+     *  spinner.remove(oldEditor); spinner.add(newEditor,"Editor");
+     * </pre>
+     *  <code> replaceEditor </code>的实现应该与<code> createEditor </code>方法协调。
+     * 
+     * 
      * @see #createEditor
      * @see #createPropertyChangeListener
      */
@@ -423,6 +527,9 @@ public class BasicSpinnerUI extends SpinnerUI
     /**
      * Remove the border around the inner editor component for LaFs
      * that install an outside border around the spinner,
+     * <p>
+     *  删除围绕内部编辑器组件的边框,用于在旋转器周围安装外部边框的LaF,
+     * 
      */
     private void maybeRemoveEditorBorder(JComponent editor) {
         if (!UIManager.getBoolean("Spinner.editorBorderPainted")) {
@@ -442,6 +549,9 @@ public class BasicSpinnerUI extends SpinnerUI
     /**
      * Remove the border around the inner editor component for LaFs
      * that install an outside border around the spinner,
+     * <p>
+     *  删除围绕内部编辑器组件的边框,用于在旋转器周围安装外部边框的LaF,
+     * 
      */
     private void installEditorBorderListener(JComponent editor) {
         if (!UIManager.getBoolean("Spinner.editorBorderPainted")) {
@@ -476,6 +586,9 @@ public class BasicSpinnerUI extends SpinnerUI
     /**
      * Updates the enabled state of the children Components based on the
      * enabled state of the <code>JSpinner</code>.
+     * <p>
+     *  根据<code> JSpinner </code>的启用状态更新子组件的已启用状态。
+     * 
      */
     private void updateEnabledState() {
         updateEnabledState(spinner, spinner.isEnabled());
@@ -485,6 +598,9 @@ public class BasicSpinnerUI extends SpinnerUI
     /**
      * Recursively updates the enabled state of the child
      * <code>Component</code>s of <code>c</code>.
+     * <p>
+     *  递归更新<code> c </code>的<code> Component </code>子项的启用状态。
+     * 
      */
     private void updateEnabledState(Container c, boolean enabled) {
         for (int counter = c.getComponentCount() - 1; counter >= 0;counter--) {
@@ -518,6 +634,10 @@ public class BasicSpinnerUI extends SpinnerUI
     /**
      * Installs the keyboard Actions onto the JSpinner.
      *
+     * <p>
+     *  将键盘操作安装到JSpinner上。
+     * 
+     * 
      * @since 1.5
      */
     protected void installKeyboardActions() {
@@ -534,6 +654,9 @@ public class BasicSpinnerUI extends SpinnerUI
 
     /**
      * Returns the InputMap to install for <code>condition</code>.
+     * <p>
+     *  返回要为<code> condition </code>安装的InputMap。
+     * 
      */
     private InputMap getInputMap(int condition) {
         if (condition == JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT) {
@@ -551,6 +674,10 @@ public class BasicSpinnerUI extends SpinnerUI
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -575,6 +702,10 @@ public class BasicSpinnerUI extends SpinnerUI
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -600,6 +731,13 @@ public class BasicSpinnerUI extends SpinnerUI
      * arrow buttons and likewise for all of the next buttons,
      * so it doesn't have any state that persists beyond the limits
      * of a single button pressed/released gesture.
+     * <p>
+     * 用于微调箭头按钮鼠标和动作事件的处理程序。当鼠标左键按下事件发生时,我们查找(启用)微调器是事件的来源,并启动自动重复计时器。
+     * 定时器触发动作事件,直到任何按钮被释放,此时定时器停止,并且对微调器的引用被清除。
+     * 定时器在300ms延迟后才启动,因此初始(和最终)动作事件的源通常只是鼠标释放的按钮逻辑 - 这意味着我们依赖于鼠标监听器运行的事实鼠标监听器的按钮。
+     * <p>
+     *  请注意,此处理程序的一个实例由所有滑块上一个箭头按钮共享,同样对于所有后续按钮共享,因此它不具有超出单个按钮按下/释放手势的限制的任何状态。
+     * 
      */
     private static class ArrowButtonHandler extends AbstractAction
                                             implements FocusListener, MouseListener, UIResource {
@@ -665,6 +803,9 @@ public class BasicSpinnerUI extends SpinnerUI
         /**
          * If the spinner's editor is a DateEditor, this selects the field
          * associated with the value that is being incremented.
+         * <p>
+         *  如果微调器的编辑器是DateEditor,则选择与正在增加的值相关联的字段。
+         * 
          */
         private void select(JSpinner spinner) {
             JComponent editor = spinner.getEditor();
@@ -698,6 +839,9 @@ public class BasicSpinnerUI extends SpinnerUI
         /**
          * Selects the passed in field, returning true if it is found,
          * false otherwise.
+         * <p>
+         *  选择传入的字段,如果找到则返回true,否则返回false。
+         * 
          */
         private boolean select(JFormattedTextField ftf,
                                AttributedCharacterIterator iterator,
@@ -726,6 +870,9 @@ public class BasicSpinnerUI extends SpinnerUI
          * Returns the calendarField under the start of the selection, or
          * -1 if there is no valid calendar field under the selection (or
          * the spinner isn't editing dates.
+         * <p>
+         *  返回选择开始处的calendarField,如果选择项下没有有效的日历字段(或微调框不在编辑日期),则返回-1。
+         * 
          */
         private int getCalendarField(JSpinner spinner) {
             JComponent editor = spinner.getEditor();
@@ -795,6 +942,9 @@ public class BasicSpinnerUI extends SpinnerUI
         /**
          * Requests focus on a child of the spinner if the spinner doesn't
          * have focus.
+         * <p>
+         *  如果微调器没有焦点,请求集中在微调器的子代。
+         * 
          */
         private void focusSpinnerIfNecessary() {
             Component fo = KeyboardFocusManager.
@@ -882,6 +1032,7 @@ public class BasicSpinnerUI extends SpinnerUI
             Dimension editorD = preferredSize(editor);
 
             /* Force the editors height to be a multiple of 2
+            /* <p>
              */
             editorD.height = ((editorD.height + 1) / 2) * 2;
 
@@ -932,6 +1083,7 @@ public class BasicSpinnerUI extends SpinnerUI
             }
 
             /* Deal with the spinner's componentOrientation property.
+            /* <p>
              */
             int editorX, editorWidth, buttonsX;
             if (parent.getComponentOrientation().isLeftToRight()) {

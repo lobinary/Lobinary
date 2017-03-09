@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,8 @@ import com.sun.corba.se.impl.encoding.MarshalOutputStream ;
 import com.sun.corba.se.impl.encoding.MarshalInputStream ;
 
 /**
+/* <p>
+/* 
  * @author
  */
 public class CodeSetsComponentImpl extends TaggedComponentBase

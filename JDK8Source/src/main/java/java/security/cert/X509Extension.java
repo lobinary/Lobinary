@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,27 @@ import java.util.Set;
  * extension value (i.e., the {@code extnValue}). This can then
  * be handled by a <em>Class</em> that understands the extension.
  *
+ * <p>
+ *  X.509扩展的接口。
+ * 
+ *  <p>为X.509 v3 {@link X509Certificate Certificates}和v2 {@link X509CRL CRLs}(证书吊销列表)定义的扩展提供了将附加属性与用户或公用
+ * 密钥相关联的方法,用于管理证书层次结构,以及管理CRL分发。
+ *  X.509扩展格式还允许社区定义私有扩展,携带这些社区特有的信息。
+ * 
+ *  <p>证书/ CRL中的每个扩展都可以指定为关键或非关键。使用证书/ CRL的系统(验证证书/ CRL的应用程序)如果遇到不能识别的关键扩展,则必须拒绝证书/ CRL。
+ * 如果未被识别,则可以忽略非关键扩展。
+ * <p>
+ *  对此的ASN.1定义是：
+ * <pre>
+ *  Extensions :: = SEQUENCE SIZE(1..MAX)OF扩展名
+ * 
+ *  Extension :: = SEQUENCE {extnId OBJECT IDENTIFIER,critical BOOLEAN DEFAULT FALSE,extnValue OCTET STRING  - 包含注册使用的类型的值的DER编码 -  extnId对象标识符值}
+ * 。
+ * </pre>
+ * 由于并非所有扩展都是已知的,因此{@code getExtensionValue}方法返回扩展值的DER编码的OCTET STRING(即{@code extnValue})。
+ * 然后,这可以通过理解扩展名的<em>类</em>来处理。
+ * 
+ * 
  * @author Hemma Prafullchandra
  */
 
@@ -72,6 +94,10 @@ public interface X509Extension {
     /**
      * Check if there is a critical extension that is not supported.
      *
+     * <p>
+     *  检查是否存在不支持的关键扩展。
+     * 
+     * 
      * @return {@code true} if a critical extension is found that is
      * not supported, otherwise {@code false}.
      */
@@ -99,6 +125,16 @@ public interface X509Extension {
      *     }
      * }
      * }</pre>
+     * <p>
+     *  获取由实现此接口的对象管理的证书/ CRL中标记为CRITICAL的扩展的OID字符串集。
+     * 
+     *  下面是从X509Certificate获取一组关键扩展并打印OID的示例代码：<pre> {@ code X509Certificate cert = null; try(InputStream inStrm = new FileInputStream("DER-encoded-Cert")){CertificateFactory cf = CertificateFactory.getInstance("X.509"); cert =(X509Certificate)cf.generateCertificate(inStrm); }
+     * }。
+     * 
+     *  设置<String> critSet = cert.getCriticalExtensionOIDs(); if(critSet！= null &&！critSet.isEmpty()){System.out.println("Set of critical extensions："); for(String oid：critSet){System.out.println(oid); }
+     * }} </pre>。
+     * 
+     * 
      * @return a Set (or an empty Set if none are marked critical) of
      * the extension OID strings for extensions that are marked critical.
      * If there are no extensions present at all, then this method returns
@@ -136,6 +172,20 @@ public interface X509Extension {
      * }
      * }</pre>
      *
+     * <p>
+     *  获取由实现此接口的对象管理的证书/ CRL中标记为NON-CRITICAL的扩展的OID字符串集。
+     * 
+     *  这里是从X509CRL撤销的证书条目获取一组非关键扩展并打印OID的示例代码：<pre> {@ code CertificateFactory cf = null; X509CRL crl = null; try(InputStream inStrm = new FileInputStream("DER-encoded-CRL")){cf = CertificateFactory.getInstance("X.509"); crl =(X509CRL)cf.enerateCRL(inStrm); }
+     * }。
+     * 
+     * byte [] certData = <DER编码的证书数据> ByteArrayInputStream bais = new ByteArrayInputStream(certData); X509C
+     * ertificate cert =(X509Certificate)cf.generateCertificate(bais); X509CRLEntry badCert = crl.getRevoked
+     * Certificate(cert.getSerialNumber());。
+     * 
+     *  if(badCert！= null){Set <String> nonCritSet = badCert.getNonCriticalExtensionOIDs(); if(nonCritSet！= null)for(String oid：nonCritSet){System.out.println(oid); }
+     * }} </pre>。
+     * 
+     * 
      * @return a Set (or an empty Set if none are marked non-critical) of
      * the extension OID strings for extensions that are marked non-critical.
      * If there are no extensions present at all, then this method returns
@@ -178,6 +228,15 @@ public interface X509Extension {
      * <td>PolicyConstraints</td></tr>
      * </table>
      *
+     * <p>
+     *  获取由传入的{@code oid}字符串标识的扩展值(<em> extnValue </em>)的DER编码的OCTET字符串。 {@code oid}字符串由一组由句点分隔的非负整数表示。
+     * 
+     *  <p>例如：<br>
+     * <table border=groove summary="Examples of OIDs and extension names">
+     * <tr>
+     *  <th> OID <em>(对象标识符)</em> </th> <th>扩展名</th> </tr> <tr> <td> 2.5.29.14 </td> <td> SubjectKeyIdentifi
+     * er < / td> 2.5.29.15 </td> <td> 2.5.29.15 </td> <td> KeyUsage </td> </tr> <tr> <td> / td> </tr> <tr> 
+     * 
      * @param oid the Object Identifier value for the extension.
      * @return the DER-encoded octet string of the extension value or
      * null if it is not present.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 // This file was generated AUTOMATICALLY from a template file Thu Apr 30 12:44:23 PDT 2015
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
@@ -27,6 +28,8 @@
 package java.lang;
 
 /** The CharacterData class encapsulates the large tables found in
+/* <p>
+/* 
     Java.lang.Character. */
 
 class CharacterData02 extends CharacterData {
@@ -64,6 +67,12 @@ class CharacterData02 extends CharacterData {
         5 bits  character type
 
         The encoding of character properties is subject to change at any time.
+    /* <p>
+    /* 1位镜像属性4位方向性属性9位有符号偏移量用于转换情况1位如果1,加上有符号偏移量将字符转换为小写1位如果1,减去有符号偏移量将字符转换为大写1位如果1,字符具有滴定等价物(可能本身)3位0可以不是标识
+    /* 符1的一部分可忽略的控制;可以继续一个Unicode标识符或Java标识符2可以继续一个Java标识符而不是一个Unicode标识符(未使用)3可以继续一个Unicode标识符或Java标识符4是一个J
+    /* ava空白字符5可以开始或继续一个Java标识符;可以继续但不启动Unicode标识符(下划线)6可以开始或继续Java标识符而不是Unicode标识符($)7可以开始或继续Unicode标识符或Jav
+    /* a标识符因此：5,6,7可以启动Java标识符1,2,3,5,6,7可以继续Java标识符7可以开始Unicode标识符1,3,5,7可以继续Unicode标识符1在标识符4内可忽略是Java空白2位0
+    /* 这个字符具有无数字属性1将数字偏移量添加到字符代码,然后用0x1F掩码将产生所需的数字值2此字符有一个"奇怪"数值3一个Java超十进制数字：将数字偏移量添加到字符代码,然后屏蔽与0x1F,然后加10将
      */
 
     int getProperties(int ch) {

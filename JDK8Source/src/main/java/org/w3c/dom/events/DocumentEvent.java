@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,10 @@
  * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
  * PURPOSE.
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ * <p>
+ *  版权所有(c)2000万维网联盟,(马萨诸塞理工学院,庆应义藩大学信息自动化研究所)。版权所有。该程序根据W3C的软件知识产权许可证分发。
+ * 这个程序是分发的,希望它将是有用的,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证。有关详细信息,请参阅W3C许可证http://www.w3.org/Consortium/Legal/。
+ * 
  */
 
 package org.w3c.dom.events;
@@ -50,11 +55,19 @@ import org.w3c.dom.DOMException;
  * implemented on the same object which implements the <code>Document</code>
  * interface in an implementation which supports the Event model.
  * <p>See also the <a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113'>Document Object Model (DOM) Level 2 Events Specification</a>.
+ * <p>
+ *  <code> DocumentEvent </code>接口提供了一种机制,用户可以通过该机制创建实现支持的类型的事件。
+ * 期望在支持事件模型的实现中,<code> DocumentEvent </code>接口将实现在实现<code> Document </code>接口的同一对象上。
+ *  <p>另请参阅<a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113'>文档对象模型(DOM)2级事件规范< a>。
+ * 
  * @since DOM Level 2
  */
 public interface DocumentEvent {
     /**
      *
+     * <p>
+     * 
+     * 
      * @param eventType The <code>eventType</code> parameter specifies the
      *   type of <code>Event</code> interface to be created. If the
      *   <code>Event</code> interface specified is supported by the

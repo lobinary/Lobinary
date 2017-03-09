@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,11 +63,28 @@ import javax.xml.ws.spi.Provider;
  * <code>endpointName</code> (if specified) MUST match a service and port
  * in the WSDL document.
  *
+ * <p>
+ *  这个类用于构建<code> W3CEndpointReference </code>实例。
+ * 此clss的预期用途是为应用程序组件(例如工厂组件)为由相同Java EE应用程序发布的Web服务端点创建<code> W3CEndpointReference </code>。
+ * 它还可以用于通过提供<code> address </code>属性为基于Java SE的端点创建<code> W3CEndpointReferences </code>。
+ * <p>
+ *  当为不是由同一个Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>时,必须指定<code> address </code>属性。
+ * <p>
+ *  当为相同Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>时,<code> address </code>属性可以是<code> null </code>
+ * ,但是<code> serviceName < / code>和<code> endpointName </code>必须指定由相同Java EE应用程序发布的端点。
+ * <p>
+ *  当指定<code> wsdlDocumentLocation </code>时,必须引用有效的WSDL文档,并且<code> serviceName </code>和<code> endpointNa
+ * me </code>(如果指定)必须匹配服务和端口WSDL文档。
+ * 
+ * 
  * @since JAX-WS 2.1
  */
 public final class W3CEndpointReferenceBuilder {
     /**
      * Creates a new <code>W3CEndpointReferenceBuilder</code> instance.
+     * <p>
+     *  创建一个新的<code> W3CEndpointReferenceBuilder </code>实例。
+     * 
      */
     public W3CEndpointReferenceBuilder() {
         referenceParameters = new ArrayList<Element>();
@@ -85,6 +103,13 @@ public final class W3CEndpointReferenceBuilder {
      * web service endpoint that is not published by the same
      * Java EE application or when running on Java SE.
      *
+     * <p>
+     *  将<code>地址</code>设置为<code> W3CEndpointReference </code>实例的<code> wsa：Address </code>。
+     * <p>
+     * 当为未由相同Java EE发布的Web服务端点构建<code> W3CEndpointReference </code>时,<code> address </code>必须设置为非<code> null
+     *  </code>应用程序或在Java SE上运行时。
+     * 
+     * 
      * @param address The address of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference</code>.
      *
@@ -104,6 +129,13 @@ public final class W3CEndpointReferenceBuilder {
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
      * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
+     * <p>
+     *  将<code> interfaceName </code>设置为<code> wsa：Metadata </code>元素中的<code> wsam：InterfaceName </code>元素。
+     * 
+     *  有关详细信息,请参见<a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr"> 2.1从
+     * EPR引用WSDL元数据</a>。
+     * 
+     * 
      * @param interfaceName The port type name of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference</code>.
      *
@@ -124,6 +156,13 @@ public final class W3CEndpointReferenceBuilder {
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
      * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
+     * <p>
+     *  将<code> serviceName </code>设置为<code> wsa：Metadata </code>元素中的<code> wsam：ServiceName </code>元素。
+     * 
+     *  有关详细信息,请参见<a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr"> 2.1从
+     * EPR引用WSDL元数据</a>。
+     * 
+     * 
      * @param serviceName The service name of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference</code>.  This property
      *      may also be used with the <code>endpointName</code> (portName)
@@ -149,6 +188,15 @@ public final class W3CEndpointReferenceBuilder {
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
      * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
+     * <p>
+     *  将<code> endpointName </code>设置为<code> wsa：Metadata </code>元素中的<code> wsam：ServiceName / @ EndpointNa
+     * me </code>。
+     * 此方法只能在调用{@link #serviceName}方法后调用。
+     * <p>
+     *  有关详细信息,请参见<a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr"> 2.1从
+     * EPR引用WSDL元数据</a>。
+     * 
+     * 
      * @param endpointName The name of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference</code>. The
      *      <code>endpointName</code> (portName) property may also be
@@ -185,6 +233,15 @@ public final class W3CEndpointReferenceBuilder {
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
      * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
+     * <p>
+     *  设置将被引用为<code> wsa：Metadata / @ wsdli：wsdlLocation </code>的<code> wsdlDocumentLocation </code>。
+     *  wsdli：wsdlLocation的值的名称空间名称可以从WSDL本身获取。
+     * 
+     * <p>
+     * 有关详细信息,请参见<a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr"> 2.1从E
+     * PR引用WSDL元数据</a>。
+     * 
+     * 
      * @param wsdlDocumentLocation The location of the WSDL document to
      *      be referenced in the <code>wsa:Metadata</code> of the
      *     <code>W3CEndpointReference</code>.
@@ -201,6 +258,11 @@ public final class W3CEndpointReferenceBuilder {
      * <code>W3CEndpointReference</code> instance
      * <code>wsa:ReferenceParameters</code> element.
      *
+     * <p>
+     *  将<code> referenceParameter </code>添加到<code> W3CEndpointReference </code>实例<code> wsa：ReferenceParame
+     * ters </code>元素。
+     * 
+     * 
      * @param referenceParameter The element to be added to the
      *      <code>wsa:ReferenceParameters</code> element.
      *
@@ -223,6 +285,11 @@ public final class W3CEndpointReferenceBuilder {
      * <code>W3CEndpointReference</code> instance's
      * <code>wsa:Metadata</code> element.
      *
+     * <p>
+     *  将<code> metadataElement </code>添加到<code> W3CEndpointReference </code>实例的<code> wsa：Metadata </code>元
+     * 素。
+     * 
+     * 
      * @param metadataElement The element to be added to the
      *      <code>wsa:Metadata</code> element.
      *
@@ -245,6 +312,10 @@ public final class W3CEndpointReferenceBuilder {
      * <code>W3CEndpointReference</code> instance's
      * <code>wsa:EndpointReference</code> element.
      *
+     * <p>
+     *  向<code> W3CEndpointReference </code>实例的<code> wsa：EndpointReference </code>元素中添加扩展元素。
+     * 
+     * 
      * @param element The extension element to be added to the
      *   <code>W3CEndpointReference</code>
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
@@ -268,6 +339,10 @@ public final class W3CEndpointReferenceBuilder {
      * <code>W3CEndpointReference</code> instance's
      * <code>wsa:EndpointReference</code> element.
      *
+     * <p>
+     *  向<code> W3CEndpointReference </code>实例的<code> wsa：EndpointReference </code>元素中添加扩展属性。
+     * 
+     * 
      * @param name The name of the extension attribute to be added to the
      *   <code>W3CEndpointReference</code>
      * @param value extension attribute value
@@ -307,6 +382,14 @@ public final class W3CEndpointReferenceBuilder {
      * <code>java.lang.IllegalStateException</code> MUST be thrown.
      *
      *
+     * <p>
+     *  从该<code> W3CEndpointReferenceBuilder </code>实例上设置的累积属性构建一个<code> W3CEndpointReference </code>。
+     * <p>
+     * 通过指定<code> address </code>属性以及任何其他所需的属性,此方法可用于为任何端点创建<code> W3CEndpointReference </code>。
+     * 此方法还可用于为由相同Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>。
+     * 此方法可以自动确定由<code> serviceName </code>和<code> endpointName </code>属性标识的同一Java EE应用程序发布的端点的<code>地址</code>
+     * 。
+     * 
      * @return <code>W3CEndpointReference</code> from the accumulated
      * properties set on this <code>W3CEndpointReferenceBuilder</code>
      * instance. This method never returns <code>null</code>.

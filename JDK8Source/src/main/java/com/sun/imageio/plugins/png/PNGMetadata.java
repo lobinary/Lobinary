@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -256,6 +257,9 @@ public class PNGMetadata extends IIOMetadata implements Cloneable {
      * Sets the IHDR_bitDepth and IHDR_colorType variables.
      * The <code>numBands</code> parameter is necessary since
      * we may only be writing a subset of the image bands.
+     * <p>
+     *  设置IHDR_bitDepth和IHDR_colorType变量。 <code> numBands </code>参数是必要的,因为我们可能只写图像带的一个子集。
+     * 
      */
     public void initialize(ImageTypeSpecifier imageType, int numBands) {
         ColorModel colorModel = imageType.getColorModel();
@@ -334,6 +338,10 @@ public class PNGMetadata extends IIOMetadata implements Cloneable {
              * For such images alpha samples in raster will occupy more space than
              * it is required to store palette so it could be reasonable to
              * use PNG_COLOR_PALETTE color type for large images.
+             * <p>
+             *  NB：PNG_COLOR_GRAY_ALPHA颜色类型对于包含超过1024像素(或调色板中单个透明像素的情况下,甚至768像素)的图像可能不是最佳的。
+             * 对于这样的图像,光栅中的α样本将占用比存储调色板所需的空间更多的空间,因此对于大图像使用PNG_COLOR_PALETTE颜色类型是合理的。
+             * 
              */
 
             if (isGray && hasAlpha && (bitDepth == 8 || bitDepth == 16)) {
@@ -1699,6 +1707,11 @@ public class PNGMetadata extends IIOMetadata implements Cloneable {
      * permitted in keywords.
      *
      * See: http://www.w3.org/TR/PNG/#11keywords
+     * <p>
+     *  根据PNG规范,关键字的长度限制为1到79个字节。关键字只能包含可打印的拉丁字符和空格;为了减少人为错误关键字的机会,在关键字中不允许前导空格,尾随空格和连续空格。
+     * 
+     *  请参阅：http：//www.w3.org/TR/PNG/#11keywords
+     * 
      */
     private boolean isValidKeyword(String s) {
         int len = s.length();
@@ -1719,6 +1732,10 @@ public class PNGMetadata extends IIOMetadata implements Cloneable {
      * character is aloowed too.
      *
      * See: http://www.w3.org/TR/PNG/#11keywords
+     * <p>
+     *  根据PNG规范,关键字只能包含可打印的拉丁文-1 [ISO-8859-1]字符和空格;也就是说,只允许十进制的字符代码32-126和161-255。
+     * 对于Latin-1值字段,0x10(换行)控制字符也是空的。
+     * 
      */
     private boolean isISOLatin(String s, boolean isLineFeedAllowed) {
         int len = s.length();

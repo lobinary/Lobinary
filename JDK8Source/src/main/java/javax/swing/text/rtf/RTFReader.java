@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ import javax.swing.text.*;
  * in order to guarantee that all of the text has been sent to
  * the text acceptor.
  *
+ * <p>
+ *  获取一系列RTF令牌和文本,并将RTF描述的文本附加到<code> StyledDocument </code>(<em>目标</em>)。
+ *  RTF通过<code> RTFParser </code>从字符流命名,这是该类的超类。
+ * 
+ *  这个类是OutputStream的一个间接子类。它必须关闭,以确保所有文本都已发送到文本接收器。
+ * 
+ * 
  *   @see RTFParser
  *   @see java.io.OutputStream
  */
@@ -53,10 +61,18 @@ class RTFReader extends RTFParser
 
   /** Miscellaneous information about the parser's state. This
    *  dictionary is saved and restored when an RTF group begins
+   * <p>
+   *  字典在RTF组开始时保存和恢复
+   * 
+   * 
    *  or ends. */
   Dictionary<Object, Object> parserState;   /* Current parser state */
   /** This is the "dst" item from parserState. rtfDestination
    *  is the current rtf destination. It is cached in an instance
+   * <p>
+   *  是当前rtf目的地。它被缓存在一个实例中
+   * 
+   * 
    *  variable for speed. */
   Destination rtfDestination;
   /** This holds the current document attributes. */
@@ -74,15 +90,23 @@ class RTFReader extends RTFParser
   Style[] sectionStyles;
 
   /** This is the RTF version number, extracted from the \rtf keyword.
+  /* <p>
+  /* 
    *  The version information is currently not used. */
   int rtfversion;
 
   /** <code>true</code> to indicate that if the next keyword is unknown,
+  /* <p>
+  /* 
    *  the containing group should be ignored. */
   boolean ignoreGroupIfUnknownKeyword;
 
   /** The parameter of the most recently parsed \\ucN keyword,
    *  used for skipping alternative representations after a
+   * <p>
+   *  用于在a之后跳过替代表示
+   * 
+   * 
    *  Unicode character. */
   int skippingCharacters;
 
@@ -95,6 +119,8 @@ class RTFReader extends RTFParser
 
   /* this should be final, but there's a bug in javac... */
   /** textKeywords maps RTF keywords to single-character strings,
+  /* <p>
+  /* 
    *  for those keywords which simply insert some text. */
   static Dictionary<String, String> textKeywords = null;
   static {
@@ -121,6 +147,8 @@ class RTFReader extends RTFParser
       textKeywords.put("zwnj",       "\u200C");
 
       /* There is no Unicode equivalent to an optional hyphen, as far as
+      /* <p>
+      /* 
          I can tell. */
       textKeywords.put("-",          "\u2027");  /* TODO: optional hyphen */
   }
@@ -141,6 +169,10 @@ class RTFReader extends RTFParser
  * Creates a new RTFReader instance. Text will be sent to
  * the specified TextAcceptor.
  *
+ * <p>
+ *  创建一个新的RTFReader实例。文本将被发送到指定的TextAcceptor。
+ * 
+ * 
  * @param destination The TextAcceptor which is to receive the text.
  */
 public RTFReader(StyledDocument destination)
@@ -160,6 +192,10 @@ public RTFReader(StyledDocument destination)
 /** Called when the RTFParser encounters a bin keyword in the
  *  RTF stream.
  *
+ * <p>
+ *  RTF流。
+ * 
+ * 
  *  @see RTFParser
  */
 public void handleBinaryBlob(byte[] data)
@@ -176,6 +212,10 @@ public void handleBinaryBlob(byte[] data)
 
 /**
  * Handles any pure text (containing no control characters) in the input
+ * <p>
+ *  处理输入中的任何纯文本(不包含控制字符)
+ * 
+ * 
  * stream. Called by the superclass. */
 public void handleText(String text)
 {
@@ -206,6 +246,10 @@ Color defaultColor()
 /** Called by the superclass when a new RTF group is begun.
  *  This implementation saves the current <code>parserState</code>, and gives
  *  the current destination a chance to save its own state.
+ * <p>
+ *  该实现保存当前<code> parserState </code>,并且给当前目的地保存其自己的状态的机会。
+ * 
+ * 
  * @see RTFParser#begingroup
  */
 public void begingroup()
@@ -216,6 +260,8 @@ public void begingroup()
     }
 
     /* we do this little dance to avoid cloning the entire state stack and
+    /* <p>
+    /* 
        immediately throwing it away. */
     Object oldSaveState = parserState.get("_savedState");
     if (oldSaveState != null)
@@ -233,6 +279,10 @@ public void begingroup()
  *  This restores the parserState saved by <code>begingroup()</code>
  *  as well as invoking the endgroup method of the current
  *  destination.
+ * <p>
+ *  这将恢复由<code> begingroup()</code>保存的parserState以及调用当前目标的endgroup方法。
+ * 
+ * 
  * @see RTFParser#endgroup
  */
 public void endgroup()
@@ -257,6 +307,8 @@ public void endgroup()
 protected void setRTFDestination(Destination newDestination)
 {
     /* Check that setting the destination won't close the
+    /* <p>
+    /* 
        current destination (should never happen) */
     Dictionary previousState = (Dictionary)parserState.get("_savedState");
     if (previousState != null) {
@@ -272,6 +324,10 @@ protected void setRTFDestination(Destination newDestination)
 /** Called by the user when there is no more input (<i>i.e.</i>,
  * at the end of the RTF file.)
  *
+ * <p>
+ *  在RTF文件的末尾。)
+ * 
+ * 
  * @see OutputStream#close
  */
 public void close()
@@ -295,6 +351,10 @@ public void close()
  * Handles a parameterless RTF keyword. This is called by the superclass
  * (RTFParser) when a keyword is found in the input stream.
  *
+ * <p>
+ *  处理无参数RTF关键字。当在输入流中找到关键字时,这由超类(RTFParser)调用。
+ * 
+ * 
  * @returns <code>true</code> if the keyword is recognized and handled;
  *          <code>false</code> otherwise
  * @see RTFParser#handleKeyword
@@ -441,6 +501,10 @@ public boolean handleKeyword(String keyword)
  * This is called by the superclass
  * (RTFParser) when a keyword is found in the input stream.
  *
+ * <p>
+ *  处理RTF关键字及其整数参数。当在输入流中找到关键字时,这由超类(RTFParser)调用。
+ * 
+ * 
  * @returns <code>true</code> if the keyword is recognized and handled;
  *          <code>false</code> otherwise
  * @see RTFParser#handleKeyword
@@ -507,6 +571,10 @@ private void setTargetAttribute(String name, Object value)
  * setCharacterSet sets the current translation table to correspond with
  * the named character set. The character set is loaded if necessary.
  *
+ * <p>
+ * setCharacterSet设置当前转换表与命名字符集相对应。如果需要,将加载字符集。
+ * 
+ * 
  * @see AbstractFilter
  */
 public void setCharacterSet(String name)
@@ -537,6 +605,8 @@ public void setCharacterSet(String name)
 }
 
 /** Adds a character set to the RTFReader's list
+/* <p>
+/* 
  *  of known character sets */
 public static void
 defineCharacterSet(String name, char[] table)
@@ -550,6 +620,10 @@ defineCharacterSet(String name, char[] table)
  *  array of characters, mapping unsigned byte values to their Unicode
  *  equivalents. The character set is loaded if necessary.
  *
+ * <p>
+ *  字符数组,将无符号字节值映射到其Unicode等效项。如果需要,将加载字符集。
+ * 
+ * 
  *  @returns the character set
  */
 public static Object
@@ -574,6 +648,10 @@ getCharacterSet(final String name)
  * must contain 256 decimal integers, separated by whitespace, with
  * no punctuation. B- and C- style comments are allowed.
  *
+ * <p>
+ *  必须包含256个十进制整数,用空格分隔,不含标点符号。允许使用B-和C-样式注释。
+ * 
+ * 
  * @returns the newly read character set
  */
 static char[] readCharset(InputStream strm)
@@ -619,6 +697,10 @@ static char[] readCharset(java.net.URL href)
  *  a destination. The RTF reader always has a current destination
  *  which is where text is sent.
  *
+ * <p>
+ *  目的地。 RTF读取器总是具有发送文本的当前目的地。
+ * 
+ * 
  *  @see RTFReader
  */
 interface Destination {
@@ -635,6 +717,10 @@ interface Destination {
 
 /** This data-sink class is used to implement ignored destinations
  *  (e.g. {\*\blegga blah blah blah} )
+ * <p>
+ *  (例如{\ * \ bllegga blah blah blah})
+ * 
+ * 
  *  It accepts all keywords and text but does nothing with them. */
 class DiscardingDestination implements Destination
 {
@@ -663,6 +749,8 @@ class DiscardingDestination implements Destination
     public void begingroup()
     {
         /* Ignore groups --- the RTFReader will keep track of the
+        /* <p>
+        /* 
            current group level as necessary */
     }
 
@@ -678,6 +766,8 @@ class DiscardingDestination implements Destination
 }
 
 /** Reads the fonttbl group, inserting fonts into the RTFReader's
+/* <p>
+/* 
  *  fontTable dictionary. */
 class FonttblDestination implements Destination
 {
@@ -699,6 +789,12 @@ class FonttblDestination implements Destination
             fontName = text;
 
 
+    { /* <p>
+    { /*  public void handleText(String text){int semicolon = text.indexOf(';'); String fontName;
+    { /* 
+    { /*  if(semicolon> -1)fontName = text.substring(0,semicolon); else fontName = text;
+    { /* 
+    { /* 
         /* TODO: do something with the font family. */
 
         if (nextFontNumber == -1
@@ -739,6 +835,8 @@ class FonttblDestination implements Destination
     public void endgroup(Dictionary oldState) {}
 
     /* currently, the only thing we do when the font table ends is
+    /* <p>
+    /* 
        dump its contents to the debugging log. */
     public void close()
     {
@@ -752,6 +850,8 @@ class FonttblDestination implements Destination
 }
 
 /** Reads the colortbl group. Upon end-of-group, the RTFReader's
+/* <p>
+/* 
  *  color table is set to an array containing the read colors. */
 class ColortblDestination implements Destination
 {
@@ -813,6 +913,8 @@ class ColortblDestination implements Destination
 }
 
 /** Handles the stylesheet keyword. Styles are read and sorted
+/* <p>
+/* 
  *  into the three style arrays in the RTFReader. */
 class StylesheetDestination
     extends DiscardingDestination
@@ -888,6 +990,12 @@ class StylesheetDestination
           for(i=0;i<m;i++)
             warnings.println("secStyle["+i+"]="+sectionStyles[i]);
         } else warnings.println("No section styles.");
+/* <p>
+/*  int i,m; if(characterStyles！= null){m = characterStyles.length; for(i = 0; i <m; i ++)warnings.println("chrStyle ["+ i +"] ="+ characterStyles [i]); } else warnings.println("No character styles。
+/* "); if(paragraphStyles！= null){m = paragraphStyles.length; for(i = 0; i <m; i ++)warnings.println("pgfStyle ["+ i +"] ="+ paragraphStyles [i]); } else warnings.println("No paragraph styles。
+/* "); if(sectionStyles！= null){m = characterStyles.length; for(i = 0; i <m; i ++)warnings.println("secStyle ["+ i +"] ="+ sectionStyles [i]); } else warnings.println("No section styles。
+/* ");。
+/* 
 */
     }
 
@@ -991,6 +1099,10 @@ class StylesheetDestination
 
             /* NB: Swing StyleContext doesn't allow distinct styles with
                the same name; RTF apparently does. This may confuse the
+            /* <p>
+            /*  同名; RTF显然。这可能会混淆
+            /* 
+            /* 
                user. */
             realizedStyle = target.addStyle(styleName, basis);
 
@@ -1029,6 +1141,8 @@ class StylesheetDestination
 }
 
 /** Handles the info group. Currently no info keywords are recognized
+/* <p>
+/* 
  *  so this is a subclass of DiscardingDestination. */
 class InfoDestination
     extends DiscardingDestination
@@ -1040,16 +1154,26 @@ class InfoDestination
  *  which simply tracks the attributes specified by the RTF control words
  *  in internal form and can produce acceptable AttributeSets for the
  *  current character, paragraph, and section attributes. It is up
+ * <p>
+ *  它简单地跟踪由内部形式的RTF控制字指定的属性,并且可以为当前字符,段落和段属性产生可接受的AttributeSet。它是up
+ * 
+ * 
  *  to the subclasses to determine what is done with the actual text. */
 abstract class AttributeTrackingDestination implements Destination
 {
     /** This is the "chr" element of parserState, cached for
+    /* <p>
+    /* 
      *  more efficient use */
     MutableAttributeSet characterAttributes;
     /** This is the "pgf" element of parserState, cached for
+    /* <p>
+    /* 
      *  more efficient use */
     MutableAttributeSet paragraphAttributes;
     /** This is the "sec" element of parserState, cached for
+    /* <p>
+    /* 
      *  more efficient use */
     MutableAttributeSet sectionAttributes;
 
@@ -1069,6 +1193,10 @@ abstract class AttributeTrackingDestination implements Destination
     {
         /* This should really be in TextHandlingDestination, but
          * since *nobody* does anything with binary blobs, this
+         * <p>
+         * 因为* nobody *与二进制blobs做任何事情,这
+         * 
+         * 
          * is more convenient. */
         warning("Unexpected binary data in RTF file.");
     }
@@ -1082,6 +1210,10 @@ abstract class AttributeTrackingDestination implements Destination
         /* It would probably be more efficient to use the
          * resolver property of the attributes set for
          * implementing rtf groups,
+         * <p>
+         *  为实现rtf组设置的属性的解析器属性,
+         * 
+         * 
          * but that's needed for styles. */
 
         /* update the cached attribute dictionaries */
@@ -1230,6 +1362,10 @@ abstract class AttributeTrackingDestination implements Destination
                 /* TODO: The RTF sl attribute has special meaning if it's
                    negative. Make sure that SwingText has the same special
                    meaning, or find a way to imitate that. When SwingText
+                /* <p>
+                /*  负。确保SwingText有同样的特殊意义,或者找到一种方法来模仿。当SwingText
+                /* 
+                /* 
                    handles this, also recognize the slmult keyword. */
                 StyleConstants.setLineSpacing(characterAttributes,
                                               parameter / 20f);
@@ -1300,6 +1436,8 @@ abstract class AttributeTrackingDestination implements Destination
     }
 
     /** Returns a new MutableAttributeSet containing the
+    /* <p>
+    /* 
      *  default character attributes */
     protected MutableAttributeSet rootCharacterAttributes()
     {
@@ -1316,6 +1454,8 @@ abstract class AttributeTrackingDestination implements Destination
     }
 
     /** Returns a new MutableAttributeSet containing the
+    /* <p>
+    /* 
      *  default paragraph attributes */
     protected MutableAttributeSet rootParagraphAttributes()
     {
@@ -1332,6 +1472,8 @@ abstract class AttributeTrackingDestination implements Destination
     }
 
     /** Returns a new MutableAttributeSet containing the
+    /* <p>
+    /* 
      *  default section attributes */
     protected MutableAttributeSet rootSectionAttributes()
     {
@@ -1344,6 +1486,10 @@ abstract class AttributeTrackingDestination implements Destination
      * Calculates the current text (character) attributes in a form suitable
      * for SwingText from the current parser state.
      *
+     * <p>
+     *  以适合当前解析器状态的SwingText的形式计算当前文本(字符)属性。
+     * 
+     * 
      * @returns a new MutableAttributeSet containing the text attributes.
      */
     MutableAttributeSet currentTextAttributes()
@@ -1356,6 +1502,10 @@ abstract class AttributeTrackingDestination implements Destination
         /* figure out the font name */
         /* TODO: catch exceptions for undefined attributes,
            bad font indices, etc.? (as it stands, it is the caller's
+        /* <p>
+        /*  坏字体索引等? (因为它是,它是呼叫者的
+        /* 
+        /* 
            job to clean up after corrupt RTF) */
         fontnum = (Integer)parserState.get("f");
         /* note setFontFamily() can not handle a null font */
@@ -1405,6 +1555,10 @@ abstract class AttributeTrackingDestination implements Destination
      * Calculates the current paragraph attributes (with keys
      * as given in StyleConstants) from the current parser state.
      *
+     * <p>
+     *  从当前解析器状态计算当前段落属性(使用StyleConstants中给出的键)。
+     * 
+     * 
      * @returns a newly created MutableAttributeSet.
      * @see StyleConstants
      */
@@ -1443,6 +1597,10 @@ abstract class AttributeTrackingDestination implements Destination
      * Calculates the current section attributes
      * from the current parser state.
      *
+     * <p>
+     *  从当前解析器状态计算当前段属性。
+     * 
+     * 
      * @returns a newly created MutableAttributeSet.
      */
     public AttributeSet currentSectionAttributes()
@@ -1458,6 +1616,10 @@ abstract class AttributeTrackingDestination implements Destination
 
     /** Resets the filter's internal notion of the current character
      *  attributes to their default values. Invoked to handle the
+     * <p>
+     *  属性设置为其默认值。调用处理
+     * 
+     * 
      *  \plain keyword. */
     protected void resetCharacterAttributes()
     {
@@ -1480,6 +1642,10 @@ abstract class AttributeTrackingDestination implements Destination
 
     /** Resets the filter's internal notion of the current paragraph's
      *  attributes to their default values. Invoked to handle the
+     * <p>
+     *  属性设置为其默认值。调用处理
+     * 
+     * 
      *  \pard keyword. */
     protected void resetParagraphAttributes()
     {
@@ -1500,6 +1666,10 @@ abstract class AttributeTrackingDestination implements Destination
 
     /** Resets the filter's internal notion of the current section's
      *  attributes to their default values. Invoked to handle the
+     * <p>
+     *  属性设置为其默认值。调用处理
+     * 
+     * 
      *  \sectd keyword. */
     protected void resetSectionAttributes()
     {
@@ -1522,12 +1692,20 @@ abstract class AttributeTrackingDestination implements Destination
  *                           set the paragraph's attributes
  *  <dt>endSection()<dd>to end the current section
  *  </dl>
+ * <p>
+ *  功能。
+ * 子类必须实现：<dl> <dt> deliverText()<dd>来处理具有相同属性<dt> finishParagraph()<dd>的文本运行以结束当前段落并设置段落属性<dt> endSecti
+ * on )<dd>结束当前部分。
+ *  功能。
+ * </dl>
  */
 abstract class TextHandlingDestination
     extends AttributeTrackingDestination
     implements Destination
 {
     /** <code>true</code> if the reader has not just finished
+    /* <p>
+    /* 
      *  a paragraph; false upon startup */
     boolean inParagraph;
 
@@ -1598,6 +1776,7 @@ abstract class TextHandlingDestination
  *  TextHandlingDestination which appends the text to the
  *  StyledDocument given by the <code>target</code> ivar of the
  *  containing RTFReader.
+ * <p>
  */
 class DocumentDestination
     extends TextHandlingDestination

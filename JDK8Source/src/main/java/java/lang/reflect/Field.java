@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,12 @@ import sun.reflect.annotation.TypeAnnotationParser;
  * set access operation, but throws an {@code IllegalArgumentException} if a
  * narrowing conversion would occur.
  *
+ * <p>
+ *  {@code Field}提供有关类或接口的单个​​字段的信息以及动态访问。反射场可以是类(静态)场或实例场。
+ * 
+ *  <p> {@code Field}允许在获取或设置访问操作期间扩展转换,但如果发生缩小转换,则会抛出{@code IllegalArgumentException}。
+ * 
+ * 
  * @see Member
  * @see java.lang.Class
  * @see java.lang.Class#getFields()
@@ -113,6 +120,9 @@ class Field extends AccessibleObject implements Member {
      * Package-private constructor used by ReflectAccess to enable
      * instantiation of these objects in Java code from the java.lang
      * package via sun.reflect.LangReflectAccess.
+     * <p>
+     *  Package-private构造函数,由ReflectAccess用于通过sun.reflect.LangReflectAccess从java.lang包中启用Java代码中的这些对象的实例化。
+     * 
      */
     Field(Class<?> declaringClass,
           String name,
@@ -135,6 +145,9 @@ class Field extends AccessibleObject implements Member {
      * Package-private routine (exposed to java.lang.Class via
      * ReflectAccess) which returns a copy of this Field. The copy's
      * "root" field points to this Field.
+     * <p>
+     *  Package-private例程(通过ReflectAccess暴露给java.lang.Class),它返回此字段的副本。副本的"根"字段指向此字段。
+     * 
      */
     Field copy() {
         // This routine enables sharing of FieldAccessor objects
@@ -159,6 +172,9 @@ class Field extends AccessibleObject implements Member {
     /**
      * Returns the {@code Class} object representing the class or interface
      * that declares the field represented by this {@code Field} object.
+     * <p>
+     *  返回表示声明由此{@code Field}对象表示的字段的类或接口的{@code Class}对象。
+     * 
      */
     public Class<?> getDeclaringClass() {
         return clazz;
@@ -166,6 +182,9 @@ class Field extends AccessibleObject implements Member {
 
     /**
      * Returns the name of the field represented by this {@code Field} object.
+     * <p>
+     *  返回由此{@code Field}对象表示的字段的名称。
+     * 
      */
     public String getName() {
         return name;
@@ -176,6 +195,10 @@ class Field extends AccessibleObject implements Member {
      * by this {@code Field} object, as an integer. The {@code Modifier} class should
      * be used to decode the modifiers.
      *
+     * <p>
+     *  返回由此{@code Field}对象表示的字段的Java语言修饰符作为整数。 {@code Modifier}类应该用于解码修饰符。
+     * 
+     * 
      * @see Modifier
      */
     public int getModifiers() {
@@ -186,6 +209,10 @@ class Field extends AccessibleObject implements Member {
      * Returns {@code true} if this field represents an element of
      * an enumerated type; returns {@code false} otherwise.
      *
+     * <p>
+     *  如果此字段表示枚举类型的元素,则返回{@code true};否则返回{@code false}。
+     * 
+     * 
      * @return {@code true} if and only if this field represents an element of
      * an enumerated type.
      * @since 1.5
@@ -198,6 +225,10 @@ class Field extends AccessibleObject implements Member {
      * Returns {@code true} if this field is a synthetic
      * field; returns {@code false} otherwise.
      *
+     * <p>
+     *  如果此字段是合成字段,则返回{@code true};否则返回{@code false}。
+     * 
+     * 
      * @return true if and only if this field is a synthetic
      * field as defined by the Java Language Specification.
      * @since 1.5
@@ -211,6 +242,10 @@ class Field extends AccessibleObject implements Member {
      * declared type for the field represented by this
      * {@code Field} object.
      *
+     * <p>
+     * 返回一个{@code Class}对象,该对象标识由此{@code Field}对象表示的字段的声明类型。
+     * 
+     * 
      * @return a {@code Class} object identifying the declared
      * type of the field represented by this object
      */
@@ -229,6 +264,14 @@ class Field extends AccessibleObject implements Member {
      * <p>If the type of the underlying field is a type variable or a
      * parameterized type, it is created. Otherwise, it is resolved.
      *
+     * <p>
+     *  返回一个{@code Type}对象,它表示由此{@code Field}对象表示的字段的声明类型。
+     * 
+     *  <p>如果{@code Type}是参数化类型,则返回的{@code Type}对象必须准确反映源代码中使用的实际类型参数。
+     * 
+     *  <p>如果底层字段的类型是类型变量或参数化类型,则会创建它。否则,它被解决。
+     * 
+     * 
      * @return a {@code Type} object that represents the declared type for
      *     the field represented by this {@code Field} object
      * @throws GenericSignatureFormatError if the generic field
@@ -255,6 +298,9 @@ class Field extends AccessibleObject implements Member {
      * true if the objects are the same.  Two {@code Field} objects are the same if
      * they were declared by the same class and have the same name
      * and type.
+     * <p>
+     *  将此{@code Field}与指定的对象进行比较。如果对象相同,则返回true。如果两个{@code Field}对象由相同的类声明并具有相同的名称和类型,则它们是相同的。
+     * 
      */
     public boolean equals(Object obj) {
         if (obj != null && obj instanceof Field) {
@@ -270,6 +316,9 @@ class Field extends AccessibleObject implements Member {
      * Returns a hashcode for this {@code Field}.  This is computed as the
      * exclusive-or of the hashcodes for the underlying field's
      * declaring class name and its name.
+     * <p>
+     *  返回此{@code Field}的哈希码。这是计算为底层字段的声明类名称及其名称的哈希码的异或。
+     * 
      */
     public int hashCode() {
         return getDeclaringClass().getName().hashCode() ^ getName().hashCode();
@@ -293,6 +342,18 @@ class Field extends AccessibleObject implements Member {
      * modifiers in the following order: {@code static}, {@code final},
      * {@code transient}, {@code volatile}.
      *
+     * <p>
+     *  返回描述此{@code Field}的字符串。格式是字段的访问修饰符(如果有),后跟字段类型,后跟一个空格,后跟一个声明该字段的类的完全限定名称,后跟一个句点,后跟一个字段名称。例如：
+     * <pre>
+     *  public static final int java.lang.Thread.MIN_PRIORITY private int java.io.FileDescriptor.fd
+     * </pre>
+     * 
+     * <p>修饰符按照"Java语言规范"指定的规范顺序放置。
+     * 这是{@code public},{@ code protected}或{@code private},然后是其他修饰符,顺序如下：{@code static},{@code final},{@code transient}
+     * 代码volatile}。
+     * <p>修饰符按照"Java语言规范"指定的规范顺序放置。
+     * 
+     * 
      * @return a string describing this {@code Field}
      * @jls 8.3.1 Field Modifiers
      */
@@ -318,6 +379,15 @@ class Field extends AccessibleObject implements Member {
      * modifiers in the following order: {@code static}, {@code final},
      * {@code transient}, {@code volatile}.
      *
+     * <p>
+     *  返回描述此{@code Field}的字符串,包括其通用类型。格式是字段的访问修饰符(如果有),后跟通用字段类型,后跟一个空格,后跟一个声明该字段的类的完全限定名称,后跟一个句点,后跟一个句点领域。
+     * 
+     *  <p>修饰符按照"Java语言规范"指定的规范顺序放置。
+     * 这是{@code public},{@ code protected}或{@code private},然后是其他修饰符,顺序如下：{@code static},{@code final},{@code transient}
+     * 代码volatile}。
+     *  <p>修饰符按照"Java语言规范"指定的规范顺序放置。
+     * 
+     * 
      * @return a string describing this {@code Field}, including
      * its generic type
      *
@@ -363,6 +433,24 @@ class Field extends AccessibleObject implements Member {
      * <p>If the field is hidden in the type of {@code obj},
      * the field's value is obtained according to the preceding rules.
      *
+     * <p>
+     *  返回指定对象上由此{@code Field}表示的字段的值。如果值具有原始类型,则该值会自动包装在对象中。
+     * 
+     *  <p>底层字段的值如下所示：
+     * 
+     *  <p>如果底层字段是静态字段,则{@code obj}参数将被忽略;它可以为null。
+     * 
+     * <p>否则,底层字段是一个实例字段。如果指定的{@code obj}参数为null,那么该方法会抛出一个{@code NullPointerException}。
+     * 如果指定的对象不是声明基础字段的类或接口的实例,则该方法会抛出{@code IllegalArgumentException}。
+     * 
+     *  <p>如果{@code Field}对象强制实施Java语言访问控制,并且底层字段无法访问,则该方法会抛出{@code IllegalAccessException}。
+     * 如果底层字段是静态的,那么声明该字段的类在未初始化的情况下被初始化。
+     * 
+     *  <p>否则,将从底层实例或静态字段检索该值。如果字段具有原始类型,则在返回之前将值包装在对象中,否则返回原样。
+     * 
+     *  <p>如果字段在{@code obj}类型中被隐藏,则根据前述规则获取字段的值。
+     * 
+     * 
      * @param obj object from which the represented field's value is
      * to be extracted
      * @return the value of the represented field in object
@@ -396,6 +484,10 @@ class Field extends AccessibleObject implements Member {
     /**
      * Gets the value of a static or instance {@code boolean} field.
      *
+     * <p>
+     *  获取静态或实例{@code boolean}字段的值。
+     * 
+     * 
      * @param obj the object to extract the {@code boolean} value
      * from
      * @return the value of the {@code boolean} field
@@ -431,6 +523,10 @@ class Field extends AccessibleObject implements Member {
     /**
      * Gets the value of a static or instance {@code byte} field.
      *
+     * <p>
+     *  获取静态或实例{@code byte}字段的值。
+     * 
+     * 
      * @param obj the object to extract the {@code byte} value
      * from
      * @return the value of the {@code byte} field
@@ -468,6 +564,10 @@ class Field extends AccessibleObject implements Member {
      * {@code char} or of another primitive type convertible to
      * type {@code char} via a widening conversion.
      *
+     * <p>
+     *  通过扩展转换获取类型为{@code char}的静态或实例字段的值或可转换为类型为{@code char}的另一个基本类型的值。
+     * 
+     * 
      * @param obj the object to extract the {@code char} value
      * from
      * @return the value of the field converted to type {@code char}
@@ -505,6 +605,10 @@ class Field extends AccessibleObject implements Member {
      * {@code short} or of another primitive type convertible to
      * type {@code short} via a widening conversion.
      *
+     * <p>
+     *  获取类型为{@code short}的静态或实例字段的值或通过加宽转换可转换为类型{@code short}的另一个基本类型的值。
+     * 
+     * 
      * @param obj the object to extract the {@code short} value
      * from
      * @return the value of the field converted to type {@code short}
@@ -542,6 +646,10 @@ class Field extends AccessibleObject implements Member {
      * {@code int} or of another primitive type convertible to
      * type {@code int} via a widening conversion.
      *
+     * <p>
+     * 获取类型为{@code int}的静态或实例字段的值或通过加宽转换可转换为类型{@code int}的另一个基本类型的值。
+     * 
+     * 
      * @param obj the object to extract the {@code int} value
      * from
      * @return the value of the field converted to type {@code int}
@@ -579,6 +687,10 @@ class Field extends AccessibleObject implements Member {
      * {@code long} or of another primitive type convertible to
      * type {@code long} via a widening conversion.
      *
+     * <p>
+     *  获取类型为{@code long}的静态或实例字段的值,或通过加宽转换可转换为类型{@code long}的另一个基本类型的值。
+     * 
+     * 
      * @param obj the object to extract the {@code long} value
      * from
      * @return the value of the field converted to type {@code long}
@@ -616,6 +728,10 @@ class Field extends AccessibleObject implements Member {
      * {@code float} or of another primitive type convertible to
      * type {@code float} via a widening conversion.
      *
+     * <p>
+     *  获取类型为{@code float}的静态或实例字段的值或通过加宽转换可转换为类型{@code float}的另一个基本类型的值。
+     * 
+     * 
      * @param obj the object to extract the {@code float} value
      * from
      * @return the value of the field converted to type {@code float}
@@ -653,6 +769,10 @@ class Field extends AccessibleObject implements Member {
      * {@code double} or of another primitive type convertible to
      * type {@code double} via a widening conversion.
      *
+     * <p>
+     *  获取类型为{@code double}的静态或实例字段的值或通过加宽转换可转换为类型{@code double}的另一个基本类型的值。
+     * 
+     * 
      * @param obj the object to extract the {@code double} value
      * from
      * @return the value of the field converted to type {@code double}
@@ -735,6 +855,34 @@ class Field extends AccessibleObject implements Member {
      * <p>If the field is hidden in the type of {@code obj},
      * the field's value is set according to the preceding rules.
      *
+     * <p>
+     *  将指定对象参数上的此{@code Field}对象所表示的字段设置为指定的新值。如果基础字段具有原始类型,则新值将自动展开。
+     * 
+     *  <p>操作如下：
+     * 
+     *  <p>如果底层字段是静态的,则忽略{@code obj}参数;它可以为null。
+     * 
+     *  <p>否则,底层字段是一个实例字段。如果指定的对象参数为null,则该方法会抛出一个{@code NullPointerException}。
+     * 如果指定的对象参数不是声明基础字段的类或接口的实例,则该方法会抛出{@code IllegalArgumentException}。
+     * 
+     *  <p>如果{@code Field}对象强制实施Java语言访问控制,并且底层字段无法访问,则该方法会抛出{@code IllegalAccessException}。
+     * 
+     * <p>如果底层字段是final,该方法会抛出一个{@code IllegalAccessException},除非{@code setAccessible(true)}已成功处理此{@code Field}
+     * 对象,并且该字段是非静态的。
+     * 以这种方式设置最终字段仅在具有空白最终字段的类的实例的反序列化或重构期间是有意义的,然后它们才可用于由程序的其它部分访问。
+     * 在任何其他上下文中使用可能具有不可预测的效果,包括程序的其他部分继续使用该字段的原始值的情况。
+     * 
+     *  <p>如果底层字段是原始类型,则尝试将新值转换为原始类型的值的展开转换。如果此尝试失败,该方法将抛出{@code IllegalArgumentException}。
+     * 
+     *  <p>如果在可能解开后,新值无法通过身份或扩展转换转换为基础字段的类型,则该方法会抛出{@code IllegalArgumentException}。
+     * 
+     *  <p>如果底层字段是静态的,则声明该字段的类在未初始化的情况下被初始化。
+     * 
+     *  <p>字段设置为可能未包装和扩展的新值。
+     * 
+     *  <p>如果字段在{@code obj}类型中被隐藏,则字段的值根据前面的规则设置。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param value the new value for the field of {@code obj}
      * being modified
@@ -771,6 +919,11 @@ class Field extends AccessibleObject implements Member {
      * where {@code zObj} is a {@code Boolean} object and
      * {@code zObj.booleanValue() == z}.
      *
+     * <p>
+     * 将字段的值设置为指定对象上的{@code boolean}。
+     * 这个方法等同于{@code set(obj,zObj)},其中{@code zObj}是一个{@code Boolean}对象和{@code zObj.booleanValue()== z}。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param z   the new value for the field of {@code obj}
      * being modified
@@ -808,6 +961,11 @@ class Field extends AccessibleObject implements Member {
      * where {@code bObj} is a {@code Byte} object and
      * {@code bObj.byteValue() == b}.
      *
+     * <p>
+     *  将字段的值设置为指定对象上的{@code byte}。
+     * 这个方法等价于{@code set(obj,bObj)},其中{@code bObj}是一个{@code Byte}对象和{@code bObj.byteValue()== b}。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param b   the new value for the field of {@code obj}
      * being modified
@@ -845,6 +1003,11 @@ class Field extends AccessibleObject implements Member {
      * where {@code cObj} is a {@code Character} object and
      * {@code cObj.charValue() == c}.
      *
+     * <p>
+     *  将字段的值设置为指定对象上的{@code char}。
+     * 这个方法等价于{@code set(obj,cObj)},其中{@code cObj}是一个{@code Character}对象和{@code cObj.charValue()== c}。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param c   the new value for the field of {@code obj}
      * being modified
@@ -882,6 +1045,11 @@ class Field extends AccessibleObject implements Member {
      * where {@code sObj} is a {@code Short} object and
      * {@code sObj.shortValue() == s}.
      *
+     * <p>
+     *  将字段的值设置为指定对象上的{@code short}。
+     * 这个方法相当于{@code set(obj,sObj)},其中{@code sObj}是一个{@code Short}对象和{@code sObj.shortValue()== s}。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param s   the new value for the field of {@code obj}
      * being modified
@@ -919,6 +1087,11 @@ class Field extends AccessibleObject implements Member {
      * where {@code iObj} is a {@code Integer} object and
      * {@code iObj.intValue() == i}.
      *
+     * <p>
+     *  将字段的值设置为指定对象上的{@code int}。
+     * 这个方法等价于{@code set(obj,iObj)},其中{@code iObj}是一个{@code Integer}对象和{@code iObj.intValue()== i}。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param i   the new value for the field of {@code obj}
      * being modified
@@ -956,6 +1129,11 @@ class Field extends AccessibleObject implements Member {
      * where {@code lObj} is a {@code Long} object and
      * {@code lObj.longValue() == l}.
      *
+     * <p>
+     *  将字段的值设置为指定对象上的{@code long}。
+     * 该方法等同于{@code set(obj,lObj)},其中{@code lObj}是{@code Long}对象和{@code lObj.longValue()== l}。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param l   the new value for the field of {@code obj}
      * being modified
@@ -993,6 +1171,11 @@ class Field extends AccessibleObject implements Member {
      * where {@code fObj} is a {@code Float} object and
      * {@code fObj.floatValue() == f}.
      *
+     * <p>
+     *  将字段的值设置为指定对象上的{@code float}。
+     * 这个方法等价于{@code set(obj,fObj)},其中{@code fObj}是一个{@code Float}对象和{@code fObj.floatValue()== f}。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param f   the new value for the field of {@code obj}
      * being modified
@@ -1030,6 +1213,11 @@ class Field extends AccessibleObject implements Member {
      * where {@code dObj} is a {@code Double} object and
      * {@code dObj.doubleValue() == d}.
      *
+     * <p>
+     * 将字段的值设置为指定对象上的{@code double}。
+     * 这个方法等同于{@code set(obj,dObj)},其中{@code dObj}是一个{@code Double}对象和{@code dObj.doubleValue()== d}。
+     * 
+     * 
      * @param obj the object whose field should be modified
      * @param d   the new value for the field of {@code obj}
      * being modified
@@ -1112,6 +1300,8 @@ class Field extends AccessibleObject implements Member {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.5
      */
@@ -1122,6 +1312,10 @@ class Field extends AccessibleObject implements Member {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.8
      */
@@ -1134,6 +1328,9 @@ class Field extends AccessibleObject implements Member {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public Annotation[] getDeclaredAnnotations()  {
         return AnnotationParser.toArray(declaredAnnotations());
@@ -1161,6 +1358,9 @@ class Field extends AccessibleObject implements Member {
     /**
      * Returns an AnnotatedType object that represents the use of a type to specify
      * the declared type of the field represented by this Field.
+     * <p>
+     *  返回一个AnnotatedType对象,它表示使用类型来指定此字段表示的字段的声明类型。
+     * 
      * @return an object representing the declared type of the field
      * represented by this Field
      *

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,6 +63,10 @@ import sun.reflect.misc.ReflectUtil;
  * This class contains the methods for performing all the tests needed to verify
  * that a class represents a JMX compliant MBean.
  *
+ * <p>
+ *  此类包含执行验证类是否表示符合JMX的MBean所需的所有测试的方法。
+ * 
+ * 
  * @since 1.5
  */
 public class Introspector {
@@ -75,6 +80,9 @@ public class Introspector {
      * ------------------------------------------
      *  PRIVATE CONSTRUCTORS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私人建筑师------------------------------------
+     * 
      */
 
     // private constructor defined to "hide" the default public constructor
@@ -89,6 +97,9 @@ public class Introspector {
      * ------------------------------------------
      *  PUBLIC METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------公共方法------------------------------------
+     * 
      */
 
     /**
@@ -105,6 +116,16 @@ public class Introspector {
      *     In particular, instances of <code>c</code> may, or may not
      *     be JMX standard MBeans.</li>
      * </ul>
+     * <p>
+     *  告诉给定类的MBean是否是动态MBean。这个方法没有什么比返回
+     * <pre>
+     *  javax.management.DynamicMBean.class.isAssignableFrom(c)
+     * </pre>
+     *  此方法不检查任何JMX MBean合规性：<ul> <li>如果返回<code> true </code>,则<code> c </code>的实例是DynamicMBean。
+     * </li> <li>如果返回<code> false </code>,则不能对<code> c </code>的实例做进一步的假设。
+     * 特别地,<code> c </code>的实例可以是或可以不是JMX标准MBean。</li>。
+     * </ul>
+     * 
      * @param c The class of the MBean under examination.
      * @return <code>true</code> if instances of <code>c</code> are
      *         Dynamic MBeans, <code>false</code> otherwise.
@@ -123,6 +144,12 @@ public class Introspector {
      *     <li>The given class exposes at least one public constructor.</li>
      * </ul>
      * If these conditions are not met, throws a NotCompliantMBeanException.
+     * <p>
+     *  用于测试给定类的MBean可以由MBean服务器实例化的基本方法。<p>此方法检查：<ul> <li>给定类是一个具体类。</li> <li>类公开至少一个公共构造函数。</li>
+     * </ul>
+     *  如果这些条件不满足,则抛出NotCompliantMBeanException异常。
+     * 
+     * 
      * @param c The class of the MBean we want to create.
      * @exception NotCompliantMBeanException if the MBean class makes it
      *            impossible to instantiate the MBean from within the
@@ -207,6 +234,10 @@ public class Introspector {
     /**
      * Basic method for testing if a given class is a JMX compliant MBean.
      *
+     * <p>
+     *  用于测试给定类是否是符合JMX的MBean的基本方法。
+     * 
+     * 
      * @param baseClass The class to be tested
      *
      * @return <code>null</code> if the MBean is a DynamicMBean,
@@ -232,6 +263,10 @@ public class Introspector {
      * Tests the given interface class for being a compliant MXBean interface.
      * A compliant MXBean interface is any publicly accessible interface
      * following the {@link MXBean} conventions.
+     * <p>
+     * 测试给定的接口类是否是兼容的MXBean接口。兼容的MXBean接口是遵循{@link MXBean}约定的任何可公开访问的接口。
+     * 
+     * 
      * @param interfaceClass An interface class to test for the MXBean compliance
      * @throws NotCompliantMBeanException Thrown when the tested interface
      * is not public or contradicts the {@link MXBean} conventions.
@@ -245,6 +280,10 @@ public class Introspector {
      * Tests the given interface class for being a compliant MBean interface.
      * A compliant MBean interface is any publicly accessible interface
      * following the {@code MBean} conventions.
+     * <p>
+     *  测试给定的接口类是一个兼容的MBean接口。兼容的MBean接口是遵循{@code MBean}约定的任何可公开访问的接口。
+     * 
+     * 
      * @param interfaceClass An interface class to test for the MBean compliance
      * @throws NotCompliantMBeanException Thrown when the tested interface
      * is not public or contradicts the {@code MBean} conventions.
@@ -259,6 +298,10 @@ public class Introspector {
      * Standard MBean.  This method is only called by the legacy code
      * in com.sun.management.jmx.
      *
+     * <p>
+     *  用于测试给定类是否是符合JMX的标准MBean的基本方法。此方法仅由com.sun.management.jmx中的旧代码调用。
+     * 
+     * 
      * @param baseClass The class to be tested.
      *
      * @param mbeanInterface the MBean interface that the class implements,
@@ -292,6 +335,10 @@ public class Introspector {
      * MBean class. This method is only called by the legacy
      * code in "com.sun.management.jmx".
      *
+     * <p>
+     *  获取由JMX标准MBean类实现的MBean接口。此方法仅由"com.sun.management.jmx"中的旧代码调用。
+     * 
+     * 
      * @param baseClass The class to be tested.
      *
      * @return The MBean interface implemented by the MBean.
@@ -312,6 +359,10 @@ public class Introspector {
     /**
      * Get the MBean interface implemented by a JMX Standard MBean class.
      *
+     * <p>
+     *  获取由JMX标准MBean类实现的MBean接口。
+     * 
+     * 
      * @param baseClass The class to be tested.
      *
      * @return The MBean interface implemented by the Standard MBean.
@@ -342,6 +393,10 @@ public class Introspector {
     /**
      * Get the MXBean interface implemented by a JMX MXBean class.
      *
+     * <p>
+     *  获取由JMX MXBean类实现的MXBean接口。
+     * 
+     * 
      * @param baseClass The class to be tested.
      *
      * @return The MXBean interface implemented by the MXBean.
@@ -362,12 +417,19 @@ public class Introspector {
      * ------------------------------------------
      *  PRIVATE METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私有方法------ ------------------------------------
+     * 
      */
 
 
     /**
      * Try to find the MBean interface corresponding to the class aName
      * - i.e. <i>aName</i>MBean, from within aClass and its superclasses.
+     * <p>
+     *  尝试从aClass及其超类中查找与类aName(即<i> aName </i> MBean)相对应的MBean接口。
+     * 
+     * 
      **/
     private static <T> Class<? super T> findMBeanInterface(
             Class<T> aClass, String aName) {
@@ -443,6 +505,10 @@ public class Introspector {
 
     /**
      * Throws a NotCompliantMBeanException or a SecurityException.
+     * <p>
+     *  抛出NotCompliantMBeanException或SecurityException。
+     * 
+     * 
      * @param notCompliant the class which was under examination
      * @param cause the raeson why NotCompliantMBeanException should
      *        be thrown.
@@ -518,6 +584,10 @@ public class Introspector {
     /**
      * Returns the XXMBean interface or null if no such interface exists
      *
+     * <p>
+     *  返回XXMBean接口,如果没有此类接口,则返回null
+     * 
+     * 
      * @param c The interface to be tested
      * @param clName The name of the class implementing this interface
      */
@@ -588,6 +658,9 @@ public class Introspector {
      * identify its "getter" methods. This class is intended for use only when
      * Java Beans is not present (which implies that there isn't explicit
      * information about the bean available).
+     * <p>
+     *  一个简单的内省函数,使用反射来分析类并识别其"getter"方法。此类仅适用于Java Bean不存在(这意味着没有有关可用bean的显式信息)。
+     * 
      */
     private static class SimpleIntrospector {
         private SimpleIntrospector() { }
@@ -603,6 +676,9 @@ public class Introspector {
         /**
          * Returns the list of methods cached for the given class, or {@code null}
          * if not cached.
+         * <p>
+         *  返回为给定类缓存的方法列表,如果未缓存,则返回{@code null}。
+         * 
          */
         private static List<Method> getCachedMethods(Class<?> clazz) {
             // return cached methods if possible
@@ -619,6 +695,9 @@ public class Introspector {
          * Returns {@code true} if the given method is a "getter" method (where
          * "getter" method is a public method of the form getXXX or "boolean
          * isXXX")
+         * <p>
+         * 如果给定的方法是"getter"方法(其中"getter"方法是getXXX或"boolean isXXX"形式的公共方法),则返回{@code true}
+         * 
          */
         static boolean isReadMethod(Method method) {
             // ignore static methods
@@ -645,6 +724,9 @@ public class Introspector {
          * Returns the list of "getter" methods for the given class. The list
          * is ordered so that isXXX methods appear before getXXX methods - this
          * is for compatibility with the JavaBeans Introspector.
+         * <p>
+         *  返回给定类的"getter"方法的列表。列表是有序的,因此isXXX方法出现在getXXX方法之前 - 这是为了与JavaBeans Introspector兼容。
+         * 
          */
         static List<Method> getReadMethods(Class<?> clazz) {
             // return cached result if available
@@ -680,6 +762,9 @@ public class Introspector {
         /**
          * Returns the "getter" to read the given property from the given class or
          * {@code null} if no method is found.
+         * <p>
+         *  返回"getter"从给定类或{@code null}中读取给定属性,如果没有找到方法。
+         * 
          */
         static Method getReadMethod(Class<?> clazz, String property) {
             // first character in uppercase (compatibility with JavaBeans)
@@ -700,6 +785,9 @@ public class Introspector {
     /**
      * A class that provides access to the JavaBeans Introspector and
      * PropertyDescriptors without creating a static dependency on java.beans.
+     * <p>
+     *  一个类,提供对JavaBeans Introspector和PropertyDescriptors的访问,而不对java.beans创建静态依赖关系。
+     * 
      */
     private static class BeansHelper {
         private static final Class<?> introspectorClass =
@@ -744,6 +832,9 @@ public class Introspector {
 
         /**
          * Returns {@code true} if java.beans is available.
+         * <p>
+         *  如果java.beans可用,返回{@code true}。
+         * 
          */
         static boolean isAvailable() {
             return introspectorClass != null;
@@ -751,6 +842,9 @@ public class Introspector {
 
         /**
          * Invokes java.beans.Introspector.getBeanInfo(Class)
+         * <p>
+         *  调用java.beans.Introspector.getBeanInfo(Class)
+         * 
          */
         static Object getBeanInfo(Class<?> clazz) throws Exception {
             try {
@@ -767,6 +861,9 @@ public class Introspector {
 
         /**
          * Invokes java.beans.BeanInfo.getPropertyDescriptors()
+         * <p>
+         *  调用java.beans.BeanInfo.getPropertyDescriptors()
+         * 
          */
         static Object[] getPropertyDescriptors(Object bi) {
             try {
@@ -783,6 +880,9 @@ public class Introspector {
 
         /**
          * Invokes java.beans.PropertyDescriptor.getName()
+         * <p>
+         *  调用java.beans.PropertyDescriptor.getName()
+         * 
          */
         static String getPropertyName(Object pd) {
             try {
@@ -799,6 +899,8 @@ public class Introspector {
 
         /**
          * Invokes java.beans.PropertyDescriptor.getReadMethod()
+         * <p>
+         *  调用java.beans.PropertyDescriptor.getReadMethod()
          */
         static Method getReadMethod(Object pd) {
             try {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: FuncExtElementAvailable.java,v 1.2.4.1 2005/09/14 19:58:32 jeffsuttor Exp $
+ * <p>
+ *  $ Id：FuncExtElementAvailable.java,v 1.2.4.1 2005/09/14 19:58:32 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.functions;
 
@@ -26,6 +39,9 @@ import com.sun.org.apache.xalan.internal.templates.Constants;
 // J2SE does not support Xalan interpretive
 /*
 import com.sun.org.apache.xalan.internal.transformer.TransformerImpl;
+/* <p>
+/*  import com.sun.org.apache.xalan.internal.transformer.TransformerImpl;
+/* 
 */
 import com.sun.org.apache.xml.internal.utils.QName;
 import com.sun.org.apache.xpath.internal.ExtensionsProvider;
@@ -36,6 +52,9 @@ import com.sun.org.apache.xpath.internal.objects.XObject;
 /**
  * Execute the ExtElementAvailable() function.
  * @xsl.usage advanced
+ * <p>
+ *  执行ExtElementAvailable()函数。 @ xsl.usage advanced
+ * 
  */
 public class FuncExtElementAvailable extends FunctionOneArg
 {
@@ -44,6 +63,10 @@ public class FuncExtElementAvailable extends FunctionOneArg
   /**
    * Execute the function.  The function must return
    * a valid object.
+   * <p>
+   *  执行该功能。函数必须返回有效的对象。
+   * 
+   * 
    * @param xctxt The current execution context.
    * @return A valid XObject.
    *
@@ -87,6 +110,10 @@ public class FuncExtElementAvailable extends FunctionOneArg
       } catch (Exception e) {
         return XBoolean.S_FALSE;
       }
+        /* <p>
+        /*  try {TransformerImpl transformer =(TransformerImpl)xctxt.getOwnerObject(); return transform.getStylesheet()。
+        /* getAvailableElements()。
+        /* containsKey(new QName(namespace,methName))? XBoolean.S_TRUE：XBoolean.S_FALSE; } catch(Exception e){return XBoolean.S_FALSE; }
       */
         return XBoolean.S_FALSE;
     } else {

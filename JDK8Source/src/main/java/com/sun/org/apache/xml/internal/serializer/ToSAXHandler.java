@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ToSAXHandler.java,v 1.2.4.1 2005/09/22 11:03:15 pvedula Exp $
+ * <p>
+ *  $ Id：ToSAXHandler.java,v 1.2.4.1 2005/09/22 11:03:15 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -38,6 +51,13 @@ import org.xml.sax.ext.LexicalHandler;
  * This class is not a public API.
  *
  * @xsl.usage internal
+ * <p>
+ *  这个类用于提供由其他To ... SAXHandler序列化程序继承的基本行为。
+ * 
+ *  此类不是公共API。
+ * 
+ *  @ xsl.usage internal
+ * 
  */
 public abstract class ToSAXHandler extends SerializerBase
 {
@@ -62,11 +82,17 @@ public abstract class ToSAXHandler extends SerializerBase
 
     /**
      * Underlying SAX handler. Taken from XSLTC
+     * <p>
+     *  底层SAX处理程序。摘自XSLTC
+     * 
      */
     protected ContentHandler m_saxHandler;
 
     /**
      * Underlying LexicalHandler. Taken from XSLTC
+     * <p>
+     *  底层LexicalHandler。摘自XSLTC
+     * 
      */
     protected LexicalHandler m_lexHandler;
 
@@ -78,17 +104,29 @@ public abstract class ToSAXHandler extends SerializerBase
      * startPrefixMapping("prefix1","uri1") will also cause the additional
      * internally generated attribute xmlns:prefix1="uri1" to be effectively added
      * to the attributes passed to the wrapped ContentHandler.
+     * <p>
+     *  对ToSAXHandler的startPrefixMapping()调用会将该调用传递给包装的ContentHandler,但是我们也应该使用匹配的属性来镜像这些调用,如果这样,则此字段为true。
+     * 例如,如果此字段为true,则诸如startPrefixMapping("prefix1","uri1")的调用也将导致附加的内部生成的属性xmlns：prefix1 ="uri1"被有效地添加到传递给
+     * 包装的ContentHandler的属性。
+     * 
      */
     private boolean m_shouldGenerateNSAttribute = true;
 
     /** If this is true, then the content handler wrapped by this
      * serializer implements the TransformState interface which
      * will give the content handler access to the state of
+     * <p>
+     * serializer实现TransformState接口,它将给内容处理程序访问状态
+     * 
+     * 
      * the transform. */
     protected TransformStateSetter m_state = null;
 
     /**
      * Pass callback to the SAX Handler
+     * <p>
+     *  通过回调到SAX处理程序
+     * 
      */
     protected void startDocumentInternal() throws SAXException
     {
@@ -102,6 +140,10 @@ public abstract class ToSAXHandler extends SerializerBase
     }
     /**
      * Do nothing.
+     * <p>
+     *  没做什么。
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#startDTD(String, String, String)
      */
     public void startDTD(String arg0, String arg1, String arg2)
@@ -113,6 +155,10 @@ public abstract class ToSAXHandler extends SerializerBase
     /**
      * Receive notification of character data.
      *
+     * <p>
+     *  接收字符数据的通知。
+     * 
+     * 
      * @param characters The string of characters to process.
      *
      * @throws org.xml.sax.SAXException
@@ -133,6 +179,10 @@ public abstract class ToSAXHandler extends SerializerBase
     /**
      * Receive notification of a comment.
      *
+     * <p>
+     *  接收评论通知。
+     * 
+     * 
      * @see ExtendedLexicalHandler#comment(String)
      */
     public void comment(String comment) throws SAXException
@@ -159,6 +209,10 @@ public abstract class ToSAXHandler extends SerializerBase
     /**
      * Do nothing as this is an abstract class. All subclasses will need to
      * define their behavior if it is different.
+     * <p>
+     *  不要这样做,因为这是一个抽象类。如果不同,所有子类都需要定义它们的行为。
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#processingInstruction(String, String)
      */
     public void processingInstruction(String target, String data)
@@ -181,6 +235,10 @@ public abstract class ToSAXHandler extends SerializerBase
      * SAX method additional namespace or attribute information can occur before
      * or after this call, that is associated with this element.
      *
+     * <p>
+     *  接收元素开头的通知,虽然这是一个SAX方法,但在此调用之前或之后可能会发生附加的命名空间或属性信息,这与此元素相关联。
+     * 
+     * 
      * @throws org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.
      * @see org.xml.sax.ContentHandler#startElement
@@ -209,6 +267,10 @@ public abstract class ToSAXHandler extends SerializerBase
 
     /**
      * Sets the LexicalHandler.
+     * <p>
+     *  设置LexicalHandler。
+     * 
+     * 
      * @param _lexHandler The LexicalHandler to set
      */
     public void setLexHandler(LexicalHandler _lexHandler)
@@ -218,6 +280,10 @@ public abstract class ToSAXHandler extends SerializerBase
 
     /**
      * Sets the SAX ContentHandler.
+     * <p>
+     *  设置SAX ContentHandler。
+     * 
+     * 
      * @param _saxHandler The ContentHandler to set
      */
     public void setContentHandler(ContentHandler _saxHandler)
@@ -234,6 +300,10 @@ public abstract class ToSAXHandler extends SerializerBase
     /**
      * Does nothing. The setting of CDATA section elements has an impact on
      * stream serializers.
+     * <p>
+     *  什么也没做。 CDATA段元素的设置对流序列化有影响。
+     * 
+     * 
      * @see SerializationHandler#setCdataSectionElements(java.util.Vector)
      */
     public void setCdataSectionElements(Vector URI_and_localNames)
@@ -244,6 +314,10 @@ public abstract class ToSAXHandler extends SerializerBase
     /** Set whether or not namespace declarations (e.g.
      * xmlns:foo) should appear as attributes of
      * elements
+     * <p>
+     *  xmlns：foo)应该作为元素的属性出现
+     * 
+     * 
      * @param doOutputNSAttr whether or not namespace declarations
      * should appear as attributes
      */
@@ -257,6 +331,10 @@ public abstract class ToSAXHandler extends SerializerBase
      * startPrefixMapping("prefix1","uri1") should
      * also be mirrored with self generated additional attributes of elements
      * that declare the namespace, for example the attribute xmlns:prefix1="uri1"
+     * <p>
+     *  如果来自调用的命名空间声明(如startPrefixMapping("prefix1","uri1"))也应使用声明该命名空间的元素的自生成附加属性进行镜像,则返回true,例如属性xmlns：pre
+     * fix1 ="uri1"。
+     * 
      */
     boolean getShouldOutputNSAttr()
     {
@@ -266,6 +344,9 @@ public abstract class ToSAXHandler extends SerializerBase
     /**
      * This method flushes any pending events, which can be startDocument()
      * closing the opening tag of an element, or closing an open CDATA section.
+     * <p>
+     *  此方法刷新任何挂起的事件,可以是startDocument()关闭元素的开始标签,或关闭打开的CDATA节。
+     * 
      */
     public void flushPending() throws SAXException
     {
@@ -296,6 +377,10 @@ public abstract class ToSAXHandler extends SerializerBase
      * information about he state of the transformation. This
      * method will be called  before each startDocument event.
      *
+     * <p>
+     *  传入对TransformState对象的引用,可以在SAX ContentHandler事件期间使用它来获取有关转换状态的信息。此方法将在每个startDocument事件之前调用。
+     * 
+     * 
      * @param ts A reference to a TransformState object
      */
     public void setTransformState(TransformStateSetter ts) {
@@ -306,6 +391,10 @@ public abstract class ToSAXHandler extends SerializerBase
      * Receives notification that an element starts, but attributes are not
      * fully known yet.
      *
+     * <p>
+     *  接收元素开始的通知,但属性尚未完全知晓。
+     * 
+     * 
      * @param uri the URI of the namespace of the element (optional)
      * @param localName the element name, but without prefix (optional)
      * @param qName the element name, with prefix, if any (required)
@@ -327,6 +416,10 @@ public abstract class ToSAXHandler extends SerializerBase
     /**
      * An element starts, but attributes are not fully known yet.
      *
+     * <p>
+     * 元素开始,但属性尚未完全知晓。
+     * 
+     * 
      * @param qName the element name, with prefix (if any).
 
      * @see ExtendedContentHandler#startElement(String)
@@ -343,6 +436,10 @@ public abstract class ToSAXHandler extends SerializerBase
     /**
      * This method gets the node's value as a String and uses that String as if
      * it were an input character notification.
+     * <p>
+     *  此方法将节点的值作为字符串获取,并将该字符串用作输入字符通知。
+     * 
+     * 
      * @param node the Node to serialize
      * @throws org.xml.sax.SAXException
      */
@@ -364,6 +461,8 @@ public abstract class ToSAXHandler extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ErrorHandler#fatalError(SAXParseException)
      */
     public void fatalError(SAXParseException exc) throws SAXException {
@@ -377,6 +476,8 @@ public abstract class ToSAXHandler extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ErrorHandler#error(SAXParseException)
      */
     public void error(SAXParseException exc) throws SAXException {
@@ -388,6 +489,8 @@ public abstract class ToSAXHandler extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ErrorHandler#warning(SAXParseException)
      */
     public void warning(SAXParseException exc) throws SAXException {
@@ -403,6 +506,10 @@ public abstract class ToSAXHandler extends SerializerBase
      * re-use, so that you don't need to create a new serializer
      * (mostly for performance reasons).
      *
+     * <p>
+     *  尝试重置超类并重置此类以供重用,以便您不需要创建新的序列化程序(主要是出于性能原因)。
+     * 
+     * 
      * @return true if the class was successfuly reset.
      * @see Serializer#reset()
      */
@@ -420,6 +527,9 @@ public abstract class ToSAXHandler extends SerializerBase
     /**
      * Reset all of the fields owned by ToSAXHandler class
      *
+     * <p>
+     *  重置ToSAXHandler类拥有的所有字段
+     * 
      */
     private void resetToSAXHandler()
     {
@@ -431,6 +541,8 @@ public abstract class ToSAXHandler extends SerializerBase
 
     /**
      * Add a unique attribute
+     * <p>
+     *  添加唯一属性
      */
     public void addUniqueAttribute(String qName, String value, int flags)
         throws SAXException

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.awt.image.ColorModel;
 /**
  * EffectUtils
  *
+ * <p>
+ *  效果
+ * 
+ * 
  * @author Created by Jasper Potts (Jun 18, 2007)
  */
 class EffectUtils {
@@ -44,6 +49,10 @@ class EffectUtils {
     /**
      * Clear a transparent image to 100% transparent
      *
+     * <p>
+     *  将透明图像清除为100％透明
+     * 
+     * 
      * @param img The image to clear
      */
     static void clearImage(BufferedImage img) {
@@ -59,6 +68,10 @@ class EffectUtils {
     /**
      * Apply Gaussian Blur to Image
      *
+     * <p>
+     *  将高斯模糊应用于图像
+     * 
+     * 
      * @param src    The image tp
      * @param dst    The destination image to draw blured src image into, null if you want a new one created
      * @param radius The blur kernel radius
@@ -106,6 +119,11 @@ class EffectUtils {
      * format.</p> <p>After this method is executed, dstPixels contains a transposed and filtered copy of
      * srcPixels.</p>
      *
+     * <p>
+     *  <p>将源像素模糊到目标像素。模糊的力由半径决定,半径必须大于0. </p> <p>源和目标像素阵列应采用INT_ARGB格式。
+     * </p> <p>此方法之后已执行,dstPixels包含srcPixels的转置和过滤副本。</p>。
+     * 
+     * 
      * @param srcPixels the source pixels
      * @param dstPixels the destination pixels
      * @param width     the width of the source picture
@@ -168,6 +186,11 @@ class EffectUtils {
      * format.</p> <p>After this method is executed, dstPixels contains a transposed and filtered copy of
      * srcPixels.</p>
      *
+     * <p>
+     *  <p>将源像素模糊到目标像素。模糊的力由半径指定,该半径必须大于0. </p> <p>源和目标像素数组预计采用BYTE_GREY格式。
+     * </p> <p>此方法之后已执行,dstPixels包含srcPixels的转置和过滤副本。</p>。
+     * 
+     * 
      * @param srcPixels the source pixels
      * @param dstPixels the destination pixels
      * @param width     the width of the source picture
@@ -238,6 +261,13 @@ class EffectUtils {
      * from <code>BufferedImage.TYPE_INT_ARGB</code> and <code>BufferedImage.TYPE_INT_RGB</code> will unmanage the
      * image.</p>
      *
+     * <p>
+     *  <p>从<code> BufferedImage </code>中返回作为整数存储的像素数组。从由位置和二维限定的矩形区域中抓取像素。
+     * 在类型不同于<code> BufferedImage.TYPE_INT_ARGB </code>和<code> BufferedImage.TYPE_INT_RGB </code>类型的图片上调用此方法
+     * 将取消管理图片。
+     *  <p>从<code> BufferedImage </code>中返回作为整数存储的像素数组。从由位置和二维限定的矩形区域中抓取像素。</p>。
+     * 
+     * 
      * @param img    the source image
      * @param x      the x location at which to start grabbing pixels
      * @param y      the y location at which to start grabbing pixels
@@ -273,6 +303,13 @@ class EffectUtils {
      * image of type different from <code>BufferedImage.TYPE_INT_ARGB</code> and <code>BufferedImage.TYPE_INT_RGB</code>
      * will unmanage the image.</p>
      *
+     * <p>
+     * <p>在目标<code> BufferedImage </code>中写入一个矩形区域的像素。
+     * 在类型不同于<code> BufferedImage.TYPE_INT_ARGB </code>和<code> BufferedImage.TYPE_INT_RGB </code>类型的图片上调用此方法
+     * 将取消管理图片。
+     * <p>在目标<code> BufferedImage </code>中写入一个矩形区域的像素。</p>。
+     * 
+     * 
      * @param img    the destination image
      * @param x      the x location at which to start storing pixels
      * @param y      the y location at which to start storing pixels
@@ -304,6 +341,13 @@ class EffectUtils {
      * an image of type different from <code>BufferedImage.TYPE_INT_ARGB</code>
      * and <code>BufferedImage.TYPE_INT_RGB</code> will unmanage the image.</p>
      *
+     * <p>
+     *  <p>从<code> BufferedImage </code>中返回作为整数存储的像素数组。从由位置和二维限定的矩形区域中抓取像素。
+     * 在类型不同于<code> BufferedImage.TYPE_INT_ARGB </code>和<code> BufferedImage.TYPE_INT_RGB </code>类型的图片上调用此方法
+     * 将取消管理图片。
+     *  <p>从<code> BufferedImage </code>中返回作为整数存储的像素数组。从由位置和二维限定的矩形区域中抓取像素。</p>。
+     * 
+     * 
      * @param img the source image
      * @param x the x location at which to start grabbing pixels
      * @param y the y location at which to start grabbing pixels
@@ -345,6 +389,13 @@ class EffectUtils {
      * an image of type different from <code>BufferedImage.TYPE_INT_ARGB</code>
      * and <code>BufferedImage.TYPE_INT_RGB</code> will unmanage the image.</p>
      *
+     * <p>
+     *  <p>在目标<code> BufferedImage </code>中写入一个矩形区域的像素。
+     * 在类型不同于<code> BufferedImage.TYPE_INT_ARGB </code>和<code> BufferedImage.TYPE_INT_RGB </code>类型的图片上调用此方法
+     * 将取消管理图片。
+     *  <p>在目标<code> BufferedImage </code>中写入一个矩形区域的像素。</p>。
+     * 
+     * 
      * @param img the destination image
      * @param x the x location at which to start storing pixels
      * @param y the y location at which to start storing pixels
@@ -380,6 +431,10 @@ class EffectUtils {
      * with the image passed as a parameter. This does not mean the returned
      * image is compatible with the hardware.</p>
      *
+     * <p>
+     *  <p>使用与作为参数传递的图像相同的颜色模型返回新的<code> BufferedImage </code>。返回的图像仅与作为参数传递的图像兼容。这并不意味着返回的图像与硬件兼容。</p>
+     * 
+     * 
      * @param image the reference image from which the color model of the new
      *   image is obtained
      * @return a new <code>BufferedImage</code>, compatible with the color model
@@ -400,6 +455,10 @@ class EffectUtils {
      * environment, then the returned BufferedImage will be compatible with
      * the source image.</p>
      *
+     * <p>
+     *  <p>返回指定宽度和高度的新的半透明兼容图像。也就是说,返回的<code> BufferedImage </code>与图形硬件兼容。
+     * 如果在无头环境中调用该方法,则返回的BufferedImage将与源图像兼容。</p>。
+     * 
      * @param width the width of the new image
      * @param height the height of the new image
      * @return a new translucent compatible <code>BufferedImage</code> of the

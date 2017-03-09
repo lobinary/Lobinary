@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,10 @@ import javax.management.MBeanParameterInfo;
  * Describes an operation of an Open MBean.
  *
  *
+ * <p>
+ *  描述Open MBean的操作。
+ * 
+ * 
  * @since 1.5
  */
 public class OpenMBeanOperationInfoSupport
@@ -51,6 +56,8 @@ public class OpenMBeanOperationInfoSupport
     static final long serialVersionUID = 4996859732565369366L;
 
     /**
+    /* <p>
+    /* 
      * @serial The <i>open type</i> of the values returned by the operation
      *         described by this {@link OpenMBeanOperationInfo} instance
      *
@@ -75,6 +82,14 @@ public class OpenMBeanOperationInfoSupport
      * so that subsequent changes to the array referenced by {@code
      * signature} have no effect on this instance.</p>
      *
+     * <p>
+     *  <p>构造一个{@code OpenMBeanOperationInfoSupport}实例,用于描述具有指定的{@code name},{@code description},{@code signature}
+     * ,{@code returnOpenType}和{@code impact}。
+     * </p>。
+     * 
+     *  <p> {@code signature}数组参数在内部被复制,因此对{@code signature}引用的数组的后续更改对此实例没有影响。</p>
+     * 
+     * 
      * @param name cannot be a null or empty string.
      *
      * @param description cannot be a null or empty string.
@@ -116,6 +131,14 @@ public class OpenMBeanOperationInfoSupport
      * so that subsequent changes to the array referenced by {@code
      * signature} have no effect on this instance.</p>
      *
+     * <p>
+     *  <p>构造一个{@code OpenMBeanOperationInfoSupport}实例,该实例描述一个具有指定的{@code name},{@code description},{@code signature}
+     * ,{@code returnOpenType},的开放MBean类的操作, {@code impact}和{@code descriptor}。
+     * </p>。
+     * 
+     *  <p> {@code signature}数组参数在内部被复制,因此对{@code signature}引用的数组的后续更改对此实例没有影响。</p>
+     * 
+     * 
      * @param name cannot be a null or empty string.
      *
      * @param description cannot be a null or empty string.
@@ -225,6 +248,9 @@ public class OpenMBeanOperationInfoSupport
      * Returns the <i>open type</i> of the values returned by the
      * operation described by this {@code OpenMBeanOperationInfo}
      * instance.
+     * <p>
+     *  返回由此{@code OpenMBeanOperationInfo}实例描述的操作返回的值的<i>打开类型</i>。
+     * 
      */
     public OpenType<?> getReturnOpenType() {
 
@@ -258,6 +284,19 @@ public class OpenMBeanOperationInfoSupport
      * {@code obj} parameters which are different implementations of
      * the {@code OpenMBeanOperationInfo} interface.
      *
+     * <p>
+     *  <p>比较指定的{@code obj}参数与此{@code OpenMBeanOperationInfoSupport}实例的相等性。</p>
+     * 
+     *  <p>当且仅当所有以下语句都为真时返回{@code true}：
+     * 
+     * <ul>
+     * <li> {@ code obj}也是实现{@code OpenMBeanOperationInfo}接口,</li> <li>它们的名称相同</li> </li> </li> <li>他们的回报打开类
+     * 型相等</li> <li>他们的影响相等</li>。
+     * </ul>
+     * 
+     *  这可以确保{@code equals}方法对{@code obj}参数正常工作,{@code obj}参数是{@code OpenMBeanOperationInfo}接口的不同实现。
+     * 
+     * 
      * @param obj the object to be compared for equality with this
      * {@code OpenMBeanOperationInfoSupport} instance;
      *
@@ -338,6 +377,24 @@ public class OpenMBeanOperationInfoSupport
      * on the first call to {@code hashCode}, and then the same value
      * is returned for subsequent calls.</p>
      *
+     * <p>
+     *  <p>返回此{@code OpenMBeanOperationInfoSupport}实例的哈希码值。</p>
+     * 
+     *  <p> {@code OpenMBeanOperationInfoSupport}实例的哈希码是{@code equals}比较中使用的所有信息元素的哈希码的总和(即：其名称,返回开放类型,影响和签名
+     * ,其中签名hashCode是通过调用{@code java.util.Arrays.asList(this.getSignature).hashCode()})计算的。
+     * </p>。
+     * 
+     *  <p>这确保{@code t1.equals(t2)}暗示任何两个{@code OpenMBeanOperationInfoSupport}实例{@code t1}的{@code t1.hashCode()== t2.hashCode() @ code t2}
+     * ,根据方法{@link Object#hashCode()Object.hashCode()}的一般合同的要求。
+     * </p>。
+     * 
+     *  <p>但是,请注意,实现{@code OpenMBeanOperationInfo}接口的类的另一个实例可能等于{@link OpenStateInfoSupport}实例(由{@link #equals(java.lang.Object)}
+     * 定义),但可能如果计算方式不同,则有不同的哈希码。
+     * </p>。
+     * 
+     * <p>由于{@code OpenMBeanOperationInfoSupport}实例是不可变的,因此首次调用{@code hashCode}时会计算此实例的哈希码一次,然后返回相同的值用于后续调用。
+     * </p>。
+     * 
      * @return the hash code value for this {@code
      * OpenMBeanOperationInfoSupport} instance
      */
@@ -375,6 +432,9 @@ public class OpenMBeanOperationInfoSupport
      * calculated once, on the first call to {@code toString}, and
      * then the same value is returned for subsequent calls.</p>
      *
+     * <p>
+     * 
+     * 
      * @return a string representation of this {@code
      * OpenMBeanOperationInfoSupport} instance
      */
@@ -412,6 +472,15 @@ public class OpenMBeanOperationInfoSupport
      * For consistency with our
      * behavior in this version, we must replace the object with one
      * where the Descriptors reflect the same value of returned openType.
+     * <p>
+     *  <p>返回此{@code OpenMBeanOperationInfoSupport}实例的字符串表示形式。</p>
+     * 
+     *  <p>字符串表示由此类的名称(即{@code javax.management.openmbean.OpenMBeanOperationInfoSupport})和名称,签名,返回打开类型和影响的描述
+     * 操作和其描述符的字符串表示。
+     * </p>。
+     * 
+     *  <p>由于{@code OpenMBeanOperationInfoSupport}实例不可变,在第一次调用{@code toString}时,此实例的字符串表示将计算一次,然后返回相同的值用于后续调
+     * 
      **/
     private Object readResolve() {
         if (getDescriptor().getFieldNames().length == 0) {

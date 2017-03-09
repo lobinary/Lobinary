@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import javax.naming.*;
  * of InitialContext (including those for synchronization) apply here.
  *
  *
+ * <p>
+ *  这个类是执行目录操作的开始上下文。 InitialContext类描述中的文档(包括用于同步的文档)适用于此。
+ * 
+ * 
  * @author Rosanna Lee
  * @author Scott Seligman
  *
@@ -54,6 +59,11 @@ public class InitialDirContext extends InitialContext implements DirContext {
      * call this constructor, compute the value of the environment,
      * and then call <tt>init()</tt> before returning.
      *
+     * <p>
+     *  构造一个初始DirContext与不初始化它的选项。当调用<tt> InitialDirContext </tt>构造函数时环境参数的值尚未知晓时,这可能会被子类中的构造函数使用。
+     * 子类的构造函数将调用此构造函数,计算环境的值,然后在返回之前调用<tt> init()</tt>。
+     * 
+     * 
      * @param lazy
      *          true means do not initialize the initial DirContext; false
      *          is equivalent to calling <tt>new InitialDirContext()</tt>
@@ -71,6 +81,10 @@ public class InitialDirContext extends InitialContext implements DirContext {
      * No environment properties are supplied.
      * Equivalent to <tt>new InitialDirContext(null)</tt>.
      *
+     * <p>
+     *  构造一个初始DirContext。不提供环境属性。等效于<tt> new InitialDirContext(null)</tt>。
+     * 
+     * 
      * @throws  NamingException if a naming exception is encountered
      *
      * @see #InitialDirContext(Hashtable)
@@ -89,6 +103,10 @@ public class InitialDirContext extends InitialContext implements DirContext {
      * Caller should not modify mutable keys and values in
      * <tt>environment</tt> after it has been passed to the constructor.
      *
+     * <p>
+     *  使用提供的环境构造一个初始DirContext。环境属性在<tt> javax.naming.InitialContext </tt>类描述中讨论。
+     * 
+     * 
      * @param environment
      *          environment used to create the initial DirContext.
      *          Null indicates an empty environment.

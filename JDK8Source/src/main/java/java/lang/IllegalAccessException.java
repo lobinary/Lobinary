@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ package java.lang;
  * executing method does not have access to the definition of
  * the specified class, field, method or constructor.
  *
+ * <p>
+ *  当应用程序尝试反映创建实例(数组除外),设置或获取字段或调用方法时,会抛出IllegalAccessException,但当前正在执行的方法无法访问指定类,字段的定义,方法或构造函数。
+ * 
+ * 
  * @author  unascribed
  * @see     Class#newInstance()
  * @see     java.lang.reflect.Field#set(Object, Object)
@@ -62,6 +67,9 @@ public class IllegalAccessException extends ReflectiveOperationException {
     /**
      * Constructs an <code>IllegalAccessException</code> without a
      * detail message.
+     * <p>
+     *  构造一个没有详细消息的<code> IllegalAccessException </code>。
+     * 
      */
     public IllegalAccessException() {
         super();
@@ -70,6 +78,9 @@ public class IllegalAccessException extends ReflectiveOperationException {
     /**
      * Constructs an <code>IllegalAccessException</code> with a detail message.
      *
+     * <p>
+     *  用详细消息构造一个<code> IllegalAccessException </code>。
+     * 
      * @param   s   the detail message.
      */
     public IllegalAccessException(String s) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,21 @@ package org.omg.CORBA;
  * are provided in the class <code>org.omg.CORBA.portable.ObjectImpl</code>,
  * which is the base class for stubs and object implementations.
  * <p>
+ * <p>
+ *  CORBA对象引用的定义。
+ * <p>
+ *  CORBA对象引用是由服务器实现的特定CORBA对象的句柄。每当引用用于调用对象上的方法时,CORBA对象引用标识相同的CORBA对象。 CORBA对象可以具有多个不同的对象引用。
+ * <p>
+ *  <code> org.omg.CORBA.Object </code>接口是Java编程语言中所有CORBA对象引用的继承层次结构的根,类似于<code> java.rmi.Remote </code>
+ *  for RMI远程对象。
+ * <p>
+ *  CORBA对象可以是本地的或远程的。如果它是本地对象(即,在与客户端相同的VM中运行),则调用可以由对象实例直接服务,并且对象引用可以指向对象实现类的实际实例。
+ * 如果CORBA对象是远程对象(即在客户机的不同VM中运行),则对象引用指向使用ORB机制在对象实现驻留的服务器上进行远程调用的存根(代理) 。
+ * <p>
+ *  接口<code> org.omg.CORBA.Object </code>中的方法的默认实现在<code> org.omg.CORBA.portable.ObjectImpl </code>类中提供,
+ * 它是基类存根和对象实现。
+ * <p>
+ * 
  * @see org.omg.CORBA.portable.ObjectImpl
  */
 
@@ -63,6 +79,10 @@ public interface Object {
      * Checks whether this object is an instance of a class that
      * implements the given interface.
      *
+     * <p>
+     * 检查此对象是否是实现给定接口的类的实例。
+     * 
+     * 
      * @param repositoryIdentifier the interface to check against
      * @return <code>true</code> if this object reference is an instance
      *         of a class that implements the interface;
@@ -79,6 +99,11 @@ public interface Object {
      * to attempt determination of whether two distinct object references
      * refer to the same object, since such determination could be impractically
      * expensive.
+     * <p>
+     *  确定两个对象引用是否相等,只要ORB可以轻松确定。如果两个对象引用相同,则它们是等价的。两个不同的对象引用实际上指向相同的对象也是等效的。
+     * 然而,ORB不需要尝试确定两个不同的对象引用是否指向相同的对象,因为这样的确定可能是不切实际的昂贵的。
+     * 
+     * 
      * @param other the other object reference with which to check for equivalence
      * @return <code>true</code> if this object reference is known to be
      *         equivalent to the given object reference.
@@ -92,6 +117,10 @@ public interface Object {
     /**
      * Determines whether the server object for this object reference has been
      * destroyed.
+     * <p>
+     *  确定此对象引用的服务器对象是否已销毁。
+     * 
+     * 
      * @return <code>true</code> if the ORB knows authoritatively that the
      *         server object does not exist; <code>false</code> otherwise
      */
@@ -109,6 +138,11 @@ public interface Object {
      * then they are distinct object references; however, both may still refer
      * to the same CORBA object.
      *
+     * <p>
+     *  返回此对象引用的ORB内部标识符。这是一个哈希标识符,在对象引用的生存期内不会改变,因此该标识符的任何哈希函数也不会改变。返回的值不能保证是唯一的;换句话说,另一对象引用可以具有相同的哈希值。
+     * 如果两个对象引用散列不同,则它们是不同的对象引用;然而,两者仍然可以引用相同的CORBA对象。
+     * 
+     * 
      * @param maximum the upper bound on the hash value returned by the ORB
      * @return the ORB-internal hash identifier for this object reference
      */
@@ -127,6 +161,14 @@ public interface Object {
      * <P>
      * The method <code>_duplicate</code> may return this object reference itself.
      *
+     * <p>
+     *  返回此CORBA对象引用的副本。在创建副本时不涉及服务器对象实现,实现无法区分原始对象引用或副本是否用于发出请求。
+     * <P>
+     * 请注意,此方法在Java平台中不是非常有用,因为内存管理由VM处理。包含它是为了符合CORBA API。
+     * <P>
+     *  方法<code> _duplicate </code>可能返回此对象引用本身。
+     * 
+     * 
      * @return a duplicate of this object reference or this object reference
      *         itself
      */
@@ -138,6 +180,9 @@ public interface Object {
      * internal ORB resources associated with this object reference can be
      * released. Note that the object implementation is not involved in
      * this operation, and other references to the same object are not affected.
+     * <p>
+     *  表示调用者使用此对象引用完成,因此可以释放与此对象引用相关联的内部ORB资源。请注意,对象实现不涉及此操作,并且对同一对象的其他引用不受影响。
+     * 
      */
     void _release();
 
@@ -149,6 +194,11 @@ public interface Object {
      * may be used to introspect on the methods, attributes, and other
      * type information for the object referred to by this object reference.
      *
+     * <p>
+     *  为该对象引用所引用的对象实现获取一个<code> InterfaceDef </code>。
+     *  <code> InterfaceDef </code>对象可以用于内省对象引用所引用的对象的方法,属性和其他类型信息。
+     * 
+     * 
      * @return the <code>InterfaceDef</code> object in the Interface Repository
      *         which provides type information about the object referred to by
      *         this object reference
@@ -161,6 +211,10 @@ public interface Object {
      * Creates a <code>Request</code> instance for use in the
      * Dynamic Invocation Interface.
      *
+     * <p>
+     *  创建要在动态调用接口中使用的<code>请求</code>实例。
+     * 
+     * 
      * @param operation  the name of the method to be invoked using the
      *                        <code>Request</code> instance
      * @return the newly-created <code>Request</code> instance
@@ -174,6 +228,10 @@ public interface Object {
      * given context, method name, list of arguments, and container
      * for the method's return value.
      *
+     * <p>
+     *  创建使用给定上下文,方法名称,参数列表和方法的返回值的容器初始化的<code> Request </code>实例。
+     * 
+     * 
      * @param ctx                       a <code>Context</code> object containing
      *                     a list of properties
      * @param operation    the name of the method to be invoked
@@ -199,6 +257,10 @@ public interface Object {
      * for the method's return value, list of possible exceptions,
      * and list of context strings needing to be resolved.
      *
+     * <p>
+     *  创建使用给定上下文,方法名称,参数列表,方法的返回值的容器,可能的异常列表以及需要解析的上下文字符串列表初始化的<code> Request </code>实例。
+     * 
+     * 
      * @param ctx                       a <code>Context</code> object containing
      *                     a list of properties
      * @param operation    the name of the method to be invoked
@@ -234,6 +296,10 @@ public interface Object {
      * Returns the <code>Policy</code> object of the specified type
      * which applies to this object.
      *
+     * <p>
+     *  返回适用于此对象的指定类型的<code> Policy </code>对象。
+     * 
+     * 
      * @param policy_type the type of policy to be obtained
      * @return A <code>Policy</code> object of the type specified by
      *         the policy_type parameter
@@ -251,6 +317,10 @@ public interface Object {
      * domain managers, and hence the security and other policies applicable
      * to individual objects that are members of the domain.
      *
+     * <p>
+     * 检索此对象的<code> DomainManagers </code>。这允许管理服务(和应用程序)检索域管理器,并因此检索适用于作为域成员的各个对象的安全性和其他策略。
+     * 
+     * 
      * @return the list of immediately enclosing domain managers of this object.
      *  At least one domain manager is always returned in the list since by
      * default each object is associated with at least one domain manager at
@@ -266,6 +336,10 @@ public interface Object {
          * to the existing ones, depending on the value of the
          * given <code>SetOverrideType</code> object.
          *
+         * <p>
+         *  使用给定的策略返回新的<code> Object </code>,替换此<code> Object </code>中的任何现有策略或添加到现有策略中的给定策略,具体取决于给定的<code > SetO
+         * verrideType </code>对象。
+         * 
          * @param policies an array of <code>Policy</code> objects containing
          *                 the policies to be added or to be used as replacements
          * @param set_add either <code>SetOverrideType.SET_OVERRIDE</code>, indicating

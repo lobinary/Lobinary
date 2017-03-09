@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import static java.util.zip.ZipConstants64.*;
 /**
  * This class is used to represent a ZIP file entry.
  *
+ * <p>
+ *  此类用于表示ZIP文件条目。
+ * 
+ * 
  * @author      David Connelly
  */
 public
@@ -55,17 +60,27 @@ class ZipEntry implements ZipConstants, Cloneable {
 
     /**
      * Compression method for uncompressed entries.
+     * <p>
+     *  未压缩条目的压缩方法。
+     * 
      */
     public static final int STORED = 0;
 
     /**
      * Compression method for compressed (deflated) entries.
+     * <p>
+     *  压缩方法用于压缩(缩小)条目。
+     * 
      */
     public static final int DEFLATED = 8;
 
     /**
      * Creates a new zip entry with the specified name.
      *
+     * <p>
+     *  创建具有指定名称的新zip条目。
+     * 
+     * 
      * @param  name
      *         The entry name
      *
@@ -85,6 +100,10 @@ class ZipEntry implements ZipConstants, Cloneable {
      * Creates a new zip entry with fields taken from the specified
      * zip entry.
      *
+     * <p>
+     *  创建一个新的zip条目,其中的字段取自指定的zip条目。
+     * 
+     * 
      * @param  e
      *         A zip Entry object
      *
@@ -108,11 +127,18 @@ class ZipEntry implements ZipConstants, Cloneable {
 
     /**
      * Creates a new un-initialized zip entry
+     * <p>
+     *  创建新的未初始化zip条目
+     * 
      */
     ZipEntry() {}
 
     /**
      * Returns the name of the entry.
+     * <p>
+     *  返回条目的名称。
+     * 
+     * 
      * @return the name of the entry
      */
     public String getName() {
@@ -129,6 +155,13 @@ class ZipEntry implements ZipConstants, Cloneable {
      * The {@link java.util.TimeZone#getDefault() default TimeZone} is
      * used to convert the epoch time to the MS-DOS data and time.
      *
+     * <p>
+     *  设置条目的最后修改时间。
+     * 
+     *  <p>如果条目输出到ZIP文件或ZIP文件格式的输出流,则此方法设置的最后修改时间将存储到zip文件条目的{@code日期和时间字段}中,并以标准{代码MS-DOS日期和时间格式}。
+     *  {@link java.util.TimeZone#getDefault()default TimeZone}用于将纪元时间转换为MS-DOS数据和时间。
+     * 
+     * 
      * @param  time
      *         The last modification time of the entry in milliseconds
      *         since the epoch
@@ -151,6 +184,13 @@ class ZipEntry implements ZipConstants, Cloneable {
      * to convert the standard MS-DOS formatted date and time to the
      * epoch time.
      *
+     * <p>
+     *  返回条目的上次修改时间。
+     * 
+     *  <p>如果从ZIP文件或ZIP文件格式化的输入流读取条目,则这是从zip文件条目的{@code日期和时间字段}的最后一次修改时间。
+     *  {@link java.util.TimeZone#getDefault()default TimeZone}用于将标准MS-DOS格式的日期和时间转换为纪元时间。
+     * 
+     * 
      * @return  The last modification time of the entry in milliseconds
      *          since the epoch, or -1 if not specified
      *
@@ -170,6 +210,13 @@ class ZipEntry implements ZipConstants, Cloneable {
      * MS-DOS date and time format}), and the extended timestamp fields
      * in {@code optional extra data} in UTC time.
      *
+     * <p>
+     *  设置条目的最后修改时间。
+     * 
+     * <p>当输出到ZIP文件或ZIP文件格式化的输出流时,此方法设置的最后修改时间将存储在{@code标准MS-DOS日期和时间格式中的zip文件条目的{@code日期和时间字段} })和UTC时间中{@code可选的额外数据}
+     * 中的扩展时间戳字段。
+     * 
+     * 
      * @param  time
      *         The last modification time of the entry
      * @return This zip entry
@@ -197,6 +244,15 @@ class ZipEntry implements ZipConstants, Cloneable {
      * java.util.TimeZone#getDefault() default TimeZone} is used to convert
      * the standard MS-DOS formatted date and time to the epoch time.
      *
+     * <p>
+     *  返回条目的上次修改时间。
+     * 
+     *  <p>如果从ZIP文件或ZIP文件格式化的输入流读取条目,则这是从zip文件条目的{@code可选额外数据}(如果扩展时间戳字段存在)的最后一次修改时间。
+     * 否则,从条目的{@code日期和时间字段}中读取最后一次修改时间,{@link java.util.TimeZone#getDefault()default TimeZone}用于将标准MS-DOS格式
+     * 的日期和时间转换为时代。
+     *  <p>如果从ZIP文件或ZIP文件格式化的输入流读取条目,则这是从zip文件条目的{@code可选额外数据}(如果扩展时间戳字段存在)的最后一次修改时间。
+     * 
+     * 
      * @return The last modification time of the entry, null if not specified
      *
      * @see #setLastModifiedTime(FileTime)
@@ -217,6 +273,12 @@ class ZipEntry implements ZipConstants, Cloneable {
      * timestamp fields of entry's {@code optional extra data}, when output
      * to a ZIP file or ZIP file formatted stream.
      *
+     * <p>
+     *  设置条目的最后访问时间。
+     * 
+     *  <p>如果设置,当输出到ZIP文件或ZIP文件格式的流时,最后访问时间将存储在条目的{@code可选额外数据}的扩展时间戳字段中。
+     * 
+     * 
      * @param  time
      *         The last access time of the entry
      * @return This zip entry
@@ -239,6 +301,12 @@ class ZipEntry implements ZipConstants, Cloneable {
      * of entry's {@code optional extra data} when read from a ZIP file
      * or ZIP file formatted stream.
      *
+     * <p>
+     *  返回条目的最后访问时间。
+     * 
+     *  <p>从ZIP文件或ZIP文件格式的流读取时,最后一次访问时间来自条目的{@code可选额外数据}的扩展时间戳字段。
+     * 
+     * 
      * @return The last access time of the entry, null if not specified
 
      * @see #setLastAccessTime(FileTime)
@@ -255,6 +323,12 @@ class ZipEntry implements ZipConstants, Cloneable {
      * timestamp fields of entry's {@code optional extra data}, when
      * output to a ZIP file or ZIP file formatted stream.
      *
+     * <p>
+     *  设置条目的创建时间。
+     * 
+     *  <p>如果设置,当输出到ZIP文件或ZIP文件格式的流时,创建时间将存储在条目的{@code可选额外数据}的扩展时间戳字段中。
+     * 
+     * 
      * @param  time
      *         The creation time of the entry
      * @return This zip entry
@@ -277,6 +351,12 @@ class ZipEntry implements ZipConstants, Cloneable {
      * entry's {@code optional extra data} when read from a ZIP file
      * or ZIP file formatted stream.
      *
+     * <p>
+     *  返回条目的创建时间。
+     * 
+     * <p>创建时间是从ZIP文件或ZIP文件格式的流读取时条目的{@code可选的额外数据}的扩展时间戳字段。
+     * 
+     * 
      * @return the creation time of the entry, null if not specified
      * @see #setCreationTime(FileTime)
      * @since 1.8
@@ -288,6 +368,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Sets the uncompressed size of the entry data.
      *
+     * <p>
+     *  设置条目数据的未压缩大小。
+     * 
+     * 
      * @param size the uncompressed size in bytes
      *
      * @throws IllegalArgumentException if the specified size is less
@@ -306,6 +390,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Returns the uncompressed size of the entry data.
      *
+     * <p>
+     *  返回条目数据的未压缩大小。
+     * 
+     * 
      * @return the uncompressed size of the entry data, or -1 if not known
      * @see #setSize(long)
      */
@@ -319,6 +407,12 @@ class ZipEntry implements ZipConstants, Cloneable {
      * <p> In the case of a stored entry, the compressed size will be the same
      * as the uncompressed size of the entry.
      *
+     * <p>
+     *  返回压缩条目数据的大小。
+     * 
+     *  <p>在存储条目的情况下,压缩大小将与条目的未压缩大小相同。
+     * 
+     * 
      * @return the size of the compressed entry data, or -1 if not known
      * @see #setCompressedSize(long)
      */
@@ -329,6 +423,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Sets the size of the compressed entry data.
      *
+     * <p>
+     *  设置压缩条目数据的大小。
+     * 
+     * 
      * @param csize the compressed size to set to
      *
      * @see #getCompressedSize()
@@ -340,6 +438,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Sets the CRC-32 checksum of the uncompressed entry data.
      *
+     * <p>
+     *  设置未压缩条目数据的CRC-32校验和。
+     * 
+     * 
      * @param crc the CRC-32 value
      *
      * @throws IllegalArgumentException if the specified CRC-32 value is
@@ -356,6 +458,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Returns the CRC-32 checksum of the uncompressed entry data.
      *
+     * <p>
+     *  返回未压缩条目数据的CRC-32校验和。
+     * 
+     * 
      * @return the CRC-32 checksum of the uncompressed entry data, or -1 if
      * not known
      *
@@ -368,6 +474,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Sets the compression method for the entry.
      *
+     * <p>
+     *  设置条目的压缩方法。
+     * 
+     * 
      * @param method the compression method, either STORED or DEFLATED
      *
      * @throws  IllegalArgumentException if the specified compression
@@ -384,6 +494,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Returns the compression method of the entry.
      *
+     * <p>
+     *  返回条目的压缩方法。
+     * 
+     * 
      * @return the compression method of the entry, or -1 if not specified
      * @see #setMethod(int)
      */
@@ -401,6 +515,14 @@ class ZipEntry implements ZipConstants, Cloneable {
      * <a href="http://www.info-zip.org/doc/appnote-19970311-iz.zip">Info-ZIP
      * Application Note 970311</a>.
      *
+     * <p>
+     *  为条目设置可选的附加字段数据。
+     * 
+     *  <p>如果{@code extra}字段数据包含可扩展时间戳字段(如{@code NTFS tag 0x0001}或{@code Info}),则调用此方法可能会更改此条目的上次修改时间,上次访问时间
+     * 和创建时间-ZIP扩展时间戳},如<a href="http://www.info-zip.org/doc/appnote-19970311-iz.zip"> Info-ZIP应用笔记970311中所述
+     * </a>。
+     * 
+     * 
      * @param  extra
      *         The extra field data bytes
      *
@@ -416,6 +538,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Sets the optional extra field data for the entry.
      *
+     * <p>
+     *  为条目设置可选的附加字段数据。
+     * 
+     * 
      * @param extra
      *        the extra field data bytes
      * @param doZIP64
@@ -489,6 +615,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Returns the extra field data for the entry.
      *
+     * <p>
+     *  返回条目的额外字段数据。
+     * 
+     * 
      * @return the extra field data for the entry, or null if none
      *
      * @see #setExtra(byte[])
@@ -504,6 +634,12 @@ class ZipEntry implements ZipConstants, Cloneable {
      * specified comment string is greater than 0xFFFF bytes after encoding, only
      * the first 0xFFFF bytes are output to the ZIP file entry.
      *
+     * <p>
+     *  设置条目的可选注释字符串。
+     * 
+     *  <p> ZIP输入注释的最大长度为0xffff。如果编码后指定的注释字符串的长度大于0xFFFF字节,则只有第一个0xFFFF字节输出到ZIP文件条目。
+     * 
+     * 
      * @param comment the comment string
      *
      * @see #getComment()
@@ -515,6 +651,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Returns the comment string for the entry.
      *
+     * <p>
+     *  返回条目的注释字符串。
+     * 
+     * 
      * @return the comment string for the entry, or null if none
      *
      * @see #setComment(String)
@@ -526,6 +666,10 @@ class ZipEntry implements ZipConstants, Cloneable {
     /**
      * Returns true if this is a directory entry. A directory entry is
      * defined to be one whose name ends with a '/'.
+     * <p>
+     * 如果这是目录条目,则返回true。目录条目定义为其名称以"/"结尾的目录条目。
+     * 
+     * 
      * @return true if this is a directory entry
      */
     public boolean isDirectory() {
@@ -534,6 +678,9 @@ class ZipEntry implements ZipConstants, Cloneable {
 
     /**
      * Returns a string representation of the ZIP entry.
+     * <p>
+     *  返回ZIP条目的字符串表示形式。
+     * 
      */
     public String toString() {
         return getName();
@@ -541,6 +688,9 @@ class ZipEntry implements ZipConstants, Cloneable {
 
     /**
      * Returns the hash code value for this entry.
+     * <p>
+     *  返回此条目的哈希码值。
+     * 
      */
     public int hashCode() {
         return name.hashCode();
@@ -548,6 +698,8 @@ class ZipEntry implements ZipConstants, Cloneable {
 
     /**
      * Returns a copy of this entry.
+     * <p>
+     *  返回此条目的副本。
      */
     public Object clone() {
         try {

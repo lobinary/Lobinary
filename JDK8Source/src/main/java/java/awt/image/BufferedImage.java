@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,19 @@ import sun.awt.image.OffScreenImageSource;
  * of <code>Raster</code>,
  * and on the color characterization methods of <code>ColorModel</code>.
  *
+ * <p>
+ *  <code> BufferedImage </code>子类描述了一个具有图像数据的可访问缓冲区的{@link java.awt.Image Image}。
+ *  <code> BufferedImage </code>由图像数据的{@link ColorModel}和{@link Raster}组成。
+ *  <code> Raster </code>的{@link SampleModel}中的波段数量和类型必须与<code> ColorModel </code>所需的数量和类型相匹配,以表示其颜色和alp
+ * ha分量。
+ *  <code> BufferedImage </code>由图像数据的{@link ColorModel}和{@link Raster}组成。
+ * 所有<code> BufferedImage </code>对象的左上角坐标为(0,&nbsp; 0)。
+ * 用于构造<code> BufferedImage </code>的任何<code> Raster </code>必须具有minX = 0和minY = 0。
+ * 
+ * <p>
+ *  该类依赖于<code> Raster </code>的数据提取和设置方法,以及<code> ColorModel </code>的颜色表征方法。
+ * 
+ * 
  * @see ColorModel
  * @see Raster
  * @see WritableRaster
@@ -83,12 +97,18 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Image Type Constants
+     * <p>
+     *  图像类型常量
+     * 
      */
 
     /**
      * Image type is not recognized so it must be a customized
      * image.  This type is only used as a return value for the getType()
      * method.
+     * <p>
+     *  无法识别图片类型,因此它必须是自定义图片。此类型仅用作getType()方法的返回值。
+     * 
      */
     public static final int TYPE_CUSTOM = 0;
 
@@ -102,6 +122,10 @@ public class BufferedImage extends java.awt.Image
      * and the alpha discarded,
      * as described in the
      * {@link java.awt.AlphaComposite} documentation.
+     * <p>
+     *  表示具有打包为整数像素的8位RGB颜色分量的图像。图片有一个没有alpha的{@link DirectColorModel}。
+     * 当具有非透明alpha的数据存储在此类型的图像中时,必须将颜色数据调整为非预乘形式,并丢弃alpha,如{@link java.awt.AlphaComposite}文档中所述。
+     * 
      */
     public static final int TYPE_INT_RGB = 1;
 
@@ -113,6 +137,10 @@ public class BufferedImage extends java.awt.Image
      * <code>imageType</code> argument to a <code>BufferedImage</code>
      * constructor, the created image is consistent with images
      * created in the JDK1.1 and earlier releases.
+     * <p>
+     * 表示具有打包为整数像素的8位RGBA颜色分量的图像。该图像具有带有alpha的<code> DirectColorModel </code>。该图像中的颜色数据被认为不是用α预乘的。
+     * 当此类型用作<code> BufferedImage </code>构造函数的<code> imageType </code>参数时,创建的图像与JDK1.1和早期版本中创建的图像一致。
+     * 
      */
     public static final int TYPE_INT_ARGB = 2;
 
@@ -121,6 +149,9 @@ public class BufferedImage extends java.awt.Image
      * integer pixels.  The image has a <code>DirectColorModel</code>
      * with alpha.  The color data in this image is considered to be
      * premultiplied with alpha.
+     * <p>
+     *  表示具有打包为整数像素的8位RGBA颜色分量的图像。该图像具有带有alpha的<code> DirectColorModel </code>。该图像中的颜色数据被认为是用α预乘的。
+     * 
      */
     public static final int TYPE_INT_ARGB_PRE = 3;
 
@@ -135,6 +166,11 @@ public class BufferedImage extends java.awt.Image
      * and the alpha discarded,
      * as described in the
      * {@link java.awt.AlphaComposite} documentation.
+     * <p>
+     *  表示具有8位RGB颜色分量的图像,对应于Windows或Solaris风格的BGR颜色模型,颜色为蓝色,绿色和红色,打包为整数像素。没有阿尔法。
+     * 该图片有一个{@link DirectColorModel}。
+     * 当具有非透明alpha的数据存储在此类型的图像中时,必须将颜色数据调整为非预乘形式,并丢弃alpha,如{@link java.awt.AlphaComposite}文档中所述。
+     * 
      */
     public static final int TYPE_INT_BGR = 4;
 
@@ -149,6 +185,11 @@ public class BufferedImage extends java.awt.Image
      * and the alpha discarded,
      * as described in the
      * {@link java.awt.AlphaComposite} documentation.
+     * <p>
+     * 表示具有8位RGB颜色分量的图像,对应于Windows样式的BGR颜色模型),具有以3字节存储的颜色Blue,Green和Red。没有阿尔法。
+     * 该图像具有<code> ComponentColorModel </code>。
+     * 当具有非透明alpha的数据存储在此类型的图像中时,必须将颜色数据调整为非预乘形式,并丢弃alpha,如{@link java.awt.AlphaComposite}文档中所述。
+     * 
      */
     public static final int TYPE_3BYTE_BGR = 5;
 
@@ -160,6 +201,10 @@ public class BufferedImage extends java.awt.Image
      * alpha.  The byte data is interleaved in a single
      * byte array in the order A, B, G, R
      * from lower to higher byte addresses within each pixel.
+     * <p>
+     *  表示具有8位RGBA颜色分量的图像,其颜色为蓝色,绿色和红色,存储在3字节和1字节的alpha中。该图像具有带有alpha的<code> ComponentColorModel </code>。
+     * 该图像中的颜色数据被认为不是用α预乘的。字节数据以每个像素内从低到高字节地址的顺序A,B,G,R在单字节阵列中交织。
+     * 
      */
     public static final int TYPE_4BYTE_ABGR = 6;
 
@@ -170,6 +215,10 @@ public class BufferedImage extends java.awt.Image
      * data in this image is considered to be premultiplied with alpha.
      * The byte data is interleaved in a single byte array in the order
      * A, B, G, R from lower to higher byte addresses within each pixel.
+     * <p>
+     *  表示具有8位RGBA颜色分量的图像,其颜色为蓝色,绿色和红色,存储在3字节和1字节的alpha中。该图像具有带有alpha的<code> ComponentColorModel </code>。
+     * 该图像中的颜色数据被认为是用α预乘的。字节数据以每个像素内从低到高字节地址的顺序A,B,G,R在单字节阵列中交织。
+     * 
      */
     public static final int TYPE_4BYTE_ABGR_PRE = 7;
 
@@ -183,6 +232,10 @@ public class BufferedImage extends java.awt.Image
      * and the alpha discarded,
      * as described in the
      * {@link java.awt.AlphaComposite} documentation.
+     * <p>
+     * 表示具有5-6-5个RGB颜色分量(5位红色,6位绿色,5位蓝色)且不带alpha的图像。此图片具有<code> DirectColorModel </code>。
+     * 当具有非透明alpha的数据存储在此类型的图像中时,必须将颜色数据调整为非预乘形式,并丢弃alpha,如{@link java.awt.AlphaComposite}文档中所述。
+     * 
      */
     public static final int TYPE_USHORT_565_RGB = 8;
 
@@ -196,6 +249,10 @@ public class BufferedImage extends java.awt.Image
      * and the alpha discarded,
      * as described in the
      * {@link java.awt.AlphaComposite} documentation.
+     * <p>
+     *  表示具有5-5-5 RGB颜色分量(5位红色,5位绿色,5位蓝色)且不带alpha的图像。此图片具有<code> DirectColorModel </code>。
+     * 当具有非透明alpha的数据存储在此类型的图像中时,必须将颜色数据调整为非预乘形式,并丢弃alpha,如{@link java.awt.AlphaComposite}文档中所述。
+     * 
      */
     public static final int TYPE_USHORT_555_RGB = 9;
 
@@ -209,6 +266,10 @@ public class BufferedImage extends java.awt.Image
      * and the alpha discarded,
      * as described in the
      * {@link java.awt.AlphaComposite} documentation.
+     * <p>
+     *  表示无索引字节灰度图像,非索引。此图片具有带CS_GRAY {@link ColorSpace}的<code> ComponentColorModel </code>。
+     * 当具有非透明alpha的数据存储在此类型的图像中时,必须将颜色数据调整为非预乘形式,并丢弃alpha,如{@link java.awt.AlphaComposite}文档中所述。
+     * 
      */
     public static final int TYPE_BYTE_GRAY = 10;
 
@@ -222,6 +283,10 @@ public class BufferedImage extends java.awt.Image
      * and the alpha discarded,
      * as described in the
      * {@link java.awt.AlphaComposite} documentation.
+     * <p>
+     *  表示无符号的短灰度图像,非索引)。此图像具有带有CS_GRAY <code> ColorSpace </code>的<code> ComponentColorModel </code>。
+     * 当具有非透明alpha的数据存储在此类型的图像中时,必须将颜色数据调整为非预乘形式,并丢弃alpha,如{@link java.awt.AlphaComposite}文档中所述。
+     * 
      */
     public static final int TYPE_USHORT_GRAY = 11;
 
@@ -251,6 +316,21 @@ public class BufferedImage extends java.awt.Image
      * Approximation and loss of alpha or color components
      * can result, depending on the colors in the
      * <code>IndexColorModel</code> colormap.
+     * <p>
+     * 表示不透明的字节包装的1,2或4位图像。该图像有一个{@link IndexColorModel}无alpha。
+     * 当此类型用作<code> BufferedImage </code>构造函数的<code> imageType </code>参数时,它采用<code> imageType </code>参数,但不使用
+     * <code> ColorModel </code> ,在默认sRGB <code> ColorSpace </code>：{0,&nbsp; 0,&nbsp; 0}和{255,&nbsp;}中创建具有两
+     * 种颜色的<code> IndexColorModel </code> ; 255,&nbsp; 255}。
+     * 表示不透明的字节包装的1,2或4位图像。该图像有一个{@link IndexColorModel}无alpha。
+     * 
+     *  <p>每像素2或4位的图像可以通过<code> BufferedImage </code>构造函数构造,该构造函数通过提供具有<code> ColorModel </code>适当的地图大小。
+     * 
+     *  <p>每像素8位图片的图片应根据<code> ColorModel </code>使用图片类型<code> TYPE_BYTE_INDEXED </code>或<code> TYPE_BYTE_GRA
+     * Y </code>。
+     * 
+     *  <p>当颜色数据存储在此类型的图像中时,颜色映射中最接近的颜色由<code> IndexColorModel </code>确定,并存储生成的索引。
+     * 根据<code> IndexColorModel </code>颜色映射中的颜色,可能会导致alpha或颜色分量的近似和丢失。
+     * 
      */
     public static final int TYPE_BYTE_BINARY = 12;
 
@@ -270,6 +350,16 @@ public class BufferedImage extends java.awt.Image
      * Approximation and loss of alpha or color components
      * can result, depending on the colors in the
      * <code>IndexColorModel</code> colormap.
+     * <p>
+     * 表示索引字节图像。
+     * 当此类型用作<code> BufferedImage </code>构造函数的<code> imageType </code>参数时,它采用<code> imageType </code>参数,但不使用
+     * <code> ColorModel </code> ,使用256色的6/6/6彩色立方体调色板创建<code> IndexColorModel </code>,其中从默认sRGB ColorSpace中
+     * 的灰度值填充216-255的其余颜色。
+     * 表示索引字节图像。
+     * 
+     *  <p>当颜色数据存储在此类型的图像中时,颜色映射中最接近的颜色由<code> IndexColorModel </code>确定,并存储生成的索引。
+     * 根据<code> IndexColorModel </code>颜色映射中的颜色,可能会导致alpha或颜色分量的近似和丢失。
+     * 
      */
     public static final int TYPE_BYTE_INDEXED = 13;
 
@@ -298,6 +388,10 @@ public class BufferedImage extends java.awt.Image
      * Constructs a <code>BufferedImage</code> of one of the predefined
      * image types.  The <code>ColorSpace</code> for the image is the
      * default sRGB space.
+     * <p>
+     *  构造一个预定义图像类型的<code> BufferedImage </code>。图像的<code> ColorSpace </code>是默认的sRGB空间。
+     * 
+     * 
      * @param width     width of the created image
      * @param height    height of the created image
      * @param imageType type of the created image
@@ -526,6 +620,13 @@ public class BufferedImage extends java.awt.Image
      * it has between 5 and 16 entries, the image will have 4 bits per
      * pixel.  Otherwise, an IllegalArgumentException will be thrown.
      *
+     * <p>
+     *  构造预定义图像类型之一的<code> BufferedImage </code>：TYPE_BYTE_BINARY或TYPE_BYTE_INDEXED。
+     * 
+     *  <p>如果图像类型为TYPE_BYTE_BINARY,则颜色模型中的条目数用于确定图像是否应具有每像素1,2或4位。如果颜色模型具有1或2个条目,则图像将具有每像素1位。
+     * 如果它具有3或4个条目,则图像具有每像素2位。如果它具有5到16个条目,则图像将具有每像素4位。否则,将抛出IllegalArgumentException。
+     * 
+     * 
      * @param width     width of the created image
      * @param height    height of the created image
      * @param imageType type of the created image
@@ -596,6 +697,19 @@ public class BufferedImage extends java.awt.Image
      * <code>BufferedImage</code> can be established by passing
      * in a {@link Hashtable} of <code>String</code>/<code>Object</code>
      * pairs.
+     * <p>
+     * 使用指定的<code> ColorModel </code>和<code> Raster </code>构造新的<code> BufferedImage </code>。
+     * 如果<code> Raster </code>的<code> SampleModel </code>中的波段数量和类型与<code> ColorModel </code>表示其颜色所需的数量和类型不匹配
+     * , alpha组件,则会抛出{@link RasterFormatException}。
+     * 使用指定的<code> ColorModel </code>和<code> Raster </code>构造新的<code> BufferedImage </code>。
+     * 此方法可以通过alpha将颜色<code> Raster </code>乘以或除以匹配<code> ColorModel </code>中的<code> alphaPremultiplied </code>
+     * 状态。
+     * 使用指定的<code> ColorModel </code>和<code> Raster </code>构造新的<code> BufferedImage </code>。
+     * 可通过传递<code> String </code> / <code> Object </code>对的{@link Hashtable}来建立此<code> BufferedImage </code>
+     * 的属性。
+     * 使用指定的<code> ColorModel </code>和<code> Raster </code>构造新的<code> BufferedImage </code>。
+     * 
+     * 
      * @param cm <code>ColorModel</code> for the new image
      * @param raster     <code>Raster</code> for the image data
      * @param isRasterPremultiplied   if <code>true</code>, the data in
@@ -620,6 +734,9 @@ public class BufferedImage extends java.awt.Image
  *  FOR NOW THE CODE WHICH DEFINES THE RASTER TYPE IS DUPLICATED BY DVF
  *  SEE THE METHOD DEFINERASTERTYPE @ RASTEROUTPUTMANAGER
  *
+ * <p>
+ *  现在,定义RASTER类型的代码被DVF复制的代码参见METHODS DEFINERASTERTYPE @ RASTEROUTPUTMANAGER
+ * 
  */
     public BufferedImage (ColorModel cm,
                           WritableRaster raster,
@@ -825,6 +942,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the image type.  If it is not one of the known types,
      * TYPE_CUSTOM is returned.
+     * <p>
+     *  返回图像类型。如果它不是已知类型之一,则返回TYPE_CUSTOM。
+     * 
+     * 
      * @return the image type of this <code>BufferedImage</code>.
      * @see #TYPE_INT_RGB
      * @see #TYPE_INT_ARGB
@@ -847,6 +968,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the <code>ColorModel</code>.
+     * <p>
+     *  返回<code> ColorModel </code>。
+     * 
+     * 
      * @return the <code>ColorModel</code> of this
      *  <code>BufferedImage</code>.
      */
@@ -856,6 +981,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the {@link WritableRaster}.
+     * <p>
+     *  返回{@link WritableRaster}。
+     * 
+     * 
      * @return the <code>WriteableRaster</code> of this
      *  <code>BufferedImage</code>.
      */
@@ -881,6 +1010,17 @@ public class BufferedImage extends java.awt.Image
      * <code>null</code> since there is no spatially discrete alpha
      * channel.  This method creates a new
      * <code>WritableRaster</code>, but shares the data array.
+     * <p>
+     * 返回<code> WritableRaster </code>代表<code> BufferedImage </code>对象的Alpha通道,该对象具有支持单独的空间Alpha通道的<code> Co
+     * lorModel </code>对象,例如<code> ComponentColorModel < code>和<code> DirectColorModel </code>。
+     * 如果此图片中没有与<code> ColorModel </code>关联的Alpha通道,则返回<code> null </code>。
+     * 这个方法假设对于除<code> IndexColorModel </code>之外的所有<code> ColorModel </code>对象,如果<code> ColorModel </code>支持
+     * alpha,则有一个单独的alpha通道存储为图像数据的最后一个频带。
+     * 如果此图片中没有与<code> ColorModel </code>关联的Alpha通道,则返回<code> null </code>。
+     * 如果图像使用在查找表中具有alpha的<code> IndexColorModel </code>,则该方法返回<code> null </code>,因为没有空间离散的alpha通道。
+     * 此方法创建一个新的<code> WritableRaster </code>,但共享数据数组。
+     * 
+     * 
      * @return a <code>WritableRaster</code> or <code>null</code> if this
      *          <code>BufferedImage</code> has no alpha channel associated
      *          with its <code>ColorModel</code>.
@@ -903,6 +1043,15 @@ public class BufferedImage extends java.awt.Image
      * if the coordinates are not in bounds.
      * However, explicit bounds checking is not guaranteed.
      *
+     * <p>
+     *  返回默认RGB颜色模型(TYPE_INT_ARGB)和默认sRGB颜色空间中的整数像素。如果此默认模型与图像<code> ColorModel </code>不匹配,则会进行颜色转换。
+     * 使用此方法时,返回数据中的每个颜色分量只有8位的精度。
+     * 
+     * <p>
+     * 
+     *  如果坐标不在边界中,可能会抛出<code> ArrayOutOfBoundsException </code>。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x the X coordinate of the pixel from which to get
      *          the pixel in the default RGB color model and sRGB
      *          color space
@@ -937,6 +1086,19 @@ public class BufferedImage extends java.awt.Image
      * if the region is not in bounds.
      * However, explicit bounds checking is not guaranteed.
      *
+     * <p>
+     * 从图像数据的一部分返回默认RGB颜色模型(TYPE_INT_ARGB)和默认sRGB颜色空间中的整数像素数组。
+     * 如果默认模型与图像<code> ColorModel </code>不匹配,则会进行颜色转换。使用此方法时,返回数据中的每个颜色分量只有8位的精度。
+     * 利用图像中的指定坐标(x,y),可以以这种方式访问​​ARGB像素：。
+     * 
+     * <pre>
+     *  pixel = rgbArray [offset +(y-startY)* scansize +(x-startX)]; </pre>
+     * 
+     * <p>
+     * 
+     *  如果区域不在边界中,可能会抛出<code> ArrayOutOfBoundsException </code>。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param startX      the starting X coordinate
      * @param startY      the starting Y coordinate
      * @param w           width of region
@@ -1007,6 +1169,15 @@ public class BufferedImage extends java.awt.Image
      * if the coordinates are not in bounds.
      * However, explicit bounds checking is not guaranteed.
      *
+     * <p>
+     *  将此<code> BufferedImage </code>中的像素设置为指定的RGB值。假设像素处于默认RGB颜色模型TYPE_INT_ARGB和默认sRGB颜色空间中。
+     * 对于带有<code> IndexColorModel </code>的图像,选择具有最接近颜色的索引。
+     * 
+     * <p>
+     * 
+     *  如果坐标不在边界中,可能会抛出<code> ArrayOutOfBoundsException </code>。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x the X coordinate of the pixel to set
      * @param y the Y coordinate of the pixel to set
      * @param rgb the RGB value
@@ -1037,6 +1208,20 @@ public class BufferedImage extends java.awt.Image
      * if the region is not in bounds.
      * However, explicit bounds checking is not guaranteed.
      *
+     * <p>
+     * 将默认RGB颜色模型(TYPE_INT_ARGB)和默认sRGB颜色空间中的整数像素数组设置为图像数据的一部分。
+     * 如果默认模型与图像<code> ColorModel </code>不匹配,则会进行颜色转换。使用此方法时,返回数据中的每个颜色分量只有8位的精度。
+     * 利用该图像中的指定坐标(x,y),可以以这种方式访问​​ARGB像素：。
+     * <pre>
+     *  pixel = rgbArray [offset +(y-startY)* scansize +(x-startX)];
+     * </pre>
+     *  警告：不发生抖动。
+     * 
+     * <p>
+     * 
+     *  如果区域不在边界中,可能会抛出<code> ArrayOutOfBoundsException </code>。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param startX      the starting X coordinate
      * @param startY      the starting Y coordinate
      * @param w           width of the region
@@ -1065,6 +1250,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the width of the <code>BufferedImage</code>.
+     * <p>
+     *  返回<code> BufferedImage </code>的宽度。
+     * 
+     * 
      * @return the width of this <code>BufferedImage</code>
      */
     public int getWidth() {
@@ -1073,6 +1262,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the height of the <code>BufferedImage</code>.
+     * <p>
+     *  返回<code> BufferedImage </code>的高度。
+     * 
+     * 
      * @return the height of this <code>BufferedImage</code>
      */
     public int getHeight() {
@@ -1081,6 +1274,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the width of the <code>BufferedImage</code>.
+     * <p>
+     *  返回<code> BufferedImage </code>的宽度。
+     * 
+     * 
      * @param observer ignored
      * @return the width of this <code>BufferedImage</code>
      */
@@ -1090,6 +1287,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the height of the <code>BufferedImage</code>.
+     * <p>
+     *  返回<code> BufferedImage </code>的高度。
+     * 
+     * 
      * @param observer ignored
      * @return the height of this <code>BufferedImage</code>
      */
@@ -1099,6 +1300,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the object that produces the pixels for the image.
+     * <p>
+     *  返回生成图像像素的对象。
+     * 
+     * 
      * @return the {@link ImageProducer} that is used to produce the
      * pixels for this image.
      * @see ImageProducer
@@ -1124,6 +1329,12 @@ public class BufferedImage extends java.awt.Image
      * notified later.  The property name "comment" should be used to
      * store an optional comment that can be presented to the user as a
      * description of the image, its source, or its author.
+     * <p>
+     * 按名称返回图像的属性。单个属性名称由各种图像格式定义。如果没有为特定映像定义属性,则此方法返回<code> UndefinedProperty </code>字段。
+     * 如果此图像的属性尚未知晓,则此方法返回<code> null </code>,稍后会通知<code> ImageObserver </code>对象。
+     * 属性名称"注释"应用于存储可选注释,可以作为图像,其源或其作者的描述呈现给用户。
+     * 
+     * 
      * @param name the property name
      * @param observer the <code>ImageObserver</code> that receives
      *  notification regarding image information
@@ -1140,6 +1351,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns a property of the image by name.
+     * <p>
+     *  按名称返回图像的属性。
+     * 
+     * 
      * @param name the property name
      * @return an <code>Object</code> that is the property referred to by
      *          the specified <code>name</code>.
@@ -1164,6 +1379,11 @@ public class BufferedImage extends java.awt.Image
      * for backwards compatibility.  {@link #createGraphics() createGraphics} is more
      * convenient, since it is declared to return a
      * <code>Graphics2D</code>.
+     * <p>
+     *  此方法返回一个{@link Graphics2D},但这里是为了向后兼容性。
+     *  {@link #createGraphics()createGraphics}更方便,因为它被声明为返回一个<code> Graphics2D </code>。
+     * 
+     * 
      * @return a <code>Graphics2D</code>, which can be used to draw into
      *          this image.
      */
@@ -1174,6 +1394,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Creates a <code>Graphics2D</code>, which can be used to draw into
      * this <code>BufferedImage</code>.
+     * <p>
+     *  创建一个<code> Graphics2D </code>,可以用来绘制这个<code> BufferedImage </code>。
+     * 
+     * 
      * @return a <code>Graphics2D</code>, used for drawing into this
      *          image.
      */
@@ -1187,6 +1411,10 @@ public class BufferedImage extends java.awt.Image
      * Returns a subimage defined by a specified rectangular region.
      * The returned <code>BufferedImage</code> shares the same
      * data array as the original image.
+     * <p>
+     *  返回由指定矩形区域定义的子图像。返回的<code> BufferedImage </code>与原始图像共享相同的数据数组。
+     * 
+     * 
      * @param x the X coordinate of the upper-left corner of the
      *          specified rectangular region
      * @param y the Y coordinate of the upper-left corner of the
@@ -1209,6 +1437,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns whether or not the alpha has been premultiplied.  It
      * returns <code>false</code> if there is no alpha.
+     * <p>
+     *  返回alpha是否已预乘。如果没有alpha,它返回<code> false </code>。
+     * 
+     * 
      * @return <code>true</code> if the alpha has been premultiplied;
      *          <code>false</code> otherwise.
      */
@@ -1221,6 +1453,10 @@ public class BufferedImage extends java.awt.Image
      * <code>isAlphaPremultiplied</code> variable.  It may multiply or
      * divide the color raster data by alpha, or do nothing if the data is
      * in the correct state.
+     * <p>
+     *  强制数据匹配<code> isAlphaPremultiplied </code>变量中指定的状态。它可以将颜色栅格数据乘以或除以阿尔法,或者如果数据处于正确状态,则什么也不做。
+     * 
+     * 
      * @param isAlphaPremultiplied <code>true</code> if the alpha has been
      *          premultiplied; <code>false</code> otherwise.
      */
@@ -1235,6 +1471,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns a <code>String</code> representation of this
      * <code>BufferedImage</code> object and its values.
+     * <p>
+     *  返回此<> BufferedImage </code>对象及其值的<code> String </code>表示形式。
+     * 
+     * 
      * @return a <code>String</code> representing this
      *          <code>BufferedImage</code>.
      */
@@ -1252,6 +1492,12 @@ public class BufferedImage extends java.awt.Image
      * has no information about its immediate sources.  It returns an
      * empty <code>Vector</code> if the <code>BufferedImage</code> has no
      * immediate sources.
+     * <p>
+     * 返回此@ <code> BufferedImage </code>的图片数据的直接来源(而不是这些直接来源的来源)的{@link RenderedImage}对象的{@link Vector}。
+     * 如果<code> BufferedImage </code>没有关于其直接源的信息,此方法返回<code> null </code>。
+     * 如果<code> BufferedImage </code>没有直接来源,它会返回一个空的<code> Vector </code>。
+     * 
+     * 
      * @return a <code>Vector</code> containing immediate sources of
      *          this <code>BufferedImage</code> object's image date, or
      *          <code>null</code> if this <code>BufferedImage</code> has
@@ -1267,6 +1513,10 @@ public class BufferedImage extends java.awt.Image
      * Returns an array of names recognized by
      * {@link #getProperty(String) getProperty(String)}
      * or <code>null</code>, if no property names are recognized.
+     * <p>
+     *  如果未识别属性名称,则返回由{@link #getProperty(String)getProperty(String)}或<code> null </code>识别的名称数组。
+     * 
+     * 
      * @return a <code>String</code> array containing all of the property
      *          names that <code>getProperty(String)</code> recognizes;
      *          or <code>null</code> if no property names are recognized.
@@ -1278,6 +1528,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the minimum x coordinate of this
      * <code>BufferedImage</code>.  This is always zero.
+     * <p>
+     *  返回此<code> BufferedImage </code>的最小x坐标。这总是零。
+     * 
+     * 
      * @return the minimum x coordinate of this
      *          <code>BufferedImage</code>.
      */
@@ -1288,6 +1542,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the minimum y coordinate of this
      * <code>BufferedImage</code>.  This is always zero.
+     * <p>
+     *  返回此<code> BufferedImage </code>的最小y坐标。这总是零。
+     * 
+     * 
      * @return the minimum y coordinate of this
      *          <code>BufferedImage</code>.
      */
@@ -1298,6 +1556,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the <code>SampleModel</code> associated with this
      * <code>BufferedImage</code>.
+     * <p>
+     *  返回与此<code> BufferedImage </code>关联的<code> SampleModel </code>。
+     * 
+     * 
      * @return the <code>SampleModel</code> of this
      *          <code>BufferedImage</code>.
      */
@@ -1308,6 +1570,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the number of tiles in the x direction.
      * This is always one.
+     * <p>
+     *  返回x方向上的图块数量。这总是一个。
+     * 
+     * 
      * @return the number of tiles in the x direction.
      */
     public int getNumXTiles() {
@@ -1317,6 +1583,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the number of tiles in the y direction.
      * This is always one.
+     * <p>
+     *  返回y方向上的tile数量。这总是一个。
+     * 
+     * 
      * @return the number of tiles in the y direction.
      */
     public int getNumYTiles() {
@@ -1326,6 +1596,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the minimum tile index in the x direction.
      * This is always zero.
+     * <p>
+     *  返回x方向上的最小图块索引。这总是零。
+     * 
+     * 
      * @return the minimum tile index in the x direction.
      */
     public int getMinTileX() {
@@ -1335,6 +1609,10 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the minimum tile index in the y direction.
      * This is always zero.
+     * <p>
+     *  返回y方向上的最小图块索引。这总是零。
+     * 
+     * 
      * @return the minimum tile index in the y direction.
      */
     public int getMinTileY() {
@@ -1343,6 +1621,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the tile width in pixels.
+     * <p>
+     *  返回图块宽度(以像素为单位)。
+     * 
+     * 
      * @return the tile width in pixels.
      */
     public int getTileWidth() {
@@ -1351,6 +1633,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns the tile height in pixels.
+     * <p>
+     *  返回图块高度(以像素为单位)。
+     * 
+     * 
      * @return the tile height in pixels.
      */
     public int getTileHeight() {
@@ -1361,6 +1647,10 @@ public class BufferedImage extends java.awt.Image
      * Returns the x offset of the tile grid relative to the origin,
      * For example, the x coordinate of the location of tile
      * (0,&nbsp;0).  This is always zero.
+     * <p>
+     *  返回拼贴网格相对于原点的x偏移量,例如,拼贴位置的x坐标(0,&nbsp; 0)。这总是零。
+     * 
+     * 
      * @return the x offset of the tile grid.
      */
     public int getTileGridXOffset() {
@@ -1371,6 +1661,10 @@ public class BufferedImage extends java.awt.Image
      * Returns the y offset of the tile grid relative to the origin,
      * For example, the y coordinate of the location of tile
      * (0,&nbsp;0).  This is always zero.
+     * <p>
+     *  返回tile网格相对于原点的y偏移量,例如,tile(0,&nbsp; 0)位置的y坐标。这总是零。
+     * 
+     * 
      * @return the y offset of the tile grid.
      */
     public int getTileGridYOffset() {
@@ -1383,6 +1677,12 @@ public class BufferedImage extends java.awt.Image
      * into the tile array, not pixel locations.  The <code>Raster</code>
      * that is returned is live, which means that it is updated if the
      * image is changed.
+     * <p>
+     * 返回tile(<code> tileX </code>,&nbsp; <code> tileY </code>)。
+     * 注意,<code> tileX </code>和<code> tileY </code>是拼贴数组的索引,而不是像素位置。
+     * 返回的<code> Raster </code>是实时的,这意味着如果更改图像,它会更新。
+     * 
+     * 
      * @param tileX the x index of the requested tile in the tile array
      * @param tileY the y index of the requested tile in the tile array
      * @return a <code>Raster</code> that is the tile defined by the
@@ -1403,6 +1703,10 @@ public class BufferedImage extends java.awt.Image
      * Returns the image as one large tile.  The <code>Raster</code>
      * returned is a copy of the image data is not updated if the
      * image is changed.
+     * <p>
+     *  将图像返回为一个大图块。返回的<code> Raster </code>是图像数据的副本,如果图像更改,则不会更新。
+     * 
+     * 
      * @return a <code>Raster</code> that is a copy of the image data.
      * @see #setData(Raster)
      */
@@ -1434,6 +1738,10 @@ public class BufferedImage extends java.awt.Image
      * <code>BufferedImage</code>.  The <code>Raster</code> returned is a
      * copy of the image data and is not updated if the image is
      * changed.
+     * <p>
+     *  计算并返回<code> BufferedImage </code>的任意区域。返回的<code> Raster </code>是图像数据的副本,如果更改图像,则不会更新。
+     * 
+     * 
      * @param rect the region of the <code>BufferedImage</code> to be
      * returned.
      * @return a <code>Raster</code> that is a copy of the image data of
@@ -1470,6 +1778,13 @@ public class BufferedImage extends java.awt.Image
      * <code>SampleModel</code> that is compatible with this image.  If
      * <code>outRaster</code> is <code>null</code>,
      * an appropriate <code>WritableRaster</code> is created.
+     * <p>
+     *  计算<code> BufferedImage </code>的任意矩形区域,并将其复制到指定的<code> WritableRaster </code>中。
+     * 要计算的区域从指定的<code> WritableRaster </code>的边界确定。
+     * 指定的<code> WritableRaster </code>必须具有与此图片兼容的<code> SampleModel </code>。
+     * 如果<code> outRaster </code>是<code> null </code>,则创建适当的<code> WritableRaster </code>。
+     * 
+     * 
      * @param outRaster a <code>WritableRaster</code> to hold the returned
      *          part of the image, or <code>null</code>
      * @return a reference to the supplied or created
@@ -1500,6 +1815,11 @@ public class BufferedImage extends java.awt.Image
      * assumed to be in the same coordinate space as the
      * <code>BufferedImage</code>. The operation is clipped to the bounds
      * of the <code>BufferedImage</code>.
+     * <p>
+     *  将图像的矩形区域设置为指定的<code> Raster </code> <code> r </code>的内容,假设它与<code> BufferedImage </code> 。
+     * 操作被剪切到<code> BufferedImage </code>的边界。
+     * 
+     * 
      * @param r the specified <code>Raster</code>
      * @see #getData
      * @see #getData(Rectangle)
@@ -1536,6 +1856,10 @@ public class BufferedImage extends java.awt.Image
   /**
    * Adds a tile observer.  If the observer is already present,
    * it receives multiple notifications.
+   * <p>
+   *  添加图块观察器。如果观察者已经存在,它接收多个通知。
+   * 
+   * 
    * @param to the specified {@link TileObserver}
    */
     public void addTileObserver (TileObserver to) {
@@ -1545,6 +1869,10 @@ public class BufferedImage extends java.awt.Image
    * Removes a tile observer.  If the observer was not registered,
    * nothing happens.  If the observer was registered for multiple
    * notifications, it is now registered for one fewer notification.
+   * <p>
+   * 删除瓦片观察器。如果观察者没有注册,什么也没有发生。如果观察者注册了多个通知,则现在注册的通知减少了一个。
+   * 
+   * 
    * @param to the specified <code>TileObserver</code>.
    */
     public void removeTileObserver (TileObserver to) {
@@ -1552,6 +1880,10 @@ public class BufferedImage extends java.awt.Image
 
     /**
      * Returns whether or not a tile is currently checked out for writing.
+     * <p>
+     *  返回图块当前是否已签出写入。
+     * 
+     * 
      * @param tileX the x index of the tile.
      * @param tileY the y index of the tile.
      * @return <code>true</code> if the tile specified by the specified
@@ -1572,6 +1904,10 @@ public class BufferedImage extends java.awt.Image
      * Returns an array of {@link Point} objects indicating which tiles
      * are checked out for writing.  Returns <code>null</code> if none are
      * checked out.
+     * <p>
+     *  返回一个{@link Point}对象数组,指示哪些图块被签出写入。如果没有检出,则返回<code> null </code>。
+     * 
+     * 
      * @return a <code>Point</code> array that indicates the tiles that
      *          are checked out for writing, or <code>null</code> if no
      *          tiles are checked out for writing.
@@ -1589,6 +1925,12 @@ public class BufferedImage extends java.awt.Image
      * <pre>
      * (getWritableTileIndices() != null).
      * </pre>
+     * <p>
+     *  返回是否检出任何磁贴写入。语义上等同于
+     * <pre>
+     *  (getWritableTileIndices()！= null)。
+     * </pre>
+     * 
      * @return <code>true</code> if any tile is checked out for writing;
      *          <code>false</code> otherwise.
      */
@@ -1600,6 +1942,10 @@ public class BufferedImage extends java.awt.Image
    * Checks out a tile for writing.  All registered
    * <code>TileObservers</code> are notified when a tile goes from having
    * no writers to having one writer.
+   * <p>
+   *  检查一个瓷砖写。当图块从没有写入者到具有一个写入者时,通知所有注册的<code> TileObservers </code>。
+   * 
+   * 
    * @param tileX the x index of the tile
    * @param tileY the y index of the tile
    * @return a <code>WritableRaster</code> that is the tile, indicated by
@@ -1617,6 +1963,12 @@ public class BufferedImage extends java.awt.Image
    * to undefined results.  All registered <code>TileObservers</code>
    * are notified when a tile goes from having one writer to having no
    * writers.
+   * <p>
+   *  放弃写入图块的权限。如果调用程序继续写入磁贴,则结果未定义。
+   * 对此方法的调用应该只出现在与{@link #getWritableTile(int,int)getWritableTile(int,int)}的调用匹配的对中。任何其他导致未定义的结果。
+   * 当图块从具有一个写入者到没有写入者时,通知所有注册的<code> TileObservers </code>。
+   * 
+   * 
    * @param tileX the x index of the tile
    * @param tileY the y index of the tile
    */
@@ -1626,6 +1978,8 @@ public class BufferedImage extends java.awt.Image
     /**
      * Returns the transparency.  Returns either OPAQUE, BITMASK,
      * or TRANSLUCENT.
+     * <p>
+     * 
      * @return the transparency of this <code>BufferedImage</code>.
      * @see Transparency#OPAQUE
      * @see Transparency#BITMASK

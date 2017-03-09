@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  */
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -55,6 +65,14 @@ import javax.xml.stream.events.XMLEvent;
  * namespace binding.
  *
  *
+ * <p>
+ *  此类添加命名空间处理的功能。
+ * 
+ *  这个类已经根据更适合有效构建pull解析器的新设计进行了修改。大量的改进已经完成,代码已添加到支持stax功能/功能。
+ * 
+ *  此类扫描XML文档,检查文档是否具有DTD,如果未找到DTD,则扫描程序将从管道中删除DTD验证程序并执行命名空间绑定。
+ * 
+ * 
  * @author Neeraj Bajaj, Sun Microsystems
  * @author Venugopal Rao K, Sun Microsystems
  * @author Elena Litani, IBM
@@ -66,10 +84,15 @@ public class XMLNSDocumentScannerImpl
     /**
      * If is true, the dtd validator is no longer in the pipeline
      * and the scanner should bind namespaces
+     * <p>
+     *  如果为true,dtd验证器不再在管道中,并且扫描程序应该绑定命名空间
+     * 
      */
     protected boolean fBindNamespaces;
 
     /** If validating parser, make sure we report an error in the
+    /* <p>
+    /* 
      *   scanner if DTD grammar is missing.*/
     protected boolean fPerformValidation;
 
@@ -84,6 +107,7 @@ public class XMLNSDocumentScannerImpl
      private boolean fXmlnsDeclared = false;
 
     /** Resets the fields of this scanner.
+    /* <p>
      */
     public void reset(PropertyManager propertyManager) {
         setPropertyManager(propertyManager);
@@ -102,6 +126,8 @@ public class XMLNSDocumentScannerImpl
 
     /** return the next state on the input
      *
+     * <p>
+     * 
      * @return int
      */
 
@@ -121,6 +147,10 @@ public class XMLNSDocumentScannerImpl
      * The scanner is responsible for removing DTD validator
      * from the pipeline if it is not needed.
      *
+     * <p>
+     *  如果不需要,扫描器负责从流水线中删除DTD验证器。
+     * 
+     * 
      * @param previous The filter component before DTDValidator
      * @param dtdValidator
      *                 The DTDValidator
@@ -150,6 +180,18 @@ public class XMLNSDocumentScannerImpl
      * destroyed. The caller should copy important information out of
      * these variables before calling this method.
      *
+     * <p>
+     *  扫描start元素。此方法将处理命名空间信息的绑定,并通知处理程序元素的开始。
+     * <p>
+     * <pre>
+     * [44] EmptyElemTag :: ='&lt;'名称(S属性)* S? '/>'[40] STag :: ='&lt;'名称(S属性)* S? '>'
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>此方法假定前导'&lt;'字符已被消耗。
+     * <p>
+     *  <strong>注意：</strong>此方法使用fElementQName和fAttributes变量。这些变量的内容将被销毁。在调用此方法之前,调用者应该从这些变量中复制重要信息。
+     * 
+     * 
      * @return True if element is empty. (i.e. It matches
      *          production [44].
      */
@@ -403,6 +445,18 @@ public class XMLNSDocumentScannerImpl
      * fQName variables. The contents of these variables will be
      * destroyed.
      *
+     * <p>
+     *  扫描属性。
+     * <p>
+     * <pre>
+     *  Attribute :: =命名Eq AttValue
+     * </pre>
+     * <p>
+     *  <strong>注意</strong>：此方法假定流上的下一个字符是属性名称的第一个字符。
+     * <p>
+     *  <strong>注意：</strong>此方法使用fAttributeQName和fQName变量。这些变量的内容将被销毁。
+     * 
+     * 
      * @param attributes The attributes list for the scanned attribute.
      */
     protected void scanAttribute(XMLAttributesImpl attributes)
@@ -582,6 +636,7 @@ public class XMLNSDocumentScannerImpl
 
     /**
      * Driver to handle content scanning.
+     * <p>
      */
     protected final class NSContentDriver
             extends ContentDriver {
@@ -593,6 +648,10 @@ public class XMLNSDocumentScannerImpl
          * is no longer in the pipeline bind namespaces in the scanner.
          *
          *
+         * <p>
+         *  驱动程序处理内容扫描。
+         * 
+         * 
          * @return True if the caller should stop and return true which
          *          allows the scanner to switch to a new scanning
          *          driver. A return value of false indicates that
@@ -616,6 +675,9 @@ public class XMLNSDocumentScannerImpl
          * if no DTD grammar exists. If no validator exists in the
          * pipeline or there is no DTD grammar, namespace binding
          * is performed by the scanner in the enclosing class.
+         * <p>
+         *  扫描根元素钩子。此方法是一个钩子,用于子类添加代码来处理根元素的扫描。如果没有DTD语法,此方法还将尝试从管道中删除DTD验证器。如果DTD验证器不再在管道中绑定命名空间在扫描器中。
+         * 
          */
         private void reconfigurePipeline() {
             //fDTDValidator will be null in Stax mode

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,15 @@ package javax.naming;
   * <p>
   * Synchronization and serialization issues that apply to NamingException
   * apply directly here.
+  * <p>
+  *  当命名操作进行到需要上下文以继续操作的点,但解析的对象不是上下文时,抛出此异常。例如,Context.destroy()要求命名对象是上下文。如果不是,则抛出NotContextException。
+  * 另一个示例是在上下文方法的解析阶段期间遇到的非上下文。
+  * p>
+  *  当需要上下文的特定子类型(如DirContext)时,也会抛出此异常,并且解析的对象是上下文,但不是必需的子类型。
+  * <p>
+  *  适用于NamingException的同步和序列化问题直接应用于此处。
+  * 
+  * 
   * @see Context#destroySubcontext
   *
   * @author Rosanna Lee
@@ -51,6 +61,10 @@ public class NotContextException extends NamingException {
      * Constructs a new instance of NotContextException using an
      * explanation. All other fields default to null.
      *
+     * <p>
+     *  使用解释构造NotContextException的新实例。所有其他字段默认为null。
+     * 
+     * 
      * @param   explanation     Possibly null additional detail about this exception.
      * @see java.lang.Throwable#getMessage
      */
@@ -61,6 +75,9 @@ public class NotContextException extends NamingException {
     /**
       * Constructs a new instance of NotContextException.
       * All fields default to null.
+      * <p>
+      *  构造一个NotContextException的新实例。所有字段默认为null。
+      * 
       */
     public NotContextException() {
         super();
@@ -68,6 +85,8 @@ public class NotContextException extends NamingException {
 
     /**
      * Use serialVersionUID from JNDI 1.1.1 for interoperability
+     * <p>
+     *  从JNDI 1.1.1使用serialVersionUID以实现互操作性
      */
     private static final long serialVersionUID = 849752551644540417L;
 }

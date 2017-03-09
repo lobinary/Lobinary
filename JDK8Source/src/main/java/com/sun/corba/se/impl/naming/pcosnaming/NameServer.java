@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,9 @@ import org.omg.CosNaming.NamingContext;
  * It uses the PersistentNameService and TransientNameService
  * classes for the name service implementation.
  *
+ * <p>
+ *  类NameServer是实现持久和临时名称服务的独立应用程序。它使用PersistentNameService和TransientNameService类来实现名称服务。
+ * 
  * @author      Hemanth Puttaswamy
  * @since       JDK1.2
  */

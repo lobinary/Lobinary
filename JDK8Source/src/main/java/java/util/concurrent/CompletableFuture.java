@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -104,6 +108,33 @@ import java.util.concurrent.locks.LockSupport;
  * {@link #getNow} that instead throw the CompletionException directly
  * in these cases.</li> </ul>
  *
+ * <p>
+ *  可以显式完成(设置其值和状态)的{@link Future},并且可以用作{@link CompletionStage},支持在完成后触发的依赖函数和操作。
+ * 
+ *  <p>当两个或更多个线程尝试{@link #complete complete},{@link #completeExceptionally completeExceptionally}或{@link #cancel cancel}
+ * 一个CompletableFuture时,只有其中一个线程成功。
+ * 
+ *  <p>除了用于直接操作状态和结果的这些和相关方法之外,CompletableFuture还实现了接口{@link CompletionStage},其中包含以下策略：<ul>
+ * 
+ *  <li>为<em>非异步</em>方法的依赖完成提供的操作可以由完成当前CompletableFuture的线程或完成方法的任何其他调用者执行。</li>
+ * 
+ *  <li>所有不带显式执行程序参数的<em> async </em>方法都使用{@link ForkJoinPool#commonPool()}(除非它不支持至少两个并行性级别,在这种情况下,创建新线程
+ * 以运行每个任务)。
+ * 为了简化监视,调试和跟踪,所有生成的异步任务都是标记接口{@link AsynchronousCompletionTask}的实例。 </li>。
+ * 
+ * <li>所有CompletionStage方法独立于其他公共方法实现,因此一个方法的行为不会受到其他子类的重写的影响。 </li> </ul>
+ * 
+ *  <p> CompletableFuture还使用以下策略实施{@link Future}：<ul>
+ * 
+ *  <li>由于(与{@link FutureTask}不同)此类不能直接控制导致其完成的计算,取消只被视为异常完成的另一种形式。
+ * 方法{@link #cancel cancel}具有与{@code completeExceptionally(new CancellationException())}相同的效果。
+ * 方法{@link #isCompletedExceptionally}可用于确定CompletableFuture是否以任何特殊方式完成。</li>。
+ * 
+ *  <li>如果使用CompletionException异常完成,方法{@link #get()}和{@link #get(long,TimeUnit)}会抛出一个{@link ExecutionException}
+ * ,原因与在相应的CompletionException中保存的原因相同。
+ * 为了简化在大多数上下文中的使用,这个类还定义了方法{@link #join()}和{@link #getNow},而在这些情况下直接抛出CompletionException。</li> </ul>。
+ * 
+ * 
  * @author Doug Lea
  * @since 1.8
  */
@@ -213,6 +244,51 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Completion fields need not be declared as final or volatile
      * because they are only visible to other threads upon safe
      * publication.
+     * <p>
+     *  概述：
+     * 
+     *  CompletableFuture可以具有依赖完成动作,在链接堆栈中收集。它通过CASing结果字段以原子方式完成,然后弹出并运行这些操作。
+     * 这适用于正常或异常结果,同步和异步操作,二进制触发器和各种形式的完成。
+     * 
+     * 字段结果的非空(通过CAS设置)指示完成。 AltResult用于将null归为结果,以及保存异常。使用单个字段使完成更容易检测和触发。编码和解码是直接的,但增加了陷阱和将异常与目标关联的蔓延。
+     * 小的简化依赖(静态)NIL(到框空结果)是唯一的具有空异常字段的AltResult,所以我们通常不需要显式比较。
+     * 即使一些泛型转换未经检查(请参阅SuppressWarnings注释),即使选中它们,它们也被放置为合适的。
+     * 
+     *  依赖操作由完成对象表示,链接为由字段"堆栈"标题的Treiber堆栈。
+     * 每种动作都有完成类,分为单输入(UniCompletion),双输入(BiCompletion),投影(BiCompletions使用两个输入中的任一个(不是两个)),共享(CoCompletion,由
+     * 两个中的第二个使用源),零输入源操作和解除锁定等待者的信号器。
+     *  依赖操作由完成对象表示,链接为由字段"堆栈"标题的Treiber堆栈。类完成扩展了ForkJoinTask以启用异步执行(不增加空间开销,因为我们利用其"标签"方法来维护声明)。
+     * 它也被声明为Runnable,允许任意执行器使用。
+     * 
+     *  对每种类型的CompletionStage的支持依赖于一个单独的类,以及两个CompletableFuture方法：
+     * 
+     * *具有与函数对应的名称X的完成类,以"Uni","Bi"或"Or"开头。每个类包含源,动作和从属的字段。它们是非常相似的,与其他仅在底层功能形式上有所不同。我们这样做,使用户不会遇到通用的适配器层。
+     * 我们还包括不与用户方法相对应的"继电器"类/方法;他们将结果从一个阶段复制到另一个阶段。
+     * 
+     *  * Boolean CompletableFuture方法x(...)(例如uniApply)获取检查操作是否可触发所需的所有参数,然后运行操作或通过执行其完成参数(如果存在)来安排其异步执行。
+     * 如果已知完成,该方法返回true。
+     * 
+     *  *完成方法tryFire(int mode)使用其持有的参数调用关联的x方法,并在成功时清除。
+     *  mode参数允许tryFire被调用两次(SYNC,然后ASYNC);第一个在安排执行时屏蔽和捕获异常,第二个在从任务调用时。 (几个类不使用async,所以采取稍微不同的形式。
+     * )claim()回调抑制函数调用,如果已经声明另一个线程。
+     * 
+     * * CompletableFuture方法xStage(...)从CompletableFuture x的公共阶段方法调用。它屏幕用户参数,调用和/或创建舞台对象。
+     * 如果不是async和x已经完成,则立即运行操作。否则,创建完成c,推送到x的堆栈(除非完成),并通过c.tryFire启动或触发。这也包括可能的x如果x完成同时推。
+     * 有两个输入(例如BiApply)的类处理两个比赛,同时推动动作。第二个完成是指向第一个,共享的CoCompletion,以便最多一个执行操作。多元方法allOf和anyOf这样做成对地形成完成树。
+     * 
+     *  注意,方法的通用类型参数根据"this"是源,从属还是完成而变化。
+     * 
+     *  方法postComplete在完成后调用,除非目标被保证不可观察(即,尚未返回或链接)。
+     * 多线程可以调用postComplete,它会自动弹出每个相关动作,并尝试通过方法tryFire在NESTED模式下触发它。
+     * 触发可以递归传播,因此NESTED模式返回其完成的依赖(如果存在)以供其调用者进一步处理(参见方法postFire)。
+     * 
+     * 阻塞方法get()和join()依赖于Signaller Completions唤醒等待线程。
+     * 机制类似于FutureTask,Phaser和SynchronousQueue中使用的Treiber堆栈等待节点。有关算法的详细信息,请参阅其内部文档。
+     * 
+     *  没有预防措施,CompletableFutures会倾向于垃圾堆积,因为链的完成积累,每个指向其来源。因此,我们尽快清除字段(特别是参见方法Completion.detach)。
+     * 无论如何,筛选检查无害地忽略可能在线程清除字段的比赛期间获得的空参数。我们还尝试从可能永远不会弹出的堆栈中取消关联已启动的完成(请参阅方法postFire)。
+     * 完成字段不需要声明为final或volatile,因为它们在安全发布时仅对其他线程可见。
+     * 
      */
 
     volatile Object result;       // Either the result or boxed AltResult
@@ -268,6 +344,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Returns the encoding of the given (non-null) exception as a
      * wrapped CompletionException unless it is one already.
+     * <p>
+     *  返回给定(非空)异常的编码作为一个包装的CompletionException,除非它已经是一个。
+     * 
      */
     static AltResult encodeThrowable(Throwable x) {
         return new AltResult((x instanceof CompletionException) ? x :
@@ -286,6 +365,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * return the given Object r (which must have been the result of a
      * source future) if it is equivalent, i.e. if this is a simple
      * relay of an existing CompletionException.
+     * <p>
+     *  返回给定(非空)异常的编码作为一个包装的CompletionException,除非它已经是一个。
+     * 如果它是等效的,即如果这是现有CompletionException的简单中继,则可以返回给定的Object r(它必须是源未来的结果)。
+     * 
      */
     static Object encodeThrowable(Throwable x, Object r) {
         if (!(x instanceof CompletionException))
@@ -302,6 +385,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * (which must have been the result of a source future) if it is
      * equivalent, i.e. if this is a simple propagation of an
      * existing CompletionException.
+     * <p>
+     * 使用给定的(非空)异常结果作为包装的CompletionException完成,除非它已经是一个,除非已经完成。
+     * 如果它是等价的,即如果这是现有CompletionException的简单传播,则可以完成给定的对象r(其必须是源未来的结果)。
+     * 
      */
     final boolean completeThrowable(Throwable x, Object r) {
         return UNSAFE.compareAndSwapObject(this, RESULT, null,
@@ -312,6 +399,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Returns the encoding of the given arguments: if the exception
      * is non-null, encodes as AltResult.  Otherwise uses the given
      * value, boxed as NIL if null.
+     * <p>
+     *  返回给定参数的编码：如果异常为非null,则编码为AltResult。否则使用给定值,如果为null,则为NIL。
+     * 
      */
     Object encodeOutcome(T t, Throwable x) {
         return (x == null) ? (t == null) ? NIL : t : encodeThrowable(x);
@@ -320,6 +410,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Returns the encoding of a copied outcome; if exceptional,
      * rewraps as a CompletionException, else returns argument.
+     * <p>
+     *  返回复制结果的编码;如果例外,重写为一个CompletionException,否则返回参数。
+     * 
      */
     static Object encodeRelay(Object r) {
         Throwable x;
@@ -332,6 +425,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Completes with r or a copy of r, unless already completed.
      * If exceptional, r is first coerced to a CompletionException.
+     * <p>
+     *  使用r或r的副本完成,除非已完成。如果例外,r首先被强制到一个CompletionException。
+     * 
      */
     final boolean completeRelay(Object r) {
         return UNSAFE.compareAndSwapObject(this, RESULT, null,
@@ -340,6 +436,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
 
     /**
      * Reports result using Future.get conventions.
+     * <p>
+     *  使用Future.get约定来报告结果。
+     * 
      */
     private static <T> T reportGet(Object r)
         throws InterruptedException, ExecutionException {
@@ -362,6 +461,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
 
     /**
      * Decodes outcome to return result or throw unchecked exception.
+     * <p>
+     *  解析结果以返回结果或抛出未检查的异常。
+     * 
      */
     private static <T> T reportJoin(Object r) {
         if (r instanceof AltResult) {
@@ -385,6 +487,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * {@code async} methods. This may be useful for monitoring,
      * debugging, and tracking asynchronous activities.
      *
+     * <p>
+     *  标识由{@code async}方法生成的异步任务的标记接口。这可能有助于监视,调试和跟踪异步活动。
+     * 
+     * 
      * @since 1.8
      */
     public static interface AsynchronousCompletionTask {
@@ -396,6 +502,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Default executor -- ForkJoinPool.commonPool() unless it cannot
      * support parallelism.
+     * <p>
+     *  默认执行者 -  ForkJoinPool.commonPool(),除非它不能支持并行性。
+     * 
      */
     private static final Executor asyncPool = useCommonPool ?
         ForkJoinPool.commonPool() : new ThreadPerTaskExecutor();
@@ -408,6 +517,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Null-checks user executor argument, and translates uses of
      * commonPool to asyncPool in case parallelism disabled.
+     * <p>
+     *  Null检查用户执行程序参数,并在禁用并行性的情况下将commonPool的用法转换为asyncPool。
+     * 
      */
     static Executor screenExecutor(Executor e) {
         if (!useCommonPool && e == ForkJoinPool.commonPool())
@@ -432,6 +544,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
          * Performs completion action if triggered, returning a
          * dependent that may need propagation, if one exists.
          *
+         * <p>
+         *  如果触发,执行完成操作,返回可能需要传播的依赖项(如果存在)。
+         * 
+         * 
          * @param mode SYNC, ASYNC, or NESTED
          */
         abstract CompletableFuture<?> tryFire(int mode);
@@ -452,12 +568,18 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Pops and tries to trigger all reachable dependents.  Call only
      * when known to be done.
+     * <p>
+     *  弹出并尝试触发所有可达的家属。仅在已知完成时才调用。
+     * 
      */
     final void postComplete() {
         /*
          * On each step, variable f holds current dependents to pop
          * and run.  It is extended along only one path at a time,
          * pushing others to avoid unbounded recursion.
+         * <p>
+         * 在每个步骤,变量f保持当前依赖项以弹出和运行。它一次只沿一条路径延伸,推动其他人避免无限递归。
+         * 
          */
         CompletableFuture<?> f = this; Completion h;
         while ((h = f.stack) != null ||
@@ -519,6 +641,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
          * be triggerable. Uses FJ tag bit to ensure that only one
          * thread claims ownership.  If async, starts as task -- a
          * later call to tryFire will run action.
+         * <p>
+         *  如果可以运行动作,则返回true。仅在已知可触发时才调用。使用FJ标记位以确保只有一个线程声明所有权。如果异步,作为任务启动 - 稍后调用tryFire将运行操作。
+         * 
          */
         final boolean claim() {
             Executor e = executor;
@@ -546,6 +671,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Post-processing by dependent after successful UniCompletion
      * tryFire.  Tries to clean stack of source a, and then either runs
      * postComplete or returns this to caller, depending on mode.
+     * <p>
+     *  成功执行UniCompletion tryFire之后的依赖性后处理。尝试清理源代码a堆栈,然后运行postComplete或返回到调用者,具体取决于模式。
+     * 
      */
     final CompletableFuture<T> postFire(CompletableFuture<?> a, int mode) {
         if (a != null && a.stack != null) {
@@ -1639,6 +1767,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Completion for recording and releasing a waiting thread.  This
      * class implements ManagedBlocker to avoid starvation when
      * blocking actions pile up in ForkJoinPools.
+     * <p>
+     *  完成记录和释放等待线程。这个类实现ManagedBlocker,以避免在ForkJoinPools中阻塞动作堆积时出现饥饿。
+     * 
      */
     @SuppressWarnings("serial")
     static final class Signaller extends Completion
@@ -1693,6 +1824,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Returns raw result after waiting, or null if interruptible and
      * interrupted.
+     * <p>
+     *  等待后返回原始结果,如果可中断并中断,则返回null。
+     * 
      */
     private Object waitingGet(boolean interruptible) {
         Signaller q = null;
@@ -1740,6 +1874,9 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Returns raw result after waiting, or null if interrupted, or
      * throws TimeoutException on timeout.
+     * <p>
+     *  在等待后返回原始结果,如果中断则返回null,或者在超时时抛出TimeoutException。
+     * 
      */
     private Object timedGet(long nanos) throws TimeoutException {
         if (Thread.interrupted())
@@ -1781,12 +1918,18 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
 
     /**
      * Creates a new incomplete CompletableFuture.
+     * <p>
+     *  创建一个新的不完全CompletableFuture。
+     * 
      */
     public CompletableFuture() {
     }
 
     /**
      * Creates a new complete CompletableFuture with given encoded result.
+     * <p>
+     *  使用给定的编码结果创建一个新的完整CompletableFuture。
+     * 
      */
     private CompletableFuture(Object r) {
         this.result = r;
@@ -1797,6 +1940,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * by a task running in the {@link ForkJoinPool#commonPool()} with
      * the value obtained by calling the given Supplier.
      *
+     * <p>
+     *  返回由在{@link ForkJoinPool#commonPool()}中运行的任务异步完成的新CompletableFuture,其中通过调用给定的Supplier获得的值。
+     * 
+     * 
      * @param supplier a function returning the value to be used
      * to complete the returned CompletableFuture
      * @param <U> the function's return type
@@ -1811,6 +1958,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * by a task running in the given executor with the value obtained
      * by calling the given Supplier.
      *
+     * <p>
+     *  返回一个新的CompletableFuture,它是由在给定执行器中运行的任务异步完成的,通过调用给定的Supplier获得的值。
+     * 
+     * 
      * @param supplier a function returning the value to be used
      * to complete the returned CompletableFuture
      * @param executor the executor to use for asynchronous execution
@@ -1827,6 +1978,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * by a task running in the {@link ForkJoinPool#commonPool()} after
      * it runs the given action.
      *
+     * <p>
+     * 返回一个新的CompletableFuture,它在运行给定操作后由在{@link ForkJoinPool#commonPool()}中运行的任务异步完成。
+     * 
+     * 
      * @param runnable the action to run before completing the
      * returned CompletableFuture
      * @return the new CompletableFuture
@@ -1840,6 +1995,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * by a task running in the given executor after it runs the given
      * action.
      *
+     * <p>
+     *  返回一个新的CompletableFuture,它是在运行给定的操作后在给定的执行器中运行的任务异步完成的。
+     * 
+     * 
      * @param runnable the action to run before completing the
      * returned CompletableFuture
      * @param executor the executor to use for asynchronous execution
@@ -1854,6 +2013,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Returns a new CompletableFuture that is already completed with
      * the given value.
      *
+     * <p>
+     *  返回一个已经用给定值完成的新CompletableFuture。
+     * 
+     * 
      * @param value the value
      * @param <U> the type of the value
      * @return the completed CompletableFuture
@@ -1866,6 +2029,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Returns {@code true} if completed in any fashion: normally,
      * exceptionally, or via cancellation.
      *
+     * <p>
+     *  如果以任何方式完成,返回{@code true}：通常,异常或通过取消。
+     * 
+     * 
      * @return {@code true} if completed
      */
     public boolean isDone() {
@@ -1876,6 +2043,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Waits if necessary for this future to complete, and then
      * returns its result.
      *
+     * <p>
+     *  如果需要等待这个未来完成,然后返回其结果。
+     * 
+     * 
      * @return the result value
      * @throws CancellationException if this future was cancelled
      * @throws ExecutionException if this future completed exceptionally
@@ -1891,6 +2062,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Waits if necessary for at most the given time for this future
      * to complete, and then returns its result, if available.
      *
+     * <p>
+     *  如果必要的话,等待至多给定时间以完成此未来,然后返回其结果(如果可用)。
+     * 
+     * 
      * @param timeout the maximum time to wait
      * @param unit the time unit of the timeout argument
      * @return the result value
@@ -1916,6 +2091,12 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * (unchecked) {@link CompletionException} with the underlying
      * exception as its cause.
      *
+     * <p>
+     *  完成后返回结果值,如果异常完成则抛出异常(未检查)。
+     * 为了更好地符合公共功能形式的使用,如果涉及完成此CompletableFuture的计算抛出异常,此方法将抛出一个(未检查的){@link CompletionException}作为其原因的底层异常。
+     *  完成后返回结果值,如果异常完成则抛出异常(未检查)。
+     * 
+     * 
      * @return the result value
      * @throws CancellationException if the computation was cancelled
      * @throws CompletionException if this future completed
@@ -1930,6 +2111,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Returns the result value (or throws any encountered exception)
      * if completed, else returns the given valueIfAbsent.
      *
+     * <p>
+     *  如果完成,返回结果值(或抛出任何遇到的异常),否则返回给定的valueIfAbsent。
+     * 
+     * 
      * @param valueIfAbsent the value to return if not completed
      * @return the result value, if completed, else the given valueIfAbsent
      * @throws CancellationException if the computation was cancelled
@@ -1945,6 +2130,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * If not already completed, sets the value returned by {@link
      * #get()} and related methods to the given value.
      *
+     * <p>
+     *  如果尚未完成,请将{@link #get()}返回的值和相关方法设置为给定值。
+     * 
+     * 
      * @param value the result value
      * @return {@code true} if this invocation caused this CompletableFuture
      * to transition to a completed state, else {@code false}
@@ -1959,6 +2148,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * If not already completed, causes invocations of {@link #get()}
      * and related methods to throw the given exception.
      *
+     * <p>
+     *  如果尚未完成,则引起{@link #get()}和相关方法的调用以抛出给定的异常。
+     * 
+     * 
      * @param ex the exception
      * @return {@code true} if this invocation caused this CompletableFuture
      * to transition to a completed state, else {@code false}
@@ -2160,6 +2353,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     /**
      * Returns this CompletableFuture.
      *
+     * <p>
+     *  返回此CompletableFuture。
+     * 
+     * 
      * @return this CompletableFuture
      */
     public CompletableFuture<T> toCompletableFuture() {
@@ -2178,6 +2375,12 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Note: More flexible versions of this functionality are
      * available using methods {@code whenComplete} and {@code handle}.
      *
+     * <p>
+     * 返回一个新的CompletableFuture,当CompletableFuture完成时完成,当异常完成时,异常的给定函数的结果触发此CompletableFuture的完成;否则,如果此Comple
+     * tableFuture正常完成,则返回的CompletableFuture也会以相同的值正常完成。
+     * 注意：使用{@code whenComplete}和{@code handle}方法可以获得更为灵活的版本。
+     * 
+     * 
      * @param fn the function to use to compute the value of the
      * returned CompletableFuture if this CompletableFuture completed
      * exceptionally
@@ -2207,6 +2410,16 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * program, as in: {@code CompletableFuture.allOf(c1, c2,
      * c3).join();}.
      *
+     * <p>
+     *  返回一个新的CompletableFuture,当所有给定的CompletableFutures完成时完成。
+     * 如果任何给定的CompletableFutures异常完成,则返回的CompletableFuture也会这样做,一个CompletionException将此异常作为其原因。
+     * 否则,给定CompletableFutures的结果(如果有)不会反映在返回的CompletableFuture中,但可以通过单独检查它们来获得。
+     * 如果没有提供CompletableFutures,则返回一个完成了值为{@code null}的CompletableFuture。
+     * 
+     *  <p>此方法的应用程序之一是在继续程序之前等待完成一组独立的CompletableFutures,如：{@code CompletableFuture.allOf(c1,c2,c3).join();}
+     * 。
+     * 
+     * 
      * @param cfs the CompletableFutures
      * @return a new CompletableFuture that is completed when all of the
      * given CompletableFutures complete
@@ -2225,6 +2438,12 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * holding this exception as its cause.  If no CompletableFutures
      * are provided, returns an incomplete CompletableFuture.
      *
+     * <p>
+     * 返回一个新的CompletableFuture,当任何给定的CompletableFutures完成时,完成,具有相同的结果。
+     * 否则,如果它完成异常,返回的CompletableFuture也这样做,与一个CompletionException举行此异常作为其原因。
+     * 如果没有提供CompletableFutures,返回一个不完整的CompletableFuture。
+     * 
+     * 
      * @param cfs the CompletableFutures
      * @return a new CompletableFuture that is completed with the
      * result or exception of any of the given CompletableFutures when
@@ -2245,6 +2464,11 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * exceptionally, with a {@link CompletionException} caused by
      * this {@code CancellationException}.
      *
+     * <p>
+     *  如果尚未完成,请使用{@link CancellationException}完成此CompletableFuture。
+     * 尚未完成的依赖CompletableFutures也将异常完成,由此{@code CancellationException}造成的{@link CompletionException}异常。
+     * 
+     * 
      * @param mayInterruptIfRunning this value has no effect in this
      * implementation because interrupts are not used to control
      * processing.
@@ -2262,6 +2486,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * Returns {@code true} if this CompletableFuture was cancelled
      * before it completed normally.
      *
+     * <p>
+     *  如果此CompletableFuture在正常完成之前被取消,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this CompletableFuture was cancelled
      * before it completed normally
      */
@@ -2278,6 +2506,11 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * completeExceptionally}, and abrupt termination of a
      * CompletionStage action.
      *
+     * <p>
+     *  如果此CompletableFuture以任何方式完成异常,则返回{@code true}。
+     * 可能的原因包括取消,显式调用{@code completeExceptionally}和突然终止CompletionStage操作。
+     * 
+     * 
      * @return {@code true} if this CompletableFuture completed
      * exceptionally
      */
@@ -2294,6 +2527,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * in ongoing dependent completions using established versus
      * overwritten outcomes.
      *
+     * <p>
+     *  强制设置或重置随后由方法{@link #get()}返回的值和相关方法,无论是否已完成。此方法设计为仅用于错误恢复操作,并且甚至在这种情况下可能导致使用已建立的对覆盖结果的正在进行的依赖性完成。
+     * 
+     * 
      * @param value the completion value
      */
     public void obtrudeValue(T value) {
@@ -2309,6 +2546,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * in ongoing dependent completions using established versus
      * overwritten outcomes.
      *
+     * <p>
+     * 强制使后续调用方法{@link #get()}和相关方法抛出给定异常,无论是否已完成。该方法被设计为仅用于错误恢复动作,并且甚至在这种情况下可以使用建立的对覆盖的结果导致正在进行的依赖性完成。
+     * 
+     * 
      * @param ex the exception
      * @throws NullPointerException if the exception is null
      */
@@ -2324,6 +2565,10 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * This method is designed for use in monitoring system state, not
      * for synchronization control.
      *
+     * <p>
+     *  返回CompletableFutures的估计数量,其完成正在等待此CompletableFuture的完成。此方法设计用于监视系统状态,而不是用于同步控制。
+     * 
+     * 
      * @return the number of dependent CompletableFutures
      */
     public int getNumberOfDependents() {
@@ -2341,6 +2586,11 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
      * completed"} followed by the number of CompletableFutures
      * dependent upon its completion, if any.
      *
+     * <p>
+     *  返回一个字符串,标识此CompletableFuture及其完成状态。
+     * 括号中的状态包含String {@code"Completed Normally"}或String {@code"Completed Exceptionally"}或String {@code"未完成"}
+     * ,后跟CompletableFutures的数量,取决于完成,如果有的话。
+     * 
      * @return a string identifying this CompletableFuture, as well as its state
      */
     public String toString() {

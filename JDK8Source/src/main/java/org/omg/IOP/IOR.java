@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -17,6 +18,8 @@ public final class IOR implements org.omg.CORBA.portable.IDLEntity
   /** 
 	 * An array of tagged profiles associated with this 
 	 * object reference. 
+	 * <p>
+	 * 
 	 */
   public org.omg.IOP.TaggedProfile profiles[] = null;
 

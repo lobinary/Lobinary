@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,18 @@ import sun.swing.DefaultLookup;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  提供文本字段的Windows外观。这基本上是对默认外观的以下自定义。
+ * <ul>
+ *  <li>边框有斜角(使用标准控制颜色)。 <li>默认情况下,背景为白色。 <li>突出显示的颜色是深色,默认为蓝色。 <li>前景色在所选区域中为高对比度,默认为白色。未选择的前景是黑色的。
+ *  <li>光标以约1/2秒的间隔闪烁。 <li>在获得焦点时选择整个值。
+ *  <li> Shift-left-arrow和shift-right-arrow扩展选择<li> Ctrl-left-arrow和ctrl-right-arrow分别表示为home和end。
+ * </ul>
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class WindowsTextFieldUI extends BasicTextFieldUI
@@ -68,6 +81,10 @@ public class WindowsTextFieldUI extends BasicTextFieldUI
     /**
      * Creates a UI for a JTextField.
      *
+     * <p>
+     *  为JTextField创建一个UI。
+     * 
+     * 
      * @param c the text field
      * @return the UI
      */
@@ -81,6 +98,10 @@ public class WindowsTextFieldUI extends BasicTextFieldUI
      * true.  The default is to paint the background color
      * of the component.
      *
+     * <p>
+     *  为视图绘制背景。只有当相关组件上的isOpaque()为true时,才会调用此方法。默认是绘制组件的背景颜色。
+     * 
+     * 
      * @param g the graphics context
      */
     protected void paintBackground(Graphics g) {
@@ -90,6 +111,10 @@ public class WindowsTextFieldUI extends BasicTextFieldUI
     /**
      * Creates the caret for a field.
      *
+     * <p>
+     *  为字段创建插入符号。
+     * 
+     * 
      * @return the caret
      */
     protected Caret createCaret() {
@@ -99,6 +124,9 @@ public class WindowsTextFieldUI extends BasicTextFieldUI
     /**
      * WindowsFieldCaret has different scrolling behavior than
      * DefaultCaret.
+     * <p>
+     *  WindowsFieldCaret具有与DefaultCaret不同的滚动行为。
+     * 
      */
     static class WindowsFieldCaret extends DefaultCaret implements UIResource {
 
@@ -111,6 +139,9 @@ public class WindowsTextFieldUI extends BasicTextFieldUI
          * the windows feel which seems to be to move the
          * caret out into the field by about a quarter of
          * a field length if not visible.
+         * <p>
+         * 根据窗口感觉调整插入符的可见性,这似乎是将插入符号移出字段大约四分之一字段长度(如果不可见)。
+         * 
          */
         protected void adjustVisibility(Rectangle r) {
             SwingUtilities.invokeLater(new SafeScroller(r));
@@ -119,6 +150,9 @@ public class WindowsTextFieldUI extends BasicTextFieldUI
         /**
          * Gets the painter for the Highlighter.
          *
+         * <p>
+         *  获取荧光笔的画家。
+         * 
          * @return the painter
          */
         protected Highlighter.HighlightPainter getSelectionPainter() {

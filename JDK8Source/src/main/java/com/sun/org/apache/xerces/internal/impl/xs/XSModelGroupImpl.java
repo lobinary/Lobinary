@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002,2003-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -32,6 +42,12 @@ import com.sun.org.apache.xerces.internal.xs.XSObjectList;
  *
  * @xerces.internal
  *
+ * <p>
+ *  存储模式模型组声明。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  *
  * @version $Id: XSModelGroupImpl.java,v 1.7 2010-11-01 04:39:55 joehw Exp $
@@ -71,6 +87,9 @@ public class XSModelGroupImpl implements XSModelGroup {
      * The following methods are used to return min/max range for a particle.
      * They are not exactly the same as it's described in the spec, but all the
      * values from the spec are retrievable by these methods.
+     * <p>
+     *  3.8.6有效总范围(全部和序列)和有效总范围(选择)以下方法用于返回粒子的最小/最大范围。它们与规范中描述的不完全相同,但规范中的所有值都可以通过这些方法检索。
+     * 
      */
     public int minEffectiveTotalRange() {
         if (fCompositor == MODELGROUP_CHOICE)
@@ -144,6 +163,9 @@ public class XSModelGroupImpl implements XSModelGroup {
 
     /**
      * get the string description of this particle
+     * <p>
+     *  获取此粒子的字符串描述
+     * 
      */
     private String fDescription = null;
     public String toString() {
@@ -180,6 +202,9 @@ public class XSModelGroupImpl implements XSModelGroup {
 
     /**
      * Get the type of the object, i.e ELEMENT_DECLARATION.
+     * <p>
+     *  获取对象的类型,即ELEMENT_DECLARATION。
+     * 
      */
     public short getType() {
         return XSConstants.MODEL_GROUP;
@@ -188,6 +213,9 @@ public class XSModelGroupImpl implements XSModelGroup {
     /**
      * The <code>name</code> of this <code>XSObject</code> depending on the
      * <code>XSObject</code> type.
+     * <p>
+     *  取决于<code> XSObject </code>类型的<code> XSObject </code>的<code> name </code>
+     * 
      */
     public String getName() {
         return null;
@@ -197,6 +225,9 @@ public class XSModelGroupImpl implements XSModelGroup {
      * The namespace URI of this node, or <code>null</code> if it is
      * unspecified.  defines how a namespace URI is attached to schema
      * components.
+     * <p>
+     *  此节点的名称空间URI,或<code> null </code>(如果未指定)。定义命名空间URI如何附加到模式组件。
+     * 
      */
     public String getNamespace() {
         return null;
@@ -205,6 +236,9 @@ public class XSModelGroupImpl implements XSModelGroup {
     /**
      * {compositor} One of all, choice or sequence. The valid constants values
      * are: ALL, CHOICE, SEQUENCE.
+     * <p>
+     *  {compositor}一个,选择或序列。有效的常数值为：ALL,CHOICE,SEQUENCE。
+     * 
      */
     public short getCompositor() {
         if (fCompositor == MODELGROUP_CHOICE)
@@ -217,6 +251,9 @@ public class XSModelGroupImpl implements XSModelGroup {
 
     /**
      * {particles} A list of particles
+     * <p>
+     * {particles}粒子列表
+     * 
      */
     public XSObjectList getParticles() {
         return new XSObjectListImpl(fParticles, fParticleCount);
@@ -224,6 +261,9 @@ public class XSModelGroupImpl implements XSModelGroup {
 
     /**
      * Optional. Annotation.
+     * <p>
+     *  可选的。注解。
+     * 
      */
     public XSAnnotation getAnnotation() {
         return (fAnnotations != null) ? (XSAnnotation) fAnnotations.item(0) : null;
@@ -231,12 +271,17 @@ public class XSModelGroupImpl implements XSModelGroup {
 
     /**
      * Optional. Annotations.
+     * <p>
+     *  可选的。注释。
+     * 
      */
     public XSObjectList getAnnotations() {
         return (fAnnotations != null) ? fAnnotations : XSObjectListImpl.EMPTY_LIST;
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.apache.xerces.xs.XSObject#getNamespaceItem()
      */
     public XSNamespaceItem getNamespaceItem() {

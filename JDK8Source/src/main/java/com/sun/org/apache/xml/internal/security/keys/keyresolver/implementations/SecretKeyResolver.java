@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -20,6 +21,9 @@ import org.w3c.dom.Element;
 /**
  * Resolves a SecretKey within a KeyStore based on the KeyName.
  * The KeyName is the key entry alias within the KeyStore.
+ * <p>
+ *  基于KeyName解析KeyStore中的SecretKey。 KeyName是KeyStore中的密钥条目别名。
+ * 
  */
 public class SecretKeyResolver extends KeyResolverSpi
 {
@@ -32,6 +36,9 @@ public class SecretKeyResolver extends KeyResolverSpi
 
     /**
      * Constructor.
+     * <p>
+     *  构造函数。
+     * 
      */
     public SecretKeyResolver(KeyStore keyStore, char[] password) {
         this.keyStore = keyStore;
@@ -41,6 +48,10 @@ public class SecretKeyResolver extends KeyResolverSpi
     /**
      * This method returns whether the KeyResolverSpi is able to perform the requested action.
      *
+     * <p>
+     *  此方法返回KeyResolverSpi是否能够执行请求的操作。
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -53,6 +64,10 @@ public class SecretKeyResolver extends KeyResolverSpi
     /**
      * Method engineLookupAndResolvePublicKey
      *
+     * <p>
+     *  方法engineLookupAndResolvePublicKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -68,6 +83,10 @@ public class SecretKeyResolver extends KeyResolverSpi
     /**
      * Method engineResolveX509Certificate
      * @inheritDoc
+     * <p>
+     *  方法engineResolveX509Certificate @inheritDoc
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -82,6 +101,10 @@ public class SecretKeyResolver extends KeyResolverSpi
     /**
      * Method engineResolveSecretKey
      *
+     * <p>
+     *  方法engineResolveSecretKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -115,6 +138,9 @@ public class SecretKeyResolver extends KeyResolverSpi
     /**
      * Method engineResolvePrivateKey
      * @inheritDoc
+     * <p>
+     *  方法engineResolvePrivateKey @inheritDoc
+     * 
      * @param element
      * @param baseURI
      * @param storage

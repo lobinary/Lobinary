@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import sun.security.x509.InvalidityDateExtension;
  * about the revoked certificate, such as the date on which the
  * certificate was revoked and the reason it was revoked.
  *
+ * <p>
+ *  指示X.509证书的异常被撤销。 {@code CertificateRevokedException}包含关于撤销的证书的其他信息,例如证书被撤销的日期以及撤销的原因。
+ * 
+ * 
  * @author Sean Mullan
  * @since 1.7
  * @see CertPathValidatorException
@@ -52,14 +57,20 @@ public class CertificateRevokedException extends CertificateException {
     private static final long serialVersionUID = 7839996631571608627L;
 
     /**
+    /* <p>
+    /* 
      * @serial the date on which the certificate was revoked
      */
     private Date revocationDate;
     /**
+    /* <p>
+    /* 
      * @serial the revocation reason
      */
     private final CRLReason reason;
     /**
+    /* <p>
+    /* 
      * @serial the {@code X500Principal} that represents the name of the
      * authority that signed the certificate's revocation status information
      */
@@ -72,6 +83,10 @@ public class CertificateRevokedException extends CertificateException {
      * the specified revocation date, reason code, authority name, and map
      * of extensions.
      *
+     * <p>
+     *  使用指定的撤销日期,原因代码,权限名称和扩展名地图构造{@code CertificateRevokedException}。
+     * 
+     * 
      * @param revocationDate the date on which the certificate was revoked. The
      *    date is copied to protect against subsequent modification.
      * @param reason the revocation reason
@@ -105,6 +120,10 @@ public class CertificateRevokedException extends CertificateException {
      * returned each time the method is invoked to protect against subsequent
      * modification.
      *
+     * <p>
+     *  返回证书被撤销的日期。每次调用该方法时都会返回一个新的副本,以防止后续修改。
+     * 
+     * 
      * @return the revocation date
      */
     public Date getRevocationDate() {
@@ -114,6 +133,10 @@ public class CertificateRevokedException extends CertificateException {
     /**
      * Returns the reason the certificate was revoked.
      *
+     * <p>
+     *  返回证书被撤销的原因。
+     * 
+     * 
      * @return the revocation reason
      */
     public CRLReason getRevocationReason() {
@@ -124,6 +147,10 @@ public class CertificateRevokedException extends CertificateException {
      * Returns the name of the authority that signed the certificate's
      * revocation status information.
      *
+     * <p>
+     *  返回签署证书吊销状态信息的授权机构的名称。
+     * 
+     * 
      * @return the {@code X500Principal} that represents the name of the
      *     authority that signed the certificate's revocation status information
      */
@@ -142,6 +169,12 @@ public class CertificateRevokedException extends CertificateException {
      * extension; otherwise null. A new Date object is returned each time the
      * method is invoked to protect against subsequent modification.
      *
+     * <p>
+     *  返回此{@code CertificateRevokedException}的无效日期扩展中指定的无效日期。无效日期是已知或怀疑私钥被盗用或证书另外失效的日期。
+     * 此实现调用{@code getExtensions()},并检查返回的映射的无效日期扩展OID("2.5.29.24")的条目。如果找到,它返回扩展中的无效日期;否则为null。
+     * 每次调用此方法时都会返回一个新的Date对象,以防止后续修改。
+     * 
+     * 
      * @return the invalidity date, or {@code null} if not specified
      */
     public Date getInvalidityDate() {
@@ -164,6 +197,10 @@ public class CertificateRevokedException extends CertificateException {
      * Extension. Each key is an OID String that maps to the corresponding
      * Extension.
      *
+     * <p>
+     * 返回X.509扩展的地图,其中包含有关已撤销证书的其他信息,例如无效日期扩展。每个键是映射到相应扩展的OID字符串。
+     * 
+     * 
      * @return an unmodifiable map of X.509 extensions, or an empty map
      *    if there are no extensions
      */
@@ -182,6 +219,10 @@ public class CertificateRevokedException extends CertificateException {
     /**
      * Serialize this {@code CertificateRevokedException} instance.
      *
+     * <p>
+     *  序列化此{@code CertificateRevokedException}实例。
+     * 
+     * 
      * @serialData the size of the extensions map (int), followed by all of
      * the extensions in the map, in no particular order. For each extension,
      * the following data is emitted: the OID String (Object), the criticality
@@ -213,6 +254,8 @@ public class CertificateRevokedException extends CertificateException {
 
     /**
      * Deserialize the {@code CertificateRevokedException} instance.
+     * <p>
+     *  反序列化{@code CertificateRevokedException}实例。
      */
     private void readObject(ObjectInputStream ois)
         throws IOException, ClassNotFoundException {

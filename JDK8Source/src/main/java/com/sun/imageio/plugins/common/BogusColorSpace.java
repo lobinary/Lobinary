@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,11 +31,18 @@ import java.awt.color.ColorSpace;
 /**
  * A dummy <code>ColorSpace</code> to enable <code>ColorModel</code>
  * for image data which do not have an innate color representation.
+ * <p>
+ *  对于没有固有颜色表示的图像数据,启用<code> ColorModel </code>的虚拟<code> ColorSpace </code>。
+ * 
  */
 public class BogusColorSpace extends ColorSpace {
     /**
      * Return the type given the number of components.
      *
+     * <p>
+     *  返回给定组件数量的类型。
+     * 
+     * 
      * @param numComponents The number of components in the
      * <code>ColorSpace</code>.
      * @exception IllegalArgumentException if <code>numComponents</code>
@@ -63,6 +71,9 @@ public class BogusColorSpace extends ColorSpace {
     /**
      * Constructs a bogus <code>ColorSpace</code>.
      *
+     * <p>
+     *  构造一个伪代码<code> ColorSpace </code>。
+     * 
      * @param numComponents The number of components in the
      * <code>ColorSpace</code>.
      * @exception IllegalArgumentException if <code>numComponents</code>

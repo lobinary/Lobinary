@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,11 @@ import java.util.List;
  *   (List<String> ls)->ls.size()
  *   (x,y)-> { return x + y; }
  * }</pre>
+ * <p>
+ *  lambda表达式的树节点。
+ * 
+ *  例如：<pre> {@ code() - > {}(List <String> ls) - > ls.size()(x,y) - > {return x + y; }} </pre>
+ * 
  */
 @jdk.Exported
 public interface LambdaExpressionTree extends ExpressionTree {
@@ -43,6 +49,7 @@ public interface LambdaExpressionTree extends ExpressionTree {
     /**
      * Lambda expressions come in two forms: (i) expression lambdas, whose body
      * is an expression, and (ii) statement lambdas, whose body is a block
+     * <p>
      */
     @jdk.Exported
     public enum BodyKind {

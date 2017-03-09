@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 
@@ -128,6 +132,17 @@ public class CorbaServerRequestDispatcherImpl
      * the appropriate ObjectAdapter is available, not that the servant
      * actually exists.
      * Need to signal one of OBJECT_HERE, OBJECT_FORWARD, OBJECT_NOT_EXIST.
+     * <p>
+     *  我们不想在POA / ServantManager案例中寻找一个servant,但在大多数其他情况下我们可以。
+     *  OA可以有一个方法,如果servant可能存在则返回true,如果servant肯定不存在,则返回false。
+     * 
+     *  XXX / REVISIT：我们可能希望通过一些机制来指示OBJECT_HERE,而不是返回null结果。
+     * 
+     *  当LocateRequest到达时从ORB.locate调用。结果并不总是绝对正确的：可以对不存在的对象指示OBJECT_HERE,它在调用时被解析。
+     * 这个"bug"是不可避免的,因为一般来说,对象可能在locate和请求之间被销毁。请注意,这只检查相应的ObjectAdapter是否可用,而不是服务实际存在。
+     * 需要发送OBJECT_HERE,OBJECT_FORWARD,OBJECT_NOT_EXIST之一。
+     * 
+     * 
      * @return Result is null if object is (possibly) implemented here, otherwise
      * an IOR indicating objref to forward the request to.
      * @exception OBJECT_NOT_EXIST is thrown if we know the object does not
@@ -455,6 +470,10 @@ public class CorbaServerRequestDispatcherImpl
     * return without performing any action, so that _non_existent can return
     * false.  Always throws OBJECT_NOT_EXIST for any other special method.
     * Update for issue 4385.
+    * <p>
+    *  如果操作是_non_existent或_not_existent,这将只返回而不执行任何操作,以便_non_existent可以返回false。
+    * 始终对任何其他特殊方法抛出OBJECT_NOT_EXIST。更新问题4385。
+    * 
     */
     protected void handleNullServant(String operation, NullServant nserv )
     {
@@ -727,6 +746,9 @@ public class CorbaServerRequestDispatcherImpl
     /** Must always be called, just after the servant's method returns.
      *  Creates the ReplyMessage header and puts in the transaction context
      *  if necessary.
+     * <p>
+     *  如果需要,创建ReplyMessage标头并放入事务上下文中。
+     * 
      */
     protected CorbaMessageMediator sendingReply(CorbaMessageMediator req, Any excany)
     {
@@ -783,6 +805,8 @@ public class CorbaServerRequestDispatcherImpl
      * Handles setting the connection's code sets if required.
      * Returns true if the CodeSetContext was in the request, false
      * otherwise.
+     * <p>
+     *  如果需要,处理设置连接的代码集。如果CodeSetContext在请求中,则返回true,否则返回false。
      */
     protected boolean processCodeSetContext(
         CorbaMessageMediator request, ServiceContexts contexts)

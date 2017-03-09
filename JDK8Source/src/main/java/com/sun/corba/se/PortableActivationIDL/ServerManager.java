@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -12,6 +13,8 @@ package com.sun.corba.se.PortableActivationIDL;
 /** Interface used to combine the Activator and Locator when both are
     * implemented together in the same process, as is currently the case
     * for our implementation.
+    * <p>
+    * 
     */
 public interface ServerManager extends ServerManagerOperations, com.sun.corba.se.PortableActivationIDL.Activator, com.sun.corba.se.PortableActivationIDL.Locator
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,16 @@ import javax.xml.datatype.DatatypeConfigurationException;
  * <p>
  * This class is responsible for whitespace normalization.
  *
+ * <p>
+ *  这个类是JAXB RI的默认实现的{@link DatatypeConverterInterface}。
+ * 
+ * <p>
+ *  当客户端应用程序指定使用{@link DatatypeConverter}中的静态打印/解析方法时,它将委派给此类。
+ * 
+ * <p>
+ *  这个类负责空格规范化。
+ * 
+ * 
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @since JAXB2.1
  */
@@ -55,6 +66,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     /**
      * To avoid re-creating instances, we cache one instance.
+     * <p>
+     *  为了避免重新创建实例,我们缓存一个实例。
+     * 
      */
     public static final DatatypeConverterInterface theInstance = new DatatypeConverterImpl();
 
@@ -93,6 +107,14 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      *  <li>XML Schema allows '+', but {@link Integer#valueOf(String)} is not.
      *  <li>XML Schema allows leading and trailing (but not in-between) whitespaces.
      *      {@link Integer#valueOf(String)} doesn't allow any.
+     * </ol>
+     * <p>
+     *  更快,但不太稳健的String-> int转换。
+     * 
+     *  注意：
+     * <ol>
+     *  <li> XML模式允许'+',但{@link Integer#valueOf(String)}不是。 <li> XML模式允许前导和尾随(但不是中间)空格。
+     *  {@link Integer#valueOf(String)}不允许任何。
      * </ol>
      */
     public static int _parseInt(CharSequence s) {
@@ -188,6 +210,12 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
          * jfloat allows ".523". And there is no clear statement that mentions
         this case in xfloat. Although probably this is allowed.
          *
+         * <p>
+         *  jfloat.valueOf忽略前导和尾部空格,而这在xfloat中不允许。
+         *  jfloat.valueOf允许在浮点文字(例如,1.52e-2f)之后附加"浮点类型后缀"(f,F),其中这不是xfloat的情况。
+         * 
+         *  灰色区域--------- jfloat允许".523"。没有明确的声明,在xfloat中提到这种情况。虽然可能这是允许的。
+         * 
          */
 
         if (s.equals("NaN")) {
@@ -361,6 +389,8 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     /**
+    /* <p>
+    /* 
      * @return null if fails to convert.
      */
     public static QName _parseQName(CharSequence text, NamespaceContext nsc) {
@@ -598,6 +628,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      * Just return the string passed as a parameter but
      * installs an instance of this class as the DatatypeConverter
      * implementation. Used from static fixed value initializers.
+     * <p>
+     *  只需返回作为参数传递的字符串,但将此类的实例安装为DatatypeConverter实现。用于静态固定值初始值。
+     * 
      */
     public static String installHook(String s) {
         DatatypeConverter.setDatatypeConverter(theInstance);
@@ -649,6 +682,18 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      * If the base64 text is tightly packed with no indentation nor illegal char
      * (like what most web services produce), then the speculation of this method
      * will be correct, so we get the performance benefit.
+     * <p>
+     *  推测性地计算二进制数据的长度。
+     * 
+     * <p>
+     * 我们的要求是创建用于存储二进制数据的精确长度的byte []。如果我们以直接的方式这样做,它需要两次通过数据。实验表明,这是一个非平凡的开销(35％左右花费在计算长度的第一次通过。)
+     * 
+     * <p>
+     *  因此,这里的方法是我们计算长度推测,而不看整个内容。所获得的推测值从不小于二进制数据的实际长度,但它可以更大。因此,如果猜测出错,我们将支付重新分配和缓冲区复制的成本。
+     * 
+     * <p>
+     *  如果base64文本紧密压缩没有缩进或非法char(像大多数web服务产生),那么这种方法的猜测将是正确的,所以我们获得性能的好处。
+     * 
      */
     private static int guessLength(String text) {
         final int len = text.length();
@@ -680,6 +725,8 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     /**
+    /* <p>
+    /* 
      * @param text
      *      base64Binary data is likely to be long, and decoding requires
      *      each character to be accessed twice (once for counting length, another
@@ -775,6 +822,8 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      *
      * The caller must supply a big enough buffer.
      *
+     * <p>
+     * 
      * @return
      *      the value of {@code ptr+((len+2)/3)*4}, which is the new offset
      *      in the output buffer where the further bytes should be placed.
@@ -817,6 +866,12 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      *
      * The caller must supply a big enough buffer.
      *
+     * <p>
+     *  通过执行base64编码将字节数组编码为char数组。
+     * 
+     *  调用者必须提供足够大的缓冲区。
+     * 
+     * 
      * @return
      *      the value of {@code ptr+((len+2)/3)*4}, which is the new offset
      *      in the output buffer where the further bytes should be placed.

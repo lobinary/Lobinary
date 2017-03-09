@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -40,6 +50,17 @@ import org.w3c.dom.Text;
  *
  * @xerces.internal
  *
+ * <p>
+ *  文本节点保存元素或属性的非标记,非实体内容。
+ * <P>
+ *  当文档首次可用于DOM时,每个相邻纯文本块只有一个Text对象。
+ * 用户(即应用程序)可以在编辑期间创建多个相邻的文本 - 请参阅{@link org.w3c.dom.Element#normalize}以供讨论。
+ * <P>
+ *  注意CDATASection是Text的子类。这在概念上是有效的,因为当它们作为XML流的一部分被写出时,它们只是两种不同的引用字符的方式。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @since  PR-DOM-Level-1-19980818.
  */
 public class TextImpl
@@ -73,6 +94,10 @@ public class TextImpl
     /**
      * NON-DOM: resets node and sets specified values for the current node
      *
+     * <p>
+     *  NON-DOM：重置节点并为当前节点设置指定的值
+     * 
+     * 
      * @param ownerDoc
      * @param data
      */
@@ -91,6 +116,9 @@ public class TextImpl
     /**
      * A short integer indicating what type of node this is. The named
      * constants for this value are defined in the org.w3c.dom.Node interface.
+     * <p>
+     *  指示这是什么类型的节点的短整数。此值的命名常量在org.w3c.dom.Node接口中定义。
+     * 
      */
     public short getNodeType() {
         return Node.TEXT_NODE;
@@ -103,6 +131,9 @@ public class TextImpl
 
     /**
      * NON-DOM: Set whether this Text is ignorable whitespace.
+     * <p>
+     * NON-DOM：设置此文本是否为可忽略的空格。
+     * 
      */
     public void setIgnorableWhitespace(boolean ignore) {
 
@@ -122,6 +153,13 @@ public class TextImpl
      * The text node is determined to contain whitespace in element content
      * during the load of the document or if validation occurs while using
      * <code>Document.normalizeDocument()</code>.
+     * <p>
+     *  DOM L3核心CR  - 实验
+     * 
+     *  返回此文本节点是否包含元素内容空格</a>,通常称为"可忽略的空格"。
+     * 在文档加载期间或者如果使用<code> Document.normalizeDocument()</code>时进行验证时,文本节点被确定为在元素内容中包含空格。
+     * 
+     * 
      * @since DOM Level 3
      */
     public boolean isElementContentWhitespace() {
@@ -137,6 +175,10 @@ public class TextImpl
      * DOM Level 3 WD - Experimental.
      * Returns all text of <code>Text</code> nodes logically-adjacent text
      * nodes to this node, concatenated in document order.
+     * <p>
+     *  DOM 3级WD  - 实验。将按文档顺序连接的<code> Text </code>节点逻辑相邻文本节点的所有文本返回到此节点。
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getWholeText(){
@@ -173,6 +215,10 @@ public class TextImpl
      * internal method taking a StringBuffer in parameter and inserts the
      * text content at the start of the buffer
      *
+     * <p>
+     *  内部方法在参数中使用StringBuffer in,并将文本内容插入到缓冲区的开头
+     * 
+     * 
      * @param buf
      */
     protected void insertTextContent(StringBuffer buf) throws DOMException {
@@ -185,6 +231,10 @@ public class TextImpl
     /**
      * Concatenates the text of all logically-adjacent text nodes to the
      * right of this node
+     * <p>
+     *  将所有逻辑相邻文本节点的文本连接到此节点的右侧
+     * 
+     * 
      * @param node
      * @param buffer
      * @param parent
@@ -232,6 +282,10 @@ public class TextImpl
     /**
      * Concatenates the text of all logically-adjacent text nodes to the left of
      * the node
+     * <p>
+     *  将所有逻辑相邻文本节点的文本连接到节点的左侧
+     * 
+     * 
      * @param node
      * @param buffer
      * @param parent
@@ -282,6 +336,10 @@ public class TextImpl
      * removed including the current node unless it was the recipient of the
      * replacement text.
      *
+     * <p>
+     *  用指定的文本替换当前节点的文本和所有逻辑相邻的文本节点。除去包括当前节点的所有逻辑相邻文本节点,除非它是替换文本的接收者。
+     * 
+     * 
      * @param content
      *            The content of the replacing Text node.
      * @return text - The Text node created with the specified content.
@@ -391,6 +449,16 @@ public class TextImpl
      * contain only Text or CDATASection nodes, return false. Check this
      * recursively for EntityReference nodes.
      *
+     * <p>
+     * 如果要删除的任何EntityReference具有不是EntityReference,Text或CDATASection节点的后代,则replaceWholeText方法必须在对文档执行任何修改之前失败
+     * ,从而产生具有代码NO_MODIFICATION_ALLOWED_ERR的DOMException。
+     * 遍历要替换的节点的先前兄弟。如果先前的兄弟节点是EntityReference节点,则获取它的最后一个子节点。
+     * 如果最后一个子节点是Text或CDATASection节点,并且其先前的兄弟节点既不是可替换的EntityReference,也不是Text或CDATASection节点,则返回false。
+     * 如果最后一个子节点既不是Text也不是CDATASection,也不是可替换的EntityReference节点,则返回true。
+     * 如果最后一个子节点是Text或CDATASection节点,则其前一个兄弟节点不是或者是不仅包含Text或CDATASection节点的EntityReference,返回false。
+     * 以递归方式检查EntityReference节点。
+     * 
+     * 
      * @param node
      * @return true - can replace text false - can't replace exception must be
      *         raised
@@ -476,6 +544,16 @@ public class TextImpl
      * contain only Text or CDATASection nodes, return false. Check this
      * recursively for EntityReference nodes.
      *
+     * <p>
+     * 如果要删除的任何EntityReference具有不是EntityReference,Text或CDATASection节点的后代,则replaceWholeText方法必须在对文档执行任何修改之前失败
+     * ,从而产生具有代码NO_MODIFICATION_ALLOWED_ERR的DOMException。
+     * 遍历要替换的节点的先前兄弟。如果先前的兄弟节点是EntityReference节点,则获取它的最后一个子节点。
+     * 如果第一个子节点是Text或CDATASection节点,并且其下一个兄弟节点既不是可替换的EntityReference节点,也不是Text或CDATASection节点,则返回false。
+     * 如果第一个孩子既不是Text也不是CDATASection也不是可替换的EntityReference节点,那么返回true。
+     * 如果第一个子节点是Text或CDATASection节点,则其下一个兄弟节点不是或者是不仅包含Text或CDATASection节点的EntityReference,返回false。
+     * 以递归方式检查EntityReference节点。
+     * 
+     * 
      * @param node
      * @return true - can replace text false - can't replace exception must be
      *         raised
@@ -547,6 +625,10 @@ public class TextImpl
     /**
      * Check if an EntityReference node has Text Only child nodes
      *
+     * <p>
+     *  检查EntityReference节点是否具有仅文本节点
+     * 
+     * 
      * @param node
      * @return true - Contains text only children
      */
@@ -578,6 +660,9 @@ public class TextImpl
 
     /**
      * NON-DOM: Returns whether this Text is ignorable whitespace.
+     * <p>
+     *  NON-DOM：返回此Text是否为可忽略的空格。
+     * 
      */
     public boolean isIgnorableWhitespace() {
 
@@ -598,6 +683,10 @@ public class TextImpl
      * has no parent, they won't wind up as "siblings" -- they'll both be
      * orphans.)
      *
+     * <p>
+     *  将文本节点分成两个兄弟节点。 (注意,如果当前节点没有父节点,它们将不会成为"兄弟节点" - 它们都将是孤立的。)
+     * 
+     * 
      * @param offset
      *            The offset at which to split. If offset is at the end of the
      *            available data, the second node will be empty.
@@ -646,6 +735,9 @@ public class TextImpl
 
     /**
      * NON-DOM (used by DOMParser): Reset data for the node.
+     * <p>
+     *  NON-DOM(由DOMParser使用)：重置节点的数据。
+     * 
      */
     public void replaceData (String value){
         data = value;
@@ -655,6 +747,8 @@ public class TextImpl
     /**
      * NON-DOM (used by DOMParser: Sets data to empty string.
      *  Returns the value the data was set to.
+     * <p>
+     *  NON-DOM(由DOMParser使用：将数据设置为空字符串。返回数据设置为的值。
      */
     public String removeData (){
         String olddata=data;

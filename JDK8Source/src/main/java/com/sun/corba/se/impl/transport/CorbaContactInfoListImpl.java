@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,8 @@ import com.sun.corba.se.impl.orbutil.ORBConstants;
 import com.sun.corba.se.impl.protocol.NotLocalLocalCRDImpl;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class CorbaContactInfoListImpl
@@ -216,6 +219,9 @@ public class CorbaContactInfoListImpl
      * Note: this must be maintained accurately whether or not the ORB
      * allows local optimization, because ServantManagers in the POA
      * ALWAYS use local optimization ONLY (they do not have a remote case).
+     * <p>
+     *  setLocalSubcontract设置每当effectiveTargetIOR更改时设置的缓存信息。
+     * 
      */
     protected void setLocalSubcontract()
     {

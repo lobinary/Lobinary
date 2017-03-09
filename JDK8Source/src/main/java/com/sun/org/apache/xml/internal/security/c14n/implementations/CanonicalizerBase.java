@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.c14n.implementations;
 
@@ -56,6 +65,10 @@ import org.xml.sax.SAXException;
 /**
  * Abstract base class for canonicalization algorithms.
  *
+ * <p>
+ *  规范化算法的抽象基类。
+ * 
+ * 
  * @author Christian Geuer-Pollmann <geuerp@apache.org>
  */
 public abstract class CanonicalizerBase extends CanonicalizerSpi {
@@ -92,18 +105,28 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * The node to be skipped/excluded from the DOM tree
      * in subtree canonicalizations.
+     * <p>
+     *  要在子树规范化中从DOM树中跳过/排除的节点。
+     * 
      */
     private Node excludeNode;
     private OutputStream writer = new ByteArrayOutputStream();
 
     /**
      * The null xmlns definition.
+     * <p>
+     *  null xmlns定义。
+     * 
      */
     private Attr nullNode;
 
     /**
      * Constructor CanonicalizerBase
      *
+     * <p>
+     *  构造函数CanonicalizerBase
+     * 
+     * 
      * @param includeComments
      */
     public CanonicalizerBase(boolean includeComments) {
@@ -113,6 +136,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Method engineCanonicalizeSubTree
      * @inheritDoc
+     * <p>
+     *  方法engineCanonicalizeSubTree @inheritDoc
+     * 
+     * 
      * @param rootNode
      * @throws CanonicalizationException
      */
@@ -124,6 +151,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Method engineCanonicalizeXPathNodeSet
      * @inheritDoc
+     * <p>
+     *  方法engineCanonicalizeXPathNodeSet @inheritDoc
+     * 
+     * 
      * @param xpathNodeSet
      * @throws CanonicalizationException
      */
@@ -135,6 +166,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
 
     /**
      * Canonicalizes a Subtree node.
+     * <p>
+     *  规范化子树节点。
+     * 
+     * 
      * @param input the root of the subtree to canicalize
      * @return The canonicalize stream.
      * @throws CanonicalizationException
@@ -173,6 +208,8 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     }
 
     /**
+    /* <p>
+    /* 
      * @param writer The writer to set.
      */
     public void setWriter(OutputStream writer) {
@@ -182,6 +219,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Canonicalizes a Subtree node.
      *
+     * <p>
+     *  规范化子树节点。
+     * 
+     * 
      * @param rootNode
      *            the root of the subtree to canonicalize
      * @param excludeNode
@@ -234,6 +275,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Method canonicalizeSubTree, this function is a recursive one.
      *
+     * <p>
+     *  方法canonicalizeSubTree,这个函数是一个递归的。
+     * 
+     * 
      * @param currentNode
      * @param ns
      * @param endnode
@@ -383,6 +428,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
      * Canonicalizes all the nodes included in the currentNode and contained in the
      * xpathNodeSet field.
      *
+     * <p>
+     *  规范化包含在currentNode中并包含在xpathNodeSet字段中的所有节点。
+     * 
+     * 
      * @param currentNode
      * @param endnode
      * @throws CanonicalizationException
@@ -612,6 +661,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
 
     /**
      * Adds to ns the definitions from the parent elements of el
+     * <p>
+     *  将来自el的父元素的定义添加到ns
+     * 
+     * 
      * @param el
      * @param ns
      */
@@ -645,6 +698,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Obtain the attributes to output for this node in XPathNodeSet c14n.
      *
+     * <p>
+     * 获取要在XPathNodeSet c14n中为此节点输出的属性。
+     * 
+     * 
      * @param element
      * @param ns
      * @return the attributes nodes to output.
@@ -656,6 +713,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Obtain the attributes to output for this node in a Subtree c14n.
      *
+     * <p>
+     *  获取要在子树c14n中为此节点输出的属性。
+     * 
+     * 
      * @param element
      * @param ns
      * @return the attributes nodes to output.
@@ -681,6 +742,17 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
      * by the character reference <CODE>&amp;#xD;</CODE>)</LI>
      * </UL>
      *
+     * <p>
+     *  将属性输出到内部写入器。
+     * 
+     *  通过替换来修改节点的字符串值
+     * <UL>
+     *  <CODE>&amp; lt; </CODE> </LI>所有开头括号(<)的所有&符号(& <LI>所有带有<CODE>&amp; quot; </CODE> </LI> <LI>的引号标记字符以及
+     * 空格字符<CODE>#x9 </CODE>,#xA和#xD, 。
+     * 字符引用以大写十六进制写入,没有前导零(例如,<CODE> #xD </CODE>由字符引用<CODE>&amp; #xD; </CODE>表示)</。
+     * </UL>
+     * 
+     * 
      * @param name
      * @param value
      * @param writer
@@ -742,6 +814,8 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Outputs a PI to the internal Writer.
      *
+     * <p>
+     * 
      * @param currentPI
      * @param writer where to write the things
      * @throws IOException
@@ -796,6 +870,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Method outputCommentToWriter
      *
+     * <p>
+     *  将PI输出到内部写入器。
+     * 
+     * 
      * @param currentComment
      * @param writer writer where to write the things
      * @throws IOException
@@ -833,6 +911,10 @@ public abstract class CanonicalizerBase extends CanonicalizerSpi {
     /**
      * Outputs a Text of CDATA section to the internal Writer.
      *
+     * <p>
+     *  方法outputCommentToWriter
+     * 
+     * 
      * @param text
      * @param writer writer where to write the things
      * @throws IOException

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ListingErrorHandler.java,v 1.2.4.1 2005/09/15 08:15:46 suresh_emailid Exp $
+ * <p>
+ *  $ Id：ListingErrorHandler.java,v 1.2.4.1 2005/09/15 08:15:46 suresh_emailid Exp $
+ * 
  */
 
 package com.sun.org.apache.xml.internal.utils;
@@ -49,6 +62,12 @@ import org.xml.sax.SAXParseException;
  * provides some basic configuration API's as well to control
  * when we re-throw errors, etc.</p>
  *
+ * <p>
+ *  类似的SAX ErrorHandler和JAXP ErrorListener的示例实现。
+ * 
+ *  <p>此实现适用于各种用例,并提供一些基本配置API以及控制何时我们重新抛出错误等。</p>
+ * 
+ * 
  * @author shane_curcuru@us.ibm.com
  * @xsl.usage general
  */
@@ -59,6 +78,9 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
 
     /**
      * Constructor ListingErrorHandler; user-supplied PrintWriter.
+     * <p>
+     *  构造函数ListingErrorHandler;用户提供的PrintWriter。
+     * 
      */
     public ListingErrorHandler(PrintWriter pw)
     {
@@ -71,6 +93,9 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
 
     /**
      * Constructor ListingErrorHandler; uses System.err.
+     * <p>
+     *  构造函数ListingErrorHandler;使用System.err。
+     * 
      */
     public ListingErrorHandler()
     {
@@ -93,6 +118,16 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * <p>Filters may use this method to report other, non-XML warnings
      * as well.</p>
      *
+     * <p>
+     *  接收警告通知。
+     * 
+     *  <p> SAX解析器将使用此方法报告不是由XML 1.0建议定义的错误或致命错误的条件。默认行为是不采取任何操作。</p>
+     * 
+     * <p>在调用此方法后,SAX解析器必须继续提供正常的解析事件：应用程序仍然可以处理文档,直到结束。</p>
+     * 
+     *  <p>过滤器也可以使用此方法报告其他非XML警告。</p>
+     * 
+     * 
      * @param exception The warning information encapsulated in a
      *                  SAX parse exception.
      * @exception org.xml.sax.SAXException Any SAX exception, possibly
@@ -132,6 +167,16 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * <p>Filters may use this method to report other, non-XML errors
      * as well.</p>
      *
+     * <p>
+     *  接收可恢复错误的通知。
+     * 
+     *  <p>这对应于W3C XML 1.0建议书第1.2节中"错误"的定义。例如,验证解析器将使用此回调来报告有效性约束的违反。默认行为是不采取任何操作。</p>
+     * 
+     *  <p>在调用此方法后,SAX解析器必须继续提供正常的解析事件：应用程序仍然可能处理文档直到结束。如果应用程序不能这样做,那么解析器应该报告致命错误,即使XML 1.0建议不要求它这样做。</p>
+     * 
+     *  <p>过滤器也可以使用此方法来报告其他非XML错误。</p>
+     * 
+     * 
      * @param exception The error information encapsulated in a
      *                  SAX parse exception.
      * @exception org.xml.sax.SAXException Any SAX exception, possibly
@@ -164,6 +209,14 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * messages: in fact, SAX parsers are free to stop reporting any
      * other events once this method has been invoked.</p>
      *
+     * <p>
+     *  接收不可恢复错误的通知。
+     * 
+     *  <p>这对应于W3C XML 1.0建议书第1.2节中"致命错误"的定义。例如,解析器将使用此回调来报告良好形式约束的违规。</p>
+     * 
+     * <p>应用程序必须假定文档在解析器调用此方法后不可用,并且应该继续(如果有的话)仅为了收集添加错误消息：实际上,SAX解析器可以自由停止报告任何其他该方法被调用后的事件。</p>
+     * 
+     * 
      * @param exception The error information encapsulated in a
      *                  SAX parse exception.
      * @exception org.xml.sax.SAXException Any SAX exception, possibly
@@ -195,6 +248,14 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * the transformation. It should still be possible for the
      * application to process the document through to the end.</p>
      *
+     * <p>
+     *  接收警告通知。
+     * 
+     *  <p> {@ link javax.xml.transform.Transformer}可以使用此方法报告不是错误或致命错误的情况。默认行为是不采取任何操作。</p>
+     * 
+     *  <p>调用此方法后,Transformer必须继续进行转换。应用程序应该仍然可以处理文档,直到结束。</p>
+     * 
+     * 
      * @param exception The warning information encapsulated in a
      *                  transformer exception.
      *
@@ -222,6 +283,12 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * application to process the document through to the end if no other errors
      * are encountered.</p>
      *
+     * <p>
+     *  接收可恢复错误的通知。
+     * 
+     *  <p>变压器必须在调用此方法后继续尝试并提供正常变换。如果没有遇到其他错误,应用程序仍然可以处理文档直到结束。</p>
+     * 
+     * 
      * @param exception The error information encapsulated in a
      *                  transformer exception.
      *
@@ -250,6 +317,12 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * are encountered, but there is no guarantee that the output will be
      * useable.</p>
      *
+     * <p>
+     *  接收不可恢复错误的通知。
+     * 
+     *  <p>变压器必须在调用此方法后继续尝试并提供正常变换。如果没有遇到其他错误,但应用程序仍然可以处理文档,直到结束,但不能保证输出可用。</p>
+     * 
+     * 
      * @param exception The error information encapsulated in a
      *                  transformer exception.
      *
@@ -278,6 +351,12 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * Print out location information about the exception.
      *
      * Cribbed from DefaultErrorHandler.printLocation()
+     * <p>
+     *  打印有关异常的位置信息。
+     * 
+     *  从DefaultErrorHandler.printLocation()
+     * 
+     * 
      * @param pw PrintWriter to send output to
      * @param exception TransformerException or SAXParseException
      * to log information about
@@ -355,6 +434,10 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * Print out the specific source line that caused the exception,
      * if possible to load it.
      *
+     * <p>
+     * 打印出导致异常的特定源代码行,如果可能加载它。
+     * 
+     * 
      * @param pw PrintWriter to send output to
      * @param locator Xalan wrapper for either a JAXP or a SAX
      * source location object
@@ -405,6 +488,10 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * Return the specific source line that caused the exception,
      * if possible to load it; allow exceptions to be thrown.
      *
+     * <p>
+     *  返回导致异常的特定源代码行,如果可能加载它;允许抛出异常。
+     * 
+     * 
      * @author shane_curcuru@us.ibm.com
      */
     protected static String getSourceLine(String sourceUrl, int lineNum)
@@ -479,6 +566,12 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * an exception when we're called for various warning /
      * error / fatalErrors, or simply log them and continue.</p>
      *
+     * <p>
+     *  用户可设置的行为：何时重新抛出异常。
+     * 
+     *  <p>这允许每个实例配置ListingErrorHandlers。您可以要求我们在调用各种warning / error / fatalErrors时抛出异常,或者只是记录并继续。</p>
+     * 
+     * 
      * @param b if we should throw an exception on warnings
      */
     public void setThrowOnWarning(boolean b)
@@ -489,6 +582,10 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
     /**
      * User-settable behavior: when to re-throw exceptions.
      *
+     * <p>
+     *  用户可设置的行为：何时重新抛出异常。
+     * 
+     * 
      * @return if we throw an exception on warnings
      */
     public boolean getThrowOnWarning()
@@ -511,6 +608,14 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * <p>Note that the behavior of many parsers/transformers
      * after an error is not necessarily defined!</p>
      *
+     * <p>
+     *  用户可设置的行为：何时重新抛出异常。
+     * 
+     *  <p>这允许每个实例配置ListingErrorHandlers。您可以要求我们在调用各种warning / error / fatalErrors时抛出异常,或者只是记录并继续。</p>
+     * 
+     *  <p>请注意,错误后许多解析器/变压器的行为未必定义！</p>
+     * 
+     * 
      * @param b if we should throw an exception on errors
      */
     public void setThrowOnError(boolean b)
@@ -521,6 +626,10 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
     /**
      * User-settable behavior: when to re-throw exceptions.
      *
+     * <p>
+     *  用户可设置的行为：何时重新抛出异常。
+     * 
+     * 
      * @return if we throw an exception on errors
      */
     public boolean getThrowOnError()
@@ -544,6 +653,13 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
      * after a fatalError is not necessarily defined, most
      * products will probably barf if you continue.</p>
      *
+     * <p>
+     *  用户可设置的行为：何时重新抛出异常。
+     * 
+     *  <p>这允许每个实例配置ListingErrorHandlers。您可以要求我们在调用各种warning / error / fatalErrors时抛出异常,或者只是记录并继续。</p>
+     * 
+     *  <p>请注意,在fatalError之后的许多解析器/变换器的行为不一定定义,如果继续,大多数产品可能会barf。</p>
+     * 
      * @param b if we should throw an exception on fatalErrors
      */
     public void setThrowOnFatalError(boolean b)
@@ -554,6 +670,9 @@ public class ListingErrorHandler implements ErrorHandler, ErrorListener
     /**
      * User-settable behavior: when to re-throw exceptions.
      *
+     * <p>
+     * 
+     * 
      * @return if we throw an exception on fatalErrors
      */
     public boolean getThrowOnFatalError()

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Marks a class that has {@link XmlElementDecl}s.
  *
+ * <p>
+ *  标记具有{@link XmlElementDecl}的类。
+ * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @since JAXB 2.0
  * @see XmlElementDecl

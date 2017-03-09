@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils.resolver.implementations;
 
@@ -44,6 +53,15 @@ import org.w3c.dom.Node;
  * nodes of the parse tree (all descendants, plus all attributes,
  * plus all namespaces nodes).
  *
+ * <p>
+ *  处理裸名XPointer引用URI。
+ * <BR />
+ *  要在通过标识符ID选择元素时保留注释,请使用以下完整XPointer：URI ='#xpointer(id('ID'))'。
+ * <BR />
+ *  要在选择整个文档时保留注释,请使用以下完整XPointer：URI ='#xpointer(/)'。
+ * 这个XPointer包含一个简单的XPath表达式,其中包含根节点,上面第二到最后一步代替解析树的所有节点(所有后代,所有属性,以及所有命名空间节点)。
+ * 
+ * 
  * @author $Author: coheigea $
  */
 public class ResolverXPointer extends ResourceResolverSpi {
@@ -62,6 +80,9 @@ public class ResolverXPointer extends ResourceResolverSpi {
 
     /**
      * @inheritDoc
+     * <p>
+     *  @inheritDoc
+     * 
      */
     @Override
     public XMLSignatureInput engineResolveURI(ResourceResolverContext context)
@@ -109,6 +130,9 @@ public class ResolverXPointer extends ResourceResolverSpi {
 
     /**
      * @inheritDoc
+     * <p>
+     *  @inheritDoc
+     * 
      */
     public boolean engineCanResolveURI(ResourceResolverContext context) {
         if (context.uriToResolve == null) {
@@ -124,6 +148,10 @@ public class ResolverXPointer extends ResourceResolverSpi {
     /**
      * Method isXPointerSlash
      *
+     * <p>
+     *  方法是XPointerSlash
+     * 
+     * 
      * @param uri
      * @return true if begins with xpointer
      */
@@ -138,6 +166,10 @@ public class ResolverXPointer extends ResourceResolverSpi {
     /**
      * Method isXPointerId
      *
+     * <p>
+     *  方法是XPointerId
+     * 
+     * 
      * @param uri
      * @return whether it has an xpointer id
      */
@@ -161,6 +193,9 @@ public class ResolverXPointer extends ResourceResolverSpi {
     /**
      * Method getXPointerId
      *
+     * <p>
+     *  方法getXPointerId
+     * 
      * @param uri
      * @return xpointerId to search.
      */

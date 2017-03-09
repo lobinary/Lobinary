@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,15 @@ import sun.nio.fs.BasicFileAttributesHolder;
  *     }
  * }</pre>
  *
+ * <p>
+ *  遍历文件树,生成对应于树中文件的事件序列。
+ * 
+ *  <pre> {@ code Path top = ...设置<FileVisitOption> options = ... int maxDepth = ...
+ * 
+ *  try(FileTreeWalker walker = new FileTreeWalker(options,maxDepth)){FileTreeWalker.Event ev = walker.walk(top); do {process(ev); ev = walker.next(); }
+ *  while(ev！= null); }} </pre>。
+ * 
+ * 
  * @see Files#walkFileTree
  */
 
@@ -63,6 +73,9 @@ class FileTreeWalker implements Closeable {
 
     /**
      * The element on the walking stack corresponding to a directory node.
+     * <p>
+     *  在步行堆栈上的元素对应于目录节点。
+     * 
      */
     private static class DirectoryNode {
         private final Path dir;
@@ -105,24 +118,39 @@ class FileTreeWalker implements Closeable {
 
     /**
      * The event types.
+     * <p>
+     *  事件类型。
+     * 
      */
     static enum EventType {
         /**
          * Start of a directory
+         * <p>
+         *  开始目录
+         * 
          */
         START_DIRECTORY,
         /**
          * End of a directory
+         * <p>
+         *  目录结束
+         * 
          */
         END_DIRECTORY,
         /**
          * An entry in a directory
+         * <p>
+         *  目录中的条目
+         * 
          */
         ENTRY;
     }
 
     /**
      * Events returned by the {@link #walk} and {@link #next} methods.
+     * <p>
+     *  由{@link #walk}和{@link #next}方法返回的事件。
+     * 
      */
     static class Event {
         private final EventType type;
@@ -165,6 +193,10 @@ class FileTreeWalker implements Closeable {
     /**
      * Creates a {@code FileTreeWalker}.
      *
+     * <p>
+     *  创建{@code FileTreeWalker}。
+     * 
+     * 
      * @throws  IllegalArgumentException
      *          if {@code maxDepth} is negative
      * @throws  ClassCastException
@@ -197,6 +229,9 @@ class FileTreeWalker implements Closeable {
      * Returns the attributes of the given file, taking into account whether
      * the walk is following sym links is not. The {@code canUseCached}
      * argument determines whether this method can use cached attributes.
+     * <p>
+     *  返回给定文件的属性,考虑是否步行是在sym链接之后。 {@code canUseCached}参数确定此方法是否可以使用缓存的属性。
+     * 
      */
     private BasicFileAttributes getAttributes(Path file, boolean canUseCached)
         throws IOException
@@ -232,6 +267,9 @@ class FileTreeWalker implements Closeable {
     /**
      * Returns true if walking into the given directory would result in a
      * file system loop/cycle.
+     * <p>
+     *  返回true如果走进给定的目录将导致文件系统循环/循环。
+     * 
      */
     private boolean wouldLoop(Path dir, Object key) {
         // if this directory and ancestor has a file key then we compare
@@ -268,6 +306,14 @@ class FileTreeWalker implements Closeable {
      *
      * The {@code canUseCached} parameter determines whether cached attributes
      * for the file can be used or not.
+     * <p>
+     *  访问指定的文件,返回与访问对应的{@code Event}。
+     * 
+     *  {@code ignoreSecurityException}参数确定是否应忽略任何SecurityException。
+     * 如果抛出SecurityException并被忽略,则此方法返回{@code null},表示没有与访问文件对应的事件。
+     * 
+     * {@code canUseCached}参数确定是否可以使用文件的缓存属性。
+     * 
      */
     private Event visit(Path entry, boolean ignoreSecurityException, boolean canUseCached) {
         // need the file attributes
@@ -314,6 +360,9 @@ class FileTreeWalker implements Closeable {
 
     /**
      * Start walking from the given file.
+     * <p>
+     *  从给定的文件开始走。
+     * 
      */
     Event walk(Path file) {
         if (closed)
@@ -329,6 +378,9 @@ class FileTreeWalker implements Closeable {
     /**
      * Returns the next Event or {@code null} if there are no more events or
      * the walker is closed.
+     * <p>
+     *  如果没有更多事件或walker关闭,则返回下一个事件或{@code null}。
+     * 
      */
     Event next() {
         DirectoryNode top = stack.peek();
@@ -383,6 +435,9 @@ class FileTreeWalker implements Closeable {
      * there are no more events for the directory (including no END_DIRECTORY)
      * event. This method is a no-op if the stack is empty or the walker is
      * closed.
+     * <p>
+     *  弹出是当前堆栈顶部的目录节点,以便没有更多的目录事件(包括没有END_DIRECTORY)事件。如果堆栈为空或者walker关闭,这个方法是无操作的。
+     * 
      */
     void pop() {
         if (!stack.isEmpty()) {
@@ -396,6 +451,9 @@ class FileTreeWalker implements Closeable {
     /**
      * Skips the remaining entries in the directory at the top of the stack.
      * This method is a no-op if the stack is empty or the walker is closed.
+     * <p>
+     *  跳过堆栈顶部目录中的剩余条目。如果堆栈为空或者walker关闭,这个方法是无操作的。
+     * 
      */
     void skipRemainingSiblings() {
         if (!stack.isEmpty()) {
@@ -405,6 +463,9 @@ class FileTreeWalker implements Closeable {
 
     /**
      * Returns {@code true} if the walker is open.
+     * <p>
+     *  如果步行者打开,返回{@code true}。
+     * 
      */
     boolean isOpen() {
         return !closed;
@@ -412,6 +473,8 @@ class FileTreeWalker implements Closeable {
 
     /**
      * Closes/pops all directories on the stack.
+     * <p>
+     *  关闭/弹出堆栈中的所有目录。
      */
     @Override
     public void close() {

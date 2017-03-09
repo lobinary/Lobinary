@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: StringType.java,v 1.2.4.1 2005/09/05 11:35:57 pvedula Exp $
+ * <p>
+ *  $ Id：StringType.java,v 1.2.4.1 2005/09/05 11:35:57 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -39,6 +52,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.FlowList;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
@@ -70,6 +85,10 @@ public class StringType extends Type {
      * The translation to int is undefined since strings are always converted
      * to reals in arithmetic expressions.
      *
+     * <p>
+     *  将字符串转换为内部类型<code> type </code>的对象。转换为int是未定义的,因为字符串总是转换为算术表达式中的reals。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -96,6 +115,10 @@ public class StringType extends Type {
     /**
      * Translates a string into a synthesized boolean.
      *
+     * <p>
+     *  将字符串转换为合成布尔值。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -112,6 +135,10 @@ public class StringType extends Type {
      * Translates a string into a real by calling stringToReal() from the
      * basis library.
      *
+     * <p>
+     *  通过从基础库中调用stringToReal()将字符串转换为实数。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -128,6 +155,10 @@ public class StringType extends Type {
      * 0 or a 1 but instead returns branchhandle list to be appended to the
      * false list.
      *
+     * <p>
+     *  将字符串转换为非合成布尔值。它不推动0或1,而是返回分支句柄列表附加到false列表。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateToDesynthesized
      */
     public FlowList translateToDesynthesized(ClassGenerator classGen,
@@ -145,6 +176,10 @@ public class StringType extends Type {
      * Expects a string on the stack and pushes a boxed string.
      * Strings are already boxed so the translation is just a NOP.
      *
+     * <p>
+     *  在堆栈上看到一个字符串,并推送一个加框字符串。字符串已经装箱,所以翻译只是一个NOP。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -155,6 +190,10 @@ public class StringType extends Type {
     /**
      * Translates a internal string into an external (Java) string.
      *
+     * <p>
+     *  将内部字符串转换为外部(Java)字符串。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateFrom
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -174,6 +213,10 @@ public class StringType extends Type {
     /**
      * Translates an external (primitive) Java type into a string.
      *
+     * <p>
+     *  将外部(原始)Java类型转换为字符串。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateFrom
      */
     public void translateFrom(ClassGenerator classGen,
@@ -199,6 +242,9 @@ public class StringType extends Type {
 
     /**
      * Translates an object of this type to its boxed representation.
+     * <p>
+     * 将此类型的对象转换为其框化表示。
+     * 
      */
     public void translateBox(ClassGenerator classGen,
                              MethodGenerator methodGen) {
@@ -207,6 +253,9 @@ public class StringType extends Type {
 
     /**
      * Translates an object of this type to its unboxed representation.
+     * <p>
+     *  将此类型的对象转换为其未装箱的表示。
+     * 
      */
     public void translateUnBox(ClassGenerator classGen,
                                MethodGenerator methodGen) {
@@ -215,6 +264,8 @@ public class StringType extends Type {
 
     /**
      * Returns the class name of an internal type's external representation.
+     * <p>
+     *  返回内部类型的外部表示的类名。
      */
     public String getClassName() {
         return(STRING_CLASS);

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,13 @@ import javax.print.attribute.PrintJobAttribute;
  * attribute name.
  * <P>
  *
+ * <p>
+ *  类NumberOfInterveningJobs是整数值打印属性,其指示以完成的预期时间的相对时间顺序(即,当前调度订单)在该作业之前的作业的数量。
+ * <P>
+ *  <B> IPP兼容性：</B>整数值给出IPP整数值。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class NumberOfInterveningJobs extends IntegerSyntax
@@ -50,6 +58,10 @@ public final class NumberOfInterveningJobs extends IntegerSyntax
      * Construct a new number of intervening jobs attribute with the given
      * integer value.
      *
+     * <p>
+     *  使用给定的整数值构造新的中间作业数。
+     * 
+     * 
      * @param  value  Integer value.
      *
      * @exception  IllegalArgumentException
@@ -73,6 +85,18 @@ public final class NumberOfInterveningJobs extends IntegerSyntax
      * <CODE>object</CODE>'s value are equal.
      * </OL>
      *
+     * <p>
+     *  返回此介入作业数量是否等于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是NumberOfInterveningJobs类的实例。
+     * <LI>
+     *  这个中间作业属性的值和<CODE>对象</CODE>的值相等。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this number of
@@ -90,6 +114,8 @@ public final class NumberOfInterveningJobs extends IntegerSyntax
      * For class NumberOfInterveningJobs, the
      * category is class NumberOfInterveningJobs itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -104,6 +130,12 @@ public final class NumberOfInterveningJobs extends IntegerSyntax
      * For class NumberOfInterveningJobs, the
      * category name is <CODE>"number-of-intervening-jobs"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于NumberOfInterveningJobs类,类别是NumberOfInterveningJobs类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

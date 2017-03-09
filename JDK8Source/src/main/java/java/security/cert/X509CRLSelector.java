@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,23 @@ import sun.security.x509.X500Name;
  * provide the necessary locking. Multiple threads each manipulating
  * separate objects need not synchronize.
  *
+ * <p>
+ *  用于选择与所有指定条件匹配的{@code X509CRLs}的{@code CRLSelector}。当从{@code CertStore}中选择CRL以检查特定证书的撤销状态时,此类尤其有用。
+ * <p>
+ *  当第一次构造时,{@code X509CRLSelector}没有启用标准,每个{@code get}方法都返回一个默认值({@code null})。
+ * 因此,对于任何{@code X509CRL},{@link #match match}方法将返回{@code true}。
+ * 通常,启用几个条件(例如调用{@link #setIssuers setIssuers}或{@link #setDateAndTime setDateAndTime}),然后将{@code X509CRLSelector}
+ * 传递给{@link CertStore#getCRLs CertStore.getCRLs}或一些类似的方法。
+ * 因此,对于任何{@code X509CRL},{@link #match match}方法将返回{@code true}。
+ * <p>
+ *  有关X.509的定义,请参阅<a href="http://www.ietf.org/rfc/rfc3280.txt"> RFC 3280：Internet X.509公钥基础结构证书和CRL配置文件
+ * </a> CRL字段和扩展名。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  除非另有说明,否则此类中定义的方法不是线程安全的。需要并发访问单个对象的多个线程应在它们之间同步并提供必要的锁定。每个操作单独对象的多个线程不需要同步。
+ * 
+ * 
  * @see CRLSelector
  * @see X509CRL
  *
@@ -88,6 +106,9 @@ public class X509CRLSelector implements CRLSelector {
     /**
      * Creates an {@code X509CRLSelector}. Initially, no criteria are set
      * so any {@code X509CRL} will match.
+     * <p>
+     * 创建{@code X509CRLSelector}。最初,没有设置条件,因此任何{@code X509CRL}都会匹配。
+     * 
      */
     public X509CRLSelector() {}
 
@@ -113,6 +134,18 @@ public class X509CRLSelector implements CRLSelector {
      * Note that a copy is performed on the {@code Collection} to
      * protect against subsequent modifications.
      *
+     * <p>
+     *  设置issuerNames条件。 {@code X509CRL}中的发行商专有名称必须与指定的专有名称中的至少一个匹配。如果{@code null},任何发行者专有名称都会做。
+     * <p>
+     *  此方法允许调用者通过一个方法调用指定{@code X509CRLs}可能包含的完整的发行者名称集合。指定的值替换issuerNames条件的先前值。
+     * <p>
+     *  {@code names}参数(如果不是{@code null})是{@code X500Principal}的{@code集合}。
+     * <p>
+     *  请注意,{@code names}参数可以包含重复的专有名称,但可以从{@link #getIssuers getIssuers}方法返回的名称的{@code Collection}中删除。
+     * <p>
+     *  请注意,在{@code集合}上执行复制以防止后续修改。
+     * 
+     * 
      * @param issuers a {@code Collection} of X500Principals
      *   (or {@code null})
      * @see #getIssuers
@@ -190,6 +223,39 @@ public class X509CRLSelector implements CRLSelector {
      * Note that a deep copy is performed on the {@code Collection} to
      * protect against subsequent modifications.
      *
+     * <p>
+     *  <strong>请注意</strong>：使用{@linkplain #setIssuers(Collection)},或者仅使用此方法指定可分辨名称的字节数组形式。
+     * 有关详细信息,请参阅{@link #addIssuerName(String)}。
+     * <p>
+     *  设置issuerNames条件。 {@code X509CRL}中的发行商专有名称必须与指定的专有名称中的至少一个匹配。如果{@code null},任何发行者专有名称都会做。
+     * <p>
+     * 此方法允许调用者通过一个方法调用指定{@code X509CRLs}可能包含的完整的发行者名称集合。指定的值替换issuerNames条件的先前值。
+     * <p>
+     *  {@code names}参数(如果不是{@code null})是一个{@code Collection}的名称。
+     * 每个名称都是{@code String}或字节数组,表示专有名称(在<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>或ASN中)。
+     *  {@code names}参数(如果不是{@code null})是一个{@code Collection}的名称。 1 DER编码形式)。
+     * 如果提供{@code null}作为此参数的值,将不执行issuerNames检查。
+     * <p>
+     *  请注意,{@code names}参数可以包含重复的专有名称,但它们可能会从{@link #getIssuerNames getIssuerNames}方法返回的名称的{@code Collection}
+     * 中删除。
+     * <p>
+     *  如果一个名称被指定为一个字节数组,它应该包含一个单独的DER编码的识别名,如X.501中定义的。该结构的ASN.1表示法如下。
+     *  <pre> {@ code Name :: = CHOICE {RDNSequence}。
+     * 
+     *  RDNSequence :: = SEQUENCE OF RelativeDistinguishedName
+     * 
+     *  RelativeDistinguishedName :: = SET SIZE(1.. MAX)of AttributeTypeAndValue
+     * 
+     *  AttributeTypeAndValue :: = SEQUENCE {type AttributeType,value AttributeValue}
+     * 
+     *  AttributeType :: = OBJECT IDENTIFIER
+     * 
+     * AttributeValue :: = ANY DEFINED BY AttributeType .... DirectoryString :: = CHOICE {teletexString TeletexString(SIZE(1..MAX)),printableString PrintableString(SIZE(1..MAX)),universalString UniversalString(SIZE MAX)),utf8String UTF8String(SIZE(1..MAX)),bmpString BMPString(SIZE(1..MAX))}
+     * } </pre>。
+     * <p>
+     *  请注意,在{@code集合}上执行深层复制,以防止后续修改。
+     * 
+     * 
      * @param names a {@code Collection} of names (or {@code null})
      * @throws IOException if a parsing error occurs
      * @see #getIssuerNames
@@ -216,6 +282,12 @@ public class X509CRLSelector implements CRLSelector {
      * any previous value for the issuerNames criterion.
      * If the specified name is a duplicate, it may be ignored.
      *
+     * <p>
+     *  向issuerNames条件添加名称。 {@code X509CRL}中的发行商专有名称必须与指定的专有名称中的至少一个匹配。
+     * <p>
+     *  此方法允许调用者为{@code X509CRLs}可能包含的发布者名称集添加一个名称。指定的名称将添加到issuerNames条件的任何先前值。如果指定的名称是重复的,则可以忽略它。
+     * 
+     * 
      * @param issuer the issuer as X500Principal
      * @since 1.5
      */
@@ -240,6 +312,15 @@ public class X509CRLSelector implements CRLSelector {
      * any previous value for the issuerNames criterion.
      * If the specified name is a duplicate, it may be ignored.
      *
+     * <p>
+     *  <strong>已拒绝</strong>,请改用{@linkplain #addIssuer(X500Principal)}或{@linkplain #addIssuerName(byte [])}。
+     * 不应该依赖此方法,因为它可能无法匹配某些CRL,因为某些可分辨名称的RFC 2253 String形式中的编码信息丢失。
+     * <p>
+     *  向issuerNames条件添加名称。 {@code X509CRL}中的发行商专有名称必须与指定的专有名称中的至少一个匹配。
+     * <p>
+     * 此方法允许调用者为{@code X509CRLs}可能包含的发布者名称集添加一个名称。指定的名称将添加到issuerNames条件的任何先前值。如果指定的名称是重复的,则可以忽略它。
+     * 
+     * 
      * @param name the name in RFC 2253 form
      * @throws IOException if a parsing error occurs
      */
@@ -268,6 +349,18 @@ public class X509CRLSelector implements CRLSelector {
      * Note that the byte array supplied here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  向issuerNames条件添加名称。 {@code X509CRL}中的发行商专有名称必须与指定的专有名称中的至少一个匹配。
+     * <p>
+     *  此方法允许调用者为{@code X509CRLs}可能包含的发布者名称集添加一个名称。指定的名称将添加到issuerNames条件的任何先前值。如果指定的名称是重复的,则可以忽略它。
+     * 如果一个名称被指定为一个字节数组,它应该包含一个单独的DER编码的识别名,如X.501中定义的。该结构的ASN.1表示法如下。
+     * <p>
+     *  名称以字节数组形式提供。此字节数组应包含单个DER编码的可分辨名称,如X.501中定义。
+     * 此结构的ASN.1表示法出现在{@link #setIssuerNames setIssuerNames(集合名称)}的文档中。
+     * <p>
+     *  请注意,此处提供的字节数组被克隆以防止后续修改。
+     * 
+     * 
      * @param name a byte array containing the name in ASN.1 DER encoded form
      * @throws IOException if a parsing error occurs
      */
@@ -282,6 +375,10 @@ public class X509CRLSelector implements CRLSelector {
      * name in the {@code X509CRL} must match at least one of the specified
      * distinguished names.
      *
+     * <p>
+     *  向issuerNames条件添加名称(字符串或字节数组)的私有方法。 {@code X509CRL}中的发行商专有名称必须与指定的专有名称中的至少一个匹配。
+     * 
+     * 
      * @param name the name in string or byte array form
      * @param principal the name in X500Principal form
      * @throws IOException if a parsing error occurs
@@ -301,6 +398,10 @@ public class X509CRLSelector implements CRLSelector {
      * Clone and check an argument of the form passed to
      * setIssuerNames. Throw an IOException if the argument is malformed.
      *
+     * <p>
+     *  克隆并检查传递给setIssuerNames的表单的参数。如果参数格式不正确,则抛出IOException。
+     * 
+     * 
      * @param names a {@code Collection} of names. Each entry is a
      *              String or a byte array (the name, in string or ASN.1
      *              DER encoded form, respectively). {@code null} is
@@ -334,6 +435,12 @@ public class X509CRLSelector implements CRLSelector {
      * into a RuntimeException. This method should be used when the object being
      * cloned has already been checked, so there should never be any exceptions.
      *
+     * <p>
+     * 克隆传递给setIssuerNames的表单的参数。如果参数格式不正确,则抛出RuntimeException。
+     * <p>
+     *  此方法包装cloneAndCheckIssuerNames,将任何IOException更改为RuntimeException。当克隆的对象已经被检查时,应该使用此方法,因此不应该有任何异常。
+     * 
+     * 
      * @param names a {@code Collection} of names. Each entry is a
      *              String or a byte array (the name, in string or ASN.1
      *              DER encoded form, respectively). {@code null} is
@@ -354,6 +461,10 @@ public class X509CRLSelector implements CRLSelector {
      * returning a Collection of issuerX500Principals.
      * Throw an IOException if the argument is malformed.
      *
+     * <p>
+     *  解析传递给setIssuerNames的表单的参数,返回issuerX500Principals的集合。如果参数格式不正确,则抛出IOException。
+     * 
+     * 
      * @param names a {@code Collection} of names. Each entry is a
      *              String or a byte array (the name, in string or ASN.1
      *              DER encoded form, respectively). <Code>Null</Code> is
@@ -385,6 +496,10 @@ public class X509CRLSelector implements CRLSelector {
      * specified value. If {@code null}, no minCRLNumber check will be
      * done.
      *
+     * <p>
+     *  设置minCRLNumber条件。 {@code X509CRL}必须有一个CRL号码扩展,其值大于或等于指定的值。如果{@code null},将不进行minCRLNumber检查。
+     * 
+     * 
      * @param minCRL the minimum CRL number accepted (or {@code null})
      */
     public void setMinCRLNumber(BigInteger minCRL) {
@@ -397,6 +512,10 @@ public class X509CRLSelector implements CRLSelector {
      * specified value. If {@code null}, no maxCRLNumber check will be
      * done.
      *
+     * <p>
+     *  设置maxCRLNumber条件。 {@code X509CRL}必须有一个CRL号码扩展,其值小于或等于指定的值。如果{@code null},将不会执行maxCRLNumber检查。
+     * 
+     * 
      * @param maxCRL the maximum CRL number accepted (or {@code null})
      */
     public void setMaxCRLNumber(BigInteger maxCRL) {
@@ -414,6 +533,13 @@ public class X509CRLSelector implements CRLSelector {
      * Note that the {@code Date} supplied here is cloned to protect
      * against subsequent modifications.
      *
+     * <p>
+     *  设置dateAndTime标准。指定的日期必须等于或晚于{@code X509CRL}的thisUpdate组件的值,且早于nextUpdate组件的值。
+     * 如果{@code X509CRL}不包含nextUpdate组件,则不存在匹配项。如果{@code null},将不会执行dateAndTime检查。
+     * <p>
+     *  请注意,此处提供的{@code Date}已克隆,以防后续修改。
+     * 
+     * 
      * @param dateAndTime the {@code Date} to match against
      *                    (or {@code null})
      * @see #getDateAndTime
@@ -429,6 +555,9 @@ public class X509CRLSelector implements CRLSelector {
     /**
      * Sets the dateAndTime criterion and allows for the specified clock skew
      * (in milliseconds) when checking against the validity period of the CRL.
+     * <p>
+     *  设置dateAndTime标准,并允许在检查CRL的有效期时指定的时钟偏差(以毫秒为单位)。
+     * 
      */
     void setDateAndTime(Date dateAndTime, long skew) {
         this.dateAndTime =
@@ -443,6 +572,10 @@ public class X509CRLSelector implements CRLSelector {
      * specified certificate. If {@code null} is specified, then no
      * such optional information is provided.
      *
+     * <p>
+     * 设置要检查的证书。这不是一个标准。相反,它是可选信息,可以帮助{@code CertStore}查找在检查指定证书的撤销时相关的CRL。如果指定了{@code null},则不提供此类可选信息。
+     * 
+     * 
      * @param cert the {@code X509Certificate} being checked
      *             (or {@code null})
      * @see #getCertificateChecking
@@ -460,6 +593,12 @@ public class X509CRLSelector implements CRLSelector {
      * If the value returned is not {@code null}, it is a
      * unmodifiable {@code Collection} of {@code X500Principal}s.
      *
+     * <p>
+     *  返回issuerNames条件。 {@code X509CRL}中的发行商专有名称必须与指定的专有名称中的至少一个匹配。如果返回的值是{@code null},任何发行者专有名称都会做。
+     * <p>
+     *  如果返回的值不是{@code null},则它是{@code X500Principal}的不可修改的{@code集合}。
+     * 
+     * 
      * @return an unmodifiable {@code Collection} of names
      *   (or {@code null})
      * @see #setIssuers
@@ -492,6 +631,18 @@ public class X509CRLSelector implements CRLSelector {
      * Note that a deep copy is performed on the {@code Collection} to
      * protect against subsequent modifications.
      *
+     * <p>
+     *  返回issuerNames条件的副本。 {@code X509CRL}中的发行商专有名称必须与指定的专有名称中的至少一个匹配。如果返回的值是{@code null},任何发行者专有名称都会做。
+     * <p>
+     *  如果返回的值不是{@code null},它是一个{@code集合}的名称。
+     * 每个名称是一个{@code String}或一个表示可分辨名称的字节数组(分别在RFC 2253或ASN.1 DER编码形式中)。请注意,返回的{@code Collection}可能包含重复的名称。
+     * <p>
+     *  如果一个名称被指定为一个字节数组,它应该包含一个单独的DER编码的识别名,如X.501中定义的。
+     * 此结构的ASN.1表示法在{@link #setIssuerNames setIssuerNames(集合名称)}的文档中给出。
+     * <p>
+     * 请注意,在{@code集合}上执行深层复制,以防止后续修改。
+     * 
+     * 
      * @return a {@code Collection} of names (or {@code null})
      * @see #setIssuerNames
      */
@@ -507,6 +658,10 @@ public class X509CRLSelector implements CRLSelector {
      * CRL number extension whose value is greater than or equal to the
      * specified value. If {@code null}, no minCRLNumber check will be done.
      *
+     * <p>
+     *  返回minCRLNumber条件。 {@code X509CRL}必须有一个CRL号码扩展,其值大于或等于指定的值。如果{@code null},将不进行minCRLNumber检查。
+     * 
+     * 
      * @return the minimum CRL number accepted (or {@code null})
      */
     public BigInteger getMinCRL() {
@@ -519,6 +674,10 @@ public class X509CRLSelector implements CRLSelector {
      * specified value. If {@code null}, no maxCRLNumber check will be
      * done.
      *
+     * <p>
+     *  返回maxCRLNumber条件。 {@code X509CRL}必须有一个CRL号码扩展,其值小于或等于指定的值。如果{@code null},将不会执行maxCRLNumber检查。
+     * 
+     * 
      * @return the maximum CRL number accepted (or {@code null})
      */
     public BigInteger getMaxCRL() {
@@ -536,6 +695,13 @@ public class X509CRLSelector implements CRLSelector {
      * Note that the {@code Date} returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  返回dateAndTime条件。指定的日期必须等于或晚于{@code X509CRL}的thisUpdate组件的值,且早于nextUpdate组件的值。
+     * 如果{@code X509CRL}不包含nextUpdate组件,则不存在匹配项。如果{@code null},将不会执行dateAndTime检查。
+     * <p>
+     *  请注意,所返回的{@code Date}已克隆,以防止后续修改。
+     * 
+     * 
      * @return the {@code Date} to match against (or {@code null})
      * @see #setDateAndTime
      */
@@ -552,6 +718,10 @@ public class X509CRLSelector implements CRLSelector {
      * specified certificate. If the value returned is {@code null}, then
      * no such optional information is provided.
      *
+     * <p>
+     *  返回要检查的证书。这不是一个标准。相反,它是可选信息,可以帮助{@code CertStore}查找在检查指定证书的撤销时相关的CRL。如果返回的值是{@code null},则不提供此类可选信息。
+     * 
+     * 
      * @return the certificate being checked (or {@code null})
      * @see #setCertificateChecking
      */
@@ -562,6 +732,10 @@ public class X509CRLSelector implements CRLSelector {
     /**
      * Returns a printable representation of the {@code X509CRLSelector}.
      *
+     * <p>
+     *  返回{@code X509CRLSelector}的可打印表示。
+     * 
+     * 
      * @return a {@code String} describing the contents of the
      *         {@code X509CRLSelector}.
      */
@@ -589,6 +763,10 @@ public class X509CRLSelector implements CRLSelector {
     /**
      * Decides whether a {@code CRL} should be selected.
      *
+     * <p>
+     *  决定是否应选择{@code CRL}。
+     * 
+     * 
      * @param crl the {@code CRL} to be checked
      * @return {@code true} if the {@code CRL} should be selected,
      *         {@code false} otherwise
@@ -694,6 +872,9 @@ public class X509CRLSelector implements CRLSelector {
     /**
      * Returns a copy of this object.
      *
+     * <p>
+     *  返回此对象的副本。
+     * 
      * @return the copy
      */
     public Object clone() {

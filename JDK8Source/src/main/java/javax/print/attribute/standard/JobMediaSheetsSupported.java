@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,16 @@ import javax.print.attribute.SupportedValuesAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  JobMediaSheetsSupported类是一个打印属性类,一组整数,为{@link JobMediaSheets JobMediaSheets}属性提供受支持的值。
+ * 它限于单个连续的整数范围;不允许多个不重叠范围。这给出了打印机将接受的打印作业数量的打印作业总大小的下限和上限。
+ * <P>
+ *  <B> IPP兼容性：</B> JobMediaSheetsSupported属性的规范数组形式给出了要包含在IPP"job-media-sheets-supported"属性中的值范围的下限和上限。
+ * 有关规范数组形式的解释,请参阅{@link javax.print.attribute.SetOfIntegerSyntax SetOfIntegerSyntax}类。
+ * 由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class JobMediaSheetsSupported extends SetOfIntegerSyntax
@@ -56,6 +67,10 @@ public final class JobMediaSheetsSupported extends SetOfIntegerSyntax
      * range of integers. That is, only those values of JobMediaSheets in the
      * one range are supported.
      *
+     * <p>
+     *  构造包含单个整数范围的新作业媒体工作表支持属性。也就是说,只支持一个范围中的JobMediaSheets的值。
+     * 
+     * 
      * @param  lowerBound  Lower bound of the range.
      * @param  upperBound  Upper bound of the range.
      *
@@ -88,6 +103,18 @@ public final class JobMediaSheetsSupported extends SetOfIntegerSyntax
      * <CODE>object</CODE>'s members are the same.
      * </OL>
      *
+     * <p>
+     *  返回此作业媒体工作表支持的属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE> object </CODE>是JobMediaSheetsSupported类的实例。
+     * <LI>
+     *  此作业介质表支持属性的成员和<CODE>对象</CODE>的成员是相同的。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job media
@@ -105,6 +132,8 @@ public final class JobMediaSheetsSupported extends SetOfIntegerSyntax
      * For class JobMediaSheetsSupported, the
      * category is class JobMediaSheetsSupported itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -119,6 +148,12 @@ public final class JobMediaSheetsSupported extends SetOfIntegerSyntax
      * For class JobMediaSheetsSupported, the
      * category name is <CODE>"job-media-sheets-supported"</CODE>.
      *
+     * <p>
+     * 获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobMediaSheetsSupported类,类别是JobMediaSheetsSupported类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -104,6 +105,41 @@ import java.io.Serializable;
  * have distinct integer values in the superclass and subclass.
  * <P>
  *
+ * <p>
+ *  类EnumSyntax是一个抽象基类,提供所有"类型安全枚举"对象的常见实现。枚举类(扩展类EnumSyntax)提供了一组枚举值(对象),这些枚举值是枚举类的单例实例;例如：
+ * <PRE>
+ *  public class Bach extends EnumSyntax {public static final Bach JOHANN_SEBASTIAN = new Bach(0); public static final Bach WILHELM_FRIEDEMANN = new Bach(1); public static final Bach CARL_PHILIP_EMMANUEL = new Bach(2); public static final Bach JOHANN_CHRISTIAN = new Bach(3); public static final Bach P_D_Q = new Bach(4);。
+ * 
+ *  private static final String [] stringTable = {"Johann Sebastian Bach","Wilhelm Friedemann Bach","Carl Philip Emmanuel Bach","Johann Christian Bach","P.D.Q. Bach"}
+ * ;。
+ * 
+ *  protected String [] getStringTable(){return stringTable; }}
+ * 
+ *  private static final Bach [] enumValueTable = {JOHANN_SEBASTIAN,WILHELM_FRIEDEMANN,CARL_PHILIP_EMMANUEL,JOHANN_CHRISTIAN,P_D_Q}
+ * ;。
+ * 
+ *  protected EnumSyntax [] getEnumValueTable(){return enumValueTable; }}
+ * </PRE>
+ *  然后,您可以编写使用<CODE> == </CODE>和<CODE>！= </CODE>运算符来测试枚举值的代码;例如：
+ * <PRE>
+ *  Bach theComposer; 。 。 。
+ *  if(theComposer == Bach.JOHANN_SEBASTIAN){System.out.println("所有时间最伟大的作曲家！ }}。
+ * </PRE>
+ * 枚举类的<CODE> equals()</CODE>方法只是测试相同的对象(<CODE> == </CODE>)。
+ * <P>
+ *  您可以通过调用{@link #toString()toString()}将枚举值转换为字符串。该字符串从枚举类提供的表中获取。
+ * <P>
+ *  在引擎盖下,枚举值只是一个整数,枚举类中的每个枚举值的不同的整数。您可以通过调用{@link #getValue()getValue()}获取枚举值的整数值。
+ * 枚举值的整数值在构造时建立(参见{@link #EnumSyntax(int)EnumSyntax(int)})。
+ * 由于构造函数是受保护的,所以唯一可能的枚举值是在枚举类中声明的单例对象;无法在运行时创建附加枚举值。
+ * <P>
+ *  您可以定义枚举类的子类,使用附加的枚举值扩展它。
+ * 子类的枚举值的整数值不需要与超类的枚举值的整数值不同; <CODE> == </CODE>,<CODE>！= </CODE>,<CODE> equals()</CODE>和<CODE> toString
+ * ()</CODE>子类使用一些与超类相同的整数值。
+ *  您可以定义枚举类的子类,使用附加的枚举值扩展它。然而,其中使用枚举类和子类的应用可能需要在超类和子类中具有不同的整数值。
+ * <P>
+ * 
+ * 
  * @author  David Mendenhall
  * @author  Alan Kaminsky
  */
@@ -113,6 +149,10 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
 
     /**
      * This enumeration value's integer value.
+     * <p>
+     *  此枚举值的整数值。
+     * 
+     * 
      * @serial
      */
     private int value;
@@ -120,6 +160,10 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
     /**
      * Construct a new enumeration value with the given integer value.
      *
+     * <p>
+     * 使用给定的整数值构造新的枚举值。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected EnumSyntax(int value) {
@@ -128,6 +172,10 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
 
     /**
      * Returns this enumeration value's integer value.
+     * <p>
+     *  返回此枚举值的整数值。
+     * 
+     * 
      * @return the value
      */
     public int getValue() {
@@ -138,6 +186,9 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
      * Returns a clone of this enumeration value, which to preserve the
      * semantics of enumeration values is the same object as this enumeration
      * value.
+     * <p>
+     *  返回此枚举值的克隆,以保留枚举值的语义与此枚举值相同的对象。
+     * 
      */
     public Object clone() {
         return this;
@@ -146,6 +197,9 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
     /**
      * Returns a hash code value for this enumeration value. The hash code is
      * just this enumeration value's integer value.
+     * <p>
+     *  返回此枚举值的哈希码值。哈希码只是这个枚举值的整数值。
+     * 
      */
     public int hashCode() {
         return value;
@@ -153,6 +207,9 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
 
     /**
      * Returns a string value corresponding to this enumeration value.
+     * <p>
+     *  返回与此枚举值对应的字符串值。
+     * 
      */
     public String toString() {
 
@@ -168,6 +225,10 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
      * During object input, convert this deserialized enumeration instance to
      * the proper enumeration value defined in the enumeration attribute class.
      *
+     * <p>
+     *  在对象输入期间,将此反序列化枚举实例转换为枚举属性类中定义的正确枚举值。
+     * 
+     * 
      * @return  The enumeration singleton value stored at index
      *          <I>i</I>-<I>L</I> in the enumeration value table returned by
      *          {@link #getEnumValueTable() getEnumValueTable()},
@@ -233,6 +294,20 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
      * #toString() toString()} method, the base class {@link
      * #toString() toString()} method will return just a string
      * representation of this enumeration value's integer value.
+     * <p>
+     *  返回此枚举值的枚举类的字符串表。
+     * 枚举类的整数值被假定为处于范围<I> L <L> L <N> N + N -1中,其中<I> L </I> >是{@link #getOffset()getOffset()}返回的值,<I> N </I>
+     * 是字符串表的长度。
+     *  返回此枚举值的枚举类的字符串表。
+     * 索引<I> i </I>  -  <I> L </I>处的字符串表中的元素是由{@link #toString()toString()}返回的值,对于整数值< I> i </I>。
+     * 如果任何枚举值不使用上述范围内的整数,请将相应的表元素保留为空。
+     * <P>
+     * 默认实现返回null。
+     * 如果枚举类(EnumSyntax类的子类)不覆盖此方法以返回非空字符串表,并且子类不覆盖{@link #toString()toString()}方法,则基类{@ link #toString()toString()}
+     * 方法将仅返回此枚举值的整数值的字符串表示形式。
+     * 默认实现返回null。
+     * 
+     * 
      * @return the string table
      */
     protected String[] getStringTable() {
@@ -259,6 +334,17 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
      * class {@link #readResolve() readResolve()} method will throw
      * an exception whenever an enumeration instance is deserialized from an
      * object input stream.
+     * <p>
+     *  返回此枚举值的枚举类的枚举值表。
+     * 枚举类的整数值被假定为处于范围<I> L <L> L <N> N + N -1中,其中<I> L </I> >是{@link #getOffset()getOffset()}返回的值,<I> N </I>
+     * 是枚举值表的长度。
+     *  返回此枚举值的枚举类的枚举值表。
+     * 索引<i> i < - > I <L>下的枚举值表中的元素是整数值为<I> i </I>的枚举值对象; {@link #readResolve()readResolve()}方法需要这个在枚举实例的反序
+     * 列化期间保留单例语义。
+     *  返回此枚举值的枚举类的枚举值表。如果任何枚举值不使用上述范围内的整数,请将相应的表元素保留为空。
+     * <P>
+     * 默认实现返回null。
+     * 
      * @return the value table
      */
     protected EnumSyntax[] getEnumValueTable() {
@@ -272,6 +358,12 @@ public abstract class EnumSyntax implements Serializable, Cloneable {
      * The default implementation returns 0. If the enumeration class (a
      * subclass of class EnumSyntax) uses integer values starting at other than
      * 0, override this method in the subclass.
+     * <p>
+     * 如果枚举类(EnumSyntax类的子类)不覆盖此方法以返回非空枚举值表,并且子类不覆盖{@link #readResolve()readResolve()}方法,则基类{ @link #readResolve()readResolve()}
+     * 方法将在枚举实例从对象输入流反序列化时抛出异常。
+     * 默认实现返回null。
+     * 
+     * 
      * @return the offset of the lowest enumeration value.
      */
     protected int getOffset() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.time.LocalTime;
  * values.
  * <p>The date components should be set to the "zero epoch"
  * value of January 1, 1970 and should not be accessed.
+ * <p>
+ *  <P> <code> java.util.Date </code>类的一个薄包装,允许JDBC API将此标识为SQL <code> TIME </code>值。
+ *  <code> Time </code>类添加了格式化和解析操作,以支持时间值的JDBC转义语法。 <p>日期元素应设置为1970年1月1日的"零纪元"值,不应访问。
+ * 
  */
 public class Time extends java.util.Date {
 
@@ -49,6 +54,13 @@ public class Time extends java.util.Date {
      * <P>
      * The result is undefined if a given argument is out of bounds.
      *
+     * <p>
+     *  构造使用给定的小时,分​​钟和秒的值初始化的<code> Time </code>对象。驱动程序将日期组件设置为1970年1月1日。
+     * 任何试图访问<code> Time </code>对象的日期组件的方法都会抛出一个<code> java.lang.IllegalArgumentException </code>。
+     * <P>
+     *  如果给定的参数超出范围,结果是未定义的。
+     * 
+     * 
      * @param hour 0 to 23
      * @param minute 0 to 59
      * @param second 0 to 59
@@ -64,6 +76,10 @@ public class Time extends java.util.Date {
     /**
      * Constructs a <code>Time</code> object using a milliseconds time value.
      *
+     * <p>
+     *  使用毫秒时间值构造<code> Time </code>对象。
+     * 
+     * 
      * @param time milliseconds since January 1, 1970, 00:00:00 GMT;
      *             a negative number is milliseconds before
      *               January 1, 1970, 00:00:00 GMT
@@ -75,6 +91,10 @@ public class Time extends java.util.Date {
     /**
      * Sets a <code>Time</code> object using a milliseconds time value.
      *
+     * <p>
+     *  使用毫秒时间值设置<code> Time </code>对象。
+     * 
+     * 
      * @param time milliseconds since January 1, 1970, 00:00:00 GMT;
      *             a negative number is milliseconds before
      *               January 1, 1970, 00:00:00 GMT
@@ -86,6 +106,10 @@ public class Time extends java.util.Date {
     /**
      * Converts a string in JDBC time escape format to a <code>Time</code> value.
      *
+     * <p>
+     *  将JDBC时间转义格式的字符串转换为<code> Time </code>值。
+     * 
+     * 
      * @param s time in format "hh:mm:ss"
      * @return a corresponding <code>Time</code> object
      */
@@ -116,6 +140,10 @@ public class Time extends java.util.Date {
     /**
      * Formats a time in JDBC time escape format.
      *
+     * <p>
+     *  以JDBC时间格式转义格式。
+     * 
+     * 
      * @return a <code>String</code> in hh:mm:ss format
      */
     @SuppressWarnings("deprecation")
@@ -151,6 +179,10 @@ public class Time extends java.util.Date {
     * This method is deprecated and should not be used because SQL <code>TIME</code>
     * values do not have a year component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL <code> TIME </code>值没有年份组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this
     *           method is invoked
@@ -165,6 +197,10 @@ public class Time extends java.util.Date {
     * This method is deprecated and should not be used because SQL <code>TIME</code>
     * values do not have a month component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL <code> TIME </code>值没有月份组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this
     *           method is invoked
@@ -179,6 +215,10 @@ public class Time extends java.util.Date {
     * This method is deprecated and should not be used because SQL <code>TIME</code>
     * values do not have a day component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL <code> TIME </code>值没有day组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this
     *           method is invoked
@@ -192,6 +232,10 @@ public class Time extends java.util.Date {
     * This method is deprecated and should not be used because SQL <code>TIME</code>
     * values do not have a date component.
     *
+    * <p>
+    * 此方法已弃用,不应使用,因为SQL <code> TIME </code>值没有日期组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this
     *           method is invoked
@@ -206,6 +250,10 @@ public class Time extends java.util.Date {
     * This method is deprecated and should not be used because SQL <code>TIME</code>
     * values do not have a year component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL <code> TIME </code>值没有年份组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this
     *           method is invoked
@@ -220,6 +268,10 @@ public class Time extends java.util.Date {
     * This method is deprecated and should not be used because SQL <code>TIME</code>
     * values do not have a month component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL <code> TIME </code>值没有月份组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this
     *           method is invoked
@@ -234,6 +286,10 @@ public class Time extends java.util.Date {
     * This method is deprecated and should not be used because SQL <code>TIME</code>
     * values do not have a date component.
     *
+    * <p>
+    *  此方法已弃用,不应使用,因为SQL <code> TIME </code>值没有日期组件。
+    * 
+    * 
     * @deprecated
     * @exception java.lang.IllegalArgumentException if this
     *           method is invoked
@@ -247,6 +303,9 @@ public class Time extends java.util.Date {
    /**
     * Private serial version unique ID to ensure serialization
     * compatibility.
+    * <p>
+    *  私有串口版本唯一的ID,以确保序列化兼容性。
+    * 
     */
     static final long serialVersionUID = 8397324403548013681L;
 
@@ -255,6 +314,10 @@ public class Time extends java.util.Date {
      * with the same hour, minute and second time value as the given
      * {@code LocalTime}.
      *
+     * <p>
+     *  从具有与给定{@code LocalTime}相同的小时,分​​钟和第二时间值的{@link LocalTime}对象获取{@code Time}的实例。
+     * 
+     * 
      * @param time a {@code LocalTime} to convert
      * @return a {@code Time} object
      * @exception NullPointerException if {@code time} is null
@@ -271,6 +334,12 @@ public class Time extends java.util.Date {
      * The conversion creates a {@code LocalTime} that represents the same
      * hour, minute, and second time value as this {@code Time}.
      *
+     * <p>
+     *  将此{@code Time}对象转换为{@code LocalTime}。
+     * <p>
+     *  转换会创建{@code LocalTime},表示与此{@code Time}相同的小时,分​​钟和秒的时间值。
+     * 
+     * 
      * @return a {@code LocalTime} object representing the same time value
      * @since 1.8
      */
@@ -284,6 +353,8 @@ public class Time extends java.util.Date {
     * not be used because SQL {@code Time} values do not have a date
     * component.
     *
+    * <p>
+    * 
     * @exception java.lang.UnsupportedOperationException if this method is invoked
     */
     @Override

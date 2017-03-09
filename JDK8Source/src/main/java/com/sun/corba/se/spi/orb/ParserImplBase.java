@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,8 @@ public abstract class ParserImplBase {
     /** Override this method if there is some needed initialization
     * that takes place after argument parsing.  It is always called
     * at the end of setFields.
+    * <p>
+    *  它发生在参数解析之后。它总是在setFields结尾处调用。
     */
     protected void complete()
     {

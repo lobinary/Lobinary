@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -96,6 +97,11 @@ abstract class DynAnyComplexImpl extends DynAnyConstructedImpl
         }
         return returnValue;
     }
+/* <p>
+/*  public org.omg.DynamicAny.DynAny copy(){if(status == STATUS_DESTROYED){throw new OBJECT_NOT_EXIST(); }
+/*  DynAnyComplexImpl returnValue = null; if((representations&REPRESENTATION_ANY)！= 0){//标志"true"表示复制Any值returnValue =(DynAnyComplexImpl)DynAnyUtil.createMostDerivedDynAny(any,orb,true); }
+/*  if((representations&REPRESENTATION_COMPONENTS)！= 0){} return returnValue; }}。
+/* 
 */
 
     //
@@ -399,6 +405,7 @@ abstract class DynAnyComplexImpl extends DynAnyConstructedImpl
                         ((DynAnyConstructedImpl)memberDynAny).initializeComponentsFromTypeCode();
                     }
                 } // Other implementations have their own way of dealing with implementing the spec.
+/* <p>
 */
             } catch (InconsistentTypeCode itc) { // impossible
             }

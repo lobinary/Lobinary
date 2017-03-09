@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -112,6 +113,9 @@ public class ThreadPoolImpl implements ThreadPool
 
     /**
      * This constructor is used to create an unbounded threadpool
+     * <p>
+     *  此构造函数用于创建无界线程池
+     * 
      */
     public ThreadPoolImpl(ThreadGroup tg, String threadpoolName) {
         inactivityTimeout = ORBConstants.DEFAULT_INACTIVITY_TIMEOUT;
@@ -125,6 +129,9 @@ public class ThreadPoolImpl implements ThreadPool
     /**
      * This constructor is used to create an unbounded threadpool
      * in the ThreadGroup of the current thread
+     * <p>
+     *  此构造函数用于在当前线程的线程组中创建无界线程池
+     * 
      */
     public ThreadPoolImpl(String threadpoolName) {
         this( Thread.currentThread().getThreadGroup(), threadpoolName ) ;
@@ -132,6 +139,9 @@ public class ThreadPoolImpl implements ThreadPool
 
     /**
      * This constructor is used to create bounded threadpool
+     * <p>
+     *  此构造函数用于创建有界线程池
+     * 
      */
     public ThreadPoolImpl(int minSize, int maxSize, long timeout,
                                             String threadpoolName)
@@ -266,6 +276,9 @@ public class ThreadPoolImpl implements ThreadPool
      * To be called from the workqueue when work is added to the
      * workQueue. This method would create new threads if required
      * or notify waiting threads on the queue for available work
+     * <p>
+     *  当工作添加到workQueue时从工作队列中调用。如果需要,此方法将创建新线程或通知队列上的等待线程可用工作
+     * 
      */
     void notifyForAvailableWork(WorkQueue aWorkQueue) {
         synchronized (aWorkQueue) {
@@ -338,6 +351,9 @@ public class ThreadPoolImpl implements ThreadPool
     /**
      * To be called from the workqueue to create worker threads when none
      * available.
+     * <p>
+     *  从工作队列中调用以在没有可用时创建工作线程。
+     * 
      */
     void createWorkerThread() {
         final String name = getName();
@@ -426,6 +442,9 @@ public class ThreadPoolImpl implements ThreadPool
 
     /**
     * This method will return the number of WorkQueues serviced by the threadpool.
+    * <p>
+    *  此方法将返回线程池服务的WorkQueues数。
+    * 
     */
     public int numberOfWorkQueues() {
         return 1;
@@ -440,6 +459,9 @@ public class ThreadPoolImpl implements ThreadPool
      * This method will decrement the number of available threads
      * in the threadpool which are waiting for work. Called from
      * WorkQueueImpl.requestWork()
+     * <p>
+     *  此方法将递减正在等待工作的线程池中的可用线程数。从WorkQueueImpl.requestWork()调用
+     * 
      */
     void decrementNumberOfAvailableThreads() {
         synchronized (workQueue) {
@@ -451,6 +473,8 @@ public class ThreadPoolImpl implements ThreadPool
      * This method will increment the number of available threads
      * in the threadpool which are waiting for work. Called from
      * WorkQueueImpl.requestWork()
+     * <p>
+     *  此方法将增加线程池中正在等待工作的可用线程数。从WorkQueueImpl.requestWork()调用
      */
     void incrementNumberOfAvailableThreads() {
         synchronized (workQueue) {

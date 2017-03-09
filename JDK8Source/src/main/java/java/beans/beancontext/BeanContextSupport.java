@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,13 @@ import java.util.Map;
  * or via ad-hoc delegation of an instance of this class from another.
  * </p>
  *
+ * <p>
+ *  此助手类提供了java.beans.beancontext.BeanContext接口的实用程序实现。
+ * <p>
+ *  因为这个类直接实现了BeanContext接口,所以该类可以,也可以通过子类化这个实现,或者通过从另一个实例委托这个类的实例来使用。
+ * </p>
+ * 
+ * 
  * @author Laurence P. G. Cable
  * @since 1.2
  */
@@ -85,6 +93,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * Construct a BeanContextSupport instance
      *
      *
+     * <p>
+     *  构造BeanContextSupport实例
+     * 
+     * 
      * @param peer      The peer <tt>BeanContext</tt> we are
      *                  supplying an implementation for,
      *                  or <tt>null</tt>
@@ -112,6 +124,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Create an instance using the specified Locale and design mode.
      *
+     * <p>
+     *  使用指定的区域设置和设计模式创建实例。
+     * 
+     * 
      * @param peer      The peer <tt>BeanContext</tt> we
      *                  are supplying an implementation for,
      *                  or <tt>null</tt> if this object is its own peer
@@ -131,6 +147,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Create an instance using the specified locale
      *
+     * <p>
+     *  使用指定的区域设置创建实例
+     * 
+     * 
      * @param peer      The peer BeanContext we are
      *                  supplying an implementation for,
      *                  or <tt>null</tt> if this object
@@ -151,6 +171,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Create an instance using with a default locale
      *
+     * <p>
+     *  使用默认语言环境创建实例
+     * 
+     * 
      * @param peer      The peer <tt>BeanContext</tt> we are
      *                  supplying an implementation for,
      *                  or <tt>null</tt> if this object
@@ -162,6 +186,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Create an instance that is not a delegate of another object
+     * <p>
+     *  创建不是另一个对象的委托的实例
+     * 
      */
 
     public BeanContextSupport() {
@@ -171,6 +198,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Gets the instance of <tt>BeanContext</tt> that
      * this object is providing the implementation for.
+     * <p>
+     *  获取此对象提供的<tt> BeanContext </tt>实例。
+     * 
+     * 
      * @return the BeanContext instance
      */
     public BeanContext getBeanContextPeer() { return (BeanContext)getBeanContextChildPeer(); }
@@ -186,6 +217,15 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * The semantics of the beanName parameter are defined by java.beans.Beans.instantiate.
      * </p>
      *
+     * <p>
+     * <p>
+     *  instantiateChild方法是BeanContext中的一个方便的挂钩,以简化实例化Bean的任务,嵌套到<tt> BeanContext </tt>中。
+     * </p>
+     * <p>
+     *  beanName参数的语义由java.beans.Beans.instantiate定义。
+     * </p>
+     * 
+     * 
      * @param beanName the name of the Bean to instantiate within this BeanContext
      * @throws IOException if there is an I/O error when the bean is being deserialized
      * @throws ClassNotFoundException if the class
@@ -203,6 +243,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * Gets the number of children currently nested in
      * this BeanContext.
      *
+     * <p>
+     *  获取当前嵌套在此BeanContext中的子项数。
+     * 
+     * 
      * @return number of children
      */
     public int size() {
@@ -217,6 +261,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * A <tt>BeanContext</tt> is considered
      * empty when it contains zero
      * nested children.
+     * <p>
+     *  报告此<tt> BeanContext </tt>是否为空。当<tt> BeanContext </tt>包含零个嵌套子项时,它被认为是空的。
+     * 
+     * 
      * @return if there are not children
      */
     public boolean isEmpty() {
@@ -228,6 +276,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Determines whether or not the specified object
      * is currently a child of this <tt>BeanContext</tt>.
+     * <p>
+     *  确定指定的对象是否当前是此<tt> BeanContext </tt>的子级。
+     * 
+     * 
      * @param o the Object in question
      * @return if this object is a child
      */
@@ -240,6 +292,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Determines whether or not the specified object
      * is currently a child of this <tt>BeanContext</tt>.
+     * <p>
+     *  确定指定的对象是否当前是此<tt> BeanContext </tt>的子级。
+     * 
+     * 
      * @param o the Object in question
      * @return if this object is a child
      */
@@ -252,6 +308,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Gets all JavaBean or <tt>BeanContext</tt> instances
      * currently nested in this <tt>BeanContext</tt>.
+     * <p>
+     * 获取当前嵌套在此<tt> BeanContext </tt>中的所有JavaBean或<tt> BeanContext </tt>实例。
+     * 
+     * 
      * @return an <tt>Iterator</tt> of the nested children
      */
     public Iterator iterator() {
@@ -263,6 +323,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Gets all JavaBean or <tt>BeanContext</tt>
      * instances currently nested in this BeanContext.
+     * <p>
+     *  获取当前嵌套在此BeanContext中的所有JavaBean或<tt> BeanContext </tt>实例。
+     * 
      */
     public Object[] toArray() {
         synchronized(children) {
@@ -274,6 +337,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * Gets an array containing all children of
      * this <tt>BeanContext</tt> that match
      * the types contained in arry.
+     * <p>
+     *  获取包含此<tt> BeanContext </tt>的所有子项的数组,它们与arry中包含的类型匹配。
+     * 
+     * 
      * @param arry The array of object
      * types that are of interest.
      * @return an array of children
@@ -290,6 +357,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * protected final subclass that encapsulates an iterator but implements
      * a noop remove() method.
+     * <p>
+     *  protected最终子类封装迭代器,但实现noop remove()方法。
+     * 
      */
 
     protected static final class BCSIterator implements Iterator {
@@ -302,6 +372,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
         private Iterator src;
     }
 
+        public void    remove()  { /* <p>
+        public void    remove()  { /*  private Iterator src; }}
+        public void    remove()  { /* 
+        public void    remove()  { /* 
     /************************************************************************/
 
     /*
@@ -311,6 +385,11 @@ public class      BeanContextSupport extends BeanContextChildSupport
      *
      * Note that this 'value' is serialized with the corresponding child 'key'
      * when the BeanContextSupport is serialized.
+     * <p>
+     *  受保护的嵌套类包含每个子项信息,其实例与"子项"散列表中的每个子项相关联。子类可以扩展这个类以包括它们自己的每个子状态。
+     * 
+     *  注意,当BeanContextSupport序列化时,这个'value'被序列化为相应的子键'key'。
+     * 
      */
 
     protected class BCSChild implements Serializable {
@@ -335,6 +414,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
         Object  getProxyPeer()              { return proxyPeer; }
         /*
          * fields
+         * <p>
+         *  字段
+         * 
          */
 
 
@@ -350,6 +432,11 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * of Child without having to override add() or the other Collection
      * methods that add children to the set.
      * </p>
+     * <p>
+     * <p>
+     *  子类可以覆盖此方法以插入他们自己的子类的子类,而无需重写add()或其他将子项添加到集合的集合方法。
+     * </p>
+     * 
      * @param targetChild the child to create the Child on behalf of
      * @param peer        the peer if the tragetChild and the peer are related by an implementation of BeanContextProxy     * @return Subtype-specific subclass of Child without overriding collection methods
      */
@@ -369,6 +456,13 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * </p>
      *
      *
+     * <p>
+     *  在<tt> BeanContext </tt>中添加/嵌套子元素。
+     * <p>
+     *  作为java.beans.Beans.instantiate()的副作用调用。如果子对象对添加无效,则此方法将抛出IllegalStateException。
+     * </p>
+     * 
+     * 
      * @param targetChild The child objects to nest
      * within this <tt>BeanContext</tt>
      * @return true if the child was added successfully.
@@ -475,6 +569,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Removes a child from this BeanContext.  If the child object is not
      * for adding then this method throws an IllegalStateException.
+     * <p>
+     *  从此BeanContext中删除一个子项。如果子对象不是用于添加,则此方法将抛出IllegalStateException。
+     * 
+     * 
      * @param targetChild The child objects to remove
      * @see #validatePendingRemove
      */
@@ -486,6 +584,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * internal remove used when removal caused by
      * unexpected <tt>setBeanContext</tt> or
      * by <tt>remove()</tt> invocation.
+     * <p>
+     *  当由意外<tt> setBeanContext </tt>或<tt> remove()</tt>调用引起的删除时使用的内部删除。
+     * 
+     * 
      * @param targetChild the JavaBean, BeanContext, or Object to be removed
      * @param callChildSetBC used to indicate that
      * the child should be notified that it is no
@@ -559,6 +661,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * Tests to see if all objects in the
      * specified <tt>Collection</tt> are children of
      * this <tt>BeanContext</tt>.
+     * <p>
+     *  测试指定<tt>集合</tt>中的所有对象是否都是<tt> BeanContext </tt>的子对象。
+     * 
+     * 
      * @param c the specified <tt>Collection</tt>
      *
      * @return <tt>true</tt> if all objects
@@ -579,6 +685,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * add Collection to set of Children (Unsupported)
      * implementations must synchronized on the hierarchy lock and "children" protected field
+     * <p>
+     * 添加集合到子集(不支持)实现必须在层次结构锁和"children"保护字段上同步
+     * 
+     * 
      * @throws UnsupportedOperationException thrown unconditionally by this implementation
      * @return this implementation unconditionally throws {@code UnsupportedOperationException}
      */
@@ -589,6 +699,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * remove all specified children (Unsupported)
      * implementations must synchronized on the hierarchy lock and "children" protected field
+     * <p>
+     *  删除所有指定的子(Unsupported)实现必须在层次锁和"children"保护字段上同步
+     * 
+     * 
      * @throws UnsupportedOperationException thrown unconditionally by this implementation
      * @return this implementation unconditionally throws {@code UnsupportedOperationException}
 
@@ -601,6 +715,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * retain only specified children (Unsupported)
      * implementations must synchronized on the hierarchy lock and "children" protected field
+     * <p>
+     *  仅保留指定的子(Unsupported)实现必须在层次锁和"children"保护字段上同步
+     * 
+     * 
      * @throws UnsupportedOperationException thrown unconditionally by this implementation
      * @return this implementation unconditionally throws {@code UnsupportedOperationException}
      */
@@ -611,6 +729,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * clear the children (Unsupported)
      * implementations must synchronized on the hierarchy lock and "children" protected field
+     * <p>
+     *  清除子(Unsupported)实现必须在层次锁和"children"保护字段上同步
+     * 
+     * 
      * @throws UnsupportedOperationException thrown unconditionally by this implementation
      */
     public void clear() {
@@ -620,6 +742,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Adds a BeanContextMembershipListener
      *
+     * <p>
+     *  添加一个BeanContextMembershipListener
+     * 
+     * 
      * @param  bcml the BeanContextMembershipListener to add
      * @throws NullPointerException if the argument is null
      */
@@ -638,6 +764,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Removes a BeanContextMembershipListener
      *
+     * <p>
+     *  删除BeanContextMembershipListener
+     * 
+     * 
      * @param  bcml the BeanContextMembershipListener to remove
      * @throws NullPointerException if the argument is null
      */
@@ -654,6 +784,8 @@ public class      BeanContextSupport extends BeanContextChildSupport
     }
 
     /**
+    /* <p>
+    /* 
      * @param name the name of the resource requested.
      * @param bcc  the child object making the request.
      *
@@ -674,6 +806,8 @@ public class      BeanContextSupport extends BeanContextChildSupport
     }
 
     /**
+    /* <p>
+    /* 
      * @param name the name of the resource requested.
      * @param bcc  the child object making the request.
      *
@@ -694,6 +828,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Sets the new design time value for this <tt>BeanContext</tt>.
+     * <p>
+     *  为此<tt> BeanContext </tt>设置新的设计时间值。
+     * 
+     * 
      * @param dTime the new designTime value
      */
     public synchronized void setDesignTime(boolean dTime) {
@@ -708,6 +846,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Reports whether or not this object is in
      * currently in design time mode.
+     * <p>
+     *  报告此对象是否当前处于设计时模式。
+     * 
+     * 
      * @return <tt>true</tt> if in design time mode,
      * <tt>false</tt> if not
      */
@@ -715,6 +857,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Sets the locale of this BeanContext.
+     * <p>
+     *  设置此BeanContext的语言环境。
+     * 
+     * 
      * @param newLocale the new locale. This method call will have
      *        no effect if newLocale is <CODE>null</CODE>.
      * @throws PropertyVetoException if the new value is rejected
@@ -735,6 +881,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Gets the locale for this <tt>BeanContext</tt>.
      *
+     * <p>
+     *  获取此<tt> BeanContext </tt>的语言区域。
+     * 
+     * 
      * @return the current Locale of the <tt>BeanContext</tt>
      */
     public synchronized Locale getLocale() { return locale; }
@@ -749,6 +899,15 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * to determine if they are either Containers, Components, or if they implement
      * Visibility and return needsGui() == true.
      * </p>
+     * <p>
+     * <p>
+     *  通常从环境中调用此方法,以便确定实现者是否"需要"GUI。
+     * </p>
+     * <p>
+     *  此处使用的算法测试BeanContextPeer及其当前子项,以确定它们是否为Containers,Components,或者如果它们实现了Visibility并返回needsGui()== true
+     * 。
+     * </p>
+     * 
      * @return <tt>true</tt> if the implementor needs a GUI
      */
     public synchronized boolean needsGui() {
@@ -781,6 +940,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * notify this instance that it may no longer render a GUI.
+     * <p>
+     *  通知此实例它可能不再渲染GUI。
+     * 
      */
 
     public synchronized void dontUseGui() {
@@ -800,6 +962,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Notify this instance that it may now render a GUI
+     * <p>
+     *  通知此实例,它现在可以渲染GUI
+     * 
      */
 
     public synchronized void okToUseGui() {
@@ -820,6 +985,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Used to determine if the <tt>BeanContext</tt>
      * child is avoiding using its GUI.
+     * <p>
+     *  用于确定<tt> BeanContext </tt>子项是否正在避免使用其GUI。
+     * 
+     * 
      * @return is this instance avoiding using its GUI?
      * @see Visibility
      */
@@ -830,6 +999,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Is this <tt>BeanContext</tt> in the
      * process of being serialized?
+     * <p>
+     *  这是<tt> BeanContext </tt>在序列化的过程中吗?
+     * 
+     * 
      * @return if this <tt>BeanContext</tt> is
      * currently being serialized
      */
@@ -838,6 +1011,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Returns an iterator of all children
      * of this <tt>BeanContext</tt>.
+     * <p>
+     *  返回此<tt> BeanContext </tt>的所有子元素的迭代器。
+     * 
+     * 
      * @return an iterator for all the current BCSChild values
      */
     protected Iterator bcsChildren() { synchronized(children) { return children.values().iterator();  } }
@@ -852,6 +1029,14 @@ public class      BeanContextSupport extends BeanContextChildSupport
      *
      * This method should not however be used by subclasses to replace their
      * own implementation (if any) of writeObject().
+     * <p>
+     * 在defaultWriteObject()之后由writeObject调用,但在当前可序列化子代的序列化之前。
+     * 
+     *  这个方法可以被子类覆盖以在这个超类序列化子元素之前执行它们的状态的自定义序列化。
+     * 
+     *  然而,子类不应该使用此方法来替换writeObject()的自己的实现(如果有的话)。
+     * 
+     * 
      * @param oos the {@code ObjectOutputStream} to use during serialization
      * @throws IOException if serialization failed
      */
@@ -869,6 +1054,14 @@ public class      BeanContextSupport extends BeanContextChildSupport
      *
      * This method should not however be used by subclasses to replace their
      * own implementation (if any) of readObject().
+     * <p>
+     *  调用readObject之后的defaultReadObject(),但在任何孩子的反序列化之前。
+     * 
+     *  这个方法可以被子类覆盖以在子类反序列化之前对其状态执行定制反序列化。
+     * 
+     *  然而,子类不应该使用此方法来替换readObject()的自己的实现(如果有的话)。
+     * 
+     * 
      * @param ois the {@code ObjectInputStream} to use during deserialization
      * @throws IOException if deserialization failed
      * @throws ClassNotFoundException if needed classes are not found
@@ -879,6 +1072,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Called by readObject with the newly deserialized child and BCSChild.
+     * <p>
+     *  由readObject调用新反序列化的孩子和BCSChild。
+     * 
+     * 
      * @param child the newly deserialized child
      * @param bcsc the newly deserialized BCSChild
      */
@@ -890,6 +1087,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Used by writeObject to serialize a Collection.
+     * <p>
+     *  由writeObject用于序列化集合。
+     * 
+     * 
      * @param oos the <tt>ObjectOutputStream</tt>
      * to use during serialization
      * @param coll the <tt>Collection</tt> to serialize
@@ -920,6 +1121,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * used by readObject to deserialize a collection.
+     * <p>
+     *  由readObject用于反序列化集合。
+     * 
+     * 
      * @param ois the ObjectInputStream to use
      * @param coll the Collection
      * @throws IOException if deserialization failed
@@ -938,6 +1143,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Used to serialize all children of
      * this <tt>BeanContext</tt>.
+     * <p>
+     *  用于序列化此<tt> BeanContext </tt>的所有子级。
+     * 
+     * 
      * @param oos the <tt>ObjectOutputStream</tt>
      * to use during serialization
      * @throws IOException if serialization failed
@@ -989,6 +1198,13 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * it should always call writeObject() followed by writeChildren() and
      * readObject() followed by readChildren().
      *
+     * <p>
+     *  序列化BeanContextSupport,如果这个实例有一个不同的对等体(即这个对象充当另一个对象的委托),那么这个实例的孩子不会在这里序列化,因为在孩子的反序列化发生的"鸡和鸡蛋"问题与此实例同时
+     * 。
+     * 
+     *  因此,在存在与此实例不同的对等体的情况下,它应该总是调用writeObject(),后跟writeChildren()和readObject(),然后是readChildren()。
+     * 
+     * 
      * @param oos the ObjectOutputStream
      */
 
@@ -1015,6 +1231,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * When an instance of this class is used as a delegate for the
      * implementation of the BeanContext protocols (and its subprotocols)
      * there exists a 'chicken and egg' problem during deserialization
+     * <p>
+     * 当这个类的实例被用作BeanContext协议(及其子协议)的实现的委托时,在反序列化过程中存在一个"鸡和鸡蛋"的问题
+     * 
+     * 
      * @param ois the ObjectInputStream to use
      * @throws IOException if deserialization failed
      * @throws ClassNotFoundException if needed classes are not found
@@ -1067,6 +1287,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * deserialize contents ... if this instance has a distinct peer the
      * children are *not* serialized here, the peer's readObject() must call
      * readChildren() after deserializing this instance.
+     * <p>
+     *  反序列化内容...如果这个实例有一个不同的对等体,孩子们在这里没有序列化,对等体的readObject()在反序列化这个实例后必须调用readChildren()。
+     * 
      */
 
     private synchronized void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
@@ -1087,6 +1310,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * subclasses may envelope to monitor veto child property changes.
+     * <p>
+     *  子类可以包络以监视否决属性更改。
+     * 
      */
 
     public void vetoableChange(PropertyChangeEvent pce) throws PropertyVetoException {
@@ -1107,6 +1333,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * subclasses may envelope to monitor child property changes.
+     * <p>
+     *  子类可以包络以监视子属性更改。
+     * 
      */
 
     public void propertyChange(PropertyChangeEvent pce) {
@@ -1135,6 +1364,12 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * immediately prior to their being added to the BeanContext.
      * </p>
      *
+     * <p>
+     * <p>
+     *  此类的子类可以覆盖或封装此方法,以便为BeanContext添加验证行为,以便在将子对象添加到BeanContext之前立即检查子对象。
+     * </p>
+     * 
+     * 
      * @param targetChild the child to create the Child on behalf of
      * @return true iff the child may be added to this BeanContext, otherwise false.
      */
@@ -1150,6 +1385,12 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * immediately prior to their being removed from the BeanContext.
      * </p>
      *
+     * <p>
+     * <p>
+     *  此类的子类可以覆盖或封装此方法,以便为BeanContext添加验证行为,以便在从BeanContext中删除子对象之前立即检查子对象。
+     * </p>
+     * 
+     * 
      * @param targetChild the child to create the Child on behalf of
      * @return true iff the child may be removed from this BeanContext, otherwise false.
      */
@@ -1162,6 +1403,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * subclasses may override this method to simply extend add() semantics
      * after the child has been added and before the event notification has
      * occurred. The method is called with the child synchronized.
+     * <p>
+     *  子类可以覆盖此方法,以在添加子节点之后和事件通知发生之前简单地扩展add()语义。该方法在子进程同步时调用。
+     * 
+     * 
      * @param child the child
      * @param bcsc the BCSChild
      */
@@ -1173,6 +1418,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
      * subclasses may override this method to simply extend remove() semantics
      * after the child has been removed and before the event notification has
      * occurred. The method is called with the child synchronized.
+     * <p>
+     *  子类可以覆盖此方法,以便在子被移除之后并且在事件通知发生之前简单地扩展remove()语义。该方法在子进程同步时调用。
+     * 
+     * 
      * @param child the child
      * @param bcsc the BCSChild
      */
@@ -1182,6 +1431,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Gets the Component (if any) associated with the specified child.
+     * <p>
+     *  获取与指定子项关联的组件(如果有)。
+     * 
+     * 
      * @param child the specified child
      * @return the Component (if any) associated with the specified child.
      */
@@ -1195,6 +1448,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Gets the Serializable (if any) associated with the specified Child
+     * <p>
+     *  获取与指定子项关联的可序列化(如果有)
+     * 
+     * 
      * @param child the specified child
      * @return the Serializable (if any) associated with the specified Child
      */
@@ -1209,6 +1466,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Gets the PropertyChangeListener
      * (if any) of the specified child
+     * <p>
+     * 获取指定子项的PropertyChangeListener(如果有)
+     * 
+     * 
      * @param child the specified child
      * @return the PropertyChangeListener (if any) of the specified child
      */
@@ -1223,6 +1484,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Gets the VetoableChangeListener
      * (if any) of the specified child
+     * <p>
+     *  获取指定子项的VetoableChangeListener(如果有)
+     * 
+     * 
      * @param child the specified child
      * @return the VetoableChangeListener (if any) of the specified child
      */
@@ -1237,6 +1502,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Gets the BeanContextMembershipListener
      * (if any) of the specified child
+     * <p>
+     *  获取指定子项的BeanContextMembershipListener(如果有)
+     * 
+     * 
      * @param child the specified child
      * @return the BeanContextMembershipListener (if any) of the specified child
      */
@@ -1250,6 +1519,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Gets the BeanContextChild (if any) of the specified child
+     * <p>
+     *  获取指定子项的BeanContextChild(如果有)
+     * 
+     * 
      * @param child the specified child
      * @return  the BeanContextChild (if any) of the specified child
      * @throws  IllegalArgumentException if child implements both BeanContextChild and BeanContextProxy
@@ -1273,6 +1546,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Fire a BeanContextshipEvent on the BeanContextMembershipListener interface
+     * <p>
+     *  在BeanContextMembershipListener接口上触发BeanContextshipEvent
+     * 
+     * 
      * @param bcme the event to fire
      */
 
@@ -1287,6 +1564,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Fire a BeanContextshipEvent on the BeanContextMembershipListener interface
+     * <p>
+     *  在BeanContextMembershipListener接口上触发BeanContextshipEvent
+     * 
+     * 
      * @param bcme the event to fire
      */
 
@@ -1308,6 +1589,13 @@ public class      BeanContextSupport extends BeanContextChildSupport
      *
      * subclasses may envelope this method to add their own initialization
      * behavior
+     * <p>
+     *  protected方法从构造函数和readObject调用来初始化BeanContextSupport实例的临时状态。
+     * 
+     *  此类使用此方法实例化用于监视子节点上的PropertyChange和VetoableChange事件的内部类侦听器。
+     * 
+     *  子类可以包围这个方法来添加自己的初始化行为
+     * 
      */
 
     protected synchronized void initialize() {
@@ -1321,6 +1609,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
              * property changes from a child to the BeanContext, avoiding
              * accidential serialization of the BeanContext by a badly
              * behaved Serializable child.
+             * <p>
+             *  BeanContextSupport类使用此适配器将属性更改从子项转移到BeanContext,从而避免由严重行为的Serializable子项对BeanContext进行序列化。
+             * 
              */
 
             public void propertyChange(PropertyChangeEvent pce) {
@@ -1335,6 +1626,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
              * vetoable changes from a child to the BeanContext, avoiding
              * accidential serialization of the BeanContext by a badly
              * behaved Serializable child.
+             * <p>
+             *  这个适配器被BeanContextSupport类用来将一个孩子的vetoable更改转发到BeanContext,避免了一个严重行为Serializable的孩子的BeanContext的序列化。
+             * 
              */
 
             public void vetoableChange(PropertyChangeEvent pce) throws PropertyVetoException {
@@ -1345,6 +1639,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * Gets a copy of the this BeanContext's children.
+     * <p>
+     *  获取这个BeanContext的孩子的副本。
+     * 
+     * 
      * @return a copy of the current nested children
      */
     protected final Object[] copyChildren() {
@@ -1354,6 +1652,10 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * Tests to see if two class objects,
      * or their names are equal.
+     * <p>
+     *  测试看看是否有两个类对象,或者它们的名字是否相等。
+     * 
+     * 
      * @param first the first object
      * @param second the second object
      * @return true if equal, false if not
@@ -1365,12 +1667,18 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /*
      * fields
+     * <p>
+     *  字段
+     * 
      */
 
 
     /**
      * all accesses to the <code> protected HashMap children </code> field
      * shall be synchronized on that object.
+     * <p>
+     *  对<code> protected HashMap children </code>字段的所有访问应在该对象上同步。
+     * 
      */
     protected transient HashMap         children;
 
@@ -1379,6 +1687,9 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * all accesses to the <code> protected ArrayList bcmListeners </code> field
      * shall be synchronized on that object.
+     * <p>
+     *  对<code> protected ArrayList bcmListeners </code>字段的所有访问应在该对象上同步。
+     * 
      */
     protected transient ArrayList       bcmListeners;
 
@@ -1386,12 +1697,18 @@ public class      BeanContextSupport extends BeanContextChildSupport
 
     /**
      * The current locale of this BeanContext.
+     * <p>
+     * 此BeanContext的当前语言环境。
+     * 
      */
     protected           Locale          locale;
 
     /**
      * A <tt>boolean</tt> indicating if this
      * instance may now render a GUI.
+     * <p>
+     *  <tt> boolean </tt>表示此实例现在是否可以渲染GUI。
+     * 
      */
     protected           boolean         okToUseGui;
 
@@ -1399,11 +1716,16 @@ public class      BeanContextSupport extends BeanContextChildSupport
     /**
      * A <tt>boolean</tt> indicating whether or not
      * this object is currently in design time mode.
+     * <p>
+     *  指示此对象当前是否处于设计时模式的<tt>布尔值</tt>。
+     * 
      */
     protected           boolean         designTime;
 
     /*
      * transient
+     * <p>
+     *  短暂的
      */
 
     private transient PropertyChangeListener childPCL;

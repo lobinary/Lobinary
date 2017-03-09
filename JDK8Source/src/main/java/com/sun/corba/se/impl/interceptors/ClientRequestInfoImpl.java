@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -88,6 +89,9 @@ import com.sun.corba.se.impl.util.RepositoryId;
 /**
  * Implementation of the ClientRequestInfo interface as specified in
  * orbos/99-12-02 section 5.4.2.
+ * <p>
+ *  按照orbos / 99-12-02第5.4.2节中的规定实现ClientRequestInfo接口。
+ * 
  */
 public final class ClientRequestInfoImpl
     extends RequestInfoImpl
@@ -158,6 +162,9 @@ public final class ClientRequestInfoImpl
     /**
      * Reset the info object so that it can be reused for a retry,
      * for example.
+     * <p>
+     *  重置信息对象,以便它可以重新用于重试,例如。
+     * 
      */
     void reset() {
         super.reset();
@@ -199,6 +206,10 @@ public final class ClientRequestInfoImpl
     /*
      **********************************************************************
      * Access protection
+     * <p>
+     *  **************************************************** ******************访问保护
+     * 
+     * 
      **********************************************************************/
 
     // Method IDs for all methods in ClientRequestInfo.  This allows for a
@@ -233,29 +244,75 @@ public final class ClientRequestInfoImpl
         //                              { s_req, s_pol, r_rep, r_exc, r_oth }
         // RequestInfo methods:
         /*request_id*/                  { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*operation*/                   { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*arguments*/                   { true , false, true , false, false },
+        /* <p>
+        /* 
         /*exceptions*/                  { true , false, true , true , true  },
+        /* <p>
+        /* 
         /*contexts*/                    { true , false, true , true , true  },
+        /* <p>
+        /* 
         /*operation_context*/           { true , false, true , true , true  },
+        /* <p>
+        /* 
         /*result*/                      { false, false, true , false, false },
+        /* <p>
+        /* 
         /*response_expected*/           { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*sync_scope*/                  { true , false, true , true , true  },
+        /* <p>
+        /* 
         /*reply_status*/                { false, false, true , true , true  },
+        /* <p>
+        /* 
         /*forward_reference*/           { false, false, false, false, true  },
+        /* <p>
+        /* 
         /*get_slot*/                    { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*get_request_service_context*/ { true , false, true , true , true  },
+        /* <p>
+        /* 
         /*get_reply_service_context*/   { false, false, true , true , true  },
         //
         // ClientRequestInfo methods::
+        /* <p>
+        /*  // // ClientRequestInfo methods ::
+        /* 
+        /* 
         /*target*/                      { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*effective_target*/            { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*effective_profile*/           { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*received_exception*/          { false, false, false, true , false },
+        /* <p>
+        /* 
         /*received_exception_id*/       { false, false, false, true , false },
+        /* <p>
+        /* 
         /*get_effective_component*/     { true , false, true , true , true  },
+        /* <p>
+        /* 
         /*get_effective_components*/    { true , false, true , true , true  },
+        /* <p>
+        /* 
         /*get_request_policy*/          { true , false, true , true , true  },
+        /* <p>
+        /* 
         /*add_request_service_context*/ { true , false, false, false, false }
     };
 
@@ -263,12 +320,21 @@ public final class ClientRequestInfoImpl
     /*
      **********************************************************************
      * Public ClientRequestInfo interfaces
+     * <p>
+     *  };
+     * 
+     *  / * ************************************************ ********************公共ClientRequestInfo接口
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Creates a new ClientRequestInfo implementation.
      * The constructor is package scope since no other package need create
      * an instance of this class.
+     * <p>
+     *  创建新的ClientRequestInfo实现。构造函数是包范围,因为没有其他包需要创建此类的实例。
+     * 
      */
     protected ClientRequestInfoImpl( ORB myORB ) {
         super( myORB );
@@ -278,6 +344,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * The object which the client called to perform the operation.
+     * <p>
+     *  客户端调用以执行操作的对象。
+     * 
      */
     public org.omg.CORBA.Object target (){
         // access is currently valid for all states:
@@ -296,6 +365,9 @@ public final class ClientRequestInfoImpl
      * reply_status is LOCATION_FORWARD, then on subsequent requests,
      * effective_target will contain the forwarded IOR while target will
      * remain unchanged.
+     * <p>
+     *  将调用操作的实际对象。如果reply_status是LOCATION_FORWARD,则在后续请求中,effective_target将包含转发的IOR,而目标将保持不变。
+     * 
      */
     public org.omg.CORBA.Object effective_target() {
         // access is currently valid for all states:
@@ -320,6 +392,9 @@ public final class ClientRequestInfoImpl
      * forward has occurred for this operation's object and that object's
      * profile change accordingly, then this profile will be that located
      * profile.
+     * <p>
+     *  将用于发送请求的配置文件。如果此操作的对象发生了位置转发,并且该对象的配置文件相应地更改,则此配置文件将是所定位的配置文件。
+     * 
      */
     public TaggedProfile effective_profile (){
         // access is currently valid for all states:
@@ -341,6 +416,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Contains the exception to be returned to the client.
+     * <p>
+     *  包含要返回到客户端的异常。
+     * 
      */
     public Any received_exception (){
         checkAccess( MID_RECEIVED_EXCEPTION );
@@ -358,6 +436,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * The CORBA::RepositoryId of the exception to be returned to the client.
+     * <p>
+     *  要返回给客户端的异常的CORBA :: RepositoryId。
+     * 
      */
     public String received_exception_id (){
         checkAccess( MID_RECEIVED_EXCEPTION_ID );
@@ -391,6 +472,10 @@ public final class ClientRequestInfoImpl
      * selected for this request.  IF there is more than one component for a
      * given component ID, it is undefined which component this operation
      * returns (get_effective_component should be called instead).
+     * <p>
+     * 从为此请求选择的概要文件中返回具有给定ID的IOP :: TaggedComponent。
+     * 如果给定的组件ID有多个组件,则未定义此操作返回的组件(应调用get_effective_component)。
+     * 
      */
     public TaggedComponent get_effective_component (int id){
         checkAccess( MID_GET_EFFECTIVE_COMPONENT );
@@ -401,6 +486,9 @@ public final class ClientRequestInfoImpl
     /**
      * Returns all the tagged components with the given ID from the profile
      * selected for this request.
+     * <p>
+     *  返回从为此请求选择的配置文件中具有给定ID的所有已标记组件。
+     * 
      */
     public TaggedComponent[] get_effective_components (int id){
         checkAccess( MID_GET_EFFECTIVE_COMPONENTS );
@@ -449,6 +537,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Returns the given policy in effect for this operation.
+     * <p>
+     *  返回此操作有效的给定策略。
+     * 
      */
     public Policy get_request_policy (int type){
         checkAccess( MID_GET_REQUEST_POLICY );
@@ -461,6 +552,11 @@ public final class ClientRequestInfoImpl
      * <p>
      * There is no declaration of the order of the service contexts.  They
      * may or may not appear in the order they are added.
+     * <p>
+     *  允许拦截器向请求中添加服务上下文。
+     * <p>
+     *  没有对服务上下文的顺序的声明。它们可能或不会按添加的顺序显示。
+     * 
      */
     public void add_request_service_context (ServiceContext service_context,
                                              boolean replace)
@@ -488,10 +584,19 @@ public final class ClientRequestInfoImpl
      * These are implemented here because they have differing
      * implementations depending on whether this is a client or a server
      * request info object.
+     * <p>
+     *  **************************************************** ******************公共RequestInfo接口
+     * 
+     *  这些是在这里实现的,因为它们具有不同的实现,取决于这是客户端还是服务器请求信息对象。
+     * 
+     * 
      **********************************************************************/
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public int request_id (){
         // access is currently valid for all states:
@@ -500,12 +605,18 @@ public final class ClientRequestInfoImpl
          * NOTE: The requestId in client interceptors is the same as the
          * GIOP request id.  This works because both interceptors and
          * request ids are scoped by the ORB on the client side.
+         * <p>
+         *  注意：客户端拦截器中的requestId与GIOP请求id相同。这是因为拦截器和请求ID由客户端上的ORB限定。
+         * 
          */
         return messageMediator.getRequestId();
     }
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public String operation (){
         // access is currently valid for all states:
@@ -515,6 +626,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public Parameter[] arguments (){
         checkAccess( MID_ARGUMENTS );
@@ -539,6 +653,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public TypeCode[] exceptions (){
         checkAccess( MID_EXCEPTIONS );
@@ -574,6 +691,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public String[] contexts (){
         checkAccess( MID_CONTEXTS );
@@ -608,6 +728,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public String[] operation_context (){
         checkAccess( MID_OPERATION_CONTEXT );
@@ -663,6 +786,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public Any result (){
         checkAccess( MID_RESULT );
@@ -690,6 +816,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public boolean response_expected (){
         // access is currently valid for all states:
@@ -699,6 +828,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public Object forward_reference (){
         checkAccess( MID_FORWARD_REFERENCE );
@@ -742,6 +874,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See RequestInfoImpl for javadoc.
+     * <p>
+     *  请参阅javadoc的RequestInfoImpl。
+     * 
      */
     public org.omg.IOP.ServiceContext get_request_service_context( int id ) {
         checkAccess( MID_GET_REQUEST_SERVICE_CONTEXT );
@@ -758,6 +893,9 @@ public final class ClientRequestInfoImpl
     /**
      * does not contain an etry for that ID, BAD_PARAM with a minor code of
      * TBD_BP is raised.
+     * <p>
+     *  不包含该ID的etry,则引发具有次要代码TBD_BP的BAD_PARAM。
+     * 
      */
     public org.omg.IOP.ServiceContext get_reply_service_context( int id ) {
         checkAccess( MID_GET_REPLY_SERVICE_CONTEXT );
@@ -814,6 +952,10 @@ public final class ClientRequestInfoImpl
     /*
      **********************************************************************
      * Package-scope interfaces
+     * <p>
+     * **************************************************** ******************包范围接口
+     * 
+     * 
      **********************************************************************/
 
     protected void setInfo(MessageMediator messageMediator)
@@ -825,6 +967,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Set or reset the retry request flag.
+     * <p>
+     *  设置或重置重试请求标志。
+     * 
      */
     void setRetryRequest( RetryType retryRequest ) {
         this.retryRequest = retryRequest;
@@ -832,6 +977,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Retrieve the current retry request status.
+     * <p>
+     *  检索当前的重试请求状态。
+     * 
      */
     RetryType getRetryRequest() {
         // 6763340
@@ -840,6 +988,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Increases the entry count by 1.
+     * <p>
+     *  将条目计数增加1。
+     * 
      */
     void incrementEntryCount() {
         this.entryCount++;
@@ -847,6 +998,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Decreases the entry count by 1.
+     * <p>
+     *  将条目计数减少1。
+     * 
      */
     void decrementEntryCount() {
         this.entryCount--;
@@ -854,6 +1008,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Retrieve the current entry count
+     * <p>
+     *  检索当前条目计数
+     * 
      */
     int getEntryCount() {
         return this.entryCount;
@@ -862,6 +1019,9 @@ public final class ClientRequestInfoImpl
     /**
      * Overridden from RequestInfoImpl.  Calls the super class, then
      * sets the ending point call depending on the reply status.
+     * <p>
+     *  从RequestInfoImpl重写。调用超类,然后根据回复状态设置结束点调用。
+     * 
      */
     protected void setReplyStatus( short replyStatus ) {
         super.setReplyStatus( replyStatus );
@@ -882,6 +1042,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Sets DII request object in the RequestInfoObject.
+     * <p>
+     *  在RequestInfoObject中设置DII请求对象。
+     * 
      */
     protected void setDIIRequest(org.omg.CORBA.Request req) {
          request = req;
@@ -891,6 +1054,9 @@ public final class ClientRequestInfoImpl
      * Keeps track of whether initiate was called for a DII request.  The ORB
      * needs to know this so it knows whether to ignore a second call to
      * initiateClientPIRequest or not.
+     * <p>
+     *  跟踪是否为DII请求调用启动。 ORB需要知道这一点,所以它知道是否忽略对initiateClientPIRequest的第二次调用。
+     * 
      */
     protected void setDIIInitiate( boolean diiInitiate ) {
         this.diiInitiate = diiInitiate;
@@ -898,6 +1064,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * See comment for setDIIInitiate
+     * <p>
+     *  请参阅setDIIInitiate的注释
+     * 
      */
     protected boolean isDIIInitiate() {
         return this.diiInitiate;
@@ -908,6 +1077,9 @@ public final class ClientRequestInfoImpl
      * This is generally the case.  But exceptions which occur
      * after the stub's entry to _request but before the push
      * end up in _releaseReply which will try to pop unless told not to.
+     * <p>
+     *  PICurrent堆栈只有在按下时才会弹出。这是通常的情况。但是在stub进入_request但是在push之前发生的异常在_releaseReply中结束,这将尝试弹出,除非被告知不。
+     * 
      */
     protected void setPICurrentPushed( boolean piCurrentPushed ) {
         this.piCurrentPushed = piCurrentPushed;
@@ -919,6 +1091,9 @@ public final class ClientRequestInfoImpl
 
     /**
      * Overridden from RequestInfoImpl.
+     * <p>
+     *  从RequestInfoImpl重写。
+     * 
      */
     protected void setException( Exception exception ) {
         super.setException( exception );
@@ -934,6 +1109,8 @@ public final class ClientRequestInfoImpl
 
     /**
      * See description for RequestInfoImpl.checkAccess
+     * <p>
+     *  请参阅RequestInfoImpl.checkAccess的描述
      */
     protected void checkAccess( int methodID )
         throws BAD_INV_ORDER

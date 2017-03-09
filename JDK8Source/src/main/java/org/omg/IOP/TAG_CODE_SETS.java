@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -20,6 +21,10 @@ public interface TAG_CODE_SETS
      * </ul>
      * Both char and wchar conversion code sets are listed in order of 
      * preference.
+     * <p>
+     *  IOR多组件轮廓结构的代码集组件包含：
+     * <ul>
+     *  <li>服务器的本机字符代码集和转换代码集,</li> <li>服务器的本机wchar代码集和转换代码集。</li>
      */
   public static final int value = (int)(1L);
 }

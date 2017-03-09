@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,32 @@ import javax.xml.transform.sax.SAXResult;
  * In particular it shall never attempt to call the setHandler,
  * setLexicalHandler, and setSystemId methods.
  *
+ * <p>
+ *  解释JAXB对象的JAXP {@link javax.xml.transform.Result}实现。
+ * 
+ * <p>
+ *  此实用程序类有助于将JAXB与其他Java / XML技术相结合。
+ * 
+ * <p>
+ *  以下示例显示如何使用JAXB对从XSLT转换得到的文档进行解组。
+ * 
+ * <blockquote>
+ * <pre>
+ *  JAXBResult result = new JAXBResult(JAXBContext.newInstance("org.acme.foo"));
+ * 
+ *  //设置XSLT转换TransformerFactory tf = TransformerFactory.newInstance(); Transformer t = tf.newTransforme
+ * r(new StreamSource("test.xsl"));。
+ * 
+ *  // run transformation t.transform(new StreamSource("document.xml"),result);
+ * 
+ *  //获取unmarshalled内容树Object o = result.getResult();
+ * </pre>
+ * </blockquote>
+ * 
+ * <p>
+ *  JAXBResult派生自SAXResult的事实是实现细节。因此,在一般应用程序中,强烈阻止访问在SAXResult上定义的方法。
+ * 
+ * 
  * @author
  *      Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  */
@@ -78,6 +105,11 @@ public class JAXBResult extends SAXResult {
      * Creates a new instance that uses the specified
      * JAXBContext to unmarshal.
      *
+     * <p>
+     * <p>
+     *  特别是它永远不会尝试调用setHandler,setLexicalHandler和setSystemId方法。
+     * 
+     * 
      * @param context The JAXBContext that will be used to create the
      * necessary Unmarshaller.  This parameter must not be null.
      * @exception JAXBException if an error is encountered while creating the
@@ -102,6 +134,10 @@ public class JAXBResult extends SAXResult {
      * to configure Unmarshaller. Unless you know what you are doing,
      * it's easier and safer to pass a JAXBContext.
      *
+     * <p>
+     *  创建使用指定的JAXBContext进行解组的新实例。
+     * 
+     * 
      * @param _unmarshaller the unmarshaller.  This parameter must not be null.
      * @throws JAXBException if an error is encountered while creating the
      * JAXBResult or the Unmarshaller parameter is null.
@@ -119,12 +155,25 @@ public class JAXBResult extends SAXResult {
     /**
      * Unmarshaller that will be used to unmarshal
      * the input documents.
+     * <p>
+     *  创建使用指定的Unmarshaller来取消集合对象的新实例。
+     * 
+     * <p>
+     *  这个JAXBResult对象将使用指定的Unmarshaller实例。在此对象使用时,调用者的责任是不要使用相同的Unmarshaller用于其他目的。
+     * 
+     * <p>
+     * 此方法的主要目的是允许客户端配置Unmarshaller。除非你知道你在做什么,通过JAXBContext更容易和更安全。
+     * 
      */
     private final UnmarshallerHandler unmarshallerHandler;
 
     /**
      * Gets the unmarshalled object created by the transformation.
      *
+     * <p>
+     *  将用于解组输入文档的取消编组器。
+     * 
+     * 
      * @return
      *      Always return a non-null object.
      *
@@ -143,6 +192,9 @@ public class JAXBResult extends SAXResult {
     /**
      * Hook to throw exception from the middle of a contructor chained call
      * to this
+     * <p>
+     *  获取由转换创建的未组合对象。
+     * 
      */
     private static Unmarshaller assertionFailed() throws JAXBException {
         throw new JAXBException( Messages.format( Messages.RESULT_NULL_CONTEXT ) );

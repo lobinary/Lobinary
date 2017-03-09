@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming.NamingContextPackage;
 
 /**
@@ -10,6 +11,8 @@ package org.omg.CosNaming.NamingContextPackage;
 
 /**
          * Indicates the reason for not able to resolve.
+         * <p>
+         * 
          */
 public final class NotFoundReasonHolder implements org.omg.CORBA.portable.Streamable
 {

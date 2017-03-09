@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import javax.swing.*;
  * Implements the Highlighter interfaces.  Implements a simple highlight
  * painter that renders in a solid color.
  *
+ * <p>
+ *  实现Highlighter界面。实现一个简单的高亮画家呈现为纯色。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     Highlighter
  */
@@ -40,6 +45,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
 
     /**
      * Creates a new DefaultHighlighther object.
+     * <p>
+     *  创建一个新的DefaultHighlighther对象。
+     * 
      */
     public DefaultHighlighter() {
         drawsLayeredHighlights = true;
@@ -50,6 +58,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
     /**
      * Renders the highlights.
      *
+     * <p>
+     *  呈现亮点。
+     * 
+     * 
      * @param g the graphics context
      */
     public void paint(Graphics g) {
@@ -82,6 +94,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
      * interface of a JTextComponent.  Installs the editor, and
      * removes any existing highlights.
      *
+     * <p>
+     *  当UI安装到JTextComponent的接口时调用。安装编辑器,并删除任何现有的亮点。
+     * 
+     * 
      * @param c the editor component
      * @see Highlighter#install
      */
@@ -94,6 +110,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
      * Called when the UI is being removed from the interface of
      * a JTextComponent.
      *
+     * <p>
+     *  当UI从JTextComponent的接口中删除时调用。
+     * 
+     * 
      * @param c the component
      * @see Highlighter#deinstall
      */
@@ -105,6 +125,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
      * Adds a highlight to the view.  Returns a tag that can be used
      * to refer to the highlight.
      *
+     * <p>
+     *  在视图中添加突出显示。返回可用于引用突出显示的标记。
+     * 
+     * 
      * @param p0   the start offset of the range to highlight &gt;= 0
      * @param p1   the end offset of the range to highlight &gt;= p0
      * @param p    the painter to use to actually render the highlight
@@ -136,6 +160,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
     /**
      * Removes a highlight from the view.
      *
+     * <p>
+     *  从视图中删除突出显示。
+     * 
+     * 
      * @param tag the reference to the highlight
      */
     public void removeHighlight(Object tag) {
@@ -154,6 +182,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
 
     /**
      * Removes all highlights.
+     * <p>
+     *  删除所有亮点。
+     * 
      */
     public void removeAllHighlights() {
         TextUI mapper = component.getUI();
@@ -219,6 +250,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
     /**
      * Changes a highlight.
      *
+     * <p>
+     *  更改突出显示。
+     * 
+     * 
      * @param tag the highlight tag
      * @param p0 the beginning of the range &gt;= 0
      * @param p1 the end of the range &gt;= p0
@@ -269,6 +304,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
      * Makes a copy of the highlights.  Does not actually clone each highlight,
      * but only makes references to them.
      *
+     * <p>
+     *  制作亮点的副本。实际上并不克隆每个突出显示,而只是引用它们。
+     * 
+     * 
      * @return the copy
      * @see Highlighter#getHighlights
      */
@@ -287,6 +326,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
      * call into this method. If a highlight is in the given region it will
      * be drawn immediately.
      *
+     * <p>
+     *  当叶视图(如LabelView)正在呈现时,他们应该调用这个方法。如果突出显示在给定区域,它将立即绘制。
+     * 
+     * 
      * @param g Graphics used to draw
      * @param p0 starting offset of view
      * @param p1 ending offset of view
@@ -315,6 +358,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
     /**
      * Queues damageRange() call into event dispatch thread
      * to be sure that views are in consistent state.
+     * <p>
+     *  将damageRange()调用到事件分派线程,以确保视图处于一致状态。
+     * 
      */
     private void safeDamageRange(final Position p0, final Position p1) {
         safeDamager.damageRange(p0, p1);
@@ -323,6 +369,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
     /**
      * Queues damageRange() call into event dispatch thread
      * to be sure that views are in consistent state.
+     * <p>
+     *  将damageRange()调用到事件分派线程,以确保视图处于一致状态。
+     * 
      */
     private void safeDamageRange(int a0, int a1) throws BadLocationException {
         Document doc = component.getDocument();
@@ -336,6 +385,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
      * (if the offsets are in a highlighted region that is). For this to
      * work the painter supplied must be an instance of
      * LayeredHighlightPainter.
+     * <p>
+     * 如果为true,则会在视图绘制文本时绘制突出显示。这就是视图将调用<code> paintLayeredHighlight </code>,这将导致在绘制文本之前绘制一个矩形(如果偏移位于高亮区域)。
+     * 为了这个工作,提供的画家必须是LayeredHighlightPainter的实例。
+     * 
      */
     public void setDrawsLayeredHighlights(boolean newValue) {
         drawsLayeredHighlights = newValue;
@@ -360,6 +413,11 @@ public class DefaultHighlighter extends LayeredHighlighter {
      * be used for painting highlights.
      * <p>
      * As of 1.4 this field is final.
+     * <p>
+     *  LayeredHighlighter.LayerPainter的默认实现,可用于绘制突出显示。
+     * <p>
+     *  从1.4这个字段是最后的。
+     * 
      */
     public static final LayeredHighlighter.LayerPainter DefaultPainter = new DefaultHighlightPainter(null);
 
@@ -367,6 +425,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
     /**
      * Simple highlight painter that fills a highlighted area with
      * a solid color.
+     * <p>
+     *  简单的高亮显示画面,用纯色填充高亮区域。
+     * 
      */
     public static class DefaultHighlightPainter extends LayeredHighlighter.LayerPainter {
 
@@ -374,6 +435,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
          * Constructs a new highlight painter. If <code>c</code> is null,
          * the JTextComponent will be queried for its selection color.
          *
+         * <p>
+         *  构建新的高亮画家。如果<code> c </code>为null,将查询JTextComponent的选择颜色。
+         * 
+         * 
          * @param c the color for the highlight
          */
         public DefaultHighlightPainter(Color c) {
@@ -383,6 +448,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
         /**
          * Returns the color of the highlight.
          *
+         * <p>
+         *  返回高亮的颜色。
+         * 
+         * 
          * @return the color
          */
         public Color getColor() {
@@ -394,6 +463,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
         /**
          * Paints a highlight.
          *
+         * <p>
+         *  画一个亮点。
+         * 
+         * 
          * @param g the graphics context
          * @param offs0 the starting model offset &gt;= 0
          * @param offs1 the ending model offset &gt;= offs1
@@ -440,6 +513,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
         /**
          * Paints a portion of a highlight.
          *
+         * <p>
+         *  描绘高亮的一部分。
+         * 
+         * 
          * @param g the graphics context
          * @param offs0 the starting model offset &gt;= 0
          * @param offs1 the ending model offset &gt;= offs1
@@ -526,6 +603,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
     /**
      * LayeredHighlightPainter is used when a drawsLayeredHighlights is
      * true. It maintains a rectangle of the region to paint.
+     * <p>
+     *  当drawLayeredHighlights为true时,使用LayeredHighlightPainter。它保持要绘制的区域的矩形。
+     * 
      */
     class LayeredHighlightInfo extends HighlightInfo {
 
@@ -559,6 +639,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
         /**
          * Restricts the region based on the receivers offsets and messages
          * the painter to paint the region.
+         * <p>
+         *  根据接收器偏移限制区域,并消息绘制区域的画家。
+         * 
          */
         void paintLayeredHighlights(Graphics g, int p0, int p1,
                                     Shape viewBounds, JTextComponent editor,
@@ -587,6 +670,10 @@ public class DefaultHighlighter extends LayeredHighlighter {
      * it collects them into queue and damages
      * them in consecutive order in <code>run</code>
      * call.
+     * <p>
+     *  此类调用EventDispatchThread中的<code> mapper.damageRange </code>。每个荧光笔只有一个实例是cretaed。
+     * 当多个范围应该被损坏时,它将它们收集到队列中,并在<code> run </code> call中以连续顺序损坏它们。
+     * 
      */
     class SafeDamager implements Runnable {
         private Vector<Position> p0 = new Vector<Position>(10);
@@ -595,6 +682,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
 
         /**
          * Executes range(s) damage and cleans range queue.
+         * <p>
+         *  执行范围损坏并清除范围队列。
+         * 
          */
         public synchronized void run() {
             if (component != null) {
@@ -626,6 +716,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
          * The method also tracks if the current document changed or
          * component is null. In this case it removes all ranges added
          * before from range queue.
+         * <p>
+         *  将要损坏的范围添加到范围队列中。如果范围队列为空(第一次调用或run()已被调用),则将此类实例添加到EventDispatch队列中。
+         * 
          */
         public synchronized void damageRange(Position pos0, Position pos1) {
             if (component == null) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ package java.util.regex;
 /**
  * Utility class that implements the standard C ctype functionality.
  *
+ * <p>
+ *  实现标准C ctype功能的实用程序类。
+ * 
  * @author Hong Zhang
  */
 

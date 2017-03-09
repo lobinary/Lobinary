@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -21,6 +22,15 @@ package org.omg.PortableInterceptor;
    * information that is common to both, so they both inherit from a common 
    * interface: <code>RequestInfo</code>.
    *
+   * <p>
+   *  请求信息,拦截器可访问。
+   * <p>
+   *  每个拦截点都被赋予一个对象,通过该对象,拦截器可以访问请求信息。
+   * 客户端和服务器端拦截点涉及不同的信息,因此有两个信息对象：<code> ClientRequestInfo </code>被传递到客户端拦截点,并且<code> ServerRequestInfo </code>
+   * 被传递到服务器端拦截点。
+   *  每个拦截点都被赋予一个对象,通过该对象,拦截器可以访问请求信息。但是有两个公共的信息,所以他们都继承一个公共接口：<code> RequestInfo </code>。
+   * 
+   * 
    * @see ClientRequestInfo
    * @see ServerRequestInfo
    */
@@ -34,11 +44,18 @@ public interface RequestInfoOperations
      * <code>request_id</code>. If GIOP is the transport mechanism used, 
      * then these IDs may very well be the same, but this is not guaranteed 
      * nor required.
+     * <p>
+     *  返回唯一标识活动请求/回复序列的ID。一旦请求/应答序列被结束,则该ID可以被重新使用。请注意,此ID与GIOP <code> request_id </code>不同。
+     * 如果GIOP是所使用的传输机制,则这些ID可能非常相同,但这不是保证也不是必需的。
+     * 
      */
   int request_id ();
 
   /**
      * Returns the name of the operation being invoked.
+     * <p>
+     *  返回要调用的操作的名称。
+     * 
      */
   String operation ();
 
@@ -55,6 +72,14 @@ public interface RequestInfoOperations
      * <p>
      * <i>Note: Arguments are available for DSI/DII calls.</i>
      *
+     * <p>
+     *  返回一个<code> Parameter </code>对象的数组,其中包含要调用的操作的参数。如果没有参数,那么此属性将为零长度数组。
+     * <p>
+     * 并非所有环境都提供对参数的访问。使用Java便携式绑定,例如,参数不可用。在这些环境中,当访问此属性时,将会抛出一个标准次要代码为1的<code> NO_RESOURCES </code>。
+     * <p>
+     *  <i>注意：参数可用于DSI / DII调用。</i>
+     * 
+     * 
      * @exception NO_RESOURCES thrown if arguments are not available.
      * @see <a href="package-summary.html#unimpl">
      *     <code>PortableInterceptor</code> package comments for 
@@ -76,6 +101,14 @@ public interface RequestInfoOperations
      * <p>
      * <i>Note: Exceptions are available for DSI/DII calls.</i>
      *
+     * <p>
+     *  返回一个<code> TypeCode </code>对象的数组,描述该操作调用可能抛出的用户异常的<code> TypeCode </code>。如果没有用户异常,这将返回一个零长度数组。
+     * <p>
+     *  并非所有环境都提供对异常列表的访问。例如,使用Java便携式绑定,异常列表不可用。在这些环境中,当访问此属性时,将会抛出一个标准次要代码为1的<code> NO_RESOURCES </code>。
+     * <p>
+     *  <i>注意：异常可用于DSI / DII呼叫。</i>
+     * 
+     * 
      * @exception NO_RESOURCES thrown if exceptions are not available.
      * @see <a href="package-summary.html#unimpl">
      *     <code>PortableInterceptor</code> package comments for 
@@ -96,6 +129,15 @@ public interface RequestInfoOperations
      * <p>
      * <i>Note: Contexts are available for DSI/DII calls.</i>
      *
+     * <p>
+     *  返回一个描述可能在此操作调用上传递的上下文的<code> String </code>对象数组。如果没有上下文,这将返回一个零长度数组。
+     * <p>
+     *  并非所有环境都提供对上下文列表的访问。例如,使用Java便携式绑定,上下文列表不可用。
+     * 在这些环境中,当访问此属性时,将会抛出一个标准次要代码为1的<code> NO_RESOURCES </code>。
+     * <p>
+     *  <i>注意：上下文可用于DSI / DII调用。</i>
+     * 
+     * 
      * @exception NO_RESOURCES thrown if contexts are not available.
      * @see <a href="package-summary.html#unimpl">
      *     <code>PortableInterceptor</code> package comments for 
@@ -115,6 +157,14 @@ public interface RequestInfoOperations
      * <i>Note: <code>operation_context</code> is available for 
      * DSI/DII calls.</i>
      *
+     * <p>
+     *  返回一个包含请求上发送的上下文的<code> String </code>对象数组。
+     * <p>
+     * 并非所有环境都提供对上下文的访问。例如,使用Java便携式绑定,上下文不可用。在这些环境中,当访问此属性时,将抛出NO_RESOURCES,其中标准次要代码为1。
+     * <p>
+     *  <i>注意：<code> operation_context </code>适用于DSI / DII呼叫。</i>
+     * 
+     * 
      * @exception NO_RESOURCES thrown if operation context is not available.
      * @see <a href="package-summary.html#unimpl">
      *     <code>PortableInterceptor</code> package comments for 
@@ -136,6 +186,14 @@ public interface RequestInfoOperations
      * <p>
      * <i>Note: Result is available for DSI/DII calls.</i>
      *
+     * <p>
+     *  返回包含操作调用结果的任何值。如果操作返回类型为void,那么此属性将为包含具有<code> TCKind </code>值<code> tk_void </code>且无值的类型代码的任何属性。
+     * <p>
+     *  并非所有环境都提供对结果的访问。使用Java便携式绑定,例如,结果不可用。在这些环境中,当访问此属性时,将会抛出一个标准次要代码为1的<code> NO_RESOURCES </code>。
+     * <p>
+     *  <i>注意：结果可用于DSI / DII呼叫。</i>
+     * 
+     * 
      * @exception NO_RESOURCES thrown if result is not available.
      * @see <a href="package-summary.html#unimpl">
      *     <code>PortableInterceptor</code> package comments for 
@@ -153,6 +211,14 @@ public interface RequestInfoOperations
      * called. 
      * <p>
      * On the client, within <code>send_poll</code>, this attribute is true.
+     * <p>
+     *  指示是否需要响应。
+     * <p>
+     *  在客户端上,当<code> response_expected </code>为false时,不会返回应答,因此无法调用<code> receive_reply </code>。
+     * 除非发生异常,否则调用<code> receive_other </code>,在这种情况下调用<code> receive_exception </code>。
+     * <p>
+     *  在客户端上,在<code> send_poll </code>中,此属性为true。
+     * 
      */
   boolean response_expected ();
 
@@ -181,6 +247,23 @@ public interface RequestInfoOperations
      * the server does send an empty reply back to the client before the 
      * target is invoked. This reply is not intercepted by server-side 
      * Interceptors.
+     * 
+     * <p>
+     * 定义在将控制返回给客户端之前,请求进行到什么程度。这在消息传递规范中定义,仅当<code> response_expected </code>为false时才是相关的。
+     * 如果<code> response_expected </code>为true,则<code> sync_scope </code>的值未定义。此属性可以具有以下值之一：。
+     * <ul>
+     *  <li> <code> Messaging.SYNC_NONE </code> </li> <li> <code> Messaging.SYNC_WITH_TRANSPORT </code> </li>
+     *  <li> <code> Messaging.SYNC_WITH_SERVER </code> > <li> <code> Messaging.SYNC_WITH_TARGET </code> </li>
+     * 。
+     * </ul>
+     *  在服务器上,对于所有作用域,将从目标操作调用的返回创建回复,但是回复不会返回到客户端。
+     * 虽然它不返回到客户端,但它确实发生,所以遵循正常的服务器端拦截点(即,<code> receive_request_service_contexts </code>,<code> receive_req
+     * uest </code>,<code> send_reply < code>或<code> send_exception </code>)。
+     *  在服务器上,对于所有作用域,将从目标操作调用的返回创建回复,但是回复不会返回到客户端。
+     * <p>
+     *  对于<code> SYNC_WITH_SERVER </code>和<code> SYNC_WITH_TARGET </code>,服务器在调用目标之前会向客户端发送一个空应答。
+     * 此回复不会被服务器端拦截器拦截。
+     * 
      * 
      * @see <a href="package-summary.html#unimpl">
      *     <code>PortableInterceptor</code> package comments for 
@@ -230,6 +313,31 @@ public interface RequestInfoOperations
      *       with <code>LOCATION_FORWARD</code> as its status.</li>
      * </ul>
      * 
+     * <p>
+     *  描述操作调用的结果的状态。返回值可以是以下之一：
+     * <ul>
+     * <li> <code> PortableInterceptor.SUCCESSFUL </code> </li> <li> <code> PortableInterceptor.SYSTEM_EXCEP
+     * TION </code> </li> <li> <code> PortableInterceptor.USER_EXCEPTION </code> > <li> <code> PortableInter
+     * ceptor.LOCATION_FORWARD </code> </li> <li> <code> PortableInterceptor.TRANSPORT_RETRY </code>。
+     * </ul>
+     *  在客户端：
+     * <ul>
+     *  <li>在<code> receive_reply </code>拦截点内,此操作只会返回<code> SUCCESSFUL </code> </li>。
+     *  <li>在<code> receive_exception </code>拦截点内,这将是<code> SYSTEM_EXCEPTION </code>或<code> USER_EXCEPTION </code>
+     * 。
+     *  <li>在<code> receive_reply </code>拦截点内,此操作只会返回<code> SUCCESSFUL </code> </li>。
+     * </li> <li> receive_other </code>拦截点,这将是以下任一：<code> SUCCESSFUL </code>,<code> LOCATION_FORWARD </code>
+     * 或<code> TRANSPORT_RETRY </code>。
+     *  <li>在<code> receive_reply </code>拦截点内,此操作只会返回<code> SUCCESSFUL </code> </li>。
+     *  <code> SUCCESSFUL </code>表示成功返回异步请求。
+     *  <code> LOCATION_FORWARD </code>表示以<code> LOCATION_FORWARD </code>作为状态的回复。
+     *  <code> TRANSPORT_RETRY </code>意味着传输机制指示重试 - 例如,具有状态为<code> NEEDS_ADDRESSING_MODE </code>的GIOP应答。
+     *  </li>。
+     * </ul>
+     *  在服务器上：
+     * <ul>
+     * <li>在<code> send_exception </code>拦截点内,这只会是<code> SUCCESSFUL </code>。
+     * 
      * @see SUCCESSFUL
      * @see SYSTEM_EXCEPTION
      * @see USER_EXCEPTION
@@ -242,6 +350,15 @@ public interface RequestInfoOperations
      * Contains the object to which the request will be forwarded, if the 
      * <code>reply_status</code> attribute is <code>LOCATION_FORWARD</code>.
      * It is indeterminate whether a forwarded request will actually occur.
+     * <p>
+     * </li> <li>将会是<code> SYSTEM_EXCEPTION </code>或<code> USER_EXCEPTION </code>。
+     * </li> <li>在<code> send_other </code>拦截点中,此属性将是以下任意：<code > SUCCESSFUL </code>或<code> LOCATION_FORWARD
+     *  </code>。
+     * </li> <li>将会是<code> SYSTEM_EXCEPTION </code>或<code> USER_EXCEPTION </code>。
+     *  <code> SUCCESSFUL </code>表示成功返回异步请求。
+     *  <code> LOCATION_FORWARD </code>表示以<code> LOCATION_FORWARD </code>作为状态的回复。</li>。
+     * </ul>
+     * 
      */
   org.omg.CORBA.Object forward_reference ();
 
@@ -254,6 +371,10 @@ public interface RequestInfoOperations
      * type code with a <code>TCKind</code> value of <code>tk_null</code> is 
      * returned. 
      *
+     * <p>
+     *  如果<code> reply_status </code>属性为<code> LOCATION_FORWARD </code>,则包含请求将转发到的对象。它不确定转发的请求是否实际发生。
+     * 
+     * 
      * @param id The <code>SlotId</code> of the slot which is to be 
      *     returned. 
      * @return The slot data, in the form of an any, obtained with the 
@@ -268,6 +389,12 @@ public interface RequestInfoOperations
      * Returns a copy of the service context with the given ID that 
      * is associated with the request. 
      * <p>
+     * <p>
+     *  从请求范围中的<code> PortableInterceptor.Current </code>的给定位置返回数据。
+     * <p>
+     *  如果未设置给定时隙,则返回包含具有<code> TCKind </code>值<code> tk_null </code>的类型代码的任何时隙。
+     * 
+     * 
      * @param id The <code>IOP.ServiceId</code> of the service context 
      *     which is to be returned. 
      * @return The <code>IOP.ServiceContext</code> obtained with the 
@@ -280,6 +407,10 @@ public interface RequestInfoOperations
   /**
      * Returns a copy of the service context with the given ID that 
      * is associated with the reply. 
+     * 
+     * <p>
+     *  返回具有与请求相关联的给定ID的服务上下文的副本。
+     * <p>
      * 
      * @param id The <code>IOP.ServiceId</code> of the service context 
      *     which is to be returned. 

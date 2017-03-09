@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,17 @@ import org.omg.CORBA.portable.*;
  *  constrained objects, such as those in the PortableServer module.
  *  The specification here is based on the CORBA Components
  *  Volume I - orbos/99-07-01<P>
+ * <p>
+ *  <P>用作在Java语言映射中实现本地IDL接口的基类。它是一个实现<tt> org.omg.CORBA.Object </tt>接口中所有操作的类。
+ * 本地接口通过使用CORBA :: LocalObject来实现,以提供<code> Object </code>伪操作的实现以及适用于这些对象的任何其他ORB特定的支持机制。
+ * 对象实现技术本质上是语言映射特定的。因此,<code> LocalObject </code>类型未在IDL中定义,而是在每个语言映射中指定。
+ *  <P>不适用于本地对象的方法会在消息"这是一个局部约束的对象"中抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常。
+ * 尝试使用<TT> LocalObject </TT>创建DII请求会导致NO_IMPLEMENT系统异常。尝试编组或字符串化<TT> LocalObject </TT>会导致MARSHAL系统异常。
+ * 缩小和扩展对<TT> LocalObjects </TT>的引用必须像常规对象引用一样工作。
+ *  <P> <code> LocalObject </code>将用作局部约束对象的基类,例如PortableServer模块中的对象。
+ * 这里的规范是基于CORBA组件卷I-orbos / 99-07-01 <P>。
+ * 
+ * 
  * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
      *      comments for unimplemented features</a>
  */
@@ -60,6 +72,9 @@ public class LocalObject implements org.omg.CORBA.Object
 
     /**
      * Constructs a default <code>LocalObject</code> instance.
+     * <p>
+     *  构造默认的<code> LocalObject </code>实例。
+     * 
      */
     public LocalObject() {}
 
@@ -73,6 +88,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * expensive.
      * <P>Default implementation of the org.omg.CORBA.Object method. <P>
      *
+     * <p>
+     * <P>确定这两个对象引用是否相等,只要ORB可以轻松确定。如果两个对象引用相同,则它们是等价的。两个不同的对象引用实际上指向相同的对象也是等效的。
+     * 然而,ORB不需要尝试确定两个不同的对象引用是否指向相同的对象,因为这样的确定可能是不切实际的昂贵的。 <P> org.omg.CORBA.Object方法的默认实现。 <P>。
+     * 
+     * 
      * @param that the object reference with which to check for equivalence
      * @return <code>true</code> if this object reference is known to be
      *         equivalent to the given object reference.
@@ -89,6 +109,10 @@ public class LocalObject implements org.omg.CORBA.Object
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
      *
+     * <p>
+     *  始终返回<code> false </code>。此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>
+     * 
+     * 
      * @return <code>false</code>
      */
     public boolean _non_existent() {
@@ -100,6 +124,10 @@ public class LocalObject implements org.omg.CORBA.Object
      * lifetime of the object, using the given number as the maximum.
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     *  返回与对象的生命周期一致的哈希值,使用给定数作为最大值。此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>
+     * 
+     * 
      * @param maximum an <code>int</code> identifying maximum value of
      *                  the hashcode
      * @return this instance's hashcode
@@ -115,6 +143,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
      *
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法不适用于本地对象,因此未实现。此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @param repository_id a <code>String</code>
      * @return NO_IMPLEMENT because this is a locally constrained object
      *      and this method does not apply to local objects
@@ -132,6 +165,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * the message "This is a locally constrained object."
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @return a duplicate of this <code>LocalObject</code> instance.
      * @exception NO_IMPLEMENT
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
@@ -146,6 +184,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * the message "This is a locally constrained object."
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     * 将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @exception NO_IMPLEMENT
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
      *      comments for unimplemented features</a>
@@ -160,6 +203,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
      *
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @param operation a <code>String</code> giving the name of an operation
      *        to be performed by the request that is returned
      * @return a <code>Request</code> object with the given operation
@@ -177,6 +225,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
      *
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @param ctx          a <code>Context</code> object containing
      *                     a list of properties
      * @param operation    the <code>String</code> representing the name of the
@@ -204,6 +257,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
      *
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @param ctx          a <code>Context</code> object containing
      *                     a list of properties
      * @param operation    the name of the method to be invoked
@@ -238,6 +296,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * does not apply to local objects and is therefore not implemented.
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法不适用于本地对象,因此未实现。此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @return NO_IMPLEMENT because this is a locally constrained object
      *      and this method does not apply to local objects
      * @exception NO_IMPLEMENT because this is a locally constrained object
@@ -255,6 +318,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * the message "This is a locally constrained object."
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @exception NO_IMPLEMENT
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
      *      comments for unimplemented features</a>
@@ -276,6 +344,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * the message "This is a locally constrained object."
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     * 将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @return the ORB instance that created the Delegate contained in this
      * <code>ObjectImpl</code>
      * @exception NO_IMPLEMENT
@@ -292,6 +365,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * does not apply to local objects and is therefore not implemented.
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法不适用于本地对象,因此未实现。此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @param policy_type  an <code>int</code>
      * @return NO_IMPLEMENT because this is a locally constrained object
      *      and this method does not apply to local objects
@@ -311,6 +389,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * does not apply to local objects and is therefore not implemented.
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法不适用于本地对象,因此未实现。此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @exception NO_IMPLEMENT
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
      *      comments for unimplemented features</a>
@@ -326,6 +409,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.
      *
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法不适用于本地对象,因此未实现。这个方法是<code> org.omg.CORBA.Object </code>方法的默认实现。
+     * 
+     * 
      * @param policies an array
      * @param set_add a flag
      * @return NO_IMPLEMENT because this is a locally constrained object
@@ -348,6 +436,12 @@ public class LocalObject implements org.omg.CORBA.Object
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
      * Returns <code>true</code> for this <code>LocalObject</code> instance.<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 这个方法是<code> org.omg.CORBA.Object </code>方法的默认实现。
+     * <P>为<code> LocalObject </code>实例返回<code> true </code> >。
+     * 
+     * 
      * @return <code>true</code> always
      * @exception NO_IMPLEMENT
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
@@ -362,6 +456,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * the message "This is a locally constrained object."
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     * 将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @param operation a <code>String</code> indicating which operation
      *                  to preinvoke
      * @param expectedType the class of the type of operation mentioned above
@@ -382,6 +481,11 @@ public class LocalObject implements org.omg.CORBA.Object
      * the message "This is a locally constrained object."
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 此方法是<code> org.omg.CORBA.Object </code>方法的默认实现。<P>。
+     * 
+     * 
      * @param servant the servant object on which to post-invoke
      * @exception NO_IMPLEMENT
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
@@ -394,6 +498,9 @@ public class LocalObject implements org.omg.CORBA.Object
     /*
      * The following methods were added by orbos/98-04-03: Java to IDL
      * Mapping. These are used by RMI over IIOP.
+     * <p>
+     *  以下方法由orbos / 98-04-03：Java添加到IDL映射。这些被RMI用于IIOP。
+     * 
      */
 
     /**
@@ -405,6 +512,12 @@ public class LocalObject implements org.omg.CORBA.Object
      * marshaling arguments. The stub must supply the operation name,
      * and indicate if a response is expected (i.e is this a oneway
      * call).<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 这个方法是<code> org.omg.CORBA.Object </code>方法的默认实现。 <P>由存根调用以获取用于封送参数的OutputStream。
+     * 存根必须提供操作名称,并指示是否期望响应(即这是单向呼叫)。<P>。
+     * 
+     * 
      * @param operation the name of the operation being requested
      * @param responseExpected <code>true</code> if a response is expected,
      *                         <code>false</code> if it is a one-way call
@@ -434,6 +547,16 @@ public class LocalObject implements org.omg.CORBA.Object
      * <code>ApplicationException</code> object which contains an
      * <code>InputStream</code> from
      * which the user exception state may be unmarshaled.<P>
+     * <p>
+     * 将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 这个方法是<code> org.omg.CORBA.Object </code>方法的默认实现。 <P>调用调用操作。
+     * 存根提供了之前由<code> _request()</code>调用返回的<code> OutputStream </code>。
+     *  <code> _invoke </code>返回一个包含被封送回复的<code> InputStream </code>。
+     * 如果发生异常,<code> _invoke </code>可能会抛出一个<code> ApplicationException </code>对象,该对象包含一个可以被解除用户异常状态的<code> I
+     * nputStream </code>。
+     *  <code> _invoke </code>返回一个包含被封送回复的<code> InputStream </code>。
+     * 
+     * 
      * @param output the <code>OutputStream</code> to invoke
      * @return NO_IMPLEMENT because this is a locally constrained object
      *      and this method does not apply to local objects
@@ -471,6 +594,14 @@ public class LocalObject implements org.omg.CORBA.Object
      * A null
      * value may also be passed to <code>_releaseReply</code>, in which case the
      * method is a no-op.<P>
+     * <p>
+     *  将抛出一个<code> org.omg.CORBA.NO_IMPLEMENT </code>异常,并显示消息"This is a locally constrained object"。
+     * 这个方法是<code> org.omg.CORBA.Object </code>方法的默认实现。 <P>可选地可以由存根调用,以在取消编序完成时将回复流释放回ORB。
+     * 存根传递<code> _invoke()</code>或<code> ApplicationException.getInputStream()</code>返回的<code> InputStream 
+     * </code>。
+     * 这个方法是<code> org.omg.CORBA.Object </code>方法的默认实现。 <P>可选地可以由存根调用,以在取消编序完成时将回复流释放回ORB。
+     * 空值也可以传递给<code> _releaseReply </code>,在这种情况下,该方法是无操作。<P>。
+     * 
      * @param input the reply stream back to the ORB or null
      * @exception NO_IMPLEMENT
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
@@ -486,6 +617,9 @@ public class LocalObject implements org.omg.CORBA.Object
      * does not apply to local objects and is therefore not implemented.
      * This method is the default implementation of the
      * <code>org.omg.CORBA.Object</code> method.<P>
+     * <p>
+     * 
+     * 
      * @return NO_IMPLEMENT because this is a locally constrained object
      *      and this method does not apply to local objects
      * @exception NO_IMPLEMENT because this is a locally constrained object

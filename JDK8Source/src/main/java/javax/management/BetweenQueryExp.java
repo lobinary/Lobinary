@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package javax.management;
 /**
  * This class is used by the query-building mechanism to represent binary
  * relations.
+ * <p>
+ *  此类由查询构建机制用于表示二进制关系。
+ * 
+ * 
  * @serial include
  *
  * @since 1.5
@@ -39,16 +44,22 @@ class BetweenQueryExp extends QueryEval implements QueryExp {
     private static final long serialVersionUID = -2933597532866307444L;
 
     /**
+    /* <p>
+    /* 
      * @serial The checked value
      */
     private ValueExp exp1;
 
     /**
+    /* <p>
+    /* 
      * @serial The lower bound value
      */
     private ValueExp exp2;
 
     /**
+    /* <p>
+    /* 
      * @serial The upper bound value
      */
     private ValueExp exp3;
@@ -56,6 +67,9 @@ class BetweenQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Basic Constructor.
+     * <p>
+     *  基本构造函数。
+     * 
      */
     public BetweenQueryExp() {
     }
@@ -63,6 +77,9 @@ class BetweenQueryExp extends QueryEval implements QueryExp {
     /**
      * Creates a new BetweenQueryExp with v1 checked value, v2 lower bound
      * and v3 upper bound values.
+     * <p>
+     *  创建一个新的BetweenQueryExp与v1检查值,v2下限和v3上限值。
+     * 
      */
     public BetweenQueryExp(ValueExp v1, ValueExp v2, ValueExp v3) {
         exp1  = v1;
@@ -73,6 +90,9 @@ class BetweenQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the checked value of the query.
+     * <p>
+     *  返回检查的查询值。
+     * 
      */
     public ValueExp getCheckedValue()  {
         return exp1;
@@ -80,6 +100,9 @@ class BetweenQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the lower bound value of the query.
+     * <p>
+     *  返回查询的下限值。
+     * 
      */
     public ValueExp getLowerBound()  {
         return exp2;
@@ -87,6 +110,9 @@ class BetweenQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the upper bound value of the query.
+     * <p>
+     *  返回查询的上限值。
+     * 
      */
     public ValueExp getUpperBound()  {
         return exp3;
@@ -95,6 +121,10 @@ class BetweenQueryExp extends QueryEval implements QueryExp {
     /**
      * Applies the BetweenQueryExp on an MBean.
      *
+     * <p>
+     *  在MBean上应用BetweenQueryExp。
+     * 
+     * 
      * @param name The name of the MBean on which the BetweenQueryExp will be applied.
      *
      * @return  True if the query was successfully applied to the MBean, false otherwise.
@@ -134,6 +164,8 @@ class BetweenQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the string representing the object.
+     * <p>
+     *  返回表示对象的字符串。
      */
     @Override
     public String toString()  {

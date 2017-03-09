@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -97,6 +116,16 @@ import java.util.Objects;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  在日历中性API中具有时区的日期时间。
+ * <p>
+ *  {@code ZoneChronoDateTime}是具有时区的日期时间的不可变表示。此类存储所有日期和时间字段,精度为纳秒,以及时区和区域偏移。
+ * <p>
+ *  存储时区的目的是区分本地时间线重叠的不确定情况,通常作为夏令时结束的结果。可以使用时区上的方法来获得关于本地时间的信息。
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @serial Document the delegation of this class in the serialized-form specification.
  * @param <D> the concrete type for the date of this date-time
  * @since 1.8
@@ -106,19 +135,31 @@ final class ChronoZonedDateTimeImpl<D extends ChronoLocalDate>
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = -5261813987200935591L;
 
     /**
      * The local date-time.
+     * <p>
+     *  本地日期时间。
+     * 
      */
     private final transient ChronoLocalDateTimeImpl<D> dateTime;
     /**
      * The zone offset.
+     * <p>
+     *  区域偏移。
+     * 
      */
     private final transient ZoneOffset offset;
     /**
      * The zone ID.
+     * <p>
+     *  区域ID。
+     * 
      */
     private final transient ZoneId zone;
 
@@ -126,6 +167,10 @@ final class ChronoZonedDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Obtains an instance from a local date-time using the preferred offset if possible.
      *
+     * <p>
+     *  如果可能,使用优选偏移量从本地日期时间获取实例。
+     * 
+     * 
      * @param localDateTime  the local date-time, not null
      * @param zone  the zone identifier, not null
      * @param preferredOffset  the zone offset, null if no preference
@@ -162,6 +207,10 @@ final class ChronoZonedDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Obtains an instance from an instant using the specified time-zone.
      *
+     * <p>
+     * 使用指定的时区从即时获取实例。
+     * 
+     * 
      * @param chrono  the chronology, not null
      * @param instant  the instant, not null
      * @param zone  the zone identifier, not null
@@ -179,6 +228,10 @@ final class ChronoZonedDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Obtains an instance from an {@code Instant}.
      *
+     * <p>
+     *  从{@code Instant}中获取实例。
+     * 
+     * 
      * @param instant  the instant to create the date-time from, not null
      * @param zone  the time-zone to use, validated not null
      * @return the zoned date-time, validated not null
@@ -191,6 +244,10 @@ final class ChronoZonedDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Casts the {@code Temporal} to {@code ChronoZonedDateTimeImpl} ensuring it bas the specified chronology.
      *
+     * <p>
+     *  将{@code Temporal}转换为{@code ChronoZonedDateTimeImpl},确保它基于指定的年表。
+     * 
+     * 
      * @param chrono  the chronology to check for, not null
      * @param temporal  a date-time to cast, not null
      * @return the date-time checked and cast to {@code ChronoZonedDateTimeImpl}, not null
@@ -211,6 +268,10 @@ final class ChronoZonedDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param dateTime  the date-time, not null
      * @param offset  the zone offset, not null
      * @param zone  the zone ID, not null
@@ -323,6 +384,10 @@ final class ChronoZonedDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Writes the ChronoZonedDateTime using a
      * <a href="../../../serialized-form.html#java.time.chrono.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.chrono.Ser">专用序列化表单</a>写入ChronoZonedDateTime。
+     * 
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(3);                  // identifies a ChronoZonedDateTime
@@ -340,6 +405,9 @@ final class ChronoZonedDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

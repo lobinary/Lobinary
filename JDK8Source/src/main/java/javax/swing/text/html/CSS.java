@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -119,6 +120,28 @@ import javax.swing.text.*;
  * unless noted, so that
  * p { margin-top: 10% } will be treated as if no margin-top was specified.</b>
  *
+ * <p>
+ *  将一组<a href="http://www.w3.org/TR/REC-CSS1"> CSS属性</a>定义为类型安全枚举。 HTML视图实现使用CSS属性来确定它们将如何呈现。
+ * 这也定义了在CSS / HTML / StyleConstants之间映射的方法。任何缩写属性(如字体)都映射到内在属性。
+ *  <p>以下描述了渲染引擎支持的CSS属性：<ul> <li> font-family <li> font-style <li> font-size(支持相对单位)<li> font-weight < li>
+ *  font <li> color <li>背景颜色<li>背景颜色<li>背景图像<li>背景重复<li>背景< <li> vertical-align(仅限sup和super)<li> text-al
+ * ign(justify被视为中心)<li> margin-top <li> margin-right <li> margin-bottom <li> margin-left <li> margin <li>
+ *  padding-top <li> padding-right <li> padding-bottom <li> padding-left <li> padding <li> border-top- -
+ * right-style <li> border-bottom-style <li> border-left-style <li> border-style(只支持插入,开始和无)<li> border-
+ * top-color <li> border-right-颜色<li> border-bottom-color <li> border-left-color <li> border-color <li> 
+ * list-style-image <li> list-style-type <li>。
+ * 这也定义了在CSS / HTML / StyleConstants之间映射的方法。任何缩写属性(如字体)都映射到内在属性。
+ * </ul>
+ * 以下是建模,但当前未渲染。
+ *  <ul> <li>背景附件(背景始终视为滚动)<li>字间距<li>字母间距<li>文字缩进<li>文字转换<li> -height <li> border-top-width(用于指示是否应使用边框
+ * )<li> border-right-width <li> border-bottom-width <li> border-left-width <li> border-width <li> borde
+ * r-top <li> border-right <li> border-bottom <li> border-left <li> border <li> width <li>显示<li>白色空间<li>
+ * 列表样式。
+ * 以下是建模,但当前未渲染。
+ * </ul>
+ *  <p> <b>注意：暂时我们不完全支持相对单位,除非另有说明,否则p {margin-top：10％}将被视为没有指定margin-top。</b>
+ * 
+ * 
  * @author  Timothy Prinzing
  * @author  Scott Violet
  * @see StyleSheet
@@ -130,6 +153,9 @@ public class CSS implements Serializable {
      * that might hold CSS attributes.  Since this is a
      * closed set (i.e. defined exactly by the specification),
      * it is final and cannot be extended.
+     * <p>
+     *  定义用作AttributeSet上可能包含CSS属性的键。由于这是一个闭合集合(即完全由规范定义),它是最终的,不能扩展。
+     * 
      */
     public static final class Attribute {
 
@@ -143,6 +169,9 @@ public class CSS implements Serializable {
          * The string representation of the attribute.  This
          * should exactly match the string specified in the
          * CSS specification.
+         * <p>
+         *  属性的字符串表示形式。这应该完全匹配CSS规范中指定的字符串。
+         * 
          */
         public String toString() {
             return name;
@@ -152,6 +181,9 @@ public class CSS implements Serializable {
          * Fetch the default value for the attribute.
          * If there is no default value (such as for
          * composite attributes), null will be returned.
+         * <p>
+         *  获取属性的默认值。如果没有默认值(例如对于复合属性),将返回null。
+         * 
          */
         public String getDefaultValue() {
             return defaultValue;
@@ -160,6 +192,9 @@ public class CSS implements Serializable {
         /**
          * Indicates if the attribute should be inherited
          * from the parent or not.
+         * <p>
+         *  指示属性是否应从父级继承。
+         * 
          */
         public boolean isInherited() {
             return inherited;
@@ -315,6 +350,9 @@ public class CSS implements Serializable {
          * made up css attributes to describe orientation depended
          * margins. used for <dir>, <menu>, <ul> etc. see
          * 5088268 for more details
+         * <p>
+         *  组成css属性来描述方向依赖边距。用于<dir>,<menu>,<ul>等,详见5088268
+         * 
          */
         static final Attribute MARGIN_LEFT_LTR =
             new Attribute("margin-left-ltr",
@@ -378,6 +416,10 @@ public class CSS implements Serializable {
         /*public*/ static final Attribute BORDER_SPACING =
             new Attribute("border-spacing", "0", true);
 
+        /* <p>
+        /*  new Attribute("border-spacing","0",true);
+        /* 
+        /* 
         /*public*/ static final Attribute CAPTION_SIDE =
             new Attribute("caption-side", "left", true);
 
@@ -429,6 +471,25 @@ public class CSS implements Serializable {
          * The string representation of the attribute.  This
          * should exactly match the string specified in the
          * CSS specification.
+         * <p>
+         *  new Attribute("caption-side","left",true);
+         * 
+         * 
+         * private static final Attribute [] ALL_MARGINS = {MARGIN_TOP,MARGIN_RIGHT,MARGIN_BOTTOM,MARGIN_LEFT}; 
+         * private static final Attribute [] ALL_PADDING = {PADDING_TOP,PADDING_RIGHT,PADDING_BOTTOM,PADDING_LEFT}
+         * ; private static final Attribute [] ALL_BORDER_WIDTHS = {BORDER_TOP_WIDTH,BORDER_RIGHT_WIDTH,BORDER_BOTTOM_WIDTH,BORDER_LEFT_WIDTH}
+         * ; private static final Attribute [] ALL_BORDER_STYLES = {BORDER_TOP_STYLE,BORDER_RIGHT_STYLE,BORDER_BOTTOM_STYLE,BORDER_LEFT_STYLE}
+         * ; private static final Attribute [] ALL_BORDER_COLORS = {BORDER_TOP_COLOR,BORDER_RIGHT_COLOR,BORDER_BOTTOM_COLOR,BORDER_LEFT_COLOR}
+         * ;。
+         * 
+         *  }}
+         * 
+         *  static final class Value {
+         * 
+         *  private Value(String name){this.name = name; }}
+         * 
+         *  / **属性的字符串表示。这应该完全匹配CSS规范中指定的字符串。
+         * 
          */
         public String toString() {
             return name;
@@ -547,6 +608,9 @@ public class CSS implements Serializable {
      * Sets the base font size. <code>sz</code> is a CSS value, and is
      * not necessarily the point size. Use getPointSize to determine the
      * point size corresponding to <code>sz</code>.
+     * <p>
+     *  设置基本字体大小。 <code> sz </code>是一个CSS值,不一定是点大小。使用getPointSize确定与<code> sz </code>对应的点大小。
+     * 
      */
     void setBaseFontSize(int sz) {
         if (sz < 1)
@@ -559,6 +623,9 @@ public class CSS implements Serializable {
 
     /**
      * Sets the base font size from the passed in string.
+     * <p>
+     *  从传入的字符串中设置基本字体大小。
+     * 
      */
     void setBaseFontSize(String size) {
         int relSize, absSize, diff;
@@ -578,6 +645,9 @@ public class CSS implements Serializable {
 
     /**
      * Returns the base font size.
+     * <p>
+     *  返回基本字体大小。
+     * 
      */
     int getBaseFontSize() {
         return baseFontSize;
@@ -586,6 +656,9 @@ public class CSS implements Serializable {
     /**
      * Parses the CSS property <code>key</code> with value
      * <code>value</code> placing the result in <code>att</code>.
+     * <p>
+     *  使用值<code> value </code>解析CSS属性<code> key </code>,将结果放在<code> att </code>中。
+     * 
      */
     void addInternalCSSValue(MutableAttributeSet attr,
                              CSS.Attribute key, String value) {
@@ -636,6 +709,10 @@ public class CSS implements Serializable {
      * a CSS value of the CSS attribute named <code>key</code>. The receiver
      * should not modify <code>value</code>, and the first <code>count</code>
      * strings are valid.
+     * <p>
+     *  获取<code> value </code>的内部CSS表示形式,它是名为<code> key </code>的CSS属性的CSS值。
+     * 接收者不应修改<code> value </code>,第一个<code> count </code>字符串是有效的。
+     * 
      */
     Object getInternalCSSValue(CSS.Attribute key, String value) {
         CssValue conv = (CssValue) valueConvertor.get(key);
@@ -645,6 +722,9 @@ public class CSS implements Serializable {
 
     /**
      * Maps from a StyleConstants to a CSS Attribute.
+     * <p>
+     *  从StyleConstants到CSS属性的映射。
+     * 
      */
     Attribute styleConstantsKeyToCSSKey(StyleConstants sc) {
         return styleConstantToCssMap.get(sc);
@@ -652,6 +732,9 @@ public class CSS implements Serializable {
 
     /**
      * Maps from a StyleConstants value to a CSS value.
+     * <p>
+     * 从StyleConstants值到CSS值的映射。
+     * 
      */
     Object styleConstantsValueToCSSValue(StyleConstants sc,
                                          Object styleValue) {
@@ -666,6 +749,9 @@ public class CSS implements Serializable {
     /**
      * Converts the passed in CSS value to a StyleConstants value.
      * <code>key</code> identifies the CSS attribute being mapped.
+     * <p>
+     *  将传递的CSS值转换为StyleConstants值。 <code> key </code>标识要映射的CSS属性。
+     * 
      */
     Object cssValueToStyleConstantsValue(StyleConstants key, Object value) {
         if (value instanceof CssValue) {
@@ -679,6 +765,10 @@ public class CSS implements Serializable {
      * It is assumed the keys will be CSS.Attribute keys.
      * <code>sc</code> is the StyleContext that will be messaged to get
      * the font once the size, name and style have been determined.
+     * <p>
+     *  返回在AttributeSet中传递的值的字体。它假定键将是CSS.Attribute键。
+     *  <code> sc </code>是StyleContext,一旦大小,名称和样式已经确定,就会被调用来获取字体。
+     * 
      */
     Font getFont(StyleContext sc, AttributeSet a, int defaultSize, StyleSheet ss) {
         ss = getStyleSheet(ss);
@@ -687,6 +777,9 @@ public class CSS implements Serializable {
         /*
          * If the vertical alignment is set to either superscirpt or
          * subscript we reduce the font size by 2 points.
+         * <p>
+         *  如果垂直对齐设置为superscirpt或下标,我们将字体大小减少2点。
+         * 
          */
         StringValue vAlignV = (StringValue)a.getAttribute
                               (CSS.Attribute.VERTICAL_ALIGN);
@@ -741,6 +834,10 @@ public class CSS implements Serializable {
      * like brighter, more hue, etc.
      * This will return null if there is no value for <code>key</code>.
      *
+     * <p>
+     *  获取一组属性并将其转换为颜色规范。这可能用于指定更亮,更多的色调等。如果<code> key </code>没有值,则返回null。
+     * 
+     * 
      * @param key CSS.Attribute identifying where color is stored.
      * @param a the set of attributes
      * @return the color
@@ -756,6 +853,10 @@ public class CSS implements Serializable {
     /**
      * Returns the size of a font from the passed in string.
      *
+     * <p>
+     *  从传入的字符串中返回字体的大小。
+     * 
+     * 
      * @param size CSS string describing font size
      * @param baseFontSize size to use for relative units.
      */
@@ -780,6 +881,9 @@ public class CSS implements Serializable {
     /**
      * Returns the length of the attribute in <code>a</code> with
      * key <code>key</code>.
+     * <p>
+     *  使用键<code>键</code>返回<code> a </code>中属性的长度。
+     * 
      */
     float getLength(AttributeSet a, CSS.Attribute key, StyleSheet ss) {
         ss = getStyleSheet(ss);
@@ -793,6 +897,10 @@ public class CSS implements Serializable {
      * Convert a set of HTML attributes to an equivalent
      * set of CSS attributes.
      *
+     * <p>
+     *  将一组HTML属性转换为等效的CSS属性集。
+     * 
+     * 
      * @param htmlAttrSet AttributeSet containing the HTML attributes.
      * @return AttributeSet containing the corresponding CSS attributes.
      *        The AttributeSet will be empty if there are no mapping
@@ -831,6 +939,9 @@ public class CSS implements Serializable {
         if (tag == HTML.Tag.CAPTION) {
             /*
              * Navigator uses ALIGN for caption placement and IE uses VALIGN.
+             * <p>
+             *  导航器使用ALIGN用于字幕放置,IE使用VALIGN。
+             * 
              */
             Object v = htmlAttrSet.getAttribute(HTML.Attribute.ALIGN);
             if ((v != null) && (v.equals("top") || v.equals("bottom"))) {
@@ -873,6 +984,11 @@ public class CSS implements Serializable {
      * HTML.Attribute.HSPACE, end up mapping to two CSS.Attribute's.
      * Therefore, the value associated with each HTML.Attribute.
      * key ends up being an array of CSS.Attribute.* objects.
+     * <p>
+     *  下面的散列表和静态初始化块设置从知名的HTML属性到CSS属性的映射。在大多数情况下,两者之间有1-1映射。
+     * 但是在某些HTML属性的情况下,例如HTML.Attribute.VSPACE或HTML.Attribute.HSPACE,最终映射到两个CSS.Attribute的。
+     * 因此,与每个HTML.Attribute关联的值。 key结束是一个CSS.Attribute。*对象的数组。
+     * 
      */
     private static final Hashtable<HTML.Attribute, CSS.Attribute[]> htmlAttrToCssAttrMap = new Hashtable<HTML.Attribute, CSS.Attribute[]>(20);
 
@@ -880,6 +996,9 @@ public class CSS implements Serializable {
      * The hashtable and static initialization that follows sets
      * up a translation from StyleConstants (i.e. the <em>well known</em>
      * attributes) to the associated CSS attributes.
+     * <p>
+     * 随后的散列表和静态初始化设置了从StyleConstants(即<em>众所周知的</em>属性)到关联的CSS属性的翻译。
+     * 
      */
     private static final Hashtable<Object, Attribute> styleConstantToCssMap = new Hashtable<Object, Attribute>(17);
     /** Maps from HTML value to a CSS value. Used in internal mapping. */
@@ -1035,6 +1154,9 @@ public class CSS implements Serializable {
 
     /**
      * Return the set of all possible CSS attribute keys.
+     * <p>
+     *  返回所有可能的CSS属性键的集合。
+     * 
      */
     public static Attribute[] getAllAttributeKeys() {
         Attribute[] keys = new Attribute[Attribute.allAttributes.length];
@@ -1047,6 +1169,10 @@ public class CSS implements Serializable {
      * This will return <code>null</code> if there is no attribute
      * by the given name.
      *
+     * <p>
+     *  将字符串翻译为<code> CSS.Attribute </code>对象。如果没有给定名称的属性,这将返回<code> null </code>。
+     * 
+     * 
      * @param name the name of the CSS attribute to fetch the
      *  typesafe enumeration for
      * @return the <code>CSS.Attribute</code> object,
@@ -1062,6 +1188,10 @@ public class CSS implements Serializable {
      * This will return <code>null</code> if there is no value
      * by the given name.
      *
+     * <p>
+     *  将字符串转换为<code> CSS.Value </code>对象。如果给定名称没有值,将返回<code> null </code>。
+     * 
+     * 
      * @param name the name of the CSS value to fetch the
      *  typesafe enumeration for
      * @return the <code>CSS.Value</code> object,
@@ -1083,6 +1213,9 @@ public class CSS implements Serializable {
      * <code>base</code> is used as the parent. If a valid URL can not
      * be found, this will not throw a MalformedURLException, instead
      * null will be returned.
+     * <p>
+     *  返回给定CSS url字符串的网址。如果相对,<code> base </code>用作父级。如果找不到有效的URL,这将不会抛出MalformedURLException,而是将返回null。
+     * 
      */
     static URL getURL(URL base, String cssString) {
         if (cssString == null) {
@@ -1116,6 +1249,9 @@ public class CSS implements Serializable {
     /**
      * Converts a type Color to a hex string
      * in the format "#RRGGBB"
+     * <p>
+     *  将类型Color转换为十六进制字符串,格式为"#RRGGBB"
+     * 
      */
     static String colorToHex(Color color) {
 
@@ -1155,6 +1291,9 @@ public class CSS implements Serializable {
       * Convert a "#FFFFFF" hex string to a Color.
       * If the color specification is bad, an attempt
       * will be made to fix it up.
+      * <p>
+      *  将"#FFFFFF"十六进制字符串转换为颜色。如果颜色规格不好,将尝试修复它。
+      * 
       */
     static final Color hexToColor(String value) {
         String digits;
@@ -1177,6 +1316,9 @@ public class CSS implements Serializable {
     /**
      * Convert a color string such as "RED" or "#NNNNNN" or "rgb(r, g, b)"
      * to a Color.
+     * <p>
+     *  将颜色字符串(如"RED"或"#NNNNNN"或"rgb(r,g,b)")转换为颜色。
+     * 
      */
     static Color stringToColor(String str) {
       Color color;
@@ -1235,6 +1377,9 @@ public class CSS implements Serializable {
      * each of the Color components is either an integer, or a floating number
      * with a % after indicating a percentage value of 255. Values are
      * constrained to fit with 0-255. The resulting Color is returned.
+     * <p>
+     *  以<code> rgb(r,g,b)</code>格式解析字符串,其中每个颜色分量是一个整数,或者是指示百分比值为255后带有％的浮点数。值受约束适合0-255。返回生成的Color。
+     * 
      */
     private static Color parseRGB(String string) {
         // Find the next numeric char
@@ -1253,6 +1398,9 @@ public class CSS implements Serializable {
      * at <code>index[0]</code>. The value can either can an integer, or
      * a percentage (floating number ending with %), in which case it is
      * multiplied by 255.
+     * <p>
+     *  从<code> index [0] </code>开始从<code> string </code>返回下一个整数值。该值可以是整数或百分比(以％结尾的浮点数),在这种情况下,它将乘以255。
+     * 
      */
     private static int getColorComponent(String string, int[] index) {
         int length = string.length();
@@ -1313,6 +1461,8 @@ public class CSS implements Serializable {
 
 
     /**
+    /* <p>
+    /* 
      * @return an array of all the strings in <code>value</code>
      *         that are separated by whitespace.
      */
@@ -1346,6 +1496,9 @@ public class CSS implements Serializable {
     /**
      * Return the point size, given a size index. Legal HTML index sizes
      * are 1-7.
+     * <p>
+     * 返回点大小,给定一个大小索引。法律HTML索引大小为1-7。
+     * 
      */
     float getPointSize(int index, StyleSheet ss) {
         ss = getStyleSheet(ss);
@@ -1398,6 +1551,9 @@ public class CSS implements Serializable {
                  * It can map to to 1 of many(3) possible CSS attributes
                  * depending on the nature of the tag the attribute is
                  * part off and depending on the value of the attribute.
+                 * <p>
+                 *  HTML.Attribute.ALIGN需要特殊处理。它可以映射到许多(3)可能的CSS属性中的一个,具体取决于属性是部分关闭的标签的性质,并且取决于属性的值。
+                 * 
                  */
                 if (key == HTML.Attribute.ALIGN) {
                     String htmlAttrValue = (String)htmlAttrSet.getAttribute(HTML.Attribute.ALIGN);
@@ -1415,6 +1571,9 @@ public class CSS implements Serializable {
                         /*
                          * The html size attribute has a mapping in the CSS world only
                          * if it is par of a font or base font tag.
+                         * <p>
+                         *  html size属性在CSS世界中有一个映射,只有它是一个字体或基本字体标签的par。
+                         * 
                          */
                     } else if (tag == HTML.Tag.TABLE && key == HTML.Attribute.BORDER) {
                         int borderWidth = getTableBorder(htmlAttrSet);
@@ -1438,6 +1597,9 @@ public class CSS implements Serializable {
         /*
          * In the case of all remaining HTML.Attribute's they
          * map to 1 or more CCS.Attribute.
+         * <p>
+         *  在所有剩余HTML.Attribute的情况下,它们映射到1个或多个CCS.Attribute。
+         * 
          */
         CSS.Attribute[] cssAttrList = getCssAttribute(key);
 
@@ -1457,6 +1619,10 @@ public class CSS implements Serializable {
      * value, this method returns a CssValue object to associate with the
      * CSS attribute.
      *
+     * <p>
+     *  给定一个CSS.Attribute对象及其对应的HTML.Attribute的值,此方法返回一个CssValue对象与CSS属性相关联。
+     * 
+     * 
      * @param the CSS.Attribute
      * @param a String containing the value associated HTML.Attribtue.
      */
@@ -1469,6 +1635,10 @@ public class CSS implements Serializable {
     /**
      * Maps an HTML.Attribute object to its appropriate CSS.Attributes.
      *
+     * <p>
+     *  将HTML.Attribute对象映射到其相应的CSS.Attributes。
+     * 
+     * 
      * @param HTML.Attribute
      * @return CSS.Attribute[]
      */
@@ -1484,6 +1654,11 @@ public class CSS implements Serializable {
      * based on the tag associated with the attribute and the
      * value of the attribute.
      *
+     * <p>
+     *  根据与属性关联的标记和属性的值,将HTML.Attribute.ALIGN映射到以下之一：CSS.Attribute.TEXT_ALIGN CSS.Attribute.FLOAT CSS.Attrib
+     * ute.VERTICAL_ALIGN。
+     * 
+     * 
      * @param AttributeSet containing HTML attributes.
      * @return CSS.Attribute mapping for HTML.Attribute.ALIGN.
      */
@@ -1504,12 +1679,22 @@ public class CSS implements Serializable {
             }
         }
         return null;
+/* <p>
+/*  String htmlAttrValue =(String)htmlAttrSet.getAttribute(HTML.Attribute.ALIGN); CSS.Attribute cssAttr 
+/* = CSS.Attribute.TEXT_ALIGN; if(htmlAttrValue！= null && htmlAttrSet instanceof Element){Element elem =(Element)htmlAttrSet; if(！elem.isLeaf()&& tag.isBlock()&& validTextAlignValue(htmlAttrValue)){return CSS.Attribute.TEXT_ALIGN; }
+/*  else if(isFloater(htmlAttrValue)){return CSS.Attribute.FLOAT; } else if(elem.isLeaf()){return CSS.Attribute.VERTICAL_ALIGN; }
+/* } return null;。
+/* 
         */
     }
 
     /**
      * Fetches the tag associated with the HTML AttributeSet.
      *
+     * <p>
+     *  获取与HTML AttributeSet关联的标记。
+     * 
+     * 
      * @param  AttributeSet containing the HTML attributes.
      * @return HTML.Tag
      */
@@ -1562,6 +1747,19 @@ public class CSS implements Serializable {
      * CSS.Attribute, and then calls the toStyleConstants
      * method to convert the CSS value to a StyleConstants
      * value.
+     * <p>
+     * 基类到属性集中的CSS值。这是为了作为/从其他属性格式的转换器。
+     * <p>
+     *  CSS解析器使用parseCssValue方法将字符串转换为适合给定键的任何格式(即,这些转换器使用CSS.Attribute作为键和CssValue作为值存储在映射中)。
+     * <p>
+     *  HTML到CSS转换过程首先将HTML.Attribute转换为CSS.Attribute,然后在HTML属性的值上调用parseHtmlValue方法以产生相应的CSS值。
+     * <p>
+     *  StyleConstants到CSS转换过程首先将StyleConstants属性转换为CSS.Attribute,然后调用fromStyleConstants方法将StyleConstants值转换
+     * 为CSS值。
+     * <p>
+     *  CSS到StyleConstants转换过程首先将StyleConstants属性转换为CSS.Attribute,然后调用toStyleConstants方法将CSS值转换为StyleConstan
+     * ts值。
+     * 
      */
     static class CssValue implements Serializable {
 
@@ -1570,6 +1768,9 @@ public class CSS implements Serializable {
          * (for fast processing) used in the attribute sets.
          * The fallback storage for any value that we don't
          * have a special binary format for is a String.
+         * <p>
+         *  将CSS值字符串转换为属性集中使用的内部格式(用于快速处理)。对于我们没有特殊二进制格式的任何值的后备存储是一个String。
+         * 
          */
         Object parseCssValue(String value) {
             return value;
@@ -1583,6 +1784,9 @@ public class CSS implements Serializable {
          * values are the same).  If the attribute value
          * isn't recognized as a CSS value it is generally
          * returned as null.
+         * <p>
+         *  将HTML属性值转换为CSS属性值。如果没有转换,则返回null。这被实现为简单地转发到CSS解析默认情况下(因为一些属性值是相同的)。如果属性值未被识别为CSS值,则通常返回为null。
+         * 
          */
         Object parseHtmlValue(String value) {
             return parseCssValue(value);
@@ -1593,6 +1797,10 @@ public class CSS implements Serializable {
          * a CSS attribute value.  If there is no conversion,
          * returns <code>null</code>.  By default, there is no conversion.
          *
+         * <p>
+         * 将<code> StyleConstants </code>属性值转换为CSS属性值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @param value the value of a <code>StyleConstants</code>
          *   attribute to be converted
@@ -1610,6 +1818,10 @@ public class CSS implements Serializable {
          * <code>null</code>.
          * By default, there is no conversion.
          *
+         * <p>
+         *  将CSS属性值转换为<code> StyleConstants </code>值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @param v the view containing <code>AttributeSet</code>
          * @return the <code>StyleConstants</code> attribute value that
@@ -1621,6 +1833,9 @@ public class CSS implements Serializable {
 
         /**
          * Return the CSS format of the value
+         * <p>
+         *  返回值的CSS格式
+         * 
          */
         public String toString() {
             return svalue;
@@ -1629,6 +1844,9 @@ public class CSS implements Serializable {
         /**
          * The value as a string... before conversion to a
          * binary format.
+         * <p>
+         *  该值作为字符串...在转换为二进制格式之前。
+         * 
          */
         String svalue;
     }
@@ -1640,6 +1858,10 @@ public class CSS implements Serializable {
      * value as a string (via the superclass), but
      * provides StyleConstants conversion support for the
      * CSS attributes that are held as strings.
+     * <p>
+     *  默认情况下,CSS属性表示为简单字符串。默认情况下,它们也没有转换到/来自StyleConstants。
+     * 这个类将值表示为字符串(通过超类),但是为作为字符串保存的CSS属性提供StyleConstants转换支持。
+     * 
      */
     static class StringValue extends CssValue {
 
@@ -1648,6 +1870,9 @@ public class CSS implements Serializable {
          * (for fast processing) used in the attribute sets.
          * This produces a StringValue, so that it can be
          * used to convert from CSS to StyleConstants values.
+         * <p>
+         *  将CSS值字符串转换为属性集中使用的内部格式(用于快速处理)。这将产生一个StringValue,以便它可以用于从CSS转换为StyleConstants值。
+         * 
          */
         Object parseCssValue(String value) {
             StringValue sv = new StringValue();
@@ -1660,6 +1885,10 @@ public class CSS implements Serializable {
          * a CSS attribute value.  If there is no conversion
          * returns <code>null</code>.
          *
+         * <p>
+         *  将<code> StyleConstants </code>属性值转换为CSS属性值。如果没有转换返回<code> null </code>。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @param value the value of a <code>StyleConstants</code>
          *   attribute to be converted
@@ -1722,6 +1951,10 @@ public class CSS implements Serializable {
          * If there is no conversion, returns <code>null</code>.
          * By default, there is no conversion.
          *
+         * <p>
+         *  将CSS属性值转换为<code> StyleConstants </code>值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @return the <code>StyleConstants</code> attribute value that
          *   represents the CSS attribute value
@@ -1796,6 +2029,9 @@ public class CSS implements Serializable {
      * associated string.
      * If the type is Integer, the value is specified
      * in terms of a size index.
+     * <p>
+     * 表示CSS.FONT_SIZE属性的值。值的二进制格式可以是几种类型之一。如果类型为Float,则根据点或百分比指定值,具体取决于关联字符串的结尾。如果类型为整数,则按照大小索引指定值。
+     * 
      */
     class FontSize extends CssValue {
 
@@ -1804,6 +2040,10 @@ public class CSS implements Serializable {
          * what we need for the purpose of creating/fetching
          * a Font object.
          *
+         * <p>
+         *  返回以磅为单位的大小。这最终是我们创建/获取Font对象所需要的。
+         * 
+         * 
          * @param a the attribute set the value is being
          *  requested from.  We may need to walk up the
          *  resolve hierarchy if it's relative.
@@ -1896,6 +2136,9 @@ public class CSS implements Serializable {
                 /*
                  * relative sizes in the size attribute are relative
                  * to the <basefont>'s size.
+                 * <p>
+                 *  size属性中的相对大小是相对于<basefont>的大小。
+                 * 
                  */
                 int baseFontSize = getBaseFontSize();
                 if (value.charAt(0) == '+') {
@@ -1927,6 +2170,10 @@ public class CSS implements Serializable {
          * a CSS attribute value.  If there is no conversion
          * returns <code>null</code>.  By default, there is no conversion.
          *
+         * <p>
+         *  将<code> StyleConstants </code>属性值转换为CSS属性值。如果没有转换返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @param value the value of a <code>StyleConstants</code>
          *   attribute to be converted
@@ -1950,6 +2197,10 @@ public class CSS implements Serializable {
          * value.  If there is no conversion, returns <code>null</code>.
          * By default, there is no conversion.
          *
+         * <p>
+         *  将CSS属性值转换为<code> StyleConstants </code>值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @return the <code>StyleConstants</code> attribute value that
          *   represents the CSS attribute value
@@ -1970,6 +2221,9 @@ public class CSS implements Serializable {
 
         /**
          * Returns the font family to use.
+         * <p>
+         *  返回要使用的字体系列。
+         * 
          */
         String getValue() {
             return family;
@@ -2037,6 +2291,10 @@ public class CSS implements Serializable {
          * a CSS attribute value.  If there is no conversion
          * returns <code>null</code>.  By default, there is no conversion.
          *
+         * <p>
+         *  将<code> StyleConstants </code>属性值转换为CSS属性值。如果没有转换返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @param value the value of a <code>StyleConstants</code>
          *   attribute to be converted
@@ -2052,6 +2310,10 @@ public class CSS implements Serializable {
          * value.  If there is no conversion, returns <code>null</code>.
          * By default, there is no conversion.
          *
+         * <p>
+         *  将CSS属性值转换为<code> StyleConstants </code>值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @return the <code>StyleConstants</code> attribute value that
          *   represents the CSS attribute value
@@ -2092,6 +2354,10 @@ public class CSS implements Serializable {
          * a CSS attribute value.  If there is no conversion
          * returns <code>null</code>.  By default, there is no conversion.
          *
+         * <p>
+         *  将<code> StyleConstants </code>属性值转换为CSS属性值。如果没有转换返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @param value the value of a <code>StyleConstants</code>
          *   attribute to be converted
@@ -2110,6 +2376,10 @@ public class CSS implements Serializable {
          * value.  If there is no conversion, returns <code>null</code>.
          * By default, there is no conversion.
          *
+         * <p>
+         * 将CSS属性值转换为<code> StyleConstants </code>值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @return the <code>StyleConstants</code> attribute value that
          *   represents the CSS attribute value
@@ -2129,6 +2399,9 @@ public class CSS implements Serializable {
 
         /**
          * Returns the color to use.
+         * <p>
+         *  返回要使用的颜色。
+         * 
          */
         Color getValue() {
             return c;
@@ -2155,6 +2428,10 @@ public class CSS implements Serializable {
          * a CSS attribute value.  If there is no conversion
          * returns <code>null</code>.  By default, there is no conversion.
          *
+         * <p>
+         *  将<code> StyleConstants </code>属性值转换为CSS属性值。如果没有转换返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @param value the value of a <code>StyleConstants</code>
          *   attribute to be converted
@@ -2173,6 +2450,10 @@ public class CSS implements Serializable {
          * value.  If there is no conversion, returns <code>null</code>.
          * By default, there is no conversion.
          *
+         * <p>
+         *  将CSS属性值转换为<code> StyleConstants </code>值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @return the <code>StyleConstants</code> attribute value that
          *   represents the CSS attribute value
@@ -2240,6 +2521,9 @@ public class CSS implements Serializable {
 
         /**
          * if this length value may be negative.
+         * <p>
+         *  如果该长度值可以是负的。
+         * 
          */
         boolean mayBeNegative;
 
@@ -2253,6 +2537,9 @@ public class CSS implements Serializable {
 
         /**
          * Returns the length (span) to use.
+         * <p>
+         *  返回要使用的长度(span)。
+         * 
          */
         float getValue() {
             return getValue(false);
@@ -2265,6 +2552,9 @@ public class CSS implements Serializable {
         /**
          * Returns the length (span) to use. If the value represents
          * a percentage, it is scaled based on <code>currentValue</code>.
+         * <p>
+         *  返回要使用的长度(span)。如果值表示百分比,则根据<code> currentValue </code>缩放。
+         * 
          */
         float getValue(float currentValue) {
             return getValue(currentValue, false);
@@ -2279,6 +2569,9 @@ public class CSS implements Serializable {
         /**
          * Returns true if the length represents a percentage of the
          * containing box.
+         * <p>
+         *  如果长度表示包含框的百分比,则返回true。
+         * 
          */
         boolean isPercentage() {
             return percentage;
@@ -2332,6 +2625,10 @@ public class CSS implements Serializable {
          * a CSS attribute value.  If there is no conversion,
          * returns <code>null</code>.  By default, there is no conversion.
          *
+         * <p>
+         *  将<code> StyleConstants </code>属性值转换为CSS属性值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @param value the value of a <code>StyleConstants</code>
          *   attribute to be converted
@@ -2350,6 +2647,10 @@ public class CSS implements Serializable {
          * value.  If there is no conversion, returns <code>null</code>.
          * By default, there is no conversion.
          *
+         * <p>
+         *  将CSS属性值转换为<code> StyleConstants </code>值。如果没有转换,则返回<code> null </code>。默认情况下,没有转换。
+         * 
+         * 
          * @param key the <code>StyleConstants</code> attribute
          * @return the <code>StyleConstants</code> attribute value that
          *   represents the CSS attribute value
@@ -2359,9 +2660,13 @@ public class CSS implements Serializable {
         }
 
         /** If true, span is a percentage value, and that to determine
+        /* <p>
+        /* 
          * the length another value needs to be passed in. */
         boolean percentage;
         /** Either the absolute value (percentage == false) or
+        /* <p>
+        /* 
          * a percentage value. */
         float span;
 
@@ -2372,6 +2677,9 @@ public class CSS implements Serializable {
     /**
      * BorderWidthValue is used to model BORDER_XXX_WIDTH and adds support
      * for the thin/medium/thick values.
+     * <p>
+     *  BorderWidthValue用于对BORDER_XXX_WIDTH建模,并添加对thin / medium / thick值的支持。
+     * 
      */
     static class BorderWidthValue extends LengthValue {
         BorderWidthValue(String svalue, int index) {
@@ -2411,6 +2719,9 @@ public class CSS implements Serializable {
     /**
      * Handles uniquing of CSS values, like lists, and background image
      * repeating.
+     * <p>
+     *  处理CSS值的唯一化,如列表和背景图像重复。
+     * 
      */
     static class CssValueMapper extends CssValue {
         Object parseCssValue(String value) {
@@ -2434,6 +2745,9 @@ public class CSS implements Serializable {
 
     /**
      * Used for background images, to represent the position.
+     * <p>
+     *  用于背景图像,以表示位置。
+     * 
      */
     static class BackgroundPosition extends CssValue {
         float horizontalPosition;
@@ -2579,6 +2893,9 @@ public class CSS implements Serializable {
 
     /**
      * Used for BackgroundImages.
+     * <p>
+     *  用于BackgroundImages。
+     * 
      */
     static class BackgroundImage extends CssValue {
         private boolean    loadedImage;
@@ -2618,6 +2935,9 @@ public class CSS implements Serializable {
     /**
      * Parses a length value, this is used internally, and never added
      * to an AttributeSet or returned to the developer.
+     * <p>
+     * 解析长度值,这在内部使用,从不添加到AttributeSet或返回给开发人员。
+     * 
      */
     static class LengthUnit implements Serializable {
         static Hashtable<String, Float> lengthMapping = new Hashtable<String, Float>(6);
@@ -2754,11 +3074,17 @@ public class CSS implements Serializable {
      * Class used to parse font property. The font property is shorthand
      * for the other font properties. This expands the properties, placing
      * them in the attributeset.
+     * <p>
+     *  用于解析字体属性的类。 font属性是其他字体属性的缩写。这会扩展属性,将它们放在attributeset中。
+     * 
      */
     static class ShorthandFontParser {
         /**
          * Parses the shorthand font string <code>value</code>, placing the
          * result in <code>attr</code>.
+         * <p>
+         *  解析速记字体字符串<code> value </code>,将结果放在<code> attr </code>中。
+         * 
          */
         static void parseShorthandFont(CSS css, String value,
                                        MutableAttributeSet attr) {
@@ -2896,11 +3222,17 @@ public class CSS implements Serializable {
 
     /**
      * Parses the background property into its intrinsic values.
+     * <p>
+     *  将background属性解析为其内在值。
+     * 
      */
     static class ShorthandBackgroundParser {
         /**
          * Parses the shorthand font string <code>value</code>, placing the
          * result in <code>attr</code>.
+         * <p>
+         *  解析速记字体字符串<code> value </code>,将结果放在<code> attr </code>中。
+         * 
          */
         static void parseShorthandBackground(CSS css, String value,
                                              MutableAttributeSet attr) {
@@ -2969,6 +3301,9 @@ public class CSS implements Serializable {
                 css.addInternalCSSValue(attr, CSS.Attribute.BACKGROUND_COLOR,
                                         null);
             }
+            /* <p>
+            /*  if((found&16)== 0){css.addInternalCSSValue(attr,CSS.Attribute.BACKGROUND_COLOR,null); }}
+            /* 
             */
         }
 
@@ -3001,12 +3336,19 @@ public class CSS implements Serializable {
 
     /**
      * Used to parser margin and padding.
+     * <p>
+     *  用于解析边距和填充。
+     * 
      */
     static class ShorthandMarginParser {
         /**
          * Parses the shorthand margin/padding/border string
          * <code>value</code>, placing the result in <code>attr</code>.
          * <code>names</code> give the 4 instrinsic property names.
+         * <p>
+         *  解析速记边距/ padding / border string <code> value </code>,将结果放在<code> attr </code>中。
+         *  <code> names </code>给出4个instrinsic属性名。
+         * 
          */
         static void parseShorthandMargin(CSS css, String value,
                                          MutableAttributeSet attr,
@@ -3098,6 +3440,9 @@ public class CSS implements Serializable {
      * Calculate the requirements needed to tile the requirements
      * given by the iterator that would be tiled.  The calculation
      * takes into consideration margin and border spacing.
+     * <p>
+     *  计算平铺由平铺的迭代器给定的需求所需的要求。计算考虑了边距和边界间距。
+     * 
      */
     static SizeRequirements calculateTiledRequirements(LayoutIterator iter, SizeRequirements r) {
         long minimum = 0;
@@ -3140,12 +3485,18 @@ public class CSS implements Serializable {
      * This should be done collapsing the neighboring
      * margins to be a total of the maximum of the two
      * neighboring margin areas as described in the CSS spec.
+     * <p>
+     *  计算给定迭代器的平铺布局。这应该将邻近边缘折叠为两个相邻边缘区域的最大值的总和,如CSS规范中所描述的。
+     * 
      */
     static void calculateTiledLayout(LayoutIterator iter, int targetSpan) {
 
         /*
          * first pass, calculate the preferred sizes, adjustments needed because
          * of margin collapsing, and the flexibility to adjust the sizes.
+         * <p>
+         *  第一遍,计算优选尺寸,由于边缘塌陷而需要的调整,以及调整尺寸的灵活性。
+         * 
          */
         long preferred = 0;
         long currentPreferred;
@@ -3190,6 +3541,9 @@ public class CSS implements Serializable {
          * Second pass, expand or contract by as much as possible to reach
          * the target span.  This takes the margin collapsing into account
          * prior to adjusting the span.
+         * <p>
+         *  第二遍,尽可能扩展或收缩到达目标跨度。这会在调整跨度之前考虑边距折叠。
+         * 
          */
 
         // determine the adjustment to be made
@@ -3279,6 +3633,9 @@ public class CSS implements Serializable {
     /**
      * An iterator to express the requirements to use when computing
      * layout.
+     * <p>
+     * 迭代器表示计算布局时要使用的要求。
+     * 
      */
     interface LayoutIterator {
 
@@ -3381,6 +3738,10 @@ public class CSS implements Serializable {
      * sizes is safe
      *
      * idk 08/30/2004
+     * <p>
+     *  我们需要StyleSheet来解析长度单位。 (见isW3CLengthUnits),我们不能传递样式表来处理相对大小。 (不要改变公共API是必要的)CSS不太可能从更多的线程访问。
+     * 为StyleSheet提供用于解析相对大小的本地存储是安全的。
+     * 
      */
     private StyleSheet getStyleSheet(StyleSheet ss) {
         if (ss != null) {

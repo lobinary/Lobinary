@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -18,12 +19,22 @@ package org.omg.DynamicAny;
     * </UL>
     * The component_count value for a union depends on the current discriminator:
     * it is 2 for a union whose discriminator indicates a named member, and 1 otherwise.
+    * <p>
+    *  DynUnion对象支持操作IDL联合。联合只能有两个有效的当前位置：
+    * <UL>
+    *  <LI>零,其表示鉴别符<LI>一,其表示活动成员
+    * </UL>
+    *  联合的component_count值取决于当前的鉴别器：对于其鉴别器指示命名成员的联合,其值为2,否则为1。
+    * 
     */
 public interface DynUnionOperations  extends org.omg.DynamicAny.DynAnyOperations
 {
 
   /**
         * Returns the current discriminator value.
+        * <p>
+        *  返回当前的鉴别器值。
+        * 
         */
   org.omg.DynamicAny.DynAny get_discriminator ();
 
@@ -39,6 +50,13 @@ public interface DynUnionOperations  extends org.omg.DynamicAny.DynAnyOperations
         * Otherwise, if the discriminator value indicates a named union member, the current position is set to 1
         * (has_no_active_member returns false and component_count returns 2 in this case).
         *
+        * <p>
+        * 将Dynunion的鉴别器设置为指定的值。将鉴别器设置为与当前活动联合成员一致的值不会影响当前活动成员。
+        * 将鉴别器设置为与当前活动成员不一致的值将禁用该成员,并通过将成员初始化为其默认值来激活与新鉴别符值(如果有该值的成员)一致的成员。
+        * 如果鉴别器值指示不存在的联合成员(has_no_active_member在这种情况下返回真),则设置联合的鉴别器将当前位置设置为0。
+        * 否则,如果鉴别器值指示命名的联合成员,则将当前位置设置为1(在这种情况下,has_no_active_member返回false,component_count返回2)。
+        * 
+        * 
         * @exception TypeMismatch if the TypeCode of the parameter is not equivalent to the TypeCode
         *            of the union's discriminator
         */
@@ -48,6 +66,10 @@ public interface DynUnionOperations  extends org.omg.DynamicAny.DynAnyOperations
         * Sets the discriminator to a value that is consistent with the value of the default case of a union.
         * It sets the current position to zero and causes component_count to return 2.
         *
+        * <p>
+        *  将鉴别器设置为与联合的默认大小写的值一致的值。它将当前位置设置为零,并导致component_count返回2。
+        * 
+        * 
         * @exception TypeMismatch if the union does not have an explicit default case
         */
   void set_to_default_member () throws org.omg.DynamicAny.DynAnyPackage.TypeMismatch;
@@ -56,6 +78,10 @@ public interface DynUnionOperations  extends org.omg.DynamicAny.DynAnyOperations
         * Sets the discriminator to a value that does not correspond to any of the unions case labels.
         * It sets the current position to zero and causes component_count to return 1.
         *
+        * <p>
+        *  将鉴别器设置为不对应任何联合用例标签的值。它将当前位置设置为零,并使component_count返回1。
+        * 
+        * 
         * @exception TypeMismatch if the union has an explicit default case or if it uses the entire range
         *            of discriminator values for explicit case labels
         */
@@ -67,17 +93,28 @@ public interface DynUnionOperations  extends org.omg.DynamicAny.DynAnyOperations
         * Calling this operation on a union that has a default case returns false.
         * Calling this operation on a union that uses the entire range of discriminator values
         * for explicit case labels returns false.
+        * <p>
+        * 如果联合没有活动成员,则返回true,也就是说,联合值仅由其鉴别器组成,因为鉴别器具有未列为明确案例标签的值。在具有默认案例的联合上调用此操作会返回false。
+        * 对使用显式案例标签的整个范围的鉴别器值的联合调用此操作返回false。
+        * 
         */
   boolean has_no_active_member ();
 
   /**
         * Returns the TCKind value of the discriminators TypeCode.
+        * <p>
+        *  返回鉴别器TypeCode的TCKind值。
+        * 
         */
   org.omg.CORBA.TCKind discriminator_kind ();
 
   /**
         * Returns the TCKind value of the currently active members TypeCode. 
         *
+        * <p>
+        *  返回当前活动成员TypeCode的TCKind值。
+        * 
+        * 
         * @exception InvalidValue if the union does not have a currently active member
         */
   org.omg.CORBA.TCKind member_kind () throws org.omg.DynamicAny.DynAnyPackage.InvalidValue;
@@ -87,6 +124,10 @@ public interface DynUnionOperations  extends org.omg.DynamicAny.DynAnyOperations
         * for as long as the currently active member does not change. Using the returned reference
         * beyond the life time of the currently active member raises OBJECT_NOT_EXIST. 
         *
+        * <p>
+        *  返回当前活动的成员。请注意,返回的引用仅在当前活动成员不更改时才保持有效。使用超出当前活动成员的生命周期的返回引用引发OBJECT_NOT_EXIST。
+        * 
+        * 
         * @exception InvalidValue if the union has no active member
         */
   org.omg.DynamicAny.DynAny member () throws org.omg.DynamicAny.DynAnyPackage.InvalidValue;
@@ -95,6 +136,9 @@ public interface DynUnionOperations  extends org.omg.DynamicAny.DynAnyOperations
         * Returns the name of the currently active member. If the unions TypeCode does not contain
         * a member name for the currently active member, the operation returns an empty string.
         *
+        * <p>
+        *  返回当前活动成员的名称。如果联合体TypeCode不包含当前活动成员的成员名称,则操作将返回一个空字符串。
+        * 
         * @exception InvalidValue if the union has no active member
         */
   String member_name () throws org.omg.DynamicAny.DynAnyPackage.InvalidValue;

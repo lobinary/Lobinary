@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,21 @@ import java.util.Arrays;
  * {@code nextToken} method in each iteration of the loop until
  * it returns the value {@code TT_EOF}.
  *
+ * <p>
+ *  {@code StreamTokenizer}类接受一个输入流并将其解析为"令牌",允许一次读取一个令牌。解析过程由表和可设置为各种状态的多个标志控制。
+ * 流标记器可以识别标识符,数字,引用的字符串和各种注释样式。
+ * <p>
+ *  从输入流读取的每个字节被视为范围{@code'\ u005Cu0000'}到{@code'\ u005Cu00FF'}中的字符。
+ * 字符值用于查找字符的五个可能属性：<i>空格</i>,<i>字母</i>,<i>数字</i> i>和<i>注释字符</i>。每个字符可以具有零个或多个这些属性。
+ * <p>
+ *  此外,一个实例有四个标志。这些标志指示：
+ * <ul>
+ *  <li>行终止符是作为令牌返回还是作为仅分隔令牌的空白处理。 <li>是否识别和跳过C风格的评论。 <li>是否要识别和跳过C ++样式的注释。 <li>标识符的字符是否转换为小写。
+ * </ul>
+ * <p>
+ *  典型的应用程序首先构造这个类的实例,设置语法表,然后在循环的每次迭代中重复循环调用{@code nextToken}方法,直到它返回值{@code TT_EOF}。
+ * 
+ * 
  * @author  James Gosling
  * @see     java.io.StreamTokenizer#nextToken()
  * @see     java.io.StreamTokenizer#TT_EOF
@@ -76,6 +92,9 @@ public class StreamTokenizer {
      * to indicate that a new character should be read and, if it is a '\n'
      * character, it should be discarded and a second new character should be
      * read.
+     * <p>
+     * nextToken方法要考虑的下一个字符。也可以是NEED_CHAR以指示应当读取新字符,或者SKIP_LF以指示应当读取新字符,并且如果其是"\ n"字符,则应该丢弃该字符,并且应当读取第二新字符。
+     * 
      */
     private int peekc = NEED_CHAR;
 
@@ -117,6 +136,16 @@ public class StreamTokenizer {
      * <p>
      * The initial value of this field is -4.
      *
+     * <p>
+     *  调用{@code nextToken}方法后,此字段包含刚读取的令牌的类型。对于单个字符令牌,其值为单个字符,转换为整数。对于带引号的字符串令牌,其值是引号字符。否则,其值为以下之一：
+     * <ul>
+     *  <li> {@ code TT_WORD}表示该令牌是一个字。 <li> {@ code TT_NUMBER}表示该令牌是一个数字。 <li> {@ code TT_EOL}表示行末行已读取。
+     * 如果使用参数{@code true}调用{@code eolIsSignificant}方法,该字段只能有此值。 <li> {@ code TT_EOF}表示已达到输入流的结尾。
+     * </ul>
+     * <p>
+     *  此字段的初始值为-4。
+     * 
+     * 
      * @see     java.io.StreamTokenizer#eolIsSignificant(boolean)
      * @see     java.io.StreamTokenizer#nextToken()
      * @see     java.io.StreamTokenizer#quoteChar(int)
@@ -129,27 +158,42 @@ public class StreamTokenizer {
 
     /**
      * A constant indicating that the end of the stream has been read.
+     * <p>
+     *  指示流的结尾已被读取的常量。
+     * 
      */
     public static final int TT_EOF = -1;
 
     /**
      * A constant indicating that the end of the line has been read.
+     * <p>
+     *  一个常数,表示行的结束已被读取。
+     * 
      */
     public static final int TT_EOL = '\n';
 
     /**
      * A constant indicating that a number token has been read.
+     * <p>
+     *  指示已读取数字令牌的常量。
+     * 
      */
     public static final int TT_NUMBER = -2;
 
     /**
      * A constant indicating that a word token has been read.
+     * <p>
+     *  指示已读取字令牌的常量。
+     * 
      */
     public static final int TT_WORD = -3;
 
     /* A constant indicating that no token has been read, used for
      * initializing ttype.  FIXME This could be made public and
      * made available as the part of the API in a future release.
+     * <p>
+     *  初始化ttype。 FIXME这可以被公开,并在未来的版本中作为API的一部分。
+     * 
      */
     private static final int TT_NOTHING = -4;
 
@@ -166,6 +210,14 @@ public class StreamTokenizer {
      * <p>
      * The initial value of this field is null.
      *
+     * <p>
+     * 如果当前令牌是字令牌,则此字段包含给出字令牌的字符的字符串。当当前令牌是带引号的字符串令牌时,此字段包含字符串的主体。
+     * <p>
+     *  当{@code ttype}字段的值为{@code TT_WORD}时,当前令牌是一个字。当{@code ttype}字段的值是引号字符时,当前令牌是带引号的字符串令牌。
+     * <p>
+     *  此字段的初始值为null。
+     * 
+     * 
      * @see     java.io.StreamTokenizer#quoteChar(int)
      * @see     java.io.StreamTokenizer#TT_WORD
      * @see     java.io.StreamTokenizer#ttype
@@ -179,6 +231,12 @@ public class StreamTokenizer {
      * <p>
      * The initial value of this field is 0.0.
      *
+     * <p>
+     *  如果当前令牌是数字,则此字段包含该数字的值。当{@code ttype}字段的值为{@code TT_NUMBER}时,当前令牌是一个数字。
+     * <p>
+     *  此字段的初始值为0.0。
+     * 
+     * 
      * @see     java.io.StreamTokenizer#TT_NUMBER
      * @see     java.io.StreamTokenizer#ttype
      */
@@ -215,6 +273,17 @@ public class StreamTokenizer {
      * <li>C-style and C++-style comments are not recognized.
      * </ul>
      *
+     * <p>
+     *  创建解析指定输入流的流标记器。流标记器初始化为以下默认状态：
+     * <ul>
+     *  <li>所有字节值{@code'A'}到{@code'Z'},{@code'a'}到{@code'z'}和{@code'\ u005Cu00A0'}到{@代码'\ u005Cu00FF'}被认为是字母
+     * 的。
+     *  <li>所有字节值{@code'\ u005Cu0000'}到{@code'\ u005Cu0020'}被视为空白。 <li> {@ code'/'}是一个注释字符。
+     *  <li>单引号{@code'\ u005C''}和双引号{@code'"''是字符串引号字符。<li>解析数字。<li>行的结尾被视为空格,而不是单独的标记。
+     * <li>无法识别C风格和C ++风格的评论。
+     * </ul>
+     * 
+     * 
      * @deprecated As of JDK version 1.1, the preferred way to tokenize an
      * input stream is to convert it into a character stream, for example:
      * <blockquote><pre>
@@ -239,6 +308,10 @@ public class StreamTokenizer {
     /**
      * Create a tokenizer that parses the given character stream.
      *
+     * <p>
+     *  创建一个分词给定字符流的分词器。
+     * 
+     * 
      * @param r  a Reader object providing the input stream.
      * @since   JDK1.1
      */
@@ -255,6 +328,10 @@ public class StreamTokenizer {
      * "ordinary." See the {@code ordinaryChar} method
      * for more information on a character being ordinary.
      *
+     * <p>
+     * 重置此标记器的语法表,以使所有字符为"普通"。有关普通字符的更多信息,请参阅{@code ordinaryChar}方法。
+     * 
+     * 
      * @see     java.io.StreamTokenizer#ordinaryChar(int)
      */
     public void resetSyntax() {
@@ -268,6 +345,11 @@ public class StreamTokenizer {
      * are word constituents. A word token consists of a word constituent
      * followed by zero or more word constituents or number constituents.
      *
+     * <p>
+     *  指定<code> low&lt; =&nbsp;&lt; = c&gt;&lt; =&nbsp; high&lt; / code&gt;范围内的所有字符<i> c </i>词令牌由词组成,后面跟着零个
+     * 或多个词成分或数字成分组成。
+     * 
+     * 
      * @param   low   the low end of the range.
      * @param   hi    the high end of the range.
      */
@@ -289,6 +371,13 @@ public class StreamTokenizer {
      * <p>Any other attribute settings for the characters in the specified
      * range are cleared.
      *
+     * <p>
+     *  指定<code> low&lt; =&nbsp;&lt; = c&gt;&lt; =&nbsp; high&lt; / code&gt;范围内的所有字符<i> c </i>都是空白字符。
+     * 空白字符仅用于分隔输入流中的标记。
+     * 
+     *  <p>清除指定范围内的字符的任何其他属性设置。
+     * 
+     * 
      * @param   low   the low end of the range.
      * @param   hi    the high end of the range.
      */
@@ -308,6 +397,11 @@ public class StreamTokenizer {
      * {@code ordinaryChar} method for more information on a
      * character being ordinary.
      *
+     * <p>
+     *  指定<code> low&lt; =&nbsp; <i> c </i>&lt; =&nbsp; high </code>范围内的所有字符<i> c </i>这个分词器。
+     * 有关普通字符的更多信息,请参阅{@code ordinaryChar}方法。
+     * 
+     * 
      * @param   low   the low end of the range.
      * @param   hi    the high end of the range.
      * @see     java.io.StreamTokenizer#ordinaryChar(int)
@@ -335,6 +429,13 @@ public class StreamTokenizer {
      * lines. The {@code lineno} method may no longer reflect
      * the presence of such terminator characters in its line count.
      *
+     * <p>
+     *  指定此标记器中的字符参数是"普通"。它删除了字符作为注释字符,字组件,字符串分隔符,空格或数字字符的任何特殊含义。
+     * 当解析器遇到这样的字符时,解析器将其视为单字符标记,并将{@code ttype}字段设置为字符值。
+     * 
+     * <p>将"终止符"字符设置为"普通"可能会干扰{@code StreamTokenizer}计算行数的能力。 {@code lineno}方法可能不再反映在其行计数中存在这样的终止符字符。
+     * 
+     * 
      * @param   ch   the character.
      * @see     java.io.StreamTokenizer#ttype
      */
@@ -350,6 +451,12 @@ public class StreamTokenizer {
      *
      * <p>Any other attribute settings for the specified character are cleared.
      *
+     * <p>
+     *  指定字符参数启动单行注释。此流标记器忽略从注释字符到行尾的所有字符。
+     * 
+     *  <p>清除指定字符的任何其他属性设置。
+     * 
+     * 
      * @param   ch   the character.
      */
     public void commentChar(int ch) {
@@ -376,6 +483,17 @@ public class StreamTokenizer {
      *
      * <p>Any other attribute settings for the specified character are cleared.
      *
+     * <p>
+     *  指定此字符的匹配对在此标记器中分隔字符串常量。
+     * <p>
+     *  当{@code nextToken}方法遇到字符串常量时,{@code ttype}字段设置为字符串分隔符,而{@code sval}字段设置为字符串的正文。
+     * <p>
+     *  如果遇到字符串引用字符,则识别字符串,包括字符串引号字符之后(但不包括)之后的所有字符,直到(但不包括)该相同字符串引号字符的下一个出现,或者行终止符,或文件结尾。
+     * 在解析字符串时,通常的转义序列,例如{@code"\ u005Cn"}和{@code"\ u005Ct"}被识别并转换为单个字符。
+     * 
+     *  <p>清除指定字符的任何其他属性设置。
+     * 
+     * 
      * @param   ch   the character.
      * @see     java.io.StreamTokenizer#nextToken()
      * @see     java.io.StreamTokenizer#sval
@@ -402,6 +520,15 @@ public class StreamTokenizer {
      * field to the value {@code TT_NUMBER} and putting the numeric
      * value of the token into the {@code nval} field.
      *
+     * <p>
+     *  指定数字应由此分词器解析。修改此分词器的语法表,以使十二个字符中的每一个：<blockquote> <pre> 0 1 2 3 4 5 6 7 8 9。
+     *  -  </pre> </blockquote>。
+     * <p>
+     *  具有"numeric"属性。
+     * <p>
+     * 当解析器遇到具有双精度浮点数格式的字令牌时,通过将{@code ttype}字段设置为值{@code TT_NUMBER},将令牌视为数字而不是字词将令牌的数值放入{@code nval}字段。
+     * 
+     * 
      * @see     java.io.StreamTokenizer#nval
      * @see     java.io.StreamTokenizer#TT_NUMBER
      * @see     java.io.StreamTokenizer#ttype
@@ -429,6 +556,15 @@ public class StreamTokenizer {
      * If the {@code flag} is false, end-of-line characters are
      * treated as white space and serve only to separate tokens.
      *
+     * <p>
+     *  确定行尾是否被视为令牌。
+     * 如果flag参数为真,则这个分词器将行的结束当作令牌; {@code nextToken}方法返回{@code TT_EOL},并且在读取行尾时将{@code ttype}字段设置为此值。
+     * <p>
+     *  行是以回车符({@code'\ u005Cr'})或换行符({@code'\ u005Cn'})结尾的字符序列。此外,紧接着换行符后面的回车字符被视为单个行尾符号。
+     * <p>
+     *  如果{@code flag}为false,行尾字符将被视为空格,并且仅用于分隔令牌。
+     * 
+     * 
      * @param   flag   {@code true} indicates that end-of-line characters
      *                 are separate tokens; {@code false} indicates that
      *                 end-of-line characters are white space.
@@ -449,6 +585,13 @@ public class StreamTokenizer {
      * If the flag argument is {@code false}, then C-style comments
      * are not treated specially.
      *
+     * <p>
+     *  确定标记器是否识别C样式注释。如果flag参数是{@code true},这个流标记器识别C风格的注释。
+     * 连续出现的{@code / *}和<code> * / </code>之间的所有文本都将被丢弃。
+     * <p>
+     *  如果flag参数是{@code false},那么C风格的注释不会被特别处理。
+     * 
+     * 
      * @param   flag   {@code true} indicates to recognize and ignore
      *                 C-style comments.
      */
@@ -466,6 +609,12 @@ public class StreamTokenizer {
      * If the flag argument is {@code false}, then C++-style
      * comments are not treated specially.
      *
+     * <p>
+     * 确定标记器是否识别C ++样式的注释。如果flag参数是{@code true},这个流标记器识别C ++风格的注释。任何出现两个连续斜杠字符({@code'/'})将被视为延伸到行尾的注释的开始。
+     * <p>
+     *  如果flag参数是{@code false},那么不会特别处理C ++样式的注释。
+     * 
+     * 
      * @param   flag   {@code true} indicates to recognize and ignore
      *                 C++-style comments.
      */
@@ -484,6 +633,13 @@ public class StreamTokenizer {
      * If the flag argument is {@code false}, then the
      * {@code sval} field is not modified.
      *
+     * <p>
+     *  确定字令牌是否自动缩小。
+     * 如果flag参数是{@code true},那么每当返回一个字符({@code ttype}字段的值为{@code TT_WORD})时,{@code sval}代码nextToken}方法。
+     * <p>
+     *  如果flag参数是{@code false},那么{@code sval}字段不会被修改。
+     * 
+     * 
      * @param   fl   {@code true} indicates that all word tokens should
      *               be lowercased.
      * @see     java.io.StreamTokenizer#nextToken()
@@ -516,6 +672,13 @@ public class StreamTokenizer {
      * calling nextToken to parse successive tokens until TT_EOF
      * is returned.
      *
+     * <p>
+     *  从此分词器的输入流中解析下一个令牌。下一个令牌的类型在{@code ttype}字段中返回。
+     * 有关令牌的其他信息可能在此tokenizer的{@code nval}字段或{@code sval}字段中。
+     * <p>
+     *  这个类的典型客户端首先设置语法表,然后在循环中调用nextToken来解析连续的令牌,直到返回TT_EOF。
+     * 
+     * 
      * @return     the value of the {@code ttype} field.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.StreamTokenizer#nval
@@ -549,6 +712,9 @@ public class StreamTokenizer {
 
         /* Set peekc so that the next invocation of nextToken will read
          * another character unless peekc is reset in this invocation
+         * <p>
+         *  另一个字符,除非peekc在此调用中重置
+         * 
          */
         peekc = NEED_CHAR;
 
@@ -638,6 +804,9 @@ public class StreamTokenizer {
             /* Invariants (because \Octal needs a lookahead):
              *   (i)  c contains char value
              *   (ii) d contains the lookahead
+             * <p>
+             *  (i)c包含char值(ii)d包含lookahead
+             * 
              */
             int d = read();
             while (d >= 0 && d != ttype && d != '\n' && d != '\r') {
@@ -696,6 +865,9 @@ public class StreamTokenizer {
             /* If we broke out of the loop because we found a matching quote
              * character then arrange to read a new character next time
              * around; otherwise, save the character.
+             * <p>
+             *  字符,然后安排下次读取一个新字符;否则,保存字符。
+             * 
              */
             peekc = (d == ttype) ? NEED_CHAR : d;
 
@@ -757,6 +929,10 @@ public class StreamTokenizer {
      * field, and not to modify the value in the {@code nval} or
      * {@code sval} field.
      *
+     * <p>
+     * 导致对此记号化器的{@code nextToken}方法的下一次调用返回{@code ttype}字段中的当前值,而不修改{@code nval}或{@code sval}字段中的值。
+     * 
+     * 
      * @see     java.io.StreamTokenizer#nextToken()
      * @see     java.io.StreamTokenizer#nval
      * @see     java.io.StreamTokenizer#sval
@@ -770,6 +946,10 @@ public class StreamTokenizer {
     /**
      * Return the current line number.
      *
+     * <p>
+     *  返回当前行号。
+     * 
+     * 
      * @return  the current line number of this stream tokenizer.
      */
     public int lineno() {
@@ -785,6 +965,13 @@ public class StreamTokenizer {
      *
      * <blockquote><pre>Token['a'], line 10</pre></blockquote>
      *
+     * <p>
+     *  返回当前流标记的字符串表示形式以及它发生的行号。
+     * 
+     *  <p>返回的精确字符串未指定,但以下示例可被视为典型：
+     * 
+     *  <blockquote> <pre> Token ['a'],第10行</pre> </blockquote>
+     * 
      * @return  a string representation of the token
      * @see     java.io.StreamTokenizer#nval
      * @see     java.io.StreamTokenizer#sval
@@ -814,6 +1001,8 @@ public class StreamTokenizer {
                  * is an ordinary character. ttype can definitely not be less
                  * than 0, since those are reserved values used in the previous
                  * case statements
+                 * <p>
+                 * 
                  */
                 if (ttype < 256 &&
                     ((ctype[ttype] & CT_QUOTE) != 0)) {

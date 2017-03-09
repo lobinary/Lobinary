@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,11 @@ import java.util.Hashtable;
  * subclass this class and override the methods which deal with the
  * data that needs to be filtered and modify it as necessary.
  *
+ * <p>
+ *  这个类实现了一组用于将数据从ImageProducer传递到ImageConsumer的接口方法的过滤器。它意味着与FilteredImageSource对象结合使用,以生成现有映像的过滤版本。
+ * 它是一个基类,它提供了实现一个"空过滤器"所需的调用,它对正在传递的数据没有影响。过滤器应该子类化此类,并覆盖处理需要过滤的数据的方法,并根据需要修改它。
+ * 
+ * 
  * @see FilteredImageSource
  * @see ImageConsumer
  *
@@ -50,6 +56,11 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * getFilterInstance() method call when the FilteredImageSource
      * is creating a unique instance of this object for a particular
      * image data stream.
+     * <p>
+     *  ImageFilter的此实例正在对其进行数据过滤的特定图像数据流的消费者。
+     * 它不是在构造函数期间初始化的,而是在getFilterInstance()方法调用期间,当FilteredImageSource为特定图像数据流创建此对象的唯一实例时。
+     * 
+     * 
      * @see #getFilterInstance
      * @see ImageConsumer
      */
@@ -65,6 +76,12 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  返回一个ImageFilter对象的唯一实例,该对象实际上将对指定的ImageConsumer执行过滤。默认实现只是克隆这个对象。
+     * <p>
+     *  注意：此方法旨在由其像素正在被过滤的图像的ImageProducer调用。使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @param ic the specified <code>ImageConsumer</code>
      * @return an <code>ImageFilter</code> used to perform the
      *         filtering for the specified <code>ImageConsumer</code>.
@@ -84,6 +101,12 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     * 过滤在ImageConsumer接口的setDimensions方法中提供的信息。
+     * <p>
+     *  注意：此方法旨在由其像素正在被过滤的图像的ImageProducer调用。使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer#setDimensions
      */
     public void setDimensions(int width, int height) {
@@ -100,6 +123,12 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * this method directly since that operation could interfere
      * with the filtering operation.
      *
+     * <p>
+     *  在添加指示其已经运行的过滤器流的属性之后,从源对象传递属性。
+     * <p>
+     *  注意：此方法旨在由其像素正在被过滤的图像的ImageProducer调用。使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @param props the properties from the source object
      * @exception NullPointerException if <code>props</code> is null
      */
@@ -123,6 +152,12 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  过滤ImageConsumer接口的setColorModel方法中提供的信息。
+     * <p>
+     *  注意：此方法旨在由其像素正在被过滤的图像的ImageProducer调用。使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer#setColorModel
      */
     public void setColorModel(ColorModel model) {
@@ -138,6 +173,12 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  过滤在ImageConsumer接口的setHints方法中提供的信息。
+     * <p>
+     * 注意：此方法旨在由其像素正在被过滤的图像的ImageProducer调用。使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer#setHints
      */
     public void setHints(int hints) {
@@ -153,6 +194,12 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  过滤在ImageConsumer接口的setPixels方法中提供的信息,该方法需要一个字节数组。
+     * <p>
+     *  注意：此方法旨在由其像素正在被过滤的图像的ImageProducer调用。使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer#setPixels
      */
     public void setPixels(int x, int y, int w, int h,
@@ -170,6 +217,12 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  过滤在ImageConsumer接口的setPixels方法中提供的信息,该方法需要一个整数数组。
+     * <p>
+     *  注意：此方法旨在由其像素正在被过滤的图像的ImageProducer调用。使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer#setPixels
      */
     public void setPixels(int x, int y, int w, int h,
@@ -187,6 +240,12 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  过滤ImageConsumer接口的imageComplete方法中提供的信息。
+     * <p>
+     *  注意：此方法旨在由其像素正在被过滤的图像的ImageProducer调用。使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer#imageComplete
      */
     public void imageComplete(int status) {
@@ -234,6 +293,20 @@ public class ImageFilter implements ImageConsumer, Cloneable {
      * if the filter cannot produce filtered data in TDLR order.
      * </ul>
      *
+     * <p>
+     * 响应对TopDownLeftRight(TDLR)的请求,从<code> ImageConsumer </code>中有序重新发送像素数据。
+     * 当由此<code> ImageFilter </code>的实例提供的<code> ImageConsumer </code>请求以TDLR顺序重新发送数据时,<code> FilteredImageS
+     * ource </code>调用<代码> ImageFilter </code>。
+     * 响应对TopDownLeftRight(TDLR)的请求,从<code> ImageConsumer </code>中有序重新发送像素数据。
+     * 
+     * <p>
+     * 
+     *  一个<code> ImageFilter </code>子类可能重写这个方法或不重叠,这取决于它是否以及如何以TDLR顺序发送数据。存在三种可能性：
+     * 
+     * <ul>
+     * <li>
+     *  不要覆盖此方法。这使得子类使用默认实现,即使用此过滤器作为请求<code> ImageConsumer </code>将请求转发到指示的<code> ImageProducer </code>。
+     * 
      * @see ImageProducer#requestTopDownLeftRightResend
      * @param ip the ImageProducer that is feeding this instance of
      * the filter - also the ImageProducer that the request should be
@@ -246,6 +319,13 @@ public class ImageFilter implements ImageConsumer, Cloneable {
 
     /**
      * Clones this object.
+     * <p>
+     * 如果过滤器可以确定它将以TDLR顺序转发像素,如果其上游生成器对象以TDLR顺序发送它们,则此行为是适当的。
+     * 
+     * <li>
+     *  覆盖该方法以简单地发送数据。这是适当的,如果过滤器可以处理请求本身,例如,如果生成的像素已保存在某种缓冲区。
+     * 
+     * <li>
      */
     public Object clone() {
         try {

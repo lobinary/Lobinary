@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -352,6 +353,121 @@ package java.lang.management;
  * described above for the <a href="#UsageThreshold">usage threshold</a>
  * in a similar fashion.
  *
+ * <p>
+ *  内存池的管理接口。内存池表示由Java虚拟机管理的内存资源,由一个或多个{@link MemoryManagerMXBean内存管理器}管理。
+ * 
+ *  <p> Java虚拟机具有此接口的实现类的一个或多个实例。
+ * 实现此接口的实例是<a href="ManagementFactory.html#MXBean"> MXBean </a>,可通过调用{@link ManagementFactory#getMemoryPoolMXBeans}
+ * 方法或从{@link ManagementFactory#getPlatformMBeanServer platform < tt> MBeanServer </tt>}方法。
+ *  <p> Java虚拟机具有此接口的实现类的一个或多个实例。
+ * 
+ *  <p> <tt> ObjectName </tt>用于唯一标识<tt> MBeanServer </tt>中的内存池的MXBean是：
+ * <blockquote>
+ *  {@link ManagementFactory#MEMORY_POOL_MXBEAN_DOMAIN_TYPE <tt> java.lang：type = MemoryPool </tt>} <tt>
+ * ,name = </tt> <i>泳池名称</i>。
+ * </blockquote>
+ * 
+ *  它可以通过调用{@link PlatformManagedObject#getObjectName}方法获得。
+ * 
+ *  <h3>内存类型</h3> <p> Java虚拟机具有用于对象分配的堆,并且还为方法区和Java虚拟机执行维护非堆内存。 Java虚拟机可以有一个或多个内存池。
+ * 每个内存池表示以下类型之一的内存区域：。
+ * <ul>
+ *  <li> {@ link MemoryType#HEAP heap} </li> <li> {@ link MemoryType#NON_HEAP non-heap} </li>
+ * </ul>
+ * 
+ *  <h3>内存使用监控</h3>
+ * 
+ * 内存池具有以下属性：
+ * <ul>
+ *  <li> <a href="#Usage">内存使用</a> </li> <li> <a href="#PeakUsage">峰值内存使用</a> </li> <li> <a href ="#UsageThreshold">
+ * 使用阈值</a> </li> <li> <a href="#CollectionThreshold">集合使用阈值</a>(仅受某些<em>垃圾回收</em >内存池)</li>。
+ * </ul>
+ * 
+ *  <h3> <a name="Usage"> 1。内存使用</a> </h3>
+ * 
+ *  {@link #getUsage}方法提供了内存池当前使用情况的估计值。
+ * 对于垃圾收集的存储器池,所使用的存储器的量包括池中包括<em>可达到的<em>和<em>不可达的</em>对象的所有对象占用的存储器。
+ * 
+ *  <p>一般来说,这种方法是获取近似内存使用量的轻量级操作。对于一些存储器池,例如,当对象不是连续地打包时,该方法可能是昂贵的操作,其需要一些计算来确定当前存储器使用。实现应该记录这种情况。
+ * 
+ *  <h3> <a name="PeakUsage"> 2。峰值内存使用情况</a> </h3>
+ * 
+ *  由于虚拟机启动或峰值复位,Java虚拟机维护内存池的峰值内存使用率。
+ * 内存使用的峰值由{@link #getPeakUsage}方法返回,并通过调用{@link #resetPeakUsage}方法重置。
+ * 
+ *  <h3> <a name="UsageThreshold"> 3。使用阈值</a> </h3>
+ * 
+ * 每个存储器池具有称为<i>使用阈值</i>的可管理属性,其具有由Java虚拟机提供的默认值。默认值是平台相关的。
+ * 可以通过{@link #setUsageThreshold setUsageThreshold}方法设置使用阈值。如果阈值设置为正值,则在此内存池中启用使用阈值交叉检查。
+ * 如果使用阈值设置为零,则禁用对此内存池的使用阈值交叉检查。 {@link MemoryPoolMXBean#isUsageThresholdSupported}方法可用于确定是否支持此功能。
+ * <p>
+ *  Java虚拟机在其最佳适当时间(通常在垃圾收集时)在存储器池的基础上执行使用阈值交叉检查。
+ * 每个内存池维护{@link #getUsageThresholdCount用量阈值计数},每次当Java虚拟机检测到内存池使用率超过阈值时,它将增加。
+ * <p>
+ * 这个可管理的使用阈值属性设计用于以低开销监视内存使用的增长趋势。使用阈值可能不适用于某些内存池。例如,代数垃圾收集器,在许多Java虚拟机实现中使用的常见垃圾收集算法,管理两个或更多代按年龄分离对象。
+ * 大多数对象分配在<em>最年轻的一代</em>(假设一个苗圃内存池)。
+ * 苗圃内存池被设计为被填满,并且收集苗圃内存池将释放其大部分内存空间,因为它预期包含大多数短暂的对象,并且在垃圾收集时大多是不可达的。在这种情况下,更适合的是苗圃存储器池不支持使用阈值。
+ * 此外,如果在一个存储器池中的对象分配的成本非常低(例如,仅仅是原子指针交换),Java虚拟机可能不支持该存储器池的使用阈值,因为在将该使用与阈值高于对象分配的成本。
+ * 
+ * <p>
+ *  可以使用<a href="#Polling">轮询</a>或<a href="#ThresholdNotification">阈值通知</a>机制来监视系统的内存使用情况。
+ * 
+ * <ol type="a">
+ *  <li> <a name="Polling"> <b>轮询</b> </a>
+ * <p>
+ * 应用程序可以通过调用所有内存池的{@link #getUsage}方法或支持使用阈值的内存池的{@link #isUsageThresholdExceeded}方法,持续监视其内存使用情况。
+ * 下面是具有专用于任务分布和处理的线程的示例代码。在每个时间间隔,它将确定它是否应该根据其内存使用接收和处理新任务。
+ * 如果内存使用量超过其使用阈值,它将重新分配所有未完成的任务到其他VM,并停止接收新任务,直到内存使用率回到低于其使用阈值。
+ * 
+ * <pre>
+ *  //假设此池支持使用阈值。 //将阈值设置为myThreshold,在此之上不应采用任何新任务//。 pool.setUsageThreshold(myThreshold); ....
+ * 
+ *  boolean lowMemory = false; while(true){if(pool.isUsageThresholdExceeded()){//潜在的低内存,因此重新分配任务到其他VM lowMemory = true; redistributeTasks(); // stop receive new tasks stopReceivingTasks(); }
+ *  else {if(lowMemory){//恢复接收任务lowMemory = false; resumeReceivingTasks(); } //处理未完成的任务...} // sleep for
+ *  sometime try {Thread.sleep(sometime);} } catch(InterruptedException e){...}}。
+ * </pre>
+ * 
+ * <hr>
+ * 上述示例不区分存储器使用已经从存储器使用在两次迭代之间保持高于阈值的情况下暂时降低到使用阈值以下的情况。
+ *  {@link #getUsageThresholdCount}方法返回的使用阈值计数可用于确定内存使用情况是否已在两次轮询之间返回到阈值以下。
+ * <p>
+ *  下面显示了另一个示例,如果内存池在低内存下并且在操作处理时间期间忽略内存使用情况更改,则需要执行一些操作。
+ * 
+ * <pre>
+ *  //假设此池支持使用阈值。 //将阈值设置为myThreshold,确定应用程序是否在低内存条件下采取一些操作。 pool.setUsageThreshold(myThreshold);
+ * 
+ *  int prevCrossingCount = 0; while(true){//一个忙循环,用于检测内存使用情况//是否超过阈值。
+ *  while(！pool.isUsageThresholdExceeded()|| pool.getUsageThresholdCount()== prevCrossingCount){try {Thread.sleep(sometime)}
+ *  catch(InterruptException e){....}}。
+ *  int prevCrossingCount = 0; while(true){//一个忙循环,用于检测内存使用情况//是否超过阈值。
+ * 
+ *  //做一些处理,如检查内存使用情况//并发出警告....
+ * 
+ *  //获取当前阈值计数。然后,忙循环将忽略在处理期间发生的阈值的任何交叉。
+ *  prevCrossingCount = pool.getUsageThresholdCount(); } </pre> <hr>。
+ * </li>
+ *  <li> <a name="ThresholdNotification"> <b>使用阈值通知</b> </a>
+ * <p>
+ * 使用阈值通知将由{@link MemoryMXBean}发出。
+ * 当Java虚拟机检测到内存池的内存使用量已达到或超过使用阈值时,虚拟机将触发<tt> MemoryMXBean </tt>发出{@link MemoryNotificationInfo#MEMORY_THRESHOLD_EXCEEDED超过使用率阈值通知}
+ * 。
+ * 使用阈值通知将由{@link MemoryMXBean}发出。在使用量下降到阈值以下,然后再次超过阈值时,才会生成另一个超过使用阈值的通知。
+ * <p>
+ *  下面是实现与上述第一个示例相同的逻辑的示例代码,但使用使用阈值通知机制来检测低内存条件,而不是轮询。
+ * 在此示例代码中,在接收到通知时,通知侦听器通知另一线程执行实际动作,例如重新分配未完成任务,停止接收任务或恢复接收任务。
+ *  <tt> handleNotification </tt>方法应设计为执行非常少量的工作,并且没有延迟地返回,以避免在传递后续通知时造成延迟。耗时的操作应该由单独的线程执行。
+ * 通知侦听器可以由多个线程同时调用;因此侦听器执行的任务应该正确同步。
+ * 
+ * <pre>
+ * class MyListener implements javax.management.NotificationListener {public void handleNotification(Notification notification,Object handback){String notifType = notification.getType(); if(notifType.equals(MemoryNotificationInfo.MEMORY_THRESHOLD_EXCEEDED)){//潜在低内存,通知另一个线程//将未完成的任务重新分配给其他VM //并停止接收新任务。
+ *  lowMemory = true; notifyAnotherThread(lowMemory); }}}。
+ * 
+ *  // Register MyListener with MemoryMXBean MemoryMXBean mbean = ManagementFactory.getMemoryMXBean(); N
+ * otificationEmitter emitter =(NotificationEmitter)mbean; MyListener listener = new MyListener(); emitt
+ * er.addNotificationListener(listener,null,null);。
+ * 
+ *  //假设此池支持使用阈值。 //将阈值设置为myThreshold,在此之上不应采用任何新任务//。 pool.setUsageThreshold(myThreshold);
+ * 
  * @see ManagementFactory#getPlatformMXBeans(Class)
  * @see <a href="../../../javax/management/package-summary.html">
  *      JMX Specification.</a>
@@ -365,6 +481,43 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
     /**
      * Returns the name representing this memory pool.
      *
+     * <p>
+     * 
+     *  //使用阈值检测已启用,通知将由MyListener处理。继续进行其他处理。 ....
+     * 
+     * </pre>
+     * <hr>
+     * <p>
+     * 不能保证<tt> MemoryMXBean </tt>何时会发出阈值通知,以及何时会发送通知。当调用通知侦听器时,存储器池的存储器使用可能已超过使用阈值多于一次。
+     *  {@link MemoryNotificationInfo#getCount}方法返回在构建通知的时间点内存使用量已超过使用阈值的次数。
+     * 它可以与{@link #getUsageThresholdCount}方法返回的当前使用阈值计数进行比较,以确定是否发生了这种情况。
+     * </li>
+     * </ol>
+     * 
+     *  <h3> <a name="CollectionThreshold"> 4。集合使用阈值</a> </h3>
+     * 
+     *  集合使用阈值是一个可管理的属性,仅适用于一些垃圾回收的内存池。在Java虚拟机通过在垃圾收集时回收内存池中的未使用对象而花费了回收内存空间的努力之后,仍在使用收集垃圾邮件的内存池中的某些字节数。
+     * 收集使用阈值允许为此字节数设置一个值,以便如果超过阈值,{@link MemoryMXBean}将发出{@link MemoryNotificationInfo#MEMORY_THRESHOLD_EXCEEDED集合使用阈值超过通知}
+     * 。
+     *  集合使用阈值是一个可管理的属性,仅适用于一些垃圾回收的内存池。在Java虚拟机通过在垃圾收集时回收内存池中的未使用对象而花费了回收内存空间的努力之后,仍在使用收集垃圾邮件的内存池中的某些字节数。
+     * 此外,{@link #getCollectionUsageThresholdCount集合使用阈值计数}将增加。
+     * 
+     * <p>
+     * {@link MemoryPoolMXBean#isCollectionUsageThresholdSupported}方法可用于确定是否支持此功能。
+     * 
+     * <p>
+     *  Java虚拟机在内存池的基础上执行集合使用阈值检查。如果集合使用阈值设置为正值,则启用此检查。如果集合使用阈值设置为零,则在此内存池上禁用此检查。默认值为零。
+     *  Java虚拟机在垃圾收集时执行收集使用阈值检查。
+     * 
+     * <p>
+     *  一些垃圾收集的内存池可能选择不支持收集使用阈值。例如,内存池只由连续并发垃圾收集器管理。对象可以由一些线程分配在该内存池中,而未使用的对象由并发垃圾回收器同时回收。
+     * 除非有一个明确定义的垃圾收集时间,这是检查内存使用情况的最合适的时间,否则不应该支持收集使用阈值。
+     * 
+     * <p>
+     *  收集使用阈值设计用于在Java虚拟机耗尽回收内存空间的工作后监视内存使用情况。
+     * 还可以通过类似方式针对<a href="#UsageThreshold">使用阈值</a>的上述轮询和阈值通知机制来监视收集使用。
+     * 
+     * 
      * @return the name of this memory pool.
      */
     public String getName();
@@ -377,6 +530,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * The mapped type of <tt>MemoryType</tt> is <tt>String</tt>
      * and the value is the name of the <tt>MemoryType</tt>.
      *
+     * <p>
+     *  返回表示此内存池的名称。
+     * 
+     * 
      * @return the type of this memory pool.
      */
     public MemoryType getType();
@@ -403,6 +560,13 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in
      * {@link MemoryUsage#from MemoryUsage}.
      *
+     * <p>
+     *  返回此内存池的类型。
+     * 
+     * <p>
+     * <b> MBeanServer访问</b>：<br> <tt> MemoryType </tt>的映射类型为<tt> String </tt>,值为<tt> MemoryType </tt> 。
+     * 
+     * 
      * @return a {@link MemoryUsage} object; or <tt>null</tt> if
      * this pool not valid.
      */
@@ -420,6 +584,19 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in
      * {@link MemoryUsage#from MemoryUsage}.
      *
+     * <p>
+     *  返回此内存池的内存使用情况的估计值。如果此内存池无效(即不再存在),此方法将返回<tt> null </tt>。
+     * 
+     * <p>
+     *  此方法请求Java虚拟机对此内存池的当前内存使用情况进行尽力而为的估计。对于一些存储器池,该方法可能是昂贵的操作,其需要一些计算来确定估计。实现应该记录这种情况。
+     * 
+     *  <p>此方法设计用于监视系统内存使用情况和检测低内存条件。
+     * 
+     * <p>
+     *  <b> MBeanServer访问</b>：<br> <tt> MemoryUsage </tt>的映射类型是<tt> CompositeData </tt>,具有{@link MemoryUsage#from MemoryUsage}
+     * 中指定的属性。
+     * 
+     * 
      * @return a {@link MemoryUsage} object representing the peak
      * memory usage; or <tt>null</tt> if this pool is not valid.
      *
@@ -430,6 +607,14 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * Resets the peak memory usage statistic of this memory pool
      * to the current memory usage.
      *
+     * <p>
+     *  返回自Java虚拟机启动或峰值重置后此内存池的峰值内存使用情况。如果此内存池无效(即不再存在),此方法将返回<tt> null </tt>。
+     * 
+     * <p>
+     *  <b> MBeanServer访问</b>：<br> <tt> MemoryUsage </tt>的映射类型是<tt> CompositeData </tt>,具有{@link MemoryUsage#from MemoryUsage}
+     * 中指定的属性。
+     * 
+     * 
      * @throws java.lang.SecurityException if a security manager
      *         exists and the caller does not have
      *         ManagementPermission("control").
@@ -441,6 +626,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * machine.  A memory pool becomes invalid once the Java virtual
      * machine removes it from the memory system.
      *
+     * <p>
+     *  将此内存池的峰值内存使用情况统计信息重置为当前内存使用情况。
+     * 
+     * 
      * @return <tt>true</tt> if the memory pool is valid in the running
      *              Java virtual machine;
      *         <tt>false</tt> otherwise.
@@ -451,6 +640,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * Returns the name of memory managers that manages this memory pool.
      * Each memory pool will be managed by at least one memory manager.
      *
+     * <p>
+     * 测试此内存池在Java虚拟机中是否有效。一旦Java虚拟机将其从内存系统中删除,内存池将无效。
+     * 
+     * 
      * @return an array of <tt>String</tt> objects, each is the name of
      * a memory manager managing this memory pool.
      */
@@ -462,6 +655,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * The current usage threshold can be changed via the
      * {@link #setUsageThreshold setUsageThreshold} method.
      *
+     * <p>
+     *  返回管理此内存池的内存管理器的名称。每个内存池将由至少一个内存管理器管理。
+     * 
+     * 
      * @return the usage threshold value of this memory pool in bytes.
      *
      * @throws UnsupportedOperationException if this memory pool
@@ -479,6 +676,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * The usage threshold crossing checking is disabled
      * if it is set to zero.
      *
+     * <p>
+     *  返回此内存池的使用率阈值(以字节为单位)。每个内存池都有一个平台相关的默认阈值。可以通过{@link #setUsageThreshold setUsageThreshold}方法更改当前使用阈值。
+     * 
+     * 
      * @param threshold the new threshold value in bytes. Must be non-negative.
      *
      * @throws IllegalArgumentException if <tt>threshold</tt> is negative
@@ -501,6 +702,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * Tests if the memory usage of this memory pool
      * reaches or exceeds its usage threshold value.
      *
+     * <p>
+     *  如果此内存池支持使用阈值,则将此内存池的阈值设置为给定的<tt>阈值</tt>值。如果阈值设置为正值,则在此内存池中启用使用阈值交叉检查。如果设置为零,则禁用使用阈值交叉检查。
+     * 
+     * 
      * @return <tt>true</tt> if the memory usage of
      * this memory pool reaches or exceeds the threshold value;
      * <tt>false</tt> otherwise.
@@ -514,6 +719,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * Returns the number of times that the memory usage has crossed
      * the usage threshold.
      *
+     * <p>
+     *  测试此内存池的内存使用量是否达到或超过其使用阈值。
+     * 
+     * 
      * @return the number of times that the memory usage
      * has crossed its usage threshold value.
      *
@@ -525,6 +734,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
     /**
      * Tests if this memory pool supports usage threshold.
      *
+     * <p>
+     *  返回内存使用量已超过使用阈值的次数。
+     * 
+     * 
      * @return <tt>true</tt> if this memory pool supports usage threshold;
      * <tt>false</tt> otherwise.
      */
@@ -536,6 +749,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * threshold can be changed via the
      * {@link #setCollectionUsageThreshold setCollectionUsageThreshold} method.
      *
+     * <p>
+     *  测试此内存池是否支持使用阈值。
+     * 
+     * 
      * @return the collection usage threshold of this memory pool in bytes.
      *
      * @throws UnsupportedOperationException if this memory pool
@@ -557,6 +774,11 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * The collection usage threshold crossing checking is disabled
      * if it is set to zero.
      *
+     * <p>
+     *  返回此内存池的集合使用阈值(以字节为单位)。默认值为零。
+     * 可以通过{@link #setCollectionUsageThreshold setCollectionUsageThreshold}方法更改收集使用阈值。
+     * 
+     * 
      * @param threshold the new collection usage threshold value in bytes.
      *              Must be non-negative.
      *
@@ -585,6 +807,12 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * machine to perform any garbage collection other than its normal
      * automatic memory management.
      *
+     * <p>
+     * 将此内存池的收集使用阈值设置为给定的<tt>阈值</tt>值。当此阈值设置为正时,Java虚拟机将在耗尽回收此内存池中未使用的对象的工作后,在其最佳适当时间检查内存使用情况。
+     * <p>
+     *  如果阈值设置为正值,则在此内存池中启用收集使用阈值跨越检查。如果设置为零,则禁用收集使用阈值交叉检查。
+     * 
+     * 
      * @return <tt>true</tt> if the memory usage of this memory pool
      * reaches or exceeds the collection usage threshold value
      * in the most recent collection;
@@ -600,6 +828,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * has detected that the memory usage has reached or
      * exceeded the collection usage threshold.
      *
+     * <p>
+     *  测试在Java虚拟机耗用的最新集合之后此内存池的内存使用情况是否已达到或超过其收集使用阈值。此方法不会请求Java虚拟机执行除了其正常的自动内存管理之外的任何垃圾回收。
+     * 
+     * 
      * @return the number of times that the memory
      * usage has reached or exceeded the collection usage threshold.
      *
@@ -626,6 +858,10 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in
      * {@link MemoryUsage#from MemoryUsage}.
      *
+     * <p>
+     *  返回Java虚拟机检测到内存使用量已达到或超过集合使用阈值的次数。
+     * 
+     * 
      * @return a {@link MemoryUsage} representing the memory usage of
      * this memory pool after the Java virtual machine most recently
      * expended effort in recycling unused objects;
@@ -636,6 +872,13 @@ public interface MemoryPoolMXBean extends PlatformManagedObject {
     /**
      * Tests if this memory pool supports a collection usage threshold.
      *
+     * <p>
+     *  返回Java虚拟机最近消耗的内存使用量,以回收此内存池中未使用的对象。此方法不会请求Java虚拟机执行除了其正常的自动内存管理之外的任何垃圾回收。
+     * 如果Java虚拟机不支持此方法,则此方法返回<tt> null </tt>。
+     * 
+     * <p>
+     * <b> MBeanServer访问</b>：<br> <tt> MemoryUsage </tt>的映射类型是具有{@link MemoryUsage#from MemoryUsage}中指定的属性的<tt>
+     * 
      * @return <tt>true</tt> if this memory pool supports the
      * collection usage threshold; <tt>false</tt> otherwise.
      */

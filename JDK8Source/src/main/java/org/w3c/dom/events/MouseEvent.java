@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,10 @@
  * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
  * PURPOSE.
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ * <p>
+ *  版权所有(c)2000万维网联盟,(马萨诸塞理工学院,庆应义藩大学信息自动化研究所)。版权所有。该程序根据W3C的软件知识产权许可证分发。
+ * 这个程序是分发的,希望它将是有用的,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证。有关详细信息,请参阅W3C许可证http://www.w3.org/Consortium/Legal/。
+ * 
  */
 
 package org.w3c.dom.events;
@@ -58,42 +63,68 @@ import org.w3c.dom.views.AbstractView;
  * bubbling to obtain notification of mouse events which occur within its
  * descendent elements.
  * <p>See also the <a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113'>Document Object Model (DOM) Level 2 Events Specification</a>.
+ * <p>
+ * <code> MouseEvent </code>界面提供与鼠标事件相关的特定上下文信息。
+ *  <p>继承自<code> UIEvent </code>的<code> detail </code>属性表示在用户操作期间在同一屏幕位置按下和释放鼠标按钮的次数。
+ * 当用户开始此操作时,属性值为1,对于每个完整的按下和释放序列,属性值递增1。如果用户在mousedown和mouseup之间移动鼠标,该值将被设置为0,表示没有发生任何点击。
+ *  <p>在嵌套元素的情况下,鼠标事件总是针对最深的嵌套元素。目标元素的祖先可以使用冒泡来获得在其派生元素内发生的鼠标事件的通知。
+ *  <p>另请参阅<a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113'>文档对象模型(DOM)2级事件规范< a>。
+ * 
+ * 
  * @since DOM Level 2
  */
 public interface MouseEvent extends UIEvent {
     /**
      * The horizontal coordinate at which the event occurred relative to the
      * origin of the screen coordinate system.
+     * <p>
+     *  事件发生的水平坐标相对于屏幕坐标系的原点。
+     * 
      */
     public int getScreenX();
 
     /**
      * The vertical coordinate at which the event occurred relative to the
      * origin of the screen coordinate system.
+     * <p>
+     *  事件发生的垂直坐标相对于屏幕坐标系的原点。
+     * 
      */
     public int getScreenY();
 
     /**
      * The horizontal coordinate at which the event occurred relative to the
      * DOM implementation's client area.
+     * <p>
+     *  事件发生的水平坐标相对于DOM实现的客户区。
+     * 
      */
     public int getClientX();
 
     /**
      * The vertical coordinate at which the event occurred relative to the DOM
      * implementation's client area.
+     * <p>
+     *  事件发生的垂直坐标相对于DOM实现的客户区。
+     * 
      */
     public int getClientY();
 
     /**
      * Used to indicate whether the 'ctrl' key was depressed during the firing
      * of the event.
+     * <p>
+     *  用于指示在触发事件期间是否按下"ctrl"键。
+     * 
      */
     public boolean getCtrlKey();
 
     /**
      * Used to indicate whether the 'shift' key was depressed during the
      * firing of the event.
+     * <p>
+     * 用于指示在事件触发期间"shift"键是否被按下。
+     * 
      */
     public boolean getShiftKey();
 
@@ -101,6 +132,9 @@ public interface MouseEvent extends UIEvent {
      * Used to indicate whether the 'alt' key was depressed during the firing
      * of the event. On some platforms this key may map to an alternative
      * key name.
+     * <p>
+     *  用于指示在事件触发期间"alt"键是否被按下。在某些平台上,此键可映射到替代键名称。
+     * 
      */
     public boolean getAltKey();
 
@@ -108,6 +142,9 @@ public interface MouseEvent extends UIEvent {
      * Used to indicate whether the 'meta' key was depressed during the firing
      * of the event. On some platforms this key may map to an alternative
      * key name.
+     * <p>
+     *  用于指示在事件触发期间"meta"键是否被按下。在某些平台上,此键可映射到替代键名称。
+     * 
      */
     public boolean getMetaKey();
 
@@ -119,6 +156,10 @@ public interface MouseEvent extends UIEvent {
      * button if present, and two to indicate the right button. For mice
      * configured for left handed use in which the button actions are
      * reversed the values are instead read from right to left.
+     * <p>
+     *  在由按下或释放鼠标按钮引起的鼠标事件期间,使用<code>按钮</code>来指示哪个鼠标按钮改变了状态。
+     *  <code>按钮</code>的值的范围从零到指示鼠标的左按钮,一个指示中间按钮(如果存在)和两个指示右按钮。对于配置为左手使用的鼠标,其中按钮动作反转,而是从右到左读取值。
+     * 
      */
     public short getButton();
 
@@ -128,6 +169,12 @@ public interface MouseEvent extends UIEvent {
      * indicate the <code>EventTarget</code> which the pointing device
      * exited and with the mouseout event to indicate the
      * <code>EventTarget</code> which the pointing device entered.
+     * <p>
+     *  用于标识与UI事件相关的辅助<code> EventTarget </code>。
+     * 当前,该属性与鼠标悬停事件一起用于指示定点设备退出的<code> EventTarget </code>,以及指示定点设备进入的<code> EventTarget </code>的mouseout事件
+     * 。
+     *  用于标识与UI事件相关的辅助<code> EventTarget </code>。
+     * 
      */
     public EventTarget getRelatedTarget();
 
@@ -139,6 +186,8 @@ public interface MouseEvent extends UIEvent {
      * <code>dispatchEvent</code> method, though it may be called multiple
      * times during that phase if necessary. If called multiple times, the
      * final invocation takes precedence.
+     * <p>
+     * 
      * @param typeArg Specifies the event type.
      * @param canBubbleArg Specifies whether or not the event can bubble.
      * @param cancelableArg Specifies whether or not the event's default

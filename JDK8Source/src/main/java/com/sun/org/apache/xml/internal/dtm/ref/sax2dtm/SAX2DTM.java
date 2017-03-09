@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SAX2DTM.java,v 1.2.4.1 2005/09/15 08:15:11 suresh_emailid Exp $
+ * <p>
+ *  $ Id：SAX2DTM.java,v 1.2.4.1 2005/09/15 08:15:11 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref.sax2dtm;
 
@@ -46,6 +59,9 @@ import org.xml.sax.ext.*;
 /**
  * This class implements a DTM that tends to be optimized more for speed than
  * for compactness, that is constructed via SAX2 ContentHandler events.
+ * <p>
+ *  这个类实现了一个通常通过SAX2 ContentHandler事件构造的,比速度更快的DTM。
+ * 
  */
 public class SAX2DTM extends DTMDefaultBaseIterators
         implements EntityResolver, DTDHandler, ContentHandler, ErrorHandler,
@@ -64,6 +80,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * fallback, but that has all the known problems with multithreading
    * on multiprocessors and we Don't Want to Go There.
    *
+   * <p>
+   *  如果我们按需增量地构建模型,我们需要能够告诉源何时向我们发送更多数据。
+   * 
+   *  注意,如果这没有设置,并且你尝试读取当前构建点,我们可能会抛出一个空指针异常。我们可以尝试等待重试,作为一个非常糟糕的后备,但是具有多线程在多处理器上的所有已知的问题,我们不想去那里。
+   * 
+   * 
    * @see setIncrementalSAXSource
    */
   private IncrementalSAXSource m_incrementalSAXSource = null;
@@ -80,32 +102,54 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * between RTFs, and tail-pruning... consider going back to the larger/faster.
    *
    * Made protected rather than private so SAX2RTFDTM can access it.
+   * <p>
+   *  所有字符内容,包括属性值,都存储在此缓冲区中。
+   * 
+   * ％REVIEW％这是否可以选择跨DTM共享?只有顺序;不是线程安全...目前,我想不是。
+   * 
+   *  ％REVIEW％初始大小被推向下以减少RTF的重量。等待减少RTF DTM的数量。现在我们在RTF之间共享一个DTM,并且尾剪枝...考虑回到更大/更快。
+   * 
+   *  使得受保护而不是专用,所以SAX2RTFDTM可以访问它。
+   * 
    */
   //private FastStringBuffer m_chars = new FastStringBuffer(13, 13);
   protected FastStringBuffer m_chars;
 
   /** This vector holds offset and length data.
+  /* <p>
    */
   protected SuballocatedIntVector m_data;
 
   /** The parent stack, needed only for construction.
    * Made protected rather than private so SAX2RTFDTM can access it.
+   * <p>
+   *  使得受保护而不是专用,所以SAX2RTFDTM可以访问它。
+   * 
    */
   transient protected IntStack m_parents;
 
   /** The current previous node, needed only for construction time.
    * Made protected rather than private so SAX2RTFDTM can access it.
+   * <p>
+   *  使得受保护而不是专用,所以SAX2RTFDTM可以访问它。
+   * 
    */
   transient protected int m_previous = 0;
 
   /** Namespace support, only relevent at construction time.
    * Made protected rather than private so SAX2RTFDTM can access it.
+   * <p>
+   *  使得受保护而不是专用,所以SAX2RTFDTM可以访问它。
+   * 
    */
   transient protected java.util.Vector m_prefixMappings =
     new java.util.Vector();
 
   /** Namespace support, only relevent at construction time.
    * Made protected rather than private so SAX2RTFDTM can access it.
+   * <p>
+   *  使得受保护而不是专用,所以SAX2RTFDTM可以访问它。
+   * 
    */
   transient protected IntStack m_contextIndexes;
 
@@ -115,6 +159,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Type of coalesced text block. See logic in the characters()
    * method.
+   * <p>
+   *  合并文本块的类型。请参阅characters()方法中的逻辑。
+   * 
    */
   transient protected int m_coalescedTextType = DTM.TEXT_NODE;
 
@@ -135,6 +182,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
   /** End document has been reached.
    * Made protected rather than private so SAX2RTFDTM can access it.
+   * <p>
+   *  使得受保护而不是专用,所以SAX2RTFDTM可以访问它。
+   * 
    */
   protected boolean m_endDocumentOccured = false;
 
@@ -144,11 +194,17 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * This table holds the ID string to node associations, for
    * XML IDs.
+   * <p>
+   *  此表保存XML字符串到节点关联的ID字符串。
+   * 
    */
   protected Hashtable m_idAttributes = new Hashtable();
 
   /**
    * fixed dom-style names.
+   * <p>
+   *  固定dom类型名称。
+   * 
    */
   private static final String[] m_fixednames = { null,
                     null,  // nothing, Element
@@ -162,6 +218,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Vector of entities.  Each record is composed of four Strings:
    *  publicId, systemID, notationName, and name.
+   * <p>
+   *  实体矢量。每个记录由四个字符串组成：publicId,systemID,notationName和name。
+   * 
    */
   private Vector m_entities = null;
 
@@ -184,6 +243,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * The starting offset within m_chars for the text or
    * CDATA_SECTION node currently being acumulated,
    * or -1 if there is no text node in progress
+   * <p>
+   *  对于当前正在累积的文本或CDATA_SECTION节点,m_chars内的起始偏移,如果没有正在进行的文本节点,则为-1
+   * 
    */
   protected int m_textPendingStart = -1;
 
@@ -192,22 +254,34 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * should be maintained or not.
    *
    * Made protected for access by SAX2RTFDTM.
+   * <p>
+   *  描述是否应保留有关文档源位置的信息。
+   * 
+   *  通过SAX2RTFDTM保护访问。
+   * 
    */
   protected boolean m_useSourceLocationProperty = false;
 
    /** Made protected for access by SAX2RTFDTM.
+   /* <p>
    */
   protected StringVector m_sourceSystemId;
    /** Made protected for access by SAX2RTFDTM.
+   /* <p>
    */
   protected IntVector m_sourceLine;
    /** Made protected for access by SAX2RTFDTM.
+   /* <p>
    */
   protected IntVector m_sourceColumn;
 
   /**
    * Construct a SAX2DTM object using the default block size.
    *
+   * <p>
+   *  使用默认块大小构造SAX2DTM对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param source the JAXP 1.1 Source object for this DTM.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -231,6 +305,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * Construct a SAX2DTM object ready to be constructed from SAX2
    * ContentHandler events.
    *
+   * <p>
+   *  构造一个准备从SAX2 ContentHandler事件构造的SAX2DTM对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param source the JAXP 1.1 Source object for this DTM.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -295,6 +373,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Set whether information about document source location
    * should be maintained or not.
+   * <p>
+   * 设置是否应保留有关文档来源位置的信息。
+   * 
    */
   public void setUseSourceLocation(boolean useSourceLocation)
   {
@@ -304,6 +385,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Get the data or qualified name for the given node identity.
    *
+   * <p>
+   *  获取给定节点标识的数据或限定名称。
+   * 
+   * 
    * @param identity The node identity.
    *
    * @return The data or qualified name, or DTM.NULL.
@@ -330,6 +415,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
   /**
    * Ask the CoRoutine parser to doTerminate and clear the reference.
+   * <p>
+   *  请求CoRoutine解析器执行doTerminate并清除引用。
+   * 
    */
   public void clearCoRoutine()
   {
@@ -340,6 +428,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * Ask the CoRoutine parser to doTerminate and clear the reference. If
    * the CoRoutine parser has already been cleared, this will have no effect.
    *
+   * <p>
+   *  请求CoRoutine解析器执行doTerminate并清除引用。如果CoRoutine解析器已经被清除,这将没有效果。
+   * 
+   * 
    * @param callDoTerminate true of doTerminate should be called on the
    * coRoutine parser.
    */
@@ -364,6 +456,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * know what source it's reading from, what thread that source will run in,
    * or when it will run.
    *
+   * <p>
+   *  将IncrementalSAXSource绑定到此DTM。如果我们发现我们需要尚未构建的节点,我们将要求此对象向我们发送更多事件,并且将管理与其数据源的交互。
+   * 
+   *  注意,我们并不实际构建IncrementalSAXSource,因为我们不知道它读取什么源,源代码将运行什么线程,或什么时候运行。
+   * 
+   * 
    * @param incrementalSAXSource The parser that we want to recieve events from
    * on demand.
    */
@@ -397,6 +495,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    *
    * %REVIEW% Should this return null if constrution already done/begun?
    *
+   * <p>
+   *  getContentHandler返回"我们的SAX构建器" - 其他人应该发送SAX事件以扩展此DTM模型的事情。
+   * 
+   *  ％REVIEW％如果解析已经完成/开始,这应该返回null吗?
+   * 
+   * 
    * @return null if this model doesn't respond to SAX events,
    * "this" if the DTM object has a built-in SAX ContentHandler,
    * the IncrementalSAXSource if we're bound to one and should receive
@@ -420,6 +524,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    *
    * %REVIEW% Should this return null if constrution already done/begun?
    *
+   * <p>
+   *  返回此DTM的词法处理程序。
+   * 
+   *  ％REVIEW％如果解析已经完成/开始,这应该返回null吗?
+   * 
+   * 
    * @return null if this model doesn't respond to lexical SAX events,
    * "this" if the DTM object has a built-in SAX ContentHandler,
    * the IncrementalSAXSource if we're bound to one and should receive
@@ -441,6 +551,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Return this DTM's EntityResolver.
    *
+   * <p>
+   *  返回此DTM的EntityResolver。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX entity ref events.
    */
   public EntityResolver getEntityResolver()
@@ -451,6 +565,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Return this DTM's DTDHandler.
    *
+   * <p>
+   *  返回此DTM的DTDHandler。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX dtd events.
    */
   public DTDHandler getDTDHandler()
@@ -461,6 +579,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Return this DTM's ErrorHandler.
    *
+   * <p>
+   *  返回此DTM的ErrorHandler。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX error events.
    */
   public ErrorHandler getErrorHandler()
@@ -471,6 +593,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Return this DTM's DeclHandler.
    *
+   * <p>
+   *  返回这个DTM的DeclHandler。
+   * 
+   * 
    * @return null if this model doesn't respond to SAX Decl events.
    */
   public DeclHandler getDeclHandler()
@@ -479,6 +605,8 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   }
 
   /**
+  /* <p>
+  /* 
    * @return true iff we're building this model incrementally (eg
    * we're partnered with a IncrementalSAXSource) and thus require that the
    * transformation and the parse run simultaneously. Guidance to the
@@ -497,6 +625,11 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * ContentHandler's characters methods may well occur for a single call to
    * this method.
    *
+   * <p>
+   *  在传递的ContentHandler上直接调用给定节点的字符串值的字符方法(有关节点的字符串值的定义,请参阅http://www.w3.org/TR/xpath#data-model)。
+   * 对ContentHandler的字符方法的多次调用很可能发生在对此方法的单个调用中。
+   * 
+   * 
    * @param nodeHandle The node ID.
    * @param ch A non-null reference to a ContentHandler.
    * @param normalize true if the content should be normalized according to
@@ -593,6 +726,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * Given a node handle, return its DOM-style node name. This will
    * include names such as #text or #document.
    *
+   * <p>
+   * 给定一个节点句柄,返回其DOM样式的节点名称。这将包括诸如#text或#document的名称。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Name of this node, which may be an empty string.
    * %REVIEW% Document when empty string is possible...
@@ -644,6 +781,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * the name as described by the XPath data model, NOT the DOM-style
    * name.
    *
+   * <p>
+   *  给定一个节点句柄,返回XPath节点名称。这应该是XPath数据模型描述的名称,而不是DOM风格的名称。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Name of this node, which may be an empty string.
    */
@@ -681,6 +822,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    *        specified in the start-tag of its element, or was defaulted from the
    *        DTD.
    *
+   * <p>
+   *  5. [specified]指示此属性是实际上在其元素的开始标签中指定的标志,还是来自DTD的标志。
+   * 
+   * 
    * @param attributeHandle Must be a valid handle to an attribute node.
    * @return <code>true</code> if the attribute was specified;
    *         <code>false</code> if it was defaulted.
@@ -698,6 +843,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    *     1. [system identifier] The system identifier of the external subset, if
    *        it exists. Otherwise this property has no value.
    *
+   * <p>
+   *  文档类型声明信息项具有以下属性：
+   * 
+   *  1. [系统标识符]外部子集的系统标识符(如果存在)。否则此属性没有值。
+   * 
+   * 
    * @return the system identifier String object, or null if there is none.
    */
   public String getDocumentTypeDeclarationSystemIdentifier()
@@ -713,6 +864,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * Get the next node identity value in the list, and call the iterator
    * if it hasn't been added yet.
    *
+   * <p>
+   *  获取列表中的下一个节点标识值,如果尚未添加迭代器,则调用迭代器。
+   * 
+   * 
    * @param identity The node identity (index).
    * @return identity+1, or DTM.NULL.
    */
@@ -735,6 +890,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Directly create SAX parser events from a subtree.
    *
+   * <p>
+   *  从子树直接创建SAX解析器事件。
+   * 
+   * 
    * @param nodeHandle The node ID.
    * @param ch A non-null reference to a ContentHandler.
    *
@@ -768,6 +927,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Get the number of nodes that have been added.
    *
+   * <p>
+   *  获取已添加的节点数。
+   * 
+   * 
    * @return The number of that are currently in the tree.
    */
   public int getNumberOfNodes()
@@ -778,6 +941,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * This method should try and build one or more nodes in the table.
    *
+   * <p>
+   *  此方法应尝试在表中构建一个或多个节点。
+   * 
+   * 
    * @return The true if a next node is found or false if
    *         there are no more nodes.
    */
@@ -836,6 +1003,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Bottleneck determination of text type.
    *
+   * <p>
+   *  瓶颈确定文本类型。
+   * 
+   * 
    * @param type oneof DTM.XXX_NODE.
    *
    * @return true if this is a text or cdata section.
@@ -849,6 +1020,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 //     * Ensure that the size of the information arrays can hold another entry
 //     * at the given index.
 //     *
+//     * <p>
+//     *  // *确保信息数组的大小可以容纳给定索引处的另一个条目// *。 // *
+//     * 
+//     * 
 //     * @param on exit from this function, the information arrays sizes must be
 //     * at least index+1.
 //     *
@@ -864,6 +1039,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Construct the node map from the node.
    *
+   * <p>
+   *  从节点构造节点映射。
+   * 
+   * 
    * @param type raw type ID, one of DTM.XXX_NODE.
    * @param expandedTypeID The expended type ID.
    * @param parentIndex The current parent index.
@@ -928,6 +1107,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
   /**
    * Get a new DTM ID beginning at the specified node index.
+   * <p>
+   *  从指定的节点索引开始获取新的DTM ID。
+   * 
+   * 
    * @param  nodeIndex The node identity at which the new DTM ID will begin
    * addressing.
    */
@@ -957,6 +1140,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     * After the migration, the new DTMManager will treat the DTM as
     * one that is built by itself.
     * This is used to support DTM sharing between multiple transformations.
+    * <p>
+    *  将使用旧DTMManager构建的DTM迁移到新的DTMManager。迁移后,新的DTMManager会将DTM视为由其自身构建的DTM。这用于支持多个转换之间的DTM共享。
+    * 
+    * 
     * @param manager the DTMManager
     */
   public void migrateTo(DTMManager manager) {
@@ -979,6 +1166,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Store the source location of the current node.  This method must be called
    * as every node is added to the DTM or for no node.
+   * <p>
+   *  存储当前节点的源位置。必须调用此方法,因为每个节点都添加到DTM或无节点。
+   * 
    */
   protected void setSourceLocation() {
     m_sourceSystemId.addElement(m_locator.getSystemId());
@@ -1001,6 +1191,11 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * as defined by the DOM, but may ignore some conveniences.
    * <p>
    *
+   * <p>
+   * 给定一个节点句柄,返回其节点值。这主要是由DOM定义的,但可能忽略一些方便。
+   * <p>
+   * 
+   * 
    * @param nodeHandle The node id.
    * @return String Value of this node, or null if not
    * meaningful for this node type.
@@ -1044,6 +1239,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * (As defined in Namespaces, this is the portion of the name after any
    * colon character).
    *
+   * <p>
+   *  给定一个节点句柄,返回其XPath样式的本地名。 (如命名空间中定义,这是任何冒号字符后的名称部分)。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Local name of this node.
    */
@@ -1080,6 +1279,18 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * to the DOM" refers only to parsed entities, not unparsed, and hence
    * doesn't affect this function.)
    *
+   * <p>
+   *  getUnparsedEntityURI函数返回在与上下文节点相同的文档中具有指定名称的未解析实体的URI(参见[3.3 Unparsed Entities])。如果没有这样的实体,它返回空字符串。
+   * <p>
+   *  XML处理器可以选择使用系统标识符(如果提供了一个)来解析实体,而不是公共标识符中的URI。细节取决于处理器,我们将不得不支持某种形式的插件解析器来正确处理这些。
+   * 目前,我们只返回系统标识符(如果存在),并希望它是一个可用的URI,或者我们的调用者可以将它映射到一个。 TODO：Resolve Public Identifiers ...或考虑更改函数名称。
+   * <p>
+   *  如果我们找到一个相对URI引用,XML期望它根据文档的基本URI解析。 DOM不为我们这样做,并不完全清楚是否应该在这里做;目前已经上升到我们的应用程序的更高水平。
+   *  (请注意,DOM级别1不存储文档的基本URI。)TODO：考虑解析相对URI。
+   * <p>
+   * (DOM的声明"一个XML处理器可能选择在结构模型被传递给DOM之前完全展开实体"仅指解析的实体,而不是解析的,因此不影响这个函数)。
+   * 
+   * 
    * @param name A string containing the Entity Name of the unparsed
    * entity.
    *
@@ -1140,6 +1351,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * <p> %REVIEW% Are you sure you want "" for no prefix?  </p>
    * <p> %REVIEW-COMMENT% I think so... not totally sure. -sb  </p>
    *
+   * <p>
+   *  给定一个命名空间句柄,返回命名空间decl正在映射的前缀。给定一个节点句柄,返回用于映射到命名空间的前缀。
+   * 
+   *  <p>％REVIEW％您确定要""没有前缀吗? </p> <p>％REVIEW-COMMENT％我认为这样...不完全确定。 -sb </p>
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String prefix of this node's name, or "" if no explicit
    * namespace prefix was given.
@@ -1183,6 +1400,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Retrieves an attribute node by by qualified name and namespace URI.
    *
+   * <p>
+   *  按限定名称和命名空间URI检索属性节点。
+   * 
+   * 
    * @param nodeHandle int Handle of the node upon which to look up this attribute..
    * @param namespaceURI The namespace URI of the attribute to
    *   retrieve, or null.
@@ -1218,6 +1439,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * no external subset or if it has no public identifier, this property
    * has no value.
    *
+   * <p>
+   *  返回外部子集的公共标识符,如4.2.2外部实体[XML]中所述进行规范化。如果没有外部子集或者没有公共标识符,则此属性没有值。
+   * 
+   * 
    * @return the public identifier String object, or null if there is none.
    */
   public String getDocumentTypeDeclarationPublicIdentifier()
@@ -1236,6 +1461,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    *
    * <p>%REVIEW% Null or ""? -sb</p>
    *
+   * <p>
+   *  给定一个节点句柄,返回它的DOM风格的命名空间URI(如命名空间中定义的,这是这个节点的前缀 - 或默认替代)被声明的URI。
+   * 
+   *  <p>％REVIEW％Null或""? -sb </p>
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String URI value of this node's namespace, or null if no
    * namespace was resolved.
@@ -1251,6 +1482,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * (see http://www.w3.org/TR/xpath#data-model
    * for the definition of a node's string-value).
    *
+   * <p>
+   *  将节点的字符串值作为String对象获取(有关节点的字符串值的定义,请参阅http://www.w3.org/TR/xpath#data-model)。
+   * 
+   * 
    * @param nodeHandle The node ID.
    *
    * @return A string object that represents the string-value of the given node.
@@ -1326,6 +1561,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Determine if the string-value of a node is whitespace
    *
+   * <p>
+   *  确定节点的字符串值是否为空格
+   * 
+   * 
    * @param nodeHandle The node Handle.
    *
    * @return Return true if the given node is whitespace.
@@ -1364,6 +1603,14 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * and this operation searches only within a single document, right?
    * Wouldn't want collisions between DTMs in the same process.</p>
    *
+   * <p>
+   * 返回<code> Element </code>,其<code> ID </code>由<code> elementId </code>给出。
+   * 如果没有这样的元素,返回<code> DTM.NULL </code>。如果多个元素具有此<code> ID </code>,则不定义行为。
+   * 属性(包括名称为"ID"的属性)不是类型ID,除非由DTM实现的DTD /模式信息如此定义。不知道属性是否为ID类型的实现应该返回<code> DTM.NULL </code>。
+   * 
+   *  <p>％REVIEW％推测ID仍然限于单个文档,此操作仅在单个文档中搜索,对吗?不希望在同一过程中DTM之间发生冲突。</p>
+   * 
+   * 
    * @param elementId The unique <code>id</code> value for an element.
    * @return The handle of the matching element.
    */
@@ -1394,6 +1641,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * Get a prefix either from the qname or from the uri mapping, or just make
    * one up!
    *
+   * <p>
+   *  从qname或从uri映射获取前缀,或者只是做一个！
+   * 
+   * 
    * @param qname The qualified name, which may be null.
    * @param uri The namespace URI, which may be null.
    *
@@ -1465,6 +1716,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * Get a prefix either from the uri mapping, or just make
    * one up!
    *
+   * <p>
+   *  从uri映射获取前缀,或者只是做一个！
+   * 
+   * 
    * @param uri The namespace URI, which may be null.
    *
    * @return The prefix if there is one, or null.
@@ -1480,6 +1735,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * Get a prefix either from the qname or from the uri mapping, or just make
    * one up!
    *
+   * <p>
+   *  从qname或从uri映射获取前缀,或者只是做一个！
+   * 
+   * 
    * @return The prefix if there is one, or null.
    */
   public String getNamespaceURI(String prefix)
@@ -1508,6 +1767,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Set an ID string to node association in the ID table.
    *
+   * <p>
+   *  在ID表中将ID字符串设置为节点关联。
+   * 
+   * 
    * @param id The ID string.
    * @param elem The associated element handle.
    */
@@ -1519,6 +1782,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Check whether accumulated text should be stripped; if not,
    * append the appropriate flavor of text/cdata node.
+   * <p>
+   *  检查是否应剥离累积的文本;如果没有,添加相应的文本/ cdata节点的风格。
+   * 
    */
   protected void charactersFlush()
   {
@@ -1569,6 +1835,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * in a subclass to do special translations such as catalog lookups
    * or URI redirection.</p>
    *
+   * <p>
+   *  解析外部实体。
+   * 
+   *  <p>始终返回null,以便解析器将使用XML文档中提供的系统标识符。此方法实现SAX默认行为：应用程序编写者可以在子类中覆盖它以执行特殊翻译,例如目录查找或URI重定向。</p>
+   * 
+   * 
    * @param publicId The public identifer, or null if none is
    *                 available.
    * @param systemId The system identifier provided in the XML
@@ -1598,6 +1870,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * method in a subclass if they wish to keep track of the notations
    * declared in a document.</p>
    *
+   * <p>
+   *  接收符号声明的通知。
+   * 
+   * <p>默认情况下,不执行任何操作。如果希望跟踪文档中声明的符号,应用程序编写器可以在子类中覆盖此方法。</p>
+   * 
+   * 
    * @param name The notation name.
    * @param publicId The notation public identifier, or null if not
    *                 available.
@@ -1622,6 +1900,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * method in a subclass to keep track of the unparsed entities
    * declared in a document.</p>
    *
+   * <p>
+   *  接收未分析实体声明的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序编写器可以在子类中覆盖此方法,以跟踪文档中声明的未解析实体。</p>
+   * 
+   * 
    * @param name The entity name.
    * @param publicId The entity public identifier, or null if not
    *                 available.
@@ -1677,6 +1961,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * method in a subclass if they wish to store the locator for use
    * with other document events.</p>
    *
+   * <p>
+   *  接收文档事件的定位器对象。
+   * 
+   *  <p>默认情况下,不执行任何操作。如果应用程序编写者希望存储定位器以与其他文档事件一起使用,则可以在子类中覆盖此方法。</p>
+   * 
+   * 
    * @param locator A locator for all SAX document events.
    * @see org.xml.sax.ContentHandler#setDocumentLocator
    * @see org.xml.sax.Locator
@@ -1690,6 +1980,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Receive notification of the beginning of the document.
    *
+   * <p>
+   *  接收文档开头的通知。
+   * 
+   * 
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
    * @see org.xml.sax.ContentHandler#startDocument
@@ -1713,6 +2007,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Receive notification of the end of the document.
    *
+   * <p>
+   *  接收文档结束的通知。
+   * 
+   * 
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
    * @see org.xml.sax.ContentHandler#endDocument
@@ -1749,6 +2047,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * method in a subclass to take specific actions at the start of
    * each Namespace prefix scope (such as storing the prefix mapping).</p>
    *
+   * <p>
+   *  接收命名空间映射开始的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序编写器可以在子类中覆盖此方法,以在每个Namespace前缀作用域开始时执行特定操作(例如存储前缀映射)。</p>
+   * 
+   * 
    * @param prefix The Namespace prefix being declared.
    * @param uri The Namespace URI mapped to the prefix.
    * @throws SAXException Any SAX exception, possibly
@@ -1776,6 +2080,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * method in a subclass to take specific actions at the end of
    * each prefix mapping.</p>
    *
+   * <p>
+   *  接收命名空间映射结束的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序编写器可以在子类中覆盖此方法,以在每个前缀映射结束时采取特定操作。</p>
+   * 
+   * 
    * @param prefix The Namespace prefix being declared.
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
@@ -1809,6 +2119,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Check if a declaration has already been made for a given prefix.
    *
+   * <p>
+   *  检查是否已为给定前缀做出声明。
+   * 
+   * 
    * @param prefix non-null prefix string.
    *
    * @return true if the declaration has already been declared in the
@@ -1845,6 +2159,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * each element (such as allocating a new tree node or writing
    * output to a file).</p>
    *
+   * <p>
+   *  接收元素开始的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序编写器可以在子类中覆盖此方法,以在每个元素的开头执行特定操作(例如分配新的树节点或将输出写入文件)。</p>
+   * 
+   * 
    * @param uri The Namespace URI, or the empty string if the
    *        element has no Namespace URI or if Namespace
    *        processing is not being performed.
@@ -2015,6 +2335,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * each element (such as finalising a tree node or writing
    * output to a file).</p>
    *
+   * <p>
+   * 接收元素结束的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序编写器可以在子类中覆盖此方法,以在每个元素结尾处执行特定操作(例如完成树节点或将输出写入文件)。</p>
+   * 
+   * 
    * @param uri The Namespace URI, or the empty string if the
    *        element has no Namespace URI or if Namespace
    *        processing is not being performed.
@@ -2067,6 +2393,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * (such as adding the data to a node or buffer, or printing it to
    * a file).</p>
    *
+   * <p>
+   *  接收元素内的字符数据的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序写入程序可以覆盖此方法,以对字符数据的每个块执行特定操作(例如将数据添加到节点或缓冲区,或将其打印到文件)。</p>
+   * 
+   * 
    * @param ch The characters.
    * @param start The start position in the character array.
    * @param length The number of characters to use from the
@@ -2102,6 +2434,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * whitespace (such as adding data to a node or buffer, or printing
    * it to a file).</p>
    *
+   * <p>
+   *  在元素内容中接收可忽略的空格的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序编写者可以覆盖此方法,以对每个可忽略的空格(例如向节点或缓冲区添加数据或将其打印到文件)采取特定操作。</p>
+   * 
+   * 
    * @param ch The whitespace characters.
    * @param start The start position in the character array.
    * @param length The number of characters to use from the
@@ -2127,6 +2465,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * processing instruction, such as setting status variables or
    * invoking other methods.</p>
    *
+   * <p>
+   *  接收处理指令的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序编写器可以在子类中覆盖此方法,以对每个处理指令采取特定操作,例如设置状态变量或调用其他方法。</p>
+   * 
+   * 
    * @param target The processing instruction target.
    * @param data The processing instruction data, or null if
    *             none is supplied.
@@ -2159,6 +2503,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * processing instruction, such as setting status variables or
    * invoking other methods.</p>
    *
+   * <p>
+   *  接收跳过的实体的通知。
+   * 
+   *  <p>默认情况下,不执行任何操作。应用程序编写器可以在子类中覆盖此方法,以对每个处理指令采取特定操作,例如设置状态变量或调用其他方法。</p>
+   * 
+   * 
    * @param name The name of the skipped entity.
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
@@ -2183,6 +2533,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * for each warning, such as inserting the message in a log file or
    * printing it to the console.</p>
    *
+   * <p>
+   *  接收解析器警告的通知。
+   * 
+   * <p>默认实现什么也不做。应用程序编写器可以在子类中覆盖此方法,以对每个警告采取特定操作,例如将消息插入日志文件或将其打印到控制台。</p>
+   * 
+   * 
    * @param e The warning information encoded as an exception.
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
@@ -2204,6 +2560,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * for each error, such as inserting the message in a log file or
    * printing it to the console.</p>
    *
+   * <p>
+   *  接收可恢复的解析器错误的通知。
+   * 
+   *  <p>默认实现什么也不做。应用程序编写器可以在子类中覆盖此方法,以对每个错误采取特定操作,例如将消息插入日志文件或将其打印到控制台。</p>
+   * 
+   * 
    * @param e The warning information encoded as an exception.
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
@@ -2226,6 +2588,15 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * method is invoked, since the document is no longer reliable, and
    * the parser may no longer report parsing events.</p>
    *
+   * <p>
+   *  报告致命的XML解析错误。
+   * 
+   *  <p>默认实现会抛出SAXParseException。
+   * 如果应用程序编写器需要对每个致命错误采取特定操作(例如将所有错误收集到单个报告中),则应用程序编写器可以在子类中覆盖此方法：在任何情况下,应用程序必须在调用此方法时停止所有常规处理,因为文档不再可靠,并
+   * 且解析器可能不再报告解析事件。
+   *  <p>默认实现会抛出SAXParseException。</p>。
+   * 
+   * 
    * @param e The error information encoded as an exception.
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
@@ -2250,6 +2621,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * that all whitespace is removed,and will include the enclosing
    * parentheses.</p>
    *
+   * <p>
+   *  报告元素类型声明。
+   * 
+   *  <p>内容模型将包含字符串"EMPTY",字符串"ANY"或括号组,可选后跟一个事件指示符。该模型将被规范化,以便删除所有空格,并包含括号括号。</p>
+   * 
+   * 
    * @param name The element type name.
    * @param model The content model as a normalized string.
    * @throws SAXException The application may raise an exception.
@@ -2269,6 +2646,14 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * "ENTITIES", or "NOTATION", or a parenthesized token group with
    * the separator "|" and all whitespace removed.</p>
    *
+   * <p>
+   *  报告属性类型声明。
+   * 
+   * <p>只会报告属性的有效(第一)声明。
+   * 类型将是字符串"CDATA","ID","IDREF","IDREFS","NMTOKEN","NMTOKENS","ENTITY","ENTITIES"或"注释"带分隔符"|"并删除所有空格。
+   * </p>。
+   * 
+   * 
    * @param eName The name of the associated element.
    * @param aName The name of the attribute.
    * @param type A string representing the attribute type.
@@ -2293,6 +2678,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * <p>Only the effective (first) declaration for each entity
    * will be reported.</p>
    *
+   * <p>
+   *  报告内部实体声明。
+   * 
+   *  <p>只会报告每个实体的有效(第一)声明。</p>
+   * 
+   * 
    * @param name The name of the entity.  If it is a parameter
    *        entity, the name will begin with '%'.
    * @param value The replacement text of the entity.
@@ -2313,6 +2704,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * <p>Only the effective (first) declaration for each entity
    * will be reported.</p>
    *
+   * <p>
+   *  报告解析的外部实体声明。
+   * 
+   *  <p>只会报告每个实体的有效(第一)声明。</p>
+   * 
+   * 
    * @param name The name of the entity.  If it is a parameter
    *        entity, the name will begin with '%'.
    * @param publicId The declared public identifier of the entity, or
@@ -2344,6 +2741,14 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * the start/endDocument events from ContentHandler and
    * before the first startElement event.</p>
    *
+   * <p>
+   *  报告DTD声明的开始(如果有)。
+   * 
+   *  <p>假设任何声明都在内部子集中,除非{@link #startEntity startEntity}事件另有说明。</p>
+   * 
+   *  <p>请注意,start / endDTD事件将出现在ContentHandler的start / endDocument事件中和第一个startElement事件之前。</p>
+   * 
+   * 
    * @param name The document type name.
    * @param publicId The declared public identifier for the
    *        external DTD subset, or null if none was declared.
@@ -2364,6 +2769,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Report the end of DTD declarations.
    *
+   * <p>
+   *  报告DTD声明的结束。
+   * 
+   * 
    * @throws SAXException The application may raise an exception.
    * @see #startDTD
    */
@@ -2388,6 +2797,18 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * {@link org.xml.sax.ContentHandler#skippedEntity skippedEntity}
    * event, which is part of the ContentHandler interface.</p>
    *
+   * <p>
+   *  在内容中报告实体的开始。
+   * 
+   *  <p> <strong>注意：属性值中的</entity>实体引用 - 以及文档实体的开始和结束都不会被报告。</p>
+   * 
+   *  <p>使用伪名称"[dtd]"报告外部DTD子集的开始和结束。所有其他事件必须正确嵌套在开始/结束实体事件中。</p>
+   * 
+   *  <p>请注意,跳过的实体将通过{@link org.xml.sax.ContentHandler#skippedEntity skippedEntity}事件(属于ContentHandler界面的一
+   * 部分)进行报告。
+   * </p>。
+   * 
+   * 
    * @param name The name of the entity.  If it is a parameter
    *        entity, the name will begin with '%'.
    * @throws SAXException The application may raise an exception.
@@ -2404,6 +2825,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Report the end of an entity.
    *
+   * <p>
+   *  报告实体的结束。
+   * 
+   * 
    * @param name The name of the entity that is ending.
    * @throws SAXException The application may raise an exception.
    * @see #startEntity
@@ -2421,6 +2846,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * the regular {@link org.xml.sax.ContentHandler#characters
    * characters} event.</p>
    *
+   * <p>
+   * 报告CDATA部分的开始。
+   * 
+   *  <p> CDATA部分的内容将通过常规{@link org.xml.sax.ContentHandler#characters characters}事件报告。</p>
+   * 
+   * 
    * @throws SAXException The application may raise an exception.
    * @see #endCDATA
    */
@@ -2432,6 +2863,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Report the end of a CDATA section.
    *
+   * <p>
+   *  报告CDATA部分的结尾。
+   * 
+   * 
    * @throws SAXException The application may raise an exception.
    * @see #startCDATA
    */
@@ -2447,6 +2882,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * document element, including comments in the external DTD
    * subset (if read).</p>
    *
+   * <p>
+   *  在文档中的任何位置报告XML注释。
+   * 
+   *  <p>此回调将用于文档元素内部或外部的注释,包括外部DTD子集中的注释(如果已读取)。</p>
+   * 
+   * 
    * @param ch An array holding the characters in the comment.
    * @param start The starting position in the array.
    * @param length The number of characters to use from the array.
@@ -2478,6 +2919,12 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * %REVIEW% Now that we no longer use this method to support
    * getSourceLocatorFor, can we remove it?
    *
+   * <p>
+   *  为此DTM实例设置运行时属性。
+   * 
+   *  ％REVIEW％现在我们不再使用此方法来支持getSourceLocatorFor,我们可以删除它吗?
+   * 
+   * 
    * @param property a <code>String</code> value
    * @param value an <code>Object</code> value
    */
@@ -2492,6 +2939,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    *
    * (We _could_ return a locator with the document's base URI and bogus
    * line/column information. Trying that; see the else clause.)
+   * <p>
+   *  这只有在XalanProperties.SOURCE_LOCATION标志使用setProperty设置为True时才有意义;如果它从未设置,或设置为false,我们将返回null。
+   * 
+   * 
    * */
   public SourceLocator getSourceLocatorFor(int node)
   {

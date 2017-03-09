@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,19 @@ import java.security.PublicKey;
  * provide the necessary locking. Multiple threads each manipulating
  * separate objects need not synchronize.
  *
+ * <p>
+ *  此类表示PKIX认证路径构建器算法的成功结果。使用此算法构建和返回的所有认证路径也根据PKIX认证路径验证算法进行验证。
+ * 
+ *  <p> {@code PKIXCertPathBuilderResult}的实例由实现PKIX算法的{@code CertPathBuilder}对象的{@code build}方法返回。
+ * 
+ *  <p>所有{@code PKIXCertPathBuilderResult}对象都包含由构建算法构建的认证路径,由构建算法生成的有效策略树和主题公钥以及描述所提供的认证中心(CA)的{@code TrustAnchor}
+ * 作为认证路径的信任锚点。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  除非另有说明,否则此类中定义的方法不是线程安全的。需要并发访问单个对象的多个线程应在它们之间同步并提供必要的锁定。每个操作单独对象的多个线程不需要同步。
+ * 
+ * 
  * @see CertPathBuilderResult
  *
  * @since       1.4
@@ -65,6 +79,8 @@ public class PKIXCertPathBuilderResult extends PKIXCertPathValidatorResult
      * Creates an instance of {@code PKIXCertPathBuilderResult}
      * containing the specified parameters.
      *
+     * <p>
+     * 
      * @param certPath the validated {@code CertPath}
      * @param trustAnchor a {@code TrustAnchor} describing the CA that
      * served as a trust anchor for the certification path
@@ -92,6 +108,10 @@ public class PKIXCertPathBuilderResult extends PKIXCertPathValidatorResult
      * obtain the {@code TrustAnchor} that served as the trust anchor
      * for the certification path.
      *
+     * <p>
+     *  创建包含指定参数的{@code PKIXCertPathBuilderResult}实例。
+     * 
+     * 
      * @return the built and validated {@code CertPath} (never
      * {@code null})
      */
@@ -103,6 +123,11 @@ public class PKIXCertPathBuilderResult extends PKIXCertPathValidatorResult
      * Return a printable representation of this
      * {@code PKIXCertPathBuilderResult}.
      *
+     * <p>
+     * 返回已构建并验证的认证路径。 {@code CertPath}对象不包括信任锚。
+     * 而应使用{@link #getTrustAnchor()getTrustAnchor()}方法来获取用作认证路径的信任锚的{@code TrustAnchor}。
+     * 
+     * 
      * @return a {@code String} describing the contents of this
      *         {@code PKIXCertPathBuilderResult}
      */

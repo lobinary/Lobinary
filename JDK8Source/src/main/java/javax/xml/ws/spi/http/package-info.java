@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -89,6 +90,25 @@
   3. EndpointN.stop()
   </pre>
 
+/* <p>
+/*  提供HTTP SPI,用于在容器(例如servlet容器)中便携式部署JAX-WS Web服务。这个SPI不是为最终开发人员,但为容器开发人员提供一种方式来可移植地部署JAX-WS服务。
+/* 
+/* <p>
+/*  可移植部署如下：
+/* <ol>
+/*  <li>容器为应用程序创建{@link javax.xml.ws.Endpoint}对象。创建Endpoint对象的必要信息可能来自Web服务部署描述符文件。
+/* </li> <li>容器需要为部署创建{@link javax.xml.ws.spi.http.HttpContext}对象。
+/* 例如,可以使用Servlet配置(例如url-pattern)为servlet容器中的web服务创建HttpContext。
+/* </li> <li>然后使用{@link javax.xml.ws.Endpoint)发布所有端点#publish(HttpContext)}。
+/* 在publish()期间,JAX-WS运行时注册一个{@link javax.xml.ws.spi.http.HttpHandler}回调以处理传入的请求或{@link javax.xml.ws.spi.http.HttpExchange}
+/* 对象。
+/* </li> <li>然后使用{@link javax.xml.ws.Endpoint)发布所有端点#publish(HttpContext)}。 HttpExchange对象封装了HTTP请求和响应。
+/* </ol>
+/* 
+/* <pre>
+/* 容器JAX-WS运行时--------- -------------- 1.创建Invoker1,... InvokerN 2. Provider.createEndpoint(...) - > 3.创
+/* 建Endpoint1配置Endpoint1 ... 4. Provider.createEndpoint(...) - > 5.创建EndpointN配置EndpointN 6.创建Applicatio
+/* 
   @author Jitendra Kotamraju
   @since JAX-WS 2.2
  */

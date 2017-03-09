@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
+/* <p>
+/* 
  * @author Joshua Outwater
  * @author Scott Violet
  */
@@ -227,6 +230,9 @@ class GTKPainter extends SynthPainter {
          * If the label is a ListCellRenderer and it's in a container
          * (CellRendererPane) which is in a JComboBox then we paint the label
          * as a TextField like a gtk_entry for a combobox.
+         * <p>
+         *  如果标签是ListCellRenderer,并且它在一个JComboBox中的容器(CellRendererPane)中,那么我们将标签绘制为TextField,就像组合框的gtk_entry一样。
+         * 
          */
         else if (c instanceof ListCellRenderer &&
                  container != null &&
@@ -477,6 +483,10 @@ class GTKPainter extends SynthPainter {
                  * the individual "spinbutton_up/down" buttons on top of that.
                  * Note that it is the state of the JSpinner (not its arrow
                  * button) that determines how we draw this background.
+                 * <p>
+                 *  ubuntulooks引擎(可能是其他人)期望我们先绘制完整的"spinbutton"背景,然后绘制单个"spinbutton_up / down"按钮。
+                 * 注意,它是JSpinner的状态(而不是它的箭头按钮),决定我们如何绘制这个背景。
+                 * 
                  */
                 int spinState = button.getParent().isEnabled() ?
                     SynthConstants.ENABLED : SynthConstants.DISABLED;
@@ -649,6 +659,10 @@ class GTKPainter extends SynthPainter {
          * As a result of all this, we need to be careful not to restrict
          * the w/h values below too much, so that the full thickness of the
          * rendered line will be captured by our image caching code.
+         * <p>
+         *  注意：在理论上,样式的x / y厚度值将决定分隔符内容的宽度。然而,在实践中,一些引擎将呈现比相应的厚度值更宽的线。
+         * 例如,ubuntulooks报告x / y厚度值为1的分隔符,但总是呈现一个2像素宽的线。作为所有这些的结果,我们需要小心不要将w / h值限制在太低,以便渲染线的完整厚度将被我们的图像缓存代码捕获。
+         * 
          */
         String detail;
         if (c instanceof JToolBar.Separator) {
@@ -673,6 +687,13 @@ class GTKPainter extends SynthPainter {
              * The separator is also centered horizontally or vertically,
              * depending on its orientation.  This was determined empirically
              * and by examining the code referenced above.
+             * <p>
+             * GTK不同地渲染工具栏分隔符,因为人工填充添加到分隔符的每一端。下面的0.2f的值是从当前版本的GTK +(在编写本文时为2.8.20)的gtktoolbar.c的源代码派生的。
+             * 具体来说,相关值为：SPACE_LINE_DIVISION 10.0 SPACE_LINE_START 2.0 SPACE_LINE_END 8.0这些值用于确定从工具栏顶部(或左侧)到另一条边的距离。
+             * GTK不同地渲染工具栏分隔符,因为人工填充添加到分隔符的每一端。下面的0.2f的值是从当前版本的GTK +(在编写本文时为2.8.20)的gtktoolbar.c的源代码派生的。
+             * 因此,例如,垂直分隔符的起始/顶点是水平工具栏的高度的2/10,远离顶部边缘,这是我们如何到达0.2f以下。
+             * 同样地,结束/底点是距离顶部边缘的高度的8/10,或者换句话说,它距底部边缘2/10,这又是我们如何到达下方的0.2f值。
+             * 
              */
             detail = "toolbar";
             float pct = 0.2f;
@@ -1399,6 +1420,9 @@ class GTKPainter extends SynthPainter {
     /*
      * Fill an area with color determined from this context's Style using the
      * specified GTKColorType
+     * <p>
+     *  分隔符还根据其方向水平或垂直居中。这是根据经验和通过检查上述代码确定的。
+     * 
      */
     private void fillArea(SynthContext context, Graphics g,
                           int x, int y, int w, int h, ColorType colorType) {

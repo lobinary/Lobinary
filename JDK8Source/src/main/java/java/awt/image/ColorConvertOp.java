@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,16 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ ************** ********************************************
+ * ******** **** * COPYRIGHT(c)Eastman Kodak Company,1997 *** *根据United *** *国家法典第17章的未发表的作品。
+ * 版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ * 版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package java.awt.image;
@@ -65,6 +76,17 @@ import java.awt.RenderingHints;
  * color conversion.
  * <p>
  * Note that Source and Destination may be the same object.
+ * <p>
+ *  该类对源图像中的数据执行逐像素颜色转换。所得到的颜色值被缩放到目标图像的精度。颜色转换可以通过ColorSpace对象数组或ICC_Profile对象数组来指定。
+ * <p>
+ *  如果源是具有预乘α的BufferedImage,则颜色分量在颜色转换之前被alpha分量除。如果目标是具有预乘α的BufferedImage,则颜色分量在转换后乘以alpha分量。
+ * 光栅被视为不具有alpha通道,即所有的带都是彩色带。
+ * <p>
+ *  如果在构造函数中指定了RenderingHints对象,则颜色渲染提示和抖动提示可以用于控制颜色转换。
+ * <p>
+ * 请注意,源和目标可以是相同的对象。
+ * 
+ * 
  * @see java.awt.RenderingHints#KEY_COLOR_RENDERING
  * @see java.awt.RenderingHints#KEY_DITHERING
  */
@@ -92,6 +114,11 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * directly from the ColorSpace of the source image to that of the
      * destination.  The destination argument of the filter method
      * cannot be specified as null.
+     * <p>
+     *  构造一个新的ColorConvertOp,它将从源色彩空间转换为目标色彩空间。 RenderingHints参数可以为null。
+     * 此Op仅可用于BufferedImages,并将直接从源图像的ColorSpace转换为目标的ColorSpace。 filter方法的目标参数不能指定为null。
+     * 
+     * 
      * @param hints the <code>RenderingHints</code> object used to control
      *        the color conversion, or <code>null</code>
      */
@@ -111,6 +138,12 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * for the destination created by the filter method.  Otherwise, the
      * ColorSpace defines an intermediate space to which the source is
      * converted before being converted to the destination space.
+     * <p>
+     *  从ColorSpace对象构造新的ColorConvertOp。 RenderingHints参数可以为null。
+     * 这个Op只能用于BufferedImages,当{@link #filter(BufferedImage,BufferedImage)filter}方法被调用时,目的参数为null时,它是主要有用的。
+     * 在这种情况下,ColorSpace定义由过滤器方法创建的目标的目标颜色空间。否则,ColorSpace会定义一个中间空间,在将源转换为目标空间之前,该空间将被转换。
+     * 
+     * 
      * @param cspace defines the destination <code>ColorSpace</code> or an
      *        intermediate <code>ColorSpace</code>
      * @param hints the <code>RenderingHints</code> object used to control
@@ -146,6 +179,13 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * must match the number of components in dstCspace.  For BufferedImages,
      * the two ColorSpaces define intermediate spaces through which the
      * source is converted before being converted to the destination space.
+     * <p>
+     * 从两个ColorSpace对象构造新的ColorConvertOp。 RenderingHints参数可以为null。
+     * 此Op主要用于调用Raster上的过滤器方法,在这种情况下,两个ColorSpaces定义要在Raster上执行的操作。
+     * 在这种情况下,源栅格中的波段数必须与srcCspace中的组件数匹配,目标栅格中的波段数必须与dstCspace中的组件数匹配。
+     * 对于BufferedImages,两个ColorSpaces定义了中间空间,源在转换到目标空间之前通过中间空间进行转换。
+     * 
+     * 
      * @param srcCspace the source <code>ColorSpace</code>
      * @param dstCspace the destination <code>ColorSpace</code>
      * @param hints the <code>RenderingHints</code> object used to control
@@ -196,6 +236,15 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * of the last profile in the array.  The array must have at least two
      * elements or calling the filter method for Rasters will throw an
      * IllegalArgumentException.
+     * <p>
+     * 从ICC_Profiles数组构造新的ColorConvertOp。 RenderingHints参数可以为null。轮廓序列可以包括表示颜色空间的轮廓,表示效果的轮廓等。
+     * 如果整个序列不表示良好定义的颜色转换,则抛出异常。
+     *  <p>对于BufferedImages,如果源BufferedImage的ColorSpace与数组中第一个配置文件的要求不匹配,则首次转换为相应的ColorSpace。
+     * 如果目标BufferedImage的ColorSpace未满足数组中最后一个配置文件的要求,则最后一次转换是到目标的ColorSpace。
+     *  <p>对于栅格,源栅格中的波段数必须与阵列中第一个配置文件的要求相匹配,并且目标栅格中的波段数必须与阵列中最后一个配置文件的要求相匹配。
+     * 数组必须至少有两个元素,或者调用Raster的filter方法会抛出IllegalArgumentException异常。
+     * 
+     * 
      * @param profiles the array of <code>ICC_Profile</code> objects
      * @param hints the <code>RenderingHints</code> object used to control
      *        the color conversion, or <code>null</code>
@@ -221,6 +270,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * Returns the array of ICC_Profiles used to construct this ColorConvertOp.
      * Returns null if the ColorConvertOp was not constructed from such an
      * array.
+     * <p>
+     *  返回用于构造此ColorConvertOp的ICC_Profiles数组。如果ColorConvertOp不是从这样的数组构造,则返回null。
+     * 
+     * 
      * @return the array of <code>ICC_Profile</code> objects of this
      *         <code>ColorConvertOp</code>, or <code>null</code> if this
      *         <code>ColorConvertOp</code> was not constructed with an
@@ -241,6 +294,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * ColorConverts the source BufferedImage.
      * If the destination image is null,
      * a BufferedImage will be created with an appropriate ColorModel.
+     * <p>
+     *  ColorConverts源BufferedImage。如果目标图像为null,则将使用适当的ColorModel创建BufferedImage。
+     * 
+     * 
      * @param src the source <code>BufferedImage</code> to be converted
      * @param dest the destination <code>BufferedImage</code>,
      *        or <code>null</code>
@@ -305,6 +362,8 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
         srcProfile = ((ICC_ColorSpace) srcColorSpace).getProfile();
 
         if (dest == null) {        /* last profile in the list defines
+        if (dest == null) {        /* <p>
+        if (dest == null) {        /* 
                                       the output color space */
             if (nProfiles == 0) {
                 throw new IllegalArgumentException(
@@ -324,6 +383,9 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
 
         /* Checking if all profiles in the transform sequence are the same.
          * If so, performing just copying the data.
+         * <p>
+         *  如果是,只需复制数据。
+         * 
          */
         if (srcProfile == destProfile) {
             boolean noTrans = true;
@@ -378,6 +440,8 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
 
         /* make the profile list */
         theProfiles = new ICC_Profile[nTransforms]; /* the list of profiles
+        theProfiles = new ICC_Profile[nTransforms]; /* <p>
+        theProfiles = new ICC_Profile[nTransforms]; /* 
                                                        for this Op */
 
         int idx = 0;
@@ -402,11 +466,15 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
         /* initialize transform get loop */
         if (theProfiles[0].getProfileClass() == ICC_Profile.CLASS_OUTPUT) {
                                         /* if first profile is a printer
+                                        /* <p>
+                                        /* 
                                            render as colorimetric */
             renderState = ICC_Profile.icRelativeColorimetric;
         }
         else {
             renderState = ICC_Profile.icPerceptual; /* render any other
+            renderState = ICC_Profile.icPerceptual; /* <p>
+            renderState = ICC_Profile.icPerceptual; /* 
                                                        class perceptually */
         }
 
@@ -432,6 +500,8 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
                 theProfiles[i1], renderState, whichTrans);
 
             /* get this profile's rendering intent to select transform
+            /* <p>
+            /* 
                from next profile */
             renderState = getRenderingIntent(theProfiles[i1]);
 
@@ -455,6 +525,11 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * create this ColorConvertOp must have provided enough information
      * to define both source and destination color spaces.  See above.
      * Otherwise, an exception is thrown.
+     * <p>
+     * Color转换源光栅中的图像数据。如果目标栅格为空,将创建一个新的栅格。源和目标光栅中的频带数必须满足上述要求。
+     * 用于创建此ColorConvertOp的构造函数必须提供足够的信息来定义源和目标颜色空间。往上看。否则,抛出异常。
+     * 
+     * 
      * @param src the source <code>Raster</code> to be converted
      * @param dest the destination <code>WritableRaster</code>,
      *        or <code>null</code>
@@ -511,11 +586,15 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
             /* initialize transform get loop */
             if (profileList[0].getProfileClass() == ICC_Profile.CLASS_OUTPUT) {
                                             /* if first profile is a printer
+                                            /* <p>
+                                            /* 
                                                render as colorimetric */
                 renderState = ICC_Profile.icRelativeColorimetric;
             }
             else {
                 renderState = ICC_Profile.icPerceptual; /* render any other
+                renderState = ICC_Profile.icPerceptual; /* <p>
+                renderState = ICC_Profile.icPerceptual; /* 
                                                            class perceptually */
             }
 
@@ -541,6 +620,8 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
                     profileList[i1], renderState, whichTrans);
 
                 /* get this profile's rendering intent to select transform
+                /* <p>
+                /* 
                    from next profile */
                 renderState = getRenderingIntent(profileList[i1]);
 
@@ -579,6 +660,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * Returns the bounding box of the destination, given this source.
      * Note that this will be the same as the the bounding box of the
      * source.
+     * <p>
+     *  给定此源,返回目标的边界框。注意,这将与源的边界框相同。
+     * 
+     * 
      * @param src the source <code>BufferedImage</code>
      * @return a <code>Rectangle2D</code> that is the bounding box
      *         of the destination, given the specified <code>src</code>
@@ -591,6 +676,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * Returns the bounding box of the destination, given this source.
      * Note that this will be the same as the the bounding box of the
      * source.
+     * <p>
+     *  给定此源,返回目标的边界框。注意,这将与源的边界框相同。
+     * 
+     * 
      * @param src the source <code>Raster</code>
      * @return a <code>Rectangle2D</code> that is the bounding box
      *         of the destination, given the specified <code>src</code>
@@ -598,6 +687,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
     public final Rectangle2D getBounds2D (Raster src) {
         /*        return new Rectangle (src.getXOffset(),
                               src.getYOffset(),
+        /* <p>
+        /*  src.getYOffset(),
+        /* 
+        /* 
                               src.getWidth(), src.getHeight()); */
         return src.getBounds();
     }
@@ -605,6 +698,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
     /**
      * Creates a zeroed destination image with the correct size and number of
      * bands, given this source.
+     * <p>
+     *  在给定此来源的情况下,创建具有正确大小和频带数的归零目标图像。
+     * 
+     * 
      * @param src       Source image for the filter operation.
      * @param destCM    ColorModel of the destination.  If null, an
      *                  appropriate ColorModel will be used.
@@ -669,6 +766,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
     /**
      * Creates a zeroed destination Raster with the correct size and number of
      * bands, given this source.
+     * <p>
+     *  在给定此源的情况下,创建具有正确大小和带数的零位置目标光栅。
+     * 
+     * 
      * @param src the specified <code>Raster</code>
      * @return a <code>WritableRaster</code> with the correct size and number
      *         of bands from the specified <code>src</code>
@@ -711,6 +812,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
      * it will be used to hold the return value.  Note that
      * for this class, the destination point will be the same
      * as the source point.
+     * <p>
+     *  返回给定源中的点的目标点的位置。如果<code> dstPt </code>为非空,它将用于保存返回值。请注意,对于此类,目标点将与源点相同。
+     * 
+     * 
      * @param srcPt the specified source <code>Point2D</code>
      * @param dstPt the destination <code>Point2D</code>
      * @return <code>dstPt</code> after setting its location to be
@@ -728,6 +833,9 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
 
     /**
      * Returns the RenderingIntent from the specified ICC Profile.
+     * <p>
+     *  从指定的ICC配置文件返回RenderingIntent。
+     * 
      */
     private int getRenderingIntent (ICC_Profile profile) {
         byte[] header = profile.getData(ICC_Profile.icSigHead);
@@ -739,6 +847,11 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
          * bytes here.
          *
          *  See http://www.color.org/ICC1v42_2006-05.pdf, section 7.2.15.
+         * <p>
+         *  用于对渲染意图进行编码。最高有效16位应设置为零。因此,我们在这里忽略两个最重要的字节。
+         * 
+         *  见http://www.color.org/ICC1v42_2006-05.pdf,第7.2.15节。
+         * 
          */
         return ((header[index+2] & 0xff) <<  8) |
                 (header[index+3] & 0xff);
@@ -746,6 +859,8 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
 
     /**
      * Returns the rendering hints used by this op.
+     * <p>
+     * 
      * @return the <code>RenderingHints</code> object of this
      *         <code>ColorConvertOp</code>
      */
@@ -946,6 +1061,10 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
     }
 
     /* color convert a Raster - handles byte, ushort, int, short, float,
+    /* <p>
+    /*  返回此操作使用的渲染提示。
+    /* 
+    /* 
        or double transferTypes */
     private final WritableRaster nonICCRasterFilter(Raster src,
                                                     WritableRaster dst)  {

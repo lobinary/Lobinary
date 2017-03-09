@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -150,6 +154,52 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * actions following a successful "acquire" method such as {@code acquire()}
  * in another thread.
  *
+ * <p>
+ *  计数信号量。在概念上,信号量保持一组许可。如果需要,每个{@link #acquire}都会阻止,直到许可证可用为止,然后才会生效。
+ * 每个{@link #release}都会添加一个许可,可能会释放屏蔽收单行。但是,不使用实际的许可证对象; {@code Semaphore}只保留可用数量的计数,并据此行事。
+ * 
+ *  <p>信号量通常用于限制线程数,而不能访问某些(物理或逻辑)资源。
+ * 例如,这里是一个类,它使用信号量来控制对项池的访问：<pre> {@code class Pool {private static final int MAX_AVAILABLE = 100; private final Semaphore available = new Semaphore(MAX_AVAILABLE,true);。
+ *  <p>信号量通常用于限制线程数,而不能访问某些(物理或逻辑)资源。
+ * 
+ *  public Object getItem()throws InterruptedException {available.acquire(); return getNextAvailableItem(); }
+ * }。
+ * 
+ *  public void putItem(Object x){if(markAsUnused(x))available.release(); }}
+ * 
+ *  //不是特别有效的数据结构;只是演示
+ * 
+ *  protected Object [] items = ...被管理的任何类型的项目保护boolean [] used = new boolean [MAX_AVAILABLE];
+ * 
+ * protected synchronized Object getNextAvailableItem(){for(int i = 0; i <MAX_AVAILABLE; ++ i){if(！used [i]){used [i] = true; return items [i]; }} return null; // 还没到 }。
+ * 
+ *  保护的同步布尔标记AsUnused(对象项目){for(int i = 0; i <MAX_AVAILABLE; ++ i){if(item == items [i]){if(used [i]){used [i] = false ; return true; } else return false; }} return false; }}} </pre>
+ * 。
+ * 
+ *  <p>在获得项目之前,每个线程必须从信号量获取许可证,以保证项目可供使用。当线程完成该项目时,它被返回到池,并且许可证被返回到信号量,允许另一个线程获取该项目。
+ * 请注意,调用{@link #acquire}时不会保持同步锁定,因为这会阻止将项目返回到池中。信号量封装限制对池的访问所需的同步,与保持池本身的一致性所需的任何同步分开。
+ * 
+ * <p>一个信号量被初始化为一个,并且使用它只有至多一个可用的permit,可以作为一个互斥锁。这通常被称为<em>二进制信号量</em>,因为它只有两个状态：一个允许可用,或零允许可用。
+ * 当以这种方式使用时,二进制信号量具有属性(与许多{@link java.util.concurrent.locks.Lock}实现不同),"锁定"可以由所有者以外的线程释放(因为信号灯没有所有权的概念)
+ * 。
+ * <p>一个信号量被初始化为一个,并且使用它只有至多一个可用的permit,可以作为一个互斥锁。这通常被称为<em>二进制信号量</em>,因为它只有两个状态：一个允许可用,或零允许可用。
+ * 这在一些专门的上下文中是有用的,例如死锁恢复。
+ * 
+ * <p>此类的构造函数可以接受<em>公平</em>参数。当设置为false时,此类不保证线程获取许可的顺序。
+ * 特别是,允许​​<em> barging </em>,也就是说,调用{@link #acquire}的线程可以在已经等待的线程之前分配许可,逻辑上新线程将自己置于头等待线程的队列。
+ * 当公平性设置为true时,信号量保证调用{@link #acquire()acquire}方法中的任何一个的线程被选择以按照它们对这些方法的调用的顺序获得许可(先进先出; FIFO)。
+ * 注意,FIFO排序必须适用于这些方法中的特定内部执行点。因此,一个线程可能在另一个线程之前调用{@code acquire},但在另一个线程之后到达排序点,并且在从该方法返回时类似。
+ * 另请注意,未定义的{@link #tryAcquire()tryAcquire}方法不符合公平设置,但会获取任何可用的许可。
+ * 
+ *  <p>通常,用于控制资源访问的信号量应初始化为公平,以确保没有线程从访问资源中脱离。当使用信号量用于其他类型的同步控制时,非公平排序的吞吐量优势通常超过公平考虑。
+ * 
+ * <p>此类还提供了{@link #acquire(int)acquire}和{@link #release(int)release}多个许可证的方便方法。
+ * 注意当这些方法在没有公平性的情况下使用时,无限期推迟的风险增加。
+ * 
+ *  <p>内存一致性效应：调用"释放"方法(如{@code release()}之前线程中的操作<a href="package-summary.html#MemoryVisibility"> <i> h
+ * appens-before <在另一个线程中成功"获取"方法(例如{@code acquire()})之后执行"i> </a>"操作。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -162,6 +212,9 @@ public class Semaphore implements java.io.Serializable {
      * Synchronization implementation for semaphore.  Uses AQS state
      * to represent permits. Subclassed into fair and nonfair
      * versions.
+     * <p>
+     *  信号量的同步实现。使用AQS状态表示许可。细分为公平和非商业版本。
+     * 
      */
     abstract static class Sync extends AbstractQueuedSynchronizer {
         private static final long serialVersionUID = 1192457210091910933L;
@@ -217,6 +270,9 @@ public class Semaphore implements java.io.Serializable {
 
     /**
      * NonFair version
+     * <p>
+     *  非版本
+     * 
      */
     static final class NonfairSync extends Sync {
         private static final long serialVersionUID = -2694183684443567898L;
@@ -232,6 +288,9 @@ public class Semaphore implements java.io.Serializable {
 
     /**
      * Fair version
+     * <p>
+     *  公平版
+     * 
      */
     static final class FairSync extends Sync {
         private static final long serialVersionUID = 2014338818796000944L;
@@ -257,6 +316,10 @@ public class Semaphore implements java.io.Serializable {
      * Creates a {@code Semaphore} with the given number of
      * permits and nonfair fairness setting.
      *
+     * <p>
+     *  创建具有给定数量的许可和不公平公平设置的{@code Semaphore}。
+     * 
+     * 
      * @param permits the initial number of permits available.
      *        This value may be negative, in which case releases
      *        must occur before any acquires will be granted.
@@ -269,6 +332,10 @@ public class Semaphore implements java.io.Serializable {
      * Creates a {@code Semaphore} with the given number of
      * permits and the given fairness setting.
      *
+     * <p>
+     *  使用给定的许可数和给定的公平设置创建{@code Semaphore}。
+     * 
+     * 
      * @param permits the initial number of permits available.
      *        This value may be negative, in which case releases
      *        must occur before any acquires will be granted.
@@ -306,6 +373,23 @@ public class Semaphore implements java.io.Serializable {
      * then {@link InterruptedException} is thrown and the current thread's
      * interrupted status is cleared.
      *
+     * <p>
+     *  从这个信号量获取一个许可,阻塞直到有一个可用,或者线程是{@linkplain线程#中断}。
+     * 
+     *  <p>获得许可证,如果有许可证并立即返回,将可用许可证数量减少一个。
+     * 
+     *  <p>如果没有许可证可用,则当前线程变为禁用线程调度目的,并处于休眠状态,直到发生以下两种情况之一：
+     * <ul>
+     * <li>某些其他线程调用此信号量的{@link #release}方法,当前线程旁边会分配一个许可证;或<li>一些其他线程{@linkplain线程#中断中断}当前线程。
+     * </ul>
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     *  <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断}同时等待许可证,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。
+     * 
+     * 
      * @throws InterruptedException if the current thread is interrupted
      */
     public void acquire() throws InterruptedException {
@@ -330,6 +414,15 @@ public class Semaphore implements java.io.Serializable {
      * the time it would have received the permit had no interruption
      * occurred.  When the thread does return from this method its interrupt
      * status will be set.
+     * <p>
+     *  从这个信号量获取许可,阻塞直到有一个可用。
+     * 
+     *  <p>获得许可证,如果有许可证并立即返回,将可用许可证数量减少一个。
+     * 
+     *  <p>如果没有可用的许可证,则当前线程被禁用用于线程调度目的,并且处于休眠状态,直到一些其他线程调用该信号量的{@link #release}方法,并且当前线程下一个被分配许可。
+     * 
+     *  <p>如果在等待许可时当前线程是{@linkplain线程#中断中断},那么它将继续等待,但是线程被分配许可的时间可能会比接收到许可证没有中断发生。当线程从此方法返回时,其中断状态将被设置。
+     * 
      */
     public void acquireUninterruptibly() {
         sync.acquireShared(1);
@@ -356,6 +449,18 @@ public class Semaphore implements java.io.Serializable {
      * {@link #tryAcquire(long, TimeUnit) tryAcquire(0, TimeUnit.SECONDS) }
      * which is almost equivalent (it also detects interruption).
      *
+     * <p>
+     *  从这个信号量获取许可证,只有在调用时有一个许可证。
+     * 
+     * <p>获取许可证(如果有),并立即返回值为{@code true}的许可证,将可用许可证数量减少一个。
+     * 
+     *  <p>如果没有许可证,则此方法将立即返回值{@code false}。
+     * 
+     *  <p>即使此信号量已设置为使用公平排序策略,调用{@code tryAcquire()} <em>将立即获取许可(如果有),无论其他线程是否目前正在等待。
+     * 这种"驳船"行为在某些情况下可能是有用的,即使它破坏公平。
+     * 如果您想要遵守公平设置,请使用{@link #tryAcquire(long,TimeUnit)tryAcquire(0,TimeUnit.SECONDS)},这几乎是等价的(它也检测到中断)。
+     * 
+     * 
      * @return {@code true} if a permit was acquired and {@code false}
      *         otherwise
      */
@@ -398,6 +503,28 @@ public class Semaphore implements java.io.Serializable {
      * is returned.  If the time is less than or equal to zero, the method
      * will not wait at all.
      *
+     * <p>
+     *  如果在给定的等待时间内可用,并且当前线程尚未{@linkplain线程#中断中断},则从此信号量获取许可。
+     * 
+     *  <p>获取许可证(如果有),并立即返回值为{@code true}的许可证,将可用许可证数量减少一个。
+     * 
+     *  <p>如果没有可用的许可,则当前线程变为禁用线程调度目的,并处于休眠状态,直到发生以下三种情况之一：
+     * <ul>
+     *  <li>某些其他线程调用此信号量的{@link #release}方法,当前线程旁边会分配一个许可证;或<li>一些其他线程{@linkplain线程#中断中断}当前线程;或<li>指定的等待时间已过
+     * 。
+     * </ul>
+     * 
+     * <p>如果获得了许可,则返回值{@code true}。
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     *  <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断}在等待获取许可证时,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。
+     * 
+     *  <p>如果经过指定的等待时间,则返回值{@code false}。如果时间小于或等于零,则该方法将不会等待。
+     * 
+     * 
      * @param timeout the maximum time to wait for a permit
      * @param unit the time unit of the {@code timeout} argument
      * @return {@code true} if a permit was acquired and {@code false}
@@ -421,6 +548,13 @@ public class Semaphore implements java.io.Serializable {
      * have acquired that permit by calling {@link #acquire}.
      * Correct usage of a semaphore is established by programming convention
      * in the application.
+     * <p>
+     *  释放许可证,将其返回到信号量。
+     * 
+     *  <p>发放许可证,将可用许可证数量增加一个。如果任何线程试图获取许可证,则选择一个并且给予刚刚释放的许可证。该线程(重新)启用线程调度的目的。
+     * 
+     *  <p>没有要求释放许可证的线程必须通过调用{@link #acquire}获得该许可证。通过应用程序中的编程约定来建立信号量的正确使用。
+     * 
      */
     public void release() {
         sync.releaseShared(1);
@@ -458,6 +592,25 @@ public class Semaphore implements java.io.Serializable {
      * assigned to other threads trying to acquire permits, as if
      * permits had been made available by a call to {@link #release()}.
      *
+     * <p>
+     *  从这个信号量获取给定数量的许可,阻塞直到所有可用,或者线程是{@linkplain线程#中断}。
+     * 
+     *  <p>获取给定数量的许可证(如果可用),并立即返回,将可用许可证数量减少给定数量。
+     * 
+     *  <p>如果没有足够的许可证可用,当前线程变为禁用线程调度目的,并休眠,直到发生以下两种情况之一：
+     * <ul>
+     * <li>一些其他线程调用此信号量的{@link #release()release}方法之一,当前线程下一个被分配许可,可用许可数量满足此请求;或<li>一些其他线程{@linkplain线程#中断中断}
+     * 当前线程。
+     * </ul>
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     *  <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断}同时等待许可证,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。
+     * 任何被分配给这个线程的许可证被分配给试图获取许可证的其他线程,就好像通过调用{@link #release()}可以获得许可证一样。
+     * 
+     * 
      * @param permits the number of permits to acquire
      * @throws InterruptedException if the current thread is interrupted
      * @throws IllegalArgumentException if {@code permits} is negative
@@ -486,6 +639,17 @@ public class Semaphore implements java.io.Serializable {
      * position in the queue is not affected.  When the thread does return
      * from this method its interrupt status will be set.
      *
+     * <p>
+     *  从此信号量获取给定数量的许可,阻塞直到所有可用。
+     * 
+     *  <p>获取给定数量的许可证(如果可用),并立即返回,将可用许可证数量减少给定数量。
+     * 
+     *  <p>如果没有足够的许可证可用,当前线程变为禁用线程调度目的,并处于休眠状态,直到一些其他线程调用{@link #release()发布}方法为这个信号量之一,当前线程是旁边分配许可证和可用许可证数量
+     * 满足此要求。
+     * 
+     * <p>如果在等待许可时当前线程为{@linkplain线程#中断},它将继续等待,并且其在队列中的位置不受影响。当线程从此方法返回时,其中断状态将被设置。
+     * 
+     * 
      * @param permits the number of permits to acquire
      * @throws IllegalArgumentException if {@code permits} is negative
      */
@@ -516,6 +680,19 @@ public class Semaphore implements java.io.Serializable {
      * long, TimeUnit) tryAcquire(permits, 0, TimeUnit.SECONDS) }
      * which is almost equivalent (it also detects interruption).
      *
+     * <p>
+     *  从这个信号量获取给定数量的许可证,只有在调用时所有的许可证都可用。
+     * 
+     *  <p>获取给定数量的许可证(如果可用),并立即返回值为{@code true}的值,将可用许可证数量减少给定量。
+     * 
+     *  <p>如果许可证不足,则此方法将立即返回值{@code false},可用许可证数量不变。
+     * 
+     *  <p>即使已将此信号量设置为使用公平排序策略,对{@code tryAcquire} <em>的调用也会立即获取许可(如果有),无论其他线程当前是否正在等待。
+     * 这种"驳船"行为在某些情况下可能是有用的,即使它破坏公平。
+     * 如果你想要遵守公平设置,那么使用{@link #tryAcquire(int,long,TimeUnit)tryAcquire(permits,0,TimeUnit.SECONDS)几乎相等(它也检测中断)。
+     * 这种"驳船"行为在某些情况下可能是有用的,即使它破坏公平。
+     * 
+     * 
      * @param permits the number of permits to acquire
      * @return {@code true} if the permits were acquired and
      *         {@code false} otherwise
@@ -568,6 +745,30 @@ public class Semaphore implements java.io.Serializable {
      * permits, as if the permits had been made available by a call to
      * {@link #release()}.
      *
+     * <p>
+     *  从该信号量获取给定数量的许可,如果在给定的等待时间内全部可用,并且当前线程尚未{@linkplain线程#中断中断}。
+     * 
+     * <p>获取给定数量的许可证(如果可用并立即返回),其值为{@code true},将可用许可证数量减少给定数量。
+     * 
+     *  <p>如果没有足够的许可证可用,当前线程变为禁用线程调度目的,并休眠,直到三个事情之一发生：
+     * <ul>
+     *  <li>一些其他线程调用此信号量的{@link #release()release}方法之一,当前线程下一个被分配许可,可用许可数量满足此请求;或<li>一些其他线程{@linkplain线程#中断中断}
+     * 当前线程;或<li>指定的等待时间已过。
+     * </ul>
+     * 
+     *  <p>如果获取许可,则返回值{@code true}。
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     *  <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断},同时等待获取许可,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。
+     * 任何分配给此线程的许可证都会分配给尝试获取许可证的其他线程,就像许可证已通过调用{@link #release()}时可用。
+     * 
+     * <p>如果经过指定的等待时间,则返回值{@code false}。如果时间小于或等于零,则该方法将不会等待。
+     * 任何分配给此线程的许可证都会分配给尝试获取许可证的其他线程,就像许可证已通过调用{@link #release()}时可用。
+     * 
+     * 
      * @param permits the number of permits to acquire
      * @param timeout the maximum time to wait for the permits
      * @param unit the time unit of the {@code timeout} argument
@@ -601,6 +802,16 @@ public class Semaphore implements java.io.Serializable {
      * Correct usage of a semaphore is established by programming convention
      * in the application.
      *
+     * <p>
+     *  释放给定数量的许可证,将它们返回到信号量。
+     * 
+     *  <p>释放给定数量的许可证,增加可用许可证的数量。如果任何线程试图获取许可证,则选择一个并且给予刚刚释放的许可证。
+     * 如果可用许可证的数量满足该线程的请求,则该线程被(重新)启用用于线程调度目的;否则线程将等待,直到有足够的许可证可用。
+     * 如果在该线程的请求已经满足之后仍然存在许可,则那些许可被依次分配给试图获取许可的其他线程。
+     * 
+     *  <p>没有要求释放许可证的线程必须已通过调用{@link Semaphore#acquire acquire}获取该许可证。通过应用程序中的编程约定来建立信号量的正确使用。
+     * 
+     * 
      * @param permits the number of permits to release
      * @throws IllegalArgumentException if {@code permits} is negative
      */
@@ -614,6 +825,12 @@ public class Semaphore implements java.io.Serializable {
      *
      * <p>This method is typically used for debugging and testing purposes.
      *
+     * <p>
+     *  返回此信号量中当前可用的许可数。
+     * 
+     *  <p>此方法通常用于调试和测试目的。
+     * 
+     * 
      * @return the number of permits available in this semaphore
      */
     public int availablePermits() {
@@ -623,6 +840,10 @@ public class Semaphore implements java.io.Serializable {
     /**
      * Acquires and returns all permits that are immediately available.
      *
+     * <p>
+     *  获取并返回所有立即可用的许可证。
+     * 
+     * 
      * @return the number of permits acquired
      */
     public int drainPermits() {
@@ -636,6 +857,10 @@ public class Semaphore implements java.io.Serializable {
      * method differs from {@code acquire} in that it does not block
      * waiting for permits to become available.
      *
+     * <p>
+     * 按指定的减少量收缩可用许可证的数量。此方法在使用信号量来跟踪变得不可用的资源的子类中非常有用。此方法与{@code acquire}不同,它不会阻止等待许可证可用。
+     * 
+     * 
      * @param reduction the number of permits to remove
      * @throws IllegalArgumentException if {@code reduction} is negative
      */
@@ -647,6 +872,10 @@ public class Semaphore implements java.io.Serializable {
     /**
      * Returns {@code true} if this semaphore has fairness set true.
      *
+     * <p>
+     *  如果此信号量的公平性设置为true,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this semaphore has fairness set true
      */
     public boolean isFair() {
@@ -660,6 +889,10 @@ public class Semaphore implements java.io.Serializable {
      * acquire.  This method is designed primarily for use in
      * monitoring of the system state.
      *
+     * <p>
+     *  查询是否有任何线程正在等待获取。注意,因为取消可能在任何时候发生,{@code true}返回不保证任何其他线程将永远获得。该方法主要用于监视系统状态。
+     * 
+     * 
      * @return {@code true} if there may be other threads waiting to
      *         acquire the lock
      */
@@ -674,6 +907,10 @@ public class Semaphore implements java.io.Serializable {
      * structures.  This method is designed for use in monitoring of the
      * system state, not for synchronization control.
      *
+     * <p>
+     *  返回等待获取的线程数的估计值。该值只是一个估计值,因为线程的数量可能会在此方法遍历内部数据结构时动态更改。此方法设计用于监视系统状态,而不是用于同步控制。
+     * 
+     * 
      * @return the estimated number of threads waiting for this lock
      */
     public final int getQueueLength() {
@@ -688,6 +925,10 @@ public class Semaphore implements java.io.Serializable {
      * order.  This method is designed to facilitate construction of
      * subclasses that provide more extensive monitoring facilities.
      *
+     * <p>
+     *  返回包含可能正在等待获取的线程的集合。因为实际的线程集合可能在构造此结果时动态地改变,所返回的集合仅是最大努力估计。返回的集合的元素没有特定的顺序。该方法被设计为便于构建提供更广泛的监测设施的子类。
+     * 
+     * 
      * @return the collection of threads
      */
     protected Collection<Thread> getQueuedThreads() {
@@ -699,6 +940,9 @@ public class Semaphore implements java.io.Serializable {
      * The state, in brackets, includes the String {@code "Permits ="}
      * followed by the number of permits.
      *
+     * <p>
+     *  返回标识此信号量的字符串及其状态。括号中的状态包括字符串{@code"Permits ="},后面是许可证数。
+     * 
      * @return a string identifying this semaphore, as well as its state
      */
     public String toString() {

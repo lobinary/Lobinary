@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,6 +63,26 @@ import java.security.spec.InvalidParameterSpecException;
  * Consult the release documentation for your implementation to see if any
  * other algorithms are supported.
  *
+ * <p>
+ *  此类用作加密参数的不透明表示。
+ * 
+ *  <p>通过调用{@code getInstance}工厂方法(返回给定类的实例的静态方法)之一,可以获得用于管理特定算法的参数的{@code AlgorithmParameters}对象。
+ * 
+ *  <p>获取{@code AlgorithmParameters}对象后,必须使用适当的参数规范或参数编码,通过调用{@code init}初始化。
+ * 
+ *  <p>通过调用{@code getParameterSpec}从{@code AlgorithmParameters}对象获得透明参数规范,并通过调用{@code getEncoded}获得参数的字节
+ * 编码。
+ * 
+ *  <p>每个Java平台的实现都需要支持以下标准{@code AlgorithmParameters}算法：
+ * <ul>
+ *  <li> {@ code AES} </li> <li> {@ code DES} </li> <li> {@ code DESede} </li> <li> {@ code DiffieHellman}
+ *  > {@ code DSA} </li>。
+ * </ul>
+ *  这些算法在<a href =中描述
+ * "{@docRoot}/../technotes/guides/security/StandardNames.html#AlgorithmParameters">
+ *  Java加密体系结构标准算法名称文档的AlgorithmParameters部分</a>。有关实现的信息,请参阅发行文档,以了解是否支持任何其他算法。
+ * 
+ * 
  * @author Jan Luehe
  *
  *
@@ -89,6 +110,10 @@ public class AlgorithmParameters {
     /**
      * Creates an AlgorithmParameters object.
      *
+     * <p>
+     *  创建AlgorithmParameters对象。
+     * 
+     * 
      * @param paramSpi the delegate
      * @param provider the provider
      * @param algorithm the algorithm
@@ -104,6 +129,10 @@ public class AlgorithmParameters {
     /**
      * Returns the name of the algorithm associated with this parameter object.
      *
+     * <p>
+     *  返回与此参数对象关联的算法的名称。
+     * 
+     * 
      * @return the algorithm name.
      */
     public final String getAlgorithm() {
@@ -126,6 +155,17 @@ public class AlgorithmParameters {
      * {@code init}, using an appropriate parameter specification or
      * parameter encoding.
      *
+     * <p>
+     * 返回指定算法的参数对象。
+     * 
+     *  <p>此方法遍历注册的安全提供程序列表,从最常用的提供程序开始。
+     * 返回一个新的AlgorithmParameters对象,该对象封装了来自支持指定算法的第一个Provider的AlgorithmParametersSpi实现。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     *  <p>返回的参数对象必须通过调用{@code init}初始化,使用适当的参数规范或参数编码。
+     * 
+     * 
      * @param algorithm the name of the algorithm requested.
      * See the AlgorithmParameters section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#AlgorithmParameters">
@@ -168,6 +208,16 @@ public class AlgorithmParameters {
      * {@code init}, using an appropriate parameter specification or
      * parameter encoding.
      *
+     * <p>
+     *  返回指定算法的参数对象。
+     * 
+     *  <p>返回一个新的AlgorithmParameters对象,用于封装来自指定提供程序的AlgorithmParametersSpi实现。指定的提供程序必须在安全提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     *  <p>返回的参数对象必须通过调用{@code init}初始化,使用适当的参数规范或参数编码。
+     * 
+     * 
      * @param algorithm the name of the algorithm requested.
      * See the AlgorithmParameters section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#AlgorithmParameters">
@@ -215,6 +265,15 @@ public class AlgorithmParameters {
      * {@code init}, using an appropriate parameter specification or
      * parameter encoding.
      *
+     * <p>
+     *  返回指定算法的参数对象。
+     * 
+     *  <p>返回一个新的AlgorithmParameters对象,用于封装来自指定的Provider对象的AlgorithmParametersSpi实现。
+     * 请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     * <p>返回的参数对象必须通过调用{@code init}初始化,使用适当的参数规范或参数编码。
+     * 
+     * 
      * @param algorithm the name of the algorithm requested.
      * See the AlgorithmParameters section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#AlgorithmParameters">
@@ -251,6 +310,10 @@ public class AlgorithmParameters {
     /**
      * Returns the provider of this parameter object.
      *
+     * <p>
+     *  返回此参数对象的提供程序。
+     * 
+     * 
      * @return the provider of this parameter object
      */
     public final Provider getProvider() {
@@ -261,6 +324,10 @@ public class AlgorithmParameters {
      * Initializes this parameter object using the parameters
      * specified in {@code paramSpec}.
      *
+     * <p>
+     *  使用{@code paramSpec}中指定的参数初始化此参数对象。
+     * 
+     * 
      * @param paramSpec the parameter specification.
      *
      * @exception InvalidParameterSpecException if the given parameter
@@ -282,6 +349,10 @@ public class AlgorithmParameters {
      * format for parameters is ASN.1, if an ASN.1 specification for this type
      * of parameters exists.
      *
+     * <p>
+     *  导入指定的参数,根据参数的主解码格式进行解码。如果存在这种类型的参数的ASN.1规范,则参数的主解码格式是ASN.1。
+     * 
+     * 
      * @param params the encoded parameters.
      *
      * @exception IOException on decoding errors, or if this parameter object
@@ -302,6 +373,11 @@ public class AlgorithmParameters {
      * format is ASN.1, if an ASN.1 specification for these parameters
      * exists.
      *
+     * <p>
+     *  从{@code params}导入参数,并根据指定的解码方案对它们进行解码。如果{@code format}为null,则使用参数的主解码格式。
+     * 如果存在用于这些参数的ASN.1规范,则主解码格式是ASN.1。
+     * 
+     * 
      * @param params the encoded parameters.
      *
      * @param format the name of the decoding scheme.
@@ -324,6 +400,11 @@ public class AlgorithmParameters {
      * parameters should be returned in an instance of the
      * {@code DSAParameterSpec} class.
      *
+     * <p>
+     *  返回此参数对象的(透明)规范。 {@code paramSpec}标识应返回参数的规范类。
+     * 例如,它可以是{@code DSAParameterSpec.class},以指示参数应在{@code DSAParameterSpec}类的实例中返回。
+     * 
+     * 
      * @param <T> the type of the parameter specification to be returrned
      * @param paramSpec the specification class in which
      * the parameters should be returned.
@@ -349,6 +430,10 @@ public class AlgorithmParameters {
      * The primary encoding format for parameters is ASN.1, if an ASN.1
      * specification for this type of parameters exists.
      *
+     * <p>
+     *  返回主要编码格式的参数。如果存在此类型的参数的ASN.1规范,则参数的主要编码格式为ASN.1。
+     * 
+     * 
      * @return the parameters encoded using their primary encoding format.
      *
      * @exception IOException on encoding errors, or if this parameter object
@@ -369,6 +454,10 @@ public class AlgorithmParameters {
      * format is ASN.1, if an ASN.1 specification for these parameters
      * exists.
      *
+     * <p>
+     * 返回在指定方案中编码的参数。如果{@code format}为null,则使用参数的主要编码格式。如果存在这些参数的ASN.1规范,则主要编码格式为ASN.1。
+     * 
+     * 
      * @param format the name of the encoding format.
      *
      * @return the parameters encoded using the specified encoding scheme.
@@ -387,6 +476,9 @@ public class AlgorithmParameters {
     /**
      * Returns a formatted string describing the parameters.
      *
+     * <p>
+     *  返回描述参数的格式化字符串。
+     * 
      * @return a formatted string describing the parameters, or null if this
      * parameter object has not been initialized.
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -73,6 +74,33 @@ import java.security.BasicPermission;
  *</table>
  *<p>
  *
+ * <p>
+ *  <code> AudioPermission </code>类表示对音频系统资源的访问权限。
+ *  <code> AudioPermission </code>包含目标名称,但没有操作列表;你有命名的权限或你不。
+ * <p>
+ *  目标名称是音频权限的名称(请参阅下表)。名称遵循分层属性命名约定。此外,星号可用于表示所有音频权限。
+ * <p>
+ *  下表列出了可能的<code> AudioPermission </code>目标名称。对于每个名称,表格提供了该权限允许的具体描述,以及对授予代码权限的风险的讨论。
+ * <p>
+ * 
+ * <table border=1 cellpadding=5 summary="permission target name, what the permission allows, and associated risks">
+ * <tr>
+ *  <th>权限目标名称</th> <th>权限允许</th> <th>允许此权限的风险</th>
+ * </tr>
+ * 
+ * <tr>
+ *  <td>播放</td> <td>通过音频设备或系统上的设备播放音频。允许应用程序获取和操作音频播放(渲染)的线和混音器。
+ * </td> <td>在某些情况下,使用此权限可能会影响其他应用程序,因为来自一行的音频可能与正在播放的其他音频混合系统,或者因为混音器的操作会影响使用该混音器的所有线路的音频。</td>。
+ * /tr>
+ * 
+ * <tr>
+ * <td>录制</td> <td>通过音频设备或系统上的设备录音。允许应用程序获取和操作音频录音(捕获)的线路和混音器。
+ * </td> <td>在某些情况下,使用此权限可能会影响其他应用程序,因为混音器的操作会影响使用该混音器的所有线路的音频。此权限可以启用小程序或应用程序来窃听用户。</td>。
+ * /tr>
+ * /table>
+ * p>
+ * 
+ * 
  * @author Kara Kytle
  * @since 1.3
  */
@@ -120,6 +148,33 @@ import java.security.BasicPermission;
  * </table>
  *<p>
  *
+ * <p>
+ *  (旧许可证适用于1.2 BETA)
+ * 
+ * <tr>
+ *  <td>播放设备访问</td> <td>直接访问音频播放设备,包括播放格式,音量和平衡的配置,设备的显式打开和关闭等。</td> <td>更改共享系统设备的属性,因此可能会影响其他应用程序。
+ * </td>。
+ * </tr>
+ * 
+ * <tr>
+ *  <td>播放设备覆盖</td> <td>以与其他应用程序的使用直接冲突的方式操纵音频播放设备。这包括在其他应用程序正在使用设备时关闭设备,在其他应用程序正在使用设备格式时更改设备格式等。
+ * </td> <td>更改共享系统设备的属性,因此可能会影响其他应用程序。 / td>。
+ * </tr>
+ * 
+ * <tr>
+ *  <td>记录设备访问</td> <td>直接访问音频记录设备,包括配置记录格式,音量和平衡,设备的显式打开和关闭等。</td > <td>更改共享系统设备的属性,因此可能会影响其他应用程序。
+ * </td>。
+ * </tr>
+ * 
+ * <tr>
+ * <td>记录设备覆盖</td> <td>以与其他应用程序的使用直接冲突的方式操纵音频记录设备。这包括在其他应用程序正在使用设备时关闭设备,在其他应用程序正在使用设备格式时更改设备格式等。
+ * </td> <td>更改共享系统设备的属性,因此可能会影响其他应用程序。 / td>。
+ * </tr>
+ * 
+ * </table>
+ * p>
+ * 
+ * 
  * @author Kara Kytle
  * @since 1.3
  */
@@ -200,6 +255,34 @@ import java.security.BasicPermission;
  * </table>
  *<p>
  *
+ * <p>
+ *  <code> AudioPermission </code>类表示对音频系统资源的访问权限。
+ *  <code> AudioPermission </code>包含目标名称,但没有操作列表;你有命名的权限或你不。
+ * <p>
+ *  目标名称是音频权限的名称(请参阅下表)。名称遵循分层属性命名约定。此外,星号可用于表示所有音频权限。
+ * <p>
+ *  下表列出了所有可能的AudioPermission目标名称。对于每个名称,表格提供了该权限允许的具体描述,以及对授予代码权限的风险的讨论。
+ * <p>
+ * 
+ * <table border=1 cellpadding=5>
+ * <tr>
+ *  <th>权限目标名称</th> <th>权限允许</th> <th>允许此权限的风险</th>
+ * </tr>
+ * 
+ * <tr>
+ *  <td>播放</td> <td>通过音频设备或系统上的设备播放音频。</td> <td>允许应用程序使用系统设备。可能会影响其他应用程序,因为结果将与在系统上播放的其他音频混合。</td>
+ * /tr>
+ * 
+ * <tr>
+ * <td> record </td> <td>通常通过麦克风从音频设备或设备上录制音频。</td> <td>可以启用小程序或应用程序来窃听用户。</td >
+ * </tr>
+ * 
+ * <tr>
+ *  <td>播放设备访问</td> <td>直接访问音频播放设备,包括播放格式,音量和平衡的配置,设备的显式打开和关闭等。</td> <td>更改共享系统设备的属性,因此可能会影响其他应用程序。
+ * </td>。
+ * </tr>
+ * 
+ * 
  * @author Kara Kytle
  */
 
@@ -209,6 +292,21 @@ public class AudioPermission extends BasicPermission {
      * Creates a new <code>AudioPermission</code> object that has the specified
      * symbolic name, such as "play" or "record". An asterisk can be used to indicate
      * all audio permissions.
+     * <p>
+     * <tr>
+     *  <td>播放设备覆盖</td> <td>以与其他应用程序的使用直接冲突的方式操纵音频播放设备。这包括在其他应用程序正在使用设备时关闭设备,在其他应用程序正在使用设备格式时更改设备格式等。
+     * </td> <td>更改共享系统设备的属性,因此可能会影响其他应用程序。 / td>。
+     * </tr>
+     * 
+     * <tr>
+     *  <td>记录设备访问</td> <td>直接访问音频记录设备,包括配置记录格式,音量和平衡,设备的显式打开和关闭等。</td > <td>更改共享系统设备的属性,因此可能会影响其他应用程序。
+     * </td>。
+     * </tr>
+     * 
+     * <tr>
+     * <td>记录设备覆盖</td> <td>以与其他应用程序的使用直接冲突的方式操纵音频记录设备。这包括在其他应用程序正在使用设备时关闭设备,在其他应用程序正在使用设备格式时更改设备格式等。
+     * </td> <td>更改共享系统设备的属性,因此可能会影响其他应用程序。 / td>。
+     * 
      * @param name the name of the new <code>AudioPermission</code>
      *
      * @throws NullPointerException if <code>name</code> is <code>null</code>.
@@ -223,6 +321,13 @@ public class AudioPermission extends BasicPermission {
      * Creates a new <code>AudioPermission</code> object that has the specified
      * symbolic name, such as "play" or "record".  The <code>actions</code>
      * parameter is currently unused and should be <code>null</code>.
+     * <p>
+     * </tr>
+     * 
+     * </table>
+     * p>
+     * 
+     * 
      * @param name the name of the new <code>AudioPermission</code>
      * @param actions (unused; should be <code>null</code>)
      *

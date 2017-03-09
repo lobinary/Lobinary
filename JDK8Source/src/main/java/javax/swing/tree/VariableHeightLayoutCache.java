@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import sun.swing.SwingUtilities2;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  注意：这将在未来的版本中变得更加开放。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Rob Davis
  * @author Ray Ryan
  * @author Scott Violet
@@ -56,11 +64,17 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
      * The array of nodes that are currently visible, in the order they
      * are displayed.
+     * <p>
+     *  当前可见的节点数组,按显示顺序排列。
+     * 
      */
     private Vector<Object> visibleNodes;
 
     /**
      * This is set to true if one of the entries has an invalid size.
+     * <p>
+     *  如果其中一个条目的大小无效,则设置为true。
+     * 
      */
     private boolean           updateNodeSizes;
 
@@ -68,22 +82,34 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * The root node of the internal cache of nodes that have been shown.
      * If the treeModel is vending a network rather than a true tree,
      * there may be one cached node for each path to a modeled node.
+     * <p>
+     *  已显示的节点的内部高速缓存的根节点。如果treeModel是自动贩卖网络而不是真正的树,则对于建模节点的每个路径可能有一个高速缓存的节点。
+     * 
      */
     private TreeStateNode     root;
 
     /**
      * Used in getting sizes for nodes to avoid creating a new Rectangle
      * every time a size is needed.
+     * <p>
+     *  用于获取节点的大小,以避免在每次需要大小时创建新的矩形。
+     * 
      */
     private Rectangle         boundsBuffer;
 
     /**
      * Maps from <code>TreePath</code> to a <code>TreeStateNode</code>.
+     * <p>
+     *  将<code> TreePath </code>映射到<code> TreeStateNode </code>。
+     * 
      */
     private Hashtable<TreePath, TreeStateNode> treePathMapping;
 
     /**
      * A stack of stacks.
+     * <p>
+     *  堆栈。
+     * 
      */
     private Stack<Stack<TreePath>> tempStacks;
 
@@ -99,6 +125,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Sets the <code>TreeModel</code> that will provide the data.
      *
+     * <p>
+     *  设置将提供数据的<code> TreeModel </code>。
+     * 
+     * 
      * @param newModel the <code>TreeModel</code> that is to provide the data
      * @beaninfo
      *        bound: true
@@ -113,6 +143,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * Determines whether or not the root node from
      * the <code>TreeModel</code> is visible.
      *
+     * <p>
+     *  确定来自<code> TreeModel </code>的根节点是否可见。
+     * 
+     * 
      * @param rootVisible true if the root node of the tree is to be displayed
      * @see #rootVisible
      * @beaninfo
@@ -147,6 +181,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * is less than or equal to zero the current cell renderer is
      * queried for each row's height.
      *
+     * <p>
+     *  设置每个单元格的高度。如果指定的值小于或等于零,则查询每一行的高度的当前单元格渲染器。
+     * 
+     * 
      * @param rowHeight the height of each cell, in pixels
      * @beaninfo
      *        bound: true
@@ -162,6 +200,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Sets the renderer that is responsible for drawing nodes in the tree.
+     * <p>
+     *  设置负责在树中绘制节点的渲染器。
+     * 
+     * 
      * @param nd the renderer
      */
     public void setNodeDimensions(NodeDimensions nd) {
@@ -173,6 +215,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Marks the path <code>path</code> expanded state to
      * <code>isExpanded</code>.
+     * <p>
+     * 将路径<code> path </code>扩展状态标记为<code> isExpanded </code>。
+     * 
+     * 
      * @param path the <code>TreePath</code> of interest
      * @param isExpanded true if the path should be expanded, otherwise false
      */
@@ -193,6 +239,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Returns true if the path is expanded, and visible.
+     * <p>
+     *  如果路径已展开,则返回true,并且可见。
+     * 
+     * 
      * @return true if the path is expanded and visible, otherwise false
      */
     public boolean getExpandedState(TreePath path) {
@@ -206,6 +256,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
       * Returns the <code>Rectangle</code> enclosing the label portion
       * into which the item identified by <code>path</code> will be drawn.
       *
+      * <p>
+      *  返回包含由<code> path </code>标识的项目的标签部分的<code> Rectangle </code>。
+      * 
+      * 
       * @param path  the path to be drawn
       * @param placeIn the bounds of the enclosing rectangle
       * @return the bounds of the enclosing rectangle or <code>null</code>
@@ -226,6 +280,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
       * Returns the path for <code>row</code>.  If <code>row</code>
       * is not visible, <code>null</code> is returned.
       *
+      * <p>
+      *  返回<code> row </code>的路径。如果<code> row </code>不可见,则返回<code> null </code>。
+      * 
+      * 
       * @param row the location of interest
       * @return the path for <code>row</code>, or <code>null</code>
       * if <code>row</code> is not visible
@@ -242,6 +300,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
       * Will return -1 if any of the elements in path are not
       * currently visible.
       *
+      * <p>
+      *  返回在路径中标识的最后一个项目是可见的行。如果路径中的任何元素当前不可见,将返回-1。
+      * 
+      * 
       * @param path the <code>TreePath</code> of interest
       * @return the row where the last item in path is visible
       */
@@ -258,6 +320,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Returns the number of visible rows.
+     * <p>
+     *  返回可见行的数量。
+     * 
+     * 
      * @return the number of visible rows
      */
     public int getRowCount() {
@@ -268,6 +334,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * Instructs the <code>LayoutCache</code> that the bounds for
      * <code>path</code> are invalid, and need to be updated.
      *
+     * <p>
+     *  指示<code> LayoutCache </code> <code> path </code>的边界无效,需要更新。
+     * 
+     * 
      * @param path the <code>TreePath</code> which is now invalid
      */
     public void invalidatePathBounds(TreePath path) {
@@ -282,6 +352,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Returns the preferred height.
+     * <p>
+     *  返回首选高度。
+     * 
+     * 
      * @return the preferred height
      */
     public int getPreferredHeight() {
@@ -300,6 +374,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * Returns the preferred width and height for the region in
      * <code>visibleRegion</code>.
      *
+     * <p>
+     *  返回<code> visibleRegion </code>中区域的首选宽度和高度。
+     * 
+     * 
      * @param bounds  the region being queried
      */
     public int getPreferredWidth(Rectangle bounds) {
@@ -317,6 +395,11 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
       * returned object is exactly at x, y you should get the bounds for
       * the returned path and test x, y against that.
       *
+      * <p>
+      *  返回最接近x,y的节点的路径。如果当前没有可见的,这将返回<code> null </code>,否则它将总是返回一个有效的路径。
+      * 如果你需要测试返回的对象是否正好在x,y,你应该得到返回的路径的边界,并测试x,y。
+      * 
+      * 
       * @param x  the x-coordinate
       * @param y  the y-coordinate
       * @return the path to the node that is closest to x, y
@@ -338,6 +421,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * starting at the passed in location. The ordering of the enumeration
      * is based on how the paths are displayed.
      *
+     * <p>
+     *  返回一个<code>枚举器</code>,它在从传入位置开始的可见路径上递增。枚举的排序基于如何显示路径。
+     * 
+     * 
      * @param path the location in the <code>TreePath</code> to start
      * @return an <code>Enumerator</code> that increments over the visible
      *     paths
@@ -353,6 +440,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Returns the number of visible children for <code>path</code>.
+     * <p>
+     *  返回<code> path </code>的可见子项数。
+     * 
+     * 
      * @return the number of visible children for <code>path</code>
      */
     public int getVisibleChildCount(TreePath path) {
@@ -364,6 +455,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Informs the <code>TreeState</code> that it needs to recalculate
      * all the sizes it is referencing.
+     * <p>
+     *  通知<code> TreeState </code>,它需要重新计算它引用的所有大小。
+     * 
      */
     public void invalidateSizes() {
         if(root != null)
@@ -376,6 +470,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
       * Returns true if the value identified by <code>path</code> is
       * currently expanded.
+      * <p>
+      * 如果由<code> path </code>标识的值当前已展开,则返回true。
+      * 
+      * 
       * @return true if the value identified by <code>path</code> is
       *    currently expanded
       */
@@ -406,6 +504,14 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * <p><code>e.childIndices</code> returns the index(es) of the
      * changed node(s).
      *
+     * <p>
+     *  在一个节点(或一组兄弟节点)以某种方式更改后调用。节点没有改变树中的位置或改变它们的子数组,但是其他属性已经改变并且可能影响呈现。示例：文件的名称已更改,但它位于文件系统中的相同位置。
+     * 
+     *  <p> <code> e.path </code>返回更改的节点的父节点的路径。
+     * 
+     *  <p> <code> e.childIndices </code>返回更改的节点的索引。
+     * 
+     * 
      * @param e the <code>TreeModelEvent</code> of interest
      */
     public void treeNodesChanged(TreeModelEvent e) {
@@ -419,6 +525,8 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
                 Object            changedValue = changedNode.getValue();
 
                 /* Update the size of the changed node, as well as all the
+                /* <p>
+                /* 
                    child indexs that are passed in. */
                 changedNode.updatePreferredSize();
                 if(changedNode.hasBeenExpanded() && changedIndexs != null) {
@@ -459,6 +567,12 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * <p><code>e.childIndices</code> returns the indices of the new nodes in
      * ascending order.
      *
+     * <p>
+     *  在将节点插入树后调用。
+     * 
+     *  <p> <code> e.path </code>返回新节点的父级。 <p> <code> e.childIndices </code>以升序返回新节点的索引。
+     * 
+     * 
      * @param e the <code>TreeModelEvent</code> of interest
      */
     public void treeNodesInserted(TreeModelEvent e) {
@@ -469,6 +583,8 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
             changedIndexs = e.getChildIndices();
             changedParentNode = getNodeForPath(SwingUtilities2.getTreePath(e, getModel()), false, false);
             /* Only need to update the children if the node has been
+            /* <p>
+            /* 
                expanded once. */
             // PENDING(scott): make sure childIndexs is sorted!
             if(changedParentNode != null && changedIndexs != null &&
@@ -498,6 +614,8 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
                     if(treeSelectionModel != null)
                         treeSelectionModel.resetRowSelection();
                     /* Update the y origins from the index of the parent
+                    /* <p>
+                    /* 
                        to the end of the visible rows. */
                     if(!isFixedRowHeight() && (makeVisible ||
                                                (oldChildCount == 0 &&
@@ -533,6 +651,14 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * <p><code>e.childIndices</code> returns the indices the nodes had
      * before they were deleted in ascending order.
      *
+     * <p>
+     *  在已从树中删除节点后调用。请注意,如果从树中删除子树,则该方法对于删除的子树的根可能只能调用一次,而对于删除的每个单独的兄弟节点集只调用一次。
+     * 
+     *  <p> <code> e.path </code>返回已删除节点的前父节点。
+     * 
+     *  <p> <code> e.childIndices </code>返回节点在以升序删除之前所具有的索引。
+     * 
+     * 
      * @param e the <code>TreeModelEvent</code> of interest
      */
     public void treeNodesRemoved(TreeModelEvent e) {
@@ -585,6 +711,8 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
                     if(treeSelectionModel != null)
                         treeSelectionModel.resetRowSelection();
                     /* Update the y origins from the index of the parent
+                    /* <p>
+                    /* 
                        to the end of the visible rows. */
                     if(!isFixedRowHeight() && (makeInvisible ||
                                (changedParentNode.getChildCount() == 0 &&
@@ -592,6 +720,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
                         if(changedParentNode == root) {
                             /* It is possible for first row to have been
                                removed if the root isn't visible, in which
+                            /* <p>
+                            /*  如果根不可见,则删除,其中
+                            /* 
+                            /* 
                                case ylocations will be off! */
                             if(getRowCount() > 0)
                                 getNode(0).setYOrigin(0);
@@ -624,6 +756,12 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * <p><code>e.path</code> holds the path to the node.
      * <p><code>e.childIndices</code> returns <code>null</code>.
      *
+     * <p>
+     *  在树已从给定节点向下大幅更改结构后调用。如果<code> e.getPath </code>返回的路径长度为1,而第一个元素不标识当前根节点,则第一个元素应该成为树的新根。
+     * 
+     * <p> <code> e.path </code>保存节点的路径。 <p> <code> e.childIndices </code>返回<code> null </code>。
+     * 
+     * 
      * @param e the <code>TreeModelEvent</code> of interest
      */
     public void treeStructureChanged(TreeModelEvent e) {
@@ -688,6 +826,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Adds a mapping for node.
+     * <p>
+     *  为节点添加映射。
+     * 
      */
     private void addMapping(TreeStateNode node) {
         treePathMapping.put(node.getTreePath(), node);
@@ -695,6 +836,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Removes the mapping for a previously added node.
+     * <p>
+     *  删除先前添加的节点的映射。
+     * 
      */
     private void removeMapping(TreeStateNode node) {
         treePathMapping.remove(node.getTreePath());
@@ -703,6 +847,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Returns the node previously added for <code>path</code>. This may
      * return null, if you to create a node use getNodeForPath.
+     * <p>
+     *  返回先前为<code> path </code>添加的节点。这可能返回null,如果你创建一个节点使用getNodeForPath。
+     * 
      */
     private TreeStateNode getMapping(TreePath path) {
         return treePathMapping.get(path);
@@ -712,6 +859,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * Retursn the bounds for row, <code>row</code> by reference in
      * <code>placeIn</code>. If <code>placeIn</code> is null a new
      * Rectangle will be created and returned.
+     * <p>
+     *  通过<code> placeIn </code>中的引用返回行<code> row </code>的边界。
+     * 如果<code> placeIn </code>为null,将创建并返回一个新的Rectangle。
+     * 
      */
     private Rectangle getBounds(int row, Rectangle placeIn) {
         if(updateNodeSizes)
@@ -726,6 +877,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Completely rebuild the tree, all expanded state, and node caches are
      * removed. All nodes are collapsed, except the root.
+     * <p>
+     *  完全重建树,所有展开状态和节点缓存都将被删除。除了根之外,所有节点都将折叠。
+     * 
      */
     private void rebuild(boolean clearSelection) {
         Object rootObject;
@@ -769,6 +923,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
       * cells, nor update the selection if it needs to be.  If succesful
       * in creating the new TreeStateNode, it is returned, otherwise
       * null is returned.
+      * <p>
+      *  创建一个新节点以表示<I> parent </I>的子节点中<I> childIndex </I>处的节点。如果节点不存在且<I>父</I>至少已经扩展一次,则应调用此方法。
+      * 如果<I>父级</I>当前已展开,则新创建的节点将可见。这不更新任何单元格的位置,也不更新选择,如果它需要。如果成功创建新的TreeStateNode,则返回它,否则返回null。
+      * 
       */
     private TreeStateNode createNodeAt(TreeStateNode parent,
                                          int childIndex) {
@@ -810,6 +968,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
       * Returns the TreeStateNode identified by path.  This mirrors
       * the behavior of getNodeForPath, but tries to take advantage of
       * path if it is an instance of AbstractTreePath.
+      * <p>
+      *  返回由path标识的TreeStateNode。这反映了getNodeForPath的行为,但如果它是AbstractTreePath的实例,则尝试利用path。
+      * 
       */
     private TreeStateNode getNodeForPath(TreePath path,
                                            boolean onlyIfVisible,
@@ -879,6 +1040,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
       * Updates the y locations of all of the visible nodes after
       * location.
+      * <p>
+      *  更新位置后所有可见节点的y位置。
+      * 
       */
     private void updateYLocationsFrom(int location) {
         if(location >= 0 && location < getRowCount()) {
@@ -904,6 +1068,10 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
       * automaticly adjusts the locations.
       * updateAll determines if updatePreferredSize() is call on all nodes
       * or just those that don't have a valid size.
+      * <p>
+      * 重置所有可见节点的y原点以及将所有可见节点消息传递给updatePreferredSize()。你通常不应该调用这个。扩展和收缩节点会自动调整位置。
+      *  updateAll确定updatePreferredSize()是否在所有节点上调用,或仅调用那些没有有效大小的节点。
+      * 
       */
     private void updateNodeSizes(boolean updateAll) {
         int                      aY, counter, maxCounter;
@@ -924,6 +1092,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
       * Returns the index of the row containing location.  If there
       * are no rows, -1 is returned.  If location is beyond the last
       * row index, the last row index is returned.
+      * <p>
+      *  返回包含位置的行的索引。如果没有行,则返回-1。如果位置超出最后一行索引,则返回最后一行索引。
+      * 
       */
     private int getRowContainingYLocation(int location) {
         if(isFixedRowHeight()) {
@@ -966,6 +1137,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * for the last component which will only be expanded if expandLast
      * is true.
      * Returns true if succesful in finding the path.
+     * <p>
+     *  确保路径中的所有路径组件都被展开,接受最后一个组件,只有在expandLast为true时才会展开。如果成功找到路径,则返回true。
+     * 
      */
     private void ensurePathIsExpanded(TreePath aPath, boolean expandLast) {
         if(aPath != null) {
@@ -989,6 +1163,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Returns the AbstractTreeUI.VisibleNode displayed at the given row
+     * <p>
+     *  返回显示在给定行的AbstractTreeUI.VisibleNode
+     * 
      */
     private TreeStateNode getNode(int row) {
         return (TreeStateNode)visibleNodes.elementAt(row);
@@ -996,6 +1173,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
       * Returns the maximum node width.
+      * <p>
+      *  返回最大节点宽度。
+      * 
       */
     private int getMaxNodeWidth() {
         int                     maxWidth = 0;
@@ -1015,6 +1195,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
     /**
       * Responsible for creating a TreeStateNode that will be used
       * to track display information about value.
+      * <p>
+      *  负责创建一个TreeStateNode,用于跟踪关于价值的显示信息。
+      * 
       */
     private TreeStateNode createNodeForValue(Object value) {
         return new TreeStateNode(value);
@@ -1025,6 +1208,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
      * TreeStateNode is used to keep track of each of
      * the nodes that have been expanded. This will also cache the preferred
      * size of the value it represents.
+     * <p>
+     *  TreeStateNode用于跟踪已扩展的每个节点。这也将缓存它表示的值的首选大小。
+     * 
      */
     private class TreeStateNode extends DefaultMutableTreeNode {
         /** Preferred size needed to draw the user object. */
@@ -1058,6 +1244,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Messaged when this node is added somewhere, resets the path
          * and adds a mapping from path to this node.
+         * <p>
+         *  在将此节点添加到某处时发生消息,重置路径并添加从路径到此节点的映射。
+         * 
          */
         public void setParent(MutableTreeNode parent) {
             super.setParent(parent);
@@ -1071,6 +1260,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Messaged when this node is removed from its parent, this messages
          * <code>removedFromMapping</code> to remove all the children.
+         * <p>
+         *  当此节点从其父级删除时,此消息会消失,此消息<code> removedFromMapping </code>可删除所有子级。
+         * 
          */
         public void remove(int childIndex) {
             TreeStateNode     node = (TreeStateNode)getChildAt(childIndex);
@@ -1081,6 +1273,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Messaged to set the user object. This resets the path.
+         * <p>
+         *  Messaged设置用户对象。这将重置路径。
+         * 
          */
         public void setUserObject(Object o) {
             super.setUserObject(o);
@@ -1098,6 +1293,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
          * Returns the children of the receiver.
          * If the receiver is not currently expanded, this will return an
          * empty enumeration.
+         * <p>
+         *  返回接收器的子节点。如果接收器当前未扩展,则将返回一个空枚举。
+         * 
          */
         public Enumeration children() {
             if (!this.isExpanded()) {
@@ -1109,6 +1307,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns true if the receiver is a leaf.
+         * <p>
+         *  如果接收器是叶子,则返回true。
+         * 
          */
         public boolean isLeaf() {
             return getModel().isLeaf(this.getValue());
@@ -1120,6 +1321,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns the location and size of this node.
+         * <p>
+         * 返回此节点的位置和大小。
+         * 
          */
         public Rectangle getNodeBounds(Rectangle placeIn) {
             if(placeIn == null)
@@ -1136,6 +1340,8 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         }
 
         /**
+        /* <p>
+        /* 
          * @return x location to draw node at.
          */
         public int getXOrigin() {
@@ -1146,6 +1352,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns the y origin the user object will be drawn at.
+         * <p>
+         *  返回用户对象将被绘制的y原点。
+         * 
          */
         public int getYOrigin() {
             if(isFixedRowHeight()) {
@@ -1160,6 +1369,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns the preferred height of the receiver.
+         * <p>
+         *  返回接收器的首选高度。
+         * 
          */
         public int getPreferredHeight() {
             if(isFixedRowHeight())
@@ -1171,6 +1383,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns the preferred width of the receiver.
+         * <p>
+         *  返回接收器的首选宽度。
+         * 
          */
         public int getPreferredWidth() {
             if(!hasValidSize())
@@ -1180,6 +1395,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns true if this node has a valid size.
+         * <p>
+         *  如果此节点具有有效的大小,则返回true。
+         * 
          */
         public boolean hasValidSize() {
             return (preferredHeight != 0);
@@ -1187,6 +1405,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns the row of the receiver.
+         * <p>
+         *  返回接收器的行。
+         * 
          */
         public int getRow() {
             return visibleNodes.indexOf(this);
@@ -1194,6 +1415,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns true if this node has been expanded at least once.
+         * <p>
+         *  如果此节点至少已展开一次,则返回true。
+         * 
          */
         public boolean hasBeenExpanded() {
             return hasBeenExpanded;
@@ -1201,6 +1425,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns true if the receiver has been expanded.
+         * <p>
+         *  如果接收器已扩展,则返回true。
+         * 
          */
         public boolean isExpanded() {
             return expanded;
@@ -1209,6 +1436,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Returns the last visible node that is a child of this
          * instance.
+         * <p>
+         *  返回作为此实例的子节点的最后一个可见节点。
+         * 
          */
         public TreeStateNode getLastVisibleNode() {
             TreeStateNode                node = this;
@@ -1220,6 +1450,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns true if the receiver is currently visible.
+         * <p>
+         *  如果接收器当前可见,则返回true。
+         * 
          */
         public boolean isVisible() {
             if(this == root)
@@ -1234,6 +1467,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Returns the number of children this will have. If the children
          * have not yet been loaded, this messages the model.
+         * <p>
+         *  返回将拥有的子项数。如果孩子还没有加载,这会给模型发送消息。
+         * 
          */
         public int getModelChildCount() {
             if(hasBeenExpanded)
@@ -1244,6 +1480,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Returns the number of visible children, that is the number of
          * children that are expanded, or leafs.
+         * <p>
+         *  返回可见子项的数量,即已展开的子项数或叶子数。
+         * 
          */
         public int getVisibleChildCount() {
             int               childCount = 0;
@@ -1261,6 +1500,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Toggles the receiver between expanded and collapsed.
+         * <p>
+         *  在展开和折叠之间切换接收器。
+         * 
          */
         public void toggleExpanded() {
             if (isExpanded()) {
@@ -1273,6 +1515,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Makes the receiver visible, but invoking
          * <code>expandParentAndReceiver</code> on the superclass.
+         * <p>
+         *  使接收者可见,但调用超类上的<code> expandParentAndReceiver </code>。
+         * 
          */
         public void makeVisible() {
             TreeStateNode       parent = (TreeStateNode)getParent();
@@ -1283,6 +1528,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Expands the receiver.
+         * <p>
+         *  扩展接收器。
+         * 
          */
         public void expand() {
             expand(true);
@@ -1290,6 +1538,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Collapses the receiver.
+         * <p>
+         *  折叠接收器。
+         * 
          */
         public void collapse() {
             collapse(true);
@@ -1298,6 +1549,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Returns the value the receiver is representing. This is a cover
          * for getUserObject.
+         * <p>
+         *  返回接收器表示的值。这是getUserObject的封面。
+         * 
          */
         public Object getValue() {
             return getUserObject();
@@ -1305,6 +1559,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns a TreePath instance for this node.
+         * <p>
+         *  返回此节点的TreePath实例。
+         * 
          */
         public TreePath getTreePath() {
             return path;
@@ -1316,6 +1573,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Recreates the receivers path, and all its children's paths.
+         * <p>
+         *  重新创建接收器路径及其所有子路径。
+         * 
          */
         protected void resetChildrenPaths(TreePath parentPath) {
             removeMapping(this);
@@ -1331,6 +1591,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Sets y origin the user object will be drawn at to
          * <I>newYOrigin</I>.
+         * <p>
+         *  设置y用户对象将绘制到<I> newYOrigin </I>。
+         * 
          */
         protected void setYOrigin(int newYOrigin) {
             yOrigin = newYOrigin;
@@ -1338,6 +1601,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Shifts the y origin by <code>offset</code>.
+         * <p>
+         *  通过<code> offset </code>转移y起点。
+         * 
          */
         protected void shiftYOriginBy(int offset) {
             yOrigin += offset;
@@ -1346,6 +1612,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Updates the receivers preferredSize by invoking
          * <code>updatePreferredSize</code> with an argument of -1.
+         * <p>
+         *  通过调用参数为-1的<code> updatePreferredSize </code>更新接收方preferredSize。
+         * 
          */
         protected void updatePreferredSize() {
             updatePreferredSize(getRow());
@@ -1355,6 +1624,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
          * Updates the preferred size by asking the current renderer
          * for the Dimension needed to draw the user object this
          * instance represents.
+         * <p>
+         *  通过向当前渲染器请求绘制此实例表示的用户对象所需的维度来更新首选大小。
+         * 
          */
         protected void updatePreferredSize(int index) {
             Rectangle       bounds = getNodeDimensions(this.getUserObject(),
@@ -1385,6 +1657,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Marks the receivers size as invalid. Next time the size, location
          * is asked for it will be obtained.
+         * <p>
+         * 将接收器大小标记为无效。下次的大小,位置要求它将获得。
+         * 
          */
         protected void markSizeInvalid() {
             preferredHeight = 0;
@@ -1392,6 +1667,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Marks the receivers size, and all its descendants sizes, as invalid.
+         * <p>
+         *  将接收器大小及其所有后代大小标记为无效。
+         * 
          */
         protected void deepMarkSizeInvalid() {
             markSizeInvalid();
@@ -1404,6 +1682,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
          * been loaded from the model and
          * <code>createIfNeeded</code> is true, the children are first
          * loaded.
+         * <p>
+         *  返回接收器的子节点。如果没有从模型中加载子代,并且<code> createIfNeeded </code>为true,则首先加载子代。
+         * 
          */
         protected Enumeration getLoadedChildren(boolean createIfNeeded) {
             if(!createIfNeeded || hasBeenExpanded)
@@ -1441,6 +1722,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Messaged from expand and collapse. This is meant for subclassers
          * that may wish to do something interesting with this.
+         * <p>
+         *  从展开和折叠消息。这是为了子类,可能希望做一些有趣的东西。
+         * 
          */
         protected void didAdjustTree() {
         }
@@ -1448,6 +1732,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Invokes <code>expandParentAndReceiver</code> on the parent,
          * and expands the receiver.
+         * <p>
+         *  在父级上调用<code> expandParentAndReceiver </code>,然后展开接收者。
+         * 
          */
         protected void expandParentAndReceiver() {
             TreeStateNode       parent = (TreeStateNode)getParent();
@@ -1462,6 +1749,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
          * from the treeModel if this node has not previously been
          * expanded.  If <I>adjustTree</I> is true the tree and selection
          * are updated accordingly.
+         * <p>
+         *  在树中扩展此节点。如果此节点以前未扩展,则将从treeModel加载子节点。如果<I> adjustTree </I>为真,树和选择将相应更新。
+         * 
          */
         protected void expand(boolean adjustTree) {
             if (!isExpanded() && !isLeaf()) {
@@ -1556,6 +1846,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Collapses this node in the tree.  If <I>adjustTree</I> is
          * true the tree and selection are updated accordingly.
+         * <p>
+         *  折叠树中的此节点。如果<I> adjustTree </I>为真,树和选择将相应更新。
+         * 
          */
         protected void collapse(boolean adjustTree) {
             if (isExpanded()) {
@@ -1636,6 +1929,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Removes the receiver, and all its children, from the mapping
          * table.
+         * <p>
+         *  从映射表中删除接收方及其所有子项。
+         * 
          */
         protected void removeFromMapping() {
             if(path != null) {
@@ -1649,12 +1945,17 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * An enumerator to iterate through visible nodes.
+     * <p>
+     *  枚举器,用于遍历可见节点。
+     * 
      */
     private class VisibleTreeStateNodeEnumeration implements
                      Enumeration<TreePath> {
         /** Parent thats children are being enumerated. */
         protected TreeStateNode       parent;
         /** Index of next child. An index of -1 signifies parent should be
+        /* <p>
+        /* 
          * visibled next. */
         protected int                 nextIndex;
         /** Number of children in parent. */
@@ -1672,6 +1973,8 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         }
 
         /**
+        /* <p>
+        /* 
          * @return true if more visible nodes.
          */
         public boolean hasMoreElements() {
@@ -1679,6 +1982,8 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         }
 
         /**
+        /* <p>
+        /* 
          * @return next visible TreePath.
          */
         public TreePath nextElement() {
@@ -1703,6 +2008,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Determines the next object by invoking <code>updateNextIndex</code>
          * and if not succesful <code>findNextValidParent</code>.
+         * <p>
+         *  通过调用<code> updateNextIndex </code>确定下一个对象,如果不成功<code> findNextValidParent </code>。
+         * 
          */
         protected void updateNextObject() {
             if(!updateNextIndex()) {
@@ -1713,6 +2021,9 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Finds the next valid parent, this should be called when nextIndex
          * is beyond the number of children of the current parent.
+         * <p>
+         *  查找下一个有效的父对象,当nextIndex超出当前父对象的子对象数时,应调用此对象。
+         * 
          */
         protected boolean findNextValidParent() {
             if(parent == root) {
@@ -1740,6 +2051,8 @@ public class VariableHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Updates <code>nextIndex</code> returning false if it is beyond
          * the number of children of parent.
+         * <p>
+         *  更新<code> nextIndex </code>如果超出父级的子级数,则返回false。
          */
         protected boolean updateNextIndex() {
             // nextIndex == -1 identifies receiver, make sure is expanded

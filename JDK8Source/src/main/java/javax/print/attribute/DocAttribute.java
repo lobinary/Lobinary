@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,12 @@ package javax.print.attribute;
  * to specify a characteristic for all the docs in that job.
  * <P>
  *
+ * <p>
+ *  接口DocAttribute是打印属性类实现的标记接口,用于指示属性表示文档的设置。 ("Doc"是一个简短的易于发音的术语,意思是"一条打印数据"。
+ * )客户端可以在<code> Doc </code>的属性中包括DocAttribute,那个文档。
+ * 如果属性实现{@link PrintRequestAttribute PrintRequestAttribute}以及DocAttribute,则客户端可以在属性集中包括属性,该属性集指定打印作业以指定
+ * 该作业中的所有文档的特性。
+ * 
  * @see DocAttributeSet
  * @see PrintRequestAttributeSet
  *

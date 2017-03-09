@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import com.sun.java.swing.plaf.windows.TMSchema.State;
  * Accessor interface for WindowsMenuItemUI to allow for "multiple implementation
  * inheritance".
  *
+ * <p>
+ *  WindowsMenuItemUI的访问接口允许"多实现继承"。
+ * 
  * @author Igor Kushnirskiy
  */
 interface WindowsMenuItemUIAccessor {

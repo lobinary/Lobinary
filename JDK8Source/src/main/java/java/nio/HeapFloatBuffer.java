@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ package java.nio;
 
 
 
+ * <p>
+ *  读/写HeapFloatBuffer。
+ * 
  */
 
 class HeapFloatBuffer
@@ -50,6 +54,9 @@ class HeapFloatBuffer
     protected final float[] hb;
     protected final int offset;
 
+    /* <p>
+    /*  protected final float [] hb; protected final int offset;
+    /* 
     */
 
     HeapFloatBuffer(int cap, int lim) {            // package-private
@@ -58,6 +65,9 @@ class HeapFloatBuffer
         /*
         hb = new float[cap];
         offset = 0;
+        /* <p>
+        /*  hb = new float [cap]; offset = 0;
+        /* 
         */
 
 
@@ -71,6 +81,9 @@ class HeapFloatBuffer
         /*
         hb = buf;
         offset = 0;
+        /* <p>
+        /*  hb = buf; offset = 0;
+        /* 
         */
 
 
@@ -87,6 +100,8 @@ class HeapFloatBuffer
         /*
         hb = buf;
         offset = off;
+        /* <p>
+        /*  hb = buf; offset = off;
         */
 
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import javax.swing.plaf.ComponentUI;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JPasswordField}.
  *
+ * <p>
+ *  为{@link javax.swing.JPasswordField}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author  Shannon Hickey
  * @since 1.7
  */
@@ -42,6 +47,10 @@ public class SynthPasswordFieldUI extends SynthTextFieldUI {
     /**
      * Creates a UI for a JPasswordField.
      *
+     * <p>
+     *  为JPasswordField创建一个UI。
+     * 
+     * 
      * @param c the JPasswordField
      * @return the UI
      */
@@ -54,6 +63,10 @@ public class SynthPasswordFieldUI extends SynthTextFieldUI {
      * UIManager.  This is used as a prefix to all the standard
      * text properties.
      *
+     * <p>
+     *  获取用作通过UIManager查找属性的键的名称。这用作所有标准文本属性的前缀。
+     * 
+     * 
      * @return the name ("PasswordField")
      */
     @Override
@@ -64,6 +77,10 @@ public class SynthPasswordFieldUI extends SynthTextFieldUI {
     /**
      * Creates a view (PasswordView) for an element.
      *
+     * <p>
+     *  为元素创建视图(PasswordView)。
+     * 
+     * 
      * @param elem the element
      * @return the view
      */
@@ -74,6 +91,9 @@ public class SynthPasswordFieldUI extends SynthTextFieldUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     void paintBackground(SynthContext context, Graphics g, JComponent c) {
@@ -83,6 +103,9 @@ public class SynthPasswordFieldUI extends SynthTextFieldUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -92,6 +115,8 @@ public class SynthPasswordFieldUI extends SynthTextFieldUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     protected void installKeyboardActions() {

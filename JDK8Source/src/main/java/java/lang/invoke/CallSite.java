@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -80,6 +81,31 @@ private static CallSite bootstrapDynamic(MethodHandles.Lookup caller, String nam
   return new ConstantCallSite(printArgs.asType(type));
 }
 }</pre></blockquote>
+ * <p>
+ *  {@code CallSite}是变量{@link MethodHandle}的持有者,称为其{@code target}。
+ * 与{@code CallSite}关联的{@code invokedynamic}指令会将所有调用委派给网站的当前目标。
+ *  {@code CallSite}可能与几个{@code invokedynamic}指令相关联,或者可能是"自由浮动",与没有相关联。
+ * 在任何情况下,它都可以通过一个名为其{@linkplain #dynamicInvoker动态调用者}的关联方法调用。
+ * <p>
+ *  {@code CallSite}是一个抽象类,不允许用户直接进行子类化。它有三个立即,具体的子类,可以实例化或子类化。
+ * <ul>
+ *  <li>如果不需要可变目标,{@code invokedynamic}指令可能会通过{@linkplain ConstantCallSite常量调用网站}永久绑定。
+ *  <li>如果需要具有volatile变量语义的可变目标,因为目标的更新必须立即可靠地被其他线程看到,可以使用{@linkplain VolatileCallSite volatile call site}
+ * 。
+ *  <li>如果不需要可变目标,{@code invokedynamic}指令可能会通过{@linkplain ConstantCallSite常量调用网站}永久绑定。
+ *  <li>否则,如果需要可变目标,则可以使用{@linkplain MutableCallSite mutable call site}。
+ * </ul>
+ * <p>
+ * 可以通过更改其目标来重新链接非常量调用网站。<em> </em>新目标必须具有与先前目标相同的{@linkplain MethodHandle#type()类型}。
+ * 因此,尽管调用点可以重新链接到一系列连续的目标,但是它不能改变其类型。
+ * <p>
+ *  下面是调用站点和引导方法的示例使用,它链接每个动态调用站点以打印其参数：<blockquote> <pre> {@ code static void test()throws Throwable {// JVM指令的下一行是PSEUDOCODE InvokeDynamic [#bootstrapDynamic] .baz("baz arg",2,3.14); }
+ *  private static void printArgs(Object ... args){System.out.println(java.util.Arrays.deepToString(args)); }
+ *  private static final MethodHandle printArgs; static {MethodHandles.Lookup lookup = MethodHandles.lookup(); Class thisClass = lookup.lookupClass(); //(我是谁?)printArgs = lookup.findStatic(thisClass,"printArgs",MethodType.methodType(void.class,Object []。
+ *  } private static CallSite bootstrapDynamic(MethodHandles.Lookup caller,String name,MethodType type){//忽略调用者和名称,但匹配类型：return new ConstantCallSite(printArgs.asType(type)); }
+ * } </pre> </blockquote>。
+ * 
+ * 
  * @author John Rose, JSR 292 EG
  */
 abstract
@@ -98,6 +124,12 @@ public class CallSite {
      * Before this {@code CallSite} object is returned from a bootstrap method,
      * it is usually provided with a more useful target method,
      * via a call to {@link CallSite#setTarget(MethodHandle) setTarget}.
+     * <p>
+     *  使用给定的方法类型创建一个空白的调用网站对象。提供了一个初始目标方法,如果调用它将抛出一个{@link IllegalStateException}。
+     * <p>
+     * 在通过引导方法返回此{@code CallSite}对象之前,通常通过调用{@link CallSite#setTarget(MethodHandle)setTarget}来提供更有用的目标方法。
+     * 
+     * 
      * @throws NullPointerException if the proposed type is null
      */
     /*package-private*/
@@ -107,6 +139,10 @@ public class CallSite {
 
     /**
      * Make a call site object equipped with an initial target method handle.
+     * <p>
+     *  使呼叫站点对象配备初始目标方法句柄。
+     * 
+     * 
      * @param target the method handle which will be the initial target of the call site
      * @throws NullPointerException if the proposed target is null
      */
@@ -118,6 +154,10 @@ public class CallSite {
 
     /**
      * Make a call site object equipped with an initial target method handle.
+     * <p>
+     *  使呼叫站点对象配备初始目标方法句柄。
+     * 
+     * 
      * @param targetType the desired type of the call site
      * @param createTargetHook a hook which will bind the call site to the target method handle
      * @throws WrongMethodTypeException if the hook cannot be invoked on the required arguments,
@@ -140,6 +180,11 @@ public class CallSite {
      * Although targets may change, any call site's type is permanent, and can never change to an unequal type.
      * The {@code setTarget} method enforces this invariant by refusing any new target that does
      * not have the previous target's type.
+     * <p>
+     *  返回此调用网站的目标的类型。虽然目标可能会更改,但任何调用站点的类型都是永久性的,并且永远不会更改为不等的类型。
+     *  {@code setTarget}方法通过拒绝任何没有上一个目标类型的新目标来强制执行这个不变量。
+     * 
+     * 
      * @return the type of the current target, which is also the type of any future target
      */
     public MethodType type() {
@@ -153,6 +198,10 @@ public class CallSite {
      * The immediate subclasses of {@code CallSite} document the
      * class-specific behaviors of this method.
      *
+     * <p>
+     *  根据此调用网站的特定类定义的行为,返回调用网站的目标方法。 {@code CallSite}的直接子类记录了此方法的特定于类的行为。
+     * 
+     * 
      * @return the current linkage state of the call site, its target method handle
      * @see ConstantCallSite
      * @see VolatileCallSite
@@ -172,6 +221,12 @@ public class CallSite {
      * The type of the new target must be {@linkplain MethodType#equals equal to}
      * the type of the old target.
      *
+     * <p>
+     *  根据此调用网站的特定类定义的行为更新此调用网站的目标方法。 {@code CallSite}的直接子类记录了此方法的特定于类的行为。
+     * <p>
+     *  新目标的类型必须是{@linkplain MethodType#等于}旧目标的类型。
+     * 
+     * 
      * @param newTarget the new target
      * @throws NullPointerException if the proposed new target is null
      * @throws WrongMethodTypeException if the proposed new target
@@ -206,6 +261,14 @@ public class CallSite {
      * result = MethodHandles.foldArguments(invoker, getTarget)
      * }</pre></blockquote>
      *
+     * <p>
+     *  生成与已调用的动态指令等价的方法句柄,该指令已链接到此调用站点。
+     * <p>
+     * 这个方法相当于下面的代码：<blockquote> <pre> {@ code MethodHandle getTarget,invoker,result; getTarget = MethodHandles.publicLookup()。
+     * bind(this,"getTarget",MethodType.methodType(MethodHandle.class)); invoker = MethodHandles.exactInvoke
+     * r(this.type()); result = MethodHandles.foldArguments(invoker,getTarget)} </pre> </blockquote>。
+     * 
+     * 
      * @return a method handle which always invokes this call site's current target
      */
     public abstract MethodHandle dynamicInvoker();
@@ -229,6 +292,13 @@ public class CallSite {
         }
     }
 
+    /* <p>
+    /*  MethodHandle getTarget = GET_TARGET.bindArgumentL(0,this); MethodHandle invoker = MethodHandles.exac
+    /* tInvoker(this.type()); return MethodHandles.foldArguments(invoker,getTarget); }}。
+    /* 
+    /*  private static final MethodHandle GET_TARGET; private static final MethodHandle THROW_UCS; static {try {GET_TARGET = IMPL_LOOKUP。
+    /*  findVirtual(CallSite.class,"getTarget",MethodType.methodType(MethodHandle.class)); THROW_UCS = IMPL_
+    /* 
     /** This guy is rolled into the default target if a MethodType is supplied to the constructor. */
     private static Object uninitializedCallSite(Object... ignore) {
         throw new IllegalStateException("uninitialized call site");

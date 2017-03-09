@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,10 @@ import java.util.function.Supplier;
  * Abstract base class for an intermediate pipeline stage or pipeline source
  * stage implementing whose elements are of type {@code int}.
  *
+ * <p>
+ *  抽象基类,用于实现其元素类型为{@code int}的中间流水线阶段或流水线源阶段。
+ * 
+ * 
  * @param <E_IN> type of elements in the upstream source
  * @since 1.8
  */
@@ -57,6 +62,10 @@ abstract class IntPipeline<E_IN>
     /**
      * Constructor for the head of a stream pipeline.
      *
+     * <p>
+     *  流管道头的构造函数。
+     * 
+     * 
      * @param source {@code Supplier<Spliterator>} describing the stream source
      * @param sourceFlags The source flags for the stream source, described in
      *        {@link StreamOpFlag}
@@ -70,6 +79,10 @@ abstract class IntPipeline<E_IN>
     /**
      * Constructor for the head of a stream pipeline.
      *
+     * <p>
+     *  流管道头的构造函数。
+     * 
+     * 
      * @param source {@code Spliterator} describing the stream source
      * @param sourceFlags The source flags for the stream source, described in
      *        {@link StreamOpFlag}
@@ -84,6 +97,10 @@ abstract class IntPipeline<E_IN>
      * Constructor for appending an intermediate operation onto an existing
      * pipeline.
      *
+     * <p>
+     *  用于将中间操作附加到现有管道上的构造函数。
+     * 
+     * 
      * @param upstream the upstream element source
      * @param opFlags the operation flags for the new operation
      */
@@ -94,6 +111,9 @@ abstract class IntPipeline<E_IN>
     /**
      * Adapt a {@code Sink<Integer> to an {@code IntConsumer}, ideally simply
      * by casting.
+     * <p>
+     *  将{@code Sink <Integer>修改为{@code IntConsumer},最好只需通过投射。
+     * 
      */
     private static IntConsumer adapt(Sink<Integer> sink) {
         if (sink instanceof IntConsumer) {
@@ -113,6 +133,11 @@ abstract class IntPipeline<E_IN>
      * @implNote
      * The implementation attempts to cast to a Spliterator.OfInt, and throws an
      * exception if this cast is not possible.
+     * <p>
+     *  将{@code Spliterator <Integer>}修改为{@code Spliterator.OfInt}。
+     * 
+     *  @implNote实现尝试强制转换为Spliterator.OfInt,并且如果不可能转换,则抛出异常。
+     * 
      */
     private static Spliterator.OfInt adapt(Spliterator<Integer> s) {
         if (s instanceof Spliterator.OfInt) {
@@ -508,6 +533,10 @@ abstract class IntPipeline<E_IN>
     /**
      * Source stage of an IntStream.
      *
+     * <p>
+     *  IntStream的源阶段。
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      * @since 1.8
      */
@@ -515,6 +544,10 @@ abstract class IntPipeline<E_IN>
         /**
          * Constructor for the source stage of an IntStream.
          *
+         * <p>
+         *  IntStream的源阶段的构造方法。
+         * 
+         * 
          * @param source {@code Supplier<Spliterator>} describing the stream
          *               source
          * @param sourceFlags the source flags for the stream source, described
@@ -529,6 +562,10 @@ abstract class IntPipeline<E_IN>
         /**
          * Constructor for the source stage of an IntStream.
          *
+         * <p>
+         *  IntStream的源阶段的构造方法。
+         * 
+         * 
          * @param source {@code Spliterator} describing the stream source
          * @param sourceFlags the source flags for the stream source, described
          *                    in {@link StreamOpFlag}
@@ -575,6 +612,10 @@ abstract class IntPipeline<E_IN>
     /**
      * Base class for a stateless intermediate stage of an IntStream
      *
+     * <p>
+     *  IntStream的无状态中间阶段的基类
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      * @since 1.8
      */
@@ -582,6 +623,10 @@ abstract class IntPipeline<E_IN>
         /**
          * Construct a new IntStream by appending a stateless intermediate
          * operation to an existing stream.
+         * <p>
+         *  通过将无状态中间操作附加到现有流来构造新的IntStream。
+         * 
+         * 
          * @param upstream The upstream pipeline stage
          * @param inputShape The stream shape for the upstream pipeline stage
          * @param opFlags Operation flags for the new stage
@@ -602,6 +647,10 @@ abstract class IntPipeline<E_IN>
     /**
      * Base class for a stateful intermediate stage of an IntStream.
      *
+     * <p>
+     *  IntStream的有状态中间阶段的基类。
+     * 
+     * 
      * @param <E_IN> type of elements in the upstream source
      * @since 1.8
      */
@@ -609,6 +658,9 @@ abstract class IntPipeline<E_IN>
         /**
          * Construct a new IntStream by appending a stateful intermediate
          * operation to an existing stream.
+         * <p>
+         *  通过将有状态中间操作附加到现有流来构造新的IntStream。
+         * 
          * @param upstream The upstream pipeline stage
          * @param inputShape The stream shape for the upstream pipeline stage
          * @param opFlags Operation flags for the new stage

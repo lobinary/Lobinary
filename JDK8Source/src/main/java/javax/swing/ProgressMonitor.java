@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,21 @@ import javax.swing.text.*;
  href="https://docs.oracle.com/javase/tutorial/uiswing/components/progress.html">How to Monitor Progress</a>,
  * a section in <em>The Java Tutorial.</em>
  *
+ * <p>
+ *  喜欢的操作将需要一段时间,将弹出一个进度对话框。创建ProgressMonitor时,它会给出一个数字范围和一个描述性字符串。
+ * 随着操作的进行,调用setProgress方法来指示操作的[min,max]范围有多远。最初,没有ProgressDialog。
+ * 在第一个millisToDecideToPopup毫秒(默认500)后,进度监视器将预测操作将花费多长时间。
+ * 如果它超过millisToPopup(默认2000,2秒),将弹出ProgressDialog。
+ * <p>
+ *  有时,当对话框可见时,进度条将在调用setProgress时更新。 setProgress不会总是更新进度条,它只会在进度数量明显显着时完成。
+ * 
+ * <p>
+ * 
+ *  有关其他文档和示例,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/progress.html">如何监控
+ * 进度</a>,<em>中的一节。
+ *  Java教程。</em>。
+ * 
+ * 
  * @see ProgressMonitorInputStream
  * @author James Gosling
  * @author Lynn Monsanto (accessibility)
@@ -100,6 +116,10 @@ public class ProgressMonitor implements Accessible
      * Constructs a graphic object that shows progress, typically by filling
      * in a rectangular bar as the process nears completion.
      *
+     * <p>
+     *  构造一个显示进度的图形对象,通常通过在进程接近完成时填充到矩形栏中。
+     * 
+     * 
      * @param parentComponent the parent component for the dialog box
      * @param message a descriptive message that will be shown
      *        to the user to indicate what operation is being monitored.
@@ -233,6 +253,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Gets the AccessibleContext for the ProgressOptionPane
          *
+         * <p>
+         *  获取ProgressOptionPane的AccessibleContext
+         * 
+         * 
          * @return the AccessibleContext for the ProgressOptionPane
          * @since 1.5
          */
@@ -242,6 +266,9 @@ public class ProgressMonitor implements Accessible
 
         /*
          * Returns the AccessibleJOptionPane
+         * <p>
+         *  返回AccessibleJOptionPane
+         * 
          */
         private AccessibleContext getAccessibleJOptionPane() {
             return super.getAccessibleContext();
@@ -253,6 +280,10 @@ public class ProgressMonitor implements Accessible
      * Indicate the progress of the operation being monitored.
      * If the specified value is &gt;= the maximum, the progress
      * monitor is closed.
+     * <p>
+     *  指示正在监视的操作的进度。如果指定的值>&gt; =最大值,进度监视器将关闭。
+     * 
+     * 
      * @param nv an int specifying the current value, between the
      *        maximum and minimum specified for this component
      * @see #setMinimum
@@ -304,6 +335,9 @@ public class ProgressMonitor implements Accessible
      * Indicate that the operation is complete.  This happens automatically
      * when the value set by setProgress is &gt;= max, but it may be called
      * earlier if the operation ends early.
+     * <p>
+     * 指示操作完成。当由setProgress设置的值是&gt; = max时,会自动发生这种情况,但如果操作提前结束,它可能会被更早调用。
+     * 
      */
     public void close() {
         if (dialog != null) {
@@ -319,6 +353,10 @@ public class ProgressMonitor implements Accessible
     /**
      * Returns the minimum value -- the lower end of the progress value.
      *
+     * <p>
+     *  返回最小值 - 进度值的下限。
+     * 
+     * 
      * @return an int representing the minimum value
      * @see #setMinimum
      */
@@ -330,6 +368,10 @@ public class ProgressMonitor implements Accessible
     /**
      * Specifies the minimum value.
      *
+     * <p>
+     *  指定最小值。
+     * 
+     * 
      * @param m  an int specifying the minimum value
      * @see #getMinimum
      */
@@ -344,6 +386,10 @@ public class ProgressMonitor implements Accessible
     /**
      * Returns the maximum value -- the higher end of the progress value.
      *
+     * <p>
+     *  返回最大值 - 进度值的上限。
+     * 
+     * 
      * @return an int representing the maximum value
      * @see #setMaximum
      */
@@ -355,6 +401,10 @@ public class ProgressMonitor implements Accessible
     /**
      * Specifies the maximum value.
      *
+     * <p>
+     *  指定最大值。
+     * 
+     * 
      * @param m  an int specifying the maximum value
      * @see #getMaximum
      */
@@ -368,6 +418,9 @@ public class ProgressMonitor implements Accessible
 
     /**
      * Returns true if the user hits the Cancel button in the progress dialog.
+     * <p>
+     *  如果用户在进度对话框中点击取消按钮,则返回true。
+     * 
      */
     public boolean isCanceled() {
         if (pane == null) return false;
@@ -382,6 +435,10 @@ public class ProgressMonitor implements Accessible
      * Specifies the amount of time to wait before deciding whether or
      * not to popup a progress monitor.
      *
+     * <p>
+     *  指定在决定是否弹出进度监视器之前等待的时间量。
+     * 
+     * 
      * @param millisToDecideToPopup  an int specifying the time to wait,
      *        in milliseconds
      * @see #getMillisToDecideToPopup
@@ -395,6 +452,10 @@ public class ProgressMonitor implements Accessible
      * Returns the amount of time this object waits before deciding whether
      * or not to popup a progress monitor.
      *
+     * <p>
+     *  返回此对象在决定是否弹出进度监视器之前等待的时间量。
+     * 
+     * 
      * @see #setMillisToDecideToPopup
      */
     public int getMillisToDecideToPopup() {
@@ -407,6 +468,10 @@ public class ProgressMonitor implements Accessible
      * (If the predicted time remaining is less than this time, the popup
      * won't be displayed.)
      *
+     * <p>
+     *  指定弹出窗口显示所需的时间。 (如果预测剩余时间少于此时间,则不会显示弹出窗口。)
+     * 
+     * 
      * @param millisToPopup  an int specifying the time in milliseconds
      * @see #getMillisToPopup
      */
@@ -418,6 +483,10 @@ public class ProgressMonitor implements Accessible
     /**
      * Returns the amount of time it will take for the popup to appear.
      *
+     * <p>
+     *  返回弹出窗口显示所需的时间。
+     * 
+     * 
      * @see #setMillisToPopup
      */
     public int getMillisToPopup() {
@@ -430,6 +499,10 @@ public class ProgressMonitor implements Accessible
      * progress message. Used, for example, to show which file the
      * is currently being copied during a multiple-file copy.
      *
+     * <p>
+     *  指定与进度消息一起显示的附加注释。例如,用于显示在多文件复制期间当前正在复制的文件。
+     * 
+     * 
      * @param note  a String specifying the note to display
      * @see #getNote
      */
@@ -445,6 +518,10 @@ public class ProgressMonitor implements Accessible
      * Specifies the additional note that is displayed along with the
      * progress message.
      *
+     * <p>
+     *  指定与进度消息一起显示的附加注释。
+     * 
+     * 
      * @return a String specifying the note to display
      * @see #setNote
      */
@@ -458,6 +535,10 @@ public class ProgressMonitor implements Accessible
 
     /**
      * The <code>AccessibleContext</code> for the <code>ProgressMonitor</code>
+     * <p>
+     *  <code> ProgressMonitor </code>的<code> AccessibleContext </code>
+     * 
+     * 
      * @since 1.5
      */
     protected AccessibleContext accessibleContext = null;
@@ -468,6 +549,10 @@ public class ProgressMonitor implements Accessible
      * Gets the <code>AccessibleContext</code> for the
      * <code>ProgressMonitor</code>
      *
+     * <p>
+     *  获取<code> ProgressMonitor </code>的<code> AccessibleContext </code>
+     * 
+     * 
      * @return the <code>AccessibleContext</code> for the
      * <code>ProgressMonitor</code>
      * @since 1.5
@@ -493,6 +578,10 @@ public class ProgressMonitor implements Accessible
     /**
      * <code>AccessibleProgressMonitor</code> implements accessibility
      * support for the <code>ProgressMonitor</code> class.
+     * <p>
+     *  <code> AccessibleProgressMonitor </code>实现<code> ProgressMonitor </code>类的辅助功能支持。
+     * 
+     * 
      * @since 1.5
      */
     protected class AccessibleProgressMonitor extends AccessibleContext
@@ -522,12 +611,25 @@ public class ProgressMonitor implements Accessible
          * the AccessibleProgressMonitor is that a dialog contains a
          * progress monitor with three children: a message, a note
          * label and a progress bar.
+         * <p>
+         * ProgressMonitor的辅助层次结构是ProgressOptionPane组件层次结构的展平版本。
+         * 
+         *  ProgressOptionPane组件层次结构是：JDialog ProgressOptionPane JPanel JPanel JLabel JLabel JProgressBar
+         * 
+         *  AccessibleProgessMonitor可访问性层次结构是：AccessibleJDialog AccessibleProgressMonitor AccessibleJLabel Acces
+         * sibleJLabel AccessibleJProgressBar。
+         * 
+         *  AccessibleProgressMonitor对抽象技术的抽象是一个对话框包含一个进度监视器,有三个子节点：消息,注释标签和进度条。
+         * 
          */
 
         private Object oldModelValue;
 
         /**
          * AccessibleProgressMonitor constructor
+         * <p>
+         *  AccessibleProgressMonitor构造函数
+         * 
          */
         protected AccessibleProgressMonitor() {
         }
@@ -543,6 +645,13 @@ public class ProgressMonitor implements Accessible
          * implements accessibility for the super class. AccessibleProgressMonitor
          * cannot extend AccessibleJOptionPane and must therefore delegate calls
          * to the AccessibleJOptionPane.
+         * <p>
+         *  初始化AccessibleContext现在已创建ProgressOptionPane。
+         * 因为ProgressMonitor不是实现Accessible接口的组件,AccessibleContext必须从ProgressOptionPane及其子节点合成。
+         * 
+         *  对于其他AWT和Swing类,实现类的可访问性的内部类扩展了实现对超类的实现可访问性的内部类。
+         *  AccessibleProgressMonitor无法扩展AccessibleJOptionPane,因此必须将调用委派给AccessibleJOptionPane。
+         * 
          */
         private void optionPaneCreated() {
             accessibleJOptionPane =
@@ -562,6 +671,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Invoked when the target of the listener has changed its state.
          *
+         * <p>
+         *  当侦听器的目标已更改其状态时调用。
+         * 
+         * 
          * @param e  a <code>ChangeEvent</code> object. Must not be null.
          * @throws NullPointerException if the parameter is null.
          */
@@ -582,6 +695,10 @@ public class ProgressMonitor implements Accessible
         /**
          * This method gets called when a bound property is changed.
          *
+         * <p>
+         *  当绑定属性更改时,将调用此方法。
+         * 
+         * 
          * @param e A <code>PropertyChangeEvent</code> object describing
          * the event source and the property that has changed. Must not be null.
          * @throws NullPointerException if the parameter is null.
@@ -605,6 +722,11 @@ public class ProgressMonitor implements Accessible
          * to enter the name of a city, the accessibleName for the en_US locale
          * could be 'city.'
          *
+         * <p>
+         * 获取此对象的accessibleName属性。对象的accessibleName属性是一个本地化的字符串,指定对象的用途。例如,标签或按钮的accessibleName属性可以是标签或按钮本身的文本。
+         * 在对象不显示其名称的情况下,仍应设置accessibleName。例如,在用于输入城市名称的文本字段的情况下,en_US语言环境的accessibleName可以是"城市"。
+         * 
+         * 
          * @return the localized name of the object; null if this
          * object does not have a name
          *
@@ -627,6 +749,11 @@ public class ProgressMonitor implements Accessible
          * case of a 'Cancel' button, the accessibleDescription could be
          * 'Ignore changes and close dialog box.'
          *
+         * <p>
+         *  获取此对象的accessibleDescription属性。此对象的accessibleDescription属性是一个简短的本地化短语,用于描述对象的用途。
+         * 例如,在"取消"按钮的情况下,accessibleDescription可以是"忽略更改并关闭对话框"。
+         * 
+         * 
          * @return the localized description of the object; null if
          * this object does not have a description
          *
@@ -657,6 +784,15 @@ public class ProgressMonitor implements Accessible
          * custom component developers can define their own AccessibleRole's
          * if the set of predefined roles is inadequate.
          *
+         * <p>
+         * 获取此对象的作用。对象的作用是该对象的类的通用目的或使用。例如,按钮的角色是AccessibleRole.PUSH_BUTTON。
+         * 提供了AccessibleRole中的角色,因此组件开发人员可以从一组预定义角色中进行选择。
+         * 这使得辅助技术能够为组件的各种调整子类提供一致的接口(例如,对于像按钮一样操作的所有组件使用AccessibleRole.PUSH_BUTTON),以及区分行为不同的子类(例如,用于复选框的Access
+         * ibleRole.CHECK_BOX和AccessibleRole.RADIO_BUTTON的单选按钮)。
+         * 提供了AccessibleRole中的角色,因此组件开发人员可以从一组预定义角色中进行选择。
+         *  <p>请注意,AccessibleRole类也是可扩展的,因此如果预定义角色集合不足,自定义组件开发人员可以定义自己的AccessibleRole。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the object
          * @see AccessibleRole
          */
@@ -670,6 +806,11 @@ public class ProgressMonitor implements Accessible
          * AccessibleStateSet of an object will cause a PropertyChangeEvent to
          * be fired for the ACCESSIBLE_STATE_PROPERTY property.
          *
+         * <p>
+         *  获取此对象的状态集。对象的AccessibleStateSet由一组唯一的AccessibleStates组成。
+         * 对象的AccessibleStateSet中的更改将导致针对ACCESSIBLE_STATE_PROPERTY属性触发PropertyChangeEvent。
+         * 
+         * 
          * @return an instance of AccessibleStateSet containing the
          * current state set of the object
          * @see AccessibleStateSet
@@ -687,6 +828,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Gets the Accessible parent of this object.
          *
+         * <p>
+         *  获取此对象的可访问父级。
+         * 
+         * 
          * @return the Accessible parent of this object; null if this
          * object does not have an Accessible parent
          */
@@ -696,6 +841,9 @@ public class ProgressMonitor implements Accessible
 
         /*
          * Returns the parent AccessibleContext
+         * <p>
+         *  返回父AccessibleContext
+         * 
          */
         private AccessibleContext getParentAccessibleContext() {
             if (dialog != null) {
@@ -707,6 +855,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Gets the 0-based index of this object in its accessible parent.
          *
+         * <p>
+         *  获取此对象在其可访问父级中的基于0的索引。
+         * 
+         * 
          * @return the 0-based index of this object in its parent; -1 if this
          * object does not have an accessible parent.
          *
@@ -725,6 +877,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Returns the number of accessible children of the object.
          *
+         * <p>
+         *  返回对象的可访问子项数。
+         * 
+         * 
          * @return the number of accessible children of the object.
          */
         public int getAccessibleChildrenCount() {
@@ -743,6 +899,10 @@ public class ProgressMonitor implements Accessible
          * of an Accessible child is at index 0, the second child is at index 1,
          * and so on.
          *
+         * <p>
+         * 返回对象的指定Accessible子项。可访问对象的可访问子对象是基于零的,因此可访问子对象的第一个子对象位于索引0,第二个子对象位于索引1,依此类推。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the Accessible child of the object
          * @see #getAccessibleChildrenCount
@@ -760,6 +920,9 @@ public class ProgressMonitor implements Accessible
         /*
          * Returns the AccessibleContext for the JPanel containing the
          * message, note label and progress bar
+         * <p>
+         *  返回包含消息,注释标签和进度条的JPanel的AccessibleContext
+         * 
          */
         private AccessibleContext getPanelAccessibleContext() {
             if (myBar != null) {
@@ -775,6 +938,10 @@ public class ProgressMonitor implements Accessible
          * Gets the locale of the component. If the component does not have a
          * locale, then the locale of its parent is returned.
          *
+         * <p>
+         *  获取组件的语言环境。如果组件没有语言环境,那么将返回其父组件的语言环境。
+         * 
+         * 
          * @return this component's locale.  If this component does not have
          * a locale, the locale of its parent is returned.
          *
@@ -797,6 +964,10 @@ public class ProgressMonitor implements Accessible
          * Gets the AccessibleComponent associated with this object that has a
          * graphical representation.
          *
+         * <p>
+         *  获取与具有图形表示形式的此对象相关联的AccessibleComponent。
+         * 
+         * 
          * @return AccessibleComponent if supported by object; else return null
          * @see AccessibleComponent
          */
@@ -812,6 +983,10 @@ public class ProgressMonitor implements Accessible
          * Gets the AccessibleValue associated with this object that supports a
          * Numerical value.
          *
+         * <p>
+         *  获取与支持数值的此对象相关联的AccessibleValue。
+         * 
+         * 
          * @return AccessibleValue if supported by object; else return null
          * @see AccessibleValue
          */
@@ -827,6 +1002,10 @@ public class ProgressMonitor implements Accessible
          * Gets the AccessibleText associated with this object presenting
          * text on the display.
          *
+         * <p>
+         *  获取与此对象相关联的AccessibleText在显示器上显示文本。
+         * 
+         * 
          * @return AccessibleText if supported by object; else return null
          * @see AccessibleText
          */
@@ -839,6 +1018,9 @@ public class ProgressMonitor implements Accessible
 
         /*
          * Returns the note label AccessibleText
+         * <p>
+         *  返回注释标签AccessibleText
+         * 
          */
         private AccessibleText getNoteLabelAccessibleText() {
             if (noteLabel != null) {
@@ -856,6 +1038,10 @@ public class ProgressMonitor implements Accessible
          * of the character under that Point.  If the point is invalid,
          * this method returns -1.
          *
+         * <p>
+         *  给定一个点在局部坐标,返回该点下的字符的从零开始的索引。如果该点无效,则此方法返回-1。
+         * 
+         * 
          * @param p the Point in local coordinates
          * @return the zero-based index of the character under Point p; if
          * Point is invalid return -1.
@@ -880,6 +1066,10 @@ public class ProgressMonitor implements Accessible
          * index into the string.  The bounds are returned in local
          * coordinates.  If the index is invalid an empty rectangle is returned.
          *
+         * <p>
+         *  确定给定索引处字符的边界框到字符串中。边界在本地坐标中返回。如果索引无效,则返回一个空的矩形。
+         * 
+         * 
          * @param i the index into the String
          * @return the screen coordinates of the character's bounding box,
          * if index is invalid return an empty rectangle.
@@ -901,6 +1091,9 @@ public class ProgressMonitor implements Accessible
         /*
          * Returns whether source and destination components have the
          * same window ancestor
+         * <p>
+         *  返回源组件和目标组件是否具有相同的窗口祖先
+         * 
          */
         private boolean sameWindowAncestor(Component src, Component dest) {
             if (src == null || dest == null) {
@@ -913,6 +1106,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Returns the number of characters (valid indicies)
          *
+         * <p>
+         *  返回字符数(有效的标记)
+         * 
+         * 
          * @return the number of characters
          */
         public int getCharCount() {
@@ -928,6 +1125,12 @@ public class ProgressMonitor implements Accessible
          *
          * Note: That to the right of the caret will have the same index
          * value as the offset (the caret is between two characters).
+         * <p>
+         *  返回插入符号的从零开始的偏移量。
+         * 
+         *  注意：插入符右侧的索引值与偏移量相同(插入符号在两个字符之间)。
+         * 
+         * 
          * @return the zero-based offset of the caret.
          */
         public int getCaretPosition() {
@@ -941,6 +1144,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Returns the String at a given index.
          *
+         * <p>
+         *  返回给定索引处的String。
+         * 
+         * 
          * @param part the CHARACTER, WORD, or SENTENCE to retrieve
          * @param index an index within the text
          * @return the letter, word, or sentence
@@ -956,6 +1163,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Returns the String after a given index.
          *
+         * <p>
+         *  返回给定索引后的String。
+         * 
+         * 
          * @param part the CHARACTER, WORD, or SENTENCE to retrieve
          * @param index an index within the text
          * @return the letter, word, or sentence
@@ -971,6 +1182,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Returns the String before a given index.
          *
+         * <p>
+         *  返回给定索引之前的String。
+         * 
+         * 
          * @param part the CHARACTER, WORD, or SENTENCE to retrieve
          * @param index an index within the text
          * @return the letter, word, or sentence
@@ -986,6 +1201,10 @@ public class ProgressMonitor implements Accessible
         /**
          * Returns the AttributeSet for a given character at a given index
          *
+         * <p>
+         * 返回给定字符在给定索引的AttributeSet
+         * 
+         * 
          * @param i the zero-based index into the text
          * @return the AttributeSet of the character
          */
@@ -1002,6 +1221,10 @@ public class ProgressMonitor implements Accessible
          * If there is no selection, but there is
          * a caret, the start and end offsets will be the same.
          *
+         * <p>
+         *  返回所选文本内的起始偏移量。如果没有选择,但有一个插入符号,开始和结束偏移将是相同的。
+         * 
+         * 
          * @return the index into the text of the start of the selection
          */
         public int getSelectionStart() {
@@ -1017,6 +1240,10 @@ public class ProgressMonitor implements Accessible
          * If there is no selection, but there is
          * a caret, the start and end offsets will be the same.
          *
+         * <p>
+         *  返回所选文本内的结束偏移量。如果没有选择,但有一个插入符号,开始和结束偏移将是相同的。
+         * 
+         * 
          * @return the index into the text of the end of the selection
          */
         public int getSelectionEnd() {
@@ -1030,6 +1257,9 @@ public class ProgressMonitor implements Accessible
         /**
          * Returns the portion of the text that is selected.
          *
+         * <p>
+         *  返回所选文本的部分。
+         * 
          * @return the String portion of the text that is selected
          */
         public String getSelectedText() {

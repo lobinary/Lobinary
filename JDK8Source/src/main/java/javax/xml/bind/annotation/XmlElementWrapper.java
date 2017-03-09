@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,40 @@ import java.lang.annotation.Target;
  * <p>See "Package Specification" in javax.xml.bind.package javadoc for
  * additional common information.</p>
  *
+ * <p>
+ *  生成围绕XML表示的包装器元素。
+ * 
+ *  这主要是用于生成围绕集合的包装XML元素。因此,注释支持两种形式的序列化,如下所示。
+ * 
+ * <pre>
+ *  //示例：code fragment int [] names;
+ * 
+ *  // XML序列化表单1(展开的集合)
+ * &lt;names> ... &lt;/names>
+ * &lt;names> ... &lt;/names>
+ * 
+ *  // XML序列化表单2(包装集合)
+ * &lt;wrapperElement>
+ * &lt;names> value-of-item &lt;/names>
+ * &lt;names> value-of-item &lt;/names>
+ *  ....
+ * &lt;/wrapperElement>
+ * </pre>
+ * 
+ *  <p>这两个序列化的XML表单允许空集合通过缺少或存在具有nillable属性的元素来表示。
+ * 
+ *  <p> <b>使用</b> </p>
+ * <p>
+ *  <tt> @XmlElementWrapper </tt>注释可以与以下程序元素一起使用：
+ * <ul>
+ *  <li> JavaBean属性</li> <li>非静态,非瞬态字段</li>
+ * </ul>
+ * 
+ *  <p>使用受以下限制约束：
+ * <ul>
+ *  <li>此属性必须是集合属性</li> <li>此注释可用于以下注释：{@link XmlElement},{@link XmlElements},{@link XmlElementRef},{@link XmlElementRefs}
+ *  ,{@link XmlJavaTypeAdapter}。
+ * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElement
  * @see XmlElements
@@ -96,6 +131,12 @@ public @interface XmlElementWrapper {
     /**
      * Name of the XML wrapper element. By default, the XML wrapper
      * element name is derived from the JavaBean property name.
+     * <p>
+     * </li>。
+     * </ul>
+     * 
+     *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
+     * 
      */
     String name() default "##default";
 
@@ -115,6 +156,9 @@ public @interface XmlElementWrapper {
      *  Otherwise "" (which produces unqualified element in the default
      *  namespace.
      * </ol>
+     * <p>
+     *  XML包装器元素的名称。默认情况下,XML包装器元素名称派生自JavaBean属性名称。
+     * 
      */
     String namespace() default "##default";
 
@@ -122,6 +166,18 @@ public @interface XmlElementWrapper {
      * If true, the absence of the collection is represented by
      * using <tt>xsi:nil='true'</tt>. Otherwise, it is represented by
      * the absence of the element.
+     * <p>
+     *  XML包装器元素的XML目标命名空间。
+     * <p>
+     *  如果值为"## default",则命名空间确定如下：
+     * <ol>
+     * <li>
+     * 如果封装包具有{@link XmlSchema}注释,并且其{@link XmlSchema#elementFormDefault()elementFormDefault}为{@link XmlNsForm#QUALIFIED QUALIFIED}
+     * ,则为封闭类的命名空间。
+     * 
+     * <li>
+     *  否则""(它在默认命名空间中产生非限定元素。
+     * </ol>
      */
     boolean nillable() default false;
 
@@ -139,6 +195,10 @@ public @interface XmlElementWrapper {
      * simply a mechanism to let users express their application constraints
      * better.
      *
+     * <p>
+     *  如果为true,则使用<tt> xsi：nil ='true'</tt>来表示集合的缺失。否则,它由没有元素表示。
+     * 
+     * 
      * @since JAXB 2.1
      */
     boolean required() default false;

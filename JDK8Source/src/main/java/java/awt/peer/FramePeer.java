@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,12 +39,21 @@ import sun.awt.EmbeddedFrame;
  * developers, and developers should not implement peers
  * nor invoke any of the peer methods directly on the peer
  * instances.
+ * <p>
+ *  {@link Frame}的对等接口。这会为{@link WindowPeer}接口添加几种特定于帧的方法。
+ * 
+ *  对等接口仅用于移植AWT。它们不是供应用程序开发人员使用的,并且开发人员不应实现对等体,也不应直接在对等实例上调用任何对等方法。
+ * 
  */
 public interface FramePeer extends WindowPeer {
 
     /**
      * Sets the title on the frame.
      *
+     * <p>
+     *  设置框架上的标题。
+     * 
+     * 
      * @param title the title to set
      *
      * @see Frame#setTitle(String)
@@ -53,6 +63,10 @@ public interface FramePeer extends WindowPeer {
     /**
      * Sets the menu bar for the frame.
      *
+     * <p>
+     *  设置框架的菜单栏。
+     * 
+     * 
      * @param mb the menu bar to set
      *
      * @see Frame#setMenuBar(MenuBar)
@@ -62,6 +76,10 @@ public interface FramePeer extends WindowPeer {
     /**
      * Sets if the frame should be resizable or not.
      *
+     * <p>
+     *  设置帧是否应该可调整大小。
+     * 
+     * 
      * @param resizeable {@code true} when the frame should be resizable,
      *        {@code false} if not
      *
@@ -72,6 +90,10 @@ public interface FramePeer extends WindowPeer {
     /**
      * Changes the state of the frame.
      *
+     * <p>
+     *  更改框架的状态。
+     * 
+     * 
      * @param state the new state
      *
      * @see Frame#setExtendedState(int)
@@ -81,6 +103,10 @@ public interface FramePeer extends WindowPeer {
     /**
      * Returns the current state of the frame.
      *
+     * <p>
+     *  返回帧的当前状态。
+     * 
+     * 
      * @return the current state of the frame
      *
      * @see Frame#getExtendedState()
@@ -90,6 +116,10 @@ public interface FramePeer extends WindowPeer {
     /**
      * Sets the bounds of the frame when it becomes maximized.
      *
+     * <p>
+     *  设置帧变为最大时的边界。
+     * 
+     * 
      * @param bounds the maximized bounds of the frame
      *
      * @see Frame#setMaximizedBounds(Rectangle)
@@ -101,6 +131,10 @@ public interface FramePeer extends WindowPeer {
      * setLocation() and setBounds() always set the frame to (0,0) for
      * backwards compatibility.
      *
+     * <p>
+     *  设置嵌入框的大小和位置。 (在嵌入式框架上,setLocation()和setBounds()总是将帧设置为(0,0)为向后兼容性。
+     * 
+     * 
      * @param x the X location
      * @param y the Y location
      * @param width the width of the frame
@@ -117,6 +151,10 @@ public interface FramePeer extends WindowPeer {
      * setLocation() and setBounds() always set the frame to (0,0) for
      * backwards compatibility.
      *
+     * <p>
+     *  返回嵌入框的大小和位置。 (在嵌入式框架上,setLocation()和setBounds()总是将帧设置为(0,0)为向后兼容性。
+     * 
+     * 
      * @return the bounds of an embedded frame
      *
      * @see EmbeddedFrame#getBoundsPrivate()
@@ -128,6 +166,9 @@ public interface FramePeer extends WindowPeer {
     /**
      * Requests the peer to emulate window activation.
      *
+     * <p>
+     *  请求对等体模拟窗口激活。
+     * 
      * @param activate activate or deactivate the window
      */
     void emulateActivation(boolean activate);

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -11,6 +12,8 @@ package org.omg.PortableInterceptor;
 
 /** Type of object adapter state.  State changes are reported either to
    * the object adapter or to the adapter manager.
+   * <p>
+   * 
    */
 abstract public class AdapterStateHelper
 {

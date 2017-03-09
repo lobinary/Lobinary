@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@
  * This notice and attribution to Taligent may not be removed.
  * Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权所有Taligent,Inc. 1996  -  1997,保留所有权利(C)版权所有IBM Corp. 1996  -  1998,保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 
+ *  此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.awt.font;
@@ -45,6 +53,9 @@ package java.awt.font;
  * separate infos for grow and shrink case
  * !!! this doesn't really need to be a separate class.  If we keep it
  * separate, probably the newJustify code from TextLayout belongs here as well.
+ * <p>
+ *  一个信息为每个字形的每一侧单独的信息增长和收缩情况！这不需要是一个单独的类。如果我们保持分离,可能来自TextLayout的newJustify代码也在这里。
+ * 
  */
 
 class TextJustifier {
@@ -57,6 +68,9 @@ class TextJustifier {
     /**
      * Initialize the justifier with an array of infos corresponding to each
      * glyph. Start and limit indicate the range of the array to examine.
+     * <p>
+     *  使用与每个字形对应的信息数组初始化对齐方式。开始和限制指示要检查的数组的范围。
+     * 
      */
     TextJustifier(GlyphJustificationInfo[] info, int start, int limit) {
         this.info = info;
@@ -83,6 +97,11 @@ class TextJustifier {
      * or shrink.
      *
      * Delta should be positive to expand the line, and negative to compress it.
+     * <p>
+     *  返回一个三角形数组,它的长度是原始信息数组的两倍,指示每个字形的每一边应该增长或缩小的量。
+     * 
+     *  Delta应该是正的以扩展线,而负的来压缩它。
+     * 
      */
     public float[] justify(float delta) {
         float[] deltas = new float[info.length * 2];
@@ -99,6 +118,7 @@ class TextJustifier {
             /*
              * special case 'fallback' iteration, set flag and recheck
              * highest priority
+             * <p>
              */
             boolean lastPass = p > MAX_PRIORITY;
             if (lastPass)

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,6 +63,25 @@ package org.xml.sax;
  * event, the application should assume that a locator is not
  * available.</p>
  *
+ * <p>
+ *  将SAX事件与文档位置相关联的接口。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保证</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p>如果SAX解析器向SAX应用程序提供位置信息,则通过实现此接口,然后使用内容处理程序的{@link org.xml.sax.ContentHandler#setDocumentLocator setDocumentLocator}
+ * 方法将实例传递给应用程序。
+ * 应用程序可以使用该对象来获取XML源文档中任何其他SAX事件的位置。</p>。
+ * 
+ *  <p>请注意,对象返回的结果仅在每个回调方法的范围内有效：如果在任何其他时间尝试使用定位器或在解析完成后,应用程序将收到不可预测的结果。</p>
+ * 
+ *  <p> SAX解析器不需要提供定位器,但是他们非常鼓励这样做。如果解析器提供了定位器,它必须在报告任何其他文档事件之前这样做。
+ * 如果在应用程序接收到{@link org.xml.sax.ContentHandler#startDocument startDocument}事件时没有设置定位器,应用程序应假定定位器不可用。
+ * </p>。
+ * 
+ * 
  * @since SAX 1.0
  * @author David Megginson
  * @see org.xml.sax.ContentHandler#setDocumentLocator
@@ -76,6 +96,12 @@ public interface Locator {
      * entity or of the external parsed entity in which the markup
      * triggering the event appears.</p>
      *
+     * <p>
+     * 返回当前文档事件的公共标识符。
+     * 
+     *  <p>返回值是文档实体或外部解析实体的公共标识符,其中触发事件的标记出现。</p>
+     * 
+     * 
      * @return A string containing the public identifier, or
      *         null if none is available.
      * @see #getSystemId
@@ -95,6 +121,15 @@ public interface Locator {
      * name must always be provided as a <em>file:...</em> URL, and other
      * kinds of relative URI are also resolved against their bases.</p>
      *
+     * <p>
+     *  返回当前文档事件的系统标识符。
+     * 
+     *  <p>返回值是触发事件的标记出现的文档实体或外部解析实体的系统标识符。</p>
+     * 
+     *  <p>如果系统标识符是URL,则解析器在将其传递给应用程序之前必须完全解析它。例如,文件名必须始终作为<em>文件提供：... </em> URL,以及其他类型的相对URI也会根据其基址解析。
+     * </p>。
+     * 
+     * 
      * @return A string containing the system identifier, or null
      *         if none is available.
      * @see #getPublicId
@@ -123,6 +158,17 @@ public interface Locator {
      * of the first character after the text associated with the document
      * event.  The first line is line 1.</p>
      *
+     * <p>
+     *  返回当前文档事件结束的行号。行由XML终端定义,在XML规范中定义。
+     * 
+     *  <p> <strong>警告：</strong>方法的返回值仅用于诊断的近似值;它不旨在提供足够的信息来编辑原始XML文档的字符内容。
+     * 在某些情况下,这些"行"数字匹配将作为列显示,在其他情况下,由于内部实体扩展,它们可能不匹配源文本。 </p>。
+     * 
+     *  <p>返回值是文档实体或外部解析实体中出现触发事件的标记的行号的近似值。</p>
+     * 
+     * <p>如果可能,SAX驱动程序应在与文档事件相关联的文本之后提供第一个字符的行位置。第一行是第1行。</p>
+     * 
+     * 
      * @return The line number, or -1 if none is available.
      * @see #getColumnNumber
      */
@@ -150,6 +196,13 @@ public interface Locator {
      * of the first character after the text associated with the document
      * event.  The first column in each line is column 1.</p>
      *
+     * <p>
+     *  返回当前文档事件结束的列号。这是自从最后一行结束以来基于1的Java <code> char </code>值。
+     * 
+     *  <p> <strong>警告：</strong>方法的返回值仅用于诊断的近似值;它不旨在提供足够的信息来编辑原始XML文档的字符内容。
+     * 例如,当行包含组合字符序列,宽字符,替代对或双向文本时,该值可能不对应于文本编辑器显示中的列。 </p>。
+     * 
+     * 
      * @return The column number, or -1 if none is available.
      * @see #getLineNumber
      */

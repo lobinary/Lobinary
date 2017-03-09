@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import sun.misc.Unsafe;
  * This class consists exclusively of static names internal to the
  * method handle implementation.
  * Usage:  {@code import static java.lang.invoke.MethodHandleStatics.*}
+ * <p>
+ *  此类仅由方法句柄实现内部的静态名称组成。用法：{@code import static java.lang.invoke.MethodHandleStatics。*}
+ * 
+ * 
  * @author John Rose, JSR 292 EG
  */
 /*non-public*/ class MethodHandleStatics {
@@ -74,6 +79,25 @@ import sun.misc.Unsafe;
 
     /** Tell if any of the debugging switches are turned on.
      *  If this is the case, it is reasonable to perform extra checks or save extra information.
+     * <p>
+     *  private MethodHandleStatics(){} //不实例化
+     * 
+     *  static final Unsafe UNSAFE = Unsafe.getUnsafe();
+     * 
+     *  static final boolean DEBUG_METHOD_HANDLE_NAMES; static final boolean DUMP_CLASS_FILES; static final 
+     * boolean TRACE_INTERPRETER; static final boolean TRACE_METHOD_LINKAGE; static final int COMPILE_THRESH
+     * OLD; static final int DONT_INLINE_THRESHOLD; static final int PROFILE_LEVEL;。
+     * 
+     * static {final Object [] values = new Object [7]; AccessController.doPrivileged(new PrivilegedAction <Void>(){public Void run(){values [0] = Boolean.getBoolean("java.lang.invoke.MethodHandle.DEBUG_NAMES"); values [1] = Boolean.getBoolean java.lang.invoke.MethodHandle.DUMP_CLASS_FILES"); values [2] = Boolean.getBoolean("java.lang.invoke.MethodHandle.TRACE_INTERPRETER"); values [3] = Boolean.getBoolean("java.lang.invoke。
+     *  MethodHandle.TRACE_METHOD_LINKAGE"); values [4] = Integer.getInteger("java.lang.invoke.MethodHandle.
+     * COMPILE_THRESHOLD",0); values [5] = Integer.getInteger("java.lang.invoke.MethodHandle.DONT_INLINE_THR
+     * ESHOLD" ,30); values [6] = Integer.getInteger("java.lang.invoke.MethodHandle.PROFILE_LEVEL",0); retur
+     * n null;}}); DEBUG_METHOD_HANDLE_NAMES =(Boolean)values [0]; DUMP_CLASS_FILES =(Boolean)values [1]; TR
+     * ACE_INTERPRETER =(布尔)values [2]; TRACE_METHOD_LINKAGE =(Boolean)values [3]; COMPILE_THRESHOLD =(Integ
+     * er)values [4]; DONT_INLINE_THRESHOLD =(整数)值[5]; PROFILE_LEVEL =(Integer)values [6]; }}。
+     * 
+     *  / **告诉是否有任何调试开关打开。如果是这种情况,则执行额外的检查或保存额外的信息是合理的。
+     * 
      */
     /*non-public*/ static boolean debugEnabled() {
         return (DEBUG_METHOD_HANDLE_NAMES |
@@ -82,6 +106,10 @@ import sun.misc.Unsafe;
                 TRACE_METHOD_LINKAGE);
     }
 
+    /* <p>
+    /*  return(DEBUG_METHOD_HANDLE_NAMES | DUMP_CLASS_FILES | TRACE_INTERPRETER | TRACE_METHOD_LINKAGE); }}。
+    /* 
+    /* 
     /*non-public*/ static String getNameString(MethodHandle target, MethodType type) {
         if (type == null)
             type = target.type();
@@ -93,14 +121,27 @@ import sun.misc.Unsafe;
         return name.getName() + type;
     }
 
+    /* <p>
+    /* if(type == null)type = target.type(); MemberName name = null; if(target！= null)name = target.internal
+    /* MemberName(); if(name == null)return"invoke"+ type; return name.getName()+ type; }}。
+    /* 
+    /* 
     /*non-public*/ static String getNameString(MethodHandle target, MethodHandle typeHolder) {
         return getNameString(target, typeHolder == null ? (MethodType) null : typeHolder.type());
     }
 
+    /* <p>
+    /*  return getNameString(target,typeHolder == null?(MethodType)null：typeHolder.type()); }}
+    /* 
+    /* 
     /*non-public*/ static String getNameString(MethodHandle target) {
         return getNameString(target, (MethodType) null);
     }
 
+    /* <p>
+    /*  return getNameString(target,(MethodType)null); }}
+    /* 
+    /* 
     /*non-public*/ static String addTypeString(Object obj, MethodHandle target) {
         String str = String.valueOf(obj);
         if (target == null)  return str;
@@ -110,30 +151,68 @@ import sun.misc.Unsafe;
     }
 
     // handy shared exception makers (they simplify the common case code)
+    /* <p>
+    /*  String str = String.valueOf(obj); if(target == null)return str; int paren = str.indexOf('('); if(par
+    /* en> = 0)str = str.substring(0,paren); return str + target.type()。
+    /* 
+    /*  //手工共享异常生成器(他们简化常见的代码)
+    /* 
+    /* 
     /*non-public*/ static InternalError newInternalError(String message) {
         return new InternalError(message);
     }
+    /* <p>
+    /*  return new InternalError(message); }}
+    /* 
+    /* 
     /*non-public*/ static InternalError newInternalError(String message, Throwable cause) {
         return new InternalError(message, cause);
     }
+    /* <p>
+    /*  return new InternalError(message,cause); }}
+    /* 
+    /* 
     /*non-public*/ static InternalError newInternalError(Throwable cause) {
         return new InternalError(cause);
     }
+    /* <p>
+    /*  return new InternalError(cause); }}
+    /* 
+    /* 
     /*non-public*/ static RuntimeException newIllegalStateException(String message) {
         return new IllegalStateException(message);
     }
+    /* <p>
+    /*  return new IllegalStateException(message); }}
+    /* 
+    /* 
     /*non-public*/ static RuntimeException newIllegalStateException(String message, Object obj) {
         return new IllegalStateException(message(message, obj));
     }
+    /* <p>
+    /*  return new IllegalStateException(message(message,obj)); }}
+    /* 
+    /* 
     /*non-public*/ static RuntimeException newIllegalArgumentException(String message) {
         return new IllegalArgumentException(message);
     }
+    /* <p>
+    /*  return new IllegalArgumentException(message); }}
+    /* 
+    /* 
     /*non-public*/ static RuntimeException newIllegalArgumentException(String message, Object obj) {
         return new IllegalArgumentException(message(message, obj));
     }
+    /* <p>
+    /*  return new IllegalArgumentException(message(message,obj)); }}
+    /* 
+    /* 
     /*non-public*/ static RuntimeException newIllegalArgumentException(String message, Object obj, Object obj2) {
         return new IllegalArgumentException(message(message, obj, obj2));
     }
+    /* <p>
+    /*  return new IllegalArgumentException(message(message,obj,obj2)); }}
+    /* 
     /** Propagate unchecked exceptions and errors, but wrap anything checked and throw that instead. */
     /*non-public*/ static Error uncaughtException(Throwable ex) {
         if (ex instanceof Error)  throw (Error) ex;

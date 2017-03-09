@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,14 @@ import java.security.PrivilegedAction;
  * a TwoStacksPlainDatagramSocketImpl is always created. This is to overcome the lack
  * of behavior defined for multicasting over a dual layer socket by the RFC.
  *
+ * <p>
+ *  这个类定义了一个创建DatagramSocketImpls的工厂。
+ * 它默认创建普通DatagramSocketImpls,但可以通过设置impl.prefix系统属性来创建其他DatagramSocketImpls。
+ * 
+ *  对于低于Windows Vista的Windows版本,始终会创建一个TwoStacksPlainDatagramSocketImpl。这个impl在这些平台上支持IPv6。
+ * 
+ *  在支持双层TCP / IP堆栈的Windows平台上,为DatagramSockets创建了一个DualStackPlainDatagramSocketImpl。
+ * 
  * @author Chris Hegarty
  */
 
@@ -114,6 +123,10 @@ class DefaultDatagramSocketImplFactory
     /**
      * Creates a new <code>DatagramSocketImpl</code> instance.
      *
+     * <p>
+     * 对于MulticastSockets,总是创建一个TwoStacksPlainDatagramSocketImpl。这是为了克服由RFC定义的通过双层套接字的多播的行为的缺乏。
+     * 
+     * 
      * @param   isMulticast true if this impl is to be used for a MutlicastSocket
      * @return  a new instance of <code>PlainDatagramSocketImpl</code>.
      */

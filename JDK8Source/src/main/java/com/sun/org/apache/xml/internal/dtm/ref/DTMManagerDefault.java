@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DTMManagerDefault.java,v 1.2.4.1 2005/09/15 08:15:02 suresh_emailid Exp $
+ * <p>
+ *  $ Id：DTMManagerDefault.java,v 1.2.4.1 2005/09/15 08:15:02 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref;
 
@@ -72,6 +85,16 @@ import org.xml.sax.helpers.DefaultHandler;
  * activity (eg, when getDTM() is invoked). The downside of that solution
  * would be a greater delay before the DTM's storage is actually released
  * for reuse.
+ * <p>
+ *  DTMManager的默认实现。
+ * 
+ * ％REVIEW％目前有一个重入问题,因为XRTreeFrag(在GC线程中运行)的终结器想要调用DTMManager.release(),并且可以在主转换线程访问管理器的同时进行。
+ * 我们当前的解决方案是使大部分管理器的方法<code>同步</code>。早期测试表明这样做并不会导致Xalan的性能损失。
+ * 然而,应该注意,有一个可能的替代解决方案：rewrite release(),因此它只是将一个释放的请求发布到线程安全队列,并且在主线程活动期间不频繁地显式地处理该队列(例如,当getDTM ()被调用
+ * )。
+ * 我们当前的解决方案是使大部分管理器的方法<code>同步</code>。早期测试表明这样做并不会导致Xalan的性能损失。该解决方案的缺点是在DTM的存储实际上被释放以供重用之前的更大延迟。
+ * 
+ * 
  * */
 public class DTMManagerDefault extends DTMManager
 {
@@ -93,6 +116,13 @@ public class DTMManagerDefault extends DTMManager
    *
    * This array grows as necessary; see addDTM(). Growth is uncommon... but
    * access needs to be blindingly fast since it's used in node addressing.
+   * <p>
+   *  从DTM标识符号映射到此管理器管理的DTM对象。一个DTM可以具有多个前缀号,如果正在使用扩展节点索引;在这种情况下,m_dtm_offsets []将用于控制哪个前缀映射到DTM的哪个部分。
+   * 
+   *  这个数组根据需要增长;参见addDTM()。
+   * 
+   *  这个数组根据需要增长;参见addDTM()。增长是不常见的,但是访问需要明显快速,因为它用于节点寻址。
+   * 
    */
   protected DTM m_dtms[] = new DTM[256];
 
@@ -108,17 +138,30 @@ public class DTMManagerDefault extends DTMManager
    * access needs to be blindingly fast since it's used in node addressing.
    * (And at the moment, that includes accessing it from DTMDefaultBase,
    * which is why this is not Protected or Private.)
+   * <p>
+   *  单个标识符,这将始终为0.在溢出寻址中,附加标识符被分配给超出单个节点句柄范围的接入节点,该表用于将句柄的节点字段映射到实际的节点标识符。
+   * 
+   * 这个数组根据需要增长;参见addDTM()。
+   * 
+   *  这个数组根据需要增长;参见addDTM()。增长是不常见的,但是访问需要明显快速,因为它用于节点寻址。 (目前,包括从DTMDefaultBase访问它,这就是为什么这不是受保护或私有)。
+   * 
    */
   int m_dtm_offsets[] = new int[256];
 
   /**
    * The cache for XMLReader objects to be used if the user did not
    * supply an XMLReader for a SAXSource or supplied a StreamSource.
+   * <p>
+   *  如果用户没有为SAXSource提供XMLReader或提供StreamSource,则使用XMLReader对象的缓存。
+   * 
    */
   protected XMLReaderManager m_readerManager = null;
 
   /**
    * The default implementation of ContentHandler, DTDHandler and ErrorHandler.
+   * <p>
+   *  ContentHandler,DTDHandler和ErrorHandler的默认实现。
+   * 
    */
   protected DefaultHandler m_defaultHandler = new DefaultHandler();
 
@@ -127,6 +170,10 @@ public class DTMManagerDefault extends DTMManager
    * "base DTM ID", with offset 0. The other version of addDTM should
    * be used if you want to add "extended" DTM IDs with nonzero offsets.
    *
+   * <p>
+   *  将DTM添加到DTM表。此方便调用将其作为"基本DTM ID"(偏移量0)添加。如果要添加具有非零偏移量的"扩展"DTM ID,应使用addDTM的其他版本。
+   * 
+   * 
    * @param dtm Should be a valid reference to a DTM.
    * @param id Integer DTM ID to be bound to this DTM
    */
@@ -136,6 +183,10 @@ public class DTMManagerDefault extends DTMManager
   /**
    * Add a DTM to the DTM table.
    *
+   * <p>
+   *  将DTM添加到DTM表。
+   * 
+   * 
    * @param dtm Should be a valid reference to a DTM.
    * @param id Integer DTM ID to be bound to this DTM.
    * @param offset Integer addressing offset. The internal DTM Node ID is
@@ -183,6 +234,9 @@ public class DTMManagerDefault extends DTMManager
 
   /**
    * Get the first free DTM ID available. %OPT% Linear search is inefficient!
+   * <p>
+   *  获取第一个免费DTM ID。 ％OPT％线性搜索效率低下！
+   * 
    */
   synchronized public int getFirstFreeDTMID()
   {
@@ -199,6 +253,9 @@ public class DTMManagerDefault extends DTMManager
 
   /**
    * The default table for exandedNameID lookups.
+   * <p>
+   *  exandedNameID查找的默认表。
+   * 
    */
   private ExpandedNameTable m_expandedNameTable =
     new ExpandedNameTable();
@@ -206,6 +263,9 @@ public class DTMManagerDefault extends DTMManager
   /**
    * Constructor DTMManagerDefault
    *
+   * <p>
+   *  构造函数DTMManagerDefault
+   * 
    */
   public DTMManagerDefault(){}
 
@@ -224,6 +284,14 @@ public class DTMManagerDefault extends DTMManager
    * (I think more parameters will need to be added for error handling, and entity
    * resolution, and more explicit control of the RTF situation).
    *
+   * <p>
+   *  获取DTM的实例,加载来自指定源的内容。如果唯一标志为真,将始终返回一个新实例。否则,由DTMManager返回一个新的实例或者它已经创建的实例,并且可能被别人使用。
+   * 
+   *  在这个实现中的一点魔法：如果源为null,unique是true,并且incremental和doIndexing都是false,我们返回一个SAX2RTFDTM的实例,见。
+   * 
+   *  (我认为需要添加更多的参数用于错误处理,实体解析,以及对RTF情况的更加明确的控制)。
+   * 
+   * 
    * @param source the specification of the source object.
    * @param unique true if the returned DTM must be unique, probably because it
    * is going to be mutated.
@@ -316,6 +384,11 @@ public class DTMManagerDefault extends DTMManager
             dtm = new XNI2DTM(this, source, documentID, whiteSpaceFilter,
                               xstringFactory, doIndexing);
           }
+          /* <p>
+          /* // EXPERIMENTAL 3/22/02 else if(JKESS_XNI_EXPERIMENT && m_incremental){dtm = new XNI2DTM(this,source,documentID,whiteSpaceFilter,xstringFactory,doIndexing); }
+          /* }。
+          /* 
+          /* 
           **************************************************************/
           // Create the basic SAX2DTM.
           else {
@@ -385,6 +458,27 @@ public class DTMManagerDefault extends DTMManager
                 dtm.setIncrementalSAXSource(coParser);
               }
             } else
+            /* <p>
+            /*  IncrementalSAXSource coParser = null;
+            /* 
+            /*  if(hasXercesParser){// IncrementalSAXSource_Xerces以避免线程化。
+            /*  try {coParser =(IncrementalSAXSource)Class.forName("com.sun.org.apache.xml.internal.dtm.ref.IncrementalSAXSource_Xerces")。
+            /*  if(hasXercesParser){// IncrementalSAXSource_Xerces以避免线程化。
+            /* newInstance(); } catch(Exception ex){ex.printStackTrace(); coParser = null; }}。
+            /* 
+            /*  if(coParser == null){//创建一个IncrementalSAXSource在辅助线程上运行。
+            /*  if(null == reader){coParser = new IncrementalSAXSource_Filter(); } else {IncrementalSAXSource_Filter filter = new IncrementalSAXSource_Filter(); filter.setXMLReader(reader); coParser = filter; }
+            /* }。
+            /*  if(coParser == null){//创建一个IncrementalSAXSource在辅助线程上运行。
+            /* 
+            /*  / ************************************************* ************* // EXPERIMENTAL 3/22/02 if(JKESS_X
+            /* NI_EXPERIMENT && m_incremental && dtm instanceof XNI2DTM && coParser instanceof IncrementalSAXSource_
+            /* Xerces){com.sun.org.apache.xerces.internal.xni。
+            /*  parser.XMLPullParserConfiguration xpc =((IncrementalSAXSource_Xerces)coParser).getXNIParserConfigura
+            /* tion(); if(xpc！= null){// Bypass SAX;监听XNI流((XNI2DTM)dtm).setIncrementalXNISource(xpc); } else {//监听SAX流(将失败,诊断...)dtm.setIncrementalSAXSource(coParser); }
+            /* } else。
+            /* 
+            /* 
             ***************************************************************/
 
             // Have the DTM set itself up as IncrementalSAXSource's listener.
@@ -487,6 +581,10 @@ public class DTMManagerDefault extends DTMManager
    * Note: calling this may be non-optimal, and there is no guarantee that
    * the node will be found in any particular DTM.
    *
+   * <p>
+   * 给定一个W3C DOM节点,尝试并返回一个DTM句柄。注意：调用可能不是最佳的,并且不能保证在任何特定的DTM中找到该节点。
+   * 
+   * 
    * @param node Non-null reference to a DOM node.
    *
    * @return a valid DTM handle.
@@ -591,6 +689,12 @@ public class DTMManagerDefault extends DTMManager
    * After use of the parser is completed, the releaseXMLReader(XMLReader)
    * must be called.
    *
+   * <p>
+   *  此方法返回SAX2解析器以与从此URI获取的InputSource一起使用。
+   * 如果可以使用任何符合SAX2的XML解析器,或者如果getInputSource()也将返回null,那么它可能返回null。解析器必须是可以自由使用的(即,当前没有用于另一个解析器)。
+   * 解析器使用完成后,必须调用releaseXMLReader(XMLReader)。
+   * 
+   * 
    * @param inputSource The value returned from the URIResolver.
    * @return  a SAX2 XMLReader to use to resolve the inputSource argument.
    *
@@ -628,6 +732,13 @@ public class DTMManagerDefault extends DTMManager
    * reader should still be passed to releaseXMLReader, but the reader manager
    * will only re-use XMLReaders that it created.
    *
+   * <p>
+   *  表示XMLReader对象不再用于转换。
+   * 
+   *  注意,getXMLReader方法可能返回应用程序代码在SAXSource对象上指定的XMLReader。
+   * 这样的读取器仍然应该传递给releaseXMLReader,但是读取器管理器只会重新使用它创建的XMLReaders。
+   * 
+   * 
    * @param reader The XMLReader to be released.
    */
   synchronized public void releaseXMLReader(XMLReader reader) {
@@ -639,6 +750,10 @@ public class DTMManagerDefault extends DTMManager
   /**
    * Return the DTM object containing a representation of this node.
    *
+   * <p>
+   *  返回包含此节点的表示形式的DTM对象。
+   * 
+   * 
    * @param nodeHandle DTM Handle indicating which node to retrieve
    *
    * @return a reference to the DTM object containing this node.
@@ -664,6 +779,10 @@ public class DTMManagerDefault extends DTMManager
    * the start of the document. If overflow addressing is in use, other
    * DTM IDs may also be assigned to this DTM.
    *
+   * <p>
+   *  给定一个DTM,在DTM表中找到寻址文档开始的ID号。如果使用溢出寻址,也可以为此DTM分配其他DTM ID。
+   * 
+   * 
    * @param dtm The DTM which (hopefully) contains this node.
    *
    * @return The DTM ID (as the high bits of a NodeHandle, not as our
@@ -700,6 +819,10 @@ public class DTMManagerDefault extends DTMManager
    * This is typically done as part of returning the DTM to the heap after
    * we're done with it.
    *
+   * <p>
+   *  将DTMManager的引用释放给DTM,使其不受管理。这通常是在我们完成之后将DTM返回到堆的一部分。
+   * 
+   * 
    * @param dtm the DTM to be released.
    *
    * @param shouldHardDelete If false, this call is a suggestion rather than an
@@ -759,6 +882,10 @@ public class DTMManagerDefault extends DTMManager
    * Method createDocumentFragment
    *
    *
+   * <p>
+   *  方法createDocumentFragment
+   * 
+   * 
    * NEEDSDOC (createDocumentFragment) @return
    */
   synchronized public DTM createDocumentFragment()
@@ -785,6 +912,10 @@ public class DTMManagerDefault extends DTMManager
    * NEEDSDOC Method createDTMIterator
    *
    *
+   * <p>
+   *  NEEDSDOC方法createDTMIterator
+   * 
+   * 
    * NEEDSDOC @param whatToShow
    * NEEDSDOC @param filter
    * NEEDSDOC @param entityReferenceExpansion
@@ -803,6 +934,10 @@ public class DTMManagerDefault extends DTMManager
    * NEEDSDOC Method createDTMIterator
    *
    *
+   * <p>
+   *  NEEDSDOC方法createDTMIterator
+   * 
+   * 
    * NEEDSDOC @param xpathString
    * NEEDSDOC @param presolver
    *
@@ -820,6 +955,10 @@ public class DTMManagerDefault extends DTMManager
    * NEEDSDOC Method createDTMIterator
    *
    *
+   * <p>
+   *  NEEDSDOC方法createDTMIterator
+   * 
+   * 
    * NEEDSDOC @param node
    *
    * NEEDSDOC (createDTMIterator) @return
@@ -835,6 +974,10 @@ public class DTMManagerDefault extends DTMManager
    * NEEDSDOC Method createDTMIterator
    *
    *
+   * <p>
+   *  NEEDSDOC方法createDTMIterator
+   * 
+   * 
    * NEEDSDOC @param xpathCompiler
    * NEEDSDOC @param pos
    *
@@ -850,6 +993,9 @@ public class DTMManagerDefault extends DTMManager
   /**
    * return the expanded name table.
    *
+   * <p>
+   *  返回扩展名表。
+   * 
    * NEEDSDOC @param dtm
    *
    * NEEDSDOC ($objectName$) @return

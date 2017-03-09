@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,12 +34,18 @@ import javax.swing.JPopupMenu;
 /**
  * Pluggable look and feel interface for JPopupMenu.
  *
+ * <p>
+ *  可插拔的外观和接口的JPopupMenu。
+ * 
+ * 
  * @author Georges Saab
  * @author David Karlton
  */
 
 public abstract class PopupMenuUI extends ComponentUI {
     /**
+    /* <p>
+    /* 
      * @since 1.3
      */
     public boolean isPopupTrigger(MouseEvent e) {
@@ -49,6 +56,9 @@ public abstract class PopupMenuUI extends ComponentUI {
      * Returns the <code>Popup</code> that will be responsible for
      * displaying the <code>JPopupMenu</code>.
      *
+     * <p>
+     *  返回将负责显示<code> JPopupMenu </code>的<code> Popup </code>。
+     * 
      * @param popup JPopupMenu requesting Popup
      * @param x     Screen x location Popup is to be shown at
      * @param y     Screen y location Popup is to be shown at.

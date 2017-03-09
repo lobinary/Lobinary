@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Step.java,v 1.6 2006/06/06 22:34:34 spericas Exp $
+ * <p>
+ *  $ Id：Step.java,v 1.6 2006/06/06 22:34:34 spericas Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -48,6 +61,8 @@ import com.sun.org.apache.xml.internal.dtm.Axis;
 import com.sun.org.apache.xml.internal.dtm.DTM;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -56,11 +71,17 @@ final class Step extends RelativeLocationPath {
 
     /**
      * This step's axis as defined in class Axis.
+     * <p>
+     *  此步骤的轴在Axis类中定义。
+     * 
      */
     private int _axis;
 
     /**
      * A vector of predicates (filters) defined on this step - may be null
+     * <p>
+     *  在此步骤中定义的谓词(过滤器)向量可以为null
+     * 
      */
     private Vector _predicates;
 
@@ -68,11 +89,17 @@ final class Step extends RelativeLocationPath {
      * Some simple predicates can be handled by this class (and not by the
      * Predicate class) and will be removed from the above vector as they are
      * handled. We use this boolean to remember if we did have any predicates.
+     * <p>
+     *  一些简单的谓词可以由这个类处理(而不是由谓词类),并且将在处理它们时从上述向量中删除。我们使用这个布尔值来记住我们是否有任何谓词。
+     * 
      */
     private boolean _hadPredicates = false;
 
     /**
      * Type of the node test.
+     * <p>
+     *  节点测试的类型。
+     * 
      */
     private int _nodeType;
 
@@ -84,6 +111,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Set the parser for this element and all child predicates
+     * <p>
+     *  设置此元素和所有子谓词的解析器
+     * 
      */
     public void setParser(Parser parser) {
         super.setParser(parser);
@@ -99,6 +129,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Define the axis (defined in Axis class) for this step
+     * <p>
+     *  定义此步骤的轴(在Axis类中定义)
+     * 
      */
     public int getAxis() {
         return _axis;
@@ -106,6 +139,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Get the axis (defined in Axis class) for this step
+     * <p>
+     *  获取此步骤的轴(在Axis类中定义)
+     * 
      */
     public void setAxis(int axis) {
         _axis = axis;
@@ -113,6 +149,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Returns the node-type for this step
+     * <p>
+     *  返回此步骤的节点类型
+     * 
      */
     public int getNodeType() {
         return _nodeType;
@@ -120,6 +159,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Returns the vector containing all predicates for this step.
+     * <p>
+     *  返回包含此步骤的所有谓词的向量。
+     * 
      */
     public Vector getPredicates() {
         return _predicates;
@@ -127,6 +169,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Returns the vector containing all predicates for this step.
+     * <p>
+     *  返回包含此步骤的所有谓词的向量。
+     * 
      */
     public void addPredicates(Vector predicates) {
         if (_predicates == null) {
@@ -141,6 +186,9 @@ final class Step extends RelativeLocationPath {
      * Returns 'true' if this step has a parent pattern.
      * This method will return 'false' if this step occurs on its own under
      * an element like <xsl:for-each> or <xsl:apply-templates>.
+     * <p>
+     * 如果此步骤具有父模式,则返回'true'。如果此步骤在<xsl：for-each>或<xsl：apply-templates>之类的元素下单独发生,此方法将返回'false'。
+     * 
      */
     private boolean hasParentPattern() {
         final SyntaxTreeNode parent = getParent();
@@ -152,6 +200,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Returns 'true' if this step has a parent location path.
+     * <p>
+     *  如果此步骤具有父位置路径,则返回'true'。
+     * 
      */
     private boolean hasParentLocationPath() {
         return getParent() instanceof ParentLocationPath;
@@ -159,6 +210,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Returns 'true' if this step has any predicates
+     * <p>
+     *  如果此步骤有任何谓词,则返回'true'
+     * 
      */
     private boolean hasPredicates() {
         return _predicates != null && _predicates.size() > 0;
@@ -166,6 +220,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Returns 'true' if this step is used within a predicate
+     * <p>
+     *  如果此步骤在谓词中使用,则返回'true'
+     * 
      */
     private boolean isPredicate() {
         SyntaxTreeNode parent = this;
@@ -178,6 +235,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * True if this step is the abbreviated step '.'
+     * <p>
+     *  如果此步骤是缩写的步骤"。
+     * 
      */
     public boolean isAbbreviatedDot() {
         return _nodeType == NodeTest.ANODE && _axis == Axis.SELF;
@@ -186,6 +246,9 @@ final class Step extends RelativeLocationPath {
 
     /**
      * True if this step is the abbreviated step '..'
+     * <p>
+     *  如果此步骤是缩写的步骤"..",则为True
+     * 
      */
     public boolean isAbbreviatedDDot() {
         return _nodeType == NodeTest.ANODE && _axis == Axis.PARENT;
@@ -195,6 +258,9 @@ final class Step extends RelativeLocationPath {
      * Type check this step. The abbreviated steps '.' and '@attr' are
      * assigned type node if they have no predicates. All other steps
      * have type node-set.
+     * <p>
+     *  类型检查此步骤。缩写的步骤"。和'@attr'如果没有谓词,则分配类型节点。所有其他步骤都具有类型node-set。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
 
@@ -232,6 +298,10 @@ final class Step extends RelativeLocationPath {
      * if they are not part of a LocationPath and have no filters.
      * In these cases a node index instead of an iterator is pushed
      * onto the stack.
+     * <p>
+     *  通过将适当的迭代器推送到堆栈来翻译一个步骤。缩写的步骤"。和'@attr'不创建新的迭代器,如果它们不是LocationPath的一部分,并且没有过滤器。
+     * 在这些情况下,节点索引而不是迭代器被推送到堆栈。
+     * 
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         translateStep(classGen, methodGen, hasPredicates() ? _predicates.size() - 1 : -1);
@@ -364,6 +434,28 @@ final class Step extends RelativeLocationPath {
      * by constructing an instance of <code>CurrentNodeListIterator</code>
      * which is initialized from another iterator (recursive call),
      * a filter and a closure (call to translate on the predicate) and "this".
+     * <p>
+     *  if((parent instanceof ParentLocationPath)&&(parent.getParent()instanceof ParentLocationPath)){if((_nodeType == NodeTest.ELEMENT)&&(！_hadPredicates)){_nodeType = NodeTest.ANODE; }
+     * }。
+     * 
+     * //"ELEMENT"或"*"或"@ *"或".."或"@attr"。
+     *  switch(_nodeType){case NodeTest.ATTRIBUTE：_axis = Axis.ATTRIBUTE; case NodeTest.ANODE：// DOM.getAxisIterator(int axis); int git = cpg.addInterfaceMethodref(DOM_INTF,"getAxisIterator","(I)"+ NODE_ITERATOR_SIG); il.append(methodGen.loadDOM()); il.append(new PUSH(cpg,_axis)); il.append(new INVOKEINTERFACE(git,2));打破;默认值：if(star> 1){final String namespace; if(_axis == Axis.ATTRIBUTE)namespace = name.substring(0,star-2); else namespace = name.substring(0,star-1);。
+     * //"ELEMENT"或"*"或"@ *"或".."或"@attr"。
+     * 
+     *  final int nsType = xsltc.registerNamespace(namespace); final int ns = cpg.addInterfaceMethodref(DOM_
+     * INTF,"getNamespaceAxisIterator","(II)"+ NODE_ITERATOR_SIG); il.append(methodGen.loadDOM()); il.append
+     * (new PUSH(cpg,_axis)); il.append(new PUSH(cpg,nsType)); il.append(new INVOKEINTERFACE(ns,3));打破; } ca
+     * se NodeTest.ELEMENT：// DOM.getTypedAxisIterator(int axes,int type); final int ty = cpg.addInterfaceMe
+     * thodref(DOM_INTF,"getTypedAxisIterator","(II)"+ NODE_ITERATOR_SIG); //获取在il.append之后的类型迭代器(methodGen.
+     * loadDOM()); il.append(new PUSH(cpg,_axis)); il.append(new PUSH(cpg,_nodeType)); il.append(new INVOKEI
+     * NTERFACE(ty,3));。
+     * 
+     *  打破; }}}
+     * 
+     *  / **翻译谓词序列。
+     * 每个谓词通过构造从另一个迭代器(递归调用),过滤器和闭包(在谓词上调用translate)和"this"初始化的<code> CurrentNodeListIterator </code>实例进行转换。
+     *  / **翻译谓词序列。
+     * 
      */
     public void translatePredicates(ClassGenerator classGen,
                                     MethodGenerator methodGen,
@@ -522,6 +614,28 @@ final class Step extends RelativeLocationPath {
 
     /**
      * Returns a string representation of this step.
+     * <p>
+     * else if(predicate.isNthDescendant()){il.append(methodGen.loadDOM()); // il.append(new ICONST(NodeTest.ELEMENT)); il.append(new PUSH(cpg,predicate.getPosType())); predicate.translate(classGen,methodGen); i.append(new ICONST(0)); idx = cpg.addInterfaceMethodref(DOM_INTF,"getNthDescendant","(IIZ)"+ NODE_ITERATOR_SIG); il.append(new INVOKEINTERFACE(idx,4)); }
+     * ; //处理'elem [n]'表达式else if(predicate.isNthPositionFilter()){idx = cpg.addMethodref(NTH_ITERATOR_CLASS,"<init>","("+ NODE_ITERATOR_SIG +。
+     * 
+     *  //如果一个未初始化的对象//在JVM规范的第4.9.4节中的堆栈上,则禁止反向分支,//第二版。
+     * 我们不知道这个代码是否可能包含//向后分支,所以我们不能创建新对象,直到我们在其构造函数中创建了可疑的参数。
+     *  //相反,我们首先计算//构造函数的参数值,将它们存储在临时变量中,创建//对象,并从临时值重新加载参数以避免出现问题。
+     *  translatePredicates(classGen,methodGen,predicateIndex); //递归调用LocalVariableGen iteratorTemp = method
+     * Gen.addLocalVariable("step_tmp1",Util.getJCRefType(NODE_ITERATOR_SIG),null,null); iteratorTemp.setSta
+     * rt(il.append(new ASTORE(iteratorTemp.getIndex())));。
+     *  //相反,我们首先计算//构造函数的参数值,将它们存储在临时变量中,创建//对象,并从临时值重新加载参数以避免出现问题。
+     * 
+     * predicate.translate(classGen,methodGen); LocalVariableGen predicateValueTemp = methodGen.addLocalVari
+     * able("step_tmp2",Util.getJCRefType("I"),null,null); predicateValueTemp.setStart(il.append(new ISTORE(
+     * predicateValueTemp.getIndex())));。
+     * 
+     *  il.append(new NEW(cpg.addClass(NTH_ITERATOR_CLASS))); i.append(DUP); iteratorTemp.setEnd(il.append(n
+     * ew ALOAD(iteratorTemp.getIndex()))); predicateValueTemp.setEnd(il.append(new ILOAD(predicateValueTemp
+     * .getIndex()))); il.append(new INVOKESPECIAL(idx)); } else {idx = cpg.addMethodref(CURRENT_NODE_LIST_ITERATOR,"<init>","("+ NODE_ITERATOR_SIG + CURRENT_NODE_LIST_FILTER_SIG + NODE_SIG + TRANSLET_SIG +")V");。
+     * 
+     *  //如果一个未初始化的对象//在JVM规范的第4.9.4节中的堆栈上,则禁止反向分支,//第二版。
+     * 我们不知道这个代码是否可能包含//向后分支,所以我们不能创建新对象,直到我们在其构造函数中创建了可疑的参数。
      */
     public String toString() {
         final StringBuffer buffer = new StringBuffer("step(\"");

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -116,6 +117,38 @@ package org.omg.PortableInterceptor;
    * <code>ORB.init</code> with the provided <code>orb_id</code>). Since 
    * registration occurs during ORB initialization, results of invocations 
    * on this ORB while it is in this state are undefined. 
+   * 
+   * <p>
+   *  促进拦截器注册和ORB初始化。
+   * <p>
+   *  拦截器意在作为一种手段,通过它ORB服务获得对ORB处理的访问,有效地成为ORB的一部分。
+   * 由于拦截器是ORB的一部分,当<code> ORB.init </code>返回一个ORB时,拦截器应该已经注册。
+   * 在通过调用<code> ORB.init </code>返回之后,拦截器不能在ORB上注册。
+   * <p>
+   *  通过注册实现<code> ORBInitializer </code>接口的关联<code> ORBInitializer </code>对象来注册拦截器。
+   * 当ORB正在初始化时,它将调用每个注册的<code> ORBInitializer </code>,并传递一个用于注册其Interceptor的<code> ORBInitInfo </code>对象。
+   *  通过注册实现<code> ORBInitializer </code>接口的关联<code> ORBInitializer </code>对象来注册拦截器。
+   * <p>
+   *  <b>在Java中注册ORB初始化程序</b>
+   * <p>
+   *  ORBInitializers通过Java ORB属性注册。
+   * <p>
+   * 属性名的格式为：<blockquote> <code> org.omg.PortableInterceptor.ORBInitializerClass。
+   * &lt; Service&gt; </code> </blockquote>其中<code>&lt; Service&gt; </code>是实现<blockquote> <code> org.omg.
+   * PortableInterceptor.ORBInitializer </code> </blockquote>为了避免名称冲突,应使用反向DNS名称约定。
+   * 属性名的格式为：<blockquote> <code> org.omg.PortableInterceptor.ORBInitializerClass。
+   * 例如,如果公司X有三个初始化器,它可以定义以下属性：。
+   * <ul>
+   *  <li> <code> org.omg.PortableInterceptor.ORBInitializerClass.com.x.Init1 </code> </li> <li> <code> or
+   * g.omg.PortableInterceptor.ORBInitializerClass.com.x.Init1 </li> </li> <li> <code> org.omg.PortableInt
+   * erceptor.ORBInitializerClass.com.x.Init3 </code> </li>。
+   * </ul>
+   *  在ORB.init中,应收集以<code> org.omg.PortableInterceptor.ORBInitializerClass </code>开头的这些ORB属性,应提取每个属性的<code>
+   * &lt; Service&gt; </code>部分,对象应以<code>&lt; Service&gt; </code>字符串作为其类名来实例化,并且应该在该对象上调用<code> pre_init 
+   * </code>和<code> post_init </code>方法。
+   * 如果有任何异常,ORB将忽略它们并继续。
+   * <p>
+   *  <b> <i>示例</i> </b>
    * 
    * @see ORBInitInfo
    */

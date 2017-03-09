@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会或其许可方(如适用)。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.resolver.tools;
@@ -47,6 +57,13 @@ import com.sun.org.apache.xml.internal.resolver.helpers.FileURL;
  * from a SAXParserFactory.</p>
  * </p>
  *
+ * <p>
+ *  执行基于目录的实体解析的SAX XMLFilter。
+ * 
+ *  <p>此类实现了使用CatalogResolver执行实体解析的SAX XMLFilter。实际的底层解析器是从SAXParserFactory获取的。</p>
+ * </p>
+ * 
+ * 
  * @see CatalogResolver
  * @see org.xml.sax.XMLFilter
  *
@@ -59,6 +76,10 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
   /**
    * Suppress explanatory message?
    *
+   * <p>
+   *  禁止解释消息?
+   * 
+   * 
    * @see #parse(InputSource)
    */
   public static boolean suppressExplanation = false;
@@ -109,6 +130,9 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
 
   /**
    * Provide accessto the underlying Catalog.
+   * <p>
+   *  提供底层目录的访问权限。
+   * 
    */
   public Catalog getCatalog() {
     return catalogResolver.getCatalog();
@@ -134,6 +158,21 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
    * message. The message is only every printed once and if
    * <code>suppressExplanation</code> is set to <code>false</code> before
    * parsing, it will never be printed.</p>
+   * <p>
+   *  SAX XMLReader API。
+   * 
+   *  <p>请注意,如果JAXP 1.1ea2解析器遇到显示为以斜杠开头的相对URI的系统标识符,则会与InternalError一起崩溃。例如,声明：</p>
+   * 
+   * <pre>
+   * &lt;!DOCTYPE book SYSTEM "/path/to/dtd/on/my/system/docbookx.dtd">
+   * </pre>
+   * 
+   *  <p>会导致这样的错误。为方便起见,此方法捕获该错误并打印说明。 (不幸的是,无法识别导致问题的特定系统标识符。)
+   * </p>
+   * 
+   * <p>打印说明信息后,潜在错误将被转发。
+   * 该消息只有每次打印一次,如果<code> suppressExplanation </code>在解析之前设置为<code> false </code>,则不会打印。</p>。
+   * 
    */
   public void parse(InputSource input)
     throws IOException, SAXException {
@@ -151,6 +190,8 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
 
   /** SAX XMLReader API.
    *
+   * <p>
+   * 
    * @see #parse(InputSource)
    */
   public void parse(String systemId)
@@ -171,6 +212,9 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
    * Implements the <code>resolveEntity</code> method
    * for the SAX interface, using an underlying CatalogResolver
    * to do the real work.
+   * <p>
+   *  实现SAX接口的<code> resolveEntity </code>方法,使用一个底层的CatalogResolver来做真正的工作。
+   * 
    */
   public InputSource resolveEntity (String publicId, String systemId) {
     allowXMLCatalogPI = false;
@@ -215,6 +259,9 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
    * <p>Captured here only to detect the end of the prolog so that
    * we can ignore subsequent oasis-xml-catalog PIs. Otherwise
    * the events are just passed through.</p>
+   * <p>
+   *  <p>捕获在这里只是为了检测prolog的结束,以便我们可以忽略后续的oasis-xml-catalog PI。否则事件就会通过。</p>
+   * 
    */
   public void notationDecl (String name, String publicId, String systemId)
     throws SAXException {
@@ -227,6 +274,9 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
    * <p>Captured here only to detect the end of the prolog so that
    * we can ignore subsequent oasis-xml-catalog PIs. Otherwise
    * the events are just passed through.</p>
+   * <p>
+   *  <p>捕获在这里只是为了检测prolog的结束,以便我们可以忽略后续的oasis-xml-catalog PI。否则事件就会通过。</p>
+   * 
    */
   public void unparsedEntityDecl (String name,
                                   String publicId,
@@ -242,6 +292,9 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
    * <p>Captured here only to detect the end of the prolog so that
    * we can ignore subsequent oasis-xml-catalog PIs. Otherwise
    * the events are just passed through.</p>
+   * <p>
+   *  <p>捕获在这里只是为了检测prolog的结束,以便我们可以忽略后续的oasis-xml-catalog PI。否则事件就会通过。</p>
+   * 
    */
   public void startElement (String uri, String localName, String qName,
                             Attributes atts)
@@ -253,6 +306,8 @@ public class ResolvingXMLFilter extends XMLFilterImpl {
   /** SAX ContentHandler API.
    *
    * <p>Detect and use the oasis-xml-catalog PI if it occurs.</p>
+   * <p>
+   *  <p>如果发生,检测并使用oasis-xml-catalog PI。</p>
    */
   public void processingInstruction(String target, String pidata)
     throws SAXException {

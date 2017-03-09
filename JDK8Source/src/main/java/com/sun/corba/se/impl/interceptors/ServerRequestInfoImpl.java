@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,9 @@ import java.util.*;
 /**
  * Implementation of the ServerRequestInfo interface as specified in
  * orbos/99-12-02 section 5.4.3.
+ * <p>
+ *  按照orbos / 99-12-02第5.4.3节中的规定实现ServerRequestInfo接口。
+ * 
  */
 public final class ServerRequestInfoImpl
     extends RequestInfoImpl
@@ -135,6 +139,9 @@ public final class ServerRequestInfoImpl
     /**
      * Reset the info object so that it can be reused for a retry,
      * for example.
+     * <p>
+     *  重置信息对象,以便它可以重新用于重试,例如。
+     * 
      */
     void reset() {
         super.reset();
@@ -175,6 +182,10 @@ public final class ServerRequestInfoImpl
     /*
      **********************************************************************
      * Access protection
+     * <p>
+     *  **************************************************** ******************访问保护
+     * 
+     * 
      **********************************************************************/
 
     // Method IDs for all methods in ServerRequestInfo.  This allows for a
@@ -212,43 +223,102 @@ public final class ServerRequestInfoImpl
         //                              { r_rsc, r_req, s_rep, s_exc, s_oth }
         // RequestInfo methods:
         /*request_id*/                  { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*operation*/                   { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*arguments*/                   { false, true , true , false, false },
+        /* <p>
+        /* 
         /*exceptions*/                  { false, true , true , true , true  },
+        /* <p>
+        /* 
         /*contexts*/                    { false, true , true , true , true  },
+        /* <p>
+        /* 
         /*operation_context*/           { false, true , true , false, false },
+        /* <p>
+        /* 
         /*result*/                      { false, false, true , false, false },
+        /* <p>
+        /* 
         /*response_expected*/           { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*sync_scope*/                  { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*reply_status*/                { false, false, true , true , true  },
+        /* <p>
+        /* 
         /*forward_reference*/           { false, false, false, false, true  },
+        /* <p>
+        /* 
         /*get_slot*/                    { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*get_request_service_context*/ { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*get_reply_service_context*/   { false, false, true , true , true  },
         //
         // ServerRequestInfo methods::
+        /* <p>
+        /*  // // ServerRequestInfo methods ::
+        /* 
+        /* 
         /*sending_exception*/           { false, false, false, true , false },
+        /* <p>
+        /* 
         /*object_id*/                   { false, true , true , true , true  },
+        /* <p>
+        /* 
         /*adapter_id*/                  { false, true , true , true , true  },
+        /* <p>
+        /* 
         /*target_most_derived_inte...*/ { false, true , false, false, false },
+        /* <p>
+        /* 
         /*get_server_policy*/           { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*set_slot*/                    { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*target_is_a*/                 { false, true , false, false, false },
+        /* <p>
+        /* 
         /*add_reply_service_context*/   { true , true , true , true , true  },
+        /* <p>
+        /* 
         /*orb_id*/                      { false, true , true , true , true  },
+        /* <p>
+        /* 
         /*server_id*/                   { false, true , true , true , true  },
+        /* <p>
+        /* 
         /*adapter_name*/                { false, true , true , true , true  }
     };
 
     /*
      **********************************************************************
      * Public interfaces
+     * <p>
+     *  };
+     * 
+     *  / * ************************************************ ********************公共接口
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Creates a new ServerRequestInfo implementation.
      * The constructor is package scope since no other package need create
      * an instance of this class.
+     * <p>
+     *  创建新的ServerRequestInfo实现。构造函数是包范围,因为没有其他包需要创建此类的实例。
+     * 
      */
     ServerRequestInfoImpl( ORB myORB ) {
         super( myORB );
@@ -260,6 +330,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Any containing the exception to be returned to the client.
+     * <p>
+     *  任何包含要返回给客户端的异常。
+     * 
      */
     public Any sending_exception () {
         checkAccess( MID_SENDING_EXCEPTION );
@@ -285,6 +358,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * The opaque object_id describing the target of the operation invocation.
+     * <p>
+     *  描述操作调用的目标的不透明object_id。
+     * 
      */
     public byte[] object_id () {
         checkAccess( MID_OBJECT_ID );
@@ -350,6 +426,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * The opaque identifier for the object adapter.
+     * <p>
+     *  对象适配器的不透明标识符。
+     * 
      */
     synchronized public byte[] adapter_id ()
     {
@@ -365,6 +444,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * The RepositoryID for the most derived interface of the servant.
+     * <p>
+     *  服务器的最派生接口的RepositoryID。
+     * 
      */
     public String target_most_derived_interface () {
         checkAccess( MID_TARGET_MOST_DERIVED_INTERFACE );
@@ -374,6 +456,9 @@ public final class ServerRequestInfoImpl
     /**
      * Returns the policy in effect for this operation for the given policy
      * type.
+     * <p>
+     *  返回给定策略类型的此操作的有效策略。
+     * 
      */
     public Policy get_server_policy (int type) {
         // access is currently valid for all states:
@@ -396,6 +481,9 @@ public final class ServerRequestInfoImpl
      * of the request.  If data already exists in that slot, it will be
      * overwritten.  If the ID does not define an allocated slot, InvalidSlot
      * is raised.
+     * <p>
+     *  允许拦截器在当前请求的作用域中设置一个插槽。如果该插槽中已存在数据,它将被覆盖。如果ID未定义分配的时隙,则会引发InvalidSlot。
+     * 
      */
     public void set_slot (int id, Any data) throws InvalidSlot {
         // access is currently valid for all states:
@@ -407,6 +495,9 @@ public final class ServerRequestInfoImpl
     /**
      * Returns true if the servant is the given RepositoryId, false if it is
      * not.
+     * <p>
+     *  如果servant是给定的RepositoryId,则返回true,否则返回false。
+     * 
      */
     public boolean target_is_a (String id) {
         checkAccess( MID_TARGET_IS_A );
@@ -425,6 +516,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Allows Interceptors to add service contexts to the request.
+     * <p>
+     *  允许拦截器向请求中添加服务上下文。
+     * 
      */
     public void add_reply_service_context ( ServiceContext service_context,
                                             boolean replace )
@@ -492,10 +586,19 @@ public final class ServerRequestInfoImpl
      * These are implemented here because they have differing
      * implementations depending on whether this is a client or a server
      * request info object.
+     * <p>
+     *  **************************************************** ******************公共RequestInfo接口
+     * 
+     * 这些是在这里实现的,因为它们具有不同的实现,取决于这是客户端还是服务器请求信息对象。
+     * 
+     * 
      **********************************************************************/
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public int request_id (){
         // access is currently valid for all states:
@@ -505,12 +608,18 @@ public final class ServerRequestInfoImpl
          * same as the GIOP request id.  The ORB may be servicing several
          * connections, each with possibly overlapping sets of request ids.
          * Therefore we create a request id specific to interceptors.
+         * <p>
+         *  注意：服务器拦截器中的请求标识与GIOP请求标识不同。 ORB可以服务几个连接,每个具有可能重叠的请求ID集合。因此,我们创建一个特定于拦截器的请求ID。
+         * 
          */
         return serverRequestId;
     }
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public String operation (){
         // access is currently valid for all states:
@@ -520,6 +629,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public Parameter[] arguments (){
         checkAccess( MID_ARGUMENTS );
@@ -548,6 +660,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public TypeCode[] exceptions (){
         checkAccess( MID_EXCEPTIONS );
@@ -559,6 +674,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public String[] contexts (){
         checkAccess( MID_CONTEXTS );
@@ -570,6 +688,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public String[] operation_context (){
         checkAccess( MID_OPERATION_CONTEXT );
@@ -582,6 +703,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public Any result (){
         checkAccess( MID_RESULT );
@@ -603,6 +727,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public boolean response_expected (){
         // access is currently valid for all states:
@@ -612,6 +739,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public Object forward_reference (){
         checkAccess( MID_FORWARD_REFERENCE );
@@ -627,6 +757,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public org.omg.IOP.ServiceContext get_request_service_context( int id ) {
         checkAccess( MID_GET_REQUEST_SERVICE_CONTEXT );
@@ -641,6 +774,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * See ServerRequestInfo for javadocs.
+     * <p>
+     *  请参阅javadocs的ServerRequestInfo。
+     * 
      */
     public org.omg.IOP.ServiceContext get_reply_service_context( int id ) {
         checkAccess( MID_GET_REPLY_SERVICE_CONTEXT );
@@ -656,6 +792,10 @@ public final class ServerRequestInfoImpl
     /*
      **********************************************************************
      * Private-scope classes and methods
+     * <p>
+     *  **************************************************** ******************私有范围类和方法
+     * 
+     * 
      **********************************************************************/
 
     // A command encapsulating a request to add a reply service context.
@@ -702,12 +842,19 @@ public final class ServerRequestInfoImpl
     /*
      **********************************************************************
      * Package and protected-scope methods
+     * <p>
+     *  **************************************************** ******************包和受保护范围方法
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Overridden from RequestInfoImpl.  This version calls the super
      * and then, if we are changing to ending points, executes all
      * enqueued AddReplyServiceContextCommands.
+     * <p>
+     *  从RequestInfoImpl重写。这个版本调用super,然后,如果我们改变到终点,执行所有入队的AddReplyServiceContextCommands。
+     * 
      */
     protected void setCurrentExecutionPoint( int executionPoint ) {
         super.setCurrentExecutionPoint( executionPoint );
@@ -745,6 +892,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Stores the various sources of information used for this info object.
+     * <p>
+     *  存储用于此信​​息对象的各种信息源。
+     * 
      */
     protected void setInfo( CorbaMessageMediator request, ObjectAdapter oa,
         byte[] objectId, ObjectKeyTemplate oktemp )
@@ -759,6 +909,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Stores the various sources of information used for this info object.
+     * <p>
+     *  存储用于此信​​息对象的各种信息源。
+     * 
      */
     protected void setDSIArguments( NVList arguments ) {
         this.dsiArguments = arguments;
@@ -766,6 +919,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Stores the various sources of information used for this info object.
+     * <p>
+     *  存储用于此信​​息对象的各种信息源。
+     * 
      */
     protected void setDSIException( Any exception ) {
         this.dsiException = exception;
@@ -776,6 +932,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Stores the various sources of information used for this info object.
+     * <p>
+     *  存储用于此信​​息对象的各种信息源。
+     * 
      */
     protected void setDSIResult( Any result ) {
         this.dsiResult = result;
@@ -784,6 +943,9 @@ public final class ServerRequestInfoImpl
     /**
      * Sets the exception to be returned by received_exception and
      * received_exception_id.
+     * <p>
+     * 设置由received_exception和received_exception_id返回的异常。
+     * 
      */
     protected void setException( Exception exception ) {
         super.setException( exception );
@@ -797,6 +959,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Stores the various sources of information used for this info object.
+     * <p>
+     *  存储用于此信​​息对象的各种信息源。
+     * 
      */
     protected void setInfo( java.lang.Object servant,
                             String targetMostDerivedInterface )
@@ -811,6 +976,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Set reply message
+     * <p>
+     *  设置回复消息
+     * 
      */
     void setReplyMessage( ReplyMessage replyMessage ) {
         this.replyMessage = replyMessage;
@@ -819,6 +987,9 @@ public final class ServerRequestInfoImpl
     /**
      * Overridden from RequestInfoImpl.  Calls the super class, then
      * sets the ending point call depending on the reply status.
+     * <p>
+     *  从RequestInfoImpl重写。调用超类,然后根据回复状态设置结束点调用。
+     * 
      */
     protected void setReplyStatus( short replyStatus ) {
         super.setReplyStatus( replyStatus );
@@ -840,6 +1011,9 @@ public final class ServerRequestInfoImpl
     /**
      * Release the servant object so the user has control over its lifetime.
      * Called after receive_request is finished executing.
+     * <p>
+     *  释放servant对象,以便用户可以控制其生命周期。 receive_request完成后调用。
+     * 
      */
     void releaseServant() {
         this.servant = null;
@@ -848,6 +1022,9 @@ public final class ServerRequestInfoImpl
     /**
      * Sets the forwardRequestRaisedInEnding flag to true, indicating that
      * a server ending point has raised location forward at some point.
+     * <p>
+     *  将forwardRequestRaisedInEnding标记设置为true,表示服务器终点已在某个点上提高了位置。
+     * 
      */
     void setForwardRequestRaisedInEnding() {
         this.forwardRequestRaisedInEnding = true;
@@ -856,6 +1033,9 @@ public final class ServerRequestInfoImpl
     /**
      * Returns true if ForwardRequest was raised by a server ending point
      * or false otherwise.
+     * <p>
+     *  如果ForwardRequest由服务器终点引发,则返回True,否则返回false。
+     * 
      */
     boolean isForwardRequestRaisedInEnding() {
         return this.forwardRequestRaisedInEnding;
@@ -863,6 +1043,9 @@ public final class ServerRequestInfoImpl
 
     /**
      * Returns true if this is a dynamic invocation, or false if not
+     * <p>
+     *  如果这是动态调用,则返回true,否则返回false
+     * 
      */
     boolean isDynamic() {
       return this.isDynamic;
@@ -870,6 +1053,8 @@ public final class ServerRequestInfoImpl
 
     /**
      * See description for RequestInfoImpl.checkAccess
+     * <p>
+     *  请参阅RequestInfoImpl.checkAccess的描述
      */
     protected void checkAccess( int methodID )
     {

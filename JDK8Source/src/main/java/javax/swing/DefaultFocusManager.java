@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ import java.util.Comparator;
  * <a href="../../java/awt/doc-files/FocusSpec.html">Focus Specification</a>
  * for more information.
  *
+ * <p>
+ *  这个类已经被1.4焦点API废弃了。
+ * 虽然客户端代码仍然可以使用此类,但强烈建议开发人员使用<code> java.awt.KeyboardFocusManager </code>和<code> java.awt.DefaultKeyboa
+ * rdFocusManager </code>。
+ *  这个类已经被1.4焦点API废弃了。
+ * <p>
+ * 
  * @author Arnaud Weber
  * @author David Mendenhall
  */

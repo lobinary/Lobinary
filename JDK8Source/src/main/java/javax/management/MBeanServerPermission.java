@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,27 @@ import java.util.StringTokenizer;
     <code>MBeanServerPermission("createMBeanServer")</code> implies
     <code>MBeanServerPermission("newMBeanServer")</code>.
  *
+ * <p>
+ *  权限的<em>名称</em>指定由权限请求或授予的操作。对于已授予的权限,可以通过<code> * </code>允许下面指定的所有MBeanServer操作。
+ * 否则,对于已授予或请求的权限,它必须是以下之一：。
+ * <dl>
+ *  <dt> createMBeanServer </dt> <dd>使用方法{@link MBeanServerFactory#createMBeanServer()}或{@link MBeanServerFactory#createMBeanServer(java.lang.String)}
+ * 创建一个新的MBeanServer对象。
+ *  <dt> findMBeanServer </dt> <dd>使用方法{@link MBeanServerFactory#findMBeanServer}查找具有给定名称的MBeanServer或此J
+ * VM中的所有MBeanServers。
+ *  <dt> newMBeanServer </dt> <dd>使用{@link MBeanServerFactory#newMBeanServer()}或{@link MBeanServerFactory#newMBeanServer(java.lang.String)}
+ * 方法创建一个新的MBeanServer对象,但不保留对它的引用。
+ *  。
+ *  <dt> releaseMBeanServer </dt> <dd>使用{@link MBeanServerFactory#releaseMBeanServer}方法删除MBeanServerFact
+ * ory对MBeanServer的引用。
+ *  。
+ * </dl>
+ *  权限的<em>名称</em>也可以表示一个或多个逗号分隔的操作的列表。允许在<em>名称</em>的开头和结尾,以及逗号前后使用空格。
+ * <p>
+ *  <code> MBeanServerPermission("createMBeanServer")</code>表示<code> MBeanServerPermission("newMBeanServ
+ * er")</code>。
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanServerPermission extends BasicPermission {
@@ -97,6 +119,11 @@ public class MBeanServerPermission extends BasicPermission {
      * This isn't very scalable.  If we have more than five or six
      * permissions, we should consider doing this differently,
      * e.g. with a Map.
+     * <p>
+     * 从权限掩码映射到规范名称。此数组根据需要填充。
+     * 
+     *  这不是很可扩展。如果我们有超过五或六个权限,我们应该考虑这样做,例如。与地图。
+     * 
      */
     private final static String[] canonicalNames = new String[1 << N_NAMES];
 
@@ -106,12 +133,21 @@ public class MBeanServerPermission extends BasicPermission {
      *
      * This mask includes implied bits.  So if it has CREATE_MASK then
      * it necessarily has NEW_MASK too.
+     * <p>
+     *  目标名称掩码。这不是私有的,以避免必须为集合类的访问生成访问器方法。
+     * 
+     *  此掩码包括隐含位。所以如果它有CREATE_MASK,那么它也必须有NEW_MASK。
+     * 
      */
     transient int mask;
 
     /** <p>Create a new MBeanServerPermission with the given name.</p>
         <p>This constructor is equivalent to
         <code>MBeanServerPermission(name,null)</code>.</p>
+    /* <p>
+    /*  <p>此构造函数等效于<code> MBeanServerPermission(name,null)</code>。</p>
+    /* 
+    /* 
         @param name the name of the granted permission.  It must
         respect the constraints spelt out in the description of the
         {@link MBeanServerPermission} class.
@@ -125,6 +161,8 @@ public class MBeanServerPermission extends BasicPermission {
     }
 
     /** <p>Create a new MBeanServerPermission with the given name.</p>
+    /* <p>
+    /* 
         @param name the name of the granted permission.  It must
         respect the constraints spelt out in the description of the
         {@link MBeanServerPermission} class.
@@ -147,6 +185,10 @@ public class MBeanServerPermission extends BasicPermission {
            Permission.getName() is final and since we can't access "this"
            until after the call to the superclass constructor, there
            isn't any very clean way to do this.  MBeanServerPermission
+        /* <p>
+        /*  Permission.getName()是final,因为我们不能访问"this",直到调用超类构造函数,没有任何非常干净的方法来做到这一点。 MBeanServerPermission
+        /* 
+        /* 
            objects aren't constructed very often, luckily.  */
         mask = parseMask(name);
 
@@ -206,10 +248,16 @@ public class MBeanServerPermission extends BasicPermission {
         return buf.toString().intern();
         /* intern() avoids duplication when the mask has only
            one bit, so is equivalent to the string constants
+        /* <p>
+        /*  一个位,所以相当于字符串常量
+        /* 
+        /* 
            we have for the names[] array.  */
     }
 
     /* Convert the string into a bitmask, including bits that
+    /* <p>
+    /* 
        are implied by the permissions in the string.  */
     private static int parseMask(String name) {
         /* Check that target name is a non-null non-empty string */
@@ -268,6 +316,18 @@ public class MBeanServerPermission extends BasicPermission {
      * <p>The <code>createMBeanServer</code> permission implies the
      * <code>newMBeanServer</code> permission.</p>
      *
+     * <p>
+     *  <p>检查此MBeanServerPermission对象是否"暗示"指定的权限。</p>
+     * 
+     *  <p>更具体地说,如果：</p>,则此方法返回true
+     * 
+     * <ul>
+     *  <li> <i> p </i>是MBeanServerPermission的实例,</li> <li> <i> p </i>的目标名称是此对象目标名称的子集</li>
+     * </ul>
+     * 
+     *  <p> <code> createMBeanServer </code>权限意味着<code> newMBeanServer </code>权限。</p>
+     * 
+     * 
      * @param p the permission to check against.
      * @return true if the specified permission is implied by this object,
      * false if not.
@@ -286,6 +346,10 @@ public class MBeanServerPermission extends BasicPermission {
      * <i>obj</i> is an MBeanServerPermission, and represents the same
      * list of allowable actions as this object.
      * <P>
+     * <p>
+     *  检查两个MBeanServerPermission对象是否相等。检查<i> obj </i>是否为MBeanServerPermission,并且表示与此对象相同的允许操作列表。
+     * <P>
+     * 
      * @param obj the object we are testing for equality with this object.
      * @return true if the objects are equal.
      */
@@ -309,6 +373,10 @@ public class MBeanServerPermission extends BasicPermission {
 /**
  * Class returned by {@link MBeanServerPermission#newPermissionCollection()}.
  *
+ * <p>
+ *  由{@link MBeanServerPermission#newPermissionCollection()}返回的类。
+ * 
+ * 
  * @serial include
  */
 
@@ -329,10 +397,22 @@ public class MBeanServerPermission extends BasicPermission {
  * MBeanPermission.newPermissionCollection, which would preclude an
  * implementation from defining a PermissionCollection there with an
  * optimized "implies" method.
+ * <p>
+ * 由于MBSP的每个集合都可以由单个MBSP表示,这就是我们的PermissionCollection。
+ * 我们需要定义一个PermissionCollection,因为从BasicPermission继承的一个不知道createMBeanServer意味着newMBeanServer。
+ * 
+ *  虽然定义了串行格式,但TCK不检查它。我们不需要独立的实现来复制它。
+ * 即使PermissionCollection是Serializable,这个类的实例几乎不会被序列化,不同的实现通常不交换序列化的权限集合。
+ * 
  */
 class MBeanServerPermissionCollection extends PermissionCollection {
     /** @serial Null if no permissions in collection, otherwise a
         single permission that is the union of all permissions that
+    /* <p>
+    /*  如果我们确实要求在这里遵守一个特定的形式,我们在逻辑上也必须要求它为MBeanPermission.newPermissionCollection,这将阻止一个实现定义一个PermissionColl
+    /* ection有优化的"隐含"方法。
+    /* 
+    /* 
         have been added.  */
     private MBeanServerPermission collectionPermission;
 

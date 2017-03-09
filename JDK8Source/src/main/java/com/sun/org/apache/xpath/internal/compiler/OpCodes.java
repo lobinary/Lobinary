@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: OpCodes.java,v 1.1.2.1 2005/08/01 01:30:33 jeffsuttor Exp $
+ * <p>
+ *  $ Id：OpCodes.java,v 1.1.2.1 2005/08/01 01:30:33 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.compiler;
 
@@ -39,6 +52,15 @@ package com.sun.org.apache.xpath.internal.compiler;
  *  ? means that it is optional.
  *
  * returns: indicates what the production should return.
+ * <p>
+ *  XPath的操作代码。
+ * 
+ *  操作代码说明的代码：[UPPER CASE]表示文字值,[小写]是值的描述,[length]总是表示操作的长度,包括操作代码和长度整数。
+ *  ){UPPER CASE}表示给定的生产,{description}是新生产的描述(例如,{布尔表达式}表示应该解析为布尔值的表达式。
+ * )*表示它出现零次或更多次,+表示发生一次或多次,?意味着它是可选的。
+ * 
+ *  返回：指示生产应该返回什么。
+ * 
  */
 public class OpCodes
 {
@@ -47,12 +69,18 @@ public class OpCodes
    * [ENDOP]
    * Some operators may like to have a terminator.
    * @xsl.usage advanced
+   * <p>
+   *  [ENDOP]一些操作员可能喜欢有一个终止符。 @ xsl.usage advanced
+   * 
    */
   public static final int ENDOP = -1;
 
   /**
    * [EMPTY]
    * Empty slot to indicate NULL.
+   * <p>
+   * [EMPTY]空槽表示NULL。
+   * 
    */
   public static final int EMPTY = -2;
 
@@ -61,6 +89,9 @@ public class OpCodes
    * Means ELEMWILDCARD ("*"), used instead
    * of string index in some places.
    * @xsl.usage advanced
+   * <p>
+   *  [ELEMWILDCARD]表示ELEMWILDCARD("*"),在某些地方使用而不是字符串索引。 @ xsl.usage advanced
+   * 
    */
   public static final int ELEMWILDCARD = -3;
 
@@ -77,6 +108,11 @@ public class OpCodes
    *  XRTree
    *  XObject
    * @xsl.usage advanced
+   * <p>
+   *  [OP_XPATH] [length] {expression}
+   * 
+   *  返回：XNodeSet XNumber XString XBoolean XRTree XObject @ xsl.usage advanced
+   * 
    */
   public static final int OP_XPATH = 1;
 
@@ -89,6 +125,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_OR] [length] {boolean expression} {boolean expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_OR = 2;
 
@@ -101,6 +142,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_AND] [length] {boolean expression} {boolean expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_AND = 3;
 
@@ -113,6 +159,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_NOTEQUALS] [length] {expression} {expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_NOTEQUALS = 4;
 
@@ -125,6 +176,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_EQUALS] [length] {expression} {expression}
+   * 
+   *  返回：XBoolean @ xsl.usage高级
+   * 
    */
   public static final int OP_EQUALS = 5;
 
@@ -137,6 +193,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_LTE](小于或等于)[length] {number expression} {number expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_LTE = 6;
 
@@ -149,6 +210,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_LT](小于)[length] {number expression} {number expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_LT = 7;
 
@@ -161,6 +227,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_GTE](大于或等于)[length] {number expression} {number expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_GTE = 8;
 
@@ -173,6 +244,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_GT](大于)[length] {number expression} {number expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_GT = 9;
 
@@ -185,6 +261,11 @@ public class OpCodes
    * returns:
    *  XNumber
    * @xsl.usage advanced
+   * <p>
+   *  [OP_PLUS] [length] {number expression} {number expression}
+   * 
+   *  返回：XNumber @ xsl.usage advanced
+   * 
    */
   public static final int OP_PLUS = 10;
 
@@ -197,6 +278,11 @@ public class OpCodes
    * returns:
    *  XNumber
    * @xsl.usage advanced
+   * <p>
+   *  [OP_MINUS] [length] {number expression} {number expression}
+   * 
+   *  返回：XNumber @ xsl.usage advanced
+   * 
    */
   public static final int OP_MINUS = 11;
 
@@ -209,6 +295,11 @@ public class OpCodes
    * returns:
    *  XNumber
    * @xsl.usage advanced
+   * <p>
+   *  [OP_MULT] [length] {number expression} {number expression}
+   * 
+   *  返回：XNumber @ xsl.usage advanced
+   * 
    */
   public static final int OP_MULT = 12;
 
@@ -221,6 +312,11 @@ public class OpCodes
    * returns:
    *  XNumber
    * @xsl.usage advanced
+   * <p>
+   *  [OP_DIV] [length] {number expression} {number expression}
+   * 
+   *  返回：XNumber @ xsl.usage advanced
+   * 
    */
   public static final int OP_DIV = 13;
 
@@ -233,6 +329,11 @@ public class OpCodes
    * returns:
    *  XNumber
    * @xsl.usage advanced
+   * <p>
+   * [OP_MOD] [length] {number expression} {number expression}
+   * 
+   *  返回：XNumber @ xsl.usage advanced
+   * 
    */
   public static final int OP_MOD = 14;
 
@@ -245,6 +346,11 @@ public class OpCodes
    * returns:
    *  XNumber
    * @xsl.usage advanced
+   * <p>
+   *  [OP_QUO] [length] {number expression} {number expression}
+   * 
+   *  返回：XNumber @ xsl.usage advanced
+   * 
    */
   public static final int OP_QUO = 15;
 
@@ -256,6 +362,11 @@ public class OpCodes
    * returns:
    *  XNumber
    * @xsl.usage advanced
+   * <p>
+   *  [OP_NEG] [length] {number expression}
+   * 
+   *  返回：XNumber @ xsl.usage advanced
+   * 
    */
   public static final int OP_NEG = 16;
 
@@ -267,6 +378,11 @@ public class OpCodes
    * returns:
    *  XString
    * @xsl.usage advanced
+   * <p>
+   *  [OP_STRING](强制操作)[length] {expression}
+   * 
+   *  返回：XString @ xsl.usage advanced
+   * 
    */
   public static final int OP_STRING = 17;
 
@@ -278,6 +394,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_BOOL](强制操作)[length] {expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_BOOL = 18;
 
@@ -289,6 +410,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [OP_NUMBER](投放作业)[length] {expression}
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int OP_NUMBER = 19;
 
@@ -300,6 +426,11 @@ public class OpCodes
    * returns:
    *  XNodeSet
    * @xsl.usage advanced
+   * <p>
+   *  [OP_UNION] [length] {PathExpr} +
+   * 
+   *  返回：XNodeSet @ xsl.usage advanced
+   * 
    */
   public static final int OP_UNION = 20;
 
@@ -311,10 +442,17 @@ public class OpCodes
    * returns:
    *  XString
    * @xsl.usage advanced
+   * <p>
+   *  [OP_LITERAL] [3] [index to token]
+   * 
+   *  返回：XString @ xsl.usage advanced
+   * 
    */
   public static final int OP_LITERAL = 21;
 
   /** The low opcode for nodesets, needed by getFirstPredicateOpPos and
+  /* <p>
+  /* 
    *  getNextStepPos.          */
   static final int FIRST_NODESET_OP = 22;
 
@@ -327,6 +465,11 @@ public class OpCodes
    * returns:
    *  XString
    * @xsl.usage advanced
+   * <p>
+   *  [OP_VARIABLE] [4] [index to namespace token,or EMPTY] [index to function name token]
+   * 
+   *  返回：XString @ xsl.usage advanced
+   * 
    */
   public static final int OP_VARIABLE = 22;
 
@@ -343,6 +486,11 @@ public class OpCodes
    *  XRTree
    *  XObject
    * @xsl.usage advanced
+   * <p>
+   *  [OP_GROUP] [length] {expression}
+   * 
+   *  返回：XNodeSet XNumber XString XBoolean XRTree XObject @ xsl.usage advanced
+   * 
    */
   public static final int OP_GROUP = 23;
 
@@ -361,6 +509,11 @@ public class OpCodes
    *  XRTree
    *  XObject
    * @xsl.usage advanced
+   * <p>
+   *  [OP_EXTFUNCTION](扩展函数。)[length] [索引到命名空间令牌] [索引到函数名称令牌] {OP_ARGUMENT}
+   * 
+   *  返回：XNodeSet XNumber XString XBoolean XRTree XObject @ xsl.usage advanced
+   * 
    */
   public static final int OP_EXTFUNCTION = 24;
 
@@ -379,6 +532,11 @@ public class OpCodes
    *  XRTree
    *  XObject
    * @xsl.usage advanced
+   * <p>
+   *  [OP_FUNCTION] [length] [FUNC_name] {OP_ARGUMENT} [ENDOP]
+   * 
+   *  返回：XNodeSet XNumber XString XBoolean XRTree XObject @ xsl.usage advanced
+   * 
    */
   public static final int OP_FUNCTION = 25;
 
@@ -398,6 +556,11 @@ public class OpCodes
    *  XRTree
    *  XObject
    * @xsl.usage advanced
+   * <p>
+   *  [OP_ARGUMENT](function argument。)[length] {expression}
+   * 
+   *  返回：XNodeSet XNumber XString XBoolean XRTree XObject @ xsl.usage advanced
+   * 
    */
   public static final int OP_ARGUMENT = 26;
 
@@ -409,6 +572,11 @@ public class OpCodes
    * returns:
    *  XString
    * @xsl.usage advanced
+   * <p>
+   *  [OP_NUMBERLIT](数字文字。)[3] [index to token]
+   * 
+   *  返回：XString @ xsl.usage advanced
+   * 
    */
   public static final int OP_NUMBERLIT = 27;
 
@@ -426,6 +594,13 @@ public class OpCodes
    * returns:
    *  XNodeSet
    * @xsl.usage advanced
+   * <p>
+   * [OP_LOCATIONPATH] [length] {FROM_stepType} | {function} {predicate} [ENDOP]
+   * 
+   *  (请注意,元素和属性名称空间和名称可以是通配符"*"。)
+   * 
+   *  返回：XNodeSet @ xsl.usage advanced
+   * 
    */
   public static final int OP_LOCATIONPATH = 28;
 
@@ -442,6 +617,11 @@ public class OpCodes
    * returns:
    *  XBoolean or XNumber
    * @xsl.usage advanced
+   * <p>
+   *  [OP_PREDICATE] [length] {expression} [ENDOP](安全)
+   * 
+   *  返回：XBoolean或XNumber @ xsl.usage advanced
+   * 
    */
   public static final int OP_PREDICATE = 29;
 
@@ -453,6 +633,11 @@ public class OpCodes
    * returns:
    *  XNodeSet
    * @xsl.usage advanced
+   * <p>
+   *  [OP_MATCHPATTERN] [length] {PathExpr} +
+   * 
+   *  返回：XNodeSet @ xsl.usage advanced
+   * 
    */
   public static final int OP_MATCHPATTERN = 30;
 
@@ -465,6 +650,10 @@ public class OpCodes
    * returns:
    *  XNodeSet
    * @xsl.usage advanced
+   * <p>
+   *  [OP_LOCATIONPATHPATTERN] [length] {FROM_stepType} | {function} {predicate} [ENDOP]返回：XNodeSet @ xsl.
+   * usage advanced。
+   * 
    */
   public static final int OP_LOCATIONPATHPATTERN = 31;
 
@@ -476,6 +665,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [NODETYPE_COMMENT]没有大小或参数。注意：不能重叠功能OP号！
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int NODETYPE_COMMENT = 1030;
 
@@ -487,6 +681,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [NODETYPE_TEXT]没有大小或参数。注意：不能重叠功能OP号！
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int NODETYPE_TEXT = 1031;
 
@@ -498,6 +697,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [NODETYPE_PI] [index to token]注意：不能重叠函数OP号！
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int NODETYPE_PI = 1032;
 
@@ -509,6 +713,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [NODETYPE_NODE]没有大小或参数。注意：不能重叠功能OP号！
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int NODETYPE_NODE = 1033;
 
@@ -520,6 +729,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [NODENAME] [index to ns token or EMPTY] [index to name token]
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int NODENAME = 34;
 
@@ -530,6 +744,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [NODETYPE_ROOT]没有大小或参数。
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int NODETYPE_ROOT = 35;
 
@@ -540,6 +759,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [NODETYPE_ANY]没有大小或参数。
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int NODETYPE_ANYELEMENT = 36;
 
@@ -550,6 +774,11 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [NODETYPE_ANY]没有大小或参数。
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int NODETYPE_FUNCTEST = 1034;
 
@@ -563,6 +792,12 @@ public class OpCodes
    * returns:
    *  XBoolean
    * @xsl.usage advanced
+   * <p>
+   *  [FROM_stepType] [length,including predicates] [length of the step,without the predicates] {node test}
+   *  {predicates}?。
+   * 
+   *  返回：XBoolean @ xsl.usage advanced
+   * 
    */
   public static final int AXES_START_TYPES = 37;
 
@@ -611,18 +846,26 @@ public class OpCodes
   /**
    * For match patterns.
    * @xsl.usage advanced
+   * <p>
+   * 对于匹配模式。 @ xsl.usage advanced
+   * 
    */
   public static final int MATCH_ATTRIBUTE = 51;
 
   /**
    * For match patterns.
    * @xsl.usage advanced
+   * <p>
+   *  对于匹配模式。 @ xsl.usage advanced
+   * 
    */
   public static final int MATCH_ANY_ANCESTOR = 52;
 
   /**
    * For match patterns.
    * @xsl.usage advanced
+   * <p>
+   *  对于匹配模式。 @ xsl.usage advanced
    */
   public static final int MATCH_IMMEDIATE_ANCESTOR = 53;
 

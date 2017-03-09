@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xerces.internal.xpointer;
 
@@ -37,6 +47,14 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLErrorHandler;
  *
  * @xerces.internal
  *
+ * <p>
+ * <p>
+ *  对element()方案特定的处理实现XPointerPart接口。
+ * </p>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @version $Id: ElementSchemePointer.java,v 1.4 2009/06/11 23:51:50 joehw Exp $
  *
  */
@@ -121,6 +139,10 @@ class ElementSchemePointer implements XPointerPart {
      * Parses the XPointer expression and tokenizes it into Strings
      * delimited by whitespace.
      *
+     * <p>
+     *  解析XPointer表达式并将其标记为由空格分隔的字符串。
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerProcessor#parseXPointer(java.lang.String)
      */
     public void parseXPointer(String xpointer) throws XNIException {
@@ -201,6 +223,10 @@ class ElementSchemePointer implements XPointerPart {
 
     /**
      * Returns the scheme name i.e element
+     * <p>
+     *  返回方案名称即元素
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#getSchemeName()
      */
     public String getSchemeName() {
@@ -210,6 +236,10 @@ class ElementSchemePointer implements XPointerPart {
     /**
      * Returns the scheme data
      *
+     * <p>
+     *  返回方案数据
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#getSchemeData()
      */
     public String getSchemeData() {
@@ -219,6 +249,10 @@ class ElementSchemePointer implements XPointerPart {
     /**
      * Sets the scheme name
      *
+     * <p>
+     *  设置方案名称
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#setSchemeName(java.lang.String)
      */
     public void setSchemeName(String schemeName) {
@@ -229,6 +263,10 @@ class ElementSchemePointer implements XPointerPart {
     /**
      * Sets the scheme data
      *
+     * <p>
+     *  设置方案数据
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#setSchemeData(java.lang.String)
      */
     public void setSchemeData(String schemeData) {
@@ -240,6 +278,10 @@ class ElementSchemePointer implements XPointerPart {
      * Pointer is present and it is successfully resolved and if a child
      * sequence is present, the child sequence is resolved relative to it.
      *
+     * <p>
+     *  负责解决element()方案XPointer。如果存在ShortHand指针并且它被成功解析,并且如果存在子序列,则子序列相对于它解析。
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerProcessor#resolveXPointer(com.sun.org.apache.xerces.internal.xni.QName, com.sun.org.apache.xerces.internal.xni.XMLAttributes, com.sun.org.apache.xerces.internal.xni.Augmentations, int event)
      */
     public boolean resolveXPointer(QName element, XMLAttributes attributes,
@@ -282,6 +324,10 @@ class ElementSchemePointer implements XPointerPart {
      * Matches the current element position in the document tree with the
      * element position specified in the element XPointer scheme.
      *
+     * <p>
+     *  使用元素XPointer方案中指定的元素位置匹配文档树中的当前元素位置。
+     * 
+     * 
      * @param event
      * @return boolean - true if the current element position in the document
      * tree matches theelement position specified in the element XPointer
@@ -366,6 +412,10 @@ class ElementSchemePointer implements XPointerPart {
      * its position and previous elements against the element XPointer expression.
      * If a match is found it return true else false.
      *
+     * <p>
+     * 通过相对于元素XPointer表达式检查其位置和先前元素来匹配正在访问的元素的当前位置。如果找到匹配,则返回true否则为false。
+     * 
+     * 
      * @return boolean
      */
     protected boolean checkMatch() {
@@ -414,6 +464,10 @@ class ElementSchemePointer implements XPointerPart {
      * Returns true if the node matches or is a child of a matching element()
      * scheme XPointer.
      *
+     * <p>
+     *  如果节点匹配或是匹配元素()方案XPointer的子节点,则返回true。
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerProcessor#isFragmentResolved()
      */
     public boolean isFragmentResolved() throws XNIException {
@@ -426,6 +480,10 @@ class ElementSchemePointer implements XPointerPart {
      * Returns true if the XPointer expression resolves to a non-element child
      * of the current resource fragment.
      *
+     * <p>
+     *  如果XPointer表达式解析为当前资源片段的非元素子元素,则返回true。
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#isChildFragmentResolved()
      *
      */
@@ -441,11 +499,17 @@ class ElementSchemePointer implements XPointerPart {
 
     /**
          * Reports an XPointer error
+         * <p>
+         *  报告XPointer错误
+         * 
          */
     protected void reportError(String key, Object[] arguments)
             throws XNIException {
         /*fErrorReporter.reportError(XPointerMessageFormatter.XPOINTER_DOMAIN,
          key, arguments, XMLErrorReporter.SEVERITY_ERROR);
+        /* <p>
+        /*  key,arguments,XMLErrorReporter.SEVERITY_ERROR);
+        /* 
          */
         throw new XNIException((fErrorReporter
                         .getMessageFormatter(XPointerMessageFormatter.XPOINTER_DOMAIN))
@@ -454,6 +518,9 @@ class ElementSchemePointer implements XPointerPart {
 
     /**
      * Initializes error handling objects
+     * <p>
+     *  初始化错误处理对象
+     * 
      */
     protected void initErrorReporter() {
         if (fErrorReporter == null) {
@@ -469,6 +536,9 @@ class ElementSchemePointer implements XPointerPart {
 
     /**
      * Initializes the element scheme processor
+     * <p>
+     *  初始化元素方案处理器
+     * 
      */
     protected void init() {
         fSchemeName = null;
@@ -495,6 +565,12 @@ class ElementSchemePointer implements XPointerPart {
      *
      * @xerces.internal
      *
+     * <p>
+     *  XPointer Framework令牌列表。
+     * 
+     *  @ xerces.internal
+     * 
+     * 
      * @author Neil Delima, IBM
      * @version $Id: ElementSchemePointer.java,v 1.4 2009/06/11 23:51:50 joehw Exp $
      *
@@ -505,6 +581,10 @@ class ElementSchemePointer implements XPointerPart {
          * XPointer element() scheme
          * [1]    ElementSchemeData    ::=    (NCName ChildSequence?) | ChildSequence
          * [2]    ChildSequence    ::=    ('/' [1-9] [0-9]*)+
+         * <p>
+         *  XPointer element()scheme [1] ElementSchemeData :: =(NCName ChildSequence?)| ChildSequence [2] ChildS
+         * equence :: =('/'[1-9] [0-9] *)+。
+         * 
          */
         private static final int XPTRTOKEN_ELEM_NCNAME = 0;
 
@@ -531,6 +611,10 @@ class ElementSchemePointer implements XPointerPart {
         /**
          * Constructor
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param symbolTable SymbolTable
          */
         private Tokens(SymbolTable symbolTable) {
@@ -544,6 +628,10 @@ class ElementSchemePointer implements XPointerPart {
 
         /*
          * Returns the token String
+         * <p>
+         *  返回标记String
+         * 
+         * 
          * @param token The index of the token
          * @return String The token string
          */
@@ -553,6 +641,10 @@ class ElementSchemePointer implements XPointerPart {
 
         /**
          * Returns the token String
+         * <p>
+         *  返回标记String
+         * 
+         * 
          * @param token The index of the token
          * @return String The token string
          */
@@ -563,6 +655,10 @@ class ElementSchemePointer implements XPointerPart {
         /**
          * Add the specified string as a token
          *
+         * <p>
+         *  将指定的字符串添加为令牌
+         * 
+         * 
          * @param token The token string
          */
         private void addToken(String tokenStr) {
@@ -577,6 +673,10 @@ class ElementSchemePointer implements XPointerPart {
         /**
          * Add the specified int token
          *
+         * <p>
+         *  添加指定的int令牌
+         * 
+         * 
          * @param token The int specifying the token
          */
         private void addToken(int token) {
@@ -593,6 +693,9 @@ class ElementSchemePointer implements XPointerPart {
 
         /**
          * Resets the current position to the head of the token list.
+         * <p>
+         *  将当前位置重置为令牌列表的头部。
+         * 
          */
         private void rewind() {
             fCurrentTokenIndex = 0;
@@ -601,6 +704,9 @@ class ElementSchemePointer implements XPointerPart {
         /**
          * Returns true if the {@link #getNextToken()} method
          * returns a valid token.
+         * <p>
+         *  如果{@link #getNextToken()}方法返回有效的令牌,则返回true。
+         * 
          */
         private boolean hasMore() {
             return fCurrentTokenIndex < fTokenCount;
@@ -612,6 +718,11 @@ class ElementSchemePointer implements XPointerPart {
          *
          * If there's no such next token, this method throws
          * <tt>new XNIException("InvalidXPointerExpression");</tt>.
+         * <p>
+         *  在当前位置获取令牌,然后将当前位置前进一个。
+         * 
+         *  如果没有这样的下一个标记,此方法会抛出<tt> new XNIException("InvalidXPointerExpression"); </tt>。
+         * 
          */
         private int nextToken() throws XNIException {
             if (fCurrentTokenIndex == fTokenCount)
@@ -625,6 +736,11 @@ class ElementSchemePointer implements XPointerPart {
          *
          * If there's no such next token, this method throws
          * <tt>new XNIException("InvalidXPointerExpression");</tt>.
+         * <p>
+         *  在当前位置获取令牌,而不推进当前位置。
+         * 
+         *  如果没有这样的下一个标记,此方法会抛出<tt> new XNIException("InvalidXPointerExpression"); </tt>。
+         * 
          */
         private int peekToken() throws XNIException {
             if (fCurrentTokenIndex == fTokenCount)
@@ -639,6 +755,12 @@ class ElementSchemePointer implements XPointerPart {
          * is not a string token, this method throws
          * If there's no such next token, this method throws
          * <tt>new XNIException("InvalidXPointerExpression");</tt>.
+         * <p>
+         *  在当前位置获取一个字符串的令牌。
+         * 
+         * 如果没有当前令牌或者当前令牌不是字符串令牌,则此方法抛出如果没有这样的下一个令牌,则此方法会抛出<tt> new XNIException("InvalidXPointerExpression"); </tt>
+         * 。
+         * 
          */
         private String nextTokenAsString() throws XNIException {
             String s = getTokenString(nextToken());
@@ -650,6 +772,9 @@ class ElementSchemePointer implements XPointerPart {
         /**
          * Returns the number of tokens.
          *
+         * <p>
+         *  返回标记的数量。
+         * 
          */
         private int getTokenCount() {
             return fTokenCount;
@@ -662,6 +787,12 @@ class ElementSchemePointer implements XPointerPart {
      *
      * @xerces.internal
      *
+     * <p>
+     *  XPointer表达式扫描器。扫描XPointer框架表达式。
+     * 
+     *  @ xerces.internal
+     * 
+     * 
      * @version $Id: ElementSchemePointer.java,v 1.4 2009/06/11 23:51:50 joehw Exp $
      */
     private class Scanner {
@@ -678,6 +809,13 @@ class ElementSchemePointer implements XPointerPart {
          *  P,  Q,  R,  S,  T,  U,  V,  W,  X,  Y,  Z,  [,  \,  ],  ^,  _,  // 5
          *  `,  a,  b,  c,  d,  e,  f,  g,  h,  i,  j,  k,  l,  m,  n,  o,  // 6
          *  p,  q,  r,  s,  t,  u,  v,  w,  x,  y,  z,  {,  |,  },  ~, DEL  // 7
+         * <p>
+         *  7位ASCII子集
+         * 
+         *  0 1 2 3 4 5 6 7 8 9 ABCDEF 0,0,0,0,0,0,0,0,0,HT,LF,0,0,CR,0,0,0 // 0,0,0, 0,0,0,0,0,0,0,0,1,0,0,0,0,
+         * 0,0, ,...,,,,,,,,,,,,,,,,,,,2, 3,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O, W,X,Y,Z,[,\,],^,_,// 5`,a,b,c,d,e,f,g
+         * ,h,i,j,k,l,m,n ,o,// 6 p,q,r,s,t,u,v,w,x,y,z,{,。
+         * 
          */
         private static final byte CHARTYPE_INVALID = 0, // invalid XML characters, control characters and 7F
                 CHARTYPE_OTHER = 1, // A valid XML character (possibly invalid NCNameChar) that does not fall in one of the other categories
@@ -699,6 +837,9 @@ class ElementSchemePointer implements XPointerPart {
 
         /**
          * Symbol literals
+         * <p>
+         *  符号字面值
+         * 
          */
 
         //
@@ -714,6 +855,10 @@ class ElementSchemePointer implements XPointerPart {
         /**
          * Constructs an XPath expression scanner.
          *
+         * <p>
+         *  构造XPath表达式扫描程序。
+         * 
+         * 
          * @param symbolTable SymbolTable
          */
         private Scanner(SymbolTable symbolTable) {
@@ -725,6 +870,9 @@ class ElementSchemePointer implements XPointerPart {
         /**
          * Scans the XPointer Expression
          *
+         * <p>
+         *  扫描XPointer表达式
+         * 
          */
         private boolean scanExpr(SymbolTable symbolTable, Tokens tokens,
                 String data, int currentOffset, int endOffset)
@@ -821,6 +969,10 @@ class ElementSchemePointer implements XPointerPart {
          * [5] NCName ::= (Letter | '_') (NCNameChar)*
          * [6] NCNameChar ::= Letter | Digit | '.' | '-' | '_' | CombiningChar | Extender
          *
+         * <p>
+         *  扫描NCName。来自XML中的命名空间[5] NCName :: =(Letter |'_')(NCNameChar)* [6]数字| ''。 | ' - '| '_'|组合Char |扩展器
+         * 
+         * 
          * @param data A String containing the XPointer expression
          * @param endOffset The int XPointer expression length
          * @param currentOffset An int representing the current position of the XPointer expression pointer
@@ -869,6 +1021,9 @@ class ElementSchemePointer implements XPointerPart {
          * to disallow certain tokens from being used in the scanned
          * XPath expression. This is a convenient way of allowing only
          * a subset of XPath.
+         * <p>
+         * 此方法将指定的令牌添加到令牌列表。默认情况下,此方法允许所有标记。但是,XPathExprScanner的子类可以覆盖此方法,以禁止在扫描的XPath表达式中使用某些标记。
+         * 这是一种只允许XPath子集的方便方法。
          */
         protected void addToken(Tokens tokens, int token) throws XNIException {
             tokens.addToken(token);

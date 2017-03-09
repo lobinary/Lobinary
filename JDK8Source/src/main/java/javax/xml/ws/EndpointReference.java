@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -79,6 +80,33 @@ import java.io.StringWriter;
  * is desired, web services developers should use a concrete
  * subclass such as {@link W3CEndpointReference}.
  *
+ * <p>
+ *  此类表示WS-Addressing EndpointReference,它是对Web服务端点的远程引用。
+ * 有关WS-Addressing EndpointReferences的更多信息,请参见<a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">
+ *  Web服务寻址1.0  - 内核</a> 。
+ *  此类表示WS-Addressing EndpointReference,它是对Web服务端点的远程引用。
+ * <p>
+ *  这个类是不可变的,因为典型的web服务开发者不需要关心它的内容。 Web服务开发人员应严格使用此类作为引用远程Web服务端点的机制。
+ * 查看客户端可以使用的{@link Service} API,使用<code> EndpointReference </code>。
+ * 请参阅{@link javax.xml.ws.Endpoint}和{@link javax.xml.ws.BindingProvider} API,了解如何为发布的端点创建<code> Endpoint
+ * References </code>。
+ * 查看客户端可以使用的{@link Service} API,使用<code> EndpointReference </code>。
+ * <p>
+ *  这个类的具体实现将表示一个特定版本的Addressing的<code> EndpointReference </code>。
+ * 例如,{@link W3CEndpointReference}用于W3C Web Services寻址1.0  - 核心推荐。
+ * 如果JAX-WS实现者需要支持不同版本的寻址,他们应为那个版本自己编写<code> EndpointReference </code>子类。
+ * 这将允许JAX-WS实现创建供应商特定的<code> EndpointReferences </code>,供应商可以使用它来标记不同版本的寻址。
+ * <p>
+ * 希望在SEI中的Java方法中传递或返回<code> EndpointReference </code>的Web服务开发人员应使用<code> EndpointReference </code>(例如<code>
+ *  W3CEndpointReference </code>)的具体实例。
+ * 这样,从SEI映射的模式将更加描述正在传递的端点引用的类型。
+ * <p>
+ *  JAX-WS实现者期望使用<code> {@ link EndpointReference#writeTo} </code>方法从<CODE> EndpointReferece </CODE>提取XM
+ * L信息集。
+ * <p>
+ *  JAXB将此类绑定到xs：anyType。如果需要更好的绑定,Web服务开发人员应该使用一个具体的子类,例如{@link W3CEndpointReference}。
+ * 
+ * 
  * @see W3CEndpointReference
  * @see Service
  * @since JAX-WS 2.1
@@ -95,6 +123,11 @@ public abstract class EndpointReference {
      * <code>eprInfoset</code>. This method delegates to the vendor specific
      * implementation of the {@link javax.xml.ws.spi.Provider#readEndpointReference} method.
      *
+     * <p>
+     *  工厂方法从包含在<code> eprInfoset </code>中的信息集读取EndpointReference。
+     * 此方法委托供应商特定的{@link javax.xml.ws.spi.Provider#readEndpointReference}方法实现。
+     * 
+     * 
      * @param eprInfoset The <code>EndpointReference</code> infoset to be unmarshalled
      *
      * @return the EndpointReference unmarshalled from <code>eprInfoset</code>
@@ -112,6 +145,10 @@ public abstract class EndpointReference {
     /**
      * write this <code>EndpointReference</code> to the specified infoset format
      *
+     * <p>
+     *  将此<code> EndpointReference </code>写入指定的信息集格式
+     * 
+     * 
      * @param result for writing infoset
      * @throws WebServiceException
      *   if there is an error writing the
@@ -150,6 +187,17 @@ public abstract class EndpointReference {
      * method can be used to manually configure handlers for this port.
      *
      *
+     * <p>
+     * <code> getPort </code>方法返回一个代理。
+     * 如果在<code> EndpointReference </code>实例中有任何引用参数,那么这些引用参数必须显示为SOAP头,表明它们是发送到端点的所有消息的引用参数。
+     * 参数<code> serviceEndpointInterface </code>指定返回的代理支持的服务端点接口。
+     *  <code> EndpointReference </code>实例指定将由返回的代理调用的端点。
+     * 在该方法的实现中,JAX-WS运行时系统负责选择协议绑定(和端口)并相应地从来自此<code> EndpointReference </code>的WSDL元数据或从<code> serviceEndp
+     * ointInterface </code>。
+     *  <code> EndpointReference </code>实例指定将由返回的代理调用的端点。
+     * 为了成功返回代理的方法,WSDL元数据必须是可用的,并且<code> EndpointReference </code>实例必须包含一个理解为<code> serviceName </code>元数据的
+     * 实现。
+     * 
      * @param serviceEndpointInterface Service endpoint interface
      * @param features  An array of <code>WebServiceFeatures</code> to configure on the
      *                proxy.  Supported features not in the <code>features
@@ -183,6 +231,12 @@ public abstract class EndpointReference {
 
     /**
      * Displays EPR infoset for debugging convenience.
+     * <p>
+     *  <code> EndpointReference </code>实例指定将由返回的代理调用的端点。
+     * <p>
+     *  因为此端口不是从<code> Service </code>对象创建的,处理程序不会自动配置,并且<code> HandlerResolver </code>和<code> Executor </code>
+     * 这个端口。
+     *  <code> BindingProvider()。getBinding()。setHandlerChain()</code>方法可用于手动配置此端口的处理程序。
      */
     public String toString() {
         StringWriter w = new StringWriter();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -41,6 +51,12 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLConfigurationException;
  * (in the form of an <code>XMLComponentManager</code>) that allows
  * parser configuration settings to be "chained" together.
  *
+ * <p>
+ *  此类实现了用于管理解析器配置功能和属性的基本操作。这个实用程序类可以用作解析器配置的基类,或单独地将多个解析器设置封装为组件管理器。
+ * <p>
+ *  此类可以使用"父"设置对象(以<code> XMLComponentManager </code>的形式)构造,允许将解析器配置设置"链接"在一起。
+ * 
+ * 
  * @author Andy Clark, IBM
  *
  * @version $Id: ParserConfigurationSettings.java,v 1.6 2010-11-01 04:40:14 joehw Exp $
@@ -84,6 +100,9 @@ public class ParserConfigurationSettings
     /**
      * Constructs a parser configuration settings object with a
      * parent settings object.
+     * <p>
+     *  使用父设置对象构造解析器配置设置对象。
+     * 
      */
     public ParserConfigurationSettings(XMLComponentManager parent) {
 
@@ -108,6 +127,10 @@ public class ParserConfigurationSettings
      * Allows a parser to add parser specific features to be recognized
      * and managed by the parser configuration.
      *
+     * <p>
+     *  允许解析器添加解析器特定的功能,以便由解析器配置识别和管理。
+     * 
+     * 
      * @param featureIds An array of the additional feature identifiers
      *                   to be recognized.
      */
@@ -131,6 +154,12 @@ public class ParserConfigurationSettings
      * might not recognize the feature, and if it does recognize
      * it, it might not be able to fulfill the request.
      *
+     * <p>
+     *  设置要素的状态。
+     * 
+     * 设置SAX2解析器中任何功能的状态。解析器可能无法识别该功能,如果它识别它,它可能无法满足该请求。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      * @param state The requested state of the feature (true or false).
      *
@@ -153,6 +182,10 @@ public class ParserConfigurationSettings
      * Allows a parser to add parser specific properties to be recognized
      * and managed by the parser configuration.
      *
+     * <p>
+     *  允许解析器添加解析器特定属性,以便由解析器配置识别和管理。
+     * 
+     * 
      * @param propertyIds An array of the additional property identifiers
      *                    to be recognized.
      */
@@ -163,6 +196,10 @@ public class ParserConfigurationSettings
     /**
      * setProperty
      *
+     * <p>
+     *  setProperty
+     * 
+     * 
      * @param propertyId
      * @param value
      * @exception com.sun.org.apache.xerces.internal.xni.parser.XMLConfigurationException If the
@@ -187,6 +224,10 @@ public class ParserConfigurationSettings
     /**
      * Returns the state of a feature.
      *
+     * <p>
+     *  返回要素的状态。
+     * 
+     * 
      * @param featureId The feature identifier.
                  * @return true if the feature is supported
      *
@@ -230,6 +271,10 @@ public class ParserConfigurationSettings
     /**
      * Returns the value of a property.
      *
+     * <p>
+     *  返回属性的值。
+     * 
+     * 
      * @param propertyId The property identifier.
                  * @return the value of the property
      *
@@ -280,6 +325,10 @@ public class ParserConfigurationSettings
      * Check a feature. If feature is known and supported, this method simply
      * returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查功能。如果特性是已知和支持的,这个方法简单地返回。否则,抛出适当的异常。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      *
      * @exception com.sun.org.apache.xerces.internal.xni.parser.XMLConfigurationException If the
@@ -306,6 +355,9 @@ public class ParserConfigurationSettings
      * Check a property. If the property is known and supported, this method
      * simply returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查属性。如果属性是已知的和支持的,这个方法简单地返回。否则,抛出适当的异常。
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      * @exception com.sun.org.apache.xerces.internal.xni.parser.XMLConfigurationException If the

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,13 @@ import java.beans.ConstructorProperties;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  实现一个简单的两行斜面边界的类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  */
 public class BevelBorder extends AbstractBorder
@@ -61,6 +69,10 @@ public class BevelBorder extends AbstractBorder
      * Creates a bevel border with the specified type and whose
      * colors will be derived from the background color of the
      * component passed into the paintBorder method.
+     * <p>
+     *  创建具有指定类型的斜角边框,其颜色将从传递到paintBorder方法的组件的背景颜色派生。
+     * 
+     * 
      * @param bevelType the type of bevel for the border
      */
     public BevelBorder(int bevelType) {
@@ -70,6 +82,10 @@ public class BevelBorder extends AbstractBorder
     /**
      * Creates a bevel border with the specified type, highlight and
      * shadow colors.
+     * <p>
+     *  创建具有指定类型,高亮和阴影颜色的斜角边框。
+     * 
+     * 
      * @param bevelType the type of bevel for the border
      * @param highlight the color to use for the bevel highlight
      * @param shadow the color to use for the bevel shadow
@@ -82,6 +98,10 @@ public class BevelBorder extends AbstractBorder
      * Creates a bevel border with the specified type, highlight and
      * shadow colors.
      *
+     * <p>
+     *  创建具有指定类型,高亮和阴影颜色的斜角边框。
+     * 
+     * 
      * @param bevelType the type of bevel for the border
      * @param highlightOuterColor the color to use for the bevel outer highlight
      * @param highlightInnerColor the color to use for the bevel inner highlight
@@ -102,6 +122,10 @@ public class BevelBorder extends AbstractBorder
     /**
      * Paints the border for the specified component with the specified
      * position and size.
+     * <p>
+     *  以指定的位置和大小绘制指定组件的边框。
+     * 
+     * 
      * @param c the component for which this border is being painted
      * @param g the paint graphics
      * @param x the x position of the painted border
@@ -120,6 +144,10 @@ public class BevelBorder extends AbstractBorder
 
     /**
      * Reinitialize the insets parameter with this Border's current Insets.
+     * <p>
+     *  使用此Border的当前Insets重新初始化insets参数。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
      */
@@ -133,6 +161,10 @@ public class BevelBorder extends AbstractBorder
      * when rendered on the specified component.  If no highlight
      * color was specified at instantiation, the highlight color
      * is derived from the specified component's background color.
+     * <p>
+     *  返回在指定组件上呈现时斜角边框的外部高亮颜色。如果在实例化时未指定高亮颜色,则高亮颜色来自指定组件的背景颜色。
+     * 
+     * 
      * @param c the component for which the highlight may be derived
      * @since 1.3
      */
@@ -147,6 +179,10 @@ public class BevelBorder extends AbstractBorder
      * when rendered on the specified component.  If no highlight
      * color was specified at instantiation, the highlight color
      * is derived from the specified component's background color.
+     * <p>
+     * 返回在指定组件上呈现时斜角边框的内部高亮颜色。如果在实例化时未指定高亮颜色,则高亮颜色来自指定组件的背景颜色。
+     * 
+     * 
      * @param c the component for which the highlight may be derived
      * @since 1.3
      */
@@ -161,6 +197,10 @@ public class BevelBorder extends AbstractBorder
      * when rendered on the specified component.  If no shadow
      * color was specified at instantiation, the shadow color
      * is derived from the specified component's background color.
+     * <p>
+     *  返回在指定组件上呈现时斜角边框的内部阴影颜色。如果在实例化时未指定阴影颜色,则阴影颜色来自指定的组件的背景颜色。
+     * 
+     * 
      * @param c the component for which the shadow may be derived
      * @since 1.3
      */
@@ -175,6 +215,10 @@ public class BevelBorder extends AbstractBorder
      * when rendered on the specified component.  If no shadow
      * color was specified at instantiation, the shadow color
      * is derived from the specified component's background color.
+     * <p>
+     *  返回在指定组件上呈现时斜角边框的外部阴影颜色。如果在实例化时未指定阴影颜色,则阴影颜色来自指定的组件的背景颜色。
+     * 
+     * 
      * @param c the component for which the shadow may be derived
      * @since 1.3
      */
@@ -188,6 +232,10 @@ public class BevelBorder extends AbstractBorder
      * Returns the outer highlight color of the bevel border.
      * Will return null if no highlight color was specified
      * at instantiation.
+     * <p>
+     *  返回斜角边框的外部高亮颜色。如果在实例化时未指定高亮颜色,则返回null。
+     * 
+     * 
      * @since 1.3
      */
     public Color getHighlightOuterColor()   {
@@ -198,6 +246,10 @@ public class BevelBorder extends AbstractBorder
      * Returns the inner highlight color of the bevel border.
      * Will return null if no highlight color was specified
      * at instantiation.
+     * <p>
+     *  返回斜角边框的内部高亮颜色。如果在实例化时未指定高亮颜色,则返回null。
+     * 
+     * 
      * @since 1.3
      */
     public Color getHighlightInnerColor()   {
@@ -208,6 +260,10 @@ public class BevelBorder extends AbstractBorder
      * Returns the inner shadow color of the bevel border.
      * Will return null if no shadow color was specified
      * at instantiation.
+     * <p>
+     *  返回斜角边框的内部阴影颜色。如果在实例化时未指定阴影颜色,则返回null。
+     * 
+     * 
      * @since 1.3
      */
     public Color getShadowInnerColor()      {
@@ -218,6 +274,10 @@ public class BevelBorder extends AbstractBorder
      * Returns the outer shadow color of the bevel border.
      * Will return null if no shadow color was specified
      * at instantiation.
+     * <p>
+     *  返回斜角边框的外阴影颜色。如果在实例化时未指定阴影颜色,则返回null。
+     * 
+     * 
      * @since 1.3
      */
     public Color getShadowOuterColor()      {
@@ -226,6 +286,9 @@ public class BevelBorder extends AbstractBorder
 
     /**
      * Returns the type of the bevel border.
+     * <p>
+     *  返回斜角边框的类型。
+     * 
      */
     public int getBevelType()       {
         return bevelType;
@@ -233,6 +296,8 @@ public class BevelBorder extends AbstractBorder
 
     /**
      * Returns whether or not the border is opaque.
+     * <p>
+     *  返回边框是否不透明。
      */
     public boolean isBorderOpaque() { return true; }
 

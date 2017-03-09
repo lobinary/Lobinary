@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -83,6 +84,15 @@ public abstract class ClientNotifForwarder {
        existing threads is < corePoolSize.  This can never happen when
        corePoolSize=0, so new threads are never created.  Surprising,
        but there you are.
+    /* <p>
+    /*  Runnable。它最多使用一个线程 - 只要没有挂起的Runnable线程可以退出。只要有一个新的待处理的Runnable,就创建另一个线程。
+    /* 该执行器适用于每个Runnable通常调度另一个Runnable的情况。从第一个返回时,第二个立即执行。
+    /* 所以这只是一个复杂的写一个while循环的方法,但是有一个优点,你可以用另一个Executor替换它,例如你用来执行一堆其他不相关的工作。
+    /* 
+    /*  您可能希望具有corePoolSize = 0和maximumPoolSize = 1的java.util.concurrent.ThreadPoolExecutor具有相同的行为,但它不会。
+    /* 当提交一个新任务并且现有线程的数量为<corePoolSize时,ThreadPoolExecutor仅创建一个新线程。
+    /* 当corePoolSize = 0时永远不会发生这种情况,因此永远不会创建新线程。令人惊讶,但你有。
+    /* 
     */
     private static class LinearExecutor implements Executor {
         public synchronized void execute(Runnable command) {
@@ -126,6 +136,10 @@ public abstract class ClientNotifForwarder {
         /* You can supply an Executor in which the remote call to
            fetchNotifications will be made.  The Executor's execute
            method reschedules another task, so you must not use
+        /* <p>
+        /*  fetch通知。执行器的execute方法重新调度另一个任务,因此您不能使用
+        /* 
+        /* 
            an Executor that executes tasks in the caller's thread.  */
         Executor ex = (Executor)
             env.get("jmx.remote.x.fetch.notifications.executor");
@@ -141,6 +155,9 @@ public abstract class ClientNotifForwarder {
 
     /**
      * Called to to fetch notifications from a server.
+     * <p>
+     *  调用从服务器获取通知。
+     * 
      */
     abstract protected NotificationResult fetchNotifs(long clientSequenceNumber,
                                                       int maxNotifications,
@@ -156,6 +173,9 @@ public abstract class ClientNotifForwarder {
 
     /**
      * Used to send out a notification about lost notifs
+     * <p>
+     *  用于发送有关丢失的notifs的通​​知
+     * 
      */
     abstract protected void lostNotifs(String message, long number);
 
@@ -283,6 +303,17 @@ public abstract class ClientNotifForwarder {
      *
      * It is caller's responsiblity to not re-call this method before calling
      * <code>postReconnection</code>.
+     * <p>
+     * 当连接器正在重新连接时调用。
+     * 与<code> postReconnection </code>类似,此方法仅由客户机连接器调用：<code> RMIConnector </code>和<code> ClientIntermediar
+     * y </code>。
+     * 当连接器正在重新连接时调用。
+     * 调用此方法将标记areReconnection设置为<code> true </code>,并且用于获取notifis的线程将被停止,只有在调用<code> postReconnection </code>
+     * 方法后才能创建一个新线程。
+     * 当连接器正在重新连接时调用。
+     * 
+     *  这是调用者在调用<code> postReconnection </code>之前不重新调用此方法的职责。
+     * 
      */
     public synchronized ClientListenerInfo[] preReconnection() throws IOException {
         if (state == TERMINATED || beingReconnected) { // should never
@@ -304,6 +335,9 @@ public abstract class ClientNotifForwarder {
      * Called after reconnection is finished.
      * This method is intended to be called only by a client connector:
      * <code>RMIConnector</code> and <code>ClientIntermediary</code>.
+     * <p>
+     *  重新连接完成后调用。此方法仅由客户端连接器调用：<code> RMIConnector </code>和<code> ClientIntermediary </code>。
+     * 
      */
     public synchronized void postReconnection(ClientListenerInfo[] listenerInfos)
         throws IOException {
@@ -629,6 +663,15 @@ public abstract class ClientNotifForwarder {
            If we had at least one
            ClassNotFoundException/NotSerializableException/UnmarshalException,
            then we must emit a JMXConnectionNotification.LOST_NOTIFS.
+        /* <p>
+        /*  通知我们不能反序列化(因为缺少类)。首先,我们要求0通知0超时。这样,我们可以跳过与我们的过滤器不匹配的通知的序列号。然后我们要求一个通知。
+        /* 如果产生ClassNotFoundException,NotSerializableException或UnmarshalException,我们增加我们的序列号并再次询问。
+        /* 最终我们将获得一个成功的通知,或返回0通知。在任一种情况下,我们都可以返回一个NotificationResult。
+        /* 该算法工作(虽然不太好),即使服务器实现没有优化对0通知的请求,以跳过与我们的过滤器不匹配的通知的序列号。
+        /* 
+        /* 如果我们至少有一个ClassNotFoundException / NotSerializableException / UnmarshalException,那么我们必须发出一个JMXConnecti
+        /* onNotification.LOST_NOTIFS。
+        /* 
         */
         private NotificationResult fetchOneNotif() {
             ClientNotifForwarder cnf = ClientNotifForwarder.this;
@@ -742,6 +785,11 @@ public abstract class ClientNotifForwarder {
      * If it is reconnected, we will not initialize in order to get all notifications arrived
      * during the reconnection. It may cause the newly registered listeners to receive some
      * notifications arrived before its registray.
+     * <p>
+     *  调用来决定是否需要启动一个线程来获取notifs。
+     *  <P>重新连接的参数将决定是否初始化clientSequenceNumber,初始化clientSequenceNumber意味着忽略之前到达的所有通知。
+     * 如果重新连接,我们将不会初始化,以便在重新连接期间获得所有通知到达。它可能导致新注册的听众接收在注册之前到达的一些通知。
+     * 
      */
     private synchronized void init(boolean reconnected) throws IOException {
         switch (state) {
@@ -831,6 +879,9 @@ public abstract class ClientNotifForwarder {
     /**
      * Import: should not remove a listener during reconnection, the reconnection
      * needs to change the listener list and that will possibly make removal fail.
+     * <p>
+     *  导入：不应在重新连接期间删除侦听器,重新连接需要更改侦听器列表,这可能会使删除失败。
+     * 
      */
     private synchronized void beforeRemove() throws IOException {
         while (beingReconnected) {
@@ -873,27 +924,42 @@ public abstract class ClientNotifForwarder {
     // state
     /**
      * This state means that a thread is being created for fetching and forwarding notifications.
+     * <p>
+     *  此状态表示正在创建用于提取和转发通知的线程。
+     * 
      */
     private static final int STARTING = 0;
 
     /**
      * This state tells that a thread has been started for fetching and forwarding notifications.
+     * <p>
+     *  此状态表明已启动线程以提取和转发通知。
+     * 
      */
     private static final int STARTED = 1;
 
     /**
      * This state means that the fetching thread is informed to stop.
+     * <p>
+     *  这个状态意味着获取线程被通知停止。
+     * 
      */
     private static final int STOPPING = 2;
 
     /**
      * This state means that the fetching thread is already stopped.
+     * <p>
+     *  此状态意味着提取线程已停止。
+     * 
      */
     private static final int STOPPED = 3;
 
     /**
      * This state means that this object is terminated and no more thread will be created
      * for fetching notifications.
+     * <p>
+     *  此状态表示此对象已终止,并且将不会创建用于提取通知的更多线程。
+     * 
      */
     private static final int TERMINATED = 4;
 
@@ -905,6 +971,9 @@ public abstract class ClientNotifForwarder {
      * This variable will be set to true by the method <code>preReconnection</code>, and set
      * to false by <code>postReconnection</code>.
      * When beingReconnected == true, no thread will be created for fetching notifications.
+     * <p>
+     * 此变量用于判断连接器(RMIConnector或ClientIntermediary)是否正在重新连接。
+     * 此变量将通过方法<code> preReconnection </code>设置为true,并通过<code> postReconnection </code>设置为false。
      */
     private boolean beingReconnected = false;
 

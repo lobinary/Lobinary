@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,18 @@ import javax.print.attribute.PrintJobAttribute;
  * name.
  * <P>
  *
+ * <p>
+ *  JobMediaSheetsCompleted类是一个整数值打印属性类,它指定到目前为止已完成整个作业的标记和堆叠的介质页数,无论这些页面是在一面还是在两面上处理。
+ * <P>
+ *  JobMediaSheetsCompleted属性描述作业的进度。此属性旨在作为计数器。
+ * 也就是说,尚未开始处理的作业的JobMediaSheetsCompleted值必须为0.当作业的{@link JobState JobState}为PROCESSING或PROCESSING_STOPP
+ * ED时,JobMediaSheetsCompleted值将随着作业处理而增加;它指示在查询打印作业属性集时或在报告打印作业事件时已处理的作业量。
+ *  JobMediaSheetsCompleted属性描述作业的进度。此属性旨在作为计数器。当作业进入完成,取消或停止状态时,JobMediaSheetsCompleted值是作业的最终值。
+ * <P>
+ *  <B> IPP兼容性：</B>整数值给出IPP整数值。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @see JobMediaSheets
  * @see JobMediaSheetsSupported
  * @see JobKOctetsProcessed
@@ -66,6 +79,10 @@ public final class JobMediaSheetsCompleted extends IntegerSyntax
      * Construct a new job media sheets completed attribute with the given
      * integer value.
      *
+     * <p>
+     *  使用给定的整数值构造新作业介质工作表完成属性。
+     * 
+     * 
      * @param  value  Integer value.
      *
      * @exception  IllegalArgumentException
@@ -89,6 +106,18 @@ public final class JobMediaSheetsCompleted extends IntegerSyntax
      * <CODE>object</CODE>'s value are equal.
      * </OL>
      *
+     * <p>
+     *  返回此作业媒体工作表完成属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     * <CODE>对象</CODE>是JobMediaSheetsCompleted类的实例。
+     * <LI>
+     *  此作业介质页完成属性值和<CODE>对象</CODE>的值相等。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job media
@@ -106,6 +135,8 @@ public final class JobMediaSheetsCompleted extends IntegerSyntax
      * For class JobMediaSheetsCompleted, the category is class
      * JobMediaSheetsCompleted itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -120,6 +151,12 @@ public final class JobMediaSheetsCompleted extends IntegerSyntax
      * For class JobMediaSheetsCompleted, the category name is
      * <CODE>"job-media-sheets-completed"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobMediaSheetsCompleted类,类别是JobMediaSheetsCompleted类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

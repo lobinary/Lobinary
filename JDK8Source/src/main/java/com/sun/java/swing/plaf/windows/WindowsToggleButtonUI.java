@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import java.beans.PropertyChangeEvent;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  Windows切换按钮。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class WindowsToggleButtonUI extends BasicToggleButtonUI
@@ -149,6 +157,9 @@ public class WindowsToggleButtonUI extends BasicToggleButtonUI
 
     /**
      * Overridden method to render the text without the mnemonic
+     * <p>
+     *  覆盖的方法来呈现没有助记符的文本
+     * 
      */
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         WindowsGraphicsUtils.paintText(g, b, textRect, text, getTextShiftOffset());
@@ -170,6 +181,8 @@ public class WindowsToggleButtonUI extends BasicToggleButtonUI
 
         /* Ensure that the width and height of the button is odd,
          * to allow for the focus line if focus is painted
+         * <p>
+         *  以便在焦点被绘时允许焦点线
          */
         AbstractButton b = (AbstractButton)c;
         if (d != null && b.isFocusPainted()) {

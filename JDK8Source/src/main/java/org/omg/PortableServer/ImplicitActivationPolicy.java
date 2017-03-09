@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -12,6 +13,8 @@ package org.omg.PortableServer;
 /**
 	 * This policy specifies whether implicit activation 
 	 * of servants is supported in the created POA.
+	 * <p>
+	 * 
 	 */
 public interface ImplicitActivationPolicy extends ImplicitActivationPolicyOperations, org.omg.CORBA.Policy, org.omg.CORBA.portable.IDLEntity 
 {

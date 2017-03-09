@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会或其许可方(如适用)。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.resolver.tools;
@@ -55,6 +65,15 @@ import com.sun.org.apache.xml.internal.resolver.helpers.FileURL;
  * current working draft of the OASIS Entity Resolution Technical
  * Committee specification.</p>
  *
+ * <p>
+ *  使用目录的SAX EntityResolver / JAXP URIResolver。
+ * 
+ *  <p>此类实现了SAX EntityResolver和JAXP URIResolver。
+ * </p>
+ * 
+ *  <p>此解析器理解OASIS TR9401目录,XCatalog以及OASIS实体解析技术委员会规范的当前工作草案。</p>
+ * 
+ * 
  * @see Catalog
  * @see org.xml.sax.EntityResolver
  * @see javax.xml.transform.URIResolver
@@ -114,6 +133,14 @@ public class CatalogResolver implements EntityResolver, URIResolver {
    * <p>If such a mapping is found, it is returned.  If no mapping is
    * found, null is returned.</p>
    *
+   * <p>
+   *  实现SAX接口的<code> resolveEntity </code>方法的内容。
+   * 
+   *  <p>提供可选的公共标识符和系统标识符,此函数尝试查找目录中的映射。</p>
+   * 
+   *  <p>如果找到这样的映射,则返回。如果找不到映射,则返回null。</p>
+   * 
+   * 
    * @param publicId  The public identifier for the entity in question.
    * This may be null.
    *
@@ -184,6 +211,16 @@ public class CatalogResolver implements EntityResolver, URIResolver {
    * will use the specified system identifier as if no entityResolver
    * was specified.</p>
    *
+   * <p>
+   *  实现SAX接口的<code> resolveEntity </code>方法。
+   * 
+   * <p>提供可选的公共标识符和系统标识符,此函数尝试查找目录中的映射。</p>
+   * 
+   *  <p>如果找到这样的映射,解析器会尝试将映射的值作为InputSource打开并返回。如果映射值无法作为输入源打开,则会忽略异常,并返回null。</p>
+   * 
+   *  <p>如果未找到映射(或尝试打开作为输入源的映射值时发生错误),则返回null,并且系统将使用指定的系统标识符,如同没有指定entityResolver。</p>
+   * 
+   * 
    * @param publicId  The public identifier for the entity in question.
    * This may be null.
    *
@@ -300,6 +337,13 @@ public class CatalogResolver implements EntityResolver, URIResolver {
    * <p>...quoted from page 118 of the Java API for XML
    * Processing 1.1 specification</p>
    *
+   * <p>
+   *  <p>为新解析的URI建立entityResolver。</p>
+   * 
+   *  <p>这是从URIResolver中调用以在SAX解析器上设置一个EntityResolver,以用于document()函数xsl：import或xsl：include所遇到的新XML文档。
+   * 这是因为XSLT处理器调用SAXParserFactory本身创建一个新的SAXParser来解析新文档。新的解析器不会自动继承原始的EntityResolver(尽管可以说它应该)。
+   * 见下文：</p>。
+   * 
    */
   private void setEntityResolver(SAXSource source) throws TransformerException {
     XMLReader reader = source.getXMLReader();

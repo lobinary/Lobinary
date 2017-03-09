@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,20 @@ import javax.net.ssl.SSLSocketFactory;
  * authentication is required by the server). This behavior can be modified
  * by supplying an already initialized <code>SSLContext</code> instance.
  *
+ * <p>
+ *  <p> RMI运行时使用<code> SslRMIServerSocketFactory </code>实例,以通过SSL获取RMI调用的服务器套接字。</p>
+ * 
+ *  <p>此类通过安全套接字层(SSL)或传输层安全(TLS)协议实现<code> RMIServerSocketFactory </code>。</p>
+ * 
+ *  <p>此类使用默认<code> SSLSocketFactory </code>(请参阅{@link SSLSocketFactory#getDefault})或默认<code> SSLServerS
+ * ocketFactory </code>创建SSL套接字(请参阅{@link SSLServerSocketFactory#getDefault})除非构造函数使用<code> SSLContext </code>
+ * ,在这种情况下,使用由{@link SSLContext#getSocketFactory}或<code> SSLServerSocketFactory </code>返回的<code> SSLSock
+ * etFactory </code>代码>由{@link SSLContext#getServerSocketFactory}返回。
+ * 
+ *  当未提供<code> SSLContext </code>时,此类的所有实例共享相同的密钥库和相同的信任库(当服务器需要客户端认证时)。
+ * 可以通过提供已初始化的<code> SSLContext </code>实例来修改此行为。
+ * 
+ * 
  * @see javax.net.ssl.SSLSocketFactory
  * @see javax.net.ssl.SSLServerSocketFactory
  * @see javax.rmi.ssl.SslRMIClientSocketFactory
@@ -75,6 +90,11 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * <p>SSL connections accepted by server sockets created by this
      * factory have the default cipher suites and protocol versions
      * enabled and do not require client authentication.</p>
+     * <p>
+     *  <p>使用默认SSL套接字配置创建新的<code> SslRMIServerSocketFactory </code>。</p>
+     * 
+     * <p>由此工厂创建的服务器套接字接受的SSL连接具有启用的默认密码套件和协议版本,不需要客户端身份验证。</p>
+     * 
      */
     public SslRMIServerSocketFactory() {
         this(null, null, false);
@@ -84,6 +104,10 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * <p>Creates a new <code>SslRMIServerSocketFactory</code> with
      * the specified SSL socket configuration.</p>
      *
+     * <p>
+     *  <p>使用指定的SSL套接字配置创建新的<code> SslRMIServerSocketFactory </code>。</p>
+     * 
+     * 
      * @param enabledCipherSuites names of all the cipher suites to
      * enable on SSL connections accepted by server sockets created by
      * this factory, or <code>null</code> to use the cipher suites
@@ -122,6 +146,10 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * <p>Creates a new <code>SslRMIServerSocketFactory</code> with the
      * specified <code>SSLContext</code> and SSL socket configuration.</p>
      *
+     * <p>
+     *  <p>使用指定的<code> SSLContext </code>和SSL套接字配置创建新的<code> SslRMIServerSocketFactory </code>。</p>
+     * 
+     * 
      * @param context the SSL context to be used for creating SSL sockets.
      * If <code>context</code> is null the default <code>SSLSocketFactory</code>
      * or the default <code>SSLServerSocketFactory</code> will be used to
@@ -210,6 +238,10 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * or <code>null</code> if this factory uses the cipher suites
      * that are enabled by default.</p>
      *
+     * <p>
+     *  <p>返回在由此工厂创建的服务器套接字接受的SSL连接上启用的密码套件的名称,如果此工厂使用默认启用的密码套件,则返回<code> null </code>。</p>
+     * 
+     * 
      * @return an array of cipher suites enabled, or <code>null</code>
      *
      * @see SSLSocket#setEnabledCipherSuites
@@ -225,6 +257,10 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * or <code>null</code> if this factory uses the protocol versions
      * that are enabled by default.</p>
      *
+     * <p>
+     *  <p>返回在由此工厂创建的服务器套接字接受的SSL连接上启用的协议版本的名称,如果此工厂使用默认启用的协议版本,则返回<code> null </code>。</p>
+     * 
+     * 
      * @return an array of protocol versions enabled, or
      * <code>null</code>
      *
@@ -240,6 +276,10 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * required on SSL connections accepted by server sockets created
      * by this factory.</p>
      *
+     * <p>
+     *  <p>如果需要对由此工厂创建的服务器套接字接受的SSL连接进行客户端身份验证,则返回<code> true </p>。</p>
+     * 
+     * 
      * @return <code>true</code> if client authentication is required
      *
      * @see SSLSocket#setNeedClientAuth
@@ -252,6 +292,9 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * <p>Creates a server socket that accepts SSL connections
      * configured according to this factory's SSL socket configuration
      * parameters.</p>
+     * <p>
+     *  <p>创建一个服务器套接字,接受根据此工厂的SSL套接字配置参数配置的SSL连接。</p>
+     * 
      */
     public ServerSocket createServerSocket(int port) throws IOException {
         final SSLSocketFactory sslSocketFactory =
@@ -286,6 +329,12 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * <p>A subclass should override this method (as well as
      * {@link #hashCode()}) if it adds instance state that affects
      * equality.</p>
+     * <p>
+     *  <p>表示某个其他物件是否「等于」这个物件。</p>
+     * 
+     *  <p>如果两个<sslRMIServerSocketFactory </code>对象使用相同的SSL上下文和SSL套接字配置参数构造,则它们是相等的。</p>
+     * 
+     *  <p>如果子类添加了影响平等的实例状态,则子类应重写此方法(以及{@link #hashCode()})。</p>
      */
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -338,6 +387,9 @@ public class SslRMIServerSocketFactory implements RMIServerSocketFactory {
      * <p>Returns a hash code value for this
      * <code>SslRMIServerSocketFactory</code>.</p>
      *
+     * <p>
+     * 
+     * 
      * @return a hash code value for this
      * <code>SslRMIServerSocketFactory</code>.
      */

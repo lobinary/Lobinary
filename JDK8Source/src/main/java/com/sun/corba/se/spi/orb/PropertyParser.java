@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,7 @@ public class PropertyParser {
     }
 
     /** Return a map from field name to value.
+    /* <p>
     */
     public Map parse( Properties props )
     {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,13 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException ;
  * The BootstrapServerRequestDispatcher responds primarily to GIOP requests,
  * but LocateRequests are also handled for graceful interoperability.
  * The BootstrapServerRequestDispatcher handles one request at a time.
+ * <p>
+ *  BootstrapServerRequestDispatcher类处理来自BootstrapServer的请求。它实现Server,以便它可以注册为一个子合同。
+ * 它通过一个BootstrapServiceProperties对象,该对象包含引导服务支持的id及其值。此Properties对象只能读取,不能写入,并且在所有线程之间共享。
+ * <p>
+ *  BootstrapServerRequestDispatcher主要响应GIOP请求,但LocateRequests也被处理以实现优雅的互操作性。
+ *  BootstrapServerRequestDispatcher一次处理一个请求。
+ * 
  */
 public class BootstrapServerRequestDispatcher
     implements CorbaServerRequestDispatcher
@@ -76,6 +84,9 @@ public class BootstrapServerRequestDispatcher
     /**
      * Dispatch is called by the ORB and will serve get(key) and list()
      * invocations on the initial object key.
+     * <p>
+     *  Dispatch由ORB调用,并将对初始对象键提供get(key)和list()调用。
+     * 
      */
     public void dispatch(MessageMediator messageMediator)
     {
@@ -135,6 +146,9 @@ public class BootstrapServerRequestDispatcher
      * Locates the object mentioned in the locate requests, and returns
      * object here iff the object is the initial object key. A SystemException
      * thrown if the object key is not the initial object key.
+     * <p>
+     *  查找locate请求中提到的对象,如果对象是初始对象键,则返回对象。如果对象键不是初始对象键,则抛出SystemException。
+     * 
      */
     public IOR locate( ObjectKey objectKey) {
         return null;
@@ -142,6 +156,8 @@ public class BootstrapServerRequestDispatcher
 
     /**
      * Not implemented
+     * <p>
+     *  未实现
      */
     public int getId() {
         throw wrapper.genericNoImpl() ;

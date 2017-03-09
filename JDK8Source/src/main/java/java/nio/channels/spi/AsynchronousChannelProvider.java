@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,15 @@ import java.security.PrivilegedAction;
  * <p> All of the methods in this class are safe for use by multiple concurrent
  * threads.  </p>
  *
+ * <p>
+ *  异步通道的服务提供程序类。
+ * 
+ *  <p>异步通道提供程序是此类的一个具体子类,它具有零参数构造函数,并实现下面指定的抽象方法。
+ *  Java虚拟机的给定调用维护单个系统范围的默认提供程序实例,该实例由{@link #provider()provider}方法返回。该方法的第一次调用将定位下面指定的默认提供程序。
+ * 
+ *  <p>此类中的所有方法都可安全地用于多个并发线程。 </p>
+ * 
+ * 
  * @since 1.7
  */
 
@@ -62,6 +72,10 @@ public abstract class AsynchronousChannelProvider {
     /**
      * Initializes a new instance of this class.
      *
+     * <p>
+     *  初始化此类的新实例。
+     * 
+     * 
      * @throws  SecurityException
      *          If a security manager has been installed and it denies
      *          {@link RuntimePermission}<tt>("asynchronousChannelProvider")</tt>
@@ -160,6 +174,24 @@ public abstract class AsynchronousChannelProvider {
      * <p> Subsequent invocations of this method return the provider that was
      * returned by the first invocation.  </p>
      *
+     * <p>
+     *  返回Java虚拟机的此调用的系统级缺省异步通道提供程序。
+     * 
+     *  <p>此方法的第一个调用如下所示定位默认提供程序对象：</p>
+     * 
+     * <ol>
+     * 
+     *  <li> <p>如果定义了系统属性<tt> java.nio.channels.spi.AsynchronousChannelProvider </tt>,那么它将被视为具体提供程序类的完全限定名称。
+     * 类被加载和实例化;如果此过程失败,则抛出未指定的错误。 </p> </li>。
+     * 
+     * <li> <p>如果提供程序类已安装在系统类加载器可见的jar文件中,并且该jar文件包含名为<tt> java.nio.channels.spi.AsynchronousChannelProvider
+     *  < / tt>在资源目录<tt> META-INF / services </tt>中,那么将获取该文件中指定的第一个类名。
+     * 类被加载和实例化;如果此过程失败,则抛出未指定的错误。 </p> </li>。
+     * 
+     *  <li> <p>最后,如果没有通过上述任何方法指定提供程序,则系统默认提供程序类将被实例化,并返回结果。 </p> </li>
+     * 
+     * </ol>
+     * 
      * @return  The system-wide default AsynchronousChannel provider
      */
     public static AsynchronousChannelProvider provider() {
@@ -169,6 +201,11 @@ public abstract class AsynchronousChannelProvider {
     /**
      * Constructs a new asynchronous channel group with a fixed thread pool.
      *
+     * <p>
+     * 
+     *  <p>此方法的后续调用返回由第一次调用返回的提供程序。 </p>
+     * 
+     * 
      * @param   nThreads
      *          The number of threads in the pool
      * @param   threadFactory
@@ -189,6 +226,10 @@ public abstract class AsynchronousChannelProvider {
     /**
      * Constructs a new asynchronous channel group with the given thread pool.
      *
+     * <p>
+     *  使用固定线程池构造新的异步通道组。
+     * 
+     * 
      * @param   executor
      *          The thread pool
      * @param   initialSize
@@ -208,6 +249,10 @@ public abstract class AsynchronousChannelProvider {
     /**
      * Opens an asynchronous server-socket channel.
      *
+     * <p>
+     *  使用给定的线程池构造新的异步通道组。
+     * 
+     * 
      * @param   group
      *          The group to which the channel is bound, or {@code null} to
      *          bind to the default group
@@ -227,6 +272,10 @@ public abstract class AsynchronousChannelProvider {
     /**
      * Opens an asynchronous socket channel.
      *
+     * <p>
+     *  打开异步服务器套接字通道。
+     * 
+     * 
      * @param   group
      *          The group to which the channel is bound, or {@code null} to
      *          bind to the default group

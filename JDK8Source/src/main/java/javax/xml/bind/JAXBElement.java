@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,27 @@ import java.io.Serializable;
  * associated with a nil element.
  * </p>
  *
+ * <p>
+ *  <p> Xml元素的JAXB表示。</p>
+ * 
+ *  <p>此类表示关于来自模式中的元素声明和xml文档中的元素实例值的Xml元素的信息,具有以下属性
+ * <ul>
+ *  <li>元素的xml标记<b> <tt> name </tt> </b> </li> <li> <b> <tt> value </tt> </b>代表元素实例的属性)和内容模型</li> <li>元素
+ * 声明<b> <tt> declaredType </tt> </b>(<tt> xs：element @type </tt>元素声明</li> <li>布尔<b> <tt> nil </tt> </b>
+ * 属性的<b> <tt>作用域</tt> (元素实例的<tt> <b> xsi：nil </b> </tt>属性)</li>。
+ * </ul>
+ * 
+ *  <p> <tt> declaredType </tt>和<tt> scope </tt>属性是xml类型定义的JAXB类绑定。
+ * </p>
+ * 
+ *  <p> <b> <tt>范围</tt> </b>是{@link GlobalScope}或表示包含模式元素声明的复杂类型定义的Java类。
+ * </p>
+ * 
+ *  <p>有一个属性约束,如果<b> <tt> value </tt> </b>是<tt> null </tt>,则<tt> nil </tt>必须<tt> true </tt>。
+ * 相反的是不能够用属性来表示nil元素。如果<tt> nil </tt>为真,则<tt>值</tt>可能是非空的,因此它可以保存与nil元素相关联的属性的值。
+ * </p>
+ * 
+ * 
  * @author Kohsuke Kawaguchi, Joe Fialli
  * @since JAXB 2.0
  */
@@ -75,10 +97,15 @@ public class JAXBElement<T> implements Serializable {
      *  - local element declaration has a scope set to the Java class
      *     representation of complex type defintion containing
      *     xml element declaration.
+     * <p>
+     * 可以是以下值之一： -  {@link GlobalScope}用于全局xml元素声明。 - 局部元素声明的范围设置为包含xml元素声明的复杂类型定义的Java类表示。
+     * 
      */
     final protected Class scope;
 
     /** xml element value.
+    /* <p>
+    /* 
         Represents content model and attributes of an xml element instance. */
     protected T value;
 
@@ -87,12 +114,19 @@ public class JAXBElement<T> implements Serializable {
 
     /**
      * Designates global scope for an xml element.
+     * <p>
+     *  指定xml元素的全局范围。
+     * 
      */
     public static final class GlobalScope {}
 
     /**
      * <p>Construct an xml element instance.</p>
      *
+     * <p>
+     *  <p>构造xml元素实例。</p>
+     * 
+     * 
      * @param name          Java binding of xml element tag name
      * @param declaredType  Java binding of xml element declaration's type
      * @param scope
@@ -120,6 +154,11 @@ public class JAXBElement<T> implements Serializable {
      * Construct an xml element instance.
      *
      * This is just a convenience method for <tt>new JAXBElement(name,declaredType,GlobalScope.class,value)</tt>
+     * <p>
+     *  构造一个xml元素实例。
+     * 
+     *  这只是一个方便的方法<tt> new JAXBElement(name,declaredType,GlobalScope.class,value)</tt>
+     * 
      */
     public JAXBElement(QName name, Class<T> declaredType, T value ) {
         this(name,declaredType,GlobalScope.class,value);
@@ -127,6 +166,9 @@ public class JAXBElement<T> implements Serializable {
 
     /**
      * Returns the Java binding of the xml element declaration's type attribute.
+     * <p>
+     *  返回xml元素声明的type属性的Java绑定。
+     * 
      */
     public Class<T> getDeclaredType() {
         return declaredType;
@@ -134,6 +176,9 @@ public class JAXBElement<T> implements Serializable {
 
     /**
      * Returns the xml element tag name.
+     * <p>
+     *  返回xml元素标记名称。
+     * 
      */
     public QName getName() {
         return name;
@@ -145,6 +190,12 @@ public class JAXBElement<T> implements Serializable {
      * <p>When this property is set to <tt>null</tt>, <tt>isNil()</tt> must by <tt>true</tt>.
      *    Details of constraint are described at {@link #isNil()}.</p>
      *
+     * <p>
+     *  <p>设置此xml元素的内容模型和属性。</p>
+     * 
+     *  <p>当此属性设置为<tt> null </tt>时,<tt> isNil()</tt>必须通过<tt> true </tt>。约束的细节在{@link #isNil()}中描述。</p>
+     * 
+     * 
      * @see #isTypeSubstituted()
      */
     public void setValue(T t) {
@@ -156,6 +207,11 @@ public class JAXBElement<T> implements Serializable {
      *
      * <p>See {@link #isNil()} for a description of a property constraint when
      * this value is <tt>null</tt></p>
+     * <p>
+     *  <p>返回此元素的内容模型和属性值。</p>
+     * 
+     *  <p>当此值为<tt> null </tt> </p>时,请参阅{@link #isNil()}关于属性约束的描述。
+     * 
      */
     public T getValue() {
         return value;
@@ -164,6 +220,10 @@ public class JAXBElement<T> implements Serializable {
     /**
      * Returns scope of xml element declaration.
      *
+     * <p>
+     *  返回xml元素声明的作用域。
+     * 
+     * 
      * @see #isGlobalScope()
      * @return <tt>GlobalScope.class</tt> if this element is of global scope.
      */
@@ -179,6 +239,12 @@ public class JAXBElement<T> implements Serializable {
      * Note that the converse is not true, when this property is <tt>true</tt>,
      * {@link #getValue()} can contain a non-null value for attribute(s). It is
      * valid for a nil xml element to have attribute(s).</p>
+     * <p>
+     *  <p>如果此元素实例内容模型为nil,则返回<tt> true </tt>。</p>
+     * 
+     *  <p>当{@link #getValue()}为null时,此属性总是返回<tt> true </tt>。
+     * 请注意,反之不是true,当此属性为<tt> true </tt>时,{@link #getValue()}可以包含属性的非空值。它对于nil xml元素有效,具有属性。</p>。
+     * 
      */
     public boolean isNil() {
         return (value == null) || nil;
@@ -187,6 +253,10 @@ public class JAXBElement<T> implements Serializable {
     /**
      * <p>Set whether this element has nil content.</p>
      *
+     * <p>
+     *  <p>设置此元素是否包含nil内容。</p>
+     * 
+     * 
      * @see #isNil()
      */
     public void setNil(boolean value) {
@@ -196,10 +266,16 @@ public class JAXBElement<T> implements Serializable {
     /* Convenience methods
      * (Not necessary but they do unambiguously conceptualize
      *  the rationale behind this class' fields.)
+     * <p>
+     * (没有必要,但他们明确地概念了这个类的领域背后的理论。)
+     * 
      */
 
     /**
      * Returns true iff this xml element declaration is global.
+     * <p>
+     *  返回true iff此xml元素声明是全局的。
+     * 
      */
     public boolean isGlobalScope() {
         return this.scope == GlobalScope.class;
@@ -208,6 +284,8 @@ public class JAXBElement<T> implements Serializable {
     /**
      * Returns true iff this xml element instance's value has a different
      * type than xml element declaration's declared type.
+     * <p>
+     *  返回true iff此xml元素实例的值具有与xml元素声明的声明类型不同的类型。
      */
     public boolean isTypeSubstituted() {
         if(value==null)     return false;

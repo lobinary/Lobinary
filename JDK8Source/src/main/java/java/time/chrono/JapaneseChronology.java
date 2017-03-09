@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -118,6 +137,23 @@ import sun.util.calendar.LocalGregorianCalendar;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  日本帝国日历系统。
+ * <p>
+ *  这个年表定义了日本帝国日历系统的规则。这种日历系统主要在日本使用。除了基于时代的年份编号之外,日本帝国日历系统与ISO日历系统相同。
+ * <p>
+ *  日本介绍了从明治6开始的公历。只有明治和以后的时代得到支持;不支持明日6,1月1日之前的日期。
+ * <p>
+ *  支持的{@code ChronoField}实例是：
+ * <ul>
+ *  <li> {@ code DAY_OF_YEAR} <li> {@ code DAY_OF_MONTH} <li> {@ code DAY_OF_YEAR} <li> {@ code EPOCH_DAY}
+ *  <li> {@ code MONTH_OF_YEAR} <li> {@ code PROLEPTIC_MONTH} > {@ code YEAR_OF_ERA} <li> {@ code YEAR} 
+ * <li> {@ code ERA}。
+ * </ul>
+ * 
+ * @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 public final class JapaneseChronology extends AbstractChronology implements Serializable {
@@ -130,17 +166,26 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
 
     /**
      * Singleton instance for Japanese chronology.
+     * <p>
+     *  日本年表的Singleton实例。
+     * 
      */
     public static final JapaneseChronology INSTANCE = new JapaneseChronology();
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 459996390165777884L;
 
     //-----------------------------------------------------------------------
     /**
      * Restricted constructor.
+     * <p>
+     *  受限制的构造函数。
+     * 
      */
     private JapaneseChronology() {
     }
@@ -152,6 +197,12 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
      * The ID uniquely identifies the {@code Chronology}.
      * It can be used to lookup the {@code Chronology} using {@link #of(String)}.
      *
+     * <p>
+     *  获取年表的ID  - "日语"。
+     * <p>
+     *  ID唯一标识{@code Chronology}。它可以用于使用{@link #of(String)}查找{@code Chronology}。
+     * 
+     * 
      * @return the chronology ID - 'Japanese'
      * @see #getCalendarType()
      */
@@ -169,6 +220,13 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
      * It can also be used as part of a locale, accessible via
      * {@link Locale#getUnicodeLocaleType(String)} with the key 'ca'.
      *
+     * <p>
+     *  获取基础日历系统的日历类型 - "japanese"。
+     * <p>
+     *  日历类型是由<em> Unicode区域设置数据标记语言(LDML)</em>规范定义的标识符。它可以用于使用{@link #of(String)}查找{@code Chronology}。
+     * 它也可以作为区域设置的一部分,通过{@link Locale#getUnicodeLocaleType(String)}访问,使用键'ca'。
+     * 
+     * 
      * @return the calendar system type - 'japanese'
      * @see #getId()
      */
@@ -192,6 +250,16 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
      *  9th Jan Heisei 1 = ISO 1989-01-09
      * </pre>
      *
+     * <p>
+     *  根据时代,年份,年份和月份字段在日历日历系统中获取本地日期。
+     * <p>
+     *  日历月和日期与ISO日历系统中的月份和月份相同。它们不会在时代变化时重置。例如：
+     * <pre>
+     *  6th Jan Showa 64 = ISO 1989-01-06 7th Jan Showa 64 = ISO 1989-01-07 8th Jan Heisei 1 = ISO 1989-01-0
+     * 8 9th Jan Heisei 1 = ISO 1989-01-09。
+     * </pre>
+     * 
+     * 
      * @param era  the Japanese era, not null
      * @param yearOfEra  the year-of-era
      * @param month  the month-of-year
@@ -215,6 +283,12 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
      * The Japanese proleptic year, month and day-of-month are the same as those
      * in the ISO calendar system. They are not reset when the era changes.
      *
+     * <p>
+     *  从日语年,月和月的字段中获取日语日历系统中的本地日期。
+     * <p>
+     *  日本的年月日和月日与ISO日历系统中的相同。它们不会在时代变化时重置。
+     * 
+     * 
      * @param prolepticYear  the proleptic-year
      * @param month  the month-of-year
      * @param dayOfMonth  the day-of-month
@@ -241,6 +315,15 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
      *  9th Jan Heisei 1 = day-of-year 2
      * </pre>
      *
+     * <p>
+     *  根据时代,年份和年份字段在日历日历系统中获取本地日期。
+     * <p>
+     * 这个工厂的年是相对于年代的开始。这个定义仅在年代由于时代的变化而重置为一年的那些年中改变年的正常含义。例如：
+     * <pre>
+     *  6月1日Showa 64 =日年6月7日Showa 64 =年7日8月1日Heisei 1 =年1月9日1月1日=年2
+     * </pre>
+     * 
+     * 
      * @param era  the Japanese era, not null
      * @param yearOfEra  the year-of-era
      * @param dayOfYear  the day-of-year
@@ -261,6 +344,12 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
      * The Japanese proleptic year and day-of-year are the same as those in the ISO calendar system.
      * They are not reset when the era changes.
      *
+     * <p>
+     *  从日文年和日期字段获取日语日历系统中的本地日期。
+     * <p>
+     *  这个工厂的年是相对于开始的年代表示的。日本提前年和日年与ISO日历系统中的相同。它们不会在时代变化时重置。
+     * 
+     * 
      * @param prolepticYear  the proleptic-year
      * @param dayOfYear  the day-of-year
      * @return the Japanese local date, not null
@@ -274,6 +363,10 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
     /**
      * Obtains a local date in the Japanese calendar system from the epoch-day.
      *
+     * <p>
+     *  从时代获取日本日历系统中的本地日期。
+     * 
+     * 
      * @param epochDay  the epoch day
      * @return the Japanese local date, not null
      * @throws DateTimeException if unable to create the date
@@ -332,6 +425,12 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
      * This method does not validate the year passed in, and only has a
      * well-defined result for years in the supported range.
      *
+     * <p>
+     *  检查指定的年份是否为闰年。
+     * <p>
+     *  日本闰年的发生完全符合ISO闰年。此方法不会验证传入的年份,并且在支持范围内的年份中只有明确定义的结果。
+     * 
+     * 
      * @param prolepticYear  the proleptic-year to check, not validated for range
      * @return true if the year is a leap year
      */
@@ -368,6 +467,13 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
      * {@link JapaneseEra#HEISEI}, {@link JapaneseEra#SHOWA},{@link JapaneseEra#TAISHO},
      * {@link JapaneseEra#MEIJI}), only Meiji and later eras are supported.
      *
+     * <p>
+     *  从给定的数值返回日历系统时代对象。
+     * 
+     *  请参阅每个时代的说明：{@link JapaneseEra#HEISEI},{@link JapaneseEra#SHOWA},{@ link JapaneseEra#TAISHO},{@link JapaneseEra#MEIJI}
+     * ),只有明治和以后的时代支持。
+     * 
+     * 
      * @param eraValue  the era value
      * @return the Japanese {@code Era} for the given numeric era value
      * @throws DateTimeException if {@code eraValue} is invalid
@@ -509,6 +615,10 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
     /**
      * Writes the Chronology using a
      * <a href="../../../serialized-form.html#java.time.chrono.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.chrono.Ser">专用序列化表单</a>撰写年表。
+     * 
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(1);     // identifies a Chronology
@@ -525,6 +635,9 @@ public final class JapaneseChronology extends AbstractChronology implements Seri
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

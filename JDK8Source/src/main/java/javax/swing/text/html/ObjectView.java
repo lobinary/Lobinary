@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,23 @@ import sun.reflect.misc.ReflectUtil;
  *      &lt;/object&gt;
  * </pre>
  *
+ * <p>
+ *  实现&lt; object&gt;的视图接口的组件装饰器元素。
+ * <p>
+ *  此视图将尝试加载由<code> classid </code>属性指定的类。如果可能,使用用于加载相关联的Document的Classloader。
+ * 这通常与用于加载EditorKit的ClassLoader相同。如果文档的ClassLoader为null,则使用<code> Class.forName </code>。
+ * <p>
+ *  如果类可以成功加载,将尝试通过调用<code> Class.newInstance </code>创建它的实例。
+ * 将尝试缩小实例以键入<code> java.awt.Component </code>以显示对象。
+ * <p>
+ *  此视图还可以管理一组具有限制的参数。 &lt; object&gt;的参数元素预期存在于相关联的元素属性上设置为简单字符串。
+ * 每个bean属性将被作为AttributeSet上的一个键查询,期望如果有一个属性的参数说明,则会出现一个非空值(String类型)。反射用于设置参数。
+ * 目前,这只限于一个非常简单的单个参数类型String。
+ * <p>
+ *  一个简单的示例HTML调用是：
+ * <pre>
+ *  &lt; object classid ="javax.swing.JLabel"&gt; &lt; param name ="text"value ="sample text"&gt; &lt; /
+ * 
  * @author Timothy Prinzing
  */
 public class ObjectView extends ComponentView  {
@@ -75,6 +93,11 @@ public class ObjectView extends ComponentView  {
     /**
      * Creates a new ObjectView object.
      *
+     * <p>
+     *  object&gt;。
+     * </pre>
+     * 
+     * 
      * @param elem the element to decorate
      */
     public ObjectView(Element elem) {
@@ -85,6 +108,9 @@ public class ObjectView extends ComponentView  {
      * Create the component.  The classid is used
      * as a specification of the classname, which
      * we try to load.
+     * <p>
+     *  创建一个新的ObjectView对象。
+     * 
      */
     protected Component createComponent() {
         AttributeSet attr = getElement().getAttributes();
@@ -110,6 +136,9 @@ public class ObjectView extends ComponentView  {
     /**
      * Fetch a component that can be used to represent the
      * object if it can't be created.
+     * <p>
+     * 创建组件。 classid用作类名的规范,我们尝试加载它。
+     * 
      */
     Component getUnloadableRepresentation() {
         // PENDING(prinz) get some artwork and return something
@@ -123,6 +152,9 @@ public class ObjectView extends ComponentView  {
      * Initialize this component according the KEY/VALUEs passed in
      * via the &lt;param&gt; elements in the corresponding
      * &lt;object&gt; element.
+     * <p>
+     *  获取可用于表示对象的组件(如果无法创建)。
+     * 
      */
     private void setParameters(Component comp, AttributeSet attr) {
         Class k = comp.getClass();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -23,6 +24,15 @@ package org.omg.PortableInterceptor;
    * To write a client-side Interceptor, implement the 
    * <code>ClientRequestInterceptor</code> interface. 
    *
+   * <p>
+   *  客户端请求拦截器。
+   * <p>
+   *  请求拦截器被设计为在特定点处通过ORB截取请求/应答序列的流,使得服务可以查询请求信息并操纵在客户端和服务器之间传播的服务上下文。
+   * 请求拦截器的主要用途是使ORB服务能够在客户端和服务器之间传递上下文信息。有两种类型的请求拦截器：客户端和服务器端。
+   * <p>
+   *  要编写客户端拦截器,请实现<code> ClientRequestInterceptor </code>接口。
+   * 
+   * 
    * @see ClientRequestInfo
    */
 public interface ClientRequestInterceptorOperations  extends org.omg.PortableInterceptor.InterceptorOperations
@@ -47,6 +57,18 @@ public interface ClientRequestInterceptorOperations  extends org.omg.PortableInt
      * point. The <code>completion_status</code> shall be 
      * <code>COMPLETED_NO</code>.
      *
+     * <p>
+     *  允许拦截器在请求发送到服务器之前查询请求信息并修改服务上下文。
+     * <p>
+     * 这个拦截点可能会抛出系统异常。如果是,则不调用其他拦截器的<code> send_request </code>操作。
+     * 流栈上的拦截器被弹出,它们的<code> receive_exception </code>拦截点被调用。这个拦截点也可能引发一个<code> ForwardRequest </code>异常。
+     * 如果拦截器抛出此异常,则不会调用其他拦截器的<code> send_request </code>操作。
+     * 流栈上的拦截器被弹出,它们的<code> receive_other </code>拦截点被调用。
+     * <p>
+     *  如果符合规则的拦截器从此拦截点抛出系统异常,则应正确地遵循completion_status语义。
+     *  <code> completion_status </code>应为<code> COMPLETED_NO </code>。
+     * 
+     * 
      * @param ri Information about the current request being intercepted.
      * @exception ForwardRequest If thrown, indicates to the ORB that a
      *     retry of the request should occur with the new object given in
@@ -78,6 +100,22 @@ public interface ClientRequestInterceptorOperations  extends org.omg.PortableInt
      * exception from this interception point. The completion_status shall be 
      * <code>COMPLETED_NO</code>.
      * 
+     * <p>
+     *  允许拦截器在时间无关调用(TII)轮询获取回复序列期间查询信息。
+     * <p>
+     *  使用TII,应用可以轮询对先前由轮询客户端或一些其他客户端发送的请求的响应。
+     * 这个轮询通过<code> send_poll </code>拦截点报告给拦截器,响应通过<code> receive_reply </code>或<code> receive_exception </code>
+     * 拦截点返回。
+     *  使用TII,应用可以轮询对先前由轮询客户端或一些其他客户端发送的请求的响应。
+     * 如果在轮询超时到期之前响应不可用,那么系统异常<code> TIMEOUT </code>被抛出,并且使用此异常调用<code> receive_exception </code>。
+     * <p>
+     * 这个拦截点可能会抛出系统异常。如果是,则不调用其他拦截器的<code> send_poll </code>操作。
+     * 流栈上的拦截器被弹出,它们的<code> receive_exception </code>拦截点被调用。
+     * <p>
+     *  如果符合规则的拦截器从此拦截点抛出系统异常,则应正确遵循<code> completion_status </code>语义。
+     *  completion_status应为<code> COMPLETED_NO </code>。
+     * 
+     * 
      * @param ri Information about the current request being intercepted.
      * @exception TIMEOUT thrown if the response is not available before 
      *     the poll time-out expires
@@ -99,6 +137,16 @@ public interface ClientRequestInterceptorOperations  extends org.omg.PortableInt
      * exception from this interception point. The 
      * <code>completion_status</code> shall be <code>COMPLETED_YES</code>.
      *
+     * <p>
+     *  允许拦截器在从服务器返回并在控制返回到客户端之前查询回复的信息。
+     * <p>
+     *  这个拦截点可能会抛出系统异常。如果是,则不调用其他拦截器的<code> receive_reply </code>操作。
+     * 流栈中剩余的拦截器应该调用其<code> receive_exception </code>拦截点。
+     * <p>
+     *  如果符合规则的拦截器从此拦截点抛出系统异常,则应正确遵循<code> completion_status </code>语义。
+     *  <code> completion_status </code>应为<code> COMPLETED_YES </code>。
+     * 
+     * 
      * @param ri Information about the current request being intercepted.
      */
   void receive_reply (org.omg.PortableInterceptor.ClientRequestInfo ri);
@@ -142,6 +190,29 @@ public interface ClientRequestInterceptorOperations  extends org.omg.PortableInt
      * client, the <code>PortableInterceptor.Current</code> for both the 
      * original request and the retrying request is the same.
      *
+     * <p>
+     *  向拦截器指示发生异常。允许拦截器在异常的信息被抛出到客户端之前查询它。
+     * <p>
+     * 这个拦截点可能会抛出系统异常。这具有改变从流栈中弹出的连续拦截器在其对<code> receive_exception </code>的调用时接收的异常的效果。
+     * 抛出给客户端的异常将是拦截器抛出的最后一个异常,或者如果没有拦截器更改异常,则抛出原始异常。
+     * <p>
+     *  这个拦截点也可能引发一个<code> ForwardRequest </code>异常。
+     * 如果拦截器抛出此异常,则不会调用其他拦截器的<code> receive_exception </code>操作。
+     * 流栈中剩余的拦截器被弹出,并调用它们的<code> receive_other </code>拦截点。
+     * <p>
+     *  如果异常的<code> completion_status </code>不是<code> COMPLETED_NO </code>,那么这个拦截点不应该抛出一个<code> ForwardReque
+     * st </code>异常。
+     * 请求的最多一次语义将丢失。
+     * <p>
+     *  如果符合规则的拦截器从此拦截点抛出系统异常,则应正确遵循<code> completion_status </code>语义。
+     * 如果原始异常是系统异常,则新异常的<code> completion_status </code>应与原始异常相同。
+     * 如果原始异常是用户异常,则新异常的<code> completion_status </code>应为<code> COMPLETED_YES </code>。
+     * <p>
+     * 在某些情况下,根据有效的策略,异常(例如<code> COMM_FAILURE </code>)可能导致请求重试。
+     * 虽然此重试是关于拦截器的新请求,但是原始请求和重试之间存在一个相关点：因为控制没有返回到客户端,所以原始请求的<code> PortableInterceptor.Current </code>请求和重
+     * 试请求是一样的。
+     * 在某些情况下,根据有效的策略,异常(例如<code> COMM_FAILURE </code>)可能导致请求重试。
+     * 
      * @param ri Information about the current request being intercepted.
      * @exception ForwardRequest If thrown, indicates to the ORB that a
      *     retry of the request should occur with the new object given in
@@ -183,6 +254,9 @@ public interface ClientRequestInterceptorOperations  extends org.omg.PortableInt
      * <code>completion_status</code> shall be <code>COMPLETED_NO</code>. 
      * If the target invocation had completed, this interception point 
      * would not be called.
+     * 
+     * <p>
+     * 
      * 
      * @param ri Information about the current request being intercepted.
      * @exception ForwardRequest If thrown, indicates to the ORB that a

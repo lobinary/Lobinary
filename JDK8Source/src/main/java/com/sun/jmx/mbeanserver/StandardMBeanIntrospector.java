@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,8 @@ import javax.management.NotificationBroadcasterSupport;
 import sun.reflect.misc.MethodUtil;
 
 /**
+/* <p>
+/* 
  * @since 1.6
  */
 class StandardMBeanIntrospector extends MBeanIntrospector<Method> {
@@ -141,6 +144,10 @@ class StandardMBeanIntrospector extends MBeanIntrospector<Method> {
     Descriptor getBasicMBeanDescriptor() {
         /* We don't bother saying mxbean=false, and we can't know whether
            the info is immutable until we know whether the MBean class
+        /* <p>
+        /*  信息是不可变的,直到我们知道是否MBean类
+        /* 
+        /* 
            (not interface) is a NotificationBroadcaster. */
         return ImmutableDescriptor.EMPTY_DESCRIPTOR;
     }
@@ -159,6 +166,9 @@ class StandardMBeanIntrospector extends MBeanIntrospector<Method> {
      * we might not know if it is immutable.  But if it is a subclass of
      * NotificationBroadcasterSupport and does not override
      * getNotificationInfo(), then we know it won't change.
+     * <p>
+     *  类有不可变的MBeanInfo。
+     * 作为NotificationBroadcaster的标准MBean允许在不同时间从其getNotificationInfo()方法返回不同的值,这是我们可能不知道它是不可变的。
      */
     static boolean isDefinitelyImmutableInfo(Class<?> implClass) {
         if (!NotificationBroadcaster.class.isAssignableFrom(implClass))

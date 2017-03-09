@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2011-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.format;
 
@@ -98,6 +117,12 @@ import sun.util.locale.provider.LocaleResources;
  * Implementations must be thread-safe.
  * Implementations should cache the textual information.
  *
+ * <p>
+ *  提供程序以获取日期时间字段的文本形式。
+ * 
+ *  @implSpec实现必须是线程安全的。实现应缓存文本信息。
+ * 
+ * 
  * @since 1.8
  */
 class DateTimeTextProvider {
@@ -117,6 +142,10 @@ class DateTimeTextProvider {
     /**
      * Gets the provider of text.
      *
+     * <p>
+     *  获取文本提供程序。
+     * 
+     * 
      * @return the provider, not null
      */
     static DateTimeTextProvider getInstance() {
@@ -131,6 +160,12 @@ class DateTimeTextProvider {
      * The null return value should be used if there is no applicable text, or
      * if the text would be a numeric representation of the value.
      *
+     * <p>
+     *  获取指定字段,区域设置和样式的文本以进行格式化。
+     * <p>
+     *  将返回与该值相关联的文本。如果没有适用的文本,或者如果文本将是值的数字表示,则应使用空返回值。
+     * 
+     * 
      * @param field  the field to get text for, not null
      * @param value  the field value to get text for, not null
      * @param style  the style to get text for, not null
@@ -153,6 +188,12 @@ class DateTimeTextProvider {
      * The null return value should be used if there is no applicable text, or
      * if the text would be a numeric representation of the value.
      *
+     * <p>
+     *  获取指定计时码,字段,区域设置和样式的文本以进行格式化。
+     * <p>
+     *  将返回与该值相关联的文本。如果没有适用的文本,或者如果文本将是值的数字表示,则应使用空返回值。
+     * 
+     * 
      * @param chrono  the Chronology to get text for, not null
      * @param field  the field to get text for, not null
      * @param value  the field value to get text for, not null
@@ -209,6 +250,14 @@ class DateTimeTextProvider {
      * if the text would be a numeric representation of the value.
      * Text can only be parsed if all the values for that field-style-locale combination are unique.
      *
+     * <p>
+     * 获取指定字段,语言环境和样式的文本迭代器字段,以便进行语法分析。
+     * <p>
+     *  迭代器必须按照从最长的文本到最短的顺序返回。
+     * <p>
+     *  如果没有适用的可解析文本,或者如果文本将是值的数字表示,则应使用空返回值。只有该字段样式区域设置组合的所有值都是唯一的,才能解析文本。
+     * 
+     * 
      * @param field  the field to get text for, not null
      * @param style  the style to get text for, null for all parsable text
      * @param locale  the locale to get text for, not null
@@ -233,6 +282,14 @@ class DateTimeTextProvider {
      * if the text would be a numeric representation of the value.
      * Text can only be parsed if all the values for that field-style-locale combination are unique.
      *
+     * <p>
+     *  获取指定的计时码,字段,语言环境和样式的文本迭代器,以便进行语法分析。
+     * <p>
+     *  迭代器必须按照从最长的文本到最短的顺序返回。
+     * <p>
+     *  如果没有适用的可解析文本,或者如果文本将是值的数字表示,则应使用空返回值。只有该字段样式区域设置组合的所有值都是唯一的,才能解析文本。
+     * 
+     * 
      * @param chrono  the Chronology to get text for, not null
      * @param field  the field to get text for, not null
      * @param style  the style to get text for, null for all parsable text
@@ -457,6 +514,10 @@ class DateTimeTextProvider {
     /**
      * Helper method to create an immutable entry.
      *
+     * <p>
+     *  Helper方法创建一个不可变的条目。
+     * 
+     * 
      * @param text  the text, not null
      * @param field  the field, not null
      * @return the entry, not null
@@ -469,6 +530,10 @@ class DateTimeTextProvider {
      * Returns the localized resource of the given key and locale, or null
      * if no localized resource is available.
      *
+     * <p>
+     *  返回给定键和语言环境的本地化资源,如果没有本地化资源可用,则返回null。
+     * 
+     * 
      * @param key  the key of the localized resource, not null
      * @param locale  the locale, not null
      * @return the localized resource, or null if not available
@@ -490,20 +555,37 @@ class DateTimeTextProvider {
      * and parsing.
      * <p>
      * This class is immutable and thread-safe.
+     * <p>
+     *  存储单个区域设置的文本。
+     * <p>
+     *  一些字段具有文本表示,例如星期几或年份。这些文本表示可以在此类中捕获以进行打印和解析。
+     * <p>
+     *  这个类是不可变的和线程安全的。
+     * 
      */
     static final class LocaleStore {
         /**
          * Map of value to text.
+         * <p>
+         *  值到文本的映射。
+         * 
          */
         private final Map<TextStyle, Map<Long, String>> valueTextMap;
         /**
          * Parsable data.
+         * <p>
+         *  可解析数据。
+         * 
          */
         private final Map<TextStyle, List<Entry<String, Long>>> parsable;
 
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数。
+         * 
+         * 
          * @param valueTextMap  the map of values to text to store, assigned and not altered, not null
          */
         LocaleStore(Map<TextStyle, Map<Long, String>> valueTextMap) {
@@ -532,6 +614,10 @@ class DateTimeTextProvider {
          * Gets the text for the specified field value, locale and style
          * for the purpose of printing.
          *
+         * <p>
+         *  获取指定字段值,语言环境和样式的文本,以便进行打印。
+         * 
+         * 
          * @param value  the value to get text for, not null
          * @param style  the style to get text for, not null
          * @return the text for the field value, null if no text found
@@ -546,6 +632,10 @@ class DateTimeTextProvider {
          * <p>
          * The iterator must be returned in order from the longest text to the shortest.
          *
+         * <p>
+         *  获取指定样式的文本迭代器字段,以便进行解析。
+         * <p>
+         * 
          * @param style  the style to get text for, null for all parsable text
          * @return the iterator of text to field pairs, in order from longest text to shortest text,
          *  null if the style is not parsable

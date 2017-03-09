@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,15 @@ package java.beans;
  * arbitrary set of if its properties have changed.  In this case the
  * old and new values should also be null.
  *
+ * <p>
+ *  每当符合JavaBeans&trade;的组件时,将传递"IndexedPropertyChange"事件。规范("bean")更改绑定的索引属性。
+ * 此类是<code> PropertyChangeEvent </code>的扩展,但包含已更改的属性的索引。
+ * <P>
+ *  如果旧值和新值的真值未知,则可以为旧值和新值提供空值。
+ * <P>
+ *  事件源可以发送空对象作为名称,以指示其属性已更改的任意集合。在这种情况下,旧值和新值也应为null。
+ * 
+ * 
  * @since 1.5
  * @author Mark Davidson
  */
@@ -48,6 +58,8 @@ public class IndexedPropertyChangeEvent extends PropertyChangeEvent {
     /**
      * Constructs a new <code>IndexedPropertyChangeEvent</code> object.
      *
+     * <p>
+     * 
      * @param source  The bean that fired the event.
      * @param propertyName  The programmatic name of the property that
      *             was changed.
@@ -65,6 +77,10 @@ public class IndexedPropertyChangeEvent extends PropertyChangeEvent {
     /**
      * Gets the index of the property that was changed.
      *
+     * <p>
+     *  构造一个新的<code> IndexedPropertyChangeEvent </code>对象。
+     * 
+     * 
      * @return The index specifying the property element that was
      *         changed.
      */

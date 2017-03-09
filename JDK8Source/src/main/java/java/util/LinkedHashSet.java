@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -103,6 +104,38 @@ package java.util;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  <p> <tt> Set </tt>界面的散列表和链接列表实现,具有可预测的迭代顺序。此实现不同于<tt> HashSet </tt>,因为它维护一个贯穿其所有条目的双向链表。
+ * 此链接列表定义迭代排序,它是元素插入集合的顺序(<i>插入顺序</i>)。请注意,如果元素<i>重新插入</i>到集合中,则插入顺序</i>不会受到影响。
+ *  (<tt> s.contains(e))时调用<tt> s.add(e)</tt>时重新插入<tt> e </tt> </tt>会在调用之前立即返回<tt> true </tt>。)。
+ * 
+ *  <p>这个实现使客户端不受{@link HashSet}提供的未指定的,通常混乱的顺序,而不会增加与{@link TreeSet}相关的成本。
+ * 它可以用于产生与原始序列具有相同顺序的集合的副本,而不考虑原始集合的实现：。
+ * <pre>
+ *  void foo(Set s){Set copy = new LinkedHashSet(s); ...}
+ * </pre>
+ *  如果模块在输入上获取一个集合,复制它,然后返回其顺序由副本的顺序确定的结果,则此技术特别有用。 (客户通常喜欢以与提交相同的顺序返回)。
+ * 
+ * <p>此类提供所有可选的<tt> Set </tt>操作,并允许空元素。
+ * 与<tt> HashSet </tt>一样,它为基本操作(<tt> add </tt>,<tt>包含</tt>和<tt>删除</tt>)提供了恒定时间性能,散列函数在这些桶之间适当地分散元素。
+ * 性能可能略低于<tt> HashSet </tt>,这是由于维护链接列表的额外费用,但有一个例外：对<tt> LinkedHashSet </tt>的迭代需要与<i>尺寸</i>,无论其容量如何。
+ * 对<tt> HashSet </tt>的迭代可能更昂贵,需要与其<i>容量成比例的时间。
+ * 
+ *  <p>链接的哈希集具有影响其性能的两个参数：<i>初始容量</i>和<i>负载因子</i>。它们的定义与<tt> HashSet </tt>一样。
+ * 然而,请注意,对于这个类别选择过高的初始容量值的惩罚对于<tt> HashSet </tt>来说不太严格,因为这个类的迭代时间不受容量的影响。
+ * 
+ *  <p> <strong>请注意,此实现未同步。</strong>如果多个线程同时访问链接的散列集,并且至少有一个线程修改集,则必须同步<em> </em>外部。
+ * 这通常通过在自然地封装集合的某个对象上同步来实现。
+ * 
+ * 如果不存在这样的对象,那么应该使用{@link Collections#synchronizeSet Collections.synchronizedSet}方法来"包装"该集合。
+ * 这最好在创建时完成,以防止意外的不同步访问集合：<pre> Set s = Collections.synchronizedSet(new LinkedHashSet(...)); </pre>。
+ * 
+ *  <p>此类的<tt>迭代器</tt>方法返回的迭代器是</em> fail-fast </em>：如果在创建迭代器之后的任何时间修改集合,迭代器自己的<tt> remove </tt>方法,迭代器将抛
+ * 出一个{@link ConcurrentModificationException}。
+ * 因此,面对并发修改,迭代器快速而干净地失败,而不是在将来的未确定时间冒任意的,非确定性行为的风险。
+ * 
+ *  <p>请注意,迭代器的故障快速行为不能得到保证,因为一般来说,在不同步并发修改的情况下不可能做出任何硬的保证。
+ * 
  * @param <E> the type of elements maintained by this set
  *
  * @author  Josh Bloch
@@ -125,6 +158,15 @@ public class LinkedHashSet<E>
      * Constructs a new, empty linked hash set with the specified initial
      * capacity and load factor.
      *
+     * <p>
+     * 故障快速迭代器在尽力而为的基础上抛出<tt> ConcurrentModificationException </tt>。
+     * 因此,编写依赖于此异常的程序的正确性是错误的：<i>迭代器的故障快速行为应该仅用于检测错误。</i>。
+     * 
+     *  <p>此类是的成员
+     * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+     *  Java集合框架</a>。
+     * 
+     * 
      * @param      initialCapacity the initial capacity of the linked hash set
      * @param      loadFactor      the load factor of the linked hash set
      * @throws     IllegalArgumentException  if the initial capacity is less
@@ -138,6 +180,10 @@ public class LinkedHashSet<E>
      * Constructs a new, empty linked hash set with the specified initial
      * capacity and the default load factor (0.75).
      *
+     * <p>
+     *  构造具有指定的初始容量和负载因子的新的空链接哈希集。
+     * 
+     * 
      * @param   initialCapacity   the initial capacity of the LinkedHashSet
      * @throws  IllegalArgumentException if the initial capacity is less
      *              than zero
@@ -149,6 +195,9 @@ public class LinkedHashSet<E>
     /**
      * Constructs a new, empty linked hash set with the default initial
      * capacity (16) and load factor (0.75).
+     * <p>
+     * 构造具有指定初始容量和默认负载系数(0.75)的新的空链接散列集。
+     * 
      */
     public LinkedHashSet() {
         super(16, .75f, true);
@@ -160,6 +209,10 @@ public class LinkedHashSet<E>
      * capacity sufficient to hold the elements in the specified collection
      * and the default load factor (0.75).
      *
+     * <p>
+     *  使用默认初始容量(16)和负载系数(0.75)构造一个新的空链接散列集。
+     * 
+     * 
      * @param c  the collection whose elements are to be placed into
      *           this set
      * @throws NullPointerException if the specified collection is null
@@ -185,6 +238,10 @@ public class LinkedHashSet<E>
      * The created {@code Spliterator} additionally reports
      * {@link Spliterator#SUBSIZED}.
      *
+     * <p>
+     *  构造具有与指定集合相同的元素的新的链接哈希集。创建的链接哈希集的初始容量足以容纳指定集合中的元素和默认负载因子(0.75)。
+     * 
+     * 
      * @return a {@code Spliterator} over the elements in this set
      * @since 1.8
      */

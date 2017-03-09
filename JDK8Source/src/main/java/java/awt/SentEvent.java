@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,11 +35,17 @@ import sun.awt.SunToolkit;
  * event even if it is currently blocked waiting for a SequencedEvent or
  * another SentEvent to be handled.
  *
+ * <p>
+ *  嵌套AWTEvent的包装标记,指示事件是从另一个AppContext发送的。目标AppContext应处理事件,即使它当前被阻塞等待SequencedEvent或另一个SentEvent被处理。
+ * 
+ * 
  * @author David Mendenhall
  */
 class SentEvent extends AWTEvent implements ActiveEvent {
     /*
      * serialVersionUID
+     * <p>
+     *  serialVersionUID
      */
     private static final long serialVersionUID = -383615247028828931L;
 

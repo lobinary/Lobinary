@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 /**
@@ -10,6 +11,8 @@ package org.omg.PortableInterceptor;
 
 /** The object reference factory.  This provides the capability of
   * creating an object reference.
+  * <p>
+  * 
   */
 public final class ObjectReferenceFactoryHolder implements org.omg.CORBA.portable.Streamable
 {

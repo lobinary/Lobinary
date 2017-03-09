@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -95,6 +96,10 @@ class TypeConvertingMethodAdapter extends MethodVisitor {
 
     /**
      * Class name to Wrapper hash, derived from Wrapper.hashWrap()
+     * <p>
+     *  类名称到Wrapper哈希,派生自Wrapper.hashWrap()
+     * 
+     * 
      * @param xn
      * @return The hash code 0-15
      */
@@ -163,6 +168,10 @@ class TypeConvertingMethodAdapter extends MethodVisitor {
 
     /**
      * Convert types by unboxing. The source type is known to be a primitive wrapper.
+     * <p>
+     *  通过解除封装转换类型。源类型已知是原始包装器。
+     * 
+     * 
      * @param sname A primitive wrapper corresponding to wrapped reference source type
      * @param wt A primitive wrapper being converted to
      */
@@ -207,6 +216,10 @@ class TypeConvertingMethodAdapter extends MethodVisitor {
     /**
      * Convert an argument of type 'arg' to be passed to 'target' assuring that it is 'functional'.
      * Insert the needed conversion instructions in the method code.
+     * <p>
+     *  将类型"arg"的参数转换为要传递给"target",确保它是"功能"。在方法代码中插入所需的转换指令。
+     * 
+     * 
      * @param arg
      * @param target
      * @param functional
@@ -287,6 +300,9 @@ class TypeConvertingMethodAdapter extends MethodVisitor {
      * org.objectweb.asm.commons.InstructionAdapter. Part of ASM: a very small
      * and fast Java bytecode manipulation framework.
      * Copyright (c) 2000-2005 INRIA, France Telecom All rights reserved.
+     * <p>
+     *  以下方法从org.objectweb.asm.commons.InstructionAdapter复制。 ASM的一部分：一个非常小和快速的Java字节码操作框架。
+     * 版权所有(c)2000-2005 INRIA,法国电信版权所有。
      */
     void iconst(final int cst) {
         if (cst >= -1 && cst <= 5) {

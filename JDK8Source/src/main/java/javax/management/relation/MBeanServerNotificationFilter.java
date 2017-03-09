@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,12 @@ import java.util.Vector;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>2605900539589789736L</code>.
  *
+ * <p>
+ *  过滤{@link MBeanServerNotification}。此筛选器通过选择感兴趣的对象名称和操作(注册,取消注册,两者)(对应于通知类型)过滤MBeanServer通知。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> 2605900539589789736L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID must be constant
@@ -91,6 +98,8 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField selectedNames List List of {@link ObjectName}s of interest
      *         <ul>
      *         <li><code>null</code> means that all {@link ObjectName}s are implicitly selected
@@ -130,6 +139,8 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     //
 
     /**
+    /* <p>
+    /* 
      * @serial List of {@link ObjectName}s of interest
      *         <ul>
      *         <li><code>null</code> means that all {@link ObjectName}s are implicitly selected
@@ -140,6 +151,8 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     private List<ObjectName> selectedNames = new Vector<ObjectName>();
 
     /**
+    /* <p>
+    /* 
      * @serial List of {@link ObjectName}s with no interest
      *         <ul>
      *         <li><code>null</code> means that all {@link ObjectName}s are implicitly deselected
@@ -156,6 +169,9 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     /**
      * Creates a filter selecting all MBeanServerNotification notifications for
      * all ObjectNames.
+     * <p>
+     *  创建一个过滤器,选择所有ObjectName的所有MBeanServerNotification通知。
+     * 
      */
     public MBeanServerNotificationFilter() {
 
@@ -178,6 +194,9 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     /**
      * Disables any MBeanServerNotification (all ObjectNames are
      * deselected).
+     * <p>
+     *  禁用任何MBeanServerNotification(所有对象名称都被取消选择)。
+     * 
      */
     public synchronized void disableAllObjectNames() {
 
@@ -195,6 +214,10 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     /**
      * Disables MBeanServerNotifications concerning given ObjectName.
      *
+     * <p>
+     *  禁用有关给定ObjectName的MBeanServerNotifications。
+     * 
+     * 
      * @param objectName  ObjectName no longer of interest
      *
      * @exception IllegalArgumentException  if the given ObjectName is null
@@ -233,6 +256,9 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
 
     /**
      * Enables all MBeanServerNotifications (all ObjectNames are selected).
+     * <p>
+     *  启用所有MBeanServer通知(选择所有对象名称)。
+     * 
      */
     public synchronized void enableAllObjectNames() {
 
@@ -250,6 +276,10 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     /**
      * Enables MBeanServerNotifications concerning given ObjectName.
      *
+     * <p>
+     *  启用有关给定ObjectName的MBeanServer通知。
+     * 
+     * 
      * @param objectName  ObjectName of interest
      *
      * @exception IllegalArgumentException  if the given ObjectName is null
@@ -289,6 +319,10 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     /**
      * Gets all the ObjectNames enabled.
      *
+     * <p>
+     *  获取所有对象名称。
+     * 
+     * 
      * @return Vector of ObjectNames:
      * <P>- null means all ObjectNames are implicitly selected, except the
      * ObjectNames explicitly deselected
@@ -306,6 +340,10 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
     /**
      * Gets all the ObjectNames disabled.
      *
+     * <p>
+     *  获取所有ObjectName禁用。
+     * 
+     * 
      * @return Vector of ObjectNames:
      * <P>- null means all ObjectNames are implicitly deselected, except the
      * ObjectNames explicitly selected
@@ -334,6 +372,11 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
      * selected
      * <P>then the notification is sent to the listener.
      *
+     * <p>
+     *  在将指定的通知发送到侦听器之前调用。
+     *  <P>如果：<P>  - 选择相关MBean的对象名称(显式OR(隐式且未明确取消选择))<P> AND <P>  - 选择操作类型(注册或注销)<P >然后将通知发送到侦听器。
+     * 
+     * 
      * @param notif  The notification to be sent.
      *
      * @return true if the notification has to be sent to the listener, false
@@ -426,6 +469,9 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
 
     /**
      * Deserializes an {@link MBeanServerNotificationFilter} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link MBeanServerNotificationFilter}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -456,6 +502,8 @@ public class MBeanServerNotificationFilter extends NotificationFilterSupport {
 
     /**
      * Serializes an {@link MBeanServerNotificationFilter} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link MBeanServerNotificationFilter}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

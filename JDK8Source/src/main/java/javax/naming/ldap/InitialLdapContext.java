@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -76,6 +77,26 @@ import java.util.Hashtable;
   * Service provider implementors should read the "Service Provider" section
   * in the <tt>LdapContext</tt> class description for implementation details.
   *
+  * <p>
+  *  这个类是执行LDAPv3风格的扩展操作和控件的开始上下文。
+  * p>
+  *  有关同步的详细信息,请参阅<tt> javax.naming.InitialContext </tt>和<tt> javax.naming.InitialDirContext </tt>,以及如何创建
+  * 初始上下文的策略。
+  * 
+  *  <h1>请求控件</h1>创建初始上下文(<tt> InitialLdapContext </tt>)时,可以指定请求控件的列表。
+  * 这些控件将用作由上下文或从上下文派生的上下文执行的任何隐式LDAP"绑定"操作的请求控件。这些称为<em>连接请求控件</em>。
+  * 使用<tt> getConnectControls()</tt>获取上下文的连接请求控件。
+  * p>
+  *  提供给初始上下文构造函数的请求控件不是</em>用作后续上下文操作(例如搜索和查找)的上下文请求控件。通过使用<tt> setRequestControls()</tt>设置和更新上下文请求控件。
+  * p>
+  * 如图所示,可以存在与上下文相关联的两组不同的请求控制：连接请求控制和上下文请求控制。这对于那些需要发送可能不适用于上下文操作和任何隐式LDAP"绑定"操作的关键控件的应用程序都是必需的。
+  * 典型的用户程序将执行以下操作：blockquote> <pre> InitialLdapContext lctx = new InitialLdapContext(env,critConnCtls); 
+  * lctx.setRequestControls(critModCtls); lctx.modifyAttributes(name,mods); Controls [] respCtls = lctx.g
+  * etResponseControls(); / pre> </blockquote>它首先指定了创建初始上下文的关键控件(<tt> critConnCtls </tt>),然后为上下文操作设置上下文的请
+  * 求控件(<tt> critModCtls </tt>) 。
+  * 如图所示,可以存在与上下文相关联的两组不同的请求控制：连接请求控制和上下文请求控制。这对于那些需要发送可能不适用于上下文操作和任何隐式LDAP"绑定"操作的关键控件的应用程序都是必需的。
+  * 如果由于某种原因<tt> lctx </tt>需要重新连接到服务器,它将使用<tt> critConnCtls </tt>。
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @author Vincent Ryan
@@ -96,6 +117,12 @@ public class InitialLdapContext extends InitialDirContext implements LdapContext
      * connection request controls.
      * Equivalent to <tt>new InitialLdapContext(null, null)</tt>.
      *
+     * <p>
+     * 有关请求控件的更多讨论,请参阅<tt> LdapContext </tt>界面。
+     * p>
+     *  服务提供者实现者应阅读<tt> LdapContext </tt>类描述中的"服务提供者"部分,了解实现细节。
+     * 
+     * 
      * @throws  NamingException if a naming exception is encountered
      */
     public InitialLdapContext() throws NamingException {
@@ -117,6 +144,10 @@ public class InitialLdapContext extends InitialDirContext implements LdapContext
      * connection request controls.  See the class description
      * for details.
      *
+     * <p>
+     *  使用无环境属性或连接请求控件构造初始上下文。等效于<tt> new InitialLdapContext(null,null)</tt>。
+     * 
+     * 
      * @param environment
      *          environment used to create the initial DirContext.
      *          Null indicates an empty environment.
@@ -157,6 +188,13 @@ public class InitialLdapContext extends InitialDirContext implements LdapContext
     /**
      * Retrieves the initial LDAP context.
      *
+     * <p>
+     *  使用环境属性和连接请求控件构造初始上下文。有关环境属性的讨论,请参见<tt> javax.naming.InitialContext </tt>。
+     * 
+     * <p>此构造函数不会修改其参数或保存对它们的引用,但可以保存克隆或副本。调用者在传递给构造函数后,不应在<tt>环境</tt>中修改可变键和值。
+     * 
+     *  <p> <tt> connCtls </tt>用作基础上下文实例的连接请求控件。有关详细信息,请参阅类描述。
+     * 
      * @return The non-null cached initial context.
      * @exception NotContextException If the initial context is not an
      * instance of <tt>LdapContext</tt>.

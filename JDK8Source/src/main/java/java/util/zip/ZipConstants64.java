@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,12 +29,18 @@ package java.util.zip;
 /*
  * This class defines the constants that are used by the classes
  * which manipulate Zip64 files.
+ * <p>
+ *  这个类定义了操作Zip64文件的类使用的常量。
+ * 
  */
 
 class ZipConstants64 {
 
     /*
      * ZIP64 constants
+     * <p>
+     *  ZIP64常量
+     * 
      */
     static final long ZIP64_ENDSIG = 0x06064b50L;  // "PK\006\006"
     static final long ZIP64_LOCSIG = 0x07064b50L;  // "PK\006\007"
@@ -47,6 +54,9 @@ class ZipConstants64 {
 
     /*
      * Zip64 End of central directory (END) header field offsets
+     * <p>
+     *  Zip64中心目录结束(END)标题字段偏移
+     * 
      */
     static final int  ZIP64_ENDLEN = 4;       // size of zip64 end of central dir
     static final int  ZIP64_ENDVEM = 12;      // version made by
@@ -61,6 +71,9 @@ class ZipConstants64 {
 
     /*
      * Zip64 End of central directory locator field offsets
+     * <p>
+     *  Zip64中央目录定位器字段偏移的结束
+     * 
      */
     static final int  ZIP64_LOCDSK = 4;       // disk number start
     static final int  ZIP64_LOCOFF = 8;       // offset of zip64 end
@@ -68,6 +81,9 @@ class ZipConstants64 {
 
     /*
      * Zip64 Extra local (EXT) header field offsets
+     * <p>
+     *  Zip64额外本地(EXT)标头字段偏移量
+     * 
      */
     static final int  ZIP64_EXTCRC = 4;       // uncompressed file crc-32 value
     static final int  ZIP64_EXTSIZ = 8;       // compressed size, 8-byte
@@ -75,6 +91,9 @@ class ZipConstants64 {
 
     /*
      * Language encoding flag EFS
+     * <p>
+     *  语言编码标志EFS
+     * 
      */
     static final int EFS = 0x800;       // If this bit is set the filename and
                                         // comment fields for this file must be
@@ -84,10 +103,16 @@ class ZipConstants64 {
      * Constants below are defined here (instead of in ZipConstants)
      * to avoid being exposed as public fields of ZipFile, ZipEntry,
      * ZipInputStream and ZipOutputstream.
+     * <p>
+     *  下面的常量在这里被定义(而不是在ZipConstants),以避免暴露为ZipFile,ZipEntry,ZipInputStream和ZipOutputstream的公共字段。
+     * 
      */
 
     /*
      * Extra field header ID
+     * <p>
+     *  附加字段标头ID
+     * 
      */
     static final int  EXTID_ZIP64 = 0x0001;    // Zip64
     static final int  EXTID_NTFS  = 0x000a;    // NTFS
@@ -96,6 +121,8 @@ class ZipConstants64 {
 
     /*
      * EXTT timestamp flags
+     * <p>
+     *  EXTT时间戳标记
      */
     static final int  EXTT_FLAG_LMT = 0x1;       // LastModifiedTime
     static final int  EXTT_FLAG_LAT = 0x2;       // LastAccessTime

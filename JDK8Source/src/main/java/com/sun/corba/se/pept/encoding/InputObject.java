@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,13 @@ import com.sun.corba.se.pept.protocol.MessageMediator;
  * <p>Note: the protocol block may also use the <code>InputObject</code> to
  * obtain header metadata.</p>
  *
+ * <p>
+ *  <p>这是<代码> InputObject </代码>是用于由呈现块来获得的编程语言的接口从在消息的编码数据类型的数据。 </p>
+ * 
+ *  <p> <code> InputObject </code>的实现包含编码数据。当介绍块请求数据的<代码> InputObject </代码>执行负责转换的数据的编码表示由编程语言所期望的类型。
+ * </P>。
+ * 
+ * 
  * @author Harold Carr
 */
 public interface InputObject

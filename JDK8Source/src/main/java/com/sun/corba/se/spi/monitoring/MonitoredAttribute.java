@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.util.*;
 /**
  * <p>
  *
+ * <p>
+ * <p>
+ * 
+ * 
  * @author Hemanth Puttaswamy
  * </p>
  * <p>
@@ -49,6 +54,13 @@ public interface MonitoredAttribute {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  获取属性的监视属性信息。
+ * </p>
+ * <p>
+ * 
+ * 
  * @param monitoredAttributeInfo for this Monitored Attribute.
  * </p>
  */
@@ -63,6 +75,15 @@ public interface MonitoredAttribute {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  设置监视属性的值,如果isWritable()为false,则该方法将抛出ILLEGAL操作异常。
+ * 
+ *  另外,"值"的类型应该与特定实例的MonitoredAttributeInfo中指定的相同。
+ * </p>
+ * <p>
+ * 
+ * 
  * @param value should be any one of the Basic Java Type Objects which are
  * Long, Double, Float, String, Integer, Short, Character, Byte.
  * </p>
@@ -85,6 +106,18 @@ public interface MonitoredAttribute {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  获取"监视属性"的值。该值可以从模块的不同部分获得。用户可以选择将对getValue()的调用委托给其他变量。
+ * 
+ *  注意：确保getvalue中返回的对象类型与此属性的MonitoredAttributeInfo中指定的对象类型相同非常重要。
+ * </p>
+ * <p>
+ * 
+ * </p>
+ * <p>
+ * 
+ * 
  * @param value is the current value for this MonitoredAttribute
  * </p>
  */
@@ -95,6 +128,13 @@ public interface MonitoredAttribute {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  获取监视属性的名称。
+ * </p>
+ * <p>
+ * 
+ * 
  * @param name of this Attribute
  * </p>
  */
@@ -107,6 +147,7 @@ public interface MonitoredAttribute {
  * then clearState() is a No Op.
  * </p>
  *
+ * <p>
  */
     public void clearState();
 

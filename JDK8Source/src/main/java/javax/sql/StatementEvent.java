@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -25,6 +26,9 @@
 
 /*
  * Created on Apr 28, 2005
+ * <p>
+ *  创建于2005年4月28日
+ * 
  */
 package javax.sql;
 
@@ -38,6 +42,12 @@ import java.util.EventObject;
  * <code>PreparedStatement</code> that is associated with the <code>PooledConnection</code> has been closed or the driver determines
  * is invalid.
  * <p>
+ * <p>
+ *  将<code> StatementEvent </code>发送到所有已向<code> PooledConnection </code>注册的<code> StatementEventListener
+ *  </code>。
+ * 当驱动程序确定与<code> PooledConnection </code>相关联的<code> PreparedStatement </code>已关闭或驱动程序确定无效时,会发生这种情况。
+ * <p>
+ * 
  * @since 1.6
  */
 public class StatementEvent extends EventObject {
@@ -51,6 +61,12 @@ public class StatementEvent extends EventObject {
          * <code>PreparedStatement</code>.  The <code>SQLException</code> contained in the event defaults to
          * null.
          * <p>
+         * <p>
+         *  使用指定的<code> PooledConnection </code>和<code> PreparedStatement </code>构造一个<code> StatementEvent </code>
+         * 。
+         * 事件中包含的<code> SQLException </code>默认为null。
+         * <p>
+         * 
          * @param con                   The <code>PooledConnection</code> that the closed or invalid
          * <code>PreparedStatement</code>is associated with.
          * @param statement             The <code>PreparedStatement</code> that is being closed or is invalid
@@ -72,6 +88,11 @@ public class StatementEvent extends EventObject {
          * Constructs a <code>StatementEvent</code> with the specified <code>PooledConnection</code>,
          * <code>PreparedStatement</code> and <code>SQLException</code>
          * <p>
+         * <p>
+         *  用指定的<code> PooledConnection </code>,<code> PreparedStatement </code>和<code> SQLException </code>构造一个
+         * <code> StatementEvent </code>。
+         * <p>
+         * 
          * @param con                   The <code>PooledConnection</code> that the closed or invalid <code>PreparedStatement</code>
          * is associated with.
          * @param statement             The <code>PreparedStatement</code> that is being closed or is invalid
@@ -95,6 +116,10 @@ public class StatementEvent extends EventObject {
         /**
          * Returns the <code>PreparedStatement</code> that is being closed or is invalid
          * <p>
+         * <p>
+         *  返回正在关闭或无效的<code> PreparedStatement </code>
+         * <p>
+         * 
          * @return      The <code>PreparedStatement</code> that is being closed or is invalid
          * <p>
          * @since 1.6
@@ -107,6 +132,9 @@ public class StatementEvent extends EventObject {
         /**
          * Returns the <code>SQLException</code> the driver is about to throw
          * <p>
+         * <p>
+         *  返回驱动程序即将抛出的<code> SQLException </code>
+         * 
          * @return      The <code>SQLException</code> the driver is about to throw
          * <p>
          * @since 1.6

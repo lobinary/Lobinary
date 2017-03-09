@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,10 @@
 * The Helper for <tt>Object</tt>.  For more information on
 * Helper files, see <a href="doc-files/generatedfiles.html#helper">
 * "Generated Files: Helper Files"</a>.<P>
+* <p>
+*  <tt>对象</tt>的帮助器。有关帮助文件的详细信息,请参阅<a href="doc-files/generatedfiles.html#helper">"生成的文件：帮助程序文件"</a>。
+* <P>。
+* 
 */
 
 /*
@@ -34,6 +39,7 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
  */
 
 package org.omg.CORBA;

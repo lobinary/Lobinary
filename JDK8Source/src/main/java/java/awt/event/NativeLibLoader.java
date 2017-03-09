@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,12 @@ class NativeLibLoader {
      *
      * For now, we know it's done by the implementation, and we assume
      * that the name of the library is "awt".  -br.
+     * <p>
+     *  这是从java.awt.Toolkit复制,因为我们需要在sun.awt.image中加载的库：
+     * 
+     *  警告：这是AWT加载本机库的问题的临时解决方法。这个包中的许多类(sun.awt.image)有一个本地方法initIDs(),它初始化JNI字段和在它们实现的本地部分使用的方法id。
+     * 
+     *  由于这些id的使用和存储由实现库完成,所以这些方法的实现由特定的AWT实现(例如,"Toolkit / s / Peer")提供,例如Motif,Microsoft Windows或Tiny。
      */
     static void loadLibraries() {
         java.security.AccessController.doPrivileged(

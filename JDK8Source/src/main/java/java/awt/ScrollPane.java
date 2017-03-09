@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,31 @@ import java.io.IOException;
  * will change dynamically depending on whether the scrollbars are
  * currently visible or not.
  *
+ * <p>
+ *  对单个子组件实现自动水平和/或垂直滚动​​的容器类。滚动条的显示策略可以设置为：
+ * <OL>
+ *  <LI>根据需要：滚动条仅在需要时通过滚动条创建和显示<LI> always：滚动条创建并始终由滚动条显示<LI>从不：滚动条从未创建或显示的滚动条
+ * </OL>
+ * <P>
+ *  水平和垂直滚动条的状态由两个实现<code> Adjustable </code>接口的<code> ScrollPaneAdjustable </code>对象(每个维度一个)表示。
+ *  API提供了访问这些对象的方法,以便可以处理Adjustable对象上的属性(例如unitIncrement,value等)。
+ * <P>
+ *  某些可调属性(minimum,maximum,blockIncrement和visibleAmount)由滚动条根据滚动条及其子项的几何形状在内部设置,这些不应该由使用滚动条的程序设置。
+ * <P>
+ *  如果滚动条显示策略被定义为"从不",则滚动条仍然可以使用setScrollPosition()方法以编程方式滚动,滚动条将适当地移动和剪切孩子的内容。
+ * 如果程序需要创建和管理自己的可调节控件,则此策略很有用。
+ * <P>
+ * 滚动条的放置由用户在程序外部设置的平台特定属性控制。
+ * <P>
+ *  此容器的初始大小设置为100x100,但可以使用setSize()重置。
+ * <P>
+ *  默认情况下,启用带滚轮的鼠标滚轮。这可以使用<code> setWheelScrollingEnabled </code>禁用。可以通过设置水平和垂直可调节的块和单位增量来定制滚轮滚动。
+ * 有关如何分派鼠标滚轮事件的信息,请参阅{@link MouseWheelEvent}的类描述。
+ * <P>
+ *  插图用于定义滚动条和滚动窗格创建的任何边框所使用的任何空间。 getInsets()可以用于获取插入的当前值。
+ * 如果scrollbarsAlwaysVisible的值为false,那么insets的值将根据滚动条当前是否可见而动态地改变。
+ * 
+ * 
  * @author      Tom Ball
  * @author      Amy Fowler
  * @author      Tim Prinzing
@@ -94,6 +120,9 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -109,18 +138,27 @@ public class ScrollPane extends Container implements Accessible {
      * Specifies that horizontal/vertical scrollbar should be shown
      * only when the size of the child exceeds the size of the scrollpane
      * in the horizontal/vertical dimension.
+     * <p>
+     *  指定只有当子项的大小超过水平/垂直维度中滚动窗格的大小时才显示水平/垂直滚动条。
+     * 
      */
     public static final int SCROLLBARS_AS_NEEDED = 0;
 
     /**
      * Specifies that horizontal/vertical scrollbars should always be
      * shown regardless of the respective sizes of the scrollpane and child.
+     * <p>
+     *  指定水平/垂直滚动条应始终显示,而不考虑滚动条和子项的相应大小。
+     * 
      */
     public static final int SCROLLBARS_ALWAYS = 1;
 
     /**
      * Specifies that horizontal/vertical scrollbars should never be shown
      * regardless of the respective sizes of the scrollpane and child.
+     * <p>
+     *  指定不管滚动条和子项的相应大小,都不应显示水平/垂直滚动条。
+     * 
      */
     public static final int SCROLLBARS_NEVER = 2;
 
@@ -129,6 +167,10 @@ public class ScrollPane extends Container implements Accessible {
      * This integer will represent one of these 3 displays -
      * (SCROLLBARS_ALWAYS, SCROLLBARS_AS_NEEDED, SCROLLBARS_NEVER)
      *
+     * <p>
+     * 有3种方式可以显示滚动条。此整数将表示这3个显示中的一个 - (SCROLLBARS_ALWAYS,SCROLLBARS_AS_NEEDED,SCROLLBARS_NEVER)
+     * 
+     * 
      * @serial
      * @see #getScrollbarDisplayPolicy
      */
@@ -141,6 +183,13 @@ public class ScrollPane extends Container implements Accessible {
      * <code>setMinimum()</code>, <code>setMaximum()</code>,
      * <code>setVisibleAmount()</code>.
      *
+     * <p>
+     *  可调整的垂直滚动条。
+     * 请务必注意,您必须<em>不</em>调用3 <code>可调整</code>方法,即：<code> setMinimum()</code>,<code> setMaximum >,<code> set
+     * VisibleAmount()</code>。
+     *  可调整的垂直滚动条。
+     * 
+     * 
      * @serial
      * @see #getVAdjustable
      */
@@ -153,6 +202,13 @@ public class ScrollPane extends Container implements Accessible {
      * <code>setMinimum()</code>, <code>setMaximum()</code>,
      * <code>setVisibleAmount()</code>.
      *
+     * <p>
+     *  可调水平滚动条。
+     * 请务必注意,您必须<em>不</em>调用3 <code>可调整</code>方法,即：<code> setMinimum()</code>,<code> setMaximum >,<code> set
+     * VisibleAmount()</code>。
+     *  可调水平滚动条。
+     * 
+     * 
      * @serial
      * @see #getHAdjustable
      */
@@ -167,6 +223,10 @@ public class ScrollPane extends Container implements Accessible {
      * Indicates whether or not scrolling should take place when a
      * MouseWheelEvent is received.
      *
+     * <p>
+     *  指示是否在接收到MouseWheelEvent时进行滚动。
+     * 
+     * 
      * @serial
      * @since 1.4
      */
@@ -174,12 +234,19 @@ public class ScrollPane extends Container implements Accessible {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 7956609840827222915L;
 
     /**
      * Create a new scrollpane container with a scrollbar display
      * policy of "as needed".
+     * <p>
+     *  创建一个新的滚动条容器,滚动条显示策略为"根据需要"。
+     * 
+     * 
      * @throws HeadlessException if GraphicsEnvironment.isHeadless()
      *     returns true
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -190,6 +257,10 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * Create a new scrollpane container.
+     * <p>
+     *  创建一个新的scrollpane容器。
+     * 
+     * 
      * @param scrollbarDisplayPolicy policy for when scrollbars should be shown
      * @throws IllegalArgumentException if the specified scrollbar
      *     display policy is invalid
@@ -223,6 +294,9 @@ public class ScrollPane extends Container implements Accessible {
     /**
      * Construct a name for this component.  Called by getName() when the
      * name is null.
+     * <p>
+     *  构造此组件的名称。当名称为null时由getName()调用。
+     * 
      */
     String constructComponentName() {
         synchronized (ScrollPane.class) {
@@ -245,6 +319,10 @@ public class ScrollPane extends Container implements Accessible {
      * Adds the specified component to this scroll pane container.
      * If the scroll pane has an existing child component, that
      * component is removed and the new one is added.
+     * <p>
+     *  将指定的组件添加到此滚动窗格容器。如果滚动窗格具有现有子组件,则删除该组件并添加新组件。
+     * 
+     * 
      * @param comp the component to be added
      * @param constraints  not applicable
      * @param index position of child component (must be &lt;= 0)
@@ -268,6 +346,10 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * Returns the display policy for the scrollbars.
+     * <p>
+     *  返回滚动条的显示策略。
+     * 
+     * 
      * @return the display policy for the scrollbars
      */
     public int getScrollbarDisplayPolicy() {
@@ -276,6 +358,10 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * Returns the current size of the scroll pane's view port.
+     * <p>
+     *  返回滚动窗格的视图端口的当前大小。
+     * 
+     * 
      * @return the size of the view port in pixels
      */
     public Dimension getViewportSize() {
@@ -288,6 +374,10 @@ public class ScrollPane extends Container implements Accessible {
      * Returns the height that would be occupied by a horizontal
      * scrollbar, which is independent of whether it is currently
      * displayed by the scroll pane or not.
+     * <p>
+     *  返回将由水平滚动条占用的高度,这与其是否当前由滚动窗格显示无关。
+     * 
+     * 
      * @return the height of a horizontal scrollbar in pixels
      */
     public int getHScrollbarHeight() {
@@ -305,6 +395,10 @@ public class ScrollPane extends Container implements Accessible {
      * Returns the width that would be occupied by a vertical
      * scrollbar, which is independent of whether it is currently
      * displayed by the scroll pane or not.
+     * <p>
+     * 返回垂直滚动条所占用的宽度,这与当前是否由滚动窗口显示无关。
+     * 
+     * 
      * @return the width of a vertical scrollbar in pixels
      */
     public int getVScrollbarWidth() {
@@ -323,6 +417,10 @@ public class ScrollPane extends Container implements Accessible {
      * represents the state of the vertical scrollbar.
      * The declared return type of this method is
      * <code>Adjustable</code> to maintain backward compatibility.
+     * <p>
+     *  返回代表垂直滚动条状态的<code> ScrollPaneAdjustable </code>对象。此方法的声明返回类型为<code> Adjustable </code>以保持向后兼容性。
+     * 
+     * 
      * @see java.awt.ScrollPaneAdjustable
      */
     public Adjustable getVAdjustable() {
@@ -334,6 +432,10 @@ public class ScrollPane extends Container implements Accessible {
      * represents the state of the horizontal scrollbar.
      * The declared return type of this method is
      * <code>Adjustable</code> to maintain backward compatibility.
+     * <p>
+     *  返回代表水平滚动条状态的<code> ScrollPaneAdjustable </code>对象。此方法的声明返回类型为<code> Adjustable </code>以保持向后兼容性。
+     * 
+     * 
      * @see java.awt.ScrollPaneAdjustable
      */
     public Adjustable getHAdjustable() {
@@ -350,6 +452,11 @@ public class ScrollPane extends Container implements Accessible {
      * height = (child height - view port height).
      * This is a convenience method which interfaces with the Adjustable
      * objects which represent the state of the scrollbars.
+     * <p>
+     *  滚动到子组件中的指定位置。只有滚动窗格包含子对象时,对此方法的调用才有效。指定儿童的法律滚动边界之外的位置将滚动到最接近的法律位置。
+     * 法律边界定义为矩形：x = 0,y = 0,width =(子宽度 - 视图端口宽度),height =(子高度 - 视图端口高度)。这是一个方便的方法,它与代表滚动条状态的可调对象接口。
+     * 
+     * 
      * @param x the x position to scroll to
      * @param y the y position to scroll to
      * @throws NullPointerException if the scrollpane does not contain
@@ -376,6 +483,11 @@ public class ScrollPane extends Container implements Accessible {
      * height = (child height - view port height).
      * This is a convenience method which interfaces with the Adjustable
      * objects which represent the state of the scrollbars.
+     * <p>
+     * 滚动到子组件中的指定位置。对此方法的调用仅在滚动窗格包含子项且指定的位置在子项的合法滚动边界内时有效。指定儿童的法律滚动边界之外的位置将滚动到最接近的法律位置。
+     * 法律边界定义为矩形：x = 0,y = 0,width =(子宽度 - 视图端口宽度),height =(子高度 - 视图端口高度)。这是一个方便的方法,它与代表滚动条状态的可调对象接口。
+     * 
+     * 
      * @param p the Point representing the position to scroll to
      * @throws NullPointerException if {@code p} is {@code null}
      */
@@ -388,6 +500,10 @@ public class ScrollPane extends Container implements Accessible {
      * at the 0,0 location of the scrolled panel's view port.
      * This is a convenience method which interfaces with the adjustable
      * objects which represent the state of the scrollbars.
+     * <p>
+     *  返回显示在滚动面板视图端口的0,0位置的子对象中当前的x,y位置。这是一个方便的方法,它与代表滚动条状态的可调节对象接口。
+     * 
+     * 
      * @return the coordinate position for the current scroll position
      * @throws NullPointerException if the scrollpane does not contain
      *     a child
@@ -405,6 +521,10 @@ public class ScrollPane extends Container implements Accessible {
     /**
      * Sets the layout manager for this container.  This method is
      * overridden to prevent the layout mgr from being set.
+     * <p>
+     *  设置此容器的布局管理器。将覆盖此方法以防止设置布局mgr。
+     * 
+     * 
      * @param mgr the specified layout manager
      */
     public final void setLayout(LayoutManager mgr) {
@@ -417,6 +537,10 @@ public class ScrollPane extends Container implements Accessible {
      * position to be invalid, the scroll position is set to the closest
      * valid position.
      *
+     * <p>
+     *  通过将其子项大小调整为其首选大小来放出此容器。如果孩子的新的优选大小导致当前滚动位置无效,则滚动位置被设置为最近的有效位置。
+     * 
+     * 
      * @see Component#validate
      */
     public void doLayout() {
@@ -429,6 +553,9 @@ public class ScrollPane extends Container implements Accessible {
      * of the child then the child is allocated enough
      * to fill the viewport, otherwise the child is given
      * it's preferred size.
+     * <p>
+     *  确定分配子组件的大小。如果视口区域大于子元素的首选大小,则子元素被分配足以填充视口,否则子元素被赋予其优选大小。
+     * 
      */
     Dimension calculateChildSize() {
         //
@@ -484,6 +611,8 @@ public class ScrollPane extends Container implements Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>doLayout()</code>.
      */
@@ -514,6 +643,10 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * Prints the component in this scroll pane.
+     * <p>
+     *  在此滚动窗格中打印组件。
+     * 
+     * 
      * @param g the specified Graphics window
      * @see Component#print
      * @see Component#printAll
@@ -539,6 +672,9 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * Creates the scroll pane's peer.
+     * <p>
+     *  创建滚动窗格的对等体。
+     * 
      */
     public void addNotify() {
         synchronized (getTreeLock()) {
@@ -577,6 +713,11 @@ public class ScrollPane extends Container implements Accessible {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     * 返回表示此<code> ScrollPane </code>的状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return the parameter string of this scroll pane
      */
     public String paramString() {
@@ -613,6 +754,10 @@ public class ScrollPane extends Container implements Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  处理通过滚动适当的量传递到此<code> ScrollPane </code>的鼠标滚轮事件。 <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param e  the mouse wheel event
      * @since 1.4
      */
@@ -626,6 +771,10 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * If wheel scrolling is enabled, we return true for MouseWheelEvents
+     * <p>
+     *  如果启用滚轮滚动,则对MouseWheelEvents返回true
+     * 
+     * 
      * @since 1.4
      */
     protected boolean eventTypeEnabled(int type) {
@@ -641,6 +790,10 @@ public class ScrollPane extends Container implements Accessible {
      * Enables/disables scrolling in response to movement of the mouse wheel.
      * Wheel scrolling is enabled by default.
      *
+     * <p>
+     *  启用/禁用响应鼠标滚轮的移动进行滚动。默认情况下启用滚轮滚动。
+     * 
+     * 
      * @param handleWheel   <code>true</code> if scrolling should be done
      *                      automatically for a MouseWheelEvent,
      *                      <code>false</code> otherwise.
@@ -657,6 +810,10 @@ public class ScrollPane extends Container implements Accessible {
      * Indicates whether or not scrolling will take place in response to
      * the mouse wheel.  Wheel scrolling is enabled by default.
      *
+     * <p>
+     *  指示是否响应鼠标滚轮进行滚动。默认情况下启用滚轮滚动。
+     * 
+     * 
      * @see #setWheelScrollingEnabled(boolean)
      * @since 1.4
      */
@@ -667,6 +824,9 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * Writes default serializable fields to stream.
+     * <p>
+     *  将缺省可序列化字段写入流。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         // 4352819: We only need this degenerate writeObject to make
@@ -677,6 +837,10 @@ public class ScrollPane extends Container implements Accessible {
 
     /**
      * Reads default serializable fields to stream.
+     * <p>
+     *  读取默认可序列化字段流。
+     * 
+     * 
      * @exception HeadlessException if
      * <code>GraphicsEnvironment.isHeadless()</code> returns
      * <code>true</code>
@@ -724,6 +888,9 @@ public class ScrollPane extends Container implements Accessible {
 
         /**
          * Invoked when the value of the adjustable has changed.
+         * <p>
+         *  在可调整值已更改时调用。
+         * 
          */
         public void adjustmentValueChanged(AdjustmentEvent e) {
             Adjustable adj = e.getAdjustable();
@@ -760,6 +927,11 @@ public class ScrollPane extends Container implements Accessible {
      * AccessibleAWTScrollPane.
      * A new AccessibleAWTScrollPane instance is created if necessary.
      *
+     * <p>
+     *  获取与此ScrollPane关联的AccessibleContext。对于滚动窗格,AccessibleContext采用AccessibleAWTScrollPane的形式。
+     * 如果需要,将创建一个新的AccessibleAWTScrollPane实例。
+     * 
+     * 
      * @return an AccessibleAWTScrollPane that serves as the
      *         AccessibleContext of this ScrollPane
      * @since 1.3
@@ -776,18 +948,29 @@ public class ScrollPane extends Container implements Accessible {
      * <code>ScrollPane</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to scroll pane user-interface
      * elements.
+     * <p>
+     *  此类实现<code> ScrollPane </code>类的辅助功能支持。它提供了适用于滚动窗格用户界面元素的Java辅助功能API的实现。
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTScrollPane extends AccessibleAWTContainer
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 1.3 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 6100703663886637L;
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -810,10 +993,18 @@ public class ScrollPane extends Container implements Accessible {
  * inner class. This pkg private PeerFixer class below will only be used
  * if the Java 2 platform is used to deserialize ScrollPane objects that were serialized
  * using JDK1.1
+ * <p>
+ * 在JDK 1.1.1中,pkg私有类java.awt.PeerFixer被移动成为ScrollPane的内部类,它使用JDK 1.1打破了ScrollPane对象的序列化。
+ * 不是将其移回这里,这将打破所有JDK 1.1.x版本,我们在两个地方保持PeerFixer。由于范围规则,在ScrollPane中使用的PeerFixer将是内部类。
+ * 下面的pkg私有PeerFixer类只会在Java 2平台用于反序列化使用JDK1.1序列化的ScrollPane对象时使用。
+ * 
  */
 class PeerFixer implements AdjustmentListener, java.io.Serializable {
     /*
      * serialVersionUID
+     * <p>
+     *  serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 7051237413532574756L;
 
@@ -823,6 +1014,8 @@ class PeerFixer implements AdjustmentListener, java.io.Serializable {
 
     /**
      * Invoked when the value of the adjustable has changed.
+     * <p>
+     *  在可调整值已更改时调用。
      */
     public void adjustmentValueChanged(AdjustmentEvent e) {
         Adjustable adj = e.getAdjustable();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import com.sun.java.swing.plaf.windows.XPStyle.*;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  Windows组件的翻译。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Igor Kushnirskiy
  */
 
@@ -71,6 +79,10 @@ public class WindowsMenuItemUI extends BasicMenuItemUI {
     /**
      * Method which renders the text of the current menu item.
      * <p>
+     * <p>
+     *  呈现当前菜单项的文本的方法。
+     * <p>
+     * 
      * @param g Graphics context
      * @param menuItem Current menu item to render
      * @param textRect Bounding rectangle to render the text.
@@ -169,6 +181,8 @@ public class WindowsMenuItemUI extends BasicMenuItemUI {
      * TODO idk can we use XPStyle.isVista?
      * is it possible that in some theme some Vista parts are not defined while
      * others are?
+     * <p>
+     *  TODO idk我们可以使用XPStyle.isVista吗?是否有可能在某些主题某些Vista部分没有定义,而其他的?
      */
     static boolean isVistaPainting(final XPStyle xp) {
         return xp != null && xp.isSkinDefined(null, Part.MP_POPUPITEM);

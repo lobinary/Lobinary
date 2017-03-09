@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@ package java.rmi.activation;
  * <code>ActivationGroupID</code> in an <code>ActivationDesc</code> refers to
  * a group that is not registered with the <code>ActivationSystem</code>
  *
+ * <p>
+ *  当确定方法的<code> ActivationGroupID </code>参数为<code> java.rmi.activation </code>包中的类和接口的方法时,会抛出<code> Unk
+ * nownGroupException </code>无效,即,<code> ActivationSystem </code>未知。
+ * 如果<code> ActivationDesc </code>中的<code> ActivationGroupID </code>指向未注册到<code> ActivationSystem </code>
+ * 中的组,则还会抛出<code> UnknownGroupException </code>。
+ * 
  * @author  Ann Wollrath
  * @since   1.2
  * @see     java.rmi.activation.Activatable
@@ -51,6 +58,9 @@ public class UnknownGroupException extends ActivationException {
      * Constructs an <code>UnknownGroupException</code> with the specified
      * detail message.
      *
+     * <p>
+     * 
+     * 
      * @param s the detail message
      * @since 1.2
      */

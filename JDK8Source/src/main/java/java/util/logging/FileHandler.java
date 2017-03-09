@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -144,6 +145,64 @@ import java.util.Set;
  * Note that the use of unique ids to avoid conflicts is only guaranteed
  * to work reliably when using a local disk file system.
  *
+ * <p>
+ *  简单文件记录<tt>处理程序</tt>。
+ * <p>
+ *  <tt> FileHandler </tt>可以写入指定的文件,也可以写入一组旋转的文件。
+ * <p>
+ *  对于一组旋转的文件,由于每个文件达到一个给定的大小限制,它被关闭,旋转出来,并打开一个新文件。通过将"0","1","2"等添加到基本文件名中来命名连续的较旧文件。
+ * <p>
+ *  默认情况下,在IO库中启用缓冲,但每个日志记录在完成后将被刷新。
+ * <p>
+ *  默认情况下,<tt> XMLFormatter </tt>类用于格式化。
+ * <p>
+ *  <b>配置：</b>默认情况下,每个<tt> FileHandler </tt>使用以下<tt> LogManager </tt>配置属性初始化,其中<tt>&lt; handler-name&gt;
+ *  </tt>到处理程序的完全限定类名。
+ * 如果未定义属性(或具有无效值),则使用指定的默认值。
+ * <ul>
+ * <li>&lt; handler-name&gt; .level指定<tt>处理程序</tt>(默认为<tt> Level.ALL </tt>)的默认级别。
+ *  </li> <li>&lt; handler-name&gt; .filter指定要使用的<tt> Filter </tt>类的名称(默认为<tt> Filter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .formatter指定要使用的<tt> Formatter </tt>类的名称(默认为<tt> java.util.logging.X
+ * MLFormatter </tt>)< / li> <li>&lt; handler-name&gt; .encoding要使用的字符集编码的名称(默认为默认平台编码)。
+ *  </li> <li>&lt; handler-name&gt; .filter指定要使用的<tt> Filter </tt>类的名称(默认为<tt> Filter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .limit指定要写入任何一个文件的大致最大值(以字节为单位)。如果这是零,那么没有限制。 (默认为无限制)。
+ *  </li> <li>&lt; handler-name&gt; .count指定要循环的输出文件数量(默认为1)。
+ *  </li> <li>&lt; handler-name&gt; .pattern指定用于生成输出文件名的模式。详情请参阅下文。 (默认为"％h / java％u.log")。
+ *  </li> <li>&lt; handler-name&gt; .append指定FileHandler是否应附加到任何现有文件(默认为false)。 </li>。
+ * </ul>
+ * <p>
+ *  例如,{@code FileHandler}的属性将是：
+ * <ul>
+ *  <li> java.util.logging.FileHandler.level = INFO </li> <li> java.util.logging.FileHandler.formatter =
+ *  java.util.logging.SimpleFormatter </li>。
+ * </ul>
+ * <p>
+ *  对于自定义处理程序,例如com.foo.MyHandler,属性将是：
+ * <ul>
+ * <li> com.foo.MyHandler.level = INFO </li> <li> com.foo.MyHandler.formatter = java.util.logging.Simple
+ * Formatter </li>。
+ * </ul>
+ * <p>
+ *  模式由一个字符串组成,该字符串包含将在运行时替换的以下特殊组件：
+ * <ul>
+ *  </li> <li>"％h"系统属性的"user.home"值</li> </li> > <li>"％g"用于区分旋转日志的世代号</li> <li>"％u"用于解决冲突的唯一号码</li> ％"</li>
+ * 。
+ * </ul>
+ *  如果没有指定"％g"字段,并且文件计数大于1,则生成编号将添加到生成的文件名的末尾。
+ * <p>
+ *  因此,例如,计数为2的"％t / java％g.log"模式通常会导致日志文件在Solaris上写入/var/tmp/java0.log和/var/tmp/java1.log,而在Windows 95
+ * 上,他们通常会写入到C：\ TEMP \ java0.log和C：\ TEMP \ java1.log。
+ * <p>
+ *  生成数字遵循序列0,1,2等。
+ * <p>
+ * 通常,"％u"唯一字段设置为0.但是,如果<tt> FileHandler </tt>尝试打开文件名,并发现文件当前正由另一个进程使用,它将增加唯一编号字段,并尝试再次。
+ * 这将重复,直到<tt> FileHandler </tt>找到当前未使用的文件名。如果存在冲突并且没有指定"％u"字段,则将在点后面的文件名末尾添加。 (这将在任何自动添加的世代号码之后。)。
+ * <p>
+ *  因此,如果三个进程都试图记录到fred％u。％g.txt,则它们可能最终使用fred0.0.txt,fred1.0.txt,fred2.0.txt作为它们的旋转序列中的第一个文件。
+ * <p>
+ *  请注意,使用唯一ID以避免冲突只能在使用本地磁盘文件系统时可靠地工作。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -163,6 +222,9 @@ public class FileHandler extends StreamHandler {
      * A metered stream is a subclass of OutputStream that
      * (a) forwards all its output to a target stream
      * (b) keeps track of how many bytes have been written
+     * <p>
+     *  计量流是OutputStream的子类,(a)将其所有输出转发到目标流(b)跟踪已经写入了多少字节
+     * 
      */
     private class MeteredStream extends OutputStream {
         final OutputStream out;
@@ -216,6 +278,9 @@ public class FileHandler extends StreamHandler {
     /**
      * Configure a FileHandler from LogManager properties and/or default values
      * as specified in the class javadoc.
+     * <p>
+     *  从LogManager属性和/或类javadoc中指定的默认值配置FileHandler。
+     * 
      */
     private void configure() {
         LogManager manager = LogManager.getLogManager();
@@ -252,6 +317,10 @@ public class FileHandler extends StreamHandler {
      * Construct a default <tt>FileHandler</tt>.  This will be configured
      * entirely from <tt>LogManager</tt> properties (or their default values).
      * <p>
+     * <p>
+     *  构造默认的<tt> FileHandler </tt>。这将完全从<tt> LogManager </tt>属性(或其默认值)进行配置。
+     * <p>
+     * 
      * @exception  IOException if there are IO problems opening the files.
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have <tt>LoggingPermission("control"))</tt>.
@@ -274,6 +343,14 @@ public class FileHandler extends StreamHandler {
      * There is no limit on the amount of data that may be written,
      * so use this with care.
      *
+     * <p>
+     *  初始化<tt> FileHandler </tt>以写入给定的文件名。
+     * <p>
+     * <tt> FileHandler </tt>是基于<tt> LogManager </tt>属性(或其默认值)配置的,除了将给定模式参数用作文件名模式,文件限制设置为无限制,并且文件计数设置为1。
+     * <p>
+     *  对可以写入的数据量没有限制,因此请谨慎使用。
+     * 
+     * 
      * @param pattern  the name of the output file
      * @exception  IOException if there are IO problems opening the files.
      * @exception  SecurityException  if a security manager exists and if
@@ -305,6 +382,15 @@ public class FileHandler extends StreamHandler {
      * There is no limit on the amount of data that may be written,
      * so use this with care.
      *
+     * <p>
+     *  初始化<tt> FileHandler </tt>以写入给定的文件名,带可选的附加。
+     * <p>
+     *  <tt> FileHandler </tt>是基于<tt> LogManager </tt>属性(或其默认值)配置的,除了将给定模式参数用作文件名模式,文件限制设置为无限制,文件计数设置为1,并且附加
+     * 模式设置为给定的<tt> append </tt>参数。
+     * <p>
+     *  对可以写入的数据量没有限制,因此请谨慎使用。
+     * 
+     * 
      * @param pattern  the name of the output file
      * @param append  specifies append mode
      * @exception  IOException if there are IO problems opening the files.
@@ -340,6 +426,15 @@ public class FileHandler extends StreamHandler {
      * <p>
      * The count must be at least 1.
      *
+     * <p>
+     *  初始化<tt> FileHandler </tt>以写入一组文件。当(大约)给定限制已写入一个文件时,将打开另一个文件。输出将循环通过一组计数文件。
+     * <p>
+     *  <tt> FileHandler </tt>是基于<tt> LogManager </tt>属性(或其默认值)配置的,除了将给定模式参数用作文件名模式,文件限制设置为limit参数,并且文件计数设置为
+     * 给定的count参数。
+     * <p>
+     *  计数必须至少为1。
+     * 
+     * 
      * @param pattern  the pattern for naming the output file
      * @param limit  the maximum number of bytes to write to any one file
      * @param count  the number of files to use
@@ -377,6 +472,15 @@ public class FileHandler extends StreamHandler {
      * <p>
      * The count must be at least 1.
      *
+     * <p>
+     * 初始化<tt> FileHandler </tt>以写入具有可选附加的一组文件。当(大约)给定限制已写入一个文件时,将打开另一个文件。输出将循环通过一组计数文件。
+     * <p>
+     *  <tt> FileHandler </tt>是基于<tt> LogManager </tt>属性(或其默认值)配置的,除了将给定模式参数用作文件名模式,文件限制设置为limit参数,并且文件计数设置为
+     * 给定的count参数,并且附加模式设置为给定的<tt> append </tt>参数。
+     * <p>
+     *  计数必须至少为1。
+     * 
+     * 
      * @param pattern  the pattern for naming the output file
      * @param limit  the maximum number of bytes to write to any one file
      * @param count  the number of files to use
@@ -413,6 +517,9 @@ public class FileHandler extends StreamHandler {
     /**
      * Open the set of output files, based on the configured
      * instance variables.
+     * <p>
+     *  根据配置的实例变量打开输出文件集。
+     * 
      */
     private void openFiles() throws IOException {
         LogManager manager = LogManager.getLogManager();
@@ -557,6 +664,10 @@ public class FileHandler extends StreamHandler {
     /**
      * Generate a file based on a user-supplied pattern, generation number,
      * and an integer uniqueness suffix
+     * <p>
+     *  基于用户提供的模式,世代号和整数唯一性后缀生成文件
+     * 
+     * 
      * @param pattern the pattern for naming the output file
      * @param generation the generation number to distinguish rotated logs
      * @param unique a unique number to resolve conflicts
@@ -641,6 +752,9 @@ public class FileHandler extends StreamHandler {
 
     /**
      * Rotate the set of output files
+     * <p>
+     *  旋转输出文件集
+     * 
      */
     private synchronized void rotate() {
         Level oldLevel = getLevel();
@@ -671,6 +785,10 @@ public class FileHandler extends StreamHandler {
     /**
      * Format and publish a <tt>LogRecord</tt>.
      *
+     * <p>
+     *  格式化并发布<tt> LogRecord </tt>。
+     * 
+     * 
      * @param  record  description of the log event. A null record is
      *                 silently ignored and is not published
      */
@@ -700,6 +818,10 @@ public class FileHandler extends StreamHandler {
     /**
      * Close all the files.
      *
+     * <p>
+     *  关闭所有文件。
+     * 
+     * 
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have <tt>LoggingPermission("control")</tt>.
      */
@@ -734,6 +856,8 @@ public class FileHandler extends StreamHandler {
 
     /**
      * check if we are in a set UID program.
+     * <p>
+     *  检查我们是否在一个设置的UID程序。
      */
     private static native boolean isSetUID();
 }

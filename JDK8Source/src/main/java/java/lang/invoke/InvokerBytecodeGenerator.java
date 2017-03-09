@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,10 @@ import sun.reflect.misc.ReflectUtil;
 /**
  * Code generation backend for LambdaForm.
  * <p>
+ * <p>
+ *  LambdaForm的代码生成后端。
+ * <p>
+ * 
  * @author John Rose, JSR 292 EG
  */
 class InvokerBytecodeGenerator {
@@ -255,6 +260,10 @@ class InvokerBytecodeGenerator {
     /**
      * Extract the number of constant pool entries from a given class file.
      *
+     * <p>
+     *  从给定的类文件中提取常量池条目的数量。
+     * 
+     * 
      * @param classFile the bytes of the class file in question.
      * @return the number of entries in the constant pool.
      */
@@ -269,6 +278,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Extract the MemberName of a newly-defined method.
+     * <p>
+     *  提取新定义​​方法的MemberName。
+     * 
      */
     private MemberName loadMethod(byte[] classFile) {
         Class<?> invokerClass = loadAndInitializeInvokerClass(classFile, cpPatches(classFile));
@@ -277,6 +289,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Define a given class as anonymous class in the runtime system.
+     * <p>
+     *  在运行时系统中将给定类定义为匿名类。
+     * 
      */
     private static Class<?> loadAndInitializeInvokerClass(byte[] classBytes, Object[] patches) {
         Class<?> invokerClass = UNSAFE.defineAnonymousClass(HOST_CLASS, classBytes, patches);
@@ -299,6 +314,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Set up class file generation.
+     * <p>
+     *  设置类文件生成。
+     * 
      */
     private void classFilePrologue() {
         final int NOT_ACC_PUBLIC = 0;  // not ACC_PUBLIC
@@ -312,6 +330,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Tear down class file generation.
+     * <p>
+     *  拖放类文件生成。
+     * 
      */
     private void classFileEpilogue() {
         mv.visitMaxs(0, 0);
@@ -320,6 +341,9 @@ class InvokerBytecodeGenerator {
 
     /*
      * Low-level emit helpers.
+     * <p>
+     *  低级发射助手。
+     * 
      */
     private void emitConst(Object con) {
         if (con == null) {
@@ -386,6 +410,9 @@ class InvokerBytecodeGenerator {
 
     /*
      * NOTE: These load/store methods use the localsMap to find the correct index!
+     * <p>
+     *  注意：这些加载/存储方法使用localsMap来查找正确的索引！
+     * 
      */
     private void emitLoadInsn(BasicType type, int index) {
         int opcode = loadInsnOpcode(type);
@@ -488,6 +515,10 @@ class InvokerBytecodeGenerator {
     /**
      * Emit a boxing call.
      *
+     * <p>
+     *  发出拳击电话。
+     * 
+     * 
      * @param wrapper primitive type class to box.
      */
     private void emitBoxing(Wrapper wrapper) {
@@ -500,6 +531,10 @@ class InvokerBytecodeGenerator {
     /**
      * Emit an unboxing call (plus preceding checkcast).
      *
+     * <p>
+     *  发出开箱调用(加上前面的checkcast)。
+     * 
+     * 
      * @param wrapper wrapper type class to unbox.
      */
     private void emitUnboxing(Wrapper wrapper) {
@@ -514,6 +549,10 @@ class InvokerBytecodeGenerator {
      * Emit an implicit conversion for an argument which must be of the given pclass.
      * This is usually a no-op, except when pclass is a subword type or a reference other than Object or an interface.
      *
+     * <p>
+     *  发出一个必须是给定pclass的参数的隐式转换。这通常是一个无操作,除了当pclass是一个子词类型或除对象或接口之外的引用。
+     * 
+     * 
      * @param ptype type of value present on stack
      * @param pclass type of value required on stack
      * @param arg compile-time representation of value on stack (Node, constant) or null if none
@@ -583,6 +622,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Emits an actual return instruction conforming to the given return type.
+     * <p>
+     *  发出符合给定返回类型的实际返回指令。
+     * 
      */
     private void emitReturnInsn(BasicType type) {
         int opcode;
@@ -610,6 +652,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Generate customized bytecode for a given LambdaForm.
+     * <p>
+     *  为给定的LambdaForm生成自定义字节码。
+     * 
      */
     static MemberName generateCustomizedCode(LambdaForm form, MethodType invokerType) {
         InvokerBytecodeGenerator g = new InvokerBytecodeGenerator("MH", form, invokerType);
@@ -618,6 +663,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Generate an invoker method for the passed {@link LambdaForm}.
+     * <p>
+     *  为传递的{@link LambdaForm}生成调用器方法。
+     * 
      */
     private byte[] generateCustomizedCodeBytes() {
         classFilePrologue();
@@ -720,6 +768,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Emit an invoke for the given name.
+     * <p>
+     *  发出给定名称的调用。
+     * 
      */
     void emitInvoke(Name name) {
         assert(!isLinkerMethodInvoke(name));  // should use the static path for these
@@ -812,6 +863,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Emit an invoke for the given name, using the MemberName directly.
+     * <p>
+     *  为给定的名称发出调用,直接使用MemberName。
+     * 
      */
     void emitStaticInvoke(MemberName member, Name name) {
         assert(member.equals(name.function.member()));
@@ -907,6 +961,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Check if MemberName is a call to a method named {@code name} in class {@code declaredClass}.
+     * <p>
+     *  检查MemberName是否是对{@code declaredClass}类中名为{@code name}的方法的调用。
+     * 
      */
     private boolean memberRefersTo(MemberName member, Class<?> declaringClass, String name) {
         return member != null &&
@@ -920,6 +977,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Check if MemberName is a call to MethodHandle.invokeBasic.
+     * <p>
+     *  检查MemberName是否是对MethodHandle.invokeBasic的调用。
+     * 
      */
     private boolean isInvokeBasic(Name name) {
         if (name.function == null)
@@ -933,6 +993,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Check if MemberName is a call to MethodHandle.linkToStatic, etc.
+     * <p>
+     *  检查MemberName是否为对MethodHandle.linkToStatic的调用等。
+     * 
      */
     private boolean isLinkerMethodInvoke(Name name) {
         if (name.function == null)
@@ -948,6 +1011,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Check if i-th name is a call to MethodHandleImpl.selectAlternative.
+     * <p>
+     *  检查第i个名称是否为MethodHandleImpl.selectAlternative的调用。
+     * 
      */
     private boolean isSelectAlternative(int pos) {
         // selectAlternative idiom:
@@ -964,6 +1030,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Check if i-th name is a start of GuardWithCatch idiom.
+     * <p>
+     *  检查第i个名字是否是GuardWithCatch idiom的开始。
+     * 
      */
     private boolean isGuardWithCatch(int pos) {
         // GuardWithCatch idiom:
@@ -993,6 +1062,12 @@ class InvokerBytecodeGenerator {
      *     t3:L=MethodHandleImpl.selectAlternative(t2:I,(MethodHandle(int)int),(MethodHandle(int)int));
      *     t4:I=MethodHandle.invokeBasic(t3:L,a1:I);t4:I}
      * }</pre></blockquote>
+     * <p>
+     *  发出selectAlternative成语的字节码。
+     * 
+     * 模式看起来像(Cf.DethodHandleImpl.makeGuardWithTest)：<blockquote> <pre> {@ code Lambda(a0：L,a1：I)=> {t2：I = foo.test(a1：I) t3：L = MethodHandleImpl.selectAlternative(t2：I,(MethodHandle(int)int),(MethodHandle(int)int) t4：I = MethodHandle.invokeBasic(t3：L,a1：I); t4：I}
+     * } </pre> </blockquote>。
+     * 
      */
     private Name emitSelectAlternative(Name selectAlternativeName, Name invokeBasicName) {
         assert isStaticallyInvocable(invokeBasicName);
@@ -1053,6 +1128,15 @@ class InvokerBytecodeGenerator {
       *      if (!a2.isInstance(e)) throw e;
       *      return a3.invokeBasic(ex, a6, a7);
       *  }}
+      * <p>
+      *  发出guardWithCatch成语的字节码。
+      * 
+      *  模式看起来像(Cf.HolderHandleImpl.makeGuardWithCatch)：<blockquote> <pre> {@ code guardWithCatch = Lambda(a0：L,a1：L,a2：L,a3：L,a4：L,a5：L,a6 ：L,a7：L)=> {t8：L = MethodHandle.invokeBasic(a4：L,a6：L,a7：L); t9：L = MethodHandleImpl.guardWithCatch(a1：L,a2：L,a3：L,t8：L); t10：I = MethodHandle.invokeBasic(a5：L,t9：L); t10：I}
+      * } </pre> </blockquote>。
+      * 
+      *  它被编译成相当于以下代码的字节码：<blockquote> <pre> {@ code try {return a1.invokeBasic(a6,a7); } catch(Throwable e){if(！a2.isInstance(e))throw e; return a3.invokeBasic(ex,a6,a7); }
+      * }。
+      * 
       */
     private Name emitGuardWithCatch(int pos) {
         Name args    = lambdaForm.names[pos];
@@ -1145,6 +1229,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Store the name to its local, if necessary.
+     * <p>
+     *  如果需要,将名称存储到本地。
+     * 
      */
     private void emitStoreResult(Name name) {
         if (name != null && name.type != V_TYPE) {
@@ -1155,6 +1242,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Emits a return statement from a LF invoker. If required, the result type is cast to the correct return type.
+     * <p>
+     *  从LF调用者发出返回语句。如果需要,结果类型将转换为正确的返回类型。
+     * 
      */
     private void emitReturn(Name onStack) {
         // return statement
@@ -1182,6 +1272,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Emit a type conversion bytecode casting from "from" to "to".
+     * <p>
+     *  发出从"from"到"to"的类型转换字节码。
+     * 
      */
     private void emitPrimCast(Wrapper from, Wrapper to) {
         // Here's how.
@@ -1277,6 +1370,15 @@ class InvokerBytecodeGenerator {
 
     /**
      * Generate bytecode for a LambdaForm.vmentry which calls interpretWithArguments.
+     * <p>
+     *  case LONG：mv.visitInsn(Opcodes.I2L);打破; case FLOAT：mv.visitInsn(Opcodes.I2F);打破; case DOUBLE：mv.visi
+     * tInsn(Opcodes.I2D);打破; case BOOLEAN：//与ValueConversions和explicitCastArguments的兼容性：mv.visitInsn(Opcode
+     * s.ICONST_1); mv.visitInsn(Opcodes.IAND);打破; default：throw new InternalError("unknown type："+ type); }
+     * }。
+     * 
+     * private void emitX2I(Wrapper type){switch(type){case LONG：mv.visitInsn(Opcodes.L2I);打破; case FLOAT：mv.visitInsn(Opcodes.F2I);打破; case DOUBLE：mv.visitInsn(Opcodes.D2I);打破; default：throw new InternalError("unknown type："+ type); }
+     * }。
+     * 
      */
     static MemberName generateLambdaFormInterpreterEntryPoint(String sig) {
         assert(isValidSignature(sig));
@@ -1337,6 +1439,9 @@ class InvokerBytecodeGenerator {
 
     /**
      * Generate bytecode for a NamedFunction invoker.
+     * <p>
+     *  / **为调用interpretWithArguments的LambdaForm.vmentry生成字节码。
+     * 
      */
     static MemberName generateNamedFunctionInvoker(MethodTypeForm typeForm) {
         MethodType invokerType = NamedFunction.INVOKER_METHOD_TYPE;
@@ -1406,6 +1511,9 @@ class InvokerBytecodeGenerator {
     /**
      * Emit a bogus method that just loads some string constants. This is to get the constants into the constant pool
      * for debugging purposes.
+     * <p>
+     *  为NamedFunction调用器生成字节码。
+     * 
      */
     private void bogusMethod(Object... os) {
         if (DUMP_CLASS_FILES) {

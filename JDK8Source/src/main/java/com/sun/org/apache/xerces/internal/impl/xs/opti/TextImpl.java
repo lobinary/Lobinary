@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.opti;
@@ -26,6 +36,10 @@ import org.w3c.dom.Node;
 /**
  * @xerces.internal
  *
+ * <p>
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neil Graham, IBM
  */
 
@@ -79,6 +93,12 @@ public class TextImpl extends DefaultText {
      * not fit into a single <code>DOMString</code>. In such cases, the user
      * may call <code>substringData</code> to retrieve the data in
      * appropriately sized pieces.
+     * <p>
+     *  实现此接口的节点的字符数据。 DOM实现可以不对可以存储在<code> CharacterData </code>节点中的数据量施加任意限制。
+     * 然而,实现限制可能意味着整个节点的数据可能不适合单个<code> DOMString </code>。
+     * 在这种情况下,用户可以调用<code> substringData </code>来检索大小合适的数据。
+     * 
+     * 
      * @exception DOMException
      *   NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.
      * @exception DOMException
@@ -95,6 +115,10 @@ public class TextImpl extends DefaultText {
      * The number of 16-bit units that are available through <code>data</code>
      * and the <code>substringData</code> method below. This may have the
      * value zero, i.e., <code>CharacterData</code> nodes may be empty.
+     * <p>
+     *  通过<code> data </code>和<code> substringData </code>方法可用的16位单位数。
+     * 这可以具有值零,即,<code> CharacterData </code>节点可以是空的。
+     * 
      */
     public int getLength() {
         if(fData == null) return 0;
@@ -103,6 +127,8 @@ public class TextImpl extends DefaultText {
 
     /**
      * Extracts a range of data from the node.
+     * <p>
+     * 
      * @param offset Start offset of substring to extract.
      * @param count The number of 16-bit units to extract.
      * @return The specified substring. If the sum of <code>offset</code> and

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.atomic;
@@ -57,6 +61,17 @@ import java.io.Serializable;
  * compareTo} because instances are expected to be mutated, and so are
  * not useful as collection keys.
  *
+ * <p>
+ *  一个或多个变量一起维持最初为零的{@code double}和。当更新(方法{@link #add})在线程之间竞争时,变量集可以动态增长以减少争用。
+ * 方法{@link #sum}(或等效地{@link #doubleValue})返回保持总和的变量的当前总计。不保证线程内或线程内的累积顺序。
+ * 因此,如果需要数值稳定性,这个类可能不适用,特别是当组合实质上不同数量级的值时。
+ * 
+ *  <p>当多个线程更新用于诸如经常更新但较不频繁读取的汇总统计信息的公共值时,此类通常优先于替代。
+ * 
+ *  <p>此类扩展了{@link Number},但不会</em>定义诸如{@code equals},{@code hashCode}和{@code compareTo}等方法,因为实例会被改变,因此不
+ * 可用作收集键。
+ * 
+ * 
  * @since 1.8
  * @author Doug Lea
  */
@@ -72,10 +87,17 @@ public class DoubleAdder extends Striped64 implements Serializable {
      * works best anyway. In principle, the long/double conversions
      * used here should be essentially free on most platforms since
      * they just re-interpret bits.
+     * <p>
+     * 注意,对于底层表示,我们必须使用"long",因为没有compareAndSet用于double,这是因为在任何CAS实现中使用的按位等于不等于double-precision equals。
+     * 然而,我们使用CAS来检测和缓解争用,其中逐位等于最好的工作。原则上,这里使用的长/双转换在大多数平台上应该基本上是自由的,因为它们只是重新解释比特。
+     * 
      */
 
     /**
      * Creates a new adder with initial sum of zero.
+     * <p>
+     *  创建一个初始和为零的新加法器。
+     * 
      */
     public DoubleAdder() {
     }
@@ -83,6 +105,10 @@ public class DoubleAdder extends Striped64 implements Serializable {
     /**
      * Adds the given value.
      *
+     * <p>
+     *  添加给定值。
+     * 
+     * 
      * @param x the value to add
      */
     public void add(double x) {
@@ -111,6 +137,11 @@ public class DoubleAdder extends Striped64 implements Serializable {
      * to the value that would be obtained in a sequential series of
      * updates to a single variable.
      *
+     * <p>
+     *  返回当前和。返回的值是<em> NOT </em>原子快照;在不存在并发更新的情况下调用返回准确的结果,但是在计算和时发生的并发更新可能不会合并。
+     * 另外,因为浮点运算不是严格关联的,所以返回的结果不需要与在对单个变量的连续系列更新中获得的值相同。
+     * 
+     * 
      * @return the sum
      */
     public double sum() {
@@ -131,6 +162,9 @@ public class DoubleAdder extends Striped64 implements Serializable {
      * effective if there are no concurrent updates.  Because this
      * method is intrinsically racy, it should only be used when it is
      * known that no threads are concurrently updating.
+     * <p>
+     *  重置将总和保持为零的变量。此方法可能是创建新加法器的有用替代方法,但仅在没有并发更新时才有效。因为这种方法本质上是有趣的,所以它应该只在已知没有线程同时更新时才使用。
+     * 
      */
     public void reset() {
         Cell[] as = cells; Cell a;
@@ -151,6 +185,10 @@ public class DoubleAdder extends Striped64 implements Serializable {
      * <em>not</em> guaranteed to be the final value occurring before
      * the reset.
      *
+     * <p>
+     * 等同于{@link #sum},后跟{@link #reset}。该方法可以应用于例如在多线程计算之间的静止点期间。如果存在与该方法并发的更新,则返回的值</em>不被保证为在复位之前发生的最终值。
+     * 
+     * 
      * @return the sum
      */
     public double sumThenReset() {
@@ -171,6 +209,10 @@ public class DoubleAdder extends Striped64 implements Serializable {
 
     /**
      * Returns the String representation of the {@link #sum}.
+     * <p>
+     *  返回{@link #sum}的String表示形式。
+     * 
+     * 
      * @return the String representation of the {@link #sum}
      */
     public String toString() {
@@ -180,6 +222,10 @@ public class DoubleAdder extends Striped64 implements Serializable {
     /**
      * Equivalent to {@link #sum}.
      *
+     * <p>
+     *  相当于{@link #sum}。
+     * 
+     * 
      * @return the sum
      */
     public double doubleValue() {
@@ -189,6 +235,9 @@ public class DoubleAdder extends Striped64 implements Serializable {
     /**
      * Returns the {@link #sum} as a {@code long} after a
      * narrowing primitive conversion.
+     * <p>
+     *  在缩小的基本转换后,将{@link #sum}返回为{@code long}。
+     * 
      */
     public long longValue() {
         return (long)sum();
@@ -197,6 +246,9 @@ public class DoubleAdder extends Striped64 implements Serializable {
     /**
      * Returns the {@link #sum} as an {@code int} after a
      * narrowing primitive conversion.
+     * <p>
+     *  在缩小的原始转换后,将{@link #sum}返回为{@code int}。
+     * 
      */
     public int intValue() {
         return (int)sum();
@@ -205,6 +257,9 @@ public class DoubleAdder extends Striped64 implements Serializable {
     /**
      * Returns the {@link #sum} as a {@code float}
      * after a narrowing primitive conversion.
+     * <p>
+     *  在缩小的原始转换后,将{@link #sum}返回为{@code float}。
+     * 
      */
     public float floatValue() {
         return (float)sum();
@@ -213,6 +268,10 @@ public class DoubleAdder extends Striped64 implements Serializable {
     /**
      * Serialization proxy, used to avoid reference to the non-public
      * Striped64 superclass in serialized forms.
+     * <p>
+     *  序列化代理,用于避免以序列化形式引用非公开的Striped64超类。
+     * 
+     * 
      * @serial include
      */
     private static class SerializationProxy implements Serializable {
@@ -220,6 +279,10 @@ public class DoubleAdder extends Striped64 implements Serializable {
 
         /**
          * The current value returned by sum().
+         * <p>
+         *  sum()返回的当前值。
+         * 
+         * 
          * @serial
          */
         private final double value;
@@ -232,6 +295,10 @@ public class DoubleAdder extends Striped64 implements Serializable {
          * Returns a {@code DoubleAdder} object with initial state
          * held by this proxy.
          *
+         * <p>
+         *  返回由此代理保持的初始状态的{@code DoubleAdder}对象。
+         * 
+         * 
          * @return a {@code DoubleAdder} object with initial state
          * held by this proxy.
          */
@@ -248,6 +315,11 @@ public class DoubleAdder extends Striped64 implements Serializable {
      * SerializationProxy</a>
      * representing the state of this instance.
      *
+     * <p>
+     *  返回a
+     * <a href="../../../../serialized-form.html#java.util.concurrent.atomic.DoubleAdder.SerializationProxy">
+     *  SerializationProxy </a>表示此实例的状态。
+     * 
      * @return a {@link SerializationProxy}
      * representing the state of this instance
      */
@@ -256,6 +328,9 @@ public class DoubleAdder extends Striped64 implements Serializable {
     }
 
     /**
+    /* <p>
+    /* 
+    /* 
      * @param s the stream
      * @throws java.io.InvalidObjectException always
      */

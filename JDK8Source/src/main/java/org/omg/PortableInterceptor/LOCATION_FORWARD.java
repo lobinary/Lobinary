@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -14,6 +15,9 @@ public interface LOCATION_FORWARD
   /**
    * Indicates a LocationForward reply status. One possible value for 
    * <code>RequestInfo.reply_status</code>.
+   * <p>
+   * 
+   * 
    * @see RequestInfo#reply_status
    * @see SUCCESSFUL
    * @see SYSTEM_EXCEPTION

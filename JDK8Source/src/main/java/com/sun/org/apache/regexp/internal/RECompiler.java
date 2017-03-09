@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.regexp.internal;
@@ -30,6 +40,11 @@ import java.util.Hashtable;
  * with RE.  For a description of the syntax accepted by RECompiler and what you can
  * do with regular expressions, see the documentation for the RE matcher class.
  *
+ * <p>
+ *  正则表达式编译器类。此类将模式字符串编译为可由RE计算程序类解释的正则表达式程序。 'recompile'命令行工具使用此编译器预先编译正则表达式以供RE使用。
+ * 有关RECompiler接受的语法的描述以及您可以对正则表达式执行的操作,请参阅RE matcher类的文档。
+ * 
+ * 
  * @see RE
  * @see recompile
  *
@@ -90,6 +105,9 @@ public class RECompiler
 
     /**
      * Constructor.  Creates (initially empty) storage for a regular expression program.
+     * <p>
+     *  构造函数。为正则表达式程序创建(最初为空)存储。
+     * 
      */
     public RECompiler()
     {
@@ -101,6 +119,10 @@ public class RECompiler
     /**
      * Ensures that n more characters can fit in the program buffer.
      * If n more can't fit, then the size is doubled until it can.
+     * <p>
+     *  确保n个更多的字符可以适合程序缓冲区。如果n更多不能适合,那么大小加倍,直到它可以。
+     * 
+     * 
      * @param n Number of additional characters to ensure will fit.
      */
     void ensure(int n)
@@ -126,6 +148,10 @@ public class RECompiler
 
     /**
      * Emit a single character into the program stream.
+     * <p>
+     *  发出单个字符到程序流。
+     * 
+     * 
      * @param c Character to add
      */
     void emit(char c)
@@ -140,6 +166,10 @@ public class RECompiler
     /**
      * Inserts a node with a given opcode and opdata at insertAt.  The node relative next
      * pointer is initialized to 0.
+     * <p>
+     *  在insertAt插入具有给定操作码和opdata的节点。节点相对下一指针被初始化为0。
+     * 
+     * 
      * @param opcode Opcode for new node
      * @param opdata Opdata for new node (only the low 16 bits are currently used)
      * @param insertAt Index at which to insert the new node in the program
@@ -159,6 +189,10 @@ public class RECompiler
 
     /**
      * Appends a node to the end of a node chain
+     * <p>
+     * 将节点追加到节点链的末尾
+     * 
+     * 
      * @param node Start of node chain to traverse
      * @param pointTo Node to have the tail of the chain point to
      */
@@ -192,6 +226,10 @@ public class RECompiler
 
     /**
      * Adds a new node
+     * <p>
+     *  添加新节点
+     * 
+     * 
      * @param opcode Opcode for node
      * @param opdata Opdata for node (only the low 16 bits are currently used)
      * @return Index of new node in program
@@ -214,6 +252,10 @@ public class RECompiler
 
     /**
      * Throws a new internal error exception
+     * <p>
+     *  引发新的内部错误异常
+     * 
+     * 
      * @exception Error Thrown in the event of an internal error.
      */
     void internalError() throws Error
@@ -223,6 +265,10 @@ public class RECompiler
 
     /**
      * Throws a new syntax error exception
+     * <p>
+     *  抛出新的语法错误异常
+     * 
+     * 
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
      */
     void syntaxError(String s) throws RESyntaxException
@@ -232,6 +278,9 @@ public class RECompiler
 
     /**
      * Allocate storage for brackets only as needed
+     * <p>
+     *  仅根据需要分配存储空间
+     * 
      */
     void allocBrackets()
     {
@@ -281,6 +330,10 @@ public class RECompiler
 
     /**
      * Match bracket {m,n} expression put results in bracket member variables
+     * <p>
+     *  匹配括号{m,n}表达式输入导致括号成员变量
+     * 
+     * 
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
      */
     void bracket() throws RESyntaxException
@@ -386,6 +439,11 @@ public class RECompiler
      * right amount. This code "understands" the subtle difference between an
      * octal escape and a backref.  You can access the type of ESC_CLASS or
      * ESC_COMPLEX or ESC_BACKREF by looking at pattern[idx - 1].
+     * <p>
+     *  匹配转义序列。句柄引用的字符和八进制转义以及正常的转义字符。始终将输入流提前正确的量。此代码"理解"八进制转义和反向引用之间的微妙差别。
+     * 您可以通过查看pattern [idx  -  1]来访问ESC_CLASS或ESC_COMPLEX或ESC_BACKREF的类型。
+     * 
+     * 
      * @return ESC_* code or character if simple escape
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
      */
@@ -510,6 +568,10 @@ public class RECompiler
 
     /**
      * Compile a character class
+     * <p>
+     *  编译字符类
+     * 
+     * 
      * @return Index of class node
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
      */
@@ -730,6 +792,10 @@ public class RECompiler
      * it can un-include the last character of string if a closure operator follows.
      * This is correct because *+? have higher precedence than concatentation (thus
      * ABC* means AB(C*) and NOT (ABC)*).
+     * <p>
+     *  吸收原子字符串。这个方法有点棘手,因为它可以取消包含字符串的最后一个字符,如果一个闭包运算符。这是正确的,因为* +?具有比并置更高的优先级(因此ABC *表示AB(C *)和NOT(ABC)*)。
+     * 
+     * 
      * @return Index of new atom node
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
      */
@@ -850,6 +916,10 @@ public class RECompiler
 
     /**
      * Match a terminal node.
+     * <p>
+     *  匹配终端节点。
+     * 
+     * 
      * @param flags Flags
      * @return Index of terminal node (closeable)
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
@@ -930,6 +1000,10 @@ public class RECompiler
 
     /**
      * Compile a possibly closured terminal
+     * <p>
+     *  编译可能关闭的终端
+     * 
+     * 
      * @param flags Flags passed by reference
      * @return Index of closured node
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
@@ -1157,6 +1231,10 @@ public class RECompiler
 
     /**
      * Compile one branch of an or operator (implements concatenation)
+     * <p>
+     *  编译an或运算符的一个分支(实现并置)
+     * 
+     * 
      * @param flags Flags passed by reference
      * @return Pointer to branch node
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
@@ -1206,6 +1284,10 @@ public class RECompiler
     /**
      * Compile an expression with possible parens around it.  Paren matching
      * is done at this level so we can tie the branch tails together.
+     * <p>
+     *  使用可能的括号编译表达式。匹配在这个级别完成,所以我们可以把分支尾巴绑在一起。
+     * 
+     * 
      * @param flags Flag value passed by reference
      * @return Node index of expression in instruction array
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
@@ -1304,6 +1386,10 @@ public class RECompiler
     /**
      * Compiles a regular expression pattern into a program runnable by the pattern
      * matcher class 'RE'.
+     * <p>
+     *  将正则表达式模式编译为可由模式匹配器类'RE'运行的程序。
+     * 
+     * 
      * @param pattern Regular expression pattern to compile (see RECompiler class
      * for details).
      * @return A compiled regular expression program.
@@ -1345,6 +1431,9 @@ public class RECompiler
 
     /**
      * Local, nested class for maintaining character ranges for character classes.
+     * <p>
+     *  用于维护字符类的字符范围的本地嵌套类。
+     * 
      */
     class RERange
     {
@@ -1355,6 +1444,10 @@ public class RECompiler
 
         /**
          * Deletes the range at a given index from the range lists
+         * <p>
+         *  从范围列表中删除给定索引处的范围
+         * 
+         * 
          * @param index Index of range to delete from minRange and maxRange arrays.
          */
         void delete(int index)
@@ -1381,6 +1474,10 @@ public class RECompiler
 
         /**
          * Merges a range into the range list, coalescing ranges if possible.
+         * <p>
+         *  将范围合并到范围列表中,如果可能,合并范围。
+         * 
+         * 
          * @param min Minimum end of range
          * @param max Maximum end of range
          */
@@ -1440,6 +1537,10 @@ public class RECompiler
 
         /**
          * Removes a range by deleting or shrinking all other ranges
+         * <p>
+         * 通过删除或缩小所有其他范围来删除范围
+         * 
+         * 
          * @param min Minimum end of range
          * @param max Maximum end of range
          */
@@ -1491,6 +1592,10 @@ public class RECompiler
 
         /**
          * Includes (or excludes) the range from min to max, inclusive.
+         * <p>
+         *  包括(或排除)从min到max的范围,包括。
+         * 
+         * 
          * @param min Minimum end of range
          * @param max Maximum end of range
          * @param include True if range should be included.  False otherwise.
@@ -1509,6 +1614,9 @@ public class RECompiler
 
         /**
          * Includes a range with the same min and max
+         * <p>
+         *  包括具有相同最小和最大值的范围
+         * 
          * @param minmax Minimum and maximum end of range (inclusive)
          * @param include True if range should be included.  False otherwise.
          */

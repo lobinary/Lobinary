@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -87,6 +88,20 @@ import javax.management.loading.ClassLoaderRepository;
  * <BR>
  * <CODE>JMImplementation:type=MBeanServerDelegate</CODE>.
  *
+ * <p>
+ *  这是代理端的MBean操作的基类。它包含创建,注册和删除MBeans所需的方法以及注册MBean的访问方法。这是JMX基础结构的核心组件。
+ * <P>
+ *  添加到MBean服务器的每个MBean都变得易于管理：其属性和操作可通过连接到该MBean服务器的连接器/适配器远程访问。不能在MBean服务器中注册Java对象,除非它是符合JMX的MBean。
+ * <P>
+ *  当MBean在MBean服务器中注册或注销时,将发出{@link javax.management.MBeanServerNotification MBeanServerNotification}通知
+ * 。
+ * 要将对象注册为侦听器到MBeanServerNotifications,您应该使用{@link javax.management.MBeanServerDelegate MBeanServerDelegate}
+ * 的<CODE> ObjectName </CODE>调用MBean服务器方法{@link #addNotificationListener addNotificationListener}。
+ * 此<CODE> ObjectName </CODE>是：。
+ * <BR>
+ *  <CODE> JMImplementation：type = MBeanServerDelegate </CODE>。
+ * 
+ * 
  * @since 1.5
  */
 public final class JmxMBeanServer
@@ -94,6 +109,10 @@ public final class JmxMBeanServer
 
     /** Control the default locking policy of the repository.
      *  By default, we will be using a fair locking policy.
+     * <p>
+     *  默认情况下,我们将使用公平锁定策略。
+     * 
+     * 
      **/
     public static final boolean DEFAULT_FAIR_LOCK_POLICY = true;
 
@@ -125,6 +144,19 @@ public final class JmxMBeanServer
      *     By default, interceptors are disabled. Use
      *     {@link #JmxMBeanServer(java.lang.String,javax.management.MBeanServer,javax.management.MBeanServerDelegate,boolean)} to enable them.
      * </ul>
+     * <p>
+     * <b>包：</b>创建具有指定的默认域名,外部接口和委派的MBeanServer。 <p>如果用户未指定域,则默认域名将用作MBeans的ObjectName中的域部分。
+     *  <ul> <b>注意：</b>强烈建议不要直接使用此构造函数。
+     * 您应该改用{@link javax.management.MBeanServerFactory#createMBeanServer(java.lang.String)}或{@link javax.management.MBeanServerFactory#newMBeanServer(java.lang.String)}
+     * 。
+     *  <ul> <b>注意：</b>强烈建议不要直接使用此构造函数。
+     * <p>
+     *  默认情况下,拦截器被禁用。
+     * 使用{@link #JmxMBeanServer(java.lang.String,javax.management.MBeanServer,javax.management.MBeanServerDelegate,boolean)}
+     * 来启用它们。
+     *  默认情况下,拦截器被禁用。
+     * </ul>
+     * 
      * @param domain The default domain name used by this MBeanServer.
      * @param outer A pointer to the MBeanServer object that must be
      *        passed to the MBeans when invoking their
@@ -151,6 +183,14 @@ public final class JmxMBeanServer
      *     {@link javax.management.MBeanServerFactory#newMBeanServer(java.lang.String)}
      *     instead.
      * </ul>
+     * <p>
+     *  <b>包：</b>创建具有指定的默认域名,外部接口和委托的MBeanServer。 <p>如果用户未指定域,则默认域名将用作MBeans的ObjectName中的域部分。
+     *  <ul> <b>注意：</b>强烈建议不要直接使用此构造函数。
+     * 您应该改用{@link javax.management.MBeanServerFactory#createMBeanServer(java.lang.String)}或{@link javax.management.MBeanServerFactory#newMBeanServer(java.lang.String)}
+     * 。
+     *  <ul> <b>注意：</b>强烈建议不要直接使用此构造函数。
+     * </ul>
+     * 
      * @param domain The default domain name used by this MBeanServer.
      * @param outer A pointer to the MBeanServer object that must be
      *        passed to the MBeans when invoking their
@@ -173,6 +213,10 @@ public final class JmxMBeanServer
 
     /**
      * <b>Package:</b> Creates an MBeanServer.
+     * <p>
+     *  <b>包：</b>创建MBeanServer。
+     * 
+     * 
      * @param domain The default domain name used by this MBeanServer.
      * @param outer A pointer to the MBeanServer object that must be
      *        passed to the MBeans when invoking their
@@ -198,6 +242,10 @@ public final class JmxMBeanServer
 
     /**
      * <b>Package:</b> Creates an MBeanServer.
+     * <p>
+     *  <b>包：</b>创建MBeanServer。
+     * 
+     * 
      * @param domain The default domain name used by this MBeanServer.
      * @param outer A pointer to the MBeanServer object that must be
      *        passed to the MBeans when invoking their
@@ -258,6 +306,10 @@ public final class JmxMBeanServer
     /**
      * Tell whether {@link MBeanServerInterceptor}s are enabled on this
      * object.
+     * <p>
+     *  判断是否对此对象启用了{@link MBeanServerInterceptor}。
+     * 
+     * 
      * @return <code>true</code> if {@link MBeanServerInterceptor}s are
      *         enabled.
      * @see #newMBeanServer(java.lang.String,javax.management.MBeanServer,javax.management.MBeanServerDelegate,boolean)
@@ -268,6 +320,10 @@ public final class JmxMBeanServer
 
     /**
      * Return the MBeanInstantiator associated to this MBeanServer.
+     * <p>
+     *  返回与此MBeanServer关联的MBeanInstantiator。
+     * 
+     * 
      * @exception UnsupportedOperationException if
      *            {@link MBeanServerInterceptor}s
      *            are not enabled on this object.
@@ -291,6 +347,15 @@ public final class JmxMBeanServer
      * The call returns an <CODE>ObjectInstance</CODE> object representing
      * the newly created MBean.
      *
+     * <p>
+     * 在MBean服务器中实例化和注册MBean。
+     *  MBean服务器将使用其{@link javax.management.loading.ClassLoaderRepository Default Loader Repository}加载MBean的
+     * 类。
+     * 在MBean服务器中实例化和注册MBean。对象名称与MBean关联。
+     * 如果给定的对象名为null,则MBean可以通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口自动提供自己的名称。
+     * 该调用返回一个代表新创建的MBean的<CODE> ObjectInstance </CODE>对象。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      *
@@ -341,6 +406,14 @@ public final class JmxMBeanServer
      * The call returns an <CODE>ObjectInstance</CODE> object representing
      * the newly created MBean.
      *
+     * <p>
+     *  在MBean服务器中实例化和注册MBean。要使用的类加载器由其对象名称标识。对象名称与MBean相关联。如果加载器的对象名称为null,将使用加载MBean服务器的ClassLoader。
+     * 如果MBean的对象名称为null,则MBean可以通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口自动提供自己的名称
+     * 。
+     *  在MBean服务器中实例化和注册MBean。要使用的类加载器由其对象名称标识。对象名称与MBean相关联。如果加载器的对象名称为null,将使用加载MBean服务器的ClassLoader。
+     * 该调用返回一个代表新创建的MBean的<CODE> ObjectInstance </CODE>对象。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param loaderName The object name of the class loader to be used.
@@ -395,6 +468,15 @@ public final class JmxMBeanServer
      * The call returns an <CODE>ObjectInstance</CODE> object representing
      * the newly created MBean.
      *
+     * <p>
+     * 在MBean服务器中实例化和注册MBean。
+     *  MBean服务器将使用其{@link javax.management.loading.ClassLoaderRepository Default Loader Repository}加载MBean的
+     * 类。
+     * 在MBean服务器中实例化和注册MBean。对象名称与MBean相关联。
+     * 如果给定的对象名为null,则MBean可以通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口自动提供自己的名称。
+     * 该调用返回一个代表新创建的MBean的<CODE> ObjectInstance </CODE>对象。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param params An array containing the parameters of the constructor
@@ -446,6 +528,13 @@ public final class JmxMBeanServer
      * The call returns an <CODE>ObjectInstance</CODE> object representing
      * the newly created MBean.
      *
+     * <p>
+     *  在MBean服务器中实例化和注册MBean。要使用的类加载器由其对象名称标识。对象名称与MBean相关联。如果未指定加载器的对象名称,则将使用加载MBean服务器的ClassLoader。
+     * 如果MBean对象名称为null,则MBean可以通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口自动提供自己的名称。
+     *  在MBean服务器中实例化和注册MBean。要使用的类加载器由其对象名称标识。对象名称与MBean相关联。如果未指定加载器的对象名称,则将使用加载MBean服务器的ClassLoader。
+     * 该调用返回一个代表新创建的MBean的<CODE> ObjectInstance </CODE>对象。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param params An array containing the parameters of the constructor
@@ -497,6 +586,12 @@ public final class JmxMBeanServer
      * The call returns an <CODE>ObjectInstance</CODE> object representing
      * the registered MBean.
      *
+     * <p>
+     *  将预先存在的对象作为MBean注册到MBean服务器。
+     * 如果给定的对象名为null,则MBean可以通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口自动提供自己的名称。
+     * 该调用返回表示已注册MBean的<CODE> ObjectInstance </CODE>对象。
+     * 
+     * 
      * @param object The  MBean to be registered as an MBean.
      * @param name The object name of the MBean. May be null.
      *
@@ -527,6 +622,10 @@ public final class JmxMBeanServer
      * its object name. Once the method has been invoked, the MBean may
      * no longer be accessed by its object name.
      *
+     * <p>
+     * 从MBean服务器取消注册MBean。 MBean由其对象名称标识。一旦该方法被调用,MBean可能不再被其对象名访问。
+     * 
+     * 
      * @param name The object name of the MBean to be de-registered.
      *
      * @exception InstanceNotFoundException The MBean specified is not
@@ -550,6 +649,10 @@ public final class JmxMBeanServer
      * Gets the <CODE>ObjectInstance</CODE> for a given MBean registered
      * with the MBean server.
      *
+     * <p>
+     *  获取向MBean服务器注册的给定MBean的<CODE> ObjectInstance </CODE>。
+     * 
+     * 
      * @param name The object name of the MBean.
      *
      * @return The <CODE>ObjectInstance</CODE> associated to the MBean
@@ -575,6 +678,13 @@ public final class JmxMBeanServer
      * <CODE>ObjectName</CODE> and the Java Class name) for
      * the selected MBeans.
      *
+     * <p>
+     *  获取MBean服务器控制的MBean。
+     * 此方法允许获取以下任何内容：所有MBean,通过<CODE> ObjectName </CODE>和/或Query表达式(特定MBean)上的模式匹配指定的一组MBean。
+     * 当对象名称为null或未指定域和键属性时,将选择所有对象(如果指定了查询,则会对其进行过滤)。
+     * 它返回所选MBean的<CODE> ObjectInstance </CODE>对象集(包含<CODE> ObjectName </CODE>和Java类名称)。
+     * 
+     * 
      * @param name The object name pattern identifying the MBeans to
      *      be retrieved. If null or or no domain and key properties
      *      are specified, all the MBeans registered will be retrieved.
@@ -603,6 +713,13 @@ public final class JmxMBeanServer
      * specified). It returns the set of ObjectNames for the MBeans
      * selected.
      *
+     * <p>
+     *  获取MBean服务器控制的MBean的名称。
+     * 此方法允许获取以下任何内容：所有MBean的名称,通过<CODE> ObjectName </CODE>和/或Query表达式上的模式匹配指定的一组MBeans的名称,特定MBean名称相当于测试MBe
+     * an是否注册)。
+     *  获取MBean服务器控制的MBean的名称。当对象名称为null或没有指定域和键属性时,将选择所有对象(如果指定了查询,则会对其进行过滤)。它返回所选MBeans的ObjectNames集合。
+     * 
+     * 
      * @param name The object name pattern identifying the MBeans to be
      *     retrieved. If null or no domain and key properties are
      *     specified, all the MBeans registered will be retrieved.
@@ -623,6 +740,10 @@ public final class JmxMBeanServer
      * Checks whether an MBean, identified by its object name, is already
      * registered with the MBean server.
      *
+     * <p>
+     *  检查由其对象名称标识的MBean是否已向MBean服务器注册。
+     * 
+     * 
      * @param name The object name of the MBean to be checked.
      *
      * @return  True if the MBean is already registered in the MBean server,
@@ -640,6 +761,9 @@ public final class JmxMBeanServer
 
     /**
      * Returns the number of MBeans registered in the MBean server.
+     * <p>
+     * 返回在MBean服务器中注册的MBean数。
+     * 
      */
     public Integer getMBeanCount()  {
 
@@ -650,6 +774,10 @@ public final class JmxMBeanServer
      * Gets the value of a specific attribute of a named MBean. The MBean
      * is identified by its object name.
      *
+     * <p>
+     *  获取命名MBean的特定属性的值。 MBean由其对象名称标识。
+     * 
+     * 
      * @param name The object name of the MBean from which the attribute
      *     is to be retrieved.
      * @param attribute A String specifying the name of the attribute to be
@@ -683,6 +811,10 @@ public final class JmxMBeanServer
      * Enables the values of several attributes of a named MBean. The MBean
      * is identified by its object name.
      *
+     * <p>
+     *  启用命名MBean的几个属性的值。 MBean由其对象名称标识。
+     * 
+     * 
      * @param name The object name of the MBean from which the attributes are
      *     retrieved.
      * @param attributes A list of the attributes to be retrieved.
@@ -710,6 +842,10 @@ public final class JmxMBeanServer
      * Sets the value of a specific attribute of a named MBean. The MBean
      * is identified by its object name.
      *
+     * <p>
+     *  设置命名MBean的特定属性的值。 MBean由其对象名称标识。
+     * 
+     * 
      * @param name The name of the MBean within which the attribute is
      *     to be set.
      * @param attribute The identification of the attribute to be set
@@ -744,6 +880,10 @@ public final class JmxMBeanServer
      * Sets the values of several attributes of a named MBean. The MBean is
      * identified by its object name.
      *
+     * <p>
+     *  设置命名MBean的几个属性的值。 MBean由其对象名称标识。
+     * 
+     * 
      * @param name The object name of the MBean within which the
      *     attributes are to  be set.
      * @param attributes A list of attributes: The identification of the
@@ -772,6 +912,10 @@ public final class JmxMBeanServer
     /**
      * Invokes an operation on an MBean.
      *
+     * <p>
+     *  调用MBean上的操作。
+     * 
+     * 
      * @param name The object name of the MBean on which the method is to be
      *     invoked.
      * @param operationName The name of the operation to be invoked.
@@ -806,6 +950,9 @@ public final class JmxMBeanServer
      * Returns the default domain used for naming the MBean.
      * The default domain name is used as the domain part in the ObjectName
      * of MBeans if no domain is specified by the user.
+     * <p>
+     *  返回用于命名MBean的默认域。如果用户未指定域,则默认域名将用作MBeans的ObjectName中的域部分。
+     * 
      */
     public String getDefaultDomain()  {
         return mbsInterceptor.getDefaultDomain();
@@ -819,6 +966,10 @@ public final class JmxMBeanServer
     /**
      * Adds a listener to a registered MBean.
      *
+     * <p>
+     *  将侦听器添加到注册的MBean。
+     * 
+     * 
      * @param name The name of the MBean on which the listener should be added.
      * @param listener The listener object which will handle the
      *        notifications emitted by the registered MBean.
@@ -843,6 +994,10 @@ public final class JmxMBeanServer
     /**
      * Adds a listener to a registered MBean.
      *
+     * <p>
+     *  将侦听器添加到注册的MBean。
+     * 
+     * 
      * @param name The name of the MBean on which the listener should be added.
      * @param listener The object name of the listener which will handle the
      *        notifications emitted by the registered MBean.
@@ -903,6 +1058,10 @@ public final class JmxMBeanServer
      * This method discovers the attributes and operations that an MBean exposes
      * for management.
      *
+     * <p>
+     *  此方法发现MBean公开用于管理的属性和操作。
+     * 
+     * 
      * @param name The name of the MBean to analyze
      *
      * @return  An instance of <CODE>MBeanInfo</CODE> allowing the retrieval of
@@ -928,6 +1087,12 @@ public final class JmxMBeanServer
      * It returns a reference to the newly created object.
      * The newly created object is not registered in the MBean server.
      *
+     * <p>
+     *  使用在MBean服务器中注册的所有类加载器的列表(使用其{@link javax.management.loading.ClassLoaderRepository Default Loader Repository}
+     * )实例化对象。
+     * 对象的类应该有一个public构造函数。它返回对新创建的对象的引用。新创建的对象未在MBean服务器中注册。
+     * 
+     * 
      * @param className The class name of the object to be instantiated.
      *
      * @return The newly instantiated object.
@@ -961,6 +1126,11 @@ public final class JmxMBeanServer
      * It returns a reference to the newly created object.
      * The newly created object is not registered in the MBean server.
      *
+     * <p>
+     * 使用由其<CODE> ObjectName </CODE>指定的类Loader实例化对象。如果加载程序名称为null,将使用加载MBean Server的ClassLoader。
+     * 对象的类应该有一个public构造函数。它返回对新创建的对象的引用。新创建的对象未在MBean服务器中注册。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param loaderName The object name of the class loader to be used.
      *
@@ -998,6 +1168,12 @@ public final class JmxMBeanServer
      * The call returns a reference to the newly created object.
      * The newly created object is not registered in the MBean server.
      *
+     * <p>
+     *  使用在MBean服务器中注册的所有类加载器的列表(使用其{@link javax.management.loading.ClassLoaderRepository Default Loader Repository}
+     * )实例化对象。
+     * 对象的类应该有一个public构造函数。该调用返回对新创建对象的引用。新创建的对象未在MBean服务器中注册。
+     * 
+     * 
      * @param className The class name of the object to be instantiated.
      * @param params An array containing the parameters of the constructor
      *     to be invoked.
@@ -1037,6 +1213,11 @@ public final class JmxMBeanServer
      * The call returns a reference to the newly created object.
      * The newly created object is not registered in the MBean server.
      *
+     * <p>
+     *  实例化对象。要使用的类加载器由其对象名称标识。如果加载器的对象名称为null,将使用加载MBean服务器的ClassLoader。对象的类应该有一个public构造函数。
+     * 该调用返回对新创建对象的引用。新创建的对象未在MBean服务器中注册。
+     * 
+     * 
      * @param className The class name of the object to be instantiated.
      * @param params An array containing the parameters of the constructor
      *     to be invoked.
@@ -1076,6 +1257,10 @@ public final class JmxMBeanServer
      * Returns true if the MBean specified is an instance of the specified
      * class, false otherwise.
      *
+     * <p>
+     *  如果指定的MBean是指定类的实例,则返回true,否则返回false。
+     * 
+     * 
      * @param name The <CODE>ObjectName</CODE> of the MBean.
      * @param className The name of the class.
      *
@@ -1095,6 +1280,10 @@ public final class JmxMBeanServer
      * De-serializes a byte array in the context of the class loader
      * of an MBean.
      *
+     * <p>
+     *  在MBean的类加载器的上下文中反序列化一个字节数组。
+     * 
+     * 
      * @param name The name of the MBean whose class loader should
      *     be used for the de-serialization.
      * @param data The byte array to be de-sererialized.
@@ -1122,6 +1311,10 @@ public final class JmxMBeanServer
      * De-serializes a byte array in the context of a given MBean class loader.
      * The class loader is the one that loaded the class with name "className".
      *
+     * <p>
+     *  在给定MBean类加载器的上下文中解序列化字节数组。类加载器是加载类名为"className"的类加载器。
+     * 
+     * 
      * @param className The name of the class whose class loader should be
      *      used for the de-serialization.
      * @param data The byte array to be de-sererialized.
@@ -1169,6 +1362,11 @@ public final class JmxMBeanServer
      * class is specified.
      * If null, the MBean Server's class loader will be used.
      *
+     * <p>
+     * 在给定MBean类加载器的上下文中解序列化字节数组。类加载器是加载类名为"className"的类加载器。指定要用于加载指定类的类加载器的名称。
+     * 如果为null,将使用MBean Server的类装入器。
+     * 
+     * 
      * @param className The name of the class whose class loader should be
      *     used for the de-serialization.
      * @param data The byte array to be de-sererialized.
@@ -1213,6 +1411,10 @@ public final class JmxMBeanServer
     /**
      * Initializes this MBeanServer, registering the MBeanServerDelegate.
      * <p>This method must be called once, before using the MBeanServer.
+     * <p>
+     *  初始化此MBeanServer,注册MBeanServerDelegate。 <p>此方法必须调用一次,然后才能使用MBeanServer。
+     * 
+     * 
      **/
     private void initialize() {
         if (instantiator == null) throw new
@@ -1249,6 +1451,10 @@ public final class JmxMBeanServer
         /* Add my class loader to the repository
            This can be null if my class loader is the bootstrap
            class loader.  The ClassLoaderRepository knows how
+        /* <p>
+        /*  如果我的类加载器是引导类加载器,这可以为null。 ClassLoaderRepository知道如何
+        /* 
+        /* 
            to handle that case.  */
         ClassLoader myLoader = outerShell.getClass().getClassLoader();
         final ModifiableClassLoaderRepository loaders = AccessController.doPrivileged(new PrivilegedAction<ModifiableClassLoaderRepository>() {
@@ -1276,6 +1482,16 @@ public final class JmxMBeanServer
                of those in JMX, we better throw the exception now.
 
                This permission question is irrelevant when JMX is part
+            /* <p>
+            /*  通过引导类加载器加载,我们仍然可以使用createMBean(className,objectName)从类路径加载MBean。
+            /* 
+            /*  如果这个类(JmxMBeanServer)没有被系统类加载器或其父类加载,则调用者必须具有RuntimePermission("getClassLoader")才能使getSystemClassLoa
+            /* der()调用成功。
+            /* 如果调用者没有这个权限,对Class.getClassLoader()的任何调用都将失败。因为在JMX中有很多,我们最好抛出异常。
+            /* 
+            /*  当JMX是一部分时,此权限问题是不相关的
+            /* 
+            /* 
                of J2SE (as of 1.5). */
             ClassLoader systemLoader = ClassLoader.getSystemClassLoader();
             if (systemLoader != myLoader)
@@ -1285,6 +1501,10 @@ public final class JmxMBeanServer
 
     /**
      * Return the MBeanServerInterceptor.
+     * <p>
+     *  返回MBeanServerInterceptor。
+     * 
+     * 
      * @exception UnsupportedOperationException if
      *            {@link MBeanServerInterceptor}s
      *            are not enabled on this object.
@@ -1298,6 +1518,10 @@ public final class JmxMBeanServer
 
     /**
      * Set the MBeanServerInterceptor.
+     * <p>
+     *  设置MBeanServerInterceptor。
+     * 
+     * 
      * @exception UnsupportedOperationException if
      *            {@link MBeanServerInterceptor}s
      *            are not enabled on this object.
@@ -1315,6 +1539,10 @@ public final class JmxMBeanServer
     /**
      * <p>Return the {@link java.lang.ClassLoader} that was used for
      * loading the class of the named MBean.
+     * <p>
+     *  <p>返回用于加载命名MBean的类的{@link java.lang.ClassLoader}。
+     * 
+     * 
      * @param mbeanName The ObjectName of the MBean.
      * @return The ClassLoader used for that MBean.
      * @exception InstanceNotFoundException if the named MBean is not found.
@@ -1326,6 +1554,10 @@ public final class JmxMBeanServer
 
     /**
      * <p>Return the named {@link java.lang.ClassLoader}.
+     * <p>
+     *  <p>返回命名的{@link java.lang.ClassLoader}。
+     * 
+     * 
      * @param loaderName The ObjectName of the ClassLoader.
      * @return The named ClassLoader.
      * @exception InstanceNotFoundException if the named ClassLoader
@@ -1338,6 +1570,10 @@ public final class JmxMBeanServer
 
     /**
      * <p>Return the ClassLoaderRepository for that MBeanServer.
+     * <p>
+     *  <p>返回该MBeanServer的ClassLoaderRepository。
+     * 
+     * 
      * @return The ClassLoaderRepository for that MBeanServer.
      **/
     public ClassLoaderRepository getClassLoaderRepository() {
@@ -1368,6 +1604,15 @@ public final class JmxMBeanServer
      * be, for instance, a new object wrapping the previously
      * returned object.
      *
+     * <p>
+     * 此方法为新的MBeanServer创建新的MBeanServerDelegate。
+     * 在创建新的MBeanServer时,{@link javax.management.MBeanServerBuilder}首先调用此方法以创建新的MBeanServerDelegate。
+     *  <br>然后调用<code> newMBeanServer(defaultDomain,outer,delegate,interceptors)</code>传递应该由MBeanServer实现使用的
+     * <var> delegate </var>。
+     * 在创建新的MBeanServer时,{@link javax.management.MBeanServerBuilder}首先调用此方法以创建新的MBeanServerDelegate。
+     *  <p>请注意,传递的<var> delegate </var>可能不是由此方法返回的MBeanServerDelegate。它可以是,例如,一个新对象包裹先前返回的对象。
+     * 
+     * 
      * @return A new {@link javax.management.MBeanServerDelegate}.
      **/
     public static MBeanServerDelegate newMBeanServerDelegate() {
@@ -1399,6 +1644,21 @@ public final class JmxMBeanServer
      * security checks, or to prevent access to the actual MBeanServer
      * implementation by returning a pointer to a wrapping object.
      *
+     * <p>
+     * 此方法创建一个新的MBeanServer实现对象。
+     * 在创建新的MBeanServer时,{@link javax.management.MBeanServerBuilder}首先调用<code> newMBeanServerDelegate()</code>
+     * ,以便为新的MBeanServer获取新的{@link javax.management.MBeanServerDelegate}。
+     * 此方法创建一个新的MBeanServer实现对象。
+     * 然后调用<code> newMBeanServer(defaultDomain,outer,delegate)</code>传递应该由MBeanServer实现使用的<var> delegate </var>
+     * 。
+     * 此方法创建一个新的MBeanServer实现对象。 <p>请注意,传递的<var> delegate </var>可能不是此实现返回的MBeanServerDelegate。
+     * 它可以是,例如,一个新对象包裹先前返回的代理。
+     *  <p> <var> outer </var>参数是指向MBeanServer的指针,在MBeanServer中注册MBean时,应将其传递给{@link javax.management.MBeanRegistration}
+     * 接口。
+     * 它可以是,例如,一个新对象包裹先前返回的代理。
+     * 如果<var> outer </var>是<code> null </code>,那么MBeanServer实现可以在调用{@link javax.management.MBeanRegistration}
+     * 时自由使用<code> this </code>接口。
+     * 
      * @param defaultDomain Default domain of the new MBeanServer.
      * @param outer A pointer to the MBeanServer object that must be
      *        passed to the MBeans when invoking their
@@ -1443,6 +1703,10 @@ public final class JmxMBeanServer
 
     /**
      * Clone object name.
+     * <p>
+     * 它可以是,例如,一个新对象包裹先前返回的代理。
+     *  <p>这使得MBeanServer实现可能包装另一个MBeanServer实现,以实现(例如)安全检查,或通过返回指向包装对象的指针来阻止访问实际的MBeanServer实现。
+     * 
      */
     private ObjectName cloneObjectName(ObjectName name) {
         if (name != null) {
@@ -1453,6 +1717,9 @@ public final class JmxMBeanServer
 
     /**
      * Clone attribute.
+     * <p>
+     *  克隆对象名称。
+     * 
      */
     private Attribute cloneAttribute(Attribute attribute) {
         if (attribute != null) {
@@ -1465,6 +1732,9 @@ public final class JmxMBeanServer
 
     /**
      * Clone attribute list.
+     * <p>
+     *  克隆属性。
+     * 
      */
     private AttributeList cloneAttributeList(AttributeList list) {
         if (list != null) {

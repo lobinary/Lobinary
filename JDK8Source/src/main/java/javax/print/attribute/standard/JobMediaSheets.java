@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,22 @@ import javax.print.attribute.PrintJobAttribute;
  * name.
  * <P>
  *
+ * <p>
+ *  JobMediaSheets类是一个整数值打印属性类,它指定要为此作业生成的介质页数总数。
+ * <P>
+ *  JobMediaSheets属性描述作业的大小。此属性不是计数器;如果已知,则意图是有用的路由和调度信息。如果打印请求中没有提供JobMediaSheets属性的值,打印机可能会尝试计算。
+ * 即使客户端为打印请求中的JobMediaSheets属性提供了值,如果打印机能够计算比客户端提供的值更精确的值,打印机可以选择更改值。
+ * 打印机可以能够在作业提交时或在任何稍后的时间点确定JobMediaSheets属性的正确值。
+ * <P>
+ * 与{@link JobKOctets JobKOctets}和{@link JobImpressions JobImpressions}属性不同,JobMediaSheets值必须包含由{@link Copies Copies}
+ * 属性指定的副本数和嵌入的"副本数"指令所贡献的乘法因子在文档数据中,如果有的话。
+ * 此差异允许系统管理员控制(1)使用{@link JobKOctetsSupported JobKOctetsSupported}和{@link JobImpressionsSupported JobImpressionsSupported}
+ * 的文档大小的下限和上限,以及(2)作业的大小{@link JobMediaSheetsSupported JobMediaSheetsSupported}。
+ * <P>
+ *  <B> IPP兼容性：</B>整数值给出IPP整数值。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @see JobMediaSheetsSupported
  * @see JobMediaSheetsCompleted
  * @see JobKOctets
@@ -76,6 +93,10 @@ public class JobMediaSheets extends IntegerSyntax
      * Construct a new job media sheets attribute with the given integer
      * value.
      *
+     * <p>
+     *  使用给定的整数值构造新的作业介质工作表属性。
+     * 
+     * 
      * @param  value  Integer value.
      *
      * @exception  IllegalArgumentException
@@ -99,6 +120,18 @@ public class JobMediaSheets extends IntegerSyntax
      * value are equal.
      * </OL>
      *
+     * <p>
+     *  返回此作业媒体工作表属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是JobMediaSheets类的实例。
+     * <LI>
+     *  此作业介质工作表属性的值和<CODE>对象</CODE>的值相等。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job media
@@ -115,6 +148,8 @@ public class JobMediaSheets extends IntegerSyntax
      * For class JobMediaSheets and any vendor-defined subclasses, the category
      * is class JobMediaSheets itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -129,6 +164,12 @@ public class JobMediaSheets extends IntegerSyntax
      * For class JobMediaSheets and any vendor-defined subclasses, the
      * category name is <CODE>"job-media-sheets"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobMediaSheets类和任何供应商定义的子类,类别是JobMediaSheets类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

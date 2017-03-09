@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -113,6 +114,42 @@ import java.beans.Transient;
  * the range of 32-bit integers, but zero dimension along one or both
  * axes, then the stored dimensions will be zero in those axes.
  *
+ * <p>
+ *  <code> Rectangle </code>指定坐标空间中由<code> Rectangle </code>对象的左上点{@code(x,y)}包围的区域, ,及其高度。
+ * <p>
+ *  <code> Rectangle </code>对象的<code> width </code>和<code> height </code>是<code> public </code>字段。
+ * 创建<code> Rectangle </code>的构造函数以及可以修改一个的方法不会阻止为宽度或高度设置负值。
+ * <p>
+ * <a name="Empty">
+ *  宽度或高度正好为零的{@code Rectangle}具有沿着零维度的轴的位置,但在其他情况下视为空。 {@link #isEmpty}方法将对此类{@code Rectangle}返回true。
+ * 测试一个空的{@code Rectangle}是否包含或交叉点或矩形的方法将总是返回false,如果任何一个维度为零。
+ * 结合这样的{@code Rectangle}与点或矩形的方法将在结果中包括{@code Rectangle}在该轴上的位置,就像调用{@link #add(Point)}方法。
+ * </a>
+ * <p>
+ * <a name="NonExistant">
+ * 宽度或高度为负的{@code Rectangle}在沿着具有负尺寸的轴上既不具有位置也不具有尺寸。这样的{@code Rectangle}被视为沿着这些轴不存在。
+ * 这样的{@code Rectangle}对于包含计算和方法也是空的,测试它是否包含或相交点或矩形将总是返回false。
+ * 将这样的{@code Rectangle}与点或矩形组合的方法将在生成结果时完全忽略{@code Rectangle}。
+ * 如果两个{@code Rectangle}对象组合在一起,每个对象具有负维度,则结果将至少有一个负维度。
+ * </a>
+ * <p>
+ *  仅影响{@code Rectangle}的位置的方法将对其位置进行操作,而不管其是否沿任一轴具有负或零维度。
+ * <p>
+ * 请注意,使用默认无参数构造函数构造的{@code Rectangle}的尺寸为{@code 0x0},因此为空。
+ *  {@code Rectangle}的位置仍然为{@code(0,0)},并将该位置贡献给联合并添加操作。
+ * 因此,试图累积一组点的边界的代码应该首先构造具有特定负宽度和高度的{@code Rectangle},或者应该使用集合中的第一个点来构造{@code Rectangle}。
+ * 例如：<pre> {@ code Rectangle bounds = new Rectangle(0,0,-1,-1); for(int i = 0; i <points.length; i ++){bounds.add(points [i]); }} </pre>
+ * 或者如果我们知道points数组包含至少一个点：<pre> {@ code Rectangle bounds = new Rectangle(points [0]); for(int i = 1; i <points.length; i ++){bounds.add(points [i]); }} </pre>
+ * 。
+ * 因此,试图累积一组点的边界的代码应该首先构造具有特定负宽度和高度的{@code Rectangle},或者应该使用集合中的第一个点来构造{@code Rectangle}。
+ * <p>
+ * 此类使用32位整数来存储其位置和维度。通常,操作可能会产生超过32位整数范围的结果。方法将以避免中间结果的任何32位溢出的方式计算其结果,然后选择最佳表示以将最终结果存储回保存位置和维度的32位字段。
+ * 结果的位置将通过将真实结果剪切为最接近的32位值存储到{@link #x}和{@link #y}字段中。
+ * 存储在{@link #width}和{@link #height}维度字段中的值将被选择为尽可能包含真实结果的最大部分的32位值。
+ * 通常这意味着维度将被独立地裁剪到32位整数的范围,除了如果位置必须被移动以将其存储到其32位字段对中,则将相对于"最佳表示"来调整维度"的位置。
+ * 如果真实结果具有负的尺寸,因此沿着一个或两个轴不存在,则存储的尺寸在这些轴上将是负数。如果真实结果具有可以在32位整数的范围内表示的位置,但是沿着一个或两个轴的零维度,则存储的维度在那些轴中将为零。
+ * 
+ * 
  * @author      Sami Shaio
  * @since 1.0
  */
@@ -123,6 +160,10 @@ public class Rectangle extends Rectangle2D
     /**
      * The X coordinate of the upper-left corner of the <code>Rectangle</code>.
      *
+     * <p>
+     *  <code> Rectangle </code>左上角的X坐标。
+     * 
+     * 
      * @serial
      * @see #setLocation(int, int)
      * @see #getLocation()
@@ -133,6 +174,10 @@ public class Rectangle extends Rectangle2D
     /**
      * The Y coordinate of the upper-left corner of the <code>Rectangle</code>.
      *
+     * <p>
+     * <code> Rectangle </code>的左上角的Y坐标。
+     * 
+     * 
      * @serial
      * @see #setLocation(int, int)
      * @see #getLocation()
@@ -142,6 +187,10 @@ public class Rectangle extends Rectangle2D
 
     /**
      * The width of the <code>Rectangle</code>.
+     * <p>
+     *  <code> Rectangle </code>的宽度。
+     * 
+     * 
      * @serial
      * @see #setSize(int, int)
      * @see #getSize()
@@ -152,6 +201,10 @@ public class Rectangle extends Rectangle2D
     /**
      * The height of the <code>Rectangle</code>.
      *
+     * <p>
+     *  <code> Rectangle </code>的高度。
+     * 
+     * 
      * @serial
      * @see #setSize(int, int)
      * @see #getSize()
@@ -161,11 +214,17 @@ public class Rectangle extends Rectangle2D
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
      private static final long serialVersionUID = -4345857070255674764L;
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -181,6 +240,9 @@ public class Rectangle extends Rectangle2D
      * Constructs a new <code>Rectangle</code> whose upper-left corner
      * is at (0,&nbsp;0) in the coordinate space, and whose width and
      * height are both zero.
+     * <p>
+     *  构造一个新的<code> Rectangle </code>,其左上角在坐标空间中为(0,&nbsp; 0),宽度和高度均为零。
+     * 
      */
     public Rectangle() {
         this(0, 0, 0, 0);
@@ -189,6 +251,10 @@ public class Rectangle extends Rectangle2D
     /**
      * Constructs a new <code>Rectangle</code>, initialized to match
      * the values of the specified <code>Rectangle</code>.
+     * <p>
+     *  构造一个新的<code> Rectangle </code>,初始化为与指定的<code> Rectangle </code>的值相匹配。
+     * 
+     * 
      * @param r  the <code>Rectangle</code> from which to copy initial values
      *           to a newly constructed <code>Rectangle</code>
      * @since 1.1
@@ -202,6 +268,10 @@ public class Rectangle extends Rectangle2D
      * specified as
      * {@code (x,y)} and whose width and height
      * are specified by the arguments of the same name.
+     * <p>
+     *  构造一个新的<code> Rectangle </code>,其左上角被指定为{@code(x,y)},其宽度和高度由同名的参数指定。
+     * 
+     * 
      * @param     x the specified X coordinate
      * @param     y the specified Y coordinate
      * @param     width    the width of the <code>Rectangle</code>
@@ -219,6 +289,10 @@ public class Rectangle extends Rectangle2D
      * Constructs a new <code>Rectangle</code> whose upper-left corner
      * is at (0,&nbsp;0) in the coordinate space, and whose width and
      * height are specified by the arguments of the same name.
+     * <p>
+     *  构造一个新的<code> Rectangle </code>,它的左上角在坐标空间中为(0,&nbsp; 0),其宽度和高度由同名的参数指定。
+     * 
+     * 
      * @param width the width of the <code>Rectangle</code>
      * @param height the height of the <code>Rectangle</code>
      */
@@ -231,6 +305,10 @@ public class Rectangle extends Rectangle2D
      * specified by the {@link Point} argument, and
      * whose width and height are specified by the
      * {@link Dimension} argument.
+     * <p>
+     *  构造一个新的<code> Rectangle </code>,其左上角由{@link Point}参数指定,其宽度和高度由{@link Dimension}参数指定。
+     * 
+     * 
      * @param p a <code>Point</code> that is the upper-left corner of
      * the <code>Rectangle</code>
      * @param d a <code>Dimension</code>, representing the
@@ -243,6 +321,10 @@ public class Rectangle extends Rectangle2D
     /**
      * Constructs a new <code>Rectangle</code> whose upper-left corner is the
      * specified <code>Point</code>, and whose width and height are both zero.
+     * <p>
+     *  构造一个新的<code> Rectangle </code>,其左上角是指定的<code> Point </code>,其宽度和高度均为零。
+     * 
+     * 
      * @param p a <code>Point</code> that is the top left corner
      * of the <code>Rectangle</code>
      */
@@ -254,6 +336,10 @@ public class Rectangle extends Rectangle2D
      * Constructs a new <code>Rectangle</code> whose top left corner is
      * (0,&nbsp;0) and whose width and height are specified
      * by the <code>Dimension</code> argument.
+     * <p>
+     *  构造一个新的<code> Rectangle </code>,其左上角是(0,&nbsp; 0),其宽度和高度由<code> Dimension </code>参数指定。
+     * 
+     * 
      * @param d a <code>Dimension</code>, specifying width and height
      */
     public Rectangle(Dimension d) {
@@ -263,6 +349,10 @@ public class Rectangle extends Rectangle2D
     /**
      * Returns the X coordinate of the bounding <code>Rectangle</code> in
      * <code>double</code> precision.
+     * <p>
+     *  返回<code> double </code>精度中边界<code> Rectangle </code>的X坐标。
+     * 
+     * 
      * @return the X coordinate of the bounding <code>Rectangle</code>.
      */
     public double getX() {
@@ -272,6 +362,10 @@ public class Rectangle extends Rectangle2D
     /**
      * Returns the Y coordinate of the bounding <code>Rectangle</code> in
      * <code>double</code> precision.
+     * <p>
+     * 返回<code> double </code>精度中边界<code> Rectangle </code>的Y坐标。
+     * 
+     * 
      * @return the Y coordinate of the bounding <code>Rectangle</code>.
      */
     public double getY() {
@@ -281,6 +375,10 @@ public class Rectangle extends Rectangle2D
     /**
      * Returns the width of the bounding <code>Rectangle</code> in
      * <code>double</code> precision.
+     * <p>
+     *  返回<code> double </code>精度中的边界<code> Rectangle </code>的宽度。
+     * 
+     * 
      * @return the width of the bounding <code>Rectangle</code>.
      */
     public double getWidth() {
@@ -290,6 +388,10 @@ public class Rectangle extends Rectangle2D
     /**
      * Returns the height of the bounding <code>Rectangle</code> in
      * <code>double</code> precision.
+     * <p>
+     *  返回<code> double </code>精度中边界<code> Rectangle </code>的高度。
+     * 
+     * 
      * @return the height of the bounding <code>Rectangle</code>.
      */
     public double getHeight() {
@@ -302,6 +404,12 @@ public class Rectangle extends Rectangle2D
      * This method is included for completeness, to parallel the
      * <code>getBounds</code> method of
      * {@link Component}.
+     * <p>
+     *  获取此<code> Rectangle </code>的边界<code> Rectangle </code>。
+     * <p>
+     *  包括这个方法的完整性,以并行{@link Component}的<code> getBounds </code>方法。
+     * 
+     * 
      * @return    a new <code>Rectangle</code>, equal to the
      * bounding <code>Rectangle</code> for this <code>Rectangle</code>.
      * @see       java.awt.Component#getBounds
@@ -316,6 +424,10 @@ public class Rectangle extends Rectangle2D
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public Rectangle2D getBounds2D() {
@@ -328,6 +440,12 @@ public class Rectangle extends Rectangle2D
      * <p>
      * This method is included for completeness, to parallel the
      * <code>setBounds</code> method of <code>Component</code>.
+     * <p>
+     *  设置此<code> Rectangle </code>的边界<code> Rectangle </code>以匹配指定的<code> Rectangle </code>。
+     * <p>
+     *  此方法包括完整性,以并行<code>组件</code>的<code> setBounds </code>方法。
+     * 
+     * 
      * @param r the specified <code>Rectangle</code>
      * @see       #getBounds
      * @see       java.awt.Component#setBounds(java.awt.Rectangle)
@@ -345,6 +463,13 @@ public class Rectangle extends Rectangle2D
      * <p>
      * This method is included for completeness, to parallel the
      * <code>setBounds</code> method of <code>Component</code>.
+     * <p>
+     *  将<code> Rectangle </code>的边界设置为指定的<code> x </code>,<code> y </code>,<code> width </code> ,<code> hei
+     * ght </code>。
+     * <p>
+     *  此方法包括完整性,以并行<code>组件</code>的<code> setBounds </code>方法。
+     * 
+     * 
      * @param x the new X coordinate for the upper-left
      *                    corner of this <code>Rectangle</code>
      * @param y the new Y coordinate for the upper-left
@@ -367,6 +492,11 @@ public class Rectangle extends Rectangle2D
      * maximum range of integers, the result will be the best
      * representation of the specified {@code Rectangle} intersected
      * with the maximum integer bounds.
+     * <p>
+     *  将此{@code Rectangle}的边界设置为包含指定的{@code x},{@code y},{@code width}和{@code height}的整数边界。
+     * 如果参数指定超过整数的最大范围的{@code Rectangle},结果将是指定的{@code Rectangle}与最大整数边界相交的最佳表示。
+     * 
+     * 
      * @param x the X coordinate of the upper-left corner of
      *                  the specified rectangle
      * @param y the Y coordinate of the upper-left corner of
@@ -423,6 +553,11 @@ public class Rectangle extends Rectangle2D
      * <code>x</code>, <code>y</code>, <code>width</code>,
      * and <code>height</code>.
      * <p>
+     * <p>
+     * 将<code> Rectangle </code>的边界设置为指定的<code> x </code>,<code> y </code>,<code> width </code> ,<code> heig
+     * ht </code>。
+     * <p>
+     * 
      * @param x the new X coordinate for the upper-left
      *                    corner of this <code>Rectangle</code>
      * @param y the new Y coordinate for the upper-left
@@ -445,6 +580,12 @@ public class Rectangle extends Rectangle2D
      * <p>
      * This method is included for completeness, to parallel the
      * <code>getLocation</code> method of <code>Component</code>.
+     * <p>
+     *  返回此<code> Rectangle </code>的位置。
+     * <p>
+     *  包括这个方法的完整性,以并行<code> Component </code>的<code> getLocation </code>方法。
+     * 
+     * 
      * @return the <code>Point</code> that is the upper-left corner of
      *                  this <code>Rectangle</code>.
      * @see       java.awt.Component#getLocation
@@ -461,6 +602,12 @@ public class Rectangle extends Rectangle2D
      * <p>
      * This method is included for completeness, to parallel the
      * <code>setLocation</code> method of <code>Component</code>.
+     * <p>
+     *  将此<code> Rectangle </code>移动到指定位置。
+     * <p>
+     *  这个方法包括完整性,以并行<code>组件</code>的<code> setLocation </code>方法。
+     * 
+     * 
      * @param p the <code>Point</code> specifying the new location
      *                for this <code>Rectangle</code>
      * @see       java.awt.Component#setLocation(java.awt.Point)
@@ -476,6 +623,12 @@ public class Rectangle extends Rectangle2D
      * <p>
      * This method is included for completeness, to parallel the
      * <code>setLocation</code> method of <code>Component</code>.
+     * <p>
+     *  将此<code> Rectangle </code>移动到指定位置。
+     * <p>
+     *  这个方法包括完整性,以并行<code>组件</code>的<code> setLocation </code>方法。
+     * 
+     * 
      * @param x the X coordinate of the new location
      * @param y the Y coordinate of the new location
      * @see       #getLocation
@@ -489,6 +642,10 @@ public class Rectangle extends Rectangle2D
     /**
      * Moves this <code>Rectangle</code> to the specified location.
      * <p>
+     * <p>
+     *  将此<code> Rectangle </code>移动到指定位置。
+     * <p>
+     * 
      * @param x the X coordinate of the new location
      * @param y the Y coordinate of the new location
      * @deprecated As of JDK version 1.1,
@@ -504,6 +661,10 @@ public class Rectangle extends Rectangle2D
      * Translates this <code>Rectangle</code> the indicated distance,
      * to the right along the X coordinate axis, and
      * downward along the Y coordinate axis.
+     * <p>
+     *  将所指示的距离转换为<code> Rectangle </code>,沿着X坐标轴向右,沿着Y坐标轴向下。
+     * 
+     * 
      * @param dx the distance to move this <code>Rectangle</code>
      *                 along the X axis
      * @param dy the distance to move this <code>Rectangle</code>
@@ -584,6 +745,12 @@ public class Rectangle extends Rectangle2D
      * <p>
      * This method is included for completeness, to parallel the
      * <code>getSize</code> method of <code>Component</code>.
+     * <p>
+     *  获取此<code> Rectangle </code>的大小,由返回的<code> Dimension </code>表示。
+     * <p>
+     *  包括这个方法的完整性,以并行<code>组件</code>的<code> getSize </code>方法。
+     * 
+     * 
      * @return a <code>Dimension</code>, representing the size of
      *            this <code>Rectangle</code>.
      * @see       java.awt.Component#getSize
@@ -601,6 +768,12 @@ public class Rectangle extends Rectangle2D
      * <p>
      * This method is included for completeness, to parallel the
      * <code>setSize</code> method of <code>Component</code>.
+     * <p>
+     *  设置此<code> Rectangle </code>的大小以匹配指定的<code> Dimension </code>。
+     * <p>
+     *  此方法包括完整性,以并行<code>组件</code>的<code> setSize </code>方法。
+     * 
+     * 
      * @param d the new size for the <code>Dimension</code> object
      * @see       java.awt.Component#setSize(java.awt.Dimension)
      * @see       #getSize
@@ -616,6 +789,12 @@ public class Rectangle extends Rectangle2D
      * <p>
      * This method is included for completeness, to parallel the
      * <code>setSize</code> method of <code>Component</code>.
+     * <p>
+     *  将<code> Rectangle </code>的大小设置为指定的宽度和高度。
+     * <p>
+     * 此方法包括完整性,以并行<code>组件</code>的<code> setSize </code>方法。
+     * 
+     * 
      * @param width the new width for this <code>Rectangle</code>
      * @param height the new height for this <code>Rectangle</code>
      * @see       java.awt.Component#setSize(int, int)
@@ -630,6 +809,10 @@ public class Rectangle extends Rectangle2D
      * Sets the size of this <code>Rectangle</code> to the specified
      * width and height.
      * <p>
+     * <p>
+     *  将<code> Rectangle </code>的大小设置为指定的宽度和高度。
+     * <p>
+     * 
      * @param width the new width for this <code>Rectangle</code>
      * @param height the new height for this <code>Rectangle</code>
      * @deprecated As of JDK version 1.1,
@@ -644,6 +827,10 @@ public class Rectangle extends Rectangle2D
     /**
      * Checks whether or not this <code>Rectangle</code> contains the
      * specified <code>Point</code>.
+     * <p>
+     *  检查此<code> Rectangle </code>是否包含指定的<code> Point </code>。
+     * 
+     * 
      * @param p the <code>Point</code> to test
      * @return    <code>true</code> if the specified <code>Point</code>
      *            is inside this <code>Rectangle</code>;
@@ -658,6 +845,10 @@ public class Rectangle extends Rectangle2D
      * Checks whether or not this <code>Rectangle</code> contains the
      * point at the specified location {@code (x,y)}.
      *
+     * <p>
+     *  检查此<code> Rectangle </code>是否包含指定位置{@code(x,y)}处的点。
+     * 
+     * 
      * @param  x the specified X coordinate
      * @param  y the specified Y coordinate
      * @return    <code>true</code> if the point
@@ -674,6 +865,10 @@ public class Rectangle extends Rectangle2D
      * Checks whether or not this <code>Rectangle</code> entirely contains
      * the specified <code>Rectangle</code>.
      *
+     * <p>
+     *  检查此<code> Rectangle </code>是否完全包含指定的<code> Rectangle </code>。
+     * 
+     * 
      * @param     r   the specified <code>Rectangle</code>
      * @return    <code>true</code> if the <code>Rectangle</code>
      *            is contained entirely inside this <code>Rectangle</code>;
@@ -689,6 +884,10 @@ public class Rectangle extends Rectangle2D
      * the <code>Rectangle</code>
      * at the specified location {@code (X,Y)} with the
      * specified dimensions {@code (W,H)}.
+     * <p>
+     *  检查此<code> Rectangle </code>是否完全包含指定维度{@code(W,H)}的指定位置{@code(X,Y)}处的<code> Rectangle </code>。
+     * 
+     * 
      * @param     X the specified X coordinate
      * @param     Y the specified Y coordinate
      * @param     W   the width of the <code>Rectangle</code>
@@ -740,6 +939,10 @@ public class Rectangle extends Rectangle2D
      * Checks whether or not this <code>Rectangle</code> contains the
      * point at the specified location {@code (X,Y)}.
      *
+     * <p>
+     *  检查此<code> Rectangle </code>是否包含指定位置{@code(X,Y)}处的点。
+     * 
+     * 
      * @param  X the specified X coordinate
      * @param  Y the specified Y coordinate
      * @return    <code>true</code> if the point
@@ -775,6 +978,10 @@ public class Rectangle extends Rectangle2D
      * <code>Rectangle</code> intersect. Two rectangles intersect if
      * their intersection is nonempty.
      *
+     * <p>
+     *  确定此<x> Rectangle </code>和指定的<code> Rectangle </code>是否相交。如果两个矩形的交集是非空的,则它们相交。
+     * 
+     * 
      * @param r the specified <code>Rectangle</code>
      * @return    <code>true</code> if the specified <code>Rectangle</code>
      *            and this <code>Rectangle</code> intersect;
@@ -810,6 +1017,11 @@ public class Rectangle extends Rectangle2D
      * If the two rectangles do not intersect, the result will be
      * an empty rectangle.
      *
+     * <p>
+     *  计算此<code> Rectangle </code>与指定<code> Rectangle </code>的交集。返回一个新的<code> Rectangle </code>,表示两个矩形的交集。
+     * 如果两个矩形不相交,结果将是一个空矩形。
+     * 
+     * 
      * @param     r   the specified <code>Rectangle</code>
      * @return    the largest <code>Rectangle</code> contained in both the
      *            specified <code>Rectangle</code> and in
@@ -857,6 +1069,16 @@ public class Rectangle extends Rectangle2D
      * too large to be expressed as an {@code int}, the result
      * will have a dimension of {@code Integer.MAX_VALUE} along
      * that dimension.
+     * <p>
+     *  使用指定的<code> Rectangle </code>计算此<code> Rectangle </code>的并集。
+     * 返回一个新的<code> Rectangle </code>,表示两个矩形的并集。
+     * <p>
+     * 如果{@code Rectangle}的尺寸小于零,则<a href=#NonExistant>不存在</a>矩形的规则适用。
+     * 如果只有一个的维度小于零,那么结果将是另一个{@code Rectangle}的副本。如果两者都具有小于零的维度,则结果将具有小于零的至少一个维度。
+     * <p>
+     *  如果生成的{@code Rectangle}的维度太大,无法用{@code int}表示,则该维度的维度为{@code Integer.MAX_VALUE}。
+     * 
+     * 
      * @param r the specified <code>Rectangle</code>
      * @return    the smallest <code>Rectangle</code> containing both
      *            the specified <code>Rectangle</code> and this
@@ -925,6 +1147,20 @@ public class Rectangle extends Rectangle2D
      * <pre>
      *     r.add(newx, newy, 1, 1);
      * </pre>
+     * <p>
+     *  将整数参数{@code newx,newy}指定的点添加到此{@code Rectangle}的边界。
+     * <p>
+     *  如果此{@code Rectangle}的尺寸小于零,则<a href=#NonExistant>不存在</a>矩形的规则适用。
+     * 在这种情况下,此{@code Rectangle}的新边界的位置将等于指定的坐标,宽度和高度等于零。
+     * <p>
+     *  添加一个点之后,调用<code>包含</code>与添加的点作为参数不一定返回<code> true </code>。
+     *  <code>包含</code>方法不会为<code> Rectangle </code>的右边或底边的点返回<code> true </code>。
+     * 因此,如果添加的点落在放大的<code> Rectangle </code>的右边或底部边缘,则<code>包含</code>会返回<code> false </code>。
+     * 如果指定点必须包含在新的{@code Rectangle}中,则应添加1x1矩形：。
+     * <pre>
+     * r.add(newx,newy,1,1);
+     * </pre>
+     * 
      * @param newx the X coordinate of the new point
      * @param newy the Y coordinate of the new point
      */
@@ -976,6 +1212,22 @@ public class Rectangle extends Rectangle2D
      * <pre>
      *     r.add(pt.x, pt.y, 1, 1);
      * </pre>
+     * <p>
+     *  将指定的{@code Point}添加到此{@code Rectangle}的边界。
+     * <p>
+     *  如果此{@code Rectangle}的尺寸小于零,则<a href=#NonExistant>不存在</a>矩形的规则适用。
+     * 在这种情况下,此{@code Rectangle}的新边界的位置将等于指定的{@code Point}的坐标,宽度和高度等于零。
+     * <p>
+     *  添加<code> Point </code>之后,调用<code>包含</code>,添加<code> Point </code>作为参数不一定返回<code> true </code>。
+     *  <code>包含</code>方法不会为<code> Rectangle </code>的右边或底边的点返回<code> true </code>。
+     * 因此,如果添加的<code> Point </code>落在放大的<code> Rectangle </code>的右边或底部边缘,则<code>包含</code>返回<code> false </code>
+     *  <code> Point </code>。
+     *  <code>包含</code>方法不会为<code> Rectangle </code>的右边或底边的点返回<code> true </code>。
+     * 如果指定点必须包含在新的{@code Rectangle}中,则应添加1x1矩形：。
+     * <pre>
+     *  r.add(pt.x,pt.y,1,1);
+     * </pre>
+     * 
      * @param pt the new <code>Point</code> to add to this
      *           <code>Rectangle</code>
      */
@@ -1004,6 +1256,18 @@ public class Rectangle extends Rectangle2D
      * too large to be expressed as an {@code int}, the result
      * will have a dimension of {@code Integer.MAX_VALUE} along
      * that dimension.
+     * <p>
+     *  向此<code> Rectangle </code>中添加<code> Rectangle </code>。结果<code> Rectangle </code>是两个矩形的联合。
+     * <p>
+     *  如果{@code Rectangle}的任何维度小于0,则结果将具有另一个{@code Rectangle}的维度。
+     * 如果两个{@code Rectangle}的至少一个维度小于0,则结果将至少有一个维度小于0。
+     * <p>
+     * 如果{@code Rectangle}的一个或两个维度等于0,那么沿着那些具有0维度的轴的结果将等同于通过将相应的原始坐标添加到沿着该轴的结果矩形中获得的结果,类似于{@link #add(Point)}
+     * 方法,但不会提供更多的维度。
+     * <p>
+     *  如果生成的{@code Rectangle}的维度太大,无法用{@code int}表示,则该维度的维度为{@code Integer.MAX_VALUE}。
+     * 
+     * 
      * @param  r the specified <code>Rectangle</code>
      */
     public void add(Rectangle r) {
@@ -1059,6 +1323,17 @@ public class Rectangle extends Rectangle2D
      * values of {@code width} and {@code height} grow
      * from negative to non-negative or shrink from non-negative
      * to negative.
+     * <p>
+     *  水平和垂直调整<code> Rectangle </code>的大小。
+     * <p>
+     *  此方法修改<code> Rectangle </code>,使得左侧和右侧的<code> h </code>单位更大,顶部和右侧的<code> v </code>底部。
+     * <p>
+     *  新的<code> Rectangle </code>具有{@code(x  -  h,y  -  v)}作为其左上角,{@code(width + 2h)}的宽度和{@code (高度+ 2v)}。
+     * <p>
+     *  如果为<code> h </code>和<code> v </code>提供负值,则<code> Rectangle </code>的大小会相应减小。
+     *  {@code grow}方法将检查整数溢出和下溢,但不检查{@code width}和{@code height}的结果值是从负值增加到非负值还是从非负值减小到负值。
+     * 
+     * 
      * @param h the horizontal expansion
      * @param v the vertical expansion
      */
@@ -1117,6 +1392,10 @@ public class Rectangle extends Rectangle2D
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean isEmpty() {
@@ -1125,6 +1404,10 @@ public class Rectangle extends Rectangle2D
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public int outcode(double x, double y) {
@@ -1136,6 +1419,11 @@ public class Rectangle extends Rectangle2D
          * avoid overflow in the comparison.
          *
          * See bug 4320890 for problems that this can cause.
+         * <p>
+         * 注意转换为双下面。如果x + w或y + h的算术在int中完成,那么我们可能得到整数溢出。通过在加法之前转换为双倍,我们强制加法以双倍进行,以避免在比较中溢出。
+         * 
+         *  有关可能导致的问题,请参阅错误4320890。
+         * 
          */
         int out = 0;
         if (this.width <= 0) {
@@ -1157,6 +1445,10 @@ public class Rectangle extends Rectangle2D
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public Rectangle2D createIntersection(Rectangle2D r) {
@@ -1170,6 +1462,10 @@ public class Rectangle extends Rectangle2D
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public Rectangle2D createUnion(Rectangle2D r) {
@@ -1188,6 +1484,12 @@ public class Rectangle extends Rectangle2D
      * <code>null</code> and is a <code>Rectangle</code> object that has the
      * same upper-left corner, width, and height as
      * this <code>Rectangle</code>.
+     * <p>
+     *  检查两个矩形是否相等。
+     * <p>
+     *  如果且仅当参数不是<code> null </code>并且是具有相同左上角,宽度的<code> Rectangle </code>对象,结果是<code> true </code>和高度为<code>
+     *  Rectangle </code>。
+     * 
      * @param obj the <code>Object</code> to compare with
      *                this <code>Rectangle</code>
      * @return    <code>true</code> if the objects are equal;
@@ -1207,6 +1509,9 @@ public class Rectangle extends Rectangle2D
     /**
      * Returns a <code>String</code> representing this
      * <code>Rectangle</code> and its values.
+     * <p>
+     * 
+     * 
      * @return a <code>String</code> representing this
      *               <code>Rectangle</code> object's coordinate and size values.
      */

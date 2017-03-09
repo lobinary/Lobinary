@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,9 @@ import java.beans.PropertyVetoException;
 /**
  * Class that manages a Motif title bar
  *
+ * <p>
+ *  管理Motif标题栏的类
+ * 
  * @since 1.3
  */
 public class MotifInternalFrameTitlePane

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,10 @@
  * Written by Doug Lea and Martin Buchholz with assistance from members of
  * JCP JSR-166 Expert Group and released to the public domain, as explained
  * at http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea和Martin Buchholz在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/z
+ * ero/1.0/。
+ * 
  */
 
 package java.util.concurrent;
@@ -98,6 +103,33 @@ import java.util.function.Consumer;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  基于链接节点的无限线程安全{@linkplain队列队列}。此队列对元素FIFO(先进先出)进行排序。队列的<em>头</em>是队列上已经在最长时间的元素。
+ * 队列的<em>尾</em>是在最短时间内在队列上的元素。新元素插入在队列的尾部,并且队列检索操作获取队列头部的元素。
+ * 当许多线程共享对公共集合的访问权限时,{@code ConcurrentLinkedQueue}是一个适当的选择。像大多数其他并发集合实现一样,此类不允许使用{@code null}元素。
+ * 
+ *  <p>此实施采用了一种基于<a href="http://www.cs.rochester.edu/u/michael/PODC96.html">中描述的高效的<em>无阻塞</em>算法简单,快速和
+ * 实用的非阻塞和阻塞并发队列算法</a> by Maged M. Michael and Michael L. Scott。
+ * 
+ * <p>迭代器</i>是弱一致的</i>,返回反映迭代器创建时或自创建迭代器之后某个点处队列状态的元素。
+ * 他们不会</em>抛出{@link java.util.ConcurrentModificationException},并且可以与其他操作同时进行。从创建迭代器后包含在队列中的元素将只返回一次。
+ * 
+ *  <p>请注意,与大多数集合不同,{@code size}方法是<em>不是</em>恒定时间操作。
+ * 由于这些队列的异步性质,确定元素的当前数量需要遍历元素,因此如果在遍历期间修改此集合,则可能报告不准确的结果。
+ * 此外,批量操作{@code addAll},{@code removeAll},{@code retainAll},{@code containsAll},{@code equals}和{@code toArray}
+ * 不是<em> </em>保证以原子方式执行。
+ * 由于这些队列的异步性质,确定元素的当前数量需要遍历元素,因此如果在遍历期间修改此集合,则可能报告不准确的结果。例如,与{@code addAll}操作同时运行的迭代器可能只查看一些添加的元素。
+ * 
+ *  <p>此类及其迭代器实现{@link Queue}和{@link Iterator}接口的所有<em>可选</em>方法。
+ * 
+ * <p>内存一致性效果：与其他并发集合一样,在将对象置于{@code ConcurrentLinkedQueue} <a href="package-summary.html#MemoryVisibility">
+ *  <i>发生之前< / i> </a>从另一个线程中的{@code ConcurrentLinkedQueue}中访问或删除该元素后的操作。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  * @param <E> the type of elements held in this collection
@@ -175,6 +207,31 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * Node with null item.  Both head and tail are only updated using
      * CAS, so they never regress, although again this is merely an
      * optimization.
+     * <p>
+     *  这是Michael&Scott算法的修改,适用于垃圾收集环境,支持内部节点删除(支持remove(Object))。为了解释,阅读论文。
+     * 
+     *  注意,像这个包中的大多数非阻塞算法一样,该实现依赖于这样的事实：在垃圾收集系统中,由于回收节点,不存在ABA问题的可能性,因此不需要使用"计数指针"或相关技术在非GC'ed设置中使用的版本。
+     * 
+     * 基本不变量是： - 正好有一个(最后一个)节点具有空的下一引用,当入队时是CASed。这最后一个节点可以在尾部到达O(1)时间,但尾只是一个优化 - 它总是可以从头到O(N)时间。
+     *  - 包含在队列中的元素是从头可达的节点中的非空项。将节点的项目引用置于空值以原子方式将其从队列中删除。即使在引起头部前进的并发修改的情况下,所有元素从头部的可达性也必须保持真实。
+     * 出列节点可能由于创建迭代器或简单地丢失其时间片的poll()而无限期地保持使用。
+     * 
+     *  以上可能似乎暗示所有节点是从前一个出列节点GC可达的。
+     * 这将导致两个问题： - 允许流氓迭代器导致无限的内存保留 - 导致旧节点到新节点的跨代链接,如果节点在活期间被终止,这些世代GC很难处理,导致重复的主要收集。
+     * 然而,只有未删除的节点需要从出列节点可达,并且可达性不一定是GC所理解的类型。我们使用把刚刚出队的节点链接到自己的技巧。这种自链接意味着前进。
+     * 
+     * 头和尾都允许滞后。事实上,没有每次都更新它们是一个重要的优化(更少的CASes)。
+     * 和LinkedTransferQueue一样(参见该类的内部文档),我们使用了一个松弛阈值2;也就是说,当当前指针出现在离开第一个/最后一个节点两个或更多步时,我们更新head / tail。
+     * 
+     *  由于头和尾被同时和独立地更新,尾部可能落后于头部(为什么不)?
+     * 
+     *  将节点的项引用置为零原子地从队列中删除该元素。迭代器跳过具有空项的节点。这个类的先前实现在poll()和remove(Object)之间有一个竞争,其中相同的元素将被两个并发操作成功地删除。
+     * 方法remove(Object)也懒地取消链接删除的节点,但这只是一个优化。
+     * 
+     *  当构造一个节点(在入队之前),我们避免通过使用Unsafe.putObject而不是正常的写入来支付对一个易失性写入项。这允许入队的成本是"一个半"CASes。
+     * 
+     *  头和尾都可以或可以不指向具有非空项的节点。如果队列为空,则所有项目当然必须为空。在创建时,头部和尾部都指代具有空项的虚节点。头和尾只是使用CAS更新,所以他们从不回退,虽然这只是一个优化。
+     * 
      */
 
     private static class Node<E> {
@@ -184,6 +241,9 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
         /**
          * Constructs a new node.  Uses relaxed write because item can
          * only be seen after publication via casNext.
+         * <p>
+         * 构造一个新节点。使用宽松的写作,因为项目只能通过casNext发布后才能看到。
+         * 
          */
         Node(E item) {
             UNSAFE.putObject(this, itemOffset, item);
@@ -232,6 +292,12 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * - head.item may or may not be null.
      * - it is permitted for tail to lag behind head, that is, for tail
      *   to not be reachable from head!
+     * <p>
+     *  在O(1)时间内可以到达第一生存(未删除)节点(如果有的话)的节点。
+     * 不变量： - 所有活节点从头通过succ() -  head！= null  - (tmp = head).next！= tmp || tmp！= head非不变量： -  head.item可以是也可
+     * 以不是null。
+     *  在O(1)时间内可以到达第一生存(未删除)节点(如果有的话)的节点。 - 允许尾部落后于头部,也就是说,尾部不能从头部到达！。
+     * 
      */
     private transient volatile Node<E> head;
 
@@ -246,11 +312,19 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * - it is permitted for tail to lag behind head, that is, for tail
      *   to not be reachable from head!
      * - tail.next may or may not be self-pointing to tail.
+     * <p>
+     *  可以在O(1)时间内到达列表上的最后一个节点(即,具有node.next == null的唯一节点)的节点。
+     * 不变量： - 最后一个节点总是可以从尾部通过succ() -  tail！= null非不变性： -  tail.item可以是也可以不是null。
+     *  - 允许尾部落后于头部,也就是说,尾部不能从头部到达！ -  tail.next可以或可以不是自指向尾。
+     * 
      */
     private transient volatile Node<E> tail;
 
     /**
      * Creates a {@code ConcurrentLinkedQueue} that is initially empty.
+     * <p>
+     *  创建最初为空的{@code ConcurrentLinkedQueue}。
+     * 
      */
     public ConcurrentLinkedQueue() {
         head = tail = new Node<E>(null);
@@ -261,6 +335,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * initially containing the elements of the given collection,
      * added in traversal order of the collection's iterator.
      *
+     * <p>
+     *  创建一个{@code ConcurrentLinkedQueue},最初包含给定集合的元素,以集合的迭代器的遍历顺序添加。
+     * 
+     * 
      * @param c the collection of elements to initially contain
      * @throws NullPointerException if the specified collection or any
      *         of its elements are null
@@ -290,6 +368,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * As the queue is unbounded, this method will never throw
      * {@link IllegalStateException} or return {@code false}.
      *
+     * <p>
+     *  在此队列的尾部插入指定的元素。由于队列是无界的,这个方法不会抛出{@link IllegalStateException}或返回{@code false}。
+     * 
+     * 
      * @return {@code true} (as specified by {@link Collection#add})
      * @throws NullPointerException if the specified element is null
      */
@@ -300,6 +382,9 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
     /**
      * Tries to CAS head to p. If successful, repoint old head to itself
      * as sentinel for succ(), below.
+     * <p>
+     *  试试CAS头到p。如果成功,重新指向老头自己作为哨兵succ(),下面。
+     * 
      */
     final void updateHead(Node<E> h, Node<E> p) {
         if (h != p && casHead(h, p))
@@ -310,6 +395,9 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * Returns the successor of p, or the head node if p.next has been
      * linked to self, which will only be true if traversing with a
      * stale pointer that is now off the list.
+     * <p>
+     * 返回p的后继节点,或者如果p.next已经链接到self,则返回头节点,如果遍历列表中的陈旧指针,则返回true。
+     * 
      */
     final Node<E> succ(Node<E> p) {
         Node<E> next = p.next;
@@ -320,6 +408,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * Inserts the specified element at the tail of this queue.
      * As the queue is unbounded, this method will never return {@code false}.
      *
+     * <p>
+     *  在此队列的尾部插入指定的元素。由于队列是无界的,这个方法永远不会返回{@code false}。
+     * 
+     * 
      * @return {@code true} (as specified by {@link Queue#offer})
      * @throws NullPointerException if the specified element is null
      */
@@ -402,6 +494,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * first(), but that would cost an extra volatile read of item,
      * and the need to add a retry loop to deal with the possibility
      * of losing a race to a concurrent poll().
+     * <p>
+     *  返回列表上的第一个live(未删除)节点,如果没有,则返回null。这是投票/偷看的另一个变种;这里返回第一个节点,而不是元素。
+     * 我们可以使peek()一个包装在first(),但是这将花费一个额外的volatile读取项,并需要添加一个重试循环来处理丢失一个竞争到并发poll()的可能性。
+     * 
      */
     Node<E> first() {
         restartFromHead:
@@ -423,6 +519,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
     /**
      * Returns {@code true} if this queue contains no elements.
      *
+     * <p>
+     *  如果此队列不包含元素,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this queue contains no elements
      */
     public boolean isEmpty() {
@@ -443,6 +543,13 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * this method is typically not very useful in concurrent
      * applications.
      *
+     * <p>
+     *  返回此队列中的元素数。如果此队列包含的元素超过{@code Integer.MAX_VALUE}个元素,则返回{@code Integer.MAX_VALUE}。
+     * 
+     *  <p>请注意,与大多数集合不同,此方法是<em>不是</em>恒定时操作。由于这些队列的异步性质,确定元素的当前数量需要O(n)遍历。此外,如果在执行此方法期间添加或删除元素,返回的结果可能不准确。
+     * 因此,此方法通常在并发应用程序中不是非常有用。
+     * 
+     * 
      * @return the number of elements in this queue
      */
     public int size() {
@@ -460,6 +567,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * More formally, returns {@code true} if and only if this queue contains
      * at least one element {@code e} such that {@code o.equals(e)}.
      *
+     * <p>
+     *  如果此队列包含指定的元素,则返回{@code true}。更正式地说,当且仅当此队列包含至少一个{@code e}元素{@code o.equals(e)}时,返回{@code true}。
+     * 
+     * 
      * @param o object to be checked for containment in this queue
      * @return {@code true} if this queue contains the specified element
      */
@@ -481,6 +592,11 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * Returns {@code true} if this queue contained the specified element
      * (or equivalently, if this queue changed as a result of the call).
      *
+     * <p>
+     * 从此队列中删除指定元素的单个实例(如果存在)。更正式地,如果此队列包含一个或多个这样的元素,则删除{@code e} {@code o.equals(e)}的元素。
+     * 如果此队列包含指定的元素(或等效地,如果此队列作为调用的结果而更改),则返回{@code true}。
+     * 
+     * 
      * @param o element to be removed from this queue, if present
      * @return {@code true} if this queue changed as a result of the call
      */
@@ -508,6 +624,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * collection's iterator.  Attempts to {@code addAll} of a queue to
      * itself result in {@code IllegalArgumentException}.
      *
+     * <p>
+     *  将指定集合中的所有元素以指定集合的​​迭代器返回的顺序追加到此队列的末尾。尝试{@code addAll}的队列本身会导致{@code IllegalArgumentException}。
+     * 
+     * 
      * @param c the elements to be inserted into this queue
      * @return {@code true} if this queue changed as a result of the call
      * @throws NullPointerException if the specified collection or any
@@ -576,6 +696,14 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * <p>This method acts as bridge between array-based and collection-based
      * APIs.
      *
+     * <p>
+     *  以正确的顺序返回包含此队列中所有元素的数组。
+     * 
+     *  <p>返回的数组将是"安全的",因为没有对它的引用由此队列维护。 (换句话说,这个方法必须分配一个新的数组)。因此调用者可以自由地修改返回的数组。
+     * 
+     *  <p>此方法充当基于阵列和基于集合的API之间的桥梁。
+     * 
+     * 
      * @return an array containing all of the elements in this queue
      */
     public Object[] toArray() {
@@ -615,6 +743,20 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * Note that {@code toArray(new Object[0])} is identical in function to
      * {@code toArray()}.
      *
+     * <p>
+     *  以正确的顺序返回包含此队列中所有元素的数组;返回的数组的运行时类型是指定数组的运行时类型。如果队列适合指定的数组,则返回其中。否则,将使用指定数组的运行时类型和此队列的大小分配新数组。
+     * 
+     * <p>如果此队列适合具有剩余空间的指定阵列(即,阵列具有比此队列更多的元素),则紧接队列结束后的数组中的元素将设置为{@code null}。
+     * 
+     *  <p>与{@link #toArray()}方法类似,此方法充当基于数组和基于集合的API之间的桥梁。此外,该方法允许对输出阵列的运行时类型的精确控制,并且在某些情况下可以用于节省分配成本。
+     * 
+     *  <p>假设{@code x}是一个已知只包含字符串的队列。以下代码可用于将队列转储到新分配的{@code String}数组中：
+     * 
+     *  <pre> {@code String [] y = x.toArray(new String [0]);} </pre>
+     * 
+     *  注意,{@code toArray(new Object [0])}在功能上与{@code toArray()}是相同的。
+     * 
+     * 
      * @param a the array into which the elements of the queue are to
      *          be stored, if it is big enough; otherwise, a new array of the
      *          same runtime type is allocated for this purpose
@@ -657,6 +799,12 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * <p>The returned iterator is
      * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
      *
+     * <p>
+     *  以正确的顺序返回此队列中的元素的迭代器。元素将按从头(头)到尾(尾)的顺序返回。
+     * 
+     *  <p>返回的迭代器为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     * 
      * @return an iterator over the elements in this queue in proper sequence
      */
     public Iterator<E> iterator() {
@@ -666,6 +814,9 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
     private class Itr implements Iterator<E> {
         /**
          * Next node to return item for.
+         * <p>
+         *  要返回项的下一个节点。
+         * 
          */
         private Node<E> nextNode;
 
@@ -674,11 +825,17 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
          * that an element exists in hasNext(), we must return it in
          * the following next() call even if it was in the process of
          * being removed when hasNext() was called.
+         * <p>
+         *  nextItem保持项目字段,因为一旦我们声明hasNext()中存在一个元素,我们必须在下面的next()调用中返回它,即使它在调用hasNext()时被删除的过程中。
+         * 
          */
         private E nextItem;
 
         /**
          * Node of the last returned item, to support remove.
+         * <p>
+         *  最后返回的节点的项,支持删除。
+         * 
          */
         private Node<E> lastRet;
 
@@ -689,6 +846,9 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
         /**
          * Moves to next valid node and returns item to return for
          * next(), or null if no such.
+         * <p>
+         *  移动到下一个有效节点并返回返回next()的项目,如果没有则返回null。
+         * 
          */
         private E advance() {
             lastRet = nextNode;
@@ -745,6 +905,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
     /**
      * Saves this queue to a stream (that is, serializes it).
      *
+     * <p>
+     *  将此队列保存到流(即,序列化它)。
+     * 
+     * 
      * @param s the stream
      * @throws java.io.IOException if an I/O error occurs
      * @serialData All of the elements (each an {@code E}) in
@@ -769,6 +933,10 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
 
     /**
      * Reconstitutes this queue from a stream (that is, deserializes it).
+     * <p>
+     * 从流重构此队列(即,反序列化它)。
+     * 
+     * 
      * @param s the stream
      * @throws ClassNotFoundException if the class of a serialized object
      *         could not be found
@@ -896,6 +1064,14 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
      * The {@code Spliterator} implements {@code trySplit} to permit limited
      * parallelism.
      *
+     * <p>
+     *  在此队列中的元素上返回{@link Spliterator}。
+     * 
+     *  <p>返回的分隔符为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     *  <p> {@code Spliterator}报告{@link Spliterator#CONCURRENT},{@link Spliterator#ORDERED}和{@link Spliterator#NONNULL}
+     * 。
+     * 
      * @return a {@code Spliterator} over the elements in this queue
      * @since 1.8
      */
@@ -907,6 +1083,11 @@ public class ConcurrentLinkedQueue<E> extends AbstractQueue<E>
     /**
      * Throws NullPointerException if argument is null.
      *
+     * <p>
+     * 
+     *  @implNote {@code Spliterator}实现{@code trySplit}以允许有限的并行性。
+     * 
+     * 
      * @param v the element
      */
     private static void checkNotNull(Object v) {

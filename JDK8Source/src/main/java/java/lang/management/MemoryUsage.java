@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -100,6 +101,49 @@ import sun.management.MemoryUsageCompositeData;
  * <tt>MemoryUsage</tt> is mapped to a {@link CompositeData CompositeData}
  * with attributes as specified in the {@link #from from} method.
  *
+ * <p>
+ *  <tt> MemoryUsage </tt>对象表示内存使用情况的快照。
+ *  <tt> MemoryUsage </tt>类的实例通常由用于获取有关Java虚拟机的单个内存池或整个Java虚拟机的堆或非堆内存的内存使用信息的方法构造。
+ * 
+ *  <p> A <tt> MemoryUsage </tt>对象包含四个值：
+ * <table summary="Describes the MemoryUsage object content">
+ * <tr>
+ *  <td valign = top> <tt> init </tt> </td> <td valign = top>表示Java虚拟机在启动期间从操作系统请求内存管理的初始内存量(以字节为单位)。
+ *  Java虚拟机可以从操作系统请求额外的存储器,并且还可以随着时间释放对系统的存储器。 <tt> init </tt>的值可能未定义。
+ * </td>
+ * </tr>
+ * <tr>
+ *  <td valign = top> <tt> used </tt> </td> <td valign = top>表示当前使用的内存量(以字节为单位)。
+ * </td>
+ * </tr>
+ * <tr>
+ *  <td valign = top> <tt>提交</tt> </td> <td valign = top>表示保证可供Java虚拟机使用的内存量(以字节为单位)。
+ * 提交的内存量可能随时间(增加或减少)而改变。 Java虚拟机可以向系统释放内存,并且<tt>提交</tt>可以小于<tt> init </tt>。
+ *  <tt>提交</tt>将始终大于或等于<tt> used </tt>。
+ * </td>
+ * </tr>
+ * <tr>
+ * <td valign = top> <tt> max </tt> </td> <td valign = top>表示可用于内存管理的最大内存量(以字节为单位)。其值可能未定义。
+ * 如果已定义,最大内存量可能会随时间改变。如果定义<tt> max </tt>,则已使用和已提交内存的总数将始终小于或等于<tt> max </tt>。
+ * 如果存储器分配试图增加所使用的存储器,使得<tt> used>提交</tt>,即使<tt> used&lt; = max </tt>仍然为真(例如,当系统在虚拟内存上为低时)。
+ * </td>
+ * </tr>
+ * </table>
+ * 
+ *  下面是一个显示内存池示例的图片：
+ * 
+ * <pre>
+ *  + ---------------------------------------------- + + / /////////////// | + + //////////////// | + + 
+ * ---------------------------------------------- +。
+ * 
+ *  | -------- | init | --------------- |使用| --------------------------- |承诺| --------------------------
+ * -------------------- |最大。
+ * </pre>
+ * 
+ *  <h3> MXBean映射</h3> <tt> MemoryUsage </tt>映射到具有{@link #from from}方法中指定的属性的{@link CompositeData CompositeData}
+ * 。
+ * 
+ * 
  * @author   Mandy Chung
  * @since   1.5
  */
@@ -112,6 +156,10 @@ public class MemoryUsage {
     /**
      * Constructs a <tt>MemoryUsage</tt> object.
      *
+     * <p>
+     *  构造<tt> MemoryUsage </tt>对象。
+     * 
+     * 
      * @param init      the initial amount of memory in bytes that
      *                  the Java virtual machine allocates;
      *                  or <tt>-1</tt> if undefined.
@@ -170,6 +218,9 @@ public class MemoryUsage {
     /**
      * Constructs a <tt>MemoryUsage</tt> object from a
      * {@link CompositeData CompositeData}.
+     * <p>
+     *  从{@link CompositeData CompositeData}构造一个<tt> MemoryUsage </tt>对象。
+     * 
      */
     private MemoryUsage(CompositeData cd) {
         // validate the input composite data
@@ -186,6 +237,10 @@ public class MemoryUsage {
      * initially requests from the operating system for memory management.
      * This method returns <tt>-1</tt> if the initial memory size is undefined.
      *
+     * <p>
+     *  返回Java虚拟机最初请求操作系统进行内存管理的内存量(以字节为单位)。如果初始内存大小未定义,此方法返回<tt> -1 </tt>。
+     * 
+     * 
      * @return the initial size of memory in bytes;
      * <tt>-1</tt> if undefined.
      */
@@ -196,6 +251,10 @@ public class MemoryUsage {
     /**
      * Returns the amount of used memory in bytes.
      *
+     * <p>
+     * 返回使用的内存量(以字节为单位)。
+     * 
+     * 
      * @return the amount of used memory in bytes.
      *
      */
@@ -208,6 +267,10 @@ public class MemoryUsage {
      * the Java virtual machine to use.  This amount of memory is
      * guaranteed for the Java virtual machine to use.
      *
+     * <p>
+     *  返回为Java虚拟机提交以供使用的内存量(以字节为单位)。这个内存量保证供Java虚拟机使用。
+     * 
+     * 
      * @return the amount of committed memory in bytes.
      *
      */
@@ -226,6 +289,12 @@ public class MemoryUsage {
      * memory even if the amount of used memory does not exceed this
      * maximum size.
      *
+     * <p>
+     *  返回可用于内存管理的最大内存量(以字节为单位)。如果最大内存大小未定义,此方法返回<tt> -1 </tt>。
+     * 
+     *  <p>如果内存量大于提交的内存量,则无法保证此内存量可用于内存管理。即使已使用的内存量未超过此最大大小,Java虚拟机也可能无法分配内存。
+     * 
+     * 
      * @return the maximum amount of memory in bytes;
      * <tt>-1</tt> if undefined.
      */
@@ -235,6 +304,9 @@ public class MemoryUsage {
 
     /**
      * Returns a descriptive representation of this memory usage.
+     * <p>
+     *  返回此内存使用情况的描述性表示。
+     * 
      */
     public String toString() {
         StringBuffer buf = new StringBuffer();
@@ -276,6 +348,19 @@ public class MemoryUsage {
      * </table>
      * </blockquote>
      *
+     * <p>
+     *  返回由给定的<tt> CompositeData </tt>表示的<tt> MemoryUsage </tt>对象。给定的<tt> CompositeData </tt>必须包含以下属性：
+     * 
+     * <blockquote>
+     * <table border summary="The attributes and the types the given CompositeData contains">
+     * <tr>
+     *  <th align = left>属性名称</th> <th align = left>键入</th>
+     * </tr>
+     * <tr>
+     *  <td> init </td> <td> <tt> java.lang.Long </tt> </td>
+     * </tr>
+     * <tr>
+     * 
      * @param cd <tt>CompositeData</tt> representing a <tt>MemoryUsage</tt>
      *
      * @throws IllegalArgumentException if <tt>cd</tt> does not

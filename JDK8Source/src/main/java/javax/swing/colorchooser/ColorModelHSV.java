@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,10 @@ final class ColorModelHSV extends ColorModel {
     /**
      * Converts HSV components of a color to a set of RGB components.
      *
+     * <p>
+     *  将颜色的HSV分量转换为一组RGB分量。
+     * 
+     * 
      * @param hsv  a float array with length equal to
      *             the number of HSV components
      * @param rgb  a float array with length of at least 3
@@ -113,6 +118,9 @@ final class ColorModelHSV extends ColorModel {
     /**
      * Converts RGB components of a color to a set of HSV components.
      *
+     * <p>
+     *  将颜色的RGB分量转换为一组HSV分量。
+     * 
      * @param rgb  a float array with length of at least 3
      *             that contains RGB components of a color
      * @param hsv  a float array with length equal to

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * $Id: XMLValidateContext.java,v 1.8 2005/05/10 16:03:49 mullan Exp $
+ * <p>
+ *  $ Id：XMLValidateContext.java,v 1.8 2005/05/10 16:03:49 mullan Exp $
+ * 
  */
 package javax.xml.crypto.dsig;
 
@@ -54,6 +58,16 @@ import javax.xml.crypto.XMLCryptoContext;
  *      specified is <code>Boolean.FALSE</code>.
  * </ul>
  *
+ * <p>
+ *  包含用于验证XML签名的上下文信息。此接口主要用于类型安全。
+ * 
+ *  <p>请注意,<code> XMLValidateContext </code>实例可以包含特定于与其一起使用的XML签名结构的信息和状态。
+ * 如果使用具有不同签名结构的<code> XMLValidateContext </code>(例如,您不应使用相同的<code> XMLValidateContext </code>实例验证两个不同的{@link XMLSignature}
+ * 对象),结果是不可预测的, 。
+ *  <p>请注意,<code> XMLValidateContext </code>实例可以包含特定于与其一起使用的XML签名结构的信息和状态。
+ * <p>
+ *  <b> <a name="Supported属性"></a>支持的属性</b> <p>应用程序可以使用{@link #setProperty setProperty}方法设置以下属性。
+ * 
  * @author Sean Mullan
  * @author JSR 105 Expert Group
  * @since 1.6

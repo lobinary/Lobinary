@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,16 @@ import java.awt.AWTEvent;
  * of any particular {@code TextEvent} instance is not
  * in the range from {@code TEXT_FIRST} to {@code TEXT_LAST}.
  *
+ * <p>
+ *  指示对象的文本已更改的语义事件。此高级事件由对象(例如TextComponent)在其文本更改时生成。
+ * 事件被传递到每个使用组件的<code> addTextListener </code>方法注册接收这些事件的每个<code> TextListener </code>对象。
+ * <P>
+ *  实现<code> TextListener </code>接口的对象在事件发生时获取此<code> TextEvent </code>。监听器免除了处理单个鼠标移动和键击的细节。
+ * 相反,它可以处理"有意义的"(语义)事件,如"文本改变"。
+ * <p>
+ *  如果任何特定{@code TextEvent}实例的{@code id}参数不在{@code TEXT_FIRST}到{@code TEXT_LAST}的范围内,则会导致未指定的行为。
+ * 
+ * 
  * @author Georges Saab
  *
  * @see java.awt.TextComponent
@@ -55,21 +66,33 @@ public class TextEvent extends AWTEvent {
 
     /**
      * The first number in the range of ids used for text events.
+     * <p>
+     *  用于文本事件的ids范围中的第一个数字。
+     * 
      */
     public static final int TEXT_FIRST  = 900;
 
     /**
      * The last number in the range of ids used for text events.
+     * <p>
+     *  用于文本事件的ids范围中的最后一个数字。
+     * 
      */
     public static final int TEXT_LAST   = 900;
 
     /**
      * This event id indicates that object's text changed.
+     * <p>
+     *  此事件标识指示对象的文本已更改。
+     * 
      */
     public static final int TEXT_VALUE_CHANGED  = TEXT_FIRST;
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 6269902291250941179L;
 
@@ -79,6 +102,11 @@ public class TextEvent extends AWTEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造一个<code> TextEvent </code>对象。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source The (<code>TextComponent</code>) object that
      *               originated the event
      * @param id     An integer that identifies the event type.
@@ -97,6 +125,8 @@ public class TextEvent extends AWTEvent {
      * Returns a parameter string identifying this text event.
      * This method is useful for event-logging and for debugging.
      *
+     * <p>
+     * 
      * @return a string identifying the event and its attributes
      */
     public String paramString() {

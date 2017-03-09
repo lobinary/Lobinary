@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ import java.util.*;
 /**
  * <p>
  *
+ * <p>
+ * <p>
+ * 
+ * 
  * @author Hemanth Puttaswamy
  * </p>
  * <p>
@@ -50,6 +55,11 @@ public abstract class LongMonitoredAttributeBase extends MonitoredAttributeBase 
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  通过创建具有"Long"作为类类型的MonitoredAttributeInfo,构造LongMonitoredAttribute。
+ * 用户应该扩展这个类,并提供getValue()和如果需要clearState()的实现。
+ * 
  * @param name of tthe MonitoredAttribute
  * </p>
  * <p>

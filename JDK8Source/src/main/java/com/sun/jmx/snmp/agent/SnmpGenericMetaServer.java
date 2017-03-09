@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,20 @@ import com.sun.jmx.snmp.SnmpStatusException;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ * <p>
+ *  此接口定义了必须由需要与{@link com.sun.jmx.snmp.agent.SnmpGenericObjectServer}对象交互的SNMP元数据对象实施的方法。
+ * </p>
+ * 
+ * <p>
+ *  当在通用元数据模式下运行时,所有这些方法通常由<code> mibgen </code>生成。
+ * </p>
+ * 
+ *  <p> <b> <i>此接口在生成的元数据和SNMP运行时之间内部使用,您不需要担心它,因为您永远不必直接使用它。 </b> </i> </p>
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  **/
 public interface SnmpGenericMetaServer {
 
@@ -58,6 +73,10 @@ public interface SnmpGenericMetaServer {
      * from an SnmpValue. The returned attribute value can be used to
      * construct an Attribute object.
      *
+     * <p>
+     *  从SnmpValue构造一个属性值(由Attribute :: getValue()返回)。返回的属性值可用于构造Attribute对象。
+     * 
+     * 
      * @param id The OID arc identifying the variable for which the
      *           value is constructed.
      * @param value The SnmpValue from which the Attribute::value will be
@@ -74,6 +93,10 @@ public interface SnmpGenericMetaServer {
      * Construct an SnmpValue from an Attribute value as returned by
      * Attribute::getValue().
      *
+     * <p>
+     *  从Attribute :: getValue()返回的Attribute值构造SnmpValue。
+     * 
+     * 
      * @param id The OID arc identifying the variable for which the
      *           value is constructed.
      * @param value The attribute value as returned by Attribute::getValue().
@@ -89,6 +112,10 @@ public interface SnmpGenericMetaServer {
      * Return the name of the attribute corresponding to the
      * SNMP variable identified by the given <code>id</code>.
      *
+     * <p>
+     *  返回与由给定的<code> id </code>标识的SNMP变量相对应的属性的名称。
+     * 
+     * 
      * @param id The OID arc identifying the variable.
      *
      * @return The name of the variable identified by the given
@@ -103,6 +130,10 @@ public interface SnmpGenericMetaServer {
     /**
      * Check the access rights for a SET operation.
      *
+     * <p>
+     *  检查SET操作的访问权限。
+     * 
+     * 
      * @param x  The new requested value.
      * @param id The OID arc identifying the variable for which the SET is
      *           requested.
@@ -118,6 +149,9 @@ public interface SnmpGenericMetaServer {
     /**
      * Check the access rights for a GET operation.
      *
+     * <p>
+     *  检查GET操作的访问权限。
+     * 
      * @param id The OID arc identifying the variable for which the SET is
      *           requested.
      * @param data A contextual object containing user-data.

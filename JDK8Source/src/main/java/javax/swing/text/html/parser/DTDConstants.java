@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ package javax.swing.text.html.parser;
  * constants correspond the the equivalent SGML constructs
  * as described in "The SGML Handbook" by  Charles F. Goldfarb.
  *
+ * <p>
+ *  在DTD中使用的SGML常量。常数的名称对应于由Charles F.Goldfarb的"The SGML Handbook"中描述的等同的SGML构建体。
+ * 
  * @see DTD
  * @see Element
  * @author Arthur van Hoff

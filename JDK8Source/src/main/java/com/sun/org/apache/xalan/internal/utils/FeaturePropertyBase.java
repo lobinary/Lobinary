@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ import com.sun.org.apache.xalan.internal.XalanConstants;
 /**
  * This is the base class for features and properties
  *
+ * <p>
+ *  这是功能和属性的基类
+ * 
  */
 public abstract class FeaturePropertyBase {
 
@@ -37,6 +41,9 @@ public abstract class FeaturePropertyBase {
      * States of the settings of a property, in the order: default value, value
      * set by FEATURE_SECURE_PROCESSING, jaxp.properties file, jaxp system
      * properties, and jaxp api properties
+     * <p>
+     *  状态设置的属性,按顺序：默认值,由FEATURE_SECURE_PROCESSING设置的值,jaxp.properties文件,jaxp系统属性和jaxp api属性
+     * 
      */
     public static enum State {
         //this order reflects the overriding order
@@ -46,10 +53,16 @@ public abstract class FeaturePropertyBase {
 
     /**
      * Values of the properties as defined in enum Properties
+     * <p>
+     *  枚举属性中定义的属性值
+     * 
      */
     String[] values = null;
     /**
      * States of the settings for each property in Properties above
+     * <p>
+     *  上述属性中每个属性的设置状态
+     * 
      */
     State[] states = {State.DEFAULT, State.DEFAULT};
 
@@ -57,6 +70,10 @@ public abstract class FeaturePropertyBase {
     /**
      * Set the value for a specific property.
      *
+     * <p>
+     *  设置特定属性的值。
+     * 
+     * 
      * @param property the property
      * @param state the state of the property
      * @param value the value of the property
@@ -71,6 +88,10 @@ public abstract class FeaturePropertyBase {
 
     /**
      * Set the value of a property by its index
+     * <p>
+     *  通过其索引设置属性的值
+     * 
+     * 
      * @param index the index of the property
      * @param state the state of the property
      * @param value the value of the property
@@ -85,6 +106,10 @@ public abstract class FeaturePropertyBase {
 
      /**
      * Set value by property name and state
+     * <p>
+     *  按属性名称和状态设置值
+     * 
+     * 
      * @param propertyName property name
      * @param state the state of the property
      * @param value the value of the property
@@ -102,6 +127,10 @@ public abstract class FeaturePropertyBase {
 
      /**
      * Set value by property name and state
+     * <p>
+     *  按属性名称和状态设置值
+     * 
+     * 
      * @param propertyName property name
      * @param state the state of the property
      * @param value the value of the property
@@ -124,6 +153,10 @@ public abstract class FeaturePropertyBase {
     /**
      * Return the value of the specified property
      *
+     * <p>
+     *  返回指定属性的值
+     * 
+     * 
      * @param property the property
      * @return the value of the property
      */
@@ -134,6 +167,10 @@ public abstract class FeaturePropertyBase {
     /**
      * Return the value of the specified property
      *
+     * <p>
+     *  返回指定属性的值
+     * 
+     * 
      * @param property the property
      * @return the value of the property
      */
@@ -148,6 +185,10 @@ public abstract class FeaturePropertyBase {
     /**
      * Return the value of the specified property.
      *
+     * <p>
+     *  返回指定属性的值。
+     * 
+     * 
      * @param propertyName the property name
      * @return the value of the property as a string. If a property is managed
      * by this manager, its value shall not be null.
@@ -163,6 +204,10 @@ public abstract class FeaturePropertyBase {
 
     /**
      * Return the value of a property by its ordinal
+     * <p>
+     *  通过其序数返回属性的值
+     * 
+     * 
      * @param index the index of a property
      * @return value of a property
      */
@@ -172,6 +217,10 @@ public abstract class FeaturePropertyBase {
 
     /**
      * Get the index by property name
+     * <p>
+     *  按属性名称获取索引
+     * 
+     * 
      * @param propertyName property name
      * @return the index of the property if found; return -1 if not
      */
@@ -191,6 +240,9 @@ public abstract class FeaturePropertyBase {
     /**
      * Read from system properties, or those in jaxp.properties
      *
+     * <p>
+     *  从系统属性或jaxp.properties中读取
+     * 
      * @param property the property
      * @param systemProperty the name of the system property
      */

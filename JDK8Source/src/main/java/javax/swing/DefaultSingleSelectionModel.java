@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,13 @@ import java.util.EventListener;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  SingleSelectionModel的通用实现。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Dave Moore
  */
 public class DefaultSingleSelectionModel implements SingleSelectionModel,
@@ -48,6 +56,9 @@ Serializable {
     /* Only one ModelChangeEvent is needed per model instance since the
      * event's only (read-only) state is the source property.  The source
      * of events generated here is always "this".
+     * <p>
+     *  事件的(只读)状态是源属性。这里生成的事件源始终是"this"。
+     * 
      */
     protected transient ChangeEvent changeEvent = null;
     /** The collection of registered listeners */
@@ -84,6 +95,9 @@ Serializable {
 
     /**
      * Adds a <code>ChangeListener</code> to the button.
+     * <p>
+     *  向按钮添加<code> ChangeListener </code>。
+     * 
      */
     public void addChangeListener(ChangeListener l) {
         listenerList.add(ChangeListener.class, l);
@@ -91,6 +105,9 @@ Serializable {
 
     /**
      * Removes a <code>ChangeListener</code> from the button.
+     * <p>
+     *  从按钮中删除<code> ChangeListener </code>。
+     * 
      */
     public void removeChangeListener(ChangeListener l) {
         listenerList.remove(ChangeListener.class, l);
@@ -100,6 +117,10 @@ Serializable {
      * Returns an array of all the change listeners
      * registered on this <code>DefaultSingleSelectionModel</code>.
      *
+     * <p>
+     *  返回在此<code> DefaultSingleSelectionModel </code>上注册的所有更改侦听器的数组。
+     * 
+     * 
      * @return all of this model's <code>ChangeListener</code>s
      *         or an empty
      *         array if no change listeners are currently registered
@@ -117,6 +138,10 @@ Serializable {
      * Notifies all listeners that have registered interest for
      * notification on this event type.  The event instance
      * is created lazily.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例是懒惰创建的。
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireStateChanged() {
@@ -153,6 +178,13 @@ Serializable {
      * If no such listeners exist,
      * this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此模型上注册为<code> <em> Foo </em> Listener </code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * <p>
+     * 您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询<code> DefaultSingleSelectionModel </code>实例<code> m </code>中的变更侦听器：。
+     * 
      * @param listenerType  the type of listeners requested;
      *          this parameter should specify an interface
      *          that descends from <code>java.util.EventListener</code>

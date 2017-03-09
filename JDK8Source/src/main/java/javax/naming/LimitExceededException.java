@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,16 @@ import javax.naming.Name;
   * Synchronization and serialization issues that apply to NamingException
   * apply directly here.
   *
+  * <p>
+  *  当方法因用户或系统指定的限制而异常终止时,将抛出此异常。
+  * 这与InsufficientResourceException不同,因为LimitExceededException是由于用户/系统指定的限制。例如,内存不足以完成请求将是一个不足的资源。
+  * 客户端要求10个答案并回到11是一个大小限制异常。
+  * p>
+  *  这些限制的示例包括客户端和服务器配置限制,如大小,时间,跳数等。
+  * <p>
+  *  适用于NamingException的同步和序列化问题直接应用于此处。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @since 1.3
@@ -52,6 +63,9 @@ public class LimitExceededException extends NamingException {
     /**
      * Constructs a new instance of LimitExceededException with
       * all name resolution fields and explanation initialized to null.
+      * <p>
+      *  构造一个LimitExceededException的新实例,并将所有名称解析字段和说明初始化为null。
+      * 
      */
     public LimitExceededException() {
         super();
@@ -60,6 +74,10 @@ public class LimitExceededException extends NamingException {
     /**
      * Constructs a new instance of LimitExceededException using an
      * explanation. All other fields default to null.
+     * <p>
+     *  使用说明构造LimitExceededException的新实例。所有其他字段默认为null。
+     * 
+     * 
      * @param explanation Possibly null detail about this exception.
      * @see java.lang.Throwable#getMessage
      */
@@ -69,6 +87,8 @@ public class LimitExceededException extends NamingException {
 
     /**
      * Use serialVersionUID from JNDI 1.1.1 for interoperability
+     * <p>
+     *  从JNDI 1.1.1使用serialVersionUID以实现互操作性
      */
     private static final long serialVersionUID = -776898738660207856L;
 }

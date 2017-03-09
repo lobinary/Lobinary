@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  分隔线用于Motif分割窗格。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class MotifSplitPaneDivider extends BasicSplitPaneDivider
@@ -50,6 +58,9 @@ public class MotifSplitPaneDivider extends BasicSplitPaneDivider
     /**
      * Default cursor, supers is package private, so we have to have one
      * too.
+     * <p>
+     *  默认游标,supers是包私有的,所以我们必须有一个。
+     * 
      */
     private static final Cursor defaultCursor =
                             Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
@@ -73,6 +84,9 @@ public class MotifSplitPaneDivider extends BasicSplitPaneDivider
 
     /**
      * Creates a new Motif SplitPaneDivider
+     * <p>
+     *  创建一个新的Motif SplitPaneDivider
+     * 
      */
     public MotifSplitPaneDivider(BasicSplitPaneUI ui) {
         super(ui);
@@ -85,6 +99,9 @@ public class MotifSplitPaneDivider extends BasicSplitPaneDivider
     /**
      * overrides to hardcode the size of the divider
      * PENDING(jeff) - rewrite JSplitPane so that this ins't needed
+     * <p>
+     *  覆盖硬编码分隔符的大小PENDING(jeff) - 重写JSplitPane,以便这不需要
+     * 
      */
     public void setDividerSize(int newSize) {
         Insets          insets = getInsets();
@@ -108,6 +125,9 @@ public class MotifSplitPaneDivider extends BasicSplitPaneDivider
 
     /**
       * Paints the divider.
+      * <p>
+      *  涂抹分隔线。
+      * 
       */
     // PENDING(jeff) - the thumb's location and size is currently hard coded.
     // It should be dynamic.
@@ -180,6 +200,9 @@ public class MotifSplitPaneDivider extends BasicSplitPaneDivider
 
     /**
       * The minimums size is the same as the preferredSize
+      * <p>
+      *  最小值大小与preferredSize相同
+      * 
       */
     public Dimension getMinimumSize() {
         return getPreferredSize();
@@ -188,6 +211,9 @@ public class MotifSplitPaneDivider extends BasicSplitPaneDivider
     /**
      * Sets the SplitPaneUI that is using the receiver. This is completely
      * overriden from super to create a different MouseHandler.
+     * <p>
+     *  设置使用接收器的SplitPaneUI。这是完全覆盖从超级创建一个不同的MouseHandler。
+     * 
      */
     public void setBasicSplitPaneUI(BasicSplitPaneUI newUI) {
         if (splitPane != null) {
@@ -223,6 +249,9 @@ public class MotifSplitPaneDivider extends BasicSplitPaneDivider
     /**
      * Returns true if the point at <code>x</code>, <code>y</code>
      * is inside the thumb.
+     * <p>
+     *  如果<code> x </code>,<code> y </code>的点在缩略图内,则返回true。
+     * 
      */
     private boolean isInThumb(int x, int y) {
         Dimension           size = getSize();
@@ -268,6 +297,8 @@ public class MotifSplitPaneDivider extends BasicSplitPaneDivider
      * MouseHandler is subclassed to only pass off to super if the mouse
      * is in the thumb. Motif only allows dragging when the thumb is clicked
      * in.
+     * <p>
+     *  MouseHandler是子类化的,如果鼠标在拇指中,则只传递给super。 Motif只允许在拇指被点击时拖动。
      */
     private class MotifMouseHandler extends MouseHandler {
         public void mousePressed(MouseEvent e) {

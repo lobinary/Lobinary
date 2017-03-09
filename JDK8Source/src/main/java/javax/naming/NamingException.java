@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,19 @@ package javax.naming;
   * <i>root exception</i> (or <i>root cause</i>) is the same object as the
   * <i>cause</i> returned by the {@link Throwable#getCause()} method.
   *
+  * <p>
+  *  这是由Context和DirContext接口中的操作抛出的所有异常的超类。故障的性质由子类的名称描述。此异常捕获定位操作失败的位置的信息,例如上次进行解析的位置。
+  * <ul>
+  *  <li>已解析的名称。已解析的名称部分。 <li>已解决的对象。名称解析的对象继续进行的对象。 <li>剩余名称。尚未解决的名称部分。 <li>说明。详细解释名称解析失败的原因。 <li>根异常。
+  * 引发此命名异常的异常被抛出。
+  * /ul>
+  *  null是这些字段中的任何一个的可接受值。当为null时,表示没有为该字段记录此类信息。
+  * p>
+  *  NamingException实例不与并发多线程访问同步。尝试访问和修改单个NamingException实例的多个线程应锁定该对象。
+  * p>
+  *  该异常已经被改进以符合通用目的异常链接机制。 <i>根异常</i>(或<i>根原因</i>)是与{@link Throwable#getCause()}方法返回的<i>原因</i>相同的对象。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @since 1.3
@@ -64,6 +78,10 @@ public class NamingException extends Exception {
      * This field is initialized by the constructors.
      * You should access and manipulate this field
      * through its get and set methods.
+     * <p>
+     * 包含已成功解析的名称部分。它是一个复合名称,可以为null。此字段由构造函数初始化。您应该通过get和set方法访问和操作此字段。
+     * 
+     * 
      * @serial
      * @see #getResolvedName
      * @see #setResolvedName
@@ -75,6 +93,10 @@ public class NamingException extends Exception {
       * This field is initialized by the constructors.
       * You should access and manipulate this field
       * through its get and set methods.
+      * <p>
+      *  包含名称的部分的解析成功的对象。可以为null。此字段由构造函数初始化。您应该通过get和set方法访问和操作此字段。
+      * 
+      * 
       * @serial
       * @see #getResolvedObj
       * @see #setResolvedObj
@@ -86,6 +108,10 @@ public class NamingException extends Exception {
      * This field is initialized by the constructors.
      * You should access and manipulate this field
      * through its get, set, "append" methods.
+     * <p>
+     *  包含尚未解析的剩余名称。它是一个复合名称,可以为null。此字段由构造函数初始化。您应该通过其get,set,"append"方法访问和操作此字段。
+     * 
+     * 
      * @serial
      * @see #getRemainingName
      * @see #setRemainingName
@@ -106,6 +132,12 @@ public class NamingException extends Exception {
      * The {@link #initCause(Throwable)} and {@link #getCause()} methods
      * are now the preferred means of accessing this information.
      *
+     * <p>
+     *  包含导致抛出此NamingException的原始异常。如果有可以从原始异常获取的附加信息,或者如果原始异常不能映射到NamingException的子类,则设置此字段。可以为null。
+     * p>
+     *  此字段早于通用的异常链接设施。 {@link #initCause(Throwable)}和{@link #getCause()}方法现在是访问此信息的首选方法。
+     * 
+     * 
      * @serial
      * @see #getRootCause
      * @see #setRootCause(Throwable)
@@ -118,6 +150,10 @@ public class NamingException extends Exception {
      * Constructs a new NamingException with an explanation.
      * All unspecified fields are set to null.
      *
+     * <p>
+     *  构造一个新的NamingException和一个解释。所有未指定的字段都设置为null。
+     * 
+     * 
      * @param   explanation     A possibly null string containing
      *                          additional detail about this exception.
      * @see java.lang.Throwable#getMessage
@@ -131,6 +167,9 @@ public class NamingException extends Exception {
     /**
       * Constructs a new NamingException.
       * All fields are set to null.
+      * <p>
+      *  构造一个新的NamingException。所有字段都设置为null。
+      * 
       */
     public NamingException() {
         super();
@@ -142,6 +181,10 @@ public class NamingException extends Exception {
      * Retrieves the leading portion of the name that was resolved
      * successfully.
      *
+     * <p>
+     *  检索已成功解析的名称的前导部分。
+     * 
+     * 
      * @return The part of the name that was resolved successfully.
      *          It is a composite name. It can be null, which means
      *          the resolved name field has not been set.
@@ -154,6 +197,10 @@ public class NamingException extends Exception {
 
     /**
      * Retrieves the remaining unresolved portion of the name.
+     * <p>
+     *  检索名称的剩余未解析部分。
+     * 
+     * 
      * @return The part of the name that has not been resolved.
      *          It is a composite name. It can be null, which means
      *          the remaining name field has not been set.
@@ -169,6 +216,10 @@ public class NamingException extends Exception {
      * Retrieves the object to which resolution was successful.
      * This is the object to which the resolved name is bound.
      *
+     * <p>
+     * 检索解析成功的对象。这是已解析的名称所绑定的对象。
+     * 
+     * 
      * @return The possibly null object that was resolved so far.
      *  null means that the resolved object field has not been set.
      * @see #getResolvedName
@@ -181,6 +232,10 @@ public class NamingException extends Exception {
     /**
       * Retrieves the explanation associated with this exception.
       *
+      * <p>
+      *  检索与此异常相关的说明。
+      * 
+      * 
       * @return The possibly null detail string explaining more
       *         about this exception. If null, it means there is no
       *         detail message for this exception.
@@ -204,6 +259,15 @@ public class NamingException extends Exception {
      * Subsequent changes to <code>name</code> does not
      * affect the copy in this NamingException and vice versa.
      *
+     * <p>
+     *  设置此异常的已解析的名称字段。
+     * p>
+     *  <tt> name </tt>是复合名称。如果意图是使用化合物名称或字符串设置此字段,则必须"stringify"化合物名称,并使用该字符串使用单个组件创建复合名称。
+     * 然后,可以使用生成的复合名称调用此方法。
+     * p>
+     *  制作并存储<code> name </code>的副本。对<code> name </code>的后续更改不会影响此NamingException中的副本,反之亦然。
+     * 
+     * 
      * @param name The possibly null name to set resolved name to.
      *          If null, it sets the resolved name field to null.
      * @see #getResolvedName
@@ -227,6 +291,15 @@ public class NamingException extends Exception {
      * A copy of <code>name</code> is made and stored.
      * Subsequent changes to <code>name</code> does not
      * affect the copy in this NamingException and vice versa.
+     * <p>
+     *  设置此异常的其余名称字段。
+     * p>
+     *  <tt> name </tt>是复合名称。如果意图是使用化合物名称或字符串设置此字段,则必须"stringify"化合物名称,并使用该字符串使用单个组件创建复合名称。
+     * 然后,可以使用生成的复合名称调用此方法。
+     * p>
+     *  制作并存储<code> name </code>的副本。对<code> name </code>的后续更改不会影响此NamingException中的副本,反之亦然。
+     * 
+     * 
      * @param name The possibly null name to set remaining name to.
      *          If null, it sets the remaining name field to null.
      * @see #getRemainingName
@@ -242,6 +315,10 @@ public class NamingException extends Exception {
 
     /**
      * Sets the resolved object field of this exception.
+     * <p>
+     *  设置此异常的已解析对象字段。
+     * 
+     * 
      * @param obj The possibly null object to set resolved object to.
      *            If null, the resolved object field is set to null.
      * @see #getResolvedObj
@@ -252,6 +329,10 @@ public class NamingException extends Exception {
 
     /**
       * Add name as the last component in remaining name.
+      * <p>
+      *  在剩余名称中添加名称作为最后一个组件。
+      * 
+      * 
       * @param name The component to add.
       *         If name is null, this method does not do anything.
       * @see #setRemainingName
@@ -281,6 +362,14 @@ public class NamingException extends Exception {
       *<p>
       * Subsequent changes to <code>name</code> does not
       * affect the remaining name field in this NamingException and vice versa.
+      * <p>
+      *  从"name"中添加组件作为其余名称中的最后一个组件。
+      * p>
+      * <tt> name </tt>是复合名称。如果意图是追加化合物名称,则应该"化合物"化合物名称,然后调用接受String参数的重载形式。
+      * p>
+      *  对<code> name </code>的后续更改不会影响此NamingException中的其余名称字段,反之亦然。
+      * 
+      * 
       * @param name The possibly null name containing ordered components to add.
       *                 If name is null, this method does not do anything.
       * @see #setRemainingName
@@ -313,6 +402,13 @@ public class NamingException extends Exception {
       * The {@link #getCause()} method is now the preferred means of obtaining
       * this information.
       *
+      * <p>
+      *  检索此NamingException的根本原因(如果有)。
+      * 当服务提供者想向调用者指示一个非命名相关的异常但同时想要使用NamingException结构来指示命名操作进行多远时,使用命名异常的根本原因。
+      * p>
+      *  此方法早于通用的异常链接设施。 {@link #getCause()}方法现在是获取此信息的首选方法。
+      * 
+      * 
       * @return The possibly null exception that caused this naming
       *    exception. If null, it means no root cause has been
       *    set for this naming exception.
@@ -332,6 +428,12 @@ public class NamingException extends Exception {
       * The {@link #initCause(Throwable)} method is now the preferred means
       * of recording this information.
       *
+      * <p>
+      *  记录此NamingException的根本原因。如果<tt> e </tt>是<tt>此</tt>,此方法不执行任何操作。
+      * p>
+      *  此方法早于通用的异常链接设施。 {@link #initCause(Throwable)}方法现在是记录此信息的首选方法。
+      * 
+      * 
       * @param e The possibly null exception that caused the naming
       *          operation to fail. If null, it means this naming
       *          exception has no root cause.
@@ -351,6 +453,10 @@ public class NamingException extends Exception {
       * Returns <code>null</code> if the cause is nonexistent or
       * unknown.
       *
+      * <p>
+      *  返回此异常的原因。原因是throwable导致抛出这个命名异常。如果原因不存在或未知,则返回<code> null </code>。
+      * 
+      * 
       * @return  the cause of this exception, or <code>null</code> if the
       *          cause is nonexistent or unknown.
       * @see #initCause(Throwable)
@@ -367,6 +473,12 @@ public class NamingException extends Exception {
       *<p>
       * This method may be called at most once.
       *
+      * <p>
+      *  将此异常的原因初始化为指定的值。原因是throwable导致抛出这个命名异常。
+      * p>
+      *  此方法最多可调用一次。
+      * 
+      * 
       * @param  cause   the cause, which is saved for later retrieval by
       *         the {@link #getCause()} method.  A <tt>null</tt> value
       *         indicates that the cause is nonexistent or unknown.
@@ -393,6 +505,10 @@ public class NamingException extends Exception {
      * This string is used for debugging and not meant to be interpreted
      * programmatically.
      *
+     * <p>
+     * 生成此异常的字符串表示形式。字符串表示包括此异常的类名称,其详细消息,如果它有根本原因,根本原因异常的字符串表示,后面是剩余名称(如果它不为null)。此字符串用于调试,不能以编程方式解释。
+     * 
+     * 
      * @return The non-null string containing the string representation
      * of this exception.
      */
@@ -416,6 +532,10 @@ public class NamingException extends Exception {
       * This string is used for debugging and not meant to be interpreted
       * programmatically.
       *
+      * <p>
+      *  生成更详细的字符串表示。此字符串表示形式由toString()返回的不带参数的信息,以及解析对象的字符串表示形式(如果它不为空)组成。此字符串用于调试,不能以编程方式解释。
+      * 
+      * 
       * @param detail If true, include details about the resolved object
       *                 in addition to the other information.
       * @return The non-null string containing the string representation.
@@ -430,6 +550,8 @@ public class NamingException extends Exception {
 
     /**
      * Use serialVersionUID from JNDI 1.1.1 for interoperability
+     * <p>
+     *  从JNDI 1.1.1使用serialVersionUID以实现互操作性
      */
     private static final long serialVersionUID = -1299181962103167177L;
 };

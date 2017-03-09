@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.util.Enumeration;
  * written out per line, the writer defaults to 100.
  * But this value can be set by subclasses.
  *
+ * <p>
+ *  AbstractWriter是一个抽象类,它实际上完成了写出包括属性的元素树的工作。根据每行写出多少,写者默认为100.但是这个值可以通过子类设置。
+ * 
+ * 
  * @author Sunita Mani
  */
 
@@ -60,6 +65,9 @@ public abstract class AbstractWriter {
      * EndOfLineStringProperty, it will be used for newlines. Otherwise
      * the System property line.separator will be used. The line separator
      * can also be set.
+     * <p>
+     *  用于行结束的字符串。如果文档具有属性EndOfLineStringProperty,它将用于换行。否则将使用系统属性line.separator。也可以设置线分隔符。
+     * 
      */
     private String lineSeparator;
 
@@ -67,22 +75,34 @@ public abstract class AbstractWriter {
      * True indicates that when writing, the line can be split, false
      * indicates that even if the line is > than max line length it should
      * not be split.
+     * <p>
+     *  True表示写入时,行可以拆分,false表示即使行>大于最大行长度,也不应拆分。
+     * 
      */
     private boolean canWrapLines;
 
     /**
      * True while the current line is empty. This will remain true after
      * indenting.
+     * <p>
+     *  当当前行为空时为True。这将在缩进后保持为真。
+     * 
      */
     private boolean isLineEmpty;
 
     /**
      * Used when indenting. Will contain the spaces.
+     * <p>
+     *  用于缩进。将包含空格。
+     * 
      */
     private char[] indentChars;
 
     /**
      * Used when writing out a string.
+     * <p>
+     *  在写出字符串时使用。
+     * 
      */
     private char[] tempChars;
 
@@ -91,16 +111,27 @@ public abstract class AbstractWriter {
      * tempChars. If tempChars were used it would mean write couldn't invoke
      * <code>writeLineSeparator</code> as it might have been passed
      * tempChars.
+     * <p>
+     *  这在<code> writeLineSeparator </code>中使用,而不是tempChars。
+     * 如果使用tempChars,这意味着写不能调用<code> writeLineSeparator </code>,因为它可能已经传递tempChars。
+     * 
      */
     private char[] newlineChars;
 
     /**
      * Used for writing text.
+     * <p>
+     *  用于写文本。
+     * 
      */
     private Segment segment;
 
     /**
      * How the text packages models newlines.
+     * <p>
+     *  文本包如何模型换行。
+     * 
+     * 
      * @see #getLineSeparator
      */
     protected static final char NEWLINE = '\n';
@@ -111,6 +142,10 @@ public abstract class AbstractWriter {
      * Initializes the ElementIterator with the default
      * root of the document.
      *
+     * <p>
+     *  创建一个新的AbstractWriter。使用文档的默认根初始化ElementIterator。
+     * 
+     * 
      * @param w a Writer.
      * @param doc a Document
      */
@@ -123,6 +158,10 @@ public abstract class AbstractWriter {
      * Initializes the ElementIterator with the
      * element passed in.
      *
+     * <p>
+     *  创建一个新的AbstractWriter。使用传入的元素初始化ElementIterator。
+     * 
+     * 
      * @param w a Writer
      * @param doc an Element
      * @param pos The location in the document to fetch the
@@ -160,6 +199,10 @@ public abstract class AbstractWriter {
      * Initializes the ElementIterator with the
      * element passed in.
      *
+     * <p>
+     *  创建一个新的AbstractWriter。使用传入的元素初始化ElementIterator。
+     * 
+     * 
      * @param w a Writer
      * @param root an Element
      */
@@ -172,6 +215,10 @@ public abstract class AbstractWriter {
      * Initializes the ElementIterator with the
      * element passed in.
      *
+     * <p>
+     * 创建一个新的AbstractWriter。使用传入的元素初始化ElementIterator。
+     * 
+     * 
      * @param w a Writer
      * @param root an Element
      * @param pos The location in the document to fetch the
@@ -190,6 +237,10 @@ public abstract class AbstractWriter {
     /**
      * Returns the first offset to be output.
      *
+     * <p>
+     *  返回要输出的第一个偏移量。
+     * 
+     * 
      * @since 1.3
      */
     public int getStartOffset() {
@@ -199,6 +250,10 @@ public abstract class AbstractWriter {
     /**
      * Returns the last offset to be output.
      *
+     * <p>
+     *  返回要输出的最后一个偏移量。
+     * 
+     * 
      * @since 1.3
      */
     public int getEndOffset() {
@@ -208,6 +263,10 @@ public abstract class AbstractWriter {
     /**
      * Fetches the ElementIterator.
      *
+     * <p>
+     *  获取ElementIterator。
+     * 
+     * 
      * @return the ElementIterator.
      */
     protected ElementIterator getElementIterator() {
@@ -217,6 +276,10 @@ public abstract class AbstractWriter {
     /**
      * Returns the Writer that is used to output the content.
      *
+     * <p>
+     *  返回用于输出内容的Writer。
+     * 
+     * 
      * @since 1.3
      */
     protected Writer getWriter() {
@@ -226,6 +289,10 @@ public abstract class AbstractWriter {
     /**
      * Fetches the document.
      *
+     * <p>
+     *  获取文档。
+     * 
+     * 
      * @return the Document.
      */
     protected Document getDocument() {
@@ -239,6 +306,10 @@ public abstract class AbstractWriter {
      * inRange() returns true if the range specified intersects
      * with the element's range.
      *
+     * <p>
+     *  此方法确定当前元素是否在指定的范围内。当未指定范围时,范围将初始化为整个文档。如果指定的范围与元素的范围相交,inRange()将返回true。
+     * 
+     * 
      * @param  next an Element.
      * @return boolean that indicates whether the element
      *         is in the range.
@@ -260,6 +331,9 @@ public abstract class AbstractWriter {
      * by subclasses.  Its responsibility is to
      * iterate over the elements and use the write()
      * methods to generate output in the desired format.
+     * <p>
+     *  这个抽象方法需要通过子类来实现。它的职责是迭代元素并使用write()方法以所需的格式生成输出。
+     * 
      */
     abstract protected void write() throws IOException, BadLocationException;
 
@@ -269,6 +343,10 @@ public abstract class AbstractWriter {
      * leaf element.  Throws a BadLocationException
      * when encountered.
      *
+     * <p>
+     *  返回与元素关联的文本。这里的假设是元素是叶元素。遇到时抛出BadLocationException。
+     * 
+     * 
      * @param     elem an <code>Element</code>
      * @exception BadLocationException if pos represents an invalid
      *            location within the document
@@ -285,6 +363,10 @@ public abstract class AbstractWriter {
      * is invoked, then only the appropriate range of text is written
      * out.
      *
+     * <p>
+     *  写出文本。如果在调用构造函数时指定了范围,则只写出适当的文本范围。
+     * 
+     * 
      * @param     elem an Element.
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
@@ -309,6 +391,10 @@ public abstract class AbstractWriter {
      * Enables subclasses to set the number of characters they
      * want written per line.   The default is 100.
      *
+     * <p>
+     *  启用子类以设置每行要写入的字符数。默认值为100。
+     * 
+     * 
      * @param l the maximum line length.
      */
     protected void setLineLength(int l) {
@@ -318,6 +404,10 @@ public abstract class AbstractWriter {
     /**
      * Returns the maximum line length.
      *
+     * <p>
+     *  返回最大行长度。
+     * 
+     * 
      * @since 1.3
      */
     protected int getLineLength() {
@@ -327,6 +417,10 @@ public abstract class AbstractWriter {
     /**
      * Sets the current line length.
      *
+     * <p>
+     *  设置当前行长度。
+     * 
+     * 
      * @since 1.3
      */
     protected void setCurrentLineLength(int length) {
@@ -337,6 +431,10 @@ public abstract class AbstractWriter {
     /**
      * Returns the current line length.
      *
+     * <p>
+     *  返回当前行长度。
+     * 
+     * 
      * @since 1.3
      */
     protected int getCurrentLineLength() {
@@ -348,6 +446,10 @@ public abstract class AbstractWriter {
      * is true when <code>getCurrentLineLength</code> == 0 ||
      * <code>indent</code> has been invoked on an empty line.
      *
+     * <p>
+     *  如果当前行应该被视为空,则返回true。当<code> getCurrentLineLength </code> == 0 ||时,这是真的<code>缩进</code>已在空行上调用。
+     * 
+     * 
      * @since 1.3
      */
     protected boolean isLineEmpty() {
@@ -359,6 +461,10 @@ public abstract class AbstractWriter {
      * during the writing of lines. For example, outputting HTML might
      * set this to false when outputting a quoted string.
      *
+     * <p>
+     * 设置是否可以包装行。这可以在写入行期间切换。例如,输出HTML时,可以在输出带引号的字符串时将其设置为false。
+     * 
+     * 
      * @since 1.3
      */
     protected void setCanWrapLines(boolean newValue) {
@@ -369,6 +475,10 @@ public abstract class AbstractWriter {
      * Returns whether or not the lines can be wrapped. If this is false
      * no lineSeparator's will be output.
      *
+     * <p>
+     *  返回是否可以包装行。如果这是假的,不会输出lineSeparator的。
+     * 
+     * 
      * @since 1.3
      */
     protected boolean getCanWrapLines() {
@@ -380,6 +490,10 @@ public abstract class AbstractWriter {
      * maps to. When indentation takes place, the indent level
      * is multiplied by this mapping.  The default is 2.
      *
+     * <p>
+     *  启用子类以指定缩进映射到的空格数。当缩进发生时,缩进级别乘以此映射。默认值为2。
+     * 
+     * 
      * @param space an int representing the space to indent mapping.
      */
     protected void setIndentSpace(int space) {
@@ -389,6 +503,10 @@ public abstract class AbstractWriter {
     /**
      * Returns the amount of space to indent.
      *
+     * <p>
+     *  返回缩进的空格量。
+     * 
+     * 
      * @since 1.3
      */
     protected int getIndentSpace() {
@@ -400,6 +518,10 @@ public abstract class AbstractWriter {
      * in the constructor from either the Document, or the System property
      * line.separator.
      *
+     * <p>
+     *  设置用于表示换行符的字符串。这在构造函数中从Document或者系统属性line.separator初始化。
+     * 
+     * 
      * @since 1.3
      */
     public void setLineSeparator(String value) {
@@ -409,6 +531,10 @@ public abstract class AbstractWriter {
     /**
      * Returns the string used to represent newlines.
      *
+     * <p>
+     *  返回用于表示换行符的字符串。
+     * 
+     * 
      * @since 1.3
      */
     public String getLineSeparator() {
@@ -419,6 +545,12 @@ public abstract class AbstractWriter {
      * Increments the indent level. If indenting would cause
      * <code>getIndentSpace()</code> *<code>getIndentLevel()</code> to be &gt;
      * than <code>getLineLength()</code> this will not cause an indent.
+     * <p>
+     *  增加缩进级别。
+     * 如果缩进会导致<code> getIndentSpace()</code> * <code> getIndentLevel()</code>比<code> getLineLength()</code>这
+     * 不会导致缩进。
+     *  增加缩进级别。
+     * 
      */
     protected void incrIndent() {
         // Only increment to a certain point.
@@ -435,6 +567,9 @@ public abstract class AbstractWriter {
 
     /**
      * Decrements the indent level.
+     * <p>
+     *  减少缩进级别。
+     * 
      */
     protected void decrIndent() {
         if (offsetIndent > 0) {
@@ -450,6 +585,10 @@ public abstract class AbstractWriter {
      * <code>incrIndent</code> has been invoked minus the number of times
      * <code>decrIndent</code> has been invoked.
      *
+     * <p>
+     *  返回当前缩进级别。也就是说,已调用<code> incrIndent </code>的次数减去已调用<code> decrIndent </code>的次数。
+     * 
+     * 
      * @since 1.3
      */
     protected int getIndentLevel() {
@@ -462,6 +601,10 @@ public abstract class AbstractWriter {
      * line is empty, this will not make it so that the current line is
      * still considered empty.
      *
+     * <p>
+     *  缩进。写出的空格数是映射空间映射的缩进级别。如果当前行为空,则不会使当前行仍为空。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void indent() throws IOException {
@@ -484,6 +627,10 @@ public abstract class AbstractWriter {
      * Writes out a character. This is implemented to invoke
      * the <code>write</code> method that takes a char[].
      *
+     * <p>
+     *  写出一个字符。这被实现以调用采用char []的<code> write </code>方法。
+     * 
+     * 
      * @param     ch a char.
      * @exception IOException on any I/O error
      */
@@ -499,6 +646,10 @@ public abstract class AbstractWriter {
      * Writes out a string. This is implemented to invoke the
      * <code>write</code> method that takes a char[].
      *
+     * <p>
+     *  写出一个字符串。这被实现以调用采用char []的<code> write </code>方法。
+     * 
+     * 
      * @param     content a String.
      * @exception IOException on any I/O error
      */
@@ -518,6 +669,10 @@ public abstract class AbstractWriter {
      * Writes the line separator. This invokes <code>output</code> directly
      * as well as setting the <code>lineLength</code> to 0.
      *
+     * <p>
+     * 写入行分隔符。这直接调用<code>输出</code>以及将<code> lineLength </code>设置为0。
+     * 
+     * 
      * @since 1.3
      */
     protected void writeLineSeparator() throws IOException {
@@ -542,6 +697,15 @@ public abstract class AbstractWriter {
      * and won't fit in which case the line length will exceed
      * <code>getLineLength</code>.
      *
+     * <p>
+     *  所有的写入方法调用这一个。
+     * 如果<code> getCanWrapLines()</code>返回false,则会为<code> chars </code>的每个序列调用<code> output </code>,其中不包含NEW
+     * LINE, <code> writeLineSeparator </code>。
+     *  所有的写入方法调用这一个。
+     * 另一方面,如果<code> getCanWrapLines()</code>返回true,这将根据需要拆分字符串,因此<code> getLineLength </code>被授权。
+     * 唯一的例外是如果当前字符串不包含空格,并且不适合在这种情况下行长度将超过<code> getLineLength </code>。
+     * 
+     * 
      * @since 1.3
      */
     protected void write(char[] chars, int startIndex, int length)
@@ -666,6 +830,10 @@ public abstract class AbstractWriter {
      * Writes out the set of attributes as " &lt;name&gt;=&lt;value&gt;"
      * pairs. It throws an IOException when encountered.
      *
+     * <p>
+     *  将属性集写为"&lt; name&gt; =&lt; value&gt;"对。遇到时会抛出IOException。
+     * 
+     * 
      * @param     attr an AttributeSet.
      * @exception IOException on any I/O error
      */
@@ -689,6 +857,11 @@ public abstract class AbstractWriter {
      * <code>writeLineSeparator</code> to write out a newline, which will
      * property update the current line length.
      *
+     * <p>
+     *  写出内容的最后一站。所有的写方法最终都使用这个方法,它调用Writer上的<code> write </code>。 <p>此方法还会根据<code> length </code>更新行长度。
+     * 如果调用此命令来输出换行符,则当前行长度将需要重置,因为它将不再有效。如果是由调用者做这个。使用<code> writeLineSeparator </code>写出一个换行符,它将更新当前行长度。
+     * 
+     * 
      * @since 1.3
      */
     protected void output(char[] content, int start, int length)
@@ -699,6 +872,7 @@ public abstract class AbstractWriter {
 
     /**
      * Support method to locate an occurrence of a particular character.
+     * <p>
      */
     private int indexOf(char[] chars, char sChar, int startIndex,
                         int endIndex) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,29 @@ import java.util.function.UnaryOperator;
  * implementation is not needed, it is recommended to use {@link
  * ArrayList} in place of {@code Vector}.
  *
+ * <p>
+ *  {@code Vector}类实现了一个可扩展的对象数组。像数组一样,它包含可以使用整数索引访问的组件。
+ * 但是,{@code Vector}的大小可以根据需要增大或缩小,以适应在创建{@code Vector}之后添加和删除项目。
+ * 
+ *  <p>每个向量都会尝试通过维护{@code capacity}和{@code capacityIncrement}来优化存储管理。
+ *  {@code capacity}总是至少与向量大小一样大;它通常较大,因为当组件添加到向量时,向量的存储以{@code capacityIncrement}的大小增加。
+ * 应用程序可以在插入大量组件之前增加向量的容量;这减少了增量重新分配的量。
+ * 
+ * <p> <a name="fail-fast">此类的{@link #iterator()iterator}和{@link #listIterator(int)listIterator}方法返回的迭代器
+ * <em> fail-fast </em > </a>：如果向量在创建迭代器之后的任何时候进行结构修改,除非通过迭代器自己的{@link ListIterator#remove()remove}或{@link ListIterator#add(Object)add }
+ * 方法,迭代器将抛出一个{@link ConcurrentModificationException}。
+ * 因此,面对并发修改,迭代器快速而干净地失败,而不是在将来的未确定时间冒任意的,非确定性行为的风险。
+ *  {@link #elements()elements}方法返回的{@link枚举枚举}不是</em>快速失败。
+ * 
+ *  <p>请注意,迭代器的故障快速行为不能得到保证,因为一般来说,在不同步并发修改的情况下不可能做出任何硬的保证。
+ * 故障快速迭代器以尽力而为的方式抛出{@code ConcurrentModificationException}。
+ * 因此,编写依赖于此异常的程序的正确性是错误的：<i>迭代器的故障快速行为应该仅用于检测错误。</i>。
+ * 
+ *  <p>从Java 2平台v1.2开始,这个类被改进来实现{@link List}接口,使其成为
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ * Java集合框架</a>。与新集合实现不同,{@code Vector}是同步的。如果不需要线程安全的实现,建议使用{@link ArrayList}来代替{@code Vector}。
+ * 
+ * 
  * @author  Lee Boynton
  * @author  Jonathan Payne
  * @see Collection
@@ -91,6 +115,12 @@ public class Vector<E>
      *
      * <p>Any array elements following the last element in the Vector are null.
      *
+     * <p>
+     *  向量的分量存储在其中的数组缓冲区。向量的容量是该数组缓冲器的长度,并且至少足够大以包含所有向量的元素。
+     * 
+     *  <p> Vector中最后一个元素之后的任何数组元素都为null。
+     * 
+     * 
      * @serial
      */
     protected Object[] elementData;
@@ -100,6 +130,10 @@ public class Vector<E>
      * Components {@code elementData[0]} through
      * {@code elementData[elementCount-1]} are the actual items.
      *
+     * <p>
+     *  此{@code Vector}对象中的有效组件数。组件{@code elementData [0]}到{@code elementData [elementCount-1]}是实际项目。
+     * 
+     * 
      * @serial
      */
     protected int elementCount;
@@ -110,6 +144,10 @@ public class Vector<E>
      * the capacity increment is less than or equal to zero, the capacity
      * of the vector is doubled each time it needs to grow.
      *
+     * <p>
+     *  向量的容量在其大小变得大于其容量时自动递增的量。如果容量增量小于或等于零,则每次需要增长时向量的容量加倍。
+     * 
+     * 
      * @serial
      */
     protected int capacityIncrement;
@@ -121,6 +159,10 @@ public class Vector<E>
      * Constructs an empty vector with the specified initial capacity and
      * capacity increment.
      *
+     * <p>
+     *  构造具有指定的初始容量和容量增量的空向量。
+     * 
+     * 
      * @param   initialCapacity     the initial capacity of the vector
      * @param   capacityIncrement   the amount by which the capacity is
      *                              increased when the vector overflows
@@ -140,6 +182,10 @@ public class Vector<E>
      * Constructs an empty vector with the specified initial capacity and
      * with its capacity increment equal to zero.
      *
+     * <p>
+     *  构造具有指定的初始容量并且其容量增量等于零的空向量。
+     * 
+     * 
      * @param   initialCapacity   the initial capacity of the vector
      * @throws IllegalArgumentException if the specified initial capacity
      *         is negative
@@ -152,6 +198,9 @@ public class Vector<E>
      * Constructs an empty vector so that its internal data array
      * has size {@code 10} and its standard capacity increment is
      * zero.
+     * <p>
+     *  构造一个空向量,使其内部数据数组的大小为{@code 10},其标准容量增量为零。
+     * 
      */
     public Vector() {
         this(10);
@@ -162,6 +211,10 @@ public class Vector<E>
      * collection, in the order they are returned by the collection's
      * iterator.
      *
+     * <p>
+     *  按照集合的迭代器返回的顺序构造包含指定集合的​​元素的向量。
+     * 
+     * 
      * @param c the collection whose elements are to be placed into this
      *       vector
      * @throws NullPointerException if the specified collection is null
@@ -180,6 +233,10 @@ public class Vector<E>
      * The item at index {@code k} in this vector is copied into
      * component {@code k} of {@code anArray}.
      *
+     * <p>
+     * 将此向量的组件复制到指定的数组中。此向量中索引{@code k}处的项目将复制到{@code anArray}的component {@code k}中。
+     * 
+     * 
      * @param  anArray the array into which the components get copied
      * @throws NullPointerException if the given array is null
      * @throws IndexOutOfBoundsException if the specified array is not
@@ -199,6 +256,10 @@ public class Vector<E>
      * its internal data array, kept in the field {@code elementData},
      * with a smaller one. An application can use this operation to
      * minimize the storage of a vector.
+     * <p>
+     *  修剪此向量的容量为向量的当前大小。如果此向量的容量大于其当前大小,则通过将其在字段{@code elementData}中保留的内部数据数组替换为较小的一个来将容量改变为等于该大小。
+     * 应用程序可以使用此操作最小化向量的存储。
+     * 
      */
     public synchronized void trimToSize() {
         modCount++;
@@ -223,6 +284,15 @@ public class Vector<E>
      * is still smaller than {@code minCapacity}, then the new capacity will
      * be {@code minCapacity}.
      *
+     * <p>
+     *  如有必要,增加此向量的容量,以确保它至少可容纳由最小容量参数指定的组件数。
+     * 
+     *  <p>如果此向量的当前容量小于{@code minCapacity},则通过使用较大的值替换保留在字段{@code elementData}中的内部数据数组,从而增加其容量。
+     * 新数据数组的大小将是旧的大小加上{@code capacityIncrement},除非{@code capacityIncrement}的值小于或等于零,在这种情况下,新容量将是旧容量的两倍;但如果此
+     * 新尺寸仍小于{@code minCapacity},则新容量将为{@code minCapacity}。
+     *  <p>如果此向量的当前容量小于{@code minCapacity},则通过使用较大的值替换保留在字段{@code elementData}中的内部数据数组,从而增加其容量。
+     * 
+     * 
      * @param minCapacity the desired minimum capacity
      */
     public synchronized void ensureCapacity(int minCapacity) {
@@ -238,6 +308,10 @@ public class Vector<E>
      * method for ensuring capacity without incurring the cost of an
      * extra synchronization.
      *
+     * <p>
+     *  这实现了ensureCapacity的不同步语义。此类中的同步方法可以在内部调用此方法以确保容量,而不会导致额外同步的成本。
+     * 
+     * 
      * @see #ensureCapacity(int)
      */
     private void ensureCapacityHelper(int minCapacity) {
@@ -251,6 +325,9 @@ public class Vector<E>
      * Some VMs reserve some header words in an array.
      * Attempts to allocate larger arrays may result in
      * OutOfMemoryError: Requested array size exceeds VM limit
+     * <p>
+     * 要分配的数组的最大大小。一些VM在数组中保留一些标题字。尝试分配较大的数组可能会导致OutOfMemoryError：请求的数组大小超过VM限制
+     * 
      */
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
@@ -280,6 +357,10 @@ public class Vector<E>
      * the vector. If the new size is less than the current size, all
      * components at index {@code newSize} and greater are discarded.
      *
+     * <p>
+     *  设置此向量的大小。如果新大小大于当前大小,则新的{@code null}项目将添加到向量的末尾。如果新大小小于当前大小,则索引为{@code newSize}和更大的所有组件都将被丢弃。
+     * 
+     * 
      * @param  newSize   the new size of this vector
      * @throws ArrayIndexOutOfBoundsException if the new size is negative
      */
@@ -298,6 +379,10 @@ public class Vector<E>
     /**
      * Returns the current capacity of this vector.
      *
+     * <p>
+     *  返回此向量的当前容量。
+     * 
+     * 
      * @return  the current capacity (the length of its internal
      *          data array, kept in the field {@code elementData}
      *          of this vector)
@@ -309,6 +394,10 @@ public class Vector<E>
     /**
      * Returns the number of components in this vector.
      *
+     * <p>
+     *  返回此向量中的组件数。
+     * 
+     * 
      * @return  the number of components in this vector
      */
     public synchronized int size() {
@@ -318,6 +407,10 @@ public class Vector<E>
     /**
      * Tests if this vector has no components.
      *
+     * <p>
+     *  测试此向量是否没有组件。
+     * 
+     * 
      * @return  {@code true} if and only if this vector has
      *          no components, that is, its size is zero;
      *          {@code false} otherwise.
@@ -332,6 +425,10 @@ public class Vector<E>
      * this vector. The first item generated is the item at index {@code 0},
      * then the item at index {@code 1}, and so on.
      *
+     * <p>
+     *  返回此向量的组件的枚举。返回的{@code Enumeration}对象将生成此向量中的所有项目。生成的第一个项目是索引为{@code 0}的项目,然后是索引为{@code 1}的项目,依此类推。
+     * 
+     * 
      * @return  an enumeration of the components of this vector
      * @see     Iterator
      */
@@ -360,6 +457,13 @@ public class Vector<E>
      * contains at least one element {@code e} such that
      * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
      *
+     * <p>
+     *  如果此向量包含指定的元素,则返回{@code true}。
+     * 更正式地说,当且仅当这个向量包含至少一个元素{@code e},使得<tt>(o == null&nbsp;?&nbsp; e == null&nbsp;：&nbsp; o.equals (e))</tt>
+     * 。
+     *  如果此向量包含指定的元素,则返回{@code true}。
+     * 
+     * 
      * @param o element whose presence in this vector is to be tested
      * @return {@code true} if this vector contains the specified element
      */
@@ -374,6 +478,13 @@ public class Vector<E>
      * <tt>(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))</tt>,
      * or -1 if there is no such index.
      *
+     * <p>
+     *  返回此向量中指定元素的第一次出现的索引,如果此向量不包含元素,则返回-1。
+     * 更正式地,返回最低索引{@code i},使得<tt>(o == null&nbsp;?&nbsp; get(i)== null&nbsp;：&nbsp; o.equals(get(i))))</tt >
+     * ,如果没有这样的索引,则为-1。
+     *  返回此向量中指定元素的第一次出现的索引,如果此向量不包含元素,则返回-1。
+     * 
+     * 
      * @param o element to search for
      * @return the index of the first occurrence of the specified element in
      *         this vector, or -1 if this vector does not contain the element
@@ -390,6 +501,13 @@ public class Vector<E>
      * <tt>(i&nbsp;&gt;=&nbsp;index&nbsp;&amp;&amp;&nbsp;(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i))))</tt>,
      * or -1 if there is no such index.
      *
+     * <p>
+     * 返回此向量中指定元素的第一次出现的索引,从{@code index}向前搜索,如果未找到元素,则返回-1。
+     * 更正式地,返回最低索引{@code i},使得<tt>(i&nbsp;&gt; =&nbsp; index&amp;&amp;&amp;&nbsp;(o == null&nbsp;?&nbsp; get
+     * (i)== null& ：&nbsp; o.equals(get(i)))))</tt>,如果没有这样的索引,则为-1。
+     * 返回此向量中指定元素的第一次出现的索引,从{@code index}向前搜索,如果未找到元素,则返回-1。
+     * 
+     * 
      * @param o element to search for
      * @param index index to start searching from
      * @return the index of the first occurrence of the element in
@@ -418,6 +536,13 @@ public class Vector<E>
      * <tt>(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))</tt>,
      * or -1 if there is no such index.
      *
+     * <p>
+     *  返回此向量中指定元素的最后一次出现的索引,如果此向量不包含元素,则返回-1。
+     * 更正式地,返回最高索引{@code i},使得<tt>(o == null&nbsp;?&nbsp; get(i)== null&nbsp;：&nbsp; o.equals(get(i))))</tt >
+     * ,如果没有这样的索引,则为-1。
+     *  返回此向量中指定元素的最后一次出现的索引,如果此向量不包含元素,则返回-1。
+     * 
+     * 
      * @param o element to search for
      * @return the index of the last occurrence of the specified element in
      *         this vector, or -1 if this vector does not contain the element
@@ -434,6 +559,13 @@ public class Vector<E>
      * <tt>(i&nbsp;&lt;=&nbsp;index&nbsp;&amp;&amp;&nbsp;(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i))))</tt>,
      * or -1 if there is no such index.
      *
+     * <p>
+     *  返回此向量中指定元素的最后一次出现的索引,从{@code index}向后搜索,如果未找到元素,则返回-1。
+     * 更正式地,返回最高索引{@code i},使得<tt>(i&nbsp;&lt; =&nbsp; index&amp;&amp;&amp;&nbsp;(o == null&nbsp;?&nbsp; get
+     * (i)== null& ：&nbsp; o.equals(get(i)))))</tt>,如果没有这样的索引,则为-1。
+     *  返回此向量中指定元素的最后一次出现的索引,从{@code index}向后搜索,如果未找到元素,则返回-1。
+     * 
+     * 
      * @param o element to search for
      * @param index index to start searching backwards from
      * @return the index of the last occurrence of the element at position
@@ -464,6 +596,12 @@ public class Vector<E>
      * <p>This method is identical in functionality to the {@link #get(int)}
      * method (which is part of the {@link List} interface).
      *
+     * <p>
+     *  返回指定索引处的组件。
+     * 
+     *  <p>此方法在功能上与{@link #get(int)}方法(它是{@link List}界面的一部分)完全相同。
+     * 
+     * 
      * @param      index   an index into this vector
      * @return     the component at the specified index
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
@@ -481,6 +619,10 @@ public class Vector<E>
      * Returns the first component (the item at index {@code 0}) of
      * this vector.
      *
+     * <p>
+     *  返回此向量的第一个组件(索引为{@code 0}的项目)。
+     * 
+     * 
      * @return     the first component of this vector
      * @throws NoSuchElementException if this vector has no components
      */
@@ -494,6 +636,10 @@ public class Vector<E>
     /**
      * Returns the last component of the vector.
      *
+     * <p>
+     *  返回向量的最后一个分量。
+     * 
+     * 
      * @return  the last component of the vector, i.e., the component at index
      *          <code>size()&nbsp;-&nbsp;1</code>.
      * @throws NoSuchElementException if this vector is empty
@@ -520,6 +666,15 @@ public class Vector<E>
      * match array usage.  Note also that the {@code set} method returns the
      * old value that was stored at the specified position.
      *
+     * <p>
+     *  将该向量的指定{@code index}处的组件设置为指定的对象。在该位置的前一个组件被丢弃。
+     * 
+     * <p>索引必须是大于或等于{@code 0}且小于向量的当前大小的值。
+     * 
+     *  <p>此方法在功能上与{@link #set(int,Object)set(int,E)}方法(它是{@link List}接口的一部分)完全相同。
+     * 注意,{@code set}方法颠倒参数的顺序,以更紧密地匹配数组使用。还要注意,{@code set}方法返回存储在指定位置的旧值。
+     * 
+     * 
      * @param      obj     what the component is to be set to
      * @param      index   the specified index
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
@@ -548,6 +703,14 @@ public class Vector<E>
      * {@code remove} method returns the old value that was stored at the
      * specified position.
      *
+     * <p>
+     *  删除指定索引处的组件。该向量中具有大于或等于指定{@code index}的索引的每个分量向下移位,以使索引1小于其先前的值。此向量的大小减少{@code 1}。
+     * 
+     *  <p>索引必须是大于或等于{@code 0}且小于向量的当前大小的值。
+     * 
+     *  <p>此方法在功能上与{@link #remove(int)}方法(它是{@link List}界面的一部分)完全相同。请注意,{@code remove}方法返回存储在指定位置的旧值。
+     * 
+     * 
      * @param      index   the index of the object to remove
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
      *         ({@code index < 0 || index >= size()})
@@ -587,6 +750,15 @@ public class Vector<E>
      * {@code add} method reverses the order of the parameters, to more closely
      * match array usage.
      *
+     * <p>
+     *  在指定的{@code index}向量中插入指定的对象作为组件。该向量中具有大于或等于指定{@code index}的索引的每个分量向上移位,以使索引1大于其先前的值。
+     * 
+     * <p>索引必须是大于或等于{@code 0}且小于或等于向量的当前大小的值。 (如果索引等于向量的当前大小,则新元素将追加到向量。)
+     * 
+     *  <p>此方法在功能上与{@link #add(int,Object)add(int,E)}方法(它是{@link List}接口的一部分)完全相同。
+     * 注意,{@code add}方法颠倒参数的顺序,以更紧密地匹配数组使用。
+     * 
+     * 
      * @param      obj     the component to insert
      * @param      index   where to insert the new component
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
@@ -613,6 +785,12 @@ public class Vector<E>
      * {@link #add(Object) add(E)}
      * method (which is part of the {@link List} interface).
      *
+     * <p>
+     *  将指定的组件添加到此向量的末尾,将其大小增加1。如果该矢量的大小变得大于其容量,则该矢量的容量增加。
+     * 
+     *  <p>此方法在功能上与{@link #add(Object)add(E)}方法(它是{@link List}接口的一部分)完全相同。
+     * 
+     * 
      * @param   obj   the component to be added
      */
     public synchronized void addElement(E obj) {
@@ -632,6 +810,12 @@ public class Vector<E>
      * {@link #remove(Object)} method (which is part of the
      * {@link List} interface).
      *
+     * <p>
+     *  从此向量中删除参数的第一个(索引最低的)。如果在该向量中找到对象,则具有大于或等于对象的索引的索引的向量中的每个分量向下移位,以使索引1小于其先前的值。
+     * 
+     *  <p>此方法在功能上与{@link #remove(Object)}方法(它是{@link List}界面的一部分)完全相同。
+     * 
+     * 
      * @param   obj   the component to be removed
      * @return  {@code true} if the argument was a component of this
      *          vector; {@code false} otherwise.
@@ -651,6 +835,11 @@ public class Vector<E>
      *
      * <p>This method is identical in functionality to the {@link #clear}
      * method (which is part of the {@link List} interface).
+     * <p>
+     *  从此向量中删除所有组件,并将其大小设置为零。
+     * 
+     *  <p>此方法在功能上与{@link #clear}方法(它是{@link List}界面的一部分)完全相同。
+     * 
      */
     public synchronized void removeAllElements() {
         modCount++;
@@ -666,6 +855,10 @@ public class Vector<E>
      * reference to a clone of the internal data array, not a reference
      * to the original internal data array of this {@code Vector} object.
      *
+     * <p>
+     * 返回此向量的克隆。副本将包含对内部数据数组的克隆的引用,而不是对此{@code Vector}对象的原始内部数据数组的引用。
+     * 
+     * 
      * @return  a clone of this vector
      */
     public synchronized Object clone() {
@@ -685,6 +878,10 @@ public class Vector<E>
      * Returns an array containing all of the elements in this Vector
      * in the correct order.
      *
+     * <p>
+     *  以正确的顺序返回包含此向量中所有元素的数组。
+     * 
+     * 
      * @since 1.2
      */
     public synchronized Object[] toArray() {
@@ -705,6 +902,13 @@ public class Vector<E>
      * of the Vector <em>only</em> if the caller knows that the Vector
      * does not contain any null elements.)
      *
+     * <p>
+     *  以正确的顺序返回包含此向量中所有元素的数组;返回的数组的运行时类型是指定数组的运行时类型。如果Vector适合指定的数组,则返回其中。否则,将使用指定数组的运行时类型和此向量的大小分配新数组。
+     * 
+     *  <p>如果Vector适合指定的空余空间(即,数组具有比Vector更多的元素),则紧接Vector结束后的数组中的元素将设置为null。
+     *  (如果调用者知道Vector不包含任何空元素,则这在确定仅</em>向量的长度时非常有用。)。
+     * 
+     * 
      * @param a the array into which the elements of the Vector are to
      *          be stored, if it is big enough; otherwise, a new array of the
      *          same runtime type is allocated for this purpose.
@@ -737,6 +941,10 @@ public class Vector<E>
     /**
      * Returns the element at the specified position in this Vector.
      *
+     * <p>
+     *  返回此向量中指定位置处的元素。
+     * 
+     * 
      * @param index index of the element to return
      * @return object at the specified index
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
@@ -754,6 +962,10 @@ public class Vector<E>
      * Replaces the element at the specified position in this Vector with the
      * specified element.
      *
+     * <p>
+     *  用指定的元素替换此向量中指定位置处的元素。
+     * 
+     * 
      * @param index index of the element to replace
      * @param element element to be stored at the specified position
      * @return the element previously at the specified position
@@ -773,6 +985,10 @@ public class Vector<E>
     /**
      * Appends the specified element to the end of this Vector.
      *
+     * <p>
+     *  将指定的元素附加到此向量的末尾。
+     * 
+     * 
      * @param e element to be appended to this Vector
      * @return {@code true} (as specified by {@link Collection#add})
      * @since 1.2
@@ -791,6 +1007,11 @@ public class Vector<E>
      * {@code (o==null ? get(i)==null : o.equals(get(i)))} (if such
      * an element exists).
      *
+     * <p>
+     *  删除此向量中指定元素的第一次出现如果向量不包含元素,则不会更改。
+     * 更正式地,删除具有最低索引i的元素,使得{@code(o == null?get(i)== null：o.equals(get(i)))}(如果这样的元素存在)。
+     * 
+     * 
      * @param o element to be removed from this Vector, if present
      * @return true if the Vector contained the specified element
      * @since 1.2
@@ -804,6 +1025,10 @@ public class Vector<E>
      * Shifts the element currently at that position (if any) and any
      * subsequent elements to the right (adds one to their indices).
      *
+     * <p>
+     * 在此Vector中指定的位置插入指定的元素。将当前在该位置的元素(如果有)和任何后续元素向右移(将一个添加到它们的索引)。
+     * 
+     * 
      * @param index index at which the specified element is to be inserted
      * @param element element to be inserted
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
@@ -819,6 +1044,10 @@ public class Vector<E>
      * Shifts any subsequent elements to the left (subtracts one from their
      * indices).  Returns the element that was removed from the Vector.
      *
+     * <p>
+     *  删除此向量中指定位置处的元素。将任何后续元素向左移(从它们的索引中减去一个)。返回从Vector中删除的元素。
+     * 
+     * 
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
      *         ({@code index < 0 || index >= size()})
      * @param index the index of the element to be removed
@@ -844,6 +1073,10 @@ public class Vector<E>
      * Removes all of the elements from this Vector.  The Vector will
      * be empty after this call returns (unless it throws an exception).
      *
+     * <p>
+     *  从此Vector中删除所有元素。此调用返回后向量将为空(除非它抛出异常)。
+     * 
+     * 
      * @since 1.2
      */
     public void clear() {
@@ -856,6 +1089,10 @@ public class Vector<E>
      * Returns true if this Vector contains all of the elements in the
      * specified Collection.
      *
+     * <p>
+     *  如果此Vector包含指定集合中的所有元素,则返回true。
+     * 
+     * 
      * @param   c a collection whose elements will be tested for containment
      *          in this Vector
      * @return true if this Vector contains all of the elements in the
@@ -874,6 +1111,11 @@ public class Vector<E>
      * (This implies that the behavior of this call is undefined if the
      * specified Collection is this Vector, and this Vector is nonempty.)
      *
+     * <p>
+     *  将指定集合中的所有元素以指定集合的​​迭代器返回的顺序追加到此Vector的末尾。如果在操作正在进行时修改指定的集合,则此操作的行为是未定义的。
+     *  (这意味着如果指定的Collection是这个Vector,这个调用的行为是未定义的,并且这个Vector是非空的。)。
+     * 
+     * 
      * @param c elements to be inserted into this Vector
      * @return {@code true} if this Vector changed as a result of the call
      * @throws NullPointerException if the specified collection is null
@@ -893,6 +1135,10 @@ public class Vector<E>
      * Removes from this Vector all of its elements that are contained in the
      * specified Collection.
      *
+     * <p>
+     *  从此Vector中删除包含在指定集合中的所有其元素。
+     * 
+     * 
      * @param c a collection of elements to be removed from the Vector
      * @return true if this Vector changed as a result of the call
      * @throws ClassCastException if the types of one or more elements
@@ -915,6 +1161,10 @@ public class Vector<E>
      * specified Collection.  In other words, removes from this Vector all
      * of its elements that are not contained in the specified Collection.
      *
+     * <p>
+     *  仅保留此向量中包含在指定集合中的元素。换句话说,从此Vector中删除不包含在指定集合中的所有元素。
+     * 
+     * 
      * @param c a collection of elements to be retained in this Vector
      *          (all other elements are removed)
      * @return true if this Vector changed as a result of the call
@@ -941,6 +1191,10 @@ public class Vector<E>
      * in the order that they are returned by the specified Collection's
      * iterator.
      *
+     * <p>
+     * 将指定集合中的所有元素插入到指定位置的此Vector中。将当前在该位置的元素(如果有)和任何后续元素向右移动(增加其索引)。新元素将按照它们由指定集合的​​迭代器返回的顺序显示在向量中。
+     * 
+     * 
      * @param index index at which to insert the first element from the
      *              specified collection
      * @param c elements to be inserted into this Vector
@@ -978,6 +1232,12 @@ public class Vector<E>
      * e1.equals(e2))}.)  In other words, two Lists are defined to be
      * equal if they contain the same elements in the same order.
      *
+     * <p>
+     *  将指定的对象与此向量进行比较以确保相等。当且仅当指定的Object也是List时,返回true,两个列表具有相同的大小,并且两个列表中的所有相应的元素对都是<em>等于</em>。
+     *  (如果{@code(e1 == null?e2 == null：e1.equals(e2))},则两个元素{@code e1}和{@code e2}等于</em>。
+     * 字,如果它们以相同的顺序包含相同的元素,则两个列表被定义为相等。
+     * 
+     * 
      * @param o the Object to be compared for equality with this Vector
      * @return true if the specified Object is equal to this Vector
      */
@@ -987,6 +1247,9 @@ public class Vector<E>
 
     /**
      * Returns the hash code value for this Vector.
+     * <p>
+     *  返回此Vector的哈希码值。
+     * 
      */
     public synchronized int hashCode() {
         return super.hashCode();
@@ -995,6 +1258,9 @@ public class Vector<E>
     /**
      * Returns a string representation of this Vector, containing
      * the String representation of each element.
+     * <p>
+     *  返回此Vector的字符串表示形式,包含每个元素的String表示形式。
+     * 
      */
     public synchronized String toString() {
         return super.toString();
@@ -1026,6 +1292,20 @@ public class Vector<E>
      * those that change the size of the List, or otherwise perturb it in such
      * a fashion that iterations in progress may yield incorrect results.)
      *
+     * <p>
+     *  返回此列表在fromIndex(包括)和toIndex(排除)之间的部分的视图。 (如果fromIndex和toIndex相等,则返回的List为空。
+     * )返回的List由此List支持,因此返回的List中的更改将反映在此列表中,反之亦然。返回的列表支持此列表支持的所有可选列表操作。
+     * 
+     * <p>此方法不需要显式范围操作(通常存在于数组的排序)。任何期望列表的操作都可以通过对子列表视图而不是整个列表进行操作来用作范围操作。例如,以下惯用语从列表中删除一系列元素：
+     * <pre>
+     *  list.subList(from,to).clear();
+     * </pre>
+     *  可以为indexOf和lastIndexOf构造类似的成语,并且Collections类中的所有算法都可以应用于子列表。
+     * 
+     *  <p>如果以任何方式而不是通过返回的列表结构性地修改后备列表(即,此列表),则由该方法返回的列表的语义变得未定义。
+     *  (结构修改是那些改变List的大小,或者以这样的方式扰乱它,即迭代正在进行可能会产生不正确的结果。
+     * 
+     * 
      * @param fromIndex low endpoint (inclusive) of the subList
      * @param toIndex high endpoint (exclusive) of the subList
      * @return a view of the specified range within this List
@@ -1045,6 +1325,10 @@ public class Vector<E>
      * Shifts any succeeding elements to the left (reduces their index).
      * This call shortens the list by {@code (toIndex - fromIndex)} elements.
      * (If {@code toIndex==fromIndex}, this operation has no effect.)
+     * <p>
+     *  从此列表中删除其索引在{@code fromIndex}(包括)和{@code toIndex}(排除)之间的所有元素。将任何后续元素向左移(减少其索引)。
+     * 此调用通过{@code(toIndex  -  fromIndex)}元素缩短列表。 (如果{@code toIndex == fromIndex},此操作没有效果。)。
+     * 
      */
     protected synchronized void removeRange(int fromIndex, int toIndex) {
         modCount++;
@@ -1063,6 +1347,9 @@ public class Vector<E>
      * is, serialize it).
      * This method performs synchronization to ensure the consistency
      * of the serialized data.
+     * <p>
+     *  将{@code Vector}实例的状态保存到流(即序列化)。此方法执行同步以确保序列化数据的一致性。
+     * 
      */
     private void writeObject(java.io.ObjectOutputStream s)
             throws java.io.IOException {
@@ -1087,6 +1374,13 @@ public class Vector<E>
      *
      * <p>The returned list iterator is <a href="#fail-fast"><i>fail-fast</i></a>.
      *
+     * <p>
+     * 对列表中的元素返回一个列表迭代器(以正确的顺序),从列表中指定的位置开始。指定的索引表示由初始调用{@link ListIterator#next next}返回的第一个元素。
+     * 对{@link ListIterator#previous previous}的初始调用将返回具有指定索引减1的元素。
+     * 
+     *  <p>返回的列表迭代器为<a href="#fail-fast"> <i>快速失败</i> </a>。
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public synchronized ListIterator<E> listIterator(int index) {
@@ -1101,6 +1395,12 @@ public class Vector<E>
      *
      * <p>The returned list iterator is <a href="#fail-fast"><i>fail-fast</i></a>.
      *
+     * <p>
+     *  返回此列表中的元素(按正确顺序)的列表迭代器。
+     * 
+     *  <p>返回的列表迭代器为<a href="#fail-fast"> <i>快速失败</i> </a>。
+     * 
+     * 
      * @see #listIterator(int)
      */
     public synchronized ListIterator<E> listIterator() {
@@ -1112,6 +1412,12 @@ public class Vector<E>
      *
      * <p>The returned iterator is <a href="#fail-fast"><i>fail-fast</i></a>.
      *
+     * <p>
+     *  以正确的顺序返回此列表中的元素的迭代器。
+     * 
+     *  <p>返回的迭代器是<a href="#fail-fast"> <i>快速失败</i> </a>。
+     * 
+     * 
      * @return an iterator over the elements in this list in proper sequence
      */
     public synchronized Iterator<E> iterator() {
@@ -1120,6 +1426,9 @@ public class Vector<E>
 
     /**
      * An optimized version of AbstractList.Itr
+     * <p>
+     *  AbstractList.Itr的优化版本
+     * 
      */
     private class Itr implements Iterator<E> {
         int cursor;       // index of next element to return
@@ -1187,6 +1496,9 @@ public class Vector<E>
 
     /**
      * An optimized version of AbstractList.ListItr
+     * <p>
+     *  AbstractList.ListItr的优化版本
+     * 
      */
     final class ListItr extends Itr implements ListIterator<E> {
         ListItr(int index) {
@@ -1333,6 +1645,12 @@ public class Vector<E>
      * Overriding implementations should document the reporting of additional
      * characteristic values.
      *
+     * <p>
+     *  在此列表中的元素上创建<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>和<em>快速失败</em> {@link Spliterator} 
+     * 。
+     * 
+     *  <p> {@code Spliterator}报告{@link Spliterator#SIZED},{@link Spliterator#SUBSIZED}和{@link Spliterator#ORDERED}
+     * 
      * @return a {@code Spliterator} over the elements in this list
      * @since 1.8
      */

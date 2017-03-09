@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -93,6 +112,16 @@ import java.util.Objects;
  *
  * @implSpec
  * This class is immutable and thread-safe.
+ * <p>
+ *  日历中间API没有时区的日期时间。
+ * <p>
+ *  {@code ChronoLocalDateTime}是一个不可变的日期时间对象,表示日期时间,通常被视为年 - 月 - 日 - 时 - 分 - 秒。此对象还可以访问其他字段,例如年,星期和星期。
+ * <p>
+ *  此类存储所有日期和时间字段,精度为纳秒。它不存储或表示时区。例如,值"2007年10月2日在13：45.30.123456789"可以存储在{@code ChronoLocalDateTime}中。
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @serial
  * @param <D> the concrete type for the date of this date-time
  * @since 1.8
@@ -102,63 +131,108 @@ final class ChronoLocalDateTimeImpl<D extends ChronoLocalDate>
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 4556003607393004514L;
     /**
      * Hours per day.
+     * <p>
+     *  每天小时。
+     * 
      */
     static final int HOURS_PER_DAY = 24;
     /**
      * Minutes per hour.
+     * <p>
+     *  分钟/小时。
+     * 
      */
     static final int MINUTES_PER_HOUR = 60;
     /**
      * Minutes per day.
+     * <p>
+     *  每天分钟。
+     * 
      */
     static final int MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY;
     /**
      * Seconds per minute.
+     * <p>
+     *  秒每分钟。
+     * 
      */
     static final int SECONDS_PER_MINUTE = 60;
     /**
      * Seconds per hour.
+     * <p>
+     *  每小时秒数。
+     * 
      */
     static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
     /**
      * Seconds per day.
+     * <p>
+     *  每天秒数。
+     * 
      */
     static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
     /**
      * Milliseconds per day.
+     * <p>
+     *  每天毫秒。
+     * 
      */
     static final long MILLIS_PER_DAY = SECONDS_PER_DAY * 1000L;
     /**
      * Microseconds per day.
+     * <p>
+     * 每天微秒。
+     * 
      */
     static final long MICROS_PER_DAY = SECONDS_PER_DAY * 1000_000L;
     /**
      * Nanos per second.
+     * <p>
+     *  纳秒每秒。
+     * 
      */
     static final long NANOS_PER_SECOND = 1000_000_000L;
     /**
      * Nanos per minute.
+     * <p>
+     *  Nanos每分钟。
+     * 
      */
     static final long NANOS_PER_MINUTE = NANOS_PER_SECOND * SECONDS_PER_MINUTE;
     /**
      * Nanos per hour.
+     * <p>
+     *  Nanos每小时。
+     * 
      */
     static final long NANOS_PER_HOUR = NANOS_PER_MINUTE * MINUTES_PER_HOUR;
     /**
      * Nanos per day.
+     * <p>
+     *  Nanos每天。
+     * 
      */
     static final long NANOS_PER_DAY = NANOS_PER_HOUR * HOURS_PER_DAY;
 
     /**
      * The date part.
+     * <p>
+     *  日期部分。
+     * 
      */
     private final transient D date;
     /**
      * The time part.
+     * <p>
+     *  时间部分。
+     * 
      */
     private final transient LocalTime time;
 
@@ -166,6 +240,10 @@ final class ChronoLocalDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Obtains an instance of {@code ChronoLocalDateTime} from a date and time.
      *
+     * <p>
+     *  从日期和时间获取{@code ChronoLocalDateTime}的实例。
+     * 
+     * 
      * @param date  the local date, not null
      * @param time  the local time, not null
      * @return the local date-time, not null
@@ -177,6 +255,10 @@ final class ChronoLocalDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Casts the {@code Temporal} to {@code ChronoLocalDateTime} ensuring it bas the specified chronology.
      *
+     * <p>
+     *  将{@code Temporal}转换为{@code ChronoLocalDateTime},确保它基于指定的年表。
+     * 
+     * 
      * @param chrono  the chronology to check for, not null
      * @param temporal   a date-time to cast, not null
      * @return the date-time checked and cast to {@code ChronoLocalDateTime}, not null
@@ -196,6 +278,10 @@ final class ChronoLocalDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param date  the date part of the date-time, not null
      * @param time  the time part of the date-time, not null
      */
@@ -210,6 +296,10 @@ final class ChronoLocalDateTimeImpl<D extends ChronoLocalDate>
      * Returns a copy of this date-time with the new date and time, checking
      * to see if a new object is in fact required.
      *
+     * <p>
+     *  返回带有新日期和时间的此日期时间的副本,检查是否确实需要新对象。
+     * 
+     * 
      * @param newDate  the date of the new date-time, not null
      * @param newTime  the time of the new date-time, not null
      * @return the date-time, not null
@@ -400,6 +490,10 @@ final class ChronoLocalDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Writes the ChronoLocalDateTime using a
      * <a href="../../../serialized-form.html#java.time.chrono.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.chrono.Ser">专用序列化表单</a>写入ChronoLocalDateTime。
+     * 
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(2);              // identifies a ChronoLocalDateTime
@@ -416,6 +510,9 @@ final class ChronoLocalDateTimeImpl<D extends ChronoLocalDate>
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

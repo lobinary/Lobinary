@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,12 @@ import sun.rmi.server.WeakClassHashMap;
  * or {@link Activatable} has an instance of this class as that proxy's
  * invocation handler.
  *
+ * <p>
+ *  用于Java远程方法调用(Java RMI)的<code> InvocationHandler </code>接口的实现。此调用处理程序可以与动态代理实例结合使用,作为预生成的存根类的替代。
+ * 
+ *  <p>应用程序不希望直接使用此类。导出为使用{@link UnicastRemoteObject}或{@link Activatable}的动态代理的远程对象具有此类的实例作为该代理的调用处理程序。
+ * 
+ * 
  * @author  Ann Wollrath
  * @since   1.5
  **/
@@ -59,6 +66,10 @@ public class RemoteObjectInvocationHandler
     /**
      * A weak hash map, mapping classes to weak hash maps that map
      * method objects to method hashes.
+     * <p>
+     *  弱散列映射,将类映射到将方法对象映射到方法哈希的弱散列映射。
+     * 
+     * 
      **/
     private static final MethodToHash_Maps methodToHash_Maps =
         new MethodToHash_Maps();
@@ -67,6 +78,10 @@ public class RemoteObjectInvocationHandler
      * Creates a new <code>RemoteObjectInvocationHandler</code> constructed
      * with the specified <code>RemoteRef</code>.
      *
+     * <p>
+     *  创建使用指定的<code> RemoteRef </code>构建的新<Remote> RemoteObjectInvocationHandler </code>。
+     * 
+     * 
      * @param ref the remote ref
      *
      * @throws NullPointerException if <code>ref</code> is <code>null</code>
@@ -128,6 +143,32 @@ public class RemoteObjectInvocationHandler
      * arguments could not have been produced by an instance of some
      * valid dynamic proxy class containing this invocation handler.
      *
+     * <p>
+     *  处理在封装代理实例<code>代理</code>上进行的方法调用,并返回结果。
+     * 
+     *  <p> <code> RemoteObjectInvocationHandler </code>实现此方法如下：
+     * 
+     *  <p>如果<code>方法</code>是以下方法之一,则按如下所述进行处理：
+     * 
+     * <ul>
+     * 
+     *  <li> {@ link Object#hashCode Object.hashCode}：返回代理的哈希码值。
+     * 
+     *  <li> {@ link Object#equals Object.equals}：如果参数(<code> args [0] </code>)是动态代理类的实例,则返回<code> true </code>
+     * 处理程序等于该参数的调用处理程序,否则返回<code> false </code>。
+     * 
+     * <li> {@ link Object#toString Object.toString}：返回代理的字符串表示形式。
+     * </ul>
+     * 
+     *  <p>否则,将按如下方式进行远程调用：
+     * 
+     * <ul>
+     *  <li>如果<code> proxy </code>不是界面{@link Remote}的实例,则会抛出{@link IllegalArgumentException}。
+     * 
+     *  <li>否则,在此调用处理程序的<code> RemoteRef </code>上调用{@link RemoteRef#invoke invoke}方法,传递<code> proxy </code>,
+     * <code>方法</code>代码> args </code>,以及<code>方法</code>的方法哈希(在"Java远程方法调用(RMI)规范"的第8.3节中定义),并返回结果。
+     * 
+     * 
      * @param proxy the proxy instance that the method was invoked on
      * @param method the <code>Method</code> instance corresponding to the
      * interface method invoked on the proxy instance
@@ -151,6 +192,15 @@ public class RemoteObjectInvocationHandler
 
     /**
      * Handles java.lang.Object methods.
+     * <p>
+     *  <li>如果<code> RemoteRef.invoke </code>抛出异常,并且该异常是不可分配给由<code> throws </code>子句执行的任何异常的已检查异常<code> pro
+     * xy </code>的类,那么该异常被包装在{@link UnexpectedException}中,并抛出被包装的异常。
+     * 否则,此方法抛出<code> invoke </code>引发的异常。
+     * </ul>
+     * 
+     *  <p>如果参数不能由包含此调用处理程序的某个有效动态代理类的实例生成,则此方法的语义是未指定的。
+     * 
+     * 
      **/
     private Object invokeObjectMethod(Object proxy,
                                       Method method,
@@ -180,6 +230,10 @@ public class RemoteObjectInvocationHandler
 
     /**
      * Handles remote methods.
+     * <p>
+     *  处理java.lang.Object方法。
+     * 
+     * 
      **/
     private Object invokeRemoteMethod(Object proxy,
                                       Method method,
@@ -218,6 +272,10 @@ public class RemoteObjectInvocationHandler
     /**
      * Returns a string representation for a proxy that uses this invocation
      * handler.
+     * <p>
+     *  处理远程方法。
+     * 
+     * 
      **/
     private String proxyToString(Object proxy) {
         Class<?>[] interfaces = proxy.getClass().getInterfaces();
@@ -236,6 +294,10 @@ public class RemoteObjectInvocationHandler
     }
 
     /**
+    /* <p>
+    /*  返回使用此调用处理程序的代理的字符串表示形式。
+    /* 
+    /* 
      * @throws InvalidObjectException unconditionally
      **/
     private void readObjectNoData() throws InvalidObjectException {
@@ -250,6 +312,8 @@ public class RemoteObjectInvocationHandler
      * method hash mapping.  The method hash is calculated using the
      * "computeMethodHash" method.
      *
+     * <p>
+     * 
      * @param method the remote method
      * @return the method hash for the specified method
      */
@@ -260,6 +324,10 @@ public class RemoteObjectInvocationHandler
     /**
      * A weak hash map, mapping classes to weak hash maps that map
      * method objects to method hashes.
+     * <p>
+     * 返回指定方法的方法哈希。后续调用"getMethodHash"传递相同的方法参数应该更快,因为这个方法在内部缓存方法的结果到方法哈希映射。方法哈希使用"computeMethodHash"方法计算。
+     * 
+     * 
      **/
     private static class MethodToHash_Maps
         extends WeakClassHashMap<Map<Method,Long>>

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,13 @@ import sun.swing.ImageCache;
  * Finally, finishPainting() should be called. It fills the data buffer passed
  *   in with the image data.
  *
+ * <p>
+ *  GTKEngine将所有绘图作业委派给本地GTK库。
+ * 
+ *  使用GTKEngine绘制如下：首先,调用startPainting()。它准备所需大小的屏幕外缓冲区。然后,可以调用任意数量的paintXXX()方法。
+ * 它们有效地忽略Graphics参数并绘制到屏幕外缓冲区。最后,应该调用finishPainting()。它填充与图像数据一起传递的数据缓冲区。
+ * 
+ * 
  * @author Josh Outwater
  */
 class GTKEngine {
@@ -90,6 +98,9 @@ class GTKEngine {
      * Representation of GtkSettings properties.
      * When we need more settings we can add them here and
      * to all implementations of getGTKSetting().
+     * <p>
+     *  GtkSettings属性的表示。当我们需要更多的设置时,我们可以将它们添加到getGTKSetting()的所有实现中。
+     * 
      */
     static enum Settings {
         GTK_FONT_NAME,
@@ -98,11 +109,17 @@ class GTKEngine {
 
     /* Custom regions are needed for representing regions that don't exist
      * in the original Region class.
+     * <p>
+     *  在原来的Region类中。
+     * 
      */
     static class CustomRegion extends Region {
         /*
          * TITLED_BORDER Region is mapped to GtkFrame class which can draw
          * titled borders around components.
+         * <p>
+         *  TITLED_BORDER区域映射到GtkFrame类,可以绘制组件周围的标题边框。
+         * 
          */
         static Region TITLED_BORDER = new CustomRegion("TitledBorder");
 
@@ -291,6 +308,9 @@ class GTKEngine {
 
             /* We should return correrct WidgetType if the seperator is inserted
              * in Menu/PopupMenu/ToolBar. BugID: 6465603
+             * <p>
+             *  在Menu / PopupMenu / ToolBar。 BugID：6465603
+             * 
              */
             if (separator.getParent() instanceof JPopupMenu) {
                 return WidgetType.POPUP_MENU_SEPARATOR;
@@ -314,6 +334,10 @@ class GTKEngine {
              * For all ListCellRenderers we will use COMBO_BOX_TEXT_FIELD widget
              * type because we can get correct insets. List items however won't be
              * drawn as a text entry (see GTKPainter.paintLabelBackground).
+             * <p>
+             *  对于所有ListCellRenderers,我们将使用COMBO_BOX_TEXT_FIELD小部件类型,因为我们可以得到正确的插入。
+             * 但是列表项不会被绘制为文本条目(请参阅GTKPainter.paintLabelBackground)。
+             * 
              */
             if (c instanceof ListCellRenderer) {
                 return widgets[1];
@@ -541,6 +565,10 @@ class GTKEngine {
      * Paint a cached image identified by its size and a set of additional
      * arguments, if there's one.
      *
+     * <p>
+     *  绘制一个由其大小标识的缓存图像和一组附加参数(如果有)。
+     * 
+     * 
      * @return true if a cached image has been painted, false otherwise
      */
     public boolean paintCachedImage(Graphics g,
@@ -560,6 +588,9 @@ class GTKEngine {
 
     /*
      * Allocate a native offscreen buffer of the specified size.
+     * <p>
+     *  分配指定大小的本机屏幕外缓冲区。
+     * 
      */
     public void startPainting(Graphics g,
             int x, int y, int w, int h, Object... args) {
@@ -575,6 +606,9 @@ class GTKEngine {
     /**
      * Convenience method that delegates to finishPainting() with
      * caching enabled.
+     * <p>
+     *  方便的方法委托finishPainting()启用缓存。
+     * 
      */
     public void finishPainting() {
         finishPainting(true);
@@ -584,6 +618,9 @@ class GTKEngine {
      * Called to indicate that painting is finished. We create a new
      * BufferedImage from the offscreen buffer, (optionally) cache it,
      * and paint it.
+     * <p>
+     *  调用以指示绘画完成。我们从屏幕外缓冲区创建一个新的BufferedImage,(可选)缓存它,然后绘制它。
+     * 
      */
     public void finishPainting(boolean useCache) {
         DataBufferInt dataBuffer = new DataBufferInt(w0 * h0);
@@ -608,6 +645,9 @@ class GTKEngine {
 
     /**
      * Notify native layer of theme change, and flush cache
+     * <p>
+     * 通知本机层的主题更改,并刷新缓存
+     * 
      */
     public void themeChanged() {
         synchronized(sun.awt.UNIXToolkit.GTK_LOCK) {
@@ -626,6 +666,8 @@ class GTKEngine {
     /**
      * Sets up the GtkAdjustment values for the native GtkRange widget
      * associated with the given region (e.g. SLIDER, SCROLL_BAR).
+     * <p>
+     *  为与给定区域关联的本机GtkRange窗口小部件设置GtkAdjustment值(例如,SLIDER,SCROLL_BAR)。
      */
     void setRangeValue(SynthContext context, Region id,
                        double value, double min, double max, double visible) {

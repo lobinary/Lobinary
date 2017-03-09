@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -106,6 +107,8 @@ public class GIFStreamMetadata extends GIFMetadata {
         /* NB: At the moment we use empty strings to support undefined
          * integer values in tree representation.
          * We need to add better support for undefined/default values later.
+         * <p>
+         *  树表示中的整数值。稍后我们需要为未定义/默认值添加更好的支持。
          */
         node.setAttribute("logicalScreenWidth",
                           logicalScreenWidth == UNDEFINED_INTEGER_VALUE ?

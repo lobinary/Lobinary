@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,16 @@ import org.w3c.dom.TypeInfo;
  * Implementation of this "interface" can be obtained through the
  * {@link ValidatorHandler#getTypeInfoProvider()} method.
  *
+ * <p>
+ *  此类提供对由{@link ValidatorHandler}确定的类型信息的访问。
+ * 
+ * <p>
+ *  一些模式语言(例如W3C XML模式)鼓励验证器报告其分配给每个属性/元素的"类型"。希望访问这种类型信息的那些应用程序可以调用在该"接口"上定义的方法来访问这种类型信息。
+ * 
+ * <p>
+ *  这个"接口"的实现可以通过{@link ValidatorHandler#getTypeInfoProvider()}方法获得。
+ * 
+ * 
  * @author  <a href="mailto:Kohsuke.Kawaguchi@Sun.com">Kohsuke Kawaguchi</a>
  * @see org.w3c.dom.TypeInfo
  * @since 1.5
@@ -52,6 +63,12 @@ public abstract class TypeInfoProvider {
      *
      * <p>
      * The constructor does nothing.
+     * <p>
+     *  派生类的构造方法。
+     * 
+     * <p>
+     *  构造函数什么也不做。
+     * 
      */
     protected TypeInfoProvider() {
     }
@@ -74,6 +91,18 @@ public abstract class TypeInfoProvider {
      * from the endElement event will be the actual member type used
      * to validate the element.</p>
      *
+     * <p>
+     *  <p>返回当前元素的不可变{@link TypeInfo}对象。</p>
+     * 
+     *  <p>该方法只能由应用程序设置为{@link ValidatorHandler}的{@link org.xml.sax.ContentHandler}的startElement事件或endElemen
+     * t事件调用。
+     * </p>。
+     * 
+     *  <p>当执行W3C XML模式验证时,如果元素具有union类型,则从startElement事件调用<code> getElementTypeInfo()</code>返回的{@link TypeInfo}
+     * 将为联合类型。
+     * 从endElement事件调用返回的<code> TypeInfo </code>将是用于验证元素的实际成员类型。</p>。
+     * 
+     * 
      * @throws IllegalStateException
      *      If this method is called from other {@link org.xml.sax.ContentHandler}
      *      methods.
@@ -101,6 +130,13 @@ public abstract class TypeInfoProvider {
      * the {@link org.xml.sax.ContentHandler} that the application sets to the
      * {@link ValidatorHandler}.</p>
      *
+     * <p>
+     *  返回当前元素的指定属性的不可变{@link TypeInfo}对象。
+     * 
+     * <p>
+     * 该方法只能由{@link org.xml.sax.ContentHandler}的应用程序设置为{@link ValidatorHandler}的startElement事件调用。</p>
+     * 
+     * 
      * @param index
      *      The index of the attribute. The same index for
      *      the {@link org.xml.sax.Attributes} object passed to the
@@ -143,6 +179,19 @@ public abstract class TypeInfoProvider {
      * the {@link org.xml.sax.ContentHandler} that the application sets to the
      * {@link ValidatorHandler}.
      *
+     * <p>
+     *  如果指定的属性被确定为ID,则返回<code> true </code>。
+     * 
+     * <p>
+     *  属性"确定为ID"的属性取决于模式语言。在W3C XML模式的情况下,这意味着属性的实际类型是内置ID类型或其派生类型。
+     * 
+     * <p>
+     *  {@link javax.xml.parsers.DocumentBuilder}使用此信息来正确实现{@link org.w3c.dom.Attr#isId()}。
+     * 
+     * <p>
+     *  该方法只能由应用程序设置为{@link ValidatorHandler}的{@link org.xml.sax.ContentHandler}的startElement事件调用。
+     * 
+     * 
      * @param index
      *      The index of the attribute. The same index for
      *      the {@link org.xml.sax.Attributes} object passed to the
@@ -177,6 +226,14 @@ public abstract class TypeInfoProvider {
      * the attribute was originally present in the pipeline, and
      * false if it was added by the validator.
      *
+     * <p>
+     *  如果属性由验证程序添加,则返回<code> false </code>。
+     * 
+     * <p>
+     *  此方法提供{@link javax.xml.parsers.DocumentBuilder}确定DOM树应从{@link org.w3c.dom.Attr#getSpecified()}方法返回的信息
+     * 。
+     * 
+     * 
      * @param index
      *      The index of the attribute. The same index for
      *      the {@link org.xml.sax.Attributes} object passed to the

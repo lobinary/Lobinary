@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import java.awt.Component;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  MenuDragMouseEvent用于通知有关各方菜单元素已收到在拖动条件下转发给它的MouseEvent。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Georges Saab
  */
 @SuppressWarnings("serial")
@@ -57,6 +65,10 @@ public class MenuDragMouseEvent extends MouseEvent {
      * <p>Absolute coordinates xAbs and yAbs are set to source's location on screen plus
      * relative coordinates x and y. xAbs and yAbs are set to zero if the source is not showing.
      *
+     * <p>
+     *  构造一个MenuDragMouseEvent对象。 <p>绝对坐标xAbs和yAbs设置为源在屏幕上的位置加上相对坐标x和y。如果源不显示,xAbs和yAbs设置为零。
+     * 
+     * 
      * @param source        the Component that originated the event
      *                      (typically <code>this</code>)
      * @param id            an int specifying the type of event, as defined
@@ -90,6 +102,10 @@ public class MenuDragMouseEvent extends MouseEvent {
      * <p>Even if inconsistent values for relative and absolute coordinates are
      * passed to the constructor, the MenuDragMouseEvent instance is still
      * created.
+     * <p>
+     *  构造一个MenuDragMouseEvent对象。 <p>即使将相对和绝对坐标的不一致值传递给构造函数,仍会创建MenuDragMouseEvent实例。
+     * 
+     * 
      * @param source        the Component that originated the event
      *                      (typically <code>this</code>)
      * @param id            an int specifying the type of event, as defined
@@ -128,6 +144,10 @@ public class MenuDragMouseEvent extends MouseEvent {
     /**
      * Returns the path to the selected menu item.
      *
+     * <p>
+     *  返回所选菜单项的路径。
+     * 
+     * 
      * @return an array of MenuElement objects representing the path value
      */
     public MenuElement[] getPath() {
@@ -137,6 +157,9 @@ public class MenuDragMouseEvent extends MouseEvent {
     /**
      * Returns the current menu selection manager.
      *
+     * <p>
+     *  返回当前菜单选择管理器。
+     * 
      * @return a MenuSelectionManager object
      */
     public MenuSelectionManager getMenuSelectionManager() {

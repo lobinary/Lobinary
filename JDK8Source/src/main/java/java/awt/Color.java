@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,19 @@ import java.awt.color.ColorSpace;
  * http://www.w3.org/pub/WWW/Graphics/Color/sRGB.html
  * </A>.
  * <p>
+ * <p>
+ *  <code> Color </code>类用于封装默认sRGB颜色空间中的颜色或由{@link ColorSpace}标识的任意颜色空间中的颜色。
+ * 每个颜色都有一个1.0的隐式alpha值,或者在构造函数中提供一个显式的值。
+ *  Alpha值定义颜色的透明度,可以通过范围为0.0&nbsp;  - &nbsp; 1.0或0&nbsp;  - &nbsp; 255中的浮点值来表示。
+ *  alpha值为1.0或255表示颜色完全不透明,alpha值为0或0.0表示颜色完全透明。
+ * 当使用显式alpha或获取<code> Color </code>的颜色/ alpha组件构造<code> Color </code>时,颜色分量决不会被alpha分量预乘。
+ * <p>
+ *  Java 2D(tm)API的默认颜色空间是sRGB,一个建议的标准RGB颜色空间。
+ * 有关sRGB的详情,请参阅<A href="http://www.w3.org/pub/WWW/Graphics/Color/sRGB.html"> http://www.w3.org/pub/WWW/
+ * Graphics /Color/sRGB.html </A>。
+ *  Java 2D(tm)API的默认颜色空间是sRGB,一个建议的标准RGB颜色空间。
+ * <p>
+ * 
  * @version     10 Feb 1997
  * @author      Sami Shaio
  * @author      Arthur van Hoff
@@ -61,149 +75,244 @@ public class Color implements Paint, java.io.Serializable {
 
     /**
      * The color white.  In the default sRGB space.
+     * <p>
+     *  颜色白色。在默认的sRGB空间。
+     * 
      */
     public final static Color white     = new Color(255, 255, 255);
 
     /**
      * The color white.  In the default sRGB space.
+     * <p>
+     *  颜色白色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color WHITE = white;
 
     /**
      * The color light gray.  In the default sRGB space.
+     * <p>
+     *  颜色浅灰色。在默认的sRGB空间。
+     * 
      */
     public final static Color lightGray = new Color(192, 192, 192);
 
     /**
      * The color light gray.  In the default sRGB space.
+     * <p>
+     *  颜色浅灰色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color LIGHT_GRAY = lightGray;
 
     /**
      * The color gray.  In the default sRGB space.
+     * <p>
+     *  颜色灰色。在默认的sRGB空间。
+     * 
      */
     public final static Color gray      = new Color(128, 128, 128);
 
     /**
      * The color gray.  In the default sRGB space.
+     * <p>
+     *  颜色灰色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color GRAY = gray;
 
     /**
      * The color dark gray.  In the default sRGB space.
+     * <p>
+     *  颜色深灰色。在默认的sRGB空间。
+     * 
      */
     public final static Color darkGray  = new Color(64, 64, 64);
 
     /**
      * The color dark gray.  In the default sRGB space.
+     * <p>
+     * 颜色深灰色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color DARK_GRAY = darkGray;
 
     /**
      * The color black.  In the default sRGB space.
+     * <p>
+     *  颜色黑色。在默认的sRGB空间。
+     * 
      */
     public final static Color black     = new Color(0, 0, 0);
 
     /**
      * The color black.  In the default sRGB space.
+     * <p>
+     *  颜色黑色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color BLACK = black;
 
     /**
      * The color red.  In the default sRGB space.
+     * <p>
+     *  颜色红色。在默认的sRGB空间。
+     * 
      */
     public final static Color red       = new Color(255, 0, 0);
 
     /**
      * The color red.  In the default sRGB space.
+     * <p>
+     *  颜色红色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color RED = red;
 
     /**
      * The color pink.  In the default sRGB space.
+     * <p>
+     *  颜色粉红色。在默认的sRGB空间。
+     * 
      */
     public final static Color pink      = new Color(255, 175, 175);
 
     /**
      * The color pink.  In the default sRGB space.
+     * <p>
+     *  颜色粉红色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color PINK = pink;
 
     /**
      * The color orange.  In the default sRGB space.
+     * <p>
+     *  颜色橙色。在默认的sRGB空间。
+     * 
      */
     public final static Color orange    = new Color(255, 200, 0);
 
     /**
      * The color orange.  In the default sRGB space.
+     * <p>
+     *  颜色橙色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color ORANGE = orange;
 
     /**
      * The color yellow.  In the default sRGB space.
+     * <p>
+     *  颜色黄色。在默认的sRGB空间。
+     * 
      */
     public final static Color yellow    = new Color(255, 255, 0);
 
     /**
      * The color yellow.  In the default sRGB space.
+     * <p>
+     *  颜色黄色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color YELLOW = yellow;
 
     /**
      * The color green.  In the default sRGB space.
+     * <p>
+     *  颜色绿色。在默认的sRGB空间。
+     * 
      */
     public final static Color green     = new Color(0, 255, 0);
 
     /**
      * The color green.  In the default sRGB space.
+     * <p>
+     *  颜色绿色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color GREEN = green;
 
     /**
      * The color magenta.  In the default sRGB space.
+     * <p>
+     *  颜色品红色。在默认的sRGB空间。
+     * 
      */
     public final static Color magenta   = new Color(255, 0, 255);
 
     /**
      * The color magenta.  In the default sRGB space.
+     * <p>
+     *  颜色品红色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color MAGENTA = magenta;
 
     /**
      * The color cyan.  In the default sRGB space.
+     * <p>
+     *  颜色青色。在默认的sRGB空间。
+     * 
      */
     public final static Color cyan      = new Color(0, 255, 255);
 
     /**
      * The color cyan.  In the default sRGB space.
+     * <p>
+     *  颜色青色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color CYAN = cyan;
 
     /**
      * The color blue.  In the default sRGB space.
+     * <p>
+     *  颜色蓝色。在默认的sRGB空间。
+     * 
      */
     public final static Color blue      = new Color(0, 0, 255);
 
     /**
      * The color blue.  In the default sRGB space.
+     * <p>
+     *  颜色蓝色。在默认的sRGB空间。
+     * 
+     * 
      * @since 1.4
      */
     public final static Color BLUE = blue;
 
     /**
      * The color value.
+     * <p>
+     *  颜色值。
+     * 
+     * 
      * @serial
      * @see #getRGB
      */
@@ -215,6 +324,11 @@ public class Color implements Paint, java.io.Serializable {
      * If <code>null</code> after object construction, this must be an
      * sRGB color constructed with 8-bit precision, so compute from the
      * <code>int</code> color value.
+     * <p>
+     *  默认sRGB <code> ColorSpace </code>中的颜色值为<code> float </code>组件(无alpha)。
+     * 如果在对象构造之后<code> null </code>,这必须是用8位精度构造的sRGB颜色,因此从<code> int </code>颜色值计算。
+     * 
+     * 
      * @serial
      * @see #getRGBColorComponents
      * @see #getRGBComponents
@@ -227,6 +341,11 @@ public class Color implements Paint, java.io.Serializable {
      * If <code>null</code> after object construction, this must be an
      * sRGB color constructed with 8-bit precision, so compute from the
      * <code>int</code> color value.
+     * <p>
+     *  原生<code> ColorSpace </code>中的颜色值为<code> float </code>组件(无alpha)。
+     * 如果在对象构造之后<code> null </code>,这必须是用8位精度构造的sRGB颜色,因此从<code> int </code>颜色值计算。
+     * 
+     * 
      * @serial
      * @see #getRGBColorComponents
      * @see #getRGBComponents
@@ -237,6 +356,11 @@ public class Color implements Paint, java.io.Serializable {
      * The alpha value as a <code>float</code> component.
      * If <code>frgbvalue</code> is <code>null</code>, this is not valid
      * data, so compute from the <code>int</code> color value.
+     * <p>
+     * alpha值作为<code> float </code>组件。
+     * 如果<code> frgbvalue </code>是<code> null </code>,则这不是有效的数据,因此从<code> int </code>颜色值计算。
+     * 
+     * 
      * @serial
      * @see #getRGBComponents
      * @see #getComponents
@@ -246,6 +370,10 @@ public class Color implements Paint, java.io.Serializable {
     /**
      * The <code>ColorSpace</code>.  If <code>null</code>, then it's
      * default is sRGB.
+     * <p>
+     *  <code> ColorSpace </code>。如果<code> null </code>,那么它的默认值为sRGB。
+     * 
+     * 
      * @serial
      * @see #getColor
      * @see #getColorSpace
@@ -255,11 +383,17 @@ public class Color implements Paint, java.io.Serializable {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
      private static final long serialVersionUID = 118526816881161077L;
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -269,6 +403,12 @@ public class Color implements Paint, java.io.Serializable {
          ** initialized. DON'T DO IT!!!
          **
          ** Toolkit.getDefaultToolkit();
+         * <p>
+         *  这里可以导致这个类在被完全初始化之前被访问。不要这样做！
+         * 
+         *  Toolkit.getDefaultToolkit();
+         * 
+         * 
          **/
 
         /* ensure that the necessary native libraries are loaded */
@@ -282,6 +422,10 @@ public class Color implements Paint, java.io.Serializable {
      * Checks the color integer components supplied for validity.
      * Throws an {@link IllegalArgumentException} if the value is out of
      * range.
+     * <p>
+     *  检查为有效性提供的颜色整数分量。如果值超出范围,则抛出{@link IllegalArgumentException}。
+     * 
+     * 
      * @param r the Red component
      * @param g the Green component
      * @param b the Blue component
@@ -317,6 +461,10 @@ public class Color implements Paint, java.io.Serializable {
      * validity.
      * Throws an <code>IllegalArgumentException</code> if the value is out
      * of range.
+     * <p>
+     *  检查为有效性提供的颜色<code> float </code>。如果值超出范围,则抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param r the Red component
      * @param g the Green component
      * @param b the Blue component
@@ -354,6 +502,10 @@ public class Color implements Paint, java.io.Serializable {
      * available for a given output device.
      * Alpha is defaulted to 255.
      *
+     * <p>
+     *  创建一个不透明的sRGB颜色,指定的红色,绿色和蓝色值在范围(0  -  255)内。渲染中使用的实际颜色取决于给定给定输出设备可用的颜色空间的最佳匹配。 Alpha默认为255。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>r</code>, <code>g</code>
      *        or <code>b</code> are outside of the range
      *        0 to 255, inclusive
@@ -373,6 +525,10 @@ public class Color implements Paint, java.io.Serializable {
      * Creates an sRGB color with the specified red, green, blue, and alpha
      * values in the range (0 - 255).
      *
+     * <p>
+     *  创建在范围(0  -  255)中指定的红色,绿色,蓝色和alpha值的sRGB颜色。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>r</code>, <code>g</code>,
      *        <code>b</code> or <code>a</code> are outside of the range
      *        0 to 255, inclusive
@@ -403,6 +559,11 @@ public class Color implements Paint, java.io.Serializable {
      * color space available for a particular output device.  Alpha is
      * defaulted to 255.
      *
+     * <p>
+     *  创建不透明的sRGB颜色,指定的组合RGB值由位16-23中的红色分量,位8-15中的绿色分量和位0-7中的蓝色分量组成。渲染中使用的实际颜色取决于给定特定输出设备可用的颜色空间的最佳匹配。
+     *  Alpha默认为255。
+     * 
+     * 
      * @param rgb the combined RGB components
      * @see java.awt.image.ColorModel#getRGBdefault
      * @see #getRed
@@ -421,6 +582,11 @@ public class Color implements Paint, java.io.Serializable {
      * If the <code>hasalpha</code> argument is <code>false</code>, alpha
      * is defaulted to 255.
      *
+     * <p>
+     * 创建sRGB颜色,指定的组合RGBA值由位24-31中的alpha分量,位16-23中的红色分量,位8-15中的绿色分量和位0-7中的蓝色分量组成。
+     * 如果<code> hasalpha </code>参数是<code> false </code>,alpha默认为255。
+     * 
+     * 
      * @param rgba the combined RGBA components
      * @param hasalpha <code>true</code> if the alpha bits are valid;
      *        <code>false</code> otherwise
@@ -446,6 +612,10 @@ public class Color implements Paint, java.io.Serializable {
      * match given the color space available for a particular output
      * device.
      *
+     * <p>
+     *  创建不透明的sRGB颜色,指定的红色,绿色和蓝色值在范围(0.0  -  1.0)中。 Alpha默认为1.0。渲染中使用的实际颜色取决于给定特定输出设备可用的颜色空间的最佳匹配。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>r</code>, <code>g</code>
      *        or <code>b</code> are outside of the range
      *        0.0 to 1.0, inclusive
@@ -473,6 +643,10 @@ public class Color implements Paint, java.io.Serializable {
      * alpha values in the range (0.0 - 1.0).  The actual color
      * used in rendering depends on finding the best match given the
      * color space available for a particular output device.
+     * <p>
+     *  创建一个sRGB颜色,指定的红色,绿色,蓝色和alpha值在范围(0.0  -  1.0)。渲染中使用的实际颜色取决于给定特定输出设备可用的颜色空间的最佳匹配。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>r</code>, <code>g</code>
      *        <code>b</code> or <code>a</code> are outside of the range
      *        0.0 to 1.0, inclusive
@@ -503,6 +677,11 @@ public class Color implements Paint, java.io.Serializable {
      * determined by the type of the <code>ColorSpace</code>.  For
      * example, RGB requires 3 components, but CMYK requires 4
      * components.
+     * <p>
+     *  使用<code> float </code>数组和指定的alpha中指定的颜色组件在指定的<code> ColorSpace </code>中创建颜色。
+     * 组件的数量由<code> ColorSpace </code>的类型确定。例如,RGB需要3个分量,但CMYK需要4个分量。
+     * 
+     * 
      * @param cspace the <code>ColorSpace</code> to be used to
      *                  interpret the components
      * @param components an arbitrary number of color components
@@ -550,6 +729,10 @@ public class Color implements Paint, java.io.Serializable {
     /**
      * Returns the red component in the range 0-255 in the default sRGB
      * space.
+     * <p>
+     *  返回默认sRGB空间中0-255范围内的红色分量。
+     * 
+     * 
      * @return the red component.
      * @see #getRGB
      */
@@ -560,6 +743,10 @@ public class Color implements Paint, java.io.Serializable {
     /**
      * Returns the green component in the range 0-255 in the default sRGB
      * space.
+     * <p>
+     *  返回默认sRGB空间中0-255范围内的绿色分量。
+     * 
+     * 
      * @return the green component.
      * @see #getRGB
      */
@@ -570,6 +757,10 @@ public class Color implements Paint, java.io.Serializable {
     /**
      * Returns the blue component in the range 0-255 in the default sRGB
      * space.
+     * <p>
+     *  返回默认sRGB空间中0-255范围内的蓝色分量。
+     * 
+     * 
      * @return the blue component.
      * @see #getRGB
      */
@@ -579,6 +770,10 @@ public class Color implements Paint, java.io.Serializable {
 
     /**
      * Returns the alpha component in the range 0-255.
+     * <p>
+     *  返回0-255范围内的alpha分量。
+     * 
+     * 
      * @return the alpha component.
      * @see #getRGB
      */
@@ -591,6 +786,10 @@ public class Color implements Paint, java.io.Serializable {
      * {@link ColorModel}.
      * (Bits 24-31 are alpha, 16-23 are red, 8-15 are green, 0-7 are
      * blue).
+     * <p>
+     * 返回表示默认sRGB {@link ColorModel}中颜色的RGB值。 (位24-31是α,16-23是红色,8-15是绿色,0-7是蓝色)。
+     * 
+     * 
      * @return the RGB value of the color in the default sRGB
      *         <code>ColorModel</code>.
      * @see java.awt.image.ColorModel#getRGBdefault
@@ -617,6 +816,13 @@ public class Color implements Paint, java.io.Serializable {
      * <code>darker</code> are inverse operations, the results of a
      * series of invocations of these two methods might be inconsistent
      * because of rounding errors.
+     * <p>
+     *  创建一个新的<code> Color </code>,它是这个<code> Color </code>的一个更亮的版本。
+     * <p>
+     *  此方法对此<code> Color </code>的三个RGB分量中的每一个应用任意比例因子,以创建此<code> Color </code>的更亮的版本。系统会保留{@code alpha}值。
+     * 虽然<code>更亮</code>和<code> darker </code>是反向操作,但是由于舍入错误,这两种方法的一系列调用的结果可能不一致。
+     * 
+     * 
      * @return     a new <code>Color</code> object that is
      *                 a brighter version of this <code>Color</code>
      *                 with the same {@code alpha} value.
@@ -633,6 +839,9 @@ public class Color implements Paint, java.io.Serializable {
          * 1. black.brighter() should return grey
          * 2. applying brighter to blue will always return blue, brighter
          * 3. non pure color (non zero rgb) will eventually return white
+         * <p>
+         *  black.brighter()应该返回灰色2.应用更亮到蓝色将总是返回蓝色,更亮3.非纯颜色(非零rgb)将最终返回白色
+         * 
          */
         int i = (int)(1.0/(1.0-FACTOR));
         if ( r == 0 && g == 0 && b == 0) {
@@ -660,6 +869,13 @@ public class Color implements Paint, java.io.Serializable {
      * <code>darker</code> are inverse operations, the results of a series
      * of invocations of these two methods might be inconsistent because
      * of rounding errors.
+     * <p>
+     *  创建一个新的<code> Color </code>,它是这个<code> Color </code>的深色版本。
+     * <p>
+     *  此方法对此<code> Color </code>的三个RGB分量中的每一个应用任意比例因子,以创建此<code> Color </code>的较暗版本。系统会保留{@code alpha}值。
+     * 虽然<code>更亮</code>和<code> darker </code>是反向操作,但是由于舍入错误,这两种方法的一系列调用的结果可能不一致。
+     * 
+     * 
      * @return  a new <code>Color</code> object that is
      *                    a darker version of this <code>Color</code>
      *                    with the same {@code alpha} value.
@@ -675,6 +891,10 @@ public class Color implements Paint, java.io.Serializable {
 
     /**
      * Computes the hash code for this <code>Color</code>.
+     * <p>
+     *  计算此<code> Color </code>的哈希码。
+     * 
+     * 
      * @return     a hash code value for this object.
      * @since      JDK1.0
      */
@@ -689,6 +909,13 @@ public class Color implements Paint, java.io.Serializable {
      * The result is <code>true</code> if and only if the argument is not
      * <code>null</code> and is a <code>Color</code> object that has the same
      * red, green, blue, and alpha values as this object.
+     * <p>
+     *  确定另一个对象是否等于此<code> Color </code>。
+     * <p>
+     * 如果且仅当参数不是<code> null </code>且是具有相同红色,绿色,蓝色和蓝色的<code> Color </code>对象,结果是<code> true </code> alpha值作为此
+     * 对象。
+     * 
+     * 
      * @param       obj   the object to test for equality with this
      *                          <code>Color</code>
      * @return      <code>true</code> if the objects are the same;
@@ -706,6 +933,10 @@ public class Color implements Paint, java.io.Serializable {
      * implementations. The returned string might be empty but cannot
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> Color </code>的字符串表示形式。此方法仅用于调试目的。返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但不能是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>Color</code>.
      */
     public String toString() {
@@ -716,6 +947,10 @@ public class Color implements Paint, java.io.Serializable {
      * Converts a <code>String</code> to an integer and returns the
      * specified opaque <code>Color</code>. This method handles string
      * formats that are used to represent octal and hexadecimal numbers.
+     * <p>
+     *  将<code> String </code>转换为整数,并返回指定的不透明<code> Color </code>。此方法处理用于表示八进制和十六进制数字的字符串格式。
+     * 
+     * 
      * @param      nm a <code>String</code> that represents
      *                            an opaque color as a 24-bit integer
      * @return     the new <code>Color</code> object.
@@ -741,6 +976,14 @@ public class Color implements Paint, java.io.Serializable {
      * <p>
      * If the specified property is not found or could not be parsed as
      * an integer then <code>null</code> is returned.
+     * <p>
+     *  在系统属性中查找颜色。
+     * <p>
+     *  参数被视为要获取的系统属性的名称。然后,此属性的字符串值将解释为整数,然后将其转换为<code> Color </code>对象。
+     * <p>
+     *  如果未找到指定的属性或无法解析为整数,则返回<code> null </code>。
+     * 
+     * 
      * @param    nm the name of the color property
      * @return   the <code>Color</code> converted from the system
      *          property.
@@ -764,6 +1007,14 @@ public class Color implements Paint, java.io.Serializable {
      * If the specified property is not found or cannot be parsed as
      * an integer then the <code>Color</code> specified by the second
      * argument is returned instead.
+     * <p>
+     *  在系统属性中查找颜色。
+     * <p>
+     *  第一个参数被视为要获取的系统属性的名称。然后,此属性的字符串值将解释为整数,然后将其转换为<code> Color </code>对象。
+     * <p>
+     *  如果未找到指定的属性或不能将其解析为整数,那么将返回由第二个参数指定的<code> Color </code>。
+     * 
+     * 
      * @param    nm the name of the color property
      * @param    v    the default <code>Color</code>
      * @return   the <code>Color</code> converted from the system
@@ -793,6 +1044,14 @@ public class Color implements Paint, java.io.Serializable {
      * If the specified property is not found or could not be parsed as
      * an integer then the integer value <code>v</code> is used instead,
      * and is converted to a <code>Color</code> object.
+     * <p>
+     *  在系统属性中查找颜色。
+     * <p>
+     * 第一个参数被视为要获取的系统属性的名称。然后,此属性的字符串值将解释为整数,然后将其转换为<code> Color </code>对象。
+     * <p>
+     *  如果未找到指定的属性或无法解析为整数,则使用整数值<code> v </code>,并将其转换为<code> Color </code>对象。
+     * 
+     * 
      * @param    nm  the name of the color property
      * @param    v   the default color value, as an integer
      * @return   the <code>Color</code> converted from the system
@@ -826,6 +1085,16 @@ public class Color implements Paint, java.io.Serializable {
      * format used by the method {@link #getRGB() getRGB}.
      * This integer can be supplied as an argument to the
      * <code>Color</code> constructor that takes a single integer argument.
+     * <p>
+     *  将颜色的组件(由HSB模型指定)转换为默认RGB模型的一组等效值。
+     * <p>
+     *  <code>饱和</code>和<code>亮度</code>组件应为零和一之间的浮点值(0.0-1.0范围内的数字)。 <code> hue </code>组件可以是任何浮点数。
+     * 从其中减去该数字的底部以创建0和1之间的分数。然后将该分数乘以360以在HSB颜色模型中产生色调角。
+     * <p>
+     *  由<code> HSBtoRGB </code>返回的整数对与方法{@link #getRGB()getRGB}使用的格式相同的整数值的位0-23中的颜色值进行编码。
+     * 此整数可作为参数提供给采用单个整数参数的<code> Color </code>构造函数。
+     * 
+     * 
      * @param     hue   the hue component of the color
      * @param     saturation   the saturation of the color
      * @param     brightness   the brightness of the color
@@ -891,6 +1160,13 @@ public class Color implements Paint, java.io.Serializable {
      * new array is allocated to return the result. Otherwise, the method
      * returns the array <code>hsbvals</code>, with the values put into
      * that array.
+     * <p>
+     *  将颜色的组件(由默认RGB模型指定)转换为HSK模型的三个组件的色调,饱和度和亮度的等效值集合。
+     * <p>
+     * 如果<code> hsbvals </code>参数是<code> null </code>,那么将分配一个新数组以返回结果。
+     * 否则,该方法返回数组<code> hsbvals </code>,将值放入该数组。
+     * 
+     * 
      * @param     r   the red component of the color
      * @param     g   the green component of the color
      * @param     b   the blue component of the color
@@ -952,6 +1228,13 @@ public class Color implements Paint, java.io.Serializable {
      * subtracted from it to create a fraction between 0 and 1.  This
      * fractional number is then multiplied by 360 to produce the hue
      * angle in the HSB color model.
+     * <p>
+     *  基于HSB颜色模型的指定值创建<code> Color </code>对象。
+     * <p>
+     *  <code> s </code>和<code> b </code>组件应为零到一(0.0-1.0范围内的数字)之间的浮点值。 <code> h </code>组件可以是任何浮点数。
+     * 从其中减去该数字的底部以创建0和1之间的分数。然后将该分数乘以360以在HSB颜色模型中产生色调角。
+     * 
+     * 
      * @param  h   the hue component
      * @param  s   the saturation of the color
      * @param  b   the brightness of the color
@@ -971,6 +1254,12 @@ public class Color implements Paint, java.io.Serializable {
      * 4 is created for the return value.  Otherwise,
      * <code>compArray</code> must have length 4 or greater,
      * and it is filled in with the components and returned.
+     * <p>
+     *  返回一个包含<code> Color </code>的颜色和alpha组件的<code> float </code>数组,如默认sRGB颜色空间中所示。
+     * 如果<code> compArray </code>是<code> null </code>,则为返回值创建长度为4的数组。
+     * 否则,<code> compArray </code>的长度必须为4或更大,并且用组件填充并返回。
+     * 
+     * 
      * @param compArray an array that this method fills with
      *                  color and alpha components and returns
      * @return the RGBA components in a <code>float</code> array.
@@ -1003,6 +1292,12 @@ public class Color implements Paint, java.io.Serializable {
      * length 3 is created for the return value.  Otherwise,
      * <code>compArray</code> must have length 3 or greater, and it is
      * filled in with the components and returned.
+     * <p>
+     *  返回在默认sRGB颜色空间中仅包含<code> Color </code>的颜色分量的<code> float </code>数组。
+     * 如果<code> compArray </code>是<code> null </code>,则为返回值创建长度为3的数组。
+     * 否则,<code> compArray </code>必须具有长度3或更大,并且用组件填充并返回。
+     * 
+     * 
      * @param compArray an array that this method fills with color
      *          components and returns
      * @return the RGB components in a <code>float</code> array.
@@ -1036,6 +1331,13 @@ public class Color implements Paint, java.io.Serializable {
      * the return value.  Otherwise, <code>compArray</code> must have at
      * least this length and it is filled in with the components and
      * returned.
+     * <p>
+     * 在<code> Color </code>的<code> ColorSpace </code>中返回<code> float </code>数组,其中包含<code> Color </code>的颜色和
+     * alpha组件。
+     * 如果<code> compArray </code>是<code> null </code>,则为返回值创建一个长度等于相关联的<code> ColorSpace </code>加一的组件数的数组。
+     * 否则,<code> compArray </code>必须至少有这个长度,它被填充组件并返回。
+     * 
+     * 
      * @param compArray an array that this method fills with the color and
      *          alpha components of this <code>Color</code> in its
      *          <code>ColorSpace</code> and returns
@@ -1069,6 +1371,13 @@ public class Color implements Paint, java.io.Serializable {
      * the return value.  Otherwise, <code>compArray</code> must have at
      * least this length and it is filled in with the components and
      * returned.
+     * <p>
+     *  在<code> Color </code>的<code> ColorSpace </code>中返回仅包含<code> Color </code>的颜色分量的<code> float </code>数
+     * 组。
+     * 如果<code> compArray </code>是<code> null </code>,则为返回值创建一个长度等于相关联的<code> ColorSpace </code>中组件数的数组。
+     * 否则,<code> compArray </code>必须至少有这个长度,它被填充组件并返回。
+     * 
+     * 
      * @param compArray an array that this method fills with the color
      *          components of this <code>Color</code> in its
      *          <code>ColorSpace</code> and returns
@@ -1099,6 +1408,13 @@ public class Color implements Paint, java.io.Serializable {
      * <code>cspace</code> plus one is created for the return value.
      * Otherwise, <code>compArray</code> must have at least this
      * length, and it is filled in with the components and returned.
+     * <p>
+     *  在<code> cspace </code>参数指定的<code> ColorSpace </code>中返回包含<code> Color </code>的颜色和alpha组件的<code> floa
+     * t </code>数组。
+     * 如果<code> compArray </code>是<code> null </code>,则为返回值创建一个长度等于<code> cspace </code>加一的组件数量的数组。
+     * 否则,<code> compArray </code>必须至少有这个长度,并且它被组件填充并返回。
+     * 
+     * 
      * @param cspace a specified <code>ColorSpace</code>
      * @param compArray an array that this method fills with the
      *          color and alpha components of this <code>Color</code> in
@@ -1144,6 +1460,13 @@ public class Color implements Paint, java.io.Serializable {
      * <code>cspace</code> is created for the return value.  Otherwise,
      * <code>compArray</code> must have at least this length, and it is
      * filled in with the components and returned.
+     * <p>
+     * 返回一个只包含由<code> cspace </code>参数指定的<code> ColorSpace </code>中<color> </code>颜色组件的<code> float </code>数
+     * 组。
+     * 如果<code> compArray </code>是<code> null </code>,则为返回值创建一个长度等于<code> cspace </code>中组件数的数组。
+     * 否则,<code> compArray </code>必须至少具有此长度,并且用组件填充并返回。
+     * 
+     * 
      * @param cspace a specified <code>ColorSpace</code>
      * @param compArray an array that this method fills with the color
      *          components of this <code>Color</code> in the specified
@@ -1176,6 +1499,10 @@ public class Color implements Paint, java.io.Serializable {
 
     /**
      * Returns the <code>ColorSpace</code> of this <code>Color</code>.
+     * <p>
+     *  返回此<code> Color </code>的<code> ColorSpace </code>。
+     * 
+     * 
      * @return this <code>Color</code> object's <code>ColorSpace</code>.
      */
     public ColorSpace getColorSpace() {
@@ -1192,6 +1519,11 @@ public class Color implements Paint, java.io.Serializable {
      * method in the {@link Paint} interface for information
      * on null parameter handling.
      *
+     * <p>
+     *  创建并返回用于生成纯色字段模式的{@link PaintContext}。
+     * 有关空参数处理的信息,请参阅{@link Paint}界面中的方法的{@link Paint#createContext specification}。
+     * 
+     * 
      * @param cm the preferred {@link ColorModel} which represents the most convenient
      *           format for the caller to receive the pixel data, or {@code null}
      *           if there is no preference.
@@ -1223,6 +1555,8 @@ public class Color implements Paint, java.io.Serializable {
     /**
      * Returns the transparency mode for this <code>Color</code>.  This is
      * required to implement the <code>Paint</code> interface.
+     * <p>
+     * 
      * @return this <code>Color</code> object's transparency mode.
      * @see Paint
      * @see Transparency

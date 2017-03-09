@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,11 +58,26 @@ import sun.management.Util;
  *
  * To add a new MXBean interface for the Java platform,
  * add a new enum constant and implement the MXBeanFetcher.
+ * <p>
+ *  此枚举类定义了提供监视和管理支持的平台组件列表。每个枚举表示一个MXBean接口。 MXBean实例可以实现一个或多个MXBean接口。
+ * 
+ *  例如,com.sun.management.GarbageCollectorMXBean扩展java.lang.management.GarbageCollectorMXBean,并且有一组垃圾回收M
+ * XBean实例,每个实例都实现c.s.m.和j.l.m。
+ * 接口。
+ * 有两个单独的枚举GARBAGE_COLLECTOR和SUN_GARBAGE_COLLECTOR,因此ManagementFactory.getPlatformMXBeans(Class)将返回指定类型的
+ * MXBeans列表。
+ * 接口。
+ * 
+ *  要为Java平台添加新的MXBean接口,请添加一个新的枚举常量并实现MXBeanFetcher。
+ * 
  */
 enum PlatformComponent {
 
     /**
      * Class loading system of the Java virtual machine.
+     * <p>
+     *  Java虚拟机的类加载系统。
+     * 
      */
     CLASS_LOADING(
         "java.lang.management.ClassLoadingMXBean",
@@ -75,6 +91,9 @@ enum PlatformComponent {
 
     /**
      * Compilation system of the Java virtual machine.
+     * <p>
+     *  Java虚拟机的编译系统。
+     * 
      */
     COMPILATION(
         "java.lang.management.CompilationMXBean",
@@ -93,6 +112,9 @@ enum PlatformComponent {
 
     /**
      * Memory system of the Java virtual machine.
+     * <p>
+     *  Java虚拟机的内存系统。
+     * 
      */
     MEMORY(
         "java.lang.management.MemoryMXBean",
@@ -106,6 +128,9 @@ enum PlatformComponent {
 
     /**
      * Garbage Collector in the Java virtual machine.
+     * <p>
+     *  Garbage Collector在Java虚拟机中。
+     * 
      */
     GARBAGE_COLLECTOR(
         "java.lang.management.GarbageCollectorMXBean",
@@ -120,6 +145,9 @@ enum PlatformComponent {
 
     /**
      * Memory manager in the Java virtual machine.
+     * <p>
+     *  Java虚拟机中的内存管理器。
+     * 
      */
     MEMORY_MANAGER(
         "java.lang.management.MemoryManagerMXBean",
@@ -134,6 +162,9 @@ enum PlatformComponent {
 
     /**
      * Memory pool in the Java virtual machine.
+     * <p>
+     *  Java虚拟机中的内存池。
+     * 
      */
     MEMORY_POOL(
         "java.lang.management.MemoryPoolMXBean",
@@ -147,6 +178,9 @@ enum PlatformComponent {
 
     /**
      * Operating system on which the Java virtual machine is running
+     * <p>
+     *  运行Java虚拟机的操作系统
+     * 
      */
     OPERATING_SYSTEM(
         "java.lang.management.OperatingSystemMXBean",
@@ -160,6 +194,9 @@ enum PlatformComponent {
 
     /**
      * Runtime system of the Java virtual machine.
+     * <p>
+     *  Java虚拟机的运行时系统。
+     * 
      */
     RUNTIME(
         "java.lang.management.RuntimeMXBean",
@@ -173,6 +210,9 @@ enum PlatformComponent {
 
     /**
      * Threading system of the Java virtual machine.
+     * <p>
+     *  Java虚拟机的线程系统。
+     * 
      */
     THREADING(
         "java.lang.management.ThreadMXBean",
@@ -187,6 +227,9 @@ enum PlatformComponent {
 
     /**
      * Logging facility.
+     * <p>
+     *  日志设施。
+     * 
      */
     LOGGING(
         "java.lang.management.PlatformLoggingMXBean",
@@ -205,6 +248,9 @@ enum PlatformComponent {
 
     /**
      * Buffer pools.
+     * <p>
+     *  缓冲池。
+     * 
      */
     BUFFER_POOL(
         "java.lang.management.BufferPoolMXBean",
@@ -221,6 +267,9 @@ enum PlatformComponent {
 
     /**
      * Sun extension garbage collector that performs collections in cycles.
+     * <p>
+     *  Sun扩展垃圾收集器以周期执行收集。
+     * 
      */
     SUN_GARBAGE_COLLECTOR(
         "com.sun.management.GarbageCollectorMXBean",
@@ -235,6 +284,9 @@ enum PlatformComponent {
     /**
      * Sun extension operating system on which the Java virtual machine
      * is running.
+     * <p>
+     *  Sun虚拟机所运行的Sun扩展操作系统。
+     * 
      */
     SUN_OPERATING_SYSTEM(
         "com.sun.management.OperatingSystemMXBean",
@@ -248,6 +300,9 @@ enum PlatformComponent {
 
     /**
      * Unix operating system.
+     * <p>
+     * Unix操作系统。
+     * 
      */
     SUN_UNIX_OPERATING_SYSTEM(
         "com.sun.management.UnixOperatingSystemMXBean",
@@ -261,6 +316,9 @@ enum PlatformComponent {
 
     /**
      * Diagnostic support for the HotSpot Virtual Machine.
+     * <p>
+     *  HotSpot虚拟机的诊断支持。
+     * 
      */
     HOTSPOT_DIAGNOSTIC(
         "com.sun.management.HotSpotDiagnosticMXBean",
@@ -275,6 +333,9 @@ enum PlatformComponent {
 
     /**
      * A task that returns the MXBeans for a component.
+     * <p>
+     *  返回组件的MXBean的任务。
+     * 
      */
     interface MXBeanFetcher<T extends PlatformManagedObject> {
         public List<T> getMXBeans();
@@ -282,6 +343,9 @@ enum PlatformComponent {
 
     /*
      * Returns a list of the GC MXBeans of the given type.
+     * <p>
+     *  返回给定类型的GC MXBeans的列表。
+     * 
      */
     private static <T extends GarbageCollectorMXBean>
             List<T> getGcMXBeanList(Class<T> gcMXBeanIntf) {
@@ -298,6 +362,8 @@ enum PlatformComponent {
 
     /*
      * Returns the OS mxbean instance of the given type.
+     * <p>
+     *  返回给定类型的操作系统mxbean实例。
      */
     private static <T extends OperatingSystemMXBean>
             List<T> getOSMXBeanList(Class<T> osMXBeanIntf) {

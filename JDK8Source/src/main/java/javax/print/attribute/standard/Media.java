@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,22 @@ import javax.print.attribute.PrintJobAttribute;
  * returns the IPP string representation of the attribute value.
  * <P>
  *
+ * <p>
+ *  类Media是指定要打印的介质的打印属性类。
+ * <p>
+ *  可以以不同的方式指定媒体。
+ * <ul>
+ *  <li>它可以由纸张来源指定 - 例如纸盒<li>,它可以由标准尺寸指定 - 例如"A4"<li>可以通过名称指定 - 例如"letterhead"
+ * </ul>
+ *  其中每个对应于IPP"媒体"属性。当前API不支持按特征描述媒体(例如颜色,不透明度)。这可以在本说明书的稍后修订中得到支持。
+ * <p>
+ *  媒体对象使用表示媒体属性可以被指定的方式之一的值来构造。
+ * <p>
+ *  <B> IPP兼容性：</B> <CODE> getName()</CODE>返回的类别名称是IPP属性名称。枚举的整数值是IPP枚举值。
+ *  <code> toString()</code>方法返回属性值的IPP字符串表示形式。
+ * <P>
+ * 
+ * 
  * @author Phil Race
  */
 public abstract class Media extends EnumSyntax
@@ -64,6 +81,10 @@ public abstract class Media extends EnumSyntax
     /**
      * Constructs a new media attribute specified by name.
      *
+     * <p>
+     *  构造由名称指定的新媒体属性。
+     * 
+     * 
      * @param value         a value
      */
     protected Media(int value) {
@@ -82,6 +103,18 @@ public abstract class Media extends EnumSyntax
      * The values are equal.
      * </OL>
      *
+     * <p>
+     *  返回此媒体属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>与此对象属于Media的同一子类。
+     * <LI>
+     *  值相等。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this media
@@ -100,6 +133,8 @@ public abstract class Media extends EnumSyntax
      * For class Media and any vendor-defined subclasses, the category is
      * class Media itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -114,6 +149,12 @@ public abstract class Media extends EnumSyntax
      * For class Media and any vendor-defined subclasses, the category name is
      * <CODE>"media"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     * 对于类Media和任何供应商定义的子类,类别是类Media本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

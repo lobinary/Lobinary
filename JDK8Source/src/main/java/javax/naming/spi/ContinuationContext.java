@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import javax.naming.*;
 /**
   * This class is for dealing with federations/continuations.
   *
+  * <p>
+  *  这个类用于处理联合会/继续。
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @since 1.3

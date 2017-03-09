@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -162,6 +163,46 @@ import java.lang.annotation.*;
  *     <td>The same value</td></tr>
  * </table>
  *
+ * <p>
+ *  <p>描述注释元素如何与{@link描述符}中的字段相关联的元注释。它可以是MBean的描述符,也可以是MBean中的属性,操作或构造函数的描述符,也可以是操作或构造函数的参数的描述符。</p>
+ * 
+ *  <p>请考虑此注释,例如：</p>
+ * 
+ * <pre>
+ *  @Documented @Target(ElementType.METHOD)@Retention(RetentionPolicy.RUNTIME)public @interface Units {<b> @DescriptorKey("units")</b> String value }
+ * }。
+ * </pre>
+ * 
+ *  <p>此注释的使用：</p>
+ * 
+ * <pre>
+ *  public interface CacheControlMBean {<b> @Units("bytes")</b> public long getCacheSize(); }}
+ * </pre>
+ * 
+ *  <p>当从{@code CacheControlMBean}生成标准MBean时,通常的规则意味着它将有一个名为{@code CacheSize}的类型为{@code long}的属性。
+ * 给定上述定义的{@code @Units}注释将确保该属性的{@link MBeanAttributeInfo}将具有{@code Descriptor},其具有称为{@code units}的具有对应
+ * 值的字段{@code字节}。
+ *  <p>当从{@code CacheControlMBean}生成标准MBean时,通常的规则意味着它将有一个名为{@code CacheSize}的类型为{@code long}的属性。</p>。
+ * 
+ *  <p>同样,如果注释看起来像这样：</p>
+ * 
+ * <pre>
+ *  @Documented @Target(ElementType.METHOD)@Retention(RetentionPolicy.RUNTIME)public @interface Units {<b> @DescriptorKey("units")</b> String value。
+ * 
+ *  <b> @DescriptorKey("descriptionResourceKey")</b> String resourceKey()default"";
+ * 
+ * <b> @DescriptorKey("descriptionResourceBundleBaseName")</b> String resourceBundleBaseName()default"";
+ *  }}。
+ * </pre>
+ * 
+ *  <p>它使用像这样：</p>
+ * 
+ * <pre>
+ *  public interface CacheControlMBean {<b> @Units("bytes",resourceKey ="bytes.key",resourceBundleBaseName ="com.example.foo.MBeanResources")</b> public long getCacheSize }
+ * }。
+ * </pre>
+ * 
+ * 
  * @since 1.6
  */
 @Documented

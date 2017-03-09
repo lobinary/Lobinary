@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,13 @@ import java.io.Serializable;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  TabSet由许多TabStops组成。它提供了将最接近的TabStop定位到给定位置并找到所有潜在的TabStop的方法。它也是不可变的。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Scott Violet
  */
 public class TabSet implements Serializable
@@ -51,12 +59,18 @@ public class TabSet implements Serializable
      * Since this class is immutable the hash code could be
      * calculated once. MAX_VALUE means that it was not initialized
      * yet. Hash code shouldn't has MAX_VALUE value.
+     * <p>
+     *  由于这个类是不可变的,所以可以计算一次哈希码。 MAX_VALUE表示尚未初始化。哈希代码不得有MAX_VALUE个值。
+     * 
      */
     private int hashCode = Integer.MAX_VALUE;
 
     /**
      * Creates and returns an instance of TabSet. The array of Tabs
      * passed in must be sorted in ascending order.
+     * <p>
+     *  创建并返回TabSet的实例。传入的Tab数组必须按升序排序。
+     * 
      */
     public TabSet(TabStop[] tabs) {
         // PENDING(sky): If this becomes a problem, make it sort.
@@ -72,6 +86,9 @@ public class TabSet implements Serializable
 
     /**
      * Returns the number of Tab instances the receiver contains.
+     * <p>
+     *  返回接收器包含的Tab实例的数量。
+     * 
      */
     public int getTabCount() {
         return (tabs == null) ? 0 : tabs.length;
@@ -81,6 +98,9 @@ public class TabSet implements Serializable
      * Returns the TabStop at index <code>index</code>. This will throw an
      * IllegalArgumentException if <code>index</code> is outside the range
      * of tabs.
+     * <p>
+     *  返回索引<code> index </code>处的TabStop。如果<code> index </code>在标签范围之外,这将抛出IllegalArgumentException。
+     * 
      */
     public TabStop getTab(int index) {
         int          numTabs = getTabCount();
@@ -94,6 +114,9 @@ public class TabSet implements Serializable
     /**
      * Returns the Tab instance after <code>location</code>. This will
      * return null if there are no tabs after <code>location</code>.
+     * <p>
+     *  返回<code> location </code>后的Tab实例。如果<code> location </code>后面没有标签,则会返回null。
+     * 
      */
     public TabStop getTabAfter(float location) {
         int     index = getTabIndexAfter(location);
@@ -102,6 +125,8 @@ public class TabSet implements Serializable
     }
 
     /**
+    /* <p>
+    /* 
      * @return the index of the TabStop <code>tab</code>, or -1 if
      * <code>tab</code> is not contained in the receiver.
      */
@@ -116,6 +141,9 @@ public class TabSet implements Serializable
     /**
      * Returns the index of the Tab to be used after <code>location</code>.
      * This will return -1 if there are no tabs after <code>location</code>.
+     * <p>
+     *  返回要在<code> location </code>之后使用的Tab的索引。如果<code> location </code>后面没有标签,则会返回-1。
+     * 
      */
     public int getTabIndexAfter(float location) {
         int     current, min, max;
@@ -142,6 +170,10 @@ public class TabSet implements Serializable
 
     /**
      * Indicates whether this <code>TabSet</code> is equal to another one.
+     * <p>
+     * 指示此<code> TabSet </code>是否等于另一个。
+     * 
+     * 
      * @param o the <code>TabSet</code> instance which this instance
      *  should be compared to.
      * @return <code>true</code> if <code>o</code> is the instance of
@@ -175,6 +207,10 @@ public class TabSet implements Serializable
 
     /**
      * Returns a hashcode for this set of TabStops.
+     * <p>
+     *  返回此TabStops集合的哈希码。
+     * 
+     * 
      * @return  a hashcode value for this set of TabStops.
      *
      * @since 1.5
@@ -196,6 +232,8 @@ public class TabSet implements Serializable
 
     /**
      * Returns the string representation of the set of tabs.
+     * <p>
+     *  返回选项卡集的字符串表示形式。
      */
     public String toString() {
         int            tabCount = getTabCount();

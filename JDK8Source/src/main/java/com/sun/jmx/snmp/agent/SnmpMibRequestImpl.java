@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,10 +45,17 @@ import com.sun.jmx.snmp.SnmpEngine;
  * never need to use this class directly. You will only access
  * instances of this class through their SnmpMibRequest interface.
  *
+ * <p>
+ *  此类实现SnmpMibRequest接口。它表示涉及特定MIB的SNMP请求的一部分。将为SNMP请求中涉及的每个MIB创建此类的一个实例,并将传递给负责处理该MIB的SnmpMibAgent。
+ * 
+ *  此类的实例由SNMP引擎分配。你永远不需要直接使用这个类。您将只通过其SnmpMibRequest接口访问此类的实例。
+ * 
  */
 final class SnmpMibRequestImpl implements SnmpMibRequest {
 
     /**
+    /* <p>
+    /* 
      * @param engine The local engine.
      * @param reqPdu The received pdu.
      * @param vblist The vector of SnmpVarBind objects in which the
@@ -85,6 +93,10 @@ final class SnmpMibRequestImpl implements SnmpMibRequest {
 
     /**
      * Returns the local engine. This parameter is returned only if <CODE> SnmpV3AdaptorServer </CODE> is the adaptor receiving this request. Otherwise null is returned.
+     * <p>
+     *  返回本地引擎。仅当<CODE> SnmpV3AdaptorServer </CODE>是接收此请求的适配器时,才会返回此参数。否则返回null。
+     * 
+     * 
      * @return the local engine.
      */
     @Override
@@ -94,6 +106,10 @@ final class SnmpMibRequestImpl implements SnmpMibRequest {
 
     /**
      * Gets the incoming request principal. This parameter is returned only if <CODE> SnmpV3AdaptorServer </CODE> is the adaptor receiving this request. Otherwise null is returned.
+     * <p>
+     *  获取传入请求主体。仅当<CODE> SnmpV3AdaptorServer </CODE>是接收此请求的适配器时,才会返回此参数。否则返回null。
+     * 
+     * 
      * @return The request principal.
      **/
     @Override
@@ -103,6 +119,11 @@ final class SnmpMibRequestImpl implements SnmpMibRequest {
 
     /**
      * Gets the incoming request security level. This level is defined in {@link com.sun.jmx.snmp.SnmpEngine SnmpEngine}. This parameter is returned only if <CODE> SnmpV3AdaptorServer </CODE> is the adaptor receiving this request. Otherwise -1 is returned.
+     * <p>
+     *  获取传入请求安全级别。此级别在{@link com.sun.jmx.snmp.SnmpEngine SnmpEngine}中定义。
+     * 仅当<CODE> SnmpV3AdaptorServer </CODE>是接收此请求的适配器时,才会返回此参数。否则返回-1。
+     * 
+     * 
      * @return The security level.
      */
     @Override
@@ -111,6 +132,10 @@ final class SnmpMibRequestImpl implements SnmpMibRequest {
     }
     /**
      * Gets the incoming request security model. This parameter is returned only if <CODE> SnmpV3AdaptorServer </CODE> is the adaptor receiving this request. Otherwise -1 is returned.
+     * <p>
+     *  获取传入请求安全模型。仅当<CODE> SnmpV3AdaptorServer </CODE>是接收此请求的适配器时,才会返回此参数。否则返回-1。
+     * 
+     * 
      * @return The security model.
      */
     @Override
@@ -119,6 +144,10 @@ final class SnmpMibRequestImpl implements SnmpMibRequest {
     }
     /**
      * Gets the incoming request context name. This parameter is returned only if <CODE> SnmpV3AdaptorServer </CODE> is the adaptor receiving this request. Otherwise null is returned.
+     * <p>
+     * 获取传入请求上下文名称。仅当<CODE> SnmpV3AdaptorServer </CODE>是接收此请求的适配器时,才会返回此参数。否则返回null。
+     * 
+     * 
      * @return The context name.
      */
     @Override
@@ -128,6 +157,10 @@ final class SnmpMibRequestImpl implements SnmpMibRequest {
 
     /**
      * Gets the incoming request context name used by Access Control Model in order to allow or deny the access to OIDs. This parameter is returned only if <CODE> SnmpV3AdaptorServer </CODE> is the adaptor receiving this request. Otherwise null is returned.
+     * <p>
+     *  获取访问控制模型使用的传入请求上下文名称,以允许或拒绝对OID的访问。仅当<CODE> SnmpV3AdaptorServer </CODE>是接收此请求的适配器时,才会返回此参数。
+     * 否则返回null。
+     * 
      * @return The checked context.
      */
     @Override

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,16 @@ import com.sun.naming.internal.FactoryEnumeration;
   * The implementation will not modify the object or keep a reference
   * to it, although it may keep a reference to a clone or copy.
   *
+  * <p>
+  *  此类包含支持<tt> DirContext </tt>实现的方法。
+  * p>
+  *  此类是<tt> NamingManager </tt>的扩展。它包含服务提供程序用于访问对象工厂和状态工厂以及获取用于支持联合的继续上下文的方法。
+  * p>
+  *  <tt> DirectoryManager </tt>对于多线程的并发访问是安全的。
+  * p>
+  *  除非另有说明,传递给任何方法的<tt> Name </tt>,<tt> Attributes </tt>或环境参数由调用者拥有。实现不会修改对象或保留对它的引用,虽然它可能保留对克隆或副本的引用。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -69,6 +80,9 @@ public class DirectoryManager extends NamingManager {
 
     /*
      * Disallow anyone from creating one of these.
+     * <p>
+     *  禁止任何人创建其中的一个。
+     * 
      */
     DirectoryManager() {}
 
@@ -77,6 +91,11 @@ public class DirectoryManager extends NamingManager {
       * Operates just like <tt>NamingManager.getContinuationContext()</tt>,
       * only the continuation context returned is a <tt>DirContext</tt>.
       *
+      * <p>
+      *  创建用于继续执行<tt> DirContext </tt>操作的上下文。
+      * 像<tt> NamingManager.getContinuationContext()</tt>一样操作,只有返回的继续上下文是一个<tt> DirContext </tt>。
+      * 
+      * 
       * @param cpe
       *         The non-null exception that triggered this continuation.
       * @return A non-null <tt>DirContext</tt> object for continuing the operation.
@@ -122,6 +141,23 @@ public class DirectoryManager extends NamingManager {
       * should use this method, not <tt>NamingManager.getObjectInstance()</tt>.
       *<p>
       *
+      * <p>
+      *  为指定的对象,属性和环境创建对象的实例。
+      * <p>
+      *  此方法与<tt> NamingManager.getObjectInstance </tt>相同,但以下区别除外：
+      * ul>
+      * li>
+      *  它接受包含与对象关联的属性的<tt> Attributes </tt>参数。 <tt> DirObjectFactory </tt>可能使用这些属性来保存,不得不从目录中查找它们。
+      * li>
+      * 对象工厂必须实现<tt> ObjectFactory </tt>或<tt> DirObjectFactory </tt>。
+      * 如果它实现<tt> DirObjectFactory </tt>,则使用<tt> DirObjectFactory.getObjectInstance()</tt>,否则使用<tt> ObjectFac
+      * tory.getObjectInstance()</tt>。
+      * 对象工厂必须实现<tt> ObjectFactory </tt>或<tt> DirObjectFactory </tt>。
+      * /ul>
+      *  实现<tt> DirContext </tt>接口的服务提供者应该使用此方法,而不是<tt> NamingManager.getObjectInstance()</tt>。
+      * p>
+      * 
+      * 
       * @param refInfo The possibly null object for which to create an object.
       * @param name The name of this object relative to <code>nameCtx</code>.
       *         Specifying a name is optional; if it is
@@ -275,6 +311,18 @@ public class DirectoryManager extends NamingManager {
       * likewise owned by the caller, or a reference to the original
       * <tt>attrs</tt> parameter.
       *
+      * <p>
+      *  当给定原始对象及其属性时,检索要绑定的对象的状态。
+      * <p>
+      *  此方法类似于<tt> NamingManager.getStateToBind </tt>,但以下区别除外：
+      * ul>
+      *  li>它接受包含传递给<tt> DirContext.bind()</tt>方法的属性的<tt> Attributes </tt>参数。
+      *  li>它返回一个非空的<tt> DirStateFactory.Result </tt>实例,包含要绑定的对象和绑定的属性。对象或属性可以为null。
+      * li>
+      *  所尝试的状态工厂必须分别实现<tt> StateFactory </tt>或<tt> DirStateFactory </tt>。
+      * 如果它实现<tt> DirStateFactory </tt>,则调用<tt> DirStateFactory.getStateToBind()</tt>否则,将调用<tt> StateFactory.
+      * getStateToBind()</tt>。
+      * 
       * @param obj The non-null object for which to get state to bind.
       * @param name The name of this object relative to <code>nameCtx</code>,
       *         or null if no name is specified.

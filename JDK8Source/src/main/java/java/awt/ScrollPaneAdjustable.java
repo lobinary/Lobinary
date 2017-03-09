@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,12 +38,20 @@ import java.io.Serializable;
  * scrollbar of a <code>ScrollPane</code>.  Objects of this class are
  * returned by <code>ScrollPane</code> methods.
  *
+ * <p>
+ *  此类表示<code> ScrollPane </code>的水平或垂直滚动​​条的状态。此类的对象由<code> ScrollPane </code>方法返回。
+ * 
+ * 
  * @since       1.4
  */
 public class ScrollPaneAdjustable implements Adjustable, Serializable {
 
     /**
      * The <code>ScrollPane</code> this object is a scrollbar of.
+     * <p>
+     *  <code> ScrollPane </code>此对象是一个滚动条。
+     * 
+     * 
      * @serial
      */
     private ScrollPane sp;
@@ -50,6 +59,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
     /**
      * Orientation of this scrollbar.
      *
+     * <p>
+     *  此滚动条的方向。
+     * 
+     * 
      * @serial
      * @see #getOrientation
      * @see java.awt.Adjustable#HORIZONTAL
@@ -62,6 +75,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * <code>value</code> should be greater than <code>minimum</code>
      * and less than <code>maximum</code>
      *
+     * <p>
+     *  此滚动条的值。 <code> value </code>应大于<code> minimum </code>且小于<code> maximum </code>
+     * 
+     * 
      * @serial
      * @see #getValue
      * @see #setValue
@@ -79,6 +96,14 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * <code>0</code> for the minimum.  <code>getMinimum</code> method
      * always returns <code>0</code> without checking this field.
      *
+     * <p>
+     *  此滚动条的最小值。此值只能由<code> ScrollPane </code>设置。
+     * <p>
+     *  <strong> ATTN：</strong>在当前实现中,<code> minimum </code>始终为<code> 0 </code>。
+     * 此字段只能通过<code> setSpan </code>方法更改,<code> ScrollPane </code>始终使用<code> 0 </code>调用该方法的最小值。
+     *  <code> getMinimum </code>方法总是返回<code> 0 </code>,而不选中此字段。
+     * 
+     * 
      * @serial
      * @see #getMinimum
      * @see #setSpan(int, int, int)
@@ -89,6 +114,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * The maximum value of this scrollbar.
      * This value can only be set by the <code>ScrollPane</code>.
      *
+     * <p>
+     *  此滚动条的最大值。此值只能由<code> ScrollPane </code>设置。
+     * 
+     * 
      * @serial
      * @see #getMaximum
      * @see #setSpan(int, int, int)
@@ -99,6 +128,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * The size of the visible portion of this scrollbar.
      * This value can only be set by the <code>ScrollPane</code>.
      *
+     * <p>
+     *  此滚动条的可见部分的大小。此值只能由<code> ScrollPane </code>设置。
+     * 
+     * 
      * @serial
      * @see #getVisibleAmount
      * @see #setSpan(int, int, int)
@@ -110,6 +143,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * True if the value is in the process of changing as a result of
      * actions being taken by the user.
      *
+     * <p>
+     *  <code> Scrollbar </code>的调整状态。如果值处于由于用户执行的操作而发生更改的过程中,则为true。
+     * 
+     * 
      * @see #getValueIsAdjusting
      * @see #setValueIsAdjusting
      * @since 1.4
@@ -121,6 +158,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * up or down by a line.
      * This value should be a non negative integer.
      *
+     * <p>
+     *  当向上或向下移动一行时滚动条值将改变的量。此值应为非负整数。
+     * 
+     * 
      * @serial
      * @see #getUnitIncrement
      * @see #setUnitIncrement
@@ -132,6 +173,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * up or down by a page.
      * This value should be a non negative integer.
      *
+     * <p>
+     * 当向上或向下按页面时滚动条值将改变的量。此值应为非负整数。
+     * 
+     * 
      * @serial
      * @see #getBlockIncrement
      * @see #setBlockIncrement
@@ -143,6 +188,9 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
     /**
      * Error message for <code>AWTError</code> reported when one of
      * the public but unsupported methods is called.
+     * <p>
+     *  当调用其中一个公共但不支持的方法时报告的<code> AWTError </code>的错误消息。
+     * 
      */
     private static final String SCROLLPANE_ONLY =
         "Can be set by scrollpane only";
@@ -150,6 +198,9 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
 
     /**
      * Initialize JNI field and method ids.
+     * <p>
+     *  初始化JNI字段和方法标识。
+     * 
      */
     private static native void initIDs();
 
@@ -168,6 +219,9 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
 
     /**
      * JDK 1.1 serialVersionUID.
+     * <p>
+     *  JDK 1.1 serialVersionUID。
+     * 
      */
     private static final long serialVersionUID = -3359745691033257079L;
 
@@ -176,6 +230,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * Constructs a new object to represent specified scrollabar
      * of the specified <code>ScrollPane</code>.
      * Only ScrollPane creates instances of this class.
+     * <p>
+     *  构造一个新对象以表示指定的scrollabar指定的<code> ScrollPane </code>。只有ScrollPane创建此类的实例。
+     * 
+     * 
      * @param sp           <code>ScrollPane</code>
      * @param l            <code>AdjustmentListener</code> to add upon creation.
      * @param orientation  specifies which scrollbar this object represents,
@@ -194,6 +252,9 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * <code>visible</code> values.  The scrollpane is the only one
      * that should be changing these since it is the source of these
      * values.
+     * <p>
+     *  这由滚动条本身调用以更新<code>最小</code>,<code>最大</code>和<code>可见</code>值。滚动条是唯一一个应该更改这些,因为它是这些值的来源。
+     * 
      */
     void setSpan(int min, int max, int visible) {
         // adjust the values to be reasonable
@@ -207,6 +268,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
 
     /**
      * Returns the orientation of this scrollbar.
+     * <p>
+     *  返回此滚动条的方向。
+     * 
+     * 
      * @return    the orientation of this scrollbar, either
      *            <code>Adjustable.HORIZONTAL</code> or
      *            <code>Adjustable.VERTICAL</code>
@@ -220,6 +285,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * This method is public for this class to properly implement
      * <code>Adjustable</code> interface.
      *
+     * <p>
+     *  此方法应<strong>不</strong>由用户代码调用。这个方法是公共的这个类正确实现<code>可调整的</code>接口。
+     * 
+     * 
      * @throws AWTError Always throws an error when called.
      */
     public void setMinimum(int min) {
@@ -237,6 +306,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * This method is public for this class to properly implement
      * <code>Adjustable</code> interface.
      *
+     * <p>
+     *  此方法应<strong>不</strong>由用户代码调用。这个方法是公共的这个类正确实现<code>可调整的</code>接口。
+     * 
+     * 
      * @throws AWTError Always throws an error when called.
      */
     public void setMaximum(int max) {
@@ -274,6 +347,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * This method is public for this class to properly implement
      * <code>Adjustable</code> interface.
      *
+     * <p>
+     *  此方法应<strong>不</strong>由用户代码调用。这个方法是公共的这个类正确实现<code>可调整的</code>接口。
+     * 
+     * 
      * @throws AWTError Always throws an error when called.
      */
     public void setVisibleAmount(int v) {
@@ -288,6 +365,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
     /**
      * Sets the <code>valueIsAdjusting</code> property.
      *
+     * <p>
+     *  设置<code> valueIsAdjusting </code>属性。
+     * 
+     * 
      * @param b new adjustment-in-progress status
      * @see #getValueIsAdjusting
      * @since 1.4
@@ -307,6 +388,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * Returns true if the value is in the process of changing as a
      * result of actions being taken by the user.
      *
+     * <p>
+     *  如果值处于由用户执行的操作的结果而发生更改的过程中,则返回true。
+     * 
+     * 
      * @return the value of the <code>valueIsAdjusting</code> property
      * @see #setValueIsAdjusting
      */
@@ -321,6 +406,12 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * greater than the current maximum, then one of those values is
      * substituted, as appropriate.
      *
+     * <p>
+     *  将此滚动条的值设置为指定的值。
+     * <p>
+     * 如果所提供的值小于当前最小值或大于当前最大值,则适当地替换那些值中的一个。
+     * 
+     * 
      * @param v the new value of the scrollbar
      */
     public void setValue(int v) {
@@ -335,6 +426,12 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * substituted, as appropriate. Also, creates and dispatches
      * the AdjustementEvent with specified type and value.
      *
+     * <p>
+     *  将此滚动条的值设置为指定的值。
+     * <p>
+     *  如果所提供的值小于当前最小值或大于当前最大值,则适当地替换那些值中的一个。此外,使用指定的类型和值创建和分派AdjustementEvent。
+     * 
+     * 
      * @param v the new value of the scrollbar
      * @param type the type of the scrolling operation occurred
      */
@@ -367,6 +464,12 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的调整侦听器以从此<code> ScrollPaneAdjustable </code>接收调整事件。
+     * 如果<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the adjustment listener.
      * @see      #removeAdjustmentListener
      * @see      #getAdjustmentListeners
@@ -388,6 +491,12 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的调整侦听器,以使其不再从此<code> ScrollPaneAdjustable </code>接收调整事件。
+     * 如果<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param         l     the adjustment listener.
      * @see           #addAdjustmentListener
      * @see           #getAdjustmentListeners
@@ -406,6 +515,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * Returns an array of all the adjustment listeners
      * registered on this <code>ScrollPaneAdjustable</code>.
      *
+     * <p>
+     *  返回在此<code> ScrollPaneAdjustable </code>上注册的所有调整侦听器的数组。
+     * 
+     * 
      * @return all of this <code>ScrollPaneAdjustable</code>'s
      *         <code>AdjustmentListener</code>s
      *         or an empty array if no adjustment
@@ -425,6 +538,10 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
 
     /**
      * Returns a string representation of this scrollbar and its values.
+     * <p>
+     *  返回此滚动条及其值的字符串表示形式。
+     * 
+     * 
      * @return    a string representation of this scrollbar.
      */
     public String toString() {
@@ -438,6 +555,9 @@ public class ScrollPaneAdjustable implements Adjustable, Serializable {
      * between implementations.  The returned string may be empty but
      * may not be <code>null</code>.
      *
+     * <p>
+     * 返回一个表示此滚动条状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
      * @return      the parameter string of this scrollbar.
      */
     public String paramString() {

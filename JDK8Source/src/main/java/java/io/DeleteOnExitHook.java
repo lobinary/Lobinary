@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import java.io.File;
  * This class holds a set of filenames to be deleted on VM exit through a shutdown hook.
  * A set is used both to prevent double-insertion of the same file as well as offer
  * quick removal.
+ * <p>
+ *  这个类保存一组文件名,在VM退出时通过关闭挂钩删除。一组用于防止同一文件的双重插入以及提供快速删除。
+ * 
  */
 
 class DeleteOnExitHook {
@@ -43,6 +47,8 @@ class DeleteOnExitHook {
         // registerShutdownInProgress parameter to true.
         sun.misc.SharedSecrets.getJavaLangAccess()
             .registerShutdownHook(2 /* Shutdown hook invocation order */,
+            .registerShutdownHook(2 /* <p>
+            .registerShutdownHook(2 /* 
                 true /* register even if shutdown in progress */,
                 new Runnable() {
                     public void run() {

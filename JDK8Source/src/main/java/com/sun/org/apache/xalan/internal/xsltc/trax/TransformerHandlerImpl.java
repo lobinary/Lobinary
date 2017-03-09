@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: TransformerHandlerImpl.java,v 1.2.4.1 2005/09/15 06:25:12 pvedula Exp $
+ * <p>
+ *  $ Id：TransformerHandlerImpl.java,v 1.2.4.1 2005/09/15 06:25:12 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.trax;
@@ -49,6 +62,10 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Implementation of a JAXP1.1 TransformerHandler
+ * <p>
+ *  实现JAXP1.1 TransformerHandler
+ * 
+ * 
  * @author Morten Jorgensen
  */
 public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
@@ -69,11 +86,17 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * A flag indicating whether this transformer handler implements the
      * identity transform.
+     * <p>
+     *  指示此变换器处理程序是否实现身份转换的标志。
+     * 
      */
     private boolean _isIdentity = false;
 
     /**
      * Cosntructor - pass in reference to a TransformerImpl object
+     * <p>
+     *  Cosntructor  - 传递给TransformerImpl对象
+     * 
      */
     public TransformerHandlerImpl(TransformerImpl transformer) {
         // Save the reference to the transformer
@@ -94,6 +117,10 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
      * Implements javax.xml.transform.sax.TransformerHandler.getSystemId()
      * Get the base ID (URI or system ID) from where relative URLs will be
      * resolved.
+     * <p>
+     *  实现javax.xml.transform.sax.TransformerHandler.getSystemId()获取将从中解析相对URL的基本ID(URI或系统ID)。
+     * 
+     * 
      * @return The systemID that was set with setSystemId(String id)
      */
     @Override
@@ -105,6 +132,10 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
      * Implements javax.xml.transform.sax.TransformerHandler.setSystemId()
      * Get the base ID (URI or system ID) from where relative URLs will be
      * resolved.
+     * <p>
+     *  实现javax.xml.transform.sax.TransformerHandler.setSystemId()获取将从中解析相对URL的基本ID(URI或系统ID)。
+     * 
+     * 
      * @param id Base URI for this stylesheet
      */
     @Override
@@ -116,6 +147,11 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
      * Implements javax.xml.transform.sax.TransformerHandler.getTransformer()
      * Get the Transformer associated with this handler, which is needed in
      * order to set parameters and output properties.
+     * <p>
+     *  实现javax.xml.transform.sax.TransformerHandler.getTransformer()获取与此处理程序相关联的Transformer,这是为了设置参数和输出属性所需
+     * 要的。
+     * 
+     * 
      * @return The Transformer object
      */
     @Override
@@ -127,6 +163,10 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
      * Implements javax.xml.transform.sax.TransformerHandler.setResult()
      * Enables the user of the TransformerHandler to set the to set the Result
      * for the transformation.
+     * <p>
+     * 实现javax.xml.transform.sax.TransformerHandler.setResult()允许TransformerHandler的用户设置为设置转换的结果。
+     * 
+     * 
      * @param result A Result instance, should not be null
      * @throws IllegalArgumentException if result is invalid for some reason
      */
@@ -169,6 +209,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.characters()
      * Receive notification of character data.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.characters()接收字符数据的通知。
+     * 
      */
     @Override
     public void characters(char[] ch, int start, int length)
@@ -180,6 +223,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.startDocument()
      * Receive notification of the beginning of a document.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.startDocument()接收文档开头的通知。
+     * 
      */
     @Override
     public void startDocument() throws SAXException {
@@ -233,6 +279,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.endDocument()
      * Receive notification of the end of a document.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.endDocument()接收文档结束的通知。
+     * 
      */
     @Override
     public void endDocument() throws SAXException {
@@ -264,6 +313,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.startElement()
      * Receive notification of the beginning of an element.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.startElement()接收元素开头的通知。
+     * 
      */
     @Override
     public void startElement(String uri, String localName,
@@ -276,6 +328,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.endElement()
      * Receive notification of the end of an element.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.endElement()接收元素结束的通知。
+     * 
      */
     @Override
     public void endElement(String namespaceURI, String localName, String qname)
@@ -287,6 +342,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.processingInstruction()
      * Receive notification of a processing instruction.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.processingInstruction()接收处理指令的通知。
+     * 
      */
     @Override
     public void processingInstruction(String target, String data)
@@ -297,6 +355,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.LexicalHandler.startCDATA()
+     * <p>
+     *  实现org.xml.sax.ext.LexicalHandler.startCDATA()
+     * 
      */
     @Override
     public void startCDATA() throws SAXException {
@@ -307,6 +368,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.LexicalHandler.endCDATA()
+     * <p>
+     *  实现org.xml.sax.ext.LexicalHandler.endCDATA()
+     * 
      */
     @Override
     public void endCDATA() throws SAXException {
@@ -318,6 +382,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ext.LexicalHandler.comment()
      * Receieve notification of a comment
+     * <p>
+     *  实现org.xml.sax.ext.LexicalHandler.comment()接收评论的通知
+     * 
      */
     @Override
     public void comment(char[] ch, int start, int length)
@@ -332,6 +399,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
      * Implements org.xml.sax.ContentHandler.ignorableWhitespace()
      * Receive notification of ignorable whitespace in element
      * content. Similar to characters(char[], int, int).
+     * <p>
+     *  实现org.xml.sax.ContentHandler.ignorableWhitespace()在元素内容中接收可忽略的空格的通知。类似于字符(char [],int,int)。
+     * 
      */
     @Override
     public void ignorableWhitespace(char[] ch, int start, int length)
@@ -343,6 +413,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.setDocumentLocator()
      * Receive an object for locating the origin of SAX document events.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.setDocumentLocator()接收用于查找SAX文档事件的来源的对象。
+     * 
      */
     @Override
     public void setDocumentLocator(Locator locator) {
@@ -356,6 +429,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.skippedEntity()
      * Receive notification of a skipped entity.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.skippedEntity()接收跳过的实体的通知。
+     * 
      */
     @Override
     public void skippedEntity(String name) throws SAXException {
@@ -365,6 +441,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.startPrefixMapping()
      * Begin the scope of a prefix-URI Namespace mapping.
+     * <p>
+     *  实现org.xml.sax.ContentHandler.startPrefixMapping()开始前缀URI范围的命名空间映射。
+     * 
      */
     @Override
     public void startPrefixMapping(String prefix, String uri)
@@ -375,6 +454,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
     /**
      * Implements org.xml.sax.ContentHandler.endPrefixMapping()
      * End the scope of a prefix-URI Namespace mapping.
+     * <p>
+     * 实现org.xml.sax.ContentHandler.endPrefixMapping()结束prefix-URI命名空间映射的作用域。
+     * 
      */
     @Override
     public void endPrefixMapping(String prefix) throws SAXException {
@@ -383,6 +465,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.LexicalHandler.startDTD()
+     * <p>
+     *  实现org.xml.sax.ext.LexicalHandler.startDTD()
+     * 
      */
     @Override
     public void startDTD(String name, String publicId, String systemId)
@@ -395,6 +480,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.LexicalHandler.endDTD()
+     * <p>
+     *  实现org.xml.sax.ext.LexicalHandler.endDTD()
+     * 
      */
     @Override
     public void endDTD() throws SAXException {
@@ -405,6 +493,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.LexicalHandler.startEntity()
+     * <p>
+     *  实现org.xml.sax.ext.LexicalHandler.startEntity()
+     * 
      */
     @Override
     public void startEntity(String name) throws SAXException {
@@ -415,6 +506,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.LexicalHandler.endEntity()
+     * <p>
+     *  实现org.xml.sax.ext.LexicalHandler.endEntity()
+     * 
      */
     @Override
     public void endEntity(String name) throws SAXException {
@@ -425,6 +519,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.DTDHandler.unparsedEntityDecl()
+     * <p>
+     *  实现org.xml.sax.DTDHandler.unparsedEntityDecl()
+     * 
      */
     @Override
     public void unparsedEntityDecl(String name, String publicId,
@@ -438,6 +535,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.DTDHandler.notationDecl()
+     * <p>
+     *  实现org.xml.sax.DTDHandler.notationDecl()
+     * 
      */
     @Override
     public void notationDecl(String name, String publicId, String systemId)
@@ -450,6 +550,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.DeclHandler.attributeDecl()
+     * <p>
+     *  实现org.xml.sax.ext.DeclHandler.attributeDecl()
+     * 
      */
     @Override
     public void attributeDecl(String eName, String aName, String type,
@@ -462,6 +565,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.DeclHandler.elementDecl()
+     * <p>
+     *  实现org.xml.sax.ext.DeclHandler.elementDecl()
+     * 
      */
     @Override
     public void elementDecl(String name, String model)
@@ -474,6 +580,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.DeclHandler.externalEntityDecl()
+     * <p>
+     *  实现org.xml.sax.ext.DeclHandler.externalEntityDecl()
+     * 
      */
     @Override
     public void externalEntityDecl(String name, String publicId, String systemId)
@@ -486,6 +595,9 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
     /**
      * Implements org.xml.sax.ext.DeclHandler.externalEntityDecl()
+     * <p>
+     *  实现org.xml.sax.ext.DeclHandler.externalEntityDecl()
+     * 
      */
     @Override
     public void internalEntityDecl(String name, String value)
@@ -499,6 +611,7 @@ public class TransformerHandlerImpl implements TransformerHandler, DeclHandler {
 
    /** Implementation of the reset() method
     *
+    * <p>
     */
    public void reset() {
        _systemId = null;

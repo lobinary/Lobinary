@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,22 @@ import java.lang.annotation.Target;
  * By the help of this annotation, JAXB implementations will be able to
  * correctly bind <tt>Dog</tt> and <tt>Cat</tt>.
  *
+ * <p>
+ *  指示JAXB在绑定此类时还绑定其他类。
+ * 
+ * <p>
+ *  Java使得列出给定类的所有子类是不切实际的/不可能的。这通常是JAXB用户的一种方式,因为JAXB不能自动列出{@link JAXBContext}需要知道的类。
+ * 
+ * <p>
+ *  例如,使用以下类定义：
+ * 
+ * <pre>
+ *  class Animal {} class Dog extends Animal {} class Cat extends Animal {}
+ * </pre>
+ * 
+ * <p>
+ *  用户将需要创建{@link JAXBContext}作为<tt> JAXBContext.newInstance(Dog.class,Cat.class)</tt>(<tt> Animal </tt>
+ * 
  * @author Kohsuke Kawaguchi
  * @since JAXB2.1
  */

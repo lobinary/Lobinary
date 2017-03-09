@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,14 @@ import java.util.List;
  *
  * @jls section 15.10
  *
+ * <p>
+ *  表达式的树节点,用于创建数组的新实例。
+ * 
+ *  例如：
+ * <pre>
+ *  新<em>类型</em> <em>维</em> <em>初始化器</em>
+ * 
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

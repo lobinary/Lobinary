@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -12,6 +13,15 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ * COPYRIGHT(c)1997-1998 Eastman Kodak公司。
+ *  *** *根据United *** *国家法典第17章的未发表的作品。版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ *  *** *根据United *** *国家法典第17章的未发表的作品。版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package com.sun.image.codec.jpeg;
@@ -37,6 +47,14 @@ import java.io.OutputStream;
  * be available in a core API or standard extension.
  * <p>
  *
+ * <p>
+ *  这个类是实现JPEG图像解码器/编码器的工厂。
+ * <p>
+ *  请注意,com.sun.image.codec.jpeg包中的类不是核心Java API的一部分。它们是Sun的JDK和JRE发行版的一部分。
+ * 虽然其他许可证持有者可能选择分发这些类,但开发人员不能依赖其在非Sun实施中的可用性。我们期望等效功能最终将在核心API或标准扩展中可用。
+ * <p>
+ * 
+ * 
  * @see JPEGImageDecoder
  * @see JPEGImageEncoder
  */
@@ -46,6 +64,9 @@ public class JPEGCodec {
         /**
          * This creates an instance of a JPEGImageDecoder that can be used
          * to decode JPEG Data streams.
+         * <p>
+         *  这将创建一个JPEGImageDecoder实例,可用于解码JPEG数据流。
+         * 
          */
         public static JPEGImageDecoder createJPEGDecoder(InputStream src) {
                 return new JPEGImageDecoderImpl(src);
@@ -54,6 +75,9 @@ public class JPEGCodec {
         /**
          * This creates an instance of a JPEGImageDecoder that can be used
          * to decode JPEG Data streams.
+         * <p>
+         *  这将创建一个JPEGImageDecoder实例,可用于解码JPEG数据流。
+         * 
          */
         public static JPEGImageDecoder createJPEGDecoder(InputStream src,
                                                                                                          JPEGDecodeParam jdp) {
@@ -63,6 +87,9 @@ public class JPEGCodec {
         /**
          * This creates an instance of a JPEGImageEncoder that can be used
          * to encode image data as JPEG Data streams.
+         * <p>
+         *  这将创建一个JPEGImageEncoder实例,可用于将图像数据编码为JPEG数据流。
+         * 
          */
         public static JPEGImageEncoder createJPEGEncoder(OutputStream dest) {
                 return new JPEGImageEncoderImpl(dest);
@@ -70,6 +97,9 @@ public class JPEGCodec {
         /**
          * This creates an instance of a JPEGImageEncoder that can be used
          * to encode image data as JPEG Data streams.
+         * <p>
+         * 这将创建一个JPEGImageEncoder实例,可用于将图像数据编码为JPEG数据流。
+         * 
          */
         public static JPEGImageEncoder createJPEGEncoder(OutputStream dest,
                                                                                                          JPEGEncodeParam jep) {
@@ -80,6 +110,10 @@ public class JPEGCodec {
           * This is a factory method for creating JPEGEncodeParam objects.
           * The returned object should do a credible job of encoding the
           * given BufferedImage.
+          * <p>
+          *  这是一个用于创建JPEGEncodeParam对象的工厂方法。返回的对象应该做一个可信的编码给定BufferedImage的工作。
+          * 
+          * 
           * @param bi A BufferedImage that is similar to the BufferedImage(s)
           * that will encoded using the returned JPEGEncodeParam object.
           */
@@ -96,6 +130,11 @@ public class JPEGCodec {
           * either poor compression or poor image quality.  If you don't
           * understand much about JPEG it is strongly recommended that you
           * stick to the BufferedImage interface.
+          * <p>
+          *  这是一个用于创建JPEGEncodeParam对象的工厂方法。用户负责将colorID与栅格中包含的数据进行匹配。否则可能导致压缩不良或图像质量差。
+          * 如果你不太了解JPEG,强烈建议你坚持BufferedImage接口。
+          * 
+          * 
           * @param ras Raster that is similar to those to be encoded later.
           * @param colorID the COLOR_ID for the encoded data.  This should
           *        match the data in the raster.
@@ -123,6 +162,13 @@ public class JPEGCodec {
           * abbreviated JPEG streams where the JPEG tables are coming from
           * some source other than a JPEG tables only stream.
           *
+          * <p>
+          *  这是一个用于创建JPEGEncodeParam对象的工厂方法。用户负责将colorID与给定数量的带匹配,应与要编码的数据匹配。否则可能导致压缩不良和/或图像质量差。
+          * 如果你不太了解JPEG,强烈建议你坚持BufferedImage接口。
+          * 
+          *  这也可以用作JPEGDecodeParam对象的工厂。然而,这种使用是非常罕见的,因为人们需要解码简缩的JPEG流,其中JPEG表来自除了仅JPEG流之外的一些源。
+          * 
+          * 
           * @param numBands the number of bands that will be encoded (max of four).
           * @param colorID the COLOR_ID for the encoded data.  This is used to
           * set reasonable defaults in the parameter object.  This must match
@@ -141,6 +187,8 @@ public class JPEGCodec {
          * that is initialized from the JPEGDecodeParam object.  All major
          * pieces of information will be initialized from the DecodeParam
          * (Markers, Tables, mappings).
+         * <p>
+         * 
          * @param jdp The JPEGDecodeParam object to copy.
          */
 

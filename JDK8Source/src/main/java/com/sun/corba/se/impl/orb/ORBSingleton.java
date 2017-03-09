@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.orb;
@@ -131,6 +135,13 @@ import com.sun.corba.se.spi.legacy.connection.LegacyServerSocketEndPointInfo;
  * used as a factory for immutable TypeCode instances.
  *
  * See ORBImpl.java for the real ORB implementation.
+ * <p>
+ *  受限的单例ORB实现。
+ * 
+ *  现在,这个类必须实现足够的功能来作为不可变的TypeCode实例的工厂。
+ * 
+ *  有关实际的ORB实现,请参阅ORBImpl.java。
+ * 
  */
 public class ORBSingleton extends ORB
 {
@@ -280,6 +291,9 @@ public class ORBSingleton extends ORB
     /*
      * Not strictly needed for TypeCode factory duty but these seem
      * harmless enough.
+     * <p>
+     *  不是严格需要TypeCode工厂任务,但这似乎是无害的。
+     * 
      */
 
     public NVList create_list(int count) {
@@ -321,6 +335,9 @@ public class ORBSingleton extends ORB
 
     /*
      * Things that aren't allowed.
+     * <p>
+     *  不允许的事情。
+     * 
      */
 
     public String[] list_initial_services ()
@@ -443,6 +460,10 @@ public class ORBSingleton extends ORB
 
 /*************************************************************************
     These are methods from com.sun.corba.se.impl.se.core.ORB
+/* <p>
+/*  这些是来自com.sun.corba.se.impl.se.core.ORB的方法
+/* 
+/* 
  ************************************************************************/
 
     private synchronized ORB getFullORB()
@@ -465,6 +486,9 @@ public class ORBSingleton extends ORB
 
     /**
      * Return the service context registry
+     * <p>
+     *  返回服务上下文注册表
+     * 
      */
     public ServiceContextRegistry getServiceContextRegistry()
     {
@@ -473,6 +497,9 @@ public class ORBSingleton extends ORB
 
     /**
      * Get the transient server ID
+     * <p>
+     *  获取临时服务器ID
+     * 
      */
     public int getTransientServerId()
     {
@@ -481,6 +508,9 @@ public class ORBSingleton extends ORB
 
     /**
      * Return the bootstrap naming port specified in the ORBInitialPort param.
+     * <p>
+     *  返回在ORBInitialPort参数中指定的引导程序命名端口。
+     * 
      */
     public int getORBInitialPort()
     {
@@ -489,6 +519,9 @@ public class ORBSingleton extends ORB
 
     /**
      * Return the bootstrap naming host specified in the ORBInitialHost param.
+     * <p>
+     *  返回在ORBInitialHost参数中指定的引导命名主机。
+     * 
      */
     public String getORBInitialHost()
     {
@@ -524,6 +557,8 @@ public class ORBSingleton extends ORB
 
     /*
      * Things from corba.ORB.
+     * <p>
+     *  东西从corba.ORB。
      */
 
     public ORBVersion getORBVersion()

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -83,6 +84,35 @@ import java.net.*;
  * to {@code 127.0.0.1} to ensure that the generated stubs connect to the right
  * network interface.
  *
+ * <p>
+ *  RMI运行时使用<code> RMISocketFactory </code>实例,以获取RMI调用的客户端和服务器套接字。
+ * 应用程序可以使用<code> setSocketFactory </code>方法请求RMI运行时使用其套接字工厂实例,而不是默认实现。
+ * 
+ *  <p>默认套接字工厂实现执行三层方法来创建客户端套接字。首先,尝试直接套接字连接到远程VM。如果失败(由于防火墙),运行时使用HTTP和服务器的显式端口号。
+ * 如果防火墙不允许此类型的通信,则使用HTTP到服务器上的cgi-bin脚本来POST RMI调用。默认情况下禁用HTTP隧道机制。
+ * 此行为由{@code java.rmi.server.disableHttp}属性控制,其默认值为{@code true}。将此属性的值设置为{@code false}将启用HTTP隧道机制。
+ * 
+ *  <p> <strong>已弃用：HTTP隧道。</strong> <em>上述HTTP隧道机制,特别是带有显式端口的HTTP和到cgi-bin脚本的HTTP已弃用。
+ * 这些HTTP隧道机制将在平台的未来版本中删除。</em>。
+ * 
+ * <p>默认套接字工厂实现创建绑定到通配符地址的服务器套接字,它接受来自所有网络接口的请求。
+ * 
+ *  @implNote <p>您可以使用{@code RMISocketFactory}类来创建绑定到特定地址的服务器套接字,限制请求的来源。
+ * 例如,以下代码实现了将服务器套接字绑定到IPv4环回地址的套接字工厂。这将RMI限制为仅处理来自本地主机的请求。
+ * 
+ *  <end> {@ code} LoopbackSocketFactory extends RMISocketFactory {public ServerSocket createServerSocket(int port)throws IOException {return new ServerSocket(port,5,InetAddress.getByName("127.0.0.1")); }
+ * }。
+ * 
+ *  public Socket createSocket(String host,int port)throws IOException {//只调用默认的客户端套接字工厂返回RMISocketFactory.getDefaultSocketFactory().createSocket(host,port); }
+ * }。
+ * 
+ *  // ...
+ * 
+ *  RMISocketFactory.setSocketFactory(new LoopbackSocketFactory()); } </pre>
+ * 
+ *  将{@code java.rmi.server.hostname}系统属性设置为{@code 127.0.0.1},以确保生成的存根连接到正确的网络接口。
+ * 
+ * 
  * @author  Ann Wollrath
  * @author  Peter Jones
  * @since   JDK1.1
@@ -100,6 +130,10 @@ public abstract class RMISocketFactory
 
     /**
      * Constructs an <code>RMISocketFactory</code>.
+     * <p>
+     *  构造一个<code> RMISocketFactory </code>。
+     * 
+     * 
      * @since JDK1.1
      */
     public RMISocketFactory() {
@@ -108,6 +142,10 @@ public abstract class RMISocketFactory
 
     /**
      * Creates a client socket connected to the specified host and port.
+     * <p>
+     *  创建连接到指定主机和端口的客户端套接字。
+     * 
+     * 
      * @param  host   the host name
      * @param  port   the port number
      * @return a socket connected to the specified host and port.
@@ -120,6 +158,10 @@ public abstract class RMISocketFactory
     /**
      * Create a server socket on the specified port (port 0 indicates
      * an anonymous port).
+     * <p>
+     *  在指定端口上创建服务器套接字(端口0表示匿名端口)。
+     * 
+     * 
      * @param  port the port number
      * @return the server socket on the specified port
      * @exception IOException if an I/O error occurs during server socket
@@ -136,6 +178,11 @@ public abstract class RMISocketFactory
      * RMISocketFactory may only be set if the current security manager allows
      * setting a socket factory; if disallowed, a SecurityException will be
      * thrown.
+     * <p>
+     * 设置RMI从中获取套接字的全局套接字工厂(如果远程对象与特定的客户端和/或服务器套接字工厂没有关联)。 RMI套接字工厂只能设置一次。
+     * 注意：RMISocketFactory只能在当前安全管理器允许设置套接字工厂时设置;如果不允许,将抛出SecurityException。
+     * 
+     * 
      * @param fac the socket factory
      * @exception IOException if the RMI socket factory is already set
      * @exception  SecurityException  if a security manager exists and its
@@ -161,6 +208,10 @@ public abstract class RMISocketFactory
      * Returns the socket factory set by the <code>setSocketFactory</code>
      * method. Returns <code>null</code> if no socket factory has been
      * set.
+     * <p>
+     *  返回由<code> setSocketFactory </code>方法设置的套接字工厂。如果没有设置套接字工厂,则返回<code> null </code>。
+     * 
+     * 
      * @return the socket factory
      * @see #setSocketFactory(RMISocketFactory)
      * @since JDK1.1
@@ -175,6 +226,10 @@ public abstract class RMISocketFactory
      * by this RMI implementation.  This will be the factory used
      * by the RMI runtime when <code>getSocketFactory</code>
      * returns <code>null</code>.
+     * <p>
+     *  返回对此RMI实现使用的默认套接字工厂的引用。这将是RMI运行时在<code> getSocketFactory </code>返回<code> null </code>时使用的工厂。
+     * 
+     * 
      * @return the default RMI socket factory
      * @since JDK1.1
      */
@@ -197,6 +252,12 @@ public abstract class RMISocketFactory
      * to ensure the operation is allowed.
      * This could result in a <code>SecurityException</code>.
      *
+     * <p>
+     *  如果服务器套接字创建失败,则设置要由RMI运行时调用的失败处理程序。默认情况下,如果未安装故障处理程序并且服务器套接字创建失败,则RMI运行时会尝试重新创建服务器套接字。
+     * 
+     *  <p>如果有安全管理器,此方法首先调用安全管理器的<code> checkSetFactory </code>方法,以确保允许操作。
+     * 这可能导致<code> SecurityException </code>。
+     * 
      * @param fh the failure handler
      * @throws  SecurityException  if a security manager exists and its
      *          <code>checkSetFactory</code> method doesn't allow the
@@ -217,6 +278,9 @@ public abstract class RMISocketFactory
     /**
      * Returns the handler for socket creation failure set by the
      * <code>setFailureHandler</code> method.
+     * <p>
+     * 
+     * 
      * @return the failure handler
      * @see #setFailureHandler(RMIFailureHandler)
      * @since JDK1.1

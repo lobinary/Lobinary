@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,14 @@ import java.text.AttributedCharacterIterator;
  *       RepaintManager repaintManager = RepaintManager.currentManager(component);
  *       repaintManager.setDoubleBufferingEnabled(false);
  *
+ * <p>
+ *  图形子类支持图形调试。覆盖图形中的大多数方法。 DebugGraphics对象很少用手创建。
+ * 当JComponent的debugGraphicsOptions使用setDebugGraphicsOptions()方法更改时,它们最常被自动创建。
+ * <p>
+ *  注意：必须关闭双缓冲才能使用DebugGraphics：RepaintManager repaintManager = RepaintManager.currentManager(component)
+ * ; repaintManager.setDoubleBufferingEnabled(false);。
+ * 
+ * 
  * @see JComponent#setDebugGraphicsOptions
  * @see RepaintManager#currentManager
  * @see RepaintManager#setDoubleBufferingEnabled
@@ -71,6 +80,9 @@ public class DebugGraphics extends Graphics {
     /**
      * Constructs a new debug graphics context that supports slowed
      * down drawing.
+     * <p>
+     *  构造支持减慢绘制的新调试图形上下文。
+     * 
      */
     public DebugGraphics() {
         super();
@@ -82,6 +94,10 @@ public class DebugGraphics extends Graphics {
      * Constructs a debug graphics context from an existing graphics
      * context that slows down drawing for the specified component.
      *
+     * <p>
+     *  从现有的图形上下文构造调试图形上下文,减慢指定组件的绘制速度。
+     * 
+     * 
      * @param graphics  the Graphics context to slow down
      * @param component the JComponent to draw slowly
      */
@@ -94,6 +110,10 @@ public class DebugGraphics extends Graphics {
      * Constructs a debug graphics context from an existing graphics
      * context that supports slowed down drawing.
      *
+     * <p>
+     *  从支持减慢绘制的现有图形上下文构造调试图形上下文。
+     * 
+     * 
      * @param graphics  the Graphics context to slow down
      */
     public DebugGraphics(Graphics graphics) {
@@ -103,6 +123,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.create</code> to return a DebugGraphics object.
+     * <p>
+     *  覆盖<code> Graphics.create </code>以返回DebugGraphics对象。
+     * 
      */
     public Graphics create() {
         DebugGraphics debugGraphics;
@@ -117,6 +140,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.create</code> to return a DebugGraphics object.
+     * <p>
+     *  覆盖<code> Graphics.create </code>以返回DebugGraphics对象。
+     * 
      */
     public Graphics create(int x, int y, int width, int height) {
         DebugGraphics debugGraphics;
@@ -138,6 +164,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Sets the Color used to flash drawing operations.
+     * <p>
+     *  设置用于闪烁绘图操作的颜色。
+     * 
      */
     public static void setFlashColor(Color flashColor) {
         info().flashColor = flashColor;
@@ -145,6 +174,10 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Returns the Color used to flash drawing operations.
+     * <p>
+     *  返回用于绘制操作的颜色。
+     * 
+     * 
      * @see #setFlashColor
      */
     public static Color flashColor() {
@@ -153,6 +186,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Sets the time delay of drawing operation flashing.
+     * <p>
+     *  设置绘图操作闪烁的时间延迟。
+     * 
      */
     public static void setFlashTime(int flashTime) {
         info().flashTime = flashTime;
@@ -160,6 +196,10 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Returns the time delay of drawing operation flashing.
+     * <p>
+     *  返回绘图操作闪烁的时间延迟。
+     * 
+     * 
      * @see #setFlashTime
      */
     public static int flashTime() {
@@ -168,12 +208,17 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Sets the number of times that drawing operations will flash.
+     * <p>
+     *  设置绘图操作将闪烁的次数。
+     * 
      */
     public static void setFlashCount(int flashCount) {
         info().flashCount = flashCount;
     }
 
     /** Returns the number of times that drawing operations will flash.
+    /* <p>
+    /* 
       * @see #setFlashCount
       */
     public static int flashCount() {
@@ -181,12 +226,15 @@ public class DebugGraphics extends Graphics {
     }
 
     /** Sets the stream to which the DebugGraphics logs drawing operations.
+    /* <p>
       */
     public static void setLogStream(java.io.PrintStream stream) {
         info().stream = stream;
     }
 
     /** Returns the stream to which the DebugGraphics logs drawing operations.
+    /* <p>
+    /* 
       * @see #setLogStream
       */
     public static java.io.PrintStream logStream() {
@@ -194,6 +242,7 @@ public class DebugGraphics extends Graphics {
     }
 
     /** Sets the Font used for text drawing operations.
+    /* <p>
       */
     public void setFont(Font aFont) {
         if (debugLog()) {
@@ -203,6 +252,8 @@ public class DebugGraphics extends Graphics {
     }
 
     /** Returns the Font used for text drawing operations.
+    /* <p>
+    /* 
       * @see #setFont
       */
     public Font getFont() {
@@ -210,6 +261,7 @@ public class DebugGraphics extends Graphics {
     }
 
     /** Sets the color to be used for drawing and filling lines and shapes.
+    /* <p>
       */
     public void setColor(Color aColor) {
         if (debugLog()) {
@@ -219,6 +271,8 @@ public class DebugGraphics extends Graphics {
     }
 
     /** Returns the Color used for text drawing operations.
+    /* <p>
+    /* 
       * @see #setColor
       */
     public Color getColor() {
@@ -232,6 +286,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.getFontMetrics</code>.
+     * <p>
+     *  覆盖<code> Graphics.getFontMetrics </code>。
+     * 
      */
     public FontMetrics getFontMetrics() {
         return graphics.getFontMetrics();
@@ -239,6 +296,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.getFontMetrics</code>.
+     * <p>
+     *  覆盖<code> Graphics.getFontMetrics </code>。
+     * 
      */
     public FontMetrics getFontMetrics(Font f) {
         return graphics.getFontMetrics(f);
@@ -246,6 +306,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.translate</code>.
+     * <p>
+     *  覆盖<code> Graphics.translate </code>。
+     * 
      */
     public void translate(int x, int y) {
         if (debugLog()) {
@@ -259,6 +322,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.setPaintMode</code>.
+     * <p>
+     * 替换<code> Graphics.setPaintMode </code>。
+     * 
      */
     public void setPaintMode() {
         if (debugLog()) {
@@ -269,6 +335,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.setXORMode</code>.
+     * <p>
+     *  覆盖<code> Graphics.setXORMode </code>。
+     * 
      */
     public void setXORMode(Color aColor) {
         if (debugLog()) {
@@ -279,6 +348,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.getClipBounds</code>.
+     * <p>
+     *  覆盖<code> Graphics.getClipBounds </code>。
+     * 
      */
     public Rectangle getClipBounds() {
         return graphics.getClipBounds();
@@ -286,6 +358,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.clipRect</code>.
+     * <p>
+     *  覆盖<code> Graphics.clipRect </code>。
+     * 
      */
     public void clipRect(int x, int y, int width, int height) {
         graphics.clipRect(x, y, width, height);
@@ -298,6 +373,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.setClip</code>.
+     * <p>
+     *  覆盖<code> Graphics.setClip </code>。
+     * 
      */
     public void setClip(int x, int y, int width, int height) {
         graphics.setClip(x, y, width, height);
@@ -309,6 +387,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.getClip</code>.
+     * <p>
+     *  覆盖<code> Graphics.getClip </code>。
+     * 
      */
     public Shape getClip() {
         return graphics.getClip();
@@ -316,6 +397,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.setClip</code>.
+     * <p>
+     *  覆盖<code> Graphics.setClip </code>。
+     * 
      */
     public void setClip(Shape clip) {
         graphics.setClip(clip);
@@ -327,6 +411,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawRect</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawRect </code>。
+     * 
      */
     public void drawRect(int x, int y, int width, int height) {
         DebugGraphicsInfo info = info();
@@ -361,6 +448,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.fillRect</code>.
+     * <p>
+     *  覆盖<code> Graphics.fillRect </code>。
+     * 
      */
     public void fillRect(int x, int y, int width, int height) {
         DebugGraphicsInfo info = info();
@@ -395,6 +485,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.clearRect</code>.
+     * <p>
+     *  覆盖<code> Graphics.clearRect </code>。
+     * 
      */
     public void clearRect(int x, int y, int width, int height) {
         DebugGraphicsInfo info = info();
@@ -429,6 +522,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawRoundRect</code>.
+     * <p>
+     *  替换<code> Graphics.drawRoundRect </code>。
+     * 
      */
     public void drawRoundRect(int x, int y, int width, int height,
                               int arcWidth, int arcHeight) {
@@ -467,6 +563,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.fillRoundRect</code>.
+     * <p>
+     *  覆盖<code> Graphics.fillRoundRect </code>。
+     * 
      */
     public void fillRoundRect(int x, int y, int width, int height,
                               int arcWidth, int arcHeight) {
@@ -505,6 +604,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawLine</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawLine </code>。
+     * 
      */
     public void drawLine(int x1, int y1, int x2, int y2) {
         DebugGraphicsInfo info = info();
@@ -539,6 +641,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.draw3DRect</code>.
+     * <p>
+     *  覆盖<code> Graphics.draw3DRect </code>。
+     * 
      */
     public void draw3DRect(int x, int y, int width, int height,
                            boolean raised) {
@@ -574,6 +679,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.fill3DRect</code>.
+     * <p>
+     *  覆盖<code> Graphics.fill3DRect </code>。
+     * 
      */
     public void fill3DRect(int x, int y, int width, int height,
                            boolean raised) {
@@ -609,6 +717,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawOval</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawOval </code>。
+     * 
      */
     public void drawOval(int x, int y, int width, int height) {
         DebugGraphicsInfo info = info();
@@ -642,6 +753,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.fillOval</code>.
+     * <p>
+     *  覆盖<code> Graphics.fillOval </code>。
+     * 
      */
     public void fillOval(int x, int y, int width, int height) {
         DebugGraphicsInfo info = info();
@@ -675,6 +789,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawArc</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawArc </code>。
+     * 
      */
     public void drawArc(int x, int y, int width, int height,
                         int startAngle, int arcAngle) {
@@ -712,6 +829,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.fillArc</code>.
+     * <p>
+     *  覆盖<code> Graphics.fillArc </code>。
+     * 
      */
     public void fillArc(int x, int y, int width, int height,
                         int startAngle, int arcAngle) {
@@ -749,6 +869,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawPolyline</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawPolyline </code>。
+     * 
      */
     public void drawPolyline(int xPoints[], int yPoints[], int nPoints) {
         DebugGraphicsInfo info = info();
@@ -784,6 +907,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawPolygon</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawPolygon </code>。
+     * 
      */
     public void drawPolygon(int xPoints[], int yPoints[], int nPoints) {
         DebugGraphicsInfo info = info();
@@ -819,6 +945,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.fillPolygon</code>.
+     * <p>
+     *  覆盖<code> Graphics.fillPolygon </code>。
+     * 
      */
     public void fillPolygon(int xPoints[], int yPoints[], int nPoints) {
         DebugGraphicsInfo info = info();
@@ -854,6 +983,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawString</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawString </code>。
+     * 
      */
     public void drawString(String aString, int x, int y) {
         DebugGraphicsInfo info = info();
@@ -889,6 +1021,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawString</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawString </code>。
+     * 
      */
     public void drawString(AttributedCharacterIterator iterator, int x, int y) {
         DebugGraphicsInfo info = info();
@@ -924,6 +1059,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawBytes</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawBytes </code>。
+     * 
      */
     public void drawBytes(byte data[], int offset, int length, int x, int y) {
         DebugGraphicsInfo info = info();
@@ -960,6 +1098,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawChars</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawChars </code>。
+     * 
      */
     public void drawChars(char data[], int offset, int length, int x, int y) {
         DebugGraphicsInfo info = info();
@@ -996,6 +1137,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawImage</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawImage </code>。
+     * 
      */
     public boolean drawImage(Image img, int x, int y,
                              ImageObserver observer) {
@@ -1040,6 +1184,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawImage</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawImage </code>。
+     * 
      */
     public boolean drawImage(Image img, int x, int y, int width, int height,
                              ImageObserver observer) {
@@ -1084,6 +1231,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawImage</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawImage </code>。
+     * 
      */
     public boolean drawImage(Image img, int x, int y,
                              Color bgcolor,
@@ -1130,6 +1280,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawImage</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawImage </code>。
+     * 
      */
     public boolean drawImage(Image img, int x, int y,int width, int height,
                              Color bgcolor,
@@ -1177,6 +1330,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawImage</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawImage </code>。
+     * 
      */
     public boolean drawImage(Image img,
                              int dx1, int dy1, int dx2, int dy2,
@@ -1227,6 +1383,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.drawImage</code>.
+     * <p>
+     *  覆盖<code> Graphics.drawImage </code>。
+     * 
      */
     public boolean drawImage(Image img,
                              int dx1, int dy1, int dx2, int dy2,
@@ -1284,6 +1443,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.copyArea</code>.
+     * <p>
+     *  覆盖<code> Graphics.copyArea </code>。
+     * 
      */
     public void copyArea(int x, int y, int width, int height,
                          int destX, int destY) {
@@ -1305,6 +1467,9 @@ public class DebugGraphics extends Graphics {
 
     /**
      * Overrides <code>Graphics.dispose</code>.
+     * <p>
+     * 覆盖<code> Graphics.dispose </code>。
+     * 
      */
     public void dispose() {
         graphics.dispose();
@@ -1315,6 +1480,10 @@ public class DebugGraphics extends Graphics {
     /**
      * Returns the drawingBuffer value.
      *
+     * <p>
+     *  返回drawingBuffer值。
+     * 
+     * 
      * @return true if this object is drawing from a Buffer
      */
     public boolean isDrawingBuffer() {
@@ -1336,6 +1505,10 @@ public class DebugGraphics extends Graphics {
       * creates a new Frame that shows each operation on an
       * offscreen buffer. The value of <b>options</b> is bitwise OR'd into
       * the current value. To disable debugging use NONE_OPTION.
+      * <p>
+      *  操作。 <b> options </b>的值表示应如何显示此信息。 LOG_OPTION导致打印文本消息。 FLASH_OPTION导致绘图闪烁几次。
+      *  BUFFERED_OPTION创建一个新的框架,显示屏幕外缓冲区上的每个操作。 <b>选项</b>的值按位"或"到当前值中。要禁用调试,请使用NONE_OPTION。
+      * 
       */
     public void setDebugOptions(int options) {
         if (options != 0) {
@@ -1356,6 +1529,8 @@ public class DebugGraphics extends Graphics {
     }
 
     /** Returns the current debugging options for this DebugGraphics.
+    /* <p>
+    /* 
       * @see #setDebugOptions
       */
     public int getDebugOptions() {
@@ -1364,12 +1539,16 @@ public class DebugGraphics extends Graphics {
 
     /** Static wrapper method for DebugGraphicsInfo.setDebugOptions(). Stores
       * options on a per component basis.
+      * <p>
+      *  选项。
+      * 
       */
     static void setDebugOptions(JComponent component, int options) {
         info().setDebugOptions(component, options);
     }
 
     /** Static wrapper method for DebugGraphicsInfo.getDebugOptions().
+    /* <p>
       */
     static int getDebugOptions(JComponent component) {
         DebugGraphicsInfo debugGraphicsInfo = info();
@@ -1383,6 +1562,9 @@ public class DebugGraphics extends Graphics {
     /** Returns non-zero if <b>component</b> should display with DebugGraphics,
       * zero otherwise. Walks the JComponent's parent tree to determine if
       * any debugging options have been set.
+      * <p>
+      *  零。遍历JComponent的父树以确定是否已设置任何调试选项。
+      * 
       */
     static int shouldComponentDebug(JComponent component) {
         DebugGraphicsInfo info = info();
@@ -1403,6 +1585,9 @@ public class DebugGraphics extends Graphics {
 
     /** Returns the number of JComponents that have debugging options turned
       * on.
+      * <p>
+      *  上。
+      * 
       */
     static int debugComponentCount() {
         DebugGraphicsInfo debugGraphicsInfo = info();
@@ -1427,6 +1612,7 @@ public class DebugGraphics extends Graphics {
     }
 
     /** Returns a DebugGraphics for use in buffering window.
+    /* <p>
       */
     private Graphics debugGraphics() {
         DebugGraphics        debugGraphics;
@@ -1451,6 +1637,7 @@ public class DebugGraphics extends Graphics {
     }
 
     /** Returns DebugGraphicsInfo, or creates one if none exists.
+    /* <p>
       */
     static DebugGraphicsInfo info() {
         DebugGraphicsInfo debugGraphicsInfo = (DebugGraphicsInfo)

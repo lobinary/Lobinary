@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -88,6 +89,26 @@ import sun.reflect.misc.ReflectUtil;
  * For more information about introspection and design patterns, please
  * consult the
  *  <a href="http://www.oracle.com/technetwork/java/javase/documentation/spec-136004.html">JavaBeans&trade; specification</a>.
+ * <p>
+ *  Introspector类为工具提供了一种标准方法,以了解目标Java Bean支持的属性,事件和方法。
+ * <p>
+ *  对于这三种信息中的每一种,Introspector将单独分析bean的类和超类,寻找显式或隐式信息,并使用该信息构建一个全面描述目标bean的BeanInfo对象。
+ * <p>
+ *  对于每个类"Foo",如果存在相应的"FooBeanInfo"类,则显式信息可以是可用的,当查询该信息时,该类提供非空值。
+ * 我们首先通过获取目标bean类的完整包限定名并附加"BeanInfo"来形成一个新的类名来查找BeanInfo类。
+ * 如果这样失败了,那么我们接受这个名称的最后一个classname组件,并在BeanInfo包搜索路径中指定的每个包中寻找该类。
+ * <p>
+ *  因此,对于诸如"sun.xyz.OurButton"这样的类,我们首先查找一个名为"sun.xyz.OurButtonBeanInfo"的BeanInfo类,如果失败了,我们将在BeanInfo搜索路
+ * 径中的每个包中查找一个OurButtonBeanInfo类。
+ * 使用默认搜索路径,这意味着寻找"sun.beans.infos.OurButtonBeanInfo"。
+ * <p>
+ * 如果一个类提供了关于自己的显式BeanInfo,那么我们将它添加到我们从分析任何派生类获得的BeanInfo信息中,但是我们认为显式信息对于当前类及其基类是确定的,并且不要继续向上超类链。
+ * <p>
+ *  如果我们没有在类上找到显式BeanInfo,我们使用低级反射来研究类的方法,并应用标准设计模式来标识属性访问器,事件源或公共方法。然后,我们继续分析类的超类并添加来自它的信息(并且可能在超类链上)。
+ * <p>
+ *  有关自省和设计模式的详情,请参阅<a href="http://www.oracle.com/technetwork/java/javase/documentation/spec-136004.html">
+ *  JavaBeans&trade;规格</a>。
+ * 
  */
 
 public class Introspector {
@@ -95,14 +116,23 @@ public class Introspector {
     // Flags that can be used to control getBeanInfo:
     /**
      * Flag to indicate to use of all beaninfo.
+     * <p>
+     *  指示使用所有beaninfo的标志。
+     * 
      */
     public final static int USE_ALL_BEANINFO           = 1;
     /**
      * Flag to indicate to ignore immediate beaninfo.
+     * <p>
+     *  指示忽略立即beaninfo的标志。
+     * 
      */
     public final static int IGNORE_IMMEDIATE_BEANINFO  = 2;
     /**
      * Flag to indicate to ignore all beaninfo.
+     * <p>
+     *  指示忽略所有beaninfo的标志。
+     * 
      */
     public final static int IGNORE_ALL_BEANINFO        = 3;
 
@@ -151,6 +181,12 @@ public class Introspector {
      * If the BeanInfo class for a Java Bean has been previously Introspected
      * then the BeanInfo class is retrieved from the BeanInfo cache.
      *
+     * <p>
+     *  对Java Bean的内省,并了解其所有属性,公开的方法和事件。
+     * <p>
+     *  如果一个Java Bean的BeanInfo类先前已被内省,那么从BeanInfo缓存中检索BeanInfo类。
+     * 
+     * 
      * @param beanClass  The bean class to be analyzed.
      * @return  A BeanInfo object describing the target bean.
      * @exception IntrospectionException if an exception occurs during
@@ -186,6 +222,12 @@ public class Introspector {
      * based on the same arguments then the BeanInfo class is retrieved
      * from the BeanInfo cache.
      *
+     * <p>
+     *  内省一个Java bean并了解它的所有属性,暴露的方法和事件,受一些控制标志。
+     * <p>
+     *  如果一个Java Bean的BeanInfo类以前基于相同的参数进行了内省,那么从BeanInfo缓存中检索BeanInfo类。
+     * 
+     * 
      * @param beanClass  The bean class to be analyzed.
      * @param flags  Flags to control the introspection.
      *     If flags == USE_ALL_BEANINFO then we use all of the BeanInfo
@@ -211,6 +253,12 @@ public class Introspector {
      * If the BeanInfo class for a Java Bean has been previously Introspected
      * based on the same arguments, then the BeanInfo class is retrieved
      * from the BeanInfo cache.
+     * <p>
+     * 内省一个Java bean并了解它的属性,暴露的方法,在给定的"停止"点下面。
+     * <p>
+     *  如果一个Java Bean的BeanInfo类以前基于相同的参数进行了内省,那么从BeanInfo缓存中检索BeanInfo类。
+     * 
+     * 
      * @return the BeanInfo for the bean
      * @param beanClass The bean class to be analyzed.
      * @param stopClass The baseclass at which to stop the analysis.  Any
@@ -244,6 +292,17 @@ public class Introspector {
      * previously introspected based on the same arguments then
      * the BeanInfo class is retrieved from the BeanInfo cache.
      *
+     * <p>
+     *  对一个Java Bean的内省,并了解它的所有属性,暴露的方法和事件,在一个给定的{@code stopClass}点下面受到一些控制{@code flags}。
+     * <dl>
+     *  </b> <dt>任何与指定{@code beanClass}相关联的BeanInfo将被忽略。</span> </span> 。
+     * </dd> <dt> IGNORE_ALL_BEANINFO </dt> <dd>与指定的{@code beanClass}或其任何父类关联的任何BeanInfo将被忽略。</dd>。
+     * </dl>
+     *  {@code stopClass}或其父类中的任何方法/属性/事件将在分析中被忽略。
+     * <p>
+     *  如果一个Java Bean的BeanInfo类先前已经基于相同的参数进行了内省,那么从BeanInfo缓存中检索BeanInfo类。
+     * 
+     * 
      * @param beanClass  the bean class to be analyzed
      * @param stopClass  the parent class at which to stop the analysis
      * @param flags      flags to control the introspection
@@ -278,6 +337,12 @@ public class Introspector {
      * Thus "FooBah" becomes "fooBah" and "X" becomes "x", but "URL" stays
      * as "URL".
      *
+     * <p>
+     *  获取字符串并将其转换为正常Java变量名大写的实用方法。这通常意味着将第一个字符从大写转换为小写,但是在(不常见)特殊情况下,当有多个字符并且第一个和第二个字符都是大写时,我们将其保留。
+     * <p>
+     *  因此,"FooBah"变为"fooBah","X"变为"x",但"URL"保持为"URL"。
+     * 
+     * 
      * @param  name The string to be decapitalized.
      * @return  The decapitalized version of the string.
      */
@@ -298,6 +363,10 @@ public class Introspector {
      * Gets the list of package names that will be used for
      *          finding BeanInfo classes.
      *
+     * <p>
+     * 获取将用于查找BeanInfo类的包名称列表。
+     * 
+     * 
      * @return  The array of package names that will be searched in
      *          order to find BeanInfo classes. The default value
      *          for this array is implementation-dependent; e.g.
@@ -317,6 +386,12 @@ public class Introspector {
      * <p>First, if there is a security manager, its <code>checkPropertiesAccess</code>
      * method is called. This could result in a SecurityException.
      *
+     * <p>
+     *  更改将用于查找BeanInfo类的包名称列表。如果参数路径为空,此方法的行为是未定义的。
+     * 
+     *  <p>首先,如果有安全管理器,它的<code> checkPropertiesAccess </code>方法被调用。这可能导致SecurityException。
+     * 
+     * 
      * @param path  Array of package names.
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkPropertiesAccess</code> method doesn't allow setting
@@ -338,6 +413,9 @@ public class Introspector {
      * not normally required.  It is normally only needed by advanced
      * tools that update existing "Class" objects in-place and need
      * to make the Introspector re-analyze existing Class objects.
+     * <p>
+     *  清除所有Introspector的内部缓存。通常不需要此方法。它通常只需要高级工具就地更新现有的"类"对象,并需要使Introspector重新分析现有的Class对象。
+     * 
      */
 
     public static void flushCaches() {
@@ -359,6 +437,13 @@ public class Introspector {
      * objects (such as subclasses), even though their state may include
      * information indirectly obtained from the target Class object.
      *
+     * <p>
+     *  清除给定类的Introspector的内部缓存信息。通常不需要此方法。通常只需要高级工具就地更新现有的"类"对象,并需要使Introspector重新分析现有的Class对象。
+     * 
+     *  请注意,只有与目标Class对象关联的直接状态才会被刷新。
+     * 我们不刷新具有相同名称的其他Class对象的状态,也不刷新任何相关的Class对象(如子类)的状态,即使它们的状态可能包括从目标Class对象间接获得的信息。
+     * 
+     * 
      * @param clz  Class object to be flushed.
      * @throws NullPointerException If the Class object is null.
      */
@@ -416,6 +501,9 @@ public class Introspector {
 
     /**
      * Constructs a GenericBeanInfo class from the state of the Introspector
+     * <p>
+     *  根据Introspector的状态构造GenericBeanInfo类
+     * 
      */
     private BeanInfo getBeanInfo() throws IntrospectionException {
 
@@ -441,6 +529,10 @@ public class Introspector {
      * then it checks to see if the class is its own BeanInfo. Finally,
      * the BeanInfo search path is prepended to the class and searched.
      *
+     * <p>
+     * 查找与类对应的显式BeanInfo类。首先,它在现有包中查找该类所定义的内容,然后检查该类是否为其自己的BeanInfo。最后,BeanInfo搜索路径被添加到类并被搜索。
+     * 
+     * 
      * @param beanClass  the class type of the bean
      * @return Instance of an explicit BeanInfo class or null if one isn't found.
      */
@@ -449,6 +541,8 @@ public class Introspector {
     }
 
     /**
+    /* <p>
+    /* 
      * @return An array of PropertyDescriptors describing the editable
      * properties supported by the target bean.
      */
@@ -572,6 +666,9 @@ public class Introspector {
 
     /**
      * Adds the property descriptor to the list store.
+     * <p>
+     *  将属性描述符添加到列表存储。
+     * 
      */
     private void addPropertyDescriptor(PropertyDescriptor pd) {
         String propName = pd.getName();
@@ -628,6 +725,9 @@ public class Introspector {
     /**
      * Populates the property descriptor table by merging the
      * lists of Property descriptors.
+     * <p>
+     *  通过合并属性描述符列表来填充属性描述符表。
+     * 
      */
     private void processPropertyDescriptors() {
         if (properties == null) {
@@ -850,6 +950,11 @@ public class Introspector {
      * types are the same.
      *
      * The most specific property descriptor will take precedence.
+     * <p>
+     *  仅当类型相同时才将属性描述符添加到indexedproperty描述符。
+     * 
+     *  最具体的属性描述符将优先。
+     * 
      */
     private PropertyDescriptor mergePropertyDescriptor(IndexedPropertyDescriptor ipd,
                                                        PropertyDescriptor pd) {
@@ -931,6 +1036,8 @@ public class Introspector {
     }
 
     /**
+    /* <p>
+    /* 
      * @return An array of EventSetDescriptors describing the kinds of
      * events fired by the target bean.
      */
@@ -1151,6 +1258,8 @@ public class Introspector {
     }
 
     /**
+    /* <p>
+    /* 
      * @return An array of MethodDescriptors describing the private
      * methods supported by the target bean.
      */
@@ -1264,6 +1373,9 @@ public class Introspector {
 
     /**
      * Creates a key for a method in a method cache.
+     * <p>
+     *  为方法缓存中的方法创建键。
+     * 
      */
     private static String makeQualifiedMethodName(String name, String[] params) {
         StringBuffer sb = new StringBuffer(name);
@@ -1323,6 +1435,9 @@ public class Introspector {
 
     /*
      * Internal method to return *public* methods within a class.
+     * <p>
+     *  在类中返回* public *方法的内部方法。
+     * 
      */
     private static Method[] getPublicDeclaredMethods(Class<?> clz) {
         // Looking up Class.getDeclaredMethods is relatively expensive,
@@ -1366,6 +1481,9 @@ public class Introspector {
     /**
      * Internal support for finding a target methodName with a given
      * parameter list on a given class.
+     * <p>
+     *  内部支持在给定类上使用给定的参数列表查找目标methodName。
+     * 
      */
     private static Method internalFindMethod(Class<?> start, String methodName,
                                                  int argCount, Class args[]) {
@@ -1425,6 +1543,9 @@ public class Introspector {
 
     /**
      * Find a target methodName on a given class.
+     * <p>
+     *  在给定类上找到一个目标methodName。
+     * 
      */
     static Method findMethod(Class<?> cls, String methodName, int argCount) {
         return findMethod(cls, methodName, argCount, null);
@@ -1436,6 +1557,12 @@ public class Introspector {
      * Used in the contructors of the EventSetDescriptor,
      * PropertyDescriptor and the IndexedPropertyDescriptor.
      * <p>
+     * <p>
+     *  在给定类上找到具有特定参数列表的目标methodName。
+     * <p>
+     *  用于EventSetDescriptor,PropertyDescriptor和IndexedPropertyDescriptor的结构。
+     * <p>
+     * 
      * @param cls The Class object on which to retrieve the method.
      * @param methodName Name of the method.
      * @param argCount Number of arguments for the desired method.
@@ -1455,6 +1582,9 @@ public class Introspector {
      * if class a is a subclass of class b, i.e. if a either "extends"
      * or "implements" b.
      * Note tht either or both "Class" objects may represent interfaces.
+     * <p>
+     *  如果类a等同于类b,或者如果类a是类b的子类,即如果"extends"或"implements"b,则返回true。注意,"类"对象中的一个或两个可以表示接口。
+     * 
      */
     static  boolean isSubclass(Class<?> a, Class<?> b) {
         // We rely on the fact that for any given java class or
@@ -1484,6 +1614,9 @@ public class Introspector {
 
     /**
      * Return true iff the given method throws the given exception.
+     * <p>
+     *  返回true如果给定的方法抛出给定的异常。
+     * 
      */
     private boolean throwsException(Method method, Class<?> exception) {
         Class exs[] = method.getExceptionTypes();
@@ -1499,6 +1632,9 @@ public class Introspector {
      * Try to create an instance of a named class.
      * First try the classloader of "sibling", then try the system
      * classloader then the class loader of the current Thread.
+     * <p>
+     *  尝试创建一个命名类的实例。首先尝试"sibling"的类加载器,然后尝试系统类加载器,然后尝试当前线程的类加载器。
+     * 
      */
     static Object instantiate(Class<?> sibling, String className)
                  throws InstantiationException, IllegalAccessException,
@@ -1518,6 +1654,11 @@ public class Introspector {
  * internal use.
  * <p>
  * Mostly this is used as a placeholder for the descriptors.
+ * <p>
+ *  Introspector的内部使用的包私有实现支持类。
+ * <p>
+ * 大多数情况下,这用作描述符的占位符。
+ * 
  */
 
 class GenericBeanInfo extends SimpleBeanInfo {
@@ -1548,6 +1689,7 @@ class GenericBeanInfo extends SimpleBeanInfo {
     /**
      * Package-private dup constructor
      * This must isolate the new object from any changes to the old object.
+     * <p>
      */
     GenericBeanInfo(GenericBeanInfo old) {
 

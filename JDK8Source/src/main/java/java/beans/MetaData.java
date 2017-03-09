@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,10 @@ import static sun.reflect.misc.ReflectUtil.isPackageAccessible;
  * classes should express their state in terms of their
  * own public APIs.
  *
+ * <p>
+ *  与<code> Intropector </code>类似,<code> MetaData </code>类包含<em> meta </em>对象,用于描述类应该根据自己的公共API表示状态的方式。
+ * 
+ * 
  * @see java.beans.Intropector
  *
  * @author Philip Milne
@@ -87,6 +92,10 @@ static final class NullPersistenceDelegate extends PersistenceDelegate {
 /**
  * The persistence delegate for <CODE>enum</CODE> classes.
  *
+ * <p>
+ *  <CODE>枚举</CODE>类的持久性委托。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static final class EnumPersistenceDelegate extends PersistenceDelegate {
@@ -267,6 +276,13 @@ static final class java_lang_reflect_Method_PersistenceDelegate extends Persiste
  * to avoid problems with <CODE>java.sql.Date</CODE>,
  * <CODE>java.sql.Time</CODE> and <CODE>java.sql.Timestamp</CODE>.
  *
+ * <p>
+ *  <CODE> java.util.Date </CODE>类的持久性委托。
+ * 不要扩展DefaultPersistenceDelegate以提高性能并避免使用<CODE> java.sql.Date </CODE>,<CODE> java.sql.Time </CODE>和<CODE>
+ *  java.sql.Timestamp </CODE> 。
+ *  <CODE> java.util.Date </CODE>类的持久性委托。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static class java_util_Date_PersistenceDelegate extends PersistenceDelegate {
@@ -290,6 +306,10 @@ static class java_util_Date_PersistenceDelegate extends PersistenceDelegate {
  * The persistence delegate for <CODE>java.sql.Timestamp</CODE> classes.
  * It supports nanoseconds.
  *
+ * <p>
+ *  <CODE> java.sql.Timestamp </CODE>类的持久性委托。它支持纳秒。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static final class java_sql_Timestamp_PersistenceDelegate extends java_util_Date_PersistenceDelegate {
@@ -308,6 +328,9 @@ static final class java_sql_Timestamp_PersistenceDelegate extends java_util_Date
 
     /**
      * Invoke Timstamp getNanos.
+     * <p>
+     *  调用TimStamp getNanos。
+     * 
      */
     private static int getNanos(Object obj) {
         if (getNanosMethod == null)
@@ -348,12 +371,21 @@ to repeating their initialization. These issues and questions around
 the ordering of delegates attached to interfaces have lead us to
 ignore any delegates attached to interfaces and force all persistence
 delegates to be registered with concrete classes.
+/* <p>
+/*  Hashtable和AbstractMap类没有共同的祖先,但可以使用单个持久性委托处理：一个专门使用Map本地方法的方法。
+/* 然而,由于在Map的情况下,AbstractMap和HashMap类都被声明为实现Map接口,使明显的实现倾向于重复它们的初始化。
+/* 关于连接到接口的代理的顺序的这些问题和问题导致我们忽略附加到接口的任何委托,并迫使所有持久性委托用具体类注册。
+/* 
 */
 
 /**
  * The base class for persistence delegates for inner classes
  * that can be created using {@link Collections}.
  *
+ * <p>
+ * 可以使用{@link Collections}创建的内部类的持久性委托的基类。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 private static abstract class java_util_Collections extends PersistenceDelegate {
@@ -573,6 +605,10 @@ private static abstract class java_util_Collections extends PersistenceDelegate 
 /**
  * The persistence delegate for <CODE>java.util.EnumMap</CODE> classes.
  *
+ * <p>
+ *  <CODE> java.util.EnumMap </CODE>类的持久性委托。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static final class java_util_EnumMap_PersistenceDelegate extends PersistenceDelegate {
@@ -592,6 +628,10 @@ static final class java_util_EnumMap_PersistenceDelegate extends PersistenceDele
 /**
  * The persistence delegate for <CODE>java.util.EnumSet</CODE> classes.
  *
+ * <p>
+ *  <CODE> java.util.EnumSet </CODE>类的持久化委托。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static final class java_util_EnumSet_PersistenceDelegate extends PersistenceDelegate {
@@ -713,6 +753,10 @@ static final class java_beans_beancontext_BeanContextSupport_PersistenceDelegate
  * It is impossible to use {@link DefaultPersistenceDelegate}
  * because this class does not have any properties.
  *
+ * <p>
+ *  {@link Insets}的持久性委托。不可能使用{@link DefaultPersistenceDelegate},因为这个类没有任何属性。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static final class java_awt_Insets_PersistenceDelegate extends PersistenceDelegate {
@@ -737,6 +781,10 @@ static final class java_awt_Insets_PersistenceDelegate extends PersistenceDelega
  * It is impossible to use {@link DefaultPersistenceDelegate}
  * because size of the font can be float value.
  *
+ * <p>
+ *  {@link Font}的持久委托。不可能使用{@link DefaultPersistenceDelegate},因为字体的大小可以是浮点值。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static final class java_awt_Font_PersistenceDelegate extends PersistenceDelegate {
@@ -806,6 +854,10 @@ static final class java_awt_Font_PersistenceDelegate extends PersistenceDelegate
  * It is impossible to use {@link DefaultPersistenceDelegate}
  * because this class have no public constructor.
  *
+ * <p>
+ *  {@link AWTKeyStroke}的持久性委托。不可能使用{@link DefaultPersistenceDelegate},因为这个类没有公共构造函数。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static final class java_awt_AWTKeyStroke_PersistenceDelegate extends PersistenceDelegate {
@@ -1228,6 +1280,10 @@ static final class javax_swing_JMenu_PersistenceDelegate extends DefaultPersiste
  * It is impossible to use {@link DefaultPersistenceDelegate}
  * because this class does not have writable properties.
  *
+ * <p>
+ *  {@link MatteBorder}的持久性委托。不可能使用{@link DefaultPersistenceDelegate},因为此类不具有可写属性。
+ * 
+ * 
  * @author Sergey A. Malenkov
  */
 static final class javax_swing_border_MatteBorder_PersistenceDelegate extends PersistenceDelegate {
@@ -1260,6 +1316,9 @@ static final class javax_swing_JMenu_PersistenceDelegate extends DefaultPersiste
         }
     }
 }
+/* <p>
+/*  static final class javax_swing_JMenu_PersistenceDelegate extends DefaultPersistenceDelegate {protected void initialize(Class <?> type,Object oldInstance,Object newInstance,Encoder out){super.initialize(type,oldInstance,newInstance,out); javax.swing.JMenu m =(javax.swing.JMenu)oldInstance; javax.swing.JMenu n =(javax.swing.JMenu)newInstance; for(int i = n.getItemCount(); i <m.getItemCount(); i ++){invokeStatement(oldInstance,"add",new Object [] {m​​.getItem(i)},out); }}}。
+/* 
 */
 
 /**
@@ -1268,6 +1327,10 @@ static final class javax_swing_JMenu_PersistenceDelegate extends DefaultPersiste
  * because this class has special rule for serialization:
  * it should be converted to {@link ColorUIResource}.
  *
+ * <p>
+ * {@link PrintColorUIResource}的持久性委托。
+ * 不可能使用{@link DefaultPersistenceDelegate},因为这个类有特殊的序列化规则：它应该转换为{@link ColorUIResource}。
+ * 
  * @see PrintColorUIResource#writeReplace
  *
  * @author Sergey A. Malenkov

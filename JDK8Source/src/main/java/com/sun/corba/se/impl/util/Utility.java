@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.util;
@@ -79,6 +83,9 @@ import com.sun.corba.se.impl.logging.OMGSystemException ;
 
 /**
  *  Handy class full of static functions.
+ * <p>
+ *  Handy类充满了静态函数。
+ * 
  */
 public final class Utility {
 
@@ -100,6 +107,10 @@ public final class Utility {
      * Ensure that stubs, ties, and implementation objects
      * are 'connected' to the runtime. Converts implementation
      * objects to a type suitable for sending on the wire.
+     * <p>
+     *  确保存根,绑定和实现对象"连接"到运行时。将实现对象转换为适合在线上发送的类型。
+     * 
+     * 
      * @param obj the object to connect.
      * @param orb the ORB to connect to if obj is exported to IIOP.
      * @param convertToStub true if implementation types should be
@@ -167,6 +178,9 @@ public final class Utility {
     /*
      * Get a new instance of an RMI-IIOP Tie for the
      * given server object.
+     * <p>
+     *  获取给定服务器对象的RMI-IIOP绑定的新实例。
+     * 
      */
     public static Tie loadTie(Remote obj) {
         Tie result = null;
@@ -237,6 +251,9 @@ public final class Utility {
 
     /*
      * Load an RMI-IIOP Tie
+     * <p>
+     *  加载RMI-IIOP绑带
+     * 
      */
     private static Tie loadTie(Class theClass)
     {
@@ -247,6 +264,9 @@ public final class Utility {
     /*
      * Clear the stub/tie caches. Intended for use by
      * test code.
+     * <p>
+     *  清除存根/连接高速缓存。适用于测试代码。
+     * 
      */
     public static void clearCaches() {
         synchronized (tieToStubCache) {
@@ -262,6 +282,10 @@ public final class Utility {
 
     /*
      * Load a class and check that it is assignable to a given type.
+     * <p>
+     *  加载类并检查它是否可分配给给定类型。
+     * 
+     * 
      * @param className the class name.
      * @param remoteCodebase the codebase to use. May be null.
      * @param loader the class loader of last resort. May be null.
@@ -333,6 +357,10 @@ public final class Utility {
 
     /*
      * Load a class and check that it is compatible with a given type.
+     * <p>
+     *  加载类并检查它是否与给定类型兼容。
+     * 
+     * 
      * @param className the class name.
      * @param remoteCodebase the codebase to use. May be null.
      * @param loadingContext the loading context. May be null.
@@ -384,6 +412,11 @@ public final class Utility {
      * Get the helper for an IDLValue
      *
      * Throws MARSHAL exception if no helper found.
+     * <p>
+     *  获取IDLValue的帮助器
+     * 
+     *  抛出MARSHAL如果没有找到帮助,则抛出异常。
+     * 
      */
     public static BoxedValueHelper getHelper(Class clazz, String codebase,
         String repId)
@@ -428,6 +461,11 @@ public final class Utility {
      * Get the factory for an IDLValue
      *
      * Throws MARSHAL exception if no factory found.
+     * <p>
+     *  获取IDLValue的工厂
+     * 
+     *  抛出MARSHAL如果没有找到工厂则抛出异常。
+     * 
      */
     public static ValueFactory getFactory(Class clazz, String codebase,
                                ORB orb, String repId)
@@ -487,6 +525,10 @@ public final class Utility {
 
     /*
      * Load an RMI-IIOP Stub given a Tie.
+     * <p>
+     *  加载RMI-IIOP Stub给定一个Tie。
+     * 
+     * 
      * @param tie the tie.
      * @param stubClass the stub class. May be null.
      * @param remoteCodebase the codebase to use. May be null.
@@ -575,6 +617,10 @@ public final class Utility {
     /*
      * Load an RMI-IIOP Stub given a Tie, but do not look in the cache.
      * This method must be called with the lock held for tieToStubCache.
+     * <p>
+     *  加载RMI-IIOP Stub给定一个Tie,但不要在缓存中查找。必须使用为tieToStubCache保持的锁来调用此方法。
+     * 
+     * 
      * @param tie the tie.
      * @param stubFactory the stub factory. May be null.
      * @param remoteCodebase the codebase to use. May be null.
@@ -693,6 +739,9 @@ public final class Utility {
      * If we loadStub(Tie,...) stashed away a tie which was
      * not connected, remove it from the cache and return
      * it.
+     * <p>
+     *  如果我们loadStub(Tie,...)隐藏了一个没有连接的tie,从缓存中删除它并返回它。
+     * 
      */
     public static Tie getAndForgetTie (org.omg.CORBA.Object stub) {
         synchronized (stubToTieCache) {
@@ -702,6 +751,9 @@ public final class Utility {
 
     /*
      * Remove any cached Stub for the given tie.
+     * <p>
+     *  删除给定tie的任何缓存的Stub。
+     * 
      */
     public static void purgeStubForTie (Tie tie) {
         StubEntry entry;
@@ -717,6 +769,9 @@ public final class Utility {
 
     /*
      * Remove cached tie/servant pair.
+     * <p>
+     *  删除缓存的领带/仆对。
+     * 
      */
     public static void purgeTieAndServant (Tie tie) {
         synchronized (tieCache) {
@@ -728,6 +783,9 @@ public final class Utility {
 
     /*
      * Convert a RepId to a stubName...
+     * <p>
+     *  将RepId转换为stubName ...
+     * 
      */
     public static String stubNameFromRepID (String repID) {
 
@@ -748,6 +806,9 @@ public final class Utility {
 
     /*
      * Load an RMI-IIOP Stub.  This is used in PortableRemoteObject.narrow.
+     * <p>
+     *  加载RMI-IIOP存根。这在PortableRemoteObject.narrow中使用。
+     * 
      */
     public static Remote loadStub (org.omg.CORBA.Object narrowFrom,
                                    Class narrowTo)
@@ -788,6 +849,9 @@ public final class Utility {
     /*
      * Load an RMI-IIOP Stub class.  This is used in the
      * StaticStubFactoryFactory code.
+     * <p>
+     *  加载RMI-IIOP Stub类。这在StaticStubFactoryFactory代码中使用。
+     * 
      */
     public static Class loadStubClass(String repID,
                                       String remoteCodebase,
@@ -826,6 +890,9 @@ public final class Utility {
 
     /**
      * Create an RMI stub name.
+     * <p>
+     *  创建RMI存根名称。
+     * 
      */
     public static String stubName (String className)
     {
@@ -872,6 +939,9 @@ public final class Utility {
 
     /**
      * Create an RMI tie name.
+     * <p>
+     *  创建RMI关系名称。
+     * 
      */
     public static String tieName (String className)
     {
@@ -901,6 +971,9 @@ public final class Utility {
 
     /**
      * Throws the CORBA equivalent of a java.io.NotSerializableException
+     * <p>
+     * 抛出CORBA等效的java.io.NotSerializableException
+     * 
      */
     public static void throwNotSerializableForCorba(String className) {
         throw omgWrapper.notSerializable( CompletionStatus.COMPLETED_MAYBE,
@@ -909,6 +982,9 @@ public final class Utility {
 
     /**
      * Create an IDL stub name.
+     * <p>
+     *  创建IDL存根名称。
+     * 
      */
     public static String idlStubName(String className)
     {
@@ -937,6 +1013,10 @@ public final class Utility {
     /**
      * Read an object reference from the input stream and narrow
      * it to the desired type.
+     * <p>
+     *  从输入流读取对象引用并缩小到所需类型。
+     * 
+     * 
      * @param in the stream to read from.
      * @throws ClassCastException if narrowFrom cannot be cast to narrowTo.
      */
@@ -954,6 +1034,10 @@ public final class Utility {
     /**
      * Read an abstract interface type from the input stream and narrow
      * it to the desired type.
+     * <p>
+     *  从输入流读取抽象接口类型,并将其缩小到所需类型。
+     * 
+     * 
      * @param in the stream to read from.
      * @throws ClassCastException if narrowFrom cannot be cast to narrowTo.
      */
@@ -970,6 +1054,7 @@ public final class Utility {
 
 
     /** Converts an Ascii Character into Hexadecimal digit
+    /* <p>
      */
     static int hexOf( char x )
     {

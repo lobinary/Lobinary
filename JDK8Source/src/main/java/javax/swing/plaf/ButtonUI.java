@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,9 @@ import java.awt.Insets;
 /**
  * Pluggable look and feel interface for JButton.
  *
+ * <p>
+ *  可插拔的外观和接口的JButton。
+ * 
  * @author Jeff Dinkins
  */
 public abstract class ButtonUI extends ComponentUI {

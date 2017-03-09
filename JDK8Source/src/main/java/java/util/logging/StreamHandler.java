@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,38 @@ import java.io.*;
  * <li>   com.foo.MyHandler.formatter=java.util.logging.SimpleFormatter </li>
  * </ul>
  * <p>
+ * <p>
+ *  基于流的日志<tt>处理程序</tt>。
+ * <p>
+ *  这主要是作为用于实现其他日志<tt>处理程序</tt>的基类或支持类。
+ * <p>
+ *  <tt> LogRecords </tt>发布到给定的<tt> java.io.OutputStream </tt>。
+ * <p>
+ *  <b>配置：</b>默认情况下,每个<tt> StreamHandler </tt>都是使用以下<tt> LogManager </tt>配置属性初始化的,其中<tt>&lt; handler-nam
+ * e&gt; </tt>到处理程序的完全限定类名。
+ * 如果未定义属性(或具有无效值),则使用指定的默认值。
+ * <ul>
+ *  <li>&lt; handler-name&gt; .level指定<tt>处理程序</tt>(默认为<tt> Level.INFO </tt>)的默认级别。
+ *  </li> <li>&lt; handler-name&gt; .filter指定要使用的<tt> Filter </tt>类的名称(默认为<tt> Filter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .formatter指定要使用的<tt> Formatter </tt>类的名称(默认为<tt> java.util.logging.S
+ * impleFormatter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .filter指定要使用的<tt> Filter </tt>类的名称(默认为<tt> Filter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .encoding要使用的字符集编码的名称(默认为默认平台编码)。 </li>。
+ * </ul>
+ * <p>
+ *  例如,{@code StreamHandler}的属性将是：
+ * <ul>
+ *  <li> java.util.logging.StreamHandler.level = INFO </li> <li> java.util.logging.StreamHandler.formatt
+ * er = java.util.logging.SimpleFormatter </li>。
+ * </ul>
+ * <p>
+ * 对于自定义处理程序,例如com.foo.MyHandler,属性将是：
+ * <ul>
+ *  <li> com.foo.MyHandler.level = INFO </li> <li> com.foo.MyHandler.formatter = java.util.logging.Simpl
+ * eFormatter </li>。
+ * </ul>
+ * <p>
+ * 
  * @since 1.4
  */
 
@@ -101,6 +134,9 @@ public class StreamHandler extends Handler {
 
     /**
      * Create a <tt>StreamHandler</tt>, with no current output stream.
+     * <p>
+     *  创建<tt> StreamHandler </tt>,没有当前输出流。
+     * 
      */
     public StreamHandler() {
         sealed = false;
@@ -112,6 +148,10 @@ public class StreamHandler extends Handler {
      * Create a <tt>StreamHandler</tt> with a given <tt>Formatter</tt>
      * and output stream.
      * <p>
+     * <p>
+     *  使用给定的<tt>格式化程序</tt>和输出流创建<tt> StreamHandler </tt>。
+     * <p>
+     * 
      * @param out         the target output stream
      * @param formatter   Formatter to be used to format output
      */
@@ -130,6 +170,12 @@ public class StreamHandler extends Handler {
      * tail string is written and the stream is flushed and closed.
      * Then the output stream is replaced with the new output stream.
      *
+     * <p>
+     *  更改输出流。
+     * <P>
+     *  如果有当前输出流,则会写入<tt> Formatter </tt>的尾字符串,并且流被刷新并关闭。然后,输出流被替换为新的输出流。
+     * 
+     * 
      * @param out   New output stream.  May not be null.
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have <tt>LoggingPermission("control")</tt>.
@@ -161,6 +207,12 @@ public class StreamHandler extends Handler {
      * The encoding should be set before any <tt>LogRecords</tt> are written
      * to the <tt>Handler</tt>.
      *
+     * <p>
+     *  设置(或更改)此<tt>处理程序</tt>使用的字符编码。
+     * <p>
+     *  应在任何<tt> LogRecords </tt>写入<tt>处理程序</tt>之前设置编码。
+     * 
+     * 
      * @param encoding  The name of a supported character encoding.
      *        May be null, to indicate the default platform encoding.
      * @exception  SecurityException  if a security manager exists and if
@@ -198,6 +250,16 @@ public class StreamHandler extends Handler {
      * <tt>OutputStream</tt>, the <tt>Formatter</tt>'s "head" string is
      * written to the stream before the <tt>LogRecord</tt> is written.
      *
+     * <p>
+     *  格式化并发布<tt> LogRecord </tt>。
+     * <p>
+     *  <tt> StreamHandler </tt>首先检查是否有<tt> OutputStream </tt>,以及给定的<tt> LogRecord </tt>是否至少具有所需的日志级别。
+     * 如果不是,它默默地返回。如果是,则调用任何关联的<tt>过滤器</tt>来检查是否应该发布记录。如果是,则调用<tt> Formatter </tt>来格式化记录,然后将结果写入当前输出流。
+     * <p>
+     *  如果这是要写入给定<tt> OutputStream </tt>的第一个<tt> LogRecord </tt>,则<tt> Formatter </tt>的"head" <tt> LogRecord
+     *  </tt>已写入。
+     * 
+     * 
      * @param  record  description of the log event. A null record is
      *                 silently ignored and is not published
      */
@@ -237,6 +299,12 @@ public class StreamHandler extends Handler {
      * whether it satisfies any <tt>Filter</tt>.  It will also return false if
      * no output stream has been assigned yet or the LogRecord is null.
      * <p>
+     * <p>
+     *  检查此<tt>处理程序</tt>是否实际记录给定的<tt> LogRecord </tt>。
+     * <p>
+     * 此方法检查<tt> LogRecord </tt>是否具有适当的级别,以及是否满足任何<tt>过滤器</tt>。如果尚未分配输出流或LogRecord为null,它也将返回false。
+     * <p>
+     * 
      * @param record  a <tt>LogRecord</tt>
      * @return true if the <tt>LogRecord</tt> would be logged.
      *
@@ -251,6 +319,9 @@ public class StreamHandler extends Handler {
 
     /**
      * Flush any buffered messages.
+     * <p>
+     *  刷新任何缓冲的消息。
+     * 
      */
     @Override
     public synchronized void flush() {
@@ -294,6 +365,10 @@ public class StreamHandler extends Handler {
      * yet been written to the stream, it will be written before the
      * "tail" string.
      *
+     * <p>
+     *  关闭当前输出流。
+     * <p>
+     * 
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have LoggingPermission("control").
      */

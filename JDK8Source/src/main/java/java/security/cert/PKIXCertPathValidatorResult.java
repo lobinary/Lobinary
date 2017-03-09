@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,20 @@ import java.security.PublicKey;
  * provide the necessary locking. Multiple threads each manipulating
  * separate objects need not synchronize.
  *
+ * <p>
+ *  此类表示PKIX认证路径验证算法的成功结果。
+ * 
+ *  <p> {@code PKIXCertPathValidatorResult}的实例由实现PKIX算法的{@code CertPathValidator}对象的{@link CertPathValidator#validate validate}
+ * 方法返回。
+ * 
+ *  <p>所有{@code PKIXCertPathValidatorResult}对象都包含由验证算法产生的有效策略树和主体公钥,以及描述用作证书的信任锚的证书颁发机构(CA)的{@code TrustAnchor}
+ * 路径。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  除非另有说明,否则此类中定义的方法不是线程安全的。需要并发访问单个对象的多个线程应在它们之间同步并提供必要的锁定。每个操作单独对象的多个线程不需要同步。
+ * 
+ * 
  * @see CertPathValidatorResult
  *
  * @since       1.4
@@ -65,6 +80,10 @@ public class PKIXCertPathValidatorResult implements CertPathValidatorResult {
      * Creates an instance of {@code PKIXCertPathValidatorResult}
      * containing the specified parameters.
      *
+     * <p>
+     *  创建包含指定参数的{@code PKIXCertPathValidatorResult}实例。
+     * 
+     * 
      * @param trustAnchor a {@code TrustAnchor} describing the CA that
      * served as a trust anchor for the certification path
      * @param policyTree the immutable valid policy tree, or {@code null}
@@ -89,6 +108,10 @@ public class PKIXCertPathValidatorResult implements CertPathValidatorResult {
      * Returns the {@code TrustAnchor} describing the CA that served
      * as a trust anchor for the certification path.
      *
+     * <p>
+     *  返回描述用作认证路径的信任锚的CA的{@code TrustAnchor}。
+     * 
+     * 
      * @return the {@code TrustAnchor} (never {@code null})
      */
     public TrustAnchor getTrustAnchor() {
@@ -109,6 +132,15 @@ public class PKIXCertPathValidatorResult implements CertPathValidatorResult {
      * {@link PolicyNode#getParent PolicyNode.getParent} and
      * {@link PolicyNode#getChildren PolicyNode.getChildren} methods.
      *
+     * <p>
+     *  返回由PKIX认证路径验证算法生成的有效策略树的根节点。返回的{@code PolicyNode}对象和通过公共方法返回的任何对象都是不可变的。
+     * 
+     * <p>大多数应用程序不需要检查有效的策略树。他们可以通过在{@code PKIXParameters}中设置策略相关参数来实现其策略处理目标。
+     * 但是,更复杂的应用程序,特别是那些处理策略限定符的应用程序,可能需要使用{@link PolicyNode#getParent PolicyNode.getParent}和{@link PolicyNode#getChildren PolicyNode.getChildren}
+     * 方法遍历有效的策略树。
+     * <p>大多数应用程序不需要检查有效的策略树。他们可以通过在{@code PKIXParameters}中设置策略相关参数来实现其策略处理目标。
+     * 
+     * 
      * @return the root node of the valid policy tree, or {@code null}
      * if there are no valid policies
      */
@@ -120,6 +152,10 @@ public class PKIXCertPathValidatorResult implements CertPathValidatorResult {
      * Returns the public key of the subject (target) of the certification
      * path, including any inherited public key parameters if applicable.
      *
+     * <p>
+     *  返回认证路径主题(目标)的公钥,包括任何继承的公钥参数(如果适用)。
+     * 
+     * 
      * @return the public key of the subject (never {@code null})
      */
     public PublicKey getPublicKey() {
@@ -129,6 +165,10 @@ public class PKIXCertPathValidatorResult implements CertPathValidatorResult {
     /**
      * Returns a copy of this object.
      *
+     * <p>
+     *  返回此对象的副本。
+     * 
+     * 
      * @return the copy
      */
     public Object clone() {
@@ -144,6 +184,9 @@ public class PKIXCertPathValidatorResult implements CertPathValidatorResult {
      * Return a printable representation of this
      * {@code PKIXCertPathValidatorResult}.
      *
+     * <p>
+     *  返回此{@code PKIXCertPathValidatorResult}的可打印表示。
+     * 
      * @return a {@code String} describing the contents of this
      *         {@code PKIXCertPathValidatorResult}
      */

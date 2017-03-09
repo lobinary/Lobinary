@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,28 @@ import java.util.Set;
  * provide the necessary locking. Multiple threads each manipulating
  * separate objects need not synchronize.
  *
+ * <p>
+ *  用作PKIX {@code CertPathValidator}算法输入的参数。
+ * <p>
+ *  PKIX {@code CertPathValidator}根据PKIX认证路径验证算法使用这些参数验证{@code CertPath}。
+ * 
+ *  <p>要实例化{@code PKIXParameters}对象,应用程序必须指定一个或多个由PKIX认证路径验证算法定义的最受信任的CA </i>。最可信的CA可以使用两个构造函数之一指定。
+ * 应用程序可以调用{@link #PKIXParameters(Set)PKIXParameters(Set)},指定{@code Set} {@code TrustAnchor}对象,每个对象标识一个最
+ * 可信的CA.或者,应用程序可以调用{@link #PKIXParameters(KeyStore)PKIXParameters(KeyStore)},指定包含受信任证书条目的{@code KeyStore}
+ * 实例,每个条目都将被视为最受信任的CA.。
+ *  <p>要实例化{@code PKIXParameters}对象,应用程序必须指定一个或多个由PKIX认证路径验证算法定义的最受信任的CA </i>。最可信的CA可以使用两个构造函数之一指定。
+ * <p>
+ *  一旦创建了{@code PKIXParameters}对象,就可以指定其他参数(例如通过调用{@link #setInitialPolicies setInitialPolicies}或{@link #setDate setDate}
+ * ),然后传递{@code PKIXParameters}并将{@code CertPath}验证为{@link CertPathValidator#validate CertPathValidator.validate}
+ * 。
+ * <p>
+ * 未设置(或设置为{@code null})的任何参数都将设置为该参数的默认值。 {@code date}参数的默认值为{@code null},表示路径验证的当前时间。其余参数的默认值为最小约束。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  除非另有说明,否则此类中定义的方法不是线程安全的。需要并发访问单个对象的多个线程应在它们之间同步并提供必要的锁定。每个操作单独对象的多个线程不需要同步。
+ * 
+ * 
  * @see CertPathValidator
  *
  * @since       1.4
@@ -106,6 +129,12 @@ public class PKIXParameters implements CertPathParameters {
      * Note that the {@code Set} is copied to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  使用指定的{@code Set}最受信任的CA创建{@code PKIXParameters}的实例。集合的每个元素是{@link TrustAnchor TrustAnchor}。
+     * <p>
+     *  请注意,复制{@code Set}以防止后续修改。
+     * 
+     * 
      * @param trustAnchors a {@code Set} of {@code TrustAnchor}s
      * @throws InvalidAlgorithmParameterException if the specified
      * {@code Set} is empty {@code (trustAnchors.isEmpty() == true)}
@@ -131,6 +160,11 @@ public class PKIXParameters implements CertPathParameters {
      * Only keystore entries that contain trusted {@code X509Certificates}
      * are considered; all other certificate types are ignored.
      *
+     * <p>
+     *  创建{@code PKIXParameters}的实例,该实例从指定的{@code KeyStore}中包含的受信任证书条目填充一组最受信任的CA.仅考虑包含受信任的{@code X509Certificates}
+     * 的密钥库条目;所有其他证书类型将被忽略。
+     * 
+     * 
      * @param keystore a {@code KeyStore} from which the set of
      * most-trusted CAs will be populated
      * @throws KeyStoreException if the keystore has not been initialized
@@ -164,6 +198,10 @@ public class PKIXParameters implements CertPathParameters {
      * Returns an immutable {@code Set} of the most-trusted
      * CAs.
      *
+     * <p>
+     *  返回不可变的{@code Set}最受信任的CA.
+     * 
+     * 
      * @return an immutable {@code Set} of {@code TrustAnchor}s
      * (never {@code null})
      *
@@ -179,6 +217,12 @@ public class PKIXParameters implements CertPathParameters {
      * Note that the {@code Set} is copied to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  设置最受信任的CA的{@code Set}。
+     * <p>
+     *  请注意,复制{@code Set}以防止后续修改。
+     * 
+     * 
      * @param trustAnchors a {@code Set} of {@code TrustAnchor}s
      * @throws InvalidAlgorithmParameterException if the specified
      * {@code Set} is empty {@code (trustAnchors.isEmpty() == true)}
@@ -218,6 +262,11 @@ public class PKIXParameters implements CertPathParameters {
      * {@code Set}, which is interpreted as meaning that any policy would
      * be acceptable.
      *
+     * <p>
+     * 返回一个不变的{@code Set}初始策略标识符(OID字符串),指示证书用户可以接受这些策略中的任何一个以用于证书路径处理。
+     * 默认返回值是一个空的{@code Set},这被解释为意味着任何策略都是可以接受的。
+     * 
+     * 
      * @return an immutable {@code Set} of initial policy OIDs in
      * {@code String} format, or an empty {@code Set} (implying any
      * policy is acceptable). Never returns {@code null}.
@@ -240,6 +289,13 @@ public class PKIXParameters implements CertPathParameters {
      * Note that the {@code Set} is copied to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  设置初始策略标识符(OID字符串)的{@code Set},指示证书用户可接受这些策略中的任何一个,以便进行证书路径处理。
+     * 默认情况下,任何策略都是可接受的(即所有策略),因此,希望允许任何策略为可接受的用户不需要调用此方法,或者可以使用空的{@code Set}(或{@code null })。
+     * <p>
+     *  请注意,复制{@code Set}以防止后续修改。
+     * 
+     * 
      * @param initialPolicies a {@code Set} of initial policy
      * OIDs in {@code String} format (or {@code null})
      * @throws ClassCastException if any of the elements in the set are
@@ -271,6 +327,13 @@ public class PKIXParameters implements CertPathParameters {
      * Note that the {@code List} is copied to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  设置要用于查找证书和CRL的{@code CertStore}的列表。可能是{@code null},在这种情况下不会使用{@code CertStore}。
+     * 列表中的第一个{@code CertStore}可能优先于稍后显示的那些。
+     * <p>
+     *  请注意,复制{@code List}以防止后续修改。
+     * 
+     * 
      * @param stores a {@code List} of {@code CertStore}s (or
      * {@code null})
      * @throws ClassCastException if any of the elements in the list are
@@ -296,6 +359,10 @@ public class PKIXParameters implements CertPathParameters {
      * Adds a {@code CertStore} to the end of the list of
      * {@code CertStore}s used in finding certificates and CRLs.
      *
+     * <p>
+     *  在用于查找证书和CRL的{@code CertStore}列表的末尾添加{@code CertStore}。
+     * 
+     * 
      * @param store the {@code CertStore} to add. If {@code null},
      * the store is ignored (not added to list).
      */
@@ -309,6 +376,10 @@ public class PKIXParameters implements CertPathParameters {
      * Returns an immutable {@code List} of {@code CertStore}s that
      * are used to find certificates and CRLs.
      *
+     * <p>
+     *  返回用于查找证书和CRL的{@code CertStore}的不可变{@code List}。
+     * 
+     * 
      * @return an immutable {@code List} of {@code CertStore}s
      * (may be empty, but never {@code null})
      *
@@ -335,6 +406,15 @@ public class PKIXParameters implements CertPathParameters {
      * {@link #addCertPathChecker addCertPathChecker} or {@link
      * #setCertPathCheckers setCertPathCheckers} methods).
      *
+     * <p>
+     * 设置RevocationEnabled标志。如果此标志为true,将使用底层PKIX服务提供程序的默认撤销检查机制。如果此标志为false,则将禁用(不使用)默认撤销检查机制。
+     * <p>
+     *  创建{@code PKIXParameters}对象时,此标志设置为true。此设置反映了检查撤销的最常见策略,因为每个服务提供商必须支持撤消检查以符合PKIX。
+     * 当使用PKIX服务提供程序的默认撤销检查机制或替换备用撤销检查机制(通过调用{@link #addCertPathChecker addCertPathChecker}或{@link})时,复杂的应用程
+     * 序应将此标志设置为false #setCertPathCheckers setCertPathCheckers}方法)。
+     *  创建{@code PKIXParameters}对象时,此标志设置为true。此设置反映了检查撤销的最常见策略,因为每个服务提供商必须支持撤消检查以符合PKIX。
+     * 
+     * 
      * @param val the new value of the RevocationEnabled flag
      */
     public void setRevocationEnabled(boolean val) {
@@ -349,6 +429,11 @@ public class PKIXParameters implements CertPathParameters {
      * #setRevocationEnabled setRevocationEnabled} method for more details on
      * setting the value of this flag.
      *
+     * <p>
+     *  检查RevocationEnabled标志。如果此标志为true,将使用底层PKIX服务提供程序的默认撤销检查机制。如果此标志为false,则将禁用(不使用)默认撤销检查机制。
+     * 有关设置此标志的值的更多详细信息,请参阅{@link #setRevocationEnabled setRevocationEnabled}方法。
+     * 
+     * 
      * @return the current value of the RevocationEnabled flag
      */
     public boolean isRevocationEnabled() {
@@ -360,6 +445,10 @@ public class PKIXParameters implements CertPathParameters {
      * acceptable policy needs to be explicitly identified in every certificate.
      * By default, the ExplicitPolicyRequired flag is false.
      *
+     * <p>
+     *  设置ExplicitPolicyRequired标志。如果此标志为真,则需要在每个证书中明确标识可接受的策略。默认情况下,ExplicitPolicyRequired标志为false。
+     * 
+     * 
      * @param val {@code true} if explicit policy is to be required,
      * {@code false} otherwise
      */
@@ -372,6 +461,10 @@ public class PKIXParameters implements CertPathParameters {
      * acceptable policy needs to be explicitly identified in every certificate.
      * By default, the ExplicitPolicyRequired flag is false.
      *
+     * <p>
+     * 检查是否需要显式策略。如果此标志为真,则需要在每个证书中明确标识可接受的策略。默认情况下,ExplicitPolicyRequired标志为false。
+     * 
+     * 
      * @return {@code true} if explicit policy is required,
      * {@code false} otherwise
      */
@@ -384,6 +477,10 @@ public class PKIXParameters implements CertPathParameters {
      * mapping is inhibited. By default, policy mapping is not inhibited (the
      * flag is false).
      *
+     * <p>
+     *  设置PolicyMappingInhibited标志。如果此标志为真,则禁止策略映射。默认情况下,不禁止策略映射(标志为false)。
+     * 
+     * 
      * @param val {@code true} if policy mapping is to be inhibited,
      * {@code false} otherwise
      */
@@ -396,6 +493,10 @@ public class PKIXParameters implements CertPathParameters {
      * mapping is inhibited. By default, policy mapping is not inhibited (the
      * flag is false).
      *
+     * <p>
+     *  检查策略映射是否禁止。如果此标志为真,则禁止策略映射。默认情况下,不禁止策略映射(标志为false)。
+     * 
+     * 
      * @return true if policy mapping is inhibited, false otherwise
      */
     public boolean isPolicyMappingInhibited() {
@@ -408,6 +509,11 @@ public class PKIXParameters implements CertPathParameters {
      * is not inhibited ({@link #isAnyPolicyInhibited isAnyPolicyInhibited()}
      * returns {@code false}).
      *
+     * <p>
+     *  设置状态以确定是否应当处理任何策略OID(如果它包含在证书中)。
+     * 默认情况下,不会禁止任何策略OID({@link #isAnyPolicyInhibited isAnyPolicyInhibited()}返回{@code false})。
+     * 
+     * 
      * @param val {@code true} if the any policy OID is to be
      * inhibited, {@code false} otherwise
      */
@@ -419,6 +525,10 @@ public class PKIXParameters implements CertPathParameters {
      * Checks whether the any policy OID should be processed if it
      * is included in a certificate.
      *
+     * <p>
+     *  检查是否应该处理任何策略OID(如果它包含在证书中)。
+     * 
+     * 
      * @return {@code true} if the any policy OID is inhibited,
      * {@code false} otherwise
      */
@@ -444,6 +554,15 @@ public class PKIXParameters implements CertPathParameters {
      * is set to false, it is up to the application to validate all policy
      * qualifiers in this manner in order to be PKIX compliant.
      *
+     * <p>
+     *  设置PolicyQualifiersRejected标志。如果此标志为真,那么在标记为关键的证书策略扩展中包含策略限定符的证书将被拒绝。如果标志为假,则证书不会在此基础上被拒绝。
+     * 
+     *  <p>创建{@code PKIXParameters}对象时,此标志设置为true。此设置反映了处理策略限定符的最常见(最简单)策略。要使用更复杂策略的应用程序必须将此标志设置为false。
+     * <p>
+     * 请注意,PKIX认证路径验证算法指定必须处理和验证标记为关键的证书策略扩展中的任何策略限定符。否则,必须拒绝认证路径。
+     * 如果policyQualifiersRejected标志设置为false,则由应用程序以此方式验证所有策略限定符以符合PKIX标准。
+     * 
+     * 
      * @param qualifiersRejected the new value of the PolicyQualifiersRejected
      * flag
      * @see #getPolicyQualifiersRejected
@@ -464,6 +583,12 @@ public class PKIXParameters implements CertPathParameters {
      * strategy for processing policy qualifiers. Applications that want to use
      * a more sophisticated policy must set this flag to false.
      *
+     * <p>
+     *  获取PolicyQualifiersRejected标志。如果此标志为真,那么在标记为关键的证书策略扩展中包含策略限定符的证书将被拒绝。如果标志为假,则证书不会在此基础上被拒绝。
+     * 
+     *  <p>创建{@code PKIXParameters}对象时,此标志设置为true。此设置反映了处理策略限定符的最常见(最简单)策略。要使用更复杂策略的应用程序必须将此标志设置为false。
+     * 
+     * 
      * @return the current value of the PolicyQualifiersRejected flag
      * @see #setPolicyQualifiersRejected
      */
@@ -478,6 +603,12 @@ public class PKIXParameters implements CertPathParameters {
      * Note that the {@code Date} returned is copied to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  返回应确定认证路径有效性的时间。如果{@code null},则使用当前时间。
+     * <p>
+     *  请注意,系统会复制返回的{@code Date},以防后续修改。
+     * 
+     * 
      * @return the {@code Date}, or {@code null} if not set
      * @see #setDate
      */
@@ -495,6 +626,12 @@ public class PKIXParameters implements CertPathParameters {
      * Note that the {@code Date} supplied here is copied to protect
      * against subsequent modifications.
      *
+     * <p>
+     *  设置应确定认证路径有效性的时间。如果{@code null},则使用当前时间。
+     * <p>
+     *  请注意,此处提供的{@code Date}已复制,以防后续修改。
+     * 
+     * 
      * @param date the {@code Date}, or {@code null} for the
      * current time
      * @see #getDate
@@ -535,6 +672,24 @@ public class PKIXParameters implements CertPathParameters {
      * {@code PKIXCertPathChecker} in the list is cloned to protect
      * against subsequent modifications.
      *
+     * <p>
+     * 设置其他认证路径检查程序的{@code List}。如果指定的{@code List}包含不是{@code PKIXCertPathChecker}的对象,则会被忽略。
+     * <p>
+     *  每个{@code PKIXCertPathChecker}指定对证书实施其他检查。通常,这些是检查以处理和验证证书中包含的私有扩展。
+     * 每个{@code PKIXCertPathChecker}都应该使用执行检查所需的任何初始化参数进行实例化。
+     * <p>
+     *  此方法允许复杂的应用程序扩展PKIX {@code CertPathValidator}或{@code CertPathBuilder}。
+     * 每个指定的{@code PKIXCertPathChecker}将被处理或验证的每个证书的PKIX {@code CertPathValidator}或{@code CertPathBuilder}依次
+     * 调用。
+     *  此方法允许复杂的应用程序扩展PKIX {@code CertPathValidator}或{@code CertPathBuilder}。
+     * <p>
+     *  无论是否设置这些附加的{@code PKIXCertPathChecker},PKIX {@code CertPathValidator}或{@code CertPathBuilder}必须对每个证书
+     * 执行所有必需的PKIX检查。
+     * 此规则的一个例外是如果RevocationEnabled标志设置为false(请参阅{@link #setRevocationEnabled setRevocationEnabled}方法)。
+     * <p>
+     *  请注意,此处提供的{@code List}已复制,列表中的每个{@code PKIXCertPathChecker}都将被克隆,以防后续修改。
+     * 
+     * 
      * @param checkers a {@code List} of {@code PKIXCertPathChecker}s.
      * May be {@code null}, in which case no additional checkers will be
      * used.
@@ -561,6 +716,11 @@ public class PKIXParameters implements CertPathParameters {
      * {@code PKIXCertPathChecker} in the {@code List} is cloned
      * to protect against subsequent modifications.
      *
+     * <p>
+     *  返回认证路径检查器的{@code List}。
+     * 返回的{@code List}是不可变的,{@code List}中的每个{@code PKIXCertPathChecker}都是克隆的,以防后续修改。
+     * 
+     * 
      * @return an immutable {@code List} of
      * {@code PKIXCertPathChecker}s (may be empty, but not
      * {@code null})
@@ -582,6 +742,13 @@ public class PKIXParameters implements CertPathParameters {
      * Note that the {@code PKIXCertPathChecker} is cloned to protect
      * against subsequent modifications.
      *
+     * <p>
+     * 将{@code PKIXCertPathChecker}添加到认证路径检查程序的列表中。
+     * 有关详细信息,请参阅{@link #setCertPathCheckers setCertPathCheckers}方法。
+     * <p>
+     *  请注意,克隆{@code PKIXCertPathChecker}以防止后续修改。
+     * 
+     * 
      * @param checker a {@code PKIXCertPathChecker} to add to the list of
      * checks. If {@code null}, the checker is ignored (not added to list).
      */
@@ -595,6 +762,10 @@ public class PKIXParameters implements CertPathParameters {
      * Returns the signature provider's name, or {@code null}
      * if not set.
      *
+     * <p>
+     *  返回签名提供程序的名称,如果未设置,则返回{@code null}。
+     * 
+     * 
      * @return the signature provider's name (or {@code null})
      * @see #setSigProvider
      */
@@ -608,6 +779,11 @@ public class PKIXParameters implements CertPathParameters {
      * objects. If {@code null} or not set, the first provider found
      * supporting the algorithm will be used.
      *
+     * <p>
+     *  设置签名提供程序的名称。创建{@link java.security.Signature Signature}对象时,将首选指定的提供程序。
+     * 如果{@code null}或未设置,将使用找到的支持该算法的第一个提供者。
+     * 
+     * 
      * @param sigProvider the signature provider's name (or {@code null})
      * @see #getSigProvider
     */
@@ -623,6 +799,12 @@ public class PKIXParameters implements CertPathParameters {
      * <p>Note that the {@code CertSelector} returned is cloned
      * to protect against subsequent modifications.
      *
+     * <p>
+     *  返回目标证书上的必需约束。约束作为{@code CertSelector}的实例返回。如果{@code null},没有定义约束。
+     * 
+     *  <p>请注意,所返回的{@code CertSelector}已克隆,以防后续修改。
+     * 
+     * 
      * @return a {@code CertSelector} specifying the constraints
      * on the target certificate (or {@code null})
      * @see #setTargetCertConstraints
@@ -644,6 +826,12 @@ public class PKIXParameters implements CertPathParameters {
      * <p>Note that the {@code CertSelector} specified is cloned
      * to protect against subsequent modifications.
      *
+     * <p>
+     *  设置目标证书上的必需约束。约束被指定为{@code CertSelector}的实例。如果{@code null},没有定义约束。
+     * 
+     *  <p>请注意,指定的{@code CertSelector}已克隆,以防后续修改。
+     * 
+     * 
      * @param selector a {@code CertSelector} specifying the constraints
      * on the target certificate (or {@code null})
      * @see #getTargetCertConstraints
@@ -659,6 +847,10 @@ public class PKIXParameters implements CertPathParameters {
      * Makes a copy of this {@code PKIXParameters} object. Changes
      * to the copy will not affect the original and vice versa.
      *
+     * <p>
+     *  创建此{@code PKIXParameters}对象的副本。对副本的更改不会影响原始副本,反之亦然。
+     * 
+     * 
      * @return a copy of this {@code PKIXParameters} object
      */
     public Object clone() {
@@ -690,6 +882,9 @@ public class PKIXParameters implements CertPathParameters {
     /**
      * Returns a formatted string describing the parameters.
      *
+     * <p>
+     *  返回描述参数的格式化字符串。
+     * 
      * @return a formatted string describing the parameters.
      */
     public String toString() {

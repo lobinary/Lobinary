@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,15 @@ import java.io.ObjectStreamField;
  * The <i>wildcard</i> is a special local IP address. It usually means "any"
  * and can only be used for {@code bind} operations.
  *
+ * <p>
+ *  此类实现IP套接字地址(IP地址+端口号)它也可以是一对(主机名+端口号),在这种情况下,将尝试解析主机名。
+ * 如果解析失败,则该地址被认为是<I>未解析</I>,但仍然可以在某些情况下使用,例如通过代理连接。
+ * <p>
+ *  它提供了一个由套接字用于绑定,连接或返回值的不可变对象。
+ * <p>
+ *  通配符</i>是特殊的本地IP地址。它通常意味着"任何",并且只能用于{@code bind}操作。
+ * 
+ * 
  * @see java.net.Socket
  * @see java.net.ServerSocket
  * @since 1.4
@@ -158,6 +168,12 @@ public class InetSocketAddress
      * A port number of {@code zero} will let the system pick up an
      * ephemeral port in a {@code bind} operation.
      * <p>
+     * <p>
+     *  创建套接字地址,其中IP地址是通配符地址,端口号是指定的值。
+     * <p>
+     *  有效的端口值介于0和65535之间。{@code zero}的端口号将让系统在{@code bind}操作中选取一个临时端口。
+     * <p>
+     * 
      * @param   port    The port number
      * @throws IllegalArgumentException if the port parameter is outside the specified
      * range of valid port values.
@@ -176,6 +192,14 @@ public class InetSocketAddress
      * <P>
      * A {@code null} address will assign the <i>wildcard</i> address.
      * <p>
+     * <p>
+     *  从IP地址和端口号创建套接字地址。
+     * <p>
+     *  有效的端口值介于0和65535之间。{@code zero}的端口号将让系统在{@code bind}操作中选取一个临时端口。
+     * <P>
+     *  {@code null}地址将分配<i>通配符</i>地址。
+     * <p>
+     * 
      * @param   addr    The IP address
      * @param   port    The port number
      * @throws IllegalArgumentException if the port parameter is outside the specified
@@ -203,6 +227,16 @@ public class InetSocketAddress
      * A port number of {@code zero} will let the system pick up an
      * ephemeral port in a {@code bind} operation.
      * <P>
+     * <p>
+     *  从主机名和端口号创建套接字地址。
+     * <p>
+     *  将尝试将主机名解析为InetAddress。如果该尝试失败,则地址将标记为<I>未解析</I>。
+     * <p>
+     * 如果有安全管理器,则会调用其{@code checkConnect}方法,并以主机名作为其参数,以检查解析它的权限。这可能导致SecurityException。
+     * <P>
+     *  有效的端口值介于0和65535之间。{@code zero}的端口号将让系统在{@code bind}操作中选取一个临时端口。
+     * <P>
+     * 
      * @param   hostname the Host name
      * @param   port    The port number
      * @throws IllegalArgumentException if the port parameter is outside the range
@@ -240,6 +274,14 @@ public class InetSocketAddress
      * A port number of {@code zero} will let the system pick up an
      * ephemeral port in a {@code bind} operation.
      * <P>
+     * <p>
+     *  从主机名和端口号创建未解析的套接字地址。
+     * <p>
+     *  不会尝试将主机名解析为InetAddress。地址将标记为<I>未解决</I>。
+     * <p>
+     *  有效的端口值介于0和65535之间。{@code zero}的端口号将让系统在{@code bind}操作中选取一个临时端口。
+     * <P>
+     * 
      * @param   host    the Host name
      * @param   port    The port number
      * @throws IllegalArgumentException if the port parameter is outside
@@ -255,6 +297,8 @@ public class InetSocketAddress
     }
 
     /**
+    /* <p>
+    /* 
      * @serialField hostname String
      * @serialField addr InetAddress
      * @serialField port int
@@ -318,6 +362,10 @@ public class InetSocketAddress
     /**
      * Gets the port number.
      *
+     * <p>
+     *  获取端口号。
+     * 
+     * 
      * @return the port number.
      */
     public final int getPort() {
@@ -328,6 +376,10 @@ public class InetSocketAddress
      *
      * Gets the {@code InetAddress}.
      *
+     * <p>
+     *  获取{@code InetAddress}。
+     * 
+     * 
      * @return the InetAdress or {@code null} if it is unresolved.
      */
     public final InetAddress getAddress() {
@@ -339,6 +391,10 @@ public class InetSocketAddress
      * Note: This method may trigger a name service reverse lookup if the
      * address was created with a literal IP address.
      *
+     * <p>
+     *  获取{@code主机名}。注意：如果地址是使用文字IP地址创建的,则此方法可以触发名称服务反向查找。
+     * 
+     * 
      * @return  the hostname part of the address.
      */
     public final String getHostName() {
@@ -350,6 +406,10 @@ public class InetSocketAddress
      * doesn't have a hostname (it was created using a literal).
      * This has the benefit of <b>not</b> attempting a reverse lookup.
      *
+     * <p>
+     *  返回主机名或地址的字符串形式(如果它没有主机名(使用文字创建))。这有利于<b>不</b>尝试反向查找。
+     * 
+     * 
      * @return the hostname, or String representation of the address.
      * @since 1.7
      */
@@ -360,6 +420,10 @@ public class InetSocketAddress
     /**
      * Checks whether the address has been resolved or not.
      *
+     * <p>
+     *  检查地址是否已解析。
+     * 
+     * 
      * @return {@code true} if the hostname couldn't be resolved into
      *          an {@code InetAddress}.
      */
@@ -373,6 +437,11 @@ public class InetSocketAddress
      * and concatenating the port number (with a colon). If the address
      * is unresolved then the part before the colon will only contain the hostname.
      *
+     * <p>
+     *  构造此InetSocketAddress的字符串表示形式。此String通过调用InetAddress上的toString()并连接端口号(使用冒号)构造。
+     * 如果地址未解析,冒号之前的部分将只包含主机名。
+     * 
+     * 
      * @return  a string representation of this object.
      */
     @Override
@@ -395,6 +464,13 @@ public class InetSocketAddress
      * Note: Hostnames are case insensitive. e.g. "FooBar" and "foobar" are
      * considered equal.
      *
+     * <p>
+     * 将此对象与指定的对象进行比较。结果是{@code true}当且仅当参数不是{@code null},并且它表示与此对象相同的地址。
+     * <p>
+     *  如果InetAddresses(或主机名,如果它未解决)和端口号相等,则{@code InetSocketAddress}的两个实例表示相同的地址。如果两个地址都未解析,则比较主机名和端口号。
+     * 
+     *  注意：主机名不区分大小写。例如"FooBar"和"foobar"被认为是相等的。
+     * 
      * @param   obj   the object to compare against.
      * @return  {@code true} if the objects are the same;
      *          {@code false} otherwise.
@@ -410,6 +486,9 @@ public class InetSocketAddress
     /**
      * Returns a hashcode for this socket address.
      *
+     * <p>
+     * 
+     * 
      * @return  a hash code value for this socket address.
      */
     @Override

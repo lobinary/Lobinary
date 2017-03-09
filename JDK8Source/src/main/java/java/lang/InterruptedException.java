@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ package java.lang;
  *      throw new InterruptedException();
  * </pre>
  *
+ * <p>
+ *  当线程等待,睡眠或以其他方式占用时抛出,并且线程在活动之前或期间中断。偶尔,一个方法可能希望测试当前线程是否已经中断,如果是,则立即抛出此异常。下面的代码可以用来实现这个效果：
+ * <pre>
+ *  if(Thread.interrupted())//清除中断状态！ throw new InterruptedException();
+ * </pre>
+ * 
+ * 
  * @author  Frank Yellin
  * @see     java.lang.Object#wait()
  * @see     java.lang.Object#wait(long)
@@ -52,6 +60,9 @@ class InterruptedException extends Exception {
 
     /**
      * Constructs an <code>InterruptedException</code> with no detail  message.
+     * <p>
+     *  构造一个没有详细消息的<code> InterruptedException </code>。
+     * 
      */
     public InterruptedException() {
         super();
@@ -61,6 +72,9 @@ class InterruptedException extends Exception {
      * Constructs an <code>InterruptedException</code> with the
      * specified detail message.
      *
+     * <p>
+     *  用指定的详细消息构造一个<code> InterruptedException </code>。
+     * 
      * @param   s   the detail message.
      */
     public InterruptedException(String s) {

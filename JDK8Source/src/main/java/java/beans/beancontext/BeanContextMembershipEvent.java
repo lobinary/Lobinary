@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,14 @@ import java.util.Iterator;
  * <code>addBeanContextMembershipListener(BeanContextMembershipListener bcml)
  * </code> method.
  *
+ * <p>
+ *  <code> BeanContextMembershipEvent </code>封装了添加到特定<code> BeanContext </code>的成员资格或从中删除的子级的列表。
+ * 在给定的<code> BeanContext </code>实例上调用成功的add(),remove(),retainAll(),removeAll()或clear()时,会触发此事件的实例。
+ * 对接收此类事件感兴趣的对象必须实现<code> BeanContextMembershipListener </code>接口,并且必须通过<code> BeanContext </code>的<code>
+ *  addBeanContextMembershipListener(BeanContextMembershipListener bcml)</code>方法。
+ * 在给定的<code> BeanContext </code>实例上调用成功的add(),remove(),retainAll(),removeAll()或clear()时,会触发此事件的实例。
+ * 
+ * 
  * @author      Laurence P. G. Cable
  * @since       1.2
  * @see         java.beans.beancontext.BeanContext
@@ -60,6 +69,10 @@ public class BeanContextMembershipEvent extends BeanContextEvent {
     /**
      * Contruct a BeanContextMembershipEvent
      *
+     * <p>
+     *  Contruct BeanContextMembershipEvent
+     * 
+     * 
      * @param bc        The BeanContext source
      * @param changes   The Children affected
      * @throws NullPointerException if <CODE>changes</CODE> is <CODE>null</CODE>
@@ -78,6 +91,10 @@ public class BeanContextMembershipEvent extends BeanContextEvent {
     /**
      * Contruct a BeanContextMembershipEvent
      *
+     * <p>
+     *  Contruct BeanContextMembershipEvent
+     * 
+     * 
      * @param bc        The BeanContext source
      * @param changes   The Children effected
      * @exception       NullPointerException if changes associated with this
@@ -95,12 +112,20 @@ public class BeanContextMembershipEvent extends BeanContextEvent {
 
     /**
      * Gets the number of children affected by the notification.
+     * <p>
+     *  获取受通知影响的儿童数量。
+     * 
+     * 
      * @return the number of children affected by the notification
      */
     public int size() { return children.size(); }
 
     /**
      * Is the child specified affected by the event?
+     * <p>
+     *  指定的孩子是否受事件影响?
+     * 
+     * 
      * @return <code>true</code> if affected, <code>false</code>
      * if not
      * @param child the object to check for being affected
@@ -111,12 +136,20 @@ public class BeanContextMembershipEvent extends BeanContextEvent {
 
     /**
      * Gets the array of children affected by this event.
+     * <p>
+     *  获取受此事件影响的儿童数组。
+     * 
+     * 
      * @return the array of children affected
      */
     public Object[] toArray() { return children.toArray(); }
 
     /**
      * Gets the array of children affected by this event.
+     * <p>
+     *  获取受此事件影响的儿童数组。
+     * 
+     * 
      * @return the array of children effected
      */
     @SuppressWarnings("rawtypes")
@@ -124,11 +157,16 @@ public class BeanContextMembershipEvent extends BeanContextEvent {
 
     /*
      * fields
+     * <p>
+     *  字段
+     * 
      */
 
    /**
     * The list of children affected by this
     * event notification.
+    * <p>
+    *  受此事件通知影响的儿童的列表。
     */
     @SuppressWarnings("rawtypes")
     protected Collection children;

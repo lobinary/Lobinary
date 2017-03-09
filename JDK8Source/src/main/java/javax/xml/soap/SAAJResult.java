@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,11 @@ import javax.xml.transform.dom.DOMResult;
  * by using the {@link #getResult()} method. The {@link DOMResult#getNode()}
  * method should be avoided in almost all cases.
  *
+ * <p>
+ *  作为JAXP转换或JAXB编组结果的持有者,以SAAJ树的形式。这些结果应通过使用{@link #getResult()}方法访问。
+ * 在几乎所有情况下都应避免{@link DOMResult#getNode()}方法。
+ * 
+ * 
  * @author XWS-Security Development Team
  *
  * @since SAAJ 1.3
@@ -51,6 +57,14 @@ public class SAAJResult extends DOMResult {
      * The <code>SOAPPart</code> returned by {@link DOMResult#getNode()}
      * is not guaranteed to be well-formed.
      *
+     * <p>
+     *  创建将以支持默认(SOAP 1.1)协议的SAAJ树的形式显示结果的<code> SAAJResult </code>。
+     * <p>
+     *  这种类型的<code> SAAJResult </code>用于在结果将用作参数的方法的情况下,该方法接受一个参数,例如<code> SOAPElement </code> SAAJ API。
+     * 在转换中使用时,结果将填充到内部创建的<code> SOAPMessage </code>的<code> SOAPPart </code>中。
+     *  {@link DOMResult#getNode()}返回的<code> SOAPPart </code>无法保证格式良好。
+     * 
+     * 
      * @throws SOAPException if there is a problem creating a <code>SOAPMessage</code>
      *
      * @since SAAJ 1.3
@@ -73,6 +87,17 @@ public class SAAJResult extends DOMResult {
      * internally. The <code>SOAPPart</code> returned by {@link DOMResult#getNode()}
      * is not guaranteed to be well-formed.
      *
+     * <p>
+     *  创建将以支持指定协议的SAAJ树的形式显示结果的<code> SAAJResult </code>。
+     *  <code> DYNAMIC_SOAP_PROTOCOL </code>在此上下文中是不明确的,并将导致此构造函数抛出一个<code> UnsupportedOperationException </code>
+     * 。
+     *  创建将以支持指定协议的SAAJ树的形式显示结果的<code> SAAJResult </code>。
+     * <p>
+     * 这种类型的<code> SAAJResult </code>用于在结果将用作参数的方法的情况下,该方法接受一个参数,例如<code> SOAPElement </code> SAAJ API。
+     * 在转换中使用时,结果将填充到内部创建的<code> SOAPMessage </code>的<code> SOAPPart </code>中。
+     *  {@link DOMResult#getNode()}返回的<code> SOAPPart </code>无法保证格式良好。
+     * 
+     * 
      * @param protocol - the name of the SOAP protocol that the resulting SAAJ
      *                      tree should support
      *
@@ -95,6 +120,12 @@ public class SAAJResult extends DOMResult {
      * after the transformation can be guaranteed only by means outside SAAJ
      * specification.
      *
+     * <p>
+     *  创建将结果写入提供的<code> SOAPMessage </code>的<code> SOAPPart </code>中的<code> SAAJResult </code>。
+     * 在正常情况下,这些结果将使用DOM API编写,因此,完成的<code> SOAPPart </code>将不能保证格式良好,除非用于创建它的数据也是正确的。
+     * 当在变换中使用时,转换之后的<code> SOAPMessage </code>的有效性可以仅通过SAAJ规范之外的手段来保证。
+     * 
+     * 
      * @param message - the message whose <code>SOAPPart</code> will be
      *                  populated as a result of some transformation or
      *                  marshalling operation
@@ -114,6 +145,11 @@ public class SAAJResult extends DOMResult {
      * incoming data can be guaranteed by means outside of the SAAJ
      * specification.
      *
+     * <p>
+     *  创建一个<code> SAAJResult </code>,它将结果作为指定的<code> SOAPElement </code>的子节点写入。
+     * 在正常情况下,这些结果将使用DOM API编写,因此可能会使SAAJ树的结构无效。
+     * 这种<code> SAAJResult </code>只有在输入数据的有效性可以通过SAAJ规范以外的方式保证时才能使用。
+     * 
      * @param rootNode - the root to which the results will be appended
      *
      * @since SAAJ 1.3
@@ -124,6 +160,9 @@ public class SAAJResult extends DOMResult {
 
 
     /**
+    /* <p>
+    /* 
+    /* 
      * @return the resulting Tree that was created under the specified root Node.
      * @since SAAJ 1.3
      */

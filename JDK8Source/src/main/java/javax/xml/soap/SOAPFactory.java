@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,18 +44,35 @@ import org.w3c.dom.Element;
  * <code>javax.xml.soap.Detail</code> objects as well as
  * <code>java.xml.soap.Name</code> objects.
  *
+ * <p>
+ *  <code> SOAPFactory </code>是一个用于创建SOAP XML树中存在的各种对象的工厂。
+ * 
+ *  <code> SOAPFactory </code>可用于创建最终将在SOAP部分中结束的XML片段。
+ * 这些片段可以作为{@link SOAPHeaderElement}或{@link SOAPBodyElement}或{@link SOAPEnvelope}或其他{@link SOAPElement}对
+ * 象的子代插入。
+ *  <code> SOAPFactory </code>可用于创建最终将在SOAP部分中结束的XML片段。
+ * 
+ *  <code> SOAPFactory </code>也有创建<code> javax.xml.soap.Detail </code>对象以及<code> java.xml.soap.Name </code>
+ * 对象的方法。
+ * 
  */
 public abstract class SOAPFactory {
 
     /**
      * A constant representing the property used to lookup the name of
      * a <code>SOAPFactory</code> implementation class.
+     * <p>
+     *  一个常量,表示用于查找<code> SOAPFactory </code>实现类的名称的属性。
+     * 
      */
     static private final String SOAP_FACTORY_PROPERTY =
         "javax.xml.soap.SOAPFactory";
 
     /**
      * Class name of default <code>SOAPFactory</code> implementation.
+     * <p>
+     *  默认<code> SOAPFactory </code>实现的类名。
+     * 
      */
     static final String DEFAULT_SOAP_FACTORY
         = "com.sun.xml.internal.messaging.saaj.soap.ver1_1.SOAPFactory1_1Impl";
@@ -70,6 +88,14 @@ public abstract class SOAPFactory {
      * part of the tree rooted in <code>domElement</code> violates SOAP rules, a
      * <code>SOAPException</code> will be thrown.
      *
+     * <p>
+     *  从现有DOM <code>元素</code>创建<code> SOAPElement </code>对象。
+     * 如果作为参数传递的DOM <code> Element </code>已经是一个<code> SOAPElement </code>,那么这个方法必须返回它没有任何进一步的工作。
+     * 否则,将创建一个新的<code> SOAPElement </code>,并创建一个深层副本<code> domElement </code>参数。
+     * 返回值的具体类型取决于<code> domElement </code>参数的名称。
+     * 如果根在<code> domElement </code>中的树的任何部分违反SOAP规则,则将抛出<code> SOAPException </code>。
+     * 
+     * 
      * @param domElement - the <code>Element</code> to be copied.
      *
      * @return a new <code>SOAPElement</code> that is a copy of <code>domElement</code>.
@@ -91,6 +117,14 @@ public abstract class SOAPFactory {
      * "{http://www.w3.org/2003/05/soap-envelope}Envelope" would cause a
      * <code>SOAPEnvelope</code> that supports SOAP 1.2 behavior to be created.
      *
+     * <p>
+     * 创建用给定的<code> Name </code>对象初始化的<code> SOAPElement </code>对象。
+     * 返回值的具体类型取决于赋予新<code> SOAPElement </code>的名称。
+     * 例如,名称为"{http://www.w3.org/2003/05/soap-envelope}Envelope")的新的<code> SOAPElement </code>会导致<code> SOAP
+     * Envelope </code>支持要创建的SOAP 1.2行为。
+     * 返回值的具体类型取决于赋予新<code> SOAPElement </code>的名称。
+     * 
+     * 
      * @param name a <code>Name</code> object with the XML name for
      *             the new element
      *
@@ -111,6 +145,14 @@ public abstract class SOAPFactory {
      * "{http://www.w3.org/2003/05/soap-envelope}Envelope" would cause a
      * <code>SOAPEnvelope</code> that supports SOAP 1.2 behavior to be created.
      *
+     * <p>
+     *  创建用给定的<code> QName </code>对象初始化的<code> SOAPElement </code>对象。
+     * 返回值的具体类型取决于赋予新<code> SOAPElement </code>的名称。
+     * 例如,名称为"{http://www.w3.org/2003/05/soap-envelope}Envelope")的新的<code> SOAPElement </code>会导致<code> SOAP
+     * Envelope </code>支持要创建的SOAP 1.2行为。
+     * 返回值的具体类型取决于赋予新<code> SOAPElement </code>的名称。
+     * 
+     * 
      * @param qname a <code>QName</code> object with the XML name for
      *             the new element
      *
@@ -130,6 +172,10 @@ public abstract class SOAPFactory {
      * Creates a <code>SOAPElement</code> object initialized with the
      * given local name.
      *
+     * <p>
+     *  创建用给定本地名称初始化的<code> SOAPElement </code>对象。
+     * 
+     * 
      * @param localName a <code>String</code> giving the local name for
      *             the new element
      *
@@ -151,6 +197,13 @@ public abstract class SOAPFactory {
      * "{http://www.w3.org/2003/05/soap-envelope}Envelope" would cause a
      * <code>SOAPEnvelope</code> that supports SOAP 1.2 behavior to be created.
      *
+     * <p>
+     *  使用给定的本地名称,前缀和uri创建一个新的<code> SOAPElement </code>对象。返回值的具体类型取决于赋予新<code> SOAPElement </code>的名称。
+     * 例如,名称为"{http://www.w3.org/2003/05/soap-envelope}Envelope")的新的<code> SOAPElement </code>会导致<code> SOAP
+     * Envelope </code>支持要创建的SOAP 1.2行为。
+     *  使用给定的本地名称,前缀和uri创建一个新的<code> SOAPElement </code>对象。返回值的具体类型取决于赋予新<code> SOAPElement </code>的名称。
+     * 
+     * 
      * @param localName a <code>String</code> giving the local name
      *                  for the new element
      * @param prefix the prefix for this <code>SOAPElement</code>
@@ -174,6 +227,12 @@ public abstract class SOAPFactory {
      * situations where it is not practical to use the <code>SOAPFault</code>
      * abstraction.
      *
+     * <p>
+     *  创建一个新的<code> Detail </code>对象,作为<code> DetailEntry </code>对象的容器。
+     * <P>
+     * 此工厂方法创建<code> Detail </code>对象,以便在不切实际使用<code> SOAPFault </code>抽象的情况下使用。
+     * 
+     * 
      * @return a <code>Detail</code> object
      * @throws SOAPException if there is a SOAP error
      * @throws UnsupportedOperationException if the protocol specified
@@ -184,6 +243,10 @@ public abstract class SOAPFactory {
     /**
      *Creates a new <code>SOAPFault</code> object initialized with the given <code>reasonText</code>
      *  and <code>faultCode</code>
+     * <p>
+     *  reates使用给定的<code> reasonText </code>和<code> faultCode </code>初始化的新的<code> SOAPFault <
+     * 
+     * 
      *@param reasonText the ReasonText/FaultString for the fault
      *@param faultCode the FaultCode for the fault
      *@return a <code>SOAPFault</code> object
@@ -194,6 +257,10 @@ public abstract class SOAPFactory {
 
     /**
      *Creates a new default <code>SOAPFault</code> object
+     * <p>
+     *  reates一个新的默认<code> SOAPFault </code>对象
+     * 
+     * 
      *@return a <code>SOAPFault</code> object
      *@throws SOAPException if there is a SOAP error
      *@since SAAJ 1.3
@@ -208,6 +275,12 @@ public abstract class SOAPFactory {
      * situations where it is not practical to use the <code>SOAPEnvelope</code>
      * abstraction.
      *
+     * <p>
+     *  创建使用给定本地名称,命名空间前缀和命名空间URI初始化的新<code> Name </code>对象。
+     * <P>
+     *  此工厂方法创建<code> Name </code>对象,以便在使用<code> SOAPEnvelope </code>抽象不切实际的情况下使用。
+     * 
+     * 
      * @param localName a <code>String</code> giving the local name
      * @param prefix a <code>String</code> giving the prefix of the namespace
      * @param uri a <code>String</code> giving the URI of the namespace
@@ -229,6 +302,12 @@ public abstract class SOAPFactory {
      * situations where it is not practical to use the <code>SOAPEnvelope</code>
      * abstraction.
      *
+     * <p>
+     *  创建用给定本地名称初始化的新<code> Name </code>对象。
+     * <P>
+     *  此工厂方法创建<code> Name </code>对象,以便在使用<code> SOAPEnvelope </code>抽象不切实际的情况下使用。
+     * 
+     * 
      * @param localName a <code>String</code> giving the local name
      * @return a <code>Name</code> object initialized with the given
      *         local name
@@ -251,6 +330,15 @@ public abstract class SOAPFactory {
      *  <LI> Use the SAAJMetaFactory instance to locate the SOAPFactory implementation class.
      * </UL>
      *
+     * <p>
+     *  创建一个新的<code> SOAPFactory </code>对象,它是默认实现(SOAP 1.1)的一个实例,
+     * 
+     *  此方法使用以下有序查找过程来确定要加载的SOAPFactory实现类：
+     * <UL>
+     * <LI>使用javax.xml.soap.SOAPFactory系统属性。 <LI>使用JRE目录中的属性文件"lib / jaxm.properties"。
+     * 此配置文件采用标准java.util.Properties格式,并包含实现类的完全限定名称,其中键是上面定义的系统属性。
+     *  <LI>使用Services API(如JAR规范中所述)(如果可用)来确定类名。
+     * 
      * @return a new instance of a <code>SOAPFactory</code>
      *
      * @exception SOAPException if there was an error creating the
@@ -278,6 +366,12 @@ public abstract class SOAPFactory {
      * the specified implementation, this method uses the SAAJMetaFactory to
      * locate the implementation class and create the SOAPFactory instance.
      *
+     * <p>
+     *  Services API将在运行时可用的jars中的文件META-INF / services / javax.xml.soap.SOAPFactory中查找类名。
+     *  <LI>使用SAAJMetaFactory实例来查找SOAPFactory实现类。
+     * </UL>
+     * 
+     * 
      * @return a new instance of a <code>SOAPFactory</code>
      *
      * @param protocol  a string constant representing the protocol of the

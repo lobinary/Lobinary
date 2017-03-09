@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import javax.swing.text.AttributeSet;
  * Once a Map has been created, and any number of areas have been added,
  * you can test if a point falls inside the map via the contains method.
  *
+ * <p>
+ *  地图用于表示作为HTML文档一部分的地图元素。一旦创建了地图,并且添加了任何数量的区域,您可以通过contains方法测试地图是否落在地图中。
+ * 
+ * 
  * @author  Scott Violet
  */
 class Map implements Serializable {
@@ -43,6 +48,8 @@ class Map implements Serializable {
     /** An array of AttributeSets. */
     private Vector<AttributeSet>           areaAttributes;
     /** An array of RegionContainments, will slowly grow to match the
+    /* <p>
+    /* 
      * length of areaAttributes as needed. */
     private Vector<RegionContainment>           areas;
 
@@ -55,6 +62,9 @@ class Map implements Serializable {
 
     /**
      * Returns the name of the Map.
+     * <p>
+     *  返回地图的名称。
+     * 
      */
     public String getName() {
         return name;
@@ -62,6 +72,9 @@ class Map implements Serializable {
 
     /**
      * Defines a region of the Map, based on the passed in AttributeSet.
+     * <p>
+     *  根据传入的AttributeSet定义Map的区域。
+     * 
      */
     public void addArea(AttributeSet as) {
         if (as == null) {
@@ -75,6 +88,9 @@ class Map implements Serializable {
 
     /**
      * Removes the previously created area.
+     * <p>
+     *  删除先前创建的区域。
+     * 
      */
     public void removeArea(AttributeSet as) {
         if (as != null && areaAttributes != null) {
@@ -93,6 +109,9 @@ class Map implements Serializable {
 
     /**
      * Returns the AttributeSets representing the differet areas of the Map.
+     * <p>
+     *  返回表示Map的不同区域的AttributeSet。
+     * 
      */
     public AttributeSet[] getAreas() {
         int numAttributes = (areaAttributes != null) ? areaAttributes.size() :
@@ -111,6 +130,10 @@ class Map implements Serializable {
      * <code>x</code>, <code>y</code>. <code>width</code>, <code>height</code>
      * gives the size of the region the map is defined over. If a matching
      * area is found, the AttribueSet for it is returned.
+     * <p>
+     *  返回包含传递的位置<code> x </code>,<code> y </code>的AttributeSet。
+     *  <code> width </code>,<code> height </code>给出了地图定义区域的大小。如果找到匹配的区域,则返回它的AttribueSet。
+     * 
      */
     public AttributeSet getArea(int x, int y, int width, int height) {
         int      numAttributes = (areaAttributes != null) ?
@@ -139,6 +162,9 @@ class Map implements Serializable {
     /**
      * Creates and returns an instance of RegionContainment that can be
      * used to test if a particular point lies inside a region.
+     * <p>
+     *  创建并返回RegionContainment的实例,可用于测试特定点是否位于区域内。
+     * 
      */
     protected RegionContainment createRegionContainment
                                   (AttributeSet attributes) {
@@ -178,6 +204,9 @@ class Map implements Serializable {
      * <code>stringCoords</code>. If one of the values represents a
      * % the returned value with be negative. If a parse error results
      * from trying to parse one of the numbers null is returned.
+     * <p>
+     *  从String <code> stringCoords </code>创建并返回一个整数数组。如果其中一个值表示返回值为负值的％。如果解析错误是由于尝试解析其中一个数,则返回null。
+     * 
      */
     static protected int[] extractCoords(Object stringCoords) {
         if (stringCoords == null || !(stringCoords instanceof String)) {
@@ -230,6 +259,9 @@ class Map implements Serializable {
     /**
      * Defines the interface used for to check if a point is inside a
      * region.
+     * <p>
+     *  定义用于检查点是否在区域内的接口。
+     * 
      */
     interface RegionContainment {
         /**
@@ -237,6 +269,10 @@ class Map implements Serializable {
          * falls inside the region defined in the receiver.
          * <code>width</code>, <code>height</code> is the size of
          * the enclosing region.
+         * <p>
+         *  如果位置<code> x </code>,<code> y </code>落在接收器中定义的区域内,则返回true。
+         *  <code> width </code>,<code> height </code>是封闭区域的大小。
+         * 
          */
         public boolean contains(int x, int y, int width, int height);
     }
@@ -244,10 +280,17 @@ class Map implements Serializable {
 
     /**
      * Used to test for containment in a rectangular region.
+     * <p>
+     *  用于测试矩形区域中的容纳。
+     * 
      */
     static class RectangleRegionContainment implements RegionContainment {
         /** Will be non-null if one of the values is a percent, and any value
          * that is non null indicates it is a percent
+         * <p>
+         * 那就是非null表示它是一个百分比
+         * 
+         * 
          * (order is x, y, width, height). */
         float[]       percents;
         /** Last value of width passed in. */
@@ -322,10 +365,15 @@ class Map implements Serializable {
 
     /**
      * Used to test for containment in a polygon region.
+     * <p>
+     *  用于测试多边形区域中的包含。
+     * 
      */
     static class PolygonRegionContainment extends Polygon implements
                  RegionContainment {
         /** If any value is a percent there will be an entry here for the
+        /* <p>
+        /* 
          * percent value. Use percentIndex to find out the index for it. */
         float[]           percentValues;
         int[]             percentIndexs;
@@ -412,6 +460,9 @@ class Map implements Serializable {
 
     /**
      * Used to test for containment in a circular region.
+     * <p>
+     *  用于测试圆形区域的容器。
+     * 
      */
     static class CircleRegionContainment implements RegionContainment {
         /** X origin of the circle. */
@@ -484,6 +535,8 @@ class Map implements Serializable {
      * An implementation that will return true if the x, y location is
      * inside a rectangle defined by origin 0, 0, and width equal to
      * width passed in, and height equal to height passed in.
+     * <p>
+     *  如果x,y位置在由原点0,0和宽度等于传入的宽度定义的矩形内,高度等于传入的高度,则返回true的实现。
      */
     static class DefaultRegionContainment implements RegionContainment {
         /** A global shared instance. */

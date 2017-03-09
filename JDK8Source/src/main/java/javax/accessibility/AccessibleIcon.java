@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ package javax.accessibility;
  * {@link AccessibleContext#getAccessibleIcon} method.
  * If the return value is not null, the object supports this interface.
  *
+ * <p>
+ *  任何具有相关图标的对象(例如按钮)都应该支持AccessibleIcon接口。此接口为辅助技术提供标准机制,以获取有关图标的描述性信息。
+ * 应用程序可以通过首先获取其AccessibleContext(参见{@link Accessible})然后调用{@link AccessibleContext#getAccessibleIcon}方法
+ * 来确定对象是否支持AccessibleIcon接口。
+ *  任何具有相关图标的对象(例如按钮)都应该支持AccessibleIcon接口。此接口为辅助技术提供标准机制,以获取有关图标的描述性信息。如果返回值不为null,则对象支持此接口。
+ * 
+ * 
  * @see Accessible
  * @see AccessibleContext
  *
@@ -51,6 +59,10 @@ public interface AccessibleIcon {
      * presented to a blind user to give an indication of the purpose
      * of the icon.
      *
+     * <p>
+     *  获取图标的描述。这意味着对象的简短文本描述。例如,它可以被呈现给盲人用户以给出图标的目的的指示。
+     * 
+     * 
      * @return the description of the icon
      */
     public String getAccessibleIconDescription();
@@ -61,6 +73,10 @@ public interface AccessibleIcon {
      * presented to a blind user to give an indication of the purpose
      * of the icon.
      *
+     * <p>
+     *  设置图标的说明。这意味着对象的简短文本描述。例如,它可以被呈现给盲人用户以给出图标的目的的指示。
+     * 
+     * 
      * @param description the description of the icon
      */
     public void setAccessibleIconDescription(String description);
@@ -68,6 +84,10 @@ public interface AccessibleIcon {
     /**
      * Gets the width of the icon
      *
+     * <p>
+     *  获取图标的宽度
+     * 
+     * 
      * @return the width of the icon.
      */
     public int getAccessibleIconWidth();
@@ -75,6 +95,9 @@ public interface AccessibleIcon {
     /**
      * Gets the height of the icon
      *
+     * <p>
+     *  获取图标的高度
+     * 
      * @return the height of the icon.
      */
     public int getAccessibleIconHeight();

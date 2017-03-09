@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,12 @@ import com.sun.naming.internal.ResourceManager;
   * When a service provider receives a response control, it uses control
   * factories to return the specific/appropriate control class implementation.
   *
+  * <p>
+  *  这个抽象类代表创建LDAPv3控件的工厂。 LDAPv3控制项在<A HREF="http://www.ietf.org/rfc/rfc2251.txt"> RFC 2251 </A>中定义。
+  * p>
+  *  当服务提供者接收到响应控制时,它使用控制工厂来返回特定/适当的控制类实现。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @author Vincent Ryan
@@ -53,6 +60,9 @@ import com.sun.naming.internal.ResourceManager;
 public abstract class ControlFactory {
     /**
      * Creates a new instance of a control factory.
+     * <p>
+     *  创建控制工厂的新实例。
+     * 
      */
     protected ControlFactory() {
     }
@@ -84,6 +94,20 @@ public abstract class ControlFactory {
       * any other internally generated exception that should be propagated
       * must be wrapped inside a <tt>NamingException</tt>.
       *
+      * <p>
+      *  使用此控制工厂创建控件。
+      * p>
+      *  服务提供程序使用工厂将从LDAP协议读取的控件返回为专用控制类。没有这种机制,提供者将返回仅包含BER编码格式的数据的控制。
+      * p>
+      *  通常,<tt> ctl </tt>是包含BER编码数据的"基本"控件。工厂用于创建专用控制实现,通常通过解码BER编码数据,提供以类型安全和友好方式访问数据的方法。
+      * <p>
+      *  例如,工厂可能在基本控制中使用BER编码的数据,并返回VirtualListReplyControl的实例。
+      * p>
+      * 如果此工厂不能使用提供的参数创建控件,则应返回null。一个工厂只应该抛出一个异常,如果它确定它是唯一的目标工厂,没有其他控制工厂应该尝试。
+      * 例如,如果控制中的BER数据与具有给定OID的控制的期望值不匹配,则可能发生这种情况。
+      * 由于此方法抛出<tt> NamingException </tt>,因此任何其他内部生成的异常都必须包含在<tt> NamingException </tt>中。
+      * 
+      * 
       * @param ctl A non-null control.
       *
       * @return A possibly null Control.
@@ -115,6 +139,8 @@ public abstract class ControlFactory {
       * Note that a control factory
       * must be public and must have a public constructor that accepts no arguments.
       * <p>
+      * <p>
+      * 
       * @param ctl The non-null control object containing the OID and BER data.
       * @param ctx The possibly null context in which the control is being created.
       * If null, no such information is available.

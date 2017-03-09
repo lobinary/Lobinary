@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: TransformerFactoryImpl.java,v 1.8 2007/04/09 21:30:41 joehw Exp $
+ * <p>
+ *  $ Id：TransformerFactoryImpl.java,v 1.8 2007/04/09 21:30:41 joehw Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.trax;
@@ -83,6 +96,10 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * Implementation of a JAXP1.1 TransformerFactory for Translets.
+ * <p>
+ *  实现JAXP1.1 TransformerFactory for Translets。
+ * 
+ * 
  * @author G. Todd Miller
  * @author Morten Jorgensen
  * @author Santiago Pericas-Geertsen
@@ -105,11 +122,17 @@ public class TransformerFactoryImpl
     /**
      * This error listener is used only for this factory and is not passed to
      * the Templates or Transformer objects that we create.
+     * <p>
+     *  此错误侦听器仅用于此工厂,不会传递到我们创建的模板或Transformer对象。
+     * 
      */
     private ErrorListener _errorListener = this;
 
     /**
      * This URIResolver is passed to all created Templates and Transformers
+     * <p>
+     *  这个URIResolver被传递给所有创建的模板和变形金刚
+     * 
      */
     private URIResolver _uriResolver = null;
 
@@ -122,37 +145,60 @@ public class TransformerFactoryImpl
      * to slide off completely. His numerous legs, which were pitifully thin
      * compared to the rest of his bulk, waved helplessly before his eyes.
      * "What has happened to me?", he thought. It was no dream....
+     * <p>
+     * 当格雷戈尔·萨姆萨从一个不安的梦想醒来的一个早晨,他发现自己在他的床上变成了一个巨大的昆虫。
+     * 他躺在他的硬,因为它的盔甲电镀,后面,如果他抬起头一点,他可以看到他的大,棕色的肚皮分成僵硬的弓形段,在床的被子几乎不能保持在位置并将要完全滑落。
+     * 他的许多腿,与他的大部分的其余部分相比是可怜的薄,无奈地在他的眼睛前挥手。 "我发生了什么事?",他想。这不是梦想....。
+     * 
      */
     protected final static String DEFAULT_TRANSLET_NAME = "GregorSamsa";
 
     /**
      * The class name of the translet
+     * <p>
+     *  translet的类名
+     * 
      */
     private String _transletName = DEFAULT_TRANSLET_NAME;
 
     /**
      * The destination directory for the translet
+     * <p>
+     *  translet的目标目录
+     * 
      */
     private String _destinationDirectory = null;
 
     /**
      * The package name prefix for all generated translet classes
+     * <p>
+     *  所有生成的translet类的包名称前缀
+     * 
      */
     private String _packageName = null;
 
     /**
      * The jar file name which the translet classes are packaged into
+     * <p>
+     *  将translet类打包到的jar文件名
+     * 
      */
     private String _jarFileName = null;
 
     /**
      * This Hashtable is used to store parameters for locating
      * <?xml-stylesheet ...?> processing instructions in XML docs.
+     * <p>
+     *  这个Hashtable用于存储用于在XML文档中定位<?xml-stylesheet ...?>处理指令的参数。
+     * 
      */
     private Hashtable _piParams = null;
 
     /**
      * The above hashtable stores objects of this class.
+     * <p>
+     *  上面的hashtable存储了这个类的对象。
+     * 
      */
     private static class PIParamWrapper {
         public String _media = null;
@@ -168,17 +214,26 @@ public class TransformerFactoryImpl
 
     /**
      * Set to <code>true</code> when debugging is enabled.
+     * <p>
+     *  当调试启用时,设置为<code> true </code>。
+     * 
      */
     private boolean _debug = false;
 
     /**
      * Set to <code>true</code> when templates are inlined.
+     * <p>
+     *  当模板内联时,设置为<code> true </code>。
+     * 
      */
     private boolean _enableInlining = false;
 
     /**
      * Set to <code>true</code> when we want to generate
      * translet classes from the stylesheet.
+     * <p>
+     *  当我们想从样式表中生成translet类时,设置为<code> true </code>。
+     * 
      */
     private boolean _generateTranslet = false;
 
@@ -187,26 +242,41 @@ public class TransformerFactoryImpl
      * for transformation if possible without compiling the stylesheet. The
      * translet class is only used if its timestamp is newer than the timestamp
      * of the stylesheet.
+     * <p>
+     *  如果这被设置为<code> true </code>,我们尝试使用translet类进行转换,如果可能,而不编译样式表。只有当其时间戳比样式表的时间戳新的时候,才使用translet类。
+     * 
      */
     private boolean _autoTranslet = false;
 
     /**
      * If this is set to <code>true</code>, we attempt to load the translet
      * from the CLASSPATH.
+     * <p>
+     *  如果这被设置为<code> true </code>,我们尝试从CLASSPATH加载translet。
+     * 
      */
     private boolean _useClasspath = false;
 
     /**
      * Number of indent spaces when indentation is turned on.
+     * <p>
+     *  打开缩进时的缩进空格数。
+     * 
      */
     private int _indentNumber = -1;
 
     /**
      * <p>State of secure processing feature.</p>
+     * <p>
+     * <p>安全处理功能的状态。</p>
+     * 
      */
     private boolean _isNotSecureProcessing = true;
     /**
      * <p>State of secure mode.</p>
+     * <p>
+     *  <p>安全模式的状态。</p>
+     * 
      */
     private boolean _isSecureMode = false;
 
@@ -214,15 +284,24 @@ public class TransformerFactoryImpl
      * Indicates whether implementation parts should use
      *   service loader (or similar).
      * Note the default value (false) is the safe option..
+     * <p>
+     *  指示实施部分是否应使用服务加载程序(或类似)。请注意,默认值(false)是安全选项。
+     * 
      */
     private boolean _useServicesMechanism;
 
     /**
      * protocols allowed for external references set by the stylesheet processing instruction, Import and Include element.
+     * <p>
+     *  允许由样式表处理指令设置的外部引用的协议,Import和Include元素。
+     * 
      */
     private String _accessExternalStylesheet = XalanConstants.EXTERNAL_ACCESS_DEFAULT;
      /**
      * protocols allowed for external DTD references in source file and/or stylesheet.
+     * <p>
+     *  允许在源文件和/或样式表中的外部DTD引用的协议。
+     * 
      */
     private String _accessExternalDTD = XalanConstants.EXTERNAL_ACCESS_DEFAULT;
 
@@ -240,6 +319,9 @@ public class TransformerFactoryImpl
 
     /**
      * javax.xml.transform.sax.TransformerFactory implementation.
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。
+     * 
      */
     public TransformerFactoryImpl() {
         this(true);
@@ -282,6 +364,10 @@ public class TransformerFactoryImpl
      * for the processing of transformation instructions, and not for the
      * transformation itself.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。为TransformerFactory设置错误事件侦听器,用于处理转换指令,而不是转换本身。
+     * 
+     * 
      * @param listener The error listener to use with the TransformerFactory
      * @throws IllegalArgumentException
      */
@@ -301,6 +387,10 @@ public class TransformerFactoryImpl
      * javax.xml.transform.sax.TransformerFactory implementation.
      * Get the error event handler for the TransformerFactory.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。获取TransformerFactory的错误事件处理程序。
+     * 
+     * 
      * @return The error listener used with the TransformerFactory
      */
     @Override
@@ -312,6 +402,10 @@ public class TransformerFactoryImpl
      * javax.xml.transform.sax.TransformerFactory implementation.
      * Returns the value set for a TransformerFactory attribute
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。返回为TransformerFactory属性设置的值
+     * 
+     * 
      * @param name The attribute name
      * @return An object representing the attribute value
      * @throws IllegalArgumentException
@@ -363,6 +457,10 @@ public class TransformerFactoryImpl
      * javax.xml.transform.sax.TransformerFactory implementation.
      * Sets the value for a TransformerFactory attribute.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。设置TransformerFactory属性的值。
+     * 
+     * 
      * @param name The attribute name
      * @param value An object representing the attribute value
      * @throws IllegalArgumentException
@@ -499,6 +597,20 @@ public class TransformerFactoryImpl
      *
      * <p>See {@link javax.xml.transform.TransformerFactory} for full documentation of specific features.</p>
      *
+     * <p>
+     *  <p>为此工厂创建的<code> TransformerFactory </code>和<code> Transformer </code>或<code>模板</code>设置功能。<​​/ p>
+     * 
+     * <p>
+     * 功能名称是完全限定的{@link java.net.URI}。实现可以定义它们自己的特征。
+     * 如果此创建的<code> TransformerFactory </code>或<code> Transformer </code>或<code> Template </code>无法支持该功能,则会抛
+     * 出{@link TransformerConfigurationException}。
+     * 功能名称是完全限定的{@link java.net.URI}。实现可以定义它们自己的特征。
+     * 一个<code> TransformerFactory </code>可以暴露一个特征值,但是不能改变它的状态。
+     * </p>
+     * 
+     *  <p>有关特定功能的完整文档,请参阅{@link javax.xml.transform.TransformerFactory}。</p>
+     * 
+     * 
      * @param name Feature name.
      * @param value Is feature state <code>true</code> or <code>false</code>.
      *
@@ -565,6 +677,10 @@ public class TransformerFactoryImpl
      * This method must be updated as the various methods and features of this
      * class are implemented.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。查找要素的值(以查看是否支持)。此方法必须随着此类的各种方法和功能的实现而更新。
+     * 
+     * 
      * @param name The feature name
      * @return 'true' if feature is supported, 'false' if not
      */
@@ -614,12 +730,17 @@ public class TransformerFactoryImpl
     }
     /**
      * Return the state of the services mechanism feature.
+     * <p>
+     *  返回服务机制功能的状态。
+     * 
      */
     public boolean useServicesMechnism() {
         return _useServicesMechanism;
     }
 
      /**
+     /* <p>
+     /* 
      * @return the feature manager
      */
     public FeatureManager getFeatureManager() {
@@ -631,6 +752,11 @@ public class TransformerFactoryImpl
      * Get the object that is used by default during the transformation to
      * resolve URIs used in document(), xsl:import, or xsl:include.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。
+     * 获取在转换期间默认使用的对象,以解析在document(),xsl：import或xsl：include中使用的URI。
+     * 
+     * 
      * @return The URLResolver used for this TransformerFactory and all
      * Templates and Transformer objects created using this factory
      */
@@ -646,6 +772,11 @@ public class TransformerFactoryImpl
      * this does not affect Templates and Transformers that are already
      * created with this factory.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。
+     * 设置转换期间默认使用的对象,以解析在document(),xsl：import或xsl：include中使用的URI。请注意,这不会影响已使用此工厂创建的模板和变形金刚。
+     * 
+     * 
      * @param resolver The URLResolver used for this TransformerFactory and all
      * Templates and Transformer objects created using this factory
      */
@@ -661,6 +792,11 @@ public class TransformerFactoryImpl
      * the document document specified in the source parameter, and that match
      * the given criteria.
      *
+     * <p>
+     * javax.xml.transform.sax.TransformerFactory实现。
+     * 通过xml样式表处理指令(请参阅http://www.w3.org/TR/xml-stylesheet/)关联的样式表规范与源参数中指定的文档文档相匹配,并且匹配给定的标准。
+     * 
+     * 
      * @param source The XML source document.
      * @param media The media attribute to be matched. May be null, in which
      * case the prefered templates will be used (i.e. alternate = no).
@@ -681,6 +817,9 @@ public class TransformerFactoryImpl
 
         /**
          * Fix for bugzilla bug 24187
+         * <p>
+         *  修复bugzilla错误24187
+         * 
          */
         StylesheetPIHandler _stylesheetPIHandler = new StylesheetPIHandler(null,media,title,charset);
 
@@ -755,6 +894,10 @@ public class TransformerFactoryImpl
      * javax.xml.transform.sax.TransformerFactory implementation.
      * Create a Transformer object that copies the input document to the result.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。创建将输入文档复制到结果的Transformer对象。
+     * 
+     * 
      * @return A Transformer object that simply copies the source to the result.
      * @throws TransformerConfigurationException
      */
@@ -781,6 +924,11 @@ public class TransformerFactoryImpl
      * used with XSLTC, as the time-consuming compilation is done for each
      * and every transformation.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。将源处理为模板对象,它是源的编译表示。
+     * 请注意,此方法不应与XSLTC一起使用,因为每次转换都需要进行耗时的编译。
+     * 
+     * 
      * @return A Templates object that can be used to create Transformers.
      * @throws TransformerConfigurationException
      */
@@ -798,6 +946,9 @@ public class TransformerFactoryImpl
 
     /**
      * Pass warning messages from the compiler to the error listener
+     * <p>
+     *  将警告消息从编译器传递给错误侦听器
+     * 
      */
     private void passWarningsToListener(Vector messages)
         throws TransformerException
@@ -821,6 +972,9 @@ public class TransformerFactoryImpl
 
     /**
      * Pass error messages from the compiler to the error listener
+     * <p>
+     *  将错误消息从编译器传递到错误侦听器
+     * 
      */
     private void passErrorsToListener(Vector messages) {
         try {
@@ -844,6 +998,10 @@ public class TransformerFactoryImpl
      * Process the Source into a Templates object, which is a a compiled
      * representation of the source.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。将源处理为模板对象,它是源的编译表示。
+     * 
+     * 
      * @param source The input stylesheet - DOMSource not supported!!!
      * @return A Templates object that can be used to create Transformers.
      * @throws TransformerConfigurationException
@@ -1048,6 +1206,11 @@ public class TransformerFactoryImpl
      * Get a TemplatesHandler object that can process SAX ContentHandler
      * events into a Templates object.
      *
+     * <p>
+     *  javax.xml.transform.sax.SAXTransformerFactory实现。
+     * 获取可以将SAX ContentHandler事件处理到Templates对象中的TemplatesHandler对象。
+     * 
+     * 
      * @return A TemplatesHandler object that can handle SAX events
      * @throws TransformerConfigurationException
      */
@@ -1068,6 +1231,11 @@ public class TransformerFactoryImpl
      * Get a TransformerHandler object that can process SAX ContentHandler
      * events into a Result. This method will return a pure copy transformer.
      *
+     * <p>
+     *  javax.xml.transform.sax.SAXTransformerFactory实现。
+     * 获取可以将SAX ContentHandler事件处理到Result中的TransformerHandler对象。此方法将返回纯复制变换器。
+     * 
+     * 
      * @return A TransformerHandler object that can handle SAX events
      * @throws TransformerConfigurationException
      */
@@ -1088,6 +1256,11 @@ public class TransformerFactoryImpl
      * events into a Result, based on the transformation instructions
      * specified by the argument.
      *
+     * <p>
+     * javax.xml.transform.sax.SAXTransformerFactory实现。
+     * 获取TransformerHandler对象,该对象可以根据参数指定的变换指令将SAX ContentHandler事件处理到Result中。
+     * 
+     * 
      * @param src The source of the transformation instructions.
      * @return A TransformerHandler object that can handle SAX events
      * @throws TransformerConfigurationException
@@ -1109,6 +1282,11 @@ public class TransformerFactoryImpl
      * events into a Result, based on the transformation instructions
      * specified by the argument.
      *
+     * <p>
+     *  javax.xml.transform.sax.SAXTransformerFactory实现。
+     * 获取TransformerHandler对象,该对象可以根据参数指定的变换指令将SAX ContentHandler事件处理到Result中。
+     * 
+     * 
      * @param templates Represents a pre-processed stylesheet
      * @return A TransformerHandler object that can handle SAX events
      * @throws TransformerConfigurationException
@@ -1127,6 +1305,10 @@ public class TransformerFactoryImpl
      * Create an XMLFilter that uses the given source as the
      * transformation instructions.
      *
+     * <p>
+     *  javax.xml.transform.sax.SAXTransformerFactory实现。创建一个使用给定源作为转换指令的XMLFilter。
+     * 
+     * 
      * @param src The source of the transformation instructions.
      * @return An XMLFilter object, or null if this feature is not supported.
      * @throws TransformerConfigurationException
@@ -1145,6 +1327,10 @@ public class TransformerFactoryImpl
      * Create an XMLFilter that uses the given source as the
      * transformation instructions.
      *
+     * <p>
+     *  javax.xml.transform.sax.SAXTransformerFactory实现。创建一个使用给定源作为转换指令的XMLFilter。
+     * 
+     * 
      * @param templates The source of the transformation instructions.
      * @return An XMLFilter object, or null if this feature is not supported.
      * @throws TransformerConfigurationException
@@ -1176,6 +1362,10 @@ public class TransformerFactoryImpl
      * invoking this method. It should still be possible for the application
      * to process the document through to the end.
      *
+     * <p>
+     *  接收可恢复错误的通知。变换器必须在调用此方法后继续提供正常的解析事件。应用程序应该仍然可以处理文档直到结束。
+     * 
+     * 
      * @param e The warning information encapsulated in a transformer
      * exception.
      * @throws TransformerException if the application chooses to discontinue
@@ -1205,6 +1395,11 @@ public class TransformerFactoryImpl
      * Transformers are free to stop reporting events once this method has
      * been invoked.
      *
+     * <p>
+     *  接收不可恢复错误的通知。应用程序必须假定在Transformer调用此方法后转换无法继续,并且应继续(如果有)仅收集添加错误消息。
+     * 事实上,一旦调用此方法,Transformers就可以自由停止报告事件。
+     * 
+     * 
      * @param e warning information encapsulated in a transformer
      * exception.
      * @throws TransformerException if the application chooses to discontinue
@@ -1234,6 +1429,10 @@ public class TransformerFactoryImpl
      * transformation. It should still be possible for the application to
      * process the document through to the end.
      *
+     * <p>
+     * 接收警告通知。变换器可以使用此方法报告不是错误或致命错误的情况。默认行为是不采取任何操作。调用此方法后,变换器必须继续执行转换。应用程序应该仍然可以处理文档直到结束。
+     * 
+     * 
      * @param e The warning information encapsulated in a transformer
      * exception.
      * @throws TransformerException if the application chooses to discontinue
@@ -1258,6 +1457,10 @@ public class TransformerFactoryImpl
      * This method implements XSLTC's SourceLoader interface. It is used to
      * glue a TrAX URIResolver to the XSLTC compiler's Input and Import classes.
      *
+     * <p>
+     *  这个方法实现了XSLTC的SourceLoader接口。它用于将TrAX URIResolver粘合到XSLTC编译器的输入和导入类。
+     * 
+     * 
      * @param href The URI of the document to load
      * @param context The URI of the currently loaded document
      * @param xsltc The compiler that resuests the document
@@ -1284,6 +1487,9 @@ public class TransformerFactoryImpl
 
     /**
      * Reset the per-session attributes to their default values
+     * <p>
+     *  将每会话属性重置为其默认值
+     * 
      */
     private void resetTransientAttributes() {
         _transletName = DEFAULT_TRANSLET_NAME;
@@ -1296,6 +1502,10 @@ public class TransformerFactoryImpl
      * Load the translet classes from local .class files and return
      * the bytecode array.
      *
+     * <p>
+     *  从本地.class文件加载translet类并返回字节码数组。
+     * 
+     * 
      * @param source The xsl source
      * @param fullClassName The full name of the translet
      * @return The bytecode array
@@ -1434,6 +1644,10 @@ public class TransformerFactoryImpl
     /**
      * Load the translet classes from the jar file and return the bytecode.
      *
+     * <p>
+     *  从jar文件加载translet类并返回字节码。
+     * 
+     * 
      * @param source The xsl source
      * @param fullClassName The full name of the translet
      * @return The bytecode array
@@ -1528,6 +1742,10 @@ public class TransformerFactoryImpl
     /**
      * Read a given number of bytes from the InputStream into a byte array.
      *
+     * <p>
+     *  从InputStream中读取给定数量的字节为字节数组。
+     * 
+     * 
      * @param bytes The byte array to store the input content.
      * @param input The input stream.
      * @param size The number of bytes to read.
@@ -1552,6 +1770,11 @@ public class TransformerFactoryImpl
      * 2. otherwise get the translet name from the base name of the system ID
      * 3. return "GregorSamsa" if the result from step 2 is null.
      *
+     * <p>
+     *  返回translet的基类名称。 translet名称使用以下规则解析：1.如果设置了_transletName属性并且其值不是"GregorSamsa",则返回_transletName。
+     *  2.否则从系统ID的基本名称获取translet名称3.如果步骤2的结果为null,则返回"GregorSamsa"。
+     * 
+     * 
      * @param source The input Source
      * @return The name of the translet class
      */
@@ -1577,6 +1800,10 @@ public class TransformerFactoryImpl
     /**
      *  Return the local file name from the systemId of the Source object
      *
+     * <p>
+     *  从Source对象的systemId返回本地文件名
+     * 
+     * 
      * @param source The Source
      * @return The file name in the local filesystem, or null if the
      * systemId does not represent a local file.
@@ -1609,6 +1836,8 @@ public class TransformerFactoryImpl
 
     /**
      * Returns a new instance of the XSLTC DTM Manager service.
+     * <p>
+     *  返回XSLTC DTM Manager服务的新实例。
      */
     protected final XSLTCDTMManager createNewDTMManagerInstance() {
         return XSLTCDTMManager.createNewDTMManagerInstance();

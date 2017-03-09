@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,8 @@ import com.sun.corba.se.spi.orb.ORB;
 import com.sun.corba.se.pept.transport.ByteBufferPool;
 
 /**
+/* <p>
+/* 
  * @author Charlie Hunt
  */
 
@@ -59,6 +62,10 @@ public class ByteBufferPoolImpl implements ByteBufferPool
      * 1. ContactInfoBase.createMessageMediator()
      * 2. ByteBufferWithInfo.growBuffer()
      * 3. ByteBufferWithInfo(ORB, BufferManagerWrite) - constructor
+     * <p>
+     *  ByteBuffers从池中获取的位置：1. ContactInfoBase.createMessageMediator()2. ByteBufferWithInfo.growBuffer()3. B
+     * yteBufferWithInfo(ORB,BufferManagerWrite) - 构造函数。
+     * 
     */
 
     // If the requested ByteBuffer size is less than or equal to
@@ -126,6 +133,9 @@ public class ByteBufferPoolImpl implements ByteBufferPool
      * 6. BufferManagerWrite.close()
      * 7. BufferManagerRead.close()
      * 8. CorbaMessageMediatorImpl.releaseByteBufferToPool()
+     * <p>
+     *  ByteBuffer被释放到池中的位置：1. ByteBufferWithInfo.growBuffer()2.PrinterManagerWriteCollect.sendMessage()3.CD
+     * RoutputStream_1_0.close()4.CDRInputStream_1_0.close()5.BufferManagerReadStream.underflow()6.BufferMan
     */
 
     // If the ByteBuffer is a DirectByteBuffer, add it to the pool.

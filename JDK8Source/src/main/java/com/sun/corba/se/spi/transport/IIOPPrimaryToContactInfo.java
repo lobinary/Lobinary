@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,16 +46,31 @@ import com.sun.corba.se.pept.transport.ContactInfo;
  * Note: This assumes static lists of replicas (e.g., AS 8.1 EE).
  * This does NOT work well with LOCATION_FORWARD.
  *
+ * <p>
+ *  此接口是IIOP故障转移的"粘性管理器"。默认的ORB不包含粘性管理器。
+ * 一个通过com.sun.CORBA.transport.ORBIIOPPrimaryToContactInfoClass提供一个类来注册。
+ * 
+ *  它使用IIOP主要主机/端口(使用SocketInfo.IIOP_CLEAR_TEXT类型)作为键映射到最后一个ContactInfo,导致成功的通信。
+ * 
+ *  它主要防止"fallback" - 如果以前失败的副本恢复,我们不想切换回使用它 - 特别是在statefull会话bean的情况下。
+ * 
  * @author Harold Carr
  */
 public interface IIOPPrimaryToContactInfo
 {
     /**
+    /* <p>
+    /* 
+    /*  注意：这假设复制品的静态列表(例如,AS 8.1 EE)。这不适用于LOCATION_FORWARD。
+    /* 
+    /* 
      * @param primary - clear any state relating to primary.
      */
     public void reset(ContactInfo primary);
 
     /**
+    /* <p>
+    /* 
      * @param primary - the key.
      * @param previous - if null return true.  Otherwise, find previous in
      * <code>contactInfos</code> and if another <code>ContactInfo</code>
@@ -67,6 +83,8 @@ public interface IIOPPrimaryToContactInfo
                            List contactInfos);
 
     /**
+    /* <p>
+    /* 
      * @param primary - the key.
      * @param previous - if null then map primary to failover.  If failover is
      * empty then map primary to primary and return primary.  If failover is

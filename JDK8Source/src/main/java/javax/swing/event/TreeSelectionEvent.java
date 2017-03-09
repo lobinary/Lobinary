@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,13 @@ import javax.swing.tree.TreePath;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  表征当前选择中的更改的事件。该更改基于任意数量的路径。 TreeSelectionListeners通常将查询每个潜在更改行的新选定状态的事件源。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see TreeSelectionListener
  * @see javax.swing.tree.TreeSelectionModel
  *
@@ -65,6 +73,10 @@ public class TreeSelectionEvent extends EventObject
       * paths identifies the paths that have been either added or
       * removed from the selection.
       *
+      * <p>
+      *  表示TreeSelectionModel的选择中的更改。路径标识已从选择中添加或删除的路径。
+      * 
+      * 
       * @param source source of event
       * @param paths the paths that have changed in the selection
       */
@@ -84,6 +96,10 @@ public class TreeSelectionEvent extends EventObject
       * path identifies the path that have been either added or
       * removed from the selection.
       *
+      * <p>
+      *  表示TreeSelectionModel的选择中的更改。 path标识已从选择中添加或删除的路径。
+      * 
+      * 
       * @param source source of event
       * @param path the path that has changed in the selection
       * @param isNew whether or not the path is new to the selection, false
@@ -105,6 +121,9 @@ public class TreeSelectionEvent extends EventObject
     /**
       * Returns the paths that have been added or removed from the
       * selection.
+      * <p>
+      *  返回已从选择中添加或删除的路径。
+      * 
       */
     public TreePath[] getPaths()
     {
@@ -119,6 +138,9 @@ public class TreeSelectionEvent extends EventObject
 
     /**
       * Returns the first path element.
+      * <p>
+      *  返回第一个路径元素。
+      * 
       */
     public TreePath getPath()
     {
@@ -132,6 +154,11 @@ public class TreeSelectionEvent extends EventObject
      * the selection. A return value of {@code false} indicates {@code
      * getPath} was selected, but is no longer selected.
      *
+     * <p>
+     *  返回{@code getPath}标识的路径是否已添加到选择中。返回值{@code true}表示由{@code getPath}标识的路径已添加到选择中。
+     * 返回值{@code false}表示{@code getPath}已选中,但不再选择。
+     * 
+     * 
      * @return {@code true} if {@code getPath} was added to the selection,
      *         {@code false} otherwise
      */
@@ -148,6 +175,11 @@ public class TreeSelectionEvent extends EventObject
      * with a path not included in {@code getPaths()} throws an
      * {@code IllegalArgumentException}.
      *
+     * <p>
+     * 返回指定的路径是否添加到选择。返回值{@code true}表示{@code path}标识的路径已添加到选择中。返回值{@code false}表示不再选择{@code path}。
+     * 此方法仅适用于从{@code getPaths()}返回的路径;调用{@code getPaths()}中未包含的路径会抛出{@code IllegalArgumentException}。
+     * 
+     * 
      * @param path the path to test
      * @return {@code true} if {@code path} was added to the selection,
      *         {@code false} otherwise
@@ -168,6 +200,10 @@ public class TreeSelectionEvent extends EventObject
      * path was added to the selection. A return value of {@code false}
      * indicates the path is no longer selected.
      *
+     * <p>
+     *  返回{@code getPaths()[index]}中的路径是否已添加到选择中。返回值{@code true}表示添加到选择中的路径。返回值{@code false}表示不再选择路径。
+     * 
+     * 
      * @param index the index of the path to test
      * @return {@code true} if the path was added to the selection,
      *         {@code false} otherwise
@@ -186,6 +222,9 @@ public class TreeSelectionEvent extends EventObject
 
     /**
      * Returns the path that was previously the lead path.
+     * <p>
+     *  返回先前为引导路径的路径。
+     * 
      */
     public TreePath getOldLeadSelectionPath() {
         return oldLeadSelectionPath;
@@ -193,6 +232,9 @@ public class TreeSelectionEvent extends EventObject
 
     /**
      * Returns the current lead path.
+     * <p>
+     *  返回当前前导路径。
+     * 
      */
     public TreePath getNewLeadSelectionPath() {
         return newLeadSelectionPath;
@@ -200,6 +242,8 @@ public class TreeSelectionEvent extends EventObject
 
     /**
      * Returns a copy of the receiver, but with the source being newSource.
+     * <p>
+     *  返回接收器的副本,但源是newSource。
      */
     public Object cloneWithSource(Object newSource) {
       // Fix for IE bug - crashing

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -116,6 +117,30 @@ import sun.reflect.misc.ReflectUtil;
  *   reconstruct an instance of the Java class from the values of the
  *   getters using one of various heuristics.</p>
  *
+ * <p>
+ *  <p>在Java类型和由Open MBeans定义的有限类类之间的转换器。</p>
+ * 
+ *  <p> Java类型是java.lang.reflect.Type的一个实例。
+ * 为了我们的目的,它是一个类,如String.class或int.class;或ParameterizedType,例如List <String>或Map <Integer,String []>。
+ * 在J2SE 1.4和更早版本上,它只能是一个类。</p>。
+ * 
+ *  <p>每个类型都与DefaultMXBeanMappingFactory相关联。
+ *  DefaultMXBeanMappingFactory定义对应于Type的OpenType,加上对应于OpenType的Java类。例如：</p>。
+ * 
+ * <pre>
+ *  类型Open class OpenType ---- ---------- --------整数Integer SimpleType.INTEGER int int SimpleType.INTEGE
+ * R Integer [] Integer [] ArrayType(1,SimpleType.INTEGER) int [] Integer [] ArrayType(SimpleType.INTEGE
+ * R,true)String [] [] String [] [] ArrayType(2,SimpleType.STRING) Enum)String SimpleType.STRING Map <Integer,String []>
+ *  TabularData TabularType(CompositeType({"key",SimpleType.INTEGER},{"value",ArrayType(1,SimpleType.STRING)}
+ * ),indexNames = "})。
+ * </pre>
+ * 
+ * <p>除了简单的类型,数组和集合,Java类型通过内省转换为CompositeType。
+ *  Java类型必须至少有一个getter(例如"int getSize()"或"boolean isBig()"的方法),并且我们必须能够从getter的值中推导出如何重构Java类的实例使用各种启发式
+ * 方法之一。
+ * <p>除了简单的类型,数组和集合,Java类型通过内省转换为CompositeType。</p>。
+ * 
+ * 
  * @since 1.6
  */
 public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
@@ -150,6 +175,9 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
         /**
          * <p>True if and only if this MXBeanMapping's toOpenValue and
          * fromOpenValue methods are the identity function.</p>
+         * <p>
+         *  <p>如果且仅当此MXBeanMapping的toOpenValue和fromOpenValue方法是身份函数,则为true。</p>
+         * 
          */
         boolean isIdentity() {
             return false;
@@ -167,6 +195,8 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
     private static final Mappings mappings = new Mappings();
 
     /** Following List simply serves to keep a reference to predefined
+    /* <p>
+    /* 
         MXBeanMappings so they don't get garbage collected. */
     private static final List<MXBeanMapping> permanentMappings = newList();
 
@@ -271,6 +301,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
 
         /* It's not yet worth formalizing these tests by having for example
            an array of factory classes, each of which says whether it
+        /* <p>
+        /*  一个工厂类的数组,每个都说是否
+        /* 
+        /* 
            recognizes the Type (Chain of Responsibility pattern).  */
         if (objType instanceof GenericArrayType) {
             Type componentType =
@@ -309,6 +343,9 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
      * List<String> or Set<Integer>.  We never see one-dimensional
      * primitive arrays (e.g. int[]) here because they use the identity
      * converter and are registered as such in the static initializer.
+     * <p>
+     *  List <String>或设置<Integer>。我们从来没有看到一维原始数组(例如int []),因为它们使用标识转换器,并在静态初始化器中注册。
+     * 
      */
     private MXBeanMapping
         makeArrayOrCollectionMapping(Type collectionType, Type elementType,
@@ -379,6 +416,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
        Map<K,V>, SortedMap<K,V>, and that's it.  We don't accept
        subtypes of those because we wouldn't know how to deserialize
        them.  We don't accept Queue<E> because it is unlikely people
+    /* <p>
+    /*  地图<K,V>,SortedMap <K,V>,就是它。我们不接受那些的子类型,因为我们不知道如何反序列化它们。我们不接受队列<E>,因为这是不可能的人
+    /* 
+    /* 
        would use that as a parameter or return type in an MBean.  */
     private MXBeanMapping
             makeParameterizedTypeMapping(ParameterizedType objType,
@@ -433,6 +474,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
 
         /* Select public methods that look like "T getX()" or "boolean
            isX()", where T is not void and X is not the empty
+        /* <p>
+        /*  isX()",其中T不是void并且X不是空的
+        /* 
+        /* 
            string.  Exclude "Class getClass()" inherited from Object.  */
         for (Method method : methods) {
             final String propertyName = propertyName(method);
@@ -492,6 +537,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
        and for an any-dimension array of those.  It is also true for
        primitive types as of JMX 1.3, since an int[]
        can be directly represented by an ArrayType, and an int needs no mapping
+    /* <p>
+    /*  原始数据。这适用于任何SimpleType类型,以及这些类型的任意维数组。对于JMX 1.3的原始类型也是如此,因为int []可以直接由ArrayType表示,int不需要映射
+    /* 
+    /* 
        because reflection takes care of it.  */
     private static final class IdentityMapping extends NonNullMXBeanMapping {
         IdentityMapping(Type targetType, OpenType<?> openType) {
@@ -593,6 +642,9 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
          * DefaultMXBeanMappingFactory for the elements of this array.  If this is an
          *          array of arrays, the converter converts the second-level arrays,
          *          not the deepest elements.
+         * <p>
+         *  DefaultMXBeanMappingFactory用于此数组的元素。如果这是一个数组数组,转换器转换第二级数组,而不是最深的元素。
+         * 
          */
         private final MXBeanMapping elementMapping;
     }
@@ -608,6 +660,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
             /* Determine the concrete class to be used when converting
                back to this Java type.  We convert all Lists to ArrayList
                and all Sets to TreeSet.  (TreeSet because it is a SortedSet,
+            /* <p>
+            /*  回到这个Java类型。我们将所有列表转换为ArrayList,将所有集合转换为TreeSet。 (TreeSet因为它是一个SortedSet,
+            /* 
+            /* 
                so works for both Set and SortedSet.)  */
             Type raw = ((ParameterizedType) targetType).getRawType();
             Class<?> c = (Class<?>) raw;
@@ -845,6 +901,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
         /** Determine how to convert back from the CompositeData into
             the original Java type.  For a type that is not reconstructible,
             this method will fail every time, and will throw the right
+        /* <p>
+        /* 原始的Java类型。对于不可重构的类型,此方法每次都会失败,并且会抛出错误
+        /* 
+        /* 
             exception. */
         private synchronized void makeCompositeBuilder()
                 throws InvalidObjectException {
@@ -854,6 +914,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
             Class<?> targetClass = (Class<?>) getJavaType();
             /* In this 2D array, each subarray is a set of builders where
                there is no point in consulting the ones after the first if
+            /* <p>
+            /*  没有必要在第一次之后咨询
+            /* 
+            /* 
                the first refuses.  */
             CompositeBuilder[][] builders = {
                 {
@@ -872,6 +936,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
             CompositeBuilder foundBuilder = null;
             /* We try to make a meaningful exception message by
                concatenating each Builder's explanation of why it
+            /* <p>
+            /*  连接每个Builder的解释为什么它
+            /* 
+            /* 
                isn't applicable.  */
             final StringBuilder whyNots = new StringBuilder();
             Throwable possibleCause = null;
@@ -946,6 +1014,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
             method returns null.  If the subclass is not appropriate,
             then the method returns an explanation of why not.  If the
             subclass should be appropriate but there is a problem,
+        /* <p>
+        /*  方法返回null。如果子类不合适,那么该方法返回为什么不解释。如果子类应该适当,但有一个问题,
+        /* 
+        /* 
             then the method throws InvalidObjectException.  */
         abstract String applicable(Method[] getters)
                 throws InvalidObjectException;
@@ -955,6 +1027,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
             potentially confusing, because the real problem could be that one
             of the other subclasses is supposed to be applicable but isn't.
             But the advantage of less information loss probably outweighs the
+        /* <p>
+        /*  它还可以指示具有细节的异常。这是潜在的混乱,因为真正的问题可能是其他子类之一应该适用,但不是。但是较少的信息损失的优势可能胜过
+        /* 
+        /* 
             disadvantage of possible confusion.  */
         Throwable possibleCause() {
             return null;
@@ -970,6 +1046,8 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
     }
 
     /** Builder for when the target class has a method "public static
+    /* <p>
+    /* 
         from(CompositeData)".  */
     private static final class CompositeBuilderViaFrom
             extends CompositeBuilder {
@@ -1034,6 +1112,12 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
         candidate builders.  Instead, the "applicable" method will return
         an explanatory string, and the other builders will be skipped.
         If all the getters are OK, then the "applicable" method will return
+    /* <p>
+    /*  以检查同一组中的其他构建器是否有任何成功的机会。
+    /* 如果targetClass中的任何getter返回一个我们不知道如何重建的类型,那么我们将无法创建一个构建器,并且没有必要多次重复有问题的getter的错误建设者。
+    /* 相反,"适用"方法将返回一个解释性字符串,其他构建器将被跳过。如果所有getter都OK,那么"适用"方法将返回。
+    /* 
+    /* 
         an empty string and the other builders will be tried.  */
     private static class CompositeBuilderCheckGetters extends CompositeBuilder {
         CompositeBuilderCheckGetters(Class<?> targetClass, String[] itemNames,
@@ -1133,6 +1217,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
 
     /** Builder for when the target class has a constructor that is
         annotated with @ConstructorProperties so we can see the correspondence
+    /* <p>
+    /*  用@ConstructorProperties注释,这样我们可以看到对应关系
+    /* 
+    /* 
         to getters.  */
     private static final class CompositeBuilderViaConstructor
             extends CompositeBuilder {
@@ -1299,6 +1387,13 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
              * would already be a large number, so although it's probably
              * possible to have an O(n lg n) algorithm it wouldn't be
              * worth the complexity.
+             * <p>
+             * 构造函数的选择(规范要求这个检查)。对于任何构造函数对,它们的并集将是最小的模糊集合。如果该集合本身对应于构造函数,则该对不存在歧义。
+             * 在通常情况下,其中一个构造函数是另一个的超集,所以联合只是更大的构造函数。
+             * 
+             *  这里的算法是具有@ConstructorProperties注释的构造函数的数量的二次方。通常这对应于已经存在的类的版本的数量。
+             * 十个已经是一个大数,所以尽管可能有一个O(n lg n)算法,它不值得的复杂性。
+             * 
              */
             for (BitSet a : getterIndexSets) {
                 boolean seen = false;
@@ -1402,6 +1497,10 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
     /** Builder for when the target class is an interface and contains
         no methods other than getters.  Then we can make an instance
         using a dynamic proxy that forwards the getters to the source
+    /* <p>
+    /*  没有除getter之外的方法。然后,我们可以使用动态代理,将getter转发到源来创建实例
+    /* 
+    /* 
         CompositeData.  */
     private static final class CompositeBuilderViaProxy
             extends CompositeBuilder {
@@ -1419,6 +1518,9 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
             methods.removeAll(Arrays.asList(getters));
             /* If the interface has any methods left over, they better be
              * public methods that are already present in java.lang.Object.
+             * <p>
+             *  已经存在于java.lang.Object中的公共方法。
+             * 
              */
             String bad = null;
             for (Method m : methods) {
@@ -1434,6 +1536,9 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
                 /* We don't catch SecurityException since it shouldn't
                  * happen for a method in Object and if it does we would
                  * like to know about it rather than mysteriously complaining.
+                 * <p>
+                 *  发生在Object中的方法,如果我们想知道它而不是神秘地抱怨。
+                 * 
                  */
             }
             if (bad != null)
@@ -1491,6 +1596,12 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
      * Thus "FooBah" becomes "fooBah" and "X" becomes "x", but "URL" stays
      * as "URL".
      *
+     * <p>
+     *  获取字符串并将其转换为正常Java变量名大写的实用方法。这通常意味着将第一个字符从大写转换为小写,但是在(不常见)特殊情况下,当有多个字符并且第一个和第二个字符都是大写时,我们将其保留。
+     * <p>
+     *  因此,"FooBah"变为"fooBah","X"变为"x",但"URL"保持为"URL"。
+     * 
+     * 
      * @param  name The string to be decapitalized.
      * @return  The decapitalized version of the string.
      */
@@ -1512,6 +1623,7 @@ public class DefaultMXBeanMappingFactory extends MXBeanMappingFactory {
      * capitalize(decapitalize(s)).equals(s).  The reverse is not true:
      * e.g. capitalize("uRL") produces "URL" which is unchanged by
      * decapitalize.
+     * <p>
      */
     static String capitalize(String name) {
         if (name == null || name.length() == 0)

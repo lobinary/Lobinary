@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import javax.imageio.stream.ImageOutputStream;
  * Came from GIFEncoder initially.
  * Modified - to allow for output compressed data without the block counts
  * which breakup the compressed data stream for GIF.
+ * <p>
+ *  最初来自GIFEncoder。修改 - 允许输出压缩数据,而不包含中断GIF的压缩数据流的块计数。
+ * 
  */
 public class BitFile {
     ImageOutputStream output;
@@ -43,6 +47,8 @@ public class BitFile {
     boolean blocks = false;
 
     /*
+    /* <p>
+    /* 
      * @param output destination for output data
      * @param blocks GIF LZW requires block counts for output data
      */

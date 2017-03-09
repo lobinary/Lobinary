@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import com.sun.jmx.snmp.SnmpOid;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  表示SNMP索引。 <CODE> SnmpIndex </CODE>表示为<CODE>向量</CODE>的<CODE> SnmpOid </CODE>。
+ * <P>
+ *  此类在内部使用,由<CODE> mibgen </CODE>生成的类使用。你不应该直接使用这个类。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public class SnmpIndex implements Serializable {
@@ -60,6 +68,11 @@ public class SnmpIndex implements Serializable {
      * In the different <CODE>SnmpValue</CODE> classes provided, there is a <CODE>toOid</CODE> method to get
      * the object identifier of the value.
      *
+     * <p>
+     *  使用对象标识符向量初始化<CODE> SnmpIndex </CODE>。 <P>遵循RFC建议,用作表索引的每个语法都应具有对象标识符表示。有一些关于如何将不同的语法映射到对象标识符的指南。
+     * 在提供的不同的<CODE> SnmpValue </CODE>类中,有一个<CODE> toOid </CODE>方法来获取值的对象标识符。
+     * 
+     * 
      * @param oidList The list of Object Identifiers.
      */
     public SnmpIndex(SnmpOid[] oidList) {
@@ -74,6 +87,10 @@ public class SnmpIndex implements Serializable {
     /**
      * Initializes an <CODE>SnmpIndex</CODE> using the specified Object Identifier.
      *
+     * <p>
+     *  使用指定的对象标识符初始化<CODE> SnmpIndex </CODE>。
+     * 
+     * 
      * @param oid The Object Identifier.
      */
     public SnmpIndex(SnmpOid oid) {
@@ -84,6 +101,10 @@ public class SnmpIndex implements Serializable {
     /**
      * Gets the number of Object Identifiers the index is made of.
      *
+     * <p>
+     *  获取索引所对应的对象标识符的数量。
+     * 
+     * 
      * @return The number of Object Identifiers.
      */
     public int getNbComponents() {
@@ -93,6 +114,10 @@ public class SnmpIndex implements Serializable {
     /**
      * Gets the index as a vector of Object Identifiers.
      *
+     * <p>
+     *  获取索引作为对象标识符的向量。
+     * 
+     * 
      * @return The index as a vector.
      */
     public Vector<SnmpOid> getComponents() {
@@ -102,6 +127,10 @@ public class SnmpIndex implements Serializable {
     /**
      * Compares two indexes for equality.
      *
+     * <p>
+     *  比较两个索引的相等性。
+     * 
+     * 
      * @param index The index to compare <CODE>this</CODE> with.
      *
      * @return <CODE>true</CODE> if the two indexes are equal, <CODE>false</CODE> otherwise.
@@ -129,6 +158,10 @@ public class SnmpIndex implements Serializable {
     /**
      * Compares two indexes.
      *
+     * <p>
+     *  比较两个索引。
+     * 
+     * 
      * @param index The index to compare <CODE>this</CODE> with.
      *
      * @return The value 0 if the two OID vectors have the same elements, another value otherwise.
@@ -162,6 +195,10 @@ public class SnmpIndex implements Serializable {
      * Returns a <CODE>String</CODE> representation of the index.
      * The different elements are separated by "//".
      *
+     * <p>
+     *  返回索引的<CODE> String </CODE>表示形式。不同的元素用"//"分隔。
+     * 
+     * 
      * @return A string representation of the index.
      */
     @Override
@@ -179,12 +216,19 @@ public class SnmpIndex implements Serializable {
 
     /**
      * The list of OIDs.
+     * <p>
+     *  OID列表。
+     * 
+     * 
      * @serial
      */
     private Vector<SnmpOid> oids = new Vector<>();
 
     /**
      * The number of elements in the index.
+     * <p>
+     *  索引中的元素数。
+     * 
      * @serial
      */
     private int size = 0;

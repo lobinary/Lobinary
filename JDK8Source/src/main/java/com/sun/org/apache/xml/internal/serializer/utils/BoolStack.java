@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: BoolStack.java,v 1.1.4.1 2005/09/08 11:03:08 suresh_emailid Exp $
+ * <p>
+ *  $ Id：BoolStack.java,v 1.1.4.1 2005/09/08 11:03:08 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer.utils;
 
@@ -35,6 +48,15 @@ package com.sun.org.apache.xml.internal.serializer.utils;
  * used in com.sun.org.apache.xml.internal.serializer.
  *
  * @xsl.usage internal
+ * <p>
+ *  布尔值的简单堆栈。
+ * 
+ *  这个类是com.sun.org.apache.xml.internal.utils中的一个副本。它存在于减少序列化程序对该包的依赖。对该包的轻微更改是：不实现Clonable
+ * 
+ *  此类不是公共API,它只是公共的,因为它在com.sun.org.apache.xml.internal.serializer中使用。
+ * 
+ *  @ xsl.usage internal
+ * 
  */
 public final class BoolStack
 {
@@ -51,6 +73,9 @@ public final class BoolStack
   /**
    * Default constructor.  Note that the default
    * block size is very small, for small lists.
+   * <p>
+   *  默认构造函数。请注意,对于小列表,默认块大小非常小。
+   * 
    */
   public BoolStack()
   {
@@ -60,6 +85,10 @@ public final class BoolStack
   /**
    * Construct a IntVector, using the given block size.
    *
+   * <p>
+   *  使用给定的块大小构造IntVector。
+   * 
+   * 
    * @param size array size to allocate
    */
   public BoolStack(int size)
@@ -73,6 +102,10 @@ public final class BoolStack
   /**
    * Get the length of the list.
    *
+   * <p>
+   *  获取列表的长度。
+   * 
+   * 
    * @return Current length of the list
    */
   public final int size()
@@ -83,6 +116,9 @@ public final class BoolStack
   /**
    * Clears the stack.
    *
+   * <p>
+   *  清除堆栈。
+   * 
    */
   public final void clear()
   {
@@ -93,6 +129,10 @@ public final class BoolStack
    * Pushes an item onto the top of this stack.
    *
    *
+   * <p>
+   *  将项目推到此堆栈的顶部。
+   * 
+   * 
    * @param val the boolean to be pushed onto this stack.
    * @return  the <code>item</code> argument.
    */
@@ -109,6 +149,10 @@ public final class BoolStack
    * Removes the object at the top of this stack and returns that
    * object as the value of this function.
    *
+   * <p>
+   *  删除该堆栈顶部的对象,并返回该对象作为此函数的值。
+   * 
+   * 
    * @return     The object at the top of this stack.
    * @throws  EmptyStackException  if this stack is empty.
    */
@@ -122,6 +166,10 @@ public final class BoolStack
    * next object at the top as the value of this function.
    *
    *
+   * <p>
+   * 删除该堆栈顶部的对象,并返回顶部的下一个对象作为此函数的值。
+   * 
+   * 
    * @return Next object to the top or false if none there
    */
   public final boolean popAndTop()
@@ -136,6 +184,10 @@ public final class BoolStack
    * Set the item at the top of this stack
    *
    *
+   * <p>
+   *  设置此堆栈顶部的项目
+   * 
+   * 
    * @param b Object to set at the top of this stack
    */
   public final void setTop(boolean b)
@@ -147,6 +199,10 @@ public final class BoolStack
    * Looks at the object at the top of this stack without removing it
    * from the stack.
    *
+   * <p>
+   *  查看该堆栈顶部的对象,而不从堆栈中删除它。
+   * 
+   * 
    * @return     the object at the top of this stack.
    * @throws  EmptyStackException  if this stack is empty.
    */
@@ -159,6 +215,10 @@ public final class BoolStack
    * Looks at the object at the top of this stack without removing it
    * from the stack.  If the stack is empty, it returns false.
    *
+   * <p>
+   *  查看该堆栈顶部的对象,而不从堆栈中删除它。如果堆栈为空,它返回false。
+   * 
+   * 
    * @return     the object at the top of this stack.
    */
   public final boolean peekOrFalse()
@@ -170,6 +230,10 @@ public final class BoolStack
    * Looks at the object at the top of this stack without removing it
    * from the stack.  If the stack is empty, it returns true.
    *
+   * <p>
+   *  查看该堆栈顶部的对象,而不从堆栈中删除它。如果堆栈为空,它返回true。
+   * 
+   * 
    * @return     the object at the top of this stack.
    */
   public final boolean peekOrTrue()
@@ -180,6 +244,10 @@ public final class BoolStack
   /**
    * Tests if this stack is empty.
    *
+   * <p>
+   *  测试此堆栈是否为空。
+   * 
+   * 
    * @return  <code>true</code> if this stack is empty;
    *          <code>false</code> otherwise.
    */
@@ -191,6 +259,8 @@ public final class BoolStack
   /**
    * Grows the size of the stack
    *
+   * <p>
+   *  增大堆栈的大小
    */
   private void grow()
   {

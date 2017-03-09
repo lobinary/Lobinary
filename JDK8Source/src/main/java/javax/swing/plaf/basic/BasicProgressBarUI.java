@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import sun.swing.DefaultLookup;
 /**
  * A Basic L&amp;F implementation of ProgressBarUI.
  *
+ * <p>
+ *  ProgressBarUI的基本L&amp; F实现。
+ * 
+ * 
  * @author Michael C. Albers
  * @author Kathy Walrath
  */
@@ -64,6 +69,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * the default animation thread updates this variable
      * by invoking incrementAnimationIndex()
      * every repaintInterval milliseconds.
+     * <p>
+     *  不确定动画循环的当前状态。 0,初始值,表示绘制第一帧。
+     * 当进度条不确定并显示时,默认动画线程通过调用incrementAnimationIndex()每个repaintInterval毫秒来更新此变量。
+     * 
      */
     private int animationIndex = 0;
 
@@ -72,6 +81,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * this depends on the cycleTime and repaintInterval.  It
      * must be an even number for the default painting algorithm.  This
      * value is set in the initIndeterminateValues method.
+     * <p>
+     *  每个周期的帧数。在默认实现下,这取决于cycleTime和repaintInterval。它必须是默认绘画算法的偶数。此值在initIndeterminateValues方法中设置。
+     * 
      */
     private int numFrames;   //0 1|numFrames-1 ... numFrames/2
 
@@ -81,6 +93,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * (every time the progress bar changes to indeterminate mode)
      * using the
      * "ProgressBar.repaintInterval" key in the defaults table.
+     * <p>
+     *  不确定进度条的重绘之间的间隔(以毫秒为单位)。使用默认值表中的"ProgressBar.repaintInterval"键设置此方法的值(每次进度条更改为不确定模式)。
+     * 
      */
     private int repaintInterval;
 
@@ -90,6 +105,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * (every time the progress bar changes to indeterminate mode)
      * using the
      * "ProgressBar.cycleTime" key in the defaults table.
+     * <p>
+     *  直到动画循环重复的毫秒数。使用默认值表中的"ProgressBar.cycleTime"键设置此方法的值(每次进度条更改为不确定模式时)。
+     * 
      */
     private int cycleTime;  //must be repaintInterval*2*aPositiveInteger
 
@@ -102,6 +120,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * Used to hold the location and size of the bouncing box (returned
      * by getBox) to be painted.
      *
+     * <p>
+     *  用于保存要绘制的弹跳框(由getBox返回)的位置和大小。
+     * 
+     * 
      * @since 1.5
      */
     protected Rectangle boxRect;
@@ -114,6 +136,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * and the box to be displayed next.
      * This rectangle's values are set in
      * the setAnimationIndex method.
+     * <p>
+     * 下一次动画线程调用重绘时要更新的矩形。对于弹跳框动画,此rect应包括当前显示的框(需要删除)和下一个要显示的框的并集。此矩形的值在setAnimationIndex方法中设置。
+     * 
      */
     private Rectangle nextPaintRect;
 
@@ -198,6 +223,14 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * If you implement your own animation thread,
      * you must override this method.
      *
+     * <p>
+     *  启动动画线程,如果需要,创建和初始化它。当不确定的进度条开始动画时,将调用此方法。其原因可能包括：
+     * <ul>
+     *  <li>进度条是确定的,可显示<li>进度条是可显示的,变为确定<li>进度条是可显示和确定的,并且此UI已安装
+     * </ul>
+     *  如果实现自己的动画线程,则必须覆盖此方法。
+     * 
+     * 
      * @since 1.4
      * @see #stopAnimationTimer
      */
@@ -221,6 +254,14 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * If you implement your own animation thread,
      * you must override this method.
      *
+     * <p>
+     *  停止动画线程。当不确定的动画应该停止时,调用此方法。其原因可能包括：
+     * <ul>
+     *  <li>进度栏更改为确定<li>进度栏不再是可显示层次结构的一部分<li>此UI已卸载
+     * </ul>
+     *  如果实现自己的动画线程,则必须覆盖此方法。
+     * 
+     * 
      * @since 1.4
      * @see #startAnimationTimer
      */
@@ -232,6 +273,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
 
     /**
      * Removes all listeners installed by this object.
+     * <p>
+     *  删除由此对象安装的所有侦听器。
+     * 
      */
     protected void uninstallListeners() {
         progressBar.removeChangeListener(changeListener);
@@ -243,6 +287,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -268,6 +316,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -312,6 +364,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * The "selectionForeground" is the color of the text when it is painted
      * over a filled area of the progress bar.
+     * <p>
+     *  "selectionForeground"是当文本在进度条的填充区域上绘制时的颜色。
+     * 
      */
     protected Color getSelectionForeground() {
         return selectionForeground;
@@ -320,6 +375,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * The "selectionBackground" is the color of the text when it is painted
      * over an unfilled area of the progress bar.
+     * <p>
+     *  "selectionBackground"是当文本在进度条的未填充区域上绘制时的颜色。
+     * 
      */
     protected Color getSelectionBackground() {
         return selectionBackground;
@@ -340,6 +398,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * aesthetic considerations, this function will return 1 when
      * the progress string is being rendered.
      *
+     * <p>
+     * 返回要在进度条中呈现的每个单元格/单元的宽度(如果为HORIZONTAL)或height(如果为VERTICAL)。但是,对于文本呈现简化和美学考虑,此函数将在呈现进度字符串时返回1。
+     * 
+     * 
      * @return the value representing the spacing between cells
      * @see    #setCellLength
      * @see    JProgressBar#isStringPainted
@@ -362,6 +424,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * aesthetic considerations, this function will return 0 when
      * the progress string is being rendered.
      *
+     * <p>
+     *  返回进度栏中每个单元格/单位之间的间距。但是,对于文本呈现简化和美学考虑,此函数将在呈现进度字符串时返回0。
+     * 
+     * 
      * @return the value representing the spacing between cells
      * @see    #setCellSpacing
      * @see    JProgressBar#isStringPainted
@@ -384,6 +450,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * operation so it was abstracted out. It assumes that your progress bar
      * is linear. That is, if you are making a circular progress indicator,
      * you will want to override this method.
+     * <p>
+     *  这将根据从模型收集的完成百分比来确定应填充的进度条数量。这是一个常见的操作,所以它被抽象出来。它假设你的进度条是线性的。也就是说,如果您正在创建一个循环进度指示器,您将要覆盖此方法。
+     * 
      */
     protected int getAmountFull(Insets b, int width, int height) {
         int amountFull = 0;
@@ -404,6 +473,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * Delegates painting to one of two methods:
      * paintDeterminate or paintIndeterminate.
+     * <p>
+     *  代理绘画为以下两种方法之一：paintDeterminate或paintIndeterminate。
+     * 
      */
     public void paint(Graphics g, JComponent c) {
         if (progressBar.isIndeterminate()) {
@@ -427,6 +499,12 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * of the bouncing box,
      * without having to reimplement <code>paintIndeterminate</code>.
      *
+     * <p>
+     *  存储在<code> r </code>中为当前动画索引绘制的弹跳框的位置和大小,并返回<code> r </code>。
+     * 添加到在此类的实现中执行的绘制的子类(例如 - 在弹出框周围绘制轮廓)可以使用此方法来获取刚刚的弹出框的位置绘。
+     * 通过覆盖此方法,您可以完全控制弹跳框的大小和位置,而无需重新实现<code> paintIndeterminate </code>。
+     * 
+     * 
      * @param r  the Rectangle instance to be modified;
      *           may be <code>null</code>
      * @return   <code>null</code> if no box should be drawn;
@@ -480,6 +558,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * Updates delta, max position.
      * Assumes componentInnards is correct (e.g. call after sizeChanged()).
+     * <p>
+     * 更新delta,max位置。假设componentInnards是正确的(例如在sizeChanged()之后调用)。
+     * 
      */
     private void updateSizes() {
         int length = 0;
@@ -503,6 +584,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
 
     /**
      * Assumes that the component innards, max position, etc. are up-to-date.
+     * <p>
+     *  假设组件内部,最大位置等是最新的。
+     * 
      */
     private Rectangle getGenericBox(Rectangle r) {
         if (r == null) {
@@ -549,6 +633,15 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * </pre>
      * </blockquote>
      *
+     * <p>
+     *  返回要绘制的"弹跳框"的长度。此方法由<code> paintIndeterminate </code>的默认实现调用,以获取框的宽度(如果进度条为水平)或高度(如果垂直)。例如：
+     * <blockquote>
+     * <pre>
+     *  oxRect.width = getBoxLength(componentInnards.width,componentInnards.height);
+     * </pre>
+     * </blockquote>
+     * 
+     * 
      * @param availableLength  the amount of space available
      *                         for the bouncing box to move in;
      *                         for a horizontal progress bar,
@@ -577,6 +670,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * Override this if you are making another kind of
      * progress bar.
      *
+     * <p>
+     *  通用涂料方法应该为所有线性弹跳盒进度条做正确的事情。如果您正在制作另一种进度条,请覆盖此项。
+     * 
+     * 
      * @see #paintDeterminate
      *
      * @since 1.4
@@ -628,6 +725,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * Naturally, override this if you are making a circular or
      * semi-circular progress bar.
      *
+     * <p>
+     *  通用涂料方法应该为几乎所有的线性,确定的进度条做正确的事情。通过在默认值表中设置几个值,事情应该很好地绘制你的进度条。当然,如果你正在做一个圆形或半圆形的进度条,重写这个。
+     * 
+     * 
      * @see #paintIndeterminate
      *
      * @since 1.4
@@ -737,6 +838,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * Paints the progress string.
      *
+     * <p>
+     *  绘制进度字符串。
+     * 
+     * 
      * @param g Graphics used for drawing.
      * @param x x location of bounding box
      * @param y y location of bounding box
@@ -793,6 +898,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * bar (in both x and y). Override this if you want to right,
      * left, top, or bottom align the progress string or if you need
      * to nudge it around for any reason.
+     * <p>
+     *  指定将绘制进度字符串的位置。这个实现将它放在进度条的中心(在x和y)。如果您要向右,向左,向上或向下对齐进度字符串或如果您需要因任何原因轻推它,则覆盖此项。
+     * 
      */
     protected Point getStringPlacement(Graphics g, String progressString,
                                        int x,int y,int width,int height) {
@@ -870,6 +978,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * The Minimum size for this component is 10. The rationale here
      * is that there should be at least one pixel per 10 percent.
+     * <p>
+     *  此组件的最小大小为10.这里的理由是,每10％应至少有一个像素。
+     * 
      */
     public Dimension getMinimumSize(JComponent c) {
         Dimension pref = getPreferredSize(progressBar);
@@ -894,6 +1005,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * Gets the index of the current animation frame.
      *
+     * <p>
+     *  获取当前动画帧的索引。
+     * 
+     * 
      * @since 1.4
      */
     protected int getAnimationIndex() {
@@ -906,6 +1021,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * from one end to the other and back during the entire loop. This
      * visual behavior may be changed by subclasses in other Look and Feels.
      *
+     * <p>
+     * 返回由不确定JProgessBar使用的完整动画循环的帧数。进度块将在整个循环期间从一端到另一端并返回。这种视觉行为可以通过其他外观和感觉中的子类来改变。
+     * 
+     * 
      * @return the number of frames
      * @since 1.6
      */
@@ -922,6 +1041,10 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * to change the way that the <code>repaint</code> method
      * is invoked.
      *
+     * <p>
+     *  将当前动画帧的索引设置为指定的值,并请求重新绘制进度条。不使用默认绘画代码的子类可能需要重写此方法以更改调用<code> repaint </code>方法的方式。
+     * 
+     * 
      * @param newValue the new animation index; no checking
      *                 is performed on its value
      * @see #incrementAnimationIndex
@@ -990,6 +1113,11 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * where <em>X</em> is specified by the "ProgressBar.repaintInterval"
      * UI default.
      *
+     * <p>
+     *  将当前动画帧的索引设置为下一个有效值,这将导致进度条被重绘。下一个有效值默认为当前动画索引加1。如果新值太大,此方法将索引设置为0.子类可能需要覆盖此方法,以确保索引不超过特定进度条实例所需的帧数。
+     * 此方法由默认动画线程每隔<em> X </em>毫秒调用,其中<em> X </em>由"ProgressBar.repaintInterval"UI默认值指定。
+     * 
+     * 
      * @see #setAnimationIndex
      * @since 1.4
      */
@@ -1015,6 +1143,11 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * The repaint interval is specified by
      * the "ProgressBar.repaintInterval" UI default.
      *
+     * <p>
+     * 返回重绘之间所需的毫秒数。仅当进度条处于不确定模式时,此值才有意义。重绘间隔决定默认动画线程的计时器被触发的频率。它也被默认的不确定的进度条绘画代码用于确定每帧移动弹跳框的距离。
+     * 重绘间隔由"ProgressBar.repaintInterval"UI默认值指定。
+     * 
+     * 
      * @return  the repaint interval, in milliseconds
      */
     private int getRepaintInterval() {
@@ -1039,6 +1172,11 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * and adjusted, if necessary,
      * by the initIndeterminateDefaults method.
      *
+     * <p>
+     *  返回每个动画循环的毫秒数。仅当进度条处于不确定模式时,此值才有意义。循环时间由默认不确定进度条绘画代码使用,以确定每帧移动弹跳框的距离。
+     * 循环时间由"ProgressBar.cycleTime"UI默认值指定,如有必要,可通过initIndeterminateDefaults方法进行调整。
+     * 
+     * 
      * @return  the cycle time, in milliseconds
      */
     private int getCycleTime() {
@@ -1079,6 +1217,11 @@ public class BasicProgressBarUI extends ProgressBarUI {
      *
      *  NOTE: This might not be invoked until after the first
      *  paintIndeterminate call.
+     * <p>
+     *  由PropertyChangeHandler调用。
+     * 
+     *  注意：这可能不会被调用,直到第一次paintIndeterminate调用之后。
+     * 
      */
     private void initIndeterminateValues() {
         initIndeterminateDefaults();
@@ -1142,6 +1285,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * will continuously adjust the repaint interval to
      * try to make the actual time between repaints match
      * the requested rate.
+     * <p>
+     *  实现以固定速率调用重绘的动画线程。如果ADJUSTTIMER为true,此线程将连续调整重绘间隔,以使重绘之间的实际时间与请求的速率相匹配。
+     * 
      */
     private class Animator implements ActionListener {
         private Timer timer;
@@ -1153,6 +1299,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
         /**
          * Creates a timer if one doesn't already exist,
          * then starts the timer thread.
+         * <p>
+         *  创建一个计时器(如果还不存在),然后启动计时器线程。
+         * 
          */
         private void start(int interval) {
             previousDelay = interval;
@@ -1174,6 +1323,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
 
         /**
          * Stops the timer thread.
+         * <p>
+         *  停止定时器线程。
+         * 
          */
         private void stop() {
             timer.stop();
@@ -1181,6 +1333,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
 
         /**
          * Reacts to the timer's action events.
+         * <p>
+         *  响应计时器的动作事件。
+         * 
          */
         public void actionPerformed(ActionEvent e) {
             if (ADJUSTTIMER) {
@@ -1213,6 +1368,8 @@ public class BasicProgressBarUI extends ProgressBarUI {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicProgressBarUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code BasicProgressBarUI}的子类中实例化它。
      */
     public class ChangeHandler implements ChangeListener {
         // NOTE: This class exists only for backward compatibility. All

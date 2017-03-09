@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ package com.sun.corba.se.impl.naming.namingutil;
  * in INS spec.
  *
  * @Author Hemanth
+ * <p>
+ *  INS URL是INS规范中指定的两种不同类型的URL的通用接口。
+ * 
  */
 public interface INSURL {
     public boolean getRIRFlag( );

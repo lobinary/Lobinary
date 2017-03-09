@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,9 @@ import com.sun.corba.se.spi.ior.TaggedComponentBase;
  * Java serialization mechanism and its accompanying encodings, instead
  * of IIOP CDR serialization mechanism. Java serialization is generally
  * observed to be faster than CDR.
+ * <p>
+ *  标记的组件,包含指示ORB支持的Java序列化版本的值。
+ * 
  */
 public class JavaSerializationComponent extends TaggedComponentBase {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,17 @@ import java.util.Objects;
  * that the properties of the {@code SerializedLambda} are consistent with a
  * lambda actually captured by that class.
  *
+ * <p>
+ *  lambda表达式的序列化形式。此类的属性表示存在于lambda工厂站点的信息,包括静态元篡改参数,例如主函数接口方法的身份和实现方法的标识,以及动态元篡改参数,例如从在λ捕获时的词汇作用域。
+ * 
+ *  <p>可序列化lambdas的实现者,如编译器或语言运行时库,应该确保实例反序列化正确。
+ * 这样做的一个方法是确保{@code writeReplace}方法返回{@code SerializedLambda}的实例,而不是允许默认序列化继续进行。
+ * 
+ *  <p> {@ code SerializedLambda}有一个{@code readResolve}方法,用于在捕获类中查找一个名为{@code $ deserializeLambda $(SerializedLambda)}
+ * 的静态方法(可能是私有的),使用自身作为第一个参数,并返回结果。
+ * 实现{@code $ deserializeLambda $}的Lambda类负责验证{@code SerializedLambda}的属性是否与该类实际捕获的lambda一致。
+ * 
+ * 
  * @see LambdaMetafactory
  */
 public final class SerializedLambda implements Serializable {
@@ -72,6 +84,10 @@ public final class SerializedLambda implements Serializable {
      * Create a {@code SerializedLambda} from the low-level information present
      * at the lambda factory site.
      *
+     * <p>
+     *  从lambda工厂站点的低级信息创建一个{@code SerializedLambda}。
+     * 
+     * 
      * @param capturingClass The class in which the lambda expression appears
      * @param functionalInterfaceClass Name, in slash-delimited form, of static
      *                                 type of the returned lambda object
@@ -118,6 +134,10 @@ public final class SerializedLambda implements Serializable {
 
     /**
      * Get the name of the class that captured this lambda.
+     * <p>
+     *  获取捕获此lambda的类的名称。
+     * 
+     * 
      * @return the name of the class that captured this lambda
      */
     public String getCapturingClass() {
@@ -127,6 +147,10 @@ public final class SerializedLambda implements Serializable {
     /**
      * Get the name of the invoked type to which this
      * lambda has been converted
+     * <p>
+     * 获取此lambda已转换到的调用类型的名称
+     * 
+     * 
      * @return the name of the functional interface class to which
      * this lambda has been converted
      */
@@ -137,6 +161,10 @@ public final class SerializedLambda implements Serializable {
     /**
      * Get the name of the primary method for the functional interface
      * to which this lambda has been converted.
+     * <p>
+     *  获取该lambda已转换到的函数接口的主方法的名称。
+     * 
+     * 
      * @return the name of the primary methods of the functional interface
      */
     public String getFunctionalInterfaceMethodName() {
@@ -146,6 +174,10 @@ public final class SerializedLambda implements Serializable {
     /**
      * Get the signature of the primary method for the functional
      * interface to which this lambda has been converted.
+     * <p>
+     *  获取已转换此lambda的功能接口的主方法的签名。
+     * 
+     * 
      * @return the signature of the primary method of the functional
      * interface
      */
@@ -156,6 +188,10 @@ public final class SerializedLambda implements Serializable {
     /**
      * Get the name of the class containing the implementation
      * method.
+     * <p>
+     *  获取包含实现方法的类的名称。
+     * 
+     * 
      * @return the name of the class containing the implementation
      * method
      */
@@ -165,6 +201,10 @@ public final class SerializedLambda implements Serializable {
 
     /**
      * Get the name of the implementation method.
+     * <p>
+     *  获取实现方法的名称。
+     * 
+     * 
      * @return the name of the implementation method
      */
     public String getImplMethodName() {
@@ -173,6 +213,10 @@ public final class SerializedLambda implements Serializable {
 
     /**
      * Get the signature of the implementation method.
+     * <p>
+     *  获取实现方法的签名。
+     * 
+     * 
      * @return the signature of the implementation method
      */
     public String getImplMethodSignature() {
@@ -182,6 +226,10 @@ public final class SerializedLambda implements Serializable {
     /**
      * Get the method handle kind (see {@link MethodHandleInfo}) of
      * the implementation method.
+     * <p>
+     *  获取实现方法的方法处理类型(参见{@link MethodHandleInfo})。
+     * 
+     * 
      * @return the method handle kind of the implementation method
      */
     public int getImplMethodKind() {
@@ -192,6 +240,10 @@ public final class SerializedLambda implements Serializable {
      * Get the signature of the primary functional interface method
      * after type variables are substituted with their instantiation
      * from the capture site.
+     * <p>
+     *  在从捕获站点用其实例化替换类型变量后,获取主函数接口方法的签名。
+     * 
+     * 
      * @return the signature of the primary functional interface method
      * after type variable processing
      */
@@ -201,6 +253,10 @@ public final class SerializedLambda implements Serializable {
 
     /**
      * Get the count of dynamic arguments to the lambda capture site.
+     * <p>
+     *  获取lambda捕获站点的动态参数的计数。
+     * 
+     * 
      * @return the count of dynamic arguments to the lambda capture site
      */
     public int getCapturedArgCount() {
@@ -209,6 +265,9 @@ public final class SerializedLambda implements Serializable {
 
     /**
      * Get a dynamic argument to the lambda capture site.
+     * <p>
+     *  获取lambda捕获站点的动态参数。
+     * 
      * @param i the argument to capture
      * @return a dynamic argument to the lambda capture site
      */

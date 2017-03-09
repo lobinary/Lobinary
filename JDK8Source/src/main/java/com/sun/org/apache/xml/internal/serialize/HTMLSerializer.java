@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 
@@ -86,6 +96,24 @@ import org.xml.sax.SAXException;
  * <li>Contents of SCRIPT and STYLE elements serialized as CDATA
  * </ul>
  *
+ * <p>
+ *  实现支持DOM和SAX漂亮序列化的HTML / XHTML序列化程序。 HTML / XHTML模式在构造函数中确定。有关使用说明,请参阅{@link Serializer}。
+ * <p>
+ *  如果使用输出流,则从输出格式(默认为<tt> UTF-8 </tt>)获取编码。如果使用写入程序,请确保写入程序使用与输出格式中指定的相同的编码(如果适用)。
+ * <p>
+ *  序列化器支持DOM和SAX。 DOM序列化通过调用{@link #serialize}完成,SAX序列化通过触发SAX事件并使用序列化程序作为文档处理程序来完成。
+ * <p>
+ * 如果在序列化时发生I / O异常,则序列化器不会直接抛出异常,而只是在序列化结束时抛出异常(DOM或SAX的{@link org.xml.sax.DocumentHandler#endDocument}
+ * 。
+ * <p>
+ *  对于未指定为空白保留的元素,序列化程序可能会在空格边界,缩进行和序列化元素在单独的行上断开长文本行。行终止符将被视为空格,行开始处的空格将被删除。
+ * <p>
+ *  XHTML与HTML稍有不同：
+ * <ul>
+ *  <li>元素/属性名称是小写和大小写<li>属性必须指定值,即使是空字符串<li>空元素在空标签中必须有"/"<li> SCRIPT和STYLE元素的内容序列化为CDATA
+ * </ul>
+ * 
+ * 
  * @deprecated This class was deprecated in Xerces 2.6.2. It is
  * recommended that new applications use JAXP's Transformation API
  * for XML (TrAX) for serializing HTML. See the Xerces documentation
@@ -100,6 +128,9 @@ public class HTMLSerializer
 
     /**
      * True if serializing in XHTML format.
+     * <p>
+     *  如果以XHTML格式序列化,则为True。
+     * 
      */
     private boolean _xhtml;
 
@@ -115,6 +146,11 @@ public class HTMLSerializer
      * <tt>xhtml</tt>. The serializer cannot be used without calling
      * {@link #setOutputCharStream} or {@link #setOutputByteStream} first.
      *
+     * <p>
+     *  根据<tt> xhtml </tt>的值构造新的HTML / XHTML序列化程序。
+     * 不调用{@link #setOutputCharStream}或{@link #setOutputByteStream}时,不能使用序列化器。
+     * 
+     * 
      * @param xhtml True if XHTML serializing
      */
     protected HTMLSerializer( boolean xhtml, OutputFormat format )
@@ -128,6 +164,9 @@ public class HTMLSerializer
      * Constructs a new serializer. The serializer cannot be used without
      * calling {@link #setOutputCharStream} or {@link #setOutputByteStream}
      * first.
+     * <p>
+     *  构造新的序列化程序。不调用{@link #setOutputCharStream}或{@link #setOutputByteStream}时,不能使用序列化器。
+     * 
      */
     public HTMLSerializer()
     {
@@ -139,6 +178,9 @@ public class HTMLSerializer
      * Constructs a new serializer. The serializer cannot be used without
      * calling {@link #setOutputCharStream} or {@link #setOutputByteStream}
      * first.
+     * <p>
+     *  构造新的序列化程序。不调用{@link #setOutputCharStream}或{@link #setOutputByteStream}时,不能使用序列化器。
+     * 
      */
     public HTMLSerializer( OutputFormat format )
     {
@@ -152,6 +194,10 @@ public class HTMLSerializer
      * using the specified output format. If <tt>format</tt> is null,
      * will use a default output format.
      *
+     * <p>
+     *  构造使用指定的输出格式写入指定的写入程序的新序列化程序。如果<tt>格式</tt>为空,将使用默认输出格式。
+     * 
+     * 
      * @param writer The writer to use
      * @param format The output format to use, null for the default
      */
@@ -167,6 +213,10 @@ public class HTMLSerializer
      * stream using the specified output format. If <tt>format</tt>
      * is null, will use a default output format.
      *
+     * <p>
+     * 构造新的序列化器,使用指定的输出格式写入指定的输出流。如果<tt>格式</tt>为空,将使用默认输出格式。
+     * 
+     * 
      * @param output The output stream to use
      * @param format The output format to use, null for the default
      */
@@ -624,6 +674,11 @@ public class HTMLSerializer
      * pre-root comments and PIs that were accumulated in the document
      * (see {@link #serializePreRoot}). Pre-root will be serialized even if
      * this is not the first root element of the document.
+     * <p>
+     *  调用通过根元素序列化文档的DOCTYPE。文档类型声明必须命名根元素,但是根元素只有当该元素被序列化时才知道,而不是在文档的开头。
+     * <p>
+     *  此方法将检查它是否尚未被调用({@link #_started}),将序列化文档类型声明,并将序列化所有在根文档中累积的注释和PI(参见{@link #serializePreRoot })。
+     * 预根将被序列化,即使这不是文档的第一个根元素。
      */
     protected void startDocument( String rootTagName )
         throws IOException
@@ -696,6 +751,8 @@ public class HTMLSerializer
      * Called to serialize a DOM element. Equivalent to calling {@link
      * #startElement}, {@link #endElement} and serializing everything
      * inbetween, but better optimized.
+     * <p>
+     * 
      */
     protected void serializeElement( Element elem )
         throws IOException

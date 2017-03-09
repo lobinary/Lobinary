@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.javax.rmi;
@@ -74,6 +78,11 @@ import com.sun.corba.se.impl.orbutil.GetPropertyAction;
  * attempts to narrow it to conform to
  * the given interface. If the operation is successful the result will be an
  * object of the specified type, otherwise an exception will be thrown.
+ * <p>
+ *  服务器实现对象可以从javax.rmi.PortableRemoteObject继承,也可以实现远程接口,然后使用exportObject方法将自身注册为服务器对象。
+ *  toStub方法接受服务器实现并返回可用于访问该服务器对象的存根。 connect方法使远程对象准备好进行远程通信。 unexportObject方法用于注销服务器对象,允许它可用于垃圾回收。
+ *  narrow方法采用对象引用或抽象接口类型,并尝试将其缩小以符合给定的接口。如果操作成功,结果将是指定类型的对象,否则将抛出异常。
+ * 
  */
 public class PortableRemoteObject
         implements javax.rmi.CORBA.PortableRemoteObjectDelegate {
@@ -82,6 +91,10 @@ public class PortableRemoteObject
      * Makes a server object ready to receive remote calls. Note
      * that subclasses of PortableRemoteObject do not need to call this
      * method, as it is called by the constructor.
+     * <p>
+     *  使服务器对象准备好接收远程调用。注意,PortableRemoteObject的子类不需要调用此方法,因为它是由构造函数调用的。
+     * 
+     * 
      * @param obj the server object to export.
      * @exception RemoteException if export fails.
      */
@@ -122,6 +135,10 @@ public class PortableRemoteObject
 
     /**
      * Returns a stub for the given server object.
+     * <p>
+     *  返回给定服务器对象的存根。
+     * 
+     * 
      * @param obj the server object for which a stub is required. Must either be a subclass
      * of PortableRemoteObject or have been previously the target of a call to
      * {@link #exportObject}.
@@ -167,6 +184,10 @@ public class PortableRemoteObject
     /**
      * Deregisters a server object from the runtime, allowing the object to become
      * available for garbage collection.
+     * <p>
+     *  从运行时注销一个服务器对象,允许该对象变为可用于垃圾回收。
+     * 
+     * 
      * @param obj the object to unexport.
      * @exception NoSuchObjectException if the remote object is not
      * currently exported.
@@ -199,6 +220,10 @@ public class PortableRemoteObject
     /**
      * Checks to ensure that an object of a remote or abstract interface type
      * can be cast to a desired type.
+     * <p>
+     *  检查以确保远程或抽象接口类型的对象可以转换为所需类型。
+     * 
+     * 
      * @param narrowFrom the object to check.
      * @param narrowTo the desired type.
      * @return an object which can be cast to the desired type.
@@ -254,6 +279,11 @@ public class PortableRemoteObject
      * on a remote method call, but in some circumstances it is useful to
      * perform this action by making an explicit call.  See the
      * {@link Stub#connect} method for more information.
+     * <p>
+     * 使远程对象准备好进行远程通信。这通常在将对象作为远程方法调用的参数发送或接收时隐式发生,但在某些情况下,通过显式调用来执行此操作很有用。
+     * 有关详细信息,请参阅{@link Stub#connect}方法。
+     * 
+     * 
      * @param target the object to connect.
      * @param source a previously connected object.
      * @throws RemoteException if <code>source</code> is not connected
@@ -284,6 +314,10 @@ public class PortableRemoteObject
                         throw new RemoteException(
                             "'source' object not exported");
                     }
+                    /* <p>
+                    /*  //不,我们能得到一条领带吗?如果没有,//假设源是一个JRMP对象... if(Utility.loadTie(source)！= null){//是的,所以它是一个iiop对象//没有被导出... throw new RemoteException("'source'object not exported"); }
+                    /* }。
+                    /* 
                     */
                 } else {
                     orb = tie.orb();
@@ -306,6 +340,7 @@ public class PortableRemoteObject
                 if (Utility.loadTie(target) != null) {
                     throw new RemoteException("'target' servant not exported");
                 }
+                /* <p>
                 */
             }
         }

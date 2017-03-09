@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -102,6 +103,32 @@ import sun.swing.SwingUtilities2;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  Caret的默认实现。插入符被渲染为由相关联的JTextComponent的CaretColor属性指定的颜色的垂直线。它可以按BlinkRate属性指定的速率闪烁。
+ * <p>
+ *  此实现期望两个异步通知来源。定时器线程异步地触发,并且使得插入符号简单地重绘最近的边界框。插入符还会在文档被修改时跟踪更改。通常,这将发生在事件分派线程上作为一些鼠标或键盘事件的结果。
+ * 同步和异步文档更新的插入符行为由<code> UpdatePolicy </code>属性控制。
+ * 在任何情况下,重新绘制新的插入符位置都将发生在事件线程上,因为调用<code> modelToView </code>只在事件线程上是安全的。
+ * <p>
+ * 插入符用作其已经安装在其上的文本组件上的鼠标和焦点监听器,并且基于这些事件来定义插入符语义。可以重新实现侦听器方法以更改语义。默认情况下,第一个鼠标按钮将用于设置焦点和插入符位置。
+ * 使用第一个鼠标按钮拖动鼠标指针将扫除模型中连续的选择。如果关联的文本组件是可编辑的,则当获得焦点时,插入符号将变得可见,而在丢失焦点时不可见。
+ * <p>
+ *  默认情况下,绑定到关联文本组件的荧光笔用于渲染选择。选择外观可以通过供应画家用于亮点定制。
+ * 默认情况下,使用一个绘制器来渲染在<code> SelectionColor </code>属性中相关文本组件中指定的纯色。
+ * 这可以通过重新实现{@link #getSelectionPainter getSelectionPainter}方法来轻松地更改。
+ * <p>
+ * 定制的插入符外观可以通过重新实现绘制方法来实现。如果涂漆方法改变,损伤方法也应该重新实现,以使得重新绘制所需的区域来渲染插入符号。
+ * 插入符号扩展了Rectangle类,该类用于保存上次渲染插入符号的边界框。
+ * 这使得插入符可以在线程安全的方式重新绘制,当插入符移动而不调用在模型更新和视图修复(即不保证递送到DocumentListener的顺序)之间不稳定的modelToView。
+ * <p>
+ *  当插入符号位置改变时,魔术插入符位置设置为null。定时器用于确定新位置(在插入符号更改之后)。当定时器触发时,如果魔术插入符位置仍然为空,它将被重置为当前插入位置。
+ * 任何改变插入符位置并希望魔法插入符位置保持不变的操作,都必须记住魔法插入位置,更改光标,然后将魔法插入符位置设置为其原始值。
+ * 这有一个好处,只有那些希望魔法插入符位置持久化的操作(例如打开/关闭)需要知道它。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     Caret
  */
@@ -110,6 +137,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Indicates that the caret position is to be updated only when
      * document changes are performed on the Event Dispatching Thread.
+     * <p>
+     *  表示仅当事件分派线程上执行文档更改时才更新插入符位置。
+     * 
+     * 
      * @see #setUpdatePolicy
      * @see #getUpdatePolicy
      * @since 1.5
@@ -123,6 +154,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * the current caret position due to removal. In that case the caret
      * position is adjusted to the end of the document.
      *
+     * <p>
+     *  表示插入符应保持在文档中的相同绝对位置,而不管是否有任何文档更新,除非文档长度由于删除而小于当前插入符位置。在这种情况下,插入符位置被调整到文档的结尾。
+     * 
+     * 
      * @see #setUpdatePolicy
      * @see #getUpdatePolicy
      * @since 1.5
@@ -135,6 +170,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * the document updates are performed on the Event Dispatching Thread
      * or not.
      *
+     * <p>
+     *  表示无论文档更新是否在事件分派主题上执行,插入符位置都将随文档更改而相应更新。<b>始终</b>。
+     * 
+     * 
      * @see #setUpdatePolicy
      * @see #getUpdatePolicy
      * @since 1.5
@@ -143,6 +182,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
 
     /**
      * Constructs a default caret.
+     * <p>
+     *  构造默认插入符号。
+     * 
      */
     public DefaultCaret() {
     }
@@ -187,6 +229,26 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * </ul> <p>
      * The default property value is <code>UPDATE_WHEN_ON_EDT</code>.
      *
+     * <p>
+     * 对文档更新设置插入符移动策略。通常,插入符更新其在文档内在插入符位置之前或之前发生插入时的绝对位置,以及在插入符位置之前的删除。 "绝对位置"在这里是指相对于文档开始的位置。
+     * 例如,如果一个字符在可编辑文本组件中键入,它会插入光标位置,并且插入符号会由于插入而移动到文档中的下一个绝对位置,如果<code> BACKSPACE </code>被键入,插入符号将减少其绝对位置,由
+     * 于删除它前面的字符。
+     * 对文档更新设置插入符移动策略。通常,插入符更新其在文档内在插入符位置之前或之前发生插入时的绝对位置,以及在插入符位置之前的删除。 "绝对位置"在这里是指相对于文档开始的位置。
+     * 有时,可能有用的是关闭插入符位置更新,以便插入符在文档位置内保持在相同的绝对位置,而不管任何文档更新。
+     * <p>
+     *  允许以下更新策略：
+     * <ul>
+     * <li> <code> NEVER_UPDATE </code>：除非文档长度由于删除而小于当前插入符号位置,否则插入符号将保留在文档中的相同绝对位置,而不管是否有任何文档更新。
+     * 在这种情况下,插入符位置将调整到文档的结尾。在使用此策略时,通过滚动关联的视图,插入符不会尝试保持其可见。
+     *  </li> <li> <code> ALWAYS_UPDATE </code>：插入符始终跟踪文档更改。
+     * 对于常规变化,如果插入在其当前位置之前或之前发生,则其增加其位置,并且如果在其当前位置之前发生移除,则减小位置。对于undo / redo更新,它总是被移动到更新发生的位置。
+     * 插入符还尝试通过调用<code> adjustVisibility </code>方法使自己可见。
+     * </li> <li> <code> UPDATE_WHEN_ON_EDT </code>：像<code> ALWAYS_UPDATE </code>如果在其他线程上执行更新,则在事件分派线程上执行,如<code>
+     *  NEVER_UPDATE </code>。
+     * 插入符还尝试通过调用<code> adjustVisibility </code>方法使自己可见。
+     *  </li> </ul> <p>默认属性值为<code> UPDATE_WHEN_ON_EDT </code>。
+     * 
+     * 
      * @param policy one of the following values : <code>UPDATE_WHEN_ON_EDT</code>,
      * <code>NEVER_UPDATE</code>, <code>ALWAYS_UPDATE</code>
      * @throws IllegalArgumentException if invalid value is passed
@@ -206,6 +268,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Gets the caret movement policy on document updates.
      *
+     * <p>
+     *  获取文档更新的插入符移动策略。
+     * 
+     * 
      * @return one of the following values : <code>UPDATE_WHEN_ON_EDT</code>,
      * <code>NEVER_UPDATE</code>, <code>ALWAYS_UPDATE</code>
      *
@@ -224,6 +290,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Gets the text editor component that this caret is
      * is bound to.
      *
+     * <p>
+     *  获取此插入符所绑定到的文本编辑器组件。
+     * 
+     * 
      * @return the component
      */
     protected final JTextComponent getComponent() {
@@ -239,6 +309,14 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * are not. Please see
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
+     * <p>
+     *  导致插入符号被绘。重绘区域是插入符号的边界框(即插入符号矩形或<em> this </em>)。
+     * <p>
+     * 这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     * 这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
      */
     protected final synchronized void repaint() {
         if (component != null) {
@@ -253,6 +331,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * reimplemented.  This method should update the
      * caret bounds (x, y, width, and height).
      *
+     * <p>
+     *  损坏插入点周围的区域,使其在新位置重新绘制。如果paint()被重新实现,这个方法也应该重新实现。此方法应更新插入符号边界(x,y,width和height)。
+     * 
+     * 
      * @param r  the current location of the caret
      * @see #paint
      */
@@ -275,6 +357,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * the scrollRectToVisible method is called on the
      * associated component.
      *
+     * <p>
+     *  滚动相关联的视图(如有必要)以使光标可见。由于这应该是一个政策,这个方法可以重新实现改变行为。默认情况下,在相关组件上调用scrollRectToVisible方法。
+     * 
+     * 
      * @param nloc the new position to scroll to
      */
     protected void adjustVisibility(Rectangle nloc) {
@@ -291,6 +377,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Gets the painter for the Highlighter.
      *
+     * <p>
+     *  获取荧光笔的画家。
+     * 
+     * 
      * @return the painter
      */
     protected Highlighter.HighlightPainter getSelectionPainter() {
@@ -301,6 +391,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Tries to set the position of the caret from
      * the coordinates of a mouse event, using viewToModel().
      *
+     * <p>
+     *  尝试使用viewToModel()从鼠标事件的坐标设置插入符的位置。
+     * 
+     * 
      * @param e the mouse event
      */
     protected void positionCaret(MouseEvent e) {
@@ -320,6 +414,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * This will cause a selection if the dot and mark
      * are different.
      *
+     * <p>
+     *  尝试使用viewToModel()从鼠标事件的坐标移动插入符的位置。如果点和标记不同,则将导致选择。
+     * 
+     * 
      * @param e the mouse event
      */
     protected void moveCaret(MouseEvent e) {
@@ -340,6 +438,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * focus.  This is implemented to set the caret to visible
      * if the component is editable.
      *
+     * <p>
+     *  当包含插入符号的组件获得焦点时调用。这被实现为如果组件是可编辑的,则将插入符号设置为可见。
+     * 
+     * 
      * @param e the focus event
      * @see FocusListener#focusGained
      */
@@ -357,6 +459,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * focus.  This is implemented to set the caret to visibility
      * to false.
      *
+     * <p>
+     *  当包含插入符号的组件失去焦点时调用。这被实现来设置插入符的可见性为false。
+     * 
+     * 
      * @param e the focus event
      * @see FocusListener#focusLost
      */
@@ -368,6 +474,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
 
     /**
      * Selects word based on the MouseEvent
+     * <p>
+     *  根据MouseEvent选择字词
+     * 
      */
     private void selectWord(MouseEvent e) {
         if (selectedWordEvent != null
@@ -399,6 +508,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * from button1, a double click selects a word,
      * and a triple click the current line.
      *
+     * <p>
+     *  单击鼠标时调用。如果点击是从button1生成的,双击选择一个单词,并三击当前行。
+     * 
+     * 
      * @param e the mouse event
      * @see MouseListener#mouseClicked
      */
@@ -482,6 +595,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * caret position will be set to the new location.  If the component
      * is not enabled, there will be no request for focus.
      *
+     * <p>
+     * 如果按下按钮1,则这被实现为请求对关联的文本组件的焦点,并设置插入符位置。如果按住shift键,则光标将被移动,从而可能导致选择,否则插入符位置将被设置为新位置。如果组件未启用,则不会有对焦请求。
+     * 
+     * 
      * @param e the mouse event
      * @see MouseListener#mousePressed
      */
@@ -509,6 +626,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
 
     /**
      * Adjusts the caret location based on the MouseEvent.
+     * <p>
+     *  根据MouseEvent调整插入符位置。
+     * 
      */
     private void adjustCaret(MouseEvent e) {
         if ((e.getModifiers() & ActionEvent.SHIFT_MASK) != 0 &&
@@ -522,6 +642,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Adjusts the focus, if necessary.
      *
+     * <p>
+     *  如有必要,调整对焦。
+     * 
+     * 
      * @param inWindow if true indicates requestFocusInWindow should be used
      */
     private void adjustFocus(boolean inWindow) {
@@ -539,6 +663,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Called when the mouse is released.
      *
+     * <p>
+     *  当鼠标释放时调用。
+     * 
+     * 
      * @param e the mouse event
      * @see MouseListener#mouseReleased
      */
@@ -554,6 +682,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Called when the mouse enters a region.
      *
+     * <p>
+     *  当鼠标进入区域时调用。
+     * 
+     * 
      * @param e the mouse event
      * @see MouseListener#mouseEntered
      */
@@ -563,6 +695,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Called when the mouse exits a region.
      *
+     * <p>
+     *  当鼠标退出区域时调用。
+     * 
+     * 
      * @param e the mouse event
      * @see MouseListener#mouseExited
      */
@@ -578,6 +714,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * selection.  By default, this is only done
      * for mouse button 1.
      *
+     * <p>
+     *  根据鼠标指针的当前位置移动插入符位置。这有效地扩展了选择。默认情况下,这只适用于鼠标按钮1。
+     * 
+     * 
      * @param e the mouse event
      * @see MouseMotionListener#mouseDragged
      */
@@ -590,6 +730,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Called when the mouse is moved.
      *
+     * <p>
+     *  当鼠标移动时调用。
+     * 
+     * 
      * @param e the mouse event
      * @see MouseMotionListener#mouseMoved
      */
@@ -611,6 +755,13 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * in the bidi element structure (i.e. the text has multiple
      * directions associated with it).
      *
+     * <p>
+     *  将插入符号呈现为垂直线。如果重新实现,损坏方法也应重新实现,因为它假定插入符的形状是垂直线。将插入符的颜色设置为getCaretColor()返回的值。
+     * <p>
+     *  如果在相关联的文档中存在多个文本方向,则将呈现指示插入符偏差的标志。
+     * 只有当相关联的文档是AbstractDocument的子类并且在bidi元素结构中存在多个bidi级别(即文本具有与其相关联的多个方向)时,才会发生这种情况。
+     * 
+     * 
      * @param g the graphics context
      * @see #damage
      */
@@ -678,6 +829,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * and mark to 0, and establishes document, property change,
      * focus, mouse, and mouse motion listeners.
      *
+     * <p>
+     * 当UI安装到JTextComponent的接口时调用。这可以用于访问正在由该接口的实现导航的模型。将点和标记设置为0,并建立文档,属性更改,焦点,鼠标和鼠标移动侦听器。
+     * 
+     * 
      * @param c the component
      * @see Caret#install
      */
@@ -721,6 +876,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * interface of a JTextComponent.  This is used to
      * unregister any listeners that were attached.
      *
+     * <p>
+     *  当UI从JTextComponent的接口中删除时调用。这用于注销附加的任何侦听器。
+     * 
+     * 
      * @param c the component
      * @see Caret#deinstall
      */
@@ -747,6 +906,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Adds a listener to track whenever the caret position has
      * been changed.
      *
+     * <p>
+     *  添加监听器,以便在每次更改插入符位置时进行跟踪。
+     * 
+     * 
      * @param l the listener
      * @see Caret#addChangeListener
      */
@@ -757,6 +920,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Removes a listener that was tracking caret position changes.
      *
+     * <p>
+     *  删除跟踪插入符位置更改的侦听器。
+     * 
+     * 
      * @param l the listener
      * @see Caret#removeChangeListener
      */
@@ -768,6 +935,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Returns an array of all the change listeners
      * registered on this caret.
      *
+     * <p>
+     *  返回在此插入符上注册的所有更改侦听器的数组。
+     * 
+     * 
      * @return all of this caret's <code>ChangeListener</code>s
      *         or an empty
      *         array if no change listeners are currently registered
@@ -787,6 +958,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * is lazily created using the parameters passed into
      * the fire method.  The listener list is processed last to first.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。侦听器列表是从最后到第一个处理的。
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireStateChanged() {
@@ -825,6 +1000,20 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前注册为<code> <em> Foo </em> Listener </code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * 
+     * <p>
+     * 
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询其更改侦听器的<code> DefaultCaret </code> <code> c </code>：。
+     * 
+     *  <pre> ChangeListener [] cls =(ChangeListener [])(c.getListeners(ChangeListener.class)); </pre>
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -847,6 +1036,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Changes the selection visibility.
      *
+     * <p>
+     * 更改选择可见性。
+     * 
+     * 
      * @param vis the new visibility
      */
     public void setSelectionVisible(boolean vis) {
@@ -879,6 +1072,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Checks whether the current selection is visible.
      *
+     * <p>
+     *  检查当前选择是否可见。
+     * 
+     * 
      * @return true if the selection is visible
      */
     public boolean isSelectionVisible() {
@@ -894,6 +1091,12 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * To determine if the caret is currently painted use the
      * <code>isVisible</code> method.
      *
+     * <p>
+     *  确定插入符号当前是否处于活动状态。
+     * <p>
+     *  此方法返回<code> Caret </code>当前是否处于闪烁状态。它不提供有关它当前是否闪烁的信息。要确定插入符当前是否使用<code> isVisible </code>方法。
+     * 
+     * 
      * @return <code>true</code> if active else <code>false</code>
      * @see #isVisible
      *
@@ -916,6 +1119,13 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * should override paint and only paint the caret if this method
      * returns true.
      *
+     * <p>
+     *  指示插入符号当前是否可见。当插入符号闪烁时,这个的返回值将在真实(当插入符号被绘制时)和假(当插入符号未被绘制时)之间变化。
+     *  <code> isActive </code>指示插入符号是否处于闪烁状态,使得它可以</b>可见,<code> isVisible </code>指示插入符号< b> </b>实际可见。
+     * <p>
+     *  希望渲染不同闪烁插入符的子类应该覆盖绘制,并且只有在此方法返回true时才绘制插入符号。
+     * 
+     * 
      * @return true if visible else false
      * @see Caret#isVisible
      * @see #isActive
@@ -954,6 +1164,25 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      *     <li>isVisible(): false</li>
      * </ul>
      *
+     * <p>
+     * 设置插入符的可见性,并重新绘制插入符号。重要的是要理解这种方法,<code> isVisible </code>和<code> isActive </code>之间的关系。
+     * 使用<code> true </code>的值调用此方法会激活插入符号闪烁。将其设置为<code> false </code>会将其完全关闭。
+     * 要确定闪烁是否活动,应调用<code> isActive </code>。实际上,<code> isActive </code>是一个适当的相应的"getter"方法。
+     *  <code> isVisible </code>可用于获取插入符的当前可见性状态,意味着它是否当前已绘制。当插入符号闪烁时,此状态将更改。
+     * <p>
+     *  下面是一个列表,显示调用此方法后<code> isActive </code>和<code> isVisible </code>的潜在返回值：
+     * <p>
+     *  <b> <code> setVisible(true)</code> </b>：
+     * <ul>
+     *  <li> isActive()：true </li> <li> isVisible()：true或false,取决于插入符号是否闪烁</li>
+     * </ul>
+     * <p>
+     *  <b> <code> setVisible(false)</code> </b>：
+     * <ul>
+     *  <li> isActive()：false </li> <li> isVisible()：false </li>
+     * </ul>
+     * 
+     * 
      * @param e the visibility specifier
      * @see #isActive
      * @see Caret#setVisible
@@ -988,6 +1217,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Sets the caret blink rate.
      *
+     * <p>
+     *  设置插入符号闪烁速率。
+     * 
+     * 
      * @param rate the rate in milliseconds, 0 to stop blinking
      * @see Caret#setBlinkRate
      */
@@ -1009,6 +1242,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Gets the caret blink rate.
      *
+     * <p>
+     *  获取插入符闪烁速率。
+     * 
+     * 
      * @return the delay in milliseconds.  If this is
      *  zero the caret will not blink.
      * @see Caret#getBlinkRate
@@ -1020,6 +1257,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Fetches the current position of the caret.
      *
+     * <p>
+     *  获取插入符号的当前位置。
+     * 
+     * 
      * @return the position &gt;= 0
      * @see Caret#getDot
      */
@@ -1031,6 +1272,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Fetches the current position of the mark.  If there is a selection,
      * the dot and mark will not be the same.
      *
+     * <p>
+     *  获取标记的当前位置。如果有选择,点和标记将不相同。
+     * 
+     * 
      * @return the position &gt;= 0
      * @see Caret#getMark
      */
@@ -1043,6 +1288,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * with a forward bias. This implicitly sets the
      * selection range to zero.
      *
+     * <p>
+     *  设置插入符位置,并使用正向偏置标记到指定位置。这隐含地将选择范围设置为零。
+     * 
+     * 
      * @param dot the position &gt;= 0
      * @see #setDot(int, Position.Bias)
      * @see Caret#setDot
@@ -1055,6 +1304,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Moves the caret position to the specified position,
      * with a forward bias.
      *
+     * <p>
+     *  使用正向偏置将插入符号位置移动到指定位置。
+     * 
+     * 
      * @param dot the position &gt;= 0
      * @see #moveDot(int, javax.swing.text.Position.Bias)
      * @see Caret#moveDot
@@ -1069,6 +1322,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Moves the caret position to the specified position, with the
      * specified bias.
      *
+     * <p>
+     * 将插入符号位置移动到指定位置,并指定偏移。
+     * 
+     * 
      * @param dot the position &gt;= 0
      * @param dotBias the bias for this position, not <code>null</code>
      * @throws IllegalArgumentException if the bias is <code>null</code>
@@ -1134,6 +1391,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * specified bias. This implicitly sets the selection range
      * to zero.
      *
+     * <p>
+     *  设置插入符号位置,并使用指定的偏移量标记到指定位置。这隐含地将选择范围设置为零。
+     * 
+     * 
      * @param dot the position &gt;= 0
      * @param dotBias the bias for this position, not <code>null</code>
      * @throws IllegalArgumentException if the bias is <code>null</code>
@@ -1184,6 +1445,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Returns the bias of the caret position.
      *
+     * <p>
+     *  返回插入符位置的偏移量。
+     * 
+     * 
      * @return the bias of the caret position
      * @since 1.6
      */
@@ -1194,6 +1459,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Returns the bias of the mark.
      *
+     * <p>
+     *  返回标记的偏差。
+     * 
+     * 
      * @return the bias of the mark
      * @since 1.6
      */
@@ -1254,6 +1523,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * causes the old and new location to be repainted.  It
      * also makes sure that the caret is within the visible
      * region of the view, if the view is scrollable.
+     * <p>
+     *  将插入符号位置(点)设置为新位置。这会导致旧位置和新位置重新绘制。它还确保插入符位于视图的可见区域内,如果视图是可滚动的。
+     * 
      */
     void changeCaretPosition(int dot, Position.Bias dotBias) {
         // repaint the old position and set the new value of
@@ -1295,6 +1567,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * assumption that this is happening on the
      * event thread so that calling <code>modelToView</code>
      * is safe.
+     * <p>
+     *  重绘新的插入符位置,假设这是发生在事件线程,所以调用<code> modelToView </code>是安全的。
+     * 
      */
     void repaintNewCaret() {
         if (component != null) {
@@ -1383,6 +1658,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * dot/mark is valid. We do this in case the <code>NavigationFilter</code>
      * changed where to position the dot, that resulted in the current location
      * being bogus.
+     * <p>
+     *  这在文档更改后调用,以验证当前点/标记是否有效。我们这样做,以防<code> NavigationFilter </code>更改位置的位置,导致当前位置是伪造的。
+     * 
      */
     private void ensureValidPosition() {
         int length = component.getDocument().getLength();
@@ -1400,6 +1678,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * caret up/down actions occur, moving between lines
      * that have uneven end positions.
      *
+     * <p>
+     *  保存当前插入符号位置。这用于当插入符号向上/向下动作发生时,在具有不平的结束位置的线之间移动。
+     * 
+     * 
      * @param p the position
      * @see #getMagicCaretPosition
      */
@@ -1410,6 +1692,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
     /**
      * Gets the saved caret position.
      *
+     * <p>
+     *  获取保存的插入符位置。
+     * 
+     * 
      * @return the position
      * see #setMagicCaretPosition
      */
@@ -1423,6 +1709,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * is not desired, so this is changed to the Object
      * behavior.
      *
+     * <p>
+     *  将此对象与指定的对象进行比较。比较矩形的超类行为是不希望的,所以这被改变为对象行为。
+     * 
+     * 
      * @param     obj   the object to compare this font with
      * @return    <code>true</code> if the objects are equal;
      *            <code>false</code> otherwise
@@ -1541,6 +1831,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
 
     /**
      * The event listener list.
+     * <p>
+     *  事件侦听器列表。
+     * 
      */
     protected EventListenerList listenerList = new EventListenerList();
 
@@ -1549,6 +1842,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Only one ChangeEvent is needed per model instance since the
      * event's only (read-only) state is the source property.  The source
      * of events generated here is always "this".
+     * <p>
+     *  模型的更改事件。由于事件的只读(只读)状态是源属性,因此每个模型实例只需要一个ChangeEvent。这里生成的事件源始终是"this"。
+     * 
      */
     protected transient ChangeEvent changeEvent = null;
 
@@ -1579,6 +1875,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * This is used to indicate if the caret currently owns the selection.
      * This is always false if the system does not support the system
      * clipboard.
+     * <p>
+     * 这用于指示插入符号当前是否拥有该选择。如果系统不支持系统剪贴板,这总是false。
+     * 
      */
     private boolean ownsSelection;
 
@@ -1587,6 +1886,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * the current location. This is set in the DocumentListener
      * such that even if the model location of dot hasn't changed (perhaps do
      * to a forward delete) the visual location is updated.
+     * <p>
+     *  如果为真,则无论当前位置如何,点的位置都会更新。这是在DocumentListener中设置的,这样即使点的模型位置没有更改(可能对向前删除执行),可视位置也会更新。
+     * 
      */
     private boolean forceCaretPositionChange;
 
@@ -1594,17 +1896,26 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
      * Whether or not mouseReleased should adjust the caret and focus.
      * This flag is set by mousePressed if it wanted to adjust the caret
      * and focus but couldn't because of a possible DnD operation.
+     * <p>
+     *  无论mouseReleased是否应该调整插入符号和焦点。如果想要调整插入符号和焦点,但是由于可能的DnD操作无法调整,则此标志由mousePressed设置。
+     * 
      */
     private transient boolean shouldHandleRelease;
 
 
     /**
      * holds last MouseEvent which caused the word selection
+     * <p>
+     *  保持导致单词选择的最后一个MouseEvent
+     * 
      */
     private transient MouseEvent selectedWordEvent = null;
 
     /**
      * The width of the caret in pixels.
+     * <p>
+     *  插入符的宽度(以像素为单位)。
+     * 
      */
     private int caretWidth = -1;
     private float aspectRatio = -1;
@@ -1634,6 +1945,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
          * asynchronously.  The simply changes the visibility
          * and repaints the rectangle that last bounded the caret.
          *
+         * <p>
+         *  闪烁定时器触发时调用。这是异步调用。只是改变可见性和重绘最后绑定插入符号的矩形。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -1662,6 +1977,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
          * Updates the dot and mark if they were changed by
          * the insertion.
          *
+         * <p>
+         *  更新点和标记(如果插入更改了)。
+         * 
+         * 
          * @param e the document event
          * @see DocumentListener#insertUpdate
          */
@@ -1740,6 +2059,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
          * Updates the dot and mark if they were changed
          * by the removal.
          *
+         * <p>
+         *  更新点和标记(如果删除更改的话)。
+         * 
+         * 
          * @param e the document event
          * @see DocumentListener#removeUpdate
          */
@@ -1822,6 +2145,10 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
         /**
          * Gives notification that an attribute or set of attributes changed.
          *
+         * <p>
+         *  提供属性或属性集更改的通知。
+         * 
+         * 
          * @param e the document event
          * @see DocumentListener#changedUpdate
          */
@@ -1841,6 +2168,9 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
         /**
          * This method gets called when a bound property is changed.
          * We are looking for document changes on the editor.
+         * <p>
+         *  当绑定属性更改时,将调用此方法。我们正在编辑器上查找文档更改。
+         * 
          */
         public void propertyChange(PropertyChangeEvent evt) {
             Object oldValue = evt.getOldValue();
@@ -1891,6 +2221,8 @@ public class DefaultCaret extends Rectangle implements Caret, FocusListener, Mou
         //
         /**
          * Toggles the visibility of the selection when ownership is lost.
+         * <p>
+         *  在所有权丢失时切换选择的可见性。
          */
         public void lostOwnership(Clipboard clipboard,
                                       Transferable contents) {

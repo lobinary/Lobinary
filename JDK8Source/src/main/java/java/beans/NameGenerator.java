@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ import static java.util.Locale.ENGLISH;
  * is passed into <code>instanceName</code> then the returned
  * string identifier will be &quot;JButton0&quot;.
  *
+ * <p>
+ *  为对象实例生成唯一名称的实用程序类。名称将是非限定类名和实例号的连接。
+ * <p>
+ *  例如,如果第一对象实例javax.swing.JButton被传递到<code> instanceName </code>,则返回的字符串标识符将是"JButton0"。
+ * 
+ * 
  * @author Philip Milne
  */
 class NameGenerator {
@@ -54,6 +61,9 @@ class NameGenerator {
     /**
      * Clears the name cache. Should be called to near the end of
      * the encoding cycle.
+     * <p>
+     *  清除名称缓存。应该调用接近编码周期的结束。
+     * 
      */
     public void clear() {
         valueToName.clear();
@@ -62,6 +72,9 @@ class NameGenerator {
 
     /**
      * Returns the root name of the class.
+     * <p>
+     *  返回类的根名称。
+     * 
      */
     @SuppressWarnings("rawtypes")
     public static String unqualifiedClassName(Class type) {
@@ -74,6 +87,9 @@ class NameGenerator {
 
     /**
      * Returns a String which capitalizes the first letter of the string.
+     * <p>
+     *  返回一个字符串,它大写字符串的第一个字母。
+     * 
      */
     public static String capitalize(String name) {
         if (name == null || name.length() == 0) {
@@ -87,6 +103,9 @@ class NameGenerator {
      * Invocations are cached so that if an object has been previously
      * passed into this method then the same identifier is returned.
      *
+     * <p>
+     *  返回标识对象实例的唯一字符串。调用缓存,以便如果先前已将对象传递到此方法,则返回相同的标识符。
+     * 
      * @param instance object used to generate string
      * @return a unique string representing the object
      */

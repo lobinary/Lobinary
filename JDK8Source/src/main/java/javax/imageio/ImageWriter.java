@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,15 @@ import javax.imageio.spi.ImageWriterSpi;
  *
  * <p>
  *
+ * <p>
+ *  用于编码和写入图像的抽象超类。这个类必须由在Java Image I / O框架的上下文中写出图像的类进行子类化。
+ * 
+ *  <p> <code> ImageWriter </code>对象通常由特定格式的服务提供程序类实例化。
+ * 服务提供程序类在<code> IIORegistry </code>中注册,它们用于格式识别和可用格式读取器和写入器的呈现。
+ * 
+ * <p>
+ * 
+ * 
  * @see ImageReader
  * @see ImageWriteParam
  * @see javax.imageio.spi.IIORegistry
@@ -67,6 +77,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * The <code>ImageWriterSpi</code> that instantiated this object,
      * or <code>null</code> if its identity is not known or none
      * exists.  By default it is initialized to <code>null</code>.
+     * <p>
+     *  实例化此对象的<code> ImageWriterSpi </code>,如果其身份不为已知或不存在,则<code> null </code>。
+     * 默认情况下,它被初始化为<code> null </code>。
+     * 
      */
     protected ImageWriterSpi originatingProvider = null;
 
@@ -75,6 +89,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * set by <code>setOutput</code> and retrieved by
      * <code>getOutput</code>.  By default it is initialized to
      * <code>null</code>.
+     * <p>
+     *  由<code> setOutput </code>设置并由<code> getOutput </code>检索的<code> ImageOutputStream </code>或其他<code> Ob
+     * ject </code>。
+     * 默认情况下,它被初始化为<code> null </code>。
+     * 
      */
     protected Object output = null;
 
@@ -83,6 +102,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * warning messages and compression setting values, or
      * <code>null</code> if localization is not supported.  By default
      * it is initialized to <code>null</code>.
+     * <p>
+     *  可以用于本地化警告消息和压缩设置值的<code> Locale </code>数组,如果不支持本地化,则为<code> null </code>。
+     * 默认情况下,它被初始化为<code> null </code>。
+     * 
      */
     protected Locale[] availableLocales = null;
 
@@ -90,6 +113,9 @@ public abstract class ImageWriter implements ImageTranscoder {
      * The current <code>Locale</code> to be used for localization, or
      * <code>null</code> if none has been set.  By default it is
      * initialized to <code>null</code>.
+     * <p>
+     *  要用于本地化的当前<code> Locale </code>,如果没有设置,则为<code> null </code>。默认情况下,它被初始化为<code> null </code>。
+     * 
      */
     protected Locale locale = null;
 
@@ -98,6 +124,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>IIOWriteWarningListener</code>s, initialized by default to
      * <code>null</code>, which is synonymous with an empty
      * <code>List</code>.
+     * <p>
+     * 当前注册的<code> IIOWriteWarningListener </code>的<code> List </code>,默认初始化为<code> null </code>,与空的<code> L
+     * ist </code>。
+     * 
      */
     protected List<IIOWriteWarningListener> warningListeners = null;
 
@@ -106,6 +136,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * element of <code>warningListeners</code>, initialized by default
      * <code>null</code>, which is synonymous with an empty
      * <code>List</code>.
+     * <p>
+     *  <code> Locale </code>的<code> List </code>,对于<code> warningListeners </code>的每个元素都有一个</code>,默认为<code>
+     *  null </code>一个空的<code> List </code>。
+     * 
      */
     protected List<Locale> warningLocales = null;
 
@@ -114,12 +148,19 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>IIOWriteProgressListener</code>s, initialized by default
      * <code>null</code>, which is synonymous with an empty
      * <code>List</code>.
+     * <p>
+     *  当前注册的<code> IIOWriteProgressListener </code>的<code> List </code>,由默认<code> null </code>初始化,与空的<code>
+     *  List </code>。
+     * 
      */
     protected List<IIOWriteProgressListener> progressListeners = null;
 
     /**
      * If <code>true</code>, the current write operation should be
      * aborted.
+     * <p>
+     *  如果<code> true </code>,则应该中止当前的写操作。
+     * 
      */
     private boolean abortFlag = false;
 
@@ -134,6 +175,13 @@ public abstract class ImageWriter implements ImageTranscoder {
      * the extension object is unsuitable, an
      * <code>IllegalArgumentException</code> should be thrown.
      *
+     * <p>
+     *  构造一个<code> ImageWriter </code>并将其<code> originatingProvider </code>实例变量设置为提供的值。
+     * 
+     *  <p>使用扩展的子类应该提供带有签名<code>(ImageWriterSpi,Object)</code>的构造函数,以便检索扩展对象。
+     * 如果扩展对象不合适,应该抛出一个<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param originatingProvider the <code>ImageWriterSpi</code> that
      * is constructing this object, or <code>null</code>.
      */
@@ -149,6 +197,13 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <p> The default implementation returns the value of the
      * <code>originatingProvider</code> instance variable.
      *
+     * <p>
+     *  如果此对象不是通过<code> IIORegistry </code>创建的,则返回创建此<code> ImageWriter </code>或<code> null </code>的<code> I
+     * mageWriterSpi </code>对象。
+     * 
+     *  <p>默认实现返回<code> originatingProvider </code>实例变量的值。
+     * 
+     * 
      * @return an <code>ImageWriterSpi</code>, or <code>null</code>.
      *
      * @see ImageWriterSpi
@@ -193,6 +248,25 @@ public abstract class ImageWriter implements ImageTranscoder {
      * checking <code>output</code> against the set of classes
      * advertised by the originating provider, if there is one.
      *
+     * <p>
+     * 将目标设置为给定的<code> ImageOutputStream </code>或其他<code> Object </code>。目标被假定为准备好接受数据,并且不会在每次写入结束时关闭。
+     * 这允许分布式成像应用通过单个网络连接传输一系列图像。如果<code> output </code>是<code> null </code>,任何当前设置的输出将被删除。
+     * 
+     *  <p>如果<code> output </code>是<code> ImageOutputStream </code>,则调用<code> write </code>,<code> writeToSe
+     * quence </code>和<code> prepareWriteEmpty < / code> / <code> endWriteEmpty </code>方法将保留流的现有内容。
+     * 其他写方法,如<code> writeInsert </code>,<code> replaceStreamMetadata </code>,<code> replaceImageMetadata </code>
+     * ,<code> replacePixels </code>,<code> prepareInsertEmpty </code> / <code> endInsertEmpty </code>和<code>
+     *  endWriteSequence </code>,需要流的全部内容是可读和可写的,并且可以改变流的任何部分。
+     * 
+     *  <p>除了<code> ImageOutputStream </code>之外的一般<code> Object </code>的使用适用于直接与输出设备或成像协议交互的写者。
+     * 这组法律类由作者的服务提供者的<code> getOutputTypes </code>方法发布;大多数写入器将返回一个只包含<code> ImageOutputStream.class </code>
+     * 的单元素数组,以表示它们只接受一个<code> ImageOutputStream </code>。
+     *  <p>除了<code> ImageOutputStream </code>之外的一般<code> Object </code>的使用适用于直接与输出设备或成像协议交互的写者。
+     * 
+     * <p>默认实现在检查源代码提供商发布的类集合后检查<code> output </code>后将<code> output </code>实例变量设置为<code> output </code> ,如果
+     * 有一个。
+     * 
+     * 
      * @param output the <code>ImageOutputStream</code> or other
      * <code>Object</code> to use for future writing.
      *
@@ -233,6 +307,13 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <p> The default implementation returns the value of the
      * <code>output</code> instance variable.
      *
+     * <p>
+     *  返回由最近一次调用<code> setOutput </code>方法设置的<code> ImageOutputStream </code>或其他<code> Object </code>如果没有设置
+     * 目的地,则返回<code> null </code>。
+     * 
+     *  <p>默认实现返回<code> output </code>实例变量的值。
+     * 
+     * 
      * @return the <code>Object</code> that was specified using
      * <code>setOutput</code>, or <code>null</code>.
      *
@@ -254,6 +335,12 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>availableLocales</code> instance variable if it is
      * non-<code>null</code>, or else returns <code>null</code>.
      *
+     * <p>
+     *  返回可用于本地化警告侦听器和压缩设置的<code> Locale </code>数组。 <code> null </code>的返回值表示不支持本地化。
+     * 
+     *  <p>如果非<code> null </code>,则返回<code> availableLocales </code>实例变量的克隆,否则返回<code> null </code>。
+     * 
+     * 
      * @return an array of <code>Locale</code>s that may be used as
      * arguments to <code>setLocale</code>, or <code>null</code>.
      */
@@ -275,6 +362,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>locale</code> is <code>null</code>, the instance variable
      * is set to <code>null</code> without any checking.
      *
+     * <p>
+     *  将此<code> ImageWriter </code>的当前<code> Locale </code>设置为给定值。
+     *  <code> null </code>的值会删除任何先前的设置,并指示写入程序应按其认为合适的方式进行本地化。
+     * 
+     *  <p>默认实现针对<code> getAvailableLocales </code>返回的值检查<code> locale </code>,如果找到,设置<code> locale </code>实
+     * 例变量。
+     * 如果<code> locale </code>是<code> null </code>,则将实例变量设置为<code> null </code>而不进行任何检查。
+     * 
+     * 
      * @param locale the desired <code>Locale</code>, or
      * <code>null</code>.
      *
@@ -310,6 +406,12 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <p> The default implementation returns the value of the
      * <code>locale</code> instance variable.
      *
+     * <p>
+     * 返回当前设置的<code> Locale </code>或<code> null </code>(如果没有设置)。
+     * 
+     *  <p>默认实现返回<code> locale </code>实例变量的值。
+     * 
+     * 
      * @return the current <code>Locale</code>, or <code>null</code>.
      *
      * @see #setLocale
@@ -340,6 +442,17 @@ public abstract class ImageWriter implements ImageTranscoder {
      * enabled, or they may return an instance of a plug-in specific
      * subclass of <code>ImageWriteParam</code>.
      *
+     * <p>
+     *  返回包含默认值(即,如果未指定<code> ImageWriteParam </code>对象时将使用的那些值)的此文件格式的适当类型的新<对象> ImageWriteParam </code>对象。
+     * 这是有用的作为起点只调整几个参数,否则单独保留默认设置。
+     * 
+     *  <p>默认实现构造并返回一个新的<code> ImageWriteParam </code>对象,该对象不允许平铺,渐进编码或压缩,并且将针对当前<code> Locale </code> i> ie
+     *  </i>,你会通过调用<code> new ImageWriteParam(getLocale())</code>得到。
+     * 
+     *  <p>各个插件可能会返回一个具有启用了额外可选功能的<code> ImageWriteParam </code>实例,或者它们可能返回<code> ImageWriteParam </code>的插件
+     * 特定子类的实例。
+     * 
+     * 
      * @return a new <code>ImageWriteParam</code> object containing
      * default values.
      */
@@ -372,6 +485,19 @@ public abstract class ImageWriter implements ImageTranscoder {
      * (<i>e.g.</i>, writers for single-image formats) should return
      * <code>null</code>.
      *
+     * <p>
+     * 返回包含用于编码图像流的默认值的<code> IIOMetadata </code>对象。
+     * 可以使用<code> IIOMetadata.getAsTree </code>方法,<code> IIOMetadataController </code>对象或通过插件特定接口返回的XML树结构来操
+     * 作对象的内容,结果数据提供给采用流元数据参数的<code> write </code>方法之一。
+     * 返回包含用于编码图像流的默认值的<code> IIOMetadata </code>对象。
+     * 
+     *  <p>可以为可能影响流元数据结构的情况提供可选的<code> ImageWriteParam </code>。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>不使用流元数据(<i>例如</i>,用于单图像格式的作者)的作者应返回<code> null </code>。
+     * 
+     * 
      * @param param an <code>ImageWriteParam</code> that will be used to
      * encode the image, or <code>null</code>.
      *
@@ -399,6 +525,17 @@ public abstract class ImageWriter implements ImageTranscoder {
      * progressive encoding or any format-specific settings), they
      * will be ignored.
      *
+     * <p>
+     *  返回包含用于编码给定类型的图像的默认值的<code> IIOMetadata </code>对象。
+     * 可以使用<code> IIOMetadata.getAsTree </code>方法,<code> IIOMetadataController </code>对象或通过插件特定接口返回的XML树结构来操
+     * 作对象的内容,结果数据提供给采用流元数据参数的<code> write </code>方法之一。
+     *  返回包含用于编码给定类型的图像的默认值的<code> IIOMetadata </code>对象。
+     * 
+     *  <p>可能会提供可能影响图像元数据结构的情况下的<code> ImageWriteParam </code>。
+     * 
+     * <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     * 
      * @param imageType an <code>ImageTypeSpecifier</code> indicating the
      * format of the image to be written later.
      * @param param an <code>ImageWriteParam</code> that will be used to
@@ -439,6 +576,16 @@ public abstract class ImageWriter implements ImageTranscoder {
      *
      * <p> The default implementation returns 0.
      *
+     * <p>
+     *  根据将在编码期间使用的图像类型和任何其他写入参数和元数据对象,返回正在写入的格式支持的缩略图数。返回值<code> -1 </code>表示信息不足。
+     * 
+     *  <p>可以选择为影响缩略图处理的情况提供<code> ImageWriteParam </code>。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>默认实现返回0。
+     * 
+     * 
      * @param imageType an <code>ImageTypeSpecifier</code> indicating
      * the type of image to be written, or <code>null</code>.
      * @param param the <code>ImageWriteParam</code> that will be used for
@@ -484,6 +631,19 @@ public abstract class ImageWriter implements ImageTranscoder {
      *
      * <p> The default implementation returns <code>null</code>.
      *
+     * <p>
+     *  返回一个<code> Dimension </code>数组,指示缩略图的合法大小范围,因为它们将在输出文件或流中编码。这些信息仅仅是咨询;作者将根据需要调整所提供的任何缩略图的大小。
+     * 
+     * <p>信息作为一组对返回;一对中的第一元素包含(包括)最小宽度和高度,第二元素包含(包括)最大宽度和高度。在一起,每对定义一个有效的尺寸范围。要指定固定大小,两个元素将显示相同的宽度和高度。
+     *  <code> null </code>的返回值表示大小是任意的或未知的。
+     * 
+     *  <p>可以选择为影响缩略图处理的情况提供<code> ImageWriteParam </code>。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>默认实现返回<code> null </code>。
+     * 
+     * 
      * @param imageType an <code>ImageTypeSpecifier</code> indicating the
      * type of image to be written, or <code>null</code>.
      * @param param the <code>ImageWriteParam</code> that will be used for
@@ -514,6 +674,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      *
      * <p> The default implementation returns <code>false</code>.
      *
+     * <p>
+     *  如果采用<code> IIOImage </code>参数的方法能够处理<code> Raster </code>(而不是<code> RenderedImage </code>),则返回<code>
+     *  true </code> )源图像。
+     * 如果此方法返回<code> false </code>,那么这些方法将抛出<code> UnsupportedOperationException </code>(如果提供了包含<code> Raste
+     * r </code>的<code> IIOImage </code>)。
+     * 
+     *  <p>默认实现返回<code> false </code>。
+     * 
+     * 
      * @return <code>true</code> if <code>Raster</code> sources are
      * supported.
      */
@@ -555,6 +724,26 @@ public abstract class ImageWriter implements ImageTranscoder {
      * progressive encoding or any format-specific settings), they
      * will be ignored.
      *
+     * <p>
+     * 将包含单个图像和关联的流以及图像元数据和缩略图的完整图像流附加到输出。包括任何必要的头信息。
+     * 如果输出是<code> ImageOutputStream </code>,则其在当前搜索位置之前的现有内容不受影响,并且不需要是可读或可写的。
+     * 
+     *  <p>输出必须使用<code> setOutput </code>方法预先设置。
+     * 
+     *  <p>可以可选地提供流元数据;如果它是<code> null </code>,则将使用默认流元数据。
+     * 
+     *  <p>如果<code> canWriteRasters </code>返回<code> true </code>,则<code> IIOImage </code>可能包含<code> Raster </code>
+     * 源。
+     * 否则,它必须包含一个<code> RenderedImage </code>源。
+     * 
+     *  <p>如果需要,系统会调整提供的缩略图,并且超过支持的缩略图的任何缩略图将被忽略。如果格式需要未提供的其他缩略图,则编写器应在内部生成它们。
+     * 
+     *  <p>可以可选地提供<code> ImageWriteParam </code>以控制写入过程。
+     * 如果<code> param </code>是<code> null </code>,将使用默认的写参数。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     * 
      * @param streamMetadata an <code>IIOMetadata</code> object representing
      * stream metadata, or <code>null</code> to use default values.
      * @param image an <code>IIOImage</code> object containing an
@@ -581,6 +770,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * default metadata and thumbnails to the output.  This method is
      * a shorthand for <code>write(null, image, null)</code>.
      *
+     * <p>
+     * 将包含具有默认元数据和缩略图的单个图像的完整图像流附加到输出。此方法是<code> write(null,image,null)</code>的缩写。
+     * 
+     * 
      * @param image an <code>IIOImage</code> object containing an
      * image, thumbnails, and metadata to be written.
      *
@@ -603,6 +796,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * method is a shorthand for <code>write(null, new IIOImage(image,
      * null, null), null)</code>.
      *
+     * <p>
+     *  将包含具有默认元数据和缩略图的单个图像的完整图像流附加到输出。
+     * 这个方法是<code> write(null,new IIOImage(image,null,null),null)</code>的简写。
+     * 
+     * 
      * @param image a <code>RenderedImage</code> to be written.
      *
      * @exception IllegalStateException if the output has not
@@ -637,6 +835,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      *
      * <p> The default implementation returns <code>false</code>.
      *
+     * <p>
+     *  如果写入程序能够将图像附加到已包含标题信息和可能的之前图像的图像流,则返回<code> true </code>。
+     * 
+     *  <p>如果<code> canWriteSequence </code>返回<code> false </code>,则<code> writeToSequence </code>和<code> en
+     * dWriteSequence </code>会抛出<code> UnsupportedOperationException </code> 。
+     * 
+     *  <p>默认实现返回<code> false </code>。
+     * 
+     * 
      * @return <code>true</code> if images may be appended sequentially.
      */
     public boolean canWriteSequence() {
@@ -671,6 +878,23 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  使用提供的流元数据对象准备流接受一系列后续的<code> writeToSequence </code>调用。如果元数据应在图像数据之前,则将元数据写入流。
+     * 如果参数是<code> null </code>,则使用默认流元数据。
+     * 
+     * <p>如果输出是<code> ImageOutputStream </code>,则刷新当前搜索位置之前的输出的现有内容,并且不需要可读或可写。
+     * 如果格式要求<code> endWriteSequence </code>能够倒回以修补标题信息,例如对于单个TIFF文件中的图像序列,则由该方法写入的元数据必须保持在可写部分的流。
+     * 其他格式可以在该方法之后和每个图像之后刷新流。
+     * 
+     *  <p>如果<code> canWriteSequence </code>返回<code> false </code>,此方法将抛出<code> UnsupportedOperationExceptio
+     * n </code>。
+     * 
+     *  <p>输出必须使用<code> setOutput </code>方法预先设置。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @param streamMetadata A stream metadata object, or <code>null</code>.
      *
      * @exception IllegalStateException if the output has not
@@ -728,6 +952,34 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  将单个图像以及可能关联的元数据和缩略图附加到输出。
+     * 如果输出是<code> ImageOutputStream </code>,则当前搜索位置之前的输出的现有内容可以被刷新,并且不需要是可读或可写的,除非插件需要能够补丁调用<code> endWrite
+     * Sequence </code>(<i> TIFF)时的头信息。
+     *  将单个图像以及可能关联的元数据和缩略图附加到输出。
+     * 
+     *  <p>如果<code> canWriteSequence </code>返回<code> false </code>,此方法将抛出<code> UnsupportedOperationExceptio
+     * n </code>。
+     * 
+     * <p>输出必须使用<code> setOutput </code>方法预先设置。
+     * 
+     *  必须事先调用<p> <code> prepareWriteSequence </code>,或者抛出<code> IllegalStateException </code>。
+     * 
+     *  <p>如果<code> canWriteRasters </code>返回<code> true </code>,则<code> IIOImage </code>可能包含<code> Raster </code>
+     * 源。
+     * 否则,它必须包含一个<code> RenderedImage </code>源。
+     * 
+     *  <p>如果需要,系统会调整提供的缩略图,并且超过支持的缩略图的任何缩略图将被忽略。如果格式需要未提供的其他缩略图,则编写器将在内部生成它们。
+     * 
+     *  <p>可以可选地提供<code> ImageWriteParam </code>以控制写入过程。
+     * 如果<code> param </code>是<code> null </code>,将使用默认的写参数。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @param image an <code>IIOImage</code> object containing an
      * image, thumbnails, and metadata to be written.
      * @param param an <code>ImageWriteParam</code>, or
@@ -769,6 +1021,17 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     * 完成以<code> prepareWriteSequence </code>开头的一系列图像的写入。任何应该在图像序列的末尾出现的流元数据被写出,并且如果必要的话,在序列的开始处的任何头信息被修补。
+     * 如果输出是<code> ImageOutputStream </code>,则通过流元数据在序列末尾的数据被刷新,并且不需要可读或可写。
+     * 
+     *  <p>如果<code> canWriteSequence </code>返回<code> false </code>,此方法将抛出<code> UnsupportedOperationExceptio
+     * n </code>。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @exception IllegalStateException if the output has not
      * been set, or <code>prepareWriteSequence</code> has not been called.
      * @exception UnsupportedOperationException if
@@ -789,6 +1052,12 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>IllegalStateException</code> if the output is
      * <code>null</code>, and otherwise returns <code>false</code>.
      *
+     * <p>
+     *  如果可以替换输出中已存在的流元数据,则返回<code> true </code>。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则返回<code> false </code>。
+     * 
+     * 
      * @return <code>true</code> if replacement of stream metadata is
      * allowed.
      *
@@ -820,6 +1089,17 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  用新信息替换输出中的流元数据。如果输出是<code> ImageOutputStream </code>,则会检查流的先前内容,并可能进行编辑,为新数据腾出空间。
+     * 输出的所有先前内容必须可用于读取和写入。
+     * 
+     *  <p>如果<code> canReplaceStreamMetadata </code>返回<code> false </code>,则会抛出<code> UnsupportedOperationEx
+     * ception </code>。
+     * 
+     * <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOpe
+     * rationException </code>。
+     * 
+     * 
      * @param streamMetadata an <code>IIOMetadata</code> object representing
      * stream metadata, or <code>null</code> to use default values.
      *
@@ -852,6 +1132,18 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise returns <code>false</code>
      * without checking the value of <code>imageIndex</code>.
      *
+     * <p>
+     *  如果可以使用索引<code> imageIndex </code>替换与现有图像相关联的图像元数据,则返回<code> true </code>。
+     * 如果此方法返回<code> false </code>,则调用<code> replaceImageMetadata(imageIndex)</code>会抛出<code> UnsupportedOpe
+     * rationException </code>。
+     *  如果可以使用索引<code> imageIndex </code>替换与现有图像相关联的图像元数据,则返回<code> true </code>。
+     * 
+     *  <p>不支持任何图像元数据替换的写入程序可能会返回<code> false </code>,而不对索引执行边界检查。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则返回<code> false </code>,而不
+     * 检查<code> imageIndex < / code>。
+     * 
+     * 
      * @param imageIndex the index of the image whose metadata is to
      * be replaced.
      *
@@ -886,6 +1178,16 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  替换与现有图像相关联的图像元数据。
+     * 
+     *  <p>如果<code> canReplaceImageMetadata(imageIndex)</code>返回<code> false </code>,将抛出<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @param imageIndex the index of the image whose metadata is to
      * be replaced.
      * @param imageMetadata an <code>IIOMetadata</code> object
@@ -925,6 +1227,16 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise returns <code>false</code>
      * without checking the value of <code>imageIndex</code>.
      *
+     * <p>
+     * 如果写入程序支持在给定索引处插入新图像,则返回<code> true </code>。
+     * 具有大于或等于插入索引的索引的现有图像将使其索引增加1. <code> -1 </code>的<code> imageIndex </code>的值可以用于表示较大的索引比当前最大指数。
+     * 
+     *  <p>不支持任何图像插入的写入程序可能会返回<code> false </code>,而不对索引执行边界检查。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则返回<code> false </code>,而不
+     * 检查<code> imageIndex < / code>。
+     * 
+     * 
      * @param imageIndex the index at which the image is to be
      * inserted.
      *
@@ -973,6 +1285,24 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  在现有图像流中插入新图像。
+     * 具有大于<code> imageIndex </code>的索引的现有图像被保留,并且它们的索引各自增加1.用于<code> imageIndex </code>为-1的值可以用于表示更大的索引比以前的
+     * 最大指数;也就是说,它将导致图像被逻辑地附加到序列的末尾。
+     *  在现有图像流中插入新图像。如果输出是<code> ImageOutputStream </code>,则整个流必须是可读和可写的。
+     * 
+     *  <p>如果<code> canInsertImage(imageIndex)</code>返回<code> false </code>,将抛出<code> UnsupportedOperationEx
+     * ception </code>。
+     * 
+     * <p>可以可选地提供<code> ImageWriteParam </code>以控制写入过程。
+     * 如果<code> param </code>是<code> null </code>,将使用默认的写参数。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @param imageIndex the index at which to write the image.
      * @param image an <code>IIOImage</code> object containing an
      * image, thumbnails, and metadata to be written.
@@ -1016,6 +1346,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise returns <code>false</code>
      * without checking the value of <code>imageIndex</code>.
      *
+     * <p>
+     *  如果写入程序支持在给定索引处删除现有图像,则返回<code> true </code>。具有大于插入索引的索引的现有图像将使其索引减小1。
+     * 
+     *  <p>不支持任何图片删除的写入器可能会返回<code> false </code>,而不对索引执行边界检查。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则返回<code> false </code>,而不
+     * 检查<code> imageIndex < / code>。
+     * 
+     * 
      * @param imageIndex the index of the image to be removed.
      *
      * @return <code>true</code> if it is possible to remove the given
@@ -1050,6 +1389,18 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  从流中删除图片。
+     * 
+     *  <p>如果<code> canRemoveImage(imageIndex)</code>返回false,则会抛出<code> UnsupportedOperationException </code>
+     * 。
+     * 
+     *  <p>删除可能会或可能不会导致实际文件大小减少。
+     * 
+     * <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOpe
+     * rationException </code>。
+     * 
+     * 
      * @param imageIndex the index of the image to be removed.
      *
      * @exception IllegalStateException if the output has not
@@ -1081,6 +1432,14 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>IllegalStateException</code> if the output is
      * <code>null</code>, and otherwise returns <code>false</code>.
      *
+     * <p>
+     *  如果写入程序支持将包含未定义像素值的单个图像以及关联的元数据和缩略图的完整图像流写入输出,则返回<code> true </code>。
+     * 像素值可以通过对<code> replacePixels </code>方法的未来调用来定义。
+     * 如果输出是<code> ImageOutputStream </code>,则其在当前搜索位置之前的现有内容不受影响,并且不需要是可读或可写的。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则返回<code> false </code>。
+     * 
+     * 
      * @return <code>true</code> if the writing of complete image
      * stream with contents to be defined later is supported.
      *
@@ -1131,6 +1490,30 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  开始将完整的图像流写入输出,该完整的图像流包括具有未定义的像素值的单个图像以及相关联的元数据和缩略图。像素值将通过对<code> replacePixels </code>方法的未来调用来定义。
+     * 如果输出是<code> ImageOutputStream </code>,则其在当前搜索位置之前的现有内容不受影响,并且不需要是可读或可写的。
+     * 
+     * <p>在调用<code> endWriteEmpty </code>之前,写入操作尚未完成。
+     * 对<code> prepareWriteEmpty </code>和<code> endWriteEmpty </code的调用之间可能会调用<code> prepareReplacePixels </code>
+     * ,<code> replacePixels </code>和<code> endReplacePixels </code> >。
+     * <p>在调用<code> endWriteEmpty </code>之前,写入操作尚未完成。
+     * 但是,对<code> prepareWriteEmpty </code>的调用不能嵌套,并且调用<code> prepareWriteEmpty </code>和<code> prepareInsert
+     * Empty </code>可能不会分散。
+     * <p>在调用<code> endWriteEmpty </code>之前,写入操作尚未完成。
+     * 
+     *  <p>如果<code> canWriteEmpty </code>返回<code> false </code>,则会抛出<code> UnsupportedOperationException </code>
+     * 。
+     * 
+     *  <p>可以可选地提供<code> ImageWriteParam </code>以控制写入过程。
+     * 如果<code> param </code>是<code> null </code>,将使用默认的写参数。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @param streamMetadata an <code>IIOMetadata</code> object representing
      * stream metadata, or <code>null</code> to use default values.
      * @param imageType an <code>ImageTypeSpecifier</code> describing
@@ -1185,6 +1568,16 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  完成对先前调用<code> prepareWriteEmpty </code>开始的新映像的写入。
+     * 
+     *  <p>如果<code> canWriteEmpty()</code>返回<code> false </code>,则会抛出<code> UnsupportedOperationException </code>
+     * 。
+     * 
+     * <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOpe
+     * rationException </code>。
+     * 
+     * 
      * @exception IllegalStateException if the output has not
      * been set.
      * @exception UnsupportedOperationException if
@@ -1227,6 +1620,16 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise returns <code>false</code>
      * without checking the value of <code>imageIndex</code>.
      *
+     * <p>
+     *  如果写入程序支持在给定索引处插入新的空图像,则返回<code> true </code>。图像的像素值未定义,并且可以使用<code> replacePixels </code>方法指定为零件。
+     * 具有大于或等于插入索引的索引的现有图像将使其索引增加1. <code> -1 </code>的<code> imageIndex </code>的值可以用于表示较大的索引比当前最大指数。
+     * 
+     *  <p>不支持插入空图像的写入程序可能会在不对索引执行边界检查的情况下返回<code> false </code>。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则返回<code> false </code>,而不
+     * 检查<code> imageIndex < / code>。
+     * 
+     * 
      * @param imageIndex the index at which the image is to be
      * inserted.
      *
@@ -1289,6 +1692,32 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     * 开始将具有未定义像素值的新图像插入到现有图像流中。
+     * 具有大于<code> imageIndex </code>的索引的现有图像被保留,并且它们的索引各自增加1.用于<code> imageIndex </code>为-1的值可以用于表示更大的索引比以前的
+     * 最大指数;也就是说,它将导致图像被逻辑地附加到序列的末尾。
+     * 开始将具有未定义像素值的新图像插入到现有图像流中。如果输出是<code> ImageOutputStream </code>,则整个流必须是可读和可写的。
+     * 
+     *  <p>稍后可以使用<code> replacePixels </code>方法提供图像内容。在发生对<code> endInsertEmpty </code>的调用之前,插入是不完整的。
+     * 对<code> prepareInsertEmpty </code>和<code> endInsertEmpty </code的调用之间可能会调用<code> prepareReplacePixels 
+     * </code>,<code> replacePixels </code>和<code> endReplacePixels </code> >。
+     *  <p>稍后可以使用<code> replacePixels </code>方法提供图像内容。在发生对<code> endInsertEmpty </code>的调用之前,插入是不完整的。
+     * 然而,对<code> prepareInsertEmpty </code>的调用不能嵌套,并且对<code> prepareWriteEmpty </code>和<code> prepareInsert
+     * Empty </code>的调用可能不是分散的。
+     *  <p>稍后可以使用<code> replacePixels </code>方法提供图像内容。在发生对<code> endInsertEmpty </code>的调用之前,插入是不完整的。
+     * 
+     *  <p>如果<code> canInsertEmpty(imageIndex)</code>返回<code> false </code>,则会抛出<code> UnsupportedOperationE
+     * xception </code>。
+     * 
+     *  <p>可以可选地提供<code> ImageWriteParam </code>以控制写入过程。
+     * 如果<code> param </code>是<code> null </code>,将使用默认的写参数。
+     * 
+     * <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @param imageIndex the index at which to write the image.
      * @param imageType an <code>ImageTypeSpecifier</code> describing
      * the layout of the image.
@@ -1342,6 +1771,13 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  完成插入一个新图像,该图像是先前调用<code> prepareInsertEmpty </code>开始的。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @exception IllegalStateException if the output has not
      * been set.
      * @exception UnsupportedOperationException if
@@ -1378,6 +1814,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise returns <code>false</code>
      * without checking the value of <code>imageIndex</code>.
      *
+     * <p>
+     *  如果写入者允许使用<code> replacePixels </code>方法替换给定图像的像素,则返回<code> true </code>。
+     * 
+     *  <p>不支持任何像素替换的写入程序可能会返回<code> false </code>,而不对索引执行边界检查。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则返回<code> false </code>,而不
+     * 检查<code> imageIndex < / code>。
+     * 
+     * 
      * @param imageIndex the index of the image whose pixels are to be
      * replaced.
      *
@@ -1412,6 +1857,16 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  准备写入程序处理对<code> replacePixels </code>方法的一系列调用。受影响的像素区域将根据提供的内容进行裁剪
+     * 
+     *  <p>如果<code> canReplacePixels </code>返回<code> false </code>,并且将抛出<code> UnsupportedOperationException
+     *  </code>。
+     * 
+     * <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOpe
+     * rationException </code>。
+     * 
+     * 
      * @param imageIndex the index of the image whose pixels are to be
      * replaced.
      * @param region a <code>Rectangle</code> that will be used to clip
@@ -1467,6 +1922,23 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  将已经存在于输出中的图像的一部分替换为给定图像的一部分。图像数据必须匹配或可转换为现有图像的图像布局。
+     * 
+     *  <p>目标区域在<code> param </code>参数中指定,并且将被剪切到图像边界和提供给<code> prepareReplacePixels </code>的区域。
+     * 至少不能剪裁源的一个像素,否则抛出异常。
+     * 
+     *  <p>可以可选地提供<code> ImageWriteParam </code>以控制写入过程。
+     * 如果<code> param </code>是<code> null </code>,将使用默认的写参数。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>此方法只能在调用<code> prepareReplacePixels </code>后调用,否则将抛出<code> IllegalStateException </code>。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @param image a <code>RenderedImage</code> containing source
      * pixels.
      * @param param an <code>ImageWriteParam</code>, or
@@ -1526,6 +1998,23 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     * 将已经存在于输出中的图像的一部分替换为给定的<code> Raster </code>的一部分。图像数据必须匹配或可转换为现有图像的图像布局。
+     * 
+     *  <p>可以可选地提供<code> ImageWriteParam </code>以控制写入过程。
+     * 如果<code> param </code>是<code> null </code>,将使用默认的写参数。
+     * 
+     *  <p>目标区域在<code> param </code>参数中指定,并且将被剪切到图像边界和提供给<code> prepareReplacePixels </code>的区域。
+     * 至少不能剪裁源的一个像素,否则抛出异常。
+     * 
+     *  <p>如果提供的<code> ImageWriteParam </code>包含此作者不支持的可选设置值(<i>例如</i>渐进式编码或任何特定于格式的设置),则它们将被忽略。
+     * 
+     *  <p>此方法只能在调用<code> prepareReplacePixels </code>后调用,否则将抛出<code> IllegalStateException </code>。
+     * 
+     *  <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOp
+     * erationException </code>。
+     * 
+     * 
      * @param raster a <code>Raster</code> containing source
      * pixels.
      * @param param an <code>ImageWriteParam</code>, or
@@ -1569,6 +2058,16 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, and otherwise throws an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  终止对<code> replacePixels </code>的调用序列。
+     * 
+     *  <p>如果<code> canReplacePixels </code>返回<code> false </code>,并且将抛出<code> UnsupportedOperationException
+     *  </code>。
+     * 
+     * <p>如果输出为<code> null </code>,则默认实现会抛出<code> IllegalStateException </code>,否则会抛出一个<code> UnsupportedOpe
+     * rationException </code>。
+     * 
+     * 
      * @exception IllegalStateException if the output has not
      * been set.
      * @exception UnsupportedOperationException if
@@ -1592,6 +2091,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <p> Writers should call <code>clearAbortRequest</code> at the
      * beginning of each write operation, and poll the value of
      * <code>abortRequested</code> regularly during the write.
+     * <p>
+     *  请求中止当前的任何写操作。中止后的输出内容将是未定义的。
+     * 
+     *  <p>写入者应在每次写入操作开始时调用<code> clearAbortRequest </code>,并在写入期间定期轮询<code> abortRequested </code>的值。
+     * 
      */
     public synchronized void abort() {
         this.abortFlag = true;
@@ -1602,6 +2106,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * write operation has been made since the writer was instantiated or
      * <code>clearAbortRequest</code> was called.
      *
+     * <p>
+     *  如果自从写入程序被实例化或调用<code> clearAbortRequest </code>后,已中止当前写入操作的请求,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the current write operation should
      * be aborted.
      *
@@ -1617,6 +2125,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * called, <code>abortRequested</code> will return
      * <code>false</code>.
      *
+     * <p>
+     *  清除任何先前中止请求。调用此方法后,<code> abortRequested </code>将返回<code> false </code>。
+     * 
+     * 
      * @see #abort
      * @see #abortRequested
      */
@@ -1635,6 +2147,12 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>Locale</code>.  If no <code>Locale</code> has been set,
      * warning messages may be localized as the writer sees fit.
      *
+     * <p>
+     *  向注册的警告侦听器列表中添加<code> IIOWriteWarningListener </code>。
+     * 如果<code> listener </code>是<code> null </code>,则不会抛出任何异常,并且不会执行任何操作。
+     * 如果可能,发送到给定侦听器的邮件将被本地化,以匹配当前的<code> Locale </code>。如果未设置<code> Locale </code>,警告消息可能会被编辑器认为合适。
+     * 
+     * 
      * @param listener an <code>IIOWriteWarningListener</code> to be
      * registered.
      *
@@ -1655,6 +2173,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, no exception will be thrown and no action
      * will be taken.
      *
+     * <p>
+     *  从注册的警告侦听器列表中删除<code> IIOWriteWarningListener </code>。
+     * 如果侦听器以前没有注册,或者<code> listener </code>是<code> null </code>,则不会抛出任何异常,不会执行任何操作。
+     * 
+     * 
      * @param listener an <code>IIOWriteWarningListener</code> to be
      * deregistered.
      *
@@ -1683,6 +2206,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <p> The default implementation sets the
      * <code>warningListeners</code> and <code>warningLocales</code>
      * instance variables to <code>null</code>.
+     * <p>
+     * 删除所有当前注册的<code> IIOWriteWarningListener </code>对象。
+     * 
+     *  <p>默认实现将<code> warningListeners </code>和<code> warningLocales </code>实例变量设置为<code> null </code>。
+     * 
      */
     public void removeAllIIOWriteWarningListeners() {
         this.warningListeners = null;
@@ -1695,6 +2223,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, no exception will be thrown and no action
      * will be taken.
      *
+     * <p>
+     *  向注册进度侦听器列表中添加<code> IIOWriteProgressListener </code>。
+     * 如果<code> listener </code>是<code> null </code>,则不会抛出任何异常,并且不会执行任何操作。
+     * 
+     * 
      * @param listener an <code>IIOWriteProgressListener</code> to be
      * registered.
      *
@@ -1715,6 +2248,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>, no exception will be thrown and no action
      * will be taken.
      *
+     * <p>
+     *  从注册的进度侦听器列表中删除<code> IIOWriteProgressListener </code>。
+     * 如果侦听器以前没有注册,或者<code> listener </code>是<code> null </code>,则不会抛出任何异常,不会执行任何操作。
+     * 
+     * 
      * @param listener an <code>IIOWriteProgressListener</code> to be
      * deregistered.
      *
@@ -1736,6 +2274,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <p> The default implementation sets the
      * <code>progressListeners</code> instance variable to
      * <code>null</code>.
+     * <p>
+     *  删除所有当前注册的<code> IIOWriteProgressListener </code>对象。
+     * 
+     *  <p>默认实现将<code> progressListeners </code>实例变量设置为<code> null </code>。
+     * 
      */
     public void removeAllIIOWriteProgressListeners() {
         this.progressListeners = null;
@@ -1747,6 +2290,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>imageStarted</code> method.  Subclasses may use this
      * method as a convenience.
      *
+     * <p>
+     *  通过调用其<code> imageStarted </code>方法,将图像写入的开始广播到所有注册的<code> IIOWriteProgressListener </code>子类可以使用此方法作
+     * 为方便。
+     * 
+     * 
      * @param imageIndex the index of the image about to be written.
      */
     protected void processImageStarted(int imageIndex) {
@@ -1767,6 +2315,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * their <code>imageProgress</code> method.  Subclasses may use
      * this method as a convenience.
      *
+     * <p>
+     *  通过调用其<code> imageProgress </code>方法将当前百分比的图像完成广播到所有注册的<code> IIOWriteProgressListener </code>子类可以使用此
+     * 方法作为方便。
+     * 
+     * 
      * @param percentageDone the current percentage of completion,
      * as a <code>float</code>.
      */
@@ -1787,6 +2340,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>IIOWriteProgressListener</code>s by calling their
      * <code>imageComplete</code> method.  Subclasses may use this
      * method as a convenience.
+     * <p>
+     *  通过调用其<code> imageComplete </code>方法,将图像写入完成到所有注册的<code> IIOWriteProgressListener </code>子类可以使用此方法作为方
+     * 便。
+     * 
      */
     protected void processImageComplete() {
         if (progressListeners == null) {
@@ -1806,6 +2363,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>thumbnailStarted</code> method.  Subclasses may use this
      * method as a convenience.
      *
+     * <p>
+     * 通过调用其<code> thumbnailStarted </code>方法,将缩略图写入的开始广播到所有注册的<code> IIOWriteProgressListener </code>子类可以使用
+     * 此方法作为方便。
+     * 
+     * 
      * @param imageIndex the index of the image associated with the
      * thumbnail.
      * @param thumbnailIndex the index of the thumbnail.
@@ -1829,6 +2391,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * their <code>thumbnailProgress</code> method.  Subclasses may
      * use this method as a convenience.
      *
+     * <p>
+     *  通过调用其<code> thumbnailProgress </code>方法,将缩略图完成的当前百分比广播到所有注册的<code> IIOWriteProgressListener </code>子
+     * 类可以使用此方法作为方便。
+     * 
+     * 
      * @param percentageDone the current percentage of completion,
      * as a <code>float</code>.
      */
@@ -1849,6 +2416,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>IIOWriteProgressListener</code>s by calling their
      * <code>thumbnailComplete</code> method.  Subclasses may use this
      * method as a convenience.
+     * <p>
+     *  通过调用其<code> thumbnailComplete </code>方法,向所有注册的<code> IIOWriteProgressListener </code>广播缩略图写入的完成。
+     * 子类可以使用此方法作为方便。
+     * 
      */
     protected void processThumbnailComplete() {
         if (progressListeners == null) {
@@ -1867,6 +2438,9 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>IIOWriteProgressListener</code>s by calling their
      * <code>writeAborted</code> method.  Subclasses may use this
      * method as a convenience.
+     * <p>
+     *  通过调用其<code> writeAborted </code>方法,写入已中止到所有注册的<code> IIOWriteProgressListener </code>子类可以使用此方法作为方便。
+     * 
      */
     protected void processWriteAborted() {
         if (progressListeners == null) {
@@ -1886,6 +2460,11 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>warningOccurred</code> method.  Subclasses may use this
      * method as a convenience.
      *
+     * <p>
+     *  通过调用其<code> warningOccurred </code>方法向所有注册的<code> IIOWriteWarningListener </code>发出警告消息。
+     * 子类可以使用此方法作为方便。
+     * 
+     * 
      * @param imageIndex the index of the image on which the warning
      * occurred.
      * @param warning the warning message.
@@ -1917,6 +2496,12 @@ public abstract class ImageWriter implements ImageTranscoder {
      * from a <code>ResourceBundle</code>.  Subclasses may use this
      * method as a convenience.
      *
+     * <p>
+     *  通过使用从<code> ResourceBundle </code>中获取的字符串调用其<code> warningOccurred </code>方法,向所有注册的<code> IIOWriteWa
+     * rningListener </code>广播本地化警告消息。
+     * 子类可以使用此方法作为方便。
+     * 
+     * 
      * @param imageIndex the index of the image on which the warning
      * occurred.
      * @param baseName the base name of a set of
@@ -1965,6 +2550,10 @@ public abstract class ImageWriter implements ImageTranscoder {
              * class loader to locate the resource bundle.
              * If that throws MissingResourceException, then try the
              * system class loader.
+             * <p>
+             * 如果applet提供ImageWriter和资源束的实现,那么资源束将需要通过applet类加载器来访问。所以首先尝试上下文类加载器来定位资源束。
+             * 如果抛出MissingResourceException,那么尝试系统类加载器。
+             * 
              */
             ClassLoader loader = (ClassLoader)
                 java.security.AccessController.doPrivileged(
@@ -2008,6 +2597,12 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>removeAllIIOWriteWarningListeners()</code>,
      * <code>removeAllIIOWriteProgressListeners()</code>, and
      * <code>clearAbortRequest</code>.
+     * <p>
+     *  将<code> ImageWriter </code>恢复到其初始状态。
+     * 
+     *  <p>默认实现调用<code> setOutput(null)</code>,<code> setLocale(null)</code>,<code> removeAllIIOWriteWarning
+     * Listeners()</code>,<code> removeAllIIOWriteProgressListeners代码>和<code> clearAbortRequest </code>。
+     * 
      */
     public void reset() {
         setOutput(null);
@@ -2031,6 +2626,10 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <p>The default implementation of this method in the superclass does
      * nothing.  Subclass implementations should ensure that all resources,
      * especially native resources, are released.
+     * <p>
+     *  允许释放此对象持有的任何资源。未调用在调用此方法后调用任何其他方法(<code> finalize </code>除外)的结果。
+     * 
+     *  <p>当应用程序知道他们将不再使用此<code> ImageWriter </code>时,调用此方法很重要。否则,作家可能继续无限期地持有资源。
      */
     public void dispose() {
     }

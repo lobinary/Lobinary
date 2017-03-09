@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -94,6 +95,9 @@ import sun.corba.SharedSecrets;
 
 /**
  *  Handy class full of static functions that don't belong in util.Utility for pure ORB reasons.
+ * <p>
+ *  Handy类充满了不属于util.Utility的静态函数,纯ORB的原因。
+ * 
  */
 public final class ORBUtility {
     private ORBUtility() {}
@@ -138,6 +142,10 @@ public final class ORBUtility {
 
     /**
      * Static method for writing a CORBA standard exception to an Any.
+     * <p>
+     *  将一个CORBA标准异常写入Any的静态方法。
+     * 
+     * 
      * @param any The Any to write the SystemException into.
      */
     public static void insertSystemException(SystemException ex, Any any) {
@@ -163,6 +171,9 @@ public final class ORBUtility {
 
     /**
      * Return default ValueHandler
+     * <p>
+     *  返回默认值ValueHandler
+     * 
      */
     public static ValueHandler createValueHandler() {
         return Util.createValueHandler();
@@ -172,6 +183,9 @@ public final class ORBUtility {
      * Returns true if it was accurately determined that the remote ORB is
      * a foreign (non-JavaSoft) ORB.  Note:  If passed the ORBSingleton, this
      * will return false.
+     * <p>
+     *  如果准确地确定远程ORB是外部(非JavaSoft)ORB,则返回true。注意：如果传递了ORBSingleton,这将返回false。
+     * 
      */
     public static boolean isForeignORB(ORB orb)
     {
@@ -189,6 +203,10 @@ public final class ORBUtility {
         Assume the bytes are in BIGENDIAN order.
         i.e. array[offset] is the most-significant-byte
         and  array[offset+3] is the least-significant-byte.
+    /* <p>
+    /*  假设字节是BIGENDIAN顺序。即array [offset]是最高有效字节,而array [offset + 3]是最低有效字节。
+    /* 
+    /* 
         @param array The array of bytes.
         @param offset The offset from which to start unmarshalling.
     */
@@ -208,6 +226,10 @@ public final class ORBUtility {
         The bytes are in BIGENDIAN order.
         i.e. array[offset] is the most-significant-byte
         and  array[offset+3] is the least-significant-byte.
+    /* <p>
+    /*  字节以BIGENDIAN顺序。即array [offset]是最高有效字节,而array [offset + 3]是最低有效字节。
+    /* 
+    /* 
         @param array The array of bytes.
         @param offset The offset from which to start marshalling.
     */
@@ -220,6 +242,7 @@ public final class ORBUtility {
     }
 
     /** Converts an Ascii Character into Hexadecimal digit
+    /* <p>
      */
     public static int hexOf( char x )
     {
@@ -244,6 +267,10 @@ public final class ORBUtility {
 
     /**
      * Static method for writing a CORBA standard exception to a stream.
+     * <p>
+     *  将CORBA标准异常写入流的静态方法。
+     * 
+     * 
      * @param strm The OutputStream to use for marshaling.
      */
     public static void writeSystemException(SystemException ex, OutputStream strm)
@@ -258,6 +285,10 @@ public final class ORBUtility {
 
     /**
      * Static method for reading a CORBA standard exception from a stream.
+     * <p>
+     *  从流读取CORBA标准异常的静态方法。
+     * 
+     * 
      * @param strm The InputStream to use for unmarshaling.
      */
     public static SystemException readSystemException(InputStream strm)
@@ -279,6 +310,10 @@ public final class ORBUtility {
      * This is used by the system to unmarshal (instantiate) the
      * appropriate exception class for an marshaled as the value of
      * its repository Id.
+     * <p>
+     *  获取与特定存储库标识对应的类名。这由系统使用来取消(实例化)适当的异常类,以便作为其存储库ID的值进行封送。
+     * 
+     * 
      * @param repositoryId The repository Id for which we want a class name.
      */
     public static String classNameOf(String repositoryId)
@@ -294,6 +329,10 @@ public final class ORBUtility {
 
     /**
      * Return true if this repositoryId is a SystemException.
+     * <p>
+     *  如果此repositoryId是SystemException,则返回true。
+     * 
+     * 
      * @param repositoryId The repository Id to check.
      */
     public static boolean isSystemException(String repositoryId)
@@ -308,6 +347,8 @@ public final class ORBUtility {
     }
 
     /**
+    /* <p>
+    /* 
      * @return the Java serialization encoding version.
      */
     public static byte getEncodingVersion(ORB orb, IOR ior) {
@@ -346,6 +387,10 @@ public final class ORBUtility {
      * Get the repository id corresponding to a particular class.
      * This is used by the system to write the
      * appropriate repository id for a system exception.
+     * <p>
+     *  获取与特定类相对应的存储库标识。这由系统用于为系统异常写入适当的存储库标识。
+     * 
+     * 
      * @param name The class name of the system exception.
      */
     public static String repositoryIdOf(String name)
@@ -478,6 +523,9 @@ public final class ORBUtility {
     /** Parse a version string such as "1.1.6" or "jdk1.2fcs" into
         a version array of integers {1, 1, 6} or {1, 2}.
         A string of "n." or "n..m" is equivalent to "n.0" or "n.0.m" respectively.
+    /* <p>
+    /*  整数{1,1,6}或{1,2}的版本数组。字符串"n"。或"n..m"分别等于"n.0"或"n.0.m"。
+    /* 
     */
     public static int[] parseVersion(String version) {
         if (version == null)
@@ -511,6 +559,9 @@ public final class ORBUtility {
 
     /** Compare two version arrays.
         Return 1, 0 or -1 if v1 is greater than, equal to, or less than v2.
+    /* <p>
+    /* 如果v1大于,等于或小于v2,则返回1,0或-1。
+    /* 
     */
     public static int compareVersion(int[] v1, int[] v2) {
         if (v1 == null)
@@ -528,6 +579,9 @@ public final class ORBUtility {
 
     /** Compare two version strings.
         Return 1, 0 or -1 if v1 is greater than, equal to, or less than v2.
+    /* <p>
+    /*  如果v1大于,等于或小于v2,则返回1,0或-1。
+    /* 
     */
     public static synchronized int compareVersion(String v1, String v2) {
         return compareVersion(parseVersion(v1), parseVersion(v2));
@@ -653,6 +707,15 @@ public final class ORBUtility {
      * build running on JDK 1.3.x.
      *
      * 2) We need to pick up the correct minor code from OMGSystemException.
+     * <p>
+     *  抛出CORBA等效的java.io.NotSerializableException
+     * 
+     *  从util / Utility复制到纯ORB的原因。有两个原因：
+     * 
+     *  1)我们不能从io / util包外部引入util版本的依赖,因为它不会存在于在JDK 1.3.x上运行的纯ORB版本中。
+     * 
+     *  2)我们需要从OMGSystemException中获取正确的次要代码。
+     * 
      */
     public static void throwNotSerializableForCorba(String className) {
         throw omgWrapper.notSerializable( CompletionStatus.COMPLETED_MAYBE,
@@ -662,6 +725,9 @@ public final class ORBUtility {
     /**
      * Returns the maximum stream format version supported by our
      * ValueHandler.
+     * <p>
+     *  返回我们的ValueHandler支持的最大流格式版本。
+     * 
      */
     public static byte getMaxStreamFormatVersion() {
         ValueHandler vh = Util.createValueHandler();
@@ -681,6 +747,7 @@ public final class ORBUtility {
     }
 
     /** This method is used to create untyped object references.
+    /* <p>
     */
     public static org.omg.CORBA.Object makeObjectReference( IOR ior )
     {
@@ -694,6 +761,10 @@ public final class ORBUtility {
     * It will return null if obj is a local object, a null object,
     * or an object implemented by a different ORB.  It will
     * throw BAD_OPERATION if obj is an unconnected RMI-IIOP object.
+    * <p>
+    *  如果obj是局部对象,空对象或由不同ORB实现的对象,它将返回null。如果obj是一个未连接的RMI-IIOP对象,它将抛出BAD_OPERATION。
+    * 
+    * 
     * @return IOR the IOR that represents this objref.  This will
     * never be null.
     * @exception BAD_OPERATION (from oi._get_delegate) if obj is a
@@ -747,6 +818,9 @@ public final class ORBUtility {
 
     /** Obtains an IOR for the object reference obj, first connecting it to
     * the ORB if necessary.
+    * <p>
+    *  如果需要的话。
+    * 
     * @return IOR the IOR that represents this objref.  This will
     * never be null.
     * @exception BAD_OPERATION if the object could not be connected,

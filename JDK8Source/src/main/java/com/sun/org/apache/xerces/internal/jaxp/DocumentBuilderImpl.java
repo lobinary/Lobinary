@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp;
@@ -56,6 +66,8 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
 /**
+/* <p>
+/* 
  * @author Rajiv Mordani
  * @author Edwin Goei
  * @version $Id: DocumentBuilderImpl.java,v 1.8 2010-11-01 04:40:06 joehw Exp $
@@ -181,6 +193,9 @@ public class DocumentBuilderImpl extends DocumentBuilder
              * If secure processing is explicitly set on the factory, the
              * access properties will be set unless the corresponding
              * System Properties or jaxp.properties are set
+             * <p>
+             *  如果在工厂中显式设置安全处理,则将设置访问属性,除非设置相应的系统属性或jaxp.properties
+             * 
              */
             if (features != null) {
                 Object temp = features.get(XMLConstants.FEATURE_SECURE_PROCESSING);
@@ -260,6 +275,11 @@ public class DocumentBuilderImpl extends DocumentBuilder
      * Note: code does not handle possible conflicts between DOMParser
      * attribute names and JAXP specific attribute names,
      * eg. DocumentBuilderFactory.setValidating()
+     * <p>
+     *  设置我们的底层DOMParser的任何DocumentBuilderFactory属性
+     * 
+     *  注意：代码不处理DOMParser属性名称和JAXP特定属性名称之间可能的冲突,例如。 DocumentBuilderFactory.setValidating()
+     * 
      */
     private void setDocumentBuilderFactoryAttributes(Hashtable dbfAttrs)
         throws SAXNotSupportedException, SAXNotRecognizedException
@@ -323,6 +343,10 @@ public class DocumentBuilderImpl extends DocumentBuilder
      * Non-preferred: use the getDOMImplementation() method instead of this
      * one to get a DOM Level 2 DOMImplementation object and then use DOM
      * Level 2 methods to create a DOM Document object.
+     * <p>
+     *  非首选：使用getDOMImplementation()方法而不是此方法来获取DOM Level 2 DOMImplementation对象,然后使用DOM Level 2方法创建一个DOM Docu
+     * ment对象。
+     * 
      */
     public Document newDocument() {
         return new com.sun.org.apache.xerces.internal.dom.DocumentImpl();
@@ -371,6 +395,8 @@ public class DocumentBuilderImpl extends DocumentBuilder
 
     /**
      * Gets the XInclude processing mode for this parser
+     * <p>
+     * 
      * @return the state of XInclude processing mode
      */
     public boolean isXIncludeAware() {

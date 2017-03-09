@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,9 @@ import com.sun.corba.se.impl.encoding.CDRInputStream ;
 
 /**
  * Handles object keys created by JDK ORBs from before JDK 1.4.0.
+ * <p>
+ *  处理JDK 1.4.0之前的JDK ORB创建的对象键。
+ * 
  */
 public final class OldJIDLObjectKeyTemplate extends OldObjectKeyTemplateBase
 {
@@ -50,6 +54,9 @@ public final class OldJIDLObjectKeyTemplate extends OldObjectKeyTemplateBase
      * JDK 1.3.1 FCS did not include a version byte at the end of
      * its object keys.  JDK 1.3.1_01 included the byte with the
      * value 1.  Anything below 1 is considered an invalid value.
+     * <p>
+     *  JDK 1.3.1 FCS在其对象键的末尾不包含版本字节。 JDK 1.3.1_01包括具有值1的字节。低于1的任何内容被认为是无效值。
+     * 
      */
     public static final byte NULL_PATCH_VERSION = 0;
 
@@ -76,6 +83,10 @@ public final class OldJIDLObjectKeyTemplate extends OldObjectKeyTemplateBase
          * getPosition.  It assumes that the CDRInputStream is an
          * encapsulation whose position can be compared to the object
          * key array length.
+         * <p>
+         *  从JDK 1.3.1_01开始,一个字节被放置在对象键的末尾,并带有指示补丁版本的值。 JDK 1.3.1_01的值为1.如果需要涉及ORB版本控制更改的其他修补程序,则它们应该增加修补程序版本。
+         * 
+         *  注意,如果我们在这段代码中看到一个大于1的值,我们将把它看作是和最近的ORB版本交谈。
          */
         if (magic == ObjectKeyFactoryImpl.JAVAMAGIC_NEW &&
             osh.value.length > ((CDRInputStream)is).getPosition()) {

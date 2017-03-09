@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,25 @@ package java.util;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  此类提供了<tt> Collection </tt>接口的骨架实现,以最小化实现此接口所需的工作量。 <p>
+ * 
+ *  要实现不可修改的集合,程序员只需要扩展此类并为<tt>迭代器</tt>和<tt>大小</tt>方法提供实现。
+ *  (<tt> iterator </tt>方法返回的迭代器必须实现<tt> hasNext </tt>和<tt> next </tt>。)<p>。
+ * 
+ *  要实现可修改的集合,程序员必须另外覆盖此类的<tt>添加</tt>方法(否则会抛出<tt> UnsupportedOperationException </tt>)和<tt>迭代器返回的迭代器</tt >
+ * 方法必须另外实现其<tt> remove </tt>方法。
+ * <p>。
+ * 
+ *  程序员通常应按照<tt> Collection </tt>接口规范中的建议提供一个void(无参数)和<tt> Collection </tt>构造函数。<p>
+ * 
+ *  这个类中每个非抽象方法的文档详细描述了它的实现。如果实现的集合承认更有效的实现,则这些方法中的每一个都可以被重写
+ * 
+ *  这个类是成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @author  Josh Bloch
  * @author  Neal Gafter
  * @see Collection
@@ -62,6 +82,9 @@ public abstract class AbstractCollection<E> implements Collection<E> {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
      */
     protected AbstractCollection() {
     }
@@ -71,6 +94,10 @@ public abstract class AbstractCollection<E> implements Collection<E> {
     /**
      * Returns an iterator over the elements contained in this collection.
      *
+     * <p>
+     *  在此集合中包含的元素上返回一个迭代器。
+     * 
+     * 
      * @return an iterator over the elements contained in this collection
      */
     public abstract Iterator<E> iterator();
@@ -81,6 +108,11 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * {@inheritDoc}
      *
      * <p>This implementation returns <tt>size() == 0</tt>.
+     * <p>
+     * {@inheritDoc}
+     * 
+     *  <p>此实现返回<tt> size()== 0 </tt>。
+     * 
      */
     public boolean isEmpty() {
         return size() == 0;
@@ -92,6 +124,12 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * <p>This implementation iterates over the elements in the collection,
      * checking each element in turn for equality with the specified element.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实现循环遍历集合中的元素,依次检查每个元素是否与指定元素相等。
+     * 
+     * 
      * @throws ClassCastException   {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
@@ -130,6 +168,18 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      *     list.add(e);
      * return list.toArray();
      * }</pre>
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实现返回一个数组,该数组包含此集合的迭代器返回的所有元素,以相同的顺序存储在数组的连续元素中,从index {@code 0}开始。
+     * 返回数组的长度等于迭代器返回的元素数,即使此集合的大小在迭代期间发生更改,如果集合在迭代期间允许并发修改,则可能会发生这种情况。
+     *  {@code size}方法仅作为优化提示调用;即使迭代器返回不同数量的元素,也会返回正确的结果。
+     * 
+     *  <p>此方法等效于：
+     * 
+     *  <pre> {@code List <E> list = new ArrayList <E>(size()); for(E e：this)list.add(e); return list.toArray(); }
+     *  </pre>。
+     * 
      */
     public Object[] toArray() {
         // Estimate size of array; be prepared to see more or fewer elements
@@ -167,6 +217,19 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * return list.toArray(a);
      * }</pre>
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * <p>此实现以相同的顺序返回一个包含此集合的迭代器返回的所有元素的数组,存储在数组的连续元素中,从index {@code 0}开始。
+     * 如果迭代器返回的元素数量太大,无法容纳到指定的数组中,那么元素会在新分配的数组中返回,其长度等于迭代器返回的元素数,即使此集合的大小发生变化在迭代期间,如果收集在迭代期间允许并发修改可能发生。
+     *  {@code size}方法仅作为优化提示调用;即使迭代器返回不同数量的元素,也会返回正确的结果。
+     * 
+     *  <p>此方法等效于：
+     * 
+     *  <pre> {@code List <E> list = new ArrayList <E>(size()); for(E e：this)list.add(e); return list.toArray(a); }
+     *  </pre>。
+     * 
+     * 
      * @throws ArrayStoreException  {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
@@ -204,6 +267,9 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * Some VMs reserve some header words in an array.
      * Attempts to allocate larger arrays may result in
      * OutOfMemoryError: Requested array size exceeds VM limit
+     * <p>
+     *  要分配的数组的最大大小。一些VM在数组中保留一些标题字。尝试分配较大的数组可能会导致OutOfMemoryError：请求的数组大小超过VM限制
+     * 
      */
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
@@ -212,6 +278,10 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * returned more elements than expected, and finishes filling it from
      * the iterator.
      *
+     * <p>
+     *  当迭代器返回比预期更多的元素时,重新分配在toArray中使用的数组,并完成从迭代器填充它。
+     * 
+     * 
      * @param r the array, replete with previously stored elements
      * @param it the in-progress iterator over this collection
      * @return array containing the elements in the given array, plus any
@@ -252,6 +322,12 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * <p>This implementation always throws an
      * <tt>UnsupportedOperationException</tt>.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实施总是会引发<tt> UnsupportedOperationException </tt>。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -274,6 +350,15 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * collection's iterator method does not implement the <tt>remove</tt>
      * method and this collection contains the specified object.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * <p>此实现循环遍历查找指定元素的集合。如果找到该元素,它将使用迭代器的remove方法从集合中删除该元素。
+     * 
+     *  <p>请注意,如果此集合的iterator方法返回的迭代器未实施<tt> remove </tt>方法,并且此集合包含指定的对象,则此实现会抛出一个<tt> UnsupportedOperationE
+     * xception </tt>。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -309,6 +394,12 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * if it's contained in this collection.  If all elements are so
      * contained <tt>true</tt> is returned, otherwise <tt>false</tt>.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实现循环遍历指定的集合,依次检查迭代器返回的每个元素,以查看它是否包含在此集合中。如果所有元素都这样包含<tt> true </tt>,则返回<tt> false </tt>。
+     * 
+     * 
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
      * @see #contains(Object)
@@ -330,6 +421,14 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * <tt>UnsupportedOperationException</tt> unless <tt>add</tt> is
      * overridden (assuming the specified collection is non-empty).
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实现循环遍历指定的集合,并将迭代器返回的每个对象依次添加到此集合。
+     * 
+     *  <p>请注意,除非<tt>添加</tt>被覆盖(假设指定的集合为非空),否则此实现会抛出<tt> UnsupportedOperationException </tt>。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -360,6 +459,15 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * and this collection contains one or more elements in common with the
      * specified collection.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实现循环遍历此集合,依次检查迭代器返回的每个元素,以查看其是否包含在指定集合中。如果这样包含,则使用迭代器的<tt> remove </tt>方法从此集合中删除。
+     * 
+     * <p>请注意,如果<tt> iterator </tt>方法返回的迭代器未实施<tt> remove </tt>方法,此实现会抛出<tt> UnsupportedOperationException </tt>
+     * 与指定集合相同的一个或多个元素。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -394,6 +502,15 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * and this collection contains one or more elements not present in the
      * specified collection.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实现循环遍历此集合,依次检查迭代器返回的每个元素,以查看其是否包含在指定集合中。如果没有这样包含,则使用迭代器的<tt> remove </tt>方法从此集合中删除。
+     * 
+     *  <p>请注意,如果<tt> iterator </tt>方法返回的迭代器未实施<tt> remove </tt>方法,此实现会抛出<tt> UnsupportedOperationException 
+     * </tt>一个或多个元素不存在于指定集合中。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -427,6 +544,14 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * collection's <tt>iterator</tt> method does not implement the
      * <tt>remove</tt> method and this collection is non-empty.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>此实现在此集合上进行迭代,使用<tt> Iterator.remove </tt>操作删除每个元素。大多数实现可能会选择覆盖此方法以提高效率。
+     * 
+     *  <p>请注意,如果此集合的<tt>迭代器</tt>方法返回的迭代器未实施<tt> remove </tt>方法,此实现会抛出<tt> UnsupportedOperationException </tt>
+     * 是非空的。
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      */
     public void clear() {
@@ -448,6 +573,9 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * <tt>", "</tt> (comma and space).  Elements are converted to strings as
      * by {@link String#valueOf(Object)}.
      *
+     * <p>
+     * 
+     * 
      * @return a string representation of this collection
      */
     public String toString() {

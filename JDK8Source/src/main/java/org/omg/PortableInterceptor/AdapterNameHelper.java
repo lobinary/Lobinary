@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -11,6 +12,8 @@ package org.omg.PortableInterceptor;
 
 /** The name of an object adapter. This is unique only within
    * the scope of the ORB that created the object adapter.
+   * <p>
+   * 
    */
 abstract public class AdapterNameHelper
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,9 @@ class JDMInformBlock extends SimpleNode {
     /**
      * Do no need to go through this part of the tree for
      * building AclEntry.
+     * <p>
+     *  不需要通过树的这一部分来构建AclEntry。
+     * 
      */
     @Override
     public void buildAclEntries(PrincipalImpl owner, AclImpl acl) {}
@@ -58,6 +62,8 @@ class JDMInformBlock extends SimpleNode {
     /**
      * Do no need to go through this part of the tree for
      * building TrapEntry.
+     * <p>
+     *  不需要通过树的这一部分来构建TrapEntry。
      */
     @Override
     public void buildTrapEntries(Hashtable<InetAddress, Vector<String>> dest) {}

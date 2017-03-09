@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import javax.swing.plaf.basic.BasicArrowButton;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  金属滚动条箭头的JButton对象。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Tom Santos
  * @author Steve Wilson
  */
@@ -121,6 +129,10 @@ public class MetalScrollButton extends BasicArrowButton
         /*      g.drawLine( 7, 6, 8, 6 );
                 g.drawLine( 6, 7, 9, 7 );
                 g.drawLine( 5, 8, 10, 8 );
+        /* <p>
+        /*  g.drawLine(6,7,9,7); g.drawLine(5,8,10,8);
+        /* 
+        /* 
                 g.drawLine( 4, 9, 11, 9 );*/
 
                 if (isEnabled) {
@@ -175,6 +187,10 @@ public class MetalScrollButton extends BasicArrowButton
         /*      g.drawLine( 4, 5, 11, 5 );
                 g.drawLine( 5, 6, 10, 6 );
                 g.drawLine( 6, 7, 9, 7 );
+        /* <p>
+        /*  g.drawLine(5,6,10,6); g.drawLine(6,7,9,7);
+        /* 
+        /* 
                 g.drawLine( 7, 8, 8, 8 ); */
 
                 if (isEnabled) {
@@ -228,6 +244,10 @@ public class MetalScrollButton extends BasicArrowButton
 /*              g.drawLine( 5, 4, 5, 11 );
                 g.drawLine( 6, 5, 6, 10 );
                 g.drawLine( 7, 6, 7, 9 );
+/* <p>
+/*  g.drawLine(6,5,6,10); g.drawLine(7,6,7,9);
+/* 
+/* 
                 g.drawLine( 8, 7, 8, 8 );*/
 
                 if (isEnabled) {
@@ -276,6 +296,9 @@ public class MetalScrollButton extends BasicArrowButton
         /*      g.drawLine( 6, 7, 6, 8 );
                 g.drawLine( 7, 6, 7, 9 );
                 g.drawLine( 8, 5, 8, 10 );
+        /* <p>
+        /*  g.drawLine(7,6,7,9); g.drawLine(8,5,8,10);
+        /* 
                 g.drawLine( 9, 4, 9, 11 );*/
 
                 if (isEnabled) {

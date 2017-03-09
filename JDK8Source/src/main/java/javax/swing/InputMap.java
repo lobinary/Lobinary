@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,17 @@ import java.util.Set;
  * </pre>
  * some of the methods will cause a StackOverflowError to be thrown.
  *
+ * <p>
+ *  <code> InputMap </code>提供了输入事件(当前只使用<code> KeyStroke </code>)和<code> Object </code>之间的绑定。
+ *  <code> InputMap </code>通常与<code> ActionMap </code>一起使用,以确定在按下键时执行的<code> Action </code>。
+ *  <code> InputMap </code>可以有一个父对象,用于搜索未在<code> InputMap </code>中定义的绑定。
+ *  <p>与<code> ActionMap </code>一样,如果创建一个循环,例如：。
+ * <pre>
+ *  InputMap am = new InputMap(); InputMap bm = new InputMap()：am.setParent(bm); bm.setParent(am);
+ * </pre>
+ *  一些方法将导致StackOverflowError被抛出。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.3
  */
@@ -62,6 +74,9 @@ public class InputMap implements Serializable {
 
     /**
      * Creates an <code>InputMap</code> with no parent and no mappings.
+     * <p>
+     *  创建一个不带父级和无映射的<code> InputMap </code>。
+     * 
      */
     public InputMap() {
     }
@@ -69,6 +84,10 @@ public class InputMap implements Serializable {
     /**
      * Sets this <code>InputMap</code>'s parent.
      *
+     * <p>
+     *  设置此<code> InputMap </code>的父级。
+     * 
+     * 
      * @param map  the <code>InputMap</code> that is the parent of this one
      */
     public void setParent(InputMap map) {
@@ -78,6 +97,10 @@ public class InputMap implements Serializable {
     /**
      * Gets this <code>InputMap</code>'s parent.
      *
+     * <p>
+     *  获取此<code> InputMap </code>的父级。
+     * 
+     * 
      * @return map  the <code>InputMap</code> that is the parent of this one,
      *              or null if this <code>InputMap</code> has no parent
      */
@@ -89,6 +112,10 @@ public class InputMap implements Serializable {
      * Adds a binding for <code>keyStroke</code> to <code>actionMapKey</code>.
      * If <code>actionMapKey</code> is null, this removes the current binding
      * for <code>keyStroke</code>.
+     * <p>
+     *  将<code> keyStroke </code>的绑定添加到<code> actionMapKey </code>。
+     * 如果<code> actionMapKey </code>为null,则会删除<code> keyStroke </code>的当前绑定。
+     * 
      */
     public void put(KeyStroke keyStroke, Object actionMapKey) {
         if (keyStroke == null) {
@@ -108,6 +135,9 @@ public class InputMap implements Serializable {
     /**
      * Returns the binding for <code>keyStroke</code>, messaging the
      * parent <code>InputMap</code> if the binding is not locally defined.
+     * <p>
+     *  返回<code> keyStroke </code>的绑定,如果绑定未在本地定义,则传递父<code> InputMap </code>。
+     * 
      */
     public Object get(KeyStroke keyStroke) {
         if (arrayTable == null) {
@@ -133,6 +163,9 @@ public class InputMap implements Serializable {
     /**
      * Removes the binding for <code>key</code> from this
      * <code>InputMap</code>.
+     * <p>
+     *  从<code> InputMap </code>中删除<code>键</code>的绑定。
+     * 
      */
     public void remove(KeyStroke key) {
         if (arrayTable != null) {
@@ -142,6 +175,9 @@ public class InputMap implements Serializable {
 
     /**
      * Removes all the mappings from this <code>InputMap</code>.
+     * <p>
+     *  从此<code> InputMap </code>中删除所有映射。
+     * 
      */
     public void clear() {
         if (arrayTable != null) {
@@ -151,6 +187,9 @@ public class InputMap implements Serializable {
 
     /**
      * Returns the <code>KeyStroke</code>s that are bound in this <code>InputMap</code>.
+     * <p>
+     *  返回绑定在此<code> InputMap </code>中的<code> KeyStroke </code>。
+     * 
      */
     public KeyStroke[] keys() {
         if (arrayTable == null) {
@@ -163,6 +202,9 @@ public class InputMap implements Serializable {
 
     /**
      * Returns the number of <code>KeyStroke</code> bindings.
+     * <p>
+     *  返回<code> KeyStroke </code>绑定的数量。
+     * 
      */
     public int size() {
         if (arrayTable == null) {
@@ -175,6 +217,9 @@ public class InputMap implements Serializable {
      * Returns an array of the <code>KeyStroke</code>s defined in this
      * <code>InputMap</code> and its parent. This differs from <code>keys()</code> in that
      * this method includes the keys defined in the parent.
+     * <p>
+     * 返回在此<code> InputMap </code>及其父代中定义的<code> KeyStroke </code>数组。
+     * 这不同于<code> keys()</code>,因为此方法包括在父级中定义的键。
      */
     public KeyStroke[] allKeys() {
         int             count = size();

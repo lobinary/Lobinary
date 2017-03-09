@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import sun.awt.AppContext;
 /**
  * Implements the bumps used throughout the Metal Look and Feel.
  *
+ * <p>
+ *  实现在金属外观和感觉使用的颠簸。
+ * 
+ * 
  * @author Tom Santos
  * @author Steve Wilson
  */
@@ -57,6 +62,9 @@ class MetalBumps implements Icon {
      * Creates MetalBumps of the specified size with the specified colors.
      * If <code>newBackColor</code> is null, the background will be
      * transparent.
+     * <p>
+     *  使用指定的颜色创建指定大小的MetalBump。如果<code> newBackColor </code>为null,则背景将是透明的。
+     * 
      */
     public MetalBumps( int width, int height,
                        Color newTopColor, Color newShadowColor, Color newBackColor ) {
@@ -180,6 +188,9 @@ class BumpBuffer {
     /**
      * Returns the Image containing the bumps appropriate for the passed in
      * <code>GraphicsConfiguration</code>.
+     * <p>
+     *  返回包含适合在<code> GraphicsConfiguration </code>中传递的凹凸的图像。
+     * 
      */
     public Image getImage() {
         return image;
@@ -187,6 +198,9 @@ class BumpBuffer {
 
     /**
      * Paints the bumps into the current image.
+     * <p>
+     *  将凸点绘制到当前图像中。
+     * 
      */
     private void fillBumpBuffer() {
         Graphics g = image.getGraphics();
@@ -215,6 +229,8 @@ class BumpBuffer {
     /**
      * Creates the image appropriate for the passed in
      * <code>GraphicsConfiguration</code>, which may be null.
+     * <p>
+     *  创建适合在<code> GraphicsConfiguration </code>中传递的图像,该图像可以为null。
      */
     private void createImage() {
         if (gc != null) {

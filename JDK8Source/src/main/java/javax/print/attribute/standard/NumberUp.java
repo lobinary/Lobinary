@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -122,6 +123,45 @@ import javax.print.attribute.PrintJobAttribute;
  * attribute name.
  * <P>
  *
+ * <p>
+ *  类NumberUp是整数值打印属性类,其指定要对所选介质的实例的单面施加的打印流页面的数量。
+ * 也就是说,如果NumberUp值是<I> n,则打印机必须在所选介质的实例的单侧上放置<I> n </i>打印流页面。为了实现这一点,打印机可以添加某种平移,缩放或旋转。
+ * 此属性主要控制打印流页面的翻译,缩放和旋转。
+ * <P>
+ *  NumberUp属性对多点打印作业(具有多个文档的作业)的影响取决于所有文档是否具有指定的相同的数字上升值,或者不同的文档是否具有指定的不同的数字上升值,以及是否(可能是默认值)的{@link MultipleDocumentHandling MultipleDocumentHandling}
+ * 属性。
+ * <UL>
+ * <LI>
+ *  如果所有文档具有指定的相同的数字上限值<I> n </I>,则{@link MultipleDocumentHandling MultipleDocumentHandling}的任何值都是有意义的,打
+ * 印机的处理取决于{@link MultipleDocumentHandling MultipleDocumentHandling}值：。
+ * <UL>
+ * <LI>
+ *  SINGLE_DOCUMENT  - 所有输入文档将组合在一起成为一个输出文档。每个媒体印象将包括来自输出文档的<I> n个打印流页面。
+ * <P>
+ * <LI>
+ * SINGLE_DOCUMENT_NEW_SHEET  - 所有输入文档将组合在一起成为一个输出文档。每个媒体印象将包括来自输出文档的<I> n </I>打印流页面。
+ * 但是,每个输入文档的第一印象总是从新的媒体工作表开始;这意味着输入文档的最后一个印象可以具有少于<I> n个的打印流页面。
+ * <P>
+ * <LI>
+ *  SEPARATE_DOCUMENTS_UNCOLLATED_COPIES  - 输入文档将保持单独。每个媒体展示将包含来自输​​入文档的<I> n </I>打印流页面。
+ * 由于输入文档是单独的,每个输入文档的第一印象总是从新的媒体工作表开始;这意味着输入文档的最后一个印象可以具有少于<I> n个的打印流页面。
+ * <P>
+ * <LI>
+ *  SEPARATE_DOCUMENTS_COLLATED_COPIES  - 输入文档将保持独立。每个媒体展示将包含来自输​​入文档的<I> n </I>打印流页面。
+ * 由于输入文档是单独的,每个输入文档的第一印象总是从新的媒体工作表开始;这意味着输入文档的最后一个印象可以具有少于<I> n个的打印流页面。
+ * </UL>
+ * <UL>
+ * <LI>
+ * SINGLE_DOCUMENT  - 所有输入文档将组合在一起成为一个输出文档。
+ * 每个媒体印象将包括来自输出文档的<I> n <SUB> i </SUB> </I>打印流页面,其中<I> i </I>是与其对应的输入文档的编号点在输出文档中。
+ * 当下一输入文档具有与先前输入文档不同的数字上升值时,下一输入文档的第一打印流页面在下一媒体印象的开始处进行,可能留下少于全部数目的打印流页面对以前的媒体印象。
+ * <P>
+ * <LI>
+ *  SINGLE_DOCUMENT_NEW_SHEET  - 所有输入文档将组合在一起成为一个输出文档。每个媒体印象将包括来自输出文档的<I> n </I>打印流页面。
+ * 但是,每个输入文档的第一印象总是从新的媒体工作表开始;这意味着输入文档的最后一个印象可以具有少于<I> n个的打印流页面。
+ * <P>
+ * <LI>
+ * 
  * @author  Alan Kaminsky
  */
 public final class NumberUp extends IntegerSyntax
@@ -133,6 +173,21 @@ public final class NumberUp extends IntegerSyntax
     /**
      * Construct a new number up attribute with the given integer value.
      *
+     * <p>
+     *  SEPARATE_DOCUMENTS_UNCOLLATED_COPIES  - 输入文档将保持单独。
+     * 对于输入doc <I> i,</I>,每个媒体印象将包括来自输入文档的<I> n <SUB> i </SUB> </I>打印流页面。
+     * 由于输入文档是单独的,每个输入文档的第一印象总是从新的媒体工作表开始;这意味着输入文档的最后一次印象可能具有少于<I> n <SUB> i </SUB> </I>个打印流页面。
+     * <P>
+     * <LI>
+     * SEPARATE_DOCUMENTS_COLLATED_COPIES  - 输入文档将保持独立。
+     * 对于输入doc <I> i,</I>,每个媒体印象将包括来自输入文档的<I> n <SUB> i </SUB> </I>打印流页面。
+     * 由于输入文档是单独的,每个输入文档的第一印象总是从新的媒体工作表开始;这意味着输入文档的最后一次印象可能具有少于<I> n <SUB> i </SUB> </I>个打印流页面。
+     * </UL>
+     * </UL>
+     *  <B> IPP兼容性：</B>整数值给出IPP整数值。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+     * <P>
+     * 
+     * 
      * @param  value  Integer value.
      *
      * @exception  IllegalArgumentException
@@ -155,6 +210,10 @@ public final class NumberUp extends IntegerSyntax
      * equal.
      * </OL>
      *
+     * <p>
+     *  使用给定的整数值构造新的数字向上属性。
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this number up
@@ -170,6 +229,18 @@ public final class NumberUp extends IntegerSyntax
      * <P>
      * For class NumberUp, the category is class NumberUp itself.
      *
+     * <p>
+     *  返回此数字up属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是NumberUp类的实例。
+     * <LI>
+     *  此数字up属性的值和<CODE>对象</CODE>的值相等。
+     * </OL>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -183,6 +254,8 @@ public final class NumberUp extends IntegerSyntax
      * <P>
      * For class NumberUp, the category name is <CODE>"number-up"</CODE>.
      *
+     * <p>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

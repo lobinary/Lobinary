@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,14 @@ import java.security.Principal;
  * identity.  Refer to the <code>Subject</code> class for more information
  * on how to achieve this.  Authorization decisions can then be based upon
  * the Principals associated with a <code>Subject</code>.
+ * <p>
+ *  <p>此类实现<code> Principal </code>接口并表示用户的Solaris标识号(UID)。
+ * 
+ *  <p>这种<code> SolarisNumericUserPrincipal </code>之类的主体可以与特定的<code> Subject </code>相关联,以增加具有附加标识的<code>
+ *  Subject </code>。
+ * 有关如何实现这一点的更多信息,请参阅<code> Subject </code>类。授权决定可以基于与<code> Subject </code>相关联的主体。
+ * 
+ * 
  * @deprecated As of JDK&nbsp;1.4, replaced by
  *             {@link UnixNumericUserPrincipal}.
  *             This class is entirely deprecated.
@@ -63,6 +72,8 @@ public class SolarisNumericUserPrincipal implements
 
 
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private String name;
@@ -74,6 +85,12 @@ public class SolarisNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  使用用户标识号(UID)的<code> String </code>表示创建<code> SolarisNumericUserPrincipal </code>。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the user identification number (UID) for this user.
      *
      * @exception NullPointerException if the <code>name</code>
@@ -92,6 +109,12 @@ public class SolarisNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  使用用户标识号(UID)的长表示创建<code> SolarisNumericUserPrincipal </code>。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the user identification number (UID) for this user
      *                  represented as a long.
      */
@@ -105,6 +128,12 @@ public class SolarisNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  返回此<code> SolarisNumericUserPrincipal </code>的用户标识号(UID)。
+     * 
+     * <p>
+     * 
+     * 
      * @return the user identification number (UID) for this
      *          <code>SolarisNumericUserPrincipal</code>
      */
@@ -118,6 +147,12 @@ public class SolarisNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  将此<code> SolarisNumericUserPrincipal </code>的用户标识号(UID)返回为long。
+     * 
+     * <p>
+     * 
+     * 
      * @return the user identification number (UID) for this
      *          <code>SolarisNumericUserPrincipal</code> as a long.
      */
@@ -131,6 +166,12 @@ public class SolarisNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  返回此<code> SolarisNumericUserPrincipal </code>的字符串表示形式。
+     * 
+     * <p>
+     * 
+     * 
      * @return a string representation of this
      *          <code>SolarisNumericUserPrincipal</code>.
      */
@@ -148,6 +189,14 @@ public class SolarisNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     *  使用此<code> SolarisNumericUserPrincipal </code>比较指定的对象是否相等。
+     * 如果给定对象也是<code> SolarisNumericUserPrincipal </code>,且两个SolarisNumericUserPrincipals具有相同的用户标识号(UID),则返回
+     * true。
+     *  使用此<code> SolarisNumericUserPrincipal </code>比较指定的对象是否相等。
+     * 
+     * <p>
+     * 
      * @param o Object to be compared for equality with this
      *          <code>SolarisNumericUserPrincipal</code>.
      *
@@ -175,6 +224,9 @@ public class SolarisNumericUserPrincipal implements
      *
      * <p>
      *
+     * <p>
+     * 
+     * 
      * @return a hash code for this <code>SolarisNumericUserPrincipal</code>.
      */
     public int hashCode() {

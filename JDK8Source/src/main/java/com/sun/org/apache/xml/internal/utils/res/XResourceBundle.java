@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XResourceBundle.java,v 1.2.4.1 2005/09/15 08:16:04 suresh_emailid Exp $
+ * <p>
+ *  $ Id：XResourceBundle.java,v 1.2.4.1 2005/09/15 08:16:04 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils.res;
 
@@ -33,11 +46,19 @@ import java.util.ResourceBundle;
  * The default (english) resource bundle.
  *
  * @xsl.usage internal
+ * <p>
+ *  默认(英语)资源束。
+ * 
+ *  @ xsl.usage internal
+ * 
  */
 public class XResourceBundle extends ListResourceBundle {
 
     /**
      * Error resource constants
+     * <p>
+     *  错误资源常量
+     * 
      */
     public static final String ERROR_RESOURCES =
             "com.sun.org.apache.xalan.internal.res.XSLTErrorResources", XSLT_RESOURCE =
@@ -56,6 +77,9 @@ public class XResourceBundle extends ListResourceBundle {
     /**
      * Get the association list.
      *
+     * <p>
+     *  获取关联列表。
+     * 
      * @return The association list.
      */
     public Object[][] getContents() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,8 @@ import com.sun.corba.se.spi.ior.MakeImmutable ;
 * and then the list can be made immutable, so that no
 * further changes are possible.  A FreezableList is frozen
 * using the makeImmutable method.
+* <p>
+*  另一个列表。它也可以被冻结,这意味着可以对列表执行多个操作,然后可以使列表不可变,使得不可能进行进一步的改变。 FreezableList使用makeImmutable方法冻结。
 */
 public class FreezableList extends AbstractList {
     private List delegate = null ;

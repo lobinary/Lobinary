@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Stylesheet.java,v 1.5 2005/09/28 13:48:16 pvedula Exp $
+ * <p>
+ *  $ Id：Stylesheet.java,v 1.5 2005/09/28 13:48:16 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -61,6 +74,8 @@ import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
 import com.sun.org.apache.xml.internal.dtm.DTM;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -69,154 +84,242 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * XSLT version defined in the stylesheet.
+     * <p>
+     *  XSLT版本在样式表中定义。
+     * 
      */
     private String _version;
 
     /**
      * Internal name of this stylesheet used as a key into the symbol table.
+     * <p>
+     *  此样式表的内部名称用作符号表中的键。
+     * 
      */
     private QName _name;
 
     /**
      * A URI that represents the system ID for this stylesheet.
+     * <p>
+     *  表示此样式表的系统ID的URI。
+     * 
      */
     private String _systemId;
 
     /**
      * A reference to the parent stylesheet or null if topmost.
+     * <p>
+     *  对父样式表的引用,如果最顶层则为null。
+     * 
      */
     private Stylesheet _parentStylesheet;
 
     /**
      * Contains global variables and parameters defined in the stylesheet.
+     * <p>
+     *  包含样式表中定义的全局变量和参数。
+     * 
      */
     private Vector _globals = new Vector();
 
     /**
      * Used to cache the result returned by <code>hasLocalParams()</code>.
+     * <p>
+     *  用于缓存<code> hasLocalParams()</code>返回的结果。
+     * 
      */
     private Boolean _hasLocalParams = null;
 
     /**
      * The name of the class being generated.
+     * <p>
+     *  正在生成的类的名称。
+     * 
      */
     private String _className;
 
     /**
       * Contains all templates defined in this stylesheet
+      * <p>
+      *  包含此样式表中定义的所有模板
+      * 
       */
     private final Vector _templates = new Vector();
 
     /**
      * Used to cache result of <code>getAllValidTemplates()</code>. Only
      * set in top-level stylesheets that include/import other stylesheets.
+     * <p>
+     *  用于缓存<code> getAllValidTemplates()</code>的结果。仅在包含/导入其他样式表的顶级样式表中设置。
+     * 
      */
     private Vector _allValidTemplates = null;
 
     /**
      * Counter to generate unique mode suffixes.
+     * <p>
+     *  计数器生成唯一模式后缀。
+     * 
      */
     private int _nextModeSerial = 1;
 
     /**
      * Mapping between mode names and Mode instances.
+     * <p>
+     *  模式名称和模式实例之间的映射。
+     * 
      */
     private final Hashtable _modes = new Hashtable();
 
     /**
      * A reference to the default Mode object.
+     * <p>
+     * 对默认Mode对象的引用。
+     * 
      */
     private Mode _defaultMode;
 
     /**
      * Mapping between extension URIs and their prefixes.
+     * <p>
+     *  扩展URI与其前缀之间的映射。
+     * 
      */
     private final Hashtable _extensions = new Hashtable();
 
     /**
      * Reference to the stylesheet from which this stylesheet was
      * imported (if any).
+     * <p>
+     *  引用导入此样式表的样式表(如果有)。
+     * 
      */
     public Stylesheet _importedFrom = null;
 
     /**
      * Reference to the stylesheet from which this stylesheet was
      * included (if any).
+     * <p>
+     *  引用包含此样式表的样式表(如果有)。
+     * 
      */
     public Stylesheet _includedFrom = null;
 
     /**
      * Array of all the stylesheets imported or included from this one.
+     * <p>
+     *  由此导入或包含的所有样式表的数组。
+     * 
      */
     private Vector _includedStylesheets = null;
 
     /**
      * Import precendence for this stylesheet.
+     * <p>
+     *  导入此样式表的前提。
+     * 
      */
     private int _importPrecedence = 1;
 
     /**
      * Minimum precendence of any descendant stylesheet by inclusion or
      * importation.
+     * <p>
+     *  任何后裔样式表通过包含或导入的最小前提。
+     * 
      */
     private int _minimumDescendantPrecedence = -1;
 
     /**
      * Mapping between key names and Key objects (needed by Key/IdPattern).
+     * <p>
+     *  键名和键对象之间的映射(Key / IdPattern需要)。
+     * 
      */
     private Hashtable _keys = new Hashtable();
 
     /**
      * A reference to the SourceLoader set by the user (a URIResolver
      * if the JAXP API is being used).
+     * <p>
+     *  对用户设置的SourceLoader的引用(如果正在使用JAXP API,则为URIResolver)。
+     * 
      */
     private SourceLoader _loader = null;
 
     /**
      * Flag indicating if format-number() is called.
+     * <p>
+     *  表示是否调用format-number()的标志。
+     * 
      */
     private boolean _numberFormattingUsed = false;
 
     /**
      * Flag indicating if this is a simplified stylesheets. A template
      * matching on "/" must be added in this case.
+     * <p>
+     *  标志指示这是否是简化的样式表。在这种情况下,必须添加与"/"匹配的模板。
+     * 
      */
     private boolean _simplified = false;
 
     /**
      * Flag indicating if multi-document support is needed.
+     * <p>
+     *  指示是否需要多文档支持的标志。
+     * 
      */
     private boolean _multiDocument = false;
 
     /**
      * Flag indicating if nodset() is called.
+     * <p>
+     *  指示是否调用nodset()的标志。
+     * 
      */
     private boolean _callsNodeset = false;
 
     /**
      * Flag indicating if id() is called.
+     * <p>
+     *  指示是否调用id()的标志。
+     * 
      */
     private boolean _hasIdCall = false;
 
     /**
      * Set to true to enable template inlining optimization.
+     * <p>
+     *  设置为true以启用模板内联优化。
+     * 
+     * 
      * @see XSLTC#_templateInlining
      */
     private boolean _templateInlining = false;
 
     /**
      * A reference to the last xsl:output object found in the styleshet.
+     * <p>
+     *  引用在stylesher中找到的最后一个xsl：output对象。
+     * 
      */
     private Output  _lastOutputElement = null;
 
     /**
      * Output properties for this stylesheet.
+     * <p>
+     *  此样式表的输出属性。
+     * 
      */
     private Properties _outputProperties = null;
 
     /**
      * Output method for this stylesheet (must be set to one of
      * the constants defined below).
+     * <p>
+     *  此样式表的输出方法(必须设置为下面定义的常量之一)。
+     * 
      */
     private int _outputMethod = UNKNOWN_OUTPUT;
 
@@ -228,6 +331,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Return the output method
+     * <p>
+     *  返回输出方法
+     * 
      */
     public int getOutputMethod() {
         return _outputMethod;
@@ -235,6 +341,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Check and set the output method
+     * <p>
+     *  检查并设置输出方法
+     * 
      */
     private void checkOutputMethod() {
         if (_lastOutputElement != null) {
@@ -313,6 +422,9 @@ public final class Stylesheet extends SyntaxTreeNode {
          * numberFormattingUsed flag to the parent stylesheet too.
          * AbstractTranslet.addDecimalFormat() will be inlined once for the
          * outer most stylesheet.
+         * <p>
+         *  修复错误23046,如果包括样式表,也将numberFormattingUsed标记设置为父样式表。 AbstractTranslet.addDecimalFormat()将内联一次最外层的样式表。
+         * 
          */
         Stylesheet parent = getParentStylesheet();
         if (null != parent) parent.numberFormattingUsed();
@@ -357,6 +469,9 @@ public final class Stylesheet extends SyntaxTreeNode {
      * Get the minimum of the precedence of this stylesheet, any stylesheet
      * imported by this stylesheet and any include/import descendant of this
      * stylesheet.
+     * <p>
+     * 获取此样式表,由此样式表导入的任何样式表和此样式表的任何include / import子孙的优先级的最小值。
+     * 
      */
     public int getMinimumDescendantPrecedence() {
         if (_minimumDescendantPrecedence == -1) {
@@ -448,6 +563,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Returns true if this stylesheet has global vars or params.
+     * <p>
+     *  如果此样式表具有全局vars或params,则返回true。
+     * 
      */
     public boolean hasGlobals() {
         return _globals.size() > 0;
@@ -457,6 +575,9 @@ public final class Stylesheet extends SyntaxTreeNode {
      * Returns true if at least one template in the stylesheet has params
      * defined. Uses the variable <code>_hasLocalParams</code> to cache the
      * result.
+     * <p>
+     *  如果样式表中至少有一个模板定义了params,则返回true。使用变量<code> _hasLocalParams </code>来缓存结果。
+     * 
      */
     public boolean hasLocalParams() {
         if (_hasLocalParams == null) {
@@ -479,6 +600,10 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Adds a single prefix mapping to this syntax tree node.
+     * <p>
+     *  向此语法树节点添加单个前缀映射。
+     * 
+     * 
      * @param prefix Namespace prefix.
      * @param uri Namespace URI.
      */
@@ -489,6 +614,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Store extension URIs
+     * <p>
+     *  商店扩展URI
+     * 
      */
     private void extensionURI(String prefixes, SymbolTable stable) {
         if (prefixes != null) {
@@ -517,6 +645,9 @@ public final class Stylesheet extends SyntaxTreeNode {
      * Parse the version and uri fields of the stylesheet and add an
      * entry to the symbol table mapping the name <tt>__stylesheet_</tt>
      * to an instance of this class.
+     * <p>
+     *  解析样式表的版本和uri字段,并向符号表中添加一个条目,将名称<tt> __ stylesheet _ </tt>映射到此类的实例。
+     * 
      */
     public void parseContents(Parser parser) {
         final SymbolTable stable = parser.getSymbolTable();
@@ -530,6 +661,11 @@ public final class Stylesheet extends SyntaxTreeNode {
         else if (!_version.equals("1.0")) {
             reportError(this, parser, ErrorMsg.XSL_VERSION_ERR, _version);
         }
+        /* <p>
+        /*  //确保在此样式表中设置的XSL版本if((_version == null)||(_version.equals(EMPTYSTRING))){reportError(this,parser,ErrorMsg.REQUIRED_ATTR_ERR,"version"); }
+        /*  //验证版本是1.0,没有别的东西if(！_version.equals("1.0")){reportError(this,parser,ErrorMsg.XSL_VERSION_ERR,_version); }
+        /* }。
+        /* 
         */
 
         // Add the implicit mapping of 'xml' to the XML namespace URI
@@ -561,6 +697,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Parse all direct children of the <xsl:stylesheet/> element.
+     * <p>
+     *  解析<xsl：stylesheet />元素的所有直接子项。
+     * 
      */
     public final void parseOwnChildren(Parser parser) {
         final SymbolTable stable = parser.getSymbolTable();
@@ -647,6 +786,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Type check all the children of this node.
+     * <p>
+     *  类型检查此节点的所有子节点。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         final int count = _globals.size();
@@ -659,6 +801,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Translate the stylesheet into JVM bytecodes.
+     * <p>
+     *  将样式表转换为JVM字节码。
+     * 
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         translate();
@@ -674,6 +819,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Add a static field
+     * <p>
+     *  添加静态字段
+     * 
      */
     private void addStaticField(ClassGenerator classGen, String type,
                                 String name)
@@ -688,6 +836,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Translate the stylesheet into JVM bytecodes.
+     * <p>
+     *  将样式表转换为JVM字节码。
+     * 
      */
     public void translate() {
         _className = getXSLTC().getClassName();
@@ -749,6 +900,9 @@ public final class Stylesheet extends SyntaxTreeNode {
      * the static initializer. They are read-only from the
      * translet. All translet instances can share a single
      * copy of this informtion.
+     * <p>
+     *  将namesArray,urisArray和typesArray编译为静态初始化程序。它们是从translet只读的。所有translet实例可以共享此信息的单个副本。
+     * 
      */
     private void compileStaticInitializer(ClassGenerator classGen) {
         final ConstantPoolGen cpg = classGen.getConstantPool();
@@ -903,6 +1057,9 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Compile the translet's constructor
+     * <p>
+     *  编译translet的构造函数
+     * 
      */
     private void compileConstructor(ClassGenerator classGen, Output output) {
 
@@ -1008,6 +1165,12 @@ public final class Stylesheet extends SyntaxTreeNode {
      * interpretive, that type of dependency is allowed. Note also that
      * the buildKeys() method is still generated as it is used by the
      * LoadDocument class, but it no longer called from transform().
+     * <p>
+     * 将topLevel()方法编译到输出类中。此方法从transform()调用以处理所有非模板顶级元素。返回topLevel()方法的签名。
+     * 
+     *  全局变量/ params和键首先排序以解决它们之间的依赖关系。 XSLT 1.0规范不允许键依赖于变量。然而,为了与Xalan解释兼容,允许该类型的依赖。
+     * 还要注意,buildKeys()方法仍然生成,因为它被LoadDocument类使用,但它不再从transform()调用。
+     * 
      */
     private String compileTopLevel(ClassGenerator classGen) {
 
@@ -1117,6 +1280,10 @@ public final class Stylesheet extends SyntaxTreeNode {
      * spec does not allow a key to depend on a variable. However, for
      * compatibility with Xalan interpretive, that type of dependency is
      * allowed and, therefore, consider to determine the partial order.
+     * <p>
+     *  这个方法返回一个带有变量/参数和键的向量,按照它们被编译为初始化的顺序。通过分析它们之间的依赖性来确定顺序。 XSLT 1.0规范不允许键依赖于变量。
+     * 然而,为了与Xalan解释兼容,允许该类型的依赖,因此,考虑确定部分顺序。
+     * 
      */
     private Vector resolveDependencies(Vector input) {
         /* DEBUG CODE - INGORE
@@ -1129,6 +1296,9 @@ public final class Stylesheet extends SyntaxTreeNode {
             }
         }
         System.out.println("=================================");
+        /* <p>
+        /*  for(int i = 0; i <input.size(); i ++){final TopLevelElement e =(TopLevelElement)input.elementAt(i); System.out.println("e ="+ e +"取决于："); Vector dep = e.getDependencies(); for(int j = 0; j <(dep！= null?dep.size()：0); j ++){System.out.println("\ t"+ dep.elementAt(j)); }} System.out.println("===============================");。
+        /* 
         */
 
         Vector result = new Vector();
@@ -1162,6 +1332,9 @@ public final class Stylesheet extends SyntaxTreeNode {
             final TopLevelElement e = (TopLevelElement) result.elementAt(i);
             System.out.println("e = " + e);
         }
+        /* <p>
+        /* System.out.println("==============================="); for(int i = 0; i <result.size(); i ++){final TopLevelElement e =(TopLevelElement)result.elementAt(i); System.out.println("e ="+ e); }}。
+        /* 
         */
 
         return result;
@@ -1172,6 +1345,10 @@ public final class Stylesheet extends SyntaxTreeNode {
      * for the input document are created in topLevel(), not in this method.
      * However, we still need this method to create keys for documents loaded
      * via the XPath document() function.
+     * <p>
+     *  将buildKeys()方法编译到输出类中。请注意,输入文档的键在topLevel()中创建,而不是在此方法中创建。
+     * 但是,我们仍然需要此方法为通过XPath document()函数加载的文档创建密钥。
+     * 
      */
     private String compileBuildKeys(ClassGenerator classGen) {
         final ConstantPoolGen cpg = classGen.getConstantPool();
@@ -1226,6 +1403,9 @@ public final class Stylesheet extends SyntaxTreeNode {
      * Compile transform() into the output class. This method is used to
      * initialize global variables and global parameters. The current node
      * is set to be the document's root node.
+     * <p>
+     *  将transform()转换为输出类。此方法用于初始化全局变量和全局参数。当前节点被设置为文档的根节点。
+     * 
      */
     private void compileTransform(ClassGenerator classGen) {
         final ConstantPoolGen cpg = classGen.getConstantPool();
@@ -1233,6 +1413,9 @@ public final class Stylesheet extends SyntaxTreeNode {
         /*
          * Define the the method transform with the following signature:
          * void transform(DOM, NodeIterator, HandlerBase)
+         * <p>
+         *  使用以下签名定义方法转换：void transform(DOM,NodeIterator,HandlerBase)
+         * 
          */
         final com.sun.org.apache.bcel.internal.generic.Type[] argTypes =
             new com.sun.org.apache.bcel.internal.generic.Type[3];
@@ -1319,6 +1502,9 @@ public final class Stylesheet extends SyntaxTreeNode {
          * invoked here as keys for the input document are now created
          * in topLevel(). However, this method is still needed by the
          * LoadDocument class.
+         * <p>
+         *  编译buildKeys()方法。注意,此处不调用此方法,因为输入文档的键现在在topLevel()中创建。但是,LoadDocument类仍然需要此方法。
+         * 
          */
         final String keySig = compileBuildKeys(classGen);
         final int keyIdx = cpg.addMethodref(getClassName(),
@@ -1368,6 +1554,8 @@ public final class Stylesheet extends SyntaxTreeNode {
 
     /**
      * Peephole optimization: Remove sequences of [ALOAD, POP].
+     * <p>
+     *  窥视孔优化：删除[ALOAD,POP]的序列。
      */
     private void peepHoleOptimization(MethodGenerator methodGen) {
         final String pattern = "`aload'`pop'`instruction'";

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -156,6 +157,41 @@
  *            Networking System Properties</a></li>
  * </ul>
  *
+ * <p>
+ *  提供用于实现网络应用程序的类。
+ * 
+ *  <p> java.net包大致可分为两部分：</p>
+ * <ul>
+ *  <li> <p> <i>低级API </i>,其处理以下抽象概念：</p>
+ * <ul>
+ *  </p> </li> <li> <p> <i>套接字</i>,这些是基本的网路识别码双向数据通信机制。
+ * </p> </li> <li> <p> <i>接口</i> </p> </li> </ul> </li> <li> <p> <i>高级API </i>。
+ * <ul>
+ *  </p> </li> <li> <p> <i> URL </i>,代表通用资源定位器。 </p> </li> </li> </p> </li> </li> / ul> </li>
+ * </ul>
+ *  <h2>地址</h2> <p>地址在整个java.net API中用作主机标识符或套接字端点标识符。
+ * </p> <p> {@link java.net.InetAddress}类是抽象表示IP(因特网协议)地址。它有两个子类：。
+ * <ul>
+ *  </li> {@ link java.net.Inet4Address} for IPv6 addresses。</li> <li> {@ link java.net.Inet4Address}
+ * </ul>
+ * <p>但是,在大多数情况下,不需要直接处理子类,因为InetAddress抽象应该涵盖大部分所需的功能。
+ * </p> <h3> <b>关于IPv6 </b> h3> <p>并非所有系统都支持IPv6协议,并且尽管Java网络协议栈会尝试检测它并在可用时透明地使用它,但也可以通过系统属性禁用它。
+ * 在IPv6不可用或显式禁用的情况下,Inet6Address不再是大多数网络操作的有效参数。
+ * 虽然像{@link java.net.InetAddress#getByName}这样的方法保证在查找主机名时不返回Inet6Address,但是可以通过传递文字来创建这样的对象。
+ * 在这种情况下,当使用Inet6Address调用时,大多数方法将抛出异常。</p> <h2>套接字是通过网络在机器之间建立通信链路的手段。 java.net包提供了4种类型的套接字：</p>。
+ * <ul>
+ * <li> {@ link java.net.Socket}是一个TCP客户端API,通常用于将{@linkplain java.net.Socket#connect(SocketAddress)connect}
+ * 连接到远程主机。
+ * </li> <li > {@ link java.net.ServerSocket}是一个TCP服务器API,通常会从客户端套接字{@linkplain java.net.ServerSocket#accept accept}
+ * 连接。
+ * </li> <li> {@ link java.net。
+ *  DatagramSocket}是一个UDP端点API,用于{@linkplain java.net.DatagramSocket#send send}和{@linkplain java.net.DatagramSocket#receive receive}
+ *  {@linkplain java.net.DatagramPacket datagram packets}。
+ * </li> <li> {@ link java.net。
+ * < li> <li> {@ link java.net.MulticastSocket}是处理多播组时使用的{@code DatagramSocket}的子类。</li>。
+ * </ul>
+ *  <p>使用TCP套接字发送和接收通过InputStreams和OutputStreams完成,可以通过{@link java.net.Socket#getInputStream}和{@link java.net.Socket#getOutputStream}
+ * 
  * @since JDK1.0
  */
 package java.net;

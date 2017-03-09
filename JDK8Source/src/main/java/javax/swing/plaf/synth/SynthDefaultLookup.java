@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import javax.swing.plaf.ComponentUI;
 /**
  * SynthDefaultLookup redirects all lookup calls to the SynthContext.
  *
+ * <p>
+ *  SynthDefaultLookup将所有查找调用重定向到SynthContext。
+ * 
  * @author Scott Violet
  */
 class SynthDefaultLookup extends DefaultLookup {

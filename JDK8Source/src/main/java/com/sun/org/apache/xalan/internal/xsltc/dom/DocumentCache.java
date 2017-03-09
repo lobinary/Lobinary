@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DocumentCache.java,v 1.2.4.1 2005/09/06 06:15:22 pvedula Exp $
+ * <p>
+ *  $ Id：DocumentCache.java,v 1.2.4.1 2005/09/06 06:15:22 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -51,6 +64,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  */
 public final class DocumentCache implements DOMCache {
@@ -68,6 +83,9 @@ public final class DocumentCache implements DOMCache {
 
     /*
      * Inner class containing a DOMImpl object and DTD handler
+     * <p>
+     *  内部类包含一个DOMImpl对象和DTD处理程序
+     * 
      */
     public final class CachedDocument {
 
@@ -84,6 +102,9 @@ public final class DocumentCache implements DOMCache {
 
         /**
          * Constructor - load document and initialise statistics
+         * <p>
+         *  构造器 - 加载文档和初始化统计信息
+         * 
          */
         public CachedDocument(String uri) {
             // Initialise statistics variables
@@ -98,6 +119,9 @@ public final class DocumentCache implements DOMCache {
 
         /**
          * Loads the document and updates build-time (latency) statistics
+         * <p>
+         *  加载文档并更新构建时间(延迟)统计信息
+         * 
          */
         public void loadDocument(String uri) {
 
@@ -152,6 +176,9 @@ public final class DocumentCache implements DOMCache {
 
     /**
      * DocumentCache constructor
+     * <p>
+     *  DocumentCache构造函数
+     * 
      */
     public DocumentCache(int size) throws SAXException {
         this(size, null);
@@ -164,6 +191,9 @@ public final class DocumentCache implements DOMCache {
 
     /**
      * DocumentCache constructor
+     * <p>
+     *  DocumentCache构造函数
+     * 
      */
     public DocumentCache(int size, XSLTCDTMManager dtmManager) throws SAXException {
         _dtmManager = dtmManager;
@@ -192,6 +222,9 @@ public final class DocumentCache implements DOMCache {
 
     /**
      * Returns the time-stamp for a document's last update
+     * <p>
+     *  返回文档上次更新的时间戳
+     * 
      */
     private final long getLastModified(String uri) {
         try {
@@ -215,6 +248,7 @@ public final class DocumentCache implements DOMCache {
 
     /**
      *
+     * <p>
      */
     private CachedDocument lookupDocument(String uri) {
         return((CachedDocument)_references.get(uri));
@@ -222,6 +256,7 @@ public final class DocumentCache implements DOMCache {
 
     /**
      *
+     * <p>
      */
     private synchronized void insertDocument(String uri, CachedDocument doc) {
         if (_count < _size) {
@@ -241,6 +276,7 @@ public final class DocumentCache implements DOMCache {
 
     /**
      *
+     * <p>
      */
     private synchronized void replaceDocument(String uri, CachedDocument doc) {
         CachedDocument old = (CachedDocument)_references.get(uri);
@@ -253,6 +289,9 @@ public final class DocumentCache implements DOMCache {
     /**
      * Returns a document either by finding it in the cache or
      * downloading it and putting it in the cache.
+     * <p>
+     *  通过在缓存中查找文档或下载文档并将其放入缓存中来返回文档。
+     * 
      */
     @Override
     public DOM retrieveDocument(String baseURI, String href, Translet trs) {
@@ -314,6 +353,8 @@ public final class DocumentCache implements DOMCache {
 
     /**
      * Outputs the cache statistics
+     * <p>
+     *  输出缓存统计信息
      */
     public void getStatistics(PrintWriter out) {
         out.println("<h2>DOM cache statistics</h2><center><table border=\"2\">"+

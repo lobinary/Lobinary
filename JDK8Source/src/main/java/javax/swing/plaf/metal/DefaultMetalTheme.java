@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -83,6 +84,35 @@ import sun.swing.SwingUtilities2;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  {@code MetalTheme}的具体实现提供了Java Look and Feel的原始外观,代码为"Steel"。
+ * 有关更改默认主题的详细信息,请参阅{@link MetalLookAndFeel#setCurrentTheme}。
+ * <p>
+ *  {@code DefaultMetalTheme}返回的所有颜色都是完全不透明的。
+ * 
+ *  <h3> <a name="fontStyle"> </a>字体样式</h3>
+ * 
+ *  {@code DefaultMetalTheme}对许多控件使用粗体字体。要使所有控件(除了内部框架标题栏和客户端装饰的框架标题栏)使用纯字体,您可以执行以下操作之一：
+ * <ul>
+ *  <li>将系统属性<code> swing.boldMetal </code>设置为<code> false </code>。
+ * 例如,<code> java&nbsp; -Dswing.boldMetal = false&nbsp; MyApp </code>。
+ *  <li>将defaults属性<code> swing.boldMetal </code>设置为<code> Boolean.FALSE </code>。
+ * 例如：<code> UIManager.put("swing.boldMetal",&amp;; Boolean.FALSE); </code>。
+ * </ul>
+ *  默认属性<code> swing.boldMetal </code>(如果设置)优先于同名的系统属性。
+ * 设置此默认属性后,您需要重新安装<code> MetalLookAndFeel </code>,以及更新任何以前创建的小部件的UI。否则结果是未定义的。以下说明如何执行此操作：。
+ * <pre>
+ *  //关闭粗体字体UIManager.put("swing.boldMetal",Boolean.FALSE);
+ * 
+ * //重新安装Metal Look和Feel UIManager.setLookAndFeel(new MetalLookAndFeel());
+ * 
+ *  //更新所有组件的ComponentUI。这个//需要为所有窗口调用。 SwingUtilities.updateComponentTreeUI(rootComponent);
+ * </pre>
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see MetalLookAndFeel
  * @see MetalLookAndFeel#setCurrentTheme
  *
@@ -92,11 +122,17 @@ public class DefaultMetalTheme extends MetalTheme {
     /**
      * Whether or not fonts should be plain.  This is only used if
      * the defaults property 'swing.boldMetal' == "false".
+     * <p>
+     *  字体是否应该是平常的。这仅在defaults属性"swing.boldMetal"=="false"时使用。
+     * 
      */
     private static final boolean PLAIN_FONTS;
 
     /**
      * Names of the fonts to use.
+     * <p>
+     *  要使用的字体的名称。
+     * 
      */
     private static final String[] fontNames = {
         Font.DIALOG,Font.DIALOG,Font.DIALOG,Font.DIALOG,Font.DIALOG,Font.DIALOG
@@ -104,12 +140,18 @@ public class DefaultMetalTheme extends MetalTheme {
     /**
      * Styles for the fonts.  This is ignored if the defaults property
      * <code>swing.boldMetal</code> is false, or PLAIN_FONTS is true.
+     * <p>
+     *  字体样式。如果defaults属性<code> swing.boldMetal </code>为false或PLAIN_FONTS为true,则会被忽略。
+     * 
      */
     private static final int[] fontStyles = {
         Font.BOLD, Font.PLAIN, Font.PLAIN, Font.BOLD, Font.BOLD, Font.PLAIN
     };
     /**
      * Sizes for the fonts.
+     * <p>
+     *  字体大小。
+     * 
      */
     private static final int[] fontSizes = {
         12, 12, 12, 12, 12, 10
@@ -124,6 +166,9 @@ public class DefaultMetalTheme extends MetalTheme {
     // to getting these from the swing.properties file, or elsewhere.
     /**
      * System property names used to look up fonts.
+     * <p>
+     *  用于查找字体的系统属性名称。
+     * 
      */
     private static final String[] defaultNames = {
         "swing.plaf.metal.controlFont",
@@ -136,6 +181,9 @@ public class DefaultMetalTheme extends MetalTheme {
 
     /**
      * Returns the ideal font name for the font identified by key.
+     * <p>
+     *  返回由键标识的字体的理想字体名称。
+     * 
      */
     static String getDefaultFontName(int key) {
         return fontNames[key];
@@ -143,6 +191,9 @@ public class DefaultMetalTheme extends MetalTheme {
 
     /**
      * Returns the ideal font size for the font identified by key.
+     * <p>
+     *  返回由键标识的字体的理想字体大小。
+     * 
      */
     static int getDefaultFontSize(int key) {
         return fontSizes[key];
@@ -150,6 +201,9 @@ public class DefaultMetalTheme extends MetalTheme {
 
     /**
      * Returns the ideal font style for the font identified by key.
+     * <p>
+     *  返回由键标识的字体的理想字体样式。
+     * 
      */
     static int getDefaultFontStyle(int key) {
         if (key != WINDOW_TITLE_FONT) {
@@ -175,6 +229,9 @@ public class DefaultMetalTheme extends MetalTheme {
 
     /**
      * Returns the default used to look up the specified font.
+     * <p>
+     *  返回用于查找指定字体的默认值。
+     * 
      */
     static String getDefaultPropertyName(int key) {
         return defaultNames[key];
@@ -209,12 +266,19 @@ public class DefaultMetalTheme extends MetalTheme {
     /**
      * Returns the name of this theme. This returns {@code "Steel"}.
      *
+     * <p>
+     *  返回此主题的名称。这将返回{@code"Steel"}。
+     * 
+     * 
      * @return the name of this theme.
      */
     public String getName() { return "Steel"; }
 
     /**
      * Creates and returns an instance of {@code DefaultMetalTheme}.
+     * <p>
+     *  创建并返回{@code DefaultMetalTheme}的实例。
+     * 
      */
     public DefaultMetalTheme() {
         install();
@@ -224,6 +288,10 @@ public class DefaultMetalTheme extends MetalTheme {
      * Returns the primary 1 color. This returns a color with rgb values
      * of 102, 102, and 153, respectively.
      *
+     * <p>
+     *  返回主1颜色。这将返回一个颜色,分别为rgb值102,102和153。
+     * 
+     * 
      * @return the primary 1 color
      */
     protected ColorUIResource getPrimary1() { return primary1; }
@@ -232,6 +300,10 @@ public class DefaultMetalTheme extends MetalTheme {
      * Returns the primary 2 color. This returns a color with rgb values
      * of 153, 153, 204, respectively.
      *
+     * <p>
+     * 返回主2颜色。这将返回一个颜色,rgb值分别为153,153,204。
+     * 
+     * 
      * @return the primary 2 color
      */
     protected ColorUIResource getPrimary2() { return primary2; }
@@ -240,6 +312,10 @@ public class DefaultMetalTheme extends MetalTheme {
      * Returns the primary 3 color. This returns a color with rgb values
      * 204, 204, 255, respectively.
      *
+     * <p>
+     *  返回主3颜色。这返回分别具有rgb值204,204,255的颜色。
+     * 
+     * 
      * @return the primary 3 color
      */
     protected ColorUIResource getPrimary3() { return primary3; }
@@ -248,6 +324,10 @@ public class DefaultMetalTheme extends MetalTheme {
      * Returns the secondary 1 color. This returns a color with rgb values
      * 102, 102, and 102, respectively.
      *
+     * <p>
+     *  返回辅助1颜色。这返回分别具有rgb值102,102和102的颜色。
+     * 
+     * 
      * @return the secondary 1 color
      */
     protected ColorUIResource getSecondary1() { return secondary1; }
@@ -256,6 +336,10 @@ public class DefaultMetalTheme extends MetalTheme {
      * Returns the secondary 2 color. This returns a color with rgb values
      * 153, 153, and 153, respectively.
      *
+     * <p>
+     *  返回辅助2颜色。这将返回一个颜色,分别为rgb值153,153和153。
+     * 
+     * 
      * @return the secondary 2 color
      */
     protected ColorUIResource getSecondary2() { return secondary2; }
@@ -264,6 +348,10 @@ public class DefaultMetalTheme extends MetalTheme {
      * Returns the secondary 3 color. This returns a color with rgb values
      * 204, 204, and 204, respectively.
      *
+     * <p>
+     *  返回辅助3颜色。这返回分别具有rgb值204,204和204的颜色。
+     * 
+     * 
      * @return the secondary 3 color
      */
     protected ColorUIResource getSecondary3() { return secondary3; }
@@ -275,6 +363,10 @@ public class DefaultMetalTheme extends MetalTheme {
      * font style</a>, the font style is plain. Otherwise the font style is
      * bold.
      *
+     * <p>
+     *  返回控件文本字体。这返回Dialog,12pt。如果已按<a href="#fontStyle">字体样式</a>中所述启用纯字体,则字体样式是纯的。否则字体样式为粗体。
+     * 
+     * 
      * @return the control text font
      */
     public FontUIResource getControlTextFont() {
@@ -284,6 +376,10 @@ public class DefaultMetalTheme extends MetalTheme {
     /**
      * Returns the system text font. This returns Dialog, 12pt, plain.
      *
+     * <p>
+     *  返回系统文本字体。这返回Dialog,12pt,plain。
+     * 
+     * 
      * @return the system text font
      */
     public FontUIResource getSystemTextFont() {
@@ -293,6 +389,10 @@ public class DefaultMetalTheme extends MetalTheme {
     /**
      * Returns the user text font. This returns Dialog, 12pt, plain.
      *
+     * <p>
+     *  返回用户文本字体。这返回Dialog,12pt,plain。
+     * 
+     * 
      * @return the user text font
      */
     public FontUIResource getUserTextFont() {
@@ -305,6 +405,10 @@ public class DefaultMetalTheme extends MetalTheme {
      * font style</a>, the font style is plain. Otherwise the font style is
      * bold.
      *
+     * <p>
+     *  返回菜单文本字体。这返回Dialog,12pt。如果已按<a href="#fontStyle">字体样式</a>中所述启用纯字体,则字体样式是纯的。否则字体样式为粗体。
+     * 
+     * 
      * @return the menu text font
      */
     public FontUIResource getMenuTextFont() {
@@ -314,6 +418,10 @@ public class DefaultMetalTheme extends MetalTheme {
     /**
      * Returns the window title font. This returns Dialog, 12pt, bold.
      *
+     * <p>
+     *  返回窗口标题字体。这返回Dialog,12pt,bold。
+     * 
+     * 
      * @return the window title font
      */
     public FontUIResource getWindowTitleFont() {
@@ -323,6 +431,10 @@ public class DefaultMetalTheme extends MetalTheme {
     /**
      * Returns the sub-text font. This returns Dialog, 10pt, plain.
      *
+     * <p>
+     *  返回子文本字体。这返回Dialog,10pt,plain。
+     * 
+     * 
      * @return the sub-text font
      */
     public FontUIResource getSubTextFont() {
@@ -345,6 +457,9 @@ public class DefaultMetalTheme extends MetalTheme {
 
     /**
      * Returns true if this is a theme provided by the core platform.
+     * <p>
+     *  如果这是核心平台提供的主题,则返回true。
+     * 
      */
     boolean isSystemTheme() {
         return (getClass() == DefaultMetalTheme.class);
@@ -352,6 +467,9 @@ public class DefaultMetalTheme extends MetalTheme {
 
     /**
      * FontDelegates add an extra level of indirection to obtaining fonts.
+     * <p>
+     *  FontDelegates添加额外级别的间接获取字体。
+     * 
      */
     private static class FontDelegate {
         private static int[] defaultMapping = {
@@ -385,6 +503,9 @@ public class DefaultMetalTheme extends MetalTheme {
          * This is the same as invoking
          * <code>Font.getFont(key)</code>, with the exception
          * that it is wrapped inside a <code>doPrivileged</code> call.
+         * <p>
+         *  这与调用<code> Font.getFont(key)</code>相同,只是它被包装在<code> doPrivileged </code>调用中。
+         * 
          */
         protected Font getPrivilegedFont(final int key) {
             return java.security.AccessController.doPrivileged(
@@ -399,6 +520,8 @@ public class DefaultMetalTheme extends MetalTheme {
 
     /**
      * The WindowsFontDelegate uses DesktopProperties to obtain fonts.
+     * <p>
+     * WindowsFontDelegate使用DesktopProperties来获取字体。
      */
     private static class WindowsFontDelegate extends FontDelegate {
         private MetalFontDesktopProperty[] props;

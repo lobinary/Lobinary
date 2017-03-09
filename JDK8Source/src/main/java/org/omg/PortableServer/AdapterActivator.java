@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -15,6 +16,8 @@ package org.omg.PortableServer;
 	 * receiving a request that names the child POA 
 	 * (or one of its children), or when find_POA is called 
 	 * with an activate parameter value of TRUE.
+	 * <p>
+	 * 
 	 */
 public interface AdapterActivator extends AdapterActivatorOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,14 @@ import java.awt.*;
  * API for rendering text however, so the GlyphPainter2
  * is recommended for the DK.
  *
+ * <p>
+ *  一个类来执行字形的渲染。这可以被实现为无状态的,或者保持一些信息作为高速缓存以促进更快的呈现和模型/视图转换。
+ * 至少,GlyphPainter允许View实现独立于JVM的特定版本和选择能力(即,针对i18n的整形等)来执行其职责。
+ * <p>
+ *  此实现用于在Java平台的JDK1.1 API下操作。
+ * 由于JDK向后兼容JDK1.1 API,这个类也将在Java 2上运行.JDK引入改进的API来渲染文本,所以GlyphPainter2被推荐用于DK。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see GlyphView
  */
@@ -53,6 +62,9 @@ class GlyphPainter1 extends GlyphView.GlyphPainter {
     /**
      * Determine the span the glyphs given a start location
      * (for tab expansion).
+     * <p>
+     *  确定给定开始位置的字形的跨度(用于制表符展开)。
+     * 
      */
     public float getSpan(GlyphView v, int p0, int p1,
                          TabExpander e, float x) {
@@ -73,6 +85,9 @@ class GlyphPainter1 extends GlyphView.GlyphPainter {
     /**
      * Fetches the ascent above the baseline for the glyphs
      * corresponding to the given range in the model.
+     * <p>
+     *  获取对应于模型中给定范围的字形的高于基线的上升。
+     * 
      */
     public float getAscent(GlyphView v) {
         sync(v);
@@ -82,6 +97,9 @@ class GlyphPainter1 extends GlyphView.GlyphPainter {
     /**
      * Fetches the descent below the baseline for the glyphs
      * corresponding to the given range in the model.
+     * <p>
+     *  获取对应于模型中给定范围的字形的低于基线的下降。
+     * 
      */
     public float getDescent(GlyphView v) {
         sync(v);
@@ -90,6 +108,9 @@ class GlyphPainter1 extends GlyphView.GlyphPainter {
 
     /**
      * Paints the glyphs representing the given range.
+     * <p>
+     *  绘制表示给定范围的字形。
+     * 
      */
     public void paint(GlyphView v, Graphics g, Shape a, int p0, int p1) {
         sync(v);
@@ -153,6 +174,10 @@ class GlyphPainter1 extends GlyphView.GlyphPainter {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param v the view containing the view coordinates
      * @param x the X coordinate
      * @param y the Y coordinate
@@ -194,6 +219,10 @@ class GlyphPainter1 extends GlyphView.GlyphPainter {
      * location.  If a whitespace location can't be found, the
      * nearest character location is returned.
      *
+     * <p>
+     *  确定打破给定视图的最佳位置(在模型中)。此方法尝试在空格位置断开。如果找不到空格位置,则返回最近的字符位置。
+     * 
+     * 
      * @param v the view
      * @param p0 the location in the model where the
      *  fragment should start its representation >= 0
@@ -231,6 +260,8 @@ class GlyphPainter1 extends GlyphView.GlyphPainter {
 
 
     /**
+    /* <p>
+    /* 
      * @return justificationData from the ParagraphRow this GlyphView
      * is in or {@code null} if no justification is needed
      */

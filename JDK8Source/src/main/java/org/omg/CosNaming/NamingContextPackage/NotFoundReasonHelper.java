@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming.NamingContextPackage;
 
 
@@ -11,6 +12,8 @@ package org.omg.CosNaming.NamingContextPackage;
 
 /**
          * Indicates the reason for not able to resolve.
+         * <p>
+         * 
          */
 abstract public class NotFoundReasonHelper
 {

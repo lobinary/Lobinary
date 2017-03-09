@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import javax.imageio.stream.ImageOutputStream;
 /*
  * Modified from original LZWCompressor to change interface to passing a
  * buffer of data to be compressed.
+ * <p>
+ *  从原始的LZWCompressor修改,改变接口传递要压缩的数据缓冲区。
+ * 
  */
 public class LZWCompressor {
     /** base underlying code size of data being compressed 8 for TIFF, 1 to 8 for GIF **/
@@ -62,6 +66,8 @@ public class LZWCompressor {
     boolean tiffFudge;
 
     /**
+    /* <p>
+    /* 
      * @param out destination for compressed data
      * @param codeSize the initial code size for the LZW compressor
      * @param TIFF flag indicating that TIFF lzw fudge needs to be applied
@@ -89,6 +95,8 @@ public class LZWCompressor {
     }
 
     /**
+    /* <p>
+    /* 
      * @param buf data to be compressed to output stream
      * @exception IOException if underlying output stream error
      **/
@@ -129,6 +137,9 @@ public class LZWCompressor {
      * Indicate to compressor that no more data to go so write out
      * any remaining buffered data.
      *
+     * <p>
+     *  指示压缩器没有更多的数据要写入任何剩余的缓冲数据。
+     * 
      * @exception IOException if underlying output stream error
      */
     public void flush() throws IOException {

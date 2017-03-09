@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 
@@ -21,6 +22,10 @@ package org.omg.CosNaming;
  * See <a href="http://www.omg.org/technology/documents/formal/naming_service.htm">
  * CORBA COS 
  * Naming Specification.</a>
+ * <p>
+ *  <code> NamingContextExt </code>是<code> NamingContext </code>的扩展,它包含一组名称绑定,其中每个名称是唯一的,并且是可互操作命名服务的一部分
+ * 。
+ * 不同的名称可以同时绑定到相同或不同上下文中的对象。使用<tt> NamingContextExt </tt>,您可以使用基于URL的名称进行绑定和解析。 <p>。
  */
 public interface NamingContextExt extends NamingContextExtOperations, org.omg.CosNaming.NamingContext, org.omg.CORBA.portable.IDLEntity 
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -81,6 +82,32 @@ import java.util.Locale;
  * supported).
  *
  *
+ * <p>
+ *  描述流如何被编码的类。此类或其子类的实例用于向<code> ImageWriter </code>的实例提供指定的"how-to"信息。
+ * 
+ *  <p>特定图片格式的插件可以定义此类的子类,并从其<code> ImageWriter </code>实现的<code> getDefaultWriteParam </code>方法中返回该类的对象。
+ * 例如,内置的JPEG编写器插件将返回<code> javax.imageio.plugins.jpeg.JPEGImageWriteParam </code>的实例。
+ * 
+ *  <p>要写入的图像的区域通过首先将图像的实际边界与由<code> IIOParam.setSourceRegion </code>指定的矩形相交(如果有的话)来确定。
+ * 如果生成的矩形的宽度或高度为零,写程序将抛出一个<code> IIOException </code>。
+ * 如果交集是非空的,则将以第一子采样像素开始写入,并且根据由{@link IIOParam#setSourceSubsampling IIOParam.setSourceSubsampling}指定的水平
+ * 和垂直子采样因子,在相交边界内包括额外的像素。
+ * 如果生成的矩形的宽度或高度为零,写程序将抛出一个<code> IIOException </code>。
+ * 
+ * 可以以四种模式之一设置诸如平铺,渐进编码和压缩的各个特征。
+ *  <code> MODE_DISABLED </code>禁用功能; <code> MODE_DEFAULT </code>使用写入器控制的参数值启用该功能; <code> MODE_EXPLICIT 
+ * </code>启用此功能,并允许使用<code> set </code>方法提供其他参数;和<code> MODE_COPY_FROM_METADATA </code>从传递给writer的流和图像元数
+ * 据对象复制相关参数值。
+ * 可以以四种模式之一设置诸如平铺,渐进编码和压缩的各个特征。所有功能的默认值为<code> MODE_COPY_FROM_METADATA </code>。
+ * 鼓励在子类中提供的非标准特征,但不需要使用类似的方案。
+ * 
+ *  <p>插件编写器可以通过提供一个实现附加的插件特定接口的子类来扩展<code> ImageWriteParam </code>的功能。它是由插件来记录什么接口可用以及如何使用它们。
+ * 写入器将静默地忽略它们不知道的<code> ImageWriteParam </code>子类的任何扩展功能。
+ * 此外,他们可以忽略通过<code> getDefaultWriteParam </code>创建自己的<code> ImageWriteParam </code>实例时通常禁用的任何可选功能。
+ * 
+ *  <p>请注意,除非存在某种功能的查询方法,否则必须由所有<code> ImageWriter </code>实现(<i>例如</i>渐进编码是可选的,但必须支持子采样)支持。
+ * 
+ * 
  * @see ImageReadParam
  */
 public class ImageWriteParam extends IIOParam {
@@ -94,6 +121,12 @@ public class ImageWriteParam extends IIOParam {
      * relevant accessor methods will throw an
      * <code>IllegalStateException</code>.
      *
+     * <p>
+     * 可以传递到诸如<code> setTilingMode </code>,<code> setProgressiveMode </code>和<code> setCompressionMode </code>
+     * 等方法的常量值,以禁用将来写入的功能。
+     * 也就是说,当设置此模式时,流将<b>不</b>平铺,渐进或压缩,相关的访问器方法将抛出一个<code> IllegalStateException </code>。
+     * 
+     * 
      * @see #MODE_EXPLICIT
      * @see #MODE_COPY_FROM_METADATA
      * @see #MODE_DEFAULT
@@ -117,6 +150,12 @@ public class ImageWriteParam extends IIOParam {
      * dependent way, and the relevant accessor methods will
      * throw an <code>IllegalStateException</code>.
      *
+     * <p>
+     *  可以传递到诸如<code> setTilingMode </code>,<code> setProgressiveMode </code>和<code> setCompressionMode </code>
+     * 等方法的常量值,也就是说,当启用此模式时,流将根据由编写者以插件依赖方式在内部选择的明智默认来平铺,渐进或压缩,并且相关的访问器方法将抛出<code> IllegalStateException <代码>
+     * 。
+     * 
+     * 
      * @see #MODE_DISABLED
      * @see #MODE_EXPLICIT
      * @see #MODE_COPY_FROM_METADATA
@@ -139,6 +178,12 @@ public class ImageWriteParam extends IIOParam {
      * corresponding <code>get</code> methods.  Note that this mode is
      * not supported for progressive output.
      *
+     * <p>
+     *  可以传递到诸如<code> setTilingMode </code>或<code> setCompressionMode </code>等方法的常量值,以便为将来写入启用功能。
+     * 也就是说,当设置该模式时,将根据提供给该类中的相应<code> set </code>方法的附加信息来平铺或压缩流,并且可以从相应的<code> get </code>方法检索。
+     * 请注意,渐进式输出不支持此模式。
+     * 
+     * 
      * @see #MODE_DISABLED
      * @see #MODE_COPY_FROM_METADATA
      * @see #MODE_DEFAULT
@@ -165,6 +210,14 @@ public class ImageWriteParam extends IIOParam {
      * including metadata followed by a write including metadata will
      * preserve as much information as possible.
      *
+     * <p>
+     * 可以传递到诸如<code> setTilingMode </code>,<code> setProgressiveMode </code>或<code> setCompressionMode </code>
+     * 等方法的常量值,也就是说,当启用此模式时,流将基于传递到写入操作的流和/或图像元数据的内容被平铺,逐行或压缩,并且任何相关的存取器方法将抛出<code> IllegalStateException </code >
+     * 。
+     * 
+     *  <p>这是所有功能的默认模式,因此包括元数据的读取包括元数据的写入将保留尽可能多的信息。
+     * 
+     * 
      * @see #MODE_DISABLED
      * @see #MODE_EXPLICIT
      * @see #MODE_DEFAULT
@@ -188,6 +241,13 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support writing tiles should ensure
      * that this value is set to <code>false</code>.
+     * <p>
+     *  如果此<code> ImageWriteParam </code>允许设置tile width和tile height参数,则<code> boolean </code>即<code> true </code>
+     * 默认情况下,值为<code> false </code>。
+     * 子类必须手动设置值。
+     * 
+     *  <p>不支持写入图块的子类应确保此值设置为<code> false </code>。
+     * 
      */
     protected boolean canWriteTiles = false;
 
@@ -198,6 +258,12 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not writing tiles may ignore this value.
      *
+     * <p>
+     *  模式控制平铺设置,其必须设置为四个<code> MODE _ * </code>值之一。默认值为<code> MODE_COPY_FROM_METADATA </code>。
+     * 
+     *  <p>不编写图块的子类可能会忽略此值。
+     * 
+     * 
      * @see #MODE_DISABLED
      * @see #MODE_EXPLICIT
      * @see #MODE_COPY_FROM_METADATA
@@ -216,6 +282,12 @@ public class ImageWriteParam extends IIOParam {
      * <p> Subclasses that do not support writing tiles may ignore
      * this value.
      *
+     * <p>
+     *  首选拼贴大小范围对的数组。默认值为<code> null </code>,表示没有首选大小。如果值为非<code> null </code>,则它的长度必须至少为2。
+     * 
+     *  <p>不支持写入图块的子类可能会忽略此值。
+     * 
+     * 
      * @see #getPreferredTileSizes
      */
     protected Dimension[] preferredTileSizes = null;
@@ -226,6 +298,11 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support writing tiles may ignore
      * this value.
+     * <p>
+     * 如果指定了平铺参数,则<code> boolean </code>是<code> true </code>。
+     * 
+     *  <p>不支持写入图块的子类可能会忽略此值。
+     * 
      */
     protected boolean tilingSet = false;
 
@@ -234,6 +311,11 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support tiling may ignore this
      * value.
+     * <p>
+     *  如果已设置平铺,则每个平铺的宽度,否则为0。
+     * 
+     *  <p>不支持平铺的子类可能会忽略此值。
+     * 
      */
     protected int tileWidth = 0;
 
@@ -243,6 +325,11 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support tiling may ignore this
      * value.
+     * <p>
+     *  如果平铺已设置,则每个平铺的高度,否则为0。初始值为<code> 0 </code>。
+     * 
+     *  <p>不支持平铺的子类可能会忽略此值。
+     * 
      */
     protected int tileHeight = 0;
 
@@ -255,6 +342,12 @@ public class ImageWriteParam extends IIOParam {
      * <p> Subclasses that do not support writing tiles, or that
      * support writing but not offsetting tiles must ensure that this
      * value is set to <code>false</code>.
+     * <p>
+     *  如果此<code> ImageWriteParam </code>允许设置平铺网格偏移参数,则<code> boolean </code>,即<code> true </code>。
+     * 默认情况下,值为<code> false </code>。子类必须手动设置值。
+     * 
+     *  <p>不支持写入磁贴或支持写入但不偏移磁贴的子类必须确保此值设置为<code> false </code>。
+     * 
      */
     protected boolean canOffsetTiles = false;
 
@@ -265,6 +358,11 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support offsetting tiles may ignore
      * this value.
+     * <p>
+     *  如果平铺已设置,拼贴网格原点应从图像原点水平偏移的量,否则为0。初始值为<code> 0 </code>。
+     * 
+     *  <p>不支持抵消图块的子类可能会忽略此值。
+     * 
      */
     protected int tileGridXOffset = 0;
 
@@ -275,6 +373,11 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support offsetting tiles may ignore
      * this value.
+     * <p>
+     *  如果平铺已设置,拼贴网格原点应从图像原点垂直偏移的量,否则为0。初始值为<code> 0 </code>。
+     * 
+     *  <p>不支持抵消图块的子类可能会忽略此值。
+     * 
      */
     protected int tileGridYOffset = 0;
 
@@ -287,6 +390,12 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support progressive encoding must
      * ensure that this value is set to <code>false</code>.
+     * <p>
+     * 如果此<code> ImageWriteParam </code>允许将图像以增加的质量通过的渐进顺序写入,则<code> boolean </code>是<code> true </code>。
+     * 默认情况下,值为<code> false </code>。子类必须手动设置值。
+     * 
+     *  <p>不支持渐进编码的子类必须确保此值设置为<code> false </code>。
+     * 
      */
     protected boolean canWriteProgressive = false;
 
@@ -299,6 +408,13 @@ public class ImageWriteParam extends IIOParam {
      * <p> Subclasses that do not support progressive encoding may
      * ignore this value.
      *
+     * <p>
+     *  模式控制逐行编码,必须设置为除<code> MODE_EXPLICIT </code>之外的四个<code> MODE _ * </code>值之一。
+     * 默认值为<code> MODE_COPY_FROM_METADATA </code>。
+     * 
+     *  <p>不支持渐进式编码的子类可能会忽略此值。
+     * 
+     * 
      * @see #MODE_DISABLED
      * @see #MODE_EXPLICIT
      * @see #MODE_COPY_FROM_METADATA
@@ -315,6 +431,12 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support compression must ensure that
      * this value is set to <code>false</code>.
+     * <p>
+     *  如果此写入程序可以使用压缩写入图像,则<code> boolean </code>为<code> true </code>。默认情况下,值为<code> false </code>。
+     * 子类必须手动设置值。
+     * 
+     *  <p>不支持压缩的子类必须确保此值设置为<code> false </code>。
+     * 
      */
     protected boolean canWriteCompressed = false;
 
@@ -326,6 +448,12 @@ public class ImageWriteParam extends IIOParam {
      * <p> Subclasses that do not support compression may ignore this
      * value.
      *
+     * <p>
+     *  模式控制压缩设置,必须设置为四个<code> MODE _ * </code>值之一。默认值为<code> MODE_COPY_FROM_METADATA </code>。
+     * 
+     *  <p>不支持压缩的子类可能会忽略此值。
+     * 
+     * 
      * @see #MODE_DISABLED
      * @see #MODE_EXPLICIT
      * @see #MODE_COPY_FROM_METADATA
@@ -342,6 +470,11 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support compression may ignore this
      * value.
+     * <p>
+     *  包含可用压缩类型名称的<code> String </code>数组。子类必须手动设置值。
+     * 
+     *  <p>不支持压缩的子类可能会忽略此值。
+     * 
      */
     protected String[] compressionTypes = null;
 
@@ -351,6 +484,11 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support compression may ignore this
      * value.
+     * <p>
+     *  包含当前压缩类型名称的<code> String </code>,如果没有设置,则为<code> null </code>。
+     * 
+     * <p>不支持压缩的子类可能会忽略此值。
+     * 
      */
     protected String compressionType = null;
 
@@ -360,6 +498,11 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> Subclasses that do not support compression may ignore this
      * value.
+     * <p>
+     *  包含当前压缩质量设置的<code> float </code>。初始值为<code> 1.0F </code>。
+     * 
+     *  <p>不支持压缩的子类可能会忽略此值。
+     * 
      */
     protected float compressionQuality = 1.0F;
 
@@ -368,12 +511,18 @@ public class ImageWriteParam extends IIOParam {
      * names and quality descriptions, or <code>null</code> to use a
      * default <code>Locale</code>.  Subclasses must set the value
      * manually.
+     * <p>
+     *  用于本地化压缩类型名称和质量描述的<code> Locale </code>或<code> null </code>以使用默认的<code> Locale </code>。子类必须手动设置值。
+     * 
      */
     protected Locale locale = null;
 
     /**
      * Constructs an empty <code>ImageWriteParam</code>.  It is up to
      * the subclass to set up the instance variables properly.
+     * <p>
+     *  构造一个空的<code> ImageWriteParam </code>。它是由子类正确设置实例变量。
+     * 
      */
     protected ImageWriteParam() {}
 
@@ -381,6 +530,10 @@ public class ImageWriteParam extends IIOParam {
      * Constructs an <code>ImageWriteParam</code> set to use a
      * given <code>Locale</code>.
      *
+     * <p>
+     *  构造一个<code> ImageWriteParam </code>设置为使用给定的<code> Locale </code>。
+     * 
+     * 
      * @param locale a <code>Locale</code> to be used to localize
      * compression type names and quality descriptions, or
      * <code>null</code>.
@@ -406,6 +559,10 @@ public class ImageWriteParam extends IIOParam {
      * <code>null</code> if only a default <code>Locale</code> is
      * supported.
      *
+     * <p>
+     *  如果仅支持默认的<code> Locale </code>,则返回当前设置的<code> Locale </code>或<code> null </code>。
+     * 
+     * 
      * @return the current <code>Locale</code>, or <code>null</code>.
      */
     public Locale getLocale() {
@@ -418,6 +575,12 @@ public class ImageWriteParam extends IIOParam {
      * <code>setTiling</code> will throw an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  如果写入器在写入时可以执行平铺,则返回<code> true </code>。
+     * 如果此方法返回<code> false </code>,则<code> setTiling </code>会抛出<code> UnsupportedOperationException </code>。
+     *  如果写入器在写入时可以执行平铺,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the writer supports tiling.
      *
      * @see #canOffsetTiles()
@@ -436,6 +599,14 @@ public class ImageWriteParam extends IIOParam {
      * returns <code>false</code>, this method will return
      * <code>false</code> as well.
      *
+     * <p>
+     *  如果写入者在写入时可以执行具有非零栅格偏移的平铺,则返回<code> true </code>。
+     * 如果此方法返回<code> false </code>,则如果网格偏移参数不都为零,则<code> setTiling </code>将抛出<code> UnsupportedOperationExce
+     * ption </code>。
+     *  如果写入者在写入时可以执行具有非零栅格偏移的平铺,则返回<code> true </code>。
+     * 如果<code> canWriteTiles </code>返回<code> false </code>,此方法也将返回<code> false </code>。
+     * 
+     * 
      * @return <code>true</code> if the writer supports non-zero tile
      * offsets.
      *
@@ -472,6 +643,26 @@ public class ImageWriteParam extends IIOParam {
      *
      * </ul>
      *
+     * <p>
+     * 确定图像是否将平铺在输出流中,如果将,将如何确定平铺参数。模式解释如下：
+     * 
+     * <ul>
+     * 
+     *  <li> <code> MODE_DISABLED </code>  - 图片不会被平铺。
+     *  <code> setTiling </code>会抛出一个<code> IllegalStateException </code>。
+     * 
+     *  <li> <code> MODE_DEFAULT </code>  - 图片将使用默认参数进行平铺。
+     *  <code> setTiling </code>会抛出一个<code> IllegalStateException </code>。
+     * 
+     *  <li> <code> MODE_EXPLICIT </code>  - 图片将根据{@link #setTiling setTiling}方法中给出的参数进行平铺。
+     * 任何先前设置的平铺参数都将被丢弃。
+     * 
+     *  <li> <code> MODE_COPY_FROM_METADATA </code>  - 图像将符合传递到写入的元数据对象。
+     *  <code> setTiling </code>会抛出一个<code> IllegalStateException </code>。
+     * 
+     * </ul>
+     * 
+     * 
      * @param mode The mode to use for tiling.
      *
      * @exception UnsupportedOperationException if
@@ -499,6 +690,10 @@ public class ImageWriteParam extends IIOParam {
      * Returns the current tiling mode, if tiling is supported.
      * Otherwise throws an <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  如果支持平铺,则返回当前平铺模式。否则会抛出<code> UnsupportedOperationException </code>。
+     * 
+     * 
      * @return the current tiling mode.
      *
      * @exception UnsupportedOperationException if
@@ -530,6 +725,15 @@ public class ImageWriteParam extends IIOParam {
      * <p> If no array is specified on the constructor, but tiling is
      * allowed, then this method returns <code>null</code>.
      *
+     * <p>
+     *  返回一个<code> Dimension </code>数组,指示图块的法律大小范围,因为它们将在输出文件或流中编码。返回的数组是一个副本。
+     * 
+     * <p>信息作为一组对返回;一对中的第一元素包含(包括)最小宽度和高度,第二元素包含(包括)最大宽度和高度。在一起,每对定义一个有效的尺寸范围。要指定固定大小,请为这两个元素使用相同的宽度和高度。
+     * 要指定任意范围,使用<code> null </code>的值来代替<code> Dimension </code> s的实际数组。
+     * 
+     *  <p>如果在构造函数中未指定数组,但允许进行平铺,则此方法返回<code> null </code>。
+     * 
+     * 
      * @exception UnsupportedOperationException if the plug-in does
      * not support tiling.
      *
@@ -554,6 +758,14 @@ public class ImageWriteParam extends IIOParam {
      * then the <code>tileGridXOffset</code> and
      * <code>tileGridYOffset</code> parameters must be zero.
      *
+     * <p>
+     *  指定图像应平铺在输出流中。 <code> tileWidth </code>和<code> tileHeight </code>参数指定文件中图块的宽度和高度。
+     * 如果图块宽度或高度大于图片的宽度或高度,则图片不会平铺在该尺寸中。
+     * 
+     *  <p>如果<code> canOffsetTiles </code>返回<code> false </code>,则<code> tileGridXOffset </code>和<code> tile
+     * GridYOffset </code>参数必须为零。
+     * 
+     * 
      * @param tileWidth the width of each tile.
      * @param tileHeight the height of each tile.
      * @param tileGridXOffset the horizontal offset of the tile grid.
@@ -630,6 +842,13 @@ public class ImageWriteParam extends IIOParam {
      * <code>tileGridXOffset</code>, and
      * <code>tileGridYOffset</code> to <code>0</code>.
      *
+     * <p>
+     *  删除通过调用<code> setTiling </code>指定的任何以前的拼贴网格参数。
+     * 
+     *  <p>默认实现将实例变量<code> tileWidth </code>,<code> tileHeight </code>,<code> tileGridXOffset </code>和<code>
+     *  tileGridYOffset </code> 0 </code>。
+     * 
+     * 
      * @exception UnsupportedOperationException if the plug-in does not
      * support tiling.
      * @exception IllegalStateException if the tiling mode is not
@@ -656,6 +875,10 @@ public class ImageWriteParam extends IIOParam {
      * written to the output stream.  If tiling parameters have not
      * been set, an <code>IllegalStateException</code> is thrown.
      *
+     * <p>
+     *  返回图像中每个图块的宽度,因为它将被写入输出流。如果未设置平铺参数,则会抛出<code> IllegalStateException </code>。
+     * 
+     * 
      * @return the tile width to be used for encoding.
      *
      * @exception UnsupportedOperationException if the plug-in does not
@@ -686,6 +909,10 @@ public class ImageWriteParam extends IIOParam {
      * the output stream.  If tiling parameters have not
      * been set, an <code>IllegalStateException</code> is thrown.
      *
+     * <p>
+     * 返回图像中每个图块的高度,因为它将被写入输出流。如果未设置平铺参数,则会抛出<code> IllegalStateException </code>。
+     * 
+     * 
      * @return the tile height to be used for encoding.
      *
      * @exception UnsupportedOperationException if the plug-in does not
@@ -716,6 +943,10 @@ public class ImageWriteParam extends IIOParam {
      * be written to the output stream.  If tiling parameters have not
      * been set, an <code>IllegalStateException</code> is thrown.
      *
+     * <p>
+     *  返回图像的水平平铺网格偏移,因为它将被写入输出流。如果未设置平铺参数,则会抛出<code> IllegalStateException </code>。
+     * 
+     * 
      * @return the tile grid X offset to be used for encoding.
      *
      * @exception UnsupportedOperationException if the plug-in does not
@@ -746,6 +977,10 @@ public class ImageWriteParam extends IIOParam {
      * be written to the output stream.  If tiling parameters have not
      * been set, an <code>IllegalStateException</code> is thrown.
      *
+     * <p>
+     *  返回图像的垂直平铺网格偏移,因为它将被写入输出流。如果未设置平铺参数,则会抛出<code> IllegalStateException </code>。
+     * 
+     * 
      * @return the tile grid Y offset to be used for encoding.
      *
      * @exception UnsupportedOperationException if the plug-in does not
@@ -775,6 +1010,10 @@ public class ImageWriteParam extends IIOParam {
      * Returns <code>true</code> if the writer can write out images
      * as a series of passes of progressively increasing quality.
      *
+     * <p>
+     *  如果写入器可以将图像作为一系列逐渐提高质量的传递写入,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the writer supports progressive
      * encoding.
      *
@@ -815,6 +1054,26 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> The default is <code>MODE_COPY_FROM_METADATA</code>.
      *
+     * <p>
+     *  指定写入器以渐进模式写出图像,使得流将包含质量增加的一系列扫描。如果不支持渐进式编码,将抛出<code> UnsupportedOperationException </code>。
+     * 
+     *  <p> mode参数决定如何选择渐进参数,并且必须是<code> MODE_DISABLED </code>,<code> MODE_COPY_FROM_METADATA </code>或<code>
+     *  MODE_DEFAULT </code>。
+     * 否则抛出<code> IllegalArgumentException </code>。
+     * 
+     *  <p>这些模式解释如下：
+     * 
+     * <ul>
+     *  <li> <code> MODE_DISABLED </code>  - 无进展。使用此选项可关闭渐进。
+     * 
+     *  <li> <code> MODE_COPY_FROM_METADATA </code>  - 输出图像将使用传递到编写器的元数据对象中找到的任何渐进参数。
+     * 
+     * <li> <code> MODE_DEFAULT </code>  - 图像将逐步编写,参数由编写者选择。
+     * </ul>
+     * 
+     *  <p>默认为<code> MODE_COPY_FROM_METADATA </code>。
+     * 
+     * 
      * @param mode The mode for setting progression in the output
      * stream.
      *
@@ -844,6 +1103,10 @@ public class ImageWriteParam extends IIOParam {
      * Returns the current mode for writing the stream in a
      * progressive manner.
      *
+     * <p>
+     *  返回以渐进方式写入流的当前模式。
+     * 
+     * 
      * @return the current mode for progressive encoding.
      *
      * @exception UnsupportedOperationException if the writer does not
@@ -862,6 +1125,10 @@ public class ImageWriteParam extends IIOParam {
     /**
      * Returns <code>true</code> if this writer supports compression.
      *
+     * <p>
+     *  如果此编写器支持压缩,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the writer supports compression.
      */
     public boolean canWriteCompressed() {
@@ -899,6 +1166,28 @@ public class ImageWriteParam extends IIOParam {
      *
      * <p> The default is <code>MODE_COPY_FROM_METADATA</code>.
      *
+     * <p>
+     *  指定是否要执行压缩,如果是,则如何确定压缩参数。 <code> mode </code>参数必须是四种模式之一,解释如下：
+     * 
+     * <ul>
+     *  <li> <code> MODE_DISABLED </code>  - 如果模式设置为<code> MODE_DISABLED </code>,查询或修改压缩类型或参数的方法将抛出<code> Il
+     * legalStateException </code>压缩通常由插件支持)。
+     * 一些作家,如JPEG,通常不提供未压缩的输出。
+     * 在这种情况下,尝试将模式设置为<code> MODE_DISABLED </code>会抛出一个<code> UnsupportedOperationException </code>,并且模式不会改变
+     * 。
+     * 一些作家,如JPEG,通常不提供未压缩的输出。
+     * 
+     *  <li> <code> MODE_EXPLICIT </code>  - 使用此<code> ImageWriteParam </code>中指定的压缩类型和质量设置进行压缩。
+     * 丢弃任何先前设置的压缩参数。
+     * 
+     *  <li> <code> MODE_COPY_FROM_METADATA </code>  - 使用在传递到编写器的元数据对象中指定的任何压缩参数。
+     * 
+     *  <li> <code> MODE_DEFAULT </code>  - 使用默认压缩参数。
+     * </ul>
+     * 
+     *  <p>默认为<code> MODE_COPY_FROM_METADATA </code>。
+     * 
+     * 
      * @param mode The mode for setting compression in the output
      * stream.
      *
@@ -927,6 +1216,10 @@ public class ImageWriteParam extends IIOParam {
      * Returns the current compression mode, if compression is
      * supported.
      *
+     * <p>
+     * 返回当前压缩模式,如果支持压缩。
+     * 
+     * 
      * @return the current compression mode.
      *
      * @exception UnsupportedOperationException if the writer does not
@@ -961,6 +1254,15 @@ public class ImageWriteParam extends IIOParam {
      * instance variable if it is non-<code>null</code>, or else
      * returns <code>null</code>.
      *
+     * <p>
+     *  如果不能使用这些接口选择压缩类型,则返回可用压缩类型的列表,如数组或<code> String </code> s或<code> null </code>。返回的数组是一个副本。
+     * 
+     *  <p>如果编写器只提供单一的强制性压缩形式,则无需提供任何命名的压缩类型。仅当用户能够在不同方案之间进行有意义的选择时,才应使用命名压缩类型。
+     * 
+     *  <p>默认实现检查是否支持压缩,如果不支持,则会抛出<code> UnsupportedOperationException </code>。
+     * 否则,如果它是非<code> null </code>,则返回<code> compressionTypes </code>实例变量的克隆,否则返回<code> null </code>。
+     * 
+     * 
      * @return an array of <code>String</code>s containing the
      * (non-localized) names of available compression types, or
      * <code>null</code>.
@@ -994,6 +1296,15 @@ public class ImageWriteParam extends IIOParam {
      * If <code>compressionType</code> is <code>null</code>, the
      * instance variable is set without performing any checking.
      *
+     * <p>
+     *  将压缩类型设置为<code> getCompressionTypes </code>指示的值之一。如果传递<code> null </code>的值,则会删除任何先前的设置。
+     * 
+     *  <p>默认实现检查是否支持压缩,压缩模式是<code> MODE_EXPLICIT </code>。
+     * 如果是这样,它调用<code> getCompressionTypes </code>并检查<code> compressionType </code>是否是合法值之一。
+     * 如果是,则设置<code> compressionType </code>实例变量。
+     * 如果<code> compressionType </code>是<code> null </code>,则设置实例变量而不执行任何检查。
+     * 
+     * 
      * @param compressionType one of the <code>String</code>s returned
      * by <code>getCompressionTypes</code>, or <code>null</code> to
      * remove any previous setting.
@@ -1056,6 +1367,14 @@ public class ImageWriteParam extends IIOParam {
      * <code>MODE_EXPLICIT</code>.  If so, it returns the value of the
      * <code>compressionType</code> instance variable.
      *
+     * <p>
+     * 返回当前设置的压缩类型,如果没有设置,则返回<code> null </code>。
+     * 类型作为<code> String </code>从<code> getCompressionTypes </code>返回的类型中返回。
+     * 如果未设置压缩类型,则返回<code> null </code>。
+     * 
+     *  <p>默认实现检查是否支持压缩,压缩模式是<code> MODE_EXPLICIT </code>。如果是,则返回<code> compressionType </code>实例变量的值。
+     * 
+     * 
      * @return the current compression type as a <code>String</code>,
      * or <code>null</code> if no type is set.
      *
@@ -1086,6 +1405,13 @@ public class ImageWriteParam extends IIOParam {
      * instance variable <code>compressionQuality</code> to
      * <code>1.0F</code>.
      *
+     * <p>
+     *  删除任何先前的压缩类型和质量设置。
+     * 
+     *  <p>默认实现将实例变量<code> compressionType </code>设置为<code> null </code>,将实例变量<code> compressionQuality </code>
+     * 设置为<code> 1.0F </code> 。
+     * 
+     * 
      * @exception UnsupportedOperationException if the plug-in does not
      * support compression.
      * @exception IllegalStateException if the compression mode is not
@@ -1119,6 +1445,13 @@ public class ImageWriteParam extends IIOParam {
      * of <code>getCompressionType</code> is returned as a
      * convenience.
      *
+     * <p>
+     *  使用<code> getLocale </code>返回的<code> Locale </code>返回当前压缩类型的名称的本地化版本。
+     * 
+     *  <p>默认实现检查是否支持压缩,压缩模式是<code> MODE_EXPLICIT </code>。
+     * 如果是,如果<code> compressionType </code>是<code>非空</code>,则返回<code> getCompressionType </code>的值,。
+     * 
+     * 
      * @return a <code>String</code> containing a localized version of
      * the name of the current compression type.
      *
@@ -1159,6 +1492,18 @@ public class ImageWriteParam extends IIOParam {
      * <code>getCompressionType()</code> is non-<code>null</code>
      * <code>true</code> is returned as a convenience.
      *
+     * <p>
+     *  如果当前压缩类型提供无损压缩,则返回<code> true </code>。
+     * 如果插件只提供一个强制压缩类型,则可以在不调用<code> setCompressionType </code>的情况下调用此方法。
+     * 
+     *  <p>如果有多个压缩类型,但没有设置,则会抛出<code> IllegalStateException </code>。
+     * 
+     * <p>默认实现检查是否支持压缩,压缩模式是<code> MODE_EXPLICIT </code>。
+     * 如果是,如果<code> getCompressionTypes()</code>是<code> null </code>或<code> getCompressionType()</code>是非<code>
+     *  null </code> <code> / code>作为方便返回。
+     * <p>默认实现检查是否支持压缩,压缩模式是<code> MODE_EXPLICIT </code>。
+     * 
+     * 
      * @return <code>true</code> if the current compression type is
      * lossless.
      *
@@ -1215,6 +1560,22 @@ public class ImageWriteParam extends IIOParam {
      * <code>compressionType</code> is non-<code>null</code> it sets
      * the <code>compressionQuality</code> instance variable.
      *
+     * <p>
+     *  将压缩质量设置为<code> 0 </code>和<code> 1 </code>之间的值。
+     * 默认情况下仅支持单个压缩质量设置;写者可以提供提供更多控制的扩展版本的<code> ImageWriteParam </code>。
+     * 对于有损压缩方案,压缩质量应该控制文件大小和图像质量之间的折衷(例如,通过在写JPEG图像时选择量化表)。
+     * 对于无损方案,压缩质量可以用于控制文件大小和执行压缩所花费的时间之间的折衷(例如,通过优化行过滤器和当写入PNG图像时设置ZLIB压缩级别)。
+     * 
+     *  <p> 0.0的压缩质量设置通常被解释为"高压缩很重要",而1.0的设置通常被解释为"高图像质量是重要的"。
+     * 
+     *  <p>如果有多个压缩类型,但没有设置,则会抛出<code> IllegalStateException </code>。
+     * 
+     * <p>默认实现检查是否支持压缩,压缩模式为<code> MODE_EXPLICIT </code>。
+     * 如果是,如果<code> getCompressionTypes()</code>返回<code> null </code>或<code> compressionType </code>是非<code>
+     *  null </code> </code>实例变量。
+     * <p>默认实现检查是否支持压缩,压缩模式为<code> MODE_EXPLICIT </code>。
+     * 
+     * 
      * @param quality a <code>float</code> between <code>0</code>and
      * <code>1</code> indicating the desired quality level.
      *
@@ -1262,6 +1623,17 @@ public class ImageWriteParam extends IIOParam {
      * returns the value of the <code>compressionQuality</code>
      * instance variable.
      *
+     * <p>
+     *  返回当前压缩质量设置。
+     * 
+     *  <p>如果有多个压缩类型,但没有设置,则会抛出<code> IllegalStateException </code>。
+     * 
+     *  <p>默认实现检查是否支持压缩,压缩模式为<code> MODE_EXPLICIT </code>。
+     * 如果是,如果<code> getCompressionTypes()</code>是<code> null </code>或<code> getCompressionType()</code>是非<code>
+     *  null </code>的<code> compressionQuality </code>实例变量。
+     *  <p>默认实现检查是否支持压缩,压缩模式为<code> MODE_EXPLICIT </code>。
+     * 
+     * 
      * @return the current compression quality setting.
      *
      * @exception UnsupportedOperationException if the writer does not
@@ -1311,6 +1683,18 @@ public class ImageWriteParam extends IIOParam {
      * <code>quality</code> is within bounds, it returns
      * <code>-1.0</code>.
      *
+     * <p>
+     *  返回指示在给定质量水平的输入图像数据的每个比特的输出数据的比特数的估计的<code> float </code>。
+     * 该值通常在<code> 0 </code>和<code> 1 </code>之间,较小的值表示更多的压缩。 <code> -1.0F </code>的特殊值用于指示没有可用的估计。
+     * 
+     *  <p>如果有多个压缩类型,但没有设置,则会抛出<code> IllegalStateException </code>。
+     * 
+     * <p>默认实现检查是否支持压缩,压缩模式为<code> MODE_EXPLICIT </code>。
+     * 如果是,如果<code> getCompressionTypes()</code>是<code> null </code>或<code> getCompressionType()</code>是非<code>
+     *  null </code>质量</code>在范围内,它返回<code> -1.0 </code>。
+     * <p>默认实现检查是否支持压缩,压缩模式为<code> MODE_EXPLICIT </code>。
+     * 
+     * 
      * @param quality the quality setting whose bit rate is to be
      * queried.
      *
@@ -1386,6 +1770,27 @@ public class ImageWriteParam extends IIOParam {
      * <code>getCompressionType()</code> is non-<code>null</code>, it
      * returns <code>null</code>.
      *
+     * <p>
+     *  返回可与<code> getCompressionQualityValues </code>一起使用的<code> String </code>的数组,作为用于设置或显示压缩质量级别的用户界面的一部分
+     * 。
+     * 具有索引<code> i </code>的<code> String </code>提供<code> getCompressionQualityValues [i] </code>和<code> get
+     * CompressionQualityValues [i + 1] </code>。
+     * 注意,从<code> getCompressionQualityValues </code>返回的数组的长度总是大于从<code> getCompressionQualityDescriptions </code>
+     * 返回的长度。
+     * 
+     *  
+     * 
+     * <p>如果没有可用的描述,则返回<code> null </code>。
+     * 如果从<code> getCompressionQualityValues </code>返回<code> null </code>,此方法还必须返回<code> null </code>。
+     * 
+     *  <p>对于<code> getLocale </code>返回的<code> Locale </code>,如果它是非<code> null </code>,则应对本描述进行本地化。
+     * 
+     *  <p>如果有多个压缩类型,但没有设置,则会抛出<code> IllegalStateException </code>。
+     * 
+     *  <p>默认实现检查是否支持压缩,压缩模式为<code> MODE_EXPLICIT </code>。
+     * 如果是,如果<code> getCompressionTypes()</code>是<code> null </code>或<code> getCompressionType()</code>是非<code>
+     *  null </code> > null </code>。
+     * 
      * @return an array of <code>String</code>s containing localized
      * descriptions of the compression quality levels.
      *
@@ -1437,6 +1842,10 @@ public class ImageWriteParam extends IIOParam {
      * <code>getCompressionType()</code> is non-<code>null</code>, it
      * returns <code>null</code>.
      *
+     * <p>
+     *  <p>默认实现检查是否支持压缩,压缩模式为<code> MODE_EXPLICIT </code>。
+     * 
+     * 
      * @return an array of <code>float</code>s indicating the
      * boundaries between the compression quality levels as described
      * by the <code>String</code>s from

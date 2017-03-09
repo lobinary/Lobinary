@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,10 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
  * Lambda metafactory implementation which dynamically creates an
  * inner-class-like class per lambda callsite.
  *
+ * <p>
+ *  Lambda嗅觉实现,它为每个lambda调用点动态创建一个类内部类。
+ * 
+ * 
  * @see LambdaMetafactory
  */
 /* package */ final class InnerClassLambdaMetafactory extends AbstractValidatingLambdaMetafactory {
@@ -109,6 +114,40 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
      * General meta-factory constructor, supporting both standard cases and
      * allowing for uncommon options such as serialization or bridging.
      *
+     * <p>
+     *  private static final Unsafe UNSAFE = Unsafe.getUnsafe();
+     * 
+     *  private static final int CLASSFILE_VERSION = 52; private static final String METHOD_DESCRIPTOR_VOID 
+     * = Type.getMethodDescriptor(Type.VOID_TYPE); private static final String JAVA_LANG_OBJECT ="java / lan
+     * g / Object"; private static final String NAME_CTOR ="<init>"; private static final String NAME_FACTOR
+     * Y ="get $ Lambda";。
+     * 
+     * // Serialization support private static final String NAME_SERIALIZED_LAMBDA ="java / lang / invoke / 
+     * SerializedLambda"; private static final String NAME_NOT_SERIALIZABLE_EXCEPTION ="java / io / NotSeria
+     * lizableException"; private static final String DESCR_METHOD_WRITE_REPLACE ="()Ljava / lang / Object;"
+     * ; private static final String DESCR_METHOD_WRITE_OBJECT ="(Ljava / io / ObjectOutputStream;)V"; priva
+     * te static final String DESCR_METHOD_READ_OBJECT ="(Ljava / io / ObjectInputStream;)V"; private static
+     *  final String NAME_METHOD_WRITE_REPLACE ="writeReplace"; private static final String NAME_METHOD_READ
+     * _OBJECT ="readObject"; private static final String NAME_METHOD_WRITE_OBJECT ="writeObject"; private s
+     * tatic final String DESCR_CTOR_SERIALIZED_LAMBDA = MethodType.methodType(void.class,Class.class,String
+     * .class,String.class,String.class,int.class,String.class,String.class,String.class,String.class, Objec
+     * t []。
+     * class).toMethodDescriptorString(); private static final String DESCR_CTOR_NOT_SERIALIZABLE_EXCEPTION 
+     * = MethodType.methodType(void.class,String.class).toMethodDescriptorString(); private static final Str
+     * ing [] SER_HOSTILE_EXCEPTIONS = new String [] {NAME_NOT_SERIALIZABLE_EXCEPTION};。
+     * 
+     *  private static final String [] EMPTY_STRING_ARRAY = new String [0];
+     * 
+     *  //用于确保每个纺织类名称是唯一的private static final AtomicInteger counter = new AtomicInteger(0);
+     * 
+     *  //用于将生成的类转储到磁盘,用于调试目的private static final ProxyClassesDumper dumper;
+     * 
+     * static {final String key ="jdk.internal.lambda.dumpProxyClasses"; String path = AccessController.doPrivileged(new GetPropertyAction(key),null,new PropertyPermission(key,"read")); dumper =(null == path)? null：ProxyClassesDumper.getInstance(path); }
+     * }。
+     * 
+     *  //查看AbstractValidatingLambdaMetafactory中的上下文值private final String implMethodClassName; //包含实现的类型的名称"
+     * CC"private final String implMethodName; //实现方法名称"impl"private final String implMethodDesc; // Type de
+     * 
      * @param caller Stacked automatically by VM; represents a lookup context
      *               with the accessibility privileges of the caller.
      * @param invokedType Stacked automatically by VM; the signature of the
@@ -183,6 +222,16 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
      * of the class which the CallSite will return, otherwise, generate handles
      * which will call the class' constructor.
      *
+     * <p>
+     * scriptor for implementation methods"(I)Ljava / lang / String;" private final Class <?> implMethodRetu
+     * rnClass; //实现方法的类返回类型"Ljava / lang / String;" private final MethodType constructorType; //生成的类构造函数类型"
+     * (CC)void"private final ClassWriter cw; // ASM class writer private final String [] argNames; //构造函数参数
+     * 的生成名称private final String [] argDescs; //类型描述符的构造函数的参数private final String lambdaClassName; //生成的类"X 
+     * $$ Lambda $ 1"的生成名称。
+     * 
+     *  / **一般元工厂构造函数,支持标准情况并允许不常见的选项,如序列化或桥接。
+     * 
+     * 
      * @return a CallSite, which, when invoked, will return an instance of the
      * functional interface
      * @throws ReflectiveOperationException
@@ -242,6 +291,10 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
      * and we make no guarantees about the reflective properties of lambda
      * objects.
      *
+     * <p>
+     * 构建CallSite。生成一个类文件,实现函数接口,定义类,如果没有参数创建CallSite将返回的类的实例,否则生成将调用类的构造函数的句柄。
+     * 
+     * 
      * @return a Class which implements the functional interface
      * @throws LambdaConversionException If properly formed functional interface
      * is not found
@@ -326,6 +379,12 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
     /**
      * Generate the factory method for the class
+     * <p>
+     *  生成实现函数接口的类文件,定义并返回类。
+     * 
+     *  @implNote生成的类不包括可能存在于SAM方法上的异常的签名信息。
+     * 这是为了减少类文件的大小,是无害的,因为检查异常无论如何都被擦除,没有人会编译这个类文件,我们不保证lambda对象的反射属性。
+     * 
      */
     private void generateFactory() {
         MethodVisitor m = cw.visitMethod(ACC_PRIVATE | ACC_STATIC, NAME_FACTORY, invokedType.toMethodDescriptorString(), null, null);
@@ -346,6 +405,9 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
     /**
      * Generate the constructor for the class
+     * <p>
+     *  生成类的工厂方法
+     * 
      */
     private void generateConstructor() {
         // Generate constructor
@@ -371,6 +433,9 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
     /**
      * Generate a writeReplace method that supports serialization
+     * <p>
+     *  生成类的构造函数
+     * 
      */
     private void generateSerializationFriendlyMethods() {
         TypeConvertingMethodAdapter mv
@@ -411,6 +476,9 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
     /**
      * Generate a readObject/writeObject method that is hostile to serialization
+     * <p>
+     *  生成支持序列化的writeReplace方法
+     * 
      */
     private void generateSerializationHostileMethods() {
         MethodVisitor mv = cw.visitMethod(ACC_PRIVATE + ACC_FINAL,
@@ -443,6 +511,9 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
     /**
      * This class generates a method body which calls the lambda implementation
      * method, converting arguments, as needed.
+     * <p>
+     *  生成对串行化不友好的readObject / writeObject方法
+     * 
      */
     private class ForwardingMethodGenerator extends TypeConvertingMethodAdapter {
 

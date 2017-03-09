@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,31 @@ import java.util.stream.Collector;
  * safe and efficient parallel execution.
  *
  * <p>This implementation does not check for overflow of the sum.
+ * <p>
+ *  用于收集统计数据的状态对象,例如count,min,max,sum和average。
+ * 
+ *  <p>此类设计用于(虽然不需要){@linkplain java.util.stream streams}。
+ * 例如,您可以通过以下方式计算int流上的汇总统计信息：<pre> {@code IntSummaryStatistics stats = intStream.collect(IntSummaryStatistics :: new,IntSummaryStatistics :: accept,IntSummaryStatistics :: combine); }
+ *  </pre>。
+ *  <p>此类设计用于(虽然不需要){@linkplain java.util.stream streams}。
+ * 
+ *  <p> {@ code IntSummaryStatistics}可用作{@linkplain java.util.stream.Stream stream}的{@linkplain java.util.stream.Stream#collect(Collector)reduction}
+ * 目标。
+ * 例如：。
+ * 
+ *  <pre> {@code IntSummaryStatistics stats = people.stream().collect(Collectors.summarizingInt(Person :: getDependents));。
+ * </pre>
+ * 
+ *  这在单次通过中计算人数,以及他们的家属数量的最小值,最大值,总和和平均值。
+ * 
+ *  @implNote这个实现不是线程安全的。
+ * 但是,在并行流上使用{@link java.util.stream.Collectors#summarizingInt(java.util.function.ToIntFunction)Collectors.toIntStatistics()}
+ * 是安全的,因为并行实现{@link java.util .stream.Stream#collect Stream.collect()}提供必要的分区,隔离和合并结果,以实现安全有效的并行执行。
+ *  @implNote这个实现不是线程安全的。
+ * 
+ *  <p>此实现不检查和的溢出。
+ * 
+ * 
  * @since 1.8
  */
 public class IntSummaryStatistics implements IntConsumer {
@@ -72,12 +98,19 @@ public class IntSummaryStatistics implements IntConsumer {
      * Construct an empty instance with zero count, zero sum,
      * {@code Integer.MAX_VALUE} min, {@code Integer.MIN_VALUE} max and zero
      * average.
+     * <p>
+     * 使用零计数,零和,{@code Integer.MAX_VALUE} min,{@code Integer.MIN_VALUE}最大和零平均值构造一个空实例。
+     * 
      */
     public IntSummaryStatistics() { }
 
     /**
      * Records a new value into the summary information
      *
+     * <p>
+     *  在摘要信息中记录一个新值
+     * 
+     * 
      * @param value the input value
      */
     @Override
@@ -91,6 +124,10 @@ public class IntSummaryStatistics implements IntConsumer {
     /**
      * Combines the state of another {@code IntSummaryStatistics} into this one.
      *
+     * <p>
+     *  将另一个{@code IntSummaryStatistics}的状态合并到此状态。
+     * 
+     * 
      * @param other another {@code IntSummaryStatistics}
      * @throws NullPointerException if {@code other} is null
      */
@@ -104,6 +141,10 @@ public class IntSummaryStatistics implements IntConsumer {
     /**
      * Returns the count of values recorded.
      *
+     * <p>
+     *  返回记录的值的计数。
+     * 
+     * 
      * @return the count of values
      */
     public final long getCount() {
@@ -114,6 +155,10 @@ public class IntSummaryStatistics implements IntConsumer {
      * Returns the sum of values recorded, or zero if no values have been
      * recorded.
      *
+     * <p>
+     *  返回记录的值的总和,如果未记录任何值,则返回零。
+     * 
+     * 
      * @return the sum of values, or zero if none
      */
     public final long getSum() {
@@ -124,6 +169,10 @@ public class IntSummaryStatistics implements IntConsumer {
      * Returns the minimum value recorded, or {@code Integer.MAX_VALUE} if no
      * values have been recorded.
      *
+     * <p>
+     *  返回记录的最小值,如果未记录任何值,则返回{@code Integer.MAX_VALUE}。
+     * 
+     * 
      * @return the minimum value, or {@code Integer.MAX_VALUE} if none
      */
     public final int getMin() {
@@ -134,6 +183,10 @@ public class IntSummaryStatistics implements IntConsumer {
      * Returns the maximum value recorded, or {@code Integer.MIN_VALUE} if no
      * values have been recorded.
      *
+     * <p>
+     *  返回记录的最大值,如果未记录任何值,则返回{@code Integer.MIN_VALUE}。
+     * 
+     * 
      * @return the maximum value, or {@code Integer.MIN_VALUE} if none
      */
     public final int getMax() {
@@ -144,6 +197,10 @@ public class IntSummaryStatistics implements IntConsumer {
      * Returns the arithmetic mean of values recorded, or zero if no values have been
      * recorded.
      *
+     * <p>
+     *  返回记录的值的算术平均值,如果未记录任何值,则返回零。
+     * 
+     * 
      * @return the arithmetic mean of values, or zero if none
      */
     public final double getAverage() {
@@ -157,6 +214,9 @@ public class IntSummaryStatistics implements IntConsumer {
      * Returns a non-empty string representation of this object suitable for
      * debugging. The exact presentation format is unspecified and may vary
      * between implementations and versions.
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public String toString() {
         return String.format(

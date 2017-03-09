@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,15 +28,22 @@
  * The Helper for <tt>ValueBase</tt>.  For more information on
  * Helper files, see <a href="doc-files/generatedfiles.html#helper">
  * "Generated Files: Helper Files"</a>.<P>
+ * <p>
+ *  <tt> ValueBase </tt>的帮助器。
+ * 有关帮助文件的详细信息,请参阅<a href="doc-files/generatedfiles.html#helper">"生成的文件：帮助程序文件"</a>。<P>。
+ * 
  */
 
 /*
+/* <p>
  */
 /*
  * Licensed Materials - Property of IBM
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
  */
 
 package org.omg.CORBA;

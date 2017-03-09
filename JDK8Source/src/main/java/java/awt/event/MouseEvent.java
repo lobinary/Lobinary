@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -175,6 +176,87 @@ import sun.awt.SunToolkit;
  * in the range from {@code MOUSE_FIRST} to {@code MOUSE_LAST}-1
  * ({@code MOUSE_WHEEL} is not acceptable).
  *
+ * <p>
+ *  指示在组件中发生鼠标操作的事件。当且仅当当动作发生时鼠标光标位于组件边界的未遮挡部分上时,认为鼠标动作发生在特定组件中。
+ * 对于轻量级组件(例如Swing的组件),只有在组件上启用了鼠标事件类型时,才会将鼠标事件分派给组件。
+ * 通过向组件({@link MouseListener}或{@link MouseMotionListener})添加适当的基于鼠标的{@code EventListener}或通过调用{@link Component#enableEvents(long)}
+ * 来启用鼠标事件类型适当的掩码参数({@code AWTEvent.MOUSE_EVENT_MASK}或{@code AWTEvent.MOUSE_MOTION_EVENT_MASK})。
+ * 对于轻量级组件(例如Swing的组件),只有在组件上启用了鼠标事件类型时,才会将鼠标事件分派给组件。如果组件上尚未启用鼠标事件类型,则相应的鼠标事件将分派到启用鼠标事件类型的第一个祖先。
+ * p>
+ * 例如,如果{@code MouseListener}已添加到组件中,或{@code enableEvents(AWTEvent.MOUSE_EVENT_MASK)}已被调用,则{@code MouseListener}
+ * 定义的所有事件都将被分派到组件。
+ * 另一方面,如果尚未添加{@code MouseMotionListener}并且尚未使用{@code AWTEvent.MOUSE_MOTION_EVENT_MASK}调用{@code enableEvents}
+ * ,则不会将鼠标移动事件分派给组件。
+ * 相反,鼠标运动事件被分派到已经启用鼠标运动事件的第一祖先。
+ * <P>
+ *  此低级事件由组件对象生成,用于：
+ * <ul>
+ *  <li>鼠标事件
+ * <ul>
+ *  <li>鼠标按钮被释放<li>鼠标按钮被点击(按下并释放)<li>鼠标光标进入部件几何的未隐藏部分<li>鼠标光标退出组件几何的未遮挡部分
+ * </ul>
+ *  <li>鼠标移动事件
+ * <ul>
+ *  <li>鼠标被移动<li>鼠标被拖动
+ * </ul>
+ * </ul>
+ * <P>
+ *  一个<code> MouseEvent </code>对象被传递到每个<code> MouseListener </code>或<code> MouseAdapter </code>对象,它注册接收"
+ * 有趣的"鼠标事件使用组件的<code> addMouseListener </code>方法。
+ *  (<code> MouseAdapter </code>对象实现<code> MouseListener </code>接口。
+ * )每个这样的监听器对象获取一个包含鼠标事件的<code> MouseEvent </code>。
+ * <P>
+ * 一个<code> MouseEvent </code>对象也被传递给每一个<code> MouseMotionListener </code>或<code> MouseMotionAdapter </code>
+ * 对象,它被注册为接收鼠标运动事件,使用组件的<code> addMouseMotionListener <代码>方法。
+ *  (<code> MouseMotionAdapter </code>对象实现<code> MouseMotionListener </code>接口。
+ * )每个这样的监听器对象获取一个包含鼠标运动事件的<code> MouseEvent </code>。
+ * <P>
+ *  当点击鼠标按钮时,生成事件并发送到注册的<code> MouseListener </code>。
+ * 模态键的状态可以使用{@link InputEvent#getModifiers}和{@link InputEvent#getModifiersEx}来检索。
+ *  {@link InputEvent#getModifiers}返回的按钮掩码仅反映更改状态的按钮,而不是所有按钮的当前状态。
+ *  (注意：由于ALT_MASK / BUTTON2_MASK和META_MASK / BUTTON3_MASK的值重叠,这对于涉及修改键的鼠标事件不总是正确的。
+ * 要获取所有按钮和修饰键的状态,请使用{@link InputEvent#getModifiersEx}。已更改状态的按钮由{@link MouseEvent#getButton}返回。
+ * <P>
+ *  例如,如果按下第一个鼠标按钮,事件按以下顺序发送：
+ * <PRE>
+ * <b> </b> <b> <b> </b> <b> </b> <b>代码> MOUSE_RELEASED </code>：<code> BUTTON1_MASK </code> <code> BUTTO
+ * N1_MASK </code> <code> BUTTON1 </code> <code> MOUSE_CLICKED </code>。
+ * </PRE>
+ *  当按下多个鼠标按钮时,每次按,释放和单击都会产生一个单独的事件。
+ * <P>
+ *  例如,如果用户按<b>按钮1 </b>后跟<b>按钮2 </b>,然后按相同顺序释放它们,则会生成以下事件序列：
+ * <PRE>
+ *  <b> </b> <b> <b> </b> <b> </b> <b>代码> MOUSE_PRESSED </code>：<code> BUTTON2_MASK </code> <code> BUTTO
+ * N2_MASK </code> <code> BUTTON2 </code> <code> MOUSE_RELEASED </code>代码> MOUSE_CLICKED </code>：<code> 
+ * BUTTON1_MASK </code> <code> BUTTON1_MASK </code> <code> BUTTON1 </code>代码> MOUSE_CLICKED </code>：<code>
+ *  BUTTON2_MASK </code> <code> BUTTON2 </code>。
+ * </PRE>
+ *  如果首先释放<b>按钮2 </b>,则<code> BUTTON2_MASK </code>的<code> MOUSE_RELEASED </code> / <code> MOUSE_CLICKED 
+ * </code>对先到达, <code> BUTTON1_MASK </code>。
+ * <p>
+ * 添加了一些额外的鼠标按钮,以扩展由以下常数表示的标准按钮组：{@ code BUTTON1},{@code BUTTON2}和{@code BUTTON3}。
+ * 额外按钮没有分配的{@code BUTTONx}常数,以及它们的按钮掩码未分配{@code BUTTONx_DOWN_MASK}常量。然而,从4开始的序数可以用作按钮号(按钮id)。
+ * 通过{@link InputEvent#getMaskForButton(int)getMaskForButton(button)}方法获得的值可以用作按钮掩码。
+ * <p>
+ *  {@code MOUSE_DRAGGED}事件传递到{@code Component},其中按下鼠标按钮,直到鼠标按钮释放(无论鼠标位置是否在{@code Component}的边界内)。
+ * 由于平台相关的Drag&amp; Drop实现,{@code MOUSE_DRAGGED}事件可能不会在本地拖放操作期间传送。
+ * 
+ *  在多屏环境中,即使鼠标位置在与<code> Component </code>相关联的<code> GraphicsConfiguration </code>的边界之外,鼠标拖动事件也会传递到<code>
+ *  Component </code> >。
+ * 但是,在这种情况下,鼠标拖动事件的报告位置可能与实际鼠标位置不同：。
+ * <ul>
+ *  <li>在没有虚拟设备的多屏环境中：
+ * <br>
+ * 所报告的鼠标拖拽事件的坐标被修剪以适合与<code> Component </code>相关联的<code> GraphicsConfiguration </code>的边界内。
+ *  <li>在具有虚拟设备的多屏环境中：。
+ * <br>
+ *  所报告的鼠标拖动事件的坐标被剪切以适合与<code> Component </code>相关联的虚拟设备的边界内。
+ * </ul>
+ * <p>
+ *  如果任何特定{@code MouseEvent}实例的{@code id}参数不在{@code MOUSE_FIRST}到{@code MOUSE_LAST} -1({@code MOUSE_WHEEL}
+ * )的范围内,则会导致未指定的行为可接受)。
+ * 
+ * 
  * @author Carl Quinn
  *
  * @see MouseAdapter
@@ -191,35 +273,53 @@ public class MouseEvent extends InputEvent {
 
     /**
      * The first number in the range of ids used for mouse events.
+     * <p>
+     *  用于鼠标事件的ids范围中的第一个数字。
+     * 
      */
     public static final int MOUSE_FIRST         = 500;
 
     /**
      * The last number in the range of ids used for mouse events.
+     * <p>
+     *  用于鼠标事件的ids范围中的最后一个数字。
+     * 
      */
     public static final int MOUSE_LAST          = 507;
 
     /**
      * The "mouse clicked" event. This <code>MouseEvent</code>
      * occurs when a mouse button is pressed and released.
+     * <p>
+     *  "鼠标点击"事件。当按下并释放鼠标按钮时,会出现<code> MouseEvent </code>。
+     * 
      */
     public static final int MOUSE_CLICKED = MOUSE_FIRST;
 
     /**
      * The "mouse pressed" event. This <code>MouseEvent</code>
      * occurs when a mouse button is pushed down.
+     * <p>
+     *  "鼠标按下"事件。这个<code> MouseEvent </code>在鼠标按钮被按下时发生。
+     * 
      */
     public static final int MOUSE_PRESSED = 1 + MOUSE_FIRST; //Event.MOUSE_DOWN
 
     /**
      * The "mouse released" event. This <code>MouseEvent</code>
      * occurs when a mouse button is let up.
+     * <p>
+     *  "鼠标释放"事件。这个<code> MouseEvent </code>发生时,鼠标按钮放开。
+     * 
      */
     public static final int MOUSE_RELEASED = 2 + MOUSE_FIRST; //Event.MOUSE_UP
 
     /**
      * The "mouse moved" event. This <code>MouseEvent</code>
      * occurs when the mouse position changes.
+     * <p>
+     *  "鼠标移动"事件。当鼠标位置改变时,会出现<code> MouseEvent </code>。
+     * 
      */
     public static final int MOUSE_MOVED = 3 + MOUSE_FIRST; //Event.MOUSE_MOVE
 
@@ -227,6 +327,9 @@ public class MouseEvent extends InputEvent {
      * The "mouse entered" event. This <code>MouseEvent</code>
      * occurs when the mouse cursor enters the unobscured part of component's
      * geometry.
+     * <p>
+     *  "鼠标输入"事件。当鼠标光标进入组件几何的未遮挡部分时,会出现<code> MouseEvent </code>。
+     * 
      */
     public static final int MOUSE_ENTERED = 4 + MOUSE_FIRST; //Event.MOUSE_ENTER
 
@@ -234,42 +337,68 @@ public class MouseEvent extends InputEvent {
      * The "mouse exited" event. This <code>MouseEvent</code>
      * occurs when the mouse cursor exits the unobscured part of component's
      * geometry.
+     * <p>
+     *  "鼠标退出"事件。当鼠标光标退出组件几何体的未遮挡部分时,会发生此<code> MouseEvent </code>。
+     * 
      */
     public static final int MOUSE_EXITED = 5 + MOUSE_FIRST; //Event.MOUSE_EXIT
 
     /**
      * The "mouse dragged" event. This <code>MouseEvent</code>
      * occurs when the mouse position changes while a mouse button is pressed.
+     * <p>
+     * "鼠标拖动"事件。当鼠标按钮按下时鼠标位置改变时,会出现<code> MouseEvent </code>。
+     * 
      */
     public static final int MOUSE_DRAGGED = 6 + MOUSE_FIRST; //Event.MOUSE_DRAG
 
     /**
      * The "mouse wheel" event.  This is the only <code>MouseWheelEvent</code>.
      * It occurs when a mouse equipped with a wheel has its wheel rotated.
+     * <p>
+     *  "鼠标滚轮"事件。这是唯一的<code> MouseWheelEvent </code>。当配备有轮子的鼠标的轮子旋转时,会发生这种情况。
+     * 
+     * 
      * @since 1.4
      */
     public static final int MOUSE_WHEEL = 7 + MOUSE_FIRST;
 
     /**
      * Indicates no mouse buttons; used by {@link #getButton}.
+     * <p>
+     *  表示没有鼠标按钮;由{@link #getButton}使用。
+     * 
+     * 
      * @since 1.4
      */
     public static final int NOBUTTON = 0;
 
     /**
      * Indicates mouse button #1; used by {@link #getButton}.
+     * <p>
+     *  表示鼠标按钮#1;由{@link #getButton}使用。
+     * 
+     * 
      * @since 1.4
      */
     public static final int BUTTON1 = 1;
 
     /**
      * Indicates mouse button #2; used by {@link #getButton}.
+     * <p>
+     *  表示鼠标按钮#2;由{@link #getButton}使用。
+     * 
+     * 
      * @since 1.4
      */
     public static final int BUTTON2 = 2;
 
     /**
      * Indicates mouse button #3; used by {@link #getButton}.
+     * <p>
+     *  表示鼠标按钮#3;由{@link #getButton}使用。
+     * 
+     * 
      * @since 1.4
      */
     public static final int BUTTON3 = 3;
@@ -278,6 +407,10 @@ public class MouseEvent extends InputEvent {
      * The mouse event's x coordinate.
      * The x value is relative to the component that fired the event.
      *
+     * <p>
+     *  鼠标事件的x坐标。 x值相对于触发事件的组件。
+     * 
+     * 
      * @serial
      * @see #getX()
      */
@@ -287,6 +420,10 @@ public class MouseEvent extends InputEvent {
      * The mouse event's y coordinate.
      * The y value is relative to the component that fired the event.
      *
+     * <p>
+     *  鼠标事件的y坐标。 y值相对于触发事件的组件。
+     * 
+     * 
      * @serial
      * @see #getY()
      */
@@ -300,6 +437,10 @@ public class MouseEvent extends InputEvent {
      * Otherwise, this coordinate is relative to the coordinate system
      * associated with the Component's GraphicsConfiguration.
      *
+     * <p>
+     *  鼠标事件的x绝对坐标。在其中桌面区域可以跨越多个物理屏幕设备的虚拟设备多屏幕环境中,该坐标相对于虚拟坐标系。否则,此坐标相对于与组件的GraphicsConfiguration相关联的坐标系。
+     * 
+     * 
      * @serial
    */
     private int xAbs;
@@ -312,6 +453,10 @@ public class MouseEvent extends InputEvent {
      * Otherwise, this coordinate is relative to the coordinate system
      * associated with the Component's GraphicsConfiguration.
      *
+     * <p>
+     *  鼠标事件的y绝对坐标。在其中桌面区域可以跨越多个物理屏幕设备的虚拟设备多屏幕环境中,该坐标相对于虚拟坐标系。否则,此坐标相对于与组件的GraphicsConfiguration相关联的坐标系。
+     * 
+     * 
      * @serial
      */
     private int yAbs;
@@ -326,6 +471,13 @@ public class MouseEvent extends InputEvent {
      * For the above, the <code>clickCount</code> will be at least 1.
      * For all other events the count will be 0.
      *
+     * <p>
+     * 表示快速连续点击鼠标按钮的次数。
+     *  clickCount只对三个鼠标事件有效：<BR> <code> MOUSE_CLICKED </code>,<code> MOUSE_PRESSED </code>和<code> MOUSE_REL
+     * EASED </code>。
+     * 表示快速连续点击鼠标按钮的次数。对于上述,<code> clickCount </code>将至少为1.对于所有其他事件,计数将为0。
+     * 
+     * 
      * @serial
      * @see #getClickCount()
      */
@@ -356,6 +508,22 @@ public class MouseEvent extends InputEvent {
      * </ul>
      * If support for extended mouse buttons is {@link Toolkit#areExtraMouseButtonsEnabled()} disabled by Java
      * then the field may not contain the value larger than {@code BUTTON3}.
+     * <p>
+     *  指示鼠标按钮中的哪些(如果有)已更改状态。
+     * 
+     *  有效值的范围从0到{@link java.awt.MouseInfo#getNumberOfButtons()MouseInfo.getNumberOfButtons()}方法返回的值。
+     * 如果这些按钮存在,则此范围已包含常数{@code NOBUTTON},{@code BUTTON1},{@code BUTTON2}和{@code BUTTON3}。所以也允许使用这些常量。
+     * 例如,对于具有两个按钮的鼠标,此字段可以包含以下值：。
+     * <ul>
+     *  <li> 0({@code NOBUTTON})<li> 1({@code BUTTON1})<li> 2({@code BUTTON2})
+     * </ul>
+     *  如果鼠标有5个按钮,则此字段可能包含以下值：
+     * <ul>
+     *  <li> 0({@code BUTTON3})<li> 1({@code BUTTON1})<li> 2({@code BUTTON2} > 5
+     * </ul>
+     *  如果支持扩展鼠标按钮是{@link Toolkit#areExtraMouseButtonsEnabled()}由Java禁用,那么该字段可能不包含大于{@code BUTTON3}的值。
+     * 
+     * 
      * @serial
      * @see #getButton()
      * @see java.awt.Toolkit#areExtraMouseButtonsEnabled()
@@ -369,6 +537,11 @@ public class MouseEvent extends InputEvent {
      * no popup menu should appear.  If it is <code>true</code>
      * then a popup menu should appear.
      *
+     * <p>
+     *  用于指示弹出菜单是否应该与某些手势一起显示的属性。如果<code> popupTrigger </code> = <code> false </code>,则不会出现弹出式菜单。
+     * 如果它是<code> true </code>,那么应该会出现一个弹出菜单。
+     * 
+     * 
      * @serial
      * @see java.awt.PopupMenu
      * @see #isPopupTrigger()
@@ -377,11 +550,17 @@ public class MouseEvent extends InputEvent {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     * JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -991214153494842848L;
 
     /**
      * A number of buttons available on the mouse at the {@code Toolkit} machinery startup.
+     * <p>
+     *  在{@code Toolkit}机械启动时,鼠标上有许多按钮。
+     * 
      */
     private static int cachedNumberOfButtons;
 
@@ -404,6 +583,9 @@ public class MouseEvent extends InputEvent {
     /**
      * Initialize JNI field and method IDs for fields that may be
      *  accessed from C.
+     * <p>
+     *  初始化可从C访问的字段的JNI字段和方法ID。
+     * 
      */
     private static native void initIDs();
 
@@ -415,6 +597,11 @@ public class MouseEvent extends InputEvent {
      * Otherwise, these coordinates are relative to the coordinate system
      * associated with the Component's GraphicsConfiguration.
      *
+     * <p>
+     *  返回事件的绝对x,y位置。在其中桌面区域可以跨越多个物理屏幕设备的虚拟设备多屏幕环境中,这些坐标是相对于虚拟坐标系的。
+     * 否则,这些坐标相对于与组件的GraphicsConfiguration相关联的坐标系。
+     * 
+     * 
      * @return a <code>Point</code> object containing the absolute  x
      *  and y coordinates.
      *
@@ -433,6 +620,10 @@ public class MouseEvent extends InputEvent {
      * Otherwise, this coordinate is relative to the coordinate system
      * associated with the Component's GraphicsConfiguration.
      *
+     * <p>
+     *  返回事件的绝对水平x位置。在其中桌面区域可以跨越多个物理屏幕设备的虚拟设备多屏幕环境中,该坐标相对于虚拟坐标系。否则,此坐标相对于与组件的GraphicsConfiguration相关联的坐标系。
+     * 
+     * 
      * @return x  an integer indicating absolute horizontal position.
      *
      * @see java.awt.GraphicsConfiguration
@@ -450,6 +641,10 @@ public class MouseEvent extends InputEvent {
      * Otherwise, this coordinate is relative to the coordinate system
      * associated with the Component's GraphicsConfiguration.
      *
+     * <p>
+     *  返回事件的绝对垂直y位置。在其中桌面区域可以跨越多个物理屏幕设备的虚拟设备多屏幕环境中,该坐标相对于虚拟坐标系。否则,此坐标相对于与组件的GraphicsConfiguration相关联的坐标系。
+     * 
+     * 
      * @return y  an integer indicating absolute vertical position.
      *
      * @see java.awt.GraphicsConfiguration
@@ -481,6 +676,17 @@ public class MouseEvent extends InputEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造具有指定源组件,类型,时间,修饰符,坐标,点击计数,popupTrigger标志和按钮编号的<code> MouseEvent </code>对象。
+     * <p>
+     * 创建无效事件(例如,通过使用多个旧的_MASK或不匹配的修饰符/按钮值)会导致未指定的行为。
+     * 调用形式<tt> MouseEvent(source,id,when,modifiers,x,y,clickCount,popupTrigger,button)</tt>的行为方式与调用<tt> {@link #MouseEvent Component,int,long,int,int,int,int,int,int,boolean,int)MouseEvent}
+     * (source,id,when,modifiers,x,y,xAbs,yAbs,clickCount,popupTrigger,button)</tt >其中xAbs和yAbs定义为屏幕上源的位置加上相
+     * 对坐标x和y。
+     * 创建无效事件(例如,通过使用多个旧的_MASK或不匹配的修饰符/按钮值)会导致未指定的行为。如果源不显示,xAbs和yAbs设置为零。
+     * 如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source       The <code>Component</code> that originated the event
      * @param id              An integer indicating the type of event.
      *                     For information on allowable values, see
@@ -580,6 +786,15 @@ public class MouseEvent extends InputEvent {
      * This method throws an <code>IllegalArgumentException</code>
      * if <code>source</code> is <code>null</code>.
      *
+     * <p>
+     * 构造具有指定源组件,类型,修饰符,坐标,点击计数和popupTrigger标志的<code> MouseEvent </code>对象。
+     * 调用形式<tt> MouseEvent(source,id,when,modifiers,x,y,clickCount,popupTrigger)</tt>的行为方式与调用<tt> {@link #MouseEvent int,long,int,int,int,int,int,int,boolean,int)MouseEvent}
+     * (source,id,when,modifiers,x,y,xAbs,yAbs,clickCount,popupTrigger,MouseEvent.NOBUTTON)</tt >其中xAbs和yAbs
+     * 定义为屏幕上源的位置加上相对坐标x和y。
+     * 构造具有指定源组件,类型,修饰符,坐标,点击计数和popupTrigger标志的<code> MouseEvent </code>对象。如果源不显示,xAbs和yAbs设置为零。
+     * 如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source       The <code>Component</code> that originated the event
      * @param id              An integer indicating the type of event.
      *                     For information on allowable values, see
@@ -622,11 +837,16 @@ public class MouseEvent extends InputEvent {
 
 
     /* if the button is an extra button and it is released or clicked then in Xsystem its state
+    /* <p>
+    /* 
        is not modified. Exclude this button number from ExtModifiers mask.*/
     transient private boolean shouldExcludeButtonFromExtModifiers = false;
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public int getModifiersEx() {
         int tmpModifiers = modifiers;
@@ -652,6 +872,13 @@ public class MouseEvent extends InputEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造具有指定的源组件,类型,时间,修饰符,坐标,绝对坐标,点击计数,popupTrigger标志和按钮编号的<code> MouseEvent </code>对象。
+     * <p>
+     *  创建无效事件(例如,通过使用多个旧的_MASK或不匹配的修饰符/按钮值)会导致未指定的行为。即使将相对和绝对坐标的不一致值传递给构造函数,仍会创建鼠标事件实例,并且不会抛出任何异常。
+     * 如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source       The <code>Component</code> that originated the event
      * @param id              An integer indicating the type of event.
      *                     For information on allowable values, see
@@ -782,6 +1009,10 @@ public class MouseEvent extends InputEvent {
      * Returns the horizontal x position of the event relative to the
      * source component.
      *
+     * <p>
+     *  返回事件相对于源组件的水平x位置。
+     * 
+     * 
      * @return x  an integer indicating horizontal position relative to
      *            the component
      */
@@ -793,6 +1024,10 @@ public class MouseEvent extends InputEvent {
      * Returns the vertical y position of the event relative to the
      * source component.
      *
+     * <p>
+     * 返回事件相对于源组件的垂直y位置。
+     * 
+     * 
      * @return y  an integer indicating vertical position relative to
      *            the component
      */
@@ -803,6 +1038,10 @@ public class MouseEvent extends InputEvent {
     /**
      * Returns the x,y position of the event relative to the source component.
      *
+     * <p>
+     *  返回事件相对于源组件的x,y位置。
+     * 
+     * 
      * @return a <code>Point</code> object containing the x and y coordinates
      *         relative to the source component
      *
@@ -822,6 +1061,10 @@ public class MouseEvent extends InputEvent {
      * by adding specified <code>x</code> (horizontal) and <code>y</code>
      * (vertical) offsets.
      *
+     * <p>
+     *  通过添加指定的<code> x </code>(水平)和<code> y </code>(垂直)偏移将事件的坐标转换到新位置。
+     * 
+     * 
      * @param x the horizontal x value to add to the current x
      *          coordinate position
      * @param y the vertical y value to add to the current y
@@ -835,6 +1078,10 @@ public class MouseEvent extends InputEvent {
     /**
      * Returns the number of mouse clicks associated with this event.
      *
+     * <p>
+     *  返回与此事件相关联的鼠标点击次数。
+     * 
+     * 
      * @return integer value for the number of clicks
      */
     public int getClickCount() {
@@ -881,6 +1128,30 @@ public class MouseEvent extends InputEvent {
      * buttons. So it is not expected that this method returns anything except {@code NOBUTTON}, {@code BUTTON1},
      * {@code BUTTON2}, {@code BUTTON3}.
      *
+     * <p>
+     *  返回鼠标按钮(如果有)是否已更改状态。
+     * 返回值的范围从0到{@link java.awt.MouseInfo#getNumberOfButtons()MouseInfo.getNumberOfButtons()}值。
+     * 返回的值至少包括以下常量：。
+     * <ul>
+     *  <li> {@ code NOBUTTON} <li> {@code BUTTON1} <li> {@code BUTTON2} <li> {@code BUTTON3}
+     * </ul>
+     *  允许使用那些常量来与应用程序中返回的按钮号进行比较。例如,
+     * <pre>
+     *  if(anEvent.getButton()== MouseEvent.BUTTON1){
+     * </pre>
+     *  特别地,对于具有一个,两个或三个按钮的鼠标,该方法可以返回以下值：
+     * <ul>
+     *  <li> 0({@code NOBUTTON})<li> 1({@code BUTTON1})<li> 2({@code BUTTON2})<li> 3
+     * </ul>
+     *  大于{@code BUTTON3}的按钮编号没有常数标识符。因此,如果安装了具有五个按钮的鼠标,则此方法可能返回以下值：
+     * <ul>
+     *  <li> 0({@code BUTTON3})<li> 1({@code BUTTON1})<li> 2({@code BUTTON2} > 5
+     * </ul>
+     * <p>
+     * 注意：如果Java支持扩展鼠标按钮{@link Toolkit#areExtraMouseButtonsEnabled()disabled},则AWT事件子系统不会为扩展鼠标按钮生成鼠标事件。
+     * 因此,不希望此方法返回除{@code NOBUTTON},{@code BUTTON1},{@code BUTTON2},{@code BUTTON3}之外的任何内容。
+     * 
+     * 
      * @return one of the values from 0 to {@link java.awt.MouseInfo#getNumberOfButtons() MouseInfo.getNumberOfButtons()}
      *         if support for the extended mouse buttons is {@link Toolkit#areExtraMouseButtonsEnabled() enabled} by Java.
      *         That range includes {@code NOBUTTON}, {@code BUTTON1}, {@code BUTTON2}, {@code BUTTON3};
@@ -906,6 +1177,13 @@ public class MouseEvent extends InputEvent {
      * and <code>mouseReleased</code>
      * for proper cross-platform functionality.
      *
+     * <p>
+     *  返回此鼠标事件是否为平台的弹出菜单触发事件。 <p> <b>注意</b>：弹出菜单在不同系统上的触发方式不同。
+     * 因此,应在<code> mousePressed </code>和<code> mouseReleased </code>中检查<code> isPopupTrigger </code>以获得适当的跨平
+     * 台功能。
+     *  返回此鼠标事件是否为平台的弹出菜单触发事件。 <p> <b>注意</b>：弹出菜单在不同系统上的触发方式不同。
+     * 
+     * 
      * @return boolean, true if this event is the popup menu trigger
      *         for this platform
      */
@@ -931,6 +1209,18 @@ public class MouseEvent extends InputEvent {
      * Zero parameter means that no modifiers were passed and will
      * cause the returning an empty string.
      * <p>
+     * <p>
+     *  返回描述在事件期间关闭的修饰键和鼠标按键(例如"Shift"或"Ctrl + Shift")的<code> String </code>实例。
+     * 这些字符串可以通过更改<code> awt.properties </code>文件进行本地化。
+     * <p>
+     *  请注意,<code> InputEvent.ALT_MASK </code>和<code> InputEvent.BUTTON2_MASK </code>具有相同的值,因此为两个修饰符返回"Alt"字
+     * 符串。
+     * 同样,<code> InputEvent.META_MASK </code>和<code> InputEvent.BUTTON3_MASK </code>具有相同的值,因此返回两个修饰符的"Meta"字
+     * 符串。
+     * <p>
+     *  注意,传递负参数不正确,将导致返回一个未指定的字符串。零参数意味着没有传递修饰符,并将导致返回一个空字符串。
+     * <p>
+     * 
      * @param modifiers A modifier mask describing the modifier keys and
      *                  mouse buttons that were down during the event
      * @return string   string text description of the combination of modifier
@@ -1000,6 +1290,10 @@ public class MouseEvent extends InputEvent {
      * Returns a parameter string identifying this event.
      * This method is useful for event-logging and for debugging.
      *
+     * <p>
+     * 返回标识此事件的参数字符串。此方法对事件记录和调试非常有用。
+     * 
+     * 
      * @return a string identifying the event and its attributes
      */
     public String paramString() {
@@ -1060,6 +1354,9 @@ public class MouseEvent extends InputEvent {
     /**
      * Sets new modifiers by the old ones.
      * Also sets button.
+     * <p>
+     *  使用旧的修饰符设置新的修饰符。也设置按钮。
+     * 
      */
     private void setNewModifiers() {
         if ((modifiers & BUTTON1_MASK) != 0) {
@@ -1114,6 +1411,9 @@ public class MouseEvent extends InputEvent {
 
     /**
      * Sets old modifiers by the new ones.
+     * <p>
+     *  通过新的修饰符设置旧的修饰符。
+     * 
      */
     private void setOldModifiers() {
         if (id == MOUSE_PRESSED
@@ -1161,6 +1461,9 @@ public class MouseEvent extends InputEvent {
 
     /**
      * Sets new modifiers by the old ones.
+     * <p>
+     *  使用旧的修饰符设置新的修饰符。
+     * 
      * @serial
      */
     private void readObject(ObjectInputStream s)

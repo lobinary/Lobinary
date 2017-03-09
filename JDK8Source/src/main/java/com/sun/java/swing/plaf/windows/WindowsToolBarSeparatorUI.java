@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import static com.sun.java.swing.plaf.windows.XPStyle.Skin;
  * Draws Windows toolbar separators.
  * <p>
  *
+ * <p>
+ *  绘制Windows工具栏分隔符。
+ * <p>
+ * 
  * @author Mark Davidson
  */
 public class WindowsToolBarSeparatorUI extends BasicToolBarSeparatorUI {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -15,6 +16,11 @@ package org.omg.PortableInterceptor;
    * The ORB passes an instance of its implementation of this interface as 
    * a parameter to <code>IORInterceptor.establish_components</code>.
    *
+   * <p>
+   *  在服务器端ORB服务提供对IOR构建期间适用策略的访问以及添加组件的能力。
+   *  ORB将此接口的实现的实例作为参数传递给<code> IORInterceptor.establish_components </code>。
+   * 
+   * 
    * @see IORInterceptor
    */
 public interface IORInfoOperations 
@@ -31,6 +37,15 @@ public interface IORInfoOperations
      * If a policy for the given type is not known to the ORB, then this 
      * operation will throw <code>INV_POLICY</code> with a standard minor 
      * code of 2. 
+     * 
+     * <p>
+     *  允许ORB服务实现确定特定类型的哪个服务器端策略对正在构建的IOR有效。
+     * 当构造的IOR是针对使用POA实现的对象时,传递到创建该POA的<code> PortableServer.POA.create_POA </code>调用的所有策略对象都可通过<code> get_e
+     * ffective_policy </code>访问。
+     *  允许ORB服务实现确定特定类型的哪个服务器端策略对正在构建的IOR有效。
+     * <p>
+     *  如果给定类型的策略不为ORB所知,那么此操作将抛出具有标准次要代码2的<code> INV_POLICY </code>。
+     * 
      * 
      * @param type an int specifying the type of policy to return. 
      * @return The effective <code>CORBA.Policy</code> object of the 
@@ -49,6 +64,14 @@ public interface IORInfoOperations
      * <p>
      * Any number of components may exist with the same component ID. 
      * 
+     * <p>
+     *  便携式ORB服务实现从其<code> establish_components </code>的实现中调用<code> add_ior_component </code>以向构造IOR时将包括的集合添
+     * 加标记的组件。
+     * 此集合中的组件将包含在所有配置文件中。
+     * <p>
+     *  任何数量的组件可以存在具有相同的组件ID。
+     * 
+     * 
      * @param tagged_component The IOP.TaggedComponent to add.
      */
   void add_ior_component (org.omg.IOP.TaggedComponent tagged_component);
@@ -62,6 +85,14 @@ public interface IORInfoOperations
      * <p>
      * Any number of components may exist with the same component ID. 
      * 
+     * <p>
+     * 便携式ORB服务实现从其<code> establish_components </code>的实现中调用<code> add_ior_component_to_profile </code>以将被标记
+     * 的组件添加到在构造IOR时将包括的组中。
+     * 此集合中的组件将包含在指定的配置文件中。
+     * <p>
+     *  任何数量的组件可以存在具有相同的组件ID。
+     * 
+     * 
      * @param tagged_component The <code>IOP.TaggedComponent</code> to add. 
      * @param profile_id The profile id of the profile to 
      *     which this component will be added.
@@ -73,16 +104,25 @@ public interface IORInfoOperations
 
   /** Return the adapter manager id of the object adapter
      * that was just created and is running IOR interceptors.
+     * <p>
+     *  它刚刚创建并运行IOR拦截器。
+     * 
      */
   int manager_id ();
 
   /** Return the adapter state of the object adapter
      * that was just created and is running IOR interceptors.
+     * <p>
+     *  它刚刚创建并运行IOR拦截器。
+     * 
      */
   short state ();
 
   /** Return the object reference template of the object adapter
      * that was just created and is running IOR interceptors.
+     * <p>
+     *  它刚刚创建并运行IOR拦截器。
+     * 
      */
   org.omg.PortableInterceptor.ObjectReferenceTemplate adapter_template ();
 
@@ -92,6 +132,10 @@ public interface IORInfoOperations
      * as the value of the adapter_template attribute.  The current_factory 
      * may also be set to another object reference template inside an
      * IORInterceptor_3_0.
+     * <p>
+     *  刚刚创建的对象适配器的对象引用,并且正在运行IOR拦截器。默认情况下,此工厂与adapter_template属性的值相同。
+     *  current_factory也可以设置为IORInterceptor_3_0中的另一个对象引用模板。
+     * 
      */
   org.omg.PortableInterceptor.ObjectReferenceFactory current_factory ();
 
@@ -101,6 +145,9 @@ public interface IORInfoOperations
      * as the value of the adapter_template attribute.  The current_factory 
      * may also be set to another object reference template inside an
      * IORInterceptor_3_0.
+     * <p>
+     *  刚刚创建的对象适配器的对象引用,并且正在运行IOR拦截器。默认情况下,此工厂与adapter_template属性的值相同。
+     *  current_factory也可以设置为IORInterceptor_3_0中的另一个对象引用模板。
      */
   void current_factory (org.omg.PortableInterceptor.ObjectReferenceFactory newCurrent_factory);
 } // interface IORInfoOperations

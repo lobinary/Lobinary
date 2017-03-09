@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ToTextSAXHandler.java,v 1.3 2005/09/28 13:49:08 pvedula Exp $
+ * <p>
+ *  $ Id：ToTextSAXHandler.java,v 1.3 2005/09/28 13:49:08 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -41,11 +54,22 @@ import org.xml.sax.ext.LexicalHandler;
  * This class is only to be used internally. This class is not a public API.
  *
  * @xsl.usage internal
+ * <p>
+ *  此类将类似SAX的事件转换为xsl：输出方法"text"的SAX事件。
+ * 
+ *  这个类只能在内部使用。此类不是公共API。
+ * 
+ *  @ xsl.usage internal
+ * 
  */
 public final class ToTextSAXHandler extends ToSAXHandler
 {
     /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
+     * 
+     * 
      * @see ExtendedContentHandler#endElement(String)
      */
     public void endElement(String elemName) throws SAXException
@@ -55,6 +79,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ContentHandler#endElement(String, String, String)
      */
     public void endElement(String arg0, String arg1, String arg2)
@@ -71,6 +97,9 @@ public final class ToTextSAXHandler extends ToSAXHandler
 
         /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
+     * 
      */
     public ToTextSAXHandler(ContentHandler handler, String encoding)
     {
@@ -96,6 +125,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#getOutputFormat()
      */
     public Properties getOutputFormat()
@@ -104,6 +135,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#getOutputStream()
      */
     public OutputStream getOutputStream()
@@ -112,6 +145,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#getWriter()
      */
     public Writer getWriter()
@@ -123,12 +158,17 @@ public final class ToTextSAXHandler extends ToSAXHandler
      * Does nothing because
      * the indent attribute is ignored for text output.
      *
+     * <p>
+     *  无效,因为对文本输出忽略缩进属性。
+     * 
      */
     public void indent(int n) throws SAXException
     {
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#reset()
      */
     public boolean reset()
@@ -137,6 +177,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see DOMSerializer#serialize(Node)
      */
     public void serialize(Node node) throws IOException
@@ -144,6 +186,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see SerializationHandler#setEscaping(boolean)
      */
     public boolean setEscaping(boolean escape)
@@ -152,6 +196,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see SerializationHandler#setIndent(boolean)
      */
     public void setIndent(boolean indent)
@@ -159,6 +205,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#setOutputFormat(Properties)
      */
     public void setOutputFormat(Properties format)
@@ -166,6 +214,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#setOutputStream(OutputStream)
      */
     public void setOutputStream(OutputStream output)
@@ -173,6 +223,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see Serializer#setWriter(Writer)
      */
     public void setWriter(Writer writer)
@@ -180,6 +232,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#addAttribute(String, String, String, String, String)
      */
     public void addAttribute(
@@ -193,6 +247,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.DeclHandler#attributeDecl(String, String, String, String, String)
      */
     public void attributeDecl(
@@ -206,6 +262,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.DeclHandler#elementDecl(String, String)
      */
     public void elementDecl(String arg0, String arg1) throws SAXException
@@ -213,6 +271,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.DeclHandler#externalEntityDecl(String, String, String)
      */
     public void externalEntityDecl(String arg0, String arg1, String arg2)
@@ -221,6 +281,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.DeclHandler#internalEntityDecl(String, String)
      */
     public void internalEntityDecl(String arg0, String arg1)
@@ -229,6 +291,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ContentHandler#endPrefixMapping(String)
      */
     public void endPrefixMapping(String arg0) throws SAXException
@@ -236,6 +300,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
      */
     public void ignorableWhitespace(char[] arg0, int arg1, int arg2)
@@ -245,6 +311,10 @@ public final class ToTextSAXHandler extends ToSAXHandler
 
     /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#processingInstruction(String, String)
      */
     public void processingInstruction(String arg0, String arg1)
@@ -255,6 +325,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ContentHandler#setDocumentLocator(Locator)
      */
     public void setDocumentLocator(Locator arg0)
@@ -263,6 +335,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ContentHandler#skippedEntity(String)
      */
     public void skippedEntity(String arg0) throws SAXException
@@ -270,6 +344,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ContentHandler#startElement(String, String, String, Attributes)
      */
     public void startElement(
@@ -284,6 +360,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.LexicalHandler#endCDATA()
      */
     public void endCDATA() throws SAXException
@@ -291,6 +369,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.LexicalHandler#endDTD()
      */
     public void endDTD() throws SAXException
@@ -298,6 +378,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.LexicalHandler#startCDATA()
      */
     public void startCDATA() throws SAXException
@@ -306,6 +388,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
 
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.LexicalHandler#startEntity(String)
      */
     public void startEntity(String arg0) throws SAXException
@@ -315,6 +399,10 @@ public final class ToTextSAXHandler extends ToSAXHandler
 
     /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
+     * 
+     * 
      * @see ExtendedContentHandler#startElement(String)
      */
     public void startElement(
@@ -334,6 +422,10 @@ public final class ToTextSAXHandler extends ToSAXHandler
 
     /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#endDocument()
      */
     public void endDocument() throws SAXException {
@@ -347,6 +439,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
 
     /**
          *
+         * <p>
+         * 
      * @see ExtendedContentHandler#characters(String)
      */
     public void characters(String characters)
@@ -363,6 +457,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
 
     }
     /**
+    /* <p>
+    /* 
          * @see org.xml.sax.ContentHandler#characters(char[], int, int)
      */
     public void characters(char[] characters, int offset, int length)
@@ -378,6 +474,8 @@ public final class ToTextSAXHandler extends ToSAXHandler
 
     /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
      */
     public void addAttribute(String name, String value)
     {

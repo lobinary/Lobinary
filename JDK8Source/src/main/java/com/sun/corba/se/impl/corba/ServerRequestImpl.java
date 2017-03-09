@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.corba;
@@ -184,6 +188,10 @@ public class ServerRequestImpl extends ServerRequest {
 
     /** This is called from the ORB after the DynamicImplementation.invoke
      *  returns. Here we set the result if result() has not already been called.
+     * <p>
+     *  返回。这里我们设置结果如果result()还没有被调用。
+     * 
+     * 
      *  @return the exception if there is one (then ORB will not call
      *  marshalReplyParams()) otherwise return null.
      */
@@ -226,6 +234,8 @@ public class ServerRequestImpl extends ServerRequest {
 
     /** This is called from the ORB after the DynamicImplementation.invoke
      *  returns. Here we marshal the return value and inout/out params.
+     * <p>
+     *  返回。这里我们编组返回值和inout / out参数。
      */
     public void marshalReplyParams(OutputStream os)
     {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -72,6 +73,9 @@ public interface MarshalOutputStream {
 
     /*
      * The methods necessary to support RMI
+     * <p>
+     *  支持RMI所需的方法
+     * 
      */
     public void write_value(java.io.Serializable value);
     public void start_block();
@@ -79,6 +83,8 @@ public interface MarshalOutputStream {
 
     /*
      * Additional Methods
+     * <p>
+     *  附加方法
      */
 
     public void   putEndian();

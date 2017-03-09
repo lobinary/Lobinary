@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,9 @@ import java.io.File;
 
 /**
  * PackagePrefixChecker provides static utility methods for getting package prefixes.
+ * <p>
+ *  PackagePrefixChecker提供了用于获取包前缀的静态实用程序方法。
+ * 
  * @author M. Mortazavi
  */
 

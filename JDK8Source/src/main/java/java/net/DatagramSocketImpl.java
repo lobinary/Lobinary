@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import java.io.InterruptedIOException;
 
 /**
  * Abstract datagram and multicast socket implementation base class.
+ * <p>
+ *  抽象数据报和组播套接字实现基类。
+ * 
+ * 
  * @author Pavani Diwanji
  * @since  JDK1.1
  */
@@ -39,11 +44,17 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * The local port number.
+     * <p>
+     *  本地端口号。
+     * 
      */
     protected int localPort;
 
     /**
      * The file descriptor object.
+     * <p>
+     *  文件描述符对象。
+     * 
      */
     protected FileDescriptor fd;
 
@@ -56,6 +67,9 @@ public abstract class DatagramSocketImpl implements SocketOptions {
     /**
      * The DatagramSocket or MulticastSocket
      * that owns this impl
+     * <p>
+     *  拥有此impl的DatagramSocket或MulticastSocket
+     * 
      */
     DatagramSocket socket;
 
@@ -69,6 +83,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Creates a datagram socket.
+     * <p>
+     *  创建数据报套接字。
+     * 
+     * 
      * @exception SocketException if there is an error in the
      * underlying protocol, such as a TCP error.
      */
@@ -76,6 +94,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Binds a datagram socket to a local port and address.
+     * <p>
+     *  将数据报套接字绑定到本地端口和地址。
+     * 
+     * 
      * @param lport the local port
      * @param laddr the local address
      * @exception SocketException if there is an error in the
@@ -86,6 +108,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
     /**
      * Sends a datagram packet. The packet contains the data and the
      * destination address to send the packet to.
+     * <p>
+     *  发送数据包。数据包包含要发送数据包的数据和目标地址。
+     * 
+     * 
      * @param p the packet to be sent.
      * @exception IOException if an I/O exception occurs while sending the
      * datagram packet.
@@ -106,6 +132,13 @@ public abstract class DatagramSocketImpl implements SocketOptions {
      * packet has been received for that address, then a subsequent call to
      * send or receive may throw a PortUnreachableException.
      * Note, there is no guarantee that the exception will be thrown.
+     * <p>
+     *  将数据报套接字连接到远程目标。这将远程地址与本地套接字相关联,使得数据报可以仅被发送到该目的地并从该目的地接收。这可以被覆盖以调用本地系统连接。
+     * 
+     *  <p>如果套接字连接到的远程目标不存在,或者以其他方式不可访问,并且如果已经为该地址接收到ICMP目的地不可达报文,则后续的发送或接收调用可能会抛出PortUnreachableException。
+     * 注意,不能保证将抛出异常。
+     * 
+     * 
      * @param address the remote InetAddress to connect to
      * @param port the remote port number
      * @exception   SocketException may be thrown if the socket cannot be
@@ -116,6 +149,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Disconnects a datagram socket from its remote destination.
+     * <p>
+     *  从其远程目标断开数据报套接字。
+     * 
+     * 
      * @since 1.4
      */
     protected void disconnect() {}
@@ -123,6 +160,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
     /**
      * Peek at the packet to see who it is from. Updates the specified {@code InetAddress}
      * to the address which the packet came from.
+     * <p>
+     *  偷看包,看看它是从哪里来的。将指定的{@code InetAddress}更新为数据包来自的地址。
+     * 
+     * 
      * @param i an InetAddress object
      * @return the port number which the packet came from.
      * @exception IOException if an I/O exception occurs
@@ -137,6 +178,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
      * {@code DatagramPacket}. The data is returned,
      * but not consumed, so that a subsequent peekData/receive operation
      * will see the same data.
+     * <p>
+     * 偷看包,看看它是从哪里来的。数据被复制到指定的{@code DatagramPacket}。数据被返回,但不被消耗,因此后续的peekData / receive操作将看到相同的数据。
+     * 
+     * 
      * @param p the Packet Received.
      * @return the port number which the packet came from.
      * @exception IOException if an I/O exception occurs
@@ -148,6 +193,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
     protected abstract int peekData(DatagramPacket p) throws IOException;
     /**
      * Receive the datagram packet.
+     * <p>
+     *  接收数据包。
+     * 
+     * 
      * @param p the Packet Received.
      * @exception IOException if an I/O exception occurs
      * while receiving the datagram packet.
@@ -159,6 +208,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Set the TTL (time-to-live) option.
+     * <p>
+     *  设置TTL(存活时间)选项。
+     * 
+     * 
      * @param ttl a byte specifying the TTL value
      *
      * @deprecated use setTimeToLive instead.
@@ -172,6 +225,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
     /**
      * Retrieve the TTL (time-to-live) option.
      *
+     * <p>
+     *  检索TTL(生存时间)选项。
+     * 
+     * 
      * @exception IOException if an I/O exception occurs
      * while retrieving the time-to-live option
      * @deprecated use getTimeToLive instead.
@@ -183,6 +240,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Set the TTL (time-to-live) option.
+     * <p>
+     *  设置TTL(存活时间)选项。
+     * 
+     * 
      * @param ttl an {@code int} specifying the time-to-live value
      * @exception IOException if an I/O exception occurs
      * while setting the time-to-live option.
@@ -192,6 +253,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Retrieve the TTL (time-to-live) option.
+     * <p>
+     *  检索TTL(生存时间)选项。
+     * 
+     * 
      * @exception IOException if an I/O exception occurs
      * while retrieving the time-to-live option
      * @return an {@code int} representing the time-to-live value
@@ -201,6 +266,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Join the multicast group.
+     * <p>
+     *  加入组播组。
+     * 
+     * 
      * @param inetaddr multicast address to join.
      * @exception IOException if an I/O exception occurs
      * while joining the multicast group.
@@ -209,6 +278,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Leave the multicast group.
+     * <p>
+     *  离开组播组。
+     * 
+     * 
      * @param inetaddr multicast address to leave.
      * @exception IOException if an I/O exception occurs
      * while leaving the multicast group.
@@ -217,6 +290,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Join the multicast group.
+     * <p>
+     *  加入组播组。
+     * 
+     * 
      * @param mcastaddr address to join.
      * @param netIf specifies the local interface to receive multicast
      *        datagram packets
@@ -230,6 +307,10 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Leave the multicast group.
+     * <p>
+     *  离开组播组。
+     * 
+     * 
      * @param mcastaddr address to leave.
      * @param netIf specified the local interface to leave the group at
      * @throws IOException if an I/O exception occurs while leaving
@@ -242,11 +323,18 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Close the socket.
+     * <p>
+     *  关闭套接字。
+     * 
      */
     protected abstract void close();
 
     /**
      * Gets the local port.
+     * <p>
+     *  获取本地端口。
+     * 
+     * 
      * @return an {@code int} representing the local port value
      */
     protected int getLocalPort() {
@@ -305,6 +393,9 @@ public abstract class DatagramSocketImpl implements SocketOptions {
 
     /**
      * Gets the datagram socket file descriptor.
+     * <p>
+     *  获取数据报套接字文件描述符。
+     * 
      * @return a {@code FileDescriptor} object representing the datagram socket
      * file descriptor
      */

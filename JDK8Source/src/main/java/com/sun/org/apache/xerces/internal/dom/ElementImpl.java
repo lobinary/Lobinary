@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -46,6 +56,15 @@ import com.sun.org.apache.xerces.internal.util.URI;
  * <P>
  * ElementImpl does not support Namespaces. ElementNSImpl, which inherits from
  * it, does.
+ * <p>
+ *  元素表示文档的大多数"标记"和结构。它们包含元素本身的数据(元素名称和属性)和任何包含的节点,包括文档文本(作为子节点)。
+ * <P>
+ *  元素可以具有与它们相关联的属性;这个API是在Node中定义的,但是函数在这里实现。一般来说,XML应用程序应该捕获属性为节点,因为它们可能包含实体引用,因此是一个相当复杂的子树。
+ *  HTML用户将处理简单的字符串值,并提供方便的方法来处理字符串。
+ * <P>
+ *  ElementImpl不支持命名空间。 ElementNSImpl,它继承它。
+ * 
+ * 
  * @see ElementNSImpl
  *
  * @xerces.internal
@@ -109,6 +128,9 @@ public class ElementImpl
     /**
      * A short integer indicating what type of node this is. The named
      * constants for this value are defined in the org.w3c.dom.Node interface.
+     * <p>
+     * 指示这是什么类型的节点的短整数。此值的命名常量在org.w3c.dom.Node接口中定义。
+     * 
      */
     public short getNodeType() {
         return Node.ELEMENT_NODE;
@@ -116,6 +138,9 @@ public class ElementImpl
 
     /**
      * Returns the element name
+     * <p>
+     *  返回元素名称
+     * 
      */
     public String getNodeName() {
         if (needsSyncData()) {
@@ -129,6 +154,9 @@ public class ElementImpl
      * from Node rather than specified on Element; in fact only Elements will
      * ever have Attributes, but they want to allow folks to "blindly" operate
      * on the tree as a set of Nodes.
+     * <p>
+     *  将所有属性检索为一组。请注意,此API是继承自Node,而不是在Element上指定;实际上只有元素将有属性,但他们希望允许人们"盲目"作为一组节点在树上操作。
+     * 
      */
     public NamedNodeMap getAttributes() {
 
@@ -147,6 +175,10 @@ public class ElementImpl
      * will not be copied unless the "deep" flag is true, but Attributes
      * are <i>always</i> replicated.
      *
+     * <p>
+     *  返回此元素的副本。注意,除非"deep"标志为真,但属性<i>始终</i>被复制,否则不会复制其子代。
+     * 
+     * 
      * @see org.w3c.dom.Node#cloneNode(boolean)
      */
     public Node cloneNode(boolean deep) {
@@ -163,6 +195,9 @@ public class ElementImpl
    /**
      * DOM Level 3 WD - Experimental.
      * Retrieve baseURI
+     * <p>
+     *  DOM 3级WD  - 实验。检索baseURI
+     * 
      */
     public String getBaseURI() {
 
@@ -228,6 +263,9 @@ public class ElementImpl
     /**
      * NON-DOM
      * set the ownerDocument of this node, its children, and its attributes
+     * <p>
+     *  NON-DOM设置此节点的ownerDocument,其子代及其属性
+     * 
      */
     void setOwnerDocument(CoreDocumentImpl doc) {
         super.setOwnerDocument(doc);
@@ -248,6 +286,11 @@ public class ElementImpl
      * Note: Attributes may contain complex node trees. This method
      * returns the "flattened" string obtained from Attribute.getValue().
      * If you need the structure information, see getAttributeNode().
+     * <p>
+     *  按名称查找单个属性。返回Attribute的字符串值或空字符串(NOT null！),以指示名称未映射到当前定义的属性。
+     * <p>
+     *  注意：属性可能包含复杂节点树。此方法返回从Attribute.getValue()获取的"flattened"字符串。如果需要结构信息,请参阅getAttributeNode()。
+     * 
      */
     public String getAttribute(String name) {
 
@@ -269,6 +312,11 @@ public class ElementImpl
      * XML, where the string rendering may not be sufficient information.
      * <p>
      * If no matching attribute is available, returns null.
+     * <p>
+     *  按名称查找单个属性。返回Attribute节点,因此它的完整子树是可用的。这在XML中可能很重要,其中字符串呈现可能不是足够的信息。
+     * <p>
+     *  如果没有匹配属性可用,则返回null。
+     * 
      */
     public Attr getAttributeNode(String name) {
 
@@ -292,6 +340,12 @@ public class ElementImpl
      * change as the DOM changes, and alterations made to the NodeList
      * will be reflected in the DOM.
      *
+     * <p>
+     *  返回所有派生节点(子节点,孙子节点等)的NodeList,这些节点是Elements并且具有指定的标记名称。
+     * <p>
+     * 注意：NodeList是DOM的"实时"视图。其内容将随着DOM更改而改变,对NodeList所做的更改将反映在DOM中。
+     * 
+     * 
      * @param tagname The type of element to gather. To obtain a list of
      * all elements no matter what their names, use the wild-card tag
      * name "*".
@@ -308,6 +362,11 @@ public class ElementImpl
      * <p>
      * This is case-preserving in XML. HTML should uppercasify it on the
      * way in.
+     * <p>
+     *  返回元素的名称。注意,Element.nodeName()被定义为也返回标签名称。
+     * <p>
+     *  这是XML中的情况保留。 HTML应该在进入时高亮显示它。
+     * 
      */
     public String getTagName() {
         if (needsSyncData()) {
@@ -329,6 +388,14 @@ public class ElementImpl
      * As of PR-DOM-Level-1-19980818, CDATA -- despite being a subclass of
      * Text -- is considered "markup" and will _not_ be merged either with
      * normal Text or with other CDATASections.
+     * <p>
+     *  在"正常形式"(从源文件读取)中,将不会有两个文本孩子连续。但DOM用户可能在操作文档的过程中创建连续的Text节点。规范化遍历子树并合并相邻的文本,好像DOM已经被写出并再次读回一样。
+     * 这简化了可能想要假定文档是标准形式的更高级别函数的实现。
+     * <p>
+     *  要标准化文档,请对其顶级Element子项进行标准化。
+     * <p>
+     *  从PR-DOM-Level-1-19980818开始,尽管CDATA是Text的子类,但CDATA被认为是"标记",并且不会与正常文本或其他CDATASections合并。
+     * 
      */
     public void normalize() {
         // No need to normalize if already normalized.
@@ -399,6 +466,14 @@ public class ElementImpl
      * existed -- unlike removeAttributeNode, which will throw a not-found
      * exception in that case.
      *
+     * <p>
+     *  从此元素中删除命名属性。如果移除的属性具有默认值,则立即被替换。
+     * <P>
+     *  默认逻辑实际上是在NamedNodeMapImpl中实现的。 PR-DOM-Level-1-19980818没有完全寻址DTD,因此这种行为在将来的版本中可能会改变。 ?????
+     * <P>
+     *  请注意,即使此名称不存在属性,此调用"成功" - 与removeAttributeNode不同,在这种情况下,将抛出一个未找到的异常。
+     * 
+     * 
      * @throws DOMException(NO_MODIFICATION_ALLOWED_ERR) if the node is
      * readonly.
      */
@@ -432,6 +507,13 @@ public class ElementImpl
      * DOMException.  If you really want to remove an attribute by name,
      * use removeAttribute().
      *
+     * <p>
+     * 删除指定的属性/值对。如果删除的属性具有默认值,则会立即替换。
+     * <p>
+     *  注意：特别删除此节点 - 不是具有此名称的节点,也不是具有这些内容的节点。如果传入的特定Attribute对象没有存储在这个Element中,我们抛出一个DOMException。
+     * 如果真的要按名称删除属性,请使用removeAttribute()。
+     * 
+     * 
      * @return the Attribute object that was removed.
      * @throws DOMException(NOT_FOUND_ERR) if oldattr is not an attribute of
      * this Element.
@@ -472,6 +554,14 @@ public class ElementImpl
      * explicit value rather than inherited from the DTD as a default.
      * Again, setAttributeNode can be used to achieve other results.
      *
+     * <p>
+     *  添加新的名称/值对,或替换具有该名称的现有属性的值。
+     * 
+     *  注意：此方法仅支持最简单的属性,其值为包含在单个Text节点中的字符串。如果您想声明一个更复杂的值(XML允许,尽管HTML不允许),请参见setAttributeNode()。
+     * 
+     *  该属性是使用specified = true创建的,这意味着它是一个显式值,而不是作为默认值从DTD继承。同样,setAttributeNode可以用来实现其他结果。
+     * 
+     * 
      * @throws DOMException(INVALID_NAME_ERR) if the name is not acceptable.
      * (Attribute factory will do that test for us.)
      *
@@ -520,6 +610,12 @@ public class ElementImpl
      * arbitrarily complex tree structure -- in particular, those which
      * had entity references mixed into their text.
      *
+     * <p>
+     *  添加新的属性/值对,或用该名称替换现有属性的值。
+     * <P>
+     *  此方法允许您添加已构建的属性,因此避免了简单setAttribute()调用的限制。它可以处理具有任意复杂的树结构的属性值 - 特别是那些具有混合到其文本中的实体引用的属性值。
+     * 
+     * 
      * @throws DOMException(INUSE_ATTRIBUTE_ERR) if the Attribute object
      * has already been assigned to another Element.
      */
@@ -562,6 +658,12 @@ public class ElementImpl
      *
      * Retrieves an attribute value by local name and namespace URI.
      *
+     * <p>
+     *  在DOM级别2中引入。<p>
+     * 
+     *  通过本地名称和命名空间URI检索属性值。
+     * 
+     * 
      * @param namespaceURI
      *                      The namespace URI of the attribute to
      *                      retrieve.
@@ -605,6 +707,18 @@ public class ElementImpl
      *  build the appropriate subtree, and use setAttributeNodeNS or
      *  setAttributeNode to assign it as the value of an attribute.
      *
+     * <p>
+     *  在DOM级别2中引入。<p>
+     * 
+     * 添加新属性。
+     * 如果给定的namespaceURI为null或空字符串,并且qualifiedName的前缀为"xml",则新属性将绑定到预定义的命名空间"http://www.w3.org/XML/1998/name
+     * space"[Namespaces 如果元素上已存在具有相同本地名称和命名空间URI的属性,则其前缀将更改为qualifiedName的前缀部分,并将其值更改为value参数。
+     * 添加新属性。此值是一个简单的字符串,它不会被解析,因为它正在设置。所以任何标记(例如被识别为实体引用的语法)被当作文本文本,并且当它被写出时需要被实现适当地转义。
+     * 为了分配包含实体引用的属性值,用户必须创建一个Attr节点以及任何Text和EntityReference节点,构建相应的子树,并使用setAttributeNodeNS或setAttributeNod
+     * e将其指定为属性的值。
+     * 添加新属性。此值是一个简单的字符串,它不会被解析,因为它正在设置。所以任何标记(例如被识别为实体引用的语法)被当作文本文本,并且当它被写出时需要被实现适当地转义。
+     * 
+     * 
      * @param namespaceURI      The namespace URI of the attribute to create
      *                          or alter.
      * @param qualifiedName     The qualified name of the attribute to create or
@@ -708,6 +822,12 @@ public class ElementImpl
      * The replacing attribute has the same namespace URI and local name,
      * as well as the original prefix.<p>
      *
+     * <p>
+     *  在DOM级别2中引入。<p>
+     * 
+     *  通过本地名称和命名空间URI删除属性。如果被删除的属性有一个默认值,它会立即被替换。 replacement属性具有相同的命名空间URI和本地名称,以及原始前缀。<p>
+     * 
+     * 
      * @param namespaceURI  The namespace URI of the attribute to remove.
      *
      * @param localName     The local name of the attribute to remove.
@@ -737,6 +857,10 @@ public class ElementImpl
     /**
      * Retrieves an Attr node by local name and namespace URI.
      *
+     * <p>
+     *  通过本地名称和命名空间URI检索Attr节点。
+     * 
+     * 
      * @param namespaceURI  The namespace URI of the attribute to
      *                      retrieve.
      * @param localName     The local name of the attribute to retrieve.
@@ -764,6 +888,12 @@ public class ElementImpl
      * namespace URI is already present in the element, it is replaced
      * by the new one.
      *
+     * <p>
+     *  在DOM级别2中引入。<p>
+     * 
+     *  添加新属性。如果具有该本地名称和命名空间URI的属性已经存在于元素中,则它将被新的替换。
+     * 
+     * 
      * @param Attr      The Attr node to add to the attribute list. When
      *                  the Node has no namespaceURI, this method behaves
      *                  like setAttributeNode.
@@ -814,6 +944,9 @@ public class ElementImpl
 
     /**
       * NON-DOM: sets attribute node for this element
+      * <p>
+      * NON-DOM：设置此元素的属性节点
+      * 
       */
     protected int setXercesAttributeNode (Attr attr){
 
@@ -830,6 +963,9 @@ public class ElementImpl
 
     /**
       * NON-DOM: get inded of an attribute
+      * <p>
+      *  NON-DOM：获取一个属性
+      * 
       */
     protected int getXercesAttribute(String namespaceURI, String localName){
 
@@ -845,6 +981,9 @@ public class ElementImpl
 
     /**
      * Introduced in DOM Level 2.
+     * <p>
+     *  在DOM级别2中引入。
+     * 
      */
     public boolean hasAttributes() {
         if (needsSyncData()) {
@@ -855,6 +994,9 @@ public class ElementImpl
 
     /**
      * Introduced in DOM Level 2.
+     * <p>
+     *  在DOM级别2中引入。
+     * 
      */
     public boolean hasAttribute(String name) {
         return getAttributeNode(name) != null;
@@ -862,6 +1004,9 @@ public class ElementImpl
 
     /**
      * Introduced in DOM Level 2.
+     * <p>
+     *  在DOM级别2中引入。
+     * 
      */
     public boolean hasAttributeNS(String namespaceURI, String localName) {
         return getAttributeNodeNS(namespaceURI, localName) != null;
@@ -874,6 +1019,12 @@ public class ElementImpl
      * namespace URI in the order in which they would be encountered in a
      * preorder traversal of the Document tree, starting from this node.
      *
+     * <p>
+     *  在DOM级别2中引入。<p>
+     * 
+     *  返回具有给定本地名称和命名空间URI的所有元素的NodeList,按照从文档树开始的预先遍历遍历该节点的顺序返回它们。
+     * 
+     * 
      * @param namespaceURI The namespace URI of the elements to match
      *                     on. The special value "*" matches all
      *                     namespaces. When it is null or an empty
@@ -894,6 +1045,9 @@ public class ElementImpl
      * DOM Level 3 WD- Experimental.
      * Override inherited behavior from NodeImpl and ParentNode to check on
      * attributes
+     * <p>
+     *  DOM级别3。覆盖从NodeImpl和ParentNode继承的行为以检查属性
+     * 
      */
     public boolean isEqualNode(Node arg) {
         if (!super.isEqualNode(arg)) {
@@ -932,6 +1086,9 @@ public class ElementImpl
 
     /**
      * DOM Level 3: register the given attribute node as an ID attribute
+     * <p>
+     *  DOM级别3：将给定属性节点注册为ID属性
+     * 
      */
     public void setIdAttributeNode(Attr at, boolean makeId) {
         if (needsSyncData()) {
@@ -961,6 +1118,9 @@ public class ElementImpl
 
     /**
      * DOM Level 3: register the given attribute node as an ID attribute
+     * <p>
+     *  DOM级别3：将给定属性节点注册为ID属性
+     * 
      */
     public void setIdAttribute(String name, boolean makeId) {
         if (needsSyncData()) {
@@ -1000,6 +1160,9 @@ public class ElementImpl
 
     /**
      * DOM Level 3: register the given attribute node as an ID attribute
+     * <p>
+     *  DOM级别3：将给定属性节点注册为ID属性
+     * 
      */
     public void setIdAttributeNS(String namespaceURI, String localName,
                                     boolean makeId) {
@@ -1042,6 +1205,8 @@ public class ElementImpl
    }
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.TypeInfo#getTypeName()
      */
      public String getTypeName() {
@@ -1049,6 +1214,8 @@ public class ElementImpl
      }
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.TypeInfo#getTypeNamespace()
      */
     public String getTypeNamespace() {
@@ -1060,6 +1227,11 @@ public class ElementImpl
      * Checks if a type is derived from another by restriction. See:
      * http://www.w3.org/TR/DOM-Level-3-Core/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     *  在DOM级别3中引入。<p>检查类型是否通过限制从另一个派生。
+     * 参见：http://www.w3.org/TR/DOM-Level-3-Core/core.html#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *        The namspace of the ancestor type declaration
      * @param ancestorName
@@ -1079,6 +1251,10 @@ public class ElementImpl
 
         /**
          * Method getSchemaTypeInfo.
+         * <p>
+         *  方法getSchemaTypeInfo。
+         * 
+         * 
          * @return TypeInfo
          */
     public TypeInfo getSchemaTypeInfo(){
@@ -1094,6 +1270,9 @@ public class ElementImpl
 
     /**
      * NON-DOM: Subclassed to flip the attributes' readonly switch as well.
+     * <p>
+     *  NON-DOM：子类翻转属性的readonly开关。
+     * 
      * @see NodeImpl#setReadOnly
      */
     public void setReadOnly(boolean readOnly, boolean deep) {

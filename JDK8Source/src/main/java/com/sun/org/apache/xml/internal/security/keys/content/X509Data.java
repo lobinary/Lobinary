@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.keys.content;
 
@@ -48,6 +57,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Constructor X509Data
      *
+     * <p>
+     *  构造函数X509Data
+     * 
+     * 
      * @param doc
      */
     public X509Data(Document doc) {
@@ -59,6 +72,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Constructor X509Data
      *
+     * <p>
+     *  构造函数X509Data
+     * 
+     * 
      * @param element
      * @param baseURI
      * @throws XMLSecurityException
@@ -82,6 +99,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addIssuerSerial
      *
+     * <p>
+     *  方法addIssuerSerial
+     * 
+     * 
      * @param X509IssuerName
      * @param X509SerialNumber
      */
@@ -92,6 +113,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addIssuerSerial
      *
+     * <p>
+     *  方法addIssuerSerial
+     * 
+     * 
      * @param X509IssuerName
      * @param X509SerialNumber
      */
@@ -102,6 +127,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addIssuerSerial
      *
+     * <p>
+     *  方法addIssuerSerial
+     * 
+     * 
      * @param X509IssuerName
      * @param X509SerialNumber
      */
@@ -112,6 +141,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param xmlX509IssuerSerial
      */
     public void add(XMLX509IssuerSerial xmlX509IssuerSerial) {
@@ -123,6 +156,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addSKI
      *
+     * <p>
+     *  方法addSKI
+     * 
+     * 
      * @param skiBytes
      */
     public void addSKI(byte[] skiBytes) {
@@ -132,6 +169,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addSKI
      *
+     * <p>
+     *  方法addSKI
+     * 
+     * 
      * @param x509certificate
      * @throws XMLSecurityException
      */
@@ -143,6 +184,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param xmlX509SKI
      */
     public void add(XMLX509SKI xmlX509SKI) {
@@ -153,6 +198,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addSubjectName
      *
+     * <p>
+     *  方法addSubjectName
+     * 
+     * 
      * @param subjectName
      */
     public void addSubjectName(String subjectName) {
@@ -162,6 +211,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addSubjectName
      *
+     * <p>
+     *  method addSubjectName
+     * 
+     * 
      * @param x509certificate
      */
     public void addSubjectName(X509Certificate x509certificate) {
@@ -171,6 +224,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param xmlX509SubjectName
      */
     public void add(XMLX509SubjectName xmlX509SubjectName) {
@@ -181,6 +238,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addCertificate
      *
+     * <p>
+     *  方法addCertificate
+     * 
+     * 
      * @param x509certificate
      * @throws XMLSecurityException
      */
@@ -192,6 +253,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addCertificate
      *
+     * <p>
+     *  方法addCertificate
+     * 
+     * 
      * @param x509certificateBytes
      */
     public void addCertificate(byte[] x509certificateBytes) {
@@ -201,6 +266,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param xmlX509Certificate
      */
     public void add(XMLX509Certificate xmlX509Certificate) {
@@ -211,6 +280,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addCRL
      *
+     * <p>
+     *  方法addCRL
+     * 
+     * 
      * @param crlBytes
      */
     public void addCRL(byte[] crlBytes) {
@@ -220,6 +293,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param xmlX509CRL
      */
     public void add(XMLX509CRL xmlX509CRL) {
@@ -230,6 +307,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addDigest
      *
+     * <p>
+     *  方法addDigest
+     * 
+     * 
      * @param x509certificate
      * @param algorithmURI
      * @throws XMLSecurityException
@@ -242,6 +323,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addDigest
      *
+     * <p>
+     *  方法addDigest
+     * 
+     * 
      * @param x509CertificateDigestByes
      * @param algorithmURI
      */
@@ -252,6 +337,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param XMLX509Digest
      */
     public void add(XMLX509Digest xmlX509Digest) {
@@ -262,6 +351,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method addUnknownElement
      *
+     * <p>
+     *  方法addUnknownElement
+     * 
+     * 
      * @param element
      */
     public void addUnknownElement(Element element) {
@@ -272,6 +365,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method lengthIssuerSerial
      *
+     * <p>
+     *  方法lengthIssuerSerial
+     * 
+     * 
      * @return the number of IssuerSerial elements in this X509Data
      */
     public int lengthIssuerSerial() {
@@ -281,6 +378,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method lengthSKI
      *
+     * <p>
+     *  方法长度SKI
+     * 
+     * 
      * @return the number of SKI elements in this X509Data
      */
     public int lengthSKI() {
@@ -290,6 +391,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method lengthSubjectName
      *
+     * <p>
+     *  方法lengthSubjectName
+     * 
+     * 
      * @return the number of SubjectName elements in this X509Data
      */
     public int lengthSubjectName() {
@@ -299,6 +404,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method lengthCertificate
      *
+     * <p>
+     *  方法lengthCertificate
+     * 
+     * 
      * @return the number of Certificate elements in this X509Data
      */
     public int lengthCertificate() {
@@ -308,6 +417,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method lengthCRL
      *
+     * <p>
+     *  方法lengthCRL
+     * 
+     * 
      * @return the number of CRL elements in this X509Data
      */
     public int lengthCRL() {
@@ -317,6 +430,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method lengthDigest
      *
+     * <p>
+     *  方法lengthDigest
+     * 
+     * 
      * @return the number of X509Digest elements in this X509Data
      */
     public int lengthDigest() {
@@ -326,6 +443,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method lengthUnknownElement
      *
+     * <p>
+     *  方法lengthUnknownElement
+     * 
+     * 
      * @return the number of UnknownElement elements in this X509Data
      */
     public int lengthUnknownElement() {
@@ -345,6 +466,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method itemIssuerSerial
      *
+     * <p>
+     *  方法itemIssuerSerial
+     * 
+     * 
      * @param i
      * @return the X509IssuerSerial, null if not present
      * @throws XMLSecurityException
@@ -363,6 +488,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method itemSKI
      *
+     * <p>
+     *  方法项目SKI
+     * 
+     * 
      * @param i
      * @return the X509SKI, null if not present
      * @throws XMLSecurityException
@@ -382,6 +511,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method itemSubjectName
      *
+     * <p>
+     * 方法itemSubjectName
+     * 
+     * 
      * @param i
      * @return the X509SubjectName, null if not present
      * @throws XMLSecurityException
@@ -401,6 +534,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method itemCertificate
      *
+     * <p>
+     *  方法itemCertificate
+     * 
+     * 
      * @param i
      * @return the X509Certifacte, null if not present
      * @throws XMLSecurityException
@@ -420,6 +557,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method itemCRL
      *
+     * <p>
+     *  方法项CRL
+     * 
+     * 
      * @param i
      * @return the X509CRL, null if not present
      * @throws XMLSecurityException
@@ -439,6 +580,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method itemDigest
      *
+     * <p>
+     *  方法项Digest
+     * 
+     * 
      * @param i
      * @return the X509Digest, null if not present
      * @throws XMLSecurityException
@@ -458,6 +603,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method itemUnknownElement
      *
+     * <p>
+     *  方法itemUnknownElement
+     * 
+     * 
      * @param i
      * @return the Unknown Element at i
      * TODO implement
@@ -472,6 +621,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method containsIssuerSerial
      *
+     * <p>
+     *  方法包含IssuerSerial
+     * 
+     * 
      * @return true if this X509Data contains a IssuerSerial
      */
     public boolean containsIssuerSerial() {
@@ -481,6 +634,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method containsSKI
      *
+     * <p>
+     *  方法包含SKI
+     * 
+     * 
      * @return true if this X509Data contains a SKI
      */
     public boolean containsSKI() {
@@ -490,6 +647,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method containsSubjectName
      *
+     * <p>
+     *  方法containsSubjectName
+     * 
+     * 
      * @return true if this X509Data contains a SubjectName
      */
     public boolean containsSubjectName() {
@@ -499,6 +660,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method containsCertificate
      *
+     * <p>
+     *  方法containsCertificate
+     * 
+     * 
      * @return true if this X509Data contains a Certificate
      */
     public boolean containsCertificate() {
@@ -508,6 +673,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method containsDigest
      *
+     * <p>
+     *  方法containsDigest
+     * 
+     * 
      * @return true if this X509Data contains an X509Digest
      */
     public boolean containsDigest() {
@@ -517,6 +686,10 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method containsCRL
      *
+     * <p>
+     *  方法包含CRL
+     * 
+     * 
      * @return true if this X509Data contains a CRL
      */
     public boolean containsCRL() {
@@ -526,6 +699,9 @@ public class X509Data extends SignatureElementProxy implements KeyInfoContent {
     /**
      * Method containsUnknownElement
      *
+     * <p>
+     *  方法containsUnknownElement
+     * 
      * @return true if this X509Data contains an UnknownElement
      */
     public boolean containsUnknownElement() {

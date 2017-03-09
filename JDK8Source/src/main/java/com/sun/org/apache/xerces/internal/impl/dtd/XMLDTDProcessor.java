@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,33 @@
  * Business Machines, Inc., http://www.apache.org.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)1999-2002 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得将"Xerces"和"Apache Software Foundation"名称用于支持或推广从本软件衍生的产品。如需书面许可,请联系apache@apache.org。
+ * 
+ *  未经Apache软件基金会事先书面许可,从本软件派生的产品可能不会被称为"Apache",也不可能出现在他们的名字中。
+ * 
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款,最初是基于软件版权(c)1999,国际商业机器公司,http://www.apache.org。
+ * 有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dtd;
@@ -111,6 +139,20 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource;
  *
  * @xerces.internal
  *
+ * <p>
+ *  DTD处理器。处理器实现DTD过滤器：从DTD扫描器接收DTD事件;验证内容和结构;如果适用,建立语法;以及向所述DTDHandler通知从所述过程产生的信息。
+ * <p>
+ *  此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ * <li> http://xml.org/sax/features/namespaces </li> <li> http://apache.org/xml/properties/internal/symb
+ * ol-table </li> <li> http：/ /apache.org/xml/properties/internal/error-reporter </li> <li> http://apach
+ * e.org/xml/properties/internal/grammar-pool </li> <li> http：// apache .org / xml / properties / intern
+ * al / datatype-validator-factory </li>。
+ * </ul>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neil Graham, IBM
  *
  * @version $Id: XMLDTDProcessor.java,v 1.5 2010-11-01 04:39:42 joehw Exp $
@@ -323,6 +365,10 @@ public class XMLDTDProcessor
      * about any features and properties that affect the operation of the
      * component.
      *
+     * <p>
+     *  复位组件。组件可以向组件管理器查询影响组件操作的任何特征和属性。
+     * 
+     * 
      * @param componentManager The component manager.
      *
      * @throws SAXException Thrown by component on finitialization error.
@@ -405,6 +451,9 @@ public class XMLDTDProcessor
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的要素标识符列表。如果此组件未识别任何功能,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedFeatures() {
         return (String[])(RECOGNIZED_FEATURES.clone());
@@ -417,6 +466,12 @@ public class XMLDTDProcessor
      * <strong>Note:</strong> Components should silently ignore features
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置要素的状态。当特性改变状态时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应默认忽略不影响组件操作的功能。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -433,6 +488,9 @@ public class XMLDTDProcessor
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符列表。如果此组件未识别任何属性,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedProperties() {
         return (String[])(RECOGNIZED_PROPERTIES.clone());
@@ -445,6 +503,12 @@ public class XMLDTDProcessor
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置属性的值。当属性更改值时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应静默忽略不影响组件操作的属性。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *
@@ -462,6 +526,10 @@ public class XMLDTDProcessor
      * component does not want to report a default value for this
      * feature.
      *
+     * <p>
+     *  返回特征的默认状态,如果此组件不希望报告此特征的默认值,则返回null。
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @since Xerces 2.2.0
@@ -480,6 +548,10 @@ public class XMLDTDProcessor
      * component does not want to report a default value for this
      * property.
      *
+     * <p>
+     * 返回属性的默认状态,如果此组件不希望报告此属性的默认值,则返回null。
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @since Xerces 2.2.0
@@ -500,6 +572,10 @@ public class XMLDTDProcessor
     /**
      * Sets the DTD handler.
      *
+     * <p>
+     *  设置DTD处理程序。
+     * 
+     * 
      * @param dtdHandler The DTD handler.
      */
     public void setDTDHandler(XMLDTDHandler dtdHandler) {
@@ -509,6 +585,10 @@ public class XMLDTDProcessor
     /**
      * Returns the DTD handler.
      *
+     * <p>
+     *  返回DTD处理程序。
+     * 
+     * 
      * @return The DTD handler.
      */
     public XMLDTDHandler getDTDHandler() {
@@ -522,6 +602,10 @@ public class XMLDTDProcessor
     /**
      * Sets the DTD content model handler.
      *
+     * <p>
+     *  设置DTD内容模型处理程序。
+     * 
+     * 
      * @param dtdContentModelHandler The DTD content model handler.
      */
     public void setDTDContentModelHandler(XMLDTDContentModelHandler dtdContentModelHandler) {
@@ -531,6 +615,10 @@ public class XMLDTDProcessor
     /**
      * Gets the DTD content model handler.
      *
+     * <p>
+     *  获取DTD内容模型处理程序。
+     * 
+     * 
      * @return dtdContentModelHandler The DTD content model handler.
      */
     public XMLDTDContentModelHandler getDTDContentModelHandler() {
@@ -544,6 +632,10 @@ public class XMLDTDProcessor
     /**
      * The start of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的开始。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -561,6 +653,10 @@ public class XMLDTDProcessor
     /**
      * The end of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -578,6 +674,10 @@ public class XMLDTDProcessor
      * Check standalone entity reference.
      * Made static to make common between the validator and loader.
      *
+     * <p>
+     *  检查独立实体引用。使得静态,使验证器和加载器之间的共同。
+     * 
+     * 
      * @param name
      *@param grammar    grammar to which entity belongs
      * @param tempEntityDecl    empty entity declaration to put results in
@@ -602,6 +702,10 @@ public class XMLDTDProcessor
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text The text in the comment.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -630,6 +734,12 @@ public class XMLDTDProcessor
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     *  一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augs   Additional information that may include infoset augmentations
@@ -654,6 +764,10 @@ public class XMLDTDProcessor
     /**
      * The start of the DTD.
      *
+     * <p>
+     *  DTD的开始。
+     * 
+     * 
      * @param locator  The document locator, or null if the document
      *                 location cannot be reported during the parsing of
      *                 the document DTD. However, it is <em>strongly</em>
@@ -692,6 +806,10 @@ public class XMLDTDProcessor
     /**
      * Characters within an IGNORE conditional section.
      *
+     * <p>
+     *  IGNORE条件部分中的字符。
+     * 
+     * 
      * @param text The ignored text.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -715,6 +833,12 @@ public class XMLDTDProcessor
      * <strong>Note:</strong> This method is only called for external
      * parameter entities referenced in the DTD.
      *
+     * <p>
+     *  通知实体中存在TextDecl行。如果存在,此方法将在startParameterEntity调用后立即调用。
+     * <p>
+     *  <strong>注意</strong>：仅在DTD中引用的外部参数实体才调用此方法。
+     * 
+     * 
      * @param version  The XML version, or null if not specified.
      * @param encoding The IANA encoding name of the entity.
      * @param augs Additional information that may include infoset
@@ -736,6 +860,10 @@ public class XMLDTDProcessor
      * This method notifies of the start of a parameter entity. The parameter
      * entity name start with a '%' character.
      *
+     * <p>
+     *  该方法通知参数实体的开始。参数实体名称以"％"字符开头。
+     * 
+     * 
      * @param name     The name of the parameter entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -768,6 +896,10 @@ public class XMLDTDProcessor
      * This method notifies the end of a parameter entity. Parameter entity
      * names begin with a '%' character.
      *
+     * <p>
+     *  此方法通知参数实体的结束。参数实体名称以"％"字符开头。
+     * 
+     * 
      * @param name The name of the parameter entity.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -787,6 +919,10 @@ public class XMLDTDProcessor
     /**
      * An element declaration.
      *
+     * <p>
+     *  元素声明。
+     * 
+     * 
      * @param name         The name of the element.
      * @param contentModel The element content model.
      * @param augs Additional information that may include infoset
@@ -822,6 +958,10 @@ public class XMLDTDProcessor
     /**
      * The start of an attribute list.
      *
+     * <p>
+     *  属性列表的开始。
+     * 
+     * 
      * @param elementName The name of the element that this attribute
      *                    list is associated with.
      * @param augs Additional information that may include infoset
@@ -844,6 +984,10 @@ public class XMLDTDProcessor
     /**
      * An attribute declaration.
      *
+     * <p>
+     * 属性声明。
+     * 
+     * 
      * @param elementName   The name of the element that this attribute
      *                      is associated with.
      * @param attributeName The name of the attribute.
@@ -1083,6 +1227,10 @@ public class XMLDTDProcessor
     /**
      * The end of an attribute list.
      *
+     * <p>
+     *  属性列表的结尾。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1102,6 +1250,10 @@ public class XMLDTDProcessor
     /**
      * An internal entity declaration.
      *
+     * <p>
+     *  内部实体声明。
+     * 
+     * 
      * @param name The name of the entity. Parameter entity names start with
      *             '%', whereas the name of a general entity is just the
      *             entity name.
@@ -1146,6 +1298,10 @@ public class XMLDTDProcessor
     /**
      * An external entity declaration.
      *
+     * <p>
+     *  外部实体声明。
+     * 
+     * 
      * @param name     The name of the entity. Parameter entity names start
      *                 with '%', whereas the name of a general entity is just
      *                 the entity name.
@@ -1185,6 +1341,10 @@ public class XMLDTDProcessor
     /**
      * An unparsed entity declaration.
      *
+     * <p>
+     *  未解析的实体声明。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier    An object containing all location information
      *                      pertinent to this entity.
@@ -1215,6 +1375,10 @@ public class XMLDTDProcessor
     /**
      * A notation declaration
      *
+     * <p>
+     *  符号声明
+     * 
+     * 
      * @param name     The name of the notation.
      * @param identifier    An object containing all location information
      *                      pertinent to this notation.
@@ -1249,6 +1413,10 @@ public class XMLDTDProcessor
     /**
      * The start of a conditional section.
      *
+     * <p>
+     *  条件段的开始。
+     * 
+     * 
      * @param type The type of the conditional section. This value will
      *             either be CONDITIONAL_INCLUDE or CONDITIONAL_IGNORE.
      * @param augs Additional information that may include infoset
@@ -1276,6 +1444,10 @@ public class XMLDTDProcessor
     /**
      * The end of a conditional section.
      *
+     * <p>
+     *  条件段的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1298,6 +1470,10 @@ public class XMLDTDProcessor
     /**
      * The end of the DTD.
      *
+     * <p>
+     *  DTD的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1407,6 +1583,10 @@ public class XMLDTDProcessor
      * model, specific methods may be called between the call to the
      * startContentModel method and the call to the endContentModel method.
      *
+     * <p>
+     *  内容模型的开始。根据内容模型的类型,可以在调用startContentModel方法和调用endContentModel方法之间调用特定方法。
+     * 
+     * 
      * @param elementName The name of the element.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -1433,6 +1613,10 @@ public class XMLDTDProcessor
     /**
      * A content model of ANY.
      *
+     * <p>
+     *  ANY的内容模型。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1452,6 +1636,10 @@ public class XMLDTDProcessor
     /**
      * A content model of EMPTY.
      *
+     * <p>
+     *  EMPTY的内容模型。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1474,6 +1662,10 @@ public class XMLDTDProcessor
      * <code>pcdata()</code> method. A children content model will
      * contain additional groups and/or elements.
      *
+     * <p>
+     *  混合或儿童内容模型的开始。混合内容模型将立即调用<code> pcdata()</code>方法。子内容模型将包含其他组和/或元素。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1499,6 +1691,10 @@ public class XMLDTDProcessor
      * mixed content model. This method will be the first called
      * following the content model's <code>startGroup()</code>.
      *
+     * <p>
+     *  表示混合内容模型的组中的"#PCDATA"的外观。这个方法将首先被调用遵循内容模型的<code> startGroup()</code>。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1518,6 +1714,10 @@ public class XMLDTDProcessor
     /**
      * A referenced element in a mixed or children content model.
      *
+     * <p>
+     *  混合或子内容模型中引用的元素。
+     * 
+     * 
      * @param elementName The name of the referenced element.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -1552,6 +1752,10 @@ public class XMLDTDProcessor
      * The separator between choices or sequences of a mixed or children
      * content model.
      *
+     * <p>
+     *  混合或子内容模型的选择或序列之间的分隔符。
+     * 
+     * 
      * @param separator The type of children separator.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -1577,6 +1781,10 @@ public class XMLDTDProcessor
      * The occurrence count for a child in a children content model or
      * for the mixed content model group.
      *
+     * <p>
+     *  子内容模型中的子级或混合内容模型组的子级的发生计数。
+     * 
+     * 
      * @param occurrence The occurrence count for the last element
      *                   or group.
      * @param augs Additional information that may include infoset
@@ -1603,6 +1811,10 @@ public class XMLDTDProcessor
     /**
      * The end of a group for mixed or children content models.
      *
+     * <p>
+     *  一个组的结尾的混合或儿童内容模型。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1622,6 +1834,10 @@ public class XMLDTDProcessor
     /**
      * The end of a content model.
      *
+     * <p>
+     *  内容模型的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1646,6 +1862,10 @@ public class XMLDTDProcessor
      * Normalize the attribute value of a non CDATA default attribute
      * collapsing sequences of space characters (x20)
      *
+     * <p>
+     *  规范化非CDATA默认属性的属性值,折叠空格字符序列(x20)
+     * 
+     * 
      * @param value The value to normalize
      * @return Whether the value was changed or not.
      */
@@ -1698,6 +1918,9 @@ public class XMLDTDProcessor
      * Checks that all elements referenced in content models have
      * been declared. This method calls out to the error handler
      * to indicate warnings.
+     * <p>
+     * 检查内容模型中引用的所有元素是否已声明。此方法调用错误处理程序以指示警告。
+     * 
      */
     private void checkDeclaredElements(DTDGrammar grammar) {
         int elementIndex = grammar.getFirstElementDeclIndex();
@@ -1718,6 +1941,8 @@ public class XMLDTDProcessor
      * Does a recursive (if necessary) check on the specified element's
      * content spec to make sure that all children refer to declared
      * elements.
+     * <p>
+     *  对指定元素的内容规范进行递归检查(如果必要),以确保所有子元素都引用声明的元素。
      */
     private void checkDeclaredElements(DTDGrammar grammar, int elementIndex,
             int contentSpecIndex, XMLContentSpec contentSpec) {

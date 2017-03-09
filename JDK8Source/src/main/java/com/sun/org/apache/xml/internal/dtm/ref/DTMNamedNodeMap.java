@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DTMNamedNodeMap.java,v 1.2.4.1 2005/09/15 08:15:03 suresh_emailid Exp $
+ * <p>
+ *  $ Id：DTMNamedNodeMap.java,v 1.2.4.1 2005/09/15 08:15:03 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref;
 
@@ -42,6 +55,13 @@ import org.w3c.dom.Node;
  * linearly until we find it or fail to find it. Again, that could be
  * optimized at some cost in object creation/storage.
  * @xsl.usage internal
+ * <p>
+ *  DTMNamedNodeMap是DOM的NamedNodeMap接口的快速(而不是快速)实现,旨在支持DTMProxy的getAttributes()调用。
+ * <p>
+ *  *****注意：这样做_not_当前尝试缓存任何数据;如果你要求属性27,然后28,你将不得不重新扫描第一个27.它应该至少保持跟踪的最后一个检索,并可能缓冲整个数组。
+ * <p>
+ *  *****还要注意,没有快速路径的名字查询;我们线性搜索,直到我们找到它或找不到它。再次,这可以在对象创建/存储中以一些成本被优化。 @ xsl.usage internal
+ * 
  */
 public class DTMNamedNodeMap implements NamedNodeMap
 {
@@ -58,6 +78,10 @@ public class DTMNamedNodeMap implements NamedNodeMap
   /**
    * Create a getAttributes NamedNodeMap for a given DTM element node
    *
+   * <p>
+   *  为给定的DTM元素节点创建getAttributes NamedNodeMap
+   * 
+   * 
    * @param dtm The DTM Reference, must be non-null.
    * @param element The DTM element handle.
    */
@@ -70,6 +94,10 @@ public class DTMNamedNodeMap implements NamedNodeMap
   /**
    * Return the number of Attributes on this Element
    *
+   * <p>
+   * 返回此元素上的属性数
+   * 
+   * 
    * @return The number of nodes in this map.
    */
   public int getLength()
@@ -93,6 +121,10 @@ public class DTMNamedNodeMap implements NamedNodeMap
 
   /**
    * Retrieves a node specified by name.
+   * <p>
+   *  检索由名称指定的节点。
+   * 
+   * 
    * @param name The <code>nodeName</code> of a node to retrieve.
    * @return A <code>Node</code> (of any type) with the specified
    *   <code>nodeName</code>, or <code>null</code> if it does not identify
@@ -115,6 +147,10 @@ public class DTMNamedNodeMap implements NamedNodeMap
    * Returns the <code>index</code>th item in the map. If <code>index</code>
    * is greater than or equal to the number of nodes in this map, this
    * returns <code>null</code>.
+   * <p>
+   *  返回地图中的<code> index </code> th项。如果<code> index </code>大于或等于此映射中的节点数,则返回<code> null </code>。
+   * 
+   * 
    * @param i The index of the requested item.
    * @return The node at the <code>index</code>th position in the map, or
    *   <code>null</code> if that is not a valid index.
@@ -145,6 +181,12 @@ public class DTMNamedNodeMap implements NamedNodeMap
    * (those that have a "special" string value) cannot be stored as the
    * names would clash. This is seen as preferable to allowing nodes to be
    * aliased.
+   * <p>
+   *  使用其<code> nodeName </code>属性添加节点。如果具有该名称的节点已经存在于此映射中,则它将被新映射替换。
+   *  <br>由于<code> nodeName </code>属性用于派生节点必须存储的名称,因此不能将某些类型的多个节点(具有"特殊"字符串值的节点)存储为名称会发生冲突。
+   * 这被认为是允许节点混叠的优选方案。
+   * 
+   * 
    * @param newNode node to store in this map. The node will later be
    *   accessible using the value of its <code>nodeName</code> attribute.
    *
@@ -171,6 +213,10 @@ public class DTMNamedNodeMap implements NamedNodeMap
    * default value, an attribute immediately appears containing the
    * default value as well as the corresponding namespace URI, local name,
    * and prefix when applicable.
+   * <p>
+   *  删除名称指定的节点。当此映射包含附加到元素的属性时,如果已知已删除的属性具有默认值,则在适用时,将立即出现包含默认值以及对应的命名空间URI,本地名称和前缀的属性。
+   * 
+   * 
    * @param name The <code>nodeName</code> of the node to remove.
    *
    * @return The node removed from this map if a node with such a name
@@ -188,6 +234,10 @@ public class DTMNamedNodeMap implements NamedNodeMap
   /**
    * Retrieves a node specified by local name and namespace URI. HTML-only
    * DOM implementations do not need to implement this method.
+   * <p>
+   *  检索由本地名称和命名空间URI指定的节点。仅HTML的DOM实现不需要实现这个方法。
+   * 
+   * 
    * @param namespaceURI The namespace URI of the node to retrieve.
    * @param localName The local name of the node to retrieve.
    *
@@ -222,6 +272,11 @@ public class DTMNamedNodeMap implements NamedNodeMap
    * local name is already present in this map, it is replaced by the new
    * one.
    * <br>HTML-only DOM implementations do not need to implement this method.
+   * <p>
+   *  使用其<code> namespaceURI </code>和<code> localName </code>添加节点。
+   * 如果具有该名称空间URI和该本地名称的节点已经存在于此映射中,则它将被新映射替换。 <br>仅HTML的DOM实现不需要实现此方法。
+   * 
+   * 
    * @param arg A node to store in this map. The node will later be
    *   accessible using the value of its <code>namespaceURI</code> and
    *   <code>localName</code> attributes.
@@ -253,6 +308,11 @@ public class DTMNamedNodeMap implements NamedNodeMap
    * corresponding namespace URI, local name, and prefix when applicable.
    * <br>HTML-only DOM implementations do not need to implement this method.
    *
+   * <p>
+   * 删除由本地名称和命名空间URI指定的节点。当此映射包含由<code> Node </code>接口的attributes属性返回的附加到元素的属性时,可以知道已移除的属性具有默认值。
+   * 如果是这样,将立即出现一个属性,包含默认值以及相应的命名空间URI,本地名称和前缀(如果适用)。 <br>仅HTML的DOM实现不需要实现此方法。
+   * 
+   * 
    * @param namespaceURI The namespace URI of the node to remove.
    * @param localName The local name of the node to remove.
    *
@@ -273,6 +333,9 @@ public class DTMNamedNodeMap implements NamedNodeMap
   /**
    * Simple implementation of DOMException.
    * @xsl.usage internal
+   * <p>
+   *  简单实现DOMException。 @ xsl.usage internal
+   * 
    */
   public class DTMException extends org.w3c.dom.DOMException
   {
@@ -280,6 +343,10 @@ public class DTMNamedNodeMap implements NamedNodeMap
     /**
      * Constructs a DOM/DTM exception.
      *
+     * <p>
+     *  构造DOM / DTM异常。
+     * 
+     * 
      * @param code
      * @param message
      */
@@ -292,6 +359,9 @@ public class DTMNamedNodeMap implements NamedNodeMap
      * Constructor DTMException
      *
      *
+     * <p>
+     *  构造函数DTMException
+     * 
      * @param code
      */
     public DTMException(short code)

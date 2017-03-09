@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -97,6 +98,36 @@ import sun.security.util.Debug;
  * Consult the release documentation for your implementation to see if any
  * other algorithms are supported.
  *
+ * <p>
+ *  此MessageDigest类为应用程序提供消息摘要算法的功能,如SHA-1或SHA-256。消息摘要是获取任意大小的数据并输出固定长度的散列值的安全单向散列函数。
+ * 
+ *  <p> MessageDigest对象开始初始化。使用{@link #update(byte)update}方法处理数据。在任何时候,可以调用{@link #reset()reset}来重置摘要。
+ * 一旦更新了所有要更新的数据,就应该调用{@link #digest()digest}方法之一来完成散列计算。
+ * 
+ *  <p>对于给定数量的更新,可以调用{@code digest}方法一次。调用{@code digest}后,MessageDigest对象将重置为其初始化状态。
+ * 
+ *  <p>实现可以自由实现Cloneable接口。客户端应用程序可以通过尝试克隆和捕获CloneNotSupportedException来测试克隆性：
+ * 
+ *  <pre> {@ code MessageDigest md = MessageDigest.getInstance("SHA");
+ * 
+ *  try {md.update(toChapter1); MessageDigest tc1 = md.clone(); byte [] toChapter1Digest = tc1.digest(); md.update(toChapter2); ...等等。
+ *  } catch(CloneNotSupportedException cnse){throw new DigestException("can not make digest of partial content"); }
+ * } </pre>。
+ * 
+ * <p>请注意,如果给定的实现不可克隆,则仍然可以通过实例化几个实例来计算中间概要,如果提前知道概要的数量。
+ * 
+ *  <p>请注意,这个类是抽象的,并且从{@code MessageDigestSpi}扩展为历史原因。
+ * 应用程序开发人员应该只注意这个{@code MessageDigest}类中定义的方法;超类中的所有方法都面向希望提供自己的消息摘要算法实现的加密服务提供者。
+ * 
+ *  <p>每个Java平台的实现都需要支持以下标准{@code MessageDigest}算法：
+ * <ul>
+ *  <li> {@ code MD5} </li> <li> {@ code SHA-1} </li> <li> {@ code SHA-256}
+ * </ul>
+ *  这些算法在<a href =中描述
+ * "{@docRoot}/../technotes/guides/security/StandardNames.html#MessageDigest">
+ *  Java密码体系结构标准算法名称文档的MessageDigest部分</a>。有关实现的信息,请参阅发行文档,以了解是否支持任何其他算法。
+ * 
+ * 
  * @author Benjamin Renaud
  *
  * @see DigestInputStream
@@ -123,6 +154,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
     /**
      * Creates a message digest with the specified algorithm name.
      *
+     * <p>
+     *  使用指定的算法名称创建消息摘要。
+     * 
+     * 
      * @param algorithm the standard name of the digest algorithm.
      * See the MessageDigest section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#MessageDigest">
@@ -146,6 +181,15 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回实现指定摘要算法的MessageDigest对象。
+     * 
+     *  <p>此方法遍历注册的安全提供程序列表,从最常用的提供程序开始。
+     * 将返回一个新的MessageDigest对象,该对象封装来自支持指定算法的第一个Provider的MessageDigestSpi实现。
+     * 
+     * <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the name of the algorithm requested.
      * See the MessageDigest section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#MessageDigest">
@@ -197,6 +241,14 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回实现指定摘要算法的MessageDigest对象。
+     * 
+     *  <p>返回一个新的MessageDigest对象,用于封装来自指定提供者的MessageDigestSpi实现。指定的提供程序必须在安全提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the name of the algorithm requested.
      * See the MessageDigest section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#MessageDigest">
@@ -246,6 +298,12 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * object is returned.  Note that the specified Provider object
      * does not have to be registered in the provider list.
      *
+     * <p>
+     *  返回实现指定摘要算法的MessageDigest对象。
+     * 
+     *  <p>返回一个新的MessageDigest对象,该对象封装来自指定的Provider对象的MessageDigestSpi实现。请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     * 
      * @param algorithm the name of the algorithm requested.
      * See the MessageDigest section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#MessageDigest">
@@ -288,6 +346,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
     /**
      * Returns the provider of this message digest object.
      *
+     * <p>
+     *  返回此消息摘要对象的提供程序。
+     * 
+     * 
      * @return the provider of this message digest object
      */
     public final Provider getProvider() {
@@ -297,6 +359,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
     /**
      * Updates the digest using the specified byte.
      *
+     * <p>
+     *  使用指定的字节更新摘要。
+     * 
+     * 
      * @param input the byte with which to update the digest.
      */
     public void update(byte input) {
@@ -308,6 +374,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * Updates the digest using the specified array of bytes, starting
      * at the specified offset.
      *
+     * <p>
+     *  使用指定的字节数组更新摘要,从指定的偏移量开始。
+     * 
+     * 
      * @param input the array of bytes.
      *
      * @param offset the offset to start from in the array of bytes.
@@ -329,6 +399,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
     /**
      * Updates the digest using the specified array of bytes.
      *
+     * <p>
+     *  使用指定的字节数更新摘要。
+     * 
+     * 
      * @param input the array of bytes.
      */
     public void update(byte[] input) {
@@ -343,6 +417,11 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * Upon return, the buffer's position will be equal to its limit;
      * its limit will not have changed.
      *
+     * <p>
+     *  使用指定的ByteBuffer更新摘要。摘要使用{@code input.remaining()}字节从{@code input.position()}开始更新。
+     * 返回时,缓冲区的位置将等于其限制;其极限不会改变。
+     * 
+     * 
      * @param input the ByteBuffer
      * @since 1.5
      */
@@ -358,6 +437,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * Completes the hash computation by performing final operations
      * such as padding. The digest is reset after this call is made.
      *
+     * <p>
+     *  通过执行最终操作(如填充)来完成哈希计算。在进行此调用后,摘要将重置。
+     * 
+     * 
      * @return the array of bytes for the resulting hash value.
      */
     public byte[] digest() {
@@ -371,6 +454,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * Completes the hash computation by performing final operations
      * such as padding. The digest is reset after this call is made.
      *
+     * <p>
+     * 通过执行最终操作(如填充)来完成哈希计算。在进行此调用后,摘要将重置。
+     * 
+     * 
      * @param buf output buffer for the computed digest
      *
      * @param offset offset into the output buffer to begin storing the digest
@@ -401,6 +488,13 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * passing the <i>input</i> array to the {@code update} method,
      * then calls {@link #digest() digest()}.
      *
+     * <p>
+     *  使用指定的字节数对摘要执行最后更新,然后完成摘要计算。
+     * 也就是说,该方法首先调用{@link #update(byte [])update(input)},将<i>输入</i>数组传递给{@code update}方法,然后调用{@link #digest () 消化()}
+     * 。
+     *  使用指定的字节数对摘要执行最后更新,然后完成摘要计算。
+     * 
+     * 
      * @param input the input to be updated before the digest is
      * completed.
      *
@@ -413,6 +507,9 @@ public abstract class MessageDigest extends MessageDigestSpi {
 
     /**
      * Returns a string representation of this message digest object.
+     * <p>
+     *  返回此消息摘要对象的字符串表示形式。
+     * 
      */
     public String toString() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -433,6 +530,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
     /**
      * Compares two digests for equality. Does a simple byte compare.
      *
+     * <p>
+     *  比较两个摘要的平等性。一个简单的字节比较。
+     * 
+     * 
      * @param digesta one of the digests to compare.
      *
      * @param digestb the other digest to compare.
@@ -454,6 +555,9 @@ public abstract class MessageDigest extends MessageDigestSpi {
 
     /**
      * Resets the digest for further use.
+     * <p>
+     *  重置摘要以供进一步使用。
+     * 
      */
     public void reset() {
         engineReset();
@@ -469,6 +573,12 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * Java Cryptography Architecture Standard Algorithm Name Documentation</a>
      * for information about standard algorithm names.
      *
+     * <p>
+     *  返回标识算法的字符串,与实现详细信息无关。名称应为标准Java安全名称(例如"SHA","MD5"等)。请参阅<a href =中的MessageDigest部分
+     * "{@docRoot}/../technotes/guides/security/StandardNames.html#MessageDigest">
+     *  Java加密架构标准算法名称文档</a>以获取有关标准算法名称的信息。
+     * 
+     * 
      * @return the name of the algorithm
      */
     public final String getAlgorithm() {
@@ -479,6 +589,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * Returns the length of the digest in bytes, or 0 if this operation is
      * not supported by the provider and the implementation is not cloneable.
      *
+     * <p>
+     *  返回摘要的长度(以字节为单位),如果此操作不受提供程序支持并且实现不可克隆,则返回0。
+     * 
+     * 
      * @return the digest length in bytes, or 0 if this operation is not
      * supported by the provider and the implementation is not cloneable.
      *
@@ -501,6 +615,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
     /**
      * Returns a clone if the implementation is cloneable.
      *
+     * <p>
+     *  如果实现是可克隆的,则返回一个克隆。
+     * 
+     * 
      * @return a clone if the implementation is cloneable.
      *
      * @exception CloneNotSupportedException if this is called on an
@@ -529,6 +647,12 @@ public abstract class MessageDigest extends MessageDigestSpi {
      * moved up the hierarchy into a new class (MessageDigestSpi), which has
      * been interposed in the hierarchy between the API (MessageDigest)
      * and its original parent (Object).
+     * <p>
+     *  以下类允许提供程序从MessageDigestSpi而不是从MessageDigest扩展。
+     * 它表示具有封装的,由提供程序提供的SPI对象(类型为MessageDigestSpi)的MessageDigest。
+     * 如果提供程序实现是MessageDigestSpi的实例,上面的getInstance()方法返回此类的实例,并封装了SPI对象。
+     * 
+     * 注意：来自原始MessageDigest类的所有SPI方法已经从层次结构向上移动到新类(MessageDigestSpi)中,该类已经插入在API(MessageDigest)和其原始父(Object)
      */
 
     static class Delegate extends MessageDigest {
@@ -545,6 +669,10 @@ public abstract class MessageDigest extends MessageDigestSpi {
         /**
          * Returns a clone if the delegate is cloneable.
          *
+         * <p>
+         * 之间的层次结构中。
+         * 
+         * 
          * @return a clone if the delegate is cloneable.
          *
          * @exception CloneNotSupportedException if this is called on a

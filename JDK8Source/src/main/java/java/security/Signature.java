@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -112,6 +113,48 @@ import sun.security.jca.GetInstance.Instance;
  * Consult the release documentation for your implementation to see if any
  * other algorithms are supported.
  *
+ * <p>
+ *  Signature类用于向应用程序提供数字签名算法的功能。数字签名用于数字数据的认证和完整性保证。
+ * 
+ *  <p>签名算法可以是使用DSA和SHA-1的NIST标准DSA等等。使用SHA-1消息摘要算法的DSA算法可以被指定为{@code SHA1withDSA}。
+ * 在RSA的情况下,对于消息摘要算法存在多个选择,因此签名算法可以被指定为例如{@code MD2withRSA},{@code MD5withRSA}或{@code SHA1withRSA}。
+ * 必须指定算法名称,因为没有默认值。
+ * 
+ *  <p>签名对象可用于生成和验证数字签名。
+ * 
+ *  <p>有三个阶段使用Signature对象来签名数据或验证签名：<ol>
+ * 
+ *  <li>初始化,使用
+ * 
+ * <ul>
+ * 
+ *  <li>公钥,用于初始化签名以进行验证(请参阅{@link #initVerify(PublicKey)initVerify}),或
+ * 
+ *  <li>初始化签名的签名(请参阅{@link #initSign(PrivateKey)}和{@link #initSign(PrivateKey,SecureRandom)})的私钥(和可选的安全随
+ * 机数生成器)。
+ * 
+ * </ul>
+ * 
+ *  <li>正在更新
+ * 
+ * <p>根据初始化的类型,这将更新要签名或验证的字节。请参阅{@link #update(字节)更新}方法。
+ * 
+ *  <li>在所有更新的字节上签名或验证签名。请参阅{@link #sign()sign}方法和{@link #verify(byte [])verify}方法。
+ * 
+ * </ol>
+ * 
+ *  <p>请注意,由于历史原因,此类是抽象的,并延伸自{@code SignatureSpi}。
+ * 应用程序开发人员应该只注意这个{@code Signature}类中定义的方法;超类中的所有方法都针对希望提供他们自己的数字签名算法实现的加密服务提供者。
+ * 
+ *  <p>每个Java平台的实施都需要支持以下标准{@code Signature}算法：
+ * <ul>
+ *  <li> {@ code SHA1withDSA} </li> <li> {@ code SHA1withRSA} </li> <li> {@ code SHA256withRSA}
+ * </ul>
+ *  这些算法在<a href =中描述
+ * "{@docRoot}/../technotes/guides/security/StandardNames.html#Signature">
+ *  Java密码体系结构标准算法名称文档的签名部分</a>。有关实现的信息,请参阅发行文档,以了解是否支持任何其他算法。
+ * 
+ * 
  * @author Benjamin Renaud
  *
  */
@@ -130,6 +173,9 @@ public abstract class Signature extends SignatureSpi {
      * The algorithm for this signature object.
      * This value is used to map an OID to the particular algorithm.
      * The mapping is done in AlgorithmObject.algOID(String algorithm)
+     * <p>
+     *  此签名对象的算法。此值用于将OID映射到特定算法。映射是在AlgorithmObject.algOID(String algorithm)
+     * 
      */
     private String algorithm;
 
@@ -139,29 +185,45 @@ public abstract class Signature extends SignatureSpi {
     /**
      * Possible {@link #state} value, signifying that
      * this signature object has not yet been initialized.
+     * <p>
+     *  可能的{@link #state}值,表示此签名对象尚未初始化。
+     * 
      */
     protected final static int UNINITIALIZED = 0;
 
     /**
      * Possible {@link #state} value, signifying that
      * this signature object has been initialized for signing.
+     * <p>
+     *  可能的{@link #state}值,表示此签名对象已初始化为签名。
+     * 
      */
     protected final static int SIGN = 2;
 
     /**
      * Possible {@link #state} value, signifying that
      * this signature object has been initialized for verification.
+     * <p>
+     * 可能的{@link #state}值,表示此签名对象已初始化以进行验证。
+     * 
      */
     protected final static int VERIFY = 3;
 
     /**
      * Current state of this signature object.
+     * <p>
+     *  此签名对象的当前状态。
+     * 
      */
     protected int state = UNINITIALIZED;
 
     /**
      * Creates a Signature object for the specified algorithm.
      *
+     * <p>
+     *  为指定的算法创建一个Signature对象。
+     * 
+     * 
      * @param algorithm the standard string name of the algorithm.
      * See the Signature section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#Signature">
@@ -202,6 +264,14 @@ public abstract class Signature extends SignatureSpi {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回实现指定签名算法的Signature对象。
+     * 
+     *  <p>此方法遍历注册的安全提供程序列表,从最常用的提供程序开始。将返回一个新的Signature对象,该对象封装来自支持指定算法的第一个Provider的SignatureSpi实现。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the standard name of the algorithm requested.
      * See the Signature section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#Signature">
@@ -322,6 +392,14 @@ public abstract class Signature extends SignatureSpi {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回实现指定签名算法的Signature对象。
+     * 
+     *  <p>将返回一个新的Signature对象,用于封装来自指定提供程序的SignatureSpi实现。指定的提供程序必须在安全提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the name of the algorithm requested.
      * See the Signature section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#Signature">
@@ -372,6 +450,12 @@ public abstract class Signature extends SignatureSpi {
      * object is returned.  Note that the specified Provider object
      * does not have to be registered in the provider list.
      *
+     * <p>
+     *  返回实现指定签名算法的Signature对象。
+     * 
+     *  <p>返回从指定的Provider对象封装SignatureSpi实现的新的Signature对象。请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     * 
      * @param algorithm the name of the algorithm requested.
      * See the Signature section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#Signature">
@@ -431,6 +515,10 @@ public abstract class Signature extends SignatureSpi {
     /**
      * Returns the provider of this signature object.
      *
+     * <p>
+     *  返回此签名对象的提供程序。
+     * 
+     * 
      * @return the provider of this signature object
      */
     public final Provider getProvider() {
@@ -447,6 +535,10 @@ public abstract class Signature extends SignatureSpi {
      * again with a different argument, it negates the effect
      * of this call.
      *
+     * <p>
+     * 初始化此对象以进行验证。如果使用不同的参数再次调用此方法,则会否定此调用的影响。
+     * 
+     * 
      * @param publicKey the public key of the identity whose signature is
      * going to be verified.
      *
@@ -473,6 +565,13 @@ public abstract class Signature extends SignatureSpi {
      * supposed to be used for digital signatures, an
      * {@code InvalidKeyException} is thrown.
      *
+     * <p>
+     *  使用给定证书中的公钥初始化此对象以进行验证。
+     *  <p>如果证书类型为X.509,并且<i>键使用</i>扩展字段标记为关键,并且<i>键使用</i>扩展字段的值表示公共键和证书中的相应私钥不应用于数字签名,则会抛出{@code InvalidKeyException}
+     * 。
+     *  使用给定证书中的公钥初始化此对象以进行验证。
+     * 
+     * 
      * @param certificate the certificate of the identity whose signature is
      * going to be verified.
      *
@@ -517,6 +616,10 @@ public abstract class Signature extends SignatureSpi {
      * again with a different argument, it negates the effect
      * of this call.
      *
+     * <p>
+     *  初始化此对象以进行签名。如果使用不同的参数再次调用此方法,则会否定此调用的影响。
+     * 
+     * 
      * @param privateKey the private key of the identity whose signature
      * is going to be generated.
      *
@@ -538,6 +641,10 @@ public abstract class Signature extends SignatureSpi {
      * again with a different argument, it negates the effect
      * of this call.
      *
+     * <p>
+     *  初始化此对象以进行签名。如果使用不同的参数再次调用此方法,则会否定此调用的影响。
+     * 
+     * 
      * @param privateKey the private key of the identity whose signature
      * is going to be generated.
      *
@@ -568,6 +675,13 @@ public abstract class Signature extends SignatureSpi {
      * signer, if desired, via new calls to {@code update} and
      * {@code sign}.
      *
+     * <p>
+     *  返回所有更新的数据的签名字节。签名的格式取决于底层签名方案。
+     * 
+     *  <p>对此方法的调用会将此签名对象重置为之前通过调用{@code initSign(PrivateKey)}进行签名时初始化的状态。
+     * 也就是说,如果需要,通过对{@code update}和{@code sign}的新调用,对象被重置并且可用于从同一签名者生成另一签名。
+     * 
+     * 
      * @return the signature bytes of the signing operation's result.
      *
      * @exception SignatureException if this signature object is not
@@ -593,6 +707,12 @@ public abstract class Signature extends SignatureSpi {
      * was in after a call to one of the {@code initSign} methods) and
      * can be reused to generate further signatures with the same private key.
      *
+     * <p>
+     *  完成签名操作并将结果签名字节存储在{@code outbuf}提供的缓冲区中,从{@code offset}开始。签名的格式取决于底层签名方案。
+     * 
+     * <p>此签名对象重置为其初始状态(在调用{@code initSign}方法之一后的状态),并可重新使用以生成具有相同私钥的其他签名。
+     * 
+     * 
      * @param outbuf buffer for the signature result.
      *
      * @param offset offset into {@code outbuf} where the signature is
@@ -638,6 +758,13 @@ public abstract class Signature extends SignatureSpi {
      * reset and available to verify another signature from the identity
      * whose public key was specified in the call to {@code initVerify}.
      *
+     * <p>
+     *  验证传入的签名。
+     * 
+     *  <p>调用此方法会将此签名对象重置为之前初始化的状态,以通过调用{@code initVerify(PublicKey)}进行验证。
+     * 也就是说,对象被重置并可用于从调用{@code initVerify}中指定的公钥的身份验证另一个签名。
+     * 
+     * 
      * @param signature the signature bytes to be verified.
      *
      * @return true if the signature was verified, false if not.
@@ -666,6 +793,13 @@ public abstract class Signature extends SignatureSpi {
      * whose public key was specified in the call to {@code initVerify}.
      *
      *
+     * <p>
+     *  从指定的偏移量开始,验证指定的字节数组中传入的签名。
+     * 
+     *  <p>调用此方法会将此签名对象重置为之前初始化的状态,以通过调用{@code initVerify(PublicKey)}进行验证。
+     * 也就是说,对象被重置并可用于从调用{@code initVerify}中指定的公钥的身份验证另一个签名。
+     * 
+     * 
      * @param signature the signature bytes to be verified.
      * @param offset the offset to start from in the array of bytes.
      * @param length the number of bytes to use, starting at offset.
@@ -707,6 +841,10 @@ public abstract class Signature extends SignatureSpi {
     /**
      * Updates the data to be signed or verified by a byte.
      *
+     * <p>
+     *  更新要通过字节签名或验证的数据。
+     * 
+     * 
      * @param b the byte to use for the update.
      *
      * @exception SignatureException if this signature object is not
@@ -725,6 +863,10 @@ public abstract class Signature extends SignatureSpi {
      * Updates the data to be signed or verified, using the specified
      * array of bytes.
      *
+     * <p>
+     *  使用指定的字节数更新要签名或验证的数据。
+     * 
+     * 
      * @param data the byte array to use for the update.
      *
      * @exception SignatureException if this signature object is not
@@ -738,6 +880,10 @@ public abstract class Signature extends SignatureSpi {
      * Updates the data to be signed or verified, using the specified
      * array of bytes, starting at the specified offset.
      *
+     * <p>
+     *  使用指定的字节数组,从指定的偏移量开始,更新要签名或验证的数据。
+     * 
+     * 
      * @param data the array of bytes.
      * @param off the offset to start from in the array of bytes.
      * @param len the number of bytes to use, starting at offset.
@@ -772,6 +918,11 @@ public abstract class Signature extends SignatureSpi {
      * Upon return, the buffer's position will be equal to its limit;
      * its limit will not have changed.
      *
+     * <p>
+     *  使用指定的ByteBuffer更新要签名或验证的数据。处理{@code data.remaining()}字节,从{@code data.position()}开始。
+     * 返回时,缓冲区的位置将等于其限制;其极限不会改变。
+     * 
+     * 
      * @param data the ByteBuffer
      *
      * @exception SignatureException if this signature object is not
@@ -792,6 +943,10 @@ public abstract class Signature extends SignatureSpi {
     /**
      * Returns the name of the algorithm for this signature object.
      *
+     * <p>
+     * 返回此签名对象的算法名称。
+     * 
+     * 
      * @return the name of the algorithm for this signature object.
      */
     public final String getAlgorithm() {
@@ -803,6 +958,10 @@ public abstract class Signature extends SignatureSpi {
      * providing information that includes the state of the object
      * and the name of the algorithm used.
      *
+     * <p>
+     *  返回此签名对象的字符串表示形式,提供包括对象状态和所使用算法名称的信息。
+     * 
+     * 
      * @return a string representation of this signature object.
      */
     public String toString() {
@@ -832,6 +991,11 @@ public abstract class Signature extends SignatureSpi {
      * naming scheme for each parameter is desirable but left unspecified
      * at this time.
      *
+     * <p>
+     *  将指定的算法参数设置为指定的值。该方法提供通用机制,通过该机制可以设置该对象的各种参数。
+     * 参数可以是用于算法的任何可设置参数,诸如参数大小或用于签名生成的随机比特的源(如果适当),或者是否执行特定但可选的计算的指示。对于每个参数的统一的特定于算法的命名方案是期望的,但是此时仍未指定。
+     * 
+     * 
      * @param param the string identifier of the parameter.
      * @param value the parameter value.
      *
@@ -855,6 +1019,10 @@ public abstract class Signature extends SignatureSpi {
     /**
      * Initializes this signature engine with the specified parameter set.
      *
+     * <p>
+     *  使用指定的参数集初始化此签名引擎。
+     * 
+     * 
      * @param params the parameters
      *
      * @exception InvalidAlgorithmParameterException if the given parameters
@@ -876,6 +1044,12 @@ public abstract class Signature extends SignatureSpi {
      * implementation if this signature requires algorithm parameters but
      * was not initialized with any.
      *
+     * <p>
+     *  返回与此签名对象一起使用的参数。
+     * 
+     *  <p>返回的参数可以与用于初始化此签名的参数相同,或者可以包含由底层签名实现使用的默认和随机生成的参数值的组合,如果该签名需要算法参数,但没有用任何初始化。
+     * 
+     * 
      * @return the parameters used with this signature, or null if this
      * signature does not use any parameters.
      *
@@ -896,6 +1070,11 @@ public abstract class Signature extends SignatureSpi {
      * computation. A uniform algorithm-specific naming scheme for each
      * parameter is desirable but left unspecified at this time.
      *
+     * <p>
+     * 获取指定算法参数的值。该方法提供通用机制,通过该机制可以获得该对象的各种参数。
+     * 参数可以是用于算法的任何可设置参数,诸如参数大小或用于签名生成的随机比特的源(如果适当),或者是否执行特定但可选的计算的指示。对于每个参数的统一的特定于算法的命名方案是期望的,但是此时仍未指定。
+     * 
+     * 
      * @param param the string name of the parameter.
      *
      * @return the object that represents the parameter value, or null if
@@ -918,6 +1097,10 @@ public abstract class Signature extends SignatureSpi {
     /**
      * Returns a clone if the implementation is cloneable.
      *
+     * <p>
+     *  如果实现是可克隆的,则返回一个克隆。
+     * 
+     * 
      * @return a clone if the implementation is cloneable.
      *
      * @exception CloneNotSupportedException if this is called
@@ -943,6 +1126,12 @@ public abstract class Signature extends SignatureSpi {
      * moved up the hierarchy into a new class (SignatureSpi), which has
      * been interposed in the hierarchy between the API (Signature)
      * and its original parent (Object).
+     * <p>
+     *  以下类允许提供程序从SignatureSpi而不是从Signature扩展。它表示具有封装的,提供商提供的SPI对象(类型SignatureSpi)的签名。
+     * 如果提供程序实现是SignatureSpi的实例,上面的getInstance()方法返回此类的实例,并封装SPI对象。
+     * 
+     *  注意：来自原始Signature类的所有SPI方法已经从层次结构向上移动到新类(SignatureSpi)中,该类已经插入在API(签名)和其原始父(Object)之间的层次结构中。
+     * 
      */
 
     @SuppressWarnings("deprecation")
@@ -982,6 +1171,10 @@ public abstract class Signature extends SignatureSpi {
         /**
          * Returns a clone if the delegate is cloneable.
          *
+         * <p>
+         *  如果委托是可克隆的,则返回一个克隆。
+         * 
+         * 
          * @return a clone if the delegate is cloneable.
          *
          * @exception CloneNotSupportedException if this is called on a
@@ -1030,6 +1223,8 @@ public abstract class Signature extends SignatureSpi {
          * Choose the Spi from the first provider available. Used if
          * delayed provider selection is not possible because initSign()/
          * initVerify() is not the first method called.
+         * <p>
+         *  从可用的第一个提供商选择Spi。如果由于initSign()/ initVerify()不是第一个调用的方法,因此无法延迟提供程序选择时使用。
          */
         void chooseFirstProvider() {
             if (sigSpi != null) {

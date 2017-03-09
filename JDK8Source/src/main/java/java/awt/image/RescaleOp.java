@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,31 @@ import sun.awt.image.ImagingLib;
  * <p>
  * Note that in-place operation is allowed (i.e. the source and destination can
  * be the same object).
+ * <p>
+ *  该类通过将每个像素的样本值乘以比例因子,然后添加偏移量,来执行源图像中的数据的逐像素重新缩放。缩放的样本值被剪切到目标图像中可表示的最小/最大值。
+ * <p>
+ *  用于重新缩放操作的伪代码如下：
+ * <pre>
+ *  或来自Source对象的每个像素{对于像素的每个带/分量{dstElement =(srcElement * scaleFactor)+ offset}
+ * 
+ * </pre>
+ * <p>
+ *  对于栅格,重新缩放在波段上运行。缩放常数的集合的数量可以是一个,在这种情况下,相同的常数应用于所有频带,或者其必须等于源光栅频带的数量。
+ * <p>
+ *  对于BufferedImages,重新缩放操作的颜色和alpha组件。缩放常数的集合的数量可以是一个,在这种情况下,相同的常数被应用于所有颜色(但不是α)分量。
+ * 否则,缩放常数的集合的数量可以等于源颜色分量的数量,在这种情况下不执行alpha分量(如果存在)的重新缩放。
+ * 如果这些情况都不适用,则缩放常数集合的数量必须等于源颜色分量加alpha分量的数量,在这种情况下,所有颜色和alpha分量被重新缩放。
+ * <p>
+ * 具有预乘α数据的BufferedImage源将以与非预乘图像相同的方式处理,以进行重新缩放。也就是说,对于BufferedImage源的原始数据,每个频带进行重新缩放,而不考虑数据是否被预乘。
+ * 如果需要对目标ColorModel进行颜色转换,则此步骤将考虑源和目标的预乘状态。
+ * <p>
+ *  不能重新缩放带有IndexColorModel的图像。
+ * <p>
+ *  如果在构造函数中指定了RenderingHints对象,则当需要颜色转换时可以使用颜色渲染提示和抖动提示。
+ * <p>
+ *  注意,允许就地操作(即,源和目的地可以是相同的对象)。
+ * 
+ * 
  * @see java.awt.RenderingHints#KEY_COLOR_RENDERING
  * @see java.awt.RenderingHints#KEY_DITHERING
  */
@@ -95,6 +121,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * and offsets.  The length of the scaleFactor and offset arrays
      * must meet the restrictions stated in the class comments above.
      * The RenderingHints argument may be null.
+     * <p>
+     *  构造具有所需缩放因子和偏移量的新RescaleOp。 scaleFactor和偏移数组的长度必须满足上面类注释中所述的限制。 RenderingHints参数可以为null。
+     * 
+     * 
      * @param scaleFactors the specified scale factors
      * @param offsets the specified offsets
      * @param hints the specified <code>RenderingHints</code>, or
@@ -120,6 +150,11 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * all bands in a source Raster and to all color (but not alpha)
      * components in a BufferedImage.
      * The RenderingHints argument may be null.
+     * <p>
+     *  构造具有所需比例因子和偏移量的新RescaleOp。 scaleFactor和offset将应用于源栅格中的所有波段,以及BufferedImage中的所有颜色(但不是alpha)组件。
+     *  RenderingHints参数可以为null。
+     * 
+     * 
      * @param scaleFactor the specified scale factor
      * @param offset the specified offset
      * @param hints the specified <code>RenderingHints</code>, or
@@ -138,6 +173,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * Returns the scale factors in the given array. The array is also
      * returned for convenience.  If scaleFactors is null, a new array
      * will be allocated.
+     * <p>
+     *  返回给定数组中的缩放因子。为了方便,也返回数组。如果scaleFactors为null,将分配一个新数组。
+     * 
+     * 
      * @param scaleFactors the array to contain the scale factors of
      *        this <code>RescaleOp</code>
      * @return the scale factors of this <code>RescaleOp</code>.
@@ -156,6 +195,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * Returns the offsets in the given array. The array is also returned
      * for convenience.  If offsets is null, a new array
      * will be allocated.
+     * <p>
+     * 返回给定数组中的偏移量。为了方便,也返回数组。如果offsets为null,将分配一个新数组。
+     * 
+     * 
      * @param offsets the array to contain the offsets of
      *        this <code>RescaleOp</code>
      * @return the offsets of this <code>RescaleOp</code>.
@@ -173,6 +216,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
     /**
      * Returns the number of scaling factors and offsets used in this
      * RescaleOp.
+     * <p>
+     *  返回此RescaleOp中使用的缩放因子和偏移量的数量。
+     * 
+     * 
      * @return the number of scaling factors and offsets of this
      *         <code>RescaleOp</code>.
      */
@@ -184,6 +231,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
     /**
      * Creates a ByteLookupTable to implement the rescale.
      * The table may have either a SHORT or BYTE input.
+     * <p>
+     *  创建一个ByteLookupTable来实现rescale。表可以具有SHORT或BYTE输入。
+     * 
+     * 
      * @param nElems    Number of elements the table is to have.
      *                  This will generally be 256 for byte and
      *                  65536 for short.
@@ -219,6 +270,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
     /**
      * Creates a ShortLookupTable to implement the rescale.
      * The table may have either a SHORT or BYTE input.
+     * <p>
+     *  创建ShortLookupTable以实现重定比例。表可以具有SHORT或BYTE输入。
+     * 
+     * 
      * @param nElems    Number of elements the table is to have.
      *                  This will generally be 256 for byte and
      *                  65536 for short.
@@ -257,6 +312,9 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * The src must be less than 16 bits.
      * All source band sizes must be the same and all dst band sizes
      * must be the same.
+     * <p>
+     *  确定重新缩放是否可以作为查找执行。 dst必须是字节或短类型。 src必须小于16位。所有源带大小必须相同,并且所有dst带大小必须相同。
+     * 
      */
     private boolean canUseLookup(Raster src, Raster dst) {
 
@@ -313,6 +371,11 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * scaling factors/offsets in this object does not meet the
      * restrictions stated in the class comments above, or if the
      * source image has an IndexColorModel.
+     * <p>
+     *  调整源BufferedImage的大小。如果源图像中的颜色模型与目标图像中的颜色模型不同,则将在目标中转换像素。如果目标图像为null,将使用源ColorModel创建BufferedImage。
+     * 如果此对象中缩放因子/偏移的数量不满足上述类注释中所述的限制,或者源图像具有IndexColorModel,则可能抛出IllegalArgumentException。
+     * 
+     * 
      * @param src the <code>BufferedImage</code> to be filtered
      * @param dst the destination for the filtering operation
      *            or <code>null</code>
@@ -450,6 +513,11 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * Note that the number of scaling factors/offsets in this object must
      * meet the restrictions stated in the class comments above.
      * Otherwise, an IllegalArgumentException is thrown.
+     * <p>
+     * 调整源栅格中的像素数据。如果目标栅格为空,将创建一个新的栅格。源和目标必须具有相同数量的波段。否则,抛出IllegalArgumentException。
+     * 请注意,此对象中缩放因子/偏移的数量必须满足上面类注释中所述的限制。否则,抛出IllegalArgumentException。
+     * 
+     * 
      * @param src the <code>Raster</code> to be filtered
      * @param dst the destination for the filtering operation
      *            or <code>null</code>
@@ -584,6 +652,9 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * Returns the bounding box of the rescaled destination image.  Since
      * this is not a geometric operation, the bounding box does not
      * change.
+     * <p>
+     *  返回重新缩放的目标图像的边框。由于这不是几何操作,边界框不会改变。
+     * 
      */
     public final Rectangle2D getBounds2D (BufferedImage src) {
          return getBounds2D(src.getRaster());
@@ -593,6 +664,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * Returns the bounding box of the rescaled destination Raster.  Since
      * this is not a geometric operation, the bounding box does not
      * change.
+     * <p>
+     *  返回重新缩放的目标栅格的边界框。由于这不是几何操作,边界框不会改变。
+     * 
+     * 
      * @param src the rescaled destination <code>Raster</code>
      * @return the bounds of the specified <code>Raster</code>.
      */
@@ -603,6 +678,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
     /**
      * Creates a zeroed destination image with the correct size and number of
      * bands.
+     * <p>
+     *  使用正确的大小和带数创建一个调零的目标图像。
+     * 
+     * 
      * @param src       Source image for the filter operation.
      * @param destCM    ColorModel of the destination.  If null, the
      *                  ColorModel of the source will be used.
@@ -632,6 +711,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
     /**
      * Creates a zeroed-destination <code>Raster</code> with the correct
      * size and number of bands, given this source.
+     * <p>
+     *  给定这个源,创建一个带有正确大小和带数的零目的<code> Raster </code>。
+     * 
+     * 
      * @param src       the source <code>Raster</code>
      * @return the zeroed-destination <code>Raster</code>.
      */
@@ -644,6 +727,10 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
      * point in the source.  If dstPt is non-null, it will
      * be used to hold the return value.  Since this is not a geometric
      * operation, the srcPt will equal the dstPt.
+     * <p>
+     *  返回给定源中的点的目标点的位置。如果dstPt为非空,它将用于保存返回值。因为这不是几何操作,所以srcPt将等于dstPt。
+     * 
+     * 
      * @param srcPt a point in the source image
      * @param dstPt the destination point or <code>null</code>
      * @return the location of the destination point.
@@ -658,6 +745,9 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
 
     /**
      * Returns the rendering hints for this op.
+     * <p>
+     *  返回此操作的渲染提示。
+     * 
      * @return the rendering hints of this <code>RescaleOp</code>.
      */
     public final RenderingHints getRenderingHints() {

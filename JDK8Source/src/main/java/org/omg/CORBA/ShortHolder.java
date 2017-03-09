@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,17 @@ import org.omg.CORBA.portable.OutputStream;
  * the value stored in its <code>value</code> field can be accessed with
  * <code>myShortHolder.value</code>.
  *
+ * <p>
+ *  <tt>短</tt>的持有人。有关持有人文件的详细信息,请参见<a href="doc-files/generatedfiles.html#holder">"生成的文件：持有人文件"</a>。
+ * <PA持有人类<a> </用于在IDL操作中存储"out"和"inout"参数。
+ * 如果IDL操作签名具有作为"out"或"inout"参数的IDL <code> short </code>,则程序员必须传递<code> ShortHolder </code>的实例作为方法调用中的相应
+ * 参数;对于"inout"参数,程序员还必须填写要发送到服务器的"in"值。
+ * <PA持有人类<a> </用于在IDL操作中存储"out"和"inout"参数。在方法调用返回之前,ORB将填充从服务器返回的"out"值对应的值。
+ * <P>
+ *  如果<code> myShortHolder </code>是<code> ShortHolder </code>的实例,则存储在其<code> value </code>字段中的值可以用<code>
+ *  myShortHolder.value </code> 。
+ * 
+ * 
  * @since       JDK1.2
  */
 public final class ShortHolder implements Streamable {
@@ -54,12 +66,18 @@ public final class ShortHolder implements Streamable {
     /**
      * The <code>short</code> value held by this <code>ShortHolder</code>
      * object.
+     * <p>
+     *  <code> ShortHolder </code>对象持有的<code> short </code>值。
+     * 
      */
     public short value;
 
     /**
      * Constructs a new <code>ShortHolder</code> object with its
      * <code>value</code> field initialized to <code>0</code>.
+     * <p>
+     *  构造一个新的<code> ShortHolder </code>对象,其<code> value </code>字段初始化为<code> 0 </code>。
+     * 
      */
     public ShortHolder() {
     }
@@ -68,6 +86,10 @@ public final class ShortHolder implements Streamable {
      * Constructs a new <code>ShortHolder</code> object with its
      * <code>value</code> field initialized to the given
      * <code>short</code>.
+     * <p>
+     *  构造一个新的<code> ShortHolder </code>对象,其<code> value </code>字段初始化为给定的<code> short </code>。
+     * 
+     * 
      * @param initial the <code>short</code> with which to initialize
      *                the <code>value</code> field of the newly-created
      *                <code>ShortHolder</code> object
@@ -81,6 +103,10 @@ public final class ShortHolder implements Streamable {
      * this <code>ShortHolder</code> object
      * with the unmarshalled data.
      *
+     * <p>
+     *  从<code>输入</code>读取,并初始化此<code> ShortHolder </code>对象中的值与未组合的数据。
+     * 
+     * 
      * @param input the InputStream containing CDR formatted data from the wire.
      */
     public void _read(InputStream input) {
@@ -91,6 +117,10 @@ public final class ShortHolder implements Streamable {
      * Marshals to <code>output</code> the value in
      * this <code>ShortHolder</code> object.
      *
+     * <p>
+     * 在<code> ShortHolder </code>对象中输入<code>输出</code>的值。
+     * 
+     * 
      * @param output the OutputStream which will contain the CDR formatted data.
      */
     public void _write(OutputStream output) {
@@ -101,6 +131,9 @@ public final class ShortHolder implements Streamable {
      * Returns the TypeCode corresponding to the value held in
      * this <code>ShortHolder</code> object.
      *
+     * <p>
+     *  返回与此<code> ShortHolder </code>对象中保存的值对应的TypeCode。
+     * 
      * @return    the TypeCode of the value held in
      *            this <code>ShortHolder</code> object
      */

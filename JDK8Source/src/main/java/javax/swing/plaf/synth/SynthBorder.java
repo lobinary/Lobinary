@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import javax.swing.plaf.UIResource;
  * SynthBorder is a border that delegates to a Painter. The Insets
  * are determined at construction time.
  *
+ * <p>
+ *  SynthBorder是一个委托给画家的边框。插图在施工时确定。
+ * 
+ * 
  * @author Scott Violet
  */
 class SynthBorder extends AbstractBorder implements UIResource {
@@ -65,6 +70,10 @@ class SynthBorder extends AbstractBorder implements UIResource {
 
     /**
      * Reinitializes the insets parameter with this Border's current Insets.
+     * <p>
+     *  使用此Border的当前Insets重新初始化insets参数。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
      * @return the <code>insets</code> object
@@ -128,6 +137,9 @@ class SynthBorder extends AbstractBorder implements UIResource {
 
     /**
      * This default implementation returns false.
+     * <p>
+     *  此默认实现返回false。
+     * 
      * @return false
      */
     public boolean isBorderOpaque() {

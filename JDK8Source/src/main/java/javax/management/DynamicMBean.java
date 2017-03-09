@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ package javax.management;
  * Defines the methods that should be implemented by
  * a Dynamic MBean (MBean that exposes a dynamic management interface).
  *
+ * <p>
+ *  定义应由动态MBean(公开动态管理接口的MBean)实现的方法。
+ * 
+ * 
  * @since 1.5
  */
 public interface DynamicMBean {
@@ -39,6 +44,10 @@ public interface DynamicMBean {
     /**
      * Obtain the value of a specific attribute of the Dynamic MBean.
      *
+     * <p>
+     *  获取动态MBean的特定属性的值。
+     * 
+     * 
      * @param attribute The name of the attribute to be retrieved
      *
      * @return  The value of the attribute retrieved.
@@ -55,6 +64,10 @@ public interface DynamicMBean {
     /**
      * Set the value of a specific attribute of the Dynamic MBean.
      *
+     * <p>
+     *  设置Dynamic MBean的特定属性的值。
+     * 
+     * 
      * @param attribute The identification of the attribute to
      * be set and  the value it is to be set to.
      *
@@ -71,6 +84,10 @@ public interface DynamicMBean {
     /**
      * Get the values of several attributes of the Dynamic MBean.
      *
+     * <p>
+     *  获取Dynamic MBean的几个属性的值。
+     * 
+     * 
      * @param attributes A list of the attributes to be retrieved.
      *
      * @return  The list of attributes retrieved.
@@ -82,6 +99,10 @@ public interface DynamicMBean {
     /**
      * Sets the values of several attributes of the Dynamic MBean.
      *
+     * <p>
+     *  设置Dynamic MBean的几个属性的值。
+     * 
+     * 
      * @param attributes A list of attributes: The identification of the
      * attributes to be set and  the values they are to be set to.
      *
@@ -94,6 +115,10 @@ public interface DynamicMBean {
     /**
      * Allows an action to be invoked on the Dynamic MBean.
      *
+     * <p>
+     *  允许在动态MBean上调用操作。
+     * 
+     * 
      * @param actionName The name of the action to be invoked.
      * @param params An array containing the parameters to be set when the action is
      * invoked.
@@ -113,6 +138,9 @@ public interface DynamicMBean {
     /**
      * Provides the exposed attributes and actions of the Dynamic MBean using an MBeanInfo object.
      *
+     * <p>
+     *  使用MBeanInfo对象提供动态MBean的公开属性和操作。
+     * 
      * @return  An instance of <CODE>MBeanInfo</CODE> allowing all attributes and actions
      * exposed by this Dynamic MBean to be retrieved.
      *

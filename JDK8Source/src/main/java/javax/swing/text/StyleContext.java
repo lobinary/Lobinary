@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,16 @@ import sun.font.FontUtilities;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  一个样式池及其相关资源。此类通过作为容纳各种资源(例如,由各种样式定义重用的字体和颜色)的缓存的容器来确定资源组的生存期。如果需要,这可以由多个文档共享以最大化相关资源的共享。
+ * <p>
+ *  这个类还为小集合的属性提供了有效的支持,并通过跨用途共享并利用它们的不变性质来压缩它们。由于许多风格被复制,共享的潜力是重要的,并且副本可以非常便宜。
+ * 较大的集减少了共享的可能性,因此自动恢复到较少空间效率的实现。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class StyleContext implements Serializable, AbstractDocument.AttributeContext {
@@ -68,6 +79,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * Returns default AttributeContext shared by all documents that
      * don't bother to define/supply their own context.
      *
+     * <p>
+     *  返回由所有不需要定义/提供自己的上下文的文档共享的默认AttributeContext。
+     * 
+     * 
      * @return the context
      */
     public static final StyleContext getDefaultStyleContext() {
@@ -81,6 +96,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
     /**
      * Creates a new StyleContext object.
+     * <p>
+     *  创建一个新的StyleContext对象。
+     * 
      */
     public StyleContext() {
         styles = new NamedStyle(null);
@@ -92,6 +110,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * resolve from bottom up so an attribute specified in a child
      * will override an attribute specified in the parent.
      *
+     * <p>
+     * 在样式层次结构中添加新样式。样式属性从下到上解析,因此子级中指定的属性将覆盖父级中指定的属性。
+     * 
+     * 
      * @param nm   the name of the style (must be unique within the
      *   collection of named styles in the document).  The name may
      *   be null if the style is unnamed, but the caller is responsible
@@ -115,6 +137,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Removes a named style previously added to the document.
      *
+     * <p>
+     *  删除先前添加到文档中的命名样式。
+     * 
+     * 
      * @param nm  the name of the style to remove
      */
     public void removeStyle(String nm) {
@@ -124,6 +150,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Fetches a named style previously added to the document
      *
+     * <p>
+     *  获取先前添加到文档中的命名样式
+     * 
+     * 
      * @param nm  the name of the style
      * @return the style
      */
@@ -134,6 +164,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Fetches the names of the styles defined.
      *
+     * <p>
+     *  获取定义的样式的名称。
+     * 
+     * 
      * @return the list of names as an enumeration
      */
     public Enumeration<?> getStyleNames() {
@@ -144,6 +178,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * Adds a listener to track when styles are added
      * or removed.
      *
+     * <p>
+     *  添加侦听器以便在添加或删除样式时进行跟踪。
+     * 
+     * 
      * @param l the change listener
      */
     public void addChangeListener(ChangeListener l) {
@@ -154,6 +192,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * Removes a listener that was tracking styles being
      * added or removed.
      *
+     * <p>
+     *  删除正在添加或删除的跟踪样式的侦听器。
+     * 
+     * 
      * @param l the change listener
      */
     public void removeChangeListener(ChangeListener l) {
@@ -164,6 +206,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * Returns an array of all the <code>ChangeListener</code>s added
      * to this StyleContext with addChangeListener().
      *
+     * <p>
+     *  返回使用addChangeListener()添加到此StyleContext的所有<code> ChangeListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ChangeListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -179,6 +225,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * the font features are resolved and the
      * font is fetched from the low-level font cache.
      *
+     * <p>
+     *  从属性集获取字体。这被实现为尝试并获取给定AttributeSet的缓存字体,并且如果失败,则字体特征被解析,并且字体从低级字体缓存获取。
+     * 
+     * 
      * @param attr the attribute set
      * @return the font
      */
@@ -198,6 +248,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * if either superscript or subscript is
          * is set, we need to reduce the font size
          * by 2.
+         * <p>
+         *  如果设置了上标​​或下标,我们需要将字体大小减小2。
+         * 
          */
         if (StyleConstants.isSuperscript(attr) ||
             StyleConstants.isSubscript(attr)) {
@@ -213,6 +266,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * like brighter, more hue, etc.  By default it simply returns
      * the value specified by the StyleConstants.Foreground attribute.
      *
+     * <p>
+     *  获取一组属性并将其转换为前景颜色规范。这可能用于指定更亮,更多的色调等。默认情况下,它只返回由StyleConstants.Foreground属性指定的值。
+     * 
+     * 
      * @param attr the set of attributes
      * @return the color
      */
@@ -226,6 +283,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * like brighter, more hue, etc.  By default it simply returns
      * the value specified by the StyleConstants.Background attribute.
      *
+     * <p>
+     *  获取一组属性并将其转换为背景颜色规范。这可能用于指定更亮,更多的色调等。默认情况下,它只返回由StyleConstants.Background属性指定的值。
+     * 
+     * 
      * @param attr the set of attributes
      * @return the color
      */
@@ -239,6 +300,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * the cache.  This is basically a low-level cache for
      * 1.1 font features.
      *
+     * <p>
+     * 获取新字体。如果缓存字体存在,则从缓存返回一个字体。如果没有,一个字体被添加到缓存。这基本上是一个低级别的缓存为1.1字体功能。
+     * 
+     * 
      * @param family the font family (such as "Monospaced")
      * @param style the style of the font (such as Font.PLAIN)
      * @param size the point size &gt;= 1
@@ -275,6 +340,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Returns font metrics for a font.
      *
+     * <p>
+     *  返回字体的字体指标。
+     * 
+     * 
      * @param f the font
      * @return the metrics
      */
@@ -295,6 +364,15 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  向给定集合添加属性,并返回新的代表集。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param old the old attribute set
      * @param name the non-null attribute name
      * @param value the attribute value
@@ -324,6 +402,15 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  向元素添加一组属性。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param old the old attribute set
      * @param attr the attributes to add
      * @return the updated attribute set
@@ -352,6 +439,15 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  从集合中删除属性。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param old the old set of attributes
      * @param name the non-null attribute name
      * @return the updated attribute set
@@ -380,6 +476,15 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  删除元素的一组属性。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param old the old attribute set
      * @param names the attribute names
      * @return the updated attribute set
@@ -408,6 +513,15 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  删除元素的一组属性。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param old the old attribute set
      * @param attrs the attributes
      * @return the updated attribute set
@@ -431,6 +545,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Fetches an empty AttributeSet.
      *
+     * <p>
+     * 获取一个空的AttributeSet。
+     * 
+     * 
      * @return the set
      */
     public AttributeSet getEmptySet() {
@@ -448,6 +566,15 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  返回MutableAttributeSet实现不再需要的集合。这对没有弱引用的1.1下的操作很有用。这通常由MutableAttributeSet实现的finalize方法调用。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param a the set to reclaim
      */
     public void reclaim(AttributeSet a) {
@@ -465,6 +592,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * compress into unique/immutable sets.  Any sets above this
      * limit will use hashtables and be a MutableAttributeSet.
      *
+     * <p>
+     *  返回要尝试和压缩到唯一/不可变集的键/值对的最大数量。任何超过此限制的集合将使用散列表并且是MutableAttributeSet。
+     * 
+     * 
      * @return the threshold
      */
     protected int getCompressionThreshold() {
@@ -478,6 +609,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * to return an AttributeSet that provides some sort of
      * attribute conversion.
      *
+     * <p>
+     *  创建可能共享的紧凑属性集。这是一个钩子,想要改变SmallAttributeSet的行为的子类。这可以重新实现以返回一个提供某种属性转换的AttributeSet。
+     * 
+     * 
      * @param a The set of attributes to be represented in the
      *  the compact form.
      */
@@ -494,6 +629,11 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * to return a MutableAttributeSet that provides some sort of
      * attribute conversion.
      *
+     * <p>
+     *  创建一组大的属性,应该在时间上折衷空间。此设置不会共享。这是一个钩子,希望改变更大的属性存储格式(默认为SimpleAttributeSet)的行为。
+     * 这可以重新实现,返回一个MutableAttributeSet,提供某种类型的属性转换。
+     * 
+     * 
      * @param a The set of attributes to be represented in the
      *  the larger form.
      */
@@ -503,6 +643,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
     /**
      * Clean the unused immutable sets out of the hashtable.
+     * <p>
+     *  从散列表中清除未使用的不可变集。
+     * 
      */
     synchronized void removeUnusedSets() {
         attributesPool.size(); // force WeakHashMap to expunge stale entries
@@ -512,6 +655,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * Search for an existing attribute set using the current search
      * parameters.  If a matching set is found, return it.  If a match
      * is not found, we create a new set and add it to the pool.
+     * <p>
+     *  使用当前搜索参数搜索现有属性集。如果找到匹配集,则返回它。如果找不到匹配,我们创建一个新集合并将其添加到池中。
+     * 
      */
     AttributeSet getImmutableUniqueSet() {
         // PENDING(prinz) should consider finding a alternative to
@@ -529,6 +675,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Creates a mutable attribute set to hand out because the current
      * needs are too big to try and use a shared version.
+     * <p>
+     * 创建一个mutable属性设置为传出,因为当前的需求太大,无法尝试和使用共享版本。
+     * 
      */
     MutableAttributeSet getMutableAttributeSet(AttributeSet a) {
         if (a instanceof MutableAttributeSet &&
@@ -541,6 +690,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Converts a StyleContext to a String.
      *
+     * <p>
+     *  将StyleContext转换为字符串。
+     * 
+     * 
      * @return the string
      */
     public String toString() {
@@ -556,6 +709,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
     /**
      * Context-specific handling of writing out attributes
+     * <p>
+     *  写出属性的上下文特定处理
+     * 
      */
     public void writeAttributes(ObjectOutputStream out,
                                   AttributeSet a) throws IOException {
@@ -564,6 +720,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
     /**
      * Context-specific handling of reading in attributes
+     * <p>
+     *  在属性中读取的上下文特定处理
+     * 
      */
     public void readAttributes(ObjectInputStream in,
                                MutableAttributeSet a) throws ClassNotFoundException, IOException {
@@ -580,6 +739,11 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * will be serialized directly.  All values are expected
      * to be serializable.
      *
+     * <p>
+     *  为了序列化的目的,将一组属性写入给定的对象流。这将特别注意处理已经在<code> registerStaticAttributeKey </code>方法中注册的静态属性键。
+     * 未注册为静态键的任何属性键都将直接序列化。所有值都需要序列化。
+     * 
+     * 
      * @param out the output stream
      * @param a the attribute set
      * @exception IOException on any I/O error
@@ -626,6 +790,12 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * The attributes retrieved from the stream will be placed
      * into the given mutable set.
      *
+     * <p>
+     *  从给定的对象输入流读取一组先前用<code> writeAttributeSet </code>写出的属性。
+     * 这将尝试将静态对象的键还原为当前虚拟机中的静态对象,只考虑已经注册到<code> registerStaticAttributeKey </code>方法的那些键。
+     * 从流检索的属性将放置到给定的可变集中。
+     * 
+     * 
      * @param in the object stream to read the attribute data from.
      * @param a  the attribute set to place the attribute
      *   definitions in.
@@ -668,6 +838,13 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * definition in Object) in order to be the same when
      * recomputed later.
      *
+     * <p>
+     *  将对象注册为在属性集中用作键的静态对象。这允许特别地对密钥进行序列化。
+     * <p>
+     * 对于在1.1虚拟机下操作,这使用由<code> toString </code>返回的值连接到类名。
+     *  toString返回的值不应该有类引用(即它应该从Object中的定义重新实现),以便在以后重新计算时是相同的。
+     * 
+     * 
      * @param key the non-null object key
      */
     public static void registerStaticAttributeKey(Object key) {
@@ -683,6 +860,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Returns the object previously registered with
      * <code>registerStaticAttributeKey</code>.
+     * <p>
+     *  返回先前使用<code> registerStaticAttributeKey </code>注册的对象。
+     * 
      */
     public static Object getStaticAttribute(Object key) {
         if (thawKeyMap == null || key == null) {
@@ -693,6 +873,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
     /**
      * Returns the String that <code>key</code> will be registered with
+     * <p>
+     *  返回<code> key </code>注册的字符串
+     * 
+     * 
      * @see #getStaticAttribute
      * @see #registerStaticAttributeKey
      */
@@ -725,6 +909,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * The name given to the default logical style attached
      * to paragraphs.
+     * <p>
+     *  附加到段落的默认逻辑样式的名称。
+     * 
      */
     public static final String DEFAULT_STYLE = "default";
 
@@ -744,12 +931,18 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * being used.  This helps indicate when the sets need
      * to be cleaned out of the hashtable they are stored
      * in.
+     * <p>
+     *  当前未使用的不可变集的数量。这有助于指示何时需要从存储的哈希表中清除集合。
+     * 
      */
     private int unusedSets;
 
     /**
      * The threshold for no longer sharing the set of attributes
      * in an immutable table.
+     * <p>
+     *  不再共享不可变表中的属性集的阈值。
+     * 
      */
     static final int THRESHOLD = 9;
 
@@ -759,6 +952,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * of the set is the length of the array divided by two.  By
      * default, this is the class that will be used to store attributes
      * when held in the compact sharable form.
+     * <p>
+     *  此类在数组中保存少量属性。存储格式是键,值,键,值等。集合的大小是数组的长度除以二。默认情况下,这是将以紧凑的可共享形式保存时用于存储属性的类。
+     * 
      */
     public class SmallAttributeSet implements AttributeSet {
 
@@ -809,6 +1005,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Returns a string showing the key/value pairs
+         * <p>
+         *  返回显示键/值对的字符串
+         * 
          */
         public String toString() {
             String s = "{";
@@ -827,6 +1026,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Returns a hashcode for this set of attributes.
+         * <p>
+         *  返回此属性集的哈希码。
+         * 
+         * 
          * @return     a hashcode value for this set of attributes.
          */
         public int hashCode() {
@@ -842,6 +1045,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * Compares this object to the specified object.
          * The result is <code>true</code> if the object is an equivalent
          * set of attributes.
+         * <p>
+         *  将此对象与指定的对象进行比较。如果对象是等效的一组属性,结果是<code> true </code>。
+         * 
+         * 
          * @param     obj   the object to compare with.
          * @return    <code>true</code> if the objects are equal;
          *            <code>false</code> otherwise.
@@ -859,6 +1066,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * Clones a set of attributes.  Since the set is immutable, a
          * clone is basically the same set.
          *
+         * <p>
+         *  克隆一组属性。因为集合是不可变的,所以克隆基本上是相同的集合。
+         * 
+         * 
          * @return the set of attributes
          */
         public Object clone() {
@@ -870,6 +1081,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Gets the number of attributes that are defined.
          *
+         * <p>
+         *  获取定义的属性数。
+         * 
+         * 
          * @return the number of attributes
          * @see AttributeSet#getAttributeCount
          */
@@ -880,6 +1095,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Checks whether a given attribute is defined.
          *
+         * <p>
+         *  检查是否定义了给定属性。
+         * 
+         * 
          * @param key the attribute key
          * @return true if the attribute is defined
          * @see AttributeSet#isDefined
@@ -898,6 +1117,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Checks whether two attribute sets are equal.
          *
+         * <p>
+         * 检查两个属性集是否相等。
+         * 
+         * 
          * @param attr the attribute set to check against
          * @return true if the same
          * @see AttributeSet#isEqual
@@ -913,6 +1136,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Copies a set of attributes.
          *
+         * <p>
+         *  复制一组属性。
+         * 
+         * 
          * @return the copy
          * @see AttributeSet#copyAttributes
          */
@@ -923,6 +1150,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Gets the value of an attribute.
          *
+         * <p>
+         *  获取属性的值。
+         * 
+         * 
          * @param key the attribute name
          * @return the attribute value
          * @see AttributeSet#getAttribute
@@ -940,6 +1171,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Gets the names of all attributes.
          *
+         * <p>
+         *  获取所有属性的名称。
+         * 
+         * 
          * @return the attribute names
          * @see AttributeSet#getAttributeNames
          */
@@ -950,6 +1185,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Checks whether a given attribute name/value is defined.
          *
+         * <p>
+         *  检查是否定义了给定的属性名称/值。
+         * 
+         * 
          * @param name the attribute name
          * @param value the attribute value
          * @return true if the name/value is defined
@@ -963,6 +1202,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * Checks whether the attribute set contains all of
          * the given attributes.
          *
+         * <p>
+         *  检查属性集是否包含所有给定的属性。
+         * 
+         * 
          * @param attrs the attributes to check
          * @return true if the element contains all the attributes
          * @see AttributeSet#containsAttributes
@@ -983,6 +1226,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * If not overriden, the resolving parent defaults to
          * the parent element.
          *
+         * <p>
+         *  如果不覆盖,则解析父代方默认为父元素。
+         * 
+         * 
          * @return the attributes from the parent
          * @see AttributeSet#getResolveParent
          */
@@ -999,6 +1246,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
     /**
      * An enumeration of the keys in a SmallAttributeSet.
+     * <p>
+     *  SmallAttributeSet中键的枚举。
+     * 
      */
     class KeyEnumeration implements Enumeration<Object> {
 
@@ -1010,6 +1260,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Tests if this enumeration contains more elements.
          *
+         * <p>
+         *  测试此枚举是否包含更多元素。
+         * 
+         * 
          * @return  <code>true</code> if this enumeration contains more elements;
          *          <code>false</code> otherwise.
          * @since   JDK1.0
@@ -1021,6 +1275,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Returns the next element of this enumeration.
          *
+         * <p>
+         *  返回此枚举的下一个元素。
+         * 
+         * 
          * @return     the next element of this enumeration.
          * @exception  NoSuchElementException  if no more elements exist.
          * @since      JDK1.0
@@ -1041,6 +1299,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
     /**
      * Sorts the key strings so that they can be very quickly compared
      * in the attribute set searches.
+     * <p>
+     *  对关键字字符串进行排序,以便可以在属性集搜索中快速比较。
+     * 
      */
     class KeyBuilder {
 
@@ -1061,6 +1322,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Initialize with a set of already sorted
          * keys (data from an existing SmallAttributeSet).
+         * <p>
+         *  使用一组已排序的键(来自现有SmallAttributeSet的数据)进行初始化。
+         * 
          */
         private void initialize(Object[] sorted) {
             keys.removeAllElements();
@@ -1076,6 +1340,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * Creates a table of sorted key/value entries
          * suitable for creation of an instance of
          * SmallAttributeSet.
+         * <p>
+         *  创建适合创建SmallAttributeSet实例的排序键/值条目的表。
+         * 
          */
         public Object[] createTable() {
             int n = keys.size();
@@ -1091,6 +1358,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * The number of key/value pairs contained
          * in the current key being forged.
+         * <p>
+         *  包含在当前密钥中的键/值对的数量是伪造的。
+         * 
          */
         int getCount() {
             return keys.size();
@@ -1098,6 +1368,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Adds a key/value to the set.
+         * <p>
+         *  向该集合添加键/值。
+         * 
          */
         public void addAttribute(Object key, Object value) {
             keys.addElement(key);
@@ -1106,6 +1379,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Adds a set of key/value pairs to the set.
+         * <p>
+         *  向该集合添加一组键/值对。
+         * 
          */
         public void addAttributes(AttributeSet attr) {
             if (attr instanceof SmallAttributeSet) {
@@ -1126,6 +1402,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Removes the given name from the set.
+         * <p>
+         *  从集合中删除给定的名称。
+         * 
          */
         public void removeAttribute(Object key) {
             int n = keys.size();
@@ -1140,6 +1419,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Removes the set of keys from the set.
+         * <p>
+         *  从集合中删除键集。
+         * 
          */
         public void removeAttributes(Enumeration names) {
             while (names.hasMoreElements()) {
@@ -1150,6 +1432,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Removes the set of matching attributes from the set.
+         * <p>
+         *  从集合中删除匹配属性集。
+         * 
          */
         public void removeAttributes(AttributeSet attr) {
             Enumeration names = attr.getAttributeNames();
@@ -1179,6 +1464,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
     /**
      * key for a font table
+     * <p>
+     *  键用于字体表
+     * 
      */
     static class FontKey {
 
@@ -1188,6 +1476,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Constructs a font key.
+         * <p>
+         *  构造字体键。
+         * 
          */
         public FontKey(String family, int style, int size) {
             setValue(family, style, size);
@@ -1201,6 +1492,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Returns a hashcode for this font.
+         * <p>
+         *  返回此字体的哈希码。
+         * 
+         * 
          * @return     a hashcode value for this font.
          */
         public int hashCode() {
@@ -1213,6 +1508,11 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * The result is <code>true</code> if and only if the argument is not
          * <code>null</code> and is a <code>Font</code> object with the same
          * name, style, and point size as this font.
+         * <p>
+         *  将此对象与指定的对象进行比较。
+         * 如果且仅当参数不是<code> null </code>且是具有相同名称,样式和点大小的<code> Font </code>对象时,结果是<code> true </code>这个字体。
+         * 
+         * 
          * @param     obj   the object to compare this font with.
          * @return    <code>true</code> if the objects are equal;
          *            <code>false</code> otherwise.
@@ -1243,12 +1543,23 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 属性集合,通常用于表示字符和段落样式。这是MutableAttributeSet的实现,如果需要可以观察。
+     * 这些样式将利用不变性,而集合足够小,并且可能比类似SimpleAttributeSet的东西效率更高。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public class NamedStyle implements Style, Serializable {
 
         /**
          * Creates a new named style.
          *
+         * <p>
+         *  创建新的命名样式。
+         * 
+         * 
          * @param name the style name, null for unnamed
          * @param parent the parent style, null if none
          * @since 1.4
@@ -1266,6 +1577,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Creates a new named style.
          *
+         * <p>
+         *  创建新的命名样式。
+         * 
+         * 
          * @param parent the parent style, null if none
          * @since 1.4
          */
@@ -1275,6 +1590,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * Creates a new named style, with a null name and parent.
+         * <p>
+         *  创建一个新的命名样式,带有空名称和父项。
+         * 
          */
         public NamedStyle() {
             attributes = getEmptySet();
@@ -1283,6 +1601,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Converts the style to a string.
          *
+         * <p>
+         *  将样式转换为字符串。
+         * 
+         * 
          * @return the string
          */
         public String toString() {
@@ -1293,6 +1615,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * Fetches the name of the style.   A style is not required to be named,
          * so null is returned if there is no name associated with the style.
          *
+         * <p>
+         *  获取样式的名称。样式不需要命名,因此如果没有与样式相关联的名称,则返回null。
+         * 
+         * 
          * @return the name
          */
         public String getName() {
@@ -1305,6 +1631,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Changes the name of the style.  Does nothing with a null name.
          *
+         * <p>
+         *  更改样式的名称。与空名称无关。
+         * 
+         * 
          * @param name the new name
          */
         public void setName(String name) {
@@ -1316,6 +1646,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Adds a change listener.
          *
+         * <p>
+         *  添加更改侦听器。
+         * 
+         * 
          * @param l the change listener
          */
         public void addChangeListener(ChangeListener l) {
@@ -1325,6 +1659,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Removes a change listener.
          *
+         * <p>
+         *  删除更改侦听器。
+         * 
+         * 
          * @param l the change listener
          */
         public void removeChangeListener(ChangeListener l) {
@@ -1336,6 +1674,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * Returns an array of all the <code>ChangeListener</code>s added
          * to this NamedStyle with addChangeListener().
          *
+         * <p>
+         *  返回使用addChangeListener()添加到此NamedStyle的所有<code> ChangeListener </code>的数组。
+         * 
+         * 
          * @return all of the <code>ChangeListener</code>s added or an empty
          *         array if no listeners have been added
          * @since 1.4
@@ -1351,6 +1693,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * is lazily created using the parameters passed into
          * the fire method.
          *
+         * <p>
+         *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+         * 
+         * 
          * @see EventListenerList
          */
         protected void fireStateChanged() {
@@ -1372,6 +1718,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * Return an array of all the listeners of the given type that
          * were added to this model.
          *
+         * <p>
+         * 返回添加到此模型的给定类型的所有侦听器的数组。
+         * 
+         * 
          * @return all of the objects receiving <em>listenerType</em> notifications
          *          from this model
          *
@@ -1387,6 +1737,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Gets the number of attributes that are defined.
          *
+         * <p>
+         *  获取定义的属性数。
+         * 
+         * 
          * @return the number of attributes &gt;= 0
          * @see AttributeSet#getAttributeCount
          */
@@ -1397,6 +1751,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Checks whether a given attribute is defined.
          *
+         * <p>
+         *  检查是否定义了给定属性。
+         * 
+         * 
          * @param attrName the non-null attribute name
          * @return true if the attribute is defined
          * @see AttributeSet#isDefined
@@ -1408,6 +1766,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Checks whether two attribute sets are equal.
          *
+         * <p>
+         *  检查两个属性集是否相等。
+         * 
+         * 
          * @param attr the attribute set to check against
          * @return true if the same
          * @see AttributeSet#isEqual
@@ -1419,6 +1781,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Copies a set of attributes.
          *
+         * <p>
+         *  复制一组属性。
+         * 
+         * 
          * @return the copy
          * @see AttributeSet#copyAttributes
          */
@@ -1431,6 +1797,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Gets the value of an attribute.
          *
+         * <p>
+         *  获取属性的值。
+         * 
+         * 
          * @param attrName the non-null attribute name
          * @return the attribute value
          * @see AttributeSet#getAttribute
@@ -1442,6 +1812,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Gets the names of all attributes.
          *
+         * <p>
+         *  获取所有属性的名称。
+         * 
+         * 
          * @return the attribute names as an enumeration
          * @see AttributeSet#getAttributeNames
          */
@@ -1452,6 +1826,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Checks whether a given attribute name/value is defined.
          *
+         * <p>
+         *  检查是否定义了给定的属性名称/值。
+         * 
+         * 
          * @param name the non-null attribute name
          * @param value the attribute value
          * @return true if the name/value is defined
@@ -1465,6 +1843,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Checks whether the element contains all the attributes.
          *
+         * <p>
+         *  检查元素是否包含所有属性。
+         * 
+         * 
          * @param attrs the attributes to check
          * @return true if the element contains all the attributes
          * @see AttributeSet#containsAttributes
@@ -1478,6 +1860,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * If not overriden, the resolving parent defaults to
          * the parent element.
          *
+         * <p>
+         *  从父级获取属性。如果不覆盖,则解析父代方默认为父元素。
+         * 
+         * 
          * @return the attributes from the parent
          * @see AttributeSet#getResolveParent
          */
@@ -1492,6 +1878,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Adds an attribute.
          *
+         * <p>
+         *  添加属性。
+         * 
+         * 
          * @param name the non-null attribute name
          * @param value the attribute value
          * @see MutableAttributeSet#addAttribute
@@ -1505,6 +1895,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Adds a set of attributes to the element.
          *
+         * <p>
+         *  向元素添加一组属性。
+         * 
+         * 
          * @param attr the attributes to add
          * @see MutableAttributeSet#addAttribute
          */
@@ -1517,6 +1911,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Removes an attribute from the set.
          *
+         * <p>
+         *  从集合中删除属性。
+         * 
+         * 
          * @param name the non-null attribute name
          * @see MutableAttributeSet#removeAttribute
          */
@@ -1529,6 +1927,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Removes a set of attributes for the element.
          *
+         * <p>
+         *  删除元素的一组属性。
+         * 
+         * 
          * @param names the attribute names
          * @see MutableAttributeSet#removeAttributes
          */
@@ -1541,6 +1943,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Removes a set of attributes for the element.
          *
+         * <p>
+         *  删除元素的一组属性。
+         * 
+         * 
          * @param attrs the attributes
          * @see MutableAttributeSet#removeAttributes
          */
@@ -1557,6 +1963,10 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
         /**
          * Sets the resolving parent.
          *
+         * <p>
+         *  设置解析父代。
+         * 
+         * 
          * @param parent the parent, null if none
          * @see MutableAttributeSet#setResolveParent
          */
@@ -1587,6 +1997,9 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
 
         /**
          * The change listeners for the model.
+         * <p>
+         *  模型的更改侦听器。
+         * 
          */
         protected EventListenerList listenerList = new EventListenerList();
 
@@ -1594,12 +2007,17 @@ public class StyleContext implements Serializable, AbstractDocument.AttributeCon
          * Only one ChangeEvent is needed per model instance since the
          * event's only (read-only) state is the source property.  The source
          * of events generated here is always "this".
+         * <p>
+         *  由于事件的只读(只读)状态是源属性,因此每个模型实例只需要一个ChangeEvent。这里生成的事件源始终是"this"。
+         * 
          */
         protected transient ChangeEvent changeEvent = null;
 
         /**
          * Inner AttributeSet implementation, which may be an
          * immutable unique set being shared.
+         * <p>
+         *  内部属性集实现,其可以是被共享的不可变唯一集。
          */
         private transient AttributeSet attributes;
 

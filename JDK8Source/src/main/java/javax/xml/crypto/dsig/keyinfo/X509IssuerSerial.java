@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * $Id: X509IssuerSerial.java,v 1.4 2005/05/10 16:35:35 mullan Exp $
+ * <p>
+ *  $ Id：X509IssuerSerial.java,v 1.4 2005/05/10 16:35:35 mullan Exp $
+ * 
  */
 package javax.xml.crypto.dsig.keyinfo;
 
@@ -62,6 +66,21 @@ import javax.xml.crypto.XMLStructure;
  *     (cert.getIssuerX500Principal().getName(), cert.getSerialNumber());
  * </pre>
  *
+ * <p>
+ *  在<a href="http://www.w3.org/TR/xmldsig-core/"> XML签名语法和处理的W3C建议书中定义的XML <code> X509IssuerSerial </code>
+ * 元素的表示形式</a>。
+ *  <code> X509IssuerSerial </code>对象包含X.509发行者可分辨名称(DN)和序列号对。 XML模式定义定义为：。
+ * 
+ * <pre>
+ *  &lt; element name ="X509IssuerSerial"type ="ds：X509IssuerSerialType"/&gt; &lt; complexType name ="X5
+ * 09IssuerSerialType"&gt; &lt; sequence&gt; &lt; element name ="X509IssuerName"type ="string"/&gt; &lt;
+ *  element name ="X509SerialNumber"type ="integer"/&gt; &lt; / sequence&gt; &lt; / complexType&gt;。
+ * </pre>
+ * 
+ *  可以通过调用{@link KeyInfoFactory}类的{@link KeyInfoFactory#newX509IssuerSerial newX509IssuerSerial}方法并传递<code>
+ *  String </code>和<code>来创建<code> X509IssuerSerial </code> BigInteger </code>代表X.500 DN和序列号。
+ * 以下是从现有{@link X509Certificate}的发行者DN和序列号创建<code> X509IssuerSerial </code>的示例：。
+ * 
  * @author Sean Mullan
  * @author JSR 105 Expert Group
  * @since 1.6
@@ -75,6 +94,14 @@ public interface X509IssuerSerial extends XMLStructure {
      * <code>X509IssuerSerial</code> in
      * <a href="http://www.ietf.org/rfc/rfc2253.txt">RFC 2253</a> String format.
      *
+     * <p>
+     * <pre>
+     *  KeyInfoFactory factory = KeyInfoFactory.getInstance("DOM"); X509IssuerSerial issuer = factory.newX50
+     * 9IssuerSerial(cert.getIssuerX500Principal()。
+     * getName(),cert.getSerialNumber());。
+     * </pre>
+     * 
+     * 
      * @return the X.500 distinguished name in RFC 2253 String format (never
      *    <code>null</code>)
      */
@@ -83,6 +110,11 @@ public interface X509IssuerSerial extends XMLStructure {
     /**
      * Returns the serial number of this <code>X509IssuerSerial</code>.
      *
+     * <p>
+     * 返回<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>字符串格式中此<code> X509IssuerSerial </code>的
+     * X.500可分辨名称。
+     * 
+     * 
      * @return the serial number (never <code>null</code>)
      */
     BigInteger getSerialNumber();

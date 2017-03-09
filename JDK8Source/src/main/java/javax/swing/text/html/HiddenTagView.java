@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,11 @@ import java.util.*;
  * reset. As this inherits from EditableView if the JTextComponent is
  * not editable, the textfield will not be visible.
  *
+ * <p>
+ *  HiddenTagView子类EditableView包含一个显示元素名称的JTextField。当文本字段被编辑时,元素名称被重置。
+ * 因为这继承自EditableView,如果JTextComponent不可编辑,文本字段将不可见。
+ * 
+ * 
  * @author  Scott Violet
  */
 class HiddenTagView extends EditableView implements DocumentListener {
@@ -158,6 +164,12 @@ class HiddenTagView extends EditableView implements DocumentListener {
      * directly invokes <code>_setTextFromModel</code>, otherwise
      * <code>SwingUtilities.invokeLater</code> is used to schedule execution
      * of <code>_setTextFromModel</code>.
+     * <p>
+     *  这将重置我们创建的文本组件上的文本,以匹配我们表示的元素的AttributeSet的文本。
+     *  <p>如果在事件分派线程上调用,则直接调用<code> _setTextFromModel </code>,否则<code> SwingUtilities.invokeLater </code>用于调
+     * 度<code> _setTextFromModel </code> 。
+     *  这将重置我们创建的文本组件上的文本,以匹配我们表示的元素的AttributeSet的文本。
+     * 
      */
     void setTextFromModel() {
         if (SwingUtilities.isEventDispatchThread()) {
@@ -175,6 +187,9 @@ class HiddenTagView extends EditableView implements DocumentListener {
     /**
      * This resets the text on the text component we created to match
      * that of the AttributeSet for the Element we represent.
+     * <p>
+     *  这将重置我们创建的文本组件上的文本,以匹配我们表示的元素的AttributeSet的文本。
+     * 
      */
     void _setTextFromModel() {
         Document doc = getDocument();
@@ -209,6 +224,11 @@ class HiddenTagView extends EditableView implements DocumentListener {
      * directly invokes <code>_updateModelFromText</code>, otherwise
      * <code>SwingUtilities.invokeLater</code> is used to schedule execution
      * of <code>_updateModelFromText</code>.
+     * <p>
+     *  这将文本从我们创建的文本组件复制到我们表示的元素的AttributeSet。
+     *  <p>如果这是在事件分派线程上调用,则直接调用<code> _updateModelFromText </code>,否则<code> SwingUtilities.invokeLater </code>
+     * 用于调度<code> _updateModelFromText </code> 。
+     *  这将文本从我们创建的文本组件复制到我们表示的元素的AttributeSet。
      */
     void updateModelFromText() {
         if (!isSettingAttributes) {
@@ -228,6 +248,8 @@ class HiddenTagView extends EditableView implements DocumentListener {
     /**
      * This copies the text from the text component we've created
      * to the Element's AttributeSet we represent.
+     * <p>
+     * 
      */
     void _updateModelFromText() {
         Document doc = getDocument();

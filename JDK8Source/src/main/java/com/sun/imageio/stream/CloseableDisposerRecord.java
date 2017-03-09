@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,8 @@ import sun.java2d.DisposerRecord;
  * Convenience class that closes a given resource (e.g. RandomAccessFile),
  * typically associated with an Image{Input,Output}Stream, prior to the
  * stream being garbage collected.
+ * <p>
+ *  在流被垃圾收集之前,关闭给定资源(例如,RandomAccessFile)的便利类通常与Image {Input,Output}流相关联。
  */
 public class CloseableDisposerRecord implements DisposerRecord {
     private Closeable closeable;

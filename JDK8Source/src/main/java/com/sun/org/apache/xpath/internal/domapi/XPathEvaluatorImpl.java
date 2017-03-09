@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002-2005 Apache软件基金会
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XPathEvaluatorImpl.java,v 1.2.4.1 2005/09/10 04:04:07 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XPathEvaluatorImpl.java,v 1.2.4.1 2005/09/10 04:04:07 jeffsuttor Exp $
+ * 
  */
 
 package com.sun.org.apache.xpath.internal.domapi;
@@ -54,6 +67,17 @@ import org.w3c.dom.xpath.XPathNSResolver;
  * sources that may provide support for special extension functions or
  * variables which are not defined in this specification.</p>
  *
+ * <p>
+ *  该类根据DOM L3 XPath规范,工作组注2004年2月26日提供了XPathEvaluator的实现。
+ * 
+ *  <p>另请参阅<a href='http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>文档对象模型(DOM)3级XPath规范< a>。
+ * </p>。
+ * 
+ * </P>的XPath表达式的评价通过<代码> XPathEvaluator </代码>提供,这将提供的XPath 1.0表达式的评估没有专门扩展函数或变量。
+ * 期望在支持XPath DOM模块的实现中,在实现<code> Document </code>接口的同一对象上实现<code> XPathEvaluator </code>接口。
+ *  <code> XPathEvaluator </code>实现可以从可以为特殊扩展函数或未在本规范中定义的变量提供支持的其他源提供。</p>。
+ * 
+ * 
  * @see org.w3c.dom.xpath.XPathEvaluator
  *
  * @xsl.usage internal
@@ -65,15 +89,23 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
          * evaluate method.  Its purpose is to satisfy the DOM L3 XPath API
          * requirement that if a null prefix resolver is used, an exception
          * should only be thrown when an attempt is made to resolve a prefix.
+         * <p>
+         *  每当将null传递给evaluate方法时,都会创建此前缀解析器。其目的是满足DOM L3 XPath API要求,如果使用空前缀解析器,则只有在尝试解析前缀时才应抛出异常。
+         * 
          */
         private class DummyPrefixResolver implements PrefixResolver {
 
                 /**
                  * Constructor for DummyPrefixResolver.
+                 * <p>
+                 *  DummyPrefixResolver的构造函数。
+                 * 
                  */
                 DummyPrefixResolver() {}
 
                 /**
+                /* <p>
+                /* 
                  * @exception DOMException
          *   NAMESPACE_ERR: Always throws this exceptionn
                  *
@@ -85,6 +117,8 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
                 }
 
                 /**
+                /* <p>
+                /* 
                  * @exception DOMException
          *   NAMESPACE_ERR: Always throws this exceptionn
          *
@@ -95,6 +129,8 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
                 }
 
                 /**
+                /* <p>
+                /* 
                  * @see com.sun.org.apache.xml.internal.utils.PrefixResolver#handlesNullPrefixes()
                  */
                 public boolean handlesNullPrefixes() {
@@ -102,6 +138,8 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
                 }
 
                 /**
+                /* <p>
+                /* 
                  * @see com.sun.org.apache.xml.internal.utils.PrefixResolver#getBaseIdentifier()
                  */
                 public String getBaseIdentifier() {
@@ -113,12 +151,19 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
     /**
      * The document to be searched to parallel the case where the XPathEvaluator
      * is obtained by casting a Document.
+     * <p>
+     *  要并行搜索的文档,其中XPathEvaluator是通过转换Document获得的。
+     * 
      */
     private final Document m_doc;
 
     /**
      * Constructor for XPathEvaluatorImpl.
      *
+     * <p>
+     *  XPathEvaluatorImpl的构造函数。
+     * 
+     * 
      * @param doc The document to be searched, to parallel the case where''
      *            the XPathEvaluator is obtained by casting the document.
      */
@@ -130,6 +175,9 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
      * Constructor in the case that the XPath expression can be evaluated
      * without needing an XML document at all.
      *
+     * <p>
+     *  在可以评估XPath表达式而无需任何XML文档的情况下的构造方法。
+     * 
      */
     public XPathEvaluatorImpl() {
             m_doc = null;
@@ -142,6 +190,10 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
      * efficient internal form and preresolve all namespace prefixes which
      * occur within the expression.
      *
+     * <p>
+     *  创建具有已解析命名空间的已分析XPath表达式。这在表达式将在应用程序中重用时很有用,因为它可以将表达式字符串编译为更有效的内部形式,并预先解析表达式中出现的所有命名空间前缀。
+     * 
+     * 
      * @param expression The XPath expression string to be parsed.
      * @param resolver The <code>resolver</code> permits translation of
      *   prefixes within the XPath expression into appropriate namespace URIs
@@ -193,6 +245,12 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
      * in the node's hierarchy at the time lookupNamespaceURI is called, also
      * correctly resolving the implicit xml prefix.
      *
+     * <p>
+     * 适应任何DOM节点以解析命名空间,以便可以轻松地相对于其在文档中出现的节点的上下文来评估XPath表达式。
+     * 此适配器的工作方式类似DOM 3级方法<code> lookupNamespaceURI </code>在解析命名空间uri从给定的前缀使用在调用lookupNamespaceURI时节点的层次结构中可
+     * 用的当前信息的节点上,也正确解析隐式xml前缀。
+     * 适应任何DOM节点以解析命名空间,以便可以轻松地相对于其在文档中出现的节点的上下文来评估XPath表达式。
+     * 
      * @param nodeResolver The node to be used as a context for namespace
      *   resolution.
      * @return <code>XPathNSResolver</code> which resolves namespaces with
@@ -210,6 +268,9 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
      * Evaluates an XPath expression string and returns a result of the
      * specified type if possible.
      *
+     * <p>
+     * 
+     * 
      * @param expression The XPath expression string to be parsed and
      *   evaluated.
      * @param contextNode The <code>context</code> is context node for the

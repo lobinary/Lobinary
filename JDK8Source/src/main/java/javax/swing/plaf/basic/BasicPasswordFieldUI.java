@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import javax.swing.plaf.*;
  * character as specified in JPasswordField, rather than the
  * real text contained in the field.
  *
+ * <p>
+ *  提供密码字段的Windows外观。与标准文本字段的唯一区别是,文本的视图仅仅是JPasswordField中指定的回显字符的字符串,而不是字段中包含的真实文本。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class BasicPasswordFieldUI extends BasicTextFieldUI {
@@ -45,6 +50,10 @@ public class BasicPasswordFieldUI extends BasicTextFieldUI {
     /**
      * Creates a UI for a JPasswordField.
      *
+     * <p>
+     *  为JPasswordField创建一个UI。
+     * 
+     * 
      * @param c the JPasswordField
      * @return the UI
      */
@@ -57,6 +66,10 @@ public class BasicPasswordFieldUI extends BasicTextFieldUI {
      * UIManager.  This is used as a prefix to all the standard
      * text properties.
      *
+     * <p>
+     *  获取用作通过UIManager查找属性的键的名称。这用作所有标准文本属性的前缀。
+     * 
+     * 
      * @return the name ("PasswordField")
      */
     protected String getPropertyPrefix() {
@@ -66,6 +79,10 @@ public class BasicPasswordFieldUI extends BasicTextFieldUI {
 
     /**
      * Installs the necessary properties on the JPasswordField.
+     * <p>
+     *  在JPasswordField上安装必要的属性。
+     * 
+     * 
      * @since 1.6
      */
     protected void installDefaults() {
@@ -80,6 +97,10 @@ public class BasicPasswordFieldUI extends BasicTextFieldUI {
     /**
      * Creates a view (PasswordView) for an element.
      *
+     * <p>
+     *  为元素创建视图(PasswordView)。
+     * 
+     * 
      * @param elem the element
      * @return the view
      */
@@ -91,6 +112,8 @@ public class BasicPasswordFieldUI extends BasicTextFieldUI {
      * Create the action map for Password Field.  This map provides
      * same actions for double mouse click and
      * and for triple mouse click (see bug 4231444).
+     * <p>
+     *  创建密码字段的操作映射。此映射提供了双鼠标单击和三鼠标单击的相同操作(见错误4231444)。
      */
 
     ActionMap createActionMap() {

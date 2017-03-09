@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,12 @@ import sun.java2d.DisposerRecord;
  * <code>InputStream</code>.  This class is provided for cases where
  * it is not possible to create a writable temporary file.
  *
+ * <p>
+ *  <code> ImageInputStream </code>的实现,它从普通的<code> InputStream </code>获取输入。存储缓冲器用于至少缓存丢弃位置和当前读取位置之间的数据。
+ * 
+ *  <p>一般来说,最好在从普通的<code> InputStream </code>中读取时使用<code> FileCacheImageInputStream </code>。
+ * 此类用于不能创建可写临时文件的情况。
+ * 
  */
 public class MemoryCacheImageInputStream extends ImageInputStreamImpl {
 
@@ -59,6 +66,10 @@ public class MemoryCacheImageInputStream extends ImageInputStreamImpl {
      * Constructs a <code>MemoryCacheImageInputStream</code> that will read
      * from a given <code>InputStream</code>.
      *
+     * <p>
+     *  构造将从给定的<code> InputStream </code>读取的<code> MemoryCacheImageInputStream </code>。
+     * 
+     * 
      * @param stream an <code>InputStream</code> to read from.
      *
      * @exception IllegalArgumentException if <code>stream</code> is
@@ -130,6 +141,10 @@ public class MemoryCacheImageInputStream extends ImageInputStreamImpl {
      * <code>ImageInputStream</code> caches data in order to allow
      * seeking backwards.
      *
+     * <p>
+     *  返回<code> true </code>,因为此<code> ImageInputStream </code>缓存数据以允许向后搜索。
+     * 
+     * 
      * @return <code>true</code>.
      *
      * @see #isCachedMemory
@@ -143,6 +158,10 @@ public class MemoryCacheImageInputStream extends ImageInputStreamImpl {
      * Returns <code>false</code> since this
      * <code>ImageInputStream</code> does not maintain a file cache.
      *
+     * <p>
+     *  返回<code> false </code>,因为此<code> ImageInputStream </code>不维护文件缓存。
+     * 
+     * 
      * @return <code>false</code>.
      *
      * @see #isCached
@@ -156,6 +175,10 @@ public class MemoryCacheImageInputStream extends ImageInputStreamImpl {
      * Returns <code>true</code> since this
      * <code>ImageInputStream</code> maintains a main memory cache.
      *
+     * <p>
+     *  返回<code> true </code>,因为<code> ImageInputStream </code>维护主内存缓存。
+     * 
+     * 
      * @return <code>true</code>.
      *
      * @see #isCached
@@ -168,6 +191,9 @@ public class MemoryCacheImageInputStream extends ImageInputStreamImpl {
     /**
      * Closes this <code>MemoryCacheImageInputStream</code>, freeing
      * the cache.  The source <code>InputStream</code> is not closed.
+     * <p>
+     *  关闭此<code> MemoryCacheImageInputStream </code>,释放缓存。源<code> InputStream </code>未关闭。
+     * 
      */
     public void close() throws IOException {
         super.close();
@@ -178,6 +204,8 @@ public class MemoryCacheImageInputStream extends ImageInputStreamImpl {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     protected void finalize() throws Throwable {
         // Empty finalizer: for performance reasons we instead use the

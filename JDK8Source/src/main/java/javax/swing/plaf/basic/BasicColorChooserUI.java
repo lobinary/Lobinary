@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import sun.swing.DefaultLookup;
 /**
  * Provides the basic look and feel for a JColorChooser.
  * <p>
+ * <p>
+ *  提供JColorChooser的基本外观和感觉。
+ * <p>
+ * 
  * @author Tom Santos
  * @author Steve Wilson
  */
@@ -49,6 +54,10 @@ public class BasicColorChooserUI extends ColorChooserUI
     /**
      * JColorChooser this BasicColorChooserUI is installed on.
      *
+     * <p>
+     *  JColorChooser这个BasicColorChooserUI安装在。
+     * 
+     * 
      * @since 1.5
      */
     protected JColorChooser chooser;
@@ -159,6 +168,10 @@ public class BasicColorChooserUI extends ColorChooserUI
     /**
      * Removes installed preview panel from the UI delegate.
      *
+     * <p>
+     *  从UI代理中删除已安装的预览面板。
+     * 
+     * 
      * @since 1.7
      */
     protected void uninstallPreviewPanel() {
@@ -338,6 +351,8 @@ public class BasicColorChooserUI extends ColorChooserUI
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicColorChooserUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code BasicColorChooserUI}的子类中实例化它。
      */
     public class PropertyHandler implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent e) {

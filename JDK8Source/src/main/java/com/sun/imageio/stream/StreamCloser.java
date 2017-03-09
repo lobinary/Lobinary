@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ import javax.imageio.stream.ImageInputStream;
  * if no other references to it exists. Stream can be closed
  * explicitly without removal from StreamCloser queue.
  * Explicit removal from the queue only helps to save some memory.
+ * <p>
+ *  此类提供了在VM关闭时正确关闭挂起的图像输入/输出流的方法。这可能有助于正确清理,如删除临时文件。
+ * 
+ *  如果没有其他引用,则添加流不会阻止它被垃圾收集。流可以明确地关闭,而不从StreamCloser队列中删除。从队列中显式删除只有助于节省一些内存。
+ * 
  */
 public class StreamCloser {
 
@@ -87,6 +93,9 @@ public class StreamCloser {
                             /* The thread must be a member of a thread group
                              * which will not get GCed before VM exit.
                              * Make its parent the top-level thread group.
+                             * <p>
+                             *  在VM退出之前不会获得GCed。使其父级为顶级线程组。
+                             * 
                              */
                             ThreadGroup tg =
                                 Thread.currentThread().getThreadGroup();
@@ -96,6 +105,8 @@ public class StreamCloser {
                             streamCloser = new Thread(tg, streamCloserRunnable);
                             /* Set context class loader to null in order to avoid
                              * keeping a strong reference to an application classloader.
+                             * <p>
+                             *  保持对应用程序类加载器的强引用。
                              */
                             streamCloser.setContextClassLoader(null);
                             Runtime.getRuntime().addShutdownHook(streamCloser);

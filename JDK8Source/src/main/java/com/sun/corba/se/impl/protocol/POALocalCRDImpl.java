@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -125,6 +126,9 @@ public class POALocalCRDImpl extends LocalClientRequestDispatcherBase
                 StubAdapter.getDelegate( ex.forward_reference ) ;
             IOR ior = csub.getIOR() ;
             setLocatedIOR( ior ) ;
+            /* <p>
+            /*  ClientRequestDispatcher csub =(ClientRequestDispatcher)StubAdapter.getDelegate(ex.forward_reference)
+            /* ; IOR ior = csub.getIOR(); setLocatedIOR(ior);。
             */
             RuntimeException runexc = new RuntimeException("deal with this.");
             runexc.initCause( ex ) ;

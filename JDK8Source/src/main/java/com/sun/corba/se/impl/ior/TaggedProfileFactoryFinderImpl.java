@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,8 @@ import com.sun.corba.se.impl.ior.IdentifiableFactoryFinderBase ;
 import org.omg.CORBA_2_3.portable.InputStream ;
 
 /**
+/* <p>
+/* 
  * @author
  */
 public class TaggedProfileFactoryFinderImpl extends

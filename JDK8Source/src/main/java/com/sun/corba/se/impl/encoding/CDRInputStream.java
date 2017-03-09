@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,13 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
  *
  * Before using the stream for valuetype unmarshaling, one must call
  * performORBVersionSpecificInit().
+ * <p>
+ *  这是代表真正的实现。
+ * 
+ *  注意：
+ * 
+ *  在使用流进行值类型解组之前,必须调用performORBVersionSpecificInit()。
+ * 
  */
 public abstract class CDRInputStream
     extends org.omg.CORBA_2_3.portable.InputStream
@@ -425,6 +433,9 @@ public abstract class CDRInputStream
 
     /**
      * return true if our ByteBuffer is sharing/equal to bb
+     * <p>
+     *  如果我们的ByteBuffer共享/等于bb,则返回true
+     * 
      */
     protected final boolean isSharing(ByteBuffer bb) {
         return (getByteBuffer() ==  bb);
@@ -486,6 +497,9 @@ public abstract class CDRInputStream
      * if there are enough bytes available to do so.  Otherwise,
      * it just returns.  This is used for some (but not all)
      * GIOP 1.2 message headers.
+     * <p>
+     *  如果有足够的字节可以这样做,则对齐给定八位字节边界上的当前位置。否则,它只是返回。这用于一些(但不是全部)GIOP 1.2消息头。
+     * 
      */
     public void alignOnBoundary(int octetBoundary) {
         impl.alignOnBoundary(octetBoundary);
@@ -504,6 +518,11 @@ public abstract class CDRInputStream
      *
      * Trying to unmarshal things requiring repository IDs before calling
      * this will result in NullPtrExceptions.
+     * <p>
+     *  这必须在确定正确的ORB版本后调用,并在流的ORB实例上设置。它可以在读取服务上下文后调用,因为这是唯一可以获取ORB版本信息的地方。
+     * 
+     *  尝试在调用此操作之前解除需要存储库ID的事务将导致NullPtrExceptions。
+     * 
      */
     public void performORBVersionSpecificInit() {
         // In the case of SystemExceptions, a stream is created
@@ -517,6 +536,7 @@ public abstract class CDRInputStream
      * This is useful for forcing the CDR stream to reacquire
      * converters (probably from its subclasses) when state
      * has changed.
+     * <p>
      */
     public void resetCodeSetConverters() {
         impl.resetCodeSetConverters();

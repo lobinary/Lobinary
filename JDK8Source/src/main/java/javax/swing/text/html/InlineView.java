@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import javax.swing.text.*;
  * Displays the <dfn>inline element</dfn> styles
  * based upon css attributes.
  *
+ * <p>
+ *  显示基于css属性的<dfn>内联元素</dfn>样式。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class InlineView extends LabelView {
@@ -40,6 +45,10 @@ public class InlineView extends LabelView {
     /**
      * Constructs a new view wrapped on an element.
      *
+     * <p>
+     *  构造包裹在元素上的新视图。
+     * 
+     * 
      * @param elem the element
      */
     public InlineView(Element elem) {
@@ -54,6 +63,10 @@ public class InlineView extends LabelView {
      * If either parameter is <code>null</code>, behavior of this method is
      * implementation dependent.
      *
+     * <p>
+     *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。如果任何一个参数是<code> null </code>,这个方法的行为是依赖于实现。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -70,6 +83,10 @@ public class InlineView extends LabelView {
      * If either parameter is <code>null</code>, behavior of this method is
      * implementation dependent.
      *
+     * <p>
+     *  提供通知,说明该视图负责的位置中的文档被删除了。如果任一参数是<code> null </code>,这个方法的行为是依赖于实现。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -84,6 +101,10 @@ public class InlineView extends LabelView {
      * Gives notification from the document that attributes were changed
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -100,6 +121,9 @@ public class InlineView extends LabelView {
      * Fetches the attributes to use when rendering.  This is
      * implemented to multiplex the attributes specified in the
      * model with a StyleSheet.
+     * <p>
+     *  获取渲染时要使用的属性。这被实现为将在模型中指定的属性与StyleSheet复用。
+     * 
      */
     public AttributeSet getAttributes() {
         return attr;
@@ -128,6 +152,16 @@ public class InlineView extends LabelView {
      * An example of a view that uses break weight is
      * <code>ParagraphView</code>.
      *
+     * <p>
+     *  确定此视图中的休息机会的吸引力。这可以用于确定哪个视图是最有吸引力的在格式化过程中调用<code> breakView </code>。
+     * 例如,表示其中具有空格的文本的视图可能比没有空格的视图更有吸引力。重量越高,断裂越有吸引力。等于或小于<code> BadBreakWeight </code>的值不应被视为中断。
+     * 大于或等于<code> ForcedBreakWeight </code>的值应该被破坏。
+     * <p>
+     * 这被实现以提供返回<code> BadBreakWeight </code>的默认行为,除非长度大于视图的长度,在这种情况下整个视图表示片段。
+     * 除非一个视图被写成支持破坏行为,尝试和破坏视图是没有吸引力的。支持断开的视图的示例是<code> LabelView </code>。
+     * 使用break权重的视图的示例是<code> ParagraphView </code>。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @param pos the potential location of the start of the
      *   broken view &gt;= 0.  This may be useful for calculating tab
@@ -159,6 +193,12 @@ public class InlineView extends LabelView {
      * in case <code>offset</code>, <code>pos</code>, or <code>len</code>
      * is null.
      *
+     * <p>
+     *  尝试在给定轴上断开此视图。有关此方法的完整说明,请参阅{@link javax.swing.text.View#breakView}。
+     *  <p>如果<code> axis </code>既不是<code> View.X_AXIS </code>也不是<code> View.Y_AXIS </code>,以及<code> offset </code>
+     * ,<code> pos </code>或<code> len </code>为空。
+     *  尝试在给定轴上断开此视图。有关此方法的完整说明,请参阅{@link javax.swing.text.View#breakView}。
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @param offset the location in the document model
@@ -182,6 +222,8 @@ public class InlineView extends LabelView {
 
     /**
      * Set the cached properties from the attributes.
+     * <p>
+     * 
      */
     protected void setPropertiesFromAttributes() {
         super.setPropertiesFromAttributes();

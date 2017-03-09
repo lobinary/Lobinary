@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: TemplatesHandlerImpl.java,v 1.2.4.1 2005/09/06 12:09:03 pvedula Exp $
+ * <p>
+ *  $ Id：TemplatesHandlerImpl.java,v 1.2.4.1 2005/09/06 12:09:03 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.trax;
@@ -48,6 +61,10 @@ import java.util.Vector;
 
 /**
  * Implementation of a JAXP1.1 TemplatesHandler
+ * <p>
+ *  实现JAXP1.1 TemplatesHandler
+ * 
+ * 
  * @author Morten Jorgensen
  * @author Santiago Pericas-Geertsen
  */
@@ -56,37 +73,58 @@ public class TemplatesHandlerImpl
 {
     /**
      * System ID for this stylesheet.
+     * <p>
+     *  此样式表的系统ID。
+     * 
      */
     private String _systemId;
 
     /**
      * Number of spaces to add for output indentation.
+     * <p>
+     *  要为输出缩进添加的空格数。
+     * 
      */
     private int _indentNumber;
 
     /**
      * This URIResolver is passed to all Transformers.
+     * <p>
+     *  这个URIResolver被传递给所有的变形金刚。
+     * 
      */
     private URIResolver _uriResolver = null;
 
     /**
      * A reference to the transformer factory that this templates
      * object belongs to.
+     * <p>
+     *  对此模板对象所属的变压器工厂的引用。
+     * 
      */
     private TransformerFactoryImpl _tfactory = null;
 
     /**
      * A reference to XSLTC's parser object.
+     * <p>
+     *  对XSLTC的解析器对象的引用。
+     * 
      */
     private Parser _parser = null;
 
     /**
      * The created Templates object.
+     * <p>
+     *  创建的Templates对象。
+     * 
      */
     private TemplatesImpl _templates = null;
 
     /**
      * Default constructor
+     * <p>
+     *  默认构造函数
+     * 
      */
     protected TemplatesHandlerImpl(int indentNumber,
         TransformerFactoryImpl tfactory)
@@ -119,6 +157,10 @@ public class TemplatesHandlerImpl
      * Implements javax.xml.transform.sax.TemplatesHandler.getSystemId()
      * Get the base ID (URI or system ID) from where relative URLs will be
      * resolved.
+     * <p>
+     *  实现javax.xml.transform.sax.TemplatesHandler.getSystemId()获取将从中解析相对URL的基本ID(URI或系统ID)。
+     * 
+     * 
      * @return The systemID that was set with setSystemId(String id)
      */
     public String getSystemId() {
@@ -129,6 +171,10 @@ public class TemplatesHandlerImpl
      * Implements javax.xml.transform.sax.TemplatesHandler.setSystemId()
      * Get the base ID (URI or system ID) from where relative URLs will be
      * resolved.
+     * <p>
+     *  实现javax.xml.transform.sax.TemplatesHandler.setSystemId()获取将从中解析相对URL的基本ID(URI或系统ID)。
+     * 
+     * 
      * @param id Base URI for this stylesheet
      */
     public void setSystemId(String id) {
@@ -137,6 +183,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Store URIResolver needed for Transformers.
+     * <p>
+     *  存储变压器所需的URIResolver。
+     * 
      */
     public void setURIResolver(URIResolver resolver) {
         _uriResolver = resolver;
@@ -148,6 +197,11 @@ public class TemplatesHandlerImpl
      * DocumentHandler for the parsing of transformation instructions, it
      * creates a Templates object, which the caller can get once the SAX
      * events have been completed.
+     * <p>
+     * 实现javax.xml.transform.sax.TemplatesHandler.getTemplates()当一个TemplatesHandler对象用作ContentHandler或Docume
+     * ntHandler来解析转换指令时,它会创建一个Templates对象,一旦SAX事件完成,调用者就可以获得。
+     * 
+     * 
      * @return The Templates object that was created during the SAX event
      *         process, or null if no Templates object has been created.
      */
@@ -159,6 +213,10 @@ public class TemplatesHandlerImpl
      * This method implements XSLTC's SourceLoader interface. It is used to
      * glue a TrAX URIResolver to the XSLTC compiler's Input and Import classes.
      *
+     * <p>
+     *  这个方法实现了XSLTC的SourceLoader接口。它用于将TrAX URIResolver粘合到XSLTC编译器的输入和导入类。
+     * 
+     * 
      * @param href The URI of the document to load
      * @param context The URI of the currently loaded document
      * @param xsltc The compiler that resuests the document
@@ -182,6 +240,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Re-initialize parser and forward SAX2 event.
+     * <p>
+     *  重新初始化解析器并转发SAX2事件。
+     * 
      */
     public void startDocument() {
         XSLTC xsltc = _parser.getXSLTC();
@@ -192,6 +253,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void endDocument() throws SAXException {
         _parser.endDocument();
@@ -286,6 +350,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void startPrefixMapping(String prefix, String uri) {
         _parser.startPrefixMapping(prefix, uri);
@@ -293,6 +360,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void endPrefixMapping(String prefix) {
         _parser.endPrefixMapping(prefix);
@@ -300,6 +370,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void startElement(String uri, String localname, String qname,
         Attributes attributes) throws SAXException
@@ -309,6 +382,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void endElement(String uri, String localname, String qname) {
         _parser.endElement(uri, localname, qname);
@@ -316,6 +392,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void characters(char[] ch, int start, int length) {
         _parser.characters(ch, start, length);
@@ -323,6 +402,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void processingInstruction(String name, String value) {
         _parser.processingInstruction(name, value);
@@ -330,6 +412,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void ignorableWhitespace(char[] ch, int start, int length) {
         _parser.ignorableWhitespace(ch, start, length);
@@ -337,6 +422,9 @@ public class TemplatesHandlerImpl
 
     /**
      * Just forward SAX2 event to parser object.
+     * <p>
+     *  只是将SAX2事件转发到解析器对象。
+     * 
      */
     public void skippedEntity(String name) {
         _parser.skippedEntity(name);
@@ -344,6 +432,8 @@ public class TemplatesHandlerImpl
 
     /**
      * Set internal system Id and forward SAX2 event to parser object.
+     * <p>
+     *  设置内部系统ID并将SAX2事件转发到解析器对象。
      */
     public void setDocumentLocator(Locator locator) {
         setSystemId(locator.getSystemId());

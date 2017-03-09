@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.locks;
@@ -100,6 +104,31 @@ import java.util.Collection;
  * the same thread. Attempts to exceed this limit result in
  * {@link Error} throws from locking methods.
  *
+ * <p>
+ *  可重入互斥{@link Lock}具有与使用{@code synchronized}方法和语句访问的隐式监视器锁相同的基本行为和语义,但具有扩展功能。
+ * 
+ *  <p> {@code ReentrantLock}由线程上次成功锁定</em>拥有,但尚未解锁。调用{@code lock}的线程将返回,成功获取锁,当锁不是由另一个线程拥有。
+ * 如果当前线程已经拥有锁,该方法将立即返回。这可以使用{@link #isHeldByCurrentThread}和{@link #getHoldCount}方法检查。
+ * 
+ * <p>此类的构造函数接受可选的<em>公平</em>参数。当设置为{@code true}时,在争用之下,锁优选允许访问最长等待的线程。否则,此锁不保证任何特定的访问顺序。
+ * 使用由许多线程访问的公平锁的程序可以显示比使用默认设置的那些更低的总吞吐量(即,更慢,通常慢得多),但是具有更小的方差以获得锁并且保证缺乏饥饿。然而,请注意,锁的公平性不保证线程调度的公平性。
+ * 因此,使用公平锁的许多线程中的一个可以连续多次获得它,而其他活动线程不进行并且当前不持有锁。另请注意,未定义的{@link #tryLock()}方法不符合公平设置。
+ * 如果锁可用,即使其他线程正在等待,它也会成功。
+ * 
+ *  <p>建议使用{@code try}块调用{@code lock},通常在之前/之后的建议,例如：</em>
+ * 
+ *  <pre> {@code class X {private final ReentrantLock lock = new ReentrantLock(); // ...
+ * 
+ *  public void m(){lock.lock(); // block until condition hold try {// ... method body} finally {lock.unlock()}
+ * }}} </pre>。
+ * 
+ * <p>除了实现{@link Lock}接口,此类还定义了许多{@code public}和{@code protected}方法来检查锁的状态。这些方法中的一些仅用于仪器和监测。
+ * 
+ *  <p>此类的序列化与内置锁的行为相同：反序列化锁处于解锁状态,无论序列化时的状态如何。
+ * 
+ *  <p>此锁定支持同一个线程的最多2147483647个递归锁。尝试超过此限制会导致{@link错误}抛出锁定方法。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -112,6 +141,9 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * Base of synchronization control for this lock. Subclassed
      * into fair and nonfair versions below. Uses AQS state to
      * represent the number of holds on the lock.
+     * <p>
+     *  此锁的同步控制基础。下面分为公平和非公平版本。使用AQS状态表示锁上的保持数。
+     * 
      */
     abstract static class Sync extends AbstractQueuedSynchronizer {
         private static final long serialVersionUID = -5179523762034025860L;
@@ -119,12 +151,18 @@ public class ReentrantLock implements Lock, java.io.Serializable {
         /**
          * Performs {@link Lock#lock}. The main reason for subclassing
          * is to allow fast path for nonfair version.
+         * <p>
+         *  执行{@link Lock#lock}。子类化的主要原因是允许非公平版本的快速路径。
+         * 
          */
         abstract void lock();
 
         /**
          * Performs non-fair tryLock.  tryAcquire is implemented in
          * subclasses, but both need nonfair try for trylock method.
+         * <p>
+         *  执行不公平的tryLock。 tryAcquire是在子类中实现的,但是两者都需要非正确的try try方法。
+         * 
          */
         final boolean nonfairTryAcquire(int acquires) {
             final Thread current = Thread.currentThread();
@@ -184,6 +222,9 @@ public class ReentrantLock implements Lock, java.io.Serializable {
 
         /**
          * Reconstitutes the instance from a stream (that is, deserializes it).
+         * <p>
+         *  从流重构实例(即,反序列化它)。
+         * 
          */
         private void readObject(java.io.ObjectInputStream s)
             throws java.io.IOException, ClassNotFoundException {
@@ -194,6 +235,9 @@ public class ReentrantLock implements Lock, java.io.Serializable {
 
     /**
      * Sync object for non-fair locks
+     * <p>
+     *  非公平锁的同步对象
+     * 
      */
     static final class NonfairSync extends Sync {
         private static final long serialVersionUID = 7316153563782823691L;
@@ -201,6 +245,9 @@ public class ReentrantLock implements Lock, java.io.Serializable {
         /**
          * Performs lock.  Try immediate barge, backing up to normal
          * acquire on failure.
+         * <p>
+         *  执行锁定。尝试立即插入,在故障时备份到正常获取。
+         * 
          */
         final void lock() {
             if (compareAndSetState(0, 1))
@@ -216,6 +263,9 @@ public class ReentrantLock implements Lock, java.io.Serializable {
 
     /**
      * Sync object for fair locks
+     * <p>
+     *  同步对象的公平锁
+     * 
      */
     static final class FairSync extends Sync {
         private static final long serialVersionUID = -3000897897090466540L;
@@ -227,6 +277,9 @@ public class ReentrantLock implements Lock, java.io.Serializable {
         /**
          * Fair version of tryAcquire.  Don't grant access unless
          * recursive call or no waiters or is first.
+         * <p>
+         *  公平版的tryAcquire。不要授予访问权限,除非递归调用或没有服务员或第一。
+         * 
          */
         protected final boolean tryAcquire(int acquires) {
             final Thread current = Thread.currentThread();
@@ -252,6 +305,9 @@ public class ReentrantLock implements Lock, java.io.Serializable {
     /**
      * Creates an instance of {@code ReentrantLock}.
      * This is equivalent to using {@code ReentrantLock(false)}.
+     * <p>
+     *  创建{@code ReentrantLock}的实例。这相当于使用{@code ReentrantLock(false)}。
+     * 
      */
     public ReentrantLock() {
         sync = new NonfairSync();
@@ -261,6 +317,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * Creates an instance of {@code ReentrantLock} with the
      * given fairness policy.
      *
+     * <p>
+     *  使用给定的公平策略创建{@code ReentrantLock}的实例。
+     * 
+     * 
      * @param fair {@code true} if this lock should use a fair ordering policy
      */
     public ReentrantLock(boolean fair) {
@@ -280,6 +340,15 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * current thread becomes disabled for thread scheduling
      * purposes and lies dormant until the lock has been acquired,
      * at which time the lock hold count is set to one.
+     * <p>
+     *  获取锁。
+     * 
+     * <p>如果锁没有被其他线程占用并立即返回,获取锁,将锁保持计数设置为1。
+     * 
+     *  <p>如果当前线程已经持有锁,则保持计数增加1,方法立即返回。
+     * 
+     *  <p>如果锁由另一个线程保持,则当前线程变为禁用以用于线程调度目的,并且处于休眠状态直到获取锁,在该时间锁保持计数被设置为一。
+     * 
      */
     public void lock() {
         sync.lock();
@@ -329,6 +398,40 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * interruption point, preference is given to responding to the
      * interrupt over normal or reentrant acquisition of the lock.
      *
+     * <p>
+     *  获取锁,除非当前线程是{@linkplain线程#中断}。
+     * 
+     *  <p>如果锁没有被其他线程占用并立即返回,获取锁,将锁保持计数设置为1。
+     * 
+     *  <p>如果当前线程已经持有此锁,则保持计数增加1,并且该方法立即返回。
+     * 
+     *  <p>如果锁由另一个线程持有,那么当前线程将变为禁用以进行线程调度,并处于休眠状态,直到发生以下两种情况之一：
+     * 
+     * <ul>
+     * 
+     *  <li>锁定由当前线程获取;要么
+     * 
+     *  <li>一些其他线程{@linkplain线程#中断中断}当前线程。
+     * 
+     * </ul>
+     * 
+     *  <p>如果锁由当前线程获取,则锁保持计数设置为1。
+     * 
+     *  <p>如果当前线程：
+     * 
+     * <ul>
+     * 
+     *  <li>在进入此方法时设置了中断状态;要么
+     * 
+     *  <li>是{@linkplain线程#中断}获取锁时,
+     * 
+     * </ul>
+     * 
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。
+     * 
+     * 在该实现中,因为该方法是显式中断点,所以优选在正常或可重入获取锁时响应中断。
+     * 
+     * 
      * @throws InterruptedException if the current thread is interrupted
      */
     public void lockInterruptibly() throws InterruptedException {
@@ -357,6 +460,18 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * <p>If the lock is held by another thread then this method will return
      * immediately with the value {@code false}.
      *
+     * <p>
+     *  只有在调用时它不被另一个线程占用,才获取锁。
+     * 
+     *  <p>如果锁未被另一个线程占用,则获取锁,并立即返回值{@code true},将锁保持计数设置为1。
+     * 即使此锁已设置为使用公平的排序策略,调用{@code tryLock()} <em>将立即获取锁,如果可用,无论是否其他线程当前正在等待锁。这种"驳船"行为在某些情况下可能是有用的,即使它破坏公平。
+     * 如果您想要遵守此锁定的公平设置,请使用{@link #tryLock(long,TimeUnit)tryLock(0,TimeUnit.SECONDS)},这几乎是等效的(它也检测到中断)。
+     * 
+     *  <p>如果当前线程已经持有此锁,则保持计数增加1,并且该方法返回{@code true}。
+     * 
+     *  <p>如果锁由另一个线程持有,那么此方法将立即返回值{@code false}。
+     * 
+     * 
      * @return {@code true} if the lock was free and was acquired by the
      *         current thread, or the lock was already held by the current
      *         thread; and {@code false} otherwise
@@ -428,6 +543,46 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * interrupt over normal or reentrant acquisition of the lock, and
      * over reporting the elapse of the waiting time.
      *
+     * <p>
+     *  如果在给定的等待时间内没有被另一个线程占用,并且当前线程尚未{@linkplain线程#中断中断},则获取锁。
+     * 
+     * <p>如果锁未被另一个线程占用,则获取锁,并立即返回值{@code true},将锁保持计数设置为1。如果这个锁被设置为使用公平的排序策略,则如果任何其他线程正在等待锁,则不会获取可用的锁<em>。
+     * 这与{@link #tryLock()}方法形成对比。如果你想要一个定时的{@code tryLock}允许在公平锁定上驳船,然后结合定时和非定时形式在一起：。
+     * 
+     *  <pre> {@code if(lock.tryLock()|| lock.tryLock(timeout,unit)){...}} </pre>
+     * 
+     *  <p>如果当前线程已经持有此锁,则保持计数增加1,并且该方法返回{@code true}。
+     * 
+     *  <p>如果锁由另一个线程持有,那么当前线程将被禁用以进行线程调度,并处于休眠状态,直到发生以下三种情况之一：
+     * 
+     * <ul>
+     * 
+     *  <li>锁定由当前线程获取;要么
+     * 
+     *  <li>一些其他线程{@linkplain线程#中断中断}当前线程;要么
+     * 
+     *  <li>经过指定的等待时间
+     * 
+     * </ul>
+     * 
+     *  <p>如果获取锁,则返回值{@code true},锁保持计数设置为1。
+     * 
+     *  <p>如果当前线程：
+     * 
+     * <ul>
+     * 
+     *  <li>在进入此方法时设置了中断状态;要么
+     * 
+     *  <li>是{@linkplain线程#中断}获取锁时,
+     * 
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。
+     * 
+     * <p>如果经过指定的等待时间,则返回值{@code false}。如果时间小于或等于零,则该方法将不会等待。
+     * 
+     *  <p>在该实现中,由于该方法是明确的中断点,所以优选在正常或可重入获取锁的情况下响应于中断,并且超过报告等待时间的流逝。
+     * 
+     * 
      * @param timeout the time to wait for the lock
      * @param unit the time unit of the timeout argument
      * @return {@code true} if the lock was free and was acquired by the
@@ -450,6 +605,13 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * is released.  If the current thread is not the holder of this
      * lock then {@link IllegalMonitorStateException} is thrown.
      *
+     * <p>
+     *  尝试释放此锁定。
+     * 
+     *  <p>如果当前线程是这个锁的持有者,则保持计数递减。如果保持计数现在为零,则锁定被释放。
+     * 如果当前线程不是这个锁的持有者,那么会抛出{@link IllegalMonitorStateException}。
+     * 
+     * 
      * @throws IllegalMonitorStateException if the current thread does not
      *         hold this lock
      */
@@ -494,6 +656,28 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      *
      * </ul>
      *
+     * <p>
+     *  返回与此{@link Lock}实例一起使用的{@link Condition}实例。
+     * 
+     *  <p>返回的{@link Condition}实例支持与{@link Object}监视方法({@link Object#wait()wait},{@link Object#notify notify}
+     * 和{@link Object#notifyAll notifyAll})当与内置的监视器锁一起使用时。
+     * 
+     * <ul>
+     * 
+     *  <li>如果在调用{@link Condition} {@linkplain Condition#await()waiting}或{@linkplain Condition#signal signaling}
+     * 方法时未锁定此锁定,则会抛出{@link IllegalMonitorStateException} 。
+     * 
+     *  <li>当调用{@linkplain Condition#await()waiting)方法时,会释放锁定,并且在它们返回之前,将重新获取锁定,并且锁定保持计数将恢复为调用方法时的值。
+     * 
+     * <li>如果在等待时线程{@linkplain线程#中断},则等待将终止,将抛出一个{@link InterruptedException},并且线程的中断状态将被清除。
+     * 
+     *  <li>等待线程以FIFO顺序发出信号。
+     * 
+     *  <li>从等待方法返回的线程的锁重新捕获的排序与初始获取锁的线程相同,这是默认情况下未指定的,但是<em> </em>锁优先考虑那些具有等待时间最长。
+     * 
+     * </ul>
+     * 
+     * 
      * @return the Condition object
      */
     public Condition newCondition() {
@@ -526,6 +710,17 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      *   }
      * }}</pre>
      *
+     * <p>
+     *  查询当前线程对此锁定的保留数。
+     * 
+     *  <p>线程对于每个锁定操作都有一个锁定保持,它不与解锁操作匹配。
+     * 
+     *  <p>保持计数信息通常仅用于测试和调试目的。例如,如果不应该使用已经持有的锁来输入某段代码,那么我们可以断言这一事实​​：
+     * 
+     *  <pre> {@code class X {ReentrantLock lock = new ReentrantLock(); // ... public void m(){assert lock.getHoldCount()== 0; lock.lock(); try {// ... method body}
+     *  finally {lock.unlock(); }}}} </pre>。
+     * 
+     * 
      * @return the number of holds on this lock by the current thread,
      *         or zero if this lock is not held by the current thread
      */
@@ -571,6 +766,23 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      *   }
      * }}</pre>
      *
+     * <p>
+     *  查询此锁是否由当前线程持有。
+     * 
+     *  <p>与内置监视器锁的{@link Thread#holdsLock(Object)}方法类似,此方法通常用于调试和测试。例如,应该仅在锁定被锁定时才调用的方法可以声明这种情况：
+     * 
+     *  <pre> {@code class X {ReentrantLock lock = new ReentrantLock(); // ...
+     * 
+     * public void m(){assert lock.isHeldByCurrentThread(); // ... method body}}} </pre>
+     * 
+     *  <p>它还可以用于确保以不可重入的方式使用可重入锁定,例如：
+     * 
+     *  <pre> {@code class X {ReentrantLock lock = new ReentrantLock(); // ...
+     * 
+     *  public void m(){assert！lock.isHeldByCurrentThread(); lock.lock(); try {// ... method body} finally {lock.unlock(); }
+     * }}} </pre>。
+     * 
+     * 
      * @return {@code true} if current thread holds this lock and
      *         {@code false} otherwise
      */
@@ -583,6 +795,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * designed for use in monitoring of the system state,
      * not for synchronization control.
      *
+     * <p>
+     *  查询此锁是否由任何线程持有。此方法设计用于监视系统状态,而不是用于同步控制。
+     * 
+     * 
      * @return {@code true} if any thread holds this lock and
      *         {@code false} otherwise
      */
@@ -593,6 +809,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
     /**
      * Returns {@code true} if this lock has fairness set true.
      *
+     * <p>
+     *  如果此锁定的公平性设置为true,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this lock has fairness set true
      */
     public final boolean isFair() {
@@ -610,6 +830,11 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * subclasses that provide more extensive lock monitoring
      * facilities.
      *
+     * <p>
+     *  返回当前拥有此锁的线程,如果不拥有则返回{@code null}。当此方法由不是所有者的线程调用时,返回值反映当前锁状态的尽力而为近似值。
+     * 例如,所有者可能会暂时{@code null},即使有线程试图获取锁,但尚未这样做。该方法被设计为便于构建提供更广泛的锁监视设施的子类。
+     * 
+     * 
      * @return the owner, or {@code null} if not owned
      */
     protected Thread getOwner() {
@@ -623,6 +848,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * acquire this lock.  This method is designed primarily for use in
      * monitoring of the system state.
      *
+     * <p>
+     *  查询任何线程是否正在等待获取此锁。注意,因为取消可能在任何时候发生,{@code true}返回不保证任何其他线程将获得此锁。该方法主要用于监视系统状态。
+     * 
+     * 
      * @return {@code true} if there may be other threads waiting to
      *         acquire the lock
      */
@@ -637,6 +866,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * will ever acquire this lock.  This method is designed primarily for use
      * in monitoring of the system state.
      *
+     * <p>
+     * 查询给定的线程是否正在等待获取此锁。注意,因为取消可能在任何时候发生,{@code true}返回不保证此线程将获得此锁。该方法主要用于监视系统状态。
+     * 
+     * 
      * @param thread the thread
      * @return {@code true} if the given thread is queued waiting for this lock
      * @throws NullPointerException if the thread is null
@@ -653,6 +886,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * monitoring of the system state, not for synchronization
      * control.
      *
+     * <p>
+     *  返回等待获取此锁的线程数的估计值。该值只是一个估计值,因为线程的数量可能会在此方法遍历内部数据结构时动态更改。此方法设计用于监视系统状态,而不是用于同步控制。
+     * 
+     * 
      * @return the estimated number of threads waiting for this lock
      */
     public final int getQueueLength() {
@@ -668,6 +905,11 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * designed to facilitate construction of subclasses that provide
      * more extensive monitoring facilities.
      *
+     * <p>
+     *  返回包含可能正在等待获取此锁的线程的集合。因为实际的线程集合可能在构造此结果时动态地改变,所返回的集合仅是最大努力估计。返回的集合的元素没有特定的顺序。
+     * 该方法被设计为便于构建提供更广泛的监测设施的子类。
+     * 
+     * 
      * @return the collection of threads
      */
     protected Collection<Thread> getQueuedThreads() {
@@ -682,6 +924,11 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * threads.  This method is designed primarily for use in
      * monitoring of the system state.
      *
+     * <p>
+     *  查询任何线程是否正在等待与此锁相关联的给定条件。注意,因为超时和中断可能在任何时候发生,{@code true}返回不保证未来的{@code signal}将唤醒任何线程。
+     * 该方法主要用于监视系统状态。
+     * 
+     * 
      * @param condition the condition
      * @return {@code true} if there are any waiting threads
      * @throws IllegalMonitorStateException if this lock is not held
@@ -705,6 +952,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * This method is designed for use in monitoring of the system
      * state, not for synchronization control.
      *
+     * <p>
+     * 返回等待与此锁相关联的给定条件的线程数的估计。注意,因为超时和中断可以在任何时间发生,所以估计仅用作实际数量的服务者的上限。此方法设计用于监视系统状态,而不是用于同步控制。
+     * 
+     * 
      * @param condition the condition
      * @return the estimated number of waiting threads
      * @throws IllegalMonitorStateException if this lock is not held
@@ -730,6 +981,11 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * facilitate construction of subclasses that provide more
      * extensive condition monitoring facilities.
      *
+     * <p>
+     *  返回包含可能在与此锁相关联的给定条件下等待的线程的集合。因为实际的线程集合可能在构造此结果时动态地改变,所返回的集合仅是最大努力估计。返回的集合的元素没有特定的顺序。
+     * 该方法被设计为便于构建提供更广泛的状态监测设施的子类。
+     * 
+     * 
      * @param condition the condition
      * @return the collection of threads
      * @throws IllegalMonitorStateException if this lock is not held
@@ -751,6 +1007,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * or the String {@code "Locked by"} followed by the
      * {@linkplain Thread#getName name} of the owning thread.
      *
+     * <p>
+     *  返回标识此锁的字符串及其锁状态。
+     * 括号中的状态包括字符串{@code"Unlocked"}或String {@code"Locked by"},后跟拥有线程的{@linkplain Thread#getName name}。
+     * 
      * @return a string identifying this lock, as well as its lock state
      */
     public String toString() {

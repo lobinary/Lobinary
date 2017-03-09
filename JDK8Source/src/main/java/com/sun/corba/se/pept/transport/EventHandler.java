@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,8 @@ import java.nio.channels.SelectionKey;
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  *
  * This should only be registered with ONE selector.

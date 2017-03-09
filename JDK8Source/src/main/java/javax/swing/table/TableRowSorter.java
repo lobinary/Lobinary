@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -118,6 +119,53 @@ import javax.swing.SortOrder;
  * return the appropriate <code>Class</code>.  This will dramatically
  * increase the performance of this class.
  *
+ * <p>
+ *  使用<code> TableModel </code>提供排序和过滤的<code> RowSorter </code>的实现。以下示例显示将排序添加到<code> JTable </code>：
+ * <pre>
+ *  TableModel myModel = createMyTableModel(); JTable table = new JTable(myModel); table.setRowSorter(ne
+ * w TableRowSorter(myModel));。
+ * </pre>
+ *  这将执行所有的布线,使得当用户做出适当的手势(诸如点击列标题)时,表将在视觉上排序。
+ * <p>
+ *  <code> JTable </code>的基于行的方法和<code> JTable </code>的选择模型指的是视图而不是基础模型。因此,有必要在两者之间进行转换。
+ * 例如,要根据<code> myModel </code>获取选择,您需要转换索引：。
+ * <pre>
+ *  int [] selection = table.getSelectedRows(); for(int i = 0; i <selection.length; i ++){selection [i] = table.convertRowIndexToModel(selection [i]); }}。
+ * </pre>
+ *  类似地,基于来自基础模型的坐标,在<code> JTable </code>中选择一行：
+ * <pre>
+ *  table.setRowSelectionInterval(table.convertRowIndexToView(row),table.convertRowIndexToView(row));
+ * </pre>
+ * <p>
+ *  上一个示例假设您尚未启用过滤。如果您已启用过滤<code> convertRowIndexToView </code>将对视图中不可见的位置返回-1。
+ * <p>
+ * <code> TableRowSorter </code>使用<code> Comparator </code>进行比较。以下定义如何为列选择<code> Comparator </code>：
+ * <ol>
+ *  <li>如果<code> setComparator </code>方法为列指定了<code> Comparator </code>,请使用它。
+ *  <li>如果<code> getColumnClass </code>返回的列类型为<code> String </code>,请使用<code> Collat​​or.getInstance代码>。
+ *  <li>如果<code> setComparator </code>方法为列指定了<code> Comparator </code>,请使用它。
+ *  <li>如果列类实现<code> Comparable </code>,请使用调用<code> compareTo </code>方法的<code> Comparator </code>。
+ *  <li>如果已指定<code> TableStringConverter </code>,则使用它将值转换为<code> String </code> s,然后使用<code>返回的<code> Co
+ * mparator </code> Collat​​or.getInstance()</code>。
+ *  <li>如果列类实现<code> Comparable </code>,请使用调用<code> compareTo </code>方法的<code> Comparator </code>。
+ *  <li>否则,使用<code> Collat​​or.getInstance()</code>返回的<code> Comparator </code>在对象上调用<code> toString </code>
+ * 的结果。
+ *  <li>如果列类实现<code> Comparable </code>,请使用调用<code> compareTo </code>方法的<code> Comparator </code>。
+ * </ol>
+ * <p>
+ *  除了排序<code> TableRowSorter </code>提供了过滤的能力。使用<code> setFilter </code>方法指定过滤器。以下示例将只显示包含字符串"foo"的行：
+ * <pre>
+ *  TableModel myModel = createMyTableModel(); TableRowSorter sorter = new TableRowSorter(myModel); sort
+ * er.setRowFilter(RowFilter.regexFilter("。
+ * * foo。*")); JTable table = new JTable(myModel); table.setRowSorter(sorter);。
+ * </pre>
+ * <p>
+ * 如果底层模型结构发生变化(调用<code> modelStructureChanged </code>方法),以下内容将重置为其默认值：<code>按列的比较器</code>,当前排序顺序,可排序。
+ * 默认排序顺序是自然的(与模型相同),默认情况下列是可排序的。
+ * <p>
+ *  <code> TableRowSorter </code>有一个形式类型参数：模型的类型。传递与您的模型完全对应的类型允许您基于您的模型进行过滤而无需投射。
+ * 有关示例,请参阅<code> RowFilter </code>的文档。
+ * 
  * @param <M> the type of the model, which must be an implementation of
  *            <code>TableModel</code>
  * @see javax.swing.JTable
@@ -130,23 +178,39 @@ import javax.swing.SortOrder;
 public class TableRowSorter<M extends TableModel> extends DefaultRowSorter<M, Integer> {
     /**
      * Comparator that uses compareTo on the contents.
+     * <p>
+     * <p>
+     *  <b>警告：</b> <code> DefaultTableModel </code>返回<code> Object </code>的列类。
+     * 因此,所有的比较将使用<code> toString </code>来完成。这可能是不必要的昂贵。
+     * 如果列只包含一种类型的值,例如<code> Integer </code>,则应覆盖<code> getColumnClass </code>并返回相应的<code> Class </code>。
+     * 这将大大提高这个类的性能。
+     * 
      */
     private static final Comparator COMPARABLE_COMPARATOR =
             new ComparableComparator();
 
     /**
      * Underlying model.
+     * <p>
+     *  在内容上使用compareTo的比较器。
+     * 
      */
     private M tableModel;
 
     /**
      * For toString conversions.
+     * <p>
+     *  基础模型。
+     * 
      */
     private TableStringConverter stringConverter;
 
 
     /**
      * Creates a <code>TableRowSorter</code> with an empty model.
+     * <p>
+     *  ForString转化。
+     * 
      */
     public TableRowSorter() {
         this(null);
@@ -156,6 +220,10 @@ public class TableRowSorter<M extends TableModel> extends DefaultRowSorter<M, In
      * Creates a <code>TableRowSorter</code> using <code>model</code>
      * as the underlying <code>TableModel</code>.
      *
+     * <p>
+     *  使用空模型创建<code> TableRowSorter </code>。
+     * 
+     * 
      * @param model the underlying <code>TableModel</code> to use,
      *        <code>null</code> is treated as an empty model
      */
@@ -168,6 +236,10 @@ public class TableRowSorter<M extends TableModel> extends DefaultRowSorter<M, In
      * for this <code>TableRowSorter</code>.  A value of <code>null</code>
      * can be used to set an empty model.
      *
+     * <p>
+     *  使用<code> model </code>作为底层的<code> TableModel </code>创建一个<code> TableRowSorter </code>。
+     * 
+     * 
      * @param model the underlying model to use, or <code>null</code>
      */
     public void setModel(M model) {
@@ -181,6 +253,10 @@ public class TableRowSorter<M extends TableModel> extends DefaultRowSorter<M, In
      * is used to convert any object values, that do not have a
      * registered <code>Comparator</code>, to strings.
      *
+     * <p>
+     *  设置<code> TableModel </code>作为此<code> TableRowSorter </code>的底层模型。 <code> null </code>的值可用于设置空模型。
+     * 
+     * 
      * @param stringConverter the object responsible for converting values
      *        from the model to strings
      */
@@ -192,6 +268,10 @@ public class TableRowSorter<M extends TableModel> extends DefaultRowSorter<M, In
      * Returns the object responsible for converting values from the
      * model to strings.
      *
+     * <p>
+     * 设置负责将值从模型转换为字符串的对象。如果非<code> null </code>,则用于将没有注册的<code> Comparator </code>的任何对象值转换为字符串。
+     * 
+     * 
      * @return object responsible for converting values to strings.
      */
     public TableStringConverter getStringConverter() {
@@ -211,6 +291,10 @@ public class TableRowSorter<M extends TableModel> extends DefaultRowSorter<M, In
      * <code>compareTo</code> method.  Otherwise
      * <code>Collator.getInstance</code> is returned.
      *
+     * <p>
+     *  返回负责将值从模型转换为字符串的对象。
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public Comparator<?> getComparator(int column) {
@@ -231,6 +315,15 @@ public class TableRowSorter<M extends TableModel> extends DefaultRowSorter<M, In
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  返回指定列的<code> Comparator </code>。
+     * 如果未使用<code> setComparator </code>方法指定<code> Comparator </code>,则将基于列类返回<code> Comparator </code>(<code>
+     *  TableModel.getColumnClass < / code>)。
+     *  返回指定列的<code> Comparator </code>。
+     * 如果列类是<code> String </code>,则返回<code> Collat​​or.getInstance </code>。
+     * 如果列类实现<code> Comparable </code>,则返回调用<code> compareTo </code>方法的私有<code> Comparator </code>。
+     * 否则返回<code> Collat​​or.getInstance </code>。
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     protected boolean useToString(int column) {
@@ -251,6 +344,8 @@ public class TableRowSorter<M extends TableModel> extends DefaultRowSorter<M, In
     /**
      * Implementation of DefaultRowSorter.ModelWrapper that delegates to a
      * TableModel.
+     * <p>
+     * 
      */
     private class TableRowSorterModelWrapper extends ModelWrapper<M,Integer> {
         public M getModel() {

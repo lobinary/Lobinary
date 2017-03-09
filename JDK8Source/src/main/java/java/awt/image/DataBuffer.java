@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码。
+ * 版权所有。
+ *  **************************************************** ************** ********************************
+ * **** ****************************。
+ * 版权所有。
+ * 
+ * 
  ******************************************************************/
 
 package java.awt.image;
@@ -64,6 +75,17 @@ import java.lang.annotation.Native;
  * methods for improved performance.  Currently, the Java 2D(tm) API
  * image classes use TYPE_BYTE, TYPE_USHORT, TYPE_INT, TYPE_SHORT,
  * TYPE_FLOAT, and TYPE_DOUBLE DataBuffers to store image data.
+ * <p>
+ * 此类存在以包装一个或多个数据数组。 DataBuffer中的每个数据数组被称为一个bank。用于获取和设置DataBuffer的组元素的访问器方法存在有和没有银行说明符。
+ * 没有银行说明符的方法使用默认的第0个银行。 DataBuffer可以可选地对每个库采取偏移量,使得即使感兴趣的数据不在数组位置零处开始,也可以使用现有阵列中的数据。
+ * 获取或设置组的第0个元素,使用数组的(0 + offset)th元素。 size字段指定了可以使用的数据数组的大小。给定库的大小+偏移量不应该大于关联数据数组的长度。
+ * 数据缓冲器的数据类型指示数据阵列的类型,并且还可以指示附加的语义,例如。将无符号8位数据存储在字节阵列的元件中。数据类型可以是TYPE_UNDEFINED或下面定义的类型之一。将来可能会添加其他类型。
+ * 通常,DataBuffer类的对象将被强制转换为其数据类型特定子类之一,以访问特定于数据类型的方法,从而提高性能。
+ * 目前,Java 2D(tm)API映像类使用TYPE_BYTE,TYPE_USHORT,TYPE_INT,TYPE_SHORT,TYPE_FLOAT和TYPE_DOUBLE DataBuffers来存储
+ * 图像数据。
+ * 通常,DataBuffer类的对象将被强制转换为其数据类型特定子类之一,以访问特定于数据类型的方法,从而提高性能。
+ * 
+ * 
  * @see java.awt.image.Raster
  * @see java.awt.image.SampleModel
  */
@@ -112,6 +134,8 @@ public abstract class DataBuffer {
     private static final int dataTypeSize[] = {8,16,16,32,32,64};
 
     /** Returns the size (in bits) of the data type, given a datatype tag.
+    /* <p>
+    /* 
       * @param type the value of one of the defined datatype tags
       * @return the size of the data type
       * @throws IllegalArgumentException if <code>type</code> is less than
@@ -128,6 +152,10 @@ public abstract class DataBuffer {
      *  Constructs a DataBuffer containing one bank of the specified
      *  data type and size.
      *
+     * <p>
+     *  构造一个包含指定数据类型和大小的一个库的DataBuffer。
+     * 
+     * 
      *  @param dataType the data type of this <code>DataBuffer</code>
      *  @param size the size of the banks
      */
@@ -139,6 +167,10 @@ public abstract class DataBuffer {
      *  Constructs a DataBuffer containing one bank of the specified
      *  data type and size with the indicated initial {@link State State}.
      *
+     * <p>
+     * 构造一个DataBuffer,它包含指定数据类型和大小的一个库,带有指定的初始{@link State State}。
+     * 
+     * 
      *  @param initialState the initial {@link State State} state of the data
      *  @param dataType the data type of this <code>DataBuffer</code>
      *  @param size the size of the banks
@@ -159,6 +191,10 @@ public abstract class DataBuffer {
      *  Constructs a DataBuffer containing the specified number of
      *  banks.  Each bank has the specified size and an offset of 0.
      *
+     * <p>
+     *  构造一个包含指定数量的bank的DataBuffer。每个存储区具有指定的大小和偏移量0。
+     * 
+     * 
      *  @param dataType the data type of this <code>DataBuffer</code>
      *  @param size the size of the banks
      *  @param numBanks the number of banks in this
@@ -173,6 +209,10 @@ public abstract class DataBuffer {
      *  banks with the indicated initial {@link State State}.
      *  Each bank has the specified size and an offset of 0.
      *
+     * <p>
+     *  构造一个DataBuffer,它包含指定的初始{@link State State}的指定数量的bank。每个存储区具有指定的大小和偏移量0。
+     * 
+     * 
      *  @param initialState the initial {@link State State} state of the data
      *  @param dataType the data type of this <code>DataBuffer</code>
      *  @param size the size of the banks
@@ -195,6 +235,10 @@ public abstract class DataBuffer {
      *  Constructs a DataBuffer that contains the specified number
      *  of banks.  Each bank has the specified datatype, size and offset.
      *
+     * <p>
+     *  构造一个包含指定数量的库的DataBuffer。每个bank具有指定的数据类型,大小和偏移量。
+     * 
+     * 
      *  @param dataType the data type of this <code>DataBuffer</code>
      *  @param size the size of the banks
      *  @param numBanks the number of banks in this
@@ -210,6 +254,10 @@ public abstract class DataBuffer {
      *  of banks with the indicated initial {@link State State}.
      *  Each bank has the specified datatype, size and offset.
      *
+     * <p>
+     *  构造一个DataBuffer,它包含指定的初始{@link State State}的指定数量的bank。每个bank具有指定的数据类型,大小和偏移量。
+     * 
+     * 
      *  @param initialState the initial {@link State State} state of the data
      *  @param dataType the data type of this <code>DataBuffer</code>
      *  @param size the size of the banks
@@ -238,6 +286,10 @@ public abstract class DataBuffer {
      *  offset for each bank is specified by its respective entry in
      *  the offsets array.
      *
+     * <p>
+     *  构造一个包含指定数量的库的DataBuffer。每个bank都有指定的数据类型和大小。每个库的偏移量由偏移数组中的相应条目指定。
+     * 
+     * 
      *  @param dataType the data type of this <code>DataBuffer</code>
      *  @param size the size of the banks
      *  @param numBanks the number of banks in this
@@ -257,6 +309,10 @@ public abstract class DataBuffer {
      *  offset for each bank is specified by its respective entry in
      *  the offsets array.
      *
+     * <p>
+     *  构造一个DataBuffer,它包含指定的初始{@link State State}的指定数量的bank。每个bank都有指定的数据类型和大小。每个库的偏移量由偏移数组中的相应条目指定。
+     * 
+     * 
      *  @param initialState the initial {@link State State} state of the data
      *  @param dataType the data type of this <code>DataBuffer</code>
      *  @param size the size of the banks
@@ -283,6 +339,8 @@ public abstract class DataBuffer {
     }
 
     /**  Returns the data type of this DataBuffer.
+    /* <p>
+    /* 
      *   @return the data type of this <code>DataBuffer</code>.
      */
     public int getDataType() {
@@ -290,6 +348,8 @@ public abstract class DataBuffer {
     }
 
     /**  Returns the size (in array elements) of all banks.
+    /* <p>
+    /* 
      *   @return the size of all banks.
      */
     public int getSize() {
@@ -297,6 +357,8 @@ public abstract class DataBuffer {
     }
 
     /** Returns the offset of the default bank in array elements.
+    /* <p>
+    /* 
      *  @return the offset of the default bank.
      */
     public int getOffset() {
@@ -304,6 +366,8 @@ public abstract class DataBuffer {
     }
 
     /** Returns the offsets (in array elements) of all the banks.
+    /* <p>
+    /* 
      *  @return the offsets of all banks.
      */
     public int[] getOffsets() {
@@ -311,6 +375,8 @@ public abstract class DataBuffer {
     }
 
     /** Returns the number of banks in this DataBuffer.
+    /* <p>
+    /* 
      *  @return the number of banks.
      */
     public int getNumBanks() {
@@ -320,6 +386,10 @@ public abstract class DataBuffer {
     /**
      * Returns the requested data array element from the first (default) bank
      * as an integer.
+     * <p>
+     *  将第一个(默认)库中请求的数据数组元素作为整数返回。
+     * 
+     * 
      * @param i the index of the requested data array element
      * @return the data array element at the specified index.
      * @see #setElem(int, int)
@@ -332,6 +402,10 @@ public abstract class DataBuffer {
     /**
      * Returns the requested data array element from the specified bank
      * as an integer.
+     * <p>
+     *  将指定库中请求的数据数组元素作为整数返回。
+     * 
+     * 
      * @param bank the specified bank
      * @param i the index of the requested data array element
      * @return the data array element at the specified index from the
@@ -344,6 +418,10 @@ public abstract class DataBuffer {
     /**
      * Sets the requested data array element in the first (default) bank
      * from the given integer.
+     * <p>
+     *  在给定整数的第一个(默认)库中设置请求的数据数组元素。
+     * 
+     * 
      * @param i the specified index into the data array
      * @param val the data to set the element at the specified index in
      * the data array
@@ -357,6 +435,10 @@ public abstract class DataBuffer {
     /**
      * Sets the requested data array element in the specified bank
      * from the given integer.
+     * <p>
+     * 从给定的整数设置指定库中请求的数据数组元素。
+     * 
+     * 
      * @param bank the specified bank
      * @param i the specified index into the data array
      * @param val  the data to set the element in the specified bank
@@ -371,6 +453,10 @@ public abstract class DataBuffer {
      * as a float.  The implementation in this class is to cast getElem(i)
      * to a float.  Subclasses may override this method if another
      * implementation is needed.
+     * <p>
+     *  从第一个(默认)库返回请求的数据数组元素为float。这个类中的实现是将getElem(i)转换为float。如果需要另一个实现,子类可以覆盖此方法。
+     * 
+     * 
      * @param i the index of the requested data array element
      * @return a float value representing the data array element at the
      *  specified index.
@@ -387,6 +473,10 @@ public abstract class DataBuffer {
      * {@link #getElem(int, int)}
      * to a float.  Subclasses can override this method if another
      * implementation is needed.
+     * <p>
+     *  从指定的bank返回请求的数据数组元素为float。这个类中的实现是将{@link #getElem(int,int)}强制转换为float。如果需要另一个实现,子类可以覆盖此方法。
+     * 
+     * 
      * @param bank the specified bank
      * @param i the index of the requested data array element
      * @return a float value representing the data array element from the
@@ -403,6 +493,10 @@ public abstract class DataBuffer {
      * from the given float.  The implementation in this class is to cast
      * val to an int and call {@link #setElem(int, int)}.  Subclasses
      * can override this method if another implementation is needed.
+     * <p>
+     *  在给定浮点数的第一个(默认)库中设置请求的数据数组元素。这个类中的实现是将val转换为int并调用{@link #setElem(int,int)}。如果需要另一个实现,子类可以覆盖此方法。
+     * 
+     * 
      * @param i the specified index
      * @param val the value to set the element at the specified index in
      * the data array
@@ -418,6 +512,10 @@ public abstract class DataBuffer {
      * from the given float.  The implementation in this class is to cast
      * val to an int and call {@link #setElem(int, int)}.  Subclasses can
      * override this method if another implementation is needed.
+     * <p>
+     *  从给定的浮点数中设置指定库中请求的数据数组元素。这个类中的实现是将val转换为int并调用{@link #setElem(int,int)}。如果需要另一个实现,子类可以覆盖此方法。
+     * 
+     * 
      * @param bank the specified bank
      * @param i the specified index
      * @param val the value to set the element in the specified bank at
@@ -435,6 +533,10 @@ public abstract class DataBuffer {
      * {@link #getElem(int)}
      * to a double.  Subclasses can override this method if another
      * implementation is needed.
+     * <p>
+     *  将第一个(默认)库中请求的数据数组元素作为double返回。这个类中的实现是将{@link #getElem(int)}转换为double。如果需要另一个实现,子类可以覆盖此方法。
+     * 
+     * 
      * @param i the specified index
      * @return a double value representing the element at the specified
      * index in the data array.
@@ -450,6 +552,10 @@ public abstract class DataBuffer {
      * a double.  The implementation in this class is to cast getElem(bank, i)
      * to a double.  Subclasses may override this method if another
      * implementation is needed.
+     * <p>
+     * 从指定的bank返回请求的数据数组元素为double。在这个类中的实现是将getElem(bank,i)转换为double。如果需要另一个实现,子类可以覆盖此方法。
+     * 
+     * 
      * @param bank the specified bank
      * @param i the specified index
      * @return a double value representing the element from the specified
@@ -466,6 +572,11 @@ public abstract class DataBuffer {
      * from the given double.  The implementation in this class is to cast
      * val to an int and call {@link #setElem(int, int)}.  Subclasses can
      * override this method if another implementation is needed.
+     * <p>
+     *  在给定的double中,在第一个(默认)bank中设置请求的数据数组元素。这个类中的实现是将val转换为int并调用{@link #setElem(int,int)}。
+     * 如果需要另一个实现,子类可以覆盖此方法。
+     * 
+     * 
      * @param i the specified index
      * @param val the value to set the element at the specified index
      * in the data array
@@ -481,6 +592,8 @@ public abstract class DataBuffer {
      * from the given double.  The implementation in this class is to cast
      * val to an int and call {@link #setElem(int, int)}.  Subclasses can
      * override this method if another implementation is needed.
+     * <p>
+     * 
      * @param bank the specified bank
      * @param i the specified index
      * @param val the value to set the element in the specified bank

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,18 @@ import com.sun.naming.internal.FactoryEnumeration;
  * The implementation will not modify the object or keep a reference
  * to it, although it may keep a reference to a clone or copy.
  *
+ * <p>
+ *  此类包含用于创建上下文对象和由命名或目录服务中的位置信息引用的对象的方法。
+ * p>
+ *  此类不能实例化。它只有静态方法。
+ * p>
+ *  在此类的文档中提及URL是指由RFC 1738及其相关RFC定义的URL字符串。它是符合其中描述的语法的任何字符串,并且可能不总是在java.net.URL类或Web浏览器中具有相应的支持。
+ * p>
+ *  NamingManager对于多线程的并发访问是安全的。
+ * p>
+ *  除非另有说明,传递给任何方法的<tt> Name </tt>或环境参数由调用者拥有。实现不会修改对象或保留对它的引用,虽然它可能保留对克隆或副本的引用。
+ * 
+ * 
  * @author Rosanna Lee
  * @author Scott Seligman
  * @since 1.3
@@ -66,6 +79,9 @@ public class NamingManager {
     /*
      * Disallow anyone from creating one of these.
      * Made package private so that DirectoryManager can subclass.
+     * <p>
+     *  禁止任何人创建其中的一个。使包是私有的,使DirectoryManager可以子类化。
+     * 
      */
 
     NamingManager() {}
@@ -77,6 +93,9 @@ public class NamingManager {
 
     /**
      * Package-private; used by DirectoryManager and NamingManager.
+     * <p>
+     *  包私有;由DirectoryManager和NamingManager使用。
+     * 
      */
     private static ObjectFactoryBuilder object_factory_builder = null;
 
@@ -93,6 +112,13 @@ public class NamingManager {
      * (by the security manager's checkSetFactory() method) to do so.
      * Once installed, the builder cannot be replaced.
      *<p>
+     * <p>
+     *  ObjectFactoryBuilder确定尝试加载对象工厂时使用的策略。有关默认策略的描述,请参阅getObjectInstance()和类ObjectFactory。
+     *  setObjectFactoryBuilder()通过安装ObjectFactoryBuilder来覆盖此默认策略。将使用已安装的构建器加载和创建后续对象工厂。
+     * p>
+     * 只有允许执行线程(通过安全管理器的checkSetFactory()方法)才能安装该构建器。安装后,无法替换构建器。
+     * p>
+     * 
      * @param builder The factory builder to install. If null, no builder
      *                  is installed.
      * @exception SecurityException builder cannot be installed
@@ -119,6 +145,9 @@ public class NamingManager {
 
     /**
      * Used for accessing object factory builder.
+     * <p>
+     *  用于访问对象工厂构建器。
+     * 
      */
     static synchronized ObjectFactoryBuilder getObjectFactoryBuilder() {
         return object_factory_builder;
@@ -129,6 +158,10 @@ public class NamingManager {
      * Retrieves the ObjectFactory for the object identified by a reference,
      * using the reference's factory class name and factory codebase
      * to load in the factory's class.
+     * <p>
+     *  检索由引用标识的对象的ObjectFactory,使用引用的工厂类名称和工厂代码库加载到工厂的类中。
+     * 
+     * 
      * @param ref The non-null reference to use.
      * @param factoryName The non-null class name of the factory.
      * @return The object factory for the object identified by ref; null
@@ -169,6 +202,10 @@ public class NamingManager {
      * <tt>Context.OBJECT_FACTORIES</tt> property of the environment
      * or of the provider resource file associated with <tt>nameCtx</tt>.
      *
+     * <p>
+     *  使用环境的<tt> Context.OBJECT_FACTORIES </tt>属性中指定的工厂或与<tt> nameCtx </tt>关联的提供程序资源文件中指定的工厂创建对象。
+     * 
+     * 
      * @return factory created; null if cannot create
      */
     private static Object createObjectFromFactories(Object obj, Name name,
@@ -259,6 +296,34 @@ public class NamingManager {
      * to the default initial context.  If no name is being specified, the
      * <code>name</code> parameter should be null.
      *
+     * <p>
+     *  为指定的对象和环境创建对象的实例。
+     * <p>
+     *  如果已经安装了对象工厂构建器,则用于创建用于创建对象的工厂。否则,将使用以下规则创建对象：
+     * ol>
+     * <li>如果<code> refInfo </code>是包含工厂类名称的<code>引用</code>或<code>引用</code>,请使用命名工厂创建对象。
+     * 如果无法创建工厂,则返回<code> refInfo </code>。
+     * 在JDK 1.1下,如果必须从引用中指定的位置加载工厂类,则必须安装<tt> SecurityManager </tt>,否则工厂创建将失败。如果在创建工厂时遇到异常,它会传递给调用者。
+     *  <li>如果<tt> refInfo </tt>是没有工厂类名称的<tt>引用</tt>或<tt>可引用</tt>,并且一个或多个地址为<tt> StringRefAddr </tt > s,地址类型
+     * 为"URL",请尝试对应于每个URL的方案id的URL上下文工厂来创建对象(参见<tt> getURLContext()</tt>)。
+     * 在JDK 1.1下,如果必须从引用中指定的位置加载工厂类,则必须安装<tt> SecurityManager </tt>,否则工厂创建将失败。如果在创建工厂时遇到异常,它会传递给调用者。
+     * 如果失败,请继续下一步。
+     *  <li>使用环境的<tt> Context.OBJECT_FACTORIES </tt>属性中指定的对象工厂,以及与<tt> nameCtx </tt>关联的提供程序资源文件中指定的对象工厂。
+     * 此属性的值是以冒号分隔的工厂类名称列表,按顺序尝试,并且成功创建对象的第一个是使用的对象。如果没有工厂可以加载,返回<code> refInfo </code>。
+     * 如果在创建对象时遇到异常,则将异常传递给调用者。
+     * /ol>
+     * p>
+     * 实现<tt> DirContext </tt>界面的服务提供程序应使用<tt> DirectoryManager.getObjectInstance()</tt>,而不是此方法。
+     * 仅实现<tt> Context </tt>接口的服务提供者应该使用此方法。
+     * <p>
+     *  注意,对象工厂(实现ObjectFactory接口的对象)必须是public的,并且必须有一个不接受参数的公共构造函数。
+     * <p>
+     *  可以可选地使用<code> name </code>和<code> nameCtx </code>参数来指定正在创建的对象的名称。
+     *  <code> name </code>是对象的名称,相对于上下文<code> nameCtx </code>。此信息可能对对象工厂或对象实现有用。
+     * 如果有几个可能的上下文从中可以命名对象 - 正如通常的情况 - 由调用者选择一个。一个好的经验法则是选择"最深的"上下文。
+     * 如果<code> nameCtx </code>为null,则<code> name </code>是相对于默认的初始上下文。如果未指定名称,则<code> name </code>参数应为null。
+     * 
+     * 
      * @param refInfo The possibly null object for which to create an object.
      * @param name The name of this object relative to <code>nameCtx</code>.
      *          Specifying a name is optional; if it is
@@ -347,6 +412,9 @@ public class NamingManager {
      * Ref has no factory.  For each address of type "URL", try its URL
      * context factory.  Returns null if unsuccessful in creating and
      * invoking a factory.
+     * <p>
+     *  Ref没有工厂。对于类型"URL"的每个地址,请尝试其URL上下文工厂。如果在创建和调用工厂时不成功,则返回null。
+     * 
      */
     static Object processURLAddrs(Reference ref, Name name, Context nameCtx,
                                   Hashtable<?,?> environment)
@@ -410,6 +478,10 @@ public class NamingManager {
      * environment.
      * Used by ContinuationContext.
      *
+     * <p>
+     *  使用指定的环境检索由<code> obj </code>标识的上下文。由ContinuationContext使用。
+     * 
+     * 
      * @param obj       The object identifying the context.
      * @param name      The name of the context being returned, relative to
      *                  <code>nameCtx</code>, or null if no name is being
@@ -528,6 +600,34 @@ public class NamingManager {
      * interface) must be public and must have a public constructor that
      * accepts no arguments.
      *
+     * <p>
+     *  为给定的URL方案ID创建上下文。
+     * <p>
+     * 结果上下文用于解决方案<code> scheme </code>的URL。生成的上下文不绑定到特定的URL。它能够处理具有指定方案的任意URL。
+     * p>
+     *  创建生成的上下文的工厂的类名在包中指定的包中具有命名约定<i> scheme-id </i> URLContextFactory(例如,"ftpURLContextFactory"为"ftp"sche
+     * me-id)。
+     *  <tt> Context.URL_PKG_PREFIXES </tt>环境属性(可能包含从applet参数,系统属性或应用程序资源文件中获取的值)包含冒号分隔的软件包前缀列表。
+     * 属性中的每个包前缀按指定的顺序尝试加载工厂类。默认包前缀是"com.sun.jndi.url"(如果没有指定的包工作,则此默认值被尝试)。完整的包名称使用包前缀与方案id连接构造。
+     * p>
+     *  例如,如果方案id是"ldap",并且<tt> Context.URL_PKG_PREFIXES </tt>属性包含"com.widget：com.wiz.jndi",命名管理器将尝试加载以下类,直到
+     * 一个已成功实例化：。
+     * ul>
+     *  <li> com.widget.ldap.ldapURLContextFactory <li> com.wiz.jndi.ldap.ldapURLContextFactory <li> com.sun
+     * .jndi.url.ldap.ldapURLContextFactory。
+     * /ul>
+     *  如果没有任何包前缀工作,则返回null。
+     * p>
+     *  如果工厂被实例化,则使用以下参数调用它以产生结果上下文。
+     * <p>
+     * <code> factory.getObjectInstance(null,environment); </code>
+     * <p>
+     *  例如,如上所示在LDAP URL上下文工厂上调用getObjectInstance()将返回一个可以解析LDAP网址的上下文(例如"ldap：//ldap.wiz.com/o=wiz,c=us","l
+     * dap： //ldap.umich.edu/o=umich,c=us",...)。
+     * p>
+     *  注意,对象工厂(实现ObjectFactory接口的对象)必须是public的,并且必须有一个不接受参数的公共构造函数。
+     * 
+     * 
      * @param scheme    The non-null scheme-id of the URLs supported by the context.
      * @param environment The possibly null environment properties to be
      *           used in the creation of the object factory and the context.
@@ -575,6 +675,16 @@ public class NamingManager {
      * The resulting context is like that of the single URL case.
      * If urlInfo is of any other type, that is handled by the
      * context factory for the URL scheme.
+     * <p>
+     *  使用提供的urlInfo为给定的URL scheme id创建一个对象。
+     * <p>
+     *  如果urlInfo为null,则结果是用于解析具有方案id"scheme"的URL的上下文。如果urlInfo是URL,则结果是由URL命名的上下文。
+     * 传递给此上下文的名称假定为相对于此上下文(即不是URL)。
+     * 例如,如果urlInfo是"ldap：//ldap.wiz.com/o=Wiz,c=us",则生成的上下文将是服务器'ldap上的"o = Wiz,c = us"指向的上下文。 wiz.com"。
+     * 可以传递到此上下文的后续名称将是相对于此上下文的LDAP名称(例如cn ="Barbs Jensen")。如果urlInfo是一个URL数组,则假定URL在它们所引用的上下文方面是等价的。
+     * 生成的上下文类似于单个URL的情况。如果urlInfo是任何其他类型,由URL方案的上下文工厂处理。
+     * 
+     * 
      * @param scheme the URL scheme id for the context
      * @param urlInfo information used to create the context
      * @param name name of this object relative to <code>nameCtx</code>
@@ -616,6 +726,9 @@ public class NamingManager {
     /**
      * Use this method for accessing initctx_factory_builder while
      * inside an unsynchronized method.
+     * <p>
+     *  在非同步方法中使用此方法访问initctx_factory_builder。
+     * 
      */
     private static synchronized InitialContextFactoryBuilder
     getInitialContextFactoryBuilder() {
@@ -634,6 +747,14 @@ public class NamingManager {
      * InitialContextFactory interface) must be public and must have a
      * public constructor that accepts no arguments.
      *
+     * <p>
+     *  使用指定的环境属性创建初始上下文。
+     * p>
+     * 如果已经安装了InitialContextFactoryBuilder,它将用于创建用于创建初始上下文的工厂。
+     * 否则,将使用在<tt> Context.INITIAL_CONTEXT_FACTORY </tt>环境属性中指定的类。
+     * 注意,初始上下文工厂(实现InitialContextFactory接口的对象)必须是public的,并且必须有一个不接受参数的公共构造函数。
+     * 
+     * 
      * @param env The possibly null environment properties used when
      *                  creating the context.
      * @return A non-null initial context.
@@ -692,6 +813,13 @@ public class NamingManager {
      * The builder can only be installed if the executing thread is allowed by
      * the security manager to do so. Once installed, the builder cannot
      * be replaced.
+     * <p>
+     *  将InitialContextFactory构建器设置为builder。
+     * 
+     * p>
+     *  只有在安全管理器允许执行线程这样做时,才能安装构建器。安装后,无法替换构建器。
+     * 
+     * 
      * @param builder The initial context factory builder to install. If null,
      *                no builder is set.
      * @exception SecurityException builder cannot be installed for security
@@ -719,6 +847,10 @@ public class NamingManager {
     /**
      * Determines whether an initial context factory builder has
      * been set.
+     * <p>
+     *  确定是否已设置初始上下文工厂构建器。
+     * 
+     * 
      * @return true if an initial context factory builder has
      *           been set; false otherwise.
      * @see #setInitialContextFactoryBuilder
@@ -739,6 +871,13 @@ public class NamingManager {
      *<p>
      * The value of this constant is "java.naming.spi.CannotProceedException".
      *
+     * <p>
+     *  包含<tt> getContinuationContext()</tt>的环境属性名称的常量,用于存储<tt> CannotProceedException </tt>参数的值。
+     * 此属性由继承上下文继承,并且可由该上下文的服务提供程序用于检查异常的字段。
+     * p>
+     *  此常量的值为"java.naming.spi.CannotProceedException"。
+     * 
+     * 
      * @see #getContinuationContext
      * @since 1.3
      */
@@ -766,6 +905,18 @@ public class NamingManager {
      * continuation context, and may be used by that context's
      * service provider to inspect the fields of this exception.
      *
+     * <p>
+     *  创建用于继续上下文操作的上下文。
+     * p>
+     * 在对跨多个命名空间的名称执行操作时,来自一个命名系统的上下文可能需要将操作传递到下一个命名系统。
+     * 上下文实现通过首先构造包含定位其已经进行了多远的信息的<code> CannotProceedException </code>来实现。
+     * 然后通过调用<code> getContinuationContext </code>从JNDI获取一个继承上下文。
+     * 然后,上下文实现应该通过使用尚未被解析的名称的其余部分在连续上下文上调用相同的操作来恢复上下文操作。
+     * p>
+     *  在使用<tt> cpe </tt>参数之前,此方法会更新与该对象相关联的环境,方法是设置属性<a href="#CPE"> <tt> CPE </tt> </a>到<tt> cpe </tt>。
+     * 此属性将由继承上下文继承,并且可由该上下文的服务提供程序用于检查此异常的字段。
+     * 
+     * 
      * @param cpe
      *          The non-null exception that triggered this continuation.
      * @return A non-null Context object for continuing the operation.
@@ -827,6 +978,16 @@ public class NamingManager {
      * directly, or to extract its reference (using
      * <tt>Referenceable.getReference()</tt>) and store that instead.
      *
+     * <p>
+     *  检索要绑定的对象的状态。
+     * <p>
+     *  实现<tt> DirContext </tt>界面的服务提供者应使用<tt> DirectoryManager.getStateToBind()</tt>,而不是此方法。
+     * 仅实现<tt> Context </tt>接口的服务提供者应该使用此方法。
+     * p>
+     * 此方法使用环境属性中的<tt> Context.STATE_FACTORIES </tt>属性中的指定状态工厂,以及与<tt> nameCtx </tt>相关联的提供程序资源文件中的指定状态工厂。
+     * 此属性的值是按顺序尝试的工厂类名称的冒号分隔列表,并且成功返回对象状态的第一个是使用的。如果没有以这种方式检索对象的状态,则返回对象本身。如果在检索状态时遇到异常,则将异常传递给调用者。
+     * <p>
+     * 
      * @param obj The non-null object for which to get state to bind.
      * @param name The name of this object relative to <code>nameCtx</code>,
      *          or null if no name is specified.

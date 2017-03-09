@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,15 +17,30 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XMLStringFactoryDefault.java,v 1.2.4.1 2005/09/15 08:16:03 suresh_emailid Exp $
+ * <p>
+ *  $ Id：XMLStringFactoryDe​​fault.java,v 1.2.4.1 2005/09/15 08:16:03 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
 /**
  * The default implementation of XMLStringFactory.
  * This implementation creates XMLStringDefault objects.
+ * <p>
+ *  XMLStringFactory的默认实现。此实现创建XMLStringDefault对象。
+ * 
  */
 public class XMLStringFactoryDefault extends XMLStringFactory
 {
@@ -35,6 +51,10 @@ public class XMLStringFactoryDefault extends XMLStringFactory
    * Create a new XMLString from a Java string.
    *
    *
+   * <p>
+   *  从Java字符串创建一个新的XMLString。
+   * 
+   * 
    * @param string Java String reference, which must be non-null.
    *
    * @return An XMLString object that wraps the String reference.
@@ -48,6 +68,10 @@ public class XMLStringFactoryDefault extends XMLStringFactory
    * Create a XMLString from a FastStringBuffer.
    *
    *
+   * <p>
+   *  从FastStringBuffer创建XMLString。
+   * 
+   * 
    * @param fsb FastStringBuffer reference, which must be non-null.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -63,6 +87,10 @@ public class XMLStringFactoryDefault extends XMLStringFactory
    * Create a XMLString from a FastStringBuffer.
    *
    *
+   * <p>
+   *  从FastStringBuffer创建XMLString。
+   * 
+   * 
    * @param string FastStringBuffer reference, which must be non-null.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -77,6 +105,9 @@ public class XMLStringFactoryDefault extends XMLStringFactory
   /**
    * Get a cheap representation of an empty string.
    *
+   * <p>
+   *  获取空字符串的廉价表示。
+   * 
    * @return An non-null reference to an XMLString that represents "".
    */
   public XMLString emptystr()

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,19 @@ import javax.imageio.stream.ImageOutputStream;
  * native implementations for a particular platform) can be installed
  * and used transparently by applications.
  *
+ * <p>
+ *  用于<code> ImageOutputStream </code>的服务提供程序接口(SPI)。
+ * 有关服务提供程序接口的更多信息,请参阅<code> IIORegistry </code>类的类注释。
+ * 
+ *  <p>此接口允许任意对象由<code> ImageOutputStream </code>的实例"包装"。
+ * 例如,特定的<code> ImageOutputStreamSpi </code>可能允许将一个通用<code> OutputStream </code>用作目的地;另一个可能输出到<code> Fil
+ * e </code>或一个设备,如串行端口。
+ *  <p>此接口允许任意对象由<code> ImageOutputStream </code>的实例"包装"。
+ * 
+ *  <p>通过将<code> ImageOutputStream </code>的创建视为可插入服务,可以在不更改API的情况下处理未来的输出目标。
+ * 此外,<code> ImageOutputStream </code>(例如,特定平台的本机实现)的高性能实现可以由应用程序透明地安装和使用。
+ * 
+ * 
  * @see IIORegistry
  * @see javax.imageio.stream.ImageOutputStream
  *
@@ -58,6 +72,9 @@ public abstract class ImageOutputStreamSpi extends IIOServiceProvider {
     /**
      * A <code>Class</code> object indicating the legal object type
      * for use by the <code>createInputStreamInstance</code> method.
+     * <p>
+     *  代表<code> createInputStreamInstance </code>方法使用的合法对象类型的<code> Class </code>对象。
+     * 
      */
     protected Class<?> outputClass;
 
@@ -66,6 +83,9 @@ public abstract class ImageOutputStreamSpi extends IIOServiceProvider {
      * to the subclass to initialize instance variables and/or
      * override method implementations in order to provide working
      * versions of all methods.
+     * <p>
+     *  构造一个空白<code> ImageOutputStreamSpi </code>。它是由子类初始化实例变量和/或覆盖方法实现为了提供所有方法的工作版本。
+     * 
      */
     protected ImageOutputStreamSpi() {
     }
@@ -74,6 +94,10 @@ public abstract class ImageOutputStreamSpi extends IIOServiceProvider {
      * Constructs an <code>ImageOutputStreamSpi</code> with a given
      * set of values.
      *
+     * <p>
+     *  用给定的一组值构造一个<code> ImageOutputStreamSpi </code>。
+     * 
+     * 
      * @param vendorName the vendor name.
      * @param version a version identifier.
      * @param outputClass a <code>Class</code> object indicating the
@@ -103,6 +127,13 @@ public abstract class ImageOutputStreamSpi extends IIOServiceProvider {
      * <code>OutputStream.class</code> or <code>File.class</code>, but
      * any class may be used.
      *
+     * <p>
+     * 返回一个表示必须由输出目标实现的类或接口类型的<code> Class </code>对象,以便通过<code> createOutputStreamInstance </code>在<code> Im
+     * ageOutputStream </code>代码>方法。
+     * 
+     *  <p>典型的返回值可能包括<code> OutputStream.class </code>或<code> File.class </code>,但可以使用任何类。
+     * 
+     * 
      * @return a <code>Class</code> variable.
      *
      * @see #createOutputStreamInstance(Object, boolean, File)
@@ -121,6 +152,14 @@ public abstract class ImageOutputStreamSpi extends IIOServiceProvider {
      *
      * <p> The default implementation returns <code>false</code>.
      *
+     * <p>
+     *  如果与此服务提供程序相关联的<code> ImageOutputStream </code>实现可以选择使用高速缓存<code> File </code>以提高性能和/或内存占用,则返回<code> 
+     * true </code>。
+     * 如果<code> false </code>,则<code> createOutputStreamInstance </code>的<code> cacheFile </code>参数的值将被忽略。
+     * 
+     *  <p>默认实现返回<code> false </code>。
+     * 
+     * 
      * @return <code>true</code> if a cache file can be used by the
      * output streams created by this service provider.
      */
@@ -135,6 +174,12 @@ public abstract class ImageOutputStreamSpi extends IIOServiceProvider {
      *
      * <p> The default implementation returns <code>false</code>.
      *
+     * <p>
+     *  如果与此服务提供商相关联的<code> ImageOutputStream </code>实现要求使用缓存<code> File </code>,则返回<code> true </code>。
+     * 
+     *  <p>默认实现返回<code> false </code>。
+     * 
+     * 
      * @return <code>true</code> if a cache file is needed by the
      * output streams created by this service provider.
      */
@@ -149,6 +194,11 @@ public abstract class ImageOutputStreamSpi extends IIOServiceProvider {
      * parameter will be consulted.  Where a cache is required, or
      * not applicable, the value of <code>useCache</code> will be ignored.
      *
+     * <p>
+     *  返回与此服务提供商相关联的<code> ImageOutputStream </code>实现的实例。如果使用高速缓存文件是可选的,那么将参考<code> useCache </code>参数。
+     * 在需要缓存或不适用的情况下,将忽略<code> useCache </code>的值。
+     * 
+     * 
      * @param output an object of the class type returned by
      * <code>getOutputClass</code>.
      * @param useCache a <code>boolean</code> indicating whether a
@@ -181,6 +231,8 @@ public abstract class ImageOutputStreamSpi extends IIOServiceProvider {
      * file will be created in the system-dependent default
      * temporary-file directory, if needed.
      *
+     * <p>
+     * 
      * @param output an object of the class type returned by
      * <code>getOutputClass</code>.
      *

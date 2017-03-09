@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,15 @@ import sun.awt.TimedWindowEvent;
  * <a href="../../java/awt/doc-files/FocusSpec.html">Focus Specification</a>
  * for more information.
  *
+ * <p>
+ *  用于AWT应用程序的默认KeyboardFocusManager。焦点遍历是响应组件的焦点遍历键,并使用Container的FocusTraversalPolicy。
+ * <p>
+ *  请参见
+ * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+ *  如何使用焦点子系统</a>,<em> Java教程</em>和<a href ="../../ java / awt / doc-files / FocusSpec.html" >聚焦规格</a>了解
+ * 更多信息。
+ * 
+ * 
  * @author David Mendenhall
  *
  * @see FocusTraversalPolicy
@@ -96,6 +106,9 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
         }
         /**
          * Returns string representation of the marker
+         * <p>
+         *  返回标记的字符串表示形式
+         * 
          */
         public String toString() {
             return ">>> Marker after " + after + " on " + untilFocused;
@@ -114,6 +127,9 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * This series of restoreFocus methods is used for recovering from a
      * rejected focus or activation change. Rejections typically occur when
      * the user attempts to focus a non-focusable Component or Window.
+     * <p>
+     *  这一系列restoreFocus方法用于从被拒绝的焦点或激活更改中恢复。拒绝通常发生在用户尝试对不可聚焦的组件或窗口进行聚焦时。
+     * 
      */
     private void restoreFocus(FocusEvent fe, Window newFocusedWindow) {
         Component realOppositeComponent = this.realOppositeComponentWR.get();
@@ -187,12 +203,18 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * A special type of SentEvent which updates a counter in the target
      * KeyboardFocusManager if it is an instance of
      * DefaultKeyboardFocusManager.
+     * <p>
+     *  一种特殊类型的SentEvent,如果它是DefaultKeyboardFocusManager的实例,则更新目标KeyboardFocusManager中的计数器。
+     * 
      */
     private static class DefaultKeyboardFocusManagerSentEvent
         extends SentEvent
     {
         /*
          * serialVersionUID
+         * <p>
+         *  serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -2924743257508701758L;
 
@@ -232,6 +254,11 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * until the event is handled or target AppContext is disposed.
      * Returns true if successfuly dispatched event, false if failed
      * to dispatch.
+     * <p>
+     *  向组件发送合成AWTEvent。如果组件在当前的AppContext中,那么将立即分派事件。
+     * 如果组件在不同的AppContext中,那么事件将被发布到另一个AppContext的EventQueue,并且此方法阻塞,直到事件被处理或目标AppContext被处置。
+     * 如果成功调度的事件返回true,如果调度失败,则返回false。
+     * 
      */
     static boolean sendMessage(Component target, AWTEvent e) {
         e.isPosted = true;
@@ -277,6 +304,10 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * case the focus window events may be dispatched before the type-ahead events
      * get handled. This may lead to wrong focus behavior and in order to avoid it,
      * the focus window events are reposted to the end of the event queue. See 6981400.
+     * <p>
+     * 检查焦点窗口事件是否遵循在预先输入队列中等待的键事件(如果有)。这可能发生在用户在窗口中向前键入时,客户端侦听器暂停EDT一段时间,并且用户将b / w切换到级别。
+     * 在这种情况下,可以在处理先行类型事件之前分派聚焦窗口事件。这可能导致错误的焦点行为,为了避免它,焦点窗口事件被重新发布到事件队列的结尾。见6981400。
+     * 
      */
     private boolean repostIfFollowsKeyEvents(WindowEvent e) {
         if (!(e instanceof TimedWindowEvent)) {
@@ -312,6 +343,13 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * AWTEvent. If this method returns <code>false</code>, then the AWT event
      * dispatcher will attempt to dispatch the event itself.
      *
+     * <p>
+     *  此方法由AWT事件分派器调用,请求当前的KeyboardFocusManager代表它分派指定的事件。
+     *  DefaultKeyboardFocusManagers分派所有FocusEvent,所有与焦点相关的WindowEvent和所有KeyEvent。
+     * 这些事件将基于KeyboardFocusManager的焦点所有者和焦点和活动窗口的概念进行分派,有时会覆盖指定的AWTEvent的源。
+     * 如果此方法返回<code> false </code>,则AWT事件分派器将尝试调度事件本身。
+     * 
+     * 
      * @param e the AWTEvent to be dispatched
      * @return <code>true</code> if this method dispatched the event;
      *         <code>false</code> otherwise
@@ -792,6 +830,15 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * <code>dispatchEvent</code>, nor the AWT event dispatcher, should take
      * further action on the event in any situation.
      *
+     * <p>
+     * 如果分派器链中没有其他KeyEventDispatcher调度KeyEvent,或者没有注册其他KeyEventDispatchers,则由<code> dispatchEvent </code>调用。
+     * 如果事件尚未使用,则其目标已启用,并且焦点所有者不为null,则此方法会将事件分派给其目标。此方法也将随后将事件分派到所有已注册的KeyEventPostProcessors。
+     * 所有这些操作完成后,事件被传递到对等体进行处理。
+     * <p>
+     *  在所有情况下,此方法返回<code> true </code>,因为DefaultKeyboardFocusManager设计为使得<code> dispatchEvent </code>和AWT事件
+     * 分派器都不应在任何情况下对事件采取进一步的操作。
+     * 
+     * 
      * @param e the KeyEvent to be dispatched
      * @return <code>true</code>
      * @see Component#dispatchEvent
@@ -846,6 +893,11 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * <code>MenuShortcut</code> by consuming the event and activating the
      * shortcut.
      *
+     * <p>
+     *  此方法将由<code> dispatchKeyEvent </code>调用。
+     * 它将通过消费事件并激活快捷方式来处理映射到AWT <code> MenuShortcut </code>的任何未使用的KeyEvent。
+     * 
+     * 
      * @param e the KeyEvent to post-process
      * @return <code>true</code>
      * @see #dispatchKeyEvent
@@ -896,6 +948,9 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
 
     /**
      * Dumps the list of type-ahead queue markers to stderr
+     * <p>
+     *  将提前输入队列标记列表转储到stderr
+     * 
      */
     void dumpMarkers() {
         if (focusLog.isLoggable(PlatformLogger.Level.FINEST)) {
@@ -1000,6 +1055,10 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
     /**
      * Returns true if there are some marker associated with component <code>comp</code>
      * in a markers' queue
+     * <p>
+     *  如果在标记队列中有一些与组件<code> comp </code>相关联的标记,则返回true
+     * 
+     * 
      * @since 1.5
      */
     private boolean hasMarker(Component comp) {
@@ -1013,6 +1072,10 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
 
     /**
      * Clears markers queue
+     * <p>
+     *  清除标记队列
+     * 
+     * 
      * @since 1.5
      */
     void clearMarkers() {
@@ -1042,6 +1105,9 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
          * event proxying mechanism is active.
          * If it is active we should redispatch key events after
          * we detected its correct target.
+         * <p>
+         *  修复4495473.此修复程序允许在本机事件代理机制处于活动状态时正确分派事件。如果它是活动的,我们应该在我们检测到其正确的目标后重新分派关键事件。
+         * 
          */
         if (KeyboardFocusManager.isProxyActive(ke)) {
             Component source = (Component)ke.getSource();
@@ -1052,6 +1118,9 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
                     peer.handleEvent(ke);
                     /**
                      * Fix for 4478780 - consume event after it was dispatched by peer.
+                     * <p>
+                     *  修复4478780  - 在对等体分派消耗事件之后。
+                     * 
                      */
                     ke.consume();
                 }
@@ -1075,6 +1144,8 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
     }
 
     /*
+    /* <p>
+    /* 
      * @param e is a KEY_PRESSED event that can be used
      *          to track the next KEY_TYPED related.
      */
@@ -1090,6 +1161,9 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
 
     /*
      * return true if event was consumed
+     * <p>
+     *  如果事件被消耗,则返回true
+     * 
      */
     private boolean consumeProcessedKeyEvent(KeyEvent e) {
         if ((e.getID() == KeyEvent.KEY_TYPED) && consumeNextKeyTyped) {
@@ -1108,6 +1182,11 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * focus traversal will nevertheless proceed as if focusedComponent
      * were the focus owner.
      *
+     * <p>
+     * 当且仅当KeyEvent表示指定的focusedComponent的焦点遍历键时,此方法才启动焦点遍历操作。期望focusedComponent是当前焦点所有者,尽管不需要这样。
+     * 如果不是,焦点遍历将继续进行,就像focusedComponent是焦点所有者。
+     * 
+     * 
      * @param focusedComponent the Component that is the basis for a focus
      *        traversal operation if the specified event represents a focus
      *        traversal key for the Component
@@ -1202,6 +1281,13 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * FOCUS_GAINED event, or the AWT cancels the delay request by invoking
      * <code>dequeueKeyEvents</code> or <code>discardKeyEvents</code>.
      *
+     * <p>
+     *  延迟调度KeyEvent,直到指定的组件成为焦点所有者。
+     * 具有晚于指定时间戳的时间戳的KeyEvent将被排队,直到指定的组件接收到FOCUS_GAINED事件,或AWT通过调用<code> dequeueKeyEvents </code>或<code> di
+     * scardKeyEvents </code>来取消延迟请求。
+     *  延迟调度KeyEvent,直到指定的组件成为焦点所有者。
+     * 
+     * 
      * @param after timestamp of current event, or the current, system time if
      *        the current event has no timestamp, or the AWT cannot determine
      *        which event is currently being handled
@@ -1245,6 +1331,11 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * request for the given Component with the <b>oldest</b> timestamp (if
      * any) should be cancelled.
      *
+     * <p>
+     *  正常分派到当前焦点所有者的所有所有由于调用具有相同时间戳和组件的<code> enqueueKeyEvents </code>而排入队列的KeyEvent。
+     * 如果给定时间戳小于零,则应取消具有<b>最早</b>时间戳(如果有)的给定组件的未完成入队请求。
+     * 
+     * 
      * @param after the timestamp specified in the call to
      *        <code>enqueueKeyEvents</code>, or any value &lt; 0
      * @param untilFocused the Component specified in the call to
@@ -1294,6 +1385,10 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * to <code>enqueueKeyEvents</code> with the specified Component, or one of
      * its descendants.
      *
+     * <p>
+     *  丢弃由于对指定的组件或其后代中的一个或多个调用<code> enqueueKeyEvents </code>而排队的所有KeyEvent。
+     * 
+     * 
      * @param comp the Component specified in one or more calls to
      *        <code>enqueueKeyEvents</code>, or a parent of such a Component
      * @see #enqueueKeyEvents
@@ -1356,6 +1451,10 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * Focuses the Component before aComponent, typically based on a
      * FocusTraversalPolicy.
      *
+     * <p>
+     *  在组件之前聚焦组件,通常基于FocusTraversalPolicy。
+     * 
+     * 
      * @param aComponent the Component that is the basis for the focus
      *        traversal operation
      * @see FocusTraversalPolicy
@@ -1371,6 +1470,10 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * Focuses the Component after aComponent, typically based on a
      * FocusTraversalPolicy.
      *
+     * <p>
+     *  在组件之后聚焦组件,通常基于FocusTraversalPolicy。
+     * 
+     * 
      * @param aComponent the Component that is the basis for the focus
      *        traversal operation
      * @see FocusTraversalPolicy
@@ -1390,6 +1493,11 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * to the focus cycle root's default Component to focus, and the current
      * focus cycle root is unchanged.
      *
+     * <p>
+     * 将焦点向上移动一个焦点遍历周期。通常,焦点所有者设置为aComponent的焦点循环根,并且当前焦点循环根设置为新焦点所有者的焦点循环根。
+     * 然而,如果aComponent的焦点周期根是一个Window,焦点所有者被设置为焦点周期根的默认组件焦点,当前焦点周期根不变。
+     * 
+     * 
      * @param aComponent the Component that is the basis for the focus
      *        traversal operation
      * @see Component#transferFocusUpCycle
@@ -1407,6 +1515,10 @@ public class DefaultKeyboardFocusManager extends KeyboardFocusManager {
      * aContainer. If aContainer is not a focus cycle root, then no focus
      * traversal operation occurs.
      *
+     * <p>
+     *  将焦点向下移动一个焦点遍历周期。如果aContainer是焦点循环根,则焦点所有者将设置为要集中的Container的默认组件,并将当前焦点循环根设置为aContainer。
+     * 如果aContainer不是焦点循环根,则不会发生焦点遍历操作。
+     * 
      * @param aContainer the Container that is the basis for the focus
      *        traversal operation
      * @see Container#transferFocusDownCycle

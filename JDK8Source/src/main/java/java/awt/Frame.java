@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -127,6 +128,58 @@ import javax.accessibility.*;
  * <li><code>WINDOW_STATE_CHANGED</code>
  * </ul>
  *
+ * <p>
+ *  <code> Frame </code>是具有标题和边框的顶级窗口。
+ * <p>
+ *  帧的大小包括为边界指定的任何区域。
+ * 边界区域的尺寸可以使用<code> getInsets </code>方法获得,但是,由于这些维度是平台相关的,所以在框架通过调用<code> pack </code>或<code> show </code>
+ * 。
+ *  帧的大小包括为边界指定的任何区域。
+ * 由于边界区域被包括在帧的整体大小中,所以边界有效地遮蔽了帧的一部分,限制了可用于呈现和/或显示具有<code>的左上角位置的矩形的子组件的区域, (insets.left,insets.top)</code>
+ * ,并且<code> height  - (insets.top + insets)的大小为<code> width  - (insets.left + insets.right)</code>底部)</code>
+ * 。
+ *  帧的大小包括为边界指定的任何区域。
+ * <p>
+ *  框架的默认布局为<code> BorderLayout </code>。
+ * <p>
+ *  一个帧可以具有用<code> setUndecorated </code>关闭的本地装饰(即<code> Frame </code>和<code> Titlebar </code>)。
+ * 这只能在框架不是{@link Component#isDisplayable()displayable}时才能完成。
+ * <p>
+ * 在多屏幕环境中,您可以通过使用{@link #Frame(GraphicsConfiguration)}或{@link #Frame(GraphicsConfiguration)}构建<code> Fr
+ * ame </code> Frame(String title,GraphicsConfiguration)}。
+ *  <code> GraphicsConfiguration </code>对象是目标屏幕设备的<code> GraphicsConfiguration </code>对象之一。
+ * <p>
+ *  在其中桌面区域可以跨越多个物理屏幕设备的虚拟设备多屏幕环境中,所有配置的边界相对于虚拟坐标系统。虚拟坐标系的原点在主物理屏幕的左上角。根据虚拟设备中主屏幕的位置,负坐标是可能的,如下图所示。
+ * <p>
+ *  <img src ="doc-files / MultiScreen.gif"alt ="包含三个物理屏幕和一个主物理屏幕的虚拟设备图。
+ * 主物理屏幕显示(0,0)coords,而不同的物理屏幕显示,-100)coords"。
+ * style="float:center; margin: 7px 10px;">
+ * <p>
+ *  在这种环境中,当调用<code> setLocation </code>时,必须将虚拟坐标传递给此方法。
+ * 类似地,在<code> Frame </code>上调用<code> getLocationOnScreen </code>会返回虚拟设备坐标。
+ * 调用<code> GraphicsConfiguration </code>的<code> getBounds </code>方法在虚拟坐标系中找到它的原点。
+ * <p>
+ * 以下代码设置了相对于相应的<code> GraphicsConfiguration </code>的物理屏幕的原点的(10,10)处的<code> Frame </code>的位置。
+ * 如果不考虑<code> GraphicsConfiguration </code>的边界,则<code> Frame </code>位置将被设置为相对于虚拟坐标系的(10,10),并且将出现在主物理屏幕
+ * ,这可能不同于指定的<code> GraphicsConfiguration </code>的物理屏幕。
+ * 以下代码设置了相对于相应的<code> GraphicsConfiguration </code>的物理屏幕的原点的(10,10)处的<code> Frame </code>的位置。
+ * 
+ * <pre>
+ *  Frame f = new Frame(GraphicsConfiguration gc); Rectangle bounds = gc.getBounds(); f.setLocation(10 +
+ *  bounds.x,10 + bounds.y);。
+ * </pre>
+ * 
+ * <p>
+ *  帧能够生成以下类型的<code> WindowEvent </code>：
+ * <ul>
+ *  <li> <code> WINDOW_OPENED </code> <li> <code> WINDOW_CLOSING </code>：<br>如果程序在处理此事件时没有显式隐藏或处理窗口,则窗口关
+ * 闭操作将被取消。
+ *  <li> <code> WINDOW_CLOSED </code> <li> <code> WINDOW_ACTIVATED </code> <li> <code> WINDOW_ICONIFIED 
+ * </code> <li> <code> WINDOW_DEICONIFIED </code> WINDOW_DEACTIVATED </code> <li> <code> WINDOW_GAINED_F
+ * OCUS </code> <li> <code> WINDOW_LOST_FOCUS </code> <li> <code> WINDOW_STATE_CHANGED </code>。
+ * </ul>
+ * 
+ * 
  * @author      Sami Shaio
  * @see WindowEvent
  * @see Window#addWindowListener
@@ -136,9 +189,14 @@ public class Frame extends Window implements MenuContainer {
 
     /* Note: These are being obsoleted;  programs should use the Cursor class
      * variables going forward. See Cursor and Component.setCursor.
+     * <p>
+     *  变量。请参见Cursor和Component.setCursor。
+     * 
      */
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.DEFAULT_CURSOR</code>.
     */
     @Deprecated
@@ -146,78 +204,104 @@ public class Frame extends Window implements MenuContainer {
 
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.CROSSHAIR_CURSOR</code>.
     */
     @Deprecated
     public static final int     CROSSHAIR_CURSOR                = Cursor.CROSSHAIR_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.TEXT_CURSOR</code>.
     */
     @Deprecated
     public static final int     TEXT_CURSOR                     = Cursor.TEXT_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.WAIT_CURSOR</code>.
     */
     @Deprecated
     public static final int     WAIT_CURSOR                     = Cursor.WAIT_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.SW_RESIZE_CURSOR</code>.
     */
     @Deprecated
     public static final int     SW_RESIZE_CURSOR                = Cursor.SW_RESIZE_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.SE_RESIZE_CURSOR</code>.
     */
     @Deprecated
     public static final int     SE_RESIZE_CURSOR                = Cursor.SE_RESIZE_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.NW_RESIZE_CURSOR</code>.
     */
     @Deprecated
     public static final int     NW_RESIZE_CURSOR                = Cursor.NW_RESIZE_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.NE_RESIZE_CURSOR</code>.
     */
     @Deprecated
     public static final int     NE_RESIZE_CURSOR                = Cursor.NE_RESIZE_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.N_RESIZE_CURSOR</code>.
     */
     @Deprecated
     public static final int     N_RESIZE_CURSOR                 = Cursor.N_RESIZE_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.S_RESIZE_CURSOR</code>.
     */
     @Deprecated
     public static final int     S_RESIZE_CURSOR                 = Cursor.S_RESIZE_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.W_RESIZE_CURSOR</code>.
     */
     @Deprecated
     public static final int     W_RESIZE_CURSOR                 = Cursor.W_RESIZE_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.E_RESIZE_CURSOR</code>.
     */
     @Deprecated
     public static final int     E_RESIZE_CURSOR                 = Cursor.E_RESIZE_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.HAND_CURSOR</code>.
     */
     @Deprecated
     public static final int     HAND_CURSOR                     = Cursor.HAND_CURSOR;
 
    /**
+   /* <p>
+   /* 
     * @deprecated   replaced by <code>Cursor.MOVE_CURSOR</code>.
     */
     @Deprecated
@@ -227,6 +311,10 @@ public class Frame extends Window implements MenuContainer {
     /**
      * Frame is in the "normal" state.  This symbolic constant names a
      * frame state with all state bits cleared.
+     * <p>
+     *  框架处于"正常"状态。此符号常量命名一个帧状态,并清除所有状态位。
+     * 
+     * 
      * @see #setExtendedState(int)
      * @see #getExtendedState
      */
@@ -234,6 +322,10 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * This state bit indicates that frame is iconified.
+     * <p>
+     *  该状态位指示帧被图标化。
+     * 
+     * 
      * @see #setExtendedState(int)
      * @see #getExtendedState
      */
@@ -242,6 +334,10 @@ public class Frame extends Window implements MenuContainer {
     /**
      * This state bit indicates that frame is maximized in the
      * horizontal direction.
+     * <p>
+     * 该状态位指示帧在水平方向上最大化。
+     * 
+     * 
      * @see #setExtendedState(int)
      * @see #getExtendedState
      * @since 1.4
@@ -251,6 +347,10 @@ public class Frame extends Window implements MenuContainer {
     /**
      * This state bit indicates that frame is maximized in the
      * vertical direction.
+     * <p>
+     *  该状态位指示帧在垂直方向上被最大化。
+     * 
+     * 
      * @see #setExtendedState(int)
      * @see #getExtendedState
      * @since 1.4
@@ -273,6 +373,20 @@ public class Frame extends Window implements MenuContainer {
      *     (state &amp; Frame.MAXIMIZED_BOTH) != 0
      * </pre>
      *
+     * <p>
+     *  该状态位掩码指示帧完全最大化(即水平和垂直)。它只是<code> MAXIMIZED_VERT&nbsp; |&nbsp; MAXIMIZED_HORIZ </code>的一个方便别名。
+     * 
+     *  <p>请注意,对帧进行完全最大化的正确测试是
+     * <pre>
+     *  (state&amp; Frame.MAXIMIZED_BOTH)== Frame.MAXIMIZED_BOTH
+     * </pre>
+     * 
+     *  <p>要测试是否在<em>方向使用中最大化框架
+     * <pre>
+     *  (state&amp; Frame.MAXIMIZED_BOTH)！= 0
+     * </pre>
+     * 
+     * 
      * @see #setExtendedState(int)
      * @see #getExtendedState
      * @since 1.4
@@ -281,6 +395,10 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * Maximized bounds for this frame.
+     * <p>
+     *  此框架的最大边界。
+     * 
+     * 
      * @see     #setMaximizedBounds(Rectangle)
      * @see     #getMaximizedBounds
      * @serial
@@ -294,6 +412,10 @@ public class Frame extends Window implements MenuContainer {
      * at any time.  <code>title</code> can be null and if
      * this is the case the <code>title</code> = "".
      *
+     * <p>
+     *  这是框架的标题。它可以随时更改。 <code> title </code>可以为null,如果是<code> title </code> =""。
+     * 
+     * 
      * @serial
      * @see #getTitle
      * @see #setTitle(String)
@@ -304,6 +426,10 @@ public class Frame extends Window implements MenuContainer {
      * The frames menubar.  If <code>menuBar</code> = null
      * the frame will not have a menubar.
      *
+     * <p>
+     *  框架菜单。如果<code> menuBar </code> = null,框架将不会有菜单栏。
+     * 
+     * 
      * @serial
      * @see #getMenuBar
      * @see #setMenuBar(MenuBar)
@@ -316,6 +442,10 @@ public class Frame extends Window implements MenuContainer {
      * <code>resizable</code> will be true if the frame is
      * resizable, otherwise it will be false.
      *
+     * <p>
+     *  此字段指示框架是否可调整大小。此属性可以随时更改。 <code> resizable </code>将为true,如果框架是可调整大小,否则将为false。
+     * 
+     * 
      * @serial
      * @see #isResizable()
      */
@@ -327,6 +457,10 @@ public class Frame extends Window implements MenuContainer {
      * <code>undecorated</code> will be true if the frame is
      * undecorated, otherwise it will be false.
      *
+     * <p>
+     *  此字段指示框架是否未装饰。此属性只能在框架无法显示时更改。 <code> undecorated </code>将为true,如果框架未装饰,否则将为false。
+     * 
+     * 
      * @serial
      * @see #setUndecorated(boolean)
      * @see #isUndecorated()
@@ -338,6 +472,10 @@ public class Frame extends Window implements MenuContainer {
     /**
      * <code>mbManagement</code> is only used by the Motif implementation.
      *
+     * <p>
+     *  <code> mbManagement </code>只被Motif实现使用。
+     * 
+     * 
      * @serial
      */
     boolean     mbManagement = false;   /* used only by the Motif impl. */
@@ -350,6 +488,10 @@ public class Frame extends Window implements MenuContainer {
      * The Windows owned by the Frame.
      * Note: in 1.2 this has been superceded by Window.ownedWindowList
      *
+     * <p>
+     *  Windows拥有的Windows。注意：在1.2这已被Window.ownedWindowList取代
+     * 
+     * 
      * @serial
      * @see java.awt.Window#ownedWindowList
      */
@@ -360,6 +502,9 @@ public class Frame extends Window implements MenuContainer {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
      private static final long serialVersionUID = 2673458971256075116L;
 
@@ -375,6 +520,10 @@ public class Frame extends Window implements MenuContainer {
      * Constructs a new instance of <code>Frame</code> that is
      * initially invisible.  The title of the <code>Frame</code>
      * is empty.
+     * <p>
+     * 构造一个最初不可见的<code> Frame </code>的新实例。 <code> Frame </code>的标题为空。
+     * 
+     * 
      * @exception HeadlessException when
      *     <code>GraphicsEnvironment.isHeadless()</code> returns <code>true</code>
      * @see java.awt.GraphicsEnvironment#isHeadless()
@@ -389,6 +538,10 @@ public class Frame extends Window implements MenuContainer {
      * Constructs a new, initially invisible {@code Frame} with the
      * specified {@code GraphicsConfiguration}.
      *
+     * <p>
+     *  使用指定的{@code GraphicsConfiguration}构造一个新的,初始不可见的{@code Frame}。
+     * 
+     * 
      * @param gc the <code>GraphicsConfiguration</code>
      * of the target screen device. If <code>gc</code>
      * is <code>null</code>, the system default
@@ -407,6 +560,10 @@ public class Frame extends Window implements MenuContainer {
     /**
      * Constructs a new, initially invisible <code>Frame</code> object
      * with the specified title.
+     * <p>
+     *  构造一个新的,初始不可见的具有指定标题的<code> Frame </code>对象。
+     * 
+     * 
      * @param title the title to be displayed in the frame's border.
      *              A <code>null</code> value
      *              is treated as an empty string, "".
@@ -425,6 +582,10 @@ public class Frame extends Window implements MenuContainer {
      * Constructs a new, initially invisible <code>Frame</code> object
      * with the specified title and a
      * <code>GraphicsConfiguration</code>.
+     * <p>
+     *  构造一个新的,初始不可见的具有指定标题和<code> GraphicsConfiguration </code>的<code> Frame </code>对象。
+     * 
+     * 
      * @param title the title to be displayed in the frame's border.
      *              A <code>null</code> value
      *              is treated as an empty string, "".
@@ -455,6 +616,9 @@ public class Frame extends Window implements MenuContainer {
     /**
      * Construct a name for this component.  Called by getName() when the
      * name is null.
+     * <p>
+     *  构造此组件的名称。当名称为null时由getName()调用。
+     * 
      */
     String constructComponentName() {
         synchronized (Frame.class) {
@@ -468,6 +632,10 @@ public class Frame extends Window implements MenuContainer {
      * cause any of its children to be made displayable.
      * This method is called internally by the toolkit and should
      * not be called directly by programs.
+     * <p>
+     *  将此框架连接到本机屏幕资源,使其可显示。使框架可显示将导致它的任何孩子被显示。此方法由工具包在内部调用,不应由程序直接调用。
+     * 
+     * 
      * @see Component#isDisplayable
      * @see #removeNotify
      */
@@ -491,6 +659,10 @@ public class Frame extends Window implements MenuContainer {
     /**
      * Gets the title of the frame.  The title is displayed in the
      * frame's border.
+     * <p>
+     *  获取框架的标题。标题显示在框架的边框中。
+     * 
+     * 
      * @return    the title of this frame, or an empty string ("")
      *                if this frame doesn't have a title.
      * @see       #setTitle(String)
@@ -501,6 +673,10 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * Sets the title for this frame to the specified string.
+     * <p>
+     *  将此帧的标题设置为指定的字符串。
+     * 
+     * 
      * @param title the title to be displayed in the frame's border.
      *              A <code>null</code> value
      *              is treated as an empty string, "".
@@ -532,6 +708,14 @@ public class Frame extends Window implements MenuContainer {
      * If a list of several images was specified as a Window's icon,
      * this method will return the first item of the list.
      *
+     * <p>
+     *  返回要显示为此框架图标的图像。
+     * <p>
+     *  此方法已过时,仅保留向后兼容性。使用{@link Window#getIconImages Window.getIconImages()}。
+     * <p>
+     *  如果将几个图像的列表指定为窗口的图标,则此方法将返回列表的第一个项目。
+     * 
+     * 
      * @return    the icon image for this frame, or <code>null</code>
      *                    if this frame doesn't have an icon image.
      * @see       #setIconImage(Image)
@@ -550,6 +734,9 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setIconImage(Image image) {
         super.setIconImage(image);
@@ -557,6 +744,10 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * Gets the menu bar for this frame.
+     * <p>
+     *  获取此框架的菜单栏。
+     * 
+     * 
      * @return    the menu bar for this frame, or <code>null</code>
      *                   if this frame doesn't have a menu bar.
      * @see       #setMenuBar(MenuBar)
@@ -567,6 +758,10 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * Sets the menu bar for this frame to the specified menu bar.
+     * <p>
+     *  将此框的菜单栏设置为指定的菜单栏。
+     * 
+     * 
      * @param     mb the menu bar being set.
      *            If this parameter is <code>null</code> then any
      *            existing menu bar on this frame is removed.
@@ -601,6 +796,10 @@ public class Frame extends Window implements MenuContainer {
     /**
      * Indicates whether this frame is resizable by the user.
      * By default, all frames are initially resizable.
+     * <p>
+     *  指示此框架是否可由用户调整大小。默认情况下,所有帧都可以初始调整大小。
+     * 
+     * 
      * @return    <code>true</code> if the user can resize this frame;
      *                        <code>false</code> otherwise.
      * @see       java.awt.Frame#setResizable(boolean)
@@ -611,6 +810,10 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * Sets whether this frame is resizable by the user.
+     * <p>
+     *  设置此框架是否可由用户调整大小。
+     * 
+     * 
      * @param    resizable   <code>true</code> if this frame is resizable;
      *                       <code>false</code> otherwise.
      * @see      java.awt.Frame#isResizable
@@ -681,6 +884,24 @@ public class Frame extends Window implements MenuContainer {
      * java.awt.event.WindowEvent#WINDOW_STATE_CHANGED}
      * events is not guaranteed in this case also.
      *
+     * <p>
+     * 设置此框架的状态(已过时)。
+     * <p>
+     *  在旧版本的JDK中,帧状态只能是NORMAL或ICONIFIED。由于JDK 1.4支持的帧状态的集合被扩展,并且帧状态被表示为按位掩码。
+     * <p>
+     * 为了与先前开发的应用程序兼容,此方法仍然只接受{@code Frame.NORMAL}和{@code Frame.ICONIFIED}。帧的图标状态只被改变,帧状态的其他方面不受这种方法的影响。
+     * 如果传递给此方法的状态既不是{@code Frame.NORMAL}也不是{@code Frame.ICONIFIED},则该方法根本不执行任何操作。
+     *  <p>请注意,如果在给定平台上不支持状态,{@link #getState}方法的状态和返回值都不会更改。
+     * 应用程序可以通过{@link java.awt.Toolkit#isFrameStateSupported}方法确定是否支持特定状态。
+     *  <p> <b>如果框架当前在屏幕上可见</b>({@link #isShowing}方法返回{@code true}),开发人员应检查{@link java。
+     * 通过{@link java.awt.event.WindowStateListener}接收的{@code WindowEvent}的awt.event.WindowEvent#getNewState}
+     * 方法来确定状态实际上已被更改。
+     *  <p> <b>如果框架当前在屏幕上可见</b>({@link #isShowing}方法返回{@code true}),开发人员应检查{@link java。
+     *  <p> <b>如果框架在屏幕上不可见,则可能生成或可能不生成事件。在这种情况下,开发人员可以假定状态在此方法返回后立即更改。
+     * 稍后,当调用{@code setVisible(true)}方法时,框架将尝试应用此状态。
+     * 在此情况下,也不保证接收任何{@link java.awt.event.WindowEvent#WINDOW_STATE_CHANGED}个事件。
+     * 
+     * 
      * @param state either <code>Frame.NORMAL</code> or
      *     <code>Frame.ICONIFIED</code>.
      * @see #setExtendedState(int)
@@ -735,6 +956,25 @@ public class Frame extends Window implements MenuContainer {
      * java.awt.event.WindowEvent#WINDOW_STATE_CHANGED}
      * events is not guaranteed in this case also.
      *
+     * <p>
+     * 设置此帧的状态。状态表示为按位掩码。
+     * <ul>
+     *  <li> <code> NORMAL </code> <br>表示未设置状态位。
+     *  <li> <code> ICONIFIED </code> <li> <code> MAXIMIZED_HORIZ </code> <li> <code> MAXIMIZED_VERT </code>
+     *  <li> <code> MAXIMIZED_BOTH </code> > MAXIMIZED_HORIZ </code>和<code> MAXIMIZED_VERT </code>。
+     *  <li> <code> NORMAL </code> <br>表示未设置状态位。
+     * </ul>
+     *  <p>请注意,如果在给定平台上不支持状态,则{@link #getExtendedState}方法的状态和返回值都不会更改。
+     * 应用程序可以通过{@link java.awt.Toolkit#isFrameStateSupported}方法确定是否支持特定状态。
+     *  <p> <b>如果框架当前在屏幕上可见</b>({@link #isShowing}方法返回{@code true}),开发人员应检查{@link java。
+     * 通过{@link java.awt.event.WindowStateListener}接收的{@code WindowEvent}的awt.event.WindowEvent#getNewState}
+     * 方法来确定状态实际上已被更改。
+     *  <p> <b>如果框架当前在屏幕上可见</b>({@link #isShowing}方法返回{@code true}),开发人员应检查{@link java。
+     *  <p> <b>如果框架在屏幕上不可见,则可能生成或可能不生成事件。在这种情况下,开发人员可以假定状态在此方法返回后立即更改。
+     * 稍后,当调用{@code setVisible(true)}方法时,框架将尝试应用此状态。
+     * 在此情况下,也不保证接收任何{@link java.awt.event.WindowEvent#WINDOW_STATE_CHANGED}个事件。
+     * 
+     * 
      * @param state a bitwise mask of frame state constants
      * @since   1.4
      * @see java.awt.Window#addWindowStateListener
@@ -782,6 +1022,15 @@ public class Frame extends Window implements MenuContainer {
      * it only reports the iconic state of the frame, other aspects of
      * frame state are not reported by this method.
      *
+     * <p>
+     *  获取此框架的状态(已过时)。
+     * <p>
+     * 在旧版本的JDK中,帧状态只能是NORMAL或ICONIFIED。由于JDK 1.4支持的帧状态的集合被扩展,并且帧状态被表示为按位掩码。
+     * <p>
+     *  为了与旧程序兼容,该方法仍然返回<code> Frame.NORMAL </code>和<code> Frame.ICONIFIED </code>,但它只报告帧的图标状态,帧状态的其他方面不报告这个
+     * 方法。
+     * 
+     * 
      * @return  <code>Frame.NORMAL</code> or <code>Frame.ICONIFIED</code>.
      * @see     #setState(int)
      * @see     #getExtendedState
@@ -805,6 +1054,16 @@ public class Frame extends Window implements MenuContainer {
      * and <code>MAXIMIZED_VERT</code>.
      * </ul>
      *
+     * <p>
+     *  获取此帧的状态。状态表示为按位掩码。
+     * <ul>
+     *  <li> <code> NORMAL </code> <br>表示未设置状态位。
+     *  <li> <code> ICONIFIED </code> <li> <code> MAXIMIZED_HORIZ </code> <li> <code> MAXIMIZED_VERT </code>
+     *  <li> <code> MAXIMIZED_BOTH </code> > MAXIMIZED_HORIZ </code>和<code> MAXIMIZED_VERT </code>。
+     *  <li> <code> NORMAL </code> <br>表示未设置状态位。
+     * </ul>
+     * 
+     * 
      * @return  a bitwise mask of frame state constants
      * @see     #setExtendedState(int)
      * @since 1.4
@@ -856,6 +1115,17 @@ public class Frame extends Window implements MenuContainer {
      * provided values do not affect the appearance of the frame in the
      * maximized state.
      *
+     * <p>
+     *  设置此帧的最大边界。
+     * <p>
+     *  当帧处于最大化状态时,系统提供一些默认边界。此方法允许覆盖某些或所有系统提供的值。
+     * <p>
+     *  如果<code> bounds </code>是<code> null </code>,请接受系统提供的界限。
+     * 如果非<code> null </code>,您可以覆盖一些系统提供的值,同时通过将您希望接受的字段从系统设置为<code> Integer.MAX_VALUE </code>来接受其他值。
+     * <p>
+     * 注意,给定的最大化边界用作本地系统的提示,因为底层平台可能不支持设置最大化窗口的位置和/或大小。如果是这种情况,则所提供的值不影响最大化状态下的帧的外观。
+     * 
+     * 
      * @param bounds  bounds for the maximized state
      * @see #getMaximizedBounds()
      * @since 1.4
@@ -875,6 +1145,10 @@ public class Frame extends Window implements MenuContainer {
      * Some fields may contain <code>Integer.MAX_VALUE</code> to indicate
      * that system supplied values for this field must be used.
      *
+     * <p>
+     *  获取此帧的最大边界。某些字段可能包含<code> Integer.MAX_VALUE </code>,表示必须使用该字段的系统提供的值。
+     * 
+     * 
      * @return  maximized bounds for this frame;  may be <code>null</code>
      * @see     #setMaximizedBounds(Rectangle)
      * @since   1.4
@@ -895,6 +1169,13 @@ public class Frame extends Window implements MenuContainer {
      * Refer to {@link Window#setShape}, {@link Window#setOpacity} and {@link
      * Window#setBackground} for details
      *
+     * <p>
+     *  禁用或启用此框架的装饰。
+     * <p>
+     *  此方法只能在帧不可显示时调用。要使此框架装饰,它必须是不透明的,并具有默认形状,否则将抛出{@code IllegalComponentStateException}。
+     * 有关详情,请参阅{@link Window#setShape},{@link Window#setOpacity}和{@link Window#setBackground}。
+     * 
+     * 
      * @param  undecorated {@code true} if no frame decorations are to be
      *         enabled; {@code false} if frame decorations are to be enabled
      *
@@ -941,6 +1222,10 @@ public class Frame extends Window implements MenuContainer {
     /**
      * Indicates whether this frame is undecorated.
      * By default, all frames are initially decorated.
+     * <p>
+     *  指示此框架是否未装饰。默认情况下,所有帧都是最初装饰的。
+     * 
+     * 
      * @return    <code>true</code> if frame is undecorated;
      *                        <code>false</code> otherwise.
      * @see       java.awt.Frame#setUndecorated(boolean)
@@ -952,6 +1237,9 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void setOpacity(float opacity) {
@@ -965,6 +1253,9 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void setShape(Shape shape) {
@@ -978,6 +1269,9 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void setBackground(Color bgColor) {
@@ -991,6 +1285,10 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * Removes the specified menu bar from this frame.
+     * <p>
+     *  从此框架中删除指定的菜单栏。
+     * 
+     * 
      * @param    m   the menu component to remove.
      *           If <code>m</code> is <code>null</code>, then
      *           no action is taken
@@ -1022,6 +1320,10 @@ public class Frame extends Window implements MenuContainer {
      * will cause any of its children to be made undisplayable.
      * This method is called by the toolkit internally and should
      * not be called directly by programs.
+     * <p>
+     *  通过删除其与其本机屏幕资源的连接,使此框架不可显示。使框架不可显示将导致其任何子项被设置为不可显示。此方法由内部工具包调用,不应由程序直接调用。
+     * 
+     * 
      * @see Component#isDisplayable
      * @see #addNotify
      */
@@ -1057,6 +1359,11 @@ public class Frame extends Window implements MenuContainer {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     * 返回一个表示此<code> Frame </code>的状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return the parameter string of this frame
      */
     protected String paramString() {
@@ -1089,6 +1396,8 @@ public class Frame extends Window implements MenuContainer {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>Component.setCursor(Cursor)</code>.
      */
@@ -1101,6 +1410,8 @@ public class Frame extends Window implements MenuContainer {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>Component.getCursor()</code>.
      */
@@ -1124,6 +1435,16 @@ public class Frame extends Window implements MenuContainer {
      * ownerless {@code Dialog}s (introduced in release 1.6), use {@link
      * Window#getOwnerlessWindows Window.getOwnerlessWindows}.
      *
+     * <p>
+     *  返回此应用程序创建的所有{@code Frame}的数组。如果从applet调用,则该数组仅包括该applet可访问的{@code Frame}。
+     * <p>
+     *  <b>警告：</b>此方法可能会返回系统创建的框架,例如Swing使用的共享的隐藏框架。
+     * 应用程序不应假定存在这些帧,应用程序也不应该假设关于这些帧的任何内容,例如组件位置,<code> LayoutManager </code>或序列化。
+     * <p>
+     *  <b>注意</b>：要获取所有无拥有窗口的列表,包括无所有{@code Dialog}(在1.6版本中介绍),请使用{@link Window#getOwnerlessWindows Window.getOwnerlessWindows}
+     * 。
+     * 
+     * 
      * @see Window#getWindows()
      * @see Window#getOwnerlessWindows
      *
@@ -1153,11 +1474,18 @@ public class Frame extends Window implements MenuContainer {
     /* Serialization support.  If there's a MenuBar we restore
      * its (transient) parent field here.  Likewise for top level
      * windows that are "owned" by this frame.
+     * <p>
+     *  其(临时)父域。同样,对于由此框架"拥有"的顶级窗口。
+     * 
      */
 
     /**
      * <code>Frame</code>'s Serialized Data Version.
      *
+     * <p>
+     *  <code> Frame </code>的序列化数据版本。
+     * 
+     * 
      * @serial
      */
     private int frameSerializedDataVersion = 1;
@@ -1167,6 +1495,10 @@ public class Frame extends Window implements MenuContainer {
      * an optional serializable icon <code>Image</code>, which is
      * available as of 1.4.
      *
+     * <p>
+     *  将缺省可序列化字段写入流。写入可选的可序列化图标<code> Image </code>,从1.4版开始提供。
+     * 
+     * 
      * @param s the <code>ObjectOutputStream</code> to write
      * @serialData an optional icon <code>Image</code>
      * @see java.awt.Image
@@ -1197,6 +1529,11 @@ public class Frame extends Window implements MenuContainer {
      * will be thrown.
      * Unrecognized keys or values will be ignored.
      *
+     * <p>
+     * 读取<code> ObjectInputStream </code>。尝试读取图标<code> Image </code>,它是1.4版本的可选数据。
+     * 如果图标<code> Image </code>不可用,但检测到除EOF之外的任何图标,将抛出<code> OptionalDataException </code>。无法识别的键或值将被忽略。
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      * @exception java.io.OptionalDataException if an icon <code>Image</code>
      *   is not available, but anything other than an EOF
@@ -1250,12 +1587,18 @@ public class Frame extends Window implements MenuContainer {
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
     /*
      * --- Accessibility Support ---
      *
+     * <p>
+     *  ---辅助功能
+     * 
      */
 
     /**
@@ -1264,6 +1607,11 @@ public class Frame extends Window implements MenuContainer {
      * AccessibleAWTFrame.
      * A new AccessibleAWTFrame instance is created if necessary.
      *
+     * <p>
+     *  获取与此帧相关联的AccessibleContext。对于框架,AccessibleContext采用AccessibleAWTFrame的形式。
+     * 如果需要,将创建一个新的AccessibleAWTFrame实例。
+     * 
+     * 
      * @return an AccessibleAWTFrame that serves as the
      *         AccessibleContext of this Frame
      * @since 1.3
@@ -1279,18 +1627,29 @@ public class Frame extends Window implements MenuContainer {
      * This class implements accessibility support for the
      * <code>Frame</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to frame user-interface elements.
+     * <p>
+     *  此类实现<code> Frame </code>类的辅助功能支持。它提供了适用于框架用户界面元素的Java辅助功能API的实现。
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTFrame extends AccessibleAWTWindow
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 1.3 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -6172960752956030250L;
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -1302,6 +1661,9 @@ public class Frame extends Window implements MenuContainer {
         /**
          * Get the state of this object.
          *
+         * <p>
+         *  获取此对象的状态。
+         * 
          * @return an instance of AccessibleStateSet containing the current
          * state set of the object
          * @see AccessibleState

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,20 @@ import static java.lang.annotation.ElementType.METHOD;
  * {@link Map}&lt;{@link QName},{@link Object}>. The attribute QName is the
  * map's key. The key's value is the String value of the attribute.
  *
+ * <p>
+ * <p>
+ *  将JavaBean属性映射到通配符属性的映射。
+ * 
+ *  <p> <b>使用</b> </p>
+ * <p>
+ *  <tt> @XmlAnyAttribute </tt>注释可以与以下程序元素一起使用：
+ * <ul>
+ *  <li> JavaBean属性</li> <li>非静态,非瞬态字段</li>
+ * </ul>
+ * 
+ *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
+ * 
+ * 
  * @author Kohsuke Kawaguchi, Sun Microsystems, Inc.
  * @since JAXB2.0
  */

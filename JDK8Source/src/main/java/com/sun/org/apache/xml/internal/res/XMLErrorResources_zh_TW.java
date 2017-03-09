@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.res;
 
@@ -31,6 +41,10 @@ import java.util.ListResourceBundle;
  * array. You also need to update MAX_CODE for error strings
  * and MAX_WARNING for warnings ( Needed for only information
  * purpose )
+ * <p>
+ *  设置错误消息。我们构建一个消息键和消息字符串的二维数组。为了在这里添加一个新消息,你需要首先添加一个String常量。您需要输入键,值对作为内容数组的一部分。
+ * 您还需要更新MAX_CODE的错误字符串和MAX_WARNING的警告(仅为信息目的需要)。
+ * 
  */
 public class XMLErrorResources_zh_TW extends ListResourceBundle
 {
@@ -71,6 +85,26 @@ public class XMLErrorResources_zh_TW extends ListResourceBundle
  *     nodes in a tree-structured representation of an XML document.  An
  *     instance of that notation is referred to as an XPath expression.
  *
+ * <p>
+ *  此文件包含与Xalan错误处理相关的错误和警告消息。
+ * 
+ *  翻译者的一般注意事项：
+ * 
+ *  1)Xalan(或更恰当地,Xalan解释)和XSLTC是组件的名称。 XSLT是"XML Stylesheet Language：Transformations"的缩写。
+ *  XSLTC是XSLT编译器的首字母缩写。
+ * 
+ * 2)样式表是如何将输入XML文档转换为结果XML文档(或HTML文档或文本)的描述。样式表本身以XML文档的形式描述。
+ * 
+ *  3)模板是用于匹配输入文档的特定部分并指定输出文档的对应部分的形式的样式表的组件。
+ * 
+ *  4)元素是XML文档中的标记标记;属性是标记上的修饰符。
+ * 例如,在<elem attr ='val'attr2 ='val2'>"elem"是元素名称,"attr"和"attr2"分别是具有值"val"和"val2"的属性名称。
+ * 
+ *  5)命名空间声明是一个特殊属性,用于将前缀与URI(命名空间)相关联。使用该前缀的元素名称和属性名称的含义是相对于该命名空间定义的。
+ * 
+ *  6)"Translet"是一个发明的术语,描述了将XML样式表编译成Java类所产生的类文件。
+ * 
+ *  7)XPath是描述用于标识XML文档的树结构表示中的节点的符号的规范。该符号的实例称为XPath表达式。
  */
 
   /** Maximum error messages, this is needed to keep track of the number of messages.    */
@@ -88,6 +122,8 @@ public class XMLErrorResources_zh_TW extends ListResourceBundle
 
   /*
    * Message keys
+   * <p>
+   * 
    */
   public static final String ER_FUNCTION_NOT_SUPPORTED = "ER_FUNCTION_NOT_SUPPORTED";
   public static final String ER_CANNOT_OVERWRITE_CAUSE = "ER_CANNOT_OVERWRITE_CAUSE";
@@ -171,6 +207,9 @@ public class XMLErrorResources_zh_TW extends ListResourceBundle
    * Now fill in the message text.
    * Then fill in the message text for that message code in the
    * array. Use the new error code as the index into the array.
+   * <p>
+   *  消息键
+   * 
    */
 
   // Error messages...
@@ -403,6 +442,9 @@ public class XMLErrorResources_zh_TW extends ListResourceBundle
        * Note to translators:  The stylesheet contained a reference to a
        * namespace prefix that was undefined.  The value of the substitution
        * text is the name of the prefix.
+       * <p>
+       *  现在填写消息文本。然后在数组中填写该消息代码的消息文本。使用新的错误代码作为数组的索引。
+       * 
        */
     {ER_NAMESPACE_PREFIX,
       "\u5B57\u9996 ''{0}'' \u7684\u547D\u540D\u7A7A\u9593\u5C1A\u672A\u5BA3\u544A\u3002" },
@@ -411,6 +453,9 @@ public class XMLErrorResources_zh_TW extends ListResourceBundle
        * being processed attempted to construct an XML document with an
        * attribute in a place other than on an element.  The substitution text
        * specifies the name of the attribute.
+       * <p>
+       * 翻译者注意：样式表包含对未定义的命名空间前缀的引用。替换文本的值是前缀的名称。
+       * 
        */
     {ER_STRAY_ATTRIBUTE,
       "\u5C6C\u6027 ''{0}'' \u5728\u5143\u7D20\u4E4B\u5916\u3002" },
@@ -421,6 +466,9 @@ public class XMLErrorResources_zh_TW extends ListResourceBundle
        * appear on an element.  The substitution text {0} is the namespace
        * prefix and {1} is the URI that was being used in the erroneous
        * namespace declaration.
+       * <p>
+       *  翻译者注意：如果正在处理的样式表试图在一个元素之外的地方构造一个带有属性的XML文档,则会报告此消息。替换文本指定属性的名称。
+       * 
        */
     {ER_STRAY_NAMESPACE,
       "\u547D\u540D\u7A7A\u9593\u5BA3\u544A ''{0}''=''{1}'' \u8D85\u51FA\u5143\u7D20\u5916\u3002" },
@@ -440,6 +488,10 @@ public class XMLErrorResources_zh_TW extends ListResourceBundle
   /**
    * Get the association list.
    *
+   * <p>
+   *  对翻译者的注意：与前面的消息一样,命名空间声明具有属性的形式,并且只允许出现在元素上。替换文本{0}是命名空间前缀,{1}是在错误的命名空间声明中使用的URI。
+   * 
+   * 
    * @return The association list.
    */
 

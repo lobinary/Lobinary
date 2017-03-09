@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -120,6 +121,48 @@ import sun.security.util.Debug;
  * Consult the release documentation for your implementation to see if any
  * other algorithms are supported.
  *
+ * <p>
+ *  KeyPairGenerator类用于生成公钥和私钥对。密钥对生成器使用{@code getInstance}工厂方法(返回给定类的实例的静态方法)构造。
+ * 
+ *  <p>特定算法的密钥对生成器创建可以与此算法一起使用的公钥/私钥对。它还将算法特定的参数与每个生成的密钥相关联。
+ * 
+ *  <p>有两种方式来生成密钥对：以独立于算法的方式,以及以算法特定的方式。两者之间的唯一区别是对象的初始化：
+ * 
+ * <ul>
+ * <li> <b>算法独立初始化</b> <p>所有密钥对生成器共享keysize和随机源的概念。针对不同的算法对密钥大小进行不同的解释(例如,在DSA算法的情况下,密钥大小对应于模的长度)。
+ * 在这个KeyPairGenerator类中有一个{@link #initialize(int,java.security.SecureRandom)initialize}方法,它接受这两个通用共享类型的
+ * 参数。
+ * <li> <b>算法独立初始化</b> <p>所有密钥对生成器共享keysize和随机源的概念。针对不同的算法对密钥大小进行不同的解释(例如,在DSA算法的情况下,密钥大小对应于模的长度)。
+ * 还有一个只需要一个{@code keysize}参数,并使用最高优先级的安装提供程序的{@code SecureRandom}实现作为随机源。
+ *  (如果安装的提供程序没有提供{@code SecureRandom}的实现,则使用系统提供的随机源。)。
+ * 
+ *  <p>由于在调用上述与算法无关的{@code initialize}方法时没有指定其他参数,因此由提供者对与每个算法相关的算法特定参数(如果有的话)做什么,键。
+ * 
+ * <p>如果算法是<DSA </i>算法,并且keysize(模数大小)是512,768或1024,则Sun提供者使用一组预计算值用于{@code p},{@code q}和{@code g}参数。
+ * 如果模量大小不是上述值之一,则<i> Sun </i>提供器创建一组新的参数。其他提供者可能具有不止于上述三个模量大小的预计算参数集。还有一些可能没有预先计算参数的列表,而是总是创建新的参数集。
+ * 
+ *  <li> <b>算法特定初始化</b> <p>对于一组算法特定参数已经存在的情况(例如,DSA中的所谓社群参数</i>),两个具有{@code AlgorithmParameterSpec}参数的{@link #initialize(java.security.spec.AlgorithmParameterSpec)initialize}
+ * 方法。
+ * 一个还有一个{@code SecureRandom}参数,而另一个使用最高优先级的安装提供程序的{@code SecureRandom}实现作为随机源。
+ *  (如果安装的提供程序没有提供{@code SecureRandom}的实现,则使用系统提供的随机源。)。
+ * </ul>
+ * 
+ *  <p>如果客户端没有显式初始化KeyPairGenerator(通过调用{@code initialize}方法),每个提供程序必须提供(并记录)默认初始化。
+ * 例如,<i> Sun </i>提供程序使用1024位的默认模数大小(keysize)。
+ * 
+ * <p>请注意,这个类是抽象的,并且从{@code KeyPairGeneratorSpi}扩展为历史原因。
+ * 应用程序开发人员应该只注意这个{@code KeyPairGenerator}类中定义的方法;超类中的所有方法都面向希望提供其自己的密钥对生成器的实现的加密服务提供者。
+ * 
+ *  <p>每个Java平台的实现都需要在括号中支持以下标准{@code KeyPairGenerator}算法和键值：
+ * <ul>
+ *  <li> {@ code DiffieHellman}(1024)</li> <li> {@ code DSA}(1024)</li> <li> {@ code RSA}(1024,2048)</li>
+ * 。
+ * </ul>
+ *  这些算法在<a href =中描述
+ * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyPairGenerator">
+ *  Java密码体系结构标准算法名称文档的KeyPairGenerator部分</a>。有关实现的信息,请参阅发行文档,以了解是否支持任何其他算法。
+ * 
+ * 
  * @author Benjamin Renaud
  *
  * @see java.security.spec.AlgorithmParameterSpec
@@ -140,6 +183,10 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
     /**
      * Creates a KeyPairGenerator object for the specified algorithm.
      *
+     * <p>
+     *  为指定的算法创建一个KeyPairGenerator对象。
+     * 
+     * 
      * @param algorithm the standard string name of the algorithm.
      * See the KeyPairGenerator section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyPairGenerator">
@@ -157,6 +204,12 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * Java Cryptography Architecture Standard Algorithm Name Documentation</a>
      * for information about standard algorithm names.
      *
+     * <p>
+     *  返回此密钥对生成器的算法的标准名称。请参阅<a href =中的KeyPairGenerator部分
+     * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyPairGenerator">
+     *  Java加密架构标准算法名称文档</a>以获取有关标准算法名称的信息。
+     * 
+     * 
      * @return the standard string name of the algorithm.
      */
     public String getAlgorithm() {
@@ -195,6 +248,15 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回一个KeyPairGenerator对象,该对象为指定的算法生成公钥/私钥对。
+     * 
+     * <p>此方法遍历注册的安全提供程序列表,从最常用的提供程序开始。
+     * 将返回一个新的KeyPairGenerator对象,该对象封装了来自支持指定算法的第一个Provider的KeyPairGeneratorSpi实现。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the standard string name of the algorithm.
      * See the KeyPairGenerator section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyPairGenerator">
@@ -251,6 +313,14 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回一个KeyPairGenerator对象,该对象为指定的算法生成公钥/私钥对。
+     * 
+     *  <p>将返回一个新的KeyPairGenerator对象,用于封装来自指定提供程序的KeyPairGeneratorSpi实现。指定的提供程序必须在安全提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param algorithm the standard string name of the algorithm.
      * See the KeyPairGenerator section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyPairGenerator">
@@ -290,6 +360,13 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * object is returned.  Note that the specified Provider object
      * does not have to be registered in the provider list.
      *
+     * <p>
+     *  返回一个KeyPairGenerator对象,该对象为指定的算法生成公钥/私钥对。
+     * 
+     *  <p>返回一个新的KeyPairGenerator对象,该对象封装了来自指定的Provider对象的KeyPairGeneratorSpi实现。
+     * 请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     * 
      * @param algorithm the standard string name of the algorithm.
      * See the KeyPairGenerator section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#KeyPairGenerator">
@@ -320,6 +397,10 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
     /**
      * Returns the provider of this key pair generator object.
      *
+     * <p>
+     *  返回此密钥对生成器对象的提供程序。
+     * 
+     * 
      * @return the provider of this key pair generator object
      */
     public final Provider getProvider() {
@@ -340,6 +421,11 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * {@code SecureRandom}, a system-provided source of randomness is
      * used.)
      *
+     * <p>
+     * 使用默认参数集和最高优先级安装的提供程序的{@code SecureRandom}实现来初始化某个keysize的密钥对生成器作为随机源。
+     *  (如果安装的提供程序没有提供{@code SecureRandom}的实现,则使用系统提供的随机源。)。
+     * 
+     * 
      * @param keysize the keysize. This is an
      * algorithm-specific metric, such as modulus length, specified in
      * number of bits.
@@ -355,6 +441,10 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * Initializes the key pair generator for a certain keysize with
      * the given source of randomness (and a default parameter set).
      *
+     * <p>
+     *  使用给定的随机源(和默认参数集)初始化某个键大小的键对生成器。
+     * 
+     * 
      * @param keysize the keysize. This is an
      * algorithm-specific metric, such as modulus length, specified in
      * number of bits.
@@ -399,6 +489,16 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * That {@code initialize} method always throws an
      * UnsupportedOperationException if it is not overridden by the provider.
      *
+     * <p>
+     *  使用指定的参数集和最高优先级安装的提供程序的{@code SecureRandom}实现来初始化密钥对生成器作为随机源。
+     *  (如果安装的提供程序没有提供{@code SecureRandom}的实现,则使用系统提供的随机源。
+     * 
+     *  <p>这个具体方法已添加到此前定义的抽象类中。
+     * 此方法调用KeyPairGeneratorSpi {@link KeyPairGeneratorSpi#initialize(java.security.spec.AlgorithmParameterSpec,java.security.SecureRandom)initialize}
+     * 方法,传递它{@code params}和随机性源(从最高优先级安装提供商或系统提供,如果没有安装的提供商提供)。
+     *  <p>这个具体方法已添加到此前定义的抽象类中。 {@code initialize}方法如果没有被提供者覆盖,总会抛出UnsupportedOperationException异常。
+     * 
+     * 
      * @param params the parameter set used to generate the keys.
      *
      * @exception InvalidAlgorithmParameterException if the given parameters
@@ -426,6 +526,15 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * method always throws an
      * UnsupportedOperationException if it is not overridden by the provider.
      *
+     * <p>
+     *  使用给定的参数集和随机源初始化密钥对生成器。
+     * 
+     * <p>这个具体方法已添加到此前定义的抽象类中。
+     * 此方法调用KeyPairGeneratorSpi {@link KeyPairGeneratorSpi#initialize(java.security.spec.AlgorithmParameterSpec,java.security.SecureRandom)initialize}
+     * 方法,传递它{@code params}和{@code random}。
+     * <p>这个具体方法已添加到此前定义的抽象类中。 {@code initialize}方法如果没有被提供者覆盖,总会抛出UnsupportedOperationException异常。
+     * 
+     * 
      * @param params the parameter set used to generate the keys.
      * @param random the source of randomness.
      *
@@ -462,6 +571,16 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * <p>This method is functionally equivalent to
      * {@link #generateKeyPair() generateKeyPair}.
      *
+     * <p>
+     *  生成密钥对。
+     * 
+     *  <p>如果此KeyPairGenerator未显式初始化,则提供程序特定的默认值将用于生成的键的大小和其他(特定于算法)值。
+     * 
+     *  <p>这将在每次被调用时生成一个新的密钥对。
+     * 
+     *  <p>此方法在功能上等同于{@link #generateKeyPair()generateKeyPair}。
+     * 
+     * 
      * @return the generated key pair
      *
      * @since 1.2
@@ -482,6 +601,16 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * <p>This method is functionally equivalent to
      * {@link #genKeyPair() genKeyPair}.
      *
+     * <p>
+     *  生成密钥对。
+     * 
+     *  <p>如果此KeyPairGenerator未显式初始化,则提供程序特定的默认值将用于生成的键的大小和其他(特定于算法)值。
+     * 
+     *  <p>这将在每次被调用时生成一个新的密钥对。
+     * 
+     *  <p>此方法在功能上等同于{@link #genKeyPair()genKeyPair}。
+     * 
+     * 
      * @return the generated key pair
      */
     public KeyPair generateKeyPair() {
@@ -515,6 +644,12 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
      * moved up the hierarchy into a new class (KeyPairGeneratorSpi), which has
      * been interposed in the hierarchy between the API (KeyPairGenerator)
      * and its original parent (Object).
+     * <p>
+     * 以下类允许提供程序从KeyPairGeneratorSpi而不是从KeyPairGenerator扩展。
+     * 它表示具有封装的,提供商提供的SPI对象(类型为KeyPairGeneratorSpi)的KeyPairGenerator。
+     * 如果提供程序实现是KeyPairGeneratorSpi的实例,上面的getInstance()方法返回此类的实例,并封装SPI对象。
+     * 
+     *  注意：来自原始KeyPairGenerator类的所有SPI方法已经从层次结构向上移动到新类(KeyPairGeneratorSpi)中,该类已经插入在API(KeyPairGenerator)和其原
      */
 
     //
@@ -581,6 +716,9 @@ public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
          * implementation for failover. If no more implemenations are
          * available, this method returns null. However, the active spi of
          * this class is never set to null.
+         * <p>
+         * 始父(Object)之间的层次结构中。
+         * 
          */
         private KeyPairGeneratorSpi nextSpi(KeyPairGeneratorSpi oldSpi,
                 boolean reinit) {

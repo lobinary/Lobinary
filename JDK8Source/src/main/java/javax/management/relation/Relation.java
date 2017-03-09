@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,14 @@ import javax.management.ObjectName;
  * methods. Those have to be exposed for remote management. So this means that
  * any user relation class must be a MBean class.
  *
+ * <p>
+ *  该接口必须由预期代表使用关系服务管理的关系的任何MBean类实现。
+ *  <P>简单关系,即只有角色,没有属性或方法,可以由关系服务(表示为RelationSupport对象,由关系服务内部处理)直接创建。
+ * 如果用户想要表示更复杂的关系,涉及属性和/或方法,则他必须提供实现关系接口的他自己的类。
+ * 这可以通过继承RelationSupport类,或通过实现接口(完全或委托到RelationSupport对象成员)来实现。指定这样的用户关系类是引入属性和/或方法。这些必须暴露给远程管理。
+ * 所以这意味着任何用户关系类都必须是MBean类。
+ * 
+ * 
  * @since 1.5
  */
 public interface Relation {
@@ -54,6 +63,10 @@ public interface Relation {
      * <P>Checks if the role exists and is readable according to the relation
      * type.
      *
+     * <p>
+     *  检索给定角色名称的角色值。 <P>检查角色是否存在,并根据关系类型可读。
+     * 
+     * 
      * @param roleName  name of role
      *
      * @return the ArrayList of ObjectName objects being the role value
@@ -77,6 +90,10 @@ public interface Relation {
      * <P>Checks for each role if it exists and is readable according to the
      * relation type.
      *
+     * <p>
+     *  检索具有给定名称的角色的值。 <P>检查每个角色是否存在,并根据关系类型可读。
+     * 
+     * 
      * @param roleNameArray  array of names of roles to be retrieved
      *
      * @return a RoleResult object, including a RoleList (for roles
@@ -96,6 +113,10 @@ public interface Relation {
     /**
      * Returns the number of MBeans currently referenced in the given role.
      *
+     * <p>
+     *  返回当前在给定角色中引用的MBean数。
+     * 
+     * 
      * @param roleName  name of role
      *
      * @return the number of currently referenced MBeans in that role
@@ -110,6 +131,10 @@ public interface Relation {
     /**
      * Returns all roles present in the relation.
      *
+     * <p>
+     *  返回关系中存在的所有角色。
+     * 
+     * 
      * @return a RoleResult object, including a RoleList (for roles
      * successfully retrieved) and a RoleUnresolvedList (for roles not
      * readable).
@@ -123,6 +148,10 @@ public interface Relation {
     /**
      * Returns all roles in the relation without checking read mode.
      *
+     * <p>
+     *  返回关系中的所有角色,而不检查读取模式。
+     * 
+     * 
      * @return a RoleList.
      */
     public RoleList retrieveAllRoles();
@@ -135,6 +164,13 @@ public interface Relation {
      * RELATION_BASIC_UPDATE or RELATION_MBEAN_UPDATE, depending if the
      * relation is a MBean or not).
      *
+     * <p>
+     * 设置给定的角色。
+     *  <P>将根据其关系类型中提供的相应角色定义检查角色<P>将发送通知(具有类型RELATION_BASIC_UPDATE或RELATION_MBEAN_UPDATE的RelationNotificati
+     * on,取决于该关系是否是MBean)。
+     * 设置给定的角色。
+     * 
+     * 
      * @param role  role to be set (name and new value)
      *
      * @exception IllegalArgumentException  if null role
@@ -175,6 +211,13 @@ public interface Relation {
      * RELATION_BASIC_UPDATE or RELATION_MBEAN_UPDATE, depending if the
      * relation is a MBean or not) per updated role.
      *
+     * <p>
+     *  设置指定的角色。
+     *  <P>将根据每个更新的角色发送一个通知(关系类型为RELATION_BASIC_UPDATE或RELATION_MBEAN_UPDATE,取决于关系是否为MBean),根据关系类型<P>中提供的相应角
+     * 色定义检查角色。
+     *  设置指定的角色。
+     * 
+     * 
      * @param roleList  list of roles to be set
      *
      * @return a RoleResult object, including a RoleList (for roles
@@ -207,6 +250,11 @@ public interface Relation {
      * (list of ObjectNames of referenced MBeans) without the unregistered
      * one.
      *
+     * <p>
+     *  在角色中引用的MBean未注册时,关系服务使用的回调。 <P>关系服务将调用此方法让关系采取行动以反映此类注销的影响。 <P>小心。用户不希望调用此方法。
+     *  <P>当前实现是使用其当前值(引用MBean的ObjectName的列表)设置角色,而不使用未注册的。
+     * 
+     * 
      * @param objectName  ObjectName of unregistered MBean
      * @param roleName  name of role where the MBean is referenced
      *
@@ -235,6 +283,10 @@ public interface Relation {
     /**
      * Retrieves MBeans referenced in the various roles of the relation.
      *
+     * <p>
+     *  检索在关系的各种角色中引用的MBean。
+     * 
+     * 
      * @return a HashMap mapping:
      * <P> ObjectName {@literal ->} ArrayList of String (role names)
      */
@@ -243,6 +295,10 @@ public interface Relation {
     /**
      * Returns name of associated relation type.
      *
+     * <p>
+     *  返回关联关系类型的名称。
+     * 
+     * 
      * @return the name of the relation type.
      */
     public String getRelationTypeName();
@@ -250,6 +306,10 @@ public interface Relation {
     /**
      * Returns ObjectName of the Relation Service handling the relation.
      *
+     * <p>
+     *  返回处理关系的关系服务的ObjectName。
+     * 
+     * 
      * @return the ObjectName of the Relation Service.
      */
     public ObjectName getRelationServiceName();
@@ -258,6 +318,9 @@ public interface Relation {
      * Returns relation identifier (used to uniquely identify the relation
      * inside the Relation Service).
      *
+     * <p>
+     *  返回关系标识符(用于唯一标识关系服务中的关系)。
+     * 
      * @return the relation id.
      */
     public String getRelationId();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009,2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,8 @@ import java.security.ProtectionDomain;
 /**
  * An implementation of IIOPProxy that simply delegates to the appropriate
  * RMI-IIOP and CORBA APIs.
+ * <p>
+ *  IIOPProxy的实现,它简单地委派给适当的RMI-IIOP和CORBA API。
  */
 
 public class IIOPProxyImpl implements IIOPProxy {

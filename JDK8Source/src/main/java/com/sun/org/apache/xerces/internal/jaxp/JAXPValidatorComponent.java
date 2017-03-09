@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp;
@@ -81,6 +91,21 @@ import org.xml.sax.helpers.DefaultHandler;
  * only those events that need to go through Validator will go the 1st route,
  * and other events go the 2nd direct route.
  *
+ * <p>
+ *  通过{@link javax.xml.validation.ValidatorHandler}运行事件,并由外部验证程序执行验证/信息集增加。
+ * 
+ * <p>
+ *  此组件设置管道如下：
+ * 
+ * <!-- this picture may look teribble on your IDE but it is correct. -->
+ * <pre>
+ *  __ __ / | ==> XNI2SAX  - > Validator  - > SAX2XNI ==> | / | | ==> | Tee | |下一个\ | |组件\ | ===========
+ * =其他XNI事件============> | ~~~~。
+ * </pre>
+ * <p>
+ *  只有那些需要通过Validator的事件才会进入第一条路线,而其他事件会进入第二条直接路线。
+ * 
+ * 
  * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  */
 final class JAXPValidatorComponent
@@ -112,11 +137,19 @@ final class JAXPValidatorComponent
      * when the event is forwarded by the {@link ValidatorHandler}.
      *
      * UGLY HACK.
+     * <p>
+     * 用于存储与当前事件相关联的{@link增强工具},以便在{@link ValidatorHandler}转发事件时,我们可以再次选择。
+     * 
+     *  UGLY HACK。
+     * 
      */
     private Augmentations fCurrentAug;
 
     /**
      * {@link XMLAttributes} version of {@link #fCurrentAug}.
+     * <p>
+     *  {@link XMLAttributes} {@link #fCurrentAug}版本。
+     * 
      */
     private XMLAttributes fCurrentAttributes;
 
@@ -127,6 +160,8 @@ final class JAXPValidatorComponent
     private XMLEntityResolver fEntityResolver;
 
     /**
+    /* <p>
+    /* 
      * @param validatorHandler may not be null.
      */
     public JAXPValidatorComponent( ValidatorHandler validatorHandler ) {
@@ -227,18 +262,30 @@ final class JAXPValidatorComponent
      * <p>
      * We only forward certain events from a {@link ValidatorHandler}.
      * Other events should go "the 2nd direct route".
+     * <p>
+     *  使用{@link DefaultHandler}作为{@link ContentHandler}的默认实现。
+     * 
+     * <p>
+     *  我们只从{@link ValidatorHandler}转发某些事件。其他事件应该去"第二直达路线"。
+     * 
      */
     private final class SAX2XNI extends DefaultHandler {
 
         /**
          * {@link Augmentations} to send along with events.
          * We reuse one object for efficiency.
+         * <p>
+         *  {@link扩充功能}与活动一并传送。我们重用一个对象的效率。
+         * 
          */
         private final Augmentations fAugmentations = new AugmentationsImpl();
 
         /**
          * {@link QName} to send along events.
          * we reuse one QName for efficiency.
+         * <p>
+         *  {@link QName}随事件发送。我们重用一个QName的效率。
+         * 
          */
         private final QName fQName = new QName();
 
@@ -285,6 +332,9 @@ final class JAXPValidatorComponent
         /**
          * Gets the {@link Augmentations} that should be associated with
          * the current event.
+         * <p>
+         *  获取应与当前事件相关联的{@link扩充功能}。
+         * 
          */
         private Augmentations aug() {
             if( fCurrentAug!=null ) {
@@ -298,6 +348,9 @@ final class JAXPValidatorComponent
 
         /**
          * Get the handler to which we should send events.
+         * <p>
+         *  获取我们应该向其发送事件的处理程序。
+         * 
          */
         private XMLDocumentHandler handler() {
             return JAXPValidatorComponent.this.getDocumentHandler();
@@ -306,6 +359,9 @@ final class JAXPValidatorComponent
         /**
          * Converts the {@link XNIException} received from a downstream
          * component to a {@link SAXException}.
+         * <p>
+         *  将从下游组件接收到的{@link XNIException}转换为{@link SAXException}。
+         * 
          */
         private SAXException toSAXException( XNIException xe ) {
             Exception e = xe.getException();
@@ -318,6 +374,11 @@ final class JAXPValidatorComponent
          * Creates a proper {@link QName} object from 3 parts.
          * <p>
          * This method does the symbolization.
+         * <p>
+         *  从3个部分创建一个正确的{@link QName}对象。
+         * <p>
+         *  此方法执行符号化。
+         * 
          */
         private QName toQName( String uri, String localName, String qname ) {
             String prefix = null;
@@ -343,6 +404,14 @@ final class JAXPValidatorComponent
      * to reuse its default {@link com.sun.org.apache.xerces.internal.xni.XMLDocumentHandler}
      * implementation.
      *
+     * <p>
+     *  将{@link XNI}事件转换为{@link ContentHandler}事件。
+     * 
+     * <p>
+     *  导出{@link DefaultXMLDocumentHandler}以重用其默认的{@link com.sun.org.apache.xerces.internal.xni.XMLDocumentHandler}
+     * 实现。
+     * 
+     * 
      * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
      */
     private final class XNI2SAX extends DefaultXMLDocumentHandler {
@@ -356,6 +425,9 @@ final class JAXPValidatorComponent
 
         /**
          * For efficiency, we reuse one instance.
+         * <p>
+         *  为了效率,我们重用一个实例。
+         * 
          */
         private final AttributesProxy fAttributesProxy = new AttributesProxy(null);
 
@@ -465,6 +537,9 @@ final class JAXPValidatorComponent
 
         /**
          * Singleton instance.
+         * <p>
+         *  单例实例。
+         * 
          */
         private static final DraconianErrorHandler ERROR_HANDLER_INSTANCE
             = new DraconianErrorHandler();
@@ -497,6 +572,9 @@ final class JAXPValidatorComponent
     /**
      * Compares the given {@link Attributes} with {@link #fCurrentAttributes}
      * and update the latter accordingly.
+     * <p>
+     *  将给定的{@link属性}与{@link #fCurrentAttributes}进行比较,并相应地更新后者。
+     * 
      */
     private void updateAttributes( Attributes atts ) {
         int len = atts.getLength();
@@ -534,6 +612,11 @@ final class JAXPValidatorComponent
             augs.putItem( Constants.TYPEINFO,
                 typeInfoProvider.getAttributeTypeInfo(i) );
             augs.putItem( Constants.ID_ATTRIBUTE,
+            /* <p>
+            /*  augnsputItem(Constants.TYPEINFO,typeInfoProvider.getAttributeTypeInfo(i)); augs.putItem(Constants.ID
+            /* _ATTRIBUTE,。
+            /* 
+            /* 
                 typeInfoProvider.isIdAttribute(i)?Boolean.TRUE:Boolean.FALSE ); **/
         }
     }
@@ -545,6 +628,7 @@ final class JAXPValidatorComponent
 
     /**
      * {@link TypeInfoProvider} that returns no info.
+     * <p>
      */
     private static final TypeInfoProvider noInfoProvider = new TypeInfoProvider() {
         public TypeInfo getElementTypeInfo() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,9 @@ class JDMAclBlock extends SimpleNode {
   /**
    * Do no need to go through this part of the tree for
    * building TrapEntry.
+   * <p>
+   *  不需要通过树的这一部分来构建TrapEntry。
+   * 
    */
    @Override
    public void buildTrapEntries(Hashtable<InetAddress, Vector<String>> dest) {}
@@ -59,6 +63,8 @@ class JDMAclBlock extends SimpleNode {
   /**
    * Do no need to go through this part of the tree for
    * building InformEntry.
+   * <p>
+   *  不需要通过树的这一部分构建InformEntry。
    */
     @Override
    public void buildInformEntries(Hashtable<InetAddress, Vector<String>> dest) {}

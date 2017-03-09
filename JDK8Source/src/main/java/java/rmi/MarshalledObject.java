@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,20 @@ import sun.rmi.server.MarshalOutputStream;
  * <p><code>MarshalledObject</code> facilitates passing objects in RMI calls
  * that are not automatically deserialized immediately by the remote peer.
  *
+ * <p>
+ *  <code> MarshalledObject </code>包含一个字节流,其中包含一个给定给它的构造函数的对象的序列化表示。
+ *  <code> get </code>方法返回原始对象的新副本,与包含的字节流反序列化。
+ * 包含的对象被序列化和反序列化,具有用于编组和解组的参数和RMI调用的返回值的相同的序列化语义：创建序列化表单时：。
+ * 
+ * <ul>
+ *  <li>类使用可以加载类的代码库URL(如果可用)进行注释,<li> <code> MarshalledObject </code>中的任何远程对象由其存根的序列化实例表示。
+ * </ul>
+ * 
+ *  <p>当检索对象的副本时(通过<code> get </code>方法),如果类在本地不可用,那么将从适当的位置加载它(指定了用类描述符注释的URL该类被序列化。
+ * 
+ *  <p> <code> MarshalledObject </code>有助于在远程对等体不立即自动反序列化的RMI调用中传递对象。
+ * 
+ * 
  * @param <T> the type of the object contained in this
  * <code>MarshalledObject</code>
  *
@@ -70,6 +85,8 @@ import sun.rmi.server.MarshalOutputStream;
  */
 public final class MarshalledObject<T> implements Serializable {
     /**
+    /* <p>
+    /* 
      * @serial Bytes of serialized representation.  If <code>objBytes</code> is
      * <code>null</code> then the object marshalled was a <code>null</code>
      * reference.
@@ -77,6 +94,8 @@ public final class MarshalledObject<T> implements Serializable {
     private byte[] objBytes = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Bytes of location annotations, which are ignored by
      * <code>equals</code>.  If <code>locBytes</code> is null, there were no
      * non-<code>null</code> annotations during marshalling.
@@ -84,6 +103,8 @@ public final class MarshalledObject<T> implements Serializable {
     private byte[] locBytes = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Stored hash code of contained object.
      *
      * @see #hashCode
@@ -99,6 +120,10 @@ public final class MarshalledObject<T> implements Serializable {
      * The object is serialized with the semantics used for marshaling
      * parameters for RMI calls.
      *
+     * <p>
+     *  创建一个新的<code> MarshalledObject </code>,它包含所提供对象的当前状态的序列化表示。对象使用用于RMI调用的调度参数的语义序列化。
+     * 
+     * 
      * @param obj the object to be serialized (must be serializable)
      * @exception IOException if an <code>IOException</code> occurs; an
      * <code>IOException</code> may occur if <code>obj</code> is not
@@ -124,6 +149,9 @@ public final class MarshalledObject<T> implements Serializable {
         /*
          * Calculate hash from the marshalled representation of object
          * so the hashcode will be comparable when sent between VMs.
+         * <p>
+         * 从对象的编组表示计算哈希,以便在VM之间发送时哈希码将是可比较的。
+         * 
          */
         int h = 0;
         for (int i = 0; i < objBytes.length; i++) {
@@ -137,6 +165,10 @@ public final class MarshalledObject<T> implements Serializable {
      * representation is deserialized with the semantics used for
      * unmarshaling parameters for RMI calls.
      *
+     * <p>
+     *  返回所包含的marshalled对象的新副本。内部表示使用用于对RMI调用的解组参数的语义反序列化。
+     * 
+     * 
      * @return a copy of the contained object
      * @exception IOException if an <code>IOException</code> occurs while
      * deserializing the object from its internal representation.
@@ -165,6 +197,10 @@ public final class MarshalledObject<T> implements Serializable {
     /**
      * Return a hash code for this <code>MarshalledObject</code>.
      *
+     * <p>
+     *  返回这个<code> MarshalledObject </code>的哈希码。
+     * 
+     * 
      * @return a hash code
      */
     public int hashCode() {
@@ -181,6 +217,12 @@ public final class MarshalledObject<T> implements Serializable {
      * representation <i>except</i> for the codebase of each class
      * in the serialized representation.
      *
+     * <p>
+     *  将此<code> MarshalledObject </code>与另一个对象进行比较。
+     * 当且仅当参数引用包含与此对象完全相同的序列化表示的<code> MarshalledObject </code>时,返回true。
+     * 比较忽略任何类的代码库注释,这意味着如果两个对象对于序列化表示中的每个类的代码库具有相同的序列化表示<i>(除了</i>),则两个对象是等价的。
+     * 
+     * 
      * @param obj the object to compare with this <code>MarshalledObject</code>
      * @return <code>true</code> if the argument contains an equivalent
      * serialized object; <code>false</code> otherwise
@@ -221,6 +263,12 @@ public final class MarshalledObject<T> implements Serializable {
      * annotations.  Objects written using this stream should be read back
      * from a <code>MarshalledObjectInputStream</code>.
      *
+     * <p>
+     *  这个类用于封装<code> MarshalledObject </code>的对象。
+     * 它将位置注释置于一侧,使得两个<code> MarshalledObject </code>可以被比较为相等,如果它们仅在位置注释不同。
+     * 使用此流写入的对象应从<code> MarshalledObjectInputStream </code>中读回。
+     * 
+     * 
      * @see java.rmi.MarshalledObject
      * @see MarshalledObjectInputStream
      */
@@ -232,6 +280,9 @@ public final class MarshalledObject<T> implements Serializable {
 
         /** <code>true</code> if non-<code>null</code> annotations are
          *  written.
+         * <p>
+         *  书面。
+         * 
          */
         private boolean hadAnnotations;
 
@@ -240,6 +291,10 @@ public final class MarshalledObject<T> implements Serializable {
          * non-location bytes will be written to <code>objOut</code> and whose
          * location annotations (if any) will be written to
          * <code>locOut</code>.
+         * <p>
+         *  创建一个新的<code> MarshalledObjectOutputStream </code>,其非位置字节将被写入<code> objOut </code>,其位置注释(如果有)将被写入<code>
+         *  locOut </code>。
+         * 
          */
         MarshalledObjectOutputStream(OutputStream objOut, OutputStream locOut)
             throws IOException
@@ -253,6 +308,9 @@ public final class MarshalledObject<T> implements Serializable {
         /**
          * Returns <code>true</code> if any non-<code>null</code> location
          * annotations have been written to this stream.
+         * <p>
+         *  如果任何非<code> null </code>位置注释已写入此流,则返回<code> true </code>。
+         * 
          */
         boolean hadAnnotations() {
             return hadAnnotations;
@@ -261,6 +319,9 @@ public final class MarshalledObject<T> implements Serializable {
         /**
          * Overrides MarshalOutputStream.writeLocation implementation to write
          * annotations to the location stream.
+         * <p>
+         * 覆盖MarshalOutputStream.writeLocation实现,以将注释写入位置流。
+         * 
          */
         protected void writeLocation(String loc) throws IOException {
             hadAnnotations |= (loc != null);
@@ -277,6 +338,10 @@ public final class MarshalledObject<T> implements Serializable {
     /**
      * The counterpart to <code>MarshalledObjectOutputStream</code>.
      *
+     * <p>
+     *  <code> MarshalledObjectOutputStream </code>的对应部分。
+     * 
+     * 
      * @see MarshalledObjectOutputStream
      */
     private static class MarshalledObjectInputStream
@@ -285,6 +350,9 @@ public final class MarshalledObject<T> implements Serializable {
         /**
          * The stream from which annotations will be read.  If this is
          * <code>null</code>, then all annotations were <code>null</code>.
+         * <p>
+         *  将读取注释的流。如果这是<code> null </code>,那么所有注释都是<code> null </code>。
+         * 
          */
         private ObjectInputStream locIn;
 
@@ -294,6 +362,11 @@ public final class MarshalledObject<T> implements Serializable {
          * from <code>locIn</code>.  If <code>locIn</code> is
          * <code>null</code>, then all annotations will be
          * <code>null</code>.
+         * <p>
+         *  创建一个新的<code> MarshalledObjectInputStream </code>,从<code> objIn </code>读取其对象,从<code> locIn </code>读取注
+         * 释。
+         * 如果<code> locIn </code>是<code> null </code>,那么所有注释将是<code> null </code>。
+         * 
          */
         MarshalledObjectInputStream(InputStream objIn, InputStream locIn)
             throws IOException
@@ -306,6 +379,7 @@ public final class MarshalledObject<T> implements Serializable {
          * Overrides MarshalInputStream.readLocation to return locations from
          * the stream we were given, or <code>null</code> if we were given a
          * <code>null</code> location stream.
+         * <p>
          */
         protected Object readLocation()
             throws IOException, ClassNotFoundException

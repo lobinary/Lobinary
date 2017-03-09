@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,11 @@
  * multiple US and International patents. This notice and attribution to IBM
  * may not be removed.
  *
+ * <p>
+ *  (C)版权所有IBM Corp. 1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本受版权和归IBM,Inc.所有。这些材料是根据IBM和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。本通知和归属于IBM的内容不得删除。
+ * 
  */
 
 package java.awt;
@@ -87,11 +93,35 @@ import java.util.ResourceBundle;
   * </pre>
   * This is unsafe, since more constants may be added in the future and
   * since it is not guaranteed that orientation objects will be unique.
+  * <p>
+  *  ComponentOrientation类封装了用于对组件或文本的元素排序的对语言敏感的方向。它用于反映西方字母,中东(如希伯来语)和远东(如日本)之间这种顺序的差异。
+  * <p>
+  *  从根本上来说,它管理以行排列的项目(例如字符),然后将这些行布置在块中。这也适用于窗口小部件中的项目：例如,在框相对于文本定位的复选框中。
+  * <p>
+  *  在现代语言中有四种不同的方向,如下表所示。<br>
+  * <pre>
+  * LT RT TL TR ABCCBAADGGDADEFFEDBEH HEBGHIIHGCFIIFC </pre> <br>(在标题中,两个字母的缩写代表第一个字母中的项目方向,而第二个字母代表行方向。
+  * 例如,LT表示" - 右,行从上到下",TL表示"项从上到下,行从左到右",等等)。
+  * <p>
+  *  方向是：
+  * <ul>
+  *  <li> LT  - 西欧(日语,中文,韩文可选)<li> RT  - 中东(阿拉伯语,希伯来语)<li> TR  - 日语,中文,韩语<li> TL  - 蒙古语
+  * </ul>
+  *  其视图和控制器代码取决于方向的组件应使用<code> isLeftToRight()</code>和<code> isHorizo​​ntal()</code>方法来确定它们的行为。
+  * 它们不应该包括切换常量的类似开关的代码,例如：。
+  * <pre>
+  *  if(orientation == LEFT_TO_RIGHT){...} else if(orientation == RIGHT_TO_LEFT){...} else {// Oops}
+  * </pre>
+  *  这是不安全的,因为将来可能会添加更多的常量,因为不能保证定向对象是唯一的。
+  * 
   */
 public final class ComponentOrientation implements java.io.Serializable
 {
     /*
      * serialVersionUID
+     * <p>
+     *  serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -4113291392143563828L;
 
@@ -103,6 +133,9 @@ public final class ComponentOrientation implements java.io.Serializable
     /**
      * Items run left to right and lines flow top to bottom
      * Examples: English, French.
+     * <p>
+     *  项目从左到右运行,线流从上到下示例：英语,法语。
+     * 
      */
     public static final ComponentOrientation LEFT_TO_RIGHT =
                     new ComponentOrientation(HORIZ_BIT|LTR_BIT);
@@ -110,6 +143,9 @@ public final class ComponentOrientation implements java.io.Serializable
     /**
      * Items run right to left and lines flow top to bottom
      * Examples: Arabic, Hebrew.
+     * <p>
+     *  项目从右到左运行,线流从上到下示例：阿拉伯语,希伯来语。
+     * 
      */
     public static final ComponentOrientation RIGHT_TO_LEFT =
                     new ComponentOrientation(HORIZ_BIT);
@@ -118,6 +154,9 @@ public final class ComponentOrientation implements java.io.Serializable
      * Indicates that a component's orientation has not been set.
      * To preserve the behavior of existing applications,
      * isLeftToRight will return true for this value.
+     * <p>
+     *  表示组件的方向未设置。要保留现有应用程序的行为,isLeftToRight将为此值返回true。
+     * 
      */
     public static final ComponentOrientation UNKNOWN =
                     new ComponentOrientation(HORIZ_BIT|LTR_BIT|UNK_BIT);
@@ -126,6 +165,9 @@ public final class ComponentOrientation implements java.io.Serializable
      * Are lines horizontal?
      * This will return true for horizontal, left-to-right writing
      * systems such as Roman.
+     * <p>
+     * 线是否水平?这将为水平,从左到右的书写系统(如罗马)返回true。
+     * 
      */
     public boolean isHorizontal() {
         return (orientation & HORIZ_BIT) != 0;
@@ -136,6 +178,9 @@ public final class ComponentOrientation implements java.io.Serializable
      * Vertical Lines:  Do lines run left-to-right?<br>
      * This will return true for horizontal, left-to-right writing
      * systems such as Roman.
+     * <p>
+     *  Horizo​​ntalLines：项目是从左到右运行吗?<br>垂直线：行从左到右?<br>对于水平,从左到右的书写系统,如Roman,它将返回true。
+     * 
      */
     public boolean isLeftToRight() {
         return (orientation & LTR_BIT) != 0;
@@ -143,6 +188,10 @@ public final class ComponentOrientation implements java.io.Serializable
 
     /**
      * Returns the orientation that is appropriate for the given locale.
+     * <p>
+     *  返回适合于给定语言环境的方向。
+     * 
+     * 
      * @param locale the specified locale
      */
     public static ComponentOrientation getOrientation(Locale locale) {
@@ -171,6 +220,11 @@ public final class ComponentOrientation implements java.io.Serializable
      * <li>Return the default locale's orientation.
      * </ol>
      *
+     * <p>
+     *  返回适合于给定ResourceBundle本地化的方向。尝试三种方法,按以下顺序：
+     * <ol>
+     *  <li>使用字符串"Orientation"作为键,从ResourceBundle中检索ComponentOrientation对象。
+     * 
      * @deprecated As of J2SE 1.4, use {@link #getOrientation(java.util.Locale)}.
      */
     @Deprecated

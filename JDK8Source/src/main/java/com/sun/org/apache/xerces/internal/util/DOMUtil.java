@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -42,6 +52,11 @@ import org.w3c.dom.ls.LSException;
  * (such as a DTM), we should easily be able to convert our schema
  * parsing to utilize it.
  *
+ * <p>
+ *  一些有用的实用方法。这个类在Xerces2中被修改,以尽可能地从底层解析结构(即DOM)的表示中抽象。
+ * 这样做使得如果Xerces采用比DOM更高效的内存表示(例如DTM),我们应该很容易地转换我们的模式解析来利用它。
+ * 
+ * 
  * @version $Id: DOMUtil.java,v 1.7 2010-11-01 04:40:14 joehw Exp $
  */
 public class DOMUtil {
@@ -63,6 +78,11 @@ public class DOMUtil {
      * of the destination node.
      * <p>
      * <em>Note:</em> This is an iterative implementation.
+     * <p>
+     *  将源树复制到目标树中指定的位置。源节点及其子节点作为目标节点的子节点附加。
+     * <p>
+     *  <em>注意：</em>这是一个迭代实现。
+     * 
      */
     public static void copyInto(Node src, Node dest) throws DOMException {
 
@@ -203,6 +223,9 @@ public class DOMUtil {
 
     /** Finds and returns the last child element node.
      *  Overload previous method for non-Xerces node impl.
+     * <p>
+     *  对非Xerces节点impl重载上一个方法。
+     * 
      */
     public static Element getLastChildElement(Node parent) {
 
@@ -240,6 +263,9 @@ public class DOMUtil {
 
     /** Finds and returns the last visible child element node.
      *  Overload previous method for non-Xerces node impl
+     * <p>
+     *  对非Xerces节点impl重载上一个方法
+     * 
      */
     public static Element getLastVisibleChildElement(Node parent, Hashtable hiddenNodes) {
 
@@ -626,6 +652,9 @@ public class DOMUtil {
     /**
      * Finds and returns the first child node with the given name and
      * attribute name, value pair.
+     * <p>
+     * 查找并返回具有给定名称和属性名称,值对的第一个子节点。
+     * 
      */
     public static Element getFirstChildElement(Node   parent,
             String elemName,
@@ -653,6 +682,9 @@ public class DOMUtil {
     /**
      * Finds and returns the last child node with the given name and
      * attribute name, value pair.
+     * <p>
+     *  查找并返回具有给定名称和属性名称,值对的最后一个子节点。
+     * 
      */
     public static Element getLastChildElement(Node   parent,
             String elemName,
@@ -681,6 +713,9 @@ public class DOMUtil {
      * Finds and returns the next sibling node with the given name and
      * attribute name, value pair. Since only elements have attributes,
      * the node returned will be of type Node.ELEMENT_NODE.
+     * <p>
+     *  查找并返回具有给定名称和属性名称,值对的下一个兄弟节点。由于只有元素具有属性,所返回的节点的类型为Node.ELEMENT_NODE。
+     * 
      */
     public static Element getNextSiblingElement(Node   node,
             String elemName,
@@ -712,6 +747,11 @@ public class DOMUtil {
      * node that is of type <code>Node.CDATA_SECTION_NODE</code>
      * for the concatenation.
      *
+     * <p>
+     *  返回指定节点的并置子文本。
+     * 此方法仅查看<code> Node.TEXT_NODE </code>类型的直接子节点或任何子节点的子节点,类型为<code> Node.CDATA_SECTION_NODE </code>用于级联。
+     * 
+     * 
      * @param node The node to look at.
      */
     public static String getChildText(Node node) {
@@ -747,6 +787,9 @@ public class DOMUtil {
 
     /** returns local name of this element if not null, otherwise
      returns the name of the node
+    /* <p>
+    /*  返回节点的名称
+    /* 
      */
     public static String getLocalName(Node node) {
         String name = node.getLocalName();
@@ -843,6 +886,9 @@ public class DOMUtil {
 
     /**
      * Creates a DOMException. On J2SE 1.4 and above the cause for the exception will be set.
+     * <p>
+     *  创建DOMException。在J2SE 1.4及以上版本中,异常的原因将被设置。
+     * 
      */
     public static DOMException createDOMException(short code, Throwable cause) {
         DOMException de = new DOMException(code, cause != null ? cause.getMessage() : null);
@@ -858,6 +904,9 @@ public class DOMUtil {
 
     /**
      * Creates an LSException. On J2SE 1.4 and above the cause for the exception will be set.
+     * <p>
+     *  创建LSException。在J2SE 1.4及以上版本中,异常的原因将被设置。
+     * 
      */
     public static LSException createLSException(short code, Throwable cause) {
         LSException lse = new LSException(code, cause != null ? cause.getMessage() : null);
@@ -873,6 +922,8 @@ public class DOMUtil {
 
     /**
      * Holder of methods from java.lang.Throwable.
+     * <p>
+     *  java.lang.Throwable方法的持有者。
      */
     static class ThrowableMethods {
 

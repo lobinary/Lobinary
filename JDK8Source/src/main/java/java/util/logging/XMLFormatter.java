@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,14 @@ import java.util.*;
  * but it is recommended that it normally be used with UTF-8.  The
  * character encoding can be set on the output Handler.
  *
+ * <p>
+ *  将LogRecord格式化为标准XML格式。
+ * <p>
+ *  DTD规范作为Java Logging API规范的附录A提供。
+ * <p>
+ *  XMLFormatter可以与任意字符编码一起使用,但是建议它通常与UTF-8一起使用。可以在输出处理程序上设置字符编码。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -99,6 +108,12 @@ public class XMLFormatter extends Formatter {
      * It is recommended to use the {@link Formatter#formatMessage}
      * convenience method to localize and format the message field.
      *
+     * <p>
+     *  将给定消息格式化为XML。
+     * <p>
+     *  此方法可以在子类中覆盖。建议使用{@link Formatter#formatMessage}便利方法来本地化和格式化消息字段。
+     * 
+     * 
      * @param record the log record to be formatted.
      * @return a formatted log record
      */
@@ -221,6 +236,10 @@ public class XMLFormatter extends Formatter {
     /**
      * Return the header string for a set of XML formatted records.
      *
+     * <p>
+     *  返回一组XML格式化记录的头字符串。
+     * 
+     * 
      * @param   h  The target handler (can be null)
      * @return  a valid XML string
      */
@@ -260,6 +279,9 @@ public class XMLFormatter extends Formatter {
     /**
      * Return the tail string for a set of XML formatted records.
      *
+     * <p>
+     *  返回一组XML格式化记录的尾部字符串。
+     * 
      * @param   h  The target handler (can be null)
      * @return  a valid XML string
      */

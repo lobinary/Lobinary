@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -492,6 +493,11 @@ public class WindowsInternalFrameTitlePane extends BasicInternalFrameTitlePane {
      * The class is public so it can be instantiated by UIDefaults.ProxyLazyValue.
      * <p>
      * Note: We assume here that icons are square.
+     * <p>
+     *  一个多功能的Icon实现,它可以采取一个Icon实例数组(通常<code> ImageIcon </code> s),并选择一个给定的Graphics2D比例因子在绘画时最好的质量。
+     * <p>
+     *  该类是public,所以它可以通过UIDefaults.ProxyLazyValue实例化。
+     * <p>
      */
     public static class ScalableIconUIResource implements Icon, UIResource {
         // We can use an arbitrary size here because we scale to it in paintIcon()
@@ -500,6 +506,10 @@ public class WindowsInternalFrameTitlePane extends BasicInternalFrameTitlePane {
         private Icon[] icons;
 
         /**
+        /* <p>
+        /*  注意：我们假设图标是正方形。
+        /* 
+        /* 
          * @params objects an array of Icon or UIDefaults.LazyValue
          * <p>
          * The constructor is public so it can be called by UIDefaults.ProxyLazyValue.
@@ -517,6 +527,8 @@ public class WindowsInternalFrameTitlePane extends BasicInternalFrameTitlePane {
         }
 
         /**
+        /* <p>
+        /* 
          * @return the <code>Icon</code> closest to the requested size
          */
         protected Icon getBestIcon(int size) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,16 @@ import com.sun.jmx.mbeanserver.GetPropertyAction;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-7516092053498031989L</code>.
  *
+ * <p>
+ *  <p>通知类表示由MBean发出的通知。
+ * 它包含对源MBean的引用：如果通知已通过MBean服务器转发,并且通知的原始源是对发出MBean对象的引用,则MBean服务器将其替换为MBean的ObjectName。
+ * 如果侦听器已直接向MBean注册,则这是对象名称或对MBean的直接引用。</p>。
+ * 
+ *  <p>强烈建议通知发件人使用对象名称而不是对MBean对象的引用作为源。</p>
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> -7516092053498031989L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID is not constant
@@ -94,6 +105,8 @@ public class Notification extends EventObject {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField type String The notification type.
      *              A string expressed in a dot notation similar to Java properties.
      *              An example of a notification type is network.alarm.router
@@ -130,6 +143,8 @@ public class Notification extends EventObject {
     // END Serialization compatibility stuff
 
     /**
+    /* <p>
+    /* 
      * @serial The notification type.
      *         A string expressed in a dot notation similar to Java properties.
      *         An example of a notification type is network.alarm.router
@@ -137,6 +152,8 @@ public class Notification extends EventObject {
     private String type;
 
     /**
+    /* <p>
+    /* 
      * @serial The notification sequence number.
      *         A serial number which identify particular instance
      *         of notification in the context of the notification source.
@@ -144,12 +161,16 @@ public class Notification extends EventObject {
     private long sequenceNumber;
 
     /**
+    /* <p>
+    /* 
      * @serial The notification timestamp.
      *         Indicating when the notification was generated
      */
     private long timeStamp;
 
     /**
+    /* <p>
+    /* 
      * @serial The notification user data.
      *         Used for whatever other data the notification
      *         source wishes to communicate to its consumers
@@ -157,6 +178,8 @@ public class Notification extends EventObject {
     private Object userData = null;
 
     /**
+    /* <p>
+    /* 
      * @serial The notification message.
      */
     private String message  = "";
@@ -166,6 +189,10 @@ public class Notification extends EventObject {
      * parent class to make it non-transient and therefore part of the
      * serialized form.</p>
      *
+     * <p>
+     *  <p>此字段隐藏父类中的{@link EventObject#source}字段,使其非瞬态,因此是序列化形式的一部分。</p>
+     * 
+     * 
      * @serial The object on which the notification initially occurred.
      */
     protected Object source = null;
@@ -175,6 +202,10 @@ public class Notification extends EventObject {
      * Creates a Notification object.
      * The notification timeStamp is set to the current date.
      *
+     * <p>
+     *  创建Notification对象。通知timeStamp设置为当前日期。
+     * 
+     * 
      * @param type The notification type.
      * @param source The notification source.
      * @param sequenceNumber The notification sequence number within the source object.
@@ -192,6 +223,10 @@ public class Notification extends EventObject {
      * Creates a Notification object.
      * The notification timeStamp is set to the current date.
      *
+     * <p>
+     *  创建Notification对象。通知timeStamp设置为当前日期。
+     * 
+     * 
      * @param type The notification type.
      * @param source The notification source.
      * @param sequenceNumber The notification sequence number within the source object.
@@ -210,6 +245,10 @@ public class Notification extends EventObject {
     /**
      * Creates a Notification object.
      *
+     * <p>
+     *  创建Notification对象。
+     * 
+     * 
      * @param type The notification type.
      * @param source The notification source.
      * @param sequenceNumber The notification sequence number within the source object.
@@ -227,6 +266,10 @@ public class Notification extends EventObject {
     /**
      * Creates a Notification object.
      *
+     * <p>
+     *  创建Notification对象。
+     * 
+     * 
      * @param type The notification type.
      * @param source The notification source.
      * @param sequenceNumber The notification sequence number within the source object.
@@ -246,6 +289,10 @@ public class Notification extends EventObject {
     /**
      * Sets the source.
      *
+     * <p>
+     *  设置源。
+     * 
+     * 
      * @param source the new source for this object.
      *
      * @see EventObject#getSource
@@ -258,6 +305,10 @@ public class Notification extends EventObject {
     /**
      * Get the notification sequence number.
      *
+     * <p>
+     *  获取通知序列号。
+     * 
+     * 
      * @return The notification sequence number within the source object. It's a serial number
      * identifying a particular instance of notification in the context of the notification source.
      * The notification model does not assume that notifications will be received in the same order
@@ -272,6 +323,10 @@ public class Notification extends EventObject {
     /**
      * Set the notification sequence number.
      *
+     * <p>
+     *  设置通知序列号。
+     * 
+     * 
      * @param sequenceNumber The notification sequence number within the source object. It is
      * a serial number identifying a particular instance of notification in the
      * context of the notification source.
@@ -285,6 +340,10 @@ public class Notification extends EventObject {
     /**
      * Get the notification type.
      *
+     * <p>
+     *  获取通知类型。
+     * 
+     * 
      * @return The notification type. It's a string expressed in a dot notation
      * similar to Java properties. It is recommended that the notification type
      * should follow the reverse-domain-name convention used by Java package
@@ -297,6 +356,10 @@ public class Notification extends EventObject {
     /**
      * Get the notification timestamp.
      *
+     * <p>
+     *  获取通知时间戳。
+     * 
+     * 
      * @return The notification timestamp.
      *
      * @see #setTimeStamp
@@ -308,6 +371,10 @@ public class Notification extends EventObject {
     /**
      * Set the notification timestamp.
      *
+     * <p>
+     *  设置通知时间戳。
+     * 
+     * 
      * @param timeStamp The notification timestamp. It indicates when the notification was generated.
      *
      * @see #getTimeStamp
@@ -319,6 +386,10 @@ public class Notification extends EventObject {
     /**
      * Get the notification message.
      *
+     * <p>
+     *  获取通知消息。
+     * 
+     * 
      * @return The message string of this notification object.
      *
      */
@@ -329,6 +400,10 @@ public class Notification extends EventObject {
     /**
      * Get the user data.
      *
+     * <p>
+     *  获取用户数据。
+     * 
+     * 
      * @return The user data object. It is used for whatever data
      * the notification source wishes to communicate to its consumers.
      *
@@ -341,6 +416,10 @@ public class Notification extends EventObject {
     /**
      * Set the user data.
      *
+     * <p>
+     *  设置用户数据。
+     * 
+     * 
      * @param userData The user data object. It is used for whatever data
      * the notification source wishes to communicate to its consumers.
      *
@@ -354,6 +433,10 @@ public class Notification extends EventObject {
     /**
      * Returns a String representation of this notification.
      *
+     * <p>
+     * 返回此通知的字符串表示形式。
+     * 
+     * 
      * @return A String representation of this notification.
      */
     @Override
@@ -363,6 +446,9 @@ public class Notification extends EventObject {
 
     /**
      * Deserializes a {@link Notification} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link Notification}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -374,6 +460,8 @@ public class Notification extends EventObject {
 
     /**
      * Serializes a {@link Notification} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link Notification}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

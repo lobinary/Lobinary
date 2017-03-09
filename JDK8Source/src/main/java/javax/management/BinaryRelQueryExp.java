@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package javax.management;
 /**
  * This class is used by the query-building mechanism to represent binary
  * operations.
+ * <p>
+ *  此类由查询构建机制用于表示二进制操作。
+ * 
+ * 
  * @serial include
  *
  * @since 1.5
@@ -39,16 +44,22 @@ class BinaryRelQueryExp extends QueryEval implements QueryExp {
     private static final long serialVersionUID = -5690656271650491000L;
 
     /**
+    /* <p>
+    /* 
      * @serial The operator
      */
     private int relOp;
 
     /**
+    /* <p>
+    /* 
      * @serial The first value
      */
     private ValueExp exp1;
 
     /**
+    /* <p>
+    /* 
      * @serial The second value
      */
     private ValueExp exp2;
@@ -56,6 +67,9 @@ class BinaryRelQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Basic Constructor.
+     * <p>
+     *  基本构造函数。
+     * 
      */
     public BinaryRelQueryExp() {
     }
@@ -63,6 +77,9 @@ class BinaryRelQueryExp extends QueryEval implements QueryExp {
     /**
      * Creates a new BinaryRelQueryExp with operator op applied on v1 and
      * v2 values.
+     * <p>
+     *  创建一个新的BinaryRelQueryExp,并对v1和v2值应用了运算符op。
+     * 
      */
     public BinaryRelQueryExp(int op, ValueExp v1, ValueExp v2) {
         relOp = op;
@@ -73,6 +90,9 @@ class BinaryRelQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the operator of the query.
+     * <p>
+     *  返回查询的运算符。
+     * 
      */
     public int getOperator()  {
         return relOp;
@@ -80,6 +100,9 @@ class BinaryRelQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the left value of the query.
+     * <p>
+     *  返回查询的左侧值。
+     * 
      */
     public ValueExp getLeftValue()  {
         return exp1;
@@ -87,6 +110,9 @@ class BinaryRelQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the right value of the query.
+     * <p>
+     *  返回查询的正确值。
+     * 
      */
     public ValueExp getRightValue()  {
         return exp2;
@@ -95,6 +121,10 @@ class BinaryRelQueryExp extends QueryEval implements QueryExp {
     /**
      * Applies the BinaryRelQueryExp on an MBean.
      *
+     * <p>
+     *  将BinaryRelQueryExp应用于MBean。
+     * 
+     * 
      * @param name The name of the MBean on which the BinaryRelQueryExp will be applied.
      *
      * @return  True if the query was successfully applied to the MBean, false otherwise.
@@ -186,6 +216,8 @@ class BinaryRelQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the string representing the object.
+     * <p>
+     *  返回表示对象的字符串。
      */
     @Override
     public String toString()  {

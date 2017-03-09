@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import java.io.Serializable;
 /**
  * Permission is represented as a String.
  *
+ * <p>
+ *  权限表示为字符串。
+ * 
+ * 
  * @see java.security.acl.Permission
  */
 
@@ -45,6 +50,10 @@ class PermissionImpl implements java.security.acl.Permission, Serializable {
   /**
    * Constructs a permission.
    *
+   * <p>
+   *  构造一个权限。
+   * 
+   * 
    * @param s the string representing the permission.
    */
   public PermissionImpl(String s) {
@@ -58,6 +67,10 @@ class PermissionImpl implements java.security.acl.Permission, Serializable {
   /**
    * Returns true if the object passed matches the permission represented in.
    *
+   * <p>
+   *  如果传递的对象与表示的权限匹配,则返回true。
+   * 
+   * 
    * @param p the Permission object to compare with.
    * @return true if the Permission objects are equal, false otherwise.
    */
@@ -72,6 +85,10 @@ class PermissionImpl implements java.security.acl.Permission, Serializable {
   /**
    * Prints a string representation of this permission.
    *
+   * <p>
+   *  打印此权限的字符串表示形式。
+   * 
+   * 
    * @return a string representation of this permission.
    */
   public String toString(){
@@ -81,6 +98,9 @@ class PermissionImpl implements java.security.acl.Permission, Serializable {
   /**
    * Prints the permission.
    *
+   * <p>
+   *  打印权限。
+   * 
    * @return a string representation of this permission.
    */
   public String getString(){

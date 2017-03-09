@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -121,6 +122,40 @@ import java.math.*;
  * Furthermore, only rows that fall within the bounds of a filter will be
  * synchronized with the data source.
  *
+ * <p>
+ *  所有标准实现的<code> FilteredRowSet </code>必须实现的标准接口。 <code> FilteredRowSetImpl </code>类提供了参考实现,如果需要可以扩展。
+ * 或者,供应商可以通过实现该接口自由地实现其自己的版本。
+ * 
+ *  <h3> 1.0背景</h3>
+ * 
+ *  有时候,一个<code> RowSet </code>对象需要对其内容提供一定程度的过滤。
+ * 一种可能的解决方案是为所有标准<code> RowSet </code>实现提供查询语言;然而,对于轻量级组件,例如断开的<code> RowSet </code>对象,这是一种不切实际的方法。
+ *  <code> FilteredRowSet </code>接口寻求解决这一需求,而不提供重量级查询语言以及这样的查询语言将需要的处理。
+ * <p>
+ *  JDBC <code> FilteredRowSet </code>标准实现实现<code> RowSet </code>接口并扩展<code> CachedRowSet </code>&trade;
+ * 类。
+ *  <code> CachedRowSet </code>类提供了一组受保护的游标操纵方法,<code> FilteredRowSet </code>实现可以覆盖以提供过滤支持。
+ * 
+ *  <h3> 2.0谓词共享</h3>
+ * 
+ * 如果在父接口中使用继承的<code> createShared </code>方法共享<code> FilteredRowSet </code>实现,那么<code> Predicate </code>
+ * 应该被所有<code> FilteredRowSet < / code>实例克隆。
+ * 
+ *  <h3> 3.0使用</h3>
+ * <p>
+ *  通过实施<code>谓词</code>(参见<a href="Predicate.html">谓词</a>类JavaDoc中的示例),然后可以如下所述使用<code> FilteredRowSet </code>
+ *  。
+ * 
+ * <pre>
+ *  {@code FilteredRowSet frs = new FilteredRowSetImpl(); frs.populate(rs);
+ * 
+ *  范围名称=新范围("Alpha","Bravo","columnName"); frs.setFilter(name);
+ * 
+ *  frs.next()//只返回从"Alpha"到"Bravo"的名称}
+ * </pre>
+ *  在上面的例子中,我们初始化了一个实现<code> Predicate </code>接口的<code> Range </code>对象。
+ * 此对象表示以下约束：从此<code> FilteredRowSet </code>对象输出或修改的所有行必须在列"columnName"中的两个值之间的值'Alpha'和'Bravo'之间。
+ * 
  * @author Jonathan Bruce
  */
 
@@ -141,6 +176,24 @@ public interface FilteredRowSet extends WebRowSet {
     * to <code>FilteredRowSet</code> objects when their underling <code>Predicate</code>
     * objects change.
     *
+    * <p>
+    * 如果将过滤器应用于不包含落入过滤器范围内的数据的<code> FilteredRowSet </code>对象,则不返回任何行。
+    * <p>
+    *  此框架允许组合使用实现谓词的多个类来实现所需的过滤结果,而不需要查询语言处理。
+    * 
+    * <h3> 4.0更新<code> FilteredRowSet </code>对象</h3>在<code> FilteredRowSet </code>对象上设置的谓词对<code> RowSet </code>
+    * 对象以管理<code> RowSet </code>对象中的行的子集。
+    * 此标准管理可见的行的子集,并且还定义可以修改,删除或插入哪些行。
+    * <p>
+    *  因此,在<code> FilteredRowSet </code>对象上设置的谓词必须被认为是双向的,并且设置标准作为对<code> FilteredRowSet </code>对象的所有视图和更新的
+    * 门控机制。
+    * 任何更新违反标准的<code> FilteredRowSet </code>的尝试都会导致抛出<code> SQLException </code>对象。
+    * <p>
+    *  通过在任何时候将<code> Predicate </code>对象应用于<code> FilteredRowSet </code>实例,可以修改<code> FilteredRowSet </code>
+    * 范围标准。
+    * 如果没有检测到对<code> FilteredRowSet </code>对象的额外引用,这是可能的。
+    * 新的过滤器对<code> FilteredRowSet </code>对象内的标准执行有即时影响,并且所有后续视图和更新将受到类似的强制执行。
+    * 
     * @param p a <code>Predicate</code> object defining the filter for this
     * <code>FilteredRowSet</code> object. Setting a <b>null</b> value
     * will clear the predicate, allowing all rows to become visible.
@@ -153,6 +206,13 @@ public interface FilteredRowSet extends WebRowSet {
    /**
     * Retrieves the active filter for this <code>FilteredRowSet</code> object.
     *
+    * <p>
+    * 
+    *  <h3> 5.0过滤器外的行的行为</h3>在除去过滤器或应用新过滤器之前,不能修改落在<code> FilteredRowSet </code>对象上的过滤器集之外的行。
+    * <p>
+    * 此外,只有落在过滤器边界内的行将与数据源同步。
+    * 
+    * 
     * @return p the <code>Predicate</code> for this <code>FilteredRowSet</code>
     * object; <code>null</code> if no filter has been set.
     */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,12 @@ import javax.swing.table.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <B> TableColumnModelEvent </B>用于通知侦听器表列模型已更改,例如添加,删除或移动列。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
  * @author Alan Chung
  * @see TableColumnModelListener
  */
@@ -64,6 +71,9 @@ public class TableColumnModelEvent extends java.util.EventObject
     /**
      * Constructs a {@code TableColumnModelEvent} object.
      *
+     * <p>
+     * 
+     * 
      * @param source  the {@code TableColumnModel} that originated the event
      * @param from    an int specifying the index from where the column was
      *                moved or removed

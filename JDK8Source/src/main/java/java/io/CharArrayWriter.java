@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,12 @@ import java.util.Arrays;
  * of this class can be called after the stream has closed
  * without generating an IOException.
  *
+ * <p>
+ *  这个类实现了一个可以用作Writer的字符缓冲区。当数据写入流时,缓冲区自动增长。可以使用toCharArray()和toString()检索数据。
+ * <P>
+ *  注意：在这个类上调用close()没有效果,这个类的方法可以在流关闭后调用,而不会产生IOException。
+ * 
+ * 
  * @author      Herb Jellinek
  * @since       JDK1.1
  */
@@ -43,16 +50,25 @@ public
 class CharArrayWriter extends Writer {
     /**
      * The buffer where data is stored.
+     * <p>
+     *  存储数据的缓冲区。
+     * 
      */
     protected char buf[];
 
     /**
      * The number of chars in the buffer.
+     * <p>
+     *  缓冲区中的字符数。
+     * 
      */
     protected int count;
 
     /**
      * Creates a new CharArrayWriter.
+     * <p>
+     *  创建一个新的CharArrayWriter。
+     * 
      */
     public CharArrayWriter() {
         this(32);
@@ -61,6 +77,10 @@ class CharArrayWriter extends Writer {
     /**
      * Creates a new CharArrayWriter with the specified initial size.
      *
+     * <p>
+     *  创建具有指定初始大小的新CharArrayWriter。
+     * 
+     * 
      * @param initialSize  an int specifying the initial buffer size.
      * @exception IllegalArgumentException if initialSize is negative
      */
@@ -74,6 +94,9 @@ class CharArrayWriter extends Writer {
 
     /**
      * Writes a character to the buffer.
+     * <p>
+     *  将字符写入缓冲区。
+     * 
      */
     public void write(int c) {
         synchronized (lock) {
@@ -88,6 +111,10 @@ class CharArrayWriter extends Writer {
 
     /**
      * Writes characters to the buffer.
+     * <p>
+     *  将字符写入缓冲区。
+     * 
+     * 
      * @param c the data to be written
      * @param off       the start offset in the data
      * @param len       the number of chars that are written
@@ -111,6 +138,10 @@ class CharArrayWriter extends Writer {
 
     /**
      * Write a portion of a string to the buffer.
+     * <p>
+     *  将一个字符串的一部分写入缓冲区。
+     * 
+     * 
      * @param  str  String to be written from
      * @param  off  Offset from which to start reading characters
      * @param  len  Number of characters to be written
@@ -129,6 +160,10 @@ class CharArrayWriter extends Writer {
     /**
      * Writes the contents of the buffer to another character stream.
      *
+     * <p>
+     *  将缓冲区的内容写入另一个字符流。
+     * 
+     * 
      * @param out       the output stream to write to
      * @throws IOException If an I/O error occurs.
      */
@@ -153,6 +188,18 @@ class CharArrayWriter extends Writer {
      * character buffer will return a subsequence whose content depends upon
      * the buffer's position and limit.
      *
+     * <p>
+     *  将指定的字符序列附加到此writer。
+     * 
+     *  <p>调用此方法的形式<tt> out.append(csq)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  out.write(csq.toString())</pre>
+     * 
+     *  <p>根据<tt> toString </tt>对字符序列<tt> csq </tt>的规定,整个序列可能不会附加。
+     * 例如,调用字符缓冲区的<tt> toString </tt>方法将返回一个子序列,其内容取决于缓冲区的位置和限制。
+     * 
+     * 
      * @param  csq
      *         The character sequence to append.  If <tt>csq</tt> is
      *         <tt>null</tt>, then the four characters <tt>"null"</tt> are
@@ -178,6 +225,15 @@ class CharArrayWriter extends Writer {
      * <pre>
      *     out.write(csq.subSequence(start, end).toString()) </pre>
      *
+     * <p>
+     *  将指定字符序列的子序列附加到此writer。
+     * 
+     * <p>当<tt> csq </tt>不是<tt> null </tt>时,对<tt> out.append(csq,start,end)</tt>形式的此方法的调用完全与调用相同的方式
+     * 
+     * <pre>
+     *  out.write(csq.subSequence(start,end).toString())</pre>
+     * 
+     * 
      * @param  csq
      *         The character sequence from which a subsequence will be
      *         appended.  If <tt>csq</tt> is <tt>null</tt>, then characters
@@ -215,6 +271,15 @@ class CharArrayWriter extends Writer {
      * <pre>
      *     out.write(c) </pre>
      *
+     * <p>
+     *  将指定的字符附加到此writer。
+     * 
+     *  <p>调用此方法的形式<tt> out.append(c)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  out.write(c)</pre>
+     * 
+     * 
      * @param  c
      *         The 16-bit character to append
      *
@@ -230,6 +295,9 @@ class CharArrayWriter extends Writer {
     /**
      * Resets the buffer so that you can use it again without
      * throwing away the already allocated buffer.
+     * <p>
+     *  重置缓冲区,以便您可以再次使用它,而不会丢弃已分配的缓冲区。
+     * 
      */
     public void reset() {
         count = 0;
@@ -238,6 +306,10 @@ class CharArrayWriter extends Writer {
     /**
      * Returns a copy of the input data.
      *
+     * <p>
+     *  返回输入数据的副本。
+     * 
+     * 
      * @return an array of chars copied from the input data.
      */
     public char toCharArray()[] {
@@ -249,6 +321,10 @@ class CharArrayWriter extends Writer {
     /**
      * Returns the current size of the buffer.
      *
+     * <p>
+     *  返回缓冲区的当前大小。
+     * 
+     * 
      * @return an int representing the current size of the buffer.
      */
     public int size() {
@@ -257,6 +333,10 @@ class CharArrayWriter extends Writer {
 
     /**
      * Converts input data to a string.
+     * <p>
+     *  将输入数据转换为字符串。
+     * 
+     * 
      * @return the string.
      */
     public String toString() {
@@ -267,6 +347,9 @@ class CharArrayWriter extends Writer {
 
     /**
      * Flush the stream.
+     * <p>
+     *  刷新流。
+     * 
      */
     public void flush() { }
 
@@ -274,6 +357,8 @@ class CharArrayWriter extends Writer {
      * Close the stream.  This method does not release the buffer, since its
      * contents might still be required. Note: Invoking this method in this class
      * will have no effect.
+     * <p>
+     *  关闭流。此方法不释放缓冲区,因为它的内容可能仍然是必需的。注意：在此类中调用此方法将不起作用。
      */
     public void close() { }
 

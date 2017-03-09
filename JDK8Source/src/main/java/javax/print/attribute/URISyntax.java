@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,11 @@ import java.net.URI;
  * Identifier (URI). Once constructed, a URI attribute's value is immutable.
  * <P>
  *
+ * <p>
+ *  URISyntax类是一个抽象基类,提供其值为统一资源标识符(URI)的所有属性的通用实现。一旦构造,URI属性的值是不可变的。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public abstract class URISyntax implements Serializable, Cloneable {
@@ -43,6 +49,10 @@ public abstract class URISyntax implements Serializable, Cloneable {
 
     /**
      * URI value of this URI attribute.
+     * <p>
+     *  此URI属性的URI值。
+     * 
+     * 
      * @serial
      */
     private URI uri;
@@ -50,6 +60,10 @@ public abstract class URISyntax implements Serializable, Cloneable {
     /**
      * Constructs a URI attribute with the specified URI.
      *
+     * <p>
+     *  构造具有指定URI的URI属性。
+     * 
+     * 
      * @param  uri  URI.
      *
      * @exception  NullPointerException
@@ -68,6 +82,10 @@ public abstract class URISyntax implements Serializable, Cloneable {
 
     /**
      * Returns this URI attribute's URI value.
+     * <p>
+     *  返回此URI属性的URI值。
+     * 
+     * 
      * @return the URI.
      */
     public URI getURI()  {
@@ -77,6 +95,10 @@ public abstract class URISyntax implements Serializable, Cloneable {
     /**
      * Returns a hashcode for this URI attribute.
      *
+     * <p>
+     *  返回此URI属性的哈希码。
+     * 
+     * 
      * @return  A hashcode value for this object.
      */
     public int hashCode() {
@@ -97,6 +119,15 @@ public abstract class URISyntax implements Serializable, Cloneable {
      * underlying URI are equal.
      * </OL>
      *
+     * <p>
+     *  返回此URI属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是URISyntax类的实例。
+     * <LI>
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this URI
@@ -112,6 +143,11 @@ public abstract class URISyntax implements Serializable, Cloneable {
      * Returns a String identifying this URI attribute. The String is the
      * string representation of the attribute's underlying URI.
      *
+     * <p>
+     *  此URI属性的底层URI和<CODE>对象</CODE>的底层URI是相等的。
+     * </OL>
+     * 
+     * 
      * @return  A String identifying this object.
      */
     public String toString() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import java.beans.*;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JSpinner}.
  *
+ * <p>
+ *  为{@link javax.swing.JSpinner}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author Hans Muller
  * @author Joshua Outwater
  * @since 1.7
@@ -50,12 +55,20 @@ public class SynthSpinnerUI extends BasicSpinnerUI
      * components indicate that they are "focused" so that they can be drawn
      * appropriately. The repaint is used to ensure that the buttons are drawn
      * in the new focused or unfocused state, mirroring that of the editor.
+     * <p>
+     *  一个FocusListener实现,当编辑器组件(通常是文本字段)变得集中或失去焦点时,导致整个微调框被重画。
+     * 这是必要的,因为由于SynthSpinnerUI是由一个编辑器和两个按钮组成的,所有三个组件都需要指明它们是"聚焦的",以便能够适当地绘制。重绘用于确保按钮以新的聚焦或未聚焦状态绘制,与编辑器的镜像。
+     * 
      */
     private EditorFocusHandler editorFocusHandler = new EditorFocusHandler();
 
     /**
      * Returns a new instance of SynthSpinnerUI.
      *
+     * <p>
+     *  返回一个新的SynthSpinnerUI实例。
+     * 
+     * 
      * @param c the JSpinner (not used)
      * @see ComponentUI#createUI
      * @return a new SynthSpinnerUI object
@@ -66,6 +79,9 @@ public class SynthSpinnerUI extends BasicSpinnerUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installListeners() {
@@ -82,6 +98,9 @@ public class SynthSpinnerUI extends BasicSpinnerUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallListeners() {
@@ -103,6 +122,14 @@ public class SynthSpinnerUI extends BasicSpinnerUI
      * The <code>JSpinners</code> layout is set to the value returned by
      * <code>createLayout</code>.  This method is called by <code>installUI</code>.
      *
+     * <p>
+     *  基于相应的"Spinner。
+     * *"属性初始化<code> JSpinner </code> <code> border </code>,<code> foreground </code>和<code> background </code>
+     * 默认表。
+     *  基于相应的"Spinner。 <code> JSpinners </code>布局设置为<code> createLayout </code>返回的值。
+     * 此方法由<code> installUI </code>调用。
+     * 
+     * 
      * @see #uninstallDefaults
      * @see #installUI
      * @see #createLayout
@@ -139,6 +166,10 @@ public class SynthSpinnerUI extends BasicSpinnerUI
      * Sets the <code>JSpinner's</code> layout manager to null.  This
      * method is called by <code>uninstallUI</code>.
      *
+     * <p>
+     *  将<code> JSpinner的</code>布局管理器设置为null。此方法由<code> uninstallUI </code>调用。
+     * 
+     * 
      * @see #installDefaults
      * @see #uninstallUI
      */
@@ -157,6 +188,9 @@ public class SynthSpinnerUI extends BasicSpinnerUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected LayoutManager createLayout() {
@@ -166,6 +200,9 @@ public class SynthSpinnerUI extends BasicSpinnerUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected Component createPreviousButton() {
@@ -178,6 +215,9 @@ public class SynthSpinnerUI extends BasicSpinnerUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected Component createNextButton() {
@@ -206,6 +246,18 @@ public class SynthSpinnerUI extends BasicSpinnerUI
      * overriden this method, then you'll probably want to override
      * <code>replaceEditor</code> as well.
      *
+     * <p>
+     * 此方法由installUI调用以获取<code> JSpinner </code>的编辑器组件。默认情况下,它只返回<code> JSpinner.getEditor()</code>。
+     * 子类可以覆盖<code> createEditor </code>以返回一个包含微调器编辑器或null的组件,如果他们要处理将编辑器添加到<code> installspo </code> / code
+     * > override。
+     * 此方法由installUI调用以获取<code> JSpinner </code>的编辑器组件。默认情况下,它只返回<code> JSpinner.getEditor()</code>。
+     * <p>
+     *  通常,将覆盖此方法以使用具有自定义边框的容器包装编辑器,因为不能假设可以直接设置编辑器边框。
+     * <p>
+     *  当使用<code> JSpinner.setEditor </code>更改旋转编辑器时,会调用<code> replaceEditor </code>方法。
+     * 如果你已经覆盖了这个方法,那么你可能想重写<code> replaceEditor </code>。
+     * 
+     * 
      * @return the JSpinners editor JComponent, spinner.getEditor() by default
      * @see #installUI
      * @see #replaceEditor
@@ -232,6 +284,15 @@ public class SynthSpinnerUI extends BasicSpinnerUI
      * The implementation of <code>replaceEditor</code> should be coordinated
      * with the <code>createEditor</code> method.
      *
+     * <p>
+     *  当<code> JSpinner </code>编辑器属性更改时,由<code> PropertyChangeListener </code>调用。这个方法的责任是删除旧的编辑器并添加新的编辑器。
+     * 默认情况下,此操作只是：。
+     * <pre>
+     *  spinner.remove(oldEditor); spinner.add(newEditor,"Editor");
+     * </pre>
+     *  <code> replaceEditor </code>的实现应该与<code> createEditor </code>方法协调。
+     * 
+     * 
      * @see #createEditor
      * @see #createPropertyChangeListener
      */
@@ -271,6 +332,9 @@ public class SynthSpinnerUI extends BasicSpinnerUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -289,6 +353,12 @@ public class SynthSpinnerUI extends BasicSpinnerUI
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     * <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -310,6 +380,10 @@ public class SynthSpinnerUI extends BasicSpinnerUI
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -325,6 +399,10 @@ public class SynthSpinnerUI extends BasicSpinnerUI
     /**
      * Paints the specified component. This implementation does nothing.
      *
+     * <p>
+     *  绘制指定的组件。这个实现什么也不做。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -334,6 +412,9 @@ public class SynthSpinnerUI extends BasicSpinnerUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -345,6 +426,9 @@ public class SynthSpinnerUI extends BasicSpinnerUI
      * A simple layout manager for the editor and the next/previous buttons.
      * See the SynthSpinnerUI javadoc for more information about exactly
      * how the components are arranged.
+     * <p>
+     *  编辑器的简单布局管理器和下一个/上一个按钮。有关如何排列组件的更多信息,请参阅SynthSpinnerUI javadoc。
+     * 
      */
     private static class SpinnerLayout implements LayoutManager, UIResource
     {
@@ -386,6 +470,7 @@ public class SynthSpinnerUI extends BasicSpinnerUI
             Dimension editorD = preferredSize(editor);
 
             /* Force the editors height to be a multiple of 2
+            /* <p>
              */
             editorD.height = ((editorD.height + 1) / 2) * 2;
 
@@ -419,6 +504,7 @@ public class SynthSpinnerUI extends BasicSpinnerUI
             int editorWidth = availWidth - buttonsWidth;
 
             /* Deal with the spinners componentOrientation property.
+            /* <p>
              */
             int editorX, buttonsX;
             if (parent.getComponentOrientation().isLeftToRight()) {
@@ -439,6 +525,8 @@ public class SynthSpinnerUI extends BasicSpinnerUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     public void propertyChange(PropertyChangeEvent e) {

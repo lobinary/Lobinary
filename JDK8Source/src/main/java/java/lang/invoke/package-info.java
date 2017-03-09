@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -204,6 +205,58 @@
  * since each call site could be given its own unique bootstrap method.
  * Such a practice is likely to produce large class files and constant pools.
  *
+ * <p>
+ *  {@code java.lang.invoke}包包含由Java核心类库和虚拟机直接提供的动态语言支持。
+ * 
+ * <p>
+ *  如Java虚拟机规范中所述,此包中的某些类型与虚拟机中的动态语言支持有特殊关系：
+ * <ul>
+ *  <li>类{@link java.lang.invoke.MethodHandle MethodHandle}包含<a href="MethodHandle.html#sigpoly">签名多态方法</a>
+ * ,无论其类型描述符如何,都可以链接。
+ * 通常,方法链接需要类型描述符的精确匹配。
+ * </li>
+ * 
+ *  <li> JVM字节码格式支持类{@link java.lang.invoke.MethodHandle MethodHandle}和{@link java.lang.invoke.MethodType MethodType}
+ * 的立即常数。
+ * </li>
+ * </ul>
+ * 
+ *  <h1> <a name="jvm_mods"> </a>相关Java虚拟机更改摘要</h1>以下低级信息总结了Java虚拟机规范的相关部分。有关详细信息,请参阅该规范的当前版本。
+ * 
+ *  每次出现的{@code invokedynamic}指令称为<em>动态调用站点</em>。
+ *  <h2> <a name="indyinsn"> </a> {@code invokedynamic}说明</h2>动态调用网站原本处于未链接状态。在此状态下,没有要调用的调用站点的目标方法。
+ * <p>
+ * 在JVM可以执行动态调用站点({@code invokedynamic}指令)之前,调用站点必须先被<em>链接</em>。
+ * 链接是通过调用一个给出调用站点的静态信息内容的<em> bootstrap方法</em>实现的,它必须产生一个{@link java.lang.invoke.MethodHandle方法句柄}呼叫站点。
+ * 在JVM可以执行动态调用站点({@code invokedynamic}指令)之前,调用站点必须先被<em>链接</em>。
+ * <p>
+ *  每个{@code invokedynamic}指令将其自身的引导方法静态指定为常量池引用。常量池引用还指定调用站点的名称和类型描述符,就像{@code invokevirtual}和其他调用指令。
+ * <p>
+ *  链接从解析引导方法的常量池条目开始,并解析动态调用站点的类型描述符的{@link java.lang.invoke.MethodType MethodType}对象。此解析过程可能会触发类加载。
+ * 因此,如果类无法加载,它可能会引发错误。此错误变为动态调用站点执行的异常终止。链接不会触发类初始化。
+ * <p>
+ *  引导方法至少在三个值上调用：
+ * <ul>
+ * <li>一个{@code MethodHandles.Lookup},是发生动态调用网站的<em>调用者类</em>上的查找对象</li> <li>一个{@code String}在调用网址</li> 
+ * <li>一个{@code MethodType}中,调用的解析类型描述符</li> <li>可选地,从常量池取得1到251个附加静态参数</li>。
+ * </ul>
+ *  调用就像是通过{@link java.lang.invoke.MethodHandle#invoke MethodHandle.invoke}。
+ * 返回的结果必须是{@link java.lang.invoke.CallSite CallSite}(或子类)。
+ * 调用站点的目标的类型必须与从动态调用站点的类型描述符派生的类型完全相同,并传递给引导方法。然后呼叫站点永久地链接到动态呼叫站点。
+ * <p>
+ *  如JVM规范中所记录的,由动态调用站点的链接引起的所有失败由{@link java.lang.BootstrapMethodError BootstrapMethodError}报告,该异常被抛出作为
+ * 动态调用站点执行的异常终止。
+ * 如果发生这种情况,对于执行动态调用站点的所有后续尝试,将抛出相同的错误。
+ * 
+ *  <h2>链接时机</h2>动态调用站点在第一次执行之前就链接。实现链接的引导程序调用发生在尝试第一次执行的线程中。
+ * <p>
+ * 如果有几个这样的线程,可以同时在几个线程中调用引导程序方法。因此,访问全局应用程序数据的引导方法必须采取通常的防范竞争条件的预防措施。
+ * 在任何情况下,每个{@code invokedynamic}指令都是取消链接或链接到唯一的{@code CallSite}对象。
+ * <p>
+ *  在需要具有单独可变行为的动态调用站点的应用程序中,其引导方法应产生不同的{@link java.lang.invoke.CallSite CallSite}对象,每个链接请求一个对象。
+ * 或者,应用程序可以将单个{@code CallSite}对象链接到多个{@code invokedynamic}指令,在这种情况下,目标方法的更改将在每个指令中可见。
+ * <p>
+ * 
  * @author John Rose, JSR 292 EG
  * @since 1.7
  */

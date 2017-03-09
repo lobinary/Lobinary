@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,11 @@ import javax.swing.*;
  * <code>JComboBox</code>, <code>JTree</code>, or <code>JTable</code>
  * needs to implement.
  *
+ * <p>
+ *  这个接口定义方法任何对象,它希望是组件的值的编辑器,例如<code> JListBox </code>,<code> JComboBox </code>,<code> JTree </code> > 
+ * JTable </code>需要实现。
+ * 
+ * 
  * @author Alan Chung
  */
 
@@ -51,6 +57,10 @@ public interface TableCellEditor extends CellEditor {
      *  hierarchy this component will then be able to draw and receive
      *  user input.
      *
+     * <p>
+     *  为编辑器设置初始<code>值</code>。这将导致编辑器<code> stopEditing </code>,并且如果编辑器在调用此方法时进行编辑,则会丢失任何部分编辑的值。 <p>
+     * 
+     * 
      * @param   table           the <code>JTable</code> that is asking the
      *                          editor to edit; can be <code>null</code>
      * @param   value           the value of the cell to be edited; it is

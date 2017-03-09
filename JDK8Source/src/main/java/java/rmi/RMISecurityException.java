@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package java.rmi;
  * has occurred during the execution of one of
  * <code>java.rmi.RMISecurityManager</code>'s methods.
  *
+ * <p>
+ *  <code> RMISecurityException </code>表示在执行<code> java.rmi.RMISecurityManager </code>的方法期间发生了安全性异常。
+ * 
+ * 
  * @author  Roger Riggs
  * @since   JDK1.1
  * @deprecated Use {@link java.lang.SecurityException} instead.
@@ -44,6 +49,10 @@ public class RMISecurityException extends java.lang.SecurityException {
 
     /**
      * Construct an <code>RMISecurityException</code> with a detail message.
+     * <p>
+     *  使用详细消息构造<code> RMISecurityException </code>。
+     * 
+     * 
      * @param name the detail message
      * @since JDK1.1
      * @deprecated no replacement
@@ -55,6 +64,9 @@ public class RMISecurityException extends java.lang.SecurityException {
 
     /**
      * Construct an <code>RMISecurityException</code> with a detail message.
+     * <p>
+     *  使用详细消息构造<code> RMISecurityException </code>。
+     * 
      * @param name the detail message
      * @param arg ignored
      * @since JDK1.1

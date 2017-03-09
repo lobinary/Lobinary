@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,25 @@ import java.io.IOException;
  *  DelegationPermission("\"backup/bar.example.com@EXAMPLE.COM\" \"nfs/home.EXAMPLE.COM@EXAMPLE.COM\"");
  * </pre>
  *
+ * <p>
+ *  此类用于限制Kerberos委派模型的使用,即：可转发和可行的票证。
+ * <p>
+ *  此{@code Permission}的目标名称指定一对kerberos服务主体。第一个是委托使用TGT的从属服务主体。
+ * 第二个服务主体指定下级服务主体代表初始KerberosPrincipal与之交互的目标服务。指定后一个服务主体以限制使用可优惠票。
+ * <p>
+ *  例如,要指定可转发TGT的"主机"服务使用,请指定目标权限如下：
+ * 
+ * <pre>
+ *  委派权限("\"host/foo.example.com@EXAMPLE.COM \"\"krbtgt/EXAMPLE.COM@EXAMPLE.COM \"");
+ * </pre>
+ * <p>
+ *  为了给"备份"服务一个可行的nfs服务票证,可以指定目标权限：
+ * 
+ * <pre>
+ *  委派权限("\"backup/bar.example.com@EXAMPLE.COM \"\"nfs/home.EXAMPLE.COM@EXAMPLE.COM \"");
+ * </pre>
+ * 
+ * 
  * @since 1.4
  */
 
@@ -76,6 +96,12 @@ public final class DelegationPermission extends BasicPermission
      *
      * <p>
      *
+     * <p>
+     *  使用指定的下级和目标主体创建新的{@code DelegationPermission}。
+     * 
+     * <p>
+     * 
+     * 
      * @param principals the name of the subordinate and target principals
      *
      * @throws NullPointerException if {@code principals} is {@code null}.
@@ -91,6 +117,11 @@ public final class DelegationPermission extends BasicPermission
      * with the specified subordinate and target principals.
      * <p>
      *
+     * <p>
+     *  使用指定的下级和目标主体创建新的{@code DelegationPermission}。
+     * <p>
+     * 
+     * 
      * @param principals the name of the subordinate and target principals
      * <p>
      * @param actions should be null.
@@ -106,6 +137,9 @@ public final class DelegationPermission extends BasicPermission
 
     /**
      * Initialize the DelegationPermission object.
+     * <p>
+     *  初始化DelegationPermission对象。
+     * 
      */
     private void init(String target) {
 
@@ -135,6 +169,12 @@ public final class DelegationPermission extends BasicPermission
      * specified permission.
      * <P>
      * If none of the above are true, {@code implies} returns false.
+     * <p>
+     *  检查此Kerberos委派权限对象是否"暗示"指定的权限。
+     * <P>
+     *  如果上面没有一个是真的,{@code implies}返回false。
+     * 
+     * 
      * @param p the permission to check against.
      *
      * @return true if the specified permission is implied by this object,
@@ -156,6 +196,10 @@ public final class DelegationPermission extends BasicPermission
     /**
      * Checks two DelegationPermission objects for equality.
      * <P>
+     * <p>
+     * 检查两个DelegPermission对象是否相等。
+     * <P>
+     * 
      * @param obj the object to test for equality with this object.
      *
      * @return true if <i>obj</i> is a DelegationPermission, and
@@ -176,6 +220,10 @@ public final class DelegationPermission extends BasicPermission
     /**
      * Returns the hash code value for this object.
      *
+     * <p>
+     *  返回此对象的哈希码值。
+     * 
+     * 
      * @return a hash code value for this object.
      */
     public int hashCode() {
@@ -192,6 +240,12 @@ public final class DelegationPermission extends BasicPermission
      * that also enables the PermissionCollection implies method to
      * be implemented in an efficient (and consistent) manner.
      *
+     * <p>
+     *  返回用于存储DelegPermission对象的PermissionCollection对象。
+     * <br>
+     *  DelegPermission对象必须以允许以任何顺序插入到集合中的方式存储,但这也使得PermissionCollection隐含方法能够以高效(且一致)的方式实现。
+     * 
+     * 
      * @return a new PermissionCollection object suitable for storing
      * DelegationPermissions.
      */
@@ -204,6 +258,9 @@ public final class DelegationPermission extends BasicPermission
      * WriteObject is called to save the state of the DelegationPermission
      * to a stream. The actions are serialized, and the superclass
      * takes care of the name.
+     * <p>
+     *  将调用WriteObject以将DelegationPermission的状态保存到流。操作是序列化的,超类负责处理名称。
+     * 
      */
     private synchronized void writeObject(java.io.ObjectOutputStream s)
         throws IOException
@@ -214,6 +271,9 @@ public final class DelegationPermission extends BasicPermission
     /**
      * readObject is called to restore the state of the
      * DelegationPermission from a stream.
+     * <p>
+     *  readObject被调用以从流恢复DelegationPermission的状态。
+     * 
      */
     private synchronized void readObject(java.io.ObjectInputStream s)
          throws IOException, ClassNotFoundException
@@ -258,6 +318,21 @@ public final class DelegationPermission extends BasicPermission
       System.out.println("nps.e = " + x);
       }
       }
+    /* <p>
+    /*  public static void main(String args [])throws Exception {DelegPermission this_ = new DelegatePermission(args [0]); assignPermission that_ = new DelegPermission(args [1]); System.out.println("----- \ n"); System.out.println("this.implies(that)="+ this_.implies(that_)); System.out.println("----- \ n"); System.out.println("this ="+ this_); System.out.println("----- \ n"); System.out.println("that ="+ that_); System.out.println("----- \ n");。
+    /* 
+    /* KrbDelegationPermissionCollection nps = new KrbDelegationPermissionCollection(); nps.add(this_); nps.
+    /* add(new DelegatePermission("\"host/foo.example.com@EXAMPLE.COM \"\ CN = Gary Ellison / OU = JSN / O =
+    /*  SUNW / L = Palo Alto / ST = CA / C = US \"")); try {nps.add(new DelegationPermission("host/foo.example.com@EXAMPLE.COM \ CN = Gary Ellison / OU = JSN / O = SUNW / L = Palo Alto / ST = CA / C = US \ ")); }
+    /*  catch(Exception e){System.err.println(e); }}。
+    /* 
+    /*  System.out.println("nps.implies(that)="+ nps.implies(that_)); System.out.println("----- \ n");
+    /* 
+    /*  枚举e = nps.elements();
+    /* 
+    /*  while(e.hasMoreElements()){DelegatePermission x =(DelegatePermission)e.nextElement(); System.out.println("nps.e ="+ x); }
+    /* }。
+    /* 
     */
 }
 
@@ -277,6 +352,10 @@ final class KrbDelegationPermissionCollection extends PermissionCollection
      * Check and see if this collection of permissions implies the permissions
      * expressed in "permission".
      *
+     * <p>
+     *  检查并查看此权限集合是否意味着在"权限"中表达的权限。
+     * 
+     * 
      * @param permission the Permission object to compare
      *
      * @return true if "permission" is a proper subset of a permission in
@@ -300,6 +379,10 @@ final class KrbDelegationPermissionCollection extends PermissionCollection
      * Adds a permission to the DelegationPermissions. The key for
      * the hash is the name.
      *
+     * <p>
+     *  向DelegationPermissions添加权限。哈希的键是名称。
+     * 
+     * 
      * @param permission the Permission object to add.
      *
      * @exception IllegalArgumentException - if the permission is not a
@@ -324,6 +407,10 @@ final class KrbDelegationPermissionCollection extends PermissionCollection
      * Returns an enumeration of all the DelegationPermission objects
      * in the container.
      *
+     * <p>
+     *  返回容器中所有DelegPermission对象的枚举。
+     * 
+     * 
      * @return an enumeration of all the DelegationPermission objects.
      */
     public Enumeration<Permission> elements() {
@@ -339,6 +426,8 @@ final class KrbDelegationPermissionCollection extends PermissionCollection
     // which had the serializable field:
     //    private Vector permissions;
     /**
+    /* <p>
+    /* 
      * @serialField permissions java.util.Vector
      *     A list of DelegationPermission objects.
      */
@@ -347,11 +436,16 @@ final class KrbDelegationPermissionCollection extends PermissionCollection
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData "permissions" field (a Vector containing the DelegationPermissions).
      */
     /*
      * Writes the contents of the perms field out as a Vector for
      * serialization compatibility with earlier releases.
+     * <p>
+     *  将perms字段的内容作为Vector与先前版本的序列化兼容性写入。
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -370,6 +464,8 @@ final class KrbDelegationPermissionCollection extends PermissionCollection
 
     /*
      * Reads in a Vector of DelegationPermissions and saves them in the perms field.
+     * <p>
+     *  读取DelegationPermissions的向量并将其保存在perms字段中。
      */
     @SuppressWarnings("unchecked")
     private void readObject(ObjectInputStream in)

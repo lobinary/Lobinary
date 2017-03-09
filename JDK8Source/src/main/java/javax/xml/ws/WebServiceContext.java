@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,12 @@ import org.w3c.dom.Element;
  *  into an endpoint implementation class using the
  *  <code>Resource</code> annotation.
  *
+ * <p>
+ *  <code> WebServiceContext </code>使得Web服务端点实现类可以访问与正在提供的请求相关的消息上下文和安全信息。
+ * 
+ *  通常,使用<code> Resource </code>注释将<code> WebServiceContext </code>注入到端点实现类中。
+ * 
+ * 
  *  @since JAX-WS 2.0
  *
  *  @see javax.annotation.Resource
@@ -52,6 +59,10 @@ public interface WebServiceContext {
      * at the time this method is called. Only properties with
      * APPLICATION scope will be visible to the application.
      *
+     * <p>
+     *  返回在调用此方法时正在投放的请求的<code> MessageContext </code>。只有具有APPLICATION范围的属性将对应用程序可见。
+     * 
+     * 
      * @return MessageContext The message context.
      *
      * @throws IllegalStateException This exception is thrown
@@ -70,6 +81,10 @@ public interface WebServiceContext {
      * sender has not been authenticated, the method
      * returns <code>null</code>.
      *
+     * <p>
+     *  返回标识当前正在服务的请求的发件人的Principal。如果发送方未经认证,则该方法返回<code> null </code>。
+     * 
+     * 
      * @return Principal The principal object.
      *
      * @throws IllegalStateException This exception is thrown
@@ -87,6 +102,10 @@ public interface WebServiceContext {
      * logical role. If the user has not been
      * authenticated, the method returns <code>false</code>.
      *
+     * <p>
+     *  返回一个布尔值,指示经过身份验证的用户是否包含在指定的逻辑角色中。如果用户未经过身份验证,则该方法返回<code> false </code>。
+     * 
+     * 
      * @param role  A <code>String</code> specifying the name of the role
      *
      * @return a <code>boolean</code> indicating whether
@@ -106,6 +125,12 @@ public interface WebServiceContext {
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
      *
+     * <p>
+     *  返回此端点的<code> EndpointReference </code>。
+     * <p>
+     *  如果这个<code> bindingProvider </code>的{@link Binding}是SOAP1.1 / HTTP或SOAP1.2 / HTTP,那么必须返回一个<code> W3CE
+     * ndpointReference </code>。
+     * 
      * @param referenceParameters Reference parameters to be associated with the
      * returned <code>EndpointReference</code> instance.
      * @return EndpointReference of the endpoint associated with this
@@ -128,6 +153,9 @@ public interface WebServiceContext {
      * Returns the <code>EndpointReference</code> associated with
      * this endpoint.
      *
+     * <p>
+     * 
+     * 
      * @param clazz The type of <code>EndpointReference</code> that
      * MUST be returned.
      * @param referenceParameters Reference parameters to be associated with the

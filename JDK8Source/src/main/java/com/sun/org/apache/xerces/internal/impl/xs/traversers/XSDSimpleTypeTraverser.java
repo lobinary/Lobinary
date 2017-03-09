@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.traversers;
@@ -74,6 +84,23 @@ import org.w3c.dom.Element;
  *
  * @xerces.internal
  *
+ * <p>
+ *  简单类型定义模式组件遍历器。
+ * 
+ *  <simpleType final =(#all |(list | union | restriction))id = ID name = NCName
+ * {any attributes with non-schema namespace . . .}>
+ *  内容：(annotation?,(restriction | list | union))
+ * </simpleType>
+ * 
+ *  <restriction base = QName id = ID
+ * {any attributes with non-schema namespace . . .}>
+ *  内容：(注释?,(simpleType?,(minExclusive | minInclusive | maxExclusive | maxInclusive | totalDigits | frac
+ * tionDigits | length | minLength | maxLength | enumeration | whiteSpace | pattern)*)。
+ * </restriction>
+ * 
+ *  <list id = ID itemType = QName
+ * {any attributes with non-schema namespace . . .}>
+ * 
  * @author Elena Litani, IBM
  * @author Neeraj Bajaj, Sun Microsystems, Inc.
  * @author Sandy Gao, IBM
@@ -165,6 +192,14 @@ class XSDSimpleTypeTraverser extends XSDAbstractTraverser {
 
     /*
      * Generate a name for an anonymous type
+     * <p>
+     *  内容：(annotation?,(simpleType?))
+     * </list>
+     * 
+     *  <union id = ID memberTypes = QName列表
+     * {any attributes with non-schema namespace . . .}>
+     *  内容：(annotation?,(simpleType *))
+     * </union>
      */
     private String genAnonTypeName(Element simpleTypeDecl) {
 
@@ -182,6 +217,11 @@ class XSDSimpleTypeTraverser extends XSDAbstractTraverser {
     }
 
     /**
+    /* <p>
+    /* 
+    /*  @ xerces.internal
+    /* 
+    /* 
      * @param name
      * @param simpleTypeDecl
      * @param attrValues

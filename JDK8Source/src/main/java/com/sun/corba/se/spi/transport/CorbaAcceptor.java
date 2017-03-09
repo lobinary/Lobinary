@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,8 @@ import com.sun.corba.se.spi.ior.IORTemplate;
 import com.sun.corba.se.impl.oa.poa.Policies;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public interface CorbaAcceptor

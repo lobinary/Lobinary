@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,33 @@ package com.sun.org.apache.bcel.internal.util;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)2001 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得使用名称"Apache"和"Apache Software Foundation"和"Apache BCEL"来认可或推广从本软件衍生的产品。
+ * 如需书面许可,请联系apache@apache.org。
+ * 
+ * 未经Apache软件基金会事先书面许可,从本软件衍生的产品可能不会被称为"Apache","Apache BCEL",也不可能出现在他们的名字中。
+ * 
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款。有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 import java.util.*;
@@ -85,6 +113,20 @@ import com.sun.org.apache.regexp.internal.*;
       ...
     }
 </pre>
+ * <p>
+ * InstructionFinder是用于搜索给定指令模式的工具,即,通过正则表达式匹配指令列表中的指令序列。例如,这可以用于实现窥视孔优化器,该窥视孔优化器寻找代码模式并用更快的等效物替换它们。
+ * 
+ *  <p>此类在内部使用<a href="http://jakarta.apache.org/regexp/"> Regexp </a>包来搜索正则表达式。
+ * 
+ *  典型的应用程序将如下所示：
+ * <pre>
+ *  InstructionFinder f = new InstructionFinder(il); String pat ="IfInstruction ICONST_0 GOTO ICONST_1 N
+ * OP(IFEQ | IFNE)";。
+ * 
+ *  for(Iterator i = f.search(pat,constraint); i.hasNext();){InstructionHandle [] match =(InstructionHandle [])i.next ... il.delete(match [1],match [5]); ...}
+ * 。
+ * </pre>
+ * 
  * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
  * @see Instruction
  * @see InstructionList
@@ -100,6 +142,8 @@ public class InstructionFinder {
   private InstructionHandle[] handles;      // map instruction list to array
 
   /**
+  /* <p>
+  /* 
    * @param il instruction list to search for given patterns
    */
   public InstructionFinder(InstructionList il) {
@@ -109,6 +153,9 @@ public class InstructionFinder {
 
   /**
    * Reread the instruction list, e.g., after you've altered the list upon a match.
+   * <p>
+   *  重新读取指令列表,例如,在匹配后更改列表之后。
+   * 
    */
   public final void reread() {
     int    size  = il.getLength();
@@ -125,6 +172,10 @@ public class InstructionFinder {
   /**
    * Map symbolic instruction names like "getfield" to a single character.
    *
+   * <p>
+   *  将符号指令名称(如"getfield")映射到单个字符。
+   * 
+   * 
    * @param pattern instruction pattern in lower case
    * @return encoded string for a pattern such as "BranchInstruction".
    */
@@ -145,6 +196,10 @@ public class InstructionFinder {
    * Replace symbolic names of instructions with the appropiate character and remove
    * all white space from string. Meta characters such as +, * are ignored.
    *
+   * <p>
+   *  用适当的字符替换指令的符号名称,并从字符串中删除所有空格。元字符(如+,*)将被忽略。
+   * 
+   * 
    * @param pattern The pattern to compile
    * @return translated regular expression string
    */
@@ -179,6 +234,8 @@ public class InstructionFinder {
   }
 
   /**
+  /* <p>
+  /* 
    * @return the matched piece of code as an array of instruction (handles)
    */
   private InstructionHandle[] getMatch(int matched_from, int match_length) {
@@ -208,6 +265,21 @@ public class InstructionFinder {
    * matching areas are affected, you should call reread() to update
    * the finder and call search() again, because the matches are cached.
    *
+   * <p>
+   *  在指令列表中搜索给定的模式。您可以通过其符号名称搜索任何有效的操作码,例如"istore"。
+   * 您还可以使用超类或接口名称来匹配整组指令,例如"BranchInstruction"或"LoadInstruction"。 "istore"也是所有"istore_x"指令的别名。
+   * 其他别名为"if"表示"ifxx","if_icmp"表示"if_icmpxx","if_acmp"表示"if_acmpxx"。
+   * 
+   * 连续指令名称必须用空格分隔,在编译模式期间将被删除。
+   * 
+   *  对于其余的,正则表达式的常用模式匹配规则适用。<P>示例模式：
+   * <pre>
+   *  search("BranchInstruction NOP((IfInstruction | GOTO)+ ISTORE指令)*");
+   * </pre>
+   * 
+   *  <p>如果在匹配时更改指令列表,以使其他匹配区域受到影响,则应调用reread()来更新finder并再次调用search(),因为匹配会被缓存。
+   * 
+   * 
    * @param pattern the instruction pattern to search for, where case is ignored
    * @param from where to start the search in the instruction list
    * @param constraint optional CodeConstraint to check the found code pattern for
@@ -258,6 +330,10 @@ public class InstructionFinder {
   /**
    * Start search beginning from the start of the given instruction list.
    *
+   * <p>
+   *  从给定指令列表的开始开始搜索。
+   * 
+   * 
    * @param pattern the instruction pattern to search for, where case is ignored
    * @return iterator of matches where e.nextElement()
    * returns an array of instruction handles describing the matched
@@ -270,6 +346,10 @@ public class InstructionFinder {
   /**
    * Start search beginning from `from'.
    *
+   * <p>
+   *  开始搜索从"from"开始。
+   * 
+   * 
    * @param pattern the instruction pattern to search for, where case is ignored
    * @param from where to start the search in the instruction list
    * @return  iterator of matches where e.nextElement() returns an array of instruction handles
@@ -283,6 +363,10 @@ public class InstructionFinder {
    * Start search beginning from the start of the given instruction list.
    * Check found matches with the constraint object.
    *
+   * <p>
+   *  从给定指令列表的开始开始搜索。检查找到的匹配与约束对象。
+   * 
+   * 
    * @param pattern the instruction pattern to search for, case is ignored
    * @param constraint constraints to be checked on matching code
    * @return instruction handle or `null' if the match failed
@@ -293,12 +377,17 @@ public class InstructionFinder {
 
   /**
    * Convert opcode number to char.
+   * <p>
+   *  将操作码数字转换为char。
+   * 
    */
   private static final char makeChar(short opcode) {
     return (char)(opcode + OFFSET);
   }
 
   /**
+  /* <p>
+  /* 
    * @return the inquired instruction list
    */
   public final InstructionList getInstructionList() { return il; }
@@ -308,9 +397,14 @@ public class InstructionFinder {
    * user-defined constraint object whether they really match the needed criterion.
    * I.e., check constraints that can not expressed with regular expressions.
    *
+   * <p>
+   *  可以使用附加的用户定义的约束对象来检查找到的代码模式,无论它们是否真的匹配所需的准则。即,检查不能用正则表达式表达的约束。
+   * 
    */
   public interface CodeConstraint {
     /**
+    /* <p>
+    /* 
      * @param match array of instructions matching the requested pattern
      * @return true if the matched area is really useful
      */
@@ -418,6 +512,8 @@ public class InstructionFinder {
 
   /*
    * Internal debugging routines.
+   * <p>
+   *  内部调试例程。
    */
   private static final String pattern2string(String pattern) {
     return pattern2string(pattern, true);

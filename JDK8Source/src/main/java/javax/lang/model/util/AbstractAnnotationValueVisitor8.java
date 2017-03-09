@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,16 @@ import javax.annotation.processing.SupportedSourceVersion;
  * to run on Java SE 8 and later may take advantage of default methods
  * in this situation.
  *
+ * <p>
+ *  用于注释值的骨架访问者,其默认行为适用于{@link SourceVersion#RELEASE_8 RELEASE_8}源版本。
+ * 
+ *  <p> <b>警告：</b>此类别实施的{@code AnnotationValueVisitor}接口可能会在未来添加方法,以适应添加到未来版本的Java和贸易的新的,当前未知的语言结构;编程语言。
+ * 因此,名称以{@code"visit"}开头的方法可能会在将来添加到此类中;为避免不兼容性,扩展此类的类不应声明任何名称以{@code"visit"}开头的实例方法。
+ * 
+ *  <p>添加这种新的访问方法时,此类中的默认实现将是调用{@link #visitUnknown visitUnknown}方法。
+ * 还将引入新的抽象注释值访问者类来对应于新的语言级别;此访问者将对所讨论的访问方法具有不同的默认行为。当新访问者被引入时,该访问者的全部或部分可能被弃用。
+ * 
+ * 
  * @param <R> the return type of this visitor's methods
  * @param <P> the type of the additional parameter to this visitor's methods.
  *
@@ -72,6 +83,11 @@ public abstract class AbstractAnnotationValueVisitor8<R, P> extends AbstractAnno
 
     /**
      * Constructor for concrete subclasses to call.
+     * <p>
+     * <p>请注意,在访问者类中添加新的访问方法的默认实现将会发生,而不是直接在访问者界面中添加<em>默认方法</em>,因为Java SE 8语言功能不能用于此版本的API,因为此版本需要在Java SE
+     *  7实现上运行。
+     * 仅需要在Java SE 8和更高版本上运行的API的未来版本可以在这种情况下利用默认方法。
+     * 
      */
     protected AbstractAnnotationValueVisitor8() {
         super();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,13 @@ import com.sun.jmx.snmp.SnmpStatusException;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  表示对应于组的SNMP MIB中的节点。此类允许将子节点注册到组下,为嵌套组提供支持。当在全局MIB OID树中注册嵌套组时,在运行时注册子节点。
+ * <P>
+ *  此类由<CODE> mibgen </CODE>生成的类使用。你不应该直接使用这个类。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public abstract class SnmpMibGroup extends SnmpMibOid
@@ -62,6 +70,10 @@ public abstract class SnmpMibGroup extends SnmpMibOid
     /**
      * Tells whether the given arc identifies a table in this group.
      *
+     * <p>
+     *  指示给定的圆弧是否标识此组中的表。
+     * 
+     * 
      * @param arc An OID arc.
      *
      * @return <CODE>true</CODE> if `arc' leads to a table.
@@ -72,6 +84,10 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * Tells whether the given arc identifies a variable (scalar object) in
      * this group.
      *
+     * <p>
+     *  指示给定的圆弧是否标识此组中的变量(标量对象)。
+     * 
+     * 
      * @param arc An OID arc.
      *
      * @return <CODE>true</CODE> if `arc' leads to a variable.
@@ -82,6 +98,10 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * Tells whether the given arc identifies a readable scalar object in
      * this group.
      *
+     * <p>
+     *  指示给定的圆弧是否标识此组中的可读标量对象。
+     * 
+     * 
      * @param arc An OID arc.
      *
      * @return <CODE>true</CODE> if `arc' leads to a readable variable.
@@ -92,6 +112,10 @@ public abstract class SnmpMibGroup extends SnmpMibOid
     /**
      * Gets the table identified by the given `arc'.
      *
+     * <p>
+     *  获取由给定的"arc"标识的表。
+     * 
+     * 
      * @param arc An OID arc.
      *
      * @return The <CODE>SnmpMibTable</CODE> identified by `arc', or
@@ -103,6 +127,10 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * Checks whether the given OID arc identifies a variable (scalar
      * object).
      *
+     * <p>
+     *  检查给定的OID是否标识变量(标量对象)。
+     * 
+     * 
      * @exception If the given `arc' does not identify any variable in this
      *    group, throws an SnmpStatusException.
      */
@@ -128,6 +156,10 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * leading to a nested SNMP sub-group. This method is used internally.
      * You shouldn't need to call it directly.
      *
+     * <p>
+     *  告诉给定的OID是否标识导致嵌套SNMP子组的子树。此方法在内部使用。你不应该直接调用它。
+     * 
+     * 
      * @param arc An OID arc.
      *
      * @return <CODE>true</CODE> if the given OID arc identifies a subtree
@@ -161,6 +193,14 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * underlying resources.
      * <p>
      *
+     * <p>
+     * 通用处理<CODE> get </CODE>操作。 <p>此方法的实际实现将由mibgen生成。通常,此实现仅将作业委派给某个其他提供的运行时类,该类知道如何访问MBean。
+     * 因此,当前工具包提供了两种实现：<ul> <li>标准实现将通过java引用直接访问MBean,</li> <li>通用实现将通过MBean服务器访问MBean。</li>。
+     * </ul>
+     *  <p>这两个实现依赖于特定的和不同的mibgen生成方法集合。 <p>如果您需要实施一些特定策略以最小化对某些远程基础资源的访问,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -191,6 +231,14 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * underlying resources.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE>设置</CODE>操作。 <p>此方法的实际实现将由mibgen生成。通常,此实现仅将作业委派给某个其他提供的运行时类,该类知道如何访问MBean。
+     * 因此,当前工具包提供了两种实现：<ul> <li>标准实现将通过java引用直接访问MBean,</li> <li>通用实现将通过MBean服务器访问MBean。</li>。
+     * </ul>
+     *  <p>这两个实现依赖于特定的和不同的mibgen生成方法集合。 <p>如果您需要实施一些特定策略以最小化对某些远程基础资源的访问,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -223,6 +271,17 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * checks between the different values provided in the varbind list.
      * <p>
      *
+     * <p>
+     * 一般处理<CODE>检查</CODE>操作。
+     * 
+     *  <p>此方法的实际实现将由mibgen生成。通常,此实现仅将作业委派给某个其他提供的运行时类,该类知道如何访问MBean。
+     * 因此,当前工具包提供了两种实现：<ul> <li>标准实现将通过java引用直接访问MBean,</li> <li>通用实现将通过MBean服务器访问MBean。</li>。
+     * </ul>
+     *  <p>这两个实现依赖于特定的和不同的mibgen生成方法集合。
+     *  <p>如果您需要实施一些特定策略以最小化对某些远程底层资源的访问,或者您需要在varbind列表中提供的不同值之间实施一些一致性检查,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -256,6 +315,8 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * leading to a nested SNMP sub-group. This method is used internally.
      * You shouldn't ever call it directly.
      *
+     * <p>
+     * 
      * @param arc An OID arc.
      *
      */
@@ -279,6 +340,10 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * Register an OID arc that identifies a scalar object or a table.
      * This method is used internally. You shouldn't ever call it directly.
      *
+     * <p>
+     *  注册OID弧,用于标识导致嵌套SNMP子组的子树。此方法在内部使用。你不应该直接调用它。
+     * 
+     * 
      * @param arc An OID arc.
      *
      */
@@ -304,6 +369,10 @@ public abstract class SnmpMibGroup extends SnmpMibOid
      * Register a child node of this node in the OID tree.
      * This method is used internally. You shouldn't ever call it directly.
      *
+     * <p>
+     *  注册标识标量对象或表的OID弧。此方法在内部使用。你不应该直接调用它。
+     * 
+     * 
      * @param oid The oid of the node being registered.
      * @param cursor The position reached in the oid.
      * @param node The node being registered.

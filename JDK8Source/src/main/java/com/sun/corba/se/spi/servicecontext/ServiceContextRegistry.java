@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,10 @@ public class ServiceContextRegistry {
      * <li>It must implement a constructor that takes a
      * org.omg.CORBA_2_3.portable.InputStream argument.</li>
      * </ul>
+     * <p>
+     *  通过读取方法。类别cls必须具有以下属性：
+     * <ul>
+     *  <li>必须源自com.sun.corba.se.spi.servicecontext.ServiceContext。
      */
     public void register( Class cls )
     {

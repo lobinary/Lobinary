@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ResultTreeType.java,v 1.2.4.1 2005/09/05 11:30:01 pvedula Exp $
+ * <p>
+ *  $ Id：ResultTreeType.java,v 1.2.4.1 2005/09/05 11:30:01 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -41,6 +54,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.FlowList;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -85,6 +100,10 @@ public final class ResultTreeType extends Type {
      * The translation to int is undefined since result trees
      * are always converted to reals in arithmetic expressions.
      *
+     * <p>
+     *  将结果树转换为内部类型<code> type </code>的对象。转换为int是未定义的,因为结果树总是转换为算术表达式中的reals。
+     * 
+     * 
      * @param classGen A BCEL class generator
      * @param methodGen A BCEL method generator
      * @param type An instance of the type to translate the result tree to
@@ -121,6 +140,10 @@ public final class ResultTreeType extends Type {
      * Expects an result tree on the stack and pushes a boolean.
      * Translates a result tree to a boolean by first converting it to string.
      *
+     * <p>
+     *  在堆栈上看到一个结果树,并推送一个布尔值。首先将结果树转换为字符串,将结果树转换为布尔值。
+     * 
+     * 
      * @param classGen A BCEL class generator
      * @param methodGen A BCEL method generator
      * @param type An instance of BooleanType (any)
@@ -139,6 +162,10 @@ public final class ResultTreeType extends Type {
     /**
      * Expects an result tree on the stack and pushes a string.
      *
+     * <p>
+     *  在栈上看到一个结果树并推送一个字符串。
+     * 
+     * 
      * @param classGen A BCEL class generator
      * @param methodGen A BCEL method generator
      * @param type An instance of StringType (any)
@@ -200,6 +227,10 @@ public final class ResultTreeType extends Type {
      * Expects an result tree on the stack and pushes a real.
      * Translates a result tree into a real by first converting it to string.
      *
+     * <p>
+     *  在栈上看到一个结果树,并推送一个真实的。首先将结果树转换为字符串,将其转换为实数。
+     * 
+     * 
      * @param classGen A BCEL class generator
      * @param methodGen A BCEL method generator
      * @param type An instance of RealType (any)
@@ -215,6 +246,10 @@ public final class ResultTreeType extends Type {
      * Expects a result tree on the stack and pushes a boxed result tree.
      * Result trees are already boxed so the translation is just a NOP.
      *
+     * <p>
+     *  在堆栈上看到一个结果树,并推送一个盒装的结果树。结果树已经加框,所以翻译只是一个NOP。
+     * 
+     * 
      * @param classGen A BCEL class generator
      * @param methodGen A BCEL method generator
      * @param type An instance of ReferenceType (any)
@@ -310,6 +345,11 @@ public final class ResultTreeType extends Type {
      * such as <xsl:apply-templates> and <xsl:for-each> without the DOM
      * parameter/variable being updates as well.
      *
+     * <p>
+     * 在堆栈上看到一个结果树,并推送一个节点集(迭代器)。请注意,生成的迭代器是包含结果树的DOM的迭代器,而不是当前正在使用的DOM。
+     * 因此,此处的转换不会直接使用<xsl：apply-templates>和<xsl：for-each>等元素,而且DOM参数/变量也不会更新。
+     * 
+     * 
      * @param classGen A BCEL class generator
      * @param methodGen A BCEL method generator
      * @param type An instance of NodeSetType (any)
@@ -362,6 +402,10 @@ public final class ResultTreeType extends Type {
     /**
      * Subsume result tree into ObjectType.
      *
+     * <p>
+     *  将结果树归入ObjectType。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -374,6 +418,10 @@ public final class ResultTreeType extends Type {
      * It does not push a 0 or a 1 but instead returns branchhandle list
      * to be appended to the false list.
      *
+     * <p>
+     *  将结果树转换为非合成布尔值。它不推动0或1,而是返回分支句柄列表附加到false列表。
+     * 
+     * 
      * @param classGen A BCEL class generator
      * @param methodGen A BCEL method generator
      * @param type An instance of BooleanType (any)
@@ -394,6 +442,11 @@ public final class ResultTreeType extends Type {
      * to W3C Node or W3C NodeList and the translation is done
      * via node-set type.
      *
+     * <p>
+     *  将结果树转换为由<code> clazz </code>表示的Java类型。在堆栈上看到一个结果树,并在强制后推送一个适当类型的对象。
+     * 结果树被转换为W3C节点或W3C节点列表,并且转换通过节点集类型完成。
+     * 
+     * 
      * @param classGen A BCEL class generator
      * @param methodGen A BCEL method generator
      * @param clazz An reference to the Class to translate to
@@ -434,6 +487,9 @@ public final class ResultTreeType extends Type {
 
     /**
      * Translates an object of this type to its boxed representation.
+     * <p>
+     *  将此类型的对象转换为其框化表示。
+     * 
      */
     public void translateBox(ClassGenerator classGen,
                              MethodGenerator methodGen) {
@@ -442,6 +498,9 @@ public final class ResultTreeType extends Type {
 
     /**
      * Translates an object of this type to its unboxed representation.
+     * <p>
+     *  将此类型的对象转换为其未装箱的表示。
+     * 
      */
     public void translateUnBox(ClassGenerator classGen,
                                MethodGenerator methodGen) {
@@ -450,6 +509,8 @@ public final class ResultTreeType extends Type {
 
     /**
      * Returns the class name of an internal type's external representation.
+     * <p>
+     *  返回内部类型的外部表示的类名。
      */
     public String getClassName() {
         return(DOM_INTF);

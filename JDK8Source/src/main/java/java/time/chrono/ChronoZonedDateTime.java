@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -115,6 +134,22 @@ import java.util.Objects;
  * All implementations that can be instantiated must be final, immutable and thread-safe.
  * Subclasses should be Serializable wherever possible.
  *
+ * <p>
+ *  带有任意时间表中的时区的日期时间,用于高级全球化用例。
+ * <p>
+ *  <b>大多数应用程序应该将方法签名,字段和变量声明为{@link ZonedDateTime},而不是此接口。</b>
+ * <p>
+ *  {@code ChronoZonedDateTime}是偏移日期时间的抽象表示,其中{@code Chronology chronology}或日历系统是可插入的。
+ * 日期时间以由{@link TemporalField}表示的字段来定义,其中最常见的实现在{@link ChronoField}中定义。年表定义日历系统的操作方式和标准字段的含义。
+ * 
+ * <h3>何时使用此接口</h3> API的设计鼓励使用{@code ZonedDateTime}而不是此接口,即使在应用程序需要处理多个日历系统的情况下。
+ * 这一点的理由在{@link ChronoLocalDate}中详细探讨。
+ * <p>
+ *  确保在使用此界面之前已阅读并理解{@code ChronoLocalDate}中的讨论。
+ * 
+ *  @implSpec必须小心地实现此接口,以确保其他类正常运行。所有可以实例化的实现必须是final,immutable和线程安全的。子类应尽可能序列化。
+ * 
+ * 
  * @param <D> the concrete type for the date of this date-time
  * @since 1.8
  */
@@ -131,6 +166,12 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * on the position of the date-time on the instant time-line.
      * The underlying comparison is equivalent to comparing the epoch-second and nano-of-second.
      *
+     * <p>
+     *  获取一个比较器,按时间线顺序比较{@code ChronoZonedDateTime}忽略时间顺序。
+     * <p>
+     *  此比较器与{@link #compareTo}中的比较不同,它仅比较基础即时而不是时间顺序。这允许基于在时间线上的日期时间的位置来比较不同日历系统中的日期。潜在的比较等同于比较时代秒和纳秒。
+     * 
+     * 
      * @return a comparator that compares in time-line order ignoring the chronology
      *
      * @see #isAfter
@@ -158,6 +199,18 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code ChronoZonedDateTime::from}.
      *
+     * <p>
+     *  从临时对象获取{@code ChronoZonedDateTime}的实例。
+     * <p>
+     *  这将基于指定的时间创建一个分区的日期时间。
+     *  {@code TemporalAccessor}表示一组任意的日期和时间信息,此工厂将其转换为{@code ChronoZonedDateTime}的实例。
+     * <p>
+     * 转换从时间对象提取并组合年表,日期,时间和区域。该行为等同于使用{@link Chronology#zonedDateTime(TemporalAccessor)}和提取的年表。
+     * 实现允许执行优化,例如访问等价于相关对象的那些字段。
+     * <p>
+     *  此方法匹配功能接口{@link TemporalQuery}的签名,允许它通过方法引用{@code ChronoZonedDateTime :: from}用作查询。
+     * 
+     * 
      * @param temporal  the temporal object to convert, not null
      * @return the date-time, not null
      * @throws DateTimeException if unable to convert to a {@code ChronoZonedDateTime}
@@ -219,6 +272,12 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * This returns a local date with the same year, month and day
      * as this date-time.
      *
+     * <p>
+     *  获取此日期时间的本地日期部分。
+     * <p>
+     *  这将返回与此日期时间相同的年,月和日的本地日期。
+     * 
+     * 
      * @return the date part of this date-time, not null
      */
     default D toLocalDate() {
@@ -231,6 +290,12 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * This returns a local time with the same hour, minute, second and
      * nanosecond as this date-time.
      *
+     * <p>
+     *  获取此日期时间的本地时间部分。
+     * <p>
+     *  这将返回与此日期时间相同的小时,分​​钟,秒和纳秒的本地时间。
+     * 
+     * 
      * @return the time part of this date-time, not null
      */
     default LocalTime toLocalTime() {
@@ -243,6 +308,12 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * This returns a local date with the same year, month and day
      * as this date-time.
      *
+     * <p>
+     *  获取此日期时间的本地日期时间部分。
+     * <p>
+     *  这将返回与此日期时间相同的年,月和日的本地日期。
+     * 
+     * 
      * @return the local date-time part of this date-time, not null
      */
     ChronoLocalDateTime<D> toLocalDateTime();
@@ -253,6 +324,12 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * The {@code Chronology} represents the calendar system in use.
      * The era and other fields in {@link ChronoField} are defined by the chronology.
      *
+     * <p>
+     *  获取此日期时间的年表。
+     * <p>
+     *  {@code Chronology}表示正在使用的日历系统。 {@link ChronoField}中的时代和其他字段由年表定义。
+     * 
+     * 
      * @return the chronology, not null
      */
     default Chronology getChronology() {
@@ -264,6 +341,12 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * <p>
      * This is the offset of the local date-time from UTC/Greenwich.
      *
+     * <p>
+     *  获取区域偏移量,例如"+01：00"。
+     * <p>
+     *  这是本地日期时间与UTC /格林威治的偏移量。
+     * 
+     * 
      * @return the zone offset, not null
      */
     ZoneOffset getOffset();
@@ -273,6 +356,12 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * <p>
      * This returns the stored time-zone id used to determine the time-zone rules.
      *
+     * <p>
+     *  获取区域ID,例如"Europe / Paris"。
+     * <p>
+     *  这返回用于确定时区规则的存储的时区标识。
+     * 
+     * 
      * @return the zone ID, not null
      */
     ZoneId getZone();
@@ -292,6 +381,16 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期时间的副本,将区域偏移更改为本地时间线重叠处的两个有效偏移量中的较早者。
+     * <p>
+     * 该方法仅在本地时间线重叠时(例如在秋季日光节约割接处)具有任何效果。在这种情况下,本地日期时间有两个有效偏移量。调用此方法将返回一个分区日期时间与所选的两个较早的日期时间。
+     * <p>
+     *  如果此方法在不重叠时调用,则返回{@code this}。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @return a {@code ZoneChronoDateTime} based on this date-time with the earlier offset, not null
      * @throws DateTimeException if no rules can be found for the zone
      * @throws DateTimeException if no rules are valid for this date-time
@@ -312,6 +411,16 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期时间的副本,将区域偏移更改为本地时间线重叠处的两个有效偏移中的较晚者。
+     * <p>
+     *  该方法仅在本地时间线重叠时(例如在秋季日光节约割接处)具有任何效果。在这种情况下,本地日期时间有两个有效偏移量。调用此方法将返回一个分区的日期时间,后两个选择的日期时间。
+     * <p>
+     *  如果此方法在不重叠时调用,则返回{@code this}。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @return a {@code ChronoZonedDateTime} based on this date-time with the later offset, not null
      * @throws DateTimeException if no rules can be found for the zone
      * @throws DateTimeException if no rules are valid for this date-time
@@ -330,6 +439,16 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以不同的时区返回此ZonedDateTime的副本,如果可能,保留本地日期时间。
+     * <p>
+     *  此方法更改时区并保留本地日期时间。仅当本地日期时间对新区域无效时,才更改本地日期时间。
+     * <p>
+     *  要更改区域并调整本地日期时间,请使用{@link #withZoneSameInstant(ZoneId)}。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param zone  the time-zone to change to, not null
      * @return a {@code ChronoZonedDateTime} based on this date-time with the requested zone, not null
      */
@@ -348,6 +467,16 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * To change the offset while keeping the local time,
      * use {@link #withZoneSameLocal(ZoneId)}.
      *
+     * <p>
+     *  返回此日期时间的副本,使用不同的时区,保留即时。
+     * <p>
+     * 此方法更改时区并保留即时。这通常导致对本地日期时间的更改。
+     * <p>
+     *  该方法基于保持相同的瞬时,因此在本地时间线中的间隙和重叠对结果没有影响。
+     * <p>
+     *  要在保持本地时间的情况下更改偏移,请使用{@link #withZoneSameLocal(ZoneId)}。
+     * 
+     * 
      * @param zone  the time-zone to change to, not null
      * @return a {@code ChronoZonedDateTime} based on this date-time with the requested zone, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -370,6 +499,21 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * passing {@code this} as the argument.
      * Whether the field is supported is determined by the field.
      *
+     * <p>
+     *  检查是否支持指定的字段。
+     * <p>
+     *  这将检查是否可以在此日期时间查询指定的字段。
+     * 如果为false,则调用{@link #range(TemporalField)范围},{@link #get(TemporalField)get}和{@link #with(TemporalField,long)}
+     * 方法将抛出异常。
+     *  这将检查是否可以在此日期时间查询指定的字段。
+     * <p>
+     *  支持字段集由年表定义,通常包括所有{@code ChronoField}字段。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.isSupportedBy(TemporalAccessor)}传递{@code this}作
+     * 为参数来获得此方法的结果。
+     * 字段是否受支持由字段确定。
+     * 
+     * 
      * @param field  the field to check, null returns false
      * @return true if the field can be queried, false if not
      */
@@ -391,6 +535,19 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * passing {@code this} as the argument.
      * Whether the unit is supported is determined by the unit.
      *
+     * <p>
+     *  检查是否支持指定的单元。
+     * <p>
+     *  这将检查指定的单位是否可以添加到此日期时间或从此日期时间中减去。
+     * 如果为false,则调用{@link #plus(long,TemporalUnit)}和{@link #minus(long,TemporalUnit)minus}方法将抛出异常。
+     * <p>
+     *  受支持单位的集合由年表定义,通常包括除{@code FOREVER}之外的所有{@code ChronoUnit}单位。
+     * <p>
+     * 如果单元不是{@code ChronoUnit},那么通过调用{@code TemporalUnit.isSupportedBy(Temporal)}传递{@code this}作为参数来获得此方法的结
+     * 果。
+     * 单元是否受支持由单元确定。
+     * 
+     * 
      * @param unit  the unit to check, null returns false
      * @return true if the unit can be added/subtracted, false if not
      */
@@ -406,6 +563,10 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
     // override for covariant return type
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -416,6 +577,10 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -424,6 +589,10 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -434,6 +603,10 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -442,6 +615,10 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -452,6 +629,10 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -473,6 +654,15 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * {@link java.time.temporal.TemporalQuery#queryFrom(TemporalAccessor)} method on the
      * specified query passing {@code this} as the argument.
      *
+     * <p>
+     *  使用指定的查询查询此日期时间。
+     * <p>
+     *  这将使用指定的查询策略对象查询此日期时间。 {@code TemporalQuery}对象定义用于获取结果的逻辑。阅读查询的文档以了解此方法的结果。
+     * <p>
+     *  此方法的结果是通过调用{@link java.time.temporal.TemporalQuery#queryFrom(TemporalAccessor)}方法对指定的查询传递{@code this}
+     * 作为参数来获得的。
+     * 
+     * 
      * @param <R> the type of the result
      * @param query  the query to invoke, not null
      * @return the query result, null may be returned (defined by the query)
@@ -508,6 +698,17 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      *  return formatter.format(this);
      * </pre>
      *
+     * <p>
+     *  使用指定的格式化程序格式化此日期时间。
+     * <p>
+     *  此日期时间将传递到格式化程序以生成字符串。
+     * <p>
+     *  默认实现必须如下所示：
+     * <pre>
+     *  return formatter.format(this);
+     * </pre>
+     * 
+     * 
      * @param formatter  the formatter to use, not null
      * @return the formatted date-time string, not null
      * @throws DateTimeException if an error occurs during printing
@@ -526,6 +727,13 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * {@linkplain #toLocalDateTime() local date-time} and
      * {@linkplain #getOffset() offset}.
      *
+     * <p>
+     *  将此日期时间转换为{@code Instant}。
+     * <p>
+     *  这会返回代表与此日期时间相同的时间线上的相同点的{@code Instant}。
+     * 计算结合{@linkplain #toLocalDateTime()local date-time}和{@linkplain #getOffset()offset}。
+     * 
+     * 
      * @return an {@code Instant} representing the same instant, not null
      */
     default Instant toInstant() {
@@ -541,6 +749,14 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * which is the number of elapsed seconds from 1970-01-01T00:00:00Z.
      * Instants on the time-line after the epoch are positive, earlier are negative.
      *
+     * <p>
+     *  将此日期时间转换为从1970-01-01T00：00：00Z的时期的秒数。
+     * <p>
+     * 这使用{@linkplain #toLocalDateTime()local date-time}和{@linkplain #getOffset()offset}来计算epoch-second值,即从1
+     * 970-01-01T00：00：00Z起经过的秒数。
+     * 时代后的时间线上的实例为正,早期为负。
+     * 
+     * 
      * @return the number of seconds from the epoch of 1970-01-01T00:00:00Z
      */
     default long toEpochSecond() {
@@ -563,6 +779,16 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * <p>
      * This default implementation performs the comparison defined above.
      *
+     * <p>
+     *  将此日期时间与另一个日期时间(包括年表)进行比较。
+     * <p>
+     *  比较首先基于时间,然后基于本地日期时间,然后基于区域ID,然后基于年表。它是"与等号一致",由{@link Comparable}定义。
+     * <p>
+     *  如果所比较的所有日期时间对象在相同的年表中,则不需要附加的年表。
+     * <p>
+     *  此默认实现执行上面定义的比较。
+     * 
+     * 
      * @param other  the other date-time to compare to, not null
      * @return the comparator value, negative if less, positive if greater
      */
@@ -594,6 +820,15 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * This default implementation performs the comparison based on the epoch-second
      * and nano-of-second.
      *
+     * <p>
+     *  检查此日期时间的时间是否在指定日期时间的时间之前。
+     * <p>
+     *  此方法与{@link #compareTo}中的比较不同,它仅比较日期时间的时间。这相当于使用{@code dateTime1.toInstant()。
+     * isBefore(dateTime2.toInstant());}。
+     * <p>
+     *  此默认实现执行基于时代秒和纳秒的比较。
+     * 
+     * 
      * @param other  the other date-time to compare to, not null
      * @return true if this point is before the specified date-time
      */
@@ -614,6 +849,15 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * This default implementation performs the comparison based on the epoch-second
      * and nano-of-second.
      *
+     * <p>
+     *  检查此日期时间的时间是否晚于指定的日期时间。
+     * <p>
+     *  此方法与{@link #compareTo}中的比较不同,它仅比较日期时间的时间。这相当于使用{@code dateTime1.toInstant()。
+     * isAfter(dateTime2.toInstant());}。
+     * <p>
+     * 此默认实现执行基于时代秒和纳秒的比较。
+     * 
+     * 
      * @param other  the other date-time to compare to, not null
      * @return true if this is after the specified date-time
      */
@@ -634,6 +878,15 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * This default implementation performs the comparison based on the epoch-second
      * and nano-of-second.
      *
+     * <p>
+     *  检查此日期时间的时间是否等于指定日期时间的时间。
+     * <p>
+     *  此方法与{@link #compareTo}和{@link #equals}中的比较不同,它仅比较日期时间的时间。这相当于使用{@code dateTime1.toInstant()。
+     * equals(dateTime2.toInstant());}。
+     * <p>
+     *  此默认实现执行基于时代秒和纳秒的比较。
+     * 
+     * 
      * @param other  the other date-time to compare to, not null
      * @return true if the instant equals the instant of the specified date-time
      */
@@ -650,6 +903,13 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * To compare for the same instant on the time-line, use {@link #compareTo}.
      * Only objects of type {@code ChronoZonedDateTime} are compared, other types return false.
      *
+     * <p>
+     *  检查此日期时间是否等于另一个日期时间。
+     * <p>
+     *  比较基于偏移日期时间和区域。要在时间线上的同一时刻进行比较,请使用{@link #compareTo}。
+     * 仅比较{@code ChronoZonedDateTime}类型的对象,其他类型返回false。
+     * 
+     * 
      * @param obj  the object to check, null returns false
      * @return true if this is equal to the other date-time
      */
@@ -659,6 +919,10 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
     /**
      * A hash code for this date-time.
      *
+     * <p>
+     *  此日期时间的哈希码。
+     * 
+     * 
      * @return a suitable hash code
      */
     @Override
@@ -670,6 +934,10 @@ public interface ChronoZonedDateTime<D extends ChronoLocalDate>
      * <p>
      * The output will include the full zoned date-time.
      *
+     * <p>
+     *  将此日期时间输出为{@code String}。
+     * <p>
+     * 
      * @return a string representation of this date-time, not null
      */
     @Override

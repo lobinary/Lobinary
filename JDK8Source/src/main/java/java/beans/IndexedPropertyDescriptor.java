@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,11 @@ import java.lang.reflect.Method;
  * An indexed property may also provide simple non-indexed read and write
  * methods.  If these are present, they read and write arrays of the type
  * returned by the indexed read method.
+ * <p>
+ *  IndexedPropertyDescriptor描述了一个行为类似于数组的属性,并且具有索引的读取和/或索引写入方法来访问数组的特定元素。
+ * <p>
+ *  索引属性还可以提供简单的非索引读取和写入方法。如果它们存在,则它们读取和写入由索引读取方法返回的类型的数组。
+ * 
  */
 
 public class IndexedPropertyDescriptor extends PropertyDescriptor {
@@ -57,6 +63,13 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * method also called "getFred", an indexed writer method "setFred",
      * and finally a non-indexed writer method "setFred".
      *
+     * <p>
+     *  此构造函数通过对索引访问和数组访问使用getFoo和setFoo访问器方法为遵循标准Java约定的属性构建一个IndexedPropertyDescriptor。
+     * <p>
+     *  因此,如果参数名称是"fred",它将假设存在一个索引的读取器方法"getFred",也称为"getFred"的非索引(数组)读取器方法,索引写入器方法"setFred"非索引写入程序方法"setFr
+     * ed"。
+     * 
+     * 
      * @param propertyName The programmatic name of the property.
      * @param beanClass The Class object for the target bean.
      * @exception IntrospectionException if an exception occurs during
@@ -76,6 +89,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * names for reading and writing the property, both indexed
      * and non-indexed.
      *
+     * <p>
+     *  此构造函数采用简单属性的名称,以及用于读取和写入属性的方法名称,包括索引和非索引。
+     * 
+     * 
      * @param propertyName The programmatic name of the property.
      * @param beanClass  The Class object for the target bean.
      * @param readMethodName The name of the method used for reading the property
@@ -116,6 +133,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * This constructor takes the name of a simple property, and Method
      * objects for reading and writing the property.
      *
+     * <p>
+     *  此构造函数使用简单属性的名称,以及用于读取和写入属性的方法对象。
+     * 
+     * 
      * @param propertyName The programmatic name of the property.
      * @param readMethod The method used for reading the property values as an array.
      *          May be null if the property is write-only or must be indexed.
@@ -144,6 +165,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * Creates <code>PropertyDescriptor</code> for the specified bean
      * with the specified name and methods to read/write the property value.
      *
+     * <p>
+     *  为具有指定名称和方法的指定bean创建<code> PropertyDescriptor </code>,以读取/写入属性值。
+     * 
+     * 
      * @param bean          the type of the target bean
      * @param base          the base name of the property (the rest of the method name)
      * @param read          the method used for reading the property value
@@ -168,6 +193,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * Gets the method that should be used to read an indexed
      * property value.
      *
+     * <p>
+     *  获取应用于读取索引属性值的方法。
+     * 
+     * 
      * @return The method that should be used to read an indexed
      * property value.
      * May return null if the property isn't indexed or is write-only.
@@ -206,6 +235,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Sets the method that should be used to read an indexed property value.
      *
+     * <p>
+     *  设置应用于读取索引属性值的方法。
+     * 
+     * 
      * @param readMethod The new indexed read method.
      * @throws IntrospectionException if an exception occurs during
      * introspection.
@@ -235,6 +268,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Gets the method that should be used to write an indexed property value.
      *
+     * <p>
+     * 获取应用于编写索引属性值的方法。
+     * 
+     * 
      * @return The method that should be used to write an indexed
      * property value.
      * May return null if the property isn't indexed or is read-only.
@@ -285,6 +322,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Sets the method that should be used to write an indexed property value.
      *
+     * <p>
+     *  设置应用于编写索引属性值的方法。
+     * 
+     * 
      * @param writeMethod The new indexed write method.
      * @throws IntrospectionException if an exception occurs during
      * introspection.
@@ -318,6 +359,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * This type is returned by the indexed read method
      * or is used as the parameter type of the indexed write method.
      *
+     * <p>
+     *  返回索引属性的Java类型信息。注意,{@code Class}对象可以描述原始的Java类型,例如{@code int}。此类型由索引读取方法返回,或用作索引写入方法的参数类型。
+     * 
+     * 
      * @return the {@code Class} object that represents the Java type info,
      *         or {@code null} if the type cannot be determined
      */
@@ -396,6 +441,11 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * are the same if the read, write, property types, property editor and
      * flags  are equivalent.
      *
+     * <p>
+     *  将此<code> PropertyDescriptor </code>与指定的对象进行比较。如果对象相同,则返回true。
+     * 如果读,写,属性类型,属性编辑器和标志是等效的,两个<code> PropertyDescriptor </code>是相同的。
+     * 
+     * 
      * @since 1.4
      */
     public boolean equals(Object obj) {
@@ -431,6 +481,10 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * Merge two property descriptors.  Where they conflict, give the
      * second argument (y) priority over the first argumnnt (x).
      *
+     * <p>
+     *  包私有构造函数。合并两个属性描述符。在它们冲突的地方,给第二个参数(y)优先于第一个argumnnt(x)。
+     * 
+     * 
      * @param x  The first (lower priority) PropertyDescriptor
      * @param y  The second (higher priority) PropertyDescriptor
      */
@@ -476,6 +530,9 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
     /*
      * Package-private dup constructor
      * This must isolate the new object from any changes to the old object.
+     * <p>
+     *  Package-private dup constructor这必须将新对象与对旧对象的任何更改隔离开来。
+     * 
      */
     IndexedPropertyDescriptor(IndexedPropertyDescriptor old) {
         super(old);
@@ -500,6 +557,9 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
      * Returns a hash code value for the object.
      * See {@link java.lang.Object#hashCode} for a complete description.
      *
+     * <p>
+     *  返回对象的哈希码值。有关完整的说明,请参阅{@link java.lang.Object#hashCode}。
+     * 
      * @return a hash code value for this object.
      * @since 1.5
      */

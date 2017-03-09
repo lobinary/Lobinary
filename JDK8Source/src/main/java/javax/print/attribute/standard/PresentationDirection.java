@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,16 @@ import javax.print.attribute.PrintRequestAttribute;
  * returns the IPP string representation of the attribute value.
  * <P>
  *
+ * <p>
+ *  类PresentationDirection是打印属性类,枚举,其与{@link NumberUp NumberUp}属性结合使用以指示要对所选介质的实例的单侧施加的多个打印流页面的布局。
+ * 这对于镜像不同脚本的文本布局约定很有用。例如,英语是"toright-tobottom",希伯来语是"toleft-tobottom",日语通常是"tobottom-toftft"。
+ * <P>
+ *  <B> IPP兼容性：</B>此属性不是IPP 1.1属性;它是IPP 1.1的生产打印扩展程序(<a href="ftp://ftp.pwg.org/pub/pwg/standards/pwg5100.3.pdf">
+ *  PDF </a>)中的属性。
+ *  <CODE> getName()</CODE>返回的类别名称是IPP属性名称。枚举的整数值是IPP枚举值。 <code> toString()</code>方法返回属性值的IPP字符串表示形式。
+ * <P>
+ * 
+ * 
  * @author  Phil Race.
  */
 public final class PresentationDirection extends EnumSyntax
@@ -57,6 +68,9 @@ public final class PresentationDirection extends EnumSyntax
     /**
      * Pages are laid out in columns starting at the top left,
      * proceeding towards the bottom {@literal &} right.
+     * <p>
+     *  页面排列在从左上角开始的列中,向右移动{@literal&}。
+     * 
      */
     public static final PresentationDirection TOBOTTOM_TORIGHT =
         new PresentationDirection(0);
@@ -64,6 +78,9 @@ public final class PresentationDirection extends EnumSyntax
     /**
      * Pages are laid out in columns starting at the top right,
      * proceeding towards the bottom {@literal &} left.
+     * <p>
+     *  页面排列在从右上角开始的列中,向左移动{@literal&}。
+     * 
      */
     public static final PresentationDirection TOBOTTOM_TOLEFT =
         new PresentationDirection(1);
@@ -71,6 +88,9 @@ public final class PresentationDirection extends EnumSyntax
     /**
      * Pages are laid out in columns starting at the bottom left,
      * proceeding towards the top {@literal &} right.
+     * <p>
+     *  页面排列在从左下方开始的列中,向右移动到顶部{@literal&}。
+     * 
      */
     public static final PresentationDirection TOTOP_TORIGHT =
         new PresentationDirection(2);
@@ -78,6 +98,9 @@ public final class PresentationDirection extends EnumSyntax
     /**
      * Pages are laid out in columns starting at the bottom right,
      * proceeding towards the top {@literal &} left.
+     * <p>
+     *  页面排列在从右下角开始的列中,向上{@literal&}向左。
+     * 
      */
     public static final PresentationDirection TOTOP_TOLEFT =
         new PresentationDirection(3);
@@ -85,6 +108,9 @@ public final class PresentationDirection extends EnumSyntax
     /**
      * Pages are laid out in rows starting at the top left,
      * proceeding towards the right {@literal &} bottom.
+     * <p>
+     * 页面从左上方开始按行排列,向右移动{@literal&} bottom。
+     * 
      */
     public static final PresentationDirection TORIGHT_TOBOTTOM =
         new PresentationDirection(4);
@@ -92,6 +118,9 @@ public final class PresentationDirection extends EnumSyntax
     /**
      * Pages are laid out in rows starting at the bottom left,
      * proceeding towards the right {@literal &} top.
+     * <p>
+     *  页面从左下方开始按行排列,向右移动{@literal&} top。
+     * 
      */
     public static final PresentationDirection TORIGHT_TOTOP =
         new PresentationDirection(5);
@@ -99,6 +128,9 @@ public final class PresentationDirection extends EnumSyntax
     /**
      * Pages are laid out in rows starting at the top right,
      * proceeding towards the left {@literal &} bottom.
+     * <p>
+     *  页面排列在从右上角开始的行中,向左移动{@literal&} bottom。
+     * 
      */
     public static final PresentationDirection TOLEFT_TOBOTTOM =
         new PresentationDirection(6);
@@ -106,6 +138,9 @@ public final class PresentationDirection extends EnumSyntax
     /**
      * Pages are laid out in rows starting at the bottom right,
      * proceeding towards the left {@literal &} top.
+     * <p>
+     *  页面排列在从右下角开始的行中,向左移动{@literal&} top。
+     * 
      */
     public static final PresentationDirection TOLEFT_TOTOP =
         new PresentationDirection(7);
@@ -114,6 +149,10 @@ public final class PresentationDirection extends EnumSyntax
      * Construct a new presentation direction enumeration value with the given
      * integer value.
      *
+     * <p>
+     *  使用给定的整数值构造新的显示方向枚举值。
+     * 
+     * 
      * @param  value  Integer value.
      */
     private PresentationDirection(int value) {
@@ -144,6 +183,9 @@ public final class PresentationDirection extends EnumSyntax
 
     /**
      * Returns the string table for class PresentationDirection.
+     * <p>
+     *  返回类PresentationDirection的字符串表。
+     * 
      */
     protected String[] getStringTable() {
         return myStringTable;
@@ -151,6 +193,9 @@ public final class PresentationDirection extends EnumSyntax
 
     /**
      * Returns the enumeration value table for class PresentationDirection.
+     * <p>
+     *  返回类PresentationDirection的枚举值表。
+     * 
      */
     protected EnumSyntax[] getEnumValueTable() {
         return myEnumValueTable;
@@ -163,6 +208,12 @@ public final class PresentationDirection extends EnumSyntax
      * For class PresentationDirection
      * the category is class PresentationDirection itself.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于类PresentationDirection,类别是类PresentationDirection本身。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -177,6 +228,10 @@ public final class PresentationDirection extends EnumSyntax
      * For class PresentationDirection
      * the category name is <CODE>"presentation-direction"</CODE>.
      *
+     * <p>
+     *  获取此属性值为实例的类别的名称。
+     * <P>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,19 @@ import java.io.IOException;
  * {@link Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.stream.XMLStreamWriter)}, and
  * {@link Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.stream.XMLEventWriter)}.
  *
+ * <p>
+ *  部分默认<tt> Marshaller </tt>实现。
+ * 
+ * <p>
+ *  此类为{@link javax.xml.bind.Marshaller}接口提供了部分默认实现。
+ * 
+ * <p>
+ *  JAXB提供程序必须实现的唯一方法是{@link Marshaller#marshal(Object,javax.xml.transform.Result)marshal(Object,javax.xml.transform.Result)}
+ * ,{@link Marshaller#marshal ,javax.xml.transform.Result)marshal(Object,javax.xml.stream.XMLStreamWriter)}
+ * 和{@link Marshaller#marshal(Object,javax.xml.transform.Result)marshal(Object,javax.xml.stream .XMLEventWriter)}
+ * 。
+ * 
+ * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li></ul>
  * @see javax.xml.bind.Marshaller
  * @since JAXB1.0
@@ -136,6 +150,11 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      *
      * Implementations that choose to support this method must
      * override this method.
+     * <p>
+     *  默认情况下,getNode方法不受支持,并抛出{@link java.lang.UnsupportedOperationException}。
+     * 
+     *  选择支持此方法的实现必须覆盖此方法。
+     * 
      */
     public org.w3c.dom.Node getNode( Object obj ) throws JAXBException {
 
@@ -147,6 +166,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for getting the current output encoding.
      *
+     * <p>
+     *  获取当前输出编码的方便方法。
+     * 
+     * 
      * @return the current encoding or "UTF-8" if it hasn't been set.
      */
     protected String getEncoding() {
@@ -156,6 +179,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for setting the output encoding.
      *
+     * <p>
+     *  方便设置输出编码的方法。
+     * 
+     * 
      * @param encoding a valid encoding as specified in the Marshaller class
      * documentation
      */
@@ -166,6 +193,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for getting the current schemaLocation.
      *
+     * <p>
+     *  用于获取当前schemaLocation的便捷方法。
+     * 
+     * 
      * @return the current schemaLocation or null if it hasn't been set
      */
     protected String getSchemaLocation() {
@@ -175,6 +206,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for setting the schemaLocation.
      *
+     * <p>
+     *  用于设置schemaLocation的便捷方法。
+     * 
+     * 
      * @param location the schemaLocation value
      */
     protected void setSchemaLocation( String location ) {
@@ -184,6 +219,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for getting the current noNamespaceSchemaLocation.
      *
+     * <p>
+     *  用于获取当前noNamespaceSchemaLocation的便捷方法。
+     * 
+     * 
      * @return the current noNamespaceSchemaLocation or null if it hasn't
      * been set
      */
@@ -194,6 +233,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for setting the noNamespaceSchemaLocation.
      *
+     * <p>
+     *  用于设置noNamespaceSchemaLocation的便捷方法。
+     * 
+     * 
      * @param location the noNamespaceSchemaLocation value
      */
     protected void setNoNSSchemaLocation( String location ) {
@@ -203,6 +246,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for getting the formatted output flag.
      *
+     * <p>
+     *  获取格式化输出标志的方便方法。
+     * 
+     * 
      * @return the current value of the formatted output flag or false if
      * it hasn't been set.
      */
@@ -213,6 +260,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for setting the formatted output flag.
      *
+     * <p>
+     *  用于设置格式化输出标志的方便方法。
+     * 
+     * 
      * @param v value of the formatted output flag.
      */
     protected void setFormattedOutput( boolean v ) {
@@ -223,6 +274,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for getting the fragment flag.
      *
+     * <p>
+     *  获取碎片标志的便利方法。
+     * 
+     * 
      * @return the current value of the fragment flag or false if
      * it hasn't been set.
      */
@@ -233,6 +288,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for setting the fragment flag.
      *
+     * <p>
+     *  设置片段标志的便捷方法。
+     * 
+     * 
      * @param v value of the fragment flag.
      */
     protected void setFragment( boolean v ) {
@@ -287,6 +346,12 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      * This method is a helper method for the derived class to convert
      * encoding names.
      *
+     * <p>
+     * 从IANA名称获取相应的Java编码名称。
+     * 
+     *  此方法是一个辅助方法,用于派生类转换编码名称。
+     * 
+     * 
      * @exception UnsupportedEncodingException
      *      If this implementation couldn't find the Java encoding name.
      */
@@ -311,6 +376,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         } catch( UnsupportedCharsetException uce ) {
             throw new JAXBException( uce );
         }
+        /* <p>
+        /*  try {this.encoding = Charset.forName(_encoding); } catch(UnsupportedCharsetException uce){throw new JAXBException(uce); }
+        /* }。
+        /* 
          */
     }
 
@@ -319,6 +388,9 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      * the four defined properties in Marshaller. If a provider
      * needs to handle additional properties, it should override
      * this method in a derived class.
+     * <p>
+     *  setProperty方法的默认实现处理Marshaller中的四个定义的属性。如果提供程序需要处理其他属性,它应该在派生类中覆盖此方法。
+     * 
      */
     public void setProperty( String name, Object value )
         throws PropertyException {
@@ -363,6 +435,9 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      * the four defined properties in Marshaller.  If a provider
      * needs to support additional provider specific properties,
      * it should override this method in a derived class.
+     * <p>
+     *  getProperty方法的默认实现处理Marshaller中的四个定义的属性。如果提供程序需要支持其他特定于提供程序的属性,它应该在派生类中覆盖此方法。
+     * 
      */
     public Object getProperty( String name )
         throws PropertyException {
@@ -387,6 +462,8 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         throw new PropertyException(name);
     }
     /**
+    /* <p>
+    /* 
      * @see javax.xml.bind.Marshaller#getEventHandler()
      */
     public ValidationEventHandler getEventHandler() throws JAXBException {
@@ -394,6 +471,8 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     }
 
     /**
+    /* <p>
+    /* 
      * @see javax.xml.bind.Marshaller#setEventHandler(ValidationEventHandler)
      */
     public void setEventHandler(ValidationEventHandler handler)
@@ -411,6 +490,9 @@ public abstract class AbstractMarshallerImpl implements Marshaller
 
     /*
      * assert that the given object is a Boolean
+     * <p>
+     *  断言给定的对象是一个布尔值
+     * 
      */
     private void checkBoolean( String name, Object value ) throws PropertyException {
         if(!(value instanceof Boolean))
@@ -420,6 +502,9 @@ public abstract class AbstractMarshallerImpl implements Marshaller
 
     /*
      * assert that the given object is a String
+     * <p>
+     *  断言给定的对象是一个String
+     * 
      */
     private void checkString( String name, Object value ) throws PropertyException {
         if(!(value instanceof String))
@@ -429,6 +514,8 @@ public abstract class AbstractMarshallerImpl implements Marshaller
 
     /*
      * assert that the parameters are not null
+     * <p>
+     *  断言参数不为null
      */
     private void checkNotNull( Object o1, String o1Name,
                                Object o2, String o2Name ) {

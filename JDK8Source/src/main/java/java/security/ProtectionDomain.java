@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,15 @@ import sun.misc.SharedSecrets;
  * is checked.
  * <p>
  *
+ * <p>
+ * p>
+ *  这个ProtectionDomain类封装了一个域的特征,该域包含一组类,当代表一组给定的Principals执行时,它们的实例被授予一组权限。
+ * <p>
+ *  静态权限集可以在构建时绑定到ProtectionDomain;这样的权限被授予域,而不管有效的策略。
+ * 但是,为了支持动态安全策略,还可以构造ProtectionDomain,以便在检查权限时,通过当前策略将其动态映射到一组权限。
+ * <p>
+ * 
+ * 
  * @author Li Gong
  * @author Roland Schemers
  * @author Gary Ellison
@@ -106,11 +116,16 @@ public class ProtectionDomain {
     private boolean hasAllPerm = false;
 
     /* the PermissionCollection is static (pre 1.4 constructor)
+    /* <p>
+    /* 
        or dynamic (via a policy refresh) */
     private boolean staticPermissions;
 
     /*
      * An object used as a key when the ProtectionDomain is stored in a Map.
+     * <p>
+     *  当ProtectionDomain存储在Map中时用作键的对象。
+     * 
      */
     final Key key = new Key();
 
@@ -123,6 +138,11 @@ public class ProtectionDomain {
      * Permissions object. The only permissions granted to this domain
      * are the ones specified; the current Policy will not be consulted.
      *
+     * <p>
+     *  使用给定的CodeSource和权限创建一个新的ProtectionDomain。
+     * 如果permissions对象不为null,那么在传递的Permissions对象中将调用{@code setReadOnly())}。授予此域的唯一权限是指定的权限;将不会咨询当前的政策。
+     * 
+     * 
      * @param codesource the codesource associated with this domain
      * @param permissions the permissions granted to this domain
      */
@@ -161,6 +181,17 @@ public class ProtectionDomain {
      * PermissionCollection to reflect policy changes.
      * <p>
      *
+     * <p>
+     * 创建由给定的CodeSource,Permissions,ClassLoader和Principals数组限定的新的ProtectionDomain。
+     * 如果permissions对象不为null,那么在传递的Permissions对象中将调用{@code setReadOnly()}。
+     * 授予此域的权限是动态的;它们包括传递给此构造函数的静态权限以及在检查权限时由当前策略授予此域的任何权限。
+     * <p>
+     *  此构造函数通常由{@link SecureClassLoader ClassLoaders}和{@link DomainCombiner DomainCombiners}使用,{@link DomainCombiner DomainCombiners}
+     * 委托{@code Policy}主动关联授予此域的权限。
+     * 此构造函数为策略提供程序提供了扩充提供的PermissionCollection以反映策略更改的机会。
+     * <p>
+     * 
+     * 
      * @param codesource the CodeSource associated with this domain
      * @param permissions the permissions granted to this domain
      * @param classloader the ClassLoader associated with this domain
@@ -192,6 +223,10 @@ public class ProtectionDomain {
 
     /**
      * Returns the CodeSource of this domain.
+     * <p>
+     *  返回此域的CodeSource。
+     * 
+     * 
      * @return the CodeSource of this domain which may be null.
      * @since 1.2
      */
@@ -202,6 +237,10 @@ public class ProtectionDomain {
 
     /**
      * Returns the ClassLoader of this domain.
+     * <p>
+     *  返回此域的ClassLoader。
+     * 
+     * 
      * @return the ClassLoader of this domain which may be null.
      *
      * @since 1.4
@@ -213,6 +252,10 @@ public class ProtectionDomain {
 
     /**
      * Returns an array of principals for this domain.
+     * <p>
+     *  返回此域的主体数组。
+     * 
+     * 
      * @return a non-null array of principals for this domain.
      * Returns a new array each time this method is called.
      *
@@ -225,6 +268,10 @@ public class ProtectionDomain {
     /**
      * Returns the static permissions granted to this domain.
      *
+     * <p>
+     *  返回授予此域的静态权限。
+     * 
+     * 
      * @return the static set of permissions for this domain which may be null.
      * @see Policy#refresh
      * @see Policy#getPermissions(ProtectionDomain)
@@ -256,6 +303,19 @@ public class ProtectionDomain {
      * the current Policy binding.
      * <p>
      *
+     * <p>
+     *  检查并查看此ProtectionDomain是否意味着在Permission对象中表达的权限。
+     * <p>
+     *  所评估的权限集是是否使用静态权限集构造ProtectionDomain的函数,还是绑定到动态映射的权限集的函数。
+     * <p>
+     * 如果ProtectionDomain构造为{@link #ProtectionDomain(CodeSource,PermissionCollection)静态绑定} PermissionCollect
+     * ion,那么将仅对构造时提供的PermissionCollection检查权限。
+     * <p>
+     *  但是,如果ProtectionDomain是用支持{@link #ProtectionDomain(CodeSource,PermissionCollection,ClassLoader,java.security.Principal [])动态绑定}
+     * 权限的构造函数变体构造的,则将根据PermissionCollection在施工时提供和当前的政策约束。
+     * <p>
+     * 
+     * 
      * @param permission the Permission object to check.
      *
      * @return true if "permission" is implicit to this ProtectionDomain.
@@ -284,6 +344,9 @@ public class ProtectionDomain {
 
     /**
      * Convert a ProtectionDomain to a String.
+     * <p>
+     *  将ProtectionDomain转换为字符串。
+     * 
      */
     @Override public String toString() {
         String pals = "<no principals>";
@@ -329,6 +392,14 @@ public class ProtectionDomain {
      * . SecurityManager is not null,
      *          debug is null,
      *          caller has Policy.getPolicy permission
+     * <p>
+     *  在以下情况下返回true(合并策略权限)：
+     * 
+     *  。 SecurityManager为null
+     * 
+     *  。
+     *  SecurityManager不为null,调试不为null,SecurityManager impelmentation在bootclasspath中,策略实现在bootclasspath(boot
+     * classpath限制避免递归)。
      */
     private static boolean seeAllp() {
         SecurityManager sm = System.getSecurityManager();
@@ -446,6 +517,11 @@ public class ProtectionDomain {
 
     /**
      * Used for storing ProtectionDomains as keys in a Map.
+     * <p>
+     *  。
+     * 
+     *  。 SecurityManager不为null,调试为null,调用者具有Policy.getPolicy权限
+     * 
      */
     final class Key {}
 

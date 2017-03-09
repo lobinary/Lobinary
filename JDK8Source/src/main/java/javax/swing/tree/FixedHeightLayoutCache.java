@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,13 @@ import sun.swing.SwingUtilities2;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  注意：这将在未来的版本中变得更加开放。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Scott Violet
  */
 
@@ -59,16 +67,25 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Used in getting sizes for nodes to avoid creating a new Rectangle
      * every time a size is needed.
+     * <p>
+     *  用于获取节点的大小,以避免在每次需要大小时创建新的矩形。
+     * 
      */
     private Rectangle          boundsBuffer;
 
     /**
      * Maps from TreePath to a FHTreeStateNode.
+     * <p>
+     *  从TreePath映射到FHTreeStateNode。
+     * 
      */
     private Hashtable<TreePath, FHTreeStateNode> treePathMapping;
 
     /**
      * Used for getting path/row information.
+     * <p>
+     *  用于获取路径/行信息。
+     * 
      */
     private SearchInfo         info;
 
@@ -87,6 +104,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Sets the TreeModel that will provide the data.
      *
+     * <p>
+     *  设置将提供数据的TreeModel。
+     * 
+     * 
      * @param newModel the TreeModel that is to provide the data
      */
     public void setModel(TreeModel newModel) {
@@ -98,6 +119,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * Determines whether or not the root node from
      * the TreeModel is visible.
      *
+     * <p>
+     *  确定来自TreeModel的根节点是否可见。
+     * 
+     * 
      * @param rootVisible true if the root node of the tree is to be displayed
      * @see #rootVisible
      */
@@ -122,6 +147,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * Sets the height of each cell. If rowHeight is less than or equal to
      * 0 this will throw an IllegalArgumentException.
      *
+     * <p>
+     *  设置每个单元格的高度。如果rowHeight小于或等于0,这将抛出IllegalArgumentException。
+     * 
+     * 
      * @param rowHeight the height of each cell, in pixels
      */
     public void setRowHeight(int rowHeight) {
@@ -135,6 +164,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Returns the number of visible rows.
+     * <p>
+     *  返回可见行的数量。
+     * 
      */
     public int getRowCount() {
         return rowCount;
@@ -143,6 +175,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Does nothing, FixedHeightLayoutCache doesn't cache width, and that
      * is all that could change.
+     * <p>
+     *  什么都不做,FixedHeightLayoutCache不缓存宽度,这是所有可能改变。
+     * 
      */
     public void invalidatePathBounds(TreePath path) {
     }
@@ -151,6 +186,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Informs the TreeState that it needs to recalculate all the sizes
      * it is referencing.
+     * <p>
+     *  通知TreeState它需要重新计算它引用的所有大小。
+     * 
      */
     public void invalidateSizes() {
         // Nothing to do here, rowHeight still same, which is all
@@ -160,6 +198,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
       * Returns true if the value identified by row is currently expanded.
+      * <p>
+      *  如果由行标​​识的值当前已展开,则返回true。
+      * 
       */
     public boolean isExpanded(TreePath path) {
         if(path != null) {
@@ -173,6 +214,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Returns a rectangle giving the bounds needed to draw path.
      *
+     * <p>
+     *  返回一个给出绘制路径所需的边界的矩形。
+     * 
+     * 
      * @param path     a TreePath specifying a node
      * @param placeIn  a Rectangle object giving the available space
      * @return a Rectangle object specifying the space to be used
@@ -204,6 +249,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
       * Returns the path for passed in row.  If row is not visible
       * null is returned.
+      * <p>
+      *  返回在行中传递的路径。如果行不可见,则返回null。
+      * 
       */
     public TreePath getPathForRow(int row) {
         if(row >= 0 && row < getRowCount()) {
@@ -218,6 +266,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
       * Returns the row that the last item identified in path is visible
       * at.  Will return -1 if any of the elements in path are not
       * currently visible.
+      * <p>
+      * 返回在路径中标识的最后一个项目所在的行在哪里可见。如果路径中的任何元素当前不可见,将返回-1。
+      * 
       */
     public int getRowForPath(TreePath path) {
         if(path == null || root == null)
@@ -245,6 +296,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
       * it'll always return a valid path.  If you need to test if the
       * returned object is exactly at x, y you should get the bounds for
       * the returned path and test x, y against that.
+      * <p>
+      *  返回最接近x,y的节点的路径。如果目前没有可见的,这将返回null,否则它将总是返回一个有效的路径。如果你需要测试返回的对象是否正好在x,y,你应该得到返回的路径的边界,并测试x,y。
+      * 
       */
     public TreePath getPathClosestTo(int x, int y) {
         if(getRowCount() == 0)
@@ -257,6 +311,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Returns the number of visible children for row.
+     * <p>
+     *  返回行的可见子项数。
+     * 
      */
     public int getVisibleChildCount(TreePath path) {
         FHTreeStateNode         node = getNodeForPath(path, true, false);
@@ -270,6 +327,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * Returns an Enumerator that increments over the visible paths
      * starting at the passed in location. The ordering of the enumeration
      * is based on how the paths are displayed.
+     * <p>
+     *  返回一个枚举器,在从传入位置开始的可见路径上递增。枚举的排序基于如何显示路径。
+     * 
      */
     public Enumeration<TreePath> getVisiblePathsFrom(TreePath path) {
         if(path == null)
@@ -294,6 +354,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Marks the path <code>path</code> expanded state to
      * <code>isExpanded</code>.
+     * <p>
+     *  将路径<code> path </code>扩展状态标记为<code> isExpanded </code>。
+     * 
      */
     public void setExpandedState(TreePath path, boolean isExpanded) {
         if(isExpanded)
@@ -319,6 +382,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Returns true if the path is expanded, and visible.
+     * <p>
+     *  如果路径已展开,则返回true,并且可见。
+     * 
      */
     public boolean getExpandedState(TreePath path) {
         FHTreeStateNode       node = getNodeForPath(path, true, false);
@@ -342,6 +408,14 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * <p>e.path() returns the path the parent of the changed node(s).</p>
      *
      * <p>e.childIndices() returns the index(es) of the changed node(s).</p>
+     * <p>
+     *  <p>在某个节点(或一组兄弟节点)以某种方式更改后调用。节点没有改变树中的位置或改变它们的子数组,但是其他属性已经改变并且可能影响呈现。示例：文件的名称已更改,但它位于文件系统中的相同位置。
+     * </p>。
+     * 
+     *  <p> e.path()返回变更节点的父节点的路径。</p>
+     * 
+     *  <p> e.childIndices()返回变更节点的索引。</p>
+     * 
      */
     public void treeNodesChanged(TreeModelEvent e) {
         if(e != null) {
@@ -352,6 +426,8 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
             changedIndexs = e.getChildIndices();
             /* Only need to update the children if the node has been
+            /* <p>
+            /* 
                expanded once. */
             // PENDING(scott): make sure childIndexs is sorted!
             if (changedParent != null) {
@@ -386,6 +462,11 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * <p>e.path() returns the parent of the new nodes
      * <p>e.childIndices() returns the indices of the new nodes in
      * ascending order.
+     * <p>
+     *  <p>在树已插入节点后调用。</p>
+     * 
+     *  <p> e.path()返回新节点的父节点<p> e.childIndices()以升序返回新节点的索引。
+     * 
      */
     public void treeNodesInserted(TreeModelEvent e) {
         if(e != null) {
@@ -396,6 +477,8 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
             changedIndexs = e.getChildIndices();
             /* Only need to update the children if the node has been
+            /* <p>
+            /* 
                expanded once. */
             // PENDING(scott): make sure childIndexs is sorted!
             if(changedParent != null && changedIndexs != null &&
@@ -425,6 +508,13 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * <p>e.path() returns the former parent of the deleted nodes.</p>
      *
      * <p>e.childIndices() returns the indices the nodes had before they were deleted in ascending order.</p>
+     * <p>
+     * <p>在从树中删除节点后调用。注意,如果从树中删除子树,则该方法对于删除的子树的根可以只被调用一次,而对于去除的每个兄弟姐妹的每个集合不能被调用一次。</p>
+     * 
+     *  <p> e.path()返回已删除节点的前父节点。</p>
+     * 
+     *  <p> e.childIndices()返回节点在以升序删除之前所具有的索引。</p>
+     * 
      */
     public void treeNodesRemoved(TreeModelEvent e) {
         if(e != null) {
@@ -473,6 +563,11 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      *
      * <p>e.path() holds the path to the node.</p>
      * <p>e.childIndices() returns null.</p>
+     * <p>
+     *  <p>在树已从给定节点向下大幅更改结构后调用。如果e.getPath()返回的路径长度为1,并且第一个元素不标识当前根节点,则第一个元素应该成为树的新根。
+     * 
+     *  <p> e.path()包含节点的路径。</p> <p> e.childIndices()返回null。</p>
+     * 
      */
     public void treeStructureChanged(TreeModelEvent e) {
         if(e != null) {
@@ -528,6 +623,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * Returns the bounds for the given node. If <code>childIndex</code>
      * is -1, the bounds of <code>parent</code> are returned, otherwise
      * the bounds of the node at <code>childIndex</code> are returned.
+     * <p>
+     *  返回给定节点的边界。
+     * 如果<code> childIndex </code>为-1,则返回<code> parent </code>的边界,否则返回<code> childIndex </code>节点的边界。
+     * 
      */
     private Rectangle getBounds(FHTreeStateNode parent, int childIndex,
                                   Rectangle placeIn) {
@@ -569,6 +668,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Adjust the large row count of the AbstractTreeUI the receiver was
      * created with.
+     * <p>
+     *  调整创建接收器的AbstractTreeUI的大行数。
+     * 
      */
     private void adjustRowCountBy(int changeAmount) {
         rowCount += changeAmount;
@@ -576,6 +678,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Adds a mapping for node.
+     * <p>
+     *  为节点添加映射。
+     * 
      */
     private void addMapping(FHTreeStateNode node) {
         treePathMapping.put(node.getTreePath(), node);
@@ -583,6 +688,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Removes the mapping for a previously added node.
+     * <p>
+     *  删除先前添加的节点的映射。
+     * 
      */
     private void removeMapping(FHTreeStateNode node) {
         treePathMapping.remove(node.getTreePath());
@@ -591,6 +699,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
     /**
      * Returns the node previously added for <code>path</code>. This may
      * return null, if you to create a node use getNodeForPath.
+     * <p>
+     *  返回先前为<code> path </code>添加的节点。这可能返回null,如果你创建一个节点使用getNodeForPath。
+     * 
      */
     private FHTreeStateNode getMapping(TreePath path) {
         return treePathMapping.get(path);
@@ -598,6 +709,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Sent to completely rebuild the visible tree. All nodes are collapsed.
+     * <p>
+     *  发送完全重建可见树。所有节点都已折叠。
+     * 
      */
     private void rebuild(boolean clearSelection) {
         Object            rootUO;
@@ -631,6 +745,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
       * Returns the index of the row containing location.  If there
       * are no rows, -1 is returned.  If location is beyond the last
       * row index, the last row index is returned.
+      * <p>
+      *  返回包含位置的行的索引。如果没有行,则返回-1。如果位置超出最后一行索引,则返回最后一行索引。
+      * 
       */
     private int getRowContainingYLocation(int location) {
         if(getRowCount() == 0)
@@ -644,6 +761,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * for the last component which will only be expanded if expandLast
      * is true.
      * Returns true if succesful in finding the path.
+     * <p>
+     * 确保路径中的所有路径组件都被展开,接受最后一个组件,只有在expandLast为true时才会展开。如果成功找到路径,则返回true。
+     * 
      */
     private boolean ensurePathIsExpanded(TreePath aPath,
                                            boolean expandLast) {
@@ -670,6 +790,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Creates and returns an instance of FHTreeStateNode.
+     * <p>
+     *  创建并返回FHTreeStateNode的实例。
+     * 
      */
     private FHTreeStateNode createNodeForValue(Object value,int childIndex) {
         return new FHTreeStateNode(value, childIndex, -1);
@@ -679,6 +802,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * Messages getTreeNodeForPage(path, onlyIfVisible, shouldCreate,
      * path.length) as long as path is non-null and the length is {@literal >} 0.
      * Otherwise returns null.
+     * <p>
+     *  消息getTreeNodeForPage(path,onlyIfVisible,shouldCreate,path.length),只要路径为非空,长度为{@literal>} 0。
+     * 否则返回null。
+     * 
      */
     private FHTreeStateNode getNodeForPath(TreePath path,
                                              boolean onlyIfVisible,
@@ -741,6 +868,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
      * in that it is highly model intensive. That is almost all queries to a
      * FHTreeStateNode result in the TreeModel being queried. And it
      * obviously does not support variable sized row heights.
+     * <p>
+     *  FHTreeStateNode用于跟踪已扩展的内容。 FHTreeStateNode不同于VariableHeightTreeState.TreeStateNode,因为它是高度模型密集型。
+     * 这几乎是对正在查询的TreeModel中的FHTreeStateNode结果的所有查询。它显然不支持可变大小的行高。
+     * 
      */
     private class FHTreeStateNode extends DefaultMutableTreeNode {
         /** Is this node expanded? */
@@ -753,6 +884,7 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         protected int             childCount;
 
         /** Row of the receiver. This is only valid if the row is expanded.
+        /* <p>
          */
         protected int             row;
 
@@ -773,6 +905,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Messaged when this node is added somewhere, resets the path
          * and adds a mapping from path to this node.
+         * <p>
+         *  在将此节点添加到某处时发生消息,重置路径并添加从路径到此节点的映射。
+         * 
          */
         public void setParent(MutableTreeNode parent) {
             super.setParent(parent);
@@ -786,6 +921,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Messaged when this node is removed from its parent, this messages
          * <code>removedFromMapping</code> to remove all the children.
+         * <p>
+         *  当此节点从其父级删除时,此消息会消失,此消息<code> removedFromMapping </code>可删除所有子级。
+         * 
          */
         public void remove(int childIndex) {
             FHTreeStateNode     node = (FHTreeStateNode)getChildAt(childIndex);
@@ -796,6 +934,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Messaged to set the user object. This resets the path.
+         * <p>
+         *  Messaged设置用户对象。这将重置路径。
+         * 
          */
         public void setUserObject(Object o) {
             super.setUserObject(o);
@@ -814,6 +955,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns the index of the receiver in the model.
+         * <p>
+         *  返回模型中接收器的索引。
+         * 
          */
         public int getChildIndex() {
             return childIndex;
@@ -821,6 +965,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns the <code>TreePath</code> of the receiver.
+         * <p>
+         *  返回接收器的<code> TreePath </code>。
+         * 
          */
         public TreePath getTreePath() {
             return path;
@@ -830,6 +977,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * Returns the child for the passed in model index, this will
          * return <code>null</code> if the child for <code>index</code>
          * has not yet been created (expanded).
+         * <p>
+         *  返回传递给模型索引的子元素,如果<code> index </code>的子元素尚未创建(展开),则返回<code> null </code>。
+         * 
          */
         public FHTreeStateNode getChildAtModelIndex(int index) {
             // PENDING: Make this a binary search!
@@ -842,6 +992,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Returns true if this node is visible. This is determined by
          * asking all the parents if they are expanded.
+         * <p>
+         *  如果此节点可见,则返回true。这是通过询问所有的父母如果他们被扩展确定。
+         * 
          */
         public boolean isVisible() {
             FHTreeStateNode         parent = (FHTreeStateNode)getParent();
@@ -853,6 +1006,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns the row of the receiver.
+         * <p>
+         *  返回接收器的行。
+         * 
          */
         public int getRow() {
             return row;
@@ -861,6 +1017,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Returns the row of the child with a model index of
          * <code>index</code>.
+         * <p>
+         *  返回模型索引为<code> index </code>的子元素的行。
+         * 
          */
         public int getRowToModelIndex(int index) {
             FHTreeStateNode      child;
@@ -887,6 +1046,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Returns the number of children in the receiver by descending all
          * expanded nodes and messaging them with getTotalChildCount.
+         * <p>
+         * 通过递减所有扩展节点并通过getTotalChildCount将它们发送消息来返回接收器中的子节点数。
+         * 
          */
         public int getTotalChildCount() {
             if(isExpanded()) {
@@ -919,6 +1081,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns true if this node is expanded.
+         * <p>
+         *  如果此节点已展开,则返回true。
+         * 
          */
         public boolean isExpanded() {
             return isExpanded;
@@ -926,6 +1091,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * The highest visible nodes have a depth of 0.
+         * <p>
+         *  最高可见节点的深度为0。
+         * 
          */
         public int getVisibleLevel() {
             if (isRootVisible()) {
@@ -937,6 +1105,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Recreates the receivers path, and all its children's paths.
+         * <p>
+         *  重新创建接收器路径及其所有子路径。
+         * 
          */
         protected void resetChildrenPaths(TreePath parentPath) {
             removeMapping(this);
@@ -953,6 +1124,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Removes the receiver, and all its children, from the mapping
          * table.
+         * <p>
+         *  从映射表中删除接收方及其所有子项。
+         * 
          */
         protected void removeFromMapping() {
             if(path != null) {
@@ -966,6 +1140,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * Creates a new node to represent <code>userObject</code>.
          * This does NOT check to ensure there isn't already a child node
          * to manage <code>userObject</code>.
+         * <p>
+         *  创建一个新节点来表示<code> userObject </code>。这不检查以确保还没有一个子节点来管理<code> userObject </code>。
+         * 
          */
         protected FHTreeStateNode createChildFor(Object userObject) {
             int      newChildIndex = treeModel.getIndexOfChild
@@ -1001,6 +1178,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Adjusts the receiver, and all its children rows by
          * <code>amount</code>.
+         * <p>
+         *  通过<code> amount </code>调整接收器及其所有子行。
+         * 
          */
         protected void adjustRowBy(int amount) {
             row += amount;
@@ -1016,6 +1196,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * an index of <code>index</code> index is the index of the child
          * to start adjusting from, which is not necessarily the model
          * index.
+         * <p>
+         *  从<code> index </code> index的索引开始调整此节点及其子节点及其父节点是子节点开始调整的索引,它不一定是模型索引。
+         * 
          */
         protected void adjustRowBy(int amount, int startIndex) {
             // Could check isVisible, but probably isn't worth it.
@@ -1036,6 +1219,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Messaged when the node has expanded. This updates all of
          * the receivers children rows, as well as the total row count.
+         * <p>
+         *  节点扩展时消息。这会更新所有接收器子行,以及总行数。
+         * 
          */
         protected void didExpand() {
             int               nextRow = setRowAndChildren(row);
@@ -1052,6 +1238,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * Sets the receivers row to <code>nextRow</code> and recursively
          * updates all the children of the receivers rows. The index the
          * next row is to be placed as is returned.
+         * <p>
+         *  将接收器行设置为<code> nextRow </code>,并递归更新接收器行的所有子节点。索引下一行将被放置为返回。
+         * 
          */
         protected int setRowAndChildren(int nextRow) {
             row = nextRow;
@@ -1084,6 +1273,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * <code>newRow</code>. This uses <code>setRowAndChildren</code>
          * to recursively descend children, and uses
          * <code>resetRowSelection</code> to ascend parents.
+         * <p>
+         *  重置接收器的子行。从<code> childIndex </code>(和<code> modelIndex </code>)到<code> newRow </code>的子代开始。
+         * 这使用<code> setRowAndChildren </code>递归下降子级,并使用<code> resetRowSelection </code>来升级父级。
+         * 
          */
         // This can be rather expensive, but is needed for the collapse
         // case this is resulting from a remove (although I could fix
@@ -1122,6 +1315,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Makes the receiver visible, but invoking
          * <code>expandParentAndReceiver</code> on the superclass.
+         * <p>
+         *  使接收者可见,但调用超类上的<code> expandParentAndReceiver </code>。
+         * 
          */
         protected void makeVisible() {
             FHTreeStateNode       parent = (FHTreeStateNode)getParent();
@@ -1133,6 +1329,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Invokes <code>expandParentAndReceiver</code> on the parent,
          * and expands the receiver.
+         * <p>
+         * 在父级上调用<code> expandParentAndReceiver </code>,然后展开接收者。
+         * 
          */
         protected void expandParentAndReceiver() {
             FHTreeStateNode       parent = (FHTreeStateNode)getParent();
@@ -1144,6 +1343,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Expands the receiver.
+         * <p>
+         *  扩展接收器。
+         * 
          */
         protected void expand() {
             if(!isExpanded && !isLeaf()) {
@@ -1166,6 +1368,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Collapses the receiver. If <code>adjustRows</code> is true,
          * the rows of nodes after the receiver are adjusted.
+         * <p>
+         *  折叠接收器。如果<code> adjustRows </code>为true,则调整接收器后的节点行。
+         * 
          */
         protected void collapse(boolean adjustRows) {
             if(isExpanded) {
@@ -1188,6 +1393,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Returns true if the receiver is a leaf.
+         * <p>
+         *  如果接收器是叶子,则返回true。
+         * 
          */
         public boolean isLeaf() {
             TreeModel model = getModel();
@@ -1199,6 +1407,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Adds newChild to this nodes children at the appropriate location.
          * The location is determined from the childIndex of newChild.
+         * <p>
+         *  将newChild添加到此节点中适当位置的子节点。位置是从newChild的childIndex确定的。
+         * 
          */
         protected void addNode(FHTreeStateNode newChild) {
             boolean         added = false;
@@ -1221,6 +1432,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * Removes the child at <code>modelIndex</code>.
          * <code>isChildVisible</code> should be true if the receiver
          * is visible and expanded.
+         * <p>
+         *  在<code> modelIndex </code>中删除子项。 <code> isChildVisible </code>应该为true,如果接收器是可见的和展开。
+         * 
          */
         protected void removeChildAtModelIndex(int modelIndex,
                                                boolean isChildVisible) {
@@ -1273,6 +1487,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Adjusts the child indexs of the receivers children by
          * <code>amount</code>, starting at <code>index</code>.
+         * <p>
+         *  从<code> index </code>开始,通过<code> amount </code>调整接收器子代的子索引。
+         * 
          */
         protected void adjustChildIndexs(int index, int amount) {
             for(int counter = index, maxCounter = getChildCount();
@@ -1285,6 +1502,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * Messaged when a child has been inserted at index. For all the
          * children that have a childIndex &ge; index their index is incremented
          * by one.
+         * <p>
+         *  在索引处插入子代时发生消息。对于所有有childIndex&ge的孩子;索引,它们的索引增加1。
+         * 
          */
         protected void childInsertedAtModelIndex(int index,
                                                boolean isExpandedAndVisible) {
@@ -1299,6 +1519,8 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
                         adjustRowCountBy(1);
                     }
                     /* Since matched and children are always sorted by
+                    /* <p>
+                    /* 
                        index, no need to continue testing with the above. */
                     for(; counter < maxCounter; counter++)
                         ((FHTreeStateNode)getChildAt(counter)).childIndex++;
@@ -1321,6 +1543,10 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * Information about the found row is returned in <code>info</code>.
          * This should be invoked on root with <code>nextRow</code> set
          * to <code>getRowCount</code>().
+         * <p>
+         *  如果<code> row </code>中有一行,则返回true。 <code> nextRow </code>给出接收器的边界。有关找到的行的信息在<code> info </code>中返回。
+         * 这应该在根上调用<code> nextRow </code>设置为<code> getRowCount </code>()。
+         * 
          */
         protected boolean getPathForRow(int row, int nextRow,
                                         SearchInfo info) {
@@ -1398,6 +1624,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Asks all the children of the receiver for their totalChildCount
          * and returns this value (plus stopIndex).
+         * <p>
+         *  询问接收器的所有子节点的totalChildCount,并返回这个值(加上stopIndex)。
+         * 
          */
         protected int getCountTo(int stopIndex) {
             FHTreeStateNode    aChild;
@@ -1424,6 +1653,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
          * <code>stopIndex</code>. This does not include the number
          * of children that the child at <code>stopIndex</code> might
          * have.
+         * <p>
+         *  返回展开到<code> stopIndex </code>的子级数。这不包括<code> stopIndex </code>的子级可能具有的子级数。
+         * 
          */
         protected int getNumExpandedChildrenTo(int stopIndex) {
             FHTreeStateNode    aChild;
@@ -1443,6 +1675,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
         /**
          * Messaged when this node either expands or collapses.
+         * <p>
+         *  此节点展开或折叠时消失。
+         * 
          */
         protected void didAdjustTree() {
         }
@@ -1452,6 +1687,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * Used as a placeholder when getting the path in FHTreeStateNodes.
+     * <p>
+     *  在FHTreeStateNodes中获取路径时用作占位符。
+     * 
      */
     private class SearchInfo {
         protected FHTreeStateNode   node;
@@ -1473,6 +1711,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
 
     /**
      * An enumerator to iterate through visible nodes.
+     * <p>
+     *  枚举器,用于遍历可见节点。
+     * 
      */
     // This is very similar to
     // VariableHeightTreeState.VisibleTreeStateNodeEnumeration
@@ -1482,6 +1723,8 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /** Parent thats children are being enumerated. */
         protected FHTreeStateNode     parent;
         /** Index of next child. An index of -1 signifies parent should be
+        /* <p>
+        /* 
          * visibled next. */
         protected int                 nextIndex;
         /** Number of children in parent. */
@@ -1500,6 +1743,8 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         }
 
         /**
+        /* <p>
+        /* 
          * @return true if more visible nodes.
          */
         public boolean hasMoreElements() {
@@ -1507,6 +1752,8 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         }
 
         /**
+        /* <p>
+        /* 
          * @return next visible TreePath.
          */
         public TreePath nextElement() {
@@ -1534,6 +1781,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Determines the next object by invoking <code>updateNextIndex</code>
          * and if not succesful <code>findNextValidParent</code>.
+         * <p>
+         * 通过调用<code> updateNextIndex </code>确定下一个对象,如果不成功<code> findNextValidParent </code>。
+         * 
          */
         protected void updateNextObject() {
             if(!updateNextIndex()) {
@@ -1544,6 +1794,9 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Finds the next valid parent, this should be called when nextIndex
          * is beyond the number of children of the current parent.
+         * <p>
+         *  查找下一个有效的父对象,当nextIndex超出当前父对象的子对象数时,应调用此对象。
+         * 
          */
         protected boolean findNextValidParent() {
             if(parent == root) {
@@ -1572,6 +1825,8 @@ public class FixedHeightLayoutCache extends AbstractLayoutCache {
         /**
          * Updates <code>nextIndex</code> returning false if it is beyond
          * the number of children of parent.
+         * <p>
+         *  更新<code> nextIndex </code>如果超出父级的子级数,则返回false。
          */
         protected boolean updateNextIndex() {
             // nextIndex == -1 identifies receiver, make sure is expanded

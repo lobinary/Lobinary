@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util;
@@ -57,6 +61,21 @@ package java.util;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  这个类提供了一些{@link Queue}操作的骨架实现。当基本实现</em>不允许<tt> null </tt>元素时,此类中的实现是合适的。
+ * 方法{@link #add add},{@link #remove remove}和{@link #element element}基于{@link #offer offer},{@link #poll poll}
+ * 和{@link #peek peek},但是抛出异常而不是通过<tt> false </tt>或<tt> null </tt>返回指示失败。
+ *  这个类提供了一些{@link Queue}操作的骨架实现。当基本实现</em>不允许<tt> null </tt>元素时,此类中的实现是合适的。
+ * 
+ *  <p>扩展此类的<tt>队列</tt>实现必须最小限度地定义不允许插入<tt> null </tt>元素的方法{@link Queue#offer} link Queue#peek},{@link Queue#poll}
+ * ,{@link Collection#size}和{@link Collection#iterator}。
+ * 通常,其他方法也将被覆盖。如果不能满足这些要求,请考虑{@link AbstractCollection}子类化。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  * @param <E> the type of elements held in this collection
@@ -67,6 +86,9 @@ public abstract class AbstractQueue<E>
 
     /**
      * Constructor for use by subclasses.
+     * <p>
+     *  子类使用的构造方法。
+     * 
      */
     protected AbstractQueue() {
     }
@@ -80,6 +102,13 @@ public abstract class AbstractQueue<E>
      * <p>This implementation returns <tt>true</tt> if <tt>offer</tt> succeeds,
      * else throws an <tt>IllegalStateException</tt>.
      *
+     * <p>
+     * 如果可以在不违反容量限制的情况下立即执行此操作,则将指定的元素插入此队列,如果成功则返回<tt> true </tt>,如果当前没有可用空间,则抛出<tt> IllegalStateException 
+     * </tt>。
+     * 
+     *  <p>如果<tt>提供</tt>成功,此实现返回<tt> true </tt>,否则会抛出<tt> IllegalStateException </tt>。
+     * 
+     * 
      * @param e the element to add
      * @return <tt>true</tt> (as specified by {@link Collection#add})
      * @throws IllegalStateException if the element cannot be added at this
@@ -106,6 +135,12 @@ public abstract class AbstractQueue<E>
      * <p>This implementation returns the result of <tt>poll</tt>
      * unless the queue is empty.
      *
+     * <p>
+     *  检索并删除此队列的头。此方法与{@link #poll poll}不同之处仅在于,如果此队列为空,它会抛出异常。
+     * 
+     *  <p>此实现返回<tt> poll </tt>的结果,除非队列为空。
+     * 
+     * 
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
@@ -125,6 +160,12 @@ public abstract class AbstractQueue<E>
      * <p>This implementation returns the result of <tt>peek</tt>
      * unless the queue is empty.
      *
+     * <p>
+     *  检索,但不删除,这个队列的头。此方法与{@link #peek peek}的区别仅在于,如果此队列为空,它会抛出异常。
+     * 
+     *  <p>此实现返回<tt> peek </tt>的结果,除非队列为空。
+     * 
+     * 
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
@@ -142,6 +183,11 @@ public abstract class AbstractQueue<E>
      *
      * <p>This implementation repeatedly invokes {@link #poll poll} until it
      * returns <tt>null</tt>.
+     * <p>
+     *  从此队列中删除所有元素。此调用返回后,队列将为空。
+     * 
+     *  <p>此实现重复调用{@link #poll poll},直到它返回<tt> null </tt>。
+     * 
      */
     public void clear() {
         while (poll() != null)
@@ -163,6 +209,11 @@ public abstract class AbstractQueue<E>
      * having been successfully added when the associated exception is
      * thrown.
      *
+     * <p>
+     *  将指定集合中的所有元素添加到此队列。尝试将自己的所有队列添加到自身会导致<tt> IllegalArgumentException </tt>。
+     * 此外,如果在操作正在进行时修改指定的集合,则此操作的行为是未定义的。
+     * 
+     * 
      * @param c collection containing elements to be added to this queue
      * @return <tt>true</tt> if this queue changed as a result of the call
      * @throws ClassCastException if the class of an element of the specified

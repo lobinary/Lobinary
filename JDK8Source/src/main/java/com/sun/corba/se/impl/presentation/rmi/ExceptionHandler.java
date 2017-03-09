@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,9 @@ public interface ExceptionHandler
     /** Return true iff cls is an exception class that is
      * assignment compatible with an exception declared
      * on the method used to create this ExceptionHandler.
+     * <p>
+     *  赋值与在用于创建此ExceptionHandler的方法上声明的异常兼容。
+     * 
      */
     boolean isDeclaredException( Class cls ) ;
 
@@ -42,6 +46,9 @@ public interface ExceptionHandler
      * compatible with an exception
      * declared on the method used to create this
      * ExceptionHandler.
+     * <p>
+     *  与在用于创建此ExceptionHandler的方法上声明的异常兼容。
+     * 
      */
     void writeException( OutputStream os, Exception ex ) ;
 
@@ -52,6 +59,8 @@ public interface ExceptionHandler
      * exception handler, return the exception,
      * otherwise return an UnexpectedException wrapping
      * the exception in ae.
+     * <p>
+     *  在ApplicationException。如果ae表示与用于创建此异常处理程序的方法上的异常兼容的异常,则返回异常,否则返回UnexpectedException,将异常封装在ae中。
      */
     Exception readException( ApplicationException ae ) ;
 }

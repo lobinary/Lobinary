@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -182,6 +183,74 @@ import sun.security.jca.GetInstance;
  * Java Cryptography Architecture Standard Algorithm Name Documentation</a>
  * for a list of standard Configuration types.
  *
+ * <p>
+ *  Configuration对象负责指定应为特定应用程序使用哪些LoginModules,以及应以什么顺序调用LoginModules。
+ * 
+ *  <p>登录配置包含以下信息。请注意,此示例仅表示{@code Configuration}的默认语法。
+ * 这个类的子类实现可以实现替代语法,并且可以从任何源(例如文件,数据库或服务器)检索{@code Configuration}。
+ * 
+ * <pre>
+ *  名称{ModuleClass Flag ModuleOptions; ModuleClass Flag ModuleOptions; ModuleClass Flag ModuleOptions; }
+ * ;名称{ModuleClass Flag ModuleOptions; ModuleClass Flag ModuleOptions; };其他{ModuleClass Flag ModuleOptions; ModuleClass Flag ModuleOptions; }
+ * ;。
+ * </pre>
+ * 
+ *  <p> {@code Configuration}中的每个条目都通过应用程序名称<i> Name </i>进行索引,并包含为该应用程序配置的LoginModule列表。
+ * 每个{@code LoginModule}通过其完全限定类名指定。认证按照指定的顺序沿着模块列表向下进行。如果应用程序没有特定条目,则默认为"<i>其他</i>"的特定条目。
+ * 
+ * <p> <i> </i>值控制当认证沿着堆栈向下进行时的整体行为。以下代表对<i> Flag </i>及其相应语义的有效值的描述：
+ * 
+ * <pre>
+ *  1)必需 - 需要{@code LoginModule}才能成功。如果成功或失败,身份验证仍将继续沿着{@code LoginModule}列表进行。
+ * 
+ *  2)必需 - 需要{@code LoginModule}才能成功。如果成功,身份验证会在{@code LoginModule}列表中继续。
+ * 如果失败,控制立即返回到应用程序(认证不会沿着{@code LoginModule}列表进行)。
+ * 
+ *  3)足够 - 不要求{@code LoginModule}成功。如果它成功,控制立即返回到应用程序(认证不会沿着{@code LoginModule}列表进行)。
+ * 如果失败,身份验证将在{@code LoginModule}列表中继续。
+ * 
+ *  4)可选 -  {@code LoginModule}不是必需的成功。如果成功或失败,身份验证仍将继续沿着{@code LoginModule}列表进行。
+ * </pre>
+ * 
+ * <p>只有当所有<i>必需</i>和<i> Requisite </i> LoginModules成功时,整个身份验证才会成功。
+ * 如果配置了<i>足够</i> {@code LoginModule}并成功,则只有<i>必需</i>和<i>必需</i>登录模块, i> {@code LoginModule}需要成功才能使整个身份验证
+ * 成功。
+ * <p>只有当所有<i>必需</i>和<i> Requisite </i> LoginModules成功时,整个身份验证才会成功。
+ * 如果没有为应用程序配置<i>必需</i>或<i>必需</i>登录模块,则至少要有一个<i>足够</i>或<i>可选</i> {@code LoginModule}必须成功。
+ * 
+ *  <p> <i> ModuleOptions </i>是一个空格分隔的{@code LoginModule}特定值列表,它们直接传递给底层的LoginModules。
+ * 选项由{@code LoginModule}本身定义,并控制其中的行为。例如,{@code LoginModule}可以定义支持调试/测试功能的选项。
+ * 在{@code Configuration}中指定选项的正确方法是使用以下键值对：<i> debug ="true"</i>。键和值应由"等号"符号分隔,并且值应该用双引号括起来。
+ * 如果在值中出现形式为$ {system.property}的字符串,它将扩展为系统属性的值。请注意,{@code LoginModule}可能定义的选项数量没有限制。
+ * 
+ *  <p>以下代表基于上述语法的{@code Configuration}条目：
+ * 
+ * <pre>
+ * 登录{com.sun.security.auth.module.UnixLoginModule必需; com.sun.security.auth.module.Krb5LoginModule可选useTicketCache ="true"ticketCache ="$ {user.home}
+ *  $ {/} ticket"; };。
+ * </pre>
+ * 
+ *  <p>此{@code Configuration}指定名为"登录"的应用程序要求用户首先对<i> com.sun.security.auth.module.UnixLoginModule </i>进行
+ * 身份验证,这是成功所必需的。
+ * 即使<i> UnixLoginModule </i>身份验证失败,仍会调用<i> com.sun.security.auth.module.Krb5LoginModule </i>。
+ * 这有助于隐藏故障源。
+ * 由于<i> Krb5LoginModule </i>是<i>可选</i>,因此只有在<i> UnixLoginModule </i>(<i>必需</i>)成功时,整个身份验证才会成功。
+ * 
+ *  <p>另请注意,特定于LoginModule的选项<i> useTicketCache ="true"</i>和<i> ticketCache = $ {user.home} $ {/}票证</i>这
+ * 些选项指示<b> Krb5LoginModule </i>在指定位置使用票证缓存。
+ * 系统属性<i> user.home </i>和<i> / </i>(file.separator),展开为各自的值。
+ * 
+ *  <p>在任何给定时间,在运行时中只安装一个Configuration对象。可以通过调用{@code setConfiguration}方法安装Configuration对象。
+ * 可以通过调用{@code getConfiguration}方法获取已安装的配置对象。
+ * 
+ * <p>如果在运行时中没有安装配置对象,调用{@code getConfiguration}会安装默认配置实现(这个抽象类的默认子类实现)的实例。
+ * 可以通过将{@code login.configuration.provider}安全属性的值设置为所需配置子类实现的完全限定名称来更改默认配置实现。
+ * 
+ *  <p>应用程序代码可以直接子类化配置以提供自定义实现。此外,可以通过调用具有标准类型的{@code getInstance}工厂方法之一来构造Configuration对象的实例。
+ * 默认策略类型为"JavaLoginConfig"。请参阅<a href =中的配置部分。
+ * "{@docRoot}/../technotes/guides/security/StandardNames.html#Configuration">
+ *  Java加密架构标准算法名称文档</a>,以获取标准配置类型的列表。
+ * 
  * @see javax.security.auth.login.LoginContext
  * @see java.security.Security security properties
  */
@@ -203,6 +272,8 @@ public abstract class Configuration {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     * 
      */
     protected Configuration() { }
 
@@ -211,6 +282,10 @@ public abstract class Configuration {
      *
      * <p>
      *
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
+     * 
      * @return the login Configuration.  If a Configuration object was set
      *          via the {@code Configuration.setConfiguration} method,
      *          then that object is returned.  Otherwise, a default
@@ -289,6 +364,12 @@ public abstract class Configuration {
      *
      * <p>
      *
+     * <p>
+     *  获取安装的登录配置。
+     * 
+     * <p>
+     * 
+     * 
      * @param configuration the new {@code Configuration}
      *
      * @exception SecurityException if the current thread does not have
@@ -315,6 +396,12 @@ public abstract class Configuration {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  设置登录{@code Configuration}。
+     * 
+     * <p>
+     * 
+     * 
      * @param type the specified Configuration type.  See the Configuration
      *    section in the <a href=
      *    "{@docRoot}/../technotes/guides/security/StandardNames.html#Configuration">
@@ -371,6 +458,14 @@ public abstract class Configuration {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回指定类型的配置对象。
+     * 
+     *  <p>此方法遍历注册的安全提供程序列表,从最优先的提供程序开始。将返回一个新的Configuration对象,用于封装来自支持指定类型的第一个Provider的ConfigurationSpi实现。
+     * 
+     * <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param type the specified Configuration type.  See the Configuration
      *    section in the <a href=
      *    "{@docRoot}/../technotes/guides/security/StandardNames.html#Configuration">
@@ -437,6 +532,14 @@ public abstract class Configuration {
      * object is returned.  Note that the specified Provider object
      * does not have to be registered in the provider list.
      *
+     * <p>
+     *  返回指定类型的配置对象。
+     * 
+     *  <p>将返回一个新的Configuration对象,用于封装来自指定提供程序的ConfigurationSpi实现。指定的提供程序必须在提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param type the specified Configuration type.  See the Configuration
      *    section in the <a href=
      *    "{@docRoot}/../technotes/guides/security/StandardNames.html#Configuration">
@@ -507,6 +610,12 @@ public abstract class Configuration {
      * was obtained via a call to {@code Configuration.getInstance}.
      * Otherwise this method returns null.
      *
+     * <p>
+     *  返回指定类型的配置对象。
+     * 
+     *  <p>返回一个新的Configuration对象,用于封装来自指定的Provider对象的ConfigurationSpi实现。请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     * 
      * @return the Provider of this Configuration, or null.
      *
      * @since 1.6
@@ -522,6 +631,12 @@ public abstract class Configuration {
      * was obtained via a call to {@code Configuration.getInstance}.
      * Otherwise this method returns null.
      *
+     * <p>
+     *  返回此配置的提供程序。
+     * 
+     *  <p>此配置实例将只有一个提供者,如果它是通过调用{@code Configuration.getInstance}获得。否则,此方法返回null。
+     * 
+     * 
      * @return the type of this Configuration, or null.
      *
      * @since 1.6
@@ -537,6 +652,12 @@ public abstract class Configuration {
      * was obtained via a call to {@code Configuration.getInstance}.
      * Otherwise this method returns null.
      *
+     * <p>
+     *  返回此配置的类型。
+     * 
+     *  <p>此配置实例将只有一个类型,如果它是通过调用{@code Configuration.getInstance}获得的。否则,此方法返回null。
+     * 
+     * 
      * @return Configuration parameters, or null.
      *
      * @since 1.6
@@ -551,6 +672,12 @@ public abstract class Configuration {
      *
      * <p>
      *
+     * <p>
+     *  返回配置参数。
+     * 
+     *  <p>此配置实例只有通过调用{@code Configuration.getInstance}获得的参数。否则,此方法返回null。
+     * 
+     * 
      * @param name the name used to index the Configuration.
      *
      * @return an array of AppConfigurationEntries for the specified <i>name</i>
@@ -572,6 +699,12 @@ public abstract class Configuration {
      * This method should be overridden if a refresh operation is supported
      * by the implementation.
      *
+     * <p>
+     *  从此配置中检索指定<i>名称</i>的AppConfigurationEntries。
+     * 
+     * <p>
+     * 
+     * 
      * @exception SecurityException if the caller does not have permission
      *                          to refresh its Configuration.
      */
@@ -580,6 +713,13 @@ public abstract class Configuration {
     /**
      * This subclass is returned by the getInstance calls.  All Configuration
      * calls are delegated to the underlying ConfigurationSpi.
+     * <p>
+     * 刷新并重新加载配置。
+     * 
+     *  <p>此方法导致此配置对象以实现相关方式刷新/重新加载其内容。例如,如果此配置对象将其条目存储在文件中,则调用{@code refresh}可能会导致该文件被重新读取。
+     * 
+     *  <p>此方法的默认实现不执行任何操作。如果实现支持刷新操作,则应覆盖此方法。
+     * 
      */
     private static class ConfigDelegate extends Configuration {
 
@@ -614,6 +754,8 @@ public abstract class Configuration {
     /**
      * This represents a marker interface for Configuration parameters.
      *
+     * <p>
+     * 
      * @since 1.6
      */
     public static interface Parameters { }

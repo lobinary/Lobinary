@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,13 @@ import java.util.Set;
  * user to set a preference order for service provider objects
  * supplied by a trusted vendor over those supplied by another.
  *
+ * <p>
+ *  一组<code> Object </code>,在它们之间具有成对排序。 <code> iterator </code>方法以拓扑排序的顺序提供元素。不返回参与循环的元素。
+ * 
+ *  与需要它们的元素实现<code> Comparable </code>接口的<code> SortedSet </code>和<code> SortedMap </code>接口不同,此类通过其<code>
+ *  setOrdering < / code>和<code> unsetPreference </code>方法。
+ * 这种差异是由于元件之间的相关排序不可能是元件本身固有的;而是根据应用策略动态设置。例如,在服务提供商注册表情况下,应用可以允许用户针对由另一方提供的服务提供商对象提供的服务提供商对象设置优先顺序。
+ * 
  */
 class PartiallyOrderedSet extends AbstractSet {
 
@@ -65,6 +73,9 @@ class PartiallyOrderedSet extends AbstractSet {
 
     /**
      * Constructs a <code>PartiallyOrderedSet</code>.
+     * <p>
+     *  构造一个<code> PartiallyOrderedSet </code>。
+     * 
      */
     public PartiallyOrderedSet() {}
 
@@ -80,6 +91,9 @@ class PartiallyOrderedSet extends AbstractSet {
      * Returns an iterator over the elements contained in this
      * collection, with an ordering that respects the orderings set
      * by the <code>setOrdering</code> method.
+     * <p>
+     *  返回此集合中包含的元素的迭代器,其顺序遵循<code> setOrdering </code>方法设置的顺序。
+     * 
      */
     public Iterator iterator() {
         return new PartialOrderIterator(poNodes.values().iterator());
@@ -88,6 +102,9 @@ class PartiallyOrderedSet extends AbstractSet {
     /**
      * Adds an <code>Object</code> to this
      * <code>PartiallyOrderedSet</code>.
+     * <p>
+     *  向此<code> PartiallyOrderedSet </code>中添加<code> Object </code>。
+     * 
      */
     public boolean add(Object o) {
         if (nodes.contains(o)) {
@@ -102,6 +119,9 @@ class PartiallyOrderedSet extends AbstractSet {
     /**
      * Removes an <code>Object</code> from this
      * <code>PartiallyOrderedSet</code>.
+     * <p>
+     *  从此<code> PartiallyOrderedSet </code>中删除<code> Object </code>。
+     * 
      */
     public boolean remove(Object o) {
         DigraphNode node = (DigraphNode)poNodes.get(o);
@@ -124,6 +144,10 @@ class PartiallyOrderedSet extends AbstractSet {
      * sequence than the second node.  If a prior ordering existed
      * between the nodes in the opposite order, it is removed.
      *
+     * <p>
+     * 设置两个节点之间的顺序。当请求迭代器时,第一个节点将出现在序列中比第二个节点更早。如果先前的顺序在相反顺序的节点之间存在,则它被去除。
+     * 
+     * 
      * @return <code>true</code> if no prior ordering existed
      * between the nodes, <code>false</code>otherwise.
      */
@@ -140,6 +164,10 @@ class PartiallyOrderedSet extends AbstractSet {
     /**
      * Removes any ordering between two nodes.
      *
+     * <p>
+     *  删除两个节点之间的任何顺序。
+     * 
+     * 
      * @return true if a prior prefence existed between the nodes.
      */
     public boolean unsetOrdering(Object first, Object second) {
@@ -155,6 +183,8 @@ class PartiallyOrderedSet extends AbstractSet {
     /**
      * Returns <code>true</code> if an ordering exists between two
      * nodes.
+     * <p>
+     *  如果两个节点之间存在顺序,则返回<code> true </code>。
      */
     public boolean hasOrdering(Object preferred, Object other) {
         DigraphNode preferredPONode =

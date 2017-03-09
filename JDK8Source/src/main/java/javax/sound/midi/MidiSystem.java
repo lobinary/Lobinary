@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -162,6 +163,64 @@ import com.sun.media.sound.MidiDeviceTransmitterEnvelope;
  * If that fails, too, a <code>MidiUnavailableException</code>
  * is thrown.
  *
+ * <p>
+ *  <code> MidiSystem </code>类提供对安装的MIDI系统资源的访问,包括合成器,顺控程序和MIDI输入和输出端口等设备。
+ * 典型的简单MIDI应用程序可以通过调用一个或多个<code> MidiSystem </code>方法来开始,以了解已安装的设备以及获取该应用程序所需的设备。
+ * <p>
+ *  该类还具有用于读取包含标准MIDI文件数据或声音库的文件,流和URL的方法。您可以查询<code> MidiSystem </code>以获取指定MIDI文件的格式。
+ * <p>
+ *  您不能实例化<code> MidiSystem </code>;所有的方法都是静态的。
+ * 
+ *  <p>属性可用于指定默认MIDI设备。考虑系统属性和属性文件。
+ *  <code> sound.properties </code>属性文件从实现特定的位置读取(通常是Java安装目录中的<code> lib </code>目录)。
+ * 如果属性作为系统属性和属性文件存在,则系统属性优先。如果未指定,则在可用设备中选择适当的默认值。
+ * 属性文件的语法在{@link java.util.Properties#load(InputStream)Properties.load}中指定。下表列出了可用的属性键以及所考虑的方法：。
+ * 
+ * <table border=0>
+ * <caption> MIDI系统属性键</caption>
+ * <tr>
+ *  <th>属性键</th> <th>接口</th> <th>受影响的方法</th>
+ * </tr>
+ * <tr>
+ *  <td> <code> javax.sound.midi.Receiver </code> </td> <td> {@ link Receiver} </td> <td> {@ link #getReceiver}
+ *  </td>。
+ * </tr>
+ * <tr>
+ *  <td> <code> javax.sound.midi.Sequencer </code> </td> <td> {@ link Sequencer} </td> <td> {@ link #getSequencer}
+ *  </td>。
+ * </tr>
+ * <tr>
+ *  <td> <code> javax.sound.midi.Synthesizer </code> </td> <td> {@ link Synthesizer} </td> <td> {@ link #getSynthesizer}
+ *  </td>。
+ * </tr>
+ * <tr>
+ *  <td> <code> javax.sound.midi.Transmitter </code> </td> <td> {@ link Transmitter} </td> <td> {@ link #getTransmitter}
+ *  </td>。
+ * </tr>
+ * </table>
+ * 
+ *  属性值由提供程序类名称和设备名称组成,由哈希标记("#")分隔。
+ * 提供程序类名称是具体的{@link javax.sound.midi.spi.MidiDeviceProvider MIDI设备提供程序}类的完全限定名称。
+ * 设备名称与<code> MidiDevice.Info </code>的<code> getName </code>方法返回的<code> String </code>匹配。可以省略类名称或设备名称。
+ * 如果仅指定类名称,则尾随散列标记是可选的。
+ * 
+ *  <p>如果指定了提供程序类,并且可以从已安装的提供程序成功检索该提供程序类,则会从提供程序检索<code> MidiDevice.Info </code>对象的列表。
+ * 否则,或者当这些设备不提供后续匹配时,从{@link #getMidiDeviceInfo}检索列表以包含所有可用的<code> MidiDevice.Info </code>对象。
+ * 
+ * <p>如果指定了设备名称,则搜索<code> MidiDevice.Info </code>对象的结果列表：第一个具有匹配名称,并且其<code> MidiDevice </code> ,将被退回。
+ * 如果没有找到匹配的<code> MidiDevice.Info </code>对象,或者未指定设备名称,则将返回结果列表中的第一个合适的设备。
+ * 对于序列器和合成器,如果设备实现各自的接口,则该设备是合适的;而对于接收器和发射器,如果其既实现定序器又不实现合成器并且分别提供至少一个接收器或发射器,则该设备是合适的。
+ * 
+ * 例如,具有值<code>"com.sun.media.sound.MidiProvider#SunMIDI1"</code>的属性<code> javax.sound.midi.Receiver </code>
+ * 将具有以下结果：代码> getReceiver </code>被调用：如果安装的MIDI设备提供者列表中存在<code> com.sun.media.sound.MidiProvider </code>
+ * 类,则第一个<code> Receiver </code>将返回名称<code>"SunMIDI1"</code>。
+ * 如果找不到,则将返回该提供程序的第一个<code> Receiver </code>,而不管其名称。
+ * 如果没有,将返回所有设备列表(由<code> getMidiDeviceInfo </code>返回)中名为<code>"SunMIDI1"</code>的第一个<code> Receiver </code>
+ *  ,或者,如果未找到,则返回在所有设备的列表中可以找到的第一<code> Receiver </code>。
+ * 如果找不到,则将返回该提供程序的第一个<code> Receiver </code>,而不管其名称。
+ * 如果失败了,也会抛出一个<code> MidiUnavailableException </code>。
+ * 
+ * 
  * @author Kara Kytle
  * @author Florian Bomers
  * @author Matthias Pfisterer
@@ -170,6 +229,9 @@ public class MidiSystem {
 
     /**
      * Private no-args constructor for ensuring against instantiation.
+     * <p>
+     *  专用无参数构造函数,用于确保防止实例化。
+     * 
      */
     private MidiSystem() {
     }
@@ -182,6 +244,11 @@ public class MidiSystem {
      * corresponding device object, by invoking
      * {@link #getMidiDevice(MidiDevice.Info) getMidiDevice}.
      *
+     * <p>
+     *  获取表示系统上可用的所有MIDI设备集合的信息对象数组。
+     * 然后,通过调用{@link #getMidiDevice(MidiDevice.Info)getMidiDevice},可以使用返回的信息对象来获得相应的设备对象。
+     * 
+     * 
      * @return an array of <code>MidiDevice.Info</code> objects, one
      * for each installed MIDI device.  If no such devices are installed,
      * an array of length 0 is returned.
@@ -205,6 +272,10 @@ public class MidiSystem {
     /**
      * Obtains the requested MIDI device.
      *
+     * <p>
+     *  获取所请求的MIDI设备。
+     * 
+     * 
      * @param info a device information object representing the desired device.
      * @return the requested device
      * @throws MidiUnavailableException if the requested device is not available
@@ -260,6 +331,23 @@ public class MidiSystem {
      * description of {@link javax.sound.midi.MidiDevice MidiDevice}.
      *
      *
+     * <p>
+     *  从外部MIDI端口或其他默认设备获取MIDI接收器。返回的接收器总是实现{@code MidiDeviceReceiver}接口。
+     * 
+     * <p>如果系统属性<code> javax.sound.midi.Receiver </code>被定义或者它被定义在文件"sound.properties"中,则它被用于标识提供默认接收者的设备。
+     * 有关详细信息,请参阅{@link MidiSystem类描述}。
+     * 
+     *  如果没有合适的MIDI端口,则从安装的合成器检索接收器。
+     * 
+     *  <p>如果默认设备提供的本地接收器不实现{@code MidiDeviceReceiver}接口,它将被包装在实现{@code MidiDeviceReceiver}接口的包装类中。
+     * 相应的{@code Receiver}方法调用将转发到本机接收器。
+     * 
+     *  <p>如果此方法成功返回,则<code> Receiver </code>所属的{@link javax.sound.midi.MidiDevice MidiDevice}将隐式打开,如果它尚未打开。
+     * 可以通过在返回的<code> Receiver </code>上调用{@link javax.sound.midi.Receiver#close close}关闭隐式打开的设备。
+     * 所有打开的<code> Receiver </code>实例必须关闭,以释放由<code> MidiDevice </code>保存的系统资源。
+     * 有关打开/关闭行为的详细描述,请参阅{@link javax.sound.midi.MidiDevice MidiDevice}的类描述。
+     * 
+     * 
      * @return the default MIDI receiver
      * @throws MidiUnavailableException if the default receiver is not
      *         available due to resource restrictions,
@@ -311,6 +399,23 @@ public class MidiSystem {
      * of open/close behaviour see the class description of {@link
      * javax.sound.midi.MidiDevice MidiDevice}.
      *
+     * <p>
+     *  从外部MIDI端口或其他默认源获取MIDI发送器。返回的发射器总是实现{@code MidiDeviceTransmitter}接口。
+     * 
+     * <p>如果系统属性<code> javax.sound.midi.Transmitter </code>被定义或者它被定义在文件"sound.properties"中,则它被用于标识提供默认发送器的设备
+     * 。
+     * 有关详细信息,请参阅{@link MidiSystem类描述}。
+     * 
+     *  <p>如果默认设备提供的本地发送器不实现{@code MidiDeviceTransmitter}接口,它将被封装在实现{@code MidiDeviceTransmitter}接口的包装类中。
+     * 相应的{@code Transmitter}方法调用将被转发到本地发送器。
+     * 
+     *  <p>如果此方法成功返回,则<code> Transmitter </code>属于的{@link javax.sound.midi.MidiDevice MidiDevice}将隐式打开,如果它尚未
+     * 打开。
+     * 可以通过在返回的<code> Transmitter </code>上调用{@link javax.sound.midi.Transmitter#close close}关闭隐式打开的设备。
+     * 所有打开的<code> Transmitter </code>实例必须关闭,以释放由<code> MidiDevice </code>保存的系统资源。
+     * 有关打开/关闭行为的详细描述,请参阅{@link javax.sound.midi.MidiDevice MidiDevice}的类描述。
+     * 
+     * 
      * @return the default MIDI transmitter
      * @throws MidiUnavailableException if the default transmitter is not
      *         available due to resource restrictions,
@@ -341,6 +446,13 @@ public class MidiSystem {
      * it is used to identify the default synthesizer.
      * For details, refer to the {@link MidiSystem class description}.
      *
+     * <p>
+     *  获取默认合成器。
+     * 
+     *  <p>如果系统属性<code> javax.sound.midi.Synthesizer </code>被定义或者它被定义在文件"sound.properties"中,则它被用来标识默认合成器。
+     * 有关详细信息,请参阅{@link MidiSystem类描述}。
+     * 
+     * 
      * @return the default synthesizer
      * @throws MidiUnavailableException if the synthesizer is not
      *         available due to resource restrictions,
@@ -378,6 +490,21 @@ public class MidiSystem {
      * it is used to identify the default sequencer.
      * For details, refer to the {@link MidiSystem class description}.
      *
+     * <p>
+     * 获取连接到默认设备的默认<code> Sequencer </code>。
+     * 返回的<code> Sequencer </code>实例连接到{@link #getSynthesizer}返回的默认<code> Synthesizer </code>。
+     * 如果没有<code> Synthesizer </code>可用,或者默认的<code> Synthesizer </code>无法打开,则<code> sequencer </code>会连接到默认的
+     * <code> Receiver </code >,由{@link #getReceiver}返回。
+     * 返回的<code> Sequencer </code>实例连接到{@link #getSynthesizer}返回的默认<code> Synthesizer </code>。
+     * 通过从<code> Sequencer </code>中检索<code> Transmitter </code>实例并设置其<code> Receiver </code>来进行连接。
+     * 关闭并重新打开序列器将会恢复与默认设备的连接。
+     * 
+     *  <p>此方法等效于调用<code> getSequencer(true)</code>。
+     * 
+     *  <p>如果系统属性<code> javax.sound.midi.Sequencer </code>被定义或者它被定义在文件"sound.properties"中,则它被用于标识默认定序器。
+     * 有关详细信息,请参阅{@link MidiSystem类描述}。
+     * 
+     * 
      * @return the default sequencer, connected to a default Receiver
      * @throws MidiUnavailableException if the sequencer is not
      *         available due to resource restrictions,
@@ -426,6 +553,24 @@ public class MidiSystem {
      * it is used to identify the default sequencer.
      * For details, refer to the {@link MidiSystem class description}.
      *
+     * <p>
+     *  获取默认的<code> Sequencer </code>,可选择连接到默认设备。
+     * 
+     * <p>如果<code> connected </code>为true,则返回的<code> Sequencer </code>实例将连接到{@link #getSynthesizer}返回的默认<code>
+     *  Synthesizer </code>。
+     * 如果没有<code> Synthesizer </code>可用,或者默认的<code> Synthesizer </code>无法打开,则<code> sequencer </code>会连接到默认的
+     * <code> Receiver </code >,由{@link #getReceiver}返回。
+     * 通过从<code> Sequencer </code>中检索<code> Transmitter </code>实例并设置其<code> Receiver </code>来进行连接。
+     * 关闭并重新打开序列器将会恢复与默认设备的连接。
+     * 
+     *  <p>如果<code> connected </code>为false,则返回的<code> Sequencer </code>实例未连接,它没有打开<code> Transmitters </code>
+     * 。
+     * 为了在MIDI设备或<code> Synthesizer </code>上播放音序器,需要获取<code> Transmitter </code>并设置其<code> Receiver </code>。
+     * 
+     *  <p>如果定义了系统属性<code> javax.sound.midi.Sequencer </code>或者它在文件"sound.properties"中定义,则用于标识默认顺控程序。
+     * 有关详细信息,请参阅{@link MidiSystem类描述}。
+     * 
+     * 
      * @param connected whether or not the returned {@code Sequencer}
      * is connected to the default {@code Synthesizer}
      * @return the default sequencer
@@ -514,6 +659,11 @@ public class MidiSystem {
      * support the stream, and, if not, reset the stream's read pointer to
      * its original position.  If the input stream does not support this,
      * this method may fail with an IOException.
+     * <p>
+     * 通过从指定的流读取它构造一个MIDI声音库。流必须指向有效的MIDI声音库文件。一般来说,MIDI音乐提供者可能需要在确定它们是否支持之前从流中读取一些数据。
+     * 这些解析器必须能够标记流,读取足够的数据以确定它们是否支持流,如果不支持,则将流的读指针重置为其原始位置。如果输入流不支持此操作,则此方法可能会失败,并显示IOException。
+     * 
+     * 
      * @param stream the source of the sound bank data.
      * @return the sound bank
      * @throws InvalidMidiDataException if the stream does not point to
@@ -547,6 +697,10 @@ public class MidiSystem {
      * Constructs a <code>Soundbank</code> by reading it from the specified URL.
      * The URL must point to a valid MIDI soundbank file.
      *
+     * <p>
+     *  通过从指定的URL读取来构造<code> Soundbank </code>。网址必须指向有效的MIDI声音库文件。
+     * 
+     * 
      * @param url the source of the sound bank data
      * @return the sound bank
      * @throws InvalidMidiDataException if the URL does not point to valid MIDI
@@ -579,6 +733,10 @@ public class MidiSystem {
      * <code>File</code>.
      * The <code>File</code> must point to a valid MIDI soundbank file.
      *
+     * <p>
+     *  通过从指定的<code> File </code>中读取<code> Soundbank </code>来构造<code>。 <code> File </code>必须指向有效的MIDI声音库文件。
+     * 
+     * 
      * @param file the source of the sound bank data
      * @return the sound bank
      * @throws InvalidMidiDataException if the <code>File</code> does not
@@ -625,6 +783,16 @@ public class MidiSystem {
      * will also fail with an InvalidMidiDataException if a compatible file reader
      * is installed, but encounters errors while determining the file format.
      *
+     * <p>
+     *  获取指定输入流中数据的MIDI文件格式。流必须指向由系统识别的文件类型的有效MIDI文件数据。
+     * <p>
+     *  该方法和/或其调用的代码可能需要从流中读取一些数据以确定其数据格式是否被支持。因此,实现可能需要标记流,读取足够的数据以确定其是否处于支持的格式,并且将流的读指针重置为其原始位置。
+     * 如果输入流不允许此组操作,则此方法可能会失败,并显示<code> IOException </code>。
+     * <p>
+     * 此操作只能对可由已安装的文件读取器解析的类型的文件成功。如果没有安装兼容的文件读取器,即使对于有效的文件,它也可能会失败并返回InvalidMidiDataException。
+     * 如果安装了兼容文件读取器,但在确定文件格式时遇到错误,它也将失败并返回InvalidMidiDataException。
+     * 
+     * 
      * @param stream the input stream from which file format information
      * should be extracted
      * @return an <code>MidiFileFormat</code> object describing the MIDI file
@@ -673,6 +841,13 @@ public class MidiSystem {
      * will also fail with an InvalidMidiDataException if a compatible file reader
      * is installed, but encounters errors while determining the file format.
      *
+     * <p>
+     *  获取指定URL中的数据的MIDI文件格式。 URL必须指向系统可识别的文件类型的有效MIDI文件数据。
+     * <p>
+     *  此操作只能对可由已安装的文件读取器解析的类型的文件成功。如果没有安装兼容的文件读取器,即使对于有效的文件,它也可能会失败并返回InvalidMidiDataException。
+     * 如果安装了兼容文件读取器,但在确定文件格式时遇到错误,它也将失败并返回InvalidMidiDataException。
+     * 
+     * 
      * @param url the URL from which file format information should be
      * extracted
      * @return a <code>MidiFileFormat</code> object describing the MIDI file
@@ -719,6 +894,13 @@ public class MidiSystem {
      * will also fail with an InvalidMidiDataException if a compatible file reader
      * is installed, but encounters errors while determining the file format.
      *
+     * <p>
+     *  获取指定的<code> File </code>的MIDI文件格式。 <code> File </code>必须指向由系统识别的文件类型的有效MIDI文件数据。
+     * <p>
+     *  此操作只能对可由已安装的文件读取器解析的类型的文件成功。如果没有安装兼容的文件读取器,即使对于有效的文件,它也可能会失败并返回InvalidMidiDataException。
+     * 如果安装了兼容文件读取器,但在确定文件格式时遇到错误,它也将失败并返回InvalidMidiDataException。
+     * 
+     * 
      * @param file the <code>File</code> from which file format information
      * should be extracted
      * @return a <code>MidiFileFormat</code> object describing the MIDI file
@@ -774,6 +956,16 @@ public class MidiSystem {
      * is installed, but encounters errors while constructing the <code>Sequence</code>
      * object from the file data.
      *
+     * <p>
+     * 从指定的输入流获取MIDI序列。流必须指向由系统识别的文件类型的有效MIDI文件数据。
+     * <p>
+     *  该方法和/或其调用的代码可能需要从流中读取一些数据以确定其数据格式是否被支持。因此,实现可能需要标记流,读取足够的数据以确定其是否处于支持的格式,并且将流的读指针重置为其原始位置。
+     * 如果输入流不允许此组操作,则此方法可能会失败,并显示<code> IOException </code>。
+     * <p>
+     *  此操作只能对可由已安装的文件读取器解析的类型的文件成功。如果没有安装兼容的文件读取器,即使对于有效的文件,它也可能会失败并返回InvalidMidiDataException。
+     * 如果安装了兼容文件读取器,但是在从文件数据构造<code> Sequence </code>对象时遇到错误,它也将失败并返回InvalidMidiDataException。
+     * 
+     * 
      * @param stream the input stream from which the <code>Sequence</code>
      * should be constructed
      * @return a <code>Sequence</code> object based on the MIDI file data
@@ -821,6 +1013,13 @@ public class MidiSystem {
      * is installed, but encounters errors while constructing the <code>Sequence</code>
      * object from the file data.
      *
+     * <p>
+     *  从指定的URL获取MIDI序列。 URL必须指向系统可识别的文件类型的有效MIDI文件数据。
+     * <p>
+     * 此操作只能对可由已安装的文件读取器解析的类型的文件成功。如果没有安装兼容的文件读取器,即使对于有效的文件,它也可能会失败并返回InvalidMidiDataException。
+     * 如果安装了兼容文件读取器,但是在从文件数据构造<code> Sequence </code>对象时遇到错误,它也将失败并返回InvalidMidiDataException。
+     * 
+     * 
      * @param url the URL from which the <code>Sequence</code> should be
      * constructed
      * @return a <code>Sequence</code> object based on the MIDI file data
@@ -865,6 +1064,13 @@ public class MidiSystem {
      * is installed, but encounters errors while constructing the <code>Sequence</code>
      * object from the file data.
      *
+     * <p>
+     *  从指定的<code> File </code>获取MIDI序列。 <code> File </code>必须指向由系统识别的文件类型的有效MIDI文件数据。
+     * <p>
+     *  此操作只能对可由已安装的文件读取器解析的类型的文件成功。如果没有安装兼容的文件读取器,即使对于有效的文件,它也可能会失败并返回InvalidMidiDataException。
+     * 如果安装了兼容文件读取器,但是在从文件数据构造<code> Sequence </code>对象时遇到错误,它也将失败并返回InvalidMidiDataException。
+     * 
+     * 
      * @param file the <code>File</code> from which the <code>Sequence</code>
      * should be constructed
      * @return a <code>Sequence</code> object based on the MIDI file data
@@ -900,6 +1106,10 @@ public class MidiSystem {
     /**
      * Obtains the set of MIDI file types for which file writing support is
      * provided by the system.
+     * <p>
+     *  获取系统提供文件写入支持的一组MIDI文件类型。
+     * 
+     * 
      * @return array of unique file types.  If no file types are supported,
      * an array of length 0 is returned.
      */
@@ -931,6 +1141,10 @@ public class MidiSystem {
     /**
      * Indicates whether file writing support for the specified MIDI file type
      * is provided by the system.
+     * <p>
+     *  指示系统是否提供对指定MIDI文件类型的文件写入支持。
+     * 
+     * 
      * @param fileType the file type for which write capabilities are queried
      * @return <code>true</code> if the file type is supported,
      * otherwise <code>false</code>
@@ -952,6 +1166,10 @@ public class MidiSystem {
     /**
      * Obtains the set of MIDI file types that the system can write from the
      * sequence specified.
+     * <p>
+     *  从指定的序列获取系统可以写入的一组MIDI文件类型。
+     * 
+     * 
      * @param sequence the sequence for which MIDI file type support
      * is queried
      * @return the set of unique supported file types.  If no file types are supported,
@@ -985,6 +1203,10 @@ public class MidiSystem {
     /**
      * Indicates whether a MIDI file of the file type specified can be written
      * from the sequence indicated.
+     * <p>
+     *  指示是否可以从指定的序列写入指定文件类型的MIDI文件。
+     * 
+     * 
      * @param fileType the file type for which write capabilities
      * are queried
      * @param sequence the sequence for which file writing support is queried
@@ -1008,6 +1230,10 @@ public class MidiSystem {
     /**
      * Writes a stream of bytes representing a file of the MIDI file type
      * indicated to the output stream provided.
+     * <p>
+     *  写入表示所提供的输出流所指示的MIDI文件类型的文件的字节流。
+     * 
+     * 
      * @param in sequence containing MIDI data to be written to the file
      * @param fileType the file type of the file to be written to the output stream
      * @param out stream to which the file data should be written
@@ -1042,6 +1268,10 @@ public class MidiSystem {
     /**
      * Writes a stream of bytes representing a file of the MIDI file type
      * indicated to the external file provided.
+     * <p>
+     * 写入表示指定给所提供的外部文件的MIDI文件类型的文件的字节流。
+     * 
+     * 
      * @param in sequence containing MIDI data to be written to the file
      * @param type the file type of the file to be written to the output stream
      * @param out external file to which the file data should be written
@@ -1105,6 +1335,15 @@ public class MidiSystem {
      * <code>MidiUnavailableException</code>, with the catched
      * exception chained.
      *
+     * <p>
+     *  类型。
+     * 
+     *  此方法封装{@link #getDefaultDevice}。
+     * 它捕获<code> getDefaultDevice </code>抛出的<code> IllegalArgumentException </code>,而引发一个<code> MidiUnavaila
+     * bleException </code>,并将捕获的异常链接起来。
+     *  此方法封装{@link #getDefaultDevice}。
+     * 
+     * 
      * @param deviceClass The requested device type, one of Synthesizer.class,
      * Sequencer.class, Receiver.class or Transmitter.class.
      * @throws  MidiUnavalableException on failure.
@@ -1124,6 +1363,10 @@ public class MidiSystem {
     /** Attempts to locate and return a default MidiDevice of the specified
      * type.
      *
+     * <p>
+     *  类型。
+     * 
+     * 
      * @param deviceClass The requested device type, one of Synthesizer.class,
      * Sequencer.class, Receiver.class or Transmitter.class.
      * @throws  IllegalArgumentException on failure.
@@ -1152,6 +1395,10 @@ public class MidiSystem {
 
         /* Provider class not specified or cannot be found, or
            provider class specified, and no appropriate device available or
+        /* <p>
+        /*  指定的提供程序类,并且没有适当的设备可用或
+        /* 
+        /* 
            provider class and instance specified and instance cannot be found or is not appropriate */
         if (instanceName != null) {
             device = getNamedDevice(instanceName, providers, deviceClass);
@@ -1161,6 +1408,8 @@ public class MidiSystem {
         }
 
         /* No default are specified, or if something is specified, everything
+        /* <p>
+        /* 
            failed. */
         device = getFirstDevice(providers, deviceClass);
         if (device != null) {
@@ -1174,6 +1423,10 @@ public class MidiSystem {
     /** Return a MidiDeviceProcider of a given class from the list of
         MidiDeviceProviders.
 
+    /* <p>
+    /*  MidiDeviceProviders。
+    /* 
+    /* 
         @param providerClassName The class name of the provider to be returned.
         @param provider The list of MidiDeviceProviders that is searched.
         @return A MidiDeviceProvider of the requested class, or null if none
@@ -1191,6 +1444,8 @@ public class MidiSystem {
 
 
     /** Return a MidiDevice with a given name from a given MidiDeviceProvider.
+    /* <p>
+    /* 
         @param deviceName The name of the MidiDevice to be returned.
         @param provider The MidiDeviceProvider to check for MidiDevices.
         @param deviceClass The requested device type, one of Synthesizer.class,
@@ -1223,6 +1478,8 @@ public class MidiSystem {
 
 
     /** Return a MidiDevice with a given name from a given MidiDeviceProvider.
+    /* <p>
+    /* 
       @param deviceName The name of the MidiDevice to be returned.
       @param provider The MidiDeviceProvider to check for MidiDevices.
       @param deviceClass The requested device type, one of Synthesizer.class,
@@ -1251,6 +1508,10 @@ public class MidiSystem {
 
     /** Return a MidiDevice with a given name from a list of
         MidiDeviceProviders.
+    /* <p>
+    /*  MidiDeviceProviders。
+    /* 
+    /* 
         @param deviceName The name of the MidiDevice to be returned.
         @param providers The List of MidiDeviceProviders to check for
         MidiDevices.
@@ -1284,6 +1545,10 @@ public class MidiSystem {
 
     /** Return a MidiDevice with a given name from a list of
         MidiDeviceProviders.
+    /* <p>
+    /*  MidiDeviceProviders。
+    /* 
+    /* 
         @param deviceName The name of the MidiDevice to be returned.
         @param providers The List of MidiDeviceProviders to check for
         MidiDevices.
@@ -1311,6 +1576,8 @@ public class MidiSystem {
 
 
     /** From a given MidiDeviceProvider, return the first appropriate device.
+    /* <p>
+    /* 
         @param provider The MidiDeviceProvider to check for MidiDevices.
         @param deviceClass The requested device type, one of Synthesizer.class,
         Sequencer.class, Receiver.class or Transmitter.class.
@@ -1341,6 +1608,8 @@ public class MidiSystem {
 
 
     /** From a given MidiDeviceProvider, return the first appropriate device.
+    /* <p>
+    /* 
         @param provider The MidiDeviceProvider to check for MidiDevices.
         @param deviceClass The requested device type, one of Synthesizer.class,
         Sequencer.class, Receiver.class or Transmitter.class.
@@ -1365,6 +1634,10 @@ public class MidiSystem {
 
     /** From a List of MidiDeviceProviders, return the first appropriate
         MidiDevice.
+    /* <p>
+    /*  MidiDevice。
+    /* 
+    /* 
         @param providers The List of MidiDeviceProviders to search.
         @param deviceClass The requested device type, one of Synthesizer.class,
         Sequencer.class, Receiver.class or Transmitter.class.
@@ -1396,6 +1669,10 @@ public class MidiSystem {
 
     /** From a List of MidiDeviceProviders, return the first appropriate
         MidiDevice.
+    /* <p>
+    /*  MidiDevice。
+    /* 
+    /* 
         @param providers The List of MidiDeviceProviders to search.
         @param deviceClass The requested device type, one of Synthesizer.class,
         Sequencer.class, Receiver.class or Transmitter.class.
@@ -1426,6 +1703,11 @@ public class MidiSystem {
         it implements neither Synthesizer nor Transmitter, and if it can
         provide at least one Receiver or Transmitter, respectively.
 
+    /* <p>
+    /*  如果deviceClass是Synthesizer或Sequencer,则实现相应接口的设备被认为是适当的。
+    /* 如果deviceClass是Receiver或Transmitter,如果一个设备既不实现合成器也不实现发送器,并且它可以分别提供至少一个接收器或发送器,则认为该设备是适当的。
+    /* 
+    /* 
         @param device the MidiDevice to test
         @param allowSynthesizer if true, Synthesizers are considered
         appropriate. Otherwise only pure MidiDevices are considered
@@ -1476,6 +1758,8 @@ public class MidiSystem {
     /**
      * Obtains the set of services currently installed on the system
      * using sun.misc.Service, the SPI mechanism in 1.3.
+     * <p>
+     * 
      * @return a List of instances of providers for the requested service.
      * If no providers are available, a List of length 0 will be returned.
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  *
@@ -34,6 +35,10 @@ package java.nio.charset;
  * Checked exception thrown when a character encoding
  * or decoding error occurs.
  *
+ * <p>
+ *  发生字符编码或解码错误时抛出的检查异常。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -45,6 +50,8 @@ public class CharacterCodingException
 
     /**
      * Constructs an instance of this class.
+     * <p>
+     *  构造此类的实例。
      */
     public CharacterCodingException() { }
 

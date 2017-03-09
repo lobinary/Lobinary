@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -61,6 +71,17 @@ import com.sun.org.apache.xml.internal.resolver.readers.SAXCatalogReader;
  * catalog resolution outside of a parsing context. It may be shared
  * between several parsers and the application.</p>
  *
+ * <p>
+ *  <p>目录解析器通过XML目录处理外部标识符和URI引用的解析。此组件支持由。定义的XML目录
+ * <a href="http://www.oasis-open.org/committees/entity/spec.html">
+ *  OASIS XML目录规范</a>。它封装了<a href="http://xml.apache.org/commons/"> XML Commons </a>解析器。
+ * 此类的实例可以作为SAX实体解析器,作为DOM LSResourceResolver或作为XNI实体解析器在解析器上注册(通过设置属性(http://apache.org/xml/properties/
+ * internal/entity-resolver) 。
+ *  OASIS XML目录规范</a>。它封装了<a href="http://xml.apache.org/commons/"> XML Commons </a>解析器。</p>。
+ * 
+ *  <p>这个类可以单独用于在解析上下文之外执行目录解析。它可以在几个解析器和应用程序之间共享。</p>
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  *
  */
@@ -79,6 +100,9 @@ public class XMLCatalogResolver
     /**
      * Indicates whether the list of catalogs has
      * changed since it was processed.
+     * <p>
+     *  指示目录列表自处理后是否已更改。
+     * 
      */
     private boolean fCatalogsChanged = true;
 
@@ -90,11 +114,17 @@ public class XMLCatalogResolver
      * the parser or some other component performing catalog
      * resolution should use the literal system identifier
      * instead of the expanded system identifier.
+     * <p>
+     * 指示应用程序是否希望解析器或执行目录解析的其他组件应使用文字系统标识符而不是扩展系统标识符。
+     * 
      */
     private boolean fUseLiteralSystemId = true;
 
     /**
      * <p>Constructs a catalog resolver with a default configuration.</p>
+     * <p>
+     *  <p>使用默认配置构造目录解析器。</p>
+     * 
      */
     public XMLCatalogResolver () {
         this(null, true);
@@ -104,6 +134,10 @@ public class XMLCatalogResolver
      * <p>Constructs a catalog resolver with the given
      * list of entry files.</p>
      *
+     * <p>
+     *  <p>使用给定的条目文件列表构造目录解析器。</p>
+     * 
+     * 
      * @param catalogs an ordered array list of absolute URIs
      */
     public XMLCatalogResolver (String [] catalogs) {
@@ -115,6 +149,10 @@ public class XMLCatalogResolver
      * list of entry files and the preference for whether
      * system or public matches are preferred.</p>
      *
+     * <p>
+     *  <p>使用给定的条目文件列表构建目录解析器,并优先选择系统或公共匹配。</p>
+     * 
+     * 
      * @param catalogs an ordered array list of absolute URIs
      * @param preferPublic the prefer public setting
      */
@@ -125,6 +163,10 @@ public class XMLCatalogResolver
     /**
      * <p>Returns the initial list of catalog entry files.</p>
      *
+     * <p>
+     *  <p>返回商品文件的初始列表。</p>
+     * 
+     * 
      * @return the initial list of catalog entry files
      */
     public final synchronized String [] getCatalogList () {
@@ -139,6 +181,10 @@ public class XMLCatalogResolver
      * mappings from the new list the next time the catalog
      * is queried.</p>
      *
+     * <p>
+     *  <p>设置商品文件的初始列表。如果存在从上一个列表缓存的任何目录映射,则下次查询目录时,它们将被来自新列表的目录映射替换。</p>
+     * 
+     * 
      * @param catalogs an ordered array list of absolute URIs
      */
     public final synchronized void setCatalogList (String [] catalogs) {
@@ -149,6 +195,9 @@ public class XMLCatalogResolver
 
     /**
      * <p>Forces the cache of catalog mappings to be cleared.</p>
+     * <p>
+     *  <p>强制清除目录映射的高速缓存。</p>
+     * 
      */
     public final synchronized void clear () {
         fCatalog = null;
@@ -162,6 +211,11 @@ public class XMLCatalogResolver
      * property has not yet been explicitly set its value is
      * <code>true</code>.</p>
      *
+     * <p>
+     *  <p>返回是否首选系统或公共匹配的首选项。这是在目录的<code>目录</code>条目上没有出现任何<code> prefer </code>属性的情况下使用的。
+     * 如果此属性尚未显式设置,其值为<code> true </code>。</p>。
+     * 
+     * 
      * @return the prefer public setting
      */
     public final boolean getPreferPublic () {
@@ -174,6 +228,10 @@ public class XMLCatalogResolver
      * of any occurence of the <code>prefer</code> attribute
      * on the <code>catalog</code> entry of a catalog.</p>
      *
+     * <p>
+     *  <p>设置是否首选系统或公共匹配。这是在目录的<code>目录</code>条目中没有出现<code> prefer </code>属性的情况下使用的。</p>
+     * 
+     * 
      * @param preferPublic the prefer public setting
      */
     public final void setPreferPublic (boolean preferPublic) {
@@ -188,6 +246,10 @@ public class XMLCatalogResolver
      * identifier are available. If this property has not yet
      * been explicitly set its value is <code>true</code>.</p>
      *
+     * <p>
+     * <p>返回在系统标识符和扩展系统标识符都可用时解析系统标识符时是否应使用文字系统标识符的首选项。如果此属性尚未显式设置,其值为<code> true </code>。</p>
+     * 
+     * 
      * @return the preference for using literal system identifers
      * for catalog resolution
      *
@@ -214,6 +276,14 @@ public class XMLCatalogResolver
      * which is the result of resolving the literal system
      * identifier against a base URI.</p>
      *
+     * <p>
+     *  <p>设置在系统标识符和扩展系统标识符都可用时解析系统标识符时是否应使用文字系统标识符的首选项。</p>
+     * 
+     *  <p>文字系统标识符是在绝对化之前提供的URI。它可以嵌入在实体中。它可以在外部提供,或者可以是重定向的结果。例如,重定向可能来自协议级别,通过HTTP或应用程序的实体解析器。</p>
+     * 
+     *  <p>展开的系统标识符是绝对URI,它是根据基本URI解析字面系统标识符的结果。</p>
+     * 
+     * 
      * @param useLiteralSystemId the preference for using
      * literal system identifers for catalog resolution
      */
@@ -228,6 +298,10 @@ public class XMLCatalogResolver
      * catalog for the given external identifier. It should be
      * overrided if other behaviour is required.</p>
      *
+     * <p>
+     *  <p>解析外部实体。如果实体无法解析,此方法应返回<code> null </code>。如果在目录中找到给定外部标识符的条目,此方法将返回输入源。如果需要其他行为,应该覆盖它。</p>
+     * 
+     * 
      * @param publicId the public identifier, or <code>null</code> if none was supplied
      * @param systemId the system identifier
      *
@@ -260,6 +334,10 @@ public class XMLCatalogResolver
       * catalog for the given external identifier. It should be
       * overrided if other behaviour is required.</p>
       *
+      * <p>
+      *  <p>解析外部实体。如果实体无法解析,此方法应返回<code> null </code>。如果在目录中找到给定外部标识符的条目,此方法将返回输入源。如果需要其他行为,应该覆盖它。</p>
+      * 
+      * 
       * @param name the identifier of the external entity
       * @param publicId the public identifier, or <code>null</code> if none was supplied
       * @param baseURI the URI with respect to which relative systemIDs are interpreted.
@@ -303,6 +381,10 @@ public class XMLCatalogResolver
       * provide one. This method always returns <code>null</code>. It
       * should be overrided if other behaviour is required.</p>
       *
+      * <p>
+      * <p>为未明确提供文档的文档找到外部子集。此方法总是返回<code> null </code>。如果需要其他行为,应该覆盖它。</p>
+      * 
+      * 
       * @param name the identifier of the document root element
       * @param baseURI the document's base URI
       *
@@ -320,6 +402,10 @@ public class XMLCatalogResolver
      * Where both a namespace and an external identifier exist, the namespace
      * takes precedence.</p>
      *
+     * <p>
+     *  <p>使用目录解析资源。此方法解释名称空间URI对应于目录中的uri条目。如果存在命名空间和外部标识符,则命名空间优先。</p>
+     * 
+     * 
      * @param type the type of the resource being resolved
      * @param namespaceURI the namespace of the resource being resolved,
      * or <code>null</code> if none was supplied
@@ -384,6 +470,11 @@ public class XMLCatalogResolver
      * an input source if an entry was found in the catalog. It
      * should be overrided if other behaviour is required.</p>
      *
+     * <p>
+     *  <p>解析外部实体。如果实体无法解析,此方法应返回<code> null </code>。
+     * 此方法仅调用<code> resolveIdentifier </code>,并在目录中找到条目时返回输入源。如果需要其他行为,应该覆盖它。</p>。
+     * 
+     * 
      * @param resourceIdentifier location of the XML resource to resolve
      *
      * @throws XNIException thrown on general error
@@ -407,6 +498,10 @@ public class XMLCatalogResolver
      * Where both a namespace and an external identifier exist, the namespace
      * takes precedence.</p>
      *
+     * <p>
+     *  <p>使用目录解析标识符。此方法解释标识符的命名空间对应于目录中的uri条目。如果存在命名空间和外部标识符,则命名空间优先。</p>
+     * 
+     * 
      * @param resourceIdentifier the identifier to resolve
      *
      * @throws XNIException thrown on general error
@@ -453,6 +548,11 @@ public class XMLCatalogResolver
      * a public identifier by URN "unwrapping" as specified
      * in the XML Catalogs specification.</p>
      *
+     * <p>
+     *  <p>如果没有映射,则返回给定外部标识符的目录中的URI映射或<code> null </code>。
+     * 如果系统标识符是<code> publicid </code>命名空间中的URN,则它将通过XML目录规范中规定的URN"unwrapping"转换为公共标识符。</p>。
+     * 
+     * 
      * @param systemId the system identifier to locate in the catalog
      *
      * @return the mapped URI or <code>null</code> if no mapping
@@ -478,6 +578,10 @@ public class XMLCatalogResolver
      * exists. Public identifiers are normalized before
      * comparison.</p>
      *
+     * <p>
+     *  <p>如果没有映射,则返回给定外部标识符的目录中的URI映射或<code> null </code>。公共标识符在比较之前已标准化。</p>
+     * 
+     * 
      * @param publicId the public identifier to locate in the catalog
      * @param systemId the system identifier to locate in the catalog
      *
@@ -508,6 +612,11 @@ public class XMLCatalogResolver
      * resolution is performed following the semantics of
      * external identifier resolution.</p>
      *
+     * <p>
+     * <p>如果没有映射,则返回给定URI引用的目录中的URI映射或<code> null </code>。 URI比较区分大小写。
+     * 如果URI引用是<code> publicid </code>命名空间中的URN,则通过URN"解包"将其转换为XML目录规范中指定的公共标识符,然后根据外部标识符解析的语义执行解析。 </p>。
+     * 
+     * 
      * @param uri the URI to locate in the catalog
      *
      * @return the mapped URI or <code>null</code> if no mapping
@@ -532,6 +641,9 @@ public class XMLCatalogResolver
      * the properties upfront. This prevents JVM wide system properties
      * or a property file somewhere in the environment from affecting
      * the behaviour of this catalog resolver.
+     * <p>
+     *  初始化。创建CatalogManager并预先设置所有属性。这会阻止JVM宽系统属性或环境中某处的属性文件影响此目录解析器的行为。
+     * 
      */
     private void init (String [] catalogs, boolean preferPublic) {
         fCatalogsList = (catalogs != null) ? (String[]) catalogs.clone() : null;
@@ -552,6 +664,9 @@ public class XMLCatalogResolver
      * catalogs in the list. Only the first catalog will actually be
      * parsed immediately. The others will be queued and read if
      * they are needed later.
+     * <p>
+     *  指示<code>目录</code>来解析列表中的每个目录。只有第一个目录实际上会立即解析。其他人将被排队和阅读,如果他们以后需要。
+     * 
      */
     private void parseCatalogs () throws IOException {
         if (fCatalogsList != null) {
@@ -571,6 +686,8 @@ public class XMLCatalogResolver
 
     /**
      * Attaches the reader to the catalog.
+     * <p>
+     *  将读者附在目录上。
      */
     private void attachReaderToCatalog (Catalog catalog) {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,13 @@ import java.awt.Rectangle;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  可以售出的工厂对象适合基本L&F的图标
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Amy Fowler
  */
 public class MotifBorders {
@@ -260,18 +268,22 @@ public class MotifBorders {
         public final static int BORDER_SIZE = 5;
 
         /** Constructs an FrameBorder for the JComponent <b>comp</b>.
+        /* <p>
         */
         public FrameBorder(JComponent comp) {
             jcomp = comp;
         }
 
         /** Sets the FrameBorder's JComponent.
+        /* <p>
       */
         public void setComponent(JComponent comp) {
             jcomp = comp;
         }
 
         /** Returns the FrameBorder's JComponent.
+        /* <p>
+        /* 
           * @see #setComponent
           */
         public JComponent component() {
@@ -296,6 +308,7 @@ public class MotifBorders {
         }
 
        /** Draws the FrameBorder's top border.
+       /* <p>
          */
         protected boolean drawTopBorder(Component c, Graphics g,
                                     int x, int y, int width, int height) {
@@ -330,6 +343,7 @@ public class MotifBorders {
         }
 
         /** Draws the FrameBorder's left border.
+        /* <p>
           */
         protected boolean drawLeftBorder(Component c, Graphics g, int x, int y,
                                int width, int height) {
@@ -355,6 +369,7 @@ public class MotifBorders {
         }
 
         /** Draws the FrameBorder's right border.
+        /* <p>
           */
         protected boolean drawRightBorder(Component c, Graphics g, int x, int y,
                                 int width, int height) {
@@ -381,6 +396,7 @@ public class MotifBorders {
         }
 
         /** Draws the FrameBorder's bottom border.
+        /* <p>
           */
         protected boolean drawBottomBorder(Component c, Graphics g, int x, int y,
                                  int width, int height) {
@@ -416,6 +432,9 @@ public class MotifBorders {
         /** Draws the FrameBorder in the given Rect.  Calls
           * <b>drawTitleBar</b>, <b>drawLeftBorder</b>, <b>drawRightBorder</b> and
           * <b>drawBottomBorder</b>.
+          * <p>
+          *  <b> drawTitleBar </b>,<b> drawLeftBorder </b>,<b> drawRightBorder </b>和<b> drawBottomBorder </b>。
+          * 
           */
         public void paintBorder(Component c, Graphics g,
                             int x, int y, int width, int height) {
@@ -443,6 +462,9 @@ public class MotifBorders {
 
         /** Constructs an InternalFrameBorder for the InternalFrame
           * <b>aFrame</b>.
+          * <p>
+          *  <b> aFrame </b>。
+          * 
           */
         public InternalFrameBorder(JInternalFrame aFrame) {
             super(aFrame);
@@ -450,12 +472,15 @@ public class MotifBorders {
         }
 
         /** Sets the InternalFrameBorder's InternalFrame.
+        /* <p>
           */
         public void setFrame(JInternalFrame aFrame) {
             frame = aFrame;
         }
 
         /** Returns the InternalFrameBorder's InternalFrame.
+        /* <p>
+        /* 
           * @see #setFrame
           */
         public JInternalFrame frame() {
@@ -469,6 +494,10 @@ public class MotifBorders {
           * constrains resizing to just the vertical dimension.  Override this
           * method if you implement your own bottom border painting and use a
           * resize control with a different size.
+          * <p>
+          *  出现在InternalFrameBorder的底部边框。在这些控件中单击和拖动可以让用户更改InternalFrame的宽度和高度,而在控件之间拖动则会将大小调整为仅垂直尺寸。
+          * 如果实现自己的底边框绘制并使用不同大小的调整大小控件,则覆盖此方法。
+          * 
           */
         public int resizePartWidth() {
             if (!frame.isResizable()) {
@@ -478,6 +507,7 @@ public class MotifBorders {
         }
 
         /** Draws the InternalFrameBorder's top border.
+        /* <p>
          */
         protected boolean drawTopBorder(Component c, Graphics g,
                                     int x, int y, int width, int height) {
@@ -497,6 +527,7 @@ public class MotifBorders {
         }
 
         /** Draws the InternalFrameBorder's left border.
+        /* <p>
           */
         protected boolean drawLeftBorder(Component c, Graphics g, int x, int y,
                                      int width, int height) {
@@ -516,6 +547,7 @@ public class MotifBorders {
         }
 
         /** Draws the InternalFrameBorder's right border.
+        /* <p>
           */
         protected boolean drawRightBorder(Component c, Graphics g, int x, int y,
                                       int width, int height) {
@@ -536,6 +568,7 @@ public class MotifBorders {
         }
 
         /** Draws the InternalFrameBorder's bottom border.
+        /* <p>
           */
         protected boolean drawBottomBorder(Component c, Graphics g, int x, int y,
                                        int width, int height) {
@@ -634,6 +667,9 @@ public class MotifBorders {
         /**
          * Creates a MotifPopupMenuBorder instance
          *
+         * <p>
+         *  创建MotifPopupMenuBorder实例
+         * 
          */
         public MotifPopupMenuBorder(
                                     Font titleFont,
@@ -651,6 +687,10 @@ public class MotifBorders {
         /**
          * Paints the border for the specified component with the
          * specified position and size.
+         * <p>
+         *  以指定的位置和大小绘制指定组件的边框。
+         * 
+         * 
          * @param c the component for which this border is being painted
          * @param g the paint graphics
          * @param x the x position of the painted border
@@ -701,6 +741,9 @@ public class MotifBorders {
 
         /**
          * Reinitialize the insets parameter with this Border's current Insets.
+         * <p>
+         *  使用此Border的当前Insets重新初始化insets参数。
+         * 
          * @param c the component for which this border insets value applies
          * @param insets the object to be reinitialized
          */

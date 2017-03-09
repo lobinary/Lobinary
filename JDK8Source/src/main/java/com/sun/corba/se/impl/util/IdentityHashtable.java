@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.util;
@@ -41,25 +45,42 @@ import java.util.NoSuchElementException;
  * does not rely on the hashCode() and equals() methods of the key or value;
  * instead, it uses the System.identityHashcode() method and pointer comparison.
  * In addition, all synchronization has been removed.
+ * <p>
+ *  IdentityHashtable是1.1.6 Hashtable类的修改版本,它不依赖于key或value的hashCode()和equals()方法;相反,它使用System.identityHa
+ * shcode()方法和指针比较。
+ * 此外,所有同步已删除。
+ * 
  */
 public final class IdentityHashtable extends Dictionary {
     /**
      * The hash table data.
+     * <p>
+     *  哈希表数据。
+     * 
      */
     private transient IdentityHashtableEntry table[];
 
     /**
      * The total number of entries in the hash table.
+     * <p>
+     *  哈希表中的条目总数。
+     * 
      */
     private transient int count;
 
     /**
      * Rehashes the table when count exceeds this threshold.
+     * <p>
+     *  当计数超过此阈值时重新刷新表。
+     * 
      */
     private int threshold;
 
     /**
      * The load factor for the hashtable.
+     * <p>
+     *  散列表的负载系数。
+     * 
      */
     private float loadFactor;
 
@@ -67,6 +88,10 @@ public final class IdentityHashtable extends Dictionary {
      * Constructs a new, empty hashtable with the specified initial
      * capacity and the specified load factor.
      *
+     * <p>
+     *  构造具有指定初始容量和指定负载因子的新的空白hashtable。
+     * 
+     * 
      * @param      initialCapacity   the initial capacity of the hashtable.
      * @param      loadFactor        a number between 0.0 and 1.0.
      * @exception  IllegalArgumentException  if the initial capacity is less
@@ -87,6 +112,10 @@ public final class IdentityHashtable extends Dictionary {
      * Constructs a new, empty hashtable with the specified initial capacity
      * and default load factor.
      *
+     * <p>
+     *  构造具有指定初始容量和默认负载因子的新的空白hashtable。
+     * 
+     * 
      * @param   initialCapacity   the initial capacity of the hashtable.
      * @since   JDK1.0
      */
@@ -98,6 +127,10 @@ public final class IdentityHashtable extends Dictionary {
      * Constructs a new, empty hashtable with a default capacity and load
      * factor.
      *
+     * <p>
+     *  构造一个具有默认容量和负载因子的新的空白hashtable。
+     * 
+     * 
      * @since   JDK1.0
      */
     public IdentityHashtable() {
@@ -107,6 +140,10 @@ public final class IdentityHashtable extends Dictionary {
     /**
      * Returns the number of keys in this hashtable.
      *
+     * <p>
+     *  返回此散列表中的键数。
+     * 
+     * 
      * @return  the number of keys in this hashtable.
      * @since   JDK1.0
      */
@@ -117,6 +154,10 @@ public final class IdentityHashtable extends Dictionary {
     /**
      * Tests if this hashtable maps no keys to values.
      *
+     * <p>
+     *  测试这个散列表是否将值映射到值。
+     * 
+     * 
      * @return  <code>true</code> if this hashtable maps no keys to values;
      *          <code>false</code> otherwise.
      * @since   JDK1.0
@@ -128,6 +169,10 @@ public final class IdentityHashtable extends Dictionary {
     /**
      * Returns an enumeration of the keys in this hashtable.
      *
+     * <p>
+     *  返回此散列表中的键的枚举。
+     * 
+     * 
      * @return  an enumeration of the keys in this hashtable.
      * @see     java.util.Enumeration
      * @see     java.util.Hashtable#elements()
@@ -142,6 +187,10 @@ public final class IdentityHashtable extends Dictionary {
      * Use the Enumeration methods on the returned object to fetch the elements
      * sequentially.
      *
+     * <p>
+     *  返回此散列表中的值的枚举。对返回的对象使用枚举方法以顺序获取元素。
+     * 
+     * 
      * @return  an enumeration of the values in this hashtable.
      * @see     java.util.Enumeration
      * @see     java.util.Hashtable#keys()
@@ -156,6 +205,10 @@ public final class IdentityHashtable extends Dictionary {
      * This operation is more expensive than the <code>containsKey</code>
      * method.
      *
+     * <p>
+     *  测试某些键是否映射到此散列表中的指定值。此操作比<code> containsKey </code>方法更昂贵。
+     * 
+     * 
      * @param      value   a value to search for.
      * @return     <code>true</code> if some key maps to the
      *             <code>value</code> argument in this hashtable;
@@ -183,6 +236,10 @@ public final class IdentityHashtable extends Dictionary {
     /**
      * Tests if the specified object is a key in this hashtable.
      *
+     * <p>
+     *  测试指定的对象是否是此散列表中的键。
+     * 
+     * 
      * @param   key   possible key.
      * @return  <code>true</code> if the specified object is a key in this
      *          hashtable; <code>false</code> otherwise.
@@ -204,6 +261,10 @@ public final class IdentityHashtable extends Dictionary {
     /**
      * Returns the value to which the specified key is mapped in this hashtable.
      *
+     * <p>
+     * 返回此散列表中指定键映射到的值。
+     * 
+     * 
      * @param   key   a key in the hashtable.
      * @return  the value to which the key is mapped in this hashtable;
      *          <code>null</code> if the key is not mapped to any value in
@@ -229,6 +290,10 @@ public final class IdentityHashtable extends Dictionary {
      * number of keys in the hashtable exceeds this hashtable's capacity
      * and load factor.
      *
+     * <p>
+     *  将散列表的内容重新散列为容量较大的散列表。当哈希表中的键数量超过此哈希表的容量和负载系数时,将自动调用此方法。
+     * 
+     * 
      * @since   JDK1.0
      */
     protected void rehash() {
@@ -263,6 +328,12 @@ public final class IdentityHashtable extends Dictionary {
      * The value can be retrieved by calling the <code>get</code> method
      * with a key that is equal to the original key.
      *
+     * <p>
+     *  将指定的<code>键</code>映射到此散列表中指定的<code>值</code>。键和值都不能为<code> null </code>。
+     * <p>
+     *  可以通过使用等于原键的键调用<code> get </code>方法来检索该值。
+     * 
+     * 
      * @param      key     the hashtable key.
      * @param      value   the value.
      * @return     the previous value of the specified key in this hashtable,
@@ -311,6 +382,10 @@ public final class IdentityHashtable extends Dictionary {
      * Removes the key (and its corresponding value) from this
      * hashtable. This method does nothing if the key is not in the hashtable.
      *
+     * <p>
+     *  从此散列表中删除键(及其对应的值)。如果密钥不在散列表中,此方法不执行任何操作。
+     * 
+     * 
      * @param   key   the key that needs to be removed.
      * @return  the value to which the key had been mapped in this hashtable,
      *          or <code>null</code> if the key did not have a mapping.
@@ -337,6 +412,10 @@ public final class IdentityHashtable extends Dictionary {
     /**
      * Clears this hashtable so that it contains no keys.
      *
+     * <p>
+     *  清除此散列表,以使其不包含键。
+     * 
+     * 
      * @since   JDK1.0
      */
     public void clear() {
@@ -349,6 +428,9 @@ public final class IdentityHashtable extends Dictionary {
     /**
      * Returns a rather long string representation of this hashtable.
      *
+     * <p>
+     *  返回此散列表的相当长的字符串表示形式。
+     * 
      * @return  a string representation of this hashtable.
      * @since   JDK1.0
      */

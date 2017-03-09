@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@ import javax.xml.bind.ValidationEventLocator;
  * the ValidationEvent interface. This class is just provided for a
  * convenience.
  *
+ * <p>
+ *  ParseConversionEvent接口的默认实现。
+ * 
+ * <p>
+ *  允许JAXB提供程序使用任何实现ValidationEvent接口的类。这个类只是为了方便。
+ * 
+ * 
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see javax.xml.bind.ParseConversionEvent
  * @see javax.xml.bind.Validator
@@ -51,6 +59,10 @@ public class ParseConversionEventImpl
     /**
      * Create a new ParseConversionEventImpl.
      *
+     * <p>
+     *  创建新的ParseConversionEventImpl。
+     * 
+     * 
      * @param _severity The severity value for this event.  Must be one of
      * ValidationEvent.WARNING, ValidationEvent.ERROR, or
      * ValidationEvent.FATAL_ERROR
@@ -67,6 +79,9 @@ public class ParseConversionEventImpl
     /**
      * Create a new ParseConversionEventImpl.
      *
+     * <p>
+     *  创建一个新的ParseConversionEventImpl。
+     * 
      * @param _severity The severity value for this event.  Must be one of
      * ValidationEvent.WARNING, ValidationEvent.ERROR, or
      * ValidationEvent.FATAL_ERROR

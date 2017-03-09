@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,11 @@ import java.awt.Rectangle;
  * be used in conjunction with a FilteredImageSource object to produce
  * cropped versions of existing images.
  *
+ * <p>
+ *  用于裁剪图像的ImageFilter类。此类扩展了基本的ImageFilter类,以提取现有图像的给定矩形区域,并为仅包含提取区域的新图像提供源。
+ * 它意味着与FilteredImageSource对象结合使用,以生成现有图像的裁剪版本。
+ * 
+ * 
  * @see FilteredImageSource
  * @see ImageFilter
  *
@@ -53,6 +59,10 @@ public class CropImageFilter extends ImageFilter {
      * Constructs a CropImageFilter that extracts the absolute rectangular
      * region of pixels from its source Image as specified by the x, y,
      * w, and h parameters.
+     * <p>
+     *  构造一个CropImageFilter,从x,y,w和h参数指定的源图像中提取像素的绝对矩形区域。
+     * 
+     * 
      * @param x the x location of the top of the rectangle to be extracted
      * @param y the y location of the top of the rectangle to be extracted
      * @param w the width of the rectangle to be extracted
@@ -77,6 +87,12 @@ public class CropImageFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  在添加指示裁剪区域的属性之后,从源对象沿着属性传递。此方法调用<code> super.setProperties </code>,这可能会导致添加其他属性。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
      */
     public void setProperties(Hashtable<?,?> props) {
         Hashtable<Object,Object> p = (Hashtable<Object,Object>)props.clone();
@@ -94,6 +110,13 @@ public class CropImageFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  覆盖源图像的尺寸,并将矩形裁剪区域的尺寸传递给ImageConsumer。
+     * <p>
+     * 注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer
      */
     public void setDimensions(int w, int h) {
@@ -111,6 +134,12 @@ public class CropImageFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  确定传递的字节像素是否与要提取的区域相交,并仅通过出现在输出区域中的像素子集。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
      */
     public void setPixels(int x, int y, int w, int h,
                           ColorModel model, byte pixels[], int off,
@@ -151,6 +180,10 @@ public class CropImageFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  确定递送的int像素是否与要提取的区域相交,并仅通过出现在输出区域中的像素子集。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
      */
     public void setPixels(int x, int y, int w, int h,
                           ColorModel model, int pixels[], int off,

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,17 @@ import sun.awt.image.ImagingLib;
  * <li>For <CODE>Raster</CODE> objects, the number of bands in the source must
  * be equal to the number of bands in the destination.
  * </ul>
+ * <p>
+ *  此类使用仿射变换执行从源图像中的2D坐标或<CODE>栅格</CODE>到目标图像或<CODE>栅格</CODE>中的2D坐标的线性映射。
+ * 所使用的插值类型通过构造函数指定,或者通过<CODE> RenderingHints </CODE>对象或者通过此类中定义的整数插值类型之一。
+ * <p>
+ *  如果在构造函数中指定了<CODE> RenderingHints </CODE>对象,则插值提示和渲染质量提示用于设置此操作的插值类型。当需要颜色转换时,可以使用显色提示和抖动提示。
+ * <p>
+ *  注意,必须满足以下约束：
+ * <ul>
+ *  <li>源和目标必须不同。 <li>对于<CODE> Raster </CODE>对象,源中的波段数必须等于目标中的波段数。
+ * </ul>
+ * 
  * @see AffineTransform
  * @see BufferedImageFilter
  * @see java.awt.RenderingHints#KEY_INTERPOLATION
@@ -69,16 +81,25 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
 
     /**
      * Nearest-neighbor interpolation type.
+     * <p>
+     *  近邻插值类型。
+     * 
      */
     @Native public static final int TYPE_NEAREST_NEIGHBOR = 1;
 
     /**
      * Bilinear interpolation type.
+     * <p>
+     *  双线性插值类型。
+     * 
      */
     @Native public static final int TYPE_BILINEAR = 2;
 
     /**
      * Bicubic interpolation type.
+     * <p>
+     *  双三次插值类型。
+     * 
      */
     @Native public static final int TYPE_BICUBIC = 3;
 
@@ -94,6 +115,12 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * the interpolation type is {@link #TYPE_NEAREST_NEIGHBOR
      * TYPE_NEAREST_NEIGHBOR}.
      *
+     * <p>
+     * 构造一个给定仿射变换的<CODE> AffineTransformOp </CODE>。插值类型由<CODE> RenderingHints </CODE>对象确定。如果定义了插值提示,则将使用它。
+     * 否则,如果定义了渲染质量提示,则从其值确定插值类型。
+     * 如果没有指定提示(<CODE> hints </CODE>为null),插值类型为{@link #TYPE_NEAREST_NEIGHBOR TYPE_NEAREST_NEIGHBOR}。
+     * 
+     * 
      * @param xform The <CODE>AffineTransform</CODE> to use for the
      * operation.
      *
@@ -139,6 +166,10 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * Constructs an <CODE>AffineTransformOp</CODE> given an affine transform
      * and the interpolation type.
      *
+     * <p>
+     *  构造一个<CODE> AffineTransformOp </CODE>给定仿射变换和插值类型。
+     * 
+     * 
      * @param xform The <CODE>AffineTransform</CODE> to use for the operation.
      * @param interpolationType One of the integer
      * interpolation type constants defined by this class:
@@ -164,6 +195,10 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
 
     /**
      * Returns the interpolation type used by this op.
+     * <p>
+     *  返回此操作使用的插值类型。
+     * 
+     * 
      * @return the interpolation type.
      * @see #TYPE_NEAREST_NEIGHBOR
      * @see #TYPE_BILINEAR
@@ -195,6 +230,17 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * An <CODE>IllegalArgumentException</CODE> is thrown if the source is
      * the same as the destination.
      *
+     * <p>
+     *  转换源<CODE> BufferedImage </CODE>,并将结果存储在目标<CODE> BufferedImage </CODE>中。
+     * 如果两个图像的颜色模型不匹配,则执行到目的地颜色模型的颜色转换。
+     * 如果目标图像为null,则使用源<CODE> ColorModel </CODE>创建<CODE> BufferedImage </CODE>。
+     * <p>
+     *  <code> getBounds2D(BufferedImage)</code>返回的矩形的坐标不一定与此方法返回的<code> BufferedImage </code>的坐标相同。
+     * 如果矩形的左上角坐标为负,则不绘制矩形的这部分。如果矩形的左上角坐标为正,则在目的地<code> BufferedImage </code>中的那个位置处绘制滤波后的图像。
+     * <p>
+     * 如果源与目标相同,则会抛出<CODE> IllegalArgumentException </CODE>。
+     * 
+     * 
      * @param src The <CODE>BufferedImage</CODE> to transform.
      * @param dst The <CODE>BufferedImage</CODE> in which to store the results
      * of the transformation.
@@ -323,6 +369,16 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * of the rectangle are positive then the filtered image is drawn at
      * that position in the destination <code>Raster</code>.
      * <p>
+     * <p>
+     *  转换源<CODE>光栅</CODE>并将结果存储在目标<CODE>光栅</CODE>中。该操作按带执行变换。
+     * <p>
+     *  如果目标<CODE> Raster </CODE>为空,则会创建一个新的<CODE>栅格</CODE>。
+     * 如果源与目标相同或如果源中的带数不等于目标中的带数,则可能会抛出<CODE> IllegalArgumentException </CODE>。
+     * <p>
+     *  <code> getBounds2D(Raster)</code>返回的矩形的坐标不一定与此方法返回的<code> WritableRaster </code>的坐标相同。
+     * 如果矩形的左上角坐标为负,则不绘制矩形的这部分。如果矩形的坐标是正的,则在目的地<code> Raster </code>中的那个位置处绘制滤波后的图像。
+     * <p>
+     * 
      * @param src The <CODE>Raster</CODE> to transform.
      * @param dst The <CODE>Raster</CODE> in which to store the results of the
      * transformation.
@@ -366,6 +422,10 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * transformed points.  The coordinates of the upper-left corner
      * of the returned rectangle might not be (0,&nbsp;0).
      *
+     * <p>
+     *  返回已转换目标的边界框。返回的矩形是变换点的实际边界框。返回的矩形的左上角的坐标可能不是(0,&nbsp; 0)。
+     * 
+     * 
      * @param src The <CODE>BufferedImage</CODE> to be transformed.
      *
      * @return The <CODE>Rectangle2D</CODE> representing the destination's
@@ -381,6 +441,10 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * transformed points.  The coordinates of the upper-left corner
      * of the returned rectangle might not be (0,&nbsp;0).
      *
+     * <p>
+     *  返回已转换目标的边界框。返回的矩形将是变换点的实际边界框。返回的矩形的左上角的坐标可能不是(0,&nbsp; 0)。
+     * 
+     * 
      * @param src The <CODE>Raster</CODE> to be transformed.
      *
      * @return The <CODE>Rectangle2D</CODE> representing the destination's
@@ -427,6 +491,13 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * <CODE>ColorModel</CODE> may have
      * an alpha channel even if the source <CODE>ColorModel</CODE> is opaque.
      *
+     * <p>
+     * 使用正确的大小和带数创建一个调零的目标图像。如果转换的宽度或高度等于0,则可能会抛出<CODE> RasterFormatException </CODE>。
+     * <p>
+     *  如果<CODE> destCM </CODE>为null,则使用适当的<CODE> ColorModel </CODE>;即使源<CODE> ColorModel </CODE>不透明,此<CODE>
+     *  ColorModel </CODE>也可能具有Alpha通道。
+     * 
+     * 
      * @param src  The <CODE>BufferedImage</CODE> to be transformed.
      * @param destCM  <CODE>ColorModel</CODE> of the destination.  If null,
      * an appropriate <CODE>ColorModel</CODE> is used.
@@ -482,6 +553,10 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * and number of bands.  A <CODE>RasterFormatException</CODE> may be thrown
      * if the transformed width or height is equal to 0.
      *
+     * <p>
+     *  使用正确的大小和带数创建一个归零目的地<CODE> Raster </CODE>。如果转换的宽度或高度等于0,则可能会抛出<CODE> RasterFormatException </CODE>。
+     * 
+     * 
      * @param src The <CODE>Raster</CODE> to be transformed.
      *
      * @return The zeroed destination <CODE>Raster</CODE>.
@@ -500,6 +575,10 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
      * point in the source.  If <CODE>dstPt</CODE> is specified, it
      * is used to hold the return value.
      *
+     * <p>
+     *  返回给定源中的点的相应目标点的位置。如果指定<CODE> dstPt </CODE>,它将用于保存返回值。
+     * 
+     * 
      * @param srcPt The <code>Point2D</code> that represents the source
      *              point.
      * @param dstPt The <CODE>Point2D</CODE> in which to store the result.
@@ -514,6 +593,10 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
     /**
      * Returns the affine transform used by this transform operation.
      *
+     * <p>
+     *  返回此变换操作使用的仿射变换。
+     * 
+     * 
      * @return The <CODE>AffineTransform</CODE> associated with this op.
      */
     public final AffineTransform getTransform() {
@@ -523,6 +606,9 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
     /**
      * Returns the rendering hints used by this transform operation.
      *
+     * <p>
+     *  返回此变换操作使用的呈现提示。
+     * 
      * @return The <CODE>RenderingHints</CODE> object associated with this op.
      */
     public final RenderingHints getRenderingHints() {

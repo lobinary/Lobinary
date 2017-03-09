@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,26 @@ package java.lang;
  * or method in this class will cause a {@link NullPointerException} to be
  * thrown.
  *
+ * <p>
+ *  可变字符序列。此类提供与{@code StringBuffer}兼容的API,但不保证同步。
+ * 这个类被设计为在单个线程正在使用字符串缓冲区的地方(如通常情况)用作{@code StringBuffer}的插入替换。
+ * 在可能的情况下,建议使用这个类优先于{@code StringBuffer},因为它在大多数实现中会更快。
+ * 
+ *  <p> {@code StringBuilder}的主要操作是{@code append}和{@code insert}方法,它们被重载以接受任何类型的数据。
+ * 每个都有效地将给定的数据转换为字符串,然后将字符串的字符附加或插入字符串构建器。 {@code append}方法总是在构建器的末尾添加这些字符; {@code insert}方法在指定点添加字符。
+ * <p>
+ *  例如,如果{@code z}引用当前内容为"{@code start}"的字符串构造器对象,则调用{@code z.append("le")}的方法将导致字符串构建器包含"{@code startle}
+ * ",而{@code z.insert(4,"le")}会改变字符串构造器包含"{@code starlet}"。
+ * <p>
+ * 通常,如果sb引用{@code StringBuilder}的一个实例,则{@code sb.append(x)}的效果与{@code sb.insert(sb.length(),x)}相同。
+ * <p>
+ *  每个字符串构建器都有一个容量只要字符串构建器中包含的字符序列的长度不超过容量,就不必分配新的内部缓冲区。如果内部缓冲区溢出,它会自动变大。
+ * 
+ *  <p> {@code StringBuilder}的执行个体不适用于多个执行绪。如果需要这样的同步,那么建议使用{@link java.lang.StringBuffer}。
+ * 
+ *  <p>除非另有说明,否则将{@code null}参数传递给此类中的构造函数或方法将导致抛出{@link NullPointerException}。
+ * 
+ * 
  * @author      Michael McCloskey
  * @see         java.lang.StringBuffer
  * @see         java.lang.String
@@ -84,6 +105,9 @@ public final class StringBuilder
     /**
      * Constructs a string builder with no characters in it and an
      * initial capacity of 16 characters.
+     * <p>
+     *  构造字符串构建器,其中不包含字符,初始容量为16个字符。
+     * 
      */
     public StringBuilder() {
         super(16);
@@ -93,6 +117,10 @@ public final class StringBuilder
      * Constructs a string builder with no characters in it and an
      * initial capacity specified by the {@code capacity} argument.
      *
+     * <p>
+     *  构造一个字符串构造器,其中没有字符,并且由{@code capacity}参数指定的初始容量。
+     * 
+     * 
      * @param      capacity  the initial capacity.
      * @throws     NegativeArraySizeException  if the {@code capacity}
      *               argument is less than {@code 0}.
@@ -106,6 +134,10 @@ public final class StringBuilder
      * specified string. The initial capacity of the string builder is
      * {@code 16} plus the length of the string argument.
      *
+     * <p>
+     *  构造一个初始化为指定字符串内容的字符串构造器。字符串构建器的初始容量为{@code 16}加上字符串参数的长度。
+     * 
+     * 
      * @param   str   the initial contents of the buffer.
      */
     public StringBuilder(String str) {
@@ -119,6 +151,10 @@ public final class StringBuilder
      * the string builder is {@code 16} plus the length of the
      * {@code CharSequence} argument.
      *
+     * <p>
+     *  构造一个字符串构造器,其中包含与指定的{@code CharSequence}相同的字符。字符串构建器的初始容量为{@code 16}加上{@code CharSequence}参数的长度。
+     * 
+     * 
      * @param      seq   the sequence to copy.
      */
     public StringBuilder(CharSequence seq) {
@@ -153,6 +189,16 @@ public final class StringBuilder
      * <i>n</i>; otherwise, it is equal to the character at index <i>k-n</i>
      * in the argument {@code sb}.
      *
+     * <p>
+     *  将指定的{@code StringBuffer}附加到此序列。
+     * <p>
+     * {@code StringBuffer}参数的字符按顺序附加到此序列,将此序列的长度增加参数的长度。
+     * 如果{@code sb}是{@code null},那么四个字符{@code"null"}将附加到此序列。
+     * <p>
+     *  让<i> n </i>是在执行{@code append}方法之前的这个字符序列的长度。
+     * 然后,新字符序列中索引<k>的字符等于旧字符序列中索引k的字符,如果<k> k <比<i> </i>否则,它等于参数{@code sb}中索引<k>的字符<i> k-n </i>。
+     * 
+     * 
      * @param   sb   the {@code StringBuffer} to append.
      * @return  a reference to this object.
      */
@@ -168,6 +214,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws     IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -183,6 +231,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -228,6 +278,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.5
      */
     @Override
@@ -237,6 +289,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -246,6 +300,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -255,6 +311,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -264,6 +322,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -275,6 +335,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -284,6 +346,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -293,6 +357,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -302,6 +368,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -311,6 +379,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -322,6 +392,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -331,6 +403,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -340,6 +414,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -349,6 +425,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -358,6 +436,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -367,6 +447,8 @@ public final class StringBuilder
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -411,6 +493,10 @@ public final class StringBuilder
      * Save the state of the {@code StringBuilder} instance to a stream
      * (that is, serialize it).
      *
+     * <p>
+     *  将{@code StringBuilder}实例的状态保存到流(即序列化它)。
+     * 
+     * 
      * @serialData the number of characters currently stored in the string
      *             builder ({@code int}), followed by the characters in the
      *             string builder ({@code char[]}).   The length of the
@@ -428,6 +514,8 @@ public final class StringBuilder
     /**
      * readObject is called to restore the state of the StringBuffer from
      * a stream.
+     * <p>
+     *  readObject被调用以从流中恢复StringBuffer的状态。
      */
     private void readObject(java.io.ObjectInputStream s)
         throws java.io.IOException, ClassNotFoundException {

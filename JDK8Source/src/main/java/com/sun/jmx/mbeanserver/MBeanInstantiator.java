@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,10 @@ import sun.reflect.misc.ReflectUtil;
  * different class loaders, deserializing objects in the context of a
  * given class loader.
  *
+ * <p>
+ *  实现MBeanInstantiator接口。提供实例化对象的方法,找到给定名称的类,使用不同的类加载器,在给定类加载器的上下文中反序列化对象。
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanInstantiator {
@@ -76,6 +81,9 @@ public class MBeanInstantiator {
      * This methods tests if the MBean class makes it possible to
      * instantiate an MBean of this class in the MBeanServer.
      * e.g. it must have a public constructor, be a concrete class...
+     * <p>
+     *  此方法测试MBean类是否可以在MBeanServer中实例化此类的MBean。例如它必须有一个公共构造函数,是一个具体的类...
+     * 
      */
     public void testCreation(Class<?> c) throws NotCompliantMBeanException {
         Introspector.testCreation(c);
@@ -84,6 +92,10 @@ public class MBeanInstantiator {
     /**
      * Loads the class with the specified name using this object's
      * Default Loader Repository.
+     * <p>
+     *  使用此对象的Default Loader Repository使用指定的名称加载类。
+     * 
+     * 
      **/
     public Class<?> findClassWithDefaultLoaderRepository(String className)
         throws ReflectionException {
@@ -112,6 +124,9 @@ public class MBeanInstantiator {
     /**
      * Gets the class for the specified class name using the MBean
      * Interceptor's classloader
+     * <p>
+     *  使用MBean Interceptor的类加载器获取指定类名的类
+     * 
      */
     public Class<?> findClass(String className, ClassLoader loader)
         throws ReflectionException {
@@ -122,6 +137,9 @@ public class MBeanInstantiator {
     /**
      * Gets the class for the specified class name using the specified
      * class loader
+     * <p>
+     *  使用指定的类装入器获取指定类名的类
+     * 
      */
     public Class<?> findClass(String className, ObjectName aLoader)
         throws ReflectionException, InstanceNotFoundException  {
@@ -146,6 +164,9 @@ public class MBeanInstantiator {
     /**
      * Return an array of Class corresponding to the given signature, using
      * the specified class loader.
+     * <p>
+     *  使用指定的类加载器返回对应于给定签名的Class数组。
+     * 
      */
     public Class<?>[] findSignatureClasses(String signature[],
                                            ClassLoader loader)
@@ -210,6 +231,9 @@ public class MBeanInstantiator {
     /**
      * Instantiates an object given its class, using its empty constructor.
      * The call returns a reference to the newly created object.
+     * <p>
+     *  使用其空构造函数实例化给定其类的对象。该调用返回对新创建对象的引用。
+     * 
      */
     public Object instantiate(Class<?> theClass)
         throws ReflectionException, MBeanException {
@@ -267,6 +291,9 @@ public class MBeanInstantiator {
      * Instantiates an object given its class, the parameters and
      * signature of its constructor The call returns a reference to
      * the newly created object.
+     * <p>
+     *  给定一个对象的类,其参数和构造函数的签名实例化该对象该调用返回对新创建的对象的引用。
+     * 
      */
     public Object instantiate(Class<?> theClass, Object params[],
                               String signature[], ClassLoader loader)
@@ -340,6 +367,10 @@ public class MBeanInstantiator {
     /**
      * De-serializes a byte array in the context of a classloader.
      *
+     * <p>
+     *  在类加载器的上下文中解串序列化字节数组。
+     * 
+     * 
      * @param loader the classloader to use for de-serialization
      * @param data The byte array to be de-sererialized.
      *
@@ -384,6 +415,11 @@ public class MBeanInstantiator {
      * class is specified. If null, a default one has to be provided (for a
      * MBean Server, its own class loader will be used).
      *
+     * <p>
+     * 在给定MBean类加载器的上下文中解序列化字节数组。 <P>类加载器是用类名"className"加载类的类加载器。 <P>指定要用于加载指定类的类加载器的名称。
+     * 如果为null,则必须提供一个默认值(对于MBean Server,将使用它自己的类装载器)。
+     * 
+     * 
      * @param className The name of the class whose class loader should
      *  be used for the de-serialization.
      * @param data The byte array to be de-sererialized.
@@ -470,6 +506,11 @@ public class MBeanInstantiator {
      * <P>It returns a reference to the newly created object.
      * <P>The newly created object is not registered in the MBean Interceptor.
      *
+     * <p>
+     *  使用在MBean Interceptor中注册的所有类加载器的列表(使用其{@link javax.management.loading.ClassLoaderRepository})实例化对象。
+     *  <P>对象的类应该有一个public构造函数。 <P>它返回对新创建的对象的引用。 <P>新创建的对象未在MBean Interceptor中注册。
+     * 
+     * 
      * @param className The class name of the object to be instantiated.
      *
      * @return The newly instantiated object.
@@ -502,6 +543,12 @@ public class MBeanInstantiator {
      * <P>It returns a reference to the newly created object.
      * <P>The newly created object is not registered in the MBean Interceptor.
      *
+     * <p>
+     *  使用由其<CODE> ObjectName </CODE>指定的类Loader实例化对象。
+     *  <P>如果加载程序名称为null,则必须提供一个默认值(对于MBean Server,将使用加载它的ClassLoader)。 <P>对象的类应该有一个public构造函数。
+     *  <P>它返回对新创建的对象的引用。 <P>新创建的对象未在MBean Interceptor中注册。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param loaderName The object name of the class loader to be used.
      *
@@ -537,6 +584,11 @@ public class MBeanInstantiator {
      * <P>The call returns a reference to the newly created object.
      * <P>The newly created object is not registered in the MBean Interceptor.
      *
+     * <p>
+     *  使用MBean服务器中注册的所有类加载器的列表(使用其{@link javax.management.loading.ClassLoaderRepository})实例化对象。
+     *  <P>对象的类应该有一个public构造函数。 <P>调用返回对新创建对象的引用。 <P>新创建的对象未在MBean Interceptor中注册。
+     * 
+     * 
      * @param className The class name of the object to be instantiated.
      * @param params An array containing the parameters of the constructor to
      * be invoked.
@@ -578,6 +630,11 @@ public class MBeanInstantiator {
      * <P>The call returns a reference to the newly created object.
      * <P>The newly created object is not registered in the MBean server.
      *
+     * <p>
+     * 实例化对象。要使用的类加载器由其对象名称标识。 <P>如果加载器的对象名称为null,则必须提供默认值(例如,对于MBean Server,将使用加载它的ClassLoader)。
+     *  <P>对象的类应该有一个public构造函数。 <P>调用返回对新创建对象的引用。 <P>新创建的对象未在MBean服务器中注册。
+     * 
+     * 
      * @param className The class name of the object to be instantiated.
      * @param params An array containing the parameters of the constructor to
      * be invoked.
@@ -623,6 +680,10 @@ public class MBeanInstantiator {
 
     /**
      * Return the Default Loader Repository used by this instantiator object.
+     * <p>
+     *  返回此实例化对象使用的Default Loader Repository。
+     * 
+     * 
      **/
     public ModifiableClassLoaderRepository getClassLoaderRepository() {
         checkMBeanPermission((String)null, null, null, "getClassLoaderRepository");
@@ -632,6 +693,10 @@ public class MBeanInstantiator {
     /**
      * Load a class with the specified loader, or with this object
      * class loader if the specified loader is null.
+     * <p>
+     *  使用指定的加载器加载类,如果指定的加载器为空,则加载此对象类加载器。
+     * 
+     * 
      **/
     static Class<?> loadClass(String className, ClassLoader loader)
         throws ReflectionException {
@@ -662,6 +727,9 @@ public class MBeanInstantiator {
     /**
      * Load the classes specified in the signature with the given loader,
      * or with this object class loader.
+     * <p>
+     *  使用给定加载器或使用此对象类加载器加载签名中指定的类。
+     * 
      **/
     static Class<?>[] loadSignatureClasses(String signature[],
                                            ClassLoader loader)

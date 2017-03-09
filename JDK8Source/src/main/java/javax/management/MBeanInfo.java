@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -102,6 +103,47 @@ import static javax.management.ImmutableDescriptor.nonNullDescriptor;
  * of parameters to constructors and operations; and the descriptions of
  * constructor parameters.</p>
  *
+ * <p>
+ *  <p>描述MBean公开的管理接口;即,可用于管理操作的属性和操作的集合。这个类的实例是不可变的。子类可以是可变的,但不推荐这样做。</p>
+ * 
+ *  <p id ="info-changed">通常,任何给定MBean的{@code MBeanInfo}在该MBean的生命周期内不会更改。
+ * 动态MBean可以更改其{@code MBeanInfo},在这种情况下,建议它们发出{@link Notification} {@linkplain Notification#getType()type}
+ *  {@code} jmx.mbean.info.changed "}和{@linkplain Notification#getUserData()userData},它是新的{@code MBeanInfo}
+ * 。
+ *  <p id ="info-changed">通常,任何给定MBean的{@code MBeanInfo}在该MBean的生命周期内不会更改。
+ * 这不是必需的,但为MBean的客户端提供发现改变的常规方式。
+ * 另请参阅{@code MBeanInfo} {@link描述符}中的<a href="Descriptor.html#immableableInfo"> immutableInfo </a>和<a href="Descriptor.html#infoTimeout">
+ *  infoTimeout </a>字段}。
+ * 这不是必需的,但为MBean的客户端提供发现改变的常规方式。</p>。
+ * 
+ *  <p>动态MBean的<code> MBeanInfo </code>的内容由其{@link DynamicMBean#getMBeanInfo getMBeanInfo()}方法确定。
+ * 这包括Open MBean和Model MBean,它们是动态MBean的种类。</p>。
+ * 
+ *  <p>标准MBean的<code> MBeanInfo </code>的内容由MBean服务器确定如下：</p>
+ * 
+ * <ul>
+ * 
+ * <li> {@ link #getClassName()}返回MBean对象的Java类名称;
+ * 
+ *  <li> {@ link #getConstructors()}返回该对象中所有公共构造函数的列表;
+ * 
+ *  <li> {@ link #getAttributes()}返回从<code> get <i> Name </i> </code>,<code>中的MBean接口中出现存在的所有属性的列表。
+ * 是符合标准MBean约定的<i> Name </i> </code>或<code> set <i> Name </i> </code>。
+ * 
+ *  <li> {@ link #getOperations()}返回MBean界面中不表示属性的所有方法的列表;
+ * 
+ *  <li>如果MBean未实施{@link NotificationBroadcaster}接口,或者调用{@link NotificationBroadcaster#getNotificationInfo()}
+ * 的结果,{@ link #getNotifications()}将返回一个空数组;。
+ * 
+ *  <li> {@ link #getDescriptor()}返回一个包含MBean接口中任何描述符注释内容的描述符(请参阅{@link DescriptorKey @DescriptorKey})。
+ * 
+ * </ul>
+ * 
+ *  <p> {@link #getDescription()}返回的描述和包含的属性和操作的说明未指定。</p>
+ * 
+ *  <p>未指定标准MBean的<code> MBeanInfo </code>的其余详细信息。这包括任何包含的构造函数和通知的描述;构造函数和操作的参数名称;和构造函数参数的描述。</p>
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
@@ -110,37 +152,51 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
     static final long serialVersionUID = -6451021435135161911L;
 
     /**
+    /* <p>
+    /* 
      * @serial The Descriptor for the MBean.  This field
      * can be null, which is equivalent to an empty Descriptor.
      */
     private transient Descriptor descriptor;
 
     /**
+    /* <p>
+    /* 
      * @serial The human readable description of the class.
      */
     private final String description;
 
     /**
+    /* <p>
+    /* 
      * @serial The MBean qualified name.
      */
     private final String className;
 
     /**
+    /* <p>
+    /* 
      * @serial The MBean attribute descriptors.
      */
     private final MBeanAttributeInfo[] attributes;
 
     /**
+    /* <p>
+    /* 
      * @serial The MBean operation descriptors.
      */
     private final MBeanOperationInfo[] operations;
 
      /**
+     /* <p>
+     /* 
      * @serial The MBean constructor descriptors.
      */
     private final MBeanConstructorInfo[] constructors;
 
     /**
+    /* <p>
+    /* 
      * @serial The MBean notification descriptors.
      */
     private final MBeanNotificationInfo[] notifications;
@@ -157,12 +213,21 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * when doing operations like {@link #equals} where we know they
      * will not be changed.  If a subclass overrides a getter, we
      * cannot access the corresponding array directly.</p>
+     * <p>
+     * <p>如果已知此类不会覆盖MBeanInfo的数组值getter,则为true。显然对于MBeanInfo本身是真的,对于一个子类,我们成功地反映了方法,发现它们没有被覆盖。</p>
+     * 
+     *  <p>此变量的目的是避免在执行像{@link #equals}这样的操作时克隆数组,我们知道它们不会被改变。如果一个子类覆盖了一个getter,我们不能直接访问相应的数组。</p>
+     * 
      */
     private final transient boolean arrayGettersSafe;
 
     /**
      * Constructs an <CODE>MBeanInfo</CODE>.
      *
+     * <p>
+     *  构造一个<CODE> MBeanInfo </CODE>。
+     * 
+     * 
      * @param className The name of the Java class of the MBean described
      * by this <CODE>MBeanInfo</CODE>.  This value may be any
      * syntactically legal Java class name.  It does not have to be a
@@ -197,6 +262,10 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
     /**
      * Constructs an <CODE>MBeanInfo</CODE>.
      *
+     * <p>
+     *  构造一个<CODE> MBeanInfo </CODE>。
+     * 
+     * 
      * @param className The name of the Java class of the MBean described
      * by this <CODE>MBeanInfo</CODE>.  This value may be any
      * syntactically legal Java class name.  It does not have to be a
@@ -267,6 +336,12 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      *
      * <p>Since this class is immutable, the clone method is chiefly of
      * interest to subclasses.</p>
+     * <p>
+     *  <p>返回此实例的浅克隆。通过简单调用<tt> super.clone()</tt>获得克隆,从而调用由<tt> Object.clone()</tt>实现的默认本机浅克隆机制。
+     * 不会对任何内部字段进行更深层次的克隆。</p>。
+     * 
+     *  <p>由于这个类是不可变的,克隆方法主要是子类的兴趣。</p>
+     * 
      */
      @Override
      public Object clone () {
@@ -283,6 +358,10 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * Returns the name of the Java class of the MBean described by
      * this <CODE>MBeanInfo</CODE>.
      *
+     * <p>
+     *  返回此<CODE> MBeanInfo </CODE>描述的MBean的Java类的名称。
+     * 
+     * 
      * @return the class name.
      */
     public String getClassName()  {
@@ -292,6 +371,10 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
     /**
      * Returns a human readable description of the MBean.
      *
+     * <p>
+     *  返回MBean的人性化描述。
+     * 
+     * 
      * @return the description.
      */
     public String getDescription()  {
@@ -307,6 +390,13 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * references to the <CODE>MBeanAttributeInfo</CODE> objects
      * but that each referenced <CODE>MBeanAttributeInfo</CODE> object is not copied.
      *
+     * <p>
+     *  返回公开用于管理的属性列表。每个属性由<CODE> MBeanAttributeInfo </CODE>对象描述。
+     * 
+     *  返回的数组是内部数组的浅拷贝,这意味着它是引用到<CODE> MBeanAttributeInfo </CODE>对象的内部数组的副本,但每个引用的<CODE> MBeanAttributeInfo 
+     * </CODE>对象不复制。
+     * 
+     * 
      * @return  An array of <CODE>MBeanAttributeInfo</CODE> objects.
      */
     public MBeanAttributeInfo[] getAttributes()   {
@@ -334,6 +424,10 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * a readObject() method, but that would require us to define the
      * various array fields as non-final, which is annoying because
      * conceptually they are indeed final.
+     * <p>
+     * 返回属性字段的值,如果字段为空,则返回空数组。这不能发生在这个类的正常构造的实例,但是如果实例被反序列化从允许字段为null的另一个实现。
+     * 如果我们通过写一个readObject()方法强制执行类不变量这些字段不能为null,但是这将要求我们将各种数组字段定义为非final,这是令人讨厌的,因为在概念上它们确实是final。
+     * 
      */
     private MBeanAttributeInfo[] nonNullAttributes() {
         return (attributes == null) ?
@@ -349,6 +443,13 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * references to the <CODE>MBeanOperationInfo</CODE> objects
      * but that each referenced <CODE>MBeanOperationInfo</CODE> object is not copied.
      *
+     * <p>
+     *  返回MBean的操作列表。每个操作由<CODE> MBeanOperationInfo </CODE>对象描述。
+     * 
+     *  返回的数组是内部数组的浅拷贝,这意味着它是引用到<CODE> MBeanOperationInfo </CODE>对象的内部数组的副本,但每个引用的<CODE> MBeanOperationInfo 
+     * </CODE>对象不复制。
+     * 
+     * 
      * @return  An array of <CODE>MBeanOperationInfo</CODE> objects.
      */
     public MBeanOperationInfo[] getOperations()  {
@@ -388,6 +489,16 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * instance of this MBean's class using that constructor, even
      * though it is not listed here.</p>
      *
+     * <p>
+     *  <p>返回MBean的公共构造函数的列表。每个构造函数由<CODE> MBeanConstructorInfo </CODE>对象描述。</p>
+     * 
+     *  <p>返回的数组是内部数组的浅拷贝,这意味着它是引用到<CODE> MBeanConstructorInfo </CODE>对象的内部数组的副本,但每个引用<CODE> MBeanConstructo
+     * rInfo </CODE >对象未被复制。
+     * </p>。
+     * 
+     * <p>返回的列表不一定是详尽的。也就是说,MBean可能有一个不在列表中的公共构造函数。在这种情况下,MBean服务器可以使用该构造函数构造此MBean类的另一个实例,即使此处未列出。</p>
+     * 
+     * 
      * @return  An array of <CODE>MBeanConstructorInfo</CODE> objects.
      */
     public MBeanConstructorInfo[] getConstructors()  {
@@ -419,6 +530,13 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * references to the <CODE>MBeanNotificationInfo</CODE> objects
      * but that each referenced <CODE>MBeanNotificationInfo</CODE> object is not copied.
      *
+     * <p>
+     *  返回MBean发出的通知的列表。每个通知由<CODE> MBeanNotificationInfo </CODE>对象描述。
+     * 
+     *  返回的数组是内部数组的浅拷贝,这意味着它是引用到<CODE> MBeanNotificationInfo </CODE>对象的内部数组的副本,但每个引用的<CODE> MBeanNotificatio
+     * nInfo </CODE>对象不复制。
+     * 
+     * 
      * @return  An array of <CODE>MBeanNotificationInfo</CODE> objects.
      */
     public MBeanNotificationInfo[] getNotifications()  {
@@ -445,6 +563,10 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * Get the descriptor of this MBeanInfo.  Changing the returned value
      * will have no affect on the original descriptor.
      *
+     * <p>
+     *  获取此MBeanInfo的描述符。更改返回值将不会影响原始描述符。
+     * 
+     * 
      * @return a descriptor that is either immutable or a copy of the original.
      *
      * @since 1.6
@@ -480,6 +602,16 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * <p>If two MBeanInfo objects return the same values in one of
      * their arrays but in a different order then they are not equal.</p>
      *
+     * <p>
+     *  <p>将此MBeanInfo与另一个进行比较。
+     * 当且仅当它们为{@link #getClassName()},{@link #getDescription()}和{@link #getDescriptor()}返回相同的值时,两个MBeanInfo对
+     * 象是相等的, {@link #getAttributes()},{@link #getOperations()},{@link #getConstructors()}和{@link #getNotifications()}
+     * 的两个对象成对相等。
+     *  <p>将此MBeanInfo与另一个进行比较。这里"等于"表示{@link Object#equals(Object)},而不是身份。</p>。
+     * 
+     *  <p>如果两个MBeanInfo对象在其数组中返回相同的值,但顺序不同,则它们不相等。</p>
+     * 
+     * 
      * @param o the object to compare to.
      *
      * @return true if and only if <code>o</code> is an MBeanInfo that is equal
@@ -512,6 +644,12 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
            caching won't work and we will recompute it every time.
 
            We don't bother synchronizing, because, at worst, n different
+        /* <p>
+        /*  如果由于某些可怕的不幸,计算值为0,缓存将不工作,我们将每次重新计算。
+        /* 
+        /* 我们不打扰同步,因为,在最坏的情况下,n不同
+        /* 
+        /* 
            threads will compute the same hashCode at the same time.  */
         if (hashCode != 0)
             return hashCode;
@@ -529,6 +667,9 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * Cached results of previous calls to arrayGettersSafe.  This is
      * a WeakHashMap so that we don't prevent a class from being
      * garbage collected just because we know whether it's immutable.
+     * <p>
+     *  先前调用arrayGettersSafe的缓存结果。这是一个WeakHashMap,所以我们不会阻止一个类被垃圾回收只是因为我们知道它是不可变的。
+     * 
      */
     private static final Map<Class<?>, Boolean> arrayGettersSafeMap =
         new WeakHashMap<Class<?>, Boolean>();
@@ -542,6 +683,12 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * of <code>immutableClass</code> whose name begins with "get".
      * This is obviously not an infallible test for immutability,
      * but it works for the public interfaces of the MBean*Info classes.
+     * <p>
+     *  如果已知<code>子类</code>保留<code> immutableClass </code>的不变性,则返回true。
+     * 类<code> immutableClass </code>是一个已知是不可变的引用类。
+     * 如果子类<code>子类</code>不覆盖其名称以"get"开头的<code> immutableClass </code>的任何公共方法,则被认为是不可变的。
+     * 这显然不是一个不可变性的可靠测试,但它适用于MBean * Info类的公共接口。
+     * 
     */
     static boolean arrayGettersSafe(Class<?> subclass, Class<?> immutableClass) {
         if (subclass == immutableClass)
@@ -569,6 +716,9 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
      * JMX user that can't do reflection can't even use Standard
      * MBeans!  But there's probably a performance gain by not having
      * to check the whole call stack.
+     * <p>
+     *  PrivilegedAction的东西可能是杀手。我们可以很确定调用方具有所需的特权 - 一个不能做反射的JMX用户甚至不能使用标准MBean！但是可能通过不必检查整个调用堆栈而获得性能提升。
+     * 
      */
     private static class ArrayGettersSafeAction
             implements PrivilegedAction<Boolean> {
@@ -617,6 +767,10 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
 
     /**
      * Serializes an {@link MBeanInfo} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link MBeanInfo}序列化为{@link ObjectOutputStream}。
+     * 
+     * 
      * @serialData
      * For compatibility reasons, an object of this class is serialized as follows.
      * <p>
@@ -659,6 +813,9 @@ public class MBeanInfo implements Cloneable, Serializable, DescriptorRead {
 
     /**
      * Deserializes an {@link MBeanInfo} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link MBeanInfo}。
+     * 
      * @serialData
      * For compatibility reasons, an object of this class is deserialized as follows.
      * <p>

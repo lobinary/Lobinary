@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,9 @@ import com.sun.corba.se.impl.logging.InterceptorsSystemException ;
  * possible during runtime, with the expense of added complexity during
  * initialization and interceptor registration.  The class is designed
  * to easily allow for the addition of new interceptor types.
+ * <p>
+ *  提供注册的便携式拦截器的存储库,按类型组织。该列表被设计为在运行时期间尽可能高效地访问,并且在初始化和拦截器注册期间增加了复杂性。该类被设计为容易允许添加新的拦截器类型。
+ * 
  */
 public class InterceptorList {
 
@@ -83,6 +87,9 @@ public class InterceptorList {
     /**
      * Creates a new Interceptor List.  Constructor is package scope so
      * only the ORB can create it.
+     * <p>
+     *  创建一个新的拦截器列表。构造函数是包范围,因此只有ORB可以创建它。
+     * 
      */
     InterceptorList( InterceptorsSystemException wrapper ) {
         this.wrapper = wrapper ;
@@ -99,6 +106,14 @@ public class InterceptorList {
      *   <li>INTERCEPTOR_TYPE_IOR - IORInterceptor
      * </ul>
      *
+     * <p>
+     *  将给定类型的拦截器注册到拦截器列表中。类型为以下之一：
+     * <ul>
+     *  <li> INTERCEPTOR_TYPE_CLIENT  -  ClientRequestInterceptor <li> INTERCEPTOR_TYPE_SERVER  -  ServerReq
+     * uestInterceptor <li> INTERCEPTOR_TYPE_IOR  -  IORInterceptor。
+     * </ul>
+     * 
+     * 
      * @exception DuplicateName Thrown if an interceptor of the given
      *     name already exists for the given type.
      */
@@ -145,6 +160,9 @@ public class InterceptorList {
      * Locks this interceptor list so that no more interceptors may be
      * registered.  This method is called after all interceptors are
      * registered for security reasons.
+     * <p>
+     *  锁定此拦截器列表,以便不再注册更多拦截器。出于安全原因,所有拦截器都被注册后调用此方法。
+     * 
      */
     void lock() {
         locked = true;
@@ -153,6 +171,9 @@ public class InterceptorList {
     /**
      * Retrieves an array of interceptors of the given type.  For efficiency,
      * the type parameter is assumed to be valid.
+     * <p>
+     *  检索给定类型的拦截器数组。为了效率,假定类型参数是有效的。
+     * 
      */
     Interceptor[] getInterceptors( int type ) {
         return interceptors[type];
@@ -161,6 +182,9 @@ public class InterceptorList {
     /**
      * Returns true if there is at least one interceptor of the given type,
      * or false if not.
+     * <p>
+     *  如果有至少一个给定类型的拦截器,则返回true,否则返回false。
+     * 
      */
     boolean hasInterceptorsOfType( int type ) {
         return interceptors[type].length > 0;
@@ -169,6 +193,9 @@ public class InterceptorList {
     /**
      * Initializes all interceptors arrays to zero-length arrays of the
      * correct type, based on the classTypes list.
+     * <p>
+     *  根据classTypes列表将所有拦截器数组初始化为零长度的正确类型的数组。
+     * 
      */
     private void initInterceptorArrays() {
         for( int type = 0; type < NUM_INTERCEPTOR_TYPES; type++ ) {
@@ -182,6 +209,9 @@ public class InterceptorList {
 
     /**
      * Grows the given interceptor array by one:
+     * <p>
+     *  将给定的拦截器数组增长一个：
+     * 
      */
     private void growInterceptorArray( int type ) {
         Class classType = classTypes[type];
@@ -200,6 +230,9 @@ public class InterceptorList {
     /**
      * Destroys all interceptors in this list by invoking their destroy()
      * method.
+     * <p>
+     *  通过调用destroy()方法来销毁此列表中的所有拦截器。
+     * 
      */
     void destroyAll() {
         int numTypes = interceptors.length;
@@ -214,6 +247,8 @@ public class InterceptorList {
 
     /**
      * Sort interceptors.
+     * <p>
+     *  排序拦截器。
      */
     void sortInterceptors() {
         List sorted = null;

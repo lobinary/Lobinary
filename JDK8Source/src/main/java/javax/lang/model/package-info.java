@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,16 @@
  * <p> Unless otherwise specified, methods in this package will throw
  * a {@code NullPointerException} if given a {@code null} argument.
  *
+ * <p>
+ *  用于对Java编程语言建模的包的类和层次结构。
+ * 
+ *  此包及其子包的成员用于语言建模和语言处理任务和API,包括但不限于{@linkplain javax.annotation.processing注释处理}框架。
+ * 
+ *  <p>这种语言模型遵循基于<i>镜像</i>的设计;看到
+ * 
+ * <blockquote>
+ *  吉拉德Bracha和大卫Ungar。 <i>镜像：面向对象的编程语言的元级设施的设计原理</i>。在Proc。的ACM Conf。
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;

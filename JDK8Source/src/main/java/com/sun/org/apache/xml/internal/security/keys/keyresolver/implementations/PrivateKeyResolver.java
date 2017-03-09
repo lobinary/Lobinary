@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import org.w3c.dom.Element;
  * Resolves a PrivateKey within a KeyStore based on the KeyInfo hints.
  * For X509Data hints, the certificate associated with the private key entry must match.
  * For a KeyName hint, the KeyName must match the alias of a PrivateKey entry within the KeyStore.
+ * <p>
+ *  根据KeyInfo提示解决KeyStore中的PrivateKey。对于X509Data提示,与私钥条目关联的证书必须匹配。
+ * 对于KeyName提示,KeyName必须与KeyStore中的PrivateKey条目的别名相匹配。
+ * 
  */
 public class PrivateKeyResolver extends KeyResolverSpi {
     /** {@link org.apache.commons.logging} logging facility */
@@ -43,6 +48,9 @@ public class PrivateKeyResolver extends KeyResolverSpi {
 
     /**
      * Constructor.
+     * <p>
+     *  构造函数。
+     * 
      */
     public PrivateKeyResolver(KeyStore keyStore, char[] password) {
         this.keyStore = keyStore;
@@ -52,6 +60,10 @@ public class PrivateKeyResolver extends KeyResolverSpi {
     /**
      * This method returns whether the KeyResolverSpi is able to perform the requested action.
      *
+     * <p>
+     *  此方法返回KeyResolverSpi是否能够执行请求的操作。
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @param storage
@@ -69,6 +81,10 @@ public class PrivateKeyResolver extends KeyResolverSpi {
     /**
      * Method engineLookupAndResolvePublicKey
      *
+     * <p>
+     *  方法engineLookupAndResolvePublicKey
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @param storage
@@ -84,6 +100,10 @@ public class PrivateKeyResolver extends KeyResolverSpi {
     /**
      * Method engineResolveX509Certificate
      * @inheritDoc
+     * <p>
+     *  方法engineResolveX509Certificate @inheritDoc
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @param storage
@@ -98,6 +118,10 @@ public class PrivateKeyResolver extends KeyResolverSpi {
     /**
      * Method engineResolveSecretKey
      *
+     * <p>
+     *  方法engineResolveSecretKey
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @param storage
@@ -114,6 +138,10 @@ public class PrivateKeyResolver extends KeyResolverSpi {
     /**
      * Method engineResolvePrivateKey
      * @inheritDoc
+     * <p>
+     *  方法engineResolvePrivateKey @inheritDoc
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -202,6 +230,9 @@ public class PrivateKeyResolver extends KeyResolverSpi {
 
     /*
      * Search for a private key entry in the KeyStore with the same Subject Key Identifier
+     * <p>
+     *  在KeyStore中搜索具有相同主题密钥标识符的私有密钥条目
+     * 
      */
     private PrivateKey resolveX509SKI(XMLX509SKI x509SKI) throws XMLSecurityException, KeyStoreException {
         log.log(java.util.logging.Level.FINE, "Can I resolve X509SKI?");
@@ -237,6 +268,9 @@ public class PrivateKeyResolver extends KeyResolverSpi {
 
     /*
      * Search for a private key entry in the KeyStore with the same Issuer/Serial Number pair.
+     * <p>
+     *  在KeyStore中搜索具有相同发行者/序列号对的私钥条目。
+     * 
      */
     private PrivateKey resolveX509IssuerSerial(XMLX509IssuerSerial x509Serial) throws KeyStoreException {
         log.log(java.util.logging.Level.FINE, "Can I resolve X509IssuerSerial?");
@@ -273,6 +307,9 @@ public class PrivateKeyResolver extends KeyResolverSpi {
 
     /*
      * Search for a private key entry in the KeyStore with the same Subject Name.
+     * <p>
+     *  在KeyStore中搜索具有相同主题名称的私钥条目。
+     * 
      */
     private PrivateKey resolveX509SubjectName(XMLX509SubjectName x509SubjectName) throws KeyStoreException {
         log.log(java.util.logging.Level.FINE, "Can I resolve X509SubjectName?");
@@ -309,6 +346,8 @@ public class PrivateKeyResolver extends KeyResolverSpi {
 
     /*
      * Search for a private key entry in the KeyStore with the same Certificate.
+     * <p>
+     *  在KeyStore中搜索具有相同证书的私钥条目。
      */
     private PrivateKey resolveX509Certificate(
         XMLX509Certificate x509Cert

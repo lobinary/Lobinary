@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ import java.util.Hashtable;
  * This does no synchronization, if you need thread safety synchronize on
  * another object before calling this.
  *
+ * <p>
+ *  Action键值对的专用存储机制。在大多数情况下,这将是一个交替的键值对的数组。随着它越来越大,它被扩展到一个Hashtable。
+ * <p>
+ *  这不做同步,如果你需要线程安全同步另一个对象之前调用这个。
+ * 
+ * 
  * @author Georges Saab
  * @author Scott Violet
  */
@@ -56,6 +63,12 @@ class ArrayTable implements Cloneable {
      * <p>
      * This is a convenience method that ActionMap/InputMap and
      * AbstractAction use to avoid having the same code in each class.
+     * <p>
+     *  将传递的ArrayTable写入传入的ObjectOutputStream。数据保存为整数,表示正在归档多少个键/值对,其后是键/值对。
+     * 如果<code> table </code>为null,则将0写入<code> s </code>。
+     * <p>
+     *  这是一个方便的方法,ActionMap / InputMap和AbstractAction使用避免在每个类中有相同的代码。
+     * 
      */
     static void writeArrayTable(ObjectOutputStream s, ArrayTable table) throws IOException {
         Object keys[];
@@ -104,6 +117,9 @@ class ArrayTable implements Cloneable {
 
     /*
      * Put the key-value pair into storage
+     * <p>
+     *  将键值对放入存储
+     * 
      */
     public void put(Object key, Object value){
         if (table==null) {
@@ -140,6 +156,9 @@ class ArrayTable implements Cloneable {
 
     /*
      * Gets the value for key
+     * <p>
+     *  获取键的值
+     * 
      */
     public Object get(Object key) {
         Object value = null;
@@ -161,6 +180,9 @@ class ArrayTable implements Cloneable {
 
     /*
      * Returns the number of pairs in storage
+     * <p>
+     *  返回存储中的对数
+     * 
      */
     public int size() {
         int size;
@@ -176,6 +198,9 @@ class ArrayTable implements Cloneable {
 
     /*
      * Returns true if we have a value for the key
+     * <p>
+     *  如果我们有键的值,则返回true
+     * 
      */
     public boolean containsKey(Object key) {
         boolean contains = false;
@@ -198,6 +223,9 @@ class ArrayTable implements Cloneable {
     /*
      * Removes the key and its value
      * Returns the value for the pair removed
+     * <p>
+     *  删除键及其值返回删除的对的值
+     * 
      */
     public Object remove(Object key){
         Object value = null;
@@ -243,6 +271,9 @@ class ArrayTable implements Cloneable {
 
     /**
      * Removes all the mappings.
+     * <p>
+     *  删除所有映射。
+     * 
      */
     public void clear() {
         table = null;
@@ -250,6 +281,9 @@ class ArrayTable implements Cloneable {
 
     /*
      * Returns a clone of the <code>ArrayTable</code>.
+     * <p>
+     *  返回<code> ArrayTable </code>的克隆。
+     * 
      */
     public Object clone() {
         ArrayTable newArrayTable = new ArrayTable();
@@ -272,6 +306,10 @@ class ArrayTable implements Cloneable {
     /**
      * Returns the keys of the table, or <code>null</code> if there
      * are currently no bindings.
+     * <p>
+     *  返回表的键,如果当前没有绑定,则返回<code> null </code>。
+     * 
+     * 
      * @param keys  array of keys
      * @return an array of bindings
      */
@@ -305,6 +343,9 @@ class ArrayTable implements Cloneable {
     /*
      * Returns true if the current storage mechanism is
      * an array of alternating key-value pairs.
+     * <p>
+     *  如果当前存储机制是由交替的键值对组成的数组,则返回true。
+     * 
      */
     private boolean isArray(){
         return (table instanceof Object[]);
@@ -312,6 +353,9 @@ class ArrayTable implements Cloneable {
 
     /*
      * Grows the storage from an array to a hashtable.
+     * <p>
+     *  将存储从数组增长到散列表。
+     * 
      */
     private void grow() {
         Object[] array = (Object[])table;
@@ -324,6 +368,8 @@ class ArrayTable implements Cloneable {
 
     /*
      * Shrinks the storage from a hashtable to an array.
+     * <p>
+     *  将存储从散列表缩减到数组。
      */
     private void shrink() {
         Hashtable<?,?> tmp = (Hashtable)table;

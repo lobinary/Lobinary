@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,16 @@ import java.util.function.Supplier;
  * trigger re-evaluation of {@code valueFactory} on request for their
  * key/subKey.
  *
+ * <p>
+ *  {@code(key,sub-key) - > value}的缓存映射对。键和值是弱的,但子键是强引用的。
+ * 键直接传递到{@link #get}方法,该方法也需要一个{@code parameter}。子键是使用传递给构造函数的{@code subKeyFactory}函数从键和参数计算的。
+ * 使用传递给构造函数的{@code valueFactory}函数从键和参数计算值。
+ * 键可以是{@code null},并通过标识进行比较,而{@code subKeyFactory}返回的子键或{@code valueFactory}返回的值不能为空。
+ * 子键使用其{@link #equals}方法进行比较。
+ * 当对键的WeakReferences被清除时,每次调用{@link #get},{@link #containsValue}或{@link #size}方法时,条目会被缓存从缓存中清除。
+ * 清除对单个值的WeakReferences不会导致清除,但是这些条目在逻辑上被视为不存在,并且触发对{@code valueFactory}的关键/子密钥请求的重新评估。
+ * 
+ * 
  * @author Peter Levart
  * @param <K> type of keys
  * @param <P> type of parameters
@@ -69,6 +80,10 @@ final class WeakCache<K, P, V> {
     /**
      * Construct an instance of {@code WeakCache}
      *
+     * <p>
+     *  构造{@code WeakCache}的实例
+     * 
+     * 
      * @param subKeyFactory a function mapping a pair of
      *                      {@code (key, parameter) -> sub-key}
      * @param valueFactory  a function mapping a pair of
@@ -88,6 +103,11 @@ final class WeakCache<K, P, V> {
      * {@code valueFactory} function if there is no entry in the cache for given
      * pair of (key, subKey) or the entry has already been cleared.
      *
+     * <p>
+     *  通过缓存查找值。
+     * 这总是评估{@code subKeyFactory}函数并且可选地评估{@code valueFactory}函数,如果在缓存中没有给定对(key,subKey)的条目或者该条目已经被清除。
+     * 
+     * 
      * @param key       possibly null key
      * @param parameter parameter used together with key to create sub-key and
      *                  value (should not be null)
@@ -164,6 +184,10 @@ final class WeakCache<K, P, V> {
      * {@code WeakCache}. The check is made using identity comparison regardless
      * of whether value's class overrides {@link Object#equals} or not.
      *
+     * <p>
+     * 检查指定的非空值是否已存在于此{@code WeakCache}中。使用身份比较进行检查,无论值的类是否覆盖{@link Object#equals}。
+     * 
+     * 
      * @param value the non-null value to check
      * @return true if given {@code value} is already cached
      * @throws NullPointerException if value is null
@@ -178,6 +202,9 @@ final class WeakCache<K, P, V> {
     /**
      * Returns the current number of cached entries that
      * can decrease over time when keys/values are GC-ed.
+     * <p>
+     *  返回当键/值为GC编码时可以随时间减少的缓存条目的当前数量。
+     * 
      */
     public int size() {
         expungeStaleEntries();
@@ -194,6 +221,9 @@ final class WeakCache<K, P, V> {
     /**
      * A factory {@link Supplier} that implements the lazy synchronized
      * construction of the value and installment of it into the cache.
+     * <p>
+     *  一个工厂{@link Supplier},实现延迟同步构造的值并将其安装到缓存中。
+     * 
      */
     private final class Factory implements Supplier<V> {
 
@@ -257,6 +287,9 @@ final class WeakCache<K, P, V> {
      * Common type of value suppliers that are holding a referent.
      * The {@link #equals} and {@link #hashCode} of implementations is defined
      * to compare the referent by identity.
+     * <p>
+     *  常见类型的价值供应商,持有指示。 {@link #equals}和{@link #hashCode}的实现被定义为通过标识来比较指示物。
+     * 
      */
     private interface Value<V> extends Supplier<V> {}
 
@@ -264,6 +297,9 @@ final class WeakCache<K, P, V> {
      * An optimized {@link Value} used to look-up the value in
      * {@link WeakCache#containsValue} method so that we are not
      * constructing the whole {@link CacheValue} just to look-up the referent.
+     * <p>
+     *  经过优化的{@link Value}用于查找{@link WeakCache#containsValue}方法中的值,因此我们不是仅仅为了查找引用对象而构造整个{@link CacheValue}。
+     * 
      */
     private static final class LookupValue<V> implements Value<V> {
         private final V value;
@@ -292,6 +328,9 @@ final class WeakCache<K, P, V> {
 
     /**
      * A {@link Value} that weakly references the referent.
+     * <p>
+     *  一个弱引用引用对象的{@link Value}。
+     * 
      */
     private static final class CacheValue<V>
         extends WeakReference<V> implements Value<V>
@@ -323,6 +362,8 @@ final class WeakCache<K, P, V> {
      * CacheKey containing a weakly referenced {@code key}. It registers
      * itself with the {@code refQueue} so that it can be used to expunge
      * the entry when the {@link WeakReference} is cleared.
+     * <p>
+     *  CacheKey包含弱引用的{@code key}。它使用{@code refQueue}注册自身,以便在{@link WeakReference}被清除时,它可以用于清除条目。
      */
     private static final class CacheKey<K> extends WeakReference<K> {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,18 @@ import javax.print.attribute.PrintJobAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  JobOriginatingUserName类是一个打印属性类,一个文本属性,包含提交打印作业的最终用户的名称。
+ * 如果可能,打印机将此属性设置为可从认证所提交的打印请求的认证服务获得的最可认证的可打印用户名。
+ * 如果不可用,则打印机使用客户端在打印请求属性集中提供的{@link RequestingUserName RequestingUserName}属性的值。
+ * 如果没有可用的身份验证服务,并且客户端未提供{@link RequestingUserName RequestingUserName}属性,则打印机将JobOriginatingUserName属性设置
+ * 为空(零长度)字符串。
+ * 如果不可用,则打印机使用客户端在打印请求属性集中提供的{@link RequestingUserName RequestingUserName}属性的值。
+ * <P>
+ *  <B> IPP兼容性：</B>字符串值给出IPP名称值。语言环境提供IPP自然语言。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class JobOriginatingUserName extends TextSyntax
@@ -60,6 +73,10 @@ public final class JobOriginatingUserName extends TextSyntax
      * Constructs a new job originating user name attribute with the given
      * user name and locale.
      *
+     * <p>
+     *  使用给定的用户名和区域设置构造新的作业来源用户名属性。
+     * 
+     * 
      * @param  userName  User name.
      * @param  locale    Natural language of the text string. null
      * is interpreted to mean the default locale as returned
@@ -89,6 +106,19 @@ public final class JobOriginatingUserName extends TextSyntax
      * <CODE>object</CODE>'s locale are equal.
      * </OL>
      *
+     * <p>
+     *  返回此作业来源用户名属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是JobOriginatingUserName类的实例。
+     * <LI>
+     * 此作业来源用户名属性的底层字符串和<CODE>对象</CODE>的底层字符串是相等的。
+     * <LI>
+     *  此作业来源用户名属性的区域设置和<CODE>对象</CODE>的区域设置相等。
+     * </OL>
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job
@@ -106,6 +136,9 @@ public final class JobOriginatingUserName extends TextSyntax
      * For class JobOriginatingUserName, the
      * category is class JobOriginatingUserName itself.
      *
+     * <p>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -120,6 +153,12 @@ public final class JobOriginatingUserName extends TextSyntax
      * For class JobOriginatingUserName, the
      * category name is <CODE>"job-originating-user-name"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobOriginatingUserName类,类别为JobOriginatingUserName类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

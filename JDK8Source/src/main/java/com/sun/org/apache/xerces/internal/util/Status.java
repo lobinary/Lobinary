@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -24,10 +25,15 @@
 
 /*
  * Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
+ * <p>
+ *  Oracle Corporation的版权所有(c)2009。版权所有。
+ * 
  */
 
 /*
  * $Id: Status.java 3024 2011-03-01 03:46:13Z joehw $
+ * <p>
+ *  $ Id：Status.java 3024 2011-03-01 03：46：13Z joehw $
  */
 package com.sun.org.apache.xerces.internal.util;
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils;
 
@@ -29,6 +38,12 @@ package com.sun.org.apache.xml.internal.security.utils;
  * <A HREF="http://www.w3.org/TR/xmldsig-core/#sec-TransformAlg">XML
  * Signature specification</A>.
  *
+ * <p>
+ *  提供i18n的所有常数和一些翻译功能。
+ * 
+ *  对于所使用的算法标识符和命名空间,请查看<A HREF="http://www.w3.org/TR/xmldsig-core/#sec-TransformAlg"> XML签名规范</A>。
+ * 
+ * 
  * @author $Author: coheigea $
  */
 public class Constants {
@@ -50,6 +65,9 @@ public class Constants {
     /**
      * The URL of the
      * <A HREF="http://www.w3.org/TR/2001/CR-xmldsig-core-20010419/">XML Signature specification</A>
+     * <p>
+     *  <A HREF="http://www.w3.org/TR/2001/CR-xmldsig-core-20010419/"> XML签名规范</A>的网址
+     * 
      */
     public static final String SIGNATURESPECIFICATION_URL =
         "http://www.w3.org/TR/2001/CR-xmldsig-core-20010419/";
@@ -57,12 +75,18 @@ public class Constants {
     /**
      * The namespace of the
      * <A HREF="http://www.w3.org/TR/2001/CR-xmldsig-core-20010419/">XML Signature specification</A>
+     * <p>
+     *  <A HREF="http://www.w3.org/TR/2001/CR-xmldsig-core-20010419/"> XML签名规范</A>的命名空间
+     * 
      */
     public static final String SignatureSpecNS = "http://www.w3.org/2000/09/xmldsig#";
 
     /**
      * The namespace of the
      * <A HREF="http://www.w3.org/TR/xmldsig-core1/">XML Signature specification</A>
+     * <p>
+     *  <A HREF="http://www.w3.org/TR/xmldsig-core1/"> XML签名规范</A>的命名空间
+     * 
      */
     public static final String SignatureSpec11NS = "http://www.w3.org/2009/xmldsig11#";
 
@@ -260,6 +284,8 @@ public class Constants {
     public static final String ALGO_ID_DIGEST_SHA1 = SignatureSpecNS + "sha1";
 
     /**
+    /* <p>
+    /* 
      * @see <A HREF="http://www.ietf.org/internet-drafts/draft-blake-wilson-xmldsig-ecdsa-02.txt">
      *  draft-blake-wilson-xmldsig-ecdsa-02.txt</A>
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,11 +29,18 @@ package com.sun.jmx.snmp;
  * request, bulk).
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  要由确认的PDU实现的接口(例如：请求,批量)。 <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @since 1.5
  */
 public interface SnmpAckPdu {
     /**
      * Returns the PDU to use for the response.
+     * <p>
+     *  返回用于响应的PDU。
+     * 
      * @return The response PDU.
      */
     public SnmpPdu getResponsePdu();

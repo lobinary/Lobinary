@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -12,6 +13,9 @@ public interface ACTIVE
 {
 
   /** Object adapter state that indicates normal request processing.
+  /* <p>
+  /* org / omg / PortableInterceptor / ACTIVE.java。
+  /* 
    */
   public static final short value = (short)(1);
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import java.awt.Insets;
 /**
  * ImageScalingHelper
  *
+ * <p>
+ *  ImageScalingHelper
+ * 
+ * 
  * @author Created by Jasper Potts (Aug 8, 2007)
  */
 class ImageScalingHelper {
@@ -40,24 +45,36 @@ class ImageScalingHelper {
         /**
          * Painting type indicating the image should be centered in the space provided.  When used the <code>mask</code>
          * is ignored.
+         * <p>
+         *  指示图像的绘画类型应在所提供的空间中居中。使用时,将忽略<code>掩码</code>。
+         * 
          */
         CENTER,
 
         /**
          * Painting type indicating the image should be tiled across the specified width and height.  When used the
          * <code>mask</code> is ignored.
+         * <p>
+         *  指示图像的绘画类型应平铺在指定的宽度和高度上。使用时,将忽略<code>掩码</code>。
+         * 
          */
         TILE,
 
         /**
          * Painting type indicating the image should be split into nine regions with the top, left, bottom and right
          * areas stretched.
+         * <p>
+         *  指示图像的绘画类型应分割为九个区域,顶部,左边,底部和右边区域被拉伸。
+         * 
          */
         PAINT9_STRETCH,
 
         /**
          * Painting type indicating the image should be split into nine regions with the top, left, bottom and right
          * areas tiled.
+         * <p>
+         *  指示图像的绘画类型应分成九个区域,顶部,左边,底部和右边区域平铺。
+         * 
          */
         PAINT9_TILE
     }
@@ -78,12 +95,19 @@ class ImageScalingHelper {
     /**
      * Specifies that all regions should be painted.  If this is set any other regions specified will not be painted.
      * For example PAINT_ALL | PAINT_CENTER will paint all but the center.
+     * <p>
+     *  指定应绘制所有区域。如果设置了此项,指定的任何其他区域将不会被绘制。例如PAINT_ALL | PAINT_CENTER将绘制除中心之外的所有内容。
+     * 
      */
     static final int PAINT_ALL = 512;
 
     /**
      * Paints using the algorightm specified by <code>paintType</code>.
      *
+     * <p>
+     *  使用<code> paintType </code>指定的算法进行绘制。
+     * 
+     * 
      * @param g         Graphics to render to
      * @param x         X-coordinate
      * @param y         Y-coordinate
@@ -210,6 +234,9 @@ class ImageScalingHelper {
     /**
      * Draws a portion of an image, stretched or tiled.
      *
+     * <p>
+     *  绘制图像的一部分,拉伸或平铺。
+     * 
      * @param image Image to render.
      * @param g Graphics to render to
      * @param stretch Whether the image should be stretched or timed in the

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,12 +57,23 @@ import java.lang.ref.ReferenceQueue;
  * with a binary search.  This increases the cost of adding a
  * mark, and decreases the cost of keeping the mark updated.
  *
+ * <p>
+ *  AbstractDocument.Content接口的实现使用类似于emacs使用的有缺口的缓冲区实现。底层存储是一个unicode字符的数组,在某处有一个空隙。
+ * 将间隙移动到更改的位置,以利用大多数更改位于相同位置的常见行为。在间隙边界处发生的变化通常是便宜的,并且移动间隙通常比直接移动阵列内容以便适应变化更便宜。
+ * <p>
+ *  位置跟踪改变通常也是便宜的维护。位置实现(标记)存储数组索引,并且可以容易地从当前间隙位置计算顺序位置。更改只需要更新旧和新间隙边界之间的标记,当移动间隙时,所以一般更新标记是相当便宜。
+ * 标记被存储排序,以便它们可以通过二分查找快速定位。这增加了添加标记的成本,并且降低了保持标记更新的成本。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class GapContent extends GapVector implements AbstractDocument.Content, Serializable {
 
     /**
      * Creates a new GapContent object.  Initial size defaults to 10.
+     * <p>
+     *  创建一个新的GapContent对象。初始大小默认为10。
+     * 
      */
     public GapContent() {
         this(10);
@@ -73,6 +85,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * to go below 2, to give room for the implied break and
      * the gap.
      *
+     * <p>
+     *  创建一个新的GapContent对象,指定初始大小。初始尺寸将不允许低于2,以给出隐含的休息和间隙的空间。
+     * 
+     * 
      * @param initialLength the initial size
      */
     public GapContent(int initialLength) {
@@ -89,6 +105,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Allocate an array to store items of the type
      * appropriate (which is determined by the subclass).
+     * <p>
+     * 分配数组以存储适当类型的项(由子类确定)。
+     * 
      */
     protected Object allocateArray(int len) {
         return new char[len];
@@ -96,6 +115,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
 
     /**
      * Get the length of the allocated array.
+     * <p>
+     *  获取分配的数组的长度。
+     * 
      */
     protected int getArrayLength() {
         char[] carray = (char[]) getArray();
@@ -107,6 +129,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Returns the length of the content.
      *
+     * <p>
+     *  返回内容的长度。
+     * 
+     * 
      * @return the length &gt;= 1
      * @see AbstractDocument.Content#length
      */
@@ -118,6 +144,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Inserts a string into the content.
      *
+     * <p>
+     *  在内容中插入字符串。
+     * 
+     * 
      * @param where the starting position &gt;= 0, &lt; length()
      * @param str the non-null string to insert
      * @return an UndoableEdit object for undoing
@@ -136,6 +166,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Removes part of the content.
      *
+     * <p>
+     *  删除部分内容。
+     * 
+     * 
      * @param where the starting position &gt;= 0, where + nitems &lt; length()
      * @param nitems the number of characters to remove &gt;= 0
      * @return an UndoableEdit object for undoing
@@ -156,6 +190,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Retrieves a portion of the content.
      *
+     * <p>
+     *  检索内容的一部分。
+     * 
+     * 
      * @param where the starting position &gt;= 0
      * @param len the length to retrieve &gt;= 0
      * @return a string representing the content
@@ -174,6 +212,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * span the gap, the actual store is returned to avoid the copy since
      * it is contiguous.
      *
+     * <p>
+     *  检索内容的一部分。如果期望的内容跨越间隙,则复制内容。如果所需内容不跨越间隙,则返回实际存储以避免副本,因为其是连续的。
+     * 
+     * 
      * @param where the starting position &gt;= 0, where + len &lt;= length()
      * @param len the number of characters to retrieve &gt;= 0
      * @param chars the Segment object to return the characters in
@@ -222,6 +264,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * Creates a position within the content that will
      * track change as the content is mutated.
      *
+     * <p>
+     *  在内容中创建一个位置,以便在内容发生改变时跟踪更改。
+     * 
+     * 
      * @param offset the offset to track &gt;= 0
      * @return the position
      * @exception BadLocationException if the specified position is invalid
@@ -261,6 +307,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * collected if there are no more references to
      * it.  The update table holds only a reference
      * to this data.
+     * <p>
+     *  保持标记的数据...与真实标记分开,以便如果没有更多的引用,则可以收集真正的标记(createPosition的调用者所持有的Position)。更新表仅保存对此数据的引用。
+     * 
      */
     final class MarkData extends WeakReference<StickyPosition> {
 
@@ -278,6 +327,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
          * being modeled.  The index in the gap array
          * is held by the mark, so it is adjusted according
          * to it's relationship to the gap.
+         * <p>
+         *  获取正在建模的连续序列中的位置。间隙数组中的索引由标记保持,因此根据其与间隙的关系来调整。
+         * 
          */
         public final int getOffset() {
             int g0 = getGapStart();
@@ -321,11 +373,17 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * Record used for searching for the place to
      * start updating mark indexs when the gap
      * boundaries are moved.
+     * <p>
+     *  移动间隙边界时用于搜索开始更新标记索引的位置的记录。
+     * 
      */
     private transient MarkData search;
 
     /**
      * The number of unused mark entries
+     * <p>
+     *  未使用标记条目的数量
+     * 
      */
     private transient int unusedMarks = 0;
 
@@ -338,6 +396,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Make the gap bigger, moving any necessary data and updating
      * the appropriate marks
+     * <p>
+     *  使间隙更大,移动任何必要的数据和更新适当的标记
+     * 
      */
     protected void shiftEnd(int newSize) {
         int oldGapEnd = getGapEnd();
@@ -357,6 +418,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Overridden to make growth policy less agressive for large
      * text amount.
+     * <p>
+     *  覆盖,使增长策略较少的积极大文本量。
+     * 
      */
     int getNewArraySize(int reqSize) {
         if (reqSize < GROWTH_SIZE) {
@@ -371,6 +435,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * without changing the size of the gap.  This
      * moves the data in the array and updates the
      * marks accordingly.
+     * <p>
+     *  将间隙的开始移动到新位置,而不更改间隙的大小。这将移动数组中的数据并相应地更新标记。
+     * 
      */
     protected void shiftGap(int newGapStart) {
         int oldGapStart = getGapStart();
@@ -412,6 +479,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Resets all the marks that have an offset of 0 to have an index of
      * zero as well.
+     * <p>
+     * 重置偏移量为0的所有标记,以使索引为零。
+     * 
      */
     protected void resetMarksAtZero() {
         if (marks != null && getGapStart() == 0) {
@@ -436,6 +506,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * gap start down to the new gap start are squeezed
      * to the end of the gap (their location has been
      * removed).
+     * <p>
+     *  向下调整间隙端。这不会移动任何数据,但它会更新受边界变化影响的任何标记。从旧的差距开始到新的差距开始的所有标记被挤压到差距的末端(他们的位置已被删除)。
+     * 
      */
     protected void shiftGapStartDown(int newGapStart) {
         // Push aside all marks from oldGapStart down to newGapStart.
@@ -465,6 +538,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * gap end up to the new gap end are squeezed
      * to the end of the gap (their location has been
      * removed).
+     * <p>
+     *  向上调整间隙端。这不会移动任何数据,但它会更新受边界变化影响的任何标记。从旧间隙到新间隙端的所有标记被挤压到间隙的末端(它们的位置已被移除)。
+     * 
      */
     protected void shiftGapEndUp(int newGapEnd) {
         int adjustIndex = findMarkAdjustIndex(getGapEnd());
@@ -486,6 +562,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Compares two marks.
      *
+     * <p>
+     *  比较两个标记。
+     * 
+     * 
      * @param o1 the first object
      * @param o2 the second object
      * @return < 0 if o1 < o2, 0 if the same, > 0 if o1 > o2
@@ -503,6 +583,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Finds the index to start mark adjustments given
      * some search index.
+     * <p>
+     *  在给定一些搜索索引的情况下查找开始标记调整的索引。
+     * 
      */
     final int findMarkAdjustIndex(int searchIndex) {
         search.index = Math.max(searchIndex, 1);
@@ -523,6 +606,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Finds the index of where to insert a new mark.
      *
+     * <p>
+     *  查找插入新标记的位置的索引。
+     * 
+     * 
      * @param o the mark to insert
      * @return the index
      */
@@ -563,6 +650,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Remove all unused marks out of the sorted collection
      * of marks.
+     * <p>
+     *  从已排序的标记集合中删除所有未使用的标记。
+     * 
      */
     final void removeUnusedMarks() {
         int n = marks.size();
@@ -591,6 +681,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
         /**
          * Allocate an array to store items of the type
          * appropriate (which is determined by the subclass).
+         * <p>
+         *  分配数组以存储适当类型的项(由子类确定)。
+         * 
          */
         protected Object allocateArray(int len) {
             return new MarkData[len];
@@ -598,6 +691,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
 
         /**
          * Get the length of the allocated array
+         * <p>
+         *  获取分配的数组的长度
+         * 
          */
         protected int getArrayLength() {
             MarkData[] marks = (MarkData[]) getArray();
@@ -606,6 +702,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
 
         /**
          * Returns the number of marks currently held
+         * <p>
+         *  返回当前持有的标记数
+         * 
          */
         public int size() {
             int len = getArrayLength() - (getGapEnd() - getGapStart());
@@ -614,6 +713,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
 
         /**
          * Inserts a mark into the vector
+         * <p>
+         *  在向量中插入标记
+         * 
          */
         public void insertElementAt(MarkData m, int index) {
             oneMark[0] = m;
@@ -622,6 +724,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
 
         /**
          * Add a mark to the end
+         * <p>
+         *  在结尾处添加标记
+         * 
          */
         public void addElement(MarkData m) {
             insertElementAt(m, size());
@@ -629,6 +734,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
 
         /**
          * Fetches the mark at the given index
+         * <p>
+         *  获取给定索引处的标记
+         * 
          */
         public MarkData elementAt(int index) {
             int g0 = getGapStart();
@@ -649,6 +757,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
          * in objects. This will NOT adjust the gap. The passed in indices
          * do not account for the gap, they are the same as would be used
          * int <code>elementAt</code>.
+         * <p>
+         *  使用传入的对象替换指定范围中的元素。这将不会调整间隙。传入的索引不考虑间隙,它们与int <code> elementAt </code>中使用的相同。
+         * 
          */
         protected void replaceRange(int start, int end, Object[] marks) {
             int g0 = getGapStart();
@@ -704,6 +815,11 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * If <code>v</code> is not null the matching Positions are placed in
      * there. The vector with the resulting Positions are returned.
      *
+     * <p>
+     * 返回包含范围<code> offset </code>到<code> offset </code> + <code> length </code>中的位置的UndoPosRef实例的向量。
+     * 如果<code> v </code>不为空,则匹配的位置被放置在其中。返回具有所得到的位置的向量。
+     * 
+     * 
      * @param v the Vector to use, with a new one created on null
      * @param offset the starting offset &gt;= 0
      * @param length the length &gt;= 0
@@ -753,6 +869,12 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
      * This is meant for internal usage, and is generally not of interest
      * to subclasses.
      *
+     * <p>
+     *  重置<code>位置</code>中所有UndoPosRef实例的位置。
+     * <p>
+     *  这是为了内部使用,并且通常不是子类感兴趣。
+     * 
+     * 
      * @param positions the UndoPosRef instances to reset
      */
     protected void updateUndoPositions(Vector positions, int offset,
@@ -822,6 +944,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
     /**
      * Used to hold a reference to a Mark that is being reset as the
      * result of removing from the content.
+     * <p>
+     *  用于保存对从正在从内容中删除的结果重置的标记的引用。
+     * 
      */
     final class UndoPosRef {
         UndoPosRef(MarkData rec) {
@@ -833,6 +958,10 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
          * Resets the location of the Position to the offset when the
          * receiver was instantiated.
          *
+         * <p>
+         *  将接收器实例化时,将Position的位置重置为偏移。
+         * 
+         * 
          * @param endOffset end location of inserted string.
          * @param g1 resulting end of gap.
          */
@@ -854,6 +983,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
 
     /**
      * UnoableEdit created for inserts.
+     * <p>
+     *  为插入创建UnoableEdit。
+     * 
      */
     class InsertUndo extends AbstractUndoableEdit {
         protected InsertUndo(int offset, int length) {
@@ -894,9 +1026,13 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
         /** Length of string inserted. */
         protected int length;
         /** The string that was inserted. This will only be valid after an
+        /* <p>
+        /* 
          * undo. */
         protected String string;
         /** An array of instances of UndoPosRef for the Positions in the
+        /* <p>
+        /* 
          * range that was removed, valid after undo. */
         protected Vector posRefs;
     } // GapContent.InsertUndo
@@ -904,6 +1040,9 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
 
     /**
      * UndoableEdit created for removes.
+     * <p>
+     *  为删除创建了UndoableEdit。
+     * 
      */
     class RemoveUndo extends AbstractUndoableEdit {
         protected RemoveUndo(int offset, String string) {
@@ -948,6 +1087,8 @@ public class GapContent extends GapVector implements AbstractDocument.Content, S
         /** The string that was removed. This is valid when redo is valid. */
         protected String string;
         /** An array of instances of UndoPosRef for the Positions in the
+        /* <p>
+        /* 
          * range that was removed, valid before undo. */
         protected Vector posRefs;
     } // GapContent.RemoveUndo

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import javax.imageio.stream.ImageInputStream;
  * so that all subclasses could benefit from them, but that would be an
  * addition to the existing API, and it is not yet clear whether these methods
  * are universally useful, so for now we will leave them here.
+ * <p>
+ *  此类包含可能对ImageReader插件有用的实用程序方法。
+ * 理想情况下,这些方法将在ImageReader基类中,以便所有子类都可以从中受益,但这将是对现有API的一个补充,并且尚不清楚这些方法是否是普遍有用的,所以现在我们将它们这里。
+ * 
  */
 public class ReaderUtil {
 
@@ -138,6 +143,10 @@ public class ReaderUtil {
      * the offsets and periods of a progressive or interlaced decoding
      * pass.
      *
+     * <p>
+     *  一种实用方法,计算在特定解码过程中将被写入的目标像素的精确集合。
+     * 目的是简化读者在将从<code> ImageReadParam </code>获得的源区域,源二次采样和目的地偏移信息与渐进或隔行解码通道的偏移和周期组合所做的工作。
+     * 
      * @param sourceRegion a <code>Rectangle</code> containing the
      * source region being read, offset by the source subsampling
      * offsets, and clipped against the source bounds, as returned by

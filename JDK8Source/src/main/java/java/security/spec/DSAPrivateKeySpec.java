@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.math.BigInteger;
 /**
  * This class specifies a DSA private key with its associated parameters.
  *
+ * <p>
+ *  此类指定具有其关联参数的DSA私钥。
+ * 
+ * 
  * @author Jan Luehe
  *
  *
@@ -52,6 +57,10 @@ public class DSAPrivateKeySpec implements KeySpec {
     /**
      * Creates a new DSAPrivateKeySpec with the specified parameter values.
      *
+     * <p>
+     *  使用指定的参数值创建新的DSAPrivateKeySpec。
+     * 
+     * 
      * @param x the private key.
      *
      * @param p the prime.
@@ -71,6 +80,10 @@ public class DSAPrivateKeySpec implements KeySpec {
     /**
      * Returns the private key {@code x}.
      *
+     * <p>
+     *  返回私钥{@code x}。
+     * 
+     * 
      * @return the private key {@code x}.
      */
     public BigInteger getX() {
@@ -80,6 +93,10 @@ public class DSAPrivateKeySpec implements KeySpec {
     /**
      * Returns the prime {@code p}.
      *
+     * <p>
+     *  返回素数{@code p}。
+     * 
+     * 
      * @return the prime {@code p}.
      */
     public BigInteger getP() {
@@ -89,6 +106,10 @@ public class DSAPrivateKeySpec implements KeySpec {
     /**
      * Returns the sub-prime {@code q}.
      *
+     * <p>
+     *  返回子素数{@code q}。
+     * 
+     * 
      * @return the sub-prime {@code q}.
      */
     public BigInteger getQ() {
@@ -98,6 +119,9 @@ public class DSAPrivateKeySpec implements KeySpec {
     /**
      * Returns the base {@code g}.
      *
+     * <p>
+     *  返回基数{@code g}。
+     * 
      * @return the base {@code g}.
      */
     public BigInteger getG() {

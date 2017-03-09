@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@
  * This notice and attribution to Taligent may not be removed.
  * Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权所有Taligent,Inc. 1996  -  1997,保留所有权利(C)版权所有IBM Corp. 1996  -  1998,保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 
+ *  此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.awt.font;
@@ -242,6 +250,74 @@ import java.awt.font.FontRenderContext;
  * }
  * }</pre>
  * </blockquote>
+ * <p>
+ *  <code> LineBreakMeasurer </code>类允许将样式文本分成适合特定视觉提示的线(或段)。这对于希望显示适合特定宽度(称为<b>换行宽度</b>)的文本段落的客户很有用。
+ * <p>
+ *  <code> LineBreakMeasurer </code>是在样式文本上用迭代器构造的。迭代器的范围应该是文本中的单个段落。
+ *  <code> LineBreakMeasurer </code>维护文本中下一个文本段开始的位置。最初,这个位置是文本的开始。根据双向格式化规则,为段落分配一个总体方向(从左到右或从右到左)。
+ * 从段落获得的所有段具有与段落相同的方向。
+ * <p>
+ * 通过调用<code> nextLayout </code>方法获取文本段,该方法返回表示适合包装宽度的文本的{@link TextLayout}。
+ *  <code> nextLayout </code>方法将当前位置移动到从<code> nextLayout </code>返回的布局的结尾。
+ * <p>
+ *  <code> LineBreakMeasurer </code>实现最常用的拆线策略：适合包装宽度的每个单词都放在行上。如果第一个单词不合适,则所有符合包装宽度的字符都放在行上。
+ * 每行至少放置一个字符。
+ * <p>
+ *  <code> LineBreakMeasurer </code>返回的<code> TextLayout </code>实例处理诸如0宽度空格的制表符。
+ * 希望获得用于定位的制表符分隔的段的客户端应该使用<code> nextLayout </code>的重载,其在文本中具有极限偏移。限制偏移应为选项卡后的第一个字符。
+ * 从此方法返回的<code> TextLayout </code>对象在提供的限制处结束(如果当前位置和限制之间的文本不完全适合包装宽度,则在此之前)。
+ * <p>
+ * 布置制表符分隔文本的客户端在第一个段放置在一行后需要略有不同的换行策略。代替在剩余空间中拟合部分字,它们应该将不适合剩余空间的单词完全放在下一行上。
+ * 可以在<code> nextLayout </code>的过载中请求此策略更改,该过载需要一个<code> boolean </code>参数。
+ * 如果这个参数是<code> true </code>,则<code> nextLayout </code>如果第一个单词不适合给定空格,则返回<code> null </code>。
+ * 请参阅下面的选项卡示例。
+ * <p>
+ *  一般来说,如果用于构建<code> LineBreakMeasurer </code>的文本发生变化,则必须构造一个新的<code> LineBreakMeasurer </code>以反映更改。
+ *  (旧<code> LineBreakMeasurer </code>继续正常工作,但它不会意识到文本更改。
+ * )然而,如果文本更改是单个字符的插入或删除,现有的<code> LineBreakMeasurer </code>可以通过调用<code> insertChar </code>或<code> delet
+ * eChar </code>来更新。
+ *  (旧<code> LineBreakMeasurer </code>继续正常工作,但它不会意识到文本更改。
+ * 更新现有的<code> LineBreakMeasurer </code>比创建一个新的更快。基于用户输入修改文本的客户应该利用这些方法。
+ * <p>
+ *  <strong>示例</strong>：<p>在组件中呈现段落
+ * <blockquote>
+ *  <pre> {@ code public void paint(Graphics graphics){
+ * 
+ * Point2D pen = new Point2D(10,20); Graphics2D g2d =(Graphics2D)图形; FontRenderContext frc = g2d.getFont
+ * RenderContext();。
+ * 
+ *  // let styledText是一个包含至少//一个字符的AttributedCharacterIterator
+ * 
+ *  LineBreakMeasurer measurer = new LineBreakMeasurer(styledText,frc); float wrappingWidth = getSize()。
+ * width  -  15;。
+ * 
+ *  while(measurer.getPosition()<fStyledText.length()){
+ * 
+ *  TextLayout layout = measurer.nextLayout(wrappingWidth);
+ * 
+ *  pen.y + =(layout.getAscent()); float dx = layout.isLeftToRight()? 0：(wrappingWidth  -  layout.getAdv
+ * ance());。
+ * 
+ *  layout.draw(graphics,pen.x + dx,pen.y); pen.y + = layout.getDescent()+ layout.getLeading(); }}} </pre>
+ * 。
+ * </blockquote>
+ * <p>
+ *  使用制表符渲染文本。为了简单起见,假定整个文本方向是从左到右
+ * <blockquote>
+ *  <pre> {@ code public void paint(Graphics graphics){
+ * 
+ *  float leftMargin = 10,rightMargin = 310; float [] tabStops = {100,250};
+ * 
+ *  //假设styledText是一个AttributedCharacterIterator,并且styledText中的标签数//是tabCount
+ * 
+ *  int [] tabLocations = new int [tabCount + 1];
+ * 
+ *  int i = 0; for(char c = styledText.first(); c！= styledText.DONE; c = styledText.next()){if(c =='\ t'){tabLocations [i ++] = styledText.getIndex }
+ * } tabLocations [tabCount] = styledText.getEndIndex() -  1;。
+ * 
+ *  // Now tabLocations有一个条目//每个标签的偏移量//在文本中。为方便起见,最后一个条目是tabLocations //是文本中最后一个字符的偏移量。
+ * 
+ * 
  * @see TextLayout
  */
 
@@ -257,6 +333,41 @@ public final class LineBreakMeasurer {
     /**
      * Constructs a <code>LineBreakMeasurer</code> for the specified text.
      *
+     * <p>
+     * LineBreakMeasurer measurer = new LineBreakMeasurer(styledText); int currentTab = 0; float verticalPos
+     *  = 20;。
+     * 
+     *  while(measurer.getPosition()<styledText.getEndIndex()){
+     * 
+     *  //布局和绘制每一行。线//上的所有线段必须在任何绘图之前计算,因为//我们必须知道线上的最大上升。
+     *  // TextLayouts被计算并存储在Vector中; //它们的水平位置存储在一个平行的// Vector中。
+     * 
+     *  // lineContainsText在第一个段被绘制后为true boolean lineContainsText = false; boolean lineComplete = false; fl
+     * oat maxAscent = 0,maxDescent = 0; float horizo​​ntalPos = leftMargin; Vector layouts = new Vector(1);
+     * 矢量penPositions =新矢量(1);。
+     * 
+     *  while(！lineComplete){float wrappingWidth = rightMargin  -  horizo​​ntalPos; TextLayout layout = measurer.nextLayout(wrappingWidth,tabLocations [currentTab] +1,lineContainsText);。
+     * 
+     *  // layout可以为null如果lineContainsText为true if(layout！= null){layouts.addElement(layout); penPositions.addElement(new Float(horizo​​ntalPos)); horizo​​ntalPos + = layout.getAdvance(); maxAscent = Math.max(maxAscent,layout.getAscent()); maxDescent = Math.max(maxDescent,layout.getDescent()+ layout.getLeading()); }
+     *  else {lineComplete = true; }}。
+     * 
+     *  lineContainsText = true;
+     * 
+     *  if(measurer.getPosition()== tabLocations [currentTab] +1){currentTab ++; }}
+     * 
+     *  if(measurer.getPosition()== styledText.getEndIndex())lineComplete = true; else if(horizo​​ntalPos> =
+     *  tabStops [tabStops.length-1])lineComplete = true;。
+     * 
+     * if(！lineComplete){// move to next tab stop int j; for(j = 0; horizo​​ntalPos> = tabStops [j]; j ++){}
+     *  horizo​​ntalPos = tabStops [j]; }}。
+     * 
+     *  verticalPos + = maxAscent;
+     * 
+     *  枚举layoutEnum = layouts.elements(); Enumeration positionEnum = penPositions.elements();
+     * 
+     *  //现在迭代布局并绘制它们while(layoutEnum.hasMoreElements()){TextLayout nextLayout =(TextLayout)layoutEnum.nextElement(); Float nextPosition =(Float)positionEnum.nextElement(); nextLayout.draw(graphics,nextPosition.floatValue(),verticalPos); }
+     * }。
+     * 
      * @param text the text for which this <code>LineBreakMeasurer</code>
      *       produces <code>TextLayout</code> objects; the text must contain
      *       at least one character; if the text available through
@@ -280,6 +391,11 @@ public final class LineBreakMeasurer {
     /**
      * Constructs a <code>LineBreakMeasurer</code> for the specified text.
      *
+     * <p>
+     * 
+     *  verticalPos + = maxDescent; }}} </pre>
+     * </blockquote>
+     * 
      * @param text the text for which this <code>LineBreakMeasurer</code>
      *     produces <code>TextLayout</code> objects; the text must contain
      *     at least one character; if the text available through
@@ -319,6 +435,10 @@ public final class LineBreakMeasurer {
      * Returns the position at the end of the next layout.  Does NOT
      * update the current position of this <code>LineBreakMeasurer</code>.
      *
+     * <p>
+     *  为指定的文本构造一个<code> LineBreakMeasurer </code>。
+     * 
+     * 
      * @param wrappingWidth the maximum visible advance permitted for
      *    the text in the next layout
      * @return an offset in the text representing the limit of the
@@ -332,6 +452,10 @@ public final class LineBreakMeasurer {
      * Returns the position at the end of the next layout.  Does NOT
      * update the current position of this <code>LineBreakMeasurer</code>.
      *
+     * <p>
+     *  为指定的文本构造一个<code> LineBreakMeasurer </code>。
+     * 
+     * 
      * @param wrappingWidth the maximum visible advance permitted for
      *    the text in the next layout
      * @param offsetLimit the first character that can not be included
@@ -403,6 +527,10 @@ public final class LineBreakMeasurer {
     /**
      * Returns the next layout, and updates the current position.
      *
+     * <p>
+     *  返回下一个布局结尾处的位置。不更新此<code> LineBreakMeasurer </code>的当前位置。
+     * 
+     * 
      * @param wrappingWidth the maximum visible advance permitted for
      *     the text in the next layout
      * @return a <code>TextLayout</code>, beginning at the current
@@ -416,6 +544,10 @@ public final class LineBreakMeasurer {
     /**
      * Returns the next layout, and updates the current position.
      *
+     * <p>
+     *  返回下一个布局结尾处的位置。不更新此<code> LineBreakMeasurer </code>的当前位置。
+     * 
+     * 
      * @param wrappingWidth the maximum visible advance permitted
      *    for the text in the next layout
      * @param offsetLimit the first character that can not be
@@ -454,6 +586,10 @@ public final class LineBreakMeasurer {
     /**
      * Returns the current position of this <code>LineBreakMeasurer</code>.
      *
+     * <p>
+     *  返回下一个布局,并更新当前位置。
+     * 
+     * 
      * @return the current position of this <code>LineBreakMeasurer</code>
      * @see #setPosition
      */
@@ -464,6 +600,10 @@ public final class LineBreakMeasurer {
     /**
      * Sets the current position of this <code>LineBreakMeasurer</code>.
      *
+     * <p>
+     *  返回下一个布局,并更新当前位置。
+     * 
+     * 
      * @param newPosition the current position of this
      *    <code>LineBreakMeasurer</code>; the position should be within the
      *    text used to construct this <code>LineBreakMeasurer</code> (or in
@@ -483,6 +623,10 @@ public final class LineBreakMeasurer {
      * character is inserted into the text, and sets the current
      * position to the beginning of the paragraph.
      *
+     * <p>
+     *  返回此<code> LineBreakMeasurer </code>的当前位置。
+     * 
+     * 
      * @param newParagraph the text after the insertion
      * @param insertPos the position in the text at which the character
      *    is inserted
@@ -509,6 +653,10 @@ public final class LineBreakMeasurer {
      * Updates this <code>LineBreakMeasurer</code> after a single
      * character is deleted from the text, and sets the current
      * position to the beginning of the paragraph.
+     * <p>
+     *  设置此<code> LineBreakMeasurer </code>的当前位置。
+     * 
+     * 
      * @param newParagraph the text after the deletion
      * @param deletePos the position in the text at which the character
      *    is deleted

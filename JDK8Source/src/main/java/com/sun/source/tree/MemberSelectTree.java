@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ import javax.lang.model.element.Name;
  *
  * @jls sections 6.5, 15.11,and 15.12
  *
+ * <p>
+ *  成员访问表达式的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  <em> <em> </em>。 <em>标识符</em>
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

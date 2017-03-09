@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import sun.reflect.Reflection;
  * <p>
  * An application cannot create its own instance of this class.
  *
+ * <p>
+ *  每个Java应用程序都有一个<code> Runtime </code>类的实例,它允许应用程序与运行应用程序的环境进行交互。
+ * 当前运行时可以从<code> getRuntime </code>方法中获取。
+ * <p>
+ *  应用程序无法创建自己的此类的实例。
+ * 
+ * 
  * @author  unascribed
  * @see     java.lang.Runtime#getRuntime()
  * @since   JDK1.0
@@ -51,6 +59,10 @@ public class Runtime {
      * Most of the methods of class <code>Runtime</code> are instance
      * methods and must be invoked with respect to the current runtime object.
      *
+     * <p>
+     *  返回与当前Java应用程序关联的运行时对象。类<code> Runtime </code>的大多数方法是实例方法,必须针对当前运行时对象调用。
+     * 
+     * 
      * @return  the <code>Runtime</code> object associated with the current
      *          Java application.
      */
@@ -85,6 +97,19 @@ public class Runtime {
      * <p> The <tt>{@link System#exit(int) System.exit}</tt> method is the
      * conventional and convenient means of invoking this method. <p>
      *
+     * <p>
+     *  通过启动其关闭序列来终止当前运行的Java虚拟机。此方法不会正常返回。参数作为状态码;按照惯例,非零状态码表示异常终止。
+     * 
+     *  <p>虚拟机的关闭序列由两个阶段组成。在第一阶段,所有注册的{@link #addShutdownHook关闭挂钩}(如果有的话)以一些未指定的顺序启动,并允许并发运行直到它们完成。
+     * 在第二阶段,如果已启用{@link #runFinalizersOnExit finalization-on-exit},则将运行所有未引用的终结器。
+     * 一旦这完成虚拟机{@link #halt halts}。
+     * 
+     * <p>如果在虚拟机已经开始其关闭序列之后调用此方法,则如果正在运行关闭挂接,则此方法将无限期地阻止。
+     * 如果已经运行关闭挂接,并且启用了退出终止,则如果状态为非零,则此方法将使用给定的状态代码暂停虚拟机;否则,它会无限期阻塞。
+     * 
+     *  <p> <tt> {@ link System#exit(int)System.exit} </tt>方法是调用此方法的常规和方便的方法。 <p>
+     * 
+     * 
      * @param  status
      *         Termination status.  By convention, a nonzero status code
      *         indicates abnormal termination.
@@ -182,6 +207,43 @@ public class Runtime {
      * then no guarantee can be made about whether or not any shutdown hooks
      * will be run. <p>
      *
+     * <p>
+     *  注册新的虚拟机关闭挂接。
+     * 
+     *  <p> Java虚拟机<i>关闭</i>以响应两种事件：
+     * 
+     * <ul>
+     * 
+     *  <li>程序<i>正常退出</i>,当最后一个非守护线程退出或<tt> {@ link #exit exit} </tt>(等同地,{@link System#exit int)System.exit}
+     * )方法被调用。
+     * 
+     *  <li>响应用户中断(如键入<tt> ^ C </tt>)或系统范围的事件(例如用户注销或系统关闭),虚拟机会终止</i>。
+     * 
+     * </ul>
+     * 
+     * <p> <i>关闭挂钩</i>只是一个初始化但未启动的线程。当虚拟机开始其关闭序列时,它将以一些未指定的顺序开始所有注册的关闭挂接,并让它们并发运行。
+     * 当所有的挂钩完成后,如果启用了退出结束,它将运行所有未被调用的终结器。最后,虚拟机将停止。
+     * 注意,守护线程将在关闭序列期间继续运行,非守护线程将通过调用<tt> {@ link #exit exit} </tt>方法启动关闭。
+     * 
+     *  <p>一旦关闭序列开始,它只能通过调用<tt> {@ link #halt halt} </tt>方法停止,该方法强制终止虚拟机。
+     * 
+     *  <p>一旦关闭序列开始,就不可能注册新的关闭挂钩或取消注册先前注册的挂钩。尝试这些操作之一将导致抛出<tt> {@ link IllegalStateException} </tt>。
+     * 
+     *  <p>关闭挂钩在虚拟机生命周期中的微妙时刻运行,因此应该进行防御编码。特别是,它们应该写成线程安全的并且尽可能地避免死锁。
+     * 他们也不应该盲目地依赖于可能注册了自己的关闭挂钩的服务,因此可能自己在关闭的过程中。尝试使用其他基于线程的服务(例如AWT事件分派线程)可能导致死锁。
+     * 
+     * <p>关闭钩子也应该快速完成他们的工作。当程序调用<tt> {@ link #exit exit} </tt>时,期望虚拟机将立即关闭并退出。
+     * 当虚拟机由于用户注销或系统关闭而终止时,底层操作系统可能只允许固定的时间量来关闭和退出。因此,不宜尝试任何用户交互或在关闭挂接中执行长时间运行的计算。
+     * 
+     *  <p>通过调用线程的<tt> {@ link ThreadGroup}的<tt> {@ link ThreadGroup#uncaughtException uncaughtException} </tt>
+     * 方法,可以在关闭挂钩中处理未捕获的异常</tt >对象。
+     * 该方法的默认实现将异常的堆栈跟踪打印到<tt> {@ link System#err} </tt>并终止线程;它不会导致虚拟机退出或停止。
+     * 
+     *  <p>在极少数情况下,虚拟机可能会中止</i>,即停止运行而不会彻底关闭。
+     * 当虚拟机在外部终止时,例如在Unix上的<tt> SIGKILL </tt>信号或在Microsoft Windows上的<tt> TerminateProcess </tt>调用时,会出现这种情况。
+     * 如果本地方法通过例如破坏内部数据结构或试图访问不存在的存储器,虚拟机也可以中止。如果虚拟机中止,则不能保证是否将运行任何关闭挂接。 <p>。
+     * 
+     * 
      * @param   hook
      *          An initialized but unstarted <tt>{@link Thread}</tt> object
      *
@@ -214,6 +276,10 @@ public class Runtime {
     /**
      * De-registers a previously-registered virtual-machine shutdown hook. <p>
      *
+     * <p>
+     * 取消注册先前注册的虚拟机关闭挂接。 <p>
+     * 
+     * 
      * @param hook the hook to remove
      * @return <tt>true</tt> if the specified hook had previously been
      * registered and was successfully de-registered, <tt>false</tt>
@@ -250,6 +316,13 @@ public class Runtime {
      * already been initiated then this method does not wait for any running
      * shutdown hooks or finalizers to finish their work. <p>
      *
+     * <p>
+     *  强制终止当前正在运行的Java虚拟机。此方法不会正常返回。
+     * 
+     *  <p>此方法应极度小心使用。与<tt> {@ link #exit exit} </tt>方法不同,此方法不会导致关闭挂接被启动,并且如果启用了结束化退出,则不会运行未被引用的终结器。
+     * 如果关闭序列已经被启动,则该方法不等待任何正在运行的关闭挂钩或终止器完成它们的工作。 <p>。
+     * 
+     * 
      * @param  status
      *         Termination status.  By convention, a nonzero status code
      *         indicates abnormal termination.  If the <tt>{@link Runtime#exit
@@ -286,6 +359,12 @@ public class Runtime {
      * with 0 as its argument to ensure the exit is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  在退出时启用或禁用终结;这样做指定具有尚未被自动调用的finalizer的所有对象的finalizer将在Java运行时退出之前运行。默认情况下,禁用在退出时完成。
+     * 
+     *  <p>如果有安全管理器,则首先调用其<code> checkExit </code>方法,其中的参数为0,以确保允许退出。这可能导致SecurityException。
+     * 
+     * 
      * @param value true to enable finalization on exit, false to disable
      * @deprecated  This method is inherently unsafe.  It may result in
      *      finalizers being called on live objects while other threads are
@@ -322,6 +401,15 @@ public class Runtime {
      * behaves in exactly the same way as the invocation
      * <tt>{@link #exec(String, String[], File) exec}(command, null, null)</tt>.
      *
+     * <p>
+     *  在单独的进程中执行指定的字符串命令。
+     * 
+     *  <p>这是一个方便的方法。
+     * 调用形式<tt> exec(command)</tt>的行为与调用<tt>完全相同{@ link #exec(String,String [],File)exec}(command,null,null 
+     * )</tt>。
+     *  <p>这是一个方便的方法。
+     * 
+     * 
      * @param   command   a specified system command.
      *
      * @return  A new {@link Process} object for managing the subprocess
@@ -356,6 +444,15 @@ public class Runtime {
      * behaves in exactly the same way as the invocation
      * <tt>{@link #exec(String, String[], File) exec}(command, envp, null)</tt>.
      *
+     * <p>
+     *  在与指定环境不同的进程中执行指定的字符串命令。
+     * 
+     * <p>这是一个方便的方法。
+     * 调用形式<tt> exec(command,envp)</tt>的行为与调用<tt>完全相同{@ link #exec(String,String [],File)exec}(command,envp 
+     * ,null)</tt>。
+     * <p>这是一个方便的方法。
+     * 
+     * 
      * @param   command   a specified system command.
      *
      * @param   envp      array of strings, each element of which
@@ -406,6 +503,19 @@ public class Runtime {
      * produced by the tokenizer are then placed in the new string
      * array <code>cmdarray</code>, in the same order.
      *
+     * <p>
+     *  在具有指定环境和工作目录的单独进程中执行指定的字符串命令。
+     * 
+     *  <p>这是一个方便的方法。
+     * 调用形式<tt> exec(command,envp,dir)</tt>的行为与调用<tt> {@ link #exec(String [],String [],File)exec} (cmdarray
+     * ,envp,dir)</tt>,其中<code> cmdarray </code>是<code> command </code>中所有标记的数组。
+     *  <p>这是一个方便的方法。
+     * 
+     *  <p>更精确地说,<code>命令</code>字符串使用通过调用<code> new {@link StringTokenizer}(command)</code>创建的{@link StringTokenizer}
+     * 修改字符类别。
+     * 然后,令牌生成器生成的令牌以相同的顺序放置在新的字符串数组<code> cmdarray </code>中。
+     * 
+     * 
      * @param   command   a specified system command.
      *
      * @param   envp      array of strings, each element of which
@@ -458,6 +568,15 @@ public class Runtime {
      * behaves in exactly the same way as the invocation
      * <tt>{@link #exec(String[], String[], File) exec}(cmdarray, null, null)</tt>.
      *
+     * <p>
+     *  在单独的进程中执行指定的命令和参数。
+     * 
+     *  <p>这是一个方便的方法。
+     * 调用形式<tt> exec(cmdarray)</tt>的行为与调用<tt>完全相同{@ link #exec(String [],String [],File)exec}(cmdarray,null 
+     * ,null)</tt>。
+     *  <p>这是一个方便的方法。
+     * 
+     * 
      * @param   cmdarray  array containing the command to call and
      *                    its arguments.
      *
@@ -494,6 +613,15 @@ public class Runtime {
      * behaves in exactly the same way as the invocation
      * <tt>{@link #exec(String[], String[], File) exec}(cmdarray, envp, null)</tt>.
      *
+     * <p>
+     *  在与指定环境不同的进程中执行指定的命令和参数。
+     * 
+     * <p>这是一个方便的方法。
+     * 调用形式<tt> exec(cmdarray,envp)</tt>的行为与调用<tt>完全相同{@ link #exec(String [],String [],File)exec}(cmdarray 
+     * ,envp,null)</tt>。
+     * <p>这是一个方便的方法。
+     * 
+     * 
      * @param   cmdarray  array containing the command to call and
      *                    its arguments.
      *
@@ -577,6 +705,33 @@ public class Runtime {
      * subclass of {@link IOException}.
      *
      *
+     * <p>
+     *  在指定的环境和工作目录的单独进程中执行指定的命令和参数。
+     * 
+     *  <p>给定一个表示命令行令牌的字符串<code> cmdarray </code>和表示"环境"变量设置的字符串数组<code> envp </code>,此方法创建一个新进程在其中执行指定的命令。
+     * 
+     *  <p>此方法检查<code> cmdarray </code>是否为有效的操作系统命令。哪些命令有效是依赖于系统的,但至少命令必须是非空字符串的非空列表。
+     * 
+     *  <p>如果<tt> envp </tt>是<tt> null </tt>,则子流程继承当前进程的环境设置。
+     * 
+     *  <p>在某些操作系统上启动进程可能需要一组最小的系统相关环境变量。因此,子过程可能继承超出指定环境中的其他环境变量设置。
+     * 
+     *  <p> {@ link ProcessBuilder#start()}现在是使用修改后的环境启动进程的首选方式。
+     * 
+     *  <p>新子流程的工作目录由<tt> dir </tt>指定。如果<tt> dir </tt>是<tt> null </tt>,则子流程继承当前进程的当前工作目录。
+     * 
+     * <p>如果存在安全管理器,则会使用数组<code> cmdarray </code>的第一个组件作为其参数来调用其{@link SecurityManager#checkExec checkExec}方
+     * 法。
+     * 这可能会导致{@link SecurityException}被抛出。
+     * 
+     *  <p>启动操作系统进程高度依赖于系统。在许多事情中可能出问题是：
+     * <ul>
+     *  <li>找不到操作系统程序文件。 <li>拒绝访问程序文件。 <li>工作目录不存在。
+     * </ul>
+     * 
+     *  <p>在这种情况下,会抛出异常。异常的确切性质是系统依赖的,但它总是{@link IOException}的子类。
+     * 
+     * 
      * @param   cmdarray  array containing the command to call and
      *                    its arguments.
      *
@@ -628,6 +783,12 @@ public class Runtime {
      * processors should therefore occasionally poll this property and adjust
      * their resource usage appropriately. </p>
      *
+     * <p>
+     *  返回Java虚拟机可用的处理器数。
+     * 
+     *  <p>此值可能会在虚拟机的特定调用期间更改。因此,对可用处理器数量敏感的应用程序应偶尔轮询此属性并适当调整其资源使用情况。 </p>
+     * 
+     * 
      * @return  the maximum number of processors available to the virtual
      *          machine; never smaller than one
      * @since 1.4
@@ -640,6 +801,10 @@ public class Runtime {
      * <code>gc</code> method may result in increasing the value returned
      * by <code>freeMemory.</code>
      *
+     * <p>
+     *  返回Java虚拟机中的可用内存量。调用<code> gc </code>方法可能会增加<code> freeMemory返回的值。</code>
+     * 
+     * 
      * @return  an approximation to the total amount of memory currently
      *          available for future allocated objects, measured in bytes.
      */
@@ -653,6 +818,12 @@ public class Runtime {
      * Note that the amount of memory required to hold an object of any
      * given type may be implementation-dependent.
      *
+     * <p>
+     *  返回Java虚拟机中的内存总量。此方法返回的值可能会随时间变化,具体取决于主机环境。
+     * <p>
+     *  注意,保存任何给定类型的对象所需的存储器的量可以是实现相关的。
+     * 
+     * 
      * @return  the total amount of memory currently available for current
      *          and future objects, measured in bytes.
      */
@@ -663,6 +834,10 @@ public class Runtime {
      * attempt to use.  If there is no inherent limit then the value {@link
      * java.lang.Long#MAX_VALUE} will be returned.
      *
+     * <p>
+     * 返回Java虚拟机尝试使用的最大内存量。如果没有固有限制,则将返回值{@link java.lang.Long#MAX_VALUE}。
+     * 
+     * 
      * @return  the maximum amount of memory that the virtual machine will
      *          attempt to use, measured in bytes
      * @since 1.4
@@ -684,6 +859,13 @@ public class Runtime {
      * <p>
      * The method {@link System#gc()} is the conventional and convenient
      * means of invoking this method.
+     * <p>
+     *  运行垃圾收集器。调用此方法表明Java虚拟机花费了回收未使用的对象的努力,以使它们当前所占用的存储器可用于快速重用。当控制从方法调用返回时,虚拟机已尽最大努力回收所有丢弃的对象。
+     * <p>
+     *  名称<code> gc </code>代表"垃圾回收器"。虚拟机在单独的线程中根据需要自动执行此回收过程,即使未明确调用<code> gc </code>方法。
+     * <p>
+     *  方法{@link System#gc()}是调用此方法的常规和方便的方法。
+     * 
      */
     public native void gc();
 
@@ -706,6 +888,16 @@ public class Runtime {
      * The method {@link System#runFinalization()} is the conventional
      * and convenient means of invoking this method.
      *
+     * <p>
+     *  运行任何对象的finalization方法,等待最终确定。
+     * 调用此方法表明Java虚拟机花费了努力来运行已被发现被丢弃但其<code> finalize </code>方法尚未运行的对象的<code> finalize </code>方法。
+     * 当控制从方法调用返回时,虚拟机已尽最大努力完成所有未完成的最终化。
+     * <p>
+     *  如果未明确调用<code> runFinalization </code>方法,则虚拟机在单独的线程中根据需要自动执行完成过程。
+     * <p>
+     * 方法{@link System#runFinalization()}是调用此方法的常规和方便的方法。
+     * 
+     * 
      * @see     java.lang.Object#finalize()
      */
     public void runFinalization() {
@@ -727,6 +919,13 @@ public class Runtime {
      * method causes the virtual machine to stop performing the
      * detailed instruction trace it is performing.
      *
+     * <p>
+     *  启用/禁用指令跟踪。如果<code> boolean </code>参数是<code> true </code>,则此方法建议Java虚拟机在虚拟机执行时为每个指令发出调试信息。
+     * 此信息的格式以及发出此信息的文件或其他输出流取决于主机环境。如果虚拟机不支持此功能,则可以忽略此请求。跟踪输出的目的地是系统相关的。
+     * <p>
+     *  如果<code> boolean </code>参数为<code> false </code>,则此方法会导致虚拟机停止执行其执行的详细指令跟踪。
+     * 
+     * 
      * @param   on   <code>true</code> to enable instruction tracing;
      *               <code>false</code> to disable this feature.
      */
@@ -745,6 +944,13 @@ public class Runtime {
      * Calling this method with argument false suggests that the
      * virtual machine cease emitting per-call debugging information.
      *
+     * <p>
+     *  启用/禁用方法调用的跟踪。如果<code> boolean </code>参数是<code> true </code>,则此方法建议Java虚拟机在调用虚拟机时为每个方法发出调试信息。
+     * 此信息的格式以及发出此信息的文件或其他输出流取决于主机环境。如果虚拟机不支持此功能,则可以忽略此请求。
+     * <p>
+     *  使用参数false调用此方法意味着虚拟机停止发出每个调用的调试信息。
+     * 
+     * 
      * @param   on   <code>true</code> to enable instruction tracing;
      *               <code>false</code> to disable this feature.
      */
@@ -778,6 +984,22 @@ public class Runtime {
      * The method {@link System#load(String)} is the conventional and
      * convenient means of invoking this method.
      *
+     * <p>
+     * 加载由filename参数指定的本机库。 filename参数必须是绝对路径名。 (例如<code> Runtime.getRuntime()。
+     * load("/ home / avh / lib / libX11.so"); </code>)。
+     * 
+     *  如果文件名参数,当剥离任何特定于平台的库前缀,路径和文件扩展名时,指示其名称为例如L的库,并且称为L的本地库与VM静态链接,则JNI_OnLoad_L函数由库导出的调用而不是尝试加载动态库。
+     * 与参数匹配的文件名不必存在于文件系统中。有关更多详细信息,请参阅JNI规范。
+     * 
+     *  否则,filename参数将以实现相关的方式映射到本机库映像。
+     * <p>
+     *  首先,如果有安全管理器,则以<code> filename </code>作为其参数调用其<code> checkLink </code>方法。这可能导致安全异常。
+     * <p>
+     *  这与{@link #loadLibrary(String)}方法类似,但它接受一个通用文件名作为参数,而不仅仅是一个库名,允许加载任何本地代码文件。
+     * <p>
+     *  方法{@link System#load(String)}是调用此方法的常规和方便的方法。
+     * 
+     * 
      * @param      filename   the file to load.
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkLink</code> method doesn't allow
@@ -840,6 +1062,23 @@ public class Runtime {
      * If this method is called more than once with the same library
      * name, the second and subsequent calls are ignored.
      *
+     * <p>
+     * 加载由<code> libname </code>参数指定的本机库。 <code> libname </code>参数不能包含任何平台特定的前缀,文件扩展名或路径。
+     * 如果称为<code> libname </code>的本机库与VM静态链接,则调用由库导出的JNI_OnLoad_ <code> libname </code>函数。
+     * 有关更多详细信息,请参阅JNI规范。
+     * 
+     *  否则,libname参数从系统库位置加载,并以实现相关的方式映射到本机库映像。
+     * <p>
+     *  首先,如果有安全管理器,则以<code> libname </code>作为其参数调用其<code> checkLink </code>方法。这可能导致安全异常。
+     * <p>
+     *  方法{@link System#loadLibrary(String)}是调用此方法的常规和方便的方法。
+     * 如果本机方法要在类的实现中使用,标准的策略是将本地代码放在库文件中(调用<code> LibFile </code>),然后放置一个静态初始化器：<blockquote> <pre> static {System.loadLibrary("LibFile"); }
+     *  </pre> </blockquote>。
+     *  方法{@link System#loadLibrary(String)}是调用此方法的常规和方便的方法。当类被加载和初始化时,本地方法的必要的本地代码实现也将被加载。
+     * <p>
+     *  如果使用相同的库名称多次调用此方法,则忽略第二个和后续调用。
+     * 
+     * 
      * @param      libname   the name of the library.
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkLink</code> method doesn't allow
@@ -881,6 +1120,15 @@ public class Runtime {
      * If the argument is already a localized stream, it may be returned
      * as the result.
      *
+     * <p>
+     * 创建输入流的本地化版本。
+     * 这个方法接受一个<code> InputStream </code>并且返回一个等价于参数的<code> InputStream </code>,除了它被本地化：当从流中读取本地字符集中的字符时,会自动
+     * 从本地字符集转换为Unicode。
+     * 创建输入流的本地化版本。
+     * <p>
+     *  如果参数已经是本地化流,则可以作为结果返回。
+     * 
+     * 
      * @param      in InputStream to localize
      * @return     a localized input stream
      * @see        java.io.InputStream
@@ -907,6 +1155,12 @@ public class Runtime {
      * If the argument is already a localized stream, it may be returned
      * as the result.
      *
+     * <p>
+     *  创建输出流的本地化版本。
+     * 这个方法需要一个<code> OutputStream </code>并且返回一个等价于参数的<code> OutputStream </code>,除了它被本地化以外：当Unicode字符被写入流时,
+     * 它们被自动转换为本地字符集。
+     *  创建输出流的本地化版本。
+     * 
      * @deprecated As of JDK&nbsp;1.1, the preferred way to translate a
      * Unicode character stream into a byte stream in the local encoding is via
      * the <code>OutputStreamWriter</code>, <code>BufferedWriter</code>, and

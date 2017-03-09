@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,16 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ ************** ********************************************
+ * ******** **** * COPYRIGHT(c)Eastman Kodak Company,1997 *** *根据United *** *国家法典第17章的未发表的作品。
+ * 版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ * 版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package java.awt.color;
@@ -78,6 +89,27 @@ import sun.java2d.cmm.PCMM;
  * imported images with a known color space.  At most, such applets
  * would need to get one of the default color spaces via
  * ColorSpace.getInstance().
+ * <p>
+ *  ICC_ColorSpace类是抽象ColorSpace类的实现。
+ * 这种表示设备无关和设备相关的颜色空间是基于国际颜色联盟规范ICC.1：2001-12,颜色配置文件的文件格式(参见<A href="http://www.color.org"> http ：//www.
+ * color.org </A>)。
+ *  ICC_ColorSpace类是抽象ColorSpace类的实现。
+ * <p>
+ * 通常,Color或ColorModel将与ICC配置文件相关联,该ICC配置文件是输入,显示或输出配置文件(参见ICC规范)。还有其它类型的ICC简档,例如。
+ * 抽象配置文件,设备链接配置文件和命名的颜色配置文件,它们不包含适用于表示颜色,图像或设备的颜色空间的信息(请参阅ICC_Profile)。
+ * 尝试从不适当的ICC配置文件创建ICC_ColorSpace对象是一个错误。
+ * <p>
+ *  ICC简档表示从简档(例如,监视器)的颜色空间到简档连接空间(PCS)的变换。
+ * 用于标记图像或颜色的感兴趣的简档具有PCS,其是在ICC简档格式规范中定义的设备无关空间(一个CIEXYZ空间和两个CIELab空间)之一。
+ * 大多数感兴趣的轮廓或者具有可逆变换或者明确地指定沿着两个方向的变换。
+ * 如果ICC_ColorSpace对象以需要从PCS到配置文件的本地空间的转换的方式使用,并且没有足够的数据来正确执行转换,则ICC_ColorSpace对象将产生指定类型的颜色空间(例如TYPE_RGB
+ * ,TYPE_CMYK等)的输出。
+ * 大多数感兴趣的轮廓或者具有可逆变换或者明确地指定沿着两个方向的变换。),但输出数据的特定颜色值将未定义。
+ * <p>
+ * 此类的详细信息对于简单小程序不重要,这些小程序绘制默认颜色空间或以已知颜色空间处理和显示导入的图像。
+ * 最多,这样的applet将需要通过ColorSpace.getInstance()获得默认的颜色空间之一。
+ * 
+ * 
  * @see ColorSpace
  * @see ICC_Profile
  */
@@ -104,6 +136,10 @@ public class ICC_ColorSpace extends ColorSpace {
 
     /**
     * Constructs a new ICC_ColorSpace from an ICC_Profile object.
+    * <p>
+    *  从ICC_Profile对象构造新的ICC_ColorSpace。
+    * 
+    * 
     * @param profile the specified ICC_Profile object
     * @exception IllegalArgumentException if profile is inappropriate for
     *            representing a ColorSpace.
@@ -129,6 +165,10 @@ public class ICC_ColorSpace extends ColorSpace {
 
     /**
     * Returns the ICC_Profile for this ICC_ColorSpace.
+    * <p>
+    *  返回此ICC_ColorSpace的ICC_Profile。
+    * 
+    * 
     * @return the ICC_Profile for this ICC_ColorSpace.
     */
     public ICC_Profile getProfile() {
@@ -150,6 +190,16 @@ public class ICC_ColorSpace extends ColorSpace {
      * See {@link #toCIEXYZ(float[]) toCIEXYZ} and
      * {@link #fromCIEXYZ(float[]) fromCIEXYZ} for further information.
      * <p>
+     * <p>
+     *  将假定为此ColorSpace中的颜色值转换为默认CS_sRGB颜色空间中的值。
+     * <p>
+     *  此方法使用设计为在输入和输出颜色之间产生最佳感知匹配的算法来变换颜色值。
+     * 为了对颜色值进行比色转换,应该使用此颜色空间的<code> toCIEXYZ </code>方法,先将输入颜色空间转换为CS_CIEXYZ颜色空间,然后使用<code> fromCIEXYZ < / code>
+     * 方法将CS_sRGB颜色空间从CS_CIEXYZ转换为输出颜色空间。
+     *  此方法使用设计为在输入和输出颜色之间产生最佳感知匹配的算法来变换颜色值。
+     * 更多信息,请参见{@link #toCIEXYZ(float [])toCIEXYZ}和{@link #fromCIEXYZ(float [])fromCIEXYZ}。
+     * <p>
+     * 
      * @param colorvalue a float array with length of at least the number
      *      of components in this ColorSpace.
      * @return a float array of length 3.
@@ -202,6 +252,16 @@ public class ICC_ColorSpace extends ColorSpace {
      * See {@link #toCIEXYZ(float[]) toCIEXYZ} and
      * {@link #fromCIEXYZ(float[]) fromCIEXYZ} for further information.
      * <p>
+     * <p>
+     *  将假定为在默认CS_sRGB颜色空间中的颜色值转换为此ColorSpace。
+     * <p>
+     * 此方法使用设计为在输入和输出颜色之间产生最佳感知匹配的算法来变换颜色值。
+     * 为了对颜色值进行比色转换,应该使用CS_sRGB颜色空间的<code> toCIEXYZ </code>方法,先将输入颜色空间转换为CS_CIEXYZ颜色空间,然后使用<code> fromCIEXYZ
+     *  </code>此颜色空间的方法从CS_CIEXYZ转换为输出颜色空间。
+     * 此方法使用设计为在输入和输出颜色之间产生最佳感知匹配的算法来变换颜色值。
+     * 更多信息,请参见{@link #toCIEXYZ(float [])toCIEXYZ}和{@link #fromCIEXYZ(float [])fromCIEXYZ}。
+     * <p>
+     * 
      * @param rgbvalue a float array with length of at least 3.
      * @return a float array with length equal to the number of
      *       components in this ColorSpace.
@@ -337,6 +397,48 @@ public class ICC_ColorSpace extends ColorSpace {
      * be the same as the media white point tag XYZ value in the ICC
      * profile for an sRGB device.
      * <p>
+     * <p>
+     *  将假定为此ColorSpace中的颜色值转换为CS_CIEXYZ转换颜色空间。
+     * <p>
+     *  该方法使用如ICC规范所定义的相对比色法来变换颜色值。这意味着由此方法返回的XYZ值相对于CS_CIEXYZ颜色空间的D50白点表示。
+     * 该表示在两步颜色转换过程中是有用的,其中颜色从输入颜色空间变换到CS_CIEXYZ,然后变换到输出颜色空间。该表示与将通过比色计从给定颜色值测量的XYZ值不同。
+     * 需要进一步的变换来计算将使用当前CIE推荐实践来测量的XYZ值。下面的段落更详细地解释这一点。
+     * <p>
+     * ICC标准使用设备无关颜色空间(DICS)作为将颜色从一个设备转换为另一个设备的机制。在此体系结构中,颜色从源设备的颜色空间转换为ICC DICS,然后从ICC DICS转换为目标设备的颜色空间。
+     *  ICC标准定义了包含将在设备的颜色空间和ICC DICS之间转换的变换的设备简档。
+     * 通过将用于源设备的简档的设备到DICS变换连接到用于目的地设备的简档的DICS到设备变换来完成从源设备到目的地设备的颜色的颜色的整体转换。因此,ICC DICS通常被称为配置文件连接空间(PCS)。
+     * 在方法toCIEXYZ和fromCIEXYZ中使用的颜色空间是由ICC规范定义的CIEXYZ PCS。这也是ColorSpace.CS_CIEXYZ表示的颜色空间。
+     * <p>
+     * 颜色的XYZ值通常相对于一些白点表示,因此,在不知道这些值的白点的情况下,不能知道XYZ值的实际含义。这称为相对比色法。 PCS使用白点D50,因此PCS的XYZ值相对于D50。
+     * 例如,PCS中的白色将具有D50的XYZ值,其被定义为X = .9642,Y = 1.000和Z = 0.8249。这个白点通常用于图形艺术应用,但是其他应用通常用于其他应用。
+     * <p>
+     *  为了量化诸如打印机或监视器的设备的颜色特性,通常进行特定设备颜色的XYZ值的测量。为了本讨论的目的,术语设备XYZ值用于表示将使用当前CIE推荐实践从设备颜色测量的XYZ值。
+     * <p>
+     * 通过此方法返回的设备XYZ值和PCS XYZ值之间的转换对应于设备的颜色空间(由CIE比色值表示)与PCS之间的转换。在这个过程中涉及许多因素,其中一些是相当微妙。
+     * 然而,最重要的是为了解决设备的白点和PCS的白点之间的差异而进行的调整。有许多这样的技术,它是目前的研究和争议的主题。一些常用的方法是XYZ缩放,von Kries变换和Bradford变换。
+     * 使用的正确方法取决于每个特定的应用。
+     * <p>
+     *  最简单的方法是XYZ缩放。在该方法中,通过将每个设备XYZ值乘以PCS白点(D50)与设备白点的比率,将每个设备XYZ值转换为PCS XYZ值。
+     * <pre>
+     * 
+     *  Xd,Yd,Zd是设备XYZ值Xdw,Ydw,Zdw是设备XYZ白点值Xp,Yp,Zp是PCS XYZ值Xd50,Yd50,Zd50是PCS XYZ白点值
+     * 
+     *  Xp = Xd *(Xd50 / Xdw)Yp = Yd *(Yd50 / Ydw)Zp = Zd *(Zd50 / Zdw)
+     * 
+     * </pre>
+     * <p>
+     *  从PCS到设备的转换将通过反转这些方程来完成：
+     * <pre>
+     * 
+     *  Xd = Xp *(Xdw / Xd50)Yd = Yp *(Ydw / Yd50)Zd = Zp *(Zdw / Zd50)
+     * 
+     * </pre>
+     * <p>
+     * 请注意,ICC配置文件中的媒体白点标记与设备白点不同。介质白点标签以PCS值表示,并用于表示在该光源下测量时设备光源的XYZ与设备介质的XYZ之间的差异。
+     * 设备白点表示为对应于设备上显示的白色的设备XYZ值。例如,在sRGB设备上显示RGB颜色(1.0,1.0,1.0)将导致D65的测量设备XYZ值。
+     * 这将不同于sRGB设备的ICC配置文件中的介质白点标记XYZ值。
+     * <p>
+     * 
      * @param colorvalue a float array with length of at least the number
      *        of components in this ColorSpace.
      * @return a float array of length 3.
@@ -481,6 +583,33 @@ public class ICC_ColorSpace extends ColorSpace {
      * be the same as the media white point tag XYZ value in the ICC
      * profile for an sRGB device.
      * <p>
+     * <p>
+     *  将假定为CS_CIEXYZ转换颜色空间中的颜色值转换为此ColorSpace。
+     * <p>
+     * 该方法使用如ICC规范所定义的相对比色法来变换颜色值。这意味着由该方法获取的XYZ参数值是相对于CS_CIEXYZ颜色空间的D50白点表示的。
+     * 该表示在两步颜色转换过程中是有用的,其中颜色从输入颜色空间变换到CS_CIEXYZ,然后变换到输出颜色空间。由该方法返回的颜色值不是那些当通过色度计测量时将产生传递给该方法的XYZ值的颜色值。
+     * 如果您具有与使用当前CIE推荐做法进行的测量相对应的XYZ值,则在传递给此方法之前,必须将它们转换为D50相对值。下面的段落更详细地解释这一点。
+     * <p>
+     * ICC标准使用设备无关颜色空间(DICS)作为将颜色从一个设备转换为另一个设备的机制。在此体系结构中,颜色从源设备的颜色空间转换为ICC DICS,然后从ICC DICS转换为目标设备的颜色空间。
+     *  ICC标准定义了包含将在设备的颜色空间和ICC DICS之间转换的变换的设备简档。
+     * 通过将用于源设备的简档的设备到DICS变换连接到用于目的地设备的简档的DICS到设备变换来完成从源设备到目的地设备的颜色的颜色的整体转换。因此,ICC DICS通常被称为配置文件连接空间(PCS)。
+     * 在方法toCIEXYZ和fromCIEXYZ中使用的颜色空间是由ICC规范定义的CIEXYZ PCS。这也是ColorSpace.CS_CIEXYZ表示的颜色空间。
+     * <p>
+     * 颜色的XYZ值通常相对于一些白点表示,因此,在不知道这些值的白点的情况下,不能知道XYZ值的实际含义。这称为相对比色法。 PCS使用白点D50,因此PCS的XYZ值相对于D50。
+     * 例如,PCS中的白色将具有D50的XYZ值,其被定义为X = .9642,Y = 1.000和Z = 0.8249。这个白点通常用于图形艺术应用,但是其他应用通常用于其他应用。
+     * <p>
+     *  为了量化诸如打印机或监视器的设备的颜色特性,通常进行特定设备颜色的XYZ值的测量。为了本讨论的目的,术语设备XYZ值用于表示将使用当前CIE推荐实践从设备颜色测量的XYZ值。
+     * <p>
+     * 通过该方法作为参数进行的设备XYZ值和PCS XYZ值之间的转换对应于在由CIE色度值表示的设备的颜色空间与PCS之间进行转换。在这个过程中涉及许多因素,其中一些是相当微妙。
+     * 然而,最重要的是为了解决设备的白点和PCS的白点之间的差异而进行的调整。有许多这样的技术,它是目前的研究和争议的主题。一些常用的方法是XYZ缩放,von Kries变换和Bradford变换。
+     * 使用的正确方法取决于每个特定的应用。
+     * <p>
+     *  最简单的方法是XYZ缩放。在该方法中,通过将每个设备XYZ值乘以PCS白点(D50)与设备白点的比率,将每个设备XYZ值转换为PCS XYZ值。
+     * <pre>
+     * 
+     *  Xd,Yd,Zd是设备XYZ值Xdw,Ydw,Zdw是设备XYZ白点值Xp,Yp,Zp是PCS XYZ值Xd50,Yd50,Zd50是PCS XYZ白点值
+     * 
+     * 
      * @param colorvalue a float array with length of at least 3.
      * @return a float array with length equal to the number of
      *         components in this ColorSpace.
@@ -537,6 +666,21 @@ public class ICC_ColorSpace extends ColorSpace {
      * method returns 0.0 for all components.  When using an ICC_ColorSpace
      * with a profile that requires different minimum component values,
      * it is necessary to subclass this class and override this method.
+     * <p>
+     *  Xp = Xd *(Xd50 / Xdw)Yp = Yd *(Yd50 / Ydw)Zp = Zd *(Zd50 / Zdw)
+     * 
+     * </pre>
+     * <p>
+     *  从PCS到设备的转换将通过反转这些方程来完成：
+     * <pre>
+     * 
+     *  Xd = Xp *(Xdw / Xd50)Yd = Yp *(Ydw / Yd50)Zd = Zp *(Zdw / Zd50)
+     * 
+     * </pre>
+     * <p>
+     * 请注意,ICC配置文件中的媒体白点标记与设备白点不同。介质白点标签以PCS值表示,并且用于表示在该光源下测量时设备光源的XYZ与设备介质的XYZ之间的差。
+     * 设备白点表示为对应于设备上显示的白色的设备XYZ值。例如,在sRGB设备上显示RGB颜色(1.0,1.0,1.0)将导致D65的测量设备XYZ值。
+     * 
      * @param component The component index.
      * @return The minimum normalized component value.
      * @throws IllegalArgumentException if component is less than 0 or
@@ -562,6 +706,10 @@ public class ICC_ColorSpace extends ColorSpace {
      * method returns 1.0 for all components.  When using an ICC_ColorSpace
      * with a profile that requires different maximum component values,
      * it is necessary to subclass this class and override this method.
+     * <p>
+     * 这将不同于sRGB设备的ICC配置文件中的介质白点标记XYZ值。
+     * <p>
+     * 
      * @param component The component index.
      * @return The maximum normalized component value.
      * @throws IllegalArgumentException if component is less than 0 or

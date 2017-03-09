@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,13 @@ import sun.rmi.transport.tcp.TCPEndpoint;
  * the remote host.  Therefore, a subsequent method invocation to a remote
  * registry returned as a result of this method may fail.
  *
+ * <p>
+ *  <code> LocateRegistry </code>用于获取对特定主机(包括本地主机)上的引导远程对象注册表的引用,或者创建接受特定端口上的调用的远程对象注册表。
+ * 
+ *  <p>请注意,<code> getRegistry </code>调用实际上不会建立到远程主机的连接。它只是创建一个本地引用远程注册表,并将成功,即使没有注册表在远程主机上运行。
+ * 因此,作为此方法的结果返回的对远程注册表的后续方法调用可能会失败。
+ * 
+ * 
  * @author  Ann Wollrath
  * @author  Peter Jones
  * @since   JDK1.1
@@ -58,6 +66,9 @@ public final class LocateRegistry {
 
     /**
      * Private constructor to disable public construction.
+     * <p>
+     *  私人建设者禁止公共建设。
+     * 
      */
     private LocateRegistry() {}
 
@@ -65,6 +76,10 @@ public final class LocateRegistry {
      * Returns a reference to the the remote object <code>Registry</code> for
      * the local host on the default registry port of 1099.
      *
+     * <p>
+     *  返回对默认注册表端口为1099的本地主机的远程对象<code> Registry </code>的引用。
+     * 
+     * 
      * @return reference (a stub) to the remote object registry
      * @exception RemoteException if the reference could not be created
      * @since JDK1.1
@@ -79,6 +94,10 @@ public final class LocateRegistry {
      * Returns a reference to the the remote object <code>Registry</code> for
      * the local host on the specified <code>port</code>.
      *
+     * <p>
+     *  返回对指定<code> port </code>上的本地主机的远程对象<code> Registry </code>的引用。
+     * 
+     * 
      * @param port port on which the registry accepts requests
      * @return reference (a stub) to the remote object registry
      * @exception RemoteException if the reference could not be created
@@ -95,6 +114,11 @@ public final class LocateRegistry {
      * specified <code>host</code> on the default registry port of 1099.  If
      * <code>host</code> is <code>null</code>, the local host is used.
      *
+     * <p>
+     *  在默认注册表端口1099上返回对指定的<code> host </code>上远程对象<code>注册表</code>的引用。
+     * 如果<code> host </code>为<code> null <代码>,则使用本地主机。
+     * 
+     * 
      * @param host host for the remote registry
      * @return reference (a stub) to the remote object registry
      * @exception RemoteException if the reference could not be created
@@ -111,6 +135,11 @@ public final class LocateRegistry {
      * specified <code>host</code> and <code>port</code>. If <code>host</code>
      * is <code>null</code>, the local host is used.
      *
+     * <p>
+     *  返回对指定的<code> host </code>和<code> port </code>上的远程对象<code> Registry </code>的引用。
+     * 如果<code> host </code>是<code> null </code>,则使用本地主机。
+     * 
+     * 
      * @param host host for the remote registry
      * @param port port on which the registry accepts requests
      * @return reference (a stub) to the remote object registry
@@ -131,6 +160,13 @@ public final class LocateRegistry {
      * to create <code>Socket</code> connections to the registry on the
      * remote <code>host</code> and <code>port</code>.
      *
+     * <p>
+     * 返回指定的<code> host </code>和<code> port </code>上的远程对象<code> Registry </code>的本地创建的远程引用。
+     * 与此远程注册表的通信将使用提供的<code> RMIClientSocketFactory </code> <code> csf </code>来创建到远程<code>主机</code>和<code> 
+     * port </code>。
+     * 返回指定的<code> host </code>和<code> port </code>上的远程对象<code> Registry </code>的本地创建的远程引用。
+     * 
+     * 
      * @param host host for the remote registry
      * @param port port on which the registry accepts requests
      * @param csf  client-side <code>Socket</code> factory used to
@@ -171,6 +207,11 @@ public final class LocateRegistry {
          * returned is an instance of a dynamic proxy class that implements
          * the Registry interface; otherwise the proxy returned is an
          * instance of the pregenerated stub class for RegistryImpl.
+         * <p>
+         *  为给定的主机,端口和客户端套接字工厂创建注册表的代理。如果提供的客户端套接字工厂为null,则引用类型为UnicastRef,否则引用类型为UnicastRef2。
+         * 如果属性java.rmi.server.ignoreStubClasses为true,则返回的代理是实现注册表接口的动态代理类的实例;否则返回的代理是RegistryImpl的预生成的存根类的实例。
+         * 
+         * 
          **/
         LiveRef liveRef =
             new LiveRef(new ObjID(ObjID.REGISTRY_ID),
@@ -194,6 +235,14 @@ public final class LocateRegistry {
      * exported with a well-known object identifier, an {@link ObjID}
      * instance constructed with the value {@link ObjID#REGISTRY_ID}.
      *
+     * <p>
+     *  在本地主机上创建并导出接受指定<code> port </code>上请求的<code>注册表</code>实例。
+     * 
+     *  <p> <code>注册表</code>实例被导出,就像调用了静态的{@link UnicastRemoteObject#exportObject(Remote,int)UnicastRemoteObject.exportObject}
+     * 方法,传递<code>注册表</code>指定的<code> port </code>作为参数,除了<code>注册表</code>实例使用已知的对象标识符导出,{@link ObjID}实例使用值{@link ObjID #REGISTRY_ID}
+     * 。
+     * 
+     * 
      * @param port the port on which the registry accepts requests
      * @return the registry
      * @exception RemoteException if the registry could not be exported
@@ -222,6 +271,13 @@ public final class LocateRegistry {
      * identifier, an {@link ObjID} instance constructed with the value
      * {@link ObjID#REGISTRY_ID}.
      *
+     * <p>
+     * 在使用自定义套接字工厂与该实例进行通信的本地主机上创建并导出<code>注册表</code>实例。
+     * 创建的注册表使用从提供的<code> RMIServerSocketFactory </code>创建的<code> ServerSocket </code>监听给定<code> port </code>
+     * 上的传入请求。
+     * 在使用自定义套接字工厂与该实例进行通信的本地主机上创建并导出<code>注册表</code>实例。
+     * 
+     * 
      * @param port port on which the registry accepts requests
      * @param csf  client-side <code>Socket</code> factory used to
      *      make connections to the registry

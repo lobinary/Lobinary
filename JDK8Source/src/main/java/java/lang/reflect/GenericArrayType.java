@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ package java.lang.reflect;
 /**
  * {@code GenericArrayType} represents an array type whose component
  * type is either a parameterized type or a type variable.
+ * <p>
+ *  {@code GenericArrayType}表示一个数组类型,其组件类型是参数化类型或类型变量。
+ * 
+ * 
  * @since 1.5
  */
 public interface GenericArrayType extends Type {
@@ -40,6 +45,11 @@ public interface GenericArrayType extends Type {
      * see {@link java.lang.reflect.TypeVariable TypeVariable} for the
      * creation process for type variables.
      *
+     * <p>
+     *  返回表示此数组的组件类型的{@code Type}对象。此方法创建数组的组件类型。
+     * 有关参数化类型的创建过程的语义,请参阅{@link java.lang.reflect.ParameterizedType ParameterizedType}的声明,对于类型变量的创建过程,请参阅{@link java.lang.reflect.TypeVariable TypeVariable}
+     * 。
+     * 
      * @return  a {@code Type} object representing the component type
      *     of this array
      * @throws TypeNotPresentException if the underlying array type's

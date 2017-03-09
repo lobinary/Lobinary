@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,12 @@ package javax.management.timer;
  * <P>
  * The timer notifications are created and handled by the timer MBean.
  *
+ * <p>
+ *  此类提供定时器MBean发送的通知的定义。 <BR>它定义了一个定时器通知标识符,它允许从定时器MBean的通知列表中检索定时器通知。
+ * <P>
+ *  定时器通知由定时器MBean创建和处理。
+ * 
+ * 
  * @since 1.5
  */
 public class TimerNotification extends javax.management.Notification {
@@ -44,9 +51,14 @@ public class TimerNotification extends javax.management.Notification {
      * ------------------------------------------
      *  PRIVATE VARIABLES
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私人变数------ ------------------------------------
+     * 
      */
 
     /**
+    /* <p>
+    /* 
      * @serial Timer notification identifier.
      *         This identifier is used to retrieve a timer notification from the timer list of notifications.
      */
@@ -57,11 +69,18 @@ public class TimerNotification extends javax.management.Notification {
      * ------------------------------------------
      *  CONSTRUCTORS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------建筑师------- -----------------------------------
+     * 
      */
 
     /**
      * Creates a timer notification object.
      *
+     * <p>
+     *  创建定时器通知对象。
+     * 
+     * 
      * @param type The notification type.
      * @param source The notification producer.
      * @param sequenceNumber The notification sequence number within the source object.
@@ -80,6 +99,9 @@ public class TimerNotification extends javax.management.Notification {
      * ------------------------------------------
      *  PUBLIC METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------公共方法------------------------------------
+     * 
      */
 
     // GETTERS AND SETTERS
@@ -88,6 +110,10 @@ public class TimerNotification extends javax.management.Notification {
     /**
      * Gets the identifier of this timer notification.
      *
+     * <p>
+     *  获取此计时器通知的标识符。
+     * 
+     * 
      * @return The identifier.
      */
     public Integer getNotificationID() {
@@ -98,11 +124,16 @@ public class TimerNotification extends javax.management.Notification {
      * ------------------------------------------
      *  PACKAGE METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------包装方法------ ------------------------------------
+     * 
      */
 
     /**
      * Creates and returns a copy of this object.
      *
+     * <p>
+     *  创建并返回此对象的副本。
      */
     Object cloneTimerNotification() {
 

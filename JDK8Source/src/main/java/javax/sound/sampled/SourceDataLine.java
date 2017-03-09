@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,24 @@ package javax.sound.sampled;
  * generated.  A <code>{@link LineEvent.Type#START START}</code> event is generated
  * when the audio output resumes.
  *
+ * <p>
+ *  源数据线是可以写入数据的数据线。它作为混音器的源。应用程序将音频字节写入源数据线,该源数据线处理字节的缓冲并将其传送到混合器。
+ * 混合器可以将样本与来自其他源的样本混合,然后将混合传送到目标,例如输出端口(其可以表示声卡上的音频输出设备)。
+ * <p>
+ *  请注意,此接口的命名约定反映了行与其混合器之间的关系。从应用的角度来看,源数据线可以用作音频数据的目标。
+ * <p>
+ *  可以通过用适当的<code>调用<code> Mixer </code>的<code> {@ link Mixer#getLine getLine} </code>方法从混合器获得源数据线{@ link DataLine.Info }
+ *  </code>对象。
+ * <p>
+ * <code> SourceDataLine </code>接口提供了一种将音频数据写入数据线缓冲区的方法。
+ * 播放或混合音频的应用程序应将数据写入源数据线的速度足够快,以防止缓冲区下溢(清空),这可能会导致音频中被感知为点击的不连续。
+ * 应用程序可以使用<code> DataLine </code>接口中定义的<code> {@ link DataLine#available available} </code>方法来确定当前在数据行缓
+ * 冲区中排队的数据量。
+ * 播放或混合音频的应用程序应将数据写入源数据线的速度足够快,以防止缓冲区下溢(清空),这可能会导致音频中被感知为点击的不连续。可以写入缓冲区而不阻塞的数据量是缓冲区大小和排队数据量之间的差值。
+ * 如果音频输出的传递由于下溢而停止,则会生成<code> {@ link LineEvent.Type#STOP STOP} </code>事件。
+ * 当音频输出恢复时,会生成<code> {@ link LineEvent.Type#START START} </code>事件。
+ * 
+ * 
  * @author Kara Kytle
  * @see Mixer
  * @see DataLine
@@ -88,6 +107,19 @@ public interface SourceDataLine extends DataLine {
      * to reopen such a line will always result in a
      * <code>LineUnavailableException</code>.
      *
+     * <p>
+     *  打开具有指定格式和建议缓冲区大小的行,使该行获取任何所需的系统资源并变为可操作。
+     * <p>
+     *  缓冲区大小以字节为单位指定,但必须表示整数个采样帧。调用具有不满足此要求的请求的缓冲区大小的此方法可能会导致IllegalArgumentException。
+     * 开放线路的实际缓冲区大小可能与请求的缓冲区大小不同。实际设置的值可以通过随后调用<code> {@ link DataLine#getBufferSize} </code>来查询。
+     * <p>
+     * 如果此操作成功,则将该行标记为打开,并将<code> {@ link LineEvent.Type#OPEN OPEN} </code>事件分派到该行的侦听器。
+     * <p>
+     *  在已经打开的行上调用此方法是非法的,并且可能导致<code> IllegalStateException </code>。
+     * <p>
+     *  注意,一些行,一旦关闭,不能重新打开。尝试重新打开这样的行将总是导致<code> LineUnavailableException </code>。
+     * 
+     * 
      * @param format the desired audio format
      * @param bufferSize the desired buffer size
      * @throws LineUnavailableException if the line cannot be
@@ -129,6 +161,19 @@ public interface SourceDataLine extends DataLine {
      * to reopen such a line will always result in a
      * <code>LineUnavailableException</code>.
      *
+     * <p>
+     *  打开具有指定格式的行,使该行获取任何所需的系统资源并运行。
+     * 
+     * <p>
+     *  实现选择缓冲器大小,其以字节为单位测量,但包含整数个样本帧。系统选择的缓冲区大小可以通过随后调用<code> {@ link DataLine#getBufferSize} </code>来查询。
+     * <p>
+     *  如果此操作成功,则将该行标记为打开,并将<code> {@ link LineEvent.Type#OPEN OPEN} </code>事件分派到该行的侦听器。
+     * <p>
+     *  在已经打开的行上调用此方法是非法的,并且可能导致<code> IllegalStateException </code>。
+     * <p>
+     *  注意,一些行,一旦关闭,不能重新打开。尝试重新打开这样的行将总是导致<code> LineUnavailableException </code>。
+     * 
+     * 
      * @param format the desired audio format
      * @throws LineUnavailableException if the line cannot be
      * opened due to resource restrictions
@@ -175,6 +220,16 @@ public interface SourceDataLine extends DataLine {
      * number of bytes representing a non-integral number of sample frames cannot
      * be fulfilled and may result in an <code>IllegalArgumentException</code>.
      *
+     * <p>
+     * 通过此源数据线将音频数据写入混音器。从指定数组读取所请求的数据字节数,从给定的偏移量开始到数组,并写入数据行的缓冲区。
+     * 如果调用者尝试写入比当前可写的数据更多的数据(参见<code> {@ link DataLine#available available} </code>),此方法将阻塞,直到写入了所请求的数据量。
+     * 即使所请求的要写入的数据量大于数据线的缓冲区大小,也适用。但是,如果在写入请求的数量之前关闭,停止或刷新数据线,则该方法不再阻塞,而是返回到目前为止写入的字节数。
+     * <p>
+     *  可以使用<code> DataLine </code>接口的<code> {@ link DataLine#available available} </code>方法来确定可以无阻塞地写入的字节数。
+     *  (虽然保证这个字节数可以不阻塞地写入,但不能保证写入附加数据的尝试将被阻塞。)。
+     * <p>
+     *  要写入的字节数必须表示采样帧的整数数量,例如：
+     * 
      * @param b a byte array containing data to be written to the data line
      * @param len the length, in bytes, of the valid data in the array
      * (in other words, the requested amount of data to write, in bytes)
@@ -196,6 +251,12 @@ public interface SourceDataLine extends DataLine {
      * Obtains the number of sample frames of audio data that can be written to
      * the mixer, via this data line, without blocking.  Note that the return
      * value measures sample frames, not bytes.
+     * <p>
+     * <br>
+     *  <center> <code> [bytes written]％[frame size in bytes] == 0 </code> </center>
+     * <br>
+     *  返回值将始终满足此要求。写入表示非整数个样本帧的多个字节的请求不能被满足,并且可能导致<code> IllegalArgumentException </code>。
+     * 
      * @return the number of sample frames currently available for writing
      * @see TargetDataLine#availableRead
      */

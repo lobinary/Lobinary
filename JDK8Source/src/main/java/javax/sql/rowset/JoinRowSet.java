@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -217,6 +218,115 @@ import javax.sql.rowset.*;
  *       This method creates a copy that can be persisted to the data source.
  * </UL>
  *
+ * <p>
+ *  <code> JoinRowSet </code>接口提供了将来自不同<code> RowSet </code>对象的相关数据组合成一个<code> JoinRowSet </code>对象的机制,代
+ * 表一个SQL <code> JOIN <代码>。
+ * 换句话说,<code> JoinRowSet </code>对象充当来自形成SQL <code> JOIN </code>关系的<code> RowSet </code>对象的数据的容器。
+ * <P>
+ *  <code> Joinable </code>接口提供了设置,检索和取消设置匹配列的方法,这是建立SQL <code> JOIN </code>关系的基础。
+ * 可替换地,可以通过将匹配列提供给<code> JointRowSet </code>方法<code> addRowSet </code>的适当版本来设置匹配列。
+ * 
+ *  <h3> 1.0概述</h3>断开<code> RowSet </code>对象(<code> CachedRowSet </code>对象和实现扩展<code> CachedRowSet </code>
+ * 接口)没有标准方法在<code> RowSet </code>对象之间建立SQL <code> JOIN </code>,而不需要重新连接到数据源的昂贵操作。
+ *  <code> JoinRowSet </code>接口是专门为解决这一需求而设计的。
+ * <P>
+ * 任何<code> RowSet </code>对象都可以添加到<code> JoinRowSet </code>对象中,成为SQL <code> JOIN </code>关系的一部分。
+ * 这意味着连接和断开的<code> RowSet </code>对象可以是<code> JOIN </code>的一部分。
+ * 鼓励在连接环境中操作的<code> RowSet </code>对象(<code> JdbcRowSet </code>对象)使用它们已经连接的数据库,以建立SQL <code> JOIN </code>
+ * 表直接。
+ * 这意味着连接和断开的<code> RowSet </code>对象可以是<code> JOIN </code>的一部分。
+ * 但是,如果需要,可以将<code> JdbcRowSet </code>对象添加到<code> JoinRowSet </code>对象。
+ * <P>
+ *  任何数量的<code> RowSet </code>对象都可以添加到<code> JoinRowSet </code>的实例,只要它们可以在SQL <code> JOIN </code>中相关。
+ * 根据定义,SQL <code> JOIN </code>语句用于基于公共属性组合包含在两个或多个关系数据库表中的数据。
+ *  <code> Joinable </code>接口提供了建立公共属性的方法,这是通过设置<i>匹配列</i>完成的。匹配列通常与主键重合,但不要求匹配列与主键相同。
+ * 通过建立并执行列匹配,<code> JoinRowSet </code>对象在没有可用关系数据库的帮助下建立<code> RowSet </code>对象之间的<code> JOIN </code>关系
+ * 。
+ *  <code> Joinable </code>接口提供了建立公共属性的方法,这是通过设置<i>匹配列</i>完成的。匹配列通常与主键重合,但不要求匹配列与主键相同。
+ * <P>
+ * 要建立的<code> JOIN </code>的类型通过使用方法<code> setJoinType </code>设置<code> JoinRowSet </code>常量之一来确定。
+ * 可以设置以下SQL <code> JOIN </code>类型：。
+ * <UL>
+ *  <LI> <code> CROSS_JOIN </code> <LI> <code> FULL_JOIN </code> <LI> <code> INNER_JOIN </code>  - 如果没有设
+ * 置<code> JOIN </code> <LI> <code> LEFT_OUTER_JOIN </code> <LI> <code> RIGHT_OUTER_JOIN </code>。
+ * </UL>
+ *  注意,如果没有设置类型,<code> JOIN </code>将自动成为内部连接。
+ *  <code> JoinRowSet </code>接口中的字段的注释解释这些<code> JOIN </code>类型,它们是标准SQL <code> JOIN </code>类型。
+ * 
+ *  <h3> 2.0使用<code> JoinRowSet </code>对象创建<code> JOIN </code> </h3>当创建一个<code> JoinRowSet </code>对象时,要添
+ * 加的第一个<code> RowSet </code>对象成为<code> JOIN </code>关系的基础。
+ * 应用程序必须确定要添加到<code> JoinRowSet </code>对象中的每个<code> RowSet </code>对象中的哪个列应该是匹配列。
+ * 所有<code> RowSet </code>对象必须包含匹配列,每个匹配列中的值必须是可与其他匹配列中的值进行比较的值。
+ * 列不必具有相同的名称,尽管它们经常这样做,并且它们不必存储完全相同的数据类型,只要可以比较数据类型。
+ * <P>
+ *  匹配列可以通过两种方式设置：
+ * <ul>
+ * <li>通过调用<code> Joinable </code>方法<code> setMatchColumn </code> <br>这是唯一可以在添加<code> RowSet </code>对象之前
+ * 设置匹配列的方法到一个<code> JoinRowSet </code>对象。
+ *  <code> RowSet </code>对象必须实现<code> Joinable </code>接口才能使用<code> setMatchColumn </code>方法。
+ * 一旦设置了匹配列值,此方法可用于随时重置匹配列。
+ *  <li>通过调用<code> JoinRowSet </code>方法<code> addRowSet </code>的某个版本,它接受列名或数字(或列名或数字数组)<BR>四个五个<code> ad
+ * dRowSet </code>方法将匹配列作为参数。
+ * 一旦设置了匹配列值,此方法可用于随时重置匹配列。这四种方法在将<code> RowSet </code>对象添加到<code> JoinRowSet </code>对象时设置或重置匹配列。
+ * </ul>
+ *  <h3> 3.0示例用法</h3>
+ * <p>
+ *  以下代码片段将两个<code> CachedRowSet </code>对象添加到<code> JoinRowSet </code>对象。
+ * 注意,在这个例子中,没有设置SQL <code> JOIN </code>类型,因此建立了默认的<code> JOIN </code>类型,即<i> INNER_JOIN </i>。
+ * <p>
+ * 在以下代码片段中,将其匹配列设置为第一列(<code> EMP_ID </code>)的表<code> EMPLOYEES </code>添加到<code> JoinRowSet </code>对象<i>
+ *  jrs </i>。
+ * 然后添加其匹配列与<code> EMP_ID </code>列类似的表<code> ESSP_BONUS_PLAN </code>。
+ * 将此第二个表添加到<i> jrs </i>时,只有其<code> EMP_ID </code>值与<code> EMP_ID </code>值匹配的<code> ESSP_BONUS_PLAN </code>
+ * 添加了<code> EMPLOYEES </code>表。
+ * 然后添加其匹配列与<code> EMP_ID </code>列类似的表<code> ESSP_BONUS_PLAN </code>。
+ * 在这种情况下,奖励计划中的每个人都是员工,因此表<code> ESSP_BONUS_PLAN </code>中的所有行都会添加到<code> JoinRowSet </code>对象中。
+ * 在这个例子中,被添加的<code> CachedRowSet </code>对象实现了<code> Joinable </code>接口,因此可以调用<code> Joinable </code>方法<code>
+ *  setMatchColumn </code> 。
+ * 在这种情况下,奖励计划中的每个人都是员工,因此表<code> ESSP_BONUS_PLAN </code>中的所有行都会添加到<code> JoinRowSet </code>对象中。
+ * <PRE>
+ *  JoinRowSet jrs = new JoinRowSetImpl();
+ * 
+ *  ResultSet rs1 = stmt.executeQuery("SELECT * FROM EMPLOYEES"); CachedRowSet empl = new CachedRowSetIm
+ * pl(); empl.populate(rs1); empl.setMatchColumn(1); jrs.addRowSet(empl);。
+ * 
+ *  ResultSet rs2 = stmt.executeQuery("SELECT * FROM ESSP_BONUS_PLAN"); CachedRowSet bonus = new CachedR
+ * owSetImpl(); bonus.populate(rs2); bonus.setMatchColumn(1); // EMP_ID是第一列jrs.addRowSet(bonus);。
+ * </PRE>
+ * <P>
+ * 此时,<i> jrs </i>是基于它们的<code> EMP_ID </code>列的两个<code> RowSet </code>对象的内部JOIN。
+ * 应用程序现在可以浏览组合数据,就像浏览单个<code> RowSet </code>对象。
+ * 因为<i> jrs </i>本身是一个<code> RowSet </code>对象,应用程序可以使用<code> RowSet </code>方法来导航或修改它。
+ * <PRE>
+ *  jrs.first(); int employeeID = jrs.getInt(1); String employeeName = jrs.getString(2);
+ * </PRE>
+ * <P>
+ *  注意,因为当应用程序添加第二个或后续的<code> RowSet </code>对象时,必须强制执行SQL <code> JOIN </code>,所以在<code> JOIN <代码>。
+ * <P>
+ *  以下代码片段添加了一个附加的<code> CachedRowSet </code>对象。
+ * 在这种情况下,当<code> CachedRowSet </code>对象添加到<code> JoinRowSet </code>对象时,设置匹配列(<code> EMP_ID </code>)。
+ * <PRE>
+ *  ResultSet rs3 = stmt.executeQuery("SELECT * FROM 401K_CONTRIB"); CachedRowSet fourO1k = new CachedRo
+ * wSetImpl(); four01k.populate(rs3); jrs.addRowSet(four01k,1);。
+ * </PRE>
+ * <P>
+ *  <code> JoinRowSet </code>对象<i> jrs </i>现在包含来自所有三个表的值。
+ *  <code> EMP_ID </code>列的值与<i> jrs </code>列中<code> EMP_ID </code>列的值匹配的<i> four01k </i> i>已添加到<i> jrs 
+ * </i>。
+ *  <code> JoinRowSet </code>对象<i> jrs </i>现在包含来自所有三个表的值。
+ * 
+ * <h3> 4.0 <code> JoinRowSet </code>方法</h3> <code> JoinRowSet </code>接口提供了几种添加<code> RowSet </code>对象的方
+ * 法, JoinRowSet </code>对象。
+ * <UL>
+ *  <LI>添加一个或多个<code> RowSet </code>对象的方法<BR>这些方法允许应用程序一次添加一个<code> RowSet </code>对象或添加多个<code> RowSet < / code>
+ * 对象。
+ * 在任一情况下,方法可以为要添加的每个<code> RowSet </code>对象指定匹配列。
+ *  <LI>获取信息的方法<BR>一种方法检索<code> JoinRowSet </code>对象中的<code> RowSet </code>对象,另一个方法检索<code> RowSet </code>
+ * 名称。
+ * 在任一情况下,方法可以为要添加的每个<code> RowSet </code>对象指定匹配列。
+ * 第三种方法检索在场景后面使用的SQL <code> WHERE </code>子句以形成<code> JOIN </code>或<code> WHERE </code>子句的文本描述。
+ *  <LI> <code> JOIN </code> <BR>类型的方法一个方法设置<code> JOIN </code>类型,五个方法查找<code> JoinRowSet </code>对象支持给定类
+ * 型。
  */
 
 public interface JoinRowSet extends WebRowSet {
@@ -235,6 +345,12 @@ public interface JoinRowSet extends WebRowSet {
      * Note: A <code>Joinable</code> object is any <code>RowSet</code> object
      * that has implemented the <code>Joinable</code> interface.
      *
+     * <p>
+     * 第三种方法检索在场景后面使用的SQL <code> WHERE </code>子句以形成<code> JOIN </code>或<code> WHERE </code>子句的文本描述。
+     *  <LI>创建<code> JoinRowSet </code>对象的单独副本的方法<BR>此方法创建可以持久保存到数据源的副本。
+     * </UL>
+     * 
+     * 
      * @param rowset the <code>RowSet</code> object that is to be added to this
      *        <code>JoinRowSet</code> object; it must implement the
      *        <code>Joinable</code> interface and have a match column set
@@ -257,6 +373,16 @@ public interface JoinRowSet extends WebRowSet {
      * This method should be used when <i>RowSet</i> does not already have a match
      * column set.
      *
+     * <p>
+     * 将给定的<code> RowSet </code>对象添加到此<code> JoinRowSet </code>对象。
+     * 如果<code> RowSet </code>对象是第一个被添加到这个<code> JoinRowSet </code>对象,它形成了要建立的<code> JOIN </code>关系的基础。
+     * <P>
+     *  仅当给定的<code> RowSet </code>对象已经具有使用<code> Joinable </code>方法<code> setMatchColumn </code>设置的匹配列时,才应使用
+     * 此方法。
+     * <p>
+     *  注意：<code> Joinable </code>对象是实现了<code> Joinable </code>接口的任何<code> RowSet </code>对象。
+     * 
+     * 
      * @param rowset the <code>RowSet</code> object that is to be added to this
      *        <code>JoinRowSet</code> object; it may implement the
      *        <code>Joinable</code> interface
@@ -278,6 +404,13 @@ public interface JoinRowSet extends WebRowSet {
      * This method should be used when the given <code>RowSet</code> object
      * does not already have a match column.
      *
+     * <p>
+     *  将给定的<code> RowSet </code>对象添加到此<code> JoinRowSet </code>对象中,并将指定的列设置为<code> RowSet </code>对象的匹配列。
+     * 如果<code> RowSet </code>对象是第一个被添加到这个<code> JoinRowSet </code>对象,它形成了要建立的<code> JOIN </code>关系的基础。
+     * <P>
+     *  当<i> RowSet </i>尚未设置匹配列时,应使用此方法。
+     * 
+     * 
      * @param rowset the <code>RowSet</code> object that is to be added to this
      *        <code>JoinRowSet</code> object; it may implement the
      *        <code>Joinable</code> interface
@@ -307,6 +440,13 @@ public interface JoinRowSet extends WebRowSet {
      * This method should be used when the given <code>RowSet</code> object
      * does not already have a match column.
      *
+     * <p>
+     *  将<i>行集</i>添加到此<code> JoinRowSet </code>对象,并将指定的列设置为匹配列。
+     * 如果<i> rowset </i>是第一个被添加到这个<code> JoinRowSet </code>对象,它形成了要建立的<code> JOIN </code>关系的基础。
+     * <P>
+     *  当给定的<code> RowSet </code>对象尚未具有匹配列时,应使用此方法。
+     * 
+     * 
      * @param rowset an array of one or more <code>RowSet</code> objects
      *        to be added to the <code>JOIN</code>; it may implement the
      *        <code>Joinable</code> interface
@@ -339,6 +479,17 @@ public interface JoinRowSet extends WebRowSet {
      * This method should be used when the given <code>RowSet</code> object(s)
      * does not already have a match column.
      *
+     * <p>
+     * 将<code> RowSet </code>对象的给定数组中包含的一个或多个<code> RowSet </code>对象添加到此<code> JoinRowSet </code>对象中,并为每个<code>
+     *  > RowSet </code>对象映射到给定的列索引数组中的匹配列。
+     *  <i> columnIdx </i>中的第一个元素设置为<i> rowset </i>中第一个<code> RowSet </code>对象的匹配列, i>设置为<i> rowset </i>中的第二
+     * 个元素的匹配列,依此类推。
+     * <P>
+     *  添加到此<code> JoinRowSet </code>对象中的第一个<code> RowSet </code>对象构成了<code> JOIN </code>关系的基础。
+     * <P>
+     *  当给定的<code> RowSet </code>对象尚未具有匹配列时,应使用此方法。
+     * 
+     * 
      * @param rowset an array of one or more <code>RowSet</code> objects
      *        to be added to the <code>JOIN</code>; it may implement the
      *        <code>Joinable</code> interface
@@ -362,6 +513,17 @@ public interface JoinRowSet extends WebRowSet {
      * within the <code>JOIN</code> and maintain any updates that have occurred while in
      * this union.
      *
+     * <p>
+     *  将<code> RowSet </code>对象的给定数组中包含的一个或多个<code> RowSet </code>对象添加到此<code> JoinRowSet </code>对象中,并为每个<code>
+     *  > RowSet </code>对象添加到给定的列名数组中的匹配列。
+     *  <i> columnName </i>中的第一个元素设置为<i> rowset </i>中第一个<code> RowSet </code>对象的匹配列, i>设置为<i> rowset </i>中的第
+     * 二个元素的匹配列,依此类推。
+     * <P>
+     *  添加到此<code> JoinRowSet </code>对象中的第一个<code> RowSet </code>对象构成了<code> JOIN </code>关系的基础。
+     * <P>
+     * 当给定的<code> RowSet </code>对象尚未具有匹配列时,应使用此方法。
+     * 
+     * 
      * @return a <code>Collection</code> object consisting of the
      *        <code>RowSet</code> objects added to this <code>JoinRowSet</code>
      *        object
@@ -375,6 +537,11 @@ public interface JoinRowSet extends WebRowSet {
      *         <code>RowSet</code> objects added to this <code>JoinRowSet</code>
      *         object.
      *
+     * <p>
+     *  返回包含已添加到此<code> JoinRowSet </code>对象的<code> RowSet </code>对象的<code> Collection </code>对象。
+     * 这应该返回包含在<code> JOIN </code>中的"n"个RowSet,并保持在此联合中发生的任何更新。
+     * 
+     * 
      * @return a <code>String</code> array of the names of the
      *         <code>RowSet</code> objects in this <code>JoinRowSet</code>
      *         object
@@ -405,6 +572,10 @@ public interface JoinRowSet extends WebRowSet {
      * implementations to interact with the SyncProvider to persist any
      * changes.
      *
+     * <p>
+     *  返回一个<code> String </code>数组,其中包含添加到此<code> JoinRowSet </code>对象的<code> RowSet </code>对象的名称。
+     * 
+     * 
      * @return a CachedRowSet containing the contents of the JoinRowSet
      * @throws SQLException if an error occurs assembling the CachedRowSet
      * object
@@ -418,6 +589,17 @@ public interface JoinRowSet extends WebRowSet {
      * Indicates if CROSS_JOIN is supported by a JoinRowSet
      * implementation
      *
+     * <p>
+     *  创建一个包含此<code> JoinRowSet </code>对象中的数据的新的<code> CachedRowSet </code>对象,可以使用<code> SyncProvider </code>
+     *  > CachedRowSet </code>对象。
+     * <P>
+     *  如果对JoinRowSet应用了任何更新或修改,该方法返回的CachedRowSet将不能将更改保存回数据源中的原始行和表。
+     * 返回的CachedRowSet实例不应包含修改数据,应清除其原始SQL语句的所有属性。应用程序应使用<code> RowSet.setCommand </code>方法重置SQL语句。
+     * <p>
+     * 为了允许将更改持久化回原始表的数据源,应在JoinRowSet对象实例上使用和调用<code> acceptChanges </code>方法。
+     * 实现可以利用内部数据并在其实现中更新跟踪,以与SyncProvider进行交互,以保持任何更改。
+     * 
+     * 
      * @return true if the CROSS_JOIN is supported; false otherwise
      */
     public boolean supportsCrossJoin();
@@ -426,6 +608,10 @@ public interface JoinRowSet extends WebRowSet {
      * Indicates if INNER_JOIN is supported by a JoinRowSet
      * implementation
      *
+     * <p>
+     *  指示JoinRowSet实现是否支持CROSS_JOIN
+     * 
+     * 
      * @return true is the INNER_JOIN is supported; false otherwise
      */
     public boolean supportsInnerJoin();
@@ -434,6 +620,10 @@ public interface JoinRowSet extends WebRowSet {
      * Indicates if LEFT_OUTER_JOIN is supported by a JoinRowSet
      * implementation
      *
+     * <p>
+     *  指示JoinRowSet实现是否支持INNER_JOIN
+     * 
+     * 
      * @return true is the LEFT_OUTER_JOIN is supported; false otherwise
      */
     public boolean supportsLeftOuterJoin();
@@ -442,6 +632,10 @@ public interface JoinRowSet extends WebRowSet {
      * Indicates if RIGHT_OUTER_JOIN is supported by a JoinRowSet
      * implementation
      *
+     * <p>
+     *  指示LEFT_OUTER_JOIN是否受JoinRowSet实现支持
+     * 
+     * 
      * @return true is the RIGHT_OUTER_JOIN is supported; false otherwise
      */
     public boolean supportsRightOuterJoin();
@@ -450,6 +644,10 @@ public interface JoinRowSet extends WebRowSet {
      * Indicates if FULL_JOIN is supported by a JoinRowSet
      * implementation
      *
+     * <p>
+     *  指示JoinRowSet实现是否支持RIGHT_OUTER_JOIN
+     * 
+     * 
      * @return true is the FULL_JOIN is supported; false otherwise
      */
     public boolean supportsFullJoin();
@@ -460,6 +658,10 @@ public interface JoinRowSet extends WebRowSet {
      * Implementations should throw a SQLException if they do
      * not support a given <code>JOIN</code> type.
      *
+     * <p>
+     *  指示JoinRowSet实现是否支持FULL_JOIN
+     * 
+     * 
      * @param joinType the standard JoinRowSet.XXX static field definition
      * of a SQL <code>JOIN</code> to re-configure a JoinRowSet instance on
      * the fly.
@@ -475,6 +677,11 @@ public interface JoinRowSet extends WebRowSet {
      * strings description of <code>JOIN</code> or provide a textual
      * description to assist applications using a <code>JoinRowSet</code>
      *
+     * <p>
+     *  允许应用程序调整施加在JoinRowSet对象实例中包含的表上的<code> JOIN </code>的类型。
+     * 如果实现不支持给定的<code> JOIN </code>类型,则应抛出SQLException。
+     * 
+     * 
      * @return whereClause a textual or SQL description of the logical
      * WHERE clause used in the JoinRowSet instance
      * @throws SQLException if an error occurs in generating a representation
@@ -489,6 +696,13 @@ public interface JoinRowSet extends WebRowSet {
      * <code>LEFT_OUTER_JOIN</code>, <code>RIGHT_OUTER_JOIN</code> or
      * <code>FULL_JOIN</code>.
      *
+     * <p>
+     *  返回在JoinRowSet对象中使用的WHERE子句的类似SQL的描述。
+     * 实现可以通过提供<code> JOIN </code>的SQL字符串描述来描述SQL <code> JOIN </code>的WHERE子句,或者提供文本描述以帮助应用程序使用<code> JoinRo
+     * wSet </code >。
+     *  返回在JoinRowSet对象中使用的WHERE子句的类似SQL的描述。
+     * 
+     * 
      * @return joinType one of the standard JoinRowSet static field
      *     definitions of a SQL <code>JOIN</code>. <code>JoinRowSet.INNER_JOIN</code>
      *     is returned as the default <code>JOIN</code> type is no type has been
@@ -501,12 +715,21 @@ public interface JoinRowSet extends WebRowSet {
 
     /**
      * An ANSI-style <code>JOIN</code> providing a cross product of two tables
+     * <p>
+     * 返回描述用于管理此JoinRowSet实例的集合SQL <code> JOIN </code>类型的<code> int </code>。
+     * 返回的类型将是标准JoinRowSet类型之一：<code> CROSS_JOIN </code>,<code> INNER_JOIN </code>,<code> LEFT_OUTER_JOIN </code>
+     * ,<code> RIGHT_OUTER_JOIN </code> FULL_JOIN </code>。
+     * 返回描述用于管理此JoinRowSet实例的集合SQL <code> JOIN </code>类型的<code> int </code>。
+     * 
      */
     public static int CROSS_JOIN = 0;
 
     /**
      * An ANSI-style <code>JOIN</code> providing a inner join between two tables. Any
      * unmatched rows in either table of the join should be discarded.
+     * <p>
+     *  一个ANSI风格的<code> JOIN </code>提供两个表的叉积
+     * 
      */
     public static int INNER_JOIN = 1;
 
@@ -514,6 +737,9 @@ public interface JoinRowSet extends WebRowSet {
      * An ANSI-style <code>JOIN</code> providing a left outer join between two
      * tables. In SQL, this is described where all records should be
      * returned from the left side of the JOIN statement.
+     * <p>
+     *  提供两个表之间的内部联接的ANSI样式<code> JOIN </code>。任何连接表中的任何未匹配的行都应该被丢弃。
+     * 
      */
     public static int LEFT_OUTER_JOIN = 2;
 
@@ -522,6 +748,9 @@ public interface JoinRowSet extends WebRowSet {
      * two tables. In SQL, this is described where all records from the
      * table on the right side of the JOIN statement even if the table
      * on the left has no matching record.
+     * <p>
+     *  在两个表之间提供左外连接的ANSI样式<code> JOIN </code>。在SQL中,描述了所有记录应从JOIN语句的左侧返回的情况。
+     * 
      */
     public static int RIGHT_OUTER_JOIN = 3;
 
@@ -529,6 +758,9 @@ public interface JoinRowSet extends WebRowSet {
      * An ANSI-style <code>JOIN</code> providing a a full JOIN. Specifies that all
      * rows from either table be returned regardless of matching
      * records on the other table.
+     * <p>
+     *  在两个表之间提供一个右外连接的ANSI风格的<code> JOIN </code>。在SQL中,描述了来自JOIN语句右侧的表中的所有记录,即使左侧的表没有匹配的记录。
+     * 
      */
     public static int FULL_JOIN = 4;
 

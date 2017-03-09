@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,8 @@ import javax.security.auth.Subject;
  * unique per connector server.  It selects notifications based on the
  * ObjectName of the originator and an optional
  * NotificationFilter.</p>
+ * <p>
+ *  <p>已识别的侦听器。侦听器具有每个连接器服务器唯一的唯一ID。它根据发件人的ObjectName和可选的NotificationFilter选择通知。</p>
  */
 public class ClientListenerInfo {
     public ClientListenerInfo(Integer listenerID,

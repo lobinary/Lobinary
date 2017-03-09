@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -123,6 +124,44 @@ import java.io.IOException;
  * factories instead of public constructors so that only subclass
  * instances would be presented to clients of the parent class.
  *
+ * <p>
+ *  此接口支持注释处理器创建新文件。以这种方式创建的文件将为实现此接口的注释处理工具所知,更好地使工具能够管理它们。
+ * 在{@code Writer}调用{@code close}方法之后,这样创建的源文件和类文件将被后面的{@linkplain RoundEnvironment round of processing}
+ * 中的工具{@ linkplain RoundEnvironment#getRootElements考虑处理}或{@code OutputStream}用于写入文件的内容。
+ *  此接口支持注释处理器创建新文件。以这种方式创建的文件将为实现此接口的注释处理工具所知,更好地使工具能够管理它们。
+ * 
+ *  区分三种文件：源文件,类文件和辅助资源文件。
+ * 
+ * <p>有两个支持的位置(逻辑文件系统中的子树),其中放置了新创建的文件：{@linkplain javax.tools.StandardLocation#SOURCE_OUTPUT新源文件},一个用于{@linkplain javax.tools .StandardLocation#CLASS_OUTPUT新类文件}
+ * 。
+ *  (这些可能在工具的命令行中指定,例如使用诸如{@code -s}和{@code -d}之类的标志。)新源文件和新类文件的实际位置可能不同或不同对工具的特定运行。可以在任一位置创建资源文件。
+ * 用于读取和写入资源的方法使用相对名称参数。相对名称是由{@code'/'}分隔的路径段的非空,非空序列; {@code'。'}和{@code'..'}是无效的路径段。
+ * 有效的相对名称必须匹配"无路径的" <a href="http://www.ietf.org/rfc/rfc3986.txt"> RFC 3986 </a>规则,第3.3节。
+ * 
+ *  <p>文件创建方法采用可变数量的参数,以允许将<em>始发元素</em>作为提示提供给工具基础结构,以更好地管理依赖关系。
+ * 原始元素是导致注解处理器尝试创建新文件的类型或包(表示{@code package-info}文件)。
+ * 例如,如果注释处理器尝试创建源文件{@code GeneratedFromUserSource},响应于处理。
+ * 
+ * <blockquote> <pre> @Generate public class UserSource {} </pre> </blockquote>
+ * 
+ *  {@code UserSource}的类型元素应该作为创建方法调用的一部分传递,如下所示：
+ * 
+ *  <blockquote> <pre> filer.createSourceFile("GeneratedFromUserSource",eltUtils.getTypeElement("UserSou
+ * rce")); </pre> </blockquote>。
+ * 
+ *  如果没有始发元素,则不需要传递。此信息可用于增量环境中,以确定是否需要重新运行处理器或删除生成的文件。非增量环境可以忽略始发元素信息。
+ * 
+ *  <p>在每次运行注释处理工具期间,只能创建具有给定路径名的文件一次。如果该文件在首次尝试创建它之前已存在,则旧内容将被删除。
+ * 任何后续在运行期间尝试创建同一文件的尝试将抛出一个{@link FilerException},将尝试为同一类型名称或相同包名称创建类文件和源文件。
+ * 工具的{@linkplain处理器初始输入}被认为是由第零轮创建的;因此,尝试创建与这些输入之一对应的源或类文件将导致{@link FilerException}。
+ * 
+ * <p>通常,处理器不得故意试图覆盖某些处理器不生成的现有文件。 {@code Filer}可能会拒绝尝试打开与现有类型对应的文件,例如{@code java.lang.Object}。
+ * 同样,注释处理工具的调用者不必故意地配置工具,使得发现的处理器将尝试覆盖未生成的现有文件。
+ * 
+ *  <p>处理程序可以指示通过包含{@link javax.annotation.Generated @Generated}注释生成的源文件或类文件。
+ * 
+ *  <p>请注意,覆盖文件的一些效果可以通过使用<i>装饰器</i>样式模式来实现。不是直接修改类,而是将类设计为使其超类通过注释处理生成,或者类的子类通过注释处理生成。
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;
@@ -158,6 +197,10 @@ public interface Filer {
      * ProcessingEnvironment#getSourceVersion source version} being used
      * for this run.
      *
+     * <p>
+     * 如果生成子类,则父类可以被设计为使用工厂而不是公共构造函数,使得只有子类实例将被呈现给父类的客户端。
+     * 
+     * 
      * @param name  canonical (fully qualified) name of the principal type
      *          being declared in this file or a package name followed by
      *          {@code ".package-info"} for a package information file
@@ -189,6 +232,18 @@ public interface Filer {
      * ProcessingEnvironment#getSourceVersion source version} being used
      * for this run.
      *
+     * <p>
+     * 创建一个新的源文件并返回一个对象允许写入它。文件的名称和路径(相对于{@linkplain StandardLocation#SOURCE_OUTPUT源文件的根输出位置))基于在该文件中声明的类型。
+     * 如果正在声明多个类型,则应使用主要顶级类型的名称(例如,public类型)。还可以创建源文件以保存有关包的信息,包括包注释。
+     * 要为命名包创建源文件,请使用{@code name}作为程序包名称,后跟{@code".package-info"};要为未命名的包创建源文件,请使用{@code"package-info"}。
+     * 
+     *  <p>请注意,要使用特定的{@linkplain java.nio.charset.Charset charset}来对文件内容进行编码,可以从{@code OutputStream}中创建一个带有所
+     * 选字符集的{@code OutputStreamWriter}返回的对象。
+     * 如果来自返回对象的{@code Writer}直接用于写入,则其字符集由实现决定。注释处理工具可以具有{@code -encoding}标志或用于指定该标志的类似选项;否则,它通常是平台的默认编码。
+     * 
+     *  <p>为避免后续错误,源文件的内容应与用于此运行的{@linkplain ProcessingEnvironment#getSourceVersion源版本}兼容。
+     * 
+     * 
      * @param name binary name of the type being written or a package name followed by
      *          {@code ".package-info"} for a package information file
      * @param originatingElements type or package elements causally
@@ -221,6 +276,13 @@ public interface Filer {
      * would correspond to the full pathname of a new source file
      * or new class file.
      *
+     * <p>
+     * 创建一个新的类文件,并返回一个对象允许写入它。文件的名称和路径(相对于{@linkplain StandardLocation#CLASS_OUTPUT类文件的根输出位置})基于正在写入的类型的名称。
+     * 还可以创建类文件以保存有关包的信息,包括包注释。要为命名包创建类文件,请使用{@code name}作为程序包名称,后跟{@code".package-info"};不支持为未命名的包创建类文件。
+     * 
+     *  <p>为避免后续错误,类文件的内容应与用于此运行的{@linkplain ProcessingEnvironment#getSourceVersion源版本}兼容。
+     * 
+     * 
      * @param location location of the new file
      * @param pkg package relative to which the file should be named,
      *          or the empty string if none
@@ -246,6 +308,16 @@ public interface Filer {
      * and {@link StandardLocation#SOURCE_OUTPUT SOURCE_OUTPUT} must
      * be supported.
      *
+     * <p>
+     *  创建用于写入的新辅助资源文件,并为其返回文件对象。该文件可以与新创建的源文件,新创建的二进制文件或其他支持的位置一起被定位。
+     * 必须支持位置{@link StandardLocation#CLASS_OUTPUT CLASS_OUTPUT}和{@link StandardLocation#SOURCE_OUTPUT SOURCE_OUTPUT}
+     * 。
+     *  创建用于写入的新辅助资源文件,并为其返回文件对象。该文件可以与新创建的源文件,新创建的二进制文件或其他支持的位置一起被定位。
+     * 资源可以相对于一些包命名(如同源文件和类文件一样),并且可以通过相对路径名来命名。
+     * 在松散的意义上,新文件的完整路径名将是{@code location},{@code pkg}和{@code relativeName}的连接。
+     * 
+     * <p>通过此方法创建的文件不会注册为注释处理,即使文件的完整路径名对应于新源文件或新类文件的完整路径名。
+     * 
      * @param location location of the file
      * @param pkg package relative to which the file should be searched,
      *          or the empty string if none

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,8 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_LOGGER;
 /**
  * The class defines an abstract representation of a host.
  *
+ * <p>
+ *  类定义了主机的抽象表示。
  */
 abstract class Host extends SimpleNode implements Serializable {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,18 @@ import java.security.Security;
  *     protocol, serverName, props, callbackHandler);
  *</pre></blockquote>
  *
+ * <p>
+ *  用于创建SASL客户端和服务器的静态类。
+ * p>
+ *  此类定义如何查找,加载和实例化SASL客户端和服务器的策略。
+ * p>
+ *  例如,应用程序或库通过执行以下操作获取SASL客户机：blockquote> <pre> SaslClient sc = Sasl.createSaslClient(mechanisms,author
+ * izationId,protocol,serverName,props,callbackHandler); / pre> </blockquote>然后可以继续使用实例来创建身份验证连接。
+ * p>
+ *  类似地,服务器通过使用如下代码获取SASL服务器：blockquote> <pre> SaslServer ss = Sasl.createSaslServer(mechanism,protocol,
+ * serverName,props,callbackHandler); / pre> </blockquote>。
+ * 
+ * 
  * @since 1.5
  *
  * @author Rosanna Lee
@@ -81,6 +94,15 @@ public class Sasl {
      * The order of the list specifies the preference order of the client or
      * server. If this property is absent, the default qop is {@code "auth"}.
      * The value of this constant is {@code "javax.security.sasl.qop"}.
+     * <p>
+     *  指定要使用的保护质量的属性的名称。该属性包含客户端或服务器愿意支持的保护质量值的逗号分隔的有序列表。 qop值为以下之一
+     * <ul>
+     *  <li> {@ code"auth"}  - 仅验证</li> <li> {@ code"auth-int"}  - 验证加完整性保护</li> <li> {@ code"auth-conf"} - 
+     * 身份验证加完整性和机密性保护</li>。
+     * </ul>
+     * 
+     *  列表的顺序指定客户端或服务器的首选顺序。如果此属性不存在,则默认qop为{@code"auth"}。此常量的值为{@code"javax.security.sasl.qop"}。
+     * 
      */
     public static final String QOP = "javax.security.sasl.qop";
 
@@ -103,6 +125,15 @@ public class Sasl {
      * If this property is absent, the default strength is
      * {@code "high,medium,low"}.
      * The value of this constant is {@code "javax.security.sasl.strength"}.
+     * <p>
+     * 指定要使用的密码强度的属性的名称。该属性包含客户端或服务器愿意支持的密码强度值的逗号分隔的有序列表。强度值为以下之一
+     * <ul>
+     *  <li> {@ code"low"} </li> <li> {@ code"medium"} </li>
+     * </ul>
+     *  列表的顺序指定客户端或服务器的首选顺序。实现应该允许配置这些值的含义。应用程序可以使用具有JCE感知机制的Java加密扩展(JCE)来控制与强度值匹配的密码套件的选择。
+     * <BR>
+     *  如果此属性不存在,默认强度为{@code"high,medium,low"}。此常量的值为{@code"javax.security.sasl.strength"}。
+     * 
      */
     public static final String STRENGTH = "javax.security.sasl.strength";
 
@@ -114,6 +145,10 @@ public class Sasl {
      * The default is {@code "false"}.
      * <br>The value of this constant is
      * {@code "javax.security.sasl.server.authentication"}.
+     * <p>
+     *  指定服务器是否必须向客户端进行身份验证的属性的名称。如果服务器必须对客户端进行身份验证,则该属性包含{@code"true"}; {@code"false"}。默认值为{@code"false"}。
+     *  <br>此常数的值为{@code"javax.security.sasl.server.authentication"}。
+     * 
      */
     public static final String SERVER_AUTH =
     "javax.security.sasl.server.authentication";
@@ -126,6 +161,10 @@ public class Sasl {
      * exchange has completed. It is only available on the server side.
      * <br>The value of this constant is
      * {@code "javax.security.sasl.bound.server.name"}.
+     * <p>
+     * 指定未绑定服务器的绑定服务器名称的属性名称。通过将{@link #createSaslServer}中的{@code serverName}参数设置为null,可将服务器创建为未绑定的服务器。
+     * 该属性在认证交换完成后包含绑定的主机名。它仅在服务器端可用。 <br>此常数的值为{@code"javax.security.sasl.bound.server.name"}。
+     * 
      */
     public static final String BOUND_SERVER_NAME =
     "javax.security.sasl.bound.server.name";
@@ -137,6 +176,10 @@ public class Sasl {
      * <br>If this property is absent, the default size
      * is defined by the mechanism.
      * <br>The value of this constant is {@code "javax.security.sasl.maxbuffer"}.
+     * <p>
+     *  指定{@code SaslClient} / {@ code SaslServer}的接收缓冲区的最大大小(以字节为单位)的属性名称。该属性包含整数的字符串表示形式。
+     *  <br>如果此属性不存在,则默认大小由机制定义。 <br>此常数的值为{@code"javax.security.sasl.maxbuffer"}。
+     * 
      */
     public static final String MAX_BUFFER = "javax.security.sasl.maxbuffer";
 
@@ -147,6 +190,10 @@ public class Sasl {
      * The value of this property is negotiated between the client and server
      * during the authentication exchange.
      * <br>The value of this constant is {@code "javax.security.sasl.rawsendsize"}.
+     * <p>
+     *  指定以{@code SaslClient} / {@ code SaslServer}为单位的原始发送缓冲区的最大大小的属性名称。该属性包含整数的字符串表示形式。
+     * 在身份验证交换期间,在客户端和服务器之间协商此属性的值。 <br>此常数的值为{@code"javax.security.sasl.rawsendsize"}。
+     * 
      */
     public static final String RAW_SEND_SIZE = "javax.security.sasl.rawsendsize";
 
@@ -174,6 +221,16 @@ public class Sasl {
      * of its implementation, for factors such as cache size, timeouts, and
      * criteria for reusability. Such customizations are
      * implementation-dependent.
+     * <p>
+     * 指定是否重用先前已验证的会话信息的属性名称。如果机制实现可以尝试重用先前认证的会话信息,则该属性包含"真";如果实现不能重用先前已验证的会话信息,则它包含"false"。
+     *  "真"的设置仅用作提示：其不一定需要实际重用,因为重复可能由于多种原因而不可能,包括但不限于缺乏重用的机制支持,可重用信息的期满,以及对等体拒绝支持重用。
+     * 
+     *  属性的默认值为"false"。此常量的值为"javax.security.sasl.reuse"。
+     * 
+     *  请注意,无论是否提供了此属性,都必须提供创建SASL客户端/服务器实例所需的所有其他参数和属性。也就是说,您不能提供任何较少的信息预期重用。
+     * 
+     *  支持重用的机制实现可能允许定制其实现,例如高速缓存大小,超时和可重用性标准等因素。这样的定制是实现相关的。
+     * 
      */
      public static final String REUSE = "javax.security.sasl.reuse";
 
@@ -186,6 +243,10 @@ public class Sasl {
      * The default is {@code "false"}.
      * <br>The value of this constant is
      * {@code "javax.security.sasl.policy.noplaintext"}.
+     * <p>
+     * 指定是否不允许容易受到简单的简单被动攻击(例如,"PLAIN")的机制的属性名称。如果不允许这样的机制,则属性包含{@code"true"}; {@code"false"}如果允许这样的机制。
+     * 默认值为{@code"false"}。 <br>此常数的值为{@code"javax.security.sasl.policy.noplaintext"}。
+     * 
      */
     public static final String POLICY_NOPLAINTEXT =
     "javax.security.sasl.policy.noplaintext";
@@ -200,6 +261,10 @@ public class Sasl {
      * The default is {@code "false"}.
      * <br>The value of this constant is
      * {@code "javax.security.sasl.policy.noactive"}.
+     * <p>
+     *  指定是否不允许对活动(非字典)攻击敏感的机制的属性名称。如果不允许有主动攻击的机制,则该属性包含{@code"true"}; {@code"false"}如果允许这样的机制。
+     * 默认值为{@code"false"}。 <br>此常数的值为{@code"javax.security.sasl.policy.noactive"}。
+     * 
      */
     public static final String POLICY_NOACTIVE =
     "javax.security.sasl.policy.noactive";
@@ -214,6 +279,12 @@ public class Sasl {
      *<br>
      * The value of this constant is
      * {@code "javax.security.sasl.policy.nodictionary"}.
+     * <p>
+     *  指定是否允许对被动字典攻击敏感的机制的属性名称。如果不允许对字典攻击敏感的机制,则该属性包含{@code"true"}; {@code"false"}如果允许这样的机制。
+     * 默认值为{@code"false"}。
+     * br>
+     *  此常量的值为{@code"javax.security.sasl.policy.nodictionary"}。
+     * 
      */
     public static final String POLICY_NODICTIONARY =
     "javax.security.sasl.policy.nodictionary";
@@ -227,6 +298,12 @@ public class Sasl {
      *<br>
      * The value of this constant is
      * {@code "javax.security.sasl.policy.noanonymous"}.
+     * <p>
+     *  指定是否不允许接受匿名登录的机制的属性名称。如果不允许接受匿名登录的机制,则该属性包含{@code"true"}; {@code"false"}如果允许这样的机制。
+     * 默认值为{@code"false"}。
+     * br>
+     * 此常量的值为{@code"javax.security.sasl.policy.noanonymous"}。
+     * 
      */
     public static final String POLICY_NOANONYMOUS =
     "javax.security.sasl.policy.noanonymous";
@@ -243,6 +320,12 @@ public class Sasl {
       *<br>
       * The value of this constant is
       * {@code "javax.security.sasl.policy.forward"}.
+      * <p>
+      *  指定是否需要在会话之间实施前向保密的机制的属性名称。转发保密意味着分成一个会话将不会自动提供用于打入未来会话的信息。
+      * 如果需要在会话之间实现前向保密的机制,则该属性包含{@code"true"}; {@code"false"}如果不需要这样的机制。默认值为{@code"false"}。
+      * br>
+      *  此常量的值为{@code"javax.security.sasl.policy.forward"}。
+      * 
       */
     public static final String POLICY_FORWARD_SECRECY =
     "javax.security.sasl.policy.forward";
@@ -256,6 +339,12 @@ public class Sasl {
      *<br>
      * The value of this constant is
      * {@code "javax.security.sasl.policy.credentials"}.
+     * <p>
+     *  指定是否需要传递客户端凭据的机制的属性名称。如果需要传递客户端凭据的机制,则该属性包含{@code"true"}; {@code"false"}如果不需要这样的机制。
+     * 默认值为{@code"false"}。
+     * br>
+     *  此常量的值为{@code"javax.security.sasl.policy.credentials"}。
+     * 
      */
     public static final String POLICY_PASS_CREDENTIALS =
     "javax.security.sasl.policy.credentials";
@@ -270,6 +359,11 @@ public class Sasl {
      *<br>
      * The value of this constant is
      * {@code "javax.security.sasl.credentials"}.
+     * <p>
+     *  指定要使用的凭据的属性的名称。该属性包含特定于机制的Java凭据对象。机制实现可以检查此属性的值,以确定它是否是它们支持的类。该属性可以用于向支持委托认证的机制提供凭证。
+     * br>
+     *  此常量的值为{@code"javax.security.sasl.credentials"}。
+     * 
      */
     public static final String CREDENTIALS = "javax.security.sasl.credentials";
 
@@ -307,6 +401,27 @@ public class Sasl {
      * for information about how to install and configure security service
      *  providers.
      *
+     * <p>
+     *  使用提供的参数创建{@code SaslClient}。
+     * 
+     * 此方法使用<a href="{@docRoot}/../technotes/guides/security/crypto/CryptoSpec.html#Provider"> JCA安全提供程序框架</a>
+     * ,如"Java加密架构API规范&amp; Reference",用于定位和选择{@code SaslClient}实现。
+     * 
+     *  首先,它从"SaslClientFactory"服务和指定的SASL机制的注册的安全提供程序获得{@code SaslClientFactory}实例的有序列表。
+     * 然后它在列表上的每个工厂实例上调用{@code createSaslClient()},直到生成一个非空的{@code SaslClient}实例。
+     * 它返回非空的{@code SaslClient}实例,如果搜索无法产生非空的{@code SaslClient}实例,则返回null。
+     * p>
+     *  SaslClientFactory的安全提供程序使用<br> {@code SaslClientFactory。
+     * } <em> {@ code mechanism_name} </em>格式的JCA安全提供程序框架注册。
+     * <br>
+     *  和作为{@code javax.security.sasl.SaslClientFactory}的实现的类名的值。
+     * 
+     *  例如,包含支持"DIGEST-MD5"机制的工厂类{@code com.wiz.sasl.digest.ClientFactory}的提供程序将使用JCA注册以下条目：{@code SaslClientFactory.DIGEST- MD5 com.wiz.sasl.digest.ClientFactory}
+     * 。
+     * p>
+     *  有关如何安装和配置安全服务提供程序的信息,请参阅"Java加密架构API规范和参考"。
+     * 
+     * 
      * @param mechanisms The non-null list of mechanism names to try. Each is the
      * IANA-registered name of a SASL mechanism. (e.g. "GSSAPI", "CRAM-MD5").
      * @param authorizationId The possibly null protocol-dependent
@@ -405,6 +520,10 @@ public class Sasl {
              * the class loader being returned. Otherwise, the caller must
              * have "getClassLoader" permission, or a SecurityException
              * will be thrown.
+             * <p>
+             * 使用用于加载提供程序的相同类加载器加载实现类。为了获得类的类加载器,调用者的类加载器必须与返回的类加载器相同或者是它的祖先。
+             * 否则,调用者必须具有"getClassLoader"权限,否则将抛出SecurityException。
+             * 
              */
             ClassLoader cl = p.getClass().getClassLoader();
             Class<?> implClass;
@@ -457,6 +576,21 @@ public class Sasl {
      * for information about how to install and configure security
      * service providers.
      *
+     * <p>
+     *  为指定的机制创建{@code SaslServer}。
+     * 
+     *  此方法使用<a href="{@docRoot}/../technotes/guides/security/crypto/CryptoSpec.html#Provider"> JCA安全提供程序框架</a>
+     * ,如"Java加密架构API规范&amp; Reference",用于定位和选择{@code SaslServer}实现。
+     * 
+     *  首先,它从"SaslServerFactory"服务和指定机制的注册安全提供程序获取{@code SaslServerFactory}实例的有序列表。
+     * 然后它在列表上的每个工厂实例上调用{@code createSaslServer()},直到生成一个非空的{@code SaslServer}实例。
+     * 它返回非空的{@code SaslServer}实例,如果搜索无法生成一个非空的{@code SaslServer}实例,则返回null。
+     * p>
+     *  SaslServerFactory的安全提供程序使用<br> {@code SaslServerFactory。
+     * } <em> {@ code mechanism_name} </em>格式的JCA安全提供程序框架注册。
+     * <br>
+     *  和作为{@code javax.security.sasl.SaslServerFactory}的实现的类名的值。
+     * 
      * @param mechanism The non-null mechanism name. It must be an
      * IANA-registered name of a SASL mechanism. (e.g. "GSSAPI", "CRAM-MD5").
      * @param protocol The non-null string name of the protocol for which
@@ -536,6 +670,14 @@ public class Sasl {
      * Gets an enumeration of known factories for producing {@code SaslClient}.
      * This method uses the same algorithm for locating factories as
      * {@code createSaslClient()}.
+     * <p>
+     * 
+     * 例如,包含支持"DIGEST-MD5"机制的工厂类{@code com.wiz.sasl.digest.ServerFactory}的提供程序将使用JCA注册以下条目：{@code SaslServerFactory.DIGEST- MD5 com.wiz.sasl.digest.ServerFactory}
+     * 。
+     * p>
+     *  有关如何安装和配置安全服务提供程序的信息,请参阅"Java加密架构API规范和参考"。
+     * 
+     * 
      * @return A non-null enumeration of known factories for producing
      * {@code SaslClient}.
      * @see #createSaslClient
@@ -557,6 +699,8 @@ public class Sasl {
      * Gets an enumeration of known factories for producing {@code SaslServer}.
      * This method uses the same algorithm for locating factories as
      * {@code createSaslServer()}.
+     * <p>
+     * 
      * @return A non-null enumeration of known factories for producing
      * {@code SaslServer}.
      * @see #createSaslServer

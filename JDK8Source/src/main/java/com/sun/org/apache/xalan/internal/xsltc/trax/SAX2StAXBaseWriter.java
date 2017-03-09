@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -169,6 +170,9 @@ public abstract class SAX2StAXBaseWriter extends DefaultHandler
         /**
          * Used to report a {@link SAXException}to the {@link XMLReporter}
          * registered with this handler.
+         * <p>
+         *  用于向向此处理程序注册的{@link XMLReporter}报告{@link SAXException}。
+         * 
          */
         protected void reportException(String type, SAXException e)
                         throws SAXException {
@@ -186,6 +190,10 @@ public abstract class SAX2StAXBaseWriter extends DefaultHandler
          * Parses an XML qualified name, and places the resulting prefix and local
          * name in the provided String array.
          *
+         * <p>
+         *  解析XML限定名称,并将生成的前缀和本地名称放在提供的String数组中。
+         * 
+         * 
          * @param qName The qualified name to parse.
          * @param results An array where parse results will be placed. The prefix
          *            will be placed at <code>results[0]</code>, and the local
@@ -210,6 +218,9 @@ public abstract class SAX2StAXBaseWriter extends DefaultHandler
          * {@Link Location}implementation used to expose details from a SAX
          * {@link Locator}.
          *
+         * <p>
+         *  {@Link Location}实施用于从SAX {@link Locator}中显示详细信息。
+         * 
          * @author christian
          */
         private static final class SAXLocation implements Location {

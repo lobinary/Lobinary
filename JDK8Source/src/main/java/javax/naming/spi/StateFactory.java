@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,27 @@ import java.util.Hashtable;
   * <tt>DirStateFactory</tt> is intended for use with service providers
   * that implement the <tt>DirContext</tt> interface.
   *
+  * <p>
+  *  该接口表示用于获得绑定对象的状态的工厂。
+  * p>
+  *  JNDI框架允许对象实现通过<em>对象工厂</em>动态加载。
+  * 例如,当查找命名空间中绑定的打印机时,如果打印服务将打印机名称绑定到<tt>引用</tt>,则打印机<tt>引用</tt>可用于创建打印机对象,使得查找的调用者可以在查找之后直接对打印机对象进行操作。
+  *  <p> <tt> ObjectFactory </tt>负责创建特定类型的对象。
+  * 在上面的示例中,您可以使用<tt> PrinterObjectFactory </tt>创建<tt>打印机</tt>对象。
+  * <p>
+  *  对于反向过程,当一个对象绑定到命名空间中时,JNDI提供<em>状态工厂</em>。
+  * 继续打印机示例,假设打印机对象已更新并反弹：<blockquote> <pre> ctx.rebind("inky",printer); </pre> </blockquote> <tt> ctx </tt>
+  * 的服务提供商使用状态工厂获取<tt>打印机</tt>的状态以绑定到其命名空间。
+  *  对于反向过程,当一个对象绑定到命名空间中时,JNDI提供<em>状态工厂</em>。 <tt>打印机</tt>类型对象的状态工厂可能会返回一个更紧凑的对象以存储在命名系统中。
+  * p>
+  * 状态工厂必须实现<tt> StateFactory </tt>接口。此外,工厂类必须是public的,并且必须具有不接受参数的公共构造函数。
+  * p>
+  *  状态工厂的<tt> getStateToBind()</tt>方法可能被调用多次,可能使用不同的参数。实现是线程安全的。
+  * p>
+  *  <tt> StateFactory </tt>仅适用于只实现<tt> Context </tt>接口的服务提供商。
+  *  <tt> DirStateFactory </tt>旨在与实现<tt> DirContext </tt>接口的服务提供商配合使用。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -115,6 +137,8 @@ public interface StateFactory {
  * The implementation will not modify these objects or keep references
  * to them, although it may keep references to clones or copies.
  *
+ * <p>
+ * 
  * @param obj A non-null object whose state is to be retrieved.
  * @param name The name of this object relative to <code>nameCtx</code>,
  *              or null if no name is specified.

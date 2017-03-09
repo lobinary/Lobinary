@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import java.io.*;
 /**
  * Simple implementation of ScriptContext.
  *
+ * <p>
+ *  简单实现ScriptContext。
+ * 
+ * 
  * @author Mike Grogan
  * @since 1.6
  */
@@ -41,6 +46,11 @@ public class SimpleScriptContext  implements ScriptContext {
      * By default, a <code>PrintWriter</code> based on <code>System.out</code>
      * is used. Accessor methods getWriter, setWriter are used to manage
      * this field.
+     * <p>
+     *  这是要用于从脚本输出的writer。默认情况下,使用基于<code> System.out </code>的<code> PrintWriter </code>。
+     * 访问器方法getWriter,setWriter用于管理此字段。
+     * 
+     * 
      * @see java.lang.System#out
      * @see java.io.PrintWriter
      */
@@ -51,6 +61,11 @@ public class SimpleScriptContext  implements ScriptContext {
      * By default, a <code>PrintWriter</code> based on <code>System.err</code> is
      * used. Accessor methods getErrorWriter, setErrorWriter are used to manage
      * this field.
+     * <p>
+     *  这是用于从脚本输出错误的写入程序。默认情况下,将使用基于<code> System.err </code>的<code> PrintWriter </code>。
+     * 访问器方法getErrorWriter,setErrorWriter用于管理此字段。
+     * 
+     * 
      * @see java.lang.System#err
      * @see java.io.PrintWriter
      */
@@ -61,6 +76,11 @@ public class SimpleScriptContext  implements ScriptContext {
      * By default, a <code>InputStreamReader</code> based on <code>System.in</code>
      * is used and default charset is used by this reader. Accessor methods
      * getReader, setReader are used to manage this field.
+     * <p>
+     *  这是用于来自脚本的输入的读取器。默认情况下,使用基于<code> System.in </code>的<code> InputStreamReader </code>,并且此读者使用默认字符集。
+     * 访问器方法getReader,setReader用于管理此字段。
+     * 
+     * 
      * @see java.lang.System#in
      * @see java.io.InputStreamReader
      */
@@ -71,6 +91,10 @@ public class SimpleScriptContext  implements ScriptContext {
      * This is the engine scope bindings.
      * By default, a <code>SimpleBindings</code> is used. Accessor
      * methods setBindings, getBindings are used to manage this field.
+     * <p>
+     *  这是引擎作用域绑定。默认情况下,使用<code> SimpleBindings </code>。访问器方法setBindings,getBindings用于管理此字段。
+     * 
+     * 
      * @see SimpleBindings
      */
     protected Bindings engineScope;
@@ -79,11 +103,17 @@ public class SimpleScriptContext  implements ScriptContext {
      * This is the global scope bindings.
      * By default, a null value (which means no global scope) is used. Accessor
      * methods setBindings, getBindings are used to manage this field.
+     * <p>
+     *  这是全局范围绑定。默认情况下,使用空值(表示没有全局范围)。访问器方法setBindings,getBindings用于管理此字段。
+     * 
      */
     protected Bindings globalScope;
 
     /**
      * Create a {@code SimpleScriptContext}.
+     * <p>
+     *  创建{@code SimpleScriptContext}。
+     * 
      */
     public SimpleScriptContext() {
         engineScope = new SimpleBindings();
@@ -100,6 +130,12 @@ public class SimpleScriptContext  implements ScriptContext {
      * of scope is <code>GLOBAL_SCOPE</code> the given <code>Bindings</code> replaces the
      * <code>globalScope</code> field.
      *
+     * <p>
+     * 设置给定作用域的属性的<code> Bindings </code>。
+     * 如果scope的值是<code> ENGINE_SCOPE </code>,给定的<code> Bindings </code>会替换<code> engineScope </code>字段。
+     * 如果scope的值是<code> GLOBAL_SCOPE </code>,给定的<code> Bindings </code>会替换<code> globalScope </code>字段。
+     * 
+     * 
      * @param bindings The <code>Bindings</code> of attributes to set.
      * @param scope The value of the scope in which the attributes are set.
      *
@@ -132,6 +168,10 @@ public class SimpleScriptContext  implements ScriptContext {
      * is determined by the numeric value of the scope parameter (lowest
      * scope values first.)
      *
+     * <p>
+     *  检索在搜索顺序中最早出现的范围中具有给定名称的属性的值。该顺序由范围参数的数值确定(最低范围值首先)。
+     * 
+     * 
      * @param name The name of the the attribute to retrieve.
      * @return The value of the attribute in the lowest scope for
      * which an attribute with the given name is defined.  Returns
@@ -152,6 +192,10 @@ public class SimpleScriptContext  implements ScriptContext {
     /**
      * Gets the value of an attribute in a given scope.
      *
+     * <p>
+     *  获取给定作用域中属性的值。
+     * 
+     * 
      * @param name The name of the attribute to retrieve.
      * @param scope The scope in which to retrieve the attribute.
      * @return The value of the attribute. Returns <code>null</code> is the name
@@ -182,6 +226,10 @@ public class SimpleScriptContext  implements ScriptContext {
     /**
      * Remove an attribute in a given scope.
      *
+     * <p>
+     *  删除给定范围中的属性。
+     * 
+     * 
      * @param name The name of the attribute to remove
      * @param scope The scope in which to remove the attribute
      *
@@ -214,6 +262,10 @@ public class SimpleScriptContext  implements ScriptContext {
     /**
      * Sets the value of an attribute in a given scope.
      *
+     * <p>
+     *  设置给定作用域中属性的值。
+     * 
+     * 
      * @param name The name of the attribute to set
      * @param value The value of the attribute
      * @param scope The scope in which to set the attribute
@@ -273,6 +325,10 @@ public class SimpleScriptContext  implements ScriptContext {
 
     /**
      * Get the lowest scope in which an attribute is defined.
+     * <p>
+     *  获取定义属性的最低范围。
+     * 
+     * 
      * @param name Name of the attribute
      * .
      * @return The lowest scope.  Returns -1 if no attribute with the given
@@ -295,6 +351,10 @@ public class SimpleScriptContext  implements ScriptContext {
      * <code>ENGINE_SCOPE</code>.  Returns the value of the <code>globalScope</code> field if the specified scope is
      * <code>GLOBAL_SCOPE</code>.
      *
+     * <p>
+     *  如果指定的作用域是<code> ENGINE_SCOPE </code>,则返回<code> engineScope </code>字段的值。
+     * 如果指定的作用域为<code> GLOBAL_SCOPE </code>,则返回<code> globalScope </code>字段的值。
+     * 
      * @param scope The specified scope
      * @return The value of either the  <code>engineScope</code> or <code>globalScope</code> field.
      * @throws IllegalArgumentException if the value of scope is invalid.

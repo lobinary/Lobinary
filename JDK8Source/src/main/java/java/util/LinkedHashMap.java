@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -148,6 +149,68 @@ import java.io.IOException;
  * returned by all of this class's collection view methods are created from
  * the iterators of the corresponding collections.
  *
+ * <p>
+ *  <p> <tt> Map </tt>界面的散列表和链接列表实现,具有可预测的迭代顺序。此实现不同于<tt> HashMap </tt>,因为它维护一个贯穿其所有条目的双向链表。
+ * 此链接列表定义了迭代排序,通常是将键插入到地图中的顺序(<i>插入顺序</i>)。请注意,如果将<i>重新插入</i>键插入地图,则插入顺序不会受到影响。
+ * 如果<tt> m.containsKey时调用<tt> m.put(k,v)</tt>,则将<tt> k </tt>重新插入到映射<tt> m </tt> k)</tt>将在调用之前立即返回<tt> t
+ * rue </tt>。
+ * 此链接列表定义了迭代排序,通常是将键插入到地图中的顺序(<i>插入顺序</i>)。请注意,如果将<i>重新插入</i>键插入地图,则插入顺序不会受到影响。)。
+ * 
+ *  <p>此实施方案使客户端免受{@link HashMap}(和{@link Hashtable})提供的未指定的,通常无序的顺序,而不会增加与{@link TreeMap}相关联的成本。
+ * 它可以用于产生与原始地图具有相同顺序的地图的副本,而不管原始地图的实现：。
+ * <pre>
+ *  void foo(Map m){Map copy = new LinkedHashMap(m); ...}
+ * </pre>
+ *  如果模块在输入上获取映射,将其复制,然后返回其顺序由副本的顺序确定的结果,则此技术特别有用。 (客户通常喜欢以与提交相同的顺序返回)。
+ * 
+ * <p>提供了一个特殊的{@link #LinkedHashMap(int,float,boolean)构造函数}来创建一个链接的散列图,其迭代顺序是其条目最后访问的顺序,从最近访问到最近访问,最近(<i>
+ * 存取顺序</i>)。
+ * 这种地图非常适合构建LRU缓存。
+ * 调用{@code put},{@code putIfAbsent},{@code get},{@code getOrDefault},{@code compute},{@code computeIfAbsent}
+ * ,{@code computeIfPresent}或{@code merge}方法导致对相应条目的访问(假设它在调用完成后存在)。
+ * 这种地图非常适合构建LRU缓存。如果值被替换,{@code replace}方法只会导致条目的访问。
+ *  {@code putAll}方法按照指定映射的条目集迭代器提供键值映射的顺序,为指定映射中的每个映射生成一个条目访问。 <i>没有其他方法生成条目访问。
+ * </i>具体来说,对集合视图的操作不会影响背景图的迭代顺序。
+ * 
+ *  <p> {@link #removeEldestEntry(Map.Entry)}方法可能会被覆盖,以便在将新映射添加到地图时自动删除过时映射的策略。
+ * 
+ * <p>此类提供所有可选的<tt> Map </tt>操作,并允许空元素。
+ * 像<tt> HashMap </tt>,它为基本操作(<tt> add </tt>,<tt>包含</tt>和<tt>删除</tt>)提供了恒定时间性能,散列函数在这些桶之间适当地分散元素。
+ * 由于维护链接列表的额外费用,性能可能略低于<tt> HashMap </tt>,除了一个例外：迭代在<tt> LinkedHashMap </tt>需要与映射的<i>尺寸</i>成比例的时间,而不管其容
+ * 量如何。
+ * 像<tt> HashMap </tt>,它为基本操作(<tt> add </tt>,<tt>包含</tt>和<tt>删除</tt>)提供了恒定时间性能,散列函数在这些桶之间适当地分散元素。
+ * 在<tt> HashMap </tt>上的迭代可能更昂贵,需要与其<i>容量成比例的时间</i>。
+ * 
+ *  <p>链接的散列图具有影响其性能的两个参数：<i>初始容量</i>和<i>负载因子</i>。它们的定义与<tt> HashMap </tt>一样。
+ * 但是,请注意,对于这个类别选择过高的初始容量值的惩罚对于<tt> HashMap </tt>来说不太严格,因为这个类的迭代时间不受容量的影响。
+ * 
+ *  <p> <strong>请注意,此实现未同步。</strong>如果多个线程同时访问链接的散列图,并且至少有一个线程在结构上修改了地图,则必须<em> </em>外部同步。
+ * 这通常通过在自然地封装映射的某个对象上同步来实现。
+ * 
+ * 如果不存在这样的对象,那么应该使用{@link Collections#synchronizeMap Collections.synchronizedMap}方法来"包装"映射。
+ * 这最好在创建时完成,以防止意外的不同步访问地图：<pre> Map m = Collections.synchronizedMap(new LinkedHashMap(...)); </pre>。
+ * 
+ *  结构修改是添加或删除一个或多个映射的任何操作,或者在访问有序链接的散列图的情况下,影响迭代顺序。在插入排序的链接散列图中,仅改变与已经包含在映射中的键相关联的值不是结构修改。
+ *  <strong>在访问有序链接散列图中,仅使用<tt> get </tt>查询地图是一种结构修改。 </strong>)。
+ * 
+ *  <p>由所有此类的集合视图方法返回的集合的<tt> iterator </tt>方法返回的迭代器<em> fail-fast </em>：如果地图在任何时候被结构修改在创建迭代器之后,除了通过迭代器自
+ * 己的<tt> remove </tt>方法,迭代器将抛出一个{@link ConcurrentModificationException}。
+ * 因此,面对并发修改,迭代器快速而干净地失败,而不是在将来的未确定时间冒任意的,非确定性行为的风险。
+ * 
+ * <p>请注意,迭代器的故障快速行为不能得到保证,因为一般来说,在不同步并发修改的情况下不可能做出任何硬的保证。
+ * 故障快速迭代器在尽力而为的基础上抛出<tt> ConcurrentModificationException </tt>。
+ * 因此,编写依赖于此异常的程序的正确性是错误的：<i>迭代器的故障快速行为应该仅用于检测错误。</i>。
+ * 
+ *  <p>由此类的所有集合视图方法返回的集合的spliterator方法返回的分隔符为<em> <a href="Spliterator.html#binding">延迟绑定</a> </em> <em>
+ *  fail-fast </em>,并另外报告{@link Spliterator#ORDERED}。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ *  @implNote由所有此类的集合视图方法返回的集合的spliterator方法返回的分隔符是从相应集合的迭代器创建的。
+ * 
+ * 
  * @param <K> the type of keys maintained by this map
  * @param <V> the type of mapped values
  *
@@ -184,10 +247,21 @@ public class LinkedHashMap<K,V>
      * the doubly-linked before/after list. This class also
      * previously used a different style of callback methods upon
      * access, insertion, and removal.
+     * <p>
+     * 实施说明。这个类的先前版本在内部结构有点不同。因为超类HashMap现在对其一些节点使用树,所以类LinkedHashMap.Entry现在被视为中间节点类,也可以转换为树形式。
+     * 此类的名称LinkedHashMap.Entry在其当前上下文中以多种方式混淆,但不能更改。
+     * 否则,即使它没有被导出到这个包之外,一些现有的源代码已经依赖于在调用removeEldestEntry中的符号解析角规规则,该规则抑制了由于不明确的用法而导致的编译错误。
+     * 因此,我们保留名称以保持未修改的可编译性。
+     * 
+     *  节点类中的变化还需要使用两个字段(头,尾)而不是指向头节点的指针,以维持列表之前/之后的双重链接。此类以前在访问,插入和删除时使用了不同风格的回调方法。
+     * 
      */
 
     /**
      * HashMap.Node subclass for normal LinkedHashMap entries.
+     * <p>
+     *  正常LinkedHashMap条目的HashMap.Node子类。
+     * 
      */
     static class Entry<K,V> extends HashMap.Node<K,V> {
         Entry<K,V> before, after;
@@ -200,11 +274,17 @@ public class LinkedHashMap<K,V>
 
     /**
      * The head (eldest) of the doubly linked list.
+     * <p>
+     *  双头链表的头部(最长的)。
+     * 
      */
     transient LinkedHashMap.Entry<K,V> head;
 
     /**
      * The tail (youngest) of the doubly linked list.
+     * <p>
+     *  双向链表的尾部(最小的)。
+     * 
      */
     transient LinkedHashMap.Entry<K,V> tail;
 
@@ -212,6 +292,10 @@ public class LinkedHashMap<K,V>
      * The iteration ordering method for this linked hash map: <tt>true</tt>
      * for access-order, <tt>false</tt> for insertion-order.
      *
+     * <p>
+     *  此链接哈希映射的迭代排序方法：<tt> true </tt>表示访问顺序,<tt> false </tt>表示插入顺序。
+     * 
+     * 
      * @serial
      */
     final boolean accessOrder;
@@ -338,6 +422,10 @@ public class LinkedHashMap<K,V>
      * Constructs an empty insertion-ordered <tt>LinkedHashMap</tt> instance
      * with the specified initial capacity and load factor.
      *
+     * <p>
+     *  构造具有指定的初始容量和负载因子的空插入顺序的<tt> LinkedHashMap </tt>实例。
+     * 
+     * 
      * @param  initialCapacity the initial capacity
      * @param  loadFactor      the load factor
      * @throws IllegalArgumentException if the initial capacity is negative
@@ -352,6 +440,10 @@ public class LinkedHashMap<K,V>
      * Constructs an empty insertion-ordered <tt>LinkedHashMap</tt> instance
      * with the specified initial capacity and a default load factor (0.75).
      *
+     * <p>
+     * 构造具有指定初始容量和默认负载系数(0.75)的空插入顺序<tt> LinkedHashMap </tt>实例。
+     * 
+     * 
      * @param  initialCapacity the initial capacity
      * @throws IllegalArgumentException if the initial capacity is negative
      */
@@ -363,6 +455,9 @@ public class LinkedHashMap<K,V>
     /**
      * Constructs an empty insertion-ordered <tt>LinkedHashMap</tt> instance
      * with the default initial capacity (16) and load factor (0.75).
+     * <p>
+     *  构造具有默认初始容量(16)和负载系数(0.75)的空插入顺序<tt> LinkedHashMap </tt>实例。
+     * 
      */
     public LinkedHashMap() {
         super();
@@ -375,6 +470,11 @@ public class LinkedHashMap<K,V>
      * instance is created with a default load factor (0.75) and an initial
      * capacity sufficient to hold the mappings in the specified map.
      *
+     * <p>
+     *  构造与指定映射具有相同映射的插入排序的<tt> LinkedHashMap </tt>实例。
+     *  <tt> LinkedHashMap </tt>实例使用默认负载系数(0.75)和足以在指定映射中保存映射的初始容量创建。
+     * 
+     * 
      * @param  m the map whose mappings are to be placed in this map
      * @throws NullPointerException if the specified map is null
      */
@@ -388,6 +488,10 @@ public class LinkedHashMap<K,V>
      * Constructs an empty <tt>LinkedHashMap</tt> instance with the
      * specified initial capacity, load factor and ordering mode.
      *
+     * <p>
+     *  使用指定的初始容量,负载系数和排序模式构造一个空的<tt> LinkedHashMap </tt>实例。
+     * 
+     * 
      * @param  initialCapacity the initial capacity
      * @param  loadFactor      the load factor
      * @param  accessOrder     the ordering mode - <tt>true</tt> for
@@ -407,6 +511,10 @@ public class LinkedHashMap<K,V>
      * Returns <tt>true</tt> if this map maps one or more keys to the
      * specified value.
      *
+     * <p>
+     *  如果此映射将一个或多个键映射到指定的值,则返回<tt> true </tt>。
+     * 
+     * 
      * @param value value whose presence in this map is to be tested
      * @return <tt>true</tt> if this map maps one or more keys to the
      *         specified value
@@ -434,6 +542,16 @@ public class LinkedHashMap<K,V>
      * possible that the map explicitly maps the key to {@code null}.
      * The {@link #containsKey containsKey} operation may be used to
      * distinguish these two cases.
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回{@code null}。
+     * 
+     *  更正式地说,如果此映射包含从密钥{@code k}到值{@code v}的映射,使得{@code(key == null?k == null：key.equals(k) )},那么这个方法返回{@code v}
+     * ;否则返回{@code null}。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     *  <p> {@code null}的返回值不一定</i>表示地图不包含键的映射;也有可能映射将键明确映射到{@code null}。
+     *  {@link #containsKey containsKey}操作可用于区分这两种情况。
+     * 
      */
     public V get(Object key) {
         Node<K,V> e;
@@ -446,6 +564,9 @@ public class LinkedHashMap<K,V>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public V getOrDefault(Object key, V defaultValue) {
        Node<K,V> e;
@@ -458,6 +579,9 @@ public class LinkedHashMap<K,V>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void clear() {
         super.clear();
@@ -494,6 +618,24 @@ public class LinkedHashMap<K,V>
      * <p>This implementation merely returns <tt>false</tt> (so that this
      * map acts like a normal map - the eldest element is never removed).
      *
+     * <p>
+     * 如果此地图应删除其最长的条目,则返回<tt> true </tt>。在向地图中插入新条目后,通过<tt> put </tt>和<tt> putAll </tt>调用此方法。
+     * 它为执行者提供了在每次添加新的条目时移除最长条目的机会。如果映射表示高速缓存,这是有用的：它允许映射通过删除过时的条目来减少内存消耗。
+     * 
+     *  <p>示例使用：此覆盖将允许地图长达100个条目,然后在每次添加新条目时删除最长条目,维护100个条目的稳定状态。
+     * <pre>
+     *  private static final int MAX_ENTRIES = 100;
+     * 
+     *  protected boolean removeEldestEntry(Map.Entry eldest){return size()&gt; MAX_ENTRIES; }}
+     * </pre>
+     * 
+     *  <p>此方法通常不会以任何方式修改地图,而是允许地图根据其返回值指示来修改本身。
+     *  <i> <i> </i> </i>是允许此方法直接修改地图,但如果是这样,则<i>必须</i>返回<tt> false </tt>尝试任何进一步修改)。
+     * 未指定在此方法中修改地图后返回<tt> true </tt>的效果。
+     * 
+     *  <p>此实现仅返回<tt> false </tt>(以便此映射表现为法线贴图 - 最早的元素不会被移除)。
+     * 
+     * 
      * @param    eldest The least recently inserted entry in the map, or if
      *           this is an access-ordered map, the least recently accessed
      *           entry.  This is the entry that will be removed it this
@@ -525,6 +667,15 @@ public class LinkedHashMap<K,V>
      * performance but much poorer parallel performance than that of
      * {@code HashMap}.
      *
+     * <p>
+     * 返回此地图中包含的键的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在迭代集合的过程中修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>操作。
+     * 如果在迭代集合的过程中修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 它的{@link Spliterator}通常提供更快的顺序性能,但是比{@code HashMap}的并行性能差得多。
+     * 
+     * 
      * @return a set view of the keys contained in this map
      */
     public Set<K> keySet() {
@@ -574,6 +725,15 @@ public class LinkedHashMap<K,V>
      * performance but much poorer parallel performance than that of
      * {@code HashMap}.
      *
+     * <p>
+     * 返回此地图中包含的值的{@link Collection}视图。集合由地图支持,因此对地图的更改会反映在集合中,反之亦然。
+     * 如果在集合的迭代正在进行时修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。
+     * 集合支持元素删除,通过<tt> Iterator.remove </tt>,<tt> Collection.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射>
+     *  retainAll </tt>和<tt>清除</tt>操作。
+     * 如果在集合的迭代正在进行时修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 它的{@link Spliterator}通常提供更快的顺序性能,但是比{@code HashMap}的并行性能差得多。
+     * 
+     * 
      * @return a view of the values contained in this map
      */
     public Collection<V> values() {
@@ -620,6 +780,12 @@ public class LinkedHashMap<K,V>
      * performance but much poorer parallel performance than that of
      * {@code HashMap}.
      *
+     * <p>
+     * 返回此地图中包含的映射的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在对迭代器执行迭代(即通过迭代器自己的<tt> remove </tt>操作,或通过对迭代器返回的映射条目执行<tt> setValue </tt>操作) )迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>操作。
+     * 
      * @return a set view of the mappings contained in this map
      */
     public Set<Map.Entry<K,V>> entrySet() {

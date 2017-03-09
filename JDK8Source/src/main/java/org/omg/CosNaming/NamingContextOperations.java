@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 
@@ -17,6 +18,11 @@ package org.omg.CosNaming;
  * See <a href="http://www.omg.org/technology/documents/formal/naming_service.htm">
  * CORBA COS 
  * Naming Specification.</a>
+ * <p>
+ *  命名上下文是一个包含一组名称绑定的对象,其中每个名称都是唯一的。不同的名称可以同时绑定到相同或不同上下文中的对象。 <p>
+ * 
+ *  请参见<a href="http://www.omg.org/technology/documents/formal/naming_service.htm"> CORBA COS命名规范</a>。
+ * 
  */
 public interface NamingContextOperations 
 {
@@ -25,6 +31,10 @@ public interface NamingContextOperations
  * Creates a binding of a name and an object in the naming context.
  * Naming contexts that are bound using bind do not participate in name
  * resolution when compound names are passed to be resolved. 
+ * 
+ * <p>
+ *  在命名上下文中创建名称和对象的绑定。当通过要解析的复合名称时,使用bind绑定的命名上下文不参与名称解析。
+ * 
  * 
  * @param n Name of the object <p>
  * 
@@ -51,6 +61,10 @@ public interface NamingContextOperations
  * are bound using bind_context() participate in name resolution 
  * when compound names are passed to be resolved.
  * 
+ * <p>
+ *  命名作为命名上下文的对象。当通过要解析的复合名称时,使用bind_context()绑定的命名上下文参与名称解析。
+ * 
+ * 
  * @param n Name of the object <p>
  * 
  * @param nc NamingContect object to bind with the given name <p>
@@ -74,6 +88,10 @@ public interface NamingContextOperations
  * that are bound using rebind do not participate in name resolution 
  * when compound names are passed to be resolved.
  * 
+ * <p>
+ *  即使名称已在上下文中绑定,也会在命名上下文中创建名称和对象的绑定。当通过要解析的复合名称时,使用重新绑定绑定的命名上下文不参与名称解析。
+ * 
+ * 
  * @param  n Name of the object <p>
  * 
  * @param obj The Object to rebind with the given name <p>
@@ -93,6 +111,10 @@ public interface NamingContextOperations
  * context even if the name is already bound in the context. Naming 
  * contexts that are bound using rebind_context() participate in name 
  * resolution when compound names are passed to be resolved.
+ * 
+ * <p>
+ *  即使名称已在上下文中绑定,也会在命名上下文中创建名称和命名上下文的绑定。当通过要解析的复合名称时,使用rebind_context()绑定的命名上下文将参与名称解析。
+ * 
  * 
  * @param n Name of the object <p>
  * 
@@ -116,6 +138,11 @@ public interface NamingContextOperations
  * to the appropriate type. That is, clients typically cast the returned 
  * object from Object to a more specialized interface.
  * 
+ * <p>
+ * 解析操作是检索绑定到给定上下文中的名称的对象的过程。给定的名称必须与绑定的名称完全匹配。命名服务不返回对象的类型。客户端负责将对象"缩小"为适当的类型。
+ * 也就是说,客户端通常将从Object返回的对象转换到更专用的接口。
+ * 
+ * 
  * @param n Name of the object <p>
  * 
  * @exception org.omg.CosNaming.NamingContextPackage.NotFound Indicates the name does not identify a binding.<p>
@@ -130,6 +157,10 @@ public interface NamingContextOperations
 
   /** 
  * The unbind operation removes a name binding from a context.
+ * 
+ * <p>
+ *  unbind操作从上下文中删除名称绑定。
+ * 
  * 
  * @param n Name of the object <p>
  * 
@@ -157,6 +188,15 @@ public interface NamingContextOperations
  * bindings, the binding iterator is a nil object reference.
  * </ul>
  * 
+ * <p>
+ *  列表操作允许客户端在命名上下文中迭代一组绑定。 <p>
+ * 
+ *  列表操作最多只返回BindingList bl中请求的绑定数。
+ * <ul>
+ *  <li>如果命名上下文包含其他绑定,则列表操作将返回带有其他绑定的BindingIterator。 <li>如果命名上下文不包含其他绑定,则绑定迭代器是一个nil对象引用。
+ * </ul>
+ * 
+ * 
  * @param how_many the maximum number of bindings to return <p>
  * 
  * @param bl the returned list of bindings <p>
@@ -169,6 +209,9 @@ public interface NamingContextOperations
  * This operation returns a naming context implemented by the same
  * naming server as the context on which the operation was invoked. 
  * The new context is not bound to any name.
+ * <p>
+ *  此操作返回由与调用操作的上下文相同的命名服务器实现的命名上下文。新上下文不绑定到任何名称。
+ * 
  */
   org.omg.CosNaming.NamingContext new_context ();
 
@@ -178,6 +221,10 @@ public interface NamingContextOperations
  * by the same naming server as the context in which it was bound (that 
  * is, the naming server that implements the context denoted by the 
  * name argument excluding the last component).
+ * 
+ * <p>
+ *  此操作将创建一个新上下文并将其绑定到作为参数提供的名称。新创建的上下文由与其绑定的上下文(即,实现由除了最后一个组件之外的名称参数表示的上下文的命名服务器)相同的命名服务器实现。
+ * 
  * 
  * @param n Name of the object <p>
  * 
@@ -197,6 +244,9 @@ public interface NamingContextOperations
   /** 
  * The destroy operation deletes a naming context. If the naming 
  * context contains bindings, the NotEmpty exception is raised.
+ * 
+ * <p>
+ *  destroy操作将删除命名上下文。如果命名上下文包含绑定,则会抛出NotEmpty异常。
  * 
  * @exception org.omg.CosNaming.NamingContextPackage.NotEmpty Indicates that the Naming Context contains bindings.
  */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import sun.security.action.GetPropertyAction;
  * Unchecked exception thrown to indicate a syntax error in a
  * regular-expression pattern.
  *
+ * <p>
+ *  未抛出的异常抛出以指示正则表达式模式中的语法错误。
+ * 
+ * 
  * @author  unascribed
  * @since 1.4
  * @spec JSR-51
@@ -49,6 +54,10 @@ public class PatternSyntaxException
     /**
      * Constructs a new instance of this class.
      *
+     * <p>
+     *  构造此类的新实例。
+     * 
+     * 
      * @param  desc
      *         A description of the error
      *
@@ -68,6 +77,10 @@ public class PatternSyntaxException
     /**
      * Retrieves the error index.
      *
+     * <p>
+     *  检索错误索引。
+     * 
+     * 
      * @return  The approximate index in the pattern of the error,
      *         or <tt>-1</tt> if the index is not known
      */
@@ -78,6 +91,10 @@ public class PatternSyntaxException
     /**
      * Retrieves the description of the error.
      *
+     * <p>
+     *  检索错误的描述。
+     * 
+     * 
      * @return  The description of the error
      */
     public String getDescription() {
@@ -87,6 +104,10 @@ public class PatternSyntaxException
     /**
      * Retrieves the erroneous regular-expression pattern.
      *
+     * <p>
+     *  检索错误的正则表达式模式。
+     * 
+     * 
      * @return  The erroneous pattern
      */
     public String getPattern() {
@@ -102,6 +123,9 @@ public class PatternSyntaxException
      * error and its index, the erroneous regular-expression pattern, and a
      * visual indication of the error index within the pattern.
      *
+     * <p>
+     *  返回多行字符串,其中包含语法错误及其索引的描述,错误的正则表达式模式以及模式中错误索引的可视指示。
+     * 
      * @return  The full detail message
      */
     public String getMessage() {

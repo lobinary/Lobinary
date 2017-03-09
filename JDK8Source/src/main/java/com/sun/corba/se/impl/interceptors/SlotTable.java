@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,9 @@ import org.omg.CORBA.Any;
 
 /**
  * SlotTable is used internally by PICurrent to store the slot information.
+ * <p>
+ *  SlotTable在PICurrent内部用于存储插槽信息。
+ * 
  */
 public class SlotTable {
     // The vector where all the slot data for the current thread is stored
@@ -48,6 +52,9 @@ public class SlotTable {
     /**
      * The constructor instantiates an Array of Any[] of size given by slotSize
      * parameter.
+     * <p>
+     *  构造函数实例化由slotSize参数指定的大小的任何[]的数组。
+     * 
      */
     SlotTable( ORB orb, int slotSize ) {
         dirtyFlag = false;
@@ -57,6 +64,9 @@ public class SlotTable {
 
     /**
      * This method sets the slot data at the given slot id (index).
+     * <p>
+     *  此方法在给定的槽id(索引)设置槽数据。
+     * 
      */
     public void set_slot( int id, Any data ) throws InvalidSlot
     {
@@ -71,6 +81,9 @@ public class SlotTable {
 
     /**
      * This method get the slot data for the given slot id (index).
+     * <p>
+     *  此方法获取给定槽id(索引)的槽数据。
+     * 
      */
     public Any get_slot( int id ) throws InvalidSlot
     {
@@ -88,6 +101,9 @@ public class SlotTable {
 
     /**
      * This method resets all the slot data to null if dirtyFlag is set.
+     * <p>
+     *  如果dirtyFlag设置,此方法将所有插槽数据重置为null。
+     * 
      */
     void resetSlots( ) {
         if( dirtyFlag == true ) {
@@ -99,6 +115,8 @@ public class SlotTable {
 
     /**
      * This method returns the size of the allocated slots.
+     * <p>
+     *  此方法返回分配的插槽的大小。
      */
     int getSize( ) {
         return theSlotData.length;

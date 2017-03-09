@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,10 @@ import sun.security.action.GetPropertyAction;
 /**
  * <p>The NimbusLookAndFeel class.</p>
  *
+ * <p>
+ *  <p> NimbusLookAndFeel类。</p>
+ * 
+ * 
  * @author Jasper Potts
  * @author Richard Bair
  */
@@ -82,11 +87,17 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * A reference to the auto-generated file NimbusDefaults. This file contains
      * the default mappings and values for the look and feel as specified in the
      * visual designer.
+     * <p>
+     *  对自动生成的文件NimbusDefaults的引用。此文件包含视觉设计器中指定的外观和感觉的默认映射和值。
+     * 
      */
     private NimbusDefaults defaults;
 
     /**
      * Reference to populated LAD uidefaults
+     * <p>
+     *  引用已填充的LAD uidefaults
+     * 
      */
     private UIDefaults uiDefaults;
 
@@ -94,6 +105,9 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
 
     /**
      * Create a new NimbusLookAndFeel.
+     * <p>
+     *  创建一个新的NimbusLookAndFeel。
+     * 
      */
     public NimbusLookAndFeel() {
         super();
@@ -125,6 +139,9 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override public UIDefaults getDefaults() {
         if (uiDefaults == null){
@@ -223,6 +240,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * will never return null. If an appropriate component and region cannot
      * be determined, then a default style is returned.
      *
+     * <p>
+     *  获取与给定组件和区域关联的样式。这将永远不会返回null。如果无法确定适当的组件和区域,则返回默认样式。
+     * 
+     * 
      * @param c a non-null reference to a JComponent
      * @param r a non-null reference to the region of the component c
      * @return a non-null reference to a NimbusStyle.
@@ -235,6 +256,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * Return a short string that identifies this look and feel. This
      * String will be the unquoted String "Nimbus".
      *
+     * <p>
+     *  返回一个标识此外观的短字符串。这个字符串将是无引号的字符串"Nimbus"。
+     * 
+     * 
      * @return a short string identifying this look and feel.
      */
     @Override public String getName() {
@@ -245,6 +270,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * Return a string that identifies this look and feel. This String will
      * be the unquoted String "Nimbus".
      *
+     * <p>
+     *  返回一个标识此外观的字符串。这个字符串将是无引号的字符串"Nimbus"。
+     * 
+     * 
      * @return a short string identifying this look and feel.
      */
     @Override public String getID() {
@@ -254,6 +283,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
     /**
      * Returns a textual description of this look and feel.
      *
+     * <p>
+     *  返回此外观的文本描述。
+     * 
+     * 
      * @return textual description of this look and feel.
      */
     @Override public String getDescription() {
@@ -262,6 +295,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @return {@code true}
      */
     @Override public boolean shouldUpdateStyleOnAncestorChanged() {
@@ -279,6 +316,16 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      *   <li>{@code "JComponent.sizeVariant"}
      * </ul>
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>如果以下某个属性更改,则覆盖以返回{@code true}：
+     * <ul>
+     *  <li> {@ code"Nimbus.Overrides"} <li> {@ code"Nimbus.Overrides.InheritDefaults"} <li> {@ code"JComponent.sizeVariant"}
+     * 。
+     * </ul>
+     * 
+     * 
      * @since 1.7
      */
     @Override
@@ -338,6 +385,30 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      *     UIManager.put("\"MyPanel\".background", new ColorUIResource(Color.RED));
      * </code></pre>
      *
+     * <p>
+     *  <p>使用NimbusLookAndFeel注册第三方组件。</p>
+     * 
+     *  <p>区域表示作为独立绘画区域的组件和组件内的区域。一旦注册到NimbusLookAndFeel,这些区域的NimbusStyles可以通过<code> getStyle </code>方法检索。
+     * </p>。
+     * 
+     * <p> NimbusLookAndFeel对UIDefaults表中的条目使用标准命名方案。
+     * 在特定区域的UIDefault中注册的每个属性,状态,画家和其他默认值的键将以指定的<code>前缀</code> </p>。
+     * 
+     *  <p>例如,假设我有一个名为JFoo的组件。假设我用这种方式用NimbusLookAndFeel注册这个组件：</p>
+     * 
+     *  <pre> <code> laf.register(NimbusFooUI.FOO_REGION,"Foo"); </code> </pre>
+     * 
+     *  <p>在这种情况下,我可以用以下方式用UIDefaults注册此组件的属性：</p>
+     * 
+     *  <pre> <code> UIManager.put("Foo.background",new ColorUIResource(Color.BLACK)); UIManager.put("Foo.En
+     * abled.backgroundPainter",new FooBackgroundPainter()); </code> </pre>。
+     * 
+     *  <p>也可以使用Nimbus注册命名的组件。例如,假设您想要将不同于其他JPanels的名为"MyPanel"的JPanel的背景风格化。您可以通过执行以下操作来完成此操作：</p>
+     * 
+     *  <pre> <code> laf.register(Region.PANEL,"\"MyPanel \""); UIManager.put("\"MyPanel \"。
+     * background",new ColorUIResource(Color.RED)); </code> </pre>。
+     * 
+     * 
      * @param region The Synth Region that is being registered. Such as Button, or
      *        ScrollBarThumb, or NimbusFooUI.FOO_REGION.
      * @param prefix The UIDefault prefix. For example, could be ComboBox, or if
@@ -350,6 +421,9 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
 
     /**
      * Simple utility method that reads system keys.
+     * <p>
+     *  读取系统密钥的简单实用程序方法。
+     * 
      */
     private String getSystemProperty(String key) {
         return AccessController.doPrivileged(new GetPropertyAction(key));
@@ -374,6 +448,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * Get a derived color, derived colors are shared instances and is color
      * value will change when its parent UIDefault color changes.
      *
+     * <p>
+     *  获取派生颜色,派生颜色是共享实例,并且是颜色值将在其父UIDefault颜色更改时更改。
+     * 
+     * 
      * @param uiDefaultParentName The parent UIDefault key
      * @param hOffset             The hue offset
      * @param sOffset             The saturation offset
@@ -395,6 +473,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * Decodes and returns a color, which is derived from an offset between two
      * other colors.
      *
+     * <p>
+     *  解码并返回一种颜色,该颜色来自两种其他颜色之间的偏移。
+     * 
+     * 
      * @param color1   The first color
      * @param color2   The second color
      * @param midPoint The offset between color 1 and color 2, a value of 0.0 is
@@ -416,6 +498,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * Decodes and returns a color, which is derived from a offset between two
      * other colors.
      *
+     * <p>
+     *  解码并返回一种颜色,该颜色来自两种其他颜色之间的偏移。
+     * 
+     * 
      * @param color1   The first color
      * @param color2   The second color
      * @param midPoint The offset between color 1 and color 2, a value of 0.0 is
@@ -443,6 +529,14 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * and so this code exists to unify the logic related to toolbars so it can
      * be shared among the static files such as NimbusIcon and generated files
      * such as the ToolBar state classes.
+     * <p>
+     * 包私有方法,返回BorderLayout.NORTH,BorderLayout.SOUTH,BorderLayout.EAST或BorderLayout.WEST,具体取决于工具栏在其父级中的位置。
+     * 工具栏可能位于PAGE_START,PAGE_END,CENTER或其他位置,但根据工具栏实际位置(CENTER为NORTH),将被解析为NORTH,SOUTH,EAST或WEST。
+     * 
+     *  此代码用于确定自定义工具栏状态应绘制边框线的位置,并由NimbusIcon用于确定是否需要移动手柄图标以使其看起来正确。
+     * 
+     *  Toollbars不幸的是,这些东西的处理方式奇怪,所以这段代码存在来统一与工具栏相关的逻辑,所以它可以在静态文件,如NimbusIcon和生成的文件,如ToolBar状态类之间共享。
+     * 
      */
     static Object resolveToolbarConstraint(JToolBar toolbar) {
         //NOTE: we don't worry about component orientation or PAGE_END etc
@@ -469,6 +563,10 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
      * Derives the ARGB value for a color based on an offset between two
      * other colors.
      *
+     * <p>
+     *  基于两种其他颜色之间的偏移量导出颜色的ARGB值。
+     * 
+     * 
      * @param color1   The first color
      * @param color2   The second color
      * @param midPoint The offset between color 1 and color 2, a value of 0.0 is
@@ -492,6 +590,9 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
 
     /**
      * Simple Symbolic Link style UIDefalts Property
+     * <p>
+     *  简单符号链接样式UIDefalts属性
+     * 
      */
     private class LinkProperty implements UIDefaults.ActiveValue, UIResource{
         private String dstPropName;
@@ -509,6 +610,9 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
     /**
      * Nimbus Property that looks up Nimbus keys for standard key names. For
      * example "Button.background" --> "Button[Enabled].backgound"
+     * <p>
+     *  Nimbus属性,用于查找标准键名称的Nimbus键。例如"Button.background" - >"Button [Enabled] .backgound"
+     * 
      */
     private class NimbusProperty implements UIDefaults.ActiveValue, UIResource {
         private String prefix;
@@ -531,6 +635,9 @@ public class NimbusLookAndFeel extends SynthLookAndFeel {
          * Creates the value retrieved from the <code>UIDefaults</code> table.
          * The object is created each time it is accessed.
          *
+         * <p>
+         *  创建从<code> UIDefaults </code>表中检索的值。每次访问对象时都会创建对象。
+         * 
          * @param table a <code>UIDefaults</code> table
          * @return the created <code>Object</code>
          */

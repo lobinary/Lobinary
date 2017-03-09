@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,13 @@ import static sun.swing.SwingUtilities2.AA_TEXT_PROPERTY_KEY;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  管理基本标题栏的类
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  * @author Steve Wilson
  */
@@ -357,6 +365,10 @@ public class BasicInternalFrameTitlePane extends JComponent
     * Invoked from paintComponent.
     * Paints the background of the titlepane.  All text and icons will
     * then be rendered on top of this background.
+    * <p>
+    *  从paintComponent调用。绘制标题板的背景。然后所有文本和图标将呈现在此背景的顶部。
+    * 
+    * 
     * @param g the graphics to use to render the background
     * @since 1.4
     */
@@ -378,6 +390,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * Post a WINDOW_CLOSING-like event to the frame, so that it can
      * be treated like a regular Frame.
+     * <p>
+     *  发布一个类似WINDOW_CLOSING的事件到框架,使其可以像普通框架一样对待。
+     * 
      */
     protected void postClosingEvent(JInternalFrame frame) {
         InternalFrameEvent e = new InternalFrameEvent(
@@ -563,6 +578,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class PropertyChangeHandler implements PropertyChangeListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -577,6 +595,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class TitlePaneLayout implements LayoutManager {
         // NOTE: This class exists only for backward compatibility. All
@@ -607,6 +628,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class CloseAction extends AbstractAction {
         public CloseAction() {
@@ -624,6 +648,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class MaximizeAction extends AbstractAction {
         public MaximizeAction() {
@@ -653,6 +680,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class IconifyAction extends AbstractAction {
         public IconifyAction() {
@@ -674,6 +704,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     * 该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class RestoreAction extends AbstractAction {
         public RestoreAction() {
@@ -701,6 +734,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class MoveAction extends AbstractAction {
         public MoveAction() {
@@ -715,6 +751,9 @@ public class BasicInternalFrameTitlePane extends JComponent
 
     /*
      * Handles showing and hiding the system menu.
+     * <p>
+     *  句柄显示和隐藏系统菜单。
+     * 
      */
     private class ShowSystemMenuAction extends AbstractAction {
         private boolean show;   // whether to show the menu
@@ -735,6 +774,9 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class SizeAction extends AbstractAction {
         public SizeAction() {
@@ -751,6 +793,8 @@ public class BasicInternalFrameTitlePane extends JComponent
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
      */
     public class SystemMenuBar extends JMenuBar {
         public boolean isFocusTraversable() { return false; }

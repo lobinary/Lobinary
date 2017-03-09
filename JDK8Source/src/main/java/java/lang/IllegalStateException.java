@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ package java.lang;
  * Java application is not in an appropriate state for the requested
  * operation.
  *
+ * <p>
+ *  表示方法在非法或不适当的时间被调用。换句话说,Java环境或Java应用程序对于所请求的操作不处于适当的状态。
+ * 
+ * 
  * @author  Jonni Kanerva
  * @since   JDK1.1
  */
@@ -39,6 +44,9 @@ class IllegalStateException extends RuntimeException {
     /**
      * Constructs an IllegalStateException with no detail message.
      * A detail message is a String that describes this particular exception.
+     * <p>
+     *  构造一个没有详细消息的IllegalStateException。详细消息是描述此特殊异常的字符串。
+     * 
      */
     public IllegalStateException() {
         super();
@@ -49,6 +57,10 @@ class IllegalStateException extends RuntimeException {
      * message.  A detail message is a String that describes this particular
      * exception.
      *
+     * <p>
+     *  构造具有指定详细消息的IllegalStateException。详细消息是描述此特殊异常的字符串。
+     * 
+     * 
      * @param s the String that contains a detailed message
      */
     public IllegalStateException(String s) {
@@ -63,6 +75,12 @@ class IllegalStateException extends RuntimeException {
      * <i>not</i> automatically incorporated in this exception's detail
      * message.
      *
+     * <p>
+     *  构造具有指定的详细消息和原因的新异常。
+     * 
+     *  <p>请注意,与<code> cause </code>关联的详细信息</i>不会自动并入此例外的详细信息中。
+     * 
+     * 
      * @param  message the detail message (which is saved for later retrieval
      *         by the {@link Throwable#getMessage()} method).
      * @param  cause the cause (which is saved for later retrieval by the
@@ -83,6 +101,8 @@ class IllegalStateException extends RuntimeException {
      * wrappers for other throwables (for example, {@link
      * java.security.PrivilegedActionException}).
      *
+     * <p>
+     * 
      * @param  cause the cause (which is saved for later retrieval by the
      *         {@link Throwable#getCause()} method).  (A <tt>null</tt> value is
      *         permitted, and indicates that the cause is nonexistent or

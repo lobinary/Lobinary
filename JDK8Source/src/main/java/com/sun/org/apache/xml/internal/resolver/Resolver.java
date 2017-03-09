@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会或其许可方(如适用)。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.resolver;
@@ -42,6 +52,10 @@ import com.sun.org.apache.xml.internal.resolver.readers.TR9401CatalogReader;
  * An extension to OASIS Open Catalog files, this class supports
  * suffix-based matching and an external RFC2483 resolver.
  *
+ * <p>
+ *  作为OASIS Open Catalog文件的扩展,此类支持基于后缀的匹配和外部RFC2483解析器。
+ * 
+ * 
  * @see Catalog
  *
  * @author Norman Walsh
@@ -54,6 +68,11 @@ public class Resolver extends Catalog {
    * The URISUFFIX Catalog Entry type.
    *
    * <p>URI suffix entries match URIs that end in a specified suffix.</p>
+   * <p>
+   *  URISUFFIX目录条目类型。
+   * 
+   *  <p> URI后缀条目匹配以指定后缀结尾的URI。</p>
+   * 
    */
   public static final int URISUFFIX = CatalogEntry.addEntryType("URISUFFIX", 2);
 
@@ -62,6 +81,11 @@ public class Resolver extends Catalog {
    *
    * <p>System suffix entries match system identifiers that end in a
    * specified suffix.</p>
+   * <p>
+   *  SYSTEMSUFFIX目录条目类型。
+   * 
+   *  <p>系统后缀条目匹配以指定后缀结尾的系统标识符。</p>
+   * 
    */
   public static final int SYSTEMSUFFIX = CatalogEntry.addEntryType("SYSTEMSUFFIX", 2);
 
@@ -69,6 +93,11 @@ public class Resolver extends Catalog {
    * The RESOLVER Catalog Entry type.
    *
    * <p>A hook for providing support for web-based backup resolvers.</p>
+   * <p>
+   *  RESOLVER商品类型。
+   * 
+   *  <p>为基于Web的备份解析器提供支持的钩子。</p>
+   * 
    */
   public static final int RESOLVER = CatalogEntry.addEntryType("RESOLVER", 1);
 
@@ -79,12 +108,20 @@ public class Resolver extends Catalog {
    * but this entry type is used to indicate that a reverse lookup is
    * being performed. (This allows the Resolver to implement
    * RFC2483 I2N and I2NS.)
+   * <p>
+   *  SYSTEMREVERSE目录条目类型。
+   * 
+   *  <p>这是一个黑客。没有实际的SYSTEMREVERSE条目,但此条目类型用于指示正​​在执行反向查找。 (这允许Resolver实现RFC2483 I2N和I2NS。)
+   * 
    */
   public static final int SYSTEMREVERSE
     = CatalogEntry.addEntryType("SYSTEMREVERSE", 1);
 
   /**
    * Setup readers.
+   * <p>
+   *  设置读卡器。
+   * 
    */
   public void setupReaders() {
     SAXParserFactory spf = catalogManager.useServicesMechanism() ?
@@ -115,6 +152,12 @@ public class Resolver extends Catalog {
    * base URI), and maintaining other information about the current
    * catalog.</p>
    *
+   * <p>
+   * 清理和处理目录条目。
+   * 
+   *  <p>此方法处理每个目录条目,将映射的相对系统标识符更改为绝对值(基于当前基本URI),并维护有关当前目录的其他信息。</p>
+   * 
+   * 
    * @param entry The CatalogEntry to process.
    */
   public void addEntry(CatalogEntry entry) {
@@ -151,6 +194,16 @@ public class Resolver extends Catalog {
    *
    * <p>URI comparison is case sensitive.</p>
    *
+   * <p>
+   *  返回适用的URI。
+   * 
+   *  <p>如果指定的URI的目录中存在URI条目,请返回映射的值。</p>
+   * 
+   *  <p>在Resolver(而不是目录)类中,如果通常的算法找不到URI,则考虑URISUFFIX条目。</p>
+   * 
+   *  <p> URI比较区分大小写。</p>
+   * 
+   * 
    * @param uri The URI to locate in the catalog.
    *
    * @return The resolved URI.
@@ -208,6 +261,16 @@ public class Resolver extends Catalog {
    * the system identifier provided and the SYSTEM entries in the
    * Catalog is case-insensitive.</p>
    *
+   * <p>
+   *  返回适用的SYSTEM系统标识符,如有必要,请求使用外部RESOLVER。
+   * 
+   *  <p>如果在指定的系统ID的目录中存在SYSTEM条目,请返回映射的值。</p>
+   * 
+   *  <p>在Resolver(而不是目录)类中,如果没有通过通常的算法找到URI,则考虑SYSTEMSUFFIX条目。</p>
+   * 
+   *  <p>在基于Windows的操作系统上,所提供的系统标识符与目录中的SYSTEM条目之间的比较不区分大小写。</p>
+   * 
+   * 
    * @param systemId The system ID to locate in the catalog.
    *
    * @return The system identifier to use for systemId.
@@ -264,6 +327,14 @@ public class Resolver extends Catalog {
    * external resolver. Further, if a systemId is present, the external
    * resolver(s) will be queried for that before the publicId.</p>
    *
+   * <p>
+   *  返回适用的PUBLIC或SYSTEM标识符,如有必要,使用外部解析器。
+   * 
+   *  <p>此方法搜索Catalog并返回为给定系统或公共标识符指定的系统标识符。如果在目录中找不到合适的PUBLIC或SYSTEM条目,则返回null。</p>
+   * 
+   * <p>请注意,将优先使用当前目录(或从属目录)中的系统或公共标识符,而不使用外部解析器。此外,如果存在systemId,那么将在publicId之前查询外部解析器。</p>
+   * 
+   * 
    * @param publicId The public identifier to locate in the catalog.
    * Public identifiers are normalized before comparison.
    * @param systemId The nominal system identifier for the entity
@@ -313,6 +384,10 @@ public class Resolver extends Catalog {
     /**
      * Query an external RFC2483 resolver for a system identifier.
      *
+     * <p>
+     *  查询系统标识符的外部RFC2483解析器。
+     * 
+     * 
      * @param systemId The system ID to locate.
      * @param resolver The name of the resolver to use.
      *
@@ -331,6 +406,10 @@ public class Resolver extends Catalog {
     /**
      * Query an external RFC2483 resolver for a public identifier.
      *
+     * <p>
+     *  查询外部RFC2483解析器的公共标识符。
+     * 
+     * 
      * @param publicId The system ID to locate.
      * @param resolver The name of the resolver to use.
      *
@@ -349,6 +428,10 @@ public class Resolver extends Catalog {
     /**
      * Query an external RFC2483 resolver.
      *
+     * <p>
+     *  查询外部RFC2483解析器。
+     * 
+     * 
      * @param resolver The URL of the RFC2483 resolver.
      * @param command The command to send the resolver.
      * @param arg1 The first argument to the resolver.
@@ -405,6 +488,10 @@ public class Resolver extends Catalog {
     /**
      * Append two vectors, returning the result.
      *
+     * <p>
+     *  追加两个向量,返回结果。
+     * 
+     * 
      * @param vec The first vector
      * @param appvec The vector to be appended
      * @return The vector vec, with appvec's elements appended to it
@@ -421,6 +508,10 @@ public class Resolver extends Catalog {
     /**
      * Find the URNs for a given system identifier in all catalogs.
      *
+     * <p>
+     *  查找所有目录中给定系统标识符的URN。
+     * 
+     * 
      * @param systemId The system ID to locate.
      *
      * @return A vector of URNs that map to the systemId.
@@ -447,6 +538,10 @@ public class Resolver extends Catalog {
     /**
      * Find the URN for a given system identifier.
      *
+     * <p>
+     *  找到给定系统标识符的URN。
+     * 
+     * 
      * @param systemId The system ID to locate.
      *
      * @return A (single) URN that maps to the systemId.
@@ -480,6 +575,18 @@ public class Resolver extends Catalog {
      * the system identifier provided and the SYSTEM entries in the
      * Catalog is case-insensitive.</p>
      *
+     * <p>
+     *  返回适用的SYSTEM系统标识符。
+     * 
+     *  <p>如果指定的系统ID的目录中存在一个或多个SYSTEM条目,请返回映射的值。</p>
+     * 
+     *  <p>调用者负责在调用此方法之前对系统标识符进行任何必要的标准化。例如,文档中的相对系统标识符可能会在尝试解析之前转换为绝对系统标识符。</p>
+     * 
+     *  <p>请注意,此函数将强制加载所有从属目录。</p>
+     * 
+     *  <p>在基于Windows的操作系统上,所提供的系统标识符与目录中的SYSTEM条目之间的比较不区分大小写。</p>
+     * 
+     * 
      * @param systemId The system ID to locate in the catalog.
      *
      * @return The system identifier to use for the notation.
@@ -519,6 +626,12 @@ public class Resolver extends Catalog {
      * <p>If one or more SYSTEM entries exists in the catalog file
      * for the system ID specified, return the mapped values.</p>
      *
+     * <p>
+     *  返回此目录中的所有适用的SYSTEM系统标识符。
+     * 
+     *  <p>如果指定的系统ID的目录文件中存在一个或多个SYSTEM条目,请返回映射的值。</p>
+     * 
+     * 
      * @param systemId The system ID to locate in the catalog
      *
      * @return A vector of the mapped system identifiers or null
@@ -547,6 +660,10 @@ public class Resolver extends Catalog {
     /**
      * Find the URNs for a given system identifier in the current catalog.
      *
+     * <p>
+     *  查找当前目录中给定系统标识符的URN。
+     * 
+     * 
      * @param systemId The system ID to locate.
      *
      * @return A vector of URNs that map to the systemId.
@@ -581,6 +698,10 @@ public class Resolver extends Catalog {
      * name, public, and system identifiers. In some contexts, these
      * may be null.</p>
      *
+     * <p>
+     * 搜索从属目录,按顺序,查找所有匹配。
+     * 
+     * 
      * @param entityType The CatalogEntry type for which this query is
      * being conducted. This is necessary in order to do the approprate
      * query on a subordinate catalog.

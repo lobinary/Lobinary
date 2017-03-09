@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,12 @@ import javax.swing.text.Caret;
  * for short term storage or RMI between applications running the same
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
+ * <p>
+ *  Windows组件的翻译。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
  */
 public class WindowsEditorPaneUI extends BasicEditorPaneUI
 {
@@ -47,6 +54,10 @@ public class WindowsEditorPaneUI extends BasicEditorPaneUI
     /**
      * Creates a UI for a JEditorPane.
      *
+     * <p>
+     *  创建JEditorPane的UI。
+     * 
+     * 
      * @param c the configurable text component
      * @return the UI
      */
@@ -60,6 +71,9 @@ public class WindowsEditorPaneUI extends BasicEditorPaneUI
      * can be redefined to provide something else that implements
      * the InputPosition interface or a subclass of DefaultCaret.
      *
+     * <p>
+     *  创建用于插入符的对象。默认情况下创建WindowsCaret的实例。此方法可以重新定义,以提供其他实现InputPosition接口或DefaultCaret的子类。
+     * 
      * @return the caret object
      */
     protected Caret createCaret() {

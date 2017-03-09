@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,13 @@ import java.io.PrintStream;
  * <code>expandCode</code> added by Robin Luiten
  * The strLen table to give quick access to the lenght of an expanded
  * code for use by the <code>expandCode</code> method added by Robin.
+ * <p>
+ *  通用LZW字符串表。
+ * 由Adam Doppelt提取GIFEncoder由Robin Luiten添加的代码<code> expandCode </code>由Robin Luiten添加strLen表可快速访问扩展代码的长
+ * 度,以供<code> expandCode </code>方法使用添加由Robin。
+ *  通用LZW字符串表。
+ * 
+ * 
  **/
 public class LZWStringTable {
     /** codesize + Reserved Codes */
@@ -56,11 +64,17 @@ public class LZWStringTable {
     /*
      * each entry corresponds to a code and contains the length of data
      * that the code expands to when decoded.
+     * <p>
+     *  每个条目对应于代码并且包含当解码时代码扩展到的数据的长度。
+     * 
      */
     int[] strLen;
 
     /*
      * Constructor allocate memory for string store data
+     * <p>
+     *  构造函数为字符串存储数据分配内存
+     * 
      */
     public LZWStringTable() {
         strChr = new byte[MAXSTR];
@@ -70,6 +84,8 @@ public class LZWStringTable {
     }
 
     /*
+    /* <p>
+    /* 
      * @param index value of -1 indicates no predecessor [used in initialisation]
      * @param b the byte [character] to add to the string store which follows
      * the predecessor string specified the index.
@@ -102,6 +118,8 @@ public class LZWStringTable {
     }
 
     /*
+    /* <p>
+    /* 
      * @param index index to prefix string
      * @param b the character that follws the index prefix
      * @return b if param index is HASH_FREE. Else return the code
@@ -126,6 +144,8 @@ public class LZWStringTable {
     }
 
     /*
+    /* <p>
+    /* 
      * @param codesize the size of code to be preallocated for the
      * string store.
      */
@@ -154,6 +174,10 @@ public class LZWStringTable {
      * previous return. Succesive negative return values should be negated and
      * added together for next skip parameter value with same code.
      *
+     * <p>
+     *  如果扩展数据不适合数组,则适合的数据将写入buf,返回值表示已将多少扩展代码写入buf。下一次调用expandCode()应该使用相同的代码,并且skip参数设置为上一个返回的否定值。
+     * 成功的负返回值应该被取消并且加在一起以用于具有相同代码的下一跳跃参数值。
+     * 
      * @param buf buffer to place expanded data into
      * @param offset offset to place expanded data
      * @param code the code to expand to the byte array it represents.

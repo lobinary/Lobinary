@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.ior;
@@ -52,6 +56,9 @@ import com.sun.corba.se.impl.orbutil.HexOutputStream ;
  * This class implements a very simply IOR representation
  * which must be completely ORBImpl free so that this class
  * can be used in the implementation of a portable StubDelegateImpl.
+ * <p>
+ *  这个类实现了一个非常简单的IOR表示,它必须是完全ORBImpl自由的,以便这个类可以用于实现一个可移植的StubDelegateImpl。
+ * 
  */
 public class StubIORImpl
 {
@@ -154,6 +161,10 @@ public class StubIORImpl
     /**
      * Returns a hash code value for the object which is the same for all stubs
      * that represent the same remote object.
+     * <p>
+     *  返回对于表示同一远程对象的所有存根都相同的对象的哈希代码值。
+     * 
+     * 
      * @return the hash code value.
      */
     public synchronized int hashCode()
@@ -246,6 +257,9 @@ public class StubIORImpl
      * Returns a string representation of this stub. Returns the same string
      * for all stubs that represent the same remote object.
      * "SimpleIORImpl[<typeName>,[<profileID>]data, ...]"
+     * <p>
+     *  返回此存根的字符串表示形式。为表示同一远程对象的所有存根返回相同的字符串。 "SimpleIORImpl [<typeName>,[<profileID>] data,...]
+     * 
      * @return a string representation of this stub.
      */
     public String toString()

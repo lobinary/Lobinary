@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,16 @@ import static javax.swing.ClientPropertyKey.PopupFactory_FORCE_HEAVYWEIGHT_POPUP
  *   popup.hide();
  * </pre>
  *
+ * <p>
+ *  <code> PopupFactory </code>,顾名思义,用于获取<code> Popup </code>的实例。
+ *  <code> Popup </code>用于显示特定包含层次结构中所有其他<code> Component </code>之上的<code> Component </code>。
+ * 一般的合同是,一旦你从一个<code> PopupFactory </code>中获得一个<code> Popup </code>,你必须调用<code> Popup </code> 。典型用法是：。
+ * <pre>
+ *  PopupFactory factory = PopupFactory.getSharedInstance(); Popup popup = factory.getPopup(owner,conten
+ * ts,x,y); popup.show(); ... popup.hide();。
+ * </pre>
+ * 
+ * 
  * @see Popup
  *
  * @since 1.4
@@ -64,32 +75,51 @@ public class PopupFactory {
      * The shared instanceof <code>PopupFactory</code> is per
      * <code>AppContext</code>. This is the key used in the
      * <code>AppContext</code> to locate the <code>PopupFactory</code>.
+     * <p>
+     *  <code> PopupFactory </code>的共享实例是每个<code> AppContext </code>。
+     * 这是在<code> AppContext </code>中用于定位<code> PopupFactory </code>的键。
+     * 
      */
     private static final Object SharedInstanceKey =
         new StringBuffer("PopupFactory.SharedInstanceKey");
 
     /**
      * Max number of items to store in any one particular cache.
+     * <p>
+     *  要存储在任何特定高速缓存中的项目的最大数量。
+     * 
      */
     private static final int MAX_CACHE_SIZE = 5;
 
     /**
      * Key used to indicate a light weight popup should be used.
+     * <p>
+     *  应使用用于指示轻量弹出框的键。
+     * 
      */
     static final int LIGHT_WEIGHT_POPUP   = 0;
 
     /**
      * Key used to indicate a medium weight Popup should be used.
+     * <p>
+     *  应使用用于指示中等重量Popup的键。
+     * 
      */
     static final int MEDIUM_WEIGHT_POPUP  = 1;
 
     /*
      * Key used to indicate a heavy weight Popup should be used.
+     * <p>
+     *  用于指示重量Popup的键应该使用。
+     * 
      */
     static final int HEAVY_WEIGHT_POPUP   = 2;
 
     /**
      * Default type of Popup to create.
+     * <p>
+     *  要创建的弹出窗口的默认类型。
+     * 
      */
     private int popupType = LIGHT_WEIGHT_POPUP;
 
@@ -100,6 +130,11 @@ public class PopupFactory {
      * This will throw an <code>IllegalArgumentException</code> if
      * <code>factory</code> is null.
      *
+     * <p>
+     *  设置将用于获取<code> Popup </code>的<code> PopupFactory </code>。
+     * 如果<code> factory </code>为null,则会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param factory Shared PopupFactory
      * @exception IllegalArgumentException if <code>factory</code> is null
      * @see #getPopup
@@ -115,6 +150,10 @@ public class PopupFactory {
      * Returns the shared <code>PopupFactory</code> which can be used
      * to obtain <code>Popup</code>s.
      *
+     * <p>
+     *  返回共享<code> PopupFactory </code>,可用于获取<code> Popup </code>。
+     * 
+     * 
      * @return Shared PopupFactory
      */
     public static PopupFactory getSharedInstance() {
@@ -132,6 +171,9 @@ public class PopupFactory {
     /**
      * Provides a hint as to the type of <code>Popup</code> that should
      * be created.
+     * <p>
+     * 提供关于应该创建的<code> Popup </code>类型的提示。
+     * 
      */
     void setPopupType(int type) {
         popupType = type;
@@ -139,6 +181,9 @@ public class PopupFactory {
 
     /**
      * Returns the preferred type of Popup to create.
+     * <p>
+     *  返回要创建的Popup的首选类型。
+     * 
      */
     int getPopupType() {
         return popupType;
@@ -156,6 +201,13 @@ public class PopupFactory {
      * the <code>Popup</code> may not display at <code>x</code> and
      * <code>y</code>.
      *
+     * <p>
+     *  为包含组件<code> contents </code>的组件<code>所有者</code>创建<code> Popup </code>。
+     *  <code> owner </code>用于确定<code> Window </code>新的<code> Popup </code>是<code> Component </code> >创建到。
+     * 空的<code>所有者</code>意味着没有有效的父。 <code> x </code>和<code> y </code>指定放置<code> Popup </code>的首选初始位置。
+     * 基于屏幕大小或其他参数,<code> Popup </code>可能不会显示在<code> x </code>和<code> y </code>。
+     * 
+     * 
      * @param owner    Component mouse coordinates are relative to, may be null
      * @param contents Contents of the Popup
      * @param x        Initial x screen coordinate
@@ -182,6 +234,9 @@ public class PopupFactory {
 
     /**
      * Returns the popup type to use for the specified parameters.
+     * <p>
+     *  返回用于指定参数的弹出窗口类型。
+     * 
      */
     private int getPopupType(Component owner, Component contents,
                              int ownerX, int ownerY) {
@@ -217,6 +272,9 @@ public class PopupFactory {
     /**
      * Obtains the appropriate <code>Popup</code> based on
      * <code>popupType</code>.
+     * <p>
+     *  基于<code> popupType </code>获取适当的<code> Popup </code>。
+     * 
      */
     private Popup getPopup(Component owner, Component contents,
                            int ownerX, int ownerY, int popupType) {
@@ -243,6 +301,9 @@ public class PopupFactory {
 
     /**
      * Creates a headless popup
+     * <p>
+     *  创建无头弹出窗口
+     * 
      */
     private Popup getHeadlessPopup(Component owner, Component contents,
                                    int ownerX, int ownerY) {
@@ -251,6 +312,9 @@ public class PopupFactory {
 
     /**
      * Creates a light weight popup.
+     * <p>
+     *  创建一个轻量级弹出窗口。
+     * 
      */
     private Popup getLightWeightPopup(Component owner, Component contents,
                                          int ownerX, int ownerY) {
@@ -260,6 +324,9 @@ public class PopupFactory {
 
     /**
      * Creates a medium weight popup.
+     * <p>
+     *  创建中等重量的弹出窗口。
+     * 
      */
     private Popup getMediumWeightPopup(Component owner, Component contents,
                                           int ownerX, int ownerY) {
@@ -269,6 +336,9 @@ public class PopupFactory {
 
     /**
      * Creates a heavy weight popup.
+     * <p>
+     *  创建一个重量的弹出窗口。
+     * 
      */
     private Popup getHeavyWeightPopup(Component owner, Component contents,
                                          int ownerX, int ownerY) {
@@ -282,6 +352,9 @@ public class PopupFactory {
     /**
      * Returns true if the Component <code>i</code> inside a heavy weight
      * <code>Popup</code>.
+     * <p>
+     *  如果组件<code> i </code>在重量<code> Popup </code>内,则返回true。
+     * 
      */
     private boolean invokerInHeavyWeightPopup(Component i) {
         if (i != null) {
@@ -299,6 +372,9 @@ public class PopupFactory {
 
     /**
      * Popup implementation that uses a Window as the popup.
+     * <p>
+     *  使用窗口作为弹出窗口的弹出窗口实现。
+     * 
      */
     private static class HeavyWeightPopup extends Popup {
         private static final Object heavyWeightPopupCacheKey =
@@ -309,6 +385,9 @@ public class PopupFactory {
         /**
          * Returns either a new or recycled <code>Popup</code> containing
          * the specified children.
+         * <p>
+         *  返回包含指定子项的新的或循环的<code> Popup </code>。
+         * 
          */
         static Popup getHeavyWeightPopup(Component owner, Component contents,
                                          int ownerX, int ownerY) {
@@ -366,6 +445,10 @@ public class PopupFactory {
          * associated with <code>window</code>. This will return null if
          * there is no <code>HeavyWeightPopup</code> associated with
          * <code>window</code>.
+         * <p>
+         *  返回与<code> window </code>关联的先前处理的重量<code> Popup </code>。
+         * 如果没有与<code> window </code>关联的<code> HeavyWeightPopup </code>,则返回null。
+         * 
          */
         private static HeavyWeightPopup getRecycledHeavyWeightPopup(Window w) {
             synchronized (HeavyWeightPopup.class) {
@@ -390,6 +473,9 @@ public class PopupFactory {
          * Returns the cache to use for heavy weight popups. Maps from
          * <code>Window</code> to a <code>List</code> of
          * <code>HeavyWeightPopup</code>s.
+         * <p>
+         * 返回用于重量大的弹出窗口的缓存。映射从<code> Window </code>到<code> HeavyWeightPopup </code>的<code> List </code>。
+         * 
          */
         private static Map<Window, List<HeavyWeightPopup>> getHeavyWeightPopupCache() {
             synchronized (HeavyWeightPopup.class) {
@@ -407,6 +493,9 @@ public class PopupFactory {
 
         /**
          * Recycles the passed in <code>HeavyWeightPopup</code>.
+         * <p>
+         *  循环传递在<code> HeavyWeightPopup </code>中。
+         * 
          */
         private static void recycleHeavyWeightPopup(HeavyWeightPopup popup) {
             synchronized (HeavyWeightPopup.class) {
@@ -462,6 +551,9 @@ public class PopupFactory {
 
         /**
          * Enables or disables cache for current object.
+         * <p>
+         *  启用或禁用当前对象的缓存。
+         * 
          */
         void setCacheEnabled(boolean enable) {
             isCacheEnabled = enable;
@@ -483,6 +575,9 @@ public class PopupFactory {
          * As we recycle the <code>Window</code>, we don't want to dispose it,
          * thus this method does nothing, instead use <code>_dipose</code>
          * which will handle the disposing.
+         * <p>
+         *  当我们回收<code> Window </code>时,我们不想处理它,因此这个方法什么都不做,而是使用<code> _dipose </code>来处理。
+         * 
          */
         void dispose() {
         }
@@ -497,6 +592,9 @@ public class PopupFactory {
     /**
      * ContainerPopup consolidates the common code used in the light/medium
      * weight implementations of <code>Popup</code>.
+     * <p>
+     *  ContainerPopup合并了在<code> Popup </code>的轻量/中等重量实现中使用的公共代码。
+     * 
      */
     private static class ContainerPopup extends Popup {
         /** Component we are to be added to. */
@@ -570,6 +668,9 @@ public class PopupFactory {
         /**
          * Returns true if popup can fit the screen and the owner's top parent.
          * It determines can popup be lightweight or mediumweight.
+         * <p>
+         *  如果弹出式窗口适合屏幕和所有者的顶级父级,则返回true。它确定可以弹出为轻量级或中等。
+         * 
          */
         boolean fitsOnScreen() {
             boolean result = false;
@@ -637,6 +738,9 @@ public class PopupFactory {
 
     /**
      * Popup implementation that is used in headless environment.
+     * <p>
+     *  在无头环境中使用的Popup实现。
+     * 
      */
     private static class HeadlessPopup extends ContainerPopup {
         static Popup getHeadlessPopup(Component owner, Component contents,
@@ -659,6 +763,9 @@ public class PopupFactory {
 
     /**
      * Popup implementation that uses a JPanel as the popup.
+     * <p>
+     *  使用JPanel作为弹出窗口的Popup实现。
+     * 
      */
     private static class LightWeightPopup extends ContainerPopup {
         private static final Object lightWeightPopupCacheKey =
@@ -668,6 +775,9 @@ public class PopupFactory {
          * Returns a light weight <code>Popup</code> implementation. If
          * the <code>Popup</code> needs more space that in available in
          * <code>owner</code>, this will return null.
+         * <p>
+         *  返回轻量的<code> Popup </code>实现。如果<code> Popup </code>需要更多在<code> owner </code>中可用的空间,则返回null。
+         * 
          */
         static Popup getLightWeightPopup(Component owner, Component contents,
                                          int ownerX, int ownerY) {
@@ -687,6 +797,9 @@ public class PopupFactory {
 
         /**
          * Returns the cache to use for heavy weight popups.
+         * <p>
+         *  返回用于重量大的弹出窗口的缓存。
+         * 
          */
         private static List<LightWeightPopup> getLightWeightPopupCache() {
             List<LightWeightPopup> cache = (List<LightWeightPopup>)SwingUtilities.appContextGet(
@@ -700,6 +813,9 @@ public class PopupFactory {
 
         /**
          * Recycles the LightWeightPopup <code>popup</code>.
+         * <p>
+         *  循环使用LightWeightPopup <code>弹出窗口</code>。
+         * 
          */
         private static void recycleLightWeightPopup(LightWeightPopup popup) {
             synchronized (LightWeightPopup.class) {
@@ -713,6 +829,9 @@ public class PopupFactory {
         /**
          * Returns a previously used <code>LightWeightPopup</code>, or null
          * if none of the popups have been recycled.
+         * <p>
+         *  返回先前使用的<code> LightWeightPopup </code>,如果没有回收弹出窗口,则返回null。
+         * 
          */
         private static LightWeightPopup getRecycledLightWeightPopup() {
             synchronized (LightWeightPopup.class) {
@@ -793,6 +912,9 @@ public class PopupFactory {
 
         /**
          * Resets the <code>Popup</code> to an initial state.
+         * <p>
+         *  将<code> Popup </code>重置为初始状态。
+         * 
          */
         void reset(Component owner, Component contents, int ownerX,
                    int ownerY) {
@@ -811,6 +933,9 @@ public class PopupFactory {
 
     /**
      * Popup implementation that uses a Panel as the popup.
+     * <p>
+     *  使用Panel作为弹出窗口的Popup实现。
+     * 
      */
     private static class MediumWeightPopup extends ContainerPopup {
         private static final Object mediumWeightPopupCacheKey =
@@ -824,6 +949,9 @@ public class PopupFactory {
          * Returns a medium weight <code>Popup</code> implementation. If
          * the <code>Popup</code> needs more space that in available in
          * <code>owner</code>, this will return null.
+         * <p>
+         *  返回中等重量的<code> Popup </code>实现。如果<code> Popup </code>需要更多在<code> owner </code>中可用的空间,则返回null。
+         * 
          */
         static Popup getMediumWeightPopup(Component owner, Component contents,
                                           int ownerX, int ownerY) {
@@ -843,6 +971,9 @@ public class PopupFactory {
 
         /**
          * Returns the cache to use for medium weight popups.
+         * <p>
+         *  返回用于中等弹出窗口的缓存。
+         * 
          */
         private static List<MediumWeightPopup> getMediumWeightPopupCache() {
             List<MediumWeightPopup> cache = (List<MediumWeightPopup>)SwingUtilities.appContextGet(
@@ -857,6 +988,9 @@ public class PopupFactory {
 
         /**
          * Recycles the MediumWeightPopup <code>popup</code>.
+         * <p>
+         * 回收MediumWeightPopup <code>弹出窗口</code>。
+         * 
          */
         private static void recycleMediumWeightPopup(MediumWeightPopup popup) {
             synchronized (MediumWeightPopup.class) {
@@ -870,6 +1004,9 @@ public class PopupFactory {
         /**
          * Returns a previously used <code>MediumWeightPopup</code>, or null
          * if none of the popups have been recycled.
+         * <p>
+         *  返回先前使用的<code> MediumWeightPopup </code>,如果没有回收弹出窗口,则返回null。
+         * 
          */
         private static MediumWeightPopup getRecycledMediumWeightPopup() {
             synchronized (MediumWeightPopup.class) {
@@ -904,6 +1041,10 @@ public class PopupFactory {
               Find the top level window,
               if it has a layered pane,
               add to that, otherwise
+            /* <p>
+            /*  找到顶级窗口,如果它有一个分层窗格,添加到,否则
+            /* 
+            /* 
               add to the window. */
             while (!(parent instanceof Window || parent instanceof Applet) &&
                    (parent!=null)) {
@@ -947,6 +1088,8 @@ public class PopupFactory {
 
         /**
          * Resets the <code>Popup</code> to an initial state.
+         * <p>
+         *  将<code> Popup </code>重置为初始状态。
          */
         void reset(Component owner, Component contents, int ownerX,
                    int ownerY) {

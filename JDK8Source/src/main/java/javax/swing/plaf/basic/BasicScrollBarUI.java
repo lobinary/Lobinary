@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,10 @@ import static sun.swing.SwingUtilities2.drawVLine;
 /**
  * Implementation of ScrollBarUI for the Basic Look and Feel
  *
+ * <p>
+ *  实现ScrollBarUI的基本外观和感觉
+ * 
+ * 
  * @author Rich Schiavi
  * @author David Kloba
  * @author Hans Muller
@@ -94,6 +99,8 @@ public class BasicScrollBarUI
     private final static int scrollSpeedThrottle = 60; // delay in milli seconds
 
     /** True indicates a middle click will absolutely position the
+    /* <p>
+    /* 
      * scrollbar. */
     private boolean supportsAbsolutePositioning;
 
@@ -101,6 +108,10 @@ public class BasicScrollBarUI
      * Hint as to what width (when vertical) or height (when horizontal)
      * should be.
      *
+     * <p>
+     *  提示什么宽度(当垂直时)或高度(水平时)应该。
+     * 
+     * 
      * @since 1.7
      */
     protected int scrollBarWidth;
@@ -112,10 +123,16 @@ public class BasicScrollBarUI
     /**
      * Determine whether scrollbar layout should use cached value or adjusted
      * value returned by scrollbar's <code>getValue</code>.
+     * <p>
+     *  确定滚动条布局是否应使用缓存值或由滚动条的<code> getValue </code>返回的调整值。
+     * 
      */
     private boolean useCachedValue = false;
     /**
      * The scrollbar value is cached to save real value if the view is adjusted.
+     * <p>
+     *  如果视图被调整,滚动条值被缓存以保存实际值。
+     * 
      */
     private int scrollBarValue;
 
@@ -124,6 +141,10 @@ public class BasicScrollBarUI
      * number. If negative, then an overlap between the button and track will occur,
      * which is useful for shaped buttons.
      *
+     * <p>
+     *  增量按钮和轨道之间的距离。这可以是负数。如果为负,则将发生按钮和轨道之间的重叠,这对于成形按钮是有用的。
+     * 
+     * 
      * @since 1.7
      */
     protected int incrGap;
@@ -133,6 +154,10 @@ public class BasicScrollBarUI
      * number. If negative, then an overlap between the button and track will occur,
      * which is useful for shaped buttons.
      *
+     * <p>
+     *  减量按钮和轨道之间的距离。这可以是负数。如果为负,则将发生按钮和轨道之间的重叠,这对于成形按钮是有用的。
+     * 
+     * 
      * @since 1.7
      */
     protected int decrGap;
@@ -406,6 +431,10 @@ public class BasicScrollBarUI
     /**
      * Sets whether or not the mouse is currently over the thumb.
      *
+     * <p>
+     *  设置是否鼠标当前位于缩略图上方。
+     * 
+     * 
      * @param active True indicates the thumb is currently active.
      * @since 1.5
      */
@@ -419,6 +448,10 @@ public class BasicScrollBarUI
     /**
      * Returns true if the mouse is currently over the thumb.
      *
+     * <p>
+     *  如果鼠标当前位于缩略图上,则返回true。
+     * 
+     * 
      * @return true if the thumb is currently active
      * @since 1.5
      */
@@ -446,6 +479,12 @@ public class BasicScrollBarUI
      * The <code>preferredSize</code> is only computed once, subsequent
      * calls to this method just return a cached size.
      *
+     * <p>
+     *  垂直滚动条的首选宽度是(非<code> null </code>)增量/减量按钮的首选宽度的最大值,以及缩略图的最小宽度。优选的高度是相同部件的优选高度的总和。水平滚动条的首选大小的基础是类似的。
+     * <p>
+     *  <code> preferredSize </code>只计算一次,对此方法的后续调用只返回缓存的大小。
+     * 
+     * 
      * @param c the <code>JScrollBar</code> that's delegating this method to us
      * @return the preferred size of a Basic JScrollBar
      * @see #getMaximumSize
@@ -459,6 +498,8 @@ public class BasicScrollBarUI
 
 
     /**
+    /* <p>
+    /* 
      * @param c The JScrollBar that's delegating this method to us.
      * @return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
      * @see #getMinimumSize
@@ -600,6 +641,12 @@ public class BasicScrollBarUI
      * <b>Warning </b>: the value returned by this method should not be
      * be modified, it's a shared static constant.
      *
+     * <p>
+     * 返回拇指可接受的最小尺寸。如果滚动条变得如此小以至于此大小不可用,则拇指将被隐藏。
+     * <p>
+     *  <b>警告</b>：此方法返回的值不应被修改,它是一个共享静态常量。
+     * 
+     * 
      * @return The smallest acceptable size for the thumb.
      * @see #getMaximumThumbSize
      */
@@ -615,6 +662,12 @@ public class BasicScrollBarUI
      * <b>Warning </b>: the value returned by this method should not be
      * be modified, it's a shared static constant.
      *
+     * <p>
+     *  返回拇指可接受的最大尺寸。要创建固定大小的缩略图,请使用此方法,并且<code> getMinimumThumbSize </code>返回相同的值。
+     * <p>
+     *  <b>警告</b>：此方法返回的值不应被修改,它是一个共享静态常量。
+     * 
+     * 
      * @return The largest acceptable size for the thumb.
      * @see #getMinimumThumbSize
      */
@@ -625,6 +678,9 @@ public class BasicScrollBarUI
 
     /*
      * LayoutManager Implementation
+     * <p>
+     *  LayoutManager实现
+     * 
      */
 
     public void addLayoutComponent(String name, Component child) {}
@@ -649,12 +705,18 @@ public class BasicScrollBarUI
 
         /*
          * Width and left edge of the buttons and thumb.
+         * <p>
+         *  宽度和左边缘的按钮和拇指。
+         * 
          */
         int itemW = sbSize.width - (sbInsets.left + sbInsets.right);
         int itemX = sbInsets.left;
 
         /* Nominal locations of the buttons, assuming their preferred
          * size will fit.
+         * <p>
+         *  尺寸将适合。
+         * 
          */
         boolean squareButtons = DefaultLookup.getBoolean(
             scrollbar, this, "ScrollBar.squareButtons", false);
@@ -669,6 +731,9 @@ public class BasicScrollBarUI
         /* The thumb must fit within the height left over after we
          * subtract the preferredSize of the buttons and the insets
          * and the gaps
+         * <p>
+         *  减去按钮和插图和间隙的preferredSize
+         * 
          */
         int sbInsetsH = sbInsets.top + sbInsets.bottom;
         int sbButtonsH = decrButtonH + incrButtonH;
@@ -680,6 +745,9 @@ public class BasicScrollBarUI
          * to avoid numerical problems in computing thumbY.  Enforce
          * the thumbs min/max dimensions.  If the thumb doesn't
          * fit in the track (trackH) we'll hide it later.
+         * <p>
+         *  其中拇指在底部边缘处被特别处理以避免计算thumbY中的数值问题。强制缩放最小/最大尺寸。如果拇指不适合在轨道(trackH),我们将隐藏它。
+         * 
          */
         float min = sb.getMinimum();
         float extent = sb.getVisibleAmount();
@@ -700,6 +768,9 @@ public class BasicScrollBarUI
 
         /* If the buttons don't fit, allocate half of the available
          * space to each and move the lower one (incrButton) down.
+         * <p>
+         *  空间到每个和移动下一个(incrButton)下来。
+         * 
          */
         int sbAvailButtonH = (sbSize.height - sbInsetsH);
         if (sbAvailButtonH < sbButtonsH) {
@@ -710,6 +781,7 @@ public class BasicScrollBarUI
         incrButton.setBounds(itemX, incrButtonY, itemW, incrButtonH);
 
         /* Update the trackRect field.
+        /* <p>
          */
         int itrackY = decrButtonY + decrButtonH + decrGap;
         int itrackH = incrButtonY - incrGap - itrackY;
@@ -718,6 +790,9 @@ public class BasicScrollBarUI
         /* If the thumb isn't going to fit, zero it's bounds.  Otherwise
          * make sure it fits between the buttons.  Note that setting the
          * thumbs bounds will cause a repaint.
+         * <p>
+         *  确保它适合在按钮之间。注意,设置大拇指边界将导致重绘。
+         * 
          */
         if(thumbH >= (int)trackH)       {
             if (UIManager.getBoolean("ScrollBar.alwaysShowThumb")) {
@@ -747,6 +822,7 @@ public class BasicScrollBarUI
         Insets sbInsets = sb.getInsets();
 
         /* Height and top edge of the buttons and thumb.
+        /* <p>
          */
         int itemH = sbSize.height - (sbInsets.top + sbInsets.bottom);
         int itemY = sbInsets.top;
@@ -755,6 +831,9 @@ public class BasicScrollBarUI
 
         /* Nominal locations of the buttons, assuming their preferred
          * size will fit.
+         * <p>
+         *  尺寸将适合。
+         * 
          */
         boolean squareButtons = DefaultLookup.getBoolean(
             scrollbar, this, "ScrollBar.squareButtons", false);
@@ -775,6 +854,9 @@ public class BasicScrollBarUI
         /* The thumb must fit within the width left over after we
          * subtract the preferredSize of the buttons and the insets
          * and the gaps
+         * <p>
+         *  减去按钮和插图和间隙的preferredSize
+         * 
          */
         int sbInsetsW = sbInsets.left + sbInsets.right;
         int sbButtonsW = leftButtonW + rightButtonW;
@@ -785,6 +867,9 @@ public class BasicScrollBarUI
          * is at the right edge is handled specially to avoid numerical
          * problems in computing thumbX.  If the thumb doesn't
          * fit in the track (trackH) we'll hide it later.
+         * <p>
+         *  拇指最小/最大尺寸。拇指在右边缘的情况被特别处理以避免计算thumbX中的数值问题。如果拇指不适合在轨道(trackH),我们将隐藏它。
+         * 
          */
         float min = sb.getMinimum();
         float max = sb.getMaximum();
@@ -810,6 +895,9 @@ public class BasicScrollBarUI
 
         /* If the buttons don't fit, allocate half of the available
          * space to each and move the right one over.
+         * <p>
+         *  空间到每个和移动正确的一个。
+         * 
          */
         int sbAvailButtonW = (sbSize.width - sbInsetsW);
         if (sbAvailButtonW < sbButtonsW) {
@@ -821,6 +909,7 @@ public class BasicScrollBarUI
         (ltr ? incrButton : decrButton).setBounds(rightButtonX, itemY, rightButtonW, itemH);
 
         /* Update the trackRect field.
+        /* <p>
          */
         int itrackX = leftButtonX + leftButtonW + leftGap;
         int itrackW = rightButtonX - rightGap - itrackX;
@@ -828,6 +917,9 @@ public class BasicScrollBarUI
 
         /* Make sure the thumb fits between the buttons.  Note
          * that setting the thumbs bounds causes a repaint.
+         * <p>
+         *  设置缩略图边界会导致重绘。
+         * 
          */
         if (thumbW >= (int)trackW) {
             if (UIManager.getBoolean("ScrollBar.alwaysShowThumb")) {
@@ -855,6 +947,9 @@ public class BasicScrollBarUI
         /* If the user is dragging the value, we'll assume that the
          * scrollbars layout is OK modulo the thumb which is being
          * handled by the dragging code.
+         * <p>
+         * 滚动条布局是OK模块正在处理的拖动代码。
+         * 
          */
         if (isDragging) {
             return;
@@ -877,11 +972,16 @@ public class BasicScrollBarUI
      * Set the bounds of the thumb and force a repaint that includes
      * the old thumbBounds and the new one.
      *
+     * <p>
+     *  设置拇指的边界,并强制重绘,包括旧thumbBounds和新的thumbBounds。
+     * 
+     * 
      * @see #getThumbBounds
      */
     protected void setThumbBounds(int x, int y, int width, int height)
     {
         /* If the thumbs bounds haven't changed, we're done.
+        /* <p>
          */
         if ((thumbRect.x == x) &&
             (thumbRect.y == y) &&
@@ -892,6 +992,9 @@ public class BasicScrollBarUI
 
         /* Update thumbRect, and repaint the union of x,y,w,h and
          * the old thumbRect.
+         * <p>
+         *  老thumbRect。
+         * 
          */
         int minX = Math.min(x, thumbRect.x);
         int minY = Math.min(y, thumbRect.y);
@@ -913,6 +1016,12 @@ public class BasicScrollBarUI
      * <b>Warning </b>: the value returned by this method should not be
      * be modified, it's a reference to the actual rectangle, not a copy.
      *
+     * <p>
+     *  返回缩略图的当前大小/位置。
+     * <p>
+     *  <b>警告</b>：此方法返回的值不应被修改,它是对实际矩形的引用,而不是副本。
+     * 
+     * 
      * @return The current size/location of the thumb.
      * @see #setThumbBounds
      */
@@ -930,6 +1039,12 @@ public class BasicScrollBarUI
      * <b>Warning </b>: the value returned by this method should not be
      * be modified, it's a reference to the actual rectangle, not a copy.
      *
+     * <p>
+     *  返回轨道的当前边界,即增量和减量按钮之间的空间,减去插入。每次滚动条布局(验证)时,将更新此方法返回的值。
+     * <p>
+     *  <b>警告</b>：此方法返回的值不应被修改,它是对实际矩形的引用,而不是副本。
+     * 
+     * 
      * @return the current bounds of the scrollbar track
      * @see #layoutContainer
      */
@@ -940,6 +1055,9 @@ public class BasicScrollBarUI
     /*
      * Method for scrolling by a block increment.
      * Added for mouse wheel scrolling support, RFE 4202656.
+     * <p>
+     *  通过块增量滚动的方法。添加了鼠标滚轮支持,RFE 4202656。
+     * 
      */
     static void scrollByBlock(JScrollBar scrollbar, int direction) {
         // This method is called from BasicScrollPaneUI to implement wheel
@@ -975,6 +1093,11 @@ public class BasicScrollBarUI
      * If limitByBlock is set to true, the scrollbar will scroll at least 1
      * unit increment, but will not scroll farther than the block increment.
      * See BasicScrollPaneUI.Handler.mouseWheelMoved().
+     * <p>
+     *  以单位增量滚动的方法。添加了鼠标滚轮支持,RFE 4202656。
+     * 
+     *  如果limitByBlock设置为true,滚动条将滚动至少1个单位增量,但不会滚动比块增量更远。请参阅BasicScrollPaneUI.Handler.mouseWheelMoved()。
+     * 
      */
     static void scrollByUnits(JScrollBar scrollbar, int direction,
                               int units, boolean limitToBlock) {
@@ -1035,6 +1158,10 @@ public class BasicScrollBarUI
      * Indicates whether the user can absolutely position the thumb with
      * a mouse gesture (usually the middle mouse button).
      *
+     * <p>
+     *  指示用户是否可以使用鼠标手势(通常是中间的鼠标按钮)绝对放置拇指。
+     * 
+     * 
      * @return true if a mouse gesture can absolutely position the thumb
      * @since 1.5
      */
@@ -1045,6 +1172,9 @@ public class BasicScrollBarUI
     /**
      * A listener to listen for model changes.
      *
+     * <p>
+     *  用于监听模型更改的侦听器。
+     * 
      */
     protected class ModelListener implements ChangeListener {
         public void stateChanged(ChangeEvent e) {
@@ -1059,6 +1189,9 @@ public class BasicScrollBarUI
 
     /**
      * Track mouse drags.
+     * <p>
+     *  跟踪鼠标拖动。
+     * 
      */
     protected class TrackListener
         extends MouseAdapter implements MouseMotionListener
@@ -1097,6 +1230,9 @@ public class BasicScrollBarUI
          * otherwise increase it by one page.  If there is no
          * thumb then page up if the mouse is in the upper half
          * of the track.
+         * <p>
+         * 如果鼠标在"thumb"组件上方按下,则将滚动条值减少一页("向上翻页"),否则将其增加一页。如果没有拇指,然后向上翻页,如果鼠标在轨道的上半部分。
+         * 
          */
         public void mousePressed(MouseEvent e)
         {
@@ -1186,6 +1322,9 @@ public class BasicScrollBarUI
          * scrollbar, or the left/right of Horizontal scrollbar in
          * left-to-right/right-to-left scrollbar relative to the origin of the
          * track.
+         * <p>
+         *  将模型值设置为垂直滚动条的大拇指顶部的位置,或水平滚动条在从左到右/从右到左滚动条中相对于轨道原点的左/右。
+         * 
          */
         public void mouseDragged(MouseEvent e) {
             if (SwingUtilities.isRightMouseButton(e) ||
@@ -1230,6 +1369,9 @@ public class BasicScrollBarUI
             /* Set the scrollbars value.  If the thumb has reached the end of
              * the scrollbar, then just set the value to its maximum.  Otherwise
              * compute the value as accurately as possible.
+             * <p>
+             *  滚动条,然后只是将其值设置为其最大值。否则,请尽可能准确地计算该值。
+             * 
              */
             if (thumbPos == thumbMax) {
                 if (scrollbar.getOrientation() == JScrollBar.VERTICAL ||
@@ -1342,6 +1484,10 @@ public class BasicScrollBarUI
         /**
          * Invoked when the mouse exits the scrollbar.
          *
+         * <p>
+         *  在鼠标退出滚动条时调用。
+         * 
+         * 
          * @param e MouseEvent further describing the event
          * @since 1.5
          */
@@ -1355,6 +1501,9 @@ public class BasicScrollBarUI
 
     /**
      * Listener for cursor keys.
+     * <p>
+     *  光标键的监听器。
+     * 
      */
     protected class ArrowButtonListener extends MouseAdapter
     {
@@ -1394,6 +1543,9 @@ public class BasicScrollBarUI
     /**
      * Listener for scrolling events initiated in the
      * <code>ScrollPane</code>.
+     * <p>
+     *  用于在<code> ScrollPane </code>中启动的滚动事件的侦听器。
+     * 
      */
     protected class ScrollListener implements ActionListener
     {
@@ -1506,6 +1658,8 @@ public class BasicScrollBarUI
 
     /**
      * Used for scrolling the scrollbar.
+     * <p>
+     *  用于滚动滚动条。
      */
     private static class Actions extends UIAction {
         private static final String POSITIVE_UNIT_INCREMENT =

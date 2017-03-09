@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp;
@@ -60,6 +70,10 @@ import org.xml.sax.helpers.DefaultHandler;
  * This is the implementation specific class for the
  * <code>javax.xml.parsers.SAXParser</code>.
  *
+ * <p>
+ *  这是<code> javax.xml.parsers.SAXParser </code>的实现特定类。
+ * 
+ * 
  * @author Rajiv Mordani
  * @author Edwin Goei
  *
@@ -116,6 +130,10 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
 
     /**
      * Create a SAX parser with the associated features
+     * <p>
+     *  创建具有关联功能的SAX解析器
+     * 
+     * 
      * @param features Hashtable of SAX features, may be null
      */
     SAXParserImpl(SAXParserFactoryImpl spf, Hashtable features)
@@ -125,6 +143,10 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
 
     /**
      * Create a SAX parser with the associated features
+     * <p>
+     *  创建具有关联功能的SAX解析器
+     * 
+     * 
      * @param features Hashtable of SAX features, may be null
      */
     SAXParserImpl(SAXParserFactoryImpl spf, Hashtable features, boolean secureProcessing)
@@ -162,6 +184,9 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
              * However, we need to check if it is actively set on the factory since we
              * allow the use of the System Property or jaxp.properties to override
              * the default value
+             * <p>
+             *  默认情况下,设置安全处理,不允许外部访问。但是,我们需要检查它是否在工厂上主动设置,因为我们允许使用System Property或jaxp.properties覆盖默认值
+             * 
              */
             if (features != null) {
 
@@ -241,6 +266,11 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
      *
      * XXX Does not handle possible conflicts between SAX feature names and
      * JAXP specific feature names, eg. SAXParserFactory.isValidating()
+     * <p>
+     *  基于SAXParserFactory上设置的任何功能设置我们的XMLReader的任何功能。
+     * 
+     *  XXX不处理SAX功能名称和JAXP特定功能名称之间可能发生的冲突,例如。 SAXParserFactory.isValidating()
+     * 
      */
     private void setFeatures(Hashtable features)
         throws SAXNotSupportedException, SAXNotRecognizedException {
@@ -264,6 +294,9 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
     /**
      * Returns the XMLReader that is encapsulated by the implementation of
      * this class.
+     * <p>
+     *  返回由此类的实现封装的XMLReader。
+     * 
      */
     public XMLReader getXMLReader() {
         return xmlReader;
@@ -289,6 +322,10 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
 
     /**
      * Gets the XInclude processing mode for this parser
+     * <p>
+     *  获取此解析器的XInclude处理模式
+     * 
+     * 
      * @return the state of XInclude processing mode
      */
     public boolean isXIncludeAware() {
@@ -303,6 +340,9 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
     /**
      * Sets the particular property in the underlying implementation of
      * org.xml.sax.XMLReader.
+     * <p>
+     * 设置org.xml.sax.XMLReader的基础实现中的特定属性。
+     * 
      */
     public void setProperty(String name, Object value)
         throws SAXNotRecognizedException, SAXNotSupportedException {
@@ -312,6 +352,9 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
     /**
      * returns the particular property requested for in the underlying
      * implementation of org.xml.sax.XMLReader.
+     * <p>
+     *  返回在org.xml.sax.XMLReader的基础实现中请求的特定属性。
+     * 
      */
     public Object getProperty(String name)
         throws SAXNotRecognizedException, SAXNotSupportedException {
@@ -375,6 +418,9 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
 
     /*
      * PSVIProvider methods
+     * <p>
+     *  PSVIProvider方法
+     * 
      */
 
     public ElementPSVI getElementPSVI() {
@@ -393,6 +439,9 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
      * Extension of SAXParser. This class tracks changes to
      * features and properties to allow the parser to be reset to
      * its initial state.
+     * <p>
+     *  扩展SAXParser。此类跟踪对功能和属性的更改,以允许解析器重置为其初始状态。
+     * 
      */
     public static class JAXPSAXParser extends com.sun.org.apache.xerces.internal.parsers.SAXParser {
 
@@ -416,6 +465,9 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
             /**
              * This class may be used directly. So initialize the security manager if
              * it is null.
+             * <p>
+             *  这个类可以直接使用。因此,如果安全管理器为空,则初始化它。
+             * 
              */
             if (fSecurityManager == null) {
                 fSecurityManager = new XMLSecurityManager(true);
@@ -443,6 +495,9 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
          * Override SAXParser's setFeature method to track the initial state
          * of features. This keeps us from affecting the performance of the
          * SAXParser when it is created with XMLReaderFactory.
+         * <p>
+         *  覆盖SAXParser的setFeature方法来跟踪特征的初始状态。这使我们在使用XMLReaderFactory创建时不会影响SAXParser的性能。
+         * 
          */
         public synchronized void setFeature(String name, boolean value)
             throws SAXNotRecognizedException, SAXNotSupportedException {
@@ -498,6 +553,8 @@ public class SAXParserImpl extends javax.xml.parsers.SAXParser
          * Override SAXParser's setProperty method to track the initial state
          * of properties. This keeps us from affecting the performance of the
          * SAXParser when it is created with XMLReaderFactory.
+         * <p>
+         *  覆盖SAXParser的setProperty方法以跟踪属性的初始状态。这使我们在使用XMLReaderFactory创建时不会影响SAXParser的性能。
          */
         public synchronized void setProperty(String name, Object value)
             throws SAXNotRecognizedException, SAXNotSupportedException {

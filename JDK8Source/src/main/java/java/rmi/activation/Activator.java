@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,20 @@ import java.rmi.activation.UnknownObjectException;
  * activation groups fail so that it can remove stale remote references
  * to groups and active object's within those groups.<p>
  *
+ * <p>
+ *  <code> Activator </code>有助于远程对象激活。 "故障"远程参考调用激活器的<code> activate </code>方法以获得对"可激活"远程对象的"实时"引用。
+ * 在接收到激活请求时,激活器查找激活标识符的激活描述符,<code> id </code>,确定其中应激活对象的组通过组的<code> ActivationInstantiator启动对象重新创建</code>
+ * (通过调用<code> newInstance </code>方法)。
+ *  <code> Activator </code>有助于远程对象激活。 "故障"远程参考调用激活器的<code> activate </code>方法以获得对"可激活"远程对象的"实时"引用。
+ * 激活器根据需要启动激活组的执行。例如,如果特定组标识符的激活组尚未执行,则激活器启动该组的VM的执行。 <p>。
+ * 
+ *  <code> Activator </code>与<code> ActivationSystem </code>密切配合,提供了在这些组中注册组和对象的方法,<code> ActivationMoni
+ * tor </code>非活动对象和非活动组。
+ *  <p>。
+ * 
+ *  激活器负责监视和检测激活组何时失败,从而可以删除对这些组中的组和活动对象的过时远程引用。<p>
+ * 
+ * 
  * @author      Ann Wollrath
  * @see         ActivationInstantiator
  * @see         ActivationGroupDesc
@@ -97,6 +112,16 @@ public interface Activator extends Remote {
      * prevent the object from being garbage collected under the
      * normal distributed garbage collection mechanism. <p>
      *
+     * <p>
+     * 激活与激活标识符<code> id </code>相关联的对象。
+     * 如果激活者知道对象已经是活动的,并且<code> force </code>为false,那么具有"实时"引用的存根立即返回到调用者;否则,如果激活器不知道对应的远程对象是活动的,则激活器使用激活描述符
+     * 信息(先前注册的)来确定其中应激活对象的组(VM)。
+     * 激活与激活标识符<code> id </code>相关联的对象。
+     * 如果对应于对象的组描述符的<code> ActivationInstantiator </code>已经存在,激活器调用激活组的<code> newInstance </code>方法传递对象的id和描
+     * 述符。
+     * 激活与激活标识符<code> id </code>相关联的对象。 <p>。
+     * 
+     * 
      * @param id the activation identifier for the object being activated
      * @param force if true, the activator contacts the group to obtain
      * the remote object's reference; if false, returning the cached value

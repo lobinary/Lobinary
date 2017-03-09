@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -70,6 +71,19 @@ import static java.lang.annotation.RetentionPolicy.*;
  * case of EJBs where the EJB can handle exceptions.</li>
  * </ul>
  *
+ * <p>
+ *  PreDestroy注释在方法上用作回调通知,以表示实例正在由容器删除的过程中。使用PreDestroy注释的方法通常用于释放它持有的资源。
+ * 除了Java EE 5中的应用程序客户端容器,支持PostConstruct的所有容器管理对象都必须支持此注释。应用PreDestroy注释的方法必须满足以下所有条件：。
+ * <p>
+ * <ul>
+ *  <li>该方法不能有任何参数,除非在拦截器的情况下,它需要一个InvocationContext对象,如拦截器规范定义。</li> <li>在拦截器类上定义的方法必须有一个以下签名：
+ * <p>
+ *  void <METHOD>(InvocationContext)
+ * <p>
+ *  对象<METHOD>(InvocationContext)抛出异常
+ * <p>
+ *  <i>注意：PreDestroy拦截器方法不能抛出应用程序异常,但是如果相同的拦截器方法插入到生命周期事件之外的业务或超时方法,它可能会被声明抛出检查异常,包括java.lang.Exception。
+ * 
  * @see javax.annotation.PostConstruct
  * @see javax.annotation.Resource
  * @since Common Annotations 1.0

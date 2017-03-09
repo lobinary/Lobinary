@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,14 @@ import javax.naming.NamingException;
   * The InitialContextFactoryBuilder interface must be implemented by
   * such a builder.
   *
+  * <p>
+  *  此接口表示创建初始上下文工厂的构建器。
+  * p>
+  *  JNDI框架允许在运行时指定不同的初始上下文实现。使用初始上下文工厂创建初始上下文。
+  * 程序可以安装自己的构建器,创建初始上下文工厂,从而覆盖框架使用的默认策略,方法是调用NamingManager.setInitialContextFactoryBuilder()。
+  *  InitialContextFactoryBuilder接口必须由这样的构建器实现。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -60,6 +69,8 @@ public interface InitialContextFactoryBuilder {
       * The implementation will not modify the object or keep a reference
       * to it, although it may keep a reference to a clone or copy.
       *
+      * <p>
+      * 
       * @param environment Environment used in creating an initial
       *                 context implementation. Can be null.
       * @return A non-null initial context factory.

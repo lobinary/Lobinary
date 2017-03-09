@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -80,6 +81,30 @@ import java.io.Serializable;
  * resolution values in the client's units won't be stored precisely.
  * <P>
  *
+ * <p>
+ *  类ResolutionSyntax是一个抽象基类,提供表示打印机分辨率的所有属性的通用实现。
+ * <P>
+ *  分辨率属性的值由两个项目组成,即横向进纸方向分辨率和进纸方向分辨率。可以通过提供两个值并指示测量值的单位来构建分辨率属性。提供了返回分辨率属性值的方法,指示要返回值的单位。
+ * 两个最常见的分辨率单位是每英寸点数(dpi)和每厘米点数(dpcm),并且提供导出的常数{@link #DPI DPI}和{@link #DPCM DPCM}以指示这些单位。
+ * <P>
+ *  一旦构造,解析属性的值是不可变的。
+ * <P>
+ *  <B>设计</B>
+ * <P>
+ * 分辨率属性的横向进给方向分辨率和进给方向分辨率值以每100英寸(dphi)的点为单位存储在内部。
+ * 将值存储在dphi而不是公制单位允许dpi和dphi之间以及dpcm和dphi之间的精确整数算术转换：1dpi = 100dphi,1dpcm = 254dphi。
+ * 因此,可以以没有精度损失的任何单位将值存储到分辨率属性中并从其中检索。如果使用浮点表示,则不能保证。
+ * 然而,如果分辨率属性的值在一个单位中创建并且以不同单位检索,则一般会发生舍入误差;例如,600dpi将被舍入到236dpcm,而真实值(到五个数字)是236.22dpcm。
+ * <P>
+ *  将内部值存储在dphi的公共单元中,可以比较两个解析属性,而不考虑创建它们的单位;例如,300dpcm将比较等于762dpi,因为它们都存储为76200dphi。
+ * 特别地,查找服务可以基于它们的序列化表示的等同性来匹配分辨率属性,而不管它们在其中被创建的单位。再次,使用整数用于内部存储允许进行精确的等式比较,如果使用浮点表示,这将不能得到保证。
+ * <P>
+ * 导出的常数{@link #DPI DPI}实际上是乘以dpi中的值以获得dphi中的值的转换因子。
+ * 同样,导出的常数{@link #DPCM DPCM}是用于乘以dpcm中的值以获得dphi中的值的转换因子。客户端可以通过提供其自身的转换因子来指定除dpi或dpcm之外的单位的分辨率值。
+ * 然而,由于dphi的内部单元被选择为仅支持dpi和dpcm的外部单元,所以不能保证客户端单元的转换因子将是确切的整数。如果转换因子不是确切的整数,客户端单位中的分辨率值将不会精确存储。
+ * <P>
+ * 
+ * 
  * @author  David Mendenhall
  * @author  Alan Kaminsky
  */
@@ -89,12 +114,20 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
 
     /**
      * Cross feed direction resolution in units of dots per 100 inches (dphi).
+     * <p>
+     *  以每100英寸点数(dphi)为单位的交叉进给方向分辨率。
+     * 
+     * 
      * @serial
      */
     private int crossFeedResolution;
 
     /**
      * Feed direction resolution in units of dots per 100 inches (dphi).
+     * <p>
+     *  进给方向分辨率,单位为每100英寸的点数(dphi)。
+     * 
+     * 
      * @serial
      */
     private int feedResolution;
@@ -102,12 +135,18 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
     /**
      * Value to indicate units of dots per inch (dpi). It is actually the
      * conversion factor by which to multiply dpi to yield dphi (100).
+     * <p>
+     *  指示每英寸点数的单位(dpi)的值。它实际上是乘以dpi以产生dphi(100)的转换因子。
+     * 
      */
     public static final int DPI = 100;
 
     /**
      * Value to indicate units of dots per centimeter (dpcm). It is actually
      * the conversion factor by which to multiply dpcm to yield dphi (254).
+     * <p>
+     *  用于指示每厘米点数单位(dpcm)的值。它实际上是乘以dpcm以产生dphi(254)的转换因子。
+     * 
      */
     public static final int DPCM = 254;
 
@@ -115,6 +154,10 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
     /**
      * Construct a new resolution attribute from the given items.
      *
+     * <p>
+     *  从给定项目构造新的分辨率属性。
+     * 
+     * 
      * @param  crossFeedResolution
      *     Cross feed direction resolution.
      * @param  feedResolution
@@ -148,6 +191,10 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * Convert a value from dphi to some other units. The result is rounded to
      * the nearest integer.
      *
+     * <p>
+     *  将值从dphi转换为其他单位。结果四舍五入为最接近的整数。
+     * 
+     * 
      * @param  dphi
      *     Value (dphi) to convert.
      * @param  units
@@ -171,6 +218,10 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * Get this resolution attribute's resolution values in the given units.
      * The values are rounded to the nearest integer.
      *
+     * <p>
+     *  以给定单位获取此分辨率属性的分辨率值。值将四舍五入为最接近的整数。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #DPI DPI} or
      * {@link   #DPCM DPCM}.
@@ -191,6 +242,10 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * Returns this resolution attribute's cross feed direction resolution in
      * the given units. The value is rounded to the nearest integer.
      *
+     * <p>
+     * 以给定单位返回此分辨率属性的横向进纸方向分辨率。值将四舍五入为最接近的整数。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #DPI DPI} or
      * {@link  #DPCM DPCM}.
@@ -208,6 +263,10 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * Returns this resolution attribute's feed direction resolution in the
      * given units. The value is rounded to the nearest integer.
      *
+     * <p>
+     *  以给定单位返回此分辨率属性的Feed方向分辨率。值将四舍五入为最接近的整数。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #DPI DPI} or {@link
      *     #DPCM DPCM}.
@@ -228,6 +287,13 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * feed direction resolution, and <I>U</I> is the units name. The values are
      * rounded to the nearest integer.
      *
+     * <p>
+     *  以给定单位返回此分辨率属性的字符串版本。
+     * 字符串采用<CODE>"<I> C </I> x <I> F </I> <I> U </I>"</CODE>的格式,其中<I> C </I>横向进给方向分辨率,I / F是进给方向分辨率,并且<I> U
+     *  </I>是单元名称。
+     *  以给定单位返回此分辨率属性的字符串版本。值将四舍五入为最接近的整数。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #DPI CODE>DPI} or {@link
      *     #DPCM DPCM}.
@@ -266,6 +332,16 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * <CODE>other</CODE> attribute's feed direction resolution.
      * </UL>
      *
+     * <p>
+     *  确定此分辨率属性的值是否小于或等于给定分辨率属性的值。如果满足以下所有条件,则为true：
+     * <UL>
+     * <LI>
+     *  此属性的横向进纸方向分辨率小于或等于<CODE>其他</CODE>属性的横向进纸方向分辨率。
+     * <LI>
+     *  此属性的Feed方向分辨率小于或等于<CODE>其他</CODE>属性的Feed方向分辨率。
+     * </UL>
+     * 
+     * 
      * @param  other  Resolution attribute to compare with.
      *
      * @return  True if this resolution attribute is less than or equal to the
@@ -296,6 +372,20 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * <CODE>object</CODE>'s feed direction resolution.
      * </OL>
      *
+     * <p>
+     *  返回此resolution属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是类ResolutionSyntax的实例。
+     * <LI>
+     *  此属性的横向进纸方向分辨率等于<CODE>对象</CODE>的横向进纸方向分辨率。
+     * <LI>
+     *  此属性的进给方向分辨率等于<CODE>对象</CODE>的进给方向分辨率。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this resolution
@@ -313,6 +403,9 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
 
     /**
      * Returns a hash code value for this resolution attribute.
+     * <p>
+     * 返回此解析度属性的哈希码值。
+     * 
      */
     public int hashCode() {
         return(((crossFeedResolution & 0x0000FFFF)) |
@@ -324,6 +417,11 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * the form <CODE>"<I>C</I>x<I>F</I> dphi"</CODE>, where <I>C</I> is the
      * cross feed direction resolution and <I>F</I> is the feed direction
      * resolution. The values are reported in the internal units of dphi.
+     * <p>
+     *  返回此解析度属性的字符串版本。
+     * 该字符串采用<CODE>"<I> C </I> x <I> F </I> dphi"</CODE>的形式,其中<I> C </I>是交叉进给方向分辨率, I> F </I>是进给方向分辨率。
+     * 值以dphi的内部单位报告。
+     * 
      */
     public String toString() {
         StringBuffer result = new StringBuffer();
@@ -339,6 +437,10 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * Returns this resolution attribute's cross feed direction resolution in
      * units of dphi. (For use in a subclass.)
      *
+     * <p>
+     *  以dphi为单位返回此分辨率属性的交叉进给方向分辨率。 (用于子类。)
+     * 
+     * 
      * @return  Cross feed direction resolution.
      */
     protected int getCrossFeedResolutionDphi() {
@@ -349,6 +451,9 @@ public abstract class ResolutionSyntax implements Serializable, Cloneable {
      * Returns this resolution attribute's feed direction resolution in units
      * of dphi. (For use in a subclass.)
      *
+     * <p>
+     *  以dphi为单位返回此分辨率属性的进给方向分辨率。 (用于子类。)
+     * 
      * @return  Feed direction resolution.
      */
     protected int getFeedResolutionDphi() {

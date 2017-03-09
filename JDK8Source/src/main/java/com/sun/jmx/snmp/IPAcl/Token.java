@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ package com.sun.jmx.snmp.IPAcl;
 
 /**
  * Describes the input token stream.
+ * <p>
+ *  描述输入令牌流。
+ * 
  */
 
 class Token {
@@ -37,6 +41,9 @@ class Token {
    * An integer that describes the kind of this token.  This numbering
    * system is determined by JavaCCParser, and a table of these numbers is
    * stored in the file ...Constants.java.
+   * <p>
+   *  描述此令牌类型的整数。这个编号系统由JavaCCParser决定,这些数字的表存储在文件... Constants.java中。
+   * 
    */
   public int kind;
 
@@ -44,11 +51,17 @@ class Token {
    * beginLine and beginColumn describe the position of the first character
    * of this token; endLine and endColumn describe the position of the
    * last character of this token.
+   * <p>
+   *  beginLine和beginColumn描述此标记的第一个字符的位置; endLine和endColumn描述这个标记的最后一个字符的位置。
+   * 
    */
   public int beginLine, beginColumn, endLine, endColumn;
 
   /**
    * The string image of the token.
+   * <p>
+   *  令牌的字符串映像。
+   * 
    */
   public String image;
 
@@ -59,6 +72,10 @@ class Token {
    * set to null.  This is true only if this token is also a regular
    * token.  Otherwise, see below for a description of the contents of
    * this field.
+   * <p>
+   *  从输入流中引用下一个常规(非特殊)标记。如果这是来自输入流的最后一个令牌,或者如果令牌管理器没有读取超出此标记的令牌,则此字段设置为null。只有当此令牌也是正规令牌时,这才是真的。
+   * 否则,请参阅下面有关此字段内容的描述。
+   * 
    */
   public Token next;
 
@@ -73,11 +90,19 @@ class Token {
    * The next fields of special tokens refer to other special tokens that
    * immediately follow it (without an intervening regular token).  If there
    * is no such token, this field is null.
+   * <p>
+   * 此字段用于访问在此令牌之前发生但在紧接在前的常规(非特殊)令牌之后发生的特殊令牌。如果没有这样的特殊令牌,则此字段设置为null。
+   * 当有多个这样的特殊令牌时,该字段引用这些特殊令牌中的最后一个,这又通过其specialToken字段引用下一个前一特殊令牌,依此类推,直到第一特殊令牌(其specialToken字段为空)。
+   * 特殊标记的下一个字段指的是紧跟其后的其他特殊标记(没有居间的规则标记)。如果没有这样的令牌,则此字段为空。
+   * 
    */
   public Token specialToken;
 
   /**
    * Returns the image.
+   * <p>
+   *  返回图像。
+   * 
    */
   public final String toString()
   {
@@ -95,6 +120,11 @@ class Token {
    *
    * to the following switch statement. Then you can cast matchedToken
    * variable to the appropriate type and use it in your lexical actions.
+   * <p>
+   *  默认情况下,返回一个新的Token对象。但是,如果需要,您可以基于ofKind的值创建和返回子类对象。只需将情况添加到交换机的所有这些特殊情况。
+   * 例如,如果你有一个Token的子类,叫做IDToken,你想要创建如果ofKind是ID,simlpy添加如下：。
+   * 
+   *  case MyParserConstants.ID：return new IDToken();
    */
   public static final Token newToken(int ofKind)
   {

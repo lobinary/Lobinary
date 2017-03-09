@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -122,6 +123,41 @@ import static java.lang.annotation.RetentionPolicy.*;
  *   </pre>
  * </p>
  *
+ * <p>
+ * <p>
+ *  允许将类映射到具有simpleContent或XML模式简单类型的XML模式复杂类型。
+ * </p>
+ * 
+ * <p>
+ *  <b>用法：</b>
+ * <p>
+ *  <tt> @XmlValue </tt>注释可与以下程序元素一起使用：
+ * <ul>
+ *  <li>一个JavaBean属性。</li> <li>非静态,非瞬态字段。</li>
+ * </ul>
+ * 
+ *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
+ * 
+ *  使用受以下使用限制约束：
+ * <ul>
+ *  <li>最多只能使用<tt> @XmlValue </tt>注释注释一个字段或属性。 </li>
+ * 
+ *  <li> <tt> @XmlValue </tt>可用于以下注释：{@link XmlList}。
+ * 但是这是多余的,因为{@link XmlList}将一个类型映射到一个简单的模式类型,如{@link XmlValue}一样通过列表派生。 </li>。
+ * 
+ *  <li>如果字段或属性的类型是集合类型,则集合项类​​型必须映射到简单的模式类型。 </li>
+ * 
+ *  <li>如果字段或属性的类型不是集合类型,则类型必须映射到XML模式简单类型。 </li>
+ * 
+ * </ul>
+ * </p>
+ * <p>
+ *  如果注释的JavaBean属性是映射到XML模式构造的唯一类成员,那么该类将映射到一个简单类型。
+ * 
+ * 如果有其他JavaBean属性(除了用<tt> @XmlValue </tt>注释注释的JavaBean属性)映射到XML属性,那么该类将使用simpleContent映射到复杂类型。
+ * </p>
+ * 
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlType
  * @since JAXB2.0

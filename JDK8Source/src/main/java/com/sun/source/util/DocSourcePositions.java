@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import com.sun.source.tree.CompilationUnitTree;
  * A position is defined as a simple character offset from the start of a
  * CompilationUnit where the first character is at offset 0.
  *
+ * <p>
+ *  提供在javadoc注释中获取DocTree位置的方法。位置被定义为从第一个字符位于偏移0处的CompilationUnit的开始的简单字符偏移。
+ * 
+ * 
  * @since 1.8
  */
 @jdk.Exported
@@ -55,6 +60,19 @@ public interface DocSourcePositions extends SourcePositions {
      * {@code subtree.getStartPosition() == NOPOS}
      * </p>
      *
+     * <p>
+     *  获取文件中注释中树的起始位置。如果在文件中找不到tree,或者如果起始位置不可用,则返回{@link javax.tools.Diagnostic#NOPOS}。
+     * 给定的树应该在给定的注释树下,并且给定的文档注释树应当从给定文件下的树的{@link DocTrees#getDocCommentTree(com.sun.source.util.TreePath)}返
+     * 回。
+     *  获取文件中注释中树的起始位置。如果在文件中找不到tree,或者如果起始位置不可用,则返回{@link javax.tools.Diagnostic#NOPOS}。
+     * 返回的位置必须位于此树的yield的开始处,即该树的任何子树,以下内容必须包含：。
+     * 
+     * <p>
+     *  {@code tree.getStartPosition()<= subtree.getStartPosition()}或{@code tree.getStartPosition()== NOPOS}或<br>
+     *  {@code subtree.getStartPosition()== NOPOS}。
+     * </p>
+     * 
+     * 
      * @param file CompilationUnit in which to find tree.
      * @param comment the comment tree that encloses the tree for which the
      *                position is being sought
@@ -87,6 +105,17 @@ public interface DocSourcePositions extends SourcePositions {
      * {@code tree.getEndPosition() == NOPOS}
      * </p>
      *
+     * <p>
+     * 获取文件中注释中树的结束位置。如果在文件中找不到tree,或者如果结束位置不可用,则返回{@link javax.tools.Diagnostic#NOPOS}。
+     * 给定的树应该在给定的注释树下,并且给定的文档注释树应当从给定文件下的树的{@link DocTrees#getDocCommentTree(com.sun.source.util.TreePath)}返
+     * 回。
+     * 获取文件中注释中树的结束位置。如果在文件中找不到tree,或者如果结束位置不可用,则返回{@link javax.tools.Diagnostic#NOPOS}。
+     * 返回的位置必须位于此树的yield的末尾,即此树的任何子树,以下内容必须包含：。
+     * 
+     * <p>
+     *  {@code tree.getEndPosition()> = subtree.getEndPosition()}或<br> {@code tree.getEndPosition()== NOPOS}
+     * 或<br> {@code subtree.getEndPosition()== NOPOS}。
+     * 
      * @param file CompilationUnit in which to find tree.
      * @param comment the comment tree that encloses the tree for which the
      *                position is being sought

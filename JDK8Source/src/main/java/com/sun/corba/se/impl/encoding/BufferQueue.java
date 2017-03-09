@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,8 @@ import java.util.LinkedList;
 
 /**
  * Simple unsynchronized queue implementation for ByteBufferWithInfos.
+ * <p>
+ *  ByteBufferWithInfos的简单不同步队列实现。
  */
 // XREVISIT - Should be in orbutil or package private
 public class BufferQueue

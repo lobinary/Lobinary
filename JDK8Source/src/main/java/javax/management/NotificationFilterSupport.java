@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,23 @@ import java.util.Vector;
  * </BLOCKQUOTE>
  * The listener <CODE>myListener</CODE> will only receive notifications the type of which equals/starts with "my_example.my_type".
  *
+ * <p>
+ *  提供{@link javax.management.NotificationFilter}接口的实现。对通知类型属性执行过滤。
+ * <P>
+ *  管理已启用的通知类型的列表。方法允许用户启用/禁用所需的通知类型。
+ * <P>
+ *  然后,在向通过过滤器注册的侦听器发送通知之前,通知广播公司将此通知类型与过滤器启用的所有通知类型进行比较。仅当其过滤器启用此通知类型时,通知才会发送到侦听器。
+ * <P>
+ *  例：
+ * <BLOCKQUOTE>
+ * <PRE>
+ *  NotificationFilterSupport myFilter = new NotificationFilterSupport(); myFilter.enableType("my_exampl
+ * e.my_type"); myBroadcaster.addListener(myListener,myFilter,null);。
+ * </PRE>
+ * </BLOCKQUOTE>
+ *  侦听器<CODE> myListener </CODE>只会接收其类型等于/以"my_example.my_type"开头的通知。
+ * 
+ * 
  * @see javax.management.NotificationBroadcaster#addNotificationListener
  *
  * @since 1.5
@@ -61,6 +79,8 @@ public class NotificationFilterSupport implements NotificationFilter {
     private static final long serialVersionUID = 6579080007561786969L;
 
     /**
+    /* <p>
+    /* 
      * @serial {@link Vector} that contains the enabled notification types.
      *         The default value is an empty vector.
      */
@@ -73,6 +93,11 @@ public class NotificationFilterSupport implements NotificationFilter {
      * If the notification type matches one of the enabled types,
      * the notification should be sent to the listener and this method returns <CODE>true</CODE>.
      *
+     * <p>
+     *  在将指定的通知发送到侦听器之前调用。 <BR>此过滤器会将指定通知的类型与每个启用的类型进行比较。
+     * 如果通知类型与启用的类型之一匹配,则通知应发送到侦听器,此方法返回<CODE> true </CODE>。
+     * 
+     * 
      * @param notification The notification to be sent.
      * @return <CODE>true</CODE> if the notification should be sent to the listener, <CODE>false</CODE> otherwise.
      */
@@ -118,6 +143,19 @@ public class NotificationFilterSupport implements NotificationFilter {
      * </CODE></BLOCKQUOTE>
      * will no match any notification type.
      *
+     * <p>
+     * 将所有以指定前缀开头的通知发送到侦听器。 <BR>如果指定的前缀已在已启用的通知类型列表中,则此方法无效。
+     * <P>
+     *  例：
+     * <BLOCKQUOTE>
+     * <PRE>
+     *  //允许发送以"my_example"开头的所有通知。 myFilter.enableType("my_example"); //允许发送类型为"my_example.my_type"的所有通知。
+     *  myFilter.enableType("my_example.my_type");。
+     * </PRE>
+     * </BLOCKQUOTE>
+     * 
+     *  请注意：<BLOCKQUOTE> <CODE> myFilter.enableType("my_example。*"); </CODE> </BLOCKQUOTE>将不匹配任何通知类型。
+     * 
      * @param prefix The prefix.
      * @exception java.lang.IllegalArgumentException The prefix parameter is null.
      */
@@ -137,6 +175,9 @@ public class NotificationFilterSupport implements NotificationFilter {
      * <BR>If the specified prefix is not in the list of enabled notification types,
      * this method has no effect.
      *
+     * <p>
+     * 
+     * 
      * @param prefix The prefix.
      */
     public synchronized void disableType(String prefix) {
@@ -145,6 +186,9 @@ public class NotificationFilterSupport implements NotificationFilter {
 
     /**
      * Disables all notification types.
+     * <p>
+     *  从前缀列表中删除给定的前缀。 <BR>如果指定的前缀不在已启用的通知类型列表中,则此方法无效。
+     * 
      */
     public synchronized void disableAllTypes() {
         enabledTypes.clear();
@@ -154,6 +198,10 @@ public class NotificationFilterSupport implements NotificationFilter {
     /**
      * Gets all the enabled notification types for this filter.
      *
+     * <p>
+     *  禁用所有通知类型。
+     * 
+     * 
      * @return The list containing all the enabled notification types.
      */
     public synchronized Vector<String> getEnabledTypes() {

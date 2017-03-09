@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,11 @@ class ObjectStreamClassCorbaExt {
      *    if all the methods (including those of its ancestors) throw an
      *    exception that is atleast java.rmi.RemoteException or one of
      *    java.rmi.RemoteException's super classes.
+     * <p>
+     *  返回true,iff,
+     * 
+     *  'cl'是一个接口,和'cl'和所有的祖先不实现java.rmi.Remote,和3.如果'cl'没有方法(包括它的祖先),或者,如果所有方法(包括其祖先的方法)抛出一个异常,该异常是java.rmi
+     * .RemoteException或java.rmi.RemoteException的super类之一。
      */
     static final boolean isAbstractInterface(Class cl) {
         if (!cl.isInterface() || // #1
@@ -87,6 +93,8 @@ class ObjectStreamClassCorbaExt {
 
     /*
      *  Returns TRUE if type is 'any'.
+     * <p>
+     * 
      */
     static final boolean isAny(String typeString) {
 

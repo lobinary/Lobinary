@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,12 +40,18 @@ import java.awt.image.BufferedImage;
  * header background painter. It is used to fill the top right corner of
  * scrollpane.
  *
+ * <p>
+ *  TableScrollPaneCorner  - 一个简单的组件,使用表头的背景画家绘制自己。它用于填充滚动条的右上角。
+ * 
+ * 
  * @author Created by Jasper Potts (Jan 28, 2008)
  */
 class TableScrollPaneCorner extends JComponent implements UIResource{
 
     /**
      * Paint the component using the Nimbus Table Header Background Painter
+     * <p>
+     *  使用Nimbus表头部背景画刷绘制组件
      */
     @Override protected void paintComponent(Graphics g) {
         Painter painter = (Painter) UIManager.get(

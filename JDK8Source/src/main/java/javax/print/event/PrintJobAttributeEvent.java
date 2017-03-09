@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,9 @@ import javax.print.attribute.PrintJobAttributeSet;
  * Class PrintJobAttributeEvent encapsulates an event a PrintService
  * reports to let the client know that one or more printing attributes for a
  * PrintJob have changed.
+ * <p>
+ *  PrintJobAttributeEvent类封装了PrintService报告的事件,以使客户端知道PrintJob的一个或多个打印属性已更改。
+ * 
  */
 
 public class PrintJobAttributeEvent extends PrintEvent {
@@ -43,6 +47,10 @@ public class PrintJobAttributeEvent extends PrintEvent {
 
     /**
      * Constructs a PrintJobAttributeEvent object.
+     * <p>
+     *  构造一个PrintJobAttributeEvent对象。
+     * 
+     * 
      * @param source the print job generating  this event
      * @param attributes the attribute changes being reported
      * @throws IllegalArgumentException if <code>source</code> is
@@ -59,6 +67,10 @@ public class PrintJobAttributeEvent extends PrintEvent {
     /**
      * Determine the Print Job to which this print job event pertains.
      *
+     * <p>
+     *  确定此打印作业事件所属的打印作业。
+     * 
+     * 
      * @return  Print Job object.
      */
     public DocPrintJob getPrintJob() {
@@ -70,6 +82,9 @@ public class PrintJobAttributeEvent extends PrintEvent {
     /**
      * Determine the printing attributes that changed and their new values.
      *
+     * <p>
+     *  确定更改的打印属性及其新值。
+     * 
      * @return  Attributes containing the new values for the print job
      * attributes that changed. The returned set may not be modifiable.
      */

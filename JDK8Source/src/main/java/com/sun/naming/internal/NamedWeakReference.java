@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ package com.sun.naming.internal;
 /**
  * A NamedWeakReference is a WeakReference with an immutable string name.
  *
+ * <p>
+ *  NamedWeakReference是一个具有不可变字符串名称的WeakReference。
+ * 
  * @author Scott Seligman
  */
 

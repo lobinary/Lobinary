@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -13,6 +14,8 @@ package org.omg.DynamicAny;
     * DynArray objects support the manipulation of IDL arrays.
     * Note that the dimension of the array is contained in the TypeCode which is accessible
     * through the type attribute. It can also be obtained by calling the component_count operation.
+    * <p>
+    * 
     */
 abstract public class DynArrayHelper
 {

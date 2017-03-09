@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ import java.util.function.Supplier;
  * encounter order) and find-any (find any element, may not be the first in
  * encounter order.)
  *
+ * <p>
+ *  工厂用于在流管道中搜索元素的短路{@code TerminalOp}实例,并在找到一个元素时终止。
+ * 支持的变体包括find-first(查找遇到顺序中的第一个元素)和find-any(查找任何元素,可能不是遇到顺序中的第一个元素。)。
+ * 
+ * 
  * @since 1.8
  */
 final class FindOps {
@@ -49,6 +55,10 @@ final class FindOps {
     /**
      * Constructs a {@code TerminalOp} for streams of objects.
      *
+     * <p>
+     *  为对象流构造一个{@code TerminalOp}。
+     * 
+     * 
      * @param <T> the type of elements of the stream
      * @param mustFindFirst whether the {@code TerminalOp} must produce the
      *        first element in the encounter order
@@ -62,6 +72,10 @@ final class FindOps {
     /**
      * Constructs a {@code TerminalOp} for streams of ints.
      *
+     * <p>
+     *  为int的流构造一个{@code TerminalOp}。
+     * 
+     * 
      * @param mustFindFirst whether the {@code TerminalOp} must produce the
      *        first element in the encounter order
      * @return a {@code TerminalOp} implementing the find operation
@@ -74,6 +88,10 @@ final class FindOps {
     /**
      * Constructs a {@code TerminalOp} for streams of longs.
      *
+     * <p>
+     *  为longs流构造一个{@code TerminalOp}。
+     * 
+     * 
      * @param mustFindFirst whether the {@code TerminalOp} must produce the
      *        first element in the encounter order
      * @return a {@code TerminalOp} implementing the find operation
@@ -86,6 +104,10 @@ final class FindOps {
     /**
      * Constructs a {@code FindOp} for streams of doubles.
      *
+     * <p>
+     *  为双重流构建一个{@code FindOp}。
+     * 
+     * 
      * @param mustFindFirst whether the {@code TerminalOp} must produce the
      *        first element in the encounter order
      * @return a {@code TerminalOp} implementing the find operation
@@ -101,6 +123,11 @@ final class FindOps {
      * find-first (find the first element in the encounter order) and find-any
      * (find any element, may not be the first in encounter order.)
      *
+     * <p>
+     *  一个短路{@code TerminalOp},它在流管道中搜索一个元素,并在找到一个元素时终止。
+     * 实现find-first(找到遇到顺序中的第一个元素)和find-any(找到任何元素,可能不是遇到顺序中的第一个元素)。
+     * 
+     * 
      * @param <T> the output type of the stream pipeline
      * @param <O> the result type of the find operation, typically an optional
      *        type
@@ -115,6 +142,10 @@ final class FindOps {
         /**
          * Constructs a {@code FindOp}.
          *
+         * <p>
+         *  构造一个{@code FindOp}。
+         * 
+         * 
          * @param mustFindFirst if true, must find the first element in
          *        encounter order, otherwise can find any element
          * @param shape stream shape of elements to search
@@ -164,6 +195,10 @@ final class FindOps {
      * Implementation of @{code TerminalSink} that implements the find
      * functionality, requesting cancellation when something has been found
      *
+     * <p>
+     *  实现@ {code TerminalSink}实现find功能,请求取消时发现的东西
+     * 
+     * 
      * @param <T> The type of input element
      * @param <O> The result type, typically an optional type
      */
@@ -242,6 +277,9 @@ final class FindOps {
 
     /**
      * {@code ForkJoinTask} implementing parallel short-circuiting search
+     * <p>
+     *  {@code ForkJoinTask}实现并行短路搜索
+     * 
      * @param <P_IN> Input element type to the stream pipeline
      * @param <P_OUT> Output element type from the stream pipeline
      * @param <O> Result type from the find operation

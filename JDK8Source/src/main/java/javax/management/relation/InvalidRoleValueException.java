@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,13 @@ package javax.management.relation;
  * class expected for that role, or an MBean provided for that role does not
  * exist.
  *
+ * <p>
+ *  角色值无效。
+ * 当在角色中,给定值中引用的MBean的数量小于预期的最小度数,或者提供的值中引用的MBean的数量超过预期的最大度数,或该值中的一个引用的MBean不是对象时引发此异常的该角色所需的MBean类,或为该
+ * 角色提供的MBean不存在。
+ *  角色值无效。
+ * 
+ * 
  * @since 1.5
  */
 public class InvalidRoleValueException extends RelationException {
@@ -43,6 +51,9 @@ public class InvalidRoleValueException extends RelationException {
 
     /**
      * Default constructor, no message put in exception.
+     * <p>
+     *  默认构造函数,没有消息放在异常。
+     * 
      */
     public InvalidRoleValueException() {
         super();
@@ -51,6 +62,9 @@ public class InvalidRoleValueException extends RelationException {
     /**
      * Constructor with given message put in exception.
      *
+     * <p>
+     *  构造器与给定的消息放在异常。
+     * 
      * @param message the detail message.
      */
     public InvalidRoleValueException(String message) {

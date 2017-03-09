@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,11 +40,19 @@ import sun.awt.SunToolkit;
  * before the wrapping SequencedEvent was able to be dispatched. In this case,
  * the nested event is never dispatched.
  *
+ * <p>
+ *  一种机制,用于确保一系列AWTEvents以精确的顺​​序执行,甚至跨多个AppContext。嵌套事件将按照它们的包装SequencedEvents被构造的顺序被分派。
+ * 此规则的唯一例外是在能够分派封装SequencedEvent之前,嵌套事件的目标的对等端已被销毁(通过调用Component.removeNotify)。在这种情况下,不会调度嵌套事件。
+ * 
+ * 
  * @author David Mendenhall
  */
 class SequencedEvent extends AWTEvent implements ActiveEvent {
     /*
      * serialVersionUID
+     * <p>
+     *  serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 547742659238625067L;
 
@@ -70,6 +79,10 @@ class SequencedEvent extends AWTEvent implements ActiveEvent {
      * Constructs a new SequencedEvent which will dispatch the specified
      * nested event.
      *
+     * <p>
+     *  构造一个新的SequencedEvent,它将分派指定的嵌套事件。
+     * 
+     * 
      * @param nested the AWTEvent which this SequencedEvent's dispatch()
      *        method will dispatch
      */
@@ -95,6 +108,12 @@ class SequencedEvent extends AWTEvent implements ActiveEvent {
      * dispatch() shall never call dispose() while holding the lock on the list,
      * as EventQueue lock is held during dispatching.  The locks should be acquired
      * in the same order.
+     * <p>
+     *  在所有先前嵌套的事件已分派或处置之后调度嵌套事件。如果在分派所有先前嵌套事件之前调用此方法,则此方法将阻塞,直到达到这样的点。而等待处理嵌套事件处理AppContext
+     * 
+     *  注意：锁定协议。由于dispose()可以获得EventQueue锁,dispatch()从不会调用dispose()同时保持锁在列表上,因为EventQueue锁在调度期间保持。
+     * 锁应该以相同的顺序获取。
+     * 
      */
     public final void dispatch() {
         try {
@@ -134,6 +153,9 @@ class SequencedEvent extends AWTEvent implements ActiveEvent {
 
     /**
      * true only if event exists and nested source appContext is disposed.
+     * <p>
+     *  仅当事件存在且嵌套源appContext处置时才为true。
+     * 
      */
     private final static boolean isOwnerAppContextDisposed(SequencedEvent se) {
         if (se != null) {
@@ -150,6 +172,9 @@ class SequencedEvent extends AWTEvent implements ActiveEvent {
      * until we are the first sequenced event in the queue (i.e. it's our
      * turn).  But while we wait for our turn to dispatch, the event
      * could have been disposed for a number of reasons.
+     * <p>
+     * 顺序调度的事件按顺序调度,因此我们不能调度,直到我们是队列中的第一个顺序事件(即轮到我们)。但是,当我们等待我们轮到派遣,事件本可以被处置由于一些原因。
+     * 
      */
     public final boolean isFirstOrDisposed() {
         if (disposed) {
@@ -165,6 +190,9 @@ class SequencedEvent extends AWTEvent implements ActiveEvent {
 
     /* Disposes all events from disposed AppContext
      * return first valid event
+     * <p>
+     *  返回第一个有效事件
+     * 
      */
     private final static SequencedEvent getFirstWithContext() {
         SequencedEvent first = getFirst();
@@ -184,6 +212,10 @@ class SequencedEvent extends AWTEvent implements ActiveEvent {
      * it shall never be called while holding the lock on the list,
      * as EventQueue lock is held during dispatching and dispatch() will get
      * lock on the list. The locks should be acquired in the same order.
+     * <p>
+     *  这个实例的处置。一旦分派和处理嵌套事件,或者当嵌套事件的目标的对等体已经调用Component.removeNotify时,就调用此方法。
+     * 
+     *  注意：锁定协议。
      */
     final void dispose() {
       synchronized (SequencedEvent.class) {

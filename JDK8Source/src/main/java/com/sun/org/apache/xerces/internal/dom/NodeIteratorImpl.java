@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -38,6 +48,15 @@ import org.w3c.dom.traversal.NodeIterator;
  *
  * @xerces.internal
  *
+ * <p>
+ *  DOM树以期望的深度第一的方式。
+ * 
+ *  <p> whatToShow和过滤器功能按预期实现。
+ * 
+ *  <p>这个类还有方法removeNode来启用对DOM删除的迭代器"修复"。期望DOM实现在实际的DOM转换之前调用removeNode。如果没有被DOM调用,客户端可以在删除之前调用它。
+ * 
+ *  @ xerces.internal
+ * 
  */
 public class NodeIteratorImpl implements NodeIterator {
 
@@ -77,6 +96,10 @@ public class NodeIteratorImpl implements NodeIterator {
      *  nextNode()  ==      fForward = true;
      *  previousNode() ==   fForward = false;
      *  </pre>
+     * <p>
+     * <pre>
+     *  nextNode()== fForward = true; previousNode()== fForward = false;
+     * </pre>
      */
     private boolean fForward = true;
 
@@ -127,6 +150,9 @@ public class NodeIteratorImpl implements NodeIterator {
     /** Return the next Node in the Iterator. The node is the next node in
      *  depth-first order which also passes the filter, and whatToShow.
      *  If there is no next node which passes these criteria, then return null.
+     * <p>
+     *  也通过过滤器的深度优先顺序和whatToShow。如果没有通过这些条件的下一个节点,则返回null。
+     * 
      */
     public Node               nextNode() {
 
@@ -183,6 +209,9 @@ public class NodeIteratorImpl implements NodeIterator {
 
     /** Return the previous Node in the Iterator. The node is the next node in
      *  _backwards_ depth-first order which also passes the filter, and whatToShow.
+     * <p>
+     *  _backwards_深度优先顺序,也通过过滤器,whatToShow。
+     * 
      */
     public Node               previousNode() {
 
@@ -259,6 +288,11 @@ public class NodeIteratorImpl implements NodeIterator {
      *
      *  The boolean visitChildren determines whether to visit the children.
      *  The result is the nextNode.
+     * <p>
+     *  从实际的DOM树。
+     * 
+     * 布尔值visitChildren决定是否访问孩子。结果是nextNode。
+     * 
      */
     Node nextNode(Node node, boolean visitChildren) {
 
@@ -301,6 +335,9 @@ public class NodeIteratorImpl implements NodeIterator {
 
     /** The method previousNode(Node) returns the previous node
      *  from the actual DOM tree.
+     * <p>
+     *  从实际的DOM树。
+     * 
      */
     Node previousNode(Node node) {
 
@@ -334,6 +371,8 @@ public class NodeIteratorImpl implements NodeIterator {
 
     /** Fix-up the iterator on a remove. Called by DOM or otherwise,
      *  before an actual DOM remove.
+     * <p>
+     *  之前一个实际的DOM删除。
      */
     public void removeNode(Node node) {
 

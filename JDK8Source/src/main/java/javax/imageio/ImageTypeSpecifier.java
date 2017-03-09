@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,22 +50,34 @@ import java.util.Hashtable;
  * <code>SampleModel</code> and <code>ColorModel</code>) to be
  * specified in a convenient manner.
  *
+ * <p>
+ *  允许以方便的方式指定图像的格式(特别是其<code> SampleModel </code>和<code> ColorModel </code>)的类。
+ * 
  */
 public class ImageTypeSpecifier {
 
     /**
      * The <code>ColorModel</code> to be used as a prototype.
+     * <p>
+     *  <code> ColorModel </code>用作原型。
+     * 
      */
     protected ColorModel colorModel;
 
     /**
      * A <code>SampleModel</code> to be used as a prototype.
+     * <p>
+     *  用作原型的<code> SampleModel </code>。
+     * 
      */
     protected SampleModel sampleModel;
 
     /**
      * Cached specifiers for all of the standard
      * <code>BufferedImage</code> types.
+     * <p>
+     *  所有标准<code> BufferedImage </code>类型的缓存说明符。
+     * 
      */
     private static ImageTypeSpecifier[] BISpecifier;
     private static ColorSpace sRGB;
@@ -78,6 +91,9 @@ public class ImageTypeSpecifier {
 
     /**
      * A constructor to be used by inner subclasses only.
+     * <p>
+     *  仅由内部子类使用的构造函数。
+     * 
      */
     private ImageTypeSpecifier() {}
 
@@ -87,6 +103,11 @@ public class ImageTypeSpecifier {
      * It is the caller's responsibility to supply compatible
      * parameters.
      *
+     * <p>
+     *  直接从<code> ColorModel </code>和<code> SampleModel </code>构造<code> ImageTypeSpecifier </code>。
+     * 呼叫者负责提供兼容的参数。
+     * 
+     * 
      * @param colorModel a <code>ColorModel</code>.
      * @param sampleModel a <code>SampleModel</code>.
      *
@@ -118,6 +139,13 @@ public class ImageTypeSpecifier {
      * <code>createFromBufferedImageType</code> should be used instead in
      * order to get a more accurate result.
      *
+     * <p>
+     *  从<code> RenderedImage </code>构造<code> ImageTypeSpecifier </code>。
+     * 如果正在使用<code> BufferedImage </code>,则应使用工厂方法<code> createFromRenderedImage </code>或<code> createFromBu
+     * fferedImageType </code>来获得更准确的结果。
+     *  从<code> RenderedImage </code>构造<code> ImageTypeSpecifier </code>。
+     * 
+     * 
      * @param image a <code>RenderedImage</code>.
      *
      * @exception IllegalArgumentException if the argument is
@@ -192,6 +220,10 @@ public class ImageTypeSpecifier {
      * <code>SampleModel</code> to store each pixel packed into in a
      * single byte, short, or int.
      *
+     * <p>
+     *  返回打包图像格式的说明符,它将使用<code> DirectColorModel </code>和打包的<code> SampleModel </code>将每个像素打包成单字节,短整型或整数。
+     * 
+     * 
      * @param colorSpace the desired <code>ColorSpace</code>.
      * @param redMask a contiguous mask indicated the position of the
      * red channel.
@@ -367,6 +399,11 @@ public class ImageTypeSpecifier {
      * <code>PixelInterleavedSampleModel</code> to store each pixel
      * component in a separate byte, short, or int.
      *
+     * <p>
+     *  返回交错图像格式的说明符,它将使用<code> ComponentColorModel </code>和<code> PixelInterleavedSampleModel </code>将每个像素组
+     * 件存储在单独的字节,短整型或整数。
+     * 
+     * 
      * @param colorSpace the desired <code>ColorSpace</code>.
      * @param bandOffsets an array of <code>int</code>s indicating the
      * offsets for each band.
@@ -519,6 +556,10 @@ public class ImageTypeSpecifier {
      * <code>BandedSampleModel</code> to store each channel in a
      * separate array.
      *
+     * <p>
+     * 返回带状图像格式的说明符,将使用<code> ComponentColorModel </code>和<code> BandedSampleModel </code>将每个通道存储在单独的数组中。
+     * 
+     * 
      * @param colorSpace the desired <code>ColorSpace</code>.
      * @param bankIndices an array of <code>int</code>s indicating the
      * bank in which each band will be stored.
@@ -660,6 +701,10 @@ public class ImageTypeSpecifier {
      * pixels of the given bit depth into array elements of
      * the specified data type.
      *
+     * <p>
+     *  返回灰度图像格式的说明符,该格式将给定位深度的像素打包到指定数据类型的数组元素中。
+     * 
+     * 
      * @param bits the number of bits per gray value (1, 2, 4, 8, or 16).
      * @param dataType the desired data type, as one of the enumerations
      * from the <code>DataBuffer</code> class.
@@ -694,6 +739,10 @@ public class ImageTypeSpecifier {
      * that will pack pixels of the given bit depth into array
      * elements of the specified data type.
      *
+     * <p>
+     *  返回灰度加alpha图像格式的说明符,它将给定位深度的像素打包到指定数据类型的数组元素中。
+     * 
+     * 
      * @param bits the number of bits per gray value (1, 2, 4, 8, or 16).
      * @param dataType the desired data type, as one of the enumerations
      * from the <code>DataBuffer</code> class.
@@ -814,6 +863,10 @@ public class ImageTypeSpecifier {
      * index values of the given bit depth into array elements of
      * the specified data type.
      *
+     * <p>
+     *  返回索引颜色图像格式的说明符,该格式将将给定位深度的索引值打包到指定数据类型的数组元素中。
+     * 
+     * 
      * @param redLUT an array of <code>byte</code>s containing
      * the red values for each index.
      * @param greenLUT an array of <code>byte</code>s containing * the
@@ -869,6 +922,11 @@ public class ImageTypeSpecifier {
      * one of the standard <code>BufferedImage</code> types
      * (other than <code>TYPE_CUSTOM</code>).
      *
+     * <p>
+     *  返回编码标准<code> BufferedImage </code>类型(<code> TYPE_CUSTOM </code>除外)类型的<code> ImageTypeSpecifier </code>
+     * 。
+     * 
+     * 
      * @param bufferedImageType an int representing one of the standard
      * <code>BufferedImage</code> types.
      *
@@ -911,6 +969,11 @@ public class ImageTypeSpecifier {
      * layout of a <code>RenderedImage</code> (which may be a
      * <code>BufferedImage</code>).
      *
+     * <p>
+     *  返回一个编码<code> RenderedImage </code>(可能是<code> BufferedImage </code>)布局的<code> ImageTypeSpecifier </code>
+     * 。
+     * 
+     * 
      * @param image a <code>RenderedImage</code>.
      *
      * @return an <code>ImageTypeSpecifier</code> with the desired
@@ -939,6 +1002,10 @@ public class ImageTypeSpecifier {
      * Returns an int containing one of the enumerated constant values
      * describing image formats from <code>BufferedImage</code>.
      *
+     * <p>
+     *  返回一个int,它包含来自<code> BufferedImage </code>的描述图像格式的枚举常量值之一。
+     * 
+     * 
      * @return an <code>int</code> representing a
      * <code>BufferedImage</code> type.
      *
@@ -968,6 +1035,10 @@ public class ImageTypeSpecifier {
      * specified by this object.  This is the same value as returned by
      * <code>ColorModel.getNumComponents</code>
      *
+     * <p>
+     *  返回此对象指定的颜色分量的数量。这与<code> ColorModel.getNumComponents </code>返回的值相同
+     * 
+     * 
      * @return the number of components in the image.
      */
     public int getNumComponents() {
@@ -979,6 +1050,10 @@ public class ImageTypeSpecifier {
      * specified by this object.  This is the same value as returned by
      * <code>SampleModel.getNumBands</code>
      *
+     * <p>
+     *  返回此对象指定的波段数。这与<code> SampleModel.getNumBands </code>返回的值相同
+     * 
+     * 
      * @return the number of bands in the image.
      */
     public int getNumBands() {
@@ -988,6 +1063,10 @@ public class ImageTypeSpecifier {
     /**
      * Return the number of bits used to represent samples of the given band.
      *
+     * <p>
+     *  返回用于表示给定频带的样本的位数。
+     * 
+     * 
      * @param band the index of the band to be queried, as an
      * int.
      *
@@ -1008,6 +1087,10 @@ public class ImageTypeSpecifier {
      * encapsulated within this object.  The width and height of the
      * <code>SampleModel</code> will be set to arbitrary values.
      *
+     * <p>
+     * 基于封装在此对象内的设置返回<code> SampleModel </code>。 <code> SampleModel </code>的宽度和高度将设置为任意值。
+     * 
+     * 
      * @return a <code>SampleModel</code> with arbitrary dimensions.
      */
     public SampleModel getSampleModel() {
@@ -1019,6 +1102,10 @@ public class ImageTypeSpecifier {
      * encapsulated within this object.  The width and height of the
      * <code>SampleModel</code> will be set to the supplied values.
      *
+     * <p>
+     *  基于封装在此对象内的设置返回<code> SampleModel </code>。 <code> SampleModel </code>的宽度和高度将设置为提供的值。
+     * 
+     * 
      * @param width the desired width of the returned <code>SampleModel</code>.
      * @param height the desired height of the returned
      * <code>SampleModel</code>.
@@ -1042,6 +1129,10 @@ public class ImageTypeSpecifier {
     /**
      * Returns the <code>ColorModel</code> specified by this object.
      *
+     * <p>
+     *  返回此对象指定的<code> ColorModel </code>。
+     * 
+     * 
      * @return a <code>ColorModel</code>.
      */
     public ColorModel getColorModel() {
@@ -1052,6 +1143,10 @@ public class ImageTypeSpecifier {
      * Creates a <code>BufferedImage</code> with a given width and
      * height according to the specification embodied in this object.
      *
+     * <p>
+     *  根据此对象中包含的规范,创建具有给定宽度和高度的<code> BufferedImage </code>。
+     * 
+     * 
      * @param width the desired width of the returned
      * <code>BufferedImage</code>.
      * @param height the desired height of the returned
@@ -1089,6 +1184,11 @@ public class ImageTypeSpecifier {
      * <code>SampleModel</code> and <code>ColorModel</code> that are
      * equal to those of this object.
      *
+     * <p>
+     *  如果给定的<code> Object </code>是<code> ImageTypeSpecifier </code>并且具有<code> SampleModel </code>和<code> Co
+     * lorModel </code>,则返回<code> true </code>这等于这个对象的那些。
+     * 
+     * 
      * @param o the <code>Object</code> to be compared for equality.
      *
      * @return <code>true</code> if the given object is an equivalent
@@ -1107,6 +1207,8 @@ public class ImageTypeSpecifier {
     /**
      * Returns the hash code for this ImageTypeSpecifier.
      *
+     * <p>
+     * 
      * @return a hash code for this ImageTypeSpecifier
      */
     public int hashCode() {

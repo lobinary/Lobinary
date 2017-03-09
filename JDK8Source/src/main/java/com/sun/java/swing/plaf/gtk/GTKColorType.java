@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,8 @@ import java.awt.Color;
 import javax.swing.plaf.ColorUIResource;
 
 /**
+/* <p>
+/* 
  * @author Scott Violet
  */
 public class GTKColorType extends ColorType {
@@ -93,6 +96,9 @@ public class GTKColorType extends ColorType {
 
     /**
      * Converts from RGB color space to HLS colorspace.
+     * <p>
+     *  从RGB颜色空间转换为HLS颜色空间。
+     * 
      */
     private static float[] rgbToHLS(int rgb, float[] hls) {
         float r = ((rgb & 0xFF0000) >> 16) / 255.0f;
@@ -137,6 +143,9 @@ public class GTKColorType extends ColorType {
      * The transformation is done in the HLS color space using the specified
      * arguments to scale.
      *
+     * <p>
+     *  创建并返回从传递的颜色派生的新颜色。转换在HLS颜色空间中使用指定的参数进行缩放。
+     * 
      * @param color Color to alter
      * @param hFactory Amount to scale the hue
      * @param lFactor Amount to scale the lightness

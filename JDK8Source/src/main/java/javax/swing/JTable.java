@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -208,6 +209,87 @@ import sun.swing.PrintingStatus;
  *   attribute: isContainer false
  * description: A component which displays data in a two dimensional grid.
  *
+ * <p>
+ *  <code> JTable </code>用于显示和编辑单元格的常规二维表格。
+ * 请参阅任务的<em> Java教程</em>中的<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/table.html">
+ * 如何使用表</a>面向对象的文档和使用<code> JTable </code>的示例。
+ *  <code> JTable </code>用于显示和编辑单元格的常规二维表格。
+ * 
+ * <p>
+ *  <code> JTable </code>有许多功能,可以自定义其呈现和编辑,但提供这些功能的默认值,以便可以轻松地设置简单的表。例如,要设置一个包含10行和10列数字的表：
+ * 
+ * <pre>
+ *  TableModel dataModel = new AbstractTableModel(){public int getColumnCount(){return 10; } public int 
+ * getRowCount(){return 10;} public Object getValueAt(int row,int col){return new Integer(row * col); }}
+ * ; JTable table = new JTable(dataModel); JScrollPane scrollpane = new JScrollPane(table);。
+ * </pre>
+ * <p>
+ *  {@code JTable}通常放置在{@code JScrollPane}中。默认情况下,{@code JTable}将调整其宽度,以便不需要水平滚动条。
+ * 要允许使用水平滚动条,请使用{@code AUTO_RESIZE_OFF}调用{@link #setAutoResizeMode}。
+ * 请注意,如果您希望在独立视图(<code> JScrollPane </code>之外)中使用<code> JTable </code>并希望显示标题,可以使用{@link #getTableHeader}
+ * 并单独显示。
+ * 要允许使用水平滚动条,请使用{@code AUTO_RESIZE_OFF}调用{@link #setAutoResizeMode}。
+ * <p>
+ * 要启用对行的排序和过滤,请使用{@code RowSorter}。您可以通过以下两种方式之一设置行排序器：
+ * <ul>
+ *  <li>直接设置{@code RowSorter}。例如：{@code table.setRowSorter(new TableRowSorter(model))}。
+ *  <li>将{@code autoCreateRowSorter}属性设置为{@code true},以便{@code JTable}为您创建一个{@code RowSorter}。
+ * 例如：{@code setAutoCreateRowSorter(true)}。
+ * </ul>
+ * <p>
+ *  当设计使用<code> JTable </code>的应用程序时,值得密切注意表示表数据的数据结构。
+ *  <code> DefaultTableModel </code>是使用<code> Object </code>的<code> Vector </code>的<code> Vector </code>
+ * 来存储单元格值的模型实现。
+ *  当设计使用<code> JTable </code>的应用程序时,值得密切注意表示表数据的数据结构。
+ * 除了将数据从应用程序复制到<code> DefaultTableModel </code>中,还可以将数据包装在<code> TableModel </code>接口的方法中,以便将数据传递给<code>
+ *  JTable </code>,如上例所示。
+ *  当设计使用<code> JTable </code>的应用程序时,值得密切注意表示表数据的数据结构。这通常导致更高效的应用程序,因为模型可以自由选择最适合数据的内部表示。
+ * 决定是否使用<code> AbstractTableModel </code>或<code> DefaultTableModel </code>的一个好的经验法则是使用<code> AbstractTa
+ * bleModel </code>作为创建子类的基类, <code> DefaultTableModel </code>当不需要子类化时。
+ *  当设计使用<code> JTable </code>的应用程序时,值得密切注意表示表数据的数据结构。这通常导致更高效的应用程序,因为模型可以自由选择最适合数据的内部表示。
+ * <p>
+ * 源分布演示区域中的"TableExample"目录提供了许多<code> JTable </code>用法的完整示例,涵盖了如何使用<code> JTable </code>提供可编辑的视图从数据库获取
+ * 的数据以及如何修改显示中的列以使用专用的渲染器和编辑器。
+ * <p>
+ *  <code> JTable </code>仅使用整数来引用它显示的模型的行和列。
+ *  <code> JTable </code>只需要一个表格范围的单元格,并使用<code> getValueAt(int,int)</code>在绘画过程中从模型中检索值。
+ * 重要的是要记住,各种<code> JTable </code>方法返回的列和行索引在<code> JTable </code>(视图)方面,并且不一定是模型。
+ * <p>
+ *  默认情况下,列可以在<code> JTable </code>中重新排列,以便视图的列以与模型中的列不同的顺序显示。
+ * 这不影响模型的实现：当列重新排序时,<code> JTable </code>在内部维护列的新顺序,并在查询模型之前转换其列索引。
+ * <p>
+ * 所以,当写一个<code> TableModel </code>时,没有必要监听列重排序事件,因为模型将在自己的坐标系统中被查询,而不管视图中发生了什么。
+ * 在示例区域中,有一个排序算法的演示,利用这种技术来插入另一个坐标系统,其中行的顺序被改变,而不是列的顺序。
+ * <p>
+ *  类似地,当使用由<code> RowSorter </code>提供的排序和过滤功能时,底层的<code> TableModel </code>不需要知道如何做排序,而是<code> RowSorte
+ * r </code> 。
+ * 当使用<code> JTable </code>与基础<code> TableModel </code>的基于行的方法时,需要进行坐标转换。
+ * 所有<code> JTable </code>的基于行的方法都是根据<code> RowSorter </code>来实现的,它不一定与底层的<code> TableModel </code>相同。
+ * 例如,选择总是使用<code> JTable </code>,以便在使用<code> RowSorter </code>时,您需要使用<code> convertRowIndexToView </code>
+ * 或<code> convertRowIndexToModel < / code>。
+ * 所有<code> JTable </code>的基于行的方法都是根据<code> RowSorter </code>来实现的,它不一定与底层的<code> TableModel </code>相同。
+ * 下面显示如何将坐标从<code> JTable </code>转换为底层模型的坐标：。
+ * <pre>
+ * int [] selection = table.getSelectedRows(); for(int i = 0; i <selection.length; i ++){selection [i] = table.convertRowIndexToModel(selection [i]); } //选择现在是根据底层的TableModel。
+ * </pre>
+ * <p>
+ *  默认情况下,如果启用排序,<code> JTable </code>将根据排序的模型来保留选择和变量行高。例如,如果行0(在底层模型方面)当前被选择,则在排序行0之后,将选择底层模型。
+ * 视觉上,选择可能改变,但是在基础模型方面,它将保持不变。一个例外是如果模型索引不再可见或被删除。例如,如果过滤掉模型中的行0,则排序后选择将为空。
+ * <p>
+ *  J2SE 5向<code> JTable </code>添加了方法,以方便访问一些常见的打印需求。简单的新{@link #print()}方法可以快速轻松地为应用程序添加打印支持。
+ * 此外,新的{@link #getPrintable}方法可用于更高级的打印需求。
+ * <p>
+ *  对于所有<code> JComponent </code>类,您可以使用{@link InputMap}和{@link ActionMap}将{@link Action}对象与{@link KeyStroke}
+ * 关联,并在指定条件下执行操作。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ *  @beaninfo属性：isContainer false description：以二维网格显示数据的组件。
+ * 
+ * 
  * @author Philip Milne
  * @author Shannon Hickey (printing support)
  * @see javax.swing.table.DefaultTableModel
@@ -215,6 +297,9 @@ import sun.swing.PrintingStatus;
  */
 /* The first versions of the JTable, contained in Swing-0.1 through
  * Swing-0.4, were written by Alan Chung.
+ * <p>
+ *  Swing-0.4,由Alan Chung写。
+ * 
  */
 public class JTable extends JComponent implements TableModelListener, Scrollable,
     TableColumnModelListener, ListSelectionListener, CellEditorListener,
@@ -225,6 +310,8 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 //
 
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -237,6 +324,8 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     public static final int     AUTO_RESIZE_NEXT_COLUMN = 1;
 
     /** During UI adjustment, change subsequent columns to preserve the total width;
+    /* <p>
+    /* 
       * this is the default behavior. */
     public static final int     AUTO_RESIZE_SUBSEQUENT_COLUMNS = 2;
 
@@ -250,6 +339,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Printing modes, used in printing <code>JTable</code>s.
      *
+     * <p>
+     *  打印模式,用于打印<code> JTable </code>。
+     * 
+     * 
      * @see #print(JTable.PrintMode, MessageFormat, MessageFormat,
      *             boolean, PrintRequestAttributeSet, boolean)
      * @see #getPrintable
@@ -260,6 +353,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Printing mode that prints the table at its current size,
          * spreading both columns and rows across multiple pages if necessary.
+         * <p>
+         *  以当前大小打印表的打印模式,如果需要,将列和行分布在多个页面上。
+         * 
          */
         NORMAL,
 
@@ -267,6 +363,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Printing mode that scales the output smaller, if necessary,
          * to fit the table's entire width (and thereby all columns) on each page;
          * Rows are spread across multiple pages as necessary.
+         * <p>
+         *  如果需要,缩放输出的打印模式可以适应每个页面上表格的整个宽度(从而适合所有列);根据需要,行可以分布在多个页面上。
+         * 
          */
         FIT_WIDTH
     }
@@ -307,12 +406,18 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *  Determines if the table automatically resizes the
      *  width of the table's columns to take up the entire width of the
      *  table, and how it does the resizing.
+     * <p>
+     *  确定表是否自动调整表格列的宽度以占用表格的整个宽度,以及如何调整大小。
+     * 
      */
     protected int               autoResizeMode;
 
     /**
      *  The table will query the <code>TableModel</code> to build the default
      *  set of columns if this is true.
+     * <p>
+     *  如果这是真的,表将查询<code> TableModel </code>来构建默认的列集合。
+     * 
      */
     protected boolean           autoCreateColumnsFromModel;
 
@@ -328,11 +433,20 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>columnSelectionAllowed</code> property of the
      * <code>columnModel</code> instead. Or use the
      * method <code>getCellSelectionEnabled</code>.
+     * <p>
+     *  作为Java 2平台v1.3的已过时。
+     * 请改用<code> rowSelectionAllowed </code>属性和<code> columnModel </code>的<code> columnSelectionAllowed </code>
+     * 属性。
+     *  作为Java 2平台v1.3的已过时。或者使用方法<code> getCellSelectionEnabled </code>。
+     * 
      */
     /*
      * If true, both a row selection and a column selection
      * can be non-empty at the same time, the selected cells are the
      * the cells whose row and column are both selected.
+     * <p>
+     * 如果为真,则行选择和列选择可以同时是非空的,所选单元是其行和列都被选择的单元。
+     * 
      */
     protected boolean           cellSelectionEnabled;
 
@@ -343,6 +457,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * The active cell editor object, that overwrites the screen real estate
      * occupied by the current cell and allows the user to change its contents.
      * {@code null} if the table isn't currently editing.
+     * <p>
+     *  活动单元格编辑器对象覆盖当前单元格占用的屏幕空间,并允许用户更改其内容。 {@code null}如果表当前未编辑。
+     * 
      */
     transient protected TableCellEditor cellEditor;
 
@@ -356,6 +473,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * A table of objects that display the contents of a cell,
      * indexed by class as declared in <code>getColumnClass</code>
      * in the <code>TableModel</code> interface.
+     * <p>
+     *  显示单元格内容的对象表,由<code> TableModel </code>接口中的<code> getColumnClass </code>中声明的类索引。
+     * 
      */
     transient protected Hashtable defaultRenderersByColumnClass;
 
@@ -363,6 +483,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * A table of objects that display and edit the contents of a cell,
      * indexed by class as declared in <code>getColumnClass</code>
      * in the <code>TableModel</code> interface.
+     * <p>
+     *  显示和编辑单元格内容的对象表,由<code> TableModel </code>界面中的<code> getColumnClass </code>中声明的类索引。
+     * 
      */
     transient protected Hashtable defaultEditorsByColumnClass;
 
@@ -386,51 +509,82 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * The last value of getValueIsAdjusting from the column selection models
      * columnSelectionChanged notification. Used to test if a repaint is
      * needed.
+     * <p>
+     *  getValueIsAdjusting的最后一个值从列选择模型columnSelectionChanged通知。用于测试是否需要重绘。
+     * 
      */
     private boolean columnSelectionAdjusting;
     /**
      * The last value of getValueIsAdjusting from the row selection models
      * valueChanged notification. Used to test if a repaint is needed.
+     * <p>
+     *  getValueIsAdjusting的最后一个值来自行选择模型valueChanged通知。用于测试是否需要重绘。
+     * 
      */
     private boolean rowSelectionAdjusting;
 
     /**
      * To communicate errors between threads during printing.
+     * <p>
+     *  在打印期间在线程之间传递错误。
+     * 
      */
     private Throwable printError;
 
     /**
      * True when setRowHeight(int) has been invoked.
+     * <p>
+     *  调用setRowHeight(int)时为true。
+     * 
      */
     private boolean isRowHeightSet;
 
     /**
      * If true, on a sort the selection is reset.
+     * <p>
+     *  如果为true,在排序上重置选择。
+     * 
      */
     private boolean updateSelectionOnSort;
 
     /**
      * Information used in sorting.
+     * <p>
+     *  排序中使用的信息。
+     * 
      */
     private transient SortManager sortManager;
 
     /**
      * If true, when sorterChanged is invoked it's value is ignored.
+     * <p>
+     *  如果为true,当调用sorterChanged时,它的值将被忽略。
+     * 
      */
     private boolean ignoreSortChange;
 
     /**
      * Whether or not sorterChanged has been invoked.
+     * <p>
+     *  是否已调用sorterChanged。
+     * 
      */
     private boolean sorterChanged;
 
     /**
      * If true, any time the model changes a new RowSorter is set.
+     * <p>
+     *  如果为true,则任何时候模型更改时都会设置一个新的RowSorter。
+     * 
      */
     private boolean autoCreateRowSorter;
 
     /**
      * Whether or not the table always fills the viewport height.
+     * <p>
+     *  表是否始终填充视口高度。
+     * 
+     * 
      * @see #setFillsViewportHeight
      * @see #getScrollableTracksViewportHeight
      */
@@ -438,11 +592,17 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * The drop mode for this component.
+     * <p>
+     *  此组件的放置模式。
+     * 
      */
     private DropMode dropMode = DropMode.USE_SELECTION;
 
     /**
      * The drop location.
+     * <p>
+     *  放置位置。
+     * 
      */
     private transient DropLocation dropLocation;
 
@@ -450,6 +610,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * A subclass of <code>TransferHandler.DropLocation</code> representing
      * a drop location for a <code>JTable</code>.
      *
+     * <p>
+     * <code> TransferHandler.DropLocation </code>的子类,表示<code> JTable </code>的放置位置。
+     * 
+     * 
      * @see #getDropLocation
      * @since 1.6
      */
@@ -481,6 +645,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * <code>-1</code> indicates that the drop occurred over empty space,
          * and no row could be calculated.
          *
+         * <p>
+         *  返回应在表中放置删除项的行索引。值的解释取决于<code> isInsertRow()</code>的返回。如果该方法返回<code> true </code>,则此值指示应插入新行的索引。
+         * 否则,它表示已删除数据的现有行的值。这个指数是根据视图。
+         * <p>
+         *  <code> -1 </code>表示删除发生在空白空间,并且没有行可以计算。
+         * 
+         * 
          * @return the drop row
          */
         public int getRow() {
@@ -499,6 +670,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * <code>-1</code> indicates that the drop occurred over empty space,
          * and no column could be calculated.
          *
+         * <p>
+         *  返回应在表中放置删除项目的列索引。值的解释取决于<code> isInsertColumn()</code>的返回。如果该方法返回<code> true </code>,则此值指示应插入新列的索引。
+         * 否则,它表示已放下数据的现有列的​​值。这个指数是根据视图。
+         * <p>
+         *  <code> -1 </code>表示删除发生在空白空间,并且没有列可以计算。
+         * 
+         * 
          * @return the drop row
          */
         public int getColumn() {
@@ -509,6 +687,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns whether or not this location represents an insert
          * of a row.
          *
+         * <p>
+         *  返回此位置是否表示行的插入。
+         * 
+         * 
          * @return whether or not this is an insert row
          */
         public boolean isInsertRow() {
@@ -519,6 +701,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns whether or not this location represents an insert
          * of a column.
          *
+         * <p>
+         *  返回此位置是否表示列的插入。
+         * 
+         * 
          * @return whether or not this is an insert column
          */
         public boolean isInsertColumn() {
@@ -531,6 +717,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * and the content and format of the returned string may vary
          * between implementations.
          *
+         * <p>
+         *  返回此放置位置的字符串表示形式。此方法旨在用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+         * 
+         * 
          * @return a string representation of this drop location
          */
         public String toString() {
@@ -552,6 +742,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * data model, a default column model, and a default selection
      * model.
      *
+     * <p>
+     * 构造使用默认数据模型,默认列模型和默认选择模型初始化的默认<code> JTable </code>。
+     * 
+     * 
      * @see #createDefaultDataModel
      * @see #createDefaultColumnModel
      * @see #createDefaultSelectionModel
@@ -565,6 +759,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>dm</code> as the data model, a default column model,
      * and a default selection model.
      *
+     * <p>
+     *  构造以<code> dm </code>作为数据模型,默认列模型和默认选择模型初始化的<code> JTable </code>。
+     * 
+     * 
      * @param dm        the data model for the table
      * @see #createDefaultColumnModel
      * @see #createDefaultSelectionModel
@@ -578,6 +776,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>dm</code> as the data model, <code>cm</code>
      * as the column model, and a default selection model.
      *
+     * <p>
+     *  构造以<code> dm </code>作为数据模型,<code> cm </code>作为列模型和默认选择模型初始化的<code> JTable </code>。
+     * 
+     * 
      * @param dm        the data model for the table
      * @param cm        the column model for the table
      * @see #createDefaultSelectionModel
@@ -597,6 +799,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * and the column model is populated with suitable
      * <code>TableColumns</code> for the columns in <code>dm</code>.
      *
+     * <p>
+     *  构造以<code> dm </code>作为数据模型,以<code> cm </code>作为列模型,以<code> sm </code>作为初始化的<code> JTable </code>选择模型
+     * 。
+     * 如果任何参数是<code> null </code>,此方法将使用相应的默认模型初始化表。
+     * 如果<code> cm </code>是非空的,则<code> autoCreateColumnsFromModel </code>标志设置为false,否则设置为true,列模型填充适当的<code>
+     *  TableColumns </code>对于<code> dm </code>中的列。
+     * 如果任何参数是<code> null </code>,此方法将使用相应的默认模型初始化表。
+     * 
+     * 
      * @param dm        the data model for the table
      * @param cm        the column model for the table
      * @param sm        the row selection model for the table
@@ -641,6 +852,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>DefaultTableModel</code>.  The columns will have
      * names of the form "A", "B", "C", etc.
      *
+     * <p>
+     *  使用<code> DefaultTableModel </code>,使用<code> numRows </code>和<code> numColumns </code>为空单元格构造<code> J
+     * Table </code>。
+     * 列将具有形式"A","B","C"等的名称。
+     * 
+     * 
      * @param numRows           the number of rows the table holds
      * @param numColumns        the number of columns the table holds
      * @see javax.swing.table.DefaultTableModel
@@ -660,6 +877,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *
      * <pre>((Vector)rowData.elementAt(1)).elementAt(5);</pre>
      * <p>
+     * <p>
+     * 构造<code> JTable </code>以显示<code>向量</code>的<code>向量</code>,<code> rowData </code> columnNames </code>。
+     *  <code> rowData </code>中包含的<code> Vectors </code>应包含该行的值。换句话说,可以使用以下代码获得行1,列5处的单元的值：。
+     * 
+     *  <pre>((Vector)rowData.elementAt(1))。elementAt(5); </pre>
+     * <p>
+     * 
      * @param rowData           the data for the new table
      * @param columnNames       names of each column
      */
@@ -677,6 +901,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <p>
      * All rows must be of the same length as <code>columnNames</code>.
      * <p>
+     * <p>
+     *  构造<code> JTable </code>以使用列名称<code> columnNames </code>显示二维数组<code> rowData </code>中的值。
+     *  <code> rowData </code>是一个行数组,因此可以使用以下代码获取第1行第5列的单元格的值：。
+     * 
+     *  <pre> rowData [1] [5]; </pre>
+     * <p>
+     *  所有行的长度必须与<code> columnNames </code>的长度相同。
+     * <p>
+     * 
      * @param rowData           the data for the new table
      * @param columnNames       names of each column
      */
@@ -697,6 +930,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Calls the <code>configureEnclosingScrollPane</code> method.
      *
+     * <p>
+     *  调用<code> configureEnclosingScrollPane </code>方法。
+     * 
+     * 
      * @see #configureEnclosingScrollPane
      */
     public void addNotify() {
@@ -715,6 +952,14 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * which is protected so that this default installation procedure can
      * be overridden by a subclass.
      *
+     * <p>
+     * 如果这个<code> JTable </code>是一个封闭的<code> JScrollPane </code>(通常情况)的<code> viewportView </code>,配置这个<code>
+     *  ScrollPane </code>其他事情,安装表的<code> tableHeader </code>作为滚动窗格的<code> columnHeaderView </code>。
+     * 当以通常的方式将<code> JTable </code>添加到<code> JScrollPane </code>中时,使用<code> new JScrollPane(myTable)</code>
+     * ,<code> addNotify </code>在<code> JTable </code>中调用(当表被添加到视口时)。
+     *  <code> JTable </code>的<code> addNotify </code>方法又调用这个方法,这是受保护的,因此这个默认安装过程可以被子类覆盖。
+     * 
+     * 
      * @see #addNotify
      */
     protected void configureEnclosingScrollPane() {
@@ -750,6 +995,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * changes its contract for any subclass that overrides it. So by splitting
      * it out in this way configureEnclosingScrollPaneUI() can be called both
      * from configureEnclosingScrollPane() and updateUI() in a safe manor.
+     * <p>
+     *  这是configureEnclosingScrollPane()的一个子部分,它配置滚动窗格上的任何东西,当外观和感觉变化时,这些东西可能会改变。
+     * 它需要从configureEnclosingScrollPane()中分离出来,以便在LAF更改时可以从updateUI()中调用,而不会导致错误6687962中发现的回归。
+     * 这是因为updateUI()从构造函数中调用,然后造成configureEnclosingScrollPane()被构造函数调用,该构造函数改变其覆盖它的任何子类的契约。
+     * 因此,通过以这种方式拆分configureEnclosingScrollPaneUI()可以从configureEnclosingScrollPane()和updateUI()在安全庄园中调用。
+     * 
      */
     private void configureEnclosingScrollPaneUI() {
         Container parent = SwingUtilities.getUnwrappedParent(this);
@@ -796,6 +1047,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Calls the <code>unconfigureEnclosingScrollPane</code> method.
      *
+     * <p>
+     *  调用<code> unconfigureEnclosingScrollPane </code>方法。
+     * 
+     * 
      * @see #unconfigureEnclosingScrollPane
      */
     public void removeNotify() {
@@ -814,6 +1069,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * this method, which is protected so that this default uninstallation
      * procedure can be overridden by a subclass.
      *
+     * <p>
+     * 通过使用<code> null </code>替换封闭滚动窗格的<code> columnHeaderView </code>,可以消除<code> configureEnclosingScrollPa
+     * ne </code>的效果。
+     *  <code> JTable </code>的<code> removeNotify </code>方法调用此方法,该方法受到保护,因此此默认卸载过程可以被子类覆盖。
+     * 
+     * 
      * @see #removeNotify
      * @see #configureEnclosingScrollPane
      * @since 1.3
@@ -863,6 +1124,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Equivalent to <code>new JScrollPane(aTable)</code>.
      *
+     * <p>
+     *  等同于<code> new JScrollPane(aTable)</code>。
+     * 
+     * 
      * @deprecated As of Swing version 1.0.2,
      * replaced by <code>new JScrollPane(aTable)</code>.
      */
@@ -879,6 +1144,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Sets the <code>tableHeader</code> working with this <code>JTable</code> to <code>newHeader</code>.
      * It is legal to have a <code>null</code> <code>tableHeader</code>.
      *
+     * <p>
+     *  将<code> tableHeader </code>设置为<code> JTable </code>到<code> newHeader </code>。
+     * 具有<code> null </code> <code> tableHeader </code>是合法的。
+     * 
+     * 
      * @param   tableHeader                       new tableHeader
      * @see     #getTableHeader
      * @beaninfo
@@ -903,6 +1173,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the <code>tableHeader</code> used by this <code>JTable</code>.
      *
+     * <p>
+     *  返回此代码<code> JTable </code>使用的<code> tableHeader </code>。
+     * 
+     * 
      * @return  the <code>tableHeader</code> used by this table
      * @see     #setTableHeader
      */
@@ -916,6 +1190,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * The height of the cells will be equal to the row height minus
      * the row margin.
      *
+     * <p>
+     *  将所有单元格的高度(以像素为单位)设置为<code> rowHeight </code>,重新验证和重新绘制。单元格的高度将等于行高减去行边距。
+     * 
+     * 
      * @param   rowHeight                       new row height
      * @exception IllegalArgumentException      if <code>rowHeight</code> is
      *                                          less than 1
@@ -942,6 +1220,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the height of a table row, in pixels.
      *
+     * <p>
+     *  返回表格行的高度(以像素为单位)。
+     * 
+     * 
      * @return  the height in pixels of a table row
      * @see     #setRowHeight
      */
@@ -961,6 +1243,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * revalidates, and repaints. The height of the cells in this row
      * will be equal to the row height minus the row margin.
      *
+     * <p>
+     *  将<code> row </code>的高度设置为<code> rowHeight </code>,重新验证和重新绘制。此行中的单元格的高度将等于行高度减行余量。
+     * 
+     * 
      * @param   row                             the row whose height is being
                                                 changed
      * @param   rowHeight                       new row height, in pixels
@@ -984,6 +1270,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Returns the height, in pixels, of the cells in <code>row</code>.
+     * <p>
+     *  返回<code> row </code>中单元格的高度(以像素为单位)。
+     * 
+     * 
      * @param   row              the row whose height is to be returned
      * @return the height, in pixels, of the cells in the row
      * @since 1.3
@@ -995,6 +1285,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Sets the amount of empty space between cells in adjacent rows.
      *
+     * <p>
+     *  设置相邻行中单元格之间的空白空间量。
+     * 
+     * 
      * @param  rowMargin  the number of pixels between cells in a row
      * @see     #getRowMargin
      * @beaninfo
@@ -1011,6 +1305,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Gets the amount of empty space, in pixels, between cells. Equivalent to:
      * <code>getIntercellSpacing().height</code>.
+     * <p>
+     *  获取单元格之间的空格空间量(以像素为单位)。等效于：<code> getIntercellSpacing()。height </code>。
+     * 
+     * 
      * @return the number of pixels between cells in a row
      *
      * @see     #setRowMargin
@@ -1024,6 +1322,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * the height and width of the space between cells -- to
      * <code>intercellSpacing</code>.
      *
+     * <p>
+     *  将<code> rowMargin </code>和<code> columnMargin </code>(单元格之间的空格的高度和宽度)设置为<code> intercellSpacing </code>
+     * 。
+     * 
+     * 
      * @param   intercellSpacing        a <code>Dimension</code>
      *                                  specifying the new width
      *                                  and height between cells
@@ -1044,6 +1347,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the horizontal and vertical space between cells.
      * The default spacing is look and feel dependent.
      *
+     * <p>
+     * 返回单元格之间的水平和垂直间距。默认间距取决于外观。
+     * 
+     * 
      * @return  the horizontal and vertical spacing between cells
      * @see     #setIntercellSpacing
      */
@@ -1055,6 +1362,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Sets the color used to draw grid lines to <code>gridColor</code> and redisplays.
      * The default color is look and feel dependent.
      *
+     * <p>
+     *  将用于绘制网格线的颜色设置为<code> gridColor </code>并重新显示。默认颜色依赖于外观。
+     * 
+     * 
      * @param   gridColor                       the new color of the grid lines
      * @exception IllegalArgumentException      if <code>gridColor</code> is <code>null</code>
      * @see     #getGridColor
@@ -1077,6 +1388,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the color used to draw grid lines.
      * The default color is look and feel dependent.
      *
+     * <p>
+     *  返回用于绘制网格线的颜色。默认颜色依赖于外观。
+     * 
+     * 
      * @return  the color used to draw grid lines
      * @see     #setGridColor
      */
@@ -1091,6 +1406,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *  in two variables -- <code>showHorizontalLines</code> and <code>showVerticalLines</code> --
      *  each of which can be queried independently.
      *
+     * <p>
+     *  设置表格是否在单元格周围绘制网格线。如果<code> showGrid </code>为true,如果它是假的,它不会。
+     * 没有<code> getShowGrid </code>方法,因为此状态保存在两个变量 -  <code> showHorizo​​ntalLines </code>和<code> showVertic
+     * alLines </code>中 - 每个都可以独立查询。
+     *  设置表格是否在单元格周围绘制网格线。如果<code> showGrid </code>为true,如果它是假的,它不会。
+     * 
+     * 
      * @param   showGrid                 true if table view should draw grid lines
      *
      * @see     #setShowVerticalLines
@@ -1110,6 +1432,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *  Sets whether the table draws horizontal lines between cells.
      *  If <code>showHorizontalLines</code> is true it does; if it is false it doesn't.
      *
+     * <p>
+     *  设置表格是否在单元格之间绘制水平线。如果<code> showHorizo​​ntalLines </code>为true,如果它是假的,它不会。
+     * 
+     * 
      * @param   showHorizontalLines      true if table view should draw horizontal lines
      * @see     #getShowHorizontalLines
      * @see     #setShowGrid
@@ -1131,6 +1457,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *  Sets whether the table draws vertical lines between cells.
      *  If <code>showVerticalLines</code> is true it does; if it is false it doesn't.
      *
+     * <p>
+     *  设置表格是否在单元格之间绘制垂直线。如果<code> showVerticalLines </code>为true,如果它是假的,它不会。
+     * 
+     * 
      * @param   showVerticalLines              true if table view should draw vertical lines
      * @see     #getShowVerticalLines
      * @see     #setShowGrid
@@ -1151,6 +1481,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns true if the table draws horizontal lines between cells, false if it
      * doesn't. The default value is look and feel dependent.
      *
+     * <p>
+     *  如果表格在单元格之间绘制水平线,则返回true,否则返回false。默认值依赖于外观。
+     * 
+     * 
      * @return  true if the table draws horizontal lines between cells, false if it
      *          doesn't
      * @see     #setShowHorizontalLines
@@ -1163,6 +1497,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns true if the table draws vertical lines between cells, false if it
      * doesn't. The default value is look and feel dependent.
      *
+     * <p>
+     *  如果表在单元格之间绘制垂直线,则返回true,否则返回false。默认值依赖于外观。
+     * 
+     * 
      * @return  true if the table draws vertical lines between cells, false if it
      *          doesn't
      * @see     #setShowVerticalLines
@@ -1176,6 +1514,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * information on how the different resize modes work, see
      * {@link #doLayout}.
      *
+     * <p>
+     *  调整表格大小时设置表格的自动调整大小模式。有关不同调整大小模式如何工作的更多信息,请参阅{@link #doLayout}。
+     * 
+     * 
      * @param   mode One of 5 legal values:
      *                   AUTO_RESIZE_OFF,
      *                   AUTO_RESIZE_NEXT_COLUMN,
@@ -1214,6 +1556,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the auto resize mode of the table.  The default mode
      * is AUTO_RESIZE_SUBSEQUENT_COLUMNS.
      *
+     * <p>
+     *  返回表格的自动调整大小模式。默认模式为AUTO_RESIZE_SUBSEQUENT_COLUMNS。
+     * 
+     * 
      * @return  the autoResizeMode of the table
      *
      * @see     #setAutoResizeMode
@@ -1228,6 +1574,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * This method calls <code>createDefaultColumnsFromModel</code> if
      * <code>autoCreateColumnsFromModel</code> changes from false to true.
      *
+     * <p>
+     * 设置此表的<code> autoCreateColumnsFromModel </code>标志。
+     * 如果<code> autoCreateColumnsFromModel </code>从false更改为true,则此方法调用<code> createDefaultColumnsFromModel </code>
+     * 。
+     * 设置此表的<code> autoCreateColumnsFromModel </code>标志。
+     * 
+     * 
      * @param   autoCreateColumnsFromModel   true if <code>JTable</code> should automatically create columns
      * @see     #getAutoCreateColumnsFromModel
      * @see     #createDefaultColumnsFromModel
@@ -1254,6 +1607,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * entire table changed, then the columns will be rebuilt.
      * The default is true.
      *
+     * <p>
+     *  确定表是否将从模型创建默认列。如果为true,则<code> setModel </code>将清除所有现有列,并从新模型中创建新列。
+     * 此外,如果<code> tableChanged </code>通知中的事件指定整个表已更改,则将重建列。默认值为true。
+     * 
+     * 
      * @return  the autoCreateColumnsFromModel of the table
      * @see     #setAutoCreateColumnsFromModel
      * @see     #createDefaultColumnsFromModel
@@ -1270,6 +1628,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Clears any existing columns before creating the
      * new columns based on information from the model.
      *
+     * <p>
+     *  使用<code> TableModel </code>界面中定义的<code> getColumnCount </code>方法从数据模型中为表创建默认列。
+     * <p>
+     *  在根据模型中的信息创建新列之前,清除所有现有列。
+     * 
+     * 
      * @see     #getAutoCreateColumnsFromModel
      */
     public void createDefaultColumnsFromModel() {
@@ -1294,6 +1658,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * a <code>TableColumn</code>. If renderer is <code>null</code>,
      * removes the default renderer for this column class.
      *
+     * <p>
+     *  设置在<code> TableColumn </code>中未设置渲染器时要使用的默认单元格渲染器。如果renderer为<code> null </code>,则删除此列类的默认渲染器。
+     * 
+     * 
      * @param  columnClass     set the default cell renderer for this columnClass
      * @param  renderer        default cell renderer to be used for this
      *                         columnClass
@@ -1318,6 +1686,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * for <code>Object</code>, <code>Number</code>, and <code>Boolean</code>, all of which can be modified
      * or replaced.
      *
+     * <p>
+     *  返回在<code> TableColumn </code>中未设置渲染器时要使用的单元格渲染器。
+     * 在单元的呈现期间,根据列中的单元的类别从条目的<code> Hashtable </code>中提取呈现器。
+     * 如果这个<code> columnClass </code>没有条目,该方法返回最特定的超类的条目。
+     *  <code> JTable </code>安装<code> Object </code>,<code> Number </code>和<code> Boolean </code>的条目,所有这些都可以
+     * 修改或替换。
+     * 如果这个<code> columnClass </code>没有条目,该方法返回最特定的超类的条目。
+     * 
+     * 
      * @param   columnClass   return the default cell renderer
      *                        for this columnClass
      * @return  the renderer for this columnClass
@@ -1352,6 +1729,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * If editor is <code>null</code>, removes the default editor for this
      * column class.
      *
+     * <p>
+     * 如果在<code> TableColumn </code>中未设置编辑器,则设置要使用的默认单元格编辑器。
+     * 如果在表中或表中的特定列中不需要编辑,则使用<code> TableModel </code>接口中的<code> isCellEditable </code>方法来确保此<code> JTable </code >
+     * 将不会在这些列中启动编辑器。
+     * 如果在<code> TableColumn </code>中未设置编辑器,则设置要使用的默认单元格编辑器。如果editor是<code> null </code>,则删除此列类的默认编辑器。
+     * 
+     * 
      * @param  columnClass  set the default cell editor for this columnClass
      * @param  editor   default cell editor to be used for this columnClass
      * @see     TableModel#isCellEditable
@@ -1376,6 +1760,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * for <code>Object</code>, <code>Number</code>, and <code>Boolean</code>, all of which can be modified
      * or replaced.
      *
+     * <p>
+     *  返回在<code> TableColumn </code>中未设置任何编辑器时要使用的编辑器。
+     * 在编辑单元格期间,根据列中单元格的类别从<code> Hashtable </code>条目中提取编辑器。
+     * 如果这个<code> columnClass </code>没有条目,该方法返回最特定的超类的条目。
+     *  <code> JTable </code>安装<code> Object </code>,<code> Number </code>和<code> Boolean </code>的条目,所有这些都可以
+     * 修改或替换。
+     * 如果这个<code> columnClass </code>没有条目,该方法返回最特定的超类的条目。
+     * 
+     * 
      * @param   columnClass  return the default cell editor for this columnClass
      * @return the default cell editor to be used for this columnClass
      * @see     #setDefaultEditor
@@ -1415,6 +1808,18 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * begin a drag and drop operation by calling {@code exportAsDrag} on the
      * table's {@code TransferHandler}.
      *
+     * <p>
+     *  打开或关闭自动拖动处理。为了启用自动拖动处理,此属性应设置为{@code true},表的{@code TransferHandler}需要为{@code non-null}。
+     *  {@code dragEnabled}属性的默认值为{@code false}。
+     * <p>
+     * 尊重此属性并识别用户拖动手势的工作在于外观和感觉实现,特别是表的{@code TableUI}。
+     * 当启用自动拖动处理时,每当用户在项目上单击鼠标按钮(在单选模式下)或选择(在其他选项中)时,大多数外观和感觉(包括那些子类{@code BasicLookAndFeel})开始拖放操作,选择模式),然后
+     * 将鼠标移动几个像素。
+     * 尊重此属性并识别用户拖动手势的工作在于外观和感觉实现,特别是表的{@code TableUI}。因此,将此属性设置为{@code true}可能会对选择行为产生微妙的影响。
+     * <p>
+     *  如果使用忽略此属性的外观,您仍然可以通过在表的{@code TransferHandler}上调用{@code exportAsDrag}来开始拖放操作。
+     * 
+     * 
      * @param b whether or not to enable automatic drag handling
      * @exception HeadlessException if
      *            <code>b</code> is <code>true</code> and
@@ -1440,6 +1845,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns whether or not automatic drag handling is enabled.
      *
+     * <p>
+     *  返回是否启用自动拖动处理。
+     * 
+     * 
      * @return the value of the {@code dragEnabled} property
      * @see #setDragEnabled
      * @since 1.4
@@ -1471,6 +1880,21 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * The drop mode is only meaningful if this component has a
      * <code>TransferHandler</code> that accepts drops.
      *
+     * <p>
+     *  设置此组件的放置模式。为了向后兼容,此属性的默认值为<code> DropMode.USE_SELECTION </code>。然而,为了改进的用户体验,推荐使用其它模式之一。
+     * 例如,<code> DropMode.ON </code>提供了类似的行为,显示所选项目,但这样做不会影响表中的实际选择。
+     * <p>
+     *  <code> JTable </code>支持以下丢弃模式：
+     * <ul>
+     * <li> <code> DropMode.USE_SELECTION </code> </li> <li> <code> DropMode.ON </code> </li> <li> <code> Dr
+     * opMode.INSERT </code> > <li> <code> DropMode.INSERT_ROWS </code> </li> <li> <code> DropMode.INSERT_CO
+     * LS </code> li> <li> <code> DropMode.ON_OR_INSERT_ROWS </code> </li> <li> <code> DropMode.ON_OR_INSERT
+     * _COLS </code>。
+     * </ul>
+     * <p>
+     *  drop模式只有在这个组件有一个接受drop的<code> TransferHandler </code>时才有意义。
+     * 
+     * 
      * @param dropMode the drop mode to use
      * @throws IllegalArgumentException if the drop mode is unsupported
      *         or <code>null</code>
@@ -1502,6 +1926,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the drop mode for this component.
      *
+     * <p>
+     *  返回此组件的放置模式。
+     * 
+     * 
      * @return the drop mode for this component
      * @see #setDropMode
      * @since 1.6
@@ -1514,6 +1942,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Calculates a drop location in this component, representing where a
      * drop at the given point should insert data.
      *
+     * <p>
+     *  计算此组件中的放置位置,表示给定点的放置应插入数据的位置。
+     * 
+     * 
      * @param p the point to calculate a drop location for
      * @return the drop location, or <code>null</code>
      */
@@ -1717,6 +2149,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * said state, and of course return <code>null</code> since there's
      * no longer anything to store.
      *
+     * <p>
+     *  在DnD操作期间调用以设置或清除丢弃位置。在某些情况下,组件可能需要暂时使用它的内部选择来指示丢弃位置。为了帮助实现这一点,该方法返回并接受状态对象作为参数。该状态对象可用于存储并稍后恢复选择状态。
+     * 无论此方法返回将作为状态参数传递回它在未来的调用。如果它希望DnD系统继续存储相同的状态,它必须每次都通过它。以下是使用方法：。
+     * <p>
+     * 让我们说,在第一次调用这个方法时,组件决定保存一些状态(因为它将使用选择来显示drop索引)。它可以返回一个状态对象给调用者封装任何保存的选择状态。在第二次调用时,我们假定放置位置正在更改为其他值。
+     * 该组件不需要恢复任何东西,所以它只是传回相同的状态对象,让DnD系统继续存储它。最后,让我们说这个方法是用<code> null </code>。这意味着DnD现在完成这个组件,意味着它应该恢复状态。
+     * 在这一点上,它可以使用状态参数来恢复所述状态,当然返回<code> null </code>,因为不再存储任何东西。
+     * 
+     * 
      * @param location the drop location (as calculated by
      *        <code>dropLocationForPoint</code>) or <code>null</code>
      *        if there's no longer a valid drop location
@@ -1805,6 +2246,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * When this property changes, a property change event with
      * name "dropLocation" is fired by the component.
      *
+     * <p>
+     *  返回此组件在组件上的DnD操作期间可视地指示为放置位置的位置,或{@code null}(如果当前未显示位置)。
+     * <p>
+     *  此方法不是用于从{@code TransferHandler}查询丢弃位置,因为丢弃位置仅在{@code TransferHandler}的<code> canImport </code>返回并允许位
+     * 置之后设置显示。
+     * <p>
+     *  当此属性更改时,组件会触发名为"dropLocation"的属性更改事件。
+     * 
+     * 
      * @return the drop location
      * @see #setDropMode
      * @see TransferHandler#canImport(TransferHandler.TransferSupport)
@@ -1826,6 +2276,14 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * The default value for the {@code autoCreateRowSorter}
      * property is {@code false}.
      *
+     * <p>
+     *  指定是否应在模型更改时为表创建{@code RowSorter}。
+     * <p>
+     * 当调用{@code setAutoCreateRowSorter(true)}时,会立即创建一个{@code TableRowSorter}并将其安装在表上。
+     * 虽然{@code autoCreateRowSorter}属性保持为{@code true},但每次模型更改时,都会创建一个新的{@code TableRowSorter}并将其设置为表的行排序器。
+     *  {@code autoCreateRowSorter}属性的默认值为{@code false}。
+     * 
+     * 
      * @param autoCreateRowSorter whether or not a {@code RowSorter}
      *        should be automatically created
      * @see javax.swing.table.TableRowSorter
@@ -1850,6 +2308,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * {@code RowSorter} should be created and installed
      * as the table's sorter; otherwise, returns {@code false}.
      *
+     * <p>
+     *  返回{@code true}如果每当模型更改,应创建一个新的{@code RowSorter}并安装为表的排序器;否则返回{@code false}。
+     * 
+     * 
      * @return true if a {@code RowSorter} should be created when
      *         the model changes
      * @since 1.6
@@ -1864,6 +2326,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * the same rows, in terms of the model, remain selected.  The default
      * is true.
      *
+     * <p>
+     *  指定是否应在排序后更新选择。如果为true,则在排序时重置选择,使得就模型而言相同的行保持选择。默认值为true。
+     * 
+     * 
      * @param update whether or not to update the selection on sorting
      * @beaninfo
      *        bound: true
@@ -1881,6 +2347,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns true if the selection should be updated after sorting.
      *
+     * <p>
+     *  如果选择应在排序后更新,则返回true。
+     * 
+     * 
      * @return whether to update the selection on a sort
      * @since 1.6
      */
@@ -1902,6 +2372,17 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * If the underlying model of the <code>RowSorter</code> differs from
      * that of this <code>JTable</code> undefined behavior will result.
      *
+     * <p>
+     *  设置<code> RowSorter </code>。 <code> RowSorter </code>用于向<code> JTable </code>提供排序和过滤。
+     * <p>
+     *  此方法清除选择并重置任何可变行高。
+     * <p>
+     *  此方法在适当时使用属性名称<code>"rowSorter"</code>触发<code> PropertyChangeEvent </code>。
+     * 为了向后兼容,此方法使用属性名称<code>"sorter"</code>触发一个附加事件。
+     * <p>
+     *  如果<code> RowSorter </code>的底层模型与此<code> JTable </code>未定义的行为的底层模型不同。
+     * 
+     * 
      * @param sorter the <code>RowSorter</code>; <code>null</code> turns
      *        sorting off
      * @see javax.swing.table.TableRowSorter
@@ -1930,6 +2411,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the object responsible for sorting.
      *
+     * <p>
+     *  返回负责排序的对象。
+     * 
+     * 
      * @return the object responsible for sorting
      * @since 1.6
      */
@@ -1959,6 +2444,18 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>JList</code>. See the <code>setSelectionMode</code> method
      * in <code>JList</code> for details about the modes.
      *
+     * <p>
+     * 将表的选择模式设置为仅允许单个选择,单个连续间隔或多个间隔。
+     * <P>
+     *  <b>注意：</b> <code> JTable </code>提供了处理列和行选择的所有方法。
+     * 当设置诸如<code> setSelectionMode </code>的状态时,它不仅更新行选择模型的模式,而且还在<code> columnModel </code>的选择模型中设置类似的值。
+     * 如果要使行和列选择模型在不同模式下操作,请直接设置它们。
+     * <p>
+     *  <code> JTable </code>的行和列选择模型默认使用<code> DefaultListSelectionModel </code>,因此<code> JTable </code>的工作
+     * 方式与<code>代码>。
+     * 有关模式的详细信息,请参阅<code> JList </code>中的<code> setSelectionMode </code>方法。
+     * 
+     * 
      * @see JList#setSelectionMode
      * @beaninfo
      * description: The selection mode used by the row and column selection models.
@@ -1975,6 +2472,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Sets whether the rows in this model can be selected.
      *
+     * <p>
+     *  设置是否可以选择此模型中的行。
+     * 
+     * 
      * @param rowSelectionAllowed   true if this model will allow row selection
      * @see #getRowSelectionAllowed
      * @beaninfo
@@ -1994,6 +2495,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns true if rows can be selected.
      *
+     * <p>
+     *  如果可以选择行,则返回true。
+     * 
+     * 
      * @return true if rows can be selected, otherwise false
      * @see #setRowSelectionAllowed
      */
@@ -2004,6 +2509,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Sets whether the columns in this model can be selected.
      *
+     * <p>
+     *  设置是否可以选择此模型中的列。
+     * 
+     * 
      * @param columnSelectionAllowed   true if this model will allow column selection
      * @see #getColumnSelectionAllowed
      * @beaninfo
@@ -2023,6 +2532,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns true if columns can be selected.
      *
+     * <p>
+     *  如果可以选择列,则返回true。
+     * 
+     * 
      * @return true if columns can be selected, otherwise false
      * @see #setColumnSelectionAllowed
      */
@@ -2040,6 +2553,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>columnSelectionAllowed</code> property of the
      * <code>columnModel</code> to the supplied value.
      *
+     * <p>
+     *  设置此表是否允许同时存在列选择和行选择。设置时,表将行和列选择模型的交集视为选定单元格。覆盖<code> isCellSelected </code>以更改此默认行为。
+     * 此方法等效于将<code> columnModel </code>的<code> rowSelectionAllowed </code>属性和<code> columnSelectionAllowed 
+     * </code>属性设置为提供的值。
+     *  设置此表是否允许同时存在列选择和行选择。设置时,表将行和列选择模型的交集视为选定单元格。覆盖<code> isCellSelected </code>以更改此默认行为。
+     * 
+     * 
      * @param  cellSelectionEnabled     true if simultaneous row and column
      *                                  selection is allowed
      * @see #getCellSelectionEnabled
@@ -2063,6 +2583,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Equivalent to <code>getRowSelectionAllowed() &amp;&amp;
      * getColumnSelectionAllowed()</code>.
      *
+     * <p>
+     * 如果行和列选择模型都启用,则返回true。
+     * 等效于<code> getRowSelectionAllowed()&amp;&amp; getColumnSelectionAllowed()</code>。
+     * 
+     * 
      * @return true if both row and column selection models are enabled
      *
      * @see #setCellSelectionEnabled
@@ -2073,6 +2598,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      *  Selects all rows, columns, and cells in the table.
+     * <p>
+     *  选择表中的所有行,列和单元格。
+     * 
      */
     public void selectAll() {
         // If I'm currently editing, then I should stop editing
@@ -2112,6 +2640,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Deselects all selected columns and rows.
+     * <p>
+     *  取消选择所有选定的列和行。
+     * 
      */
     public void clearSelection() {
         selectionModel.clearSelection();
@@ -2156,6 +2687,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Selects the rows from <code>index0</code> to <code>index1</code>,
      * inclusive.
      *
+     * <p>
+     *  选择<code> index0 </code>到<code> index1 </code>(含)的行。
+     * 
+     * 
      * @exception IllegalArgumentException      if <code>index0</code> or
      *                                          <code>index1</code> lie outside
      *                                          [0, <code>getRowCount()</code>-1]
@@ -2170,6 +2705,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Selects the columns from <code>index0</code> to <code>index1</code>,
      * inclusive.
      *
+     * <p>
+     *  选择<code> index0 </code>到<code> index1 </code>(含)的列。
+     * 
+     * 
      * @exception IllegalArgumentException      if <code>index0</code> or
      *                                          <code>index1</code> lie outside
      *                                          [0, <code>getColumnCount()</code>-1]
@@ -2184,6 +2723,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Adds the rows from <code>index0</code> to <code>index1</code>, inclusive, to
      * the current selection.
      *
+     * <p>
+     *  将从<code> index0 </code>到<code> index1 </code>(包括)的行添加到当前选择。
+     * 
+     * 
      * @exception IllegalArgumentException      if <code>index0</code> or <code>index1</code>
      *                                          lie outside [0, <code>getRowCount()</code>-1]
      * @param   index0 one end of the interval
@@ -2197,6 +2740,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Adds the columns from <code>index0</code> to <code>index1</code>,
      * inclusive, to the current selection.
      *
+     * <p>
+     *  将<code> index0 </code>中的列添加到当前选择中的<code> index1 </code>(含)。
+     * 
+     * 
      * @exception IllegalArgumentException      if <code>index0</code> or
      *                                          <code>index1</code> lie outside
      *                                          [0, <code>getColumnCount()</code>-1]
@@ -2210,6 +2757,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Deselects the rows from <code>index0</code> to <code>index1</code>, inclusive.
      *
+     * <p>
+     *  取消选择<code> index0 </code>到<code> index1 </code>(含)的行。
+     * 
+     * 
      * @exception IllegalArgumentException      if <code>index0</code> or
      *                                          <code>index1</code> lie outside
      *                                          [0, <code>getRowCount()</code>-1]
@@ -2223,6 +2774,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Deselects the columns from <code>index0</code> to <code>index1</code>, inclusive.
      *
+     * <p>
+     *  取消选择<code> index0 </code>到<code> index1 </code>(含)的列。
+     * 
+     * 
      * @exception IllegalArgumentException      if <code>index0</code> or
      *                                          <code>index1</code> lie outside
      *                                          [0, <code>getColumnCount()</code>-1]
@@ -2235,6 +2790,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Returns the index of the first selected row, -1 if no row is selected.
+     * <p>
+     *  返回第一个选定行的索引,如果没有选择行,则返回-1。
+     * 
+     * 
      * @return the index of the first selected row
      */
     public int getSelectedRow() {
@@ -2244,6 +2803,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the index of the first selected column,
      * -1 if no column is selected.
+     * <p>
+     *  返回第一个选定列的索引,如果未选择列,则返回-1。
+     * 
+     * 
      * @return the index of the first selected column
      */
     public int getSelectedColumn() {
@@ -2253,6 +2816,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the indices of all selected rows.
      *
+     * <p>
+     *  返回所有选定行的索引。
+     * 
+     * 
      * @return an array of integers containing the indices of all selected rows,
      *         or an empty array if no row is selected
      * @see #getSelectedRow
@@ -2280,6 +2847,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the indices of all selected columns.
      *
+     * <p>
+     *  返回所有选定列的索引。
+     * 
+     * 
      * @return an array of integers containing the indices of all selected columns,
      *         or an empty array if no column is selected
      * @see #getSelectedColumn
@@ -2291,6 +2862,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the number of selected rows.
      *
+     * <p>
+     *  返回所选行的数量。
+     * 
+     * 
      * @return the number of selected rows, 0 if no rows are selected
      */
     public int getSelectedRowCount() {
@@ -2309,6 +2884,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the number of selected columns.
      *
+     * <p>
+     *  返回所选列的数量。
+     * 
+     * 
      * @return the number of selected columns, 0 if no columns are selected
      */
     public int getSelectedColumnCount() {
@@ -2319,6 +2898,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns true if the specified index is in the valid range of rows,
      * and the row at that index is selected.
      *
+     * <p>
+     *  如果指定的索引在行的有效范围内,则返回true,并且选择该索引处的行。
+     * 
+     * 
      * @return true if <code>row</code> is a valid index and the row at
      *              that index is selected (where 0 is the first row)
      */
@@ -2330,6 +2913,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns true if the specified index is in the valid range of columns,
      * and the column at that index is selected.
      *
+     * <p>
+     *  如果指定的索引在列的有效范围内,则返回true,并且选择该索引处的列。
+     * 
+     * 
      * @param   column   the column in the column model
      * @return true if <code>column</code> is a valid index and the column at
      *              that index is selected (where 0 is the first column)
@@ -2341,6 +2928,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns true if the specified indices are in the valid range of rows
      * and columns and the cell at the specified position is selected.
+     * <p>
+     *  如果指定的索引在行和列的有效范围内,并且选择指定位置的单元格,则返回true。
+     * 
+     * 
      * @param row   the row being queried
      * @param column  the column being queried
      *
@@ -2413,6 +3004,22 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *      Apply the selection state of the anchor to all cells between it and the
      *      specified cell.
      * </ul>
+     * <p>
+     * 根据两个标志的状态更新表的选择模型：<code> toggle </code>和<code> extend </code>。
+     * 选择的大多数更改是由UI接收的键盘或鼠标事件的结果,通过此方法引导,以便行为可以被子类覆盖。
+     * 一些UI可能需要比该方法提供更多的功能,例如当操纵用于不连续选择的线索时,并且可能不调用该方法用于一些选择改变。
+     * <p>
+     *  此实现使用以下约定：
+     * <ul>
+     *  <li> <code> toggle </code>：<em> false </em>,<code> extend </code>：<em> false </em>。
+     * 清除先前的选择并确保选择新单元格。 <li> <code> toggle </code>：<em> false </em>,<code> extend </code>：<em> true </em>。
+     * 将之前的选择从锚点扩展到指定的单元格,清除所有其他选择。
+     *  <li> <code> toggle </code>：<em> true </em>,<code> extend </code>：<em> false </em>。
+     * 如果选择指定的单元格,请取消选择它。如果未选择,请选择它。
+     *  <li> <code> toggle </code>：<em> true </em>,<code> expand </code>：<em> true </em>。
+     * 将锚点的选择状态应用于它与指定单元格之间的所有单元格。
+     * </ul>
+     * 
      * @param  rowIndex   affects the selection at <code>row</code>
      * @param  columnIndex  affects the selection at <code>column</code>
      * @param  toggle  see description above
@@ -2472,6 +3079,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the foreground color for selected cells.
      *
+     * <p>
+     *  返回所选单元格的前景颜色。
+     * 
+     * 
      * @return the <code>Color</code> object for the foreground property
      * @see #setSelectionForeground
      * @see #setSelectionBackground
@@ -2490,6 +3101,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <p>
      * This is a <a href="https://docs.oracle.com/javase/tutorial/javabeans/writing/properties.html">JavaBeans</a> bound property.
      *
+     * <p>
+     *  设置所选单元格的前景颜色。单元格渲染器可以使用此颜色来渲染所选单元格的文本和图形。
+     * <p>
+     *  此属性的默认值由外观实现定义。
+     * <p>
+     * 这是<a href="https://docs.oracle.com/javase/tutorial/javabeans/writing/properties.html"> JavaBeans </a>
+     * 绑定属性。
+     * 
+     * 
      * @param selectionForeground  the <code>Color</code> to use in the foreground
      *                             for selected list items
      * @see #getSelectionForeground
@@ -2511,6 +3131,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the background color for selected cells.
      *
+     * <p>
+     *  返回所选单元格的背景颜色。
+     * 
+     * 
      * @return the <code>Color</code> used for the background of selected list items
      * @see #setSelectionBackground
      * @see #setSelectionForeground
@@ -2528,6 +3152,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <p>
      * This is a <a href="https://docs.oracle.com/javase/tutorial/javabeans/writing/properties.html">JavaBeans</a> bound property.
      *
+     * <p>
+     *  设置所选单元格的背景颜色。单元格渲染器可以使用此颜色填充所选单元格。
+     * <p>
+     *  此属性的默认值由外观实现定义。
+     * <p>
+     *  这是<a href="https://docs.oracle.com/javase/tutorial/javabeans/writing/properties.html"> JavaBeans </a>
+     * 绑定属性。
+     * 
+     * 
      * @param selectionBackground  the <code>Color</code> to use for the background
      *                             of selected cells
      * @see #getSelectionBackground
@@ -2551,6 +3184,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * whose identifier is equal to <code>identifier</code>, when compared using
      * <code>equals</code>.
      *
+     * <p>
+     *  当使用<code> equals </code>进行比较时,为标识符等于<code> identifier </code>的表中的列返回<code> TableColumn </code>对象。
+     * 
+     * 
      * @return  the <code>TableColumn</code> object that matches the identifier
      * @exception IllegalArgumentException      if <code>identifier</code> is <code>null</code> or no <code>TableColumn</code> has this identifier
      *
@@ -2573,6 +3210,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * column in the model.  If <code>viewColumnIndex</code>
      * is less than zero, returns <code>viewColumnIndex</code>.
      *
+     * <p>
+     *  将视图中<column> viewColumnIndex </code>中的列的索引映射到表模型中的列的索引。返回模型中对应列的索引。
+     * 如果<code> viewColumnIndex </code>小于零,则返回<code> viewColumnIndex </code>。
+     * 
+     * 
      * @param   viewColumnIndex     the index of the column in the view
      * @return  the index of the corresponding column in the model
      *
@@ -2591,6 +3233,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * being displayed.  If <code>modelColumnIndex</code> is less than zero,
      * returns <code>modelColumnIndex</code>.
      *
+     * <p>
+     *  将表模型中<code> modelColumnIndex </code>中的列索引映射到视图中列的索引。返回视图中相应列的索引;如果此列未显示,则返回-1。
+     * 如果<code> modelColumnIndex </code>小于零,则返回<code> modelColumnIndex </code>。
+     * 
+     * 
      * @param   modelColumnIndex     the index of the column in the model
      * @return   the index of the corresponding column in the view
      *
@@ -2606,6 +3253,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>TableModel</code> to the view.  If the contents of the
      * model are not sorted the model and view indices are the same.
      *
+     * <p>
+     *  按照<code> TableModel </code>的方式将该行的索引映射到视图。如果模型的内容没有排序,模型和视图索引是相同的。
+     * 
+     * 
      * @param modelRowIndex the index of the row in terms of the model
      * @return the index of the corresponding row in the view, or -1 if
      *         the row isn't visible
@@ -2627,6 +3278,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * underlying <code>TableModel</code>.  If the contents of the
      * model are not sorted the model and view indices are the same.
      *
+     * <p>
+     * 将视图中行的索引映射到底层的<code> TableModel </code>。如果模型的内容没有排序,模型和视图索引是相同的。
+     * 
+     * 
      * @param viewRowIndex the index of the row in the view
      * @return the index of the corresponding row in the model
      * @throws IndexOutOfBoundsException if sorting is enabled and passed an
@@ -2651,6 +3306,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * number of rows returned may differ from that of the underlying
      * <code>TableModel</code>.
      *
+     * <p>
+     *  返回可以在<code> JTable </code>中显示的行数,给定的空间不受限制。
+     * 如果已经指定了具有过滤器的<code> RowSorter </code>,则返回的行数可能与底层的<code> TableModel </code>不同。
+     * 
+     * 
      * @return the number of rows shown in the <code>JTable</code>
      * @see #getColumnCount
      */
@@ -2666,6 +3326,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the number of columns in the column model. Note that this may
      * be different from the number of columns in the table model.
      *
+     * <p>
+     *  返回列模型中的列数。请注意,这可能不同于表模型中的列数。
+     * 
+     * 
      * @return  the number of columns in the table
      * @see #getRowCount
      * @see #removeColumn
@@ -2678,6 +3342,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the name of the column appearing in the view at
      * column position <code>column</code>.
      *
+     * <p>
+     *  返回视图中列位置<code> column </code>上出现的列的名称。
+     * 
+     * 
      * @param  column    the column in the view being queried
      * @return the name of the column at position <code>column</code>
                         in the view where the first column is column 0
@@ -2690,6 +3358,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the type of the column appearing in the view at
      * column position <code>column</code>.
      *
+     * <p>
+     *  返回视图中列位置<code> column </code>上出现的列的类型。
+     * 
+     * 
      * @param   column   the column in the view being queried
      * @return the type of the column at position <code>column</code>
      *          in the view where the first column is column 0
@@ -2709,6 +3381,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *              Meanwhile the user's actions never affect the model's
      *              column ordering.
      *
+     * <p>
+     *  返回<code> row </code>和<code> column </code>的单元格值。
+     * <p>
+     *  <b>注意</b>：该列在表视图的显示顺序中指定,而不是以<code> TableModel </code>的列顺序指定。
+     * 这是一个重要的区别,因为当用户重新排列表中的列时,视图中给定索引处的列将更改。同时,用户的动作从不影响模型的列排序。
+     * 
+     * 
      * @param   row             the row whose value is to be queried
      * @param   column          the column whose value is to be queried
      * @return  the Object at the specified cell
@@ -2732,6 +3411,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *
      * <code>aValue</code> is the new value.
      *
+     * <p>
+     *  在<code> row </code>和<code> column </code>中设置表模型中单元格的值。
+     * <p>
+     * <b>注意</b>：该列在表视图的显示顺序中指定,而不是以<code> TableModel </code>的列顺序指定。这是一个重要的区别,因为当用户重新排列表中的列时,视图中给定索引处的列将更改。
+     * 同时,用户的动作从不影响模型的列排序。
+     * 
+     *  <code> aValue </code>是新值。
+     * 
+     * 
      * @param   aValue          the new value
      * @param   row             the row of the cell to be changed
      * @param   column          the column of the cell to be changed
@@ -2756,6 +3444,14 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *              column ordering.
      *
      *
+     * <p>
+     *  如果<code> row </code>和<code> column </code>上的单元格是可编辑的,则返回true。
+     * 否则,调用单元格上的<code> setValueAt </code>将没有任何效果。
+     * <p>
+     *  <b>注意</b>：该列在表视图的显示顺序中指定,而不是以<code> TableModel </code>的列顺序指定。
+     * 这是一个重要的区别,因为当用户重新排列表中的列时,视图中给定索引处的列将更改。同时,用户的动作从不影响模型的列排序。
+     * 
+     * 
      * @param   row      the row whose value is to be queried
      * @param   column   the column whose value is to be queried
      * @return  true if the cell is editable
@@ -2792,6 +3488,23 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *  data values in the model. The model column number does not change
      *  when columns are reordered in the view.
      *
+     * <p>
+     *  将<code> aColumn </code>附加到此<code> JTable </code>的列模型所包含的列数组的末尾。
+     * 如果<code> aColumn </code>的列名是<code> null </code>,请将<code> aColumn </code>的列名设置为<code> getModel()返回的名称g
+     * etColumnName )</code>。
+     *  将<code> aColumn </code>附加到此<code> JTable </code>的列模型所包含的列数组的末尾。
+     * <p>
+     *  在<code> JTable </code>中添加一个列以显示模型中的<code> modelColumn </code>数据列,并给定<code> width </code>,<code> cell
+     * Renderer < / code>和<code> cellEditor </code>,您可以使用：。
+     * <pre>
+     * 
+     *  addColumn(new TableColumn(modelColumn,width,cellRenderer,cellEditor));
+     * 
+     * </pre>
+     * [任何<code> TableColumn </code>构造函数都可以用来代替这个。]模型列号存储在<code> TableColumn </code>中,在渲染和编辑期间用于定位适当数据值。
+     * 在视图中重新排序列时,模型列号不会更改。
+     * 
+     * 
      *  @param  aColumn         the <code>TableColumn</code> to be added
      *  @see    #removeColumn
      */
@@ -2810,6 +3523,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      *  of data from the model; it just removes the <code>TableColumn</code>
      *  that was responsible for displaying it.
      *
+     * <p>
+     *  从此<code> JTable </code>的列数组中删除<code> aColumn </code>。
+     * 注意：此方法不会从模型中删除数据列;它只是删除负责显示它的<code> TableColumn </code>。
+     * 
+     * 
      *  @param  aColumn         the <code>TableColumn</code> to be removed
      *  @see    #addColumn
      */
@@ -2823,6 +3541,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * The old column at <code>targetColumn</code> is
      * shifted left or right to make room.
      *
+     * <p>
+     *  将<code>列</code>移动到视图中<code> targetColumn </code>列当前占用的位置。
+     *  <code> targetColumn </code>上的旧列向左或向右移动以腾出空间。
+     * 
+     * 
      * @param   column                  the index of column to be moved
      * @param   targetColumn            the new index of the column
      */
@@ -2839,6 +3562,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * or -1 if the result is not in the range
      * [0, <code>getColumnCount()</code>-1].
      *
+     * <p>
+     *  返回<code> point </code>所在列的索引,如果结果不在[0,<code> getColumnCount()</code> -1]范围内,则返回-1。
+     * 
+     * 
      * @param   point   the location of interest
      * @return  the index of the column that <code>point</code> lies in,
      *          or -1 if the result is not in the range
@@ -2858,6 +3585,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * or -1 if the result is not in the range
      * [0, <code>getRowCount()</code>-1].
      *
+     * <p>
+     *  返回<code> point </code>所在行的索引,如果结果不在[0,<code> getRowCount()</code> -1]范围内,则返回-1。
+     * 
+     * 
      * @param   point   the location of interest
      * @return  the index of the row that <code>point</code> lies in,
      *          or -1 if the result is not in the range
@@ -2903,6 +3634,18 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * calculations along the other axis. When the cell is not valid
      * the <code>includeSpacing</code> parameter is ignored.
      *
+     * <p>
+     *  返回位于<code> row </code>和<code> column </code>交集处的单元格的矩形。
+     * 如果<code> includeSpacing </code>为true,则返回的值具有指定的行和列的完整高度和宽度。
+     * 如果它为假,则返回的矩形由插槽间隔插入,以返回渲染或编辑组件的真实边界,因为它将在渲染期间设置。
+     * <p>
+     * 如果列索引有效,但行索引小于零,则该方法返回一个矩形,其中<code> y </code>和<code> height </code>值设置正确,<code> x </code >和<code> wid
+     * th </code>值都设置为零。
+     * 一般来说,当行或列索引指示在适当范围之外的单元格时,该方法返回描述表格范围内最近单元格的最近边的矩形。当行和列索引都超出范围时,返回的矩形覆盖最近单元格的最近点。
+     * <p>
+     *  在所有情况下,使用此方法计算沿一个轴的结果的计算不会失败,因为沿着另一个轴的计算中的异常。当单元格无效时,将忽略<code> includeSpacing </code>参数。
+     * 
+     * 
      * @param   row                   the row index where the desired cell
      *                                is located
      * @param   column                the column index where the desired cell
@@ -3121,6 +3864,79 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * the algorithm sets all sizes to their appropriate limiting value
      * (maximum or minimum).
      *
+     * <p>
+     *  使此表格显示其行和列。重写,以便可以调整列大小以适应包含父代的大小的更改。调整表中的一个或多个列的大小,以使所有此<code> JTable </code>的列的总宽度等于表的宽度。
+     * <p>
+     * 在布局开始之前,该方法获取<code> tableHeader </code>的<code> resizingColumn </code>。
+     * 当方法由于调整封闭窗口的大小而被调用时,<code> resizingColumn </code>是<code> null </code>。
+     * 这意味着调整大小已经发生在<code> JTable </code>之外,并且改变 - 或者"delta"应该分布到所有列,而不管这个<code> JTable </code>是自动的调整大小模式。
+     * <p>
+     *  如果<code> resizingColumn </code>不是<code> null </code>,它是表中已更改大小而不是表本身的列之一。
+     * 在这种情况下,自动调整大小模式控制额外(或缺陷)空间分布在可用列之间的方式。
+     * <p>
+     *  模式为：
+     * <ul>
+     * <li> AUTO_RESIZE_OFF：不要自动调整列的宽度。当它们的总和超过<code> Viewport </code>的宽度时,使用水平滚动条来容纳列。
+     * 如果<code> JTable </code>没有包含在<code> JScrollPane </code>中,这可能会使表的部分不可见。
+     *  <li> AUTO_RESIZE_NEXT_COLUMN：仅使用调整大小列后的列。这导致相邻单元之间的"边界"或分隔器是可独立调节的。
+     *  <li> AUTO_RESIZE_SUBSEQUENT_COLUMNS：使用调整后的所有列来吸收更改。这是默认行为。
+     *  <li> AUTO_RESIZE_LAST_COLUMN：仅自动调整最后一列的大小。如果最后一列的边界阻止分配所需的大小,请将最后一列的宽度设置为适当的限制,不要进一步调整。
+     *  <li> AUTO_RESIZE_ALL_COLUMNS：在<code> JTable </code>中的所有列(包括正在调整的列)中扩展delta。
+     * </ul>
+     * <p>
+     * <b>注意：</b>当一个<code> JTable </code>调整列的宽度时,它绝对地遵守它们的最小值和最大值。因此,即使调用此方法后,列的总宽度仍不等于表的宽度。
+     * 当这种情况发生时,<code> JTable </code>不会将自己置于AUTO_RESIZE_OFF模式,以启动滚动条,或打破其当前自动调整大小模式的其他承诺,而是允许其边界设置较大小于)列的最小值
+     * 或最大值的总和,意味着没有足够的空间来显示所有列,或者列不会填充<code> JTable </code>的范围。
+     * <b>注意：</b>当一个<code> JTable </code>调整列的宽度时,它绝对地遵守它们的最小值和最大值。因此,即使调用此方法后,列的总宽度仍不等于表的宽度。
+     * 这些分别导致在绘画期间在<code> JTable </code>的背景颜色中剪切一些列或正在绘制的区域。
+     * <p>
+     *  在可用列之间分配增量的机制在<code> JTable </code>类中的私有方法中提供：
+     * <pre>
+     *  adjustSizes(long targetSize,final Resizable3 r,boolean inverse)
+     * </pre>
+     *  在下面的部分中提供了其解释。 <code> Resizable3 </code>是一个私有接口,允许任何包含大小,首选大小,最大大小和最小大小的元素集合的数据结构,使其元素可以由算法操作。
+     * 
+     *  <H3>分配delta </H3>
+     * 
+     *  <H4>概述</H4>
+     * <P>
+     * 调用"DELTA"目标大小与r中元素的首选大小之和的差值。通过采用原始优选大小并添加DELTA的份额来计算各个大小 - 基于每个优选大小距离其限制界限(最小或最大)多远,共享。
+     * 
+     *  <H4>定义</H4>
+     * <P>
+     *  调用个别约束min [i],max [i]和pref [i]。
+     * <p>
+     *  调用它们各自的和：MIN,MAX和PREF。
+     * <p>
+     *  每个新尺寸将使用以下公式计算：
+     * 
+     * <pre>
+     *  size [i] = pref [i] + delta [i]
+     * </pre>
+     *  其中每个单独的delta [i]根据以下公式计算：
+     * <p>
+     *  如果(DELTA <0),我们处于收缩模式,其中：
+     * 
+     * <PRE>
+     *  DELTA delta [i] = ------------ *(pref [i] -min [i])(PREF-MIN)
+     * </PRE>
+     *  如果(DELTA> 0),我们处于扩展模式,其中：
+     * 
+     * <PRE>
+     *  DELTA delta [i] = ------------ *(max [i]  -  pref [i])(MAX-PREF)
+     * </PRE>
+     * <P>
+     *  总体效果是,总尺寸将相同百分比k朝向总最小值或最大值移动,并且该百分比保证适应所需空间DELTA。
+     * 
+     *  <H4>详细信息</H4>
+     * <P>
+     * 这里给出的公式的朴素评价将受到在有限精度(使用ints)中执行此操作导致的聚合舍入误差的影响。为了处理这一点,上面的乘法因子不断地被重新计算,并且这考虑了先前迭代中的舍入误差。
+     * 结果是产生一组整数的算法,其值与所提供的<code> targetSize </code>精确求和,并且通过在给定元素上均匀地扩展舍入误差来进行。
+     * 
+     *  <H4>当击中MAX和MIN边界时</H4>
+     * <P>
+     *  当<code> targetSize </code>在[MIN,MAX]范围之外时,算法将所有大小设置为其适当的极限值(最大值或最小值)。
+     * 
      */
     public void doLayout() {
         TableColumn resizingColumn = getResizingColumn();
@@ -3172,6 +3988,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Sizes the table columns to fit the available space.
+     * <p>
+     *  调整表列大小以适合可用空间。
+     * 
+     * 
      * @deprecated As of Swing version 1.0.3,
      * replaced by <code>doLayout()</code>.
      * @see #doLayout
@@ -3188,6 +4008,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Obsolete as of Java 2 platform v1.4.  Please use the
      * <code>doLayout()</code> method instead.
+     * <p>
+     *  作为Java 2平台v1.4的已过时。请改用<code> doLayout()</code>方法。
+     * 
+     * 
      * @param resizingColumn    the column whose resizing made this adjustment
      *                          necessary or -1 if there is no such column
      * @see  #doLayout
@@ -3376,6 +4200,15 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>setToolTipText(null)</code> it will unregister the table
      * component, and no tips from renderers will display anymore.
      *
+     * <p>
+     *  覆盖<code> JComponent </code>的<code> getToolTipText </code>方法,以便允许使用渲染器的提示,如果它有文本集。
+     * <p>
+     *  <b>注意：</b>对于<code> JTable </code>正确显示其渲染器的工具提示<code> JTable </code>必须是注册的组件与<code> ToolTipManager </code>
+     * 。
+     * 这在<code> initializeLocalVars </code>中自动完成,但如果稍后某个<code> JTable </code>被告知<code> setToolTipText(null)</code>
+     * ,它将取消注册表组件,渲染器的提示将显示。
+     * 
+     * 
      * @see JComponent#getToolTipText
      */
     public String getToolTipText(MouseEvent event) {
@@ -3427,6 +4260,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * By default, this property is false, and the JTable
      * retains the focus unless the cell is clicked.
      *
+     * <p>
+     * 设置当编辑器由于单元格的JTable转发键盘事件而被激活时,此JTable中的编辑器是否获得键盘焦点。默认情况下,此属性为false,并且JTable保留焦点,除非单击该单元格。
+     * 
+     * 
      * @param surrendersFocusOnKeystroke true if the editor should get the focus
      *          when keystrokes cause the editor to be
      *          activated
@@ -3443,6 +4280,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns true if the editor should get the focus
      * when keystrokes cause the editor to be activated
      *
+     * <p>
+     *  如果编辑器在击键导致编辑器激活时获得焦点,则返回true
+     * 
+     * 
      * @return  true if the editor should get the focus
      *          when keystrokes cause the editor to be
      *          activated
@@ -3461,6 +4302,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Note that this is a convenience method for
      * <code>editCellAt(int, int, null)</code>.
      *
+     * <p>
+     *  以编程方式开始编辑<code> row </code>和<code> column </code>的单元格,如果这些索引在有效范围内,并且这些索引处的单元格是可编辑的。
+     * 注意,这是一个方便的方法为<code> editCellAt(int,int,null)</code>。
+     * 
+     * 
      * @param   row                             the row to be edited
      * @param   column                          the column to be edited
      * @return  false if for any reason the cell cannot be edited,
@@ -3479,6 +4325,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * the <code>isCellEditable</code> method in the <code>TableModel</code>
      * interface.
      *
+     * <p>
+     *  以编程方式开始编辑<code> row </code>和<code> column </code>的单元格,如果这些索引在有效范围内,并且这些索引处的单元格是可编辑的。
+     * 要防止<code> JTable </code>编辑特定的表,列或单元格值,请从<co​​de> TableModel </code>界面中的<code> isCellEditable </code>方
+     * 法返回false。
+     *  以编程方式开始编辑<code> row </code>和<code> column </code>的单元格,如果这些索引在有效范围内,并且这些索引处的单元格是可编辑的。
+     * 
+     * 
      * @param   row     the row to be edited
      * @param   column  the column to be edited
      * @param   e       event to pass into <code>shouldSelectCell</code>;
@@ -3532,6 +4385,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns true if a cell is being edited.
      *
+     * <p>
+     *  如果正在编辑单元格,则返回true。
+     * 
+     * 
      * @return  true if the table is editing a cell
      * @see     #editingColumn
      * @see     #editingRow
@@ -3544,6 +4401,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the component that is handling the editing session.
      * If nothing is being edited, returns null.
      *
+     * <p>
+     *  返回正在处理编辑会话的组件。如果没有编辑,返回null。
+     * 
+     * 
      * @return  Component handling editing session
      */
     public Component getEditorComponent() {
@@ -3554,6 +4415,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the index of the column that contains the cell currently
      * being edited.  If nothing is being edited, returns -1.
      *
+     * <p>
+     *  返回包含当前正在编辑的单元格的列的索引。如果没有编辑,返回-1。
+     * 
+     * 
      * @return  the index of the column that contains the cell currently
      *          being edited; returns -1 if nothing being edited
      * @see #editingRow
@@ -3566,6 +4431,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the index of the row that contains the cell currently
      * being edited.  If nothing is being edited, returns -1.
      *
+     * <p>
+     *  返回包含当前正在编辑的单元格的行的索引。如果没有编辑,返回-1。
+     * 
+     * 
      * @return  the index of the row that contains the cell currently
      *          being edited; returns -1 if nothing being edited
      * @see #editingColumn
@@ -3581,6 +4450,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the L&amp;F object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @return the <code>TableUI</code> object that renders this component
      */
     public TableUI getUI() {
@@ -3590,6 +4463,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Sets the L&amp;F object that renders this component and repaints.
      *
+     * <p>
+     *  设置渲染此组件和重绘的L&amp; F对象。
+     * 
+     * 
      * @param ui  the TableUI L&amp;F object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -3610,6 +4487,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Replaces the current UI object with the latest version from the
      * <code>UIManager</code>.
      *
+     * <p>
+     * 来自<code> UIManager </code>的通知表示L&amp; F已更改。使用<code> UIManager </code>中的最新版本替换当前的UI对象。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -3649,6 +4530,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the suffix used to construct the name of the L&amp;F class used to
      * render this component.
      *
+     * <p>
+     *  返回用于构造用于渲染此组件的L&amp; F类的名称的后缀。
+     * 
+     * 
      * @return the string "TableUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -3666,6 +4551,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Sets the data model for this table to <code>newModel</code> and registers
      * with it for listener notifications from the new data model.
      *
+     * <p>
+     *  将此表的数据模型设置为<code> newModel </code>,并从新数据模型注册监听器通知。
+     * 
+     * 
      * @param   dataModel        the new data source for this table
      * @exception IllegalArgumentException      if <code>newModel</code> is <code>null</code>
      * @see     #getModel
@@ -3699,6 +4588,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the <code>TableModel</code> that provides the data displayed by this
      * <code>JTable</code>.
      *
+     * <p>
+     *  返回提供由此<code> JTable </code>显示的数据的<code> TableModel </code>。
+     * 
+     * 
      * @return  the <code>TableModel</code> that provides the data displayed by this <code>JTable</code>
      * @see     #setModel
      */
@@ -3711,6 +4604,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * for listener notifications from the new column model. Also sets
      * the column model of the <code>JTableHeader</code> to <code>columnModel</code>.
      *
+     * <p>
+     *  将此表的列模型设置为<code> newModel </code>,并注册来自新列模型的侦听器通知。
+     * 还将<code> JTableHeader </code>的列模型设置为<code> columnModel </code>。
+     * 
+     * 
      * @param   columnModel        the new data source for this table
      * @exception IllegalArgumentException      if <code>columnModel</code> is <code>null</code>
      * @see     #getColumnModel
@@ -3744,6 +4642,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the <code>TableColumnModel</code> that contains all column information
      * of this table.
      *
+     * <p>
+     *  返回包含此表的所有列信息的<code> TableColumnModel </code>。
+     * 
+     * 
      * @return  the object that provides the column state of the table
      * @see     #setColumnModel
      */
@@ -3755,6 +4657,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Sets the row selection model for this table to <code>newModel</code>
      * and registers for listener notifications from the new selection model.
      *
+     * <p>
+     *  将此表的行选择模型设置为<code> newModel </code>,并注册来自新选择模型的侦听器通知。
+     * 
+     * 
      * @param   newModel        the new selection model
      * @exception IllegalArgumentException      if <code>newModel</code> is <code>null</code>
      * @see     #getSelectionModel
@@ -3786,6 +4692,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the <code>ListSelectionModel</code> that is used to maintain row
      * selection state.
      *
+     * <p>
+     *  返回用于维护行选择状态的<code> ListSelectionModel </code>。
+     * 
+     * 
      * @return  the object that provides row selection state, <code>null</code>
      *          if row selection is not allowed
      * @see     #setSelectionModel
@@ -3802,6 +4712,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <code>RowSorterListener</code> notification that the
      * <code>RowSorter</code> has changed in some way.
      *
+     * <p>
+     *  <code> RowSorterListener </code>通知：<code> RowSorter </code>以某种方式改变了。
+     * 
+     * 
      * @param e the <code>RowSorterEvent</code> describing the change
      * @throws NullPointerException if <code>e</code> is <code>null</code>
      * @since 1.6
@@ -3826,6 +4740,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * SortManager provides support for managing the selection and variable
      * row heights when sorting is enabled. This information is encapsulated
      * into a class to avoid bulking up JTable.
+     * <p>
+     *  SortManager支持在启用排序时管理选择和可变行高。这些信息被封装到一个类中,以避免向上扩展JTable。
+     * 
      */
     private final class SortManager {
         RowSorter<? extends TableModel> sorter;
@@ -3852,6 +4769,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Disposes any resources used by this SortManager.
+         * <p>
+         *  处理此SortManager使用的任何资源。
+         * 
          */
         public void dispose() {
             if (sorter != null) {
@@ -3861,6 +4781,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Sets the height for a row at a specified index.
+         * <p>
+         *  设置指定索引处行的高度。
+         * 
          */
         public void setViewRowHeight(int viewIndex, int rowHeight) {
             if (modelRowSizes == null) {
@@ -3872,6 +4795,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Invoked when the underlying model has completely changed.
+         * <p>
+         *  在底层模型完全更改时调用。
+         * 
          */
         public void allChanged() {
             modelLeadIndex = -1;
@@ -3881,6 +4807,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Invoked when the selection, on the view, has changed.
+         * <p>
+         * 在视图上的选择已更改时调用。
+         * 
          */
         public void viewSelectionChanged(ListSelectionEvent e) {
             if (!syncingSelection && modelSelection != null) {
@@ -3892,6 +4821,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Invoked when either the table model has changed, or the RowSorter
          * has changed. This is invoked prior to notifying the sorter of the
          * change.
+         * <p>
+         *  在表模型更改或RowSorter已更改时调用。在通知分拣机之前调用此更改。
+         * 
          */
         public void prepareForChange(RowSorterEvent sortEvent,
                                      ModelChange change) {
@@ -3902,6 +4834,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Updates the internal cache of the selection based on the change.
+         * <p>
+         *  根据更改更新选择的内部高速缓存。
+         * 
          */
         private void cacheSelection(RowSorterEvent sortEvent,
                                     ModelChange change) {
@@ -3971,6 +4906,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Inovked when either the table has changed or the sorter has changed
          * and after the sorter has been notified. If necessary this will
          * reapply the selection and variable row heights.
+         * <p>
+         *  当表格已更改或分拣机已更改并且已通知分拣机后,进行Inovked。如果有必要,这将重新应用选择和可变行高。
+         * 
          */
         public void processChange(RowSorterEvent sortEvent,
                                   ModelChange change,
@@ -4001,6 +4939,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Resets the variable row heights in terms of the view from
          * that of the variable row heights in terms of the model.
+         * <p>
+         *  就模型而言,根据视图中的可变行高度重新设置可变行高度。
+         * 
          */
         private void setViewRowHeightsFromModel() {
             if (modelRowSizes != null) {
@@ -4016,6 +4957,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Restores the selection from that in terms of the model.
+         * <p>
+         *  从模型中恢复选择。
+         * 
          */
         private void restoreSelection(ModelChange change) {
             syncingSelection = true;
@@ -4057,6 +5001,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * ModelChange is used when sorting to restore state, it corresponds
      * to data from a TableModelEvent.  The values are precalculated as
      * they are used extensively.
+     * <p>
+     *  ModelChange在排序时用于恢复状态,它对应于来自TableModelEvent的数据。这些值是预先计算的,因为它们被广泛使用。
+     * 
      */
     private final class ModelChange {
         // Starting index of the change, in terms of the model
@@ -4097,6 +5044,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Invoked when <code>sorterChanged</code> is invoked, or
      * when <code>tableChanged</code> is invoked and sorting is enabled.
+     * <p>
+     *  在调用<code> sorterChanged </code>时调用,或在调用<code> tableChanged </code>并调用排序时调用。
+     * 
      */
     private void sortedTableChanged(RowSorterEvent sortedEvent,
                                     TableModelEvent e) {
@@ -4151,6 +5101,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Repaints the sort of sorted rows in response to a TableModelEvent.
+     * <p>
+     *  重新绘制排序的排序以响应TableModelEvent。
+     * 
      */
     private void repaintSortedRows(ModelChange change) {
         if (change.startModelIndex > change.endModelIndex ||
@@ -4190,6 +5143,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Restores the selection after a model event/sort order changes.
      * All coordinates are in terms of the model.
+     * <p>
+     *  模型事件/排序顺序更改后恢复选择。所有坐标都是根据模型。
+     * 
      */
     private void restoreSortingSelection(int[] selection, int lead,
             ModelChange change) {
@@ -4222,6 +5178,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Restores the editing row after a model event/sort order change.
      *
+     * <p>
+     *  在模型事件/排序顺序更改后恢复编辑行。
+     * 
+     * 
      * @param editingRow new index of the editingRow, in terms of the view
      */
     private void restoreSortingEditingRow(int editingRow) {
@@ -4247,6 +5207,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Notifies the sorter of a change in the underlying model.
+     * <p>
+     *  通知分拣机基础模型的变化。
+     * 
      */
     private void notifySorter(ModelChange change) {
         try {
@@ -4284,6 +5247,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Converts a model index to view index.  This is called when the
      * sorter or model changes and sorting is enabled.
      *
+     * <p>
+     *  将模型索引转换为查看索引。当分拣机或模型更改并启用排序时,将调用此函数。
+     * 
+     * 
      * @param change describes the TableModelEvent that initiated the change;
      *        will be null if called as the result of a sort
      */
@@ -4323,6 +5290,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Converts the selection to model coordinates.  This is used when
      * the model changes or the sorter changes.
+     * <p>
+     *  将选择转换为模型坐标。这在模型更改或分拣机更改时使用。
+     * 
      */
     private int[] convertSelectionToModel(RowSorterEvent e) {
         int[] selection = getSelectedRows();
@@ -4363,6 +5333,14 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * are used internally by <code>JTable</code>.
      * <p>
      * Note that as of 1.3, this method clears the selection, if any.
+     * <p>
+     * 当此表的<code> TableModel </code>生成<code> TableModelEvent </code>时调用。
+     *  <code> TableModelEvent </code>应该在模型的坐标系中构造;当接收到事件时,通过<code> JTable </code>来执行到视图坐标系的适当映射。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由<code> JTable </code>在内部使用。
+     * <p>
+     *  注意,从1.3开始,此方法清除选择(如果有的话)。
+     * 
      */
     public void tableChanged(TableModelEvent e) {
         if (e == null || e.getFirstRow() == TableModelEvent.HEADER_ROW) {
@@ -4454,6 +5432,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  在行插入表中时调用。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @param e the TableModelEvent encapsulating the insertion
      */
     private void tableRowsInserted(TableModelEvent e) {
@@ -4491,6 +5475,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  在从表中删除行时调用。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @param e the TableModelEvent encapsulating the deletion
      */
     private void tableRowsDeleted(TableModelEvent e) {
@@ -4534,6 +5524,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  将列添加到表列模型时调用。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @see TableColumnModelListener
      */
     public void columnAdded(TableColumnModelEvent e) {
@@ -4550,6 +5546,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  在从表列模型中删除列时调用。
+     * <p>
+     *  应用程序代码不会明确地使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @see TableColumnModelListener
      */
     public void columnRemoved(TableColumnModelEvent e) {
@@ -4567,6 +5569,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  在重新定位列时调用。如果正在编辑单元格,则停止编辑并重新绘制单元格。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @param e   the event received
      * @see TableColumnModelListener
      */
@@ -4585,6 +5593,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  在由于保证金更改而移动列时调用。如果正在编辑单元格,则停止编辑并重新绘制单元格。
+     * <p>
+     * 应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @param  e    the event received
      * @see TableColumnModelListener
      */
@@ -4612,6 +5626,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  当<code> TableColumnModel </code>的选择模型更改时调用。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @param  e  the event received
      * @see TableColumnModelListener
      */
@@ -4673,6 +5693,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  当行选择更改时调用 - 重绘以显示新选择。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @param e   the event received
      * @see ListSelectionListener
      */
@@ -4712,6 +5738,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  编辑完成时调用。保存更改并丢弃编辑器。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @param  e  the event received
      * @see CellEditorListener
      */
@@ -4732,6 +5764,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Application code will not use these methods explicitly, they
      * are used internally by JTable.
      *
+     * <p>
+     *  当编辑被取消时调用。编辑器对象被丢弃,并且单元格再次被渲染。
+     * <p>
+     *  应用程序代码不会明确使用这些方法,它们由JTable内部使用。
+     * 
+     * 
      * @param  e  the event received
      * @see CellEditorListener
      */
@@ -4746,6 +5784,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Sets the preferred size of the viewport for this table.
      *
+     * <p>
+     *  设置此表的视口的首选大小。
+     * 
+     * 
      * @param size  a <code>Dimension</code> object specifying the <code>preferredSize</code> of a
      *              <code>JViewport</code> whose view is this table
      * @see Scrollable#getPreferredScrollableViewportSize
@@ -4759,6 +5801,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Returns the preferred size of the viewport for this table.
      *
+     * <p>
+     *  返回此表的视口的首选大小。
+     * 
+     * 
      * @return a <code>Dimension</code> object containing the <code>preferredSize</code> of the <code>JViewport</code>
      *         which displays this table
      * @see Scrollable#getPreferredScrollableViewportSize
@@ -4773,6 +5819,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * <p>
      * This method is called each time the user requests a unit scroll.
      *
+     * <p>
+     *  返回完全暴露一个新行或列(取决于方向)的滚动增量(以像素为单位)。
+     * <p>
+     *  每次用户请求单元滚动时,都会调用此方法。
+     * 
+     * 
      * @param visibleRect the view area visible within the viewport
      * @param orientation either <code>SwingConstants.VERTICAL</code>
      *                  or <code>SwingConstants.HORIZONTAL</code>
@@ -4877,6 +5929,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * returned will ensure that the viewport is cleanly aligned on
      * a row boundary.
      *
+     * <p>
+     *  根据此表的方向,返回<code> visibleRect.height </code>或<code> visibleRect.width </code>。
+     * 注意,从Swing 1.1.1(Java 2 v 1.2.2)开始,返回的值将确保视口在行边界上完全对齐。
+     * 
+     * 
      * @return <code>visibleRect.height</code> or
      *                                  <code>visibleRect.width</code>
      *                                  per the orientation
@@ -4921,6 +5978,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Called to get the block increment for upward scrolling in cases of
      * horizontal scrolling, or for vertical scrolling of a table with
      * variable row heights.
+     * <p>
+     * 调用在水平滚动情况下获得向上滚动的块增量,或者对具有可变行高的表进行垂直滚动。
+     * 
      */
     private int getPreviousBlockIncrement(Rectangle visibleRect,
                                           int orientation) {
@@ -5011,6 +6071,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Called to get the block increment for downward scrolling in cases of
      * horizontal scrolling, or for vertical scrolling of a table with
      * variable row heights.
+     * <p>
+     *  调用在水平滚动或垂直滚动​​具有可变行高的表时获得用于向下滚动的块增量。
+     * 
      */
     private int getNextBlockIncrement(Rectangle visibleRect,
                                       int orientation) {
@@ -5074,6 +6137,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Return the row at the top of the visibleRect
      *
      * May return -1
+     * <p>
+     *  返回visibleRect顶部的行
+     * 
+     *  可能返回-1
+     * 
      */
     private int getLeadingRow(Rectangle visibleRect) {
         Point leadingPoint;
@@ -5092,6 +6160,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Return the column at the leading edge of the visibleRect.
      *
      * May return -1
+     * <p>
+     *  返回在visibleRect的前沿的列。
+     * 
+     *  可能返回-1
+     * 
      */
     private int getLeadingCol(Rectangle visibleRect) {
         Point leadingPoint;
@@ -5110,6 +6183,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Return the row at the bottom of the visibleRect.
      *
      * May return -1
+     * <p>
+     *  返回visibleRect底部的行。
+     * 
+     *  可能返回-1
+     * 
      */
     private int getTrailingRow(Rectangle visibleRect) {
         Point trailingPoint;
@@ -5129,6 +6207,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Return the column at the trailing edge of the visibleRect.
      *
      * May return -1
+     * <p>
+     *  返回visibleRect的后缘的列。
+     * 
+     *  可能返回-1
+     * 
      */
     private int getTrailingCol(Rectangle visibleRect) {
         Point trailingPoint;
@@ -5147,6 +6230,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the leading edge ("beginning") of the given Rectangle.
      * For VERTICAL, this is the top, for left-to-right, the left side, and for
      * right-to-left, the right side.
+     * <p>
+     *  返回给定矩形的前沿("开始")。对于VERTICAL,这是顶部,从左到右,左侧,从右到左,右侧。
+     * 
      */
     private int leadingEdge(Rectangle rect, int orientation) {
         if (orientation == SwingConstants.VERTICAL) {
@@ -5164,6 +6250,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the trailing edge ("end") of the given Rectangle.
      * For VERTICAL, this is the bottom, for left-to-right, the right side, and
      * for right-to-left, the left side.
+     * <p>
+     *  返回给定矩形的后沿("end")。对于VERTICAL,这是底部,从左到右,右边,从右到左,左边。
+     * 
      */
     private int trailingEdge(Rectangle rect, int orientation) {
         if (orientation == SwingConstants.VERTICAL) {
@@ -5183,6 +6272,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * width of the viewport does not determine the width
      * of the table.  Otherwise returns true.
      *
+     * <p>
+     *  如果<code> autoResizeMode </code>设置为<code> AUTO_RESIZE_OFF </code>,则返回false,表示视口的宽度不决定表格的宽度。否则返回true。
+     * 
+     * 
      * @return false if <code>autoResizeMode</code> is set
      *   to <code>AUTO_RESIZE_OFF</code>, otherwise returns true
      * @see Scrollable#getScrollableTracksViewportWidth
@@ -5197,6 +6290,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * {@code getFillsViewportHeight} is {@code true} and the preferred height
      * of the table is smaller than the viewport's height.
      *
+     * <p>
+     *  返回{@code false}以指示视口的高度不确定表的高度,除非{@code getFillsViewportHeight}为{@code true},并且表的首选高度小于视口的高度。
+     * 
+     * 
      * @return {@code false} unless {@code getFillsViewportHeight} is
      *         {@code true} and the table needs to be stretched to fill
      *         the viewport
@@ -5219,6 +6316,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * ensures the table is never smaller than the viewport.
      * The default for this property is {@code false}.
      *
+     * <p>
+     * 设置此表是否始终足够大以填充封闭视口的高度。如果表的首选高度小于视口,则表将被拉伸以填充视口。换句话说,这确保了表从不小于视口。此属性的默认值为{@code false}。
+     * 
+     * 
      * @param fillsViewportHeight whether or not this table is always
      *        made large enough to fill the height of an enclosing
      *        viewport
@@ -5241,6 +6342,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns whether or not this table is always made large enough
      * to fill the height of an enclosing viewport.
      *
+     * <p>
+     *  返回此表是否始终大到足以填充封闭视口的高度。
+     * 
+     * 
      * @return whether or not this table is always made large enough
      *         to fill the height of an enclosing viewport
      * @see #setFillsViewportHeight
@@ -5308,6 +6413,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Creates default cell renderers for objects, numbers, doubles, dates,
      * booleans, and icons.
+     * <p>
+     *  为对象,数字,双精度,日期,布尔值和图标创建默认单元格渲染器。
+     * 
+     * 
      * @see javax.swing.table.DefaultTableCellRenderer
      *
      */
@@ -5337,6 +6446,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Default Renderers
+     * <p>
+     *  默认渲染器
+     * 
+     * 
      **/
     static class NumberRenderer extends DefaultTableCellRenderer.UIResource {
         public NumberRenderer() {
@@ -5412,6 +6525,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Creates default cell editors for objects, numbers, and boolean values.
+     * <p>
+     *  为对象,数字和布尔值创建默认单元格编辑器。
+     * 
+     * 
      * @see DefaultCellEditor
      */
     protected void createDefaultEditors() {
@@ -5429,6 +6546,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Default Editors
+     * <p>
+     *  默认编辑器
+     * 
      */
     static class GenericEditor extends DefaultCellEditor {
 
@@ -5513,6 +6633,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Initializes table properties to their default values.
+     * <p>
+     *  将表属性初始化为其默认值。
+     * 
      */
     protected void initializeLocalVars() {
         updateSelectionOnSort = true;
@@ -5546,6 +6669,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * a <code>DefaultTableModel</code>.  A subclass can override this
      * method to return a different table model object.
      *
+     * <p>
+     *  返回默认表模型对象,它是一个<code> DefaultTableModel </code>。子类可以覆盖此方法以返回不同的表模型对象。
+     * 
+     * 
      * @return the default table model object
      * @see javax.swing.table.DefaultTableModel
      */
@@ -5558,6 +6685,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * a <code>DefaultTableColumnModel</code>.  A subclass can override this
      * method to return a different column model object.
      *
+     * <p>
+     *  返回默认的列模型对象,它是一个<code> DefaultTableColumnModel </code>。子类可以覆盖此方法以返回不同的列模型对象。
+     * 
+     * 
      * @return the default column model object
      * @see javax.swing.table.DefaultTableColumnModel
      */
@@ -5570,6 +6701,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * a <code>DefaultListSelectionModel</code>.  A subclass can override this
      * method to return a different selection model object.
      *
+     * <p>
+     *  返回默认选择模型对象,它是一个<code> DefaultListSelectionModel </code>。子类可以覆盖此方法以返回不同的选择模型对象。
+     * 
+     * 
      * @return the default selection model object
      * @see javax.swing.DefaultListSelectionModel
      */
@@ -5582,6 +6717,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * a <code>JTableHeader</code>.  A subclass can override this
      * method to return a different table header object.
      *
+     * <p>
+     *  返回默认的表头对象,它是一个<code> JTableHeader </code>。子类可以覆盖此方法以返回不同的表头对象。
+     * 
+     * 
      * @return the default table header object
      * @see javax.swing.table.JTableHeader
      */
@@ -5591,6 +6730,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Equivalent to <code>revalidate</code> followed by <code>repaint</code>.
+     * <p>
+     *  等同于<code> revalidate </code>后跟<code> repaint </code>。
+     * 
      */
     protected void resizeAndRepaint() {
         revalidate();
@@ -5601,6 +6743,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Returns the active cell editor, which is {@code null} if the table
      * is not currently editing.
      *
+     * <p>
+     * 返回活动单元格编辑器,如果表格当前未编辑,则为{@code null}。
+     * 
+     * 
      * @return the {@code TableCellEditor} that does the editing,
      *         or {@code null} if the table is not currently editing.
      * @see #cellEditor
@@ -5613,6 +6759,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Sets the active cell editor.
      *
+     * <p>
+     *  设置活动单元格编辑器。
+     * 
+     * 
      * @param anEditor the active cell editor
      * @see #cellEditor
      * @beaninfo
@@ -5627,6 +6777,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Sets the <code>editingColumn</code> variable.
+     * <p>
+     *  设置<code> editingColumn </code>变量。
+     * 
+     * 
      * @param aColumn  the column of the cell to be edited
      *
      * @see #editingColumn
@@ -5637,6 +6791,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Sets the <code>editingRow</code> variable.
+     * <p>
+     *  设置<code> editingRow </code>变量。
+     * 
+     * 
      * @param aRow  the row of the cell to be edited
      *
      * @see #editingRow
@@ -5657,6 +6815,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * use this method to provide renderers so that this default behavior
      * can be safely overridden by a subclass.
      *
+     * <p>
+     *  返回此行和列指定的单元格的适当渲染器。如果此列的<code> TableColumn </code>具有非null呈现器,则返回该值。
+     * 如果不是,则在此列中查找数据的类(使用<code> getColumnClass </code>),并返回此类数据的默认渲染器。
+     * <p>
+     *  <b>注意：</b>在整个表包中,内部实现总是使用此方法来提供渲染器,以便此默认行为可以被子类安全地覆盖。
+     * 
+     * 
      * @param row       the row of the cell to render, where 0 is the first row
      * @param column    the column of the cell to render,
      *                  where 0 is the first column
@@ -5696,6 +6861,16 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * use this method to prepare renderers so that this default behavior
      * can be safely overridden by a subclass.
      *
+     * <p>
+     *  通过在<code> row </code>,<code>列</code>查询数据模型的单元格的值和选择状态来准备渲染器。
+     * 返回事件位置下的组件(可能是<code> Component </code>或<code> JComponent </code>)。
+     * <p>
+     *  在打印操作期间,此方法将配置渲染器而不指示选择或聚焦,以防止它们出现在打印输出中。
+     * 要根据表是否正在打印进行其他自定义,您可以在此处或自定义渲染器中检查{@link javax.swing.JComponent#isPaintingForPrint()}的值。
+     * <p>
+     * <b>注意：</b>在整个表包中,内部实现总是使用此方法来准备渲染器,以使此默认行为可以被子类安全地覆盖。
+     * 
+     * 
      * @param renderer  the <code>TableCellRenderer</code> to prepare
      * @param row       the row of the cell to render, where 0 is the first row
      * @param column    the column of the cell to render,
@@ -5738,6 +6913,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * use this method to provide editors so that this default behavior
      * can be safely overridden by a subclass.
      *
+     * <p>
+     *  返回由<code> row </code>和<code> column </code>指定的单元格的相应编辑器。如果此列的<code> TableColumn </code>具有非空编辑器,则返回。
+     * 如果没有,则在此列中找到数据的类(使用<code> getColumnClass </code>),并返回此类数据的默认编辑器。
+     * <p>
+     *  <b>注意：</b>在整个表包中,内部实现总是使用此方法来提供编辑器,以便此子类可以安全地覆盖此默认行为。
+     * 
+     * 
      * @param row       the row of the cell to edit, where 0 is the first row
      * @param column    the column of the cell to edit,
      *                  where 0 is the first column
@@ -5765,6 +6947,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * use this method to prepare editors so that this default behavior
      * can be safely overridden by a subclass.
      *
+     * <p>
+     *  通过在<code> row </code>,<code>列</code>查询单元格的值和选择状态来查询数据模型,从而准备编辑器。
+     * <p>
+     *  <b>注意：</b>在整个表包中,内部实现总是使用此方法来准备编辑器,以使此默认行为可以被子类安全地覆盖。
+     * 
+     * 
      * @param editor  the <code>TableCellEditor</code> to set up
      * @param row     the row of the cell to edit,
      *                where 0 is the first row
@@ -5789,6 +6977,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * Discards the editor object and frees the real estate it used for
      * cell rendering.
+     * <p>
+     *  丢弃编辑器对象并释放它用于单元格渲染的空间。
+     * 
      */
     public void removeEditor() {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().
@@ -5827,6 +7018,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * See readObject() and writeObject() in JComponent for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅JComponent中的readObject()和writeObject()。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -5859,6 +7053,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /* Called from the JComponent's EnableSerializationFocusListener to
      * do any Swing-specific pre-serialization configuration.
+     * <p>
+     *  做任何Swing特定的预顺序化配置。
+     * 
      */
     void compWriteObjectNotify() {
         super.compWriteObjectNotify();
@@ -5876,6 +7073,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     * 返回此表的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this table
      */
     protected String paramString() {
@@ -5978,6 +7179,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Note: In headless mode, no dialogs are shown and printing
      * occurs on the default printer.
      *
+     * <p>
+     *  一种显示打印对话框的方便方法,然后在模式<code> PrintMode.FIT_WIDTH </code>中打印此<code> JTable </code>,没有页眉或页脚文本。
+     * 在打印期间将显示带有中止选项的模态进度对话框。
+     * <p>
+     *  注意：在无头模式下,不显示对话框,并在默认打印机上进行打印。
+     * 
+     * 
      * @return true, unless printing is cancelled by the user
      * @throws SecurityException if this thread is not allowed to
      *                           initiate a print job request
@@ -6003,6 +7211,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Note: In headless mode, no dialogs are shown and printing
      * occurs on the default printer.
      *
+     * <p>
+     *  一种方便的方法显示打印对话框,然后在给定的打印模式下打印此<code> JTable </code>,没有页眉或页脚文本。在打印期间将显示带有中止选项的模态进度对话框。
+     * <p>
+     *  注意：在无头模式下,不显示对话框,并在默认打印机上进行打印。
+     * 
+     * 
      * @param  printMode        the printing mode that the printable should use
      * @return true, unless printing is cancelled by the user
      * @throws SecurityException if this thread is not allowed to
@@ -6029,6 +7243,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * Note: In headless mode, no dialogs are shown and printing
      * occurs on the default printer.
      *
+     * <p>
+     *  一种显示打印对话框的方便方法,然后在指定的打印模式下,使用指定的页眉和页脚文本打印此<code> JTable </code>。在打印期间将显示带有中止选项的模态进度对话框。
+     * <p>
+     *  注意：在无头模式下,不显示对话框,并在默认打印机上进行打印。
+     * 
+     * 
      * @param  printMode        the printing mode that the printable should use
      * @param  headerFormat     a <code>MessageFormat</code> specifying the text
      *                          to be used in printing a header,
@@ -6062,6 +7282,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * boolean, PrintRequestAttributeSet, boolean, PrintService) print}
      * method, with the default printer specified as the print service.
      *
+     * <p>
+     * 按照完整功能{@link #print(JTable.PrintMode,MessageFormat,MessageFormat,boolean,PrintRequestAttributeSet,boolean,PrintService)print}
+     * 方法指定的打印此表,并将默认打印机指定为打印服务。
+     * 
+     * 
      * @param  printMode        the printing mode that the printable should use
      * @param  headerFormat     a <code>MessageFormat</code> specifying the text
      *                          to be used in printing a header,
@@ -6155,6 +7380,28 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * See {@link #getPrintable} for more description on how the table is
      * printed.
      *
+     * <p>
+     *  打印此<code> JTable </code>。采取的步骤,大多数开发商将打印一个<code> JTable </code>。
+     * 简而言之,它准备表,调用<code> getPrintable </code>以获取适当的<code> Printable </code>,然后将其发送到打印机。
+     * <p>
+     *  <code> boolean </code>参数允许您指定是否向用户显示打印对话框。当它是,用户可以使用对话框来改变目的地打印机或打印属性,或甚至取消打印。
+     * 另外两个参数允许指定<code> PrintService </code>和打印属性。这些参数可用于为打印对话框提供初始值,或者在未显示对话框时指定值。
+     * <p>
+     * 第二个<code> boolean </code>参数允许您指定是否在交互模式下执行打印。如果<code> true </code>,则在打印期间将显示带有中止选项的模态进度对话框。
+     * 此对话框还可防止可能影响表的任何用户操作。但是,它不能阻止表被代码修改(例如,使用<code> SwingUtilities.invokeLater </code>发布更新的另一个线程)。
+     * 因此,开发人员有责任确保在打印期间没有其他代码以任何方式修改表(无效修改包括：大小,渲染器或基础数据中的更改)。在打印期间更改表时,打印行为未定义。
+     * <p>
+     *  如果为此参数指定了<code> false </code>,则不会显示对话框,并且会立即在事件分派线程上开始打印。这将阻止任何其他事件(包括重绘)在打印完成之前被处理。
+     * 虽然这有效地防止了表被改变,但是它不提供良好的用户体验。因此,仅当从没有可见GUI的应用程序打印时,才建议指定<code> false </code>。
+     * <p>
+     *  注意：尝试显示打印对话框或交互地运行,而在无头模式下,将导致<code> HeadlessException </code>。
+     * <p>
+     * 在获取可打印之前,如果需要,此方法将正常终止编辑,以防止编辑器显示在打印结果中。此外,<code> JTable </code>将在打印期间准备其渲染器,以便不指示选择和焦点。
+     * 就进一步定制打印输出中的表格而言,开发人员可以提供自定义渲染器或绘制代码,它们以{@link javax.swing.JComponent#isPaintingForPrint()}的值为条件。
+     * <p>
+     *  有关如何打印表格的详细说明,请参阅{@link #getPrintable}。
+     * 
+     * 
      * @param  printMode        the printing mode that the printable should use
      * @param  headerFormat     a <code>MessageFormat</code> specifying the text
      *                          to be used in printing a header,
@@ -6410,6 +7657,48 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * underlying data). The behavior of the returned <code>Printable</code>
      * is undefined once the table has been changed.
      *
+     * <p>
+     *  返回<code>可打印</code>以用于打印此JTable。
+     * <p>
+     *  此方法适用于希望定制<code> JTable </code>的<code> print </code>方法所使用的默认<code> Printable </code>实现的方法。
+     * 想要简单地打印表的开发人员应该直接使用这些方法之一。
+     * <p>
+     * 可以在两种打印模式之一下请求<code> Printable </code>。在这两种模式下,它在多个页面上自然地按顺序传播表行,每页尽可能多的行。
+     *  <code> PrintMode.NORMAL </code>指定以当前大小打印表。在此模式下,可能需要以类似于行的方式跨页扩展列。
+     * 当需要时,列以与表的<code> ComponentOrientation </code>一致的顺序分布。
+     *  <code> PrintMode.FIT_WIDTH </code>指定如果需要,输出被缩小以适合每个页面上的表的整个宽度(从而适合所有列)。宽度和高度均匀缩放,保持输出的宽高比。
+     * <p>
+     *  <code> Printable </code>使每个页面上的表的部分与表的<code> JTableHeader </code>中的相应部分(如果有)相对应。
+     * <p>
+     *  可以通过提供<code> MessageFormat </code>参数将标题和页脚文本添加到输出中。
+     * 打印代码从格式请求字符串,提供可以包括在格式化的字符串中的单个项目：代表当前页面编号的<code> Integer </code>。
+     * <p>
+     *  鼓励您阅读<code> MessageFormat </code>的文档,因为某些字符(如单引号)是特殊的,需要进行转义。
+     * <p>
+     *  下面是一个创建一个<code> MessageFormat </code>的示例,可用于打印"Duke's Table：Page  - "和当前页码：
+     * 
+     * <pre>
+     * //注意转义单引号//注意页面编号是如何包含在"{0}"中MessageFormat format = new MessageFormat("Duke''s Table：Page  -  {0}");。
+     * </pre>
+     * <p>
+     *  <code>可打印</code>约束它绘制到它打印的每个页面的可打印区域。在某些情况下,它可能发现不可能将所有页面的内容放入该区域。在这些情况下,输出可能被修剪,但是实施方式努力做某事是合理的。
+     * 下面是一些已知发生的情况,以及这些特定实现如何处理：。
+     * <ul>
+     *  <li>在任何模式下,当页眉或页脚文本太宽而不能完全适合可打印区域时 - 从表的<code> ComponentOrientation </code确定的开始,尽可能多地打印文本>。
+     *  <li>在任何模式下,如果行过大,无法适合可打印区域,请打印该行的最上部分,并在表格上不绘制下边框。
+     *  <li>在<code> PrintMode.NORMAL </code>中,当列太宽而不适合可打印区域时,请打印列的中心部分,并将左右边框离开表格。
+     * </ul>
+     * <p>
+     * 它完全有效的这个<code>可打印</code>被包裹在另一个,以创建复杂的报告和文档。您甚至可以请求将不同的页面呈现为不同大小的可打印区域。实现必须准备好处理这个(可能通过在运行时进行布局计算)。
+     * 但是,为每个页面提供不同的高度可能不适合使用<code> PrintMode.NORMAL </code>当它必须跨页面传播列。
+     * <p>
+     *  就定制表格在打印结果中的样式而言,<code> JTable </code>本身将在打印期间隐藏选择和焦点。
+     * 对于其他自定义,渲染器或绘图代码可以根据{@link javax.swing.JComponent#isPaintingForPrint()}的值自定义外观。
+     * <p>
+     *  此外,在</i>调用此方法之前,您可能希望先</i>修改表的状态,例如取消单元格编辑或让用户适当地调整表格大小。
+     * 不过,您必须在取得<code>可列印</code>(无效修改包括大小或底层资料变更)</i>之后修改表格<i>的状态。更改表后,返回的<code> Printable </code>行为未定义。
+     * 
+     * 
      * @param  printMode     the printing mode that the printable should use
      * @param  headerFormat  a <code>MessageFormat</code> specifying the text to
      *                       be used in printing a header, or null for none
@@ -6434,6 +7723,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     /**
      * A <code>Printable</code> implementation that wraps another
      * <code>Printable</code>, making it safe for printing on another thread.
+     * <p>
+     *  一个<code>可打印</code>实现,它包装另一个<code>可打印</code>,可以安全地在另一个线程上打印。
+     * 
      */
     private class ThreadSafePrintable implements Printable {
 
@@ -6442,11 +7734,17 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * To communicate any return value when delegating.
+         * <p>
+         *  在委派时传达任何返回值。
+         * 
          */
         private int retVal;
 
         /**
          * To communicate any <code>Throwable</code> when delegating.
+         * <p>
+         * 在委派时传递任何<code> Throwable </code>。
+         * 
          */
         private Throwable retThrowable;
 
@@ -6454,6 +7752,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Construct a <code>ThreadSafePrintable</code> around the given
          * delegate.
          *
+         * <p>
+         *  在给定的委托周围构造一个<code> ThreadSafePrintable </code>。
+         * 
+         * 
          * @param printDelegate the <code>Printable</code> to delegate to
          */
         public ThreadSafePrintable(Printable printDelegate) {
@@ -6467,6 +7769,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Regardless of what thread this method is called on, all calls into
          * the delegate will be done on the event-dispatch thread.
          *
+         * <p>
+         *  以指定的格式将指定的页面打印到给定的{@link Graphics}上下文中。
+         * <p>
+         *  不管调用什么线程的方法,所有对代理的调用都将在事件调度线程上完成。
+         * 
+         * 
          * @param   graphics    the context into which the page is drawn
          * @param   pageFormat  the size and orientation of the page being drawn
          * @param   pageIndex   the zero based index of the page to be drawn
@@ -6541,6 +7849,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * AccessibleJTable.
      * A new AccessibleJTable instance is created if necessary.
      *
+     * <p>
+     *  获取与此JTable相关联的AccessibleContext。对于表,AccessibleContext采用AccessibleJTable的形式。
+     * 如果需要,将创建一个新的AccessibleJTable实例。
+     * 
+     * 
      * @return an AccessibleJTable that serves as the
      *         AccessibleContext of this JTable
      */
@@ -6568,6 +7881,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现了<code> JTable </code>类的辅助功能支持。它提供了适用于表用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class AccessibleJTable extends AccessibleJComponent
     implements AccessibleSelection, ListSelectionListener, TableModelListener,
@@ -6580,6 +7899,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * AccessibleJTable constructor
          *
+         * <p>
+         *  AccessibleJTable构造函数
+         * 
+         * 
          * @since 1.5
          */
         protected AccessibleJTable() {
@@ -6603,6 +7926,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Track changes to selection model, column model, etc. so as to
          * be able to re-place listeners on those in order to pass on
          * information to the Accessibility PropertyChange mechanism
+         * <p>
+         *  跟踪对选择模型,列模型等的更改,以便能够在这些模型上重新放置侦听器,以便将信息传递到辅助功能属性更改机制
+         * 
          */
         public void propertyChange(PropertyChangeEvent e) {
             String name = e.getPropertyName();
@@ -6681,6 +8007,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /*
          * Describes a change in the accessible table model.
+         * <p>
+         *  描述可访问表模型中的更改。
+         * 
          */
         protected class AccessibleJTableModelChange
             implements AccessibleTableModelChange {
@@ -6724,6 +8053,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Track changes to the table contents
+         * <p>
+         *  跟踪对表内容的更改
+         * 
          */
         public void tableChanged(TableModelEvent e) {
            firePropertyChange(AccessibleContext.ACCESSIBLE_VISIBLE_DATA_PROPERTY,
@@ -6751,6 +8083,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Track changes to the table contents (row insertions)
+         * <p>
+         *  跟踪对表内容的更改(行插入)
+         * 
          */
         public void tableRowsInserted(TableModelEvent e) {
            firePropertyChange(AccessibleContext.ACCESSIBLE_VISIBLE_DATA_PROPERTY,
@@ -6776,6 +8111,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Track changes to the table contents (row deletions)
+         * <p>
+         * 跟踪表内容的更改(行删除)
+         * 
          */
         public void tableRowsDeleted(TableModelEvent e) {
            firePropertyChange(AccessibleContext.ACCESSIBLE_VISIBLE_DATA_PROPERTY,
@@ -6801,6 +8139,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Track changes to the table contents (column insertions)
+         * <p>
+         *  跟踪表内容的更改(列插入)
+         * 
          */
         public void columnAdded(TableColumnModelEvent e) {
            firePropertyChange(AccessibleContext.ACCESSIBLE_VISIBLE_DATA_PROPERTY,
@@ -6821,6 +8162,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Track changes to the table contents (column deletions)
+         * <p>
+         *  跟踪表内容的更改(列删除)
+         * 
          */
         public void columnRemoved(TableColumnModelEvent e) {
            firePropertyChange(AccessibleContext.ACCESSIBLE_VISIBLE_DATA_PROPERTY,
@@ -6841,6 +8185,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Track changes of a column repositioning.
          *
+         * <p>
+         *  跟踪列重新定位的更改。
+         * 
+         * 
          * @see TableColumnModelListener
          */
         public void columnMoved(TableColumnModelEvent e) {
@@ -6873,6 +8221,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Track changes of a column moving due to margin changes.
          *
+         * <p>
+         *  跟踪由于余量变化而移动的列的变化。
+         * 
+         * 
          * @see TableColumnModelListener
          */
         public void columnMarginChanged(ChangeEvent e) {
@@ -6883,6 +8235,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Track that the selection model of the TableColumnModel changed.
          *
+         * <p>
+         *  跟踪TableColumnModel的选择模型更改。
+         * 
+         * 
          * @see TableColumnModelListener
          */
         public void columnSelectionChanged(ListSelectionEvent e) {
@@ -6895,6 +8251,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Invoked when editing is finished. The changes are saved, the
          * editor object is discarded, and the cell is rendered once again.
          *
+         * <p>
+         *  跟踪单元格内容的更改。
+         * 
+         *  编辑完成时调用。保存更改,删除编辑器对象,并再次呈现单元格。
+         * 
+         * 
          * @see CellEditorListener
          */
         public void editingStopped(ChangeEvent e) {
@@ -6908,6 +8270,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Invoked when editing is canceled. The editor object is discarded
          * and the cell is rendered once again.
          *
+         * <p>
+         *  当编辑被取消时调用。编辑器对象被丢弃,并且单元格再次被渲染。
+         * 
+         * 
          * @see CellEditorListener
          */
         public void editingCanceled(ChangeEvent e) {
@@ -6916,6 +8282,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * Track changes to table cell selections
+         * <p>
+         *  跟踪对表单元格选择的更改
+         * 
          */
         public void valueChanged(ListSelectionEvent e) {
             firePropertyChange(AccessibleContext.ACCESSIBLE_SELECTION_PROPERTY,
@@ -6949,6 +8318,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * return this object, which is responsible for implementing the
          * AccessibleSelection interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleSelection。在为此类实现Java Accessibility API时,返回此对象,它负责代表自身实现AccessibleSelection接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleSelection getAccessibleSelection() {
@@ -6958,6 +8331,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Gets the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -6970,6 +8347,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns the <code>Accessible</code> child, if one exists,
          * contained at the local coordinate <code>Point</code>.
          *
+         * <p>
+         *  返回包含在本地坐标<code> Point </code>处的<code> Accessible </code>子代(如果存在)。
+         * 
+         * 
          * @param p the point defining the top-left corner of the
          *    <code>Accessible</code>, given in the coordinate space
          *    of the object's parent
@@ -7001,6 +8382,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * of the children of this object implement <code>Accessible</code>,
          * then this method should return the number of children of this object.
          *
+         * <p>
+         *  返回对象中可访问的子项数。如果这个对象的所有子实现<code> Accessible </code>,那么这个方法应该返回这个对象的子数。
+         * 
+         * 
          * @return the number of accessible children in the object
          */
         public int getAccessibleChildrenCount() {
@@ -7010,6 +8395,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the nth <code>Accessible</code> child of the object.
          *
+         * <p>
+         *  返回对象的第n个<code> Accessible </code>子对象。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the nth Accessible child of the object
          */
@@ -7043,6 +8432,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * currently selected.
          * If no children are selected, the return value will be 0.
          *
+         * <p>
+         *  返回当前选择的<code>可访问</code>子项数。如果未选择任何子项,则返回值为0。
+         * 
+         * 
          * @return the number of items currently selected
          */
         public int getAccessibleSelectionCount() {
@@ -7083,6 +8476,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * <p>Note that the index represents the i-th selected child, which
          * is different from the i-th child.
          *
+         * <p>
+         * 返回表示对象中指定的选定子项的<code> Accessible </code>。如果没有选择,或者选择的子选择比传递的整数少,返回值将是<code> null </code>。
+         *  <p>请注意,索引表示第i个选定子项,它与第i个子项不同。
+         * 
+         * 
          * @param i the zero-based index of selected children
          * @return the i-th selected child
          * @see #getAccessibleSelectionCount
@@ -7208,6 +8606,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Determines if the current child of this object is selected.
          *
+         * <p>
+         *  确定是否选择此对象的当前子项。
+         * 
+         * 
          * @param i the zero-based index of the child in this
          *    <code>Accessible</code> object
          * @return true if the current child of this object is selected
@@ -7230,6 +8632,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * This method only works on <code>JTable</code>s which have
          * individual cell selection enabled.
          *
+         * <p>
+         *  将对象的指定<code> Accessible </code>子对象添加到对象的选择。如果对象支持多个选择,则将指定的子项添加到任何现有选择,否则将替换对象中的任何现有选择。
+         * 如果已选择指定的子项,则此方法无效。
+         * <p>
+         *  此方法仅适用于已启用单个单元格选择的<code> JTable </code>。
+         * 
+         * 
          * @param i the zero-based index of the child
          * @see AccessibleContext#getAccessibleChild
          */
@@ -7248,6 +8657,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * This method only works on <code>JTables</code> which have
          * individual cell selection enabled.
          *
+         * <p>
+         *  从对象的选择中删除对象的指定子项。如果当前未选择指定的项目,则此方法无效。
+         * <p>
+         *  此方法仅适用于已启用单个单元格选择的<code> JTables </code>。
+         * 
+         * 
          * @param i the zero-based index of the child
          * @see AccessibleContext#getAccessibleChild
          */
@@ -7263,6 +8678,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Clears the selection in the object, so that no children in the
          * object are selected.
+         * <p>
+         *  清除对象中的选择,以便不会选择对象中的任何子对象。
+         * 
          */
         public void clearAccessibleSelection() {
             JTable.this.clearSelection();
@@ -7272,6 +8690,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Causes every child of the object to be selected, but only
          * if the <code>JTable</code> supports multiple selections,
          * and if individual cell selection is enabled.
+         * <p>
+         *  使对象的每个子对象被选择,但只有当<code> JTable </code>支持多​​个选择,并且如果启用了单个单元格选择。
+         * 
          */
         public void selectAllAccessibleSelection() {
             if (JTable.this.cellSelectionEnabled) {
@@ -7284,6 +8705,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the row number of an index in the table.
          *
+         * <p>
+         *  返回表中索引的行号。
+         * 
+         * 
          * @param index the zero-based index in the table
          * @return the zero-based row of the table if one exists;
          * otherwise -1.
@@ -7296,6 +8721,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the column number of an index in the table.
          *
+         * <p>
+         *  返回表中索引的列号。
+         * 
+         * 
          * @param index the zero-based index in the table
          * @return the zero-based column of the table if one exists;
          * otherwise -1.
@@ -7308,6 +8737,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the index at a row and column in the table.
          *
+         * <p>
+         *  返回表中行和列的索引。
+         * 
+         * 
          * @param r zero-based row of the table
          * @param c zero-based column of the table
          * @return the zero-based index in the table if one exists;
@@ -7334,6 +8767,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * for implementing the <code>AccessibleTables</code> interface
          * on behalf of itself.
          *
+         * <p>
+         * 获取与此对象关联的<code> AccessibleTable </code>。
+         * 在为该类实现Java辅助功能API时,返回此对象,该对象负责代表自身实现<code> AccessibleTables </code>接口。
+         * 
+         * 
          * @return this object
          * @since 1.3
          */
@@ -7344,6 +8782,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the caption for the table.
          *
+         * <p>
+         *  返回表的标题。
+         * 
+         * 
          * @return the caption for the table
          * @since 1.3
          */
@@ -7354,6 +8796,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Sets the caption for the table.
          *
+         * <p>
+         *  设置表的标题。
+         * 
+         * 
          * @param a the caption for the table
          * @since 1.3
          */
@@ -7367,6 +8813,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the summary description of the table.
          *
+         * <p>
+         *  返回表的摘要描述。
+         * 
+         * 
          * @return the summary description of the table
          * @since 1.3
          */
@@ -7377,6 +8827,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Sets the summary description of the table.
          *
+         * <p>
+         *  设置表的摘要说明。
+         * 
+         * 
          * @param a the summary description of the table
          * @since 1.3
          */
@@ -7390,6 +8844,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /*
          * Returns the total number of rows in this table.
          *
+         * <p>
+         *  返回此表中的总行数。
+         * 
+         * 
          * @return the total number of rows in this table
          */
         public int getAccessibleRowCount() {
@@ -7399,6 +8857,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /*
          * Returns the total number of columns in the table.
          *
+         * <p>
+         *  返回表中的列总数。
+         * 
+         * 
          * @return the total number of columns in the table
          */
         public int getAccessibleColumnCount() {
@@ -7409,6 +8871,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns the <code>Accessible</code> at a specified row
          * and column in the table.
          *
+         * <p>
+         *  返回表中指定行和列处的<code> Accessible </code>。
+         * 
+         * 
          * @param r zero-based row of the table
          * @param c zero-based column of the table
          * @return the <code>Accessible</code> at the specified row and column
@@ -7422,6 +8888,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns the number of rows occupied by the <code>Accessible</code>
          * at a specified row and column in the table.
          *
+         * <p>
+         *  返回表中指定行和列处的<code> Accessible </code>所占用的行数。
+         * 
+         * 
          * @return the number of rows occupied by the <code>Accessible</code>
          *     at a specified row and column in the table
          * @since 1.3
@@ -7434,6 +8904,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns the number of columns occupied by the
          * <code>Accessible</code> at a given (row, column).
          *
+         * <p>
+         *  返回给定(行,列)上<code> Accessible </code>所占用的列数。
+         * 
+         * 
          * @return the number of columns occupied by the <code>Accessible</code>
          *     at a specified row and column in the table
          * @since 1.3
@@ -7445,6 +8919,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the row headers as an <code>AccessibleTable</code>.
          *
+         * <p>
+         *  以<code> AccessibleTable </code>形式返回行标题。
+         * 
+         * 
          * @return an <code>AccessibleTable</code> representing the row
          * headers
          * @since 1.3
@@ -7457,6 +8935,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Sets the row headers as an <code>AccessibleTable</code>.
          *
+         * <p>
+         *  将行标题设置为<code> AccessibleTable </code>。
+         * 
+         * 
          * @param a an <code>AccessibleTable</code> representing the row
          *  headers
          * @since 1.3
@@ -7468,6 +8950,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the column headers as an <code>AccessibleTable</code>.
          *
+         * <p>
+         *  以<code> AccessibleTable </code>形式返回列标题。
+         * 
+         * 
          *  @return an <code>AccessibleTable</code> representing the column
          *          headers, or <code>null</code> if the table header is
          *          <code>null</code>
@@ -7480,6 +8966,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /*
          * Private class representing a table column header
+         * <p>
+         *  表示表列标题的私有类
+         * 
          */
         private class AccessibleTableHeader implements AccessibleTable {
             private JTableHeader header;
@@ -7493,6 +8982,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the caption for the table.
              *
+             * <p>
+             *  返回表的标题。
+             * 
+             * 
              * @return the caption for the table
              */
             public Accessible getAccessibleCaption() { return null; }
@@ -7501,6 +8994,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the caption for the table.
              *
+             * <p>
+             *  设置表的标题。
+             * 
+             * 
              * @param a the caption for the table
              */
             public void setAccessibleCaption(Accessible a) {}
@@ -7508,6 +9005,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the summary description of the table.
              *
+             * <p>
+             *  返回表的摘要描述。
+             * 
+             * 
              * @return the summary description of the table
              */
             public Accessible getAccessibleSummary() { return null; }
@@ -7515,6 +9016,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the summary description of the table
              *
+             * <p>
+             *  设置表的摘要说明
+             * 
+             * 
              * @param a the summary description of the table
              */
             public void setAccessibleSummary(Accessible a) {}
@@ -7522,6 +9027,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the number of rows in the table.
              *
+             * <p>
+             *  返回表中的行数。
+             * 
+             * 
              * @return the number of rows in the table
              */
             public int getAccessibleRowCount() { return 1; }
@@ -7529,6 +9038,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the number of columns in the table.
              *
+             * <p>
+             *  返回表中的列数。
+             * 
+             * 
              * @return the number of columns in the table
              */
             public int getAccessibleColumnCount() {
@@ -7539,6 +9052,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns the Accessible at a specified row and column
              * in the table.
              *
+             * <p>
+             *  返回表中指定行和列处的Accessible。
+             * 
+             * 
              * @param row zero-based row of the table
              * @param column zero-based column of the table
              * @return the Accessible at the specified row and column
@@ -7566,6 +9083,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns the number of rows occupied by the Accessible at
              * a specified row and column in the table.
              *
+             * <p>
+             *  返回表中指定行和列处Accessible所占用的行数。
+             * 
+             * 
              * @return the number of rows occupied by the Accessible at a
              * given specified (row, column)
              */
@@ -7575,6 +9096,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns the number of columns occupied by the Accessible at
              * a specified row and column in the table.
              *
+             * <p>
+             * 返回表中指定行和列处Accessible所占用的列数。
+             * 
+             * 
              * @return the number of columns occupied by the Accessible at a
              * given specified row and column
              */
@@ -7583,6 +9108,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the row headers as an AccessibleTable.
              *
+             * <p>
+             *  将行标题作为AccessibleTable返回。
+             * 
+             * 
              * @return an AccessibleTable representing the row
              * headers
              */
@@ -7591,6 +9120,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the row headers.
              *
+             * <p>
+             *  设置行标题。
+             * 
+             * 
              * @param table an AccessibleTable representing the
              * row headers
              */
@@ -7599,6 +9132,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the column headers as an AccessibleTable.
              *
+             * <p>
+             *  将列标题作为AccessibleTable返回。
+             * 
+             * 
              * @return an AccessibleTable representing the column
              * headers
              */
@@ -7607,6 +9144,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the column headers.
              *
+             * <p>
+             *  设置列标题。
+             * 
+             * 
              * @param table an AccessibleTable representing the
              * column headers
              * @since 1.3
@@ -7616,6 +9157,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the description of the specified row in the table.
              *
+             * <p>
+             *  返回表中指定行的描述。
+             * 
+             * 
              * @param r zero-based row of the table
              * @return the description of the row
              * @since 1.3
@@ -7625,6 +9170,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the description text of the specified row of the table.
              *
+             * <p>
+             *  设置表的指定行的描述文本。
+             * 
+             * 
              * @param r zero-based row of the table
              * @param a the description of the row
              * @since 1.3
@@ -7634,6 +9183,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the description text of the specified column in the table.
              *
+             * <p>
+             *  返回表中指定列的描述文本。
+             * 
+             * 
              * @param c zero-based column of the table
              * @return the text description of the column
              * @since 1.3
@@ -7643,6 +9196,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the description text of the specified column in the table.
              *
+             * <p>
+             *  设置表中指定列的描述文本。
+             * 
+             * 
              * @param c zero-based column of the table
              * @param a the text description of the column
              * @since 1.3
@@ -7653,6 +9210,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns a boolean value indicating whether the accessible at
              * a specified row and column is selected.
              *
+             * <p>
+             *  返回一个布尔值,指示是否选择了指定行和列处的可访问性。
+             * 
+             * 
              * @param r zero-based row of the table
              * @param c zero-based column of the table
              * @return the boolean value true if the accessible at the
@@ -7666,6 +9227,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns a boolean value indicating whether the specified row
              * is selected.
              *
+             * <p>
+             *  返回一个布尔值,指示是否选择指定的行。
+             * 
+             * 
              * @param r zero-based row of the table
              * @return the boolean value true if the specified row is selected.
              * Otherwise, false.
@@ -7677,6 +9242,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns a boolean value indicating whether the specified column
              * is selected.
              *
+             * <p>
+             *  返回一个布尔值,指示是否选择指定的列。
+             * 
+             * 
              * @param c zero-based column of the table
              * @return the boolean value true if the specified column is selected.
              * Otherwise, false.
@@ -7687,6 +9256,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the selected rows in a table.
              *
+             * <p>
+             *  返回表中选定的行。
+             * 
+             * 
              * @return an array of selected rows where each element is a
              * zero-based row of the table
              * @since 1.3
@@ -7696,6 +9269,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the selected columns in a table.
              *
+             * <p>
+             *  返回表中所选的列。
+             * 
+             * 
              * @return an array of selected columns where each element is a
              * zero-based column of the table
              * @since 1.3
@@ -7707,6 +9284,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Sets the column headers as an <code>AccessibleTable</code>.
          *
+         * <p>
+         *  将列标题设置为<code> AccessibleTable </code>。
+         * 
+         * 
          * @param a an <code>AccessibleTable</code> representing the
          * column headers
          * @since 1.3
@@ -7718,6 +9299,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the description of the specified row in the table.
          *
+         * <p>
+         *  返回表中指定行的描述。
+         * 
+         * 
          * @param r zero-based row of the table
          * @return the description of the row
          * @since 1.3
@@ -7736,6 +9321,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Sets the description text of the specified row of the table.
          *
+         * <p>
+         *  设置表的指定行的描述文本。
+         * 
+         * 
          * @param r zero-based row of the table
          * @param a the description of the row
          * @since 1.3
@@ -7754,6 +9343,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the description of the specified column in the table.
          *
+         * <p>
+         *  返回表中指定列的描述。
+         * 
+         * 
          * @param c zero-based column of the table
          * @return the description of the column
          * @since 1.3
@@ -7772,6 +9365,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Sets the description text of the specified column of the table.
          *
+         * <p>
+         *  设置表的指定列的描述文本。
+         * 
+         * 
          * @param c zero-based column of the table
          * @param a the description of the column
          * @since 1.3
@@ -7791,6 +9388,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns a boolean value indicating whether the accessible at a
          * given (row, column) is selected.
          *
+         * <p>
+         *  返回一个布尔值,指示是否选择给定(行,列)的可访问。
+         * 
+         * 
          * @param r zero-based row of the table
          * @param c zero-based column of the table
          * @return the boolean value true if the accessible at (row, column)
@@ -7805,6 +9406,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns a boolean value indicating whether the specified row
          * is selected.
          *
+         * <p>
+         *  返回一个布尔值,指示是否选择指定的行。
+         * 
+         * 
          * @param r zero-based row of the table
          * @return the boolean value true if the specified row is selected;
          *     otherwise, false
@@ -7818,6 +9423,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Returns a boolean value indicating whether the specified column
          * is selected.
          *
+         * <p>
+         *  返回一个布尔值,指示是否选择指定的列。
+         * 
+         * 
          * @param c zero-based column of the table
          * @return the boolean value true if the specified column is selected;
          *     otherwise, false
@@ -7830,6 +9439,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the selected rows in a table.
          *
+         * <p>
+         *  返回表中选定的行。
+         * 
+         * 
          * @return an array of selected rows where each element is a
          *     zero-based row of the table
          * @since 1.3
@@ -7841,6 +9454,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the selected columns in a table.
          *
+         * <p>
+         *  返回表中所选的列。
+         * 
+         * 
          * @return an array of selected columns where each element is a
          *     zero-based column of the table
          * @since 1.3
@@ -7852,6 +9469,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the row at a given index into the table.
          *
+         * <p>
+         * 将给定索引处的行返回到表中。
+         * 
+         * 
          * @param i zero-based index into the table
          * @return the row at a given index
          * @since 1.3
@@ -7868,6 +9489,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the column at a given index into the table.
          *
+         * <p>
+         *  将给定索引处的列返回到表中。
+         * 
+         * 
          * @param i zero-based index into the table
          * @return the column at a given index
          * @since 1.3
@@ -7884,6 +9509,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * Returns the index at a given (row, column) in the table.
          *
+         * <p>
+         *  返回表中给定(行,列)的索引。
+         * 
+         * 
          * @param r zero-based row of the table
          * @param c zero-based column of the table
          * @return the index into the table
@@ -7898,6 +9527,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         /**
          * The class provides an implementation of the Java Accessibility
          * API appropriate to table cells.
+         * <p>
+         *  该类提供了适用于表单元格的Java辅助功能API的实现。
+         * 
          */
         protected class AccessibleJTableCell extends AccessibleContext
             implements Accessible, AccessibleComponent {
@@ -7909,6 +9541,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
             /**
              *  Constructs an <code>AccessibleJTableHeaderEntry</code>.
+             * <p>
+             *  构造一个<code> AccessibleJTableHeaderEntry </code>。
+             * 
+             * 
              * @since 1.4
              */
             public AccessibleJTableCell(JTable t, int r, int c, int i) {
@@ -7925,6 +9561,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * API for this class, return this object, which is its own
              * <code>AccessibleContext</code>.
              *
+             * <p>
+             *  获取与此组件关联的<code> AccessibleContext </code>。
+             * 在为这个类实现Java Accessibility API时,返回这个对象,它是自己的<code> AccessibleContext </code>。
+             * 
+             * 
              * @return this object
              */
             public AccessibleContext getAccessibleContext() {
@@ -7934,6 +9575,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the AccessibleContext for the table cell renderer.
              *
+             * <p>
+             *  获取表单元格渲染器的AccessibleContext。
+             * 
+             * 
              * @return the <code>AccessibleContext</code> for the table
              * cell renderer if one exists;
              * otherwise, returns <code>null</code>.
@@ -7959,6 +9604,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the table cell renderer component.
              *
+             * <p>
+             *  获取表单元格渲染器组件。
+             * 
+             * 
              * @return the table cell renderer component if one exists;
              * otherwise, returns <code>null</code>.
              * @since 1.6
@@ -7980,6 +9629,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the accessible name of this object.
              *
+             * <p>
+             *  获取此对象的可访问名称。
+             * 
+             * 
              * @return the localized name of the object; <code>null</code>
              *     if this object does not have a name
              */
@@ -8003,6 +9656,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the localized accessible name of this object.
              *
+             * <p>
+             *  设置此对象的本地化可访问名称。
+             * 
+             * 
              * @param s the new localized name of the object
              */
             public void setAccessibleName(String s) {
@@ -8020,6 +9677,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the accessible description of this object.
              *
+             * <p>
+             *  获取此对象的可访问描述。
+             * 
+             * 
              * @return the localized description of the object;
              *     <code>null</code> if this object does not have
              *     a description
@@ -8036,6 +9697,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the accessible description of this object.
              *
+             * <p>
+             *  设置此对象的可访问描述。
+             * 
+             * 
              * @param s the new localized description of the object
              */
             public void setAccessibleDescription(String s) {
@@ -8050,6 +9715,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the role of this object.
              *
+             * <p>
+             *  获取此对象的作用。
+             * 
+             * 
              * @return an instance of <code>AccessibleRole</code>
              *      describing the role of the object
              * @see AccessibleRole
@@ -8066,6 +9735,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the state set of this object.
              *
+             * <p>
+             *  获取此对象的状态集。
+             * 
+             * 
              * @return an instance of <code>AccessibleStateSet</code>
              *     containing the current state set of the object
              * @see AccessibleState
@@ -8104,6 +9777,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the <code>Accessible</code> parent of this object.
              *
+             * <p>
+             *  获取此对象的<code> Accessible </code> parent。
+             * 
+             * 
              * @return the Accessible parent of this object;
              *     <code>null</code> if this object does not
              *     have an <code>Accessible</code> parent
@@ -8115,6 +9792,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the index of this object in its accessible parent.
              *
+             * <p>
+             *  获取此对象在其可访问父级中的索引。
+             * 
+             * 
              * @return the index of this object in its parent; -1 if this
              *     object does not have an accessible parent
              * @see #getAccessibleParent
@@ -8126,6 +9807,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the number of accessible children in the object.
              *
+             * <p>
+             *  返回对象中可访问的子项数。
+             * 
+             * 
              * @return the number of accessible children in the object
              */
             public int getAccessibleChildrenCount() {
@@ -8141,6 +9826,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns the specified <code>Accessible</code> child of the
              * object.
              *
+             * <p>
+             *  返回对象的指定<code> Accessible </code>子对象。
+             * 
+             * 
              * @param i zero-based index of child
              * @return the <code>Accessible</code> child of the object
              */
@@ -8160,6 +9849,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * does not have a locale, then the locale of its parent
              * is returned.
              *
+             * <p>
+             *  获取组件的语言环境。如果组件没有语言环境,那么将返回其父组件的语言环境。
+             * 
+             * 
              * @return this component's locale; if this component does
              *    not have a locale, the locale of its parent is returned
              * @exception IllegalComponentStateException if the
@@ -8182,6 +9875,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Adds a <code>PropertyChangeListener</code> to the listener list.
              * The listener is registered for all properties.
              *
+             * <p>
+             *  向侦听器列表中添加<code> PropertyChangeListener </code>。侦听器为所有属性注册。
+             * 
+             * 
              * @param l  the <code>PropertyChangeListener</code>
              *     to be added
              */
@@ -8199,6 +9896,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * listener list. This removes a <code>PropertyChangeListener</code>
              * that was registered for all properties.
              *
+             * <p>
+             * 从侦听器列表中删除<code> PropertyChangeListener </code>。这将删除为所有属性注册的<code> PropertyChangeListener </code>。
+             * 
+             * 
              * @param l  the <code>PropertyChangeListener</code>
              *    to be removed
              */
@@ -8215,6 +9916,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleAction</code> associated with this
              * object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleAction </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleAction</code>, or <code>null</code>
              */
             public AccessibleAction getAccessibleAction() {
@@ -8225,6 +9930,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleComponent</code> associated with
              * this object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleComponent </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleComponent</code>, or
              *    <code>null</code>
              */
@@ -8236,6 +9945,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleSelection</code> associated with
              * this object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleSelection </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleSelection</code>, or
              *    <code>null</code>
              */
@@ -8247,6 +9960,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleText</code> associated with this
              * object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleText </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleText</code>, or <code>null</code>
              */
             public AccessibleText getAccessibleText() {
@@ -8257,6 +9974,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleValue</code> associated with
              * this object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleValue </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleValue</code>, or <code>null</code>
              */
             public AccessibleValue getAccessibleValue() {
@@ -8269,6 +9990,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the background color of this object.
              *
+             * <p>
+             *  获取此对象的背景颜色。
+             * 
+             * 
              * @return the background color, if supported, of the object;
              *     otherwise, <code>null</code>
              */
@@ -8289,6 +10014,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the background color of this object.
              *
+             * <p>
+             *  设置此对象的背景颜色。
+             * 
+             * 
              * @param c the new <code>Color</code> for the background
              */
             public void setBackground(Color c) {
@@ -8306,6 +10035,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the foreground color of this object.
              *
+             * <p>
+             *  获取此对象的前景颜色。
+             * 
+             * 
              * @return the foreground color, if supported, of the object;
              *     otherwise, <code>null</code>
              */
@@ -8326,6 +10059,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the foreground color of this object.
              *
+             * <p>
+             *  设置此对象的前景颜色。
+             * 
+             * 
              * @param c the new <code>Color</code> for the foreground
              */
             public void setForeground(Color c) {
@@ -8343,6 +10080,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the <code>Cursor</code> of this object.
              *
+             * <p>
+             *  获取此对象的<code> Cursor </code>。
+             * 
+             * 
              * @return the <code>Cursor</code>, if supported,
              *    of the object; otherwise, <code>null</code>
              */
@@ -8368,6 +10109,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the <code>Cursor</code> of this object.
              *
+             * <p>
+             *  设置此对象的<code> Cursor </code>。
+             * 
+             * 
              * @param c the new <code>Cursor</code> for the object
              */
             public void setCursor(Cursor c) {
@@ -8385,6 +10130,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the <code>Font</code> of this object.
              *
+             * <p>
+             *  获取此对象的<code> Font </code>。
+             * 
+             * 
              * @return the <code>Font</code>,if supported,
              *   for the object; otherwise, <code>null</code>
              */
@@ -8405,6 +10154,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the <code>Font</code> of this object.
              *
+             * <p>
+             *  设置此对象的<code> Font </code>。
+             * 
+             * 
              * @param f the new <code>Font</code> for the object
              */
             public void setFont(Font f) {
@@ -8422,6 +10175,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the <code>FontMetrics</code> of this object.
              *
+             * <p>
+             *  获取此对象的<code> FontMetrics </code>。
+             * 
+             * 
              * @param f the <code>Font</code>
              * @return the <code>FontMetrics</code> object, if supported;
              *    otherwise <code>null</code>
@@ -8444,6 +10201,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Determines if the object is enabled.
              *
+             * <p>
+             *  确定对象是否已启用。
+             * 
+             * 
              * @return true if object is enabled; otherwise, false
              */
             public boolean isEnabled() {
@@ -8463,6 +10224,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the enabled state of the object.
              *
+             * <p>
+             *  设置对象的启用状态。
+             * 
+             * 
              * @param b if true, enables this object; otherwise, disables it
              */
             public void setEnabled(boolean b) {
@@ -8484,6 +10249,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * is contained by is not visible.  To determine if an object is
              * showing on the screen, use <code>isShowing</code>.
              *
+             * <p>
+             * 确定此对象是否可见。注意：这意味着对象是可见的;然而,它可能实际上不在屏幕上显示,因为包含该对象的对象之一是不可见的。
+             * 要确定对象是否显示在屏幕上,请使用<code> isShowing </code>。
+             * 
+             * 
              * @return true if object is visible; otherwise, false
              */
             public boolean isVisible() {
@@ -8503,6 +10273,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the visible state of the object.
              *
+             * <p>
+             *  设置对象的可见状态。
+             * 
+             * 
              * @param b if true, shows this object; otherwise, hides it
              */
             public void setVisible(boolean b) {
@@ -8524,6 +10298,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * object is obscured by another (for example,
              * it happens to be underneath a menu that was pulled down).
              *
+             * <p>
+             *  确定对象是否正在显示。这是通过检查对象和对象的祖先的可见性来确定的。注意：即使对象被另一个对象遮盖,这将返回true(例如,它恰好在下拉菜单下)。
+             * 
+             * 
              * @return true if the object is showing; otherwise, false
              */
             public boolean isShowing() {
@@ -8553,6 +10331,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * are defined to be relative to the coordinate system of
              * the object.
              *
+             * <p>
+             *  检查指定点是否在此对象的边界内,其中点的x和y坐标被定义为相对于对象的坐标系。
+             * 
+             * 
              * @param p the <code>Point</code> relative to the
              *    coordinate system of the object
              * @return true if object contains <code>Point</code>;
@@ -8577,6 +10359,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the location of the object on the screen.
              *
+             * <p>
+             *  返回对象在屏幕上的位置。
+             * 
+             * 
              * @return location of object on screen -- can be
              *    <code>null</code> if this object is not on the screen
              */
@@ -8596,6 +10382,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * in the form of a point specifying the object's
              * top-left corner in the screen's coordinate space.
              *
+             * <p>
+             *  以指定对象在屏幕坐标空间中左上角的点的形式获取对象相对于父对象的位置。
+             * 
+             * 
              * @return an instance of <code>Point</code> representing
              *    the top-left corner of the object's bounds in the
              *    coordinate space of the screen; <code>null</code> if
@@ -8613,6 +10403,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
             /**
              * Sets the location of the object relative to the parent.
+             * <p>
+             *  设置对象相对于父对象的位置。
+             * 
              */
             public void setLocation(Point p) {
 //              if ((parent != null)  && (parent.contains(p))) {
@@ -8727,6 +10520,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
         /**
          * This class implements accessibility for JTable header cells.
+         * <p>
+         *  此类实现JTable标头单元的可访问性。
+         * 
          */
         private class AccessibleJTableHeaderCell extends AccessibleContext
             implements Accessible, AccessibleComponent {
@@ -8739,6 +10535,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Constructs an <code>AccessibleJTableHeaderEntry</code> instance.
              *
+             * <p>
+             *  构造一个<code> AccessibleJTableHeaderEntry </code>实例。
+             * 
+             * 
              * @param row header cell row index
              * @param column header cell column index
              * @param parent header cell parent
@@ -8760,6 +10560,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * API for this class, return this object, which is its own
              * <code>AccessibleContext</code>.
              *
+             * <p>
+             *  获取与此组件关联的<code> AccessibleContext </code>。
+             * 在为这个类实现Java Accessibility API时,返回这个对象,它是自己的<code> AccessibleContext </code>。
+             * 
+             * 
              * @return this object
              */
             public AccessibleContext getAccessibleContext() {
@@ -8769,6 +10574,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /*
              * Returns the AccessibleContext for the header cell
              * renderer.
+             * <p>
+             *  返回标头单元格渲染器的AccessibleContext。
+             * 
              */
             private AccessibleContext getCurrentAccessibleContext() {
                 return rendererComponent.getAccessibleContext();
@@ -8776,6 +10584,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
             /*
              * Returns the component that renders the header cell.
+             * <p>
+             * 返回呈现标题单元格的组件。
+             * 
              */
             private Component getCurrentComponent() {
                 return rendererComponent;
@@ -8786,6 +10597,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the accessible name of this object.
              *
+             * <p>
+             *  获取此对象的可访问名称。
+             * 
+             * 
              * @return the localized name of the object; <code>null</code>
              *     if this object does not have a name
              */
@@ -8807,6 +10622,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the localized accessible name of this object.
              *
+             * <p>
+             *  设置此对象的本地化可访问名称。
+             * 
+             * 
              * @param s the new localized name of the object
              */
             public void setAccessibleName(String s) {
@@ -8821,6 +10640,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the accessible description of this object.
              *
+             * <p>
+             *  获取此对象的可访问描述。
+             * 
+             * 
              * @return the localized description of the object;
              *     <code>null</code> if this object does not have
              *     a description
@@ -8837,6 +10660,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the accessible description of this object.
              *
+             * <p>
+             *  设置此对象的可访问描述。
+             * 
+             * 
              * @param s the new localized description of the object
              */
             public void setAccessibleDescription(String s) {
@@ -8851,6 +10678,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the role of this object.
              *
+             * <p>
+             *  获取此对象的作用。
+             * 
+             * 
              * @return an instance of <code>AccessibleRole</code>
              *      describing the role of the object
              * @see AccessibleRole
@@ -8867,6 +10698,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the state set of this object.
              *
+             * <p>
+             *  获取此对象的状态集。
+             * 
+             * 
              * @return an instance of <code>AccessibleStateSet</code>
              *     containing the current state set of the object
              * @see AccessibleState
@@ -8905,6 +10740,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the <code>Accessible</code> parent of this object.
              *
+             * <p>
+             *  获取此对象的<code> Accessible </code> parent。
+             * 
+             * 
              * @return the Accessible parent of this object;
              *     <code>null</code> if this object does not
              *     have an <code>Accessible</code> parent
@@ -8916,6 +10755,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the index of this object in its accessible parent.
              *
+             * <p>
+             *  获取此对象在其可访问父级中的索引。
+             * 
+             * 
              * @return the index of this object in its parent; -1 if this
              *     object does not have an accessible parent
              * @see #getAccessibleParent
@@ -8927,6 +10770,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the number of accessible children in the object.
              *
+             * <p>
+             *  返回对象中可访问的子项数。
+             * 
+             * 
              * @return the number of accessible children in the object
              */
             public int getAccessibleChildrenCount() {
@@ -8942,6 +10789,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns the specified <code>Accessible</code> child of the
              * object.
              *
+             * <p>
+             *  返回对象的指定<code> Accessible </code>子对象。
+             * 
+             * 
              * @param i zero-based index of child
              * @return the <code>Accessible</code> child of the object
              */
@@ -8961,6 +10812,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * does not have a locale, then the locale of its parent
              * is returned.
              *
+             * <p>
+             *  获取组件的语言环境。如果组件没有语言环境,那么将返回其父组件的语言环境。
+             * 
+             * 
              * @return this component's locale; if this component does
              *    not have a locale, the locale of its parent is returned
              * @exception IllegalComponentStateException if the
@@ -8983,6 +10838,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Adds a <code>PropertyChangeListener</code> to the listener list.
              * The listener is registered for all properties.
              *
+             * <p>
+             *  向侦听器列表中添加<code> PropertyChangeListener </code>。侦听器为所有属性注册。
+             * 
+             * 
              * @param l  the <code>PropertyChangeListener</code>
              *     to be added
              */
@@ -9000,6 +10859,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * listener list. This removes a <code>PropertyChangeListener</code>
              * that was registered for all properties.
              *
+             * <p>
+             *  从侦听器列表中删除<code> PropertyChangeListener </code>。这将删除为所有属性注册的<code> PropertyChangeListener </code>。
+             * 
+             * 
              * @param l  the <code>PropertyChangeListener</code>
              *    to be removed
              */
@@ -9016,6 +10879,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleAction</code> associated with this
              * object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleAction </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleAction</code>, or <code>null</code>
              */
             public AccessibleAction getAccessibleAction() {
@@ -9026,6 +10893,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleComponent</code> associated with
              * this object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleComponent </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleComponent</code>, or
              *    <code>null</code>
              */
@@ -9037,6 +10908,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleSelection</code> associated with
              * this object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleSelection </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleSelection</code>, or
              *    <code>null</code>
              */
@@ -9048,6 +10923,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleText</code> associated with this
              * object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  获取与此对象关联的<code> AccessibleText </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleText</code>, or <code>null</code>
              */
             public AccessibleText getAccessibleText() {
@@ -9058,6 +10937,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Gets the <code>AccessibleValue</code> associated with
              * this object if one exists.  Otherwise returns <code>null</code>.
              *
+             * <p>
+             * 获取与此对象关联的<code> AccessibleValue </code>(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @return the <code>AccessibleValue</code>, or <code>null</code>
              */
             public AccessibleValue getAccessibleValue() {
@@ -9070,6 +10953,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the background color of this object.
              *
+             * <p>
+             *  获取此对象的背景颜色。
+             * 
+             * 
              * @return the background color, if supported, of the object;
              *     otherwise, <code>null</code>
              */
@@ -9090,6 +10977,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the background color of this object.
              *
+             * <p>
+             *  设置此对象的背景颜色。
+             * 
+             * 
              * @param c the new <code>Color</code> for the background
              */
             public void setBackground(Color c) {
@@ -9107,6 +10998,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the foreground color of this object.
              *
+             * <p>
+             *  获取此对象的前景颜色。
+             * 
+             * 
              * @return the foreground color, if supported, of the object;
              *     otherwise, <code>null</code>
              */
@@ -9127,6 +11022,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the foreground color of this object.
              *
+             * <p>
+             *  设置此对象的前景颜色。
+             * 
+             * 
              * @param c the new <code>Color</code> for the foreground
              */
             public void setForeground(Color c) {
@@ -9144,6 +11043,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the <code>Cursor</code> of this object.
              *
+             * <p>
+             *  获取此对象的<code> Cursor </code>。
+             * 
+             * 
              * @return the <code>Cursor</code>, if supported,
              *    of the object; otherwise, <code>null</code>
              */
@@ -9169,6 +11072,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the <code>Cursor</code> of this object.
              *
+             * <p>
+             *  设置此对象的<code> Cursor </code>。
+             * 
+             * 
              * @param c the new <code>Cursor</code> for the object
              */
             public void setCursor(Cursor c) {
@@ -9186,6 +11093,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the <code>Font</code> of this object.
              *
+             * <p>
+             *  获取此对象的<code> Font </code>。
+             * 
+             * 
              * @return the <code>Font</code>,if supported,
              *   for the object; otherwise, <code>null</code>
              */
@@ -9206,6 +11117,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the <code>Font</code> of this object.
              *
+             * <p>
+             *  设置此对象的<code> Font </code>。
+             * 
+             * 
              * @param f the new <code>Font</code> for the object
              */
             public void setFont(Font f) {
@@ -9223,6 +11138,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Gets the <code>FontMetrics</code> of this object.
              *
+             * <p>
+             *  获取此对象的<code> FontMetrics </code>。
+             * 
+             * 
              * @param f the <code>Font</code>
              * @return the <code>FontMetrics</code> object, if supported;
              *    otherwise <code>null</code>
@@ -9245,6 +11164,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Determines if the object is enabled.
              *
+             * <p>
+             *  确定对象是否已启用。
+             * 
+             * 
              * @return true if object is enabled; otherwise, false
              */
             public boolean isEnabled() {
@@ -9264,6 +11187,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the enabled state of the object.
              *
+             * <p>
+             *  设置对象的启用状态。
+             * 
+             * 
              * @param b if true, enables this object; otherwise, disables it
              */
             public void setEnabled(boolean b) {
@@ -9285,6 +11212,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * is contained by is not visible.  To determine if an object is
              * showing on the screen, use <code>isShowing</code>.
              *
+             * <p>
+             *  确定此对象是否可见。注意：这意味着对象是可见的;然而,它可能实际上不在屏幕上显示,因为包含该对象的对象之一是不可见的。
+             * 要确定对象是否显示在屏幕上,请使用<code> isShowing </code>。
+             * 
+             * 
              * @return true if object is visible; otherwise, false
              */
             public boolean isVisible() {
@@ -9304,6 +11236,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Sets the visible state of the object.
              *
+             * <p>
+             *  设置对象的可见状态。
+             * 
+             * 
              * @param b if true, shows this object; otherwise, hides it
              */
             public void setVisible(boolean b) {
@@ -9325,6 +11261,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * object is obscured by another (for example,
              * it happens to be underneath a menu that was pulled down).
              *
+             * <p>
+             *  确定对象是否正在显示。这是通过检查对象和对象的祖先的可见性来确定的。注意：即使对象被另一个对象遮盖,这将返回true(例如,它恰好在下拉菜单下)。
+             * 
+             * 
              * @return true if the object is showing; otherwise, false
              */
             public boolean isShowing() {
@@ -9354,6 +11294,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * are defined to be relative to the coordinate system of
              * the object.
              *
+             * <p>
+             *  检查指定点是否在此对象的边界内,其中点的x和y坐标被定义为相对于对象的坐标系。
+             * 
+             * 
              * @param p the <code>Point</code> relative to the
              *    coordinate system of the object
              * @return true if object contains <code>Point</code>;
@@ -9378,6 +11322,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Returns the location of the object on the screen.
              *
+             * <p>
+             *  返回对象在屏幕上的位置。
+             * 
+             * 
              * @return location of object on screen -- can be
              *    <code>null</code> if this object is not on the screen
              */
@@ -9397,6 +11345,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * in the form of a point specifying the object's
              * top-left corner in the screen's coordinate space.
              *
+             * <p>
+             * 以指定对象在屏幕坐标空间中左上角的点的形式获取对象相对于父对象的位置。
+             * 
+             * 
              * @return an instance of <code>Point</code> representing
              *    the top-left corner of the object's bounds in the
              *    coordinate space of the screen; <code>null</code> if
@@ -9414,6 +11366,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
             /**
              * Sets the location of the object relative to the parent.
+             * <p>
+             *  设置对象相对于父对象的位置。
+             * 
+             * 
              * @param p the new position for the top-left corner
              * @see #getLocation
              */
@@ -9425,6 +11381,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * The bounds specify this object's width, height, and location
              * relative to its parent.
              *
+             * <p>
+             *  以Rectangle对象的形式获取此对象的边界。 bounds指定此对象的宽度,高度和相对于其父级的位置。
+             * 
+             * 
              * @return A rectangle indicating this component's bounds; null if
              * this object is not on the screen.
              * @see #contains
@@ -9442,6 +11402,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * The bounds specify this object's width, height, and location
              * relative to its parent.
              *
+             * <p>
+             *  以Rectangle对象的形式设置此对象的边界。 bounds指定此对象的宽度,高度和相对于其父级的位置。
+             * 
+             * 
              * @param r rectangle indicating this component's bounds
              * @see #getBounds
              */
@@ -9463,6 +11427,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * height, and the width field of the Dimension object contains this
              * object's width.
              *
+             * <p>
+             *  以Dimension对象的形式返回此对象的大小。 Dimension对象的height字段包含此对象的高度,Dimension对象的width字段包含此对象的宽度。
+             * 
+             * 
              * @return A Dimension object that indicates the size of this component;
              * null if this object is not on the screen
              * @see #setSize
@@ -9480,6 +11448,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             /**
              * Resizes this object so that it has width and height.
              *
+             * <p>
+             *  调整此对象的大小,使其具有宽度和高度。
+             * 
+             * 
              * @param d The dimension specifying the new size of the object.
              * @see #getSize
              */
@@ -9499,6 +11471,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Returns the Accessible child, if one exists, contained at the local
              * coordinate Point.
              *
+             * <p>
+             *  返回Accessible child(如果存在)包含在本地坐标Point。
+             * 
+             * 
              * @param p The point relative to the coordinate system of this object.
              * @return the Accessible, if it exists, at the specified location;
              * otherwise null
@@ -9517,6 +11493,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * can accept focus will also have the AccessibleState.FOCUSABLE state
              * set in their AccessibleStateSets.
              *
+             * <p>
+             *  返回此对象是否可以接受焦点。可以接受焦点的对象也将在其AccessibleStateSets中设置AccessibleState.FOCUSABLE状态。
+             * 
+             * 
              * @return true if object can accept focus; otherwise false
              * @see AccessibleContext#getAccessibleStateSet
              * @see AccessibleState#FOCUSABLE
@@ -9541,6 +11521,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Requests focus for this object.  If this object cannot accept focus,
              * nothing will happen.  Otherwise, the object will attempt to take
              * focus.
+             * <p>
+             *  此对象的请求焦点。如果这个对象不能接受焦点,什么也不会发生。否则,对象将尝试获取焦点。
+             * 
+             * 
              * @see #isFocusTraversable
              */
             public void requestFocus() {
@@ -9559,6 +11543,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Adds the specified focus listener to receive focus events from this
              * component.
              *
+             * <p>
+             *  添加指定的焦点侦听器以从此组件接收焦点事件。
+             * 
+             * 
              * @param l the focus listener
              * @see #removeFocusListener
              */
@@ -9578,6 +11566,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * Removes the specified focus listener so it no longer receives focus
              * events from this component.
              *
+             * <p>
+             *  删除指定的焦点侦听器,使其不再从此组件接收焦点事件。
+             * 
              * @param l the focus listener
              * @see #addFocusListener
              */

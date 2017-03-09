@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -102,12 +103,39 @@ import java.util.*;
  *   attribute: isContainer false
  * description: A component that displays a short string and an icon.
  *
+ * <p>
+ *  用于短文本字符串或图像或两者的显示区域。标签不会对输入事件做出反应。因此,它无法获得键盘焦点。然而,标签可以显示键盘替代,作为具有键盘替代但不能显示它的附近组件的方便。
+ * <p>
+ *  <code> JLabel </code>对象可以显示文本,图像或两者。您可以通过设置垂直和水平对齐来指定标签的显示区域中标签内容的对齐位置。默认情况下,标签在其显示区域中垂直居中。
+ * 默认情况下,纯文本标签是前边对齐的;默认情况下,仅图像标签水平居中。
+ * <p>
+ *  您还可以指定文本相对于图像的位置。默认情况下,文本在图像的后缘,文本和图像垂直对齐。
+ * <p>
+ *  标签的前缘和后缘由其{@link java.awt.ComponentOrientation}属性的值确定。
+ * 目前,默认的ComponentOrientation设置将前边缘映射到左边,将后边缘映射到右边。
+ * 
+ * <p>
+ *  最后,您可以使用<code> setIconTextGap </code>方法来指定在文本和图像之间应该出现多少像素。默认值为4像素。
+ * <p>
+ * 有关详情,请参阅Java教程</em>中的<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/label.html">
+ * 如何使用标签</a>文档。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ *  @beaninfo属性：isContainer false description：显示短字符串和图标的组件。
+ * 
+ * 
  * @author Hans Muller
  */
 @SuppressWarnings("serial")
 public class JLabel extends JComponent implements SwingConstants, Accessible
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -137,6 +165,11 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * automatically set the LABELED_BY_PROPERTY of the component being
      * labelled.
      *
+     * <p>
+     *  客户端属性键,用于确定为组件标记的标签。这通常不由标签使用,而是由组件(例如由标签标记的文本区域)使用。
+     * 设置标签的labelFor属性时,它会自动设置要标记的组件的LABELED_BY_PROPERTY。
+     * 
+     * 
      * @see #setLabelFor
      */
     static final String LABELED_BY_PROPERTY = "labeledBy";
@@ -147,6 +180,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * The label is centered vertically in its display area.
      * The text is on the trailing edge of the image.
      *
+     * <p>
+     *  创建具有指定的文本,图像和水平对齐方式的<code> JLabel </code>实例。标签在其显示区域中垂直居中。文本位于图像的后缘。
+     * 
+     * 
      * @param text  The text to be displayed by the label.
      * @param icon  The image to be displayed by the label.
      * @param horizontalAlignment  One of the following constants
@@ -170,6 +207,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * text and horizontal alignment.
      * The label is centered vertically in its display area.
      *
+     * <p>
+     * 创建具有指定文本和水平对齐方式的<code> JLabel </code>实例。标签在其显示区域中垂直居中。
+     * 
+     * 
      * @param text  The text to be displayed by the label.
      * @param horizontalAlignment  One of the following constants
      *           defined in <code>SwingConstants</code>:
@@ -188,6 +229,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * The label is aligned against the leading edge of its display area,
      * and centered vertically.
      *
+     * <p>
+     *  使用指定的文本创建<code> JLabel </code>实例。标签与其显示区域的前边缘对齐,并垂直居中。
+     * 
+     * 
      * @param text  The text to be displayed by the label.
      */
     public JLabel(String text) {
@@ -199,6 +244,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * image and horizontal alignment.
      * The label is centered vertically in its display area.
      *
+     * <p>
+     *  创建具有指定图像和水平对齐方式的<code> JLabel </code>实例。标签在其显示区域中垂直居中。
+     * 
+     * 
      * @param image  The image to be displayed by the label.
      * @param horizontalAlignment  One of the following constants
      *           defined in <code>SwingConstants</code>:
@@ -217,6 +266,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * The label is centered vertically and horizontally
      * in its display area.
      *
+     * <p>
+     *  使用指定的图像创建<code> JLabel </code>实例。标签在其显示区域中垂直和水平居中。
+     * 
+     * 
      * @param image  The image to be displayed by the label.
      */
     public JLabel(Icon image) {
@@ -230,6 +283,9 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * in its display area.
      * The label's contents, once set, will be displayed on the leading edge
      * of the label's display area.
+     * <p>
+     *  创建一个没有图像并带有标题的空字符串的<code> JLabel </code>实例。标签在其显示区域中垂直居中。标签的内容一旦设置,将显示在标签显示区域的前缘。
+     * 
      */
     public JLabel() {
         this("", null, LEADING);
@@ -239,6 +295,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Returns the L&amp;F object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @return LabelUI object
      */
     public LabelUI getUI() {
@@ -249,6 +309,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Sets the L&amp;F object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @param ui  the LabelUI L&amp;F object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -269,6 +333,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Resets the UI property to a value from the current look and feel.
      *
+     * <p>
+     *  将UI属性重置为当前外观的值。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -280,6 +348,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * Returns a string that specifies the name of the l&amp;f class
      * that renders this component.
      *
+     * <p>
+     *  返回一个字符串,指定呈现此组件的l&amp; f类的名称。
+     * 
+     * 
      * @return String "LabelUI"
      *
      * @see JComponent#getUIClassID
@@ -293,6 +365,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Returns the text string that the label displays.
      *
+     * <p>
+     *  返回标签显示的文本字符串。
+     * 
+     * 
      * @return a String
      * @see #setText
      */
@@ -309,6 +385,14 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  定义此组件将显示的单行文本。如果text的值为null或空字符串,则不显示任何内容。
+     * <p>
+     *  此属性的缺省值为null。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @see #setVerticalTextPosition
      * @see #setHorizontalTextPosition
      * @see #setIcon
@@ -350,6 +434,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Returns the graphic image (glyph, icon) that the label displays.
      *
+     * <p>
+     *  返回标签显示的图形图像(字形,图标)。
+     * 
+     * 
      * @return an Icon
      * @see #setIcon
      */
@@ -365,6 +453,14 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     * 定义此组件将显示的图标。如果icon的值为null,则不显示任何内容。
+     * <p>
+     *  此属性的缺省值为null。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @see #setVerticalTextPosition
      * @see #setHorizontalTextPosition
      * @see #getIcon
@@ -382,6 +478,9 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
          * generated the disabled icon for this component
          * (in other words, setDisabledIcon() was never called), then
          * clear the disabledIcon field.
+         * <p>
+         *  生成此组件的禁用图标(换句话说,setDisabledIcon()从未被调用),然后清除disabledIcon字段。
+         * 
          */
         if ((defaultIcon != oldValue) && !disabledIconSet) {
             disabledIcon = null;
@@ -398,6 +497,9 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /* If the default icon has changed and the new one is
          * a different size, then revalidate.   Repaint if the
          * default icon has changed.
+         * <p>
+         *  不同的大小,然后重新验证。重新绘制默认图标是否已更改。
+         * 
          */
         if (defaultIcon != oldValue) {
             if ((defaultIcon == null) ||
@@ -419,6 +521,12 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * Some look and feels might not render the disabled Icon, in which
      * case they will ignore this.
      *
+     * <p>
+     *  返回标签已停用时使用的图标。如果没有设置禁用图标,这将转发呼叫的外观和感觉来构造适当的禁用图标。
+     * <p>
+     *  一些外观和感觉可能不会呈现禁用的图标,在这种情况下,他们会忽略这一点。
+     * 
+     * 
      * @return the <code>disabledIcon</code> property
      * @see #setDisabledIcon
      * @see javax.swing.LookAndFeel#getDisabledIcon
@@ -442,6 +550,12 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * <p>
      * The default value of this property is null.
      *
+     * <p>
+     *  如果此JLabel为"disabled"(JLabel.setEnabled(false)),请设置要显示的图标。
+     * <p>
+     *  此属性的缺省值为null。
+     * 
+     * 
      * @param disabledIcon the Icon to display when the component is disabled
      * @see #getDisabledIcon
      * @see #setEnabled
@@ -475,6 +589,11 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * call the requestFocus method of the component specified by the
      * labelFor property when the mnemonic is activated.
      *
+     * <p>
+     *  指定指示助记键的键码。当标签是较大组件的一部分时,将使用此属性。
+     * 如果标签的labelFor属性不为null,则当激活助记符时,标签将调用由labelFor属性指定的组件的requestFocus方法。
+     * 
+     * 
      * @see #getLabelFor
      * @see #setLabelFor
      * @beaninfo
@@ -500,6 +619,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Specifies the displayedMnemonic as a char value.
      *
+     * <p>
+     *  将displayedMnemonic指定为char值。
+     * 
+     * 
      * @param aChar  a char specifying the mnemonic to display
      * @see #setDisplayedMnemonic(int)
      */
@@ -518,6 +641,11 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * call the requestFocus method of the component specified by the
      * labelFor property when the mnemonic is activated.
      *
+     * <p>
+     *  返回指示助记键的键码。当标签是较大组件的一部分时,将使用此属性。
+     * 如果标签的labelFor属性不为null,则当激活助记符时,标签将调用由labelFor属性指定的组件的requestFocus方法。
+     * 
+     * 
      * @return int value for the mnemonic key
      *
      * @see #getLabelFor
@@ -543,6 +671,15 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * <code>setDisplayedMnemonicIndex(5)</code> after invoking
      * <code>setDisplayedMnemonic(KeyEvent.VK_A)</code>.
      *
+     * <p>
+     * 提供关于文本中应当装饰哪个字符以表示助记符的外观和感觉的提示。不是所有的外观和感觉可能支持这一点。值-1表示没有助记符,助记符不包含在字符串中,或​​者开发人员不希望显示助记符。
+     * <p>
+     *  此值将更新为与助记符更改相关的属性(例如助记符本身,文本...)。如果你不希望默认字符被加下划线,你应该只需要调用这个。
+     * 例如,如果文本是"另存为",助记符为'a',并且您想要将'A'装饰为'保存<u> A </u>',则必须调用<code> setDisplayedMnemonicIndex(5)</code>在调用<code>
+     *  setDisplayedMnemonic(KeyEvent.VK_A)</code>之后。
+     *  此值将更新为与助记符更改相关的属性(例如助记符本身,文本...)。如果你不希望默认字符被加下划线,你应该只需要调用这个。
+     * 
+     * 
      * @since 1.4
      * @param index Index into the String to underline
      * @exception IllegalArgumentException will be thrown if <code>index</code>
@@ -578,6 +715,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * Returns the character, as an index, that the look and feel should
      * provide decoration for as representing the mnemonic character.
      *
+     * <p>
+     *  返回作为索引的字符,外观应该提供装饰作为代表助记符的字符。
+     * 
+     * 
      * @since 1.4
      * @return index representing mnemonic character
      * @see #setDisplayedMnemonicIndex
@@ -589,6 +730,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Verify that key is a legal value for the horizontalAlignment properties.
      *
+     * <p>
+     *  验证该键是horizo​​ntalAlignment属性的合法值。
+     * 
+     * 
      * @param key the property value to check
      * @param message the IllegalArgumentException detail message
      * @exception IllegalArgumentException if key isn't LEFT, CENTER, RIGHT,
@@ -614,6 +759,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * Verify that key is a legal value for the
      * verticalAlignment or verticalTextPosition properties.
      *
+     * <p>
+     *  验证该键是verticalAlignment或verticalTextPosition属性的合法值。
+     * 
+     * 
      * @param key the property value to check
      * @param message the IllegalArgumentException detail message
      * @exception IllegalArgumentException if key isn't TOP, CENTER, or BOTTOM.
@@ -634,6 +783,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * Returns the amount of space between the text and the icon
      * displayed in this label.
      *
+     * <p>
+     *  返回文本和此标签中显示的图标之间的空格大小。
+     * 
+     * 
      * @return an int equal to the number of pixels between the text
      *         and the icon.
      * @see #setIconTextGap
@@ -651,6 +804,14 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  如果同时设置了图标和文本属性,则此属性定义它们之间的空格。
+     * <p>
+     *  此属性的默认值为4像素。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @see #getIconTextGap
      * @beaninfo
      *        bound: true
@@ -673,6 +834,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Returns the alignment of the label's contents along the Y axis.
      *
+     * <p>
+     *  返回标签内容沿Y轴的对齐方式。
+     * 
+     * 
      * @return   The value of the verticalAlignment property, one of the
      *           following constants defined in <code>SwingConstants</code>:
      *           <code>TOP</code>,
@@ -692,6 +857,12 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * <p>
      * The default value of this property is CENTER.
      *
+     * <p>
+     *  设置标签内容沿Y轴的对齐方式。
+     * <p>
+     * 此属性的默认值为CENTER。
+     * 
+     * 
      * @param alignment One of the following constants
      *           defined in <code>SwingConstants</code>:
      *           <code>TOP</code>,
@@ -720,6 +891,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Returns the alignment of the label's contents along the X axis.
      *
+     * <p>
+     *  返回标签内容沿X轴的对齐方式。
+     * 
+     * 
      * @return   The value of the horizontalAlignment property, one of the
      *           following constants defined in <code>SwingConstants</code>:
      *           <code>LEFT</code>,
@@ -740,6 +915,12 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置标签内容沿X轴的对齐方式。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param alignment  One of the following constants
      *           defined in <code>SwingConstants</code>:
      *           <code>LEFT</code>,
@@ -775,6 +956,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * Returns the vertical position of the label's text,
      * relative to its image.
      *
+     * <p>
+     *  返回标签文本相对于其图片的垂直位置。
+     * 
+     * 
      * @return   One of the following constants
      *           defined in <code>SwingConstants</code>:
      *           <code>TOP</code>,
@@ -797,6 +982,14 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置标签文本相对于其图像的垂直位置。
+     * <p>
+     *  此属性的默认值为CENTER。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param textPosition  One of the following constants
      *           defined in <code>SwingConstants</code>:
      *           <code>TOP</code>,
@@ -829,6 +1022,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * Returns the horizontal position of the label's text,
      * relative to its image.
      *
+     * <p>
+     *  返回标签文本相对于其图像的水平位置。
+     * 
+     * 
      * @return   One of the following constants
      *           defined in <code>SwingConstants</code>:
      *           <code>LEFT</code>,
@@ -848,6 +1045,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * Sets the horizontal position of the label's text,
      * relative to its image.
      *
+     * <p>
+     *  设置标签文本相对于其图像的水平位置。
+     * 
+     * 
      * @param textPosition  One of the following constants
      *           defined in <code>SwingConstants</code>:
      *           <code>LEFT</code>,
@@ -885,6 +1086,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * This is overridden to return false if the current Icon's Image is
      * not equal to the passed in Image <code>img</code>.
      *
+     * <p>
+     *  如果当前图标的图像不等于图像<code> img </code>中传递的图像,则覆盖此属性返回false。
+     * 
+     * 
      * @see     java.awt.image.ImageObserver
      * @see     java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
      */
@@ -905,6 +1110,9 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * See readObject() and writeObject() in JComponent for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅JComponent中的readObject()和writeObject()。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -925,6 +1133,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此JLabel的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this JLabel.
      */
     protected String paramString() {
@@ -993,11 +1205,18 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
 
     /**
      * --- Accessibility Support ---
+     * <p>
+     *  ---辅助功能
+     * 
      */
 
     /**
      * Get the component this is labelling.
      *
+     * <p>
+     *  获取正在标记的组件。
+     * 
+     * 
      * @return the Component this is labelling.  Can be null if this
      * does not label a Component.  If the displayedMnemonic
      * property is set and the labelFor property is also set, the label
@@ -1018,6 +1237,11 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * call the requestFocus method of the component specified by the
      * labelFor property when the mnemonic is activated.
      *
+     * <p>
+     *  设置要标记的组件。如果这不标记组件,可以为null。
+     * 如果设置了displayedMnemonic属性并且还设置了labelFor属性,则当激活助记符时,标签将调用由labelFor属性指定的组件的requestFocus方法。
+     * 
+     * 
      * @param c  the Component this label is for, or null if the label is
      *           not the label for a component
      *
@@ -1044,6 +1268,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
     /**
      * Get the AccessibleContext of this object
      *
+     * <p>
+     *  获取此对象的AccessibleContext
+     * 
+     * 
      * @return the AccessibleContext of this object
      * @beaninfo
      *       expert: true
@@ -1067,6 +1295,12 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 用于获取此对象的可访问角色的类。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     @SuppressWarnings("serial")
     protected class AccessibleJLabel extends AccessibleJComponent
@@ -1075,6 +1309,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Get the accessible name of this object.
          *
+         * <p>
+         *  获取此对象的可访问名称。
+         * 
+         * 
          * @return the localized name of the object -- can be null if this
          * object does not have a name
          * @see AccessibleContext#setAccessibleName
@@ -1097,6 +1335,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -1108,6 +1350,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Get the AccessibleIcons associated with this object if one
          * or more exist.  Otherwise return null.
+         * <p>
+         *  如果一个或多个存在,获取与此对象相关联的AccessibleIcons。否则返回null。
+         * 
+         * 
          * @since 1.3
          */
         public AccessibleIcon [] getAccessibleIcon() {
@@ -1125,6 +1371,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Get the AccessibleRelationSet associated with this object if one
          * exists.  Otherwise return null.
+         * <p>
+         *  获取与此对象关联的AccessibleRelationSet(如果存在)。否则返回null。
+         * 
+         * 
          * @see AccessibleRelation
          * @since 1.3
          */
@@ -1163,6 +1413,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
          * of the character under that Point.  If the point is invalid,
          * this method returns -1.
          *
+         * <p>
+         *  给定一个点在局部坐标,返回该点下的字符的从零开始的索引。如果该点无效,则此方法返回-1。
+         * 
+         * 
          * @param p the Point in local coordinates
          * @return the zero-based index of the character under Point p; if
          * Point is invalid returns -1.
@@ -1189,6 +1443,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
          * index in the string.  The bounds are returned in local
          * coordinates. If the index is invalid, <code>null</code> is returned.
          *
+         * <p>
+         *  返回字符串中给定索引处的字符的边界框。边界在本地坐标中返回。如果索引无效,则返回<code> null </code>。
+         * 
+         * 
          * @param i the index into the String
          * @return the screen coordinates of the character's bounding box.
          * If the index is invalid, <code>null</code> is returned.
@@ -1218,6 +1476,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Return the number of characters (valid indicies)
          *
+         * <p>
+         *  返回字符数(有效指示)
+         * 
+         * 
          * @return the number of characters
          * @since 1.3
          */
@@ -1238,6 +1500,12 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
          *
          * Note: That to the right of the caret will have the same index
          * value as the offset (the caret is between two characters).
+         * <p>
+         *  返回插入符号的从零开始的偏移量。
+         * 
+         *  注意：插入符右侧的索引值与偏移量相同(插入符号在两个字符之间)。
+         * 
+         * 
          * @return the zero-based offset of the caret.
          * @since 1.3
          */
@@ -1249,6 +1517,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Returns the String at a given index.
          *
+         * <p>
+         *  返回给定索引处的String。
+         * 
+         * 
          * @param part the AccessibleText.CHARACTER, AccessibleText.WORD,
          * or AccessibleText.SENTENCE to retrieve
          * @param index an index within the text &gt;= 0
@@ -1296,6 +1568,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Returns the String after a given index.
          *
+         * <p>
+         *  返回给定索引后的String。
+         * 
+         * 
          * @param part the AccessibleText.CHARACTER, AccessibleText.WORD,
          * or AccessibleText.SENTENCE to retrieve
          * @param index an index within the text &gt;= 0
@@ -1360,6 +1636,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Returns the String before a given index.
          *
+         * <p>
+         *  返回给定索引之前的String。
+         * 
+         * 
          * @param part the AccessibleText.CHARACTER, AccessibleText.WORD,
          *   or AccessibleText.SENTENCE to retrieve
          * @param index an index within the text &gt;= 0
@@ -1420,6 +1700,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Return the AttributeSet for a given character at a given index
          *
+         * <p>
+         *  返回给定字符在给定索引的AttributeSet
+         * 
+         * 
          * @param i the zero-based index into the text
          * @return the AttributeSet of the character
          * @since 1.3
@@ -1444,6 +1728,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
          * If there is no selection, but there is
          * a caret, the start and end offsets will be the same.
          *
+         * <p>
+         * 返回所选文本内的起始偏移量。如果没有选择,但有一个插入符号,开始和结束偏移将是相同的。
+         * 
+         * 
          * @return the index into the text of the start of the selection
          * @since 1.3
          */
@@ -1457,6 +1745,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
          * If there is no selection, but there is
          * a caret, the start and end offsets will be the same.
          *
+         * <p>
+         *  返回所选文本内的结束偏移量。如果没有选择,但有一个插入符号,开始和结束偏移将是相同的。
+         * 
+         * 
          * @return the index into the text of the end of the selection
          * @since 1.3
          */
@@ -1468,6 +1760,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Returns the portion of the text that is selected.
          *
+         * <p>
+         *  返回所选文本的部分。
+         * 
+         * 
          * @return the String portion of the text that is selected
          * @since 1.3
          */
@@ -1479,6 +1775,9 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /*
          * Returns the text substring starting at the specified
          * offset with the specified length.
+         * <p>
+         *  返回以指定长度在指定偏移处开始的文本子字符串。
+         * 
          */
         private String getText(int offset, int length)
             throws BadLocationException {
@@ -1496,6 +1795,9 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
 
         /*
          * Returns the bounding rectangle for the component text.
+         * <p>
+         *  返回组件文本的边界矩形。
+         * 
          */
         private Rectangle getTextRectangle() {
 
@@ -1539,6 +1841,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Returns the AccessibleExtendedComponent
          *
+         * <p>
+         *  返回AccessibleExtendedComponent
+         * 
+         * 
          * @return the AccessibleExtendedComponent
          */
         AccessibleExtendedComponent getAccessibleExtendedComponent() {
@@ -1548,6 +1854,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Returns the tool tip text
          *
+         * <p>
+         *  返回工具提示文本
+         * 
+         * 
          * @return the tool tip text, if supported, of the object;
          * otherwise, null
          * @since 1.4
@@ -1559,6 +1869,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Returns the titled border text
          *
+         * <p>
+         *  返回标题边框文本
+         * 
+         * 
          * @return the titled border text, if supported, of the object;
          * otherwise, null
          * @since 1.4
@@ -1570,6 +1884,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
         /**
          * Returns key bindings associated with this object
          *
+         * <p>
+         *  返回与此对象关联的键绑定
+         * 
+         * 
          * @return the key bindings, if supported, of the object;
          * otherwise, null
          * @see AccessibleKeyBinding
@@ -1593,6 +1911,10 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
             /**
              * Returns the number of key bindings for this object
              *
+             * <p>
+             *  返回此对象的键绑定数
+             * 
+             * 
              * @return the zero-based number of key bindings for this object
              */
             public int getAccessibleKeyBindingCount() {
@@ -1618,6 +1940,12 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
              * }
              * </code></nf>
              *
+             * <p>
+             *  返回此对象的键绑定。返回的值是一个java.lang.Object,它必须根据键的底层实现转换为适当的类型。
+             * 例如,如果返回的对象是javax.swing.KeyStroke,则此方法的用户应执行以下操作：<nf> <code> Component c = <获取具有键绑定的组件> AccessibleCont
+             * ext ac = c.getAccessibleContext (); AccessibleKeyBinding akb = ac.getAccessibleKeyBinding(); for(int 
+             * i = 0; i <akb.getAccessibleKeyBindingCount(); i ++){Object o = akb.getAccessibleKeyBinding(i); if(o instanceof javax.swing.KeyStroke){javax.swing.KeyStroke keyStroke =(javax.swing.KeyStroke)o;。
+             * 
              * @param i zero-based index of the key bindings
              * @return a javax.lang.Object which specifies the key binding
              * @exception IllegalArgumentException if the index is

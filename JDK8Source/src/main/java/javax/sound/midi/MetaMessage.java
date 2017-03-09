@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,20 @@ package javax.sound.midi;
  * bytes.  As with system exclusive messages, there are an arbitrary number of
  * data bytes, depending on the type of <code>MetaMessage</code>.
  *
+ * <p>
+ *  <code> MetaMessage </code>是一个<code> {@ link MidiMessage} </code>,对合成器没有意义,但可以存储在MIDI文件中,并由音序器程序解释。
+ *  (参见<code> MidiMessage </code>类描述中的讨论。)标准MIDI文件规范定义了各种类型的元事件,如序列号,歌词,提示点和设置速度。
+ * 还有用于诸如歌词,版权,速度指示,时间和键签名,标记等的信息的元事件。
+ * 关于更多信息,参见标准MIDI文件1.0规范,其是由发布的完整MIDI 1.0详细规范的一部分MIDI制造商协会(<a href = http://www.midi.org> http://www.mi
+ * di.org </a>)。
+ * 还有用于诸如歌词,版权,速度指示,时间和键签名,标记等的信息的元事件。
+ * 
+ * <p>
+ *  当使用MIDI线协议传输数据时,状态值为<code> 0xFF </code>的<code> {@ link ShortMessage} </code>表示系统复位消息。
+ * 在MIDI文件中,相同的状态值表示<code> MetaMessage </code>。元消息的类型通过状态字节<code> 0xFF </code>之后的第一字节来彼此区分。后续字节是数据字节。
+ * 与系统独占消息一样,根据<code> MetaMessage </code>的类型,有任意数量的数据字节。
+ * 
+ * 
  * @see MetaEventListener
  *
  * @author David Rivas
@@ -63,6 +78,10 @@ public class MetaMessage extends MidiMessage {
      * Status byte for <code>MetaMessage</code> (0xFF, or 255), which is used
      * in MIDI files.  It has the same value as SYSTEM_RESET, which
      * is used in the real-time "MIDI wire" protocol.
+     * <p>
+     * <code> MetaMessage </code>(0xFF或255)的状态字节,用于MIDI文件。它与SYSTEM_RESET具有相同的值,用于实时"MIDI线"协议。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int META                                                = 0xFF; // 255
@@ -75,6 +94,9 @@ public class MetaMessage extends MidiMessage {
      * is the message, and how many are the status byte, the
      * type byte, and the variable-length-int describing the
      * length of the message.
+     * <p>
+     *  数据数组中实际消息的长度。这用于确定消息的数据数组的字节数,状态字节,类型字节和描述消息长度的variable-length-int有多少。
+     * 
      */
     private int dataLength = 0;
 
@@ -84,6 +106,9 @@ public class MetaMessage extends MidiMessage {
      * the message are not set here; use
      * {@link #setMessage(int, byte[], int) setMessage}
      * to set them subsequently.
+     * <p>
+     *  构造一个新的<code> MetaMessage </code>。消息的内容不在这里设置;使用{@link #setMessage(int,byte [],int)setMessage}来设置它们。
+     * 
      */
     public MetaMessage() {
         // Default meta message data: just the META status byte value
@@ -95,6 +120,10 @@ public class MetaMessage extends MidiMessage {
      * The contents of the message can be changed by using
      * the {@code setMessage} method.
      *
+     * <p>
+     *  构造一个新的{@code MetaMessage}并设置消息参数。可以使用{@code setMessage}方法更改消息的内容。
+     * 
+     * 
      * @param type   meta-message type (must be less than 128)
      * @param data   the data bytes in the MIDI message
      * @param length an amount of bytes in the {@code data} byte array;
@@ -116,6 +145,10 @@ public class MetaMessage extends MidiMessage {
 
     /**
      * Constructs a new <code>MetaMessage</code>.
+     * <p>
+     *  构造一个新的<code> MetaMessage </code>。
+     * 
+     * 
      * @param data an array of bytes containing the complete message.
      * The message data may be changed using the <code>setMessage</code>
      * method.
@@ -145,6 +178,15 @@ public class MetaMessage extends MidiMessage {
      * should contain all the subsequent bytes of the <code>MetaMessage</code>.  In other words,
      * the byte that specifies the type of <code>MetaMessage</code> is not considered a data byte.
      *
+     * <p>
+     *  设置<code> MetaMessage </code>的消息参数。由于只允许一个状态字节值<code> 0xFF </code>用于元消息,因此不需要在这里指定。
+     * 对所有元消息调用<code> {@ link MidiMessage#getStatus getStatus} </code>返回<code> 0xFF </code>。
+     * <p>
+     *  <code> type </code>参数应该是<code> MetaMessage </code>中的状态字节后的字节的有效值。
+     *  <code> data </code>参数应包含<code> MetaMessage </code>的所有后续字节。
+     * 换句话说,指定<code> MetaMessage </code>类型的字节不被认为是数据字节。
+     * 
+     * 
      * @param type              meta-message type (must be less than 128)
      * @param data              the data bytes in the MIDI message
      * @param length    the number of bytes in the <code>data</code>
@@ -175,6 +217,10 @@ public class MetaMessage extends MidiMessage {
 
     /**
      * Obtains the type of the <code>MetaMessage</code>.
+     * <p>
+     *  获取<code> MetaMessage </code>的类型。
+     * 
+     * 
      * @return an integer representing the <code>MetaMessage</code> type
      */
     public int getType() {
@@ -193,6 +239,10 @@ public class MetaMessage extends MidiMessage {
      * the length of the array.  Note that the length of the entire
      * message includes the status byte and the meta message type
      * byte, and therefore may be longer than the returned array.
+     * <p>
+     * 获取元消息的数据副本。返回的字节数组不包括状态字节或消息长度数据。元消息的数据长度是数组的长度。注意,整个消息的长度包括状态字节和元消息类型字节,因此可能比返回的数组长。
+     * 
+     * 
      * @return array containing the meta message data.
      * @see MidiMessage#getLength
      */
@@ -206,6 +256,9 @@ public class MetaMessage extends MidiMessage {
     /**
      * Creates a new object of the same class and with the same contents
      * as this object.
+     * <p>
+     *  创建与此对象具有相同类和相同内容的新对象。
+     * 
      * @return a clone of this instance
      */
     public Object clone() {

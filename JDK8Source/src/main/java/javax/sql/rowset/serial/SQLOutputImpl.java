@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,12 +53,27 @@ import java.util.Vector;
  * to write data from the <code>SQLData</code> object to
  * the <code>SQLOutputImpl</code> output stream as the
  * representation of an SQL user-defined type.
+ * <p>
+ *  用于将自定义映射的用户定义类型(UDT)的属性写回数据库的输出流。驱动程序在内部使用此接口,并且它的方法不会被应用程序员直接调用。
+ * <p>
+ *  当应用程序调用<code> PreparedStatement.setObject </code>方法时,驱动程序将检查要写入的值是否为具有自定义映射的UDT。
+ * 如果是,在包含用于实现这个UDT的<code> SQLData </code>的类的<code> Class </code>对象的类型映射中将有一个条目。
+ * 如果要写入的值是<code> SQLData </code>的实例,驱动程序将创建一个<code> SQLOutputImpl </code>的实例,并将其传递给方法<code> SQLData.wri
+ * teSQL </code> 。
+ * 如果是,在包含用于实现这个UDT的<code> SQLData </code>的类的<code> Class </code>对象的类型映射中将有一个条目。
+ * 方法<code> writeSQL </code>依次调用<code> SQLOutputImpl.writeXXX </code>方法将数据从<code> SQLData </code>对象写入<code>
+ *  SQLOutputImpl </code>输出流作为SQL用户定义类型的表示。
+ * 如果是,在包含用于实现这个UDT的<code> SQLData </code>的类的<code> Class </code>对象的类型映射中将有一个条目。
+ * 
  */
 public class SQLOutputImpl implements SQLOutput {
 
     /**
      * A reference to an existing vector that
      * contains the attributes of a <code>Struct</code> object.
+     * <p>
+     *  对包含<code> Struct </code>对象的属性的现有向量的引用。
+     * 
      */
     @SuppressWarnings("rawtypes")
     private Vector attribs;
@@ -69,6 +85,11 @@ public class SQLOutputImpl implements SQLOutput {
      * <code>writeSQL</code> method will be called.  This
      * method will in turn call the appropriate
      * <code>SQLOutputImpl</code> writer methods.
+     * <p>
+     * 驱动程序提供给新创建的<code> SQLOutputImpl </code>对象的类型映射。
+     * 此类型映射表示<code> SQLData </code>类,其<code> writeSQL </code>方法将被调用。
+     * 该方法将调用适当的<code> SQLOutputImpl </code> writer方法。
+     * 
      */
     @SuppressWarnings("rawtypes")
     private Map map;
@@ -82,6 +103,12 @@ public class SQLOutputImpl implements SQLOutput {
      * <code>SQLOutputImpl</code> writer methods in order and
      * thereby write the attributes to the new output stream.
      *
+     * <p>
+     *  创建一个新的<code> SQLOutputImpl </code>对象,使用给定的属性向量和类型map初始化。
+     * 驱动程序将使用类型映射来确定要调用哪个<code> SQLData.writeSQL </code>方法。
+     * 然后,该方法将按顺序调用相应的<code> SQLOutputImpl </code>写入器方法,从而将属性写入新的输出流。
+     * 
+     * 
      * @param attributes a <code>Vector</code> object containing the attributes of
      *        the UDT to be mapped to one or more objects in the Java
      *        programming language
@@ -117,6 +144,11 @@ public class SQLOutputImpl implements SQLOutput {
      * it to an SQL <code>CHAR</code>, <code>VARCHAR</code>, or
      * <code>LONGVARCHAR</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> String </code>写入此<code> SQLOutputImpl </code>对象。
+     * 在将其返回到数据库之前,驱动程序将其转换为SQL <code> CHAR </code>,<code> VARCHAR </code>或<code> LONGVARCHAR </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -133,6 +165,11 @@ public class SQLOutputImpl implements SQLOutput {
      * to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>BIT</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> boolean </code>写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> BIT </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -148,6 +185,11 @@ public class SQLOutputImpl implements SQLOutput {
      * to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>BIT</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> byte </code>写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> BIT </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -163,6 +205,11 @@ public class SQLOutputImpl implements SQLOutput {
      * to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>SMALLINT</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> short </code>写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> SMALLINT </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -178,6 +225,11 @@ public class SQLOutputImpl implements SQLOutput {
      * to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>INTEGER</code> before returning it to the database.
      *
+     * <p>
+     * 将Java编程语言中的<code> int </code>写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> INTEGER </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -193,6 +245,11 @@ public class SQLOutputImpl implements SQLOutput {
      * to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>BIGINT</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> long </code>写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> BIGINT </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -208,6 +265,11 @@ public class SQLOutputImpl implements SQLOutput {
      * to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>REAL</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> float </code>写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> REAL </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -223,6 +285,11 @@ public class SQLOutputImpl implements SQLOutput {
      * to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>DOUBLE</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> double </code>写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> DOUBLE </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -238,6 +305,11 @@ public class SQLOutputImpl implements SQLOutput {
      * language to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>NUMERIC</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> java.math.BigDecimal </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> NUMERIC </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -254,6 +326,11 @@ public class SQLOutputImpl implements SQLOutput {
      * it to an SQL <code>VARBINARY</code> or <code>LONGVARBINARY</code>
      * before returning it to the database.
      *
+     * <p>
+     *  将Java编程语言中的<code>字节</code>数组写入此<code> SQLOutputImpl </code>对象。
+     * 在将其返回到数据库之前,驱动程序将其转换为SQL <code> VARBINARY </code>或<code> LONGVARBINARY </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -269,6 +346,11 @@ public class SQLOutputImpl implements SQLOutput {
      * language to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>DATE</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> java.sql.Date </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> DATE </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -284,6 +366,11 @@ public class SQLOutputImpl implements SQLOutput {
      * language to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>TIME</code> before returning it to the database.
      *
+     * <p>
+     * 在Java编程语言中将<code> java.sql.Time </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> TIME </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -299,6 +386,11 @@ public class SQLOutputImpl implements SQLOutput {
      * language to this <code>SQLOutputImpl</code> object. The driver converts
      * it to an SQL <code>TIMESTAMP</code> before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> java.sql.Timestamp </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为SQL <code> TIMESTAMP </code>。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -314,6 +406,10 @@ public class SQLOutputImpl implements SQLOutput {
      * <code>SQLOutputImpl</code> object. The driver will do any necessary
      * conversion from Unicode to the database <code>CHAR</code> format.
      *
+     * <p>
+     *  将Unicode字符流写入此<code> SQLOutputImpl </code>对象。驱动程序将执行从Unicode到数据库<code> CHAR </code>格式的任何必要的转换。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -344,6 +440,10 @@ public class SQLOutputImpl implements SQLOutput {
      * <code>SQLOutputImpl</code> object. The driver will do any necessary
      * conversion from ASCII to the database <code>CHAR</code> format.
      *
+     * <p>
+     *  将ASCII字符流写入此<code> SQLOutputImpl </code>对象。驱动程序将执行从ASCII到数据库<code> CHAR </code>格式的必要转换。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -374,6 +474,10 @@ public class SQLOutputImpl implements SQLOutput {
      * Writes a stream of uninterpreted bytes to this <code>SQLOutputImpl</code>
      * object.
      *
+     * <p>
+     *  将未解释字节流写入此<code> SQLOutputImpl </code>对象。
+     * 
+     * 
      * @param x the value to pass to the database
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -425,6 +529,15 @@ public class SQLOutputImpl implements SQLOutput {
      * output stream in the same order in which they were
      * listed in the SQL definition of the user-defined type.
      *
+     * <p>
+     *  将给定的<code> SQLData </code>对象中包含的数据写入流。
+     * 当<code> SQLData </code>对象是<code> null </code>时,此方法将SQL <code> NULL </code>写入流。
+     * 否则,它调用给定对象的<code> SQLData.writeSQL </code>方法,它将对象的属性写入流。
+     * <P>
+     * 方法<code> SQLData.writeSQ </code>的实现调用适当的<code> SQLOutputImpl.writeXXX </code>方法,按顺序写入对象的每个属性。
+     * 必须从<code> SQLInput </code>输入流读取属性,并以与在用户定义类型的SQL定义中列出的顺序相同的顺序写入到<code> SQLOutputImpl </code>输出流。
+     * 
+     * 
      * @param x the object representing data of an SQL structured or
      *          distinct type
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
@@ -441,6 +554,11 @@ public class SQLOutputImpl implements SQLOutput {
          *
          * Note: this means that the class defining SQLData
          * will need to track if a field is SQL null for itself
+         * <p>
+         *  除了作为对象传递的类型,这似乎是对象为结构中的字段获取空值的唯一方法。
+         * 
+         *  注意：这意味着定义SQLData的类将需要跟踪一个字段是否为SQL null
+         * 
          */
         if (x == null) {
             attribs.add(null);
@@ -449,6 +567,9 @@ public class SQLOutputImpl implements SQLOutput {
              * We have to write out a SerialStruct that contains
              * the name of this class otherwise we don't know
              * what to re-instantiate during readSQL()
+             * <p>
+             *  我们必须写出一个包含此类的名称的SerialStruct,否则我们不知道在readSQL()中重新实例化什么,
+             * 
              */
             attribs.add(new SerialStruct(x, map));
         }
@@ -460,6 +581,11 @@ public class SQLOutputImpl implements SQLOutput {
      * it to a serializable <code>SerialRef</code> SQL <code>REF</code> value
      * before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> Ref </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为可序列化的<code> SerialRef </code> SQL <code> REF </code>值。
+     * 
+     * 
      * @param x an object representing an SQL <code>REF</code> value
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -480,6 +606,11 @@ public class SQLOutputImpl implements SQLOutput {
      * it to a serializable <code>SerialBlob</code> SQL <code>BLOB</code> value
      * before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> Blob </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序在将其返回到数据库之前将其转换为可序列化的<code> SerialBlob </code> SQL <code> BLOB </code>值。
+     * 
+     * 
      * @param x an object representing an SQL <code>BLOB</code> value
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -500,6 +631,11 @@ public class SQLOutputImpl implements SQLOutput {
      * it to a serializable <code>SerialClob</code> SQL <code>CLOB</code> value
      * before returning it to the database.
      *
+     * <p>
+     * 在Java编程语言中将<code> Clob </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 在将其返回到数据库之前,驱动程序将其转换为可序列化的<code> SerialClob </code> SQL <code> CLOB </code>值。
+     * 
+     * 
      * @param x an object representing an SQL <code>CLOB</code> value
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -526,6 +662,13 @@ public class SQLOutputImpl implements SQLOutput {
      * <code>writeObject</code> should be used if an SQL structured type
      * has been custom mapped to a class in the Java programming language.
      *
+     * <p>
+     *  在Java编程语言中将<code> Struct </code>对象写入此<code> SQLOutputImpl </code>对象。驱动程序在将该值返回到数据库之前将其转换为SQL结构化类型。
+     * <P>
+     *  当SQL结构化类型已经映射到Java编程语言(标准映射)中的<code> Struct </code>对象时,应使用此方法。
+     * 如果SQL结构化类型已定制映射到Java编程语言中的类,则应使用方法<code> writeObject </code>。
+     * 
+     * 
      * @param x an object representing the attributes of an SQL structured type
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -544,6 +687,11 @@ public class SQLOutputImpl implements SQLOutput {
      * <code>SerialArray</code> SQL <code>ARRAY</code>
      * value before returning it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> Array </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 在将其返回到数据库之前,驱动程序将此值转换为可序列化的<code> SerialArray </code> SQL <code> ARRAY </code>值。
+     * 
+     * 
      * @param x an object representing an SQL <code>ARRAY</code> value
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -564,6 +712,11 @@ public class SQLOutputImpl implements SQLOutput {
      * driver converts this value to a serializable <code>SerialDatalink</code>
      * SQL <code>DATALINK</code> value before return it to the database.
      *
+     * <p>
+     *  在Java编程语言中将<code> java.sql.Type.DATALINK </code>对象写入此<code> SQLOutputImpl </code>对象。
+     * 驱动程序将此值转换为可序列化的<code> SerialDatalink </code> SQL <code> DATALINK </code>值,然后将其返回到数据库。
+     * 
+     * 
      * @param url an object representing a SQL <code>DATALINK</code> value
      * @throws SQLException if the <code>SQLOutputImpl</code> object is in
      *        use by a <code>SQLData</code> object attempting to write the attribute
@@ -588,6 +741,13 @@ public class SQLOutputImpl implements SQLOutput {
    * size relative to the driver's limits on <code>NVARCHAR</code> values)
    * when it sends it to the stream.
    *
+   * <p>
+   * 将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 驱动程序将此转换为SQL <code> NCHAR </code>或<code> NVARCHAR </code>或<code> LONGNVARCHAR </code>值(取决于参数的大小相对于驱动程
+   * 序的限制< </code>值),当它发送到流。
+   * 将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @since 1.6
@@ -600,6 +760,10 @@ public class SQLOutputImpl implements SQLOutput {
   /**
    * Writes an SQL <code>NCLOB</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> NCLOB </code>值写入流。
+   * 
+   * 
    * @param x a <code>NClob</code> object representing data of an SQL
    * <code>NCLOB</code> value
    *
@@ -615,6 +779,10 @@ public class SQLOutputImpl implements SQLOutput {
   /**
    * Writes an SQL <code>ROWID</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> ROWID </code>值写入流。
+   * 
+   * 
    * @param x a <code>RowId</code> object representing data of an SQL
    * <code>ROWID</code> value
    *
@@ -630,6 +798,9 @@ public class SQLOutputImpl implements SQLOutput {
   /**
    * Writes an SQL <code>XML</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> XML </code>值写入流。
+   * 
    * @param x a <code>SQLXML</code> object representing data of an SQL
    * <code>XML</code> value
    *

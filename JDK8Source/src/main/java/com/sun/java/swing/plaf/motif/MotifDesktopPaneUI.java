@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,12 @@ import java.io.Serializable;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author David Kloba
  */
 public class MotifDesktopPaneUI extends javax.swing.plaf.basic.BasicDesktopPaneUI
@@ -179,6 +186,9 @@ public class MotifDesktopPaneUI extends javax.swing.plaf.basic.BasicDesktopPaneU
         /**
          * Change positions of icons in the desktop pane so that
          * they do not overlap
+         * <p>
+         *  更改桌面窗格中图标的位置,以使它们不重叠
+         * 
          */
         protected void adjustIcons(JDesktopPane desktop) {
             // We need to know Motif icon size
@@ -199,6 +209,9 @@ public class MotifDesktopPaneUI extends javax.swing.plaf.basic.BasicDesktopPaneU
         /**
          * Change positions of icon so that it doesn't overlap
          * other icons.
+         * <p>
+         *  更改图标的位置,使其不与其他图标重叠。
+         * 
          */
         protected void adjustBoundsForIcon(JInternalFrame.JDesktopIcon icon,
                 int x, int y) {
@@ -213,6 +226,9 @@ public class MotifDesktopPaneUI extends javax.swing.plaf.basic.BasicDesktopPaneU
 
             /* Fix for disappearing icons. If the y value is maxy then this
              * algorithm would place the icon in a non-displayed cell.  Never
+             * <p>
+             *  算法将图标放置在未显示的单元格中。决不
+             * 
              * to be ssen again.*/
             y = y >= maxy ? (maxy - 1) : y;
 

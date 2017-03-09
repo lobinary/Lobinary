@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,16 @@ import javax.crypto.spec.SecretKeySpec;
  * Security Appendix</a>
  * of the Serialization Specification for more information.
  *
+ * <p>
+ *  序列化Key对象的标准化表示。
+ * 
+ * <p>
+ * 
+ *  请注意,序列化密钥可能包含不应在不受信任的环境中公开的敏感信息。看到
+ * <a href="../../../platform/serialization/spec/security.html">
+ *  有关详细信息,请参阅序列化规范的安全附录</a>。
+ * 
+ * 
  * @see Key
  * @see KeyFactory
  * @see javax.crypto.spec.SecretKeySpec
@@ -62,6 +73,10 @@ public class KeyRep implements Serializable {
     /**
      * Key type.
      *
+     * <p>
+     *  键类型。
+     * 
+     * 
      * @since 1.5
      */
     public static enum Type {
@@ -84,6 +99,10 @@ public class KeyRep implements Serializable {
     /**
      * Either one of Type.SECRET, Type.PUBLIC, or Type.PRIVATE
      *
+     * <p>
+     *  Type.SECRET,Type.PUBLIC或Type.PRIVATE中的一个
+     * 
+     * 
      * @serial
      */
     private Type type;
@@ -91,6 +110,10 @@ public class KeyRep implements Serializable {
     /**
      * The Key algorithm
      *
+     * <p>
+     *  密钥算法
+     * 
+     * 
      * @serial
      */
     private String algorithm;
@@ -98,6 +121,10 @@ public class KeyRep implements Serializable {
     /**
      * The Key encoding format
      *
+     * <p>
+     *  密钥编码格式
+     * 
+     * 
      * @serial
      */
     private String format;
@@ -105,6 +132,10 @@ public class KeyRep implements Serializable {
     /**
      * The encoded Key bytes
      *
+     * <p>
+     *  编码的Key字节
+     * 
+     * 
      * @serial
      */
     private byte[] encoded;
@@ -114,6 +145,12 @@ public class KeyRep implements Serializable {
      *
      * <p>
      *
+     * <p>
+     *  构造备用Key类。
+     * 
+     * <p>
+     * 
+     * 
      * @param type either one of Type.SECRET, Type.PUBLIC, or Type.PRIVATE
      * @param algorithm the algorithm returned from
      *          {@code Key.getAlgorithm()}
@@ -159,6 +196,14 @@ public class KeyRep implements Serializable {
      *
      * <p>
      *
+     * <p>
+     *  解析Key对象。
+     * 
+     *  <p>此方法支持三种类型/格式组合：
+     * <ul>
+     *  <li> Type.SECRET /"RAW" - 返回使用编码密钥字节和算法构造的SecretKeySpec对象<li> Type.PUBLIC /"X.509" - 获取密钥算法的KeyFacto
+     * ry实例,构造一个带编码的X509EncodedKeySpec密钥字节,并从规范<li> Type.PRIVATE /"PKCS#8"生成公钥 - 获取密钥算法的KeyFactory实例,使用编码的密钥
+     * 
      * @return the resolved Key object
      *
      * @exception ObjectStreamException if the Type/format

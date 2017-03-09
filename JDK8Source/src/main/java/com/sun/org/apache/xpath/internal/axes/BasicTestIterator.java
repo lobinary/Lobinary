@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: BasicTestIterator.java,v 1.2.4.1 2005/09/14 19:45:20 jeffsuttor Exp $
+ * <p>
+ *  $ Id：BasicTestIterator.java,v 1.2.4.1 2005/09/14 19:45:20 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -33,6 +46,9 @@ import com.sun.org.apache.xpath.internal.compiler.OpMap;
  * Base for iterators that handle predicates.  Does the basic next
  * node logic, so all the derived iterator has to do is get the
  * next node.
+ * <p>
+ *  用于处理谓词的迭代器的基础。基本的下一个节点逻辑,所以派生迭代器必须做的是获得下一个节点。
+ * 
  */
 public abstract class BasicTestIterator extends LocPathIterator
 {
@@ -40,6 +56,10 @@ public abstract class BasicTestIterator extends LocPathIterator
   /**
    * Create a LocPathIterator object.
    *
+   * <p>
+   *  创建LocPathIterator对象。
+   * 
+   * 
    * @param nscontext The namespace context for this iterator,
    * should be OK if null.
    */
@@ -51,6 +71,10 @@ public abstract class BasicTestIterator extends LocPathIterator
   /**
    * Create a LocPathIterator object.
    *
+   * <p>
+   *  创建LocPathIterator对象。
+   * 
+   * 
    * @param nscontext The namespace context for this iterator,
    * should be OK if null.
    */
@@ -65,6 +89,10 @@ public abstract class BasicTestIterator extends LocPathIterator
    * of step walkers from the opcode list, and call back
    * into the Compiler to create predicate expressions.
    *
+   * <p>
+   *  创建LocPathIterator对象,包括从操作码列表创建步骤步行器,并回调到编译器以创建谓词表达式。
+   * 
+   * 
    * @param compiler The Compiler which is creating
    * this expression.
    * @param opPos The position of this iterator in the
@@ -100,6 +128,10 @@ public abstract class BasicTestIterator extends LocPathIterator
    * of step walkers from the opcode list, and call back
    * into the Compiler to create predicate expressions.
    *
+   * <p>
+   *  创建LocPathIterator对象,包括从操作码列表创建步骤步行器,并回调到编译器以创建谓词表达式。
+   * 
+   * 
    * @param compiler The Compiler which is creating
    * this expression.
    * @param opPos The position of this iterator in the
@@ -120,6 +152,10 @@ public abstract class BasicTestIterator extends LocPathIterator
 
   /**
    * Get the next node via getNextXXX.  Bottlenecked for derived class override.
+   * <p>
+   *  通过getNextXXX获取下一个节点。瓶颈为派生类覆盖。
+   * 
+   * 
    * @return The next node on the axis, or DTM.NULL.
    */
   protected abstract int getNextNode();
@@ -129,6 +165,10 @@ public abstract class BasicTestIterator extends LocPathIterator
    * iterator in the set. After a NodeIterator is created, the first call
    * to nextNode() returns the first node in the set.
    *
+   * <p>
+   * 返回集合中的下一个节点,并推进迭代器在集合中的位置。创建NodeIterator之后,第一次调用nextNode()返回集合中的第一个节点。
+   * 
+   * 
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
@@ -209,6 +249,9 @@ public abstract class BasicTestIterator extends LocPathIterator
    *  Get a cloned Iterator that is reset to the beginning
    *  of the query.
    *
+   * <p>
+   *  获取复位到查询开头的克隆迭代器。
+   * 
    *  @return A cloned NodeIterator set of the start of the query.
    *
    *  @throws CloneNotSupportedException

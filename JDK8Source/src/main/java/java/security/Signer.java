@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,12 @@ import java.io.*;
  * sensitive issue that should be handled by subclasses as appropriate
  * to their intended use.
  *
+ * <p>
+ *  此类用于表示还可以对数据进行数字签名的标识。
+ * 
+ *  <p>签署人私钥的管理是一个重要而敏感的问题,应由子类根据其预期用途进行处理。
+ * 
+ * 
  * @see Identity
  *
  * @author Benjamin Renaud
@@ -52,6 +59,10 @@ public abstract class Signer extends Identity {
     /**
      * The signer's private key.
      *
+     * <p>
+     *  签名者的私钥。
+     * 
+     * 
      * @serial
      */
     private PrivateKey privateKey;
@@ -59,6 +70,9 @@ public abstract class Signer extends Identity {
     /**
      * Creates a signer. This constructor should only be used for
      * serialization.
+     * <p>
+     *  创建签名者。此构造函数只应用于序列化。
+     * 
      */
     protected Signer() {
         super();
@@ -68,6 +82,10 @@ public abstract class Signer extends Identity {
     /**
      * Creates a signer with the specified identity name.
      *
+     * <p>
+     *  创建具有指定标识名称的签名者。
+     * 
+     * 
      * @param name the identity name.
      */
     public Signer(String name) {
@@ -77,6 +95,10 @@ public abstract class Signer extends Identity {
     /**
      * Creates a signer with the specified identity name and scope.
      *
+     * <p>
+     *  创建具有指定的标识名和范围的签名者。
+     * 
+     * 
      * @param name the identity name.
      *
      * @param scope the scope of the identity.
@@ -96,6 +118,12 @@ public abstract class Signer extends Identity {
      * method is called with {@code "getSignerPrivateKey"}
      * as its argument to see if it's ok to return the private key.
      *
+     * <p>
+     *  返回此签名者的私钥。
+     * 
+     *  <p>首先,如果有一个安全管理器,则使用{@code"getSignerPrivateKey"}作为其参数来调用其{@code checkSecurityAccess}方法,以查看是否可以返回私钥。
+     * 
+     * 
      * @return this signer's private key, or null if the private key has
      * not yet been set.
      *
@@ -117,6 +145,12 @@ public abstract class Signer extends Identity {
      * method is called with {@code "setSignerKeyPair"}
      * as its argument to see if it's ok to set the key pair.
      *
+     * <p>
+     *  设置此签名者的密钥对(公钥和私钥)。
+     * 
+     *  <p>首先,如果有一个安全管理器,它的{@code checkSecurityAccess}方法被调用与{@code"setSignerKeyPair"}作为其参数,看看是否可以设置密钥对。
+     * 
+     * 
      * @param pair an initialized key pair.
      *
      * @exception InvalidParameterException if the key pair is not
@@ -167,6 +201,8 @@ public abstract class Signer extends Identity {
     /**
      * Returns a string of information about the signer.
      *
+     * <p>
+     * 
      * @return a string of information about the signer.
      */
     public String toString() {

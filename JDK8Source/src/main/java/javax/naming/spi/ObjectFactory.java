@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,20 @@ import javax.naming.*;
   * may not always have corresponding support in the java.net.URL
   * class or Web browsers.
   *
+  * <p>
+  *  此接口代表创建对象的工厂。
+  * p>
+  *  JNDI框架允许对象实现通过<em>对象工厂</em>动态加载。
+  * 例如,当查找命名空间中绑定的打印机时,如果打印服务将打印机名称绑定到引用,则打印机引用可以用于创建打印机对象,以便查找的调用者可以直接对打印机对象进行操作查找。
+  *  <p> <tt> ObjectFactory </tt>负责创建特定类型的对象。在上面的示例中,您可能有一个PrinterObjectFactory用于创建打印机对象。
+  * p>
+  *  对象工厂必须实现<tt> ObjectFactory </tt>接口。此外,工厂类必须是public的,并且必须具有不接受参数的公共构造函数。
+  * p>
+  *  对象工厂的<tt> getObjectInstance()</tt>方法可能被调用多次,可能使用不同的参数。实现是线程安全的。
+  * p>
+  *  在此类的文档中提及URL是指由RFC 1738及其相关RFC定义的URL字符串。它是符合其中描述的语法的任何字符串,并且可能不总是在java.net.URL类或Web浏览器中具有相应的支持。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -151,6 +166,29 @@ public interface ObjectFactory {
  * guaranteed to be thread-safe.
  * <p>
  *
+ * <p>
+ *  使用指定的位置或参考信息创建对象。
+ * <p>
+ * 此对象的特殊要求使用<code> environment </code>提供。这样的环境属性的示例是用户身份信息。
+ * p>
+ *  <tt> NamingManager.getObjectInstance()</tt>相继加载对象工厂,并对它们调用此方法,直到产生非空答案。
+ * 当对象工厂抛出异常时,异常将传递给<tt> NamingManager.getObjectInstance()</tt>的调用者(并且不会搜索可能产生非null答案的其他工厂)。
+ * 对象工厂只应该抛出一个异常,如果它确定它是唯一的目标工厂,并且没有其他对象工厂应该尝试。如果此工厂无法使用提供的参数创建对象,则应返回null。
+ * p>
+ *  URL上下文工厂</em>是一个特殊的ObjectFactory,它创建用于解析URL或其位置由URL指定的对象的上下文。
+ *  URL上下文工厂的<tt> getObjectInstance()</tt>方法将遵守以下规则。
+ * <ol>
+ * <li>如果<code> obj </code>为null,请创建用于解析与此工厂相关联的方案的URL的上下文。生成的上下文不绑定到一个特定的URL：它能够处理任意URL与这个工厂的方案id。
+ * 例如,在LDAP URL上下文工厂上调用<tt> getObjectInstance()</tt>和<code> obj </code>设置为null将返回一个上下文,可以解析LDAP URL,例如"l
+ * dap：// ldap。
+ * <li>如果<code> obj </code>为null,请创建用于解析与此工厂相关联的方案的URL的上下文。生成的上下文不绑定到一个特定的URL：它能够处理任意URL与这个工厂的方案id。
+ *  wiz.com/o=wiz,c=us"和"ldap：//ldap.umich.edu/o=umich,c=us"。
+ * <li>
+ *  如果<code> obj </code>是URL字符串,请创建由URL标识的对象(通常为上下文)。例如,假设这是一个LDAP URL上下文工厂。
+ * 如果<code> obj </code>是"ldap：//ldap.wiz.com/o=wiz,c=us",getObjectInstance()将返回由可分辨名称命名的上下文"o = wiz,c = 
+ * us "在LDAP服务器ldap.wiz.com。
+ *  如果<code> obj </code>是URL字符串,请创建由URL标识的对象(通常为上下文)。例如,假设这是一个LDAP URL上下文工厂。
+ * 
  * @param obj The possibly null object containing location or reference
  *              information that can be used in creating an object.
  * @param name The name of this object relative to <code>nameCtx</code>,

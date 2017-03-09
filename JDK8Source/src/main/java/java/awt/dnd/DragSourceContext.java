@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,27 @@ import java.util.TooManyListenersException;
  * custom implementations of the {@code DragSource}
  * and the {@code DragSourceContext} classes.
  *
+ * <p>
+ *  <code> DragSourceContext </code>类负责管理拖放协议的启动器端。
+ * 特别是,它负责管理对{@linkplain DragSourceListener DragSourceListeners}和{@linkplain DragSourceMotionListener DragSourceMotionListeners}
+ * 的拖动事件通知,并提供表示拖动操作的源数据的{@link Transferable}。
+ *  <code> DragSourceContext </code>类负责管理拖放协议的启动器端。
+ * <p>
+ *  注意,<code> DragSourceContext </code>本身实现<code> DragSourceListener </code>和<code> DragSourceMotionList
+ * ener </code>接口。
+ * 这是为了允许由{@link DragSource}创建的平台对等体({@link DragSourceContextPeer}实例)通知正在进行的操作中的状态变化的<code> DragSourceCo
+ * ntext </code>。
+ * 这允许<code> DragSourceContext </code>对象将自身插入平台和拖动操作的启动器提供的侦听器之间。
+ * <p>
+ * <a name="defaultCursor"> </a>默认情况下,{@code DragSourceContext}将光标设置为适用于拖放操作的当前状态。
+ * 例如,如果用户选择了{@linkplain DnDConstants#ACTION_MOVE移动动作},并且指针位于接受移动动作的目标上,则显示默认移动光标。
+ * 当指针位于不接受传输的区域上时,将显示默认的"无下拉"光标。
+ * <p>
+ *  当通过{@link #setCursor}方法设置自定义游标时,将禁用此默认处理机制。
+ * 当禁用默认处理时,通过侦听{@code DragSource}事件并调用{@code setCursor()}方法,开发人员有责任使光标保持最新。
+ * 或者,您可以通过提供{@code DragSource}和{@code DragSourceContext}类的自定义实现来提供自定义游标行为。
+ * 
+ * 
  * @see DragSourceListener
  * @see DragSourceMotionListener
  * @see DnDConstants
@@ -99,6 +121,9 @@ public class DragSourceContext
      * An <code>int</code> used by updateCurrentCursor()
      * indicating that the <code>Cursor</code> should change
      * to the default (no drop) <code>Cursor</code>.
+     * <p>
+     *  updateCurrentCursor()使用的<code> int </code>指示<code> Cursor </code>应该更改为默认值(无下拉)<code> Cursor </code>。
+     * 
      */
     protected static final int DEFAULT = 0;
 
@@ -106,6 +131,9 @@ public class DragSourceContext
      * An <code>int</code> used by updateCurrentCursor()
      * indicating that the <code>Cursor</code>
      * has entered a <code>DropTarget</code>.
+     * <p>
+     *  updateCurrentCursor()使用的<code> int </code>指示<code> Cursor </code>已输入<code> DropTarget </code>。
+     * 
      */
     protected static final int ENTER   = 1;
 
@@ -113,12 +141,18 @@ public class DragSourceContext
      * An <code>int</code> used by updateCurrentCursor()
      * indicating that the <code>Cursor</code> is
      * over a <code>DropTarget</code>.
+     * <p>
+     *  updateCurrentCursor()使用的<code> int </code>表示<code> Cursor </code>位于<code> DropTarget </code>之上。
+     * 
      */
     protected static final int OVER    = 2;
 
     /**
      * An <code>int</code> used by updateCurrentCursor()
      * indicating that the user operation has changed.
+     * <p>
+     *  updateCurrentCursor()使用的<code> int </code>,表示用户操作已更改。
+     * 
      */
 
     protected static final int CHANGED = 3;
@@ -155,6 +189,28 @@ public class DragSourceContext
      * If <code>DragSourceListener</code> is <code>null</code> no exception
      * is thrown.
      *
+     * <p>
+     * 从<code> DragSource </code>调用,此构造函数创建一个新的<code> DragSourceContext </code>给定此Drag的<code> DragSourceCont
+     * extPeer </code>,<code> DragGestureEvent </code>拖动,用于拖动的初始<code> Cursor </code>,用于拖动的(可选)<code> Image 
+     * </code>显示,<code> Image </code >源于触发事件时的热点,<code>可传递的</code>主题数据,以及在拖放操作期间使用的<code> DragSourceListener
+     *  </code>。
+     * <br>
+     *  如果<code> DragSourceContextPeer </code>是<code> null </code> <code> NullPointerException </code>被抛出。
+     * <br>
+     *  如果<code> DragGestureEvent </code>是<code> null </code> <code> NullPointerException </code>被抛出。
+     * <br>
+     *  如果<code> Cursor </code>是<code> null </code>,则不抛出异常,并为此拖动操作激活默认的拖动光标行为。
+     * <br>
+     *  如果<code> Image </code>是<code> null </code>,则不会抛出异常。
+     * <br>
+     *  如果<code> Image </code>不是<code> null </code>,并且偏移量是<code> null </code> <code> NullPointerException </code>
+     * 。
+     * <br>
+     *  如果<code> Transferable </code>是<code> null </code> <code> NullPointerException </code>被抛出。
+     * <br>
+     *  如果<code> DragSourceListener </code>是<code> null </code>,则不会抛出异常。
+     * 
+     * 
      * @param dscp       the <code>DragSourceContextPeer</code> for this drag
      * @param trigger    the triggering event
      * @param dragCursor     the initial {@code Cursor} for this drag operation
@@ -233,6 +289,10 @@ public class DragSourceContext
      * Returns the <code>DragSource</code>
      * that instantiated this <code>DragSourceContext</code>.
      *
+     * <p>
+     *  返回实例化此<code> DragSourceContext </code>的<code> DragSource </code>。
+     * 
+     * 
      * @return the <code>DragSource</code> that
      *   instantiated this <code>DragSourceContext</code>
      */
@@ -243,6 +303,10 @@ public class DragSourceContext
      * Returns the <code>Component</code> associated with this
      * <code>DragSourceContext</code>.
      *
+     * <p>
+     *  返回与此<code> DragSourceContext </code>关联的<code> Component </code>。
+     * 
+     * 
      * @return the <code>Component</code> that started the drag
      */
 
@@ -252,6 +316,10 @@ public class DragSourceContext
      * Returns the <code>DragGestureEvent</code>
      * that initially triggered the drag.
      *
+     * <p>
+     * 返回最初触发拖动的<code> DragGestureEvent </code>。
+     * 
+     * 
      * @return the Event that triggered the drag
      */
 
@@ -262,6 +330,10 @@ public class DragSourceContext
      * represent the set of drop actions supported by the drag source for the
      * drag operation associated with this <code>DragSourceContext</code>.
      *
+     * <p>
+     *  返回<code> DnDConstants </code>的位掩码,表示与此<code> DragSourceContext </code>关联的拖动操作的拖动源支持的拖放操作的集合。
+     * 
+     * 
      * @return the drop actions supported by the drag source
      */
     public int  getSourceActions() {
@@ -274,6 +346,11 @@ public class DragSourceContext
      * is <code>null</code>, the default drag cursor behavior is
      * activated for this drag operation, otherwise it is deactivated.
      *
+     * <p>
+     *  将此拖动操作的光标设置为指定的<code> Cursor </code>。
+     * 如果指定的<code> Cursor </code>为<code> null </code>,则此拖动操作的默认拖动光标行为被激活,否则被禁用。
+     * 
+     * 
      * @param c     the initial {@code Cursor} for this drag operation,
      *                       or {@code null} for the default cursor handling;
      *                       see {@linkplain Cursor class
@@ -290,6 +367,10 @@ public class DragSourceContext
     /**
      * Returns the current drag <code>Cursor</code>.
      * <P>
+     * <p>
+     *  返回当前拖动<code> Cursor </code>。
+     * <P>
+     * 
      * @return the current drag <code>Cursor</code>
      */
 
@@ -301,6 +382,11 @@ public class DragSourceContext
      * If a <code>DragSourceListener</code> already exists,
      * this method throws a <code>TooManyListenersException</code>.
      * <P>
+     * <p>
+     *  将<code> DragSourceListener </code>添加到此<code> DragSourceContext </code>(如果尚未添加)。
+     * 如果<code> DragSourceListener </code>已经存在,此方法会抛出一个<code> TooManyListenersException </code>。
+     * <P>
+     * 
      * @param dsl the <code>DragSourceListener</code> to add.
      * Note that while <code>null</code> is not prohibited,
      * it is not acceptable as a parameter.
@@ -324,6 +410,10 @@ public class DragSourceContext
      * Removes the specified <code>DragSourceListener</code>
      * from  this <code>DragSourceContext</code>.
      *
+     * <p>
+     *  从此<code> DragSourceContext </code>中删除指定的<code> DragSourceListener </code>。
+     * 
+     * 
      * @param dsl the <code>DragSourceListener</code> to remove;
      *     note that while <code>null</code> is not prohibited,
      *     it is not acceptable as a parameter
@@ -339,6 +429,9 @@ public class DragSourceContext
     /**
      * Notifies the peer that the <code>Transferable</code>'s
      * <code>DataFlavor</code>s have changed.
+     * <p>
+     *  通知对等体<code>可传输</code>的<code> DataFlavor </code>已更改。
+     * 
      */
 
     public void transferablesFlavorsChanged() {
@@ -352,6 +445,11 @@ public class DragSourceContext
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDragEvent</code>.
      *
+     * <p>
+     *  在<code> DragSourceContext </code>注册的<code> DragSourceListener </code>以及相关的<code> DragSource </code>中
+     * 调用<code> dragEnter </code>代码> DragSourceDragEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceDragEvent</code>
      */
     public void dragEnter(DragSourceDragEvent dsde) {
@@ -371,6 +469,11 @@ public class DragSourceContext
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDragEvent</code>.
      *
+     * <p>
+     *  在与此<code> DragSourceContext </code>和相关联的<code> DragSource </code>注册的<code> DragSourceListener </code>
+     * 上调用<code> dragOver </code>代码> DragSourceDragEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceDragEvent</code>
      */
     public void dragOver(DragSourceDragEvent dsde) {
@@ -390,6 +493,11 @@ public class DragSourceContext
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceEvent</code>.
      *
+     * <p>
+     * 在向<code> DragSourceContext </code>注册的<code> DragSourceListener </code>和与之关联的<code> DragSource </code>
+     * 中调用<code> dragExit </code>代码> DragSourceEvent </code>。
+     * 
+     * 
      * @param dse the <code>DragSourceEvent</code>
      */
     public void dragExit(DragSourceEvent dse) {
@@ -409,6 +517,11 @@ public class DragSourceContext
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDragEvent</code>.
      *
+     * <p>
+     *  在与此<code> DragSourceContext </code>和相关联的<code> DragSource </code>注册的<code> DragSourceListener </code>
+     * 上调用<code> dropActionChanged </code>代码> DragSourceDragEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceDragEvent</code>
      */
     public void dropActionChanged(DragSourceDragEvent dsde) {
@@ -428,6 +541,11 @@ public class DragSourceContext
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDropEvent</code>.
      *
+     * <p>
+     *  在向<code> DragSourceContext </code>注册的<code> DragSourceListener </code>以及相关的<code> DragSource </code>
+     * 中调用<code> dragDropEnd </code>代码> DragSourceDropEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceDropEvent</code>
      */
     public void dragDropEnd(DragSourceDropEvent dsde) {
@@ -445,6 +563,11 @@ public class DragSourceContext
      * <code>DragSourceContext</code>, and them passes the specified
      * <code>DragSourceDragEvent</code>.
      *
+     * <p>
+     *  在与<code> DragSourceContext </code>关联的<code> DragSource </code>注册的<code> DragSourceMotionListener </code>
+     * 上调用<code> dragMouseMoved </code>,并传递指定的<code > DragSourceDragEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceDragEvent</code>
      * @since 1.4
      */
@@ -456,6 +579,10 @@ public class DragSourceContext
      * Returns the <code>Transferable</code> associated with
      * this <code>DragSourceContext</code>.
      *
+     * <p>
+     *  返回与此<code> DragSourceContext </code>关联的<code> Transferable </code>。
+     * 
+     * 
      * @return the <code>Transferable</code>
      */
     public Transferable getTransferable() { return transferable; }
@@ -466,6 +593,10 @@ public class DragSourceContext
      * supported by the drag source, the drop target action,
      * and status, otherwise this method does nothing.
      *
+     * <p>
+     *  如果默认拖动光标行为是活动的,则此方法为拖动源支持的指定操作,放置目标操作和状态设置默认拖动光标,否则此方法不执行任何操作。
+     * 
+     * 
      * @param sourceAct the actions supported by the drag source
      * @param targetAct the drop target action
      * @param status one of the fields <code>DEFAULT</code>,
@@ -532,6 +663,15 @@ public class DragSourceContext
      * <code>DragSourceListener</code> is written out if and only if it can be
      * serialized. If not, <code>null</code> is written instead.
      *
+     * <p>
+     * 序列化此<code> DragSourceContext </code>。此方法首先执行默认序列化。
+     * 接下来,当且仅当它可以被序列化时,该对象的<code> Transferable </code>被写出。如果不是,写入<code> null </code>。
+     * 在这种情况下,从所得到的反序列化流创建的<code> DragSourceContext </code>将包含不支持<code> DataFlavor </code>的虚拟<code> Transfer
+     * able </code>。
+     * 接下来,当且仅当它可以被序列化时,该对象的<code> Transferable </code>被写出。如果不是,写入<code> null </code>。
+     * 最后,这个对象的<code> DragSourceListener </code>被写出,当且仅当它可以被序列化。如果不是,写入<code> null </code>。
+     * 
+     * 
      * @serialData The default serializable fields, in alphabetical order,
      *             followed by either a <code>Transferable</code> instance, or
      *             <code>null</code>, followed by either a
@@ -558,6 +698,14 @@ public class DragSourceContext
      * <code>Transferable</code> is set to a dummy <code>Transferable</code>
      * which supports no <code>DataFlavor</code>s.
      *
+     * <p>
+     *  反序列化此<code> DragSourceContext </code>。该方法首先对所有非<code> transient </code>字段执行默认反序列化。
+     * 然后,通过使用流中的下两个对象,该对象的<code> Transferable </code>和<code> DragSourceListener </code>也会被反序列化。
+     * 如果结果<code> Transferable </code>是<code> null </code>,则该对象的<code> Transferable </code>被设置为一个虚拟<code> Tr
+     * ansferable </code> DataFlavor </code>。
+     * 然后,通过使用流中的下两个对象,该对象的<code> Transferable </code>和<code> DragSourceListener </code>也会被反序列化。
+     * 
+     * 
      * @since 1.4
      */
     private void readObject(ObjectInputStream s)
@@ -622,6 +770,9 @@ public class DragSourceContext
 
     /*
      * fields
+     * <p>
+     *  字段
+     * 
      */
 
     private transient DragSourceContextPeer peer;
@@ -629,6 +780,10 @@ public class DragSourceContext
     /**
      * The event which triggered the start of the drag.
      *
+     * <p>
+     *  触发拖动开始的事件。
+     * 
+     * 
      * @serial
      */
     private DragGestureEvent    trigger;
@@ -636,6 +791,10 @@ public class DragSourceContext
     /**
      * The current drag cursor.
      *
+     * <p>
+     *  当前拖动游标。
+     * 
+     * 
      * @serial
      */
     private Cursor              cursor;
@@ -648,6 +807,10 @@ public class DragSourceContext
      * <code>true</code> if the custom drag cursor is used instead of the
      * default one.
      *
+     * <p>
+     *  <code> true </code>如果使用自定义拖动光标而不是默认的光标。
+     * 
+     * 
      * @serial
      */
     private boolean useCustomCursor;
@@ -657,6 +820,9 @@ public class DragSourceContext
      * drop actions supported by the drag source for the drag operation associated
      * with this <code>DragSourceContext.</code>
      *
+     * <p>
+     *  <code> DnDConstants </code>的位掩码,表示与此<code> DragSourceContext相关联的拖动操作的拖动源支持的拖放操作的集合。</code>
+     * 
      * @serial
      */
     private int sourceActions;

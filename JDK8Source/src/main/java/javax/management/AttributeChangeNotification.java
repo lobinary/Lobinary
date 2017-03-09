@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,17 @@ package javax.management;
  *                                 "myString", "String", oldValue, newValue);
  * </CODE></BLOCKQUOTE>
  *
+ * <p>
+ *  提供由MBeans发送的属性更改通知的定义。
+ * <P>
+ *  在属性更改发生时,由拥有感兴趣属性的MBean创建和发送属性更改通知。
+ * 因此,<CODE> NotificationBroadcaster </CODE>接口必须由对其感兴趣的属性更改的任何MBean实现。
+ * <P>
+ *  示例：如果调用<CODE> myMbean </CODE>的MBean需要通知已注册的侦听器,当属性<BLOCKQUOTE> <CODE> String myString </CODE> </BLOCKQUOTE>
+ * 被修改,<CODE> myMbean </CODE>创建并发出以下通知：<BLOCKQUOTE> <CODE> new AttributeChangeNotification(myMbean,seque
+ * nceNumber,timeStamp,msg,"myString","String",oldValue,newValue); </CODE> </BLOCKQUOTE>。
+ * 
+ * 
  * @since 1.5
  */
 public class AttributeChangeNotification extends javax.management.Notification {
@@ -57,26 +69,37 @@ public class AttributeChangeNotification extends javax.management.Notification {
     /**
      * Notification type which indicates that the observed MBean attribute value has changed.
      * <BR>The value of this type string is <CODE>jmx.attribute.change</CODE>.
+     * <p>
+     *  指示观察到的MBean属性值已更改的通知类型。 <BR>此类型字符串的值为<CODE> jmx.attribute.change </CODE>。
+     * 
      */
     public static final String ATTRIBUTE_CHANGE = "jmx.attribute.change";
 
 
     /**
+    /* <p>
+    /* 
      * @serial The MBean attribute name.
      */
     private String attributeName = null;
 
     /**
+    /* <p>
+    /* 
      * @serial The MBean attribute type.
      */
     private String attributeType = null;
 
     /**
+    /* <p>
+    /* 
      * @serial The MBean attribute old value.
      */
     private Object oldValue = null;
 
     /**
+    /* <p>
+    /* 
      * @serial The MBean attribute new value.
      */
     private Object newValue = null;
@@ -87,6 +110,10 @@ public class AttributeChangeNotification extends javax.management.Notification {
      * In addition to the information common to all notification, the caller must supply the name and type
      * of the attribute, as well as its old and new values.
      *
+     * <p>
+     *  构造属性更改通知对象。除了所有通知的通用信息之外,调用者必须提供属性的名称和类型,以及其旧值和新值。
+     * 
+     * 
      * @param source The notification producer, that is, the MBean the attribute belongs to.
      * @param sequenceNumber The notification sequence number within the source object.
      * @param timeStamp The date at which the notification is being sent.
@@ -110,6 +137,10 @@ public class AttributeChangeNotification extends javax.management.Notification {
     /**
      * Gets the name of the attribute which has changed.
      *
+     * <p>
+     *  获取已更改的属性的名称。
+     * 
+     * 
      * @return A String containing the name of the attribute.
      */
     public String getAttributeName() {
@@ -119,6 +150,10 @@ public class AttributeChangeNotification extends javax.management.Notification {
     /**
      * Gets the type of the attribute which has changed.
      *
+     * <p>
+     *  获取已更改的属性的类型。
+     * 
+     * 
      * @return A String containing the type of the attribute.
      */
     public String getAttributeType() {
@@ -128,6 +163,10 @@ public class AttributeChangeNotification extends javax.management.Notification {
     /**
      * Gets the old value of the attribute which has changed.
      *
+     * <p>
+     *  获取已更改的属性的旧值。
+     * 
+     * 
      * @return An Object containing the old value of the attribute.
      */
     public Object getOldValue() {
@@ -137,6 +176,9 @@ public class AttributeChangeNotification extends javax.management.Notification {
     /**
      * Gets the new value of the attribute which has changed.
      *
+     * <p>
+     *  获取已更改的属性的新值。
+     * 
      * @return An Object containing the new value of the attribute.
      */
     public Object getNewValue() {

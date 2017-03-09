@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,13 @@ import javax.management.MBeanOperationInfo;
  * typically {@code OpenMBeanInfoSupport}.
  *
  *
+ * <p>
+ *  {@code OpenMBeanInfoSupport}类描述了<i>打开的MBean </i>的管理信息：它是{@link javax.management.MBeanInfo}的子类,它实现了{@link OpenMBeanInfo}
+ * 接口。
+ * 请注意,如果其{@code getMBeanInfo()}方法返回实现OpenMBeanInfo接口的类的实例(通常为{@code OpenMBeanInfoSupport}),则会识别<i>打开的MB
+ * ean </i>。
+ * 
+ * 
  * @since 1.5
  */
 public class OpenMBeanInfoSupport
@@ -78,6 +86,16 @@ public class OpenMBeanInfoSupport
      * to the arrays referenced by these parameters have no effect on this
      * instance.</p>
      *
+     * <p>
+     *  <p>构造一个{@code OpenMBeanInfoSupport}实例,它描述了一个具有指定的{@code className},{@code description},{@code openAttributes}
+     * ,{@code openConstructors},{@code openOperations }和{@code notifications}。
+     * </p>。
+     * 
+     *  <p>内部复制{@code openAttributes},{@code openConstructors},{@code openOperations}和{@code notifications}数
+     * 组参数,以便对这些参数引用的数组进行后续更改对此实例没有影响。
+     * </p>。
+     * 
+     * 
      * @param className The fully qualified Java class name of the
      * open MBean described by this <CODE>OpenMBeanInfoSupport</CODE>
      * instance.
@@ -134,6 +152,16 @@ public class OpenMBeanInfoSupport
      * referenced by these parameters have no effect on this
      * instance.</p>
      *
+     * <p>
+     *  <p>构造一个{@code OpenMBeanInfoSupport}实例,它描述了一个具有指定的{@code className},{@code description},{@code openAttributes}
+     * ,{@code openConstructors},{@code openOperations },{@code notifications}和{@code descriptor}。
+     * </p>。
+     * 
+     * <p>内部复制{@code openAttributes},{@code openConstructors},{@code openOperations}和{@code notifications}数组
+     * 参数,以便对这些参数引用的数组进行后续更改对此实例没有影响。
+     * </p>。
+     * 
+     * 
      * @param className The fully qualified Java class name of the
      * open MBean described by this <CODE>OpenMBeanInfoSupport</CODE>
      * instance.
@@ -242,6 +270,18 @@ public class OpenMBeanInfoSupport
      * {@code obj} parameters which are different implementations of
      * the {@code OpenMBeanInfo} interface.
      *
+     * <p>
+     *  <p>将指定的{@code obj}参数与此{@code OpenMBeanInfoSupport}实例相比较。</p>
+     * 
+     *  <p>当且仅当所有以下语句都为真时返回{@code true}：
+     * 
+     * <ul>
+     *  <li> {@ code obj}也实现了{@code OpenMBeanInfo}接口,</li> <li>它们的类名相等。</li> <li>其属性,构造函数,操作和通知的信息相同</li>
+     * </ul>
+     * 
+     *  这样可以确保{@code equals}方法对{@code obj}参数正常工作,而{@code obj}参数是{@code OpenMBeanInfo}接口的不同实现。
+     * 
+     * 
      * @param obj the object to be compared for equality with this
      * {@code OpenMBeanInfoSupport} instance;
      *
@@ -334,6 +374,21 @@ public class OpenMBeanInfoSupport
      * call to {@code hashCode}, and then the same value is returned
      * for subsequent calls.</p>
      *
+     * <p>
+     *  <p>返回此{@code OpenMBeanInfoSupport}实例的哈希码值。</p>
+     * 
+     *  <p> {@code OpenMBeanInfoSupport}实例的哈希码是{@code equals}比较中使用的所有信息元素的哈希码的总和(即：其类名称及其属性,构造函数和操作的信息和通知,其中
+     * 每个数组的hashCode通过调用{@code new java.util.HashSet(java.util.Arrays.asList(this.getSignature))。
+     * hashCode()}计算。</p >。
+     * 
+     * <p>这确保{@code t1.equals(t2)}意味着任何两个{@code OpenMBeanInfoSupport}实例{@code t1}的{@code t1.hashCode()== t2.hashCode @ code t2}
+     * ,根据方法{@link Object#hashCode()Object.hashCode()}的一般合同的要求。
+     * </p>。
+     * 
+     *  <p>但是,请注意,实现{@code OpenMBeanInfo}接口的类的另一个实例可能等于{@link OpenStateInfoSupport}实例(由{@link #equals(java.lang.Object)}
+     * 定义),但可能如果计算方式不同,则使用不同的哈希码。
+     * </p>。
+     * 
      * @return the hash code value for this {@code
      * OpenMBeanInfoSupport} instance
      */
@@ -380,6 +435,11 @@ public class OpenMBeanInfoSupport
      * the first call to {@code toString}, and then the same value is
      * returned for subsequent calls.</p>
      *
+     * <p>
+     * 
+     *  <p>由于{@code OpenMBeanInfoSupport}实例不可变,在第一次调用{@code hashCode}时,此实例的哈希码计算一次,然后为后续调用返回相同的值。</p>
+     * 
+     * 
      * @return a string representation of this {@code
      * OpenMBeanInfoSupport} instance
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,11 +35,18 @@ import sun.reflect.misc.ReflectUtil;
 /**
  * Static methods from the JMX API.  There are no instances of this class.
  *
+ * <p>
+ *  来自JMX API的静态方法。没有这个类的实例。
+ * 
+ * 
  * @since 1.6
  */
 public class JMX {
     /* Code within this package can prove that by providing this instance of
      * this class.
+     * <p>
+     *  这个班。
+     * 
      */
     static final JMX proof = new JMX();
 
@@ -47,54 +55,81 @@ public class JMX {
     /**
      * The name of the <a href="Descriptor.html#defaultValue">{@code
      * defaultValue}</a> field.
+     * <p>
+     *  <a href="Descriptor.html#defaultValue"> {@code defaultValue} </a>字段的名称。
+     * 
      */
     public static final String DEFAULT_VALUE_FIELD = "defaultValue";
 
     /**
      * The name of the <a href="Descriptor.html#immutableInfo">{@code
      * immutableInfo}</a> field.
+     * <p>
+     *  <a href="Descriptor.html#immutableInfo"> {@code immutableInfo} </a>字段的名称。
+     * 
      */
     public static final String IMMUTABLE_INFO_FIELD = "immutableInfo";
 
     /**
      * The name of the <a href="Descriptor.html#interfaceClassName">{@code
      * interfaceClassName}</a> field.
+     * <p>
+     *  <a href="Descriptor.html#interfaceClassName"> {@code interfaceClassName} </a>字段的名称。
+     * 
      */
     public static final String INTERFACE_CLASS_NAME_FIELD = "interfaceClassName";
 
     /**
      * The name of the <a href="Descriptor.html#legalValues">{@code
      * legalValues}</a> field.
+     * <p>
+     *  <a href="Descriptor.html#legalValues"> {@code legalValues} </a>字段的名称。
+     * 
      */
     public static final String LEGAL_VALUES_FIELD = "legalValues";
 
     /**
      * The name of the <a href="Descriptor.html#maxValue">{@code
      * maxValue}</a> field.
+     * <p>
+     *  字段的名称。<a href="Descriptor.html#maxValue"> {@code maxValue} </a>字段。
+     * 
      */
     public static final String MAX_VALUE_FIELD = "maxValue";
 
     /**
      * The name of the <a href="Descriptor.html#minValue">{@code
      * minValue}</a> field.
+     * <p>
+     *  <a href="Descriptor.html#minValue"> {@code minValue} </a>字段的名称。
+     * 
      */
     public static final String MIN_VALUE_FIELD = "minValue";
 
     /**
      * The name of the <a href="Descriptor.html#mxbean">{@code
      * mxbean}</a> field.
+     * <p>
+     *  <a href="Descriptor.html#mxbean"> {@code mxbean} </a>字段的名称。
+     * 
      */
     public static final String MXBEAN_FIELD = "mxbean";
 
     /**
      * The name of the <a href="Descriptor.html#openType">{@code
      * openType}</a> field.
+     * <p>
+     *  <a href="Descriptor.html#openType"> {@code openType} </a>字段的名称。
+     * 
      */
     public static final String OPEN_TYPE_FIELD = "openType";
 
     /**
      * The name of the <a href="Descriptor.html#originalType">{@code
      * originalType}</a> field.
+     * <p>
+     *  <a href="Descriptor.html#originalType"> {@code originalType} </a>字段的名称。
+     * 
      */
     public static final String ORIGINAL_TYPE_FIELD = "originalType";
 
@@ -149,6 +184,45 @@ public class JMX {
      * boolean) newMBeanProxy(connection, objectName, interfaceClass,
      * false)}.</p>
      *
+     * <p>
+     *  <p>在本地或远程MBean Server中为标准MBean创建代理。</p>
+     * 
+     *  <p>如果您有一个MBean服务器{@code mbs}包含带有{@link ObjectName} {@code name}的MBean,并且如果MBean的管理界面由Java界面{@code MyMBean}
+     * 描述,像这样的MBean的代理：</p>。
+     * 
+     * <pre>
+     *  MyMBean proxy = JMX.newMBeanProxy(mbs,name,MyMBean.class);
+     * </pre>
+     * 
+     *  <p>假设,例如,{@code MyMBean}看起来像这样：</p>
+     * 
+     * <pre>
+     * public interface MyMBean {public String getSomeAttribute(); public void setSomeAttribute(String value); public void someOperation(String param1,int param2); }
+     * }。
+     * </pre>
+     * 
+     *  <p>然后您可以执行：</p>
+     * 
+     * <ul>
+     * 
+     *  <li> {@ code proxy.getSomeAttribute()}这会导致对{@code mbs.}{@link MBeanServerConnection#getAttribute getAttribute}
+     *  {@ code(name,"SomeAttribute")}的调用。
+     * 
+     *  <li> {@ code proxy.setSomeAttribute("whatever")}这将导致对{@code mbs.}{@link MBeanServerConnection#setAttribute setAttribute}
+     * 的调用{@ code(name,new Attribute("SomeAttribute","随你"))}。
+     * 
+     *  <li> {@ code proxy.someOperation("param1",2)}将转换为对{@code mbs.}{@link MBeanServerConnection#invoke invoke}
+     * 的调用{@ code(name,"someOperation",< etc>)}。
+     * 
+     * </ul>
+     * 
+     *  <p>此方法返回的对象是{@link Proxy},其{@code InvocationHandler}是一个{@link MBeanServerInvocationHandler}。</p>
+     * 
+     *  <p>此方法相当于{@link #newMBeanProxy(MBeanServerConnection,ObjectName,Class,boolean)newMBeanProxy(connection,objectName,interfaceClass,false)}
+     * 。
+     * </p>。
+     * 
+     * 
      * @param connection the MBean server to forward to.
      * @param objectName the name of the MBean within
      * {@code connection} to forward to.
@@ -190,6 +264,17 @@ public class JMX {
      * likewise for the other methods of {@link
      * NotificationBroadcaster} and {@link NotificationEmitter}.</p>
      *
+     * <p>
+     *  <p>为本地或远程MBean服务器中的标准MBean代理,该服务器也可能支持{@link NotificationEmitter}的方法。</p>
+     * 
+     * <p>此方法的行为与{@link #newMBeanProxy(MBeanServerConnection,ObjectName,Class)}相同,但另外,如果{@code notificationEmitter}
+     * 是{@code true},则MBean被假定为{@link NotificationBroadcaster}或{@link NotificationEmitter},返回的代理将实现{@link NotificationEmitter}
+     * 以及{@code interfaceClass}。
+     * 在代理上对{@link NotificationBroadcaster#addNotificationListener}的调用将导致对{@link MBeanServerConnection#addNotificationListener(ObjectName,NotificationListener,NotificationFilter,Object)}
+     * 的调用,对于{@link NotificationBroadcaster}和{ @link NotificationEmitter}。
+     * </p>。
+     * 
+     * 
      * @param connection the MBean server to forward to.
      * @param objectName the name of the MBean within
      * {@code connection} to forward to.
@@ -294,6 +379,46 @@ public class JMX {
      * boolean) newMXBeanProxy(connection, objectName, interfaceClass,
      * false)}.</p>
      *
+     * <p>
+     *  在本地或远程MBean Server中为MXBean创建代理。
+     * 
+     *  <p>如果您有一个包含{@link ObjectName} {@code name}的MXBean的MBean Server {@code mbs},并且如果MXBean的管理界面由Java界面{@code MyMXBean}
+     * 描述,您可以构造代理MXBean像这样：</p>。
+     * 
+     * <pre>
+     *  MyMXBean proxy = JMX.newMXBeanProxy(mbs,name,MyMXBean.class);
+     * </pre>
+     * 
+     *  <p>假设,例如,{@code MyMXBean}看起来像这样：</p>
+     * 
+     * <pre>
+     *  public interface MyMXBean {public String getSimpleAttribute(); public void setSimpleAttribute(String value); public {@link java.lang.management.MemoryUsage}
+     *  getMappedAttribute(); public void setMappedAttribute(MemoryUsage memoryUsage); public MemoryUsage so
+     * meOperation(String param1,MemoryUsage param2); }}。
+     * </pre>
+     * 
+     *  <p>然后：</p>
+     * 
+     * <ul>
+     * 
+     * <li> <p> {@ code proxy.getSimpleAttribute()}会导致对{@code mbs.}{@link MBeanServerConnection#getAttribute getAttribute}
+     *  {@ code(name,"SimpleAttribute")}的调用。
+     * </p >。
+     * 
+     *  <li> <p> {@ code proxy.setSimpleAttribute("whatever")}将导致对{@code mbs.}{@link MBeanServerConnection#setAttribute setAttribute}
+     *  <code>(name,new Attribute("SimpleAttribute" ,"whatever"))</code>。
+     * </p>。
+     * 
+     *  <p>由于{@code String}是一个<em>简单类型</em>,在{@link javax.management.openmbean.SimpleType}的意义上,它不会在MXBean的上下
+     * 文中改变。
+     * 对于属性{@code SimpleAttribute},MXBean代理的行为与标准MBean代理相同(请参阅{@link #newMBeanProxy(MBeanServerConnection,ObjectName,Class)newMBeanProxy}
+     * )。
+     * </p>。
+     * 
+     *  <li> <p> {@ code proxy.getMappedAttribute()}会导致对{@code mbs.getAttribute("MappedAttribute")}的调用。
+     *  MXBean映射规则意味着属性{@code MappedAttribute}的实际类型将是{@link javax.management.openmbean.CompositeData CompositeData}
+     * ,这是{@code mbs.getAttribute}调用将返回的。
+     * 
      * @param connection the MBean server to forward to.
      * @param objectName the name of the MBean within
      * {@code connection} to forward to.
@@ -334,6 +459,27 @@ public class JMX {
      * likewise for the other methods of {@link
      * NotificationBroadcaster} and {@link NotificationEmitter}.</p>
      *
+     * <p>
+     *  <li> <p> {@ code proxy.getMappedAttribute()}会导致对{@code mbs.getAttribute("MappedAttribute")}的调用。
+     * 然后,代理将使用MXBean映射规则将{@code CompositeData}转换回期望的类型{@code MemoryUsage}。</p>。
+     * 
+     *  </li> </p>同样,{@code proxy.setMappedAttribute(memoryUsage)}会将{@code MemoryUsage}参数转换为{@code CompositeData}
+     * ,然后再调用{@code mbs.setAttribute}。
+     * 
+     * <li> <p> {@ code proxy.someOperation("whatever",memoryUsage)}会将{@code MemoryUsage}参数转换为{@code CompositeData}
+     * 并调用{@code mbs.invoke}。
+     *  {@code mbs.invoke}返回的值也将是一个{@code CompositeData},并且代理将使用MXBean映射规则将其转换为预期类型{@code MemoryUsage}。
+     * </p>。
+     * 
+     * </ul>
+     * 
+     *  <p>此方法返回的对象是{@link Proxy},其{@code InvocationHandler}是一个{@link MBeanServerInvocationHandler}。</p>
+     * 
+     *  <p>此方法相当于{@link #newMXBeanProxy(MBeanServerConnection,ObjectName,Class,boolean)newMXBeanProxy(connection,objectName,interfaceClass,false)}
+     * 。
+     * </p>。
+     * 
+     * 
      * @param connection the MBean server to forward to.
      * @param objectName the name of the MBean within
      * {@code connection} to forward to.
@@ -366,6 +512,8 @@ public class JMX {
      * or if it does not have an {@code @MXBean} annotation
      * and its name ends with "{@code MXBean}".</p>
      *
+     * <p>
+     * 
      * @param interfaceClass The candidate interface.
      *
      * @return true if {@code interfaceClass} is a
@@ -391,6 +539,17 @@ public class JMX {
 
     /**
      * Centralised M(X)Bean proxy creation code
+     * <p>
+     *  <p>为本地或远程MBean Server中的MXBean创建代理,该代理也可能支持{@link NotificationEmitter}的方法。</p>
+     * 
+     * <p>此方法的行为与{@link #newMXBeanProxy(MBeanServerConnection,ObjectName,Class)}相同,但另外,如果{@code notificationEmitter}
+     * 是{@code true},则MXBean被假定为{@link NotificationBroadcaster}或{@link NotificationEmitter},返回的代理将实现{@link NotificationEmitter}
+     * 以及{@code interfaceClass}。
+     * 在代理上对{@link NotificationBroadcaster#addNotificationListener}的调用将导致对{@link MBeanServerConnection#addNotificationListener(ObjectName,NotificationListener,NotificationFilter,Object)}
+     * 的调用,对于{@link NotificationBroadcaster}和{ @link NotificationEmitter}。
+     * </p>。
+     * 
+     * 
      * @param connection {@linkplain MBeanServerConnection} to use
      * @param objectName M(X)Bean object name
      * @param interfaceClass M(X)Bean interface class

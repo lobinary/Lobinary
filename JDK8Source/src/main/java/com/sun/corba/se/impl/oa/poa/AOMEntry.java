@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,8 @@ import org.omg.PortableServer.POAPackage.ObjectAlreadyActive ;
 * that controls the lifecycle of the entry.  A library is used to build the state
 * machine rather than the more usual state pattern so that the state machine
 * transitions are explicitly visible.
+* <p>
+*  它可以处于几个状态以允许长时间的化身或空灵化操作。此类上的方法主要表示控制条目生命周期的状态机的输入符号。库用于构建状态机,而不是更常见的状态模式,使得状态机转换是明确可见的。
 */
 public class AOMEntry extends FSMImpl {
     private final Thread[] etherealizer ;   // The actual etherealize operation

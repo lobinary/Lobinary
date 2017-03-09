@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: VariableStack.java,v 1.2.4.1 2005/09/10 18:16:22 jeffsuttor Exp $
+ * <p>
+ *  $ Id：VariableStack.java,v 1.2.4.1 2005/09/10 18:16:22 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal;
 
@@ -35,16 +48,27 @@ import com.sun.org.apache.xpath.internal.res.XPATHErrorResources;
  * <p>This has been changed from the previous incarnations of this
  * class to be fairly low level.</p>
  * @xsl.usage internal
+ * <p>
+ *  定义一个类来跟踪模板参数和变量的堆栈。
+ * 
+ *  <p>这已经从这个类的前面的变化改为相当低的水平。</p> @ xsl.usage internal
+ * 
  */
 public class VariableStack implements Cloneable
 {
   /**
    * limitation for 1K
+   * <p>
+   *  限制1K
+   * 
    */
   public static final int CLEARLIMITATION= 1024;
 
   /**
    * Constructor for a variable stack.
+   * <p>
+   *  变量堆栈的构造方法。
+   * 
    */
   public VariableStack()
   {
@@ -54,6 +78,10 @@ public class VariableStack implements Cloneable
   /**
    * Returns a clone of this variable stack.
    *
+   * <p>
+   *  返回此变量堆栈的克隆。
+   * 
+   * 
    * @return  a clone of this variable stack.
    *
    * @throws CloneNotSupportedException
@@ -72,18 +100,30 @@ public class VariableStack implements Cloneable
 
   /**
    * The stack frame where all variables and params will be kept.
+   * <p>
+   *  保存所有变量和参数的堆栈框架。
+   * 
+   * 
    * @serial
    */
   XObject[] _stackFrames = new XObject[XPathContext.RECURSIONLIMIT * 2];
 
   /**
    * The top of the stack frame (<code>_stackFrames</code>).
+   * <p>
+   *  堆栈帧的顶部(<code> _stackFrames </code>)。
+   * 
+   * 
    * @serial
    */
   int _frameTop;
 
   /**
    * The bottom index of the current frame (relative to <code>_stackFrames</code>).
+   * <p>
+   *  当前帧的底部索引(相对于<code> _stackFrames </code>)。
+   * 
+   * 
    * @serial
    */
   private int _currentFrameBottom;
@@ -92,18 +132,31 @@ public class VariableStack implements Cloneable
    * The stack of frame positions.  I call 'em links because of distant
    * <a href="http://math.millikin.edu/mprogers/Courses/currentCourses/CS481-ComputerArchitecture/cs481.Motorola68000.html">
    * Motorola 68000 assembler</a> memories.  :-)
+   * <p>
+   *  帧位置的堆栈。我叫'em链接,因为遥远
+   * <a href="http://math.millikin.edu/mprogers/Courses/currentCourses/CS481-ComputerArchitecture/cs481.Motorola68000.html">
+   *  摩托罗拉68000汇编器</a>回忆。 :-)
+   * 
+   * 
    * @serial
    */
   int[] _links = new int[XPathContext.RECURSIONLIMIT];
 
   /**
    * The top of the links stack.
+   * <p>
+   *  链接堆栈的顶部。
+   * 
    */
   int _linksTop;
 
   /**
    * Get the element at the given index, regardless of stackframe.
    *
+   * <p>
+   *  获取给定索引处的元素,而不考虑堆栈帧。
+   * 
+   * 
    * @param i index from zero.
    *
    * @return The item at the given index.
@@ -116,6 +169,10 @@ public class VariableStack implements Cloneable
   /**
    * Get size of the stack.
    *
+   * <p>
+   * 获取堆栈的大小。
+   * 
+   * 
    * @return the total size of the execution stack.
    */
   public int size()
@@ -126,6 +183,10 @@ public class VariableStack implements Cloneable
   /**
    * Reset the stack to a start position.
    *
+   * <p>
+   *  将堆叠重置为开始位置。
+   * 
+   * 
    * @return the total size of the execution stack.
    */
   public void reset()
@@ -144,6 +205,10 @@ public class VariableStack implements Cloneable
   /**
    * Set the current stack frame.
    *
+   * <p>
+   *  设置当前堆栈帧。
+   * 
+   * 
    * @param sf The new stack frame position.
    */
   public void setStackFrame(int sf)
@@ -156,6 +221,10 @@ public class VariableStack implements Cloneable
    * which is either the searchStart property, or the top
    * of the stack if that value is -1.
    *
+   * <p>
+   *  获取搜索应该从哪里开始的位置,它是searchStart属性,如果该值为-1,则为栈顶。
+   * 
+   * 
    * @return The current stack frame position.
    */
   public int getStackFrame()
@@ -171,6 +240,14 @@ public class VariableStack implements Cloneable
    * <a href="http://math.millikin.edu/mprogers/Courses/currentCourses/CS481-ComputerArchitecture/cs481.Motorola68000.html">
    * Motorola 68000 assembler</a> memories.</p>
    *
+   * <p>
+   *  在堆栈上分配内存(称为堆栈帧)用于存储局部变量和参数参数。
+   * 
+   *  <p>我使用link / unlink概念,因为遥远
+   * <a href="http://math.millikin.edu/mprogers/Courses/currentCourses/CS481-ComputerArchitecture/cs481.Motorola68000.html">
+   *  摩托罗拉68000汇编器</a>内存。</p>
+   * 
+   * 
    * @param size The size of the stack frame allocation.  This ammount should
    * normally be the maximum number of variables that you can have allocated
    * at one time in the new stack frame.
@@ -210,6 +287,9 @@ public class VariableStack implements Cloneable
   /**
    * Free up the stack frame that was last allocated with
    * {@link #link(int size)}.
+   * <p>
+   *  释放最后分配了{@link #link(int size)}的堆栈帧。
+   * 
    */
   public  void unlink()
   {
@@ -220,6 +300,10 @@ public class VariableStack implements Cloneable
   /**
    * Free up the stack frame that was last allocated with
    * {@link #link(int size)}.
+   * <p>
+   *  释放最后分配了{@link #link(int size)}的堆栈帧。
+   * 
+   * 
    * @param currentFrame The current frame to set to
    * after the unlink.
    */
@@ -233,6 +317,10 @@ public class VariableStack implements Cloneable
    * Set a local variable or parameter in the current stack frame.
    *
    *
+   * <p>
+   *  在当前堆栈帧中设置局部变量或参数。
+   * 
+   * 
    * @param index Local variable index relative to the current stack
    * frame bottom.
    *
@@ -247,6 +335,10 @@ public class VariableStack implements Cloneable
    * Set a local variable or parameter in the specified stack frame.
    *
    *
+   * <p>
+   *  在指定的堆栈框架中设置局部变量或参数。
+   * 
+   * 
    * @param index Local variable index relative to the current stack
    * frame bottom.
    * NEEDSDOC @param stackFrame
@@ -262,6 +354,10 @@ public class VariableStack implements Cloneable
    * Get a local variable or parameter in the current stack frame.
    *
    *
+   * <p>
+   *  获取当前堆栈框架中的局部变量或参数。
+   * 
+   * 
    * @param xctxt The XPath context, which must be passed in order to
    * lazy evaluate variables.
    *
@@ -296,6 +392,10 @@ public class VariableStack implements Cloneable
    * Get a local variable or parameter in the current stack frame.
    *
    *
+   * <p>
+   *  获取当前堆栈框架中的局部变量或参数。
+   * 
+   * 
    * @param index Local variable index relative to the given
    * frame bottom.
    * NEEDSDOC @param frame
@@ -319,6 +419,10 @@ public class VariableStack implements Cloneable
    * Get a local variable or parameter in the current stack frame.
    *
    *
+   * <p>
+   *  获取当前堆栈框架中的局部变量或参数。
+   * 
+   * 
    * @param xctxt The XPath context, which must be passed in order to
    * lazy evaluate variables.
    *
@@ -352,6 +456,10 @@ public class VariableStack implements Cloneable
   /**
    * Tell if a local variable has been set or not.
    *
+   * <p>
+   *  告诉是否设置了局部变量。
+   * 
+   * 
    * @param index Local variable index relative to the current stack
    * frame bottom.
    *
@@ -373,6 +481,10 @@ public class VariableStack implements Cloneable
    * values can tell if they've already been set.  It is important to note that
    * this function has a 1K limitation.
    *
+   * <p>
+   *  使用它清除堆栈中某个部分的变量。这用于清除堆栈的参数部分,以便默认参数值可以告诉它们是否已经设置。重要的是注意这个函数有1K的限制。
+   * 
+   * 
    * @param start The start position, relative to the current local stack frame.
    * @param len The number of slots to be cleared.
    */
@@ -388,6 +500,10 @@ public class VariableStack implements Cloneable
    * Set a global variable or parameter in the global stack frame.
    *
    *
+   * <p>
+   *  在全局堆栈帧中设置全局变量或参数。
+   * 
+   * 
    * @param index Local variable index relative to the global stack frame
    * bottom.
    *
@@ -402,6 +518,10 @@ public class VariableStack implements Cloneable
    * Get a global variable or parameter from the global stack frame.
    *
    *
+   * <p>
+   *  从全局堆栈框架中获取全局变量或参数。
+   * 
+   * 
    * @param xctxt The XPath context, which must be passed in order to
    * lazy evaluate variables.
    *
@@ -429,6 +549,10 @@ public class VariableStack implements Cloneable
    * Get a global variable or parameter from the global stack frame.
    *
    *
+   * <p>
+   *  从全局堆栈框架中获取全局变量或参数。
+   * 
+   * 
    * @param xctxt The XPath context, which must be passed in order to
    * lazy evaluate variables.
    *
@@ -456,6 +580,10 @@ public class VariableStack implements Cloneable
    * Get a variable based on it's qualified name.
    * This is for external use only.
    *
+   * <p>
+   *  基于其限定名称获取变量。这仅供外部使用。
+   * 
+   * 
    * @param xctxt The XPath context, which must be passed in order to
    * lazy evaluate variables.
    *
@@ -513,6 +641,21 @@ public class VariableStack implements Cloneable
       if (null != vvar)
         return getGlobalVariable(xctxt, vvar.getIndex());
     }
+        /* <p>
+        /* com.sun.org.apache.xml.internal.utils.PrefixResolver prefixResolver = xctxt.getNamespaceContext();
+        /* 
+        /*  //获取当前的ElemTemplateElement,它必须作为//前缀解析器推送,然后按照文档顺序向后走,搜索与我们的// qname匹配的xsl：param元素或xsl：variable元素。
+        /* 如果我们达到顶级,使用StylesheetRoot的组成的顶级变量和参数的列表。
+        /* 
+        /*  if(prefixResolver instanceof com.sun.org.apache.xalan.internal.templates.ElemTemplateElement){
+        /* 
+        /*  com.sun.org.apache.xalan.internal.templates.ElemVariable vvar;
+        /* 
+        /*  com.sun.org.apache.xalan.internal.templates.ElemTemplateElement prev =(com.sun.org.apache.xalan.inte
+        /* rnal.templates.ElemTemplateElement)prefixResolver;。
+        /* 
+        /*  if(！(prev instanceof com.sun.org.apache.xalan.internal.templates.Stylesheet)){while(！(prev.getParentNode()instanceof com.sun.org.apache.xalan.internal.templates.Stylesheet) ){com.sun.org.apache.xalan.internal.templates.ElemTemplateElement savedprev = prev;。
+        /* 
     */
 
     throw new javax.xml.transform.TransformerException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_VAR_NOT_RESOLVABLE, new Object[]{qname.toString()})); //"Variable not resolvable: " + qname);

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,18 @@ import org.xml.sax.SAXNotRecognizedException;
  * specific methods to modify the event stream or the configuration
  * requests as they pass through.</p>
  *
+ * <p>
+ *  用于派生XML过滤器的基类。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保证</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p>此类设计为位于{@link org.xml.sax.XMLReader XMLReader}和客户端应用程序的事件处理程序之间。
+ * 默认情况下,它不做任何事情,只是将读取器和事件直接传递到处理程序,但是子类可以重写特定的方法来修改事件流或配置请求,直到它们通过。</p>。
+ * 
+ * 
  * @since SAX 2.0
  * @author David Megginson
  * @see org.xml.sax.XMLFilter
@@ -92,6 +105,13 @@ public class XMLFilterImpl
      * setFeature or setProperty, unless you use this as a pure event
      * consumer rather than as an {@link XMLReader}.</p>
      *
+     * <p>
+     *  构造一个空的XML过滤器,不带父级。
+     * 
+     *  <p>此过滤器不会有父级：您必须在开始解析之前分配父级,或者使用setFeature或setProperty进行任何配置,除非您将其用作纯事件消费者而不是{@link XMLReader}。
+     * < p>。
+     * 
+     * 
      * @see org.xml.sax.XMLReader#setFeature
      * @see org.xml.sax.XMLReader#setProperty
      * @see #setParent
@@ -105,6 +125,10 @@ public class XMLFilterImpl
     /**
      * Construct an XML filter with the specified parent.
      *
+     * <p>
+     *  使用指定的父构造XML过滤器。
+     * 
+     * 
      * @see #setParent
      * @see #getParent
      */
@@ -131,6 +155,14 @@ public class XMLFilterImpl
      * <p>If there is no parent reader set, any attempt to parse
      * or to set or get a feature or property will fail.</p>
      *
+     * <p>
+     *  设置父读取器。
+     * 
+     *  <p>这是{@link org.xml.sax.XMLReader XMLReader},此过滤器将从中获取其事件,并将向其传递其配置请求。父母本身可以是另一个过滤器。</p>
+     * 
+     *  <p>如果没有父级阅读器设置,任何解析或设置或获取功能或属性的尝试都会失败。</p>
+     * 
+     * 
      * @param parent The parent XML reader.
      * @see #getParent
      */
@@ -143,6 +175,10 @@ public class XMLFilterImpl
     /**
      * Get the parent reader.
      *
+     * <p>
+     *  获取父读者。
+     * 
+     * 
      * @return The parent XML reader, or null if none is set.
      * @see #setParent
      */
@@ -163,6 +199,12 @@ public class XMLFilterImpl
      *
      * <p>This will always fail if the parent is null.</p>
      *
+     * <p>
+     *  设置要素的值。
+     * 
+     * <p>如果父项为null,这将总是失败。</p>
+     * 
+     * 
      * @param name The feature name.
      * @param value The requested feature value.
      * @exception org.xml.sax.SAXNotRecognizedException If the feature
@@ -187,6 +229,12 @@ public class XMLFilterImpl
      *
      * <p>This will always fail if the parent is null.</p>
      *
+     * <p>
+     *  查找要素的值。
+     * 
+     *  <p>如果父项为null,这将总是失败。</p>
+     * 
+     * 
      * @param name The feature name.
      * @return The current value of the feature.
      * @exception org.xml.sax.SAXNotRecognizedException If the feature
@@ -211,6 +259,12 @@ public class XMLFilterImpl
      *
      * <p>This will always fail if the parent is null.</p>
      *
+     * <p>
+     *  设置属性的值。
+     * 
+     *  <p>如果父项为null,这将总是失败。</p>
+     * 
+     * 
      * @param name The property name.
      * @param value The requested property value.
      * @exception org.xml.sax.SAXNotRecognizedException If the property
@@ -233,6 +287,10 @@ public class XMLFilterImpl
     /**
      * Look up the value of a property.
      *
+     * <p>
+     *  查找属性的值。
+     * 
+     * 
      * @param name The property name.
      * @return The current value of the property.
      * @exception org.xml.sax.SAXNotRecognizedException If the property
@@ -255,6 +313,10 @@ public class XMLFilterImpl
     /**
      * Set the entity resolver.
      *
+     * <p>
+     *  设置实体解析器。
+     * 
+     * 
      * @param resolver The new entity resolver.
      */
     public void setEntityResolver (EntityResolver resolver)
@@ -266,6 +328,10 @@ public class XMLFilterImpl
     /**
      * Get the current entity resolver.
      *
+     * <p>
+     *  获取当前实体解析器。
+     * 
+     * 
      * @return The current entity resolver, or null if none was set.
      */
     public EntityResolver getEntityResolver ()
@@ -277,6 +343,10 @@ public class XMLFilterImpl
     /**
      * Set the DTD event handler.
      *
+     * <p>
+     *  设置DTD事件处理程序。
+     * 
+     * 
      * @param handler the new DTD handler
      */
     public void setDTDHandler (DTDHandler handler)
@@ -288,6 +358,10 @@ public class XMLFilterImpl
     /**
      * Get the current DTD event handler.
      *
+     * <p>
+     *  获取当前的DTD事件处理程序。
+     * 
+     * 
      * @return The current DTD handler, or null if none was set.
      */
     public DTDHandler getDTDHandler ()
@@ -299,6 +373,10 @@ public class XMLFilterImpl
     /**
      * Set the content event handler.
      *
+     * <p>
+     *  设置内容事件处理程序。
+     * 
+     * 
      * @param handler the new content handler
      */
     public void setContentHandler (ContentHandler handler)
@@ -310,6 +388,10 @@ public class XMLFilterImpl
     /**
      * Get the content event handler.
      *
+     * <p>
+     *  获取内容事件处理程序。
+     * 
+     * 
      * @return The current content handler, or null if none was set.
      */
     public ContentHandler getContentHandler ()
@@ -321,6 +403,10 @@ public class XMLFilterImpl
     /**
      * Set the error event handler.
      *
+     * <p>
+     *  设置错误事件处理程序。
+     * 
+     * 
      * @param handler the new error handler
      */
     public void setErrorHandler (ErrorHandler handler)
@@ -332,6 +418,10 @@ public class XMLFilterImpl
     /**
      * Get the current error event handler.
      *
+     * <p>
+     *  获取当前错误事件处理程序。
+     * 
+     * 
      * @return The current error handler, or null if none was set.
      */
     public ErrorHandler getErrorHandler ()
@@ -343,6 +433,10 @@ public class XMLFilterImpl
     /**
      * Parse a document.
      *
+     * <p>
+     *  解析文档。
+     * 
+     * 
      * @param input The input source for the document entity.
      * @exception org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.
@@ -361,6 +455,10 @@ public class XMLFilterImpl
     /**
      * Parse a document.
      *
+     * <p>
+     *  解析文档。
+     * 
+     * 
      * @param systemId The system identifier as a fully-qualified URI.
      * @exception org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.
@@ -384,6 +482,10 @@ public class XMLFilterImpl
     /**
      * Filter an external entity resolution.
      *
+     * <p>
+     *  过滤外部实体分辨率。
+     * 
+     * 
      * @param publicId The entity's public identifier, or null.
      * @param systemId The entity's system identifier.
      * @return A new InputSource or null for the default.
@@ -413,6 +515,10 @@ public class XMLFilterImpl
     /**
      * Filter a notation declaration event.
      *
+     * <p>
+     *  过滤符号声明事件。
+     * 
+     * 
      * @param name The notation name.
      * @param publicId The notation's public identifier, or null.
      * @param systemId The notation's system identifier, or null.
@@ -431,6 +537,10 @@ public class XMLFilterImpl
     /**
      * Filter an unparsed entity declaration event.
      *
+     * <p>
+     *  过滤未解析的实体声明事件。
+     * 
+     * 
      * @param name The entity name.
      * @param publicId The entity's public identifier, or null.
      * @param systemId The entity's system identifier, or null.
@@ -458,6 +568,10 @@ public class XMLFilterImpl
     /**
      * Filter a new document locator event.
      *
+     * <p>
+     *  过滤新的文档定位器事件。
+     * 
+     * 
      * @param locator The document locator.
      */
     public void setDocumentLocator (Locator locator)
@@ -472,6 +586,10 @@ public class XMLFilterImpl
     /**
      * Filter a start document event.
      *
+     * <p>
+     *  过滤开始文档事件。
+     * 
+     * 
      * @exception org.xml.sax.SAXException The client may throw
      *            an exception during processing.
      */
@@ -487,6 +605,10 @@ public class XMLFilterImpl
     /**
      * Filter an end document event.
      *
+     * <p>
+     *  过滤结束文档事件。
+     * 
+     * 
      * @exception org.xml.sax.SAXException The client may throw
      *            an exception during processing.
      */
@@ -502,6 +624,10 @@ public class XMLFilterImpl
     /**
      * Filter a start Namespace prefix mapping event.
      *
+     * <p>
+     *  过滤开始命名空间前缀映射事件。
+     * 
+     * 
      * @param prefix The Namespace prefix.
      * @param uri The Namespace URI.
      * @exception org.xml.sax.SAXException The client may throw
@@ -519,6 +645,10 @@ public class XMLFilterImpl
     /**
      * Filter an end Namespace prefix mapping event.
      *
+     * <p>
+     *  过滤结束命名空间前缀映射事件。
+     * 
+     * 
      * @param prefix The Namespace prefix.
      * @exception org.xml.sax.SAXException The client may throw
      *            an exception during processing.
@@ -535,6 +665,10 @@ public class XMLFilterImpl
     /**
      * Filter a start element event.
      *
+     * <p>
+     *  过滤开始元素事件。
+     * 
+     * 
      * @param uri The element's Namespace URI, or the empty string.
      * @param localName The element's local name, or the empty string.
      * @param qName The element's qualified (prefixed) name, or the empty
@@ -556,6 +690,10 @@ public class XMLFilterImpl
     /**
      * Filter an end element event.
      *
+     * <p>
+     *  过滤结束元素事件。
+     * 
+     * 
      * @param uri The element's Namespace URI, or the empty string.
      * @param localName The element's local name, or the empty string.
      * @param qName The element's qualified (prefixed) name, or the empty
@@ -575,6 +713,10 @@ public class XMLFilterImpl
     /**
      * Filter a character data event.
      *
+     * <p>
+     *  过滤字符数据事件。
+     * 
+     * 
      * @param ch An array of characters.
      * @param start The starting position in the array.
      * @param length The number of characters to use from the array.
@@ -593,6 +735,10 @@ public class XMLFilterImpl
     /**
      * Filter an ignorable whitespace event.
      *
+     * <p>
+     *  过滤可忽略的空格事件。
+     * 
+     * 
      * @param ch An array of characters.
      * @param start The starting position in the array.
      * @param length The number of characters to use from the array.
@@ -611,6 +757,10 @@ public class XMLFilterImpl
     /**
      * Filter a processing instruction event.
      *
+     * <p>
+     *  过滤处理指令事件。
+     * 
+     * 
      * @param target The processing instruction target.
      * @param data The text following the target.
      * @exception org.xml.sax.SAXException The client may throw
@@ -628,6 +778,10 @@ public class XMLFilterImpl
     /**
      * Filter a skipped entity event.
      *
+     * <p>
+     *  过滤跳过的实体事件。
+     * 
+     * 
      * @param name The name of the skipped entity.
      * @exception org.xml.sax.SAXException The client may throw
      *            an exception during processing.
@@ -650,6 +804,10 @@ public class XMLFilterImpl
     /**
      * Filter a warning event.
      *
+     * <p>
+     *  过滤警告事件。
+     * 
+     * 
      * @param e The warning as an exception.
      * @exception org.xml.sax.SAXException The client may throw
      *            an exception during processing.
@@ -666,6 +824,10 @@ public class XMLFilterImpl
     /**
      * Filter an error event.
      *
+     * <p>
+     *  过滤错误事件。
+     * 
+     * 
      * @param e The error as an exception.
      * @exception org.xml.sax.SAXException The client may throw
      *            an exception during processing.
@@ -682,6 +844,10 @@ public class XMLFilterImpl
     /**
      * Filter a fatal error event.
      *
+     * <p>
+     *  过滤致命错误事件。
+     * 
+     * 
      * @param e The error as an exception.
      * @exception org.xml.sax.SAXException The client may throw
      *            an exception during processing.
@@ -707,6 +873,9 @@ public class XMLFilterImpl
      * <p>Before every parse, check whether the parent is
      * non-null, and re-register the filter for all of the
      * events.</p>
+     * <p>
+     *  设置之前解析。
+     * 
      */
     private void setupParse ()
     {

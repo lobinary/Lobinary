@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,15 @@ import javax.lang.model.element.Name;
  *
  * @jls sections 8.4, 8.6, 8.7, 9.4, and 9.6
  *
+ * <p>
+ *  方法或注释类型元素声明的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  <em> <em> </em> <em> </em> <em> </em>
+ * 
+ *  </em> <em> <em> <em> </em> <em> </em>
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6
@@ -57,6 +67,12 @@ public interface MethodTree extends Tree {
     /**
      * Return an explicit receiver parameter ("this" parameter).
      *
+     * <p>
+     * </pre>
+     * 
+     *  @jls部分8.4,8.6,8.7,9.4和9.6
+     * 
+     * 
      * @return an explicit receiver parameter ("this" parameter)
      * @since 1.8
      */

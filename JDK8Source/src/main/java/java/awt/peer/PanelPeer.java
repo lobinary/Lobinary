@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,9 @@ package java.awt.peer;
  * developers, and developers should not implement peers
  * nor invoke any of the peer methods directly on the peer
  * instances.
+ * <p>
+ *  {@link Panel}的对等接口。这是ContainerPeer的子接口,不会声明任何其他方法,因为Panel只是一个具体的Container。
+ * 
  */
 public interface PanelPeer extends ContainerPeer {
 }

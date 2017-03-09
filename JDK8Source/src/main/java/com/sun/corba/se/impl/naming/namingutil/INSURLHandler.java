@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import java.util.StringTokenizer;
  *  This class is the entry point to parse different types of INS URL's.
  *
  *  @Author Hemanth
+ * <p>
+ *  这个类是解析不同类型的INS URL的入口点。
+ * 
  */
 
 public class INSURLHandler {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import javax.swing.text.*;
 /**
  * HTML table view.
  *
+ * <p>
+ *  HTML表视图。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     View
  */
@@ -44,6 +49,10 @@ import javax.swing.text.*;
     /**
      * Constructs a TableView for the given element.
      *
+     * <p>
+     *  / **为给定元素构造一个TableView。
+     * 
+     * 
      * @param elem the element that this view is responsible for
      */
     public TableView(Element elem) {
@@ -57,6 +66,10 @@ import javax.swing.text.*;
     /**
      * Creates a new table row.
      *
+     * <p>
+     *  创建新表行。
+     * 
+     * 
      * @param elem an element
      * @return the row
      */
@@ -73,6 +86,9 @@ import javax.swing.text.*;
 
     /**
      * The number of columns in the table.
+     * <p>
+     *  表中的列数。
+     * 
      */
     public int getColumnCount() {
         return columnSpans.length;
@@ -82,6 +98,9 @@ import javax.swing.text.*;
      * Fetches the span (width) of the given column.
      * This is used by the nested cells to query the
      * sizes of grid locations outside of themselves.
+     * <p>
+     *  获取给定列的跨度(宽度)。嵌套单元格使用它来查询自己外部的网格位置的大小。
+     * 
      */
     public int getColumnSpan(int col) {
         if (col < columnSpans.length) {
@@ -92,6 +111,9 @@ import javax.swing.text.*;
 
     /**
      * The number of rows in the table.
+     * <p>
+     *  表中的行数。
+     * 
      */
     public int getRowCount() {
         return rows.size();
@@ -100,6 +122,9 @@ import javax.swing.text.*;
     /**
      * Fetch the span of multiple rows.  This includes
      * the border area.
+     * <p>
+     *  获取多行的跨度。这包括边界区域。
+     * 
      */
     public int getMultiRowSpan(int row0, int row1) {
         RowView rv0 = getRow(row0);
@@ -116,6 +141,9 @@ import javax.swing.text.*;
 
     /**
      * Fetches the span (height) of the given row.
+     * <p>
+     *  获取给定行的跨度(高度)。
+     * 
      */
     public int getRowSpan(int row) {
         RowView rv = getRow(row);
@@ -154,6 +182,9 @@ import javax.swing.text.*;
     /**
      * Determines the number of columns occupied by
      * the table cell represented by given element.
+     * <p>
+     *  确定由给定元素表示的表单元占据的列数。
+     * 
      */
     protected int getColumnsOccupied(View v) {
         AttributeSet a = v.getElement().getAttributes();
@@ -175,6 +206,9 @@ import javax.swing.text.*;
     /**
      * Determines the number of rows occupied by
      * the table cell represented by given element.
+     * <p>
+     *  确定由给定元素表示的表单元占用的行数。
+     * 
      */
     protected int getRowsOccupied(View v) {
         AttributeSet a = v.getElement().getAttributes();
@@ -205,6 +239,9 @@ import javax.swing.text.*;
     /**
      * Update the insets, which contain the caption if there
      * is a caption.
+     * <p>
+     *  更新insets,如果有标题,则包含标题。
+     * 
      */
     void updateInsets() {
         short top = (short) painter.getInset(TOP, this);
@@ -226,6 +263,9 @@ import javax.swing.text.*;
 
     /**
      * Update any cached values that come from attributes.
+     * <p>
+     *  更新来自属性的任何缓存值。
+     * 
      */
     protected void setPropertiesFromAttributes() {
         StyleSheet sheet = getStyleSheet();
@@ -259,6 +299,9 @@ import javax.swing.text.*;
      * Fill in the grid locations that are placeholders
      * for multi-column, multi-row, and missing grid
      * locations.
+     * <p>
+     *  填写多列,多行和缺少网格位置的占位符的网格位置。
+     * 
      */
     void updateGrid() {
         if (! gridValid) {
@@ -344,6 +387,9 @@ import javax.swing.text.*;
 
     /**
      * Mark a grid location as filled in for a cells overflow.
+     * <p>
+     *  将网格位置标记为填充以用于单元格溢出。
+     * 
      */
     void addFill(int row, int col) {
         RowView rv = getRow(row);
@@ -355,6 +401,10 @@ import javax.swing.text.*;
     /**
      * Layout the columns to fit within the given target span.
      *
+     * <p>
+     *  布局列以适合给定的目标范围内。
+     * 
+     * 
      * @param targetSpan the given span for total of all the table
      *  columns
      * @param reqs the requirements desired for each column.  This
@@ -389,6 +439,10 @@ import javax.swing.text.*;
      * The calculation of the multi-column distribution is based upon
      * the proportions of the existing column requirements and taking
      * into consideration any constraining maximums.
+     * <p>
+     * 计算每个列的要求。计算以两次通过表的形式完成。首先扫描占用单个列的表格单元格,以确定沿给定轴的最小,最佳和最大跨度的最大值。跨越多个列的表单元格从第一遍排除。进行第二遍以确定是否满足跨越多个列的单元。
+     * 如果不满足列要求,则将多列单元格的需求混合到现有列需求中。多列分布的计算基于现有列要求的比例,并考虑任何约束最大值。
+     * 
      */
     void calculateColumnRequirements(int axis) {
         // clean columnRequirements
@@ -455,6 +509,9 @@ import javax.swing.text.*;
 
     /**
      * check the requirements of a table cell that spans a single column.
+     * <p>
+     *  请检查跨单个列的表单元格的要求。
+     * 
      */
     void checkSingleColumnCell(int axis, int col, View v) {
         SizeRequirements req = columnRequirements[col];
@@ -465,6 +522,9 @@ import javax.swing.text.*;
     /**
      * check the requirements of a table cell that spans multiple
      * columns.
+     * <p>
+     *  请检查跨多个列的表单元格的要求。
+     * 
      */
     void checkMultiColumnCell(int axis, int col, int ncols, View v) {
         // calculate the totals
@@ -484,6 +544,9 @@ import javax.swing.text.*;
             /*
              * the columns that this cell spans need adjustment to fit
              * this table cell.... calculate the adjustments.
+             * <p>
+             *  该单元格跨越的列需要调整以适合此表格单元格....计算调整。
+             * 
              */
             SizeRequirements[] reqs = new SizeRequirements[ncols];
             for (int i = 0; i < ncols; i++) {
@@ -508,6 +571,9 @@ import javax.swing.text.*;
             /*
              * the columns that this cell spans need adjustment to fit
              * this table cell.... calculate the adjustments.
+             * <p>
+             *  该单元格跨越的列需要调整以适合此表格单元格....计算调整。
+             * 
              */
             SizeRequirements[] reqs = new SizeRequirements[ncols];
             for (int i = 0; i < ncols; i++) {
@@ -538,6 +604,11 @@ import javax.swing.text.*;
      * requirements of the columns and then adjust it if the
      * CSS width or height attribute is specified and applicable to
      * the axis.
+     * <p>
+     *  计算短轴的要求。每当需要被更新时(即,通过这个视图传送preferenceChanged),这被超类调用。
+     * <p>
+     *  这被实现来计算要求作为列的需求的总和,然后如果CSS宽度或高度属性被指定并适用于轴,则调整它。
+     * 
      */
     protected SizeRequirements calculateMinorAxisRequirements(int axis, SizeRequirements r) {
         updateGrid();
@@ -609,6 +680,11 @@ import javax.swing.text.*;
      * <p>
      * This is implemented to provide the superclass behavior adjusted for
      * multi-row table cells.
+     * <p>
+     * 计算长轴的要求。每当需要被更新时(即,通过这个视图传送preferenceChanged),这被超类调用。
+     * <p>
+     *  这被实现以提供为多行表格单元调整的超类行为。
+     * 
      */
     protected SizeRequirements calculateMajorAxisRequirements(int axis, SizeRequirements r) {
         updateInsets();
@@ -631,6 +707,12 @@ import javax.swing.text.*;
      * forward to the superclass to actually carry out the layout
      * of the tables rows.
      *
+     * <p>
+     *  执行箱子短轴(即与它代表的轴正交的轴)的布局。布局的结果应该放在给定的数组中,这些数组表示沿着短轴的子项分配。每当布局需要沿着短轴被更新时,这被超类调用。
+     * <p>
+     *  这是实现为调用<a href="#layoutColumns"> layoutColumns </a>方法,然后转发到超类,以实际执行表行的布局。
+     * 
+     * 
      * @param targetSpan the total span given to the view, which
      *  would be used to layout the children
      * @param axis the axis being layed out
@@ -674,6 +756,12 @@ import javax.swing.text.*;
      * the RowIterator and the CSS collapsing tile to layout
      * with border spacing and border collapsing capabilities.
      *
+     * <p>
+     *  执行箱子长轴(即它代表的轴)的布局。布局的结果应该放在给定的数组中,这些数组表示沿着短轴的子项分配。每当布局需要沿着短轴被更新时,这被超类调用。
+     * <p>
+     *  此方法是在表中的表行的布局发生的地方。这个方法被实现来调用使用RowIterator和CSS折叠平铺来布局边界间距和边框折叠功能。
+     * 
+     * 
      * @param targetSpan the total span given to the view, which
      *  would be used to layout the children
      * @param axis the axis being layed out
@@ -710,6 +798,10 @@ import javax.swing.text.*;
      * view the children do not necessarily have a one to one mapping
      * with the child elements.
      *
+     * <p>
+     * 获取表示模型中给定位置的子视图。这被实现为遍历寻找包含给定位置的范围的孩子。在这个视图中,子元素不必具有与子元素的一对一映射。
+     * 
+     * 
      * @param pos  the search position >= 0
      * @param a  the allocation to the table on entry, and the
      *   allocation of the view containing the position on exit
@@ -746,6 +838,9 @@ import javax.swing.text.*;
      * Fetches the attributes to use when rendering.  This is
      * implemented to multiplex the attributes specified in the
      * model with a StyleSheet.
+     * <p>
+     *  获取渲染时要使用的属性。这被实现为将在模型中指定的属性与StyleSheet复用。
+     * 
      */
     public AttributeSet getAttributes() {
         if (attr == null) {
@@ -766,6 +861,11 @@ import javax.swing.text.*;
      * paints all of the rows and lets the rows cull those
      * cells not intersecting the clip region.
      *
+     * <p>
+     *  使用给定的渲染表面和该表面上的区域渲染。这被实现委托给css盒子画家在内部之前绘制边界和背景。超类剔除渲染不直接与剪辑交叉的子元素,并且该行可以具有从其上面的行悬置的单元格。
+     * 该表不使用超类呈现行为,而是绘制所有行,并让行剔除不与剪裁区域相交的单元格。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param allocation the allocated region to render into
      * @see View#paint
@@ -809,6 +909,14 @@ import javax.swing.text.*;
      * the ability to resolve upward through the parents
      * view attributes.
      *
+     * <p>
+     *  为此视图建立父视图。如果父视图正常工作,这保证在任何其他方法之前被调用。
+     * <p>
+     *  这是实现为转发到超类以及调用<a href="#setPropertiesFromAttributes"> setPropertiesFromAttributes </a>方法从css属性设置段落属性
+     * 。
+     * 此时进行调用以确保通过父视图属性向上分辨的能力。
+     * 
+     * 
      * @param parent the new parent, or null if the view is
      *  being removed from a parent it was previously added
      *  to
@@ -829,6 +937,11 @@ import javax.swing.text.*;
      * table row or cell, the request is delegated to the factory
      * produced by the superclass behavior.
      *
+     * <p>
+     * 获取提供视图层次结构的ViewFactory实现。这将用一个实现替换ViewFactory,该实现调用createTableRow和createTableCell方法。
+     * 如果给予工厂的元素不是表行或单元格,则将请求委派给由超类行为生成的工厂。
+     * 
+     * 
      * @return the factory, null if none
      */
     public ViewFactory getViewFactory() {
@@ -844,6 +957,11 @@ import javax.swing.text.*;
      * table row or cell, the request is delegated to the factory
      * passed as an argument.
      *
+     * <p>
+     *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。这将用一个实现替换ViewFactory,该实现调用createTableRow和createTableCell方法。
+     * 如果给予工厂的元素不是表行或单元格,则将请求委派给作为参数传递的工厂。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -862,6 +980,11 @@ import javax.swing.text.*;
      * table row or cell, the request is delegated to the factory
      * passed as an argument.
      *
+     * <p>
+     *  提供通知,说明该视图负责的位置中的文档被删除了。这将用一个实现替换ViewFactory,该实现调用createTableRow和createTableCell方法。
+     * 如果给予工厂的元素不是表行或单元格,则将请求委派给作为参数传递的工厂。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -880,6 +1003,11 @@ import javax.swing.text.*;
      * table row or cell, the request is delegated to the factory
      * passed as an argument.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。这将用一个实现替换ViewFactory,该实现调用createTableRow和createTableCell方法。
+     * 如果给予工厂的元素不是表行或单元格,则将请求委派给作为参数传递的工厂。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -908,6 +1036,9 @@ import javax.swing.text.*;
      * Change the child views.  This is implemented to
      * provide the superclass behavior and invalidate the
      * grid so that rows and columns will be recalculated.
+     * <p>
+     * 更改子视图。这被实现以提供超类行为并且使网格无效,使得行和列将被重新计算。
+     * 
      */
     public void replace(int offset, int length, View[] views) {
         super.replace(offset, length, views);
@@ -921,6 +1052,9 @@ import javax.swing.text.*;
      * views that actually represent pieces of the table.
      * All other factory activity is delegated to the factory
      * returned by the parent of the table.
+     * <p>
+     *  表本身充当实际表示表的各个视图的工厂。所有其他工厂活动都被委派给由表的父代返回的工厂。
+     * 
      */
     public View create(Element elem) {
         Object o = elem.getAttributes().getAttribute(StyleConstants.NameAttribute);
@@ -958,6 +1092,9 @@ import javax.swing.text.*;
      * This has a value of -1 if there is no caption.  The
      * caption lives in the inset area of the table, and is
      * updated with each time the grid is recalculated.
+     * <p>
+     *  如果有字幕,则为字幕视图的索引。如果没有标题,则值为-1。字幕存在于表格的插入区域中,并且每次重新计算网格时更新。
+     * 
      */
     private int captionIndex;
 
@@ -967,6 +1104,9 @@ import javax.swing.text.*;
      * updateGrid().  If this is true, the ColumnIterator
      * will do extra work to calculate relative cell
      * specifications.
+     * <p>
+     *  任何表单元格是否包含相对大小规范?这是每次调用updateGrid()更新。如果这是真的,ColumnIterator将执行额外的工作来计算相对单元格规格。
+     * 
      */
     private boolean relativeCells;
 
@@ -976,6 +1116,9 @@ import javax.swing.text.*;
      * work to adjust the requirements of rows spanned by
      * a single table cell.  This is updated with each call to
      * updateGrid().
+     * <p>
+     *  任何表单元格是否跨多行?如果为true,RowRequirementIterator将执行额外的工作来调整单个表单元格跨越的行的要求。这是每次调用updateGrid()更新。
+     * 
      */
     private boolean multiRowCells;
 
@@ -983,6 +1126,9 @@ import javax.swing.text.*;
     int[] columnOffsets;
     /**
      * SizeRequirements for all the columns.
+     * <p>
+     *  所有列的SizeRequirements。
+     * 
      */
     SizeRequirements totalColumnRequirements;
     SizeRequirements[] columnRequirements;
@@ -1003,6 +1149,9 @@ import javax.swing.text.*;
         /**
          * Disable percentage adjustments which should only apply
          * when calculating layout, not requirements.
+         * <p>
+         *  禁用百分比调整,应仅应用于计算布局,而不是要求。
+         * 
          */
         void disablePercentages() {
             percentages = null;
@@ -1010,6 +1159,9 @@ import javax.swing.text.*;
 
         /**
          * Update percentage adjustments if they are needed.
+         * <p>
+         *  如果需要,请更新百分比调整。
+         * 
          */
         private void updatePercentagesAndAdjustmentWeights(int span) {
             adjustmentWeights = new int[columnRequirements.length];
@@ -1053,6 +1205,9 @@ import javax.swing.text.*;
 
         /**
          * Set the layout arrays to use for holding layout results
+         * <p>
+         *  设置要用于保留布局结果的布局数组
+         * 
          */
         public void setLayoutArrays(int offsets[], int spans[], int targetSpan) {
             this.offsets = offsets;
@@ -1123,12 +1278,18 @@ import javax.swing.text.*;
 
         /**
          * Current column index
+         * <p>
+         *  当前列索引
+         * 
          */
         private int col;
 
         /**
          * percentage values (may be null since there
          * might not be any).
+         * <p>
+         *  百分比值(可以为null,因为可能没有任何值)。
+         * 
          */
         private int[] percentages;
 
@@ -1173,6 +1334,9 @@ import javax.swing.text.*;
          * if not already covered by existing preferences.  This is
          * a no-op if not all of the rows needed (to do this check/fixup)
          * have arrived yet.
+         * <p>
+         * Fixup首选项以适应多行表单元格(如果尚未由现有首选项覆盖)。这是一个无操作,如果不是所有的行需要(做这个检查/ fixup)到目前为止。
+         * 
          */
         void adjustMultiRowSpan(int spanNeeded, int nrows, int rowIndex) {
             if ((rowIndex + nrows) > getCount()) {
@@ -1283,12 +1447,18 @@ import javax.swing.text.*;
 
         /**
          * Current row index
+         * <p>
+         *  当前行索引
+         * 
          */
         private int row;
 
         /**
          * Adjustments to the row requirements to handle multi-row
          * table cells.
+         * <p>
+         *  调整行要求以处理多行表单元格。
+         * 
          */
         private int[] adjustments;
 
@@ -1298,12 +1468,19 @@ import javax.swing.text.*;
 
     /**
      * View of a row in a row-centric table.
+     * <p>
+     *  一行在行为中心的表中的视图。
+     * 
      */
     public class RowView extends BoxView {
 
         /**
          * Constructs a TableView for the given element.
          *
+         * <p>
+         *  构造给定元素的TableView。
+         * 
+         * 
          * @param elem the element that this view is responsible for
          */
         public RowView(Element elem) {
@@ -1326,6 +1503,9 @@ import javax.swing.text.*;
 
         /**
          * The number of columns present in this row.
+         * <p>
+         *  此行中显示的列数。
+         * 
          */
         int getColumnCount() {
             int nfill = 0;
@@ -1342,6 +1522,9 @@ import javax.swing.text.*;
          * Fetches the attributes to use when rendering.  This is
          * implemented to multiplex the attributes specified in the
          * model with a StyleSheet.
+         * <p>
+         *  获取渲染时要使用的属性。这被实现为将在模型中指定的属性与StyleSheet复用。
+         * 
          */
         public AttributeSet getAttributes() {
             return attr;
@@ -1372,6 +1555,11 @@ import javax.swing.text.*;
          * needs to propagate a preferenceChanged so that it will
          * recalculate the multi-row cell.
          *
+         * <p>
+         *  这由孩子调用以指示其首选跨度已更改。这被实现为执行超类行为以及尝试确定具有多行单元格的行是否挂在该行上。
+         * 如果多行单元格覆盖此行,它还需要传播preferenceChanged,以便它将重新计算多行单元格。
+         * 
+         * 
          * @param child the child view
          * @param width true if the width preference should change
          * @param height true if the height preference should change
@@ -1455,6 +1643,10 @@ import javax.swing.text.*;
          * painter to paint the border and background prior to the
          * interior.
          *
+         * <p>
+         *  使用给定的渲染表面和该表面上的区域渲染。这被实现委托给css盒子画家在内部之前绘制边界和背景。
+         * 
+         * 
          * @param g the rendering surface to use
          * @param allocation the allocated region to render into
          * @see View#paint
@@ -1469,6 +1661,9 @@ import javax.swing.text.*;
          * Change the child views.  This is implemented to
          * provide the superclass behavior and invalidate the
          * grid so that rows and columns will be recalculated.
+         * <p>
+         *  更改子视图。这被实现以提供超类行为并且使网格无效,使得行和列将被重新计算。
+         * 
          */
         public void replace(int offset, int length, View[] views) {
             super.replace(offset, length, views);
@@ -1482,6 +1677,9 @@ import javax.swing.text.*;
          * requirements for all the rows that have multi-row cells spanning
          * them.  This method updates the multi-row flag that indicates that
          * this row and rows below need additional consideration.
+         * <p>
+         * 计算表行的高度要求。对于该计算不考虑多行单元的要求。表本身将检查和调整跨多行单元格的所有行的行要求。此方法更新多行标志,指示此行和下面的行需要额外考虑。
+         * 
          */
         protected SizeRequirements calculateMinorAxisRequirements(int axis, SizeRequirements r) {
 //          return super.calculateMinorAxisRequirements(axis, r);
@@ -1522,6 +1720,12 @@ import javax.swing.text.*;
          * width for the table, and to give cells that span multiple columns
          * the multi-column span.
          *
+         * <p>
+         *  执行箱子长轴(即它代表的轴)的布局。布局的结果应该放在给定的数组中,这些数组表示沿着长轴的子项的分配。
+         * <p>
+         *  这被重新实现,以给每个子表达表的列宽度的跨度,并且给予跨多个列的单元格多列跨度。
+         * 
+         * 
          * @param targetSpan the total span given to the view, which
          *  would be used to layout the children
          * @param axis the axis being layed out
@@ -1573,6 +1777,12 @@ import javax.swing.text.*;
          * This is implemented to delegate to the superclass, then adjust
          * the span for any cell that spans multiple rows.
          *
+         * <p>
+         *  执行箱子短轴(即与它代表的轴正交的轴)的布局。布局的结果应该放在给定的数组中,这些数组表示沿着短轴的子项分配。每当布局需要沿着短轴被更新时,这被超类调用。
+         * <p>
+         *  这是实现委托到超类,然后调整跨越多行的任何单元格的跨度。
+         * 
+         * 
          * @param targetSpan the total span given to the view, which
          *  would be used to layout the children
          * @param axis the axis being layed out
@@ -1609,6 +1819,10 @@ import javax.swing.text.*;
          * Determines the resizability of the view along the
          * given axis.  A value of 0 or less is not resizable.
          *
+         * <p>
+         *  确定沿给定轴的视图的可重新调整性。值为0或更小不可调整大小。
+         * 
+         * 
          * @param axis may be either View.X_AXIS or View.Y_AXIS
          * @return the resize weight
          * @exception IllegalArgumentException for an invalid axis
@@ -1624,6 +1838,10 @@ import javax.swing.text.*;
          * view the children do not necessarily have a one to one mapping
          * with the child elements.
          *
+         * <p>
+         * 获取表示模型中给定位置的子视图。这被实现为遍历寻找包含给定位置的范围的孩子。在这个视图中,子元素不必具有与子元素的一对一映射。
+         * 
+         * 
          * @param pos  the search position >= 0
          * @param a  the allocation to the table on entry, and the
          *   allocation of the view containing the position on exit
@@ -1656,6 +1874,9 @@ import javax.swing.text.*;
 
         /**
          * Update any cached values that come from attributes.
+         * <p>
+         *  更新来自属性的任何缓存值。
+         * 
          */
         void setPropertiesFromAttributes() {
             StyleSheet sheet = getStyleSheet();
@@ -1671,17 +1892,26 @@ import javax.swing.text.*;
 
         /**
          * The row index within the overall grid
+         * <p>
+         *  整个网格中的行索引
+         * 
          */
         int rowIndex;
 
         /**
          * The view index (for row index to view index conversion).
          * This is set by the updateGrid method.
+         * <p>
+         *  视图索引(用于查看索引转换的行索引)。这是由updateGrid方法设置的。
+         * 
          */
         int viewIndex;
 
         /**
          * Does this table row have cells that span multiple rows?
+         * <p>
+         *  此表行是否有跨多行的单元格?
+         * 
          */
         boolean multiRowCells;
 
@@ -1690,12 +1920,19 @@ import javax.swing.text.*;
     /**
      * Default view of an html table cell.  This needs to be moved
      * somewhere else.
+     * <p>
+     *  html表单元格的默认视图。这需要移动到别的地方。
+     * 
      */
     class CellView extends BlockView {
 
         /**
          * Constructs a TableCell for the given element.
          *
+         * <p>
+         *  构造给定元素的TableCell。
+         * 
+         * 
          * @param elem the element that this view is responsible for
          */
         public CellView(Element elem) {
@@ -1715,6 +1952,12 @@ import javax.swing.text.*;
          * was needed, the offsets are adjusted to align the children
          * (i.e. position according to the html valign attribute).
          *
+         * <p>
+         *  执行箱子长轴(即它代表的轴)的布局。布局的结果应该放在给定的数组中,这些数组表示沿着长轴的子项的分配。当布局可能已更改时,超类将重新计算子视图的位置。
+         * <p>
+         *  这是实现委托到超类来平铺孩子。如果目标跨度大于需要的值,则调整偏移以对齐子项(即,根据html valign属性的位置)。
+         * 
+         * 
          * @param targetSpan the total span given to the view, which
          *  would be used to layout the children
          * @param axis the axis being layed out
@@ -1770,6 +2013,10 @@ import javax.swing.text.*;
          * indicate the maximum size is very large (i.e. the cell
          * is willing to expend to occupy the full height of the row).
          *
+         * <p>
+         *  计算沿主轴所需的要求。每当需要被更新时(即,通过这个视图传送preferenceChanged),这被超类调用。
+         * <p>
+         * 
          * @param axis the axis being layed out.
          * @param r the requirements to fill in.  If null, a new one
          *  should be allocated.

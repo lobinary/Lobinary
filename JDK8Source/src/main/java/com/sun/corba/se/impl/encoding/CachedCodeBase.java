@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,12 @@ import com.sun.corba.se.spi.orb.ORB;
  *         RepId to superclass type list
  *
  * Needs cache management.
+ * <p>
+ *  为读取端提供每个连接缓存的信息,通过调用远程CodeBase获得。
+ * 
+ *  以前,大多数是在IIOPConnection。
+ * 
+ *  特性：延迟缓存创建,除非使用推迟远程调用直到必要处理从IOR创建obj ref维护以下映射的缓存：CodeBase IOR到obj ref(global)RepId到实现URL RepId到远程FVD
  */
 public class CachedCodeBase extends _CodeBaseImplBase
 {

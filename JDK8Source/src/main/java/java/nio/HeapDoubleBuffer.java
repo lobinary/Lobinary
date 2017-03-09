@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ package java.nio;
 
 
 
+ * <p>
+ *  读/写HeapDoubleBuffer。
+ * 
  */
 
 class HeapDoubleBuffer
@@ -50,6 +54,9 @@ class HeapDoubleBuffer
     protected final double[] hb;
     protected final int offset;
 
+    /* <p>
+    /*  protected final double [] hb; protected final int offset;
+    /* 
     */
 
     HeapDoubleBuffer(int cap, int lim) {            // package-private
@@ -58,6 +65,9 @@ class HeapDoubleBuffer
         /*
         hb = new double[cap];
         offset = 0;
+        /* <p>
+        /*  hb = new double [cap]; offset = 0;
+        /* 
         */
 
 
@@ -71,6 +81,9 @@ class HeapDoubleBuffer
         /*
         hb = buf;
         offset = 0;
+        /* <p>
+        /*  hb = buf; offset = 0;
+        /* 
         */
 
 
@@ -87,6 +100,8 @@ class HeapDoubleBuffer
         /*
         hb = buf;
         offset = off;
+        /* <p>
+        /*  hb = buf; offset = off;
         */
 
 

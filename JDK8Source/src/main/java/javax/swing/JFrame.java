@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -106,6 +107,43 @@ import javax.accessibility.AccessibleStateSet;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  扩展版本的<code> java.awt.Frame </code>,增加了对JFC / Swing组件架构的支持。
+ * 您可以在<em> Java教程</em>中的<a href ="https://docs.oracle.com/javase/tutorial一节中找到有关使用<code> JFrame </code>
+ * 的面向任务的文档/uiswing/components/frame.html">如何制作框架</a>。
+ *  扩展版本的<code> java.awt.Frame </code>,增加了对JFC / Swing组件架构的支持。
+ * 
+ * <p>
+ *  <code> JFrame </code>类与<code> Frame </code>稍有不兼容。
+ * 像所有其他JFC / Swing顶级容器一样,<code> JFrame </code>包含一个<code> JRootPane </code>作为它的唯一的孩子。
+ * 根窗格提供的<b>内容窗格</b>应该包含由<code> JFrame </code>显示的所有非菜单组件。这与AWT <code> Frame </code>案例不同。
+ * 为方便起见,此类的{@code add},{@code remove}和{@code setLayout}方法被覆盖,因此它们将调用委派给{@code ContentPane}的相应方法。
+ * 例如,您可以将子组件添加到框架,如下所示：。
+ * <pre>
+ *  frame.add(child);
+ * </pre>
+ * 并且孩子将被添加到contentPane。内容窗格将始终为非空。尝试将其设置为null将导致JFrame抛出异常。默认内容窗格将设置一个BorderLayout管理器。
+ * 有关添加,删除和设置<code> JFrame </code>的<code> LayoutManager </code>的详细信息,请参阅{@link javax.swing.RootPaneContainer}
+ * 。
+ * 并且孩子将被添加到contentPane。内容窗格将始终为非空。尝试将其设置为null将导致JFrame抛出异常。默认内容窗格将设置一个BorderLayout管理器。
+ * <p>
+ *  与<code> Frame </code>不同,<code> JFrame </code>有一些用户尝试关闭窗口时如何响应的概念。默认行为是在用户关闭窗口时简单地隐藏JFrame。
+ * 要更改默认行为,请调用{@link #setDefaultCloseOperation}方法。
+ * 要使<code> JFrame </code>的行为与<code> Frame </code>实例相同,请使用<code> setDefaultCloseOperation(WindowConstant
+ * s.DO_NOTHING_ON_CLOSE)</code>。
+ * 要更改默认行为,请调用{@link #setDefaultCloseOperation}方法。
+ * <p>
+ *  有关内容窗格和根窗格提供的其他功能的详细信息,请参见<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/toplevel.html">
+ * 使用顶级容器</span> a>在Java教程</em>中。
+ * <p>
+ *  在多屏幕环境中,您可以在其他屏幕设备上创建<code> JFrame </code>。有关详细信息,请参阅{@link java.awt.Frame}。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see JRootPane
  * @see #setDefaultCloseOperation
  * @see java.awt.event.WindowListener#windowClosing
@@ -131,6 +169,11 @@ public class JFrame  extends Frame implements WindowConstants,
      * a <code>SecurityException</code> may be thrown.
      * It is recommended you only use this in an application.
      * <p>
+     * <p>
+     *  退出应用程序默认窗口关闭操作。如果一个窗口被设置为关闭操作并且在一个applet中被关闭,那么可能会抛出一个<code> SecurityException </code>。
+     * 建议您只在应用程序中使用它。
+     * <p>
+     * 
      * @since 1.3
      */
     public static final int EXIT_ON_CLOSE = 3;
@@ -138,6 +181,9 @@ public class JFrame  extends Frame implements WindowConstants,
     /**
      * Key into the AppContext, used to check if should provide decorations
      * by default.
+     * <p>
+     *  Key进入AppContext,用于检查是否应该默认提供装饰。
+     * 
      */
     private static final Object defaultLookAndFeelDecoratedKey =
             new StringBuffer("JFrame.defaultLookAndFeelDecorated");
@@ -146,6 +192,9 @@ public class JFrame  extends Frame implements WindowConstants,
 
     /**
      * The <code>TransferHandler</code> for this frame.
+     * <p>
+     *  此框架的<code> TransferHandler </code>。
+     * 
      */
     private TransferHandler transferHandler;
 
@@ -155,6 +204,11 @@ public class JFrame  extends Frame implements WindowConstants,
      * and optional <code>menuBar</code> for this frame, as well as the
      * <code>glassPane</code>.
      *
+     * <p>
+     *  管理此框架的<code> contentPane </code>和可选<code> menuBar </code>以及<code> glassPane </code>的<code> JRootPane
+     *  </code>实例。
+     * 
+     * 
      * @see JRootPane
      * @see RootPaneContainer
      */
@@ -165,6 +219,11 @@ public class JFrame  extends Frame implements WindowConstants,
      * will be forwarded to the <code>contentPane</code>. This is initially
      * false, but is set to true when the <code>JFrame</code> is constructed.
      *
+     * <p>
+     *  如果为true,那么对<code> add </code>和<code> setLayout </code>的调用将被转发到<code> contentPane </code>。
+     * 这最初是false,但在构建<code> JFrame </code>时设置为true。
+     * 
+     * 
      * @see #isRootPaneCheckingEnabled
      * @see #setRootPaneCheckingEnabled
      * @see javax.swing.RootPaneContainer
@@ -178,6 +237,12 @@ public class JFrame  extends Frame implements WindowConstants,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  构造一个最初不可见的新框架。
+     * <p>
+     *  此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true.
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -198,6 +263,12 @@ public class JFrame  extends Frame implements WindowConstants,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  在屏幕设备的指定<code> GraphicsConfiguration </code>中创建<code>框架</code>和空白标题。
+     * <p>
+     * 此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @param gc the <code>GraphicsConfiguration</code> that is used
      *          to construct the new <code>Frame</code>;
      *          if <code>gc</code> is <code>null</code>, the system
@@ -221,6 +292,12 @@ public class JFrame  extends Frame implements WindowConstants,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  使用指定的标题创建一个新的,初始不可见的<code> Frame </code>。
+     * <p>
+     *  此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @param title the title for the frame
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true.
@@ -241,6 +318,12 @@ public class JFrame  extends Frame implements WindowConstants,
      * This constructor sets the component's locale property to the value
      * returned by <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     *  使用指定的标题和指定的屏幕设备的<code> GraphicsConfiguration </code>创建<code> JFrame </code>。
+     * <p>
+     *  此构造函数将组件的locale属性设置为<code> JComponent.getDefaultLocale </code>返回的值。
+     * 
+     * 
      * @param title the title to be displayed in the
      *          frame's border. A <code>null</code> value is treated as
      *          an empty string, "".
@@ -281,6 +364,9 @@ public class JFrame  extends Frame implements WindowConstants,
     /**
      * Called by the constructor methods to create the default
      * <code>rootPane</code>.
+     * <p>
+     *  通过构造方法调用来创建默认的<code> rootPane </code>。
+     * 
      */
     protected JRootPane createRootPane() {
         JRootPane rp = new JRootPane();
@@ -297,6 +383,10 @@ public class JFrame  extends Frame implements WindowConstants,
      * Hides the window or disposes of it, as specified by the setting
      * of the <code>defaultCloseOperation</code> property.
      *
+     * <p>
+     *  处理在此组件上发生的窗口事件。根据<code> defaultCloseOperation </code>属性的设置指定隐藏窗口或处理窗口。
+     * 
+     * 
      * @param  e  the window event
      * @see    #setDefaultCloseOperation
      * @see    java.awt.Window#processWindowEvent
@@ -362,6 +452,29 @@ public class JFrame  extends Frame implements WindowConstants,
      * terminate.  See <a href="../../java/awt/doc-files/AWTThreadIssues.html">
      * AWT Threading Issues</a> for more information.
      *
+     * <p>
+     *  设置当用户在此帧上启动"关闭"时默认发生的操作。您必须指定以下选项之一：<br> <br>
+     * <ul>
+     *  <li> <code> DO_NOTHING_ON_CLOSE </code>(在<code> WindowConstants </code>中定义)：不要做任何事情;要求程序处理注册的<code> 
+     * WindowListener </code>对象的<code> windowClosing </code>方法中的操作。
+     * 
+     *  <li> <code> HIDE_ON_CLOSE </code>(在<code> WindowConstants </code>中定义)：在调用任何注册的<code> WindowListener 
+     * </code>对象后自动隐藏框架。
+     * 
+     * <li> <code> DISPOSE_ON_CLOSE </code>(在<code> WindowConstants </code>中定义)：在调用任何注册的<code> WindowListene
+     * r </code>对象后自动隐藏和处理框架。
+     * 
+     *  <li> <code> EXIT_ON_CLOSE </code>(在<code> JFrame </code>中定义)：使用<code> System </code> <code> exit </code>
+     * 方法退出应用程序。
+     * 仅在应用程序中使用它。
+     * </ul>
+     * <p>
+     *  默认情况下,该值设置为<code> HIDE_ON_CLOSE </code>。对此属性的值的更改导致触发属性更改事件,属性名称为"defaultCloseOperation"。
+     * <p>
+     *  <b>注意</b>：当处理Java虚拟机(VM)中的最后一个可显示窗口时,VM可能终止。
+     * 有关详细信息,请参见<a href="../../java/awt/doc-files/AWTThreadIssues.html"> AWT线程问题</a>。
+     * 
+     * 
      * @param operation the operation which should be performed when the
      *        user closes the frame
      * @exception IllegalArgumentException if defaultCloseOperation value
@@ -410,6 +523,10 @@ public class JFrame  extends Frame implements WindowConstants,
     * Returns the operation that occurs when the user
     * initiates a "close" on this frame.
     *
+    * <p>
+    *  返回用户在此框架上启动"关闭"时发生的操作。
+    * 
+    * 
     * @return an integer indicating the window-close operation
     * @see #setDefaultCloseOperation
     */
@@ -438,6 +555,20 @@ public class JFrame  extends Frame implements WindowConstants,
      * How to Use Drag and Drop and Data Transfer</a>, a section in
      * <em>The Java Tutorial</em>, for more information.
      *
+     * <p>
+     *  设置{@code transferHandler}属性,这是一种支持将数据传输到此组件的机制。如果组件不支持数据传输操作,请使用{@code null}。
+     * <p>
+     *  如果系统属性{@code suppressSwingDropSupport}是{@code false}(默认值),并且此组件上的当前放置目标是{@code null}或不是用户设置放置目标,则此方法
+     * 将更改放置目标如下所示：如果{@code newHandler}是{@code null},它将清除放置目标。
+     * 如果不是{@code null},它会安装一个新的{@code DropTarget}。
+     * <p>
+     * 注意：与{@code JFrame}结合使用时,{@code TransferHandler}仅提供数据导入功能,因为数据导出相关方法目前类型为{@code JComponent}。
+     * <p>
+     *  请参见
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/dnd/index.html">
+     *  如何使用拖放和数据传输</a>,有关更多信息,请参阅<em> Java教程</em>中的一节。
+     * 
+     * 
      * @param newHandler the new {@code TransferHandler}
      *
      * @see TransferHandler
@@ -460,6 +591,10 @@ public class JFrame  extends Frame implements WindowConstants,
     /**
      * Gets the <code>transferHandler</code> property.
      *
+     * <p>
+     *  获取<code> transferHandler </code>属性。
+     * 
+     * 
      * @return the value of the <code>transferHandler</code> property
      *
      * @see TransferHandler
@@ -474,6 +609,10 @@ public class JFrame  extends Frame implements WindowConstants,
      * Just calls <code>paint(g)</code>.  This method was overridden to
      * prevent an unnecessary call to clear the background.
      *
+     * <p>
+     *  只需调用<code> paint(g)</code>。此方法被覆盖,以防止不必要的调用清除背景。
+     * 
+     * 
      * @param g the Graphics context in which to paint
      */
     public void update(Graphics g) {
@@ -482,6 +621,10 @@ public class JFrame  extends Frame implements WindowConstants,
 
    /**
     * Sets the menubar for this frame.
+    * <p>
+    *  设置此框架的菜单栏。
+    * 
+    * 
     * @param menubar the menubar being placed in the frame
     *
     * @see #getJMenuBar
@@ -496,6 +639,10 @@ public class JFrame  extends Frame implements WindowConstants,
 
    /**
     * Returns the menubar set on this frame.
+    * <p>
+    *  返回此框架上的菜单集。
+    * 
+    * 
     * @return the menubar for this frame
     *
     * @see #setJMenuBar
@@ -508,6 +655,10 @@ public class JFrame  extends Frame implements WindowConstants,
      * Returns whether calls to <code>add</code> and
      * <code>setLayout</code> are forwarded to the <code>contentPane</code>.
      *
+     * <p>
+     *  返回是否将对<code> add </code>和<code> setLayout </code>的调用转发到<code> contentPane </code>。
+     * 
+     * 
      * @return true if <code>add</code> and <code>setLayout</code>
      *         are forwarded; false otherwise
      *
@@ -525,6 +676,10 @@ public class JFrame  extends Frame implements WindowConstants,
      * Sets whether calls to <code>add</code> and
      * <code>setLayout</code> are forwarded to the <code>contentPane</code>.
      *
+     * <p>
+     *  设置是否将对<code> add </code>和<code> setLayout </code>的调用转发到<code> contentPane </code>。
+     * 
+     * 
      * @param enabled  true if <code>add</code> and <code>setLayout</code>
      *        are forwarded, false if they should operate directly on the
      *        <code>JFrame</code>.
@@ -550,6 +705,11 @@ public class JFrame  extends Frame implements WindowConstants,
      * of the frame, refer to {@link javax.swing.RootPaneContainer} for
      * details.
      *
+     * <p>
+     *  添加指定的子<code> Component </code>。将覆盖此方法以有条件地将调用转发到<code> contentPane </code>。
+     * 默认情况下,将子代添加到<code> contentPane </code>而不是框架中,有关详细信息,请参阅{@link javax.swing.RootPaneContainer}。
+     * 
+     * 
      * @param comp the component to be enhanced
      * @param constraints the constraints to be respected
      * @param index the index
@@ -578,6 +738,11 @@ public class JFrame  extends Frame implements WindowConstants,
      * <code>comp</code> is not a child of the <code>JFrame</code> or
      * <code>contentPane</code>.
      *
+     * <p>
+     *  从容器中删除指定的组件。如果<code> comp </code>不是<code> rootPane </code>,这将转发到<code> contentPane </code>的调用。
+     * 如果<code> comp </code>不是<code> JFrame </code>或<code> contentPane </code>的子级,则此操作无效。
+     * 
+     * 
      * @param comp the component to be removed
      * @throws NullPointerException if <code>comp</code> is null
      * @see #add
@@ -599,6 +764,11 @@ public class JFrame  extends Frame implements WindowConstants,
      * Refer to {@link javax.swing.RootPaneContainer} for
      * more information.
      *
+     * <p>
+     * 设置<code> LayoutManager </code>。重写以有条件地将调用转发到<code> contentPane </code>。
+     * 有关详细信息,请参阅{@link javax.swing.RootPaneContainer}。
+     * 
+     * 
      * @param manager the <code>LayoutManager</code>
      * @see #setRootPaneCheckingEnabled
      * @see javax.swing.RootPaneContainer
@@ -615,6 +785,10 @@ public class JFrame  extends Frame implements WindowConstants,
 
     /**
      * Returns the <code>rootPane</code> object for this frame.
+     * <p>
+     *  返回此框架的<code> rootPane </code>对象。
+     * 
+     * 
      * @return the <code>rootPane</code> property
      *
      * @see #setRootPane
@@ -628,6 +802,10 @@ public class JFrame  extends Frame implements WindowConstants,
     /**
      * Sets the <code>rootPane</code> property.
      * This method is called by the constructor.
+     * <p>
+     *  设置<code> rootPane </code>属性。此方法由构造函数调用。
+     * 
+     * 
      * @param root the <code>rootPane</code> object for this frame
      *
      * @see #getRootPane
@@ -656,6 +834,9 @@ public class JFrame  extends Frame implements WindowConstants,
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setIconImage(Image image) {
         super.setIconImage(image);
@@ -663,6 +844,10 @@ public class JFrame  extends Frame implements WindowConstants,
 
     /**
      * Returns the <code>contentPane</code> object for this frame.
+     * <p>
+     *  返回此框架的<code> contentPane </code>对象。
+     * 
+     * 
      * @return the <code>contentPane</code> property
      *
      * @see #setContentPane
@@ -681,6 +866,13 @@ public class JFrame  extends Frame implements WindowConstants,
      * content pane. If you replace the content pane it is recommended you
      * replace it with an opaque <code>JComponent</code>.
      *
+     * <p>
+     *  设置<code> contentPane </code>属性。此方法由构造函数调用。
+     * <p>
+     *  Swing的绘制架构需要在包含层次结构中有一个不透明的<code> JComponent </code>。这通常由内容窗格提供。
+     * 如果替换内容窗格,建议您将其替换为不透明的<code> JComponent </code>。
+     * 
+     * 
      * @param contentPane the <code>contentPane</code> object for this frame
      *
      * @exception java.awt.IllegalComponentStateException (a runtime
@@ -700,6 +892,10 @@ public class JFrame  extends Frame implements WindowConstants,
 
     /**
      * Returns the <code>layeredPane</code> object for this frame.
+     * <p>
+     *  返回此框架的<code> layeredPane </code>对象。
+     * 
+     * 
      * @return the <code>layeredPane</code> property
      *
      * @see #setLayeredPane
@@ -712,6 +908,10 @@ public class JFrame  extends Frame implements WindowConstants,
     /**
      * Sets the <code>layeredPane</code> property.
      * This method is called by the constructor.
+     * <p>
+     *  设置<code> layeredPane </code>属性。此方法由构造函数调用。
+     * 
+     * 
      * @param layeredPane the <code>layeredPane</code> object for this frame
      *
      * @exception java.awt.IllegalComponentStateException (a runtime
@@ -729,6 +929,10 @@ public class JFrame  extends Frame implements WindowConstants,
 
     /**
      * Returns the <code>glassPane</code> object for this frame.
+     * <p>
+     *  返回此框架的<code> glassPane </code>对象。
+     * 
+     * 
      * @return the <code>glassPane</code> property
      *
      * @see #setGlassPane
@@ -741,6 +945,10 @@ public class JFrame  extends Frame implements WindowConstants,
     /**
      * Sets the <code>glassPane</code> property.
      * This method is called by the constructor.
+     * <p>
+     *  设置<code> glassPane </code>属性。此方法由构造函数调用。
+     * 
+     * 
      * @param glassPane the <code>glassPane</code> object for this frame
      *
      * @see #getGlassPane
@@ -757,6 +965,10 @@ public class JFrame  extends Frame implements WindowConstants,
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     public Graphics getGraphics() {
@@ -769,6 +981,10 @@ public class JFrame  extends Frame implements WindowConstants,
      * <code>time</code> milliseconds.  Refer to <code>RepaintManager</code>
      * for details on how the repaint is handled.
      *
+     * <p>
+     *  在<code> time </code>毫秒内重新绘制此组件的指定矩形。有关如何处理重绘的详细信息,请参阅<code> RepaintManager </code>。
+     * 
+     * 
      * @param     time   maximum time in milliseconds before update
      * @param     x    the <i>x</i> coordinate
      * @param     y    the <i>y</i> coordinate
@@ -806,6 +1022,20 @@ public class JFrame  extends Frame implements WindowConstants,
      *    frame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
      * </pre>
      *
+     * <p>
+     * 提供关于新创建的<code> JFrame </code>是否应该具有由当前外观和感觉提供的窗口装饰(例如边框,窗口小部件关闭窗口,标题...)的提示。
+     * 如果<code> defaultLookAndFeelDecorated </code>为true,当前<code> LookAndFeel </code>支持提供窗口装饰,并且当前窗口管理器支持未装饰
+     * 的窗口,则新创建的<code> JFrame </code>它们的窗口装饰由当前<code> LookAndFeel </code>提供。
+     * 提供关于新创建的<code> JFrame </code>是否应该具有由当前外观和感觉提供的窗口装饰(例如边框,窗口小部件关闭窗口,标题...)的提示。
+     * 否则,新创建的<code> JFrame </code>将具有由当前窗口管理器提供的窗口装饰。
+     * <p>
+     *  您可以通过执行以下操作在单个JFrame上获得相同的效果：
+     * <pre>
+     *  JFrame frame = new JFrame(); frame.setUndecorated(true); frame.getRootPane()。
+     * setWindowDecorationStyle(JRootPane.FRAME);。
+     * </pre>
+     * 
+     * 
      * @param defaultLookAndFeelDecorated A hint as to whether or not current
      *        look and feel should provide window decorations
      * @see javax.swing.LookAndFeel#getSupportsWindowDecorations
@@ -825,6 +1055,10 @@ public class JFrame  extends Frame implements WindowConstants,
      * Window decorations provided by the current look and feel. This is only
      * a hint, as certain look and feels may not support this feature.
      *
+     * <p>
+     *  如果新创建的<code> JFrame </code>应该具有由当前外观提供的窗口装饰,则返回true。这只是一个提示,因为某些外观和感觉可能不支持此功能。
+     * 
+     * 
      * @return true if look and feel should provide Window decorations.
      * @since 1.4
      */
@@ -845,6 +1079,11 @@ public class JFrame  extends Frame implements WindowConstants,
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JFrame </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JFrame</code>
      */
     protected String paramString() {
@@ -884,6 +1123,11 @@ public class JFrame  extends Frame implements WindowConstants,
      * AccessibleJFrame.
      * A new AccessibleJFrame instance is created if necessary.
      *
+     * <p>
+     * 获取与此JFrame关联的AccessibleContext。对于JFrames,AccessibleContext采用AccessibleJFrame的形式。
+     * 如果需要,将创建一个新的AccessibleJFrame实例。
+     * 
+     * 
      * @return an AccessibleJFrame that serves as the
      *         AccessibleContext of this JFrame
      */
@@ -899,6 +1143,9 @@ public class JFrame  extends Frame implements WindowConstants,
      * <code>JFrame</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to frame user-interface
      * elements.
+     * <p>
+     *  此类实现<code> JFrame </code>类的辅助功能支持。它提供了适用于框架用户界面元素的Java辅助功能API的实现。
+     * 
      */
     protected class AccessibleJFrame extends AccessibleAWTFrame {
 
@@ -906,6 +1153,10 @@ public class JFrame  extends Frame implements WindowConstants,
         /**
          * Get the accessible name of this object.
          *
+         * <p>
+         *  获取此对象的可访问名称。
+         * 
+         * 
          * @return the localized name of the object -- can be null if this
          * object does not have a name
          */
@@ -924,6 +1175,9 @@ public class JFrame  extends Frame implements WindowConstants,
         /**
          * Get the state of this object.
          *
+         * <p>
+         *  获取此对象的状态。
+         * 
          * @return an instance of AccessibleStateSet containing the current
          * state set of the object
          * @see AccessibleState

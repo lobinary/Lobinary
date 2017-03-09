@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -150,6 +151,67 @@ import com.sun.security.auth.UnixNumericGroupPrincipal;
  *                  have completed.
  * </pre>
  *
+ * <p>
+ *  <p>模块提示输入用户名和密码,然后根据JNDI下配置的目录服务中存储的密码验证密码。
+ * 
+ *  <p>此<code> LoginModule </code>与任何一致的JNDI服务提供商进行互操作。
+ * 要指示此<code> LoginModule </code>使用特定的JNDI服务提供者,必须在此<code> LoginModule </code>的登录<code> Configuration </code>
+ * 中指定两个选项。
+ *  <p>此<code> LoginModule </code>与任何一致的JNDI服务提供商进行互操作。
+ * <pre>
+ *  user.provider.url = <b> name_service_url </b> group.provider.url = <b> name_service_url </b>
+ * </pre>
+ * 
+ *  <b> name_service_url </b>指定此<code> LoginModule </code>可以访问相关用户和组信息的目录服务和路径。
+ * 因为<code> LoginModule </code>只执行一级搜索以找到相关的用户信息,所以<code> URL </code>必须指向上一级目录,用户和组信息存储在目录服务。
+ * 例如,要指示此<code> LoginModule </code>联系NIS服务器,必须指定以下URL：。
+ * <pre>
+ *  user.provider.url ="nis：// <b> NISServerHostName </b> / <b> NISDomain </b> / user"group.provider.url
+ *  ="nis：// <b> NISServerHostName </b> / <b> NISDomain </b> / system / group"。
+ * </pre>
+ * 
+ * <b> NISServerHostName </b>指定NIS服务器的服务器主机名(例如<i> nis.sun.com </i>和<b> NISDomain </b>)指定该NIS服务器的域(例如,<i>
+ *  jaas.sun.com </i>)。
+ * 要联系LDAP服务器,必须指定以下URL：。
+ * <pre>
+ *  user.provider.url ="ldap：// <b> LDAPServerHostName </b> / <b> LDAPName </b>"group.provider.url ="lda
+ * p：// <b> LDAPServerHostName </b> b> LDAPName </b>"。
+ * </pre>
+ * 
+ *  <b> LDAPServerHostName </b>指定LDAP服务器的服务器主机名,其中可能包含端口号(例如<i> ldap.sun.com:389 </i>)和<b> LDAPName < / b>
+ * 指定LDAP目录中的条目名称(例如<i> ou = People,o = Sun,c = US </i>和<i> ou = Groups,o = Sun,c = US < i>分别用于用户和组信息)。
+ * 
+ *  <p> RFC 2307中指定了用户信息必须存储在目录服务中的格式。
+ * 具体来说,<code> LoginModule </code>将使用用户的<i> uid </i>属性,其中<i> uid = <b>用户名</b> </i>。
+ * 如果搜索成功,则<code> LoginModule </code>将使用<i> userPassword </i>属性从检索的条目获取用户的加密密码。
+ * 这个<code> LoginModule </code>假定密码存储为字节数组,当转换为<code> String </code>时,具有以下格式：。
+ * <pre>
+ *  "{crypt} <b> encrypted_pa​​ssword </b>"
+ * </pre>
+ * 
+ * LDAP目录服务器必须配置为允许对userPassword属性的读取访问。
+ * 如果用户输入有效的用户名和密码,此<code> LoginModule </code>将<code> UnixPrincipal </code>,<code> UnixNumericUserPrinci
+ * pal </code>和相关的UnixNumericGroupPrincipals与<code> / code>。
+ * LDAP目录服务器必须配置为允许对userPassword属性的读取访问。
+ * 
+ *  <p>此LoginModule还识别以下<code>配置</code>选项：
+ * <pre>
+ *  debug if,true,调试消息输出到System.out。
+ * 
+ *  useFirstPass if,true,此LoginModule从模块的共享状态检索用户名和密码,使用"javax.security.auth.login.name"和"javax.security
+ * .auth.login.password"作为相应的键。
+ * 检索的值用于认证。如果认证失败,则不进行重试的尝试,并且将该失败报告回调用的应用程序。
+ * 
+ *  tryFirstPass if,true,此LoginModule从模块的共享状态检索用户名和密码,使用"javax.security.auth.login.name"和"javax.security
+ * .auth.login.password"作为相应的键。
+ * 检索的值用于认证。如果认证失败,模块使用CallbackHandler检索新的用户名和密码,并进行另一次尝试认证。如果认证失败,则将故障报告回调用的应用程序。
+ * 
+ * storePass if,true,此LoginModule将从模块的共享状态中获取的CallbackHandler的用户名和密码存储为"javax.security.auth.login.name"和
+ * "javax.security.auth.login.password"作为相应的键。
+ * 如果共享状态下的用户名和密码已存在值,或者认证失败,则不会执行此操作。
+ * 
+ *  clearPass if,true,在验证(登录和提交)的两个阶段完成后,此<code> LoginModule </code>清除存储在模块共享状态中的用户名和密码。
+ * </pre>
  */
 @jdk.Exported
 public class JndiLoginModule implements LoginModule {
@@ -212,6 +274,9 @@ public class JndiLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     * 
+     * 
      * @param subject the <code>Subject</code> to be authenticated. <p>
      *
      * @param callbackHandler a <code>CallbackHandler</code> for communicating
@@ -260,6 +325,12 @@ public class JndiLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  初始化此<code> LoginModule </code>。
+     * 
+     * <p>
+     * 
+     * 
      * @return true always, since this <code>LoginModule</code>
      *          should not be ignored.
      *
@@ -376,6 +447,12 @@ public class JndiLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  <p>提示输入用户名和密码。根据相关名称服务验证密码。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the commit fails
      *
      * @return true if this LoginModule's own login and commit
@@ -430,6 +507,18 @@ public class JndiLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  抽象方法提交认证过程(阶段2)。
+     * 
+     *  <p>如果LoginContext的整体认证成功(相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules成功),则调用此方法。
+     * 
+     *  <p>如果此LoginModule自己的验证尝试成功(通过检索由<code> login </code>方法保存的私有状态进行检查),则此方法将<code> UnixPrincipal </code>
+     * 与<code> Subject </code>位于<code> LoginModule </code>中。
+     * 如果此LoginModule自己的身份验证尝试失败,则此方法将删除最初保存的任何状态。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the abort fails.
      *
      * @return false if this LoginModule's own login and/or commit attempts
@@ -468,6 +557,15 @@ public class JndiLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     * <p>如果LoginContext的整体身份验证失败,则会调用此方法。 (相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules没有成功)。
+     * 
+     *  <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>和<code> commit </code>方法保存的私有状态进行检查),则此方法将清除原来
+     * 保存。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the logout fails.
      *
      * @return true in all cases since this <code>LoginModule</code>
@@ -508,6 +606,14 @@ public class JndiLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  注销用户。
+     * 
+     *  <p>此方法删除由<code> commit </code>方法添加的Principal。
+     * 
+     * <p>
+     * 
+     * 
      * @param getPasswdFromSharedState boolean that tells this method whether
      *          to retrieve the password from the sharedState.
      */
@@ -533,6 +639,11 @@ public class JndiLoginModule implements LoginModule {
                                         new String[] { USER_PWD },
                                         false,
                                         false);
+            /* <p>
+            /*  尝试认证
+            /* 
+            /* <p>
+            /* 
             */
 
             SearchControls controls = new SearchControls();
@@ -676,6 +787,11 @@ public class JndiLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  SearchControls controls = new SearchControls(SearchControls.ONELEVEL_SCOPE,0,5000,new String [] {USER_PWD}
+     * ,false,false);。
+     * 
+     * 
      * @param getPasswdFromSharedState boolean that tells this method whether
      *          to retrieve the password from the sharedState.
      */
@@ -735,6 +851,13 @@ public class JndiLoginModule implements LoginModule {
 
     /**
      * Verify a password against the encrypted passwd from /etc/shadow
+     * <p>
+     *  获取用户名和密码。此方法不返回任何值。相反,它设置全局名称和密码变量。
+     * 
+     *  <p>另请注意,此方法将在共享状态下设置用户名和密码值,以防后续LoginModules想通过use / tryFirstPass使用它们。
+     * 
+     * <p>
+     * 
      */
     private boolean verifyPassword(String encryptedPassword, String password) {
 
@@ -761,6 +884,7 @@ public class JndiLoginModule implements LoginModule {
 
     /**
      * Clean out state because of a failed authentication attempt
+     * <p>
      */
     private void cleanState() {
         username = null;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,20 @@ import java.beans.ConstructorProperties;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  一个复合Border类,用于通过在一个外部Border对象的嵌套内嵌入一个内部Border对象,将两个Border对象组合成一个单个边框。
+ * 
+ *  例如,此类可用于向具有现有装饰边框的组件添加空白边距空间：
+ * 
+ * <pre>
+ *  border border = comp.getBorder();边距margin = new EmptyBorder(10,10,10,10); comp.setBorder(new Compoun
+ * dBorder(border,margin));。
+ * </pre>
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  */
 @SuppressWarnings("serial")
@@ -61,6 +76,9 @@ public class CompoundBorder extends AbstractBorder {
 
     /**
      * Creates a compound border with null outside and inside borders.
+     * <p>
+     *  创建带有空外部和内部边框的复合边框。
+     * 
      */
     public CompoundBorder() {
         this.outsideBorder = null;
@@ -70,6 +88,10 @@ public class CompoundBorder extends AbstractBorder {
     /**
      * Creates a compound border with the specified outside and
      * inside borders.  Either border may be null.
+     * <p>
+     *  使用指定的外部和内部边框创建复合边框。任一边界可以为null。
+     * 
+     * 
      * @param outsideBorder the outside border
      * @param insideBorder the inside border to be nested
      */
@@ -82,6 +104,10 @@ public class CompoundBorder extends AbstractBorder {
     /**
      * Returns whether or not the compound border is opaque.
      *
+     * <p>
+     *  返回复合边框是否不透明。
+     * 
+     * 
      * @return {@code true} if the inside and outside borders
      *         are each either {@code null} or opaque;
      *         or {@code false} otherwise
@@ -97,6 +123,10 @@ public class CompoundBorder extends AbstractBorder {
      * with the specified position and size and then painting the
      * inside border at the specified position and size offset by
      * the insets of the outside border.
+     * <p>
+     *  通过以指定的位置和大小绘制外边框来绘制复合边框,然后在指定位置和大小偏移的内边框上绘制外边框的插图。
+     * 
+     * 
      * @param c the component for which this border is being painted
      * @param g the paint graphics
      * @param x the x position of the painted border
@@ -129,6 +159,10 @@ public class CompoundBorder extends AbstractBorder {
 
     /**
      * Reinitialize the insets parameter with this Border's current Insets.
+     * <p>
+     *  使用此Border的当前Insets重新初始化insets参数。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
      */
@@ -155,6 +189,9 @@ public class CompoundBorder extends AbstractBorder {
 
     /**
      * Returns the outside border object.
+     * <p>
+     * 返回外部边界对象。
+     * 
      */
     public Border getOutsideBorder() {
         return outsideBorder;
@@ -162,6 +199,8 @@ public class CompoundBorder extends AbstractBorder {
 
     /**
      * Returns the inside border object.
+     * <p>
+     *  返回内部边框对象。
      */
     public Border getInsideBorder() {
         return insideBorder;

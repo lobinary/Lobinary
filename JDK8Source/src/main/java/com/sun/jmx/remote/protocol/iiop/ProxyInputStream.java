@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -159,6 +160,8 @@ public class ProxyInputStream extends org.omg.CORBA_2_3.portable.InputStream {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated
      */
     @Override

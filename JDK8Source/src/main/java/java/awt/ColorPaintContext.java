@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,9 @@ class ColorPaintContext implements PaintContext {
      * {@link ColorModel}.
      * (Bits 24-31 are alpha, 16-23 are red, 8-15 are green, 0-7 are
      * blue).
+     * <p>
+     *  返回表示默认sRGB {@link ColorModel}中颜色的RGB值。 (位24-31是α,16-23是红色,8-15是绿色,0-7是蓝色)。
+     * 
      * @return the RGB value of the color in the default sRGB
      *         <code>ColorModel</code>.
      * @see java.awt.image.ColorModel#getRGBdefault

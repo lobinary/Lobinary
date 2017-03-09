@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: FunctionPattern.java,v 1.2.4.2 2005/09/15 00:21:15 jeffsuttor Exp $
+ * <p>
+ *  $ Id：FunctionPattern.java,v 1.2.4.2 2005/09/15 00:21:15 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.patterns;
 
@@ -34,6 +47,9 @@ import com.sun.org.apache.xpath.internal.objects.XObject;
 /**
  * Match pattern step that contains a function.
  * @xsl.usage advanced
+ * <p>
+ *  包含函数的匹配模式步骤。 @ xsl.usage advanced
+ * 
  */
 public class FunctionPattern extends StepPattern
 {
@@ -43,6 +59,10 @@ public class FunctionPattern extends StepPattern
    * Construct a FunctionPattern from a
    * {@link com.sun.org.apache.xpath.internal.functions.Function expression}.
    *
+   * <p>
+   *  从{@link com.sun.org.apache.xpath.internal.functions.Function expression}构造FunctionPattern。
+   * 
+   * 
    * NEEDSDOC @param expr
    */
   public FunctionPattern(Expression expr, int axis, int predaxis)
@@ -55,6 +75,9 @@ public class FunctionPattern extends StepPattern
 
   /**
    * Static calc of match score.
+   * <p>
+   *  静态计算匹配得分。
+   * 
    */
   public final void calcScore()
   {
@@ -67,6 +90,10 @@ public class FunctionPattern extends StepPattern
 
   /**
    * Should be a {@link com.sun.org.apache.xpath.internal.functions.Function expression}.
+   * <p>
+   *  应为{@link com.sun.org.apache.xpath.internal.functions.Function expression}。
+   * 
+   * 
    *  @serial
    */
   Expression m_functionExpr;
@@ -74,6 +101,10 @@ public class FunctionPattern extends StepPattern
   /**
    * This function is used to fixup variables from QNames to stack frame
    * indexes at stylesheet build time.
+   * <p>
+   *  此函数用于在样式表构建时将QNames中的变量固定到堆栈帧索引。
+   * 
+   * 
    * @param vars List of QNames that correspond to variables.  This list
    * should be searched backwards for the first qualified name that
    * corresponds to the variable reference qname.  The position of the
@@ -91,6 +122,10 @@ public class FunctionPattern extends StepPattern
   /**
    * Test a node to see if it matches the given node test.
    *
+   * <p>
+   *  测试节点以查看它是否匹配给定的节点测试。
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return {@link com.sun.org.apache.xpath.internal.patterns.NodeTest#SCORE_NODETEST},
@@ -134,6 +169,10 @@ public class FunctionPattern extends StepPattern
   /**
    * Test a node to see if it matches the given node test.
    *
+   * <p>
+   *  测试节点以查看它是否匹配给定的节点测试。
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return {@link com.sun.org.apache.xpath.internal.patterns.NodeTest#SCORE_NODETEST},
@@ -177,6 +216,10 @@ public class FunctionPattern extends StepPattern
   /**
    * Test a node to see if it matches the given node test.
    *
+   * <p>
+   *  测试节点以查看它是否匹配给定的节点测试。
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return {@link com.sun.org.apache.xpath.internal.patterns.NodeTest#SCORE_NODETEST},
@@ -220,6 +263,8 @@ public class FunctionPattern extends StepPattern
   class FunctionOwner implements ExpressionOwner
   {
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#getExpression()
      */
     public Expression getExpression()
@@ -229,6 +274,8 @@ public class FunctionPattern extends StepPattern
 
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#setExpression(Expression)
      */
     public void setExpression(Expression exp)
@@ -240,6 +287,8 @@ public class FunctionPattern extends StepPattern
 
   /**
    * Call the visitor for the function.
+   * <p>
+   *  调用函数的访问者。
    */
   protected void callSubtreeVisitors(XPathVisitor visitor)
   {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -20,6 +21,11 @@ package org.omg.DynamicAny;
     * implementation to break by violating internal constraints. Access to private members is provided to support
     * such activities as ORB bridging and debugging and should not be used to arbitrarily violate
     * the encapsulation of the value type. 
+    * <p>
+    *  DynValue对象支持对IDL非盒式值类型的操作。 DynValue接口可以表示null和非null值类型。
+    * 对于表示非空值类型的DynValue,DynValue的组件构成值类型的公共和私有成员,包括从具体基本值类型继承的成员,按照定义的顺序。表示空值类型的DynValue没有分量,当前位置为-1。
+    *  <P>警告：不加选择地更改专用值类型成员的内容可能会导致值类型实现因违反内部限制而中断。提供对私有成员的访问以支持诸如ORB桥接和调试的活动,并且不应该用于任意违反值类型的封装。
+    * 
     */
 public interface DynValueOperations  extends org.omg.DynamicAny.DynValueCommonOperations
 {
@@ -29,6 +35,10 @@ public interface DynValueOperations  extends org.omg.DynamicAny.DynValueCommonOp
         * This operation may return an empty string since the TypeCode of the value being
         * manipulated may not contain the names of members.
         *
+        * <p>
+        *  返回当前位置处的成员的名称。此操作可能返回一个空字符串,因为正在操作的值的TypeCode可能不包含成员的名称。
+        * 
+        * 
         * @exception TypeMismatch if the DynValue represents a null value type.
         * @exception InvalidValue if the current position does not indicate a member
         */
@@ -37,6 +47,10 @@ public interface DynValueOperations  extends org.omg.DynamicAny.DynValueCommonOp
   /**
         * Returns the TCKind associated with the member at the current position.
         *
+        * <p>
+        *  返回与当前位置的成员关联的TCKind。
+        * 
+        * 
         * @exception TypeMismatch if the DynValue represents a null value type.
         * @exception InvalidValue if the current position does not indicate a member
         */
@@ -50,6 +64,11 @@ public interface DynValueOperations  extends org.omg.DynamicAny.DynValueCommonOp
         * The member names in the returned sequence will be empty strings if the DynValue's TypeCode
         * does not contain member names.
         *
+        * <p>
+        * 返回描述值类型中每个成员的名称和值的NameValuePairs序列。该序列包含与DynValue的TypeCode所指示的成员的声明顺序相同的顺序的成员。当前位置不受影响。
+        * 如果DynValue的TypeCode不包含成员名称,则返回序列中的成员名称将为空字符串。
+        * 
+        * 
         * @exception InvalidValue if this object represents a null value type
         */
   org.omg.DynamicAny.NameValuePair[] get_members () throws org.omg.DynamicAny.DynAnyPackage.InvalidValue;
@@ -63,6 +82,13 @@ public interface DynValueOperations  extends org.omg.DynamicAny.DynValueCommonOp
         * of the value type as indicated by the DynValue's TypeCode or they must be empty strings.
         * The operation makes no attempt to assign member values based on member names.
         *
+        * <p>
+        *  从NameValuePairs序列初始化值类型的成员。如果所传递的序列具有非零长度,则操作将当前位置设置为零。否则,如果传递一个空序列,则当前位置设置为-1。
+        * 可以使用此方法将空值类型初始化为非空值类型。
+        *  <P>成员必须按照它们在值类型的IDL规范中出现的顺序出现在NameValuePairs中,如DynValue的TypeCode所指示的,否则它们必须是空字符串。
+        * 该操作不会尝试根据成员名称分配成员值。
+        * 
+        * 
         * @exception TypeMismatch if the member names supplied in the passed sequence do not match the
         *            corresponding member name in the DynValue's TypeCode and they are not empty strings
         * @exception InvalidValue if the passed sequence has a number of elements that disagrees
@@ -78,6 +104,11 @@ public interface DynValueOperations  extends org.omg.DynamicAny.DynValueCommonOp
         * The member names in the returned sequence will be empty strings if the DynValue's TypeCode
         * does not contain member names.
         *
+        * <p>
+        *  返回一个NameDynAnyPairs序列,描述值类型中每个成员的名称和值。该序列包含与DynValue的TypeCode所指示的成员的声明顺序相同的顺序的成员。当前位置不受影响。
+        * 如果DynValue的TypeCode不包含成员名称,则返回序列中的成员名称将为空字符串。
+        * 
+        * 
         * @exception InvalidValue if this object represents a null value type
         */
   org.omg.DynamicAny.NameDynAnyPair[] get_members_as_dyn_any () throws org.omg.DynamicAny.DynAnyPackage.InvalidValue;
@@ -91,6 +122,10 @@ public interface DynValueOperations  extends org.omg.DynamicAny.DynValueCommonOp
         * of the value type as indicated by the DynValue's TypeCode or they must be empty strings.
         * The operation makes no attempt to assign member values based on member names.
         *
+        * <p>
+        * 从NameDynAnyPairs序列初始化值类型的成员。如果所传递的序列具有非零长度,则操作将当前位置设置为零。否则,如果传递一个空序列,则当前位置设置为-1。
+        * 可以使用此方法将空值类型初始化为非空值类型。
+        * 
         * @exception TypeMismatch if the member names supplied in the passed sequence do not match the
         *            corresponding member name in the DynValue's TypeCode and they are not empty strings
         * @exception InvalidValue if the passed sequence has a number of elements that disagrees

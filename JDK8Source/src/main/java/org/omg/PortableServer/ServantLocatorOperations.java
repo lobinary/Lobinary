@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -26,6 +27,14 @@ package org.omg.PortableServer;
 	 * (among others). This feature may be used to force 
 	 * every request for objects associated with a POA to 
 	 * be mediated by the servant manager.
+	 * <p>
+	 *  当POA具有NON_RETAIN策略时,它使用作为ServantLocator的servant管理器。
+	 * 因为POA知道由此仆人管理器返回的服务人员将仅用于单个请求,所以它可以向服务方管理器的操作提供额外的信息,并且服务方管理器的操作对可能能够合作以执行与ServantActivator不同的操作。
+	 * 当POA使用ServantLocator接口时,在对preinvoke返回的servant执行操作调用之后,POA将立即在servant管理器上调用postinvoke,并将ObjectId值和Serv
+	 * ant值作为参数传递。
+	 * 因为POA知道由此仆人管理器返回的服务人员将仅用于单个请求,所以它可以向服务方管理器的操作提供额外的信息,并且服务方管理器的操作对可能能够合作以执行与ServantActivator不同的操作。
+	 * 该特征可以用于强制对与POA相关联的对象的每个请求由服务方管理器介导。
+	 * 
 	 */
 public interface ServantLocatorOperations  extends org.omg.PortableServer.ServantManagerOperations
 {
@@ -34,6 +43,8 @@ public interface ServantLocatorOperations  extends org.omg.PortableServer.Servan
 	 * This operations is used to get a servant that will be
 	 * used to process the request that caused preinvoke to
 	 * be called.
+	 * <p>
+	 * 
 	 * @param oid the object id associated with object on
 	 *            which the request was made. 
 	 * @param adapter the reference for POA in which the
@@ -54,6 +65,10 @@ public interface ServantLocatorOperations  extends org.omg.PortableServer.Servan
   /**
 	 * This operation is invoked whenener a servant completes
 	 * a request.
+	 * <p>
+	 *  此操作用于获取将用于处理导致preinvoke被调用的请求的服务方。
+	 * 
+	 * 
 	 * @param oid the object id ssociated with object on which
 	 *            the request was made.
 	 * @param adapter the reference for POA in which the

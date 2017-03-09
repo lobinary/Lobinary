@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -104,6 +114,40 @@ import org.w3c.dom.Text;
  *
  * @xerces.internal
  *
+ * <p>
+ *  属性表示元素的XML样式属性。通常,允许值由其在管理此类文档的文档类型定义(DTD)中的声明控​​制。
+ * <P>
+ *  如果属性没有显式分配一个值,但已在DTD中声明,它将存在并具有该缺省值。只有当文档和DTD都没有指定一个值时,属性才会被认为是空的并且没有值;在这种情况下,查询属性将返回null。
+ * <P>
+ * 属性可能有多个包含其数据的子级。 (XML允许属性包含实体引用,并且标记化的属性类型,如NMTOKENS可能为每个标记有一个子类。
+ * )为方便起见,Attribute对象的getValue()方法返回属性值的字符串版本。
+ * <P>
+ *  属性不是它们属于的元素的子元素,通常意义上,并没有有效的父引用。但是,规范说他们_do_属于一个特定的元素,如果用户尝试在元素之间显式共享它们,则抛出INUSE异常。
+ * <P>
+ *  请注意,元素不允许属性显示为共享(参见INUSE异常),因此该对象的可变性在官方上不是问题。
+ * <p>
+ *  注意：ownerNode属性用于存储与Attr节点相关联的元素。 Attr节点没有父节点。此外,getOwnerElement()方法可用于获取此属性关联的元素节点。
+ * <P>
+ *  AttrImpl不支持命名空间。 AttrNSImpl,它继承它。
+ * 
+ * <p> AttrImpl用于从ParentNode继承。它现在直接继承自NodeImpl并提供自己的实现ParentNode的行为。原因是我们现在尝试避免总是创建一个Text节点来保存属性的值。
+ *  DOM规范需要它,所以我们仍然必须这样做,如果实例调用getFirstChild()。属性值被存储为节点列表的原因是它们可以携带多于一个简单的字符串。
+ * 它们还可以包含EntityReference节点。然而,大多数时候人们只有一个字符串,他们只设置和获取通过Element.set / getAttribute或Attr.set / getValue。
+ * 在这个新版本中,Attr节点有一个值指针,它可以是字符串直接或指向第一个子节点的指针。一个标志告诉它当前是哪一个。请注意,虽然我们尽量坚持使用直接String,尽可能一旦我们切换到一个节点,没有回来。
+ * 这是因为我们没有办法知道应用程序是否继续引用我们曾经返回的节点。 <p>内存中的增益因文档中属性的密度而异。但在我运行的测试中,我已经看到高达12％的内存增益。
+ * 好的事情是,它也导致速度略微增加,因为我们分配更少的对象！我的意思是,这是,直到我们必须实际创建节点...。
+ * <p>
+ * 为了避免太多重复的代码,为了简单起见,我删除了ParentNode并将ParentAndParentNode重命名为ParentNode,为了简单起见,我从来没有真正喜欢过它,但是这不会对内存使用产生太
+ * 大的影响,因为只有很少的对象父母。
+ * 这只是真的现在,因为AttrImpl现在直接从NodeImpl继承,并有自己的父节点的节点行为的实现。所以还有一些重复的代码。
+ * <p>
+ *  这个类不直接支持突变事件,但是,当执行突变时它通知文档,以便文档类这样做。
+ * 
+ *  <p> <b>警告</b>：此处的部分代码在ParentNode中部分重复,请小心保持这两个类同步！
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @see AttrNSImpl
  *
  * @author Arnaud  Le Hors, IBM
@@ -150,6 +194,9 @@ public class AttrImpl
     /**
      * Attribute has no public constructor. Please use the factory
      * method in the Document class.
+     * <p>
+     *  属性没有公共构造函数。请在Document类中使用工厂方法。
+     * 
      */
     protected AttrImpl(CoreDocumentImpl ownerDocument, String name) {
         super(ownerDocument);
@@ -192,6 +239,9 @@ public class AttrImpl
     /**
      * NON-DOM
      * set the ownerDocument of this node and its children
+     * <p>
+     *  NON-DOM设置此节点及其子节点的ownerDocument
+     * 
      */
     void setOwnerDocument(CoreDocumentImpl doc) {
         if (needsSyncChildren()) {
@@ -209,6 +259,10 @@ public class AttrImpl
     /**
      * NON-DOM: set the type of this attribute to be ID type.
      *
+     * <p>
+     *  NON-DOM：将此属性的类型设置为ID类型。
+     * 
+     * 
      * @param id
      */
     public void setIdAttribute(boolean id){
@@ -257,6 +311,9 @@ public class AttrImpl
     /**
      * A short integer indicating what type of node this is. The named
      * constants for this value are defined in the org.w3c.dom.Node interface.
+     * <p>
+     *  指示这是什么类型的节点的短整数。此值的命名常量在org.w3c.dom.Node接口中定义。
+     * 
      */
     public short getNodeType() {
         return Node.ATTRIBUTE_NODE;
@@ -264,6 +321,9 @@ public class AttrImpl
 
     /**
      * Returns the attribute name
+     * <p>
+     *  返回属性名称
+     * 
      */
     public String getNodeName() {
         if (needsSyncData()) {
@@ -277,12 +337,18 @@ public class AttrImpl
      * need to redefine setNodeValue, for symmetry's sake.  Note that
      * since we're explicitly providing a value, Specified should be set
      * true.... even if that value equals the default.
+     * <p>
+     *  在getNodeValue到getValue的重新路由中的隐含是需要重新定义setNodeValue,为了对称的缘故。
+     * 注意,由于我们显式提供一个值,Specified应该设置为true ....即使该值等于默认值。
+     * 
      */
     public void setNodeValue(String value) throws DOMException {
         setValue(value);
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.TypeInfo#getTypeName()
      */
     public String getTypeName() {
@@ -290,6 +356,8 @@ public class AttrImpl
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.TypeInfo#getTypeNamespace()
      */
     public String getTypeNamespace() {
@@ -301,6 +369,10 @@ public class AttrImpl
 
     /**
      * Method getSchemaTypeInfo.
+     * <p>
+     *  方法getSchemaTypeInfo。
+     * 
+     * 
      * @return TypeInfo
      */
     public TypeInfo getSchemaTypeInfo(){
@@ -311,6 +383,10 @@ public class AttrImpl
      * In Attribute objects, NodeValue is considered a synonym for
      * Value.
      *
+     * <p>
+     *  在属性对象中,NodeValue被认为是Value的同义词。
+     * 
+     * 
      * @see #getValue()
      */
     public String getNodeValue() {
@@ -324,6 +400,9 @@ public class AttrImpl
     /**
      * In Attributes, NodeName is considered a synonym for the
      * attribute's Name
+     * <p>
+     * 在属性中,NodeName被视为属性名称的同义词
+     * 
      */
     public String getName() {
 
@@ -338,6 +417,9 @@ public class AttrImpl
      * The DOM doesn't clearly define what setValue(null) means. I've taken it
      * as "remove all children", which from outside should appear
      * similar to setting it to the empty string.
+     * <p>
+     *  DOM没有清楚地定义什么setValue(null)意味着。我把它当作"删除所有的孩子",从外面应该看起来类似于将其设置为空字符串。
+     * 
      */
     public void setValue(String newvalue) {
 
@@ -436,6 +518,9 @@ public class AttrImpl
     /**
      * The "string value" of an Attribute is its text representation,
      * which in turn is a concatenation of the string values of its children.
+     * <p>
+     *  属性的"字符串值"是其文本表示,它又是其子节点的字符串值的串联。
+     * 
      */
     public String getValue() {
 
@@ -493,6 +578,10 @@ public class AttrImpl
      * delete the attribute from the Element, and the Implementation will
      * re-assert the default (if any) in its place, with the appropriate
      * specified=false setting.
+     * <p>
+     *  当且仅当在原始文档中明确指定了该属性的值时,"指定"标志为真。注意,实现,而不是用户,负责此属性。如果用户声明了属性值(即使它最终具有与默认值相同的值),它被认为是指定的属性。
+     * 如果你真的想恢复默认,从元素删除属性,实现将重新断言默认(如果有)在它的位置,与适当的指定= false设置。
+     * 
      */
     public boolean getSpecified() {
 
@@ -511,6 +600,10 @@ public class AttrImpl
      * Returns the element node that this attribute is associated with,
      * or null if the attribute has not been added to an element.
      *
+     * <p>
+     *  返回此属性关联的元素节点,如果属性尚未添加到元素,则返回null。
+     * 
+     * 
      * @see #getOwnerElement
      *
      * @deprecated Previous working draft of DOM Level 2. New method
@@ -526,6 +619,10 @@ public class AttrImpl
      * Returns the element node that this attribute is associated with,
      * or null if the attribute has not been added to an element.
      *
+     * <p>
+     *  返回此属性关联的元素节点,如果属性尚未添加到元素,则返回null。
+     * 
+     * 
      * @since WD-DOM-Level-2-19990719
      */
     public Element getOwnerElement() {
@@ -589,6 +686,10 @@ public class AttrImpl
 
         /**
          * NON-DOM: used by the parser
+         * <p>
+         *  NON-DOM：由解析器使用
+         * 
+         * 
          * @param type
          */
     public void setType (Object type){
@@ -607,6 +708,9 @@ public class AttrImpl
     /**
      * Test whether this node has any children. Convenience shorthand
      * for (Node.getFirstChild()!=null)
+     * <p>
+     *  测试此节点是否有任何子节点。方便简写(Node.getFirstChild()！= null)
+     * 
      */
     public boolean hasChildNodes() {
         if (needsSyncChildren()) {
@@ -627,6 +731,13 @@ public class AttrImpl
      * In this implementation, Nodes implement the NodeList interface and
      * provide their own getChildNodes() support. Other DOMs may solve this
      * differently.
+     * <p>
+     *  获取枚举此节点的所有子节点的NodeList。如果没有,则返回(最初)空的NodeList。
+     * <p>
+     * NodeList是"live";当添加/删除子节点时,NodeList将立即反映这些更改。此外,NodeList引用实际节点,因此通过DOM树进行的那些节点的改变将反映在NodeList中,反之亦然。
+     * <p>
+     *  在这个实现中,节点实现NodeList接口并提供他们自己的getChildNodes()支持。其他DOM可以不同地解决这个问题。
+     * 
      */
     public NodeList getChildNodes() {
         // JKESS: KNOWN ISSUE HERE
@@ -676,6 +787,10 @@ public class AttrImpl
      * Move one or more node(s) to our list of children. Note that this
      * implicitly removes them from their previous parent.
      *
+     * <p>
+     *  将一个或多个节点移动到我们的子节点列表。请注意,这会隐式地从他们以前的父级删除它们。
+     * 
+     * 
      * @param newChild The Node to be moved to our subtree. As a
      * convenience feature, inserting a DocumentNode will instead insert
      * all its children.
@@ -710,6 +825,9 @@ public class AttrImpl
      * to control which mutation events are spawned. This version of the
      * insertBefore operation allows us to do so. It is not intended
      * for use by application programs.
+     * <p>
+     *  以控制产生哪些突变事件。这个版本的insertBefore操作允许我们这样做。它不适用于应用程序。
+     * 
      */
     Node internalInsertBefore(Node newChild, Node refChild, boolean replace)
         throws DOMException {
@@ -871,6 +989,10 @@ public class AttrImpl
      * Remove a child from this Node. The removed child's subtree
      * remains intact so it may be re-inserted elsewhere.
      *
+     * <p>
+     *  从此节点删除子项。删除的子树的子树保持原样,因此可以重新插入其他位置。
+     * 
+     * 
      * @return oldChild, in its new state (removed).
      *
      * @throws DOMException(NOT_FOUND_ERR) if oldChild is not a child of
@@ -894,6 +1016,9 @@ public class AttrImpl
      * to control which mutation events are spawned. This version of the
      * removeChild operation allows us to do so. It is not intended
      * for use by application programs.
+     * <p>
+     *  以控制产生哪些突变事件。这个版本的removeChild操作允许我们这样做。它不适用于应用程序。
+     * 
      */
     Node internalRemoveChild(Node oldChild, boolean replace)
         throws DOMException {
@@ -967,6 +1092,10 @@ public class AttrImpl
      * parent, if any. Equivalent to inserting newChild before oldChild,
      * then removing oldChild.
      *
+     * <p>
+     *  使newChild占据oldChild曾经存在的位置。请注意,newChild将首先从其上一个父级(如果有)中删除。相当于在oldChild之前插入newChild,然后删除oldChild。
+     * 
+     * 
      * @return oldChild, in its new state (removed).
      *
      * @throws DOMException(HIERARCHY_REQUEST_ERR) if newChild is of a
@@ -1014,6 +1143,10 @@ public class AttrImpl
 
     /**
      * NodeList method: Count the immediate children of this node
+     * <p>
+     *  NodeList方法：计算此节点的直接子节点
+     * 
+     * 
      * @return int
      */
     public int getLength() {
@@ -1033,6 +1166,10 @@ public class AttrImpl
     /**
      * NodeList method: Return the Nth immediate child of this node, or
      * null if the index is out of bounds.
+     * <p>
+     *  NodeList方法：返回此节点的第N个直接子节点,如果索引超出边界则返回null。
+     * 
+     * 
      * @return org.w3c.dom.Node
      * @param Index int
      */
@@ -1066,6 +1203,9 @@ public class AttrImpl
      * DOM Level 3 WD- Experimental.
      * Override inherited behavior from ParentNode to support deep equal.
      * isEqualNode is always deep on Attr nodes.
+     * <p>
+     *  DOM级别3。覆盖从父节点继承的行为以支持深度相等。 isEqualNode总是在Attr节点上深。
+     * 
      */
     public boolean isEqualNode(Node arg) {
         return super.isEqualNode(arg);
@@ -1076,6 +1216,11 @@ public class AttrImpl
      * Checks if a type is derived from another by restriction. See:
      * http://www.w3.org/TR/DOM-Level-3-Core/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     * 在DOM级别3中引入。<p>检查类型是否通过限制从另一个派生。
+     * 参见：http://www.w3.org/TR/DOM-Level-3-Core/core.html#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *        The namspace of the ancestor type declaration
      * @param ancestorName
@@ -1101,6 +1246,10 @@ public class AttrImpl
     /**
      * Override default behavior so that if deep is true, children are also
      * toggled.
+     * <p>
+     *  覆盖默认行为,以便如果deep为true,孩子也被切换。
+     * 
+     * 
      * @see Node
      * <P>
      * Note: this will not change the state of an EntityReference or its
@@ -1137,6 +1286,9 @@ public class AttrImpl
     /**
      * Override this method in subclass to hook in efficient
      * internal data structure.
+     * <p>
+     *  在子类中覆盖此方法以挂钩有效的内部数据结构。
+     * 
      */
     protected void synchronizeChildren() {
         // By default just change the flag to avoid calling this method again
@@ -1154,6 +1306,13 @@ public class AttrImpl
      * <li>The inserted child is is itself unnormalized.
      * </ul>
      *
+     * <p>
+     *  检查插入子节点后此节点的规范化状态。如果插入的子节点导致此节点非规范化,则相应地标记该节点。用于改变归一化状态的条件是：
+     * <ul>
+     *  <li>插入的子节点是文本节点,其相邻兄弟节点之一也是文本节点。 <li>插入的子项本身是未规范化的。
+     * </ul>
+     * 
+     * 
      * @param insertedChild the child node that was inserted into this node
      *
      * @throws NullPointerException if the inserted child is <code>null</code>
@@ -1188,6 +1347,11 @@ public class AttrImpl
      * <li>The removed child had two adjacent siblings that were text nodes.
      * </ul>
      *
+     * <p>
+     *  检查删除子节点后此节点的规范化。如果删除的子节点导致此节点非规范化,则相应地标记该节点。用于改变归一化状态的条件是：
+     * <ul>
+     *  <li>已移除的子项有两个相邻的兄弟节点,它们是文本节点。
+     * 
      * @param previousSibling the previous sibling of the removed child, or
      * <code>null</code>
      */

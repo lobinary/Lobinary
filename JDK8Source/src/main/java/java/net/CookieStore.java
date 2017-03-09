@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,14 @@ import java.util.Map;
  * retrieve cookie for every outgoing HTTP request. A CookieStore
  * is responsible for removing HttpCookie instances which have expired.
  *
+ * <p>
+ *  CookieStore对象表示Cookie的存储。可以存储和检索Cookie。
+ * 
+ *  <p> {@ link CookieManager}会调用{@code CookieStore.add}为每个传入的HTTP响应保存Cookie,并调用{@code CookieStore.get}来
+ * 为每个传出的HTTP请求检索Cookie。
+ *  CookieStore负责删除已过期的HttpCookie实例。
+ * 
+ * 
  * @author Edward Wang
  * @since 1.6
  */
@@ -54,6 +63,15 @@ public interface CookieStore {
      * <p>If a cookie corresponding to the given URI already exists,
      * then it is replaced with the new one.
      *
+     * <p>
+     *  向存储添加一个HTTP Cookie。这是为每个传入的HTTP响应调用。
+     * 
+     *  <p>存储的Cookie可能与URI相关联,也可能不会与URI相关联。如果它不与URI相关联,则cookie的domain和path属性将指示它来自哪里。
+     * 如果它与一个URI相关联,并且未指定其域和路径属性,则给定URI将指示此Cookie来自哪里。
+     * 
+     *  <p>如果与给定URI对应的Cookie已经存在,那么它将被替换为新的。
+     * 
+     * 
      * @param uri       the uri this cookie associated with.
      *                  if {@code null}, this cookie will not be associated
      *                  with an URI
@@ -72,6 +90,10 @@ public interface CookieStore {
      * given URI. Only cookies that have not expired are returned.
      * This is called for every outgoing HTTP request.
      *
+     * <p>
+     *  检索与给定URI或其域与给定URI相匹配的Cookie。仅返回未过期的Cookie。这是为每个传出的HTTP请求调用。
+     * 
+     * 
      * @return          an immutable list of HttpCookie,
      *                  return empty list if no cookies match the given URI
      *
@@ -88,6 +110,10 @@ public interface CookieStore {
     /**
      * Get all not-expired cookies in cookie store.
      *
+     * <p>
+     *  获取cookie存储中的所有未过期的Cookie。
+     * 
+     * 
      * @return          an immutable list of http cookies;
      *                  return empty list if there's no http cookie in store
      */
@@ -97,6 +123,10 @@ public interface CookieStore {
     /**
      * Get all URIs which identify the cookies in this cookie store.
      *
+     * <p>
+     *  获取标识此Cookie存储中的Cookie的所有URI。
+     * 
+     * 
      * @return          an immutable list of URIs;
      *                  return empty list if no cookie in this cookie store
      *                  is associated with an URI
@@ -107,6 +137,10 @@ public interface CookieStore {
     /**
      * Remove a cookie from store.
      *
+     * <p>
+     *  从商店删除Cookie。
+     * 
+     * 
      * @param uri       the uri this cookie associated with.
      *                  if {@code null}, the cookie to be removed is not associated
      *                  with an URI when added; if not {@code null}, the cookie
@@ -123,6 +157,9 @@ public interface CookieStore {
     /**
      * Remove all cookies in this cookie store.
      *
+     * <p>
+     *  删除此Cookie存储中的所有Cookie。
+     * 
      * @return          {@code true} if this store changed as a result of the call
      */
     public boolean removeAll();

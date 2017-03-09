@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ package javax.management;
 
 /**
  * This class is used by the query building mechanism for isInstanceOf expressions.
+ * <p>
+ *  此类由isInstanceOf表达式的查询构建机制使用。
+ * 
+ * 
  * @serial include
  *
  * @since 1.6
@@ -38,6 +43,8 @@ class InstanceOfQueryExp extends QueryEval implements QueryExp {
     private static final long serialVersionUID = -1081892073854801359L;
 
     /**
+    /* <p>
+    /* 
      * @serial The {@link StringValueExp} returning the name of the class
      *         of which selected MBeans should be instances.
      */
@@ -45,6 +52,10 @@ class InstanceOfQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Creates a new InstanceOfExp with a specific class name.
+     * <p>
+     *  创建具有特定类名称的新InstanceOfExp。
+     * 
+     * 
      * @param classNameValue The {@link StringValueExp} returning the name of
      *        the class of which selected MBeans should be instances.
      */
@@ -65,6 +76,10 @@ class InstanceOfQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns the class name.
+     * <p>
+     *  返回类名。
+     * 
+     * 
      * @returns The {@link StringValueExp} returning the name of
      *        the class of which selected MBeans should be instances.
      */
@@ -75,6 +90,10 @@ class InstanceOfQueryExp extends QueryEval implements QueryExp {
     /**
      * Applies the InstanceOf on a MBean.
      *
+     * <p>
+     *  在MBean上应用InstanceOf。
+     * 
+     * 
      * @param name The name of the MBean on which the InstanceOf will be applied.
      *
      * @return  True if the MBean specified by the name is instance of the class.
@@ -112,6 +131,9 @@ class InstanceOfQueryExp extends QueryEval implements QueryExp {
 
     /**
      * Returns a string representation of this InstanceOfQueryExp.
+     * <p>
+     *  返回此InstanceOfQueryExp的字符串表示形式。
+     * 
      * @return a string representation of this InstanceOfQueryExp.
      */
     public String toString() {

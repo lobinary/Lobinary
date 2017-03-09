@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.security.algorithms;
@@ -35,6 +44,9 @@ import java.util.List;
  * tolerant manner that works across different applications servers. Do not
  * touch this unless you're a grizzled classloading guru veteran who is going to
  * verify any change on 6 different application servers.
+ * <p>
+ *  此类在以容错方式加载资源和类非常有用,可在不同的应用程序服务器上工作。不要触摸这个,除非你是一个灰熊的类加载的古茹老兵谁将要验证在6个不同的应用程序服务器上的任何更改。
+ * 
  */
 // NOTE! This is a duplicate of utils.ClassLoaderUtils with public
 // modifiers changed to package-private. Make sure to integrate any future
@@ -57,6 +69,15 @@ final class ClassLoaderUtils {
      * <li>callingClass.getClassLoader()
      * </ul>
      *
+     * <p>
+     *  加载给定资源。 <p />此方法将尝试使用以下方法(按顺序)加载资源：
+     * <ul>
+     *  <li> From Thread.currentThread()。
+     * getContextClassLoader()<li>从ClassLoaderUtil.class.getClassLoader()<li> callingClass.getClassLoader()。
+     *  <li> From Thread.currentThread()。
+     * </ul>
+     * 
+     * 
      * @param resourceName The name of the resource to load
      * @param callingClass The Class object of the calling object
      */
@@ -110,6 +131,15 @@ final class ClassLoaderUtils {
      * <li>callingClass.getClassLoader()
      * </ul>
      *
+     * <p>
+     * 加载给定资源。 <p />此方法将尝试使用以下方法(按顺序)加载资源：
+     * <ul>
+     *  <li> From Thread.currentThread()。
+     * getContextClassLoader()<li>从ClassLoaderUtil.class.getClassLoader()<li> callingClass.getClassLoader()。
+     *  <li> From Thread.currentThread()。
+     * </ul>
+     * 
+     * 
      * @param resourceName The name of the resource to load
      * @param callingClass The Class object of the calling object
      */
@@ -210,6 +240,10 @@ final class ClassLoaderUtils {
      * This is a convenience method to load a resource as a stream. <p/> The
      * algorithm used to find the resource is given in getResource()
      *
+     * <p>
+     *  这是一种方便的方法来将资源加载为流。 <p />用于查找资源的算法在getResource()中给出,
+     * 
+     * 
      * @param resourceName The name of the resource to load
      * @param callingClass The Class object of the calling object
      */
@@ -236,6 +270,12 @@ final class ClassLoaderUtils {
      * <li>From the callingClass.getClassLoader()
      * </ul>
      *
+     * <p>
+     *  加载具有给定名称的类。 <p />它将尝试按以下顺序加载类：
+     * <ul>
+     *  <li> From Thread.currentThread()。
+     * getContextClassLoader()<li>使用基本Class.forName()<li>从ClassLoaderUtil.class.getClassLoader()<li>从calling
+     * 
      * @param className The name of the class to load
      * @param callingClass The Class object of the calling object
      * @throws ClassNotFoundException If the class cannot be found anywhere.

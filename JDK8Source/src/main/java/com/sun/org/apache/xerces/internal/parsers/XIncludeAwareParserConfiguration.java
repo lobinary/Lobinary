@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -37,6 +47,10 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource;
  * This class is the configuration used to parse XML 1.0 and XML 1.1 documents
  * and provides support for XInclude. This is the default Xerces configuration.
  *
+ * <p>
+ *  此类是用于解析XML 1.0和XML 1.1文档的配置,并为XInclude提供支持。这是默认的Xerces配置。
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  *
  * @version $Id: XIncludeAwareParserConfiguration.java,v 1.5 2010-11-01 04:40:10 joehw Exp $
@@ -94,6 +108,10 @@ public class XIncludeAwareParserConfiguration extends XML11Configuration {
     /**
      * Constructs a parser configuration using the specified symbol table.
      *
+     * <p>
+     *  使用指定的符号表构造解析器配置。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      */
     public XIncludeAwareParserConfiguration(SymbolTable symbolTable) {
@@ -105,6 +123,11 @@ public class XIncludeAwareParserConfiguration extends XML11Configuration {
      * grammar pool.
      * <p>
      *
+     * <p>
+     *  使用指定的符号表和语法池构造解析器配置。
+     * <p>
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      * @param grammarPool The grammar pool to use.
      */
@@ -119,6 +142,10 @@ public class XIncludeAwareParserConfiguration extends XML11Configuration {
      * grammar pool, and parent settings.
      * <p>
      *
+     * <p>
+     *  使用指定的符号表,语法池和父设置构造一个解析器配置。
+     * <p>
+     * 
      * @param symbolTable    The symbol table to use.
      * @param grammarPool    The grammar pool to use.
      * @param parentSettings The parent settings.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ package com.sun.jmx.snmp;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  表示SNMP IpAddress。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public class SnmpIpAddress extends SnmpOid {
@@ -43,6 +49,10 @@ public class SnmpIpAddress extends SnmpOid {
     //-------------
     /**
      * Constructs a new <CODE>SnmpIpAddress</CODE> from the specified bytes array.
+     * <p>
+     *  从指定的字节数组构造一个新的<CODE> SnmpIpAddress </CODE>。
+     * 
+     * 
      * @param bytes The four bytes composing the address.
      * @exception IllegalArgumentException The length of the array is not equal to four.
      */
@@ -52,6 +62,10 @@ public class SnmpIpAddress extends SnmpOid {
 
     /**
      * Constructs a new <CODE>SnmpIpAddress</CODE> from the specified long value.
+     * <p>
+     *  从指定的长整型值构造新的<CODE> SnmpIpAddress </CODE>。
+     * 
+     * 
      * @param addr The initialization value.
      */
     public SnmpIpAddress(long addr) {
@@ -69,6 +83,10 @@ public class SnmpIpAddress extends SnmpOid {
     /**
      * Constructs a new <CODE>SnmpIpAddress</CODE> from a dot-formatted <CODE>String</CODE>.
      * The dot-formatted <CODE>String</CODE> is formulated x.x.x.x .
+     * <p>
+     *  从点格式的<CODE>字符串</CODE>构造新的<CODE> SnmpIpAddress </CODE>。点格式<CODE> String </CODE>以x.x.x.x表示。
+     * 
+     * 
      * @param dotAddress The initialization value.
      * @exception IllegalArgumentException The string does not correspond to an ip address.
      */
@@ -85,6 +103,10 @@ public class SnmpIpAddress extends SnmpOid {
 
     /**
      * Constructs a new <CODE>SnmpIpAddress</CODE> from four long values.
+     * <p>
+     *  从四个长值构造新的<CODE> SnmpIpAddress </CODE>。
+     * 
+     * 
      * @param b1 Byte 1.
      * @param b2 Byte 2.
      * @param b3 Byte 3.
@@ -105,6 +127,10 @@ public class SnmpIpAddress extends SnmpOid {
     //---------------
     /**
      * Converts the address value to its byte array form.
+     * <p>
+     *  将地址值转换为其字节数组形式。
+     * 
+     * 
      * @return The byte array representation of the value.
      */
     public byte[] byteValue() {
@@ -120,6 +146,10 @@ public class SnmpIpAddress extends SnmpOid {
     /**
      * Converts the address to its <CODE>String</CODE> form.
      * Same as <CODE>toString()</CODE>. Exists only to follow a naming scheme.
+     * <p>
+     *  将地址转换为其<CODE>字符串</CODE>表单。与<CODE> toString()</CODE>相同。存在只遵循命名方案。
+     * 
+     * 
      * @return The <CODE>String</CODE> representation of the value.
      */
     public String stringValue() {
@@ -129,6 +159,10 @@ public class SnmpIpAddress extends SnmpOid {
     /**
      * Extracts the ip address from an index OID and returns its
      * value converted as an <CODE>SnmpOid</CODE>.
+     * <p>
+     *  从索引OID提取IP地址,并返回其转换为<CODE> SnmpOid </CODE>的值。
+     * 
+     * 
      * @param index The index array.
      * @param start The position in the index array.
      * @return The OID representing the ip address value.
@@ -156,6 +190,10 @@ public class SnmpIpAddress extends SnmpOid {
     /**
      * Scans an index OID, skips the address value and returns the position
      * of the next value.
+     * <p>
+     *  扫描索引OID,跳过地址值并返回下一个值的位置。
+     * 
+     * 
      * @param index The index array.
      * @param start The position in the index array.
      * @return The position of the next value.
@@ -173,6 +211,10 @@ public class SnmpIpAddress extends SnmpOid {
 
     /**
      * Appends an <CODE>SnmpOid</CODE> representing an <CODE>SnmpIpAddress</CODE> to another OID.
+     * <p>
+     *  将代表<CODE> SnmpIpAddress </CODE>的<CODE> SnmpOid </CODE>附加到另一个OID。
+     * 
+     * 
      * @param source An OID representing an <CODE>SnmpIpAddress</CODE> value.
      * @param dest Where source should be appended.
      */
@@ -185,6 +227,10 @@ public class SnmpIpAddress extends SnmpOid {
 
     /**
      * Returns a textual description of the type object.
+     * <p>
+     *  返回类型对象的文本描述。
+     * 
+     * 
      * @return ASN.1 textual description.
      */
     final public String getTypeName() {
@@ -195,6 +241,9 @@ public class SnmpIpAddress extends SnmpOid {
     //----------------
     /**
      * Build Ip address from byte array.
+     * <p>
+     *  从字节数组构建Ip地址。
+     * 
      */
     private void buildFromByteArray(byte[] bytes) {
         if (bytes.length != 4) {
@@ -212,6 +261,8 @@ public class SnmpIpAddress extends SnmpOid {
     //----------
     /**
      * Name of the type.
+     * <p>
+     *  类型的名称。
      */
     final static String name = "IpAddress" ;
 }

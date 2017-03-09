@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,23 @@ import java.util.Locale;
  * once the first parse has completed successfully, but it may not
  * invoke the parse() methods recursively within a parse.</p>
  *
+ * <p>
+ *  SAX(Simple API for XML)解析器的基本接口。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保证</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p>这是SAX1的主要活动供应商界面;它在SAX2中被{@link org.xml.sax.XMLReader XMLReader}替换,它包括命名空间支持和复杂的可配置性和可扩展性。</p>
+ * 
+ *  <p>所有SAX1解析器都必须实现此基本接口：它允许应用程序注册不同类型事件的处理程序,并从URI或字符流启动解析。</p>
+ * 
+ *  <p>所有SAX1解析器还必须实现一个零参数构造函数(尽管也允许其他构造函数)。</p>
+ * 
+ *  <p> SAX1解析器可重用,但不可重入：应用程序可以在第一次解析成功完成后重用解析器对象(可能使用不同的输入源),但它可能无法在解析中递归调用parse()方法。</p>
+ * 
+ * 
  * @deprecated This interface has been replaced by the SAX2
  *             {@link org.xml.sax.XMLReader XMLReader}
  *             interface, which includes Namespace support.
@@ -84,6 +102,12 @@ public interface Parser
      * however, they must throw a SAX exception.  Applications may
      * not request a locale change in the middle of a parse.</p>
      *
+     * <p>
+     *  允许应用程序请求错误和警告的区域设置。
+     * 
+     * <p> SAX解析器不需要提供错误和警告的本地化;如果他们不能支持请求的语言环境,但是,他们必须抛出一个SAX异常。应用程序可能不会在解析过程中请求更改区域设置。</p>
+     * 
+     * 
      * @param locale A Java Locale object.
      * @exception org.xml.sax.SAXException Throws an exception
      *            (using the previous or default locale) if the
@@ -107,6 +131,14 @@ public interface Parser
      * in the middle of a parse, and the SAX parser must begin using
      * the new resolver immediately.</p>
      *
+     * <p>
+     *  允许应用程序注册自定义实体解析器。
+     * 
+     *  <p>如果应用程序未注册实体解析器,则SAX解析器将解析系统标识符并打开与实体本身的连接(这是在HandlerBase中实现的默认行为)。</p>
+     * 
+     *  <p>应用程序可以在解析的过程中注册一个新的或不同的实体解析器,并且SAX解析器必须立即开始使用新的解析器。</p>
+     * 
+     * 
      * @param resolver The object for resolving entities.
      * @see EntityResolver
      * @see HandlerBase
@@ -126,6 +158,14 @@ public interface Parser
      * handler in the middle of a parse, and the SAX parser must
      * begin using the new handler immediately.</p>
      *
+     * <p>
+     *  允许应用程序注册DTD事件处理程序。
+     * 
+     *  <p>如果应用程序未注册DTD处理程序,则SAX解析器报告的所有DTD事件将被静默忽略(这是HandlerBase实现的默认行为)。</p>
+     * 
+     *  <p>应用程序可能在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。</p>
+     * 
+     * 
      * @param handler The DTD handler.
      * @see DTDHandler
      * @see HandlerBase
@@ -145,6 +185,14 @@ public interface Parser
      * middle of a parse, and the SAX parser must begin using the new
      * handler immediately.</p>
      *
+     * <p>
+     *  允许应用程序注册文档事件处理程序。
+     * 
+     *  <p>如果应用程序没有注册文档处理程序,则SAX解析器报告的所有文档事件将被默认忽略(这是HandlerBase实现的默认行为)。</p>
+     * 
+     *  <p>应用程序可能在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。</p>
+     * 
+     * 
      * @param handler The document handler.
      * @see DocumentHandler
      * @see HandlerBase
@@ -164,6 +212,15 @@ public interface Parser
      * middle of a parse, and the SAX parser must begin using the new
      * handler immediately.</p>
      *
+     * <p>
+     * 允许应用程序注册错误事件处理程序。
+     * 
+     *  <p>如果应用程序没有注册错误事件处理程序,SAX解析器报告的所有错误事件将被忽略,除了fatalError,它将抛出一个SAXException(这是由HandlerBase实现的默认行为)。
+     * </p >。
+     * 
+     *  <p>应用程序可能在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。</p>
+     * 
+     * 
      * @param handler The error handler.
      * @see ErrorHandler
      * @see SAXException
@@ -185,6 +242,14 @@ public interface Parser
      * application may reuse the same Parser object, possibly with a
      * different input source.</p>
      *
+     * <p>
+     *  解析XML文档。
+     * 
+     *  <p>应用程序可以使用此方法指示SAX解析器开始从任何有效的输入源(字符流,字节流或URI)解析XML文档。</p>
+     * 
+     *  <p>在解析正在进行时,应用程序不能调用此方法(它们应为每个其他XML文档创建一个新的解析器)。一旦解析完成,应用程序可以重用相同的解析器对象,可能使用不同的输入源。</p>
+     * 
+     * 
      * @param source The input source for the top-level of the
      *        XML document.
      * @exception org.xml.sax.SAXException Any SAX exception, possibly
@@ -217,6 +282,13 @@ public interface Parser
      * <p>If the system identifier is a URL, it must be fully resolved
      * by the application before it is passed to the parser.</p>
      *
+     * <p>
+     *  从系统标识符(URI)解析XML文档。
+     * 
+     *  <p>此方法是从系统标识符读取文档的常见情况的快捷方式。它与以下内容完全相同：</p>
+     * 
+     * <pre>
+     * 
      * @param systemId The system identifier (URI).
      * @exception org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.

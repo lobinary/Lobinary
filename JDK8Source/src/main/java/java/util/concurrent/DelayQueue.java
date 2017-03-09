@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -63,6 +67,20 @@ import java.util.*;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  {@code Delayed}元素的无界{@linkplain BlockingQueue blocking queue},其中元素只能在其延迟已过期时进行。
+ * 队列的<em>头</em>是{@code Delayed}元素,其延迟在过去最远。如果没有延迟过期,则没有头,并且{@code poll}将返回{@code null}。
+ * 当元素的{@code getDelay(TimeUnit.NANOSECONDS)}方法返回小于或等于零的值时,会发生过期。
+ * 即使不能使用{@code take}或{@code poll}删除未过期的元素,它们也被视为普通元素。例如,{@code size}方法返回过期和未过期元素的计数。此队列不允许空元素。
+ * 
+ *  <p>此类及其迭代器实现{@link Collection}和{@link Iterator}接口的所有<em>可选</em>方法。
+ * 方法{@link #iterator()}中提供的迭代器不能</em>保证以任何特定顺序遍历DelayQueue的元素。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  * @param <E> the type of elements held in this collection
@@ -88,6 +106,11 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * waiting thread, but not necessarily the current leader, is
      * signalled.  So waiting threads must be prepared to acquire
      * and lose leadership while waiting.
+     * <p>
+     * 指定的线程等待队列头部的元素。 Leader-Follower模式(http://www.cs.wustl.edu/~schmidt/POSA/POSA2/)的这种变体用于最小化不必要的时间等待。
+     * 当线程成为领导者时,它仅等待下一个延迟过去,但其他线程无限期地等待。领导线程必须在从take()或poll(...)返回之前发信号通知一些其他线程,除非一些其他线程在临时中成为领导者。
+     * 每当队列的头部被具有较早到期时间的元素替换时,通过被重置为空而使领导字段无效,并且用信号发送一些等待线程,但不一定是当前领导。所以等待线程必须准备好在等待期间获得和失去领导。
+     * 
      */
     private Thread leader = null;
 
@@ -95,11 +118,17 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * Condition signalled when a newer element becomes available
      * at the head of the queue or a new thread may need to
      * become leader.
+     * <p>
+     *  当新的元素在队列的头部变得可用或者新的线程可能需要变为领导时,发送条件。
+     * 
      */
     private final Condition available = lock.newCondition();
 
     /**
      * Creates a new {@code DelayQueue} that is initially empty.
+     * <p>
+     *  创建一个最初为空的新{@code DelayQueue}。
+     * 
      */
     public DelayQueue() {}
 
@@ -107,6 +136,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * Creates a {@code DelayQueue} initially containing the elements of the
      * given collection of {@link Delayed} instances.
      *
+     * <p>
+     *  创建最初包含{@link Delayed}实例的给定集合的元素的{@code DelayQueue}。
+     * 
+     * 
      * @param c the collection of elements to initially contain
      * @throws NullPointerException if the specified collection or any
      *         of its elements are null
@@ -118,6 +151,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
     /**
      * Inserts the specified element into this delay queue.
      *
+     * <p>
+     *  将指定的元素插入此延迟队列。
+     * 
+     * 
      * @param e the element to add
      * @return {@code true} (as specified by {@link Collection#add})
      * @throws NullPointerException if the specified element is null
@@ -129,6 +166,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
     /**
      * Inserts the specified element into this delay queue.
      *
+     * <p>
+     *  将指定的元素插入此延迟队列。
+     * 
+     * 
      * @param e the element to add
      * @return {@code true}
      * @throws NullPointerException if the specified element is null
@@ -152,6 +193,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * Inserts the specified element into this delay queue. As the queue is
      * unbounded this method will never block.
      *
+     * <p>
+     *  将指定的元素插入此延迟队列。由于队列是无界的,这个方法永远不会阻塞。
+     * 
+     * 
      * @param e the element to add
      * @throws NullPointerException {@inheritDoc}
      */
@@ -163,6 +208,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * Inserts the specified element into this delay queue. As the queue is
      * unbounded this method will never block.
      *
+     * <p>
+     *  将指定的元素插入此延迟队列。由于队列是无界的,这个方法永远不会阻塞。
+     * 
+     * 
      * @param e the element to add
      * @param timeout This parameter is ignored as the method never blocks
      * @param unit This parameter is ignored as the method never blocks
@@ -177,6 +226,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * Retrieves and removes the head of this queue, or returns {@code null}
      * if this queue has no elements with an expired delay.
      *
+     * <p>
+     * 检索并删除此队列的头,或者如果此队列没有过期延迟的元素,则返回{@code null}。
+     * 
+     * 
      * @return the head of this queue, or {@code null} if this
      *         queue has no elements with an expired delay
      */
@@ -198,6 +251,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * Retrieves and removes the head of this queue, waiting if necessary
      * until an element with an expired delay is available on this queue.
      *
+     * <p>
+     *  检索并删除此队列的头,如果有必要,直到具有到期延迟的元素在此队列上可用。
+     * 
+     * 
      * @return the head of this queue
      * @throws InterruptedException {@inheritDoc}
      */
@@ -240,6 +297,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * until an element with an expired delay is available on this queue,
      * or the specified wait time expires.
      *
+     * <p>
+     *  检索并删除此队列的头,如有必要,等待直到具有到期延迟的元素在此队列上可用,或指定的等待时间到期。
+     * 
+     * 
      * @return the head of this queue, or {@code null} if the
      *         specified waiting time elapses before an element with
      *         an expired delay becomes available
@@ -293,6 +354,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * this method returns the element that will expire next,
      * if one exists.
      *
+     * <p>
+     *  检索但不删除此队列的头,或如果此队列为空,则返回{@code null}。与{@code poll}不同,如果队列中没有过期的元素可用,此方法将返回下一个将要过期的元素(如果存在)。
+     * 
+     * 
      * @return the head of this queue, or {@code null} if this
      *         queue is empty
      */
@@ -319,6 +384,9 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
     /**
      * Returns first element only if it is expired.
      * Used only by drainTo.  Call only when holding lock.
+     * <p>
+     *  仅当第一个元素过期时返回。仅由drainTo使用。仅在握住锁时才调用。
+     * 
      */
     private E peekExpired() {
         // assert lock.isHeldByCurrentThread();
@@ -328,6 +396,8 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -354,6 +424,8 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -386,6 +458,9 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * The queue will be empty after this call returns.
      * Elements with an unexpired delay are not waited for; they are
      * simply discarded from the queue.
+     * <p>
+     *  以原子方式从此延迟队列中删除所有元素。此调用返回后,队列将为空。不等待具有未到期延迟的元素;它们只是从队列中丢弃。
+     * 
      */
     public void clear() {
         final ReentrantLock lock = this.lock;
@@ -401,6 +476,10 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * Always returns {@code Integer.MAX_VALUE} because
      * a {@code DelayQueue} is not capacity constrained.
      *
+     * <p>
+     *  始终返回{@code Integer.MAX_VALUE},因为{@code DelayQueue}不受容量限制。
+     * 
+     * 
      * @return {@code Integer.MAX_VALUE}
      */
     public int remainingCapacity() {
@@ -418,6 +497,14 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * <p>This method acts as bridge between array-based and collection-based
      * APIs.
      *
+     * <p>
+     *  返回包含此队列中所有元素的数组。返回的数组元素没有特定的顺序。
+     * 
+     *  <p>返回的数组将是"安全的",因为没有对它的引用由此队列维护。 (换句话说,这个方法必须分配一个新的数组)。因此调用者可以自由地修改返回的数组。
+     * 
+     *  <p>此方法充当基于阵列和基于集合的API之间的桥梁。
+     * 
+     * 
      * @return an array containing all of the elements in this queue
      */
     public Object[] toArray() {
@@ -456,6 +543,21 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * Note that {@code toArray(new Object[0])} is identical in function to
      * {@code toArray()}.
      *
+     * <p>
+     * 返回包含此队列中所有元素的数组;返回的数组的运行时类型是指定数组的运行时类型。返回的数组元素没有特定的顺序。如果队列适合指定的数组,则返回其中。
+     * 否则,将使用指定数组的运行时类型和此队列的大小分配新数组。
+     * 
+     *  <p>如果此队列适合具有剩余空间的指定阵列(即,阵列具有比此队列更多的元素),则紧接队列结束后的数组中的元素将设置为{@code null}。
+     * 
+     *  <p>与{@link #toArray()}方法类似,此方法充当基于数组和基于集合的API之间的桥梁。此外,该方法允许对输出阵列的运行时类型的精确控制,并且在某些情况下可以用于节省分配成本。
+     * 
+     *  <p>以下代码可用于将延迟队列转储到新分配的{@code Delayed}数组中：
+     * 
+     *  <pre> {@code Delayed [] a = q.toArray(new Delayed [0]);} </pre>
+     * 
+     *  注意,{@code toArray(new Object [0])}在功能上与{@code toArray()}是相同的。
+     * 
+     * 
      * @param a the array into which the elements of the queue are to
      *          be stored, if it is big enough; otherwise, a new array of the
      *          same runtime type is allocated for this purpose
@@ -478,6 +580,9 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
     /**
      * Removes a single instance of the specified element from this
      * queue, if it is present, whether or not it has expired.
+     * <p>
+     *  从此队列中删除指定元素的单个实例(如果它存在),无论它是否已过期。
+     * 
      */
     public boolean remove(Object o) {
         final ReentrantLock lock = this.lock;
@@ -491,6 +596,9 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
 
     /**
      * Identity-based version for use in Itr.remove
+     * <p>
+     *  基于身份的版本,用于Itr.remove
+     * 
      */
     void removeEQ(Object o) {
         final ReentrantLock lock = this.lock;
@@ -515,6 +623,12 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
      * <p>The returned iterator is
      * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
      *
+     * <p>
+     *  在此队列中的所有元素(过期和未过期)上返回一个迭代器。迭代器不以任何特定的顺序返回元素。
+     * 
+     * <p>返回的迭代器为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     * 
      * @return an iterator over the elements in this queue
      */
     public Iterator<E> iterator() {
@@ -523,6 +637,7 @@ public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
 
     /**
      * Snapshot iterator that works off copy of underlying q array.
+     * <p>
      */
     private class Itr implements Iterator<E> {
         final Object[] array; // Array of all elements

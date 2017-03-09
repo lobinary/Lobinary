@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ import javax.swing.text.html.HTML;
  * A generic HTML TagElement class. The methods define how white
  * space is interpreted around the tag.
  *
+ * <p>
+ *  一个通用的HTML TagElement类。方法定义如何解释标记周围的空格。
+ * 
  * @author      Sunita Mani
  */
 

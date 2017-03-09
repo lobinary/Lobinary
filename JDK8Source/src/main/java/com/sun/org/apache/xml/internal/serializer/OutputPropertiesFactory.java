@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: OutputPropertiesFactory.java,v 1.2.4.1 2005/09/15 08:15:21 suresh_emailid Exp $
+ * <p>
+ *  $ Id：OutputPropertiesFactory.java,v 1.2.4.1 2005/09/15 08:15:21 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -80,6 +93,28 @@ import com.sun.org.apache.xml.internal.serializer.utils.WrappedRuntimeException;
  *  otherwise be supplied.
  * </ul>
  *
+ * <p>
+ *  此类是一个工厂,用于生成一组用于通过工厂{@link SerializerFactory SerilizerFactory}创建序列化程序的键/值对的默认属性。
+ * 在使用SerializerFactory创建Serializer之前,可以将此工厂生成的属性修改为非默认值。
+ * <p>
+ *  支持的给定输出类型是"xml","text"和"html"。这些类型字符串可以从这个包中的{@link Method Method}类中获得。
+ * <p>
+ * 此类中定义的其他常数是非标准属性键,可用于在用于创建或配置序列化程序的java.util.Properties对象上设置非标准属性值。以下是非标准键：
+ * <ul>
+ *  <li> <b> S_KEY_INDENT_AMOUNT </b>  - 用于设置缩进量的非标准属性键。 "缩进"键需要具有值"yes",并且此属性值是按缩进级别缩进的空格的数量。
+ * 
+ *  <li> <b> S_KEY_CONTENT_HANDLER </b>  - 此非标准属性键用于设置实现ContentHandler接口的完全限定Java类的名称。
+ * 串行器的输出将是SAX事件发送给这个类的一个对象。
+ * 
+ *  <li> <b> S_KEY_ENTITIES </b>  - 此非标准属性键用于指定指定字符到实体引用映射的属性文件的名称。
+ * 这样的文件中的行具有实体的名称和相应字符的数字(基数10)值,如下所示：<br> quot = 34 <br>。
+ * 
+ *  <li> <b> S_USE_URL_ESCAPING </b>  - 如果HTML序列化的href值使用％xx转义,此非标准属性键用于将值设置为"yes"。
+ * 
+ *  <li> <b> S_OMIT_META_TAG </b>  - 如果在其他情况下应省略META标记,则此非标准属性键用于设置值"yes"。
+ * </ul>
+ * 
+ * 
  * @see SerializerFactory
  * @see Method
  * @see Serializer
@@ -90,6 +125,9 @@ public final class OutputPropertiesFactory
      *(http://xml.apache.org/xalan) predefined to signify Xalan's
      * built-in XSLT Extensions. When used in stylesheets, this is often
      * bound to the "xalan:" prefix.
+     * <p>
+     * http://xml.apache.org/xalan)预定义为表示Xalan的内置XSLT扩展。当在样式表中使用时,这通常绑定到"xalan："前缀。
+     * 
      */
     private static final String
       S_BUILTIN_EXTENSIONS_URL = "http://xml.apache.org/xalan";
@@ -97,6 +135,9 @@ public final class OutputPropertiesFactory
     /**
      * The old built-in extension url. It is still supported for
      * backward compatibility.
+     * <p>
+     *  旧的内置扩展程序网址。它仍然支持向后兼容性。
+     * 
      */
     private static final String
       S_BUILTIN_OLD_EXTENSIONS_URL = "http://xml.apache.org/xslt";
@@ -110,6 +151,11 @@ public final class OutputPropertiesFactory
      * reexpressed in {namespaceURI} syntax
      * suitable for prepending to a localname to produce a "universal
      * name".
+     * <p>
+     *  // * PUBLIC CONSTANTS // ******************************************* ***************** / **这不是一个公共AP
+     * I。
+     * 这是内置的扩展名命名空间,以{namespaceURI}语法重新表达,适用于前缀到本地名称以产生"通用名称"。
+     * 
      */
     public static final String S_BUILTIN_EXTENSIONS_UNIVERSAL =
         "{" + S_BUILTIN_EXTENSIONS_URL + "}";
@@ -120,6 +166,9 @@ public final class OutputPropertiesFactory
      * The non-standard property key to use to set the
      * number of whitepaces to indent by, per indentation level,
      * if indent="yes".
+     * <p>
+     *  使用非标准属性键设置要缩进的白色空间的数量,每个缩进级别,如果indent ="yes"。
+     * 
      */
     public static final String S_KEY_INDENT_AMOUNT =
         S_BUILTIN_EXTENSIONS_UNIVERSAL + "indent-amount";
@@ -128,6 +177,9 @@ public final class OutputPropertiesFactory
      * The non-standard property key to use to set the
      * number of whitepaces to indent by, per indentation level,
      * if indent="yes".
+     * <p>
+     *  使用非标准属性键设置要缩进的白色空间的数量,每个缩进级别,如果indent ="yes"。
+     * 
      */
     public static final String S_KEY_LINE_SEPARATOR =
         S_BUILTIN_EXTENSIONS_UNIVERSAL + "line-separator";
@@ -137,6 +189,9 @@ public final class OutputPropertiesFactory
      * Fully qualified name of class with a default constructor that
      *  implements the ContentHandler interface, where the result tree events
      *  will be sent to.
+     * <p>
+     *  实现ContentHandler接口的Java类。类的完全限定名称,带有实现ContentHandler接口的默认构造函数,结果树事件将发送到该接口。
+     * 
      */
 
     public static final String S_KEY_CONTENT_HANDLER =
@@ -145,12 +200,19 @@ public final class OutputPropertiesFactory
     /**
      * This non-standard property key is used to specify the name of the property file
      * that specifies character to entity reference mappings.
+     * <p>
+     *  此非标准属性键用于指定指定字符到实体引用映射的属性文件的名称。
+     * 
      */
     public static final String S_KEY_ENTITIES =
         S_BUILTIN_EXTENSIONS_UNIVERSAL + "entities";
 
     /**
      * This non-standard property key is used to set a value of "yes" if the href values for HTML serialization should
+     * <p>
+     *  如果HTML序列化的href值应该使用此非标准属性键来设置值"yes"
+     * 
+     * 
      *  use %xx escaping. */
     public static final String S_USE_URL_ESCAPING =
         S_BUILTIN_EXTENSIONS_UNIVERSAL + "use-url-escaping";
@@ -158,12 +220,18 @@ public final class OutputPropertiesFactory
     /**
      * This non-standard property key is used to set a value of "yes" if the META tag should be omitted where it would
      *  otherwise be supplied.
+     * <p>
+     *  如果META标签应该被省略,否则该非标准属性键用于设置值"yes"。
+     * 
      */
     public static final String S_OMIT_META_TAG =
         S_BUILTIN_EXTENSIONS_UNIVERSAL + "omit-meta-tag";
 
     /**
      * The old built-in extension namespace, this is not a public API.
+     * <p>
+     *  旧的内置扩展名命名空间,这不是一个公共API。
+     * 
      */
     public static final String S_BUILTIN_OLD_EXTENSIONS_UNIVERSAL =
         "{" + S_BUILTIN_OLD_EXTENSIONS_URL + "}";
@@ -172,6 +240,9 @@ public final class OutputPropertiesFactory
      * This is not a public API, it is only public because it is used
      * by outside of this package,
      * it is the length of the old built-in extension namespace.
+     * <p>
+     * 这不是一个公共API,它只是公共的,因为它被这个包的外部使用,它是旧的内置扩展名命名空间的长度。
+     * 
      */
     public static final int S_BUILTIN_OLD_EXTENSIONS_UNIVERSAL_LEN =
         S_BUILTIN_OLD_EXTENSIONS_UNIVERSAL.length();
@@ -181,6 +252,10 @@ public final class OutputPropertiesFactory
      * without writing it out in the declaration; It can be used to reverse the change by Xalan patch 1495.
      * Since Xalan patch 1495 can cause incompatible behavior, this property is add for application to neutralize
      * the effect of Xalan patch 1495
+     * <p>
+     *  这个非标准的Oracle-impl only属性键被用作指定OutputKeys.STANDALONE但是没有在声明中写出来;它可以用来反转由Xalan补丁1495的更改。
+     * 由于Xalan补丁1495可能导致不兼容的行为,此属性添加到应用程序以中和Xalan补丁1495的影响。
+     * 
      */
         /**
          * <p>Is Standalone</p>
@@ -192,6 +267,17 @@ public final class OutputPropertiesFactory
          *   <li>
          *     <code>no</code> has no effect.
          *   </li>
+         * </ul>
+         * <p>
+         *  <p>为独立</p>
+         * 
+         * <ul>
+         * <li>
+         *  <code> yes </code>以指示输出旨在作为独立使用
+         * </li>
+         * <li>
+         *  <code> no </code>没有效果。
+         * </li>
          * </ul>
          */
     public static final String ORACLE_IS_STANDALONE = "http://www.oracle.com/xml/is-standalone";
@@ -205,6 +291,16 @@ public final class OutputPropertiesFactory
     private static final String S_XALAN_PREFIX = "org.apache.xslt.";
     private static final int S_XALAN_PREFIX_LEN = S_XALAN_PREFIX.length();
 
+    //* <p>
+    //*  // * PRIVATE CONSTANTS // ******************************************* *****************
+    //* 
+    //*  private static final String S_XSLT_PREFIX ="xslt.output。
+    //* "; private static final int S_XSLT_PREFIX_LEN = S_XSLT_PREFIX.length(); private static final String S
+    //* _XALAN_PREFIX ="org.apache.xslt。
+    //*  private static final String S_XSLT_PREFIX ="xslt.output。
+    //* "; private static final int S_XALAN_PREFIX_LEN = S_XALAN_PREFIX.length();。
+    //* 
+    //* 
     /** Synchronization object for lazy initialization of the above tables. */
     private static Integer m_synch_object = new Integer(1);
 
@@ -223,6 +319,10 @@ public final class OutputPropertiesFactory
     //*  PRIVATE STATIC FIELDS
     //************************************************************
 
+    //* <p>
+    //*  // * PRIVATE STATIC FIELDS // ****************************************** ******************
+    //* 
+    //* 
     /** The default properties of all output files. */
     private static Properties m_xml_properties = null;
 
@@ -268,6 +368,14 @@ public final class OutputPropertiesFactory
      * <p>Anything other than 'text', 'xml', and 'html', will
      * use the output_xml.properties file.</p>
      *
+     * <p>
+     *  使用属性文件指定的属性键/值default创建空的OutputProperties。
+     * 方法参数用于构造一个形式为output_ [method] .properties(例如output_html.properties)的字符串。
+     *  output_xml.properties文件始终用作基础。
+     * 
+     *  <p>除"text","xml"和"html"之外的任何内容都将使用output_xml.properties文件。</p>
+     * 
+     * 
      * @param   method non-null reference to method name.
      *
      * @return Properties object that holds the defaults for the given method.
@@ -362,6 +470,12 @@ public final class OutputPropertiesFactory
      * fix it up to be ":", since earlier versions of the JDK do not
      * handle the escape sequence (at least in key names).
      *
+     * <p>
+     * 从资源流加载属性文件。如果一个键名称如"org.apache.xslt.xxx",将字符串的开头固定为一个curly命名空间。
+     * 如果键名以"xslt.output.xxx"开头,剪切"xslt.output"。
+     * 如果发现键名称*或*键值,请检查文本中的\ u003a,并将其修复为"：",因为JDK的早期版本不处理转义序列(至少在键名称中) 。
+     * 
+     * 
      * @param resourceName non-null reference to resource name.
      * @param defaults Default properties, which may be null.
      */
@@ -511,6 +625,8 @@ public final class OutputPropertiesFactory
      * Fix up a string in an output properties file according to
      * the rules of {@link #loadPropertiesFile}.
      *
+     * <p>
+     * 
      * @param s non-null reference to string that may need to be fixed up.
      * @return A new string if fixup occured, otherwise the s argument.
      */

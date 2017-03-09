@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -144,6 +145,67 @@ import java.beans.ConstructorProperties;
  * output of the sample code">
  * </center>
  *
+ * <p>
+ *  {@code RadialGradientPaint}类提供了一种用圆形径向颜色渐变图案填充形状的方法。用户可以指定2个或更多个渐变颜色,并且该涂色将在每个颜色之间提供插值。
+ * <p>
+ *  用户必须指定控制渐变图案的圆,其由中心点和半径描述。用户还可以在该圆内指定单独的对焦点,该对焦点控制渐变的第一颜色的位置。默认情况下,焦点设置为圆的中心。
+ * <p>
+ *  这个颜色会将渐变的第一种颜色映射到焦点,并将最后一种颜色映射到圆的周边,对用户指定的任何中间颜色进行平滑插值。从焦点到圆周绘制的任何线将因此跨越所有梯度颜色。
+ * <p>
+ *  在圆的半径之外指定聚焦点将使梯度图案的环以聚焦点方向上的圆的边缘内的点为中心。渲染将在内部使用此修改的位置,如同它是指定的焦点。
+ * <p>
+ * 用户必须提供一个浮点数组,指定如何沿渐变分布颜色。这些值应该在0.0到1.0之间,并且沿着渐变(它们标记渐变应该是特定颜色的位置)的关键帧。
+ * <p>
+ *  在用户未将第一关键帧值设置为等于0和/或最后关键帧值等于1的情况下,将在这些位置创建关键帧,并且将在那里复制第一和最后一个颜色。因此,如果用户指定以下数组来构造渐变：<br>
+ * <pre>
+ *  {Color.BLUE,Color.RED},{.3f,.7f}
+ * </pre>
+ *  这将被转换为具有以下关键帧的渐变：<br>
+ * <pre>
+ *  {Color.BLUE,Color.BLUE,Color.RED,Color.RED},{0f,.3f,.7f,1f}
+ * </pre>
+ * 
+ * <p>
+ *  当{@code RadialGradientPaint}对象通过将{@code CycleMethod}设置为{@code REFLECTION}或{@code REPEAT}时,填充圆圈半径外的空间
+ * 时,用户还可以选择什么操作。
+ * 对于从焦点绘制的任何特定线,渐变色比例是相等的。下图显示距离AB等于距离BC,距离AD等于距离DE。
+ * <center>
+ *  <img src ="doc-files / RadialGradientPaint-3.png"alt ="图像显示
+ * distance AB=BC, and AD=DE">
+ * </center>
+ * 如果梯度和图形渲染变换被均匀地缩放,并且用户设置焦点以使其与圆的中心重合,则对于从中心绘制的任何线的梯度颜色比例相等。下图显示了距离AB,BC,AD和DE。他们都是平等的。
+ * <center>
+ *  <img src ="doc-files / RadialGradientPaint-4.png"alt ="图像显示
+ * distance of AB, BC, AD, and DE are all equal">
+ * </center>
+ *  注意,由于以像素的粒度进行采样,可能发生一些小的距离变化。如果没有指定循环方法,默认情况下将选择{@code NO_CYCLE},这意味着最后一个关键帧颜色将用于填充剩余区域。
+ * <p>
+ *  colorSpace参数允许用户指定应在哪个颜色空间中执行插值,默认sRGB或线性化RGB。
+ * 
+ * <p>
+ *  以下代码演示了{@code RadialGradientPaint}的典型用法,其中心和焦点相同：
+ * <pre>
+ *  Point2D center = new Point2D.Float(50,50); float radius = 25; float [] dist = {0.0f,0.2f,1.0f}; Colo
+ * r [] colors = {Color.RED,Color.WHITE,Color.BLUE}; RadialGradientPaint p = new RadialGradientPaint(cen
+ * ter,radius,dist,colors);。
+ * </pre>
+ * 
+ * <p>
+ *  此图像演示了上面的示例代码,其中每个循环方法的默认(居中)焦点：
+ * <center>
+ *  <img src ="doc-files / RadialGradientPaint-1.png"alt ="图像显示
+ * output of the sameple code">
+ * </center>
+ * 
+ * <p>
+ *  也可以指定一个非居中的焦点,如下面的代码所示：
+ * <pre>
+ * Point2D center = new Point2D.Float(50,50); float radius = 25; Point2D focus = new Point2D.Float(40,40
+ * ); float [] dist = {0.0f,0.2f,1.0f}; Color [] colors = {Color.RED,Color.WHITE,Color.BLUE}; RadialGrad
+ * ientPaint p = new RadialGradientPaint(center,radius,focus,dist,colors,CycleMethod.NO_CYCLE);。
+ * </pre>
+ * 
+ * 
  * @see java.awt.Paint
  * @see java.awt.Graphics2D#setPaint
  * @author Nicholas Talian, Vincent Hardy, Jim Graham, Jerry Evans
@@ -165,6 +227,15 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      * {@code NO_CYCLE} repeating method and {@code SRGB} color space,
      * using the center as the focus point.
      *
+     * <p>
+     * <p>
+     *  此图像演示了之前的示例代码,其中每个循环方法的非中心焦点：
+     * <center>
+     *  <img src ="doc-files / RadialGradientPaint-2.png"alt ="图像显示
+     * output of the sample code">
+     * </center>
+     * 
+     * 
      * @param cx the X coordinate in user space of the center point of the
      *           circle defining the gradient.  The last color of the
      *           gradient is mapped to the perimeter of this circle.
@@ -205,6 +276,10 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      * {@code NO_CYCLE} repeating method and {@code SRGB} color space,
      * using the center as the focus point.
      *
+     * <p>
+     *  使用默认的{@code NO_CYCLE}重复方法和{@code SRGB}颜色空间构造{@code RadialGradientPaint},使用中心作为焦点。
+     * 
+     * 
      * @param center the center point, in user space, of the circle defining
      *               the gradient
      * @param radius the radius of the circle defining the extents of the
@@ -241,6 +316,10 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      * Constructs a {@code RadialGradientPaint} with a default
      * {@code SRGB} color space, using the center as the focus point.
      *
+     * <p>
+     *  使用默认的{@code NO_CYCLE}重复方法和{@code SRGB}颜色空间构造{@code RadialGradientPaint},使用中心作为焦点。
+     * 
+     * 
      * @param cx the X coordinate in user space of the center point of the
      *           circle defining the gradient.  The last color of the
      *           gradient is mapped to the perimeter of this circle.
@@ -284,6 +363,10 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      * Constructs a {@code RadialGradientPaint} with a default
      * {@code SRGB} color space, using the center as the focus point.
      *
+     * <p>
+     *  使用默认{@code SRGB}颜色空间构建{@code RadialGradientPaint},使用中心作为焦点。
+     * 
+     * 
      * @param center the center point, in user space, of the circle defining
      *               the gradient
      * @param radius the radius of the circle defining the extents of the
@@ -324,6 +407,10 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      * Constructs a {@code RadialGradientPaint} with a default
      * {@code SRGB} color space.
      *
+     * <p>
+     *  使用默认{@code SRGB}颜色空间构建{@code RadialGradientPaint},使用中心作为焦点。
+     * 
+     * 
      * @param cx the X coordinate in user space of the center point of the
      *           circle defining the gradient.  The last color of the
      *           gradient is mapped to the perimeter of this circle.
@@ -372,6 +459,10 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      * Constructs a {@code RadialGradientPaint} with a default
      * {@code SRGB} color space.
      *
+     * <p>
+     *  使用默认的{@code SRGB}颜色空间构造{@code RadialGradientPaint}。
+     * 
+     * 
      * @param center the center point, in user space, of the circle defining
      *               the gradient.  The last color of the gradient is mapped
      *               to the perimeter of this circle.
@@ -416,6 +507,10 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
     /**
      * Constructs a {@code RadialGradientPaint}.
      *
+     * <p>
+     *  使用默认的{@code SRGB}颜色空间构造{@code RadialGradientPaint}。
+     * 
+     * 
      * @param center the center point in user space of the circle defining the
      *               gradient.  The last color of the gradient is mapped to
      *               the perimeter of this circle.
@@ -507,6 +602,10 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      *                                 gradientTransform);
      * </pre>
      *
+     * <p>
+     *  构造{@code RadialGradientPaint}。
+     * 
+     * 
      * @param gradientBounds the bounding box, in user space, of the circle
      *                       defining the outermost extent of the gradient
      * @param fractions numbers ranging from 0.0 to 1.0 specifying the
@@ -568,6 +667,23 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      * See the description of the {@link Paint#createContext createContext} method
      * for information on null parameter handling.
      *
+     * <p>
+     *  使用默认的{@code SRGB}颜色空间构造{@code RadialGradientPaint}。 {@code RadialGradientPaint}的渐变圆由给定的边界框定义。
+     * <p>
+     * 这个构造函数是一种更方便的方式来表达以下(等效)代码：<br>
+     * 
+     * <pre>
+     *  double gw = gradientBounds.getWidth(); double gh = gradientBounds.getHeight(); double cx = gradientB
+     * ounds.getCenterX(); double cy = gradientBounds.getCenterY(); Point2D center = new Point2D.Double(cx,c
+     * y);。
+     * 
+     *  AffineTransform gradientTransform = new AffineTransform(); gradientTransform.translate(cx,cy); gradi
+     * entTransform.scale(gw / 2,gh / 2); gradientTransform.translate(-cx,-cy);。
+     * 
+     *  RadialGradientPaint gp = new RadialGradientPaint(center,1.0f,center,fractions,colors,cycleMethod,Col
+     * orSpaceType.SRGB,gradientTransform);。
+     * </pre>
+     * 
      * @param cm the preferred {@link ColorModel} which represents the most convenient
      *           format for the caller to receive the pixel data, or {@code null}
      *           if there is no preference.
@@ -615,6 +731,9 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
     /**
      * Returns a copy of the center point of the radial gradient.
      *
+     * <p>
+     * 
+     * 
      * @return a {@code Point2D} object that is a copy of the center point
      */
     public Point2D getCenterPoint() {
@@ -629,6 +748,11 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
      * the rendering may center the rings of color on a different
      * point that lies inside the radius.
      *
+     * <p>
+     *  创建并返回一个用于生成圆形径向颜色渐变图案的{@link PaintContext}。
+     * 有关空参数处理的信息,请参阅{@link Paint#createContext createContext}方法的描述。
+     * 
+     * 
      * @return a {@code Point2D} object that is a copy of the focus point
      */
     public Point2D getFocusPoint() {
@@ -638,6 +762,10 @@ public final class RadialGradientPaint extends MultipleGradientPaint {
     /**
      * Returns the radius of the circle defining the radial gradient.
      *
+     * <p>
+     *  返回径向渐变的中心点的副本。
+     * 
+     * 
      * @return the radius of the circle defining the radial gradient
      */
     public float getRadius() {

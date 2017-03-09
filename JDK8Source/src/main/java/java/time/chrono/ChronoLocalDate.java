@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -235,6 +254,83 @@ import java.util.Objects;
  * Additional calendar systems may be added to the system.
  * See {@link Chronology} for more details.
  *
+ * <p>
+ *  在任意年表中没有时间或时区的日期,用于高级全球化用例。
+ * <p>
+ *  <b>大多数应用程序应该将方法签名,字段和变量声明为{@link LocalDate},而不是此接口。</b>
+ * <p>
+ *  {@code ChronoLocalDate}是{@code Chronology chronology}或日历系统可插拔日期的抽象表示形式。
+ * 日期以由{@link TemporalField}表示的字段来定义,其中最常见的实现在{@link ChronoField}中定义。年表定义日历系统的操作方式和标准字段的含义。
+ * 
+ * <h3>何时使用此接口</h3> API的设计鼓励使用{@code LocalDate}而不是此接口,即使在应用程序需要处理多个日历系统的情况下。
+ * <p>
+ *  这个概念首先看起来很奇怪,因为全球化应用程序的自然方式最初似乎是抽象日历系统。然而,如下所述,抽象日历系统通常是错误的方法,导致逻辑错误,很难找到错误。
+ * 因此,它应该被视为一个应用程序范围的架构决定,选择使用这个接口,而不是{@code LocalDate}。
+ * 
+ *  <h3>要考虑的架构问题</h3>这些是在整个应用程序中使用此接口之前必须考虑的一些要点。
+ * <p>
+ *  1)使用这个接口的应用程序,而不是仅仅使用{@code LocalDate},面临的bug的概率明显更高。这是因为正在使用的日历系统在开发时是未知的。
+ * 错误的一个关键原因是开发人员将其日常知识的ISO日历系统的假设应用于旨在处理任何任意日历系统的代码。下面的部分概述了这些假设如何导致问题减少这种增加错误风险的主要机制是强大的代码审查过程。
+ * 这也应该被认为是在代码的生命周期的维护中的额外成本。
+ * <p>
+ * 2)此接口不强制实现的不变性。虽然实现注释表明所有实现必须是不可变的,但是在代码或类型系统中没有任何东西来强制这样做。
+ * 任何声明接受{@code ChronoLocalDate}的方法都可能被传递一个糟糕的或恶意写的可变实现。
+ * <p>
+ *  3)使用该接口的应用必须考虑时间的影响。 {@code LocalDate}通过确保{@code getYear()}返回延迟年度,使用户免受时间的概念。
+ * 该决定确保开发人员可以将{@code LocalDate}实例视为由三个字段组成 - 年,月和日。相比之下,该界面的用户必须将日期视为由四个字段组成：时代,年份,年份和月份。
+ * 额外的时代领域经常被遗忘,但它对任意日历系统中的日期至关重要。例如,在日本日历系统中,时代代表皇帝的统治。每当一个统治结束和另一个统治开始时,年龄被重置为一。
+ * <p>
+ *  4)唯一商定的在两个系统之间传递日期的国际标准是ISO-8601标准,其要求ISO日历系统。
+ * 在整个应用程序中使用此接口将不可避免地导致需要在网络或组件边界上传递日期,从而需要特定于应用程序的协议或格式。
+ * <p>
+ * 5)长期持久性,例如数据库,几乎总是只接受ISO-8601日历系统(或相关的朱利安 - 格里高利)中的日期。在其他日历系统中传递日期会增加与持久性交互的复杂性。
+ * <p>
+ *  6)大多数时候,在整个应用程序中传递{@code ChronoLocalDate}是不必要的,如下面最后一节所讨论的。
+ * 
+ *  <h3>在多日历系统代码中造成错误的假设假设</h3>如上所述,尝试在任意日历系统中使用和操作日期时,需要考虑很多问题。这些是一些关键问题。
+ * <p>
+ *  查询月份日期并假定值永远不会大于31的代码无效。某些日历系统在几个月内有超过31天的时间。
+ * <p>
+ *  将日期添加12个月并假定已添加年份的代码无效。一些日历系统有不同的月数,如在科普特或埃塞俄比亚的13。
+ * <p>
+ *  将日期添加一个月并假定年份值增加1或换行到下一年的代码无效。一些日历系统在一年中具有可变的月数,例如希伯来语。
+ * <p>
+ * 添加一个月的代码,然后再增加一个月,并假定月份将保持接近其原始值无效。一些日历系统在最长月份的长度和最短月份的长度之间具有大的差异。例如,科普特或埃塞俄比亚人有12个月的30天和1个月的5天。
+ * <p>
+ *  添加七天并假设添加一周的代码无效。一些日历系统有七天以外的周,例如法国革命。
+ * <p>
+ *  假设由于{@code date1}的年份大于{@code date2}的年份,因此{@code date2}无效,因此{@code date1}之后的代码。
+ * 这对于所有的日历系统在涉及到年代的时候是无效的,特别是日本日历系统的不真实,那里的年代与每个新皇帝的统治重新开始。
+ * <p>
+ *  将年月日1和日期月1作为年度开始的代码无效。并非所有日历系统都在月值为1的年份开始。
+ * <p>
+ *  一般来说,操作日期,甚至查询日期,当日历系统在开发时是未知的时候,对于错误是开放的。这就是为什么使用此接口的代码必须经过额外的代码审查。这也是为什么避免这种接口类型的架构决定通常是正确的。
+ * 
+ *  <h3>代替使用LocalDate </h3>在整个应用程序中使用此接口的主要替代方法如下。
+ * <ul>
+ * <li>以{@code LocalDate}的形式声明指向日期的所有方法签名。
+ *  <li>将年表(日历系统)存储在用户个人资料中或从用户区域设置查找年表<li>在打印和解析期间将ISO {@code LocalDate}转换为用户首选的日历系统。
+ * </ul>
+ *  这种方法将全球化日历系统的问题视为本地化问题,并将其限制在UI层。这种方法与Java平台中的其他本地化问题保持一致。
+ * <p>
+ *  如上所述,在日历系统的规则是可插入的日期执行计算需要技能,并且不推荐。幸运的是,在任意日历系统中对日期执行计算的需要是极其罕见的。
+ * 例如,图书馆图书租赁计划的商业规则将允许租赁一个月,其中月份的意义取决于用户的偏好日程表系统是不太可能的。
+ * <p>
+ *  在任意日历系统中的日期上的计算的关键用例是产生用于显示和用户交互的逐月日历。再次,这是UI问题,并且仅在UI层的几个方法内使用该接口可以是合理的。
+ * <p>
+ * 在系统的任何其他部分,其中日期必须在除ISO之外的日历系统中操作,该用例通常将指定要使用的日历系统。例如,应用程序可能需要计算可能需要操作日期的下一个伊斯兰或希伯来节日。这种用例可以处理如下：
+ * <ul>
+ *  <li>从传递给方法的ISO {@code LocalDate} <li>将日期转换为备用日历系统,对于此用例是已知的,而不是任意的<li>执行计算<li>转换回来到{@code LocalDate}
+ * 。
+ * </ul>
+ *  编写低级框架或库的开发人员也应该避免这种接口。相反,应该使用两个通用访问接口之一。
+ * 如果需要只读访问,请使用{@link TemporalAccessor},如果需要读写访问,请使用{@link Temporal}。
+ * 
+ *  @implSpec必须小心地实现此接口,以确保其他类正常运行。所有可以实例化的实现必须是final,immutable和线程安全的。子类应尽可能序列化。
+ * <p>
+ *  可以向系统添加附加日历系统。有关详细信息,请参阅{@link Chronology}。
+ * 
+ * 
  * @since 1.8
  */
 public interface ChronoLocalDate
@@ -249,6 +345,12 @@ public interface ChronoLocalDate
      * This allows dates in different calendar systems to be compared based
      * on the position of the date on the local time-line.
      * The underlying comparison is equivalent to comparing the epoch-day.
+     * <p>
+     *  获取一个比较器,按时间线顺序比较{@code ChronoLocalDate}忽略年表。
+     * <p>
+     * 此比较器与{@link #compareTo}中的比较不同,它仅比较基础日期而不是年表。这允许基于本地时间线上的日期的位置来比较不同日历系统中的日期。潜在的比较等同于比较时代。
+     * 
+     * 
      * @return a comparator that compares in time-line order ignoring the chronology
      *
      * @see #isAfter
@@ -276,6 +378,17 @@ public interface ChronoLocalDate
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code ChronoLocalDate::from}.
      *
+     * <p>
+     *  从临时对象获取{@code ChronoLocalDate}的实例。
+     * <p>
+     *  这基于指定的时间获得本地日期。 {@code TemporalAccessor}表示一组任意的日期和时间信息,此工厂将其转换为{@code ChronoLocalDate}的实例。
+     * <p>
+     *  转换提取并组合来自时间对象的年表和日期。该行为等同于使用{@link Chronology#date(TemporalAccessor)}和提取的年表。
+     * 实现允许执行优化,例如访问等价于相关对象的那些字段。
+     * <p>
+     *  此方法匹配功能接口{@link TemporalQuery}的签名,允许它通过方法引用{@code ChronoLocalDate :: from}用作查询。
+     * 
+     * 
      * @param temporal  the temporal object to convert, not null
      * @return the date, not null
      * @throws DateTimeException if unable to convert to a {@code ChronoLocalDate}
@@ -300,6 +413,12 @@ public interface ChronoLocalDate
      * The {@code Chronology} represents the calendar system in use.
      * The era and other fields in {@link ChronoField} are defined by the chronology.
      *
+     * <p>
+     *  获取此日期的年表。
+     * <p>
+     *  {@code Chronology}表示正在使用的日历系统。 {@link ChronoField}中的时代和其他字段由年表定义。
+     * 
+     * 
      * @return the chronology, not null
      */
     Chronology getChronology();
@@ -317,6 +436,16 @@ public interface ChronoLocalDate
      * <p>
      * This default implementation uses {@link Chronology#eraOf(int)}.
      *
+     * <p>
+     *  获得时代,如年表所定义的。
+     * <p>
+     * 时代在概念上是时间线的最大分割。大多数日历系统具有将时间线分为两个时间的单个时期。然而,一些人有多个时代,例如每个领导人统治一个时代。确切的含义由{@code Chronology}确定。
+     * <p>
+     *  所有正确实现的{@code Era}类都是单例,因此它是有效的代码{@code date.getEra()== SomeChrono.ERA_NAME)}。
+     * <p>
+     *  此默认实现使用{@link Chronology#eraOf(int)}。
+     * 
+     * 
      * @return the chronology specific era constant applicable at this date, not null
      */
     default Era getEra() {
@@ -332,6 +461,14 @@ public interface ChronoLocalDate
      * <p>
      * This default implementation uses {@link Chronology#isLeapYear(long)}.
      *
+     * <p>
+     *  检查年份是否为日历系统定义的闰年。
+     * <p>
+     *  闰年是比正常长的一年。确切的含义是由年表确定的,闰年必须暗示比非闰年更长的年长。
+     * <p>
+     *  此默认实现使用{@link Chronology#isLeapYear(long)}。
+     * 
+     * 
      * @return true if this date is in a leap year, false otherwise
      */
     default boolean isLeapYear() {
@@ -343,6 +480,12 @@ public interface ChronoLocalDate
      * <p>
      * This returns the length of the month in days.
      *
+     * <p>
+     *  返回由此日期表示的月份的长度,由日历系统定义。
+     * <p>
+     *  这将返回月份的长度(以天为单位)。
+     * 
+     * 
      * @return the length of the month in days
      */
     int lengthOfMonth();
@@ -354,6 +497,14 @@ public interface ChronoLocalDate
      * <p>
      * The default implementation uses {@link #isLeapYear()} and returns 365 or 366.
      *
+     * <p>
+     *  返回由此日期表示的年份的长度,由日历系统定义。
+     * <p>
+     *  这将返回年的长度(以天为单位)。
+     * <p>
+     *  默认实现使用{@link #isLeapYear()}并返回365或366。
+     * 
+     * 
      * @return the length of the year in days
      */
     default int lengthOfYear() {
@@ -376,6 +527,21 @@ public interface ChronoLocalDate
      * passing {@code this} as the argument.
      * Whether the field is supported is determined by the field.
      *
+     * <p>
+     *  检查是否支持指定的字段。
+     * <p>
+     *  这将检查在此日期是否可以查询指定的字段。
+     * 如果为false,则调用{@link #range(TemporalField)范围},{@link #get(TemporalField)get}和{@link #with(TemporalField,long)}
+     * 方法将抛出异常。
+     *  这将检查在此日期是否可以查询指定的字段。
+     * <p>
+     * 支持字段集由年表定义,通常包括所有{@code ChronoField}日期字段。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalField.isSupportedBy(TemporalAccessor)}传递{@code this}作
+     * 为参数来获得此方法的结果。
+     * 字段是否受支持由字段确定。
+     * 
+     * 
      * @param field  the field to check, null returns false
      * @return true if the field can be queried, false if not
      */
@@ -402,6 +568,19 @@ public interface ChronoLocalDate
      * passing {@code this} as the argument.
      * Whether the unit is supported is determined by the unit.
      *
+     * <p>
+     *  检查是否支持指定的单元。
+     * <p>
+     *  这将检查指定的单位是否可以从此日期添加或减去。
+     * 如果为false,则调用{@link #plus(long,TemporalUnit)}和{@link #minus(long,TemporalUnit)minus}方法将抛出异常。
+     * <p>
+     *  受支持单位的集合由年表定义,通常包括除{@code FOREVER}之外的所有{@code ChronoUnit}日期单位。
+     * <p>
+     *  如果单元不是{@code ChronoUnit},那么通过调用{@code TemporalUnit.isSupportedBy(Temporal)}传递{@code this}作为参数来获得此方法的
+     * 结果。
+     * 单元是否受支持由单元确定。
+     * 
+     * 
      * @param unit  the unit to check, null returns false
      * @return true if the unit can be added/subtracted, false if not
      */
@@ -417,6 +596,10 @@ public interface ChronoLocalDate
     // override for covariant return type
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -427,6 +610,10 @@ public interface ChronoLocalDate
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws UnsupportedTemporalTypeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
@@ -441,6 +628,10 @@ public interface ChronoLocalDate
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -451,6 +642,10 @@ public interface ChronoLocalDate
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -464,6 +659,10 @@ public interface ChronoLocalDate
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -474,6 +673,10 @@ public interface ChronoLocalDate
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws UnsupportedTemporalTypeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
@@ -496,6 +699,14 @@ public interface ChronoLocalDate
      * {@link TemporalQuery#queryFrom(TemporalAccessor)} method on the
      * specified query passing {@code this} as the argument.
      *
+     * <p>
+     *  使用指定的查询查询此日期。
+     * <p>
+     *  这将使用指定的查询策略对象查询此日期。 {@code TemporalQuery}对象定义用于获取结果的逻辑。阅读查询的文档以了解此方法的结果。
+     * <p>
+     * 此方法的结果是通过对指定的查询调用{@link TemporalQuery#queryFrom(TemporalAccessor)}方法传递{@code this}作为参数来获得的。
+     * 
+     * 
      * @param <R> the type of the result
      * @param query  the query to invoke, not null
      * @return the query result, null may be returned (defined by the query)
@@ -538,6 +749,22 @@ public interface ChronoLocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  将指定的时间对象调整为与此对象具有相同的日期。
+     * <p>
+     *  这返回一个与输入相同的observable类型的时间对象,日期更改为与此相同。
+     * <p>
+     *  该调整等同于使用{@link Temporal#with(TemporalField,long)}传递{@link ChronoField#EPOCH_DAY}作为字段。
+     * <p>
+     *  在大多数情况下,通过使用{@link Temporal#with(TemporalAdjuster)}来反转呼叫模式是更清楚的：
+     * <pre>
+     *  //这两行是等价的,但第二种方法是建议temporal = thisLocalDate.adjustInto(temporal); temporal = temporal.with(thisLocal
+     * Date);。
+     * </pre>
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param temporal  the target object to be adjusted, not null
      * @return the adjusted object, not null
      * @throws DateTimeException if unable to make the adjustment
@@ -585,6 +812,31 @@ public interface ChronoLocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  根据指定的单位计算直到另一个日期的时间量。
+     * <p>
+     * 这将根据单个{@code TemporalUnit}计算两个{@code ChronoLocalDate}对象之间的时间量。起点和终点是{@code this}和指定的日期。
+     * 如果结束在开始之前,结果将为负。
+     * 使用{@link Chronology#date(TemporalAccessor)}将传递给此方法的{@code Temporal}转换为{@code ChronoLocalDate}。
+     * 计算返回一个整数,表示两个日期之间的完整单位数。例如,两个日期之间的天数可以使用{@code startDate.until(endDate,DAYS)}计算。
+     * <p>
+     *  有两种等效的方法使用这种方法。第一个是调用这个方法。第二个是使用{@link TemporalUnit#between(Temporal,Temporal)}：
+     * <pre>
+     *  //这两行是等价的amount = start.until(end,MONTHS); amount = MONTHS.between(start,end);
+     * </pre>
+     *  应该基于哪个使得代码更可读的选择。
+     * <p>
+     *  该计算在{@link ChronoUnit}的此方法中实现。
+     *  {@code DAYS},{@code WEEKS},{@code MONTHS},{@code YEARS},{@code DECADES},{@code CENTURIES},{@code MILLENNIA}
+     * 和{@code ERAS}应该得到所有实现的支持。
+     *  该计算在{@link ChronoUnit}的此方法中实现。其他{@code ChronoUnit}值会抛出异常。
+     * <p>
+     *  如果单元不是{@code ChronoUnit},那么通过调用{@code TemporalUnit.between(Temporal,Temporal)}传递{@code this}作为第一个参数和
+     * 转换的输入时间为第二个参数。
+     * <p>
+     * 此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param endExclusive  the end date, exclusive, which is converted to a
      *  {@code ChronoLocalDate} in the same chronology, not null
      * @param unit  the unit to measure the amount in, not null
@@ -613,6 +865,18 @@ public interface ChronoLocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  计算此日期与另一个日期之间的期间为{@code ChronoPeriod}。
+     * <p>
+     *  这将计算两个日期之间的期间。所有提供的年表都使用年,月和日计算期间,但{@code ChronoPeriod} API允许使用其他单位表示期间。
+     * <p>
+     *  起点和终点是{@code this}和指定的日期。如果结束在开始之前,结果将为负。负号在年,月和日的每一个中都是相同的。
+     * <p>
+     *  使用该日期的年表进行计算。如果需要,输入日期将被转换为匹配。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param endDateExclusive  the end date, exclusive, which may be in any chronology, not null
      * @return the period between this date and the end date, not null
      * @throws DateTimeException if the period cannot be calculated
@@ -630,6 +894,17 @@ public interface ChronoLocalDate
      *  return formatter.format(this);
      * </pre>
      *
+     * <p>
+     *  使用指定的格式化程序格式化此日期。
+     * <p>
+     *  此日期将传递到格式化程序以生成字符串。
+     * <p>
+     *  默认实现必须如下所示：
+     * <pre>
+     *  return formatter.format(this);
+     * </pre>
+     * 
+     * 
      * @param formatter  the formatter to use, not null
      * @return the formatted date string, not null
      * @throws DateTimeException if an error occurs during printing
@@ -646,6 +921,12 @@ public interface ChronoLocalDate
      * This returns a {@code ChronoLocalDateTime} formed from this date at the specified time.
      * All possible combinations of date and time are valid.
      *
+     * <p>
+     *  将此日期与时间组合,以创建{@code ChronoLocalDateTime}。
+     * <p>
+     *  这将返回在指定时间从此日期形成的{@code ChronoLocalDateTime}。所有可能的日期和时间组合都有效。
+     * 
+     * 
      * @param localTime  the local time to use, not null
      * @return the local date-time formed from this date and the specified time, not null
      */
@@ -664,6 +945,14 @@ public interface ChronoLocalDate
      * <p>
      * This default implementation queries the {@code EPOCH_DAY} field.
      *
+     * <p>
+     *  将此日期转换为纪元日。
+     * <p>
+     *  {@link ChronoField#EPOCH_DAY纪元日计数}是简单的递增天数,第0天为1970-01-01(ISO)。这个定义对于所有的年表都是一样的,可以进行转换。
+     * <p>
+     *  此默认实现查询{@code EPOCH_DAY}字段。
+     * 
+     * 
      * @return the Epoch Day equivalent to this date
      */
     default long toEpochDay() {
@@ -696,6 +985,24 @@ public interface ChronoLocalDate
      * <p>
      * This default implementation performs the comparison defined above.
      *
+     * <p>
+     * 将此日期与另一个日期(包括年表)进行比较。
+     * <p>
+     *  比较首先基于潜在的时间线日期,然后基于年表。它是"与等号一致",由{@link Comparable}定义。
+     * <p>
+     *  例如,以下是比较器顺序：
+     * <ol>
+     *  <li> {@ code 2012-12-03(ISO)} </li> <li> {@ code 2012-12-04(ISO)} </li> <li> {@ code 2555-12-04 ThaiBuddhist)}
+     *  </li> <li> {@ code 2012-12-05(ISO)} </li>。
+     * </ol>
+     *  值#2和#3表示时间线上的相同日期。当两个值表示相同的日期时,比较年表ID以区分它们。需要此步骤使排序"与等号一致"。
+     * <p>
+     *  如果所比较的所有日期对象都在相同的年表中,则不需要附加的年表,而仅使用本地日期。
+     * 要比较两个{@code TemporalAccessor}实例的日期,包括两个不同年代的日期,请使用{@link ChronoField#EPOCH_DAY}作为比较。
+     * <p>
+     *  此默认实现执行上面定义的比较。
+     * 
+     * 
      * @param other  the other date to compare to, not null
      * @return the comparator value, negative if less, positive if greater
      */
@@ -719,6 +1026,15 @@ public interface ChronoLocalDate
      * <p>
      * This default implementation performs the comparison based on the epoch-day.
      *
+     * <p>
+     *  检查此日期是否晚于指定的日期,而忽略年表。
+     * <p>
+     *  此方法与{@link #compareTo}中的比较不同,它仅比较基础日期而不是年表。这允许基于时间线位置来比较不同日历系统中的日期。
+     * 这相当于使用{@code date1.toEpochDay()&gt; date2.toEpochDay()}。
+     * <p>
+     *  此默认实现基于时代日执行比较。
+     * 
+     * 
      * @param other  the other date to compare to, not null
      * @return true if this is after the specified date
      */
@@ -737,6 +1053,15 @@ public interface ChronoLocalDate
      * <p>
      * This default implementation performs the comparison based on the epoch-day.
      *
+     * <p>
+     * 检查此日期是否早于指定的日期,而忽略年表。
+     * <p>
+     *  此方法与{@link #compareTo}中的比较不同,它仅比较基础日期而不是年表。这允许基于时间线位置来比较不同日历系统中的日期。
+     * 这相当于使用{@code date1.toEpochDay()&lt; date2.toEpochDay()}。
+     * <p>
+     *  此默认实现基于时代日执行比较。
+     * 
+     * 
      * @param other  the other date to compare to, not null
      * @return true if this is before the specified date
      */
@@ -755,6 +1080,15 @@ public interface ChronoLocalDate
      * <p>
      * This default implementation performs the comparison based on the epoch-day.
      *
+     * <p>
+     *  检查此日期是否等于忽略年表的指定日期。
+     * <p>
+     *  此方法与{@link #compareTo}中的比较不同,它仅比较基础日期而不是年表。这允许基于时间线位置来比较不同日历系统中的日期。
+     * 这相当于使用{@code date1.toEpochDay()== date2.toEpochDay()}。
+     * <p>
+     *  此默认实现基于时代日执行比较。
+     * 
+     * 
      * @param other  the other date to compare to, not null
      * @return true if the underlying date is equal to the specified date
      */
@@ -771,6 +1105,14 @@ public interface ChronoLocalDate
      * To compare the dates of two {@code TemporalAccessor} instances, including dates
      * in two different chronologies, use {@link ChronoField#EPOCH_DAY} as a comparator.
      *
+     * <p>
+     *  检查此日期是否等于另一个日期,包括年表。
+     * <p>
+     *  将此日期与另一个日期进行比较,确保日期和年表相同。
+     * <p>
+     *  要比较两个{@code TemporalAccessor}实例的日期,包括两个不同年代的日期,请使用{@link ChronoField#EPOCH_DAY}作为比较。
+     * 
+     * 
      * @param obj  the object to check, null returns false
      * @return true if this is equal to the other date
      */
@@ -780,6 +1122,10 @@ public interface ChronoLocalDate
     /**
      * A hash code for this date.
      *
+     * <p>
+     *  此日期的哈希码。
+     * 
+     * 
      * @return a suitable hash code
      */
     @Override
@@ -791,6 +1137,10 @@ public interface ChronoLocalDate
      * <p>
      * The output will include the full local date.
      *
+     * <p>
+     *  将此日期作为{@code String}输出。
+     * <p>
+     * 
      * @return the formatted date, not null
      */
     @Override

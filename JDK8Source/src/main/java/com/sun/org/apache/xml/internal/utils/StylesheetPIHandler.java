@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: StylesheetPIHandler.java,v 1.2.4.1 2005/09/15 08:15:57 suresh_emailid Exp $
+ * <p>
+ *  $ Id：StylesheetPIHandler.java,v 1.2.4.1 2005/09/15 08:15:57 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -38,6 +51,10 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Search for the xml-stylesheet processing instructions in an XML document.
+ * <p>
+ *  在XML文档中搜索xml样式表处理指令。
+ * 
+ * 
  * @see <a href="http://www.w3.org/TR/xml-stylesheet/">Associating Style Sheets with XML documents, Version 1.0</a>
  */
 public class StylesheetPIHandler extends DefaultHandler
@@ -62,6 +79,9 @@ public class StylesheetPIHandler extends DefaultHandler
   /**
    * The object that implements the URIResolver interface,
    * or null.
+   * <p>
+   *  实现URIResolver接口的对象,或null。
+   * 
    */
   URIResolver m_uriResolver;
 
@@ -69,6 +89,10 @@ public class StylesheetPIHandler extends DefaultHandler
    * Get the object that will be used to resolve URIs in href
    * in xml-stylesheet processing instruction.
    *
+   * <p>
+   *  获取将用于解析xml样式表处理指令中的href中的URI的对象。
+   * 
+   * 
    * @param resolver An object that implements the URIResolver interface,
    * or null.
    */
@@ -81,6 +105,10 @@ public class StylesheetPIHandler extends DefaultHandler
    * Get the object that will be used to resolve URIs in href
    * in xml-stylesheet processing instruction.
    *
+   * <p>
+   *  获取将用于解析xml样式表处理指令中的href中的URI的对象。
+   * 
+   * 
    * @return The URIResolver that was set with setURIResolver.
    */
   public URIResolver getURIResolver()
@@ -92,6 +120,10 @@ public class StylesheetPIHandler extends DefaultHandler
    * Construct a StylesheetPIHandler instance that will search
    * for xml-stylesheet PIs based on the given criteria.
    *
+   * <p>
+   *  构造一个StylesheetPIHandler实例,该实例将根据给定的条件搜索xml样式表PI。
+   * 
+   * 
    * @param baseID The base ID of the XML document, needed to resolve
    *               relative IDs.
    * @param media The desired media criteria.
@@ -111,6 +143,10 @@ public class StylesheetPIHandler extends DefaultHandler
   /**
    * Return the last stylesheet found that match the constraints.
    *
+   * <p>
+   *  返回找到的匹配约束的最后一个样式表。
+   * 
+   * 
    * @return Source object that references the last stylesheet reference
    *         that matches the constraints.
    */
@@ -131,6 +167,10 @@ public class StylesheetPIHandler extends DefaultHandler
   /**
    * Handle the xml-stylesheet processing instruction.
    *
+   * <p>
+   *  处理xml样式表处理指令。
+   * 
+   * 
    * @param target The processing instruction target.
    * @param data The processing instruction data, or null if
    *             none is supplied.
@@ -311,6 +351,10 @@ public class StylesheetPIHandler extends DefaultHandler
    * so, at least for right now, I'm going to go ahead an throw a TransformerException
    * in order to stop the parse.
    *
+   * <p>
+   * 规范指出"xml样式表处理指令只允许在XML文档的序言中",所以,至少现在,我要继续抛出TransformerException以停止解析。
+   * 
+   * 
    * @param namespaceURI The Namespace URI, or an empty string.
    * @param localName The local name (without prefix), or empty string if not namespace processing.
    * @param qName The qualified name (with prefix).
@@ -330,6 +374,8 @@ public class StylesheetPIHandler extends DefaultHandler
     * Added additional getter and setter methods for the Base Id
     * to fix bugzilla bug 24187
     *
+    * <p>
+    *  为Base Id添加了额外的getter和setter方法来修复bugzilla错误24187
     */
    public void setBaseId(String baseId) {
        m_baseID = baseId;

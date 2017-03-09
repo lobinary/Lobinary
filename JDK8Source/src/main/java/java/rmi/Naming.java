@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,6 +63,28 @@ import java.net.URISyntaxException;
  * (see <code>java.rmi.registry.LocateRegistry.createRegistry</code> method
  * for details).
  *
+ * <p>
+ *  <code> Naming </code>类提供了用于存储和获取对远程对象注册表中的远程对象的引用的方法。
+ *  <code> Naming </code>类的每个方法都以其格式的URL格式(不包含scheme组件)的<code> java.lang.String </code>作为其参数之一：。
+ * 
+ * <PRE>
+ *  // host：port / name
+ * </PRE>
+ * 
+ *  <p>其中<code> host </code>是注册表所在的主机(远程或本地),<code> port </code>是注册表接受呼叫的端口号,<code> name </code>是注册表未解释的
+ * 简单字符串。
+ *  <code> host </code>和<code> port </code>都是可选的。如果省略<code> host </code>,则主机默认为本地主机。
+ * 如果省略<code> port </code>,那么端口默认为1099,RMI的注册表<code> rmiregistry </code>使用的"知名"端口。
+ * 
+ *  <P> </em>绑定远程对象的名称正在关联或注册远程对象的名称,以供稍后查找该远程对象。
+ * 远程对象可以使用<code> Naming </code>类的<code> bind </code>或<code> rebind </code>方法与名称相关联。
+ * 
+ * <P>远程对象在本地主机上注册(绑定)RMI注册表后,远程(或本地)主机上的调用者可以按名称查找远程对象,获取其引用,然后在对象上调用远程方法。
+ * 注册表可以由在主机上运行的所有服务器共享,或者单个服务器进程可以根据需要创建和使用其自己的注册表(细节参见<code> java.rmi.registry.LocateRegistry.createRe
+ * gistry </code>方法)。
+ * <P>远程对象在本地主机上注册(绑定)RMI注册表后,远程(或本地)主机上的调用者可以按名称查找远程对象,获取其引用,然后在对象上调用远程方法。
+ * 
+ * 
  * @author  Ann Wollrath
  * @author  Roger Riggs
  * @since   JDK1.1
@@ -72,6 +95,9 @@ import java.net.URISyntaxException;
 public final class Naming {
     /**
      * Disallow anyone from creating one of these
+     * <p>
+     *  禁止任何人创建其中的一个
+     * 
      */
     private Naming() {}
 
@@ -79,6 +105,10 @@ public final class Naming {
      * Returns a reference, a stub, for the remote object associated
      * with the specified <code>name</code>.
      *
+     * <p>
+     *  返回与指定的<code> name </code>关联的远程对象的引用,存根。
+     * 
+     * 
      * @param name a name in URL format (without the scheme component)
      * @return a reference for a remote object
      * @exception NotBoundException if name is not currently bound
@@ -104,6 +134,10 @@ public final class Naming {
     /**
      * Binds the specified <code>name</code> to a remote object.
      *
+     * <p>
+     *  将指定的<code>名称</code>绑定到远程对象。
+     * 
+     * 
      * @param name a name in URL format (without the scheme component)
      * @param obj a reference for the remote object (usually a stub)
      * @exception AlreadyBoundException if name is already bound
@@ -132,6 +166,10 @@ public final class Naming {
      * Destroys the binding for the specified name that is associated
      * with a remote object.
      *
+     * <p>
+     *  销毁与远程对象关联的指定名称的绑定。
+     * 
+     * 
      * @param name a name in URL format (without the scheme component)
      * @exception NotBoundException if name is not currently bound
      * @exception MalformedURLException if the name is not an appropriately
@@ -156,6 +194,10 @@ public final class Naming {
      * Rebinds the specified name to a new remote object. Any existing
      * binding for the name is replaced.
      *
+     * <p>
+     *  将指定的名称重新绑定到新的远程对象。将替换名称的任何现有绑定。
+     * 
+     * 
      * @param name a name in URL format (without the scheme component)
      * @param obj new remote object to associate with the name
      * @exception MalformedURLException if the name is not an appropriately
@@ -183,6 +225,10 @@ public final class Naming {
      * a snapshot of the names present in the registry at the time of the
      * call.
      *
+     * <p>
+     *  返回在注册表中绑定的名称数组。名称是URL格式的(不包括方案组件)字符串。该数组包含调用时注册表中存在的名称的快照。
+     * 
+     * 
      * @param   name a registry name in URL format (without the scheme
      *          component)
      * @return  an array of names (in the appropriate format) bound
@@ -214,6 +260,9 @@ public final class Naming {
 
     /**
      * Returns a registry reference obtained from information in the URL.
+     * <p>
+     *  返回从URL中的信息获取的注册表引用。
+     * 
      */
     private static Registry getRegistry(ParsedNamingURL parsed)
         throws RemoteException
@@ -225,6 +274,10 @@ public final class Naming {
      * Dissect Naming URL strings to obtain referenced host, port and
      * object name.
      *
+     * <p>
+     *  解析命名URL字符串以获取引用的主机,端口和对象名称。
+     * 
+     * 
      * @return an object which contains each of the above
      * components.
      *
@@ -239,6 +292,9 @@ public final class Naming {
             /* With RFC 3986 URI handling, 'rmi://:<port>' and
              * '//:<port>' forms will result in a URI syntax exception
              * Convert the authority to a localhost:<port> form
+             * <p>
+             *  '//：<port>'形式将导致URI语法异常将权限转换为localhost：<port>形式
+             * 
              */
             MalformedURLException mue = new MalformedURLException(
                 "invalid URL String: " + str);
@@ -309,6 +365,9 @@ public final class Naming {
                  * or 'rmi://:<port>' are parsed into a registry based
                  * authority. We only want to allow server based naming
                  * authorities.
+                 * <p>
+                 *  使用2396 URI处理,诸如"rmi：// host：bar"或"rmi：//：<port>"之类的表单被解析为基于注册表的权限。我们只想允许基于服务器的命名机构。
+                 * 
                  */
                 uri.parseServerAuthority();
             } catch (URISyntaxException use) {
@@ -341,6 +400,8 @@ public final class Naming {
 
     /**
      * Simple class to enable multiple URL return values.
+     * <p>
+     * 简单类,以启用多个URL返回值。
      */
     private static class ParsedNamingURL {
         String host;

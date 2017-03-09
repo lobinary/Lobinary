@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -86,6 +87,28 @@ name has no package name, such as <code>String</code>.
 <h3>Example</h3>
 
 The following is an example doclet that
+/* <p>
+/*  Doclet API(也称为Javadoc API)为客户端提供了一种检查程序和库的源级结构的机制,包括源代码中嵌入的javadoc注释。这对于文档,程序检查,自动代码生成和许多其他工具很有用。
+/* <p>
+/* 
+/*  Doclet由javadoc调用,并使用此API将程序信息写入文件。例如,默认情况下调用标准doclet,并将文档写入HTML文件。
+/* <p>
+/* 
+/*  调用由抽象{@link com.sun.javadoc.Doclet}类定义 - 入口点是{@link com.sun.javadoc.Doclet#start(RootDoc)start}方法：
+/* <pre>
+/*  public static boolean <b> start </b>(RootDoc root)
+/* </pre>
+/*  {@link com.sun.javadoc.RootDoc}实例保存程序结构信息的根。从该根可以提取所有其他节目结构信息。
+/* <p>
+/* 
+/*  <a name="terminology"> </a> <h3>术语</h3>
+/* 
+/* <a name="included"> </a>调用javadoc时,您会传入包名称和源文件名称 - 这些名称称为<em>指定的包和类。
+/* 您还传递Javadoc选项; </em> Javadoc选项(<code> -public </code>,<code> -protected </code>,<code> -package </code>
+/* 和<code> -private < / code>)过滤程序元素,产生结果集,称为包含</em>集合或"文档"集合。
+/* <a name="included"> </a>调用javadoc时,您会传入包名称和源文件名称 - 这些名称称为<em>指定的包和类。
+/*  (未过滤的集合也可以通过{@link com.sun.javadoc.PackageDoc#allClasses(boolean)allClasses(false)}。)。
+/* 
 displays information in the <code>@param</code> tags of the processed
 classes:
 <pre>

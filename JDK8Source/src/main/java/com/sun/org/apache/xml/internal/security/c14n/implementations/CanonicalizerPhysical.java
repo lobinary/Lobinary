@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.c14n.implementations;
 
@@ -51,6 +60,10 @@ import org.xml.sax.SAXException;
  * This same property makes it ideal for XML Encryption Syntax and Processing,
  * because the decrypted XML content will share the same physical representation
  * as the original XML content that was encrypted.
+ * <p>
+ *  序列化子树的物理表示。发出子树中存在的所有属性。属性在元素内排序,命名空间声明出现在常规属性之前。该算法不是真正的规范化,因为等效子树可能产生不同的输出。因此,它不适合于数字签名。
+ * 此相同的属性使其成为XML加密语法和处理的理想选择,因为解密的XML内容将与被加密的原始XML内容共享相同的物理表示。
+ * 
  */
 public class CanonicalizerPhysical extends CanonicalizerBase {
 
@@ -58,6 +71,9 @@ public class CanonicalizerPhysical extends CanonicalizerBase {
 
     /**
      * Constructor Canonicalizer20010315
+     * <p>
+     * 构造函数Canonicalizer20010315
+     * 
      */
     public CanonicalizerPhysical() {
         super(true);
@@ -66,6 +82,10 @@ public class CanonicalizerPhysical extends CanonicalizerBase {
     /**
      * Always throws a CanonicalizationException.
      *
+     * <p>
+     *  总是抛出CanonicalizationException。
+     * 
+     * 
      * @param xpathNodeSet
      * @param inclusiveNamespaces
      * @return none it always fails
@@ -81,6 +101,10 @@ public class CanonicalizerPhysical extends CanonicalizerBase {
     /**
      * Always throws a CanonicalizationException.
      *
+     * <p>
+     *  总是抛出CanonicalizationException。
+     * 
+     * 
      * @param rootNode
      * @param inclusiveNamespaces
      * @return none it always fails
@@ -102,6 +126,12 @@ public class CanonicalizerPhysical extends CanonicalizerBase {
      * So if the element in question isRoot of c14n, it's parent is not in the
      * node set, as well as all other ancestors.
      *
+     * <p>
+     *  返回要为给定元素输出的Attr []。
+     * <br>
+     *  此方法的代码是{@link #handleAttributes(Element,NameSpaceSymbTable)}的副本,而它考虑到子树-c14n是基于良好子树的。
+     * 因此,如果有问题的元素是ROW的c14n,它的父节点不在节点集,以及所有其他祖先。
+     * 
      * @param element
      * @param ns
      * @return the Attr[]s to be output
@@ -134,6 +164,9 @@ public class CanonicalizerPhysical extends CanonicalizerBase {
     /**
      * Returns the Attr[]s to be output for the given element.
      *
+     * <p>
+     * 
+     * 
      * @param element
      * @param ns
      * @return the Attr[]s to be output

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -120,6 +121,44 @@ import static java.lang.annotation.RetentionPolicy.*;
  *     &lt;/xs:complexType>
  *
  * </pre>
+ * <p>
+ * <p>
+ *  将JavaBean属性映射到XML属性。
+ * 
+ *  <p> <b>使用</b> </p>
+ * <p>
+ *  <tt> @XmlAttribute </tt>注释可以与以下程序元素一起使用：
+ * <ul>
+ *  <li> JavaBean属性</li> <li>字段</li>
+ * </ul>
+ * 
+ *  <p>静态final字段映射到XML固定属性。
+ * 
+ *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
+ * 
+ *  用法受以下约束：
+ * <ul>
+ *  <li>如果字段或属性的类型是集合类型,则集合项类​​型必须映射到模式简单类型。
+ * <pre>
+ *  //示例@XmlAttribute List&lt; Integer> items; // legal @XmlAttribute List&lt; Bar> foo; //如果Bar不映射到模式简单
+ * 类型,则为非法。
+ * </pre>
+ * </li>
+ *  <li>如果字段或属性的类型是非集合类型,则属性或字段的类型必须映射到简单的模式类型。
+ * <pre>
+ *  //示例@XmlAttribute int foo; // legal @XmlAttribute Foo foo; //非法如果Foo不映射到模式简单类型
+ * </pre>
+ * </li>
+ *  <li>此注释可用于以下注释：{@link XmlID},{@link XmlIDREF},{@link XmlList},{@link XmlSchemaType},{@link XmlValue}
+ * ,{@link XmlAttachmentRef},{ @link XmlMimeType},{@link XmlInlineBinaryData},{@link javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter}
+ * 。
+ * </li>。
+ * </ul>
+ * </p>
+ * 
+ * <p> <b>示例1：</b>将JavaBean属性映射到XML属性。</p>
+ * <pre>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlType
  * @since JAXB2.0
@@ -131,6 +170,25 @@ public @interface XmlAttribute {
      * Name of the XML Schema attribute. By default, the XML Schema
      * attribute name is derived from the JavaBean property name.
      *
+     * <p>
+     *  //示例：代码片段public class USPrice {@XmlAttribute public java.math.BigDecimal getPrice(){...}; public voi
+     * d setPrice(java.math.BigDecimal){...}; }}。
+     * 
+     * &lt;!-- Example: XML Schema fragment -->
+     * &lt;xs:complexType name="USPrice">
+     * &lt;xs:sequence>
+     * &lt;/xs:sequence>
+     * &lt;xs:attribute name="price" type="xs:decimal"/>
+     * &lt;/xs:complexType>
+     * </pre>
+     * 
+     *  <p> <b>示例2：</b>将JavaBean属性映射到具有匿名类型的XML属性。</p>请参见@ {@ link XmlType}中的示例7。
+     * 
+     *  <p> <b>示例3：</b>将JavaBean集合属性映射到XML属性。</p>
+     * <pre>
+     *  //示例：代码片段类Foo {... @XmlAttribute List&lt; Integer> items; }}
+     * 
+     * &lt;!-- Example: XML Schema fragment -->
      */
     String name() default "##default";
 
@@ -140,6 +198,16 @@ public @interface XmlAttribute {
      * XML Schema attribute that is required. Otherwise it is mapped
      * to a XML Schema attribute that is optional.
      *
+     * <p>
+     * &lt;xs:complexType name="foo">
+     *  ... ...
+     * &lt;xs:attribute name="items">
+     * &lt;xs:simpleType>
+     * &lt;xs:list itemType="xs:int"/>
+     * &lt;/xs:simpleType>
+     * &lt;/xs:complexType>
+     * 
+     * </pre>
      */
      boolean required() default false;
 
@@ -147,6 +215,7 @@ public @interface XmlAttribute {
      * Specifies the XML target namespace of the XML Schema
      * attribute.
      *
+     * <p>
      */
     String namespace() default "##default" ;
 }

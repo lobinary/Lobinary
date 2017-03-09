@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.regexp.internal;
@@ -289,6 +299,148 @@ import java.util.Vector;
  *
  * </font>
  *
+ * <p>
+ *  RE是一个高效,轻量的正则表达式计算器/匹配器类。正则表达式是允许字符串的复杂匹配的模式描述。除了能够将字符串与模式匹配之外,还可以提取匹配的部分。
+ * 这在文本解析中特别有用！下面给出了正则表达式模式的语法的详细信息。
+ * 
+ * <p>
+ *  要编译正则表达式(RE),您可以从模式的字符串规范中简单地构造一个RE匹配器对象,如下所示：
+ * 
+ * <pre>
+ *  RE r = new RE("a * b");
+ * </pre>
+ * 
+ * <p>
+ *  一旦你这样做,你可以调用任何一个RE.match方法来执行匹配一个字符串。例如：
+ * 
+ * <pre>
+ *  boolean matched = r.match("aaaab");
+ * </pre>
+ * 
+ * 将使布尔匹配设置为true,因为模式"a * b"匹配字符串"aaaab"。
+ * 
+ * <p>
+ *  如果您对与我们的示例表达式第一部分匹配的a的<i>数字</i>感兴趣,您可以将表达式更改为"(a *)b"。然后,当你编译表达式并将其与类似"xaaaab"的东西进行匹配时,将得到如下结果：
+ * 
+ * <pre>
+ *  RE r = new RE("(a *)b"); //编译表达式boolean matched = r.match("xaaaab"); // Match against"xaaaab"
+ * 
+ *  String wholeExpr = r.getParen(0); // wholeExpr将'aaaab'String insideParens = r.getParen(1); // inside
+ * Parens将'aaaa'。
+ * 
+ *  int startWholeExpr = r.getParenStart(0); // startWholeExpr将索引1 int endWholeExpr = r.getParenEnd(0); 
+ * // endWholeExpr将被索引6 int lenWholeExpr = r.getParenLength(0); // lenWholeExpr将为5。
+ * 
+ *  int startInside = r.getParenStart(1); // startInside将索引1 int endInside = r.getParenEnd(1); // endIns
+ * ide将索引5 int lenInside = r.getParenLength(1); // lenInside将是4。
+ * </pre>
+ * 
+ *  您还可以在正则表达式本身中引用括号表达式的内容。这被称为"反向引用"。正则表达式中的第一个反向引用用\ 1表示,第二个用\ 2表示,依此类推。所以表达式：
+ * 
+ * <pre>
+ *  ([0-9] +)= \ 1
+ * </pre>
+ * 
+ *  将匹配任何形式n = n(如0 = 0或2 = 2)的字符串。
+ * 
+ * <p>
+ *  RE接受的完整正则表达式语法描述如下：
+ * 
+ * <pre>
+ * 
+ * <b> <font face = times roman>人物</font> </b>
+ * 
+ *  <i> unicodeChar </i>匹配任何相同的unicode字符\用于引用元字符(如'*')\\匹配单个'\'字符\ 0nnn匹配给定的八进制字符\ xhh匹配给定的8-位十六进制字符\\ u
+ * hhhh匹配给定的16位十六进制字符\ t匹配ASCII选项卡字符\ n匹配ASCII换行符\ r匹配ASCII返回字符\ f匹配ASCII换行符。
+ * 
+ *  <b> <font face = times roman>字符类</font> </b>
+ * 
+ *  [abc]简单字符类[a-zA-Z]带范围的字符类[^ abc]否定字符类
+ * </pre>
+ * 
+ *  <b>注意：</b>不完全范围将被解释为"从零开始"或"以最后字符结束"。
+ * <br>
+ *  也就是说[-a]与[\\ u0000-a]相同,并且[a-]与[a  -  \\ uFFFF]相同,[ - ]表示"所有字符"。
+ * 
+ * <pre>
+ * 
+ *  <b> <font face = times roman>标准POSIX字符类</font> </b>
+ * 
+ * [：alnum：]字母数字字符。 [：alpha：]字母字符。 [：blank：]空格和制表符字符。 [：cntrl：]控制字符。 [：digit：]数字字符。
+ *  [：graph：]可打印且也可见的字符。 (空格是可打印的,但不可见,而"a"是两个。)[：lower：]小写字母字符。 [：print：]可打印字符(不是控制字符的字符。
+ * )[：punct：]标点字符(不是字母,数字,控制字符或空格字符的字符)。 [：space：]空格字符(例如空格,制表符和换页符等等)。 [：upper：]大写字母字符。
+ *  [：xdigit：]十六进制数字的字符。
+ * 
+ *  <b> <font face = times roman>非标准POSIX样式字符类</font> </b>
+ * 
+ *  [：javastart：] Java标识符的开始[：javapart：] Java标识符的一部分
+ * 
+ *  <b> <font face = times roman>预定义类</font> </b>
+ * 
+ *  。匹配除了换行符以外的任何字符\ w匹配"字"字符(字母数字加"_")\ W匹配非字符字符\ s匹配空白字符\ S匹配非空白字符\ d匹配数字字符\ D匹配一个非数字字符
+ * 
+ *  <b> <font face = times roman>边界匹配</font> </b>
+ * 
+ * ^仅在行开始处匹配$仅在行结束处匹配\ b仅在字边界匹配\ B仅在非字边界匹配
+ * 
+ *  <b> <font face = times roman>贪婪闭合</font> </b>
+ * 
+ *  A *匹配A 0次以上(贪婪)A +匹配A 1次以上(贪婪)A?匹配A 1或0次(贪婪)A {n}匹配A正好n次(贪婪)A {n,}匹配A至少n次(贪婪)A {n,m}匹配A至少n但不超过m次(贪婪)
+ * 。
+ * 
+ *  <b> <font face = times roman>勉强关闭</font> </b>
+ * 
+ *  一个*?匹配A 0次或更多次(不愿意)A +?匹配A 1次或更多次(不情愿)A?匹配A 0或1次(不情愿)
+ * 
+ *  <b> <font face = times roman>逻辑运算符</font> </b>
+ * 
+ *  AB匹配A后跟B A | B匹配A或B(A)用于子表达式分组(?：A)用于子表达式聚类(就像分组但没有后向引用)
+ * 
+ *  <b> <font face = times roman> Backreferences </font> </b>
+ * 
+ * \ 1与第一个圆括号子表达式的反向引用\ 2与第二个括号子表达式的反引用\ 3与第二个圆括号子表达式的反引用\ 3与第三个圆括号子表达式的反引用\ 4与第四个圆括号子表达式的反引用\ 5与第五个圆括号子
+ * 表达式的反引用\ 8返回引用到第8个带括号的子表达式\ 9后面引用第9个带括号的子表达式。
+ * </pre>
+ * 
+ * <p>
+ *  默认情况下,所有闭包运算符(+,*,?,{m,n})都是贪婪的,这意味着它们匹配字符串中尽可能多的元素,而不会导致整体匹配失败。如果你想要一个闭包是不情愿(非贪婪),你可以简单地跟着一个'?'。
+ * 当发现匹配时,不情愿的关闭将匹配字符串的最少元素。 {m,n}闭包当前不支持不活动。
+ * 
+ * <p>
+ *  <b> <font face ="times roman">行终止符</font> </b>
+ * <br>
+ *  行终止符是一个或两个字符的序列,标记输入字符序列的行的结尾。以下被识别为行终止符：
+ * <ul>
+ *  <li>换行符(换行符)('\ n'),</li> <li>回车字符后紧跟换行符("\ r \ n"),</li> <li >一个单独的回车字符('\ r'),</li> <li>一个下一个字符('\
+ *  u0085'),</li> ),或</li> <li>段落分隔符('\ u2029)。
+ * </li>。
+ * </ul>
+ * 
+ * <p>
+ * RE运行由RECompiler类编译的程序。但是RE匹配器类不包括实际的正则表达式编译器为了效率的原因。
+ * 事实上,如果你想预编译一个或多个正则表达式,可以从命令行调用'recompile'类,以产生如下的编译输出：。
+ * 
+ * <pre>
+ *  //预编译的正则表达式"a * b"char [] re1Instructions = {0x007c,0x0000,0x001a,0x007c,0x0000,0x000d,0x0041,0x0001,0x0004,0x0061,0x007c,0x0000,0x0003,0x0047,0x0000,0xfff6, 0x007c,0x0000,0x0003,0x004e,0x0000,0x0003,0x0041,0x0001,0x0004,0x0062,0x0045,0x0000,0x0000,}
+ * ;。
+ * 
+ *  REProgram re1 = new REProgram(re1Instructions);
+ * </pre>
+ * 
+ *  然后,可以从预编译的表达式re1构建正则表达式匹配器(RE)对象,从而避免在运行时编译表达式的开销。如果需要更多动态正则表达式,可以构造单个RECompiler对象,并重新使用它来编译每个表达式。
+ * 同样,您可以随时更改由给定的匹配器对象运行的程序。
+ * 然而,RE和RECompiler不是线程安全的(出于效率的原因,因为在这个类中需要线程安全被认为是一个罕见的要求),所以你需要为每个线程构建一个单独的编译器或匹配器对象(除非你做线程同步)。
+ * 一旦表达式编译到REProgram对象中,REProgram可以安全地跨多个线程和RE对象共享。
+ * 
+ *  <br> <p> <br>
+ * 
+ * <font color="red">
+ * <i> ISSUES：</i>
+ * 
+ * <ul>
+ *  <li> com.weusours.util.re当前不兼容所有标准POSIX regcomp标记</li> <li> com.weusours.util.re不支持POSIX等价类([= foo =
+ * ]语法)(I18N / locale问题)</li> <li> com.weusours.util.re不支持嵌套的POSIX字符类(绝对应该,但不完全琐碎)</li> <li> com.weusour
+ * 
  * @see recompile
  * @see RECompiler
  *
@@ -299,21 +451,40 @@ public class RE implements Serializable
 {
     /**
      * Specifies normal, case-sensitive matching behaviour.
+     * <p>
+     * s.util.re支持POSIX字符排序概念([.foo。
+     * ]语法)(I18N / locale问题)</li> <li>应该有不同的匹配样式(simple,POSIX,Perl等?)</li> <li>支持字符迭代器(用于向后RE匹配！)</li> <li>应
+     * 该RE支持不情愿的{m,n}闭包(有人关心)吗?</li> <li>当涉及反向引用时(POSIX建议应该是这种情况)。
+     * 当与"acdacaa"匹配时,POSIX RE"(ac *)c * d [ac] * \ 1"应该产生acdacaa的匹配,其中\ 1是"a"。
+     * 这不是这个RE包的情况,实际上Perl也不去这个程度！直到有人实际上抱怨这一点,我不知道它值得"修复"。如果它是固定的,测试#137在RETest.txt应该更新。</li>。
+     * </ul>
+     * 
+     * </font>
+     * 
      */
     public static final int MATCH_NORMAL          = 0x0000;
 
     /**
      * Flag to indicate that matching should be case-independent (folded)
+     * <p>
+     *  指定正常的区分大小写的匹配行为。
+     * 
      */
     public static final int MATCH_CASEINDEPENDENT = 0x0001;
 
     /**
      * Newlines should match as BOL/EOL (^ and $)
+     * <p>
+     *  标志以指示匹配应与大小写无关(折叠)
+     * 
      */
     public static final int MATCH_MULTILINE       = 0x0002;
 
     /**
      * Consider all input a single body of text - newlines are matched by .
+     * <p>
+     *  换行符应匹配为BOL / EOL(^和$)
+     * 
      */
     public static final int MATCH_SINGLELINE      = 0x0004;
 
@@ -327,6 +498,10 @@ public class RE implements Serializable
      * char OPDATA - modifying data                 *
      * char OPNEXT - next node (relative offset)    *
      *                                              *
+     * <p>
+     *  考虑所有输入单一文本体 - 换行符匹配。
+     * 
+     * 
      ************************************************/
 
                  //   Opcode              Char       Opdata/Operand  Meaning
@@ -416,6 +591,11 @@ public class RE implements Serializable
      * using a new instance of RECompiler.  If you will be compiling many
      * expressions, you may prefer to use a single RECompiler object instead.
      *
+     * <p>
+     * *程序中节点的格式为：* * [OPCODE] [OPDATA] [OPNEXT] [OPERAND] * * char OPCODE  - 指令* char OPDATA  - 修改数据* char 
+     * OPNEXT-下一个节点。
+     * 
+     * 
      * @param pattern The regular expression pattern to compile.
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
      * @see RECompiler
@@ -431,6 +611,10 @@ public class RE implements Serializable
      * using a new instance of RECompiler.  If you will be compiling many
      * expressions, you may prefer to use a single RECompiler object instead.
      *
+     * <p>
+     *  通过使用新的RECompiler实例编译,从String构造正则表达式匹配器。如果您将编译许多表达式,您可能更喜欢使用单个的RECompiler对象。
+     * 
+     * 
      * @param pattern The regular expression pattern to compile.
      * @param matchFlags The matching style
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
@@ -448,6 +632,10 @@ public class RE implements Serializable
      * (bytecode) data.  Permits special flags to be passed in to modify matching
      * behaviour.
      *
+     * <p>
+     *  通过使用新的RECompiler实例编译,从String构造正则表达式匹配器。如果您将编译许多表达式,您可能更喜欢使用单个的RECompiler对象。
+     * 
+     * 
      * @param program Compiled regular expression program (see RECompiler and/or recompile)
      * @param matchFlags One or more of the RE match behaviour flags (RE.MATCH_*):
      *
@@ -471,6 +659,10 @@ public class RE implements Serializable
      * Construct a matcher for a pre-compiled regular expression from program
      * (bytecode) data.
      *
+     * <p>
+     *  从程序(字节码)数据构造一个预编译正则表达式的匹配器。允许传入特殊标志以修改匹配行为。
+     * 
+     * 
      * @param program Compiled regular expression program
      * @see RECompiler
      * @see recompile
@@ -483,6 +675,9 @@ public class RE implements Serializable
     /**
      * Constructs a regular expression matcher with no initial program.
      * This is likely to be an uncommon practice, but is still supported.
+     * <p>
+     *  从程序(字节码)数据构造一个预编译正则表达式的匹配器。
+     * 
      */
     public RE()
     {
@@ -492,6 +687,10 @@ public class RE implements Serializable
     /**
      * Converts a 'simplified' regular expression to a full regular expression
      *
+     * <p>
+     *  构造没有初始程序的正则表达式匹配器。这可能是一个不常见的做法,但仍然支持。
+     * 
+     * 
      * @param pattern The pattern to convert
      * @return The full regular expression
      */
@@ -531,6 +730,10 @@ public class RE implements Serializable
 
     /**
      * Sets match behaviour flags which alter the way RE does matching.
+     * <p>
+     *  将"简化"正则表达式转换为完整正则表达式
+     * 
+     * 
      * @param matchFlags One or more of the RE match behaviour flags (RE.MATCH_*):
      *
      * <pre>
@@ -546,6 +749,10 @@ public class RE implements Serializable
 
     /**
      * Returns the current match behaviour flags.
+     * <p>
+     *  设置匹配行为标志,改变RE匹配的方式。
+     * 
+     * 
      * @return Current match behaviour flags (RE.MATCH_*).
      *
      * <pre>
@@ -564,6 +771,10 @@ public class RE implements Serializable
     /**
      * Sets the current regular expression program used by this matcher object.
      *
+     * <p>
+     *  返回当前匹配行为标志。
+     * 
+     * 
      * @param program Regular expression program compiled by RECompiler.
      * @see RECompiler
      * @see REProgram
@@ -582,6 +793,10 @@ public class RE implements Serializable
     /**
      * Returns the current regular expression program in use by this matcher object.
      *
+     * <p>
+     *  设置此匹配器对象使用的当前正则表达式程序。
+     * 
+     * 
      * @return Regular expression program
      * @see #setProgram
      */
@@ -593,6 +808,10 @@ public class RE implements Serializable
     /**
      * Returns the number of parenthesized subexpressions available after a successful match.
      *
+     * <p>
+     *  返回此匹配器对象正在使用的当前正则表达式程序。
+     * 
+     * 
      * @return Number of available parenthesized subexpressions
      */
     public int getParenCount()
@@ -603,6 +822,10 @@ public class RE implements Serializable
     /**
      * Gets the contents of a parenthesized subexpression after a successful match.
      *
+     * <p>
+     *  返回成功匹配后可用的带括号的子表达式的数量。
+     * 
+     * 
      * @param which Nesting level of subexpression
      * @return String
      */
@@ -619,6 +842,10 @@ public class RE implements Serializable
     /**
      * Returns the start index of a given paren level.
      *
+     * <p>
+     * 成功匹配后获取带括号的子表达式的内容。
+     * 
+     * 
      * @param which Nesting level of subexpression
      * @return String index
      */
@@ -651,6 +878,10 @@ public class RE implements Serializable
     /**
      * Returns the end index of a given paren level.
      *
+     * <p>
+     *  返回给定包含层的开始索引。
+     * 
+     * 
      * @param which Nesting level of subexpression
      * @return String index
      */
@@ -683,6 +914,10 @@ public class RE implements Serializable
     /**
      * Returns the length of a given paren level.
      *
+     * <p>
+     *  返回给定包含层的结束索引。
+     * 
+     * 
      * @param which Nesting level of subexpression
      * @return Number of characters in the parenthesized subexpression
      */
@@ -698,6 +933,10 @@ public class RE implements Serializable
     /**
      * Sets the start of a paren level
      *
+     * <p>
+     *  返回给定的包含层的长度。
+     * 
+     * 
      * @param which Which paren level
      * @param i Index in input array
      */
@@ -733,6 +972,10 @@ public class RE implements Serializable
     /**
      * Sets the end of a paren level
      *
+     * <p>
+     *  设置说明级别的开始
+     * 
+     * 
      * @param which Which paren level
      * @param i Index in input array
      */
@@ -770,6 +1013,10 @@ public class RE implements Serializable
      * from a bug in the regular expression compiler (or possibly data corruption).
      * In practice, this should be very rare.
      *
+     * <p>
+     *  设置完整级别的结束
+     * 
+     * 
      * @param s Error description
      */
     protected void internalError(String s) throws Error
@@ -779,6 +1026,9 @@ public class RE implements Serializable
 
     /**
      * Performs lazy allocation of subexpression arrays
+     * <p>
+     *  抛出错误,表示内部错误条件,可能是由于正则表达式编译器中的错误(或可能是数据损坏)导致的。在实践中,这应该是非常罕见的。
+     * 
      */
     private final void allocParens()
     {
@@ -797,6 +1047,10 @@ public class RE implements Serializable
     /**
      * Try to match a string against a subset of nodes in the program
      *
+     * <p>
+     *  执行子表达式数组的延迟分配
+     * 
+     * 
      * @param firstNode Node to start at in program
      * @param lastNode  Last valid node (used for matching a subexpression without
      *                  matching the rest of the program as well).
@@ -1346,6 +1600,10 @@ public class RE implements Serializable
      * input string, starting at index i of the input string.  This method
      * is only meant for internal use.
      *
+     * <p>
+     *  尝试将字符串与程序中的节点子集匹配
+     * 
+     * 
      * @param i The input string index to start matching at
      * @return True if the input matched the expression
      */
@@ -1387,6 +1645,10 @@ public class RE implements Serializable
      * Matches the current regular expression program against a character array,
      * starting at a given index.
      *
+     * <p>
+     *  使当前正则表达式程序与当前输入字符串匹配,从输入字符串的索引i开始。此方法仅用于内部使用。
+     * 
+     * 
      * @param search String to match against
      * @param i Index to start searching at
      * @return True if string matched
@@ -1400,6 +1662,10 @@ public class RE implements Serializable
      * Matches the current regular expression program against a character array,
      * starting at a given index.
      *
+     * <p>
+     *  将当前正则表达式程序与字符数组匹配,从给定的索引开始。
+     * 
+     * 
      * @param search String to match against
      * @param i Index to start searching at
      * @return True if string matched
@@ -1464,6 +1730,10 @@ public class RE implements Serializable
     /**
      * Matches the current regular expression program against a String.
      *
+     * <p>
+     *  将当前正则表达式程序与字符数组匹配,从给定的索引开始。
+     * 
+     * 
      * @param search String to match against
      * @return True if string matched
      */
@@ -1483,6 +1753,10 @@ public class RE implements Serializable
      * string. This happens when the very first character of input string is
      * matched by the pattern.
      *
+     * <p>
+     *  使当前正则表达式程序与字符串匹配。
+     * 
+     * 
      * @param s String to split on this regular exression
      * @return Array of strings
      */
@@ -1535,17 +1809,29 @@ public class RE implements Serializable
     /**
      * Flag bit that indicates that subst should replace all occurrences of this
      * regular expression.
+     * <p>
+     *  将字符串拆分成正则表达式边界上的字符串数组。此函数的工作方式与同名的Perl函数相同。
+     * 给定正则表达式"[ab] +"和分割"xyzzyababbayyzabbbab123"的字符串,结果将是字符串数组"[xyzzy,yyz,123]"。
+     * 
+     *  <p>请注意,结果数组中的第一个字符串可能是空字符串。当输入字符串的第一个字符与模式匹配时,会发生这种情况。
+     * 
      */
     public static final int REPLACE_ALL            = 0x0000;
 
     /**
      * Flag bit that indicates that subst should only replace the first occurrence
      * of this regular expression.
+     * <p>
+     * 标志位,指示subst应替换此正则表达式的所有出现。
+     * 
      */
     public static final int REPLACE_FIRSTONLY      = 0x0001;
 
     /**
      * Flag bit that indicates that subst should replace backreferences
+     * <p>
+     *  标志位,表示subst应该只替换此正则表达式的第一次出现。
+     * 
      */
     public static final int REPLACE_BACKREFERENCES = 0x0002;
 
@@ -1556,6 +1842,10 @@ public class RE implements Serializable
      * "aaaabfooaaabgarplyaaabwackyb" and the substitution String "-", the
      * resulting String returned by subst would be "-foo-garply-wacky-".
      *
+     * <p>
+     *  标志位,指示subst应该替换反向引用
+     * 
+     * 
      * @param substituteIn String to substitute within
      * @param substitution String to substitute for all matches of this regular expression.
      * @return The string substituteIn with zero or more occurrences of the current
@@ -1584,6 +1874,13 @@ public class RE implements Serializable
      * <p>
      * <i>Note:</i> $0 represents the whole match.
      *
+     * <p>
+     *  在另一个字符串中替换此正则表达式的字符串。此方法的工作方式类似于同名的Perl函数。
+     * 给定"a * b"的正则表达式,"aaaabfooaaabgarplyaaabwackyb"的替代字符串和替换字符串" - "的字符串,由subst返回的结果字符串将是"-foo-garply-wack
+     * y-"。
+     *  在另一个字符串中替换此正则表达式的字符串。此方法的工作方式类似于同名的Perl函数。
+     * 
+     * 
      * @param substituteIn String to substitute within
      * @param substitution String to substitute for matches of this regular expression
      * @param flags One or more bitwise flags from REPLACE_*.  If the REPLACE_FIRSTONLY
@@ -1696,6 +1993,19 @@ public class RE implements Serializable
      * a regular expression of "a*b" and an array of String objects of [foo, aab, zzz,
      * aaaab], the array of Strings returned by grep would be [aab, aaaab].
      *
+     * <p>
+     *  在另一个字符串中替换此正则表达式的字符串。此方法的工作方式类似于同名的Perl函数。
+     * 给定"a * b"的正则表达式,"aaaabfooaaabgarplyaaabwackyb"的替代字符串和替换字符串" - "的字符串,由subst返回的结果字符串将是"-foo-garply-wack
+     * y-"。
+     *  在另一个字符串中替换此正则表达式的字符串。此方法的工作方式类似于同名的Perl函数。
+     * <p>
+     *  也可以使用$ 0,$ 1,... $ 9引用括号表达式的内容。 "http：// [\\。
+     * \\ w \\  -  \\?/〜_ @&％] +"的正则表达式,"访问我们：http：//www.apache。
+     *  org！"和替换字符串"&lt; a href = \"$ 0 \"&gt; $ 0&lt; / a&gt;",则由subst返回的结果字符串将是"visit us：&lt; a href = \"h
+     * ttp： apache.org \"&gt; http：//www.apache.org&lt; / a&gt ;!"。
+     * \\ w \\  -  \\?/〜_ @&％] +"的正则表达式,"访问我们：http：//www.apache。
+     * <p>
+     * 
      * @param search Array of Objects to search
      * @return Array of Strings whose toString() value matches this regular expression.
      */
@@ -1724,6 +2034,10 @@ public class RE implements Serializable
     }
 
     /**
+    /* <p>
+    /*  <i>注意：</i> $ 0表示整个匹配。
+    /* 
+    /* 
      * @return true if character at i-th position in the <code>search</code> string is a newline
      */
     private boolean isNewline(int i)
@@ -1742,6 +2056,11 @@ public class RE implements Serializable
     /**
      * Compares two characters.
      *
+     * <p>
+     * 返回一个Strings数组,其toString表达式与正则表达式匹配。此方法的工作方式类似于同名的Perl函数。
+     * 给定正则表达式"a * b"和[foo,aab,zzz,aaaab]的String对象数组,grep返回的字符串数组将是[aab,aaaab]。
+     * 
+     * 
      * @param c1 first character to compare.
      * @param c2 second character to compare.
      * @param caseIndependent whether comparision is case insensitive or not.

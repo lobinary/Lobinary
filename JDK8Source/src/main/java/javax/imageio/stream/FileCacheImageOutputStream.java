@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import com.sun.imageio.stream.StreamCloser;
  * output to a regular <code>OutputStream</code>.  A file is used to
  * cache data until it is flushed to the output stream.
  *
+ * <p>
+ *  <code> ImageOutputStream </code>的实现,将其输出写入常规<code> OutputStream </code>。文件用于缓存数据,直到它被刷新到输出流。
+ * 
  */
 public class FileCacheImageOutputStream extends ImageOutputStreamImpl {
 
@@ -50,6 +54,8 @@ public class FileCacheImageOutputStream extends ImageOutputStreamImpl {
     private long maxStreamPos = 0L;
 
     /** The CloseAction that closes the stream in
+    /* <p>
+    /* 
      *  the StreamCloser's shutdown hook                     */
     private final StreamCloser.CloseAction closeAction;
 
@@ -64,6 +70,13 @@ public class FileCacheImageOutputStream extends ImageOutputStreamImpl {
      * directory will be used (see the documentation for
      * <code>File.createTempFile</code> for details).
      *
+     * <p>
+     *  构造将写入给定<code> outputStream </code>的<code> FileCacheImageOutputStream </code>。
+     * 
+     *  <p>临时文件用作缓存。如果<code> cacheDir </code>是非<code> null </code>并且是目录,那么将在那里创建文件。
+     * 如果是<code> null </code>,将使用系统相关的默认临时文件目录(有关详细信息,请参阅<code> File.createTempFile </code>的文档)。
+     * 
+     * 
      * @param stream an <code>OutputStream</code> to write to.
      * @param cacheDir a <code>File</code> indicating where the
      * cache file should be created, or <code>null</code> to use the
@@ -159,6 +172,10 @@ public class FileCacheImageOutputStream extends ImageOutputStreamImpl {
      * performed.  The file length will not be increased until a write
      * is performed.
      *
+     * <p>
+     *  设置当前流位置,并将位偏移重置为0.在文件末尾查找是合法的;只有在执行读取时才会抛出<code> EOFException </code>。在执行写操作之前,文件长度不会增加。
+     * 
+     * 
      * @exception IndexOutOfBoundsException if <code>pos</code> is smaller
      * than the flushed position.
      * @exception IOException if any other I/O error occurs.
@@ -181,6 +198,10 @@ public class FileCacheImageOutputStream extends ImageOutputStreamImpl {
      * <code>ImageOutputStream</code> caches data in order to allow
      * seeking backwards.
      *
+     * <p>
+     *  返回<code> true </code>,因为<code> ImageOutputStream </code>缓存数据以允许向后搜索。
+     * 
+     * 
      * @return <code>true</code>.
      *
      * @see #isCachedMemory
@@ -194,6 +215,10 @@ public class FileCacheImageOutputStream extends ImageOutputStreamImpl {
      * Returns <code>true</code> since this
      * <code>ImageOutputStream</code> maintains a file cache.
      *
+     * <p>
+     *  返回<code> true </code>,因为此<code> ImageOutputStream </code>维护文件缓存。
+     * 
+     * 
      * @return <code>true</code>.
      *
      * @see #isCached
@@ -208,6 +233,10 @@ public class FileCacheImageOutputStream extends ImageOutputStreamImpl {
      * <code>ImageOutputStream</code> does not maintain a main memory
      * cache.
      *
+     * <p>
+     *  返回<code> false </code>,因为此<code> ImageOutputStream </code>不维护主内存缓存。
+     * 
+     * 
      * @return <code>false</code>.
      *
      * @see #isCached
@@ -223,6 +252,10 @@ public class FileCacheImageOutputStream extends ImageOutputStreamImpl {
      * is closed and removed.  The destination <code>OutputStream</code>
      * is not closed.
      *
+     * <p>
+     * 关闭此<code> FileCacheImageOutputStream </code>。所有挂起的数据都将刷新到输出,并关闭并删除缓存文件。
+     * 目标<code> OutputStream </code>未关闭。
+     * 
      * @exception IOException if an error occurs.
      */
     public void close() throws IOException {

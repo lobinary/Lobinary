@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,15 @@ import javax.swing.DefaultListSelectionModel;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  TreeSelectionModel的默认实现。当选择中的路径更改时,将通知侦听器,而不是行。为了能够跟踪行更改,您可能希望成为树上扩展事件的侦听器,并从那里测试更改。
+ *  <p>从更新所选路径的任何方法调用resetRowSelection。
+ * 如果你子类化任何这些方法来过滤允许被选择,请确保和消息<code> resetRowSelection </code>如果你不消息超级。
+ * 
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see javax.swing.JTree
  *
  * @author Scott Violet
@@ -71,6 +81,8 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     protected SwingPropertyChangeSupport     changeSupport;
 
     /** Paths that are currently selected.  Will be null if nothing is
+    /* <p>
+    /* 
       * currently selected. */
     protected TreePath[]                selection;
 
@@ -81,11 +93,16 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     transient protected RowMapper               rowMapper;
 
     /** Handles maintaining the list selection model. The RowMapper is used
+    /* <p>
+    /* 
      * to map from a TreePath to a row, and the value is then placed here. */
     protected DefaultListSelectionModel     listSelectionModel;
 
     /** Mode for the selection, will be either SINGLE_TREE_SELECTION,
      * CONTIGUOUS_TREE_SELECTION or DISCONTIGUOUS_TREE_SELECTION.
+     * <p>
+     *  CONTIGUOUS_TREE_SELECTION或DISCONTIGUOUS_TREE_SELECTION。
+     * 
      */
     protected int                           selectionMode;
 
@@ -98,6 +115,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
 
     /** Used to make sure the paths are unique, will contain all the paths
      * in <code>selection</code>.
+     * <p>
+     *  在<code>选择</code>。
+     * 
      */
     private Hashtable<TreePath, Boolean>    uniquePaths;
     private Hashtable<TreePath, Boolean>    lastPaths;
@@ -107,6 +127,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
      * Creates a new instance of DefaultTreeSelectionModel that is
      * empty, with a selection mode of DISCONTIGUOUS_TREE_SELECTION.
+     * <p>
+     *  创建一个为空的DefaultTreeSelectionModel的新实例,选择模式为DISCONTIGUOUS_TREE_SELECTION。
+     * 
      */
     public DefaultTreeSelectionModel() {
         listSelectionModel = new DefaultListSelectionModel();
@@ -120,6 +143,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
      * Sets the RowMapper instance. This instance is used to determine
      * the row for a particular TreePath.
+     * <p>
+     *  设置RowMapper实例。此实例用于确定特定TreePath的行。
+     * 
      */
     public void setRowMapper(RowMapper newMapper) {
         rowMapper = newMapper;
@@ -129,6 +155,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
      * Returns the RowMapper instance that is able to map a TreePath to a
      * row.
+     * <p>
+     *  返回能够将TreePath映射到行的RowMapper实例。
+     * 
      */
     public RowMapper getRowMapper() {
         return rowMapper;
@@ -147,6 +176,14 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * <p>
      * Setting the mode to something other than the defined types will
      * result in the mode becoming <code>DISCONTIGUOUS_TREE_SELECTION</code>.
+     * <p>
+     * 设置选择模型,它必须是SINGLE_TREE_SELECTION,CONTIGUOUS_TREE_SELECTION或DISCONTIGUOUS_TREE_SELECTION之一。
+     * 如果mode不是定义值之一,则假定为<code> DISCONTIGUOUS_TREE_SELECTION </code>。 <p>如果当前选择对新模式无效,这可能会更改选择。
+     * 例如,如果在将模式更改为<code> SINGLE_TREE_SELECTION </code>时选择了三个TreePath,则只会保留一个TreePath。
+     * 由特定实现决定什么TreePath保持选择。
+     * <p>
+     *  将模式设置为非定义类型以外的模式将导致模式变为<code> DISCONTIGUOUS_TREE_SELECTION </code>。
+     * 
      */
     public void setSelectionMode(int mode) {
         int            oldMode = selectionMode;
@@ -166,6 +203,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * Returns the selection mode, one of <code>SINGLE_TREE_SELECTION</code>,
      * <code>DISCONTIGUOUS_TREE_SELECTION</code> or
      * <code>CONTIGUOUS_TREE_SELECTION</code>.
+     * <p>
+     *  返回选择模式,<code> SINGLE_TREE_SELECTION </code>,<code> DISCONTIGUOUS_TREE_SELECTION </code>或<code> CONTI
+     * GUOUS_TREE_SELECTION </code>之一。
+     * 
      */
     public int getSelectionMode() {
         return selectionMode;
@@ -176,6 +217,11 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
       * the TreeSelectionListeners are notified. If <code>path</code> is
       * null, this has the same effect as invoking <code>clearSelection</code>.
       *
+      * <p>
+      *  将选择设置为路径。如果这表示更改,那么将通知TreeSelectionListeners。
+      * 如果<code> path </code>为null,这与调用<code> clearSelection </code>具有相同的效果。
+      * 
+      * 
       * @param path new path to select
       */
     public void setSelectionPath(TreePath path) {
@@ -210,6 +256,21 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * The paths returned from {@code getSelectionPaths} are in the same
      * order as those supplied to this method.
      *
+     * <p>
+     * 设置选择。所提供的路径是否作为新选择取决于选择模式。如果提供的数组为{@code null}或为空,则选择将被清除。
+     * 如果选择模式是{@code SINGLE_TREE_SELECTION},则仅使用{@code pPaths}中的第一个路径。
+     * 如果选择模式为{@code CONTIGUOUS_TREE_SELECTION}且提供的路径不连续,则只使用{@code pPaths}中的第一个路径。
+     * 如果选择模式为{@code DISCONTIGUOUS_TREE_SELECTION},则使用所有路径。
+     * <p>
+     *  {@code pPaths}中的所有{@code null}路径都会被忽略。
+     * <p>
+     *  如果这表示更改,则会通知所有已注册的{@code TreeSelectionListener}。
+     * <p>
+     *  引导路径设置为最后一个唯一路径。
+     * <p>
+     *  从{@code getSelectionPaths}返回的路径与提供给此方法的路径顺序相同。
+     * 
+     * 
      * @param pPaths the new selection
      */
     public void setSelectionPaths(TreePath[] pPaths) {
@@ -227,6 +288,8 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
         if((newCount + oldCount) != 0) {
             if(selectionMode == TreeSelectionModel.SINGLE_TREE_SELECTION) {
                 /* If single selection and more than one path, only allow
+                /* <p>
+                /* 
                    first. */
                 if(newCount > 1) {
                     paths = new TreePath[1];
@@ -237,6 +300,8 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
             else if(selectionMode ==
                     TreeSelectionModel.CONTIGUOUS_TREE_SELECTION) {
                 /* If contiguous selection and paths aren't contiguous,
+                /* <p>
+                /* 
                    only select the first path item. */
                 if(newCount > 0 && !arePathsContiguous(paths)) {
                     paths = new TreePath[1];
@@ -300,6 +365,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
       * in the selection the TreeSelectionListeners are notified. This has
       * no effect if <code>path</code> is null.
       *
+      * <p>
+      *  添加当前选择的路径。如果路径当前不在选择中,则通知TreeSelectionListeners。如果<code> path </code>为null,则此操作无效。
+      * 
+      * 
       * @param path the new path to add to the current selection
       */
     public void addSelectionPath(TreePath path) {
@@ -324,6 +393,15 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
       * otherwise the TreePaths aren't contiguous and the selection becomes
       * the first TreePath in <code>paths</code>.
       *
+      * <p>
+      * 添加当前选择的路径。如果路径中的任何路径当前不在选择中,则通知TreeSelectionListeners。如果<code> paths </code>为null,则没有任何效果。
+      *  <p>引导路径设置为<code> paths </code>中的最后一个元素。
+      *  <p>如果选择模式为<code> CONTIGUOUS_TREE_SELECTION </code>,并且添加新路径将使选择不连续。
+      * 那么可能会导致两个结果：如果<code> paths </code>中的TreePaths是连续的,那么选择将变为这些TreePaths,否则TreePaths不是连续的,并且选择成为<code> pa
+      * ths </code >。
+      *  <p>如果选择模式为<code> CONTIGUOUS_TREE_SELECTION </code>,并且添加新路径将使选择不连续。
+      * 
+      * 
       * @param paths the new path to add to the current selection
       */
     public void addSelectionPaths(TreePath[] paths) {
@@ -356,6 +434,8 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
                 else
                     oldCount = selection.length;
                 /* Determine the paths that aren't currently in the
+                /* <p>
+                /* 
                    selection. */
                 lastPaths.clear();
                 for(counter = 0, validCount = 0; counter < newPathLength;
@@ -388,6 +468,8 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
                                          oldCount);
                     if(validCount != paths.length) {
                         /* Some of the paths in paths are already in
+                        /* <p>
+                        /* 
                            the selection. */
                         Enumeration<TreePath> newPaths = lastPaths.keys();
 
@@ -423,6 +505,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
       * The TreeSelectionListeners are notified. This has no effect if
       * <code>path</code> is null.
       *
+      * <p>
+      *  从选择中删除路径。如果路径在选择中,则通知TreeSelectionListeners。如果<code> path </code>为null,则没有效果。
+      * 
+      * 
       * @param path the path to remove from the selection
       */
     public void removeSelectionPath(TreePath path) {
@@ -439,6 +525,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
       * are in the selection the TreeSelectionListeners are notified.
       * This has no effect if <code>paths</code> is null.
       *
+      * <p>
+      *  从选择中删除路径。如果路径中的任何路径在选择中,则通知TreeSelectionListeners。如果<code> paths </code>为null,则没有任何效果。
+      * 
+      * 
       * @param paths the paths to remove from the selection
       */
     public void removeSelectionPaths(TreePath[] paths) {
@@ -508,6 +598,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
       * Returns the first path in the selection. This is useful if there
       * if only one item currently selected.
+      * <p>
+      *  返回选择中的第一个路径。如果只有一个项目当前选择,这是有用的。
+      * 
       */
     public TreePath getSelectionPath() {
         if (selection != null && selection.length > 0) {
@@ -519,6 +612,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
       * Returns the selection.
       *
+      * <p>
+      *  返回选择。
+      * 
+      * 
       * @return the selection
       */
     public TreePath[] getSelectionPaths() {
@@ -534,6 +631,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
 
     /**
      * Returns the number of paths that are selected.
+     * <p>
+     *  返回所选路径的数量。
+     * 
      */
     public int getSelectionCount() {
         return (selection == null) ? 0 : selection.length;
@@ -542,6 +642,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
       * Returns true if the path, <code>path</code>,
       * is in the current selection.
+      * <p>
+      *  如果路径<code> path </code>在当前选择中,则返回true。
+      * 
       */
     public boolean isPathSelected(TreePath path) {
         return (path != null) ? (uniquePaths.get(path) != null) : false;
@@ -549,6 +652,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
 
     /**
       * Returns true if the selection is currently empty.
+      * <p>
+      *  如果选择当前为空,则返回true。
+      * 
       */
     public boolean isSelectionEmpty() {
         return (selection == null || selection.length == 0);
@@ -557,6 +663,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
       * Empties the current selection.  If this represents a change in the
       * current selection, the selection listeners are notified.
+      * <p>
+      *  清空当前选择。如果这表示当前选择中的更改,则通知选择侦听器。
+      * 
       */
     public void clearSelection() {
         if (selection != null && selection.length > 0) {
@@ -582,6 +691,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
       * Adds x to the list of listeners that are notified each time the
       * set of selected TreePaths changes.
       *
+      * <p>
+      *  将x添加到每当选定的TreePaths集更改时通知的侦听器列表。
+      * 
+      * 
       * @param x the new listener to be added
       */
     public void addTreeSelectionListener(TreeSelectionListener x) {
@@ -592,6 +705,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
       * Removes x from the list of listeners that are notified each time
       * the set of selected TreePaths changes.
       *
+      * <p>
+      * 从每当选定的TreePaths集更改时通知的侦听器列表中删除x。
+      * 
+      * 
       * @param x the listener to remove
       */
     public void removeTreeSelectionListener(TreeSelectionListener x) {
@@ -602,6 +719,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * Returns an array of all the tree selection listeners
      * registered on this model.
      *
+     * <p>
+     *  返回在此模型上注册的所有树选择侦听器的数组。
+     * 
+     * 
      * @return all of this model's <code>TreeSelectionListener</code>s
      *         or an empty
      *         array if no tree selection listeners are currently registered
@@ -618,6 +739,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
      * Notifies all listeners that are registered for
      * tree selection events on this object.
+     * <p>
+     *  通知在此对象上注册了树选择事件的所有侦听器。
+     * 
+     * 
      * @see #addTreeSelectionListener
      * @see EventListenerList
      */
@@ -658,6 +783,21 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此模型上注册为<code> <em> Foo </em> Listener </code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * 
+     * <p>
+     * 
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询其树选择侦听器的<code> DefaultTreeSelectionModel </code> <code> m </code>：。
+     * 
+     *  <pre> TreeSelectionListener [] tsls =(TreeSelectionListener [])(m.getListeners(TreeSelectionListener
+     * .class)); </pre>。
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -690,6 +830,12 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * {@code 10}, and {@code B} not currently viewable, then this method
      * returns an array with the single entry {@code 10}.
      *
+     * <p>
+     * 返回以行为单位的选择。在从{@code getSelectionPaths}返回的{@code TreePath}和这个方法之间不一定有一对一的映射。
+     * 特别是,如果{@code TreePath}不可见(对于与{@code TreePath}对应的行,{@code RowMapper}返回{@code -1}),那么相应的行不包括在返回的数组。
+     * 例如,如果选择包含两个路径{@code A}和{@code B},其中{@code A}在行{@code 10},而{@code B}目前不可见,则此方法返回具有单个条目{@code 10}的数组。
+     * 
+     * 
      * @return the selection in terms of rows
      */
     public int[] getSelectionRows() {
@@ -732,6 +878,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * Returns the smallest value obtained from the RowMapper for the
      * current set of selected TreePaths. If nothing is selected,
      * or there is no RowMapper, this will return -1.
+     * <p>
+     *  返回从当前选定TreePath集合的RowMapper获取的最小值。如果没有选择,或没有RowMapper,这将返回-1。
+     * 
       */
     public int getMinSelectionRow() {
         return listSelectionModel.getMinSelectionIndex();
@@ -741,6 +890,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * Returns the largest value obtained from the RowMapper for the
      * current set of selected TreePaths. If nothing is selected,
      * or there is no RowMapper, this will return -1.
+     * <p>
+     *  返回从当前选定TreePaths集合的RowMapper获取的最大值。如果没有选择,或没有RowMapper,这将返回-1。
+     * 
       */
     public int getMaxSelectionRow() {
         return listSelectionModel.getMaxSelectionIndex();
@@ -748,6 +900,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
 
     /**
       * Returns true if the row identified by <code>row</code> is selected.
+      * <p>
+      *  如果选择由<code> row </code>标识的行,则返回true。
+      * 
       */
     public boolean isRowSelected(int row) {
         return listSelectionModel.isSelectedIndex(row);
@@ -763,6 +918,11 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * <p>This will invoke <code>insureRowContinuity</code> to make sure
      * the currently selected TreePaths are still valid based on the
      * selection mode.
+     * <p>
+     * 将此对象的映射从TreePath更新为行。当从TreePaths到整数的映射已经改变(例如,一个节点已经被展开)时,应该调用这个方法。
+     *  <p>您通常不必调用此方法,JTree及其相关联的侦听器将为您调用此方法。如果你正在实现你自己的View类,那么你将不得不调用这个。
+     *  <p>这将调用<code> insureRowContinuity </code>,以确保当前选择的TreePaths仍然有效,基于选择模式。
+     * 
      */
     public void resetRowSelection() {
         listSelectionModel.clearSelection();
@@ -800,6 +960,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
      * Returns the lead selection index. That is the last index that was
      * added.
+     * <p>
+     *  返回潜在客户选择索引。这是添加的最后一个索引。
+     * 
      */
     public int getLeadSelectionRow() {
         return leadRow;
@@ -808,6 +971,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
      * Returns the last path that was added. This may differ from the
      * leadSelectionPath property maintained by the JTree.
+     * <p>
+     *  返回添加的最后一个路径。这可能不同于JTree维护的leadSelectionPath属性。
+     * 
      */
     public TreePath getLeadSelectionPath() {
         return leadPath;
@@ -820,6 +986,12 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * A PropertyChangeEvent will get fired when the selection mode
      * changes.
      *
+     * <p>
+     *  将PropertyChangeListener添加到侦听器列表。侦听器为所有属性注册。
+     * <p>
+     *  当选择模式更改时,PropertyChangeEvent将触发。
+     * 
+     * 
      * @param listener  the PropertyChangeListener to be added
      */
     public synchronized void addPropertyChangeListener(
@@ -835,6 +1007,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * This removes a PropertyChangeListener that was registered
      * for all properties.
      *
+     * <p>
+     *  从侦听器列表中删除PropertyChangeListener。这将删除为所有属性注册的PropertyChangeListener。
+     * 
+     * 
      * @param listener  the PropertyChangeListener to be removed
      */
 
@@ -850,6 +1026,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * Returns an array of all the property change listeners
      * registered on this <code>DefaultTreeSelectionModel</code>.
      *
+     * <p>
+     *  返回在此<code> DefaultTreeSelectionModel </code>上注册的所有属性更改侦听器的数组。
+     * 
+     * 
      * @return all of this model's <code>PropertyChangeListener</code>s
      *         or an empty
      *         array if no property change listeners are currently registered
@@ -879,6 +1059,14 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * If the selection mode is <code>SINGLE_TREE_SELECTION</code> and
      * more than one TreePath is selected, the selection is reset to
      * contain the first path currently selected.
+     * <p>
+     * 确保当前选择的<code> TreePath </code>对当前选择模式有效。
+     * 如果选择模式是<code> CONTIGUOUS_TREE_SELECTION </code>和<code> RowMapper </code>存在,这将确保所有的行都是连续的,也就是说,当排序时,所有
+     * 行都是没有间隙的顺序。
+     * 确保当前选择的<code> TreePath </code>对当前选择模式有效。如果选择不连续,则选择将重置为包含排序时连续行的第一个集合。
+     * <p>
+     *  如果选择模式是<code> SINGLE_TREE_SELECTION </code>,并且选择了多个TreePath,则选择将重置为包含当前选定的第一个路径。
+     * 
      */
     protected void insureRowContinuity() {
         if(selectionMode == TreeSelectionModel.CONTIGUOUS_TREE_SELECTION &&
@@ -920,6 +1108,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
     /**
      * Returns true if the paths are contiguous,
      * or this object has no RowMapper.
+     * <p>
+     *  如果路径是连续的,或者此对象没有RowMapper,则返回true。
+     * 
      */
     protected boolean arePathsContiguous(TreePath[] paths) {
         if(rowMapper == null || paths.length < 2)
@@ -968,6 +1159,12 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * or the selection mode is <code>DISCONTIGUOUS_TREE_SELECTION</code>, or
      * adding the paths to the current selection still results in a
      * contiguous set of <code>TreePath</code>s.
+     * <p>
+     *  用于测试是否可以添加一组特定的<code> TreePath </code>。
+     * 如果<code> paths </code>为null(或空),或者此对象没有RowMapper,或当前没有选择任何内容,或者选择模式为<code> DISCONTIGUOUS_TREE_SELECTI
+     * ON </code>到当前选择的路径仍然导致<code> TreePath </code>的连续集合。
+     *  用于测试是否可以添加一组特定的<code> TreePath </code>。
+     * 
      */
     protected boolean canPathsBeAdded(TreePath[] paths) {
         if(paths == null || paths.length == 0 || rowMapper == null ||
@@ -1019,6 +1216,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * Returns true if the paths can be removed without breaking the
      * continuity of the model.
      * This is rather expensive.
+     * <p>
+     *  如果可以删除路径而不破坏模型的连续性,则返回true。这是相当昂贵的。
+     * 
      */
     protected boolean canPathsBeRemoved(TreePath[] paths) {
         if(rowMapper == null || selection == null ||
@@ -1071,6 +1271,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * Notifies listeners of a change in path. changePaths should contain
      * instances of PathPlaceHolder.
      *
+     * <p>
+     *  通知侦听器路径中的更改。 changePaths应包含PathPlaceHolder的实例。
+     * 
+     * 
      * @deprecated As of JDK version 1.7
      */
     @Deprecated
@@ -1095,6 +1299,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
 
     /**
      * Updates the leadIndex instance variable.
+     * <p>
+     *  更新leadIndex实例变量。
+     * 
      */
     protected void updateLeadIndex() {
         if(leadPath != null) {
@@ -1124,6 +1331,9 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * This method is obsolete and its implementation is now a noop.  It's
      * still called by setSelectionPaths and addSelectionPaths, but only
      * for backwards compatibility.
+     * <p>
+     *  此方法已过时,其实现现在是一个noop。它仍然由setSelectionPaths和addSelectionPaths调用,但仅用于向后兼容性。
+     * 
      */
     protected void insureUniqueness() {
     }
@@ -1133,6 +1343,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * Returns a string that displays and identifies this
      * object's properties.
      *
+     * <p>
+     * 返回显示和标识此对象属性的字符串。
+     * 
+     * 
      * @return a String representation of this object
      */
     public String toString() {
@@ -1161,6 +1375,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
      * This method does not duplicate
      * selection listeners and property listeners.
      *
+     * <p>
+     *  返回具有相同选择的此对象的克隆。此方法不会重复选择侦听器和属性侦听器。
+     * 
+     * 
      * @exception CloneNotSupportedException never thrown by instances of
      *                                       this class
      */
@@ -1216,6 +1434,8 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
 
 /**
  * Holds a path and whether or not it is new.
+ * <p>
+ *  保存路径以及是否为新路径。
  */
 class PathPlaceHolder {
     protected boolean             isNew;

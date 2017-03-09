@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,16 @@ import sun.awt.AWTAccessor;
  * (an instance of <code>Menu</code>), or a check box (an instance of
  * <code>CheckboxMenuItem</code>).
  *
+ * <p>
+ *  <code> Menu </code>对象是从菜单栏部署的下拉菜单组件。
+ * <p>
+ *  菜单可以可选地是<i>撕下</i>菜单。可以打开撕离菜单,并从其父菜单栏或菜单中拖出。鼠标按钮释放后,它仍保留在屏幕上。撕开菜单的机制取决于平台,因为撕离菜单的外观和感觉由其对等体确定。
+ * 在不支持拆除菜单的平台上,将忽略拆除属性。
+ * <p>
+ *  菜单中的每个项目都必须属于<code> MenuItem </code>类。
+ * 它可以是<code> MenuItem </code>,子菜单(<code> Menu </code>的实例)或复选框(<code> CheckboxMenuItem </code>的实例)的实例。
+ * 
+ * 
  * @author Sami Shaio
  * @see     java.awt.MenuItem
  * @see     java.awt.CheckboxMenuItem
@@ -75,6 +86,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /**
      * A vector of the items that will be part of the Menu.
      *
+     * <p>
+     *  将成为菜单一部分的项目的向量。
+     * 
+     * 
      * @serial
      * @see #countItems()
      */
@@ -89,6 +104,11 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * A torn off menu can be deleted by a user when
      * it is no longer needed.
      *
+     * <p>
+     *  该字段指示菜单是否具有属性的撕裂。如果菜单有tear off属性,它将被设置为<code> true </code>,如果没有,它将被设置为<code> false </code>。
+     * 当不再需要时,用户可以删除撕下的菜单。
+     * 
+     * 
      * @serial
      * @see #isTearOff()
      */
@@ -100,6 +120,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * menu.  Otherwise it will be set to <code>
      * false</code>.
      *
+     * <p>
+     *  如果相关菜单实际上是帮助菜单,则此字段将设置为<code> true </code>。否则它将被设置为<code> false </code>。
+     * 
+     * 
      * @serial
      */
     boolean             isHelpMenu;
@@ -109,12 +133,19 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
      private static final long serialVersionUID = -8809584163345499784L;
 
     /**
      * Constructs a new menu with an empty label. This menu is not
      * a tear-off menu.
+     * <p>
+     *  构造一个带有空标签的新菜单。此菜单不是可撕下的菜单。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true.
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -127,6 +158,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /**
      * Constructs a new menu with the specified label. This menu is not
      * a tear-off menu.
+     * <p>
+     * 构造具有指定标签的新菜单。此菜单不是可撕下的菜单。
+     * 
+     * 
      * @param       label the menu's label in the menu bar, or in
      *                   another menu of which this menu is a submenu.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -144,6 +179,12 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * Tear-off functionality may not be supported by all
      * implementations of AWT.  If a particular implementation doesn't
      * support tear-off menus, this value is silently ignored.
+     * <p>
+     *  构造具有指定标签的新菜单,指示菜单是否可以被撕下。
+     * <p>
+     *  AWT的所有实施可能不支持撕除功能。如果特定实现不支持拆除菜单,则会默认忽略此值。
+     * 
+     * 
      * @param       label the menu's label in the menu bar, or in
      *                   another menu of which this menu is a submenu.
      * @param       tearOff   if <code>true</code>, the menu
@@ -161,6 +202,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /**
      * Construct a name for this MenuComponent.  Called by getName() when
      * the name is null.
+     * <p>
+     *  为此MenuComponent构造名称。当名称为null时由getName()调用。
+     * 
      */
     String constructComponentName() {
         synchronized (Menu.class) {
@@ -171,6 +215,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /**
      * Creates the menu's peer.  The peer allows us to modify the
      * appearance of the menu without changing its functionality.
+     * <p>
+     *  创建菜单的对等项。对等体允许我们在不改变其功能的情况下修改菜单的外观。
+     * 
      */
     public void addNotify() {
         synchronized (getTreeLock()) {
@@ -188,6 +235,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /**
      * Removes the menu's peer.  The peer allows us to modify the appearance
      * of the menu without changing its functionality.
+     * <p>
+     *  删除菜单的对等项。对等体允许我们在不改变其功能的情况下修改菜单的外观。
+     * 
      */
     public void removeNotify() {
         synchronized (getTreeLock()) {
@@ -205,6 +255,12 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * Tear-off functionality may not be supported by all
      * implementations of AWT.  If a particular implementation doesn't
      * support tear-off menus, this value is silently ignored.
+     * <p>
+     *  指示此菜单是否为撕离菜单。
+     * <p>
+     *  AWT的所有实现可能不支持撕除功能。如果特定实现不支持拆除菜单,则会默认忽略此值。
+     * 
+     * 
      * @return      <code>true</code> if this is a tear-off menu;
      *                         <code>false</code> otherwise.
      */
@@ -214,6 +270,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
       * Get the number of items in this menu.
+      * <p>
+      *  获取此菜单中的项目数。
+      * 
+      * 
       * @return     the number of items in this menu.
       * @since      JDK1.1
       */
@@ -222,6 +282,8 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getItemCount()</code>.
      */
@@ -233,6 +295,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /*
      * This is called by the native code, so client code can't
      * be called on the toolkit thread.
+     * <p>
+     *  这是由本地代码调用的,所以客户端代码不能在工具包线程上调用。
+     * 
      */
     final int countItemsImpl() {
         return items.size();
@@ -240,6 +305,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
      * Gets the item located at the specified index of this menu.
+     * <p>
+     *  获取位于此菜单的指定索引处的项目。
+     * 
+     * 
      * @param     index the position of the item to be returned.
      * @return    the item located at the specified index.
      */
@@ -250,6 +319,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /*
      * This is called by the native code, so client code can't
      * be called on the toolkit thread.
+     * <p>
+     *  这是由本地代码调用的,所以客户端代码不能在工具包线程上调用。
+     * 
      */
     final MenuItem getItemImpl(int index) {
         return (MenuItem)items.elementAt(index);
@@ -260,6 +332,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * menu item has been part of another menu, removes it
      * from that menu.
      *
+     * <p>
+     *  将指定的菜单项添加到此菜单。如果菜单项已作为另一个菜单的一部分,则从该菜单中删除该菜单项。
+     * 
+     * 
      * @param       mi   the menu item to be added
      * @return      the menu item added
      * @see         java.awt.Menu#insert(java.lang.String, int)
@@ -284,6 +360,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /**
      * Adds an item with the specified label to this menu.
      *
+     * <p>
+     *  将具有指定标签的项目添加到此菜单。
+     * 
+     * 
      * @param       label   the text on the item
      * @see         java.awt.Menu#insert(java.lang.String, int)
      * @see         java.awt.Menu#insert(java.awt.MenuItem, int)
@@ -296,6 +376,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * Inserts a menu item into this menu
      * at the specified position.
      *
+     * <p>
+     *  在指定位置将菜单项插入此菜单。
+     * 
+     * 
      * @param         menuitem  the menu item to be inserted.
      * @param         index     the position at which the menu
      *                          item should be inserted.
@@ -318,6 +402,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
             /* Remove the item at index, nitems-index times
                storing them in a temporary vector in the
                order they appear on the menu.
+            /* <p>
+            /*  将它们按照它们在菜单上出现的顺序存储在临时向量中。
+            /* 
             */
             for (int i = index ; i < nitems; i++) {
                 tempItems.addElement(getItem(index));
@@ -328,6 +415,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
             /* Add the removed items back to the menu, they are
                already in the correct order in the temp vector.
+            /* <p>
+            /* 已经在temp矢量中的正确顺序。
+            /* 
             */
             for (int i = 0; i < tempItems.size()  ; i++) {
                 add(tempItems.elementAt(i));
@@ -340,6 +430,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * at the specified position.  This is a convenience method for
      * <code>insert(menuItem, index)</code>.
      *
+     * <p>
+     *  在指定位置将带有指定标签的菜单项插入此菜单。这是<code> insert(menuItem,index)</code>的一个方便的方法。
+     * 
+     * 
      * @param       label the text on the item
      * @param       index the position at which the menu item
      *                      should be inserted
@@ -356,6 +450,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
      * Adds a separator line, or a hypen, to the menu at the current position.
+     * <p>
+     *  将分隔线或连字号添加到当前位置的菜单。
+     * 
+     * 
      * @see         java.awt.Menu#insertSeparator(int)
      */
     public void addSeparator() {
@@ -364,6 +462,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
      * Inserts a separator at the specified position.
+     * <p>
+     *  在指定位置插入分隔符。
+     * 
+     * 
      * @param       index the position at which the
      *                       menu separator should be inserted.
      * @exception   IllegalArgumentException if the value of
@@ -384,6 +486,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
             /* Remove the item at index, nitems-index times
                storing them in a temporary vector in the
                order they appear on the menu.
+            /* <p>
+            /*  将它们按照它们在菜单上出现的顺序存储在临时向量中。
+            /* 
             */
             for (int i = index ; i < nitems; i++) {
                 tempItems.addElement(getItem(index));
@@ -394,6 +499,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
             /* Add the removed items back to the menu, they are
                already in the correct order in the temp vector.
+            /* <p>
+            /*  已经在temp矢量中的正确顺序。
+            /* 
             */
             for (int i = 0; i < tempItems.size()  ; i++) {
                 add(tempItems.elementAt(i));
@@ -403,6 +511,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
      * Removes the menu item at the specified index from this menu.
+     * <p>
+     *  从此菜单中删除指定索引处的菜单项。
+     * 
+     * 
      * @param       index the position of the item to be removed.
      */
     public void remove(int index) {
@@ -420,6 +532,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
      * Removes the specified menu item from this menu.
+     * <p>
+     *  从此菜单中删除指定的菜单项。
+     * 
+     * 
      * @param  item the item to be removed from the menu.
      *         If <code>item</code> is <code>null</code>
      *         or is not in this menu, this method does
@@ -436,6 +552,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
      * Removes all items from this menu.
+     * <p>
+     *  从此菜单中删除所有项目。
+     * 
+     * 
      * @since       JDK1.0.
      */
     public void removeAll() {
@@ -452,6 +572,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * associated with the specified keyboard event (on
      * keydown).  Returns true if there is an associated
      * keyboard event.
+     * <p>
+     *  将ActionEvent发布到与指定键盘事件相关联的MenuPeer的目标(在键下)。如果存在相关联的键盘事件,则返回true。
+     * 
      */
     boolean handleShortcut(KeyEvent e) {
         int nitems = getItemCount();
@@ -505,11 +628,18 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /* Serialization support.  A MenuContainer is responsible for
      * restoring the parent fields of its children.
+     * <p>
+     *  恢复其子项的父字段。
+     * 
      */
 
     /**
      * The menu serialized Data Version.
      *
+     * <p>
+     *  菜单序列化了数据版本。
+     * 
+     * 
      * @serial
      */
     private int menuSerializedDataVersion = 1;
@@ -517,6 +647,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
     /**
      * Writes default serializable fields to stream.
      *
+     * <p>
+     *  将缺省可序列化字段写入流。
+     * 
+     * 
      * @param s the <code>ObjectOutputStream</code> to write
      * @see AWTEventMulticaster#save(ObjectOutputStream, String, EventListener)
      * @see #readObject(ObjectInputStream)
@@ -531,6 +665,10 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * Reads the <code>ObjectInputStream</code>.
      * Unrecognized keys or values will be ignored.
      *
+     * <p>
+     *  读取<code> ObjectInputStream </code>。无法识别的键或值将被忽略。
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      * @exception HeadlessException if
      *   <code>GraphicsEnvironment.isHeadless</code> returns
@@ -556,6 +694,11 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     *  返回表示此<code> Menu </code>的状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return the parameter string of this menu
      */
     public String paramString() {
@@ -565,6 +708,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -579,6 +725,11 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * AccessibleAWTMenu.
      * A new AccessibleAWTMenu instance is created if necessary.
      *
+     * <p>
+     *  获取与此菜单相关联的AccessibleContext。对于菜单,AccessibleContext采用AccessibleAWTMenu的形式。
+     * 如果需要,将创建一个新的AccessibleAWTMenu实例。
+     * 
+     * 
      * @return an AccessibleAWTMenu that serves as the
      *         AccessibleContext of this Menu
      * @since 1.3
@@ -592,6 +743,9 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 
     /**
      * Defined in MenuComponent. Overridden here.
+     * <p>
+     * 在MenuComponent中定义。在这里覆盖。
+     * 
      */
     int getAccessibleChildIndex(MenuComponent child) {
         return items.indexOf(child);
@@ -606,18 +760,30 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
      * This class implements accessibility support for the
      * <code>Menu</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to menu user-interface elements.
+     * <p>
+     *  内部类Menu用于提供对辅助功能的默认支持。这个类不是直接由应用程序开发人员使用,而是意味着只能由菜单组件开发人员进行子类化。
+     * <p>
+     *  此类实现<code> Menu </code>类的辅助功能支持。它提供了适用于菜单用户界面元素的Java可访问性API的实现。
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTMenu extends AccessibleAWTMenuItem
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 1.3 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 5228160894980069094L;
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          */

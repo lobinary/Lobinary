@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,21 @@ import java.util.Arrays;
  * <p> A SerialClob is not safe for use by multiple concurrent threads.  If a
  * SerialClob is to be used by more than one thread then access to the SerialClob
  * should be controlled by appropriate synchronization.
+ * <p>
+ *  值为Java <code> CLOB </code>值的Java编程语言中的序列化映射。
+ * <P>
+ *  <code> SerialClob </code>类提供了一个从<code> Clob </code>对象创建实例的构造函数。
+ * 请注意,在从<code> CLOB </code>对象构建一个<code> SerialClob </code>对象之前,<code> Clob </code>对象应该将SQL <code> CLOB 
+ * </code> SQL <code> CLOB </code>值的数据可以在客户端上作为Unicode字符流实现。
+ *  <code> SerialClob </code>类提供了一个从<code> Clob </code>对象创建实例的构造函数。
+ * <P>
+ *  <code> SerialClob </code>方法可以从<code> SerialClob </code>对象中获取子串,或者定位字符模式的开始。
+ * 
+ *  <h3>线程安全</h3>
+ * 
+ *  <p> SerialClob不能安全地用于多个并发线程。如果一个SerialClob被多个线程使用,则应该通过适当的同步来控制对SerialClob的访问。
+ * 
+ * 
  * @author Jonathan Bruce
  */
 public class SerialClob implements Clob, Serializable, Cloneable {
@@ -58,6 +74,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * <code>CLOB</code> value that this <code>SerialClob</code> object
      * represents.
      *
+     * <p>
+     *  包含此<code> SerialClob </code>对象表示的SQL <code> CLOB </code>值的数据的字符序列化数组。
+     * 
+     * 
      * @serial
      */
     private char buf[];
@@ -65,6 +85,9 @@ public class SerialClob implements Clob, Serializable, Cloneable {
     /**
      * Internal Clob representation if SerialClob is initialized with a
      * Clob. Null if SerialClob is initialized with a char[].
+     * <p>
+     *  如果SerialClob使用Clob初始化,则为内部Clob表示。 Null如果SerialClob使用char []初始化。
+     * 
      */
     private Clob clob;
 
@@ -72,6 +95,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * The length in characters of this <code>SerialClob</code> object's
      * internal array of characters.
      *
+     * <p>
+     *  这个<code> SerialClob </code>对象的内部字符数组的长度。
+     * 
+     * 
      * @serial
      */
     private long len;
@@ -80,6 +107,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * The original length in characters of this <code>SerialClob</code>
      * object's internal array of characters.
      *
+     * <p>
+     * 这个<code> SerialClob </code>对象的内部字符数组的原始长度。
+     * 
+     * 
      * @serial
      */
     private long origLen;
@@ -93,6 +124,13 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * objects to establish a serialized <code>Clob</code> object without touching
      * the data source.
      *
+     * <p>
+     *  构造一个<code> SerialClob </code>对象,它是给定的<code> char </code>数组的序列化版本。
+     * <p>
+     *  新的<code> SerialClob </code>对象使用来自<code> char </code>数组的数据初始化,因此允许断开<code> RowSet </code>对象建立一个序列化的<code>
+     *  Clob <代码>对象而不触及数据源。
+     * 
+     * 
      * @param ch the char array representing the <code>Clob</code> object to be
      *         serialized
      * @throws SerialException if an error occurs during serialization
@@ -130,6 +168,19 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * constructor cannot serialize a <code>Clob</code> object in this instance
      * and will throw an <code>SQLException</code> object.
      *
+     * <p>
+     *  构造一个<code> SerialClob </code>对象,它是给定的<code> Clob </code>对象的一个​​序列化版本。
+     * <P>
+     *  新的<code> SerialClob </code>对象用来自<code> Clob </code>对象的数据初始化;因此,<code> Clob </code>对象应该以前将SQL <code> 
+     * CLOB </code>值的数据从数据库带到客户端。
+     * 否则,新的<code> SerialClob </code>对象将不包含数据。
+     * <p>
+     *  注意：提供给此构造函数的<code> Clob </code>对象必须对<code> Clob.getCharacterStream()</code>和<code> Clob.getAsciiStre
+     * am </code>方法返回非null。
+     * 这个<code> SerialClob </code>构造函数不能在这个实例中序列化一个<code> Clob </code>对象,并且会抛出一个<code> SQLException </code>对
+     * 象。
+     * 
+     * 
      * @param  clob the <code>Clob</code> object from which this
      *     <code>SerialClob</code> object is to be constructed; cannot be null
      * @throws SerialException if an error occurs during serialization
@@ -183,6 +234,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * Retrieves the number of characters in this <code>SerialClob</code>
      * object's array of characters.
      *
+     * <p>
+     *  检索此<cnt> SerialClob </code>对象的字符数组中的字符数。
+     * 
+     * 
      * @return a <code>long</code> indicating the length in characters of this
      *         <code>SerialClob</code> object's array of character
      * @throws SerialException if an error occurs;
@@ -199,6 +254,13 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * a stream is produced regardless of whether the <code>SerialClob</code> object
      * was created with a <code>Clob</code> object or a <code>char</code> array.
      *
+     * <p>
+     * 返回这个<code> SerialClob </code>对象的数据作为Unicode字符流。
+     * 与相关方法<code> getAsciiStream </code>不同,不管<code> SerialClob </code>对象是用<code> Clob </code>对象还是<code> cha
+     * r </code>数组。
+     * 返回这个<code> SerialClob </code>对象的数据作为Unicode字符流。
+     * 
+     * 
      * @return a <code>java.io.Reader</code> object containing this
      *         <code>SerialClob</code> object's data
      * @throws SerialException if an error occurs;
@@ -217,6 +279,12 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * object. If this <code>SerialClob</code> object is instantiated with
      * a <code>char</code> array, a <code>SerialException</code> object is thrown.
      *
+     * <p>
+     *  撷取由此<code> SerialClob </code>物件指定为ascii串流的<code> CLOB </code>值。
+     * 在这个<code> SerialClob </code>对象用<code> Clob </code>对象实例化的情况下,此方法将<code> getAsciiStream </code> >对象。
+     * 如果这个<code> SerialClob </code>对象被一个<code> char </code>数组实例化,则抛出一个<code> SerialException </code>对象。
+     * 
+     * 
      * @return a <code>java.io.InputStream</code> object containing
      *     this <code>SerialClob</code> object's data
      * @throws SerialException if this {@code SerialClob} object was not
@@ -242,6 +310,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * <code>SerialClob</code> object, starting at the given position
      * and continuing for the specified number or characters.
      *
+     * <p>
+     *  返回此<c> SerialClob </code>对象中包含的子字符串的副本,从给定位置开始,并持续指定的数字或字符。
+     * 
+     * 
      * @param pos the position of the first character in the substring
      *            to be copied; the first character of the
      *            <code>SerialClob</code> object is at position
@@ -289,6 +361,11 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * the search at the specified position. This method returns
      * <code>-1</code> if the pattern is not found.
      *
+     * <p>
+     *  返回给定<code> String </code>对象开始的<code> SerialClob </code>对象中的位置,开始在指定位置搜索。
+     * 如果未找到模式,此方法返回<code> -1 </code>。
+     * 
+     * 
      * @param searchStr the <code>String</code> object for which to
      *                  search
      * @param start the position in this <code>SerialClob</code> object
@@ -338,6 +415,11 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * the search at the specified position. This method returns
      * <code>-1</code> if the pattern is not found.
      *
+     * <p>
+     *  返回在给定的<code> Clob </code>签名开始的<code> SerialClob </code>对象中的位置,开始在指定位置搜索。
+     * 如果未找到模式,此方法返回<code> -1 </code>。
+     * 
+     * 
      * @param searchStr the <code>Clob</code> object for which to search
      * @param start the position in this <code>SerialClob</code> object
      *        at which to begin the search; the first position is
@@ -362,6 +444,11 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * value that this <code>SerialClob</code> object represents, at the position
      * <code>pos</code>.
      *
+     * <p>
+     * 将给定的Java <code> String </code>写入此<code> SerialClob </code>对象表示的<code> CLOB </code>值,位置为<code> pos </code>
+     * 。
+     * 
+     * 
      * @param pos the position at which to start writing to the <code>CLOB</code>
      *         value that this <code>SerialClob</code> object represents; the first
      *         position is <code>1</code>; must not be less than <code>1</code> nor
@@ -385,6 +472,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * at character <code>offset</code>, to the <code>CLOB</code> value
      * that this <code>Clob</code> represents.
      *
+     * <p>
+     *  从<code> offset </code>开始,将<code> len </code>字符写入<code> CLOB </code> / code>表示。
+     * 
+     * 
      * @param pos the position at which to start writing to the <code>CLOB</code>
      *         value that this <code>SerialClob</code> object represents; the first
      *         position is <code>1</code>; must not be less than <code>1</code> nor
@@ -444,6 +535,14 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * <code>Clob</code> object. If this <code>SerialClob</code> object is instantiated
      *  with a <code>char</code> array, a <code>SerialException</code> object is thrown.
      *
+     * <p>
+     *  从位置<code> pos </code>开始,检索用于将Ascii字符写入此<code> SerialClob </code>对象表示的<code> CLOB </code>值的流。
+     * 这个方法将<code> setAsciiStream()</code>调用转发到底层的<code> Clob </code>对象,如果这个<code> SerialClob </code>对象被实例化为
+     * <code> Clob < / code> object。
+     *  从位置<code> pos </code>开始,检索用于将Ascii字符写入此<code> SerialClob </code>对象表示的<code> CLOB </code>值的流。
+     * 如果这个<code> SerialClob </code>对象被一个<code> char </code>数组实例化,则抛出一个<code> SerialException </code>对象。
+     * 
+     * 
      * @param pos the position at which to start writing to the
      *        <code>CLOB</code> object
      * @return the stream to which ASCII encoded characters can be written
@@ -475,6 +574,12 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * <code>Clob</code> object. If this <code>SerialClob</code> object is instantiated with
      * a <code>char</code> array, a <code>SerialException</code> is thrown.
      *
+     * <p>
+     *  检索要用于将Unicode字符流写入此<code> SerialClob </code>对象表示的<code> CLOB </code>值的流的位置<code> pos </code>。
+     * 该方法将<code> SerialClob </code>对象实例化为<code> Clob </code>对象的<code> setCharacterStream()<// code>对象。
+     * 如果这个<code> SerialClob </code>对象用一个<code> char </code>数组实例化,则抛出一个<code> SerialException </code>。
+     * 
+     * 
      * @param  pos the position at which to start writing to the
      *        <code>CLOB</code> value
      *
@@ -506,6 +611,12 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * Truncating a <code>SerialClob</code> object to length 0 has the effect of
      * clearing its contents.
      *
+     * <p>
+     * 截断此代码<code> SerialClob </code>所代表的<code> CLOB </code>值,以使其长度为<code> len </code>个字符。
+     * <p>
+     *  将长度为0的<code> SerialClob </code>对象截断可以清除其内容。
+     * 
+     * 
      * @param length the length, in bytes, to which the <code>CLOB</code>
      *        value should be truncated
      * @throws SerialException if there is an error accessing the
@@ -535,6 +646,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * {@code SerialClob} value, starting
      * with the character specified by pos, which is length characters in length.
      *
+     * <p>
+     *  返回包含部分{@code SerialClob}值的{@code Reader}对象,从由pos指定的字符开始,该字符的长度为length个字符。
+     * 
+     * 
      * @param pos the offset to the first character of the partial value to
      * be retrieved.  The first character in the {@code SerialClob} is at position 1.
      * @param length the length in characters of the partial value to be retrieved.
@@ -570,6 +685,12 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * If {@code free} is called multiple times, the subsequent
      * calls to {@code free} are treated as a no-op.
      * </P>
+     * <p>
+     *  此方法释放{@code SeriableClob}对象,并释放其所拥有的资源。调用{@code free}方法后,对象无效。
+     * <p>
+     *  如果{@code free}被多次调用,则对{@code free}的后续调用将被视为无操作。
+     * </P>
+     * 
      * @throws SQLException if an error occurs releasing
      * the Clob's resources
      * @since 1.6
@@ -590,6 +711,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * SerialClob} object that represents the same sequence of characters as this
      * object.
      *
+     * <p>
+     *  将此SerialClob与指定的对象进行比较。结果是{@code true}当且仅当参数不是{@code null},并且是一个表示与此对象相同的字符序列的{@code SerialClob}对象。
+     * 
+     * 
      * @param  obj The object to compare this {@code SerialClob} against
      *
      * @return  {@code true} if the given object represents a {@code SerialClob}
@@ -611,6 +736,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
 
     /**
      * Returns a hash code for this {@code SerialClob}.
+     * <p>
+     *  返回此{@code SerialClob}的哈希码。
+     * 
+     * 
      * @return  a hash code value for this object.
      */
     public int hashCode() {
@@ -623,6 +752,11 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * to the original internal character array of this {@code SerialClob} object.
      * The underlying {@code Clob} object will be set to null.
      *
+     * <p>
+     *  返回此{@code SerialClob}的克隆。该副本将包含对内部字符数组的克隆的引用,而不是对此{@code SerialClob}对象的原始内部字符数组的引用。
+     * 底层的{@code Clob}对象将设置为null。
+     * 
+     * 
      * @return  a clone of this SerialClob
      */
     public Object clone() {
@@ -640,6 +774,9 @@ public class SerialClob implements Clob, Serializable, Cloneable {
     /**
      * readObject is called to restore the state of the SerialClob from
      * a stream.
+     * <p>
+     *  readObject被调用以从流中恢复SerialClob的状态。
+     * 
      */
     private void readObject(ObjectInputStream s)
             throws IOException, ClassNotFoundException {
@@ -659,6 +796,9 @@ public class SerialClob implements Clob, Serializable, Cloneable {
     /**
      * writeObject is called to save the state of the SerialClob
      * to a stream.
+     * <p>
+     *  writeObject被调用以将SerialClob的状态保存到流。
+     * 
      */
     private void writeObject(ObjectOutputStream s)
             throws IOException, ClassNotFoundException {
@@ -677,6 +817,10 @@ public class SerialClob implements Clob, Serializable, Cloneable {
      * Check to see if this object had previously had its {@code free} method
      * called
      *
+     * <p>
+     *  检查此对象之前是否已调用其{@code free}方法
+     * 
+     * 
      * @throws SerialException
      */
     private void isValid() throws SerialException {
@@ -689,6 +833,8 @@ public class SerialClob implements Clob, Serializable, Cloneable {
     /**
      * The identifier that assists in the serialization of this {@code SerialClob}
      * object.
+     * <p>
+     * 协助序列化此{@code SerialClob}对象的标识符。
      */
     static final long serialVersionUID = -1662519690087375313L;
 }

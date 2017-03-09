@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Constants.java,v 1.2.4.1 2005/09/10 19:50:56 jeffsuttor Exp $
+ * <p>
+ *  $ Id：Constants.java,v 1.2.4.1 2005/09/10 19:50:56 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.templates;
 
@@ -26,6 +39,9 @@ package com.sun.org.apache.xalan.internal.templates;
 /**
  * Primary constants used in the TransformerImpl classes.
  * @xsl.usage advanced
+ * <p>
+ *  TransformerImpl类中使用的主要常数。 @ xsl.usage advanced
+ * 
  */
 public class Constants extends com.sun.org.apache.xml.internal.utils.Constants
 {
@@ -38,6 +54,10 @@ public class Constants extends com.sun.org.apache.xml.internal.utils.Constants
    * (It's a pity Java doesn't have a real Enumerated Mnemonic
    * datatype... or a C-like preprocessor in lieu thereof which
    * could be used to generate and maintain synch between these lists.)
+   * <p>
+   *  XSL元素类型的ID。这些与TransformerImpl类中的字符串文字相关联。不要更改数字。
+   * 注意这些不是在物理订单！ (很遗憾Java不具有真实的枚举助记符数据类型...或者类似C的预处理器,其可以用于生成和维持这些列表之间的同步)。
+   * 
    */
   public static final int ELEMNAME_UNDEFINED = -1, ELEMNAME_WITHPARAM = 2,
                           ELEMNAME_ADDATTRIBUTE = 4, ELEMNAME_ANCHOR = 22,
@@ -98,6 +118,9 @@ public class Constants extends com.sun.org.apache.xml.internal.utils.Constants
   /**
    * Literals for XSL element names.  Note that there are more
    * names than IDs, because some names map to the same ID.
+   * <p>
+   *  XSL元素名称的字面值。请注意,名称比ID多,因为一些名称映射到相同的ID。
+   * 
    */
   public static final String
           ELEMNAME_ANCHOR_STRING = "anchor",
@@ -170,6 +193,9 @@ public class Constants extends com.sun.org.apache.xml.internal.utils.Constants
 
   /**
    * Literals for EXSLT function elements.
+   * <p>
+   *  EXSLT函数元素的文字。
+   * 
    */
   public static final String
     EXSLT_ELEMNAME_FUNCTION_STRING = "function",
@@ -182,6 +208,9 @@ public class Constants extends com.sun.org.apache.xml.internal.utils.Constants
   /**
    * Literals for XSL attribute names.  Note that there may be more
    * names than IDs, because some names may map to the same ID.
+   * <p>
+   *  XSL属性名称的字面值。注意,可能有比ID更多的名称,因为一些名称可能映射到相同的ID。
+   * 
    */
   public static final String
           ATTRNAME_AMOUNT = "amount",
@@ -271,6 +300,9 @@ public class Constants extends com.sun.org.apache.xml.internal.utils.Constants
    * with the string literals in the TransformerImpl class.
    * Don't change the numbers. NOTE THAT THESE ARE NOT IN
    * ALPHABETICAL ORDER!
+   * <p>
+   * 与TransformerImpl类中的字符串文字。不要更改数字。注意这些不是在物理订单！
+   * 
    */
   public static final int TATTRNAME_OUTPUT_METHOD = 1, TATTRNAME_AMOUNT = 2,
                           TATTRNAME_ANCESTOR = 3, TATTRNAME_ARCHIVE = 4,
@@ -332,6 +364,12 @@ public class Constants extends com.sun.org.apache.xml.internal.utils.Constants
    * most often when producing something that isn't an XML or HTML
    * document.</li>
    * </ul>
+   * <p>
+   *  method = attribute：
+   * <ul>
+   *  <li> ATTRVAL_OUTPUT_METHOD_XML =使用XML格式化程序生成输出文档(基本XSLT操作)。
+   * </li> <li> ATTRVAL_OUTPUT_METHOD_HTML：使用HTML格式化程序生成输出文档。当生成HTML文档时,这可能产生更好的结果;它会执行href属性中的转义字符。
+   * 
    * */
   public static final String ATTRVAL_OUTPUT_METHOD_HTML = "html",
                              ATTRVAL_OUTPUT_METHOD_XML = "xml",

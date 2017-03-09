@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,8 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import com.sun.corba.se.impl.orbutil.ORBUtility;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 class SelectorImpl
@@ -290,6 +293,9 @@ class SelectorImpl
                   if (n == 0) {
                   continue;
                   }
+                /* <p>
+                /*  if(timeout == 0 && orb.transportDebugFlag){dprint("。
+                /* run：selector.select()returned："+ n); } if(n == 0){continue; }}。
                 */
                 Iterator iterator = selector.selectedKeys().iterator();
                 if (orb.transportDebugFlag) {

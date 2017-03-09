@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,12 @@ import java.awt.Rectangle;
  * implementation dependencies, there may be differences in pixel values
  * of an image filtered on different platforms.
  *
+ * <p>
+ *  用于使用最简单的算法缩放图像的ImageFilter类。此类扩展了基本的ImageFilter类,以扩展现有图像,并为包含重新采样的图像的新图像提供源。
+ * 通过复制像素的行和列以按比例放大或省略像素的行和列以按比例缩小,对源图像中的像素进行采样以产生用于指定尺寸的图像的像素。
+ *  <p>这意味着与FilteredImageSource对象结合使用以生成现有图像的缩放版本。由于实现依赖性,在不同平台上过滤的图像的像素值可能存在差异。
+ * 
+ * 
  * @see FilteredImageSource
  * @see ImageFilter
  *
@@ -52,33 +59,51 @@ public class ReplicateScaleFilter extends ImageFilter {
 
     /**
      * The width of the source image.
+     * <p>
+     *  源图像的宽度。
+     * 
      */
     protected int srcWidth;
 
     /**
      * The height of the source image.
+     * <p>
+     *  源图像的高度。
+     * 
      */
     protected int srcHeight;
 
     /**
      * The target width to scale the image.
+     * <p>
+     *  用于缩放图像的目标宽度。
+     * 
      */
     protected int destWidth;
 
     /**
      * The target height to scale the image.
+     * <p>
+     *  用于缩放图像的目标高度。
+     * 
      */
     protected int destHeight;
 
     /**
      * An <code>int</code> array containing information about a
      * row of pixels.
+     * <p>
+     *  包含有关一行像素的信息的<code> int </code>数组。
+     * 
      */
     protected int srcrows[];
 
     /**
      * An <code>int</code> array containing information about a
      * column of pixels.
+     * <p>
+     *  包含有关像素列信息的<code> int </code>数组。
+     * 
      */
     protected int srccols[];
 
@@ -86,12 +111,19 @@ public class ReplicateScaleFilter extends ImageFilter {
      * A <code>byte</code> array initialized with a size of
      * {@link #destWidth} and used to deliver a row of pixel
      * data to the {@link ImageConsumer}.
+     * <p>
+     *  以{@link #destWidth}大小初始化并用于将一行像素数据传递到{@link ImageConsumer}的<code> byte </code>数组。
+     * 
      */
     protected Object outpixbuf;
 
     /**
      * Constructs a ReplicateScaleFilter that scales the pixels from
      * its source Image as specified by the width and height parameters.
+     * <p>
+     *  构造一个ReplicateScaleFilter,它根据width和height参数指定的缩放像素的源图像。
+     * 
+     * 
      * @param width the target width to scale the image
      * @param height the target height to scale the image
      * @throws IllegalArgumentException if <code>width</code> equals
@@ -119,6 +151,12 @@ public class ReplicateScaleFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     * 在添加表示应用比例的属性后,从源对象的属性传递。此方法调用<code> super.setProperties </code>,这可能会导致添加其他属性。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
      */
     public void setProperties(Hashtable<?,?> props) {
         Hashtable<Object,Object> p = (Hashtable<Object,Object>)props.clone();
@@ -142,6 +180,13 @@ public class ReplicateScaleFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  覆盖源图像的尺寸,并将新缩放后的尺寸的尺寸传递给ImageConsumer。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer
      */
     public void setDimensions(int w, int h) {
@@ -182,6 +227,12 @@ public class ReplicateScaleFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  选择目标缩放图像需要传递的字节像素的哪些行和列,并只传递所需的行和列,并根据需要进行复制。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
      */
     public void setPixels(int x, int y, int w, int h,
                           ColorModel model, byte pixels[], int off,
@@ -223,6 +274,10 @@ public class ReplicateScaleFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     * 选择目标缩放图像需要投放的int像素的哪些行和列,并只传递所需的行和列,并根据需要进行复制。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
      */
     public void setPixels(int x, int y, int w, int h,
                           ColorModel model, int pixels[], int off,

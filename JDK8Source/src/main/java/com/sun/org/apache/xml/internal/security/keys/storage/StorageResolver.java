@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.keys.storage;
 
@@ -35,6 +44,9 @@ import com.sun.org.apache.xml.internal.security.keys.storage.implementations.Sin
 
 /**
  * This class collects customized resolvers for Certificates.
+ * <p>
+ *  此类收集证书的自定义解析器。
+ * 
  */
 public class StorageResolver {
 
@@ -48,12 +60,19 @@ public class StorageResolver {
     /**
      * Constructor StorageResolver
      *
+     * <p>
+     *  构造函数StorageResolver
+     * 
      */
     public StorageResolver() {}
 
     /**
      * Constructor StorageResolver
      *
+     * <p>
+     *  构造函数StorageResolver
+     * 
+     * 
      * @param resolver
      */
     public StorageResolver(StorageResolverSpi resolver) {
@@ -63,6 +82,10 @@ public class StorageResolver {
     /**
      * Method addResolver
      *
+     * <p>
+     *  方法addResolver
+     * 
+     * 
      * @param resolver
      */
     public void add(StorageResolverSpi resolver) {
@@ -75,6 +98,10 @@ public class StorageResolver {
     /**
      * Constructor StorageResolver
      *
+     * <p>
+     *  构造函数StorageResolver
+     * 
+     * 
      * @param keyStore
      */
     public StorageResolver(KeyStore keyStore) {
@@ -84,6 +111,10 @@ public class StorageResolver {
     /**
      * Method addKeyStore
      *
+     * <p>
+     *  方法addKeyStore
+     * 
+     * 
      * @param keyStore
      */
     public void add(KeyStore keyStore) {
@@ -97,6 +128,10 @@ public class StorageResolver {
     /**
      * Constructor StorageResolver
      *
+     * <p>
+     *  构造函数StorageResolver
+     * 
+     * 
      * @param x509certificate
      */
     public StorageResolver(X509Certificate x509certificate) {
@@ -106,6 +141,10 @@ public class StorageResolver {
     /**
      * Method addCertificate
      *
+     * <p>
+     *  方法addCertificate
+     * 
+     * 
      * @param x509certificate
      */
     public void add(X509Certificate x509certificate) {
@@ -114,6 +153,10 @@ public class StorageResolver {
 
     /**
      * Method getIterator
+     * <p>
+     *  方法getIterator
+     * 
+     * 
      * @return the iterator for the resolvers.
      */
     public Iterator<Certificate> getIterator() {
@@ -123,6 +166,9 @@ public class StorageResolver {
     /**
      * Class StorageResolverIterator
      * This iterates over all the Certificates found in all the resolvers.
+     * <p>
+     *  StorageResolverIterator类迭代所有解析器中找到的所有证书。
+     * 
      */
     static class StorageResolverIterator implements Iterator<Certificate> {
 
@@ -135,6 +181,10 @@ public class StorageResolver {
         /**
          * Constructor StorageResolverIterator
          *
+         * <p>
+         *  构造函数StorageResolverIterator
+         * 
+         * 
          * @param resolvers
          */
         public StorageResolverIterator(Iterator<StorageResolverSpi> resolvers) {
@@ -167,6 +217,8 @@ public class StorageResolver {
 
         /**
          * Method remove
+         * <p>
+         *  方法删除
          */
         public void remove() {
             throw new UnsupportedOperationException("Can't remove keys from KeyStore");

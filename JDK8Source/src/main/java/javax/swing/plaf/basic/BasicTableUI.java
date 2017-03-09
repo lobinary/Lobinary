@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,10 @@ import sun.swing.UIAction;
 /**
  * BasicTableUI implementation
  *
+ * <p>
+ *  BasicTableUI实现
+ * 
+ * 
  * @author Philip Milne
  * @author Shannon Hickey (drag and drop)
  */
@@ -76,6 +81,9 @@ public class BasicTableUI extends TableUI
 
     /**
      * Local cache of Table's client property "Table.isFileList"
+     * <p>
+     *  Table的客户端属性"Table.isFileList"的本地缓存
+     * 
      */
     private boolean isFileList = false;
 
@@ -243,6 +251,10 @@ public class BasicTableUI extends TableUI
          * it is recommended that caution be taken in order to preserve
          * the intent of this method, especially when deciding whether to
          * query the selection models or interact with JTable directly.
+         * <p>
+         *  调用在给定JTable的选定范围内移动。此方法使用表的选择概念,这对于允许用户在屏幕上视觉选择的项之间导航很重要。这个概念可以或可以不与通过直接查询选择模型所确定的相同。
+         * 它取决于某些表属性(例如是否允许行或列选择)。当执行修改时,建议采取谨慎措施以保持此方法的意图,尤其是在决定是查询选择模型还是直接与JTable交互时。
+         * 
          */
         private boolean moveWithinSelectedRange(JTable table, int dx, int dy,
                 ListSelectionModel rsm, ListSelectionModel csm) {
@@ -343,6 +355,9 @@ public class BasicTableUI extends TableUI
         /**
          * Find the next lead row and column based on the given
          * dx/dy and max/min values.
+         * <p>
+         *  根据给定的dx / dy和max / min值查找下一个引导行和列。
+         * 
          */
         private void calcNextPos(int dx, int minX, int maxX,
                                  int dy, int minY, int maxY) {
@@ -602,6 +617,10 @@ public class BasicTableUI extends TableUI
                         });
                     }
                 }
+                /* <p>
+                /*  if(wasEditingWithFocus){table.editCellAt(leadRow,leadColumn); final组件editorComp = table.getEditorComponent(); if(editorComp！= null){SwingUtilities.invokeLater(new Runnable(){public void run(){editorComp.requestFocus();}
+                /* }); }}。
+                /* 
                 */
             } else if (key == CANCEL_EDITING) {
                 table.removeEditor();
@@ -736,6 +755,10 @@ public class BasicTableUI extends TableUI
      * Instead <code>JTable</code>
      * overrides <code>processKeyBinding</code> to dispatch the event to
      * the current <code>TableCellEditor</code>.
+     * <p>
+     * 该类应当被视为"受保护的"内部类。仅在{@code BasicTableUI}的子类中实例化它。 <p>从Java 2平台v1.3开始,这个类不再使用。
+     * 代替<code> JTable </code>覆盖<code> processKeyBinding </code>以将事件分派到当前<code> TableCellEditor </code>。
+     * 
      */
      public class KeyHandler implements KeyListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -762,6 +785,9 @@ public class BasicTableUI extends TableUI
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicTableUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code BasicTableUI}的子类中实例化它。
+     * 
      */
     public class FocusHandler implements FocusListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -784,6 +810,9 @@ public class BasicTableUI extends TableUI
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicTableUI.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicTableUI的子类中。
+     * 
      */
     public class MouseInputHandler implements MouseInputListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -1329,6 +1358,9 @@ public class BasicTableUI extends TableUI
      * Returns true if the given point is outside the preferredSize of the
      * item at the given row of the table.  (Column must be 0).
      * Returns false if the "Table.isFileList" client property is not set.
+     * <p>
+     *  如果给定点在表的给定行的项目的preferredSize之外,则返回true。 (列必须为0)。如果未设置"Table.isFileList"客户端属性,则返回false。
+     * 
      */
     private boolean pointOutsidePrefSize(int row, int column, Point p) {
         if (!isFileList) {
@@ -1351,6 +1383,9 @@ public class BasicTableUI extends TableUI
 
     /**
      * Creates the key listener for handling keyboard navigation in the JTable.
+     * <p>
+     *  创建用于处理JTable中键盘导航的键监听器。
+     * 
      */
     protected KeyListener createKeyListener() {
         return null;
@@ -1358,6 +1393,9 @@ public class BasicTableUI extends TableUI
 
     /**
      * Creates the focus listener for handling keyboard navigation in the JTable.
+     * <p>
+     *  创建用于处理JTable中键盘导航的焦点侦听器。
+     * 
      */
     protected FocusListener createFocusListener() {
         return getHandler();
@@ -1365,6 +1403,9 @@ public class BasicTableUI extends TableUI
 
     /**
      * Creates the mouse listener for the JTable.
+     * <p>
+     *  为JTable创建鼠标监听器。
+     * 
      */
     protected MouseInputListener createMouseInputListener() {
         return getHandler();
@@ -1397,6 +1438,10 @@ public class BasicTableUI extends TableUI
      * current value is either null or a UIResource, other properties are set
      * if the current value is null.
      *
+     * <p>
+     *  初始化JTable属性,例如字体,前景和背景。仅当字体,前景和背景属性的当前值为null或UIResource时,才设置它们,如果当前值为null,则设置其他属性。
+     * 
+     * 
      * @see #installUI
      */
     protected void installDefaults() {
@@ -1456,6 +1501,9 @@ public class BasicTableUI extends TableUI
 
     /**
      * Attaches listeners to the JTable.
+     * <p>
+     *  将侦听器附加到JTable。
+     * 
      */
     protected void installListeners() {
         focusListener = createFocusListener();
@@ -1474,6 +1522,9 @@ public class BasicTableUI extends TableUI
 
     /**
      * Register all keyboard actions on the JTable.
+     * <p>
+     *  在JTable上注册所有键盘操作。
+     * 
      */
     protected void installKeyboardActions() {
         LazyActionMap.installLazyActionMap(table, BasicTableUI.class,
@@ -1647,6 +1698,10 @@ public class BasicTableUI extends TableUI
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -1673,6 +1728,10 @@ public class BasicTableUI extends TableUI
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -1707,6 +1766,9 @@ public class BasicTableUI extends TableUI
      * Return the minimum size of the table. The minimum height is the
      * row height times the number of rows.
      * The minimum width is the sum of the minimum widths of each column.
+     * <p>
+     * 返回表的最小大小。最小高度是行高乘以行数。最小宽度是每列的最小宽度之和。
+     * 
      */
     public Dimension getMinimumSize(JComponent c) {
         long width = 0;
@@ -1722,6 +1784,9 @@ public class BasicTableUI extends TableUI
      * Return the preferred size of the table. The preferred height is the
      * row height times the number of rows.
      * The preferred width is the sum of the preferred widths of each column.
+     * <p>
+     *  返回表的首选大小。首选高度是行高乘以行数。优选的宽度是每列的优选宽度的总和。
+     * 
      */
     public Dimension getPreferredSize(JComponent c) {
         long width = 0;
@@ -1737,6 +1802,9 @@ public class BasicTableUI extends TableUI
      * Return the maximum size of the table. The maximum height is the
      * row heighttimes the number of rows.
      * The maximum width is the sum of the maximum widths of each column.
+     * <p>
+     *  返回表的最大大小。最大高度是行高乘以行数。最大宽度是每列的最大宽度的总和。
+     * 
      */
     public Dimension getMaximumSize(JComponent c) {
         long width = 0;
@@ -1754,6 +1822,9 @@ public class BasicTableUI extends TableUI
 
     /** Paint a representation of the <code>table</code> instance
      * that was set in installUI().
+     * <p>
+     *  在installUI()中设置。
+     * 
      */
     public void paint(Graphics g, JComponent c) {
         Rectangle clip = g.getClipBounds();
@@ -1947,6 +2018,11 @@ public class BasicTableUI extends TableUI
      * if <code>getShowVerticalLines()</code> returns true and paints
      * horizontal lines if <code>getShowHorizontalLines()</code>
      * returns true.
+     * <p>
+     *  使用<I> setGridColor </I>设置的网格颜色在<I> aRect </I>中绘制网格线。
+     * 如果<code> getShowVerticalLines()</code>返回true,则绘制垂直线,如果<code> getShowHorizo​​ntalLines()</code>返回true,
+     * 则绘制垂直线。
+     *  使用<I> setGridColor </I>设置的网格颜色在<I> aRect </I>中绘制网格线。
      */
     private void paintGrid(Graphics g, int rMin, int rMax, int cMin, int cMax) {
         g.setColor(table.getGridColor());
@@ -2139,6 +2215,9 @@ public class BasicTableUI extends TableUI
         /**
          * Create a Transferable to use as the source for a data transfer.
          *
+         * <p>
+         * 
+         * 
          * @param c  The component holding the data to be transfered.  This
          *  argument is provided to enable sharing of TransferHandlers by
          *  multiple components.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -115,6 +116,47 @@ import java.util.function.BiFunction;
  * to use {@link java.util.concurrent.ConcurrentHashMap} in place of
  * {@code Hashtable}.
  *
+ * <p>
+ *  这个类实现了一个哈希表,它将键映射到值。任何非<code> null </code>对象都可以用作键或值。 <p>
+ * 
+ *  要成功存储和检索哈希表中的对象,用作键的对象必须实现<code> hashCode </code>方法和<code> equals </code>方法。 <p>
+ * 
+ *  <code> Hashtable </code>的实例具有影响其性能的两个参数：<i>初始容量</i>和<i>负载因子</i>。
+ *  <i> capacity </i>是哈希表中的<bu> </i>的数量,而<i>初始容量</i>只是创建哈希表时的容量。
+ * 请注意,哈希表是<i> open </i>：在"哈希冲突"的情况下,单个桶存储多个条目,必须顺序搜索。 <i>负载因子</i>是在其容量自动增加之前允许哈希表获得多大的量度。
+ * 初始容量和负载因子参数仅仅是实现的提示。关于何时和是否调用rehash方法的确切细节与实现相关。<p>。
+ * 
+ * 通常,默认负载因子(.75)在时间和空间成本之间提供了良好的折衷。
+ * 较高的值减少了空间开销,但增加了查找条目的时间成本(这反映在大多数<tt> Hashtable </tt>操作中,包括<tt> get </tt>和<tt> put </tt> )。<p>。
+ * 
+ *  初始容量控制浪费空间和需要<code> rehash </code>操作之间的折衷,这是耗时的。
+ * 如果初始容量大于<tt> Hashtable </tt>将包含的最大条目数除以其负载因子,则不会发生<code> rehash </code>操作。但是,将初始容量设置得过高可能会浪费空间。
+ * 
+ *  如果将许多条目形成为<code> Hashtable </code>,则使用足够大的容量来创建条目可以允许条目被更有效地插入,而不是根据需要执行自动重新散列以增长表。 <p>
+ * 
+ *  此示例创建一个数字哈希表。
+ * 它使用数字的名称作为键：<pre> {@code Hashtable <String,Integer> numbers = new Hashtable <String,Integer>(); numbers.put("one",1); numbers.put("two",2); numbers.put("three",3);}
+ *  </pre>。
+ *  此示例创建一个数字哈希表。
+ * 
+ *  <p>要检索数字,请使用以下代码：<pre> {@code Integer n = numbers.get("two"); if(n！= null){System.out.println("two ="+ n); }
+ * } </pre>。
+ * 
+ * <p>由所有这个类的"集合视图方法"返回的集合的<tt> iterator </tt>方法返回的迭代器<em> fail-fast </em>：如果Hashtable在结构上被修改在创建迭代器之后的任何
+ * 时候,除了通过迭代器自己的<tt> remove </tt>方法,迭代器将抛出一个{@link ConcurrentModificationException}。
+ * 因此,面对并发修改,迭代器快速而干净地失败,而不是在将来的未确定时间冒任意的,非确定性行为的风险。 Hashtable的键和元素方法返回的枚举不是</em> fail-fast。
+ * 
+ *  <p>请注意,迭代器的故障快速行为不能得到保证,因为一般来说,在不同步并发修改的情况下不可能做出任何硬的保证。
+ * 故障快速迭代器在尽力而为的基础上抛出<tt> ConcurrentModificationException </tt>。
+ * 因此,编写依赖于此异常的程序的正确性是错误的：<i>迭代器的故障快速行为应该仅用于检测错误。</i>。
+ * 
+ *  <p>从Java 2平台v1.2开始,这个类被改进来实现{@link Map}接口,使其成为
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ * 
+ * Java集合框架</a>。与新集合实现不同,{@code Hashtable}是同步的。如果不需要线程安全的实现,建议使用{@link HashMap}代替{@code Hashtable}。
+ * 如果需要线程安全的高并发实现,那么建议使用{@link java.util.concurrent.ConcurrentHashMap}来代替{@code Hashtable}。
+ * 
+ * 
  * @author  Arthur van Hoff
  * @author  Josh Bloch
  * @author  Neal Gafter
@@ -133,11 +175,17 @@ public class Hashtable<K,V>
 
     /**
      * The hash table data.
+     * <p>
+     *  哈希表数据。
+     * 
      */
     private transient Entry<?,?>[] table;
 
     /**
      * The total number of entries in the hash table.
+     * <p>
+     *  哈希表中的条目总数。
+     * 
      */
     private transient int count;
 
@@ -145,6 +193,10 @@ public class Hashtable<K,V>
      * The table is rehashed when its size exceeds this threshold.  (The
      * value of this field is (int)(capacity * loadFactor).)
      *
+     * <p>
+     *  当表的大小超过此阈值时,会重新刷新表。 (此字段的值为(int)(capacity * loadFactor)。)
+     * 
+     * 
      * @serial
      */
     private int threshold;
@@ -152,6 +204,10 @@ public class Hashtable<K,V>
     /**
      * The load factor for the hashtable.
      *
+     * <p>
+     *  散列表的负载系数。
+     * 
+     * 
      * @serial
      */
     private float loadFactor;
@@ -162,6 +218,10 @@ public class Hashtable<K,V>
      * the Hashtable or otherwise modify its internal structure (e.g.,
      * rehash).  This field is used to make iterators on Collection-views of
      * the Hashtable fail-fast.  (See ConcurrentModificationException).
+     * <p>
+     *  该Hashtable已被结构修改的次数结构修改是那些改变Hashtable中条目数量或修改其内部结构(例如,rehash)的修改。此字段用于在Hashtable的故障转移集合视图上创建迭代器。
+     *  (请参阅ConcurrentModificationException)。
+     * 
      */
     private transient int modCount = 0;
 
@@ -172,6 +232,10 @@ public class Hashtable<K,V>
      * Constructs a new, empty hashtable with the specified initial
      * capacity and the specified load factor.
      *
+     * <p>
+     *  构造具有指定初始容量和指定负载因子的新的空白hashtable。
+     * 
+     * 
      * @param      initialCapacity   the initial capacity of the hashtable.
      * @param      loadFactor        the load factor of the hashtable.
      * @exception  IllegalArgumentException  if the initial capacity is less
@@ -195,6 +259,10 @@ public class Hashtable<K,V>
      * Constructs a new, empty hashtable with the specified initial capacity
      * and default load factor (0.75).
      *
+     * <p>
+     *  构造具有指定初始容量和默认负载系数(0.75)的新的空白hashtable。
+     * 
+     * 
      * @param     initialCapacity   the initial capacity of the hashtable.
      * @exception IllegalArgumentException if the initial capacity is less
      *              than zero.
@@ -206,6 +274,9 @@ public class Hashtable<K,V>
     /**
      * Constructs a new, empty hashtable with a default initial capacity (11)
      * and load factor (0.75).
+     * <p>
+     *  构造一个具有默认初始容量(11)和负载系数(0.75)的新的空白hashtable。
+     * 
      */
     public Hashtable() {
         this(11, 0.75f);
@@ -216,6 +287,10 @@ public class Hashtable<K,V>
      * Map.  The hashtable is created with an initial capacity sufficient to
      * hold the mappings in the given Map and a default load factor (0.75).
      *
+     * <p>
+     *  构造一个新的哈希表,具有与给定Map相同的映射。散列表创建的初始容量足以容纳给定映射中的映射和默认负载因子(0.75)。
+     * 
+     * 
      * @param t the map whose mappings are to be placed in this map.
      * @throws NullPointerException if the specified map is null.
      * @since   1.2
@@ -228,6 +303,10 @@ public class Hashtable<K,V>
     /**
      * Returns the number of keys in this hashtable.
      *
+     * <p>
+     * 返回此散列表中的键数。
+     * 
+     * 
      * @return  the number of keys in this hashtable.
      */
     public synchronized int size() {
@@ -237,6 +316,10 @@ public class Hashtable<K,V>
     /**
      * Tests if this hashtable maps no keys to values.
      *
+     * <p>
+     *  测试这个散列表是否将值映射到值。
+     * 
+     * 
      * @return  <code>true</code> if this hashtable maps no keys to values;
      *          <code>false</code> otherwise.
      */
@@ -247,6 +330,10 @@ public class Hashtable<K,V>
     /**
      * Returns an enumeration of the keys in this hashtable.
      *
+     * <p>
+     *  返回此散列表中的键的枚举。
+     * 
+     * 
      * @return  an enumeration of the keys in this hashtable.
      * @see     Enumeration
      * @see     #elements()
@@ -262,6 +349,10 @@ public class Hashtable<K,V>
      * Use the Enumeration methods on the returned object to fetch the elements
      * sequentially.
      *
+     * <p>
+     *  返回此散列表中的值的枚举。对返回的对象使用枚举方法以顺序获取元素。
+     * 
+     * 
      * @return  an enumeration of the values in this hashtable.
      * @see     java.util.Enumeration
      * @see     #keys()
@@ -281,6 +372,12 @@ public class Hashtable<K,V>
      * {@link #containsValue containsValue}, (which is part of the
      * {@link Map} interface in the collections framework).
      *
+     * <p>
+     *  测试某些键是否映射到此散列表中的指定值。此操作比{@link #containsKey containsKey}方法更昂贵。
+     * 
+     *  <p>请注意,此方法在功能上与{@link #containsValue containsValue}(它是集合框架中的{@link Map}接口的一部分)完全相同。
+     * 
+     * 
      * @param      value   a value to search for
      * @return     <code>true</code> if and only if some key maps to the
      *             <code>value</code> argument in this hashtable as
@@ -310,6 +407,12 @@ public class Hashtable<K,V>
      * <p>Note that this method is identical in functionality to {@link
      * #contains contains} (which predates the {@link Map} interface).
      *
+     * <p>
+     *  如果此散列表将一个或多个键映射到此值,则返回true。
+     * 
+     *  <p>请注意,此方法的功能与{@link #contains contains}(早于{@link Map}界面)完全相同。
+     * 
+     * 
      * @param value value whose presence in this hashtable is to be tested
      * @return <tt>true</tt> if this map maps one or more keys to the
      *         specified value
@@ -323,6 +426,10 @@ public class Hashtable<K,V>
     /**
      * Tests if the specified object is a key in this hashtable.
      *
+     * <p>
+     *  测试指定的对象是否是此散列表中的键。
+     * 
+     * 
      * @param   key   possible key
      * @return  <code>true</code> if and only if the specified object
      *          is a key in this hashtable, as determined by the
@@ -351,6 +458,13 @@ public class Hashtable<K,V>
      * then this method returns {@code v}; otherwise it returns
      * {@code null}.  (There can be at most one such mapping.)
      *
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回{@code null}。
+     * 
+     *  更正式地说,如果此映射包含从密钥{@code k}到值{@code v}(使得{@code(key.equals(k))}的映射,则此方法返回{@code v};否则返回{@code null}。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     * 
      * @param key the key whose associated value is to be returned
      * @return the value to which the specified key is mapped, or
      *         {@code null} if this map contains no mapping for the key
@@ -375,6 +489,9 @@ public class Hashtable<K,V>
      * Some VMs reserve some header words in an array.
      * Attempts to allocate larger arrays may result in
      * OutOfMemoryError: Requested array size exceeds VM limit
+     * <p>
+     *  要分配的数组的最大大小。一些VM在数组中保留一些标题字。尝试分配较大的数组可能会导致OutOfMemoryError：请求的数组大小超过VM限制
+     * 
      */
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
@@ -384,6 +501,9 @@ public class Hashtable<K,V>
      * efficiently.  This method is called automatically when the
      * number of keys in the hashtable exceeds this hashtable's capacity
      * and load factor.
+     * <p>
+     * 增加该散列表的容量,并在内部重新组织该散列表,以便更有效地容纳和访问其条目。当哈希表中的键数量超过此哈希表的容量和负载系数时,将自动调用此方法。
+     * 
      */
     @SuppressWarnings("unchecked")
     protected void rehash() {
@@ -444,6 +564,12 @@ public class Hashtable<K,V>
      * The value can be retrieved by calling the <code>get</code> method
      * with a key that is equal to the original key.
      *
+     * <p>
+     *  将指定的<code>键</code>映射到此散列表中指定的<code>值</code>。键和值都不能为<code> null </code>。 <p>
+     * 
+     *  可以通过使用等于原键的键调用<code> get </code>方法来检索该值。
+     * 
+     * 
      * @param      key     the hashtable key
      * @param      value   the value
      * @return     the previous value of the specified key in this hashtable,
@@ -481,6 +607,10 @@ public class Hashtable<K,V>
      * Removes the key (and its corresponding value) from this
      * hashtable. This method does nothing if the key is not in the hashtable.
      *
+     * <p>
+     *  从此散列表中删除键(及其对应的值)。如果密钥不在散列表中,此方法不执行任何操作。
+     * 
+     * 
      * @param   key   the key that needs to be removed
      * @return  the value to which the key had been mapped in this hashtable,
      *          or <code>null</code> if the key did not have a mapping
@@ -514,6 +644,10 @@ public class Hashtable<K,V>
      * These mappings will replace any mappings that this hashtable had for any
      * of the keys currently in the specified map.
      *
+     * <p>
+     *  将指定映射中的所有映射复制到此散列表。这些映射将替换该散列表对当前在指定映射中的任何键所具有的任何映射。
+     * 
+     * 
      * @param t mappings to be stored in this map
      * @throws NullPointerException if the specified map is null
      * @since 1.2
@@ -525,6 +659,9 @@ public class Hashtable<K,V>
 
     /**
      * Clears this hashtable so that it contains no keys.
+     * <p>
+     *  清除此散列表,以使其不包含键。
+     * 
      */
     public synchronized void clear() {
         Entry<?,?> tab[] = table;
@@ -539,6 +676,10 @@ public class Hashtable<K,V>
      * hashtable itself is copied, but the keys and values are not cloned.
      * This is a relatively expensive operation.
      *
+     * <p>
+     *  创建此散列表的浅副本。哈希表本身的所有结构都被复制,但键和值不被克隆。这是一个相对昂贵的操作。
+     * 
+     * 
      * @return  a clone of the hashtable
      */
     public synchronized Object clone() {
@@ -568,6 +709,11 @@ public class Hashtable<K,V>
      * associated element, where the <tt>toString</tt> method is used to
      * convert the key and element to strings.
      *
+     * <p>
+     *  以一组条目的形式返回此<tt> Hashtable </tt>对象的字符串表示形式,用大括号括起来并用ASCII字符"<tt>,&lt; / tt>"(逗号和空格) 。
+     * 每个条目呈现为键,等号<tt> = </tt>和相关联的元素,其中<tt> toString </tt>方法用于将键和元素转换为字符串。
+     * 
+     * 
      * @return  a string representation of this hashtable
      */
     public synchronized String toString() {
@@ -616,6 +762,9 @@ public class Hashtable<K,V>
      * Each of these fields are initialized to contain an instance of the
      * appropriate view the first time this view is requested.  The views are
      * stateless, so there's no reason to create more than one of each.
+     * <p>
+     * 这些字段中的每一个都被初始化为包含第一次请求此视图的适当视图的实例。视图是无状态的,因此没有理由创建多个。
+     * 
      */
     private transient volatile Set<K> keySet;
     private transient volatile Set<Map.Entry<K,V>> entrySet;
@@ -634,6 +783,14 @@ public class Hashtable<K,V>
      * operations.  It does not support the <tt>add</tt> or <tt>addAll</tt>
      * operations.
      *
+     * <p>
+     *  返回此地图中包含的键的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在迭代集合的过程中修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>操作。
+     * 如果在迭代集合的过程中修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
+     * 
      * @since 1.2
      */
     public Set<K> keySet() {
@@ -674,6 +831,15 @@ public class Hashtable<K,V>
      * <tt>clear</tt> operations.  It does not support the
      * <tt>add</tt> or <tt>addAll</tt> operations.
      *
+     * <p>
+     * 返回此地图中包含的映射的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在对迭代器执行迭代(即通过迭代器自己的<tt> remove </tt>操作,或通过对迭代器返回的映射条目执行<tt> setValue </tt>操作) )迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>操作。
+     * 如果在对迭代器执行迭代(即通过迭代器自己的<tt> remove </tt>操作,或通过对迭代器返回的映射条目执行<tt> setValue </tt>操作) )迭代的结果是未定义的。
+     * 它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
+     * 
      * @since 1.2
      */
     public Set<Map.Entry<K,V>> entrySet() {
@@ -755,6 +921,14 @@ public class Hashtable<K,V>
      * <tt>retainAll</tt> and <tt>clear</tt> operations.  It does not
      * support the <tt>add</tt> or <tt>addAll</tt> operations.
      *
+     * <p>
+     *  返回此地图中包含的值的{@link Collection}视图。集合由地图支持,因此对地图的更改会反映在集合中,反之亦然。
+     * 如果在集合的迭代正在进行时修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。
+     * 集合支持元素删除,通过<tt> Iterator.remove </tt>,<tt> Collection.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射>
+     *  retainAll </tt>和<tt>清除</tt>操作。
+     * 如果在集合的迭代正在进行时修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
+     * 
      * @since 1.2
      */
     public Collection<V> values() {
@@ -785,6 +959,10 @@ public class Hashtable<K,V>
      * Compares the specified Object with this Map for equality,
      * as per the definition in the Map interface.
      *
+     * <p>
+     *  按照Map接口中的定义,将指定的对象与此Map比较以实现相等。
+     * 
+     * 
      * @param  o object to be compared for equality with this hashtable
      * @return true if the specified Object is equal to this Map
      * @see Map#equals(Object)
@@ -827,6 +1005,10 @@ public class Hashtable<K,V>
      * Returns the hash code value for this Map as per the definition in the
      * Map interface.
      *
+     * <p>
+     * 根据Map界面中的定义返回此Map的哈希码值。
+     * 
+     * 
      * @see Map#hashCode()
      * @since 1.2
      */
@@ -840,6 +1022,10 @@ public class Hashtable<K,V>
          * in progress flag, so as not to worsen the space performance.
          * A negative load factor indicates that hash code computation is
          * in progress.
+         * <p>
+         *  此代码检测由计算自引用散列表的散列码导致的递归,并防止否则会导致的堆栈溢出。这允许某些具有自引用哈希表的1.1时代applet工作。
+         * 此代码滥用loadFactor字段以做为进行中的hashCode标志的双重任务,以免恶化空间性能。负负载系数表示散列码计算正在进行。
+         * 
          */
         int h = 0;
         if (count == 0 || loadFactor < 0)
@@ -1120,6 +1306,10 @@ public class Hashtable<K,V>
     /**
      * Save the state of the Hashtable to a stream (i.e., serialize it).
      *
+     * <p>
+     *  将Hashtable的状态保存到流(即,序列化它)。
+     * 
+     * 
      * @serialData The <i>capacity</i> of the Hashtable (the length of the
      *             bucket array) is emitted (int), followed by the
      *             <i>size</i> of the Hashtable (the number of key-value
@@ -1161,6 +1351,9 @@ public class Hashtable<K,V>
 
     /**
      * Reconstitute the Hashtable from a stream (i.e., deserialize it).
+     * <p>
+     *  从流重构哈希表(即,反序列化它)。
+     * 
      */
     private void readObject(java.io.ObjectInputStream s)
          throws IOException, ClassNotFoundException
@@ -1206,6 +1399,11 @@ public class Hashtable<K,V>
      * initially in the table is known. The modCount is not incremented
      * because we are creating a new instance. Also, no return value
      * is needed.
+     * <p>
+     *  readObject使用的put方法。这是因为put是可覆盖的,并且不应该在readObject中调用,因为子类还没有被初始化。
+     * 
+     *  <p>这与普通put方法在几个方面不同。不需要检查重排序,因为表中最初的元素的数量是已知的。 modCount不会递增,因为我们正在创建一个新的实例。此外,不需要返回值。
+     * 
      */
     private void reconstitutionPut(Entry<?,?>[] tab, K key, V value)
         throws StreamCorruptedException
@@ -1231,6 +1429,9 @@ public class Hashtable<K,V>
 
     /**
      * Hashtable bucket collision list entry
+     * <p>
+     *  Hashtable桶冲突列表条目
+     * 
      */
     private static class Entry<K,V> implements Map.Entry<K,V> {
         final int hash;
@@ -1299,6 +1500,9 @@ public class Hashtable<K,V>
      * can be created with the Iterator methods disabled.  This is necessary
      * to avoid unintentionally increasing the capabilities granted a user
      * by passing an Enumeration.
+     * <p>
+     *  散列表枚举类。这个类实现了Enumeration和Iterator接口,但是可以通过禁用Iterator方法来创建单个实例。这是必要的,以避免无意地增加通过传递枚举授予用户的能力。
+     * 
      */
     private class Enumerator<T> implements Enumeration<T>, Iterator<T> {
         Entry<?,?>[] table = Hashtable.this.table;
@@ -1310,6 +1514,9 @@ public class Hashtable<K,V>
         /**
          * Indicates whether this Enumerator is serving as an Iterator
          * or an Enumeration.  (true -> Iterator).
+         * <p>
+         * 指示此枚举器是作为迭代器还是枚举。 (true  - >迭代器)。
+         * 
          */
         boolean iterator;
 
@@ -1317,6 +1524,8 @@ public class Hashtable<K,V>
          * The modCount value that the iterator believes that the backing
          * Hashtable should have.  If this expectation is violated, the iterator
          * has detected concurrent modification.
+         * <p>
+         *  迭代器认为支持Hashtable应该有的modCount值。如果违反此期望,迭代器已检测到并发修改。
          */
         protected int expectedModCount = modCount;
 

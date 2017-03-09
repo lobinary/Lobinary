@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -16,6 +17,7 @@ package org.omg.PortableServer;
 	 * NON_RETAIN - to indicate Servants are not retained by 
 	 * the POA. If no ServantRetentionPolicy is specified at 
 	 * POA creation, the default is RETAIN.
+	 * <p>
 	 */
 public class ServantRetentionPolicyValue implements org.omg.CORBA.portable.IDLEntity
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,18 @@ package com.sun.corba.se.impl.orbutil ;
  *                         new GetPropertyAction("prop"));
  * </pre>
  *
+ * <p>
+ *  用于将系统属性的字符串值作为特权操作检索的便利类。这个类直接从sun.security.action.GetPropertyAction复制,以避免依赖于sun.security.action包。
+ * 
+ *  <p>此类的实例可以用作<code> AccessController.doPrivileged </code>的参数。
+ * 
+ *  <p>以下代码检索名为<code>"prop"</code>的系统属性的值作为特权操作：<p>
+ * 
+ * <pre>
+ *  String s =(String)java.security.AccessController.doPrivileged(new GetPropertyAction("prop"));
+ * </pre>
+ * 
+ * 
  * @author Roland Schemers
  * @author Ken Cavanaugh
  * @see java.security.PrivilegedAction
@@ -56,6 +69,8 @@ public class GetPropertyAction implements java.security.PrivilegedAction {
      * Constructor that takes the name of the system property whose
      * string value needs to be determined.
      *
+     * <p>
+     * 
      * @param theProp the name of the system property.
      */
     public GetPropertyAction(String theProp) {
@@ -66,6 +81,10 @@ public class GetPropertyAction implements java.security.PrivilegedAction {
      * Constructor that takes the name of the system property and the default
      * value of that property.
      *
+     * <p>
+     *  构造函数需要需要确定其字符串值的系统属性的名称。
+     * 
+     * 
      * @param theProp the name of the system property.
      * @param defaulVal the default value.
      */
@@ -78,6 +97,10 @@ public class GetPropertyAction implements java.security.PrivilegedAction {
      * Determines the string value of the system property whose
      * name was specified in the constructor.
      *
+     * <p>
+     *  构造函数采用系统属性的名称和该属性的默认值。
+     * 
+     * 
      * @return the string value of the system property,
      *         or the default value if there is no property with that key.
      */

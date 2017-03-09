@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.io;
@@ -47,6 +51,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
     /**
      * Since ObjectOutputStream.PutField methods specify no exceptions,
      * we are not checking for null parameters on put methods.
+     * <p>
+     *  由于ObjectOutputStream.PutField方法没有指定异常,因此我们不会在put方法上检查null参数。
+     * 
      */
     private class HookPutFields extends ObjectOutputStream.PutField
     {
@@ -54,6 +61,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Put the value of the named boolean field into the persistent field.
+         * <p>
+         *  将指定的布尔字段的值放入持久字段。
+         * 
          */
         public void put(String name, boolean value){
             fields.put(name, new Boolean(value));
@@ -61,6 +71,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Put the value of the named char field into the persistent fields.
+         * <p>
+         *  将命名的char字段的值放入持久字段。
+         * 
          */
         public void put(String name, char value){
             fields.put(name, new Character(value));
@@ -68,6 +81,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Put the value of the named byte field into the persistent fields.
+         * <p>
+         *  将命名的字节字段的值放入持久字段。
+         * 
          */
         public void put(String name, byte value){
             fields.put(name, new Byte(value));
@@ -75,6 +91,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Put the value of the named short field into the persistent fields.
+         * <p>
+         *  将命名的短字段的值放入持久字段。
+         * 
          */
         public void put(String name, short value){
             fields.put(name, new Short(value));
@@ -82,6 +101,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Put the value of the named int field into the persistent fields.
+         * <p>
+         *  将命名的int字段的值放入持久字段。
+         * 
          */
         public void put(String name, int value){
             fields.put(name, new Integer(value));
@@ -89,6 +111,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Put the value of the named long field into the persistent fields.
+         * <p>
+         *  将命名的长字段的值放入持久字段。
+         * 
          */
         public void put(String name, long value){
             fields.put(name, new Long(value));
@@ -97,6 +122,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
         /**
          * Put the value of the named float field into the persistent fields.
          *
+         * <p>
+         *  将命名的float字段的值放入持久字段。
+         * 
          */
         public void put(String name, float value){
             fields.put(name, new Float(value));
@@ -104,6 +132,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Put the value of the named double field into the persistent field.
+         * <p>
+         *  将命名的double字段的值放入持久字段。
+         * 
          */
         public void put(String name, double value){
             fields.put(name, new Double(value));
@@ -111,6 +142,9 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Put the value of the named Object field into the persistent field.
+         * <p>
+         *  将命名对象字段的值放入持久字段。
+         * 
          */
         public void put(String name, Object value){
             fields.put(name, value);
@@ -118,6 +152,8 @@ public abstract class OutputStreamHook extends ObjectOutputStream
 
         /**
          * Write the data and fields to the specified ObjectOutput stream.
+         * <p>
+         *  将数据和字段写入指定的ObjectOutput流。
          */
         public void write(ObjectOutput out) throws IOException {
             OutputStreamHook hook = (OutputStreamHook)out;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import java.io.IOException;
  * possible to turn arbitrary binary data into an ASCII format.
  * The high 4 bits of the byte is translated into the first byte.
  *
+ * <p>
+ *  将每个输入字节写为2字节十六进制输出对,使得可以将任意二进制数据转换为ASCII格式。字节的高4位转换为第一个字节。
+ * 
+ * 
  * @author      Jeff Nisewanger
  */
 public class HexOutputStream extends OutputStream
@@ -47,6 +52,10 @@ public class HexOutputStream extends OutputStream
 
     /**
      * Creates a new HexOutputStream.
+     * <p>
+     *  创建一个新的HexOutputStream。
+     * 
+     * 
      * @param w The underlying StringWriter.
      */
     public
@@ -59,6 +68,9 @@ public class HexOutputStream extends OutputStream
      * Writes a byte. Will block until the byte is actually
      * written.
      * param b The byte to write out.
+     * <p>
+     *  写入一个字节。将阻塞,直到字节实际写入。 param b要写出的字节。
+     * 
      * @exception java.io.IOException I/O error occurred.
      */
     public synchronized void write(int b) throws IOException {

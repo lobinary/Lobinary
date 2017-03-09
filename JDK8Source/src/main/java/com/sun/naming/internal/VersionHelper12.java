@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,11 @@ import javax.naming.*;
  * serves as a set of utilities for performing system-level things,
  * such as class-loading and reading system properties.
  *
+ * <p>
+ *  JNDI使用VersionHelper来适应JDK 1.1.x和Java 2平台之间的差异。
+ * 由于JNDI包含在平台中,因此不再需要这个类,因此该类目前用作一组用于执行系统级事务的实用程序,例如类加载和读取系统属性。
+ * 
+ * 
  * @author Rosanna Lee
  * @author Scott Seligman
  */
@@ -66,6 +72,11 @@ final class VersionHelper12 extends VersionHelper {
      *
      * This internal method is used with Thread Context Class Loader (TCCL),
      * please don't expose this method as public.
+     * <p>
+     *  软件包私有。
+     * 
+     *  这个内部方法与Thread Context类加载器(TCCL)一起使用,请不要将此方法公开为公开。
+     * 
      */
     Class<?> loadClass(String className, ClassLoader cl)
         throws ClassNotFoundException {
@@ -74,6 +85,8 @@ final class VersionHelper12 extends VersionHelper {
     }
 
     /**
+    /* <p>
+    /* 
      * @param className A non-null fully qualified class name.
      * @param codebase A non-null, space-separated list of URL strings.
      */
@@ -179,6 +192,13 @@ final class VersionHelper12 extends VersionHelper {
      * if null, returns the system Class Loader.
      *
      * Please don't expose this method as public.
+     * <p>
+     *  软件包私有。
+     * 
+     *  这个内部方法返回Thread Context Class Loader(TCCL),如果为null,则返回系统类Loader。
+     * 
+     *  请不要公开此方法为公开。
+     * 
      */
     ClassLoader getContextClassLoader() {
 
@@ -204,6 +224,7 @@ final class VersionHelper12 extends VersionHelper {
      * enumeration is performed within a doPrivileged block.
      * This is used to enumerate the resources under a foreign codebase.
      * This class is not MT-safe.
+     * <p>
      */
     class InputStreamEnumeration implements NamingEnumeration<InputStream> {
 
@@ -218,6 +239,9 @@ final class VersionHelper12 extends VersionHelper {
         /*
          * Returns the next InputStream, or null if there are no more.
          * An InputStream that cannot be opened is skipped.
+         * <p>
+         *  给定URL的枚举,此类的实例表示其InputStream的枚举。 URL枚举上的每个操作都在doPrivileged块中执行。这用于枚举外部代码库下的资源。这个类不是MT安全的。
+         * 
          */
         private InputStream getNextElement() {
             return AccessController.doPrivileged(

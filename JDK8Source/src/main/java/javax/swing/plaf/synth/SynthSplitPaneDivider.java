@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import sun.swing.DefaultLookup;
 /**
  * Synth's SplitPaneDivider.
  *
+ * <p>
+ *  Synth的SplitPaneDivider。
+ * 
+ * 
  * @author Scott Violet
  */
 class SynthSplitPaneDivider extends BasicSplitPaneDivider {
@@ -111,6 +116,9 @@ class SynthSplitPaneDivider extends BasicSplitPaneDivider {
     /**
      * Creates and return an instance of JButton that can be used to
      * collapse the left component in the split pane.
+     * <p>
+     *  创建并返回JButton的实例,可用于折叠拆分窗格中的左侧组件。
+     * 
      */
     protected JButton createLeftOneTouchButton() {
         SynthArrowButton b = new SynthArrowButton(SwingConstants.NORTH);
@@ -134,6 +142,8 @@ class SynthSplitPaneDivider extends BasicSplitPaneDivider {
     /**
      * Creates and return an instance of JButton that can be used to
      * collapse the right component in the split pane.
+     * <p>
+     *  创建并返回JButton的实例,可用于在拆分窗格中折叠正确的组件。
      */
     protected JButton createRightOneTouchButton() {
         SynthArrowButton b = new SynthArrowButton(SwingConstants.NORTH);

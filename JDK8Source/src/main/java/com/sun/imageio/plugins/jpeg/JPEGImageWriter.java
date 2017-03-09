@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,9 @@ public class JPEGImageWriter extends ImageWriter {
      * structure for this reader.  It is assigned in the constructor
      * and then is passed in to every native call.  It is set to 0
      * by dispose to avoid disposing twice.
+     * <p>
+     *  以下变量包含指向此阅读器的IJG库结构的指针。它在构造函数中分配,然后传递到每个本地调用。通过处理将其设置为0,以避免布置两次。
+     * 
      */
     private long structPointer = 0;
 
@@ -94,6 +98,9 @@ public class JPEGImageWriter extends ImageWriter {
     /**
      * Set to true if we are writing an image with an
      * indexed ColorModel
+     * <p>
+     *  如果我们使用索引的ColorModel编写图像,则设置为true
+     * 
      */
     private boolean indexed = false;
     private IndexColorModel indexCM = null;
@@ -106,11 +113,17 @@ public class JPEGImageWriter extends ImageWriter {
 
     /**
      * If there are thumbnails to be written, this is the list.
+     * <p>
+     *  如果有要写入的缩略图,这是列表。
+     * 
      */
     private List thumbnails = null;
 
     /**
      * If metadata should include an icc profile, store it here.
+     * <p>
+     *  如果元数据应包含icc配置文件,请将其存储在此处。
+     * 
      */
     private ICC_Profile iccProfile = null;
 
@@ -1126,6 +1139,10 @@ public class JPEGImageWriter extends ImageWriter {
          * no tables is supplied to
          * <code>ImageWriter.prepareWriteSequence</code>, then a tables-only
          * image containing default visually lossless tables is written.
+         * <p>
+         *  from jpeg_metadata.html：如果没有流元数据提供给<code> ImageWriter.prepareWriteSequence </code>,则不会写入仅表格图像。
+         * 如果不包含表的流元数据被提供给<code> ImageWriter.prepareWriteSequence </code>,则写入包含默认的视觉无损表的仅表格图像。
+         * 
          */
         if (streamMetadata != null) {
             if (streamMetadata instanceof JPEGMetadata) {
@@ -1217,6 +1234,9 @@ public class JPEGImageWriter extends ImageWriter {
             /**
              * NB: we do not check the call back lock here, we allow to abort
              * the reader any time.
+             * <p>
+             *  注意：我们不检查回调锁在这里,我们允许随时中止读者。
+             * 
              */
             super.abort();
             abortWrite(structPointer);
@@ -1271,6 +1291,9 @@ public class JPEGImageWriter extends ImageWriter {
      * Called by the native code or other classes to signal a warning.
      * The code is used to lookup a localized message to be used when
      * sending warnings to listeners.
+     * <p>
+     *  由本地代码或其他类调用以发出警告。该代码用于查找向收听程序发送警告时要使用的本地化消息。
+     * 
      */
     void warningOccurred(int code) {
         cbLock.lock();
@@ -1299,6 +1322,11 @@ public class JPEGImageWriter extends ImageWriter {
      * and formats (%u with possibly large numbers, %02d, %02x, etc.)
      * that actually occur in the JPEG library.  For now, this prevents
      * library warnings from being printed to stderr.
+     * <p>
+     * 库有它自己的错误设施,发出警告消息。当它已经格式化一个字符串输出时,本地代码调用这个例程。
+     *  XXX对于所有警告消息的完全本地化,本地代码中的sun_jpeg_output_message例程应仅将代码和参数发送到Java中的方法,然后使用本地化的字符串格式化并发送警告。
+     * 此方法将必须处理实际发生在JPEG库中的所有参数和格式(％u与可能的大数字,％02d,％02x等)。现在,这防止库警告打印到stderr。
+     * 
      */
     void warningWithMessage(String msg) {
         cbLock.lock();
@@ -1391,6 +1419,9 @@ public class JPEGImageWriter extends ImageWriter {
      * organize it into the scan info array required by the
      * IJG libray.  It is much simpler to parse out this
      * data in Java and then just copy the data in C.
+     * <p>
+     *  从给定元数据收集所有扫描信息,并将其组织到IJG库所需的扫描信息数组中。在Java中解析这些数据更简单,然后只是复制C中的数据。
+     * 
      */
     private int [] collectScans(JPEGMetadata metadata,
                                 SOFMarkerSegment sof) {
@@ -1438,6 +1469,9 @@ public class JPEGImageWriter extends ImageWriter {
     /**
      * Finds all DQT marker segments and returns all the q
      * tables as a single array of JPEGQTables.
+     * <p>
+     *  查找所有DQT标记段,并将所有q个表作为单个JPEGQTable数组返回。
+     * 
      */
     private JPEGQTable [] collectQTablesFromMetadata
         (JPEGMetadata metadata) {
@@ -1468,6 +1502,9 @@ public class JPEGImageWriter extends ImageWriter {
      * must not be for a progressive image, or an exception
      * will be thrown when two Huffman tables with the same
      * table id are encountered.
+     * <p>
+     *  找到所有DHT标记段,并将所有q表作为单个JPEGQTable数组返回。元数据不能是渐进式图像,或者当遇到具有相同表id的两个霍夫曼表时将抛出异常。
+     * 
      */
     private JPEGHuffmanTable[] collectHTablesFromMetadata
         (JPEGMetadata metadata, boolean wantDC) throws IIOException {
@@ -1673,6 +1710,9 @@ public class JPEGImageWriter extends ImageWriter {
 
     /**
      * Returns <code>true</code> if the write was aborted.
+     * <p>
+     *  如果写入已中止,则返回<code> true </code>。
+     * 
      */
     private native boolean writeImage(long structPointer,
                                       byte [] data,
@@ -1704,6 +1744,9 @@ public class JPEGImageWriter extends ImageWriter {
      * which will have already written the header to the stream
      * and established the library state.  This is simpler than
      * breaking the write call in two.
+     * <p>
+     *  当本地代码调用时,将元数据写出,这将已经将头写入流并建立库状态。这比在两个中断写调用更简单。
+     * 
      */
     private void writeMetadata() throws IOException {
         if (metadata == null) {
@@ -1730,6 +1773,9 @@ public class JPEGImageWriter extends ImageWriter {
 
     /**
      * Write out a tables-only image to the stream.
+     * <p>
+     *  写出一个仅表格的图像到流。
+     * 
      */
     private native void writeTables(long structPointer,
                                     JPEGQTable [] qtables,
@@ -1742,6 +1788,9 @@ public class JPEGImageWriter extends ImageWriter {
      * rearrangements, and expands indexed images.  Subsampling is
      * done in the native code.
      * This is called by the native code.
+     * <p>
+     * 将源ROI视图栅格的扫描线y放入1行栅格中进行写入。它处理ROI和带重排,并扩展索引图像。子采样在本机代码中完成。这由本地代码调用。
+     * 
      */
     private void grabPixels(int y) {
 
@@ -1834,6 +1883,9 @@ public class JPEGImageWriter extends ImageWriter {
      * We block any attempt to change the writer state during this
      * method, in order to prevent a corruption of the native encoder
      * state.
+     * <p>
+     *  该方法从本地代码调用,以将编码器输出写入目标。
+     * 
      */
     private void writeOutputData(byte[] data, int offset, int len)
             throws IOException

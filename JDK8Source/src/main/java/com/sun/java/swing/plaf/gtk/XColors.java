@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,8 @@ import java.util.Arrays;
 import javax.swing.plaf.ColorUIResource;
 
 /**
+/* <p>
+/* 
  * @author  Shannon Hickey
  */
 class XColors {

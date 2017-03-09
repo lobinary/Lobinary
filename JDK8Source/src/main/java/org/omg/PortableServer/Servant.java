@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,12 @@ import org.omg.PortableServer.portable.Delegate;
  * which are invoked by the POA itself and may be overridden by
  * the user to control aspects of servant behavior.
  * Based on IDL to Java spec. (CORBA V2.3.1) ptc/00-01-08.pdf.
+ * <p>
+ *  定义本机<code> Servant </code>类型。
+ * 在Java中,<code> Servant </code>类型映射到Java <code> org.omg.PortableServer.Servant </code>类。
+ * 它作为所有POA servant实现的基类,并提供了可由应用程序员调用的许多方法,以及由POA本身调用并可被用户覆盖以控制服务方行为的方法。基于IDL到Java规范。
+ *  (CORBA V2.3.1)ptc / 00-01-08.pdf。
+ * 
  */
 
 abstract public class Servant {
@@ -45,6 +52,10 @@ abstract public class Servant {
     /**
      * Gets the ORB vendor-specific implementation of
      * <code>PortableServer::Servant</code>.
+     * <p>
+     *  获取<code> PortableServer :: Servant </code>的ORB供应商特定实现。
+     * 
+     * 
      * @return <code>_delegate</code> the ORB vendor-specific
      * implementation of <code>PortableServer::Servant</code>.
      */
@@ -62,6 +73,10 @@ abstract public class Servant {
      * Supports the Java ORB portability
      * interfaces by providing a method for classes that support
      * ORB portability through delegation to set their delegate.
+     * <p>
+     *  支持Java ORB可移植性接口,通过为通过委派设置其委托来支持ORB可移植性的类提供一个方法。
+     * 
+     * 
      * @param delegate ORB vendor-specific implementation of
      *                 the <code>PortableServer::Servant</code>.
      */
@@ -72,6 +87,10 @@ abstract public class Servant {
     /**
      * Allows the servant to obtain the object reference for
      * the target CORBA object it is incarnating for that request.
+     * <p>
+     *  允许服务方获取其为该请求所体现的目标CORBA对象的对象引用。
+     * 
+     * 
      * @return <code>this_object</code> <code>Object</code> reference
      * associated with the request.
      */
@@ -82,6 +101,10 @@ abstract public class Servant {
     /**
      * Allows the servant to obtain the object reference for
      * the target CORBA Object it is incarnating for that request.
+     * <p>
+     *  允许服务方获取其为该请求所体现的目标CORBA对象的对象引用。
+     * 
+     * 
      * @param orb ORB with which the servant is associated.
      * @return <code>_this_object</code> reference associated with the request.
      */
@@ -101,6 +124,10 @@ abstract public class Servant {
     /**
      * Returns the instance of the ORB
      * currently associated with the <code>Servant</code> (convenience method).
+     * <p>
+     *  返回当前与<code> Servant </code>(方便方法)相关联的ORB的实例。
+     * 
+     * 
      * @return <code>orb</code> the instance of the ORB currently
      * associated with the <code>Servant</code>.
      */
@@ -111,6 +138,10 @@ abstract public class Servant {
     /**
      * Allows easy execution of common methods, equivalent to
      * <code>PortableServer::Current:get_POA</code>.
+     * <p>
+     *  允许方便地执行常用方法,等效于<code> PortableServer :: Current：get_POA </code>。
+     * 
+     * 
      * @return <code>poa</code> POA associated with the servant.
      */
     final public POA _poa() {
@@ -121,6 +152,10 @@ abstract public class Servant {
      * Allows easy execution of
      * common methods, equivalent
      * to calling <code>PortableServer::Current::get_object_id</code>.
+     * <p>
+     *  允许方便地执行常用方法,相当于调用<code> PortableServer :: Current :: get_object_id </code>。
+     * 
+     * 
      * @return <code>object_id</code> the <code>Object</code> ID associated
      * with this servant.
      */
@@ -132,6 +167,10 @@ abstract public class Servant {
      * Returns the
      * root POA from the ORB instance associated with the servant.
      * Subclasses may override this method to return a different POA.
+     * <p>
+     * 从与服务方关联的ORB实例返回根POA。子类可以覆盖此方法以返回不同的POA。
+     * 
+     * 
      * @return <code>default_POA</code> the POA associated with the
      * <code>Servant</code>.
      */
@@ -143,6 +182,11 @@ abstract public class Servant {
      * Checks to see if the specified <code>repository_id</code> is present
      * on the list returned by <code>_all_interfaces()</code> or is the
      * <code>repository_id</code> for the generic CORBA Object.
+     * <p>
+     *  检查以确定<code> _all_interfaces()</code>返回的列表中是否存在指定的<code> repository_id </code>,或者是通用CORBA对象的<code> re
+     * pository_id </code>。
+     * 
+     * 
      * @param repository_id the <code>repository_id</code>
      *          to be checked in the repository list or against the id
      *          of generic CORBA objects.
@@ -160,6 +204,11 @@ abstract public class Servant {
      * <code>Object</code>.
      * The <code>Servant</code> provides a default implementation of
      * <code>_non_existent()</code> that can be overridden by derived servants.
+     * <p>
+     *  检查是否存在<code> Object </code>。
+     *  <code> Servant </code>提供了可以被派生服务器覆盖的<code> _non_existent()</code>的默认实现。
+     * 
+     * 
      * @return <code>non_existent</code> <code>true</code> if that object does
      *           not exist,  <code>false</code> otherwise.
      */
@@ -177,12 +226,20 @@ abstract public class Servant {
      * <code>_get_interface()</code>
      * that can be overridden by derived servants if the default
      * behavior is not adequate.
+     * <p>
+     *  在Interface Repository中返回一个对象,该对象提供可能对程序有用的类型信息。
+     *  <code> Servant </code>提供了<code> _get_interface()</code>的默认实现,如果默认行为不足,可以由派生服务器覆盖。
+     * 
+     * 
      * @return <code>get_interface</code> type information that corresponds to this servant.
      */
     /*
     public org.omg.CORBA.Object _get_interface() {
         return _get_delegate().get_interface(this);
     }
+    /* <p>
+    /*  public org.omg.CORBA.Object _get_interface(){return _get_delegate()。get_interface(this); }}
+    /* 
     */
 
     // _get_interface_def() replaces the _get_interface() method
@@ -205,6 +262,14 @@ abstract public class Servant {
      * This behavior must
      * be supported by the <code>Delegate</code> that implements the
      * <code>Servant</code>.
+     * <p>
+     * 返回一个<code> InterfaceDef </code>对象作为定义<code> CORBA :: Object </code>的运行时类型的<code> CORBA :: Object </code>
+     *  / code>。
+     *  <code> _get_interface_def </code>的调用者必须将结果缩小到<code> InterfaceDef </code>以便使用它。
+     *  <P>如果默认行为不足,派生服务器可以覆盖<code> _get_interface_def()</code>的默认实现。
+     * 如CORBA 2.3.1规范第11.3.1节中所定义,<code> _get_interface_def()</code>的默认行为是使用静态服务方的最派生接口或从动态服务方检索的最派生接口以获取<code>
+     *  InterfaceDef </code>。
+     * 
      * @return <code>get_interface_def</code> an <code>InterfaceDef</code>
      * object as a
      * <code>CORBA::Object</code> that defines the runtime type of the
@@ -257,6 +322,11 @@ abstract public class Servant {
     /**
      * Used by the ORB to obtain complete type
      * information from the servant.
+     * <p>
+     *  <P>如果默认行为不足,派生服务器可以覆盖<code> _get_interface_def()</code>的默认实现。
+     * 此行为必须由实现<code> Servant </code>的<code> Delegate </code>支持。
+     * 
+     * 
      * @param poa POA with which the servant is associated.
      * @param objectId is the id corresponding to the object
      *         associated with this servant.

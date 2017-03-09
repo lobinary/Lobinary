@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.io;
@@ -51,6 +55,8 @@ import com.sun.corba.se.spi.logging.CORBALogDomains;
 /**
  * This class acts as the remote interface to receivers wishing to retrieve
  * the information of a remote Class.
+ * <p>
+ *  这个类充当了希望检索远程类的信息的接收者的远程接口。
  */
 public class FVDCodeBaseImpl extends _CodeBaseImplBase
 {

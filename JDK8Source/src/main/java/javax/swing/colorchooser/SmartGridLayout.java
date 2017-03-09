@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,9 @@ import java.io.Serializable;
 /**
   * A better GridLayout class
   *
+  * <p>
+  *  一个更好的GridLayout类
+  * 
   * @author Steve Wilson
   */
 class SmartGridLayout implements LayoutManager, Serializable {

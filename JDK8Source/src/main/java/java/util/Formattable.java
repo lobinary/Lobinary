@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -114,6 +115,31 @@ import java.io.IOException;
  * any method in this interface will cause a {@link
  * NullPointerException} to be thrown.
  *
+ * <p>
+ *  <tt> Formattable </tt>界面必须由需要使用{@link java.util.Formatter}的<tt>'''</tt>转换说明符执行自定义格式设置的任何类实现。
+ * 此接口允许对任意对象进行格式化的基本控制。
+ * 
+ *  例如,以下类根据标志和长度约束打印出股票名称的不同表示：
+ * 
+ *  {@code import java.nio.CharBuffer; import java.util.Formatter; import java.util.Formattable; import java.util.Locale; import static java.util.FormattableFlags。
+ * *;。
+ * 
+ *  ... ...
+ * 
+ *  public class StockName implements Formattable {private String symbol,companyName,frenchCompanyName; public StockName(String symbol,String companyName,String frenchCompanyName){...}
+ * 。
+ * 
+ *  ... ...
+ * 
+ *  public void formatTo(Formatter fmt,int f,int width,int precision){StringBuilder sb = new StringBuilder();。
+ * 
+ *  //决定名称的形式String name = companyName; if(fmt.locale()。
+ * equals(Locale.FRANCE))name = frenchCompanyName; boolean alternate =(f&ALTERNATE)== ALTERNATE; boolean
+ *  usesymbol = alternate || (precision！= -1 && precision <10); String out =(usesymbol?symbol：name);。
+ *  //决定名称的形式String name = companyName; if(fmt.locale()。
+ * 
+ *  // apply precision if(precision == -1 || out.length()<precision){// write it all sb.append(out); } else {sb.append(out.substring(0,precision  -  1))。
+ * 
  * @since  1.5
  */
 public interface Formattable {
@@ -121,6 +147,19 @@ public interface Formattable {
     /**
      * Formats the object using the provided {@link Formatter formatter}.
      *
+     * <p>
+     * append('*'); }}。
+     * 
+     * // apply width and justification int len = sb.length(); if((&LEFT_JUSTIFY)== LEFT_JUSTIFY)sb.append('
+     * '); if(len <width)for(int i = 0; i <width-len; i ++) else sb.insert(0,'');。
+     * 
+     *  fmt.format(sb.toString()); }}
+     * 
+     *  public String toString(){return String.format("％s  - ％s",symbol,companyName); }}}
+     * 
+     *  <p>与{@link java.util.Formatter}结合使用时,上述类会为各种格式字符串生成以下输出。
+     * 
+     * 
      * @param  formatter
      *         The {@link Formatter formatter}.  Implementing classes may call
      *         {@link Formatter#out() formatter.out()} or {@link

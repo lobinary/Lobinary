@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -36,6 +46,11 @@ import org.w3c.dom.ranges.RangeException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  <p>请参阅接口类的API文档,并在客户端程序中使用接口。
+ * 
+ *  @ xerces.internal
+ * 
  */
 public class RangeImpl  implements Range {
 
@@ -64,6 +79,9 @@ public class RangeImpl  implements Range {
     /** The constructor. Clients must use DocumentRange.createRange(),
      *  because it registers the Range with the document, so it can
      *  be fixed-up.
+     * <p>
+     *  因为它注册范围与文档,因此它可以固定。
+     * 
      */
     public RangeImpl(DocumentImpl document) {
         fDocument = document;
@@ -849,6 +867,9 @@ public class RangeImpl  implements Range {
     /** Signal other Ranges to update their start/end
      *  containers/offsets. The data has already been split
      *  into the two Nodes.
+     * <p>
+     *  容器/偏移量。数据已经被分割成两个节点。
+     * 
      */
     void signalSplitData(Node node, Node newNode, int offset) {
         fSplitNode = node;
@@ -859,6 +880,9 @@ public class RangeImpl  implements Range {
 
     /** Fix up this Range if another Range has split a Text Node
      *  into 2 Nodes.
+     * <p>
+     *  分成2个节点。
+     * 
      */
     void receiveSplitData(Node node, Node newNode, int offset) {
         if (node == null || newNode == null) return;
@@ -883,6 +907,9 @@ public class RangeImpl  implements Range {
 
     /** This function inserts text into a Node and invokes
      *  a method to fix-up all other Ranges.
+     * <p>
+     *  一种固定所有其他范围的方法。
+     * 
      */
     void deleteData(CharacterData node, int offset, int count) {
         fDeleteNode = node;
@@ -894,6 +921,9 @@ public class RangeImpl  implements Range {
     /** This function is called from DOM.
      *  The  text has already beeen inserted.
      *  Fix-up any offsets.
+     * <p>
+     *  文本已插入。修正任何偏移。
+     * 
      */
     void receiveDeletedText(Node node, int offset, int count) {
         if (node == null) return;
@@ -921,6 +951,9 @@ public class RangeImpl  implements Range {
 
     /** This function inserts text into a Node and invokes
      *  a method to fix-up all other Ranges.
+     * <p>
+     *  一种固定所有其他范围的方法。
+     * 
      */
     void insertData(CharacterData node, int index, String insert) {
         fInsertNode = node;
@@ -932,6 +965,9 @@ public class RangeImpl  implements Range {
     /** This function is called from DOM.
      *  The  text has already beeen inserted.
      *  Fix-up any offsets.
+     * <p>
+     *  文本已插入。修正任何偏移。
+     * 
      */
     void receiveInsertedText(Node node, int index, int len) {
         if (node == null) return;
@@ -954,6 +990,9 @@ public class RangeImpl  implements Range {
     /** This function is called from DOM.
      *  The  text has already beeen replaced.
      *  Fix-up any offsets.
+     * <p>
+     *  文本已被替换。修正任何偏移。
+     * 
      */
     void receiveReplacedText(Node node) {
         if (node == null) return;
@@ -971,6 +1010,9 @@ public class RangeImpl  implements Range {
     /** This function is called from the DOM.
      *  This node has already been inserted into the DOM.
      *  Fix-up any offsets.
+     * <p>
+     *  此节点已经插入到DOM中。修正任何偏移。
+     * 
      */
     public void insertedNodeFromDOM(Node node) {
         if (node == null) return;
@@ -999,6 +1041,9 @@ public class RangeImpl  implements Range {
      *  instead of Node.removeChild,
      *  so that the range can remember that it is actively
      *  removing this child.
+     * <p>
+     *  而不是Node.removeChild,以便范围可以记住它正在主动删除此子项。
+     * 
      */
 
     Node fRemoveChild = null;
@@ -1012,6 +1057,9 @@ public class RangeImpl  implements Range {
     /** This function must be called by the DOM _BEFORE_
      *  a node is deleted, because at that time it is
      *  connected in the DOM tree, which we depend on.
+     * <p>
+     * 一个节点被删除,因为那时它被连接在DOM树中,我们依赖它。
+     * 
      */
     void removeNode(Node node) {
         if (node == null) return;
@@ -1063,6 +1111,10 @@ public class RangeImpl  implements Range {
      * actions are taken depending on the value of the
      * <code>how</code> argument.
      *
+     * <p>
+     *  这是调用以访问由此范围选择的节点的主例程。对于每个这样的节点,根据<code> how </code>参数的值采取不同的动作。
+     * 
+     * 
      * @param how    Specifies what type of traversal is being
      *               requested (extract, clone, or delete).
      *               Legal values for this argument are:
@@ -1107,6 +1159,9 @@ public class RangeImpl  implements Range {
           For each of four significant relationships, we will
           delegate the traversal call to a method that
           can make appropriate assumptions.
+        /* <p>
+        /*  遍历通过首先确定范围的端点之间的关系来完成。对于四个重要关系中的每一个,我们将遍历调用委派给一个可做出适当假设的方法。
+        /* 
          */
 
         // case 1: same container
@@ -1172,6 +1227,10 @@ public class RangeImpl  implements Range {
      * This method is invoked by the generic <code>traverse</code>
      * method.
      *
+     * <p>
+     *  当我们知道开始和结束容器相同时,访问由此范围选择的节点。此方法由通用<code>遍历</code>方法调用。
+     * 
+     * 
      * @param how    Specifies what type of traversal is being
      *               requested (extract, clone, or delete).
      *               Legal values for this argument are:
@@ -1253,6 +1312,10 @@ public class RangeImpl  implements Range {
      * end container. This method is invoked by the generic
      * <code>traverse</code> method.
      *
+     * <p>
+     *  当我们知道开始和结束容器不相同,但是开始容器是结束容器的祖先时,访问由此范围选择的节点。此方法由通用<code>遍历</code>方法调用。
+     * 
+     * 
      * @param endAncestor
      *               The ancestor of the end container that is a direct child
      *               of the start container.
@@ -1332,6 +1395,10 @@ public class RangeImpl  implements Range {
      * start container. This method is invoked by the generic
      * <code>traverse</code> method.
      *
+     * <p>
+     *  当我们知道开始和结束容器不相同,但结束容器是开始容器的祖先时,访问由此范围选择的节点。此方法由通用<code>遍历</code>方法调用。
+     * 
+     * 
      * @param startAncestor
      *               The ancestor of the start container that is a direct
      *               child of the end container.
@@ -1401,6 +1468,10 @@ public class RangeImpl  implements Range {
      * This method is invoked by
      * the generic <code>traverse</code> method.
      *
+     * <p>
+     *  当我们知道开始和结束容器不相同时,访问由此范围选择的节点,并且我们也知道开始和结束容器都不是另一个的祖先。此方法由通用<code>遍历</code>方法调用。
+     * 
+     * 
      * @param startAncestor
      *               Given a common ancestor of the start and end containers,
      *               this parameter is the ancestor (or self) of the start
@@ -1509,6 +1580,20 @@ public class RangeImpl  implements Range {
      * In this example, the nodes that are traversed
      * as "right boundary" nodes are: H, I, and D.
      *
+     * <p>
+     * 遍历该范围的"右边界",并根据<code> how </code>参数对每个"边界节点"进行操作。通过该方法先验地假设右边界不包含范围的开始容器。
+     * <p>
+     *  "右边界"最好通过考虑样本树来可视化：<pre> A / | \ / | \ / | \ B C D / | \ / | \ E F G H I J
+     * </pre>
+     *  首先想象一下从"E"和"F"节点之间开始并在"I"和"J"节点之间结束的范围。起始容器是"B",结束容器是"D"。给定此设置,以下适用：
+     * <p>
+     *  部分选择的节点：B,D <br>完全选择的节点：F,G,C,H,I
+     * <p>
+     *  "右边界"是包含结尾容器的最高子树节点。此子树的根总是部分选择。
+     * <p>
+     *  在本示例中,作为"右边界"节点遍历的节点是：H,I和D.
+     * 
+     * 
      * @param root   The node that is the root of the "right boundary" subtree.
      *
      * @param how    Specifies what type of traversal is being
@@ -1612,6 +1697,22 @@ public class RangeImpl  implements Range {
      * In this example, the nodes that are traversed
      * as "left boundary" nodes are: F, G, and B.
      *
+     * <p>
+     *  遍历该范围的"左边界",并根据<code> how </code>参数对每个"边界节点"进行操作。通过该方法先验地假定左边界不包含范围的结束容器。
+     * <p>
+     *  "左边界"最好通过考虑样本树来可视化：<pre>
+     * 
+     *  A / | \ / | \ / | \ B C D / | \ / | \ E F G H I J
+     * </pre>
+     *  首先想象一下从"E"和"F"节点之间开始并在"I"和"J"节点之间结束的范围。起始容器是"B",结束容器是"D"。给定此设置,以下适用：
+     * <p>
+     * 部分选择的节点：B,D <br>完全选择的节点：F,G,C,H,I
+     * <p>
+     *  "左边界"是包含起始容器的最高子树节点。此子树的根总是部分选择。
+     * <p>
+     *  在本示例中,作为"左边界"节点遍历的节点是：F,G和B.
+     * 
+     * 
      * @param root   The node that is the root of the "left boundary" subtree.
      *
      * @param how    Specifies what type of traversal is being
@@ -1683,6 +1784,10 @@ public class RangeImpl  implements Range {
      * start and end offsets.  Such nodes should
      * have been previously detected and been routed to traverseTextNode.
      *
+     * <p>
+     *  遍历单个节点的实用方法。没有正确处理包含开始和结束偏移量的文本节点。这样的节点应该之前已经被检测到并且被路由到traverseTextNode。
+     * 
+     * 
      * @param n      The node to be traversed.
      *
      * @param isFullySelected
@@ -1732,6 +1837,10 @@ public class RangeImpl  implements Range {
      * we know a-priori that the node if fully
      * selected.
      *
+     * <p>
+     *  用于遍历单个节点的实用方法,当我们知道节点如果完全选择的先验。
+     * 
+     * 
      * @param n      The node to be traversed.
      *
      * @param how    Specifies what type of traversal is being
@@ -1781,6 +1890,10 @@ public class RangeImpl  implements Range {
      * we know a-priori that the node if partially
      * selected and is not a text node.
      *
+     * <p>
+     *  当我们知道节点如果被部分选择并且不是文本节点时,用于遍历单个节点的实用方法。
+     * 
+     * 
      * @param n      The node to be traversed.
      *
      * @param how    Specifies what type of traversal is being
@@ -1822,6 +1935,10 @@ public class RangeImpl  implements Range {
      * This method does not properly handle text nodes that contain
      * both the start and end points of the range.
      *
+     * <p>
+     *  用于遍历文本节点的实用方法,我们先前知道它在范围的左边界或右边界。此方法无法正确处理包含范围的开始点和结束点的文本节点。
+     * 
+     * 
      * @param n      The node to be traversed.
      *
      * @param isLeft Is true if we are traversing the node as part of navigating
@@ -1911,6 +2028,9 @@ public class RangeImpl  implements Range {
         /**
          * Given a node, calculate what the Range's root container
          * for that node would be.
+         * <p>
+         *  给定一个节点,计算该节点的Range的根容器。
+         * 
          */
         private Node getRootContainer( Node node )
         {
@@ -1925,6 +2045,9 @@ public class RangeImpl  implements Range {
         /**
          * Returns true IFF the given node can serve as a container
          * for a range's boundary points.
+         * <p>
+         *  返回true IFF,给定节点可以用作范围边界点的容器。
+         * 
          */
         private boolean isLegalContainer( Node node )
         {
@@ -1953,6 +2076,9 @@ public class RangeImpl  implements Range {
          * DOM 2 specification.  At present, that means the root
          * container must be either an attribute, a document,
          * or a document fragment.
+         * <p>
+         *  找到给定节点的根容器,并确定该根容器是否相对于DOM 2规范是合法的。目前,这意味着根容器必须是属性,文档或文档片段。
+         * 
          */
         private boolean hasLegalRootContainer( Node node )
         {
@@ -1973,6 +2099,9 @@ public class RangeImpl  implements Range {
         /**
          * Returns true IFF the given node can be contained by
          * a range.
+         * <p>
+         *  返回true IFF给定节点可以包含在范围内。
+         * 
          */
         private boolean isLegalContainedNode( Node node )
         {
@@ -2052,6 +2181,9 @@ public class RangeImpl  implements Range {
      * greater than the number of children, this implies that the
      * first node selected is the parent node itself.
      *
+     * <p>
+     * 通过索引检索子节点的实用方法。此方法假定调用者试图找出由给定索引选择的节点。注意,如果索引大于子节点数,这意味着所选择的第一个节点是父节点本身。
+     * 
      * @param container A container node
      *
      * @param offset    An offset within the container for which a selected node should

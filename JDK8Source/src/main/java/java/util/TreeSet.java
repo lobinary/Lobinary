@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,40 @@ package java.util;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  基于{@link TreeMap}的{@link NavigableSet}实现。
+ * 元素使用其{@linkplain Comparable natural ordering}排序,或者通过在创建集合时提供的{@link Comparator}进行排序,具体取决于使用的构造函数。
+ * 
+ *  <p>此实现提供了基本操作({@code add},{@code remove}和{@code contains})的保证log(n)时间成本。
+ * 
+ *  <p>请注意,如果要正确实现{@code Set}接口,由集合(不管是否提供显式比较器)维护的排序必须与equals </i>一致。
+ *  (参见{@code Comparable}或{@code Comparator},以获得与等于</i>一致的<i>的精确定义。
+ * )这是因为{@code Set}接口是根据{@code equals}操作,但是{@code TreeSet}实例使用其{@code compareTo}(或{@code compare})方法执行所有
+ * 元素比较,因此从该方法认为相等的两个元素是设置,相等。
+ *  (参见{@code Comparable}或{@code Comparator},以获得与等于</i>一致的<i>的精确定义。
+ * 集合<i>的行为是良好定义的,即使其排序与等号不一致;它只是没有遵守{@code Set}接口的一般合同。
+ * 
+ * <p> <strong>请注意,此实现未同步。</strong>如果多个线程并发访问树集,并且至少有一个线程修改了集合,则<i>必须</i> 。这通常通过在自然地封装集合的某个对象上同步来实现。
+ * 如果不存在这样的对象,那么应该使用{@link Collections#synchronizeSortedSet Collections.synchronizedSortedSet}方法来"封装"该集合
+ * 。
+ * <p> <strong>请注意,此实现未同步。</strong>如果多个线程并发访问树集,并且至少有一个线程修改了集合,则<i>必须</i> 。这通常通过在自然地封装集合的某个对象上同步来实现。
+ * 这最好在创建时完成,以防止意外的不同步访问集合：<pre> SortedSet s = Collections.synchronizedSortedSet(new TreeSet(...)); </pre>
+ * 。
+ * <p> <strong>请注意,此实现未同步。</strong>如果多个线程并发访问树集,并且至少有一个线程修改了集合,则<i>必须</i> 。这通常通过在自然地封装集合的某个对象上同步来实现。
+ * 
+ *  <p>此类的{@code iterator}方法返回的迭代器<i> fail-fast </i>：如果在创建迭代器之后的任何时间修改集合,除非通过迭代器自己的{ @code remove}方法,迭代器
+ * 将抛出一个{@link ConcurrentModificationException}。
+ * 因此,面对并发修改,迭代器快速而干净地失败,而不是在将来的未确定时间冒任意的,非确定性行为的风险。
+ * 
+ * <p>请注意,迭代器的故障快速行为不能得到保证,因为一般来说,在不同步并发修改的情况下不可能做出任何硬的保证。
+ * 故障快速迭代器以尽力而为的方式抛出{@code ConcurrentModificationException}。
+ * 因此,编写依赖于此异常的程序的正确性是错误的：<i>迭代器的故障快速行为应该仅用于检测错误。</i>。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @param <E> the type of elements maintained by this set
  *
  * @author  Josh Bloch
@@ -94,6 +129,9 @@ public class TreeSet<E> extends AbstractSet<E>
 {
     /**
      * The backing map.
+     * <p>
+     *  背景图。
+     * 
      */
     private transient NavigableMap<E,Object> m;
 
@@ -102,6 +140,9 @@ public class TreeSet<E> extends AbstractSet<E>
 
     /**
      * Constructs a set backed by the specified navigable map.
+     * <p>
+     *  构造由指定的可导航地图支持的集。
+     * 
      */
     TreeSet(NavigableMap<E,Object> m) {
         this.m = m;
@@ -119,6 +160,13 @@ public class TreeSet<E> extends AbstractSet<E>
      * attempts to add a string element to a set whose elements are
      * integers), the {@code add} call will throw a
      * {@code ClassCastException}.
+     * <p>
+     *  构造一个新的空树结构集,根据其元素的自然排序进行排序。插入到集合中的所有元素都必须实现{@ link Comparable}接口。
+     * 此外,所有这些元素必须<i>相互比较</i>：{@code e1.compareTo(e2)}不得对任何元素{@code e1}和{@code e2}抛出{@code ClassCastException}
+     * 在集合。
+     *  构造一个新的空树结构集,根据其元素的自然排序进行排序。插入到集合中的所有元素都必须实现{@ link Comparable}接口。
+     * 如果用户尝试向违反此约束的集合添加一个元素(例如,用户尝试向其元素为整数的集合添加字符串元素),则{@code add}调用将抛出一个{@code ClassCastException }。
+     * 
      */
     public TreeSet() {
         this(new TreeMap<E,Object>());
@@ -133,6 +181,13 @@ public class TreeSet<E> extends AbstractSet<E>
      * an element to the set that violates this constraint, the
      * {@code add} call will throw a {@code ClassCastException}.
      *
+     * <p>
+     * 构造一个新的空树结构集,根据指定的比较器排序。
+     * 插入到集合中的所有元素必须由指定的比较器<i>互相比较</i>：{@code comparator.compare(e1,e2)}不得为任何元素抛出{@code ClassCastException} 
+     * {@code e1 }和{@code e2}。
+     * 构造一个新的空树结构集,根据指定的比较器排序。如果用户尝试向违反此约束的集合中添加一个元素,则{@code add}调用将抛出一个{@code ClassCastException}。
+     * 
+     * 
      * @param comparator the comparator that will be used to order this set.
      *        If {@code null}, the {@linkplain Comparable natural
      *        ordering} of the elements will be used.
@@ -150,6 +205,13 @@ public class TreeSet<E> extends AbstractSet<E>
      * {@code ClassCastException} for any elements {@code e1} and
      * {@code e2} in the set.
      *
+     * <p>
+     *  构造包含指定集合中的元素的新树集,并根据其元素的<i>自然排序</i>进行排序。插入到集合中的所有元素都必须实现{@ link Comparable}接口。
+     * 此外,所有这些元素必须<i>相互比较</i>：{@code e1.compareTo(e2)}不得对任何元素{@code e1}和{@code e2}抛出{@code ClassCastException}
+     * 在集合。
+     *  构造包含指定集合中的元素的新树集,并根据其元素的<i>自然排序</i>进行排序。插入到集合中的所有元素都必须实现{@ link Comparable}接口。
+     * 
+     * 
      * @param c collection whose elements will comprise the new set
      * @throws ClassCastException if the elements in {@code c} are
      *         not {@link Comparable}, or are not mutually comparable
@@ -164,6 +226,10 @@ public class TreeSet<E> extends AbstractSet<E>
      * Constructs a new tree set containing the same elements and
      * using the same ordering as the specified sorted set.
      *
+     * <p>
+     *  构造包含相同元素并使用与指定的排序集相同的排序的新树集。
+     * 
+     * 
      * @param s sorted set whose elements will comprise the new set
      * @throws NullPointerException if the specified sorted set is null
      */
@@ -175,6 +241,10 @@ public class TreeSet<E> extends AbstractSet<E>
     /**
      * Returns an iterator over the elements in this set in ascending order.
      *
+     * <p>
+     *  以升序返回此集合中的元素的迭代器。
+     * 
+     * 
      * @return an iterator over the elements in this set in ascending order
      */
     public Iterator<E> iterator() {
@@ -184,6 +254,10 @@ public class TreeSet<E> extends AbstractSet<E>
     /**
      * Returns an iterator over the elements in this set in descending order.
      *
+     * <p>
+     *  以降序方式返回此集合中的元素的迭代器。
+     * 
+     * 
      * @return an iterator over the elements in this set in descending order
      * @since 1.6
      */
@@ -192,6 +266,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.6
      */
     public NavigableSet<E> descendingSet() {
@@ -201,6 +277,10 @@ public class TreeSet<E> extends AbstractSet<E>
     /**
      * Returns the number of elements in this set (its cardinality).
      *
+     * <p>
+     *  返回此集合中的元素数(其基数)。
+     * 
+     * 
      * @return the number of elements in this set (its cardinality)
      */
     public int size() {
@@ -210,6 +290,10 @@ public class TreeSet<E> extends AbstractSet<E>
     /**
      * Returns {@code true} if this set contains no elements.
      *
+     * <p>
+     *  如果此集合不包含元素,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this set contains no elements
      */
     public boolean isEmpty() {
@@ -222,6 +306,11 @@ public class TreeSet<E> extends AbstractSet<E>
      * contains an element {@code e} such that
      * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
      *
+     * <p>
+     *  如果此集合包含指定的元素,则返回{@code true}。
+     * 更正式地说,当且仅当这个集合包含一个元素{@code e},使得<tt>(o == null&nbsp;?&nbsp; e == null&nbsp;：&nbsp; o.equals ))</tt>。
+     * 
+     * 
      * @param o object to be checked for containment in this set
      * @return {@code true} if this set contains the specified element
      * @throws ClassCastException if the specified object cannot be compared
@@ -242,6 +331,12 @@ public class TreeSet<E> extends AbstractSet<E>
      * If this set already contains the element, the call leaves the set
      * unchanged and returns {@code false}.
      *
+     * <p>
+     * 如果指定的元素不存在,则将其添加到此集合。
+     * 更正式地,如果集合不包含元素{@code e2},使得<tt>(e == null&nbsp;?&nbsp; e2 == null&nbsp;：&nbsp;等于(e2))</tt>。
+     * 如果此集合已经包含元素,则调用保持集合不变,并返回{@code false}。
+     * 
+     * 
      * @param e element to be added to this set
      * @return {@code true} if this set did not already contain the specified
      *         element
@@ -264,6 +359,12 @@ public class TreeSet<E> extends AbstractSet<E>
      * changed as a result of the call).  (This set will not contain the
      * element once the call returns.)
      *
+     * <p>
+     *  从此集合中删除指定的元素(如果存在)。
+     * 更正式地,删除元素{@code e},使得<tt>(o == null&nbsp;?&nbsp; e == null&nbsp;：&nbsp; o.equals(e))</tt>元素。
+     * 如果此集合包含元素(或等效地,如果此集合作为调用的结果而更改),则返回{@code true}。 (这个集合在调用返回后不会包含元素。)。
+     * 
+     * 
      * @param o object to be removed from this set, if present
      * @return {@code true} if this set contained the specified element
      * @throws ClassCastException if the specified object cannot be compared
@@ -279,6 +380,9 @@ public class TreeSet<E> extends AbstractSet<E>
     /**
      * Removes all of the elements from this set.
      * The set will be empty after this call returns.
+     * <p>
+     *  删除此集合中的所有元素。此调用返回后,集合将为空。
+     * 
      */
     public void clear() {
         m.clear();
@@ -287,6 +391,10 @@ public class TreeSet<E> extends AbstractSet<E>
     /**
      * Adds all of the elements in the specified collection to this set.
      *
+     * <p>
+     *  将指定集合中的所有元素添加到此集合。
+     * 
+     * 
      * @param c collection containing elements to be added to this set
      * @return {@code true} if this set changed as a result of the call
      * @throws ClassCastException if the elements provided cannot be compared
@@ -313,6 +421,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if {@code fromElement} or {@code toElement}
      *         is null and this set uses natural ordering, or its comparator
@@ -327,6 +437,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if {@code toElement} is null and
      *         this set uses natural ordering, or its comparator does
@@ -339,6 +451,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if {@code fromElement} is null and
      *         this set uses natural ordering, or its comparator does
@@ -351,6 +465,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if {@code fromElement} or
      *         {@code toElement} is null and this set uses natural ordering,
@@ -362,6 +478,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if {@code toElement} is null
      *         and this set uses natural ordering, or its comparator does
@@ -373,6 +491,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if {@code fromElement} is null
      *         and this set uses natural ordering, or its comparator does
@@ -388,6 +508,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E first() {
@@ -395,6 +517,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E last() {
@@ -404,6 +528,8 @@ public class TreeSet<E> extends AbstractSet<E>
     // NavigableSet API methods
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if the specified element is null
      *         and this set uses natural ordering, or its comparator
@@ -415,6 +541,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if the specified element is null
      *         and this set uses natural ordering, or its comparator
@@ -426,6 +554,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if the specified element is null
      *         and this set uses natural ordering, or its comparator
@@ -437,6 +567,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException if the specified element is null
      *         and this set uses natural ordering, or its comparator
@@ -448,6 +580,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.6
      */
     public E pollFirst() {
@@ -456,6 +590,8 @@ public class TreeSet<E> extends AbstractSet<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.6
      */
     public E pollLast() {
@@ -467,6 +603,10 @@ public class TreeSet<E> extends AbstractSet<E>
      * Returns a shallow copy of this {@code TreeSet} instance. (The elements
      * themselves are not cloned.)
      *
+     * <p>
+     *  返回此{@code TreeSet}实例的浅拷贝。 (元素本身未克隆。)
+     * 
+     * 
      * @return a shallow copy of this set
      */
     @SuppressWarnings("unchecked")
@@ -486,6 +626,10 @@ public class TreeSet<E> extends AbstractSet<E>
      * Save the state of the {@code TreeSet} instance to a stream (that is,
      * serialize it).
      *
+     * <p>
+     *  将{@code TreeSet}实例的状态保存到流(即,序列化它)。
+     * 
+     * 
      * @serialData Emits the comparator used to order this set, or
      *             {@code null} if it obeys its elements' natural ordering
      *             (Object), followed by the size of the set (the number of
@@ -513,6 +657,9 @@ public class TreeSet<E> extends AbstractSet<E>
     /**
      * Reconstitute the {@code TreeSet} instance from a stream (that is,
      * deserialize it).
+     * <p>
+     *  从流重构{@code TreeSet}实例(即,反序列化它)。
+     * 
      */
     private void readObject(java.io.ObjectInputStream s)
         throws java.io.IOException, ClassNotFoundException {
@@ -549,6 +696,14 @@ public class TreeSet<E> extends AbstractSet<E>
      * Otherwise, the spliterator's comparator is the same as or imposes the
      * same total ordering as the tree set's comparator.
      *
+     * <p>
+     *  在此集合中的元素上创建<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>和<em>快速失败</em> {@link Spliterator} 
+     * 。
+     * 
+     * <p> {@code Spliterator}报告{@link Spliterator#SIZED},{@link Spliterator#DISTINCT},{@link Spliterator#SORTED}
+     * 和{@link Spliterator#ORDERED}。
+     * 重写实现应记录附加特征值的报告。
+     * 
      * @return a {@code Spliterator} over the elements in this set
      * @since 1.8
      */

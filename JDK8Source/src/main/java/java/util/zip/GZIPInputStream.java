@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.io.EOFException;
  * This class implements a stream filter for reading compressed data in
  * the GZIP file format.
  *
+ * <p>
+ *  这个类实现了一个流过滤器,用于读取GZIP文件格式的压缩数据。
+ * 
+ * 
  * @see         InflaterInputStream
  * @author      David Connelly
  *
@@ -44,11 +49,17 @@ public
 class GZIPInputStream extends InflaterInputStream {
     /**
      * CRC-32 for uncompressed data.
+     * <p>
+     *  CRC-32用于未压缩数据。
+     * 
      */
     protected CRC32 crc = new CRC32();
 
     /**
      * Indicates end of input stream.
+     * <p>
+     *  表示输入流的结束。
+     * 
      */
     protected boolean eos;
 
@@ -56,6 +67,9 @@ class GZIPInputStream extends InflaterInputStream {
 
     /**
      * Check to make sure that this stream has not been closed
+     * <p>
+     *  请检查以确保此流未关闭
+     * 
      */
     private void ensureOpen() throws IOException {
         if (closed) {
@@ -65,6 +79,10 @@ class GZIPInputStream extends InflaterInputStream {
 
     /**
      * Creates a new input stream with the specified buffer size.
+     * <p>
+     *  创建具有指定缓冲区大小的新输入流。
+     * 
+     * 
      * @param in the input stream
      * @param size the input buffer size
      *
@@ -81,6 +99,10 @@ class GZIPInputStream extends InflaterInputStream {
 
     /**
      * Creates a new input stream with a default buffer size.
+     * <p>
+     *  创建具有默认缓冲区大小的新输入流。
+     * 
+     * 
      * @param in the input stream
      *
      * @exception ZipException if a GZIP format error has occurred or the
@@ -95,6 +117,10 @@ class GZIPInputStream extends InflaterInputStream {
      * Reads uncompressed data into an array of bytes. If <code>len</code> is not
      * zero, the method will block until some input can be decompressed; otherwise,
      * no bytes are read and <code>0</code> is returned.
+     * <p>
+     *  将未压缩的数据读入字节数组。如果<code> len </code>不为零,则该方法将阻塞,直到某些输入可以解压缩;否则,不读取任何字节,并返回<code> 0 </code>。
+     * 
+     * 
      * @param buf the buffer into which the data is read
      * @param off the start offset in the destination array <code>b</code>
      * @param len the maximum number of bytes read
@@ -129,6 +155,10 @@ class GZIPInputStream extends InflaterInputStream {
     /**
      * Closes this input stream and releases any system resources associated
      * with the stream.
+     * <p>
+     *  关闭此输入流,并释放与流相关联的任何系统资源。
+     * 
+     * 
      * @exception IOException if an I/O error has occurred
      */
     public void close() throws IOException {
@@ -141,11 +171,17 @@ class GZIPInputStream extends InflaterInputStream {
 
     /**
      * GZIP header magic number.
+     * <p>
+     *  GZIP标题幻数。
+     * 
      */
     public final static int GZIP_MAGIC = 0x8b1f;
 
     /*
      * File header flags.
+     * <p>
+     *  文件头标志。
+     * 
      */
     private final static int FTEXT      = 1;    // Extra text
     private final static int FHCRC      = 2;    // Header CRC
@@ -156,6 +192,9 @@ class GZIPInputStream extends InflaterInputStream {
     /*
      * Reads GZIP member header and returns the total byte number
      * of this member header.
+     * <p>
+     *  读取GZIP成员头并返回此成员头的总字节数。
+     * 
      */
     private int readHeader(InputStream this_in) throws IOException {
         CheckedInputStream in = new CheckedInputStream(this_in, crc);
@@ -207,6 +246,9 @@ class GZIPInputStream extends InflaterInputStream {
      * Reads GZIP member trailer and returns true if the eos
      * reached, false if there are more (concatenated gzip
      * data set)
+     * <p>
+     *  读取GZIP成员预告片,如果达到eos则返回true,如果有更多则返回false(连接的gzip数据集)
+     * 
      */
     private boolean readTrailer() throws IOException {
         InputStream in = this.in;
@@ -245,6 +287,9 @@ class GZIPInputStream extends InflaterInputStream {
 
     /*
      * Reads unsigned integer in Intel byte order.
+     * <p>
+     *  以英特尔字节顺序读取无符号整数。
+     * 
      */
     private long readUInt(InputStream in) throws IOException {
         long s = readUShort(in);
@@ -253,6 +298,9 @@ class GZIPInputStream extends InflaterInputStream {
 
     /*
      * Reads unsigned short in Intel byte order.
+     * <p>
+     *  以字节顺序读取无符号短整数。
+     * 
      */
     private int readUShort(InputStream in) throws IOException {
         int b = readUByte(in);
@@ -261,6 +309,9 @@ class GZIPInputStream extends InflaterInputStream {
 
     /*
      * Reads unsigned byte.
+     * <p>
+     *  读取无符号字节。
+     * 
      */
     private int readUByte(InputStream in) throws IOException {
         int b = in.read();
@@ -280,6 +331,8 @@ class GZIPInputStream extends InflaterInputStream {
     /*
      * Skips bytes of input data blocking until all bytes are skipped.
      * Does not assume that the input stream is capable of seeking.
+     * <p>
+     *  跳过输入数据块的字节,直到跳过所有字节。不假定输入流能够搜索。
      */
     private void skipBytes(InputStream in, int n) throws IOException {
         while (n > 0) {

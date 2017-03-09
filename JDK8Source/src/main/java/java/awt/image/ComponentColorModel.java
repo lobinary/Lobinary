@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -166,6 +167,72 @@ import java.awt.color.ICC_ColorSpace;
  * or a <CODE>PixelInterleavedSampleModel</CODE> to construct a
  * <CODE>BufferedImage</CODE>.
  *
+ * <p>
+ *  <CODE> ColorModel </CODE>类,它将表示颜色和alpha信息的像素值用作单独的样本,并将每个样本存储在单独的数据元素中。
+ * 这个类可以和任意的<CODE> ColorSpace </CODE>一起使用。像素值中的颜色样本数必须与<CODE> ColorSpace </CODE>中颜色分量的数量相同。
+ * 可能有单个alpha样本。
+ * <p>
+ *  对于使用<CODE> transferType </CODE>类型的基本数组像素表示的那些方法,数组长度与颜色和alpha样本的数量相同。颜色样本首先存储在阵列中,然后是α样本(如果存在)。
+ * 颜色样本的顺序由<CODE> ColorSpace </CODE>指定。通常,此顺序反映颜色空间类型的名称。
+ * 例如,对于<CODE> TYPE_RGB </CODE>,索引0对应于红色,索引1对应于绿色,索引2对应于蓝色。
+ * <p>
+ * 从像素样本值到颜色/阿尔法分量的显示或处理目的的转换是基于样本与分量的一对一对应关系。
+ * 根据用于创建<code> ComponentColorModel </code>的实例的传输类型,由该实例表示的像素样本值可以是有符号的或无符号的,并且可以是整数类型或浮点型或双精度(见下面的细节)。
+ * 从样本值到标准化颜色/ alpha分量的转换必须遵循特定规则。对于浮点和双样本,平移是一个标识,即标准化分量值等于相应的样本值。
+ * 对于积分样本,平移应该只是一个简单的比例和偏移,其中比例和偏移常数可能对于每个分量是不同的。应用比例和偏移常数的结果是一组颜色/阿尔法分量值,其被保证落在一定范围内。
+ * 通常,颜色分量的范围将是由<code> ColorSpace </code>类的<code> getMinValue </code>和<code> getMaxValue </code>方法定义的范围。
+ * 对于积分样本,平移应该只是一个简单的比例和偏移,其中比例和偏移常数可能对于每个分量是不同的。应用比例和偏移常数的结果是一组颜色/阿尔法分量值,其被保证落在一定范围内。
+ *  alpha组件的范围应为0.0到1.0。
+ * <p>
+ * 使用传输类型<CODE> DataBuffer.TYPE_BYTE </CODE>,<CODE> DataBuffer.TYPE_USHORT </CODE>和<CODE> DataBuffer.TYP
+ * E_INT </CODE>创建的<code> ComponentColorModel </code>值被视为无符号整数值。
+ * 像素值的颜色或alpha样本中的位数可能不等于传递给<code> ComponentColorModel(ColorSpace,int [],boolean,boolean,int)的相应颜色或alph
+ * a样本的位数,int)</code>构造函数。
+ * 在这种情况下,此类假设采样值的最低有效n位保存组件值,其中n是传递给构造函数的组件的有效位数。它还假定采样值中的任何高阶位为零。因此,样本值范围从0到2 <sup> n </sup> -1。
+ * 该类将这些样本值映射到归一化的颜色分量值,使得0映射到从<code> ColorSpace的</code>代码> getMinValue </code>方法,并且2 <sup> n </sup>  - 
+ *  1映射到从<code> getMaxValue </code>获得的值。
+ * 在这种情况下,此类假设采样值的最低有效n位保存组件值,其中n是传递给构造函数的组件的有效位数。它还假定采样值中的任何高阶位为零。因此,样本值范围从0到2 <sup> n </sup> -1。
+ * 要创建一个具有不同颜色样本映射的<code> ComponentColorModel </code>,需要对该类进行子类化并覆盖<code> getNormalizedComponents(Object
+ * ,float [],int)</code>方法。
+ * 在这种情况下,此类假设采样值的最低有效n位保存组件值,其中n是传递给构造函数的组件的有效位数。它还假定采样值中的任何高阶位为零。因此,样本值范围从0到2 <sup> n </sup> -1。
+ *  α样本的映射总是将0映射到0.0和2 <sup> n <-1>到1.0。
+ * <p>
+ * 对于具有无符号样本值的实例,仅当两个条件成立时,才支持非标准化的颜色/ alpha分量表示。首先,样本值值0必须映射到归一化分量值0.0和样本值2 <sup> n </sup>  -  1到1.0。
+ * 第二,<code> ColorSpace </code>的所有颜色分量的最小/最大范围必须为0.0到1.0。在这种情况下,组件表示是相应采样的n个最低有效位。
+ * 因此,每个分量是0和2之间的无符号整数值,其中n是特定分量的有效位的数量。
+ * 如果不满足这些条件,任何采用非规范化组件参数的方法都会抛出一个<code> IllegalArgumentException </code>。
+ * <p>
+ * 使用传输类型<CODE> DataBuffer.TYPE_SHORT </CODE>,<CODE> DataBuffer.TYPE_FLOAT </CODE>和<CODE> DataBuffer.TYP
+ * E_DOUBLE </CODE>创建的<code> ComponentColorModel </code>值被视为带符号的短整数,浮点数或双精度值。
+ * 这样的实例不支持非规范化的颜色/ alpha组件表示,因此任何采用这样的表示作为参数的方法将在其中一个实例上调用时抛出<code> IllegalArgumentException </code>。
+ * 此类的实例的规范化组件值具有取决于传输类型的范围,如下所示：对于float样本,float数据类型的全范围;对于双样本,浮点数据类型的全范围(由双转换为浮点);对于短样本,从大约-maxVal到+ ma
+ * xVal,其中maxVal是<code> ColorSpace </code>的每个组件最大值(-32767映射到-maxVal,0映射到0.0,并且32767映射到+ maxVal) 。
+ * 这样的实例不支持非规范化的颜色/ alpha组件表示,因此任何采用这样的表示作为参数的方法将在其中一个实例上调用时抛出<code> IllegalArgumentException </code>。
+ * 子类可以通过覆盖<code> getNormalizedComponents(Object,float [],int)</code>方法来覆盖缩短样本值到规范化组件值的缩放。
+ * 对于浮点和双样本,归一化分量值被认为等于相应的样本值,子类不应尝试为这些传输类型添加任何非身份缩放。
+ * <p>
+ * 使用传输类型<CODE> DataBuffer.TYPE_SHORT </CODE>,<CODE> DataBuffer.TYPE_FLOAT </CODE>和<CODE> DataBuffer.TYP
+ * E_DOUBLE </CODE>创建的<code> ComponentColorModel </code>实例使用所有所有样本值的位。
+ * 因此,当使用<CODE> DataBuffer.TYPE_SHORT </CODE>时,所有颜色/ alpha分量具有16位;当使用<CODE> DataBuffer.TYPE_FLOAT </CODE>
+ * 时,所有颜色/ alpha分量具有16位;当使用<CODE> DataBuffer.TYPE_DOUBLE < CODE>。
+ * 当<code> ComponentColorModel(ColorSpace,int [],boolean,boolean,int,int)</code>构造函数形式与这些传输类型之一一起使用时,bit
+ * s数组参数被忽略。
+ * <p>
+ * 可能具有不能被合理地解释为用于渲染的组件值的颜色/α样本值。
+ * 当<code> ComponentColorModel </code>被子类化以覆盖无符号样本值到标准化颜色分量值的映射,或者使用超出特定范围的带符号样本值时,会发生这种情况。
+ *  (例如,将alpha分量指定为0到32767范围之外的有符号短值,归一化范围为0.0到1.0可导致意想不到的结果。
+ * )应用程序有责任在渲染之前适当地缩放像素数据,组件落在<code> ColorSpace </code>(使用<code> ColorSpace </code>类的<code> getMinValue 
+ * </code>和<code> getMaxValue </code>方法获得)的规范范围内,并且α分量在0.0和1.0之间。
+ *  (例如,将alpha分量指定为0到32767范围之外的有符号短值,归一化范围为0.0到1.0可导致意想不到的结果。如果颜色或alpha分量值超出这些范围,渲染结果是不确定的。
+ * <p>
+ *  使用单个int像素表示的方法会抛出<CODE> IllegalArgumentException </CODE>,除非<CODE> ComponentColorModel </CODE>的组件数为一,
+ * 而组件值为无符号 - 换句话说,使用<CODE> DataBuffer.TYPE_BYTE </CODE>,<CODE> DataBuffer.TYPE_USHORT </CODE>或<CODE> Da
+ * taBuffer.TYPE_INT </CODE>的传输类型,并且不使用alpha。
+ * <p>
+ * <CODE> ComponentColorModel </CODE>可以与<CODE> ComponentSampleModel </CODE>,<CODE> BandedSampleModel </CODE>
+ * 或<CODE> PixelInterleavedSampleModel </CODE>结合使用以构建<CODE > BufferedImage </CODE>。
+ * 
+ * 
  * @see ColorModel
  * @see ColorSpace
  * @see ComponentSampleModel
@@ -181,6 +248,10 @@ public class ComponentColorModel extends ColorModel {
      * <code>float</code>, and <code>double</code> transfer types; it
      * is <code>false</code> for <code>byte</code>, <code>ushort</code>,
      * and <code>int</code> transfer types.
+     * <p>
+     *  对于<code> short </code>,<code> float </code>和<code> double </code>传输类型,<code> signed </code>是<code> t
+     * rue </code>它是<code> byte </code>,<code> ushort </code>和<code> int </code>传输类型的<code> false </code>。
+     * 
      */
     private boolean signed; // true for transfer types short, float, double
                             // false for byte, ushort, int
@@ -229,6 +300,25 @@ public class ComponentColorModel extends ColorModel {
      * The <CODE>transferType</CODE> is the type of primitive array used
      * to represent pixel values.
      *
+     * <p>
+     * 从指定的参数构造<CODE> ComponentColorModel </CODE>。颜色组件将在指定的<CODE> ColorSpace </CODE>中。
+     * 支持的传输类型是<CODE> DataBuffer.TYPE_BYTE </CODE>,<CODE> DataBuffer.TYPE_USHORT </CODE>,<CODE> DataBuffer.T
+     * YPE_INT </CODE>,<CODE> DataBuffer.TYPE_SHORT </CODE> CODE> DataBuffer.TYPE_FLOAT </CODE>和<CODE> DataB
+     * uffer.TYPE_DOUBLE </CODE>。
+     * 从指定的参数构造<CODE> ComponentColorModel </CODE>。颜色组件将在指定的<CODE> ColorSpace </CODE>中。
+     * 如果不为空,则<CODE>位</CODE>数组指定每个颜色和alpha分量的有效位数,且其长度应至少为<CODE> ColorSpace </CODE>中的组件数alpha信息在像素值中,或者如果有al
+     * pha信息,则超过此数字。
+     * 从指定的参数构造<CODE> ComponentColorModel </CODE>。颜色组件将在指定的<CODE> ColorSpace </CODE>中。
+     * 当<CODE> transferType </CODE>为<CODE> DataBuffer.TYPE_SHORT </CODE>,<CODE> DataBuffer.TYPE_FLOAT </CODE>
+     * 或<CODE> DataBuffer.TYPE_DOUBLE </CODE> / CODE>数组参数被忽略。
+     * 从指定的参数构造<CODE> ComponentColorModel </CODE>。颜色组件将在指定的<CODE> ColorSpace </CODE>中。
+     *  <CODE> hasAlpha </CODE>表示是否存在alpha信息。
+     * 如果<CODE> hasAlpha </CODE>为真,则布尔<CODE> isAlphaPremultiplied </CODE>指定如何解释像素值中的颜色和alpha样本。
+     * 如果布尔值为真,则假定颜色样本已经乘以α样本。 <CODE>透明度</CODE>指定此颜色模型可表示哪些alpha值。
+     * 可接受的<code>透明度</code>值为<CODE> OPAQUE </CODE>,<CODE> BITMASK </CODE>或<CODE> TRANSLUCENT </CODE>。
+     *  <CODE> transferType </CODE>是用于表示像素值的基本数组的类型。
+     * 
+     * 
      * @param colorSpace       The <CODE>ColorSpace</CODE> associated
      *                         with this color model.
      * @param bits             The number of significant bits per component.
@@ -322,6 +412,20 @@ public class ComponentColorModel extends ColorModel {
      * The <CODE>transferType</CODE> is the type of primitive array used
      * to represent pixel values.
      *
+     * <p>
+     * 从指定的参数构造<CODE> ComponentColorModel </CODE>。颜色组件将在指定的<CODE> ColorSpace </CODE>中。
+     * 支持的传输类型是<CODE> DataBuffer.TYPE_BYTE </CODE>,<CODE> DataBuffer.TYPE_USHORT </CODE>,<CODE> DataBuffer.T
+     * YPE_INT </CODE>,<CODE> DataBuffer.TYPE_SHORT </CODE> CODE> DataBuffer.TYPE_FLOAT </CODE>和<CODE> DataB
+     * uffer.TYPE_DOUBLE </CODE>。
+     * 从指定的参数构造<CODE> ComponentColorModel </CODE>。颜色组件将在指定的<CODE> ColorSpace </CODE>中。
+     * 每个颜色和α分量的有效位的数量将分别为8,16,32,16,32或64。颜色分量的数量将是<CODE> ColorSpace </CODE>中的分量数量。
+     * 如果<CODE> hasAlpha </CODE>是<CODE> true </CODE>,将会有一个alpha组件。
+     * 如果<CODE> hasAlpha </CODE>为真,则布尔<CODE> isAlphaPremultiplied </CODE>指定如何解释像素值中的颜色和alpha样本。
+     * 如果布尔值为真,则假定颜色样本已经乘以α样本。 <CODE>透明度</CODE>指定此颜色模型可表示哪些alpha值。
+     * 可接受的<code>透明度</code>值为<CODE> OPAQUE </CODE>,<CODE> BITMASK </CODE>或<CODE> TRANSLUCENT </CODE>。
+     *  <CODE> transferType </CODE>是用于表示像素值的基本数组的类型。
+     * 
+     * 
      * @param colorSpace       The <CODE>ColorSpace</CODE> associated
      *                         with this color model.
      * @param hasAlpha         If true, this color model supports alpha.
@@ -657,6 +761,11 @@ public class ComponentColorModel extends ColorModel {
      * it out before returning the value (if the alpha value is 0,
      * the red value will be 0).
      *
+     * <p>
+     * 返回指定像素的红色分量,在默认RGB ColorSpace(sRGB)中从0到255缩放。如果需要,进行颜色转换。像素值指定为int。返回的值将是非预乘的值。
+     * 如果alpha被预乘,此方法在返回值之前将其分割(如果alpha值为0,则红色值为0)。
+     * 
+     * 
      * @param pixel The pixel from which you want to get the red color component.
      *
      * @return The red color component for the specified pixel, as an int.
@@ -679,6 +788,11 @@ public class ComponentColorModel extends ColorModel {
      * divides it out before returning the value (if the alpha value is 0,
      * the green value will be 0).
      *
+     * <p>
+     *  返回指定像素的绿色分量,在默认RGB ColorSpace(sRGB)中从0到255。如果需要,进行颜色转换。像素值指定为int。返回的值将是非预乘的值。
+     * 如果alpha被预乘,此方法在返回值之前将其分割(如果alpha值为0,则绿色值为0)。
+     * 
+     * 
      * @param pixel The pixel from which you want to get the green color component.
      *
      * @return The green color component for the specified pixel, as an int.
@@ -701,6 +815,11 @@ public class ComponentColorModel extends ColorModel {
      * divides it out before returning the value (if the alpha value is 0,
      * the blue value will be 0).
      *
+     * <p>
+     *  返回指定像素的蓝色分量,在默认RGB ColorSpace(sRGB)中从0到255。如果需要,进行颜色转换。像素值指定为int。返回的值将是非预乘的值。
+     * 如果alpha被预乘,该方法在返回值之前将其分割(如果alpha值为0,蓝色值为0)。
+     * 
+     * 
      * @param pixel The pixel from which you want to get the blue color component.
      *
      * @return The blue color component for the specified pixel, as an int.
@@ -718,6 +837,10 @@ public class ComponentColorModel extends ColorModel {
      * Returns the alpha component for the specified pixel, scaled
      * from 0 to 255.   The pixel value is specified as an int.
      *
+     * <p>
+     *  返回指定像素的alpha分量,从0到255缩放。像素值指定为int。
+     * 
+     * 
      * @param pixel The pixel from which you want to get the alpha component.
      *
      * @return The alpha component for the specified pixel, as an int.
@@ -750,6 +873,11 @@ public class ComponentColorModel extends ColorModel {
      * the alpha is premultiplied, this method divides it out of the
      * color components (if the alpha value is 0, the color values will be 0).
      *
+     * <p>
+     * 以默认的RGB颜色模型格式返回像素的颜色/ alpha分量。如果需要,进行颜色转换。返回的值将采用非预扩展格式。
+     * 如果alpha被预乘,该方法将其从颜色分量中分割出来(如果alpha值为0,则颜色值为0)。
+     * 
+     * 
      * @param pixel The pixel from which you want to get the color/alpha components.
      *
      * @return The color/alpha components for the specified pixel, as an int.
@@ -923,6 +1051,15 @@ public class ComponentColorModel extends ColorModel {
      * it then they throw an exception if they use an unsupported
      * <code>transferType</code>.
      *
+     * <p>
+     *  返回指定像素的红色分量,在默认RGB ColorSpace(sRGB)中从0到255缩放。如果需要,进行颜色转换。
+     *  <CODE>像素</CODE>值由作为对象引用传递的<CODE> transferType </CODE>类型的数据元素数组指定。返回的值将是非预乘的值。
+     * 如果alpha被预乘,此方法在返回值之前将其分割(如果alpha值为0,则红色值为0)。
+     * 由于<code> ComponentColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>
+     * ,它们会抛出异常。
+     * 如果alpha被预乘,此方法在返回值之前将其分割(如果alpha值为0,则红色值为0)。
+     * 
+     * 
      * @param inData The pixel from which you want to get the red color component,
      * specified by an array of data elements of type <CODE>transferType</CODE>.
      *
@@ -958,6 +1095,15 @@ public class ComponentColorModel extends ColorModel {
      * don't override it then they throw an exception if they use an
      * unsupported <code>transferType</code>.
      *
+     * <p>
+     * 返回指定像素的绿色分量,在默认RGB <CODE> ColorSpace </CODE>,sRGB中从0到255。如果需要,进行颜色转换。
+     *  <CODE>像素</CODE>值由作为对象引用传递的<CODE> transferType </CODE>类型的数据元素数组指定。返回的值是非预乘的值。
+     * 如果alpha被预乘,此方法在返回值之前将其分割(如果alpha值为0,则绿色值为0)。
+     * 由于<code> ComponentColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>
+     * ,它们会抛出异常。
+     * 如果alpha被预乘,此方法在返回值之前将其分割(如果alpha值为0,则绿色值为0)。
+     * 
+     * 
      * @param inData The pixel from which you want to get the green color component,
      * specified by an array of data elements of type <CODE>transferType</CODE>.
      *
@@ -993,6 +1139,15 @@ public class ComponentColorModel extends ColorModel {
      * don't override it then they throw an exception if they use an
      * unsupported <code>transferType</code>.
      *
+     * <p>
+     *  返回指定像素的蓝色分量,在默认RGB <CODE> ColorSpace </CODE>,sRGB中从0到255。如果需要,进行颜色转换。
+     *  <CODE>像素</CODE>值由作为对象引用传递的<CODE> transferType </CODE>类型的数据元素数组指定。返回的值是非预乘的值。
+     * 如果alpha被预乘,该方法在返回值之前将其分割(如果alpha值为0,蓝色值为0)。
+     * 由于<code> ComponentColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>
+     * ,它们会抛出异常。
+     * 如果alpha被预乘,该方法在返回值之前将其分割(如果alpha值为0,蓝色值为0)。
+     * 
+     * 
      * @param inData The pixel from which you want to get the blue color component,
      * specified by an array of data elements of type <CODE>transferType</CODE>.
      *
@@ -1024,6 +1179,13 @@ public class ComponentColorModel extends ColorModel {
      * they throw an exception if they use an unsupported
      * <code>transferType</code>.
      *
+     * <p>
+     * 返回指定像素的alpha分量,从0到255缩放。像素值由作为对象引用传递的<CODE> transferType </CODE>类型的数据元素数组指定。
+     * 由于<code> ComponentColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>
+     * ,它们会抛出异常。
+     * 返回指定像素的alpha分量,从0到255缩放。像素值由作为对象引用传递的<CODE> transferType </CODE>类型的数据元素数组指定。
+     * 
+     * 
      * @param inData The pixel from which you want to get the alpha component,
      * specified by an array of data elements of type <CODE>transferType</CODE>.
      *
@@ -1104,6 +1266,14 @@ public class ComponentColorModel extends ColorModel {
      * don't override it then they throw an exception if they use an
      * unsupported <code>transferType</code>.
      *
+     * <p>
+     *  返回默认RGB颜色模型格式中指定像素的颜色/ alpha分量。如果需要,进行颜色转换。像素值由作为对象引用传入的<CODE> transferType </CODE>类型的数据元素数组指定。
+     * 返回的值采用非预扩展格式。如果alpha被预乘,该方法将其从颜色分量中分割出来(如果alpha值为0,则颜色值为0)。
+     * 由于<code> ComponentColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>
+     * ,它们会抛出异常。
+     * 返回的值采用非预扩展格式。如果alpha被预乘,该方法将其从颜色分量中分割出来(如果alpha值为0,则颜色值为0)。
+     * 
+     * 
      * @param inData The pixel from which you want to get the color/alpha components,
      * specified by an array of data elements of type <CODE>transferType</CODE>.
      *
@@ -1162,6 +1332,15 @@ public class ComponentColorModel extends ColorModel {
      * they throw an exception if they use an unsupported
      * <code>transferType</code>.
      *
+     * <p>
+     * 返回此<CODE> ColorModel </CODE>中像素的数据元素数组表示,给定默认RGB颜色模型中的整数像素表示。
+     * 然后可以将该数组传递给<CODE> WritableRaster </CODE>对象的<CODE> setDataElements </CODE>方法。
+     * 如果<CODE>像素</CODE>参数为null,则会分配一个新数组。
+     * 由于<code> ComponentColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>
+     * ,它们会抛出异常。
+     * 如果<CODE>像素</CODE>参数为null,则会分配一个新数组。
+     * 
+     * 
      * @param rgb the integer representation of the pixel in the RGB
      *            color model
      * @param pixel the specified pixel
@@ -1662,6 +1841,12 @@ public class ComponentColorModel extends ColorModel {
      * in the <CODE>components</CODE> array starting at <CODE>offset</CODE>
      * (even if the array is allocated by this method).
      *
+     * <p>
+     *  在此<CODE> ColorModel </CODE>中。
+     * 如果<CODE> ColorModel </CODE>的组件值在非标准化形式中不方便表示,则抛出IllegalArgumentException。
+     * 颜色/ alpha分量存储在<CODE>组件</CODE>数组中,从<CODE> offset </CODE>开始(即使数组是由此方法分配的)。
+     * 
+     * 
      * @param pixel The pixel value specified as an integer.
      * @param components An integer array in which to store the unnormalized
      * color/alpha components. If the <CODE>components</CODE> array is null,
@@ -1715,6 +1900,16 @@ public class ComponentColorModel extends ColorModel {
      * this method might throw an exception if they use an unsupported
      * <code>transferType</code>.
      *
+     * <p>
+     * 在此<CODE> ColorModel </CODE>中,给定一个像素,返回一个非规格化的颜色/ alpha分量数组。
+     * 像素值由作为对象引用传入的<CODE> transferType </CODE>类型的数据元素数组指定。
+     * 如果<CODE> ColorModel </CODE>的组件值不能以非规范化形式方便地表示,则抛出IllegalArgumentException。
+     * 颜色/ alpha分量存储在<CODE>组件</CODE>数组中,从<CODE> offset </CODE>开始(即使数组是由此方法分配的)。
+     * 由于<code> ComponentColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>
+     * ,这个方法可能会抛出异常。
+     * 颜色/ alpha分量存储在<CODE>组件</CODE>数组中,从<CODE> offset </CODE>开始(即使数组是由此方法分配的)。
+     * 
+     * 
      * @param pixel A pixel value specified by an array of data elements of
      * type <CODE>transferType</CODE>.
      * @param components An integer array in which to store the unnormalized
@@ -1797,6 +1992,20 @@ public class ComponentColorModel extends ColorModel {
      * <code>normComponents</code> array is not large enough to hold
      * all the color and alpha components starting at
      * <code>normOffset</code>.
+     * <p>
+     * 给定归一化的组件数组,返回非规范化形式的所有颜色/ alpha组件的数组。未规范化的分量是0和2之间的无符号整数值<sup> n </sup>  -  1,其中n是特定分量的比特数。
+     * 规范化组件是由<code> ColorModel </code>的<code> ColorSpace </code>对象指定的每个组件最小值和最大值之间的浮点值。
+     * 如果<code> ColorModel </code>的颜色组件值不能以非规范化形式方便地表示,则会抛出<code> IllegalArgumentException </code>。
+     * 如果<code> components </code>数组是<code> null </code>,将分配一个新的数组。将返回<code>组件</code>数组。
+     * 颜色/ alpha分量存储在<code>组件</code>数组中,从<code> offset </code>开始(即使数组是由此方法分配的)。
+     * 如果<code> components </code>数组不是<code> null </code>,并且不够大,不足以容纳所有的颜色和alpha组件(从<code>开始),则抛出<code> Arra
+     * yIndexOutOfBoundsException </code> > offset </code>)。
+     * 颜色/ alpha分量存储在<code>组件</code>数组中,从<code> offset </code>开始(即使数组是由此方法分配的)。
+     * 如果<code> normComponents </code>数组不足够大以容纳从<code> normOffset </code>开始的所有颜色和alpha组件,则会抛出<code> IllegalA
+     * rgumentException </code>。
+     * 颜色/ alpha分量存储在<code>组件</code>数组中,从<code> offset </code>开始(即使数组是由此方法分配的)。
+     * 
+     * 
      * @param normComponents an array containing normalized components
      * @param normOffset the offset into the <code>normComponents</code>
      * array at which to start retrieving normalized components
@@ -1851,6 +2060,20 @@ public class ComponentColorModel extends ColorModel {
      * <code>IllegalArgumentException</code> is thrown if the
      * <code>components</code> array is not large enough to hold all the
      * color and alpha components starting at <code>offset</code>.
+     * <p>
+     * 给定一个非规格化的组件数组,以标准化形式返回所有颜色/ alpha组件的数组。未规范化的分量是0和2之间的无符号整数值<sup> n </sup>  -  1,其中n是特定分量的比特数。
+     * 规范化组件是由<code> ColorModel </code>的<code> ColorSpace </code>对象指定的每个组件最小值和最大值之间的浮点值。
+     * 如果<code> ColorModel </code>的颜色组件值不能以非规范化形式方便地表示,则会抛出<code> IllegalArgumentException </code>。
+     * 如果<code> normComponents </code>数组是<code> null </code>,将分配一个新的数组。将返回<code> normComponents </code>数组。
+     * 颜色/ alpha分量存储在<code> normComponent </code>数组中,从<code> normOffset </code>开始(即使数组是由此方法分配的)。
+     * 如果<code> normComponents </code>数组不是<code> null </code>,并且大小不足以容纳所有的颜色和alpha分量,则会抛出<code> ArrayIndexOu
+     * tOfBoundsException </code> > normOffset </code>)。
+     * 颜色/ alpha分量存储在<code> normComponent </code>数组中,从<code> normOffset </code>开始(即使数组是由此方法分配的)。
+     * 如果<code> components </code>数组大小不足以容纳从<code> offset </code>开始的所有颜色和alpha组件,则会抛出<code> IllegalArgumentE
+     * xception </code>。
+     * 颜色/ alpha分量存储在<code> normComponent </code>数组中,从<code> normOffset </code>开始(即使数组是由此方法分配的)。
+     * 
+     * 
      * @param components an array containing unnormalized components
      * @param offset the offset into the <code>components</code> array at
      * which to start retrieving unnormalized components
@@ -1881,6 +2104,10 @@ public class ComponentColorModel extends ColorModel {
      * Returns a pixel value represented as an int in this <CODE>ColorModel</CODE>,
      * given an array of unnormalized color/alpha components.
      *
+     * <p>
+     *  给定一个非规格化的颜色/ alpha分量数组,返回这个<CODE> ColorModel </CODE>中表示为int的像素值。
+     * 
+     * 
      * @param components An array of unnormalized color/alpha components.
      * @param offset An offset into the <CODE>components</CODE> array.
      *
@@ -1914,6 +2141,11 @@ public class ComponentColorModel extends ColorModel {
      * components. This array can then be passed to the <CODE>setDataElements</CODE>
      * method of a <CODE>WritableRaster</CODE> object.
      *
+     * <p>
+     * 给定一个非规格化的颜色/ alpha分量数组,返回此<CODE> ColorModel </CODE>中像素的数据元素数组表示。
+     * 然后可以将该数组传递给<CODE> WritableRaster </CODE>对象的<CODE> setDataElements </CODE>方法。
+     * 
+     * 
      * @param components An array of unnormalized color/alpha components.
      * @param offset The integer offset into the <CODE>components</CODE> array.
      * @param obj The object in which to store the data element array
@@ -2024,6 +2256,16 @@ public class ComponentColorModel extends ColorModel {
      * <code>ArrayIndexOutOfBoundsException</code> is thrown if  the
      * <code>normComponents</code> array is not large enough to hold all the
      * color and alpha components (starting at <code>normOffset</code>).
+     * <p>
+     *  给定一个标准化的颜色/ alpha分量数组,返回这个<code> ColorModel </code>中表示为<code> int </code>的像素值。
+     * 如果<code> ColorModel </code>的像素值不能方便地表示为单个<code> int </code>,则此方法将抛出<code> IllegalArgumentException </code>
+     * 。
+     *  给定一个标准化的颜色/ alpha分量数组,返回这个<code> ColorModel </code>中表示为<code> int </code>的像素值。
+     * 如果<code> normComponents </code>数组不足以容纳所有的颜色和alpha组件(从<code> normOffset </code>开始),则抛出<code> ArrayInde
+     * xOutOfBoundsException </code>。
+     *  给定一个标准化的颜色/ alpha分量数组,返回这个<code> ColorModel </code>中表示为<code> int </code>的像素值。
+     * 
+     * 
      * @param normComponents an array of normalized color and alpha
      * components
      * @param normOffset the index into <code>normComponents</code> at which to
@@ -2090,6 +2332,21 @@ public class ComponentColorModel extends ColorModel {
      * <code>ArrayIndexOutOfBoundsException</code> is thrown if
      * <code>obj</code> is not large enough to hold a pixel value for this
      * <code>ColorModel</code>.
+     * <p>
+     * 给定一个标准化的颜色/ alpha分量数组,返回这个<code> ColorModel </code>中像素的数据元素数组表示。
+     * 然后可以将该数组传递给<code> WritableRaster </code>对象的<code> setDataElements </code>方法。
+     * 如果<code> normComponents </code>数组不足以容纳所有的颜色和alpha组件(从<code> normOffset </code>开始),则抛出<code> ArrayInde
+     * xOutOfBoundsException </code>。
+     * 然后可以将该数组传递给<code> WritableRaster </code>对象的<code> setDataElements </code>方法。
+     * 如果<code> obj </code>变量是<code> null </code>,则将分配一个新数组。
+     * 如果<code> obj </code>不是<code> null </code>,那么它必须是transferType类型的原始数组;否则,抛出<code> ClassCastException </code>
+     * 。
+     * 如果<code> obj </code>变量是<code> null </code>,则将分配一个新数组。
+     * 如果<code> obj </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 如果<code> obj </code>变量是<code> null </code>,则将分配一个新数组。
+     * 
+     * 
      * @param normComponents an array of normalized color and alpha
      * components
      * @param normOffset the index into <code>normComponents</code> at which to
@@ -2324,6 +2581,22 @@ public class ComponentColorModel extends ColorModel {
      * class is described in the class comments.  Any subclass implementing
      * a non-default translation must follow the constraints on allowable
      * translations defined there.
+     * <p>
+     * 以标准化形式返回所有颜色/ alpha分量的数组,给定此<code> ColorModel </code>中的像素。像素值由作为对象引用传递的transferType类型的数据元素数组指定。
+     * 如果pixel不是transferType类型的原始数组,则抛出<code> ClassCastException </code>。
+     * 如果<code> pixel </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 如果pixel不是transferType类型的原始数组,则抛出<code> ClassCastException </code>。
+     * 规范化组件是由<code> ColorModel </code>的<code> ColorSpace </code>对象指定的每个组件最小值和最大值之间的浮点值。
+     * 如果<code> normComponents </code>数组是<code> null </code>,将分配一个新的数组。将返回<code> normComponents </code>数组。
+     * 颜色/ alpha分量存储在<code> normComponent </code>数组中,从<code> normOffset </code>开始(即使数组是由此方法分配的)。
+     * 如果<code> normComponents </code>数组不是<code> null </code>,并且大小不足以容纳所有的颜色和alpha分量,则会抛出<code> ArrayIndexOu
+     * tOfBoundsException </code> > normOffset </code>)。
+     * 颜色/ alpha分量存储在<code> normComponent </code>数组中,从<code> normOffset </code>开始(即使数组是由此方法分配的)。
+     * <p>
+     * 如果该子类被设计为以非默认方式将像素样本值转换为颜色分量值,则此方法必须被子类覆盖。此类实现的默认翻译在类注释中描述。任何实现非默认翻译的子类必须遵循在那里定义的允许翻译的约束。
+     * 
+     * 
      * @param pixel the specified pixel
      * @param normComponents an array to receive the normalized components
      * @param normOffset the offset into the <code>normComponents</code>
@@ -2438,6 +2711,15 @@ public class ComponentColorModel extends ColorModel {
      * then they throw an exception if they use an unsupported
      * <code>transferType</code>.
      *
+     * <p>
+     *  假设此<CODE> ColorModel </CODE>正确描述数据,强制栅格数据与<CODE> isAlphaPremultiplied </CODE>变量中指定的状态匹配。
+     * 它可以将颜色栅格数据乘以或除以阿尔法,或者如果数据处于正确状态,则什么也不做。
+     * 如果需要强制数据,此方法还会返回此<CODE> ColorModel </CODE>的实例,并且相应地设置<CODE> isAlphaPremultiplied </CODE>标志。
+     * 由于<code> ColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它们会抛出异常
+     * 。
+     * 如果需要强制数据,此方法还会返回此<CODE> ColorModel </CODE>的实例,并且相应地设置<CODE> isAlphaPremultiplied </CODE>标志。
+     * 
+     * 
      * @throws NullPointerException if <code>raster</code> is
      * <code>null</code> and data coercion is required.
      * @throws UnsupportedOperationException if the transfer type of
@@ -2777,6 +3059,10 @@ public class ComponentColorModel extends ColorModel {
       * Returns true if <CODE>raster</CODE> is compatible with this
       * <CODE>ColorModel</CODE>; false if it is not.
       *
+      * <p>
+      *  如果<CODE>光栅</CODE>与此<CODE> ColorModel </CODE>兼容,则返回true;如果不是false。
+      * 
+      * 
       * @param raster The <CODE>Raster</CODE> object to test for compatibility.
       *
       * @return <CODE>true</CODE> if <CODE>raster</CODE> is compatible with this
@@ -2807,6 +3093,11 @@ public class ComponentColorModel extends ColorModel {
      * that  has a data layout (<CODE>SampleModel</CODE>) compatible with
      * this <CODE>ColorModel</CODE>.
      *
+     * <p>
+     *  创建具有指定宽度和高度的<CODE> WritableRaster </CODE>,其具有与此<CODE> ColorModel </CODE>兼容的数据布局(<CODE> SampleModel </CODE>
+     * )。
+     * 
+     * 
      * @param w The width of the <CODE>WritableRaster</CODE> you want to create.
      * @param h The height of the <CODE>WritableRaster</CODE> you want to create.
      *
@@ -2839,6 +3130,10 @@ public class ComponentColorModel extends ColorModel {
      * Creates a <CODE>SampleModel</CODE> with the specified width and height,
      * that  has a data layout compatible with this <CODE>ColorModel</CODE>.
      *
+     * <p>
+     *  创建具有指定宽度和高度的<CODE> SampleModel </CODE>,其具有与此<CODE> ColorModel </CODE>兼容的数据布局。
+     * 
+     * 
      * @param w The width of the <CODE>SampleModel</CODE> you want to create.
      * @param h The height of the <CODE>SampleModel</CODE> you want to create.
      *
@@ -2871,6 +3166,10 @@ public class ComponentColorModel extends ColorModel {
      * Checks whether or not the specified <CODE>SampleModel</CODE>
      * is compatible with this <CODE>ColorModel</CODE>.
      *
+     * <p>
+     * 检查指定的<CODE> SampleModel </CODE>是否与此<CODE> ColorModel </CODE>兼容。
+     * 
+     * 
      * @param sm The <CODE>SampleModel</CODE> to test for compatibility.
      *
      * @return <CODE>true</CODE> if the <CODE>SampleModel</CODE> is
@@ -2906,6 +3205,12 @@ public class ComponentColorModel extends ColorModel {
      * This method creates a new <CODE>Raster</CODE>, but will share the data
      * array.
      *
+     * <p>
+     *  返回从输入<CODE> Raster </CODE>中提取的表示图像的Alpha通道的<CODE>栅格</CODE>。
+     * 此方法假定与此<CODE> ColorModel </CODE>相关联的<CODE>光栅</CODE>对象将Alpha波段(如果存在)存储为图像数据的最后一个波段。
+     * 如果没有与此<CODE> ColorModel </CODE>相关联的单独的空间Alpha通道,则返回null。此方法创建一个新的<CODE>栅格</CODE>,但将共享数据数组。
+     * 
+     * 
      * @param raster The <CODE>WritableRaster</CODE> from which to extract the
      * alpha  channel.
      *
@@ -2929,6 +3234,8 @@ public class ComponentColorModel extends ColorModel {
     /**
      * Compares this color model with another for equality.
      *
+     * <p>
+     * 
      * @param obj The object to compare with this color model.
      * @return <CODE>true</CODE> if the color model objects are equal,
      * <CODE>false</CODE> if they are not.

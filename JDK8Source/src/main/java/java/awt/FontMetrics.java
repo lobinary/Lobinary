@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -92,6 +93,32 @@ import java.text.CharacterIterator;
  * generally independent of the rotation applied to the font (modulo
  * possible grid hinting effects).  See {@link java.awt.Font Font}.
  *
+ * <p>
+ *  <code> FontMetrics </code>类定义了一个字体度量对象,它封装了特定字体在特定屏幕上的呈现信息。
+ * <p>
+ *  <b>子类注意事项</b>：由于许多这些方法形成闭合的,相互递归的循环,因此您必须注意在每个这样的循环中至少实现一个方法,以防止在使用子类时发生无限递归。
+ * 特别是,以下是为了确保正确性和防止无限递归而覆盖的最小建议方法集(尽管其他子集同样可行)：。
+ * <ul>
+ *  <li> {@ link #getLeading()} <li> {@ link #getMaxAdvance()} <li> {@ link #charWidth(char)} <li> {@ link #charsWidth(char [],int,int)}
+ * 。
+ * </ul>
+ * <p>
+ *  <img src ="doc-files / FontMetrics-1.gif"alt ="字母'p'显示其'参考点'"
+ * style="border:15px; float:right; margin: 7px 10px;">
+ *  请注意,这些方法的实现是低效的,因此它们通常被更有效的工具包特定实现覆盖。
+ * <p>
+ *  当应用程序要求在字符位置(<i> x </i>,<y> y </i>)放置字符时,字符的放置使其参考点图像)放在该位置。参考点指定称为字符的<i>基线</i>的水平线。
+ * 在正常打印中,字符的基线应对齐。
+ * <p>
+ * 此外,字体中的每个字符都有<i>上升</i>,<i>下降</i>和<i>前进宽度</i>。上升是人物在基线之上上升的量。下降是字符下降到基线以下的量。前进宽度表示AWT应放置下一个字符的位置。
+ * <p>
+ * 字符数组或字符串也可以具有上升,下降和前进宽度。数组的上升是数组中任意字符的最大上升。下降是数组中任何字符的最大下降。前进宽度是字符阵列中每个字符的前进宽度的总和。
+ *  <code> String </code>的前进是沿着<code> String </code>的基线的距离。此距离是用于定位或右对齐<code> String </code>的宽度。
+ *  <p>请注意,<code> String </code>的进度不一定是隔离测量的字符的进度的总和,因为字符的宽度可以根据其上下文而变化。例如,在阿拉伯语文本中,字符的形状可以改变以便连接到其他字符。
+ * 此外,在一些脚本中,某些字符序列可以由单个形状表示,称为<em> ligature </em>。单独测量字符不考虑这些变换。
+ *  <p>字体度量是相对的,意味着它们通常独立于应用于字体的旋转(模式可能的网格提示效果)。请参阅{@link java.awt.Font Font}。
+ * 
+ * 
  * @author      Jim Graham
  * @see         java.awt.Font
  * @since       JDK1.0
@@ -114,6 +141,10 @@ public abstract class FontMetrics implements java.io.Serializable {
      * created.
      * This cannot be null.
      *
+     * <p>
+     *  创建字体指标的实际{@link Font}。此值不能为空。
+     * 
+     * 
      * @serial
      * @see #getFont()
      */
@@ -121,6 +152,9 @@ public abstract class FontMetrics implements java.io.Serializable {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 1681126225205050147L;
 
@@ -128,6 +162,10 @@ public abstract class FontMetrics implements java.io.Serializable {
      * Creates a new <code>FontMetrics</code> object for finding out
      * height and width information about the specified <code>Font</code>
      * and specific character glyphs in that <code>Font</code>.
+     * <p>
+     * 创建一个新的<code> FontMetrics </code>对象,以查找<code> Font </code>和<code> Font </code>中指定字符字形的高度和宽度信息。
+     * 
+     * 
      * @param     font the <code>Font</code>
      * @see       java.awt.Font
      */
@@ -138,6 +176,10 @@ public abstract class FontMetrics implements java.io.Serializable {
     /**
      * Gets the <code>Font</code> described by this
      * <code>FontMetrics</code> object.
+     * <p>
+     *  获取由此<code> FontMetrics </code>对象描述的<code> Font </code>。
+     * 
+     * 
      * @return    the <code>Font</code> described by this
      * <code>FontMetrics</code> object.
      */
@@ -153,6 +195,13 @@ public abstract class FontMetrics implements java.io.Serializable {
      * parameter measure text using the <code>FontRenderContext</code>
      * of that <code>Graphics</code> object, and not this
      * <code>FontRenderContext</code>
+     * <p>
+     *  获取由此<code> FontMetrics </code>对象使用的<code> FontRenderContext </code>来测量文本。
+     * <p>
+     *  注意,这个类中使用<code> Graphics </code>参数测量文本的方法是使用<code> Graphics </code>对象的<code> FontRenderContext </code>
+     * ,而不是这个<code> FontRenderContext < / code>。
+     * 
+     * 
      * @return    the <code>FontRenderContext</code> used by this
      * <code>FontMetrics</code> object.
      * @since 1.6
@@ -168,6 +217,12 @@ public abstract class FontMetrics implements java.io.Serializable {
      * interline spacing, is the logical amount of space to be reserved
      * between the descent of one line of text and the ascent of the next
      * line. The height metric is calculated to include this extra space.
+     * <p>
+     *  确定由此<code> FontMetrics </code>对象描述的<code> Font </code>的<em>标准领先</em>标准前导或行间距是在一行文本的下降和下一行的上升之间保留的空间的
+     * 逻辑量。
+     * 计算高度度量以包括此额外空间。
+     * 
+     * 
      * @return    the standard leading of the <code>Font</code>.
      * @see   #getHeight()
      * @see   #getAscent()
@@ -183,6 +238,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * is the distance from the font's baseline to the top of most
      * alphanumeric characters. Some characters in the <code>Font</code>
      * might extend above the font ascent line.
+     * <p>
+     *  确定由此<code> FontMetrics </code>对象描述的<code> Font </code>的<em>字体上升</em>字体上升是字体的基线到大多数字母数字字符顶部的距离。
+     *  <code> Font </code>中的某些字符可能会延伸到字体上边界。
+     * 
+     * 
      * @return     the font ascent of the <code>Font</code>.
      * @see        #getMaxAscent()
      */
@@ -198,6 +258,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * characters with descenders. Some characters in the
      * <code>Font</code> might extend
      * below the font descent line.
+     * <p>
+     * 确定由此<code> FontMetrics </code>对象描述的<code> Font </code>的<em>字体下降</em>字体下降是字体的基线到具有下降的大多数字母数字字符底部的距离。
+     *  <code> Font </code>中的某些字符可能会延伸到字体下降线以下。
+     * 
+     * 
      * @return     the font descent of the <code>Font</code>.
      * @see        #getMaxDescent()
      */
@@ -213,6 +278,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * There is no guarantee that lines of text spaced at this distance are
      * disjoint; such lines may overlap if some characters overshoot
      * either the standard ascent or the standard descent metric.
+     * <p>
+     *  获取此字体中一行文本的标准高度。这是相邻文本行的基线之间的距离。它是领先+上升+下降的总和。由于四舍五入,这可能不同于getAscent()+ getDescent()+ getLeading()。
+     * 不能保证在该距离处间隔开的文本行是不相交的;如果一些字符超过标准上升或标准下降度量,这些线可能重叠。
+     * 
+     * 
      * @return    the standard height of the font.
      * @see       #getLeading()
      * @see       #getAscent()
@@ -226,6 +296,10 @@ public abstract class FontMetrics implements java.io.Serializable {
      * Determines the maximum ascent of the <code>Font</code>
      * described by this <code>FontMetrics</code> object.  No character
      * extends further above the font's baseline than this height.
+     * <p>
+     *  确定由此<code> FontMetrics </code>对象描述的<code> Font </code>的最大上升。字体的基线上没有比此高度更高的字符。
+     * 
+     * 
      * @return    the maximum ascent of any character in the
      * <code>Font</code>.
      * @see       #getAscent()
@@ -238,6 +312,10 @@ public abstract class FontMetrics implements java.io.Serializable {
      * Determines the maximum descent of the <code>Font</code>
      * described by this <code>FontMetrics</code> object.  No character
      * extends further below the font's baseline than this height.
+     * <p>
+     *  确定由此<code> FontMetrics </code>对象描述的<code> Font </code>的最大下降。没有字符在字体的基线下方比此高度更远。
+     * 
+     * 
      * @return    the maximum descent of any character in the
      * <code>Font</code>.
      * @see       #getDescent()
@@ -248,6 +326,10 @@ public abstract class FontMetrics implements java.io.Serializable {
 
     /**
      * For backward compatibility only.
+     * <p>
+     *  仅用于向后兼容。
+     * 
+     * 
      * @return    the maximum descent of any character in the
      * <code>Font</code>.
      * @see #getMaxDescent()
@@ -265,6 +347,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * distance from the leftmost point to the rightmost point on the
      * string's baseline.  The advance of a <code>String</code> is
      * not necessarily the sum of the advances of its characters.
+     * <p>
+     *  获取此<code> Font </code>中任意字符的最大前进宽度。 advance是从最左点到字符串基线上最右点的距离。
+     *  <code> String </code>的前进不一定是其字符前进的总和。
+     * 
+     * 
      * @return    the maximum advance width of any character
      *            in the <code>Font</code>, or <code>-1</code> if the
      *            maximum advance width is not known.
@@ -287,6 +374,13 @@ public abstract class FontMetrics implements java.io.Serializable {
      * java.lang.Character#isValidCodePoint(int)
      * Character.isValidCodePoint} if necessary.
      *
+     * <p>
+     * 返回此<code> Font </code>中指定字符的前进宽度。 advance是从最左点到字符基线上最右点的距离。注意,<code> String </code>的前进不一定是其字符前进的总和。
+     * 
+     *  <p>此方法不会将指定的字符验证为有效的Unicode代码点。
+     * 调用者必须使用{@link java.lang.Character#isValidCodePoint(int)Character.isValidCodePoint}来验证字符值。
+     * 
+     * 
      * @param codePoint the character (Unicode code point) to be measured
      * @return    the advance width of the specified character
      *            in the <code>Font</code> described by this
@@ -321,6 +415,13 @@ public abstract class FontMetrics implements java.io.Serializable {
      * characters</a>. To support all Unicode characters, including
      * supplementary characters, use the {@link #charWidth(int)} method.
      *
+     * <p>
+     *  返回此<code> Font </code>中指定字符的前进宽度。 advance是从最左点到字符基线上最右点的距离。注意,<code> String </code>的前进不一定是其字符前进的总和。
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href="../lang/Character.html#supplementary">补充字符</a>。
+     * 要支持所有Unicode字符(包括补充字符),请使用{@link #charWidth(int)}方法。
+     * 
+     * 
      * @param ch the character to be measured
      * @return     the advance width of the specified character
      *                  in the <code>Font</code> described by this
@@ -344,6 +445,12 @@ public abstract class FontMetrics implements java.io.Serializable {
      * <p>
      * Note that the advance of a <code>String</code> is
      * not necessarily the sum of the advances of its characters.
+     * <p>
+     *  返回显示此<code> Font </code>中指定的<code> String </code>的总前进宽度。 advance是从最左点到字符串基线上最右点的距离。
+     * <p>
+     *  注意,<code> String </code>的前进不一定是其字符前进的总和。
+     * 
+     * 
      * @param str the <code>String</code> to be measured
      * @return    the advance width of the specified <code>String</code>
      *                  in the <code>Font</code> described by this
@@ -368,6 +475,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * is not necessarily the sum of the advances of its characters.
      * This is equivalent to measuring a <code>String</code> of the
      * characters in the specified range.
+     * <p>
+     * 返回在此<code> Font </code>中显示指定字符数组的总预处理宽度。 advance是从最左点到字符串基线上最右点的距离。
+     *  <code> String </code>的前进不一定是其字符前进的总和。这相当于测量指定范围内的字符的<code> String </code>。
+     * 
+     * 
      * @param data the array of characters to be measured
      * @param off the start offset of the characters in the array
      * @param len the number of characters to be measured from the array
@@ -395,6 +507,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * is not necessarily the sum of the advances of its characters.
      * This is equivalent to measuring a <code>String</code> of the
      * characters in the specified range.
+     * <p>
+     *  返回在此<code> Font </code>中显示指定的字节数组的总前进宽度。 advance是从最左点到字符串基线上最右点的距离。
+     *  <code> String </code>的前进不一定是其字符前进的总和。这相当于测量指定范围内的字符的<code> String </code>。
+     * 
+     * 
      * @param data the array of bytes to be measured
      * @param off the start offset of the bytes in the array
      * @param len the number of bytes to be measured from the array
@@ -420,6 +537,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * character's baseline.  Note that the advance of a
      * <code>String</code> is not necessarily the sum of the advances
      * of its characters.
+     * <p>
+     *  获取<code> Font </code>中前256个字符的前进宽度。 advance是从最左点到字符基线上最右点的距离。
+     * 注意,<code> String </code>的前进不一定是其字符前进的总和。
+     * 
+     * 
      * @return    an array storing the advance widths of the
      *                 characters in the <code>Font</code>
      *                 described by this <code>FontMetrics</code> object.
@@ -440,6 +562,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * Different fonts may have a different ascent, descent, metrics and
      * so on.  This information is sometimes necessary for line
      * measuring and line breaking.
+     * <p>
+     *  检查<code> Font </code>是否有统一的线条指标。复合字体可以由几种不同的字体组成,以覆盖各种字符集。
+     * 在这种情况下,<code> FontLineMetrics </code>对象不统一。不同的字体可能有不同的上升,下降,度量等。此信息有时对于线路测量和线路断开是必需的。
+     * 
+     * 
      * @return <code>true</code> if the font has uniform line metrics;
      * <code>false</code> otherwise.
      * @see java.awt.Font#hasUniformLineMetrics()
@@ -451,6 +578,10 @@ public abstract class FontMetrics implements java.io.Serializable {
     /**
      * Returns the {@link LineMetrics} object for the specified
      * <code>String</code> in the specified {@link Graphics} context.
+     * <p>
+     * 返回指定的{@link Graphics}上下文中指定的<code> String </code>的{@link LineMetrics}对象。
+     * 
+     * 
      * @param str the specified <code>String</code>
      * @param context the specified <code>Graphics</code> context
      * @return a <code>LineMetrics</code> object created with the
@@ -464,6 +595,10 @@ public abstract class FontMetrics implements java.io.Serializable {
     /**
      * Returns the {@link LineMetrics} object for the specified
      * <code>String</code> in the specified {@link Graphics} context.
+     * <p>
+     *  返回指定的{@link Graphics}上下文中指定的<code> String </code>的{@link LineMetrics}对象。
+     * 
+     * 
      * @param str the specified <code>String</code>
      * @param beginIndex the initial offset of <code>str</code>
      * @param limit the end offset of <code>str</code>
@@ -481,6 +616,10 @@ public abstract class FontMetrics implements java.io.Serializable {
     /**
      * Returns the {@link LineMetrics} object for the specified
      * character array in the specified {@link Graphics} context.
+     * <p>
+     *  返回指定的{@link Graphics}上下文中指定字符数组的{@link LineMetrics}对象。
+     * 
+     * 
      * @param chars the specified character array
      * @param beginIndex the initial offset of <code>chars</code>
      * @param limit the end offset of <code>chars</code>
@@ -500,6 +639,10 @@ public abstract class FontMetrics implements java.io.Serializable {
      * Returns the {@link LineMetrics} object for the specified
      * {@link CharacterIterator} in the specified {@link Graphics}
      * context.
+     * <p>
+     *  返回指定{@link Graphics}上下文中指定的{@link CharacterIterator}的{@link LineMetrics}对象。
+     * 
+     * 
      * @param ci the specified <code>CharacterIterator</code>
      * @param beginIndex the initial offset in <code>ci</code>
      * @param limit the end index of <code>ci</code>
@@ -520,6 +663,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * to layout the <code>String</code>.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.FontMetrics class notes}).
+     * <p>
+     *  返回指定的<code> Graphics </code>上下文中指定的<code> String </code>的边界。 bounds用于布局<code> String </code>。
+     *  <p>注意：返回的边界在基线相对坐标中(参见{@link java.awt.FontMetrics课堂笔记})。
+     * 
+     * 
      * @param str the specified <code>String</code>
      * @param context the specified <code>Graphics</code> context
      * @return a {@link Rectangle2D} that is the bounding box of the
@@ -537,6 +685,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * to layout the <code>String</code>.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.FontMetrics class notes}).
+     * <p>
+     *  返回指定的<code> Graphics </code>上下文中指定的<code> String </code>的边界。 bounds用于布局<code> String </code>。
+     *  <p>注意：返回的边界在基线相对坐标中(参见{@link java.awt.FontMetrics课堂笔记})。
+     * 
+     * 
      * @param str the specified <code>String</code>
      * @param beginIndex the offset of the beginning of <code>str</code>
      * @param limit the end offset of <code>str</code>
@@ -561,6 +714,12 @@ public abstract class FontMetrics implements java.io.Serializable {
      * <code>beginIndex</code> and <code>limit</code>.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.FontMetrics class notes}).
+     * <p>
+     *  返回指定的<code> Graphics </code>上下文中指定的字符数组的边界。
+     *  bounds用于布局使用指定的字符数组<code> beginIndex </code>和<code> limit </code>创建的<code> String </code>。
+     *  <p>注意：返回的边界在基线相对坐标中(参见{@link java.awt.FontMetrics课堂笔记})。
+     * 
+     * 
      * @param chars an array of characters
      * @param beginIndex the initial offset of the array of
      * characters
@@ -584,6 +743,11 @@ public abstract class FontMetrics implements java.io.Serializable {
      * specified <code>Graphics</code> context.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.FontMetrics class notes}).
+     * <p>
+     * 返回在指定的<code> Graphics </code>上下文中的指定<code> CharacterIterator </code>中索引的字符的边界。
+     *  <p>注意：返回的边界在基线相对坐标中(参见{@link java.awt.FontMetrics课堂笔记})。
+     * 
+     * 
      * @param ci the specified <code>CharacterIterator</code>
      * @param beginIndex the initial offset in <code>ci</code>
      * @param limit the end index of <code>ci</code>
@@ -603,6 +767,10 @@ public abstract class FontMetrics implements java.io.Serializable {
     /**
      * Returns the bounds for the character with the maximum bounds
      * in the specified <code>Graphics</code> context.
+     * <p>
+     *  返回在指定的<code> Graphics </code>上下文中具有最大边界的字符的边界。
+     * 
+     * 
      * @param context the specified <code>Graphics</code> context
      * @return a <code>Rectangle2D</code> that is the
      * bounding box for the character with the maximum bounds.
@@ -623,6 +791,10 @@ public abstract class FontMetrics implements java.io.Serializable {
     /**
      * Returns a representation of this <code>FontMetrics</code>
      * object's values as a <code>String</code>.
+     * <p>
+     *  将<code> FontMetrics </code>对象的值的表示形式返回为<code> String </code>。
+     * 
+     * 
      * @return    a <code>String</code> representation of this
      * <code>FontMetrics</code> object.
      * @since     JDK1.0.
@@ -637,6 +809,8 @@ public abstract class FontMetrics implements java.io.Serializable {
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
      */
     private static native void initIDs();
 }

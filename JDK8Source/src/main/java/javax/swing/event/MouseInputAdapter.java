@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import java.awt.event.MouseAdapter;
  * empty implementation of the {@code MouseWheelListener} interface, through
  * its extension from AWT's {@code MouseAdapter}.
  *
+ * <p>
+ *  {@code MouseInputListener}接口的空实现,通过扩展和实现感兴趣的方法,为简化创建侦听器的任务提供便利。
+ * 这个类还提供了{@code MouseWheelListener}接口的空实现,通过它的扩展从AWT的{@code MouseAdapter}。
+ * 
  * @author Philip Milne
  * @author Shannon Hickey
  */

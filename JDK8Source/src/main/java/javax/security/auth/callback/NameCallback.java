@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ package javax.security.auth.callback;
  * {@code NameCallback} to the {@code handle}
  * method of a {@code CallbackHandler} to retrieve name information.
  *
+ * <p>
+ *  <p>基础安全服务会实例化{@code NameCallback}并传递给{@code CallbackHandler}的{@code handle}方法,以检索名称信息。
+ * 
+ * 
  * @see javax.security.auth.callback.CallbackHandler
  */
 public class NameCallback implements Callback, java.io.Serializable {
@@ -37,16 +42,22 @@ public class NameCallback implements Callback, java.io.Serializable {
     private static final long serialVersionUID = 3770938795909392253L;
 
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private String prompt;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private String defaultName;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
@@ -57,6 +68,12 @@ public class NameCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  使用提示构造一个{@code NameCallback}。
+     * 
+     * <p>
+     * 
+     * 
      * @param prompt the prompt used to request the name.
      *
      * @exception IllegalArgumentException if {@code prompt} is null
@@ -74,6 +91,12 @@ public class NameCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  使用提示和默认名称构造{@code NameCallback}。
+     * 
+     * <p>
+     * 
+     * 
      * @param prompt the prompt used to request the information. <p>
      *
      * @param defaultName the name to be used as the default name displayed
@@ -98,6 +121,12 @@ public class NameCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取提示。
+     * 
+     * <p>
+     * 
+     * 
      * @return the prompt.
      */
     public String getPrompt() {
@@ -109,6 +138,12 @@ public class NameCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取默认名称。
+     * 
+     * <p>
+     * 
+     * 
      * @return the default name, or null if this {@code NameCallback}
      *          was not instantiated with a {@code defaultName}.
      */
@@ -121,6 +156,12 @@ public class NameCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  设置检索的名称。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the retrieved name (which may be null).
      *
      * @see #getName
@@ -134,6 +175,10 @@ public class NameCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取检索的名称。
+     * 
+     * 
      * @return the retrieved name (which may be null)
      *
      * @see #setName

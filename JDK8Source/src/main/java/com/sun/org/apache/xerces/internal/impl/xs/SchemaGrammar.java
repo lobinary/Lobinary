@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -72,6 +82,14 @@ import org.xml.sax.SAXException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  这个类保存在一个命名空间中声明的所有模式组件声明。
+ * 
+ *  这个类扩展的语法类包含XML Schema和DTD语法之间的一些共性。当语法对象存在于池或缓存中时,区分语法对象与其他类型的对象很有用。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  * @author Elena Litani, IBM
  *
@@ -135,6 +153,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
     /**
      * Default constructor.
      *
+     * <p>
+     *  默认构造函数。
+     * 
+     * 
      * @param targetNamespace
      * @param grammarDesc the XMLGrammarDescription corresponding to this objec
      *          at the least a systemId should always be known.
@@ -270,6 +292,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
         /**
          * Special constructor to create the grammars for the schema namespaces
          *
+         * <p>
+         *  为模式命名空间创建语法的特殊构造函数
+         * 
+         * 
          * @param grammar
          */
         public BuiltinSchemaGrammar(int grammar, short schemaVersion) {
@@ -480,18 +506,30 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
      *
      * @xerces.internal
      *
+     * <p>
+     *  <p>用于验证注释的模式的部分模式。</p>
+     * 
+     *  @ xerces.internal
+     * 
+     * 
      * @author Michael Glavassevich, IBM
      */
     public static final class Schema4Annotations extends SchemaGrammar {
 
         /**
          * Singleton instance.
+         * <p>
+         *  单例实例。
+         * 
          */
         public static final Schema4Annotations INSTANCE = new Schema4Annotations();
 
         /**
          * Special constructor to create a schema
          * capable of validating annotations.
+         * <p>
+         *  特殊构造函数,用于创建能够验证注释的模式。
+         * 
          */
         private Schema4Annotations() {
 
@@ -809,6 +847,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * Returns this grammar's target namespace.
+     * <p>
+     *  返回此语法的目标命名空间。
+     * 
      */
     public final String getTargetNamespace() {
         return fTargetNamespace;
@@ -816,6 +857,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one global attribute
+     * <p>
+     *  注册一个全局属性
+     * 
      */
     public void addGlobalAttributeDecl(XSAttributeDecl decl) {
         fGlobalAttrDecls.put(decl.fName, decl);
@@ -831,6 +875,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one global attribute group
+     * <p>
+     *  注册一个全局属性组
+     * 
      */
     public void addGlobalAttributeGroupDecl(XSAttributeGroupDecl decl) {
         fGlobalAttrGrpDecls.put(decl.fName, decl);
@@ -846,6 +893,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one global element
+     * <p>
+     *  注册一个全局元素
+     * 
      */
     public void addGlobalElementDeclAll(XSElementDecl decl) {
         if (fAllGlobalElemDecls.get(decl) == null) {
@@ -874,6 +924,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one global group
+     * <p>
+     *  注册一个全局组
+     * 
      */
     public void addGlobalGroupDecl(XSGroupDecl decl) {
         fGlobalGroupDecls.put(decl.fName, decl);
@@ -889,6 +942,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one global notation
+     * <p>
+     * 注册一个全局符号
+     * 
      */
     public void addGlobalNotationDecl(XSNotationDecl decl) {
         fGlobalNotationDecls.put(decl.fName, decl);
@@ -904,6 +960,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one global type
+     * <p>
+     *  注册一个全局类型
+     * 
      */
     public void addGlobalTypeDecl(XSTypeDefinition decl) {
         fGlobalTypeDecls.put(decl.getName(), decl);
@@ -929,6 +988,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one global complex type
+     * <p>
+     *  注册一个全局复杂类型
+     * 
      */
     public void addGlobalComplexTypeDecl(XSComplexTypeDecl decl) {
         fGlobalTypeDecls.put(decl.getName(), decl);
@@ -944,6 +1006,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one global simple type
+     * <p>
+     *  注册一个全局简单类型
+     * 
      */
     public void addGlobalSimpleTypeDecl(XSSimpleType decl) {
         fGlobalTypeDecls.put(decl.getName(), decl);
@@ -961,6 +1026,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * register one identity constraint
+     * <p>
+     *  注册一个身份约束
+     * 
      */
     public final void addIDConstraintDecl(XSElementDecl elmDecl, IdentityConstraint decl) {
         elmDecl.addIDConstraint(decl);
@@ -973,6 +1041,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get one global attribute
+     * <p>
+     *  获取一个全局属性
+     * 
      */
     public final XSAttributeDecl getGlobalAttributeDecl(String declName) {
         return(XSAttributeDecl)fGlobalAttrDecls.get(declName);
@@ -984,6 +1055,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get one global attribute group
+     * <p>
+     *  获得一个全局属性组
+     * 
      */
     public final XSAttributeGroupDecl getGlobalAttributeGroupDecl(String declName) {
         return(XSAttributeGroupDecl)fGlobalAttrGrpDecls.get(declName);
@@ -995,6 +1069,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get one global element
+     * <p>
+     *  获取一个全局元素
+     * 
      */
     public final XSElementDecl getGlobalElementDecl(String declName) {
         return(XSElementDecl)fGlobalElemDecls.get(declName);
@@ -1006,6 +1083,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get one global group
+     * <p>
+     *  获得一个全局组
+     * 
      */
     public final XSGroupDecl getGlobalGroupDecl(String declName) {
         return(XSGroupDecl)fGlobalGroupDecls.get(declName);
@@ -1017,6 +1097,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get one global notation
+     * <p>
+     *  得到一个全局符号
+     * 
      */
     public final XSNotationDecl getGlobalNotationDecl(String declName) {
         return(XSNotationDecl)fGlobalNotationDecls.get(declName);
@@ -1028,6 +1111,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get one global type
+     * <p>
+     *  得到一个全局类型
+     * 
      */
     public final XSTypeDefinition getGlobalTypeDecl(String declName) {
         return(XSTypeDefinition)fGlobalTypeDecls.get(declName);
@@ -1039,6 +1125,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get one identity constraint
+     * <p>
+     *  得到一个标识约束
+     * 
      */
     public final IdentityConstraint getIDConstraintDecl(String declName) {
         return(IdentityConstraint)fGlobalIDConstraintDecls.get(declName);
@@ -1050,6 +1139,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get one identity constraint
+     * <p>
+     *  得到一个标识约束
+     * 
      */
     public final boolean hasIDConstraints() {
         return fGlobalIDConstraintDecls.getLength() > 0;
@@ -1076,6 +1168,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * add one complex type decl: for later constraint checking
+     * <p>
+     *  添加一个复杂类型decl：用于以后的约束检查
+     * 
      */
     public void addComplexTypeDecl(XSComplexTypeDecl decl, SimpleLocator locator) {
         if (fCTCount == fComplexTypeDecls.length) {
@@ -1088,6 +1183,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * add a group redefined by restriction: for later constraint checking
+     * <p>
+     *  添加一个由constraint限定的组：用于以后的约束检查
+     * 
      */
     public void addRedefinedGroupDecl(XSGroupDecl derived, XSGroupDecl base, SimpleLocator locator) {
         if (fRGCount == fRedefinedGroupDecls.length) {
@@ -1102,6 +1200,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get all complex type decls: for later constraint checking
+     * <p>
+     *  得到所有复杂类型decls：用于以后的约束检查
+     * 
      */
     final XSComplexTypeDecl[] getUncheckedComplexTypeDecls() {
         if (fCTCount < fComplexTypeDecls.length) {
@@ -1113,6 +1214,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get the error locator of all complex type decls
+     * <p>
+     *  获取所有复杂类型decls的错误定位器
+     * 
      */
     final SimpleLocator[] getUncheckedCTLocators() {
         if (fCTCount < fCTLocators.length) {
@@ -1124,6 +1228,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get all redefined groups: for later constraint checking
+     * <p>
+     *  获取所有重定义的组：用于以后的约束检查
+     * 
      */
     final XSGroupDecl[] getRedefinedGroupDecls() {
         if (fRGCount < fRedefinedGroupDecls.length) {
@@ -1135,6 +1242,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get the error locator of all redefined groups
+     * <p>
+     *  获取所有重定义组的错误定位器
+     * 
      */
     final SimpleLocator[] getRGLocators() {
         if (fRGCount < fRedefinedGroupDecls.length) {
@@ -1147,6 +1257,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
     /**
      * after the first-round checking, some types don't need to be checked
      * against UPA again. here we trim the array to the proper size.
+     * <p>
+     *  在第一轮检查后,一些类型不需要再次检查UPA。这里我们将数组调整到适当的大小。
+     * 
      */
     final void setUncheckedTypeNum(int newSize) {
         fCTCount = newSize;
@@ -1161,6 +1274,9 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * get all substitution group information: for the 3 constraint checking
+     * <p>
+     *  获取所有替换组信息：用于3个约束检查
+     * 
      */
     final XSElementDecl[] getSubstitutionGroups() {
         if (fSubGroupCount < fSubGroups.length)
@@ -1386,6 +1502,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * [schema namespace]
+     * <p>
+     *  [schema namespace]
+     * 
+     * 
      * @see <a href="http://www.w3.org/TR/xmlschema-1/#nsi-schema_namespace">[schema namespace]</a>
      * @return The target namespace of this item.
      */
@@ -1442,6 +1562,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
     /**
      * [schema components]: a list of top-level components, i.e. element
      * declarations, attribute declarations, etc.
+     * <p>
+     *  [模式组件]：顶级组件的列表,即元素声明,属性声明等。
+     * 
+     * 
      * @param objectType The type of the declaration, i.e.
      *   <code>ELEMENT_DECLARATION</code>. Note that
      *   <code>XSTypeDefinition.SIMPLE_TYPE</code> and
@@ -1551,6 +1675,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
     /**
      * Convenience method. Returns a top-level simple or complex type
      * definition.
+     * <p>
+     *  方便的方法。返回顶级简单或复杂类型定义。
+     * 
+     * 
      * @param name The name of the definition.
      * @return An <code>XSTypeDefinition</code> or null if such definition
      *   does not exist.
@@ -1561,6 +1689,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * Convenience method. Returns a top-level attribute declaration.
+     * <p>
+     *  方便的方法。返回顶级属性声明。
+     * 
+     * 
      * @param name The name of the declaration.
      * @return A top-level attribute declaration or null if such declaration
      *   does not exist.
@@ -1571,6 +1703,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * Convenience method. Returns a top-level element declaration.
+     * <p>
+     *  方便的方法。返回顶级元素声明。
+     * 
+     * 
      * @param name The name of the declaration.
      * @return A top-level element declaration or null if such declaration
      *   does not exist.
@@ -1581,6 +1717,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * Convenience method. Returns a top-level attribute group definition.
+     * <p>
+     *  方便的方法。返回顶级属性组定义。
+     * 
+     * 
      * @param name The name of the definition.
      * @return A top-level attribute group definition or null if such
      *   definition does not exist.
@@ -1592,6 +1732,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
     /**
      * Convenience method. Returns a top-level model group definition.
      *
+     * <p>
+     *  方便的方法。返回顶级模型组定义。
+     * 
+     * 
      * @param name      The name of the definition.
      * @return A top-level model group definition definition or null if such
      *         definition does not exist.
@@ -1603,6 +1747,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
     /**
      * Convenience method. Returns a top-level notation declaration.
      *
+     * <p>
+     *  方便的方法。返回顶级符号声明。
+     * 
+     * 
      * @param name      The name of the declaration.
      * @return A top-level notation declaration or null if such declaration
      *         does not exist.
@@ -1614,6 +1762,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
 
     /**
      * [document location]
+     * <p>
+     *  [文档位置]
+     * 
+     * 
      * @see <a href="http://www.w3.org/TR/xmlschema-1/#sd-document_location">[document location]</a>
      * @return a list of document information item
      */
@@ -1625,6 +1777,10 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
      * Return an <code>XSModel</code> that represents components in this schema
      * grammar.
      *
+     * <p>
+     * 返回表示此模式语法中的组件的<code> XSModel </code>。
+     * 
+     * 
      * @return  an <code>XSModel</code> representing this schema grammar
      */
     public XSModel toXSModel() {
@@ -1653,6 +1809,8 @@ public class SchemaGrammar implements XSGrammar, XSNamespaceItem {
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.apache.xerces.xs.XSNamespaceItem#getAnnotations()
      */
     public XSObjectList getAnnotations() {

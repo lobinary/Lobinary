@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import com.sun.jmx.mbeanserver.GetPropertyAction;
  * This class represents the name of the Java implementation class of
  * the MBean. It is used for performing queries based on the class of
  * the MBean.
+ * <p>
+ *  此类表示MBean的Java实现类的名称。它用于根据MBean的类执行查询。
+ * 
+ * 
  * @serial include
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-1081892073854801359L</code>.
@@ -71,6 +76,8 @@ class ClassAttributeValueExp extends AttributeValueExp {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial The name of the attribute
      *
      * <p>The <b>serialVersionUID</b> of this class is <code>-1081892073854801359L</code>.
@@ -79,9 +86,14 @@ class ClassAttributeValueExp extends AttributeValueExp {
 
     /**
      * Basic Constructor.
+     * <p>
+     *  基本构造函数。
+     * 
      */
     public ClassAttributeValueExp() {
         /* Compatibility: we have an attr field that we must hold on to
+        /* <p>
+        /* 
            for serial compatibility, even though our parent has one too.  */
         super("Class");
         attr = "Class";
@@ -92,6 +104,10 @@ class ClassAttributeValueExp extends AttributeValueExp {
      * Applies the ClassAttributeValueExp on an MBean. Returns the name of
      * the Java implementation class of the MBean.
      *
+     * <p>
+     *  在MBean上应用ClassAttributeValueExp。返回MBean的Java实现类的名称。
+     * 
+     * 
      * @param name The name of the MBean on which the ClassAttributeValueExp will be applied.
      *
      * @return  The ValueExp.
@@ -113,6 +129,9 @@ class ClassAttributeValueExp extends AttributeValueExp {
 
     /**
      * Returns the string "Class" representing its value
+     * <p>
+     *  返回表示其值的字符串"Class"
+     * 
      */
     public String toString()  {
         return attr;
@@ -135,6 +154,11 @@ class ClassAttributeValueExp extends AttributeValueExp {
 
                Returning null from here will cause
                BadAttributeValueExpException, which will in turn cause
+            /* <p>
+            /*  将不会评估它上的查询。但是它可能在我们发现它和查询被评估的时间之间消失。
+            /* 
+            /*  此外,异常可能是SecurityException。
+            /* 
                this MBean to be omitted from the query result.  */
         }
     }

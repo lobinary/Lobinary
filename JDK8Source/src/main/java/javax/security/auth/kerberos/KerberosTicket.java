@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,23 @@ import sun.security.util.*;
  * other regular service tickets. A ticket granting ticket is just a
  * special case of a more generalized service ticket.
  *
+ * <p>
+ *  此类封装了Kerberos票据和从客户端的角度查看的关联信息。
+ * 它捕获密钥分发中心(KDC)在Kerberos协议规范中定义的回复消息KDC-REP中发送给客户端的所有信息(<a href=http://www.ietf.org/rfc/rfc4120.txt> R
+ * FC 4120 </a>)。
+ *  此类封装了Kerberos票据和从客户端的角度查看的关联信息。
+ * <p>
+ *  所有用于向KDC认证用户的Kerberos JAAS登录模块都应使用此类。如果可用,登录模块甚至可以从操作系统中的票证缓存读取此信息,而不是直接与KDC通信。
+ * 在JAAS认证过程的提交阶段,JAAS登录模块应实例化此类并将实例存储在{@link javax.security.auth.Subject Subject}的私有凭证集中。<p>。
+ * 
+ *  如果需要从主题访问KerberosTicket实例,则可能需要向应用程序授予{@link javax.security.auth.PrivateCredentialPermission PrivateCredentialPermission}
+ * 。
+ * 当应用程序依赖于默认的JGSS Kerberos机制来访问KerberosTicket时,不需要此权限。
+ * 在这种情况下,应用程序将需要一个适当的{@link javax.security.auth.kerberos.ServicePermission ServicePermission}。
+ * <p>
+ * 请注意,此类别适用于票券授予票和其他常规服务票。票证授予票只是更普遍的服务票的特殊情况。
+ * 
+ * 
  * @see javax.security.auth.Subject
  * @see javax.security.auth.PrivateCredentialPermission
  * @see javax.security.auth.login.LoginContext
@@ -97,6 +115,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * ASN.1 DER Encoding of the Ticket as defined in the
      * Kerberos Protocol Specification RFC4120.
      *
+     * <p>
+     *  ASN.1 DER Kerberos协议规范RFC4120中定义的票证的编码。
+     * 
+     * 
      * @serial
      */
 
@@ -113,6 +135,13 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * }
      * </pre>
      *
+     * <p>
+     *  @code KeyImpl}通过写出加密密钥的ASN1编码字节来序列化。 ASN1编码在RFC4120中定义如下：
+     * <pre>
+     *  EncryptionKey :: = SEQUENCE {keytype [0] Int32  - 实际上是加密类型 - ,keyvalue [1] OCTET STRING}
+     * </pre>
+     * 
+     * 
      * @serial
      */
 
@@ -122,6 +151,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      *
      * Ticket Flags as defined in the Kerberos Protocol Specification RFC4120.
      *
+     * <p>
+     *  Ticket标志,如Kerberos协议规范RFC4120中定义。
+     * 
+     * 
      * @serial
      */
 
@@ -131,6 +164,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      *
      * Time of initial authentication
      *
+     * <p>
+     *  初始认证时间
+     * 
+     * 
      * @serial
      */
 
@@ -139,6 +176,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      *
      * Time after which the ticket is valid.
+     * <p>
+     *  票证有效的时间。
+     * 
+     * 
      * @serial
      */
     private Date startTime;
@@ -147,6 +188,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      *
      * Time after which the ticket will not be honored. (its expiration time).
      *
+     * <p>
+     *  时间之后,票将不被兑现。 (其到期时间)。
+     * 
+     * 
      * @serial
      */
 
@@ -159,6 +204,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * time for the ticket, including all renewals. This field may be null
      * for tickets that are not renewable.
      *
+     * <p>
+     *  对于可再生票证,它指示可以包括在续订中的最大结束时间。它可以被认为是票的绝对到期时间,包括所有续订。对于不可再生的票券,此字段可以为空。
+     * 
+     * 
      * @serial
      */
 
@@ -168,6 +217,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      *
      * Client that owns the service ticket
      *
+     * <p>
+     *  拥有服务票证的客户端
+     * 
+     * 
      * @serial
      */
 
@@ -177,6 +230,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      *
      * The service for which the ticket was issued.
      *
+     * <p>
+     *  发出票证的服务。
+     * 
+     * 
      * @serial
      */
 
@@ -187,6 +244,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * The addresses from where the ticket may be used by the client.
      * This field may be null when the ticket is usable from any address.
      *
+     * <p>
+     *  客户机可以使用故障单的地址。当票证可以从任何地址使用时,此字段可以为空。
+     * 
+     * 
      * @serial
      */
 
@@ -199,6 +260,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * Constructs a KerberosTicket using credentials information that a
      * client either receives from a KDC or reads from a cache.
      *
+     * <p>
+     *  使用客户端从KDC接收或从缓存读取的凭据信息构造KerberosTicket。
+     * 
+     * 
      * @param asn1Encoding the ASN.1 encoding of the ticket as defined by
      * the Kerberos protocol specification.
      * @param client the client that owns this service
@@ -330,6 +395,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns the client principal associated with this ticket.
      *
+     * <p>
+     *  返回与此故障单关联的客户主体。
+     * 
+     * 
      * @return the client principal.
      */
     public final KerberosPrincipal getClient() {
@@ -339,6 +408,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns the service principal associated with this ticket.
      *
+     * <p>
+     *  返回与此故障单关联的服务主体。
+     * 
+     * 
      * @return the service principal.
      */
     public final KerberosPrincipal getServer() {
@@ -348,6 +421,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns the session key associated with this ticket.
      *
+     * <p>
+     * 返回与此故障单关联的会话密钥。
+     * 
+     * 
      * @return the session key.
      */
     public final SecretKey getSessionKey() {
@@ -360,6 +437,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * Returns the key type of the session key associated with this
      * ticket as defined by the Kerberos Protocol Specification.
      *
+     * <p>
+     *  返回与此故障单相关联的会话密钥的密钥类型,如Kerberos协议规范所定义。
+     * 
+     * 
      * @return the key type of the session key associated with this
      * ticket.
      *
@@ -374,6 +455,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Determines if this ticket is forwardable.
      *
+     * <p>
+     *  确定此支持消息是否可转发。
+     * 
+     * 
      * @return true if this ticket is forwardable, false if not.
      */
     public final boolean isForwardable() {
@@ -384,6 +469,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * Determines if this ticket had been forwarded or was issued based on
      * authentication involving a forwarded ticket-granting ticket.
      *
+     * <p>
+     *  确定此票据是否已根据包含转发的票证授予票证的身份验证转发或发出。
+     * 
+     * 
      * @return true if this ticket had been forwarded or was issued based on
      * authentication involving a forwarded ticket-granting ticket,
      * false otherwise.
@@ -395,6 +484,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Determines if this ticket is proxiable.
      *
+     * <p>
+     *  确定此票证是否可行。
+     * 
+     * 
      * @return true if this ticket is proxiable, false if not.
      */
     public final boolean isProxiable() {
@@ -404,6 +497,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Determines is this ticket is a proxy-ticket.
      *
+     * <p>
+     *  确定这张票是一张代理票。
+     * 
+     * 
      * @return true if this ticket is a proxy-ticket, false if not.
      */
     public final boolean isProxy() {
@@ -414,6 +511,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Determines is this ticket is post-dated.
      *
+     * <p>
+     *  确定这张票是过时的。
+     * 
+     * 
      * @return true if this ticket is post-dated, false if not.
      */
     public final boolean isPostdated() {
@@ -425,6 +526,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * refresh} method can be called, assuming the validity period for
      * renewing is not already over.
      *
+     * <p>
+     *  确定这张票是可续订的。如果是这样,则可以调用{@link #refresh()refresh}方法,假定更新的有效期尚未结束。
+     * 
+     * 
      * @return true if this ticket is renewable, false if not.
      */
     public final boolean isRenewable() {
@@ -435,6 +540,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * Determines if this ticket was issued using the Kerberos AS-Exchange
      * protocol, and not issued based on some ticket-granting ticket.
      *
+     * <p>
+     *  确定此故障单是使用Kerberos AS-Exchange协议发出的,而不是基于某些故障单授予故障单发出的。
+     * 
+     * 
      * @return true if this ticket was issued using the Kerberos AS-Exchange
      * protocol, false if not.
      */
@@ -447,6 +556,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * returned array indicates the value for the corresponding bit in the
      * ASN.1 BitString that represents the ticket flags.
      *
+     * <p>
+     *  返回与此故障单关联的标志。返回数组中的每个元素表示表示票证标志的ASN.1 BitString中对应位的值。
+     * 
+     * 
      * @return the flags associated with this ticket.
      */
     public final boolean[]  getFlags() {
@@ -456,6 +569,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns the time that the client was authenticated.
      *
+     * <p>
+     *  返回客户端通过身份验证的时间。
+     * 
+     * 
      * @return the time that the client was authenticated
      *         or null if not set.
      */
@@ -466,6 +583,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns the start time for this ticket's validity period.
      *
+     * <p>
+     *  返回此票证有效期的开始时间。
+     * 
+     * 
      * @return the start time for this ticket's validity period
      *         or null if not set.
      */
@@ -476,6 +597,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns the expiration time for this ticket's validity period.
      *
+     * <p>
+     *  返回此故障单的有效期的到期时间。
+     * 
+     * 
      * @return the expiration time for this ticket's validity period.
      */
     public final java.util.Date getEndTime() {
@@ -486,6 +611,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * Returns the latest expiration time for this ticket, including all
      * renewals. This will return a null value for non-renewable tickets.
      *
+     * <p>
+     *  返回此故障单的最近到期时间,包括所有续订。这将为不可再生票券返回一个空值。
+     * 
+     * 
      * @return the latest expiration time for this ticket.
      */
     public final java.util.Date getRenewTill() {
@@ -495,6 +624,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns a list of addresses from where the ticket can be used.
      *
+     * <p>
+     *  返回可以使用故障单的地址列表。
+     * 
+     * 
      * @return ths list of addresses or null, if the field was not
      * provided.
      */
@@ -505,6 +638,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns an ASN.1 encoding of the entire ticket.
      *
+     * <p>
+     *  返回整个票证的ASN.1编码。
+     * 
+     * 
      * @return an ASN.1 encoding of the entire ticket.
      */
     public final byte[] getEncoded() {
@@ -530,6 +667,12 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * threads that might access this and try to renew it at the same
      * time.
      *
+     * <p>
+     * 延长此票的有效期。如果刷新操作成功,则票证将包含新的会话密钥。如果故障单不可更新或最近允许的更新时间已过,则刷新操作将失败。 KDC返回的任何其他错误也将导致此方法失败。
+     * 
+     *  注意：此方法不与此对象的访问器方法同步。因此,呼叫者需要知道可能访问此并尝试在同一时间更新它的多个线程。
+     * 
+     * 
      * @throws RefreshFailedException if the ticket is not renewable, or
      * the latest allowable renew time has passed, or the KDC returns some
      * error.
@@ -583,6 +726,9 @@ public class KerberosTicket implements Destroyable, Refreshable,
 
         /*
          * In case multiple threads try to refresh it at the same time.
+         * <p>
+         *  如果多个线程尝试同时刷新它。
+         * 
          */
         synchronized (this) {
             try {
@@ -609,6 +755,9 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Destroys the ticket and destroys any sensitive information stored in
      * it.
+     * <p>
+     *  销毁票据并销毁其中存储的任何敏感信息。
+     * 
      */
     public void destroy() throws DestroyFailedException {
         if (!destroyed) {
@@ -628,6 +777,9 @@ public class KerberosTicket implements Destroyable, Refreshable,
 
     /**
      * Determines if this ticket has been destroyed.
+     * <p>
+     *  确定此故障单是否已销毁。
+     * 
      */
     public boolean isDestroyed() {
         return destroyed;
@@ -667,6 +819,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
     /**
      * Returns a hashcode for this KerberosTicket.
      *
+     * <p>
+     *  返回此KerberosTicket的哈希码。
+     * 
+     * 
      * @return a hashCode() for the {@code KerberosTicket}
      * @since 1.6
      */
@@ -707,6 +863,10 @@ public class KerberosTicket implements Destroyable, Refreshable,
      * {@code KerberosTicket} and the two
      * {@code KerberosTicket} instances are equivalent.
      *
+     * <p>
+     *  将指定的对象与此KerberosTicket比较以确保相等。
+     * 如果给定对象也是{@code KerberosTicket}并且两个{@code KerberosTicket}实例是等效的,则返回true。
+     * 
      * @param other the Object to compare to
      * @return true if the specified object is equal to this KerberosTicket,
      * false otherwise. NOTE: Returns false if either of the KerberosTicket

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,26 @@ import javax.xml.XMLConstants;
  *
  * <p><code>QName</code> is immutable.</p>
  *
+ * <p>
+ *  <p> <code> QName </code>代表XML规范中定义的<strong>限定名称</strong>：<a href ="http://www.w3.org/TR/xmlschema-2/ #QName">
+ *  XML模式Part2：数据类型规范</a>,<a href="http://www.w3.org/TR/REC-xml-names/#ns-qualnames"> XML中的命名空间</a >,<a href="http://www.w3.org/XML/xml-names-19990114-errata">
+ *  XML勘误中的命名空间</a>。
+ * </p>。
+ * 
+ *  <p> <code> QName </code>的值包含<strong>命名空间URI </strong>,<strong>本地部分</strong>和<strong>前缀</strong>。
+ * </p>。
+ * 
+ *  <p>前缀包含在<code> QName </code>中,用于在{@link javax.xml.transform.Source XML输入中保留词汇信息<strong> <em>存在时</strong> </资源}。
+ * 前缀是在{@link #equals(Object)QName.equals(Object)}中使用的<strong> <em> NOT </em> </strong>或计算{@link #hashCode()QName.hashCode )}
+ * 。
+ * 平等和散列码是使用<strong> </em> </strong>命名空间URI和本地部分定义的。</p>。
+ * 
+ *  <p>如果未指定,则命名空间URI将设置为{@link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI}。
+ * 如果未指定,则前缀设置为{@link javax.xml.XMLConstants#DEFAULT_NS_PREFIX XMLConstants.DEFAULT_NS_PREFIX}。</p>。
+ * 
+ *  <p> <code> QName </code>是不可变的。</p>
+ * 
+ * 
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  * @version $Revision: 1.8 $, $Date: 2010/03/18 03:06:17 $
  * @see <a href="http://www.w3.org/TR/xmlschema-2/#QName">
@@ -90,18 +111,38 @@ public class QName implements Serializable {
      * <p>This workaround was inspired by classes in the javax.management
      * package, e.g. ObjectName, etc.
      * See CR6267224 for original defect report.</p>
+     * <p>
+     *  <p>流唯一标识符</p>
+     * 
+     * <p>由于历史缺陷,QName被释放时带有多个serialVersionUID值,即使它的序列化是相同的。</p>
+     * 
+     *  <p>要解决此问题,serialVersionUID设置为默认值或兼容性值。要使用兼容性值,请设置系统属性：</p>
+     * 
+     *  <code> com.sun.xml.namespace.QName.useCompatibleSerialVersionUID = 1.0 </code>
+     * 
+     *  <p>此解决方法的灵感来自javax.management软件包中的类,例如ObjectName等,参见CR6267224的原始缺陷报告。</p>
+     * 
      */
     private static final long serialVersionUID;
     /**
      * <p>Default <code>serialVersionUID</code> value.</p>
+     * <p>
+     *  <p>默认<code> serialVersionUID </code>值。</p>
+     * 
      */
     private static final long defaultSerialVersionUID = -9120448754896609940L;
     /**
      * <p>Compatibility <code>serialVersionUID</code> value.</p>
+     * <p>
+     *  <p>兼容性<code> serialVersionUID </code>值。</p>
+     * 
      */
     private static final long compatibleSerialVersionUID = 4418622981026545151L;
     /**
      * <p>Flag to use default or campatible serialVersionUID.</p>
+     * <p>
+     *  <p>标记为使用默认或可持续的serialVersionUID。</p>
+     * 
      */
     private static boolean useDefaultSerialVersionUID = true;
     static {
@@ -130,16 +171,25 @@ public class QName implements Serializable {
 
     /**
      * <p>Namespace URI of this <code>QName</code>.</p>
+     * <p>
+     *  <p>此<code> QName </code>的命名空间URI。</p>
+     * 
      */
     private final String namespaceURI;
 
     /**
      * <p>local part of this <code>QName</code>.</p>
+     * <p>
+     *  <p>此<code> QName </code>的本地部分。</p>
+     * 
      */
     private final String localPart;
 
     /**
      * <p>prefix of this <code>QName</code>.</p>
+     * <p>
+     *  <p>此<code> QName </code>的前缀。</p>
+     * 
      */
     private final String prefix;
 
@@ -174,6 +224,27 @@ public class QName implements Serializable {
      * as specified in <a href="http://www.w3.org/TR/REC-xml-names/">Namespaces
      * in XML</a>.</p>
      *
+     * <p>
+     *  <p> <code> QName </code>构造函数,用于指定命名空间URI和本地部分。</p>
+     * 
+     *  <p>如果命名空间URI为<code> null </code>,则设置为{@link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI}
+     * 。
+     * 此值不表示<a href="http://www.w3.org/TR/REC-xml-names/#ns-qualnames"> XML中的命名空间</a>规范中定义的明确定义的命名空间。
+     * 此操作保留与QName 1.0的兼容行为。
+     * 明确提供{@link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI}值是首选的编码样式。</p>。
+     * 
+     * <p>如果本地部分是<code> null </code>,则会抛出<code> IllegalArgumentException </code>。
+     *  ""的本地部分允许保留与QName 1.0的兼容行为。 </p>。
+     * 
+     *  <p>使用此构造函数时,前缀设置为{@link javax.xml.XMLConstants#DEFAULT_NS_PREFIX XMLConstants.DEFAULT_NS_PREFIX}。
+     * </p>。
+     * 
+     *  <p>名称空间URI未经验证为<a href="http://www.ietf.org/rfc/rfc2396.txt"> URI参考</a>。
+     * 本地部分未验证为<a href ="中指定的<a href="http://www.w3.org/TR/REC-xml-names/#NT-NCName"> NCName </a> http://www
+     * .w3.org/TR/REC-xml-names/"> XML中的命名空间</a>。
+     *  <p>名称空间URI未经验证为<a href="http://www.ietf.org/rfc/rfc2396.txt"> URI参考</a>。</p>。
+     * 
+     * 
      * @param namespaceURI Namespace URI of the <code>QName</code>
      * @param localPart    local part of the <code>QName</code>
      *
@@ -221,6 +292,28 @@ public class QName implements Serializable {
      * as specified in <a href="http://www.w3.org/TR/REC-xml-names/">Namespaces
      * in XML</a>.</p>
      *
+     * <p>
+     *  <p> <code> QName </code>构造函数,用于指定命名空间URI,本地部分和前缀。</p>
+     * 
+     *  <p>如果命名空间URI为<code> null </code>,则设置为{@link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI}
+     * 。
+     * 此值不表示<a href="http://www.w3.org/TR/REC-xml-names/#ns-qualnames"> XML中的命名空间</a>规范中定义的明确定义的命名空间。
+     * 此操作保留与QName 1.0的兼容行为。
+     * 明确提供{@link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI}值是首选的编码样式。</p>。
+     * 
+     *  <p>如果本地部分是<code> null </code>,则会抛出<code> IllegalArgumentException </code>。
+     *  ""的本地部分允许保留与QName 1.0的兼容行为。 </p>。
+     * 
+     * <p>如果前缀是<code> null </code>,则会抛出<code> IllegalArgumentException </code>。
+     * 使用{@link javax.xml.XMLConstants#DEFAULT_NS_PREFIX XMLConstants.DEFAULT_NS_PREFIX}显式指示不存在前缀或前缀不相关。
+     * </p>。
+     * 
+     *  <p>名称空间URI未经验证为<a href="http://www.ietf.org/rfc/rfc2396.txt"> URI参考</a>。
+     * 本地部分和前缀不会验证为<a href中指定的<a href="http://www.w3.org/TR/REC-xml-names/#NT-NCName"> NCName </a> ="http://
+     * www.w3.org/TR/REC-xml-names/"> XML中的命名空间</a>。
+     *  <p>名称空间URI未经验证为<a href="http://www.ietf.org/rfc/rfc2396.txt"> URI参考</a>。</p>。
+     * 
+     * 
      * @param namespaceURI Namespace URI of the <code>QName</code>
      * @param localPart    local part of the <code>QName</code>
      * @param prefix       prefix of the <code>QName</code>
@@ -282,6 +375,26 @@ public class QName implements Serializable {
      * as specified in <a href="http://www.w3.org/TR/REC-xml-names/">Namespaces
      * in XML</a>.</p>
      *
+     * <p>
+     *  <p> <code> QName </code>构造函数指定本地部分。</p>
+     * 
+     *  <p>如果本地部分是<code> null </code>,则会抛出<code> IllegalArgumentException </code>。
+     *  ""的本地部分允许保留与QName 1.0的兼容行为。 </p>。
+     * 
+     *  <p>使用此构造函数时,命名空间URI设置为{@link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI},前缀设置为{@link javax.xml.XMLConstants#DEFAULT_NS_PREFIX XMLConstants.DEFAULT_NS_PREFIX}
+     * 。
+     *  / p>。
+     * 
+     *  <p> <em>在XML上下文中,所有元素和属性名称都存在于命名空间的上下文中。在构建<code> QName </code>期间明确这一点有助于防止难以诊断XML有效性错误。
+     * 首选构造函数{@link #QName(String namespaceURI,String localPart)QName(String namespaceURI,String localPart)}
+     * 和{@link #QName(String namespaceURI,String localPart,String prefix)}。
+     *  <p> <em>在XML上下文中,所有元素和属性名称都存在于命名空间的上下文中。在构建<code> QName </code>期间明确这一点有助于防止难以诊断XML有效性错误。</p> >。
+     * 
+     * <p>本地部分不会验证为<a中指定的<a href="http://www.w3.org/TR/REC-xml-names/#NT-NCName"> NCName </a> href ="http://
+     * www.w3.org/TR/REC-xml-names/"> XML中的命名空间</a>。
+     * </p>。
+     * 
+     * 
      * @param localPart local part of the <code>QName</code>
      *
      * @throws IllegalArgumentException When <code>localPart</code> is
@@ -303,6 +416,10 @@ public class QName implements Serializable {
     /**
      * <p>Get the Namespace URI of this <code>QName</code>.</p>
      *
+     * <p>
+     *  <p>获取此<code> QName </code>的命名空间URI。</p>
+     * 
+     * 
      * @return Namespace URI of this <code>QName</code>
      */
     public String getNamespaceURI() {
@@ -312,6 +429,10 @@ public class QName implements Serializable {
     /**
      * <p>Get the local part of this <code>QName</code>.</p>
      *
+     * <p>
+     *  <p>获取此<code> QName </code>的本地部分。</p>
+     * 
+     * 
      *  @return local part of this <code>QName</code>
      */
     public String getLocalPart() {
@@ -327,6 +448,13 @@ public class QName implements Serializable {
      * prefix in the context of parsing a document but that prefix may
      * be invalid in the context of a different document.</p>
      *
+     * <p>
+     *  <p>获取此<code> QName </code>的前缀。</p>
+     * 
+     *  <p>分配给<code> QName </code>的前缀可能<strong> <em> </em> </strong>在不同的上下文中有效。
+     * 例如,可以在解析文档的上下文中为<code> QName </code>分配前缀,但该前缀在不同文档的上下文中可能是无效的。</p>。
+     * 
+     * 
      *  @return prefix of this <code>QName</code>
      */
     public String getPrefix() {
@@ -350,6 +478,19 @@ public class QName implements Serializable {
      * <p>This method satisfies the general contract of {@link
      * java.lang.Object#equals(Object) Object.equals(Object)}</p>
      *
+     * <p>
+     *  <p>测试此<code> QName </code>是否与另一个<code> Object </code>相同。</p>
+     * 
+     *  <p>如果要测试的<code> Object </code>不是<code> QName </code>或<code> null </code>,则此方法返回<code> false </code> 
+     * 。
+     * </p>。
+     * 
+     *  <p>如果且仅当命名空间URI和本地部分相等时,两个<code> QName </code>被视为相等。
+     * 此方法使用<code> String.equals()</code>来检查命名空间URI和本地部分的相等性。前缀是<strong> </em> </strong>用于确定平等。</p>。
+     * 
+     *  <p>此方法满足{@link java.lang.Object#equals(Object)Object.equals(Object)}的一般合同} </p>
+     * 
+     * 
      * @param objectToTest the <code>Object</code> to test for
      * equality with this <code>QName</code>
      * @return <code>true</code> if the given <code>Object</code> is
@@ -381,6 +522,14 @@ public class QName implements Serializable {
      * <p>This method satisfies the general contract of {@link
      * java.lang.Object#hashCode() Object.hashCode()}.</p>
      *
+     * <p>
+     *  <p>为此<code> QName </code>生成哈希码。</p>
+     * 
+     * <p>使用命名空间URI和<code> QName </code>的本地部分计算哈希码。前缀是<strong> </em> </strong>用于计算哈希码。</p>
+     * 
+     *  <p>此方法满足{@link java.lang.Object#hashCode()Object.hashCode()}的一般合同。</p>
+     * 
+     * 
      * @return hash code for this <code>QName</code> <code>Object</code>
      */
     public final int hashCode() {
@@ -409,6 +558,21 @@ public class QName implements Serializable {
      * <p>This method satisfies the general contract of {@link
      * java.lang.Object#toString() Object.toString()}.</p>
      *
+     * <p>
+     *  此<code> QName </code>的<p> <code> String </code>表示。</p>
+     * 
+     *  <p>将<code> QName </code>表示为<code> String </code>的常见方法是<a href="http://jclark.com/xml/xmlns.htm">定义</a>
+     *  by James Clark。
+     * 虽然这不是<em>标准</em>规范,但它是常用的,例如。
+     *  {@link javax.xml.transform.Transformer#setParameter(String name,Object value)}。
+     * 此实现将<code> QName </code>表示为："{"+ Namespace URI +"}"+本地部分。
+     * 如果命名空间URI <code> .equals(XMLConstants.NULL_NS_URI)</code>,则只返回本地部分。此方法的适当使用是用于调试或记录人类消费。</p>。
+     * 
+     *  <p>请注意,前缀值为<strong> </em> </strong>作为<code> String </code>表示形式的一部分返回。</p>
+     * 
+     *  <p>此方法满足{@link java.lang.Object#toString()Object.toString()}的一般合同。</p>
+     * 
+     * 
      *  @return <code>String</code> representation of this <code>QName</code>
      */
     public String toString() {
@@ -455,6 +619,21 @@ public class QName implements Serializable {
      * as specified in
      * <a href="http://www.w3.org/TR/REC-xml-names/">Namespaces in XML</a>.</p>
      *
+     * <p>
+     *  <p> <code> QName </code>源自解析格式化的<code> String </code>。</p>
+     * 
+     *  <p>如果<code> String </code>是<code> null </code>或不符合{@link #toString()QName.toString()}格式,<code> Illeg
+     * alArgumentException </code >被抛出。
+     * </p>。
+     * 
+     * <p> <em> <code> String </code> <strong>必须</strong>使用{@link #toString()QName.toString()}返回的表单。
+     * </em> </p >。
+     * 
+     *  <p>将<code> QName </code>表示为<code> String </code>的常见方法是<a href="http://jclark.com/xml/xmlns.htm">定义</a>
+     *  by James Clark。
+     * 虽然这不是<em>标准</em>规范,但它是常用的,例如。
+     *  {@link javax.xml.transform.Transformer#setParameter(String name,Object value)}。
+     * 
      * @param qNameAsString <code>String</code> representation
      * of the <code>QName</code>
      *

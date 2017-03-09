@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -258,6 +259,121 @@ import sun.security.action.GetPropertyAction;
  * of chars) and sequences of bytes. </p>
  *
  *
+ * <p>
+ *  在十六位Unicode <a href="../../lang/Character.html#unicode">代码单元</a>序列和字节序列之间的命名映射。
+ * 该类定义了用于创建解码器和编码器以及用于检索与字符集相关联的各种名称的方法。这个类的实例是不可变的。
+ * 
+ *  <p>此类还定义了用于测试是否支持特定字符集的静态方法,用于按名称定位charset实例,以及用于构造包含当前Java虚拟机中可用支持的每个字符集的映射。
+ * 可以通过{@link java.nio.charset.spi.CharsetProvider}类中定义的服务提供程序接口添加对新字符集的支持。
+ * 
+ *  <p>此类中定义的所有方法都可安全地用于多个并发线程。
+ * 
+ *  <a name="names"> </a> <a name="charenc"> </a> <h2>字符集名称</h2>
+ * 
+ *  <p>字符集由以下字符组成的字符串命名：
+ * 
+ * <ul>
+ * 
+ *  <li>大写字母<tt>'A'</tt>至<tt>'Z'</tt>(<tt>'\ u0041'</tt>&nbsp; through&nbsp; <tt>'\ u005a' </tt>),
+ * 
+ *  <li>小写字母<tt>'a'</tt>至<tt>'z'</tt>(<tt>'\ u0061'</tt>&nbsp;通过&lt; tt>'\ u007a' </tt>),
+ * 
+ *  <li>数字<tt>'0'</tt>至<tt>'9'</tt>(<tt>'\ u0030'</tt>&nbsp;通过<tt>'\ u0039' / tt>),
+ * 
+ * <li>短划字符<tt>' - '</tt>(<tt>'\ u002d'</tt>,&nbsp; <small> HYPHEN-MINUS </small>),
+ * 
+ *  <li>加号字符<tt>'+'</tt>(<tt>'\ u002b'</tt>,&nbsp; <small> PLUS SIGN </small>),
+ * 
+ *  <li>句点字符<tt>'。'</tt>(<tt>'\ u002e'</tt>,&nbsp; <small> FULL STOP </small>),
+ * 
+ *  <li>冒号<tt>'：'</tt>(<tt>'\ u003a'</tt>,&nbsp; <small> COLON </small>),以及
+ * 
+ *  <li>下划线字符<tt>'_'</tt>(<tt>'\ u005f'</tt>,&nbsp; <small> LOW&nbsp; LINE </small>)。
+ * 
+ * </ul>
+ * 
+ *  字符集名称必须以字母或数字开头。空字符串不是法定字符集名称。字符集名称不区分大小写;也就是说,比较字符集名称时总是忽略大小写。
+ * 字符集名称通常遵循<a href="http://www.ietf.org/rfc/rfc2278.txt"> <i> RFC 2278：IANA字符集注册程序</i> </a >。
+ * 
+ *  <p>每个字符集都有一个<i>规范名称</i>,也可能有一个或多个<i>别名</i>。规范名称由此类的{@link #name()name}方法返回。按照惯例,规范名称通常为大写。
+ * 字符集的别名由{@link #aliases()aliases}方法返回。
+ * 
+ * <p> <a name="hn">某些字符集具有为与先前版本的Java平台兼容而定义的<i>历史名称</i>。</a>字符集的历史名称是其规范名称或其别名之一。
+ * 历史名称由{@link java.io.InputStreamReader#getEncoding InputStreamReader}和{@link java.io.OutputStreamWriter#getEncoding OutputStreamWriter}
+ * 类的<tt> getEncoding()</tt>方法返回。
+ * <p> <a name="hn">某些字符集具有为与先前版本的Java平台兼容而定义的<i>历史名称</i>。</a>字符集的历史名称是其规范名称或其别名之一。
+ * 
+ *  <p> <a name="iana"> </a>如果<a href="http://www.iana.org/assignments/character-sets"> <i> IANA Charset
+ * 注册表中列出的字符集< / i> </a>由Java平台的实现支持,则其规范名称必须是注册表中列出的名称。
+ * 许多字符集在注册表中被赋予多个名称,在这种情况下,注册表将其中一个名称标识为<i> MIME优选</i>。
+ * 如果字符集有多个注册表名称,则其规范名称必须是MIME首选名称,注册表中的其他名称必须是有效的别名。
+ * 如果支持的字符集未在IANA注册表中列出,则其规范名称必须以字符串<tt>"X  - "</tt>或<tt>"x  - "</tt>开头。
+ * 
+ * <p> IANA字符集注册表会随时间而变化,因此特定字符集的规范名称和别名也可能会随时间而变化。为了确保兼容性,建议不要从字符集中删除别名,如果字符集的规范名称已更改,那么其以前的规范名称将变为别名。
+ * 
+ *  <h2>标准字符集</h2>
+ * 
+ *  <p> <a name="standard">需要每个Java平台的实现来支持以下标准字符集。</a>请参阅发行版文档以了解您的实现,看看是否支持任何其他字符集。
+ * 这些可选字符集的行为在实现之间可能不同。
+ * 
+ * <blockquote> <table width ="80％"summary ="标准字符集说明"> <tr> <th align ="left">字符集</th> <th align ="left">
+ * 描述</th> / tr> <tr> <td valign = top> <tt> US-ASCII </tt> </td> <td> Seven-bit ASCII,aka <tt> ISO646-U
+ * S </tt>块的Unicode字符集</td> </tr> <tr> <td valign = top> <tt> ISO-8859-1&nbsp;&nbsp; </tt> </td> <td> 1,
+ * aka <tt> ISO-LATIN-1 </tt> </td> </tr> <tr> <td valign = top> <tt> UTF-8 </tt> </td> <td>八位UCS转换格式</td>
+ *  </tr> <tr> <td valign = top> <tt> UTF-16BE </tt> </td> <td> 16位UCS转换格式,big-endian字节; order </td> </tr>
+ *  <tr> <td valign = top> <tt> UTF-16LE </tt> </td> <td> 16位UCS转换格式,little-endian字节& / td> </tr> <tr> <td valign = top>
+ *  <tt> UTF-16 </tt> </td> <td>十六位UCS变换格式,字节顺序由可选字节顺序标记</td> </tr> </table> </blockquote>。
+ * 
+ *  <p> <tt> UTF-8 </tt>字符集由<a href="http://www.ietf.org/rfc/rfc2279.txt"> <i> RFC&nbsp; 2279 </i> </a>;
+ * 其所基于的转换格式在ISO 10646-1的修订2中规定,并且还在<a href="http://www.unicode.org/unicode/standard/standard.html">中进行了
+ * 说明<i> Unicode标准</i> </a>。
+ * 
+ * <p> <tt> UTF-16 </tt>字符集由<a href="http://www.ietf.org/rfc/rfc2781.txt"> <i> RFC 2781 </i> </a>;它们所基于的
+ * 转换格式在ISO 10646-1的修订1中规定,并且也在<a href="http://www.unicode.org/unicode/standard/standard.html"> <i> Unic
+ * ode标准</i> </a>。
+ * 
+ *  <p> <tt> UTF-16 </tt>字符集使用十六位数量,因此对字节顺序很敏感。
+ * 在这些编码中,流的字节顺序可以由Unicode字符<tt>'\ uFEFF'</tt>表示的初始字节顺序标记</i>来指示。字节顺序标记处理如下：。
+ * 
+ * <ul>
+ * 
+ *  <li> <p>解码时,<tt> UTF-16BE </tt>和<tt> UTF-16LE </tt>字符集将初始字节顺序标记解释为<small> ZERO-WIDTH NON-BREAKING SP
+ * ACE </small>;当编码时,它们不写入字节顺序标记。
+ *  </p> </li>。
+ * 
+ *  <li> <p>解码时,<tt> UTF-16 </tt>字符集解释输入流开头的字节顺序标记,表示流的字节顺序,但默认为big-endian if没有字节顺序标记;当编码时,它使用big-endian
+ * 字节顺序并写一个big-endian字节顺序标记。
+ *  </p> </li>。
+ * 
+ * </ul>
+ * 
+ *  在任何情况下,出现在输入序列的第一个元素之后的字节顺序标记不被省略,因为相同的代码用于表示<small> ZERO-WIDTH NON-BREAKING SPACE </small>。
+ * 
+ * <p> Java虚拟机的每个实例都有一个默认字符集,它可以是也可以不是标准字符集之一。默认字符集在虚拟机启动期间确定,并且通常取决于底层操作系统正在使用的区域设置和字符集。 </p>
+ * 
+ *  <p> {@link StandardCharsets}类定义了每个标准字符集的常量。
+ * 
+ *  <h2>术语</h2>
+ * 
+ *  <p>此类别的名称取自<a href="http://www.ietf.org/rfc/rfc2278.txt"> <i> RFC 2278 </i> </a中使用的条款>。
+ * 在该文档中,字符集</i>被定义为一个或多个编码字符集和字符编码方案的组合。 (这个定义很混乱;一些其他软件系统将<i> charset </i>定义为<i>编码字符集</i>的同义词)。
+ * 
+ *  <p>编码字符集</i>是一组抽象字符和一组整数之间的映射。 US-ASCII,ISO&nbsp; 8859-1,JIS&nbsp; X&nbsp; 0201和Unicode是编码字符集的示例。
+ * 
+ *  <p>一些标准已将<i>字符集</i>定义为简单的一组抽象字符,而没有相关联的分配的编号。字母表是这种字符集的示例。
+ * 然而,在字符集和编码字符集之间的细微区别在实践中很少使用;前者已经成为后者的简短形式,包括在Java API规范中。
+ * 
+ * </p>字符编码方案</i>是一个或多个编码字符集和一组八位字节(八位字节)序列之间的映射。 UTF-8,UTF-16,ISO 2022和EUC是字符编码方案的示例。
+ * 编码方案通常与特定的编码字符集相关联;例如,UTF-8仅用于编码Unicode。然而,一些方案与多个编码字符集相关联;例如,EUC可以用于编码各种亚洲编码字符集中的字符。
+ * 
+ *  <p>当编码字符集专用于单个字符编码方案时,相应的字符集通常为编码字符集命名;否则字符集通常为编码方案命名,并且可能包含其支持的编码字符集的语言环境。
+ * 因此,<tt> US-ASCII </tt>既是编码字符集的名称,也是对其进行编码的字符集的名称,<tt> EUC-JP </tt> X&nbsp; 0201,JIS&nbsp; X&020; 0208
+ * 和JIS&nbsp; X&02; 0212编码字符集。
+ *  <p>当编码字符集专用于单个字符编码方案时,相应的字符集通常为编码字符集命名;否则字符集通常为编码方案命名,并且可能包含其支持的编码字符集的语言环境。
+ * 
+ *  <p> Java编程语言的本机字符编码是UTF-16。因此,Java平台中的字符集定义了16位UTF-16代码单元(即字符序列)序列和字节序列之间的映射。 </p>
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -290,6 +406,10 @@ public abstract class Charset
     /**
      * Checks that the given string is a legal charset name. </p>
      *
+     * <p>
+     *  检查给定的字符串是否是合法的字符集名称。 </p>
+     * 
+     * 
      * @param  s
      *         A purported charset name
      *
@@ -488,6 +608,10 @@ public abstract class Charset
     /**
      * Tells whether the named charset is supported.
      *
+     * <p>
+     *  指示命名的字符集是否受支持。
+     * 
+     * 
      * @param  charsetName
      *         The name of the requested charset; may be either
      *         a canonical name or an alias
@@ -508,6 +632,10 @@ public abstract class Charset
     /**
      * Returns a charset object for the named charset.
      *
+     * <p>
+     * 返回指定的charset的charset对象。
+     * 
+     * 
      * @param  charsetName
      *         The name of the requested charset; may be either
      *         a canonical name or an alias
@@ -565,6 +693,18 @@ public abstract class Charset
      * by this method are exactly those that can be retrieved via the {@link
      * #forName forName} method.  </p>
      *
+     * <p>
+     *  构造从规范字符集名称到字符集对象的排序映射。
+     * 
+     *  <p>此方法返回的地图将为当前Java虚拟机中可用的每个字符集提供一个条目。如果两个或多个受支持的字符集具有相同的规范名称,则生成的地图将只包含其中一个;它将包含的一个没有指定。 </p>
+     * 
+     *  <p>调用此方法以及随后使用生成的映射可能会导致耗时的磁盘或网络I / O操作。此方法适用于需要枚举所有可用字符集的应用程序,例如允许选择用户字符集。
+     *  {@link #forName forName}方法不使用此方法,而是使用高效的增量查找算法。
+     * 
+     *  <p>如果新的字符集提供程序动态变为可用于当前Java虚拟机,则此方法可能在不同时间返回不同的结果。
+     * 在没有此类更改的情况下,此方法返回的字符集正是可以通过{@link #forName forName}方法检索的字符集。 </p>。
+     * 
+     * 
      * @return An immutable, case-insensitive map from canonical charset names
      *         to charset objects
      */
@@ -597,6 +737,12 @@ public abstract class Charset
      * typically depends upon the locale and charset of the underlying
      * operating system.
      *
+     * <p>
+     *  返回此Java虚拟机的默认字符集。
+     * 
+     *  <p>默认字符集是在虚拟机启动期间确定的,通常取决于底层操作系统的区域设置和字符集。
+     * 
+     * 
      * @return  A charset object for the default charset
      *
      * @since 1.5
@@ -627,6 +773,10 @@ public abstract class Charset
      * Initializes a new charset with the given canonical name and alias
      * set.
      *
+     * <p>
+     *  使用给定的规范名称和别名集来初始化新的字符集。
+     * 
+     * 
      * @param  canonicalName
      *         The canonical name of this charset
      *
@@ -648,6 +798,10 @@ public abstract class Charset
     /**
      * Returns this charset's canonical name.
      *
+     * <p>
+     *  返回此字符集的规范名称。
+     * 
+     * 
      * @return  The canonical name of this charset
      */
     public final String name() {
@@ -657,6 +811,10 @@ public abstract class Charset
     /**
      * Returns a set containing this charset's aliases.
      *
+     * <p>
+     * 返回包含此字符集的别名的集合。
+     * 
+     * 
      * @return  An immutable set of this charset's aliases
      */
     public final Set<String> aliases() {
@@ -677,6 +835,12 @@ public abstract class Charset
      * charset's canonical name.  Concrete subclasses of this class may
      * override this method in order to provide a localized display name. </p>
      *
+     * <p>
+     *  返回默认语言环境的此字符集的人性化名称。
+     * 
+     *  <p>此方法的默认实现仅返回此字符集的规范名称。此类的具体子类可以覆盖此方法,以提供本地化的显示名称。 </p>
+     * 
+     * 
      * @return  The display name of this charset in the default locale
      */
     public String displayName() {
@@ -688,6 +852,10 @@ public abstract class Charset
      * href="http://www.iana.org/assignments/character-sets">IANA Charset
      * Registry</a>.
      *
+     * <p>
+     *  指出此字符集是否已在<a href="http://www.iana.org/assignments/character-sets"> IANA字库集注册表</a>中注册。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this charset is known by its
      *          implementor to be registered with the IANA
      */
@@ -702,6 +870,12 @@ public abstract class Charset
      * charset's canonical name.  Concrete subclasses of this class may
      * override this method in order to provide a localized display name. </p>
      *
+     * <p>
+     *  返回给定语言环境的这个字符集的人类可读的名称。
+     * 
+     *  <p>此方法的默认实现仅返回此字符集的规范名称。此类的具体子类可以覆盖此方法,以提供本地化的显示名称。 </p>
+     * 
+     * 
      * @param  locale
      *         The locale for which the display name is to be retrieved
      *
@@ -733,6 +907,21 @@ public abstract class Charset
      * it is not necessarily the case that the given charset is not contained
      * in this charset.
      *
+     * <p>
+     *  告诉这个字符集是否包含给定的字符集。
+     * 
+     *  <p>如果且仅当<D> </i>中可表示的每个字符,字符集<i> C </i>都包含</i>字符集< i>也可以在C中表示。
+     * 如果这种关系成立,则保证可以在D中编码的每个字符串也可以在C中被编码,而不执行任何替换。
+     * 
+     *  &lt; p&gt; C&lt; i&gt;包含&lt; i&gt; D&lt; i&gt;并不意味着在特定字节序列的&lt; i&gt;中可表示的每个字符都表示在&lt; / i>由相同的字节序列,
+     * 虽然有时是这种情况。
+     * 
+     *  <p>每个字符集都包含自身。
+     * 
+     * <p>此方法计算包含关系的近似值：如果返回<tt> true </tt>,则知道给定的字符集包含在此字符集中;如果它返回<tt> false </tt>,但是,并不一定是给定的字符集不包含在此字符集中的
+     * 情况。
+     * 
+     * 
      * @param   cs
      *          The given charset
      *
@@ -743,6 +932,10 @@ public abstract class Charset
     /**
      * Constructs a new decoder for this charset.
      *
+     * <p>
+     *  为此字符集构造一个新的解码器。
+     * 
+     * 
      * @return  A new decoder for this charset
      */
     public abstract CharsetDecoder newDecoder();
@@ -750,6 +943,10 @@ public abstract class Charset
     /**
      * Constructs a new encoder for this charset.
      *
+     * <p>
+     *  为此字符集构造一个新的编码器。
+     * 
+     * 
      * @return  A new encoder for this charset
      *
      * @throws  UnsupportedOperationException
@@ -768,6 +965,13 @@ public abstract class Charset
      * Implementations of such charsets should override this method to return
      * <tt>false</tt>. </p>
      *
+     * <p>
+     *  告诉这个字符集是否支持编码。
+     * 
+     *  <p>几乎所有的字符集都支持编码。主要例外是特殊用途<i>自动检测</i>字符集,其解码器可以通过检查输入字节序列来确定正在使用几种可能的编码方案中的哪一种。
+     * 这样的字符集不支持编码,因为没有办法确定应该在输出上使用哪个编码。此类字符集的实现应覆盖此方法以返回<tt> false </tt>。 </p>。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this charset supports encoding
      */
     public boolean canEncode() {
@@ -795,6 +999,21 @@ public abstract class Charset
      * to detect such sequences, use the {@link
      * CharsetDecoder#decode(java.nio.ByteBuffer)} method directly.  </p>
      *
+     * <p>
+     *  将此字符集中的字节解码为Unicode字符的便捷方法。
+     * 
+     *  <p>对字符集<tt> cs </tt>的此方法的调用返回与表达式
+     * 
+     * <pre>
+     *  cs.newDecoder().onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.
+     * REPLACE).decode(bb); </pre>。
+     * 
+     *  除了它可能更有效,因为它可以在连续调用之间高速缓存解码器。
+     * 
+     * <p>此方法总是使用此字符集的默认替换字节数组替换格式不正确的输入和不可映射字符序列。
+     * 为了检测这样的序列,直接使用{@link CharsetDecoder#decode(java.nio.ByteBuffer)}方法。 </p>。
+     * 
+     * 
      * @param  bb  The byte buffer to be decoded
      *
      * @return  A char buffer containing the decoded characters
@@ -831,6 +1050,21 @@ public abstract class Charset
      * detect such sequences, use the {@link
      * CharsetEncoder#encode(java.nio.CharBuffer)} method directly.  </p>
      *
+     * <p>
+     *  在此字符集中将Unicode字符编码为字节的便捷方法。
+     * 
+     *  <p>对字符集<tt> cs </tt>的此方法的调用返回与表达式
+     * 
+     * <pre>
+     *  cs.newEncoder().onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.
+     * REPLACE).encode(bb); </pre>。
+     * 
+     *  除了它可能更有效,因为它可以在连续调用之间缓存编码器。
+     * 
+     *  <p>此方法总是使用此字符集的默认替换字符串替换格式不正确的输入和不可映射字符序列。
+     * 为了检测这样的序列,直接使用{@link CharsetEncoder#encode(java.nio.CharBuffer)}方法。 </p>。
+     * 
+     * 
      * @param  cb  The char buffer to be encoded
      *
      * @return  A byte buffer containing the encoded characters
@@ -855,6 +1089,15 @@ public abstract class Charset
      * <pre>
      *     cs.encode(CharBuffer.wrap(s)); </pre>
      *
+     * <p>
+     *  在此字符集中将字符串编码为字节的便捷方法。
+     * 
+     *  <p>对字符集<tt> cs </tt>的此方法的调用返回与表达式
+     * 
+     * <pre>
+     *  cs.encode(CharBuffer.wrap(s)); </pre>
+     * 
+     * 
      * @param  str  The string to be encoded
      *
      * @return  A byte buffer containing the encoded characters
@@ -869,6 +1112,12 @@ public abstract class Charset
      * <p> Charsets are ordered by their canonical names, without regard to
      * case. </p>
      *
+     * <p>
+     *  将此字符集与另一个比较。
+     * 
+     *  <p>字符集按照其规范名称排序,不考虑大小写。 </p>
+     * 
+     * 
      * @param  that
      *         The charset to which this charset is to be compared
      *
@@ -882,6 +1131,10 @@ public abstract class Charset
     /**
      * Computes a hashcode for this charset.
      *
+     * <p>
+     *  计算此字符集的哈希码。
+     * 
+     * 
      * @return  An integer hashcode
      */
     public final int hashCode() {
@@ -894,6 +1147,12 @@ public abstract class Charset
      * <p> Two charsets are equal if, and only if, they have the same canonical
      * names.  A charset is never equal to any other type of object.  </p>
      *
+     * <p>
+     *  告诉这个对象是否等于另一个对象。
+     * 
+     *  <p>两个字符集是相等的,如果,只有,他们有相同的规范名称。字符集从不等于任何其他类型的对象。 </p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this charset is equal to the
      *          given object
      */
@@ -908,6 +1167,8 @@ public abstract class Charset
     /**
      * Returns a string describing this charset.
      *
+     * <p>
+     * 
      * @return  A string describing this charset
      */
     public final String toString() {

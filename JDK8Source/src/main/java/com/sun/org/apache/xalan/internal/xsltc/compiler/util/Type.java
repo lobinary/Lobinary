@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Type.java,v 1.8 2007/03/28 16:51:19 joehw Exp $
+ * <p>
+ *  $ Id：Type.java,v 1.8 2007/03/28 16:51:19 joehw Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -30,6 +43,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.FlowList;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.NodeTest;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -58,6 +73,9 @@ public abstract class Type implements Constants {
     /**
      * Factory method to instantiate object types. Returns a pre-defined
      * instance for "java.lang.Object" and "java.lang.String".
+     * <p>
+     *  实例化对象类型的工厂方法。返回"java.lang.Object"和"java.lang.String"的预定义实例。
+     * 
      */
     public static Type newObjectType(String javaClassName) {
         if (javaClassName == "java.lang.Object") {
@@ -77,6 +95,9 @@ public abstract class Type implements Constants {
    /**
      * Factory method to instantiate object types. Returns a pre-defined
      * instance for java.lang.Object.class and java.lang.String.class.
+     * <p>
+     *  实例化对象类型的工厂方法。返回java.lang.Object.class和java.lang.String.class的预定义实例。
+     * 
      */
     public static Type newObjectType(Class clazz) {
         if (clazz == java.lang.Object.class) {
@@ -92,16 +113,25 @@ public abstract class Type implements Constants {
 
     /**
      * Returns a string representation of this type.
+     * <p>
+     *  返回此类型的字符串表示形式。
+     * 
      */
     public abstract String toString();
 
     /**
      * Returns true if this and other are identical types.
+     * <p>
+     *  如果此和其他是相同类型,则返回true。
+     * 
      */
     public abstract boolean identicalTo(Type other);
 
     /**
      * Returns true if this type is a numeric type. Redefined in NumberType.
+     * <p>
+     *  如果此类型是数字类型,则返回true。在NumberType中重新定义。
+     * 
      */
     public boolean isNumber() {
         return false;
@@ -110,6 +140,9 @@ public abstract class Type implements Constants {
     /**
      * Returns true if this type has no object representaion. Redefined in
      * ResultTreeType.
+     * <p>
+     *  如果此类型没有对象表示,则返回true。在ResultTreeType中重新定义。
+     * 
      */
     public boolean implementedAsMethod() {
         return false;
@@ -118,6 +151,9 @@ public abstract class Type implements Constants {
     /**
      * Returns true if this type is a simple type. Redefined in NumberType,
      * BooleanType and StringType.
+     * <p>
+     *  如果此类型是简单类型,则返回true。在NumberType,BooleanType和StringType中重新定义。
+     * 
      */
     public boolean isSimple() {
         return false;
@@ -129,6 +165,9 @@ public abstract class Type implements Constants {
      * Returns the distance between two types. This measure is used to select
      * overloaded functions/operators. This method is typically redefined by
      * the subclasses.
+     * <p>
+     * 返回两种类型之间的距离。此度量用于选择重载的函数/运算符。此方法通常由子类重新定义。
+     * 
      */
     public int distanceTo(Type type) {
         return type == this ? 0 : Integer.MAX_VALUE;
@@ -136,6 +175,9 @@ public abstract class Type implements Constants {
 
     /**
      * Returns the signature of an internal type's external representation.
+     * <p>
+     *  返回内部类型的外部表示的签名。
+     * 
      */
     public abstract String toSignature();
 
@@ -143,6 +185,9 @@ public abstract class Type implements Constants {
      * Translates an object of this type to an object of type
      * <code>type</code>.
      * Expects an object of the former type and pushes an object of the latter.
+     * <p>
+     *  将此类型的对象转换为类型<code> type </code>的对象。期望前一类型的对象并推动后者的对象。
+     * 
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
                             Type type) {
@@ -156,6 +201,10 @@ public abstract class Type implements Constants {
      * Expects an object of the former type and pushes an object of the latter
      * if not boolean. If type <code>type</code> is boolean then a branchhandle
      * list (to be appended to the false list) is returned.
+     * <p>
+     *  将此类型的对象转换为<code> type </code>类型的对象。期望前一类型的对象,并且如果不是布尔类型,则推送后者的对象。
+     * 如果类型<code> type </code>是boolean,则返回分支句柄列表(要附加到false列表)。
+     * 
      */
     public FlowList translateToDesynthesized(ClassGenerator classGen,
                                              MethodGenerator methodGen,
@@ -175,6 +224,9 @@ public abstract class Type implements Constants {
      * Translates an object of this type to an non-synthesized boolean. It
      * does not push a 0 or a 1 but instead returns branchhandle list to be
      * appended to the false list.
+     * <p>
+     *  将此类型的对象转换为非合成布尔值。它不推动0或1,而是返回分支句柄列表附加到false列表。
+     * 
      */
     public FlowList translateToDesynthesized(ClassGenerator classGen,
                                              MethodGenerator methodGen,
@@ -189,6 +241,9 @@ public abstract class Type implements Constants {
      * Translates an object of this type to the external (Java) type denoted
      * by <code>clazz</code>. This method is used to translate parameters
      * when external functions are called.
+     * <p>
+     *  将此类型的对象转换为由<code> clazz </code>表示的外部(Java)类型。当调用外部函数时,此方法用于翻译参数。
+     * 
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
                             Class clazz) {
@@ -201,6 +256,9 @@ public abstract class Type implements Constants {
      * Translates an external (Java) type denoted by <code>clazz</code> to
      * an object of this type. This method is used to translate return values
      * when external functions are called.
+     * <p>
+     *  将由<code> clazz </code>表示的外部(Java)类型转换为此类型的对象。此方法用于在调用外部函数时翻译返回值。
+     * 
      */
     public void translateFrom(ClassGenerator classGen, MethodGenerator methodGen,
                               Class clazz) {
@@ -211,6 +269,9 @@ public abstract class Type implements Constants {
 
     /**
      * Translates an object of this type to its boxed representation.
+     * <p>
+     *  将此类型的对象转换为其框化表示。
+     * 
      */
     public void translateBox(ClassGenerator classGen,
                              MethodGenerator methodGen) {
@@ -221,6 +282,9 @@ public abstract class Type implements Constants {
 
     /**
      * Translates an object of this type to its unboxed representation.
+     * <p>
+     *  将此类型的对象转换为其未装箱的表示。
+     * 
      */
     public void translateUnBox(ClassGenerator classGen,
                                MethodGenerator methodGen) {
@@ -231,6 +295,8 @@ public abstract class Type implements Constants {
 
     /**
      * Returns the class name of an internal type's external representation.
+     * <p>
+     *  返回内部类型的外部表示的类名。
      */
     public String getClassName() {
         return(EMPTYSTRING);

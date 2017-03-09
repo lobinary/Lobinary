@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ToHTMLStream.java,v 1.2.4.1 2005/09/15 08:15:26 suresh_emailid Exp $
+ * <p>
+ *  $ Id：ToHTMLStream.java,v 1.2.4.1 2005/09/15 08:15:26 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -43,6 +56,13 @@ import org.xml.sax.SAXException;
  * because it is used from another package.
  *
  * @xsl.usage internal
+ * <p>
+ *  此序列化程序需要一系列SAX或SAX类事件,并将其输出写入给定流。
+ * 
+ *  这个类不是公共API,它是公共的,因为它是从另一个包中使用的。
+ * 
+ *  @ xsl.usage internal
+ * 
  */
 public final class ToHTMLStream extends ToStream
 {
@@ -51,12 +71,17 @@ public final class ToHTMLStream extends ToStream
     protected boolean m_inDTD = false;
 
     /** True if the current element is a block element.  (seems like
+    /* <p>
+    /* 
      *  this needs to be a stack. -sb). */
     private boolean m_inBlockElem = false;
 
     /**
      * Map that tells which XML characters should have special treatment, and it
      *  provides character to entity name lookup.
+     * <p>
+     *  指示哪些XML字符应该有特殊处理的地图,并且它提供字符到实体名称查找。
+     * 
      */
     private static final CharInfo m_htmlcharInfo =
 //        new CharInfo(CharInfo.HTML_ENTITIES_RESOURCE);
@@ -518,6 +543,9 @@ public final class ToHTMLStream extends ToStream
 
     /**
      * Dummy element for elements not found.
+     * <p>
+     *  没有找到元素的Dummy元素。
+     * 
      */
     static private final ElemDesc m_dummy = new ElemDesc(0 | ElemDesc.BLOCK);
 
@@ -530,6 +558,10 @@ public final class ToHTMLStream extends ToStream
     /**
      * Tells if the formatter should use special URL escaping.
      *
+     * <p>
+     *  告诉格式器是否应该使用特殊的URL转义。
+     * 
+     * 
      * @param bool True if URLs should be specially escaped with the %xx form.
      */
     public void setSpecialEscapeURLs(boolean bool)
@@ -540,6 +572,10 @@ public final class ToHTMLStream extends ToStream
     /**
      * Tells if the formatter should omit the META tag.
      *
+     * <p>
+     *  指示格式化程序是否应省略META标记。
+     * 
+     * 
      * @param bool True if the META tag should be omitted.
      */
     public void setOmitMetaTag(boolean bool)
@@ -560,6 +596,13 @@ public final class ToHTMLStream extends ToStream
      * of method="html" (it must be method="html" otherwise we
      * shouldn't even have a ToHTMLStream object here!)
      *
+     * <p>
+     * 指定此序列化程序的输出格式。它已经与一个输出格式相关联,它将切换到新的格式。在序列化程序正在序列化文档的过程中,不应调用此方法。
+     * 
+     *  在开始对特定结果树进行序列化之前,可以多次调用此方法。
+     * 原则上所有序列化参数都可以改变,除了method ="html"(它必须是method ="html",否则我们甚至不应该有一个ToHTMLStream对象！)。
+     * 
+     * 
      * @param format The output format or serialzation parameters
      * to use.
      */
@@ -582,6 +625,10 @@ public final class ToHTMLStream extends ToStream
     /**
      * Tells if the formatter should use special URL escaping.
      *
+     * <p>
+     *  告诉格式器是否应该使用特殊的URL转义。
+     * 
+     * 
      * @return True if URLs should be specially escaped with the %xx form.
      */
     private final boolean getSpecialEscapeURLs()
@@ -592,6 +639,10 @@ public final class ToHTMLStream extends ToStream
     /**
      * Tells if the formatter should omit the META tag.
      *
+     * <p>
+     *  指示格式化程序是否应省略META标记。
+     * 
+     * 
      * @return True if the META tag should be omitted.
      */
     private final boolean getOmitMetaTag()
@@ -602,6 +653,10 @@ public final class ToHTMLStream extends ToStream
     /**
      * Get a description of the given element.
      *
+     * <p>
+     *  获取给定元素的描述。
+     * 
+     * 
      * @param name non-null name of element, case insensitive.
      *
      * @return non-null reference to ElemDesc, which may be m_dummy if no
@@ -611,6 +666,9 @@ public final class ToHTMLStream extends ToStream
     {
         /* this method used to return m_dummy  when name was null
          * but now it doesn't check and and requires non-null name.
+         * <p>
+         *  但现在它不检查和和要求非空名称。
+         * 
          */
         Object obj = m_elementFlags.get(name);
         if (null != obj)
@@ -622,11 +680,17 @@ public final class ToHTMLStream extends ToStream
      * A Trie that is just a copy of the "static" one.
      * We need this one to be able to use the faster, but not thread-safe
      * method Trie.get2(name)
+     * <p>
+     *  一个Trie只是一个"静态"的副本。我们需要这个能够使用更快,但不是线程安全的方法Trie.get2(name)
+     * 
      */
     private Trie m_htmlInfo = new Trie(m_elementFlags);
     /**
      * Calls to this method could be replaced with calls to
      * getElemDesc(name), but this one should be faster.
+     * <p>
+     *  对此方法的调用可以替换为对getElemDesc(name)的调用,但是这应该更快。
+     * 
      */
     private ElemDesc getElemDesc2(String name)
     {
@@ -638,6 +702,9 @@ public final class ToHTMLStream extends ToStream
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public ToHTMLStream()
     {
@@ -655,6 +722,10 @@ public final class ToHTMLStream extends ToStream
     /**
      * Receive notification of the beginning of a document.
      *
+     * <p>
+     *  接收文档开头的通知。
+     * 
+     * 
      * @throws org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.
      *
@@ -714,6 +785,10 @@ public final class ToHTMLStream extends ToStream
     /**
      * Receive notification of the end of a document.
      *
+     * <p>
+     *  接收文档结束的通知。
+     * 
+     * 
      * @throws org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.
      *
@@ -744,6 +819,10 @@ public final class ToHTMLStream extends ToStream
      *  Receive notification of the beginning of an element.
      *
      *
+     * <p>
+     *  接收元素开头的通知。
+     * 
+     * 
      *  @param namespaceURI
      *  @param localName
      *  @param name The element type name.
@@ -837,6 +916,9 @@ public final class ToHTMLStream extends ToStream
                 m_elemContext = elemContext.push();
                 /* XSLTC sometimes calls namespaceAfterStartElement()
                  * so we need to remember the name
+                 * <p>
+                 *  所以我们需要记住名字
+                 * 
                  */
                 m_elemContext.m_elementName = name;
                 m_elemContext.m_elementDesc = elemDesc;
@@ -879,6 +961,10 @@ public final class ToHTMLStream extends ToStream
      *  Receive notification of the end of an element.
      *
      *
+     * <p>
+     *  接收元素结束的通知。
+     * 
+     * 
      *  @param namespaceURI
      *  @param localName
      *  @param name The element type name
@@ -1008,6 +1094,10 @@ public final class ToHTMLStream extends ToStream
 
     /**
      * Process an attribute.
+     * <p>
+     *  处理属性。
+     * 
+     * 
      * @param   writer The writer to write the processed output to.
      * @param   name   The name of the attribute.
      * @param   value   The value of the attribute.
@@ -1050,6 +1140,9 @@ public final class ToHTMLStream extends ToStream
 
     /**
      * Tell if a character is an ASCII digit.
+     * <p>
+     *  告诉一个字符是否是ASCII数字。
+     * 
      */
     private boolean isASCIIDigit(char c)
     {
@@ -1061,6 +1154,10 @@ public final class ToHTMLStream extends ToStream
      * Does no checking on the size of the input, since this
      * is only meant to be used locally by writeAttrURI.
      *
+     * <p>
+     *  将整数转换为HH十六进制值。不检查输入的大小,因为这只是意味着在本地使用writeAttrURI。
+     * 
+     * 
      * @param i must be a value less than 255.
      *
      * @return should be a two character string.
@@ -1077,6 +1174,10 @@ public final class ToHTMLStream extends ToStream
 
     /**
     * Dmitri Ilyin: Makes sure if the String is HH encoded sign.
+    * <p>
+    * Dmitri Ilyin：确保字符串是HH编码符号。
+    * 
+    * 
     * @param str must be 2 characters long
     *
     * @return true or false
@@ -1099,6 +1200,10 @@ public final class ToHTMLStream extends ToStream
      * Write the specified <var>string</var> after substituting non ASCII characters,
      * with <CODE>%HH</CODE>, where HH is the hex of the byte value.
      *
+     * <p>
+     *  用<CODE>％HH </CODE>替换非ASCII字符后写入指定的<var> string </var>,其中HH是字节值的十六进制。
+     * 
+     * 
      * @param   string      String to convert to XML format.
      * @param doURLEscaping True if we should try to encode as
      *                      per http://www.ietf.org/rfc/rfc2396.txt.
@@ -1338,6 +1443,10 @@ public final class ToHTMLStream extends ToStream
      * Writes the specified <var>string</var> after substituting <VAR>specials</VAR>,
      * and UTF-16 surrogates for character references <CODE>&amp;#xnn</CODE>.
      *
+     * <p>
+     *  在替换<VAR> specials </VAR>之后写入指定的<var> string </var>,UTF-16替代字符引用<CODE>&amp; #xnn </CODE>。
+     * 
+     * 
      * @param   string      String to convert to XML format.
      * @param   encoding    CURRENTLY NOT IMPLEMENTED.
      *
@@ -1416,6 +1525,9 @@ public final class ToHTMLStream extends ToStream
                     writer.write(ch);  // no escaping in this case
                     }
                     else
+                    /* <p>
+                    /*  else if((ch <m_maxCharacter)&&(m_maxCharacter == 0xFFFF)&&(ch！= 160)){writer.write(ch); //在这种情况下没有转义} else。
+                    /* 
                     */
                     String outputStringForChar = m_charInfo.getOutputStringForChar(ch);
                     if (null != outputStringForChar)
@@ -1476,6 +1588,17 @@ public final class ToHTMLStream extends ToStream
      * ignorableWhitespace() method rather than this one (validating
      * parsers must do so).</p>
      *
+     * <p>
+     *  接收字符数据的通知。
+     * 
+     *  <p>解析器将调用此方法来报告每个字符数据块。
+     *  SAX解析器可以返回单个块中的所有连续字符数据,或者它们可以将其拆分成几个块;然而,任何单个事件中的所有字符必须来自同一外部实体,以便定位器提供有用的信息。</p>。
+     * 
+     *  <p>应用程序不得尝试从指定范围之外的数组中读取数据。</p>
+     * 
+     *  <p>请注意,一些解析器将使用ignorableWhitespace()方法而不是这一个(验证解析器必须这样做)报告空格。</p>
+     * 
+     * 
      * @param chars The characters from the XML document.
      * @param start The start position in the array.
      * @param length The number of characters to read from the array.
@@ -1551,6 +1674,17 @@ public final class ToHTMLStream extends ToStream
      *  ignorableWhitespace() method rather than this one (validating
      *  parsers must do so).</p>
      *
+     * <p>
+     *  接收cdata的通知。
+     * 
+     *  <p>解析器将调用此方法来报告每个字符数据块。
+     *  SAX解析器可以返回单个块中的所有连续字符数据,或者它们可以将其拆分成几个块;然而,任何单个事件中的所有字符必须来自同一外部实体,以便定位器提供有用的信息。</p>。
+     * 
+     * <p>应用程序不得尝试从指定范围之外的数组中读取数据。</p>
+     * 
+     *  <p>请注意,一些解析器将使用ignorableWhitespace()方法而不是这一个(验证解析器必须这样做)报告空格。</p>
+     * 
+     * 
      *  @param ch The characters from the XML document.
      *  @param start The start position in the array.
      *  @param length The number of characters to read from the array.
@@ -1604,6 +1738,10 @@ public final class ToHTMLStream extends ToStream
     /**
      *  Receive notification of a processing instruction.
      *
+     * <p>
+     *  接收处理指令的通知。
+     * 
+     * 
      *  @param target The processing instruction target.
      *  @param data The processing instruction data, or null if
      *         none was supplied.
@@ -1678,6 +1816,10 @@ public final class ToHTMLStream extends ToStream
     /**
      * Receive notivication of a entityReference.
      *
+     * <p>
+     *  接收entityReference的通知。
+     * 
+     * 
      * @param name non-null reference to entity name string.
      *
      * @throws org.xml.sax.SAXException
@@ -1699,6 +1841,8 @@ public final class ToHTMLStream extends ToStream
         }
     }
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#endElement(String)
      */
     public final void endElement(String elemName) throws SAXException
@@ -1711,6 +1855,10 @@ public final class ToHTMLStream extends ToStream
      * collected attributes to the writer. The attributes are not
      * cleared by this method
      *
+     * <p>
+     *  处理属性,这意味着将当前收集的属性写入写入程序。此方法不会清除属性
+     * 
+     * 
      * @param writer the writer to write processed attributes to.
      * @param nAttrs the number of attributes in m_attributes
      * to be processed
@@ -1722,6 +1870,9 @@ public final class ToHTMLStream extends ToStream
     {
             /*
              * process the collected attributes
+             * <p>
+             *  处理收集的属性
+             * 
              */
             for (int i = 0; i < nAttrs; i++)
             {
@@ -1737,6 +1888,10 @@ public final class ToHTMLStream extends ToStream
      * For the enclosing elements starting tag write out out any attributes
      * followed by ">"
      *
+     * <p>
+     *  对于包围元素,起始标签写出任何属性后跟">"
+     * 
+     * 
      *@throws org.xml.sax.SAXException
      */
     protected void closeStartTag() throws SAXException
@@ -1761,6 +1916,9 @@ public final class ToHTMLStream extends ToStream
             /* whether Xalan or XSLTC, we have the prefix mappings now, so
              * lets determine if the current element is specified in the cdata-
              * section-elements list.
+             * <p>
+             *  允许确定是否在cdata-节 - 元素列表中指定当前元素。
+             * 
              */
             if (m_cdataSectionElements != null)
                 m_elemContext.m_isCdataSection = isCdataSection();
@@ -1780,6 +1938,10 @@ public final class ToHTMLStream extends ToStream
      * Initialize the serializer with the specified output stream and output
      * format. Must be called before calling any of the serialize methods.
      *
+     * <p>
+     *  使用指定的输出流和输出格式初始化序列化器。必须在调用任何serialize方法之前调用。
+     * 
+     * 
      * @param output The output stream to use
      * @param format The output format
      * @throws UnsupportedEncodingException The encoding specified   in the
@@ -1804,6 +1966,12 @@ public final class ToHTMLStream extends ToStream
          * if no encoding was specified, the default for the selected
          * output method.
          *
+         * <p>
+         *  指定应将文档序列化的输出流。在序列化程序正在序列化文档的过程中,不应调用此方法。
+         * <p>
+         *  使用输出属性中指定的编码,或者如果未指定编码,则为所选输出方法的默认值。
+         * 
+         * 
          * @param output The output stream
          */
         public void setOutputStream(OutputStream output)
@@ -1830,6 +1998,11 @@ public final class ToHTMLStream extends ToStream
          * startElement() and before and endElement().
          * startPrefixMapping(prefix,uri) would be used before the
          * startElement() call.
+         * <p>
+         *  在使用startElement()和before和endElement()启动元素之后指示前缀/ uri命名空间映射时,将使用此方法。
+         *  startPrefixMapping(prefix,uri)将在startElement()调用之前使用。
+         * 
+         * 
          * @param uri the URI of the namespace
          * @param prefix the prefix associated with the given URI.
          *
@@ -1863,6 +2036,10 @@ public final class ToHTMLStream extends ToStream
 
     /**
      * Report the end of DTD declarations.
+     * <p>
+     *  报告DTD声明的结束。
+     * 
+     * 
      * @throws org.xml.sax.SAXException The application may raise an exception.
      * @see #startDTD
      */
@@ -1871,10 +2048,16 @@ public final class ToHTMLStream extends ToStream
         m_inDTD = false;
         /* for ToHTMLStream the DOCTYPE is entirely output in the
          * startDocumentInternal() method, so don't do anything here
+         * <p>
+         *  startDocumentInternal()方法,所以不要在这里做任何事情
+         * 
          */
     }
     /**
      * This method does nothing.
+     * <p>
+     *  此方法不执行任何操作。
+     * 
      */
     public void attributeDecl(
         String eName,
@@ -1889,6 +2072,9 @@ public final class ToHTMLStream extends ToStream
 
     /**
      * This method does nothing.
+     * <p>
+     * 此方法不执行任何操作。
+     * 
      */
     public void elementDecl(String name, String model) throws SAXException
     {
@@ -1896,6 +2082,9 @@ public final class ToHTMLStream extends ToStream
     }
     /**
      * This method does nothing.
+     * <p>
+     *  此方法不执行任何操作。
+     * 
      */
     public void internalEntityDecl(String name, String value)
         throws SAXException
@@ -1904,6 +2093,9 @@ public final class ToHTMLStream extends ToStream
     }
     /**
      * This method does nothing.
+     * <p>
+     *  此方法不执行任何操作。
+     * 
      */
     public void externalEntityDecl(
         String name,
@@ -1919,6 +2111,10 @@ public final class ToHTMLStream extends ToStream
      * The caller has guaranted that this attribute is unique, which means that it
      * not been seen before and will not be seen again.
      *
+     * <p>
+     *  此方法用于向当前打开的元素添加属性。调用者保证此属性是唯一的,这意味着它之前没有被看到,并且不会再被看到。
+     * 
+     * 
      * @param name the qualified name of the attribute
      * @param value the value of the attribute which can contain only
      * ASCII printable characters characters in the range 32 to 127 inclusive.
@@ -2015,6 +2211,14 @@ public final class ToHTMLStream extends ToStream
          * It exists to cut the serializers dependancy on that package.
          *
          * @xsl.usage internal
+         * <p>
+         *  用于7位ASCII文本的数字搜索trie该API是java.util.Hashtable的子集。键必须是7位ASCII字符串。该值可以是任何Java对象。
+         * 可以从其关键字中获取存储在trie中的对象,但搜索是区分大小写或对密钥中的字符不区分大小写,并且灵敏度或不敏感性的选择是在创建Trie时,在任何对象被放入之前进行的。
+         * 
+         *  这个类是com.sun.org.apache.xml.internal.utils中的一个副本。它存在于减少序列化程序对该包的依赖。
+         * 
+         *  @ xsl.usage internal
+         * 
          */
 
         /** Size of the m_nextChar array.  */
@@ -2031,6 +2235,9 @@ public final class ToHTMLStream extends ToStream
 
         /**
          * Construct the trie that has a case insensitive search.
+         * <p>
+         *  构造具有不区分大小写搜索的特里结构。
+         * 
          */
         public Trie()
         {
@@ -2040,6 +2247,10 @@ public final class ToHTMLStream extends ToStream
 
         /**
          * Construct the trie given the desired case sensitivity with the key.
+         * <p>
+         *  使用键为给定所需的大小写敏感性构建特里结构。
+         * 
+         * 
          * @param lowerCaseOnly true if the search keys are to be loser case only,
          * not case insensitive.
          */
@@ -2052,6 +2263,10 @@ public final class ToHTMLStream extends ToStream
         /**
          * Put an object into the trie for lookup.
          *
+         * <p>
+         *  将一个对象放入trie中进行查找。
+         * 
+         * 
          * @param key must be a 7-bit ASCII string
          * @param value any java object.
          *
@@ -2116,6 +2331,10 @@ public final class ToHTMLStream extends ToStream
         /**
          * Get an object that matches the key.
          *
+         * <p>
+         *  获取与该键匹配的对象。
+         * 
+         * 
          * @param key must be a 7-bit ASCII string
          *
          * @return The object that matches the key, or null.
@@ -2127,6 +2346,9 @@ public final class ToHTMLStream extends ToStream
 
             /* If the name is too long, we won't find it, this also keeps us
              * from overflowing m_charBuffer
+             * <p>
+             *  从溢出m_charBuffer
+             * 
              */
             if (m_charBuffer.length < len)
                 return null;
@@ -2199,12 +2421,18 @@ public final class ToHTMLStream extends ToStream
         /**
          * The node representation for the trie.
          * @xsl.usage internal
+         * <p>
+         *  trie的节点表示。 @ xsl.usage internal
+         * 
          */
         private class Node
         {
 
             /**
              * Constructor, creates a Node[ALPHA_SIZE].
+             * <p>
+             *  构造函数,创建一个节点[ALPHA_SIZE]。
+             * 
              */
             Node()
             {
@@ -2224,6 +2452,10 @@ public final class ToHTMLStream extends ToStream
          * lookup, and it is assumed that the table is fully populated and
          * not changing anymore.
          *
+         * <p>
+         *  从另一个Trie构造trie。现有的Trie和这个新的Trie共享相同的表用于查找,并且假定该表被完全填充并且不再改变。
+         * 
+         * 
          * @param existingTrie the Trie that this one is a copy of.
          */
         public Trie(Trie existingTrie)
@@ -2241,6 +2473,10 @@ public final class ToHTMLStream extends ToStream
          * Get an object that matches the key.
          * This method is faster than get(), but is not thread-safe.
          *
+         * <p>
+         *  获取与该键匹配的对象。这个方法比get()快,但是不是线程安全的。
+         * 
+         * 
          * @param key must be a 7-bit ASCII string
          *
          * @return The object that matches the key, or null.
@@ -2252,6 +2488,9 @@ public final class ToHTMLStream extends ToStream
 
             /* If the name is too long, we won't find it, this also keeps us
              * from overflowing m_charBuffer
+             * <p>
+             * 从溢出m_charBuffer
+             * 
              */
             if (m_charBuffer.length < len)
                 return null;
@@ -2287,6 +2526,10 @@ public final class ToHTMLStream extends ToStream
                          * method is not thread-safe, but it is faster because
                          * converting to a char[] and looping over elements of
                          * the array is faster than a String's charAt(i).
+                         * <p>
+                         *  它修改m_charBuffer的内容。如果多个线程使用这个Trie,他们都将使用这个相同的数组(不好)。
+                         * 所以这个方法不是线程安全的,但是它更快,因为转换为char []并且循环遍历数组的元素比String的charAt(i)更快。
+                         * 
                          */
                         key.getChars(0, len, m_charBuffer, 0);
 
@@ -2311,6 +2554,7 @@ public final class ToHTMLStream extends ToStream
 
         /**
          * Get the length of the longest key used in the table.
+         * <p>
          */
         public int getLongestKeyLength()
         {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp.validation;
@@ -62,6 +72,10 @@ import org.xml.sax.SAXException;
 /**
  * <p>A validator helper for <code>DOMSource</code>s.</p>
  *
+ * <p>
+ *  <p> <code> DOMSource </code>的验证工具助手。</p>
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  * @version $Id: DOMValidatorHelper.java,v 1.9 2010-11-01 04:40:08 joehw Exp $
  */
@@ -165,6 +179,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
 
     /*
      * ValidatorHelper methods
+     * <p>
+     *  ValidatorHelper方法
+     * 
      */
 
     public void validate(Source source, Result result)
@@ -215,6 +232,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
 
     /*
      * EntityState methods
+     * <p>
+     *  EntityState方法
+     * 
      */
 
     public boolean isEntityDeclared(String name) {
@@ -233,6 +253,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
 
     /*
      * Other methods
+     * <p>
+     *  其他方法
+     * 
      */
 
     /** Traverse the DOM and fire events to the schema validator. */
@@ -306,6 +329,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
                 /**
                  * The validator does nothing with processing instructions so bypass it.
                  * Send the ProcessingInstruction node directly to the result builder.
+                 * <p>
+                 *  验证器不处理指令,所以绕过它。将ProcessingInstruction节点直接发送到结果构建器。
+                 * 
                  */
                 if (fDOMValidatorHandler != null) {
                     fDOMValidatorHandler.processingInstruction((ProcessingInstruction) node);
@@ -315,6 +341,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
                 /**
                  * The validator does nothing with comments so bypass it.
                  * Send the Comment node directly to the result builder.
+                 * <p>
+                 *  验证器对注释没有任何作用,因此绕过它。将"注释"节点直接发送到结果生成器。
+                 * 
                  */
                 if (fDOMValidatorHandler != null) {
                     fDOMValidatorHandler.comment((Comment) node);
@@ -323,6 +352,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
             case Node.DOCUMENT_TYPE_NODE:
                 /**
                  * Send the DocumentType node directly to the result builder.
+                 * <p>
+                 *  将DocumentType节点直接发送到结果构建器。
+                 * 
                  */
                 if (fDOMValidatorHandler != null) {
                     fDOMValidatorHandler.doctypeDecl((DocumentType) node);
@@ -349,6 +381,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
      * Extracts NamedNodeMap of entities. We need this to validate
      * elements and attributes of type xs:ENTITY, xs:ENTITIES or
      * types dervied from them.
+     * <p>
+     *  提取实体的NamedNodeMap。我们需要这个来验证类型xs：ENTITY,xs：ENTITIES或从它们衍生的类型的元素和属性。
+     * 
      */
     private void setupEntityMap(Document doc) {
         if (doc != null) {
@@ -363,6 +398,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
 
     /**
      * Sets up handler for <code>DOMResult</code>.
+     * <p>
+     *  为<code> DOMResult </code>设置处理程序。
+     * 
      */
     private void setupDOMResultHandler(DOMSource source, DOMResult result) throws SAXException {
         // If there's no DOMResult, unset the validator handler
@@ -476,6 +514,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
 
     /**
      * NamespaceContext for the DOMSource, includes context for ancestor nodes.
+     * <p>
+     *  DOMSource的NamespaceContext包括祖先节点的上下文。
+     * 
      */
     final class DOMNamespaceContext implements NamespaceContext {
 
@@ -487,6 +528,9 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
          * Namespace binding information. This array is composed of a
          * series of tuples containing the namespace binding information:
          * &lt;prefix, uri&gt;.
+         * <p>
+         * 命名空间绑定信息。此数组由一系列包含命名空间绑定信息的元组组成：&lt; prefix,uri&gt ;.
+         * 
          */
         protected String[] fNamespace = new String[16 * 2];
 
@@ -496,6 +540,8 @@ final class DOMValidatorHelper implements ValidatorHelper, EntityState {
         /**
          * Flag indicating whether the namespace context
          * has been from the root node's ancestors.
+         * <p>
+         *  表示命名空间上下文是否来自根节点的祖先的标志。
          */
         protected boolean fDOMContextBuilt = false;
 

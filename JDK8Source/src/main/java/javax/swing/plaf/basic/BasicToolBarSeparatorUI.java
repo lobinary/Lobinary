@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,10 @@ import javax.swing.plaf.basic.BasicSeparatorUI;
  * is a "combined" view/controller.
  * <p>
  *
+ * <p>
+ *  ToolBarSeparatorUI的基本L&amp; F实现。这个实现是一个"组合"视图/控制器。
+ * <p>
+ * 
  * @author Jeff Shapiro
  */
 

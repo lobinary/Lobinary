@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,25 @@ import sun.awt.image.ImagingLib;
  * <p>
  * This class allows the Source to be the same as the Destination.
  *
+ * <p>
+ *  此类实现从源到目标的查找操作。 LookupTable对象可以包含单个数组或多个数组,但受下面的限制。
+ * <p>
+ *  对于栅格,查找在波段上运行。查找阵列的数量可以是一个,在这种情况下,相同的阵列应用于所有频带,或者它必须等于源光栅频带的数量。
+ * <p>
+ *  对于BufferedImages,查找操作的颜色和alpha组件。查找阵列的数量可以是一个,在这种情况下,相同的阵列应用于所有颜色(但不是α)分量。
+ * 否则,查找数组的数量可以等于源颜色分量的数量,在这种情况下,不执行对alpha分量(如果存在)的查找。
+ * 如果这两种情况都不适用,则查找数组的数量必须等于源颜色分量加上alpha分量的数量,在这种情况下,对所有颜色和alpha分量执行查找。这允许多频带BufferedImages的非均匀重新缩放。
+ * <p>
+ * 具有预乘的alpha数据的BufferedImage源将以与非预乘的图像相同的方式进行处理以用于查找。也就是说,对BufferedImage源的原始数据的每个频带进行查找,而不考虑数据是否被预乘。
+ * 如果需要对目标ColorModel进行颜色转换,则此步骤将考虑源和目标的预乘状态。
+ * <p>
+ *  不能使用带有IndexColorModel的图像。
+ * <p>
+ *  如果在构造函数中指定了RenderingHints对象,则当需要颜色转换时可以使用颜色渲染提示和抖动提示。
+ * <p>
+ *  此类允许Source与Destination相同。
+ * 
+ * 
  * @see LookupTable
  * @see java.awt.RenderingHints#KEY_COLOR_RENDERING
  * @see java.awt.RenderingHints#KEY_DITHERING
@@ -83,6 +103,10 @@ public class LookupOp implements BufferedImageOp, RasterOp {
      * Constructs a <code>LookupOp</code> object given the lookup
      * table and a <code>RenderingHints</code> object, which might
      * be <code>null</code>.
+     * <p>
+     *  构造一个<code> LookupOp </code>对象给定查找表和一个<code> RenderingHints </code>对象,可能是<code> null </code>。
+     * 
+     * 
      * @param lookup the specified <code>LookupTable</code>
      * @param hints the specified <code>RenderingHints</code>,
      *        or <code>null</code>
@@ -95,6 +119,10 @@ public class LookupOp implements BufferedImageOp, RasterOp {
 
     /**
      * Returns the <code>LookupTable</code>.
+     * <p>
+     *  返回<code> LookupTable </code>。
+     * 
+     * 
      * @return the <code>LookupTable</code> of this
      *         <code>LookupOp</code>.
      */
@@ -113,6 +141,14 @@ public class LookupOp implements BufferedImageOp, RasterOp {
      * <code>LookupTable</code> does not meet the restrictions
      * stated in the class comment above, or if the source image
      * has an <code>IndexColorModel</code>.
+     * <p>
+     *  对<code> BufferedImage </code>执行查找操作。如果源图像中的颜色模型与目标图像中的颜色模型不同,则将在目标中转换像素。
+     * 如果目的图像是<code> null </code>,将使用适当的<code> ColorModel </code>创建<code> BufferedImage </code>。
+     * 如果<code> LookupTable </code>中的数组数量不满足上面类注释中所述的限制,或者源图像具有<code> IndexColorModel,则可能会抛出<code> IllegalAr
+     * gumentException </code> </code>。
+     * 如果目的图像是<code> null </code>,将使用适当的<code> ColorModel </code>创建<code> BufferedImage </code>。
+     * 
+     * 
      * @param src the <code>BufferedImage</code> to be filtered
      * @param dst the <code>BufferedImage</code> in which to
      *            store the results of the filter operation
@@ -240,6 +276,14 @@ public class LookupOp implements BufferedImageOp, RasterOp {
      * number of bands or if the number of arrays in the
      * <code>LookupTable</code> does not meet the
      * restrictions stated in the class comment above.
+     * <p>
+     * 在<code> Raster </code>上执行查找操作。
+     * 如果目的地<code> Raster </code>是<code> null </code>,将创建​​一个新的<code> Raster </code>。
+     * 如果源<code> Raster </code>和目标<code> Raster </code>没有相同数量的波段,或者如果数组中的数组数量不足,则可能会抛出<code> IllegalArgument
+     * Exception </code> <code> LookupTable </code>不符合上面类注释中所述的限制。
+     * 如果目的地<code> Raster </code>是<code> null </code>,将创建​​一个新的<code> Raster </code>。
+     * 
+     * 
      * @param src the source <code>Raster</code> to filter
      * @param dst the destination <code>WritableRaster</code> for the
      *            filtered <code>src</code>
@@ -329,6 +373,10 @@ public class LookupOp implements BufferedImageOp, RasterOp {
      * Returns the bounding box of the filtered destination image.  Since
      * this is not a geometric operation, the bounding box does not
      * change.
+     * <p>
+     *  返回过滤的目标图像的边框。由于这不是几何操作,边界框不会改变。
+     * 
+     * 
      * @param src the <code>BufferedImage</code> to be filtered
      * @return the bounds of the filtered definition image.
      */
@@ -340,6 +388,10 @@ public class LookupOp implements BufferedImageOp, RasterOp {
      * Returns the bounding box of the filtered destination Raster.  Since
      * this is not a geometric operation, the bounding box does not
      * change.
+     * <p>
+     *  返回过滤的目标栅格的边界框。由于这不是几何操作,边界框不会改变。
+     * 
+     * 
      * @param src the <code>Raster</code> to be filtered
      * @return the bounds of the filtered definition <code>Raster</code>.
      */
@@ -352,6 +404,10 @@ public class LookupOp implements BufferedImageOp, RasterOp {
      * Creates a zeroed destination image with the correct size and number of
      * bands.  If destCM is <code>null</code>, an appropriate
      * <code>ColorModel</code> will be used.
+     * <p>
+     *  使用正确的大小和带数创建一个调零的目标图像。如果destCM是<code> null </code>,则将使用适当的<code> ColorModel </code>。
+     * 
+     * 
      * @param src       Source image for the filter operation.
      * @param destCM    the destination's <code>ColorModel</code>, which
      *                  can be <code>null</code>.
@@ -434,6 +490,10 @@ public class LookupOp implements BufferedImageOp, RasterOp {
     /**
      * Creates a zeroed-destination <code>Raster</code> with the
      * correct size and number of bands, given this source.
+     * <p>
+     *  给定这个源,创建一个带有正确大小和带数的零目的<code> Raster </code>。
+     * 
+     * 
      * @param src the <code>Raster</code> to be transformed
      * @return the zeroed-destination <code>Raster</code>.
      */
@@ -447,6 +507,11 @@ public class LookupOp implements BufferedImageOp, RasterOp {
      * <code>null</code>, it will be used to hold the return value.
      * Since this is not a geometric operation, the <code>srcPt</code>
      * will equal the <code>dstPt</code>.
+     * <p>
+     *  返回给定源中的点的目标点的位置。如果<code> dstPt </code>不是<code> null </code>,它将用于保存返回值。
+     * 因为这不是几何操作,所以<code> srcPt </code>将等于<code> dstPt </code>。
+     * 
+     * 
      * @param srcPt a <code>Point2D</code> that represents a point
      *        in the source image
      * @param dstPt a <code>Point2D</code>that represents the location
@@ -465,6 +530,8 @@ public class LookupOp implements BufferedImageOp, RasterOp {
 
     /**
      * Returns the rendering hints for this op.
+     * <p>
+     * 
      * @return the <code>RenderingHints</code> object associated
      *         with this op.
      */

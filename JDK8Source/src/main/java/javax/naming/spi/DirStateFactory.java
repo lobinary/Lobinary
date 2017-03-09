@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -73,6 +74,32 @@ import java.util.Hashtable;
   * DirStateFactory may be invoked multiple times, possibly using different
   * parameters.  The implementation is thread-safe.
   *
+  * <p>
+  *  该接口表示用于获得对象的状态和用于绑定的对应属性的工厂。
+  * p>
+  *  JNDI框架允许通过<tt>对象工厂</tt>动态加载对象实现。
+  * <p>
+  *  通过允许<tt> Attributes </tt>实例提供给<tt> getStateToBind()</tt>方法并返回的<tt> DirStateFactory </tt>扩展<tt> State
+  * Factory </tt> 。
+  *  <tt> DirStateFactory </tt>实施旨在由<tt> DirContext </tt>服务提供商使用。
+  * 当调用者使用<tt> DirContext.bind()</tt>绑定对象时,他还可以指定要与对象绑定的一组属性。
+  * 要绑定的对象和属性传递到工厂的<tt> getStateToBind()</tt>方法。如果工厂处理对象和属性,则它返回一对相应的要绑定的对象和属性。如果工厂不处理对象,它必须返回null。
+  * p>
+  * 例如,调用者可以使用一些与打印机相关的属性来绑定打印机对象。
+  *  blockquote> <pre> ctx.rebind("inky",printer,printerAttrs); / pre> </blockquote> <tt> ctx </tt>的LDAP服
+  * 务提供程序使用<tt> DirStateFactory </tt>(通过<tt> DirectoryManager.getStateToBind()</tt>间接使用) tt> printer </tt>
+  * 和<tt> printerAttrs </tt>。
+  * 例如,调用者可以使用一些与打印机相关的属性来绑定打印机对象。 LDAP目录的工厂可能会将<tt>打印机</tt>变为一组属性,并与<tt> printerAttrs </tt>合并。
+  * 然后,服务提供者使用生成的属性创建LDAP条目并更新目录。
+  * 
+  *  <p>由于<tt> DirStateFactory </tt>扩展了<tt> StateFactory </tt>,它有两个<tt> getStateToBind()</tt>方法,其中一个与attr
+  * ibutes不同。
+  *  <tt> DirectoryManager.getStateToBind()</tt>只使用接受attributes参数的形式,而<tt> NamingManager.getStateToBind()
+  * </tt>只使用不接受attributes参数的形式。
+  * 
+  *  <p> DirStateFactory的<tt> getStateToBind()</tt>方法的任一形式都可能被调用多次,可能使用不同的参数。实现是线程安全的。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -120,6 +147,25 @@ public interface DirStateFactory extends StateFactory {
  * likewise owned by the caller, or a reference to the original
  * <tt>inAttrs</tt> parameter.
  *
+ * <p>
+ *  在给定要转换的对象和属性的情况下检索对象的状态。
+ * p>
+ * <tt> DirectoryManager.getStateToBind()</tt>连续加载状态工厂。
+ * 如果工厂实现<tt> DirStateFactory </tt>,<tt> DirectoryManager </tt>调用此方法;否则,它调用<tt> StateFactory.getStateToB
+ * ind()</tt>。
+ * <tt> DirectoryManager.getStateToBind()</tt>连续加载状态工厂。它这样做,直到工厂产生一个非null的答案。
+ * p>
+ *  当工厂抛出异常时,异常将传递给<tt> DirectoryManager.getStateToBind()</tt>的调用者。对可能产生非空答案的其他工厂的搜索被停止。
+ * 一个工厂只应该抛出一个例外,如果它确定它是唯一的工厂,不应该尝试其他工厂。如果此工厂无法使用提供的参数创建对象,则应返回null。
+ * <p>
+ *  可以可选地使用<code> name </code>和<code> nameCtx </code>参数来指定正在创建的对象的名称。
+ * 有关详细信息,请参阅{@link ObjectFactory#getObjectInstance ObjectFactory.getObjectInstance()}中的"名称和上下文参数"的描述。
+ * 如果工厂使用<code> nameCtx </code>,它应该将其使用与同时访问同步,因为上下文实现不能保证是线程安全的。
+ * p>
+ * <tt>名称</tt>,<tt> inAttrs </tt>和<tt>环境</tt>参数由调用者拥有。实现不会修改这些对象或保留对它们的引用,尽管它可能保留对克隆或副本的引用。
+ * 此方法返回的对象由调用者拥有。实现将不会随后修改它。它将包含同样由调用者拥有的一个新<tt> Attributes </tt>对象,或者是对原始<tt> inAttrs </tt>参数的引用。
+ * 
+ * 
  * @param obj A possibly null object whose state is to be retrieved.
  * @param name The name of this object relative to <code>nameCtx</code>,
  *              or null if no name is specified.
@@ -148,22 +194,35 @@ public interface DirStateFactory extends StateFactory {
         /**
          * An object/attributes pair for returning the result of
          * DirStateFactory.getStateToBind().
+         * <p>
+         *  用于返回DirStateFactory.getStateToBind()的结果的对象/属性对。
+         * 
          */
     public static class Result {
         /**
          * The possibly null object to be bound.
+         * <p>
+         *  要绑定的可能为null的对象。
+         * 
          */
         private Object obj;
 
 
         /**
          * The possibly null attributes to be bound.
+         * <p>
+         *  要绑定的可能为null的属性。
+         * 
          */
         private Attributes attrs;
 
         /**
           * Constructs an instance of Result.
           *
+          * <p>
+          *  构造Result的实例。
+          * 
+          * 
           * @param obj The possibly null object to be bound.
           * @param outAttrs The possibly null attributes to be bound.
           */
@@ -174,12 +233,19 @@ public interface DirStateFactory extends StateFactory {
 
         /**
          * Retrieves the object to be bound.
+         * <p>
+         *  检索要绑定的对象。
+         * 
+         * 
          * @return The possibly null object to be bound.
          */
         public Object getObject() { return obj; };
 
         /**
          * Retrieves the attributes to be bound.
+         * <p>
+         *  检索要绑定的属性。
+         * 
          * @return The possibly null attributes to be bound.
          */
         public Attributes getAttributes() { return attrs; };

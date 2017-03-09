@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ import com.sun.jmx.snmp.tasks.TaskServer;
  * a thread pool.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  这个类通过线程池实现一个{@link com.sun.jmx.snmp.tasks.TaskServer}。
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
+ * 
  **/
 public class ThreadService implements TaskServer {
 
@@ -60,6 +66,12 @@ public class ThreadService implements TaskServer {
      * {@link com.sun.jmx.snmp.tasks.Task#cancel() task.cancel()} will be called.
      * This implementation of TaskServer uses a thread pool to execute
      * the submitted tasks.
+     * <p>
+     *  提交要执行的任务。
+     * 提交任务后,将确保{@link com.sun.jmx.snmp.tasks.Task#run()task.run()}或{@link com.sun.jmx.snmp.tasks.Task #cancel()task.cancel()}
+     * 将被调用。
+     *  提交要执行的任务。这个TaskServer的实现使用线程池来执行提交的任务。
+     * 
      * @param task The task to be executed.
      * @exception IllegalArgumentException if the submitted task is null.
      **/
@@ -71,6 +83,9 @@ public class ThreadService implements TaskServer {
      * Submit a task to be executed.
      * This implementation of TaskServer uses a thread pool to execute
      * the submitted tasks.
+     * <p>
+     * 
+     * 
      * @param task The task to be executed.
      * @exception IllegalArgumentException if the submitted task is null.
      **/

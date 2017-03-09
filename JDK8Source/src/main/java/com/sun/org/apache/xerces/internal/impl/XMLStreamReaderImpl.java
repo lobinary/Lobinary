@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,10 @@ import com.sun.xml.internal.stream.dtd.DTDGrammarUtil;
  * derive most of its functionality. If desired, Application can reuse this instance by calling
  * reset() and setInputSource().
  *
+ * <p>
+ *  导出其大部分功能。如果需要,Application可以通过调用reset()和setInputSource()来重用这个实例。
+ * 
+ * 
  * @author Neeraj Bajaj Sun Microsystems,Inc.
  * @author K.Venugopal Sun Microsystems,Inc.
  * @author Sunitha Reddy Sun Microsystems,Inc.
@@ -120,6 +125,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     private String versionStr = null;
 
     /**
+    /* <p>
+    /* 
      * @param inputStream
      * @param props
      * @throws XMLStreamException
@@ -137,6 +144,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
         return fScanner;
     }
     /**
+    /* <p>
+    /* 
      * @param systemid
      * @param props
      * @throws XMLStreamException
@@ -151,6 +160,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
 
     /**
+    /* <p>
+    /* 
      * @param inputStream
      * @param encoding
      * @param props
@@ -165,6 +176,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @param reader
      * @param props
      * @throws XMLStreamException
@@ -179,6 +192,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @param inputSource
      * @param props
      * @throws XMLStreamException
@@ -190,6 +205,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @param inputSource
      * @throws XMLStreamException
      */
@@ -240,6 +257,9 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     /** This function tells if this instances is available for reuse.
      * One must call reset() and setInputSource() to be able to reuse
      * this instance.
+     * <p>
+     *  必须调用reset()和setInputSource()才能重用此实例。
+     * 
      */
     public boolean canReuse(){
         if(DEBUG){
@@ -253,6 +273,9 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /**
      * Resets this instance so that this instance is ready for reuse.
+     * <p>
+     *  重置此实例,以便此实例准备好重用。
+     * 
      */
     public void reset(){
         fReuse = true;
@@ -274,6 +297,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
 
     /** Frees any resources associated with this Reader. This method does not close the underlying input source.
+    /* <p>
+    /* 
      * @throws XMLStreamException if there are errors freeing associated resources
      */
     public void close() throws XMLStreamException {
@@ -284,6 +309,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
 
     /** Returns the character encoding declared on the xml declaration Returns null if none was declared
+    /* <p>
+    /* 
      * @return the encoding declared in the document or null
      */
     public String getCharacterEncodingScheme() {
@@ -293,6 +320,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public int getColumnNumber() {
@@ -300,6 +329,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }//getColumnNumber
 
     /** Return input encoding if known or null if unknown.
+    /* <p>
+    /* 
      * @return the encoding of this instance or null
      */
     public String getEncoding() {
@@ -307,6 +338,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }//getEncoding
 
     /** Returns the current value of the parse event as a string, this returns the string value of a CHARACTERS event, returns the value of a COMMENT, the replacement value for an ENTITY_REFERENCE, the string value of a CDATA section, the string value for a SPACE event, or the String value of the internal subset of the DTD. If an ENTITY_REFERENCE has been resolved, any character data will be reported as CHARACTERS events.
+    /* <p>
+    /* 
      * @return the current text or null
      */
     public int getEventType() {
@@ -314,6 +347,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }//getEventType
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public int getLineNumber() {
@@ -333,6 +368,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }//getLocalName()
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public String getNamespaceURI() {
@@ -344,6 +381,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }//getNamespaceURI
 
     /** Get the data section of a processing instruction
+    /* <p>
+    /* 
      * @return the data or null
      */
 
@@ -357,6 +396,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
 
     /** Get the target of a processing instruction
+    /* <p>
+    /* 
      * @return the target or null
      */
     public String getPITarget() {
@@ -370,6 +411,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
 
     /**
+    /* <p>
+    /* 
     * @return the prefix of the current event, or null if the event does
     * not have a prefix. For START_ELEMENT and END_ELEMENT, return
     * XMLConstants.DEFAULT_NS_PREFIX when no prefix is available.
@@ -385,6 +428,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public char[] getTextCharacters() {
@@ -400,6 +445,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public int getTextLength() {
@@ -416,6 +463,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
    }
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public int getTextStart() {
@@ -430,6 +479,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public String getValue() {
@@ -457,6 +508,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public boolean hasAttributes() {
@@ -473,6 +526,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }//hasName()
 
     /**
+    /* <p>
+    /* 
      * @throws XMLStreamException
      * @return
      */
@@ -485,6 +540,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public boolean hasValue() {
@@ -499,6 +556,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public boolean isEndElement() {
@@ -506,6 +565,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public boolean isStandalone() {
@@ -513,6 +574,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @return
      */
     public boolean isStartElement() {
@@ -523,6 +586,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      *  Returns true if the cursor points to a character data event that consists of all whitespace
      *  Application calling this method needs to cache the value and avoid calling this method again
      *  for the same event.
+     * <p>
+     *  如果光标指向由所有空格组成的字符数据事件,则返回true应用程序调用此方法需要缓存该值,并避免为同一事件再次调用此方法。
+     * 
+     * 
      * @return
      */
     public boolean isWhiteSpace() {
@@ -543,6 +610,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
 
     /**
+    /* <p>
+    /* 
      * @throws XMLStreamException
      * @return
      */
@@ -657,6 +726,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      * this method is only valid on a START_ELEMENT or ATTRIBUTE.  This
      * count excludes namespace definitions.  Attribute indices are
      * zero-based.
+     * <p>
+     *  此方法仅适用于START_ELEMENT或ATTRIBUTE。此计数不包括命名空间定义。属性索引是从零开始的。
+     * 
+     * 
      * @return returns the number of attributes
      * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
      */
@@ -677,6 +750,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /** Returns the localName of the attribute at the provided
      * index
+     * <p>
+     *  指数
+     * 
+     * 
      * @param index the position of the attribute
      * @return the localName of the attribute
      * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
@@ -694,6 +771,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }//getAttributeName
 
     /**
+    /* <p>
+    /* 
      * @param index
      * @return
      */
@@ -708,6 +787,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /** Returns the namespace of the attribute at the provided
      * index
+     * <p>
+     *  指数
+     * 
+     * 
      * @param index the position of the attribute
      * @return the namespace URI (can be null)
      * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
@@ -727,6 +810,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /** Returns the prefix of this attribute at the
      * provided index
+     * <p>
+     *  提供索引
+     * 
+     * 
      * @param index the position of the attribute
      * @return the prefix of the attribute
      * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
@@ -745,6 +832,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /** Returns the qname of the attribute at the provided index
      *
+     * <p>
+     * 
      * @param index the position of the attribute
      * @return the QName of the attribute
      * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
@@ -766,6 +855,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /** Returns the XML type of the attribute at the provided
      * index
+     * <p>
+     *  指数
+     * 
+     * 
      * @param index the position of the attribute
      * @return the XML type of the attribute
      * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
@@ -785,6 +878,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /** Returns the value of the attribute at the
      * index
+     * <p>
+     *  指数
+     * 
+     * 
      * @param index the position of the attribute
      * @return the attribute value
      * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
@@ -803,6 +900,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }//getAttributeValue
 
     /**
+    /* <p>
+    /* 
      * @param namespaceURI
      * @param localName
      * @return
@@ -830,6 +929,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     /** Reads the content of a text-only element. Precondition:
      * the current event is START_ELEMENT. Postcondition:
      * The current event is the corresponding END_ELEMENT.
+     * <p>
+     *  当前活动为START_ELEMENT。后置条件：当前事件是相应的END_ELEMENT。
+     * 
+     * 
      * @throws XMLStreamException if the current event is not a START_ELEMENT or if
      * a non text element is encountered
      */
@@ -870,6 +973,9 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      * location and null for the publicId and systemId.
      * The location information is only valid until next() is
      * called.
+     * <p>
+     *  如果位置未知,处理器应返回Location的实现,返回位置为-1,publicId和systemId返回null。位置信息只有在调用next()之前有效。
+     * 
      */
     public Location getLocation() {
         return new Location() {
@@ -923,6 +1029,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /** Returns a QName for the current START_ELEMENT or END_ELEMENT event
+    /* <p>
+    /* 
      * @return the QName for the current START_ELEMENT or END_ELEMENT event
      */
     public javax.xml.namespace.QName getName() {
@@ -938,6 +1046,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     /** Returns a read only namespace context for the current
      * position.  The context is transient and only valid until
      * a call to next() changes the state of the reader.
+     * <p>
+     *  位置。上下文是瞬时的,只有在调用next()更改读取器的状态时才有效。
+     * 
+     * 
      * @return return a namespace context
      */
     public NamespaceContext getNamespaceContext() {
@@ -949,6 +1061,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      * an END_ELEMENT the count is of the namespaces that are about to go
      * out of scope.  This is the equivalent of the information reported
      * by SAX callback for an end element event.
+     * <p>
+     *  此方法仅适用于START_ELEMENT,END_ELEMENT或NAMESPACE。在END_ELEMENT,计数是将要超出范围的命名空间。这相当于由结束元素事件的SAX回调报告的信息。
+     * 
+     * 
      * @return returns the number of namespace declarations on this specific element
      * @throws IllegalStateException if this is not a START_ELEMENT, END_ELEMENT or NAMESPACE
      */
@@ -970,6 +1086,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      * index.  Returns null if this is the default namespace
      * declaration
      *
+     * <p>
+     * 指数。如果这是默认的命名空间声明,则返回null
+     * 
+     * 
      * @param index the position of the namespace declaration
      * @return returns the namespace prefix
      * @throws IllegalStateException if this is not a START_ELEMENT, END_ELEMENT or NAMESPACE
@@ -992,6 +1112,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     /** Returns the uri for the namespace declared at the
      * index.
      *
+     * <p>
+     *  指数。
+     * 
+     * 
      * @param index the position of the namespace declaration
      * @return returns the namespace uri
      * @throws IllegalStateException if this is not a START_ELEMENT, END_ELEMENT or NAMESPACE
@@ -1012,6 +1136,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /** Get the value of a feature/property from the underlying implementation
+    /* <p>
+    /* 
      * @param name The name of the property, may not be null
      * @return The value of the property
      * @throws IllegalArgumentException if name is null
@@ -1034,6 +1160,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      * returns the value of a COMMENT, the replacement value
      * for an ENTITY_REFERENCE,
      * or the String value of the DTD
+     * <p>
+     *  这返回CHARACTERS事件的字符串值,返回COMMENT的值,ENTITY_REFERENCE的替换值或DTD的String值
+     * 
+     * 
      * @return the current text or null
      * @throws java.lang.IllegalStateException if this state is not
      * a valid text state.
@@ -1082,6 +1212,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /** Test if the current event is of the given type and if the namespace and name match the current namespace and name of the current event.
      * If the namespaceURI is null it is not checked for equality, if the localName is null it is not checked for equality.
+     * <p>
+     *  如果namespaceURI为null,则不检查其是否相等,如果localName为null,则不检查其是否相等。
+     * 
+     * 
      * @param type the event type
      * @param namespaceURI the uri of the event, may be null
      * @param localName the localName of the event, may be null
@@ -1125,6 +1259,23 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      * The "targetStart" argument must be greater than or equal to 0 and less than the length of "target",
      * Length must be greater than 0 and "targetStart + length" must be less than or equal to length of "target".
      *
+     * <p>
+     *  启动"sourceStart"的文本将从"targetStart"开始复制到"destination"中。最多可复制"长度"字符。将返回实际复制的字符数。
+     * 
+     *  "sourceStart"参数必须大于或等于0,并小于或等于与事件相关联的字符数。通常,一个请求从"sourceStart"为0开始的文本。如果实际复制的字符数小于"长度",则不再有文本。
+     * 否则,需要进行后续调用,直到检索到所有文本。例如：。
+     * 
+     * <code>
+     *  int length = 1024; char [] myBuffer = new char [length];
+     * 
+     *  for(int sourceStart = 0;; sourceStart + = length){int nCopied = stream.getTextCharacters(sourceStart,myBuffer,0,length);。
+     * 
+     *  if(nCopied <length)break; }}
+     * </code>
+     *  如果基础源中存在任何XML错误,则可能会抛出XMLStreamException。
+     *  "targetStart"参数必须大于或等于0且小于"target"的长度,Length必须大于0,"targetStart + length"必须小于或等于"target"的长度。
+     * 
+     * 
      * @param sourceStart the index of the first character in the source array to copy
      * @param target the destination array
      * @param targetStart the start offset in the target array
@@ -1169,6 +1320,9 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     /** Return true if the current event has text, false otherwise
      * The following events have text:
      * CHARACTERS,DTD ,ENTITY_REFERENCE, COMMENT
+     * <p>
+     * 以下事件具有文本：CHARACTERS,DTD,ENTITY_REFERENCE,COMMENT
+     * 
      */
     public boolean hasText() {
         if(DEBUG) pr("XMLReaderImpl#EVENT TYPE = " + fEventType ) ;
@@ -1200,6 +1354,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
 
     /** Returns a boolean which indicates if this
      * attribute was created by default
+     * <p>
+     *  属性是默认创建的
+     * 
+     * 
      * @param index the position of the attribute
      * @return true if this is a default attribute
      * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
@@ -1217,6 +1375,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /** Returns true if the cursor points to a character data event
+    /* <p>
+    /* 
      * @return true if the cursor points to character data, false otherwise
      */
     public boolean isCharacters() {
@@ -1230,6 +1390,10 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      * be used when processing element-only content because
      * the parser is not able to recognize ignorable whitespace if
      * then DTD is missing or not interpreted.
+     * <p>
+     *  直到到达START_ELEMENT或END_ELEMENT。如果遇到空格字符以外的字符,则抛出异常。当处理纯元素内容时,应使用此方法,因为如果DTD缺失或未解释,解析器将无法识别可忽略的空格。
+     * 
+     * 
      * @return the event type of the element read
      * @throws XMLStreamException if the current event is not white space
      */
@@ -1258,6 +1422,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /** Checks if standalone was set in the document
+    /* <p>
+    /* 
      * @return true if standalone was set in the document, or false otherwise
      */
     public boolean standaloneSet() {
@@ -1267,6 +1433,8 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /* 
      * @param qname
      * @return
      */
@@ -1289,6 +1457,13 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
      *
      * <p><strong>NOTE:</strong> The 'xmlns' prefix must be resolved to following namespace
      * <a href="http://www.w3.org/2000/xmlns/">http://www.w3.org/2000/xmlns/</a>
+     * <p>
+     *  返回的uri取决于处理器的当前状态。
+     * 
+     *  <p> <strong>注意</strong>：<xml>前缀的定义如<a href ="http://www.w3.org/TR/REC-xml-names/#ns-using" > XML中的命名
+     * 空间</a>规范改为"http://www.w3.org/XML/1998/namespace"。
+     * 
+     * 
      * @return the uri bound to the given prefix or null if it is not bound
      * @param prefix The prefix to lookup, may not be null
      * @throws IllegalStateException - if the prefix is null
@@ -1309,6 +1484,11 @@ public class XMLStreamReaderImpl implements javax.xml.stream.XMLStreamReader {
     }
 
     /**
+    /* <p>
+    /*  <p> <strong>注意</strong>：</strong>"xmlns"前缀必须解析为以下名称空间<a href="http://www.w3.org/2000/xmlns/"> http：/
+    /* / www。
+    /*  w3.org/2000/xmlns/ </a>。
+    /* 
      * @return returns the reference to property manager.
      */
     protected PropertyManager getPropertyManager(){

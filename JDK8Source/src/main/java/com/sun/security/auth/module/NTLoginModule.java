@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,15 @@ import com.sun.security.auth.NTNumericCredential;
  * debug messages from the native component of the module
  * will be output to the output stream, System.out.
  *
+ * <p>
+ *  <p>此<code> LoginModule </code>将用户的NT安全信息作为一定数量的<code> Principal </code>来呈现,并将它们与<code> Subject </code>
+ * 关联。
+ * 
+ *  <p>此LoginModule识别调试选项。如果在登录配置中设置为true,则调试消息将输出到输出流System.out。
+ * 
+ *  <p>此LoginModule还识别debugNative选项。如果在登录配置中设置为true,则来自模块的本地组件的调试消息将输出到输出流System.out。
+ * 
+ * 
  * @see javax.security.auth.spi.LoginModule
  */
 @jdk.Exported
@@ -89,6 +99,12 @@ public class NTLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  初始化此<code> LoginModule </code>。
+     * 
+     * <p>
+     * 
+     * 
      * @param subject the <code>Subject</code> to be authenticated. <p>
      *
      * @param callbackHandler a <code>CallbackHandler</code> for communicating
@@ -127,6 +143,12 @@ public class NTLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  导入底层NT系统标识信息。
+     * 
+     * <p>
+     * 
+     * 
      * @return true in all cases since this <code>LoginModule</code>
      *          should not be ignored.
      *
@@ -235,6 +257,16 @@ public class NTLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  <p>如果LoginContext的整体认证成功(相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules成功),则调用此方法。
+     * 
+     *  <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>方法保存的私有状态进行检查),则此方法将某些数量的各种<code> Principal </code>
+     *  <code> Subject </code>位于<code> LoginModuleContext </code>中。
+     * 如果此LoginModule自己的身份验证尝试失败,则此方法将删除最初保存的任何状态。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the commit fails.
      *
      * @return true if this LoginModule's own login and commit
@@ -300,6 +332,15 @@ public class NTLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     * <p>如果LoginContext的整体身份验证失败,则会调用此方法。 (相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules没有成功)。
+     * 
+     *  <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>和<code> commit </code>方法保存的私有状态进行检查),则此方法将清除原来
+     * 保存。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the abort fails.
      *
      * @return false if this LoginModule's own login and/or commit attempts
@@ -342,6 +383,12 @@ public class NTLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  注销用户。
+     * 
+     *  <p>此方法移除<code> NTUserPrincipal </code>,<code> NTDomainPrincipal </code>,<code> NTSidUserPrincipal </code>
+     * ,<code> NTSidDomainPrincipal </code>,<code> NTSidGroupPrincipal </code > s和可能已通过<code> commit </code>
+     * 
      * @exception LoginException if the logout fails.
      *
      * @return true in all cases since this <code>LoginModule</code>

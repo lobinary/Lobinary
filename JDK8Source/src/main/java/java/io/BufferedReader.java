@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,23 @@ import java.util.stream.StreamSupport;
  * <p> Programs that use DataInputStreams for textual input can be localized by
  * replacing each DataInputStream with an appropriate BufferedReader.
  *
+ * <p>
+ *  从字符输入流读取文本,缓冲字符以便提供字符,数组和行的有效读取。
+ * 
+ *  <p>可以指定缓冲区大小,也可以使用默认大小。默认值对于大多数用途都足够大。
+ * 
+ *  通常,由读取器做出的每个读取请求导致对底层字符或字节流进行相应的读取请求。
+ * 因此,建议将BufferedReader包装在read()操作可能很昂贵的任何Reader上,例如FileReaders和InputStreamReaders。例如,。
+ * 
+ * <pre>
+ *  BufferedReader in = new BufferedReader(new FileReader("foo.in"));
+ * </pre>
+ * 
+ *  将缓冲来自指定文件的输入。没有缓冲,每次调用read()或readLine()可能导致从文件读取字节,转换为字符,然后返回,这可能是非常低效的。
+ * 
+ *  <p>使用DataInputStreams进行文本输入的程序可以通过用适当的BufferedReader替换每个DataInputStream进行本地化。
+ * 
+ * 
  * @see FileReader
  * @see InputStreamReader
  * @see java.nio.file.Files#newBufferedReader
@@ -92,6 +110,10 @@ public class BufferedReader extends Reader {
      * Creates a buffering character-input stream that uses an input buffer of
      * the specified size.
      *
+     * <p>
+     *  创建使用指定大小的输入缓冲区的缓冲字符输入流。
+     * 
+     * 
      * @param  in   A Reader
      * @param  sz   Input-buffer size
      *
@@ -110,6 +132,10 @@ public class BufferedReader extends Reader {
      * Creates a buffering character-input stream that uses a default-sized
      * input buffer.
      *
+     * <p>
+     *  创建使用默认大小的输入缓冲区的缓冲字符输入流。
+     * 
+     * 
      * @param  in   A Reader
      */
     public BufferedReader(Reader in) {
@@ -124,6 +150,9 @@ public class BufferedReader extends Reader {
 
     /**
      * Fills the input buffer, taking the mark into account if it is valid.
+     * <p>
+     *  填充输入缓冲区,如果它是有效的,考虑标记。
+     * 
      */
     private void fill() throws IOException {
         int dst;
@@ -169,6 +198,10 @@ public class BufferedReader extends Reader {
     /**
      * Reads a single character.
      *
+     * <p>
+     *  读取单个字符。
+     * 
+     * 
      * @return The character read, as an integer in the range
      *         0 to 65535 (<tt>0x00-0xffff</tt>), or -1 if the
      *         end of the stream has been reached
@@ -198,6 +231,9 @@ public class BufferedReader extends Reader {
     /**
      * Reads characters into a portion of an array, reading from the underlying
      * stream if necessary.
+     * <p>
+     * 将字符读入数组的一部分,如果需要,从底层流读取。
+     * 
      */
     private int read1(char[] cbuf, int off, int len) throws IOException {
         if (nextChar >= nChars) {
@@ -205,6 +241,10 @@ public class BufferedReader extends Reader {
                if there is no mark/reset activity, and if line feeds are not
                being skipped, do not bother to copy the characters into the
                local buffer.  In this way buffered streams will cascade
+            /* <p>
+            /*  如果没有标记/复位活动,并且如果没有跳过换行,则不要将字符复制到本地缓冲区中。这样,缓冲流将级联
+            /* 
+            /* 
                harmlessly. */
             if (len >= cb.length && markedChar <= UNMARKED && !skipLF) {
                 return in.read(cbuf, off, len);
@@ -264,6 +304,27 @@ public class BufferedReader extends Reader {
      * Thus redundant <code>BufferedReader</code>s will not copy data
      * unnecessarily.
      *
+     * <p>
+     *  将字符读入数组的一部分。
+     * 
+     *  <p>此方法实施<code> {@ link Reader} </code的相应<code> {@ link Reader#read(char [],int,int)read} </code> >类。
+     * 作为额外的方便,它尝试通过重复调用底层流的<code> read </code>方法来读取尽可能多的字符。这个迭代的<code> read </code>继续,直到下列条件之一变为true：<ul>。
+     * 
+     *  <li>已读取指定的字符数,
+     * 
+     *  <li>基础流的<code> read </code>方法返回<code> -1 </code>,表示文件结束,或
+     * 
+     *  <li>基本流的<code> ready </code>方法返回<code> false </code>,表示进一步的输入请求将被阻止。
+     * 
+     *  </ul>如果底层流上的第一个<code> read </code>返回<code> -1 </code>以指示文件结束,则此方法返回<code> -1 </code>。
+     * 否则,此方法返回实际读取的字符数。
+     * 
+     *  <p>鼓励这个类的子类,但不是必需的,尝试以同样的方式读取尽可能多的字符。
+     * 
+     * <p>通常,此方法从此流的字符缓冲区中获取字符,必要时从底层流中填充字符。然而,如果缓冲区为空,则标记无效,并且请求的长度至少与缓冲区一样大,则此方法将直接从底层流读取字符到给定数组中。
+     * 因此,冗余的<code> BufferedReader </code>将不会不必要地复制数据。
+     * 
+     * 
      * @param      cbuf  Destination buffer
      * @param      off   Offset at which to start storing characters
      * @param      len   Maximum number of characters to read
@@ -299,6 +360,10 @@ public class BufferedReader extends Reader {
      * of a line feed ('\n'), a carriage return ('\r'), or a carriage return
      * followed immediately by a linefeed.
      *
+     * <p>
+     *  读取一行文本。线被认为是由换行符('\ n'),回车符('\ r')或回车符后面紧跟换行符中的任何一个终止。
+     * 
+     * 
      * @param      ignoreLF  If true, the next '\n' will be skipped
      *
      * @return     A String containing the contents of the line, not including
@@ -377,6 +442,10 @@ public class BufferedReader extends Reader {
      * of a line feed ('\n'), a carriage return ('\r'), or a carriage return
      * followed immediately by a linefeed.
      *
+     * <p>
+     *  读取一行文本。线被认为是由换行符('\ n'),回车符('\ r')或回车符后面紧跟换行符中的任何一个终止。
+     * 
+     * 
      * @return     A String containing the contents of the line, not including
      *             any line-termination characters, or null if the end of the
      *             stream has been reached
@@ -392,6 +461,10 @@ public class BufferedReader extends Reader {
     /**
      * Skips characters.
      *
+     * <p>
+     *  跳过字符。
+     * 
+     * 
      * @param  n  The number of characters to skip
      *
      * @return    The number of characters actually skipped
@@ -437,6 +510,10 @@ public class BufferedReader extends Reader {
      * stream is ready if the buffer is not empty, or if the underlying
      * character stream is ready.
      *
+     * <p>
+     *  告诉这个流是否准备好被读取。如果缓冲区不为空,或者底层字符流准备就绪,则缓冲字符流就绪。
+     * 
+     * 
      * @exception  IOException  If an I/O error occurs
      */
     public boolean ready() throws IOException {
@@ -446,10 +523,16 @@ public class BufferedReader extends Reader {
             /*
              * If newline needs to be skipped and the next char to be read
              * is a newline character, then just skip it right away.
+             * <p>
+             *  如果需要跳过换行符并且要读取的下一个字符是换行符,则立即跳过它。
+             * 
              */
             if (skipLF) {
                 /* Note that in.ready() will return true if and only if the next
                  * read on the stream will not block.
+                 * <p>
+                 *  在流上读取不会阻塞。
+                 * 
                  */
                 if (nextChar >= nChars && in.ready()) {
                     fill();
@@ -466,6 +549,9 @@ public class BufferedReader extends Reader {
 
     /**
      * Tells whether this stream supports the mark() operation, which it does.
+     * <p>
+     *  告诉这个流是否支持它所做的mark()操作。
+     * 
      */
     public boolean markSupported() {
         return true;
@@ -475,6 +561,10 @@ public class BufferedReader extends Reader {
      * Marks the present position in the stream.  Subsequent calls to reset()
      * will attempt to reposition the stream to this point.
      *
+     * <p>
+     *  标记流中的当前位置。后续对reset()的调用将尝试将流重新定位到此点。
+     * 
+     * 
      * @param readAheadLimit   Limit on the number of characters that may be
      *                         read while still preserving the mark. An attempt
      *                         to reset the stream after reading characters
@@ -502,6 +592,10 @@ public class BufferedReader extends Reader {
     /**
      * Resets the stream to the most recent mark.
      *
+     * <p>
+     *  将流重置为最近的标记。
+     * 
+     * 
      * @exception  IOException  If the stream has never been marked,
      *                          or if the mark has been invalidated
      */
@@ -553,6 +647,14 @@ public class BufferedReader extends Reader {
      * that stream that requires reading from the BufferedReader after it is
      * closed, will cause an UncheckedIOException to be thrown.
      *
+     * <p>
+     * 返回一个{@code Stream},其元素是从这个{@code BufferedReader}读取的行。
+     *  {@link Stream}懒惰填充,即只读在<a href="../util/stream/package-summary.html#StreamOps">终端流操作</a>期间发生。
+     * 
+     *  <p>在执行终端流操作期间,不得操作阅读器。否则,终端流操作的结果是未定义的。
+     * 
+     *  <p>在执行终端流操作之后,不能保证读取器将在从其读取下一字符或行的特定位置。
+     * 
      * @return a {@code Stream<String>} providing the lines of text
      *         described by this {@code BufferedReader}
      *

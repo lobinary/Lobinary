@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SimpleAttributeValue.java,v 1.2.4.1 2005/09/05 08:58:46 pvedula Exp $
+ * <p>
+ *  $ Id：SimpleAttributeValue.java,v 1.2.4.1 2005/09/05 08:58:46 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -32,6 +45,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
@@ -41,6 +56,10 @@ final class SimpleAttributeValue extends AttributeValue {
 
     /**
      * Creates a new simple attribute value.
+     * <p>
+     *  创建一个新的简单属性值。
+     * 
+     * 
      * @param value the attribute value.
      */
     public SimpleAttributeValue(String value) {
@@ -49,6 +68,10 @@ final class SimpleAttributeValue extends AttributeValue {
 
     /**
      * Returns this attribute value's type (String).
+     * <p>
+     *  返回此属性值的类型(String)。
+     * 
+     * 
      * @param stable The compiler/parser's symbol table
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
@@ -66,6 +89,9 @@ final class SimpleAttributeValue extends AttributeValue {
     /**
      * Translate this attribute value into JVM bytecodes that pushes the
      * attribute value onto the JVM's stack.
+     * <p>
+     *  将此属性值转换为将属性值推送到JVM堆栈的JVM字节码。
+     * 
      * @param classGen BCEL Java class generator
      * @param methodGen BCEL Java method generator
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -65,6 +75,25 @@ import org.w3c.dom.UserDataHandler;
  *
  * @xerces.internal
  *
+ * <p>
+ *  ParentNode从ChildNode继承,并添加了具有子节点的功能。不是DOM中的每个节点都有孩子,所以只有可以继承这个类并支付价格的节点。
+ * <P>
+ *  ParentNode,就像NodeImpl,也实现了NodeList,所以它可以返回自己以响应getChildNodes()查询。这消除了对单独的ChildNodeList对象的需要。
+ * 注意这是一个实现细节;应用程序应该_never_假定此标识存在。另一方面,子类可能需要重写此,以防名称冲突。
+ * 这是HTML DOM的类HTMLSelectElementImpl和HTMLFormElementImpl的情况。
+ * <P>
+ * 虽然我们直接引用第一个孩子,但最后一个孩子被存储为第一个孩子的前一个兄弟。第一个子节点标记为这样,getNextSibling隐藏这个事实。 <P>注意：并非所有的父节点实际上都需要也是一个子节点。
+ * 在某些时候,我们曾经有过继承自NodeImpl的ParentNode和继承自ChildNode的另一个叫ChildAndParentNode的类。
+ * 但是由于缺乏多重继承,很多代码必须重复,这导致了维护噩梦。同时,只有几个节点(文档,文档碎片,实体和属性)不能是一个孩子,所以内存中的增益不是真的值得。
+ * 唯一的类型是属性,但是我们以另一种特殊方式处理,所以这是不适用的。
+ * <p>
+ *  这个类不直接支持突变事件,但是,当执行突变时它通知文档,以便文档类这样做。
+ * 
+ *  <p> <b>警告</b>：这里的一些代码在AttrImpl中部分重复,请小心保持这两个类同步！
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Joe Kesselman, IBM
  * @author Andy Clark, IBM
@@ -94,6 +123,9 @@ public abstract class ParentNode
     /**
      * No public constructor; only subclasses of ParentNode should be
      * instantiated, and those normally via a Document's factory methods
+     * <p>
+     *  没有公共构造函数;只有ParentNode的子类应该被实例化,并且那些通常通过Document的工厂方法
+     * 
      */
     protected ParentNode(CoreDocumentImpl ownerDocument) {
         super(ownerDocument);
@@ -124,6 +156,15 @@ public abstract class ParentNode
      * NOTE: Clones will always be read/write, even if the node being cloned
      * is read-only, to permit applications using only the DOM API to obtain
      * editable copies of locked portions of the tree.
+     * <p>
+     *  返回给定节点的副本。你可以认为这是一个通用的"复制构造函数"的节点。新返回的对象应该完全独立于源对象的子树,因此在克隆之后的一个更改不会影响另一个。
+     * <p>
+     * 示例：克隆文本节点将复制节点及其包含的文本。
+     * <p>
+     *  示例：克隆具有子项的内容(例如Element或Attr)将_not_克隆这些子项,除非已请求"深层克隆"。 Attr节点的浅克隆将产生相同名称的空Attr。
+     * <p>
+     *  注意：克隆将始终为读/写,即使要克隆的节点为只读,以允许仅使用DOM API的应用程序获得树的锁定部分的可编辑副本。
+     * 
      */
     public Node cloneNode(boolean deep) {
 
@@ -158,6 +199,9 @@ public abstract class ParentNode
      * Find the Document that this Node belongs to (the document in
      * whose context the Node was created). The Node may or may not
      * currently be part of that Document's actual contents.
+     * <p>
+     *  查找此节点所属的文档(在其上下文中创建节点的文档)。节点可能或可能不当前是该文档的实际内容的一部分。
+     * 
      */
     public Document getOwnerDocument() {
         return ownerDocument;
@@ -166,6 +210,9 @@ public abstract class ParentNode
     /**
      * same as above but returns internal type and this one is not overridden
      * by CoreDocumentImpl to return null
+     * <p>
+     *  与上述相同,但返回内部类型,并且这一个不被CoreDocumentImpl覆盖以返回null
+     * 
      */
     CoreDocumentImpl ownerDocument() {
         return ownerDocument;
@@ -174,6 +221,9 @@ public abstract class ParentNode
     /**
      * NON-DOM
      * set the ownerDocument of this node and its children
+     * <p>
+     *  NON-DOM设置此节点及其子节点的ownerDocument
+     * 
      */
     void setOwnerDocument(CoreDocumentImpl doc) {
         if (needsSyncChildren()) {
@@ -184,6 +234,8 @@ public abstract class ParentNode
              child.setOwnerDocument(doc);
         }
         /* setting the owner document of self, after it's children makes the
+        /* <p>
+        /* 
            data of children available to the new document. */
         super.setOwnerDocument(doc);
         ownerDocument = doc;
@@ -192,6 +244,9 @@ public abstract class ParentNode
     /**
      * Test whether this node has any children. Convenience shorthand
      * for (Node.getFirstChild()!=null)
+     * <p>
+     *  测试此节点是否有任何子节点。方便简写(Node.getFirstChild()！= null)
+     * 
      */
     public boolean hasChildNodes() {
         if (needsSyncChildren()) {
@@ -212,6 +267,14 @@ public abstract class ParentNode
      * In this implementation, Nodes implement the NodeList interface and
      * provide their own getChildNodes() support. Other DOMs may solve this
      * differently.
+     * <p>
+     *  获取枚举此节点的所有子节点的NodeList。如果没有,则返回(最初)空的NodeList。
+     * <p>
+     *  NodeList是"live";当添加/删除子节点时,NodeList将立即反映这些更改。
+     * 此外,NodeList引用实际节点,因此通过DOM树进行的那些节点的改变将反映在NodeList中,反之亦然。
+     * <p>
+     *  在这个实现中,节点实现NodeList接口并提供他们自己的getChildNodes()支持。其他DOM可以不同地解决这个问题。
+     * 
      */
     public NodeList getChildNodes() {
 
@@ -258,6 +321,10 @@ public abstract class ParentNode
      * Move one or more node(s) to our list of children. Note that this
      * implicitly removes them from their previous parent.
      *
+     * <p>
+     * 将一个或多个节点移动到我们的子节点列表。请注意,这会隐式地从他们以前的父级删除它们。
+     * 
+     * 
      * @param newChild The Node to be moved to our subtree. As a
      * convenience feature, inserting a DocumentNode will instead insert
      * all its children.
@@ -292,6 +359,9 @@ public abstract class ParentNode
      * to control which mutation events are spawned. This version of the
      * insertBefore operation allows us to do so. It is not intended
      * for use by application programs.
+     * <p>
+     *  以控制产生哪些突变事件。这个版本的insertBefore操作允许我们这样做。它不适用于应用程序。
+     * 
      */
     Node internalInsertBefore(Node newChild, Node refChild, boolean replace)
         throws DOMException {
@@ -470,6 +540,10 @@ public abstract class ParentNode
      * Remove a child from this Node. The removed child's subtree
      * remains intact so it may be re-inserted elsewhere.
      *
+     * <p>
+     *  从此节点删除子项。删除的子树的子树保持原样,因此可以重新插入其他位置。
+     * 
+     * 
      * @return oldChild, in its new state (removed).
      *
      * @throws DOMException(NOT_FOUND_ERR) if oldChild is not a child of
@@ -488,6 +562,9 @@ public abstract class ParentNode
      * to control which mutation events are spawned. This version of the
      * removeChild operation allows us to do so. It is not intended
      * for use by application programs.
+     * <p>
+     *  以控制产生哪些突变事件。这个版本的removeChild操作允许我们这样做。它不适用于应用程序。
+     * 
      */
     Node internalRemoveChild(Node oldChild, boolean replace)
         throws DOMException {
@@ -577,6 +654,10 @@ public abstract class ParentNode
      * parent, if any. Equivalent to inserting newChild before oldChild,
      * then removing oldChild.
      *
+     * <p>
+     *  使newChild占据oldChild曾经存在的位置。请注意,newChild将首先从其上一个父级(如果有)中删除。相当于在oldChild之前插入newChild,然后删除oldChild。
+     * 
+     * 
      * @return oldChild, in its new state (removed).
      *
      * @throws DOMException(HIERARCHY_REQUEST_ERR) if newChild is of a
@@ -616,6 +697,10 @@ public abstract class ParentNode
 
     /*
      * Get Node text content
+     * <p>
+     *  获取节点文本内容
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getTextContent() throws DOMException {
@@ -658,6 +743,10 @@ public abstract class ParentNode
 
     /*
      * Set Node text content
+     * <p>
+     *  设置节点文本内容
+     * 
+     * 
      * @since DOM Level 3
      */
     public void setTextContent(String textContent)
@@ -680,6 +769,10 @@ public abstract class ParentNode
     /**
      * Count the immediate children of this node.  Use to implement
      * NodeList.getLength().
+     * <p>
+     *  计算此节点的直接子节点。用于实现NodeList.getLength()。
+     * 
+     * 
      * @return int
      */
     private int nodeListGetLength() {
@@ -720,6 +813,10 @@ public abstract class ParentNode
 
     /**
      * NodeList method: Count the immediate children of this node
+     * <p>
+     *  NodeList方法：计算此节点的直接子节点
+     * 
+     * 
      * @return int
      */
     public int getLength() {
@@ -729,6 +826,10 @@ public abstract class ParentNode
     /**
      * Return the Nth immediate child of this node, or null if the index is
      * out of bounds.  Use to implement NodeList.item().
+     * <p>
+     *  返回此节点的第N个直接子节点,如果索引超出边界,则返回null。用于实现NodeList.item()。
+     * 
+     * 
      * @param index int
      */
     private Node nodeListItem(int index) {
@@ -793,6 +894,10 @@ public abstract class ParentNode
     /**
      * NodeList method: Return the Nth immediate child of this node, or
      * null if the index is out of bounds.
+     * <p>
+     *  NodeList方法：返回此节点的第N个直接子节点,如果索引超出边界则返回null。
+     * 
+     * 
      * @return org.w3c.dom.Node
      * @param index int
      */
@@ -811,6 +916,13 @@ public abstract class ParentNode
      * have it call this method.  The resulting NodeList instance maybe
      * shared and cached in a transient field, but the cached value must be
      * cleared if the node is cloned.
+     * <p>
+     * 创建一个NodeList来访问由具有名为getLength()或item(int)的方法的子类元素使用的子节点。
+     *  ChildAndParentNode通过实现NodeList本身来优化getChildNodes()。
+     * 然而,如果一个子类Element实现与NodeList方法同名的方法,它们将覆盖这个类中的实际方法。
+     * <p>
+     *  要使用这个方法,子类应该实现getChildNodes()并让它调用这个方法。生成的NodeList实例可以在瞬态字段中共享和缓存,但是如果节点被克隆,则必须清除缓存的值。
+     * 
      */
     protected final NodeList getChildNodesUnoptimized() {
         if (needsSyncChildren()) {
@@ -818,6 +930,8 @@ public abstract class ParentNode
         }
         return new NodeList() {
                 /**
+                /* <p>
+                /* 
                  * @see NodeList.getLength()
                  */
                 public int getLength() {
@@ -825,6 +939,8 @@ public abstract class ParentNode
                 } // getLength():int
 
                 /**
+                /* <p>
+                /* 
                  * @see NodeList.item(int)
                  */
                 public Node item(int index) {
@@ -841,6 +957,9 @@ public abstract class ParentNode
      * Override default behavior to call normalize() on this Node's
      * children. It is up to implementors or Node to override normalize()
      * to take action.
+     * <p>
+     *  覆盖默认行为以在此Node的子节点上调用normalize()。它由实现者或Node来覆盖normalize()来执行操作。
+     * 
      */
     public void normalize() {
         // No need to normalize if already normalized.
@@ -860,6 +979,9 @@ public abstract class ParentNode
     /**
      * DOM Level 3 WD- Experimental.
      * Override inherited behavior from NodeImpl to support deep equal.
+     * <p>
+     *  DOM级别3。覆盖从NodeImpl继承的行为以支持深度相等。
+     * 
      */
     public boolean isEqualNode(Node arg) {
         if (!super.isEqualNode(arg)) {
@@ -890,6 +1012,10 @@ public abstract class ParentNode
     /**
      * Override default behavior so that if deep is true, children are also
      * toggled.
+     * <p>
+     *  覆盖默认行为,以便如果deep为true,孩子也被切换。
+     * 
+     * 
      * @see Node
      * <P>
      * Note: this will not change the state of an EntityReference or its
@@ -923,6 +1049,9 @@ public abstract class ParentNode
     /**
      * Override this method in subclass to hook in efficient
      * internal data structure.
+     * <p>
+     *  在子类中覆盖此方法以挂钩有效的内部数据结构。
+     * 
      */
     protected void synchronizeChildren() {
         // By default just change the flag to avoid calling this method again
@@ -940,6 +1069,13 @@ public abstract class ParentNode
      * <li>The inserted child is is itself unnormalized.
      * </ul>
      *
+     * <p>
+     *  检查插入子节点后此节点的规范化状态。如果插入的子节点导致此节点非规范化,则相应地标记该节点。用于改变归一化状态的条件是：
+     * <ul>
+     *  <li>插入的子节点是文本节点,其相邻兄弟节点之一也是文本节点。 <li>插入的子项本身是未规范化的。
+     * </ul>
+     * 
+     * 
      * @param insertedChild the child node that was inserted into this node
      *
      * @throws NullPointerException if the inserted child is <code>null</code>
@@ -974,6 +1110,12 @@ public abstract class ParentNode
      * <li>The removed child had two adjacent siblings that were text nodes.
      * </ul>
      *
+     * <p>
+     * 检查删除子节点后此节点的规范化。如果删除的子节点导致此节点非规范化,则相应地标记该节点。用于改变归一化状态的条件是：
+     * <ul>
+     *  <li>已移除的子项有两个相邻的兄弟节点,它们是文本节点。
+     * </ul>
+     * 
      * @param previousSibling the previous sibling of the removed child, or
      * <code>null</code>
      */
@@ -1022,6 +1164,8 @@ public abstract class ParentNode
 
     /*
      * a class to store some user data along with its handler
+     * <p>
+     * 
      */
     class UserDataRecord implements Serializable {
         /** Serialization version. */

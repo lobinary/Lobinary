@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import java.beans.PropertyChangeEvent;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JComboBox}.
  *
+ * <p>
+ *  为{@link javax.swing.JComboBox}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.7
  */
@@ -53,6 +58,10 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * part of the "visual" border, and in these cases, you'd like the popup
      * to be adjusted such that it looks as if it were next to the visual border.
      * You may want to use negative insets to get the right look.
+     * <p>
+     *  用于调整弹出窗口的位置和大小。非常有用的情况下,如我们发现在尼姆布斯的边界的一部分用于画的焦点。
+     * 在这种情况下,边框是空白空间,而不是"可视"边框的一部分,在这些情况下,您需要调整弹出窗口,使其看起来像是在视觉边框旁边。你可能想使用负插入来获得正确的外观。
+     * 
      */
     Insets popupInsets;
 
@@ -60,12 +69,18 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * This flag may be set via UIDefaults. By default, it is false, to
      * preserve backwards compatibility. If true, then the combo will
      * "act as a button" when it is not editable.
+     * <p>
+     *  此标志可以通过UIDefaults设置。默认情况下,它为false,以保留向后兼容性。如果为true,那么当组合不可编辑时,它将"作为按钮"。
+     * 
      */
     private boolean buttonWhenNotEditable;
 
     /**
      * A flag to indicate that the combo box and combo box button should
      * remain in the PRESSED state while the combo popup is visible.
+     * <p>
+     *  一个标志,指示组合框和组合框按钮应保持在PRESSED状态,而组合弹出窗口是可见的。
+     * 
      */
     private boolean pressedWhenPopupVisible;
 
@@ -77,11 +92,18 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * will cause the entire combo to go into "rollover" state, and anywhere
      * you press will go into "pressed" state. This also keeps in sync the
      * state of the combo and the arrowButton.
+     * <p>
+     *  当buttonWhenNotEditable为true时,此字段用于在组合框无法编辑时帮助使组合框显示并用作按钮。在这种状态下,您可以单击按钮上的任何位置以使其打开弹出窗口。
+     * 此外,任何地方,你悬停在组合将导致整个组合进入"翻转"状态,任何地方,你按将进入"按"状态。这也保持同步组合和arrowButton的状态。
+     * 
      */
     private ButtonHandler buttonHandler;
 
     /**
      * Handler for repainting combo when editor component gains/looses focus
+     * <p>
+     *  当编辑器组件获得/失去焦点时重新绘制组合的处理程序
+     * 
      */
     private EditorFocusHandler editorFocusHandler;
 
@@ -89,12 +111,19 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * If true, then the cell renderer will be forced to be non-opaque when
      * used for rendering the selected item in the combo box (not in the list),
      * and forced to opaque after rendering the selected value.
+     * <p>
+     * 如果为true,则当用于在组合框(不在列表中)呈现所选项目时,单元格呈现器将被强制为非不透明的,并且在呈现所选择的值之后被强制为不透明。
+     * 
      */
     private boolean forceOpaque = false;
 
     /**
      * Creates a new UI object for the given component.
      *
+     * <p>
+     *  为给定组件创建一个新的UI对象。
+     * 
+     * 
      * @param c component to create UI object for
      * @return the UI object
      */
@@ -108,6 +137,11 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * Overridden to ensure that ButtonHandler is created prior to any of
      * the other installXXX methods, since several of them reference
      * buttonHandler.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  重写以确保ButtonHandler在任何其他installXXX方法之前创建,因为其中几个引用了buttonHandler。
+     * 
      */
     @Override
     public void installUI(JComponent c) {
@@ -153,6 +187,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installListeners() {
@@ -164,6 +201,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void uninstallUI(JComponent c) {
@@ -176,6 +216,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallDefaults() {
@@ -188,6 +231,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallListeners() {
@@ -201,6 +247,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -251,6 +300,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected ComboPopup createPopup() {
@@ -261,6 +313,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected ListCellRenderer createRenderer() {
@@ -269,6 +324,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected ComboBoxEditor createEditor() {
@@ -281,6 +339,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void propertyChange(PropertyChangeEvent e) {
@@ -291,6 +352,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected JButton createArrowButton() {
@@ -311,6 +375,12 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -331,6 +401,10 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -346,6 +420,10 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
     /**
      * Paints the specified component.
      *
+     * <p>
+     *  绘制指定的组件。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -360,6 +438,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -369,6 +450,9 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * Paints the currently selected item.
+     * <p>
+     *  绘制当前选定的项目。
+     * 
      */
     @Override
     public void paintCurrentValue(Graphics g,Rectangle bounds,boolean hasFocus) {
@@ -409,6 +493,8 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
     }
 
     /**
+    /* <p>
+    /* 
      * @return true if this combo box should act as one big button. Typically
      * only happens when buttonWhenNotEditable is true, and comboBox.isEditable
      * is false.
@@ -426,6 +512,12 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * size of the combo box. This is used in the case of the combo not having
      * any data.
      *
+     * <p>
+     *  使用当前渲染器和字体返回组合框的空显示区域的默认大小。
+     * 
+     *  在计算组合框的大小时,将覆盖此方法以使用SynthComboBoxRenderer而不是DefaultListCellRenderer作为默认渲染器。这在组合没有任何数据的情况下使用。
+     * 
+     * 
      * @return the size of an empty display area
      * @see #getDisplaySize
      */
@@ -442,6 +534,12 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * Be aware that SynthFileChooserUIImpl relies on the fact that the default
      * renderer installed on a Synth combo box is a JLabel. If this is changed,
      * then an assert will fail in SynthFileChooserUIImpl
+     * <p>
+     * 从BasicComboBoxRenderer v 1.18。
+     * 
+     *  请注意,SynthFileChooserUIImpl依赖于一个事实,即安装在Synth组合框上的默认渲染器是一个JLabel。
+     * 如果这被改变,那么断言将在SynthFileChooserUIImpl中失败。
+     * 
      */
     private class SynthComboBoxRenderer extends JLabel implements ListCellRenderer<Object>, UIResource {
         public SynthComboBoxRenderer() {
@@ -533,17 +631,28 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
      * the combo box. In this way, the state between the button and combo
      * are in sync. Whenever one is "over" both are. Whenever one is pressed,
      * both are.
+     * <p>
+     *  处理所有的逻辑,当它不可编辑的时候,当shouldActLikeButton()为true时,将组合作为一个按钮。
+     * 这个类是一个特殊的ButtonModel,并在适当的时候安装在arrowButton上。它也作为鼠标监听器和鼠标移动侦听器安装在组合框上。这样,按钮和组合之间的状态是同步的。
+     * 每当一个人"过",两者都是。每当一个人按下,两者都是。
+     * 
      */
     private final class ButtonHandler extends DefaultButtonModel
             implements MouseListener, PopupMenuListener {
         /**
          * Indicates that the mouse is over the combo or the arrow button.
          * This field only has meaning if buttonWhenNotEnabled is true.
+         * <p>
+         *  表示鼠标位于组合框或箭头按钮上方。如果buttonWhenNotEnabled为true,此字段只有意义。
+         * 
          */
         private boolean over;
         /**
          * Indicates that the combo or arrow button has been pressed. This
          * field only has meaning if buttonWhenNotEnabled is true.
+         * <p>
+         *  表示已按下组合键或箭头按钮。如果buttonWhenNotEnabled为true,此字段只有意义。
+         * 
          */
         private boolean pressed;
 
@@ -558,6 +667,11 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
          *
          * <p>Note that this method is called either when a press event
          * occurs on the combo box, or on the arrow button.</p>
+         * <p>
+         *  <p>更新内部"按下"状态。如果shouldActLikeButton()为true,并且此方法调用将更改内部状态,则将重新绘制组合框和按钮。</p>
+         * 
+         *  <p>请注意,当组合框或箭头按钮上发生按下事件时,将调用此方法。</p>
+         * 
          */
         private void updatePressed(boolean p) {
             this.pressed = p && isEnabled();
@@ -573,6 +687,11 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
          *
          * <p>Note that this method is called either when a mouseover/mouseoff event
          * occurs on the combo box, or on the arrow button.</p>
+         * <p>
+         *  <p>更新内部的"覆盖"状态。如果shouldActLikeButton()为true,并且此方法调用将更改内部状态,则将重新绘制组合框和按钮。</p>
+         * 
+         * <p>请注意,当组合框或箭头按钮上发生mouseover / mouseoff事件时,将调用此方法。</p>
+         * 
          */
         private void updateOver(boolean o) {
             boolean old = isRollover();
@@ -594,6 +713,11 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
          * or the arrowButton is pressed, <em>or</em> if the combo popup is
          * visible. This is the case because a combo box looks pressed when
          * the popup is visible, and so should the arrow button.
+         * <p>
+         *  @inheritDoc
+         * 
+         *  如果组合按钮可见,确保isPressed()将返回true,或按下arrowButton,则返回<em> </em>。这是这种情况,因为当弹出窗口可见时,组合框看起来按下,箭头按钮也应该如此。
+         * 
          */
         @Override
         public boolean isPressed() {
@@ -608,6 +732,11 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
          * if shouldActLikeButton is true. Without this method, the arrow
          * button will not look pressed when the popup is open, regardless
          * of the result of isPressed() alone.
+         * <p>
+         *  @inheritDoc
+         * 
+         *  如果shouldActLikeButton为true,确保布防状态与按下状态同步。没有这个方法,当弹出窗口打开时,不管isPressed()的结果如何,箭头按钮看起来不会按下。
+         * 
          */
         @Override
         public boolean isArmed() {
@@ -621,6 +750,11 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
          *
          * Ensures that isRollover() will return true if the combo is
          * rolled over, or the arrowButton is rolled over.
+         * <p>
+         *  @inheritDoc
+         * 
+         *  如果组合滚动或arrowButton翻转,确保isRollover()将返回true。
+         * 
          */
         @Override
         public boolean isRollover() {
@@ -631,6 +765,11 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
          * @inheritDoc
          *
          * Forwards pressed states to the internal "pressed" field
+         * <p>
+         *  @inheritDoc
+         * 
+         *  将按下的状态转到内部"按下"字段
+         * 
          */
         @Override
         public void setPressed(boolean b) {
@@ -642,6 +781,11 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
          * @inheritDoc
          *
          * Forwards rollover states to the internal "over" field
+         * <p>
+         *  @inheritDoc
+         * 
+         *  将翻转状态转换为内部"over"字段
+         * 
          */
         @Override
         public void setRollover(boolean b) {
@@ -689,6 +833,13 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
          *
          * This bug was only noticed when acting as a button, but may be generally
          * present. If so, remove the if() block
+         * <p>
+         *  @inheritDoc
+         * 
+         *  确保在弹出窗口关闭时重新绘制组合框。这避免了一个错误,即单击组合不会导致重绘,因此组合框仍然看起来即使不是。
+         * 
+         *  这个错误只是作为一个按钮时注意到,但可能一般存在。如果是这样,请删除if()块
+         * 
          */
         @Override
         public void popupMenuCanceled(PopupMenuEvent e) {
@@ -705,6 +856,7 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
 
     /**
      * Handler for repainting combo when editor component gains/looses focus
+     * <p>
      */
     private static class EditorFocusHandler implements FocusListener,
             PropertyChangeListener {
@@ -746,6 +898,10 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
         /**
          * Called when the combos editor changes
          *
+         * <p>
+         *  当编辑器组件获得/失去焦点时重新绘制组合的处理程序
+         * 
+         * 
          * @param evt A PropertyChangeEvent object describing the event source and
          *            the property that has changed.
          */

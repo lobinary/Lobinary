@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,12 +29,18 @@ package org.omg.CORBA;
 /** Defines the methods used to read primitive data types from input streams
 * for unmarshaling custom value types.  This interface is used by user
 * written custom unmarshaling code for custom value types.
+* <p>
+*  用于解组自定义值类型。此接口由用户为自定义值类型编写的定制取消编码代码使用。
+* 
+* 
 * @see org.omg.CORBA.DataOutputStream
 * @see org.omg.CORBA.CustomMarshal
 */
 public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 {
     /** Reads an IDL <code>Any</code> value from the input stream.
+    /* <p>
+    /* 
     * @return  the <code>Any</code> read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -42,6 +49,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     org.omg.CORBA.Any read_any ();
 
     /** Reads an IDL boolean value from the input stream.
+    /* <p>
+    /* 
     * @return  the boolean read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -50,6 +59,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     boolean read_boolean ();
 
     /** Reads an IDL character value from the input stream.
+    /* <p>
+    /* 
     * @return  the character read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -58,6 +69,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     char read_char ();
 
     /** Reads an IDL wide character value from the input stream.
+    /* <p>
+    /* 
     * @return  the wide character read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -66,6 +79,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     char read_wchar ();
 
     /** Reads an IDL octet value from the input stream.
+    /* <p>
+    /* 
     * @return  the octet value read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -74,6 +89,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     byte read_octet ();
 
     /** Reads an IDL short from the input stream.
+    /* <p>
+    /* 
     * @return  the short read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -82,6 +99,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     short read_short ();
 
     /** Reads an IDL unsigned short from the input stream.
+    /* <p>
+    /* 
     * @return  the unsigned short read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -90,6 +109,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     short read_ushort ();
 
     /** Reads an IDL long from the input stream.
+    /* <p>
+    /* 
     * @return  the long read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -98,6 +119,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     int read_long ();
 
     /** Reads an IDL unsigned long from the input stream.
+    /* <p>
+    /* 
     * @return  the unsigned long read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -106,6 +129,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     int read_ulong ();
 
     /** Reads an IDL long long from the input stream.
+    /* <p>
+    /* 
     * @return  the long long read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -114,6 +139,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     long read_longlong ();
 
     /** Reads an unsigned IDL long long from the input stream.
+    /* <p>
+    /* 
     * @return  the unsigned long long read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -122,6 +149,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     long read_ulonglong ();
 
     /** Reads an IDL float from the input stream.
+    /* <p>
+    /* 
     * @return  the float read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -130,6 +159,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     float read_float ();
 
     /** Reads an IDL double from the input stream.
+    /* <p>
+    /* 
     * @return  the double read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -139,6 +170,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     // read_longdouble not supported by IDL/Java mapping
 
     /** Reads an IDL string from the input stream.
+    /* <p>
+    /* 
     * @return  the string read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -147,6 +180,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     String read_string ();
 
     /** Reads an IDL wide string from the input stream.
+    /* <p>
+    /* 
     * @return  the wide string read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -155,6 +190,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     String read_wstring ();
 
     /** Reads an IDL CORBA::Object from the input stream.
+    /* <p>
+    /* 
     * @return  the CORBA::Object read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -163,6 +200,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     org.omg.CORBA.Object read_Object ();
 
     /** Reads an IDL Abstract interface from the input stream.
+    /* <p>
+    /* 
     * @return  the Abstract interface read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -171,6 +210,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     java.lang.Object read_Abstract ();
 
     /** Reads an IDL value type from the input stream.
+    /* <p>
+    /* 
     * @return  the value type read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -179,6 +220,8 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
     java.io.Serializable read_Value ();
 
     /** Reads an IDL typecode from the input stream.
+    /* <p>
+    /* 
     * @return  the typecode read.
     * @throws <code>org.omg.CORBA.MARSHAL</code>
     * If an inconsistency is detected, including not having registered
@@ -188,6 +231,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL Anys from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -200,6 +247,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL booleans from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -212,6 +263,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL characters from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -224,6 +279,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL wide characters from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -236,6 +295,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL octets from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -248,6 +311,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL shorts from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -260,6 +327,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL unsigned shorts from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -272,6 +343,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL longs from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -284,6 +359,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL unsigned longs from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -296,6 +375,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL unsigned long longs from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -308,6 +391,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL long longs from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -320,6 +407,10 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL floats from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.
@@ -332,6 +423,9 @@ public interface DataInputStream extends org.omg.CORBA.portable.ValueBase
 
     /** Reads array of IDL doubles from offset for length elements from the
     * input stream.
+    * <p>
+    *  输入流。
+    * 
     * @param seq The out parameter holder for the array to be read.
     * @param offset The index into seq of the first element to read from the
     * input stream.

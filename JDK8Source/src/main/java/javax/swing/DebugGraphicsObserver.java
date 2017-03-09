@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,8 @@ import java.awt.image.*;
 
 /** ImageObserver for DebugGraphics, used for images only.
   *
+  * <p>
+  * 
   * @author Dave Karlton
   */
 class DebugGraphicsObserver implements ImageObserver {

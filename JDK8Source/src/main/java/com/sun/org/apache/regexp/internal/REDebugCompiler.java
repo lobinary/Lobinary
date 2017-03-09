@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.regexp.internal;
@@ -27,12 +37,19 @@ import java.util.Hashtable;
  * A subclass of RECompiler which can dump a regular expression program
  * for debugging purposes.
  *
+ * <p>
+ *  RECompiler的子类,它可以转储正则表达式程序用于调试目的。
+ * 
+ * 
  * @author <a href="mailto:jonl@muppetlabs.com">Jonathan Locke</a>
  */
 public class REDebugCompiler extends RECompiler
 {
     /**
      * Mapping from opcodes to descriptive strings
+     * <p>
+     *  从操作码映射到描述性字符串
+     * 
      */
     static Hashtable hashOpcode = new Hashtable();
     static
@@ -63,6 +80,10 @@ public class REDebugCompiler extends RECompiler
 
     /**
      * Returns a descriptive string for an opcode.
+     * <p>
+     *  返回操作码的描述性字符串。
+     * 
+     * 
      * @param opcode Opcode to convert to a string
      * @return Description of opcode
      */
@@ -81,6 +102,10 @@ public class REDebugCompiler extends RECompiler
 
     /**
      * Return a string describing a (possibly unprintable) character.
+     * <p>
+     *  返回一个描述(可能不可打印)字符的字符串。
+     * 
+     * 
      * @param c Character to convert to a printable representation
      * @return String representation of character
      */
@@ -98,6 +123,10 @@ public class REDebugCompiler extends RECompiler
 
     /**
      * Returns a descriptive string for a node in a regular expression program.
+     * <p>
+     *  返回正则表达式程序中的节点的描述性字符串。
+     * 
+     * 
      * @param node Node to describe
      * @return Description of node
      */
@@ -114,6 +143,10 @@ public class REDebugCompiler extends RECompiler
     /**
      * Inserts a node with a given opcode and opdata at insertAt.  The node relative next
      * pointer is initialized to 0.
+     * <p>
+     *  在insertAt插入具有给定操作码和opdata的节点。节点相对下一指针被初始化为0。
+     * 
+     * 
      * @param opcode Opcode for new node
      * @param opdata Opdata for new node (only the low 16 bits are currently used)
      * @param insertAt Index at which to insert the new node in the program * /
@@ -130,6 +163,10 @@ public class REDebugCompiler extends RECompiler
 
     /**
     * Appends a node to the end of a node chain
+    * <p>
+    *  将节点追加到节点链的末尾
+    * 
+    * 
     * @param node Start of node chain to traverse
     * @param pointTo Node to have the tail of the chain point to * /
     void setNextOfEnd(int node, int pointTo) {
@@ -145,6 +182,9 @@ public class REDebugCompiler extends RECompiler
 
     /**
      * Dumps the current program to a PrintWriter
+     * <p>
+     *  将当前程序转储到PrintWriter
+     * 
      * @param p PrintWriter for program dump output
      */
     public void dumpProgram(PrintWriter p)

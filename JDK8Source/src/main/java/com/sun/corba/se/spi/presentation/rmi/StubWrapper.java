@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,8 @@ import org.omg.CORBA.portable.OutputStream ;
 
 /** Wrapper that can take any stub (object x such that StubAdapter.isStub(x))
  * and treat it as a DynamicStub.
+ * <p>
+ *  并将其视为DynamicStub。
  */
 public class StubWrapper implements DynamicStub
 {

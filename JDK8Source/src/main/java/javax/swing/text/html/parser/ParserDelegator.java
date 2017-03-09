@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,10 @@ import java.security.PrivilegedAction;
  * each time its parse method is invoked. Stores a
  * reference to the dtd.
  *
+ * <p>
+ *  负责在每次调用其parse方法时启动一个新的DocumentParser。存储对dtd的引用。
+ * 
+ * 
  * @author  Sunita Mani
  */
 
@@ -108,6 +113,9 @@ public class ParserDelegator extends HTMLEditorKit.Parser implements Serializabl
      * protection of a doPrivileged call to allow the ParserDelegator
      * to function when used in an applet.
      *
+     * <p>
+     *  获取相对于ParserDelegator类文件的资源。如果在1.2上调用,加载将在doPrivileged调用的保护下发生,以允许ParserDelegator在applet中使用时起作用。
+     * 
      * @param name the name of the resource, relative to the
      *  ParserDelegator class.
      * @returns a stream representing the resource

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -46,6 +47,9 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
   /** register server definition.
 	* This returns the serverId of the server.  A newly created server is
 	* always uninstalled.
+	* <p>
+	*  这将返回服务器的serverId。始终卸载新创建的服务器。
+	* 
 	*/
        case 0:  // PortableActivationIDL/Repository/registerServer
        {
@@ -67,6 +71,7 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
 
 
   /** unregister server definition
+  /* <p>
 	*/
        case 1:  // PortableActivationIDL/Repository/unregisterServer
        {
@@ -83,6 +88,7 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
 
 
   /** get server definition
+  /* <p>
 	*/
        case 2:  // PortableActivationIDL/Repository/getServer
        {
@@ -101,6 +107,7 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
 
 
   /** Return whether the server has been installed
+  /* <p>
 	*/
        case 3:  // PortableActivationIDL/Repository/isInstalled
        {
@@ -120,6 +127,9 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
 
   /** Mark the server as being installed.  Raises ServerAlreadyInstalled
 	* if the server is currently marked as installed.
+	* <p>
+	*  如果服务器当前标记为已安装。
+	* 
 	*/
        case 4:  // PortableActivationIDL/Repository/install
        {
@@ -140,6 +150,9 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
 
   /** Mark the server as being uninstalled.  Raises ServerAlreadyUninstalled
 	* if the server is currently marked as uninstalled.
+	* <p>
+	*  如果服务器当前标记为已卸载。
+	* 
 	*/
        case 5:  // PortableActivationIDL/Repository/uninstall
        {
@@ -159,6 +172,7 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
 
 
   /** list registered servers
+  /* <p>
 	*/
        case 6:  // PortableActivationIDL/Repository/listRegisteredServers
        {
@@ -172,6 +186,9 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
 
   /** Returns list of ALL applicationNames defined in ServerDefs of registered 
 	* servers.
+	* <p>
+	*  服务器。
+	* 
 	*/
        case 7:  // PortableActivationIDL/Repository/getApplicationNames
        {
@@ -184,6 +201,7 @@ public abstract class _RepositoryImplBase extends org.omg.CORBA.portable.ObjectI
 
 
   /** Find the ServerID associated with the given application name.
+  /* <p>
 	*/
        case 8:  // PortableActivationIDL/Repository/getServerID
        {

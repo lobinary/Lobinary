@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  *
@@ -35,6 +36,10 @@ package java.nio.channels;
  * with a selector that was not created by the provider that created the
  * channel.
  *
+ * <p>
+ *  尝试向创建频道的提供商未创建的选择器注册频道时抛出未经检查的异常。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -46,6 +51,8 @@ public class IllegalSelectorException
 
     /**
      * Constructs an instance of this class.
+     * <p>
+     *  构造此类的实例。
      */
     public IllegalSelectorException() { }
 

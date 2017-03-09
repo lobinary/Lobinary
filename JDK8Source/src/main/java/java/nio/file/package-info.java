@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -112,6 +113,31 @@
  * Where the specific error cannot be detected then the more general {@code
  * IOException} is thrown.
  *
+ * <p>
+ *  定义Java虚拟机访问文件,文件属性和文件系统的接口和类。
+ * 
+ *  <p> java.nio.file包定义了访问文件和文件系统的类。用于访问文件和文件系统属性的API在{@link java.nio.file.attribute}包中定义。
+ *  {@link java.nio.file.spi}包由希望扩展平台缺省提供程序的服务提供程序实现者使用,或者用于构建其他提供程序实现。 </p>。
+ * 
+ *  <h3> <a name="links">符号链接</a> </h3> <p>许多操作系统和文件系统支持<em>符号链接</em>。符号链接是用作对另一个文件的引用的特殊文件。
+ * 在大多数情况下,符号链接对于应用程序是透明的,并且符号链接上的操作被自动重定向到链接的<em>目标</em>。例外情况是,当符号链接被删除或重命名/移动时,链接被删除或删除,而不是链接的目标。
+ * 这个包包括对实现提供这些语义的符号链接的支持。文件系统可以支持语义上接近的其他类型,但是对这些其他类型的链接的支持不包括在此包中。 </p>。
+ * 
+ * <h3> <a name="interop">互操作性</a> </h3> <p> {@link java.io.File}类定义了{@link java.io.File#toPath toPath}方
+ * 法,通过转换由{@code java.io.File}对象表示的抽象路径构造一个{@link java.nio.file.Path}。
+ * 生成的{@code Path}可以用于在与{@code File}对象相同的文件上操作。
+ *  {@code Path}规范提供了有关{@code Path}和{@code java.io.File}对象之间的<a href="Path.html#interop">互操作性</a>的详细信息。
+ *  </p>。
+ * 
+ *  <h3>可见性</h3> <p>此包中的类提供的文件和文件系统的视图保证与同一Java虚拟机中其他实例提供的其他视图一致。
+ * 然而,由于由底层操作系统执行的高速缓存和由网络文件系统协议引起的延迟,该视图可能或可能不与其它并发运行的程序所看到的文件系统的视图一致。
+ * 无论这些其他程序的编写语言,以及它们是在同一台机器上运行还是在其他机器上运行,都是如此。任何这种不一致的确切性质是系统依赖性的,因此未指定。 </p>。
+ * 
+ * <h3> <a name="integrity">同步I / O文件完整性</a> </h3> <p> {@link java.nio.file.StandardOpenOption#SYNC SYNC}
+ * 和{@link java.nio .file.StandardOpenOption#DSYNC DSYNC}选项用于打开文件以要求对文件的更新与底层存储设备同步写入时。
+ * 在默认提供程序的情况下,并且文件驻留在本地存储设备上,并且{@link java.nio.channels.SeekableByteChannel seekable}通道连接到使用这些选项之一打开的文件
+ * ,则调用的{@link java.nio.channels.WritableByteChannel#write(java.nio.ByteBuffer)write}方法只有在该调用对文件所做的所有更改都
+ * 
  * @since 1.7
  */
 package java.nio.file;

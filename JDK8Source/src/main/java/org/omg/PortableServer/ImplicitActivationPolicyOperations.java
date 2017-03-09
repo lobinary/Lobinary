@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -12,12 +13,17 @@ package org.omg.PortableServer;
 /**
 	 * This policy specifies whether implicit activation 
 	 * of servants is supported in the created POA.
+	 * <p>
+	 *  此策略指定是否在创建的POA中支持隐式激活服务器。
+	 * 
 	 */
 public interface ImplicitActivationPolicyOperations  extends org.omg.CORBA.PolicyOperations
 {
 
   /**
 	 * specifies the policy value
+	 * <p>
+	 *  指定策略值
 	 */
   org.omg.PortableServer.ImplicitActivationPolicyValue value ();
 } // interface ImplicitActivationPolicyOperations

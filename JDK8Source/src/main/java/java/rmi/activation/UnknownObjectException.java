@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,13 @@ package java.rmi.activation;
  * An <code>ActivationID</code> is also obtained during the
  * <code>Activatable.register</code> call.
  *
+ * <p>
+ *  当确定方法的<code> ActivationID </code>参数为<code>时,<code> java.rmi.activation </code>包中的类和接口的方法抛出<code> Unk
+ * nownObjectException </code>无效。
+ * 如果<code> ActivationSystem </code>当前未知,则<code> ActivationID </code>无效。
+ * 通过<code> ActivationSystem.registerObject </code>方法获得<code> ActivationID </code>。
+ * 在<code> Activatable.register </code>调用期间还会获取<code> ActivationID </code>。
+ * 
  * @author  Ann Wollrath
  * @since   1.2
  * @see     java.rmi.activation.Activatable
@@ -53,6 +61,9 @@ public class UnknownObjectException extends ActivationException {
      * Constructs an <code>UnknownObjectException</code> with the specified
      * detail message.
      *
+     * <p>
+     * 
+     * 
      * @param s the detail message
      * @since 1.2
      */

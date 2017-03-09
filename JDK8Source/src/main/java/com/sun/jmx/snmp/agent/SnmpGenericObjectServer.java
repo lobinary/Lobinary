@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -70,6 +71,20 @@ import com.sun.jmx.snmp.SnmpStatusException;
  * </b></i></p>
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ * <p>
+ *  此类是一个实用程序类,它将SNMP GET / SET请求转换为标准JMX getAttributes()setAttributes()请求。
+ * </p>
+ * 
+ * <p>
+ *  该转换依赖于由{@link com.sun.jmx.snmp.agent.SnmpGenericMetaServer}对象提供的元数据信息,该对象作为第一个参数传递给每个方法。
+ * 这个SnmpGenericMetaServer对象通常是由<code> mibgen </code>生成的元数据对象。
+ * </p>
+ * 
+ *  <p> <b> <i>此类在mibgen生成的元数据对象内部使用,您不应该直接使用它。
+ *  </b> </i> </p> <p> <b>此API是Sun Microsystems内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
+ * 
  **/
 
 public class SnmpGenericObjectServer {
@@ -82,6 +97,10 @@ public class SnmpGenericObjectServer {
 
     /**
      * The MBean server through which the MBeans will be accessed.
+     * <p>
+     *  将访问MBean的MBean服务器。
+     * 
+     * 
      **/
     protected final MBeanServer server;
 
@@ -95,6 +114,10 @@ public class SnmpGenericObjectServer {
      * Builds a new SnmpGenericObjectServer. Usually there will be a single
      * object of this type per MIB.
      *
+     * <p>
+     *  构建新的SnmpGenericObjectServer。通常每个MIB将有一个此类型的单个对象。
+     * 
+     * 
      * @param server The MBeanServer in which the MBean accessed by this
      *               MIB are registered.
      **/
@@ -123,6 +146,20 @@ public class SnmpGenericObjectServer {
      * objects and you should never need to call it directly.
      * </i></b></p>
      *
+     * <p>
+     *  执行SNMP GET请求。
+     * 
+     * <p>
+     *  此方法首先构建需要从MBean检索的属性列表,然后在MBean服务器上调用getAttributes()。然后,使用从MBean检索的值更新SnmpMibSubRequest。
+     * </p>
+     * 
+     * <p>
+     *  SNMP元数据信息通过给定的<code> meta </code>对象获得,该对象通常是一个<code> mibgen </code>生成类的实例。
+     * </p>
+     * 
+     * <p> <b> <i>此方法由<code> mibgen </code>生成的对象在内部调用,您应该永远不需要直接调用它。 </i> </b> </p>
+     * 
+     * 
      * @param meta  The metadata object impacted by the subrequest
      * @param name  The ObjectName of the MBean impacted by this subrequest
      * @param req   The SNMP subrequest to execute on the MBean
@@ -232,6 +269,12 @@ public class SnmpGenericObjectServer {
      * You should never need to use this method directly.
      * </i></b></p>
      *
+     * <p>
+     *  获取SNMP变量的值。
+     * 
+     *  <p> <b> <i>您不应该直接使用此方法。 </i> </b> </p>
+     * 
+     * 
      * @param meta  The impacted metadata object
      * @param name  The ObjectName of the impacted MBean
      * @param id    The OID arc identifying the variable we're trying to set.
@@ -288,6 +331,20 @@ public class SnmpGenericObjectServer {
      * objects and you should never need to call it directly.
      * </i></b></p>
      *
+     * <p>
+     *  执行SNMP SET请求。
+     * 
+     * <p>
+     *  此方法首先构建需要在MBean上设置的属性列表,然后在MBean服务器上调用setAttributes()。然后,使用从MBean检索的新值更新SnmpMibSubRequest。
+     * </p>
+     * 
+     * <p>
+     *  SNMP元数据信息通过给定的<code> meta </code>对象获得,该对象通常是一个<code> mibgen </code>生成类的实例。
+     * </p>
+     * 
+     *  <p> <b> <i>此方法由<code> mibgen </code>生成的对象在内部调用,您应该永远不需要直接调用它。 </i> </b> </p>
+     * 
+     * 
      * @param meta  The metadata object impacted by the subrequest
      * @param name  The ObjectName of the MBean impacted by this subrequest
      * @param req   The SNMP subrequest to execute on the MBean
@@ -382,6 +439,12 @@ public class SnmpGenericObjectServer {
      * You should never need to use this method directly.
      * </i></b></p>
      *
+     * <p>
+     *  设置SNMP变量的值。
+     * 
+     *  <p> <b> <i>您不应该直接使用此方法。 </i> </b> </p>
+     * 
+     * 
      * @param meta  The impacted metadata object
      * @param name  The ObjectName of the impacted MBean
      * @param x     The new requested SnmpValue
@@ -449,6 +512,14 @@ public class SnmpGenericObjectServer {
      * objects and you should never need to call it directly.
      * </i></b></p>
      *
+     * <p>
+     *  检查是否可以成功执行SNMP SET请求。
+     * 
+     * <p>
+     *  对于子请求中的每个变量,此方法在元对象上调用checkSetAccess(),然后尝试调用MBean上的检查<i> AttributeName </i>()方法。
+     * 如果未定义此方法,则假定SET不会失败。
+     * </p>
+     * 
      * @param meta  The metadata object impacted by the subrequest
      * @param name  The ObjectName of the MBean impacted by this subrequest
      * @param req   The SNMP subrequest to execute on the MBean
@@ -484,6 +555,11 @@ public class SnmpGenericObjectServer {
      * Checks whether a SET operation can be performed on a given SNMP
      * variable.
      *
+     * <p>
+     * 
+     *  <p> <b> <i>此方法由<code> mibgen </code>生成的对象在内部调用,您应该永远不需要直接调用它。 </i> </b> </p>
+     * 
+     * 
      * @param meta  The impacted metadata object
      * @param name  The ObjectName of the impacted MBean
      * @param x     The new requested SnmpValue

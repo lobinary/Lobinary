@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import sun.net.util.IPAddressUtil;
 
 /**
  * Parses a string containing a host/domain name and port range
+ * <p>
+ *  解析包含主机/域名和端口范围的字符串
+ * 
  */
 class HostPortrange {
 
@@ -166,6 +170,9 @@ class HostPortrange {
     /**
      * Convert to lower case, and check that all chars are ascii
      * alphanumeric, '-' or '.' only.
+     * <p>
+     *  转换为小写,并检查所有字符是ASCII字母数字,' - '或'。'。只要。
+     * 
      */
     static String toLowerCase(String s) {
         int len = s.length();
@@ -218,6 +225,9 @@ class HostPortrange {
      * hostname returns the remaining part of the host component
      * eg "*.foo.com" -> ".foo.com" or "*" -> ""
      *
+     * <p>
+     *  如果以* hostname开头的主机名部分返回主机组件的其余部分,例如"* .foo.com" - >".foo.com"或"*" - >"",则返回true。
+     * 
      * @return
      */
     public boolean wildcard() {

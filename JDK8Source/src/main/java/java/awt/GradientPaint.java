@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,20 @@ import java.beans.ConstructorProperties;
  * have the constant <code>Color</code> C2.
  * </ul>
  *
+ * <p>
+ *  <code> GradientPaint </code>类提供了一种用线性颜色渐变图案填充{@link Shape}的方法。
+ * 如果在用户空间中指定了{@link Point} P1与{@link Color} C1和<code> Point </code> P2与<code> Color </code> C2,则<code> 
+ * Color </code> on P1,P2连接线从C1到C2按比例变化。
+ *  <code> GradientPaint </code>类提供了一种用线性颜色渐变图案填充{@link Shape}的方法。
+ * 任何点P不在扩展P1,P2连接线上的点P'的颜色是P在扩展P1,P2连接线上的垂直投影。 P1,P2段外延长线上的点可以用两种方法之一进行着色。
+ * <ul>
+ * <li>
+ *  如果梯度是循环的,则扩展P1,P2上的点连接线在颜色C1和C2之间来回循环。
+ * <li>
+ *  如果梯度是非循环的,则段的P1侧上的点具有常数<code> Color </code> C1,而P2侧上的点具有常数<code> Color </code> C2。
+ * </ul>
+ * 
+ * 
  * @see Paint
  * @see Graphics2D#setPaint
  * @version 10 Feb 1997
@@ -66,6 +81,10 @@ public class GradientPaint implements Paint {
 
     /**
      * Constructs a simple acyclic <code>GradientPaint</code> object.
+     * <p>
+     *  构造一个简单的非循环<code> GradientPaint </code>对象。
+     * 
+     * 
      * @param x1 x coordinate of the first specified
      * <code>Point</code> in user space
      * @param y1 y coordinate of the first specified
@@ -98,6 +117,10 @@ public class GradientPaint implements Paint {
 
     /**
      * Constructs a simple acyclic <code>GradientPaint</code> object.
+     * <p>
+     *  构造一个简单的非循环<code> GradientPaint </code>对象。
+     * 
+     * 
      * @param pt1 the first specified <code>Point</code> in user space
      * @param color1 <code>Color</code> at the first specified
      * <code>Point</code>
@@ -125,6 +148,10 @@ public class GradientPaint implements Paint {
     /**
      * Constructs either a cyclic or acyclic <code>GradientPaint</code>
      * object depending on the <code>boolean</code> parameter.
+     * <p>
+     *  根据<code> boolean </code>参数构造循环或非循环<code> GradientPaint </code>对象。
+     * 
+     * 
      * @param x1 x coordinate of the first specified
      * <code>Point</code> in user space
      * @param y1 y coordinate of the first specified
@@ -154,6 +181,10 @@ public class GradientPaint implements Paint {
     /**
      * Constructs either a cyclic or acyclic <code>GradientPaint</code>
      * object depending on the <code>boolean</code> parameter.
+     * <p>
+     *  根据<code> boolean </code>参数构造循环或非循环<code> GradientPaint </code>对象。
+     * 
+     * 
      * @param pt1 the first specified <code>Point</code>
      * in user space
      * @param color1 <code>Color</code> at the first specified
@@ -179,6 +210,10 @@ public class GradientPaint implements Paint {
 
     /**
      * Returns a copy of the point P1 that anchors the first color.
+     * <p>
+     *  返回锚定第一种颜色的点P1的副本。
+     * 
+     * 
      * @return a {@link Point2D} object that is a copy of the point
      * that anchors the first color of this
      * <code>GradientPaint</code>.
@@ -189,6 +224,10 @@ public class GradientPaint implements Paint {
 
     /**
      * Returns the color C1 anchored by the point P1.
+     * <p>
+     * 返回由点P1锚定的颜色C1。
+     * 
+     * 
      * @return a <code>Color</code> object that is the color
      * anchored by P1.
      */
@@ -198,6 +237,10 @@ public class GradientPaint implements Paint {
 
     /**
      * Returns a copy of the point P2 which anchors the second color.
+     * <p>
+     *  返回锚点为第二种颜色的点P2的副本。
+     * 
+     * 
      * @return a {@link Point2D} object that is a copy of the point
      * that anchors the second color of this
      * <code>GradientPaint</code>.
@@ -208,6 +251,10 @@ public class GradientPaint implements Paint {
 
     /**
      * Returns the color C2 anchored by the point P2.
+     * <p>
+     *  返回由点P2锚定的颜色C2。
+     * 
+     * 
      * @return a <code>Color</code> object that is the color
      * anchored by P2.
      */
@@ -218,6 +265,10 @@ public class GradientPaint implements Paint {
     /**
      * Returns <code>true</code> if the gradient cycles repeatedly
      * between the two colors C1 and C2.
+     * <p>
+     *  如果渐变在两种颜色C1和C2之间重复循环,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the gradient cycles repeatedly
      * between the two colors; <code>false</code> otherwise.
      */
@@ -232,6 +283,11 @@ public class GradientPaint implements Paint {
      * method in the {@link Paint} interface for information
      * on null parameter handling.
      *
+     * <p>
+     *  创建并返回用于生成线性颜色渐变图案的{@link PaintContext}。
+     * 有关空参数处理的信息,请参阅{@link Paint}界面中的方法的{@link Paint#createContext specification}。
+     * 
+     * 
      * @param cm the preferred {@link ColorModel} which represents the most convenient
      *           format for the caller to receive the pixel data, or {@code null}
      *           if there is no preference.
@@ -265,6 +321,8 @@ public class GradientPaint implements Paint {
 
     /**
      * Returns the transparency mode for this <code>GradientPaint</code>.
+     * <p>
+     * 
      * @return an integer value representing this <code>GradientPaint</code>
      * object's transparency mode.
      * @see Transparency

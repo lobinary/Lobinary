@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -198,6 +199,8 @@ public class DynUnionImpl extends DynAnyConstructedImpl implements DynUnion
 
     /**
     * Returns the current discriminator value.
+    * <p>
+    *  返回当前的鉴别器值。
     */
     public org.omg.DynamicAny.DynAny get_discriminator () {
         if (status == STATUS_DESTROYED) {

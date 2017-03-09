@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,12 @@ import sun.swing.SwingUtilities2;
  * <p>Looks up the {@code selectedTabPadInsets} property from the Style,
  * which represents additional insets for the selected tab.
  *
+ * <p>
+ *  为{@link javax.swing.JTabbedPane}提供Synth L&amp; F UI委托。
+ * 
+ *  <p>从样式中查找{@code selectedTabPadInsets}属性,它代表所选标签的其他插入。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.7
  */
@@ -69,6 +76,18 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
      * tab's width is also extended by 1 pixel to make up the difference.</p>
      *
      * <p>This property respects the RTL component orientation.</p>
+     * <p>
+     *  <p>如果非零,tabOverlap表示标签界限的数量应该更改,以使它们将重叠的运行的前端或尾端的标签(即：在TOP,这将是在左边或右)。</p>
+     * 
+     *  <p>正重叠表示标签应该向右/向下重叠,而负重叠表示标签应该向左/向上重叠。</p>
+     * 
+     *  <p>指定tabOverlap时,如果在TOP或BOTTOM展示位置中,则它会更改标签的x位置和宽度,如果在LEFT或RIGHT位置,则会更改y位置和高度。</p>
+     * 
+     *  <p>这是出于以下原因。考虑运行10个选项卡。这些选项卡之间有9个间隙。如果您指定tabOverlap为"-1",则每个选项卡"x"值将向左移动。这使得最右侧的选项卡的右侧没有画出9个像素的空间。
+     * 因此,每个标签的宽度也会延伸1像素,以弥补差异。</p>。
+     * 
+     *  <p>此属性遵循RTL组件定向。</p>
+     * 
      */
     private int tabOverlap = 0;
 
@@ -80,6 +99,10 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
      * tabs. The text position does not change. The result is that the bottom
      * border of the upper row of tabs becomes fully obscured by the lower tabs,
      * resulting in a cleaner look.
+     * <p>
+     * 当标签式窗格具有多行标签时,这指示上部行中的标签是否应该延伸到标签区域的基部,或者是否应当保持在其正常的标签高度。这不会影响选项卡的边界,只影响选项卡绘制的区域的边界。文本位置不变。
+     * 结果是上排突片的底部边缘被下突片完全遮挡,导致更清洁的外观。
+     * 
      */
     private boolean extendTabsToBase = false;
 
@@ -108,6 +131,10 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
     /**
      * Creates a new UI object for the given component.
      *
+     * <p>
+     *  为给定组件创建一个新的UI对象。
+     * 
+     * 
      * @param c component to create UI object for
      * @return the UI object
      */
@@ -121,6 +148,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installDefaults() {
@@ -184,6 +214,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installListeners() {
@@ -193,6 +226,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallListeners() {
@@ -202,6 +238,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallDefaults() {
@@ -228,6 +267,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -255,6 +297,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected JButton createScrollButton(int direction) {
@@ -271,6 +316,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void propertyChange(PropertyChangeEvent e) {
@@ -283,6 +331,11 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
      * {@inheritDoc}
      *
      * Overridden to keep track of whether the selected tab is also pressed.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  覆盖以跟踪是否也按下所选择的选项卡。
+     * 
      */
     @Override
     protected MouseListener createMouseListener() {
@@ -332,6 +385,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected int getTabLabelShiftX(int tabPlacement, int tabIndex, boolean isSelected) {
@@ -344,6 +400,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected int getTabLabelShiftY(int tabPlacement, int tabIndex, boolean isSelected) {
@@ -362,6 +421,12 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -379,6 +444,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected int getBaseline(int tab) {
@@ -403,6 +471,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -415,6 +486,10 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -430,6 +505,10 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
     /**
      * Paints the specified component.
      *
+     * <p>
+     *  绘制指定的组件。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -555,6 +634,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void setRolloverTab(int index) {
@@ -740,6 +822,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
         /* If tabPane doesn't have a peer yet, the validate() call will
          * silently fail.  We handle that by forcing a layout if tabPane
          * is still invalid.  See bug 4237677.
+         * <p>
+         *  默默地失败。如果tabPane仍然无效,我们通过强制布局来处理它。见错误4237677。
+         * 
          */
         if (!tabPane.isValid()) {
             TabbedPaneLayout layout = (TabbedPaneLayout)tabPane.getLayout();
@@ -749,6 +834,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected int calculateMaxTabHeight(int tabPlacement) {
@@ -765,6 +853,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected int calculateTabWidth(int tabPlacement, int tabIndex,
@@ -796,6 +887,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected int calculateMaxTabWidth(int tabPlacement) {
@@ -812,6 +906,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected Insets getTabInsets(int tabPlacement, int tabIndex) {
@@ -822,6 +919,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected FontMetrics getFontMetrics() {
@@ -869,6 +969,9 @@ public class SynthTabbedPaneUI extends BasicTabbedPaneUI
      *
      * Overridden to create a TabbedPaneLayout subclass which takes into
      * account tabOverlap.
+     * <p>
+     * {@inheritDoc}
+     * 
      */
     @Override
     protected LayoutManager createLayoutManager() {

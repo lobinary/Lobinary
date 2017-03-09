@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -18,6 +19,7 @@ package org.omg.PortableServer;
 	 * hierarchy starting with the root POA. A POA object 
 	 * must not be exported to other processes, or 
 	 * externalized with ORB::object_to_string.
+	 * <p>
 	 */
 public interface POA extends POAOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2003-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xerces.internal.xinclude;
 
@@ -55,6 +65,13 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource;
  * for reading files as XML, and this needs to read files as text, there would need
  * to be some refactoring done.
  *
+ * <p>
+ *  该类用于读取&lt; include&gt;中请求的资源。当&lt; include&gt;元素的parse属性,元素是"文本"。使用此类将打开位置,检测编码,并丢弃字节顺序标记(如果适用)。
+ * 
+ *  REVISIT：这个类中的大部分代码取自XMLEntityManager。这将是很好,如果这个代码可以在某种方式共享。
+ * 但是,由于XMLEntityManager用于读取文件作为XML,并且这需要读取文件作为文本,需要进行一些重构。
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  * @author Peter McCracken, IBM
  * @author Ankit Pasricha, IBM
@@ -74,6 +91,10 @@ public class XIncludeTextReader {
     /**
      * Construct the XIncludeReader using the XMLInputSource and XIncludeHandler.
      *
+     * <p>
+     *  使用XMLInputSource和XIncludeHandler构造XIncludeReader。
+     * 
+     * 
      * @param source The XMLInputSource to use.
      * @param handler The XIncludeHandler to use.
      * @param bufferSize The size of this text reader's buffer.
@@ -89,6 +110,10 @@ public class XIncludeTextReader {
      * Sets the XMLErrorReporter used for reporting errors while
      * reading the text include.
      *
+     * <p>
+     *  设置用于在读取文本include时报告错误的XMLErrorReporter。
+     * 
+     * 
      * @param errorReporter the XMLErrorReporter to be used for
      * reporting errors.
      */
@@ -99,6 +124,10 @@ public class XIncludeTextReader {
     /**
      * Return the Reader for given XMLInputSource.
      *
+     * <p>
+     *  返回给定的XMLInputSource的Reader。
+     * 
+     * 
      * @param source The XMLInputSource to use.
      */
     protected Reader getReader(XMLInputSource source) throws IOException {
@@ -190,6 +219,11 @@ public class XIncludeTextReader {
                     2 if the media type of the resource is text/xml, application/xml, or matches the conventions text/*+xml or application/*+xml as described in XML Media Types [IETF RFC 3023], the encoding is recognized as specified in XML 1.0, otherwise
                     3 the value of the encoding attribute if one exists, otherwise
                     4 UTF-8.
+                    2 if the media type of the resource is text/xml, application/xml, or matches the conventions text/* <p>
+                    2 if the media type of the resource is text/xml, application/xml, or matches the conventions text/* 1外部编码信息(如果可用),否则 - 最常见类型的外部信息是MIME包的"charset"参数2如果资源的媒体类型是text / xml,application / xml或匹配约定文本/ * + xm
+                    2 if the media type of the resource is text/xml, application/xml, or matches the conventions text/* l或application / * + xml,如XML媒体类型[IETF RFC 3023]中所述,编码被识别为在XML 1.0中指定,否则3编码属性的值(如果存在),否则为4 UTF-8。
+                    2 if the media type of the resource is text/xml, application/xml, or matches the conventions text/* 
+                    2 if the media type of the resource is text/xml, application/xml, or matches the conventions text/* 
                  **/
                 if (contentType.equals("text/xml")) {
                     if (charset != null) {
@@ -265,6 +299,10 @@ public class XIncludeTextReader {
      * readers. Since we're just using generic Java readers for now, we're not caring
      * about endian-ness.  If this changes, even more code needs to be copied from
      * XMLEntity manager. -- PJM
+     * <p>
+     *  XMLEntityManager关心端点,因为它创建了自己的优化的读者。因为我们现在只是使用通用的Java阅读器,我们不关心endianness。
+     * 如果这个更改,甚至更多的代码需要从XMLEntity管理器中复制。 -  PJM。
+     * 
      */
     protected String getEncodingName(InputStream stream) throws IOException {
         final byte[] b4 = new byte[4];
@@ -286,6 +324,10 @@ public class XIncludeTextReader {
      * Removes the byte order mark from the stream, if
      * it exists and returns the encoding name.
      *
+     * <p>
+     *  从流中删除字节顺序标记(如果存在)并返回编码名称。
+     * 
+     * 
      * @param stream
      * @param encoding
      * @throws IOException
@@ -341,6 +383,13 @@ public class XIncludeTextReader {
      * Returns the IANA encoding name that is auto-detected from
      * the bytes specified, with the endian-ness of that encoding where appropriate.
      *
+     * <p>
+     *  REVISIT：此代码取自com.sun.org.apache.xerces.internal.impl.XMLEntityManager。
+     * 有没有办法我们可以共享代码,而不必实现两次?我认为我们应该在XMLEntityManager中使其公开和静态。 --PJM。
+     * 
+     *  返回从指定的字节自动检测的IANA编码名称,并在适当的位置使用该编码的字节顺序。
+     * 
+     * 
      * @param b4    The first four bytes of the input.
      * @return the encoding name, or null if no encoding could be detected
      */
@@ -408,6 +457,10 @@ public class XIncludeTextReader {
      * using calls to characters().  This will read all of the text it can from the
      * resource.
      *
+     * <p>
+     *  将输入流读取为文本,并使用对characters()的调用将文本传递到XIncludeHandler。这将读取来自资源的所有文本。
+     * 
+     * 
      * @throws IOException
      */
     public void parse() throws IOException {
@@ -472,6 +525,10 @@ public class XIncludeTextReader {
     /**
      * Sets the input source on this text reader.
      *
+     * <p>
+     *  在此文本阅读器上设置输入源。
+     * 
+     * 
      * @param source The XMLInputSource to use.
      */
     public void setInputSource(XMLInputSource source) {
@@ -482,6 +539,10 @@ public class XIncludeTextReader {
      * Closes the stream.  Call this after parse(), or when there is no longer any need
      * for this object.
      *
+     * <p>
+     *  关闭流。在解析()之后调用,或者当不再需要这个对象时。
+     * 
+     * 
      * @throws IOException
      */
     public void close() throws IOException {
@@ -495,6 +556,10 @@ public class XIncludeTextReader {
      * Returns true if the specified character is a valid XML character
      * as per the rules of XML 1.0.
      *
+     * <p>
+     * 如果指定的字符是根据XML 1.0的规则的有效XML字符,则返回true。
+     * 
+     * 
      * @param ch The character to check.
      */
     protected boolean isValid(int ch) {
@@ -505,6 +570,9 @@ public class XIncludeTextReader {
      * Sets the buffer size property for the reader which decides the chunk sizes that are parsed
      * by the reader at a time and passed to the handler
      *
+     * <p>
+     *  设置读取器的缓冲区大小属性,该属性决定读取器一次解析并传递给处理程序的块大小
+     * 
      * @param bufferSize The size of the buffer desired
      */
     protected void setBufferSize(int bufferSize) {

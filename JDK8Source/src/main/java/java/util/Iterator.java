@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,18 @@ import java.util.function.Consumer;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  集合上的迭代器。 {@code Iterator}在Java Collections Framework中取代{@link枚举}。迭代器有两种不同的枚举：
+ * 
+ * <ul>
+ *  <li>迭代器允许调用者在迭代期间使用明确定义的语义从底层集合中删除元素。 <li>方法名称已改进。
+ * </ul>
+ * 
+ *  <p>此接口是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @param <E> the type of elements returned by this iterator
  *
  * @author  Josh Bloch
@@ -57,6 +70,10 @@ public interface Iterator<E> {
      * (In other words, returns {@code true} if {@link #next} would
      * return an element rather than throwing an exception.)
      *
+     * <p>
+     *  如果迭代有更多元素,则返回{@code true}。 (换句话说,如果{@link #next}返回一个元素而不是抛出异常,则返回{@code true}。)
+     * 
+     * 
      * @return {@code true} if the iteration has more elements
      */
     boolean hasNext();
@@ -64,6 +81,10 @@ public interface Iterator<E> {
     /**
      * Returns the next element in the iteration.
      *
+     * <p>
+     *  返回迭代中的下一个元素。
+     * 
+     * 
      * @return the next element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
      */
@@ -81,6 +102,13 @@ public interface Iterator<E> {
      * The default implementation throws an instance of
      * {@link UnsupportedOperationException} and performs no other action.
      *
+     * <p>
+     *  从底层集合中删除此迭代器返回的最后一个元素(可选操作)。每次调用{@link #next}时,此方法只能调用一次。
+     * 如果在迭代正在以除了通过调用此方法之外的任何方式进行时修改了底层集合,则迭代器的行为是未指定的。
+     * 
+     *  @implSpec默认实现引发{@link UnsupportedOperationException}的一个实例,不执行任何其他操作。
+     * 
+     * 
      * @throws UnsupportedOperationException if the {@code remove}
      *         operation is not supported by this iterator
      *
@@ -106,6 +134,8 @@ public interface Iterator<E> {
      *         action.accept(next());
      * }</pre>
      *
+     * <p>
+     * 
      * @param action The action to be performed for each element
      * @throws NullPointerException if the specified action is null
      * @since 1.8

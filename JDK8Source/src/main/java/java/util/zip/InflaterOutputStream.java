@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import java.io.OutputStream;
  * Implements an output stream filter for uncompressing data stored in the
  * "deflate" compression format.
  *
+ * <p>
+ *  实现输出流过滤器,用于解压缩以"deflate"压缩格式存储的数据。
+ * 
+ * 
  * @since       1.6
  * @author      David R Tribble (david@tribble.com)
  *
@@ -59,6 +64,9 @@ public class InflaterOutputStream extends FilterOutputStream {
 
     /**
      * Checks to make sure that this stream has not been closed.
+     * <p>
+     *  检查以确保此流未关闭。
+     * 
      */
     private void ensureOpen() throws IOException {
         if (closed) {
@@ -70,6 +78,10 @@ public class InflaterOutputStream extends FilterOutputStream {
      * Creates a new output stream with a default decompressor and buffer
      * size.
      *
+     * <p>
+     *  使用默认解压缩器和缓冲区大小创建新的输出流。
+     * 
+     * 
      * @param out output stream to write the uncompressed data to
      * @throws NullPointerException if {@code out} is null
      */
@@ -82,6 +94,10 @@ public class InflaterOutputStream extends FilterOutputStream {
      * Creates a new output stream with the specified decompressor and a
      * default buffer size.
      *
+     * <p>
+     *  使用指定的解压缩器和默认缓冲区大小创建新的输出流。
+     * 
+     * 
      * @param out output stream to write the uncompressed data to
      * @param infl decompressor ("inflater") for this stream
      * @throws NullPointerException if {@code out} or {@code infl} is null
@@ -94,6 +110,10 @@ public class InflaterOutputStream extends FilterOutputStream {
      * Creates a new output stream with the specified decompressor and
      * buffer size.
      *
+     * <p>
+     *  使用指定的解压缩器和缓冲区大小创建新的输出流。
+     * 
+     * 
      * @param out output stream to write the uncompressed data to
      * @param infl decompressor ("inflater") for this stream
      * @param bufLen decompression buffer size
@@ -120,6 +140,10 @@ public class InflaterOutputStream extends FilterOutputStream {
      * Writes any remaining uncompressed data to the output stream and closes
      * the underlying output stream.
      *
+     * <p>
+     *  将任何剩余的未压缩数据写入输出流,并关闭底层输出流。
+     * 
+     * 
      * @throws IOException if an I/O error occurs
      */
     public void close() throws IOException {
@@ -138,6 +162,10 @@ public class InflaterOutputStream extends FilterOutputStream {
      * Flushes this output stream, forcing any pending buffered output bytes to be
      * written.
      *
+     * <p>
+     *  刷新此输出流,强制写入任何待处理的缓冲输出字节。
+     * 
+     * 
      * @throws IOException if an I/O error occurs or this stream is already
      * closed
      */
@@ -176,6 +204,10 @@ public class InflaterOutputStream extends FilterOutputStream {
      * the underlying stream.  Use this method when applying multiple filters in
      * succession to the same output stream.
      *
+     * <p>
+     *  完成将未压缩数据写入输出流,而不关闭底层流。当将多个过滤器连续应用于同一输出流时,请使用此方法。
+     * 
+     * 
      * @throws IOException if an I/O error occurs or this stream is already
      * closed
      */
@@ -192,6 +224,10 @@ public class InflaterOutputStream extends FilterOutputStream {
     /**
      * Writes a byte to the uncompressed output stream.
      *
+     * <p>
+     *  将一个字节写入未压缩的输出流。
+     * 
+     * 
      * @param b a single byte of compressed data to decompress and write to
      * the output stream
      * @throws IOException if an I/O error occurs or this stream is already
@@ -207,6 +243,9 @@ public class InflaterOutputStream extends FilterOutputStream {
     /**
      * Writes an array of bytes to the uncompressed output stream.
      *
+     * <p>
+     *  将字节数组写入未压缩的输出流。
+     * 
      * @param b buffer containing compressed data to decompress and write to
      * the output stream
      * @param off starting offset of the compressed data within {@code b}

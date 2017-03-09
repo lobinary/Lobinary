@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2011-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.temporal;
 
@@ -174,6 +193,52 @@ import sun.util.locale.provider.LocaleResources;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  星期几,星期和星期字段的本地化定义。
+ * <p>
+ *  标准周是七天,但是对于一周的某些其他方面,文化具有不同的定义。这个类表示周的定义,目的是提供{@link TemporalField}实例。
+ * <p>
+ *  WeekFields提供五个字段：{@link #dayOfWeek()},{@link #weekOfMonth()},{@link #weekOfYear()},{@link #weekOfWeekBasedYear()}
+ * 和{@link #weekBasedYear它们提供对来自任何{@linkplain时间对象}的值的访问。
+ * <p>
+ * 星期几,星期和星期的计算基于{@linkplain ChronoField#YEAR proleptic-year},{@linkplain ChronoField#MONTH_OF_YEAR month-of-year}
+ * ,{ @linkplain ChronoField#DAY_OF_MONTH天的日期},以及{@linkplain ChronoField#DAY_OF_WEEK ISO day-of-week},它们
+ * 基于{@linkplain ChronoField#EPOCH_DAY纪元日}和年表。
+ * 根据年表,这些值可能与{@linkplain ChronoField#YEAR_OF_ERA年前)不一致。 <p>一周定义为：。
+ * <ul>
+ *  <li>星期的第一天。例如,ISO-8601标准认为星期一是第一个星期。 <li>第一周的最少天数。例如,ISO-8601标准计算第一周至少需要4天。
+ * </ul>
+ *  这两个值一起允许将年或月分成几周。
+ * 
+ *  <h3>每月周</h3>使用一个字段：月份周。该计算确保周几不会与月边界重叠。该月份被分为期间,其中每个期间从所定义的第一个星期开始。
+ * 如果最小周期小于最小天数,则将其称为周0,如果它具有至少最小天数,则称为周1。
+ * 
+ * <table cellpadding="0" cellspacing="3" border="0" style="text-align: left; width: 50%;">
+ * <caption> WeekFields示例</caption> <tr> <th>日期</th> <td>星期几</td> <td>第一天：周一<br>最小天数：4 </td > <td>第一天：周一
+ * <br>最低天数：5 </td> </tr> <tr> <th> 2008-12-31 </th> <td>周三</td> <td>周5 of 2008年12月</td> <td> 2008年12月第5
+ * 周</td> </tr> <tr> <th> 2009-01-01 </th> <td>星期四</td> <td>第1周2009年1月</td> <td>第0周2009年1月</td> </tr> <tr>
+ *  <th> 2009-01-04 </th> <td>周日</td> <td > 2009年1月第1周</td> <td> 2009年1月第0周</td> </tr> <tr> <th> 2009-01
+ * -05 </th> <td>星期一</td> td> 2009年1月第2周</td> <td> 2009年1月第1周</td> </tr>。
+ * </table>
+ * 
+ *  <h3>一年的周</h3>使用一个字段：年周。计算确保周几不会与年边界重叠。年份被分为期间,其中每个期间从所定义的第一个星期开始。
+ * 如果最小周期小于最小天数,则将其称为周0,如果它具有至少最小天数,则称为周1。
+ * 
+ *  <h3>以周为基础的年</h3>两个字段用于基于周的年份,一个用于{@link #weekOfWeekBasedYear()基于周周的年份),另一个用于{@link #weekBasedYear )week-based-year}
+ * 。
+ * 在基于周的年中,每周仅属于一年。一年的第1周是从第一天开始的第一周,并且至少具有最小天数。一年的第一周和最后一周可能分别包含上一个日历年或下一个日历年的天数。
+ * 
+ * <table cellpadding="0" cellspacing="3" border="0" style="text-align: left; width: 50%;">
+ * <caption> WeekFields以周为基础的年度示例</caption> <tr> <th>日期</th> <td>周日</td> <td>第一天：周一<br>最小天：4 </td> <td>第
+ * 一天：周一<br>最低天数：5 </td> </tr> <tr> <th> 2008-12-31 </th> <td> td> <td> 2009年第1周</td> <td> 2008年第53周</td>
+ *  </tr> <tr> <th> 2009-01-01 </th> <td>星期四</td > <td> 2009年第1周</td> <td> 2008年第53周</td> </tr> <tr> <th>
+ *  2009-01-04 </th> <td>星期日</td> <td> 2009年第1周</td> <td> 2008年第53周</td> </tr> <tr> <th> 2009-01-05 </th>
+ *  <td>星期一</td> td> 2009年第2周</td> <td> 2009年第1周</td> </tr>。
+ * </table>
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 public final class WeekFields implements Serializable {
@@ -187,6 +252,9 @@ public final class WeekFields implements Serializable {
     /**
      * The cache of rules by firstDayOfWeek plus minimalDays.
      * Initialized first to be available for definition of ISO, etc.
+     * <p>
+     *  通过firstDayOfWeek加上minimalDays的规则缓存。初始化为可用于定义ISO等。
+     * 
      */
     private static final ConcurrentMap<String, WeekFields> CACHE = new ConcurrentHashMap<>(4, 0.75f, 2);
 
@@ -201,6 +269,13 @@ public final class WeekFields implements Serializable {
      * Note that the first week may start in the previous calendar year.
      * Note also that the first few days of a calendar year may be in the
      * week-based-year corresponding to the previous calendar year.
+     * <p>
+     *  ISO-8601定义,其中一周从星期一开始,第一周至少有4天。
+     * <p>
+     *  ISO-8601标准定义了基于周的日历系统。它使用基于星期的年和基于星期的基于年的概念来分割日的通过而不是标准的年/月/日。
+     * <p>
+     *  请注意,第一周可能从上一个日历年开始。还要注意,日历年的前几天可以是对应于前一日历年的基于周的年。
+     * 
      */
     public static final WeekFields ISO = new WeekFields(DayOfWeek.MONDAY, 4);
 
@@ -210,6 +285,11 @@ public final class WeekFields implements Serializable {
      * <p>
      * Defined as starting on Sunday and with a minimum of 1 day in the month.
      * This week definition is in use in the US and other European countries.
+     * <p>
+     *  从星期日和第一周开始的一周的常见定义至少为1天。
+     * <p>
+     *  定义为从星期日开始,每月至少1天。本周定义在美国和其他欧洲国家使用。
+     * 
      */
     public static final WeekFields SUNDAY_START = WeekFields.of(DayOfWeek.SUNDAY, 1);
 
@@ -228,32 +308,59 @@ public final class WeekFields implements Serializable {
      * with the same day-of-week.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     * 表示加法和减法目的的基于周的年的单位。
+     * <p>
+     *  这允许将多个基于周的年份添加到日期中或从日期中减去。单位等于52或53周。每周基准年的估计持续时间与标准ISO年{@code 365.2425 Days}的持续时间相同。
+     * <p>
+     *  添加规则将基于周的年份的数量添加到保留基于星期的年份和星期的基于星期的年份字段的现有值,除非星期数量太大为目标年份。在这种情况下,该周设置为具有相同星期几的一年中的最后一周。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     public static final TemporalUnit WEEK_BASED_YEARS = IsoFields.WEEK_BASED_YEARS;
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = -1177360819670808121L;
 
     /**
      * The first day-of-week.
+     * <p>
+     *  第一个星期。
+     * 
      */
     private final DayOfWeek firstDayOfWeek;
     /**
      * The minimal number of days in the first week.
+     * <p>
+     *  第一周的最少天数。
+     * 
      */
     private final int minimalDays;
     /**
      * The field used to access the computed DayOfWeek.
+     * <p>
+     *  用于访问计算的DayOfWeek的字段。
+     * 
      */
     private final transient TemporalField dayOfWeek = ComputedDayOfField.ofDayOfWeekField(this);
     /**
      * The field used to access the computed WeekOfMonth.
+     * <p>
+     *  用于访问计算的WeekOfMonth的字段。
+     * 
      */
     private final transient TemporalField weekOfMonth = ComputedDayOfField.ofWeekOfMonthField(this);
     /**
      * The field used to access the computed WeekOfYear.
+     * <p>
+     *  用于访问计算的WeekOfYear的字段。
+     * 
      */
     private final transient TemporalField weekOfYear = ComputedDayOfField.ofWeekOfYearField(this);
     /**
@@ -262,6 +369,13 @@ public final class WeekFields implements Serializable {
      * This field allows the week of the week-based-year value to be queried and set.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     *  表示基于星期的年份的字段。
+     * <p>
+     *  此字段允许查询和设置基于周的年份值的周。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     private final transient TemporalField weekOfWeekBasedYear = ComputedDayOfField.ofWeekOfWeekBasedYearField(this);
     /**
@@ -270,6 +384,13 @@ public final class WeekFields implements Serializable {
      * This field allows the week-based-year value to be queried and set.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     *  表示基于周的年的字段。
+     * <p>
+     *  此字段允许查询和设置基于周的年份值。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     private final transient TemporalField weekBasedYear = ComputedDayOfField.ofWeekBasedYearField(this);
 
@@ -279,6 +400,12 @@ public final class WeekFields implements Serializable {
      * <p>
      * This will look up appropriate values from the provider of localization data.
      *
+     * <p>
+     *  获取适合于语言环境的{@code WeekFields}的实例。
+     * <p>
+     *  这将从本地化数据的提供者中查找适当的值。
+     * 
+     * 
      * @param locale  the locale to use, not null
      * @return the week-definition, not null
      */
@@ -306,6 +433,15 @@ public final class WeekFields implements Serializable {
      * of {@code firstDayOfWeek} and {@code minimalDaysInFirstWeek} the
      * the same instance will be returned.
      *
+     * <p>
+     * 从星期第一天和最少天获取{@code WeekFields}的实例。
+     * <p>
+     *  第一个星期定义了ISO {@code DayOfWeek},它是一周的第1天。第一周中的最小天数定义从一周中的第一天开始,在该周被计数为第一周之前,一个月或一年中必须存在多少天。
+     * 值1将计算作为第一周的一部分的月或年的第一天,而值7将需要整个七天在新的一个月或一年。
+     * <p>
+     *  WeekFields实例是单例;对于{@code firstDayOfWeek}和{@code minimalDaysInFirstWeek}的每个唯一组合,将返回相同的实例。
+     * 
+     * 
      * @param firstDayOfWeek  the first day of the week, not null
      * @param minimalDaysInFirstWeek  the minimal number of days in the first week, from 1 to 7
      * @return the week-definition, not null
@@ -327,6 +463,10 @@ public final class WeekFields implements Serializable {
     /**
      * Creates an instance of the definition.
      *
+     * <p>
+     *  创建定义的实例。
+     * 
+     * 
      * @param firstDayOfWeek  the first day of the week, not null
      * @param minimalDaysInFirstWeek  the minimal number of days in the first week, from 1 to 7
      * @throws IllegalArgumentException if the minimal days value is invalid
@@ -345,6 +485,10 @@ public final class WeekFields implements Serializable {
      * Restore the state of a WeekFields from the stream.
      * Check that the values are valid.
      *
+     * <p>
+     *  从流中恢复WeekFields的状态。检查值是否有效。
+     * 
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException if the serialized object has an invalid
      *     value for firstDayOfWeek or minimalDays.
@@ -366,6 +510,10 @@ public final class WeekFields implements Serializable {
     /**
      * Return the singleton WeekFields associated with the
      * {@code firstDayOfWeek} and {@code minimalDays}.
+     * <p>
+     *  返回与{@code firstDayOfWeek}和{@code minimalDays}相关联的单例WeekField。
+     * 
+     * 
      * @return the singleton WeekFields for the firstDayOfWeek and minimalDays.
      * @throws InvalidObjectException if the serialized object has invalid
      *     values for firstDayOfWeek or minimalDays.
@@ -386,6 +534,12 @@ public final class WeekFields implements Serializable {
      * For example, the US uses Sunday, while France and the ISO-8601 standard use Monday.
      * This method returns the first day using the standard {@code DayOfWeek} enum.
      *
+     * <p>
+     *  获取第一个星期。
+     * <p>
+     *  一周的第一天因文化而异。例如,美国使用星期天,而法国和ISO-8601标准使用星期一。此方法使用标准的{@code DayOfWeek}枚举返回第一天。
+     * 
+     * 
      * @return the first day-of-week, not null
      */
     public DayOfWeek getFirstDayOfWeek() {
@@ -400,6 +554,12 @@ public final class WeekFields implements Serializable {
      * For example, the ISO-8601 requires 4 days (more than half a week) to
      * be present before counting the first week.
      *
+     * <p>
+     *  获取第一周的最少天数。
+     * <p>
+     *  考虑定义一个月或一年的第一周的天数因文化而异。例如,ISO-8601在计算第一周之前需要4天(超过半周)。
+     * 
+     * 
      * @return the minimal number of days in the first week of a month or year, from 1 to 7
      */
     public int getMinimalDaysInFirstWeek() {
@@ -423,6 +583,17 @@ public final class WeekFields implements Serializable {
      * The day-of-week must be in the valid range 1 to 7.
      * Other fields in this class build dates using the standardized day-of-week.
      *
+     * <p>
+     *  返回一个字段,以根据此{@code WeekFields}访问星期几。
+     * <p>
+     * 这与{@link ChronoField#DAY_OF_WEEK}类似,但基于此{@code WeekFields}使用星期值。
+     * 日期从1到7编号,其中{@link #getFirstDayOfWeek()第一天的星期}被分配值1。
+     * <p>
+     *  例如,如果第一个星期几是星期日,那么它将具有值1,其他日子范围从星期一2到星期六7。
+     * <p>
+     *  在解析的解析阶段,本地化的星期几将被转换为标准化的{@code ChronoField}星期几。星期几必须在1到7的有效范围内。此类别中的其他字段使用标准化的星期几构建日期。
+     * 
+     * 
      * @return a field providing access to the day-of-week with localized numbering, not null
      */
     public TemporalField dayOfWeek() {
@@ -469,6 +640,31 @@ public final class WeekFields implements Serializable {
      * Then take the week-of-month, subtract one, and add the amount in weeks to the date.
      * Finally, adjust to the correct day-of-week within the localized week.
      *
+     * <p>
+     *  返回一个字段,以根据此{@code WeekFields}访问每月的星期。
+     * <p>
+     *  这表示在一个月内的星期计数的概念,其中星期从固定的星期开始,例如星期一。此字段通常与{@link WeekFields#dayOfWeek()}一起使用。
+     * <p>
+     *  第一周(1)是从{@link WeekFields#getFirstDayOfWeek}开始的一周,该月份至少有{@link WeekFields#getMinimalDaysInFirstWeek()}
+     * 天。
+     * 因此,第一周可能会在月初{@code minDays}天开始。如果第一周从月份开始,那么之前的周期是周零(0)。
+     * <p>
+     * 例如：<br>  - 如果每月的第一天是星期一,则第一周从第一天开始,并且没有星期零<br>  - 如果每月的第二天是星期一,则第一周从第2个,第1个在第0个星期<br>  - 如果每月的第4天是星期一
+     * ,则第1周从第4开始,第1到第3周是零周<br>  - 如果每月的第5天是一个星期一,第二周从第5天开始,第1到第4周是第一周<br>。
+     * <p>
+     *  此字段可用于任何日历系统。
+     * <p>
+     *  在解析的解析阶段中,可以从一年,一星期,一个月和一个星期中创建日期。
+     * <p>
+     *  在{@linkplain ResolverStyle#STRICT strict mode}中,所有四个字段都根据其有效值范围进行验证。验证月份周期字段以确保生成的月份是所请求的月份。
+     * <p>
+     *  在{@linkplain ResolverStyle#SMART智能模式}中,所有四个字段均根据其有效值范围进行验证。
+     *  week-of-month字段从0到6验证,这意味着生成的日期可以在指定的不同的月份。
+     * <p>
+     * 在{@linkplain ResolverStyle#LENIENT宽松模式}中,将根据有效值的范围验证年份和星期几。计算结果日期等同于以下四阶段方法。
+     * 首先,在请求的年份中的1月的第一周的第一天创建日期。然后取年份,减去1,并将月份中的金额加到日期。然后取月份周数,减1,并将周数加到日期。最后,在本地化周内调整到正确的星期几。
+     * 
+     * 
      * @return a field providing access to the week-of-month, not null
      */
     public TemporalField weekOfMonth() {
@@ -514,6 +710,30 @@ public final class WeekFields implements Serializable {
      * Then take the week-of-year, subtract one, and add the amount in weeks to the date.
      * Finally, adjust to the correct day-of-week within the localized week.
      *
+     * <p>
+     *  返回一个字段,以访问基于此{@code WeekFields}的一年的周。
+     * <p>
+     *  这代表一周内的周数的概念,其中周在固定的星期几(例如星期一)开始。此字段通常与{@link WeekFields#dayOfWeek()}一起使用。
+     * <p>
+     *  第一周(1)是从{@link WeekFields#getFirstDayOfWeek}开始的一周,该年度至少有{@link WeekFields#getMinimalDaysInFirstWeek()}
+     * 天。
+     * 因此,第一周可能会在一年中的{@code minDays}天之前开始。如果第一周从年初开始,则前一周是周零(0)。
+     * <p>
+     * 例如：<br>  - 如果一年的第一天是星期一,则第一周从第一天开始,并且没有星期零<br>  - 如果一年的第二天是星期一,则第一周从第2个,第1个在第0周<br>  - 如果一年中的第4天是星期一,
+     * 则第1周从第4周开始,第1周到第3周是在第0周<br>  - 如果一年的第5天是一个星期一,第二周从第5天开始,第1到第4周是第一周<br>。
+     * <p>
+     *  此字段可用于任何日历系统。
+     * <p>
+     *  在解析的解析阶段中,可以从年,星期和星期创建日期。
+     * <p>
+     *  在{@linkplain ResolverStyle#STRICT strict mode}中,所有三个字段都根据其有效值范围进行验证。验证年周期字段以确保生成的年份是所请求的年份。
+     * <p>
+     *  在{@linkplain ResolverStyle#SMART智能模式}中,所有三个字段均根据其有效值范围进行验证。年周期字段从0到54有效,这意味着结果日期可以与指定的日期不同的年份。
+     * <p>
+     *  在{@linkplain ResolverStyle#LENIENT宽松模式}中,将根据有效值的范围验证年份和星期几。计算结果日期等同于以下三阶段方法。首先,在请求的年份中的第一周的第一天创建日期。
+     * 然后取一年的周,减去一个,并添加的数量,以星期为单位的日期。最后,在本地化周内调整到正确的星期几。
+     * 
+     * 
      * @return a field providing access to the week-of-year, not null
      */
     public TemporalField weekOfYear() {
@@ -564,6 +784,32 @@ public final class WeekFields implements Serializable {
      * Then take the week-of-week-based-year, subtract one, and add the amount in weeks to the date.
      * Finally, adjust to the correct day-of-week within the localized week.
      *
+     * <p>
+     * 返回一个字段,以访问基于此{@code WeekFields}的基于周的年份的周。
+     * <p>
+     *  这表示一年中的星期计数的概念,其中星期从固定的星期开始,例如星期一,并且每星期属于恰好一年。
+     * 此字段通常与{@link WeekFields#dayOfWeek()}和{@link WeekFields#weekBasedYear()}一起使用。
+     * <p>
+     *  第一周(1)是从{@link WeekFields#getFirstDayOfWeek}开始的一周,该年度至少有{@link WeekFields#getMinimalDaysInFirstWeek()}
+     * 天。
+     * 如果第一周在年开始后开始,则前一周是上一年的最后一周。
+     * <p>
+     *  例如：<br>  - 如果一年的第一天是星期一,则第一周从第一天开始<br>  - 如果一年的第二天是星期一,则第一周从第二天开始,第一天开始上一年的最后一周<br>  - 如果一年中的第四天是星期一
+     * ,则第一周从第4天开始,第1到第3天是上一年的最后一周<br>  - 如果第5天的年份是星期一,第二周从第五天开始,第一到第四周是第一周<br>。
+     * <p>
+     *  此字段可用于任何日历系统。
+     * <p>
+     *  在解析的解析阶段中,可以从基于周的年,星期和星期创建日期。
+     * <p>
+     * 在{@linkplain ResolverStyle#STRICT strict mode}中,所有三个字段都根据其有效值范围进行验证。验证年周期字段以确保所得的基于周的年是基于周的年请求。
+     * <p>
+     *  在{@linkplain ResolverStyle#SMART智能模式}中,所有三个字段均根据其有效值范围进行验证。
+     * 基于星期的年份字段从1到53有效,这意味着结果日期可以是指定的下一个基于周的年份。
+     * <p>
+     *  在{@linkplain ResolverStyle#LENIENT宽松模式}中,将根据有效值的范围验证年份和星期几。计算结果日期等同于以下三阶段方法。
+     * 首先,在请求的基于周的年中的第一周的第一天创建日期。然后取基于星期的年份,减去1,并将数字加到日期。最后,在本地化周内调整到正确的星期几。
+     * 
+     * 
      * @return a field providing access to the week-of-week-based-year, not null
      */
     public TemporalField weekOfWeekBasedYear() {
@@ -606,6 +852,29 @@ public final class WeekFields implements Serializable {
      * Then take the week-of-week-based-year, subtract one, and add the amount in weeks to the date.
      * Finally, adjust to the correct day-of-week within the localized week.
      *
+     * <p>
+     *  返回一个字段,以访问基于此{@code WeekFields}的基于周的年份的年份。
+     * <p>
+     *  这表示年的概念,其中星期从固定的星期开始,例如星期一,并且每星期属于恰好一年。
+     * 此字段通常与{@link WeekFields#dayOfWeek()}和{@link WeekFields#weekOfWeekBasedYear()}一起使用。
+     * <p>
+     * 第一周(1)是从{@link WeekFields#getFirstDayOfWeek}开始的一周,该年度至少有{@link WeekFields#getMinimalDaysInFirstWeek()}
+     * 天。
+     * 因此,第一周可以在年初开始。如果第一周在年开始后开始,则前一周是上一年的最后一周。
+     * <p>
+     *  此字段可用于任何日历系统。
+     * <p>
+     *  在解析的解析阶段中,可以从基于周的年,星期和星期创建日期。
+     * <p>
+     *  在{@linkplain ResolverStyle#STRICT strict mode}中,所有三个字段都根据其有效值范围进行验证。验证年周期字段以确保所得的基于周的年是基于周的年请求。
+     * <p>
+     *  在{@linkplain ResolverStyle#SMART智能模式}中,所有三个字段均根据其有效值范围进行验证。
+     * 基于星期的年份字段从1到53有效,这意味着结果日期可以是指定的下一个基于周的年份。
+     * <p>
+     *  在{@linkplain ResolverStyle#LENIENT宽松模式}中,将根据有效值的范围验证年份和星期几。计算结果日期等同于以下三阶段方法。
+     * 首先,在请求的基于周的年中的第一周的第一天创建日期。然后取基于星期的年份,减去1,并将数字加到日期。最后,在本地化周内调整到正确的星期几。
+     * 
+     * 
      * @return a field providing access to the week-based-year, not null
      */
     public TemporalField weekBasedYear() {
@@ -619,6 +888,12 @@ public final class WeekFields implements Serializable {
      * The comparison is based on the entire state of the rules, which is
      * the first day-of-week and minimal days.
      *
+     * <p>
+     * 检查此{@code WeekFields}是否等于指定的对象。
+     * <p>
+     *  比较是基于规则的整个状态,这是第一个星期和最少天。
+     * 
+     * 
      * @param object  the other rules to compare to, null returns false
      * @return true if this is equal to the specified rules
      */
@@ -636,6 +911,10 @@ public final class WeekFields implements Serializable {
     /**
      * A hash code for this {@code WeekFields}.
      *
+     * <p>
+     *  此{@code WeekFields}的哈希代码。
+     * 
+     * 
      * @return a suitable hash code
      */
     @Override
@@ -647,6 +926,10 @@ public final class WeekFields implements Serializable {
     /**
      * A string representation of this {@code WeekFields} instance.
      *
+     * <p>
+     *  此{@code WeekFields}实例的字符串表示形式。
+     * 
+     * 
      * @return the string representation, not null
      */
     @Override
@@ -662,6 +945,10 @@ public final class WeekFields implements Serializable {
      * combination of start of week and minimum number of days.
      * Constructors are provided to create fields for DayOfWeek, WeekOfMonth,
      * and WeekOfYear.
+     * <p>
+     *  基于WeekFields计算DayOfWeek,WeekOfMonth和WeekOfYear的字段类型。每个不同的WeekField需要单独的Field实例;组合周的开始和最小天数。
+     * 提供构造函数以为DayOfWeek,WeekOfMonth和WeekOfYear创建字段。
+     * 
      */
     static class ComputedDayOfField implements TemporalField {
 
@@ -671,6 +958,11 @@ public final class WeekFields implements Serializable {
          * <p>
          * The WeekDefintion of the first day of the week is used with
          * the ISO DAY_OF_WEEK field to compute week boundaries.
+         * <p>
+         *  返回一个字段以访问星期几,基于WeekFields计算。
+         * <p>
+         *  一周的第一天的WeekDefintion与ISO DAY_OF_WEEK字段一起使用,以计算周边界。
+         * 
          */
         static ComputedDayOfField ofDayOfWeekField(WeekFields weekDef) {
             return new ComputedDayOfField("DayOfWeek", weekDef, DAYS, WEEKS, DAY_OF_WEEK_RANGE);
@@ -679,6 +971,10 @@ public final class WeekFields implements Serializable {
         /**
          * Returns a field to access the week of month,
          * computed based on a WeekFields.
+         * <p>
+         *  返回一个字段以访问基于WeekFields计算的月份周。
+         * 
+         * 
          * @see WeekFields#weekOfMonth()
          */
         static ComputedDayOfField ofWeekOfMonthField(WeekFields weekDef) {
@@ -688,6 +984,10 @@ public final class WeekFields implements Serializable {
         /**
          * Returns a field to access the week of year,
          * computed based on a WeekFields.
+         * <p>
+         *  返回一个字段以访问基于WeekFields计算的年度周。
+         * 
+         * 
          * @see WeekFields#weekOfYear()
          */
         static ComputedDayOfField ofWeekOfYearField(WeekFields weekDef) {
@@ -697,6 +997,10 @@ public final class WeekFields implements Serializable {
         /**
          * Returns a field to access the week of week-based-year,
          * computed based on a WeekFields.
+         * <p>
+         *  返回一个字段以访问基于week-based-year的周,基于WeekFields计算。
+         * 
+         * 
          * @see WeekFields#weekOfWeekBasedYear()
          */
         static ComputedDayOfField ofWeekOfWeekBasedYearField(WeekFields weekDef) {
@@ -706,6 +1010,10 @@ public final class WeekFields implements Serializable {
         /**
          * Returns a field to access the week of week-based-year,
          * computed based on a WeekFields.
+         * <p>
+         *  返回一个字段以访问基于week-based-year的周,基于WeekFields计算。
+         * 
+         * 
          * @see WeekFields#weekBasedYear()
          */
         static ComputedDayOfField ofWeekBasedYearField(WeekFields weekDef) {
@@ -715,6 +1023,10 @@ public final class WeekFields implements Serializable {
         /**
          * Return a new week-based-year date of the Chronology, year, week-of-year,
          * and dow of week.
+         * <p>
+         *  返回年度年,年,年,星期的新的基于周的年份日期。
+         * 
+         * 
          * @param chrono The chronology of the new date
          * @param yowby the year of the week-based-year
          * @param wowby the week of the week-based-year
@@ -800,6 +1112,10 @@ public final class WeekFields implements Serializable {
         /**
          * Returns the year of week-based-year for the temporal.
          * The year can be the previous year, the current year, or the next year.
+         * <p>
+         *  返回时间的基于周的年的年份。年份可以是上一年,当年或下一年。
+         * 
+         * 
          * @param temporal a date of any chronology, not null
          * @return the year of week-based-year for the date
          */
@@ -830,6 +1146,10 @@ public final class WeekFields implements Serializable {
          * The week can be part of the previous year, the current year,
          * or the next year depending on the week start and minimum number
          * of days.
+         * <p>
+         * 返回时间的周为基础的年的周。该周可以是上一年,当前年或下一年的一部分,取决于周开始和最小天数。
+         * 
+         * 
          * @param temporal  a date of any chronology
          * @return the week of the year
          * @see #localizedWeekBasedYear(java.time.temporal.TemporalAccessor)
@@ -862,6 +1182,10 @@ public final class WeekFields implements Serializable {
         /**
          * Returns an offset to align week start with a day of month or day of year.
          *
+         * <p>
+         *  返回一个偏移量,以便将星期开始与一个月中的某一天或一年中的某一天对齐。
+         * 
+         * 
          * @param day  the day; 1 through infinity
          * @param dow  the day of the week of that day; 1 through 7
          * @return  an offset in days to align a day with the start of the first 'full' week
@@ -880,6 +1204,10 @@ public final class WeekFields implements Serializable {
         /**
          * Returns the week number computed from the reference day and reference dayOfWeek.
          *
+         * <p>
+         *  返回从参考日和参考dayOfWeek计算的周数。
+         * 
+         * 
          * @param offset the offset to align a date with the start of week
          *     from {@link #startOfWeekOffset}.
          * @param day  the day for which to compute the week number
@@ -1103,6 +1431,10 @@ public final class WeekFields implements Serializable {
 
         /**
          * Map the field range to a week range
+         * <p>
+         *  将字段范围映射到周范围
+         * 
+         * 
          * @param temporal the temporal
          * @param field the field to get the range of
          * @return the ValueRange with the range adjusted to weeks.
@@ -1117,6 +1449,9 @@ public final class WeekFields implements Serializable {
 
         /**
          * Map the field range to a week range of a week year.
+         * <p>
+         *  将字段范围映射到周一周的周范围。
+         * 
          * @param temporal  the temporal
          * @return the ValueRange with the range adjusted to weeks.
          */

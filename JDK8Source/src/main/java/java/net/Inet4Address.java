@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -79,6 +80,37 @@ import java.io.ObjectStreamException;
  * 255 are global. However, the administrative scoping is preferred.
  * Please refer to <a href="http://www.ietf.org/rfc/rfc2365.txt">
  * <i>RFC&nbsp;2365: Administratively Scoped IP Multicast</i></a>
+ * <p>
+ *  此类表示Internet协议版本4(IPv4)地址。
+ * 由<a href="http://www.ietf.org/rfc/rfc790.txt"> <i> RFC 790：已分配号码</i> </a>定义,。
+ * <a href="http://www.ietf.org/rfc/rfc1918.txt">
+ *  <i> RFC&nbsp; 1918：私人网际网路的地址分配</i> </a>和<a href="http://www.ietf.org/rfc/rfc2365.txt"> <i> RFC&nbsp;
+ *  2365 ：管理范围的IP组播</i> </a>。
+ * 
+ *  <h3> <A NAME="format"> IP地址的文字表示</a> </h3>
+ * 
+ *  用作方法输入的IPv4地址的文本表示采用以下形式之一：
+ * 
+ *  <blockquote> <table cellpadding = 0 cellspacing = 0 summary ="layout"> <tr> <td> {@ code dddd} </td>
+ *  </tr> <tr> <td> {@ code ddd} </td > </tr> <tr> <td> {@ code dd} </td> </tr> <tr> <td> {@ code d} </td>
+ *  </tr> </table> </blockquote >。
+ * 
+ *  <p>当指定四个部分时,每个部分都被解释为一个字节的数据,并从左到右分配给IPv4地址的四个字节。
+ * 
+ *  <p>指定三部分地址时,最后一部分被解释为16位数量,并放在网络地址的最右两个字节中。这使得三部分地址格式便于将B类网络地址指定为128.net.host。
+ * 
+ * <p>当提供两部分地址时,最后一部分被解释为24位数量,并放在网络地址的最右三个字节中。这使得两部分地址格式方便地将A类网络地址指定为net.host。
+ * 
+ *  <p>当只给出一个部分时,该值直接存储在网络地址中,不进行任何字节重新排列。
+ * 
+ *  <p>对于返回文本表示作为输出值的方法,使用第一种形式,即点分四元字符串。
+ * 
+ *  <h4>多播地址的范围</h4>
+ * 
+ *  历史上,IP报头中的IPv4 TTL字段已加倍为多播范围字段：TTL为0表示节点本地,1表示链路本地,上至32表示站点本地,上至64表示区域本地, 128表示大陆本地,并且上至255是全局的。
+ * 但是,首选管理范围。请参阅<a href="http://www.ietf.org/rfc/rfc2365.txt"> <i> RFC&nbsp; 2365：管理范围的IP组播</i> </a>。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -88,11 +120,18 @@ class Inet4Address extends InetAddress {
 
     /** use serialVersionUID from InetAddress, but Inet4Address instance
      *  is always replaced by an InetAddress instance before being
+     * <p>
+     *  始终由InetAddress实例替代
+     * 
+     * 
      *  serialized */
     private static final long serialVersionUID = 3286316764910316507L;
 
     /*
      * Perform initializations.
+     * <p>
+     *  执行初始化。
+     * 
      */
     static {
         init();
@@ -127,6 +166,10 @@ class Inet4Address extends InetAddress {
     /**
      * Replaces the object to be serialized with an InetAddress object.
      *
+     * <p>
+     *  用InetAddress对象替换要序列化的对象。
+     * 
+     * 
      * @return the alternate object to be serialized.
      *
      * @throws ObjectStreamException if a new object replacing this
@@ -143,6 +186,9 @@ class Inet4Address extends InetAddress {
          * based on the platform AF_INET value (usually 2).
          * For compatibility reasons we must therefore write the
          * the InetAddress with this family.
+         * <p>
+         *  在1.4之前,InetAddress是基于平台AF_INET值(通常为2)创建的。出于兼容性原因,我们必须将InetAddress写入此系列。
+         * 
          */
         inet.holder().family = 2;
 
@@ -153,6 +199,10 @@ class Inet4Address extends InetAddress {
      * Utility routine to check if the InetAddress is an
      * IP multicast address. IP multicast address is a Class D
      * address i.e first four bits of the address are 1110.
+     * <p>
+     *  用于检查InetAddress是否是IP多播地址的实用程序。 IP多播地址是D类地址,即地址的前四位是1110。
+     * 
+     * 
      * @return a {@code boolean} indicating if the InetAddress is
      * an IP multicast address
      * @since   JDK1.1
@@ -163,6 +213,10 @@ class Inet4Address extends InetAddress {
 
     /**
      * Utility routine to check if the InetAddress in a wildcard address.
+     * <p>
+     * 用于检查通配符地址中的InetAddress的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the Inetaddress is
      *         a wildcard address.
      * @since 1.4
@@ -174,6 +228,10 @@ class Inet4Address extends InetAddress {
     /**
      * Utility routine to check if the InetAddress is a loopback address.
      *
+     * <p>
+     *  用于检查InetAddress是否是环回地址的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the InetAddress is
      * a loopback address; or false otherwise.
      * @since 1.4
@@ -187,6 +245,10 @@ class Inet4Address extends InetAddress {
     /**
      * Utility routine to check if the InetAddress is an link local address.
      *
+     * <p>
+     *  用于检查InetAddress是否是链路本地地址的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the InetAddress is
      * a link local address; or false if address is not a link local unicast address.
      * @since 1.4
@@ -204,6 +266,10 @@ class Inet4Address extends InetAddress {
     /**
      * Utility routine to check if the InetAddress is a site local address.
      *
+     * <p>
+     *  用于检查InetAddress是否是站点本地地址的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the InetAddress is
      * a site local address; or false if address is not a site local unicast address.
      * @since 1.4
@@ -224,6 +290,10 @@ class Inet4Address extends InetAddress {
     /**
      * Utility routine to check if the multicast address has global scope.
      *
+     * <p>
+     *  用于检查多播地址是否具有全局范围的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the address has
      *         is a multicast address of global scope, false if it is not
      *         of global scope or it is not a multicast address
@@ -240,6 +310,10 @@ class Inet4Address extends InetAddress {
     /**
      * Utility routine to check if the multicast address has node scope.
      *
+     * <p>
+     *  用于检查多播地址是否具有节点范围的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the address has
      *         is a multicast address of node-local scope, false if it is not
      *         of node-local scope or it is not a multicast address
@@ -253,6 +327,10 @@ class Inet4Address extends InetAddress {
     /**
      * Utility routine to check if the multicast address has link scope.
      *
+     * <p>
+     *  用于检查多播地址是否具有链路范围的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the address has
      *         is a multicast address of link-local scope, false if it is not
      *         of link-local scope or it is not a multicast address
@@ -269,6 +347,10 @@ class Inet4Address extends InetAddress {
     /**
      * Utility routine to check if the multicast address has site scope.
      *
+     * <p>
+     *  用于检查多播地址是否具有站点范围的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the address has
      *         is a multicast address of site-local scope, false if it is not
      *         of site-local scope or it is not a multicast address
@@ -284,6 +366,10 @@ class Inet4Address extends InetAddress {
     /**
      * Utility routine to check if the multicast address has organization scope.
      *
+     * <p>
+     *  用于检查多播地址是否具有组织范围的实用程序。
+     * 
+     * 
      * @return a {@code boolean} indicating if the address has
      *         is a multicast address of organization-local scope,
      *         false if it is not of organization-local scope
@@ -303,6 +389,10 @@ class Inet4Address extends InetAddress {
      * object. The result is in network byte order: the highest order
      * byte of the address is in {@code getAddress()[0]}.
      *
+     * <p>
+     *  返回此{@code InetAddress}对象的原始IP地址。结果是以网络字节顺序：地址的最高位字节在{@code getAddress()[0]}中。
+     * 
+     * 
      * @return  the raw IP address of this object.
      */
     public byte[] getAddress() {
@@ -319,6 +409,10 @@ class Inet4Address extends InetAddress {
     /**
      * Returns the IP address string in textual presentation form.
      *
+     * <p>
+     *  以文本表示形式返回IP地址字符串。
+     * 
+     * 
      * @return  the raw IP address in a string format.
      * @since   JDK1.0.2
      */
@@ -329,6 +423,10 @@ class Inet4Address extends InetAddress {
     /**
      * Returns a hashcode for this IP address.
      *
+     * <p>
+     *  返回此IP地址的哈希码。
+     * 
+     * 
      * @return  a hash code value for this IP address.
      */
     public int hashCode() {
@@ -346,6 +444,12 @@ class Inet4Address extends InetAddress {
      * {@code getAddress} is the same for both, and each of the
      * array components is the same for the byte arrays.
      *
+     * <p>
+     *  将此对象与指定的对象进行比较。结果是{@code true}当且仅当参数不是{@code null},它表示与此对象相同的IP地址。
+     * <p>
+     *  {@code InetAddress}的两个实例表示相同的IP地址,如果{@code getAddress}返回的字节数组的长度相同,并且每个数组组件对于字节数组是相同的。
+     * 
+     * 
      * @param   obj   the object to compare against.
      * @return  {@code true} if the objects are the same;
      *          {@code false} otherwise.
@@ -360,6 +464,10 @@ class Inet4Address extends InetAddress {
     /*
      * Converts IPv4 binary address into a string suitable for presentation.
      *
+     * <p>
+     *  将IPv4二进制地址转换为适合呈现的字符串。
+     * 
+     * 
      * @param src a byte array representing an IPv4 numeric address
      * @return a String representing the IPv4 address in
      *         textual representation format
@@ -373,6 +481,8 @@ class Inet4Address extends InetAddress {
 
     /**
      * Perform class load-time initializations.
+     * <p>
+     *  执行类装入时初始化。
      */
     private static native void init();
 }

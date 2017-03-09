@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,11 @@ import javax.swing.JTextField;
  * authentication questions.
  * This can be used by a JAAS application to instantiate a
  * CallbackHandler
+ * <p>
+ * <p>
+ *  使用Swing对话框窗口查询用户对身份验证问题的答案。这可以由JAAS应用程序用来实例化CallbackHandler
+ * 
+ * 
  * @see javax.security.auth.callback
  * @deprecated This class will be removed in a future release.
  */
@@ -69,12 +75,19 @@ public class DialogCallbackHandler implements CallbackHandler {
 
     /**
      * Creates a callback dialog with the default parent window.
+     * <p>
+     *  使用默认父窗口创建回调对话框。
+     * 
      */
     public DialogCallbackHandler() { }
 
     /**
      * Creates a callback dialog and specify the parent window.
      *
+     * <p>
+     *  创建回调对话框并指定父窗口。
+     * 
+     * 
      * @param parentComponent the parent window -- specify <code>null</code>
      * for the default parent
      */
@@ -85,6 +98,9 @@ public class DialogCallbackHandler implements CallbackHandler {
     /*
      * An interface for recording actions to carry out if the user
      * clicks OK for the dialog.
+     * <p>
+     *  用于记录操作的界面,以执行用户是否单击对话框的确定​​。
+     * 
      */
     private static interface Action {
          void perform();
@@ -93,6 +109,10 @@ public class DialogCallbackHandler implements CallbackHandler {
     /**
      * Handles the specified set of callbacks.
      *
+     * <p>
+     *  处理指定的回调集。
+     * 
+     * 
      * @param callbacks the callbacks to handle
      * @throws UnsupportedCallbackException if the callback is not an
      * instance  of NameCallback or PasswordCallback
@@ -144,6 +164,9 @@ public class DialogCallbackHandler implements CallbackHandler {
                 /*
                  * Put the prompt and name in a horizontal box,
                  * and add that to the set of messages.
+                 * <p>
+                 *  将提示和名称放在水平框中,并将其添加到消息集。
+                 * 
                  */
                 Box namePanel = Box.createHorizontalBox();
                 namePanel.add(prompt);
@@ -219,6 +242,9 @@ public class DialogCallbackHandler implements CallbackHandler {
     /*
      * Provides assistance with translating between JAAS and Swing
      * confirmation dialogs.
+     * <p>
+     *  提供协助在JAAS和Swing确认对话框之间进行翻译。
+     * 
      */
     private static class ConfirmationInfo {
 
@@ -271,6 +297,8 @@ public class DialogCallbackHandler implements CallbackHandler {
                  * There's no way to know if the default option means
                  * to cancel the login, but there isn't a better way
                  * to guess this.
+                 * <p>
+                 *  没有办法知道默认选项是否意味着取消登录,但没有一个更好的方法来猜测这个。
                  */
                 translations = new int[] {
                     JOptionPane.CLOSED_OPTION, callback.getDefaultOption()

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -94,6 +95,43 @@ import java.io.IOException;
  *     ServicePermission("host/foo.example.com@EXAMPLE.COM", "accept");
  * </pre>
  *
+ * <p>
+ *  此类用于保护Kerberos服务和访问这些服务所需的凭据。存在服务主体和访问服务所需的凭证的一对一映射。因此,授予对服务主体的访问权限隐含地授予对与服务主体建立安全上下文所必需的凭证的访问。
+ * 无论凭证是在高速缓存中还是通过与KDC的交换获取,这都适用。凭证可以是票据授予票据,服务票据或来自密钥表的秘密密钥。
+ * <p>
+ *  ServicePermission包含服务主体名称和指定可在其中使用凭证的上下文的操作列表。
+ * <p>
+ *  服务主体名称是提供服务的{@code KereberosPrincipal}的规范名称,即KerberosPrincipal代表Kerberos服务主体。此名称以区分大小写的方式处理。
+ * 星号可以单独出现,表示任何服务主体。
+ * <p>
+ *  授予此权限意味着调用者可以在操作指定的上下文中使用缓存的凭据(TGT,服务票证或密钥)。在TGT的情况下,授予此许可还意味着可以通过认证服务交换获得TGT。
+ * <p>
+ *  可能的操作是：
+ * 
+ * <pre>
+ * 启动 - 允许呼叫者使用凭证来发起与服务主体的安全上下文。
+ * 
+ *  accept  - 允许调用者使用凭证接受安全上下文作为特定的主体。
+ * </pre>
+ * 
+ *  例如,要指定访问TGT以启动安全上下文的权限,权限的构造如下：
+ * 
+ * <pre>
+ *  ServicePermission("krbtgt/EXAMPLE.COM@EXAMPLE.COM","initiate");
+ * </pre>
+ * <p>
+ *  要获得服务票证以使用"主机"服务启动上下文,权限构造如下：
+ * <pre>
+ *  ServicePermission("host/foo.example.com@EXAMPLE.COM","initiate");
+ * </pre>
+ * <p>
+ *  对于Kerberized服务器,操作是"accept"。例如,访问和使用Kerberized"主机"服务(telnet等)的密钥所需的权限将被构造如下：
+ * 
+ * <pre>
+ *  ServicePermission("host/foo.example.com@EXAMPLE.COM","accept");
+ * </pre>
+ * 
+ * 
  * @since 1.4
  */
 
@@ -104,21 +142,33 @@ public final class ServicePermission extends Permission
 
     /**
      * Initiate a security context to the specified service
+     * <p>
+     *  向指定的服务发起安全上下文
+     * 
      */
     private final static int INITIATE   = 0x1;
 
     /**
      * Accept a security context
+     * <p>
+     *  接受安全上下文
+     * 
      */
     private final static int ACCEPT     = 0x2;
 
     /**
      * All actions
+     * <p>
+     *  所有操作
+     * 
      */
     private final static int ALL        = INITIATE|ACCEPT;
 
     /**
      * No actions.
+     * <p>
+     *  无操作。
+     * 
      */
     private final static int NONE    = 0x0;
 
@@ -128,6 +178,10 @@ public final class ServicePermission extends Permission
     /**
      * the actions string.
      *
+     * <p>
+     *  操作字符串。
+     * 
+     * 
      * @serial
      */
 
@@ -139,6 +193,10 @@ public final class ServicePermission extends Permission
      * with the specified {@code servicePrincipal}
      * and {@code action}.
      *
+     * <p>
+     *  使用指定的{@code servicePrincipal}和{@code action}创建新的{@code ServicePermission}。
+     * 
+     * 
      * @param servicePrincipal the name of the service principal.
      * An asterisk may appear by itself, to signify any service principal.
      * <p>
@@ -152,6 +210,9 @@ public final class ServicePermission extends Permission
 
     /**
      * Initialize the ServicePermission object.
+     * <p>
+     *  初始化ServicePermission对象。
+     * 
      */
     private void init(String servicePrincipal, int mask) {
 
@@ -170,6 +231,12 @@ public final class ServicePermission extends Permission
      * specified permission.
      * <P>
      * If none of the above are true, {@code implies} returns false.
+     * <p>
+     *  检查此Kerberos服务权限对象是否"暗示"指定的权限。
+     * <P>
+     *  如果上面没有一个是真的,{@code implies}返回false。
+     * 
+     * 
      * @param p the permission to check against.
      *
      * @return true if the specified permission is implied by this object,
@@ -194,6 +261,10 @@ public final class ServicePermission extends Permission
     /**
      * Checks two ServicePermission objects for equality.
      * <P>
+     * <p>
+     *  检查两个ServicePermission对象是否相等。
+     * <P>
+     * 
      * @param obj the object to test for equality with this object.
      *
      * @return true if <i>obj</i> is a ServicePermission, and has the
@@ -217,6 +288,10 @@ public final class ServicePermission extends Permission
     /**
      * Returns the hash code value for this object.
      *
+     * <p>
+     *  返回此对象的哈希码值。
+     * 
+     * 
      * @return a hash code value for this object.
      */
 
@@ -231,6 +306,10 @@ public final class ServicePermission extends Permission
      * Always returns present actions in the following order:
      * initiate, accept.
      *
+     * <p>
+     * 返回指定掩码中操作的"规范字符串表示"。始终按以下顺序返回当前操作：启动,接受。
+     * 
+     * 
      * @param mask a specific integer action mask to translate into a string
      * @return the canonical string representation of the actions
      */
@@ -258,6 +337,9 @@ public final class ServicePermission extends Permission
      * Returns the canonical string representation of the actions.
      * Always returns present actions in the following order:
      * initiate, accept.
+     * <p>
+     *  返回操作的规范字符串表示形式。始终按以下顺序返回当前操作：启动,接受。
+     * 
      */
     public String getActions() {
         if (actions == null)
@@ -276,6 +358,12 @@ public final class ServicePermission extends Permission
      * that also enables the PermissionCollection implies method to
      * be implemented in an efficient (and consistent) manner.
      *
+     * <p>
+     *  返回用于存储ServicePermission对象的PermissionCollection对象。
+     * <br>
+     *  ServicePermission对象必须以允许以任何顺序插入到集合中的方式存储,但这也使得PermissionCollection隐含方法能够以高效(且一致)的方式实现。
+     * 
+     * 
      * @return a new PermissionCollection object suitable for storing
      * ServicePermissions.
      */
@@ -286,6 +374,10 @@ public final class ServicePermission extends Permission
     /**
      * Return the current action mask.
      *
+     * <p>
+     *  返回当前操作掩码。
+     * 
+     * 
      * @return the actions mask.
      */
     int getMask() {
@@ -295,6 +387,10 @@ public final class ServicePermission extends Permission
     /**
      * Convert an action string to an integer actions mask.
      *
+     * <p>
+     *  将操作字符串转换为整数操作掩码。
+     * 
+     * 
      * @param action the action string
      * @return the action mask
      */
@@ -388,6 +484,9 @@ public final class ServicePermission extends Permission
      * WriteObject is called to save the state of the ServicePermission
      * to a stream. The actions are serialized, and the superclass
      * takes care of the name.
+     * <p>
+     *  WriteObject被调用以将ServicePermission的状态保存到流。操作是序列化的,超类负责处理名称。
+     * 
      */
     private void writeObject(java.io.ObjectOutputStream s)
         throws IOException
@@ -402,6 +501,9 @@ public final class ServicePermission extends Permission
     /**
      * readObject is called to restore the state of the
      * ServicePermission from a stream.
+     * <p>
+     *  readObject被调用以从流中恢复ServicePermission的状态。
+     * 
      */
     private void readObject(java.io.ObjectInputStream s)
          throws IOException, ClassNotFoundException
@@ -445,6 +547,21 @@ public final class ServicePermission extends Permission
       }
 
       }
+    /* <p>
+    /*  public static void main(String args [])throws Exception {ServicePermission this_ = new ServicePermission(args [0],"accept"); ServicePermission that_ = new ServicePermission(args [1],"accept,initiate"); System.out.println("----- \ n"); System.out.println("this.implies(that)="+ this_.implies(that_)); System.out.println("----- \ n"); System.out.println("this ="+ this_); System.out.println("----- \ n"); System.out.println("that ="+ that_); System.out.println("----- \ n");。
+    /* 
+    /* KrbServicePermissionCollection nps = new KrbServicePermissionCollection(); nps.add(this_); nps.add(ne
+    /* w ServicePermission("nfs/example.com@EXAMPLE.COM","accept")); nps.add(new ServicePermission("host/exa
+    /* mple.com@EXAMPLE.COM","initiate")); System.out.println("nps.implies(that)="+ nps.implies(that_)); Sys
+    /* tem.out.println("----- \ n");。
+    /* 
+    /*  枚举e = nps.elements();
+    /* 
+    /*  while(e.hasMoreElements()){ServicePermission x =(ServicePermission)e.nextElement(); System.out.println("nps.e ="+ x); }
+    /* }。
+    /* 
+    /*  }}
+    /* 
     */
 
 }
@@ -464,6 +581,10 @@ final class KrbServicePermissionCollection extends PermissionCollection
      * Check and see if this collection of permissions implies the permissions
      * expressed in "permission".
      *
+     * <p>
+     *  检查并查看此权限集合是否意味着在"权限"中表达的权限。
+     * 
+     * 
      * @param permission the Permission object to compare
      *
      * @return true if "permission" is a proper subset of a permission in
@@ -504,6 +625,10 @@ final class KrbServicePermissionCollection extends PermissionCollection
      * Adds a permission to the ServicePermissions. The key for
      * the hash is the name.
      *
+     * <p>
+     *  向ServicePermissions添加权限。哈希的键是名称。
+     * 
+     * 
      * @param permission the Permission object to add.
      *
      * @exception IllegalArgumentException - if the permission is not a
@@ -528,6 +653,10 @@ final class KrbServicePermissionCollection extends PermissionCollection
      * Returns an enumeration of all the ServicePermission objects
      * in the container.
      *
+     * <p>
+     *  返回容器中所有ServicePermission对象的枚举。
+     * 
+     * 
      * @return an enumeration of all the ServicePermission objects.
      */
 
@@ -545,6 +674,8 @@ final class KrbServicePermissionCollection extends PermissionCollection
     // private Vector permissions;
 
     /**
+    /* <p>
+    /* 
      * @serialField permissions java.util.Vector
      *     A list of ServicePermission objects.
      */
@@ -553,11 +684,16 @@ final class KrbServicePermissionCollection extends PermissionCollection
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData "permissions" field (a Vector containing the ServicePermissions).
      */
     /*
      * Writes the contents of the perms field out as a Vector for
      * serialization compatibility with earlier releases.
+     * <p>
+     *  将perms字段的内容作为Vector与先前版本的序列化兼容性写入。
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -576,6 +712,8 @@ final class KrbServicePermissionCollection extends PermissionCollection
 
     /*
      * Reads in a Vector of ServicePermissions and saves them in the perms field.
+     * <p>
+     *  读取ServicePermissions的向量并将其保存在perms字段中。
      */
     @SuppressWarnings("unchecked")
     private void readObject(ObjectInputStream in)

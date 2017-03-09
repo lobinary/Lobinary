@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,16 @@ import java.net.*;
  * implement {@link Object#hashCode} consistently with its
  * <code>Object.equals</code> implementation).
  *
+ * <p>
+ *  RMI运行时使用<code> RMIServerSocketFactory </code>实例,以获取RMI调用的服务器套接字。
+ * 当通过<code> java.rmi.server.UnicastRemoteObject </code>的构造函数或<code> exportObject </code>方法创建/导出时,远程对象可以
+ * 与<code> RMIServerSocketFactory </code>和<code> java.rmi.activation.Activatable </code>。
+ *  RMI运行时使用<code> RMIServerSocketFactory </code>实例,以获取RMI调用的服务器套接字。
+ * 
+ *  <p>与远程对象相关联的<code> RMIServerSocketFactory </code>实例用于获取用于接受来自客户端的传入呼叫的​​<code> ServerSocket </code>。
+ * 
+ *  <p> <code> RMIServerSocketFactory </code>实例也可以与远程对象注册表相关联,以便客户端可以使用与远程对象注册表的自定义套接字通信。
+ * 
  * @author  Ann Wollrath
  * @author  Peter Jones
  * @since   1.2
@@ -63,6 +74,12 @@ public interface RMIServerSocketFactory {
     /**
      * Create a server socket on the specified port (port 0 indicates
      * an anonymous port).
+     * <p>
+     * 
+     *  <p>这个接口的实现应该实现{@link Object#equals},以便在传递代表相同(功能等效的)服务器套接字工厂的实例时返回<code> true </code>,<code> false <代码>
+     * 否则(它也应该实现{@link Object#hashCode}与其<code> Object.equals </code>实现一致)。
+     * 
+     * 
      * @param  port the port number
      * @return the server socket on the specified port
      * @exception IOException if an I/O error occurs during server socket

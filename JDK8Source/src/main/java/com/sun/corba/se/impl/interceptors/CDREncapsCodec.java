@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,9 @@ import org.omg.IOP.CodecPackage.TypeMismatch;
  * CDREncapsCodec is an implementation of Codec, as described
  * in orbos/99-12-02, that supports CDR encapsulation version 1.0, 1.1, and
  * 1.2.
+ * <p>
+ *  CDREncapsCodec是如在orbos / 99-12-02中描述的Codec的实现,其支持CDR封装版本1.0,1.1和1.2。
+ * 
  */
 public final class CDREncapsCodec
     extends org.omg.CORBA.LocalObject
@@ -66,12 +70,21 @@ public final class CDREncapsCodec
      * NOTE: CDREncapsCodec must remain immutable!  This is so that we
      * can pre-create CDREncapsCodecs for each version of GIOP in
      * CodecFactoryImpl.
+     * <p>
+     *  **************************************************** ***************注意：CDREncapsCodec必须保持不变！这是为了使我们可
+     * 以在CodecFactoryImpl中为每个版本的GIOP预先创建CDREncapsCodec。
+     * 
+     * 
      *******************************************************************/
 
     /**
      * Creates a new codec implementation.  Uses the given ORB to create
      * CDRInputStreams when necessary.
      *
+     * <p>
+     *  创建新的编解码器实现。必要时,使用给定的ORB创建CDRInputStreams。
+     * 
+     * 
      * @param orb The ORB to use to create a CDRInputStream or CDROutputStream
      * @param major The major version of GIOP we are encoding for
      * @param minor The minor version of GIOP we are encoding for
@@ -86,6 +99,9 @@ public final class CDREncapsCodec
 
     /**
      * Convert the given any into a CDR encapsulated octet sequence
+     * <p>
+     *  将给定的任何转换为​​CDR封装的八位字节序列
+     * 
      */
     public byte[] encode( Any data )
         throws InvalidTypeForEncoding
@@ -98,6 +114,9 @@ public final class CDREncapsCodec
     /**
      * Decode the given octet sequence into an any based on a CDR
      * encapsulated octet sequence.
+     * <p>
+     *  基于CDR封装的八位字节序列,将给定的八位字节序列解码成任何字节序列。
+     * 
      */
     public Any decode ( byte[] data )
         throws FormatMismatch
@@ -110,6 +129,9 @@ public final class CDREncapsCodec
     /**
      * Convert the given any into a CDR encapsulated octet sequence.  Only
      * the data is stored.  The type code is not.
+     * <p>
+     *  将给定的任何转换为​​CDR封装的八位字节序列。仅存储数据。类型代码不是。
+     * 
      */
     public byte[] encode_value( Any data )
         throws InvalidTypeForEncoding
@@ -123,6 +145,9 @@ public final class CDREncapsCodec
      * Decode the given octet sequence into an any based on a CDR
      * encapsulated octet sequence.  The type code is expected not to appear
      * in the octet sequence, and the given type code is used instead.
+     * <p>
+     *  基于CDR封装的八位字节序列,将给定的八位字节序列解码成任何字节序列。类型代码预期不会出现在八位位组序列中,而是使用给定的类型代码。
+     * 
      */
     public Any decode_value( byte[] data, TypeCode tc )
         throws FormatMismatch, TypeMismatch
@@ -139,6 +164,10 @@ public final class CDREncapsCodec
      * If sendTypeCode is true, the type code is sent with the message, as in
      * a standard encapsulation.  If it is false, only the data is sent.
      * Either way, the endian type is sent as the first part of the message.
+     * <p>
+     *  将给定的任何转换为​​CDR封装的八位字节序列。如果sendTypeCode为true,则类型代码与消息一起发送,如在标准封装中。如果为假,则只发送数据。
+     * 无论哪种方式,字节序类型都作为消息的第一部分发送。
+     * 
      */
     private byte[] encodeImpl( Any data, boolean sendTypeCode )
         throws InvalidTypeForEncoding
@@ -180,6 +209,7 @@ public final class CDREncapsCodec
      * encapsulated octet sequence.  If the type code is null, it is
      * expected to appear in the octet sequence.  Otherwise, the given
      * type code is used.
+     * <p>
      */
     private Any decodeImpl( byte[] data, TypeCode tc )
         throws FormatMismatch

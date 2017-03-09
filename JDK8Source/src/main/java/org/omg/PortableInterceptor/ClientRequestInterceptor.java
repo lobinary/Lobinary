@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -23,6 +24,12 @@ package org.omg.PortableInterceptor;
    * To write a client-side Interceptor, implement the 
    * <code>ClientRequestInterceptor</code> interface. 
    *
+   * <p>
+   *  客户端请求拦截器。
+   * <p>
+   *  请求拦截器被设计为在特定点处通过ORB截取请求/应答序列的流,使得服务可以查询请求信息并操纵在客户端和服务器之间传播的服务上下文。
+   * 请求拦截器的主要用途是使ORB服务能够在客户端和服务器之间传递上下文信息。有两种类型的请求拦截器：客户端和服务器端。
+   * 
    * @see ClientRequestInfo
    */
 public interface ClientRequestInterceptor extends ClientRequestInterceptorOperations, org.omg.PortableInterceptor.Interceptor, org.omg.CORBA.portable.IDLEntity 

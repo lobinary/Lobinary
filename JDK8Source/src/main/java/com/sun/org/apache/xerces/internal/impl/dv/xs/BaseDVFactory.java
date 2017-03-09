@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002,2003,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dv.xs;
@@ -32,6 +42,12 @@ import com.sun.org.apache.xerces.internal.xs.XSObjectList;
  *
  * @xerces.internal
  *
+ * <p>
+ *  工厂创建/返回内置模式DV并创建用户定义的DV
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neeraj Bajaj, Sun Microsystems, inc.
  * @author Sandy Gao, IBM
  *
@@ -55,6 +71,12 @@ public class BaseDVFactory extends SchemaDVFactory {
      *          is derived from anyType, and pass 'null' as the base of
      *          anySimpleType. It needs to be changed as per the decision taken.
      *
+     * <p>
+     *  获取给定名称的内置简单类型REVISIT：它仍然没有在Schema WG中决定如何定义ur-types和如果所有简单类型都应该从复杂类型派生,所以现在我们忽略这样的事实： anySimpleType派
+     * 生自anyType,并传递'null'作为anySimpleType的基础。
+     * 它需要根据所做的决定进行更改。
+     * 
+     * 
      * @param name  the name of the datatype
      * @return      the datatype validator of the given name
      */
@@ -66,6 +88,10 @@ public class BaseDVFactory extends SchemaDVFactory {
      * get all built-in simple types, which are stored in a hashtable keyed by
      * the name
      *
+     * <p>
+     *  得到所有内置的简单类型,这些类型存储在以名称键入的散列表中
+     * 
+     * 
      * @return      a hashtable which contains all built-in simple types
      */
     public SymbolHash getBuiltInTypes() {
@@ -76,6 +102,10 @@ public class BaseDVFactory extends SchemaDVFactory {
      * Create a new simple type which is derived by restriction from another
      * simple type.
      *
+     * <p>
+     *  创建一个新的简单类型,通过限制从另一个简单类型派生。
+     * 
+     * 
      * @param name              name of the new type, could be null
      * @param targetNamespace   target namespace of the new type, could be null
      * @param finalSet          value of "final"
@@ -92,6 +122,10 @@ public class BaseDVFactory extends SchemaDVFactory {
      * Create a new simple type which is derived by list from another simple
      * type.
      *
+     * <p>
+     *  创建一个新的简单类型,由另一个简单类型的列表派生。
+     * 
+     * 
      * @param name              name of the new type, could be null
      * @param targetNamespace   target namespace of the new type, could be null
      * @param finalSet          value of "final"
@@ -109,6 +143,9 @@ public class BaseDVFactory extends SchemaDVFactory {
      * Create a new simple type which is derived by union from a list of other
      * simple types.
      *
+     * <p>
+     * 创建一个新的简单类型,通过union从其他简单类型的列表中派生。
+     * 
      * @param name              name of the new type, could be null
      * @param targetNamespace   target namespace of the new type, could be null
      * @param finalSet          value of "final"

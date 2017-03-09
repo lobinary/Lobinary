@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,8 @@ import com.sun.corba.se.impl.logging.ActivationSystemException;
 
 /**
  *
+ * <p>
+ * 
  * @author      Rohit Garg
  * @since       JDK1.2
  */
@@ -364,6 +367,8 @@ public class RepositoryImpl extends _RepositoryImplBase
     /**
      * Typically the Repositoy is created within the ORBd VM but it can
      * be independently started as well.
+     * <p>
+     *  通常,Repositoy在ORBd VM中创建,但也可以单独启动。
      */
     public static void main(String args[]) {
         boolean debug = false ;

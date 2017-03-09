@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -38,6 +48,10 @@ import org.xml.sax.SAXException;
 /**
  * <p>This class wraps a SAX entity resolver (EntityResolver2) in an XNI entity resolver.</p>
  *
+ * <p>
+ *  <p>此类将SAX实体解析器(EntityResolver2)包装在XNI实体解析器中。</p>
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  *
  */
@@ -61,6 +75,10 @@ public class EntityResolver2Wrapper
     /**
      * <p>Creates a new instance wrapping the given SAX entity resolver.</p>
      *
+     * <p>
+     *  <p>创建包装给定SAX实体解析器的新实例。</p>
+     * 
+     * 
      * @param entityResolver the SAX entity resolver to wrap
      */
     public EntityResolver2Wrapper(EntityResolver2 entityResolver) {
@@ -74,6 +92,10 @@ public class EntityResolver2Wrapper
     /**
      * <p>Sets the SAX entity resolver wrapped by this object.</p>
      *
+     * <p>
+     *  <p>设置由此对象包装的SAX实体解析器。</p>
+     * 
+     * 
      * @param entityResolver the SAX entity resolver to wrap
      */
     public void setEntityResolver(EntityResolver2 entityResolver) {
@@ -83,6 +105,10 @@ public class EntityResolver2Wrapper
     /**
      * <p>Returns the SAX entity resolver wrapped by this object.</p>
      *
+     * <p>
+     *  <p>返回此对象包装的SAX实体解析器。</p>
+     * 
+     * 
      * @return the SAX entity resolver wrapped by this object
      */
     public EntityResolver2 getEntityResolver() {
@@ -98,6 +124,10 @@ public class EntityResolver2Wrapper
      * provide one. If no external subset is provided, this method should
      * return <code>null</code>.</p>
      *
+     * <p>
+     *  <p>为未明确提供文档的文档找到外部子集。如果没有提供外部子集,此方法应返回<code> null </code>。</p>
+     * 
+     * 
      * @param grammarDescription a description of the DTD
      *
      * @throws XNIException Thrown on general error.
@@ -140,6 +170,10 @@ public class EntityResolver2Wrapper
      * Resolves an external parsed entity. If the entity cannot be
      * resolved, this method should return null.
      *
+     * <p>
+     *  解析外部解析的实体。如果实体无法解析,则此方法应返回null。
+     * 
+     * 
      * @param resourceIdentifier contains the physical co-ordinates of the resource to be resolved
      *
      * @throws XNIException Thrown on general error.
@@ -194,6 +228,8 @@ public class EntityResolver2Wrapper
 
     /**
      * Creates an XMLInputSource from a SAX InputSource.
+     * <p>
+     *  从SAX InputSource创建XMLInputSource。
      */
     private XMLInputSource createXMLInputSource(InputSource source, String baseURI) {
 

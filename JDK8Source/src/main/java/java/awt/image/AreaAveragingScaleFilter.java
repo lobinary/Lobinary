@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,16 @@ import java.awt.Rectangle;
  * implementation dependencies, there may be differences in pixel values
  * of an image filtered on different platforms.
  *
+ * <p>
+ *  ImageFilter类,用于使用简单的面积平均算法来缩放图像,该算法产生比最近邻算法更平滑的结果。
+ *  <p>此类扩展了基本的ImageFilter类,以扩展现有图像,并为包含重新采样图像的新图像提供源。源图像中的像素被混合以产生用于指定大小的图像的像素。
+ * 混合处理类似于使用像素复制将源图像按比例放大到目标大小的倍数,然后通过简单地对落在目的地的给定像素内的超大化图像中的所有像素进行平均来将其缩小到目的地大小图片。
+ * 如果来自源的数据不是按照TopDownLeftRight顺序传送的,则过滤器将退回到简单的像素复制行为,并且在结束时利用requestTopDownLeftRightResend()方法以更好的方式重新
+ * 过滤像素。
+ * 混合处理类似于使用像素复制将源图像按比例放大到目标大小的倍数,然后通过简单地对落在目的地的给定像素内的超大化图像中的所有像素进行平均来将其缩小到目的地大小图片。
+ *  <p>这意味着与FilteredImageSource对象结合使用以生成现有图像的缩放版本。由于实现依赖性,在不同平台上过滤的图像的像素值可能存在差异。
+ * 
+ * 
  * @see FilteredImageSource
  * @see ReplicateScaleFilter
  * @see ImageFilter
@@ -70,6 +81,10 @@ public class AreaAveragingScaleFilter extends ReplicateScaleFilter {
     /**
      * Constructs an AreaAveragingScaleFilter that scales the pixels from
      * its source Image as specified by the width and height parameters.
+     * <p>
+     *  构造一个AreaAveragingScaleFilter,它根据width和height参数指定的缩放来自其源图像的像素。
+     * 
+     * 
      * @param width the target width to scale the image
      * @param height the target height to scale the image
      */
@@ -87,6 +102,13 @@ public class AreaAveragingScaleFilter extends ReplicateScaleFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     * 检测数据是否正在传递必要的提示,以允许平均算法完成其工作。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer#setHints
      */
     public void setHints(int hints) {
@@ -241,6 +263,13 @@ public class AreaAveragingScaleFilter extends ReplicateScaleFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  将传送的字节像素的分量组合到累积数组中,并对完成的像素行的任何平均数据发送。如果没有在setHints调用中指定正确的提示,那么将工作中继到我们的超类,它能够缩放像素,而不考虑传递提示。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ReplicateScaleFilter
      */
     public void setPixels(int x, int y, int w, int h,
@@ -267,6 +296,11 @@ public class AreaAveragingScaleFilter extends ReplicateScaleFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  将用于传送的int像素的分量组合到累积数组中,并对完成的像素行的任何平均数据发送。如果没有在setHints调用中指定正确的提示,那么将工作中继到我们的超类,它能够缩放像素,而不考虑传递提示。
+     * <p>
+     * 注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 
      * @see ReplicateScaleFilter
      */
     public void setPixels(int x, int y, int w, int h,

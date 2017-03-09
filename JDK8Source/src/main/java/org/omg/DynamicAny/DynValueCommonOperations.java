@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -11,17 +12,26 @@ package org.omg.DynamicAny;
 
 /**
     * DynValueCommon provides operations supported by both the DynValue and DynValueBox interfaces.
+    * <p>
+    *  DynValueCommon提供了DynValue和DynValueBox接口支持的操作。
+    * 
     */
 public interface DynValueCommonOperations  extends org.omg.DynamicAny.DynAnyOperations
 {
 
   /**
         * Returns true if the DynValueCommon represents a null value type.
+        * <p>
+        *  如果DynValueCommon表示空值类型,则返回true。
+        * 
         */
   boolean is_null ();
 
   /**
         * Changes the representation of a DynValueCommon to a null value type.
+        * <p>
+        *  将DynValueCommon的表示形式更改为空值类型。
+        * 
         */
   void set_to_null ();
 
@@ -29,6 +39,9 @@ public interface DynValueCommonOperations  extends org.omg.DynamicAny.DynAnyOper
         * Replaces a null value type with a newly constructed value. Its components are initialized
         * to default values as in DynAnyFactory.create_dyn_any_from_type_code.
         * If the DynValueCommon represents a non-null value type, then this operation has no effect. 
+        * <p>
+        *  将空值类型替换为新构造的值。它的组件被初始化为默认值,如在DynAnyFactory.create_dyn_any_from_type_code中。
+        * 如果DynValueCommon表示非空值类型,则此操作不起作用。
         */
   void set_to_value ();
 } // interface DynValueCommonOperations

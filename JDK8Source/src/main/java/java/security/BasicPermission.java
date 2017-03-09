@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,16 @@ import java.io.IOException;
  * Subclasses may implement actions on top of BasicPermission,
  * if desired.
  * <p>
+ * <p>
+ *  BasicPermission类扩展了Permission类,并且可以用作希望遵循与BasicPermission相同的命名约定的权限的基类。
+ * <P>
+ *  BasicPermission的名称是给定权限的名称(例如,"exit","setFactory","print.queueJob"等)。命名约定遵循分层属性命名约定。
+ * 星号可以单独出现,或者如果紧接在前面有""。可能出现在名称的结尾,表示通配符匹配。例如,"*"和"java。*"表示通配符匹配,而"* java","a * b"和"java *"不匹配。
+ * <P>
+ *  操作字符串(继承自Permission)未使用。因此,BasicPermission通常用作"命名"权限的基类(包含名称但没有动作列表的基类;您具有命名权限,或者不具有命名权限)。
+ * 如果需要,子类可以在BasicPermission之上实现动作。
+ * <p>
+ * 
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.PermissionCollection
@@ -83,6 +94,9 @@ public abstract class BasicPermission extends Permission
 
     /**
      * initialize a BasicPermission object. Common to all constructors.
+     * <p>
+     *  初始化一个BasicPermission对象。所有构造函数的公共。
+     * 
      */
     private void init(String name) {
         if (name == null)
@@ -121,6 +135,10 @@ public abstract class BasicPermission extends Permission
      * "setFactory",
      * "print.queueJob", or "topLevelWindow", etc.
      *
+     * <p>
+     *  创建具有指定名称的新BasicPermission。 Name是权限的符号名称,例如"setFactory","print.queueJob"或"topLevelWindow"等。
+     * 
+     * 
      * @param name the name of the BasicPermission.
      *
      * @throws NullPointerException if {@code name} is {@code null}.
@@ -137,6 +155,10 @@ public abstract class BasicPermission extends Permission
      * The name is the symbolic name of the BasicPermission, and the
      * actions String is currently unused.
      *
+     * <p>
+     *  创建具有指定名称的新BasicPermission对象。名称是BasicPermission的符号名称,并且操作String目前未使用。
+     * 
+     * 
      * @param name the name of the BasicPermission.
      * @param actions ignored.
      *
@@ -160,6 +182,15 @@ public abstract class BasicPermission extends Permission
      *      name. For example, "a.b.*" implies "a.b.c".
      * </ul>
      *
+     * <p>
+     * 检查此对象是否"隐含"指定的权限。
+     * <P>
+     *  更具体地说,这个方法返回true如果：
+     * <ul>
+     *  <li> <i> p </i>的类别与此物件的类别相同,而且<li> <i>的名称等于或(在通配符的情况下)对象的名称。例如,"a.b. *"表示"a.b.c"。
+     * </ul>
+     * 
+     * 
      * @param p the permission to check against.
      *
      * @return true if the passed permission is equal to or
@@ -196,6 +227,10 @@ public abstract class BasicPermission extends Permission
      * Checks that <i>obj</i>'s class is the same as this object's class
      * and has the same name as this object.
      * <P>
+     * <p>
+     *  检查两个BasicPermission对象是否相等。检查<i> obj </i>的类与此对象的类是否相同,并且具有与此对象相同的名称。
+     * <P>
+     * 
      * @param obj the object we are testing for equality with this object.
      * @return true if <i>obj</i>'s class is the same as this object's class
      *  and has the same name as this BasicPermission object, false otherwise.
@@ -219,6 +254,10 @@ public abstract class BasicPermission extends Permission
      * {@code getName().hashCode()}, where {@code getName} is
      * from the Permission superclass.
      *
+     * <p>
+     *  返回此对象的哈希码值。使用的哈希码是名称的哈希码,即{@code getName()。hashCode()},其中{@code getName}来自Permission超类。
+     * 
+     * 
      * @return a hash code value for this object.
      */
     public int hashCode() {
@@ -230,6 +269,10 @@ public abstract class BasicPermission extends Permission
      * which currently is the empty string "", since there are no actions for
      * a BasicPermission.
      *
+     * <p>
+     *  返回动作的规范字符串表示形式,目前是空字符串"",因为没有对BasicPermission的动作。
+     * 
+     * 
      * @return the empty string "".
      */
     public String getActions() {
@@ -245,6 +288,12 @@ public abstract class BasicPermission extends Permission
      * PermissionCollection {@code implies} method
      * to be implemented in an efficient (and consistent) manner.
      *
+     * <p>
+     *  返回一个新的PermissionCollection对象用于存储BasicPermission对象。
+     * 
+     *  <p> BasicPermission对象必须以允许以任何顺序插入的方式存储,但这也使得PermissionCollection {@code implies}方法能够以高效(且一致)的方式实现。
+     * 
+     * 
      * @return a new PermissionCollection object suitable for
      * storing BasicPermissions.
      */
@@ -255,6 +304,9 @@ public abstract class BasicPermission extends Permission
     /**
      * readObject is called to restore the state of the BasicPermission from
      * a stream.
+     * <p>
+     *  readObject被调用以从流中恢复BasicPermission的状态。
+     * 
      */
     private void readObject(ObjectInputStream s)
          throws IOException, ClassNotFoundException
@@ -270,6 +322,11 @@ public abstract class BasicPermission extends Permission
      * that the pre-JDK 1.6 "exitVM" and current "exitVM.*" permission are
      * equivalent in equals/hashCode methods.
      *
+     * <p>
+     *  返回此BasicPermission的规范名称。 getName的所有内部调用都应调用此方法,以使JDK 1.6"exitVM"和当前"exitVM。
+     * *"权限在equals / hashCode方法中是等效的。
+     * 
+     * 
      * @return the canonical name of this BasicPermission.
      */
     final String getCanonicalName() {
@@ -287,6 +344,13 @@ public abstract class BasicPermission extends Permission
  * A BasicPermissionCollection handles comparing a permission like "a.b.c.d.e"
  * with a Permission such as "a.b.*", or "*".
  *
+ * <p>
+ * BasicPermissionCollection存储BasicPermission权限的集合。
+ *  BasicPermission对象必须以允许以任何顺序插入的方式存储,但使implicit函数能够以高效(且一致)的方式评估implies方法。
+ * 
+ *  BasicPermissionCollection处理将诸如"a.b.c.d.e"之类的权限与诸如"a.b. *"或"*"之类的权限进行比较。
+ * 
+ * 
  * @see java.security.Permission
  * @see java.security.Permissions
  *
@@ -307,6 +371,9 @@ final class BasicPermissionCollection
       * Key is name, value is permission. All permission objects in
       * collection must be of the same type.
       * Not serialized; see serialization section at end of class.
+      * <p>
+      *  键是名称,值是权限。集合中的所有权限对象必须为相同类型。未序列化;请参见类末尾的序列化部分。
+      * 
       */
     private transient Map<String, Permission> perms;
 
@@ -314,6 +381,10 @@ final class BasicPermissionCollection
      * This is set to {@code true} if this BasicPermissionCollection
      * contains a BasicPermission with '*' as its permission name.
      *
+     * <p>
+     *  如果此BasicPermissionCollection包含具有"*"作为其权限名称的BasicPermission,则设置为{@code true}。
+     * 
+     * 
      * @see #serialPersistentFields
      */
     private boolean all_allowed;
@@ -322,6 +393,10 @@ final class BasicPermissionCollection
      * The class to which all BasicPermissions in this
      * BasicPermissionCollection belongs.
      *
+     * <p>
+     *  此BasicPermissionCollection中的所有BasicPermissions所属的类。
+     * 
+     * 
      * @see #serialPersistentFields
      */
     private Class<?> permClass;
@@ -329,6 +404,9 @@ final class BasicPermissionCollection
     /**
      * Create an empty BasicPermissionCollection object.
      *
+     * <p>
+     *  创建一个空的BasicPermissionCollection对象。
+     * 
      */
 
     public BasicPermissionCollection(Class<?> clazz) {
@@ -341,6 +419,10 @@ final class BasicPermissionCollection
      * Adds a permission to the BasicPermissions. The key for the hash is
      * permission.path.
      *
+     * <p>
+     *  向BasicPermissions添加权限。哈希的键是permission.path。
+     * 
+     * 
      * @param permission the Permission object to add.
      *
      * @exception IllegalArgumentException - if the permission is not a
@@ -388,6 +470,10 @@ final class BasicPermissionCollection
      * Check and see if this set of permissions implies the permissions
      * expressed in "permission".
      *
+     * <p>
+     *  检查并确定这组权限是否意味着在"权限"中表达的权限。
+     * 
+     * 
      * @param permission the Permission object to compare
      *
      * @return true if "permission" is a proper subset of a permission in
@@ -454,6 +540,10 @@ final class BasicPermissionCollection
      * Returns an enumeration of all the BasicPermission objects in the
      * container.
      *
+     * <p>
+     *  返回容器中所有BasicPermission对象的枚举。
+     * 
+     * 
      * @return an enumeration of all the BasicPermission objects.
      */
     public Enumeration<Permission> elements() {
@@ -470,6 +560,8 @@ final class BasicPermissionCollection
     //
     // private Hashtable permissions;
     /**
+    /* <p>
+    /* 
      * @serialField permissions java.util.Hashtable
      *    The BasicPermissions in this BasicPermissionCollection.
      *    All BasicPermissions in the collection must belong to the same class.
@@ -489,12 +581,17 @@ final class BasicPermissionCollection
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData Default fields.
      */
     /*
      * Writes the contents of the perms field out as a Hashtable for
      * serialization compatibility with earlier releases. all_allowed
      * and permClass unchanged.
+     * <p>
+     *  将perms字段的内容作为Hashtable写入,以便与早期版本的序列化兼容性。 all_allowed和permClass不变。
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -518,6 +615,8 @@ final class BasicPermissionCollection
     /**
      * readObject is called to restore the state of the
      * BasicPermissionCollection from a stream.
+     * <p>
+     *  readObject被调用以从流中恢复BasicPermissionCollection的状态。
      */
     private void readObject(java.io.ObjectInputStream in)
          throws IOException, ClassNotFoundException

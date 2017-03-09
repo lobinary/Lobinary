@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,11 @@ package javax.security.auth.callback;
  * method of a {@code CallbackHandler} to display information messages,
  * warning messages and error messages.
  *
+ * <p>
+ *  <p>基础安全服务实例化并将{@code TextOutputCallback}传递给{@code CallbackHandler}的{@code handle}方法,以显示信息消息,警告消息和错误消
+ * 息。
+ * 
+ * 
  * @see javax.security.auth.callback.CallbackHandler
  */
 public class TextOutputCallback implements Callback, java.io.Serializable {
@@ -45,11 +51,15 @@ public class TextOutputCallback implements Callback, java.io.Serializable {
     public static final int ERROR               = 2;
 
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private int messageType;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
@@ -61,6 +71,12 @@ public class TextOutputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  构造具有要显示的消息类型和消息的TextOutputCallback。
+     * 
+     * <p>
+     * 
+     * 
      * @param messageType the message type ({@code INFORMATION},
      *                  {@code WARNING} or {@code ERROR}). <p>
      *
@@ -87,6 +103,12 @@ public class TextOutputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取消息类型。
+     * 
+     * <p>
+     * 
+     * 
      * @return the message type ({@code INFORMATION},
      *                  {@code WARNING} or {@code ERROR}).
      */
@@ -99,6 +121,10 @@ public class TextOutputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取要显示的消息。
+     * 
+     * 
      * @return the message to be displayed.
      */
     public String getMessage() {

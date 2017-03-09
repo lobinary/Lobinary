@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,6 +92,36 @@ import sun.awt.image.SunVolatileImage;
  *          }
  *      } }</pre>
  *
+ * <p>
+ *  <code> GraphicsConfiguration </code>类描述了图形目标(如打印机或监视器)的特性。
+ * 可以有与单个图形设备相关联的许多<code> GraphicsConfiguration </code>对象,表示不同的绘制模式或能力。相应的本机结构将随平台而变化。
+ * 例如,在X11窗口系统上,每个视觉是不同的<code> GraphicsConfiguration </code>。
+ * 在Microsoft Windows上,<code> GraphicsConfiguration </code>表示当前分辨率和颜色深度中可用的PixelFormats。
+ * <p>
+ *  在其中桌面区域可以跨越多个物理屏幕设备的虚拟设备多屏幕环境中,<code> GraphicsConfiguration </code>对象的边界相对于虚拟坐标系。
+ * 当设置组件的位置时,使用{@link #getBounds()getBounds}来获取所需<code> GraphicsConfiguration </code>的边界,并使用<code> Graph
+ * icsConfiguration </code> ,如下面的代码示例所示：。
+ *  在其中桌面区域可以跨越多个物理屏幕设备的虚拟设备多屏幕环境中,<code> GraphicsConfiguration </code>对象的边界相对于虚拟坐标系。
+ * </p>
+ * 
+ * <pre>
+ *  帧f =新帧(gc); //其中gc是GraphicsConfiguration Rectangle bounds = gc.getBounds(); f.setLocation(10 + bound
+ * s.x,10 + bounds.y); </pre>。
+ * 
+ * <p>
+ * 要确定您的环境是否是虚拟设备环境,请在系统中的所有<code> GraphicsConfiguration </code>对象上调用<code> getBounds </code>。
+ * 如果返回的边界的任何起点不是(0,&nbsp; 0),则您的环境是虚拟设备环境。
+ * 
+ * <p>
+ *  您还可以使用<code> getBounds </code>来确定虚拟设备的边界。
+ * 为此,首先在系统中的所有<code> GraphicsConfiguration </code>对象上调用<code> getBounds </code>。
+ * 然后计算从调用<code> getBounds </code>返回的所有边界的并集。联合是虚拟设备的边界。以下代码示例计算虚拟设备的边界。
+ * 
+ *  <pre> {@ code Rectangle virtualBounds = new Rectangle(); GraphicsEnvironment ge = GraphicsEnvironment。
+ *  getLocalGraphicsEnvironment(); GraphicsDevice [] gs = ge.getScreenDevices(); for(int j = 0; j <gs.length; j ++){GraphicsDevice gd = gs [j]; GraphicsConfiguration [] gc = gd.getConfigurations(); for(int i = 0; i <gc.length; i ++){virtualBounds = virtualBounds.union(gc [i] .getBounds()); }}} </pre>
+ * 。
+ * 
+ * 
  * @see Window
  * @see Frame
  * @see GraphicsEnvironment
@@ -103,6 +134,9 @@ import sun.awt.image.SunVolatileImage;
  * capabilities and checking if the GraphicsConfiguration
  * implements the interface for that capability.
  *
+ * <p>
+ *  提醒：对能力做什么?可以通过枚举可能的能力并检查GraphicsConfiguration是否实现该能力的接口来确定设备的能力。
+ * 
  */
 
 
@@ -115,6 +149,10 @@ public abstract class GraphicsConfiguration {
      * This is an abstract class that cannot be instantiated directly.
      * Instances must be obtained from a suitable factory or query method.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类。实例必须从适当的工厂或查询方法获取。
+     * 
+     * 
      * @see GraphicsDevice#getConfigurations
      * @see GraphicsDevice#getDefaultConfiguration
      * @see GraphicsDevice#getBestConfiguration
@@ -126,6 +164,10 @@ public abstract class GraphicsConfiguration {
     /**
      * Returns the {@link GraphicsDevice} associated with this
      * <code>GraphicsConfiguration</code>.
+     * <p>
+     * 返回与此<code> GraphicsConfiguration </code>关联的{@link GraphicsDevice}。
+     * 
+     * 
      * @return a <code>GraphicsDevice</code> object that is
      * associated with this <code>GraphicsConfiguration</code>.
      */
@@ -139,6 +181,11 @@ public abstract class GraphicsConfiguration {
      * a layout and color model that is closest to this native device
      * configuration and can therefore be optimally blitted to this
      * device.
+     * <p>
+     *  返回具有与此<code> GraphicsConfiguration </code>兼容的数据布局和颜色模型的{@link BufferedImage}。这种方法与内存映射设备无关。
+     * 返回的<code> BufferedImage </code>具有最接近此本机设备配置的布局和颜色模型,因此可以最佳地布局到此设备。
+     * 
+     * 
      * @param width the width of the returned <code>BufferedImage</code>
      * @param height the height of the returned <code>BufferedImage</code>
      * @return a <code>BufferedImage</code> whose data layout and color
@@ -160,6 +207,12 @@ public abstract class GraphicsConfiguration {
      * a device. The returned <code>BufferedImage</code> has a layout and
      * color model that can be optimally blitted to a device
      * with this <code>GraphicsConfiguration</code>.
+     * <p>
+     *  返回一个支持指定透明度并且具有与此<code> GraphicsConfiguration </code>兼容的数据布局和颜色模型的<code> BufferedImage </code>。
+     * 这种方法与内存映射设备无关。
+     * 返回的<code> BufferedImage </code>有一个布局和颜色模型,可以通过这个<code> GraphicsConfiguration </code>最佳地布局到一个设备。
+     * 
+     * 
      * @param width the width of the returned <code>BufferedImage</code>
      * @param height the height of the returned <code>BufferedImage</code>
      * @param transparency the specified transparency mode
@@ -195,6 +248,11 @@ public abstract class GraphicsConfiguration {
      * may have data that is stored optimally for the underlying graphics
      * device and may therefore benefit from platform-specific rendering
      * acceleration.
+     * <p>
+     *  返回具有与此<code> GraphicsConfiguration </code>兼容的数据布局和颜色模型的{@link VolatileImage}。
+     * 返回的<code> VolatileImage </code>可以具有为底层图形设备最佳存储的数据,因此可以受益于平台特定的呈现加速。
+     * 
+     * 
      * @param width the width of the returned <code>VolatileImage</code>
      * @param height the height of the returned <code>VolatileImage</code>
      * @return a <code>VolatileImage</code> whose data layout and color
@@ -221,6 +279,11 @@ public abstract class GraphicsConfiguration {
      * may have data that is stored optimally for the underlying graphics
      * device and may therefore benefit from platform-specific rendering
      * acceleration.
+     * <p>
+     *  返回具有与此<code> GraphicsConfiguration </code>兼容的数据布局和颜色模型的{@link VolatileImage}。
+     * 返回的<code> VolatileImage </code>可以具有为底层图形设备最佳存储的数据,因此可以受益于平台特定的呈现加速。
+     * 
+     * 
      * @param width the width of the returned <code>VolatileImage</code>
      * @param height the height of the returned <code>VolatileImage</code>
      * @param transparency the specified transparency mode
@@ -258,6 +321,15 @@ public abstract class GraphicsConfiguration {
      * a layout and color model that is closest to this native device
      * configuration and can therefore be optimally blitted to this
      * device.
+     * <p>
+     * 使用指定的图像功能,返回与此<code> GraphicsConfiguration </code>兼容的数据布局和颜色模型的{@link VolatileImage}。
+     * 如果<code> caps </code>参数为null,那么它将被有效地忽略,并且此方法将创建一个VolatileImage而不考虑<code> ImageCapabilities </code>约束
+     * 。
+     * 使用指定的图像功能,返回与此<code> GraphicsConfiguration </code>兼容的数据布局和颜色模型的{@link VolatileImage}。
+     * 
+     *  返回的<code> VolatileImage </code>具有最接近本地设备配置的布局和颜色模型,因此可以最佳地适用于此设备。
+     * 
+     * 
      * @return a <code>VolatileImage</code> whose data layout and color
      * model is compatible with this <code>GraphicsConfiguration</code>.
      * @param width the width of the returned <code>VolatileImage</code>
@@ -286,6 +358,15 @@ public abstract class GraphicsConfiguration {
      * a layout and color model that is closest to this native device
      * configuration and can therefore be optimally blitted to this
      * device.
+     * <p>
+     *  使用指定的图像能力和透明度值,返回与此<code> GraphicsConfiguration </code>兼容的数据布局和颜色模型的{@link VolatileImage}。
+     * 如果<code> caps </code>参数为null,那么它将被有效地忽略,并且此方法将创建一个VolatileImage而不考虑<code> ImageCapabilities </code>约束
+     * 。
+     *  使用指定的图像能力和透明度值,返回与此<code> GraphicsConfiguration </code>兼容的数据布局和颜色模型的{@link VolatileImage}。
+     * 
+     *  返回的<code> VolatileImage </code>具有最接近本地设备配置的布局和颜色模型,因此可以最佳地适用于此设备。
+     * 
+     * 
      * @param width the width of the returned <code>VolatileImage</code>
      * @param height the height of the returned <code>VolatileImage</code>
      * @param caps the image capabilities
@@ -318,6 +399,10 @@ public abstract class GraphicsConfiguration {
     /**
      * Returns the {@link ColorModel} associated with this
      * <code>GraphicsConfiguration</code>.
+     * <p>
+     *  返回与此<code> GraphicsConfiguration </code>关联的{@link ColorModel}。
+     * 
+     * 
      * @return a <code>ColorModel</code> object that is associated with
      * this <code>GraphicsConfiguration</code>.
      */
@@ -327,6 +412,10 @@ public abstract class GraphicsConfiguration {
      * Returns the <code>ColorModel</code> associated with this
      * <code>GraphicsConfiguration</code> that supports the specified
      * transparency.
+     * <p>
+     *  返回与此<code> GraphicsConfiguration </code>关联的<code> ColorModel </code>,它支持指定的透明度。
+     * 
+     * 
      * @param transparency the specified transparency mode
      * @return a <code>ColorModel</code> object that is associated with
      * this <code>GraphicsConfiguration</code> and supports the
@@ -354,6 +443,14 @@ public abstract class GraphicsConfiguration {
      * For image buffers not associated with a device, such as those not
      * created by <code>createCompatibleImage</code>,
      * this <code>AffineTransform</code> is the Identity transform.
+     * <p>
+     * 为此<code> GraphicsConfiguration </code>返回默认的{@link AffineTransform}。
+     * 这个<code> AffineTransform </code>通常是大多数正常屏幕的身份转换。
+     * 默认的<code> AffineTransform </code>将坐标映射到设备上,使得72个用户空间坐标单位在设备空间中测量大约1英寸。归一化变换可以用于使该映射更精确。
+     * 由屏幕和打印机设备的默认<code> AffineTransform </code>定义的坐标空间中的坐标具有在设备的目标区域的左上角的原点,其中X坐标向右增加,Y坐标向下增加。
+     * 对于不与设备相关联的图像缓冲器(例如不是由<code> createCompatibleImage </code>创建的缓冲器),此<代码> AffineTransform </code>是身份转换。
+     * 
+     * 
      * @return the default <code>AffineTransform</code> for this
      * <code>GraphicsConfiguration</code>.
      */
@@ -383,6 +480,22 @@ public abstract class GraphicsConfiguration {
      * <code>createCompatibleImage</code>, this
      * <code>AffineTransform</code> is the Identity transform
      * since there is no valid distance measurement.
+     * <p>
+     *  返回可以与<code> GraphicsConfiguration </code>的默认<code> AffineTransform </code>级联的<code> AffineTransform 
+     * </code>,以便用户空间中的72个单位等于1英寸的设备空间。
+     * <p>
+     *  对于特定的{@link Graphics2D},g,可以使用以下伪代码重置转换以创建此类映射：
+     * <pre>
+     *  GraphicsConfiguration gc = g.getDeviceConfiguration();
+     * 
+     *  g.setTransform(gc.getDefaultTransform()); g.transform(gc.getNormalizingTransform());
+     * </pre>
+     * 注意,有时这个<code> AffineTransform </code>是标识,例如打印机或元文件输出,并且这个<code> AffineTransform </code>只与底层系统提供的信息一样准
+     * 确。
+     * 对于不与设备相关联的图像缓冲器(例如不是由<code> createCompatibleImage </code>创建的缓冲器),此<代码> AffineTransform </code>是身份转换,因
+     * 为没有有效的距离测量。
+     * 
+     * 
      * @return an <code>AffineTransform</code> to concatenate to the
      * default <code>AffineTransform</code> so that 72 units in user
      * space is mapped to 1 inch in device space.
@@ -394,6 +507,8 @@ public abstract class GraphicsConfiguration {
      * in the device coordinates. In a multi-screen environment
      * with a virtual device, the bounds can have negative X
      * or Y origins.
+     * <p>
+     * 
      * @return the bounds of the area covered by this
      * <code>GraphicsConfiguration</code>.
      * @since 1.3
@@ -409,6 +524,10 @@ public abstract class GraphicsConfiguration {
     /**
      * Returns the buffering capabilities of this
      * <code>GraphicsConfiguration</code>.
+     * <p>
+     *  返回设备坐标中<code> GraphicsConfiguration </code>的边界。在具有虚拟设备的多屏幕环境中,边界可以具有负X或Y起点。
+     * 
+     * 
      * @return the buffering capabilities of this graphics
      * configuration object
      * @since 1.4
@@ -424,6 +543,10 @@ public abstract class GraphicsConfiguration {
     /**
      * Returns the image capabilities of this
      * <code>GraphicsConfiguration</code>.
+     * <p>
+     *  返回此<code> GraphicsConfiguration </code>的缓冲能力。
+     * 
+     * 
      * @return the image capabilities of this graphics
      * configuration object
      * @since 1.4
@@ -440,6 +563,10 @@ public abstract class GraphicsConfiguration {
      * the {@link GraphicsDevice.WindowTranslucency#PERPIXEL_TRANSLUCENT
      * PERPIXEL_TRANSLUCENT} kind of translucency.
      *
+     * <p>
+     *  返回此<code> GraphicsConfiguration </code>的图像功能。
+     * 
+     * 
      * @return whether the given GraphicsConfiguration supports
      *         the translucency effects.
      *

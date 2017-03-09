@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,11 @@ import com.sun.imageio.plugins.common.I18N;
  *
  *  This class supports Microsoft Windows Bitmap Version 3-5,
  *  as well as OS/2 Bitmap Version 2.x (for single-image BMP file).
+ * <p>
+ *  如果在所提供的<code> ImageReadParam </code>中设置了正确的解码参数,它可以对图像进行二次采样,剪切图像,选择子带,并且移位解码的图像原点。
+ * 
+ *  此类支持Microsoft Windows位图版本3-5,以及OS / 2位图版本2.x(对于单图像BMP文件)。
+ * 
  */
 public class BMPImageReader extends ImageReader implements BMPConstants {
     // BMP Image types
@@ -146,6 +152,9 @@ public class BMPImageReader extends ImageReader implements BMPConstants {
 
     /** Indicates whether subsampled, subregion is required, and offset is
      *  defined
+     * <p>
+     *  定义
+     * 
      */
     private boolean noTransform = true;
 
@@ -160,6 +169,9 @@ public class BMPImageReader extends ImageReader implements BMPConstants {
 
     /** Constructs <code>BMPImageReader</code> from the provided
      *  <code>ImageReaderSpi</code>.
+     * <p>
+     *  <code> ImageReaderSpi </code>。
+     * 
      */
     public BMPImageReader(ImageReaderSpi originator) {
         super(originator);
@@ -217,6 +229,10 @@ public class BMPImageReader extends ImageReader implements BMPConstants {
     /**
      * Process the image header.
      *
+     * <p>
+     *  处理图像头。
+     * 
+     * 
      * @exception IllegalStateException if source stream is not set.
      *
      * @exception IOException if image stream is corrupted.
@@ -1667,6 +1683,10 @@ public class BMPImageReader extends ImageReader implements BMPConstants {
     /** Decodes the jpeg/png image embedded in the bitmap using any jpeg
      *  ImageIO-style plugin.
      *
+     * <p>
+     *  ImageIO风格的插件。
+     * 
+     * 
      * @param bi The destination <code>BufferedImage</code>.
      * @param bmpParam The <code>ImageReadParam</code> for decoding this
      *          BMP image.  The parameters for subregion, band selection and
@@ -1819,6 +1839,10 @@ public class BMPImageReader extends ImageReader implements BMPConstants {
      *  \\server\share - a UNC path in simple notation
      *  \\?\UNC\server\share - a UNC path in long notation
      *  \\.\some\device - a path to device.
+     * <p>
+     *  验证字节数组是否支持unc路径。非UNC路径示例：c：\ path \ to \ file  - 简单符号\\?\ c：\ path \ to \ file  -  long符号
+     * 
+     *  UNC路径示例：\\ server \ share  - 简单符号中的UNC路径\\?\ UNC \ server \ share  - 长符号中的UNC路径\\。
      */
     private static boolean isUncOrDevicePath(byte[] p) {
         if (isWindowsPlatform == null) {

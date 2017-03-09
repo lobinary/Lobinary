@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,10 +59,25 @@ import com.sun.corba.se.impl.orbutil.ORBUtility ;
 * These cases are needed when the service context is created and written to
 * the request or reply, and when the service context is read from the
 * received request or reply.
+* <p>
+*  对于ORB支持的每个服务上下文,都有一个派生的ServiceContext类。每个子类封装服务上下文的表示,并提供操作服务上下文所需的任何方法。每个子类必须提供以下成员：
+* <p>
+* <ul>
+*  </li> public static final int SERVICE_CONTEXT_ID,它为服务上下文提供OMG(或其他)定义的ID。
+* 这是ServiceContexts中定义的注册机制所需要的。 OMG定义的服务上下文id来自ptc / 98-12-04的第13.6.7节。
+* </li> <li>一个公共构造函数,以InputStream作为参数。</li> <li> getId ()和writeData()。 getId()必须返回SERVICE_CONTEXT_ID。
+* </li>。
+* </ul>
+* <p>
+*  子类可以直接从服务上下文表示构造,或者通过从输入流读取表示来构造。当创建服务上下文并将其写入请求或回复时,以及从接收到的请求或回复中读取服务上下文时,需要这些情况。
+* 
 */
 public abstract class ServiceContext {
     /** Simple default constructor used when subclass is constructed
      * from its representation.
+     * <p>
+     *  从它的表示。
+     * 
      */
     protected ServiceContext() { }
 
@@ -76,6 +92,9 @@ public abstract class ServiceContext {
      * context representation can be read from in.
      * Note that the service context id has been consumed from the input
      * stream before this object is constructed.
+     * <p>
+     *  InputStream。这个构造函数必须在子类中被super(stream)调用。在此构造函数完成后,可以从中读取服务上下文表示。请注意,在构建此对象之前,服务上下文标识已从输入流中消耗。
+     * 
      */
     protected ServiceContext(InputStream s, GIOPVersion gv) throws SystemException
     {
@@ -83,12 +102,16 @@ public abstract class ServiceContext {
     }
 
     /** Returns Service context id.  Must be overloaded in subclass.
+    /* <p>
      */
     public abstract int getId() ;
 
     /** Write the service context to an output stream.  This method
      * must be used for writing the service context to a request or reply
      * header.
+     * <p>
+     * 必须用于将服务上下文写入请求或应答标头。
+     * 
      */
     public void write(OutputStream s, GIOPVersion gv) throws SystemException
     {
@@ -105,12 +128,17 @@ public abstract class ServiceContext {
 
     /** Writes the data used to represent the subclasses service context
      * into an encapsulation stream.  Must be overloaded in subclass.
+     * <p>
+     *  到封装流中。必须在子类中重载。
+     * 
      */
     protected abstract void writeData( OutputStream os ) ;
 
     /** in is the stream containing the service context representation.
      * It is constructed by the stream constructor, and available for use
      * in the subclass stream constructor.
+     * <p>
+     *  它由流构造器构造,并可用于子类流构造器。
      */
     protected InputStream in = null ;
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,15 @@ import java.util.Locale;
  * from another through the BeanContextProxy interface.
  * </p>
  *
+ * <p>
+ * <p>
+ *  此助手类提供了java.beans.beancontext.BeanContextServices接口的实用程序实现。
+ * </p>
+ * <p>
+ *  因为这个类直接实现了BeanContextServices接口,所以这个类可以,也可以通过子类化这个实现来使用,或者通过BeanContextProxy接口从另一个实例委托这个类的实例。
+ * </p>
+ * 
+ * 
  * @author Laurence P. G. Cable
  * @since 1.2
  */
@@ -67,6 +77,12 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      * Construct a BeanContextServicesSupport instance
      * </p>
      *
+     * <p>
+     * <p>
+     *  构造BeanContextServicesSupport实例
+     * </p>
+     * 
+     * 
      * @param peer      The peer BeanContext we are supplying an implementation for, if null the this object is its own peer
      * @param lcle      The current Locale for this BeanContext.
      * @param dTime     The initial state, true if in design mode, false if runtime.
@@ -81,6 +97,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
     /**
      * Create an instance using the specified Locale and design mode.
      *
+     * <p>
+     *  使用指定的区域设置和设计模式创建实例。
+     * 
+     * 
      * @param peer      The peer BeanContext we are supplying an implementation for, if null the this object is its own peer
      * @param lcle      The current Locale for this BeanContext.
      * @param dtime     The initial state, true if in design mode, false if runtime.
@@ -93,6 +113,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
     /**
      * Create an instance using the specified locale
      *
+     * <p>
+     *  使用指定的区域设置创建实例
+     * 
+     * 
      * @param peer      The peer BeanContext we are supplying an implementation for, if null the this object is its own peer
      * @param lcle      The current Locale for this BeanContext.
      */
@@ -104,6 +128,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
     /**
      * Create an instance with a peer
      *
+     * <p>
+     *  使用对等体创建实例
+     * 
+     * 
      * @param peer      The peer BeanContext we are supplying an implementation for, if null the this object is its own peer
      */
 
@@ -113,6 +141,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * Create an instance that is not a delegate of another object
+     * <p>
+     *  创建不是另一个对象的委托的实例
+     * 
      */
 
     public BeanContextServicesSupport() {
@@ -125,6 +156,11 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      *
      * subclasses may envelope this method, but should not override it or
      * call it directly.
+     * <p>
+     *  在构造和反序列化期间由BeanContextSupport超类调用以初始化子类瞬态状态。
+     * 
+     *  子类可以包装此方法,但不应覆盖它或直接调用它。
+     * 
      */
 
     public void initialize() {
@@ -138,6 +174,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      * Gets the <tt>BeanContextServices</tt> associated with this
      * <tt>BeanContextServicesSupport</tt>.
      *
+     * <p>
+     *  获取与此<tt> BeanContextServicesSupport </tt>关联的<tt> BeanContextServices </tt>。
+     * 
+     * 
      * @return the instance of <tt>BeanContext</tt>
      * this object is providing the implementation for.
      */
@@ -154,6 +194,11 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      *
      * Note that this 'value' is serialized with the corresponding child 'key'
      * when the BeanContextSupport is serialized.
+     * <p>
+     *  受保护的嵌套类包含每个子项信息,其实例与"子项"散列表中的每个子项相关联。子类可以扩展这个类以包括它们自己的每个子状态。
+     * 
+     *  注意,当BeanContextSupport序列化时,这个'value'被序列化为相应的子键'key'。
+     * 
      */
 
     protected class BCSSChild extends BeanContextSupport.BCSChild  {
@@ -163,6 +208,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
         /*
          * private nested class to map serviceClass to Provider and requestors
          * listeners.
+         * <p>
+         *  私有嵌套类将serviceClass映射到提供者和请求者侦听器。
+         * 
          */
 
         class BCSSCServiceClassRef {
@@ -279,6 +327,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
             /*
              * fields
+             * <p>
+             *  字段
+             * 
              */
 
             Class                               serviceClass;
@@ -294,6 +345,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
         /*
          * per service reference info ...
+         * <p>
+         * 每个服务参考信息...
+         * 
          */
 
         class BCSSCServiceRef {
@@ -311,6 +365,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
             /*
              * fields
+             * <p>
+             *  字段
+             * 
              */
 
             BCSSCServiceClassRef serviceClassRef;
@@ -566,6 +623,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
         /*
          * fields
+         * <p>
+         *  字段
+         * 
          */
 
         private transient HashMap       serviceClasses;
@@ -579,6 +639,12 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      * methods that add children to the set.
      * </p>
      *
+     * <p>
+     * <p>
+     *  子类可以覆盖此方法以插入他们自己的子类的子类,而无需重写add()或其他将子项添加到集合的集合方法。
+     * </p>
+     * 
+     * 
      * @param targetChild the child to create the Child on behalf of
      * @param peer        the peer if the targetChild and peer are related by BeanContextProxy
      */
@@ -592,6 +658,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
         /**
          * subclasses may subclass this nested class to add behaviors for
          * each BeanContextServicesProvider.
+         * <p>
+         *  子类可以对这个嵌套类进行子类化,为每个BeanContextServicesProvider添加行为。
+         * 
          */
 
         protected static class BCSSServiceProvider implements Serializable {
@@ -605,6 +674,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
             /**
              * Returns the service provider.
+             * <p>
+             *  返回服务提供程序。
+             * 
+             * 
              * @return the service provider
              */
             protected BeanContextServiceProvider getServiceProvider() {
@@ -613,6 +686,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
             /**
              * The service provider.
+             * <p>
+             *  服务提供商。
+             * 
              */
 
             protected BeanContextServiceProvider serviceProvider;
@@ -622,6 +698,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
          * subclasses can override this method to create new subclasses of
          * BCSSServiceProvider without having to override addService() in
          * order to instantiate.
+         * <p>
+         *  子类可以覆盖此方法以创建BCSSServiceProvider的新子类,而无需重写addService()以便实例化。
+         * 
+         * 
          * @param sc the class
          * @param bcsp the service provider
          * @return a service provider without overriding addService()
@@ -636,6 +716,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
     /**
      * add a BeanContextServicesListener
      *
+     * <p>
+     *  添加一个BeanContextServicesListener
+     * 
+     * 
      * @throws NullPointerException if the argument is null
      */
 
@@ -652,6 +736,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * remove a BeanContextServicesListener
+     * <p>
+     *  删除BeanContextServicesListener
+     * 
      */
 
     public void removeBeanContextServicesListener(BeanContextServicesListener bcsl) {
@@ -667,6 +754,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * add a service
+     * <p>
+     *  添加服务
+     * 
+     * 
      * @param serviceClass the service class
      * @param bcsp the service provider
      */
@@ -677,6 +768,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * add a service
+     * <p>
+     *  添加服务
+     * 
+     * 
      * @param serviceClass the service class
      * @param bcsp the service provider
      * @param fireEvent whether or not an event should be fired
@@ -722,6 +817,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * remove a service
+     * <p>
+     *  删除服务
+     * 
+     * 
      * @param serviceClass the service class
      * @param bcsp the service provider
      * @param revokeCurrentServicesNow whether or not to revoke the service
@@ -756,6 +855,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * has a service, which may be delegated
+     * <p>
+     *  有一个服务,可以委托
+     * 
      */
 
     public synchronized boolean hasService(Class serviceClass) {
@@ -781,6 +883,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
     /*
      * a nested subclass used to represent a proxy for serviceClasses delegated
      * to an enclosing BeanContext.
+     * <p>
+     *  一个嵌套子类,用于表示委托给一个封闭BeanContext的serviceClasses的代理。
+     * 
      */
 
     protected class BCSSProxyServiceProvider implements BeanContextServiceProvider, BeanContextServiceRevokedListener {
@@ -821,6 +926,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
         /*
          * fields
+         * <p>
+         *  字段
+         * 
          */
 
         private BeanContextServices nestingCtxt;
@@ -830,6 +938,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * obtain a service which may be delegated
+     * <p>
+     *  获得可以委托的服务
+     * 
      */
 
      public Object getService(BeanContextChild child, Object requestor, Class serviceClass, Object serviceSelector, BeanContextServiceRevokedListener bcsrl) throws TooManyListenersException {
@@ -895,6 +1006,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * release a service
+     * <p>
+     *  释放服务
+     * 
      */
 
     public void releaseService(BeanContextChild child, Object requestor, Object service) {
@@ -915,6 +1029,8 @@ public class      BeanContextServicesSupport extends BeanContextSupport
     }
 
     /**
+    /* <p>
+    /* 
      * @return an iterator for all the currently registered service classes.
      */
 
@@ -923,6 +1039,8 @@ public class      BeanContextServicesSupport extends BeanContextSupport
     }
 
     /**
+    /* <p>
+    /* 
      * @return an iterator for all the currently available service selectors
      * (if any) available for the specified service.
      */
@@ -942,6 +1060,12 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      *
      * subclasses may override or envelope this method to implement their
      * own propagation semantics.
+     * <p>
+     *  BeanContextServicesListener回调,将事件传播到所有当前注册的侦听器和BeanContextServices子节点,如果此BeanContextService尚未实现此服务本身
+     * 。
+     * 
+     *  子类可以覆盖或包络该方法以实现它们自己的传播语义。
+     * 
      */
 
      public void serviceAvailable(BeanContextServiceAvailableEvent bcssae) {
@@ -974,6 +1098,12 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      *
      * subclasses may override or envelope this method to implement their
      * own propagation semantics.
+     * <p>
+     *  BeanContextServicesListener回调,将事件传播到所有当前注册的侦听器和BeanContextServices子节点,如果此BeanContextService尚未实现此服务本身
+     * 。
+     * 
+     *  子类可以覆盖或包络该方法以实现它们自己的传播语义。
+     * 
      */
 
     public void serviceRevoked(BeanContextServiceRevokedEvent bcssre) {
@@ -1002,6 +1132,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      * Gets the <tt>BeanContextServicesListener</tt> (if any) of the specified
      * child.
      *
+     * <p>
+     * 获取指定子项的<tt> BeanContextServicesListener </tt>(如果有)。
+     * 
+     * 
      * @param child the specified child
      * @return the BeanContextServicesListener (if any) of the specified child
      */
@@ -1022,6 +1156,13 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      *
      * subclasses may envelope this method in order to implement their
      * own child removal side-effects.
+     * <p>
+     *  在子类已成功删除后从超类子级删除操作调用。调用与子同步。
+     * 
+     *  这个子类使用这个钩子立即撤销这个子类使用的任何服务,如果它是一个BeanContextChild。
+     * 
+     *  子类可以包装这个方法,以实现自己的子删除副作用。
+     * 
      */
 
     protected void childJustRemovedHook(Object child, BCSChild bcsc) {
@@ -1037,6 +1178,13 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      * This method revokes any services obtained from its parent.
      *
      * subclasses may envelope this method to implement their own semantics.
+     * <p>
+     *  从setBeanContext调用以通知BeanContextChild释放从嵌套BeanContext获取的资源。
+     * 
+     *  此方法将撤销从其父级获取的任何服务。
+     * 
+     *  子类可以包装这个方法来实现自己的语义。
+     * 
      */
 
     protected synchronized void releaseBeanContextResources() {
@@ -1063,6 +1211,11 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      * to allocate resources obtained from the nesting BeanContext.
      *
      * subclasses may envelope this method to implement their own semantics.
+     * <p>
+     *  从setBeanContext调用以通知BeanContextChild分配从嵌套BeanContext获取的资源。
+     * 
+     *  子类可以包装这个方法来实现自己的语义。
+     * 
      */
 
     protected synchronized void initializeBeanContextResources() {
@@ -1083,6 +1236,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * Fires a <tt>BeanContextServiceEvent</tt> notifying of a new service.
+     * <p>
+     *  触发<tt> BeanContextServiceEvent </tt>通知新服务。
+     * 
+     * 
      * @param serviceClass the service class
      */
     protected final void fireServiceAdded(Class serviceClass) {
@@ -1095,6 +1252,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      * Fires a <tt>BeanContextServiceAvailableEvent</tt> indicating that a new
      * service has become available.
      *
+     * <p>
+     *  触发指示新服务已可用的<tt> BeanContextServiceAvailableEvent </tt>。
+     * 
+     * 
      * @param bcssae the <tt>BeanContextServiceAvailableEvent</tt>
      */
     protected final void fireServiceAdded(BeanContextServiceAvailableEvent bcssae) {
@@ -1110,6 +1271,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
     /**
      * Fires a <tt>BeanContextServiceEvent</tt> notifying of a service being revoked.
      *
+     * <p>
+     *  触发<tt> BeanContextServiceEvent </tt>通知要撤消的服务。
+     * 
+     * 
      * @param bcsre the <tt>BeanContextServiceRevokedEvent</tt>
      */
     protected final void fireServiceRevoked(BeanContextServiceRevokedEvent bcsre) {
@@ -1126,6 +1291,10 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      * Fires a <tt>BeanContextServiceRevokedEvent</tt>
      * indicating that a particular service is
      * no longer available.
+     * <p>
+     *  触发指示特定服务不再可用的<tt> BeanContextServiceRevokedEvent </tt>。
+     * 
+     * 
      * @param serviceClass the service class
      * @param revokeNow whether or not the event should be revoked now
      */
@@ -1149,6 +1318,13 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      *
      * subclasses may envelope this method to insert their own serialization
      * processing that has to occur prior to serialization of the children
+     * <p>
+     *  从BeanContextSupport writeObject调用之前序列化的孩子...
+     * 
+     *  这个类将序列化任何可序列化的BeanContextServiceProvider。
+     * 
+     * 子类可以包装该方法以插入他们自己的序列化处理,该序列化处理必须在子序列化之前发生
+     * 
      */
 
     protected synchronized void bcsPreSerializationHook(ObjectOutputStream oos) throws IOException {
@@ -1192,6 +1368,13 @@ public class      BeanContextServicesSupport extends BeanContextSupport
      *
      * subclasses may envelope this method to insert their own serialization
      * processing that has to occur prior to serialization of the children
+     * <p>
+     *  从BeanContextSupport readObject之前,它反序列化的孩子...
+     * 
+     *  这个类将反序列化任何可序列化的BeanContextServiceProviders序列化早期,因此使他们可用的孩子,当他们反序列化。
+     * 
+     *  子类可以包装该方法以插入他们自己的序列化处理,该序列化处理必须在子序列化之前发生
+     * 
      */
 
     protected synchronized void bcsPreDeserializationHook(ObjectInputStream ois) throws IOException, ClassNotFoundException {
@@ -1208,6 +1391,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * serialize the instance
+     * <p>
+     *  序列化实例
+     * 
      */
 
     private synchronized void writeObject(ObjectOutputStream oos) throws IOException {
@@ -1218,6 +1404,9 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /**
      * deserialize the instance
+     * <p>
+     *  反序列化实例
+     * 
      */
 
     private synchronized void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
@@ -1230,28 +1419,42 @@ public class      BeanContextServicesSupport extends BeanContextSupport
 
     /*
      * fields
+     * <p>
+     *  字段
+     * 
      */
 
     /**
      * all accesses to the <code> protected transient HashMap services </code>
      * field should be synchronized on that object
+     * <p>
+     *  所有对<code> protected瞬态HashMap服务</code>字段的访问都应该在该对象上同步
+     * 
      */
     protected transient HashMap                  services;
 
     /**
      * The number of instances of a serializable <tt>BeanContextServceProvider</tt>.
+     * <p>
+     *  可序列化<tt> BeanContextServceProvider </tt>的实例数。
+     * 
      */
     protected transient int                      serializable = 0;
 
 
     /**
      * Delegate for the <tt>BeanContextServiceProvider</tt>.
+     * <p>
+     *  代表<tt> BeanContextServiceProvider </tt>。
+     * 
      */
     protected transient BCSSProxyServiceProvider proxy;
 
 
     /**
      * List of <tt>BeanContextServicesListener</tt> objects.
+     * <p>
+     *  <tt> BeanContextServicesListener </tt>对象的列表。
      */
     protected transient ArrayList                bcsListeners;
 }

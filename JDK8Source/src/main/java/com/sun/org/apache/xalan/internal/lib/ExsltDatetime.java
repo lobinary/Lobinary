@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ExsltDatetime.java,v 1.2.4.1 2005/09/10 18:50:49 jeffsuttor Exp $
+ * <p>
+ *  $ Id：ExsltDatetime.java,v 1.2.4.1 2005/09/10 18:50:49 jeffsuttor Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.lib;
@@ -45,6 +58,15 @@ import com.sun.org.apache.xpath.internal.objects.XObject;
  * The documentation for each function has been copied from the relevant
  * EXSLT Implementer page.
  *
+ * <p>
+ *  此类包含EXSLT日期和时间扩展函数。可通过指定名称空间URI来访问它,如下所示：
+ * <pre>
+ *  xmlns：datetime ="http://exslt.org/dates-and-times"
+ * </pre>
+ * 
+ *  每个函数的文档已从相关的EXSLT实施者页面复制。
+ * 
+ * 
  * @see <a href="http://www.exslt.org/">EXSLT</a>
  * @xsl.usage general
  */
@@ -74,6 +96,13 @@ public class ExsltDatetime
      * The date/time string format must include a time zone, either a Z to indicate Coordinated
      * Universal Time or a + or - followed by the difference between the difference from UTC
      * represented as hh:mm.
+     * <p>
+     * date：date-time函数返回当前日期和时间作为日期/时间字符串。
+     * 返回的日期/时间字符串必须是格式中定义为xs：dateTime的词法表示形式的字符串,位于<a href="http://www.w3.org/TR/xmlschema-2/#dateTime"> [ 
+     * 日期/时间格式基本上是CCYY-MM-DDThh：mm：ss,但实施者应参阅<a href="http://www.w3.org/TR/xmlschema-2/"> [XML模式第2部分：日期/时间字符
+     * 串格式必须包含时区,指示协调通用时间的Z或+或 - 后跟与UTC之间的差异表示为hh：mm。
+     * date：date-time函数返回当前日期和时间作为日期/时间字符串。
+     * 
      */
     public static String dateTime()
     {
@@ -104,6 +133,10 @@ public class ExsltDatetime
 
     /**
      * Represent the hours and minutes with two-digit strings.
+     * <p>
+     *  用两位数字符串表示小时和分钟。
+     * 
+     * 
      * @param q hrs or minutes.
      * @return two-digit String representation of hrs or minutes.
      */
@@ -133,6 +166,18 @@ public class ExsltDatetime
      * followed by the difference between the difference from UTC represented as hh:mm. If an argument
      * is specified and it does not specify a time zone, then the date string format must not include
      * a time zone.
+     * <p>
+     * date：date函数返回在作为参数给出的日期/时间字符串中指定的日期。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 返回的日期/时间字符串必须是格式中定义为xs：dateTime的词法表示形式的字符串,位于<a href="http://www.w3.org/TR/xmlschema-2/#dateTime"> [ 
+     * 如果参数不是这两种格式之一,date：date返回一个空字符串('')。
+     * date：date函数返回在作为参数给出的日期/时间字符串中指定的日期。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 日期/时间格式基本上是CCYY-MM-DDThh：mm：ss,但实施者应参阅<a href="http://www.w3.org/TR/xmlschema-2/"> [XML模式第2部分：日期作为字符串
+     * 返回,具有在[XML模式第2部分：数据类型]的[3.2.9 date]中为xs：date定义的词法表示。
+     * date：date函数返回在作为参数给出的日期/时间字符串中指定的日期。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 日期格式基本上是CCYY-MM-DD,尽管实现者应参考[XML模式第2部分：数据类型]和[ISO 8601]了解详细信息。
+     * 如果没有给出参数或参数日期/时间指定一个时区,则日期字符串格式必须包含一个时区,指示协调世界时的Z或+或 - 后面跟UTC之间的差为hh：mm。
+     * 如果指定了参数并且未指定时区,则日期字符串格式不能包含时区。
+     * 
      */
     public static String date(String datetimeIn)
       throws ParseException
@@ -161,6 +206,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     * 往上看。
+     * 
      */
     public static String date()
     {
@@ -191,6 +239,19 @@ public class ExsltDatetime
      * followed by the difference between the difference from UTC represented as hh:mm. If an argument
      * is specified and it does not specify a time zone, then the time string format must not include
      * a time zone.
+     * <p>
+     * date：time函数返回在作为参数给出的日期/时间字符串中指定的时间。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 返回的日期/时间字符串必须是格式中定义为xs：dateTime的词法表示形式的字符串,位于<a href="http://www.w3.org/TR/xmlschema-2/#dateTime"> [ 
+     * 如果参数字符串不是此格式,则date：time返回一个空字符串('')。
+     * date：time函数返回在作为参数给出的日期/时间字符串中指定的时间。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 日期/时间格式基本上是CCYY-MM-DDThh：mm：ss,但实施者应参阅<a href="http://www.w3.org/TR/xmlschema-2/"> [XML模式第2部分：日期作为字符串
+     * 返回,其字符串表示形式如在<a href="http://www.w3.org/TR/xmlschema-2/#time"> [3.2.8 time] < / a> [XML Schema Part 2
+     * ：Datatypes]。
+     * date：time函数返回在作为参数给出的日期/时间字符串中指定的时间。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 时间格式基本上是hh：mm：ss,尽管实现者应参考[XML Schema Part 2：Datatypes]和[ISO 8601]了解详细信息。
+     * 如果没有给出参数或参数日期/时间指定一个时区,则时间字符串格式必须包括一个时区,一个Z表示协调世界时间,或者一个+或 - 后面跟UTC之间的差为hh：mm。
+     * 如果指定了参数并且未指定时区,则时间字符串格式不能包含时区。
+     * 
      */
     public static String time(String timeIn)
       throws ParseException
@@ -212,6 +273,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     * 往上看。
+     * 
      */
     public static String time()
     {
@@ -241,6 +305,15 @@ public class ExsltDatetime
      *   xs:gYearMonth (CCYY-MM)
      *   xs:gYear (CCYY)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     *  date：year函数返回日期的年份作为数字。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为第一个参数的日期/时间字符串必须为格式中定义为xs：dateTime的词法表示形式的右截断字符串,其格式为<a href ="http://www.w3.org中定义的格式之一/ TR / xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     *  date：year函数返回日期的年份作为数字。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)xs：gYearMonth(CCYY-MM)xs：gYear字符串不是这些格式之一,
+     * 则返回NaN。
+     *  date：year函数返回日期的年份作为数字。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 
      */
     public static double year(String datetimeIn)
       throws ParseException
@@ -261,6 +334,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double year()
     {
@@ -283,6 +359,14 @@ public class ExsltDatetime
      *    xs:gMonth (--MM--)
      *    xs:gMonthDay (--MM-DD)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     *  日期：month-in-year函数以数字形式返回日期的月份。如果未指定任何参数,那么将使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为第一个参数的日期/时间字符串是一个左或右截断字符串,格式定义为<a href ="http：//www.w3中定义的格式之一的xs：dateTime的词法表示形式。
+     *  org / TR / xmlschema-2 /"> [XML Schema Part 2：Datatypes] </a>。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)xs：gYearMonth(CCYY-MM)xs：gMonth ：gMonthDay
+     * (--MM-DD)如果日期/时间字符串不是这些格式之一,则返回NaN。
+     *  org / TR / xmlschema-2 /"> [XML Schema Part 2：Datatypes] </a>。
+     * 
      */
     public static double monthInYear(String datetimeIn)
       throws ParseException
@@ -298,6 +382,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double monthInYear()
     {
@@ -317,6 +404,14 @@ public class ExsltDatetime
      *    xs:dateTime (CCYY-MM-DDThh:mm:ss)
      *    xs:date (CCYY-MM-DD)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     * 日期：week-in-year函数以数字形式返回年的星期。如果未指定任何参数,则使用由date：date-time返回的当前本地日期/时间作为默认参数。
+     * 为编号,计数遵循ISO 8601：一年中的第一周是包含一年的第一个星期四的星期,从星期一开始的新星期。
+     * 指定为参数的日期/时间字符串是一个右截断字符串,格式定义为<a href ="http://www.w3.org/TR中定义的格式之一中xs：dateTime的词法表示形式/ xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * 为编号,计数遵循ISO 8601：一年中的第一周是包含一年的第一个星期四的星期,从星期一开始的新星期。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)如果日期/时间字符串不是这些格式之一,。
+     * 
      */
     public static double weekInYear(String datetimeIn)
       throws ParseException
@@ -332,6 +427,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double weekInYear()
     {
@@ -351,6 +449,13 @@ public class ExsltDatetime
      *     xs:dateTime (CCYY-MM-DDThh:mm:ss)
      *     xs:date (CCYY-MM-DD)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     *  日期：日期函数返回一个年份中的日期作为数字。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个右截断字符串,格式定义为<a href ="http://www.w3.org/TR中定义的格式之一中xs：dateTime的词法表示形式/ xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     *  日期：日期函数返回一个年份中的日期作为数字。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)如果日期/时间字符串不是这些格式之一,。
+     * 
      */
     public static double dayInYear(String datetimeIn)
       throws ParseException
@@ -366,6 +471,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double dayInYear()
     {
@@ -388,6 +496,15 @@ public class ExsltDatetime
      *      xs:gMonthDay (--MM-DD)
      *      xs:gDay (---DD)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     * 日期：日期函数以数字形式返回日期的日期。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个左或右截断字符串,格式定义为<a href ="http://www.w3.org中定义的格式之一中的xs：dateTime的词法表示形式/ TR / xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * 日期：日期函数以数字形式返回日期的日期。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)xs：gMonthDay(--MM-DD)xs：gDay如果日期/时间字符串不是这些
+     * 格式之一,则返回NaN。
+     * 日期：日期函数以数字形式返回日期的日期。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 
      */
     public static double dayInMonth(String datetimeIn)
       throws ParseException
@@ -401,6 +518,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double dayInMonth()
     {
@@ -421,6 +541,13 @@ public class ExsltDatetime
      *      xs:dateTime (CCYY-MM-DDThh:mm:ss)
      *      xs:date (CCYY-MM-DD)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     *  日期：星期几函数以数字的形式返回日期的一个月中的星期几(例如,5月的第三个星期二为3)。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个右截断字符串,格式定义为<a href ="http://www.w3.org/TR中定义的格式之一中xs：dateTime的词法表示形式/ xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     *  日期：星期几函数以数字的形式返回日期的一个月中的星期几(例如,5月的第三个星期二为3)。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)如果日期/时间字符串不是这些格式之一,。
+     * 
      */
     public static double dayOfWeekInMonth(String datetimeIn)
       throws ParseException
@@ -436,6 +563,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double dayOfWeekInMonth()
     {
@@ -457,6 +587,15 @@ public class ExsltDatetime
      *      xs:date (CCYY-MM-DD)
      * If the date/time string is not in one of these formats, then NaN is returned.
                             The numbering of days of the week starts at 1 for Sunday, 2 for Monday and so on up to 7 for Saturday.
+     * <p>
+     * 日期：星期几函数返回在日期中作为数字给出的星期几。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个右截断字符串,格式定义为<a href ="http://www.w3.org/TR中定义的格式之一中xs：dateTime的词法表示形式/ xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * 日期：星期几函数返回在日期中作为数字给出的星期几。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)如果日期/时间字符串不是这些格式之一,一周中的天数从1开始,星期日为2,星期一为7,
+     * 星期六为7。
+     * 日期：星期几函数返回在日期中作为数字给出的星期几。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 
      */
     public static double dayInWeek(String datetimeIn)
       throws ParseException
@@ -472,6 +611,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double dayInWeek()
     {
@@ -491,6 +633,13 @@ public class ExsltDatetime
      *     xs:dateTime (CCYY-MM-DDThh:mm:ss)
      *     xs:time (hh:mm:ss)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     *  日期：hour-in-day函数以数字形式返回一天中的小时。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个右截断字符串,格式定义为<a href ="http://www.w3.org/TR中定义的格式之一中xs：dateTime的词法表示形式/ xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     *  日期：hour-in-day函数以数字形式返回一天中的小时。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：time(hh：mm：ss)如果日期/时间字符串不是这些格式之一,。
+     * 
      */
     public static double hourInDay(String datetimeIn)
       throws ParseException
@@ -506,6 +655,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double hourInDay()
     {
@@ -525,6 +677,13 @@ public class ExsltDatetime
      *      xs:dateTime (CCYY-MM-DDThh:mm:ss)
      *      xs:time (hh:mm:ss)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     * 日期：minute-in-hour函数返回小时的分钟作为数字。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个右截断字符串,格式定义为<a href ="http://www.w3.org/TR中定义的格式之一中xs：dateTime的词法表示形式/ xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * 日期：minute-in-hour函数返回小时的分钟作为数字。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：time(hh：mm：ss)如果日期/时间字符串不是这些格式之一,。
+     * 
      */
     public static double minuteInHour(String datetimeIn)
       throws ParseException
@@ -540,6 +699,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
    public static double minuteInHour()
     {
@@ -559,6 +721,13 @@ public class ExsltDatetime
      *      xs:dateTime (CCYY-MM-DDThh:mm:ss)
      *      xs:time (hh:mm:ss)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     *  日期：秒钟分钟函数返回分钟的秒数作为数字。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个右截断字符串,格式定义为<a href ="http://www.w3.org/TR中定义的格式之一中xs：dateTime的词法表示形式/ xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     *  日期：秒钟分钟函数返回分钟的秒数作为数字。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：time(hh：mm：ss)如果日期/时间字符串不是这些格式之一,。
+     * 
      */
     public static double secondInMinute(String datetimeIn)
       throws ParseException
@@ -574,6 +743,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static double secondInMinute()
     {
@@ -595,6 +767,15 @@ public class ExsltDatetime
      *    xs:gYearMonth (CCYY-MM)
      *    xs:gYear (CCYY)
      * If the date/time string is not in one of these formats, then NaN is returned.
+     * <p>
+     * 日期：如果日期中给出的年份是闰年,则闰年函数返回true。如果未指定任何参数,那么将使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为第一个参数的日期/时间字符串必须为格式中定义为xs：dateTime的词法表示形式的右截断字符串,其格式为<a href ="http://www.w3.org中定义的格式之一/ TR / xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * 日期：如果日期中给出的年份是闰年,则闰年函数返回true。如果未指定任何参数,那么将使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)xs：gYearMonth(CCYY-MM)xs：gYear字符串不是这些格式之一,
+     * 则返回NaN。
+     * 日期：如果日期中给出的年份是闰年,则闰年函数返回true。如果未指定任何参数,那么将使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 
      */
     public static XObject leapYear(String datetimeIn)
       throws ParseException
@@ -614,6 +795,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static boolean leapYear()
     {
@@ -640,6 +824,16 @@ public class ExsltDatetime
      * The result is an English month name: one of 'January', 'February', 'March',
      * 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'
      * or 'December'.
+     * <p>
+     * date：month-name函数返回日期的月份的全名。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个左或右截断字符串,格式定义为<a href ="http://www.w3.org中定义的格式之一中的xs：dateTime的词法表示形式/ TR / xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * date：month-name函数返回日期的月份的全名。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)xs：gYearMonth(CCYY-MM)xs：gMonth日期/时间字符串不是这
+     * 些格式之一,则返回一个空字符串('')。
+     * date：month-name函数返回日期的月份的全名。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 结果是一个英文月份名称：'一月','二月','三月','四月','五月','六月','七月','八月','九月','十月' '十一月'或'十二月'。
+     * 
      */
     public static String monthName(String datetimeIn)
       throws ParseException
@@ -656,6 +850,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static String monthName()
     {
@@ -683,6 +880,17 @@ public class ExsltDatetime
      * 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov' or 'Dec'.
      * An implementation of this extension function in the EXSLT date namespace must conform
      * to the behaviour described in this document.
+     * <p>
+     * date：month-abbreviation函数返回日期的月份的缩写。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个左或右截断字符串,格式定义为<a href ="http://www.w3.org中定义的格式之一中的xs：dateTime的词法表示形式/ TR / xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * date：month-abbreviation函数返回日期的月份的缩写。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)xs：gYearMonth(CCYY-MM)xs：gMonth日期/时间字符串不是这
+     * 些格式之一,则返回一个空字符串('')。
+     * date：month-abbreviation函数返回日期的月份的缩写。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 结果是三个字母的英语月份缩写：'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep' Oct','Nov'或'Dec'。
+     *  EXSLT日期命名空间中此扩展函数的实现必须符合本文档中描述的行为。
+     * 
      */
     public static String monthAbbreviation(String datetimeIn)
       throws ParseException
@@ -699,6 +907,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static String monthAbbreviation()
     {
@@ -723,6 +934,14 @@ public class ExsltDatetime
      * 'Thursday' or 'Friday'.
      * An implementation of this extension function in the EXSLT date namespace must conform
      * to the behaviour described in this document.
+     * <p>
+     * 日期：day-name函数返回日期的星期几的全名。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个左或右截断字符串,格式定义为<a href ="http://www.w3.org中定义的格式之一中的xs：dateTime的词法表示形式/ TR / xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * 日期：day-name函数返回日期的星期几的全名。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)如果日期/时间字符串不是这些格式之一, '')。
+     * 结果是英语日名称："星期日","星期一","星期二","星期三","星期四"或"星期五"之一。 EXSLT日期命名空间中此扩展函数的实现必须符合本文档中描述的行为。
+     * 
      */
     public static String dayName(String datetimeIn)
       throws ParseException
@@ -739,6 +958,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static String dayName()
     {
@@ -763,6 +985,14 @@ public class ExsltDatetime
      * 'Wed', 'Thu' or 'Fri'.
      * An implementation of this extension function in the EXSLT date namespace must conform
      * to the behaviour described in this document.
+     * <p>
+     * 日期：日缩写函数返回日期的星期几的缩写。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 指定为参数的日期/时间字符串是一个左或右截断字符串,格式定义为<a href ="http://www.w3.org中定义的格式之一中的xs：dateTime的词法表示形式/ TR / xmlschema-2 /">
+     *  [XML模式第2部分：数据类型] </a>。
+     * 日期：日缩写函数返回日期的星期几的缩写。如果没有给出参数,那么使用date：date-time返回的当前本地日期/时间作为默认参数。
+     * 允许的格式如下：xs：dateTime(CCYY-MM-DDThh：mm：ss)xs：date(CCYY-MM-DD)如果日期/时间字符串不是这些格式之一, '')。
+     * 结果是一个三个字母的英语日缩写："Sun","Mon","Tue","Wed","Thu"或"Fri"之一。 EXSLT日期命名空间中此扩展函数的实现必须符合本文档中描述的行为。
+     * 
      */
     public static String dayAbbreviation(String datetimeIn)
       throws ParseException
@@ -779,6 +1009,9 @@ public class ExsltDatetime
 
     /**
      * See above.
+     * <p>
+     *  往上看。
+     * 
      */
     public static String dayAbbreviation()
     {
@@ -790,6 +1023,9 @@ public class ExsltDatetime
      * Returns an array with the 3 components that a datetime input string
      * may contain: - (for BC era), datetime, and zone. If the zone is not
      * valid, return null for that component.
+     * <p>
+     *  返回一个包含datetime输入字符串可能包含的3个组件的数组： - (对于BC时代),datetime和zone。如果区域无效,则返回该组件的null。
+     * 
      */
     private static String[] getEraDatetimeZone(String in)
     {
@@ -818,6 +1054,9 @@ public class ExsltDatetime
      * with 'Z' or +/-hh:mm. If a zone string is not
      * found, return -1; if the zone string is invalid,
      * return -2.
+     * <p>
+     *  如果输入以"Z"或+/- hh：mm结尾,则获取区域信息的开始。如果找不到区域字符串,则返回-1;如果区域字符串无效,则返回-2。
+     * 
      */
     private static int getZoneStart (String datetime)
     {
@@ -848,6 +1087,9 @@ public class ExsltDatetime
     /**
      * Attempt to parse an input string with the allowed formats, returning
      * null if none of the formats work.
+     * <p>
+     *  尝试使用允许的格式解析输入字符串,如果没有格式可用,则返回null。
+     * 
      */
     private static Date testFormats (String in, String[] formats)
       throws ParseException
@@ -871,6 +1113,9 @@ public class ExsltDatetime
     /**
      * Parse the input string and return the corresponding calendar field
      * number.
+     * <p>
+     *  解析输入字符串并返回相应的日历字段编号。
+     * 
      */
     private static double getNumber(String in, String[] formats, int calField)
       throws ParseException
@@ -886,6 +1131,9 @@ public class ExsltDatetime
 
     /**
      *  Get the full name or abbreviation of the month or day.
+     * <p>
+     *  获取月份或日期的全名或缩写。
+     * 
      */
     private static String getNameOrAbbrev(String in,
                                          String[] formatsIn,
@@ -911,6 +1159,9 @@ public class ExsltDatetime
     /**
      * Get the full name or abbreviation for the current month or day
      * (no input string).
+     * <p>
+     * 获取当前月份或日期的全名或缩写(无输入字符串)。
+     * 
      */
     private static String getNameOrAbbrev(String format)
     {
@@ -954,6 +1205,19 @@ public class ExsltDatetime
      * is replaced with an empty string ('') within the result.
      *
      * The author is Helg Bredow (helg.bredow@kalido.com)
+     * <p>
+     *  日期：format-date函数根据模式格式化日期/时间。
+     * <p>
+     *  date的第一个参数：format-date指定要格式化的日期/时间。
+     * 它必须是<a href="http://www.w3.org/TR/xmlschema-2/"> [XML模式第2部分：数据类型]中定义的格式中的一种格式的正确或截断日期/时间字符串。 </a>。
+     * 允许的格式如下：。
+     * <ul>
+     *  <li> xs：dateTime(CCYY-MM-DDThh：mm：ss)<li> xs：date(CCYY-MM-DD)<li> xs：time(hh：mm：ss)<li> xs：gYearMont
+     * h CCYY-MM)<li> xs：gYear(CCYY)<li> xs：gMonthDay(--MM-DD)<li> xs：gMonth(--MM--)<li> xs：gDay )。
+     * </ul>
+     *  第二个参数是一个字符串,它给出了用于格式化日期的格式模式。格式模式必须在JDK 1.1 SimpleDateFormat类指定的语法中。
+     * 格式模式字符串的解释如JDK 1.1 SimpleDateFormat类中所述。
+     * <p>
      */
     public static String formatDate(String dateTime, String pattern)
     {
@@ -1080,6 +1344,14 @@ public class ExsltDatetime
 
     /**
      * Strips occurrences of the given character from a date format pattern.
+     * <p>
+     *  如果日期/时间格式为右截断(即格式不是xs：time或xs：dateTime),则任何缺少的组件假定如下：如果未指定月份,则给定一个月为01 ;如果没有指定日期,则给出一天01;如果没有指定时间,则给
+     * 定时间00:00:00。
+     * <p>
+     * 如果日期/时间格式为左截断(即xs：time,xs：gMonthDay,xs：gMonth或xs：gDay),并且格式模式具有使用从所使用的日期/时间格式中缺失的组件的令牌,那么该令牌将在结果中用空字符
+     * 串('')替换。
+     * 
+     * 
      * @param symbols list of symbols to strip.
      * @param pattern
      * @return

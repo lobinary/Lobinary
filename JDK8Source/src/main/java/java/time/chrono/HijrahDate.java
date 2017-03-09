@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -114,6 +133,26 @@ import java.time.temporal.ValueRange;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  Hijrah日历系统中的日期。
+ * <p>
+ *  此日期使用{@linkplain Hijrah Chronology Hijrah calendar}的几个变体之一运行。
+ * <p>
+ *  Hijrah日历在一年中具有不同于Gregorian日历的总天数,并且每月的长度基于月球在地球周围的完整旋转的周期(在连续的新卫星之间)。
+ * 有关支持的变量的详细信息,请参阅{@link Hijrah Chronology}。
+ * <p>
+ * 每个HijrahDate被创建为绑定到特定的HijrahChronology。相同的年表被传播到从日期计算的每个HijrahDate。
+ * 要使用不同的Hijrah变体,其HijrahChronology可用于创建新的HijrahDate实例。
+ * 或者,可以使用{@link #withVariant}方法转换为新的HijrahChronology。
+ * 
+ * <p>
+ *  这是<a href="{@docRoot}/java/lang/doc-files/ValueBased.html">以价值为基础的</a>类;在{@code HijrahDate}的实例上使用身份敏
+ * 感操作(包括引用相等({@code ==}),身份哈希码或同步)可能会产生不可预测的结果,应该避免使用。
+ * 应该使用{@code equals}方法进行比较。
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 public final class HijrahDate
@@ -122,22 +161,37 @@ public final class HijrahDate
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = -5207853542612002020L;
     /**
      * The Chronology of this HijrahDate.
+     * <p>
+     *  这个HijrahDate的年表。
+     * 
      */
     private final transient HijrahChronology chrono;
     /**
      * The proleptic year.
+     * <p>
+     *  晚年。
+     * 
      */
     private final transient int prolepticYear;
     /**
      * The month-of-year.
+     * <p>
+     *  一年中的月份。
+     * 
      */
     private final transient int monthOfYear;
     /**
      * The day-of-month.
+     * <p>
+     *  日期。
+     * 
      */
     private final transient int dayOfMonth;
 
@@ -146,6 +200,10 @@ public final class HijrahDate
      * Obtains an instance of {@code HijrahDate} from the Hijrah proleptic year,
      * month-of-year and day-of-month.
      *
+     * <p>
+     *  从Hijrah proleptic年,月和月中获取{@code HijrahDate}的实例。
+     * 
+     * 
      * @param prolepticYear  the proleptic year to represent in the Hijrah calendar
      * @param monthOfYear  the month-of-year to represent, from 1 to 12
      * @param dayOfMonth  the day-of-month to represent, from 1 to 30
@@ -158,6 +216,10 @@ public final class HijrahDate
 
     /**
      * Returns a HijrahDate for the chronology and epochDay.
+     * <p>
+     *  返回年表和epochDay的HijrahDate。
+     * 
+     * 
      * @param chrono The Hijrah chronology
      * @param epochDay the epoch day
      * @return a HijrahDate for the epoch day; non-null
@@ -177,6 +239,14 @@ public final class HijrahDate
      * Using this method will prevent the ability to use an alternate clock for testing
      * because the clock is hard-coded.
      *
+     * <p>
+     *  在默认时区获取伊斯兰世界杯日历的当前{@code HijrahDate}。
+     * <p>
+     *  这将在默认时区中查询{@link Clock#systemDefaultZone()系统时钟}以获取当前日期。
+     * <p>
+     *  使用此方法将会阻止使用备用时钟进行测试,因为时钟是硬编码的。
+     * 
+     * 
      * @return the current date using the system clock and default time-zone, not null
      */
     public static HijrahDate now() {
@@ -193,6 +263,14 @@ public final class HijrahDate
      * Using this method will prevent the ability to use an alternate clock for testing
      * because the clock is hard-coded.
      *
+     * <p>
+     *  在指定的时区获取伊斯兰教义日历的当前{@code HijrahDate}。
+     * <p>
+     * 这将查询{@link Clock#system(ZoneId)系统时钟}以获取当前日期。指定时区避免了对默认时区的依赖。
+     * <p>
+     *  使用此方法将会阻止使用备用时钟进行测试,因为时钟是硬编码的。
+     * 
+     * 
      * @param zone  the zone ID to use, not null
      * @return the current date using the system clock, not null
      */
@@ -208,6 +286,12 @@ public final class HijrahDate
      * Using this method allows the use of an alternate clock for testing.
      * The alternate clock may be introduced using {@linkplain Clock dependency injection}.
      *
+     * <p>
+     *  从指定的时钟获取伊斯兰Umm Al-Qura日历的当前{@code HijrahDate}。
+     * <p>
+     *  这将查询指定的时钟以获取当前日期 - 今天。使用此方法允许使用替代时钟进行测试。可以使用{@linkplain时钟依赖注入}来引入替代时钟。
+     * 
+     * 
      * @param clock  the clock to use, not null
      * @return the current date, not null
      * @throws DateTimeException if the current date cannot be obtained
@@ -223,6 +307,12 @@ public final class HijrahDate
      * This returns a {@code HijrahDate} with the specified fields.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      *
+     * <p>
+     *  从推测年,月和月的字段中获取伊斯兰铀铝库拉日历的{@code HijrahDate}。
+     * <p>
+     *  这将返回一个带有指定字段的{@code HijrahDate}。日期必须对年和月有效,否则将抛出异常。
+     * 
+     * 
      * @param prolepticYear  the Hijrah proleptic-year
      * @param month  the Hijrah month-of-year, from 1 to 12
      * @param dayOfMonth  the Hijrah day-of-month, from 1 to 30
@@ -247,6 +337,16 @@ public final class HijrahDate
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code HijrahDate::from}.
      *
+     * <p>
+     *  从一个时空对象中获取伊斯兰Umm Al-Qura日历的{@code HijrahDate}。
+     * <p>
+     *  这基于指定的时间在Hijrah日历系统中获得日期。 {@code TemporalAccessor}表示一组任意的日期和时间信息,该工厂将其转换为{@code HijrahDate}的实例。
+     * <p>
+     *  转化通常使用{@link ChronoField#EPOCH_DAY EPOCH_DAY}字段,该字段在日历系统中标准化。
+     * <p>
+     *  此方法匹配功能接口{@link TemporalQuery}的签名,允许它通过方法引用{@code HijrahDate :: from}用作查询。
+     * 
+     * 
      * @param temporal  the temporal object to convert, not null
      * @return the date in Hijrah calendar system, not null
      * @throws DateTimeException if unable to convert to a {@code HijrahDate}
@@ -260,6 +360,10 @@ public final class HijrahDate
      * Constructs an {@code HijrahDate} with the proleptic-year, month-of-year and
      * day-of-month fields.
      *
+     * <p>
+     * 用冒号年,月和月的字段构造{@code HijrahDate}。
+     * 
+     * 
      * @param chrono The chronology to create the date with
      * @param prolepticYear the proleptic year
      * @param monthOfYear the month of year
@@ -278,6 +382,10 @@ public final class HijrahDate
     /**
      * Constructs an instance with the Epoch Day.
      *
+     * <p>
+     *  构造一个具有"纪元日"的实例。
+     * 
+     * 
      * @param epochDay  the epochDay
      */
     private HijrahDate(HijrahChronology chrono, long epochDay) {
@@ -296,6 +404,12 @@ public final class HijrahDate
      * The {@code Chronology} represents the calendar system in use.
      * The era and other fields in {@link ChronoField} are defined by the chronology.
      *
+     * <p>
+     *  获取此日期的年表,这是Hijrah日历系统。
+     * <p>
+     *  {@code Chronology}表示正在使用的日历系统。 {@link ChronoField}中的时代和其他字段由年表定义。
+     * 
+     * 
      * @return the Hijrah chronology, not null
      */
     @Override
@@ -309,6 +423,12 @@ public final class HijrahDate
      * The Hijrah calendar system has one era, 'AH',
      * defined by {@link HijrahEra}.
      *
+     * <p>
+     *  获取此日期适用的时代。
+     * <p>
+     *  Hijrah日历系统有一个时代,'AH',由{@link HijrahEra}定义。
+     * 
+     * 
      * @return the era applicable at this date, not null
      */
     @Override
@@ -322,6 +442,12 @@ public final class HijrahDate
      * This returns the length of the month in days.
      * Month lengths in the Hijrah calendar system vary between 29 and 30 days.
      *
+     * <p>
+     *  返回此日期表示的月份的长度。
+     * <p>
+     *  这将返回月份的长度(以天为单位)。 Hijrah日历系统的月份长度在29和30天之间变化。
+     * 
+     * 
      * @return the length of the month in days
      */
     @Override
@@ -336,6 +462,12 @@ public final class HijrahDate
      * A Hijrah calendar system year is typically shorter than
      * that of the ISO calendar system.
      *
+     * <p>
+     *  返回由此日期表示的年份的长度。
+     * <p>
+     *  这将返回年的长度(以天为单位)。 Hijrah日历系统年通常短于ISO日历系统的年。
+     * 
+     * 
      * @return the length of the year in days
      */
     @Override
@@ -427,6 +559,10 @@ public final class HijrahDate
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException if unable to make the adjustment.
      *     For example, if the adjuster requires an ISO chronology
      * @throws ArithmeticException {@inheritDoc}
@@ -443,6 +579,12 @@ public final class HijrahDate
      * HijrahChronology.  If the chronology has a shorter month length
      * for the month, the day is reduced to be the last day of the month.
      *
+     * <p>
+     *  根据请求的年表返回{@code HijrahDate}。
+     * <p>
+     *  根据新请求的Hijrah Chronology检查年,月和日。如果年表的月份的月份较短,那么日期将缩短为月份的最后一天。
+     * 
+     * 
      * @param chronology the new HijrahChonology, non-null
      * @return a HijrahDate with the requested HijrahChronology, non-null
      */
@@ -457,6 +599,10 @@ public final class HijrahDate
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -467,6 +613,10 @@ public final class HijrahDate
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws DateTimeException {@inheritDoc}
      * @throws ArithmeticException {@inheritDoc}
      */
@@ -485,6 +635,12 @@ public final class HijrahDate
      * <p>
      * This method returns the primitive {@code int} value for the day-of-year.
      *
+     * <p>
+     *  获取年份字段。
+     * <p>
+     *  此方法返回一年中的原始{@code int}值。
+     * 
+     * 
      * @return the day-of-year
      */
     private int getDayOfYear() {
@@ -494,6 +650,10 @@ public final class HijrahDate
     /**
      * Gets the day-of-week value.
      *
+     * <p>
+     *  获取星期值。
+     * 
+     * 
      * @return the day-of-week; computed from the epochday
      */
     private int getDayOfWeek() {
@@ -504,6 +664,10 @@ public final class HijrahDate
     /**
      * Gets the Era of this date.
      *
+     * <p>
+     *  获取此日期的时代。
+     * 
+     * 
      * @return the Era of this date; computed from epochDay
      */
     private int getEraValue() {
@@ -514,6 +678,10 @@ public final class HijrahDate
     /**
      * Checks if the year is a leap year, according to the Hijrah calendar system rules.
      *
+     * <p>
+     *  根据Hijrah日历系统规则检查年份是否为闰年。
+     * 
+     * 
      * @return true if this date is in a leap year
      */
     @Override
@@ -618,6 +786,15 @@ public final class HijrahDate
      * To compare the dates of two {@code TemporalAccessor} instances, including dates
      * in two different chronologies, use {@link ChronoField#EPOCH_DAY} as a comparator.
      *
+     * <p>
+     *  将此日期与另一个日期(包括年表)进行比较。
+     * <p>
+     * 将此{@code HijrahDate}与另一个比较,确保日期是相同的。
+     * <p>
+     *  仅比较{@code HijrahDate}类型的对象,其他类型返回false。
+     * 要比较两个{@code TemporalAccessor}实例的日期,包括两个不同年代的日期,请使用{@link ChronoField#EPOCH_DAY}作为比较。
+     * 
+     * 
      * @param obj  the object to check, null returns false
      * @return true if this is equal to the other date and the Chronologies are equal
      */
@@ -639,6 +816,10 @@ public final class HijrahDate
     /**
      * A hash code for this date.
      *
+     * <p>
+     *  此日期的哈希码。
+     * 
+     * 
      * @return a suitable hash code based only on the Chronology and the date
      */
     @Override  // override for performance
@@ -654,6 +835,10 @@ public final class HijrahDate
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */
@@ -664,6 +849,9 @@ public final class HijrahDate
     /**
      * Writes the object using a
      * <a href="../../../serialized-form.html#java.time.chrono.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.chrono.Ser">专用序列化表单</a>写入对象。
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(6);                 // identifies a HijrahDate

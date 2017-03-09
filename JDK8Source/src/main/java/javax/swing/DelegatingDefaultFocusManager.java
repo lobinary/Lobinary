@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import java.util.Set;
  * some pre-1.4 code assumes that the object returned by
  * FocusManager.getCurrentManager is an instance of DefaultFocusManager unless
  * set explicitly.
+ * <p>
+ *  在任意java.awt.KeyboardFocusManager上提供javax.swing.DefaultFocusManager视图。
+ * 我们使用DefaultFocusManager而不是FocusManager,因为它看起来更向下兼容。
  */
 final class DelegatingDefaultFocusManager extends DefaultFocusManager {
     private final KeyboardFocusManager delegate;

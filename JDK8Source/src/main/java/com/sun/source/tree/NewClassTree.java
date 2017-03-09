@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,16 @@ import java.util.List;
  *
  * @jls section 15.9
  *
+ * <p>
+ *  一个树节点来声明一个类的新实例。
+ * 
+ *  例如：
+ * <pre>
+ *  新<em>标识符</em>()
+ * 
+ *  新<em>标识符</em>(<em>参数</em>)
+ * 
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

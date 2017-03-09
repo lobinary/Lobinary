@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,10 @@ import com.sun.jmx.remote.util.OrderClassLoaders;
  * <p>Implementation of the {@link RMIConnection} interface.  User
  * code will not usually reference this class.</p>
  *
+ * <p>
+ *  <p>实施{@link RMIConnection}界面。用户代码通常不会引用此类。</p>
+ * 
+ * 
  * @since 1.5
  */
 /*
@@ -72,6 +77,10 @@ import com.sun.jmx.remote.util.OrderClassLoaders;
  * reason is that it was only added in Mustang (Java SE 6), whereas versions
  * 1.4 and 2.0 of the JMX API must be implementable on Tiger per our
  * commitments for JSR 255.
+ * <p>
+ *  请注意,我们从MarshalledObject中省略了type参数,即使它将向文档添加有用的信息。
+ * 原因是它只在Mustang(Java SE 6)中添加,而JMX API的1.4和2.0版本必须能够在Tiger上根据我们对JSR 255的承诺来实现。
+ * 
  */
 public class RMIConnectionImpl implements RMIConnection, Unreferenced {
 
@@ -83,6 +92,13 @@ public class RMIConnectionImpl implements RMIConnection, Unreferenced {
      * RMIJRMPServerImpl#makeClient(String,Subject)} and {@link
      * RMIIIOPServerImpl#makeClient(String,Subject)}.
      *
+     * <p>
+     *  构造新的{@link RMIConnection}。此连接可用于JRMP或IIOP传输。
+     * 这个对象不会导出它自己：它是调用者的责任适当地导出它(参见{@link RMIJRMPServerImpl#makeClient(String,Subject)}和{@link RMIIIOPServerImpl#makeClient(String,Subject)}
+     * 。
+     *  构造新的{@link RMIConnection}。此连接可用于JRMP或IIOP传输。
+     * 
+     * 
      * @param rmiServer The RMIServerImpl object for which this
      * connection is created.  The behavior is unspecified if this
      * parameter is null.
@@ -1284,6 +1300,10 @@ public class RMIConnectionImpl implements RMIConnection, Unreferenced {
      * concise but informative representation that is easy for a
      * person to read.</p>
      *
+     * <p>
+     *  <p>返回此对象的字符串表示形式。一般来说,<code> toString </code>方法返回一个"文本表示"此对象的字符串。结果应该是一个简明易懂的表示,对于一个人来说很容易阅读。</p>
+     * 
+     * 
      * @return a String representation of this object.
      **/
     @Override
@@ -1614,6 +1634,9 @@ public class RMIConnectionImpl implements RMIConnection, Unreferenced {
     /**
      * Construct a new IOException with a nested exception.
      * The nested exception is set only if JDK {@literal >= 1.4}
+     * <p>
+     *  使用嵌套异常构造新的IOException。嵌套异常仅在JDK {@literal> = 1.4}
+     * 
      */
     private static IOException newIOException(String message,
                                               Throwable cause) {
@@ -1624,6 +1647,9 @@ public class RMIConnectionImpl implements RMIConnection, Unreferenced {
     /**
      * Iterate until we extract the real exception
      * from a stack of PrivilegedActionExceptions.
+     * <p>
+     *  迭代,直到我们从PrivilegedActionExceptions的堆栈中提取真正的异常。
+     * 
      */
     private static Exception extractException(Exception e) {
         while (e instanceof PrivilegedActionException) {
@@ -1642,6 +1668,10 @@ public class RMIConnectionImpl implements RMIConnection, Unreferenced {
      * maximal interoperability, we make it so even when we're
      * connected to some other JMX implementation that might not do
      * that.  This should be clarified in the next version of JMX.
+     * <p>
+     * JMX规范没有明确说明在一个空对象[]或String []在例如。 MBeanServer.invoke等价于一个空数组,但RI行为这样。
+     * 为了最大的互操作性,我们使它这样,即使当我们连接到一些其他JMX实现,可能不这样做。这应该在下一个版本的JMX中澄清。
+     * 
      */
     private static Object[] nullIsEmpty(Object[] array) {
         return (array == null) ? NO_OBJECTS : array;
@@ -1657,6 +1687,9 @@ public class RMIConnectionImpl implements RMIConnection, Unreferenced {
      * you get this exception.  We specify it for all of them, and
      * make it so for the ones where it's not specified in JMX even if
      * the JMX implementation doesn't do so.
+     * <p>
+     *  类似地,JMX规范说明了一些但不是所有的方法在MBeanServer取ObjectName目标,如果它是null你得到这个异常。
+     * 我们为它们指定它,并且使它对于那些在JMX中没有指定的,即使JMX实现不这样做。
      */
     private static void checkNonNull(String what, Object x) {
         if (x == null) {

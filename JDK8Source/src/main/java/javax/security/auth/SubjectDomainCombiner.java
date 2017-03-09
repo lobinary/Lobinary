@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,9 @@ import java.lang.ref.WeakReference;
  * with Principals from the {@code Subject} associated with this
  * {@code SubjectDomainCombiner}.
  *
+ * <p>
+ *  {@code SubjectDomainCombiner}使用与此{@code SubjectDomainCombiner}相关联的{@code主题}更新ProtectionDomains的主体。
+ * 
  */
 public class SubjectDomainCombiner implements java.security.DomainCombiner {
 
@@ -71,6 +75,12 @@ public class SubjectDomainCombiner implements java.security.DomainCombiner {
      *
      * <p>
      *
+     * <p>
+     *  将提供的{@code Subject}与此{@code SubjectDomainCombiner}关联。
+     * 
+     * <p>
+     * 
+     * 
      * @param subject the {@code Subject} to be associated with
      *          with this {@code SubjectDomainCombiner}.
      */
@@ -90,6 +100,12 @@ public class SubjectDomainCombiner implements java.security.DomainCombiner {
      *
      * <p>
      *
+     * <p>
+     *  取得与此{@code SubjectDomainCombiner}相关联的{@code Subject}。
+     * 
+     * <p>
+     * 
+     * 
      * @return the {@code Subject} associated with this
      *          {@code SubjectDomainCombiner}, or {@code null}
      *          if no {@code Subject} is associated with this
@@ -134,6 +150,20 @@ public class SubjectDomainCombiner implements java.security.DomainCombiner {
      *
      * <p>
      *
+     * <p>
+     *  从与此{@code SubjectDomainCombiner}关联的{@code主题}更新相关的ProtectionDomains主体。
+     * 
+     *  <p>为<i> currentDomains </i>数组中的每个{@code ProtectionDomain}创建一个新的{@code ProtectionDomain}实例。
+     * 使用<i> currentDomains </i>中对应的{@code ProtectionDomain}中的{@code CodeSource},{@code Permission}和{@code ClassLoader}
+     * 创建每个新的{@code ProtectionDomain}与来自与此{@code SubjectDomainCombiner}关联的{@code Subject}的主体一样。
+     *  <p>为<i> currentDomains </i>数组中的每个{@code ProtectionDomain}创建一个新的{@code ProtectionDomain}实例。
+     * 
+     *  <p>所有新实例化的ProtectionDomains都合并到一个新数组中。来自<i> assignedDomains </i>数组的ProtectionDomains将附加到此新数组,并返回结果。
+     * 
+     *  <p>请注意,可能发生了诸如删除重复的ProtectionDomains的优化。此外,可以允许缓存ProtectionDomains。
+     * 
+     * <p>
+     * 
      * @param currentDomains the ProtectionDomains associated with the
      *          current execution Thread, up to the most recent
      *          privileged {@code ProtectionDomain}.
@@ -293,6 +323,8 @@ public class SubjectDomainCombiner implements java.security.DomainCombiner {
 
     /**
      * Use the javax.security.auth.Policy implementation
+     * <p>
+     * 
      */
     private ProtectionDomain[] combineJavaxPolicy(
         ProtectionDomain[] currentDomains,
@@ -546,6 +578,9 @@ public class SubjectDomainCombiner implements java.security.DomainCombiner {
      * a "principal-based" PD contains strong references to the CodeSource,
      * signer certs, PermissionCollection and ClassLoader objects
      * in the "current PD".
+     * <p>
+     *  使用javax.security.auth.Policy实现
+     * 
      */
     private static class WeakKeyValueMap<K,V> extends
                                         WeakHashMap<K,WeakReference<V>> {

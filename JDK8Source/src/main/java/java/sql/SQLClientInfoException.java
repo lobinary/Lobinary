@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,18 @@ import java.util.Map;
  * <code>Map&lt;String,ClientInfoStatus&gt;</code> to
  * the appropriate <code>SQLClientInfoException</code> constructor.
  * <p>
+ * <p>
+ *  当无法在<code> Connection </code>上设置一个或多个客户端信息属性时,将抛出{@link SQLException}的子类。
+ * 除了由<code> SQLException </code>提供的信息,<code> SQLClientInfoException </code>提供了未设置的客户端信息属性列表。
+ * 
+ *  某些数据库不允许以原子方式设置多个客户端信息属性。
+ * 对于这些数据库,尽管<code> Connection.setClientInfo </code>方法引发了异常,但仍有可能设置了一些客户端信息属性。
+ * 应用程序可以使用<code> getFailedProperties </code>方法检索未设置的客户端信息属性列表。
+ * 通过将<code> Map&lt; String,ClientInfoStatus&gt; </code>传递到适当的<code> SQLClientInfoException </code>构造函数来
+ * 识别属性。
+ * 应用程序可以使用<code> getFailedProperties </code>方法检索未设置的客户端信息属性列表。
+ * <p>
+ * 
  * @see ClientInfoStatus
  * @see Connection#setClientInfo
  * @since 1.6
@@ -62,6 +75,14 @@ public class SQLClientInfoException extends SQLException {
      * {@link Throwable#initCause(java.lang.Throwable)} method.
      * <p>
      *
+     * <p>
+     *  构造一个<code> SQLClientInfoException </code>对象。
+     *  <code>原因</code>,<code> SQLState </code>和failedProperties列表初始化为<code> null </code>,供应商代码初始化为0. <code>
+     *  cause </code >未初始化,并且可以随后通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+     *  构造一个<code> SQLClientInfoException </code>对象。
+     * <p>
+     * 
+     * 
      * @since 1.6
      */
         public SQLClientInfoException() {
@@ -80,6 +101,14 @@ public class SQLClientInfoException extends SQLException {
      * {@link Throwable#initCause(java.lang.Throwable)} method.
      * <p>
      *
+     * <p>
+     * 构造使用给定<code> failedProperties </code>初始化的<code> SQLClientInfoException </code>对象。
+     *  <code> reason </code>和<code> SQLState </code>初始化为<code> null </code>,供应商代码初始化为0。
+     * 
+     *  <code> cause </code>没有被初始化,并且随后可以通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+     * <p>
+     * 
+     * 
      * @param failedProperties          A Map containing the property values that could not
      *                                  be set.  The keys in the Map
      *                                  contain the names of the client info
@@ -104,6 +133,16 @@ public class SQLClientInfoException extends SQLException {
      *
      * <p>
      *
+     * <p>
+     *  构造使用给定的<code> cause </code>和<code> failedProperties </code>初始化的<code> SQLClientInfoException </code>
+     * 对象。
+     * 
+     *  如果<code> cause == null </code>或<code> cause.toString()</code>如果<code>,<code>原因</code>被初始化为< cause！= null </code>
+     * ,并将供应商代码初始化为0。
+     * 
+     * <p>
+     * 
+     * 
      * @param failedProperties          A Map containing the property values that could not
      *                                  be set.  The keys in the Map
      *                                  contain the names of the client info
@@ -134,6 +173,15 @@ public class SQLClientInfoException extends SQLException {
      * {@link Throwable#initCause(java.lang.Throwable)} method.
      * <p>
      *
+     * <p>
+     *  构造使用给定的<code> reason </code>和<code> failedProperties </code>初始化的<code> SQLClientInfoException </code>
+     * 对象。
+     *  <code> SQLState </code>初始化为<code> null </code>,供应商代码初始化为0。
+     * 
+     *  <code> cause </code>没有被初始化,并且随后可以通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+     * <p>
+     * 
+     * 
      * @param reason                            a description of the exception
      * @param failedProperties          A Map containing the property values that could not
      *                                  be set.  The keys in the Map
@@ -159,6 +207,13 @@ public class SQLClientInfoException extends SQLException {
      * to <code>null</code> and the vendor code is initialized to 0.
      * <p>
      *
+     * <p>
+     *  构造使用给定的<code>原因</code>,<code>原因</code>和<code> failedProperties </code>初始化的<code> SQLClientInfoExcept
+     * ion </code>对象。
+     *  <code> SQLState </code>初始化为<code> null </code>,供应商代码初始化为0。
+     * <p>
+     * 
+     * 
      * @param reason                            a description of the exception
      * @param failedProperties          A Map containing the property values that could not
      *                                  be set.  The keys in the Map
@@ -190,6 +245,14 @@ public class SQLClientInfoException extends SQLException {
      * is initialized to 0.
      * <p>
      *
+     * <p>
+     * 构造使用给定的<code> reason </code>,<code> SQLState </code>和<code> failedProperties </code>初始化的<code> SQLCli
+     * entInfoException </code>对象。
+     *  <code> cause </code>没有被初始化,并且随后可以通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+     * 供应商代码初始化为0。
+     * <p>
+     * 
+     * 
      * @param reason                            a description of the exception
      * @param SQLState                          an XOPEN or SQL:2003 code identifying the exception
      * @param failedProperties          A Map containing the property values that could not
@@ -215,6 +278,13 @@ public class SQLClientInfoException extends SQLException {
      * and <code>failedProperties</code>.  The vendor code is initialized to 0.
      * <p>
      *
+     * <p>
+     *  构造使用给定<code>原因</code>,<code> SQLState </code>,<code>原因</code>和<code> failedProperties </code>初始化的<code>
+     *  SQLClientInfoException < 。
+     * 供应商代码初始化为0。
+     * <p>
+     * 
+     * 
      * @param reason                            a description of the exception
      * @param SQLState                          an XOPEN or SQL:2003 code identifying the exception
      * @param failedProperties          A Map containing the property values that could not
@@ -247,6 +317,13 @@ public class SQLClientInfoException extends SQLException {
      * {@link Throwable#initCause(java.lang.Throwable)} method.
      * <p>
      *
+     * <p>
+     *  构造使用给定<code>原因</code>,<code> SQLState </code>,<code> vendorCode </code>和<code> failedProperties </code>
+     * 初始化的<code> SQLClientInfoException < 。
+     *  <code> cause </code>没有被初始化,并且随后可以通过调用{@link Throwable#initCause(java.lang.Throwable)}方法来初始化。
+     * <p>
+     * 
+     * 
      * @param reason                            a description of the exception
      * @param SQLState                          an XOPEN or SQL:2003 code identifying the exception
      * @param vendorCode                        a database vendor-specific exception code
@@ -275,6 +352,12 @@ public class SQLClientInfoException extends SQLException {
      * <code>failedProperties</code>.
      * <p>
      *
+     * <p>
+     *  构造使用给定<code>原因</code>,<code> SQLState </code>,<code>原因</code>,<code> vendorCode </code>初始化的<code> SQ
+     * LClientInfoException <和<code> failedProperties </code>。
+     * <p>
+     * 
+     * 
      * @param reason                            a description of the exception
      * @param SQLState                          an XOPEN or SQL:2003 code identifying the exception
      * @param vendorCode                        a database vendor-specific exception code
@@ -307,6 +390,8 @@ public class SQLClientInfoException extends SQLException {
      * reason codes defined in <code>ClientInfoStatus</code>
      * <p>
      *
+     * <p>
+     * 
      * @return Map list containing the client info properties that could
      * not be set
      * <p>

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -103,6 +104,25 @@ public class ImageUtil {
         System.out.println(createColorModel(packed.getSampleModel()));
         System.out.println(createColorModel(bandedSM));
     }
+    /* <p>
+    /*  public static void main(String [] args){ImageTypeSpecifier bilevel = ImageTypeSpecifier.createIndexed(new byte [] {(byte)0,(byte)255}
+    /* ,new byte [] {(byte)0,(byte)255} new byte [] {(byte)0,(byte)255},null,1,DataBuffer.TYPE_BYTE); ImageT
+    /* ypeSpecifier gray = ImageTypeSpecifier.createGrayscale(8,DataBuffer.TYPE_BYTE,false); ImageTypeSpecif
+    /* ier grayAlpha = ImageTypeSpecifier.createGrayscale(8,DataBuffer.TYPE_BYTE,false,false); ImageTypeSpec
+    /* ifier rgb = ImageTypeSpecifier.createInterleaved(ColorSpace.getInstance(ColorSpace.CS_sRGB),new int [
+    /* ] {0,1,2},DataBuffer.TYPE_BYTE,false,false); ImageTypeSpecifier rgba = ImageTypeSpecifier.createInter
+    /* leaved(ColorSpace.getInstance(ColorSpace.CS_sRGB),new int [] {0,1,2,3},DataBuffer.TYPE_BYTE,true,fals
+    /* e); ImageTypeSpecifier packed = ImageTypeSpecifier.createPacked(ColorSpace.getInstance(ColorSpace.CS_
+    /* sRGB),0xff000000,0x00ff0000,0x0000ff00,0x000000ff,DataBuffer.TYPE_BYTE,false);。
+    /* 
+    /*  SampleModel bandedSM = new java.awt.image.BandedSampleModel(DataBuffer.TYPE_BYTE,1,1,15);
+    /* 
+    /* System.out.println(createColorModel(bilevel.getSampleModel())); System.out.println(createColorModel(g
+    /* ray.getSampleModel())); System.out.println(createColorModel(grayAlpha.getSampleModel())); System.out.
+    /* println(createColorModel(rgb.getSampleModel())); System.out.println(createColorModel(rgba.getSampleMo
+    /* del())); System.out.println(createColorModel(packed.getSampleModel())); System.out.println(createColo
+    /* rModel(bandedSM)); }}。
+    /* 
     */
 
     /**
@@ -130,6 +150,23 @@ public class ImageUtil {
      * will be a grayscale ramp with <code>1&nbsp;<<&nbsp;numberOfBits</code>
      * entries ranging from zero to at most 255.</p>
      *
+     * <p>
+     *  创建可与指定的<code> SampleModel </code>配合使用的<code> ColorModel </code>。
+     * 如果找不到合适的<code> ColorModel </code>,此方法将返回<code> null </code>。
+     * 
+     *  <p>对于<code> ComponentSampleModel </code>的所有实例,保证存在合适的<code> ColorModel </code>。
+     * 对于1-和3-带化<code> SampleModel </code>,返回的<code> ColorModel </code>将是不透明的。
+     * 对于2和4带的<code> SampleModel </code>,输出将使用未预乘的α透明度。
+     *  1-带和2-带数据将使用灰度<code> ColorSpace </code>,以及3和4带数据sRGB <code> ColorSpace </code>。
+     * 具有5个或更多频带的数据将具有<code> BogusColorSpace </code>。</p>。
+     * 
+     *  <p> <code> DirectColorModel </code>的实例将为<code> SinglePixelPackedSampleModel </code>的实例创建,且不超过4个波段。
+     * </p>。
+     * 
+     * <p>将为<code> MultiPixelPackedSampleModel </code>的实例创建<code> IndexColorModel </code>的实例。
+     * 色彩映射将是一个灰度梯度,其中<code> 1&lt; numberOfBits </code>条目的范围从零到最多255. </p>。
+     * 
+     * 
      * @return An instance of <code>ColorModel</code> that is suitable for
      *         the supplied <code>SampleModel</code>, or <code>null</code>.
      *
@@ -250,6 +287,12 @@ public class ImageUtil {
      * <code>(int)((getWidth()+7)/8)</code>.  The length of the returned
      * array will be the line stride multiplied by <code>getHeight()</code>
      *
+     * <p>
+     *  对于二进制数据(<code> isBinary()</code>返回<code> true </code>)的情况,返回二进制数据作为压缩字节数组。
+     * 数据将被打包为每个字节八位而没有位偏移,即每个图像行中的第一位将是该行的第一个字节的最左边。行的字节将是<code>(int)((getWidth()+ 7)/ 8)</code>。
+     * 返回的数组的长度将是行跨步乘以<code> getHeight()</code>。
+     * 
+     * 
      * @return the binary data as a packed array of bytes with zero offset
      * of <code>null</code> if the data are not binary.
      * @throws IllegalArgumentException if <code>isBinary()</code> returns
@@ -437,6 +480,10 @@ public class ImageUtil {
      * Returns the binary data unpacked into an array of bytes.
      * The line stride will be the width of the <code>Raster</code>.
      *
+     * <p>
+     *  将解包的二进制数据返回到字节数组。行跨度将是<code> Raster </code>的宽度。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>isBinary()</code> returns
      * <code>false</code> with the <code>SampleModel</code> of the
      * supplied <code>Raster</code> as argument.
@@ -519,6 +566,10 @@ public class ImageUtil {
      * of packed binary data of the form returned by
      * <code>getPackedBinaryData()</code>.
      *
+     * <p>
+     *  从<code> getPackedBinaryData()</code>返回的形式的二进制数据数组中设置提供的<code> Raster </code>数据。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>isBinary()</code> returns
      * <code>false</code> with the <code>SampleModel</code> of the
      * supplied <code>Raster</code> as argument.
@@ -769,6 +820,12 @@ public class ImageUtil {
      * <p> If the data are binary, then the target bit will be set if
      * and only if the corresponding byte is non-zero.
      *
+     * <p>
+     *  将数据从<code> getUnpackedBinaryData()</code>返回的形式的解压缩数据数组复制到<code> Raster </code>的打包数组中。
+     * 
+     *  <p>如果数据是二进制的,则目标位将被设置,如果且仅当相应的字节为非零时。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>isBinary()</code> returns
      * <code>false</code> with the <code>SampleModel</code> of the
      * supplied <code>Raster</code> as argument.
@@ -1029,6 +1086,10 @@ public class ImageUtil {
     /**
      * Tests whether the color indices represent a gray-scale image.
      *
+     * <p>
+     *  测试颜色索引是否表示灰度图像。
+     * 
+     * 
      * @param r The red channel color indices.
      * @param g The green channel color indices.
      * @param b The blue channel color indices.
@@ -1088,6 +1149,10 @@ public class ImageUtil {
     /** Checks that the provided <code>ImageWriter</code> can encode
      * the provided <code>ImageTypeSpecifier</code> or not.  If not, an
      * <code>IIOException</code> will be thrown.
+     * <p>
+     *  提供的<code> ImageTypeSpecifier </code>。如果不是,将抛出<code> IIOException </code>。
+     * 
+     * 
      * @param writer The provided <code>ImageWriter</code>.
      * @param type The image to be tested.
      * @throws IIOException If the writer cannot encoded the provided image.
@@ -1106,6 +1171,10 @@ public class ImageUtil {
     /** Checks that the provided <code>ImageWriter</code> can encode
      * the provided <code>ColorModel</code> and <code>SampleModel</code>.
      * If not, an <code>IIOException</code> will be thrown.
+     * <p>
+     * 所提供的<code> ColorModel </code>和<code> SampleModel </code>。如果不是,将抛出<code> IIOException </code>。
+     * 
+     * 
      * @param writer The provided <code>ImageWriter</code>.
      * @param colorModel The provided <code>ColorModel</code>.
      * @param sampleModel The provided <code>SampleModel</code>.
@@ -1123,6 +1192,8 @@ public class ImageUtil {
 
     /**
      * Returns whether the image has contiguous data across rows.
+     * <p>
+     *  返回图像是否具有跨行的连续数据。
      */
     public static final boolean imageIsContiguous(RenderedImage image) {
         SampleModel sm;

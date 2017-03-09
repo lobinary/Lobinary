@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ package java.awt;
 /**
  * Capabilities and properties of buffers.
  *
+ * <p>
+ *  缓冲区的功能和属性。
+ * 
+ * 
  * @see java.awt.image.BufferStrategy#getCapabilities()
  * @see GraphicsConfiguration#getBufferCapabilities
  * @author Michael Martak
@@ -41,6 +46,10 @@ public class BufferCapabilities implements Cloneable {
 
     /**
      * Creates a new object for specifying buffering capabilities
+     * <p>
+     *  创建用于指定缓冲能力的新对象
+     * 
+     * 
      * @param frontCaps the capabilities of the front buffer; cannot be
      * <code>null</code>
      * @param backCaps the capabilities of the back and intermediate buffers;
@@ -62,6 +71,8 @@ public class BufferCapabilities implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return the image capabilities of the front (displayed) buffer
      */
     public ImageCapabilities getFrontBufferCapabilities() {
@@ -69,6 +80,8 @@ public class BufferCapabilities implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return the image capabilities of all back buffers (intermediate buffers
      * are considered back buffers)
      */
@@ -77,6 +90,8 @@ public class BufferCapabilities implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return whether or not the buffer strategy uses page flipping; a set of
      * buffers that uses page flipping
      * can swap the contents internally between the front buffer and one or
@@ -91,6 +106,8 @@ public class BufferCapabilities implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return the resulting contents of the back buffer after page-flipping.
      * This value is <code>null</code> when the <code>isPageFlipping</code>
      * returns <code>false</code>, implying blitting.  It can be one of
@@ -109,6 +126,8 @@ public class BufferCapabilities implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return whether page flipping is only available in full-screen mode.  If this
      * is <code>true</code>, full-screen exclusive mode is required for
      * page-flipping.
@@ -120,6 +139,8 @@ public class BufferCapabilities implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return whether or not
      * page flipping can be performed using more than two buffers (one or more
      * intermediate buffers as well as the front and back buffer).
@@ -130,6 +151,8 @@ public class BufferCapabilities implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return a copy of this BufferCapabilities object.
      */
     public Object clone() {
@@ -145,6 +168,10 @@ public class BufferCapabilities implements Cloneable {
     /**
      * A type-safe enumeration of the possible back buffer contents after
      * page-flipping
+     * <p>
+     *  页面翻转后可能的后缓冲器内容的类型安全枚举
+     * 
+     * 
      * @since 1.4
      */
     public static final class FlipContents extends AttributeValue {
@@ -160,6 +187,10 @@ public class BufferCapabilities implements Cloneable {
         /**
          * When flip contents are <code>UNDEFINED</code>, the
          * contents of the back buffer are undefined after flipping.
+         * <p>
+         *  当翻转内容为<code> UNDEFINED </code>时,后退缓冲区的内容在翻转后未定义。
+         * 
+         * 
          * @see #isPageFlipping
          * @see #getFlipContents
          * @see #BACKGROUND
@@ -173,6 +204,10 @@ public class BufferCapabilities implements Cloneable {
          * When flip contents are <code>BACKGROUND</code>, the
          * contents of the back buffer are cleared with the background color after
          * flipping.
+         * <p>
+         *  当翻转内容是<code> BACKGROUND </code>时,后台缓冲器的内容在翻转后以背景颜色清除。
+         * 
+         * 
          * @see #isPageFlipping
          * @see #getFlipContents
          * @see #UNDEFINED
@@ -186,6 +221,10 @@ public class BufferCapabilities implements Cloneable {
          * When flip contents are <code>PRIOR</code>, the
          * contents of the back buffer are the prior contents of the front buffer
          * (a true page flip).
+         * <p>
+         *  当翻转内容为<code> PRIOR </code>时,后缓冲器的内容是前缓冲器的先前内容(真正的页翻转)。
+         * 
+         * 
          * @see #isPageFlipping
          * @see #getFlipContents
          * @see #UNDEFINED
@@ -199,6 +238,9 @@ public class BufferCapabilities implements Cloneable {
          * When flip contents are <code>COPIED</code>, the
          * contents of the back buffer are copied to the front buffer when
          * flipping.
+         * <p>
+         *  当翻转内容是<code> COPIED </code>时,后台缓冲区的内容在翻转时被复制到前台缓冲区。
+         * 
          * @see #isPageFlipping
          * @see #getFlipContents
          * @see #UNDEFINED

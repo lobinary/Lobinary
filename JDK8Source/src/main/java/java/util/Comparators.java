@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,9 @@ import java.util.function.ToLongFunction;
 
 /**
  * Package private supporting class for {@link Comparator}.
+ * <p>
+ *  {@link Comparator}的软件包私有支持类。
+ * 
  */
 class Comparators {
     private Comparators() {
@@ -42,6 +46,10 @@ class Comparators {
     /**
      * Compares {@link Comparable} objects in natural order.
      *
+     * <p>
+     *  以自然顺序比较{@link Comparable}对象。
+     * 
+     * 
      * @see Comparable
      */
     enum NaturalOrderComparator implements Comparator<Comparable<Object>> {
@@ -60,6 +68,8 @@ class Comparators {
 
     /**
      * Null-friendly comparators
+     * <p>
+     *  空友好的比较器
      */
     final static class NullComparator<T> implements Comparator<T>, Serializable {
         private static final long serialVersionUID = -7569533591570686392L;

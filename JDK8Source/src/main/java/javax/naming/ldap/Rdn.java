@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -100,6 +101,38 @@ import java.io.IOException;
  * to a constructor or method in this class will cause NullPointerException
  * to be thrown.
  *
+ * <p>
+ *  此类表示相对可分辨名称或RDN,它是由<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>指定的可分辨名称的组成部分。 。
+ *  RDN的示例是"OU = Sales + CN = J.Smith"。在此示例中,RDN由多个属性类型/值对组成。
+ *  RDN按照{@link javax.naming.ldap.LdapName <tt> LdapName </tt>}的类描述中所述进行解析。
+ * <p>
+ *  Rdn类将RDN表示为属性类型/值映射,可以使用{@link javax.naming.directory.Attributes Attributes}查看。
+ * 此外,它包含方便的方法,当Rdn由单个类型/值对组成时,允许轻松检索类型和值,这是它在典型用法中的显示方式。
+ * 它还包含助手方法,允许转义未格式化的属性值,并根据RFC2253中定义的转义语法格式化的值的转义。对于接受或返回属性值作为对象的方法,该值为字符串(未转义的形式)或字节数组。
+ * <p>
+ * <code> Rdn </code>将正确解析所有有效的RDN,但在解析无效的RDN时不会尝试检测所有可能的违规。在接受无效的RDN时是"大方的"。
+ * 当它被提供给LDAP服务器,它可以接受或拒绝基于各种因素的名称,如它的模式信息和互操作性考虑的一个名称的"有效性"最终确定。
+ * 
+ * <p>
+ *  以下代码示例说明如何使用将类型和值作为参数的构造函数构造Rdn：
+ * <pre>
+ *  Rdn rdn = new Rdn("cn","Juicy,Fruit"); System.out.println(rdn.toString());
+ * </pre>
+ *  最后一行将打印<tt> cn = Juicy \,Fruit </tt>。
+ *  {@link #unescapeValue(String)<tt> unescapeValue()</tt>}方法可用于取消转义导出原始值<tt>"Juicy,Fruit"</tt>的转义逗号。
+ *  {@link #escapeValue(Object)<tt> escapeValue()</tt>}方法会在逗号之前添加回退。
+ * <p>
+ *  这个类可以通过RFC 2253中定义的RDN的字符串表示来实例化,如下面的代码示例所示：
+ * <pre>
+ *  Rdn rdn = new Rdn("cn = Juicy \\,Fruit"); System.out.println(rdn.toString());
+ * </pre>
+ *  最后一行将打印<tt> cn = Juicy \,Fruit </tt>。
+ * <p>
+ *  <tt> Rdn </tt>实例的并发多线程只读访问不需要同步。
+ * <p>
+ *  除非另有说明,否则将空参数传递给此类中的构造函数或方法的行为将导致抛出NullPointerException。
+ * 
+ * 
  * @since 1.5
  */
 
@@ -121,6 +154,13 @@ public class Rdn implements Serializable, Comparable<Object> {
      * formatted RDN strings. That is, the values are used
      * literally (not parsed) and assumed to be unescaped.
      *
+     * <p>
+     * 构造来自给定属性集的Rdn。请参阅{@link javax.naming.directory.Attributes Attributes}。
+     * <p>
+     *  字符串属性值不会解释为<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>格式化的RDN字符串。
+     * 也就是说,值按字面使用(不解析),并假定为非转义。
+     * 
+     * 
      * @param attrSet The non-null and non-empty attributes containing
      * type/value mappings.
      * @throws InvalidNameException If contents of <tt>attrSet</tt> cannot
@@ -156,6 +196,13 @@ public class Rdn implements Serializable, Comparable<Object> {
      * and described in the class description for
      * {@link javax.naming.ldap.LdapName}.
      *
+     * <p>
+     *  从给定字符串构造Rdn。
+     * 此构造函数接受根据<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>中定义的规则格式化的字符串,并在{@link javax.naming.ldap.LdapName}
+     * 。
+     *  从给定字符串构造Rdn。
+     * 
+     * 
      * @param rdnString The non-null and non-empty RFC2253 formatted string.
      * @throws InvalidNameException If a syntax error occurs during
      *                  parsing of the rdnString.
@@ -169,6 +216,10 @@ public class Rdn implements Serializable, Comparable<Object> {
      * Constructs an Rdn from the given <tt>rdn</tt>.
      * The contents of the <tt>rdn</tt> are simply copied into the newly
      * created Rdn.
+     * <p>
+     *  从给定的<tt> rdn </tt>构造Rdn。 <tt> rdn </tt>的内容只会复制到新创建的Rdn中。
+     * 
+     * 
      * @param rdn The non-null Rdn to be copied.
      */
     public Rdn(Rdn rdn) {
@@ -184,6 +235,11 @@ public class Rdn implements Serializable, Comparable<Object> {
      * formatted RDN strings. That is, the values are used
      * literally (not parsed) and assumed to be unescaped.
      *
+     * <p>
+     *  根据给定的属性类型和值构造Rdn。字符串属性值不会解释为<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>格式化的RDN字符串。
+     * 也就是说,值按字面使用(不解析),并假定为非转义。
+     * 
+     * 
      * @param type The non-null and non-empty string attribute type.
      * @param value The non-null and non-empty attribute value.
      * @throws InvalidNameException If type/value cannot be used to
@@ -220,6 +276,12 @@ public class Rdn implements Serializable, Comparable<Object> {
      * formatted RDN strings. That is the values are used
      * literally (not parsed) and assumed to be unescaped.
      *
+     * <p>
+     *  将给定的属性类型和值添加到此Rdn。
+     * 字符串属性值不会解释为<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>格式化的RDN字符串。
+     * 这就是字面上使用的值(不解析),并假定为非转义。
+     * 
+     * 
      * @param type The non-null and non-empty string attribute type.
      * @param value The non-null and non-empty attribute value.
      * @return The updated Rdn, not a new one. Cannot be null.
@@ -254,6 +316,12 @@ public class Rdn implements Serializable, Comparable<Object> {
      * For a multi-valued RDN, this method returns value corresponding
      * to the type returned by {@link #getType() getType()} method.
      *
+     * <p>
+     *  检索此Rdn的值之一。当RDN包含单个类型和值映射(这是常见的RDN使用)时,这是获取值的一种方便的方法。
+     * <p>
+     * 对于多值RDN,此方法返回与{@link #getType()getType()}方法返回的类型相对应的值。
+     * 
+     * 
      * @return The non-null attribute value.
      */
     public Object getValue() {
@@ -272,6 +340,12 @@ public class Rdn implements Serializable, Comparable<Object> {
      * The {@link #getValue() getValue()} method returns the
      * value corresponding to the type returned by this method.
      *
+     * <p>
+     *  检索此Rdn的类型之一。当RDN包含单个类型和值映射(这是常见的RDN使用)时,这是获取类型的简便方法。
+     * <p>
+     *  对于多值RDN,类型/值对没有在它们上定义的特定顺序。在这种情况下,此方法返回类型/值对之一的类型。 {@link #getValue()getValue()}方法返回与此方法返回的类型对应的值。
+     * 
+     * 
      * @return The non-null attribute type.
      */
     public String getType() {
@@ -283,6 +357,11 @@ public class Rdn implements Serializable, Comparable<Object> {
      * <a href="http://www.ietf.org/rfc/rfc2253.txt">RFC 2253</a> and described
      * in the class description for {@link javax.naming.ldap.LdapName LdapName}.
      *
+     * <p>
+     *  将此Rdn返回为由<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>定义的格式表示的字符串,并在{@link javax.naming.ldap.LdapName LdapName}
+     * 。
+     * 
+     * 
      * @return The string representation of the Rdn.
      */
     public String toString() {
@@ -311,6 +390,14 @@ public class Rdn implements Serializable, Comparable<Object> {
      * components in multi-valued Rdns (such as "ou=Sales+cn=Bob") is not
      * significant.
      *
+     * <p>
+     *  将此Rdn与指定的对象进行比较。返回一个负整数,零或正整数,因为此Rdn小于,等于或大于给定的对象。
+     * <p>
+     *  如果obj为null或不是Rdn的实例,则抛出ClassCastException。
+     * <p>
+     *  RDN的属性类型和值对彼此对齐并按字典顺序进行比较。多值Rdns中的组件的顺序(例如"ou = Sales + cn = Bob")不重要。
+     * 
+     * 
      * @param obj The non-null object to compare against.
      * @return  A negative integer, zero, or a positive integer as this Rdn
      *          is less than, equal to, or greater than the given Object.
@@ -353,6 +440,18 @@ public class Rdn implements Serializable, Comparable<Object> {
      * <p>
      * If obj is null or not an instance of Rdn, false is returned.
      * <p>
+     * <p>
+     * 将指定的对象与此Rdn比较以确保相等。如果给定对象也是Rdn,并且两个Rdns表示相同的属性类型和值映射,则返回true。
+     * 多值Rdns中的组件的顺序(例如"ou = Sales + cn = Bob")不重要。
+     * <p>
+     *  类型和值相等匹配完成如下：
+     * <ul>
+     *  <li>比较类型与忽略的情况的相等性。 <li>具有不同但等效的引用,转义或UTF8-hex编码的字符串值被视为相等。在比较期间忽略值的情况。
+     * </ul>
+     * <p>
+     *  如果obj为null或不是Rdn的实例,则返回false。
+     * <p>
+     * 
      * @param obj object to be compared for equality with this Rdn.
      * @return true if the specified object is equal to this Rdn.
      * @see #hashCode()
@@ -381,6 +480,10 @@ public class Rdn implements Serializable, Comparable<Object> {
      * equal (according to the equals method) will have the same
      * hash code.
      *
+     * <p>
+     *  返回此RDN的哈希码。两个相等的RDN(根据equals方法)将具有相同的哈希码。
+     * 
+     * 
      * @return An int representing the hash code of this Rdn.
      * @see #equals
      */
@@ -400,6 +503,10 @@ public class Rdn implements Serializable, Comparable<Object> {
      * Retrieves the {@link javax.naming.directory.Attributes Attributes}
      * view of the type/value mappings contained in this Rdn.
      *
+     * <p>
+     *  检索此Rdn中包含的类型/值映射的{@link javax.naming.directory.Attributes Attributes}视图。
+     * 
+     * 
      * @return  The non-null attributes containing the type/value
      *          mappings of this Rdn.
      */
@@ -486,6 +593,10 @@ public class Rdn implements Serializable, Comparable<Object> {
 
     /**
      * Retrieves the number of attribute type/value pairs in this Rdn.
+     * <p>
+     *  检索此Rdn中的属性类型/值对的数量。
+     * 
+     * 
      * @return The non-negative number of type/value pairs in this Rdn.
      */
     public int size() {
@@ -503,6 +614,14 @@ public class Rdn implements Serializable, Comparable<Object> {
      * A string value is represented as a String and binary value
      * as a byte array.
      *
+     * <p>
+     *  给定属性的值,将返回根据<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>中指定的规则转义的字符串。
+     * <p>
+     *  例如,如果val是"Sue,Grabbit和Runn",则此方法返回的转义值为"Sue \,Grabbit和Runn"。
+     * <p>
+     *  字符串值表示为字符串和二进制值作为字节数组。
+     * 
+     * 
      * @param val The non-null object to be escaped.
      * @return Escaped string value.
      * @throws ClassCastException if val is is not a String or byte array.
@@ -519,6 +638,9 @@ public class Rdn implements Serializable, Comparable<Object> {
      * using backslash (\) to escape the following characters:
      *  leading and trailing whitespace
      *  , = + < > # ; " \
+     * <p>
+     * 给定字符串值属性的值,返回适合包含在DN中的字符串。这是通过使用反斜杠(\)来转义以下字符来实现的：前导和尾随空格,= + <>#; "\
+     * 
      */
     private static final String escapees = ",=+<>#;\"\\";
 
@@ -556,6 +678,9 @@ public class Rdn implements Serializable, Comparable<Object> {
      * suitable for inclusion in a DN (such as "#CEB1DF80").
      * TBD: This method should actually generate the ber encoding
      * of the binary value
+     * <p>
+     *  给定二进制属性的值,返回一个适合包含在DN中的字符串(如"#CEB1DF80")。 TBD：这个方法实际上应该生成二进制值的ber编码
+     * 
      */
     private static String escapeBinaryValue(byte[] val) {
 
@@ -585,6 +710,13 @@ public class Rdn implements Serializable, Comparable<Object> {
      * Therefore, passing in an illegal value might not necessarily
      * trigger an <tt>IllegalArgumentException</tt>.
      *
+     * <p>
+     *  给定根据<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253 </a>中指定的规则生成的属性值字符串,返回未格式化的值。
+     * 转义和引号被去除,并且十六进制编码的UTF-8转换为等效的UTF-16字符。以字符串形式返回字符串值,以字节数组形式返回二进制值。
+     * <p>
+     *  在RFC 2253中定义了合法和非法值。此方法慷慨地接受值,并且不捕获所有非法值。因此,传入非法值可能不一定会触发<tt> IllegalArgumentException </tt>。
+     * 
+     * 
      * @param   val     The non-null string to be unescaped.
      * @return          Unescaped value.
      * @throws          IllegalArgumentException When an Illegal value
@@ -675,6 +807,9 @@ public class Rdn implements Serializable, Comparable<Object> {
          * Given an array of chars (with starting and ending indexes into it)
          * representing bytes encoded as hex-pairs (such as "CEB1DF80"),
          * returns a byte array containing the decoded bytes.
+         * <p>
+         *  给定表示以十六进制编码的字节(例如"CEB1DF80")的字符数组(具有开始和结束索引),返回包含解码字节的字节数组。
+         * 
          */
         private static byte[] decodeHexPairs(char[] chars, int beg, int end) {
             byte[] bytes = new byte[(end - beg) / 2];
@@ -701,6 +836,11 @@ public class Rdn implements Serializable, Comparable<Object> {
          *
          * Hex-encoded UTF-8 octets look like this:
          *      \03\B1\DF\80
+         * <p>
+         *  给定一个字符数组(其中包含起始和结尾索引),找到由十六进制编码的UTF-8八位字节组成的最大前缀,并返回包含对应的UTF-8八位字节的字节数组。
+         * 
+         *  十六进制编码的UTF-8八位字节如下所示：\ 03 \ B1 \ DF \ 80
+         * 
          */
         private static byte[] getUtf8Octets(char[] chars, int beg, int end) {
             byte[] utf8 = new byte[(end - beg) / 3];    // allow enough room
@@ -726,6 +866,9 @@ public class Rdn implements Serializable, Comparable<Object> {
 
     /*
      * Best guess as to what RFC 2253 means by "whitespace".
+     * <p>
+     * 最好猜测什么RFC 2253意味着"空白"。
+     * 
      */
     private static boolean isWhitespace(char c) {
         return (c == ' ' || c == '\r');
@@ -735,6 +878,9 @@ public class Rdn implements Serializable, Comparable<Object> {
      * Serializes only the unparsed RDN, for compactness and to avoid
      * any implementation dependency.
      *
+     * <p>
+     *  仅序列化未解析的RDN,以实现紧凑性,并避免任何实现依赖性。
+     * 
      * @serialData      The RDN string
      */
     private void writeObject(ObjectOutputStream s)

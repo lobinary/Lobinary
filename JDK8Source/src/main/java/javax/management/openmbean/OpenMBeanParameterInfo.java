@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,14 @@ import java.lang.Comparable; // to be substituted for jdk1.1.x
  * extend {@link javax.management.MBeanParameterInfo}.</p>
  *
  *
+ * <p>
+ *  <p>描述在打开的MBean的一个或多个操作或构造函数中使用的参数。</p>
+ * 
+ *  <p>此接口声明与类{@link javax.management.MBeanParameterInfo}相同的方法。
+ * 实现此接口的类(通常为{@link OpenMBeanParameterInfoSupport})应该扩展{@link javax.management.MBeanParameterInfo}。
+ * </p>。
+ * 
+ * 
  * @since 1.5
  */
 public interface OpenMBeanParameterInfo {
@@ -59,6 +68,10 @@ public interface OpenMBeanParameterInfo {
      * Returns a human readable description of the parameter
      * described by this <tt>OpenMBeanParameterInfo</tt> instance.
      *
+     * <p>
+     *  返回此<tt> OpenMBeanParameterInfo </tt>实例描述的参数的可读描述。
+     * 
+     * 
      * @return the description.
      */
     public String getDescription() ;
@@ -67,6 +80,10 @@ public interface OpenMBeanParameterInfo {
      * Returns the name of the parameter
      * described by this <tt>OpenMBeanParameterInfo</tt> instance.
      *
+     * <p>
+     *  返回此<tt> OpenMBeanParameterInfo </tt>实例描述的参数的名称。
+     * 
+     * 
      * @return the name.
      */
     public String getName() ;
@@ -79,6 +96,10 @@ public interface OpenMBeanParameterInfo {
      * Returns the <i>open type</i> of the values of the parameter
      * described by this <tt>OpenMBeanParameterInfo</tt> instance.
      *
+     * <p>
+     *  返回此<tt> OpenMBeanParameterInfo </tt>实例描述的参数值的<i>打开类型</i>。
+     * 
+     * 
      * @return the open type.
      */
     public OpenType<?> getOpenType() ;
@@ -87,6 +108,10 @@ public interface OpenMBeanParameterInfo {
      * Returns the default value for this parameter, if it has one, or
      * <tt>null</tt> otherwise.
      *
+     * <p>
+     *  返回此参数的默认值(如果有),否则返回<tt> null </tt>。
+     * 
+     * 
      * @return the default value.
      */
     public Object getDefaultValue() ;
@@ -95,6 +120,10 @@ public interface OpenMBeanParameterInfo {
      * Returns the set of legal values for this parameter, if it has
      * one, or <tt>null</tt> otherwise.
      *
+     * <p>
+     *  返回此参数的合法值集(如果有),否则返回<tt> null </tt>。
+     * 
+     * 
      * @return the set of legal values.
      */
     public Set<?> getLegalValues() ;
@@ -103,6 +132,10 @@ public interface OpenMBeanParameterInfo {
      * Returns the minimal value for this parameter, if it has one, or
      * <tt>null</tt> otherwise.
      *
+     * <p>
+     *  返回此参数的最小值(如果有),否则返回<tt> null </tt>。
+     * 
+     * 
      * @return the minimum value.
      */
     public Comparable<?> getMinValue() ;
@@ -111,6 +144,10 @@ public interface OpenMBeanParameterInfo {
      * Returns the maximal value for this parameter, if it has one, or
      * <tt>null</tt> otherwise.
      *
+     * <p>
+     *  返回此参数的最大值(如果有),否则返回<tt> null </tt>。
+     * 
+     * 
      * @return the maximum value.
      */
     public Comparable<?> getMaxValue() ;
@@ -119,6 +156,10 @@ public interface OpenMBeanParameterInfo {
      * Returns <tt>true</tt> if this parameter has a specified default
      * value, or <tt>false</tt> otherwise.
      *
+     * <p>
+     *  如果此参数具有指定的默认值,则返回<tt> true </tt>,否则返回<tt> false </tt>。
+     * 
+     * 
      * @return true if there is a default value.
      */
     public boolean hasDefaultValue() ;
@@ -127,6 +168,10 @@ public interface OpenMBeanParameterInfo {
      * Returns <tt>true</tt> if this parameter has a specified set of
      * legal values, or <tt>false</tt> otherwise.
      *
+     * <p>
+     *  如果此参数具有指定的合法值集合,则返回<tt> true </tt>,否则返回<tt> false </tt>。
+     * 
+     * 
      * @return true if there is a set of legal values.
      */
     public boolean hasLegalValues() ;
@@ -135,6 +180,10 @@ public interface OpenMBeanParameterInfo {
      * Returns <tt>true</tt> if this parameter has a specified minimal
      * value, or <tt>false</tt> otherwise.
      *
+     * <p>
+     *  如果此参数具有指定的最小值,则返回<tt> true </tt>,否则返回<tt> false </tt>。
+     * 
+     * 
      * @return true if there is a minimum value.
      */
     public boolean hasMinValue() ;
@@ -143,6 +192,10 @@ public interface OpenMBeanParameterInfo {
      * Returns <tt>true</tt> if this parameter has a specified maximal
      * value, or <tt>false</tt> otherwise.
      *
+     * <p>
+     * 如果此参数具有指定的最大值,则返回<tt> true </tt>,否则返回<tt> false </tt>。
+     * 
+     * 
      * @return true if there is a maximum value.
      */
     public boolean hasMaxValue() ;
@@ -151,6 +204,10 @@ public interface OpenMBeanParameterInfo {
      * Tests whether <var>obj</var> is a valid value for the parameter
      * described by this <code>OpenMBeanParameterInfo</code> instance.
      *
+     * <p>
+     *  测试<var> obj </var>是否是由此<code> OpenMBeanParameterInfo </code>实例描述的参数的有效值。
+     * 
+     * 
      * @param obj the object to be tested.
      *
      * @return <code>true</code> if <var>obj</var> is a valid value
@@ -175,6 +232,19 @@ public interface OpenMBeanParameterInfo {
      * This ensures that this <tt>equals</tt> method works properly for <var>obj</var> parameters which are
      * different implementations of the <code>OpenMBeanParameterInfo</code> interface.
      * <br>&nbsp;
+     * <p>
+     *  将指定的<var> obj </var>参数与此<code> OpenMBeanParameterInfo </code>实例相比较。
+     * <p>
+     *  当且仅当所有以下语句都为真时返回<tt> true </tt>：
+     * <ul>
+     *  <li> <var> obj </var>不为空,</li> <li> <var> obj </var>也实现<code> OpenMBeanParameterInfo </code> </li> <li>
+     * 其默认值,最小值,最大值和法定值相等。
+     * </li>。
+     * </ul>
+     *  这可以确保<tt> equals </tt>方法对<var> obj </var>参数正常工作,这些参数是<code> OpenMBeanParameterInfo </code>接口的不同实现。
+     *  <br>&nbsp;。
+     * 
+     * 
      * @param  obj  the object to be compared for equality with this <code>OpenMBeanParameterInfo</code> instance;
      *
      * @return  <code>true</code> if the specified object is equal to this <code>OpenMBeanParameterInfo</code> instance.
@@ -194,6 +264,16 @@ public interface OpenMBeanParameterInfo {
      * {@link Object#hashCode() Object.hashCode()}.
      * <p>
      *
+     * <p>
+     *  返回此<code> OpenMBeanParameterInfo </code>实例的哈希码值。
+     * <p>
+     *  <code> OpenMBeanParameterInfo </code>实例的哈希码是在<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即：它的名称, / i>及其
+     * 默认值,min,max和legal值)。
+     * <p>
+     * 这确保对于任何两个<code> OpenMBeanParameterInfo </code>实例,<code> t1.equals(t2)</code>意味着<code> t1.hashCode()==
+     *  t2.hashCode()</代码> t1 </code>和<code> t2 </code>,这是方法{@link Object#hashCode()Object.hashCode()}的一般合同的
+     * 要求。
+     * 
      * @return  the hash code value for this <code>OpenMBeanParameterInfo</code> instance
      */
     public int hashCode();
@@ -205,6 +285,10 @@ public interface OpenMBeanParameterInfo {
      * the string representation of the name and open type of the described parameter,
      * and the string representation of its default, min, max and legal values.
      *
+     * <p>
+     * <p>
+     * 
+     * 
      * @return  a string representation of this <code>OpenMBeanParameterInfo</code> instance
      */
     public String toString();

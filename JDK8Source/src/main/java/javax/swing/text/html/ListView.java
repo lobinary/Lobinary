@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import javax.swing.text.*;
 /**
  * A view implementation to display an html list
  *
+ * <p>
+ *  用于显示html列表的视图实现
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class ListView extends BlockView  {
@@ -38,6 +43,10 @@ public class ListView extends BlockView  {
     /**
      * Creates a new view that represents a list element.
      *
+     * <p>
+     *  创建表示列表元素的新视图。
+     * 
+     * 
      * @param elem the element to create a view for
      */
     public ListView(Element elem) {
@@ -47,6 +56,10 @@ public class ListView extends BlockView  {
     /**
      * Calculates the desired shape of the list.
      *
+     * <p>
+     *  计算列表的所需形状。
+     * 
+     * 
      * @return the desired span
      * @see View#getPreferredSpan
      */
@@ -65,6 +78,10 @@ public class ListView extends BlockView  {
      * Renders using the given rendering surface and area on that
      * surface.
      *
+     * <p>
+     *  使用给定的渲染表面和该表面上的区域渲染。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param allocation the allocated region to render into
      * @see View#paint
@@ -104,6 +121,9 @@ public class ListView extends BlockView  {
      * that is all it does, but a subclass can use this to paint
      * things relative to the child.
      *
+     * <p>
+     *  画一个孩子;调用paint()。默认情况下,它是它所做的,但一个子类可以使用它来绘制相对于孩子的东西。
+     * 
      * @param g the graphics context
      * @param alloc the allocated region to render the child into
      * @param index the index of the child

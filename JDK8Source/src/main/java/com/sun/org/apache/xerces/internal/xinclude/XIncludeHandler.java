@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2003-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xerces.internal.xinclude;
 
@@ -112,6 +122,39 @@ import java.util.Objects;
  * documents can be included using this component in the pipeline.
  * </p>
  *
+ * <p>
+ * <p>
+ *  这是一个管道组件,根据XML包含的W3C规范执行XInclude处理。
+ * </p>
+ * <p>
+ *  此组件分析管道中的每个事件,寻找&lt; include&gt;元素。
+ *  &lt; include&gt;元素是具有<code> http://www.w3.org/2001/XInclude </code>的命名空间和<code> include </code>的本地名称
+ * 的元素。
+ *  此组件分析管道中的每个事件,寻找&lt; include&gt;元素。当它发现&lt; include&gt;元素,它会尝试包含元素的<code> href </code>属性中指定的文件。
+ * 如果包含成功,则&lt; include&gt;元素将被忽略(除了检查规范中概述的无效子项)。如果包含失败,则&lt; fallback&gt; &lt; include&gt;的子节点。元素被处理。
+ * </p>
+ * <p>
+ * 有关如何使用XInclude的详细信息,请参见<a href="http://www.w3.org/TR/xinclude/"> XInclude规范</a>。
+ * </p>
+ * <p>
+ *  此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ *  <li> http://xml.org/sax/features/allow-dtd-events-after-endDTD </li> <li> http://apache.org/xml/prop
+ * erties/internal/error-reporter </li> <li> http://apache.org/xml/properties/internal/entity-resolver </li>
+ * 。
+ * </ul>
+ *  可选属性：
+ * <ul>
+ *  <li> http://apache.org/xml/properties/input-buffer-size </li>
+ * </ul>
+ * 
+ *  此外,管道中使用的<code> NamespaceContext </code>需要是<code> XIncludeNamespaceSupport </code>的实例。
+ * </p>
+ * <p>
+ *  目前,此实现仅部分支持XInclude规范。具体来说,它缺少对XPointer文档片段的支持。因此,在流水线中只使用该组件可以包括整个文档。
+ * </p>
+ * 
+ * 
  * @author Peter McCracken, IBM
  * @author Michael Glavassevich, IBM
  *
@@ -591,6 +634,9 @@ public class XIncludeHandler
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的要素标识符列表。如果此组件未识别任何功能,此方法可能返回null。
+     * 
      */
     @Override
     public String[] getRecognizedFeatures() {
@@ -604,6 +650,12 @@ public class XIncludeHandler
      * <strong>Note:</strong> Components should silently ignore features
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置要素的状态。当特性改变状态时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应默认忽略不影响组件操作的功能。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -628,6 +680,9 @@ public class XIncludeHandler
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符列表。如果此组件未识别任何属性,此方法可能返回null。
+     * 
      */
     @Override
     public String[] getRecognizedProperties() {
@@ -641,6 +696,12 @@ public class XIncludeHandler
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     * 设置属性的值。当属性更改值时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应静默忽略不影响组件操作的属性。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *
@@ -716,6 +777,10 @@ public class XIncludeHandler
      * component does not want to report a default value for this
      * feature.
      *
+     * <p>
+     *  返回特征的默认状态,如果此组件不希望报告此特征的默认值,则返回null。
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @since Xerces 2.2.0
@@ -735,6 +800,10 @@ public class XIncludeHandler
      * component does not want to report a default value for this
      * property.
      *
+     * <p>
+     *  返回属性的默认状态,如果此组件不希望报告此属性的默认值,则返回null。
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @since Xerces 2.2.0
@@ -768,6 +837,13 @@ public class XIncludeHandler
      * before.
      *
      * This event is only passed on to the document handler if this is the root document.
+     * <p>
+     *  事件在文档开始时发送。
+     * 
+     *  如果检测到此文档已在之前处理,则会在此处发生致命错误。
+     * 
+     *  如果这是根文档,则此事件仅传递到文档处理程序。
+     * 
      */
     @Override
     public void startDocument(
@@ -1189,6 +1265,8 @@ public class XIncludeHandler
     // the rest we just pass on
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#attributeDecl(java.lang.String, java.lang.String, java.lang.String, java.lang.String[], java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1216,6 +1294,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#elementDecl(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1230,6 +1310,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#endAttlist(com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1240,6 +1322,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#endConditional(com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1251,6 +1335,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#endDTD(com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1262,6 +1348,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#endExternalSubset(com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1273,6 +1361,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#endParameterEntity(java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1284,6 +1374,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#externalEntityDecl(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1298,6 +1390,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#getDTDSource()
      */
     @Override
@@ -1306,6 +1400,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#ignoredCharacters(com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1317,6 +1413,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#internalEntityDecl(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1336,6 +1434,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#notationDecl(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1351,6 +1451,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#setDTDSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource)
      */
     @Override
@@ -1359,6 +1461,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#startAttlist(java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1370,6 +1474,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#startConditional(short, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1381,6 +1487,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#startDTD(com.sun.org.apache.xerces.internal.xni.XMLLocator, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1393,6 +1501,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#startExternalSubset(com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1406,6 +1516,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#startParameterEntity(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1425,6 +1537,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.XMLDTDHandler#unparsedEntityDecl(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations)
      */
     @Override
@@ -1445,6 +1559,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource#getDTDHandler()
      */
     @Override
@@ -1453,6 +1569,8 @@ public class XIncludeHandler
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource#setDTDHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDHandler)
      */
     @Override
@@ -1845,6 +1963,10 @@ public class XIncludeHandler
 
     /**
      * Returns true if the element has the namespace "http://www.w3.org/2001/XInclude"
+     * <p>
+     *  如果元素具有命名空间"http://www.w3.org/2001/XInclude",则返回true
+     * 
+     * 
      * @param element the element to check
      * @return true if the element has the namespace "http://www.w3.org/2001/XInclude"
      */
@@ -1860,6 +1982,10 @@ public class XIncludeHandler
      * Checks if the element is an &lt;include&gt; element.  The element must have
      * the XInclude namespace, and a local name of "include".
      *
+     * <p>
+     *  检查元素是否为&lt; include&gt;元件。元素必须具有XInclude命名空间,本地名称为"include"。
+     * 
+     * 
      * @param element the element to check
      * @return true if the element is an &lt;include&gt; element
      * @see #hasXIncludeNamespace(QName)
@@ -1873,6 +1999,10 @@ public class XIncludeHandler
      * Checks if the element is an &lt;fallback&gt; element.  The element must have
      * the XInclude namespace, and a local name of "fallback".
      *
+     * <p>
+     *  检查元素是否为&lt; fallback&gt;元件。元素必须具有XInclude命名空间,本地名称为"fallback"。
+     * 
+     * 
      * @param element the element to check
      * @return true if the element is an &lt;fallback; element
      * @see #hasXIncludeNamespace(QName)
@@ -1889,6 +2019,11 @@ public class XIncludeHandler
      * of a fallback element, or the root elements in an included document.
      * The "include parent" is the element which, in the result infoset, will be the
      * direct parent of the current element.
+     * <p>
+     *  如果当前[基本URI]与对包含父代生效的[基本URI]相同,则返回true。仅当当前元素是顶级包含元素(即后备元素的直接子元素或所包含文档中的根元素)时,才会调用此方法</em>。
+     *  "include parent"是在结果信息集中,将是当前元素的直接父代的元素。
+     * 
+     * 
      * @return true if the [base URIs] are the same string
      */
     protected boolean sameBaseURIAsIncludeParent() {
@@ -1914,6 +2049,11 @@ public class XIncludeHandler
      * The "include parent" is the element which, in the result infoset, will be the
      * direct parent of the current element.
      *
+     * <p>
+     * 如果当前[language]等价于包含parent的有效的[language],则返回true,根据[RFC 3066]考虑不区分大小写。
+     * 仅当当前元素是顶级包含元素(即后备元素的直接子元素或所包含文档中的根元素)时,才会调用此方法</em>。 "include parent"是在结果信息集中,将是当前元素的直接父代的元素。
+     * 
+     * 
      * @return true if the [language] properties have the same value
      * taking case-insensitivity into account as per [RFC 3066].
      */
@@ -1925,6 +2065,10 @@ public class XIncludeHandler
     /**
      * Checks if the file indicated by the given XMLLocator has already been included
      * in the current stack.
+     * <p>
+     *  检查给定XMLLocator指示的文件是否已包括在当前堆栈中。
+     * 
+     * 
      * @param includedSource the source to check for inclusion
      * @return true if the source has already been included
      */
@@ -1959,6 +2103,10 @@ public class XIncludeHandler
      * Returns true if the current element is a top level included item.  This means
      * it's either the child of a fallback element, or the top level item in an
      * included document
+     * <p>
+     *  如果当前元素是包含顶级项目,则返回true。这意味着它是后备元素的子元素,或包含文档中的顶级项目
+     * 
+     * 
      * @return true if the current element is a top level included item
      */
     protected boolean isTopLevelIncludedItem() {
@@ -1989,6 +2137,14 @@ public class XIncludeHandler
      * <li> For all attributes with a type of ENTITY, ENTITIES or NOTATIONS, the notations and
      * unparsed entities are processed as described in the spec, sections 4.5.1 and 4.5.2
      * </ul>
+     * <p>
+     *  处理startElement()调用的XMLAttributes对象。执行以下任务：
+     * <ul>
+     *  <li>如果元素是其[base URI]与include parent的[base URI]不同的顶级包含项,则会添加一个xml：base属性,以指定真实的[base URI] <li> For所有属
+     * 于包含项目范围内,但不在include parent范围内的命名空间前缀。
+     * <li>对于具有ENTITY,ENTITIES或NOTATIONS类型的所有属性,符号和未解析的实体按照规范第4.5.1和4.5.2节中的描述进行处理。
+     * </ul>
+     * 
      * @param attributes
      * @return
      */
@@ -2123,6 +2279,11 @@ public class XIncludeHandler
                  * in the pipeline, when the IDREFs are actually resolved against IDs.
                  *
                  * if (type == XMLSymbols.fIDREFSymbol || type == XMLSymbols.fIDREFSSymbol) { }
+                 * <p>
+                 *  属性的值只是一个字符串。它将在后面的管道中处理,当IDREF实际上解析对ID。
+                 * 
+                 * if(type == XMLSymbols.fIDREFSymbol || type == XMLSymbols.fIDREFSSymbol){}
+                 * 
                  */
             }
         }
@@ -2134,6 +2295,11 @@ public class XIncludeHandler
      * Returns a URI, relative to the include parent's base URI, of the current
      * [base URI].  For instance, if the current [base URI] was "dir1/dir2/file.xml"
      * and the include parent's [base URI] was "dir/", this would return "dir2/file.xml".
+     * <p>
+     *  返回当前[基本URI]的相对于包含父项的基本URI的URI。
+     * 例如,如果当前的[base URI]是"dir1 / dir2 / file.xml",include parent的[base URI]是"dir /",这将返回"dir2 / file.xml"。
+     * 
+     * 
      * @return the relative URI
      */
     protected String getRelativeBaseURI() throws MalformedURIException {
@@ -2177,6 +2343,9 @@ public class XIncludeHandler
                  * The scheme and authority components are equal,
                  * return the path and the possible query and/or
                  * fragment which follow.
+                 * <p>
+                 *  方案和权限组件相等,返回路径和可能的查询和/或片段。
+                 * 
                  */
                 final String literalPath = uri.getPath();
                 final String literalQuery = uri.getQueryString();
@@ -2206,6 +2375,10 @@ public class XIncludeHandler
 
     /**
      * Returns the [base URI] of the include parent.
+     * <p>
+     *  返回include parent的[base URI]。
+     * 
+     * 
      * @return the base URI of the include parent.
      */
     private String getIncludeParentBaseURI() {
@@ -2221,6 +2394,10 @@ public class XIncludeHandler
     /**
      * Returns the [language] of the include parent.
      *
+     * <p>
+     *  返回包含父项的[语言]。
+     * 
+     * 
      * @return the language property of the include parent.
      */
     private String getIncludeParentLanguage() {
@@ -2239,6 +2416,10 @@ public class XIncludeHandler
      * this method is called when the current element is a top level included item.
      * Returning 0 indicates that the top level element in this document
      * was an include element.
+     * <p>
+     *  返回包含父元素的深度。这里,include parent被计算为最后一个非包含或非fallback元素。假设当当前元素是包含顶级项目时调用此方法。返回0表示此文档中的顶级元素是include元素。
+     * 
+     * 
      * @return the depth of the top level include element
      */
     private int getIncludeParentDepth() {
@@ -2262,6 +2443,9 @@ public class XIncludeHandler
 
     /**
      * Returns the current element depth of the result infoset.
+     * <p>
+     *  返回结果信息集的当前元素深度。
+     * 
      */
     private int getResultDepth() {
         return fResultDepth;
@@ -2270,6 +2454,10 @@ public class XIncludeHandler
     /**
      * Modify the augmentations.  Add an [included] infoset item, if the current
      * element is a top level included item.
+     * <p>
+     *  修改增强。如果当前元素是包含顶级项目,则添加[included]信息集项目。
+     * 
+     * 
      * @param augs the Augmentations to modify.
      * @return the modified Augmentations
      */
@@ -2280,6 +2468,10 @@ public class XIncludeHandler
     /**
      * Modify the augmentations.  Add an [included] infoset item, if <code>force</code>
      * is true, or if the current element is a top level included item.
+     * <p>
+     *  修改增强。如果<code> force </code>为true,或者当前元素是包含顶级项目,请添加[included]信息集项目。
+     * 
+     * 
      * @param augs the Augmentations to modify.
      * @param force whether to force modification
      * @return the modified Augmentations
@@ -2318,6 +2510,10 @@ public class XIncludeHandler
      * as an ancestor of the current element, or as a sibling of an ancestor of the
      * current element.
      *
+     * <p>
+     *  记录&lt; fallback&gt;在指定的深度遇到,作为当前元素的祖先,或作为当前元素的祖先的兄弟。
+     * 
+     * 
      * @param depth
      * @param val
      */
@@ -2335,6 +2531,10 @@ public class XIncludeHandler
      * as an ancestor of the current element, or as a sibling of an ancestor of the
      * current element.
      *
+     * <p>
+     *  返回&lt; fallback&gt;在指定的深度遇到,作为当前元素的祖先,或作为当前元素的祖先的兄弟。
+     * 
+     * 
      * @param depth
      */
     protected boolean getSawFallback(int depth) {
@@ -2348,6 +2548,10 @@ public class XIncludeHandler
      * Records that an &lt;include&gt; was encountered at the specified depth,
      * as an ancestor of the current item.
      *
+     * <p>
+     * 记录&lt; include&gt;在指定的深度遇到,作为当前项目的祖先。
+     * 
+     * 
      * @param depth
      * @param val
      */
@@ -2364,6 +2568,10 @@ public class XIncludeHandler
      * Return whether an &lt;include&gt; was encountered at the specified depth,
      * as an ancestor of the current item.
      *
+     * <p>
+     *  返回&lt; include&gt;在指定的深度遇到,作为当前项目的祖先。
+     * 
+     * 
      * @param depth
      * @return
      */
@@ -2404,6 +2612,10 @@ public class XIncludeHandler
 
     /**
      * Set the parent of this XIncludeHandler in the tree
+     * <p>
+     *  在树中设置此XIncludeHandler的父级
+     * 
+     * 
      * @param parent
      */
     protected void setParent(XIncludeHandler parent) {
@@ -2417,6 +2629,10 @@ public class XIncludeHandler
 
     /**
      * Caches an unparsed entity.
+     * <p>
+     *  缓存未解析的实体。
+     * 
+     * 
      * @param name the name of the unparsed entity
      * @param identifier the location of the unparsed entity
      * @param augmentations any Augmentations that were on the original unparsed entity declaration
@@ -2439,6 +2655,10 @@ public class XIncludeHandler
 
     /**
      * Caches a notation.
+     * <p>
+     *  缓存符号。
+     * 
+     * 
      * @param name the name of the notation
      * @param identifier the location of the notation
      * @param augmentations any Augmentations that were on the original notation declaration
@@ -2463,6 +2683,11 @@ public class XIncludeHandler
      * If that turns out okay, then the UnparsedEntity is passed to the root pipeline to
      * be checked for conflicts, and sent to the root DTDHandler.
      *
+     * <p>
+     *  检查是否在当前流水线的文档的DTD中声明了具有给定名称的UnparsedEntity。如果是,则检查UnparsedEntity的符号。
+     * 如果结果好了,那么UnparsedEntity被传递到根管道以检查冲突,并发送到根DTDHandler。
+     * 
+     * 
      * @param entName the name of the UnparsedEntity to check
      */
     protected void checkUnparsedEntity(String entName) {
@@ -2482,6 +2707,10 @@ public class XIncludeHandler
      * for the current pipeline.  If so, that Notation is passed to the root pipeline to
      * be checked for conflicts, and sent to the root DTDHandler
      *
+     * <p>
+     *  检查是否在当前管道的文档的DTD中声明了具有给定名称的符号。如果是这样,该符号被传递到根管线以检查冲突,并发送到根DTDHandler
+     * 
+     * 
      * @param notName the name of the Notation to check
      */
     protected void checkNotation(String notName) {
@@ -2499,6 +2728,10 @@ public class XIncludeHandler
      * declared entity in the current pipeline stack.  If there is no conflict, the
      * UnparsedEntity is sent by the root pipeline.
      *
+     * <p>
+     *  此方法的目的是检查UnparsedEntity是否与当前管道堆栈中先前声明的实体冲突。如果没有冲突,则UnparsedEntity由根管道发送。
+     * 
+     * 
      * @param ent the UnparsedEntity to check for conflicts
      */
     protected void checkAndSendUnparsedEntity(UnparsedEntity ent) {
@@ -2547,6 +2780,10 @@ public class XIncludeHandler
      * declared notation in the current pipeline stack.  If there is no conflict, the
      * Notation is sent by the root pipeline.
      *
+     * <p>
+     *  此方法的目的是检查Notation是否与当前管道堆栈中先前声明的符号冲突。如果没有冲突,则符号由根管道发送。
+     * 
+     * 
      * @param not the Notation to check for conflicts
      */
     protected void checkAndSendNotation(Notation not) {
@@ -2582,6 +2819,10 @@ public class XIncludeHandler
     /**
      * Checks whether the string only contains white space characters.
      *
+     * <p>
+     *  检查字符串是否包含空格字符。
+     * 
+     * 
      * @param value the text to check
      */
     private void checkWhitespace(XMLString value) {
@@ -2596,6 +2837,9 @@ public class XIncludeHandler
 
     /**
      * Checks whether the root element has already been processed.
+     * <p>
+     *  检查根元素是否已处理。
+     * 
      */
     private void checkMultipleRootElements() {
         if (getRootElementProcessed()) {
@@ -2606,6 +2850,9 @@ public class XIncludeHandler
 
     /**
      * Sets whether the root element has been processed.
+     * <p>
+     *  设置是否已处理根元素。
+     * 
      */
     private void setRootElementProcessed(boolean seenRoot) {
         if (isRootDocument()) {
@@ -2617,6 +2864,9 @@ public class XIncludeHandler
 
     /**
      * Returns whether the root element has been processed.
+     * <p>
+     *  返回根元素是否已处理。
+     * 
      */
     private boolean getRootElementProcessed() {
         return isRootDocument() ? fSeenRootElement : fParentXIncludeHandler.getRootElementProcessed();
@@ -2769,6 +3019,9 @@ public class XIncludeHandler
 
     /**
      * Saves the current base URI to the top of the stack.
+     * <p>
+     * 将当前基本URI保存到堆栈顶部。
+     * 
      */
     protected void saveBaseURI() {
         fBaseURIScope.push(fDepth);
@@ -2779,6 +3032,9 @@ public class XIncludeHandler
 
     /**
      * Discards the URIs at the top of the stack, and restores the ones beneath it.
+     * <p>
+     *  丢弃堆栈顶部的URI,并恢复它下面的URI。
+     * 
      */
     protected void restoreBaseURI() {
         fBaseURI.pop();
@@ -2795,6 +3051,10 @@ public class XIncludeHandler
     /**
      * Saves the given language on the top of the stack.
      *
+     * <p>
+     *  将给定的语言保存在堆栈顶部。
+     * 
+     * 
      * @param lanaguage the language to push onto the stack.
      */
     protected void saveLanguage(String language) {
@@ -2804,6 +3064,9 @@ public class XIncludeHandler
 
     /**
      * Discards the language at the top of the stack, and returns the one beneath it.
+     * <p>
+     *  丢弃堆栈顶部的语言,并返回它下面的语言。
+     * 
      */
     public String restoreLanguage() {
         fLanguageStack.pop();
@@ -2813,6 +3076,10 @@ public class XIncludeHandler
 
     /**
      * Gets the base URI that was in use at that depth
+     * <p>
+     *  获取在该深度使用的基本URI
+     * 
+     * 
      * @param depth
      * @return the base URI
      */
@@ -2823,6 +3090,10 @@ public class XIncludeHandler
 
     /**
      * Gets the language that was in use at that depth.
+     * <p>
+     *  获取在该深度使用的语言。
+     * 
+     * 
      * @param depth
      * @return the language
      */
@@ -2835,6 +3106,10 @@ public class XIncludeHandler
      * Returns a relative URI, which when resolved against the base URI at the
      * specified depth, will create the current base URI.
      * This is accomplished by merged the literal system IDs.
+     * <p>
+     *  返回相对URI,当在指定深度基于URI解析时,将创建当前基本URI。这是通过合并字面系统ID来实现的。
+     * 
+     * 
      * @param depth the depth at which to start creating the relative URI
      * @return a relative URI to convert the base URI at the given depth to the current
      *         base URI
@@ -2879,6 +3154,9 @@ public class XIncludeHandler
     /**
      * Search for a xml:base attribute, and if one is found, put the new base URI into
      * effect.
+     * <p>
+     *  搜索xml：base属性,如果找到,则使新的基本URI生效。
+     * 
      */
     protected void processXMLBaseAttributes(XMLAttributes attributes) {
         String baseURIValue =
@@ -2907,6 +3185,9 @@ public class XIncludeHandler
     /**
      * Search for a xml:lang attribute, and if one is found, put the new
      * [language] into effect.
+     * <p>
+     *  搜索xml：lang属性,如果找到,则将新的[语言]生效。
+     * 
      */
     protected void processXMLLangAttributes(XMLAttributes attributes) {
         String language = attributes.getValue(NamespaceContext.XML_URI, "lang");
@@ -2920,6 +3201,10 @@ public class XIncludeHandler
      * Returns <code>true</code> if the given string
      * would be valid in an HTTP header.
      *
+     * <p>
+     *  如果给定的字符串在HTTP标头中有效,则返回<code> true </code>。
+     * 
+     * 
      * @param value string to check
      * @return <code>true</code> if the given string
      * would be valid in an HTTP header
@@ -2937,6 +3222,8 @@ public class XIncludeHandler
 
     /**
      * Returns a new <code>XMLInputSource</code> from the given parameters.
+     * <p>
+     *  从给定的参数中返回一个新的<code> XMLInputSource </code>。
      */
     private XMLInputSource createInputSource(String publicId,
             String systemId, String baseSystemId,

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ import java.lang.annotation.RetentionPolicy;
  *  This annotation may be overriden programmatically or via
  *  deployment descriptors, depending on the platform in use.
  *
+ * <p>
+ *  <code> BindingType </code>注释用于指定要用于Web服务端点实现类的绑定。
+ * <p>
+ *  根据使用的平台,可以编程地或通过部署描述符来覆盖该注释。
+ * 
+ * 
  *  @since JAX-WS 2.0
  *
  **/
@@ -53,6 +60,10 @@ public @interface BindingType {
       * See the <code>SOAPBinding</code> and <code>HTTPBinding</code>
       * for the definition of the standard binding identifiers.
       *
+      * <p>
+      *  绑定标识符(URI)。如果未指定,则默认为SOAP 1.1 / HTTP绑定。
+      * <p>
+      * 
       * @see javax.xml.ws.Binding
       * @see javax.xml.ws.soap.SOAPBinding#SOAP11HTTP_BINDING
       * @see javax.xml.ws.soap.SOAPBinding#SOAP12HTTP_BINDING

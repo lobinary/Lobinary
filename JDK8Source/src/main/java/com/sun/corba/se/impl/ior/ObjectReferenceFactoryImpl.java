@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,10 @@ import com.sun.corba.se.spi.orb.ORB ;
 * since defining the state in IDL is awkward and inefficient.  The best way
 * to define the state is to use internal data structures that can be written
 * to and read from CORBA streams.
+* <p>
+*  类型由便携式拦截器IDL定义。注意,这是抽象值类型的直接Java实现：在IDL中没有定义有状态值类型,因为在IDL中定义状态是尴尬和低效的。
+* 定义状态的最好方法是使用可以写入和读取CORBA流的内部数据结构。
+* 
 */
 public class ObjectReferenceFactoryImpl extends ObjectReferenceProducerBase
     implements ObjectReferenceFactory, StreamableValue
@@ -111,6 +116,9 @@ public class ObjectReferenceFactoryImpl extends ObjectReferenceProducerBase
 
     /** Read the data into a (presumably) empty ObjectReferenceFactoryImpl.
     * This sets the orb to the ORB of the InputStream.
+    * <p>
+    *  这将orb设置为InputStream的ORB。
+    * 
     */
     public void _read( InputStream is )
     {
@@ -121,6 +129,7 @@ public class ObjectReferenceFactoryImpl extends ObjectReferenceProducerBase
     }
 
     /** Write the state to the OutputStream.
+    /* <p>
      */
     public void _write( OutputStream os )
     {

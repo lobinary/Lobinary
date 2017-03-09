@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -119,6 +120,47 @@ import javax.print.attribute.PrintJobAttribute;
  * name.
  * <P>
  *
+ * <p>
+ *  JobKOctets类是一个整数值打印属性类,它指定以K个字节为单位的文档的总大小,即以作业中请求处理的1024个八位位组为单位。
+ * 该值必须向上取整,以便1至1024个八位字节之间的作业必须指示为1K个八位字节,1025至2048个字节必须为2K个八位字节等。
+ * 对于多标题打印作业(具有多个文档的作业),JobKOctets值是通过以八位字节为单位累加单个文档的大小来计算的,然后向上取整到下一个K字节值。
+ * <P>
+ *  JobKOctets属性描述作业的大小。此属性不是计数器;如果已知,则意图是有用的路由和调度信息。如果打印请求中没有提供JobKOctets属性的值,打印机可能会尝试计算。
+ * 即使客户端为打印请求中的JobKOctets属性提供了值,如果打印机能够计算比客户端提供的值更精确的值,打印机可以选择更改值。
+ * 打印机可以能够在作业提交时或在任何稍后的时间点确定JobKOctets属性的正确值。
+ * <P>
+ * JobKOctets值不能包括由{@link Copies Copies}属性指定的副本数所贡献的乘法因子,而与设备是否可以处理多个副本而不对作业或文档数据进行多次传递无关,而与是否输出是否整理。
+ * 因此,该值与实现无关,并且指示以K个字节测量的文档的大小,而与复制的数量无关。
+ * <P>
+ *  由于嵌入在文档数据中的副本指令,JobKOctets值还必须不包括乘法因子。如果文档数据实际上包括文档数据的复制,则该值将包括这样的复制。
+ * 换句话说,该值始终是源文档数据的大小,而不是要生成的硬拷贝输出的度量。
+ * <P>
+ *  文档的大小是根据文档的{@link javax.print.DocFlavor DocFlavor}指定的打印数据表示类计算的,如下表所示。
+ * <P>
+ * <TABLE BORDER=1 CELLPADDING=2 CELLSPACING=1 SUMMARY="Table showing computation of doc sizes">
+ * <TR>
+ *  <TH>表示类</TH> <TH>文档大小</TH>
+ * </TR>
+ * <TR>
+ *  <TD> byte [] </TD> <TD>字节数组的长度</TD>
+ * </TR>
+ * <TR>
+ *  <TD> java.io.InputStream </TD> <TD>从流读取的字节数</TD>
+ * </TR>
+ * <TR>
+ *  <TD> char [] </TD> <TD>字符数组x 2的长度</TD>
+ * </TR>
+ * <TR>
+ *  <TD> java.lang.String </TD> <TD>字符串的长度x 2 </TD>
+ * </TR>
+ * <TR>
+ *  <TD> java.io.Reader </TD> <TD>从流读取的字符数x 2 </TD>
+ * </TR>
+ * <TR>
+ * <TD> java.net.URL </TD> <TD>从给定URL地址处的文件中读取的字节数</TD>
+ * </TR>
+ * <TR>
+ * 
  * @see JobKOctetsSupported
  * @see JobKOctetsProcessed
  * @see JobImpressions
@@ -134,6 +176,23 @@ public final class JobKOctets   extends IntegerSyntax
     /**
      * Construct a new job K octets attribute with the given integer value.
      *
+     * <p>
+     *  <TD> java.awt.image.renderable.RenderableImage </TD> <TD>实现依赖* </TD>
+     * </TR>
+     * <TR>
+     *  <TD> java.awt.print.Printable </TD> <TD>实现相关* </TD>
+     * </TR>
+     * <TR>
+     *  <TD> java.awt.print.Pageable </TD> <TD>实现相关* </TD>
+     * </TR>
+     * </TABLE>
+     * <P>
+     *  *在这些情况下,打印服务本身会生成发送到打印机的打印数据。如果打印服务支持JobKOctets属性,对于这些情况,打印服务本身必须计算打印数据的大小,替换客户端指定的任何JobKOctets值。
+     * <P>
+     *  <B> IPP兼容性：</B>整数值给出IPP整数值。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+     * <P>
+     * 
+     * 
      * @param  value  Integer value.
      *
      * @exception  IllegalArgumentException
@@ -157,6 +216,10 @@ public final class JobKOctets   extends IntegerSyntax
      * are equal.
      * </OL>
      *
+     * <p>
+     *  使用给定的整数值构造新的作业K个八位位组属性。
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this job K
@@ -172,6 +235,18 @@ public final class JobKOctets   extends IntegerSyntax
      * <P>
      * For class JobKOctets, the category is class JobKOctets itself.
      *
+     * <p>
+     *  返回此作业的K个八位位组属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是JobKOctets类的实例。
+     * <LI>
+     *  此作业K个八位字节属性的值和<CODE>对象</CODE>的值相等。
+     * </OL>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -185,6 +260,8 @@ public final class JobKOctets   extends IntegerSyntax
      * <P>
      * For class JobKOctets, the category name is <CODE>"job-k-octets"</CODE>.
      *
+     * <p>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

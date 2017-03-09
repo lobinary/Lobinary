@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@ import java.util.Locale;
  * {@link java.text.DateFormatSymbols#getZoneStrings()
  * DateFormatSymbols.getZoneStrings()} method.
  *
+ * <p>
+ *  为{@link java.util.TimeZone TimeZone}类提供本地化时区名称的服务提供程序的抽象类。
+ * 可以从此类的实现中获得的本地化时区名称也是{@link java.text.DateFormatSymbols#getZoneStrings()DateFormatSymbols.getZoneStrings()}
+ * 方法的源。
+ *  为{@link java.util.TimeZone TimeZone}类提供本地化时区名称的服务提供程序的抽象类。
+ * 
+ * 
  * @since        1.6
  */
 public abstract class TimeZoneNameProvider extends LocaleServiceProvider {
@@ -43,6 +51,9 @@ public abstract class TimeZoneNameProvider extends LocaleServiceProvider {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
      */
     protected TimeZoneNameProvider() {
     }
@@ -61,6 +72,16 @@ public abstract class TimeZoneNameProvider extends LocaleServiceProvider {
      * appropriate for daylight saving time even if the specified time zone
      * has not observed daylight saving time in the past.
      *
+     * <p>
+     *  返回适合在指定区域设置中向用户显示的给定时区ID的名称。
+     * 给定的时区ID是"GMT"或使用"tz数据库"中的"Zone"条目定义的名称之一,公共领域时区数据库位于<a href ="ftp://elsie.nci.nih.gov /pub/">ftp://el
+     * sie.nci.nih.gov/pub/ </a>。
+     *  返回适合在指定区域设置中向用户显示的给定时区ID的名称。
+     * 该数据库的数据包含在名称以"tzdata"开头的文件中,数据格式的规范是zic.8手册页的一部分,zic.8手册页包含在名称以"tzcode"开头的文件中。
+     * <p>
+     *  如果<code> daylight </code>为true,则即使指定的时区没有遵守过去的夏令时,该方法应返回适合夏令时的名称。
+     * 
+     * 
      * @param ID a time zone ID string
      * @param daylight if true, return the daylight saving name.
      * @param style either {@link java.util.TimeZone#LONG TimeZone.LONG} or
@@ -90,6 +111,8 @@ public abstract class TimeZoneNameProvider extends LocaleServiceProvider {
      *
      * <p>The default implementation of this method returns {@code null}.
      *
+     * <p>
+     * 
      * @param ID a time zone ID string
      * @param style either {@link java.util.TimeZone#LONG TimeZone.LONG} or
      *    {@link java.util.TimeZone#SHORT TimeZone.SHORT}

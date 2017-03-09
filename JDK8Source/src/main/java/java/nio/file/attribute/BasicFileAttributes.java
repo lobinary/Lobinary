@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,17 @@ package java.nio.file.attribute;
  *    BasicFileAttributes attrs = Files.readAttributes(file, BasicFileAttributes.class);
  * </pre>
  *
+ * <p>
+ *  与文件系统中的文件相关联的基本属性。
+ * 
+ *  <p>基本文件属性是许多文件系统通用的属性,由此接口定义的强制和可选文件属性组成。
+ * 
+ *  <p> <b>使用示例：</b>
+ * <pre>
+ *  Path file = ... BasicFileAttributes attrs = Files.readAttributes(file,BasicFileAttributes.class);
+ * </pre>
+ * 
+ * 
  * @since 1.7
  *
  * @see BasicFileAttributeView
@@ -53,6 +65,12 @@ public interface BasicFileAttributes {
      * implementation specific default value, typically a {@code FileTime}
      * representing the epoch (1970-01-01T00:00:00Z).
      *
+     * <p>
+     *  返回上次修改的时间。
+     * 
+     *  <p>如果文件系统实现不支持时间戳以指示上次修改的时间,则此方法返回实现特定的默认值,通常为表示时期的{@code FileTime}(1970-01-01T00：00： 00Z)。
+     * 
+     * 
      * @return  a {@code FileTime} representing the time the file was last
      *          modified
      */
@@ -67,6 +85,13 @@ public interface BasicFileAttributes {
      * #lastModifiedTime() last-modified-time} or a {@code FileTime}
      * representing the epoch (1970-01-01T00:00:00Z).
      *
+     * <p>
+     *  返回上次访问的时间。
+     * 
+     *  <p>如果文件系统实现不支持时间戳以指示最后一次访问的时间,则此方法返回一个实现特定的默认值,通常为{@link #lastModifiedTime()last-modified-time}或{代码FileTime}
+     * 表示时期(1970-01-01T00：00：00Z)。
+     * 
+     * 
      * @return  a {@code FileTime} representing the time of last access
      */
     FileTime lastAccessTime();
@@ -81,6 +106,13 @@ public interface BasicFileAttributes {
      * #lastModifiedTime() last-modified-time} or a {@code FileTime}
      * representing the epoch (1970-01-01T00:00:00Z).
      *
+     * <p>
+     *  返回创建时间。创建时间是创建文件的时间。
+     * 
+     * <p>如果文件系统实现不支持时间戳以指示文件创建的时间,那么此方法将返回一个实现特定的默认值,通常为{@link #lastModifiedTime()last-modified-time}或a {@code FileTime}
+     * 表示时代(1970-01-01T00：00：00Z)。
+     * 
+     * 
      * @return   a {@code FileTime} representing the time the file was created
      */
     FileTime creationTime();
@@ -88,6 +120,10 @@ public interface BasicFileAttributes {
     /**
      * Tells whether the file is a regular file with opaque content.
      *
+     * <p>
+     *  告诉文件是否是具有不透明内容的常规文件。
+     * 
+     * 
      * @return {@code true} if the file is a regular file with opaque content
      */
     boolean isRegularFile();
@@ -95,6 +131,10 @@ public interface BasicFileAttributes {
     /**
      * Tells whether the file is a directory.
      *
+     * <p>
+     *  告诉文件是否是目录。
+     * 
+     * 
      * @return {@code true} if the file is a directory
      */
     boolean isDirectory();
@@ -102,6 +142,10 @@ public interface BasicFileAttributes {
     /**
      * Tells whether the file is a symbolic link.
      *
+     * <p>
+     *  告诉文件是否是符号链接。
+     * 
+     * 
      * @return {@code true} if the file is a symbolic link
      */
     boolean isSymbolicLink();
@@ -110,6 +154,10 @@ public interface BasicFileAttributes {
      * Tells whether the file is something other than a regular file, directory,
      * or symbolic link.
      *
+     * <p>
+     *  指示文件是否是除常规文件,目录或符号链接以外的其他文件。
+     * 
+     * 
      * @return {@code true} if the file something other than a regular file,
      *         directory or symbolic link
      */
@@ -122,6 +170,11 @@ public interface BasicFileAttributes {
      * #isRegularFile regular} files is implementation specific and
      * therefore unspecified.
      *
+     * <p>
+     *  返回文件的大小(以字节为单位)。由于压缩,支持稀疏文件或其他原因,大小可能与文件系统上的实际大小不同。
+     * 不是{@link #isRegularFile regular}文件的文件的大小是实现特定的,因此未指定。
+     * 
+     * 
      * @return  the file size, in bytes
      */
     long size();
@@ -147,6 +200,13 @@ public interface BasicFileAttributes {
      * and two files are the {@link java.nio.file.Files#isSameFile same} with
      * non-{@code null} file keys, then their file keys are equal.
      *
+     * <p>
+     *  返回唯一标识给定文件的对象,如果文件键不可用,则返回{@code null}。在一些平台或文件系统上,可以使用标识符或标识符的组合来唯一地标识文件。
+     * 此类标识符对于诸如支持<a href="../package-summary.html#links">符号链接</a>的文件系统中的文件树遍历或允许文件为条目的文件系统等操作很重要在多个目录中。
+     * 例如,在UNIX文件系统上,<em>设备ID </em>和<em> inode </em>通常用于此目的。
+     * 
+     * <p>如果文件系统和文件保持静态,则此方法返回的文件键只能保证是唯一的。删除文件后文件系统是否重新使用标识符是实现相关的,因此未指定。
+     * 
      * @return an object that uniquely identifies the given file, or {@code null}
      *
      * @see java.nio.file.Files#walkFileTree

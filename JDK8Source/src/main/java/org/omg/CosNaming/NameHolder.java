@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 
@@ -11,6 +12,8 @@ package org.omg.CosNaming;
 
 /**
    * A name is a sequence of name components.
+   * <p>
+   * 
    */
 public final class NameHolder implements org.omg.CORBA.portable.Streamable
 {

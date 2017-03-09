@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,27 @@ import java.io.IOException;
  * identifiers to local URIs or to look up replacements in a catalog
  * (possibly by using the public identifier).</p>
  *
+ * <p>
+ *  用于解析实体的基本接口。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保证</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p>如果SAX应用程序需要为外部实体实现自定义处理,则必须使用{@link org.xml.sax.XMLReader#setEntityResolver setEntityResolver}方法实
+ * 现此接口并向SAX驱动程序注册实例。
+ * </p >。
+ * 
+ *  <p>然后,XML读取器将允许应用程序在包含它们之前拦截任何外部实体(包括外部DTD子集和外部参数实体,如果有)。</p>
+ * 
+ *  <p>许多SAX应用程序不需要实现此接口,但它对于从数据库或其他专用输入源或使用除URL之外的URI类型的应用程序构建XML文档的应用程序尤其有用。</p>
+ * 
+ *  <p>以下解析器将为系统标识符为"http://www.myhost.com/today"的实体向应用程序提供特殊字符流：</p>
+ * 
+ * <pre>
+ *  import org.xml.sax.EntityResolver; import org.xml.sax.InputSource;
+ * 
  * @since SAX 1.0
  * @author David Megginson
  * @see org.xml.sax.XMLReader#setEntityResolver
@@ -120,6 +142,15 @@ public interface EntityResolver {
      * <p>If the system identifier is a URL, the SAX parser must
      * resolve it fully before reporting it to the application.</p>
      *
+     * <p>
+     * 
+     * public class MyResolver implements EntityResolver {public InputSource resolveEntity(String publicId,String systemId){if(systemId.equals("http://www.myhost.com/today")){//返回一个特殊的输入源MyReader reader = new MyReader(); return new InputSource(reader); }
+     *  else {//使用默认行为return null; }}}。
+     * </pre>
+     * 
+     *  <p>应用程序还可以使用此接口将系统标识符重定向到本地URI或在目录中查找替换(可能通过使用公共标识符)。</p>
+     * 
+     * 
      * @param publicId The public identifier of the external entity
      *        being referenced, or null if none was supplied.
      * @param systemId The system identifier of the external entity

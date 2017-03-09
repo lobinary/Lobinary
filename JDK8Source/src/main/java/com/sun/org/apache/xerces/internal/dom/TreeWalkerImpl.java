@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -29,6 +39,9 @@ import org.w3c.dom.traversal.TreeWalker;
  *
  * @xerces.internal
  *
+ * <p>
+ *  @ xerces.internal
+ * 
  */
 
 public class TreeWalkerImpl implements TreeWalker {
@@ -110,6 +123,9 @@ public class TreeWalkerImpl implements TreeWalker {
     /** Return the parent Node from the current node,
      *  after applying filter, whatToshow.
      *  If result is not null, set the current Node.
+     * <p>
+     *  应用过滤器后,whatToshow。如果result不为null,则设置当前节点。
+     * 
      */
     public Node               parentNode() {
 
@@ -126,6 +142,9 @@ public class TreeWalkerImpl implements TreeWalker {
     /** Return the first child Node from the current node,
      *  after applying filter, whatToshow.
      *  If result is not null, set the current Node.
+     * <p>
+     *  应用过滤器后,whatToshow。如果result不为null,则设置当前节点。
+     * 
      */
     public Node               firstChild() {
 
@@ -140,6 +159,9 @@ public class TreeWalkerImpl implements TreeWalker {
     /** Return the last child Node from the current node,
      *  after applying filter, whatToshow.
      *  If result is not null, set the current Node.
+     * <p>
+     *  应用过滤器后,whatToshow。如果result不为null,则设置当前节点。
+     * 
      */
     public Node               lastChild() {
 
@@ -155,6 +177,9 @@ public class TreeWalkerImpl implements TreeWalker {
     /** Return the previous sibling Node from the current node,
      *  after applying filter, whatToshow.
      *  If result is not null, set the current Node.
+     * <p>
+     *  应用过滤器后,whatToshow。如果result不为null,则设置当前节点。
+     * 
      */
     public Node               previousSibling() {
 
@@ -170,6 +195,9 @@ public class TreeWalkerImpl implements TreeWalker {
     /** Return the next sibling Node from the current node,
      *  after applying filter, whatToshow.
      *  If result is not null, set the current Node.
+     * <p>
+     *  应用过滤器后,whatToshow。如果result不为null,则设置当前节点。
+     * 
      */
     public Node               nextSibling(){
         if (fCurrentNode == null) return null;
@@ -184,6 +212,9 @@ public class TreeWalkerImpl implements TreeWalker {
     /** Return the previous Node from the current node,
      *  after applying filter, whatToshow.
      *  If result is not null, set the current Node.
+     * <p>
+     *  应用过滤器后,whatToshow。如果result不为null,则设置当前节点。
+     * 
      */
     public Node               previousNode() {
         Node result;
@@ -231,6 +262,9 @@ public class TreeWalkerImpl implements TreeWalker {
     /** Return the next Node from the current node,
      *  after applying filter, whatToshow.
      *  If result is not null, set the current Node.
+     * <p>
+     *  应用过滤器后,whatToshow。如果result不为null,则设置当前节点。
+     * 
      */
     public Node               nextNode() {
 
@@ -270,6 +304,9 @@ public class TreeWalkerImpl implements TreeWalker {
      *  Return the parent Node, from the input node
      *  after applying filter, whatToshow.
      *  The current node is not consulted or set.
+     * <p>
+     *  返回父节点,从应用过滤器后的输入节点,whatToshow。未查询或设置当前节点。
+     * 
      */
     Node getParentNode(Node node) {
 
@@ -295,6 +332,9 @@ public class TreeWalkerImpl implements TreeWalker {
      *  Return the nextSibling Node, from the input node
      *  after applying filter, whatToshow.
      *  The current node is not consulted or set.
+     * <p>
+     * 返回nextSibling节点,从应用过滤器后的输入节点,whatToshow。未查询或设置当前节点。
+     * 
      */
     Node getNextSibling(Node node) {
                 return getNextSibling(node, fRoot);
@@ -305,6 +345,9 @@ public class TreeWalkerImpl implements TreeWalker {
      *  after applying filter, whatToshow.
      *  NEVER TRAVERSES ABOVE THE SPECIFIED ROOT NODE.
      *  The current node is not consulted or set.
+     * <p>
+     *  返回nextSibling节点,从应用过滤器后的输入节点,whatToshow。切勿在指定的根节点以上运行。未查询或设置当前节点。
+     * 
      */
     Node getNextSibling(Node node, Node root) {
 
@@ -350,6 +393,9 @@ public class TreeWalkerImpl implements TreeWalker {
      *  Return the previous sibling Node, from the input node
      *  after applying filter, whatToshow.
      *  The current node is not consulted or set.
+     * <p>
+     *  返回上一个兄弟节点,从应用过滤器后的输入节点,whatToshow。未查询或设置当前节点。
+     * 
      */
     Node getPreviousSibling(Node node) {
                 return getPreviousSibling(node, fRoot);
@@ -360,6 +406,9 @@ public class TreeWalkerImpl implements TreeWalker {
      *  after applying filter, whatToshow.
          *  NEVER TRAVERSES ABOVE THE SPECIFIED ROOT NODE.
      *  The current node is not consulted or set.
+     * <p>
+     *  返回previousSibling节点,从应用过滤器后的输入节点,whatToshow。切勿在指定的根节点以上运行。未查询或设置当前节点。
+     * 
      */
     Node getPreviousSibling(Node node, Node root) {
 
@@ -404,6 +453,9 @@ public class TreeWalkerImpl implements TreeWalker {
      *  Return the first child Node, from the input node
      *  after applying filter, whatToshow.
      *  The current node is not consulted or set.
+     * <p>
+     *  返回第一个子节点,从应用过滤器后的输入节点,whatToshow。未查询或设置当前节点。
+     * 
      */
     Node getFirstChild(Node node) {
         if (node == null) return null;
@@ -441,6 +493,9 @@ public class TreeWalkerImpl implements TreeWalker {
      *  Return the last child Node, from the input node
      *  after applying filter, whatToshow.
      *  The current node is not consulted or set.
+     * <p>
+     *  返回最后一个子节点,从应用过滤器后的输入节点,whatToshow。未查询或设置当前节点。
+     * 
      */
     Node getLastChild(Node node) {
 
@@ -477,6 +532,8 @@ public class TreeWalkerImpl implements TreeWalker {
     }
 
     /** Internal function.
+    /* <p>
+    /* 
      *  The node whatToShow and the filter are combined into one result. */
     short acceptNode(Node node) {
         /***
@@ -486,6 +543,11 @@ public class TreeWalkerImpl implements TreeWalker {
          active whatToShow flags, a Filter will not be called to evaluate that node. When a node is rejected by
          the active whatToShow flags, children of that node will still be considered, and Filters may be called to
          evaluate them.
+        /* <p>
+        /*  7.1.2.4。过滤器和whatToShow标志
+        /* 
+        /*  迭代器和TreeWalker应用whatToShow标志,然后应用过滤器。如果一个节点被活动的whatToShow标志拒绝,则不会调用过滤器来评估该节点。
+        /* 
          ***/
 
         if (fNodeFilter == null) {

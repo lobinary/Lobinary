@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会或其许可方(如适用)。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.resolver.tools;
@@ -55,6 +65,13 @@ import com.sun.org.apache.xml.internal.resolver.helpers.FileURL;
  * from a SAXParserFactory.</p>
  * </p>
  *
+ * <p>
+ *  执行基于目录的实体解析的SAX解析器。
+ * 
+ *  <p>此类实现使用CatalogResolver执行实体解析的SAX解析器。实际的底层解析器是从SAXParserFactory获取的。</p>
+ * </p>
+ * 
+ * 
  * @deprecated This interface has been replaced by the
  *             {@link com.sun.org.apache.xml.internal.resolver.tools.ResolvingXMLReader} for SAX2.
  * @see CatalogResolver
@@ -75,6 +92,8 @@ public class ResolvingParser
 
   /** Suppress explanatory message?
    *
+   * <p>
+   * 
    * @see #parse(InputSource)
    */
   public static boolean suppressExplanation = false;
@@ -163,6 +182,19 @@ public class ResolvingParser
    * message. The message is only every printed once and if
    * <code>suppressExplanation</code> is set to <code>false</code> before
    * parsing, it will never be printed.</p>
+   * <p>
+   *  SAX解析器API。
+   * 
+   *  <p>请注意,如果JAXP 1.1ea2解析器遇到显示为以斜杠开头的相对URI的系统标识符,则会与InternalError一起崩溃。例如,声明：</p>
+   * 
+   * <pre>
+   * &lt;!DOCTYPE book SYSTEM "/path/to/dtd/on/my/system/docbookx.dtd">
+   * </pre>
+   * 
+   *  <p>会导致这样的错误。为方便起见,此方法捕获该错误并打印说明。 (不幸的是,无法识别导致问题的特定系统标识符。)
+   * </p>
+   * 
+   * <p>打印说明信息后,潜在错误将被转发。
    */
   public void parse(InputSource input)
     throws IOException,
@@ -178,6 +210,10 @@ public class ResolvingParser
 
   /** SAX Parser API.
    *
+   * <p>
+   * 该消息只有每次打印一次,如果<code> suppressExplanation </code>在解析之前设置为<code> false </code>,则不会打印。</p>。
+   * 
+   * 
    * @see #parse(InputSource)
    */
   public void parse(String systemId)
@@ -207,6 +243,7 @@ public class ResolvingParser
    *
    * <p>The purpose of this class is to implement an entity resolver.
    * Attempting to set a different one is pointless (and ignored).</p>
+   * <p>
    */
   public void setEntityResolver(EntityResolver resolver) {
     // nop
@@ -365,6 +402,11 @@ public class ResolvingParser
    * Implements the <code>resolveEntity</code> method
    * for the SAX interface, using an underlying CatalogResolver
    * to do the real work.
+   * <p>
+   *  SAX解析器API。
+   * 
+   *  <p>这个类的目的是实现一个实体解析器。尝试设置不同的选项是无意义的(并被忽略)。</p>
+   * 
    */
   public InputSource resolveEntity (String publicId, String systemId) {
     allowXMLCatalogPI = false;

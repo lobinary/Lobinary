@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -167,6 +168,93 @@ import java.util.Spliterator;
  * b.flip().position(23).limit(42);</pre></blockquote>
  *
  *
+ * <p>
+ *  用于特定原始类型的数据的容器。
+ * 
+ *  <p>缓冲区是特定原始类型的元素的线性有限序列。除了它的内容,缓冲区的基本属性是它的容量,极限和位置：</p>
+ * 
+ * <blockquote>
+ * 
+ *  <p>缓冲区的<i>容量</i>是其包含的元素数量。缓冲区的容量从不为负,从不改变。 </p>
+ * 
+ *  <p>缓冲区的<i>限制</i>是不应读取或写入的第一个元素的索引。缓冲区的限制永远不是负的,永远不会大于其容量。 </p>
+ * 
+ *  <p>缓冲区<i>位置</i>是要读取或写入的下一个元素的索引。缓冲区的位置从不为负,并且永远不会大于其限制。 </p>
+ * 
+ * </blockquote>
+ * 
+ *  <p>每个非布尔基元类型都有一个这个类的子类。
+ * 
+ *  <h2>传输数据</h2>
+ * 
+ *  <p>此类的每个子类定义<i> get </i>和<i> put </i>操作的两个类别：</p>
+ * 
+ * <blockquote>
+ * 
+ * <p> <i>相对</i>操作读取或写入从当前位置开始的一个或多个元素,然后将位置增加传送的元素数量。
+ * 如果请求的传输超过限制,则相对<i> get </i>操作抛出{@link BufferUnderflowException}和相对</i>操作抛出{@link BufferOverflowException}
+ * ;在任一情况下,不传送数据。
+ * <p> <i>相对</i>操作读取或写入从当前位置开始的一个或多个元素,然后将位置增加传送的元素数量。 </p>。
+ * 
+ *  <p> <i>绝对</i>操作采用明确的元素索引,不影响位置。
+ * 如果索引参数超过限制,则绝对<i> get </i>和<i> put </i>操作将抛出一个{@link IndexOutOfBoundsException}。 </p>。
+ * 
+ * </blockquote>
+ * 
+ *  当然,数据也可以通过适当通道的I / O操作(其总是相对于当前位置)传送到缓冲器或从缓冲器传出。
+ * 
+ *  <h2>标记和重置</h2>
+ * 
+ *  <p>缓冲区的<i>标记</i>是在调用{@link #reset reset}方法时,其位置将被重置的索引。标记不总是定义的,但是当它被定义时,它从不是负的,并且从不大于位置。
+ * 如果定义了标记,则当位置或限制被调整为小于标记的值时,则丢弃该标记。
+ * 如果没有定义标记,那么调用{@link #reset reset}方法会抛出{@link InvalidMarkException}。
+ * 
+ *  <h2>不变量</h2>
+ * 
+ *  <p>标记,位置,限制和容量值的以下不变式成立：
+ * 
+ * <blockquote>
+ * <tt> 0 </tt> <tt> <= </tt> <i>标记</i> <tt> <= </tt> <i> position </i> <tt> </tt> <i>限制</i> <tt>&lt; = 
+ * </tt> <i>容量</i>。
+ * </blockquote>
+ * 
+ *  <p>新创建的缓冲区始终具有零位置和未定义的标记。初始限制可以是零,或者它可以是取决于缓冲器的类型和其被构造的方式的一些其它值。新分配的缓冲器的每个元素被初始化为零。
+ * 
+ *  <h2>清除,翻转和倒回</h2>
+ * 
+ *  <p>除了访问位置,限制和容量值以及标记和重置的方法之外,此类还定义了对缓冲区的以下操作：
+ * 
+ * <ul>
+ * 
+ *  <li> <p> {@link #clear}为新的通道读取或相对</i>操作序列准备了一个缓冲区：它将容量限制和位置设置为零。 </p> </li>
+ * 
+ *  <li> <p> {@link #flip}为新的通道写入或相对<i> get </i>操作准备一个缓冲区：它将限制设置为当前位置,然后将位置设置为零。 </p> </li>
+ * 
+ *  <li> <p> {@link #rewind}使缓冲区准备好重新读取其已包含的数据：它保持不变的限制,并将位置设置为零。 </p> </li>
+ * 
+ * </ul>
+ * 
+ *  <h2>只读缓冲区</h2>
+ * 
+ * <p>每个缓冲区都是可读的,但不是每个缓冲区都是可写的。
+ * 每个缓冲区类的突变方法被指定为<i>可选操作</i>,当在只读缓冲区上调用时将抛出{@link ReadOnlyBufferException}。
+ * 只读缓冲区不允许更改其内容,但其标记,位置和限制值是可变的。缓冲器是否是只读的可以通过调用其{@link #isReadOnly isReadOnly}方法来确定。
+ * 
+ *  <h2>线程安全</h2>
+ * 
+ *  <p>缓冲区不适用于多个并发线程。如果一个缓冲区要由多个线程使用,则应该通过适当的同步来控制对缓冲区的访问。
+ * 
+ *  <h2>调用链</h2>
+ * 
+ *  <p>此类中没有返回值的方法被指定为返回调用它们的缓冲区。这允许方法调用链接;例如,语句的序列
+ * 
+ *  <blockquote> <pre> b.flip(); b.position(23); b.limit(42); </pre> </blockquote>
+ * 
+ *  可以由单个,更紧凑的语句替换
+ * 
+ *  <blockquote> <pre> b.flip()。position(23).limit(42); </pre> </blockquote>
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -177,6 +265,9 @@ public abstract class Buffer {
     /**
      * The characteristics of Spliterators that traverse and split elements
      * maintained in Buffers.
+     * <p>
+     *  遍历和拆分缓冲区中维护的元素的Spliterators的特性。
+     * 
      */
     static final int SPLITERATOR_CHARACTERISTICS =
         Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED;
@@ -211,6 +302,10 @@ public abstract class Buffer {
     /**
      * Returns this buffer's capacity.
      *
+     * <p>
+     *  返回此缓冲区的容量。
+     * 
+     * 
      * @return  The capacity of this buffer
      */
     public final int capacity() {
@@ -220,6 +315,10 @@ public abstract class Buffer {
     /**
      * Returns this buffer's position.
      *
+     * <p>
+     *  返回此缓冲区的位置。
+     * 
+     * 
      * @return  The position of this buffer
      */
     public final int position() {
@@ -230,6 +329,10 @@ public abstract class Buffer {
      * Sets this buffer's position.  If the mark is defined and larger than the
      * new position then it is discarded.
      *
+     * <p>
+     *  设置此缓冲区的位置。如果标记被定义并大于新位置,则它被丢弃。
+     * 
+     * 
      * @param  newPosition
      *         The new position value; must be non-negative
      *         and no larger than the current limit
@@ -250,6 +353,10 @@ public abstract class Buffer {
     /**
      * Returns this buffer's limit.
      *
+     * <p>
+     *  返回此缓冲区的限制。
+     * 
+     * 
      * @return  The limit of this buffer
      */
     public final int limit() {
@@ -261,6 +368,10 @@ public abstract class Buffer {
      * then it is set to the new limit.  If the mark is defined and larger than
      * the new limit then it is discarded.
      *
+     * <p>
+     * 设置此缓冲区的限制。如果位置大于新限制,则将其设置为新限制。如果标记已定义且大于新限制,则将其丢弃。
+     * 
+     * 
      * @param  newLimit
      *         The new limit value; must be non-negative
      *         and no larger than this buffer's capacity
@@ -282,6 +393,10 @@ public abstract class Buffer {
     /**
      * Sets this buffer's mark at its position.
      *
+     * <p>
+     *  将此缓冲区的标记设置在其位置。
+     * 
+     * 
      * @return  This buffer
      */
     public final Buffer mark() {
@@ -295,6 +410,12 @@ public abstract class Buffer {
      * <p> Invoking this method neither changes nor discards the mark's
      * value. </p>
      *
+     * <p>
+     *  将此缓冲器的位置重置为先前标记的位置。
+     * 
+     *  <p>调用此方法既不会更改也不会丢弃商标的值。 </p>
+     * 
+     * 
      * @return  This buffer
      *
      * @throws  InvalidMarkException
@@ -323,6 +444,16 @@ public abstract class Buffer {
      * is named as if it did because it will most often be used in situations
      * in which that might as well be the case. </p>
      *
+     * <p>
+     *  清除此缓冲区。位置设置为零,极限设置为容量,标记将被丢弃。
+     * 
+     *  <p>在使用通道读取或<i> put </i>操作序列填充此缓冲区之前调用此方法。例如：
+     * 
+     *  <blockquote> <pre> buf.clear(); //准备读取缓冲区in.read(buf); //读取数据</pre> </blockquote>
+     * 
+     *  <p>这种方法实际上并不擦除缓冲区中的数据,但它被命名为它的确如此,因为它最常用于可能情况下的情况。 </p>
+     * 
+     * 
      * @return  This buffer
      */
     public final Buffer clear() {
@@ -351,6 +482,17 @@ public abstract class Buffer {
      * java.nio.ByteBuffer#compact compact} method when transferring data from
      * one place to another.  </p>
      *
+     * <p>
+     *  翻转此缓冲区。将限制设置为当前位置,然后将位置设置为零。如果定义了标记,则将其丢弃。
+     * 
+     *  <p>在一系列通道读取或</i>操作之后,调用此方法以准备通道写入或相对获取</i>操作的序列。例如：
+     * 
+     *  <blockquote> <pre> buf.put(magic); // Prepend header in.read(buf); //将数据读入缓冲区的其余部分buf.flip(); // Fli
+     * p buffer out.write(buf); //将标题+数据写入通道</pre> </blockquote>。
+     * 
+     * <p>在将数据从一个地方传输到另一个地方时,此方法通常与{@link java.nio.ByteBuffer#compact compact}方法结合使用。 </p>
+     * 
+     * 
      * @return  This buffer
      */
     public final Buffer flip() {
@@ -373,6 +515,15 @@ public abstract class Buffer {
      * buf.rewind();      // Rewind buffer
      * buf.get(array);    // Copy data into array</pre></blockquote>
      *
+     * <p>
+     *  回退此缓冲区。位置设置为零,标记将被丢弃。
+     * 
+     *  <p>在通道写入或<i> get </i>操作序列之前调用此方法,假设已经适当地设置了限制。例如：
+     * 
+     *  <blockquote> <pre> out.write(buf); //写剩余数据buf.rewind(); // Rewind buffer buf.get(array); //将数据复制到数组</pre>
+     *  </blockquote>。
+     * 
+     * 
      * @return  This buffer
      */
     public final Buffer rewind() {
@@ -385,6 +536,10 @@ public abstract class Buffer {
      * Returns the number of elements between the current position and the
      * limit.
      *
+     * <p>
+     *  返回当前位置和限制之间的元素数。
+     * 
+     * 
      * @return  The number of elements remaining in this buffer
      */
     public final int remaining() {
@@ -395,6 +550,10 @@ public abstract class Buffer {
      * Tells whether there are any elements between the current position and
      * the limit.
      *
+     * <p>
+     *  告诉当前位置和限制之间是否有任何元素。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, there is at least one element
      *          remaining in this buffer
      */
@@ -405,6 +564,10 @@ public abstract class Buffer {
     /**
      * Tells whether or not this buffer is read-only.
      *
+     * <p>
+     *  告诉这个缓冲区是否是只读的。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer is read-only
      */
     public abstract boolean isReadOnly();
@@ -417,6 +580,13 @@ public abstract class Buffer {
      * and {@link #arrayOffset() arrayOffset} methods may safely be invoked.
      * </p>
      *
+     * <p>
+     *  指示此缓冲区是否由可访问数组支持。
+     * 
+     *  <p>如果此方法返回<tt> true </tt>,则可以安全地调用{@link #array()数组}和{@link #arrayOffset()arrayOffset}方法。
+     * </p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer
      *          is backed by an array and is not read-only
      *
@@ -439,6 +609,16 @@ public abstract class Buffer {
      * method in order to ensure that this buffer has an accessible backing
      * array.  </p>
      *
+     * <p>
+     *  返回支持此缓冲区的数组&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法旨在使支持数组的缓冲区更有效地传递到本机代码。具体子类为此方法提供更强类型的返回值。
+     * 
+     *  <p>修改此缓冲区的内容将导致返回的数组的内容被修改,反之亦然。
+     * 
+     * <p>在调用此方法之前调用{@link #hasArray hasArray}方法,以确保此缓冲区具有可访问的后备数组。 </p>
+     * 
+     * 
      * @return  The array that backs this buffer
      *
      * @throws  ReadOnlyBufferException
@@ -462,6 +642,14 @@ public abstract class Buffer {
      * method in order to ensure that this buffer has an accessible backing
      * array.  </p>
      *
+     * <p>
+     *  返回缓冲区的第一个元素(可选操作)</i>在此缓冲区的后备数组中的偏移量。
+     * 
+     *  <p>如果此缓冲区由数组支持,则缓冲区位置<i> p </i>对应于数组索引<i> p </i>&nbsp; <tt> arrayOffset()</tt>。
+     * 
+     *  <p>在调用此方法之前调用{@link #hasArray hasArray}方法,以确保此缓冲区具有可访问的后备数组。 </p>
+     * 
+     * 
      * @return  The offset within this buffer's array
      *          of the first element of the buffer
      *
@@ -479,6 +667,10 @@ public abstract class Buffer {
      * Tells whether or not this buffer is
      * <a href="ByteBuffer.html#direct"><i>direct</i></a>.
      *
+     * <p>
+     *  指出此缓冲区是否为<a href="ByteBuffer.html#direct"> <i>直接</i> </a>。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer is direct
      *
      * @since 1.6
@@ -493,6 +685,10 @@ public abstract class Buffer {
      * BufferUnderflowException} if it is not smaller than the limit, and then
      * increments the position.
      *
+     * <p>
+     *  根据限制检查当前位置,如果它不小于限制,则抛出一个{@link BufferUnderflowException},然后增加位置。
+     * 
+     * 
      * @return  The current position value, before it is incremented
      */
     final int nextGetIndex() {                          // package-private
@@ -514,6 +710,10 @@ public abstract class Buffer {
      * BufferOverflowException} if it is not smaller than the limit, and then
      * increments the position.
      *
+     * <p>
+     *  根据限制检查当前位置,如果它不小于限制,则抛出一个{@link BufferOverflowException},然后增加位置。
+     * 
+     * 
      * @return  The current position value, before it is incremented
      */
     final int nextPutIndex() {                          // package-private
@@ -534,6 +734,8 @@ public abstract class Buffer {
      * Checks the given index against the limit, throwing an {@link
      * IndexOutOfBoundsException} if it is not smaller than the limit
      * or is smaller than zero.
+     * <p>
+     *  根据限制检查给定的索引,如果它不小于限制或小于零,则抛出{@link IndexOutOfBoundsException}。
      */
     final int checkIndex(int i) {                       // package-private
         if ((i < 0) || (i >= limit))

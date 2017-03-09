@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ReferenceType.java,v 1.2.4.1 2005/09/05 11:29:12 pvedula Exp $
+ * <p>
+ *  $ Id：ReferenceType.java,v 1.2.4.1 2005/09/05 11:29:12 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -40,6 +53,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.FlowList;
 import com.sun.org.apache.xml.internal.dtm.DTM;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Erwin Bolwidt <ejb@klomp.org>
@@ -68,6 +83,10 @@ public final class ReferenceType extends Type {
      * The translation to int is undefined since references
      * are always converted to reals in arithmetic expressions.
      *
+     * <p>
+     *  将引用转换为内部类型<code> type </code>的对象。转换为int是未定义的,因为引用总是转换为算术表达式中的reals。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -104,6 +123,10 @@ public final class ReferenceType extends Type {
     /**
      * Translates reference into object of internal type <code>type</code>.
      *
+     * <p>
+     *  将引用转换为内部类型<code> type </code>的对象。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -133,6 +156,10 @@ public final class ReferenceType extends Type {
     /**
      * Translates a reference into an object of internal type <code>type</code>.
      *
+     * <p>
+     *  将引用转换为内部类型<code> type </code>的对象。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -152,6 +179,10 @@ public final class ReferenceType extends Type {
     /**
      * Translates a reference to an object of internal type <code>type</code>.
      *
+     * <p>
+     *  将引用转换为内部类型<code> type </code>的对象。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -169,6 +200,10 @@ public final class ReferenceType extends Type {
     /**
      * Casts a reference into a NodeIterator.
      *
+     * <p>
+     *  将引用转换为NodeIterator。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -190,6 +225,10 @@ public final class ReferenceType extends Type {
     /**
      * Casts a reference into a Node.
      *
+     * <p>
+     *  将引用投射到节点。
+     * 
+     * 
      * @see com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -201,6 +240,10 @@ public final class ReferenceType extends Type {
     /**
      * Casts a reference into a ResultTree.
      *
+     * <p>
+     *  将引用转换为ResultTree。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -215,6 +258,10 @@ public final class ReferenceType extends Type {
     /**
      * Subsume reference into ObjectType.
      *
+     * <p>
+     *  将引用引用到ObjectType中。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -224,6 +271,9 @@ public final class ReferenceType extends Type {
 
     /**
      * Translates a reference into the Java type denoted by <code>clazz</code>.
+     * <p>
+     *  将引用转换为由<code> clazz </code>表示的Java类型。
+     * 
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
                             Class clazz) {
@@ -326,6 +376,9 @@ public final class ReferenceType extends Type {
     /**
      * Translates an external Java type into a reference. Only conversion
      * allowed is from java.lang.Object.
+     * <p>
+     * 将外部Java类型转换为引用。只有允许的转换来自java.lang.Object。
+     * 
      */
     public void translateFrom(ClassGenerator classGen, MethodGenerator methodGen,
                               Class clazz) {
@@ -344,6 +397,10 @@ public final class ReferenceType extends Type {
      * boolean. It does not push a 0 or a 1 but instead returns branchhandle
      * list to be appended to the false list.
      *
+     * <p>
+     *  期望在堆栈上的引用,并将其转换为非合成布尔。它不推动0或1,而是返回分支句柄列表附加到false列表。
+     * 
+     * 
      * @see com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateToDesynthesized
      */
     public FlowList translateToDesynthesized(ClassGenerator classGen,
@@ -356,6 +413,9 @@ public final class ReferenceType extends Type {
 
     /**
      * Translates an object of this type to its boxed representation.
+     * <p>
+     *  将此类型的对象转换为其框化表示。
+     * 
      */
     public void translateBox(ClassGenerator classGen,
                              MethodGenerator methodGen) {
@@ -363,6 +423,8 @@ public final class ReferenceType extends Type {
 
     /**
      * Translates an object of this type to its unboxed representation.
+     * <p>
+     *  将此类型的对象转换为其未装箱的表示。
      */
     public void translateUnBox(ClassGenerator classGen,
                                MethodGenerator methodGen) {

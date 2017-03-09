@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -302,6 +303,95 @@ import com.sun.security.auth.UserPrincipal;
  * </dd>
  * </dl>
  *
+ * <p>
+ *  此{@link LoginModule}执行基于LDAP的身份验证。将根据存储在LDAP目录中的相应用户凭据验证用户名和密码。
+ * 此模块要求提供的{@link CallbackHandler}支持{@link NameCallback}和{@link PasswordCallback}。
+ * 如果认证成功,则使用用户的可分辨名称创建新的{@link LdapPrincipal},并使用用户的用户名创建新的{@link UserPrincipal},并且两者都与当前{@link主题}相关联。
+ * 
+ *  <p>此模块以三种模式之一运行：<i>首先搜索</i>,<i>验证优先</i>或<i>仅验证</i>。通过指定特定的一组选项来选择模式。
+ * 
+ *  <p>在搜索优先模式下,搜索LDAP目录以确定用户的可分辨名称,然后尝试进行身份验证。使用提供的用户名结合指定的搜索过滤器执行(匿名)搜索。如果成功,则使用用户的可分辨名称和提供的密码尝试认证。
+ * 要启用此模式,请设置<code> userFilter </code>选项并忽略<code> authIdentity </code>选项。如果提前不知道用户的可分辨名称,请使用搜索优先模式。
+ * 
+ * <p>在验证优先模式下,尝试使用提供的用户名和密码进行验证,然后搜索LDAP目录。如果认证成功,则使用所提供的用户名以及指定的搜索过滤器来执行搜索。
+ * 要启用此模式,请设置<code> authIdentity </code>和<code> userFilter </code>选项。在访问已配置为禁止匿名搜索的LDAP目录时,使用身份验证优先模式。
+ * 
+ *  <p>在纯认证模式下,尝试使用提供的用户名和密码进行认证。不搜索LDAP目录,因为用户的可分辨名称是已知的。
+ * 要启用此模式,请将<code> authIdentity </code>选项设置为有效的可分辨名称,并省略<code> userFilter </code>选项。
+ * 事先知道用户的专有名称时,请使用仅认证模式。
+ * 
+ *  <p>以下选项是必需的,必须在此模块的登录{@link Configuration}中指定：<dl> <dt> </dt> <dd>
+ * <dl>
+ *  <dt> <code> userProvider = <b> ldap_urls </b> </code>
+ * </dt>
+ * <dd>此选项标识用于存储用户条目的LDAP目录。
+ *  <b> ldap_urls </b>是由空格分隔的LDAP网址(<a href="http://www.ietf.org/rfc/rfc2255.txt"> RFC 2255 </a>)的列表,用于标
+ * 识LDAP服务器以及用户条目所在目录树中的位置。
+ * <dd>此选项标识用于存储用户条目的LDAP目录。当指定了几个LDAP URL时,依次尝试每个,直到建立第一个成功的连接。
+ * 必须使用百分比字符('<code>％</code>')和两个十六进制数字(参见{@link java.net.URI})的标准机制转义URL的可分辨名称组件中的空格。还必须从URL中省略查询组件。
+ * 
+ * <p>
+ *  支持通过DNS自动发现LDAP服务器(<a href="http://www.ietf.org/rfc/rfc2782.txt"> RFC 2782 </a>)(一旦DNS配置为支持这样的服务)。
+ * 它通过从LDAP URL中省略主机名和端口号组件来启用。 </dd> </dl> </dl>。
+ * 
+ *  <p>此模块还识别以下可选的{@link Configuration}选项：<dl> <dt> </dt> <dd>
+ * <dl>
+ * <dt> <code> userFilter = <b> ldap_filter </b> </code> </dt> <dd>此选项指定用于在LDAP目录中查找用户条目的搜索过滤器。
+ * 它用于确定用户的可分辨名称。
+ *  <code> <b> ldap_filter </b> </code>是LDAP过滤字符串(<a href="http://www.ietf.org/rfc/rfc2254.txt"> RFC 225
+ * 4 </a>) 。
+ * 它用于确定用户的可分辨名称。如果它包含特殊标记"<code> <b> {USERNAME} </b> </code>",那么在过滤器用于搜索目录之前,该标记将替换为提供的用户名值。 </dd>。
+ * 
+ *  <dt> <code> authIdentity = <b> auth_id </b> </code> </dt> <dd>此选项指定在认证LDAP目录的用户时要使用的标识。
+ *  <code> <b> auth_id </b> </code>可能是LDAP专有名称字符串(<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 225
+ * 3 </a >)或一些其他字符串名称。
+ *  <dt> <code> authIdentity = <b> auth_id </b> </code> </dt> <dd>此选项指定在认证LDAP目录的用户时要使用的标识。
+ * 它必须包含特殊标记"<code> <b> {USERNAME} </b> </code>",在用于认证之前,将用提供的用户名值替换。
+ * 请注意,如果此选项不包含可分辨名称,则还必须指定<code> userFilter </code>选项。 </dd>。
+ * 
+ * <dt> <code> authzIdentity = <b> authz_id </b> </code> </dt> <dd>此选项指定用户的授权身份。
+ *  <code> <b> authz_id </b> </code>是任何字符串名称。如果它包含带花括号的单个特殊令牌,那么该令牌将被视为属性名称,并将被来自用户的LDAP条目的该属性的单个值替换。
+ * 如果找不到该属性,则忽略该选项。当提供此选项并且用户已成功通过身份验证时,将使用授权标识创建一个附加{@link UserPrincipal},并将其与当前{@link主题}相关联。 </dd>。
+ * 
+ *  <dt> <code> useSSL </code> </dt> <dd>如果<code> false </code>,此模块在尝试身份验证之前未建立与LDAP服务器的SSL连接。
+ *  SSL用于保护用户密码的隐私,因为它是通过LDAP清除传输的。默认情况下,此模块使用SSL。 </dd>。
+ * 
+ *  <dt> <code> useFirstPass </code> </dt> <dd>如果<code> true </code>,此模块从模块的共享状态检索用户名和密码,使用"javax.securi
+ * ty.auth.login .name"和"javax.security.auth.login.password"作为相应的键。
+ * 检索的值用于认证。如果身份验证失败,则不会尝试重试,并将该失败报告给调用应用程序。</dd>。
+ * 
+ * <dt> <code> tryFirstPass </code> </dt> <dd>如果<code> true </code>,此模块从模块的共享状态检索用户名和密码,使用"javax.securit
+ * y.auth.login .name"和"javax.security.auth.login.password"作为相应的键。
+ * 检索的值用于认证。如果身份验证失败,模块将使用{@link CallbackHandler}检索新的用户名和密码,并进行另一次身份验证。如果认证失败,则将故障报告回调用的应用程序。</dd>。
+ * 
+ *  <dt> <code> storePass </code> </dt> <dd>如果<code> true </code>,此模块将从{@link CallbackHandler}获取的用户名和密码存
+ * 储在模块的共享状态, "javax.security.auth.login.name"和"javax.security.auth.login.password"作为相应的键。
+ * 如果共享状态下的用户名和密码已存在,或者认证失败,则不会执行此操作。</dd>。
+ * 
+ *  <dt> <code> clearPass </code> </dt> <dd>如果<code> true </code>,此模块清除存储在模块的共享状态中的用户名和密码, )已完成。</dd>
+ * 
+ *  <dt> <code> debug </code> </dt> <dd>如果<code> true </code>,则调试消息将显示在标准输出流上。
+ * </dl>
+ * </dl>
+ * 
+ * <p>
+ * 任意<a href="{@docRoot}/../../../../../technotes/guides/jndi/jndi-ldap-gl.html#PROP"> JNDI属性</a>可能也可以在{@link Configuration}
+ * 中指定。
+ * 它们将添加到环境中并传递到LDAP提供程序。请注意,以下四个JNDI属性由此模块直接设置,如果在配置中也存在,将被忽略：。
+ * <ul>
+ *  <li> <code> java.naming.provider.url </code> <li> <code> java.naming.security.principal </code> <li>
+ *  <code> java.naming.security.credentials </code > <li> <code> java.naming.security.protocol </code>。
+ * </ul>
+ * 
+ * <p>
+ *  三个示例{@link配置}如下所示。第一个激活搜索优先模式。
+ * 它标识LDAP服务器并指定用户的条目由其<code> uid </code>和<code> objectClass </code>属性定位。
+ * 它还指定应创建基于用户的<code> employeeNumber </code>属性的标识。第二个激活认证优先模式。
+ * 它要求动态定位LDAP服务器,使用提供的用户名直接执行认证,但没有SSL保护,并且用户的条目由三个命名属性之一及其<code> objectClass </code>属性定位。第三个激活仅认证模式。
+ * 它标识备用LDAP服务器,它指定用于认证的可分辨名称和用于授权的固定标识。不执行目录搜索。
+ * 
+ * <pre>
+ * 
  * @since 1.6
  */
 @jdk.Exported
@@ -375,6 +465,48 @@ public class LdapLoginModule implements LoginModule {
     /**
      * Initialize this <code>LoginModule</code>.
      *
+     * <p>
+     * 
+     * ExampleApplication {com.sun.security.auth.module.LdapLoginModule REQUIRED userProvider ="ldap：// ldap-svr / ou = people,dc = example,dc = com"userFilter ="(&(uid = {USERNAME}
+     * ) objectClass = inetOrgPerson))"authzIdentity ="{EMPLOYEENUMBER}"debug = true; };。
+     * 
+     *  ExampleApplication {com.sun.security.auth.module.LdapLoginModule REQUIRED userProvider ="ldap：/// cn = users,dc = example,dc = com"authIdentity ="{USERNAME}
+     * "userFilter ="(&(|(samAccountName = {USERNAME})(userPrincipalName = {USERNAME})(cn = {USERNAME}))(obj
+     * ectClass = user))"useSSL = false debug = true; };。
+     * 
+     *  ExampleApplication {com.sun.security.auth.module.LdapLoginModule REQUIRED userProvider ="ldap：// ldap-svr1 ldap：// ldap-svr2"authIdentity ="cn = {USERNAME}
+     * ,ou = people,dc = example,dc = com"authzIdentity ="staff"debug = true; };。
+     * 
+     * </pre>
+     * 
+     * <dl>
+     *  <dt> <b>注意：</b> </dt> <dd>当{@link SecurityManager}处于活动状态时,必须授予创建{@link LoginContext}并使用{@link LoginModule}
+     * 的应用程序某些权限。
+     * <p>
+     *  如果应用程序使用安装的</em> {@link Configuration}创建登录上下文,则应用程序必须授予{@link AuthPermission}以创建登录上下文。
+     * 例如,以下安全策略允许用户当前目录中的应用程序实例化<em>任何</em>登录上下文：。
+     * <pre>
+     * 
+     *  授权代码库"文件：$ {user.dir} /"{permission javax.security.auth.AuthPermission"createLoginContext。*"; };
+     * </pre>
+     * 
+     * 或者,如果应用程序使用<em>调用者指定的</em> {@link Configuration}创建登录上下文,则应用程序必须被授予{@link LoginModule}所需的权限。
+     *  <em>此</em>模块需要以下两个权限：。
+     * <p>
+     * <ul>
+     *  <li>用于连接到LDAP服务器的{@link SocketPermission}。 <li> {@link AuthPermission}修改与{@link主题}相关联的{@link主体}集合。
+     * </ul>
+     * <p>
+     *  例如,以下安全策略向用户当前目录中的应用程序授予此模块所需的所有权限：
+     * <pre>
+     * 
+     *  授权代码库"文件：$ {user.dir} /"{permission java.net.SocketPermission"*：389","connect"; permission java.net.SocketPermission"*：636","connect"; permission javax.security.auth.AuthPermission"modifyPrincipals"; }
+     * ;。
+     * </pre>
+     * </dd>
+     * </dl>
+     * 
+     * 
      * @param subject the <code>Subject</code> to be authenticated.
      * @param callbackHandler a <code>CallbackHandler</code> to acquire the
      *                  username and password.
@@ -492,6 +624,10 @@ public class LdapLoginModule implements LoginModule {
      * <p> Acquire the user's credentials and verify them against the
      * specified LDAP directory.
      *
+     * <p>
+     *  初始化此<code> LoginModule </code>。
+     * 
+     * 
      * @return true always, since this <code>LoginModule</code>
      *          should not be ignored.
      * @exception FailedLoginException if the authentication fails.
@@ -600,6 +736,12 @@ public class LdapLoginModule implements LoginModule {
      * authentication attempted failed, then this method removes
      * any state that was originally saved.
      *
+     * <p>
+     *  开始用户身份验证。
+     * 
+     *  <p>获取用户的凭据,并根据指定的LDAP目录进行验证。
+     * 
+     * 
      * @exception LoginException if the commit fails
      * @return true if this LoginModule's own login and commit
      *          attempts succeeded, or false otherwise.
@@ -665,6 +807,16 @@ public class LdapLoginModule implements LoginModule {
      * <code>login</code> and <code>commit</code> methods),
      * then this method cleans up any state that was originally saved.
      *
+     * <p>
+     *  完成用户身份验证。
+     * 
+     *  <p>如果LoginContext的整体认证成功(相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules成功),则调用此方法。
+     * 
+     * <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>方法保存的私有状态进行检查),则此方法将<code> LdapPrincipal </code>
+     * 与一个或多个<code > UserPrincipal </code>与<code> Subject </code>位于<code> LoginModule </code>中。
+     * 如果此LoginModule自己的身份验证尝试失败,则此方法将删除最初保存的任何状态。
+     * 
+     * 
      * @exception LoginException if the abort fails.
      * @return false if this LoginModule's own login and/or commit attempts
      *          failed, and true otherwise.
@@ -699,6 +851,15 @@ public class LdapLoginModule implements LoginModule {
      * <p> This method removes the Principals
      * that were added by the <code>commit</code> method.
      *
+     * <p>
+     *  中止用户身份验证。
+     * 
+     *  <p>如果整体身份验证失败,则会调用此方法。 (相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules没有成功)。
+     * 
+     *  <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>和<code> commit </code>方法保存的私有状态进行检查),则此方法将清除原来
+     * 保存。
+     * 
+     * 
      * @exception LoginException if the logout fails.
      * @return true in all cases since this <code>LoginModule</code>
      *          should not be ignored.
@@ -733,6 +894,12 @@ public class LdapLoginModule implements LoginModule {
     /**
      * Attempt authentication
      *
+     * <p>
+     *  注销用户。
+     * 
+     *  <p>此方法删除由<code> commit </code>方法添加的Principal。
+     * 
+     * 
      * @param getPasswdFromSharedState boolean that tells this method whether
      *          to retrieve the password from the sharedState.
      * @exception LoginException if the authentication attempt fails.
@@ -854,6 +1021,10 @@ public class LdapLoginModule implements LoginModule {
      * Determine the distinguished name of the user's entry and optionally
      * an authorization identity for the user.
      *
+     * <p>
+     *  尝试认证
+     * 
+     * 
      * @param ctx an LDAP context to use for the search
      * @return the user's distinguished name or an empty string if none
      *         was found.
@@ -934,6 +1105,10 @@ public class LdapLoginModule implements LoginModule {
     /**
      * Replace the username token
      *
+     * <p>
+     *  搜索用户的条目。确定用户条目的可分辨名称以及可选的用户的授权身份。
+     * 
+     * 
      * @param string the target string
      * @return the modified string
      */
@@ -950,6 +1125,10 @@ public class LdapLoginModule implements LoginModule {
      * values in the shared state in case subsequent LoginModules
      * want to use them via use/tryFirstPass.
      *
+     * <p>
+     *  替换用户名令牌
+     * 
+     * 
      * @param getPasswdFromSharedState boolean that tells this method whether
      *          to retrieve the password from the sharedState.
      * @exception LoginException if the username/password cannot be acquired.
@@ -994,6 +1173,11 @@ public class LdapLoginModule implements LoginModule {
 
     /**
      * Clean out state because of a failed authentication attempt
+     * <p>
+     *  获取用户名和密码。此方法不返回任何值。相反,它设置全局名称和密码变量。
+     * 
+     *  <p>另请注意,此方法将在共享状态下设置用户名和密码值,以防后续LoginModules想通过use / tryFirstPass使用它们。
+     * 
      */
     private void cleanState() {
         username = null;

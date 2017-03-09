@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.utils;
@@ -38,6 +48,15 @@ import java.util.Arrays;
  * convenience methods. There is one exception: check the comments
  * for the <code>isValid</code> method for details.
  *
+ * <p>
+ *  这是XERCES-2J类的副本com.sun.org.apache.xerces.internal.utls.XMLChar
+ * 
+ *  此类定义了XML 1.1中的字符的基本属性。此类中的数据可用于验证字符是否是有效的XML 1.1字符,或者如果字符是空格,名称开始或名称字符。
+ * <p>
+ *  提供了一系列方便的方法以减轻开发人员的负担。
+ * 使用字符作为索引到<code> XML11CHARS </code>数组并应用适当的掩码标志(例如<code> MASK_VALID </code>),产生与调用方便方法相同的结果。
+ * 有一个例外：检查<code> isValid </code>方法的注释以了解详细信息。
+ * 
  */
 public class XML11Char {
 
@@ -151,6 +170,10 @@ public class XML11Char {
      * Returns true if the specified character is a space character
      * as amdended in the XML 1.1 specification.
      *
+     * <p>
+     * 如果指定的字符在XML 1.1规范中为空格字符,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11Space(int c) {
@@ -165,6 +188,12 @@ public class XML11Char {
      * <code>XML11CHARS</code> array, then they are responsible for checking
      * the surrogate character range.
      *
+     * <p>
+     *  如果指定的字符有效,则返回true。此方法还检查从0x10000到0x10FFFF的替代字符范围。
+     * <p>
+     *  如果程序选择将掩码直接应用到<code> XML11CHARS </code>数组,那么它们负责检查替代字符范围。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11Valid(int c) {
@@ -175,6 +204,10 @@ public class XML11Char {
     /**
      * Returns true if the specified character is invalid.
      *
+     * <p>
+     *  如果指定的字符无效,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11Invalid(int c) {
@@ -187,6 +220,10 @@ public class XML11Char {
      * That is, this method will return false for the same set as
      * isXML11Valid, except it also reports false for "control characters".
      *
+     * <p>
+     *  如果指定的字符有效并且允许在字符引用之外,则返回true。也就是说,这个方法将返回与isXML11Valid相同的集合,除了它也为"控制字符"报告false。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11ValidLiteral(int c) {
@@ -198,6 +235,10 @@ public class XML11Char {
      * Returns true if the specified character can be considered
      * content in an external parsed entity.
      *
+     * <p>
+     *  如果指定的字符可以被视为外部解析实体中的内容,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11Content(int c) {
@@ -209,6 +250,10 @@ public class XML11Char {
      * Returns true if the specified character can be considered
      * content in an internal parsed entity.
      *
+     * <p>
+     *  如果指定的字符可以被视为内部解析实体中的内容,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11InternalEntityContent(int c) {
@@ -221,6 +266,10 @@ public class XML11Char {
      * character as defined by production [4] in the XML 1.1
      * specification.
      *
+     * <p>
+     *  如果指定的字符是由XML 1.1规范中的production [4]定义的有效名称开始字符,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11NameStart(int c) {
@@ -233,6 +282,10 @@ public class XML11Char {
      * character as defined by production [4a] in the XML 1.1
      * specification.
      *
+     * <p>
+     *  如果指定的字符是由XML 1.1规范中的生产[4a]定义的有效名称字符,则返回true。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11Name(int c) {
@@ -245,6 +298,10 @@ public class XML11Char {
      * character as defined by production [4] in Namespaces in XML
      * 1.1 recommendation.
      *
+     * <p>
+     *  如果指定的字符是一个有效的NCName开始字符,则返回true,如XML [1.1]中Namespaces中的production [4]定义。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11NCNameStart(int c) {
@@ -257,6 +314,10 @@ public class XML11Char {
      * character as defined by production [5] in Namespaces in XML
      * 1.1 recommendation.
      *
+     * <p>
+     *  如果指定的字符是一个有效的NCName字符,则返回true,如XML1.1中Namespaces中的production [5]定义。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11NCName(int c) {
@@ -270,6 +331,10 @@ public class XML11Char {
      * all high surrogates for characters [0x10000-0xEFFFF].
      * In other words everything excluding planes 15 and 16.
      *
+     * <p>
+     * 返回给定字符是否是名称字符的有效高代理。这包括字符[0x10000-0xEFFFF]的所有高代理。换句话说,除了平面15和16之外的所有东西。
+     * 
+     * 
      * @param c The character to check.
      */
     public static boolean isXML11NameHighSurrogate(int c) {
@@ -278,11 +343,18 @@ public class XML11Char {
 
     /*
      * [5] Name ::= NameStartChar NameChar*
+     * <p>
+     *  [5] Name :: = NameStartChar NameChar *
+     * 
      */
     /**
      * Check to see if a string is a valid Name according to [5]
      * in the XML 1.1 Recommendation
      *
+     * <p>
+     *  根据XML 1.1建议书中的[5],检查字符串是否是有效的名称
+     * 
+     * 
      * @param name string to check
      * @return true if name is a valid Name
      */
@@ -328,11 +400,18 @@ public class XML11Char {
     /*
      * from the namespace 1.1 rec
      * [4] NCName ::= NCNameStartChar NCNameChar*
+     * <p>
+     *  从命名空间1.1 rec [4] NCName :: = NCNameStartChar NCNameChar *
+     * 
      */
     /**
      * Check to see if a string is a valid NCName according to [4]
      * from the XML Namespaces 1.1 Recommendation
      *
+     * <p>
+     *  根据XML命名空间1.1建议书中的[4],检查字符串是否是有效的NCName
+     * 
+     * 
      * @param ncName string to check
      * @return true if name is a valid NCName
      */
@@ -376,11 +455,18 @@ public class XML11Char {
 
     /*
      * [7] Nmtoken ::= (NameChar)+
+     * <p>
+     *  [7] Nmtoken :: =(NameChar)+
+     * 
      */
     /**
      * Check to see if a string is a valid Nmtoken according to [7]
      * in the XML 1.1 Recommendation
      *
+     * <p>
+     *  根据XML 1.1建议书中的[7],检查字符串是否是有效的Nmtoken
+     * 
+     * 
      * @param nmtoken string to check
      * @return true if nmtoken is a valid Nmtoken
      */
@@ -410,6 +496,8 @@ public class XML11Char {
       * Simple check to determine if qname is legal. If it returns false
       * then <param>str</param> is illegal; if it returns true then
       * <param>str</param> is legal.
+      * <p>
+      *  简单检查以确定qname是否合法。如果它返回false,那么<param> str </param>是非法的;如果它返回true,那么<param> str </param>是合法的。
       */
      public static boolean isXML11ValidQName(String str) {
 

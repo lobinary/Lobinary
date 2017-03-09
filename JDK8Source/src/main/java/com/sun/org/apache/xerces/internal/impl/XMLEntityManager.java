@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  */
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl ;
@@ -78,6 +88,21 @@ import javax.xml.stream.XMLInputFactory;
  * </ul>
  *
  *
+ * <p>
+ *  将跟踪当前实体。
+ * 
+ *  实体管理器处理一般和参数实体的注册;解决实体;并启动实体。实体管理器是标准解析器配置中的中心组件,并且此类直接与实体扫描器一起工作以管理基础xni。
+ * <p>
+ *  此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ * <li> http://xml.org/sax/features/validation </li> <li> http://xml.org/sax/features/external-general-e
+ * ntities </li> <li> http：/ /xml.org/sax/features/external-parameter-entities </li> <li> http://apache.
+ * org/xml/features/allow-java-encodings </li> <li> http：// apache .org / xml / properties / internal / 
+ * symbol-table </li> <li> http://apache.org/xml/properties/internal/error-reporter </li> <li> http://ap
+ * ache.org / xml / properties / internal / entity-resolver </li>。
+ * </ul>
+ * 
+ * 
  * @author Andy Clark, IBM
  * @author Arnaud  Le Hors, IBM
  * @author K.Venugopal SUN Microsystems
@@ -109,6 +134,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * standard uri conformant (strict uri).
      * http://apache.org/xml/features/standard-uri-conformant
+     * <p>
+     *  标准uri一致性(严格uri)。 http://apache.org/xml/features/standard-uri-conformant
+     * 
      */
     protected boolean fStrictURI;
 
@@ -229,11 +257,17 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Debug printing of buffer. This debugging flag works best when you
      * resize the DEFAULT_BUFFER_SIZE down to something reasonable like
      * 64 characters.
+     * <p>
+     *  调试打印缓冲区。当你将DEFAULT_BUFFER_SIZE的大小调整到合理的64个字符时,这个调试标志的效果最好。
+     * 
      */
     private static final boolean DEBUG_BUFFER = false;
 
     /** warn on duplicate Entity declaration.
      *  http://apache.org/xml/features/warn-on-duplicate-entitydef
+     * <p>
+     *  http://apache.org/xml/features/warn-on-duplicate-entitydef
+     * 
      */
     protected boolean fWarnDuplicateEntityDef;
 
@@ -255,24 +289,36 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Validation. This feature identifier is:
      * http://xml.org/sax/features/validation
+     * <p>
+     *  验证。此功能标识符为：http://xml.org/sax/features/validation
+     * 
      */
     protected boolean fValidation;
 
     /**
      * External general entities. This feature identifier is:
      * http://xml.org/sax/features/external-general-entities
+     * <p>
+     *  外部一般实体。此功能标识符为：http://xml.org/sax/features/external-general-entities
+     * 
      */
     protected boolean fExternalGeneralEntities;
 
     /**
      * External parameter entities. This feature identifier is:
      * http://xml.org/sax/features/external-parameter-entities
+     * <p>
+     *  外部参数实体。此功能标识符为：http://xml.org/sax/features/external-parameter-entities
+     * 
      */
     protected boolean fExternalParameterEntities;
 
     /**
      * Allow Java encoding names. This feature identifier is:
      * http://apache.org/xml/features/allow-java-encodings
+     * <p>
+     *  允许Java编码名称。此功能标识符为：http://apache.org/xml/features/allow-java-encodings
+     * 
      */
     protected boolean fAllowJavaEncodings = true ;
 
@@ -284,18 +330,27 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Symbol table. This property identifier is:
      * http://apache.org/xml/properties/internal/symbol-table
+     * <p>
+     *  符号表。此属性标识符为：http://apache.org/xml/properties/internal/symbol-table
+     * 
      */
     protected SymbolTable fSymbolTable;
 
     /**
      * Error reporter. This property identifier is:
      * http://apache.org/xml/properties/internal/error-reporter
+     * <p>
+     *  错误报告。此属性标识符为：http://apache.org/xml/properties/internal/error-reporter
+     * 
      */
     protected XMLErrorReporter fErrorReporter;
 
     /**
      * Entity resolver. This property identifier is:
      * http://apache.org/xml/properties/internal/entity-resolver
+     * <p>
+     *  实体解析器。此属性标识符为：http://apache.org/xml/properties/internal/entity-resolver
+     * 
      */
     protected XMLEntityResolver fEntityResolver;
 
@@ -319,6 +374,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Validation manager. This property identifier is:
      * http://apache.org/xml/properties/internal/validation-manager
+     * <p>
+     * 验证经理。此属性标识符为：http://apache.org/xml/properties/internal/validation-manager
+     * 
      */
     protected ValidationManager fValidationManager;
 
@@ -328,6 +386,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Buffer size. We get this value from a property. The default size
      * is used if the input buffer size property is not specified.
      * REVISIT: do we need a property for internal entity buffer size?
+     * <p>
+     *  缓冲区大小。我们从一个属性中获取这个值。如果未指定输入缓冲区大小属性,则使用缺省大小。 REVISIT：我们需要一个内部实体缓冲区大小的属性吗?
+     * 
      */
     protected int fBufferSize = DEFAULT_BUFFER_SIZE;
 
@@ -341,6 +402,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * True if the document entity is standalone. This should really
      * only be set by the document source (e.g. XMLDocumentScanner).
+     * <p>
+     *  如果文档实体是独立的,则为True。这应该只由文档源(例如XMLDocumentScanner)设置。
+     * 
      */
     protected boolean fStandalone;
 
@@ -403,6 +467,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
 
     /**
      * If this constructor is used to create the object, reset() should be invoked on this object
+     * <p>
+     *  如果此构造函数用于创建对象,则应在此对象上调用reset()
+     * 
      */
     public XMLEntityManager() {
         fEntityStorage = new XMLEntityStorage(this) ;
@@ -428,6 +495,14 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * <strong>Note:</strong> The name should be a unique symbol. The
      * SymbolTable can be used for this purpose.
      *
+     * <p>
+     *  添加内部实体声明。
+     * <p>
+     *  <strong>注意：</strong>此方法忽略后续实体声明。
+     * <p>
+     *  <strong>注意：</strong>名称应为唯一符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @param name The name of the entity.
      * @param text The text of the entity.
      *
@@ -457,6 +532,14 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * <strong>Note:</strong> The name should be a unique symbol. The
      * SymbolTable can be used for this purpose.
      *
+     * <p>
+     *  添加外部实体声明。
+     * <p>
+     *  <strong>注意：</strong>此方法忽略后续实体声明。
+     * <p>
+     *  <strong>注意：</strong>名称应为唯一符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @param name         The name of the entity.
      * @param publicId     The public identifier of the entity.
      * @param literalSystemId     The system identifier of the entity.
@@ -514,6 +597,14 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * <strong>Note:</strong> The name should be a unique symbol. The
      * SymbolTable can be used for this purpose.
      *
+     * <p>
+     *  添加未解析的实体声明。
+     * <p>
+     *  <strong>注意：</strong>此方法忽略后续实体声明。
+     * <p>
+     *  <strong>注意：</strong>名称应为唯一符号。 SymbolTable可用于此目的。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param publicId The public identifier of the entity.
      * @param systemId The system identifier of the entity.
@@ -582,6 +673,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * This method uses the passed-in XMLInputSource to make
      * fCurrentEntity usable for reading.
+     * <p>
+     *  此方法使用传入的XMLInputSource使fCurrentEntity可用于读取。
+     * 
+     * 
      * @param name  name of the entity (XML is it's the document entity)
      * @param xmlInputSource    the input source, with sufficient information
      *      to begin scanning characters.
@@ -834,6 +929,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
         /* if encoding is specified externally, 'encoding' information present
          * in the prolog of the XML document is not considered. Hence, prolog can
          * be read in Chunks of data instead of byte by byte.
+         * <p>
+         *  在prolog的XML文档中不考虑。因此,prolog可以读取数据块,而不是逐字节读取。
+         * 
          */
         fCurrentEntity = new com.sun.xml.internal.stream.Entity.ScannedEntity(name,new XMLResourceIdentifierImpl(publicId, literalSystemId, baseSystemId, expandedSystemId),stream, reader, encoding, literal, encodingExternallySpecified, isExternal);
         fCurrentEntity.setEncodingExternallySpecified(encodingExternallySpecified);
@@ -849,6 +947,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Checks whether an entity given by name is external.
      *
+     * <p>
+     *  检查由名称提供的实体是否是外部实体。
+     * 
+     * 
      * @param entityName The name of the entity to check.
      * @return True if the entity is external, false otherwise
      * (including when the entity is not declared).
@@ -866,6 +968,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Checks whether the declaration of an entity given by name is
      * // in the external subset.
      *
+     * <p>
+     * 检查由名称指定的实体的声明是否为外部子集中的//。
+     * 
+     * 
      * @param entityName The name of the entity to check.
      * @return True if the entity was declared in the external subset, false otherwise
      *           (including when the entity is not declared).
@@ -888,6 +994,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Sets whether the document entity is standalone.
      *
+     * <p>
+     *  设置文档实体是否是独立的。
+     * 
+     * 
      * @param standalone True if document entity is standalone.
      */
     public void setStandalone(boolean standalone) {
@@ -930,6 +1040,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Sets the entity handler. When an entity starts and ends, the
      * entity handler is notified of the change.
      *
+     * <p>
+     *  设置实体处理程序。当实体开始和结束时,实体处理程序被通知该改变。
+     * 
+     * 
      * @param entityHandler The new entity handler.
      */
 
@@ -1030,6 +1144,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * is unable to resolve the entity, then default entity
      * resolution will occur.
      *
+     * <p>
+     *  解析指定的公共和系统标识符。此方法首先尝试基于应用程序注册的EntityResolver来解析实体。如果没有实体解析器被注册或者注册的实体处理程序不能解析实体,则将发生默认实体解析。
+     * 
+     * 
      * @param publicId     The public identifier of the entity.
      * @param systemId     The system identifier of the entity.
      * @param baseSystemId The base system identifier of the entity.
@@ -1103,6 +1221,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Starts a named entity.
      *
+     * <p>
+     *  启动命名实体。
+     * 
+     * 
      * @param entityName The name of the entity to start.
      * @param literal    True if this entity is started within a literal
      *                   value.
@@ -1211,6 +1333,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
              * //simply return if there was entity resolver registered and application
              * //returns either XMLStreamReader or XMLEventReader.
              * if(staxInputSource.hasXMLStreamOrXMLEventReader()) return ;
+             * <p>
+             *  //简单地返回如果有实体解析器注册和应用程序//返回XMLStreamReader或XMLEventReader。
+             *  if(staxInputSource.hasXMLStreamOrXMLEventReader())return;。
+             * 
              */
             xmlInputSource = staxInputSource.getXMLInputSource() ;
             if (!fISCreatedByResolver) {
@@ -1242,6 +1368,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Starts the document entity. The document entity has the "[xml]"
      * pseudo-name.
      *
+     * <p>
+     *  启动文档实体。文档实体具有"[xml]"伪名称。
+     * 
+     * 
      * @param xmlInputSource The input source of the document entity.
      *
      * @throws IOException  Thrown on i/o error.
@@ -1257,6 +1387,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Starts the DTD entity. The DTD entity has the "[dtd]"
      * pseudo-name.
      *
+     * <p>
+     *  启动DTD实体。 DTD实体具有"[dtd]"伪名称。
+     * 
+     * 
      * @param xmlInputSource The input source of the DTD entity.
      *
      * @throws IOException  Thrown on i/o error.
@@ -1283,6 +1417,12 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * This method can be used to insert an application defined XML
      * entity stream into the parsing stream.
      *
+     * <p>
+     *  启动实体。
+     * <p>
+     *  此方法可用于将应用程序定义的XML实体流插入到解析流中。
+     * 
+     * 
      * @param name           The name of the entity.
      * @param xmlInputSource The input source of the entity.
      * @param literal        True if this entity is started within a
@@ -1327,6 +1467,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
 
     /**
      * Return the current entity being scanned. Current entity is SET using startEntity function.
+     * <p>
+     *  返回正在扫描的当前实体。使用startEntity函数设置当前实体。
+     * 
+     * 
      * @return Entity.ScannedEntity
      */
 
@@ -1337,6 +1481,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Return the top level entity handled by this manager, or null
      * if no entity was added.
+     * <p>
+     *  返回此管理器处理的顶级实体,如果未添加任何实体,则返回null。
+     * 
      */
     public Entity.ScannedEntity getTopLevelEntity() {
         return (Entity.ScannedEntity)
@@ -1346,12 +1493,19 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
 
     /**
      * Close all opened InputStreams and Readers opened by this parser.
+     * <p>
+     *  关闭此解析器打开的所有打开的InputStreams和Readers。
+     * 
      */
     public void closeReaders() {
         /** this call actually does nothing, readers are closed in the endEntity method
          * through the current entity.
          * The change seems to have happened during the jdk6 development with the
          * addition of StAX
+         * <p>
+         *  通过当前实体。这种变化似乎发生在jdk6开发期间,添加了StAX
+         * 
+         * 
         **/
     }
 
@@ -1369,6 +1523,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
         /** need to close the reader first since the program can end
          *  prematurely (e.g. fEntityHandler.endEntity may throw exception)
          *  leaving the reader open
+         * <p>
+         *  过早地(例如fEntityHandler.endEntity可能会抛出异常)让读者打开
+         * 
          */
         //close the reader
         if(fCurrentEntity != null){
@@ -1467,6 +1624,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * about any features and properties that affect the operation of the
      * component.
      *
+     * <p>
+     * 复位组件。组件可以向组件管理器查询影响组件操作的任何特征和属性。
+     * 
+     * 
      * @param componentManager The component manager.
      *
      * @throws SAXException Thrown by component on initialization error.
@@ -1586,6 +1747,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的要素标识符列表。如果此组件未识别任何功能,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedFeatures() {
         return (String[])(RECOGNIZED_FEATURES.clone());
@@ -1598,6 +1762,12 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * <strong>Note:</strong> Components should silently ignore features
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置要素的状态。当特性改变状态时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应默认忽略不影响组件操作的功能。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -1632,6 +1802,12 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置属性的值。当属性更改值时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应静默忽略不影响组件操作的属性。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *
@@ -1692,6 +1868,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符列表。如果此组件未识别任何属性,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedProperties() {
         return (String[])(RECOGNIZED_PROPERTIES.clone());
@@ -1701,6 +1880,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * component does not want to report a default value for this
      * feature.
      *
+     * <p>
+     *  返回特征的默认状态,如果此组件不希望报告此特征的默认值,则返回null。
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @since Xerces 2.2.0
@@ -1719,6 +1902,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * component does not want to report a default value for this
      * property.
      *
+     * <p>
+     *  返回属性的默认状态,如果此组件不希望报告此属性的默认值,则返回null。
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @since Xerces 2.2.0
@@ -1742,6 +1929,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * identifier is already expanded. An exception thrown
      * indicates a failure to expand the id.
      *
+     * <p>
+     *  扩展系统ID,并将系统ID作为URI返回,如果它可以扩展。返回值为null表示标识符已经展开。抛出的异常表示无法扩展标识。
+     * 
+     * 
      * @param systemId The systemId to be expanded.
      *
      * @return Returns the URI string representing the expanded system
@@ -1901,6 +2092,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * of the "user.dir" property as the base URI. If
      * the URI is already absolute, this is a no-op.
      *
+     * <p>
+     * 使用"user.dir"属性的当前值作为基本URI绝对化URI。如果URI已经是绝对的,这是一个无操作。
+     * 
+     * 
      * @param uri the URI to absolutize
      */
     public static void absolutizeAgainstUserDir(URI uri)
@@ -1914,6 +2109,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * identifier is already expanded. An exception thrown
      * indicates a failure to expand the id.
      *
+     * <p>
+     *  扩展系统ID,并将系统ID作为URI返回,如果它可以扩展。返回值为null表示标识符已经展开。抛出的异常表示无法扩展标识。
+     * 
+     * 
      * @param systemId The systemId to be expanded.
      *
      * @return Returns the URI string representing the expanded system
@@ -1982,6 +2181,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * identifier is already expanded. An exception thrown
      * indicates a failure to expand the id.
      *
+     * <p>
+     *  扩展系统ID,并将系统ID作为URI返回,如果它可以扩展。返回值为null表示标识符已经展开。抛出的异常表示无法扩展标识。
+     * 
+     * 
      * @param systemId The systemId to be expanded.
      *
      * @return Returns the URI string representing the expanded system
@@ -2050,6 +2253,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
              * this is not ideal solution, but it covers known cases which either
              * Xerces URI or java.net.URI can handle alone
              * will file bug against java.net.URI
+             * <p>
+             *  这不是理想的解决方案,但它涵盖已知的情况下,Xerces URI或java.net.URI可以单独处理将文件错误java.net.URI
+             * 
              */
             try {
                 return expandSystemIdStrictOff1(systemId, baseSystemId);
@@ -2105,6 +2311,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
 
     /**
      * Helper method for expandSystemId(String,String,boolean):String
+     * <p>
+     *  expandSystemId(String,String,boolean)的辅助方法：String
+     * 
      */
     private static String expandSystemIdStrictOn(String systemId, String baseSystemId)
         throws URI.MalformedURIException {
@@ -2141,6 +2350,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Attempt to set whether redirects will be followed for an <code>HttpURLConnection</code>.
      * This may fail on earlier JDKs which do not support setting this preference.
+     * <p>
+     *  尝试设置<code> HttpURLConnection </code>是否会重定向。这可能会在不支持设置此首选项的早期JDK上失败。
+     * 
      */
     public static void setInstanceFollowRedirects(HttpURLConnection urlCon, boolean followRedirects) {
         try {
@@ -2154,6 +2366,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
 
     /**
      * Helper method for expandSystemId(String,String,boolean):String
+     * <p>
+     *  expandSystemId(String,String,boolean)的辅助方法：String
+     * 
      */
     private static String expandSystemIdStrictOff(String systemId, String baseSystemId)
         throws URI.MalformedURIException {
@@ -2169,6 +2384,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
              * it's likely that this was intended as a file
              * path. Fixing this up in expandSystemId to
              * maintain backwards compatibility.
+             * <p>
+             *  如果方案的长度只有一个字符,这很可能是作为一个文件路径。在expandSystemId中修复此问题以保持向后兼容性。
+             * 
              */
             throw new URI.MalformedURIException();
         }
@@ -2210,6 +2428,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
              * it's likely that this was intended as a file
              * path. Fixing this up in expandSystemId to
              * maintain backwards compatibility.
+             * <p>
+             *  如果方案的长度只有一个字符,这很可能是作为一个文件路径。在expandSystemId中修复此问题以保持向后兼容性。
+             * 
              */
             throw new URISyntaxException(systemId, "the scheme's length is only one character");
         }
@@ -2247,6 +2468,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Returns the IANA encoding name that is auto-detected from
      * the bytes specified, with the endian-ness of that encoding where appropriate.
      *
+     * <p>
+     *  返回从指定的字节自动检测的IANA编码名称,并在适当的位置使用该编码的字节顺序。
+     * 
+     * 
      * @param b4    The first four bytes of the input.
      * @param count The number of bytes actually read.
      * @return a 2-element array:  the first element, an IANA-encoding string,
@@ -2334,6 +2559,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * Creates a reader capable of reading the given input stream in
      * the specified encoding.
      *
+     * <p>
+     * 创建能够读取指定编码中给定输入流的阅读器。
+     * 
+     * 
      * @param inputStream  The input stream.
      * @param encoding     The encoding name that the input stream is
      *                     encoded using. If the user has specified that
@@ -2451,6 +2680,12 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * entity or of the external parsed entity in which the markup
      * triggering the event appears.
      *
+     * <p>
+     *  返回当前文档事件的公共标识符。
+     * <p>
+     *  返回值是文档实体或外部解析实体的公共标识符,其中触发事件的标记出现。
+     * 
+     * 
      * @return A string containing the public identifier, or
      *         null if none is available.
      */
@@ -2468,6 +2703,14 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * If the system identifier is a URL, the parser must resolve it
      * fully before passing it to the application.
      *
+     * <p>
+     *  返回当前文档事件的展开系统标识符。
+     * <p>
+     *  返回值是文档实体或外部解析实体的扩展系统标识符,其中触发事件的标记出现。
+     * <p>
+     *  如果系统标识符是URL,则解析器在将其传递给应用程序之前必须完全解析它。
+     * 
+     * 
      * @return A string containing the expanded system identifier, or null
      *         if none is available.
      */
@@ -2500,6 +2743,12 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * entity or of the external parsed entity in which the markup
      * triggering the event appears.
      * <p>
+     * <p>
+     *  返回当前文档事件的文本系统标识符。
+     * <p>
+     *  返回值是文档实体或外部解析实体的文字系统标识符,其中触发事件的标记出现。
+     * <p>
+     * 
      * @return A string containing the literal system identifier, or null
      *         if none is available.
      */
@@ -2541,6 +2790,16 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * of the first character after the text associated with the document
      * event.  The first line in the document is line 1.
      *
+     * <p>
+     *  返回当前文档事件结束的行号。
+     * <p>
+     *  <strong>警告：</strong>该方法的返回值仅作为估计错误报告的近似值;它不旨在提供足够的信息来编辑原始XML文档的字符内容。
+     * <p>
+     *  返回值是文档实体或外部解析实体中出现触发事件的标记的行号的近似值。
+     * <p>
+     *  如果可能,SAX驱动程序应在与文档事件相关联的文本之后提供第一个字符的行位置。文档中的第一行是第1行。
+     * 
+     * 
      * @return The line number, or -1 if none is available.
      */
     public int getLineNumber() {
@@ -2583,6 +2842,18 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      * of the first character after the text associated with the document
      * event.  The first column in each line is column 1.
      *
+     * <p>
+     * 返回当前文档事件结束的列号。
+     * <p>
+     *  <strong>警告：</strong>该方法的返回值仅作为估计错误报告的近似值;它不旨在提供足够的信息来编辑原始XML文档的字符内容。
+     * <p>
+     *  返回值是文档实体或外部解析实体中列号的近似值,触发事件的标记出现。
+     * <p>
+     *  如果可能,SAX驱动程序应在与文档事件相关联的文本之后提供第一个字符的行位置。
+     * <p>
+     *  如果可能,SAX驱动程序应在与文档事件相关联的文本之后提供第一个字符的行位置。每行中的第一列为第1列。
+     * 
+     * 
      * @return The column number, or -1 if none is available.
      */
     public int getColumnNumber() {
@@ -2612,6 +2883,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     /**
      * Fixes a platform dependent filename to standard URI form.
      *
+     * <p>
+     *  将平台相关的文件名修复为标准URI形式。
+     * 
+     * 
      * @param str The string to fix.
      *
      * @return Returns the fixed URI string.
@@ -2727,6 +3002,12 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      *
      * @xerces.internal
      *
+     * <p>
+     *  在实体管理器中使用的缓冲区来重用字符数组,而不是每次都创建新的。
+     * 
+     *  @ xerces.internal
+     * 
+     * 
      * @author Ankit Pasricha, IBM
      */
     private static class CharacterBuffer {
@@ -2750,6 +3031,12 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
      *
      * @xerces.internal
      *
+     * <p>
+     *  存储多个字符缓冲区并将其提供给实体管理器,以便在看到实体时使用。
+     * 
+     *  @ xerces.internal
+     * 
+     * 
      * @author Ankit Pasricha, IBM
      */
     private static class CharacterBufferPool {
@@ -2844,6 +3131,17 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
     *
     * @xerces.internal
     *
+    * <p>
+    * 这个类包装我们提供的字节输入流。我们需要它,因为java.io.InputStreams不提供重新读取处理的字节的功能,他们有一个习惯,当你调用read()方法读取多个字符。
+    * 这意味着,一旦我们发现一个文档的真实(声明)编码,我们不能回溯读取整个文档,也不开始读一个新的读者。
+    * 
+    *  此类允许通过允许设置标记来倒回inputStream,并且流重置到该位置。
+    *  <strong>该类假设当read()方法被inovked时,每次调用需要读取一个字符,但是使用底层的InputStream的read(char [],offset length)方法 - 它不会缓冲
+    * 以这种方式读取的数据！</strong>。
+    *  此类允许通过允许设置标记来倒回inputStream,并且流重置到该位置。
+    * 
+    *  @ xerces.internal
+    * 
     * @author Neil Graham, IBM
     * @author Glenn Marcy, IBM
     */
@@ -2909,6 +3207,9 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
                 /**
                  * //System.out.println("fCurrentEntitty = " + fCurrentEntity );
                  * //System.out.println("fInputStream = " + fInputStream );
+                 * <p>
+                 * 
+                 * 
                  * // better get some more for the voracious reader... */
 
                 if(fCurrentEntity.mayReadChunks || !fCurrentEntity.xmlDeclChunkRead) {
@@ -2973,6 +3274,10 @@ public class XMLEntityManager implements XMLComponent, XMLEntityResolver {
             * blocking, so while we're in this mode, it should only indicate
             * that bytes in its buffer are available; otherwise, the result of
             * available() on the underlying InputStream is appropriate.
+            * <p>
+            *  //System.out.println("fCurrentEntitty ="+ fCurrentEntity); //System.out.println("fInputStream ="+ fI
+            * nputStream);。
+            * 
             */
             return fInputStream.skip(n) + bytesLeft;
         }

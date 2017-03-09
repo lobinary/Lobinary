@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.util;
@@ -75,6 +79,10 @@ class RepositoryIdPool extends Stack {
           cache.remove(key);
           }
           }
+        /* <p>
+        /*  // _REVISIT_这将不工作w / out线程跟踪或弱引用。我是在押注线程跟踪几乎完全否定重用的好处。
+        /* 直到// 1.2只包含或相反的证明,我会这样离开... else {int numToReclaim = cache.size()/ 2;枚举键= cache.keys();枚举元素= cache.elements(); for(int i = numToReclaim; i> 0; i--){Object key = keys.nextElement(); Object element = elements.nextElement();。
+        /*  // _REVISIT_这将不工作w / out线程跟踪或弱引用。我是在押注线程跟踪几乎完全否定重用的好处。
         */
     }
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.lang.annotation.RetentionPolicy;
  * to the local and namespace name of the fault element and the name
  * of the fault bean.
  *
+ * <p>
+ *  用于注释特定于服务的异常类,以自定义故障元素的局部和命名空间名称以及故障bean的名称。
+ * 
+ * 
  *  @since JAX-WS 2.0
 **/
 @Target({ElementType.TYPE})
@@ -44,22 +49,37 @@ import java.lang.annotation.RetentionPolicy;
 public @interface WebFault {
   /**
    *  Element's local name.
+   * <p>
+   *  元素的本地名称。
+   * 
+   * 
   **/
   public String name() default "";
 
   /**
    *  Element's namespace name.
+   * <p>
+   *  元素的命名空间名称。
+   * 
+   * 
   **/
   public String targetNamespace() default "";
 
   /**
    *  Fault bean name.
+   * <p>
+   *  故障bean名称。
+   * 
+   * 
   **/
   public String faultBean() default "";
 
 
   /**
    *  wsdl:Message's name. Default name is the exception's class name.
+   * <p>
+   *  wsdl：消息的名称。默认名称是异常的类名。
+   * 
    *  @since JAX-WS 2.2
    */
   public String messageName() default "";

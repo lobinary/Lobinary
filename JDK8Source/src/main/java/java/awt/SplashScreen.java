@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,6 +92,39 @@ import sun.awt.image.SunWritableRaster;
  * application startup via the command line or manifest file option,
  * the <code>getSplashScreen</code> method returns <code>null</code>.
  *
+ * <p>
+ *  在Java虚拟机(JVM)启动之前,可以在应用程序启动时显示启动屏幕。启动画面显示为包含图像的未装饰窗口。您可以对图片使用GIF,JPEG或PNG文件。
+ *  GIF格式支持动画,而GIF和PNG格式均支持透明度。窗口位于屏幕中心。未指定多监视器系统上的位置。它是平台和实现依赖。
+ * 只要Swing / AWT显示第一个窗口(也可以使用Java API手动关闭,请参见下文),启动屏幕窗口将自动关闭。
+ * <P>
+ *  如果您的应用程序打包在一个jar文件中,您可以使用清单文件中的"SplashScreen-Image"选项来显示启动屏幕。将图像放在jar存档中,并在选项中指定路径。路径不应该有一个斜杠。
+ * <BR>
+ *  例如,在<code> manifest.mf </code>文件中：
+ * <PRE>
+ *  Manifest-Version：1.0 Main-Class：Test SplashScreen-Image：filename.gif
+ * </PRE>
+ * <P>
+ *  如果Java实现提供了命令行界面,并且使用命令行或快捷方式运行应用程序,请使用Java应用程序启动器选项显示启动屏幕。
+ *  Oracle参考实现允许您使用{@code -splash：}选项指定初始屏幕图像位置。
+ * <BR>
+ * 例如：
+ * <PRE>
+ *  java -splash：filename.gif测试
+ * </PRE>
+ *  命令行界面的优先级高于清单设置。
+ * <p>
+ *  在给定目标平台和显示器的限制的情况下,飞溅屏幕将尽可能忠实地显示以呈现整个飞溅屏幕图像。
+ * <p>
+ *  这意味着指定的图像在屏幕上"按原样"呈现,即保留在图像文件中指定的精确颜色值。然而,在某些情况下,所呈现的图像可能不同,例如,当应用彩色抖动以在16或8bpp屏幕上呈现32位每像素(bpp)图像时。
+ * 原生平台显示配置还可以影响所显示的图像的颜色(例如,颜色配置文件等)。
+ * <p>
+ *  {@code SplashScreen}类提供了用于控制启动屏幕的API。此类可用于关闭启动屏幕,更改启动屏幕图像,获取启动屏幕本机窗口位置/大小,并在启动屏幕中绘制。它不能用于创建启动屏幕。
+ * 您应该使用Java实现提供的选项。
+ * <p>
+ *  此类不能实例化。只有此类的一个实例可以存在,并且可以通过使用{@link #getSplashScreen()}静态方法获得。
+ * 如果尚未在应用程序启动时通过命令行或清单文件选项创建启动屏幕,则<code> getSplashScreen </code>方法返回<code> null </code>。
+ * 
+ * 
  * @author Oleg Semenov
  * @since 1.6
  */
@@ -104,6 +138,10 @@ public final class SplashScreen {
      * Returns the {@code SplashScreen} object used for
      * Java startup splash screen control on systems that support display.
      *
+     * <p>
+     * 返回用于支持显示的系统上的Java启动初始屏幕控件的{@code SplashScreen}对象。
+     * 
+     * 
      * @throws UnsupportedOperationException if the splash screen feature is not
      *         supported by the current toolkit
      * @throws HeadlessException if {@code GraphicsEnvironment.isHeadless()}
@@ -142,6 +180,10 @@ public final class SplashScreen {
      * The splash screen window is resized according to the size of
      * the image and is centered on the screen.
      *
+     * <p>
+     *  更改启动屏幕图像。新图像从指定的网址加载;支持GIF,JPEG和PNG图像格式。该方法在图像加载完成并且窗口已更新后返回。启动屏幕窗口根据图像的大小调整大小,并以屏幕为中心。
+     * 
+     * 
      * @param imageURL the non-<code>null</code> URL for the new
      *        splash screen image
      * @throws NullPointerException if {@code imageURL} is <code>null</code>
@@ -200,6 +242,10 @@ public final class SplashScreen {
     /**
      * Returns the current splash screen image.
      *
+     * <p>
+     *  返回当前启动屏幕图像。
+     * 
+     * 
      * @return URL for the current splash screen image file
      * @throws IllegalStateException if the splash screen has already been closed
      */
@@ -239,6 +285,14 @@ public final class SplashScreen {
      * The image may contain transparent areas, and thus the reported bounds may
      * be larger than the visible splash screen image on the screen.
      *
+     * <p>
+     *  以{@link Rectangle}形式返回启动屏幕窗口的边界。这可能是有用的,例如,如果你想用同一位置的窗口替换启动屏幕。
+     * <p>
+     *  您无法控制启动画面的大小或位置。当图像更改时,会自动调整闪屏尺寸。
+     * <p>
+     *  图像可以包含透明区域,因此报告的边界可以大于屏幕上的可见闪光屏幕图像。
+     * 
+     * 
      * @return a {@code Rectangle} containing the splash screen bounds
      * @throws IllegalStateException if the splash screen has already been closed
      */
@@ -267,6 +321,14 @@ public final class SplashScreen {
      * The image may contain transparent areas, and thus the reported size may
      * be larger than the visible splash screen image on the screen.
      *
+     * <p>
+     *  以{@link Dimension}形式返回启动屏幕窗口的大小。这可能是有用的,例如,如果你想画在闪屏重叠表面。
+     * <p>
+     *  您无法控制启动画面的大小或位置。当图像更改时,会自动调整闪屏尺寸。
+     * <p>
+     *  图像可以包含透明区域,因此报告的大小可以大于屏幕上的可见闪光屏幕图像。
+     * 
+     * 
      * @return a {@link Dimension} object indicating the splash screen size
      * @throws IllegalStateException if the splash screen has already been closed
      */
@@ -288,6 +350,13 @@ public final class SplashScreen {
      * corresponds to the origin of the splash screen native window bounds (see
      * {@link #getBounds()}).
      *
+     * <p>
+     * 为启动屏幕覆盖图像创建图形上下文(作为{@link Graphics2D}对象),允许您在启动屏幕上绘制。请注意,您不在主图像上绘制,而是在使用Alpha混合在主图像上显示的图像上绘制。
+     * 还要注意,在叠加图像上绘图不一定更新启动屏幕窗口的内容。当您希望立即更新启动屏幕时,应在<code> SplashScreen </code>上调用{@code update()}。
+     * <p>
+     *  图形上下文的坐标空间中的像素(0,0)对应于初始屏幕本机窗口边界的原点(参见{@link #getBounds()})。
+     * 
+     * 
      * @return graphics context for the splash screen overlay surface
      * @throws IllegalStateException if the splash screen has already been closed
      */
@@ -314,6 +383,10 @@ public final class SplashScreen {
     /**
      * Updates the splash window with current contents of the overlay image.
      *
+     * <p>
+     *  使用叠加图像的当前内容更新启动窗口。
+     * 
+     * 
      * @throws IllegalStateException if the overlay image does not exist;
      *         for example, if {@code createGraphics} has never been called,
      *         or if the splash screen has already been closed
@@ -354,6 +427,10 @@ public final class SplashScreen {
      * Hides the splash screen, closes the window, and releases all associated
      * resources.
      *
+     * <p>
+     *  隐藏启动屏幕,关闭窗口,并释放所有相关资源。
+     * 
+     * 
      * @throws IllegalStateException if the splash screen has already been closed
      */
     public void close() throws IllegalStateException {
@@ -383,6 +460,12 @@ public final class SplashScreen {
      * method only guarantees that the conditions to hide the splash screen
      * window have not occurred yet.
      *
+     * <p>
+     *  确定启动屏幕是否可见。启动屏幕可以使用{@link #close()}隐藏,当第一个AWT / Swing窗口可见时,它也会自动隐藏。
+     * <p>
+     *  注意,本地平台可以延迟在屏幕上呈现闪屏屏幕本机窗口。此方法的{@code true}的返回值仅保证隐藏初始屏幕窗口的条件尚未发生。
+     * 
+     * 
      * @return true if the splash screen is visible (has not been closed yet),
      *         false otherwise
      */
@@ -403,6 +486,8 @@ public final class SplashScreen {
      * The instance reference for the singleton.
      * (<code>null</code> if no instance exists yet.)
      *
+     * <p>
+     * 
      * @see #getSplashScreen
      * @see #close
      */

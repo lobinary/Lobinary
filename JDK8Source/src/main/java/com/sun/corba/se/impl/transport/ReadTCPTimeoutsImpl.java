@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,8 @@ package com.sun.corba.se.impl.transport;
 import com.sun.corba.se.spi.transport.ReadTimeouts;
 
 /**
+/* <p>
+/* 
  * @author Charlie Hunt
  */
 public class ReadTCPTimeoutsImpl implements ReadTimeouts

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,15 @@ package com.sun.jmx.snmp;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  在内部用于表示PDU的大小超过了数据包大小限制。
+ * <p>
+ *  您通常不需要使用此类,除非您决定实现自己的{@link com.sun.jmx.snmp.SnmpPduFactory SnmPduFactory}对象。
+ * <p>
+ *  <CODE> varBindCount </CODE>属性包含在抛出异常之前成功编码的<CODE> SnmpVarBind </CODE>的编号。当此数字未知时,其值为0。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public class SnmpTooBigException extends Exception {
@@ -49,6 +59,9 @@ public class SnmpTooBigException extends Exception {
   /**
    * Builds an <CODE>SnmpTooBigException</CODE> with
    * <CODE>varBindCount</CODE> set to 0.
+   * <p>
+   *  构建<CODE> SnmpTooBigException </CODE>,并将<CODE> varBindCount </CODE>设置为0。
+   * 
    */
   public SnmpTooBigException() {
     varBindCount = 0 ;
@@ -57,6 +70,10 @@ public class SnmpTooBigException extends Exception {
   /**
    * Builds an <CODE>SnmpTooBigException</CODE> with
    * <CODE>varBindCount</CODE> set to the specified value.
+   * <p>
+   *  构建<CODE> SnmpTooBigException </CODE>,并将<CODE> varBindCount </CODE>设置为指定的值。
+   * 
+   * 
    * @param n The <CODE>varBindCount</CODE> value.
    */
   public SnmpTooBigException(int n) {
@@ -68,6 +85,10 @@ public class SnmpTooBigException extends Exception {
    * Returns the number of <CODE>SnmpVarBind</CODE> successfully
    * encoded before the exception was thrown.
    *
+   * <p>
+   *  返回在抛出异常之前成功编码的<CODE> SnmpVarBind </CODE>的数目。
+   * 
+   * 
    * @return A positive integer (0 means the number is unknown).
    */
   public int getVarBindCount() {
@@ -76,6 +97,9 @@ public class SnmpTooBigException extends Exception {
 
   /**
    * The <CODE>varBindCount</CODE>.
+   * <p>
+   *  <CODE> varBindCount </CODE>。
+   * 
    * @serial
    */
   private int varBindCount ;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996,1997  - 保留所有权利(C)版权所有IBM Corp. 1996,1997  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.text;
@@ -44,6 +51,10 @@ import java.lang.Character;
  * Utility class for normalizing and merging patterns for collation.
  * This is to be used with MergeCollation for adding patterns to an
  * existing rule table.
+ * <p>
+ *  用于归一化和合并排序规则的实用程序类。这将与MergeCollat​​ion一起使用以将模式添加到现有规则表。
+ * 
+ * 
  * @see        MergeCollation
  * @author     Mark Davis, Helena Shih
  */
@@ -51,6 +62,9 @@ import java.lang.Character;
 class PatternEntry {
     /**
      * Gets the current extension, quoted
+     * <p>
+     *  获取当前扩展名,引用
+     * 
      */
     public void appendQuotedExtension(StringBuffer toAddTo) {
         appendQuoted(extension,toAddTo);
@@ -58,6 +72,9 @@ class PatternEntry {
 
     /**
      * Gets the current chars, quoted
+     * <p>
+     *  获取当前字符,引用
+     * 
      */
     public void appendQuotedChars(StringBuffer toAddTo) {
         appendQuoted(chars,toAddTo);
@@ -67,6 +84,9 @@ class PatternEntry {
      * WARNING this is used for searching in a Vector.
      * Because Vector.indexOf doesn't take a comparator,
      * this method is ill-defined and ignores strength.
+     * <p>
+     *  警告这用于在向量中搜索。因为Vector.indexOf不使用比较器,所以这个方法是不明确的,忽略了强度。
+     * 
      */
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -81,6 +101,9 @@ class PatternEntry {
 
     /**
      * For debugging.
+     * <p>
+     *  用于调试。
+     * 
      */
     public String toString() {
         StringBuffer result = new StringBuffer();
@@ -90,6 +113,9 @@ class PatternEntry {
 
     /**
      * Gets the strength of the entry.
+     * <p>
+     *  获得条目的强度。
+     * 
      */
     final int getStrength() {
         return strength;
@@ -97,6 +123,9 @@ class PatternEntry {
 
     /**
      * Gets the expanding characters of the entry.
+     * <p>
+     *  获取条目的展开字符。
+     * 
      */
     final String getExtension() {
         return extension;
@@ -104,6 +133,8 @@ class PatternEntry {
 
     /**
      * Gets the core characters of the entry.
+     * <p>
+     *  获取条目的核心字符。
      */
     final String getChars() {
         return chars;

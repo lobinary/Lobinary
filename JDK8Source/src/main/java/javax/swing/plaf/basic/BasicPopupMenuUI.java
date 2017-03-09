@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,10 @@ import sun.awt.AppContext;
  * A Windows L&amp;F implementation of PopupMenuUI.  This implementation
  * is a "combined" view/controller.
  *
+ * <p>
+ *  Windows L&amp; F实现的PopupMenuUI。这个实现是一个"组合"视图/控制器。
+ * 
+ * 
  * @author Georges Saab
  * @author David Karlton
  * @author Arnaud Weber
@@ -261,6 +266,10 @@ public class BasicPopupMenuUI extends PopupMenuUI {
      * This Listener fires the Action that provides the correct auditory
      * feedback.
      *
+     * <p>
+     *  此侦听器触发提供正确听觉反馈的操作。
+     * 
+     * 
      * @since 1.4
      */
     private class BasicPopupMenuListener implements PopupMenuListener {
@@ -278,6 +287,10 @@ public class BasicPopupMenuUI extends PopupMenuUI {
 
     /**
      * Handles mnemonic for children JMenuItems.
+     * <p>
+     *  处理儿童JMenuItems助记符。
+     * 
+     * 
      * @since 1.5
      */
     private class BasicMenuKeyListener implements MenuKeyListener {
@@ -964,6 +977,12 @@ public class BasicPopupMenuUI extends PopupMenuUI {
      * This helper is also installed as a KeyListener on root pane when menu
      * is active. It forwards key events to MenuSelectionManager for mnemonic
      * keys handling.
+     * <p>
+     *  此助手作为ChangeListener添加到MenuSelectionManager以监听菜单选择更改。
+     * 当激活菜单时,它将焦点传递到其父JRootPane,并在该JRootPane上安装一个ActionMap / InputMap对。这些地图是必要的,以便菜单导航工作。
+     * 当菜单被取消激活时,它会将焦点恢复到激活菜单之前所拥有的组件,并卸载地图。当菜单处于活动状态时,此助手也作为KeyListener安装在根窗格上。
+     * 它将键事件转发到MenuSelectionManager以进行助记键处理。
+     * 
      */
     static class MenuKeyboardHelper
         implements ChangeListener, KeyListener {
@@ -982,6 +1001,9 @@ public class BasicPopupMenuUI extends PopupMenuUI {
          * If this is false, KEY_TYPED and KEY_RELEASED events are NOT
          * processed. This is needed to avoid activating a menuitem when
          * the menu and menuitem share the same mnemonic.
+         * <p>
+         *  修正为4213634如果这是假的,KEY_TYPED和KEY_RELEASED事件不处理。这是需要的,以避免激活菜单和菜单和菜单共享同一个助记符。
+         * 
          */
         private boolean receivedKeyPressed = false;
 
@@ -1027,6 +1049,8 @@ public class BasicPopupMenuUI extends PopupMenuUI {
         /**
          * Return the last JPopupMenu in <code>path</code>,
          * or <code>null</code> if none found
+         * <p>
+         *  返回<code> path </code>中的最后一个JPopupMenu,如果没有找到,则返回<code> null </code>
          */
         JPopupMenu getActivePopup(MenuElement[] path) {
             for (int i=path.length-1; i>=0; i--) {

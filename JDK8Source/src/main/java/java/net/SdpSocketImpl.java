@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,8 @@ import sun.net.sdp.SdpSupport;
 
 /**
  * SocketImpl that supports the SDP protocol
+ * <p>
+ *  SocketImpl,支持SDP协议
  */
 class SdpSocketImpl extends PlainSocketImpl {
     SdpSocketImpl() { }

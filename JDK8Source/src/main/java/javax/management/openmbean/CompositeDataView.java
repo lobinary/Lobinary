@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -102,6 +103,29 @@ package javax.management.openmbean;
  * {@code CompositeData} that is generated will have both {@code units} and
  * {@code value}.</p>
  *
+ * <p>
+ *  <p> Java类可以实现此接口,以指示如何通过MXBean框架将其转换为{@code CompositeData}。</p>
+ * 
+ *  <p>使用这个类的一个典型方法是在{@code CompositeData}中添加额外的项目,除了在MXBean框架提供的{@code CompositeType}中声明的项目。
+ * 为此,您必须创建另一个{@code CompositeType},其中包含所有相同的项目,以及您的额外项目。</p>。
+ * 
+ *  <p>例如,假设您有一个类{@code Measure},它由一个名为{@code units}的String和一个{@code long}或{@code double}的{@code value} 
+ * 。
+ * 它可能如下所示：</p>。
+ * 
+ * <pre>
+ *  public class Measure实现CompositeDataView {private String units; private number value; // a Long或Double。
+ * 
+ *  public Measure(String units,Number value){this.units = units; this.value = value; }}
+ * 
+ *  public static Measure from(CompositeData cd){return new Measure((String)cd.get("units"),(Number)cd.get("value")); }
+ * }。
+ * 
+ *  public String getUnits(){return units; }}
+ * 
+ *  //不能调用getValue(),因为Number在MXBean中不是有效的类型//因此隐含的"value"属性将被拒绝。
+ *  public Number _getValue(){return value; }}。
+ * 
  * @see javax.management.MXBean
  *
  * @since 1.6
@@ -115,6 +139,19 @@ public interface CompositeDataView {
      * Otherwise, a remote client that receives the object might not be
      * able to reconstruct it.
      *
+     * <p>
+     * 
+     * public CompositeData toCompositeData(CompositeType ct){try {{@code List <String> itemNames = new ArrayList <String>(ct.keySet());}
+     *  {@code List <String> itemDescriptions = new ArrayList <String>(); } {@code List <OpenType <?>> itemTypes = new ArrayList <OpenType <?>>();}
+     *  for(String item：itemNames){itemDescriptions.add(ct.getDescription(item)); itemTypes.add(ct.getType(item)); }
+     *  itemNames.add("value"); itemDescriptions.add("度量的长或双值"); itemTypes.add((value instanceof Long)?Simpl
+     * eType.LONG：SimpleType.DOUBLE); CompositeType xct = new CompositeType(ct.getTypeName(),ct.getDescripti
+     * on(),itemNames.toArray(new String [0]),itemDescriptions.toArray(new String [0]),itemTypes.toArray(new
+     *  OpenType&lt;?& [0])); CompositeData cd = new CompositeDataSupport(xct,new String [] {"units","value"}
+     * ,new Object [] {units,value}); assert ct.isValue(cd); // check we've done it right return cd; } catch
+     * (Exception e){throw new RuntimeException(e); }}}。
+     * </pre>
+     * 
      * @param ct The expected {@code CompositeType} of the returned
      * value.  If the returned value is {@code cd}, then
      * {@code cd.getCompositeType().equals(ct)} should be true.

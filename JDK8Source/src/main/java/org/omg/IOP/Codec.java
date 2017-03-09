@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -19,6 +20,10 @@ package org.omg.IOP;
    * A <code>Codec</code> is obtained from the <code>CodecFactory</code>. 
    * The <code>CodecFactory</code> is obtained through a call to 
    * <code>ORB.resolve_initial_references( "CodecFactory" )</code>.
+   * <p>
+   *  ORB服务使用的IOR组件和服务上下文数据的格式通常被定义为编码IDL定义的数据类型的实例的CDR封装。
+   *  <code> Codec </code>提供了一种在它们的IDL数据类型和它们的CDR封装表示之间传输这些组件的机制。
+   * <p>
    */
 public interface Codec extends CodecOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
 {

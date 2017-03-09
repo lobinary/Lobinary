@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,16 +35,27 @@ import com.sun.jmx.snmp.SnmpSecurityParameters;
  * Security sub system interface. To allow engine integration, a security sub system must implement this interface.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  安全子系统接口。为了允许引擎集成,安全子系统必须实现此接口。 <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 public interface SnmpSecuritySubSystem extends SnmpSubSystem {
      /**
      * Instantiates an <CODE>SnmpSecurityCache</CODE> that is dependant to the model implementation. This call is routed to the dedicated model according to the model ID.
+     * <p>
+     *  实例化依赖于模型实现的<CODE> SnmpSecurityCache </CODE>。此呼叫根据型号ID路由到专用模型。
+     * 
+     * 
      * @param id The model ID.
      * @return The model dependant security cache.
      */
     public SnmpSecurityCache createSecurityCache(int id) throws SnmpUnknownSecModelException;
     /**
      * To release the previously created cache. This call is routed to the dedicated model according to the model ID.
+     * <p>
+     *  释放之前创建的缓存。此呼叫根据型号ID路由到专用模型。
+     * 
+     * 
      * @param id The model ID.
      * @param cache The security cache to release.
      */
@@ -53,6 +65,11 @@ public interface SnmpSecuritySubSystem extends SnmpSubSystem {
      /**
      * Called when a request is to be sent to the network. It must be securized. This call is routed to the dedicated model according to the model ID.
      * <BR>The specified parameters are defined in RFC 2572 (see also the {@link com.sun.jmx.snmp.SnmpV3Message} class).
+     * <p>
+     *  当请求发送到网络时调用。它必须得到安全。此呼叫根据型号ID路由到专用模型。
+     *  <BR>指定的参数在RFC 2572中定义(另请参阅{@link com.sun.jmx.snmp.SnmpV3Message}类)。
+     * 
+     * 
      * @param cache The cache that has been created by calling <CODE>createSecurityCache</CODE> on this model.
      * @param version The SNMP protocol version.
      * @param msgID The current request id.
@@ -84,6 +101,11 @@ public interface SnmpSecuritySubSystem extends SnmpSubSystem {
     /**
      * Called when a response is to be sent to the network. It must be securized. This call is routed to the dedicated model according to the model ID.
      * <BR>The specified parameters are defined in RFC 2572 (see also the {@link com.sun.jmx.snmp.SnmpV3Message} class).
+     * <p>
+     *  当响应发送到网络时调用。它必须得到安全。此呼叫根据型号ID路由到专用模型。
+     *  <BR>指定的参数在RFC 2572中定义(另请参阅{@link com.sun.jmx.snmp.SnmpV3Message}类)。
+     * 
+     * 
      * @param cache The cache that has been created by calling <CODE>createSecurityCache</CODE> on this model.
      * @param version The SNMP protocol version.
      * @param msgID The current request id.
@@ -115,6 +137,11 @@ public interface SnmpSecuritySubSystem extends SnmpSubSystem {
       /**
      * Called when a request is received from the network. It handles authentication and privacy. This call is routed to the dedicated model according to the model ID.
      * <BR>The specified parameters are defined in RFC 2572 (see also the {@link com.sun.jmx.snmp.SnmpV3Message} class).
+     * <p>
+     *  当从网络接收到请求时调用。它处理身份验证和隐私。此呼叫根据型号ID路由到专用模型。
+     *  <BR>指定的参数在RFC 2572中定义(另请参阅{@link com.sun.jmx.snmp.SnmpV3Message}类)。
+     * 
+     * 
      * @param cache The cache that has been created by calling <CODE>createSecurityCache</CODE> on this model.
      * @param version The SNMP protocol version.
      * @param msgID The current request id.
@@ -147,6 +174,10 @@ public interface SnmpSecuritySubSystem extends SnmpSubSystem {
           /**
      * Called when a response is received from the network. It handles authentication and privacy. This call is routed to the dedicated model according to the model ID.
      * <BR>The specified parameters are defined in RFC 2572 (see also the {@link com.sun.jmx.snmp.SnmpV3Message} class).
+     * <p>
+     * 从网络接收到响应时调用。它处理身份验证和隐私。此呼叫根据型号ID路由到专用模型。
+     *  <BR>指定的参数在RFC 2572中定义(另请参阅{@link com.sun.jmx.snmp.SnmpV3Message}类)。
+     * 
      * @param cache The cache that has been created by calling <CODE>createSecurityCache</CODE> on this model.
      * @param version The SNMP protocol version.
      * @param msgID The current request id.

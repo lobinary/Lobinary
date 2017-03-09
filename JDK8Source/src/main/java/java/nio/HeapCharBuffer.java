@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ package java.nio;
 
 
 
+ * <p>
+ *  读/写HeapCharBuffer。
+ * 
  */
 
 class HeapCharBuffer
@@ -50,6 +54,9 @@ class HeapCharBuffer
     protected final char[] hb;
     protected final int offset;
 
+    /* <p>
+    /*  protected final char [] hb; protected final int offset;
+    /* 
     */
 
     HeapCharBuffer(int cap, int lim) {            // package-private
@@ -58,6 +65,9 @@ class HeapCharBuffer
         /*
         hb = new char[cap];
         offset = 0;
+        /* <p>
+        /*  hb = new char [cap]; offset = 0;
+        /* 
         */
 
 
@@ -71,6 +81,9 @@ class HeapCharBuffer
         /*
         hb = buf;
         offset = 0;
+        /* <p>
+        /*  hb = buf; offset = 0;
+        /* 
         */
 
 
@@ -87,6 +100,8 @@ class HeapCharBuffer
         /*
         hb = buf;
         offset = off;
+        /* <p>
+        /*  hb = buf; offset = off;
         */
 
 

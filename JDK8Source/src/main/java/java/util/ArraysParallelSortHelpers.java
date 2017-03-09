@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -71,6 +72,22 @@ import java.util.concurrent.CountedCompleter;
  * temp workspace array slices that we will have already allocated, so
  * avoids redundant allocation. (Except for DualPivotQuicksort byte[]
  * sort, that does not ever use a workspace array.)
+ * <p>
+ *  用于Arrays.parallelSort中并行排序方法的辅助工具。
+ * 
+ *  对于每个基本类型,加上Object,我们定义一个静态类来包含该类型的Sorter和Merger实现：
+ * 
+ *  基于CilkSort的分类器类<A href="http://supertech.lcs.mit.edu/cilk/"> Cilk </A>：基本算法：如果数组大小较小,只需使用顺序快速排序(通过数组
+ * .sort)否则：1.将数组中断一半。
+ * 对于每一半,a。打破一半(即四分之一),b。排序季度c。将它们合并在一起3.将两半合并在一起。
+ * 
+ *  分裂的一个原因是,这保证最后的排序是在主数组,而不是工作区数组。 (每个子节点步骤上的工作区和主交换角色。)叶级排序使用关联的顺序排序。
+ * 
+ * 合并类对Sorter执行合并。它们的结构使得如果底层的排序是稳定的(对于TimSort是正确的),那么整个排序也是如此。
+ * 如果足够大,它们将两个分区中的最大分割成两半,通过二分搜索找到小分区中的最大点小于较大分区的下半部分的开始;然后并行合并这两个分区。
+ * 部分地,为了确保以稳定性保持顺序触发任务,当前的CountedCompleter设计需要一些小任务作为用于触发完成任务的占位符。
+ * 这些类(EmptyCompleter和Relay)不需要跟踪数组,并且不会被分叉,所以不要保持任何状态。
+ * 
  */
 /*package*/ class ArraysParallelSortHelpers {
 
@@ -80,11 +97,20 @@ import java.util.concurrent.CountedCompleter;
      * compute() methods, We pack these into as few lines as possible,
      * and hoist consistency checks among them before main loops, to
      * reduce distraction.
+     * <p>
+     *  原语类版本(FJByte ... FJDouble)除了类型声明之外彼此相同。
+     * 
+     *  基本顺序排序依赖于接受我们已经分配的临时工作区数组切片的TimSort,ComparableTimSort和DualPivotQuicksort排序方法的非公开版本,因此避免了冗余分配。
+     *  (除了DualPivotQuicksort byte []排序,它不使用工作区数组)。
+     * 
      */
 
     /**
      * A placeholder task for Sorters, used for the lowest
      * quartile task, that does not need to maintain array state.
+     * <p>
+     *  / *样式注释：任务类有很多参数,它们被存储为任务字段并复制到局部变量并在compute()方法中使用,我们将这些参数包含在尽可能少的行中,并在它们之间提升一致性检查主循环,以减少分心。
+     * 
      */
     static final class EmptyCompleter extends CountedCompleter<Void> {
         static final long serialVersionUID = 2446542900576103244L;
@@ -94,6 +120,9 @@ import java.util.concurrent.CountedCompleter;
 
     /**
      * A trigger for secondary merge of two merges
+     * <p>
+     * 用于最低四分位数任务的Sorters的占位符任务,不需要保持数组状态。
+     * 
      */
     static final class Relay extends CountedCompleter<Void> {
         static final long serialVersionUID = 2446542900576103244L;

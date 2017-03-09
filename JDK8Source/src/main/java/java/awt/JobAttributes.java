@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,12 +55,36 @@ package java.awt;
  * has a corresponding <code>set<i>attributeName</i>ToDefault</code> method.
  * Default value fields are not provided.
  *
+ * <p>
+ *  控制打印作业的一组属性。
+ * <p>
+ *  该类的实例控制每个打印作业的份数,默认选择,目的地,打印对话框,文件和打印机名称,页面范围,多文档处理(包括整理)和多页整版(例如双面),其​​使用实例。
+ * 属性名称尽可能符合Internet打印协议(IPP)1.1。属性值在可能的情况下部分符合。
+ * <p>
+ *  要使用一个接受一个内部类类型的方法,传递一个引用到内部类的一个常量字段。客户端代码无法创建内部类类型的新实例,因为这些类都没有公共构造函数。
+ * 例如,要将打印对话框类型设置为跨平台,纯Java打印对话框,请使用以下代码：。
+ * <pre>
+ *  import java.awt.JobAttributes;
+ * 
+ *  public class PureJavaPrintDialogExample {public void setPureJavaPrintDialog(JobAttributes jobAttributes){jobAttributes.setDialog(JobAttributes.DialogType.COMMON); }
+ * }。
+ * </pre>
+ * <p>
+ *  支持<i> attributeName </i> -default value的每个IPP属性都有相应的<code> set <i> attributeName </i> ToDefault </code>
+ * 方法。
+ * 不提供默认值字段。
+ * 
+ * 
  * @author      David Mendenhall
  * @since 1.3
  */
 public final class JobAttributes implements Cloneable {
     /**
      * A type-safe enumeration of possible default selection states.
+     * <p>
+     *  可能的默认选择状态的类型安全枚举。
+     * 
+     * 
      * @since 1.3
      */
     public static final class DefaultSelectionType extends AttributeValue {
@@ -74,18 +99,27 @@ public final class JobAttributes implements Cloneable {
         /**
          * The <code>DefaultSelectionType</code> instance to use for
          * specifying that all pages of the job should be printed.
+         * <p>
+         * 用于指定应打印作业的所有页面的<code> DefaultSelectionType </code>实例。
+         * 
          */
         public static final DefaultSelectionType ALL =
            new DefaultSelectionType(I_ALL);
         /**
          * The <code>DefaultSelectionType</code> instance to use for
          * specifying that a range of pages of the job should be printed.
+         * <p>
+         *  用于指定应打印作业页面范围的<code> DefaultSelectionType </code>实例。
+         * 
          */
         public static final DefaultSelectionType RANGE =
            new DefaultSelectionType(I_RANGE);
         /**
          * The <code>DefaultSelectionType</code> instance to use for
          * specifying that the current selection should be printed.
+         * <p>
+         *  用于指定应打印当前选择的<code> DefaultSelectionType </code>实例。
+         * 
          */
         public static final DefaultSelectionType SELECTION =
            new DefaultSelectionType(I_SELECTION);
@@ -97,6 +131,10 @@ public final class JobAttributes implements Cloneable {
 
     /**
      * A type-safe enumeration of possible job destinations.
+     * <p>
+     *  可能的作业目的地的类型安全枚举。
+     * 
+     * 
      * @since 1.3
      */
     public static final class DestinationType extends AttributeValue {
@@ -110,12 +148,18 @@ public final class JobAttributes implements Cloneable {
         /**
          * The <code>DestinationType</code> instance to use for
          * specifying print to file.
+         * <p>
+         *  用于指定打印到文件的<code> DestinationType </code>实例。
+         * 
          */
         public static final DestinationType FILE =
             new DestinationType(I_FILE);
         /**
          * The <code>DestinationType</code> instance to use for
          * specifying print to printer.
+         * <p>
+         *  用于指定打印到打印机的<code> DestinationType </code>实例。
+         * 
          */
         public static final DestinationType PRINTER =
             new DestinationType(I_PRINTER);
@@ -127,6 +171,10 @@ public final class JobAttributes implements Cloneable {
 
     /**
      * A type-safe enumeration of possible dialogs to display to the user.
+     * <p>
+     *  可显示给用户的可能对话框的类型安全枚举。
+     * 
+     * 
      * @since 1.3
      */
     public static final class DialogType extends AttributeValue {
@@ -141,16 +189,25 @@ public final class JobAttributes implements Cloneable {
         /**
          * The <code>DialogType</code> instance to use for
          * specifying the cross-platform, pure Java print dialog.
+         * <p>
+         *  用于指定跨平台,纯Java打印对话框的<code> DialogType </code>实例。
+         * 
          */
         public static final DialogType COMMON = new DialogType(I_COMMON);
         /**
          * The <code>DialogType</code> instance to use for
          * specifying the platform's native print dialog.
+         * <p>
+         *  用于指定平台的本机打印对话框的<code> DialogType </code>实例。
+         * 
          */
         public static final DialogType NATIVE = new DialogType(I_NATIVE);
         /**
          * The <code>DialogType</code> instance to use for
          * specifying no print dialog.
+         * <p>
+         *  用于指定无打印对话框的<code> DialogType </code>实例。
+         * 
          */
         public static final DialogType NONE = new DialogType(I_NONE);
 
@@ -163,6 +220,10 @@ public final class JobAttributes implements Cloneable {
      * A type-safe enumeration of possible multiple copy handling states.
      * It is used to control how the sheets of multiple copies of a single
      * document are collated.
+     * <p>
+     *  可能的多个拷贝处理状态的类型安全枚举。它用于控制如何整理单个文档的多个副本的工作表。
+     * 
+     * 
      * @since 1.3
      */
     public static final class MultipleDocumentHandlingType extends
@@ -178,6 +239,9 @@ public final class JobAttributes implements Cloneable {
         /**
          * The <code>MultipleDocumentHandlingType</code> instance to use for specifying
          * that the job should be divided into separate, collated copies.
+         * <p>
+         *  用于指定作业应划分为单独的分页副本的<code> MultipleDocumentHandlingType </code>实例。
+         * 
          */
         public static final MultipleDocumentHandlingType
             SEPARATE_DOCUMENTS_COLLATED_COPIES =
@@ -186,6 +250,9 @@ public final class JobAttributes implements Cloneable {
         /**
          * The <code>MultipleDocumentHandlingType</code> instance to use for specifying
          * that the job should be divided into separate, uncollated copies.
+         * <p>
+         *  用于指定作业应该分为单独的未分层副本的<code> MultipleDocumentHandlingType </code>实例。
+         * 
          */
         public static final MultipleDocumentHandlingType
             SEPARATE_DOCUMENTS_UNCOLLATED_COPIES =
@@ -200,6 +267,10 @@ public final class JobAttributes implements Cloneable {
     /**
      * A type-safe enumeration of possible multi-page impositions. These
      * impositions are in compliance with IPP 1.1.
+     * <p>
+     *  可能的多页imposition的类型安全枚举。这些义务符合IPP 1.1。
+     * 
+     * 
      * @since 1.3
      */
     public static final class SidesType extends AttributeValue {
@@ -215,6 +286,9 @@ public final class JobAttributes implements Cloneable {
          * The <code>SidesType</code> instance to use for specifying that
          * consecutive job pages should be printed upon the same side of
          * consecutive media sheets.
+         * <p>
+         * 用于指定连续作业页的<code> SidesType </code>实例应该打印在连续介质页的同一面上。
+         * 
          */
         public static final SidesType ONE_SIDED = new SidesType(I_ONE_SIDED);
         /**
@@ -223,6 +297,9 @@ public final class JobAttributes implements Cloneable {
          * of consecutive media sheets, such that the orientation of each pair
          * of pages on the medium would be correct for the reader as if for
          * binding on the long edge.
+         * <p>
+         *  用于指定连续作业页面的<code> SidesType </code>实例应当被打印在连续介质页的正面和背面上,使得介质上的每对页面的方向对于读者是正确的如果用于绑定在长边上。
+         * 
          */
         public static final SidesType TWO_SIDED_LONG_EDGE =
             new SidesType(I_TWO_SIDED_LONG_EDGE);
@@ -232,6 +309,9 @@ public final class JobAttributes implements Cloneable {
          * of consecutive media sheets, such that the orientation of each pair
          * of pages on the medium would be correct for the reader as if for
          * binding on the short edge.
+         * <p>
+         *  用于指定连续作业页面的<code> SidesType </code>实例应当被打印在连续介质页的正面和背面上,使得介质上的每对页面的方向对于读者是正确的如果用于绑定在短边上。
+         * 
          */
         public static final SidesType TWO_SIDED_SHORT_EDGE =
             new SidesType(I_TWO_SIDED_SHORT_EDGE);
@@ -268,6 +348,14 @@ public final class JobAttributes implements Cloneable {
      * to <code>MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_UNCOLLATED_COPIES</code>.
      * Sides defaults to <code>SidesType.ONE_SIDED</code>. File name defaults
      * to <code>null</code>.
+     * <p>
+     *  构造具有每个属性的默认值的<code> JobAttributes </code>实例。对话框默认为<code> DialogType.NATIVE </code>。
+     * 最小页面默认为<code> 1 </code>。最大页面默认为<code> Integer.MAX_VALUE </code>。
+     * 目标默认为<code> DestinationType.PRINTER </code>。选择默认为<code> DefaultSelectionType.ALL </code>。
+     * 份数默认为<code> 1 </code>。
+     * 多个文档处理默认为<code> MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_UNCOLLATED_COPIES </code>。
+     * 侧面默认为<code> SidesType.ONE_SIDED </code>。文件名默认为<code> null </code>。
+     * 
      */
     public JobAttributes() {
         setCopiesToDefault();
@@ -284,6 +372,10 @@ public final class JobAttributes implements Cloneable {
      * Constructs a <code>JobAttributes</code> instance which is a copy
      * of the supplied <code>JobAttributes</code>.
      *
+     * <p>
+     *  构造一个<code> JobAttributes </code>实例,它是提供的<code> JobAttributes </code>的副本。
+     * 
+     * 
      * @param   obj the <code>JobAttributes</code> to copy
      */
     public JobAttributes(JobAttributes obj) {
@@ -294,6 +386,10 @@ public final class JobAttributes implements Cloneable {
      * Constructs a <code>JobAttributes</code> instance with the
      * specified values for every attribute.
      *
+     * <p>
+     * 构造具有每个属性的指定值的<code> JobAttributes </code>实例。
+     * 
+     * 
      * @param   copies an integer greater than 0
      * @param   defaultSelection <code>DefaultSelectionType.ALL</code>,
      *          <code>DefaultSelectionType.RANGE</code>, or
@@ -353,6 +449,10 @@ public final class JobAttributes implements Cloneable {
     /**
      * Creates and returns a copy of this <code>JobAttributes</code>.
      *
+     * <p>
+     *  创建并返回此<code> JobAttributes </code>的副本。
+     * 
+     * 
      * @return  the newly created copy; it is safe to cast this Object into
      *          a <code>JobAttributes</code>
      */
@@ -369,6 +469,10 @@ public final class JobAttributes implements Cloneable {
      * Sets all of the attributes of this <code>JobAttributes</code> to
      * the same values as the attributes of obj.
      *
+     * <p>
+     *  将此<code> JobAttributes </code>的所有属性设置为与obj的属性相同的值。
+     * 
+     * 
      * @param   obj the <code>JobAttributes</code> to copy
      */
     public void set(JobAttributes obj) {
@@ -395,6 +499,10 @@ public final class JobAttributes implements Cloneable {
      * using these attributes. This attribute is updated to the value chosen
      * by the user.
      *
+     * <p>
+     *  返回应用程序应为使用这些属性的作业呈现的副本数。此属性更新为用户选择的值。
+     * 
+     * 
      * @return  an integer greater than 0.
      */
     public int getCopies() {
@@ -406,6 +514,10 @@ public final class JobAttributes implements Cloneable {
      * using these attributes. Not specifying this attribute is equivalent to
      * specifying <code>1</code>.
      *
+     * <p>
+     *  指定应用程序应为使用这些属性的作业呈现的副本数。不指定此属性等效于指定<code> 1 </code>。
+     * 
+     * 
      * @param   copies an integer greater than 0
      * @throws  IllegalArgumentException if <code>copies</code> is less than
      *      or equal to 0
@@ -421,6 +533,9 @@ public final class JobAttributes implements Cloneable {
     /**
      * Sets the number of copies the application should render for jobs using
      * these attributes to the default. The default number of copies is 1.
+     * <p>
+     *  设置应用程序应使用这些属性为默认值呈现的副本数。默认份数为1。
+     * 
      */
     public void setCopiesToDefault() {
         setCopies(1);
@@ -432,6 +547,10 @@ public final class JobAttributes implements Cloneable {
      * <code>getPageRanges</code>, or the current selection. This attribute
      * is updated to the value chosen by the user.
      *
+     * <p>
+     *  指定对于使用这些属性的作业,应用程序是否应打印所有页面,由<code> getPageRanges </code>的返回值指定的范围或当前选择。此属性更新为用户选择的值。
+     * 
+     * 
      * @return  DefaultSelectionType.ALL, DefaultSelectionType.RANGE, or
      *          DefaultSelectionType.SELECTION
      */
@@ -445,6 +564,11 @@ public final class JobAttributes implements Cloneable {
      * <code>getPageRanges</code>, or the current selection. Not specifying
      * this attribute is equivalent to specifying DefaultSelectionType.ALL.
      *
+     * <p>
+     *  指定对于使用这些属性的作业,应用程序是否应打印所有页面,由<code> getPageRanges </code>返回值指定的范围或当前选择。
+     * 不指定此属性等效于指定DefaultSelectionType.ALL。
+     * 
+     * 
      * @param   defaultSelection DefaultSelectionType.ALL,
      *          DefaultSelectionType.RANGE, or DefaultSelectionType.SELECTION.
      * @throws  IllegalArgumentException if defaultSelection is <code>null</code>
@@ -462,6 +586,10 @@ public final class JobAttributes implements Cloneable {
      * these attributes. This attribute is updated to the value chosen by the
      * user.
      *
+     * <p>
+     *  指定对使用这些属性的作业的输出是打印机还是文件。此属性更新为用户选择的值。
+     * 
+     * 
      * @return  DesintationType.FILE or DesintationType.PRINTER
      */
     public DestinationType getDestination() {
@@ -473,6 +601,10 @@ public final class JobAttributes implements Cloneable {
      * these attributes. Not specifying this attribute is equivalent to
      * specifying DesintationType.PRINTER.
      *
+     * <p>
+     * 指定对使用这些属性的作业的输出是打印机还是文件。不指定此属性等效于指定DesintationType.PRINTER。
+     * 
+     * 
      * @param   destination DesintationType.FILE or DesintationType.PRINTER.
      * @throws  IllegalArgumentException if destination is null.
      */
@@ -495,6 +627,12 @@ public final class JobAttributes implements Cloneable {
      * This attribute cannot be modified by, and is not subject to any
      * limitations of, the implementation or the target printer.
      *
+     * <p>
+     *  返回对于使用这些属性的作业,用户是否应该看到打印对话框,以修改打印设置,以及应显示哪种类型的打印对话框。 DialogType.COMMON表示跨平台,纯Java打印对话框。
+     *  DialogType.NATIVE表示平台的本地打印对话框。如果平台不支持本地打印对话框,则会显示纯Java打印对话框。 DialogType.NONE不指定打印对话框(即背景打印)。
+     * 此属性不能由实施或目标打印机修改,并且不受其实施或目标打印机的任何限制。
+     * 
+     * 
      * @return  <code>DialogType.COMMON</code>, <code>DialogType.NATIVE</code>, or
      *          <code>DialogType.NONE</code>
      */
@@ -513,6 +651,12 @@ public final class JobAttributes implements Cloneable {
      * Not specifying this attribute is equivalent to specifying
      * DialogType.NATIVE.
      *
+     * <p>
+     *  指定对于使用这些属性的作业,用户是否应该看到打印对话框,以修改打印设置,以及应显示哪种类型的打印对话框。 DialogType.COMMON表示跨平台,纯Java打印对话框。
+     *  DialogType.NATIVE表示平台的本地打印对话框。如果平台不支持本地打印对话框,则会显示纯Java打印对话框。 DialogType.NONE不指定打印对话框(即背景打印)。
+     * 不指定此属性等效于指定DialogType.NATIVE。
+     * 
+     * 
      * @param   dialog DialogType.COMMON, DialogType.NATIVE, or
      *          DialogType.NONE.
      * @throws  IllegalArgumentException if dialog is null.
@@ -529,6 +673,10 @@ public final class JobAttributes implements Cloneable {
      * Specifies the file name for the output file for jobs using these
      * attributes. This attribute is updated to the value chosen by the user.
      *
+     * <p>
+     *  指定使用这些属性的作业的输出文件的文件名。此属性更新为用户选择的值。
+     * 
+     * 
      * @return  the possibly <code>null</code> file name
      */
     public String getFileName() {
@@ -539,6 +687,10 @@ public final class JobAttributes implements Cloneable {
      * Specifies the file name for the output file for jobs using these
      * attributes. Default is platform-dependent and implementation-defined.
      *
+     * <p>
+     * 指定使用这些属性的作业的输出文件的文件名。默认值是平台相关的和实现定义的。
+     * 
+     * 
      * @param   fileName the possibly null file name.
      */
     public void setFileName(String fileName) {
@@ -554,6 +706,12 @@ public final class JobAttributes implements Cloneable {
      * application should honor the return value of <code>getPageRanges</code>
      * over the return value of this method, if possible.
      *
+     * <p>
+     *  对于使用这些属性的作业,返回要打印的第一页(如果要打印一系列页面)。此属性更新为用户选择的值。
+     * 应用程序应忽略输出上的此属性,除非<code> getDefaultSelection </code>方法的返回值为DefaultSelectionType.RANGE。
+     * 如果可能,应用程序应该遵守<code> getPageRanges </code>的返回值超过此方法的返回值。
+     * 
+     * 
      * @return  an integer greater than zero and less than or equal to
      *          <i>toPage</i> and greater than or equal to <i>minPage</i> and
      *          less than or equal to <i>maxPage</i>.
@@ -579,6 +737,12 @@ public final class JobAttributes implements Cloneable {
      * or toPage is equivalent to calling
      * setPageRanges(new int[][] { new int[] { <i>minPage</i> } });
      *
+     * <p>
+     *  对于使用这些属性的作业,指定要打印的第一页,如果要打印一系列页面。如果未指定此属性,那么将使用来自pageRanges属性的值。
+     * 如果指定了pageRanges和fromPage和toPage中的一个或两个,则页面宽度优先。
+     * 没有指定pageRanges,fromPage或toPage等效于调用setPageRanges(new int [] [] {new int [] {<i> minPage </i>}});。
+     * 
+     * 
      * @param   fromPage an integer greater than zero and less than or equal to
      *          <i>toPage</i> and greater than or equal to <i>minPage</i> and
      *          less than or equal to <i>maxPage</i>.
@@ -602,6 +766,10 @@ public final class JobAttributes implements Cloneable {
      * modified by, and is not subject to any limitations of, the
      * implementation or the target printer.
      *
+     * <p>
+     *  指定用户可以指定为使用这些属性的作业要打印的最后一页的最大值。此属性不能由实施或目标打印机修改,并且不受其实施或目标打印机的任何限制。
+     * 
+     * 
      * @return  an integer greater than zero and greater than or equal
      *          to <i>minPage</i>.
      */
@@ -614,6 +782,10 @@ public final class JobAttributes implements Cloneable {
      * be printed for jobs using these attributes. Not specifying this
      * attribute is equivalent to specifying <code>Integer.MAX_VALUE</code>.
      *
+     * <p>
+     *  指定用户可以指定为使用这些属性的作业要打印的最后一页的最大值。不指定此属性等效于指定<code> Integer.MAX_VALUE </code>。
+     * 
+     * 
      * @param   maxPage an integer greater than zero and greater than or equal
      *          to <i>minPage</i>
      * @throws  IllegalArgumentException if one or more of the above
@@ -633,6 +805,10 @@ public final class JobAttributes implements Cloneable {
      * modified by, and is not subject to any limitations of, the
      * implementation or the target printer.
      *
+     * <p>
+     * 指定用户可以指定为使用这些属性的作业要打印的第一页的最小值。此属性不能由实施或目标打印机修改,并且不受其实施或目标打印机的任何限制。
+     * 
+     * 
      * @return  an integer greater than zero and less than or equal
      *          to <i>maxPage</i>.
      */
@@ -645,6 +821,10 @@ public final class JobAttributes implements Cloneable {
      * be printed for jobs using these attributes. Not specifying this
      * attribute is equivalent to specifying <code>1</code>.
      *
+     * <p>
+     *  指定用户可以指定为使用这些属性的作业要打印的第一页的最小值。不指定此属性等效于指定<code> 1 </code>。
+     * 
+     * 
      * @param   minPage an integer greater than zero and less than or equal
      *          to <i>maxPage</i>.
      * @throws  IllegalArgumentException if one or more of the above
@@ -663,6 +843,10 @@ public final class JobAttributes implements Cloneable {
      * jobs using these attributes. This attribute is updated to the value
      * chosen by the user.
      *
+     * <p>
+     *  指定对使用这些属性的作业处理多个副本(包括归类)。此属性更新为用户选择的值。
+     * 
+     * 
      * @return
      *     MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_COLLATED_COPIES or
      *     MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_UNCOLLATED_COPIES.
@@ -677,6 +861,11 @@ public final class JobAttributes implements Cloneable {
      * to specifying
      * MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_UNCOLLATED_COPIES.
      *
+     * <p>
+     *  指定对使用这些属性的作业处理多个副本(包括归类)。
+     * 不指定此属性等同于指定MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_UNCOLLATED_COPIES。
+     * 
+     * 
      * @param   multipleDocumentHandling
      *     MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_COLLATED_COPIES or
      *     MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_UNCOLLATED_COPIES.
@@ -695,6 +884,10 @@ public final class JobAttributes implements Cloneable {
      * Sets the handling of multiple copies, including collation, for jobs
      * using these attributes to the default. The default handling is
      * MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_UNCOLLATED_COPIES.
+     * <p>
+     *  将使用这些属性的作业的多个副本(包括归类)的处理设置为默认值。
+     * 默认处理为MultipleDocumentHandlingType.SEPARATE_DOCUMENTS_UNCOLLATED_COPIES。
+     * 
      */
     public void setMultipleDocumentHandlingToDefault() {
         setMultipleDocumentHandling(
@@ -709,6 +902,11 @@ public final class JobAttributes implements Cloneable {
      * return value of the <code>getDefaultSelection</code> method is
      * DefaultSelectionType.RANGE.
      *
+     * <p>
+     *  对于使用这些属性的作业,指定要打印的页面范围(如果要打印一页范围)。所有范围数字都包括在内。此属性更新为用户选择的值。
+     * 应用程序应忽略输出上的此属性,除非<code> getDefaultSelection </code>方法的返回值为DefaultSelectionType.RANGE。
+     * 
+     * 
      * @return  an array of integer arrays of 2 elements. An array
      *          is interpreted as a range spanning all pages including and
      *          between the specified pages. Ranges must be in ascending
@@ -750,6 +948,14 @@ public final class JobAttributes implements Cloneable {
      * calling setPageRanges(new int[][] { new int[] { <i>minPage</i>,
      *                                                 <i>minPage</i> } });
      *
+     * <p>
+     * 对于使用这些属性的作业,指定要打印的页面范围(如果要打印一页范围)。所有范围数字都包括在内。如果未指定此属性,那么将使用fromPage和toPages属性中的值。
+     * 如果指定了pageRanges和fromPage和toPage中的一个或两个,则页面宽度优先。
+     * 没有指定pageRanges,fromPage或toPage等效于调用setPageRanges(new int [] [] {new int [] {<i> minPage </i>,<i> minPage </i>}
+     * });。
+     * 如果指定了pageRanges和fromPage和toPage中的一个或两个,则页面宽度优先。
+     * 
+     * 
      * @param   pageRanges an array of integer arrays of 2 elements. An array
      *          is interpreted as a range spanning all pages including and
      *          between the specified pages. Ranges must be in ascending
@@ -808,6 +1014,10 @@ public final class JobAttributes implements Cloneable {
      * Returns the destination printer for jobs using these attributes. This
      * attribute is updated to the value chosen by the user.
      *
+     * <p>
+     *  返回使用这些属性的作业的目标打印机。此属性更新为用户选择的值。
+     * 
+     * 
      * @return  the possibly null printer name.
      */
     public String getPrinter() {
@@ -818,6 +1028,10 @@ public final class JobAttributes implements Cloneable {
      * Specifies the destination printer for jobs using these attributes.
      * Default is platform-dependent and implementation-defined.
      *
+     * <p>
+     *  为使用这些属性的作业指定目标打印机。默认值是平台相关的和实现定义的。
+     * 
+     * 
      * @param   printer the possibly null printer name.
      */
     public void setPrinter(String printer) {
@@ -840,6 +1054,14 @@ public final class JobAttributes implements Cloneable {
      * edge. This imposition is sometimes called <i>tumble</i>. This attribute
      * is updated to the value chosen by the user.
      *
+     * <p>
+     * 返回对于使用这些属性的作业,应如何将连续页面强加在打印介质的两侧。 SidesType.ONE_SIDED将每个连续页面强加在连续媒体工作表的同一面上。此拼版有时称为<i> simplex </i>。
+     *  SidesType.TWO_SIDED_LONG_EDGE将每个连续的页对施加在连续介质页的前侧和后侧上,使得介质上的每对页的取向对于读取者来说对于在长边上的绑定是正确的。
+     * 此拼版有时称为<i>双面</i>。
+     *  SidesType.TWO_SIDED_SHORT_EDGE将连续的一对页面施加在连续介质页的前侧和后侧,使得介质上的每对页面的取向对于读取器来说对于在短边缘上的绑定是正确的。
+     * 此拼版有时称为<i>滚动</i>。此属性更新为用户选择的值。
+     * 
+     * 
      * @return  SidesType.ONE_SIDED, SidesType.TWO_SIDED_LONG_EDGE, or
      *          SidesType.TWO_SIDED_SHORT_EDGE.
      */
@@ -863,6 +1085,14 @@ public final class JobAttributes implements Cloneable {
      * edge. This imposition is sometimes called <i>tumble</i>. Not specifying
      * this attribute is equivalent to specifying SidesType.ONE_SIDED.
      *
+     * <p>
+     * 指定对于使用这些属性的作业,应如何将连续页面强加在打印介质的两侧。 SidesType.ONE_SIDED将每个连续页面强加在连续媒体工作表的同一面上。此拼版有时称为<i> simplex </i>。
+     *  SidesType.TWO_SIDED_LONG_EDGE将每个连续的页对施加在连续介质页的前侧和后侧,使得介质上的每对页面的取向对于读取者来说对于在长边上的绑定是正确的。
+     * 此拼版有时称为<i>双面</i>。
+     *  SidesType.TWO_SIDED_SHORT_EDGE将每个连续的页对施加在连续介质页的前侧和后侧上,使得介质上的每对页的取向对于读取者来说对于在短边上的绑定是正确的。
+     * 此拼版有时称为<i>滚动</i>。不指定此属性等效于指定SidesType.ONE_SIDED。
+     * 
+     * 
      * @param   sides SidesType.ONE_SIDED, SidesType.TWO_SIDED_LONG_EDGE, or
      *          SidesType.TWO_SIDED_SHORT_EDGE.
      * @throws  IllegalArgumentException if sides is null.
@@ -879,6 +1109,9 @@ public final class JobAttributes implements Cloneable {
      * Sets how consecutive pages should be imposed upon the sides of the
      * print medium for jobs using these attributes to the default. The
      * default imposition is SidesType.ONE_SIDED.
+     * <p>
+     *  设置如何将使用这些属性的作业的连续页面应用于打印介质两侧的默认值。默认拼版是SidesType.ONE_SIDED。
+     * 
      */
     public void setSidesToDefault() {
         setSides(SidesType.ONE_SIDED);
@@ -893,6 +1126,12 @@ public final class JobAttributes implements Cloneable {
      * application should honor the return value of <code>getPageRanges</code>
      * over the return value of this method, if possible.
      *
+     * <p>
+     * 对于使用这些属性的作业,返回要打印的最后一页(包括),如果要打印一页范围。此属性更新为用户选择的值。
+     * 应用程序应忽略输出上的此属性,除非<code> getDefaultSelection </code>方法的返回值为DefaultSelectionType.RANGE。
+     * 如果可能,应用程序应该遵守<code> getPageRanges </code>的返回值超过此方法的返回值。
+     * 
+     * 
      * @return  an integer greater than zero and greater than or equal
      *          to <i>toPage</i> and greater than or equal to <i>minPage</i>
      *          and less than or equal to <i>maxPage</i>.
@@ -918,6 +1157,12 @@ public final class JobAttributes implements Cloneable {
      * pageRanges, fromPage, or toPage is equivalent to calling
      * setPageRanges(new int[][] { new int[] { <i>minPage</i> } });
      *
+     * <p>
+     *  对于使用这些属性的作业,指定要打印的最后一页(包括),如果要打印一页范围。如果未指定此属性,那么将使用来自pageRanges属性的值。
+     * 如果指定了pageRanges和fromPage和toPage中的一个或两个,则页面宽度优先。
+     * 没有指定pageRanges,fromPage或toPage等效于调用setPageRanges(new int [] [] {new int [] {<i> minPage </i>}});。
+     * 
+     * 
      * @param   toPage an integer greater than zero and greater than or equal
      *          to <i>fromPage</i> and greater than or equal to <i>minPage</i>
      *          and less than or equal to <i>maxPage</i>.
@@ -944,6 +1189,13 @@ public final class JobAttributes implements Cloneable {
      * ranges is equal if and only if the sets are of equal length, each range
      * enumerates the same pages, and the ranges are in the same order.
      *
+     * <p>
+     *  确定两个JobAttributes是否相等。
+     * <p>
+     *  当且仅当它们的每个属性相等时,两个JobAttributes是相等的。当且仅当字段引用同一唯一枚举对象时,枚举类型的属性相等。
+     * 当且仅当集合具有相等的长度,每个范围枚举相同的页面,并且范围以相同的顺序时,一组页面范围是相等的。
+     * 
+     * 
      * @param   obj the object whose equality will be checked.
      * @return  whether obj is equal to this JobAttribute according to the
      *          above criteria.
@@ -1008,6 +1260,10 @@ public final class JobAttributes implements Cloneable {
     /**
      * Returns a hash code value for this JobAttributes.
      *
+     * <p>
+     *  返回此JobAttributes的哈希码值。
+     * 
+     * 
      * @return  the hash code.
      */
     public int hashCode() {
@@ -1037,6 +1293,9 @@ public final class JobAttributes implements Cloneable {
     /**
      * Returns a string representation of this JobAttributes.
      *
+     * <p>
+     *  返回此JobAttributes的字符串表示形式。
+     * 
      * @return  the string representation.
      */
     public String toString() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.atomic;
@@ -76,6 +80,22 @@ import sun.reflect.Reflection;
  * guarantee atomicity only with respect to other invocations of
  * {@code compareAndSet} and {@code set} on the same updater.
  *
+ * <p>
+ *  一种基于反射的实用程序,可以对指定类的指定{@code volatile}引用字段进行原子更新。此类设计用于原子数据结构,其中同一节点的几个引用字段独立地进行原子更新。例如,树节点可以被声明为
+ * 
+ *  <pre> {@code class Node {private volatile Node left,right;
+ * 
+ *  private static final AtomicReferenceFieldUpdater <Node,Node> leftUpdater = AtomicReferenceFieldUpdat
+ * er.newUpdater(Node.class,Node.class,"left"); private static AtomicReferenceFieldUpdater <Node,Node> r
+ * ightUpdater = AtomicReferenceFieldUpdater.newUpdater(Node.class,Node.class,"right");。
+ * 
+ *  Node getLeft(){return left; } boolean compareAndSetLeft(Node expect,Node update){return leftUpdater.compareAndSet(this,expect,update); }
+ *  // ...等等}} </pre>。
+ * 
+ *  <p>请注意,此类中的{@code compareAndSet}方法的保证比其他原子类中的弱。
+ * 因为这个类不能确保字段的所有使用都适合于原子访问的目的,所以它只能在相同更新器上对{@code compareAndSet}和{@code set}的其他调用保证原子性。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  * @param <T> The type of the object holding the updatable field
@@ -88,6 +108,10 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * The Class arguments are needed to check that reflective types and
      * generic types match.
      *
+     * <p>
+     * 为给定字段的对象创建并返回更新器。需要Class参数来检查反射类型和通用类型是否匹配。
+     * 
+     * 
      * @param tclass the class of the objects holding the field
      * @param vclass the class of the field
      * @param fieldName the name of the field to be updated
@@ -111,6 +135,9 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
 
     /**
      * Protected do-nothing constructor for use by subclasses.
+     * <p>
+     *  受保护的无效构造函数,供子类使用。
+     * 
      */
     protected AtomicReferenceFieldUpdater() {
     }
@@ -122,6 +149,11 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * other calls to {@code compareAndSet} and {@code set}, but not
      * necessarily with respect to other changes in the field.
      *
+     * <p>
+     *  如果当前值{@code ==}是预期值,则将此updater管理的给定对象的字段原子设置为给定的更新值。
+     * 这个方法相对于对{@code compareAndSet}和{@code set}的其他调用,保证是原子的,但不一定是相对于字段中的其他变化。
+     * 
+     * 
      * @param obj An object whose field to conditionally set
      * @param expect the expected value
      * @param update the new value
@@ -140,6 +172,14 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * spuriously and does not provide ordering guarantees</a>, so is
      * only rarely an appropriate alternative to {@code compareAndSet}.
      *
+     * <p>
+     *  如果当前值{@code ==}是预期值,则将此updater管理的给定对象的字段原子设置为给定的更新值。
+     * 这个方法相对于对{@code compareAndSet}和{@code set}的其他调用,保证是原子的,但不一定是相对于字段中的其他变化。
+     * 
+     *  <p> <a href="package-summary.html#weakCompareAndSet">可能会失败,并且不提供排序保证</a>,因此很少是{@code compareAndSet}的
+     * 适当替代品。
+     * 
+     * 
      * @param obj An object whose field to conditionally set
      * @param expect the expected value
      * @param update the new value
@@ -152,6 +192,10 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * given updated value. This operation is guaranteed to act as a volatile
      * store with respect to subsequent invocations of {@code compareAndSet}.
      *
+     * <p>
+     *  将此updater管理的给定对象的字段设置为给定的更新值。此操作保证作为对随后调用{@code compareAndSet}的易失性存储。
+     * 
+     * 
      * @param obj An object whose field to set
      * @param newValue the new value
      */
@@ -161,6 +205,10 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * Eventually sets the field of the given object managed by this
      * updater to the given updated value.
      *
+     * <p>
+     *  最终将由此更新器管理的给定对象的字段设置为给定的更新值。
+     * 
+     * 
      * @param obj An object whose field to set
      * @param newValue the new value
      * @since 1.6
@@ -171,6 +219,10 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * Gets the current value held in the field of the given object managed
      * by this updater.
      *
+     * <p>
+     *  获取由此更新程序管理的给定对象的字段中保存的当前值。
+     * 
+     * 
      * @param obj An object whose field to get
      * @return the current value
      */
@@ -180,6 +232,10 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * Atomically sets the field of the given object managed by this updater
      * to the given value and returns the old value.
      *
+     * <p>
+     * 将由此updater管理的给定对象的字段原子设置为给定值,并返回旧值。
+     * 
+     * 
      * @param obj An object whose field to get and set
      * @param newValue the new value
      * @return the previous value
@@ -198,6 +254,10 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * value. The function should be side-effect-free, since it may be
      * re-applied when attempted updates fail due to contention among threads.
      *
+     * <p>
+     *  使用应用给定函数的结果,以原子方式更新此updater管理的给定对象的字段,返回以前的值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 
+     * 
      * @param obj An object whose field to get and set
      * @param updateFunction a side-effect-free function
      * @return the previous value
@@ -218,6 +278,10 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * value. The function should be side-effect-free, since it may be
      * re-applied when attempted updates fail due to contention among threads.
      *
+     * <p>
+     *  使用应用给定函数的结果,以原子方式更新由此更新程序管理的给定对象的字段,返回更新的值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 
+     * 
      * @param obj An object whose field to get and set
      * @param updateFunction a side-effect-free function
      * @return the updated value
@@ -241,6 +305,11 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * function is applied with the current value as its first argument,
      * and the given update as the second argument.
      *
+     * <p>
+     *  通过将给定函数应用于当前值和给定值,返回前一个值的结果,对由此更新器管理的给定对象的字段进行原子更新。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 该函数应用当前值作为其第一个参数,给定的更新作为第二个参数。
+     * 
+     * 
      * @param obj An object whose field to get and set
      * @param x the update value
      * @param accumulatorFunction a side-effect-free function of two arguments
@@ -266,6 +335,11 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
      * function is applied with the current value as its first argument,
      * and the given update as the second argument.
      *
+     * <p>
+     * 使用将给定函数应用于当前值和给定值的结果,以原子方式更新由此更新程序管理的给定对象的字段,返回更新的值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 该函数应用当前值作为其第一个参数,给定的更新作为第二个参数。
+     * 
+     * 
      * @param obj An object whose field to get and set
      * @param x the update value
      * @param accumulatorFunction a side-effect-free function of two arguments
@@ -300,6 +374,11 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
          * setting vclass to null in constructor.  The targetCheck and
          * updateCheck methods are invoked when these faster
          * screenings fail.
+         * <p>
+         *  所有更新方法中的内部类型检查包含内部内联优化,检查类是最终的常见情况(在这种情况下,简单的getClass比较就足够了),或者是类型为Object(在这种情况下,不需要检查,因为所有对象都是实例目的)
+         * 。
+         * 通过在构造函数中将vclass设置为null,可以简单地处理Object对象。当这些更快的筛选失败时,将调用targetCheck和updateCheck方法。
+         * 
          */
 
         AtomicReferenceFieldUpdaterImpl(final Class<T> tclass,
@@ -354,6 +433,7 @@ public abstract class AtomicReferenceFieldUpdater<T,V> {
          * Returns true if the second classloader can be found in the first
          * classloader's delegation chain.
          * Equivalent to the inaccessible: first.isAncestor(second).
+         * <p>
          */
         private static boolean isAncestor(ClassLoader first, ClassLoader second) {
             ClassLoader acl = first;

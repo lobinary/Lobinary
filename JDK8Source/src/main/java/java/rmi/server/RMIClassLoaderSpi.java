@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,24 @@ import java.net.URL;
  * See the documentation for {@link RMIClassLoader} for a description
  * of how a provider instance is chosen.
  *
+ * <p>
+ *  <code> RMIClassLoaderSpi </code>是<code> RMIClassLoader </code>的服务提供程序接口。
+ * 
+ *  特别地,<code> RMIClassLoaderSpi </code>实例提供了<code> RMIClassLoader </code>的以下静态方法的实现：
+ * 
+ * <ul>
+ * 
+ *  <li> {@ link RMIClassLoader#loadClass(URL,String)} <li> {@ link RMIClassLoader#loadClass(String,String)}
+ *  <li> {@ link RMIClassLoader#loadClass(String,String,ClassLoader)} <li> {@link RMIClassLoader#loadProxyClass(String,String [],ClassLoader)}
+ *  <li> {@ link RMIClassLoader#getClassLoader(String)} <li> {@ link RMIClassLoader#getClassAnnotation(Class)}
+ * 。
+ * 
+ * </ul>
+ * 
+ *  当这些方法之一被调用时,它的行为是委托给这个类的实例上的相应方法。每个特定方法的文档中描述了每个方法如何委派给提供程序实例的详细信息。
+ * 有关如何选择提供程序实例的说明,请参阅{@link RMIClassLoader}的文档。
+ * 
+ * 
  * @author      Peter Jones
  * @author      Laird Dornin
  * @see         RMIClassLoader
@@ -78,6 +97,17 @@ public abstract class RMIClassLoaderSpi {
      * <p>An implementation of this method must either return a class
      * with the given name or throw an exception.
      *
+     * <p>
+     *  提供{@link RMIClassLoader#loadClass(URL,String)},{@link RMIClassLoader#loadClass(String,String)}和{@link RMIClassLoader#loadClass(String,String,ClassLoader)}
+     * 的实现。
+     * 
+     *  从代码库URL路径加载类,可选择使用提供的加载器。
+     * 
+     * 通常,在尝试从代码库URL路径解析类之前,提供程序实现将尝试使用给定的<code> defaultLoader </code>(如果指定)解析命名类。
+     * 
+     *  <p>此方法的实现必须返回具有给定名称的类或抛出异常。
+     * 
+     * 
      * @param   codebase the list of URLs (separated by spaces) to load
      * the class from, or <code>null</code>
      *
@@ -111,6 +141,14 @@ public abstract class RMIClassLoaderSpi {
      * <p>An implementation of this method must either return a proxy
      * class that implements the named interfaces or throw an exception.
      *
+     * <p>
+     *  提供{@link RMIClassLoader#loadProxyClass(String,String [],ClassLoader)}的实现。
+     * 
+     *  加载一个动态代理类(参见{@link java.lang.reflect.Proxy},它从代码库URL路径中实现一组具有给定名称的接口,可选择使用提供的加载器。
+     * 
+     *  <p>此方法的实现必须返回实现命名接口的代理类或抛出异常。
+     * 
+     * 
      * @param   codebase the list of URLs (space-separated) to load
      * classes from, or <code>null</code>
      *
@@ -154,6 +192,15 @@ public abstract class RMIClassLoaderSpi {
      * checks to verify that the calling context has permission to connect
      * to all of the URLs in the codebase URL path.
      *
+     * <p>
+     *  提供{@link RMIClassLoader#getClassLoader(String)}的实现。
+     * 
+     *  返回从给定代码库URL路径加载类的类加载器。
+     * 
+     *  <p>如果有安全管理器,其<code> checkPermission </code>方法将使用<code> RuntimePermission("getClassLoader")</code>权限调
+     * 用;这可能导致<code> SecurityException </code>。
+     * 此方法的实现还可以执行进一步的安全检查以验证调用上下文具有连接到代码库URL路径中的所有URL的许可。
+     * 
      * @param   codebase the list of URLs (space-separated) from which
      * the returned class loader will load classes from, or <code>null</code>
      *
@@ -181,6 +228,9 @@ public abstract class RMIClassLoaderSpi {
      * the class definition) that RMI will use to annotate the class
      * descriptor when marshalling objects of the given class.
      *
+     * <p>
+     * 
+     * 
      * @param   cl the class to obtain the annotation for
      *
      * @return  a string to be used to annotate the given class when

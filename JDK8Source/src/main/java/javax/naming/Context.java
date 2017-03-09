@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -271,6 +272,123 @@ import java.util.Hashtable;
  * the application resources specified by the deployer of the application
  * or applet, which in turn can be modified by the user.
  *
+ * <p>
+ *  此接口表示命名上下文,其由一组名称到对象绑定组成。它包含用于检查和更新这些绑定的方法。
+ * 
+ *  <h1>名称</h1>作为参数传递给<tt>上下文</tt>方法的每个名称都与该上下文相关。空名称用于命名上下文本身。 name参数永远不能为null。
+ * <p>
+ *  大多数方法具有重载版本,其中一个采用<code> Name </code>参数,一个采用<code> String </code>。
+ * 这些重载的版本是等同的,如果<code> Name </code>和<code> String </code>参数只是同一个名称的不同表示,那么相同方法的重载版本行为相同。
+ * 在下面的方法描述中,只有一个版本完整记录。第二个版本有一个链接到第一个：同样的文档适用于两者。
+ * <p>
+ * 对于支持联合的系统,<tt>上下文</tt>方法的<tt> String </tt>名称参数是复合名称。
+ * 作为<tt> CompositeName </tt>实例的名称参数被视为复合名称,而不是<tt> CompositeName </tt>实例的<tt> Name </tt>参数被视为复合名称可能是<tt>
+ *  CompoundName </tt>或化合物名称的其他实现的实例)。
+ * 对于支持联合的系统,<tt>上下文</tt>方法的<tt> String </tt>名称参数是复合名称。
+ * 这允许将<tt> NameParser.parse()</tt>的结果用作<tt>上下文</tt>方法的参数。在JNDI 1.2之前,所有名称参数都被视为复合名称。
+ * p>
+ *  此外,对于支持联合的系统,从<tt> list()</tt>和<tt> listBindings()</tt>中的<tt> NamingEnumeration </tt>中返回的所有名称都是以字符串表
+ * 示的复合名称。
+ * 有关名称的字符串语法,请参见<tt> CompositeName </tt>。
+ * p>
+ *  对于不支持联合的系统,名称参数(<tt> Name </tt>或<tt> String </tt>表单)和<tt> NamingEnumeration </tt>中返回的名称可能是它们自己的命名空间而
+ * 不是复合命名空间中的名称,由服务提供商自行决定。
+ * 
+ *  h1>异常</h1>此界面中的所有方法都可以抛出一个<tt> NamingException </tt>或其任何子类。
+ * 有关每个异常的详细信息,请参见<tt> NamingException </tt>及其子类。
+ * 
+ * h1>并发访问</h1>不能保证上下文实例与多个线程的并发访问同步。需要并发访问单个Context实例的线程应在它们之间同步并提供必要的锁定。每个操作不同的Context实例的多个线程不需要同步。
+ * 请注意,{@link #lookup(Name)<tt> lookup </tt>}方法传递一个空名称时,将返回一个代表相同命名上下文的新Context实例。
+ * p>
+ *  为了并发控制的目的,返回<tt> NamingEnumeration </tt>的上下文操作在枚举仍在使用中时,或者当该操作生成的任何引用仍被遵循时,不被认为已经完成。
+ * 
+ *  h1>参数</h1>传递给<tt> Context </tt>接口的任何方法或其子接口之一的<tt> Name </tt>参数不会被服务提供程序修改。
+ * 服务提供商可以在操作的持续时间保持对其的引用,包括方法的结果的任何枚举以及生成的任何引用的处理。调用者在此期间不应该修改对象。由任何此类方法返回的<tt>名称</tt>由调用者拥有。
+ * 调用者可以随后修改它;服务提供商可能不会。
+ * 
+ *  h1>环境属性</h1>
+ * p>
+ * JNDI应用程序需要一种方法来传递定义访问命名和目录服务的环境的各种首选项和属性。例如,上下文可能需要指定安全凭证才能访问服务。另一个上下文可能需要提供服务器配置信息。
+ * 这些被称为上下文的<em>环境</em>。 <tt>上下文</tt>界面提供检索和更新此环境的方法。
+ * p>
+ *  当上下文方法从一个上下文继续到下一个上下文时,环境从父上下文继承。对一个上下文的环境的改变不直接影响其他上下文的环境。
+ * p>
+ *  当使用和/或验证环境属性的有效性时,它是实现相关的。例如,服务提供商使用一些与安全相关的属性来"登录"到目录。此登录过程可能在创建上下文时或在上下文上第一次调用方法时发生。
+ * 何时,以及这是否发生,是实现依赖的。当从上下文添加或删除环境属性时,验证更改的有效性也是实现相关的。例如,一些属性的验证可以在进行改变时或在对上下文执行下一操作时发生,或者根本不发生。
+ * p>
+ * 任何具有上下文引用的对象都可以检查该上下文的环境。敏感信息(例如明文密码)不应存储在那里,除非已知实施可保护敏感信息。
+ * 
+ * p>
+ *  a name = RESOURCEFILES> </a> h1>资源文件</h1>
+ * p>
+ *  为了简化设置JNDI应用所需的环境的任务,应用组件和服务提供者可以与资源文件一起分布。
+ * </em> JNDI资源文件是属性文件格式的文件(参见{ @link java.util.Properties#load <tt> java.util.Properties </tt>}),其中包含键/
+ * 值对列表。
+ *  为了简化设置JNDI应用所需的环境的任务,应用组件和服务提供者可以与资源文件一起分布。键是属性的名称(例如"java.naming.factory.object"),值是以该属性定义的格式的字符串。
+ * 下面是一个JNDI资源文件的示例：。
+ * 
+ *  <blockquote> {@ code java.naming.factory.object = com.sun.jndi.ldap.AttrsToCorba：com.wiz.from.Person java.naming.factory.state = com.sun.jndi.ldap.CorbaToAttrs：com .wiz.from.Person java.naming.factory.control = com.sun.jndi.ldap.ResponseControlFactory}
+ *  </blockquote>。
+ * 
+ *  JNDI类库读取资源文件,并使属性值免费提供。因此,JNDI资源文件应被视为"世界可读",并且敏感信息(如明文密码)不应存储在那里。
+ * p>
+ *  有两种JNDI资源文件：<em> provider </em>和<em> application </em>。
+ * 
+ *  <h2>提供程序资源文件</h2>
+ * 
+ * 每个服务提供程序都有一个可选的资源,列出特定于该提供程序的属性。此资源的名称为：
+ * <blockquote>
+ *  [<em>前缀</em> /] <tt> jndiprovider.properties </tt>
+ * </blockquote>
+ *  其中<em>前缀</em>是提供商的上下文实现的包名称,每个句点("。")转换为斜杠("/")。
+ * 
+ *  例如,假设服务提供者定义类名为<tt> com.sun.jndi.ldap.LdapCtx </tt>的上下文实现。
+ * 此提供程序的提供程序资源名为<tt> com / sun / jndi / ldap / jndiprovider.properties </tt>。
+ * 如果类不在包中,则资源的名称只是<tt> jndiprovider.properties </tt>。
+ * 
+ * <p>
+ *  <a name=LISTPROPS> </a> JNDI类库中的某些方法使用指定JNDI工厂列表的标准JNDI属性：
+ * <ul>
+ *  <li> java.naming.factory.object <li> java.naming.factory.state <li> java.naming.factory.control <li>
+ *  java.naming.factory.url.pkgs。
+ * </ul>
+ *  确定这些属性的值时,JNDI库将查询提供程序资源文件。除了这些之外的属性可以由服务提供商自行决定在提供者资源文件中设置。服务提供者的文档应该清楚地说明允许哪些属性;文件中的其他属性将被忽略。
+ * 
+ *  <h2>应用程序资源文件</h2>
+ * 
+ * 部署应用程序时,它通常在其类路径中具有多个代码库目录和JAR。类似地,当部署applet时,它将具有指定在哪里找到applet的类的代码库和存档。
+ *  JNDI在类路径中定位(使用{@link ClassLoader#getResources <tt> ClassLoader.getResources()</tt>})所有<em>应用程序资源文件</em>
+ * ,名称为<tt> jndi.properties </tt>。
+ * 部署应用程序时,它通常在其类路径中具有多个代码库目录和JAR。类似地,当部署applet时,它将具有指定在哪里找到applet的类的代码库和存档。
+ * 此外,如果文件<i> java.home </i> <tt> /lib/jndi.properties </tt>存在并且可读,则JNDI将其视为另一个应用程序资源文件。
+ *  (<i> java.home </i>指示由<tt> java.home </tt>系统属性命名的目录。)这些文件中包含的所有属性都放置在初始上下文的环境中。这个环境然后由其他上下文继承。
+ * 
+ * <p>
+ *  对于在多个应用程序资源文件中找到的每个属性,JNDI使用找到的第一个值,或者在有些情况下这样做有意义,它会连接所有值(详细信息如下)。
+ * 例如,如果在三个<tt> jndi.properties </tt>资源文件中找到"java.naming.factory.object"属性,则对象工厂的列表是来自所有三个文件的属性值的并置。
+ * 使用此方案,每个可部署组件负责列出其导出的工厂。 JNDI在搜索工厂类时自动收集和使用所有这些导出列表。
+ * 
+ *  <h2>属性的搜索算法</h2>
+ * 
+ * 当JNDI构造初始上下文时,使用传递给构造函数的环境参数中定义的属性,系统属性,小程序参数和应用程序资源文件来初始化上下文的环境。
+ * 有关详细信息,请参见<a href=InitialContext.html#ENVIRONMENT> <tt> InitialContext </tt> </a>。
+ * 然后,这个初始环境被其他上下文实例继承。
+ * 
+ * <p>
+ *  当JNDI类库需要确定属性的值时,它通过按顺序合并来自以下两个源的值来实现：
+ * <ol>
+ *  <li>正在操作的上下文的环境。 <li>正在操作的上下文的提供程序资源文件(<tt> jndiprovider.properties </tt>)。
+ * </ol>
+ *  对于在这两个源中找到的每个属性,JNDI如下确定属性的值。
+ * 如果属性是指定JNDI工厂列表(列出为<a href=#LISTPROPS>上述</a>)的标准JNDI属性之一,则值将连接到单个以冒号分隔的列表中。对于其他属性,只使用找到的第一个值。
+ * 
+ * <p>
+ *  当服务提供商需要确定属性的值时,它通常直接从环境中获取该值。服务提供者可以定义要放置在其自己的提供者资源文件中的特定于提供者的属性。在这种情况下,它应该如上一段所述合并值。
+ * 
+ * <p>
+ * 以这种方式,每个服务提供商开发者可以指定要与该服务提供商一起使用的工厂的列表。这些可以由应用程序或小程序的部署者指定的应用程序资源来修改,而应用程序或小程序的部署者又可以由用户修改。
+ * 
+ * 
  * @author Rosanna Lee
  * @author Scott Seligman
  * @author R. Vasudevan
@@ -287,6 +405,10 @@ public interface Context {
      * environment may be modified independently and it may be accessed
      * concurrently).
      *
+     * <p>
+     *  检索命名对象。如果<tt> name </tt>为空,则返回此上下文的新实例(代表与此上下文相同的命名上下文,但其环境可以单独修改,并且可以同时访问)。
+     * 
+     * 
      * @param name
      *          the name of the object to look up
      * @return  the object bound to <tt>name</tt>
@@ -300,6 +422,10 @@ public interface Context {
     /**
      * Retrieves the named object.
      * See {@link #lookup(Name)} for details.
+     * <p>
+     *  检索命名对象。有关详情,请参阅{@link #lookup(Name)}。
+     * 
+     * 
      * @param name
      *          the name of the object to look up
      * @return  the object bound to <tt>name</tt>
@@ -312,6 +438,10 @@ public interface Context {
      * All intermediate contexts and the target context (that named by all
      * but terminal atomic component of the name) must already exist.
      *
+     * <p>
+     *  为对象绑定名称。所有中间上下文和目标上下文(由名称的终端原子组件除外的所有中间上下文和目标上下文)必须已经存在。
+     * 
+     * 
      * @param name
      *          the name to bind; may not be empty
      * @param obj
@@ -332,6 +462,10 @@ public interface Context {
      * Binds a name to an object.
      * See {@link #bind(Name, Object)} for details.
      *
+     * <p>
+     *  为对象绑定名称。有关详细信息,请参阅{@link #bind(Name,Object)}。
+     * 
+     * 
      * @param name
      *          the name to bind; may not be empty
      * @param obj
@@ -353,6 +487,12 @@ public interface Context {
      * Otherwise, any existing attributes associated with the name remain
      * unchanged.
      *
+     * <p>
+     *  将名称绑定到对象,覆盖任何现有绑定。所有中间上下文和目标上下文(由名称的终端原子组件除外的所有中间上下文和目标上下文)必须已经存在。
+     * 
+     *  <p>如果对象是<tt> DirContext </tt>,则与名称关联的任何现有属性都将替换为对象的名称。否则,与名称关联的任何现有属性保持不变。
+     * 
+     * 
      * @param name
      *          the name to bind; may not be empty
      * @param obj
@@ -373,6 +513,10 @@ public interface Context {
      * Binds a name to an object, overwriting any existing binding.
      * See {@link #rebind(Name, Object)} for details.
      *
+     * <p>
+     *  将名称绑定到对象,覆盖任何现有绑定。有关详细信息,请参阅{@link #rebind(Name,Object)}。
+     * 
+     * 
      * @param name
      *          the name to bind; may not be empty
      * @param obj
@@ -398,6 +542,14 @@ public interface Context {
      * <p> Any attributes associated with the name are removed.
      * Intermediate contexts are not changed.
      *
+     * <p>
+     *  取消绑定命名对象。从目标上下文中删除<code> name </code>中的终端原子名称 - 除了<code> name </code>的终端原子部分,所有终止原子名称。
+     * 
+     * <p>此方法是幂等的。即使终端原子名未在目标上下文中绑定,也会成功,但如果任何中间上下文不存在,则会抛出<tt> NameNotFoundException </tt>。
+     * 
+     *  <p>与名称关联的任何属性都将被删除。中间上下文不更改。
+     * 
+     * 
      * @param name
      *          the name to unbind; may not be empty
      * @throws  NameNotFoundException if an intermediate context does not exist
@@ -410,6 +562,10 @@ public interface Context {
      * Unbinds the named object.
      * See {@link #unbind(Name)} for details.
      *
+     * <p>
+     *  取消绑定命名对象。有关详细信息,请参阅{@link #unbind(Name)}。
+     * 
+     * 
      * @param name
      *          the name to unbind; may not be empty
      * @throws  NameNotFoundException if an intermediate context does not exist
@@ -424,6 +580,10 @@ public interface Context {
      * with the new name.
      * Intermediate contexts of the old name are not changed.
      *
+     * <p>
+     *  为绑定到旧名称的对象绑定一个新名称,并解除绑定旧名称。这两个名称都与此上下文相关。与旧名称关联的任何属性都将与新名称关联。旧名称的中间上下文不会更改。
+     * 
+     * 
      * @param oldName
      *          the name of the existing binding; may not be empty
      * @param newName
@@ -442,6 +602,10 @@ public interface Context {
      * the old name.
      * See {@link #rename(Name, Name)} for details.
      *
+     * <p>
+     *  为绑定到旧名称的对象绑定一个新名称,并解除绑定旧名称。有关详细信息,请参阅{@link #rename(Name,Name)}。
+     * 
+     * 
      * @param oldName
      *          the name of the existing binding; may not be empty
      * @param newName
@@ -459,6 +623,12 @@ public interface Context {
      * <p> If a binding is added to or removed from this context,
      * its effect on an enumeration previously returned is undefined.
      *
+     * <p>
+     *  枚举在命名上下文中绑定的名称,以及绑定到它们的对象的类名。不包括任何子上下文的内容。
+     * 
+     *  <p>如果向此上下文添加或删除绑定,则对先前返回的枚举的影响未定义。
+     * 
+     * 
      * @param name
      *          the name of the context to list
      * @return  an enumeration of the names and class names of the
@@ -478,6 +648,10 @@ public interface Context {
      * class names of objects bound to them.
      * See {@link #list(Name)} for details.
      *
+     * <p>
+     *  枚举在命名上下文中绑定的名称,以及绑定到它们的对象的类名。有关详细信息,请参阅{@link #list(Name)}。
+     * 
+     * 
      * @param name
      *          the name of the context to list
      * @return  an enumeration of the names and class names of the
@@ -496,6 +670,12 @@ public interface Context {
      * <p> If a binding is added to or removed from this context,
      * its effect on an enumeration previously returned is undefined.
      *
+     * <p>
+     *  枚举在命名上下文中绑定的名称以及绑定到它们的对象。不包括任何子上下文的内容。
+     * 
+     *  <p>如果向此上下文添加或删除绑定,则对先前返回的枚举的影响未定义。
+     * 
+     * 
      * @param name
      *          the name of the context to list
      * @return  an enumeration of the bindings in this context.
@@ -515,6 +695,10 @@ public interface Context {
      * objects bound to them.
      * See {@link #listBindings(Name)} for details.
      *
+     * <p>
+     * 枚举在命名上下文中绑定的名称以及绑定到它们的对象。有关详情,请参阅{@link #listBindings(Name)}。
+     * 
+     * 
      * @param name
      *          the name of the context to list
      * @return  an enumeration of the bindings in this context.
@@ -548,6 +732,16 @@ public interface Context {
      * requires that the <tt>destroySubcontext()</tt> be performed
      * on a context from the foreign context's "native" naming system.
      *
+     * <p>
+     *  销毁命名上下文并将其从命名空间中删除。与名称关联的任何属性也将被删除。中间上下文不会被销毁。
+     * 
+     *  <p>此方法是幂等的。即使终端原子名未在目标上下文中绑定,也会成功,但如果任何中间上下文不存在,则会抛出<tt> NameNotFoundException </tt>。
+     * 
+     *  <p>在联合命名系统中,来自一个命名系统的上下文可能绑定到另一个命名系统中的名称。随后可以使用复合名称查找并对外部上下文执行操作。
+     * 但是,尝试使用此复合名称破坏上下文将失败,并且<tt> NotContextException </tt>,因为外部上下文不是其绑定的上下文的"子上下文"。
+     * 而应使用<tt> unbind()</tt>删除外部上下文的绑定。破坏外部上下文需要对来自外部上下文的"本地"命名系统的上下文执行<tt> destroySubcontext()</tt>。
+     * 
+     * 
      * @param name
      *          the name of the context to be destroyed; may not be empty
      * @throws  NameNotFoundException if an intermediate context does not exist
@@ -564,6 +758,10 @@ public interface Context {
      * Destroys the named context and removes it from the namespace.
      * See {@link #destroySubcontext(Name)} for details.
      *
+     * <p>
+     *  销毁命名上下文并将其从命名空间中删除。有关详情,请参阅{@link #destroySubcontext(Name)}。
+     * 
+     * 
      * @param name
      *          the name of the context to be destroyed; may not be empty
      * @throws  NameNotFoundException if an intermediate context does not exist
@@ -581,6 +779,10 @@ public interface Context {
      * component of the name).  All intermediate contexts and the
      * target context must already exist.
      *
+     * <p>
+     *  创建和绑定新的上下文。创建具有给定名称的新上下文,并将其绑定在目标上下文中(由名称的所有终端原子组件命名的)。所有中间上下文和目标上下文必须已经存在。
+     * 
+     * 
      * @param name
      *          the name of the context to create; may not be empty
      * @return  the newly created context
@@ -600,6 +802,10 @@ public interface Context {
      * Creates and binds a new context.
      * See {@link #createSubcontext(Name)} for details.
      *
+     * <p>
+     * 创建和绑定新的上下文。有关详情,请参阅{@link #createSubcontext(Name)}。
+     * 
+     * 
      * @param name
      *          the name of the context to create; may not be empty
      * @return  the newly created context
@@ -618,6 +824,10 @@ public interface Context {
      * If the object bound to <tt>name</tt> is not a link,
      * returns the object itself.
      *
+     * <p>
+     *  检索命名对象,除了名称的终端原子组件之外的链接。如果绑定到<tt>名称</tt>的对象不是链接,则返回对象本身。
+     * 
+     * 
      * @param name
      *          the name of the object to look up
      * @return  the object bound to <tt>name</tt>, not following the
@@ -633,6 +843,10 @@ public interface Context {
      * for the terminal atomic component of the name.
      * See {@link #lookupLink(Name)} for details.
      *
+     * <p>
+     *  检索命名对象,除了名称的终端原子组件之外的链接。有关详细信息,请参阅{@link #lookupLink(Name)}。
+     * 
+     * 
      * @param name
      *          the name of the object to look up
      * @return  the object bound to <tt>name</tt>, not following the
@@ -651,6 +865,11 @@ public interface Context {
      * returned by this method must be equal (using the <tt>equals()</tt>
      * test).
      *
+     * <p>
+     *  检索与命名上下文关联的解析器。在命名空间的联合中,不同的命名系统将以不同的方式解析名称。此方法允许应用程序获得解析器,用于使用特定命名系统的命名约定将名称解析为其原子组件。
+     * 在任何单个命名系统中,此方法返回的<tt> NameParser </tt>对象必须相等(使用<tt> equals()</tt>测试)。
+     * 
+     * 
      * @param name
      *          the name of the context from which to get the parser
      * @return  a name parser that can parse compound names into their atomic
@@ -666,6 +885,10 @@ public interface Context {
      * Retrieves the parser associated with the named context.
      * See {@link #getNameParser(Name)} for details.
      *
+     * <p>
+     *  检索与命名上下文关联的解析器。有关详情,请参阅{@link #getNameParser(Name)}。
+     * 
+     * 
      * @param name
      *          the name of the context from which to get the parser
      * @return  a name parser that can parse compound names into their atomic
@@ -699,6 +922,21 @@ public interface Context {
      *  composeName("user/jane", "research")    </pre>
      * returns <code>"research/user/jane"</code>.
      *
+     * <p>
+     *  使用相对于此上下文的名称构造此上下文的名称。
+     * 给定相对于该上下文的名称(<code> name </code>)以及该上下文相对于其上一个祖先的名称(<code>前缀</code>),该方法返回两个名称的组合使用适用于所涉及的命名系统的语法。
+     * 也就是说,如果<code> name </code>命名了一个与这个上下文相关的对象,结果就是同一个对象的名称,但是相对于祖先上下文。所有名称都不能为空。
+     * <p>
+     * 例如,如果此上下文相对于初始上下文命名为"wiz.com",则
+     * <pre>
+     *  composeName("east","wiz.com")</pre>可能会返回<code>"east.wiz.com"</code>。
+     * 如果相反,这个上下文被命名为"org / research",那么。
+     * <pre>
+     *  composeName("user / jane","org / research")</pre>可能会返回<code>"org / research / user / jane"</code>
+     * <pre>
+     *  composeName("user / jane","research")</pre>返回<code>"research / user / jane"</code>。
+     * 
+     * 
      * @param name
      *          a name relative to this context
      * @param prefix
@@ -716,6 +954,10 @@ public interface Context {
      * this context.
      * See {@link #composeName(Name, Name)} for details.
      *
+     * <p>
+     *  使用相对于此上下文的名称构造此上下文的名称。有关详情,请参阅{@link #composeName(Name,Name)}。
+     * 
+     * 
      * @param name
      *          a name relative to this context
      * @param prefix
@@ -731,6 +973,10 @@ public interface Context {
      * context.  If the property already exists, its value is overwritten.
      * See class description for more details on environment properties.
      *
+     * <p>
+     *  向此上下文的环境中添加新的环境属性。如果属性已存在,则其值将被覆盖。有关环境属性的更多详细信息,请参阅类描述。
+     * 
+     * 
      * @param propName
      *          the name of the environment property to add; may not be null
      * @param propVal
@@ -750,6 +996,10 @@ public interface Context {
      * context.  See class description for more details on environment
      * properties.
      *
+     * <p>
+     *  从此上下文的环境中删除环境属性。有关环境属性的更多详细信息,请参阅类描述。
+     * 
+     * 
      * @param propName
      *          the name of the environment property to remove; may not be null
      * @return  the previous value of the property, or null if the property was
@@ -771,6 +1021,13 @@ public interface Context {
      * The environment of this context may be changed using
      * <tt>addToEnvironment()</tt> and <tt>removeFromEnvironment()</tt>.
      *
+     * <p>
+     *  检索在此上下文中有效的环境。有关环境属性的更多详细信息,请参阅类描述。
+     * 
+     *  <p>调用者不应该对返回的对象进行任何更改：它们对上下文的影响是未定义的。
+     * 可以使用<tt> addToEnvironment()</tt>和<tt> removeFromEnvironment()</tt>更改此上下文的环境。
+     * 
+     * 
      * @return  the environment of this context; never null
      * @throws  NamingException if a naming exception is encountered
      *
@@ -788,6 +1045,12 @@ public interface Context {
      * already been closed has no effect.  Invoking any other method
      * on a closed context is not allowed, and results in undefined behaviour.
      *
+     * <p>
+     *  关闭此上下文。此方法立即释放此上下文的资源,而不是等待它们由垃圾回收器自动释放。
+     * 
+     * <p>此方法是幂等的：在已经关闭的上下文上调用它不起作用。不允许在封闭上下文上调用任何其他方法,并导致未定义的行为。
+     * 
+     * 
      * @throws  NamingException if a naming exception is encountered
      */
     public void close() throws NamingException;
@@ -804,6 +1067,13 @@ public interface Context {
      * In naming systems for which the notion of full name does not
      * make sense, <tt>OperationNotSupportedException</tt> is thrown.
      *
+     * <p>
+     *  在其自己的命名空间中检索此上下文的全名。
+     * 
+     *  <p>许多命名服务在其各自的命名空间中具有对象的"全名"概念。例如,LDAP条目具有专有名称,并且DNS记录具有完全限定名称。此方法允许客户端应用程序检索此名称。
+     * 此方法返回的字符串不是JNDI复合名称,不应直接传递给上下文方法。在命名系统中,全名的概念没有意义,则会抛出<tt> OperationNotSupportedException </tt>。
+     * 
+     * 
      * @return  this context's name in its own namespace; never null
      * @throws  OperationNotSupportedException if the naming system does
      *          not have the notion of a full name
@@ -830,6 +1100,14 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.factory.initial".
      *
+     * <p>
+     *  包含用于指定要使用的初始上下文工厂的environment属性的名称的常量。属性的值应该是将创建初始上下文的工厂类的完全限定类名。
+     * 此属性可以在传递给初始上下文构造函数的环境参数中指定,applet参数,系统属性或应用程序资源文件。
+     * 如果未在任何这些源中指定,则在需要初始上下文以完成操作时,会抛出<tt> NoInitialContextException </tt>。
+     * 
+     *  <p>此常量的值为"java.naming.factory.initial"。
+     * 
+     * 
      * @see InitialContext
      * @see javax.naming.directory.InitialDirContext
      * @see javax.naming.spi.NamingManager#getInitialContext
@@ -852,6 +1130,13 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.factory.object".
      *
+     * <p>
+     * 包含用于指定要使用的对象工厂的列表的environment属性的名称的常量。属性的值应该是以冒号分隔的工厂类的完全限定类名的列表,这将创建一个给定关于对象的信息的对象。
+     * 可以在环境中指定此属性,小程序参数,系统属性或一个或多个资源文件。
+     * 
+     *  <p>此常量的值为"java.naming.factory.object"。
+     * 
+     * 
      * @see javax.naming.spi.NamingManager#getObjectInstance
      * @see javax.naming.spi.ObjectFactory
      * @see #addToEnvironment(String, Object)
@@ -871,6 +1156,13 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.factory.state".
      *
+     * <p>
+     *  包含用于指定要使用的状态工厂列表的environment属性的名称的常量。属性的值应该是以冒号分隔的状态工厂类的完全限定类名的列表,将用于获取对象本身的对象状态。
+     * 可以在环境中指定此属性,小程序参数,系统属性或一个或多个资源文件。
+     * 
+     *  <p>此常量的值为"java.naming.factory.state"。
+     * 
+     * 
      * @see javax.naming.spi.NamingManager#getStateToBind
      * @see javax.naming.spi.StateFactory
      * @see #addToEnvironment(String, Object)
@@ -895,6 +1187,13 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.factory.url.pkgs".
      *
+     * <p>
+     *  常量,其中包含环境属性的名称,用于指定在URL上下文工厂中加载时要使用的程序包前缀列表。属性的值应该是将创建URL上下文工厂的工厂类的类名的包前缀的冒号分隔列表。
+     * 可以在环境中指定此属性,小程序参数,系统属性或一个或多个资源文件。前缀<tt> com.sun.jndi.url </tt>始终附加到可能为空的包前缀列表。
+     * 
+     * <p>此常数的值为"java.naming.factory.url.pkgs"。
+     * 
+     * 
      * @see javax.naming.spi.NamingManager#getObjectInstance
      * @see javax.naming.spi.NamingManager#getURLContext
      * @see javax.naming.spi.ObjectFactory
@@ -916,6 +1215,13 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.provider.url".
      *
+     * <p>
+     *  包含用于指定服务提供程序要使用的配置信息的environment属性的名称的常量。属性的值应包含网址字符串(例如"ldap：// somehost：389")。
+     * 可以在环境中指定此属性,小程序参数,系统属性或资源文件。如果未在任何这些源中指定,则默认配置由服务提供商确定。
+     * 
+     *  <p>此常量的值为"java.naming.provider.url"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      * @see #APPLET
@@ -934,6 +1240,14 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.dns.url".
      *
+     * <p>
+     *  包含用于指定用于JNDI URL上下文的DNS主机和域名(例如,"dns：//somehost/wiz.com")的environment属性的名称的常量。
+     * 可以在环境中指定此属性,小程序参数,系统属性或资源文件。
+     * 如果未在任何这些源中指定,并且程序尝试使用包含DNS名称的JNDI URL,则将抛出<tt> ConfigurationException </tt>。
+     * 
+     *  <p>此常量的值为"java.naming.dns.url"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -950,6 +1264,13 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.authoritative".
      *
+     * <p>
+     *  包含用于指定所请求服务的权威性的环境属性的常量。如果属性的值是字符串"true",则意味着访问是最权威的源(即绕过任何高速缓存或副本)。如果值是其他值,源不需要(但可能)是权威的。
+     * 如果未指定,该值默认为"false"。
+     * 
+     * <p>此常数的值为"java.naming.authoritative"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -968,6 +1289,13 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.batchsize".
      *
+     * <p>
+     *  用于指定通过服务协议返回数据时要使用的批处理大小的环境属性的名称的常量。这是提示程序返回指定大小的批处理操作结果的提示,因此提供程序可以优化其性能和资源使用。属性的值是整数的字符串表示形式。
+     * 如果未指定,批量大小由服务提供商确定。
+     * 
+     *  <p>此常数的值为"java.naming.batchsize"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -991,6 +1319,16 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.referral".
      *
+     * <p>
+     *  包含用于指定如何处理服务提供者遇到的引荐的环境属性的名称的常量。属性的值是以下字符串之一：
+     * <dl>
+     *  <dt>"遇到引荐时,"跟随"<dd>自动跟随引荐<dt>"忽略"<dd>忽略引荐<dt>"throw"<dd>抛出<tt> ReferralException </tt>
+     * </dl>
+     *  如果未指定此属性,那么缺省值由提供程序确定。
+     * 
+     *  <p>此常数的值为"java.naming.referral"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -1006,6 +1344,12 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.security.protocol".
      *
+     * <p>
+     *  包含用于指定要使用的安全协议的environment属性的名称的常量。其值是由服务提供商确定的字符串(例如"ssl")。如果此属性未指定,则行为由服务提供程序确定。
+     * 
+     *  <p>此常量的值为"java.naming.security.protocol"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -1021,6 +1365,12 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.security.authentication".
      *
+     * <p>
+     * 包含用于指定要使用的安全级别的environment属性的名称的常量。它的值是以下字符串之一："none","simple","strong"。如果此属性未指定,则行为由服务提供程序确定。
+     * 
+     *  <p>此常量的值为"java.naming.security.authentication"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -1036,6 +1386,12 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.security.principal".
      *
+     * <p>
+     *  保存环境属性的常量,用于指定用于验证服务调用者的主体的身份。主体的格式取决于认证方案。如果此属性未指定,则行为由服务提供程序确定。
+     * 
+     *  <p>此常数的值为"java.naming.security.principal"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -1052,6 +1408,12 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.security.credentials".
      *
+     * <p>
+     *  用于指定用于验证服务调用者的主体凭据的环境属性的名称的常量。属性的值取决于认证方案。例如,它可以是散列密码,明文密码,密钥,证书等。如果此属性未指定,则行为由服务提供程序确定。
+     * 
+     *  <p>此常量的值为"java.naming.security.credentials"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -1067,6 +1429,12 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.language".
      *
+     * <p>
+     *  保存环境属性的名称的常量,用于指定与服务一起使用的首选语言。属性的值是以冒号分隔的语言标记列表,如RFC 1766中定义的。如果此属性未指定,则语言首选项由服务提供商确定。
+     * 
+     * <p>此常数的值为"java.naming.language"。
+     * 
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      */
@@ -1089,6 +1457,11 @@ public interface Context {
      *
      * <p> The value of this constant is "java.naming.applet".
      *
+     * <p>
+     *  保存环境属性的名称的常量,用于指定初始上下文构造函数在搜索其他属性时使用的小程序。此属性的值是正在执行的<tt> java.applet.Applet </tt>实例。
+     * 此属性可以在传递给初始上下文构造函数的environment参数中指定。设置此属性时,首先在applet的参数列表中查找初始上下文构造函数在系统属性中查找的每个属性。
+     * 如果此属性未指定,则初始上下文构造函数将仅在传递给它的环境参数,系统属性和应用程序资源文件中搜索属性。
+     * 
      * @see #addToEnvironment(String, Object)
      * @see #removeFromEnvironment(String)
      * @see InitialContext

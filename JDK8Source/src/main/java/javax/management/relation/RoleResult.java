@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,12 @@ import java.util.Iterator;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-6304063118040985512L</code>.
  *
+ * <p>
+ *  表示对关系的多个角色(对于读取或写入)的多重访问的结果。
+ * 
+ *  <p>此类别的<b> serialVersionUID </b>是<code> -6304063118040985512L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")
@@ -77,6 +84,8 @@ public class RoleResult implements Serializable {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField roleList RoleList List of roles successfully accessed
      * @serialField unresolvedRoleList RoleUnresolvedList List of roles unsuccessfully accessed
      */
@@ -106,11 +115,15 @@ public class RoleResult implements Serializable {
     //
 
     /**
+    /* <p>
+    /* 
      * @serial List of roles successfully accessed
      */
     private RoleList roleList = null;
 
     /**
+    /* <p>
+    /* 
      * @serial List of roles unsuccessfully accessed
      */
     private RoleUnresolvedList unresolvedRoleList = null;
@@ -122,6 +135,10 @@ public class RoleResult implements Serializable {
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param list  list of roles successfully accessed.
      * @param unresolvedList  list of roles not accessed (with problem
      * descriptions).
@@ -141,6 +158,10 @@ public class RoleResult implements Serializable {
     /**
      * Retrieves list of roles successfully accessed.
      *
+     * <p>
+     *  检索成功访问的角色列表。
+     * 
+     * 
      * @return a RoleList
      *
      * @see #setRoles
@@ -152,6 +173,10 @@ public class RoleResult implements Serializable {
     /**
      * Retrieves list of roles unsuccessfully accessed.
      *
+     * <p>
+     *  检索未成功访问的角色列表。
+     * 
+     * 
      * @return a RoleUnresolvedList.
      *
      * @see #setRolesUnresolved
@@ -163,6 +188,10 @@ public class RoleResult implements Serializable {
     /**
      * Sets list of roles successfully accessed.
      *
+     * <p>
+     *  设置成功访问的角色列表。
+     * 
+     * 
      * @param list  list of roles successfully accessed
      *
      * @see #getRoles
@@ -186,6 +215,10 @@ public class RoleResult implements Serializable {
     /**
      * Sets list of roles unsuccessfully accessed.
      *
+     * <p>
+     *  设置未成功访问的角色列表。
+     * 
+     * 
      * @param unresolvedList  list of roles unsuccessfully accessed
      *
      * @see #getRolesUnresolved
@@ -209,6 +242,9 @@ public class RoleResult implements Serializable {
 
     /**
      * Deserializes a {@link RoleResult} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link RoleResult}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -239,6 +275,8 @@ public class RoleResult implements Serializable {
 
     /**
      * Serializes a {@link RoleResult} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link RoleResult}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

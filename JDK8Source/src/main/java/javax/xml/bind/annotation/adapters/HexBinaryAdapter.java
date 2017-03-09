@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,11 @@ import javax.xml.bind.DatatypeConverter;
  * <p>
  * This {@link XmlAdapter} binds <tt>byte[]</tt> to the hexBinary representation in XML.
  *
+ * <p>
+ *  {@link XmlAdapter} for <tt> xs：hexBinary </tt>。
+ * 
+ * <p>
+ * 
  * @author Kohsuke Kawaguchi
  * @since JAXB 2.0
  */

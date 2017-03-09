@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.xni;
@@ -39,6 +49,16 @@ package com.sun.org.apache.xerces.internal.xni;
  * Therefore, methods passed this structure should not save any reference
  * to the structure or the character array contained in the structure.
  *
+ * <p>
+ *  此类用作传递包含在扫描器的基础字符缓冲区中的文本的结构。 offset和length字段允许重用缓冲区,而不创建新的字符数组。
+ * <p>
+ *  <strong>注意</strong>：传递XMLString结构的方法应将内容视为只读,而不对缓冲区的内容进行任何修改。
+ * 接收此结构的方法也不应修改偏移和长度,如果此结构(或此结构的值)被传递到另一个方法。
+ * <p>
+ * <strong>注意</strong>：传递XMLString结构的方法需要将信息复制到缓冲区之外,如果它被保存以供超出方法范围使用。
+ * 结构的内容是易变的,一旦传递此结构的方法返回,就不能确保字符缓冲区的内容。因此,传递此结构的方法不应保存对结构或结构中包含的字符数组的任何引用。
+ * 
+ * 
  * @author Eric Ye, IBM
  * @author Andy Clark, IBM
  *
@@ -70,6 +90,10 @@ public class XMLString {
      * Constructs an XMLString structure preset with the specified
      * values.
      *
+     * <p>
+     *  构造使用指定值预设的XMLString结构。
+     * 
+     * 
      * @param ch     The character array.
      * @param offset The offset into the character array.
      * @param length The length of characters from the offset.
@@ -85,6 +109,12 @@ public class XMLString {
      * <strong>Note:</strong> This does not copy the character array;
      * only the reference to the array is copied.
      *
+     * <p>
+     *  构造具有给定结构中的值的副本的XMLString结构。
+     * <p>
+     *  <strong>注意：</strong>这不会复制字符数组;只复制对数组的引用。
+     * 
+     * 
      * @param string The XMLString to copy.
      */
     public XMLString(XMLString string) {
@@ -99,6 +129,10 @@ public class XMLString {
      * Initializes the contents of the XMLString structure with the
      * specified values.
      *
+     * <p>
+     *  使用指定的值初始化XMLString结构的内容。
+     * 
+     * 
      * @param ch     The character array.
      * @param offset The offset into the character array.
      * @param length The length of characters from the offset.
@@ -116,6 +150,12 @@ public class XMLString {
      * <strong>Note:</strong> This does not copy the character array;
      * only the reference to the array is copied.
      *
+     * <p>
+     *  使用给定字符串结构的副本初始化XMLString结构的内容。
+     * <p>
+     *  <strong>注意：</strong>这不会复制字符数组;只复制对数组的引用。
+     * 
+     * 
      * @param s
      */
     public void setValues(XMLString s) {
@@ -133,6 +173,10 @@ public class XMLString {
      * Returns true if the contents of this XMLString structure and
      * the specified array are equal.
      *
+     * <p>
+     *  如果此XMLString结构和指定数组的内容相等,则返回true。
+     * 
+     * 
      * @param ch     The character array.
      * @param offset The offset into the character array.
      * @param length The length of characters from the offset.
@@ -157,6 +201,9 @@ public class XMLString {
      * Returns true if the contents of this XMLString structure and
      * the specified string are equal.
      *
+     * <p>
+     *  如果此XMLString结构的内容和指定的字符串相等,则返回true。
+     * 
      * @param s The string to compare.
      */
     public boolean equals(String s) {

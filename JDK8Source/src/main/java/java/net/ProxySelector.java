@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,20 @@ import sun.security.util.SecurityConstants;
  * <a href="doc-files/net-properties.html#Proxies">set of System Properties</a>
  * related to proxy settings.</P>
  *
+ * <p>
+ *  选择要连接到由URL引用的网络资源时要使用的代理服务器(如果有)。
+ * 代理选择器是此类的一个具体子类,并通过调用{@link java.net.ProxySelector#setDefault setDefault}方法进行注册。
+ * 可以通过调用{@link java.net.ProxySelector#getDefault getDefault}方法检索当前注册的代理选择器。
+ * 
+ *  <p>例如,当注册代理选择器时,URLConnection类的子类应为每个URL请求调用{@link #select select}方法,以便代理选择器可以决定是使用直接连接还是使用代理连接。
+ *  {@link #select select}方法通过首选连接方法对集合返回迭代器。
+ * 
+ *  <p>如果无法与代理服务器(PROXY或SOCKS)建立连接,则调用者应调用代理选择器的{@link #connectFailed connectFailed}方法,以通知代理选择器代理服务器不可用。
+ *  </p>。
+ * 
+ *  <P>默认代理选择器会强制执行与代理设置相关的<a href="doc-files/net-properties.html#Proxies">一组系统属性</a>。</P>
+ * 
+ * 
  * @author Yingxian Wang
  * @author Jean-Christophe Collet
  * @since 1.5
@@ -63,6 +78,10 @@ public abstract class ProxySelector {
      * use, if any, when connecting to a remote object referenced by
      * an URL.
      *
+     * <p>
+     *  在连接到由URL引用的远程对象时选择要使用的代理服务器(如果有)的系统范围代理选择器。
+     * 
+     * 
      * @see #setDefault(ProxySelector)
      */
     private static ProxySelector theProxySelector;
@@ -81,6 +100,10 @@ public abstract class ProxySelector {
     /**
      * Gets the system-wide proxy selector.
      *
+     * <p>
+     *  获取系统范围的代理选择器。
+     * 
+     * 
      * @throws  SecurityException
      *          If a security manager has been installed and it denies
      * {@link NetPermission}{@code ("getProxySelector")}
@@ -101,6 +124,12 @@ public abstract class ProxySelector {
      *
      * Note: non-standard protocol handlers may ignore this setting.
      *
+     * <p>
+     * 设置(或取消)系统范围的代理选择器。
+     * 
+     *  注意：非标准协议处理程序可能会忽略此设置。
+     * 
+     * 
      * @param ps The HTTP proxy selector, or
      *          {@code null} to unset the proxy selector.
      *
@@ -131,6 +160,13 @@ public abstract class ProxySelector {
      *     for tcp client sockets connections</LI>
      * </UL>
      *
+     * <p>
+     *  根据访问资源的协议选择所有适用的代理,并使用目标地址访问资源。 URI的格式定义如下：
+     * <UL>
+     *  <li> http连接的URI </li> <li> https连接的https URI <li> {@ code socket：// host：port} <br>用于tcp客户端套接字连接</li>
+     * 。
+     * </UL>
+     * 
      * @param   uri
      *          The URI that a connection is required to
      *
@@ -152,6 +188,9 @@ public abstract class ProxySelector {
      * proxies returned by {@link #select(URI)}, using the address
      * and the IOException caught when trying to connect.
      *
+     * <p>
+     * 
+     * 
      * @param   uri
      *          The URI that the proxy at sa failed to serve.
      * @param   sa

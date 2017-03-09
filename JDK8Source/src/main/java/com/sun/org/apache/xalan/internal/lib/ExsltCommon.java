@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ExsltCommon.java,v 1.2.4.1 2005/09/15 02:45:24 jeffsuttor Exp $
+ * <p>
+ *  $ Id：ExsltCommon.java,v 1.2.4.1 2005/09/15 02:45:24 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.lib;
 
@@ -37,6 +50,15 @@ import com.sun.org.apache.xpath.internal.NodeSet;
  * The documentation for each function has been copied from the relevant
  * EXSLT Implementer page.
  *
+ * <p>
+ *  此类包含EXSLT公共扩展函数。可通过指定名称空间URI来访问它,如下所示：
+ * <pre>
+ *  xmlns：exslt ="http://exslt.org/common"
+ * </pre>
+ * 
+ *  每个函数的文档已从相关的EXSLT实施者页面复制。
+ * 
+ * 
  * @see <a href="http://www.exslt.org/">EXSLT</a>
  * @xsl.usage general
  */
@@ -55,6 +77,16 @@ public class ExsltCommon
    *
    * The Xalan extensions MethodResolver converts 'object-type' to 'objectType'.
    *
+   * <p>
+   *  exsl：object-type函数返回一个字符串,给出作为参数传递的对象的类型。
+   * 可能的对象类型有：'string','number','boolean','node-set','RTF'或'external'。
+   * 
+   * 大多数XSLT对象类型可以彼此强制转换而不会出错。但是,存在某些强制提高错误,最重要的是将除节点集之外的任何东西视为节点集。
+   * 诸如命名模板或用户定义的扩展函数的实用程序的作者可能希望给予该实用程序接受的参数和参数值一些灵活性; exsl：object-type函数使它们能够这样做。
+   * 
+   *  Xalan扩展MethodResolver将'object-type'转换为'objectType'。
+   * 
+   * 
    * @param obj The object to be typed.
    * @return objectType 'string', 'number', 'boolean', 'node-set', 'RTF', or 'external'.
    *
@@ -91,6 +123,8 @@ public class ExsltCommon
    *
    * The Xalan extensions MethodResolver converts 'node-set' to 'nodeSet'.
    *
+   * <p>
+   * 
    * @param myProcessor is passed in by the Xalan extension processor
    * @param rtf The result tree fragment to be converted to a node-set.
    *

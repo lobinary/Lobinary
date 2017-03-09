@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ package com.sun.jmx.snmp;
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
  *
+ * <p>
+ *  发生BER编码/解码错误时抛出异常。
+ * 
+ * 
  * @since 1.5
  */
 

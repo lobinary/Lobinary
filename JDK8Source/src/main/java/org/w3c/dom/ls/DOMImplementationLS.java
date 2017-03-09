@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究联合会信息学和数学,庆应大学)。版权所有。这项工作根据W3C(r)软件许可证[1]分发,希望它有用,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证。
+ * 
+ *  [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * 
  */
 
 package org.w3c.dom.ls;
@@ -57,15 +65,29 @@ import org.w3c.dom.DOMException;
  * <code>"3.0"</code> (respectively).
  * <p>See also the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'>Document Object Model (DOM) Level 3 Load
 and Save Specification</a>.
+ * <p>
+ *  <code> DOMImplementationLS </code>包含用于创建Load和Save对象的工厂方法。
+ *  <p>期望的是,通过对<code> DOMImplementation </code>接口的实例使用特定于绑定的转换方法可以获得<code> DOMImplementationLS </code>接口
+ * 的实例, >文档</code>支持在[<a href ='http：//www.w3.org/TR/]中定义的<code>"Core"</code>版本<code>"3.0"</代码>(或<code>"
+ * LS-Async"</code>)和<code>"3.0"</code> <p>另请参阅<a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'>
+ * 文档对象模型(DOM)3级加载和保存规范</a>。
+ *  <code> DOMImplementationLS </code>包含用于创建Load和Save对象的工厂方法。
+ * 
  */
 public interface DOMImplementationLS {
     // DOMImplementationLSMode
     /**
      * Create a synchronous <code>LSParser</code>.
+     * <p>
+     *  创建同步<code> LSParser </code>。
+     * 
      */
     public static final short MODE_SYNCHRONOUS          = 1;
     /**
      * Create an asynchronous <code>LSParser</code>.
+     * <p>
+     *  创建异步<code> LSParser </code>。
+     * 
      */
     public static final short MODE_ASYNCHRONOUS         = 2;
 
@@ -74,6 +96,11 @@ public interface DOMImplementationLS {
      * then be configured by means of its <code>DOMConfiguration</code>
      * object, and used to parse documents by means of its <code>parse</code>
      *  method.
+     * <p>
+     * 创建一个新的<code> LSParser </code>。
+     * 新构造的解析器然后可以通过其<code> DOMConfiguration </code>对象来配置,并且用于通过其<code> parse </code>方法解析文档。
+     * 
+     * 
      * @param mode  The <code>mode</code> argument is either
      *   <code>MODE_SYNCHRONOUS</code> or <code>MODE_ASYNCHRONOUS</code>, if
      *   <code>mode</code> is <code>MODE_SYNCHRONOUS</code> then the
@@ -116,6 +143,10 @@ public interface DOMImplementationLS {
 
     /**
      *  Create a new <code>LSSerializer</code> object.
+     * <p>
+     *  创建一个新的<code> LSSerializer </code>对象。
+     * 
+     * 
      * @return The newly created <code>LSSerializer</code> object.
      * <p ><b>Note:</b>    By default, the newly created
      *   <code>LSSerializer</code> has no <code>DOMErrorHandler</code>, i.e.
@@ -135,6 +166,12 @@ public interface DOMImplementationLS {
      * <code>LSInput.publicId</code>, <code>LSInput.baseURI</code>, and
      * <code>LSInput.encoding</code> are null, and
      * <code>LSInput.certifiedText</code> is false.
+     * <p>
+     *  创建一个新的空输入源对象,其中<code> LSInput.characterStream </code>,<code> LSInput.byteStream </code>,<code> LSInp
+     * ut.stringData </code> <code> LSInput.systemId </code> ,<code> LSInput.publicId </code>,<code> LSInput
+     * .baseURI </code>和<code> LSInput.encoding </code>为空,并且<code> LSInput.certifiedText </code>为false 。
+     * 
+     * 
      * @return  The newly created input object.
      */
     public LSInput createLSInput();
@@ -144,6 +181,8 @@ public interface DOMImplementationLS {
      * <code>LSOutput.characterStream</code>,
      * <code>LSOutput.byteStream</code>, <code>LSOutput.systemId</code>,
      * <code>LSOutput.encoding</code> are null.
+     * <p>
+     * 
      * @return  The newly created output object.
      */
     public LSOutput createLSOutput();

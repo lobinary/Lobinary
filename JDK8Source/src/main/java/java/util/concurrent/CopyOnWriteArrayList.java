@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -30,6 +31,11 @@
  * Copyright 1997 by Sun Microsystems, Inc.,
  * 901 San Antonio Road, Palo Alto, California, 94303, U.S.A.
  * All rights reserved.
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写。根据显式许可,从JDK ArrayList.java中进行修改和发布,其中包含以下版权：
+ * 
+ *  版权1997年Sun Microsystems,Inc.,901 San Antonio Road,Palo Alto,California,94303,U.S.A。保留所有权利。
+ * 
  */
 
 package java.util.concurrent;
@@ -84,6 +90,25 @@ import java.util.function.UnaryOperator;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  {@link java.util.ArrayList}的线程安全变体,其中所有的变异操作({@code add},{@code set},等等)都是通过对底层数组进行全新的复制来实现的。
+ * 
+ *  <p>这通常太贵,但是当遍历操作大大超过突变时,效率可能比替代方法更高,并且当您不能或不想同步遍历,但需要排除干扰时,这是非常有用的在并发线程中。
+ *  "快照"样式迭代器方法使用对创建迭代器的点的数组的状态的引用。
+ * 这个数组在迭代器的生命周期中从不改变,所以干扰是不可能的,迭代器保证不抛出{@code ConcurrentModificationException}。
+ * 迭代器不会反映自迭代器创建以来的列表中的添加,删除或更改。不支持对迭代器自身({@code remove},{@code set}和{@code add})的元素更改操作。
+ * 这些方法抛出{@code UnsupportedOperationException}。
+ * 
+ *  <p>允许所有元素,包括{@code null}。
+ * 
+ * <p>内存一致性效果：与其他并发集合一样,在将对象放入{@code CopyOnWriteArrayList} <a href="package-summary.html#MemoryVisibility">
+ *  <i>发生之前< / i> </a>从另一个线程中的{@code CopyOnWriteArrayList}中访问或删除该元素后的操作。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  * @param <E> the type of elements held in this collection
@@ -101,6 +126,9 @@ public class CopyOnWriteArrayList<E>
     /**
      * Gets the array.  Non-private so as to also be accessible
      * from CopyOnWriteArraySet class.
+     * <p>
+     *  获取数组。非私有的,以便也可以从CopyOnWriteArraySet类访问。
+     * 
      */
     final Object[] getArray() {
         return array;
@@ -108,6 +136,9 @@ public class CopyOnWriteArrayList<E>
 
     /**
      * Sets the array.
+     * <p>
+     *  设置数组。
+     * 
      */
     final void setArray(Object[] a) {
         array = a;
@@ -115,6 +146,9 @@ public class CopyOnWriteArrayList<E>
 
     /**
      * Creates an empty list.
+     * <p>
+     *  创建空列表。
+     * 
      */
     public CopyOnWriteArrayList() {
         setArray(new Object[0]);
@@ -125,6 +159,10 @@ public class CopyOnWriteArrayList<E>
      * collection, in the order they are returned by the collection's
      * iterator.
      *
+     * <p>
+     *  按照集合的迭代器返回的顺序创建包含指定集合的​​元素的列表。
+     * 
+     * 
      * @param c the collection of initially held elements
      * @throws NullPointerException if the specified collection is null
      */
@@ -144,6 +182,10 @@ public class CopyOnWriteArrayList<E>
     /**
      * Creates a list holding a copy of the given array.
      *
+     * <p>
+     *  创建保存给定数组副本的列表。
+     * 
+     * 
      * @param toCopyIn the array (a copy of this array is used as the
      *        internal array)
      * @throws NullPointerException if the specified array is null
@@ -155,6 +197,10 @@ public class CopyOnWriteArrayList<E>
     /**
      * Returns the number of elements in this list.
      *
+     * <p>
+     *  返回此列表中的元素数。
+     * 
+     * 
      * @return the number of elements in this list
      */
     public int size() {
@@ -164,6 +210,10 @@ public class CopyOnWriteArrayList<E>
     /**
      * Returns {@code true} if this list contains no elements.
      *
+     * <p>
+     *  如果此列表不包含元素,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this list contains no elements
      */
     public boolean isEmpty() {
@@ -172,6 +222,9 @@ public class CopyOnWriteArrayList<E>
 
     /**
      * Tests for equality, coping with nulls.
+     * <p>
+     *  平等测试,处理null。
+     * 
      */
     private static boolean eq(Object o1, Object o2) {
         return (o1 == null) ? o2 == null : o1.equals(o2);
@@ -180,6 +233,10 @@ public class CopyOnWriteArrayList<E>
     /**
      * static version of indexOf, to allow repeated calls without
      * needing to re-acquire array each time.
+     * <p>
+     *  静态版本的indexOf,允许重复调用而不需要每次重新获取数组。
+     * 
+     * 
      * @param o element to search for
      * @param elements the array
      * @param index first index to search
@@ -202,6 +259,10 @@ public class CopyOnWriteArrayList<E>
 
     /**
      * static version of lastIndexOf.
+     * <p>
+     *  静态版本的lastIndexOf。
+     * 
+     * 
      * @param o element to search for
      * @param elements the array
      * @param index first index to search
@@ -226,6 +287,13 @@ public class CopyOnWriteArrayList<E>
      * at least one element {@code e} such that
      * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
      *
+     * <p>
+     *  如果此列表包含指定的元素,则返回{@code true}。
+     * 更正式地说,如果且仅当此列表至少包含一个元素{@code e},使得<tt>(o == null&nbsp;?&nbsp; e == null&nbsp;：&nbsp; o.equals (e))</tt>
+     * 。
+     *  如果此列表包含指定的元素,则返回{@code true}。
+     * 
+     * 
      * @param o element whose presence in this list is to be tested
      * @return {@code true} if this list contains the specified element
      */
@@ -236,6 +304,9 @@ public class CopyOnWriteArrayList<E>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public int indexOf(Object o) {
         Object[] elements = getArray();
@@ -250,6 +321,13 @@ public class CopyOnWriteArrayList<E>
      * <tt>(i&nbsp;&gt;=&nbsp;index&nbsp;&amp;&amp;&nbsp;(e==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;e.equals(get(i))))</tt>,
      * or -1 if there is no such index.
      *
+     * <p>
+     * 返回此列表中指定元素的第一次出现的索引,从{@code index}向前搜索,如果未找到元素,则返回-1。
+     * 更正式地,返回最低索引{@code i},使得<tt>(i&nbsp;&gt; =&nbsp; index&amp;&amp;&amp;&nbsp;(e == null&nbsp;?&nbsp; get
+     * (i)== null& ：&nbsp; e.equals(get(i)))))</tt>,如果没有这样的索引,则为-1。
+     * 返回此列表中指定元素的第一次出现的索引,从{@code index}向前搜索,如果未找到元素,则返回-1。
+     * 
+     * 
      * @param e element to search for
      * @param index index to start searching from
      * @return the index of the first occurrence of the element in
@@ -264,6 +342,9 @@ public class CopyOnWriteArrayList<E>
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public int lastIndexOf(Object o) {
         Object[] elements = getArray();
@@ -278,6 +359,13 @@ public class CopyOnWriteArrayList<E>
      * <tt>(i&nbsp;&lt;=&nbsp;index&nbsp;&amp;&amp;&nbsp;(e==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;e.equals(get(i))))</tt>,
      * or -1 if there is no such index.
      *
+     * <p>
+     *  返回此列表中指定元素的最后一次出现的索引,从{@code index}向后搜索,如果未找到元素,则返回-1。
+     * 更正式地,返回最高索引{@code i},使得<tt>(i&nbsp;&lt; =&nbsp; index&amp;&amp;&amp;&nbsp;(e == null&nbsp;?&nbsp; get
+     * (i)== null& ：&nbsp; e.equals(get(i)))))</tt>,如果没有这样的索引,则为-1。
+     *  返回此列表中指定元素的最后一次出现的索引,从{@code index}向后搜索,如果未找到元素,则返回-1。
+     * 
+     * 
      * @param e element to search for
      * @param index index to start searching backwards from
      * @return the index of the last occurrence of the element at position
@@ -295,6 +383,10 @@ public class CopyOnWriteArrayList<E>
      * Returns a shallow copy of this list.  (The elements themselves
      * are not copied.)
      *
+     * <p>
+     *  返回此列表的浅副本。 (元素本身不被复制。)
+     * 
+     * 
      * @return a clone of this list
      */
     public Object clone() {
@@ -321,6 +413,14 @@ public class CopyOnWriteArrayList<E>
      * <p>This method acts as bridge between array-based and collection-based
      * APIs.
      *
+     * <p>
+     *  以正确的顺序返回包含此列表中所有元素的数组(从第一个元素到最后一个元素)。
+     * 
+     *  <p>返回的数组将是"安全的",因为没有对它的引用由此列表维护。 (换句话说,这个方法必须分配一个新的数组)。因此调用者可以自由地修改返回的数组。
+     * 
+     *  <p>此方法充当基于阵列和基于集合的API之间的桥梁。
+     * 
+     * 
      * @return an array containing all the elements in this list
      */
     public Object[] toArray() {
@@ -357,6 +457,22 @@ public class CopyOnWriteArrayList<E>
      * Note that {@code toArray(new Object[0])} is identical in function to
      * {@code toArray()}.
      *
+     * <p>
+     * 返回一个包含正确顺序(从第一个元素到最后一个元素)的列表中所有元素的数组。返回的数组的运行时类型是指定数组的运行时类型。如果列表适合指定的数组,则返回其中。
+     * 否则,将使用指定数组的运行时类型和此列表的大小分配新数组。
+     * 
+     *  <p>如果此列表适合具有空余空间的指定数组(即,数组具有比此列表更多的元素),则紧接列表结尾的数组中的元素将设置为{@code null}。
+     *  (如果调用者知道此列表不包含任何空元素,则此字段只用于确定此列表的长度</i>非常有用。)。
+     * 
+     *  <p>与{@link #toArray()}方法类似,此方法充当基于数组和基于集合的API之间的桥梁。此外,该方法允许对输出阵列的运行时类型的精确控制,并且在某些情况下可以用于节省分配成本。
+     * 
+     *  <p>假设{@code x}是一个已知只包含字符串的列表。以下代码可用于将列表转储到新分配的{@code String}数组中：
+     * 
+     *  <pre> {@code String [] y = x.toArray(new String [0]);} </pre>
+     * 
+     *  注意,{@code toArray(new Object [0])}在功能上与{@code toArray()}是相同的。
+     * 
+     * 
      * @param a the array into which the elements of the list are to
      *          be stored, if it is big enough; otherwise, a new array of the
      *          same runtime type is allocated for this purpose.
@@ -390,6 +506,10 @@ public class CopyOnWriteArrayList<E>
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E get(int index) {
@@ -400,6 +520,10 @@ public class CopyOnWriteArrayList<E>
      * Replaces the element at the specified position in this list with the
      * specified element.
      *
+     * <p>
+     *  用指定的元素替换此列表中指定位置处的元素。
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E set(int index, E element) {
@@ -427,6 +551,10 @@ public class CopyOnWriteArrayList<E>
     /**
      * Appends the specified element to the end of this list.
      *
+     * <p>
+     *  将指定的元素追加到此列表的末尾。
+     * 
+     * 
      * @param e element to be appended to this list
      * @return {@code true} (as specified by {@link Collection#add})
      */
@@ -450,6 +578,10 @@ public class CopyOnWriteArrayList<E>
      * list. Shifts the element currently at that position (if any) and
      * any subsequent elements to the right (adds one to their indices).
      *
+     * <p>
+     * 在此列表中指定的位置插入指定的元素。将当前在该位置的元素(如果有)和任何后续元素向右移(将一个添加到它们的索引)。
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public void add(int index, E element) {
@@ -483,6 +615,10 @@ public class CopyOnWriteArrayList<E>
      * Shifts any subsequent elements to the left (subtracts one from their
      * indices).  Returns the element that was removed from the list.
      *
+     * <p>
+     *  删除此列表中指定位置的元素。将任何后续元素向左移(从它们的索引中减去一个)。返回从列表中删除的元素。
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E remove(int index) {
@@ -518,6 +654,13 @@ public class CopyOnWriteArrayList<E>
      * contained the specified element (or equivalently, if this list
      * changed as a result of the call).
      *
+     * <p>
+     *  从列表中删除指定元素的第一次出现(如果存在)。如果此列表不包含元素,则不会更改。
+     * 更正式地,删除具有最低索引{@code i}的元素,使得<tt>(o == null&nbsp;?&nbsp; get(i)== null&：;&nbsp; o.equals(get(i))) </tt>
+     * (如果这样的元素存在)。
+     *  从列表中删除指定元素的第一次出现(如果存在)。如果此列表不包含元素,则不会更改。如果此列表包含指定的元素(或等效地,如果此列表作为调用的结果而更改),则返回{@code true}。
+     * 
+     * 
      * @param o element to be removed from this list, if present
      * @return {@code true} if this list contained the specified element
      */
@@ -530,6 +673,9 @@ public class CopyOnWriteArrayList<E>
     /**
      * A version of remove(Object) using the strong hint that given
      * recent snapshot contains o at the given index.
+     * <p>
+     *  使用给定最近快照包含o的强提示的remove(Object)版本在给定索引。
+     * 
      */
     private boolean remove(Object o, Object[] snapshot, int index) {
         final ReentrantLock lock = this.lock;
@@ -572,6 +718,11 @@ public class CopyOnWriteArrayList<E>
      * This call shortens the list by {@code (toIndex - fromIndex)} elements.
      * (If {@code toIndex==fromIndex}, this operation has no effect.)
      *
+     * <p>
+     *  从此列表中删除其索引在{@code fromIndex}(包括)和{@code toIndex}(排除)之间的所有元素。将任何后续元素向左移(减少其索引)。
+     * 此调用通过{@code(toIndex  -  fromIndex)}元素缩短列表。 (如果{@code toIndex == fromIndex},此操作没有效果。)。
+     * 
+     * 
      * @param fromIndex index of first element to be removed
      * @param toIndex index after last element to be removed
      * @throws IndexOutOfBoundsException if fromIndex or toIndex out of range
@@ -605,6 +756,10 @@ public class CopyOnWriteArrayList<E>
     /**
      * Appends the element, if not present.
      *
+     * <p>
+     *  追加元素(如果不存在)。
+     * 
+     * 
      * @param e element to be added to this list, if absent
      * @return {@code true} if the element was added
      */
@@ -617,6 +772,9 @@ public class CopyOnWriteArrayList<E>
     /**
      * A version of addIfAbsent using the strong hint that given
      * recent snapshot does not contain e.
+     * <p>
+     *  addIfAbsent的版本使用强提示,给定最近的快照不包含e。
+     * 
      */
     private boolean addIfAbsent(E e, Object[] snapshot) {
         final ReentrantLock lock = this.lock;
@@ -646,6 +804,10 @@ public class CopyOnWriteArrayList<E>
      * Returns {@code true} if this list contains all of the elements of the
      * specified collection.
      *
+     * <p>
+     * 如果此列表包含指定集合的​​所有元素,则返回{@code true}。
+     * 
+     * 
      * @param c collection to be checked for containment in this list
      * @return {@code true} if this list contains all of the elements of the
      *         specified collection
@@ -667,6 +829,10 @@ public class CopyOnWriteArrayList<E>
      * the specified collection. This is a particularly expensive operation
      * in this class because of the need for an internal temporary array.
      *
+     * <p>
+     *  从此列表中删除包含在指定集合中的所有元素。在这个类中,这是一个特别昂贵的操作,因为需要一个内部临时数组。
+     * 
+     * 
      * @param c collection containing elements to be removed from this list
      * @return {@code true} if this list changed as a result of the call
      * @throws ClassCastException if the class of an element of this list
@@ -710,6 +876,10 @@ public class CopyOnWriteArrayList<E>
      * specified collection.  In other words, removes from this list all of
      * its elements that are not contained in the specified collection.
      *
+     * <p>
+     *  仅保留此列表中包含在指定集合中的元素。换句话说,从此列表中删除未包含在指定集合中的所有元素。
+     * 
+     * 
      * @param c collection containing elements to be retained in this list
      * @return {@code true} if this list changed as a result of the call
      * @throws ClassCastException if the class of an element of this list
@@ -754,6 +924,10 @@ public class CopyOnWriteArrayList<E>
      * this list, in the order that they are returned by the
      * specified collection's iterator.
      *
+     * <p>
+     *  将指定集合中尚未包含在此列表中的所有元素按照它们由指定集合的​​迭代器返回的顺序,追加到此列表的末尾。
+     * 
+     * 
      * @param c collection containing elements to be added to this list
      * @return the number of elements added
      * @throws NullPointerException if the specified collection is null
@@ -790,6 +964,9 @@ public class CopyOnWriteArrayList<E>
     /**
      * Removes all of the elements from this list.
      * The list will be empty after this call returns.
+     * <p>
+     *  从此列表中删除所有元素。此调用返回后,列表将为空。
+     * 
      */
     public void clear() {
         final ReentrantLock lock = this.lock;
@@ -806,6 +983,10 @@ public class CopyOnWriteArrayList<E>
      * of this list, in the order that they are returned by the specified
      * collection's iterator.
      *
+     * <p>
+     *  将指定集合中的所有元素以指定集合的​​迭代器返回的顺序追加到此列表的末尾。
+     * 
+     * 
      * @param c collection containing elements to be added to this list
      * @return {@code true} if this list changed as a result of the call
      * @throws NullPointerException if the specified collection is null
@@ -842,6 +1023,10 @@ public class CopyOnWriteArrayList<E>
      * in this list in the order that they are returned by the
      * specified collection's iterator.
      *
+     * <p>
+     *  将指定集合中的所有元素插入到此列表中,从指定位置开始。将当前在该位置的元素(如果有)和任何后续元素向右移动(增加其索引)。新元素将按照它们由指定集合的​​迭代器返回的顺序显示在此列表中。
+     * 
+     * 
      * @param index index at which to insert the first element
      *        from the specified collection
      * @param c collection containing elements to be added to this list
@@ -952,6 +1137,10 @@ public class CopyOnWriteArrayList<E>
     /**
      * Saves this list to a stream (that is, serializes it).
      *
+     * <p>
+     *  将此列表保存到流(即,将其序列化)。
+     * 
+     * 
      * @param s the stream
      * @throws java.io.IOException if an I/O error occurs
      * @serialData The length of the array backing the list is emitted
@@ -974,6 +1163,10 @@ public class CopyOnWriteArrayList<E>
 
     /**
      * Reconstitutes this list from a stream (that is, deserializes it).
+     * <p>
+     *  从流重构此列表(即,反序列化它)。
+     * 
+     * 
      * @param s the stream
      * @throws ClassNotFoundException if the class of a serialized object
      *         could not be found
@@ -1005,6 +1198,11 @@ public class CopyOnWriteArrayList<E>
      * the characters {@code ", "} (comma and space).  Elements are
      * converted to strings as by {@link String#valueOf(Object)}.
      *
+     * <p>
+     * 返回此列表的字符串表示形式。字符串表示形式由列表元素的字符串表示形式组成,它们由迭代器返回的顺序括在方括号中({@code"[]"})。相邻的元素由字符{@code","}(逗号和空格)分隔。
+     * 元素通过{@link String#valueOf(Object)}转换为字符串。
+     * 
+     * 
      * @return a string representation of this list
      */
     public String toString() {
@@ -1023,6 +1221,14 @@ public class CopyOnWriteArrayList<E>
      * Two elements {@code e1} and {@code e2} are considered
      * <em>equal</em> if {@code (e1==null ? e2==null : e1.equals(e2))}.
      *
+     * <p>
+     *  将指定的对象与此列表进行比较以确保相等。
+     * 如果指定的对象与此对象相同,则返回{@code true},或者如果它也是{@link List},并且由{@linkplain List#iterator()迭代器}返回的元素序列超过指定的列表与迭代
+     * 器在此列表上返回的序列相同。
+     *  将指定的对象与此列表进行比较以确保相等。如果两个序列具有相同的长度,并且序列中相同位置处的对应元素<em>相等,则认为两个序列相同。
+     * 如果{@code(e1 == null?e2 == null：e1.equals(e2))},则两个元素{@code e1}和{@code e2}被认为是<em>。
+     * 
+     * 
      * @param o the object to be compared for equality with this list
      * @return {@code true} if the specified object is equal to this list
      */
@@ -1049,6 +1255,12 @@ public class CopyOnWriteArrayList<E>
      *
      * <p>This implementation uses the definition in {@link List#hashCode}.
      *
+     * <p>
+     *  返回此列表的哈希码值。
+     * 
+     *  <p>此实现使用{@link List#hashCode}中的定义。
+     * 
+     * 
      * @return the hash code value for this list
      */
     public int hashCode() {
@@ -1070,6 +1282,12 @@ public class CopyOnWriteArrayList<E>
      * traversing the iterator. The iterator does <em>NOT</em> support the
      * {@code remove} method.
      *
+     * <p>
+     *  以正确的顺序返回此列表中的元素的迭代器。
+     * 
+     *  <p>返回的迭代器提供了迭代器构造时列表状态的快照。遍历迭代器时不需要同步。迭代器会<em>不</em>支持{@code remove}方法。
+     * 
+     * 
      * @return an iterator over the elements in this list in proper sequence
      */
     public Iterator<E> iterator() {
@@ -1083,6 +1301,11 @@ public class CopyOnWriteArrayList<E>
      * when the iterator was constructed. No synchronization is needed while
      * traversing the iterator. The iterator does <em>NOT</em> support the
      * {@code remove}, {@code set} or {@code add} methods.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * <p>返回的迭代器提供了迭代器构造时列表状态的快照。遍历迭代器时不需要同步。迭代器不会</em>支持{@code remove},{@code set}或{@code add}方法。
+     * 
      */
     public ListIterator<E> listIterator() {
         return new COWIterator<E>(getArray(), 0);
@@ -1096,6 +1319,12 @@ public class CopyOnWriteArrayList<E>
      * traversing the iterator. The iterator does <em>NOT</em> support the
      * {@code remove}, {@code set} or {@code add} methods.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  <p>返回的迭代器提供了迭代器构造时列表状态的快照。遍历迭代器时不需要同步。迭代器不会</em>支持{@code remove},{@code set}或{@code add}方法。
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public ListIterator<E> listIterator(int index) {
@@ -1118,6 +1347,15 @@ public class CopyOnWriteArrayList<E>
      * when the spliterator was constructed. No synchronization is needed while
      * operating on the spliterator.
      *
+     * <p>
+     *  在此列表中的元素上返回{@link Spliterator}。
+     * 
+     *  <p> {@code Spliterator}报告{@link Spliterator#IMMUTABLE},{@link Spliterator#ORDERED},{@link Spliterator#SIZED}
+     * 和{@link Spliterator#SUBSIZED}。
+     * 
+     *  <p>拆分器提供构建拆分器时列表状态的快照。在拼接器上操作时不需要同步。
+     * 
+     * 
      * @return a {@code Spliterator} over the elements in this list
      * @since 1.8
      */
@@ -1169,6 +1407,10 @@ public class CopyOnWriteArrayList<E>
 
         /**
          * Not supported. Always throws UnsupportedOperationException.
+         * <p>
+         *  不支持。始终抛出UnsupportedOperationException。
+         * 
+         * 
          * @throws UnsupportedOperationException always; {@code remove}
          *         is not supported by this iterator.
          */
@@ -1178,6 +1420,10 @@ public class CopyOnWriteArrayList<E>
 
         /**
          * Not supported. Always throws UnsupportedOperationException.
+         * <p>
+         *  不支持。始终抛出UnsupportedOperationException。
+         * 
+         * 
          * @throws UnsupportedOperationException always; {@code set}
          *         is not supported by this iterator.
          */
@@ -1187,6 +1433,10 @@ public class CopyOnWriteArrayList<E>
 
         /**
          * Not supported. Always throws UnsupportedOperationException.
+         * <p>
+         *  不支持。始终引发UnsupportedOperationException。
+         * 
+         * 
          * @throws UnsupportedOperationException always; {@code add}
          *         is not supported by this iterator.
          */
@@ -1217,6 +1467,12 @@ public class CopyOnWriteArrayList<E>
      * undefined if the backing list (i.e., this list) is modified in
      * any way other than via the returned list.
      *
+     * <p>
+     *  返回此列表中{@code fromIndex}(包括)和{@code toIndex}(排除)的部分的视图。返回的列表由此列表支持,因此返回列表中的更改将反映在此列表中。
+     * 
+     *  <p>如果以除了通过返回列表之外的任何方式修改后备列表(即,此列表),则由该方法返回的列表的语义变为未定义。
+     * 
+     * 
      * @param fromIndex low endpoint (inclusive) of the subList
      * @param toIndex high endpoint (exclusive) of the subList
      * @return a view of the specified range within this list
@@ -1250,6 +1506,10 @@ public class CopyOnWriteArrayList<E>
      * improving.  The kinds of list operations inherited from
      * AbstractList are already so slow on COW sublists that
      * adding a bit more space/time doesn't seem even noticeable.
+     * <p>
+     * CopyOnWriteArrayList的子列表。这个类扩展AbstractList只是为了方便,以避免定义addAll等。这不伤害,但是浪费。
+     * 这个类不需要或在AbstractList中使用modCount机制,但是需要使用类似的机制检查并发修改。在每个操作上,我们期望使用的备份列表的数组被检查和更新。
+     * 因为我们对AbstractList中定义的所有基本操作都这样做,一切都很好。虽然效率低下,但这不值得改进。
      */
     private static class COWSubList<E>
         extends AbstractList<E>

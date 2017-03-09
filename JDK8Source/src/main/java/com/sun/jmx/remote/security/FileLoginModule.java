@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -107,6 +108,36 @@ import sun.management.jmxremote.ConnectorBootstrap;
  *      stored in the module's shared state after both phases of authentication
  *      (login and commit) have completed.</dd>
  * </dl>
+ * <p>
+ *  此{@link LoginModule}执行基于文件的身份验证。
+ * 
+ *  <p>提供的用户名和密码与存储在指定密码文件中的相应用户凭证进行验证。如果成功,则使用用户名创建新的{@link JMXPrincipal},并将其与当前{@link主题}相关联。
+ * 可以在用于JMX远程管理的访问控制文件中或在Java安全策略中识别和授予这样的主体管理特权。
+ * 
+ *  <p>密码文件包含在{@link属性}中指定的键值对列表。键表示用户的名称,值是其关联的明文密码。默认情况下,使用以下密码文件：
+ * <pre>
+ *  $ {java.home} /lib/management/jmxremote.password
+ * </pre>
+ *  可以通过<code> passwordFile </code>配置选项指定不同的密码文件。
+ * 
+ *  <p>此模块识别以下<code>配置</code>选项：
+ * <dl>
+ *  <dt> <code> passwordFile </code> </dt> <dd>替代密码文件的路径。它用于代替默认密码文件。</dd>
+ * 
+ * <dt> <code> useFirstPass </code> </dt> <dd>如果<code> true </code>,此模块从模块的共享状态检索用户名和密码,使用"javax.securit
+ * y.auth.login .name"和"javax.security.auth.login.password"作为相应的键。
+ * 检索的值用于认证。如果身份验证失败,则不会尝试重试,并将该失败报告给调用应用程序。</dd>。
+ * 
+ *  <dt> <code> tryFirstPass </code> </dt> <dd>如果<code> true </code>,此模块从模块的共享状态检索用户名和密码,使用"javax.securi
+ * ty.auth.login .name"和"javax.security.auth.login.password"作为相应的键。
+ * 检索的值用于认证。如果认证失败,模块使用CallbackHandler检索新的用户名和密码,并进行另一次尝试认证。如果认证失败,则将故障报告回调用的应用程序。</dd>。
+ * 
+ *  <dt> <code> storePass </code> </dt> <dd>如果<code> true </code>,此模块将从模块的共享状态中存储从CallbackHandler获取的用户名和
+ * 密码,使用"javax.security .auth.login.name"和"javax.security.auth.login.password"作为相应的键。
+ * 如果共享状态下的用户名和密码已存在,或者认证失败,则不会执行此操作。</dd>。
+ * 
+ * <dt> <code> clearPass </code> </dt> <dd>如果<code> true </code>,此模块清除存储在模块的共享状态中的用户名和密码, )已完成。</dd>
+ * </dl>
  */
 public class FileLoginModule implements LoginModule {
 
@@ -158,6 +189,10 @@ public class FileLoginModule implements LoginModule {
     /**
      * Initialize this <code>LoginModule</code>.
      *
+     * <p>
+     *  初始化此<code> LoginModule </code>。
+     * 
+     * 
      * @param subject the <code>Subject</code> to be authenticated.
      * @param callbackHandler a <code>CallbackHandler</code> to acquire the
      *                  user's name and password.
@@ -212,6 +247,12 @@ public class FileLoginModule implements LoginModule {
      * <p> Acquire the user's name and password and verify them against
      * the corresponding credentials from the password file.
      *
+     * <p>
+     *  开始用户身份验证(身份验证阶段1)。
+     * 
+     *  <p>获取用户的名称和密码,并根据密码文件中的相应凭据进行验证。
+     * 
+     * 
      * @return true always, since this <code>LoginModule</code>
      *          should not be ignored.
      * @exception FailedLoginException if the authentication fails.
@@ -326,6 +367,16 @@ public class FileLoginModule implements LoginModule {
      * authentication attempted failed, then this method removes
      * any state that was originally saved.
      *
+     * <p>
+     *  完成用户认证(认证阶段2)。
+     * 
+     *  <p>如果LoginContext的整体认证已成功(所有相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModule都已成功),则调用此方法。
+     * 
+     *  <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>方法保存的私有状态进行检查),则此方法将<code> JMXPrincipal </code>
+     * 与<code> Subject </code>位于<code> LoginModule </code>中。
+     * 如果此LoginModule自己的身份验证尝试失败,则此方法将删除最初保存的任何状态。
+     * 
+     * 
      * @exception LoginException if the commit fails
      * @return true if this LoginModule's own login and commit
      *          attempts succeeded, or false otherwise.
@@ -367,6 +418,15 @@ public class FileLoginModule implements LoginModule {
      * <code>login</code> and <code>commit</code> methods),
      * then this method cleans up any state that was originally saved.
      *
+     * <p>
+     *  中止用户认证(认证阶段2)。
+     * 
+     *  <p>如果LoginContext的整体身份验证失败(相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules未成功),则调用此方法。
+     * 
+     * <p>如果此LoginModule自己的身份验证尝试成功(通过检索由<code> login </code>和<code> commit </code>方法保存的私有状态进行检查),则此方法将清除原来保
+     * 存。
+     * 
+     * 
      * @exception LoginException if the abort fails.
      * @return false if this LoginModule's own login and/or commit attempts
      *          failed, and true otherwise.
@@ -400,6 +460,12 @@ public class FileLoginModule implements LoginModule {
      * <p> This method removes the Principals
      * that were added by the <code>commit</code> method.
      *
+     * <p>
+     *  注销用户。
+     * 
+     *  <p>此方法删除由<code> commit </code>方法添加的Principal。
+     * 
+     * 
      * @exception LoginException if the logout fails.
      * @return true in all cases since this <code>LoginModule</code>
      *          should not be ignored.
@@ -427,6 +493,10 @@ public class FileLoginModule implements LoginModule {
     /**
      * Attempt authentication
      *
+     * <p>
+     *  尝试认证
+     * 
+     * 
      * @param usePasswdFromSharedState a flag to tell this method whether
      *          to retrieve the password from the sharedState.
      */
@@ -470,6 +540,9 @@ public class FileLoginModule implements LoginModule {
 
     /*
      * Read the password file.
+     * <p>
+     *  读取密码文件。
+     * 
      */
     private void loadPasswordFile() throws IOException {
         FileInputStream fis;
@@ -509,6 +582,12 @@ public class FileLoginModule implements LoginModule {
      * values in the shared state in case subsequent LoginModules
      * want to use them via use/tryFirstPass.
      *
+     * <p>
+     *  获取用户名和密码。此方法不返回任何值。相反,它设置全局名称和密码变量。
+     * 
+     *  <p>另请注意,此方法将在共享状态下设置用户名和密码值,以防后续LoginModules想通过use / tryFirstPass使用它们。
+     * 
+     * 
      * @param usePasswdFromSharedState boolean that tells this method whether
      *          to retrieve the password from the sharedState.
      */
@@ -554,6 +633,7 @@ public class FileLoginModule implements LoginModule {
 
     /**
      * Clean out state because of a failed authentication attempt
+     * <p>
      */
     private void cleanState() {
         username = null;

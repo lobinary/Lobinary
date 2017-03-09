@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,12 @@ import javax.management.loading.ClassLoaderRepository;
  * only the methods from {@link javax.management.loading.ClassLoaderRepository}
  * can be accessed (read-only).
  *
+ * <p>
+ *  修复ClassLoaderRepository中的安全漏洞。
+ * 这个类包装实际的ClassLoaderRepository实现,以便只能访问{@link javax.management.loading.ClassLoaderRepository}中的方法(只读)。
+ *  修复ClassLoaderRepository中的安全漏洞。
+ * 
+ * 
  * @since 1.5
  */
 final class SecureClassLoaderRepository
@@ -41,6 +48,8 @@ final class SecureClassLoaderRepository
     /**
      * Creates a new secure ClassLoaderRepository wrapping an
      * unsecure implementation.
+     * <p>
+     * 
      * @param clr Unsecure {@link ClassLoaderRepository} implementation
      *            to wrap.
      **/

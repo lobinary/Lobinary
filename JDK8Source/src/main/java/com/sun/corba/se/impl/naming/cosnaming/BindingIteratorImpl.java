@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,14 @@ import org.omg.CORBA.BAD_PARAM;
  * A subclass must implement NextOne() and Destroy(); these
  * methods are invoked from synchronized methods and need therefore
  * not be synchronized themselves.
+ * <p>
+ *  BindingIteratorImpl类实现了org.omg.CosNaming :: BindingIterator接口,但没有实现该方法来检索为其创建的NamingContext中的下一个绑定。
+ * 这是留给一个子类,这就是为什么这个类是抽象的; BindingIteratorImpl提供了在两个子类方法之上的接口操作的实现,允许多个实现在存储和访问NamingContext实现的内容不同的迭代器。
+ * <p>
+ *  操作next_one()由子类实现,而next_n()在next_one()实现的顶部实现。销毁也必须由子类实现。
+ * <p>
+ *  子类必须实现NextOne()和Destroy();这些方法从同步方法调用,因此不需要自己同步。
+ * 
  */
 public abstract class BindingIteratorImpl extends BindingIteratorPOA
 {
@@ -63,6 +72,10 @@ public abstract class BindingIteratorImpl extends BindingIteratorPOA
     /**
      * Create a binding iterator servant.
      * runs the super constructor.
+     * <p>
+     *  创建绑定迭代器服务方。运行超级构造函数。
+     * 
+     * 
      * @param orb an ORB object.
      * @exception java.lang.Exception a Java exception.
      */
@@ -76,6 +89,10 @@ public abstract class BindingIteratorImpl extends BindingIteratorPOA
     /**
      * Return the next binding. It also returns true or false, indicating
      * whether there were more bindings.
+     * <p>
+     *  返回下一个绑定。它也返回true或false,指示是否有更多的绑定。
+     * 
+     * 
      * @param b The Binding as an out parameter.
      * @return true if there were more bindings.
      * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA
@@ -91,6 +108,10 @@ public abstract class BindingIteratorImpl extends BindingIteratorPOA
     /**
      * Return the next n bindings. It also returns true or false, indicating
      * whether there were more bindings.
+     * <p>
+     *  返回下n个绑定。它也返回true或false,指示是否有更多的绑定。
+     * 
+     * 
      * @param how_many The number of requested bindings in the BindingList.
      * @param bl The BindingList as an out parameter.
      * @return true if there were more bindings.
@@ -113,6 +134,10 @@ public abstract class BindingIteratorImpl extends BindingIteratorPOA
      * whether there were more bindings. This method has the package private
      * scope, It will be called from NamingContext.list() operation or
      * this.next_n().
+     * <p>
+     *  列出下n个绑定。它返回true或false,指示是否有更多的绑定。此方法具有包的私有作用域,它将从NamingContext.list()操作或this.next_n()调用。
+     * 
+     * 
      * @param how_many The number of requested bindings in the BindingList.
      * @param bl The BindingList as an out parameter.
      * @return true if there were more bindings.
@@ -150,6 +175,10 @@ public abstract class BindingIteratorImpl extends BindingIteratorPOA
     /**
      * Destroy this BindingIterator object. The object corresponding to this
      * object reference is destroyed.
+     * <p>
+     * 销毁此BindingIterator对象。与此对象引用相对应的对象被销毁。
+     * 
+     * 
      * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA
      * system exceptions.
      * @see Destroy
@@ -163,6 +192,10 @@ public abstract class BindingIteratorImpl extends BindingIteratorPOA
     /**
      * Abstract method for returning the next binding in the NamingContext
      * for which this BindingIterator was created.
+     * <p>
+     *  用于返回创建了此BindingIterator的NamingContext中的下一个绑定的抽象方法。
+     * 
+     * 
      * @param b The Binding as an out parameter.
      * @return true if there were more bindings.
      * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA
@@ -172,6 +205,10 @@ public abstract class BindingIteratorImpl extends BindingIteratorPOA
 
     /**
      * Abstract method for destroying this BindingIterator.
+     * <p>
+     *  破坏这个BindingIterator的抽象方法。
+     * 
+     * 
      * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA
      * system exceptions.
      */
@@ -179,6 +216,9 @@ public abstract class BindingIteratorImpl extends BindingIteratorPOA
 
     /**
      * Abstract method for returning the remaining number of elements.
+     * <p>
+     *  用于返回剩余数量的元素的抽象方法。
+     * 
      * @return the remaining number of elements in the iterator.
      */
     protected abstract int RemainingElements();

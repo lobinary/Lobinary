@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: IncrementalSAXSource_Filter.java,v 1.2.4.1 2005/09/15 08:15:07 suresh_emailid Exp $
+ * <p>
+ *  $ Id：IncrementalSAXSource_Filter.java,v 1.2.4.1 2005/09/15 08:15:07 suresh_emailid Exp $
+ * 
  */
 
 package com.sun.org.apache.xml.internal.dtm.ref;
@@ -69,6 +82,24 @@ import org.xml.sax.ext.LexicalHandler;
  * This class is final and package private for security reasons. Please
  * see CR 6537912 for further details.
  *
+ * <p>
+ *  标准SAX2事件源作为其输入,并在响应deliverMoreNodes()请求时逐步分析这些事件。
+ * 来自过滤器的输出将被传递给一个注册为我们的监听器的SAX处理程序,但是这些回调将通过一个计数阶段,它周期性地产生控制回到控制器协程。
+ * </p>
+ * 
+ *  <p>％REVIEW％：此过滤器不是可重用于解析其他流/文档。我们可能希望考虑在将来的某个时间将其重置。
+ * 但它是一个小对象,所以,大多是一个方便的问题;每次分配的成本与处理任何非流量流的成本相比是微不足道的。</p>。
+ * 
+ * <p>有关简要的使用示例,请参阅unit-test main()方法。</p>
+ * 
+ *  <p>这是旧的CoroutineSAXParser的简化,专门关注过滤。
+ * 生成的控制器协议是_far_更简单,更不容易出错;唯一的控制器操作是deliverMoreNodes(),并且唯一的要求是如果您想要丢弃流的其余部分并且之前的deliverMoreNodes()没有返回
+ * false,则调用deliverMoreNodes(false)。
+ *  <p>这是旧的CoroutineSAXParser的简化,专门关注过滤。
+ * 
+ *  出于安全原因,此类是最终的和包私有的。详情请参阅CR 6537912。
+ * 
+ * 
  * */
 final class IncrementalSAXSource_Filter
 implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, ErrorHandler, Runnable
@@ -108,6 +139,10 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
 
   /** Create a IncrementalSAXSource_Filter which is not yet bound to a specific
    * SAX event source.
+   * <p>
+   *  SAX事件源。
+   * 
+   * 
    * */
   public IncrementalSAXSource_Filter(CoroutineManager co, int controllerCoroutineID)
   {
@@ -144,6 +179,10 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    *
    * Just a convenience routine; obviously you can explicitly register
    * this as a listener with the same effect.
+   * <p>
+   *  只是一个方便的例程;显然你可以显式地注册这个具有相同效果的监听器。
+   * 
+   * 
    * */
   public void setXMLReader(XMLReader eventsource)
   {
@@ -473,6 +512,10 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    * If you're using the do...() methods, applications should only
    * need to talk to the CoroutineManager once, to obtain the
    * application's Coroutine ID.
+   * <p>
+   *  如果你使用do ...()方法,应用程序应该只需要与CoroutineManager交谈一次,以获取应用程序的Coroutine ID。
+   * 
+   * 
    * */
   public CoroutineManager getCoroutineManager()
   {
@@ -487,6 +530,11 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    * routine for the convenience of subclasses: every [frequency]
    * invocations, issue a co_yield.</p>
    *
+   * <p>
+   *  希望鼓励编译器提供更好的性能。但是,如果我们子类化(例如直接连接到一个DTM生成器的输出),这将需要调用超级为了运行那个逻辑...这似乎不起眼。
+   * 因此这个例程为方便子类：每个[频率]调用,发出co_yield。</p>。
+   * 
+   * 
    * @param moreExepected Should always be true unless this is being called
    * at the end of endDocument() handling.
    * */
@@ -507,6 +555,9 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    * from the controller before delivering any events. Note that
    * the very first thing the controller tells us may be "I don't
    * need events after all"!
+   * <p>
+   *  co_entry_pause在startDocument()中调用,然后再发生。它导致过滤器在传递任何事件之前等待来自控制器的"继续"请求。注意控制器告诉我们的第一件事可能是"我毕竟不需要事件"！
+   * 
    */
   private void co_entry_pause() throws SAXException
   {
@@ -552,6 +603,18 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    * coming from another source, we can't do that because its caller may
    * not be prepared for this "normal abnormal exit", and instead we put
    * ourselves in a "spin" mode where events are discarded.
+   * <p>
+   * 当解析正在进行时,Co_Yield处理coroutine交互。
+   * 
+   *  当moreRemains == true时,我们在传递事件后暂停,询问是否需要更多。我们将使用co_resume(Boolean.TRUE,...)恢复控制器线程。
+   * 当控制被传递回来时,它可以指示继续传递事件的Boolean.TRUE指示。布尔。FALSE指示,以停止事件并关闭。
+   * 
+   *  当moreRemains == false时,我们立即关闭而不询问控制器的权限。通常这意味着已经到达文档的结束。
+   * 
+   *  关闭IncrementalSAXSource_Filter需要终止传入的SAX事件流。
+   * 如果我们在控制这个流(如果它来自一个XMLReader传递给我们的startReader()方法),我们可以通过抛出一个保留的异常来做到这一点。
+   * 如果流来自另一个源,我们不能这样做,因为它的调用者可能不准备这种"正常的异常退出",而是我们自己处于"自旋"模式,其中事件被丢弃。
+   * 
    */
   private void co_yield(boolean moreRemains) throws SAXException
   {
@@ -603,6 +666,11 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    *  we can halt parsing quickly via a StopException rather than waiting
    *  for the SAX stream to end by itself.
    *
+   * <p>
+   *  一个线程,将事件馈送到这个IncrementalSAXSource_Filter。
+   * 主要是一个方便的例程,但有一个优点,因为我们调用parse() - 我们可以通过StopException停止快速解析,而不是等待SAX流自身结束。
+   * 
+   * 
    * @throws SAXException is parse thread is already in progress
    * or parsing can not be started.
    * */
@@ -621,6 +689,7 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   }
 
   /* Thread logic to support startParseThread()
+  /* <p>
    */
   public void run()
   {
@@ -688,6 +757,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   }
 
   /** Used to quickly terminate parse when running under a
+  /* <p>
+  /* 
       startParse() thread. Only its type is important. */
   class StopException extends RuntimeException
   {
@@ -699,6 +770,10 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    * from one of our partner routines, and serves to encapsulate the
    * details of how incremental parsing has been achieved.
    *
+   * <p>
+   *  解析器,我们需要更多的节点。这旨在从我们的合作伙伴例程中调用,并用于封装已实现增量解析的详细信息。
+   * 
+   * 
    * @param parsemore If true, tells the incremental filter to generate
    * another chunk of output. If false, tells the filter that we're
    * satisfied and it can terminate parsing of this document.
@@ -741,6 +816,9 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   //================================================================
   /** Simple unit test. Attempt coroutine parsing of document indicated
    * by first argument (as a URI), report progress.
+   * <p>
+   * 通过第一个参数(作为URI),报告进度。
+   * 
    */
     /*
   public static void _main(String args[])
@@ -809,5 +887,22 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
       }
     } // end for
   }
+    /* <p>
+    /*  public static void _main(String args []){System.out.println("Starting ...");
+    /* 
+    /*  org.xml.sax.XMLReader theSAXParser = new com.sun.org.apache.xerces.internal.parsers.SAXParser();
+    /* 
+    /*  for(int arg = 0; arg <args.length; ++ arg){//在解析结束后,该过滤器目前不被设计为可重新启动。每次生成一个新的。
+    /*  IncrementalSAXSource_Filter filter = new IncrementalSAXSource_Filter(); //使用serializer作为我们的示例输出com.s
+    /* un.org.apache.xml.internal.serialize.XMLSerializer trace; trace = new com.sun.org.apache.xml.internal
+    /* .serialize.XMLSerializer(System.out,null); filter.setContentHandler(trace); filter.setLexicalHandler(
+    /* trace);。
+    /*  for(int arg = 0; arg <args.length; ++ arg){//在解析结束后,该过滤器目前不被设计为可重新启动。每次生成一个新的。
+    /* 
+    /*  try {InputSource source = new InputSource(args [arg]); Object result = null; boolean more = true;
+    /* 
+    /*  // init not issued;我们_should_自动做正确的事
+    /* 
+    /*  //绑定解析器,启动解析线程中的filter.setXMLReader(theSAXParser); filter.startParse(source);
     */
 } // class IncrementalSAXSource_Filter

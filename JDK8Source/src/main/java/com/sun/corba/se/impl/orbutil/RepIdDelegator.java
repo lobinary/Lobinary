@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,8 @@ import com.sun.corba.se.impl.util.RepositoryId;
  * com.sun.corba.se.impl.util.  This is necessary to
  * overcome the fact that many of RepositoryId's methods
  * are static.
+ * <p>
+ *  代理到com.sun.corba.se.impl.util中的当前RepositoryId实现。这是必要的,以克服RepositoryId的许多方法是静态的事实。
  */
 public final class RepIdDelegator
     implements RepositoryIdStrings,

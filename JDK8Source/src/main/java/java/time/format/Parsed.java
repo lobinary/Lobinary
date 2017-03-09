@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2008-2013,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.format;
 
@@ -118,6 +137,16 @@ import java.util.Set;
  * Usage of the class is thread-safe within standard parsing as a new instance of this class
  * is automatically created for each parse and parsing is single-threaded
  *
+ * <p>
+ *  解析数据的存储。
+ * <p>
+ *  此类在解析期间用于收集数据。解析过程的一部分涉及处理可选的块和创建的数据的多个副本以支持必要的回溯。
+ * <p>
+ *  一旦解析完成,这个类可以用作结果{@code TemporalAccessor}。在大多数情况下,只有字段解析后才会显示。
+ * 
+ *  @implSpec这个类是一个可变的上下文,用于单线程。在标准解析中,类的使用是线程安全的,因为每个解析都会自动创建此类的新实例,并且解析是单线程的
+ * 
+ * 
  * @since 1.8
  */
 final class Parsed implements TemporalAccessor {
@@ -125,45 +154,75 @@ final class Parsed implements TemporalAccessor {
 
     /**
      * The parsed fields.
+     * <p>
+     *  解析字段。
+     * 
      */
     final Map<TemporalField, Long> fieldValues = new HashMap<>();
     /**
      * The parsed zone.
+     * <p>
+     *  解析区域。
+     * 
      */
     ZoneId zone;
     /**
      * The parsed chronology.
+     * <p>
+     *  解析的年表。
+     * 
      */
     Chronology chrono;
     /**
      * Whether a leap-second is parsed.
+     * <p>
+     *  是否解析闰秒。
+     * 
      */
     boolean leapSecond;
     /**
      * The resolver style to use.
+     * <p>
+     * 要使用的解析器样式。
+     * 
      */
     private ResolverStyle resolverStyle;
     /**
      * The resolved date.
+     * <p>
+     *  解析日期。
+     * 
      */
     private ChronoLocalDate date;
     /**
      * The resolved time.
+     * <p>
+     *  解决时间。
+     * 
      */
     private LocalTime time;
     /**
      * The excess period from time-only parsing.
+     * <p>
+     *  超时时间从只有时间的解析。
+     * 
      */
     Period excessDays = Period.ZERO;
 
     /**
      * Creates an instance.
+     * <p>
+     *  创建实例。
+     * 
      */
     Parsed() {
     }
 
     /**
      * Creates a copy.
+     * <p>
+     *  创建副本。
+     * 
      */
     Parsed copy() {
         // only copy fields used in parsing stage
@@ -230,6 +289,9 @@ final class Parsed implements TemporalAccessor {
     /**
      * Resolves the fields in this context.
      *
+     * <p>
+     *  解析此上下文中的字段。
+     * 
      * @param resolverStyle  the resolver style, not null
      * @param resolverFields  the fields to use for resolving, null for all fields
      * @return this, for method chaining

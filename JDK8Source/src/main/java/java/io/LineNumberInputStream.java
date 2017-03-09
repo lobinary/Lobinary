@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,14 @@ package java.io;
  * The line number begins at {@code 0}, and is incremented by
  * {@code 1} when a {@code read} returns a newline character.
  *
+ * <p>
+ *  此类是一个输入流过滤器,提供了跟踪当前行号的附加功能。
+ * <p>
+ *  一行是以回车字符({@code'\ u005Cr'}),换行符({@code'\ u005Cn'})或回车符结束的字符序列,后面紧跟换行符。在所有三种情况下,行终止字符作为单个换行符返回。
+ * <p>
+ *  行号从{@code 0}开始,当{@code read}返回换行符时,该行号递增{@code 1}。
+ * 
+ * 
  * @author     Arthur van Hoff
  * @see        java.io.LineNumberReader
  * @since      JDK1.0
@@ -58,6 +67,10 @@ class LineNumberInputStream extends FilterInputStream {
      * Constructs a newline number input stream that reads its input
      * from the specified input stream.
      *
+     * <p>
+     *  构造从指定的输入流读取其输入的换行数输入流。
+     * 
+     * 
      * @param      in   the underlying input stream.
      */
     public LineNumberInputStream(InputStream in) {
@@ -81,6 +94,14 @@ class LineNumberInputStream extends FilterInputStream {
      * a carriage return followed by a newline character are both
      * converted into a single newline character.
      *
+     * <p>
+     *  从此输入流读取数据的下一个字节。值字节作为{@code int}在范围{@code 0}到{@code 255}中返回。如果没有字节可用,因为已经到达流的结尾,则返回值{@code -1}。
+     * 此方法阻塞,直到输入数据可用,检测到流的结尾,或抛出异常。
+     * <p>
+     * {@code LineNumberInputStream}的{@code read}方法调用底层输入流的{@code read}方法。它检查输入中的回车符和换行符,并根据需要修改当前行号。
+     * 回车字符或回车符后跟换行符都将转换为单个换行符。
+     * 
+     * 
      * @return     the next byte of data, or {@code -1} if the end of this
      *             stream is reached.
      * @exception  IOException  if an I/O error occurs.
@@ -118,6 +139,12 @@ class LineNumberInputStream extends FilterInputStream {
      * {@code LineNumberInputStream} repeatedly calls the
      * {@code read} method of zero arguments to fill in the byte array.
      *
+     * <p>
+     *  从此输入流中读取{@code len}字节的数据,形成一个字节数组。此方法阻塞,直到某些输入可用。
+     * <p>
+     *  {@code LineNumberInputStream}的{@code read}方法重复调用零参数的{@code read}方法以填充字节数组。
+     * 
+     * 
      * @param      b     the buffer into which the data is read.
      * @param      off   the start offset of the data.
      * @param      len   the maximum number of bytes read.
@@ -171,6 +198,13 @@ class LineNumberInputStream extends FilterInputStream {
      * {@code n} bytes have been read or the end of the stream has
      * been reached.
      *
+     * <p>
+     *  跳过并丢弃此输入流中的{@code n}字节数据。由于各种原因,{@code skip}方法可能跳过一些较小数量的字节,可能是{@code 0}。将返回实际跳过的字节数。
+     * 如果{@code n}为负,则不跳过任何字节。
+     * <p>
+     *  {@code LineNumberInputStream}的{@code skip}方法创建一个字节数组,然后重复读取,直到读取了{@code n}个字节或已到达流的结尾。
+     * 
+     * 
      * @param      n   the number of bytes to be skipped.
      * @return     the actual number of bytes skipped.
      * @exception  IOException  if an I/O error occurs.
@@ -201,6 +235,10 @@ class LineNumberInputStream extends FilterInputStream {
     /**
      * Sets the line number to the specified argument.
      *
+     * <p>
+     *  将行号设置为指定的参数。
+     * 
+     * 
      * @param      lineNumber   the new line number.
      * @see #getLineNumber
      */
@@ -211,6 +249,10 @@ class LineNumberInputStream extends FilterInputStream {
     /**
      * Returns the current line number.
      *
+     * <p>
+     *  返回当前行号。
+     * 
+     * 
      * @return     the current line number.
      * @see #setLineNumber
      */
@@ -232,6 +274,13 @@ class LineNumberInputStream extends FilterInputStream {
      * {@code '\u005Cn'}, which are converted to just
      * <i>k</i>/2 {@code '\u005Cn'} characters.
      *
+     * <p>
+     *  返回可以从此输入流读取但不阻塞的字节数。
+     * <p>
+     * 注意,如果底层输入流能够提供<k>输入字符而不阻塞,则{@code LineNumberInputStream}可以保证只提供<k> k / 2个字符而不阻塞,因为来自基本输入流的<k> k个字符可以由
+     * {@code'\ u005Cr'}和{@code'\ u005Cn'}的k / 2对组成,它们是只转换成<i> k </i> / 2 {@code'\ u005Cn'}个字元。
+     * 
+     * 
      * @return     the number of bytes that can be read from this input stream
      *             without blocking.
      * @exception  IOException  if an I/O error occurs.
@@ -251,6 +300,12 @@ class LineNumberInputStream extends FilterInputStream {
      * number in a private variable, and then calls the {@code mark}
      * method of the underlying input stream.
      *
+     * <p>
+     *  标记此输入流中的当前位置。随后调用{@code reset}方法会在最后标记的位置重新定位此流,以便后续读取重新读取相同的字节。
+     * <p>
+     *  {@code LineNumberInputStream}的{@code mark}方法会记住私有变量中的当前行号,然后调用底层输入流的{@code mark}方法。
+     * 
+     * 
      * @param   readlimit   the maximum limit of bytes that can be read before
      *                      the mark position becomes invalid.
      * @see     java.io.FilterInputStream#in
@@ -281,6 +336,12 @@ class LineNumberInputStream extends FilterInputStream {
      * which, if it happens within readlimit bytes, allows the outer
      * code to reset the stream and try another parser.
      *
+     * <p>
+     *  将此流重定位到在此输入流上最后调用{@code mark}方法时的位置。
+     * <p>
+     *  {@code LineNumberInputStream}的{@code reset}方法将行号重置为调用{@code mark}方法时的行号,然后调用底层输入流的{@code reset}方法。
+     * <p>
+     * 
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterInputStream#in
      * @see        java.io.LineNumberInputStream#mark(int)

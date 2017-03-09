@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,14 @@ package javax.xml.bind.annotation.adapters;
  * Replaces any tab, CR, and LF by a whitespace character ' ',
  * as specified in <a href="http://www.w3.org/TR/xmlschema-2/#rf-whiteSpace">the whitespace facet 'replace'</a>
  *
+ * <p>
+ *  {@link XmlAdapter}以处理<tt> xs：normalizedString </tt>。
+ * 
+ * <p>
+ *  将任何制表符,CR和LF替换为空格字符"",如<a href="http://www.w3.org/TR/xmlschema-2/#rf-whiteSpace"> whitespace facet'r
+ * eplace中所指定'</a>。
+ * 
+ * 
  * @author Kohsuke Kawaguchi, Martin Grebac
  * @since JAXB 2.0
  */
@@ -41,6 +50,10 @@ public final class NormalizedStringAdapter extends XmlAdapter<String,String> {
     /**
      * Replace any tab, CR, and LF by a whitespace character ' ',
      * as specified in <a href="http://www.w3.org/TR/xmlschema-2/#rf-whiteSpace">the whitespace facet 'replace'</a>
+     * <p>
+     *  将任何制表符,CR和LF替换为空格字符"",如<a href="http://www.w3.org/TR/xmlschema-2/#rf-whiteSpace"> whitespace facet'r
+     * eplace中所指定'</a>。
+     * 
      */
     public String unmarshal(String text) {
         if(text==null)      return null;    // be defensive
@@ -71,6 +84,11 @@ public final class NormalizedStringAdapter extends XmlAdapter<String,String> {
      * No-op.
      *
      * Just return the same string given as the parameter.
+     * <p>
+     *  无操作。
+     * 
+     *  只返回与参数给定的相同的字符串。
+     * 
      */
         public String marshal(String s) {
             return s;
@@ -80,6 +98,7 @@ public final class NormalizedStringAdapter extends XmlAdapter<String,String> {
     /**
      * Returns true if the specified char is a white space character
      * but not 0x20.
+     * <p>
      */
     protected static boolean isWhiteSpaceExceptSpace(char ch) {
         // most of the characters are non-control characters.

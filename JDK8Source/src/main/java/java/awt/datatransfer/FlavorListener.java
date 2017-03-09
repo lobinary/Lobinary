@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.util.EventListener;
 /**
  * Defines an object which listens for {@link FlavorEvent}s.
  *
+ * <p>
+ *  定义侦听{@link FlavorEvent}的对象。
+ * 
+ * 
  * @author Alexander Gerasimov
  * @since 1.5
  */
@@ -49,6 +54,11 @@ public interface FlavorListener extends EventListener {
      * a significant notification. Ordinarily, those redundant
      * notifications should be occasional.
      *
+     * <p>
+     *  当侦听器的目标{@link Clipboard}更改了其可用的{@link DataFlavor}时调用。
+     * <p>
+     *  一些通知可能是冗余的 - 它们不是由剪贴板上可用的DataFlavors集合的改变引起的。
+     * 
      * @param e  a <code>FlavorEvent</code> object
      */
     void flavorsChanged(FlavorEvent e);

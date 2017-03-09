@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,9 @@ class ZipUtils {
 
     /**
      * Converts Windows time (in microseconds, UTC/GMT) time to FileTime.
+     * <p>
+     *  将Windows时间(以微秒,UTC / GMT)为单位转换为FileTime。
+     * 
      */
     public static final FileTime winTimeToFileTime(long wtime) {
         return FileTime.from(wtime / 10 + WINDOWS_EPOCH_IN_MICROSECONDS,
@@ -47,6 +51,9 @@ class ZipUtils {
 
     /**
      * Converts FileTime to Windows time.
+     * <p>
+     *  将FileTime转换为Windows时间。
+     * 
      */
     public static final long fileTimeToWinTime(FileTime ftime) {
         return (ftime.to(TimeUnit.MICROSECONDS) - WINDOWS_EPOCH_IN_MICROSECONDS) * 10;
@@ -54,6 +61,9 @@ class ZipUtils {
 
     /**
      * Converts "standard Unix time"(in seconds, UTC/GMT) to FileTime
+     * <p>
+     *  将"标准Unix时间"(以秒,UTC / GMT)转​​换为FileTime
+     * 
      */
     public static final FileTime unixTimeToFileTime(long utime) {
         return FileTime.from(utime, TimeUnit.SECONDS);
@@ -61,6 +71,9 @@ class ZipUtils {
 
     /**
      * Converts FileTime to "standard Unix time".
+     * <p>
+     *  将FileTime转换为"标准Unix时间"。
+     * 
      */
     public static final long fileTimeToUnixTime(FileTime ftime) {
         return ftime.to(TimeUnit.SECONDS);
@@ -68,6 +81,9 @@ class ZipUtils {
 
     /**
      * Converts DOS time to Java time (number of milliseconds since epoch).
+     * <p>
+     *  将DOS时间转换为Java时间(自纪元以来的毫秒数)。
+     * 
      */
     public static long dosToJavaTime(long dtime) {
         @SuppressWarnings("deprecation") // Use of date constructor.
@@ -82,6 +98,9 @@ class ZipUtils {
 
     /**
      * Converts Java time to DOS time.
+     * <p>
+     *  将Java时间转换为DOS时间。
+     * 
      */
     @SuppressWarnings("deprecation") // Use of date methods
     public static long javaToDosTime(long time) {
@@ -98,6 +117,9 @@ class ZipUtils {
     /**
      * Fetches unsigned 16-bit value from byte array at specified offset.
      * The bytes are assumed to be in Intel (little-endian) byte order.
+     * <p>
+     *  从指定偏移量的字节数组中读取无符号16位值。这些字节假定是以英特尔(小端)字节顺序。
+     * 
      */
     public static final int get16(byte b[], int off) {
         return Byte.toUnsignedInt(b[off]) | (Byte.toUnsignedInt(b[off+1]) << 8);
@@ -106,6 +128,9 @@ class ZipUtils {
     /**
      * Fetches unsigned 32-bit value from byte array at specified offset.
      * The bytes are assumed to be in Intel (little-endian) byte order.
+     * <p>
+     *  从指定偏移量的字节数组中读取无符号32位值。这些字节假定是以英特尔(小端)字节顺序。
+     * 
      */
     public static final long get32(byte b[], int off) {
         return (get16(b, off) | ((long)get16(b, off+2) << 16)) & 0xffffffffL;
@@ -114,6 +139,8 @@ class ZipUtils {
     /**
      * Fetches signed 64-bit value from byte array at specified offset.
      * The bytes are assumed to be in Intel (little-endian) byte order.
+     * <p>
+     *  从指定偏移量的字节数组获取64位值。这些字节假定是以英特尔(小端)字节顺序。
      */
     public static final long get64(byte b[], int off) {
         return get32(b, off) | (get32(b, off+4) << 32);

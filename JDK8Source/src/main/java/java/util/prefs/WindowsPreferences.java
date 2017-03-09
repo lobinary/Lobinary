@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ import sun.util.logging.PlatformLogger;
  * <tt>HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Prefs</tt> and
  * <tt>HKEY_CURRENT_USER\Software\JavaSoft\Prefs</tt> correspondingly.
  *
+ * <p>
+ *  基于Windows注册表的<tt>首选项</tt>实现。
+ *  <tt>首选项</tt>'<tt> systemRoot </tt>和<tt> userRoot </tt>存储在<tt> HKEY_LOCAL_MACHINE \ SOFTWARE \ JavaSo
+ * ft \ Prefs </tt>和<tt> HKEY_CURRENT_USER \ Software \ JavaSoft \ Prefs </tt>。
+ *  基于Windows注册表的<tt>首选项</tt>实现。
+ * 
+ * 
  * @author  Konstantin Kladko
  * @see Preferences
  * @see PreferencesFactory
@@ -47,11 +55,17 @@ class WindowsPreferences extends AbstractPreferences{
 
     /**
      * Logger for error messages
+     * <p>
+     *  记录错误消息
+     * 
      */
     private static PlatformLogger logger;
 
     /**
      * Windows registry path to <tt>Preferences</tt>'s root nodes.
+     * <p>
+     *  Windows注册表路径到<tt>首选项</tt>的根节点。
+     * 
      */
     private static final byte[] WINDOWS_ROOT_PATH
                                = stringToByteArray("Software\\JavaSoft\\Prefs");
@@ -59,34 +73,52 @@ class WindowsPreferences extends AbstractPreferences{
     /**
      * Windows handles to <tt>HKEY_CURRENT_USER</tt> and
      * <tt>HKEY_LOCAL_MACHINE</tt> hives.
+     * <p>
+     *  Windows处理<tt> HKEY_CURRENT_USER </tt>和<tt> HKEY_LOCAL_MACHINE </tt>蜂巢。
+     * 
      */
     private static final int HKEY_CURRENT_USER = 0x80000001;
     private static final int HKEY_LOCAL_MACHINE = 0x80000002;
 
     /**
      * Mount point for <tt>Preferences</tt>'  user root.
+     * <p>
+     *  <tt>首选项</tt>的用户根的安装点。
+     * 
      */
     private static final int USER_ROOT_NATIVE_HANDLE = HKEY_CURRENT_USER;
 
     /**
      * Mount point for <tt>Preferences</tt>'  system root.
+     * <p>
+     *  <tt>首选项</tt>"系统根目录的安装点。
+     * 
      */
     private static final int SYSTEM_ROOT_NATIVE_HANDLE = HKEY_LOCAL_MACHINE;
 
     /**
      * Maximum byte-encoded path length for Windows native functions,
      * ending <tt>null</tt> character not included.
+     * <p>
+     *  Windows本机函数的最大字节编码路径长度,不包括结束<tt> null </tt>字符。
+     * 
      */
     private static final int MAX_WINDOWS_PATH_LENGTH = 256;
 
     /**
      * User root node.
+     * <p>
+     *  用户根节点。
+     * 
      */
     static final Preferences userRoot =
          new WindowsPreferences(USER_ROOT_NATIVE_HANDLE, WINDOWS_ROOT_PATH);
 
     /**
      * System root node.
+     * <p>
+     *  系统根节点。
+     * 
      */
     static final Preferences systemRoot =
         new WindowsPreferences(SYSTEM_ROOT_NATIVE_HANDLE, WINDOWS_ROOT_PATH);
@@ -121,26 +153,41 @@ class WindowsPreferences extends AbstractPreferences{
     /**
      * Initial time between registry access attempts, in ms. The time is doubled
      * after each failing attempt (except the first).
+     * <p>
+     *  注册表访问尝试之间的初始时间(以毫秒为单位)。每次失败尝试后,时间加倍(除了第一次)。
+     * 
      */
     private static int INIT_SLEEP_TIME = 50;
 
     /**
      * Maximum number of registry access attempts.
+     * <p>
+     *  最大注册表访问尝试次数。
+     * 
      */
     private static int MAX_ATTEMPTS = 5;
 
     /**
      * BackingStore availability flag.
+     * <p>
+     *  BackingStore可用性标志。
+     * 
      */
     private boolean isBackingStoreAvailable = true;
 
     /**
      * Java wrapper for Windows registry API RegOpenKey()
+     * <p>
+     *  Windows注册表API的Java包装器RegOpenKey()
+     * 
      */
     private static native int[] WindowsRegOpenKey(int hKey, byte[] subKey,
                                                          int securityMask);
     /**
      * Retries RegOpenKey() MAX_ATTEMPTS times before giving up.
+     * <p>
+     *  在放弃之前重试RegOpenKey()MAX_ATTEMPTS次。
+     * 
      */
     private static int[] WindowsRegOpenKey1(int hKey, byte[] subKey,
                                                       int securityMask) {
@@ -175,16 +222,25 @@ class WindowsPreferences extends AbstractPreferences{
 
      /**
      * Java wrapper for Windows registry API RegCloseKey()
+     * <p>
+     *  Windows注册表API的Java包装RegCloseKey()
+     * 
      */
     private static native int WindowsRegCloseKey(int hKey);
 
     /**
      * Java wrapper for Windows registry API RegCreateKeyEx()
+     * <p>
+     *  Windows注册表API的Java包装器RegCreateKeyEx()
+     * 
      */
     private static native int[] WindowsRegCreateKeyEx(int hKey, byte[] subKey);
 
     /**
      * Retries RegCreateKeyEx() MAX_ATTEMPTS times before giving up.
+     * <p>
+     *  在放弃之前重试RegCreateKeyEx()MAX_ATTEMPTS次。
+     * 
      */
     private static int[] WindowsRegCreateKeyEx1(int hKey, byte[] subKey) {
         int[] result = WindowsRegCreateKeyEx(hKey, subKey);
@@ -209,16 +265,25 @@ class WindowsPreferences extends AbstractPreferences{
     }
     /**
      * Java wrapper for Windows registry API RegDeleteKey()
+     * <p>
+     *  Windows注册表API的Java包装器RegDeleteKey()
+     * 
      */
     private static native int WindowsRegDeleteKey(int hKey, byte[] subKey);
 
     /**
      * Java wrapper for Windows registry API RegFlushKey()
+     * <p>
+     *  Windows注册表API的Java包装器RegFlushKey()
+     * 
      */
     private static native int WindowsRegFlushKey(int hKey);
 
     /**
      * Retries RegFlushKey() MAX_ATTEMPTS times before giving up.
+     * <p>
+     *  在放弃之前重试RegFlushKey()MAX_ATTEMPTS次。
+     * 
      */
     private static int WindowsRegFlushKey1(int hKey) {
         int result = WindowsRegFlushKey(hKey);
@@ -244,16 +309,25 @@ class WindowsPreferences extends AbstractPreferences{
 
     /**
      * Java wrapper for Windows registry API RegQueryValueEx()
+     * <p>
+     * Windows注册表API的Java包装器RegQueryValueEx()
+     * 
      */
     private static native byte[] WindowsRegQueryValueEx(int hKey,
                                                               byte[] valueName);
     /**
      * Java wrapper for Windows registry API RegSetValueEx()
+     * <p>
+     *  Windows注册表API的Wrapper RegSetValueEx()
+     * 
      */
     private static native int WindowsRegSetValueEx(int hKey, byte[] valueName,
                                                          byte[] value);
     /**
      * Retries RegSetValueEx() MAX_ATTEMPTS times before giving up.
+     * <p>
+     *  在放弃之前重试RegSetValueEx()MAX_ATTEMPTS次。
+     * 
      */
     private static int WindowsRegSetValueEx1(int hKey, byte[] valueName,
                                                          byte[] value) {
@@ -280,16 +354,25 @@ class WindowsPreferences extends AbstractPreferences{
 
     /**
      * Java wrapper for Windows registry API RegDeleteValue()
+     * <p>
+     *  Windows注册表API的Java包装器RegDeleteValue()
+     * 
      */
     private static native int WindowsRegDeleteValue(int hKey, byte[] valueName);
 
     /**
      * Java wrapper for Windows registry API RegQueryInfoKey()
+     * <p>
+     *  Windows注册表API的Java包装器RegQueryInfoKey()
+     * 
      */
     private static native int[] WindowsRegQueryInfoKey(int hKey);
 
     /**
      * Retries RegQueryInfoKey() MAX_ATTEMPTS times before giving up.
+     * <p>
+     *  在放弃之前重试RegQueryInfoKey()MAX_ATTEMPTS次。
+     * 
      */
     private static int[] WindowsRegQueryInfoKey1(int hKey) {
         int[] result = WindowsRegQueryInfoKey(hKey);
@@ -315,12 +398,18 @@ class WindowsPreferences extends AbstractPreferences{
 
     /**
      * Java wrapper for Windows registry API RegEnumKeyEx()
+     * <p>
+     *  Windows注册表API的Java包装器RegEnumKeyEx()
+     * 
      */
     private static native byte[] WindowsRegEnumKeyEx(int hKey, int subKeyIndex,
                                       int maxKeyLength);
 
     /**
      * Retries RegEnumKeyEx() MAX_ATTEMPTS times before giving up.
+     * <p>
+     *  在放弃之前重试RegEnumKeyEx()MAX_ATTEMPTS次。
+     * 
      */
     private static byte[] WindowsRegEnumKeyEx1(int hKey, int subKeyIndex,
                                       int maxKeyLength) {
@@ -347,11 +436,17 @@ class WindowsPreferences extends AbstractPreferences{
 
     /**
      * Java wrapper for Windows registry API RegEnumValue()
+     * <p>
+     *  Windows注册表API的Java包装器RegEnumValue()
+     * 
      */
     private static native byte[] WindowsRegEnumValue(int hKey, int valueIndex,
                                       int maxValueNameLength);
     /**
      * Retries RegEnumValueEx() MAX_ATTEMPTS times before giving up.
+     * <p>
+     *  在放弃之前重试RegEnumValueEx()MAX_ATTEMPTS次。
+     * 
      */
     private static byte[] WindowsRegEnumValue1(int hKey, int valueIndex,
                                       int maxValueNameLength) {
@@ -383,6 +478,9 @@ class WindowsPreferences extends AbstractPreferences{
      * Windows registry node and all its Windows parents, if they are not yet
      * created.
      * Logs a warning message, if Windows Registry is unavailable.
+     * <p>
+     *  构造一个<tt> WindowsPreferences </tt>节点,创建基础Windows注册表节点及其所有Windows父项(如果尚未创建)。如果Windows注册表不可用,记录一条警告消息。
+     * 
      */
     private WindowsPreferences(WindowsPreferences parent, String name) {
         super(parent, name);
@@ -413,6 +511,10 @@ class WindowsPreferences extends AbstractPreferences{
      * Windows registry node and all of its parents, if they have not yet been
      * created.
      * Logs a warning message, if Windows Registry is unavailable.
+     * <p>
+     *  构造根节点,创建基础Windows注册表节点及其所有父项(如果尚未创建)。如果Windows注册表不可用,记录一条警告消息。
+     * 
+     * 
      * @param rootNativeHandle Native handle to one of Windows top level keys.
      * @param rootDirectory Path to root directory, as a byte-encoded string.
      */
@@ -437,6 +539,10 @@ class WindowsPreferences extends AbstractPreferences{
     /**
      * Returns Windows absolute path of the current node as a byte array.
      * Java "/" separator is transformed into Windows "\".
+     * <p>
+     *  以字节数组形式返回当前节点的Windows绝对路径。 Java"/"分隔符转换为Windows"\"。
+     * 
+     * 
      * @see Preferences#absolutePath()
      */
     private byte[] windowsAbsolutePath() {
@@ -456,6 +562,10 @@ class WindowsPreferences extends AbstractPreferences{
     /**
      * Opens current node's underlying Windows registry key using a
      * given security mask.
+     * <p>
+     *  使用给定的安全掩码打开当前节点的基础Windows注册表项。
+     * 
+     * 
      * @param securityMask Windows security mask.
      * @return Windows registry key's handle.
      * @see #openKey(byte[], int)
@@ -469,6 +579,10 @@ class WindowsPreferences extends AbstractPreferences{
     /**
      * Opens current node's underlying Windows registry key using a
      * given security mask.
+     * <p>
+     *  使用给定的安全掩码打开当前节点的基础Windows注册表项。
+     * 
+     * 
      * @param mask1 Preferred Windows security mask.
      * @param mask2 Alternate Windows security mask.
      * @return Windows registry key's handle.
@@ -483,6 +597,10 @@ class WindowsPreferences extends AbstractPreferences{
      /**
      * Opens Windows registry key at a given absolute path using a given
      * security mask.
+     * <p>
+     *  使用给定的安全掩码在给定的绝对路径打开Windows注册表项。
+     * 
+     * 
      * @param windowsAbsolutePath Windows absolute path of the
      *        key as a byte-encoded string.
      * @param mask1 Preferred Windows security mask.
@@ -494,6 +612,8 @@ class WindowsPreferences extends AbstractPreferences{
      */
     private int openKey(byte[] windowsAbsolutePath, int mask1, int mask2) {
         /*  Check if key's path is short enough be opened at once
+        /* <p>
+        /* 
             otherwise use a path-splitting procedure */
         if (windowsAbsolutePath.length <= MAX_WINDOWS_PATH_LENGTH + 1) {
              int[] result = WindowsRegOpenKey1(rootNativeHandle(),
@@ -525,6 +645,10 @@ class WindowsPreferences extends AbstractPreferences{
      /**
      * Opens Windows registry key at a given relative path
      * with respect to a given Windows registry key.
+     * <p>
+     *  在给定的Windows注册表项的给定相对路径上打开Windows注册表项。
+     * 
+     * 
      * @param windowsAbsolutePath Windows relative path of the
      *        key as a byte-encoded string.
      * @param nativeHandle handle to the base Windows key.
@@ -587,6 +711,10 @@ class WindowsPreferences extends AbstractPreferences{
      /**
      * Closes Windows registry key.
      * Logs a warning if Windows registry is unavailable.
+     * <p>
+     * 关闭Windows注册表项。如果Windows注册表不可用,请记录警告。
+     * 
+     * 
      * @param key's Windows registry handle.
      * @see #openKey(int)
      * @see #openKey(byte[],int)
@@ -606,6 +734,10 @@ class WindowsPreferences extends AbstractPreferences{
      * Implements <tt>AbstractPreferences</tt> <tt>putSpi()</tt> method.
      * Puts name-value pair into the underlying Windows registry node.
      * Logs a warning, if Windows registry is unavailable.
+     * <p>
+     *  实现<tt> AbstractPreferences </tt> <tt> putSpi()</tt>方法。将名称值对放入基础Windows注册表节点。如果Windows注册表不可用,请记录警告。
+     * 
+     * 
      * @see #getSpi(String)
      */
     protected void putSpi(String javaName, String value) {
@@ -631,6 +763,10 @@ class WindowsPreferences extends AbstractPreferences{
      * Implements <tt>AbstractPreferences</tt> <tt>getSpi()</tt> method.
      * Gets a string value from the underlying Windows registry node.
      * Logs a warning, if Windows registry is unavailable.
+     * <p>
+     *  实现<tt> AbstractPreferences </tt> <tt> getSpi()</tt>方法。从底层Windows注册表节点获取字符串值。如果Windows注册表不可用,请记录警告。
+     * 
+     * 
      * @see #putSpi(String, String)
      */
     protected String getSpi(String javaName) {
@@ -654,6 +790,10 @@ class WindowsPreferences extends AbstractPreferences{
      * node, if this value still exists.
      * Logs a warning, if Windows registry is unavailable or key has already
      * been deleted.
+     * <p>
+     *  实现<tt> AbstractPreferences </tt> <tt> removeSpi()</tt>方法。从基础Windows注册表节点删除字符串名称/值对,如果此值仍然存在。
+     * 记录警告,如果Windows注册表不可用或密钥已被删除。
+     * 
      */
     protected void removeSpi(String key) {
         int nativeHandle = openKey(KEY_SET_VALUE);
@@ -679,6 +819,10 @@ class WindowsPreferences extends AbstractPreferences{
      * Gets value names from the underlying Windows registry node.
      * Throws a BackingStoreException and logs a warning, if
      * Windows registry is unavailable.
+     * <p>
+     *  实现<tt> AbstractPreferences </tt> <tt> keysSpi()</tt>方法。从底层Windows注册表节点获取值名称。
+     * 如果Windows注册表不可用,则抛出BackingStoreException并记录警告。
+     * 
      */
     protected String[] keysSpi() throws BackingStoreException{
         // Find out the number of values
@@ -728,6 +872,10 @@ class WindowsPreferences extends AbstractPreferences{
      * Calls Windows registry to retrive children of this node.
      * Throws a BackingStoreException and logs a warning message,
      * if Windows registry is not available.
+     * <p>
+     *  实现<tt> AbstractPreferences </tt> <tt> childrenNamesSpi()</tt>方法。调用Windows注册表以检索此节点的子代。
+     * 如果Windows注册表不可用,则抛出BackingStoreException并记录一条警告消息。
+     * 
      */
     protected String[] childrenNamesSpi() throws BackingStoreException {
         // Open key
@@ -780,6 +928,10 @@ class WindowsPreferences extends AbstractPreferences{
      * Flushes Windows registry changes to disk.
      * Throws a BackingStoreException and logs a warning message if Windows
      * registry is not available.
+     * <p>
+     *  实现<tt>首选项</tt> <tt> flush()</tt>方法。将Windows注册表更改刷新到磁盘。
+     * 如果Windows注册表不可用,则抛出BackingStoreException并记录一条警告消息。
+     * 
      */
     public void flush() throws BackingStoreException{
 
@@ -813,6 +965,10 @@ class WindowsPreferences extends AbstractPreferences{
     /**
      * Implements <tt>Preferences</tt> <tt>sync()</tt> method.
      * Flushes Windows registry changes to disk. Equivalent to flush().
+     * <p>
+     *  实现<tt>首选项</tt> <tt> sync()</tt>方法。将Windows注册表更改刷新到磁盘。相当于flush()。
+     * 
+     * 
      * @see flush()
      */
     public void sync() throws BackingStoreException{
@@ -827,6 +983,10 @@ class WindowsPreferences extends AbstractPreferences{
      * given name and creates its underlying Windows registry node,
      * if it does not exist.
      * Logs a warning message, if Windows Registry is unavailable.
+     * <p>
+     * 实现<tt> AbstractPreferences </tt> <tt> childSpi()</tt>方法。构造具有给定名称的子节点,并创建其基础Windows注册表节点(如果它不存在)。
+     * 如果Windows注册表不可用,记录一条警告消息。
+     * 
      */
     protected AbstractPreferences childSpi(String name) {
             return new WindowsPreferences(this, name);
@@ -837,6 +997,10 @@ class WindowsPreferences extends AbstractPreferences{
      * Deletes underlying Windows registry node.
      * Throws a BackingStoreException and logs a warning, if Windows registry
      * is not available.
+     * <p>
+     *  实现<tt> AbstractPreferences </tt> <tt> removeNodeSpi()</tt>方法。删除基础Windows注册表节点。
+     * 如果Windows注册表不可用,则抛出BackingStoreException并记录警告。
+     * 
      */
     public void removeNodeSpi() throws BackingStoreException {
         int parentNativeHandle =
@@ -865,6 +1029,11 @@ class WindowsPreferences extends AbstractPreferences{
      * java string. Two encodings, simple and altBase64 are used. See
      * {@link #toWindowsName(String) toWindowsName()} for a detailed
      * description of encoding conventions.
+     * <p>
+     *  将值或节点的名称从其字节数组表示形式转换为java字符串。使用两种编码,简单和altBase64。
+     * 有关编码约定的详细说明,请参阅{@link #toWindowsName(String)toWindowsName()}。
+     * 
+     * 
      * @param windowsNameArray Null-terminated byte array.
      */
     private static String toJavaName(byte[] windowsNameArray) {
@@ -901,6 +1070,10 @@ class WindowsPreferences extends AbstractPreferences{
      * string, using altBase64 encoding. See
      * {@link #toWindowsName(String) toWindowsName()} for a detailed
      * description of encoding conventions.
+     * <p>
+     *  使用altBase64编码将值或节点的名称从其Windows表示形式转换为java字符串。
+     * 有关编码约定的详细说明,请参阅{@link #toWindowsName(String)toWindowsName()}。
+     * 
      */
 
     private static String toJavaAlt64Name(String windowsName) {
@@ -934,6 +1107,15 @@ class WindowsPreferences extends AbstractPreferences{
      * Windows string to '/!'. The java name is then encoded using
      * byteArrayToAltBase64() method from
      * Base64 class.
+     * <p>
+     *  将值或节点的名称转换为其Windows表示形式作为字节编码的字符串。使用两种编码,简单和altBase64。
+     * <p>
+     *  <i>使用简单</i>编码,如果java字符串不包含任何字符小于0x0020或更大,而不是0x007f。简单编码将"/"字符添加到大写字母,即"A"被编码为"/ A"。
+     * 字符'\'编码为'//','/'编码为'\'。通过截断最高字节并添加终止<tt> null </tt>字符,将构造的字符串转换为字节数组。
+     * <p>
+     * 使用<i> altBase64 </i>编码,如果java字符串至少包含一个字符,小于0x0020,或大于0x007f。此编码通过将Windows字符串的前两个字节设置为"/！"来标记。
+     * 然后使用来自Base64类的byteArrayToAltBase64()方法对java名称进行编码。
+     * 
      */
     private static byte[] toWindowsName(String javaName) {
         StringBuffer windowsName = new StringBuffer();
@@ -961,6 +1143,10 @@ class WindowsPreferences extends AbstractPreferences{
      * as a byte-encoded string, using altBase64 encoding. See
      * {@link #toWindowsName(String) toWindowsName()} for a detailed
      * description of encoding conventions.
+     * <p>
+     *  使用altBase64编码将值或节点的名称转换为其Windows表示形式作为字节编码的字符串。
+     * 有关编码约定的详细说明,请参阅{@link #toWindowsName(String)toWindowsName()}。
+     * 
      */
     private static byte[] toWindowsAlt64Name(String javaName) {
         byte[] javaNameArray = new byte[2*javaName.length()];
@@ -981,6 +1167,10 @@ class WindowsPreferences extends AbstractPreferences{
      * to java string.  See
      * {@link #toWindowsValueString(String) toWindowsValueString()} for the
      * description of the encoding algorithm.
+     * <p>
+     *  将值字符串从其Windows表示形式转换为java字符串。
+     * 有关编码算法的说明,请参阅{@link #toWindowsValueString(String)toWindowsValueString()}。
+     * 
      */
      private static String toJavaValueString(byte[] windowsNameArray) {
         // Use modified native2ascii algorithm
@@ -1026,6 +1216,10 @@ class WindowsPreferences extends AbstractPreferences{
      * '/' is encoded as  '\'.
      * Then encoding scheme similar to jdk's native2ascii converter is used
      * to convert java string to a byte array of ASCII characters.
+     * <p>
+     *  将值字符串转换为Windows表示形式。作为字节编码的字符串。编码算法将"/"字符添加到大写字母,即"A"被编码为"/ A"。字符'\'编码为'//','/'编码为'\'。
+     * 然后编码方案类似于jdk的native2ascii转换器用于将java字符串转换为ASCII字符的字节数组。
+     * 
      */
     private static byte[] toWindowsValueString(String javaName) {
         StringBuffer windowsName = new StringBuffer();
@@ -1059,6 +1253,9 @@ class WindowsPreferences extends AbstractPreferences{
 
     /**
      * Returns native handle for the top Windows node for this node.
+     * <p>
+     *  返回此节点的顶级Windows节点的本地句柄。
+     * 
      */
     private int rootNativeHandle() {
         return (isUserNode()? USER_ROOT_NATIVE_HANDLE :
@@ -1067,6 +1264,9 @@ class WindowsPreferences extends AbstractPreferences{
 
     /**
      * Returns this java string as a null-terminated byte array
+     * <p>
+     *  返回这个java字符串作为一个以null终止的字节数组
+     * 
      */
     private static byte[] stringToByteArray(String str) {
         byte[] result = new byte[str.length()+1];
@@ -1079,6 +1279,9 @@ class WindowsPreferences extends AbstractPreferences{
 
     /**
      * Converts a null-terminated byte array to java string
+     * <p>
+     *  将以null结尾的字节数组转换为java字符串
+     * 
      */
     private static String byteArrayToString(byte[] array) {
         StringBuffer result = new StringBuffer();
@@ -1090,6 +1293,9 @@ class WindowsPreferences extends AbstractPreferences{
 
    /**
     * Empty, never used implementation  of AbstractPreferences.flushSpi().
+    * <p>
+    *  空,从未使用AbstractPreferences.flushSpi()的实现。
+    * 
     */
     protected void flushSpi() throws BackingStoreException {
         // assert false;
@@ -1097,6 +1303,8 @@ class WindowsPreferences extends AbstractPreferences{
 
    /**
     * Empty, never used implementation  of AbstractPreferences.flushSpi().
+    * <p>
+    *  空,从未使用AbstractPreferences.flushSpi()的实现。
     */
     protected void syncSpi() throws BackingStoreException {
         // assert false;

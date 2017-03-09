@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -65,6 +69,20 @@ import sun.security.util.SecurityConstants;
  *        in execution methods requiring {@code Callable}.
  * </ul>
  *
+ * <p>
+ *  此包中定义的{@link Executor},{@link ExecutorService},{@link ScheduledExecutorService},{@link ThreadFactory}
+ * 和{@link Callable}类的工厂和实用程序方法。
+ * 此类支持以下类型的方法：。
+ * 
+ * <ul>
+ *  <li>使用常用的配置设置创建和返回{@link ExecutorService}的方法。
+ *  <li>使用常用的配置设置创建和返回{@link ScheduledExecutorService}的方法。
+ *  <li>创建和返回"封装"ExecutorService的方法,通过使实现特定的方法无法访问来禁用重新配置。
+ *  <li>创建并返回{@link ThreadFactory}的方法,将新创建的线程设置为已知状态。
+ *  <li>创建并返回{@link Callable}的其他类似闭包形式的方法,因此它们可以在需要{@code Callable}的执行方法中使用。
+ * </ul>
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -81,6 +99,12 @@ public class Executors {
      * execute subsequent tasks.  The threads in the pool will exist
      * until it is explicitly {@link ExecutorService#shutdown shutdown}.
      *
+     * <p>
+     * 创建重用固定数量的线程操作一个共享无界队列的线程池。在任何时候,至多{@code nThreads}线程将是活动的处理任务。
+     * 如果在所有线程都处于活动状态时提交其他任务,则它们将在队列中等待,直到线程可用。如果任何线程由于在关闭之前的执行期间的故障而终止,则如果需要执行后续任务,则新的线程将占据它的位置。
+     * 池中的线程将存在,直到它显式{@link ExecutorService#shutdown shutdown}。
+     * 
+     * 
      * @param nThreads the number of threads in the pool
      * @return the newly created thread pool
      * @throws IllegalArgumentException if {@code nThreads <= 0}
@@ -101,6 +125,11 @@ public class Executors {
      * guarantees about the order in which submitted tasks are
      * executed.
      *
+     * <p>
+     *  创建维护足够线程以支持给定并行性级别的线程池,并且可以使用多个队列来减少争用。并行性级别对应于主动参与任务处理或可用于参与任务处理的线程的最大数目。实际的线程数可以动态增长和收缩。
+     * 工作窃取池不能保证执行提交的任务的顺序。
+     * 
+     * 
      * @param parallelism the targeted parallelism level
      * @return the newly created thread pool
      * @throws IllegalArgumentException if {@code parallelism <= 0}
@@ -117,6 +146,10 @@ public class Executors {
      * Creates a work-stealing thread pool using all
      * {@link Runtime#availableProcessors available processors}
      * as its target parallelism level.
+     * <p>
+     *  使用所有{@link Runtime#availableProcessors可用处理器}创建工作窃取线程池作为其目标并行性级别。
+     * 
+     * 
      * @return the newly created thread pool
      * @see #newWorkStealingPool(int)
      * @since 1.8
@@ -141,6 +174,12 @@ public class Executors {
      * exist until it is explicitly {@link ExecutorService#shutdown
      * shutdown}.
      *
+     * <p>
+     * 创建一个线程池,重用固定数量的线程操作一个共享的无界队列,使用提供的ThreadFactory在需要时创建新线程。在任何时候,至多{@code nThreads}线程将是活动的处理任务。
+     * 如果在所有线程都处于活动状态时提交其他任务,则它们将在队列中等待,直到线程可用。如果任何线程由于在关闭之前的执行期间的故障而终止,则如果需要执行后续任务,则新的线程将占据它的位置。
+     * 池中的线程将存在,直到它显式{@link ExecutorService#shutdown shutdown}。
+     * 
+     * 
      * @param nThreads the number of threads in the pool
      * @param threadFactory the factory to use when creating new threads
      * @return the newly created thread pool
@@ -165,6 +204,11 @@ public class Executors {
      * {@code newFixedThreadPool(1)} the returned executor is
      * guaranteed not to be reconfigurable to use additional threads.
      *
+     * <p>
+     *  创建一个Executor,它使用一个工作线程操作一个无界队列。 (但是,如果这个单个线程由于在关闭之前的执行期间的故障而终止,则如果需要执行后续任务,则新的线程将占据它的位置。
+     * )任务被保证顺序地执行,并且不多于一个任务将是活动的在任何给定的时间。与其他等同的{@code newFixedThreadPool(1)}不同,返回的执行器不能重新配置为使用额外的线程。
+     * 
+     * 
      * @return the newly created single-threaded Executor
      */
     public static ExecutorService newSingleThreadExecutor() {
@@ -182,6 +226,11 @@ public class Executors {
      * returned executor is guaranteed not to be reconfigurable to use
      * additional threads.
      *
+     * <p>
+     *  创建一个Executor,它使用单个工作线程操作一个无界队列,并在需要时使用提供的ThreadFactory创建一个新线程。
+     * 与其他等效的{@code newFixedThreadPool(1,threadFactory)}不同,返回的执行器不能重新配置以使用额外的线程。
+     * 
+     * 
      * @param threadFactory the factory to use when creating new
      * threads
      *
@@ -210,6 +259,12 @@ public class Executors {
      * properties but different details (for example, timeout parameters)
      * may be created using {@link ThreadPoolExecutor} constructors.
      *
+     * <p>
+     * 创建一个根据需要创建新线程的线程池,但会在以前构造的线程可用时重用它。这些池通常会提高执行许多短暂异步任务的程序的性能。对{@code execute}的调用将重用以前构造的线程(如果可用)。
+     * 如果没有现有线程可用,将创建一个新线程并将其添加到池中。未使用60秒的线程被终止并从高速缓存中删除。因此,保持空闲足够长时间的池不会消耗任何资源。
+     * 注意,可以使用{@link ThreadPoolExecutor}构造函数创建具有相似属性但不同细节(例如,超时参数)的池。
+     * 
+     * 
      * @return the newly created thread pool
      */
     public static ExecutorService newCachedThreadPool() {
@@ -223,6 +278,10 @@ public class Executors {
      * will reuse previously constructed threads when they are
      * available, and uses the provided
      * ThreadFactory to create new threads when needed.
+     * <p>
+     *  创建一个根据需要创建新线程的线程池,但会在以前构造的线程可用时重用它,并在需要时使用提供的ThreadFactory创建新线程。
+     * 
+     * 
      * @param threadFactory the factory to use when creating new threads
      * @return the newly created thread pool
      * @throws NullPointerException if threadFactory is null
@@ -245,6 +304,11 @@ public class Executors {
      * given time. Unlike the otherwise equivalent
      * {@code newScheduledThreadPool(1)} the returned executor is
      * guaranteed not to be reconfigurable to use additional threads.
+     * <p>
+     *  创建单线程执行程序,可以调度命令在给定延迟后运行,或定期执行。 (但是,如果这个单个线程由于在关闭之前的执行期间的故障而终止,则如果需要执行后续任务,则新的线程将占据它的位置。
+     * )任务被保证顺序地执行,并且不多于一个任务将是活动的在任何给定的时间。与其他等效的{@code newScheduledThreadPool(1)}不同,返回的执行器不能重新配置以使用额外的线程。
+     * 
+     * 
      * @return the newly created scheduled executor
      */
     public static ScheduledExecutorService newSingleThreadScheduledExecutor() {
@@ -263,6 +327,12 @@ public class Executors {
      * equivalent {@code newScheduledThreadPool(1, threadFactory)}
      * the returned executor is guaranteed not to be reconfigurable to
      * use additional threads.
+     * <p>
+     * 创建单线程执行程序,可以调度命令在给定延迟后运行,或定期执行。 (但是,如果这个单个线程由于在关闭之前的执行期间的故障而终止,则如果需要执行后续任务,则新的线程将占据它的位置。
+     * )任务被保证顺序地执行,并且不多于一个任务将是活动的在任何给定的时间。
+     * 与其他等效的{@code newScheduledThreadPool(1,threadFactory)}不同,返回的执行器不能重新配置为使用额外的线程。
+     * 
+     * 
      * @param threadFactory the factory to use when creating new
      * threads
      * @return a newly created scheduled executor
@@ -276,6 +346,10 @@ public class Executors {
     /**
      * Creates a thread pool that can schedule commands to run after a
      * given delay, or to execute periodically.
+     * <p>
+     *  创建可以调度命令以在给定延迟后运行或者定期执行的线程池。
+     * 
+     * 
      * @param corePoolSize the number of threads to keep in the pool,
      * even if they are idle
      * @return a newly created scheduled thread pool
@@ -288,6 +362,10 @@ public class Executors {
     /**
      * Creates a thread pool that can schedule commands to run after a
      * given delay, or to execute periodically.
+     * <p>
+     *  创建可以调度命令以在给定延迟后运行或者定期执行的线程池。
+     * 
+     * 
      * @param corePoolSize the number of threads to keep in the pool,
      * even if they are idle
      * @param threadFactory the factory to use when the executor
@@ -307,6 +385,11 @@ public class Executors {
      * other methods that might otherwise be accessible using
      * casts. This provides a way to safely "freeze" configuration and
      * disallow tuning of a given concrete implementation.
+     * <p>
+     *  返回一个对象,该对象将所有定义的{@link ExecutorService}方法委托给给定的执行器,而不是任何其他方法,否则可能使用casts访问。
+     * 这提供了一种安全地"冻结"配置和不允许调整给定的具体实现的方式。
+     * 
+     * 
      * @param executor the underlying implementation
      * @return an {@code ExecutorService} instance
      * @throws NullPointerException if executor null
@@ -323,6 +406,11 @@ public class Executors {
      * not any other methods that might otherwise be accessible using
      * casts. This provides a way to safely "freeze" configuration and
      * disallow tuning of a given concrete implementation.
+     * <p>
+     *  返回一个对象,它将所有定义的{@link ScheduledExecutorService}方法委托给给定的执行器,而不是任何其他方法,否则可以使用casts访问。
+     * 这提供了一种安全地"冻结"配置和不允许调整给定的具体实现的方式。
+     * 
+     * 
      * @param executor the underlying implementation
      * @return a {@code ScheduledExecutorService} instance
      * @throws NullPointerException if executor null
@@ -347,6 +435,17 @@ public class Executors {
      * <em>pool-N-thread-M</em>, where <em>N</em> is the sequence
      * number of this factory, and <em>M</em> is the sequence number
      * of the thread created by this factory.
+     * <p>
+     * 返回用于创建新线程的默认线程工厂。这个工厂在同一个{@link ThreadGroup}中创建一个Executor使用的所有新线程。
+     * 如果有一个{@link java.lang.SecurityManager},它使用{@link System#getSecurityManager}组,否则调用此{@code defaultThreadFactory}
+     * 方法的线程组。
+     * 返回用于创建新线程的默认线程工厂。这个工厂在同一个{@link ThreadGroup}中创建一个Executor使用的所有新线程。
+     * 每个新线程都创建为非守护线程,优先级设置为{@code Thread.NORM_PRIORITY}中的较小值和线程组中允许的最大优先级。
+     * 新线程具有可通过pool-N-thread-M </em>的{@link Thread#getName}访问的名称,其中<em> N </em>是此工厂的序列号, M </em>是此工厂创建的主题的序号
+     * 。
+     * 每个新线程都创建为非守护线程,优先级设置为{@code Thread.NORM_PRIORITY}中的较小值和线程组中允许的最大优先级。
+     * 
+     * 
      * @return a thread factory
      */
     public static ThreadFactory defaultThreadFactory() {
@@ -381,6 +480,23 @@ public class Executors {
      * which that thread waits for and services requests to create
      * others that will inherit its values.
      *
+     * <p>
+     *  返回一个线程工厂,用于创建与当前线程具有相同权限的新线程。
+     * 此工厂创建与{@link Executors#defaultThreadFactory}相同设置的线程,另外将新线程的AccessControlContext和contextClassLoader设置为
+     * 与调用此{@code privilegedThreadFactory}方法的线程相同。
+     *  返回一个线程工厂,用于创建与当前线程具有相同权限的新线程。
+     * 可以在{@link AccessController#doPrivileged AccessController.doPrivileged}操作中创建一个新的{@code privilegedThreadFactory}
+     * ,设置当前线程的访问控制上下文以创建具有在该操作中保留的所选权限设置的线程。
+     *  返回一个线程工厂,用于创建与当前线程具有相同权限的新线程。
+     * 
+     * <p>请注意,虽然在此类线程中运行的任务将具有与当前线程相同的访问控制和类加载器设置,但它们不需要具有相同的{@link java.lang.ThreadLocal}或{@link java.lang.InheritableThreadLocal }
+     * 值。
+     * 如果需要,可以在任何任务在{@link ThreadPoolExecutor}子类中使用{@link ThreadPoolExecutor#beforeExecute(Thread,Runnable)}
+     * 运行之前设置或重置线程局部变量的特定值。
+     * 此外,如果需要初始化工作线程以具有与其他指定线程相同的InheritableThreadLocal设置,则可以创建自定义ThreadFactory,该线程在其中等待并提供服务请求以创建将继承其值的其他请
+     * 求。
+     * 
+     * 
      * @return a thread factory
      * @throws AccessControlException if the current access control
      * context does not have permission to both get and set context
@@ -395,6 +511,10 @@ public class Executors {
      * called, runs the given task and returns the given result.  This
      * can be useful when applying methods requiring a
      * {@code Callable} to an otherwise resultless action.
+     * <p>
+     *  返回一个{@link Callable}对象,当被调用时,运行给定的任务并返回给定的结果。当应用需要{@code Callable}的方法时,这可能非常有用。
+     * 
+     * 
      * @param task the task to run
      * @param result the result to return
      * @param <T> the type of the result
@@ -410,6 +530,10 @@ public class Executors {
     /**
      * Returns a {@link Callable} object that, when
      * called, runs the given task and returns {@code null}.
+     * <p>
+     *  返回一个{@link Callable}对象,当被调用时,运行给定的任务并返回{@code null}。
+     * 
+     * 
      * @param task the task to run
      * @return a callable object
      * @throws NullPointerException if task null
@@ -423,6 +547,10 @@ public class Executors {
     /**
      * Returns a {@link Callable} object that, when
      * called, runs the given privileged action and returns its result.
+     * <p>
+     *  返回一个{@link Callable}对象,当被调用时,运行给定的特权操作并返回其结果。
+     * 
+     * 
      * @param action the privileged action to run
      * @return a callable object
      * @throws NullPointerException if action null
@@ -438,6 +566,10 @@ public class Executors {
      * Returns a {@link Callable} object that, when
      * called, runs the given privileged exception action and returns
      * its result.
+     * <p>
+     *  返回一个{@link Callable}对象,该对象在调用时运行给定的特权异常操作并返回其结果。
+     * 
+     * 
      * @param action the privileged exception action to run
      * @return a callable object
      * @throws NullPointerException if action null
@@ -458,6 +590,13 @@ public class Executors {
      * under the selected permission settings holding within that
      * action; or if not possible, throw an associated {@link
      * AccessControlException}.
+     * <p>
+     * 返回一个{@link Callable}对象,当被调用时,将在当前访问控制上下文下执行给定的{@code callable}。
+     * 此方法通常应在{@link AccessController#doPrivileged AccessController.doPrivileged}操作中调用,以创建可调用项,如果可能,该调用项将在该操
+     * 作中保留的所选权限设置下执行;或者如果不可能,则抛出相关的{@link AccessControlException}。
+     * 返回一个{@link Callable}对象,当被调用时,将在当前访问控制上下文下执行给定的{@code callable}。
+     * 
+     * 
      * @param callable the underlying task
      * @param <T> the type of the callable's result
      * @return a callable object
@@ -481,6 +620,13 @@ public class Executors {
      * action; or if not possible, throw an associated {@link
      * AccessControlException}.
      *
+     * <p>
+     *  返回一个{@link Callable}对象,当被调用时,将在当前访问控制上下文下执行给定的{@code callable},当前上下文类加载器作为上下文类加载器。
+     * 此方法通常应在{@link AccessController#doPrivileged AccessController.doPrivileged}操作中调用,以创建可调用项,如果可能,该调用项将在该操
+     * 作中保留的所选权限设置下执行;或者如果不可能,则抛出相关的{@link AccessControlException}。
+     *  返回一个{@link Callable}对象,当被调用时,将在当前访问控制上下文下执行给定的{@code callable},当前上下文类加载器作为上下文类加载器。
+     * 
+     * 
      * @param callable the underlying task
      * @param <T> the type of the callable's result
      * @return a callable object
@@ -499,6 +645,9 @@ public class Executors {
 
     /**
      * A callable that runs given task and returns given result
+     * <p>
+     *  运行给定任务并返回给定结果的可调用项
+     * 
      */
     static final class RunnableAdapter<T> implements Callable<T> {
         final Runnable task;
@@ -515,6 +664,9 @@ public class Executors {
 
     /**
      * A callable that runs under established access control settings
+     * <p>
+     *  在已建立的访问控制设置下运行的可调用项
+     * 
      */
     static final class PrivilegedCallable<T> implements Callable<T> {
         private final Callable<T> task;
@@ -542,6 +694,9 @@ public class Executors {
     /**
      * A callable that runs under established access control settings and
      * current ClassLoader
+     * <p>
+     *  在已建立的访问控制设置和当前ClassLoader下运行的可调用
+     * 
      */
     static final class PrivilegedCallableUsingCurrentClassLoader<T> implements Callable<T> {
         private final Callable<T> task;
@@ -592,6 +747,9 @@ public class Executors {
 
     /**
      * The default thread factory
+     * <p>
+     *  默认线程工厂
+     * 
      */
     static class DefaultThreadFactory implements ThreadFactory {
         private static final AtomicInteger poolNumber = new AtomicInteger(1);
@@ -622,6 +780,9 @@ public class Executors {
 
     /**
      * Thread factory capturing access control context and class loader
+     * <p>
+     *  线程工厂捕获访问控制上下文和类装载器
+     * 
      */
     static class PrivilegedThreadFactory extends DefaultThreadFactory {
         private final AccessControlContext acc;
@@ -661,6 +822,9 @@ public class Executors {
     /**
      * A wrapper class that exposes only the ExecutorService methods
      * of an ExecutorService implementation.
+     * <p>
+     *  一个包装类,只公开ExecutorService实现的ExecutorService方法。
+     * 
      */
     static class DelegatedExecutorService extends AbstractExecutorService {
         private final ExecutorService e;
@@ -716,6 +880,8 @@ public class Executors {
     /**
      * A wrapper class that exposes only the ScheduledExecutorService
      * methods of a ScheduledExecutorService implementation.
+     * <p>
+     *  一个包装类,只公开一个ScheduledExecutorService实现的ScheduledExecutorService方法。
      */
     static class DelegatedScheduledExecutorService
             extends DelegatedExecutorService

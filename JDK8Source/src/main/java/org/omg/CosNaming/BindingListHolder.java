@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 
@@ -11,6 +12,8 @@ package org.omg.CosNaming;
 
 /**
    * List of Bindings.
+   * <p>
+   * 
    */
 public final class BindingListHolder implements org.omg.CORBA.portable.Streamable
 {

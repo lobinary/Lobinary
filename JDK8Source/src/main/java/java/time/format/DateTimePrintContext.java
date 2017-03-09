@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2011-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.format;
 
@@ -91,26 +110,47 @@ import java.util.Objects;
  * Usage of the class is thread-safe within standard printing as the framework creates
  * a new instance of the class for each format and printing is single-threaded.
  *
+ * <p>
+ *  日期和时间打印期间使用的上下文对象。
+ * <p>
+ *  这个类为格式中使用的项提供了一个包装器。
+ * 
+ *  @implSpec这个类是一个可变的上下文,用于单线程。在标准打印中,类的使用是线程安全的,因为框架为每种格式创建类的新实例,并且打印是单线程的。
+ * 
+ * 
  * @since 1.8
  */
 final class DateTimePrintContext {
 
     /**
      * The temporal being output.
+     * <p>
+     *  时间输出。
+     * 
      */
     private TemporalAccessor temporal;
     /**
      * The formatter, not null.
+     * <p>
+     *  格式化程序,不是null。
+     * 
      */
     private DateTimeFormatter formatter;
     /**
      * Whether the current formatter is optional.
+     * <p>
+     *  当前格式化程序是否是可选的。
+     * 
      */
     private int optional;
 
     /**
      * Creates a new instance of the context.
      *
+     * <p>
+     *  创建上下文的新实例。
+     * 
+     * 
      * @param temporal  the temporal object being output, not null
      * @param formatter  the formatter controlling the format, not null
      */
@@ -225,6 +265,10 @@ final class DateTimePrintContext {
     /**
      * Gets the temporal object being output.
      *
+     * <p>
+     *  获取正在输出的时间对象。
+     * 
+     * 
      * @return the temporal object, not null
      */
     TemporalAccessor getTemporal() {
@@ -237,6 +281,12 @@ final class DateTimePrintContext {
      * This locale is used to control localization in the format output except
      * where localization is controlled by the DecimalStyle.
      *
+     * <p>
+     *  获取区域设置。
+     * <p>
+     *  此区域设置用于控制格式输出中的本地化,除非本地化由DecimalStyle控制。
+     * 
+     * 
      * @return the locale, not null
      */
     Locale getLocale() {
@@ -248,6 +298,12 @@ final class DateTimePrintContext {
      * <p>
      * The DecimalStyle controls the localization of numeric output.
      *
+     * <p>
+     *  获取DecimalStyle。
+     * <p>
+     * DecimalStyle控制数字输出的本地化。
+     * 
+     * 
      * @return the DecimalStyle, not null
      */
     DecimalStyle getDecimalStyle() {
@@ -257,6 +313,9 @@ final class DateTimePrintContext {
     //-----------------------------------------------------------------------
     /**
      * Starts the printing of an optional segment of the input.
+     * <p>
+     *  开始打印输入的可选段。
+     * 
      */
     void startOptional() {
         this.optional++;
@@ -264,6 +323,9 @@ final class DateTimePrintContext {
 
     /**
      * Ends the printing of an optional segment of the input.
+     * <p>
+     *  结束输入的可选段的打印。
+     * 
      */
     void endOptional() {
         this.optional--;
@@ -272,6 +334,10 @@ final class DateTimePrintContext {
     /**
      * Gets a value using a query.
      *
+     * <p>
+     *  使用查询获取值。
+     * 
+     * 
      * @param query  the query to use, not null
      * @return the result, null if not found and optional is true
      * @throws DateTimeException if the type is not available and the section is not optional
@@ -289,6 +355,12 @@ final class DateTimePrintContext {
      * <p>
      * This will return the value for the specified field.
      *
+     * <p>
+     *  获取指定字段的值。
+     * <p>
+     *  这将返回指定字段的值。
+     * 
+     * 
      * @param field  the field to find, not null
      * @return the value, null if not found and optional is true
      * @throws DateTimeException if the field is not available and the section is not optional
@@ -308,6 +380,8 @@ final class DateTimePrintContext {
     /**
      * Returns a string version of the context for debugging.
      *
+     * <p>
+     * 
      * @return a string representation of the context, not null
      */
     @Override

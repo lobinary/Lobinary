@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,18 @@ import java.util.Iterator;
  * A <code>SimpleScriptContext</code> is used as the default <code>ScriptContext</code>
  * of the <code>AbstractScriptEngine</code>..
  *
+ * <p>
+ *  提供了<code> eval </code>方法的几个变体的标准实现。
+ *  <br> <br> <code> <b> eval(Reader)</b> </code> <p> <code> <b> eval(String)</b> </code> <p> <code > <b>
+ *  eval(String,Bindings)</b> </code> <p> <code> <b> eval(Reader,Bindings)</b> </code> <br> <br>抽象方法<br>
+ *  <br> <code> <b> eval(Reader,ScriptContext)</b> </code>或<code> <b> eval(String,ScriptContext)</<br> <br>
+ * 与<code> SimpleScriptContext </code>。
+ *  提供了<code> eval </code>方法的几个变体的标准实现。
+ *  <br> <br> <code> SimpleScriptContext </code>用作<code> AbstractScriptEngine </code>的默认<code> ScriptCon
+ * text </code> ..。
+ *  提供了<code> eval </code>方法的几个变体的标准实现。
+ * 
+ * 
  * @author Mike Grogan
  * @since 1.6
  */
@@ -51,6 +64,9 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
 
     /**
      * The default <code>ScriptContext</code> of this <code>AbstractScriptEngine</code>.
+     * <p>
+     *  此<code> AbstractScriptEngine </code>的默认<code> ScriptContext </code>。
+     * 
      */
 
     protected ScriptContext context;
@@ -58,6 +74,9 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
     /**
      * Creates a new instance of AbstractScriptEngine using a <code>SimpleScriptContext</code>
      * as its default <code>ScriptContext</code>.
+     * <p>
+     *  使用<code> SimpleScriptContext </code>作为其默认<code> ScriptContext </code>创建AbstractScriptEngine的新实例。
+     * 
      */
     public AbstractScriptEngine() {
 
@@ -69,6 +88,11 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * Creates a new instance using the specified <code>Bindings</code> as the
      * <code>ENGINE_SCOPE</code> <code>Bindings</code> in the protected <code>context</code> field.
      *
+     * <p>
+     *  使用指定的<code> Bindings </code>作为受保护的<code>上下文</code>字段中的<code> ENGINE_SCOPE </code> <code> Bindings </code>
+     * 创建一个新实例。
+     * 
+     * 
      * @param n The specified <code>Bindings</code>.
      * @throws NullPointerException if n is null.
      */
@@ -85,6 +109,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * Sets the value of the protected <code>context</code> field to the specified
      * <code>ScriptContext</code>.
      *
+     * <p>
+     *  将protected <code> context </code>字段的值设置为指定的<code> ScriptContext </code>。
+     * 
+     * 
      * @param ctxt The specified <code>ScriptContext</code>.
      * @throws NullPointerException if ctxt is null.
      */
@@ -98,6 +126,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
     /**
      * Returns the value of the protected <code>context</code> field.
      *
+     * <p>
+     *  返回protected <code> context </code>字段的值。
+     * 
+     * 
      * @return The value of the protected <code>context</code> field.
      */
     public ScriptContext getContext() {
@@ -108,6 +140,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * Returns the <code>Bindings</code> with the specified scope value in
      * the protected <code>context</code> field.
      *
+     * <p>
+     *  返回受保护的<code>上下文</code>字段中指定范围值的<code> Bindings </code>。
+     * 
+     * 
      * @param scope The specified scope
      *
      * @return The corresponding <code>Bindings</code>.
@@ -130,6 +166,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * Sets the <code>Bindings</code> with the corresponding scope value in the
      * <code>context</code> field.
      *
+     * <p>
+     * 在<code> context </code>字段中设置<code> Bindings </code>与对应的范围值。
+     * 
+     * 
      * @param bindings The specified <code>Bindings</code>.
      * @param scope The specified scope.
      *
@@ -153,6 +193,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * Sets the specified value with the specified key in the <code>ENGINE_SCOPE</code>
      * <code>Bindings</code> of the protected <code>context</code> field.
      *
+     * <p>
+     *  在受保护的<code>上下文</code>字段的<code> ENGINE_SCOPE </code>绑定</code>中使用指定的键设置指定的值。
+     * 
+     * 
      * @param key The specified key.
      * @param value The specified value.
      *
@@ -172,6 +216,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * Gets the value for the specified key in the <code>ENGINE_SCOPE</code> of the
      * protected <code>context</code> field.
      *
+     * <p>
+     *  获取受保护的<code>上下文</code>字段的<code> ENGINE_SCOPE </code>中指定键的值。
+     * 
+     * 
      * @return The value for the specified key.
      *
      * @throws NullPointerException if key is null.
@@ -197,6 +245,14 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      *
      * <code>Bindings</code> of the <code>context</code> field.
      *
+     * <p>
+     *  <code> eval(Reader,Bindings)</code>调用抽象<code> eval(Reader,ScriptContext)</code>方法,传递一个<code> ScriptC
+     * ontext </code>,它的Reader,Writer和Bindings其他<code> ENGINE_SCOPE </code>与受保护的<code>上下文</code>字段的成员相同。
+     * 使用指定的<code> Bindings </code>而不是<code> ENGINE_SCOPE </code>。
+     * 
+     *  <code>上下文</code>字段的<code>绑定</code>。
+     * 
+     * 
      * @param reader A <code>Reader</code> containing the source of the script.
      * @param bindings A <code>Bindings</code> to use for the <code>ENGINE_SCOPE</code>
      * while the script executes.
@@ -217,6 +273,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * Same as <code>eval(Reader, Bindings)</code> except that the abstract
      * <code>eval(String, ScriptContext)</code> is used.
      *
+     * <p>
+     *  与<code> eval(Reader,Bindings)</code>相同,只是使用抽象<code> eval(String,ScriptContext)</code>。
+     * 
+     * 
      * @param script A <code>String</code> containing the source of the script.
      *
      * @param bindings A <code>Bindings</code> to use as the <code>ENGINE_SCOPE</code>
@@ -238,6 +298,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * <code>eval(Reader, ScriptContext)</code> passing the value of the <code>context</code>
      * field.
      *
+     * <p>
+     *  <code> eval(Reader)</code>调用传递<code> context </code>字段值的抽象<code> eval(Reader,ScriptContext)</code>。
+     * 
+     * 
      * @param reader A <code>Reader</code> containing the source of the script.
      * @return The return value from <code>eval(Reader, ScriptContext)</code>
      * @throws ScriptException if an error occurs in script.
@@ -253,6 +317,10 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * Same as <code>eval(Reader)</code> except that the abstract
      * <code>eval(String, ScriptContext)</code> is used.
      *
+     * <p>
+     *  与<code> eval(Reader)</code>相同,只是使用抽象<code> eval(String,ScriptContext)</code>。
+     * 
+     * 
      * @param script A <code>String</code> containing the source of the script.
      * @return The return value from <code>eval(String, ScriptContext)</code>
      * @throws ScriptException if an error occurs in script.
@@ -282,6 +350,14 @@ public abstract class AbstractScriptEngine  implements ScriptEngine {
      * using the abstract <code>eval(Reader,Bindings)</code> and <code>eval(String,Bindings)</code>
      * versions.
      *
+     * <p>
+     *  返回<code> SimpleScriptContext </code>。 <code> SimpleScriptContext </code>：br> <br>
+     * <ul>
+     *  <li>对其<code> ENGINE_SCOPE </code>使用指定的<code> Bindings </code>
+     * </li>
+     *  <li>使用抽象<code> getGlobalScope </code>方法返回的<code> Bindings </code>作为其<code> GLOBAL_SCOPE </code>
+     * </li>
+     * 
      * @param nn Bindings to use for the <code>ENGINE_SCOPE</code>
      * @return The <code>SimpleScriptContext</code>
      */

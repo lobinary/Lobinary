@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.algorithms.implementations;
 
@@ -59,17 +68,29 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Method engineGetURI
      *
      *@inheritDoc
+     * <p>
+     *  方法engineGetURI
+     * 
+     *  inheritDoc
+     * 
      */
     public abstract String engineGetURI();
 
     /**
      * Returns the output length of the hash/digest.
+     * <p>
+     *  返回散列/摘要的输出长度。
+     * 
      */
     abstract int getDigestLength();
 
     /**
      * Method IntegrityHmac
      *
+     * <p>
+     *  方法完整性
+     * 
+     * 
      * @throws XMLSignatureException
      */
     public IntegrityHmac() throws XMLSignatureException {
@@ -92,6 +113,11 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * java.security.spec.AlgorithmParameterSpec)}
      * which is executed on the internal {@link java.security.Signature} object.
      *
+     * <p>
+     *  在内部{@link java.security.Signature}对象上执行的{@link java.security.Signature#setParameter(java.security.spec.AlgorithmParameterSpec)}
+     * 的代理方法。
+     * 
+     * 
      * @param params
      * @throws XMLSignatureException
      */
@@ -109,6 +135,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Proxy method for {@link java.security.Signature#verify(byte[])}
      * which is executed on the internal {@link java.security.Signature} object.
      *
+     * <p>
+     *  对在内部{@link java.security.Signature}对象上执行的{@link java.security.Signature#verify(byte [])}的代理方法。
+     * 
+     * 
      * @param signature
      * @return true if the signature is correct
      * @throws XMLSignatureException
@@ -134,6 +164,11 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Proxy method for {@link java.security.Signature#initVerify(java.security.PublicKey)}
      * which is executed on the internal {@link java.security.Signature} object.
      *
+     * <p>
+     *  对在内部{@link java.security.Signature}对象上执行的{@link java.security.Signature#initVerify(java.security.PublicKey)}
+     * 的代理方法。
+     * 
+     * 
      * @param secretKey
      * @throws XMLSignatureException
      */
@@ -169,6 +204,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Proxy method for {@link java.security.Signature#sign()}
      * which is executed on the internal {@link java.security.Signature} object.
      *
+     * <p>
+     * 对在内部{@link java.security.Signature}对象上执行的{@link java.security.Signature#sign()}的代理方法。
+     * 
+     * 
      * @return the result of the {@link java.security.Signature#sign()} method
      * @throws XMLSignatureException
      */
@@ -191,6 +230,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
     /**
      * Method engineInitSign
      *
+     * <p>
+     *  方法engineInitSign
+     * 
+     * 
      * @param secretKey
      * @throws XMLSignatureException
      */
@@ -213,6 +256,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
     /**
      * Method engineInitSign
      *
+     * <p>
+     *  方法engineInitSign
+     * 
+     * 
      * @param secretKey
      * @param algorithmParameterSpec
      * @throws XMLSignatureException
@@ -240,6 +287,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
     /**
      * Method engineInitSign
      *
+     * <p>
+     *  方法engineInitSign
+     * 
+     * 
      * @param secretKey
      * @param secureRandom
      * @throws XMLSignatureException
@@ -253,6 +304,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Proxy method for {@link java.security.Signature#update(byte[])}
      * which is executed on the internal {@link java.security.Signature} object.
      *
+     * <p>
+     *  对在内部{@link java.security.Signature}对象上执行的{@link java.security.Signature#update(byte [])}的代理方法。
+     * 
+     * 
      * @param input
      * @throws XMLSignatureException
      */
@@ -268,6 +323,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Proxy method for {@link java.security.Signature#update(byte)}
      * which is executed on the internal {@link java.security.Signature} object.
      *
+     * <p>
+     *  对在内部{@link java.security.Signature}对象上执行的{@link java.security.Signature#update(byte)}的代理方法。
+     * 
+     * 
      * @param input
      * @throws XMLSignatureException
      */
@@ -283,6 +342,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Proxy method for {@link java.security.Signature#update(byte[], int, int)}
      * which is executed on the internal {@link java.security.Signature} object.
      *
+     * <p>
+     *  在内部{@link java.security.Signature}对象上执行的{@link java.security.Signature#update(byte [],int,int)的代理方法。
+     * 
+     * 
      * @param buf
      * @param offset
      * @param len
@@ -300,6 +363,9 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Method engineGetJCEAlgorithmString
      * @inheritDoc
      *
+     * <p>
+     *  方法engineGetJCEAlgorithmString @inheritDoc
+     * 
      */
     protected String engineGetJCEAlgorithmString() {
         return this.macAlgorithm.getAlgorithm();
@@ -309,6 +375,11 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
      * Method engineGetJCEAlgorithmString
      *
      * @inheritDoc
+     * <p>
+     *  方法engineGetJCEAlgorithmString
+     * 
+     *  @inheritDoc
+     * 
      */
     protected String engineGetJCEProviderName() {
         return this.macAlgorithm.getProvider().getName();
@@ -317,6 +388,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
     /**
      * Method engineSetHMACOutputLength
      *
+     * <p>
+     *  方法engineSetHMACOutputLength
+     * 
+     * 
      * @param HMACOutputLength
      */
     protected void engineSetHMACOutputLength(int HMACOutputLength) {
@@ -327,6 +402,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
     /**
      * Method engineGetContextFromElement
      *
+     * <p>
+     *  方法engineGetContextFromElement
+     * 
+     * 
      * @param element
      */
     protected void engineGetContextFromElement(Element element) {
@@ -348,6 +427,10 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
     /**
      * Method engineAddContextToElement
      *
+     * <p>
+     *  方法engineAddContextToElement
+     * 
+     * 
      * @param element
      */
     public void engineAddContextToElement(Element element) {
@@ -371,12 +454,19 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
 
     /**
      * Class IntegrityHmacSHA1
+     * <p>
+     *  类IntegrityHmacSHA1
+     * 
      */
     public static class IntegrityHmacSHA1 extends IntegrityHmac {
 
         /**
          * Constructor IntegrityHmacSHA1
          *
+         * <p>
+         *  构造函数IntegrityHmacSHA1
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public IntegrityHmacSHA1() throws XMLSignatureException {
@@ -387,6 +477,9 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
          * Method engineGetURI
          * @inheritDoc
          *
+         * <p>
+         *  方法engineGetURI @inheritDoc
+         * 
          */
         public String engineGetURI() {
             return XMLSignature.ALGO_ID_MAC_HMAC_SHA1;
@@ -399,12 +492,19 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
 
     /**
      * Class IntegrityHmacSHA256
+     * <p>
+     *  类IntegrityHmacSHA256
+     * 
      */
     public static class IntegrityHmacSHA256 extends IntegrityHmac {
 
         /**
          * Constructor IntegrityHmacSHA256
          *
+         * <p>
+         *  构造函数IntegrityHmacSHA256
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public IntegrityHmacSHA256() throws XMLSignatureException {
@@ -415,6 +515,11 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
          * Method engineGetURI
          *
          * @inheritDoc
+         * <p>
+         *  方法engineGetURI
+         * 
+         *  @inheritDoc
+         * 
          */
         public String engineGetURI() {
             return XMLSignature.ALGO_ID_MAC_HMAC_SHA256;
@@ -427,12 +532,19 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
 
     /**
      * Class IntegrityHmacSHA384
+     * <p>
+     *  类IntegrityHmacSHA384
+     * 
      */
     public static class IntegrityHmacSHA384 extends IntegrityHmac {
 
         /**
          * Constructor IntegrityHmacSHA384
          *
+         * <p>
+         *  构造函数IntegrityHmacSHA384
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public IntegrityHmacSHA384() throws XMLSignatureException {
@@ -443,6 +555,9 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
          * Method engineGetURI
          * @inheritDoc
          *
+         * <p>
+         *  方法engineGetURI @inheritDoc
+         * 
          */
         public String engineGetURI() {
             return XMLSignature.ALGO_ID_MAC_HMAC_SHA384;
@@ -455,12 +570,19 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
 
     /**
      * Class IntegrityHmacSHA512
+     * <p>
+     *  类IntegrityHmacSHA512
+     * 
      */
     public static class IntegrityHmacSHA512 extends IntegrityHmac {
 
         /**
          * Constructor IntegrityHmacSHA512
          *
+         * <p>
+         *  构造函数IntegrityHmacSHA512
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public IntegrityHmacSHA512() throws XMLSignatureException {
@@ -471,6 +593,9 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
          * Method engineGetURI
          * @inheritDoc
          *
+         * <p>
+         *  方法engineGetURI @inheritDoc
+         * 
          */
         public String engineGetURI() {
             return XMLSignature.ALGO_ID_MAC_HMAC_SHA512;
@@ -483,12 +608,19 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
 
     /**
      * Class IntegrityHmacRIPEMD160
+     * <p>
+     *  类IntegrityHmacRIPEMD160
+     * 
      */
     public static class IntegrityHmacRIPEMD160 extends IntegrityHmac {
 
         /**
          * Constructor IntegrityHmacRIPEMD160
          *
+         * <p>
+         *  构造函数IntegrityHmacRIPEMD160
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public IntegrityHmacRIPEMD160() throws XMLSignatureException {
@@ -499,6 +631,11 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
          * Method engineGetURI
          *
          * @inheritDoc
+         * <p>
+         *  方法engineGetURI
+         * 
+         *  @inheritDoc
+         * 
          */
         public String engineGetURI() {
             return XMLSignature.ALGO_ID_MAC_HMAC_RIPEMD160;
@@ -511,12 +648,19 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
 
     /**
      * Class IntegrityHmacMD5
+     * <p>
+     *  类IntegrityHmacMD5
+     * 
      */
     public static class IntegrityHmacMD5 extends IntegrityHmac {
 
         /**
          * Constructor IntegrityHmacMD5
          *
+         * <p>
+         *  构造函数IntegrityHmacMD5
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public IntegrityHmacMD5() throws XMLSignatureException {
@@ -527,6 +671,9 @@ public abstract class IntegrityHmac extends SignatureAlgorithmSpi {
          * Method engineGetURI
          *
          * @inheritDoc
+         * <p>
+         *  方法engineGetURI
+         * 
          */
         public String engineGetURI() {
             return XMLSignature.ALGO_ID_MAC_HMAC_NOT_RECOMMENDED_MD5;

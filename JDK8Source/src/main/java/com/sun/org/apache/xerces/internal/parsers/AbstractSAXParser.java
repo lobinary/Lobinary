@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -74,6 +84,10 @@ import org.xml.sax.helpers.LocatorImpl;
  * SAX1 and SAX2 parser functionality, while the actual pipeline is
  * defined in the parser configuration.
  *
+ * <p>
+ *  这是所有SAX解析器的基类。它实现了SAX1和SAX2解析器功能,而实际的流水线在解析器配置中定义。
+ * 
+ * 
  * @author Arnaud Le Hors, IBM
  * @author Andy Clark, IBM
  *
@@ -168,6 +182,9 @@ public abstract class AbstractSAXParser
     /**
      * XMLNS URIs: Namespace declarations in the
      * http://www.w3.org/2000/xmlns/ namespace.
+     * <p>
+     *  XMLNS URI：http://www.w3.org/2000/xmlns/命名空间中的命名空间声明。
+     * 
      */
     protected boolean fXMLNSURIs = false;
 
@@ -199,6 +216,9 @@ public abstract class AbstractSAXParser
      * True if a parse is in progress. This state is needed because
      * some features/properties cannot be set while parsing (e.g.
      * validation and namespaces).
+     * <p>
+     *  如果解析正在进行,则为true。需要此状态,因为在解析(例如验证和命名空间)时无法设置某些功能/属性。
+     * 
      */
     protected boolean fParseInProgress = false;
 
@@ -246,6 +266,10 @@ public abstract class AbstractSAXParser
     /**
      * The start of the document.
      *
+     * <p>
+     *  文档的开始。
+     * 
+     * 
      * @param locator The document locator, or null if the document
      *                 location cannot be reported during the parsing
      *                 of this document. However, it is <em>strongly</em>
@@ -303,6 +327,10 @@ public abstract class AbstractSAXParser
      * present, this method will be called immediately following the
      * startDocument call.
      *
+     * <p>
+     *  通知文档中存在XMLDecl行。如果存在,此方法将在startDocument调用后立即调用。
+     * 
+     * 
      * @param version    The XML version.
      * @param encoding   The IANA encoding name of the document, or null if
      *                   not specified.
@@ -322,6 +350,10 @@ public abstract class AbstractSAXParser
     /**
      * Notifies of the presence of the DOCTYPE line in the document.
      *
+     * <p>
+     *  通知文档中DOCTYPE行的存在。
+     * 
+     * 
      * @param rootElement The name of the root element.
      * @param publicId    The public identifier if an external DTD or null
      *                    if the external DTD is specified using SYSTEM.
@@ -367,6 +399,15 @@ public abstract class AbstractSAXParser
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     * 此方法通知实体的开始。 DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和通用实体名称只是实体名称。
+     * <p>
+     *  <strong>注意</strong>：由于文档是一个实体,因此通过在</em>之前调用具有实体名称"[xml]"</em>的startEntity方法,调用startDocument方法。
+     * 当通过SAX API暴露实体边界时,文档实体不会被报告。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -416,6 +457,15 @@ public abstract class AbstractSAXParser
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知实体的结束。 DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和通用实体名称只是实体名称。
+     * <p>
+     *  <strong>注意</strong>：由于文档是一个实体,因此在</em>之后,将通过调用具有实体名称"[xml]"<em>的endEntity方法通知处理程序结束调用endDocument方法。
+     * 当通过SAX API暴露实体边界时,文档实体不会被报告。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name The name of the entity.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -443,6 +493,10 @@ public abstract class AbstractSAXParser
      * by using an empty tag, then the startElement method will immediately
      * be followed by the endElement method, with no intervening methods.
      *
+     * <p>
+     *  元素的开始。如果文档通过使用空标签指定start元素,那么startElement方法将立即跟随endElement方法,没有中间方法。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs     Additional information that may include infoset augmentations
@@ -519,6 +573,10 @@ public abstract class AbstractSAXParser
     /**
      * Character content.
      *
+     * <p>
+     *  字符内容。
+     * 
+     * 
      * @param text The content.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -560,6 +618,10 @@ public abstract class AbstractSAXParser
      * characters in the document are ignorable based on the element
      * content model.
      *
+     * <p>
+     * 可怕的空格。对于要调用的此方法,文档源必须具有某种方式确定仅包含空格字符的文本应该被视为可忽略。例如,验证器可以基于元素内容模型来确定文档中的空白字符的长度是否可忽略。
+     * 
+     * 
      * @param text The ignorable whitespace.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -587,6 +649,10 @@ public abstract class AbstractSAXParser
     /**
      * The end of an element.
      *
+     * <p>
+     *  元素的结尾。
+     * 
+     * 
      * @param element The name of the element.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -621,6 +687,10 @@ public abstract class AbstractSAXParser
 
         /**
      * The start of a CDATA section.
+     * <p>
+     *  CDATA节的开始。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -641,6 +711,10 @@ public abstract class AbstractSAXParser
 
     /**
      * The end of a CDATA section.
+     * <p>
+     *  CDATA段的结尾。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -662,6 +736,10 @@ public abstract class AbstractSAXParser
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text The text in the comment.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -692,6 +770,12 @@ public abstract class AbstractSAXParser
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     *  一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augs     Additional information that may include infoset augmentations
@@ -728,6 +812,10 @@ public abstract class AbstractSAXParser
 
     /**
      * The end of the document.
+     * <p>
+     *  文档的结尾。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -758,6 +846,10 @@ public abstract class AbstractSAXParser
     /**
      * The start of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的开始。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -771,6 +863,10 @@ public abstract class AbstractSAXParser
     /**
      * The end of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -794,6 +890,15 @@ public abstract class AbstractSAXParser
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知参数实体的启动。 DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和通用实体名称只是实体名称。
+     * <p>
+     * <strong>注意</strong>：由于文档是一个实体,因此通过在</em>之前调用具有实体名称"[xml]"</em>的startEntity方法,调用startDocument方法。
+     * 当通过SAX API暴露实体边界时,文档实体不会被报告。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name     The name of the parameter entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -845,6 +950,15 @@ public abstract class AbstractSAXParser
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知实体的结束。 DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和通用实体名称只是实体名称。
+     * <p>
+     *  <strong>注意</strong>：由于文档是一个实体,因此在</em>之后,将通过调用具有实体名称"[xml]"<em>的endEntity方法通知处理程序结束调用endDocument方法。
+     * 当通过SAX API暴露实体边界时,文档实体不会被报告。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name The name of the parameter entity.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -871,6 +985,10 @@ public abstract class AbstractSAXParser
     /**
      * An element declaration.
      *
+     * <p>
+     *  元素声明。
+     * 
+     * 
      * @param name         The name of the element.
      * @param contentModel The element content model.
      *
@@ -897,6 +1015,10 @@ public abstract class AbstractSAXParser
     /**
      * An attribute declaration.
      *
+     * <p>
+     *  属性声明。
+     * 
+     * 
      * @param elementName   The name of the element that this attribute
      *                      is associated with.
      * @param attributeName The name of the attribute.
@@ -969,6 +1091,10 @@ public abstract class AbstractSAXParser
     /**
      * An internal entity declaration.
      *
+     * <p>
+     *  内部实体声明。
+     * 
+     * 
      * @param name The name of the entity. Parameter entity names start with
      *             '%', whereas the name of a general entity is just the
      *             entity name.
@@ -1002,6 +1128,10 @@ public abstract class AbstractSAXParser
     /**
      * An external entity declaration.
      *
+     * <p>
+     *  外部实体声明。
+     * 
+     * 
      * @param name     The name of the entity. Parameter entity names start
      *                 with '%', whereas the name of a general entity is just
      *                 the entity name.
@@ -1032,6 +1162,10 @@ public abstract class AbstractSAXParser
     /**
      * An unparsed entity declaration.
      *
+     * <p>
+     *  未解析的实体声明。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier    An object containing all location information
      *                      pertinent to this entity.
@@ -1063,6 +1197,10 @@ public abstract class AbstractSAXParser
     /**
      * A notation declaration
      *
+     * <p>
+     *  符号声明
+     * 
+     * 
      * @param name     The name of the notation.
      * @param identifier    An object containing all location information
      *                      pertinent to this notation.
@@ -1091,6 +1229,10 @@ public abstract class AbstractSAXParser
     /**
      * The end of the DTD.
      *
+     * <p>
+     *  DTD的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1127,6 +1269,15 @@ public abstract class AbstractSAXParser
      *     parse(new InputSource(systemId));
      * </pre>
      *
+     * <p>
+     *  解析由给定系统标识符指定的输入源。
+     * <p>
+     *  此方法等效于以下操作：
+     * <pre>
+     *  parse(new InputSource(systemId));
+     * </pre>
+     * 
+     * 
      * @param systemId The system identifier (URI).
      *
      * @exception org.xml.sax.SAXException Throws exception on SAX error.
@@ -1193,6 +1344,10 @@ public abstract class AbstractSAXParser
     /**
      * parse
      *
+     * <p>
+     *  解析
+     * 
+     * 
      * @param inputSource
      *
      * @exception org.xml.sax.SAXException
@@ -1267,6 +1422,10 @@ public abstract class AbstractSAXParser
      * Sets the resolver used to resolve external entities. The EntityResolver
      * interface supports resolution of public and system identifiers.
      *
+     * <p>
+     * 设置用于解析外部实体的解析器。 EntityResolver接口支持公共和系统标识符的解析。
+     * 
+     * 
      * @param resolver The new entity resolver. Passing a null value will
      *                 uninstall the currently installed resolver.
      */
@@ -1304,6 +1463,10 @@ public abstract class AbstractSAXParser
     /**
      * Return the current entity resolver.
      *
+     * <p>
+     *  返回当前实体解析器。
+     * 
+     * 
      * @return The current entity resolver, or null if none
      *         has been registered.
      * @see #setEntityResolver
@@ -1345,6 +1508,14 @@ public abstract class AbstractSAXParser
      * middle of a parse, and the SAX parser must begin using the new
      * handler immediately.</p>
      *
+     * <p>
+     *  允许应用程序注册错误事件处理程序。
+     * 
+     *  <p>如果应用程序未注册错误处理程序,则SAX解析器报告的所有错误事件将被忽略;然而,正常处理可能不会继续。强烈建议所有SAX应用程序实现错误处理程序,以避免意外的错误。</p>
+     * 
+     *  <p>应用程序可能在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。</p>
+     * 
+     * 
      * @param errorHandler The error handler.
      * @see #getErrorHandler
      */
@@ -1370,6 +1541,10 @@ public abstract class AbstractSAXParser
     /**
      * Return the current error handler.
      *
+     * <p>
+     *  返回当前错误处理程序。
+     * 
+     * 
      * @return The current error handler, or null if none
      *         has been registered.
      * @see #setErrorHandler
@@ -1395,6 +1570,10 @@ public abstract class AbstractSAXParser
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception SAXException An exception thrown if the parser does not
@@ -1419,6 +1598,14 @@ public abstract class AbstractSAXParser
      * middle of a parse, and the SAX parser must begin using the new
      * handler immediately.
      *
+     * <p>
+     *  允许应用程序注册DTD事件处理程序。
+     * <p>
+     *  如果应用程序未注册DTD处理程序,则SAX解析器报告的所有DTD事件将被忽略。
+     * <p>
+     *  应用程序可以在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。
+     * 
+     * 
      * @param dtdHandler The DTD handler.
      *
 
@@ -1444,6 +1631,14 @@ public abstract class AbstractSAXParser
      * middle of a parse, and the SAX parser must begin using the new
      * handler immediately.
      *
+     * <p>
+     *  允许应用程序注册文档事件处理程序。
+     * <p>
+     *  如果应用程序没有注册文档处理程序,则SAX解析器报告的所有文档事件将被静默忽略(这是由HandlerBase实现的默认行为)。
+     * <p>
+     *  应用程序可以在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。
+     * 
+     * 
      * @param documentHandler The document handler.
      */
     public void setDocumentHandler(DocumentHandler documentHandler) {
@@ -1465,6 +1660,14 @@ public abstract class AbstractSAXParser
      * middle of a parse, and the SAX parser must begin using the new
      * handler immediately.
      *
+     * <p>
+     * 允许应用程序注册内容事件处理程序。
+     * <p>
+     *  如果应用程序未注册内容处理程序,则SAX解析器报告的所有内容事件将被忽略。
+     * <p>
+     *  应用程序可以在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。
+     * 
+     * 
      * @param contentHandler The content handler.
      *
      * @see #getContentHandler
@@ -1476,6 +1679,10 @@ public abstract class AbstractSAXParser
     /**
      * Return the current content handler.
      *
+     * <p>
+     *  返回当前内容处理程序。
+     * 
+     * 
      * @return The current content handler, or null if none
      *         has been registered.
      *
@@ -1488,6 +1695,10 @@ public abstract class AbstractSAXParser
     /**
      * Return the current DTD handler.
      *
+     * <p>
+     *  返回当前DTD处理程序。
+     * 
+     * 
      * @return The current DTD handler, or null if none
      *         has been registered.
      * @see #setDTDHandler
@@ -1501,6 +1712,10 @@ public abstract class AbstractSAXParser
      * might not recognize the feature, and if it does recognize
      * it, it might not be able to fulfill the request.
      *
+     * <p>
+     *  设置SAX2解析器中任何功能的状态。解析器可能无法识别该功能,如果它识别它,它可能无法满足该请求。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      * @param state The requested state of the feature (true or false).
      *
@@ -1684,6 +1899,12 @@ public abstract class AbstractSAXParser
      * Query the current state of any feature in a SAX2 parser.  The
      * parser might not recognize the feature.
      *
+     * <p>
+     *  查询要素的状态。
+     * 
+     *  查询SAX2解析器中任何功能的当前状态。解析器可能无法识别该功能。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature
      *                  being set.
      * @return The current state of the feature.
@@ -1815,6 +2036,9 @@ public abstract class AbstractSAXParser
                 // Drop through and perform default processing
                 //
             }
+            /* <p>
+            /*  else if(featureId.startsWith(XERCES_FEATURES_PREFIX)){// //下拉并执行默认处理//}
+            /* 
             */
 
             return fConfiguration.getFeature(featureId);
@@ -1840,6 +2064,10 @@ public abstract class AbstractSAXParser
      * might not recognize the property, and if it does recognize
      * it, it might not support the requested value.
      *
+     * <p>
+     *  设置SAX2解析器中任何属性的值。解析器可能无法识别属性,并且如果它识别它,它可能不支持请求的值。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      * @param value The value to which the property is being set.
@@ -1934,6 +2162,9 @@ public abstract class AbstractSAXParser
                 // Drop through and perform default processing
                 //
             }
+            /* <p>
+            /*  else if(propertyId.startsWith(XERCES_PROPERTIES_PREFIX)){// //下拉并执行默认处理//}
+            /* 
             */
 
             //
@@ -1964,6 +2195,12 @@ public abstract class AbstractSAXParser
      * Return the current value of a property in a SAX2 parser.
      * The parser might not recognize the property.
      *
+     * <p>
+     *  查询属性的值。
+     * 
+     *  返回SAX2解析器中属性的当前值。解析器可能无法识别属性。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      * @return The current value of the property.
@@ -2048,6 +2285,9 @@ public abstract class AbstractSAXParser
                 // Drop through and perform default processing
                 //
             }
+            /* <p>
+            /*  else if(propertyId.startsWith(XERCES_PROPERTIES_PREFIX)){// //下拉并执行默认处理//}
+            /* 
             */
 
             //
@@ -2086,6 +2326,15 @@ public abstract class AbstractSAXParser
      * http://xml.org/sax/properties/declaration-handler
      * </pre>
      *
+     * <p>
+     *  设置DTD声明事件处理程序。
+     * <p>
+     *  此方法等同于属性：
+     * <pre>
+     *  http://xml.org/sax/properties/declaration-handler
+     * </pre>
+     * 
+     * 
      * @param handler The new handler.
      *
      * @see #getDeclHandler
@@ -2107,6 +2356,10 @@ public abstract class AbstractSAXParser
     /**
      * Returns the DTD declaration event handler.
      *
+     * <p>
+     * 返回DTD声明事件处理程序。
+     * 
+     * 
      * @see #setDeclHandler
      */
     protected DeclHandler getDeclHandler()
@@ -2122,6 +2375,15 @@ public abstract class AbstractSAXParser
      * http://xml.org/sax/properties/lexical-handler
      * </pre>
      *
+     * <p>
+     *  设置词法事件处理程序。
+     * <p>
+     *  此方法等同于属性：
+     * <pre>
+     *  http://xml.org/sax/properties/lexical-handler
+     * </pre>
+     * 
+     * 
      * @param handler lexical event handler
      *
      * @see #getLexicalHandler
@@ -2143,6 +2405,10 @@ public abstract class AbstractSAXParser
     /**
      * Returns the lexical handler.
      *
+     * <p>
+     *  返回词法处理程序。
+     * 
+     * 
      * @see #setLexicalHandler
      */
     protected LexicalHandler getLexicalHandler()
@@ -2152,6 +2418,9 @@ public abstract class AbstractSAXParser
 
     /**
      * Send startPrefixMapping events
+     * <p>
+     *  发送startPrefixMapping事件
+     * 
      */
     protected final void startNamespaceMapping() throws SAXException{
         int count = fNamespaceContext.getDeclaredPrefixCount();
@@ -2169,6 +2438,9 @@ public abstract class AbstractSAXParser
 
     /**
      * Send endPrefixMapping events
+     * <p>
+     *  发送endPrefixMapping事件
+     * 
      */
     protected final void endNamespaceMapping() throws SAXException {
         int count = fNamespaceContext.getDeclaredPrefixCount();
@@ -2186,6 +2458,9 @@ public abstract class AbstractSAXParser
     /**
      * Reset all components before parsing.
      *
+     * <p>
+     *  在解析之前重置所有组件。
+     * 
      * @throws XNIException Thrown if an error occurs during initialization.
      */
     public void reset() throws XNIException {

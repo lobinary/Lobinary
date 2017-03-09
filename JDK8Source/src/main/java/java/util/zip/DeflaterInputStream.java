@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import java.io.IOException;
  * Implements an input stream filter for compressing data in the "deflate"
  * compression format.
  *
+ * <p>
+ *  实现用于以"缩放"压缩格式压缩数据的输入流过滤器。
+ * 
+ * 
  * @since       1.6
  * @author      David R Tribble (david@tribble.com)
  *
@@ -59,6 +64,9 @@ public class DeflaterInputStream extends FilterInputStream {
 
     /**
      * Check to make sure that this stream has not been closed.
+     * <p>
+     *  请检查以确保此流未关闭。
+     * 
      */
     private void ensureOpen() throws IOException {
         if (in == null) {
@@ -70,6 +78,10 @@ public class DeflaterInputStream extends FilterInputStream {
      * Creates a new input stream with a default compressor and buffer
      * size.
      *
+     * <p>
+     *  使用默认压缩器和缓冲区大小创建新的输入流。
+     * 
+     * 
      * @param in input stream to read the uncompressed data to
      * @throws NullPointerException if {@code in} is null
      */
@@ -82,6 +94,10 @@ public class DeflaterInputStream extends FilterInputStream {
      * Creates a new input stream with the specified compressor and a
      * default buffer size.
      *
+     * <p>
+     *  使用指定的压缩器和默认缓冲区大小创建新的输入流。
+     * 
+     * 
      * @param in input stream to read the uncompressed data to
      * @param defl compressor ("deflater") for this stream
      * @throws NullPointerException if {@code in} or {@code defl} is null
@@ -94,6 +110,10 @@ public class DeflaterInputStream extends FilterInputStream {
      * Creates a new input stream with the specified compressor and buffer
      * size.
      *
+     * <p>
+     *  创建具有指定压缩器和缓冲区大小的新输入流。
+     * 
+     * 
      * @param in input stream to read the uncompressed data to
      * @param defl compressor ("deflater") for this stream
      * @param bufLen compression buffer size
@@ -120,6 +140,10 @@ public class DeflaterInputStream extends FilterInputStream {
      * Closes this input stream and its underlying input stream, discarding
      * any pending uncompressed data.
      *
+     * <p>
+     *  关闭此输入流及其基础输入流,丢弃任何未决的未压缩数据。
+     * 
+     * 
      * @throws IOException if an I/O error occurs
      */
     public void close() throws IOException {
@@ -141,6 +165,10 @@ public class DeflaterInputStream extends FilterInputStream {
      * Reads a single byte of compressed data from the input stream.
      * This method will block until some input can be read and compressed.
      *
+     * <p>
+     *  从输入流读取单个字节的压缩数据。此方法将阻塞,直到一些输入可以读取和压缩。
+     * 
+     * 
      * @return a single byte of compressed data, or -1 if the end of the
      * uncompressed input stream is reached
      * @throws IOException if an I/O error occurs or if this stream is
@@ -158,6 +186,10 @@ public class DeflaterInputStream extends FilterInputStream {
      * Reads compressed data into a byte array.
      * This method will block until some input can be read and compressed.
      *
+     * <p>
+     *  将压缩数据读取到字节数组中。此方法将阻塞,直到一些输入可以读取和压缩。
+     * 
+     * 
      * @param b buffer into which the data is read
      * @param off starting offset of the data within {@code b}
      * @param len maximum number of compressed bytes to read into {@code b}
@@ -215,6 +247,11 @@ public class DeflaterInputStream extends FilterInputStream {
      * the maximum number of bytes which can be skipped is
      * {@code Integer.MAX_VALUE}.
      *
+     * <p>
+     *  跳过并丢弃来自输入流的数据。此方法可能阻塞,直到读取和跳过指定数量的字节。
+     *  <em>注意：</em>虽然{@code n}是以{@code long}形式提供的,但可以跳过的最大字节数为{@code Integer.MAX_VALUE}。
+     * 
+     * 
      * @param n number of bytes to be skipped
      * @return the actual number of bytes skipped
      * @throws IOException if an I/O error occurs or if this stream is
@@ -250,6 +287,12 @@ public class DeflaterInputStream extends FilterInputStream {
      * <p>
      * Programs should not count on this method to return the actual number
      * of bytes that could be read without blocking
+     * <p>
+     *  在达到EOF后返回0,否则始终返回1。
+     * <p>
+     *  程序不应该依赖此方法返回可以无阻塞地读取的实际字节数
+     * 
+     * 
      * @return zero after the end of the underlying input stream has been
      * reached, otherwise always returns 1
      * @throws IOException if an I/O error occurs or if this stream is
@@ -267,6 +310,10 @@ public class DeflaterInputStream extends FilterInputStream {
      * Always returns {@code false} because this input stream does not support
      * the {@link #mark mark()} and {@link #reset reset()} methods.
      *
+     * <p>
+     *  始终返回{@code false},因为此输入流不支持{@link #mark mark()}和{@link #reset reset()}方法。
+     * 
+     * 
      * @return false, always
      */
     public boolean markSupported() {
@@ -276,6 +323,10 @@ public class DeflaterInputStream extends FilterInputStream {
     /**
      * <i>This operation is not supported</i>.
      *
+     * <p>
+     *  <i>不支持此操作</i>。
+     * 
+     * 
      * @param limit maximum bytes that can be read before invalidating the position marker
      */
     public void mark(int limit) {
@@ -285,6 +336,9 @@ public class DeflaterInputStream extends FilterInputStream {
     /**
      * <i>This operation is not supported</i>.
      *
+     * <p>
+     * <i>不支持此操作</i>。
+     * 
      * @throws IOException always thrown
      */
     public void reset() throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 
 package java.time.chrono;
@@ -212,91 +231,233 @@ import sun.util.logging.PlatformLogger;
  * </tbody>
  * </table>
  *
+ * <p>
+ *  Hijrah日历是支持伊斯兰日历的农历。
+ * <p>
+ *  Hijrah年代学遵循Hijrah日历系统的规则。 Hijrah日历具有基于当确定发生新月和何处进行观察时的差异的若干变体。
+ * 在一些变型中,每月的长度是根据用于月球和地球的天文数据算法地计算的,并且在其他变型中,月的长度由新月的授权瞄准确定。对于基于算法的日历,日历可以投影到未来。
+ * 对于基于目视的日历,只有来自过去目击的历史数据可用。
+ * <p>
+ * 每月的长度为29或30天。普通年有354天;闰年有355天。
+ * 
+ * <p>
+ *  CLDR和LDML识别变体：
+ * <table cellpadding="2" summary="Variants of Hijrah Calendars">
+ * <thead>
+ * <tr class="tableSubHeadingColor">
+ *  <th class ="colFirst"align ="left">年表ID </th> <th class ="colFirst"align ="left">日历类型</th> <th class ="colFirst"align ="left" >
+ *  Locale extension,see {@link java.util.Locale} </th> <th class ="colLast"align ="left">说明</th>。
+ * </tr>
+ * </thead>
+ * <tbody>
+ * <tr class="altColor">
+ *  <td> Hijrah-umalqura </td> <td> islamic-umalqura </td> <td> ca-islamic-umalqura </td> <td>伊斯兰 - 沙特阿拉
+ * 伯的Umm Al-Qura日历</td>。
+ * </tr>
+ * </tbody>
+ * </table>
+ *  <p>可以通过{@link Chronology#getAvailableChronologies()}获得其他变体。
+ * 
+ *  <p>示例</p>
+ * <p>
+ *  从区域设置选择年表使用{@link Chronology#ofLocale}查找基于支持区域设置的BCP 47扩展机制的年表,以请求特定日历("ca")。例如,
+ * </p>
+ * <pre>
+ *  Locale locale = Locale.forLanguageTag("en-US-u-ca-islamic-umalqura"); Chrono chrono = Chronology.ofL
+ * ocale(locale);。
+ * </pre>
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ *  @implNote每个Hijrah变体单独配置。每个变体由定义{@code ID},{@code日历类型},日历开始,与ISO日历对齐的属性资源以及一定年份范围内每月的长度定义。
+ * 变量在{@code calendars.properties}文件中标识。新属性的前缀为{@code"calendars.hijrah。"}：。
+ * <table cellpadding="2" border="0" summary="Configuration of Hijrah Calendar Variants">
+ * <thead>
+ * <tr class="tableSubHeadingColor">
+ * <th class ="colFirst"align ="left">属性名</th> <th class ="colFirst"align ="left">属性值</th> <th class ="colLast"align = >
+ * 说明</th>。
+ * </tr>
+ * </thead>
+ * <tbody>
+ * <tr class="altColor">
+ *  <td> calendars.hijrah。
+ * {ID} </td> <td>定义{@code {ID}}变体的属性资源</td> <td>属性资源位于{@code calendars.properties }文件</td>。
+ * </tr>
+ * <tr class="rowColor">
+ *  <td> calendars.hijrah。{ID} .type </td> <td>日历类型</td> <td> LDML定义日历类型名称</td>
+ * </tr>
+ * </tbody>
+ * </table>
+ * <p>
+ *  Hijrah属性资源是描述日历的一组属性。语法由{@code java.util.Properties#load(Reader)}定义。
+ * <table cellpadding="2" summary="Configuration of Hijrah Calendar">
+ * <thead>
+ * <tr class="tableSubHeadingColor">
+ *  <th class ="colFirst"align ="left">属性名</th> <th class ="colFirst"align ="left">属性值</th> <th class ="colLast"align = >
+ * 说明</th>。
+ * </tr>
+ * </thead>
+ * <tbody>
+ * <tr class="altColor">
+ *  <td> id </td> <td>年表ID,例如"Hijrah-umalqura"</td> <td>常用日历的ID </td>
+ * </tr>
+ * <tr class="rowColor">
+ *  <td>类型</td> <td>日历类型,例如"islamic-umalqura"</td> <td> LDML定义日历类型</td>
+ * </tr>
+ * <tr class="altColor">
+ *  <td>版本</td> <td>版本,例如："1.8.0_1"</td> <td> Hijrah变体数据的版本</td>
+ * </tr>
+ * <tr class="rowColor">
+ *  <td> iso-start </td> <td> ISO开始日期格式为{@code yyyy-MM-dd},例如："1900-04-30"</td> <td> ISO日期最小Hijrah年的第一天。
+ * </td>。
+ * </tr>
+ * <tr class="altColor">
+ * <td> yyyy  - 数字4位数年份,例如"1434"</td> <td>值为12个月长度的序列,例如："29 30 29 30 29 30 30 30 29 30 29 29" </td> <td>
+ * 以空格分隔的年份12个月的长度。
+ * 数字年属性必须存在,每年没有任何差距。月份长度必须介于29-32之间。
+ * </td>
+ * </tr>
+ * </tbody>
+ * </table>
+ * 
+ * 
  * @since 1.8
  */
 public final class HijrahChronology extends AbstractChronology implements Serializable {
 
     /**
      * The Hijrah Calendar id.
+     * <p>
+     *  Hijrah日历id。
+     * 
      */
     private final transient String typeId;
     /**
      * The Hijrah calendarType.
+     * <p>
+     *  Hijrah calendarType。
+     * 
      */
     private final transient String calendarType;
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 3127340209035924785L;
     /**
      * Singleton instance of the Islamic Umm Al-Qura calendar of Saudi Arabia.
      * Other Hijrah chronology variants may be available from
      * {@link Chronology#getAvailableChronologies}.
+     * <p>
+     *  沙特阿拉伯的伊斯兰盎格鲁库拉日历的单身人士实例。其他Hijrah年表变体可以从{@link Chronology#getAvailableChronologies}获得。
+     * 
      */
     public static final HijrahChronology INSTANCE;
     /**
      * Flag to indicate the initialization of configuration data is complete.
+     * <p>
+     *  表示配置数据初始化的标志已完成。
+     * 
+     * 
      * @see #checkCalendarInit()
      */
     private transient volatile boolean initComplete;
     /**
      * Array of epoch days indexed by Hijrah Epoch month.
      * Computed by {@link #loadCalendarData}.
+     * <p>
+     *  由Hijrah时代月份索引的时代日阵列。由{@link #loadCalendarData}计算。
+     * 
      */
     private transient int[] hijrahEpochMonthStartDays;
     /**
      * The minimum epoch day of this Hijrah calendar.
      * Computed by {@link #loadCalendarData}.
+     * <p>
+     *  这个Hijrah日历的最小纪元日。由{@link #loadCalendarData}计算。
+     * 
      */
     private transient int minEpochDay;
     /**
      * The maximum epoch day for which calendar data is available.
      * Computed by {@link #loadCalendarData}.
+     * <p>
+     *  日历数据可用的最大时期。由{@link #loadCalendarData}计算。
+     * 
      */
     private transient int maxEpochDay;
     /**
      * The minimum epoch month.
      * Computed by {@link #loadCalendarData}.
+     * <p>
+     *  最小历元月份。由{@link #loadCalendarData}计算。
+     * 
      */
     private transient int hijrahStartEpochMonth;
     /**
      * The minimum length of a month.
      * Computed by {@link #createEpochMonths}.
+     * <p>
+     *  一个月的最小长度。由{@link #createEpochMonths}计算。
+     * 
      */
     private transient int minMonthLength;
     /**
      * The maximum length of a month.
      * Computed by {@link #createEpochMonths}.
+     * <p>
+     *  一个月的最大长度。由{@link #createEpochMonths}计算。
+     * 
      */
     private transient int maxMonthLength;
     /**
      * The minimum length of a year in days.
      * Computed by {@link #createEpochMonths}.
+     * <p>
+     *  一年中的最小长度(以天为单位)。由{@link #createEpochMonths}计算。
+     * 
      */
     private transient int minYearLength;
     /**
      * The maximum length of a year in days.
      * Computed by {@link #createEpochMonths}.
+     * <p>
+     *  一年中的最大长度(以天为单位)。由{@link #createEpochMonths}计算。
+     * 
      */
     private transient int maxYearLength;
     /**
      * A reference to the properties stored in
      * ${java.home}/lib/calendars.properties
+     * <p>
+     *  对存储在$ {java.home} /lib/calendars.properties中的属性的引用
+     * 
      */
     private final transient static Properties calendarProperties;
 
     /**
      * Prefix of property names for Hijrah calendar variants.
+     * <p>
+     *  Hijrah日历变体的属性名称的前缀。
+     * 
      */
     private static final String PROP_PREFIX = "calendar.hijrah.";
     /**
      * Suffix of property names containing the calendar type of a variant.
+     * <p>
+     * 包含变体的日历类型的属性名称的后缀。
+     * 
      */
     private static final String PROP_TYPE_SUFFIX = ".type";
 
     /**
      * Static initialization of the predefined calendars found in the
      * lib/calendars.properties file.
+     * <p>
+     *  在lib / calendars.properties文件中找到的预定义日历的静态初始化。
+     * 
      */
     static {
         try {
@@ -322,6 +483,9 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * For each Hijrah variant listed, create the HijrahChronology and register it.
      * Exceptions during initialization are logged but otherwise ignored.
+     * <p>
+     *  对于列出的每个Hijrah变体,创建HijrahChronology并注册它。初始化期间的异常被记录但被忽略。
+     * 
      */
     private static void registerVariants() {
         for (String name : calendarProperties.stringPropertyNames()) {
@@ -352,6 +516,11 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * in the {@code calendars.properties}.
      * The property names are {@code "calendar.hijrah." + id}
      * and  {@code "calendar.hijrah." + id + ".type"}
+     * <p>
+     *  为命名的变体创建HijrahChronology。资源和日历类型从{@code calendars.properties}中的属性中检索。属性名称为{@code"calendar.hijrah。
+     * " + id}和{@code"calendar.hijrah。" + id +".type"}。
+     * 
+     * 
      * @param id the id of the calendar
      * @throws DateTimeException if the calendar type is missing from the properties file.
      * @throws IllegalArgumentException if the id is empty
@@ -378,6 +547,13 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * {@link #getHijrahDateInfo} so every call from HijrahDate to a
      * HijrahChronology via package private methods has been checked.
      *
+     * <p>
+     *  检查并确保日历数据已初始化。初始化检查在公共和包方法之间的边界执行。如果公共方调用另一个公共方法,则在调用方中不需要检查。
+     *  HijrahDate的构造函数调用{@link #getEpochDay}或{@link #getHijrahDateInfo},所以从HijrahDate到HijrahChronology通过包私有
+     * 方法的每个调用都被检查。
+     *  检查并确保日历数据已初始化。初始化检查在公共和包方法之间的边界执行。如果公共方调用另一个公共方法,则在调用方中不需要检查。
+     * 
+     * 
      * @throws DateTimeException if the calendar data configuration is
      *     malformed or IOExceptions occur loading the data
      */
@@ -396,6 +572,12 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * The ID uniquely identifies the {@code Chronology}. It can be used to
      * lookup the {@code Chronology} using {@link #of(String)}.
      *
+     * <p>
+     *  获取年表的ID。
+     * <p>
+     *  ID唯一标识{@code Chronology}。它可以用于使用{@link #of(String)}查找{@code Chronology}。
+     * 
+     * 
      * @return the chronology ID, non-null
      * @see #getCalendarType()
      */
@@ -411,6 +593,12 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * <em>Unicode Locale Data Markup Language (LDML)</em> specification.
      * It can be used to lookup the {@code Chronology} using {@link #of(String)}.
      *
+     * <p>
+     *  获取伊斯兰日历的日历类型。
+     * <p>
+     *  日历类型是由<em> Unicode区域设置数据标记语言(LDML)</em>规范定义的标识符。它可以用于使用{@link #of(String)}查找{@code Chronology}。
+     * 
+     * 
      * @return the calendar system type; non-null if the calendar has
      *    a standard type, otherwise null
      * @see #getId()
@@ -425,6 +613,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Obtains a local date in Hijrah calendar system from the
      * era, year-of-era, month-of-year and day-of-month fields.
      *
+     * <p>
+     *  从时代,年份,年份和月份字段获取Hijrah日历系统中的本地日期。
+     * 
+     * 
      * @param era  the Hijrah era, not null
      * @param yearOfEra  the year-of-era
      * @param month  the month-of-year
@@ -442,6 +634,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Obtains a local date in Hijrah calendar system from the
      * proleptic-year, month-of-year and day-of-month fields.
      *
+     * <p>
+     * 从推测年,月和月日字段中获取Hijrah日历系统中的本地日期。
+     * 
+     * 
      * @param prolepticYear  the proleptic-year
      * @param month  the month-of-year
      * @param dayOfMonth  the day-of-month
@@ -457,6 +653,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Obtains a local date in Hijrah calendar system from the
      * era, year-of-era and day-of-year fields.
      *
+     * <p>
+     *  从时代,年代和年年字段获取Hijrah日历系统中的本地日期。
+     * 
+     * 
      * @param era  the Hijrah era, not null
      * @param yearOfEra  the year-of-era
      * @param dayOfYear  the day-of-year
@@ -473,6 +673,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Obtains a local date in Hijrah calendar system from the
      * proleptic-year and day-of-year fields.
      *
+     * <p>
+     *  从推测年和年年字段获取Hijrah日历系统中的本地日期。
+     * 
+     * 
      * @param prolepticYear  the proleptic-year
      * @param dayOfYear  the day-of-year
      * @return the Hijrah local date, not null
@@ -491,6 +695,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Obtains a local date in the Hijrah calendar system from the epoch-day.
      *
+     * <p>
+     *  从时代日获得Hijrah日历系统中的本地日期。
+     * 
+     * 
      * @param epochDay  the epoch day
      * @return the Hijrah local date, not null
      * @throws DateTimeException if unable to create the date
@@ -611,6 +819,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Check the validity of a year.
      *
+     * <p>
+     *  检查一年的有效期。
+     * 
+     * 
      * @param prolepticYear the year to check
      */
     int checkValidYear(long prolepticYear) {
@@ -637,6 +849,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Returns an array containing the Hijrah year, month and day
      * computed from the epoch day.
      *
+     * <p>
+     *  返回包含从历元日计算的Hijrah年,月和日的数组。
+     * 
+     * 
      * @param epochDay  the EpochDay
      * @return int[0] = YEAR, int[1] = MONTH, int[2] = DATE
      */
@@ -662,6 +878,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Return the epoch day computed from Hijrah year, month, and day.
      *
+     * <p>
+     *  返回从Hijrah年,月和日计算的纪元日。
+     * 
+     * 
      * @param prolepticYear the year to represent, 0-origin
      * @param monthOfYear the month-of-year to represent, 1-origin
      * @param dayOfMonth the day-of-month to represent, 1-origin
@@ -684,6 +904,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns day of year for the year and month.
      *
+     * <p>
+     *  返回年和月的日期。
+     * 
+     * 
      * @param prolepticYear a proleptic year
      * @param month a month, 1-origin
      * @return the day of year, 1-origin
@@ -695,6 +919,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns month length for the year and month.
      *
+     * <p>
+     *  返回年份和月份的月份长度。
+     * 
+     * 
      * @param prolepticYear a proleptic year
      * @param monthOfYear a month, 1-origin.
      * @return the length of the month
@@ -712,6 +940,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Returns year length.
      * Note: The 12th month must exist in the data.
      *
+     * <p>
+     *  返回年份长度。注意：第12个月必须存在于数据中。
+     * 
+     * 
      * @param prolepticYear a proleptic year
      * @return year length in days
      */
@@ -722,6 +954,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Return the minimum supported Hijrah year.
      *
+     * <p>
+     *  返回最小支持的Hijrah年。
+     * 
+     * 
      * @return the minimum
      */
     int getMinimumYear() {
@@ -731,6 +967,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Return the maximum supported Hijrah ear.
      *
+     * <p>
+     *  返回最大支持的Hijrah耳朵。
+     * 
+     * 
      * @return the minimum
      */
     int getMaximumYear() {
@@ -740,6 +980,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns maximum day-of-month.
      *
+     * <p>
+     *  返回月份的最大日。
+     * 
+     * 
      * @return maximum day-of-month
      */
     int getMaximumMonthLength() {
@@ -749,6 +993,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns smallest maximum day-of-month.
      *
+     * <p>
+     *  返回最小的最大日期。
+     * 
+     * 
      * @return smallest maximum day-of-month
      */
     int getMinimumMonthLength() {
@@ -758,6 +1006,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns maximum day-of-year.
      *
+     * <p>
+     *  返回年的最大天数。
+     * 
+     * 
      * @return maximum day-of-year
      */
     int getMaximumDayOfYear() {
@@ -767,6 +1019,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns smallest maximum day-of-year.
      *
+     * <p>
+     *  返回最小的最大日期。
+     * 
+     * 
      * @return smallest maximum day-of-year
      */
     int getSmallestMaximumDayOfYear() {
@@ -777,6 +1033,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Returns the epochMonth found by locating the epochDay in the table. The
      * epochMonth is the index in the table
      *
+     * <p>
+     *  返回通过在表中查找epochDay而找到的epochMonth。 epochMonth是表中的索引
+     * 
+     * 
      * @param epochDay
      * @return The index of the element of the start of the month containing the
      * epochDay.
@@ -793,6 +1053,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns the year computed from the epochMonth
      *
+     * <p>
+     *  返回从epochMonth计算的年份
+     * 
+     * 
      * @param epochMonth the epochMonth
      * @return the Hijrah Year
      */
@@ -803,6 +1067,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns the epochMonth for the Hijrah Year.
      *
+     * <p>
+     *  返回Hijrah年的epochMonth。
+     * 
+     * 
      * @param year the HijrahYear
      * @return the epochMonth for the beginning of the year.
      */
@@ -813,6 +1081,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns the Hijrah month from the epochMonth.
      *
+     * <p>
+     *  从epochMonth返回Hijrah月份。
+     * 
+     * 
      * @param epochMonth the epochMonth
      * @return the month of the Hijrah Year
      */
@@ -823,6 +1095,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns the epochDay for the start of the epochMonth.
      *
+     * <p>
+     *  返回epochMonth开始的epochDay。
+     * 
+     * 
      * @param epochMonth the epochMonth
      * @return the epochDay for the start of the epochMonth.
      */
@@ -834,6 +1110,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Returns the day of year for the requested HijrahYear and month.
      *
+     * <p>
+     *  返回所请求的HijrahYear和月份的年中的第几天。
+     * 
+     * 
      * @param prolepticYear the Hijrah year
      * @param month the Hijrah month
      * @return the day of year for the start of the month of the year
@@ -848,6 +1128,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Returns the length of the epochMonth. It is computed from the start of
      * the following month minus the start of the requested month.
      *
+     * <p>
+     *  返回epochMonth的长度。它是从下个月的开始减去所请求的月份的开始计算的。
+     * 
+     * 
      * @param epochMonth the epochMonth; assumed to be within range
      * @return the length in days of the epochMonth
      */
@@ -871,6 +1155,15 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      *   "$java.home/lib/" + resource-name
      * </pre>
      *
+     * <p>
+     * 从资源返回配置属性。
+     * <p>
+     *  变量配置资源的默认位置为：
+     * <pre>
+     *  "$ java.home / lib /"+ resource-name
+     * </pre>
+     * 
+     * 
      * @param resource the name of the calendar property resource
      * @return a Properties containing the properties read from the resource.
      * @throws Exception if access to the property resource fails
@@ -901,6 +1194,11 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * Everything else is the data for a year with containing the length of each
      * of 12 months.
      *
+     * <p>
+     *  加载并处理此calendarType的Hijrah日历属性文件。提取起始Hijrah日期和相应的ISO日期,并用于计算epochDate偏移量。版本号被识别和忽略。
+     * 一切都是一年的数据,包含每12个月的长度。
+     * 
+     * 
      * @throws DateTimeException if initialization of the calendar data from the
      *     resource fails
      */
@@ -987,6 +1285,11 @@ public final class HijrahChronology extends AbstractChronology implements Serial
      * computed from year and month and offset by minYear. The value of each
      * entry is the epochDay corresponding to the first day of the month.
      *
+     * <p>
+     *  将年到月长度的地图(从minYear到maxYear)转换为epochDays的线性连续数组。指数是从年和月计算的hijrahMonth,并偏移minYear。
+     * 每个条目的值是对应于该月第一天的epochDay。
+     * 
+     * 
      * @param minYear The minimum year for which data is provided
      * @param maxYear The maximum year for which data is provided
      * @param years a Map of year to the array of 12 month lengths
@@ -1032,6 +1335,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Parses the 12 months lengths from a property value for a specific year.
      *
+     * <p>
+     *  从特定年份的房产价值中折算12个月的长度。
+     * 
+     * 
      * @param line the value of a year property
      * @return an array of int[12] containing the 12 month lengths
      * @throws IllegalArgumentException if the number of months is not 12
@@ -1056,6 +1363,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Parse yyyy-MM-dd into a 3 element array [yyyy, mm, dd].
      *
+     * <p>
+     *  将yyyy-MM-dd解析为3个元素数组[yyyy,mm,dd]。
+     * 
+     * 
      * @param string the input string
      * @return the 3 element array with year, month, day
      */
@@ -1080,6 +1391,10 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Writes the Chronology using a
      * <a href="../../../serialized-form.html#java.time.chrono.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.chrono.Ser">专用序列化表单</a>撰写年表。
+     * 
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(1);     // identifies a Chronology
@@ -1096,6 +1411,9 @@ public final class HijrahChronology extends AbstractChronology implements Serial
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
@@ -58,6 +59,9 @@ public class EnvHelp {
      * <p>Name of the attribute that specifies a default class loader
      * object.
      * The value associated with this attribute is a ClassLoader object</p>
+     * <p>
+     *  <p>指定默认类装入器对象的属性的名称。与此属性关联的值是ClassLoader对象</p>
+     * 
      */
     private static final String DEFAULT_CLASS_LOADER =
         JMXConnectorFactory.DEFAULT_CLASS_LOADER;
@@ -66,6 +70,9 @@ public class EnvHelp {
      * <p>Name of the attribute that specifies a default class loader
      *    ObjectName.
      * The value associated with this attribute is an ObjectName object</p>
+     * <p>
+     *  <p>指定默认类加载器ObjectName的属性的名称。与此属性关联的值是ObjectName对象</p>
+     * 
      */
     private static final String DEFAULT_CLASS_LOADER_NAME =
         JMXConnectorServerFactory.DEFAULT_CLASS_LOADER_NAME;
@@ -90,6 +97,25 @@ public class EnvHelp {
      * </li>
      * </ul>
      *
+     * <p>
+     *  获取连接器服务器默认类加载器。
+     * <p>
+     *  返回：
+     * <p>
+     * <ul>
+     * <li>
+     *  对于<code> jmx.remote.default.class.loader </code>(如果有),在<var> env </var>中找到ClassLoader对象。
+     * </li>
+     * <li>
+     *  在<var> env </var>中为<code> jmx.remote.default.class.loader.name </code>中找到的ObjectName指向的类加载器,并注册在<var>
+     *  mbs </var> 。
+     * </li>
+     * <li>
+     *  否则为当前线程的上下文类加载器。
+     * </li>
+     * </ul>
+     * 
+     * 
      * @param env Environment attributes.
      * @param mbs The MBeanServer for which the connector server provides
      * remote access.
@@ -189,6 +215,26 @@ public class EnvHelp {
      * </pre>
      * in its <code>connect(Map env)</code> method.
      *
+     * <p>
+     *  获取Connector Client默认类加载器。
+     * <p>
+     *  返回：
+     * <p>
+     * <ul>
+     * <li>
+     *  对于<code> jmx.remote.default.class.loader </code>(如果有),在<var> env </var>中找到ClassLoader对象。
+     * </li>
+     *  <li>否则,<tt> Thread.currentThread()。getContextClassLoader()</tt>。
+     * </li>
+     * </ul>
+     * <p>
+     *  通常连接器客户端将调用
+     * <pre>
+     *  ClassLoader dcl = EnvHelp.resolveClientClassLoader(env);
+     * </pre>
+     *  在其<code> connect(Map env)</code>方法中。
+     * 
+     * 
      * @return The connector client default class loader.
      *
      * @exception IllegalArgumentException if
@@ -219,6 +265,10 @@ public class EnvHelp {
     /**
      * Initialize the cause field of a {@code Throwable} object.
      *
+     * <p>
+     *  初始化{@code Throwable}对象的原因字段。
+     * 
+     * 
      * @param throwable The {@code Throwable} on which the cause is set.
      * @param cause The cause to set on the supplied {@code Throwable}.
      * @return the {@code Throwable} with the cause field initialized.
@@ -233,6 +283,11 @@ public class EnvHelp {
      * Returns the cause field of a {@code Throwable} object.
      * The cause field can be got only if <var>t</var> has an
      * {@link Throwable#getCause()} method (JDK Version >= 1.4)
+     * <p>
+     *  返回{@code Throwable}对象的原因字段。
+     * 只有当<var> t </var>有一个{@link Throwable#getCause()}方法(JDK版本> = 1.4)时,才能得到cause字段。
+     * 
+     * 
      * @param t {@code Throwable} on which the cause must be set.
      * @return the cause if getCause() succeeded and the got value is not
      * null, otherwise return the <var>t</var>.
@@ -256,6 +311,9 @@ public class EnvHelp {
     /**
      * <p>Name of the attribute that specifies the size of a notification
      * buffer for a connector server. The default value is 1000.
+     * <p>
+     * <p>指定连接器服务器通知缓冲区大小的属性名称。默认值为1000。
+     * 
      */
     public static final String BUFFER_SIZE_PROPERTY =
         "jmx.remote.x.notification.buffer.size";
@@ -264,6 +322,9 @@ public class EnvHelp {
     /**
      * Returns the size of a notification buffer for a connector server.
      * The default value is 1000.
+     * <p>
+     *  返回连接器服务器的通知缓冲区的大小。默认值为1000。
+     * 
      */
     public static int getNotifBufferSize(Map<String, ?> env) {
         int defaultQueueSize = 1000; // default value
@@ -320,6 +381,9 @@ public class EnvHelp {
      * notifications that a client will fetch from its server.. The
      * value associated with this attribute should be an
      * <code>Integer</code> object.  The default value is 1000.</p>
+     * <p>
+     *  <p>指定客户端将从其服务器获取的通知的最大数量的属性的名称。与此属性关联的值应为<code> Integer </code>对象。默认值为1000. </p>
+     * 
      */
     public static final String MAX_FETCH_NOTIFS =
         "jmx.remote.x.notification.fetch.max";
@@ -327,6 +391,9 @@ public class EnvHelp {
     /**
      * Returns the maximum notification number which a client will
      * fetch every time.
+     * <p>
+     *  返回客户端每次提取的最大通知数。
+     * 
      */
     public static int getMaxFetchNotifNumber(Map<String, ?> env) {
         return (int) getIntegerAttribute(env, MAX_FETCH_NOTIFS, 1000, 1,
@@ -338,12 +405,18 @@ public class EnvHelp {
      * client to fetch notifications from its server. The value
      * associated with this attribute should be a <code>Long</code>
      * object.  The default value is 60000 milliseconds.</p>
+     * <p>
+     *  <p>指定客户端从其服务器提取通知的超时的属性名称。与此属性关联的值应为<code> Long </code>对象。默认值为60000毫秒。</p>
+     * 
      */
     public static final String FETCH_TIMEOUT =
         "jmx.remote.x.notification.fetch.timeout";
 
     /**
      * Returns the timeout for a client to fetch notifications.
+     * <p>
+     *  返回客户端获取通知的超时时间。
+     * 
      */
     public static long getFetchTimeout(Map<String, ?> env) {
         return getIntegerAttribute(env, FETCH_TIMEOUT, 60000L, 0,
@@ -357,6 +430,10 @@ public class EnvHelp {
      * should be a <code>NotificationAccessController</code> object.
      * The default value is null.</p>
      * This field is not public because of its com.sun dependency.
+     * <p>
+     *  <p>指定将检查对add / removeNotificationListener的访问并且还尝试接收通知的对象的属性的名称。
+     * 与此属性相关联的值应为<code> NotificationAccessController </code>对象。默认值为null。</p>此字段不是公共的,因为其com.sun依赖关系。
+     * 
      */
     public static final String NOTIF_ACCESS_CONTROLLER =
             "com.sun.jmx.remote.notification.access.controller";
@@ -375,6 +452,12 @@ public class EnvHelp {
      * may be a String that is parsable as a long.  It must be at
      * least <code>minValue</code> and at most<code>maxValue</code>.
      *
+     * <p>
+     * 从<code> env </code>中获取名为<code> name </code>的整数值属性。
+     * 如果<code> env </code>为空,或不包含<code> name </code>的条目,请返回<code> defaultValue </code>。
+     * 该值可以是Number,也可以是可解析为long的String。它必须至少是<code> minValue </code>和最多<code> maxValue </code>。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>env</code> contains
      * an entry for <code>name</code> but it does not meet the
      * constraints above.
@@ -394,6 +477,8 @@ public class EnvHelp {
         else if (o instanceof String) {
             result = Long.parseLong((String) o);
             /* May throw a NumberFormatException, which is an
+            /* <p>
+            /* 
                IllegalArgumentException.  */
         } else {
             final String msg =
@@ -421,6 +506,8 @@ public class EnvHelp {
     public static final String DEFAULT_ORB="java.naming.corba.orb";
 
     /* Check that all attributes have a key that is a String.
+    /* <p>
+    /* 
        Could make further checks, e.g. appropriate types for attributes.  */
     public static void checkAttributes(Map<?, ?> attributes) {
         for (Object key : attributes.keySet()) {
@@ -435,6 +522,10 @@ public class EnvHelp {
     /* Return a writable map containing only those attributes that are
        serializable, and that are not hidden by
        jmx.remote.x.hidden.attributes or the default list of hidden
+    /* <p>
+    /*  可序列化,并且不被jmx.remote.x.hidden.attributes或默认的隐藏列表隐藏
+    /* 
+    /* 
        attributes.  */
     public static <V> Map<String, V> filterAttributes(Map<String, V> attributes) {
         if (logger.traceOn()) {
@@ -450,6 +541,9 @@ public class EnvHelp {
     /**
      * Remove from the given Collection any element that is not a
      * serializable object.
+     * <p>
+     *  从给定集合中删除不是可序列化对象的任何元素。
+     * 
      */
     private static void purgeUnserializable(Collection<?> objects) {
         logger.trace("purgeUnserializable", "starts");
@@ -498,18 +592,31 @@ public class EnvHelp {
      * uses the same format).  If the value of this attribute begins
      * with an "=", then the remainder of the string defines the
      * complete list of attribute patterns.
+     * <p>
+     *  此属性的值(如果存在)是一个字符串,指定在JMXConnectorServer.getAttributes()中不应显示的其他属性。
+     * 它是以空格分隔的属性模式列表,其中每个模式都是属性名称,或属性前缀后跟"*"字符。除了在模式的末尾,"*"没有任何特殊意义。
+     * 默认情况下,此列表将添加到由{@link #DEFAULT_HIDDEN_ATTRIBUTES}(使用相同格式)定义的列表中。如果此属性的值以"="开头,则字符串的其余部分定义属性模式的完整列表。
+     * 
      */
     public static final String HIDDEN_ATTRIBUTES =
         "jmx.remote.x.hidden.attributes";
 
     /**
      * Default list of attributes not to show.
+     * <p>
+     *  默认的属性列表不显示。
+     * 
+     * 
      * @see #HIDDEN_ATTRIBUTES
      */
     /* This list is copied directly from the spec, plus
        java.naming.security.*.  Most of the attributes here would have
        been eliminated from the map anyway because they are typically
        not serializable.  But just in case they are, we list them here
+       java.naming.security.* <p>
+       java.naming.security.*  java.naming.security。*。这里的大多数属性将被从地图中消除,因为它们通常不是可序列化的。但是,如果他们是,我们在这里列出他们
+       java.naming.security.* 
+       java.naming.security.* 
        to conform to the spec.  */
     public static final String DEFAULT_HIDDEN_ATTRIBUTES =
         "java.naming.security.* " +
@@ -562,6 +669,10 @@ public class EnvHelp {
         /* Construct a string that is greater than any key in the map.
            Setting a string-to-match or a prefix-to-match to this string
            guarantees that we will never call next() on the corresponding
+        /* <p>
+        /* 为这个字符串设置字符串匹配或前缀匹配保证我们永远不会调用对应的next()
+        /* 
+        /* 
            iterator.  */
         String sentinelKey = map.lastKey() + "X";
         Iterator<String> keyIterator = map.keySet().iterator();
@@ -580,6 +691,8 @@ public class EnvHelp {
             nextPrefix = sentinelKey;
 
         /* Read each key in sorted order and, if it matches a string
+        /* <p>
+        /* 
            or prefix, remove it. */
     keys:
         while (keyIterator.hasNext()) {
@@ -587,6 +700,10 @@ public class EnvHelp {
 
             /* Continue through string-match values until we find one
                that is either greater than the current key, or equal
+            /* <p>
+            /*  即大于当前密钥,或者相等
+            /* 
+            /* 
                to it.  In the latter case, remove the key.  */
             int cmp = +1;
             while ((cmp = nextString.compareTo(key)) < 0) {
@@ -602,6 +719,10 @@ public class EnvHelp {
 
             /* Continue through the prefix values until we find one
                that is either greater than the current key, or a
+            /* <p>
+            /*  即大于当前密钥,或a
+            /* 
+            /* 
                prefix of it.  In the latter case, remove the key.  */
             while (nextPrefix.compareTo(key) <= 0) {
                 if (key.startsWith(nextPrefix)) {
@@ -633,12 +754,18 @@ public class EnvHelp {
      * <p>Name of the attribute that specifies the timeout to keep a
      * server side connection after answering last client request.
      * The default value is 120000 milliseconds.</p>
+     * <p>
+     *  <p>指定在应答最后一个客户端请求后保留服务器端连接的超时的属性名称。默认值为120000毫秒。</p>
+     * 
      */
     public static final String SERVER_CONNECTION_TIMEOUT =
         "jmx.remote.x.server.connection.timeout";
 
     /**
      * Returns the server side connection timeout.
+     * <p>
+     *  返回服务器端连接超时。
+     * 
      */
     public static long getServerConnectionTimeout(Map<String, ?> env) {
         return getIntegerAttribute(env, SERVER_CONNECTION_TIMEOUT, 120000L,
@@ -649,12 +776,18 @@ public class EnvHelp {
      * <p>Name of the attribute that specifies the period in
      * millisecond for a client to check its connection.  The default
      * value is 60000 milliseconds.</p>
+     * <p>
+     *  <p>指定客户端检查其连接的周期(以毫秒为单位)的属性的名称。默认值为60000毫秒。</p>
+     * 
      */
     public static final String CLIENT_CONNECTION_CHECK_PERIOD =
         "jmx.remote.x.client.connection.check.period";
 
     /**
      * Returns the client connection check period.
+     * <p>
+     *  返回客户端连接检查期。
+     * 
      */
     public static long getConnectionCheckPeriod(Map<String, ?> env) {
         return getIntegerAttribute(env, CLIENT_CONNECTION_CHECK_PERIOD, 60000L,
@@ -665,6 +798,10 @@ public class EnvHelp {
      * Computes a boolean value from a string value retrieved from a
      * property in the given map.
      *
+     * <p>
+     *  根据从给定地图中的属性检索的字符串值计算布尔值。
+     * 
+     * 
      * @param stringBoolean the string value that must be converted
      * into a boolean value.
      *
@@ -693,6 +830,10 @@ public class EnvHelp {
      * Computes a boolean value from a string value retrieved from a
      * property in the given map.
      *
+     * <p>
+     *  根据从给定地图中的属性检索的字符串值计算布尔值。
+     * 
+     * 
      * @param stringBoolean the string value that must be converted
      * into a boolean value.
      * @param defaultValue a default value to return in case no property
@@ -731,6 +872,9 @@ public class EnvHelp {
     /**
      * Converts a map into a valid hash table, i.e.
      * it removes all the 'null' values from the map.
+     * <p>
+     *  将地图转换为有效的哈希表,即它从地图中删除所有"空"值。
+     * 
      */
     public static <K, V> Hashtable<K, V> mapToHashtable(Map<K, V> map) {
         HashMap<K, V> m = new HashMap<K, V>(map);
@@ -743,6 +887,9 @@ public class EnvHelp {
     /**
      * <p>Name of the attribute that specifies whether a connector server
      * should not prevent the VM from exiting
+     * <p>
+     *  <p>指定连接器服务器是否应该不会阻止VM退出的属性的名称
+     * 
      */
     public static final String JMX_SERVER_DAEMON = "jmx.remote.x.daemon";
 
@@ -750,6 +897,9 @@ public class EnvHelp {
      * Returns true if {@value SERVER_DAEMON} is specified in the {@code env}
      * as a key and its value is a String and it is equal to true ignoring case.
      *
+     * <p>
+     *  如果在{@code env}中将{@value SERVER_DAEMON}指定为键,并且其值为String且等于true,则返回true。
+     * 
      * @param env
      * @return
      */

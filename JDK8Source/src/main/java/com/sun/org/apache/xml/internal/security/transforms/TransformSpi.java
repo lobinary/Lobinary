@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.transforms;
 
@@ -36,6 +45,10 @@ import org.xml.sax.SAXException;
  * have to be overridden are the
  * {@link #enginePerformTransform(XMLSignatureInput, Transform)} method.
  *
+ * <p>
+ *  所有变换算法扩展的基类。必须覆盖的常见方法是{@link #enginePerformTransform(XMLSignatureInput,Transform)}方法。
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  */
 public abstract class TransformSpi {
@@ -43,6 +56,10 @@ public abstract class TransformSpi {
     /**
      * The mega method which MUST be implemented by the Transformation Algorithm.
      *
+     * <p>
+     *  必须通过变换算法实现的巨型方法。
+     * 
+     * 
      * @param input {@link XMLSignatureInput} as the input of transformation
      * @param os where to output this transformation.
      * @param transformObject the Transform object
@@ -68,6 +85,10 @@ public abstract class TransformSpi {
      * methods. Subclasses should override this with a thread-safe
      * implementation.
      *
+     * <p>
+     *  必须通过变换算法实现的巨型方法。为了与预先存在的Transform实现兼容,默认情况下,此实现调用已弃用的线程不安全方法。子类应该使用线程安全的实现来覆盖它。
+     * 
+     * 
      * @param input {@link XMLSignatureInput} as the input of transformation
      * @param transformObject the Transform object
      * @return {@link XMLSignatureInput} as the result of transformation
@@ -87,6 +108,10 @@ public abstract class TransformSpi {
 
     /**
      * The mega method which MUST be implemented by the Transformation Algorithm.
+     * <p>
+     * 必须通过变换算法实现的巨型方法。
+     * 
+     * 
      * @param input {@link XMLSignatureInput} as the input of transformation
      * @return {@link XMLSignatureInput} as the result of transformation
      * @throws CanonicalizationException
@@ -106,6 +131,9 @@ public abstract class TransformSpi {
     /**
      * Returns the URI representation of <code>Transformation algorithm</code>
      *
+     * <p>
+     *  返回<code> Transformation algorithm </code>的URI表示形式
+     * 
      * @return the URI representation of <code>Transformation algorithm</code>
      */
     protected abstract String engineGetURI();

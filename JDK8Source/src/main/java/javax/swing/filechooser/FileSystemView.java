@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,15 @@ import sun.awt.shell.*;
  * Java Licensees may want to provide a different implementation of
  * FileSystemView to better handle a given operating system.
  *
+ * <p>
+ *  FileSystemView是JFileChooser的文件系统的网关。
+ * 由于JDK1.1文件API不允许访问根分区,文件类型信息或隐藏文件位等信息,因此该类旨在尽可能直观地了解特定于操作系统的文件系统信息。
+ * 
+ * <p>
+ * 
+ *  Java许可证人可能希望提供FileSystemView的不同实现以更好地处理给定的操作系统。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 
@@ -129,6 +139,13 @@ public abstract class FileSystemView {
      *
      * The default implementation gets information from the <code>ShellFolder</code> class.
      *
+     * <p>
+     *  确定给定文件是否是可导航树中的根。示例：Windows 98有一个根目录,即Desktop文件夹。
+     *  DOS每个驱动器盘符有一个根,<code> C：\ </code>,<code> D：\ </code>等.Unix有一个根目录：<code>"/"</code>。
+     * 
+     *  默认实现从<code> ShellFolder </code>类中获取信息。
+     * 
+     * 
      * @param f a <code>File</code> object representing a directory
      * @return <code>true</code> if <code>f</code> is a root in the navigable tree.
      * @see #isFileSystemRoot
@@ -151,6 +168,10 @@ public abstract class FileSystemView {
      * Returns true if the file (directory) can be visited.
      * Returns false if the directory cannot be traversed.
      *
+     * <p>
+     *  如果可以访问文件(目录),则返回true。如果无法遍历目录,则返回false。
+     * 
+     * 
      * @param f the <code>File</code>
      * @return <code>true</code> if the file/directory can be traversed, otherwise <code>false</code>
      * @see JFileChooser#isTraversable
@@ -168,6 +189,12 @@ public abstract class FileSystemView {
      *
      * The default implementation gets information from the ShellFolder class.
      *
+     * <p>
+     *  将在系统文件浏览器中显示的文件,目录或文件夹的名称。示例从Windows："M：\"目录显示为"CD-ROM(M :)"
+     * 
+     *  默认实现从ShellFolder类获取信息。
+     * 
+     * 
      * @param f a <code>File</code> object
      * @return the file name as it would be displayed by a native file chooser
      * @see JFileChooser#getName
@@ -205,6 +232,12 @@ public abstract class FileSystemView {
      *
      * Override for platforms with native ShellFolder implementations.
      *
+     * <p>
+     *  键入将在系统文件浏览器中显示的文件,目录或文件夹的描述。示例从Windows："桌面"文件夹被描述为"桌面"。
+     * 
+     *  使用本机ShellFolder实现覆盖平台。
+     * 
+     * 
      * @param f a <code>File</code> object
      * @return the file type description as it would be displayed by a native file chooser
      * or null if no native information is available.
@@ -222,6 +255,12 @@ public abstract class FileSystemView {
      *
      * The default implementation gets information from the ShellFolder class.
      *
+     * <p>
+     * 文件,目录或文件夹的图标,它将显示在系统文件浏览器中。示例从Windows："M：\"目录显示一个光盘图标。
+     * 
+     *  默认实现从ShellFolder类获取信息。
+     * 
+     * 
      * @param f a <code>File</code> object
      * @return an icon as it would be displayed by a native file chooser
      * @see JFileChooser#getIcon
@@ -254,6 +293,10 @@ public abstract class FileSystemView {
      * parent directory in the filesystem. Folder could for example be the
      * "Desktop" folder which is not the same as file.getParentFile().
      *
+     * <p>
+     *  在Windows上,文件可以出现在多个文件夹中,而不是文件系统中的父目录。文件夹可以是例如与"file.getParentFile()"不同的"Desktop"文件夹。
+     * 
+     * 
      * @param folder a <code>File</code> object representing a directory or special folder
      * @param file a <code>File</code> object
      * @return <code>true</code> if <code>folder</code> is a directory or special folder and contains <code>file</code>.
@@ -281,6 +324,8 @@ public abstract class FileSystemView {
 
     /**
      *
+     * <p>
+     * 
      * @param parent a <code>File</code> object representing a directory or special folder
      * @param fileName a name of a file or folder which exists in <code>parent</code>
      * @return a File object. This is normally constructed with <code>new
@@ -307,6 +352,10 @@ public abstract class FileSystemView {
      * special folder such as <code>"Desktop"</code>. Used by UI classes to decide if
      * a folder is selectable when doing directory choosing.
      *
+     * <p>
+     *  检查<code> f </code>是否表示真实的目录或文件,而不是特殊文件夹,如<code>"Desktop"</code>。由UI类用于决定在进行目录选择时文件夹是否可选。
+     * 
+     * 
      * @param f a <code>File</code> object
      * @return <code>true</code> if <code>f</code> is a real file or directory.
      * @since 1.4
@@ -324,11 +373,17 @@ public abstract class FileSystemView {
 
     /**
      * Creates a new folder with a default folder name.
+     * <p>
+     *  创建具有默认文件夹名称的新文件夹。
+     * 
      */
     public abstract File createNewFolder(File containingDir) throws IOException;
 
     /**
      * Returns whether a file is hidden or not.
+     * <p>
+     *  返回文件是否隐藏。
+     * 
      */
     public boolean isHiddenFile(File f) {
         return f.isHidden();
@@ -339,6 +394,10 @@ public abstract class FileSystemView {
      * Is dir the root of a tree in the file system, such as a drive
      * or partition. Example: Returns true for "C:\" on Windows 98.
      *
+     * <p>
+     *  是dir文件系统中树的根,例如驱动器或分区。示例：在Windows 98上为"C：\"返回true。
+     * 
+     * 
      * @param dir a <code>File</code> object representing a directory
      * @return <code>true</code> if <code>f</code> is a root of a filesystem
      * @see #isRoot
@@ -354,6 +413,12 @@ public abstract class FileSystemView {
      *
      * The default implementation has no way of knowing, so always returns false.
      *
+     * <p>
+     *  由UI类用于决定是否为驱动器或分区显示特殊图标,例如"硬盘"图标。
+     * 
+     *  默认实现没有办法知道,所以总是返回false。
+     * 
+     * 
      * @param dir a directory
      * @return <code>false</code> always
      * @since 1.4
@@ -368,6 +433,12 @@ public abstract class FileSystemView {
      *
      * The default implementation has no way of knowing, so always returns false.
      *
+     * <p>
+     *  由UI类用于决定是否显示软盘的特殊图标。 Implies isDrive(dir)。
+     * 
+     *  默认实现没有办法知道,所以总是返回false。
+     * 
+     * 
      * @param dir a directory
      * @return <code>false</code> always
      * @since 1.4
@@ -382,6 +453,12 @@ public abstract class FileSystemView {
      *
      * The default implementation has no way of knowing, so always returns false.
      *
+     * <p>
+     *  由UI类用于决定是否为计算机节点显示特殊图标,例如"我的电脑"或网络服务器。
+     * 
+     *  默认实现没有办法知道,所以总是返回false。
+     * 
+     * 
      * @param dir a directory
      * @return <code>false</code> always
      * @since 1.4
@@ -395,6 +472,9 @@ public abstract class FileSystemView {
      * Returns all root partitions on this system. For example, on
      * Windows, this would be the "Desktop" folder, while on DOS this
      * would be the A: through Z: drives.
+     * <p>
+     * 返回此系统上的所有根分区。例如,在Windows上,这将是"桌面"文件夹,而在DOS上,这将是A：通过Z：驱动器。
+     * 
      */
     public File[] getRoots() {
         // Don't cache this array, because filesystem might change
@@ -421,6 +501,10 @@ public abstract class FileSystemView {
     /**
      * Return the user's default starting directory for the file chooser.
      *
+     * <p>
+     *  返回用户的文件选择器的默认开始目录。
+     * 
+     * 
      * @return a <code>File</code> object representing the default
      *         starting folder
      * @since 1.4
@@ -435,6 +519,9 @@ public abstract class FileSystemView {
 
     /**
      * Returns a File object constructed in dir from the given filename.
+     * <p>
+     *  返回从给定文件名在dir中构造的File对象。
+     * 
      */
     public File createFileObject(File dir, String filename) {
         if(dir == null) {
@@ -446,6 +533,9 @@ public abstract class FileSystemView {
 
     /**
      * Returns a File object constructed from the given path string.
+     * <p>
+     *  返回从给定路径字符串构造的File对象。
+     * 
      */
     public File createFileObject(String path) {
         File f = new File(path);
@@ -458,6 +548,9 @@ public abstract class FileSystemView {
 
     /**
      * Gets the list of shown (i.e. not hidden) files.
+     * <p>
+     *  获取显示(即不隐藏)文件的列表。
+     * 
      */
     public File[] getFiles(File dir, boolean useFileHiding) {
         List<File> files = new ArrayList<File>();
@@ -510,6 +603,10 @@ public abstract class FileSystemView {
 
     /**
      * Returns the parent directory of <code>dir</code>.
+     * <p>
+     *  返回<code> dir </code>的父目录。
+     * 
+     * 
      * @param dir the <code>File</code> being queried
      * @return the parent directory of <code>dir</code>, or
      *   <code>null</code> if <code>dir</code> is <code>null</code>
@@ -551,6 +648,9 @@ public abstract class FileSystemView {
 
     /**
      * Throws {@code FileNotFoundException} if file not found or current thread was interrupted
+     * <p>
+     *  如果找不到文件或当前线程被中断,则抛出{@code FileNotFoundException}
+     * 
      */
     ShellFolder getShellFolder(File f) throws FileNotFoundException {
         if (!(f instanceof ShellFolder) && !(f instanceof FileSystemRoot) && isFileSystemRoot(f)) {
@@ -570,6 +670,10 @@ public abstract class FileSystemView {
      * Creates a new <code>File</code> object for <code>f</code> with correct
      * behavior for a file system root directory.
      *
+     * <p>
+     *  为文件系统根目录的正确行为为<code> f </code>创建一个新的<code> File </code>对象。
+     * 
+     * 
      * @param f a <code>File</code> object representing a file system root
      *          directory, for example "/" on Unix or "C:\" on Windows.
      * @return a new <code>File</code> object
@@ -603,6 +707,9 @@ public abstract class FileSystemView {
 
 /**
  * FileSystemView that handles some specific unix-isms.
+ * <p>
+ *  FileSystemView处理一些特定的unix-isms。
+ * 
  */
 class UnixFileSystemView extends FileSystemView {
 
@@ -613,6 +720,9 @@ class UnixFileSystemView extends FileSystemView {
 
     /**
      * Creates a new folder with a default folder name.
+     * <p>
+     *  创建具有默认文件夹名称的新文件夹。
+     * 
      */
     public File createNewFolder(File containingDir) throws IOException {
         if(containingDir == null) {
@@ -666,6 +776,9 @@ class UnixFileSystemView extends FileSystemView {
 
 /**
  * FileSystemView that handles some specific windows concepts.
+ * <p>
+ *  FileSystemView处理一些特定的窗口概念。
+ * 
  */
 class WindowsFileSystemView extends FileSystemView {
 
@@ -701,6 +814,11 @@ class WindowsFileSystemView extends FileSystemView {
      * is described as "Desktop".
      *
      * The Windows implementation gets information from the ShellFolder class.
+     * <p>
+     *  键入将在系统文件浏览器中显示的文件,目录或文件夹的描述。示例从Windows："桌面"文件夹被描述为"桌面"。
+     * 
+     *  Windows实现从ShellFolder类获取信息。
+     * 
      */
     public String getSystemTypeDescription(File f) {
         if (f == null) {
@@ -715,6 +833,8 @@ class WindowsFileSystemView extends FileSystemView {
     }
 
     /**
+    /* <p>
+    /* 
      * @return the Desktop folder.
      */
     public File getHomeDirectory() {
@@ -724,6 +844,9 @@ class WindowsFileSystemView extends FileSystemView {
 
     /**
      * Creates a new folder with a default folder name.
+     * <p>
+     *  创建具有默认文件夹名称的新文件夹。
+     * 
      */
     public File createNewFolder(File containingDir) throws IOException {
         if(containingDir == null) {
@@ -763,6 +886,9 @@ class WindowsFileSystemView extends FileSystemView {
 
     /**
      * Returns a File object constructed from the given path string.
+     * <p>
+     *  返回从给定路径字符串构造的File对象。
+     * 
      */
     public File createFileObject(String path) {
         // Check for missing backslash after drive letter such as "C:" or "C:filename"
@@ -790,6 +916,9 @@ class WindowsFileSystemView extends FileSystemView {
 
 /**
  * Fallthrough FileSystemView in case we can't determine the OS.
+ * <p>
+ *  Fallthrough FileSystemView,以防我们无法确定操作系统。
+ * 
  */
 class GenericFileSystemView extends FileSystemView {
 
@@ -798,6 +927,8 @@ class GenericFileSystemView extends FileSystemView {
 
     /**
      * Creates a new folder with a default folder name.
+     * <p>
+     *  创建具有默认文件夹名称的新文件夹。
      */
     public File createNewFolder(File containingDir) throws IOException {
         if(containingDir == null) {

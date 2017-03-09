@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,14 @@ import java.io.ObjectInputStream;
  * considered a trusted source for MBeans. Only MBeans from trusted
  * sources may be registered in the MBeanServer.
  *
+ * <p>
+ *  此权限表示签名者或代码库中的"信任"。
+ * <p>
+ *  MBeanTrustPermission包含目标名称,但没有操作列表。为此权限定义了单个目标名称"register"。目标"*"也是允许的,允许"注册"以及可以定义的任何未来目标。
+ * 对于操作,只允许空值或空字符串,以允许策略对象创建策略文件中指定的权限。
+ * <p>
+ *  如果签署者或codesource被授予此权限,那么它被认为是MBeans的可信源。只有来自受信任来源的MBean可能会在MBeanServer中注册。
+ * 
  * @since 1.5
  */
 public class MBeanTrustPermission extends BasicPermission {
@@ -54,6 +63,9 @@ public class MBeanTrustPermission extends BasicPermission {
     /** <p>Create a new MBeanTrustPermission with the given name.</p>
         <p>This constructor is equivalent to
         <code>MBeanTrustPermission(name,null)</code>.</p>
+    /* <p>
+    /* 
+    /* 
         @param name the name of the permission. It must be
         "register" or "*" for this permission.
      *
@@ -66,6 +78,10 @@ public class MBeanTrustPermission extends BasicPermission {
     }
 
     /** <p>Create a new MBeanTrustPermission with the given name.</p>
+    /* <p>
+    /*  <p>此构造函数等效于<code> MBeanTrustPermission(name,null)</code>。</p>
+    /* 
+    /* 
         @param name the name of the permission. It must be
         "register" or "*" for this permission.
         @param actions the actions for the permission.  It must be

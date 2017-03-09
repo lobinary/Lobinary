@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,12 @@ import java.lang.annotation.RetentionPolicy;
  *  determined based on the value of the <code>WebServiceClient</code>
  *  annotation on the generated service interface itself.
  *
+ * <p>
+ *  用于注释生成的服务接口的<code> get <em> PortName </em>()</code>方法。
+ * 
+ *  <p>此注释中指定的信息足以唯一标识<code> wsdl：service </code>中的<code> wsdl：port </code>元素。
+ * 后者是基于生成的服务接口本身的<code> WebServiceClient </code>注释的值确定的。
+ * 
  *  @since JAX-WS 2.0
  *
  *  @see javax.xml.ws.WebServiceClient
@@ -51,6 +58,9 @@ import java.lang.annotation.RetentionPolicy;
 public @interface WebEndpoint {
   /**
    *  The local name of the endpoint.
+   * <p>
+   * 
+   * 
   **/
   String name() default "";
 }

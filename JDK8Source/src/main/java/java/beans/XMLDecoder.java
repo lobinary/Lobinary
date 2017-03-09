@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,20 @@ import org.xml.sax.helpers.DefaultHandler;
  * <a
  href="http://java.sun.com/products/jfc/tsc/articles/persistence3">Long Term Persistence of JavaBeans Components: XML Schema</a>,
  * an article in <em>The Swing Connection.</em>
+ * <p>
+ *  <code> XMLDecoder </code>类用于读取使用<code> XMLEncoder </code>创建的XML文档,并且像<code> ObjectInputStream </code>
+ * 一样使用。
+ * 例如,可以使用以下片段来读取由<code> XMLEncoder </code>类编写的XML文档中定义的第一个对象：。
+ * <pre>
+ *  XMLDecoder d = new XMLDecoder(new BufferedInputStream(new FileInputStream("Test.xml"))); Object resu
+ * lt = d.readObject(); d.close();。
+ * </pre>
+ * 
+ * p>
+ *  有关详情,您还可以查看<a href="http://java.sun.com/products/jfc/tsc/articles/persistence3"> JavaBeans组件的长期持久性：X
+ * ML模式</a>, </em>中的文章。
+ * 
+ * 
  * @see XMLEncoder
  * @see java.io.ObjectInputStream
  *
@@ -75,6 +90,10 @@ public class XMLDecoder implements AutoCloseable {
      * Creates a new input stream for reading archives
      * created by the <code>XMLEncoder</code> class.
      *
+     * <p>
+     *  创建用于读取由<code> XMLEncoder </code>类创建的归档的新输入流。
+     * 
+     * 
      * @param in The underlying stream.
      *
      * @see XMLEncoder#XMLEncoder(java.io.OutputStream)
@@ -87,6 +106,10 @@ public class XMLDecoder implements AutoCloseable {
      * Creates a new input stream for reading archives
      * created by the <code>XMLEncoder</code> class.
      *
+     * <p>
+     *  创建用于读取由<code> XMLEncoder </code>类创建的归档的新输入流。
+     * 
+     * 
      * @param in The underlying stream.
      * @param owner The owner of this stream.
      *
@@ -99,6 +122,10 @@ public class XMLDecoder implements AutoCloseable {
      * Creates a new input stream for reading archives
      * created by the <code>XMLEncoder</code> class.
      *
+     * <p>
+     *  创建用于读取由<code> XMLEncoder </code>类创建的归档的新输入流。
+     * 
+     * 
      * @param in the underlying stream.
      * @param owner the owner of this stream.
      * @param exceptionListener the exception handler for the stream;
@@ -112,6 +139,10 @@ public class XMLDecoder implements AutoCloseable {
      * Creates a new input stream for reading archives
      * created by the <code>XMLEncoder</code> class.
      *
+     * <p>
+     *  创建用于读取由<code> XMLEncoder </code>类创建的归档的新输入流。
+     * 
+     * 
      * @param in the underlying stream.  <code>null</code> may be passed without
      *        error, though the resulting XMLDecoder will be useless
      * @param owner the owner of this stream.  <code>null</code> is a legal
@@ -137,6 +168,11 @@ public class XMLDecoder implements AutoCloseable {
      * This behavior is similar to behavior of other constructors
      * that use {@code InputStream} as a parameter.
      *
+     * <p>
+     *  创建一个新的解码器来解析由{@code XMLEncoder}类创建的XML归档。如果输入源{@code is}是{@code null},则不会抛出异常,并且不会执行解析。
+     * 此行为类似于使用{@code InputStream}作为参数的其他构造函数的行为。
+     * 
+     * 
      * @param is  the input source to parse
      *
      * @since 1.7
@@ -149,6 +185,10 @@ public class XMLDecoder implements AutoCloseable {
      * Creates a new decoder to parse XML archives
      * created by the {@code XMLEncoder} class.
      *
+     * <p>
+     * 创建一个新的解码器来解析由{@code XMLEncoder}类创建的XML归档。
+     * 
+     * 
      * @param is     the input source to parse
      * @param owner  the owner of this decoder
      * @param el     the exception handler for the parser,
@@ -169,6 +209,9 @@ public class XMLDecoder implements AutoCloseable {
     /**
      * This method closes the input stream associated
      * with this stream.
+     * <p>
+     *  此方法关闭与此流相关联的输入流。
+     * 
      */
     public void close() {
         if (parsingComplete()) {
@@ -212,6 +255,10 @@ public class XMLDecoder implements AutoCloseable {
      * The exception handler is notified when this stream catches recoverable
      * exceptions.
      *
+     * <p>
+     *  将此流的异常处理程序设置为<code> exceptionListener </code>。当此流捕获可恢复异常时,将通知异常处理程序。
+     * 
+     * 
      * @param exceptionListener The exception handler for this stream;
      * if <code>null</code> the default exception listener will be used.
      *
@@ -227,6 +274,10 @@ public class XMLDecoder implements AutoCloseable {
     /**
      * Gets the exception handler for this stream.
      *
+     * <p>
+     *  获取此流的异常处理程序。
+     * 
+     * 
      * @return The exception handler for this stream.
      *     Will return the default exception listener if this has not explicitly been set.
      *
@@ -239,6 +290,10 @@ public class XMLDecoder implements AutoCloseable {
     /**
      * Reads the next object from the underlying input stream.
      *
+     * <p>
+     *  从底层输入流读取下一个对象。
+     * 
+     * 
      * @return the next object read
      *
      * @throws ArrayIndexOutOfBoundsException if the stream contains no objects
@@ -255,6 +310,10 @@ public class XMLDecoder implements AutoCloseable {
     /**
      * Sets the owner of this decoder to <code>owner</code>.
      *
+     * <p>
+     *  将此解码器的所有者设置为<code>所有者</code>。
+     * 
+     * 
      * @param owner The owner of this decoder.
      *
      * @see #getOwner
@@ -266,6 +325,10 @@ public class XMLDecoder implements AutoCloseable {
     /**
      * Gets the owner of this decoder.
      *
+     * <p>
+     *  获取此解码器的所有者。
+     * 
+     * 
      * @return The owner of this decoder.
      *
      * @see #setOwner
@@ -286,6 +349,11 @@ public class XMLDecoder implements AutoCloseable {
      * does not contain expected method to call. See details <a
      * href="http://java.sun.com/products/jfc/tsc/articles/persistence3/">here</a>.
      *
+     * <p>
+     *  为SAX解析器创建一个新的处理程序,可用于解析由{@code XMLEncoder}类创建的嵌入式XML归档。
+     * 
+     *  如果解析的XML文档包含&lt; java&gt;上下文中的方法调用,则应使用{@code owner}元件。在这种情况下,{@code null}值可能会导致非法解析。
+     * 
      * @param owner  the owner of the default handler
      *               that can be used as a value of &lt;java&gt; element
      * @param el     the exception handler for the parser,

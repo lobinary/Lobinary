@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,34 +38,56 @@ import javax.swing.plaf.*;
  * will force the UIs to update all known Frames. You can invoke
  * <code>invalidate</code> to force the value to be fetched again.
  *
+ * <p>
+ *  包装来自桌面的值。该值被懒洋洋地查找,并且可以使用<code> UIManager.ActiveValue </code>方法<code> createValue </code>来访问。
+ * 如果底层桌面属性更改,这将强制UI更新所有已知的框架。您可以调用<code> invalidate </code>强制重新获取该值。
+ * 
  */
 // NOTE: Don't rely on this class staying in this location. It is likely
 // to move to a different package in the future.
 public class DesktopProperty implements UIDefaults.ActiveValue {
     /**
      * Indicates if an updateUI call is pending.
+     * <p>
+     *  指示updateUI调用是否挂起。
+     * 
      */
     private static boolean updatePending;
 
     /**
      * ReferenceQueue of unreferenced WeakPCLs.
+     * <p>
+     *  参考没有引用WeakPCLs的队列。
+     * 
      */
     private static final ReferenceQueue<DesktopProperty> queue = new ReferenceQueue<DesktopProperty>();
 
     /**
      * PropertyChangeListener attached to the Toolkit.
+     * <p>
+     *  PropertyChangeListener附加到Toolkit。
+     * 
      */
     private WeakPCL pcl;
     /**
      * Key used to lookup value from desktop.
+     * <p>
+     *  用于从桌面查找值的键。
+     * 
      */
     private final String key;
     /**
      * Value to return.
+     * <p>
+     *  返回值。
+     * 
      */
     private Object value;
     /**
      * Fallback value in case we get null from desktop.
+     * <p>
+     *  备用值,以防我们从桌面收到null。
+     * 
      */
     private final Object fallback;
 
@@ -72,6 +95,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
     /**
      * Cleans up any lingering state held by unrefeernced
      * DesktopProperties.
+     * <p>
+     *  清理由未确定的DesktopProperties持有的任何延迟状态。
+     * 
      */
     static void flushUnreferencedProperties() {
         WeakPCL pcl;
@@ -84,6 +110,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
 
     /**
      * Sets whether or not an updateUI call is pending.
+     * <p>
+     *  设置updateUI调用是否正在等待。
+     * 
      */
     private static synchronized void setUpdatePending(boolean update) {
         updatePending = update;
@@ -91,6 +120,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
 
     /**
      * Returns true if a UI update is pending.
+     * <p>
+     *  如果UI更新待处理,则返回true。
+     * 
      */
     private static synchronized boolean isUpdatePending() {
         return updatePending;
@@ -98,6 +130,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
 
     /**
      * Updates the UIs of all the known Frames.
+     * <p>
+     *  更新所有已知帧的UI。
+     * 
      */
     private static void updateAllUIs() {
         // Check if the current UI is WindowsLookAndfeel and flush the XP style map.
@@ -114,6 +149,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
 
     /**
      * Updates the UI of the passed in window and all its children.
+     * <p>
+     *  更新传入的窗口及其所有子窗口的UI。
+     * 
      */
     private static void updateWindowUI(Window window) {
         SwingUtilities.updateComponentTreeUI(window);
@@ -127,6 +165,10 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
     /**
      * Creates a DesktopProperty.
      *
+     * <p>
+     *  创建DesktopProperty。
+     * 
+     * 
      * @param key Key used in looking up desktop value.
      * @param fallback Value used if desktop property is null.
      */
@@ -148,6 +190,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
     /**
      * UIManager.LazyValue method, returns the value from the desktop
      * or the fallback value if the desktop value is null.
+     * <p>
+     *  UIManager.LazyValue方法,如果桌面值为null,则返回桌面值或后备值。
+     * 
      */
     public Object createValue(UIDefaults table) {
         if (value == null) {
@@ -161,6 +206,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
 
     /**
      * Returns the value from the desktop.
+     * <p>
+     *  从桌面返回值。
+     * 
      */
     protected Object getValueFromDesktop() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -175,6 +223,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
 
     /**
      * Returns the value to use if the desktop property is null.
+     * <p>
+     *  返回桌面属性为null时要使用的值。
+     * 
      */
     protected Object getDefaultValue() {
         return fallback;
@@ -183,6 +234,10 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
     /**
      * Invalidates the current value.
      *
+     * <p>
+     *  使当前值无效。
+     * 
+     * 
      * @param laf the LookAndFeel this DesktopProperty was created with
      */
     public void invalidate(LookAndFeel laf) {
@@ -192,6 +247,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
     /**
      * Invalides the current value so that the next invocation of
      * <code>createValue</code> will ask for the property again.
+     * <p>
+     *  使当前值无效,以使下一次调用<code> createValue </code>时再次请求该属性。
+     * 
      */
     public void invalidate() {
         value = null;
@@ -203,6 +261,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
      * by uninstalling and re-installing the UI objects. Requests are
      * batched and collapsed into a single update pass because often
      * many desktop properties will change at once.
+     * <p>
+     * 请求更新GUI层次结构中的所有组件以反映此外观和感觉的动态更改。通过卸载并重新安装UI对象来进行此更新。请求被批量处理并折叠为单个更新通知,因为很多桌面属性会同时更改。
+     * 
      */
     protected void updateUI() {
         if (!isUpdatePending()) {
@@ -220,6 +281,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
     /**
      * Configures the value as appropriate for a defaults property in
      * the UIDefaults table.
+     * <p>
+     *  在UIDefaults表中为defaults属性配置适当的值。
+     * 
      */
     protected Object configureValue(Object value) {
         if (value != null) {
@@ -241,6 +305,9 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
 
     /**
      * Returns the key used to lookup the desktop properties value.
+     * <p>
+     *  返回用于查找桌面属性值的键。
+     * 
      */
     protected String getKey() {
         return key;
@@ -252,6 +319,8 @@ public class DesktopProperty implements UIDefaults.ActiveValue {
      * As there is typically only one Toolkit, the PropertyChangeListener
      * is handled via a WeakReference so as not to pin down the
      * DesktopProperty.
+     * <p>
+     *  由于通常只有一个工具包,PropertyChangeListener通过WeakReference处理,以便不会固定下来的DesktopProperty。
      */
     private static class WeakPCL extends WeakReference<DesktopProperty>
                                implements PropertyChangeListener {

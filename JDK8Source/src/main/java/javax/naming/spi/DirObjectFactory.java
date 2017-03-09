@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,18 @@ import javax.naming.directory.Attributes;
   * eliminate objects that it need not worry about, and non-CORBA object
   * factories can quickly eliminate CORBA-related LDAP entries.
   *
+  * <p>
+  *  该接口表示给定对象的对象和属性的创建对象的工厂。
+  * p>
+  *  JNDI框架允许通过<em>对象工厂</em>动态加载对象实现。有关详细信息,请参阅<tt> ObjectFactory </tt>。
+  * <p>
+  *  通过允许将<tt> Attributes </tt>实例提供给<tt> getObjectInstance()</tt>方法,<tt> DirObjectFactory </tt>扩展<tt> Obj
+  * ectFactory </tt> <tt> DirObjectFactory </tt>实施旨在由<tt> DirContext </tt>服务提供商使用。
+  * 除了从目录中读取对象之外,服务提供者可能已经具有对于对象工厂检查以查看工厂是否应该处理对象有用的属性。例如,LDAP式服务提供程序可能已读取对象的"objectclass"。
+  *  CORBA对象工厂可能只对具有"objectclass = corbaObject"的LDAP条目感兴趣。
+  * 通过使用LDAP服务提供程序提供的属性,CORBA对象工厂可以快速删除不需要担心的对象,非CORBA对象工厂可以快速消除CORBA相关的LDAP条目。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -103,6 +116,19 @@ public interface DirObjectFactory extends ObjectFactory {
  * The implementation will not modify these objects or keep references
  * to them, although it may keep references to clones or copies.
  *
+ * <p>
+ *  使用位置或引用信息和指定的属性创建对象。
+ * <p>
+ * 此对象的特殊要求使用<code> environment </code>提供。这样的环境属性的示例是用户身份信息。
+ * p>
+ *  <tt> DirectoryManager.getObjectInstance()</tt>连续加载对象工厂。
+ * 如果遇到<tt> DirObjectFactory </tt>,它将调用<tt> DirObjectFactory.getObjectInstance()</tt>;否则,它调用<tt> ObjectF
+ * actory.getObjectInstance()</tt>。
+ *  <tt> DirectoryManager.getObjectInstance()</tt>连续加载对象工厂。它这样做,直到工厂产生一个非null的答案。
+ *  <p>当对象工厂抛出异常时,异常将传递给<tt> DirectoryManager.getObjectInstance()</tt>的调用者。对可能产生非空答案的其他工厂的搜索被停止。
+ * 对象工厂只应该抛出一个异常,如果它确定它是唯一的目标工厂,并且没有其他对象工厂应该尝试。如果此工厂无法使用提供的参数创建对象,则应返回null。
+ *  p>由于<tt> DirObjectFactory </tt>扩展<tt> ObjectFactory </tt>,它有效地具有两个<tt> getObjectInstance()</tt>方法,其中
+ * 
  * @param obj The possibly null object containing location or reference
  *              information that can be used in creating an object.
  * @param name The name of this object relative to <code>nameCtx</code>,

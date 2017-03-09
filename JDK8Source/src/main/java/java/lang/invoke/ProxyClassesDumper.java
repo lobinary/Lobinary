@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @implNote
  * <p> Because this class is called by LambdaMetafactory, make use
  * of lambda lead to recursive calls cause stack overflow.
+ * <p>
+ *  InnerClassLambdaMetafactory用于记录生成的类的辅助类
+ * 
  */
 final class ProxyClassesDumper {
     private static final char[] HEX = {

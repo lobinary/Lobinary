@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Util.java,v 1.2.4.1 2005/09/12 11:47:15 pvedula Exp $
+ * <p>
+ *  $ Id：Util.java,v 1.2.4.1 2005/09/12 11:47:15 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -31,6 +44,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants;
 import com.sun.org.apache.xml.internal.utils.XML11Char;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
@@ -50,6 +65,9 @@ public final class Util {
     /**
      * Search for both slashes in order to support URLs and
      * files.
+     * <p>
+     *  搜索两个斜杠以支持网址和文件。
+     * 
      */
     public static String baseName(String name) {
         int index = name.lastIndexOf('\\');
@@ -71,6 +89,9 @@ public final class Util {
     /**
      * Search for both slashes in order to support URLs and
      * files.
+     * <p>
+     *  搜索两个斜杠以支持网址和文件。
+     * 
      */
     public static String pathName(String name) {
         int index = name.lastIndexOf('/');
@@ -82,6 +103,9 @@ public final class Util {
 
     /**
      * Replace all illegal Java chars by '_'.
+     * <p>
+     *  将所有非法Java字符替换为"_"。
+     * 
      */
     public static String toJavaName(String name) {
         if (name.length() > 0) {
@@ -130,6 +154,9 @@ public final class Util {
 
     /**
      * Replace a certain character in a string with a new substring.
+     * <p>
+     *  用新的子字符串替换字符串中的某个字符。
+     * 
      */
     public static String replace(String base, char ch, String str) {
         return (base.indexOf(ch) < 0) ? base :
@@ -156,6 +183,9 @@ public final class Util {
 
     /**
      * Replace occurances of '.', '-', '/' and ':'
+     * <p>
+     *  替换"。"," - ","/"和"："的出现
+     * 
      */
     public static String escape(String input) {
         return replace(input, ".-/:",
@@ -175,6 +205,9 @@ public final class Util {
 
     /**
      * Checks if the string is a literal (i.e. not an AVT) or not.
+     * <p>
+     *  检查字符串是否是文字(即不是AVT)。
+     * 
      */
     public static boolean isLiteral(String str) {
         final int length = str.length();
@@ -188,6 +221,8 @@ public final class Util {
 
     /**
      * Checks if the string is valid list of qnames
+     * <p>
+     *  检查字符串是否是有效的qnames列表
      */
     public static boolean isValidQNames(String str) {
         if ((str != null) && (!str.equals(Constants.EMPTYSTRING))) {

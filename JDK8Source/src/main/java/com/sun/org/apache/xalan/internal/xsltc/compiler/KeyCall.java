@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2006 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: KeyCall.java,v 1.7 2006/06/19 19:49:04 spericas Exp $
+ * <p>
+ *  $ Id：KeyCall.java,v 1.7 2006/06/19 19:49:04 spericas Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -47,6 +60,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  * @author Santiago Pericas-Geertsen
  */
@@ -54,21 +69,33 @@ final class KeyCall extends FunctionCall {
 
     /**
      * The name of the key.
+     * <p>
+     *  密钥的名称。
+     * 
      */
     private Expression _name;
 
     /**
      * The value to look up in the key/index.
+     * <p>
+     *  在键/索引中查找的值。
+     * 
      */
     private Expression _value;
 
     /**
      * The value's data type.
+     * <p>
+     *  值的数据类型。
+     * 
      */
     private Type _valueType; // The value's data type
 
     /**
      * Expanded qname when name is literal.
+     * <p>
+     *  名称为字面值时展开qname。
+     * 
      */
     private QName _resolvedQName = null;
 
@@ -81,6 +108,12 @@ final class KeyCall extends FunctionCall {
      * vector has only one parameter for id() calls (the key name is always
      * "##id" for id() calls).
      *
+     * <p>
+     *  获取传递给函数的参数：key(String name,String value)key(String name,NodeSet value)'arguments'向量应该包含用于key(​​)调用的两
+     * 个参数,一个保存键名称,一个保存值) 去查查看。
+     * 向量只有一个参数为id()调用(键名称总是"## id"id()调用)。
+     * 
+     * 
      * @param fname The function name (should be 'key' or 'id')
      * @param arguments A vector containing the arguments the the function
      */
@@ -112,6 +145,14 @@ final class KeyCall extends FunctionCall {
      * and assuming this class represents "key('x', 1)", add a reference
      * between variable y and key x. Note that if 'x' is unknown statically
      * in key('x', 1), there's nothing we can do at this point.
+     * <p>
+     *  如果这个对key()的调用是在一个顶级元素,如另一个变量或参数,添加一个依赖性在顶级元素和引用的键之间。例如,
+     * 
+     * <xsl:key name="x" .../>
+     * <xsl:variable name="y" select="key('x', 1)"/>
+     * 
+     * 并假设此类表示"key('x',1)",则在变量y和键x之间添加引用。注意,如果'x'在键('x',1)中是未知的,所以我们在这一点上不能做任何事。
+     * 
      */
     public void addParentDependency() {
         // If name unknown statically, there's nothing we can do
@@ -132,6 +173,8 @@ final class KeyCall extends FunctionCall {
      * Type check the parameters for the id() or key() function.
      * The index name (for key() call only) must be a string or convertable
      * to a string, and the lookup-value must be a string or a node-set.
+     * <p>
+     * 
      * @param stable The parser's symbol table
      * @throws TypeCheckError When the parameters have illegal type
      */
@@ -182,6 +225,10 @@ final class KeyCall extends FunctionCall {
      * Stylesheet.compileConstructor() and not as the syntax tree is traversed.
      * <p>This method will generate byte code that produces an iterator
      * for the nodes in the node set for the key or id function call.
+     * <p>
+     *  类型检查id()或key()函数的参数。索引名称(仅用于key(​​)调用)必须是字符串或可转换为字符串,并且lookup-value必须是字符串或节点集。
+     * 
+     * 
      * @param classGen The Java class generator
      * @param methodGen The method generator
      */

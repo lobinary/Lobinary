@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,9 @@ class SnmpSubBulkRequestHandler extends SnmpSubRequestHandler {
     /**
      * The constructor initialize the subrequest with the whole varbind list contained
      * in the original request.
+     * <p>
+     *  构造函数使用原始请求中包含的整个varbind列表初始化子请求。
+     * 
      */
     protected SnmpSubBulkRequestHandler(SnmpEngine engine,
                                         SnmpAdaptorServer server,
@@ -70,6 +74,9 @@ class SnmpSubBulkRequestHandler extends SnmpSubRequestHandler {
     /**
      * The constructor initialize the subrequest with the whole varbind list contained
      * in the original request.
+     * <p>
+     *  构造函数使用原始请求中包含的整个varbind列表初始化子请求。
+     * 
      */
     protected SnmpSubBulkRequestHandler(SnmpAdaptorServer server,
                                         SnmpMibAgent agent,
@@ -156,6 +163,9 @@ class SnmpSubBulkRequestHandler extends SnmpSubRequestHandler {
 
     /**
      * The method updates find out which element to use at update time. Handle oid overlapping as well
+     * <p>
+     *  方法更新找出在更新时使用哪个元素。处理oid重叠以及
+     * 
      */
     private SnmpVarBind findVarBind(SnmpVarBind element,
                                     SnmpVarBind result) {
@@ -237,6 +247,15 @@ class SnmpSubBulkRequestHandler extends SnmpSubRequestHandler {
                    realValue.value);
 
                    return realValue;
+                /* <p>
+                /*  Vector v = new Vector(); SnmpMibRequest getReq = createMibRequest(v,version,null); SnmpVarBind realV
+                /* alue = new SnmpVarBind(oid); getReq.addVarBind(realValue); try {deeperAgent.get(getReq); } catch(Snmp
+                /* StatusException e){e.printStackTrace(); }}。
+                /* 
+                /*  if(isDebugOn())trace("findVarBind","Biggest priority value is："+ realValue.value);
+                /* 
+                /*  return realValue;
+                /* 
                 */
 
             }
@@ -255,6 +274,9 @@ class SnmpSubBulkRequestHandler extends SnmpSubRequestHandler {
      * Prior to calling the method, one must make sure that the operation was
      * successful. As such the method getErrorIndex or getErrorStatus should be
      * called.
+     * <p>
+     *  该方法使用预先调用的操作的结果更新给定的var绑定列表。在调用方法之前,必须确保操作成功。因此应该调用getErrorIndex或getErrorStatus方法。
+     * 
      */
     @Override
     protected void updateResult(SnmpVarBind[] result) {
@@ -329,6 +351,9 @@ class SnmpSubBulkRequestHandler extends SnmpSubRequestHandler {
 
     /**
      * Specific to the sub request
+     * <p>
+     *  特定于子请求
+     * 
      */
     protected int nonRepeat=0;
 
@@ -336,6 +361,8 @@ class SnmpSubBulkRequestHandler extends SnmpSubRequestHandler {
 
     /**
      * R as defined in RCF 1902 for the global request the sub-request is associated to.
+     * <p>
+     *  R,如针对与子请求相关联的全局请求在RCF 1902中定义的。
      */
     protected int globalR=0;
 

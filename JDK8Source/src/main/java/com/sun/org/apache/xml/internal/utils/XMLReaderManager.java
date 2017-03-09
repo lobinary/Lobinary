@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XMLReaderManager.java,v 1.2.4.1 2005/09/15 08:16:02 suresh_emailid Exp $
+ * <p>
+ *  $ Id：XMLReaderManager.java,v 1.2.4.1 2005/09/15 08:16:02 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -40,6 +53,9 @@ import org.xml.sax.helpers.XMLReaderFactory;
 /**
  * Creates XMLReader objects and caches them for re-use.
  * This class follows the singleton pattern.
+ * <p>
+ *  创建XMLReader对象并将其缓存以供重用。这个类遵循单例模式。
+ * 
  */
 public class XMLReaderManager {
 
@@ -52,16 +68,25 @@ public class XMLReaderManager {
     private static final String property = "org.xml.sax.driver";
     /**
      * Parser factory to be used to construct XMLReader objects
+     * <p>
+     *  解析器工厂用于构造XMLReader对象
+     * 
      */
     private static SAXParserFactory m_parserFactory;
 
     /**
      * Cache of XMLReader objects
+     * <p>
+     *  XMLReader对象的缓存
+     * 
      */
     private ThreadLocal m_readers;
 
     /**
      * Keeps track of whether an XMLReader object is in use.
+     * <p>
+     *  跟踪是否正在使用XMLReader对象。
+     * 
      */
     private HashMap m_inUse;
 
@@ -70,6 +95,9 @@ public class XMLReaderManager {
     private boolean _secureProcessing;
      /**
      * protocols allowed for external DTD references in source file and/or stylesheet.
+     * <p>
+     *  允许在源文件和/或样式表中的外部DTD引用的协议。
+     * 
      */
     private String _accessExternalDTD = XalanConstants.EXTERNAL_ACCESS_DEFAULT;
 
@@ -77,12 +105,18 @@ public class XMLReaderManager {
 
     /**
      * Hidden constructor
+     * <p>
+     *  隐藏构造函数
+     * 
      */
     private XMLReaderManager() {
     }
 
     /**
      * Retrieves the singleton reader manager
+     * <p>
+     *  检索单身票读者经理
+     * 
      */
     public static XMLReaderManager getInstance(boolean useServicesMechanism) {
         m_singletonManager.setServicesMechnism(useServicesMechanism);
@@ -94,6 +128,9 @@ public class XMLReaderManager {
      * XMLReader, if the existing reader is in use.  When the caller no
      * longer needs the reader, it must release it with a call to
      * {@link #releaseXMLReader}.
+     * <p>
+     *  检索此线程的缓存XMLReader,或创建新的XMLReader(如果现有阅读器正在使用)。当调用者不再需要阅读器时,它必须通过调用{@link #releaseXMLReader}来释放它。
+     * 
      */
     public synchronized XMLReader getXMLReader() throws SAXException {
         XMLReader reader;
@@ -198,6 +235,10 @@ public class XMLReaderManager {
      * Mark the cached XMLReader as available.  If the reader was not
      * actually in the cache, do nothing.
      *
+     * <p>
+     *  将缓存的XMLReader标记为可用。如果读者实际上不在缓存中,什么都不做。
+     * 
+     * 
      * @param reader The XMLReader that's being released.
      */
     public synchronized void releaseXMLReader(XMLReader reader) {
@@ -209,6 +250,9 @@ public class XMLReaderManager {
     }
     /**
      * Return the state of the services mechanism feature.
+     * <p>
+     * 返回服务机制功能的状态。
+     * 
      */
     public boolean useServicesMechnism() {
         return m_useServicesMechanism;
@@ -216,6 +260,9 @@ public class XMLReaderManager {
 
     /**
      * Set the state of the services mechanism feature.
+     * <p>
+     *  设置服务机制功能的状态。
+     * 
      */
     public void setServicesMechnism(boolean flag) {
         m_useServicesMechanism = flag;
@@ -223,6 +270,9 @@ public class XMLReaderManager {
 
     /**
      * Set feature
+     * <p>
+     *  设置功能
+     * 
      */
     public void setFeature(String name, boolean value) {
         if (name.equals(XMLConstants.FEATURE_SECURE_PROCESSING)) {
@@ -232,6 +282,9 @@ public class XMLReaderManager {
 
     /**
      * Get property value
+     * <p>
+     *  获取属性值
+     * 
      */
     public Object getProperty(String name) {
         if (name.equals(XMLConstants.ACCESS_EXTERNAL_DTD)) {
@@ -244,6 +297,8 @@ public class XMLReaderManager {
 
     /**
      * Set property.
+     * <p>
+     *  设置属性。
      */
     public void setProperty(String name, Object value) {
         if (name.equals(XMLConstants.ACCESS_EXTERNAL_DTD)) {

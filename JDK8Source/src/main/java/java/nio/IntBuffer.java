@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -254,6 +255,36 @@ package java.nio;
 
  *
  *
+ * <p>
+ *  一个int缓冲区。
+ * 
+ *  <p>此类在int缓冲区定义四种操作类别：
+ * 
+ * <ul>
+ * 
+ *  <li> <p>读取和写入单个int的绝对和相对{@link #get()<i> get </i>}和{@link #put(int)<i> put </i> ; </p> </li>
+ * 
+ *  <li> <p>相对{@link #get(int [])<i>批量get </i>}方法将int缓冲区的连续序列传送到数组中;和</p> </li>
+ * 
+ *  <li> <p>相对{@link #put(int [])<i>批量放入</i>}方法将int数组或其他int缓冲区的连续序列传送到此缓冲区;和</p> </li>
+ * 
+ *  <li> <p> {@link #compact compacting},{@link #duplicate duplicating}和{@link #slice slicing}一个int缓冲区的方
+ * 法。
+ *  </p> </li>。
+ * 
+ * </ul>
+ * 
+ *  <p>可以通过{@link #allocate <i>分配</i>}创建Int缓冲区,它为缓冲区分配空间
+ * 
+ *  内容,通过{@link #wrap(int [])<i>包装</i>}将现有的int数组导入缓冲区,或创建<a href="ByteBuffer.html#views"> <i> </i> </a>。
+ * 
+ * <p>像字节缓冲区一样,int缓冲区是<a href="ByteBuffer.html#direct"> <i>直接</i>或<i>非直接</i> </a>。
+ * 通过此类的<tt> wrap </tt>方法创建的int缓冲区将是非直接的。作为字节缓冲区视图创建的int缓冲区将是直接的,如果且仅当字节缓冲区本身是直接的。
+ * 可以通过调用{@link #isDirect isDirect}方法来确定int缓冲区是否是直接的。 </p>。
+ * 
+ *  <p>此类中没有返回值的方法被指定为返回调用它们的缓冲区。这允许方法调用链接。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -321,6 +352,13 @@ public abstract class IntBuffer
      * initialized to zero.  It will have a {@link #array backing array},
      * and its {@link #arrayOffset array offset} will be zero.
      *
+     * <p>
+     *  分配一个新的int缓冲区。
+     * 
+     *  <p>新缓冲区的位置将为零,其限制将是其容量,其标记将是未定义的,并且其每个元素将初始化为零。
+     * 它将有一个{@link #array返回数组},其{@link #arrayOffset数组偏移量}将为零。
+     * 
+     * 
      * @param  capacity
      *         The new buffer's capacity, in ints
      *
@@ -346,6 +384,14 @@ public abstract class IntBuffer
      * {@link #array backing array} will be the given array, and
      * its {@link #arrayOffset array offset} will be zero.  </p>
      *
+     * <p>
+     *  将int数组包装到缓冲区中。
+     * 
+     *  <p>新的缓冲区将由给定的int数组支持;也就是说,对缓冲区的修改将导致数组被修改,反之亦然。
+     * 新缓冲区的容量将为<tt> array.length </tt>,其位置将为<tt> offset </tt>,其限制将为<tt> offset + length </tt>,其标记将为未定义。
+     * 它的{@link #array backing array}将是给定的数组,其{@link #arrayOffset数组偏移量}将为零。 </p>。
+     * 
+     * 
      * @param  array
      *         The array that will back the new buffer
      *
@@ -387,6 +433,13 @@ public abstract class IntBuffer
      * given array, and its {@link #arrayOffset array offset>} will
      * be zero.  </p>
      *
+     * <p>
+     *  将int数组包装到缓冲区中。
+     * 
+     * <p>新的缓冲区将由给定的int数组支持;也就是说,对缓冲区的修改将导致数组被修改,反之亦然。新缓冲区的容量和限制将为<tt> array.length </tt>,其位置将为零,其标记将为未定义。
+     * 它的{@link #array backing array}将是给定的数组,其{@link #arrayOffset数组偏移量}将为零。 </p>。
+     * 
+     * 
      * @param  array
      *         The array that will back this buffer
      *
@@ -504,6 +557,14 @@ public abstract class IntBuffer
      * buffer is direct, and it will be read-only if, and only if, this buffer
      * is read-only.  </p>
      *
+     * <p>
+     *  创建一个新的int缓冲区,其内容是此缓冲区内容的共享子序列。
+     * 
+     *  <p>新缓冲区的内容将从此缓冲区的当前位置开始。对此缓冲区内容的更改将在新缓冲区中可见,反之亦然;两个缓冲器的位置,限制和标记值将是独立的。
+     * 
+     *  <p>新缓冲区的位置将为零,其容量和限制将是此缓冲区中剩余的整数,其标记将为未定义。新缓冲区将是直接的,如果且仅当这个缓冲区是直接的,并且只有当且仅当这个缓冲区是只读时,它才是只读的。 </p>
+     * 
+     * 
      * @return  The new int buffer
      */
     public abstract IntBuffer slice();
@@ -521,6 +582,14 @@ public abstract class IntBuffer
      * and only if, this buffer is direct, and it will be read-only if, and
      * only if, this buffer is read-only.  </p>
      *
+     * <p>
+     *  创建共享此缓冲区内容的新int缓冲区。
+     * 
+     *  <p>新缓冲区的内容将是此缓冲区的内容。对此缓冲区内容的更改将在新缓冲区中可见,反之亦然;两个缓冲器的位置,限制和标记值将是独立的。
+     * 
+     * <p>新缓冲区的容量,限制,位置和标记值将与此缓冲区的容量,限制,位置和标记值相同。新缓冲区将是直接的,如果且仅当这个缓冲区是直接的,并且只有当且仅当这个缓冲区是只读时,它才是只读的。 </p>
+     * 
+     * 
      * @return  The new int buffer
      */
     public abstract IntBuffer duplicate();
@@ -541,6 +610,16 @@ public abstract class IntBuffer
      * <p> If this buffer is itself read-only then this method behaves in
      * exactly the same way as the {@link #duplicate duplicate} method.  </p>
      *
+     * <p>
+     *  创建一个新的只读int缓冲区,该缓冲区共享此缓冲区的内容。
+     * 
+     *  <p>新缓冲区的内容将是此缓冲区的内容。对此缓冲区内容的更改将在新缓冲区中可见;但是,新的缓冲区本身将是只读的,不允许修改共享内容。两个缓冲区的位置,极限和标记值将是独立的。
+     * 
+     *  <p>新缓冲区的容量,限制,位置和标记值将与此缓冲区的容量,限制,位置和标记值相同。
+     * 
+     *  <p>如果此缓冲区本身是只读的,那么此方法的行为方式与{@link #duplicate duplicate}方法完全相同。 </p>
+     * 
+     * 
      * @return  The new, read-only int buffer
      */
     public abstract IntBuffer asReadOnlyBuffer();
@@ -552,6 +631,10 @@ public abstract class IntBuffer
      * Relative <i>get</i> method.  Reads the int at this buffer's
      * current position, and then increments the position.
      *
+     * <p>
+     *  相对<i> get </i>方法。读取该缓冲区当前位置的int,然后增加位置。
+     * 
+     * 
      * @return  The int at the buffer's current position
      *
      * @throws  BufferUnderflowException
@@ -565,6 +648,12 @@ public abstract class IntBuffer
      * <p> Writes the given int into this buffer at the current
      * position, and then increments the position. </p>
      *
+     * <p>
+     *  相对<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>将给定的int写入到当前位置的缓冲区中,然后递增位置。 </p>
+     * 
+     * 
      * @param  i
      *         The int to be written
      *
@@ -582,6 +671,10 @@ public abstract class IntBuffer
      * Absolute <i>get</i> method.  Reads the int at the given
      * index.
      *
+     * <p>
+     *  绝对<i> get </i>方法。读取给定索引处的int。
+     * 
+     * 
      * @param  index
      *         The index from which the int will be read
      *
@@ -612,6 +705,12 @@ public abstract class IntBuffer
      * <p> Writes the given int into this buffer at the given
      * index. </p>
      *
+     * <p>
+     *  绝对<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>在给定索引处将给定的int写入此缓冲区。 </p>
+     * 
+     * 
      * @param  index
      *         The index at which the int will be written
      *
@@ -659,6 +758,23 @@ public abstract class IntBuffer
      * except that it first checks that there are sufficient ints in
      * this buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> get </i>方法。
+     * 
+     * <p>此方法将int从此缓冲区传输到给定的目标数组。
+     * 如果缓冲器中剩余的int小于满足请求所需的int,也就是说,如果<tt> length </tt> <tt>&gt; </tt>&lt; tt> remaining() tt>,那么不会传输任何int并
+     * 抛出{@link BufferUnderflowException}。
+     * <p>此方法将int从此缓冲区传输到给定的目标数组。
+     * 
+     *  <p>否则,此方法会将此缓冲区中的<tt>长度</tt> int复制到给定数组中,从此缓冲区的当前位置开始,到数组中给定的偏移量。然后,该缓冲区的位置增加<tt> length </tt>。
+     * 
+     *  <p>换句话说,对形式为<tt> src.get(dst,&nbsp; off,&nbsp; len)</tt>的此方法的调用与循环具有完全相同的效果
+     * 
+     *  <pre> {@ code for(int i = off; i <off + len; i ++)dst [i] = src.get()：} </pre>
+     * 
+     *  除了它首先检查在这个缓冲区中有足够的int,并且它可能更有效率。
+     * 
+     * 
      * @param  dst
      *         The array into which ints are to be written
      *
@@ -702,6 +818,15 @@ public abstract class IntBuffer
      * <pre>
      *     src.get(a, 0, a.length) </pre>
      *
+     * <p>
+     *  相对批量<i> get </i>方法。
+     * 
+     *  <p>此方法将int从此缓冲区传输到给定的目标数组。调用此方法的形式<tt> src.get(a)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  src.get(a,0,a.length)</pre>
+     * 
+     * 
      * @param   dst
      *          The destination array
      *
@@ -743,6 +868,25 @@ public abstract class IntBuffer
      * except that it first checks that there is sufficient space in this
      * buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     * <p>此方法将保留在给定源缓冲区中的int传输到此缓冲区。
+     * 如果源缓冲区中有比此缓冲区更多的int,也就是说,如果<tt> src.remaining()</tt>&nbsp; <tt>&gt; </tt> </tt>,则不会传输任何int,并且会抛出{@link BufferOverflowException}
+     * 。
+     * <p>此方法将保留在给定源缓冲区中的int传输到此缓冲区。
+     * 
+     *  <p>否则,此方法会从指定缓冲区中将<i> n </i>&nbsp; =&nbsp; <tt> src.remaining()</tt> int从每个缓冲区的当前位置开始复制到此缓冲区中。
+     * 然后,两个缓冲器的位置增加n n。
+     * 
+     *  <p>换句话说,对形式<tt> dst.put(src)</tt>的此方法的调用具有与循环完全相同的效果
+     * 
+     * <pre>
+     *  while(src.hasRemaining())dst.put(src.get()); </pre>
+     * 
+     *  除了它首先检查在这个缓冲器中有足够的空间并且它可能更有效率。
+     * 
+     * 
      * @param  src
      *         The source buffer from which ints are to be read;
      *         must not be this buffer
@@ -799,6 +943,23 @@ public abstract class IntBuffer
      * except that it first checks that there is sufficient space in this
      * buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法将int从给定源数组传输到此缓冲区。
+     * 如果有更多的int要从数组复制而不是保留在这个缓冲区,也就是说,如果<tt> length </tt>&lt; tt&gt; </tt>&lt; tt>,那么不会传输任何int,并且会抛出{@link BufferOverflowException}
+     * 。
+     *  <p>此方法将int从给定源数组传输到此缓冲区。
+     * 
+     *  <p>否则,此方法会从给定数组中的<tt>长度</tt> int复制到此缓冲区,从数组中给定的偏移量和此缓冲区的当前位置开始。然后,该缓冲区的位置增加<tt> length </tt>。
+     * 
+     * <p>换句话说,对形式为<tt> dst.put(src,&nbsp; off,&nbsp; len)</tt>的此方法的调用与循环具有完全相同的效果
+     * 
+     *  <pre> {@ code for(int i = off; i <off + len; i ++)dst.put(a [i]); } </pre>
+     * 
+     *  除了它首先检查在这个缓冲器中有足够的空间并且它可能更有效率。
+     * 
+     * 
      * @param  src
      *         The array from which ints are to be read
      *
@@ -844,6 +1005,15 @@ public abstract class IntBuffer
      * <pre>
      *     dst.put(a, 0, a.length) </pre>
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法将给定源int数组的整个内容传输到此缓冲区。调用此方法的形式<tt> dst.put(a)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  dst.put(a,0,a.length)</pre>
+     * 
+     * 
      * @param   src
      *          The source array
      *
@@ -963,6 +1133,13 @@ public abstract class IntBuffer
      * and {@link #arrayOffset() arrayOffset} methods may safely be invoked.
      * </p>
      *
+     * <p>
+     *  告诉这个缓冲区是否由可访问的int数组支持。
+     * 
+     *  <p>如果此方法返回<tt> true </tt>,则可以安全地调用{@link #array()数组}和{@link #arrayOffset()arrayOffset}方法。
+     * </p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer
      *          is backed by an array and is not read-only
      */
@@ -981,6 +1158,14 @@ public abstract class IntBuffer
      * method in order to ensure that this buffer has an accessible backing
      * array.  </p>
      *
+     * <p>
+     *  返回用于回退此缓冲区的int数组&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>修改此缓冲区的内容将导致返回的数组的内容被修改,反之亦然。
+     * 
+     *  <p>在调用此方法之前调用{@link #hasArray hasArray}方法,以确保此缓冲区具有可访问的后备数组。 </p>
+     * 
+     * 
      * @return  The array that backs this buffer
      *
      * @throws  ReadOnlyBufferException
@@ -1008,6 +1193,14 @@ public abstract class IntBuffer
      * method in order to ensure that this buffer has an accessible backing
      * array.  </p>
      *
+     * <p>
+     *  返回缓冲区的第一个元素(可选操作)</i>在此缓冲区的后备数组中的偏移量。
+     * 
+     *  <p>如果此缓冲区由数组支持,则缓冲区位置<i> p </i>对应于数组索引<i> p </i>&nbsp; <tt> arrayOffset()</tt>。
+     * 
+     * <p>在调用此方法之前调用{@link #hasArray hasArray}方法,以确保此缓冲区具有可访问的后备数组。 </p>
+     * 
+     * 
      * @return  The offset within this buffer's array
      *          of the first element of the buffer
      *
@@ -1060,6 +1253,18 @@ public abstract class IntBuffer
 
 
      *
+     * <p>
+     *  压缩此缓冲区&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>缓冲区当前位置和其限制(如果有)之间的整数被复制到缓冲区的开头。
+     * 也就是说,将索引<i> p </i>&nbsp; =&nbsp; <tt> position()</tt>处的int复制到索引零,int在索引<i> p </i> +&nbsp; 1复制到索引1,依此类
+     * 推,直到索引<tt> limit()</tt>&nbsp;  - &nbsp; 1的int被复制到索引<i> n </i>&nbsp; =&nbsp; ; <tt> limit()</tt>&nbsp;
+     *   - &nbsp; <tt> 1 </tt>&nbsp;  - &nbsp; <i> p </i>。
+     *  <p>缓冲区当前位置和其限制(如果有)之间的整数被复制到缓冲区的开头。然后将缓冲器的位置设置为<n> n + 1,并将其限制设置为其容量。如果定义,标记将被丢弃。
+     * 
+     *  <p>缓冲区的位置设置为复制的int数量,而不是零,因此可以立即调用另一个相对</i>方法来调用此方法。 </p>
+     * 
+     * 
      * @return  This buffer
      *
      * @throws  ReadOnlyBufferException
@@ -1070,6 +1275,10 @@ public abstract class IntBuffer
     /**
      * Tells whether or not this int buffer is direct.
      *
+     * <p>
+     *  告诉这个int缓冲区是否是直接的。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer is direct
      */
     public abstract boolean isDirect();
@@ -1079,6 +1288,10 @@ public abstract class IntBuffer
     /**
      * Returns a string summarizing the state of this buffer.
      *
+     * <p>
+     *  返回汇总此缓冲区状态的字符串。
+     * 
+     * 
      * @return  A summary string
      */
     public String toString() {
@@ -1110,6 +1323,14 @@ public abstract class IntBuffer
      * to use buffers as keys in hash maps or similar data structures unless it
      * is known that their contents will not change.  </p>
      *
+     * <p>
+     *  返回此缓冲区的当前散列码。
+     * 
+     *  <p> int缓冲区的哈希码仅取决于其剩余元素;即从<tt> position()</tt>到<tt> limit()</tt>&nbsp; <tt> 1 </tt>的元素,并包含该元素。
+     * 
+     * <p>因为缓冲区哈希码是内容相关的,所以不宜使用缓冲区作为哈希映射或类似数据结构中的键,除非知道它们的内容不会改变。 </p>
+     * 
+     * 
      * @return  The current hash code of this buffer
      */
     public int hashCode() {
@@ -1151,6 +1372,25 @@ public abstract class IntBuffer
      *
      * <p> A int buffer is not equal to any other type of object.  </p>
      *
+     * <p>
+     *  告诉这个缓冲区是否等于另一个对象。
+     * 
+     *  <p>两个int缓冲区是相等的,如果,只有,
+     * 
+     * <ol>
+     * 
+     *  <li> <p>它们具有相同的元素类型,</p> </li>
+     * 
+     *  <li> <p>它们具有相同数量的剩余元素,</p> </li>
+     * 
+     *  <li> <p>剩余元素的两个序列,独立于其起始位置考虑,是逐点相等的。
+     * 
+     *  </p> </li>
+     * 
+     * </ol>
+     * 
+     *  <p> int缓冲区不等于任何其他类型的对象。 </p>
+     * 
      * @param  ob  The object to which this buffer is to be compared
      *
      * @return  <tt>true</tt> if, and only if, this buffer is equal to the
@@ -1199,6 +1439,9 @@ public abstract class IntBuffer
      *
      * <p> A int buffer is not comparable to any other type of object.
      *
+     * <p>
+     * 
+     * 
      * @return  A negative integer, zero, or a positive integer as this buffer
      *          is less than, equal to, or greater than the given buffer
      */
@@ -1432,6 +1675,15 @@ public abstract class IntBuffer
      * href="ByteBuffer.html#views">view</a> of a byte buffer is that of the
      * byte buffer at the moment that the view is created.  </p>
      *
+     * <p>
+     *  将此缓冲区与另一个进行比较。
+     * 
+     *  <p>两个int缓冲器通过按字典顺序比较其剩余元素的序列来进行比较,而不考虑每个序列在其相应缓冲器内的起始位置。
+     * 
+     *  对{@code int}元素进行比较,如同通过调用{@link Integer#compare(int,int)}。
+     * 
+     *  <p> int缓冲区与任何其他类型的对象都不可比。
+     * 
      * @return  This buffer's byte order
      */
     public abstract ByteOrder order();

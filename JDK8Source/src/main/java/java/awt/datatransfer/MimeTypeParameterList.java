@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,12 +37,19 @@ import java.util.Set;
  * An object that encapsulates the parameter list of a MimeType
  * as defined in RFC 2045 and 2046.
  *
+ * <p>
+ *  一个对象,用于封装RFC 2045和2046中定义的MimeType的参数列表。
+ * 
+ * 
  * @author jeff.dunn@eng.sun.com
  */
 class MimeTypeParameterList implements Cloneable {
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public MimeTypeParameterList() {
         parameters = new Hashtable<>();
@@ -74,6 +82,9 @@ class MimeTypeParameterList implements Cloneable {
      * Two parameter lists are considered equal if they have exactly
      * the same set of parameter names and associated values. The
      * order of the parameters is not considered.
+     * <p>
+     *  如果两个参数列表具有完全相同的参数名称和关联值集,则它们被视为相等。不考虑参数的顺序。
+     * 
      */
     public boolean equals(Object thatObject) {
         //System.out.println("MimeTypeParameterList.equals("+this+","+thatObject+")");
@@ -110,6 +121,9 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * A routine for parsing the parameter list out of a String.
+     * <p>
+     *  用于解析String中的参数列表的例程。
+     * 
      */
     protected void parse(String rawdata) throws MimeTypeParseException {
         int length = rawdata.length();
@@ -233,6 +247,9 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * return the number of name-value pairs in this list.
+     * <p>
+     *  返回此列表中的名称/值对的数量。
+     * 
      */
     public int size() {
         return parameters.size();
@@ -240,6 +257,9 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * Determine whether or not this list is empty.
+     * <p>
+     *  确定此列表是否为空。
+     * 
      */
     public boolean isEmpty() {
         return parameters.isEmpty();
@@ -248,6 +268,9 @@ class MimeTypeParameterList implements Cloneable {
     /**
      * Retrieve the value associated with the given name, or null if there
      * is no current association.
+     * <p>
+     *  检索与给定名称关联的值,如果没有当前关联,则返回null。
+     * 
      */
     public String get(String name) {
         return parameters.get(name.trim().toLowerCase());
@@ -256,6 +279,9 @@ class MimeTypeParameterList implements Cloneable {
     /**
      * Set the value to be associated with the given name, replacing
      * any previous association.
+     * <p>
+     *  设置要与给定名称关联的值,替换任何先前的关联。
+     * 
      */
     public void set(String name, String value) {
         parameters.put(name.trim().toLowerCase(), value);
@@ -263,6 +289,9 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * Remove any value associated with the given name.
+     * <p>
+     *  删除与给定名称关联的任何值。
+     * 
      */
     public void remove(String name) {
         parameters.remove(name.trim().toLowerCase());
@@ -270,6 +299,9 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * Retrieve an enumeration of all the names in this list.
+     * <p>
+     *  检索此列表中所有名称的枚举。
+     * 
      */
     public Enumeration<String> getNames() {
         return parameters.keys();
@@ -294,6 +326,8 @@ class MimeTypeParameterList implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return a clone of this object
      */
 
@@ -313,6 +347,9 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * Determine whether or not a given character belongs to a legal token.
+     * <p>
+     *  确定给定字符是否属于合法令牌。
+     * 
      */
     private static boolean isTokenChar(char c) {
         return ((c > 040) && (c < 0177)) && (TSPECIALS.indexOf(c) < 0);
@@ -321,6 +358,9 @@ class MimeTypeParameterList implements Cloneable {
     /**
      * return the index of the first non white space character in
      * rawdata at or after index i.
+     * <p>
+     *  返回rawdata中第一个非空格字符的索引,位于索引i或之后。
+     * 
      */
     private static int skipWhiteSpace(String rawdata, int i) {
         int length = rawdata.length();
@@ -337,6 +377,9 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * A routine that knows how and when to quote and escape the given value.
+     * <p>
+     *  知道如何和何时引用和逃避给定值的例程。
+     * 
      */
     private static String quote(String value) {
         boolean needsQuotes = false;
@@ -375,6 +418,9 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * A routine that knows how to strip the quotes and escape sequences from the given value.
+     * <p>
+     *  知道如何从给定值中去除引号和转义序列的例程。
+     * 
      */
     private static String unquote(String value) {
         int valueLength = value.length();
@@ -398,6 +444,8 @@ class MimeTypeParameterList implements Cloneable {
 
     /**
      * A string that holds all the special chars.
+     * <p>
+     *  一个包含所有特殊字符的字符串。
      */
     private static final String TSPECIALS = "()<>@,;:\\\"/[]?=";
 

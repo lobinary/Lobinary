@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,10 @@ import sun.swing.UIAction;
 /**
  * A Basic L&amp;F implementation of TabbedPaneUI.
  *
+ * <p>
+ *  TabbedPaneUI的基本L&amp; F实现。
+ * 
+ * 
  * @author Amy Fowler
  * @author Philip Milne
  * @author Steve Wilson
@@ -83,6 +88,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -93,6 +102,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -103,6 +116,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -113,6 +130,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -149,6 +170,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * InputMap used for mnemonics. Only non-null if the JTabbedPane has
      * mnemonics associated with it. Lazily created in initMnemonics.
+     * <p>
+     *  InputMap用于助记符。只有非null如果JTabbedPane有助记符与它相关联。 Lazily在initMnemonics中创建。
+     * 
      */
     private InputMap mnemonicInputMap;
 
@@ -160,21 +184,33 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * A rectangle used for general layout calculations in order
      * to avoid constructing many new Rectangles on the fly.
+     * <p>
+     *  用于一般布局计算的矩形,以避免在运行中构建许多新的矩形。
+     * 
      */
     protected transient Rectangle calcRect = new Rectangle(0,0,0,0);
 
     /**
      * Tab that has focus.
+     * <p>
+     *  具有焦点的标签。
+     * 
      */
     private int focusIndex;
 
     /**
      * Combined listeners.
+     * <p>
+     *  组合听众。
+     * 
      */
     private Handler handler;
 
     /**
      * Index of the tab the mouse is over.
+     * <p>
+     *  鼠标悬停的标签的索引。
+     * 
      */
     private int rolloverTabIndex;
 
@@ -182,6 +218,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * This is set to true when a component is added/removed from the tab
      * pane and set to false when layout happens.  If true it indicates that
      * tabRuns is not valid and shouldn't be used.
+     * <p>
+     *  当在选项卡窗格中添加/删除组件时,此选项设置为true,并在布局发生时设置为false。如果为true,则表示tabRuns无效,因此不应使用。
+     * 
      */
     private boolean isRunsDirty;
 
@@ -241,6 +280,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * a layout manager object to manage
      * the <code>JTabbedPane</code>.
      *
+     * <p>
+     * 由<code> installUI </code>调用以创建布局管理器对象来管理<code> JTabbedPane </code>。
+     * 
+     * 
      * @return a layout manager object
      *
      * @see TabbedPaneLayout
@@ -258,6 +301,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * which have extended BasicTabbedPaneUI to do their own layout, the
      * UI uses the installed layoutManager (and not tabLayoutPolicy) to
      * determine if scrollTabLayout is enabled.
+     * <p>
+     *  它们扩展了BasicTabbedPaneUI来做自己的布局,UI使用安装的layoutManager(而不是tabLayoutPolicy)来确定是否启用scrollTabLayout。
+     * 
      */
     private boolean scrollableTabLayoutEnabled() {
         return (tabPane.getLayout() instanceof TabbedPaneScrollLayout);
@@ -267,6 +313,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Creates and installs any required subcomponents for the JTabbedPane.
      * Invoked by installUI.
      *
+     * <p>
+     *  为JTabbedPane创建并安装任何所需的子组件。由installUI调用。
+     * 
+     * 
      * @since 1.4
      */
     protected void installComponents() {
@@ -304,6 +354,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * with a way to scroll the tabs in a particular direction. The
      * returned JButton must be instance of UIResource.
      *
+     * <p>
+     *  创建并返回一个JButton,它将为用户提供一种在特定方向滚动选项卡的方法。返回的JButton必须是UIResource的实例。
+     * 
+     * 
      * @param direction One of the SwingConstants constants:
      * SOUTH, NORTH, EAST or WEST
      * @return Widget for user to
@@ -326,6 +380,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Removes any installed subcomponents from the JTabbedPane.
      * Invoked by uninstallUI.
      *
+     * <p>
+     *  从JTabbedPane中删除任何已安装的子组件。由uninstallUI调用。
+     * 
+     * 
      * @since 1.4
      */
     protected void uninstallComponents() {
@@ -515,6 +573,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * Reloads the mnemonics. This should be invoked when a memonic changes,
      * when the title of a mnemonic changes, or when tabs are added/removed.
+     * <p>
+     *  重新加载助记符。当备忘录更改时,助记符的标题更改或添加/删除选项卡时,应调用此选项。
+     * 
      */
     private void updateMnemonics() {
         resetMnemonics();
@@ -530,6 +591,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     /**
      * Resets the mnemonics bindings to an empty state.
+     * <p>
+     *  将助记符绑定重置为空状态。
+     * 
      */
     private void resetMnemonics() {
         if (mnemonicToIndexMap != null) {
@@ -540,6 +604,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     /**
      * Adds the specified mnemonic at the specified index.
+     * <p>
+     *  在指定的索引处添加指定的助记符。
+     * 
      */
     private void addMnemonic(int index, int mnemonic) {
         if (mnemonicToIndexMap == null) {
@@ -552,6 +619,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     /**
      * Installs the state needed for mnemonics.
+     * <p>
+     *  安装助记符所需的状态。
+     * 
      */
     private void initMnemonics() {
         mnemonicToIndexMap = new Hashtable<Integer, Integer>();
@@ -566,6 +636,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * Sets the tab the mouse is over by location. This is a cover method
      * for <code>setRolloverTab(tabForCoordinate(x, y, false))</code>.
+     * <p>
+     *  设置鼠标在位置上的标签。这是<code> setRolloverTab(tabForCoordinate(x,y,false))</code>的覆盖方法。
+     * 
      */
     private void setRolloverTab(int x, int y) {
         // NOTE:
@@ -581,6 +654,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * tab. No checking is done to ensure the passed in index identifies a
      * valid tab.
      *
+     * <p>
+     *  将鼠标当前位于的标签设置为<code> index </code>。 <code> index </code>将为-1,如果鼠标不再超过任何选项卡。不进行检查以确保传入的索引标识有效的选项卡。
+     * 
+     * 
      * @param index Index of the tab the mouse is over.
      * @since 1.5
      */
@@ -592,6 +669,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Returns the tab the mouse is currently over, or {@code -1} if the mouse is no
      * longer over any tab.
      *
+     * <p>
+     *  返回鼠标当前所处的标签,如果鼠标不再位于任何标签上,则返回{@code -1}。
+     * 
+     * 
      * @return the tab the mouse is currently over, or {@code -1} if the mouse is no
      * longer over any tab
      * @since 1.5
@@ -613,6 +694,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -646,6 +731,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -667,6 +756,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * Returns the baseline for the specified tab.
      *
+     * <p>
+     * 返回指定选项卡的基线。
+     * 
+     * 
      * @param tab index of tab to get baseline for
      * @exception IndexOutOfBoundsException if index is out of range
      *            (index &lt; 0 || index &gt;= tab count)
@@ -714,6 +807,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Returns the amount the baseline is offset by.  This is typically
      * the same as <code>getTabLabelShiftY</code>.
      *
+     * <p>
+     *  返回基线偏移量。这通常与<code> getTabLabelShiftY </code>相同。
+     * 
+     * 
      * @return amount to offset the baseline by
      * @since 1.6
      */
@@ -812,6 +909,14 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * tab count - 1, inclusive) or -1 if no tab is currently selected.
      * The handling of invalid parameters is unspecified.
      *
+     * <p>
+     *  在选项卡区域绘制选项卡。调用由paint()。图形参数必须是有效的<code> Graphics </code>对象。
+     * 标签位置可以是：<code> JTabbedPane.TOP </code>,<code> JTabbedPane.BOTTOM </code>,<code> JTabbedPane.LEFT </code>
+     * 或<code> JTabbedPane.RIGHT </code> 。
+     *  在选项卡区域绘制选项卡。调用由paint()。图形参数必须是有效的<code> Graphics </code>对象。
+     * 所选索引必须是有效的选项卡式窗格选项卡索引(0到选项卡计数-1,包括1),如果当前未选择任何选项卡,则为-1。无效参数的处理未指定。
+     * 
+     * 
      * @param g the graphics object to use for rendering
      * @param tabPlacement the placement for the tabs within the JTabbedPane
      * @param selectedIndex the tab index of the selected component
@@ -913,6 +1018,14 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * For tabs placed on LEFT or RIGHT, the bottom torn edge is created by
      * subtracting xCropLen[i] from (tab.y + tab.height) and adding yCropLen[i]
      * to (tab.x).
+     * <p>
+     *  其已经在具有撕裂边缘视觉的指定的束处裁剪。例如在"i"之后裁剪裁剪的"文件"选项卡：------------- | ..... | | 。 | | ...。 | | 。 。 | | 。 。
+     *  | | 。 。 | --------------。
+     * 
+     *  下面的x,y阵列定义用于创建"撕裂"边缘段的图案,其被重复以填充该标签的边缘。
+     * 对于放置在TOP和BOTTOM上的标签,该右侧撕裂边缘由通过从(tab.x + tab.width)减去xCropLen [i]并将yCroplen [i]添加到(tab.y) )。
+     * 对于放置在LEFT或RIGHT上的标签,通过从(tab.y + tab.height)减去xCropLen [i]并将yCropLen [i]添加到(tabs.x)来创建底部撕裂边缘。
+     * 
      */
     private static int xCropLen[] = {1,1,0,0,1,1,2,2};
     private static int yCropLen[] = {0,3,3,6,6,9,9,12};
@@ -975,6 +1088,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     /* If tabLayoutPolicy == SCROLL_TAB_LAYOUT, this method will paint an edge
      * indicating the tab is cropped in the viewport display
+     * <p>
+     *  指示在视口显示中裁剪该选项卡
+     * 
      */
     private void paintCroppedTabEdge(Graphics g) {
         int tabIndex = tabScroller.croppedEdge.getTabIndex();
@@ -1174,6 +1290,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
       * this function draws the border around each tab
       * note that this function does now draw the background of the tab.
       * that is done elsewhere
+      * <p>
+      * 此函数在每个选项卡注释周围绘制边框,此函数现在绘制选项卡的背景。这是在别处做的
+      * 
       */
     protected void paintTabBorder(Graphics g, int tabPlacement,
                                   int tabIndex,
@@ -1449,6 +1568,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         /* If tabPane doesn't have a peer yet, the validate() call will
          * silently fail.  We handle that by forcing a layout if tabPane
          * is still invalid.  See bug 4237677.
+         * <p>
+         *  默默地失败。如果tabPane仍然无效,我们通过强制布局来处理它。见错误4237677。
+         * 
          */
         if (!tabPane.isValid()) {
             TabbedPaneLayout layout = (TabbedPaneLayout)tabPane.getLayout();
@@ -1462,6 +1584,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * Returns the bounds of the specified tab index.  The bounds are
      * with respect to the JTabbedPane's coordinate space.
+     * <p>
+     *  返回指定制表符索引的边界。边界是相对于JTabbedPane的坐标空间。
+     * 
      */
     public Rectangle getTabBounds(JTabbedPane pane, int i) {
         ensureCurrentLayout();
@@ -1477,6 +1602,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * Returns the tab index which intersects the specified point
      * in the JTabbedPane's coordinate space.
+     * <p>
+     *  返回与JTabbedPane的坐标空间中的指定点相交的制表符索引。
+     * 
      */
     public int tabForCoordinate(JTabbedPane pane, int x, int y) {
         return tabForCoordinate(pane, x, y, true);
@@ -1524,6 +1652,15 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * rectangle parameter must be a valid <code>Rectangle</code> instance.
      * The handling of invalid parameters is unspecified.
      *
+     * <p>
+     *  返回JTabbedPane组件的坐标空间中指定制表符的边界。
+     * 这是必需的,因为默认情况下,选项卡矩形在渲染它们的组件的坐标空间中定义,可以是JTabbedPane(用于WRAP_TAB_LAYOUT)或ScrollableTabPanel(SCROLL_TAB_L
+     * AYOUT)。
+     *  返回JTabbedPane组件的坐标空间中指定制表符的边界。
+     * 当标签矩形必须相对于JTabbedPane本身时,应使用此方法,并且结果应放置在指定的Rectangle对象中(而不是每次实例化并返回一个新的矩形)。
+     * 标签索引参数必须是有效的标签式窗格标签索引(0到标签计数-1,包括1和)。目标矩形参数必须是有效的<code> Rectangle </code>实例。无效参数的处理未指定。
+     * 
+     * 
      * @param tabIndex the index of the tab
      * @param dest the rectangle where the result should be placed
      * @return the resulting rectangle
@@ -1552,6 +1689,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * Returns the index of the tab closest to the passed in location, note
      * that the returned tab may not contain the location x,y.
+     * <p>
+     *  返回最接近传入位置的标签的索引,请注意返回的标签可能不包含位置x,y。
+     * 
      */
     private int getClosestTab(int x, int y) {
         int min = 0;
@@ -1597,6 +1737,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Returns a point which is translated from the specified point in the
      * JTabbedPane's coordinate space to the coordinate space of the
      * ScrollableTabPanel.  This is used for SCROLL_TAB_LAYOUT ONLY.
+     * <p>
+     * 返回从JTabbedPane的坐标空间中的指定点平移到ScrollableTabPanel的坐标空间的点。这仅用于SCROLL_TAB_LAYOUT。
+     * 
      */
     private Point translatePointToTabPanel(int srcx, int srcy, Point dest) {
         Point vpp = tabScroller.viewport.getLocation();
@@ -1695,6 +1838,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * the specified tab or null if no specialized text rendering is needed
      * for this tab. This is provided to support html rendering inside tabs.
      *
+     * <p>
+     *  返回为指定选项卡呈现风格化文本(HTML)所需的文本View对象,如果此选项卡不需要专门的文本呈现,则返回null。这是为了支持在标签内的html渲染。
+     * 
+     * 
      * @param tabIndex the index of the tab
      * @return the text view to render the tab's text or null if no
      *         specialized rendering is required
@@ -1988,6 +2135,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     /**
      * Repaints the specified tab.
+     * <p>
+     *  重绘指定的标签。
+     * 
      */
     private void repaintTab(int index) {
         // If we're not valid that means we will shortly be validated and
@@ -1999,6 +2149,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     /**
      * Makes sure the focusIndex is valid.
+     * <p>
+     *  确保focusIndex有效。
+     * 
      */
     private void validateFocusIndex() {
         if (focusIndex >= tabPane.getTabCount()) {
@@ -2009,6 +2162,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * Returns the index of the tab that has focus.
      *
+     * <p>
+     *  返回具有焦点的选项卡的索引。
+     * 
+     * 
      * @return index of tab that has focus
      * @since 1.5
      */
@@ -2267,6 +2424,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicTabbedPaneUI.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在BasicTabbedPaneUI的子类中实例化它。
+     * 
      */
     public class TabbedPaneLayout implements LayoutManager {
 
@@ -2395,6 +2555,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             * subclasses that don't fireStateChanged() where it may be used.
             * Any changes here need to be kept in synch with
             * JTabbedPane.fireStateChanged().
+            * <p>
+            *  组件的可见性以隐藏和显示所选选项卡的内容。这是较旧的代码,此后已在JTabbedPane.fireStateChanged()中重复,以便允许可见性更改发生更快(参见注释)。
+            * 此代码保持向后兼容性,因为在某些情况下,例如子类不fireStateChanged()它可以使用。此处的任何更改都需要与JTabbedPane.fireStateChanged()保持同步。
+            * 
             */
 
             setRolloverTab(-1);
@@ -2658,6 +2822,17 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                     }
                     // Initialize x position in case there's just one column
                     rect.x = x;
+                    rect.height = maxTabHeight/* <p>
+                    rect.height = maxTabHeight/*  } else {// LEFT或RIGHT ...上的标签if(i> 0){rect.y = rects [i-1] .y + rects [i-1] .height; } else {tabRuns [0] = 0; runCount = 1; maxTabHeight = 0; rect.y = y; }
+                    rect.height = maxTabHeight/*  rect.height = calculateTabHeight(tabPlacement,i,fontHeight); maxTabHeight = Math.max(maxTabHeight,re
+                    rect.height = maxTabHeight/* ct.height);。
+                    rect.height = maxTabHeight/* 
+                    rect.height = maxTabHeight/* //如果TAB在第一次运行中,则不会将其移动。 //即使没有足够的空间,移动到一个新的//列也不会有帮助。
+                    rect.height = maxTabHeight/*  if(rect.y！= y && rect.y + rect.height> returnAt){if(runCount> tabRuns.length  -  1){expandTabRunsArray(); }
+                    rect.height = maxTabHeight/*  tabRuns [runCount] = i; runCount ++; rect.y = y; } //初始化x位置,以便只有一列rect.x = x;。
+                    rect.height = maxTabHeight/* //如果TAB在第一次运行中,则不会将其移动。 //即使没有足够的空间,移动到一个新的//列也不会有帮助。
+                    rect.height = maxTabHeight/* 
+                    rect.height = maxTabHeight/* 
                     rect.width = maxTabWidth/* - 2*/;
 
                 }
@@ -2732,6 +2907,24 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
        /*
        * Rotates the run-index array so that the selected run is run[0]
+       * <p>
+       *  } if(i == selectedIndex){selectedRun = runCount  -  1; }}
+       * 
+       *  if(runCount> 1){//在最后一次运行时重新分配选项卡有剩余空间normalizeTabRuns(tabPlacement,tabCount,verticalTabRuns?y：x,returnAt);。
+       * 
+       *  selectedRun = getRunForTab(tabCount,selectedIndex);
+       * 
+       *  //旋转运行数组,以便选择的运行是第一个if(shouldRotateTabRuns(tabPlacement)){rotateTabRuns(tabPlacement,selectedRun); }
+       * }。
+       * 
+       * //从前到后逐步运行以计算//标签y位置并适当填充运行(i = runCount  -  1; i> = 0; i--){int start = tabRuns [i]; int next = tabRuns [i ==(runCount  -  1)? int end =(next！= 0?next  -  1：tabCount  -  1); if(！verticalTabRuns){for(j = start; j <= end; j ++){rect = rects [j] rect.y = y; rect.x + = getTabRunIndent(tabPlacement,i); } if(shouldPadTabRun(tabPlacement,i)){padTabRun(tabPlacement,start,end,returnAt); } if(tabPlacement == BOTTOM){y  -  =(maxTabHeight  -  tabRunOverlay); } else {y + =(maxTabHeight  -  tabRunOverlay); }} else {for(j = start; j <= end; j ++){rect = rects [j] rect.x = x; rect.y + = getTabRunIndent(tabPlacement,i); } if(shouldPadTabRun(tabPlacement,i)){padTabRun(tabPlacement,start,end,returnAt); } if(tabPlacement == RIGHT){x  -  =(maxTabWidth  -  tabRunOverlay); } else {x + =(maxTabWidth  -  tabRunOverlay); }}}。
+       * 
+       *  //填充选定的选项卡,使其出现在前面padSelectedTab(tabPlacement,selectedIndex);
+       * 
+       *  //如果右到左,并且tab放置在顶部或//底部,翻转x位置并调整宽度if(！leftToRight &&！verticalTabRuns){int rightMargin = size.width  - (insets.right + tabAreaInsets.right) ; for(i = 0; i <tabCount; i ++){rects [i] .x = rightMargin-rects [i] .x- rects [i] .width; }}}。
+       * 
+       *  / *旋转运行索引数组,以便运行选定的运行[0]
+       * 
        */
         protected void rotateTabRuns(int tabPlacement, int selectedRun) {
             for (int i = 0; i < selectedRun; i++) {
@@ -2903,6 +3096,10 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
              * subclasses that don't fireStateChanged() where it may be used.
              * Any changes here need to be kept in synch with
              * JTabbedPane.fireStateChanged().
+             * <p>
+             * 组件的可见性以隐藏和显示所选选项卡的内容。这是较旧的代码,此后已在JTabbedPane.fireStateChanged()中重复,以便允许可见性更改发生更快(参见注释)。
+             * 此代码保持向后兼容性,因为在某些情况下,例如子类不fireStateChanged()它可以使用。此处的任何更改都需要与JTabbedPane.fireStateChanged()保持同步。
+             * 
              */
 
             setRolloverTab(-1);
@@ -3219,6 +3416,14 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                     maxTabHeight = Math.max(maxTabHeight, rect.height);
 
                     rect.x = x;
+                    rect.height = maxTabHeight/* <p>
+                    rect.height = maxTabHeight/*  } else {// LEFT或RIGHT ...上的标签if(i> 0){rect.y = rects [i-1] .y + rects [i-1] .height; } else {tabRuns [0] = 0; maxTabHeight = 0; totalWidth = maxTabWidth; rect.y = y; }
+                    rect.height = maxTabHeight/*  rect.height = calculateTabHeight(tabPlacement,i,fontHeight); totalHeight = rect.y + rect.height; max
+                    rect.height = maxTabHeight/* TabHeight = Math.max(maxTabHeight,rect.height);。
+                    rect.height = maxTabHeight/* 
+                    rect.height = maxTabHeight/*  rect.x = x;
+                    rect.height = maxTabHeight/* 
+                    rect.height = maxTabHeight/* 
                     rect.width = maxTabWidth/* - 2*/;
 
                 }
@@ -3265,6 +3470,22 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
         /**
          * Recreates the scroll buttons and adds them to the TabbedPane.
+         * <p>
+         *  }}
+         * 
+         *  if(tabsOverlapBorder){//填充所选的标签,使其出现在前面padSelectedTab(tabPlacement,selectedIndex); }}
+         * 
+         *  //如果右到左,并且tab放置在顶部或//底部,翻转x位置并调整宽度if(！leftToRight &&！verticalTabRuns){int rightMargin = size.width  - (insets.right + tabAreaInsets.right) ; for(i = 0; i <tabCount; i ++){rects [i] .x = rightMargin-rects [i] .x- rects [i] .width; }} tabScroller.tabPanel.setPreferredSize(new Dimension(totalWidth,totalHeight)); tabScroller.tabPanel.invalidate(); }}。
+         * 
+         * 私人类ScrollableTabSupport实现ActionListener,ChangeListener {public Sc​​rollableTabViewport viewport; public Sc​​rollableTabPanel tabPanel; public JButton scrollForwardButton; public JButton scrollBackwardButton; public CroppedEdge croppedEdge; public int leadingTabIndex;。
+         * 
+         *  private Point tabViewPosition = new Point(0,0);
+         * 
+         *  ScrollableTabSupport(int tabPlacement){viewport = new ScrollableTabViewport(); tabPanel = new ScrollableTabPanel(); viewport.setView(tabPanel); viewport.addChangeListener(this); croppedEdge = new CroppedEdge(); createButtons(); }
+         * }。
+         * 
+         *  / **重新创建滚动按钮并将其添加到TabbedPane。
+         * 
          */
         void createButtons() {
             if (scrollForwardButton != null) {
@@ -3418,6 +3639,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
         /**
          * ActionListener for the scroll buttons.
+         * <p>
+         *  ActionListener用于滚动按钮。
+         * 
          */
         public void actionPerformed(ActionEvent e) {
             ActionMap map = tabPane.getActionMap();
@@ -3706,6 +3930,21 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
        When we have added a way to listen for tab additions and
        changes to tab text, this code should be removed and
+    /* <p>
+    /*  添加了容器侦听器代码以支持选项卡标题的HTML呈现。
+    /* 
+    /*  理想情况下,当添加标签或修改其文本时,我们将能够监听属性更改。目前没有这样的事件,因为Beans规范不允许"索引"属性更改(即制表符2的文本从A更改为B)。
+    /* 
+    /*  为了解决这个问题,我们通过监听容器事件来监听要添加或删除的选项卡。我们然后排队一个runnable(所以组件有机会完成添加),它检查新组件的选项卡标题,看看是否需要HTML呈现。
+    /* 
+    /* 视图(每个选项卡标题需要HTML渲染一个)存储在htmlViews向量中,它只在第一次运行到HTML选项卡后分配。
+    /* 请注意,此向量与页数一起保持,并且为其标签标题不需要HTML呈现的那些页面添加null。
+    /* 
+    /*  这使得绘画和布局代码容易分辨是否调用HTML引擎,而不必在时间敏感操作期间检查字符串。
+    /* 
+    /*  当我们添加了一个方法来监听Tab添加和对Tab文本的更改时,应该删除这个代码
+    /* 
+    /* 
        replaced by something which uses that.  */
 
         public void componentAdded(ContainerEvent e) {
@@ -3748,6 +3987,7 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicTabbedPaneUI.
+     * <p>
      */
     public class PropertyChangeHandler implements PropertyChangeListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -3762,6 +4002,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicTabbedPaneUI.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在BasicTabbedPaneUI的子类中实例化它。
+     * 
      */
     public class TabSelectionHandler implements ChangeListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -3776,6 +4019,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicTabbedPaneUI.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在BasicTabbedPaneUI的子类中实例化它。
+     * 
      */
     public class MouseHandler extends MouseAdapter {
         // NOTE: This class exists only for backward compatibility. All
@@ -3790,6 +4036,9 @@ public class BasicTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicTabbedPaneUI.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在BasicTabbedPaneUI的子类中实例化它。
+     * 
      */
     public class FocusHandler extends FocusAdapter {
         // NOTE: This class exists only for backward compatibility. All

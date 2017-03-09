@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DOM2TO.java,v 1.5 2005/09/28 13:48:44 pvedula Exp $
+ * <p>
+ *  $ Id：DOM2TO.java,v 1.5 2005/09/28 13:48:44 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.trax;
@@ -42,6 +55,8 @@ import org.xml.sax.XMLReader;
 import com.sun.org.apache.xml.internal.serializer.NamespaceMappings;
 
 /**
+/* <p>
+/* 
  * @author Santiago Pericas-Geertsen
  * @author Sunitha Reddy
  */
@@ -52,11 +67,17 @@ public class DOM2TO implements XMLReader, Locator2 {
 
     /**
      * A reference to the DOM to be traversed.
+     * <p>
+     *  对要遍历的DOM的引用。
+     * 
      */
     private Node _dom;
 
     /**
      * A reference to the output handler receiving the events.
+     * <p>
+     *  对接收事件的输出处理程序的引用。
+     * 
      */
     private SerializationHandler _handler;
 
@@ -103,6 +124,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * Traverse the DOM and generate TO events for a handler. Notice that
      * we need to handle implicit namespace declarations too.
+     * <p>
+     *  遍历DOM并为处理程序生成TO事件。注意,我们还需要处理隐式命名空间声明。
+     * 
      */
     private void parse(Node node)
         throws IOException, SAXException
@@ -249,6 +273,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public DTDHandler getDTDHandler() {
         return null;
@@ -257,6 +284,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public ErrorHandler getErrorHandler() {
         return null;
@@ -265,6 +295,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public boolean getFeature(String name) throws SAXNotRecognizedException,
         SAXNotSupportedException
@@ -275,6 +308,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setFeature(String name, boolean value) throws
         SAXNotRecognizedException, SAXNotSupportedException
@@ -284,6 +320,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void parse(String sysId) throws IOException, SAXException {
         throw new IOException("This method is not yet implemented.");
@@ -292,6 +331,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setDTDHandler(DTDHandler handler) throws NullPointerException {
     }
@@ -299,6 +341,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     * 此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setEntityResolver(EntityResolver resolver) throws
         NullPointerException
@@ -308,6 +353,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public EntityResolver getEntityResolver() {
         return null;
@@ -316,6 +364,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setErrorHandler(ErrorHandler handler) throws
         NullPointerException
@@ -325,6 +376,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setProperty(String name, Object value) throws
         SAXNotRecognizedException, SAXNotSupportedException {
@@ -333,6 +387,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public Object getProperty(String name) throws SAXNotRecognizedException,
         SAXNotSupportedException
@@ -343,6 +400,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public int getColumnNumber() {
         return 0;
@@ -351,6 +411,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public int getLineNumber() {
         return 0;
@@ -359,6 +422,9 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public String getPublicId() {
         return null;
@@ -367,6 +433,8 @@ public class DOM2TO implements XMLReader, Locator2 {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
      */
     public String getSystemId() {
         return null;

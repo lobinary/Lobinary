@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ClassGenerator.java,v 1.2.4.1 2005/09/05 11:07:09 pvedula Exp $
+ * <p>
+ *  $ Id：ClassGenerator.java,v 1.2.4.1 2005/09/05 11:07:09 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -44,6 +57,15 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.Stylesheet;
  *
  * 3. Rt methods: for result tree fragments, implemented by
  * instances of <tt>RtMethodGenerator</tt>.
+ * <p>
+ *  实现继承自<tt> AbstractTranslet </tt>的任何类的类,即任何translet。该类中的方法可以是以下类型：
+ * 
+ *  1.主方法：applyTemplates,由<tt> MethodGenerator </tt>的内容实现。
+ * 
+ *  2.命名方法：对于由<tt> NamedMethodGenerator </tt>实例实现的命名模板。
+ * 
+ *  3. Rt方法：用于由<tt> RtMethodGenerator </tt>的实例实现的结果树片段。
+ * 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
@@ -103,6 +125,8 @@ public class ClassGenerator extends ClassGen {
     /**
      * Pretend this is the stylesheet class. Useful when compiling
      * references to global variables inside a predicate.
+     * <p>
+     * 
      */
     public final String getClassName() {
         return _stylesheet.getClassName();
@@ -131,6 +155,9 @@ public class ClassGenerator extends ClassGen {
     /**
      * Returns <tt>true</tt> or <tt>false</tt> depending on whether
      * this class inherits from <tt>AbstractTranslet</tt> or not.
+     * <p>
+     *  假装这是stylesheet类。在编译对谓词中的全局变量的引用时很有用。
+     * 
      */
     public boolean isExternal() {
         return false;

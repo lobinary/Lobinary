@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -218,6 +219,122 @@ import javax.print.attribute.PrintJobAttribute;
  * In IPP Finishings is a multi-value attribute, this API currently allows
  * only one binding to be specified.
  *
+ * <p>
+ *  类Finishings是打印属性类,枚举,用于标识打印机是否对作业中每个打印文档的每个副本应用某种类型的绑定的完成操作。
+ * 对于多标识打印作业(具有多个文档的作业),{@link MultipleDocumentHandling MultipleDocumentHandling}属性确定构成"复印"的目的是用于整理的。
+ * <P>
+ *  标准完成值为：
+ * <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 WIDTH=100% SUMMARY="layout">
+ * <TR>
+ * <TD STYLE="WIDTH:10%">
+ *  &nbsp;
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #NONE NONE}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE STAPLE}
+ * </TD>
+ * <TD STYLE="WIDTH:36%">
+ *  {@link #EDGE_STITCH EDGE_STITCH}
+ * </TD>
+ * </TR>
+ * <TR>
+ * <TD>
+ *  &nbsp;
+ * </TD>
+ * <TD>
+ *  {@link #BIND BIND}
+ * </TD>
+ * <TD>
+ *  {@link #SADDLE_STITCH SADDLE_STITCH}
+ * </TD>
+ * <TD>
+ *  {@link #COVER COVER}
+ * </TD>
+ * <TD>
+ *  &nbsp;
+ * </TD>
+ * </TR>
+ * </TABLE>
+ * <P>
+ *  以下Finishings值更具体;它们表示角落或边缘,就像文档是肖像文档一样：
+ * <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 WIDTH=100% SUMMARY="layout">
+ * <TR>
+ * <TD STYLE="WIDTH:10%">
+ *  &nbsp;
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE_TOP_LEFT STAPLE_TOP_LEFT}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #EDGE_STITCH_LEFT EDGE_STITCH_LEFT}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE_DUAL_LEFT STAPLE_DUAL_LEFT}
+ * </TD>
+ * <TD STYLE="WIDTH:9%">
+ *  &nbsp;
+ * </TD>
+ * </TR>
+ * <TR>
+ * <TD STYLE="WIDTH:10%">
+ *  &nbsp;
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE_BOTTOM_LEFT STAPLE_BOTTOM_LEFT}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #EDGE_STITCH_TOP EDGE_STITCH_TOP}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE_DUAL_TOP STAPLE_DUAL_TOP}
+ * </TD>
+ * <TD STYLE="WIDTH:9%">
+ *  &nbsp;
+ * </TD>
+ * </TR>
+ * <TR>
+ * <TD STYLE="WIDTH:10%">
+ *  &nbsp;
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE_TOP_RIGHT STAPLE_TOP_RIGHT}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #EDGE_STITCH_RIGHT EDGE_STITCH_RIGHT}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE_DUAL_RIGHT STAPLE_DUAL_RIGHT}
+ * </TD>
+ * <TD STYLE="WIDTH:9%">
+ *  &nbsp;
+ * </TD>
+ * </TR>
+ * <TR>
+ * <TD STYLE="WIDTH:10%">
+ *  &nbsp;
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE_BOTTOM_RIGHT STAPLE_BOTTOM_RIGHT}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #EDGE_STITCH_BOTTOM EDGE_STITCH_BOTTOM}
+ * </TD>
+ * <TD STYLE="WIDTH:27%">
+ *  {@link #STAPLE_DUAL_BOTTOM STAPLE_DUAL_BOTTOM}
+ * </TD>
+ * <TD STYLE="WIDTH:9%">
+ *  &nbsp;
+ * </TD>
+ * </TR>
+ * </TABLE>
+ * <P>
+ * 相对于文档指定STAPLE_ <I> XXX </I>值,如同文档是纵向文档一样。如果文档实际上是横向或反向横向文档,则客户端提供适当的变换值。
+ * 例如,为了在保持用于读取时将订书钉定位在横向文档的左上角,客户端提供STAPLE_BOTTOM_LEFT值(因为横向定义为从纵向旋转+90度,即逆时针)。
+ * 另一方面,为了在保持用于读取时将订书钉定位在反转横向文档的左上角中,客户端提供STAPLE_TOP_RIGHT值(因为反向横向被定义为从纵向的-90度旋转,即,顺时针)。
+ * <P>
+ * 
  * @author  Alan Kaminsky
  */
 public class Finishings extends EnumSyntax
@@ -227,12 +344,54 @@ public class Finishings extends EnumSyntax
 
     /**
      * Perform no binding.
+     * <p>
+     *  每个订书钉相对于文档的角度(垂直,水平,成角度)取决于实现,而实现又可以取决于属性的值。
+     * <P>
+     *  Finishings属性对多节点打印作业(具有多个文档的作业)的影响取决于所有文档是否具有指定的相同绑定,或不同的文档是否具有指定的不同绑定,以及{@(可能是默认值)链接MultipleDocumentHandling MultipleDocumentHandling}
+     * 属性。
+     * <UL>
+     * <LI>
+     * 如果所有文档都指定了相同的绑定,则{@link MultipleDocumentHandling MultipleDocumentHandling}的任何值都是有意义的,打印机的处理取决于{@link MultipleDocumentHandling MultipleDocumentHandling}
+     * 值：。
+     * <UL>
+     * <LI>
+     *  SINGLE_DOCUMENT  - 所有输入文档将绑定在一起作为一个输出文档与指定的绑定。
+     * <P>
+     * <LI>
+     *  SINGLE_DOCUMENT_NEW_SHEET  - 所有输入文档将绑定在一起作为一个输出文档与指定的绑定,每个输入文档的第一印象将始终从新的媒体工作表。
+     * <P>
+     * <LI>
+     *  SEPARATE_DOCUMENTS_UNCOLLATED_COPIES  - 每个输入文档将与指定的绑定分开绑定。
+     * <P>
+     * <LI>
+     *  SEPARATE_DOCUMENTS_COLLATED_COPIES  - 每个输入文档将与指定的绑定分开绑定。
+     * </UL>
+     * <P>
+     * <LI>
+     *  如果不同的文档指定了不同的绑定,则只有两个值{@link MultipleDocumentHandling MultipleDocumentHandling}是有意义的,并且当任务提交时打印机报告错误
+     * ,如果指定了任何其他值：。
+     * <UL>
+     * <LI>
+     *  SEPARATE_DOCUMENTS_UNCOLLATED_COPIES  - 每个输入文档将单独绑定其自己指定的绑定。
+     * <P>
+     * <LI>
+     *  SEPARATE_DOCUMENTS_COLLATED_COPIES  - 每个输入文档将单独绑定其自己指定的绑定。
+     * </UL>
+     * </UL>
+     * <P>
+     * <B> IPP兼容性：</B>类完成封装了一些可以包含在IPP"finishings"属性中的IPP枚举值,这是一组枚举。
+     *  <CODE> getName()</CODE>返回的类别名称是IPP属性名称。枚举的整数值是IPP枚举值。 <code> toString()</code>方法返回属性值的IPP字符串表示形式。
+     * 在IPP中,Finishings是一个多值属性,此API目前仅允许指定一个绑定。
+     * 
      */
     public static final Finishings NONE = new Finishings(3);
 
     /**
      * Bind the document(s) with one or more staples. The exact number and
      * placement of the staples is site-defined.
+     * <p>
+     *  不执行绑定。
+     * 
      */
     public static final Finishings STAPLE = new Finishings(4);
 
@@ -241,12 +400,18 @@ public class Finishings extends EnumSyntax
      * pre-printed) cover for the document. This does not supplant the
      * specification of a printed cover (on cover stock medium) by the
      * document  itself.
+     * <p>
+     *  使用一个或多个订书钉装订文档。订书钉的确切数量和位置是现场定义的。
+     * 
      */
     public static final Finishings COVER = new Finishings(6);
 
     /**
      * This value indicates that a binding is to be applied to the document;
      * the type and placement of the binding is site-defined.
+     * <p>
+     *  当希望为文档选择非打印(或预打印)的盖时,指定该值。这不能取代文件本身对打印盖(在封面纸介质上)的规格。
+     * 
      */
     public static final Finishings BIND = new Finishings(7);
 
@@ -254,6 +419,9 @@ public class Finishings extends EnumSyntax
      * Bind the document(s) with one or more staples (wire stitches) along the
      * middle fold. The exact number and placement of the staples and the
      * middle fold is implementation- and/or site-defined.
+     * <p>
+     *  此值指示要对文档应用绑定;绑定的类型和位置是位置定义的。
+     * 
      */
     public static final Finishings SADDLE_STITCH =
         new Finishings(8);
@@ -262,12 +430,18 @@ public class Finishings extends EnumSyntax
      * Bind the document(s) with one or more staples (wire stitches) along one
      * edge. The exact number and placement of the staples is implementation-
      * and/or site- defined.
+     * <p>
+     *  使用一个或多个订书钉(线迹)沿中间折叠装订文档。缝钉和中间折叠的确切数量和位置是实施和/或位置限定的。
+     * 
      */
     public static final Finishings EDGE_STITCH =
         new Finishings(9);
 
     /**
      * Bind the document(s) with one or more staples in the top left corner.
+     * <p>
+     *  使用一个或多个订书钉(线迹)沿着一个边缘装订文档。钉的确切数量和位置是实施和/或位置限定的。
+     * 
      */
     public static final Finishings STAPLE_TOP_LEFT =
         new Finishings(20);
@@ -275,12 +449,18 @@ public class Finishings extends EnumSyntax
     /**
      * Bind the document(s) with one or more staples in the bottom left
      * corner.
+     * <p>
+     *  使用左上角的一个或多个订书钉装订文档。
+     * 
      */
     public static final Finishings STAPLE_BOTTOM_LEFT =
         new Finishings(21);
 
     /**
      * Bind the document(s) with one or more staples in the top right corner.
+     * <p>
+     *  使用左下角的一个或多个订书钉装订文档。
+     * 
      */
     public static final Finishings STAPLE_TOP_RIGHT =
         new Finishings(22);
@@ -288,6 +468,9 @@ public class Finishings extends EnumSyntax
     /**
      * Bind the document(s) with one or more staples in the bottom right
      * corner.
+     * <p>
+     * 使用右上角的一个或多个订书钉装订文档。
+     * 
      */
     public static final Finishings STAPLE_BOTTOM_RIGHT =
         new Finishings(23);
@@ -296,6 +479,9 @@ public class Finishings extends EnumSyntax
      * Bind the document(s) with one or more staples (wire stitches) along the
      * left edge. The exact number and placement of the staples is
      * implementation- and/or site-defined.
+     * <p>
+     *  使用右下角的一个或多个订书钉装订文档。
+     * 
      */
     public static final Finishings EDGE_STITCH_LEFT =
         new Finishings(24);
@@ -304,6 +490,9 @@ public class Finishings extends EnumSyntax
      * Bind the document(s) with one or more staples (wire stitches) along the
      * top edge. The exact number and placement of the staples is
      * implementation- and/or site-defined.
+     * <p>
+     *  沿左边缘用一个或多个订书钉(线迹)装订文档。钉的确切数量和位置是实施和/或位置定义的。
+     * 
      */
     public static final Finishings EDGE_STITCH_TOP =
         new Finishings(25);
@@ -312,6 +501,9 @@ public class Finishings extends EnumSyntax
      * Bind the document(s) with one or more staples (wire stitches) along the
      * right edge. The exact number and placement of the staples is
      * implementation- and/or site-defined.
+     * <p>
+     *  使用一个或多个订书钉(线迹)沿着顶部边缘装订文档。钉的确切数量和位置是实施和/或位置定义的。
+     * 
      */
     public static final Finishings EDGE_STITCH_RIGHT =
         new Finishings(26);
@@ -320,6 +512,9 @@ public class Finishings extends EnumSyntax
      * Bind the document(s) with one or more staples (wire stitches) along the
      * bottom edge. The exact number and placement of the staples is
      * implementation- and/or site-defined.
+     * <p>
+     *  使用一个或多个订书钉(线迹)沿着右边缘装订文档。钉的确切数量和位置是实施和/或位置定义的。
+     * 
      */
     public static final Finishings EDGE_STITCH_BOTTOM =
         new Finishings(27);
@@ -327,6 +522,9 @@ public class Finishings extends EnumSyntax
     /**
      * Bind the document(s) with two staples (wire stitches) along the left
      * edge assuming a portrait document (see above).
+     * <p>
+     *  使用一个或多个订书钉(线迹)沿着底部边缘装订文档。钉的确切数量和位置是实施和/或位置定义的。
+     * 
      */
     public static final Finishings STAPLE_DUAL_LEFT =
         new Finishings(28);
@@ -334,6 +532,9 @@ public class Finishings extends EnumSyntax
     /**
      * Bind the document(s) with two staples (wire stitches) along the top
      * edge assuming a portrait document (see above).
+     * <p>
+     *  使用两个订书钉(线迹)沿左边缘装订文档,假定有纵向文档(见上文)。
+     * 
      */
     public static final Finishings STAPLE_DUAL_TOP =
         new Finishings(29);
@@ -341,6 +542,9 @@ public class Finishings extends EnumSyntax
     /**
      * Bind the document(s) with two staples (wire stitches) along the right
      * edge assuming a portrait document (see above).
+     * <p>
+     *  使用两个订书钉(线迹)沿顶边装订文档,假定有纵向文档(见上文)。
+     * 
      */
     public static final Finishings STAPLE_DUAL_RIGHT =
         new Finishings(30);
@@ -348,6 +552,9 @@ public class Finishings extends EnumSyntax
     /**
      * Bind the document(s) with two staples (wire stitches) along the bottom
      * edge assuming a portrait document (see above).
+     * <p>
+     *  使用两个订书钉(线迹)沿着右边缘装订文档,假定为纵向文档(见上文)。
+     * 
      */
     public static final Finishings STAPLE_DUAL_BOTTOM =
         new Finishings(31);
@@ -356,6 +563,10 @@ public class Finishings extends EnumSyntax
      * Construct a new finishings binding enumeration value with the given
      * integer value.
      *
+     * <p>
+     *  使用两个订书钉(线迹)沿底边装订文档,假定有纵向文档(见上文)。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected Finishings(int value) {
@@ -428,6 +639,9 @@ public class Finishings extends EnumSyntax
 
     /**
      * Returns the string table for class Finishings.
+     * <p>
+     *  使用给定的整数值构造新的完成绑定枚举值。
+     * 
      */
     protected String[] getStringTable() {
         return (String[])myStringTable.clone();
@@ -435,6 +649,9 @@ public class Finishings extends EnumSyntax
 
     /**
      * Returns the enumeration value table for class Finishings.
+     * <p>
+     *  返回类Finishings的字符串表。
+     * 
      */
     protected EnumSyntax[] getEnumValueTable() {
         return (EnumSyntax[])myEnumValueTable.clone();
@@ -442,6 +659,9 @@ public class Finishings extends EnumSyntax
 
     /**
      * Returns the lowest integer value used by class Finishings.
+     * <p>
+     *  返回类Finishings的枚举值表。
+     * 
      */
     protected int getOffset() {
         return 3;
@@ -454,6 +674,10 @@ public class Finishings extends EnumSyntax
      * For class Finishings and any vendor-defined subclasses, the
      * category is class Finishings itself.
      *
+     * <p>
+     * 返回类Finishings使用的最小整数值。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -468,6 +692,12 @@ public class Finishings extends EnumSyntax
      * For class Finishings and any vendor-defined subclasses, the
      * category name is <CODE>"finishings"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于类Finishings和任何供应商定义的子类,类别是类Finishings本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

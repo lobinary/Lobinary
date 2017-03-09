@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import static java.util.zip.ZipUtils.*;
  * ZIP file format. Includes support for both compressed and uncompressed
  * entries.
  *
+ * <p>
+ *  这个类实现了一个输出流过滤器,用于以ZIP文件格式写入文件。包括对压缩和未压缩条目的支持。
+ * 
+ * 
  * @author      David Connelly
  */
 public
@@ -51,6 +56,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
      * read by legacy zip implementations which tolerate "incorrect"
      * total entry count fields, such as the ones in jdk6, and even
      * some in jdk7.
+     * <p>
+     *  是否对ZIP文件使用ZIP64超过64k条目。
+     * 直到zip64实现中的ZIP64支持是普遍存在的,这个系统属性允许创建zip文件,可以通过旧的zip实现读取,它允许"不正确"的总计数字段,如jdk6中的,甚至一些在jdk7。
+     * 
      */
     private static final boolean inhibitZip64 =
         Boolean.parseBoolean(
@@ -92,6 +101,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /**
      * Checks to make sure that this stream has not been closed.
+     * <p>
+     *  检查以确保此流未关闭。
+     * 
      */
     private void ensureOpen() throws IOException {
         if (closed) {
@@ -100,11 +112,17 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
     }
     /**
      * Compression method for uncompressed (STORED) entries.
+     * <p>
+     *  未压缩(STORED)条目的压缩方法。
+     * 
      */
     public static final int STORED = ZipEntry.STORED;
 
     /**
      * Compression method for compressed (DEFLATED) entries.
+     * <p>
+     *  压缩方法用于压缩(DEFLATED)条目。
+     * 
      */
     public static final int DEFLATED = ZipEntry.DEFLATED;
 
@@ -114,6 +132,12 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
      * <p>The UTF-8 {@link java.nio.charset.Charset charset} is used
      * to encode the entry names and comments.
      *
+     * <p>
+     *  创建新的ZIP输出流。
+     * 
+     *  <p> UTF-8 {@link java.nio.charset.Charset charset}用于对条目名称和注释进行编码。
+     * 
+     * 
      * @param out the actual output stream
      */
     public ZipOutputStream(OutputStream out) {
@@ -123,6 +147,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
     /**
      * Creates a new ZIP output stream.
      *
+     * <p>
+     *  创建新的ZIP输出流。
+     * 
+     * 
      * @param out the actual output stream
      *
      * @param charset the {@linkplain java.nio.charset.Charset charset}
@@ -140,6 +168,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /**
      * Sets the ZIP file comment.
+     * <p>
+     *  设置ZIP文件注释。
+     * 
+     * 
      * @param comment the comment string
      * @exception IllegalArgumentException if the length of the specified
      *            ZIP file comment is greater than 0xFFFF bytes
@@ -156,6 +188,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
      * Sets the default compression method for subsequent entries. This
      * default will be used whenever the compression method is not specified
      * for an individual ZIP file entry, and is initially set to DEFLATED.
+     * <p>
+     *  设置后续条目的默认压缩方法。每当未对单个ZIP文件条目指定压缩方法时,将使用此默认值,并且初始设置为DEFLATED。
+     * 
+     * 
      * @param method the default compression method
      * @exception IllegalArgumentException if the specified compression method
      *            is invalid
@@ -170,6 +206,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
     /**
      * Sets the compression level for subsequent entries which are DEFLATED.
      * The default setting is DEFAULT_COMPRESSION.
+     * <p>
+     *  设置后续条目(DEFLATED)的压缩级别。默认设置为DEFAULT_COMPRESSION。
+     * 
+     * 
      * @param level the compression level (0-9)
      * @exception IllegalArgumentException if the compression level is invalid
      */
@@ -183,6 +223,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
      * The default compression method will be used if no compression method
      * was specified for the entry, and the current time will be used if
      * the entry has no set modification time.
+     * <p>
+     * 开始编写新的ZIP文件条目,并将流定位到条目数据的开头。关闭当前条目(如果仍处于活动状态)。如果没有为条目指定压缩方法,则将使用默认压缩方法,如果条目没有设置修改时间,则将使用当前时间。
+     * 
+     * 
      * @param e the ZIP entry to be written
      * @exception ZipException if a ZIP format error has occurred
      * @exception IOException if an I/O error has occurred
@@ -242,6 +286,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
     /**
      * Closes the current ZIP entry and positions the stream for writing
      * the next entry.
+     * <p>
+     *  关闭当前ZIP条目并定位流以写入下一个条目。
+     * 
+     * 
      * @exception ZipException if a ZIP format error has occurred
      * @exception IOException if an I/O error has occurred
      */
@@ -307,6 +355,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
     /**
      * Writes an array of bytes to the current ZIP entry data. This method
      * will block until all the bytes are written.
+     * <p>
+     *  将字节数组写入当前ZIP条目数据。此方法将阻塞,直到写入所有字节。
+     * 
+     * 
      * @param b the data to be written
      * @param off the start offset in the data
      * @param len the number of bytes that are written
@@ -349,6 +401,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
      * Finishes writing the contents of the ZIP output stream without closing
      * the underlying stream. Use this method when applying multiple filters
      * in succession to the same output stream.
+     * <p>
+     *  完成写入ZIP输出流的内容,而不关闭底层流。当将多个过滤器连续应用于同一输出流时,请使用此方法。
+     * 
+     * 
      * @exception ZipException if a ZIP file error has occurred
      * @exception IOException if an I/O exception has occurred
      */
@@ -370,6 +426,10 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /**
      * Closes the ZIP output stream as well as the stream being filtered.
+     * <p>
+     *  关闭ZIP输出流以及正在过滤的流。
+     * 
+     * 
      * @exception ZipException if a ZIP file error has occurred
      * @exception IOException if an I/O error has occurred
      */
@@ -382,6 +442,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Writes local file (LOC) header for specified entry.
+     * <p>
+     *  为指定的条目写入本地文件(LOC)标题。
+     * 
      */
     private void writeLOC(XEntry xentry) throws IOException {
         ZipEntry e = xentry.entry;
@@ -470,6 +533,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Writes extra data descriptor (EXT) for specified entry.
+     * <p>
+     *  为指定的条目写入额外数据描述符(EXT)。
+     * 
      */
     private void writeEXT(ZipEntry e) throws IOException {
         writeInt(EXTSIG);           // EXT header signature
@@ -486,6 +552,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
     /*
      * Write central directory (CEN) header for specified entry.
      * REMIND: add support for file attributes
+     * <p>
+     *  写入指定条目的中心目录(CEN)标题。 REMIND：添加对文件属性的支持
+     * 
      */
     private void writeCEN(XEntry xentry) throws IOException {
         ZipEntry e  = xentry.entry;
@@ -596,6 +665,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Writes end of central directory (END) header.
+     * <p>
+     *  写中心目录(END)标题的结尾。
+     * 
      */
     private void writeEND(long off, long len) throws IOException {
         boolean hasZip64 = false;
@@ -653,6 +725,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Returns the length of extra data without EXTT and ZIP64.
+     * <p>
+     *  返回没有EXTT和ZIP64的额外数据的长度。
+     * 
      */
     private int getExtraLen(byte[] extra) {
         if (extra == null)
@@ -679,6 +754,11 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
      *
      * Extra timestamp and ZIP64 data is handled/output separately
      * in writeLOC and writeCEN.
+     * <p>
+     *  写入EXTT和ZIP64的额外数据。
+     * 
+     *  额外的时间戳和ZIP64数据在writeLOC和writeCEN中单独处理/输出。
+     * 
      */
     private void writeExtra(byte[] extra) throws IOException {
         if (extra != null) {
@@ -704,6 +784,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Writes a 8-bit byte to the output stream.
+     * <p>
+     *  将8位字节写入输出流。
+     * 
      */
     private void writeByte(int v) throws IOException {
         OutputStream out = this.out;
@@ -713,6 +796,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Writes a 16-bit short to the output stream in little-endian byte order.
+     * <p>
+     *  以小端字节顺序将16位短路写入输出流。
+     * 
      */
     private void writeShort(int v) throws IOException {
         OutputStream out = this.out;
@@ -723,6 +809,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Writes a 32-bit int to the output stream in little-endian byte order.
+     * <p>
+     *  以小端字节顺序将32位int写入输出流。
+     * 
      */
     private void writeInt(long v) throws IOException {
         OutputStream out = this.out;
@@ -735,6 +824,9 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Writes a 64-bit int to the output stream in little-endian byte order.
+     * <p>
+     *  以小端字节顺序将64位int写入输出流。
+     * 
      */
     private void writeLong(long v) throws IOException {
         OutputStream out = this.out;
@@ -751,6 +843,8 @@ class ZipOutputStream extends DeflaterOutputStream implements ZipConstants {
 
     /*
      * Writes an array of bytes to the output stream.
+     * <p>
+     * 将一个字节数组写入输出流。
      */
     private void writeBytes(byte[] b, int off, int len) throws IOException {
         super.out.write(b, off, len);

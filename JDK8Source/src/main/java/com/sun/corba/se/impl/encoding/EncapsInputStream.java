@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,12 @@ import sun.corba.EncapsInputStreamFactory;
  *
  * When more encapsulations arise that have their own special code
  * sets defined, we can make all constructors take such parameters.
+ * <p>
+ *  封装应该明确定义他们的代码集和GIOP版本。发出2784的原始解决方案说,默认值是UTF-8和UTF-16,但是没有商定。
+ * 
+ *  这些流目前使用CDR 1.2,其中ISO8859-1用于char / string,UTF16用于wchar / wstring。如果没有字节顺序标记可用,则使用封装的字节顺序。
+ * 
+ *  当更多的封装出现时,它们有自己的特殊代码集定义,我们可以使所有构造函数采用这样的参数。
  */
 public class EncapsInputStream extends CDRInputStream
 {
@@ -125,6 +132,8 @@ public class EncapsInputStream extends CDRInputStream
      * unmarshaling RMI-IIOP valuetypes (technically against the
      * intention of an encapsulation, but necessary due to OMG
      * issue 4795.  Used by ServiceContexts.
+     * <p>
+     * 
      */
     public EncapsInputStream(org.omg.CORBA.ORB orb,
                              byte[] data,

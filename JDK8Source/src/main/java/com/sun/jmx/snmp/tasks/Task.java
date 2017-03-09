@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 // NPCTE fix for bugId 4510777, esc 532372, MR October 2001
 // file Task.java created for this bug fix
 /*
@@ -51,6 +52,17 @@ package com.sun.jmx.snmp.tasks;
  * which it will be executed.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此接口由可由{@link com.sun.jmx.snmp.tasks.TaskServer}执行的对象实现。
+ *  <p> <code> Task </code>对象实现两种方法：<ul> <li> <code> public void run()：</code> from {@link java.lang.Runnable}
+ *  <ul>此方法由{@link com.sun.jmx.snmp.tasks.TaskServer}在执行任务时调用。
+ *  此接口由可由{@link com.sun.jmx.snmp.tasks.TaskServer}执行的对象实现。
+ * </ul> <li> <code> public void cancel()：</code> </li> <ul>此方法由{@link com.sun.jmx.snmp.tasks.TaskServer}
+ * 调用,如果<code> TaskServer </code>在<code> Task </code> </ul>。
+ *  此接口由可由{@link com.sun.jmx.snmp.tasks.TaskServer}执行的对象实现。
+ * </ul>
+ *  {@link com.sun.jmx.snmp.tasks.TaskServer}的实现应调用<code> run()</code>或<code> cancel()</code>。
+ * 
  * @see com.sun.jmx.snmp.tasks.TaskServer
  *
  * @since 1.5
@@ -62,6 +74,12 @@ public interface Task extends Runnable {
      * It could involve some message logging, or even call the run() method.
      * Note that only one of run() or cancel() will be called - and exactly
      * one.
+     * <p>
+     * 是否在当前线程中同步执行任务(在调用<code> TaskServer.submitTask()</code>或在专用于任务的新线程中或在守护线程中时)取决于<code> <p> <code> Task
+     *  </code>的实现不能对执行任务的<code> TaskServer </code>执行任何假设。
+     *  {@link com.sun.jmx.snmp.tasks.TaskServer}的实现应调用<code> run()</code>或<code> cancel()</code>。 。
+     * <p> <b>此API是Sun Microsystems内部API,如有更改,恕不另行通知。</b> </p>。
+     * 
      **/
     public void cancel();
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -76,6 +77,29 @@ import java.util.concurrent.ForkJoinPool;
  * <p>Serialization is not supported as there is no intention to serialize
  * tasks managed by stream ops.
  *
+ * <p>
+ *  用于实现流操作的大多数fork-join任务的抽象基类。管理分割逻辑,跟踪子任务和中间结果。
+ * 每个任务都与{@link Spliterator}相关联,该{@link Spliterator}描述与以此任务为根的子树相关联的输入部分。
+ * 任务可以是叶节点(其将遍历{@code Spliterator}的元素)或内部节点(其将{@code Spliterator}分割成多个子任务)。
+ * 
+ *  @implNote <p>此类基于{@link CountedCompleter},一种fork-join任务形式,其中每个任务都有未完成子项的类似信号量的计数,并且该任务隐式完成并在其最后一个子完成
+ * 时通知。
+ * 内部节点任务可能会覆盖{@code CountedCompleter}中的{@code onCompletion}方法,将子任务的结果合并到当前任务的结果中。
+ * 
+ *  <p>分割和设置子任务链接是通过内部节点的{@code compute()}完成的。
+ * 在叶节点的{@code compute()}时间,保证为所有子节点设置父节点的子节点相关字段(包括父节点子节点的兄弟节点链接)。
+ * 
+ * <p>例如,执行reduce的任务将覆盖{@code doLeaf()},以使用{@code Spliterator}对该叶节点的块执行缩减,并覆盖{@code onCompletion()}以合并内部
+ * 节点的子任务的结果：。
+ * 
+ *  <pre> {@ code protected S doLeaf(){spliterator.forEach(...); return localReductionResult; }}
+ * 
+ *  public void onCompletion(CountedCompleter caller){if(！isLeaf()){ReduceTask <P_IN,P_OUT,T,R> child = children; R result = child.getLocalResult(); child = child.nextSibling; for(; child！= null; child = child.nextSibling)result = combine(result,child.getLocalResult()); setLocalResult(result); }
+ * }} </pre>。
+ * 
+ *  <p>不支持序列化,因为不打算序列化由流操作管理的任务。
+ * 
+ * 
  * @param <P_IN> Type of elements input to the pipeline
  * @param <P_OUT> Type of elements output from the pipeline
  * @param <R> Type of intermediate result, which may be different from operation
@@ -93,6 +117,9 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * To allow load balancing, we over-partition, currently to approximately
      * four tasks per processor, which enables others to help out
      * if leaf tasks are uneven or some processors are otherwise busy.
+     * <p>
+     *  并行分解叶任务的默认目标因子。为了允许负载平衡,我们过分割,目前每个处理器大约有四个任务,这使得其他人能够帮助叶片任务不均匀或者一些处理器另外忙。
+     * 
      */
     static final int LEAF_TARGET = ForkJoinPool.getCommonPoolParallelism() << 2;
 
@@ -102,6 +129,9 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * The spliterator for the portion of the input associated with the subtree
      * rooted at this task
+     * <p>
+     *  与根据此任务的子树相关联的输入部分的分割器
+     * 
      */
     protected Spliterator<P_IN> spliterator;
 
@@ -112,6 +142,9 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * The left child.
      * null if no children
      * if non-null rightChild is non-null
+     * <p>
+     *  左孩子。 null如果没有孩子,如果非空rightChild是非空的
+     * 
      */
     protected K leftChild;
 
@@ -119,6 +152,9 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * The right child.
      * null if no children
      * if non-null leftChild is non-null
+     * <p>
+     *  正确的孩子。 null如果没有孩子,如果非空的leftChild是非空的
+     * 
      */
     protected K rightChild;
 
@@ -128,6 +164,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * Constructor for root nodes.
      *
+     * <p>
+     *  根节点的构造函数。
+     * 
+     * 
      * @param helper The {@code PipelineHelper} describing the stream pipeline
      *               up to this operation
      * @param spliterator The {@code Spliterator} describing the source for this
@@ -144,6 +184,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * Constructor for non-root nodes.
      *
+     * <p>
+     *  非根节点的构造方法。
+     * 
+     * 
      * @param parent this node's parent task
      * @param spliterator {@code Spliterator} describing the subtree rooted at
      *        this node, obtained by splitting the parent {@code Spliterator}
@@ -161,6 +205,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * the AbstractTask(T, Spliterator) constructor with the receiver and the
      * provided Spliterator.
      *
+     * <p>
+     *  构造一个类型T的新节点,其父节点是接收者;必须使用接收器和提供的Spliterator调用AbstractTask(T,Spliterator)构造函数。
+     * 
+     * 
      * @param spliterator {@code Spliterator} describing the subtree rooted at
      *        this node, obtained by splitting the parent {@code Spliterator}
      * @return newly constructed child node
@@ -171,6 +219,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * Computes the result associated with a leaf node.  Will be called by
      * {@code compute()} and the result passed to @{code setLocalResult()}
      *
+     * <p>
+     * 计算与叶节点相关联的结果。将由{@code compute()}调用,并将结果传递给@ {code setLocalResult()}
+     * 
+     * 
      * @return the computed result of a leaf node
      */
     protected abstract R doLeaf();
@@ -178,6 +230,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * Returns a suggested target leaf size based on the initial size estimate.
      *
+     * <p>
+     *  基于初始大小估计值返回建议的目标叶大小。
+     * 
+     * 
      * @return suggested target leaf size
      */
     public static long suggestTargetSize(long sizeEstimate) {
@@ -188,6 +244,9 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * Returns the targetSize, initializing it via the supplied
      * size estimate if not already initialized.
+     * <p>
+     *  返回targetSize,如果尚未初始化,则通过提供的大小估计值对其进行初始化。
+     * 
      */
     protected final long getTargetSize(long sizeEstimate) {
         long s;
@@ -201,6 +260,11 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * results.  This returns the local result so that calls from within the
      * fork-join framework will return the correct result.
      *
+     * <p>
+     *  返回本地结果(如果有)。子类应使用{@link #setLocalResult(Object)}和{@link #getLocalResult()}来管理结果。
+     * 这将返回本地结果,以便来自fork-join框架的调用将返回正确的结果。
+     * 
+     * 
      * @return local result for this node previously stored with
      * {@link #setLocalResult}
      */
@@ -213,6 +277,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * Does nothing; instead, subclasses should use
      * {@link #setLocalResult(Object)}} to manage results.
      *
+     * <p>
+     *  什么也没做;相反,子类应该使用{@link #setLocalResult(Object)}}来管理结果。
+     * 
+     * 
      * @param result must be null, or an exception is thrown (this is a safety
      *        tripwire to detect when {@code setRawResult()} is being used
      *        instead of {@code setLocalResult()}
@@ -226,6 +294,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * Retrieves a result previously stored with {@link #setLocalResult}
      *
+     * <p>
+     *  检索先前使用{@link #setLocalResult}存储的结果
+     * 
+     * 
      * @return local result for this node previously stored with
      * {@link #setLocalResult}
      */
@@ -237,6 +309,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * Associates the result with the task, can be retrieved with
      * {@link #getLocalResult}
      *
+     * <p>
+     *  将结果与任务相关联,可以使用{@link #getLocalResult}
+     * 
+     * 
      * @param localResult local result for this node
      */
     protected void setLocalResult(R localResult) {
@@ -249,6 +325,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * leaf node, then children will be non-null and numChildren will be
      * positive.
      *
+     * <p>
+     *  指示此任务是否为叶节点。 (仅在此节点上调用{@link #compute}后生效)。如果节点不是叶节点,则子节点将是非空的,numChildren将是正值。
+     * 
+     * 
      * @return {@code true} if this task is a leaf node
      */
     protected boolean isLeaf() {
@@ -258,6 +338,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * Indicates whether this task is the root node
      *
+     * <p>
+     *  指示此任务是否为根节点
+     * 
+     * 
      * @return {@code true} if this task is the root node.
      */
     protected boolean isRoot() {
@@ -267,6 +351,10 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * Returns the parent of this task, or null if this task is the root
      *
+     * <p>
+     *  返回此任务的父项,如果此任务是根,则返回null
+     * 
+     * 
      * @return the parent of this task, or null if this task is the root
      */
     @SuppressWarnings("unchecked")
@@ -286,6 +374,11 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * that may be systematically biased toward left-heavy or
      * right-heavy splits, we alternate which child is forked versus
      * continued in the loop.
+     * <p>
+     *  决定是否进一步拆分任务或直接计算。如果直接计算,调用{@code doLeaf}并将结果传递给{@code setRawResult}。否则拆分子任务,分叉并继续作为另一个。
+     * 
+     * <p>该方法被构造为节省跨越一系列使用的资源。当拆分时,循环继续执行其中一个子任务,以避免深度递归。为了应对可能被系统地偏向左重或右重分裂的分裂器,我们交替哪个子分叉而不是在循环中继续。
+     * 
      */
     @Override
     public void compute() {
@@ -324,6 +417,11 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * Clears spliterator and children fields.  Overriders MUST call
      * {@code super.onCompletion} as the last thing they do if they want these
      * cleared.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implNote清除spliterator和children字段。覆盖者必须调用{@code super.onCompletion}作为他们做的最后一件事,如果他们想要这些清除。
+     * 
      */
     @Override
     public void onCompletion(CountedCompleter<?> caller) {
@@ -336,6 +434,8 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * the root to this node involves only traversing leftmost child links.  For
      * a leaf node, this means it is the first leaf node in the encounter order.
      *
+     * <p>
+     * 
      * @return {@code true} if this node is a "leftmost" node
      */
     protected boolean isLeftmostNode() {

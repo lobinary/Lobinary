@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,11 @@ import sun.security.util.Password;
  * questions.
  * This can be used by a JAAS application to instantiate a
  * CallbackHandler
+ * <p>
+ * <p>
+ *  从命令行提示和读取认证问题的答案。这可以由JAAS应用程序用来实例化CallbackHandler
+ * 
+ * 
  * @see javax.security.auth.callback
  */
 
@@ -62,12 +68,18 @@ public class TextCallbackHandler implements CallbackHandler {
      * This can be used by JAAS applications to instantiate a
      * CallbackHandler.
 
+     * <p>
+     *  <p>创建一个回调处理程序,从命令行提示和读取认证问题的答案。这可以由JAAS应用程序用来实例化CallbackHandler。
+     * 
      */
     public TextCallbackHandler() { }
 
     /**
      * Handles the specified set of callbacks.
      *
+     * <p>
+     *  处理指定的回调集。
+     * 
      * @param callbacks the callbacks to handle
      * @throws IOException if an input or output error occurs.
      * @throws UnsupportedCallbackException if the callback is not an

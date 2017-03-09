@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,31 @@ import java.util.Arrays;
  *  information for the address fields, or omit setting of the addressing
  *  information.
  *
+ * <p>
+ *  这个类封装了调用者提供的通道绑定信息的概念。信道绑定用于加强在上下文建立期间提供对等实体认证的质量。它们使GSS-API调用者能够将安全上下文的建立绑定到相关特性,如地址或应用程序特定数据。<p>
+ * 
+ *  启动安全上下文的调用者必须确定在GSSContext对象中设置的适当的通道绑定值。接受者必须提供相同的绑定,以验证接收的令牌具有正确的信道相关特性
+ * 
+ *  在GSS-API中使用通道绑定是可选的。
+ * 可以在首次调用{@link GSSContext#initSecContext(byte [],int,int)initSecContext}或{@link GSSontext}之前使用{@link GSSContext#setChannelBinding(ChannelBinding)setChannelBinding}
+ * 方法为{@link GSSContext GSSContext}已经执行了@link GSSContext#acceptSecContext(byte [],int,int)acceptSecConte
+ * xt}。
+ *  在GSS-API中使用通道绑定是可选的。
+ * 除非已经使用<code> setChannelBinding </code>方法为GSSContext对象设置ChannelBinding,将假设<code> null </code> ChannelB
+ * inding。
+ *  在GSS-API中使用通道绑定是可选的。 <p>。
+ * 
+ * 从概念上讲,GSS-API将启动器和接受器地址信息以及应用程序提供的字节数组连接起来,形成一个字节串。
+ * 该机制计算该八位字节串上的MIC,并将MIC绑定到由<code> GSSContext </code>接口的<code> initSecContext </code>方法发出的上下文建立令牌。
+ * 相同的绑定由上下文接受器为其<code> GSSContext </code>对象设置,并且在<code> acceptSecContext </code>方法的处理期间,MIC以相同的方式计算。
+ * 将计算的MIC与令牌中发现的MIC进行比较,如果MIC不同,则接受将抛出一个主代码设置为{@link GSSException#BAD_BINDINGS BAD_BINDINGS}的<code> GSS
+ * Exception </code>,并且上下文不会成立。
+ * 相同的绑定由上下文接受器为其<code> GSSContext </code>对象设置,并且在<code> acceptSecContext </code>方法的处理期间,MIC以相同的方式计算。
+ * 一些机制可以包括令牌中的实际信道绑定数据(而不仅仅是MIC);应用程序因此不应使用机密数据作为通道绑定组件。<p>。
+ * 
+ *  个别机制可以对可能出现在信道绑定中的地址施加额外的约束。例如,机制可以验证信道绑定的发起方地址字段包含主机系统的正确网络地址。
+ * 因此,便携式应用程序应确保它们为地址字段提供正确的信息,或者省略寻址信息的设置。
+ * 
  * @author Mayank Upadhyay
  * @since 1.4
  */
@@ -88,6 +114,9 @@ public class ChannelBinding {
      * and data.  <code>null</code> values can be used for any fields which the
      * application does not want to specify.
      *
+     * <p>
+     * 
+     * 
      * @param initAddr the address of the context initiator.
      * <code>null</code> value can be supplied to indicate that the
      * application does not want to set this value.
@@ -114,6 +143,10 @@ public class ChannelBinding {
     /**
      * Creates a ChannelBinding object without any addressing information.
      *
+     * <p>
+     * 使用用户提供的地址信息和数据创建ChannelBinding对象。 <code> null </code>值可用于应用程序不想指定的任何字段。
+     * 
+     * 
      * @param appData application supplied data to be used as part of the
      * channel bindings.
      */
@@ -124,6 +157,10 @@ public class ChannelBinding {
     /**
      * Get the initiator's address for this channel binding.
      *
+     * <p>
+     *  创建一个没有任何地址信息的ChannelBinding对象。
+     * 
+     * 
      * @return the initiator's address. <code>null</code> is returned if
      * the address has not been set.
      */
@@ -134,6 +171,10 @@ public class ChannelBinding {
     /**
      * Get the acceptor's address for this channel binding.
      *
+     * <p>
+     *  获取此通道绑定的启动程序地址。
+     * 
+     * 
      * @return the acceptor's address. null is returned if the address has
      * not been set.
      */
@@ -144,6 +185,10 @@ public class ChannelBinding {
     /**
      * Get the application specified data for this channel binding.
      *
+     * <p>
+     *  获取此频道绑定的接受者地址。
+     * 
+     * 
      * @return the application data being used as part of the
      * ChannelBinding. <code>null</code> is returned if no application data
      * has been specified for the channel binding.
@@ -162,6 +207,10 @@ public class ChannelBinding {
     /**
      * Compares two instances of ChannelBinding.
      *
+     * <p>
+     *  获取该通道绑定的应用程序指定数据。
+     * 
+     * 
      * @param obj another ChannelBinding to compare this one with
      * @return true if the two ChannelBinding's contain
      * the same values for the initiator and acceptor addresses and the
@@ -197,6 +246,10 @@ public class ChannelBinding {
     /**
      * Returns a hashcode value for this ChannelBinding object.
      *
+     * <p>
+     *  比较两个ChannelBinding实例。
+     * 
+     * 
      * @return a hashCode value
      */
     public int hashCode() {

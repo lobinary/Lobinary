@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.util.*;
  * private key). It does not enforce any security, and, when initialized,
  * should be treated like a PrivateKey.
  *
+ * <p>
+ *  此类是密钥对(公钥和私钥)的简单持有者。它不强制执行任何安全性,并且,当初始化时,应该像一个PrivateKey。
+ * 
+ * 
  * @see PublicKey
  * @see PrivateKey
  *
@@ -52,6 +57,12 @@ public final class KeyPair implements java.io.Serializable {
      * and private key components in the generated key pair. This is safe,
      * because {@code Key} objects are immutable.
      *
+     * <p>
+     *  根据给定的公钥和私钥构造密钥对。
+     * 
+     *  <p>请注意,此构造函数仅存储对生成的密钥对中的公钥和私钥组件的引用。这是安全的,因为{@code Key}对象是不可变的。
+     * 
+     * 
      * @param publicKey the public key.
      *
      * @param privateKey the private key.
@@ -64,6 +75,10 @@ public final class KeyPair implements java.io.Serializable {
     /**
      * Returns a reference to the public key component of this key pair.
      *
+     * <p>
+     *  返回对此密钥对的公钥组件的引用。
+     * 
+     * 
      * @return a reference to the public key.
      */
     public PublicKey getPublic() {
@@ -73,6 +88,9 @@ public final class KeyPair implements java.io.Serializable {
      /**
      * Returns a reference to the private key component of this key pair.
      *
+     * <p>
+     *  返回对此密钥对的私钥组件的引用。
+     * 
      * @return a reference to the private key.
      */
    public PrivateKey getPrivate() {

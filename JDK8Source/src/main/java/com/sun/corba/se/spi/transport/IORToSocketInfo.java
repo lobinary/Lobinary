@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,9 @@ public interface IORToSocketInfo
     /**
      * Used to extract socket address information from an IOR.
      *
+     * <p>
+     *  用于从IOR提取套接字地址信息。
+     * 
      * @param ior.
      *
      * @return List - a list of SocketInfo.

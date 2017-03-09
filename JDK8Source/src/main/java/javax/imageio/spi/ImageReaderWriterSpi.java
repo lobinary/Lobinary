@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import javax.imageio.stream.ImageInputStream;
  * A superclass containing instance variables and methods common to
  * <code>ImageReaderSpi</code> and <code>ImageWriterSpi</code>.
  *
+ * <p>
+ *  一个包含与<code> ImageReaderSpi </code>和<code> ImageWriterSpi </code>共同的实例变量和方法的超类。
+ * 
+ * 
  * @see IIORegistry
  * @see ImageReaderSpi
  * @see ImageWriterSpi
@@ -51,24 +56,36 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * An array of strings to be returned from
      * <code>getFormatNames</code>, initially <code>null</code>.
      * Constructors should set this to a non-<code>null</code> value.
+     * <p>
+     *  要从<code> getFormatNames </code>返回的字符串数组,最初为<code> null </code>。构造函数应将此值设置为非<code> null </code>值。
+     * 
      */
     protected String[] names = null;
 
     /**
      * An array of strings to be returned from
      * <code>getFileSuffixes</code>, initially <code>null</code>.
+     * <p>
+     *  要从<code> getFileSuffixes </code>返回的字符串数组,最初为<code> null </code>。
+     * 
      */
     protected String[] suffixes = null;
 
     /**
      * An array of strings to be returned from
      * <code>getMIMETypes</code>, initially <code>null</code>.
+     * <p>
+     *  要从<code> getMIMETypes </code>返回的字符串数组,最初为<code> null </code>。
+     * 
      */
     protected String[] MIMETypes = null;
 
     /**
      * A <code>String</code> containing the name of the associated
      * plug-in class, initially <code>null</code>.
+     * <p>
+     *  包含相关插件类名称的<code> String </code>,最初为<code> null </code>。
+     * 
      */
     protected String pluginClassName = null;
 
@@ -76,6 +93,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * A boolean indicating whether this plug-in supports the
      * standard metadata format for stream metadata, initially
      * <code>false</code>.
+     * <p>
+     *  一个布尔值,表示此插件是否支持流元数据的标准元数据格式,最初为<code> false </code>。
+     * 
      */
     protected boolean supportsStandardStreamMetadataFormat = false;
 
@@ -83,6 +103,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * A <code>String</code> containing the name of the native stream
      * metadata format supported by this plug-in, initially
      * <code>null</code>.
+     * <p>
+     *  包含此插件支持的本机流元数据格式的名称的<code> String </code>,最初为<code> null </code>。
+     * 
      */
     protected String nativeStreamMetadataFormatName = null;
 
@@ -90,6 +113,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * A <code>String</code> containing the class name of the native
      * stream metadata format supported by this plug-in, initially
      * <code>null</code>.
+     * <p>
+     *  包含此插件支持的本机流元数据格式的类名的<code> String </code>,最初为<code> null </code>。
+     * 
      */
     protected String nativeStreamMetadataFormatClassName = null;
 
@@ -97,6 +123,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * An array of <code>String</code>s containing the names of any
      * additional stream metadata formats supported by this plug-in,
      * initially <code>null</code>.
+     * <p>
+     *  一个<code> String </code>数组,包含此插件支持的任何附加流元数据格式的名称,最初为<code> null </code>。
+     * 
      */
     protected String[] extraStreamMetadataFormatNames = null;
 
@@ -104,6 +133,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * An array of <code>String</code>s containing the class names of
      * any additional stream metadata formats supported by this plug-in,
      * initially <code>null</code>.
+     * <p>
+     *  一个<code> String </code>数组,包含此插件支持的任何附加流元数据格式的类名,最初为<code> null </code>。
+     * 
      */
     protected String[] extraStreamMetadataFormatClassNames = null;
 
@@ -111,6 +143,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * A boolean indicating whether this plug-in supports the
      * standard metadata format for image metadata, initially
      * <code>false</code>.
+     * <p>
+     * 一个布尔值,表示此插件是否支持图像元数据的标准元数据格式,最初为<code> false </code>。
+     * 
      */
     protected boolean supportsStandardImageMetadataFormat = false;
 
@@ -118,6 +153,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * A <code>String</code> containing the name of the
      * native stream metadata format supported by this plug-in,
      * initially <code>null</code>.
+     * <p>
+     *  包含此插件支持的本机流元数据格式的名称的<code> String </code>,最初为<code> null </code>。
+     * 
      */
     protected String nativeImageMetadataFormatName = null;
 
@@ -125,6 +163,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * A <code>String</code> containing the class name of the
      * native stream metadata format supported by this plug-in,
      * initially <code>null</code>.
+     * <p>
+     *  包含此插件支持的本机流元数据格式的类名的<code> String </code>,最初为<code> null </code>。
+     * 
      */
     protected String nativeImageMetadataFormatClassName = null;
 
@@ -132,6 +173,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * An array of <code>String</code>s containing the names of any
      * additional image metadata formats supported by this plug-in,
      * initially <code>null</code>.
+     * <p>
+     *  包含此插件支持的任何其他图像元数据格式的名称的<code> String </code>数组,最初为<code> null </code>。
+     * 
      */
     protected String[] extraImageMetadataFormatNames = null;
 
@@ -139,6 +183,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * An array of <code>String</code>s containing the class names of
      * any additional image metadata formats supported by this
      * plug-in, initially <code>null</code>.
+     * <p>
+     *  包含此插件支持的任何其他图像元数据格式的类名称的<code> String </code>数组,最初为<code> null </code>。
+     * 
      */
     protected String[] extraImageMetadataFormatClassNames = null;
 
@@ -146,6 +193,10 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * Constructs an <code>ImageReaderWriterSpi</code> with a given
      * set of values.
      *
+     * <p>
+     *  用给定的一组值构造一个<code> ImageReaderWriterSpi </code>。
+     * 
+     * 
      * @param vendorName the vendor name, as a non-<code>null</code>
      * <code>String</code>.
      * @param version a version identifier, as a non-<code>null</code>
@@ -291,6 +342,9 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * to the subclass to initialize instance variables and/or
      * override method implementations in order to provide working
      * versions of all methods.
+     * <p>
+     *  构造一个空白<code> ImageReaderWriterSpi </code>。它是由子类初始化实例变量和/或覆盖方法实现为了提供所有方法的工作版本。
+     * 
      */
     public ImageReaderWriterSpi() {
     }
@@ -303,6 +357,12 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * example, a single <code>ImageReader</code> might be able to
      * process both PBM and PNM files.
      *
+     * <p>
+     *  返回包含与此服务提供商相关联的<code> ImageReader </code>或<code> ImageWriter </code>实现通常可用的格式的人类可读名称的<code> String </code>
+     * 数组。
+     * 例如,单个<code> ImageReader </code>可能能够处理PBM和PNM文件。
+     * 
+     * 
      * @return a non-<code>null</code> array of <code>String</code>s
      * or length at least 1 containing informal format names
      * associated with this reader or writer.
@@ -327,6 +387,15 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * may be worthwhile attempting to decode or encode such files
      * using this service provider.
      *
+     * <p>
+     * 返回一个包含与<code> ImageReader </code>或<code> ImageWriter </code>实现相关联的格式相关联的文件后缀列表的<code> String </code>服
+     * 务提供者。
+     * 例如,单个<code> ImageReader </code>可能能够处理具有'.pbm'和'.pnm'后缀或'.jpg'和'.jpeg'后缀的文件。
+     * 如果没有已知的文件后缀,将返回<code> null </code>。
+     * 
+     *  <p>返回特定后缀并不保证可以处理具有该后缀的文件;它仅仅指示可能值得尝试使用该服务提供商来解码或编码这样的文件。
+     * 
+     * 
      * @return an array of <code>String</code>s or length at least 1
      * containing common file suffixes associated with this reader or
      * writer, or <code>null</code>.
@@ -362,6 +431,18 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * indicates that it may be worthwhile attempting to decode or
      * encode such files using this service provider.
      *
+     * <p>
+     *  返回一个包含与<code> ImageReader </code>或<code> ImageWriter </code>实现相关联的格式相关联的MIME类型列表的<code> String </code>
+     * 服务提供者。
+     * 
+     * <p>理想情况下,为了描述特定的格式,只需要一个MIME类型。然而,由于几个原因,需要将类型列表与每个服务提供商相关联。
+     * 首先,许多常见的图像文件格式不具有标准MIME类型,因此将需要常用的非正式名称的列表,例如<code> image / x-pbm </code>和<code> image /位图</code>。
+     * 一些文件格式具有官方MIME类型,但有时可以使用他们以前的非正式名称,例如<code> image / x-png </code>而不是官方<code> image / png </code>来引用。
+     * 最后,单个服务提供者可以能够从MIME观点解析多个不同类型,例如<code> image / x-xbitmap </code>和<code> image / x-xpixmap </code>。
+     * 
+     *  <p>返回特定MIME类型并不保证可以处理声称为该类型的文件;它仅仅指示可能值得尝试使用该服务提供商来解码或编码这样的文件。
+     * 
+     * 
      * @return an array of <code>String</code>s or length at least 1
      * containing MIME types associated with this reader or writer, or
      * <code>null</code>.
@@ -375,6 +456,10 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * <code>ImageReader</code> or <code>ImageWriter</code> plug-in
      * associated with this service provider.
      *
+     * <p>
+     *  返回与此服务提供商相关联的<code> ImageReader </code>或<code> ImageWriter </code>插件的完全限定类名。
+     * 
+     * 
      * @return the class name, as a non-<code>null</code>
      * <code>String</code>.
      */
@@ -389,6 +474,11 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * the stream metadata objects produced or consumed by this
      * plug-in.
      *
+     * <p>
+     *  如果标准元数据格式是由<code> getAsTree </code>和<code> setFromTree </code>方法识别的流元数据对象生成或使用的流元数据对象的文档格式,则返回<code>
+     *  true </code>插入。
+     * 
+     * 
      * @return <code>true</code> if the standard format is supported
      * for stream metadata.
      */
@@ -407,6 +497,12 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * <code>nativeStreamMetadataFormatName</code> instance variable,
      * which is typically set by the constructor.
      *
+     * <p>
+     * 返回此插件的"本机"流元数据格式的名称,通常允许以此插件处理的格式存储的流元数据的无损编码和传输。如果不支持这种格式,将返回<code> null </code>。
+     * 
+     *  <p>默认实现返回<code> nativeStreamMetadataFormatName </code>实例变量,通常由构造函数设置。
+     * 
+     * 
      * @return the name of the native stream metadata format, or
      * <code>null</code>.
      *
@@ -435,6 +531,17 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * <code>extraStreamMetadataFormatNames</code> instance variable,
      * which is typically set by the constructor.
      *
+     * <p>
+     *  返回一个<code> String </code>数组,其中包含由<code> getAsTree </code>和<code> setFromTree </code>方法识别的其他文档格式的名称对由
+     * 此插件生成或使用的流元数据对象。
+     * 
+     *  <p>如果插件不处理元数据,应返回null。
+     * 
+     *  <p>格式集可能会根据正在读取或写入的特定图片而有所不同;此方法应指示插件在任何情况下支持的所有其他格式。
+     * 
+     *  <p>默认实现返回了一个克隆的<code> extraStreamMetadataFormatNames </code>实例变量,通常由构造函数设置。
+     * 
+     * 
      * @return an array of <code>String</code>s, or null.
      *
      * @see IIOMetadata#getMetadataFormatNames
@@ -453,6 +560,10 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * the image metadata objects produced or consumed by this
      * plug-in.
      *
+     * <p>
+     *  如果标准元数据格式是由<code> getAsTree </code>和<code> setFromTree </code>方法识别的文档格式,则返回<code> true </code>插入。
+     * 
+     * 
      * @return <code>true</code> if the standard format is supported
      * for image metadata.
      */
@@ -471,6 +582,12 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * <code>nativeImageMetadataFormatName</code> instance variable,
      * which is typically set by the constructor.
      *
+     * <p>
+     * 返回此插件的"本机"图像元数据格式的名称,通常允许以此插件处理的格式存储的图像元数据的无损编码和传输。如果不支持这种格式,将返回<code> null </code>。
+     * 
+     *  <p>默认实现返回<code> nativeImageMetadataFormatName </code>实例变量,通常由构造函数设置。
+     * 
+     * 
      * @return the name of the native image metadata format, or
      * <code>null</code>.
      *
@@ -499,6 +616,17 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * <code>extraImageMetadataFormatNames</code> instance variable,
      * which is typically set by the constructor.
      *
+     * <p>
+     *  返回一个<code> String </code>数组,其中包含由<code> getAsTree </code>和<code> setFromTree </code>方法识别的其他文档格式的名称对由
+     * 此插件生成或消耗的图像元数据对象。
+     * 
+     *  <p>如果插件不处理图像元数据,则应返回null。
+     * 
+     *  <p>格式集可能会根据正在读取或写入的特定图片而有所不同;此方法应指示插件在任何情况下支持的所有其他格式。
+     * 
+     *  <p>默认实现返回了一个克隆的<code> extraImageMetadataFormatNames </code>实例变量,通常由构造函数设置。
+     * 
+     * 
      * @return an array of <code>String</code>s, or null.
      *
      * @see IIOMetadata#getMetadataFormatNames
@@ -518,6 +646,8 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * or one of those returned by
      * <code>getExtraStreamMetadataFormatNames</code>.
      *
+     * <p>
+     * 
      * @param formatName the desired stream metadata format.
      *
      * @return an <code>IIOMetadataFormat</code> object.
@@ -542,6 +672,11 @@ public abstract class ImageReaderWriterSpi extends IIOServiceProvider {
      * or one of those returned by
      * <code>getExtraImageMetadataFormatNames</code>.
      *
+     * <p>
+     *  返回描述给定流元数据格式的<code> IIOMetadataFormat </code>对象,如果没有可用的描述,则返回<code> null </code>。
+     * 提供的名称必须是本机流元数据格式名称,标准元数据格式名称或<code> getExtraStreamMetadataFormatNames </code>返回的名称之一。
+     * 
+     * 
      * @param formatName the desired image metadata format.
      *
      * @return an <code>IIOMetadataFormat</code> object.

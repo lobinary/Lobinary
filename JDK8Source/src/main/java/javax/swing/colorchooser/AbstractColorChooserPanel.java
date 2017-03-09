@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,13 @@ import javax.swing.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  这是颜色选择器的抽象超类。如果你想添加一个新的颜色选择器面板到<code> JColorChooser </code>,这个类的子类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Tom Santos
  * @author Steve Wilson
  */
@@ -60,6 +68,7 @@ public abstract class AbstractColorChooserPanel extends JPanel {
 
     /**
      *
+     * <p>
      */
     private JColorChooser chooser;
 
@@ -68,16 +77,27 @@ public abstract class AbstractColorChooserPanel extends JPanel {
       * It is also called by <code>installChooserPanel</code> to allow
       * you to set up the initial state of your chooser.
       * Override this method to update your <code>ChooserPanel</code>.
+      * <p>
+      *  当模型的状态更改时自动调用。它也被<code> installChooserPanel </code>调用以允许您设置选择器的初始状态。
+      * 覆盖此方法以更新您的<code> ChooserPanel </code>。
+      * 
       */
     public abstract void updateChooser();
 
     /**
      * Builds a new chooser panel.
+     * <p>
+     *  构建新的选择器面板。
+     * 
      */
     protected abstract void buildChooser();
 
     /**
      * Returns a string containing the display name of the panel.
+     * <p>
+     *  返回包含面板的显示名称的字符串。
+     * 
+     * 
      * @return the name of the display panel
      */
     public abstract String getDisplayName();
@@ -94,6 +114,14 @@ public abstract class AbstractColorChooserPanel extends JPanel {
      * <code>AbstractColorChooserPanel</code> does not support a mnemonic,
      * subclasses wishing a mnemonic will need to override this.
      *
+     * <p>
+     *  提供了对可以用作访问面板的助记符的<code> KeyEvent.VK </code>常量的外观和感觉的提示。返回值<= 0表示没有助记符。
+     * <p>
+     *  这里的返回值是一个提示,它最终取决于外观和感觉,以一些有意义的方式来兑现返回值。
+     * <p>
+     * 此实现返回0,表示<code> AbstractColorChooserPanel </code>不支持助记符,希望助记符的子类将需要覆盖此。
+     * 
+     * 
      * @return KeyEvent.VK constant identifying the mnemonic; &lt;= 0 for no
      *         mnemonic
      * @see #getDisplayedMnemonicIndex
@@ -120,6 +148,18 @@ public abstract class AbstractColorChooserPanel extends JPanel {
      * <code>AbstractColorChooserPanel</code> does not support a mnemonic,
      * subclasses wishing a mnemonic will need to override this.
      *
+     * <p>
+     *  提供对<code> getDisplayName </code>中应该被视觉识别为助记符的字符的索引的外观和感觉的提示。
+     * 只有在<code> getMnemonic </code>返回一个值&gt; 0。
+     * <p>
+     *  这里的返回值是一个提示,它最终取决于外观和感觉,以一些有意义的方式来兑现返回值。
+     * 例如,一个外观和感觉可能希望在<code> JTabbedPane </code>中呈现每个<code> AbstractColorChooserPanel </code>,并进一步使用此返回值来强调<code>
+     *  getDisplayName </code >。
+     *  这里的返回值是一个提示,它最终取决于外观和感觉,以一些有意义的方式来兑现返回值。
+     * <p>
+     *  此实现返回-1,表示<code> AbstractColorChooserPanel </code>不支持助记符,希望助记符的子类将需要覆盖此。
+     * 
+     * 
      * @return Character index to render mnemonic for; -1 to provide no
      *                   visual identifier for this panel.
      * @see #getMnemonic
@@ -131,12 +171,20 @@ public abstract class AbstractColorChooserPanel extends JPanel {
 
     /**
      * Returns the small display icon for the panel.
+     * <p>
+     *  返回面板的小显示图标。
+     * 
+     * 
      * @return the small display icon
      */
     public abstract Icon getSmallDisplayIcon();
 
     /**
      * Returns the large display icon for the panel.
+     * <p>
+     *  返回面板的大显示图标。
+     * 
+     * 
      * @return the large display icon
      */
     public abstract Icon getLargeDisplayIcon();
@@ -144,6 +192,10 @@ public abstract class AbstractColorChooserPanel extends JPanel {
     /**
      * Invoked when the panel is added to the chooser.
      * If you override this, be sure to call <code>super</code>.
+     * <p>
+     *  将面板添加到选择器时调用。如果你重写这个,一定要调用<code> super </code>。
+     * 
+     * 
      * @param enclosingChooser  the panel to be added
      * @exception RuntimeException  if the chooser panel has already been
      *                          installed
@@ -162,6 +214,9 @@ public abstract class AbstractColorChooserPanel extends JPanel {
     /**
      * Invoked when the panel is removed from the chooser.
      * If override this, be sure to call <code>super</code>.
+     * <p>
+     *  当面板从选择器中移除时调用。如果覆盖这个,一定要调用<code> super </code>。
+     * 
      */
   public void uninstallChooserPanel(JColorChooser enclosingChooser) {
         chooser.removePropertyChangeListener("enabled", enabledListener);
@@ -170,6 +225,10 @@ public abstract class AbstractColorChooserPanel extends JPanel {
 
     /**
       * Returns the model that the chooser panel is editing.
+      * <p>
+      *  返回选择器面板正在编辑的模型。
+      * 
+      * 
       * @return the <code>ColorSelectionModel</code> model this panel
       *         is editing
       */
@@ -181,6 +240,10 @@ public abstract class AbstractColorChooserPanel extends JPanel {
 
     /**
      * Returns the color that is currently selected.
+     * <p>
+     *  返回当前选择的颜色。
+     * 
+     * 
      * @return the <code>Color</code> that is selected
      */
     protected Color getColorFromModel() {
@@ -199,6 +262,10 @@ public abstract class AbstractColorChooserPanel extends JPanel {
 
     /**
      * Draws the panel.
+     * <p>
+     *  绘制面板。
+     * 
+     * 
      * @param g  the <code>Graphics</code> object
      */
     public void paint(Graphics g) {
@@ -210,6 +277,9 @@ public abstract class AbstractColorChooserPanel extends JPanel {
      * not map to a valid <code>Integer</code>, <code>default</code> is
      * returned.
      *
+     * <p>
+     * 从defaults表返回一个整数。如果<code>键</code>未映射到有效的<code> Integer </code>,则会返回<code> default </code>。
+     * 
      * @param key  an <code>Object</code> specifying the int
      * @param defaultValue Returned value if <code>key</code> is not available,
      *                     or is not an Integer

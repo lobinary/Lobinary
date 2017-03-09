@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.signature;
 
@@ -74,6 +83,17 @@ import org.w3c.dom.Text;
  * ObjectContainer during signing.</li>
  * <li>sign and checkSignatureValue methods are used to sign and validate the
  * signature. </li></ul>
+ * <p>
+ *  处理<code>&lt; ds：Signature&gt; </code>元素。这是处理创建和验证签名的主要类。
+ * 
+ *  <p>这个类有两种类型的构造函数。获取文档,baseURI和1个或多个Java对象。这主要用于签名目的。另一个构造函数是一个接受DOM Element和baseURI的构造函数。
+ * 这主要用于验证,当你有一个SignatureElement。
+ * 
+ * 有几种不同类型的方法：<ul> <li> addDocument *方法用于在签名期间添加带有可选变换的引用。
+ *  </li> <li> addKeyInfo *方法是在签名期间向KeyInfo标记添加证书和密钥。
+ *  </li> <li> appendObject允许用户在签名期间添加任何XML结构作为ObjectContainer。
+ * </li> <li> sign和checkSignatureValue方法用于签名和验证签名。 </li> </ul>。
+ * 
  */
 public final class XMLSignature extends SignatureElementProxy {
 
@@ -163,6 +183,9 @@ public final class XMLSignature extends SignatureElementProxy {
      * Checking the digests in References in a Signature are mandatory, but for
      * References inside a Manifest it is application specific. This boolean is
      * to indicate that the References inside Manifests should be validated.
+     * <p>
+     *  检查签名中的引用中的摘要是必需的,但对于清单中的引用,它是特定于应用程序的。此布尔值表示应该验证清单中的引用。
+     * 
      */
     private boolean followManifestsDuringValidation = false;
 
@@ -179,6 +202,12 @@ public final class XMLSignature extends SignatureElementProxy {
      * algorithm and Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS which is REQUIRED
      * by the spec. This method's main use is for creating a new signature.
      *
+     * <p>
+     *  这将创建一个新的<CODE> ds：Signature </CODE>元素并添加一个空的<CODE> ds：SignedInfo </CODE>。
+     * 使用指定的签名算法和规范要求的Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS初始化<code> ds：SignedInfo </code>。
+     * 此方法的主要用途是创建新的签名。
+     * 
+     * 
      * @param doc Document in which the signature will be appended after creation.
      * @param baseURI URI to be used as context for all relative URIs.
      * @param signatureMethodURI signature algorithm to use.
@@ -192,6 +221,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Constructor XMLSignature
      *
+     * <p>
+     *  构造函数XMLSignature
+     * 
+     * 
      * @param doc
      * @param baseURI
      * @param signatureMethodURI the Signature method to be used.
@@ -209,6 +242,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Constructor XMLSignature
      *
+     * <p>
+     *  构造函数XMLSignature
+     * 
+     * 
      * @param doc
      * @param baseURI
      * @param signatureMethodURI the Signature method to be used.
@@ -228,6 +265,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Constructor XMLSignature
      *
+     * <p>
+     *  构造函数XMLSignature
+     * 
+     * 
      * @param doc
      * @param baseURI
      * @param signatureMethodURI
@@ -275,6 +316,10 @@ public final class XMLSignature extends SignatureElementProxy {
 
     /**
      *  Creates a XMLSignature in a Document
+     * <p>
+     *  在文档中创建XMLSignature
+     * 
+     * 
      * @param doc
      * @param baseURI
      * @param SignatureMethodElem
@@ -320,6 +365,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * This will parse the element and construct the Java Objects.
      * That will allow a user to validate the signature.
      *
+     * <p>
+     *  这将解析元素并构造Java对象。这将允许用户验证签名。
+     * 
+     * 
      * @param element ds:Signature element that contains the whole signature
      * @param baseURI URI to be prepended to all relative URIs
      * @throws XMLSecurityException
@@ -334,6 +383,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * This will parse the element and construct the Java Objects.
      * That will allow a user to validate the signature.
      *
+     * <p>
+     *  这将解析元素并构造Java对象。这将允许用户验证签名。
+     * 
+     * 
      * @param element ds:Signature element that contains the whole signature
      * @param baseURI URI to be prepended to all relative URIs
      * @param secureValidation whether secure secureValidation is enabled or not
@@ -418,6 +471,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Sets the <code>Id</code> attribute
      *
+     * <p>
+     *  设置<code> Id </code>属性
+     * 
+     * 
      * @param id Id value for the id attribute on the Signature Element
      */
     public void setId(String id) {
@@ -430,6 +487,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Returns the <code>Id</code> attribute
      *
+     * <p>
+     *  返回<code> Id </code>属性
+     * 
+     * 
      * @return the <code>Id</code> attribute
      */
     public String getId() {
@@ -439,6 +500,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Returns the completely parsed <code>SignedInfo</code> object.
      *
+     * <p>
+     *  返回完全解析的<code> SignedInfo </code>对象。
+     * 
+     * 
      * @return the completely parsed <code>SignedInfo</code> object.
      */
     public SignedInfo getSignedInfo() {
@@ -449,6 +514,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * Returns the octet value of the SignatureValue element.
      * Throws an XMLSignatureException if it has no or wrong content.
      *
+     * <p>
+     * 返回SignatureValue元素的八位字节值。如果没有或错误的内容,则抛出XMLSignatureException。
+     * 
+     * 
      * @return the value of the SignatureValue element.
      * @throws XMLSignatureException If there is no content
      */
@@ -464,6 +533,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * Base64 encodes and sets the bytes as the content of the SignatureValue
      * Node.
      *
+     * <p>
+     *  Base64编码并设置字节为SignatureValue节点的内容。
+     * 
+     * 
      * @param bytes bytes to be used by SignatureValue before Base64 encoding
      */
     private void setSignatureValueElement(byte[] bytes) {
@@ -488,6 +561,12 @@ public final class XMLSignature extends SignatureElementProxy {
      * <br>
      * This allows to add arbitrary content to the KeyInfo during signing.
      *
+     * <p>
+     *  返回KeyInfo子项。如果我们处于签名模式,并且KeyInfo不存在,则它会根据需要创建并添加到签名。
+     * <br>
+     *  这允许在签名期间向KeyInfo添加任意内容。
+     * 
+     * 
      * @return the KeyInfo object
      */
     public KeyInfo getKeyInfo() {
@@ -523,6 +602,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * element) to the Signature. Please note that this is only possible
      * when signing.
      *
+     * <p>
+     *  向签名附加一个对象(不是<code> java.lang.Object </code>,但是一个对象元素)。请注意,这只有在签名时才可能。
+     * 
+     * 
      * @param object ds:Object to be appended.
      * @throws XMLSignatureException When this object is used to verify.
      */
@@ -544,6 +627,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * Returns the <code>i<code>th <code>ds:Object</code> child of the signature
      * or null if no such <code>ds:Object</code> element exists.
      *
+     * <p>
+     *  返回签名的<code> i <code> th <code> ds：Object </code>子代,如果不存在此类<code> ds：Object </code>元素,则返回null。
+     * 
+     * 
      * @param i
      * @return the <code>i<code>th <code>ds:Object</code> child of the signature
      * or null if no such <code>ds:Object</code> element exists.
@@ -564,6 +651,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Returns the number of all <code>ds:Object</code> elements.
      *
+     * <p>
+     *  返回所有<code> ds：Object </code>元素的数量。
+     * 
+     * 
      * @return the number of all <code>ds:Object</code> elements.
      */
     public int getObjectLength() {
@@ -574,6 +665,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * Digests all References in the SignedInfo, calculates the signature value
      * and sets it in the SignatureValue Element.
      *
+     * <p>
+     *  在SignedInfo中摘要所有引用,计算签名值并将其设置在SignatureValue元素中。
+     * 
+     * 
      * @param signingKey the {@link java.security.PrivateKey} or
      * {@link javax.crypto.SecretKey} that is used to sign.
      * @throws XMLSignatureException
@@ -630,6 +725,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Adds a {@link ResourceResolver} to enable the retrieval of resources.
      *
+     * <p>
+     *  添加{@link ResourceResolver}以启用资源检索。
+     * 
+     * 
      * @param resolver
      */
     public void addResourceResolver(ResourceResolver resolver) {
@@ -639,6 +738,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Adds a {@link ResourceResolverSpi} to enable the retrieval of resources.
      *
+     * <p>
+     *  添加{@link ResourceResolverSpi}以启用资源检索。
+     * 
+     * 
      * @param resolver
      */
     public void addResourceResolver(ResourceResolverSpi resolver) {
@@ -651,6 +754,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * stored DigestValues and then checking to see if the Signatures match on
      * the SignedInfo.
      *
+     * <p>
+     *  从证书中提取公钥,通过重新消化所有引用,将这些与存储的DigestValues进行比较,然后检查签名是否与SignedInfo匹配,来验证签名是否有效。
+     * 
+     * 
      * @param cert Certificate that contains the public key part of the keypair
      * that was used to sign.
      * @return true if the signature is valid, false otherwise
@@ -673,6 +780,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * comparing those against the stored DigestValues and then checking to see
      * if the Signatures match on the SignedInfo.
      *
+     * <p>
+     *  通过重新标记所有引用,比较这些与存储的DigestValues,然后检查签名是否匹配SignedInfo来验证签名是否有效。
+     * 
+     * 
      * @param pk {@link java.security.PublicKey} part of the keypair or
      * {@link javax.crypto.SecretKey} that was used to sign
      * @return true if the signature is valid, false otherwise
@@ -740,6 +851,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Add a Reference with full parameters to this Signature
      *
+     * <p>
+     *  将带有完整参数的引用添加到此签名
+     * 
+     * 
      * @param referenceURI URI of the resource to be signed. Can be null in
      * which case the dereferencing is application specific. Can be "" in which
      * it's the parent node (or parent document?). There can only be one "" in
@@ -765,6 +880,10 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * This method is a proxy method for the {@link Manifest#addDocument} method.
      *
+     * <p>
+     * 此方法是{@link Manifest#addDocument}方法的代理方法。
+     * 
+     * 
      * @param referenceURI URI according to the XML Signature specification.
      * @param trans List of transformations to be applied.
      * @param digestURI URI of the digest algorithm to be used.
@@ -783,6 +902,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * Adds a Reference with just the URI and the transforms. This used the
      * SHA1 algorithm as a default digest algorithm.
      *
+     * <p>
+     *  添加仅使用URI和变换的引用。这使用SHA1算法作为默认摘要算法。
+     * 
+     * 
      * @param referenceURI URI according to the XML Signature specification.
      * @param trans List of transformations to be applied.
      * @throws XMLSignatureException
@@ -798,6 +921,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * Add a Reference with just this URI. It uses SHA1 by default as the digest
      * algorithm
      *
+     * <p>
+     *  仅使用此URI添加引用。它默认使用SHA1作为摘要算法
+     * 
+     * 
      * @param referenceURI URI according to the XML Signature specification.
      * @throws XMLSignatureException
      */
@@ -811,6 +938,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * Add an X509 Certificate to the KeyInfo. This will include the whole cert
      * inside X509Data/X509Certificate tags.
      *
+     * <p>
+     *  向KeyInfo添加X509证书。这将包括X509Data / X509Certificate标签内的整个证书。
+     * 
+     * 
      * @param cert Certificate to be included. This should be the certificate of
      * the key that was used to sign.
      * @throws XMLSecurityException
@@ -826,6 +957,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * Add this public key to the KeyInfo. This will include the complete key in
      * the KeyInfo structure.
      *
+     * <p>
+     *  将此公钥添加到KeyInfo。这将包括KeyInfo结构中的完整键。
+     * 
+     * 
      * @param pk
      */
     public void addKeyInfo(PublicKey pk) {
@@ -837,6 +972,11 @@ public final class XMLSignature extends SignatureElementProxy {
      * to create a MAC, this method helps you to obtain the
      * {@link javax.crypto.SecretKey} from octets.
      *
+     * <p>
+     *  {@link SignedInfo#createSecretKey(byte [])}的代理方法。
+     * 如果要创建MAC,此方法可帮助您从八位字节获取{@link javax.crypto.SecretKey}。
+     * 
+     * 
      * @param secretKeyBytes
      * @return the secret key created.
      * @see SignedInfo#createSecretKey(byte[])
@@ -851,6 +991,10 @@ public final class XMLSignature extends SignatureElementProxy {
      * References inside a Manifest it is application specific. This boolean is
      * to indicate that the References inside Manifests should be validated.
      *
+     * <p>
+     *  Signal是否应自动验证清单的信号。检查签名中的引用中的摘要是必需的,但对于清单中的引用,它是特定于应用程序的。此布尔值表示应该验证清单中的引用。
+     * 
+     * 
      * @param followManifests
      * @see <a href="http://www.w3.org/TR/xmldsig-core/#sec-CoreValidation">
      * Core validation section in the XML Signature Rec.</a>
@@ -862,6 +1006,9 @@ public final class XMLSignature extends SignatureElementProxy {
     /**
      * Get the local name of this element
      *
+     * <p>
+     *  获取此元素的本地名称
+     * 
      * @return Constants._TAG_SIGNATURE
      */
     public String getBaseLocalName() {

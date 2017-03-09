@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,10 @@ public abstract class ServerCommunicatorAdmin {
      * A caller of this method should always call the method
      * <code>rspOutgoing</code> to inform that a response is sent out
      * for the received request.
+     * <p>
+     *  告知接收到新的请求消息。这个方法的调用者应该总是调用<code> rspOutgoing </code>方法来通知为接收到的请求发送响应。
+     * 
+     * 
      * @return the value of the termination flag:
      * <ul><code>true</code> if the connection is already being terminated,
      * <br><code>false</code> otherwise.</ul>
@@ -79,6 +84,10 @@ public abstract class ServerCommunicatorAdmin {
 
     /**
      * Tells that a response is sent out for a received request.
+     * <p>
+     *  告诉对于接收到的请求发出响应。
+     * 
+     * 
      * @return the value of the termination flag:
      * <ul><code>true</code> if the connection is already being terminated,
      * <br><code>false</code> otherwise.</ul>
@@ -101,12 +110,17 @@ public abstract class ServerCommunicatorAdmin {
 
     /**
      * Called by this class to tell an implementation to do stop.
+     * <p>
+     *  这个类调用来告诉实现停止。
+     * 
      */
     protected abstract void doStop();
 
     /**
      * Terminates this object.
      * Called only by outside, so do not need to call doStop
+     * <p>
+     *  终止此对象。仅由外部调用,因此不需要调用doStop
      */
     public void terminate() {
         if (logger.traceOn()) {

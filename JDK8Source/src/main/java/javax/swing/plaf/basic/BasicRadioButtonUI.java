@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import java.util.HashSet;
 /**
  * RadioButtonUI implementation for BasicRadioButtonUI
  *
+ * <p>
+ *  RadioButtonUI实现BasicRadioButtonUI
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class BasicRadioButtonUI extends BasicToggleButtonUI
@@ -47,6 +52,9 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
 
     /**
      * The icon.
+     * <p>
+     *  图标。
+     * 
      */
     protected Icon icon;
 
@@ -63,6 +71,10 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
     /**
      * Returns an instance of {@code BasicRadioButtonUI}.
      *
+     * <p>
+     *  返回{@code BasicRadioButtonUI}的实例。
+     * 
+     * 
      * @param b a component
      * @return an instance of {@code BasicRadioButtonUI}
      */
@@ -106,6 +118,10 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
     /**
      * Returns the default icon.
      *
+     * <p>
+     *  返回默认图标。
+     * 
+     * 
      * @return the default icon
      */
     public Icon getDefaultIcon() {
@@ -177,6 +193,9 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
      * rather than allocating them in each paint call substantially
      * reduced the time it took paint to run.  Obviously, this
      * method can't be re-entered.
+     * <p>
+     *  RadioButtonUI.paint()调用。重新使用矩形而不是在每个绘制调用中分配它们大大减少了绘画运行的时间。显然,这种方法不能重新输入。
+     * 
      */
     private static Dimension size = new Dimension();
     private static Rectangle viewRect = new Rectangle();
@@ -185,6 +204,9 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
 
     /**
      * paint the radio button
+     * <p>
+     *  油漆单选按钮
+     * 
      */
     @Override
     public synchronized void paint(Graphics g, JComponent c) {
@@ -279,6 +301,10 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
     /**
      * Paints focused radio button.
      *
+     * <p>
+     *  油漆聚焦单选按钮。
+     * 
+     * 
      * @param g an instance of {@code Graphics}
      * @param textRect bounds
      * @param size the size of radio button
@@ -292,6 +318,9 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
      * rather than allocating them in each call substantially
      * reduced the time it took getPreferredSize() to run.  Obviously,
      * this method can't be re-entered.
+     * <p>
+     *  RadioButtonUI.getPreferredSize()调用。重新使用矩形而不是在每次调用中分配它们大大减少了getPreferredSize()运行的时间。显然,这种方法不能重新输入。
+     * 
      */
     private static Rectangle prefViewRect = new Rectangle();
     private static Rectangle prefIconRect = new Rectangle();
@@ -300,6 +329,9 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
 
     /**
      * The preferred size of the radio button
+     * <p>
+     *  单选按钮的首选大小
+     * 
      */
     @Override
     public Dimension getPreferredSize(JComponent c) {
@@ -351,6 +383,9 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
     /////////////////////////// Private functions ////////////////////////
     /**
      * Creates the key listener to handle tab navigation in JRadioButton Group.
+     * <p>
+     *  创建键监听器以处理JRadioButton组中的选项卡导航。
+     * 
      */
     private KeyListener createKeyListener() {
          if (keyListener == null) {
@@ -369,6 +404,10 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
     /**
      * Select radio button based on "Previous" or "Next" operation
      *
+     * <p>
+     *  根据"上一步"或"下一步"操作选择单选按钮
+     * 
+     * 
      * @param event, the event object.
      * @param next, indicate if it's next one
      */
@@ -410,6 +449,9 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
     /**
      * ButtonGroupInfo, used to get related info in button group
      * for given radio button
+     * <p>
+     *  ButtonGroupInfo,用于获取按钮组中给定单选按钮的相关信息
+     * 
      */
     private class ButtonGroupInfo {
 
@@ -512,6 +554,10 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
           * Find the new radio button that focus needs to be
           * moved to in the group, select the button
           *
+          * <p>
+          *  找到需要移动到组中的焦点的新单选按钮,选择按钮
+          * 
+          * 
           * @param next, indicate if it's arrow up/left or down/right
           */
         void selectNewButton(boolean next) {
@@ -542,6 +588,10 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
           * move focus to next component of the last button in the group
           * or previous component of first button
           *
+          * <p>
+          *  找到JRadioButton传递的按钮组,并将焦点移动到组中最后一个按钮的下一个组件或第一个按钮的上一个组件
+          * 
+          * 
           * @param next, indicate if jump to next component or previous
           */
         void jumpToNextComponent(boolean next) {
@@ -579,6 +629,8 @@ public class BasicRadioButtonUI extends BasicToggleButtonUI
 
     /**
      * Radiobutton KeyListener
+     * <p>
+     *  单选按钮
      */
     private class KeyHandler implements KeyListener {
 

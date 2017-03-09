@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,11 @@ import com.sun.jmx.snmp.internal.SnmpTools;
  * This class is handling an <CODE>SnmpEngineId</CODE> data. It copes with binary as well as <CODE>String</CODE> representation of an engine Id. A string format engine is an hex string starting with 0x.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  这个类正在处理一个<CODE> SnmpEngineId </CODE>数据。它处理二进制以及引擎Id的<CODE> String </CODE>表示。字符串格式引擎是以0x开头的十六进制字符串。
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
+ * 
  * @since 1.5
  */
 public class SnmpEngineId implements Serializable {
@@ -47,6 +53,10 @@ public class SnmpEngineId implements Serializable {
     String humanString = null;
     /**
      * New <CODE>SnmpEngineId</CODE> with an hex string value. Can handle engine Id format &lt;host&gt:&lt;port&gt.
+     * <p>
+     *  使用十六进制字符串值新建<CODE> SnmpEngineId </CODE>。可以处理引擎ID格式&lt; host&gt：&lt; port&gt;。
+     * 
+     * 
      * @param hexString Hexa string.
      */
     SnmpEngineId(String hexString) {
@@ -55,6 +65,10 @@ public class SnmpEngineId implements Serializable {
     }
     /**
      * New <CODE>SnmpEngineId</CODE> with a binary value. You can use <CODE> SnmpTools </CODE> to convert from hex string to binary format.
+     * <p>
+     *  使用二进制值新建<CODE> SnmpEngineId </CODE>。您可以使用<CODE> SnmpTools </CODE>将十六进制字符串转换为二进制格式。
+     * 
+     * 
      * @param bin Binary value
      */
     SnmpEngineId(byte[] bin) {
@@ -64,6 +78,10 @@ public class SnmpEngineId implements Serializable {
 
     /**
      * If a string of the format &lt;address&gt;:&lt;port&gt;:&lt;IANA number&gt; has been provided at creation time, this string is returned.
+     * <p>
+     *  如果格式为&lt; address&gt;：&lt; port&gt;：&lt; IANA number&gt;已在创建时提供,则返回此字符串。
+     * 
+     * 
      * @return The Id as a readable string or null if not provided.
      */
     public String getReadableId() {
@@ -72,6 +90,10 @@ public class SnmpEngineId implements Serializable {
 
     /**
      * Returns a string format engine Id.
+     * <p>
+     *  返回字符串格式的引擎ID。
+     * 
+     * 
      * @return String format value.
      */
     public String toString() {
@@ -79,6 +101,10 @@ public class SnmpEngineId implements Serializable {
     }
     /**
      * Returns a binary engine Id.
+     * <p>
+     *  返回二进制引擎ID。
+     * 
+     * 
      * @return Binary value.
      */
     public byte[] getBytes() {
@@ -87,6 +113,9 @@ public class SnmpEngineId implements Serializable {
 
     /**
      * In order to store the string used to create the engineId.
+     * <p>
+     *  为了存储用于创建engineId的字符串。
+     * 
      */
     void setStringValue(String val) {
         humanString = val;
@@ -116,6 +145,10 @@ public class SnmpEngineId implements Serializable {
 
     /**
      * Generates an engine Id based on the passed array.
+     * <p>
+     *  基于传递的数组生成引擎ID。
+     * 
+     * 
      * @return The created engine Id or null if given arr is null or its length == 0;
      * @exception IllegalArgumentException when:
      * <ul>
@@ -134,6 +167,10 @@ public class SnmpEngineId implements Serializable {
 
     /**
      * Generates an engine Id that is unique to the host the agent is running on. The engine Id unicity is system time based. The creation algorithm uses the SUN Microsystems IANA number (42).
+     * <p>
+     *  生成代理正在运行的主机唯一的引擎标识。发动机Id统一性是基于系统时间的。创建算法使用SUN Microsystems IANA号(42)。
+     * 
+     * 
      * @return The generated engine Id.
      */
     public static SnmpEngineId createEngineId() {
@@ -167,6 +204,13 @@ public class SnmpEngineId implements Serializable {
      * The oid format is : <engine Id length>.<engine Id binary octet1>....<engine Id binary octetn - 1>.<engine Id binary octetn>
      * Eg: "0x8000002a05819dcb6e00001f96" ==> 13.128.0.0.42.5.129.157.203.110.0.0.31.150
      *
+     * <p>
+     *  以SnmpOid格式翻译引擎标识。这在处理USM MIB索引时很有用。 oid格式为：<engine id length>。
+     * <engine id binary octet1> .... <engine id binary octetn  -  1> <engine id binary octetn>例如："0x8000002
+     * a05819dcb6e00001f96"==> 13.128.0.0.42.5。
+     *  以SnmpOid格式翻译引擎标识。这在处理USM MIB索引时很有用。 oid格式为：<engine id length>。 129.157.203.110.0.0.31.150。
+     * 
+     * 
      * @return SnmpOid The oid.
      */
     public SnmpOid toOid() {
@@ -199,6 +243,20 @@ public class SnmpEngineId implements Serializable {
     * <li> :: &nbsp;&nbsp;&nbsp;
     * <BR>   The port 161, localhost and the SUN Microsystems IANA number will be used to generate the Id. </li>
     * </ul>
+    * <p>
+    * <P>生成唯一引擎ID。支持十六进制字符串以及文本描述。
+    * 文本格式如下：<BR>&lt; address&gt;：&lt; port&gt;：&lt; IANA号码&gt; </P> <P>允许的格式：</P>。
+    * <ul>
+    *  <li>&lt; address&gt;：&lt; port&gt;：&lt; IANA号码&gt;所有这些参数都用于生成Id。警告,此方法不符合IPv6地址格式。
+    * 请改用{@link com.sun.jmx.snmp.SnmpEngineId#createEngineId(java.lang.String,java.lang.String)}。
+    * </li> <li>&lt; address&gt;：&lt; port& <BR> IANA号码将是SUN Microsystems(42)号码。
+    *  </li> <li>地址<BR>端口161将用于生成Id。 IANA号将是SUN Microsystems的一个(42)。 </li> <li>：port <BR>要使用的主机是localhost。
+    *  IANA号将是SUN Microsystems的一个(42)。 </li> <li> ::&lt; IANA号码&nbsp;&nbsp;&nbsp; <BR>端口161和本地主机将用于生成Id。
+    *  </li> <li>：&lt; port&gt;：&lt; IANA号码&gt; <BR>要使用的主机是localhost。
+    *  </li> <li>&lt; address&gt; ::&lt; IANA号码&gt; <BR>端口161将用于生成Id。
+    *  </li> <li> ::&nbsp;&nbsp;&nbsp; <BR>端口161,localhost和SUN Microsystems IANA号码将用于生成Id。 </li>。
+    * </ul>
+    * 
     * @exception UnknownHostException if the host name contained in the textual format is unknown.
     * @exception IllegalArgumentException when :
     * <ul>
@@ -223,6 +281,11 @@ public class SnmpEngineId implements Serializable {
      * com.sun.jmx.snmp.SnmpEngineId#createEngineId(java.lang.String) }
      * with the ability to provide your own separator. This allows IPv6
      * address format handling (eg: providing @ as separator).
+     * <p>
+     *  Idem {@link com.sun.jmx.snmp.SnmpEngineId#createEngineId(java.lang.String)}能够提供您自己的分隔符。
+     * 这允许IPv6地址格式处理(例如：提供@作为分隔符)。
+     * 
+     * 
      * @param str The string to parse.
      * @param separator the separator to use. If null is provided, the default
      * separator ":" is used.
@@ -343,6 +406,10 @@ public class SnmpEngineId implements Serializable {
      * the host IP address and port. The IP address used is the
      * localhost one. The creation algorithm uses the SUN Microsystems IANA
      * number (42).
+     * <p>
+     * 生成唯一引擎ID。引擎Id unicity基于主机IP地址和端口。使用的IP地址是localhost。创建算法使用SUN Microsystems IANA号(42)。
+     * 
+     * 
      * @param port The TCP/IP port the SNMPv3 Adaptor Server is listening to.
      * @return The generated engine Id.
      * @exception UnknownHostException if the local host name
@@ -360,6 +427,10 @@ public class SnmpEngineId implements Serializable {
      * the host IP address and port. The IP address used is the passed
      * one. The creation algorithm uses the SUN Microsystems IANA
      * number (42).
+     * <p>
+     *  生成唯一引擎ID。引擎Id unicity基于主机IP地址和端口。使用的IP地址是传递的IP地址。创建算法使用SUN Microsystems IANA号(42)。
+     * 
+     * 
      * @param address The IP address the SNMPv3 Adaptor Server is listening to.
      * @param port The TCP/IP port the SNMPv3 Adaptor Server is listening to.
      * @return The generated engine Id.
@@ -377,6 +448,10 @@ public class SnmpEngineId implements Serializable {
      * Generates a unique engine Id. The engine Id unicity is based on
      * the host IP address and port. The IP address is the localhost one.
      * The creation algorithm uses the passed IANA number.
+     * <p>
+     *  生成唯一引擎ID。引擎Id unicity基于主机IP地址和端口。 IP地址是本地主机。创建算法使用传递的IANA号码。
+     * 
+     * 
      * @param port The TCP/IP port the SNMPv3 Adaptor Server is listening to.
      * @param iana Your enterprise IANA number.
      * @exception UnknownHostException if the local host name used to calculate the id is unknown.
@@ -390,6 +465,10 @@ public class SnmpEngineId implements Serializable {
 
     /**
      * Generates a unique engine Id. The engine Id unicity is based on the host IP address and port. The IP address is the passed one, it handles IPv4 and IPv6 hosts. The creation algorithm uses the passed IANA number.
+     * <p>
+     *  生成唯一引擎ID。引擎Id unicity基于主机IP地址和端口。 IP地址是传递的IP地址,它处理IPv4和IPv6主机。创建算法使用传递的IANA号码。
+     * 
+     * 
      * @param addr The IP address the SNMPv3 Adaptor Server is listening to.
      * @param port The TCP/IP port the SNMPv3 Adaptor Server is listening to.
      * @param iana Your enterprise IANA number.
@@ -430,6 +509,10 @@ engineid[3] = (byte) (iana & 0x000000FF);
 
      /**
      * Generates an engine Id based on an InetAddress. Handles IPv4 and IPv6 addresses. The creation algorithm uses the passed IANA number.
+     * <p>
+     *  基于InetAddress生成引擎标识。处理IPv4和IPv6地址。创建算法使用传递的IANA号码。
+     * 
+     * 
      * @param iana Your enterprise IANA number.
      * @param addr The IP address the SNMPv3 Adaptor Server is listening to.
      * @return The generated engine Id.
@@ -463,6 +546,10 @@ engineid[3] = (byte) (iana & 0x000000FF);
     /**
      * Generates an engine Id based on an InetAddress. Handles IPv4 and IPv6
      * addresses. The creation algorithm uses the sun IANA number (42).
+     * <p>
+     *  基于InetAddress生成引擎标识。处理IPv4和IPv6地址。创建算法使用sun IANA号(42)。
+     * 
+     * 
      * @param addr The IP address the SNMPv3 Adaptor Server is listening to.
      * @return The generated engine Id.
      * @since 1.5
@@ -476,6 +563,9 @@ engineid[3] = (byte) (iana & 0x000000FF);
 
     /**
      * Tests <CODE>SnmpEngineId</CODE> instance equality. Two <CODE>SnmpEngineId</CODE> are equal if they have the same value.
+     * <p>
+     *  测试<CODE> SnmpEngineId </CODE>实例相等性。如果两个<CODE> SnmpEngineId </CODE>具有相同的值,则它们是相等的。
+     * 
      * @return <CODE>true</CODE> if the two <CODE>SnmpEngineId</CODE> are equals, <CODE>false</CODE> otherwise.
      */
     public boolean equals(Object a) {

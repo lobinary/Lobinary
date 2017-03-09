@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,9 @@ import com.sun.corba.se.spi.orb.ORB;
 
 /**
  * SlotTableStack is the container of SlotTable instances for each thread
+ * <p>
+ *  SlotTableStack是每个线程的SlotTable实例的容器
+ * 
  */
 public class SlotTableStack
 {
@@ -63,6 +67,9 @@ public class SlotTableStack
 
         /**
          * Puts SlotTable to the re-usable pool.
+         * <p>
+         *  将SlotTable置于可重用池中。
+         * 
          */
         void putSlotTable( SlotTable table ) {
             // If there are enough SlotTables in the pool, then don't add
@@ -77,6 +84,9 @@ public class SlotTableStack
 
         /**
          * Gets SlotTable from the re-usable pool.
+         * <p>
+         *  从可重用池中获取SlotTable。
+         * 
          */
         SlotTable getSlotTable( ) {
             // If there are no entries in the pool then return null
@@ -107,6 +117,9 @@ public class SlotTableStack
 
     /**
      * Constructs the stack and and SlotTablePool
+     * <p>
+     *  构造堆栈和SlotTablePool
+     * 
      */
     SlotTableStack( ORB orb, SlotTable table ) {
        this.orb = orb;
@@ -131,6 +144,12 @@ public class SlotTableStack
      *
      * 2: If there is no SlotTable in the pool, then creates a new one and
      *    pushes that into the SlotTableStack
+     * <p>
+     *  pushSlotTable通过执行以下操作将新的Slot Table推送到堆栈：1：检查SlotTablePool中是否有任何SlotTable如果存在,然后使用该实例推入SlotTableStack
+     * 。
+     * 
+     *  2：如果池中没有SlotTable,则创建一个新的SlotTable并将其推入SlotTableStack
+     * 
      */
     void pushSlotTable( ) {
         SlotTable table = tablePool.getSlotTable( );
@@ -161,6 +180,12 @@ public class SlotTableStack
      *    null if there are any previous sets.
      *
      * 3: puts the reset SlotTable into the SlotTablePool to reuse
+     * <p>
+     *  popSlotTable执行以下1：弹出SlotTableStack中的顶部SlotTable
+     * 
+     *  2：重置SlotTable中的槽,如果存在任何先前的集,则将槽值重置为空。
+     * 
+     *  3：将复位SlotTable放入SlotTablePool以重用
      */
     void  popSlotTable( ) {
         if( currentIndex <= 1 ) {
@@ -178,6 +203,8 @@ public class SlotTableStack
     /**
      * peekSlotTable gets the top SlotTable from the SlotTableStack without
      * popping.
+     * <p>
+     * 
      */
     SlotTable peekSlotTable( ) {
        return (SlotTable) tableContainer.get( currentIndex - 1);

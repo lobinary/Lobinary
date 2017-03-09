@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -184,6 +185,86 @@ import sun.security.util.ResourcesMgr;
  * </ul>
  * </ol>
  *
+ * <p>
+ *  <p> {@code LoginContext}类描述了用于验证Subject的基本方法,并提供了一种独立于底层认证技术开发应用程序的方法。
+ *  {@code Configuration}指定与特定应用程序一起使用的身份验证技术或{@code LoginModule}。
+ * 不同的LoginModule可以在应用程序下插入,而不需要对应用程序本身进行任何修改。
+ * 
+ *  <p>除了支持<i>可插入</i>身份验证,此类别还支持<i>堆叠</i>身份验证的概念。应用程序可以配置为使用多个LoginModule。
+ * 例如,可以在应用程序下配置Kerberos LoginModule和智能卡LoginModule。
+ * 
+ *  <p>典型的调用者使用<i>名称</i>和{@code CallbackHandler}实例化一个LoginContext。
+ *  LoginContext使用<i> name </i>作为配置的索引,以确定应该使用哪些LoginModules,哪些LoginModule必须成功才能使整个身份验证成功。
+ *  {@code CallbackHandler}被传递给底层的LoginModules,以便它们可以与用户进行通信和交互(例如通过图形用户界面提示用户名和密码)。
+ * 
+ * <p>一旦调用者实例化了一个LoginContext,它调用{@code login}方法来验证{@code Subject}。
+ *  {@code login}方法调用已配置的模块来执行各自的身份验证(用户名/密码,智能卡引脚验证等)。注意,如果认证失败,LoginModule不会尝试认证重试或引入延迟。
+ * 这些任务属于LoginContext调用者。
+ * 
+ *  <p>如果{@code login}方法返回时没有抛出异常,则整个身份验证成功。然后调用者可以通过调用{@code getSubject}方法来检索新认证的主题。
+ * 与主题相关联的主体和凭据可以通过调用主题的各自的{@code getPrincipals},{@code getPublicCredentials}和{@code getPrivateCredentials}
+ * 方法来检索。
+ *  <p>如果{@code login}方法返回时没有抛出异常,则整个身份验证成功。然后调用者可以通过调用{@code getSubject}方法来检索新认证的主题。
+ * 
+ *  <p>要注销主题,调用者调用{@code logout}方法。与{@code login}方法一样,此{@code logout}方法调用已配置模块的{@code logout}方法。
+ * 
+ *  <p> LoginContext不应用于验证多个主题。应该使用单独的LoginContext来验证每个不同的Subject。
+ * 
+ *  <p>以下文档适用于所有LoginContext构造函数：
+ * <ol>
+ * 
+ *  <li> {@code主题}
+ * <ul>
+ *  <li>如果构造函数具有Subject输入参数,LoginContext将使用调用方指定的Subject对象。
+ * 
+ * <li>如果调用者指定了{@code null}主题和{@code null}值,LoginContext会实例化一个新的主题。
+ * 
+ *  <li>如果构造函数<b>不</b>有一个Subject输入参数,LoginContext实例化一个新的Subject。
+ * <p>
+ * </ul>
+ * 
+ *  <li> {@code Configuration}
+ * <ul>
+ *  <li>如果构造函数具有配置输入参数,并且调用程序指定了非空配置,则LoginContext使用调用程序指定的配置。
+ * <p>
+ *  如果构造函数<b>不</b>有配置输入参数,或者调用者指定了一个{@code null}配置对象,构造函数将使用以下调用来获取已安装的配置：
+ * <pre>
+ *  config = Configuration.getConfiguration();
+ * </pre>
+ *  对于这两种情况,给予构造函数的<i> name </i>参数被传递给{@code Configuration.getAppConfigurationEntry}方法。
+ * 如果配置没有指定<i> name </i>的条目,则{@code LoginContext}调用{@code getAppConfigurationEntry},名称为"<i> other </i>" 
+ * )。
+ *  对于这两种情况,给予构造函数的<i> name </i>参数被传递给{@code Configuration.getAppConfigurationEntry}方法。
+ * 如果没有"<i>其他</i>"的条目,则会抛出{@code LoginException}。
+ * 
+ * <li>当LoginContext使用已安装的配置时,调用程序需要createLoginContext。
+ * <em> name </em>以及可能的createLoginContext.other AuthPermissions。
+ * 此外,LoginContext将从{@code AccessController.doPrivileged}调用中调用配置的模块,以便执行安全敏感任务(例如连接到远程主机和更新主题)的模块将需要相应的权
+ * 限,但是调用者的LoginContext不会需要这些权限。
+ * <em> name </em>以及可能的createLoginContext.other AuthPermissions。
+ * 
+ *  <li>当LoginContext使用调用者指定的配置时,调用者不需要任何createLoginContext AuthPermission。
+ *  LoginContext为调用者保存{@code AccessControlContext},并从受该上下文约束的{@code AccessController.doPrivileged}调用中调用配
+ * 置的模块。
+ *  <li>当LoginContext使用调用者指定的配置时,调用者不需要任何createLoginContext AuthPermission。
+ * 这意味着调用者上下文(在创建LoginContext时存储)必须有足够的权限来执行模块可能执行的任何安全敏感任务。
+ * <p>
+ * </ul>
+ * 
+ *  <li> {@code CallbackHandler}
+ * <ul>
+ *  <li>如果构造函数具有CallbackHandler输入参数,LoginContext将使用调用者指定的CallbackHandler对象。
+ * 
+ * <li>如果构造函数<b>不</b>有一个CallbackHandler输入参数,或者调用者指定了一个{@code null} CallbackHandler对象(允许一个{@code null}),L
+ * oginContext查询默认处理程序实现的完全限定类名的{@code auth.login.defaultCallbackHandler}安全属性。
+ * 如果未设置安全属性,则底层模块将不具有用于与用户通信的CallbackHandler。因此,呼叫者假设所配置的模块具有用于认证用户的替代装置。
+ * 
+ *  <li>当LoginContext使用安装的配置(而不是调用者指定的配置,见上文)时,这个LoginContext必须包装任何调用者指定的或默认的CallbackHandler实现在一个新的Callb
+ * ackHandler实现中{@code handle}方法实现调用在{@code java.security.AccessController.doPrivileged}调用中的指定CallbackHa
+ * ndler的{@code handle}方法受调用者的当前{@code AccessControlContext}约束。
+ * </ul>
+ * </ol>
+ * 
  * @see java.security.Security
  * @see javax.security.auth.AuthPermission
  * @see javax.security.auth.Subject
@@ -326,6 +407,9 @@ public class LoginContext {
     /**
      * Instantiate a new {@code LoginContext} object with a name.
      *
+     * <p>
+     * 
+     * 
      * @param name the name used as the index into the
      *          {@code Configuration}.
      *
@@ -355,6 +439,10 @@ public class LoginContext {
      *
      * <p>
      *
+     * <p>
+     *  使用名称实例化一个新的{@code LoginContext}对象。
+     * 
+     * 
      * @param name the name used as the index into the
      *          {@code Configuration}. <p>
      *
@@ -393,6 +481,12 @@ public class LoginContext {
      *
      * <p>
      *
+     * <p>
+     *  使用名称和{@code Subject}对象实例化一个新的{@code LoginContext}对象。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the name used as the index into the
      *          {@code Configuration}. <p>
      *
@@ -430,6 +524,12 @@ public class LoginContext {
      *
      * <p>
      *
+     * <p>
+     *  使用名称和{@code CallbackHandler}对象实例化一个新的{@code LoginContext}对象。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the name used as the index into the
      *          {@code Configuration}. <p>
      *
@@ -472,6 +572,12 @@ public class LoginContext {
      *
      * <p>
      *
+     * <p>
+     *  使用名称,要认证的{@code Subject}和一个{@code CallbackHandler}对象实例化一个新的{@code LoginContext}对象。
+     * 
+     * <p>
+     * 
+     * 
      * @param name the name used as the index into the caller-specified
      *          {@code Configuration}. <p>
      *
@@ -572,6 +678,13 @@ public class LoginContext {
      *
      * <p>
      *
+     * <p>
+     * 使用名称,要认证的{@code Subject},{@code CallbackHandler}对象和登录名{@code Configuration}来实例化一个新的{@code LoginContext}
+     * 对象。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the authentication fails.
      */
     public void login() throws LoginException {
@@ -616,6 +729,31 @@ public class LoginContext {
      *
      * <p>
      *
+     * <p>
+     *  执行身份验证。
+     * 
+     *  <p>此方法为登录{@code Configuration}所确定的为{@code LoginContext}构造函数指定的<i>名称</i>配置的每个LoginModule调用{@code login}
+     * 方法。
+     * 每个{@code LoginModule}然后执行其相应的身份验证类型(用户名/密码,智能卡引脚验证等)。
+     * 
+     *  <p>如果整个身份验证成功(相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules成功),或者通过调用每个配置的LoginModule的{@ code commit}
+     * 方法,此方法将调用每个配置的LoginModule的{@code commit} @code abort}方法,如果整体认证失败。
+     * 如果认证成功,则每个成功的LoginModule的{@code commit}方法将相关Principals和Credentials与{@code Subject}相关联。
+     * 如果身份验证失败,每个LoginModule的{@code abort}方法删除/销毁任何先前存储的状态。
+     * 
+     *  <p>如果身份验证过程的{@code commit}阶段失败,那么整个身份验证将失败,此方法将为每个配置的{@code LoginModule}调用{@code abort}方法。
+     * 
+     * <p>如果{@code abort}阶段因任何原因失败,则此方法会传播在{@code login}阶段或{@code commit}阶段期间抛出的原始异常。在任一情况下,整体认证失败。
+     * 
+     *  <p>在多个LoginModule失败的情况下,此方法传播由失败的第一个{@code LoginModule}引发的异常。
+     * 
+     *  <p>请注意,如果此方法进入{@code abort}阶段({@code login}或{@code commit}阶段失败),此方法将调用为应用程序配置的所有LoginModules,而不管它们各自
+     * 的{@code配置}标志参数。
+     * 基本上这意味着{@code Requisite}和{@code Sufficient}语义在{@code abort}阶段被忽略。这保证可以进行适当的清理和状态恢复。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the logout fails.
      */
     public void logout() throws LoginException {
@@ -633,6 +771,20 @@ public class LoginContext {
      *
      * <p>
      *
+     * <p>
+     *  注销{@code Subject}。
+     * 
+     *  <p>此方法为为此{@code LoginContext}配置的每个{@code LoginModule}调用{@code logout}方法。
+     * 每个{@code LoginModule}都会执行相应的注销过程,其中可能包括从{@code Subject}和状态清除中删除/销毁{@code Principal}和{@code Credential}
+     * 信息。
+     *  <p>此方法为为此{@code LoginContext}配置的每个{@code LoginModule}调用{@code logout}方法。
+     * 
+     * <p>请注意,此方法会调用为该应用程式配置的所有LoginModules,而不考虑其各自的{@code Configuration}标志参数。
+     * 基本上这意味着对于这种方法,{@code Requisite}和{@code Sufficient}语义将被忽略。这保证可以进行适当的清理和状态恢复。
+     * 
+     * <p>
+     * 
+     * 
      * @return the authenticated Subject.  If the caller specified a
      *          Subject to this LoginContext's constructor,
      *          this method returns the caller-specified Subject.
@@ -673,6 +825,11 @@ public class LoginContext {
      *
      * This version is called if the caller did not instantiate
      * the LoginContext with a Configuration object.
+     * <p>
+     *  返回已验证的主题。
+     * 
+     * <p>
+     * 
      */
     private void invokePriv(final String methodName) throws LoginException {
         try {
@@ -917,6 +1074,11 @@ public class LoginContext {
      * Wrap the caller-specified CallbackHandler in our own
      * and invoke it within a privileged block, constrained by
      * the caller's AccessControlContext.
+     * <p>
+     *  从由createAcc(可能为null)限制的doPrivileged块中的LoginModule调用登录,提交和注销方法。
+     * 
+     *  如果调用者没有使用Configuration对象实例化LoginContext,则调用此版本。
+     * 
      */
     private static class SecureCallbackHandler implements CallbackHandler {
 
@@ -953,6 +1115,9 @@ public class LoginContext {
     /**
      * LoginModule information -
      *          incapsulates Configuration info and actual module instances
+     * <p>
+     *  将调用者指定的CallbackHandler包装在我们自己的包中,并在一个特权块中调用它,由调用者的AccessControlContext约束。
+     * 
      */
     private static class ModuleInfo {
         AppConfigurationEntry entry;

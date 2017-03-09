@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,9 @@ import com.sun.corba.se.impl.oa.NullServantImpl ;
  * <li>retain</li>
  * <li>useActiveObjectMapOnly</li>
  * </ul>
+ * <p>
+ *  操作上POA的情况：
+ * <ul>
  */
 public class POAPolicyMediatorImpl_R_AOM extends POAPolicyMediatorBase_R {
     POAPolicyMediatorImpl_R_AOM( Policies policies, POAImpl poa )

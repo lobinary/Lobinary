@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -119,6 +120,49 @@ import java.util.Date;
  * use the standard Java SE certificate classes located in
  * {@code java.security.cert}.</em></p>
  *
+ * <p>
+ *  X.509 v1证书的抽象类。这提供了访问X.509证书的所有版本1属性的标准方法。特定于X.509 v2或v3的属性不可通过此接口使用。未来的API演进将提供完整的访问完整的X.509 v3属性。
+ * <p>
+ *  基本的X.509格式由ISO / IEC和ANSI X9定义,并在ASN.1中描述如下：
+ * <pre>
+ *  Certificate :: = SEQUENCE {tbsCertificate TBSCertificate,signatureAlgorithm AlgorithmIdentifier,signature BIT STRING}
+ * 。
+ * </pre>
+ * <p>
+ *  这些证书广泛用于支持Internet安全系统中的身份验证和其他功能。常见的应用包括隐私增强邮件(PEM),传输层安全(SSL),可信软件分发的代码签名和安全电子交易(SET)。
+ * <p>
+ *  这些证书由<em>证书颁发机构</em>(CA)管理和支持。 CA是通过以X.509标准格式放置数据然后对该数据进行数字签名来创建证书的服务。
+ *  CA作为受信任的第三方,在没有彼此直接了解的校长之间进行介绍。 CA证书由它们自己签名,或由一些其他CA签名,例如"根"CA。
+ * <p>
+ *  {@code tbsCertificate}的ASN.1定义是：
+ * <pre>
+ * TBSCertificate :: = SEQUENCE {version [0] EXPLICIT Version DEFAULT v1,serialNumber CertificateSerialNumber,signature AlgorithmIdentifier,issuer Name,validity有效性,主题名,subjectPublicKeyInfo SubjectPublicKeyInfo,。
+ * </pre>
+ * <p>
+ *  以下是实例化X.509证书的示例代码：
+ * <pre>
+ *  InputStream inStream = new FileInputStream("fileName-of-cert"); X509Certificate cert = X509Certifica
+ * te.getInstance(inStream); inStream.close();。
+ * </pre>
+ *  要么
+ * <pre>
+ *  byte [] certData =&lt;证书从文件读取,说&gt; X509Certificate cert = X509Certificate.getInstance(certData);
+ * </pre>
+ * <p>
+ *  在任何一种情况下,实例化X.509证书的代码都会查阅{@code cert.provider.x509v1}安全属性的值来定位实际实现或实例化默认实现。
+ * <p>
+ *  {@code cert.provider.x509v1}属性设置为X.509的默认实现,例如：
+ * <pre>
+ *  cert.provider.x509v1 = com.sun.security.cert.internal.x509.X509V1CertImpl
+ * </pre>
+ * <p>
+ *  此{@code cert.provider.x509v1}属性的值必须更改为实例化另一个实现。如果未设置此安全属性,将使用默认实现。
+ * 目前,由于对访问安全属性的可能的安全限制,在类初始化时查找和缓存此值,如果Security属性不可访问,则将默认实现。
+ * 
+ * <p> <em>注意：包{@code javax.security.cert}中的类是为了与早期版本的Java安全套接字扩展(JSSE)兼容而存在。
+ * 新应用程序应使用位于{@code java.security.cert}中的标准Java SE证书类。</em> </p>。
+ * 
+ * 
  * @author Hemma Prafullchandra
  * @since 1.4
  * @see Certificate
@@ -133,6 +177,11 @@ public abstract class X509Certificate extends Certificate {
      * for X.509 v3 is given as:
      * <pre>
      * cert.provider.x509v1=com.sun.security.cert.internal.x509.X509V1CertImpl
+     * </pre>
+     * <p>
+     *  在安全属性文件中查找的常量。在安全属性文件中,X.509 v3的默认实现为：
+     * <pre>
+     *  cert.provider.x509v1 = com.sun.security.cert.internal.x509.X509V1CertImpl
      * </pre>
      */
     private static final String X509_PROVIDER = "cert.provider.x509v1";
@@ -163,6 +212,15 @@ public abstract class X509Certificate extends Certificate {
      * public <subClass>(InputStream inStream) ...
      * }</pre>
      *
+     * <p>
+     *  实例化X509Certificate对象,并使用从输入流{@code inStream}读取的数据对其进行初始化。
+     * 实现(X509Certificate是一个抽象类)由指定为{@code cert.provider.x509v1}安全属性值的类提供。
+     * 
+     *  <p>注意：预期在输入流中只有一个DER编码的证书。
+     * 此外,所有X509Certificate子类必须提供一个形式的构造函数：<pre> {@ code public <subClass>(InputStream inStream)...} </pre>。
+     *  <p>注意：预期在输入流中只有一个DER编码的证书。
+     * 
+     * 
      * @param inStream an input stream with the data to be read to
      *        initialize the certificate.
      * @return an X509Certificate object initialized with the data
@@ -188,6 +246,14 @@ public abstract class X509Certificate extends Certificate {
      * public <subClass>(InputStream inStream) ...
      * }</pre>
      *
+     * <p>
+     *  实例化X509Certificate对象,并使用指定的字节数组初始化它。
+     * 实现(X509Certificate是一个抽象类)由指定为{@code cert.provider.x509v1}安全属性值的类提供。
+     * 
+     *  <p>注意：所有X509Certificate子类必须提供一个形式的构造函数：<pre> {@ code public <subClass>(InputStream inStream)...} </pre>
+     * 。
+     * 
+     * 
      * @param certData a byte array containing the DER-encoded
      *        certificate.
      * @return an X509Certificate object initialized with the data
@@ -206,6 +272,9 @@ public abstract class X509Certificate extends Certificate {
          * This turns out not to work for now. To run under JDK1.2 we would
          * need to call beginPrivileged() but we can't do that and run
          * under JDK1.1.
+         * <p>
+         * 这结果现在不工作。要在JDK1.2下运行,我们需要调用beginPrivileged(),但是我们不能这样做,并在JDK1.1下运行。
+         * 
          */
         String className = X509Provider;
         if (className == null || className.length() == 0) {
@@ -266,6 +335,19 @@ public abstract class X509Certificate extends Certificate {
      *     generalTime    GeneralizedTime }
      * </pre>
      *
+     * <p>
+     *  检查证书当前是否有效。这是如果当前日期和时间在证书中给出的有效期内。
+     * <p>
+     *  有效期由两个日期/时间值组成：证书有效的第一个和最后一个日期(和时间)。它在ASN.1中定义为：
+     * <pre>
+     *  有效性
+     * 
+     *  Validity :: = SEQUENCE {不是CertificateValidityDate之前,不是CertificateValidityDate之后}
+     * 
+     *  CertificateValidityDate :: = CHOICE {utcTime UTCTime,generalTime GeneralizedTime}
+     * </pre>
+     * 
+     * 
      * @exception CertificateExpiredException if the certificate has expired.
      * @exception CertificateNotYetValidException if the certificate is not
      *            yet valid.
@@ -278,6 +360,10 @@ public abstract class X509Certificate extends Certificate {
      * validity period. In other words, this determines whether the
      * certificate would be valid at the specified date/time.
      *
+     * <p>
+     *  检查指定的日期是否在证书的有效期内。换句话说,这决定了证书在指定的日期/时间是否有效。
+     * 
+     * 
      * @param date the Date to check against to see if this certificate
      *        is valid at that date/time.
      * @exception CertificateExpiredException if the certificate has expired
@@ -298,6 +384,15 @@ public abstract class X509Certificate extends Certificate {
      * Version  ::=  INTEGER  {  v1(0), v2(1), v3(2)  }
      * </pre>
      *
+     * <p>
+     *  从证书获取{@code版本}(版本号)值。对此的ASN.1定义是：
+     * <pre>
+     *  version [0] EXPLICIT版本DEFAULT v1
+     * 
+     *  Version :: = INTEGER {v1(0),v2(1),v3(2)}
+     * </pre>
+     * 
+     * 
      * @return the version number from the ASN.1 encoding, i.e. 0, 1 or 2.
      */
     public abstract int getVersion();
@@ -315,6 +410,16 @@ public abstract class X509Certificate extends Certificate {
      * CertificateSerialNumber  ::=  INTEGER
      * </pre>
      *
+     * <p>
+     *  从证书获取{@code serialNumber}值。序列号是证书颁发机构为每个证书分配的整数。它必须对于由给定CA发布的每个证书是唯一的(即,发行者名称和序列号标识唯一证书)。
+     * 对此的ASN.1定义是：。
+     * <pre>
+     *  serialNumber CertificateSerialNumber
+     * 
+     *  CertificateSerialNumber :: = INTEGER
+     * </pre>
+     * 
+     * 
      * @return the serial number.
      */
     public abstract BigInteger getSerialNumber();
@@ -349,6 +454,24 @@ public abstract class X509Certificate extends Certificate {
      * one of {@code PrintableString},
      * {@code TeletexString} or {@code UniversalString}.
      *
+     * <p>
+     * 从证书获取{@code issuer}(颁发者专有名称)值。发放者名称标识签署(并颁发)证书的实体。
+     * 
+     *  <p>发行者名称字段包含X.500可分辨名称(DN)。对此的ASN.1定义是：
+     * <pre>
+     *  发行人名称
+     * 
+     *  Name :: = CHOICE {RDNSequence} RDNSequence :: = SEQUENCE OF RelativeDistinguishedName RelativeDistin
+     * guishedName :: = SET OF AttributeValueAssertion。
+     * 
+     *  AttributeValueAssertion :: = SEQUENCE {AttributeType,AttributeValue} AttributeType :: = OBJECT IDENT
+     * IFIER AttributeValue :: = ANY。
+     * </pre>
+     *  {@code Name}描述了由属性组成的分层名称,例如国家/地区名称和相应的值,例如US。
+     *  {@code AttributeValue}组件的类型由{@code AttributeType}确定;一般来说它会是一个{@code directoryString}。
+     *  {@code directoryString}通常是{@code PrintableString},{@code TeletexString}或{@code UniversalString}之一。
+     * 
+     * 
      * @return a Principal whose name is the issuer distinguished name.
      */
     public abstract Principal getIssuerDN();
@@ -364,6 +487,15 @@ public abstract class X509Certificate extends Certificate {
      * <p>See {@link #getIssuerDN() getIssuerDN} for {@code Name}
      * and other relevant definitions.
      *
+     * <p>
+     *  从证书获取{@code subject}(主题专有名称)值。对此的ASN.1定义是：
+     * <pre>
+     *  主题名称
+     * </pre>
+     * 
+     *  <p>有关{@code Name}和其他相关定义,请参阅{@link #getIssuerDN()getIssuerDN}。
+     * 
+     * 
      * @return a Principal whose name is the subject name.
      * @see #getIssuerDN()
      */
@@ -385,6 +517,17 @@ public abstract class X509Certificate extends Certificate {
      *     generalTime    GeneralizedTime }
      * </pre>
      *
+     * <p>
+     *  从证书的有效期获取{@code notBefore}日期。相关的ASN.1定义是：
+     * <pre>
+     *  有效性
+     * 
+     *  Validity :: = SEQUENCE {不是CertificateValidityDate之前,不是CertificateValidityDate之后}
+     * 
+     * CertificateValidityDate :: = CHOICE {utcTime UTCTime,generalTime GeneralizedTime}
+     * </pre>
+     * 
+     * 
      * @return the start date of the validity period.
      * @see #checkValidity()
      */
@@ -395,6 +538,10 @@ public abstract class X509Certificate extends Certificate {
      * the certificate. See {@link #getNotBefore() getNotBefore}
      * for relevant ASN.1 definitions.
      *
+     * <p>
+     *  从证书的有效期获取{@code notAfter}日期。有关ASN.1定义,请参见{@link #getNotBefore()getNotBefore}。
+     * 
+     * 
      * @return the end date of the validity period.
      * @see #checkValidity()
      */
@@ -418,6 +565,18 @@ public abstract class X509Certificate extends Certificate {
      * <p>The algorithm name is determined from the {@code algorithm}
      * OID string.
      *
+     * <p>
+     *  获取证书签名算法的签名算法名称。一个例子是字符串"SHA-1 / DSA"。对此的ASN.1定义是：
+     * <pre>
+     *  signatureAlgorithm AlgorithmIdentifier
+     * 
+     *  AlgorithmIdentifier :: = SEQUENCE {algorithm OBJECT IDENTIFIER,parameters ANY DEFINED BY algorithm OPTIONAL}
+     *   - 包含类型的值 - 注册用于 - 算法对象标识符值。
+     * </pre>
+     * 
+     *  <p>算法名称由{@code algorithm} OID字符串确定。
+     * 
+     * 
      * @return the signature algorithm name.
      */
     public abstract String getSigAlgName();
@@ -432,6 +591,8 @@ public abstract class X509Certificate extends Certificate {
      * <p>See {@link #getSigAlgName() getSigAlgName} for
      * relevant ASN.1 definitions.
      *
+     * <p>
+     * 
      * @return the signature algorithm OID string.
      */
     public abstract String getSigAlgOID();
@@ -445,6 +606,12 @@ public abstract class X509Certificate extends Certificate {
      * <p>See {@link #getSigAlgName() getSigAlgName} for
      * relevant ASN.1 definitions.
      *
+     * <p>
+     *  从证书获取签名算法OID字符串。 OID由用句点分隔的一组正整数表示。例如,字符串"1.2.840.10040.4.3"根据PKIX第一部分标识具有DSA签名算法的SHA-1。
+     * 
+     *  <p>有关ASN.1定义,请参阅{@link #getSigAlgName()getSigAlgName}。
+     * 
+     * 
      * @return the DER-encoded signature algorithm parameters, or
      *         null if no parameters are present.
      */

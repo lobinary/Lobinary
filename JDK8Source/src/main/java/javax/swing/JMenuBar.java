@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,25 @@ import javax.accessibility.*;
  *   attribute: isContainer true
  * description: A container for holding and displaying menus.
  *
+ * <p>
+ *  一个菜单栏的实现。您可以向菜单栏中添加<code> JMenu </code>对象以构建菜单。
+ * 当用户选择一个<code> JMenu </code>对象时,会显示其相关的<code> JPopupMenu </code>,允许用户选择<code> JMenuItem </code>。
+ * <p>
+ *  有关使用菜单栏的信息和示例,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html">如何使用
+ * 菜单</a>, em> Java教程。
+ * </em>。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * <p>
+ * <strong>警告：</strong>默认情况下,按Tab键不会将焦点从与其他Swing组件一起添加到容器的<code> JMenuBar </code>中转移,因为<code> focusTrave
+ * rsalKeysEnabled <代码>属性<code> JMenuBar </code>设置为<code> false </code>。
+ * 要解决此问题,您应该调用<code> JMenuBar.setFocusTraversalKeysEnabled(true)</code>方法。
+ *  @beaninfo属性：isContainer true description：用于保存和显示菜单的容器。
+ * 
+ * 
  * @author Georges Saab
  * @author David Karlton
  * @author Arnaud Weber
@@ -93,6 +113,8 @@ import javax.accessibility.*;
 public class JMenuBar extends JComponent implements Accessible,MenuElement
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -100,6 +122,9 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
 
     /*
      * Model for the selected subcontrol.
+     * <p>
+     *  所选子控件的模型。
+     * 
      */
     private transient SingleSelectionModel selectionModel;
 
@@ -113,6 +138,9 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
 
     /**
      * Creates a new menu bar.
+     * <p>
+     *  创建一个新的菜单栏。
+     * 
      */
     public JMenuBar() {
         super();
@@ -123,6 +151,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
 
     /**
      * Returns the menubar's current UI.
+     * <p>
+     *  返回菜单栏的当前UI。
+     * 
+     * 
      * @see #setUI
      */
     public MenuBarUI getUI() {
@@ -132,6 +164,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Sets the L&amp;F object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @param ui the new MenuBarUI L&amp;F object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -147,6 +183,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Resets the UI property with a value from the current look and feel.
      *
+     * <p>
+     *  使用当前外观的值重置UI属性。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -157,6 +197,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Returns the name of the L&amp;F class that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F类的名称。
+     * 
+     * 
      * @return the string "MenuBarUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -169,6 +213,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Returns the model object that handles single selections.
      *
+     * <p>
+     *  返回处理单个选择的模型对象。
+     * 
+     * 
      * @return the <code>SingleSelectionModel</code> property
      * @see SingleSelectionModel
      */
@@ -179,6 +227,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Sets the model object to handle single selections.
      *
+     * <p>
+     *  设置模型对象以处理单个选择。
+     * 
+     * 
      * @param model the <code>SingleSelectionModel</code> to use
      * @see SingleSelectionModel
      * @beaninfo
@@ -195,6 +247,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Appends the specified menu to the end of the menu bar.
      *
+     * <p>
+     *  将指定的菜单附加到菜单栏的末尾。
+     * 
+     * 
      * @param c the <code>JMenu</code> component to add
      * @return the menu component
      */
@@ -206,6 +262,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Returns the menu at the specified position in the menu bar.
      *
+     * <p>
+     *  返回菜单栏中指定位置的菜单。
+     * 
+     * 
      * @param index  an integer giving the position in the menu bar, where
      *               0 is the first position
      * @return the <code>JMenu</code> at that position, or <code>null</code> if
@@ -222,6 +282,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Returns the number of items in the menu bar.
      *
+     * <p>
+     *  返回菜单栏中的项目数。
+     * 
+     * 
      * @return the number of items in the menu bar
      */
     public int getMenuCount() {
@@ -233,6 +297,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * "help" option in the menu bar. This method is not yet implemented
      * and will throw an exception.
      *
+     * <p>
+     *  设置用户在菜单栏中选择"帮助"选项时显示的帮助菜单。这个方法还没有实现,会抛出异常。
+     * 
+     * 
      * @param menu the JMenu that delivers help to the user
      */
     public void setHelpMenu(JMenu menu) {
@@ -243,6 +311,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * Gets the help menu for the menu bar.  This method is not yet
      * implemented and will throw an exception.
      *
+     * <p>
+     *  获取菜单栏的帮助菜单。这个方法还没有实现,会抛出异常。
+     * 
+     * 
      * @return the <code>JMenu</code> that delivers help to the user
      */
     @Transient
@@ -253,6 +325,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Returns the component at the specified index.
      *
+     * <p>
+     *  返回指定索引处的组件。
+     * 
+     * 
      * @param i an integer specifying the position, where 0 is first
      * @return the <code>Component</code> at the position,
      *          or <code>null</code> for an invalid index
@@ -269,6 +345,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Returns the index of the specified component.
      *
+     * <p>
+     *  返回指定组件的索引。
+     * 
+     * 
      * @param c  the <code>Component</code> to find
      * @return an integer giving the component's position, where 0 is first;
      *          or -1 if it can't be found
@@ -288,6 +368,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * Sets the currently selected component, producing a
      * a change to the selection model.
      *
+     * <p>
+     *  设置当前选定的组件,对选择模型进行更改。
+     * 
+     * 
      * @param sel the <code>Component</code> to select
      */
     public void setSelected(Component sel) {
@@ -299,6 +383,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Returns true if the menu bar currently has a component selected.
      *
+     * <p>
+     * 如果菜单栏当前选择了某个组件,则返回true。
+     * 
+     * 
      * @return true if a selection has been made, else false
      */
     public boolean isSelected() {
@@ -308,6 +396,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Returns true if the menu bars border should be painted.
      *
+     * <p>
+     *  如果菜单栏边框应该被绘,则返回true。
+     * 
+     * 
      * @return  true if the border should be painted, else false
      */
     public boolean isBorderPainted() {
@@ -317,6 +409,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Sets whether the border should be painted.
      *
+     * <p>
+     *  设置是否应该绘制边框。
+     * 
+     * 
      * @param b if true and border property is not <code>null</code>,
      *          the border is painted.
      * @see #isBorderPainted
@@ -339,6 +435,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * Paints the menubar's border if <code>BorderPainted</code>
      * property is true.
      *
+     * <p>
+     *  如果<code> BorderPainted </code>属性为true,则绘制菜单栏的边框。
+     * 
+     * 
      * @param g the <code>Graphics</code> context to use for painting
      * @see JComponent#paint
      * @see JComponent#setBorder
@@ -354,6 +454,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * its menus. Setting to <code>null</code> will cause the menubar to
      * use the default margins.
      *
+     * <p>
+     *  设置菜单栏边框和菜单之间的边距。设置为<code> null </code>将使菜单栏使用默认边距。
+     * 
+     * 
      * @param m an Insets object containing the margin values
      * @see Insets
      * @beaninfo
@@ -376,6 +480,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * its menus.  If there is no previous margin, it will create
      * a default margin with zero size.
      *
+     * <p>
+     *  返回菜单栏边框和菜单之间的边距。如果没有上一个保证金,它将创建一个零尺寸的默认保证金。
+     * 
+     * 
      * @return an <code>Insets</code> object containing the margin values
      * @see Insets
      */
@@ -391,6 +499,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Implemented to be a <code>MenuElement</code> -- does nothing.
      *
+     * <p>
+     *  实现为<code> MenuElement </code>  - 什么都不做。
+     * 
+     * 
      * @see #getSubElements
      */
     public void processMouseEvent(MouseEvent event,MenuElement path[],MenuSelectionManager manager) {
@@ -399,6 +511,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Implemented to be a <code>MenuElement</code> -- does nothing.
      *
+     * <p>
+     *  实现为<code> MenuElement </code>  - 什么都不做。
+     * 
+     * 
      * @see #getSubElements
      */
     public void processKeyEvent(KeyEvent e,MenuElement path[],MenuSelectionManager manager) {
@@ -407,6 +523,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Implemented to be a <code>MenuElement</code> -- does nothing.
      *
+     * <p>
+     *  实现为<code> MenuElement </code>  - 什么都不做。
+     * 
+     * 
      * @see #getSubElements
      */
     public void menuSelectionChanged(boolean isIncluded) {
@@ -418,6 +538,11 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * This is the reason for implementing the <code>MenuElement</code>
      * interface -- so that the menu bar can be treated the same as
      * other menu elements.
+     * <p>
+     *  实现为<code> MenuElement </code>  - 返回此菜单栏中的菜单。
+     * 这是实现<code> MenuElement </code>接口的原因 - 以便菜单栏可以被视为与其他菜单元素相同。
+     * 
+     * 
      * @return an array of menu items in the menu bar.
      */
     public MenuElement[] getSubElements() {
@@ -442,6 +567,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Implemented to be a <code>MenuElement</code>. Returns this object.
      *
+     * <p>
+     *  实现为<code> MenuElement </code>。返回此对象。
+     * 
+     * 
      * @return the current <code>Component</code> (this)
      * @see #getSubElements
      */
@@ -458,6 +587,11 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JMenuBar </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JMenuBar</code>
      */
     protected String paramString() {
@@ -481,6 +615,11 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * AccessibleJMenuBar.
      * A new AccessibleJMenuBar instance is created if necessary.
      *
+     * <p>
+     *  获取与此JMenuBar相关联的AccessibleContext。对于JMenuBars,AccessibleContext采用AccessibleJMenuBar的形式。
+     * 如果需要,将创建一个新的AccessibleJMenuBar实例。
+     * 
+     * 
      * @return an AccessibleJMenuBar that serves as the
      *         AccessibleContext of this JMenuBar
      */
@@ -505,6 +644,12 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 此类实现<code> JMenuBar </code>类的辅助功能支持。它提供了适用于菜单栏用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     @SuppressWarnings("serial")
     protected class AccessibleJMenuBar extends AccessibleJComponent
@@ -513,6 +658,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
         /**
          * Get the accessible state set of this object.
          *
+         * <p>
+         *  获取此对象的可访问状态集。
+         * 
+         * 
          * @return an instance of AccessibleState containing the current state
          *         of the object
          */
@@ -524,6 +673,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          */
@@ -537,6 +690,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
          * return this object, which is responsible for implementing the
          * AccessibleSelection interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleSelection。在为此类实现Java Accessibility API时,返回此对象,它负责代表自身实现AccessibleSelection接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleSelection getAccessibleSelection() {
@@ -546,6 +703,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
         /**
          * Returns 1 if a menu is currently selected in this menu bar.
          *
+         * <p>
+         *  如果当前在此菜单栏中选择了菜单,则返回1。
+         * 
+         * 
          * @return 1 if a menu is currently selected, else 0
          */
          public int getAccessibleSelectionCount() {
@@ -559,6 +720,9 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
         /**
          * Returns the currently selected menu if one is selected,
          * otherwise null.
+         * <p>
+         *  返回当前选择的菜单(如果选择了),否则返回null。
+         * 
          */
          public Accessible getAccessibleSelection(int i) {
             if (isSelected()) {
@@ -576,6 +740,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
         /**
          * Returns true if the current child of this object is selected.
          *
+         * <p>
+         *  如果选择此对象的当前子项,则返回true。
+         * 
+         * 
          * @param i the zero-based index of the child in this Accessible
          * object.
          * @see AccessibleContext#getAccessibleChild
@@ -590,6 +758,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
          * it to close.  If the nth menu is already selected, this
          * method has no effect.
          *
+         * <p>
+         *  选择菜单栏中的第n个菜单,强制它弹出。如果弹出另一个菜单,这将强制它关闭。如果已选择第n个菜单,则此方法无效。
+         * 
+         * 
          * @param i the zero-based index of selectable items
          * @see #getAccessibleStateSet
          */
@@ -624,6 +796,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
          * selection.  If the nth item isn't currently selected, this
          * method has no effect.  Otherwise, it closes the popup menu.
          *
+         * <p>
+         *  从对象的选择中删除对象中的第n个选定项目。如果第n个项目当前未选中,则此方法无效。否则,它关闭弹出菜单。
+         * 
+         * 
          * @param i the zero-based index of selectable items
          */
         public void removeAccessibleSelection(int i) {
@@ -640,6 +816,9 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
         /**
          * Clears the selection in the object, so that nothing in the
          * object is selected.  This will close any open menu.
+         * <p>
+         * 清除对象中的选择,以便不选择对象中的任何内容。这将关闭任何打开的菜单。
+         * 
          */
         public void clearAccessibleSelection() {
             int i = getSelectionModel().getSelectedIndex();
@@ -657,6 +836,9 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
          * Normally causes every selected item in the object to be selected
          * if the object supports multiple selections.  This method
          * makes no sense in a menu bar, and so does nothing.
+         * <p>
+         *  如果对象支持多个选择,通常会导致选择对象中的每个选定项目。这种方法在菜单栏中没有意义,因此什么都不做。
+         * 
          */
         public void selectAllAccessibleSelection() {
         }
@@ -665,6 +847,10 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
 
     /**
      * Subclassed to check all the child menus.
+     * <p>
+     *  子类化以检查所有子菜单。
+     * 
+     * 
      * @since 1.3
      */
     protected boolean processKeyBinding(KeyStroke ks, KeyEvent e,
@@ -714,6 +900,9 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Overrides <code>JComponent.addNotify</code> to register this
      * menu bar with the current keyboard manager.
+     * <p>
+     *  覆盖<code> JComponent.addNotify </code>以使用当前键盘管理器注册此菜单栏。
+     * 
      */
     public void addNotify() {
         super.addNotify();
@@ -723,6 +912,9 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * Overrides <code>JComponent.removeNotify</code> to unregister this
      * menu bar with the current keyboard manager.
+     * <p>
+     *  覆盖<code> JComponent.removeNotify </code>以使用当前键盘管理器取消注册此菜单栏。
+     * 
      */
     public void removeNotify() {
         super.removeNotify();
@@ -755,6 +947,8 @@ public class JMenuBar extends JComponent implements Accessible,MenuElement
     /**
      * See JComponent.readObject() for information about serialization
      * in Swing.
+     * <p>
+     *  有关Swing中序列化的信息,请参阅JComponent.readObject()。
      */
     private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException
     {

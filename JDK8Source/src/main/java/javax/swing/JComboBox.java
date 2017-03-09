@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -66,6 +67,20 @@ import javax.accessibility.*;
  * in <a href="https://docs.oracle.com/javase/tutorial/"><em>The Java Tutorial</em></a>
  * for further information.
  * <p>
+ * <p>
+ *  组合按钮或可编辑字段和下拉列表的组件。用户可以从根据用户请求显示的下拉列表中选择一个值。如果使组合框可编辑,则组合框包括可编辑字段,用户可以在其中键入值。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * <p>
+ *  请参阅<a href ="https：// docs中的<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/combobox.html">
+ * 如何使用组合框</a>。
+ *  oracle.com/javase/tutorial/"><em> Java教程</em> </a>了解更多信息。
+ * <p>
+ * 
  * @see ComboBoxModel
  * @see DefaultComboBoxModel
  *
@@ -81,6 +96,8 @@ import javax.accessibility.*;
 public class JComboBox<E> extends JComponent
 implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -90,6 +107,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #getModel
      * @see #setModel
      */
@@ -98,6 +119,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #getRenderer
      * @see #setRenderer
      */
@@ -106,6 +131,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     * 此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #getEditor
      * @see #setEditor
      */
@@ -114,6 +143,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #getMaximumRowCount
      * @see #setMaximumRowCount
      */
@@ -123,6 +156,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #isEditable
      * @see #setEditable
      */
@@ -131,6 +168,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #setKeySelectionManager
      * @see #getKeySelectionManager
      */
@@ -139,6 +180,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #setActionCommand
      * @see #getActionCommand
      */
@@ -147,6 +192,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #setLightWeightPopupEnabled
      * @see #isLightWeightPopupEnabled
      */
@@ -155,6 +204,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * This protected field is implementation specific. Do not access directly
      * or override.
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。
+     * 
      */
     protected Object selectedItemReminder = null;
 
@@ -173,6 +225,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * this constructor does not create a default combo box model and
      * may impact how the insert, remove and add methods behave.
      *
+     * <p>
+     *  创建从现有<code> ComboBoxModel </code>获取其项目的<code> JComboBox </code>。
+     * 由于提供了<code> ComboBoxModel </code>,使用此构造函数创建的组合框不会创建默认组合框模型,并且可能会影响插入,删除和添加方法的行为。
+     * 
+     * 
      * @param aModel the <code>ComboBoxModel</code> that provides the
      *          displayed list of items
      * @see DefaultComboBoxModel
@@ -188,6 +245,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * in the specified array.  By default the first item in the array
      * (and therefore the data model) becomes selected.
      *
+     * <p>
+     *  创建一个包含指定数组中的元素的<code> JComboBox </code>。默认情况下,数组中的第一个项目(因此也就是数据模型)被选中。
+     * 
+     * 
      * @param items  an array of objects to insert into the combo box
      * @see DefaultComboBoxModel
      */
@@ -202,6 +263,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * in the specified Vector.  By default the first item in the vector
      * (and therefore the data model) becomes selected.
      *
+     * <p>
+     *  创建一个包含指定向量中的元素的<code> JComboBox </code>。默认情况下,向量中的第一个项目(以及数据模型)将被选中。
+     * 
+     * 
      * @param items  an array of vectors to insert into the combo box
      * @see DefaultComboBoxModel
      */
@@ -217,6 +282,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Use <code>addItem</code> to add items.  By default the first item
      * in the data model becomes selected.
      *
+     * <p>
+     * 使用默认数据模型创建<code> JComboBox </code>。默认数据模型是一个空的对象列表。使用<code> addItem </code>添加项目。
+     * 默认情况下,数据模型中的第一个项目被选中。
+     * 
+     * 
      * @see DefaultComboBoxModel
      */
     public JComboBox() {
@@ -244,6 +314,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Sets the L&amp;F object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @param ui  the <code>ComboBoxUI</code> L&amp;F object
      * @see UIDefaults#getUI
      *
@@ -260,6 +334,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Resets the UI property to a value from the current look and feel.
      *
+     * <p>
+     *  将UI属性重置为当前外观的值。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -275,6 +353,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Returns the name of the L&amp;F class that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F类的名称。
+     * 
+     * 
      * @return the string "ComboBoxUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -287,6 +369,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Returns the L&amp;F object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @return the ComboBoxUI object that renders this component
      */
     public ComboBoxUI getUI() {
@@ -297,6 +383,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Sets the data model that the <code>JComboBox</code> uses to obtain
      * the list of items.
      *
+     * <p>
+     *  设置<code> JComboBox </code>用于获取项目列表的数据模型。
+     * 
+     * 
      * @param aModel the <code>ComboBoxModel</code> that provides the
      *  displayed list of items
      *
@@ -321,6 +411,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Returns the data model currently used by the <code>JComboBox</code>.
      *
+     * <p>
+     *  返回<code> JComboBox </code>当前使用的数据模型。
+     * 
+     * 
      * @return the <code>ComboBoxModel</code> that provides the displayed
      *                  list of items
      */
@@ -330,6 +424,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
     /*
      * Properties
+     * <p>
+     *  属性
+     * 
      */
 
     /**
@@ -353,6 +450,18 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * See the article <a href="http://www.oracle.com/technetwork/articles/java/mixing-components-433992.html">Mixing Heavy and Light Components</a>
      * This method fires a property changed event.
      *
+     * <p>
+     *  设置<code> lightWeightPopupEnabled </code>属性,它提供了一个提示,说明是否应该使用一个轻量级的<code> Component </code>来包含<code> 
+     * JComboBox </code>代码>组件</code>,例如<code> Panel </code>或<code> Window </code>。
+     * 轻量级和重量级的决定最终取决于<code> JComboBox </code>。轻量级窗口比重量级窗口更高效,但轻量级和重量级组件在GUI中不能很好地混合。
+     * 如果您的应用程序混合轻量级和重量级组件,则应禁用轻量级弹出窗口。
+     * 除非另有指定,否则<code> lightWeightPopupEnabled </code>属性的默认值为<code> true </code>。
+     * 有些外观和感觉总是使用重量级的弹出窗口,无论这个属性的值。
+     * <p>
+     * 请参阅文章<a href="http://www.oracle.com/technetwork/articles/java/mixing-components-433992.html">混合重型和轻型组
+     * 件</a>此方法触发属性已更改事件。
+     * 
+     * 
      * @param aFlag if <code>true</code>, lightweight popups are desired
      *
      * @beaninfo
@@ -370,6 +479,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Gets the value of the <code>lightWeightPopupEnabled</code>
      * property.
      *
+     * <p>
+     *  获取<code> lightWeightPopupEnabled </code>属性的值。
+     * 
+     * 
      * @return the value of the <code>lightWeightPopupEnabled</code>
      *    property
      * @see #setLightWeightPopupEnabled
@@ -387,6 +500,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * displays the selected item in the field,
      * but the selection cannot be modified.
      *
+     * <p>
+     *  确定<code> JComboBox </code>字段是否可编辑。可编辑的<code> JComboBox </code>允许用户键入字段或从列表中选择一个项目来初始化字段,之后可以编辑它。
+     *  (编辑仅影响字段,列表项保持不变。)不可编辑的<code> JComboBox </code>在字段中显示所选项,但不能修改选择。
+     * 
+     * 
      * @param aFlag a boolean value, where true indicates that the
      *                  field is editable
      *
@@ -405,6 +523,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns true if the <code>JComboBox</code> is editable.
      * By default, a combo box is not editable.
      *
+     * <p>
+     *  如果<code> JComboBox </code>可编辑,则返回true。默认情况下,组合框不可编辑。
+     * 
+     * 
      * @return true if the <code>JComboBox</code> is editable, else false
      */
     public boolean isEditable() {
@@ -416,6 +538,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * If the number of objects in the model is greater than count,
      * the combo box uses a scrollbar.
      *
+     * <p>
+     *  设置<code> JComboBox </code>显示的最大行数。如果模型中的对象数量大于count,组合框使用滚动条。
+     * 
+     * 
      * @param count an integer specifying the maximum number of items to
      *              display in the list before using a scrollbar
      * @beaninfo
@@ -433,6 +559,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns the maximum number of items the combo box can display
      * without a scrollbar
      *
+     * <p>
+     *  返回组合框在没有滚动条的情况下可显示的最大项数
+     * 
+     * 
      * @return an integer specifying the maximum number of items that are
      *         displayed in the list before using a scrollbar
      */
@@ -453,6 +583,14 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * <code>aRenderer.getListCellRendererComponent</code>
      * is called, passing the list object and an index of -1.
      *
+     * <p>
+     *  设置描绘JComboBox字段中列表项和从列表中选择的项的渲染器。如果JComboBox不可编辑,则使用渲染器。如果它是可编辑的,则编辑器用于呈现和编辑所选项目。
+     * <p>
+     *  默认渲染器显示字符串或图标。其他渲染器可以处理图形图像和复合项目。
+     * <p>
+     * 为了显示所选项目,调用<code> aRenderer.getListCellRendererComponent </code>,传递列表对象和索引-1。
+     * 
+     * 
      * @param aRenderer  the <code>ListCellRenderer</code> that
      *                  displays the selected item
      * @see #setEditor
@@ -472,6 +610,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns the renderer used to display the selected item in the
      * <code>JComboBox</code> field.
      *
+     * <p>
+     *  返回用于在<code> JComboBox </code>字段中显示所选项目的渲染器。
+     * 
+     * 
      * @return  the <code>ListCellRenderer</code> that displays
      *                  the selected item.
      */
@@ -485,6 +627,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * receiving <code>JComboBox</code> is editable. If not editable,
      * the combo box uses the renderer to paint the selected item.
      *
+     * <p>
+     *  设置用于在<code> JComboBox </code>字段中绘制和编辑所选项目的编辑器。仅当接收<code> JComboBox </code>可编辑时,才使用编辑器。
+     * 如果不可编辑,组合框使用渲染器绘制所选项目。
+     * 
+     * 
      * @param anEditor  the <code>ComboBoxEditor</code> that
      *                  displays the selected item
      * @see #setRenderer
@@ -510,6 +657,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns the editor used to paint and edit the selected item in the
      * <code>JComboBox</code> field.
      *
+     * <p>
+     *  返回用于绘制和编辑<code> JComboBox </code>字段中所选项目的编辑器。
+     * 
+     * 
      * @return the <code>ComboBoxEditor</code> that displays the selected item
      */
     public ComboBoxEditor getEditor() {
@@ -542,6 +693,21 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * <code>ActionListener</code>s added to the combo box will be notified
      * with an <code>ActionEvent</code> when this method is called.
      *
+     * <p>
+     *  将组合框显示区域中的选定项目设置为参数中的对象。如果<code> anObject </code>在列表中,则显示区域显示<code> anObject </code>被选中。
+     * <p>
+     *  如果列表中的<code> anObject </code> <i>不是</i>,并且组合框是不可编辑的,则不会更改当前选择。
+     * 对于可编辑组合框,选择将更改为<code> anObject </code>。
+     * <p>
+     *  如果这构成所选项目的改变,则将向一个或两个<code> ItemEvent </code>通知添加到组合框中的<code> ItemListener </code>。
+     * 如果存在当前选择的项目,则将触发<code> ItemEvent </code>,并且状态改变将是<code> ItemEvent.DESELECTED </code>。
+     * 如果<code> anObject </code>在列表中,并且当前未被选择,则会触发<code> ItemEvent </code>,状态更改将为<code> ItemEvent.SELECTED </code>
+     * 。
+     * 如果存在当前选择的项目,则将触发<code> ItemEvent </code>,并且状态改变将是<code> ItemEvent.DESELECTED </code>。
+     * <p>
+     * <code>当调用此方法时,添加到组合框中的ActionListener </code>将通过<code> ActionEvent </code>通知。
+     * 
+     * 
      * @param anObject  the list object to select; use <code>null</code> to
                         clear the selection
      * @beaninfo
@@ -593,6 +759,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * to the combo box with <code>addItem</code>, <code>insertItemAt</code>
      * or the data constructors.
      *
+     * <p>
+     *  返回当前选定的项目。
+     * <p>
+     *  如果组合框是可编辑的,则此值可能未添加到包含<code> addItem </code>,<code> insertItemAt </code>或数据构造函数的组合框中。
+     * 
+     * 
      * @return the current selected Object
      * @see #setSelectedItem
      */
@@ -603,6 +775,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Selects the item at index <code>anIndex</code>.
      *
+     * <p>
+     *  选择索引<code> anIndex </code>下的项目。
+     * 
+     * 
      * @param anIndex an integer specifying the list item to select,
      *                  where 0 specifies the first item in the list and -1 indicates no selection
      * @exception IllegalArgumentException if <code>anIndex</code> &lt; -1 or
@@ -630,6 +806,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns -1 if there is no selected item or if the user specified
      * an item which is not in the list.
 
+     * <p>
+     *  返回列表中与给定项匹配的第一个项。如果<code> JComboBox </code>允许不在列表中的选定项目,则结果并不总是定义的。如果没有选定的项目或用户指定的项目不在列表中,则返回-1。
+     * 
+     * 
      * @return an integer specifying the currently selected list item,
      *                  where 0 specifies
      *                  the first item in the list;
@@ -654,6 +834,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns the "prototypical display" value - an Object used
      * for the calculation of the display height and width.
      *
+     * <p>
+     *  返回"原型显示"值 - 用于计算显示高度和宽度的对象。
+     * 
+     * 
      * @return the value of the <code>prototypeDisplayValue</code> property
      * @see #setPrototypeDisplayValue
      * @since 1.4
@@ -675,6 +859,13 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * the model and its preferred size obtained, which can be
      * relatively expensive.
      *
+     * <p>
+     *  设置用于计算UI部分的显示大小的原型显示值。
+     * <p>
+     *  如果指定了原型显示值,则通过使用原型显示值配置渲染器并获得其优选大小来计算组合框的优选大小。当组合框将显示大量数据时,指定首选显示值通常很有用。
+     * 如果未指定原型显示值,则必须为模型中的每个值及其获得的首选大小配置渲染器,这可能相对昂贵。
+     * 
+     * 
      * @param prototypeDisplayValue
      * @see #getPrototypeDisplayValue
      * @since 1.4
@@ -708,6 +899,16 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      *   }
      * </pre>
      *
+     * <p>
+     *  将项目添加到项目列表。仅当<code> JComboBox </code>使用可变数据模型时,此方法才有效。
+     * <p>
+     * <strong>警告：</strong>如果您添加重复的String对象,则可能会出现焦点和键盘导航问题。解决方法是添加新对象而不是String对象,并确保定义了toString()方法。例如：
+     * <pre>
+     *  comboBox.addItem(makeObj("Item 1")); comboBox.addItem(makeObj("Item 1")); ... private Object makeObj
+     * (final String item){return new Object(){public String toString(){return item; }}; }}。
+     * </pre>
+     * 
+     * 
      * @param item the item to add to the list
      * @see MutableComboBoxModel
      */
@@ -721,6 +922,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This method works only if the <code>JComboBox</code> uses a
      * mutable data model.
      *
+     * <p>
+     *  在给定索引的项目列表中插入项目。仅当<code> JComboBox </code>使用可变数据模型时,此方法才有效。
+     * 
+     * 
      * @param item the item to add to the list
      * @param index    an integer specifying the position at which
      *                  to add the item
@@ -736,6 +941,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This method works only if the <code>JComboBox</code> uses a
      * mutable data model.
      *
+     * <p>
+     *  从项目列表中删除项目。仅当<code> JComboBox </code>使用可变数据模型时,此方法才有效。
+     * 
+     * 
      * @param anObject  the object to remove from the item list
      * @see MutableComboBoxModel
      */
@@ -749,6 +958,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This method works only if the <code>JComboBox</code> uses a
      * mutable data model.
      *
+     * <p>
+     *  删除<code> anIndex </code>上的项目此方法仅在<code> JComboBox </code>使用可变数据模型时才有效。
+     * 
+     * 
      * @param anIndex  an int specifying the index of the item to remove,
      *                  where 0
      *                  indicates the first item in the list
@@ -761,6 +974,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
     /**
      * Removes all items from the item list.
+     * <p>
+     *  从项目列表中删除所有项目。
+     * 
      */
     public void removeAllItems() {
         checkMutableComboBoxModel();
@@ -785,6 +1001,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Checks that the <code>dataModel</code> is an instance of
      * <code>MutableComboBoxModel</code>.  If not, it throws an exception.
+     * <p>
+     *  检查<code> dataModel </code>是<code> MutableComboBoxModel </code>的实例。如果不是,它抛出异常。
+     * 
+     * 
      * @exception RuntimeException if <code>dataModel</code> is not an
      *          instance of <code>MutableComboBoxModel</code>.
      */
@@ -795,6 +1015,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
     /**
      * Causes the combo box to display its popup window.
+     * <p>
+     *  使组合框显示其弹出窗口。
+     * 
+     * 
      * @see #setPopupVisible
      */
     public void showPopup() {
@@ -803,6 +1027,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
     /**
      * Causes the combo box to close its popup window.
+     * <p>
+     *  使组合框关闭其弹出窗口。
+     * 
+     * 
      * @see #setPopupVisible
      */
     public void hidePopup() {
@@ -811,6 +1039,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
     /**
      * Sets the visibility of the popup.
+     * <p>
+     *  设置弹出窗口的可见性。
+     * 
      */
     public void setPopupVisible(boolean v) {
         getUI().setPopupVisible(this, v);
@@ -819,6 +1050,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Determines the visibility of the popup.
      *
+     * <p>
+     *  确定弹出窗口的可见性。
+     * 
+     * 
      * @return true if the popup is visible, otherwise returns false
      */
     public boolean isPopupVisible() {
@@ -833,6 +1068,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * <code>aListener</code> will receive one or two <code>ItemEvent</code>s when
      * the selected item changes.
      *
+     * <p>
+     *  添加<code> ItemListener </code>。
+     * <p>
+     *  当所选项目改变时,<code> aListener </code>会收到一个或两个<code> ItemEvent </code>。
+     * 
+     * 
      * @param aListener the <code>ItemListener</code> that is to be notified
      * @see #setSelectedItem
      */
@@ -842,6 +1083,8 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
     /** Removes an <code>ItemListener</code>.
      *
+     * <p>
+     * 
      * @param aListener  the <code>ItemListener</code> to remove
      */
     public void removeItemListener(ItemListener aListener) {
@@ -852,6 +1095,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns an array of all the <code>ItemListener</code>s added
      * to this JComboBox with addItemListener().
      *
+     * <p>
+     *  返回使用addItemListener()添加到此JComboBox的所有<code> ItemListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ItemListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -867,6 +1114,13 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * when a selection has been made. If the combo box is editable, then
      * an <code>ActionEvent</code> will be fired when editing has stopped.
      *
+     * <p>
+     *  添加<code> ActionListener </code>。
+     * <p>
+     * 当做出选择时,<code> ActionListener </code>将接收到<code> ActionEvent </code>。
+     * 如果组合框是可编辑的,那么当编辑停止时,会触发<code> ActionEvent </code>。
+     * 
+     * 
      * @param l  the <code>ActionListener</code> that is to be notified
      * @see #setSelectedItem
      */
@@ -876,6 +1130,8 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
     /** Removes an <code>ActionListener</code>.
      *
+     * <p>
+     * 
      * @param l  the <code>ActionListener</code> to remove
      */
     public void removeActionListener(ActionListener l) {
@@ -890,6 +1146,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns an array of all the <code>ActionListener</code>s added
      * to this JComboBox with addActionListener().
      *
+     * <p>
+     *  返回通过addActionListener()添加到此JComboBox的所有<code> ActionListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ActionListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -907,6 +1167,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * A custom look and feel may not implement it this way and will
      * therefore not receive the notification.
      *
+     * <p>
+     *  添加一个<code> PopupMenu </code>侦听器,它将侦听来自组合框弹出部分的通知消息。
+     * <p>
+     *  对于Java提供的所有标准外观和感觉,组合框的弹出列表部分实现为<code> JPopupMenu </code>。自定义的外观和感觉可能不会这样实现,因此不会收到通知。
+     * 
+     * 
      * @param l  the <code>PopupMenuListener</code> to add
      * @since 1.4
      */
@@ -917,6 +1183,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Removes a <code>PopupMenuListener</code>.
      *
+     * <p>
+     *  删除<code> PopupMenuListener </code>。
+     * 
+     * 
      * @param l  the <code>PopupMenuListener</code> to remove
      * @see #addPopupMenuListener
      * @since 1.4
@@ -929,6 +1199,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns an array of all the <code>PopupMenuListener</code>s added
      * to this JComboBox with addPopupMenuListener().
      *
+     * <p>
+     *  返回使用addPopupMenuListener()添加到此JComboBox的所有<code> PopupMenuListener </code>数组。
+     * 
+     * 
      * @return all of the <code>PopupMenuListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -943,6 +1217,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * <p>
      * This method is public but should not be called by anything other than
      * the UI delegate.
+     * <p>
+     *  通知<code> PopupMenuListener </code>,组合框的弹出部分将变为可见。
+     * <p>
+     *  此方法是公共的,但不应由除UI委托之外的任何其他方法调用。
+     * 
+     * 
      * @see #addPopupMenuListener
      * @since 1.4
      */
@@ -964,6 +1244,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * <p>
      * This method is public but should not be called by anything other than
      * the UI delegate.
+     * <p>
+     *  通知<code> PopupMenuListener </code>表明组合框的弹出部分已变为不可见。
+     * <p>
+     *  此方法是公共的,但不应由除UI委托之外的任何其他方法调用。
+     * 
+     * 
      * @see #addPopupMenuListener
      * @since 1.4
      */
@@ -985,6 +1271,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * <p>
      * This method is public but should not be called by anything other than
      * the UI delegate.
+     * <p>
+     *  通知<code> PopupMenuListener </code>表示组合框的弹出部分已取消。
+     * <p>
+     *  此方法是公共的,但不应由除UI委托之外的任何其他方法调用。
+     * 
+     * 
      * @see #addPopupMenuListener
      * @since 1.4
      */
@@ -1004,6 +1296,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Sets the action command that should be included in the event
      * sent to action listeners.
      *
+     * <p>
+     *  设置应发送到动作侦听器的事件中应包含的操作命令。
+     * 
+     * 
      * @param aCommand  a string containing the "command" that is sent
      *                  to action listeners; the same listener can then
      *                  do different things depending on the command it
@@ -1017,6 +1313,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Returns the action command that is included in the event sent to
      * action listeners.
      *
+     * <p>
+     * 返回发送到操作侦听器的事件中包含的操作命令。
+     * 
+     * 
      * @return  the string containing the "command" that is sent
      *          to action listeners.
      */
@@ -1053,6 +1353,25 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * {@code actionPropertyChanged} method when a property in the
      * {@code Action} changes.
      *
+     * <p>
+     *  为<code> ActionEvent </code>源设置<code> Action </code>。
+     * 新<code> Action </code>替换任何先前设置的<code> Action </code>,但不影响<code> addActionListener </code>独立添加的<code> 
+     * ActionListeners </code>。
+     *  为<code> ActionEvent </code>源设置<code> Action </code>。
+     * 如果<code> Action </code>已经是<code> ActionEvent </code>源的注册<code> ActionListener </code>,则不会重新注册。
+     * <p>
+     *  设置<code> Action </code>会立即更改<a href="Action.html#buttonActions"> Swing组件支持<code> Action </code> </a>
+     * 中描述的所有属性。
+     * 随后,随着<code> Action </code>的属性更改,组合框的属性会自动更新。
+     * <p>
+     *  此方法使用其他三种方法来设置和帮助跟踪<code> Action </code>的属性值。
+     * 它使用<code> configurePropertiesFromAction </code>方法立即更改组合框的属性。
+     * 要跟踪<code> Action </code>的属性值的更改,此方法注册<code> createActionPropertyChangeListener </code>返回的<code> Prope
+     * rtyChangeListener </code>。
+     * 它使用<code> configurePropertiesFromAction </code>方法立即更改组合框的属性。
+     *  {@code Action}中的属性更改时,默认的{@code PropertyChangeListener}调用{@code actionPropertyChanged}方法。
+     * 
+     * 
      * @param a the <code>Action</code> for the <code>JComboBox</code>,
      *                  or <code>null</code>.
      * @since 1.3
@@ -1105,6 +1424,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * <code>ActionEvent</code> source, or <code>null</code> if no
      * <code>Action</code> is set.
      *
+     * <p>
+     *  如果未设置<code> Action </code>,则为此<code> ActionEvent </code>源或<code> null </code>返回当前设置的<code> Action </code>
+     * 。
+     * 
+     * 
      * @return the <code>Action</code> for this <code>ActionEvent</code>
      *          source; or <code>null</code>
      * @since 1.3
@@ -1121,6 +1445,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Swing Components Supporting <code>Action</code></a> for more
      * details as to which properties this sets.
      *
+     * <p>
+     * 将此组合框上的属性设置为与指定的<code> Action </code>中的属性匹配。
+     * 有关此设置的属性的更多详细信息,请参阅<a href="Action.html#buttonActions"> Swing组件支持<code> Action </code> </a>。
+     * 
+     * 
      * @param a the <code>Action</code> from which to get the properties,
      *          or <code>null</code>
      * @since 1.3
@@ -1142,6 +1471,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * inner class.  If you do the lifetime of the combobox will be tied to
      * that of the <code>Action</code>.
      *
+     * <p>
+     *  创建并返回一个<code> PropertyChangeListener </code>,它负责侦听来自指定<code> Action </code>的更改并更新相应的属性。
+     * <p>
+     *  <b>警告：</b>如果你子类化这不创建一个匿名内部类。如果你做的组合框的生命周期将绑定到<code> Action </code>。
+     * 
+     * 
      * @param a the combobox's action
      * @since 1.3
      * @see Action
@@ -1164,6 +1499,14 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Swing Components Supporting <code>Action</code></a> for a list of
      * the properties this method sets.
      *
+     * <p>
+     *  更新组合框的状态以响应关联操作中的属性更改。
+     * 此方法从{@code createActionPropertyChangeListener}返回的{@code PropertyChangeListener}中调用。子类通常不需要调用这个。
+     * 支持其他{@code Action}属性的子类应该覆盖此类和{@code configurePropertiesFromAction}。
+     * <p>
+     *  请参阅<a href="Action.html#buttonActions"> Swing组件支持<code>操作</code> </a>中的表格,了解此方法设置的属性列表。
+     * 
+     * 
      * @param action the <code>Action</code> associated with this combobox
      * @param propertyName the name of the property that changed
      * @since 1.6
@@ -1206,6 +1549,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Notifies all listeners that have registered interest for
      * notification on this event type.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。
+     * 
+     * 
      * @param e  the event of interest
      *
      * @see EventListenerList
@@ -1229,6 +1576,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Notifies all listeners that have registered interest for
      * notification on this event type.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireActionEvent() {
@@ -1265,6 +1616,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * This protected method is implementation specific. Do not access directly
      * or override.
+     * <p>
+     *  这种受保护的方法是实现特定的。不要直接访问或覆盖。
+     * 
      */
     protected void selectedItemChanged() {
         if (selectedItemReminder != null ) {
@@ -1288,6 +1642,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * This method is implemented for compatibility with
      * <code>ItemSelectable</code>.
      *
+     * <p>
+     * 返回包含所选项目的数组。此方法是为了与<code> ItemSelectable </code>兼容而实现的。
+     * 
+     * 
      * @return an array of <code>Objects</code> containing one
      *          element -- the selected item
      */
@@ -1305,6 +1663,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * This method is public as an implementation side effect.
      * do not call or override.
+     * <p>
+     *  这个方法是public的,作为实现的副作用。不要调用或覆盖。
+     * 
      */
     public void actionPerformed(ActionEvent e) {
         ComboBoxEditor editor = getEditor();
@@ -1322,6 +1683,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * This method is public as an implementation side effect.
      * do not call or override.
+     * <p>
+     *  这个方法是public的,作为实现的副作用。不要调用或覆盖。
+     * 
      */
     public void contentsChanged(ListDataEvent e) {
         Object oldSelection = selectedItemReminder;
@@ -1337,6 +1701,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * This method is public as an implementation side effect.
      * do not call or override.
+     * <p>
+     *  这个方法是public的,作为实现的副作用。不要调用或覆盖。
+     * 
      */
     public void intervalAdded(ListDataEvent e) {
         if (selectedItemReminder != dataModel.getSelectedItem()) {
@@ -1347,6 +1714,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * This method is public as an implementation side effect.
      * do not call or override.
+     * <p>
+     *  这个方法是public的,作为实现的副作用。不要调用或覆盖。
+     * 
      */
     public void intervalRemoved(ListDataEvent e) {
         contentsChanged(e);
@@ -1357,6 +1727,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * character and returns true, if there is an item corresponding
      * to that character.  Otherwise, returns false.
      *
+     * <p>
+     *  选择与指定键盘字符相对应的列表项,并返回true,如果有与该字符相对应的项目。否则,返回false。
+     * 
+     * 
      * @param keyChar a char, typically this is a keyboard key
      *                  typed by the user
      */
@@ -1380,6 +1754,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * combo box is disabled, items cannot be selected and values
      * cannot be typed into its field (if it is editable).
      *
+     * <p>
+     *  启用组合框,以便可以选择项目。当组合框被禁用时,不能选择项目,并且不能在其字段中键入值(如果它是可编辑的)。
+     * 
+     * 
      * @param b a boolean value, where true enables the component and
      *          false disables it
      * @beaninfo
@@ -1395,6 +1773,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Initializes the editor with the specified item.
      *
+     * <p>
+     *  使用指定的项目初始化编辑器。
+     * 
+     * 
      * @param anEditor the <code>ComboBoxEditor</code> that displays
      *                  the list item in the
      *                  combo box field and allows it to be edited
@@ -1408,6 +1790,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * Handles <code>KeyEvent</code>s, looking for the Tab key.
      * If the Tab key is found, the popup window is closed.
      *
+     * <p>
+     *  处理<code> KeyEvent </code>,找到Tab键。如果找到Tab键,则弹出窗口关闭。
+     * 
+     * 
      * @param e  the <code>KeyEvent</code> containing the keyboard
      *          key that was pressed
      */
@@ -1420,6 +1806,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
@@ -1448,6 +1837,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * @beaninfo
      *       expert: true
      *  description: The objects that changes the selection when a key is pressed.
+     * <p>
+     *  设置将键盘字符转换为列表选择的对象。通常,具有匹配的第一字符的第一选择变为所选择的项目。
+     * 
+     *  @beaninfo expert：true description：按下某个键时更改选择的对象。
+     * 
      */
     public void setKeySelectionManager(KeySelectionManager aManager) {
         keySelectionManager = aManager;
@@ -1456,6 +1850,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Returns the list's key-selection manager.
      *
+     * <p>
+     *  返回列表的键选择管理器。
+     * 
+     * 
      * @return the <code>KeySelectionManager</code> currently in use
      */
     public KeySelectionManager getKeySelectionManager() {
@@ -1466,6 +1864,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Returns the number of items in the list.
      *
+     * <p>
+     *  返回列表中的项目数。
+     * 
+     * 
      * @return an integer equal to the number of items in the list
      */
     public int getItemCount() {
@@ -1477,6 +1879,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * is out of range (less than zero or greater than or equal to size)
      * it will return <code>null</code>.
      *
+     * <p>
+     *  返回指定索引处的列表项。如果<code> index </code>超出范围(小于零或大于或等于size),它将返回<code> null </code>。
+     * 
+     * 
      * @param index  an integer indicating the list position, where the first
      *               item starts at zero
      * @return the item at that list position; or
@@ -1489,6 +1895,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
     /**
      * Returns an instance of the default key-selection manager.
      *
+     * <p>
+     * 返回默认键选择管理器的实例。
+     * 
+     * 
      * @return the <code>KeySelectionManager</code> currently used by the list
      * @see #setKeySelectionManager
      */
@@ -1503,12 +1913,20 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * the class needs to implement the method
      * that identifies the list index given a character and the
      * combo box data model.
+     * <p>
+     *  定义<code> KeySelectionManager </code>的接口。
+     * 为了限定为<code> KeySelectionManager </code>,类需要实现识别给定字符的列表索引和组合框数据模型的方法。
+     * 
      */
     public interface KeySelectionManager {
         /** Given <code>aKey</code> and the model, returns the row
          *  that should become selected. Return -1 if no match was
          *  found.
          *
+         * <p>
+         *  应该选择。如果未找到匹配,则返回-1。
+         * 
+         * 
          * @param  aKey  a char value, usually indicating a keyboard key that
          *               was pressed
          * @param aModel a ComboBoxModel -- the component's data model, containing
@@ -1565,6 +1983,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * See <code>readObject</code> and <code>writeObject</code> in
      * <code>JComponent</code> for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅<code> readComponent </code>中的<code> readObject </code>和<code> writeObject </code>
+     * 。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -1585,6 +2007,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JComboBox </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JComboBox</code>
      */
     protected String paramString() {
@@ -1613,6 +2040,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * AccessibleJComboBox.
      * A new AccessibleJComboBox instance is created if necessary.
      *
+     * <p>
+     *  获取与此JComboBox相关联的AccessibleContext。对于组合框,AccessibleContext采用AccessibleJComboBox的形式。
+     * 如果需要,将创建一个新的AccessibleJComboBox实例。
+     * 
+     * 
      * @return an AccessibleJComboBox that serves as the
      *         AccessibleContext of this JComboBox
      */
@@ -1636,6 +2068,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现<code> JComboBox </code>类的辅助功能支持。它提供了适用于Combo Box用户界面元素的Java辅助功能API的实现。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class AccessibleJComboBox extends AccessibleJComponent
     implements AccessibleAction, AccessibleSelection {
@@ -1646,6 +2084,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
         /**
          * Returns an AccessibleJComboBox instance
+         * <p>
+         *  返回一个AccessibleJComboBox实例
+         * 
+         * 
          * @since 1.4
          */
         public AccessibleJComboBox() {
@@ -1668,6 +2110,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
         /*
          * JComboBox PropertyChangeListener
+         * <p>
+         *  JComboBox PropertyChangeListener
+         * 
          */
         private class AccessibleJComboBoxPropertyChangeListener
             implements PropertyChangeListener {
@@ -1683,6 +2128,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
         /*
          * Sets the combo box editor's accessible name and descripton
+         * <p>
+         *  设置组合框编辑器的可访问名称和描述符
+         * 
          */
         private void setEditorNameAndDescription() {
             ComboBoxEditor editor = JComboBox.this.getEditor();
@@ -1701,12 +2149,18 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
         /*
          * Listener for combo box popup menu
          * TIGER - 4669379 4894434
+         * <p>
+         *  组合框弹出菜单的侦听器TIGER  -  4669379 4894434
+         * 
          */
         private class AccessibleJComboBoxPopupMenuListener
             implements PopupMenuListener {
 
             /**
              *  This method is called before the popup menu becomes visible
+             * <p>
+             *  在弹出菜单变为可见之前调用此方法
+             * 
              */
             public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
                 // save the initial selection
@@ -1724,6 +2178,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
             /**
              * This method is called before the popup menu becomes invisible
              * Note that a JPopupMenu can become invisible any time
+             * <p>
+             *  此方法在弹出菜单变为不可见之前调用请注意,JPopupMenu可以随时变得不可见
+             * 
              */
             public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
                 // ignore
@@ -1731,6 +2188,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
 
             /**
              * This method is called when the popup menu is canceled
+             * <p>
+             *  当取消弹出菜单时调用此方法
+             * 
              */
             public void popupMenuCanceled(PopupMenuEvent e) {
                 // ignore
@@ -1740,6 +2200,9 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
         /*
          * Handles changes to the popup list selection.
          * TIGER - 4669379 4894434 4933143
+         * <p>
+         *  处理对弹出列表选择的更改。 TIGER  -  4669379 4894434 4933143
+         * 
          */
         private class AccessibleJComboBoxListSelectionListener
             implements ListSelectionListener {
@@ -1795,6 +2258,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * of the children of this object implement Accessible, than this
          * method should return the number of children of this object.
          *
+         * <p>
+         *  返回对象中可访问的子项数。如果这个对象的所有子对象实现Accessible,那么这个方法应该返回这个对象的子对象数。
+         * 
+         * 
          * @return the number of accessible children in the object.
          */
         public int getAccessibleChildrenCount() {
@@ -1812,6 +2279,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * If the combo box is editable, the child at index one
          * represents the editor.
          *
+         * <p>
+         *  返回对象的第n个Accessible子项。索引为零的子代表弹出窗口。如果组合框是可编辑的,索引为1的子代表编辑器。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the nth Accessible child of the object
          */
@@ -1827,6 +2298,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -1842,6 +2317,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * PropertyChangeEvent to be fired for the ACCESSIBLE_STATE_PROPERTY
          * property.
          *
+         * <p>
+         * 获取此对象的状态集。对象的AccessibleStateSet由一组唯一的AccessibleStates组成。
+         * 对象的AccessibleStateSet中的更改将导致针对ACCESSIBLE_STATE_PROPERTY属性触发PropertyChangeEvent。
+         * 
+         * 
          * @return an instance of AccessibleStateSet containing the
          * current state set of the object
          * @see AccessibleStateSet
@@ -1869,6 +2349,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * return this object, which is responsible for implementing the
          * AccessibleAction interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleAction。在为该类实现Java辅助功能API时,返回此对象,该对象负责代表自身实现AccessibleAction接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleAction getAccessibleAction() {
@@ -1878,6 +2362,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
         /**
          * Return a description of the specified action of the object.
          *
+         * <p>
+         *  返回对象的指定操作的描述。
+         * 
+         * 
          * @param i zero-based index of the actions
          */
         public String getAccessibleActionDescription(int i) {
@@ -1893,6 +2381,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * Returns the number of Actions available in this object.  The
          * default behavior of a combo box is to have one action.
          *
+         * <p>
+         *  返回此对象中可用的操作数。组合框的默认行为是具有一个动作。
+         * 
+         * 
          * @return 1, the number of Actions in this object
          */
         public int getAccessibleActionCount() {
@@ -1902,6 +2394,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
         /**
          * Perform the specified Action on the object
          *
+         * <p>
+         *  对对象执行指定的Action
+         * 
+         * 
          * @param i zero-based index of actions
          * @return true if the the action was performed; else false.
          */
@@ -1922,6 +2418,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * return this object, which is responsible for implementing the
          * AccessibleSelection interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleSelection。在为此类实现Java Accessibility API时,返回此对象,它负责代表自身实现AccessibleSelection接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleSelection getAccessibleSelection() {
@@ -1932,6 +2432,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * Returns the number of Accessible children currently selected.
          * If no children are selected, the return value will be 0.
          *
+         * <p>
+         *  返回当前选定的可访问子项数。如果未选择任何子项,则返回值为0。
+         * 
+         * 
          * @return the number of items currently selected.
          * @since 1.3
          */
@@ -1952,6 +2456,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * <p>Note that the index represents the i-th selected child, which
          * is different from the i-th child.
          *
+         * <p>
+         *  返回表示弹出窗口中指定的选定子项的Accessible。如果没有选择,或者选择的子选择比传递的整数少,返回值将为null。 <p>请注意,索引表示第i个选定子项,它与第i个子项不同。
+         * 
+         * 
          * @param i the zero-based index of selected children
          * @return the i-th selected child
          * @see #getAccessibleSelectionCount
@@ -1982,6 +2490,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
         /**
          * Determines if the current child of this object is selected.
          *
+         * <p>
+         *  确定是否选择此对象的当前子项。
+         * 
+         * 
          * @return true if the current child of this object is selected;
          *              else false
          * @param i the zero-based index of the child in this Accessible
@@ -2000,6 +2512,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * it replaces any existing selection in the object.  If the
          * specified child is already selected, this method has no effect.
          *
+         * <p>
+         * 将对象的指定Accessible子项添加到对象的选择。如果对象支持多个选择,则将指定的子项添加到任何现有选择,否则将替换对象中的任何现有选择。如果已选择指定的子项,则此方法无效。
+         * 
+         * 
          * @param i the zero-based index of the child
          * @see AccessibleContext#getAccessibleChild
          * @since 1.3
@@ -2015,6 +2531,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * selection.  If the specified item isn't currently selected, this
          * method has no effect.
          *
+         * <p>
+         *  从对象的选择中删除对象的指定子项。如果当前未选择指定的项目,则此方法无效。
+         * 
+         * 
          * @param i the zero-based index of the child
          * @see AccessibleContext#getAccessibleChild
          * @since 1.3
@@ -2028,6 +2548,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
         /**
          * Clears the selection in the object, so that no children in the
          * object are selected.
+         * <p>
+         *  清除对象中的选择,以便不会选择对象中的任何子对象。
+         * 
+         * 
          * @since 1.3
          */
         public void clearAccessibleSelection() {
@@ -2037,6 +2561,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
         /**
          * Causes every child of the object to be selected
          * if the object supports multiple selections.
+         * <p>
+         *  如果对象支持多个选择,则导致选择对象的每个子项。
+         * 
+         * 
          * @since 1.3
          */
         public void selectAllAccessibleSelection() {
@@ -2073,6 +2601,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
          * getAccessibleIndexInParent to the editor.  The
          * getAccessibleIndexInParent method returns the selected
          * index in the combo box.
+         * <p>
+         *  组合框编辑器实现的AccessibleContext的包装类。将除了getAccessibleIndexInParent之外的所有方法调用委派给编辑器。
+         *  getAccessibleIndexInParent方法返回组合框中选定的索引。
+         * 
          */
         private class EditorAccessibleContext extends AccessibleContext {
 
@@ -2082,6 +2614,8 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
             }
 
             /*
+            /* <p>
+            /* 
              * @param a the AccessibleContext implemented by the
              * combo box editor
              */
@@ -2099,6 +2633,12 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * to enter the name of a city, the accessibleName for the en_US locale
              * could be 'city.'
              *
+             * <p>
+             *  获取此对象的accessibleName属性。对象的accessibleName属性是一个本地化的字符串,指定对象的用途。
+             * 例如,标签或按钮的accessibleName属性可以是标签或按钮本身的文本。在对象不显示其名称的情况下,仍应设置accessibleName。
+             * 例如,在用于输入城市名称的文本字段的情况下,en_US语言环境的accessibleName可以是"城市"。
+             * 
+             * 
              * @return the localized name of the object; null if this
              * object does not have a name
              *
@@ -2113,6 +2653,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * name will cause a PropertyChangeEvent to be fired for the
              * ACCESSIBLE_NAME_PROPERTY property.
              *
+             * <p>
+             * 设置此对象的本地化可访问名称。更改名称将导致针对ACCESSIBLE_NAME_PROPERTY属性触发PropertyChangeEvent。
+             * 
+             * 
              * @param s the new localized name of the object.
              *
              * @see #getAccessibleName
@@ -2133,6 +2677,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * case of a 'Cancel' button, the accessibleDescription could be
              * 'Ignore changes and close dialog box.'
              *
+             * <p>
+             *  获取此对象的accessibleDescription属性。此对象的accessibleDescription属性是一个简短的本地化短语,用于描述对象的用途。
+             * 例如,在"取消"按钮的情况下,accessibleDescription可以是"忽略更改并关闭对话框"。
+             * 
+             * 
              * @return the localized description of the object; null if
              * this object does not have a description
              *
@@ -2147,6 +2696,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * name will cause a PropertyChangeEvent to be fired for the
              * ACCESSIBLE_DESCRIPTION_PROPERTY property.
              *
+             * <p>
+             *  设置此对象的可访问描述。更改名称将导致针对ACCESSIBLE_DESCRIPTION_PROPERTY属性触发PropertyChangeEvent。
+             * 
+             * 
              * @param s the new localized description of the object
              *
              * @see #setAccessibleName
@@ -2175,6 +2728,15 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * custom component developers can define their own AccessibleRole's
              * if the set of predefined roles is inadequate.
              *
+             * <p>
+             *  获取此对象的作用。对象的作用是该对象的类的通用目的或使用。例如,按钮的角色是AccessibleRole.PUSH_BUTTON。
+             * 提供了AccessibleRole中的角色,因此组件开发人员可以从一组预定义角色中进行选择。
+             * 这使得辅助技术能够为组件的各种调整子类提供一致的接口(例如,对于像按钮一样操作的所有组件使用AccessibleRole.PUSH_BUTTON),以及区分行为不同的子类(例如,用于复选框的Access
+             * ibleRole.CHECK_BOX和AccessibleRole.RADIO_BUTTON的单选按钮)。
+             * 提供了AccessibleRole中的角色,因此组件开发人员可以从一组预定义角色中进行选择。
+             *  <p>请注意,AccessibleRole类也是可扩展的,因此如果预定义角色集合不足,自定义组件开发人员可以定义自己的AccessibleRole。
+             * 
+             * 
              * @return an instance of AccessibleRole describing the role of the object
              * @see AccessibleRole
              */
@@ -2188,6 +2750,11 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * AccessibleStateSet of an object will cause a PropertyChangeEvent to
              * be fired for the ACCESSIBLE_STATE_PROPERTY property.
              *
+             * <p>
+             * 获取此对象的状态集。对象的AccessibleStateSet由一组唯一的AccessibleStates组成。
+             * 对象的AccessibleStateSet中的更改将导致针对ACCESSIBLE_STATE_PROPERTY属性触发PropertyChangeEvent。
+             * 
+             * 
              * @return an instance of AccessibleStateSet containing the
              * current state set of the object
              * @see AccessibleStateSet
@@ -2201,6 +2768,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
             /**
              * Gets the Accessible parent of this object.
              *
+             * <p>
+             *  获取此对象的可访问父级。
+             * 
+             * 
              * @return the Accessible parent of this object; null if this
              * object does not have an Accessible parent
              */
@@ -2214,6 +2785,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * not be treated as the component's accessible parent and is a method
              * that should only be called by the parent of the accessible child.
              *
+             * <p>
+             *  设置此对象的可访问父级。这意味着仅在实际组件的父代不应被视为该组件的可访问父代的情况下使用,并且是一种只应由可访问子代的父代调用的方法。
+             * 
+             * 
              * @param a - Accessible to be set as the parent
              */
             public void setAccessibleParent(Accessible a) {
@@ -2223,6 +2798,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
             /**
              * Gets the 0-based index of this object in its accessible parent.
              *
+             * <p>
+             *  获取此对象在其可访问父级中的基于0的索引。
+             * 
+             * 
              * @return the 0-based index of this object in its parent; -1 if this
              * object does not have an accessible parent.
              *
@@ -2237,6 +2816,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
             /**
              * Returns the number of accessible children of the object.
              *
+             * <p>
+             *  返回对象的可访问子项数。
+             * 
+             * 
              * @return the number of accessible children of the object.
              */
             public int getAccessibleChildrenCount() {
@@ -2249,6 +2832,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * of an Accessible child is at index 0, the second child is at index 1,
              * and so on.
              *
+             * <p>
+             *  返回对象的指定Accessible子项。可访问对象的可访问子对象是基于零的,因此可访问子对象的第一个子对象位于索引0,第二个子对象位于索引1,依此类推。
+             * 
+             * 
              * @param i zero-based index of child
              * @return the Accessible child of the object
              * @see #getAccessibleChildrenCount
@@ -2261,6 +2848,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * Gets the locale of the component. If the component does not have a
              * locale, then the locale of its parent is returned.
              *
+             * <p>
+             *  获取组件的语言环境。如果组件没有语言环境,那么将返回其父组件的语言环境。
+             * 
+             * 
              * @return this component's locale.  If this component does not have
              * a locale, the locale of its parent is returned.
              *
@@ -2278,6 +2869,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * The listener is registered for all Accessible properties and will
              * be called when those properties change.
              *
+             * <p>
+             *  将PropertyChangeListener添加到侦听器列表。侦听器为所有可访问属性注册,并将在这些属性更改时调用。
+             * 
+             * 
              * @see #ACCESSIBLE_NAME_PROPERTY
              * @see #ACCESSIBLE_DESCRIPTION_PROPERTY
              * @see #ACCESSIBLE_STATE_PROPERTY
@@ -2297,6 +2892,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * This removes a PropertyChangeListener that was registered
              * for all properties.
              *
+             * <p>
+             *  从侦听器列表中删除PropertyChangeListener。这将删除为所有属性注册的PropertyChangeListener。
+             * 
+             * 
              * @param listener  The PropertyChangeListener to be removed
              */
             public void removePropertyChangeListener(PropertyChangeListener listener) {
@@ -2307,6 +2906,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * Gets the AccessibleAction associated with this object that supports
              * one or more actions.
              *
+             * <p>
+             *  获取与支持一个或多个操作的此对象关联的AccessibleAction。
+             * 
+             * 
              * @return AccessibleAction if supported by object; else return null
              * @see AccessibleAction
              */
@@ -2318,6 +2921,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * Gets the AccessibleComponent associated with this object that has a
              * graphical representation.
              *
+             * <p>
+             * 获取与具有图形表示形式的此对象相关联的AccessibleComponent。
+             * 
+             * 
              * @return AccessibleComponent if supported by object; else return null
              * @see AccessibleComponent
              */
@@ -2329,6 +2936,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * Gets the AccessibleSelection associated with this object which allows its
              * Accessible children to be selected.
              *
+             * <p>
+             *  获取与此对象相关联的AccessibleSelection,以允许选择其可访问的子项。
+             * 
+             * 
              * @return AccessibleSelection if supported by object; else return null
              * @see AccessibleSelection
              */
@@ -2340,6 +2951,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * Gets the AccessibleText associated with this object presenting
              * text on the display.
              *
+             * <p>
+             *  获取与此对象相关联的AccessibleText在显示器上显示文本。
+             * 
+             * 
              * @return AccessibleText if supported by object; else return null
              * @see AccessibleText
              */
@@ -2351,6 +2966,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * Gets the AccessibleEditableText associated with this object
              * presenting editable text on the display.
              *
+             * <p>
+             *  获取与此对象相关联的AccessibleEditableText在显示屏上显示可编辑文本。
+             * 
+             * 
              * @return AccessibleEditableText if supported by object; else return null
              * @see AccessibleEditableText
              */
@@ -2362,6 +2981,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * Gets the AccessibleValue associated with this object that supports a
              * Numerical value.
              *
+             * <p>
+             *  获取与支持数值的此对象相关联的AccessibleValue。
+             * 
+             * 
              * @return AccessibleValue if supported by object; else return null
              * @see AccessibleValue
              */
@@ -2373,6 +2996,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * Gets the AccessibleIcons associated with an object that has
              * one or more associated icons
              *
+             * <p>
+             *  获取与具有一个或多个关联图标的对象相关联的AccessibleIcons
+             * 
+             * 
              * @return an array of AccessibleIcon if supported by object;
              * otherwise return null
              * @see AccessibleIcon
@@ -2384,6 +3011,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
             /**
              * Gets the AccessibleRelationSet associated with an object
              *
+             * <p>
+             *  获取与对象关联的AccessibleRelationSet
+             * 
+             * 
              * @return an AccessibleRelationSet if supported by object;
              * otherwise return null
              * @see AccessibleRelationSet
@@ -2395,6 +3026,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
             /**
              * Gets the AccessibleTable associated with an object
              *
+             * <p>
+             *  获取与对象关联的AccessibleTable
+             * 
+             * 
              * @return an AccessibleTable if supported by object;
              * otherwise return null
              * @see AccessibleTable
@@ -2409,6 +3044,10 @@ implements ItemSelectable,ListDataListener,ActionListener, Accessible {
              * is not empty, then fire a PropertyChange event to each listener.
              * In general, this is for use by the Accessible objects themselves
              * and should not be called by an application program.
+             * <p>
+             *  支持报告绑定的属性更改。如果oldValue和newValue不相等,并且PropertyChangeEvent侦听器列表不为空,那么为每个侦听器触发一个PropertyChange事件。
+             * 一般来说,这是由Accessible对象本身使用,不应该被应用程序调用。
+             * 
              * @param propertyName  The programmatic name of the property that
              * was changed.
              * @param oldValue  The old value of the property.

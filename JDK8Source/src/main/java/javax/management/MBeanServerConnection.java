@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.util.Set;
  * local MBean server, extends this interface.
  *
  *
+ * <p>
+ *  此接口表示与MBean服务器通信的方式,无论是本地还是远程。代表本地MBean服务器的{@link MBeanServer}接口扩展了此接口。
+ * 
+ * 
  * @since 1.5
  */
 public interface MBeanServerConnection {
@@ -56,6 +61,20 @@ public interface MBeanServerConnection {
      * createMBean(className, name, (Object[]) null, (String[])
      * null)}.</p>
      *
+     * <p>
+     *  <p>在MBean服务器中实例化并注册MBean。
+     *  MBean服务器将使用其{@link javax.management.loading.ClassLoaderRepository Default Loader Repository}加载MBean的
+     * 类。
+     *  <p>在MBean服务器中实例化并注册MBean。对象名称与MBean相关联。
+     * 如果对象名称为null,MBean必须通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口并返回{@link MBeanRegistration#preRegister preRegister}
+     * 方法的名称来提供自己的名称。
+     *  <p>在MBean服务器中实例化并注册MBean。对象名称与MBean相关联。</p>。
+     * 
+     *  <p>此方法相当于{@link #createMBean(String,ObjectName,Object [],String [])createMBean(className,name,(Object [])null,(String [])null)}
+     * 。
+     *  p>。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      *
@@ -129,6 +148,18 @@ public interface MBeanServerConnection {
      * createMBean(className, name, loaderName, (Object[]) null,
      * (String[]) null)}.</p>
      *
+     * <p>
+     * <p>在MBean服务器中实例化并注册MBean。要使用的类加载器由其对象名称标识。对象名称与MBean相关联。如果加载器的对象名称为null,将使用加载MBean服务器的ClassLoader。
+     * 如果MBean的对象名称为null,则MBean必须通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口并返回{@link MBeanRegistration#preRegister preRegister}
+     * 方法的名称来提供自己的名称。
+     * <p>在MBean服务器中实例化并注册MBean。要使用的类加载器由其对象名称标识。对象名称与MBean相关联。如果加载器的对象名称为null,将使用加载MBean服务器的ClassLoader。
+     * </p>。
+     * 
+     *  <p>此方法相当于{@link #createMBean(String,ObjectName,ObjectName,Object [],String [])createMBean(className,name,loaderName,(Object [])null,(String [])null) }
+     * 。
+     * </p>。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param loaderName The object name of the class loader to be used.
@@ -203,6 +234,16 @@ public interface MBeanServerConnection {
      * and returning the name from the {@link
      * MBeanRegistration#preRegister preRegister} method.
      *
+     * <p>
+     *  在MBean服务器中实例化和注册MBean。
+     *  MBean服务器将使用其{@link javax.management.loading.ClassLoaderRepository Default Loader Repository}加载MBean的
+     * 类。
+     *  在MBean服务器中实例化和注册MBean。对象名称与MBean相关联。
+     * 如果给定的对象名为null,MBean必须通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口并从{@link MBeanRegistration#preRegister preRegister}
+     * 方法返回名称来提供自己的名称。
+     *  在MBean服务器中实例化和注册MBean。对象名称与MBean相关联。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param params An array containing the parameters of the
@@ -276,6 +317,13 @@ public interface MBeanServerConnection {
      * interface and returning the name from the {@link
      * MBeanRegistration#preRegister preRegister} method.
      *
+     * <p>
+     * <p>在MBean服务器中实例化并注册MBean。要使用的类加载器由其对象名称标识。对象名称与MBean相关联。如果未指定加载器的对象名称,则将使用加载MBean服务器的ClassLoader。
+     * 如果MBean对象名称为null,MBean必须通过实现{@link javax.management.MBeanRegistration MBeanRegistration}接口并从{@link MBeanRegistration#preRegister preRegister}
+     * 方法返回名称来提供自己的名称。
+     * <p>在MBean服务器中实例化并注册MBean。要使用的类加载器由其对象名称标识。对象名称与MBean相关联。如果未指定加载器的对象名称,则将使用加载MBean服务器的ClassLoader。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param params An array containing the parameters of the
@@ -349,6 +397,10 @@ public interface MBeanServerConnection {
      * invoked, the MBean may no longer be accessed by its object
      * name.
      *
+     * <p>
+     *  从MBean服务器取消注册MBean。 MBean由其对象名称标识。一旦该方法被调用,MBean可能不再被其对象名访问。
+     * 
+     * 
      * @param name The object name of the MBean to be unregistered.
      *
      * @exception InstanceNotFoundException The MBean specified is not
@@ -391,6 +443,10 @@ public interface MBeanServerConnection {
      * Gets the <CODE>ObjectInstance</CODE> for a given MBean
      * registered with the MBean server.
      *
+     * <p>
+     *  获取向MBean服务器注册的给定MBean的<CODE> ObjectInstance </CODE>。
+     * 
+     * 
      * @param name The object name of the MBean.
      *
      * @return The <CODE>ObjectInstance</CODE> associated with the MBean
@@ -418,6 +474,13 @@ public interface MBeanServerConnection {
      * <CODE>ObjectName</CODE> and the Java Class name) for the
      * selected MBeans.
      *
+     * <p>
+     *  获取MBean服务器控制的MBean。
+     * 此方法允许获取以下任何内容：所有MBean,通过<CODE> ObjectName </CODE>和/或Query表达式(特定MBean)上的模式匹配指定的一组MBean。
+     * 当对象名称为null或未指定域和键属性时,将选择所有对象(如果指定了查询,则会对其进行过滤)。
+     * 它返回所选MBean的<CODE> ObjectInstance </CODE>对象集(包含<CODE> ObjectName </CODE>和Java类名称)。
+     * 
+     * 
      * @param name The object name pattern identifying the MBeans to
      * be retrieved. If null or no domain and key properties are
      * specified, all the MBeans registered will be retrieved.
@@ -446,6 +509,13 @@ public interface MBeanServerConnection {
      * selected (and filtered if a query is specified). It returns the
      * set of ObjectNames for the MBeans selected.
      *
+     * <p>
+     * 获取MBean服务器控制的MBean的名称。
+     * 此方法允许获取以下任何内容：所有MBean的名称,通过<CODE> ObjectName </CODE>和/或Query表达式上的模式匹配指定的一组MBeans的名称,特定MBean名称相当于测试MBe
+     * an是否注册)。
+     * 获取MBean服务器控制的MBean的名称。当对象名称为null或未指定域和键属性时,将选择所有对象(如果指定了查询,则会对其进行过滤)。它返回所选MBeans的ObjectNames集合。
+     * 
+     * 
      * @param name The object name pattern identifying the MBean names
      * to be retrieved. If null or no domain and key properties are
      * specified, the name of all registered MBeans will be retrieved.
@@ -469,6 +539,10 @@ public interface MBeanServerConnection {
      * Checks whether an MBean, identified by its object name, is
      * already registered with the MBean server.
      *
+     * <p>
+     *  检查由其对象名称标识的MBean是否已向MBean服务器注册。
+     * 
+     * 
      * @param name The object name of the MBean to be checked.
      *
      * @return True if the MBean is already registered in the MBean
@@ -487,6 +561,10 @@ public interface MBeanServerConnection {
     /**
      * Returns the number of MBeans registered in the MBean server.
      *
+     * <p>
+     *  返回在MBean服务器中注册的MBean数。
+     * 
+     * 
      * @return the number of MBeans registered.
      *
      * @exception IOException A communication problem occurred when
@@ -499,6 +577,10 @@ public interface MBeanServerConnection {
      * Gets the value of a specific attribute of a named MBean. The MBean
      * is identified by its object name.
      *
+     * <p>
+     *  获取命名MBean的特定属性的值。 MBean由其对象名称标识。
+     * 
+     * 
      * @param name The object name of the MBean from which the
      * attribute is to be retrieved.
      * @param attribute A String specifying the name of the attribute
@@ -557,6 +639,23 @@ public interface MBeanServerConnection {
      * }
      * </pre>
      *
+     * <p>
+     *  <p>检索命名MBean的几个属性的值。 MBean由其对象名称标识。</p>
+     * 
+     *  <p>如果由于某种原因无法检索一个或多个属性,则会从返回的{@code AttributeList}中省略这些属性。调用者应该检查列表与{@code attributes}数组的大小相同。
+     * 要发现阻止给定属性被检索的问题,请为该属性调用{@link #getAttribute getAttribute}。</p>。
+     * 
+     *  <p>以下是调用此方法并检查其是否成功检索到所有请求的属性的示例：</p>
+     * 
+     * <pre>
+     * String [] attrNames = ...; AttributeList list = mbeanServerConnection.getAttributes(objectName,attrNa
+     * mes); if(list.size()== attrNames.length)System.out.println("所有属性已成功检索"); else {{@code List <String>} 
+     * missing = new {@code ArrayList <String>}(<！ -   - > {@ link java.util.Arrays#asList Arrays.asList}(at
+     * trNames)); for(属性a：list.asList())missing.remove(a.getName()); System.out.println("Did not retrieve："+
+     *  missing); }}。
+     * </pre>
+     * 
+     * 
      * @param name The object name of the MBean from which the
      * attributes are retrieved.
      * @param attributes A list of the attributes to be retrieved.
@@ -584,6 +683,10 @@ public interface MBeanServerConnection {
      * Sets the value of a specific attribute of a named MBean. The MBean
      * is identified by its object name.
      *
+     * <p>
+     *  设置命名MBean的特定属性的值。 MBean由其对象名称标识。
+     * 
+     * 
      * @param name The name of the MBean within which the attribute is
      * to be set.
      * @param attribute The identification of the attribute to be set
@@ -648,6 +751,24 @@ public interface MBeanServerConnection {
      * }
      * </pre>
      *
+     * <p>
+     *  <p>设置命名MBean的多个属性的值。 MBean由其对象名称标识。</p>
+     * 
+     *  <p>如果由于某种原因不能设置一个或多个属性,则从返回的{@code AttributeList}中将忽略它们。调用者应该检查输入{@code AttributeList}是否与输出一样大。
+     * 要发现阻止给定属性被检索的问题,通常可以为该属性调用{@link #setAttribute setAttribute},虽然这不能保证工作。
+     *  (例如,两个属性的值可能已被拒绝,因为它们彼此不一致,可能只允许单独设置其中一个)。
+     * 
+     *  <p>以下是调用此方法并检查其是否成功设置所有请求的属性的示例：</p>
+     * 
+     * <pre>
+     * AttributeList inputAttrs = ...; AttributeList outputAttrs = mbeanServerConnection.setAttributes(<！ -   - >
+     *  objectName,inputAttrs); if(inputAttrs.size()== outputAttrs.size())System.out.println("All attributes
+     *  were set successfully"); else {{@code List <String>} missing = new {@code ArrayList <String>}(); for
+     * (属性a：inputAttrs.asList())missing.add(a.getName()); for(Attribute a：outputAttrs.asList())missing.remov
+     * e(a.getName()); System.out.println("Did not set："+ missing); }}。
+     * </pre>
+     * 
+     * 
      * @param name The object name of the MBean within which the
      * attributes are to be set.
      * @param attributes A list of attributes: The identification of
@@ -707,6 +828,33 @@ public interface MBeanServerConnection {
      * int count = fooProxy.countMatches(myPatterns, true);
      * </pre>
      *
+     * <p>
+     *  <p>调用MBean上的操作。</p>
+     * 
+     *  <p>由于需要使用{@code signature}来区分可能的重载操作,因此在可能的情况下通过{@linkplain JMX#newMBeanProxy(MBeanServerConnection,ObjectName,Class)MBean代理}
+     * 调用操作要简单得多。
+     * 例如,假设您有一个标准MBean界面,如下所示：</p>。
+     * 
+     * <pre>
+     *  public interface FooMBean {public int countMatches(String [] patterns,boolean ignoreCase); }}
+     * </pre>
+     * 
+     *  <p> {@code countMatches}操作的调用方式如下：</p>
+     * 
+     * <pre>
+     *  String [] myPatterns = ...; int count =(Integer)mbeanServerConnection.invoke(objectName,"countMatche
+     * s",new Object [] {m​​yPatterns,true},new String [] {String []。
+     * class.getName(),boolean.class.getName ;。
+     * </pre>
+     * 
+     *  <p>或者,它可以通过代理调用如下：</p>
+     * 
+     * <pre>
+     *  String [] myPatterns = ...; FooMBean fooProxy = JMX.newMBeanProxy(mbeanServerConnection,objectName,F
+     * ooMBean.class); int count = fooProxy.countMatches(myPatterns,true);。
+     * </pre>
+     * 
+     * 
      * @param name The object name of the MBean on which the method is
      * to be invoked.
      * @param operationName The name of the operation to be invoked.
@@ -744,6 +892,10 @@ public interface MBeanServerConnection {
      * The default domain name is used as the domain part in the ObjectName
      * of MBeans if no domain is specified by the user.
      *
+     * <p>
+     * 返回用于命名MBean的默认域。如果用户未指定域,则默认域名将用作MBeans的ObjectName中的域部分。
+     * 
+     * 
      * @return the default domain.
      *
      * @exception IOException A communication problem occurred when
@@ -760,6 +912,12 @@ public interface MBeanServerConnection {
      * string.  The order of strings within the returned array is
      * not defined.</p>
      *
+     * <p>
+     *  <p>返回当前注册了任何MBean的域列表。
+     * 当且仅当至少有一个MBean注册了一个ObjectName,其{@link ObjectName#getDomain()getDomain()}等于该字符串时,字符串才在返回的数组中。
+     * 未定义返回数组中的字符串顺序。</p>。
+     * 
+     * 
      * @return the list of domains.
      *
      * @exception IOException A communication problem occurred when
@@ -773,6 +931,10 @@ public interface MBeanServerConnection {
      * <p>Adds a listener to a registered MBean.
      * Notifications emitted by the MBean will be forwarded to the listener.</p>
      *
+     * <p>
+     *  <p>将侦听器添加到注册的MBean。 MBean发出的通知将转发给侦听器。</p>
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be added.
      * @param listener The listener object which will handle the
@@ -812,6 +974,14 @@ public interface MBeanServerConnection {
      * is called.  Even if it is subsequently unregistered, it will
      * continue to receive notifications.</p>
      *
+     * <p>
+     *  <p>将侦听器添加到注册的MBean。</p>
+     * 
+     *  <p> MBean发出的通知将由MBeanServer转发到侦听器。如果通知的来源是对MBean对象的引用,MBean服务器将用MBean的ObjectName替换它。否则源未更改。</p>
+     * 
+     *  <p>接收通知的侦听器对象是在调用此方法时使用给定名称注册的侦听器对象。即使后来未注册,它仍会继续接收通知。</p>
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be added.
      * @param listener The object name of the listener which will
@@ -849,6 +1019,12 @@ public interface MBeanServerConnection {
      * different filters or callbacks, this method will remove all
      * those registrations.
      *
+     * <p>
+     *  从注册的MBean中删除侦听器。
+     * 
+     *  <P>如果侦听器被注册了多次,可能使用不同的过滤器或回调,则此方法将删除所有这些注册。
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be removed.
      * @param listener The object name of the listener to be removed.
@@ -880,6 +1056,15 @@ public interface MBeanServerConnection {
      * may be null if and only if they are null in a listener to be
      * removed.</p>
      *
+     * <p>
+     *  <p>从注册的MBean中删除侦听器。</p>
+     * 
+     * <p> MBean必须有一个与给定的<code>监听器</code>,<code>过滤器</code>和<code> handback </code>参数完全匹配的监听器。
+     * 如果有多个此类侦听器,则只会删除一个。</p>。
+     * 
+     *  <p> <code> filter </code>和<code> handback </code>参数可能为null,如果且仅当它们在要删除的侦听器中为null。</p>
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be removed.
      * @param listener The object name of the listener to be removed.
@@ -915,6 +1100,12 @@ public interface MBeanServerConnection {
      * different filters or callbacks, this method will remove all
      * those registrations.
      *
+     * <p>
+     *  <p>从注册的MBean中删除侦听器。</p>
+     * 
+     *  <P>如果侦听器被注册了多次,可能使用不同的过滤器或回调,则此方法将删除所有这些注册。
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be removed.
      * @param listener The listener to be removed.
@@ -946,6 +1137,15 @@ public interface MBeanServerConnection {
      * may be null if and only if they are null in a listener to be
      * removed.</p>
      *
+     * <p>
+     *  <p>从注册的MBean中删除侦听器。</p>
+     * 
+     *  <p> MBean必须有一个与给定的<code>监听器</code>,<code>过滤器</code>和<code> handback </code>参数完全匹配的监听器。
+     * 如果有多个此类侦听器,则只会删除一个。</p>。
+     * 
+     *  <p> <code> filter </code>和<code> handback </code>参数可能为null,如果且仅当它们在要删除的侦听器中为null。</p>
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be removed.
      * @param listener The listener to be removed.
@@ -977,6 +1177,10 @@ public interface MBeanServerConnection {
      * This method discovers the attributes and operations that an
      * MBean exposes for management.
      *
+     * <p>
+     *  此方法发现MBean公开用于管理的属性和操作。
+     * 
+     * 
      * @param name The name of the MBean to analyze
      *
      * @return An instance of <CODE>MBeanInfo</CODE> allowing the
@@ -1019,6 +1223,16 @@ public interface MBeanServerConnection {
      *
      * <p>Otherwise, the result is false.</p>
      *
+     * <p>
+     *  <p>如果指定的MBean是指定类的实例,则返回true,否则返回false。</p>
+     * 
+     *  <p>如果<code> name </code>未命名MBean,此方法会抛出{@link InstanceNotFoundException}。</p>
+     * 
+     *  <p>否则,让<br> X是由<code> name </code>命名的MBean,<br> L是X的ClassLoader,<br> N是X的{@link MBeanInfo}中的类名。
+     *  </p>。
+     * 
+     *  <p>如果N等于<code> className </code>,结果为true。</p>
+     * 
      * @param name The <CODE>ObjectName</CODE> of the MBean.
      * @param className The name of the class.
      *

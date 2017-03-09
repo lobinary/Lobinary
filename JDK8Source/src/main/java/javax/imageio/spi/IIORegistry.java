@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -108,12 +109,46 @@ import java.util.ServiceConfigurationError;
  * href="{@docRoot}/../technotes/guides/jar/jar.html">
  * JAR File Specification</a>.
  *
+ * <p>
+ *  服务提供程序实例的注册表。服务提供程序类可以在运行时通过包含它们的JAR文件中的元信息来检测。其目的是加载和检查所有可用的服务提供程序类相对便宜。
+ * 这些类可以用于定位和实例化将执行实际工作的更重的类,在这种情况下是<code> ImageReader </code>,<code> ImageWriter </code>,<code> ImageTr
+ * anscoder </code> ,<code> ImageInputStream </code>和<code> ImageOutputStream </code>。
+ *  服务提供程序实例的注册表。服务提供程序类可以在运行时通过包含它们的JAR文件中的元信息来检测。其目的是加载和检查所有可用的服务提供程序类相对便宜。
+ * 
+ *  <p>系统类路径(通常是Java安装目录中的<code> lib / ext </code>目录)中找到的服务提供程序会在实例化此类时自动加载。
+ * 
+ * <p>当调用<code> registerApplicationClasspathSpis </code>方法时,会加载在应用程序类路径上的JAR文件的元信息部分中声明的服务提供程序实例。
+ * 要声明服务提供程序,将<code> services </code>子目录放在每个JAR文件中存在的<code> META-INF </code>目录中。
+ * 此目录包含每个服务提供程序接口的文件,该文件在JAR文件中具有一个或多个实现类。
+ * 例如,如果JAR文件包含实现<code> ImageReaderSpi </code>接口的<code> com.mycompany.imageio.MyFormatReaderSpi </code>类
+ * ,JAR文件将包含一个名为：。
+ * 此目录包含每个服务提供程序接口的文件,该文件在JAR文件中具有一个或多个实现类。
+ * 
+ * <pre>
+ *  META-INF / services / javax.imageio.spi.ImageReaderSpi
+ * </pre>
+ * 
+ *  包含行：
+ * 
+ * <pre>
+ *  MyFormatReaderSpi
+ * </pre>
+ * 
+ *  <p>服务提供程序类旨在实现轻量级和快速加载。这些接口的实现应避免对其他类和本地代码的复杂依赖。
+ * 
+ *  <p>也可以手动添加未自动找到的服务提供者,以及删除那些使用<code> ServiceRegistry </code>类接口的服务提供者。因此,应用程序可以定制其认为合适的注册表的内容。
  */
 public final class IIORegistry extends ServiceRegistry {
 
     /**
      * A <code>Vector</code> containing the valid IIO registry
      * categories (superinterfaces) to be used in the constructor.
+     * <p>
+     * 
+     *  <p>有关声明服务提供程序和JAR格式的更多详细信息,请参阅<a
+     * href="{@docRoot}/../technotes/guides/jar/jar.html">
+     *  JAR文件规范</a>。
+     * 
      */
     private static final Vector initialCategories = new Vector(5);
 
@@ -131,6 +166,9 @@ public final class IIORegistry extends ServiceRegistry {
      *
      * <p> The constructor is private in order to prevent creation of
      * additional instances.
+     * <p>
+     * 包含要在构造函数中使用的有效IIO注册表类别(超级接口)的<code> Vector </code>。
+     * 
      */
     private IIORegistry() {
         super(initialCategories.iterator());
@@ -147,6 +185,12 @@ public final class IIORegistry extends ServiceRegistry {
      * instance; this allows different <code>Applet</code>s in the
      * same browser (for example) to each have their own registry.
      *
+     * <p>
+     *  设置有效的服务提供商类别,并自动注册所有可用的服务提供商。
+     * 
+     *  <p>构造函数是私有的,以防止创建其他实例。
+     * 
+     * 
      * @return the default registry for the current
      * <code>ThreadGroup</code>.
      */
@@ -190,6 +234,12 @@ public final class IIORegistry extends ServiceRegistry {
      * <code>ClassLoader</code>.  This method is typically invoked by
      * the <code>ImageIO.scanForPlugins</code> method.
      *
+     * <p>
+     *  返回由Image I / O API使用的默认<code> IIORegistry </code>实例。此实例应用于所有注册表函数。
+     * 
+     *  <p>每个<code> ThreadGroup </code>都会收到自己的实例;这允许不同的<code> Applet </code>在同一个浏览器(例如)每个都有自己的注册表。
+     * 
+     * 
      * @see javax.imageio.ImageIO#scanForPlugins
      * @see ClassLoader#getResources
      */
@@ -233,6 +283,10 @@ public final class IIORegistry extends ServiceRegistry {
           be able read corresponding jar files even if
           file read capability is restricted (like the
           applet context case).
+        /* <p>
+        /*  注册应用程序类路径上找到的所有可用服务提供程序,使用默认的<code> ClassLoader </code>。
+        /* 此方法通常由<code> ImageIO.scanForPlugins </code>方法调用。
+        /* 
          */
         PrivilegedAction doRegistration =
             new PrivilegedAction() {

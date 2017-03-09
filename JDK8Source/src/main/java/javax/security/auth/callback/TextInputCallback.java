@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ package javax.security.auth.callback;
  * method of a {@code CallbackHandler} to retrieve generic text
  * information.
  *
+ * <p>
+ *  <p>基础安全服务会实例化一个{@code TextInputCallback}并传递给{@code CallbackHandler}的{@code handle}方法,以检索通用文字信息。
+ * 
+ * 
  * @see javax.security.auth.callback.CallbackHandler
  */
 public class TextInputCallback implements Callback, java.io.Serializable {
@@ -38,16 +43,22 @@ public class TextInputCallback implements Callback, java.io.Serializable {
     private static final long serialVersionUID = -8064222478852811804L;
 
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private String prompt;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private String defaultText;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
@@ -58,6 +69,12 @@ public class TextInputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  使用提示构造一个{@code TextInputCallback}。
+     * 
+     * <p>
+     * 
+     * 
      * @param prompt the prompt used to request the information.
      *
      * @exception IllegalArgumentException if {@code prompt} is null
@@ -75,6 +92,12 @@ public class TextInputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  使用提示和默认输入值构造{@code TextInputCallback}。
+     * 
+     * <p>
+     * 
+     * 
      * @param prompt the prompt used to request the information. <p>
      *
      * @param defaultText the text to be used as the default text displayed
@@ -99,6 +122,12 @@ public class TextInputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取提示。
+     * 
+     * <p>
+     * 
+     * 
      * @return the prompt.
      */
     public String getPrompt() {
@@ -110,6 +139,12 @@ public class TextInputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取默认文本。
+     * 
+     * <p>
+     * 
+     * 
      * @return the default text, or null if this {@code TextInputCallback}
      *          was not instantiated with {@code defaultText}.
      */
@@ -122,6 +157,12 @@ public class TextInputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  设置检索的文本。
+     * 
+     * <p>
+     * 
+     * 
      * @param text the retrieved text, which may be null.
      *
      * @see #getText
@@ -135,6 +176,10 @@ public class TextInputCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取检索到的文本。
+     * 
+     * 
      * @return the retrieved text, which may be null.
      *
      * @see #setText

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,9 @@ import org.w3c.dom.NamedNodeMap;
 
 /**
  * An SOS (Start Of Scan) marker segment.
+ * <p>
+ *  SOS(开始扫描)标记段。
+ * 
  */
 class SOSMarkerSegment extends MarkerSegment {
     int startSpectralSelection;
@@ -153,6 +157,9 @@ class SOSMarkerSegment extends MarkerSegment {
     /**
      * Writes the data for this segment to the stream in
      * valid JPEG format.
+     * <p>
+     *  以有效的JPEG格式将此段的数据写入流。
+     * 
      */
     void write(ImageOutputStream ios) throws IOException {
         // We don't write SOS segments; the IJG library does.
@@ -181,6 +188,8 @@ class SOSMarkerSegment extends MarkerSegment {
 
     /**
      * A scan component spec within an SOS marker segment.
+     * <p>
+     *  SOS标记段内的扫描组件规格。
      */
     class ScanComponentSpec implements Cloneable {
         int componentSelector;

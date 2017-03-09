@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import javax.swing.event.*;
  * Implements a FrameSetView, intended to support the HTML
  * &lt;FRAMESET&gt; tag.  Supports the ROWS and COLS attributes.
  *
+ * <p>
+ *  实现FrameSetView,旨在支持HTML&lt; FRAMESET&gt;标签。支持ROWS和COLS属性。
+ * 
+ * 
  * @author  Sunita Mani
  *
  *          Credit also to the hotjava browser engineers that
@@ -56,6 +61,10 @@ class FrameSetView extends javax.swing.text.BoxView {
     /**
      * Constructs a FrameSetView for the given element.
      *
+     * <p>
+     *  构造给定元素的FrameSetView。
+     * 
+     * 
      * @param elem the element that this view is responsible for
      */
     public FrameSetView(Element elem, int axis) {
@@ -68,6 +77,9 @@ class FrameSetView extends javax.swing.text.BoxView {
      * an array of strings that represent the space
      * distribution.
      *
+     * <p>
+     *  解析ROW或COL属性,并返回一个表示空间分布的字符串数组。
+     * 
      */
     private String[] parseRowColSpec(HTML.Attribute key) {
 
@@ -106,6 +118,9 @@ class FrameSetView extends javax.swing.text.BoxView {
      * Initializes a number of internal state variables
      * that store information about space allocation
      * for the frames contained within the frameset.
+     * <p>
+     *  初始化多个内部状态变量,用于存储有关框架集中包含的帧的空间分配的信息。
+     * 
      */
     private void init() {
         if (getAxis() == View.Y_AXIS) {
@@ -156,6 +171,10 @@ class FrameSetView extends javax.swing.text.BoxView {
      * be placed in the given arrays which represent the allocations
      * to the children along the major axis.
      *
+     * <p>
+     *  执行箱子长轴(即它代表的轴)的布局。布局的结果应该放在给定的数组中,这些数组表示沿着长轴的子项的分配。
+     * 
+     * 
      * @param targetSpan the total span given to the view, which
      *  would be used to layout the children
      * @param axis the axis being layed out
@@ -210,6 +229,9 @@ class FrameSetView extends javax.swing.text.BoxView {
      * span for each child view along the major axis.  it
      * computes this based on the information that extracted
      * from the value of the ROW/COL attribute.
+     * <p>
+     *  此方法负责在span []中返回每个子视图沿着主轴的跨度。它基于从ROW / COL属性的值提取的信息来计算该值。
+     * 
      */
     private void spread(int targetSpan, int span[]) {
 
@@ -307,6 +329,8 @@ class FrameSetView extends javax.swing.text.BoxView {
     /*
      * Users have been known to type things like "%25" and "25 %".  Deal
      * with it.
+     * <p>
+     *  已知用户键入"％25"和"25％"等内容。处理它。
      */
     private int parseDigits(String mixedStr) {
         int result = 0;

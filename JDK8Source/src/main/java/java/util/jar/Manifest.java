@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,12 @@ import java.util.Iterator;
  * <a href="../../../../technotes/guides/jar/jar.html">
  * Manifest format specification</a>.
  *
+ * <p>
+ *  清单类用于维护清单条目名称及其关联的属性。有主要清单属性以及每条目属性。有关清单格式的信息,请参阅
+ * <a href="../../../../technotes/guides/jar/jar.html">
+ *  清单格式规范</a>。
+ * 
+ * 
  * @author  David Connelly
  * @see     Attributes
  * @since   1.2
@@ -55,6 +62,9 @@ public class Manifest implements Cloneable {
 
     /**
      * Constructs a new, empty Manifest.
+     * <p>
+     *  构造一个新的,空的清单。
+     * 
      */
     public Manifest() {
     }
@@ -62,6 +72,10 @@ public class Manifest implements Cloneable {
     /**
      * Constructs a new Manifest from the specified input stream.
      *
+     * <p>
+     *  从指定的输入流构造新的清单。
+     * 
+     * 
      * @param is the input stream containing manifest data
      * @throws IOException if an I/O error has occurred
      */
@@ -72,6 +86,10 @@ public class Manifest implements Cloneable {
     /**
      * Constructs a new Manifest that is a copy of the specified Manifest.
      *
+     * <p>
+     *  构造一个新的清单,它是指定清单的副本。
+     * 
+     * 
      * @param man the Manifest to copy
      */
     public Manifest(Manifest man) {
@@ -81,6 +99,10 @@ public class Manifest implements Cloneable {
 
     /**
      * Returns the main Attributes for the Manifest.
+     * <p>
+     *  返回清单的主要属性。
+     * 
+     * 
      * @return the main Attributes for the Manifest
      */
     public Attributes getMainAttributes() {
@@ -94,6 +116,11 @@ public class Manifest implements Cloneable {
      * created by {@link #read}, nor is such an entry written by using {@link
      * #write}.
      *
+     * <p>
+     *  返回此清单中包含的条目的映射。每个条目由字符串名称(键)和关联的属性(值)表示。
+     *  Map允许{@code null}键,但是没有带有空键的条目是由{@link #read}创建的,也不是使用{@link #write}编写的条目。
+     * 
+     * 
      * @return a Map of the entries contained in this Manifest
      */
     public Map<String,Attributes> getEntries() {
@@ -119,6 +146,19 @@ public class Manifest implements Cloneable {
      * Note that this method does not return the manifest's main attributes;
      * see {@link #getMainAttributes}.
      *
+     * <p>
+     *  返回指定条目名称的属性。该方法定义为：
+     * <pre>
+     *  return(Attributes)getEntries()。get(name)
+     * </pre>
+     * 尽管{@code null}是有效的{@code name},但是当从jar文件获取的{@code Manifest}上调用{@code getAttributes(null)}时,将返回{@code null}
+     * 。
+     * 虽然jar文件本身不允许{@code null}命名的属性,可以在{@code Manifest}上调用{@link #getEntries},然后在该结果上使用空键调用{@code put}和任意值。
+     * 随后调用{@code getAttributes(null)}将返回just  -  {@ code put}值。
+     * <p>
+     *  请注意,此方法不返回清单的主要属性;请参阅{@link #getMainAttributes}。
+     * 
+     * 
      * @param name entry name
      * @return the Attributes for the specified entry name
      */
@@ -128,6 +168,9 @@ public class Manifest implements Cloneable {
 
     /**
      * Clears the main Attributes as well as the entries in this Manifest.
+     * <p>
+     *  清除主要属性以及此清单中的条目。
+     * 
      */
     public void clear() {
         attr.clear();
@@ -139,6 +182,10 @@ public class Manifest implements Cloneable {
      * Attributes.Name.MANIFEST_VERSION must be set in
      * MainAttributes prior to invoking this method.
      *
+     * <p>
+     *  将清单写入指定的OutputStream。 Attributes.Name.MANIFEST_VERSION必须在调用此方法之前在MainAttributes中设置。
+     * 
+     * 
      * @param out the output stream
      * @exception IOException if an I/O error has occurred
      * @see #getMainAttributes
@@ -168,6 +215,9 @@ public class Manifest implements Cloneable {
 
     /**
      * Adds line breaks to enforce a maximum 72 bytes per line.
+     * <p>
+     *  添加换行符以强制每行最多72个字节。
+     * 
      */
     static void make72Safe(StringBuffer line) {
         int length = line.length();
@@ -187,6 +237,10 @@ public class Manifest implements Cloneable {
      * names and attributes read will be merged in with the current
      * manifest entries.
      *
+     * <p>
+     *  从指定的InputStream读取清单。读取的条目名称和属性将与当前清单条目合并。
+     * 
+     * 
      * @param is the input stream
      * @exception IOException if an I/O error has occurred
      */
@@ -282,6 +336,10 @@ public class Manifest implements Cloneable {
      * Returns true if the specified Object is also a Manifest and has
      * the same main Attributes and entries.
      *
+     * <p>
+     *  如果指定的对象也是清单并且具有相同的主属性和条目,则返回true。
+     * 
+     * 
      * @param o the object to be compared
      * @return true if the specified Object is also a Manifest and has
      * the same main Attributes and entries
@@ -298,6 +356,9 @@ public class Manifest implements Cloneable {
 
     /**
      * Returns the hash code for this Manifest.
+     * <p>
+     *  返回此清单的哈希码。
+     * 
      */
     public int hashCode() {
         return attr.hashCode() + entries.hashCode();
@@ -309,6 +370,12 @@ public class Manifest implements Cloneable {
      * <pre>
      *     public Object clone() { return new Manifest(this); }
      * </pre>
+     * <p>
+     *  返回此清单的浅副本。浅拷贝实现如下：
+     * <pre>
+     *  public Object clone(){return new Manifest(this); }}
+     * </pre>
+     * 
      * @return a shallow copy of this Manifest
      */
     public Object clone() {
@@ -317,6 +384,9 @@ public class Manifest implements Cloneable {
 
     /*
      * A fast buffered input stream for parsing manifest files.
+     * <p>
+     *  用于解析清单文件的快速缓冲输入流。
+     * 
      */
     static class FastInputStream extends FilterInputStream {
         private byte buf[];
@@ -365,6 +435,8 @@ public class Manifest implements Cloneable {
         /*
          * Reads 'len' bytes from the input stream, or until an end-of-line
          * is reached. Returns the number of bytes read.
+         * <p>
+         *  从输入流读取"len"字节,或直到到达行尾。返回读取的字节数。
          */
         public int readLine(byte[] b, int off, int len) throws IOException {
             byte[] tbuf = this.buf;

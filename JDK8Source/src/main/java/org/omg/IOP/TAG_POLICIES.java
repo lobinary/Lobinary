@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -14,6 +15,8 @@ public interface TAG_POLICIES
   /**
      * A profile component containing the sequence of QoS policies exported
      * with the object reference by an object adapter.
+     * <p>
+     * 
      */
   public static final int value = (int)(2L);
 }

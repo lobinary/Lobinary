@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -105,6 +106,36 @@ import sun.util.CoreResourceBundleControl;
  * <code>java.awt.peer</code>. Some methods defined by
  * <code>Toolkit</code> query the native operating system directly.
  *
+ * <p>
+ *  这个类是抽象窗口工具包的所有实际实现的抽象超类。 <code> Toolkit </code>类的子类用于将各种组件绑定到特定的本地工具包实现。
+ * <p>
+ *  如果没有明确指定相反的情况,许多GUI事件可以异步地传递给用户。以及许多GUI操作可以异步地执行。此事实意味着如果设置了组件的状态,然后状态立即查询,则返回的值可能尚未反映所请求的更改。
+ * 此行为包括但不限于：。
+ * <ul>
+ *  <li>滚动到指定位置。
+ *  <br>例如,如果尚未处理原始请求,则调用<code> ScrollPane.setScrollPosition </code>然后调用<code> getScrollPosition </code>
+ * 可能会返回不正确的值。
+ *  <li>滚动到指定位置。
+ * 
+ *  <li>将焦点从一个组件移动到另一个组件。
+ *  <br>有关详细信息,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html#transferTiming">
+ * 计时聚焦传输</a>, a href ="http://java.sun.com/docs/books/tutorial/uiswing/"> The Swing教程</a>。
+ *  <li>将焦点从一个组件移动到另一个组件。
+ * 
+ *  <li>显示顶层容器。
+ *  <br>在<code>窗口</code>,<code>框架</code>或<code>对话框</code>上调用<code> setVisible(true)</code>可能会异步发生。
+ * 
+ * <li>设置顶级容器的大小或位置。
+ *  <br>在<code> Window </code>,<code> Frame </code>上调用<code> setSize </code>,<code> setBounds </code>或<code>
+ *  setLocation </code>或<code> Dialog </code>被转发到基础窗口管理系统,并可能被忽略或修改。
+ * <li>设置顶级容器的大小或位置。有关详细信息,请参阅{@link java.awt.Window}。
+ * </ul>
+ * <p>
+ *  大多数应用程序不应该直接调用此类中的任何方法。
+ *  <code> Toolkit </code>定义的方法是将<code> java.awt </code>包中与平台无关的类与<code> java.awt.peer </code> / code>。
+ * 由<code> Toolkit </code>定义的一些方法可以直接查询本机操作系统。
+ * 
+ * 
  * @author      Sami Shaio
  * @author      Arthur van Hoff
  * @author      Fred Ecks
@@ -115,6 +146,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of the <code>Desktop</code>
      * using the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Desktop </code>实现。
+     * 
+     * 
      * @param     target the desktop to be implemented
      * @return    this toolkit's implementation of the <code>Desktop</code>
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -131,6 +166,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Button</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Button </code>实现。
+     * 
+     * 
      * @param     target the button to be implemented.
      * @return    this toolkit's implementation of <code>Button</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -145,6 +184,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>TextField</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> TextField </code>实现。
+     * 
+     * 
      * @param     target the text field to be implemented.
      * @return    this toolkit's implementation of <code>TextField</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -159,6 +202,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Label</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Label </code>实现。
+     * 
+     * 
      * @param     target the label to be implemented.
      * @return    this toolkit's implementation of <code>Label</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -173,6 +220,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>List</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> List </code>实现。
+     * 
+     * 
      * @param     target the list to be implemented.
      * @return    this toolkit's implementation of <code>List</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -187,6 +238,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Checkbox</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具箱的<code>复选框</code>实现。
+     * 
+     * 
      * @param     target the check box to be implemented.
      * @return    this toolkit's implementation of <code>Checkbox</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -201,6 +256,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Scrollbar</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Scrollbar </code>实现。
+     * 
+     * 
      * @param     target the scroll bar to be implemented.
      * @return    this toolkit's implementation of <code>Scrollbar</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -215,6 +274,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>ScrollPane</code> using
      * the specified peer interface.
+     * <p>
+     * 使用指定的对等接口创建此工具包的<code> ScrollPane </code>实现。
+     * 
+     * 
      * @param     target the scroll pane to be implemented.
      * @return    this toolkit's implementation of <code>ScrollPane</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -230,6 +293,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>TextArea</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> TextArea </code>实现。
+     * 
+     * 
      * @param     target the text area to be implemented.
      * @return    this toolkit's implementation of <code>TextArea</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -244,6 +311,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Choice</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具箱的<code> Choice </code>实现。
+     * 
+     * 
      * @param     target the choice to be implemented.
      * @return    this toolkit's implementation of <code>Choice</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -258,6 +329,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Frame</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Frame </code>实现。
+     * 
+     * 
      * @param     target the frame to be implemented.
      * @return    this toolkit's implementation of <code>Frame</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -272,6 +347,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Canvas</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Canvas </code>实现。
+     * 
+     * 
      * @param     target the canvas to be implemented.
      * @return    this toolkit's implementation of <code>Canvas</code>.
      * @see       java.awt.Canvas
@@ -282,6 +361,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Panel</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Panel </code>实现。
+     * 
+     * 
      * @param     target the panel to be implemented.
      * @return    this toolkit's implementation of <code>Panel</code>.
      * @see       java.awt.Panel
@@ -292,6 +375,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Window</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Window </code>实现。
+     * 
+     * 
      * @param     target the window to be implemented.
      * @return    this toolkit's implementation of <code>Window</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -306,6 +393,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Dialog</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Dialog </code>实现。
+     * 
+     * 
      * @param     target the dialog to be implemented.
      * @return    this toolkit's implementation of <code>Dialog</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -320,6 +411,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>MenuBar</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> MenuBar </code>实现。
+     * 
+     * 
      * @param     target the menu bar to be implemented.
      * @return    this toolkit's implementation of <code>MenuBar</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -334,6 +429,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Menu</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Menu </code>实现。
+     * 
+     * 
      * @param     target the menu to be implemented.
      * @return    this toolkit's implementation of <code>Menu</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -348,6 +447,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>PopupMenu</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> PopupMenu </code>实现。
+     * 
+     * 
      * @param     target the popup menu to be implemented.
      * @return    this toolkit's implementation of <code>PopupMenu</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -363,6 +466,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>MenuItem</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> MenuItem </code>实现。
+     * 
+     * 
      * @param     target the menu item to be implemented.
      * @return    this toolkit's implementation of <code>MenuItem</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -377,6 +484,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>FileDialog</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> FileDialog </code>实现。
+     * 
+     * 
      * @param     target the file dialog to be implemented.
      * @return    this toolkit's implementation of <code>FileDialog</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -391,6 +502,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>CheckboxMenuItem</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具箱的<code> CheckboxMenuItem </code>实现。
+     * 
+     * 
      * @param     target the checkbox menu item to be implemented.
      * @return    this toolkit's implementation of <code>CheckboxMenuItem</code>.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -405,6 +520,10 @@ public abstract class Toolkit {
     /**
      * Obtains this toolkit's implementation of helper class for
      * <code>MouseInfo</code> operations.
+     * <p>
+     *  获取此工具包的<code> MouseInfo </code>操作的辅助类的实现。
+     * 
+     * 
      * @return    this toolkit's implementation of  helper for <code>MouseInfo</code>
      * @throws    UnsupportedOperationException if this operation is not implemented
      * @see       java.awt.peer.MouseInfoPeer
@@ -422,6 +541,10 @@ public abstract class Toolkit {
      * and allows the Component and Container classes to be extended directly
      * to create windowless components that are defined entirely in java.
      *
+     * <p>
+     * 为组件或容器创建对等体。此对等体是无窗口的,并允许组件和容器类直接扩展以创建完全在java中定义的无窗组件。
+     * 
+     * 
      * @param target The Component to be created.
      */
     protected LightweightPeer createComponent(Component target) {
@@ -434,6 +557,10 @@ public abstract class Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Font</code> using
      * the specified peer interface.
+     * <p>
+     *  使用指定的对等接口创建此工具包的<code> Font </code>实现。
+     * 
+     * 
      * @param     name the font to be implemented
      * @param     style the style of the font, such as <code>PLAIN</code>,
      *            <code>BOLD</code>, <code>ITALIC</code>, or a combination
@@ -453,6 +580,10 @@ public abstract class Toolkit {
      * Fills in the integer array that is supplied as an argument
      * with the current system color values.
      *
+     * <p>
+     *  填充作为当前系统颜色值的参数提供的整数数组。
+     * 
+     * 
      * @param     systemColors an integer array.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true
@@ -483,6 +614,14 @@ public abstract class Toolkit {
      * window manager.  The OS/WM support can be
      * queried using getDesktopProperty("awt.dynamicLayoutSupported") method.
      *
+     * <p>
+     *  控制是否在调整大小期间动态地验证容器的布局,或者在调整大小完成后静态地验证容器的布局。
+     * 使用{@code isDynamicLayoutActive()}来检测此功能是否在此程序中启用,并且此操作系统和/或窗口管理器支持此功能。
+     * 请注意,并非所有平台都支持此功能,反之,某些平台上无法关闭此功能。在这些平台上,不支持(或始终支持)调整大小期间的动态布局,设置此属性不起作用。
+     * 请注意,此功能可以设置或取消设置为某些平台上的操作系统或窗口管理器的属性。在此类平台上,必须在操作系统或窗口管理器级别设置动态resize属性,然后此方法才能生效。
+     * 此方法不会更改底层操作系统或窗口管理器的支持或设置。可以使用getDesktopProperty("awt.dynamicLayoutSupported")方法查询OS / WM支持。
+     * 
+     * 
      * @param     dynamic  If true, Containers should re-layout their
      *            components as the Container is being resized.  If false,
      *            the layout will be validated after resizing is completed.
@@ -511,6 +650,12 @@ public abstract class Toolkit {
      * operating system or window manager settings.  The OS/WM support can
      * be queried using getDesktopProperty("awt.dynamicLayoutSupported").
      *
+     * <p>
+     * 返回在调整大小期间动态地验证容器的布局,或在调整大小完成后静态地验证。
+     * 注意：此方法返回以编程方式设置的值;它不反映在操作系统或窗口管理器级别上对于调整大小的动态布局或当前操作系统或窗口管理器设置的支持。
+     * 可以使用getDesktopProperty("awt.dynamicLayoutSupported")查询OS / WM支持。
+     * 
+     * 
      * @return    true if validation of Containers is done dynamically,
      *            false if validation is done after resizing is finished.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -548,6 +693,13 @@ public abstract class Toolkit {
      * The OS/WM support can be queried using
      * the getDesktopProperty("awt.dynamicLayoutSupported") method.
      *
+     * <p>
+     *  返回在调整大小时Containers的动态布局是否当前处于活动状态(都在程序{@code isDynamicLayoutSet()}中设置),并由底层操作系统和/或窗口管理器支持。
+     * 如果动态布局当前处于非活动状态,则容器在重新调整大小时重新布局其组件。因此,{@code Component.validate()}方法只会在每次调整大小时调用一次。
+     * 如果动态布局当前处于活动状态,则容器会在每个原生resize事件上重新布局其组件,并且每次都将调用{@code validate()}方法。
+     * 可以使用getDesktopProperty("awt.dynamicLayoutSupported")方法查询OS / WM支持。
+     * 
+     * 
      * @return    true if dynamic layout of Containers on resize is
      *            currently active, false otherwise.
      * @exception HeadlessException if the GraphicsEnvironment.isHeadless()
@@ -574,6 +726,11 @@ public abstract class Toolkit {
      * primary display is used.  Multi-screen aware display dimensions are
      * available from <code>GraphicsConfiguration</code> and
      * <code>GraphicsDevice</code>.
+     * <p>
+     *  获取屏幕的大小。在具有多个显示器的系统上,使用主显示器。
+     * 多屏幕感知显示尺寸可从<code> GraphicsConfiguration </code>和<code> GraphicsDevice </code>获得。
+     * 
+     * 
      * @return    the size of this toolkit's screen, in pixels.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true
@@ -586,6 +743,10 @@ public abstract class Toolkit {
 
     /**
      * Returns the screen resolution in dots-per-inch.
+     * <p>
+     *  以英寸为单位返回屏幕分辨率。
+     * 
+     * 
      * @return    this toolkit's screen resolution, in dots-per-inch.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true
@@ -596,6 +757,10 @@ public abstract class Toolkit {
 
     /**
      * Gets the insets of the screen.
+     * <p>
+     *  获取屏幕的插入。
+     * 
+     * 
      * @param     gc a <code>GraphicsConfiguration</code>
      * @return    the insets of this toolkit's screen, in pixels.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -624,6 +789,14 @@ public abstract class Toolkit {
      * This toolkit method is called by the
      * <code>getColorModel</code> method
      * of the <code>Component</code> class.
+     * <p>
+     *  确定此工具包屏幕的颜色模型。
+     * <p>
+     * <code> ColorModel </code>是一个抽象类,它封装了在图像的像素值及其红,绿,蓝和alpha分量之间进行转换的能力。
+     * <p>
+     *  此工具包方法由<code> Component </code>类的<code> getColorModel </code>方法调用。
+     * 
+     * 
      * @return    the color model of this toolkit's screen.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true
@@ -646,6 +819,13 @@ public abstract class Toolkit {
      * The ZapfDingbats fontname is also deprecated in 1.1 but the characters
      * are defined in Unicode starting at 0x2700, and as of 1.1 Java supports
      * those characters.
+     * <p>
+     *  返回此工具包中可用字体的名称。<p>对于1.1,不推荐使用以下字体名称(替换名称如下)：
+     * <ul>
+     *  <li> TimeRoman(使用Serif)<li> Helvetica(使用SansSerif)<li> Courier(使用Monospaced)</ul> <p> ZapfDingbats字体
+     * 名称在1.1中已弃用,但字符定义在Unicode从0x2700开始,并从1.1版开始支持这些字符。
+     * 
+     * 
      * @return    the names of the available fonts in this toolkit.
      * @deprecated see {@link java.awt.GraphicsEnvironment#getAvailableFontFamilyNames()}
      * @see java.awt.GraphicsEnvironment#getAvailableFontFamilyNames()
@@ -655,6 +835,10 @@ public abstract class Toolkit {
 
     /**
      * Gets the screen device metrics for rendering of the font.
+     * <p>
+     *  获取用于呈现字体的屏幕设备指标。
+     * 
+     * 
      * @param     font   a font
      * @return    the screen metrics of the specified font in this toolkit
      * @deprecated  As of JDK version 1.2, replaced by the <code>Font</code>
@@ -672,17 +856,28 @@ public abstract class Toolkit {
      * <p>
      * This method ensures that the display is up-to-date. It is useful
      * for animation.
+     * <p>
+     *  同步此工具包的图形状态。一些窗口系统可以进行图形事件的缓冲。
+     * <p>
+     *  此方法确保显示是最新的。它对动画有用。
+     * 
      */
     public abstract void sync();
 
     /**
      * The default toolkit.
+     * <p>
+     *  默认工具包。
+     * 
      */
     private static Toolkit toolkit;
 
     /**
      * Used internally by the assistive technologies functions; set at
      * init time and used at load time
+     * <p>
+     *  辅助技术功能内部使用;在init时间设置并在加载时使用
+     * 
      */
     private static String atNames;
 
@@ -696,6 +891,12 @@ public abstract class Toolkit {
      * specific Toolkit class is instantiated so that all necessary
      * properties are set up properly before any classes dependent upon them
      * are initialized.
+     * <p>
+     * 初始化与辅助技术相关的属性。
+     * 这些属性在下面的loadAssistiveProperties()函数中使用,以及jdk中依赖于属性的其他类(例如在Java2D硬件加速初始化中使用screen_magnifier_present属性)
+     * 。
+     * 初始化与辅助技术相关的属性。属性的初始化必须在平台特定的Toolkit类实例化之前完成,以便在依赖于它们的任何类被初始化之前正确地设置所有必要的属性。
+     * 
      */
     private static void initAssistiveTechnologies() {
 
@@ -786,6 +987,14 @@ public abstract class Toolkit {
      * a call to <code>ClassLoader.getSystemClassLoader</code>, whose
      * delegation parent is the extension class loader for installed
      * extensions).
+     * <p>
+     *  使用"accessibility.properties"文件中的行在Sun引用实现中指定的属性"assistive_technologies"将其他类加载到VM中。
+     * 形式是"assistive_technologies = ...",其中"..."是加载的辅助技术类的逗号分隔列表。
+     * 每个类以给定的顺序加载,并且每个类的单个实例使用Class.forName(类).newInstance()创建。所有错误都通过AWTError异常处理。
+     * 
+     *  <p>假设辅助技术类作为INSTALLED(而不是BUNDLED)扩展的一部分提供或者在类路径上指定(因此可以使用类调用器返回的类加载器加载<code> ClassLoader .getSystemC
+     * lassLoader </code>,其代理父级是已安装扩展的扩展类加载器)。
+     * 
      */
     private static void loadAssistiveTechnologies() {
         // Load any assistive technologies
@@ -845,6 +1054,19 @@ public abstract class Toolkit {
      * Class.forName(class).newInstance().  This is done just after
      * the AWT toolkit is created.  All errors are handled via an
      * AWTError exception.
+     * <p>
+     *  获取默认工具包。
+     * <p>
+     * 如果名为<code>"java.awt.headless"</code>的系统属性设置为<code> true </code>,则使用<code> Toolkit </code>的无头实现。
+     * <p>
+     *  如果没有<code>"java.awt.headless"</code>或者它设置为<code> false </code>,并且有一个名为<code>"awt.toolkit"的系统属性</code>
+     *  ,该属性被视为<code> Toolkit </code>的子类的类的名称;否则使用<code> Toolkit </code>的缺省平台特定实现。
+     * <p>
+     *  还可以使用"accessibility.properties"文件中的行在Sun引用实现中指定的属性"assistive_technologies"将其他类加载到VM中。
+     * 形式是"assistive_technologies = ...",其中"..."是加载的辅助技术类的逗号分隔列表。
+     * 每个类以给定的顺序加载,并且每个类的单个实例使用Class.forName(类).newInstance()创建。这是在创建AWT工具包之后完成的。所有错误都通过AWTError异常处理。
+     * 
+     * 
      * @return    the default toolkit.
      * @exception  AWTError  if a toolkit could not be found, or
      *                 if one could not be accessed or instantiated.
@@ -912,6 +1134,17 @@ public abstract class Toolkit {
      * If so, the method calls the security manager's
      * <code>checkRead</code> method with the file specified to ensure
      * that the access to the image is allowed.
+     * <p>
+     *  返回从指定文件获取像素数据的图像,其格式可以是GIF,JPEG或PNG。底层工具包尝试使用相同的文件名将多个请求解析为相同的返回图像。
+     * <p>
+     * 由于促进<code> Image </code>对象的共享所需的机制可以继续保持在不确定的时间段内不再使用的图像,因此鼓励开发者通过使用{@link #createImage(java.lang.String)createImage}
+     *  variant。
+     * 如果指定文件中包含的图像数据发生更改,则从此方法返回的<code> Image </code>对象仍可能包含过期调用后从文件加载的陈旧信息。
+     * 先前加载的图像数据可以通过在返回的<code> Image </code>上调用{@link Image#flush flush}方法来手动删除。
+     * <p>
+     *  此方法首先检查是否安装了安全管理器。如果是这样,该方法调用安全管理器的<code> checkRead </code>方法与指定的文件,以确保允许对映像的访问。
+     * 
+     * 
      * @param     filename   the name of a file containing pixel data
      *                         in a recognized file format.
      * @return    an image which gets its pixel data from
@@ -953,6 +1186,21 @@ public abstract class Toolkit {
      * the method throws the <code>SecurityException</code>
      * if the corresponding 1.1-style SecurityManager.checkXXX method
      * also denies permission.
+     * <p>
+     *  返回从指定的URL获取像素数据的图像。指定网址引用的像素数据必须采用以下格式之一：GIF,JPEG或PNG。底层工具包尝试使用相同的URL将多个请求解析为相同的返回图像。
+     * <p>
+     * 由于促进<code> Image </code>对象的共享所需的机制可以继续保持在不确定的时间段内不再使用的图像,因此鼓励开发者通过使用{@link #createImage(java.net.URL)createImage}
+     *  variant。
+     * 如果存储在指定URL的图像数据发生更改,则从此方法返回的<code> Image </code>对象仍可能包含在先前调用后从URL中提取的过时信息。
+     * 先前加载的图像数据可以通过在返回的<code> Image </code>上调用{@link Image#flush flush}方法来手动删除。
+     * <p>
+     *  此方法首先检查是否安装了安全管理器。如果是这样,该方法使用url.openConnection()。
+     * getPermission()权限调用安全管理器的<code> checkPermission </code>方法,以确保允许访问映像。
+     * 为了与前1.2安全管理器兼容,如果访问被拒绝与<code> FilePermission </code>或<code> SocketPermission </code>,该方法抛出<code> Secu
+     * rityException </code>如果相应的1.1-风格SecurityManager.checkXXX方法也拒绝权限。
+     * getPermission()权限调用安全管理器的<code> checkPermission </code>方法,以确保允许访问映像。
+     * 
+     * 
      * @param     url   the URL to use in fetching the pixel data.
      * @return    an image which gets its pixel data from
      *                         the specified URL.
@@ -972,6 +1220,12 @@ public abstract class Toolkit {
      * If so, the method calls the security manager's
      * <code>checkRead</code> method with the specified file to ensure
      * that the image creation is allowed.
+     * <p>
+     *  返回从指定文件获取像素数据的图像。返回的图像是一个新对象,不会与此方法的任何其他调用者或其getImage变体共享。
+     * <p>
+     * 此方法首先检查是否安装了安全管理器。如果是这样,该方法将使用指定的文件调用安全管理器的<code> checkRead </code>方法,以确保允许创建映像。
+     * 
+     * 
      * @param     filename   the name of a file containing pixel data
      *                         in a recognized file format.
      * @return    an image which gets its pixel data from
@@ -997,6 +1251,16 @@ public abstract class Toolkit {
      * the method throws <code>SecurityException</code>
      * if the corresponding 1.1-style SecurityManager.checkXXX method
      * also denies permission.
+     * <p>
+     *  返回从指定的URL获取像素数据的图像。返回的图像是一个新对象,不会与此方法的任何其他调用者或其getImage变体共享。
+     * <p>
+     *  此方法首先检查是否安装了安全管理器。如果是这样,该方法使用url.openConnection()。
+     * getPermission()权限调用安全管理器的<code> checkPermission </code>方法,以确保允许创建映像。
+     * 为了与pre-1.2安全管理器兼容,如果访问被拒绝与<code> FilePermission </code>或<code> SocketPermission </code>,该方法throws <code>
+     *  SecurityException </code>如果相应的1.1-样式SecurityManager.checkXXX方法也拒绝了权限。
+     * getPermission()权限调用安全管理器的<code> checkPermission </code>方法,以确保允许创建映像。
+     * 
+     * 
      * @param     url   the URL to use in fetching the pixel data.
      * @return    an image which gets its pixel data from
      *                         the specified URL.
@@ -1025,6 +1289,18 @@ public abstract class Toolkit {
      * Information on the flags returned by this method can be found
      * with the definition of the <code>ImageObserver</code> interface.
 
+     * <p>
+     *  准备要渲染的图像。
+     * <p>
+     *  如果width和height参数的值均为<code> -1 </code>,则此方法准备要在默认屏幕上呈现的图像;否则,此方法准备要在默认屏幕上以指定宽度和高度渲染的图像。
+     * <p>
+     *  图像数据异步地下载在另一线程中,并且生成图像的适当缩放的屏幕表示。
+     * <p>
+     *  此方法由组件<code> prepareImage </code>方法调用。
+     * <p>
+     * 有关此方法返回的标志的信息可以通过<code> ImageObserver </code>接口的定义找到。
+     * 
+     * 
      * @param     image      the image for which to prepare a
      *                           screen representation.
      * @param     width      the width of the desired screen
@@ -1065,6 +1341,18 @@ public abstract class Toolkit {
      * <p>
      * Information on the flags returned by this method can be found
      * with the definition of the <code>ImageObserver</code> interface.
+     * <p>
+     *  指示正在准备显示的指定图像的构造状态。
+     * <p>
+     *  如果width和height参数的值均为<code> -1 </code>,则此方法返回此工具包中指定图像的屏幕表示的构造状态。否则,此方法返回在指定宽度和高度的图像的缩放表示的构造状态。
+     * <p>
+     *  此方法不会导致图像开始加载。应用程序必须调用<code> prepareImage </code>强制加载图像。
+     * <p>
+     *  此方法由组件的<code> checkImage </code>方法调用。
+     * <p>
+     *  有关此方法返回的标志的信息可以通过<code> ImageObserver </code>接口的定义找到。
+     * 
+     * 
      * @param     image   the image whose status is being checked.
      * @param     width   the width of the scaled version whose status is
      *                 being checked, or <code>-1</code>.
@@ -1088,6 +1376,10 @@ public abstract class Toolkit {
 
     /**
      * Creates an image with the specified image producer.
+     * <p>
+     *  使用指定的图像生成器创建图像。
+     * 
+     * 
      * @param     producer the image producer to be used.
      * @return    an image with the specified image producer.
      * @see       java.awt.Image
@@ -1102,6 +1394,12 @@ public abstract class Toolkit {
      * <p>
      * The data must be in some image format, such as GIF or JPEG,
      * that is supported by this toolkit.
+     * <p>
+     *  创建对存储在指定字节数组中的图像进行解码的图像。
+     * <p>
+     *  数据必须是某种图像格式,例如GIF或JPEG,该工具包支持。
+     * 
+     * 
      * @param     imagedata   an array of bytes, representing
      *                         image data in a supported image format.
      * @return    an image.
@@ -1116,6 +1414,10 @@ public abstract class Toolkit {
      * byte array, and at the specified offset and length.
      * The data must be in some image format, such as GIF or JPEG,
      * that is supported by this toolkit.
+     * <p>
+     *  创建一个图像,对存储在指定字节数组中的图像进行解码,并以指定的偏移和长度进行解码。数据必须是某种图像格式,例如GIF或JPEG,该工具包支持。
+     * 
+     * 
      * @param     imagedata   an array of bytes, representing
      *                         image data in a supported image format.
      * @param     imageoffset  the offset of the beginning
@@ -1141,6 +1443,15 @@ public abstract class Toolkit {
      * security manager's <code>checkPermission</code> method with a <code>
      * RuntimePermission("queuePrintJob")</code> permission.
      *
+     * <p>
+     *  获取一个<code> PrintJob </code>对象,它是在工具包平台上启动打印操作的结果。
+     * <p>
+     * 此方法的每个实际实现应首先检查是否安装了安全管理器。如果存在,该方法应该调用安全管理器的<code> checkPrintJobAccess </code>方法,以确保允许启动打印操作。
+     * 如果使用<code> checkPrintJobAccess </code>的默认实现(即,该方法不被覆盖),则这将导致对安全管理器的<code> checkPermission </code> Run
+     * timePermission("queuePrintJob")</code>权限。
+     * 此方法的每个实际实现应首先检查是否安装了安全管理器。如果存在,该方法应该调用安全管理器的<code> checkPrintJobAccess </code>方法,以确保允许启动打印操作。
+     * 
+     * 
      * @param   frame the parent of the print dialog. May not be null.
      * @param   jobtitle the title of the PrintJob. A null title is equivalent
      *          to "".
@@ -1177,6 +1488,15 @@ public abstract class Toolkit {
      * security manager's <code>checkPermission</code> method with a <code>
      * RuntimePermission("queuePrintJob")</code> permission.
      *
+     * <p>
+     *  获取一个<code> PrintJob </code>对象,它是在工具包平台上启动打印操作的结果。
+     * <p>
+     *  此方法的每个实际实现应首先检查是否安装了安全管理器。如果存在,该方法应该调用安全管理器的<code> checkPrintJobAccess </code>方法,以确保允许启动打印操作。
+     * 如果使用<code> checkPrintJobAccess </code>的默认实现(即,该方法不被覆盖),则这将导致对安全管理器的<code> checkPermission </code> Run
+     * timePermission("queuePrintJob")</code>权限。
+     *  此方法的每个实际实现应首先检查是否安装了安全管理器。如果存在,该方法应该调用安全管理器的<code> checkPrintJobAccess </code>方法,以确保允许启动打印操作。
+     * 
+     * 
      * @param   frame the parent of the print dialog. May not be null.
      * @param   jobtitle the title of the PrintJob. A null title is equivalent
      *          to "".
@@ -1230,6 +1550,10 @@ public abstract class Toolkit {
     /**
      * Emits an audio beep depending on native system settings and hardware
      * capabilities.
+     * <p>
+     *  根据本机系统设置和硬件功能发出音频提示音。
+     * 
+     * 
      * @since     JDK1.1
      */
     public abstract void beep();
@@ -1263,6 +1587,26 @@ public abstract class Toolkit {
      * the security manager's {@link SecurityManager#checkPermission
      * checkPermission} method to check {@code AWTPermission("accessClipboard")}.
      *
+     * <p>
+     * 获取与本机平台提供的剪贴板设施接口的系统剪贴板的单例实例。此剪贴板支持使用本机剪贴板工具的Java程序和本机应用程序之间的数据传输。
+     * <p>
+     *  除了在flavormap.properties文件或由<code> AWT.DnD.flavorMapFileURL </code> Toolkit属性指定的其他文件中指定的任何和所有格式,系统剪贴板
+     * 的<code> getTransferData()</代码>方法可用于以下类型：。
+     * <ul>
+     *  <li> DataFlavor.stringFlavor </li> <li> DataFlavor.plainTextFlavor(<b>已弃用</b>)</li>
+     * </ul>
+     *  与<code> java.awt.datatransfer.StringSelection </code>一样,如果请求的flavor是<code> DataFlavor.plainTextFlavo
+     * r </code>或等效的风格,则返回一个Reader。
+     *  <b>注意</b>：<code> DataFlavor.plainTextFlavor </code>和等效DataFlavors系统剪贴板的<code> getTransferData()</code>
+     * 方法的行为与<code> > DataFlavor.plainTextFlavor </code>。
+     * 因此,对<code> DataFlavor.plainTextFlavor </code>和等效风格的支持<b>已弃用</b>。
+     * <p>
+     *  此方法的每个实际实现应首先检查是否安装了安全管理器。
+     * 如果存在,该方法应调用安全管理器的{@link SecurityManager#checkPermission checkPermission}方法来检查{@code AWTPermission("accessClipboard")}
+     * 。
+     *  此方法的每个实际实现应首先检查是否安装了安全管理器。
+     * 
+     * 
      * @return    the system Clipboard
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true
@@ -1308,6 +1652,26 @@ public abstract class Toolkit {
      * the security manager's {@link SecurityManager#checkPermission
      * checkPermission} method to check {@code AWTPermission("accessClipboard")}.
      *
+     * <p>
+     * 将系统选择的单例实例作为<code> Clipboard </code>对象。这允许应用程序读取和修改当前的系统范围选择。
+     * <p>
+     *  当用户使用鼠标或键盘选择文本时,应用程序负责更新系统选择。
+     * 通常,通过在支持文本选择的所有<code> Component </code>上安装<code> FocusListener </code>,并在<code> FOCUS_GAINED </code>和
+     * <code> FOCUS_LOST </code>当<code> Component </code>中的选择更改时,更新系统选择<code> Clipboard </code>正确更新系统选择可确保Ja
+     * va应用程序与本机应用程序和系统上同时运行的其他Java应用程序正确交互。
+     *  当用户使用鼠标或键盘选择文本时,应用程序负责更新系统选择。
+     * 请注意,<code> java.awt.TextComponent </code>和<code> javax.swing.text.JTextComponent </code>已遵守此政策。
+     * 当使用这些类及其子类时,开发人员不需要编写任何额外的代码。
+     * <p>
+     *  一些平台不支持系统选择<code> Clipboard </code>。在这些平台上,此方法将返回<code> null </code>。
+     * 在这种情况下,应用被免除其如上所述更新系统选择<code> Clipboard </code>的责任。
+     * <p>
+     * 此方法的每个实际实现应首先检查是否安装了安全管理器。
+     * 如果存在,该方法应调用安全管理器的{@link SecurityManager#checkPermission checkPermission}方法来检查{@code AWTPermission("accessClipboard")}
+     * 。
+     * 此方法的每个实际实现应首先检查是否安装了安全管理器。
+     * 
+     * 
      * @return the system selection as a <code>Clipboard</code>, or
      *         <code>null</code> if the native platform does not support a
      *         system selection <code>Clipboard</code>
@@ -1346,6 +1710,14 @@ public abstract class Toolkit {
      * By default, this method returns <code>Event.CTRL_MASK</code>.
      * Toolkit implementations should override this method if the
      * <b>Control</b> key isn't the correct key for accelerators.
+     * <p>
+     *  确定哪个修饰键是菜单快捷键的相应加速键。
+     * <p>
+     *  包含在<code> MenuShortcut </code>类中的菜单快捷方式由<code> MenuBar </code>类处理。
+     * <p>
+     *  默认情况下,此方法返回<code> Event.CTRL_MASK </code>。如果<b> Control </b>键不是加速器的正确键,Toolkit实现应该覆盖此方法。
+     * 
+     * 
      * @return    the modifier mask on the <code>Event</code> class
      *                 that is used for menu shortcuts on this toolkit.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -1370,6 +1742,14 @@ public abstract class Toolkit {
      * {@link java.awt.event.KeyEvent#VK_SCROLL_LOCK VK_SCROLL_LOCK}, and
      * {@link java.awt.event.KeyEvent#VK_KANA_LOCK VK_KANA_LOCK}.
      *
+     * <p>
+     *  返回键盘上给定的锁定键是否处于其"打开"状态。
+     * 有效的键码是{@link java.awt.event.KeyEvent#VK_CAPS_LOCK VK_CAPS_LOCK},{@link java.awt.event.KeyEvent#VK_NUM_LOCK VK_NUM_LOCK}
+     * ,{@link java.awt.event.KeyEvent#VK_SCROLL_LOCK VK_SCROLL_LOCK},以及{@link java.awt.event.KeyEvent#VK_KANA_LOCK VK_KANA_LOCK}
+     * 。
+     *  返回键盘上给定的锁定键是否处于其"打开"状态。
+     * 
+     * 
      * @exception java.lang.IllegalArgumentException if <code>keyCode</code>
      * is not one of the valid key codes
      * @exception java.lang.UnsupportedOperationException if the host system doesn't
@@ -1404,6 +1784,16 @@ public abstract class Toolkit {
      * involve event processing and therefore may not be immediately
      * observable through getLockingKeyState.
      *
+     * <p>
+     *  设置键盘上给定锁定键的状态。
+     * 有效的键码是{@link java.awt.event.KeyEvent#VK_CAPS_LOCK VK_CAPS_LOCK},{@link java.awt.event.KeyEvent#VK_NUM_LOCK VK_NUM_LOCK}
+     * ,{@link java.awt.event.KeyEvent#VK_SCROLL_LOCK VK_SCROLL_LOCK},以及{@link java.awt.event.KeyEvent#VK_KANA_LOCK VK_KANA_LOCK}
+     * 。
+     *  设置键盘上给定锁定键的状态。
+     * <p>
+     * 根据平台,设置锁定键的状态可能涉及事件处理,因此可能无法通过getLockingKeyState立即查看。
+     * 
+     * 
      * @exception java.lang.IllegalArgumentException if <code>keyCode</code>
      * is not one of the valid key codes
      * @exception java.lang.UnsupportedOperationException if the host system doesn't
@@ -1429,6 +1819,9 @@ public abstract class Toolkit {
     /**
      * Give native peers the ability to query the native container
      * given a native component (eg the direct parent may be lightweight).
+     * <p>
+     *  给予本地同伴在给定本地组件(例如,直接父组可以是轻量级的)的情况下查询本地容器的能力。
+     * 
      */
     protected static Container getNativeContainer(Component c) {
         return c.getNativeContainer();
@@ -1442,6 +1835,12 @@ public abstract class Toolkit {
      * <p>Note that multi-frame images are invalid and may cause this
      * method to hang.
      *
+     * <p>
+     *  创建新的自定义光标对象。如果要显示的图像无效,则光标将被隐藏(完全透明),热点将设置为(0,0)。
+     * 
+     *  <p>请注意,多帧图片无效,可能会导致此方法挂起。
+     * 
+     * 
      * @param cursor the image to display when the cursor is activated
      * @param hotSpot the X and Y of the large cursor's hot spot; the
      *   hotSpot values must be less than the Dimension returned by
@@ -1479,6 +1878,12 @@ public abstract class Toolkit {
      * supported size.  It is therefore recommended that this method
      * be called and an appropriate image used so no image conversion is made.
      *
+     * <p>
+     *  返回最接近所需尺寸的支持的光标尺寸。只支持单个游标大小的系统将返回该大小,而不考虑所需的大小。不支持自定义游标的系统将返回0,0的维度。
+     * <p>注意：如果使用的维度与支持的大小(由此方法返回的)不匹配的图像,Toolkit实现将尝试将图像大小调整为支持的大小。由于难以转换低分辨率图像,因此不能保证不是所支持的尺寸的光标图像的质量。
+     * 因此,建议调用此方法,并使用合适的图像,以便不进行图像转换。
+     * 
+     * 
      * @param     preferredWidth the preferred cursor width the component would like
      * to use.
      * @param     preferredHeight the preferred cursor height the component would like
@@ -1513,6 +1918,11 @@ public abstract class Toolkit {
      * colors than the system supports.  It is therefore recommended that this method
      * be called and an appropriate image used so no image conversion is made.
      *
+     * <p>
+     * 返回Toolkit在自定义游标调色板中支持的最大颜色数。<p>注意：如果使用的图片在其调色板中具有比支持的最大值更多的颜色,则Toolkit实现将尝试将调色板平整到最大值。
+     * 由于转换低分辨率图像是困难的,因此不能保证具有比系统支持的颜色更多的光标图像的质量。因此,建议调用此方法,并使用合适的图像,以便不进行图像转换。
+     * 
+     * 
      * @return    the maximum number of colors, or zero if custom cursors are not
      * supported by this Toolkit implementation.
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -1560,6 +1970,20 @@ public abstract class Toolkit {
      * documentation for the {@link Frame#setExtendedState} method.
      * </ul>
      *
+     * <p>
+     *  返回Toolkit是否支持<code> Frame </code>的此状态。此方法会告诉您是否支持最大化或图标化的<em> UI概念</em>。
+     * 对于"复合"状态,如<code> Frame.ICONIFIED | Frame.MAXIMIZED_VERT </code>,它总是返回false。
+     * 换句话说,经验法则是只有具有单个帧状态常量作为参数的查询是有意义的。 <p>请注意,支持给定的概念是一个平台相关的功能。
+     * 由于本地限制,Toolkit对象可以报告支持的特定状态,但是同时Toolkit对象将无法将状态应用于给定的帧。这种情况有两个后果：。
+     * <ul>
+     * <li>对于本方法,只有{@code false}的返回值实际上表示不支持给定状态。如果该方法返回{@code true},给定状态对于特定帧可能仍然不受支持和/或不可用。
+     *  <li>开发人员应考虑检查通过{@link java.awt.event.WindowStateListener}接收的{@code WindowEvent}的{@link java.awt.event.WindowEvent#getNewState}
+     * 方法的值,而不是假设给定到{@code setExtendedState()}方法的状态将被明确应用。
+     * <li>对于本方法,只有{@code false}的返回值实际上表示不支持给定状态。如果该方法返回{@code true},给定状态对于特定帧可能仍然不受支持和/或不可用。
+     * 有关详细信息,请参阅{@link Frame#setExtendedState}方法的文档。
+     * </ul>
+     * 
+     * 
      * @param state one of named frame state constants.
      * @return <code>true</code> is this frame state is supported by
      *     this Toolkit implementation, <code>false</code> otherwise.
@@ -1586,6 +2010,9 @@ public abstract class Toolkit {
      * Support for I18N: any visible strings should be stored in
      * sun.awt.resources.awt.properties.  The ResourceBundle is stored
      * here, so that only one copy is maintained.
+     * <p>
+     *  支持I18N：任何可见的字符串都应该存储在sun.awt.resources.awt.properties中。 ResourceBundle存储在这里,因此只保留一个副本。
+     * 
      */
     private static ResourceBundle resources;
     private static ResourceBundle platformResources;
@@ -1597,6 +2024,9 @@ public abstract class Toolkit {
 
     /**
      * Initialize JNI field and method ids
+     * <p>
+     *  初始化JNI字段和方法标识
+     * 
      */
     private static native void initIDs();
 
@@ -1626,6 +2056,17 @@ public abstract class Toolkit {
      * classes can be loaded in java.awt.image that depend on
      * libawt and there is no way to call Toolkit.loadLibraries()
      * directly.  -hung
+     * <p>
+     *  警告：这是AWT加载本机库的问题的临时解决方法。 AWT包中的多个类具有本地方法initIDs(),它初始化JNI字段和在其实现的本地部分中使用的方法ID。
+     * 
+     * 由于这些id的使用和存储由实现库完成,所以这些方法的实现由特定的AWT实现(例如,"Toolkit / s / Peer")提供,例如Motif,Microsoft Windows或Tiny。
+     * 问题是这意味着本地库必须由java。*类加载,这不一定知道要加载的库的名称。一个更好的方法是提供一个独立的库,它定义了java.awt。* initIDs,并将相关符号导出到实现库中。
+     * 
+     *  现在,我们知道它是由实现完成的,我们假设库的名称是"awt"。 -br。
+     * 
+     *  如果更改loadLibraries(),请将更改添加到java.awt.image.ColorModel.loadLibraries()。
+     * 不幸的是,类可以在依赖libawt的java.awt.image中加载,没有办法直接调用Toolkit.loadLibraries()。 -hung。
+     * 
      */
     private static boolean loaded = false;
     static void loadLibraries() {
@@ -1675,6 +2116,9 @@ public abstract class Toolkit {
     /**
      * Gets a property with the specified key and default.
      * This method returns defaultValue if the property is not found.
+     * <p>
+     *  获取具有指定键和默认值的属性。如果未找到属性,此方法返回defaultValue。
+     * 
      */
     public static String getProperty(String key, String defaultValue) {
         // first try platform specific bundle
@@ -1707,6 +2151,14 @@ public abstract class Toolkit {
      * {@link SecurityManager#checkPermission checkPermission} method
      * is called to check {@code AWTPermission("accessEventQueue")}.
      *
+     * <p>
+     *  获取应用程序或applet的EventQueue实例。根据Toolkit实现,可以为不同的applet返回不同的EventQueue。
+     * 因此,Applet不应假定由此方法返回的EventQueue实例将被其他applet或系统共享。
+     * 
+     * <p>如果有安全管理员,则会调用其{@link SecurityManager#checkPermission checkPermission}方法来检查{@code AWTPermission("accessEventQueue")}
+     * 。
+     * 
+     * 
      * @return    the <code>EventQueue</code> object
      * @throws  SecurityException
      *          if a security manager is set and it denies access to
@@ -1725,6 +2177,10 @@ public abstract class Toolkit {
      * Gets the application's or applet's <code>EventQueue</code>
      * instance, without checking access.  For security reasons,
      * this can only be called from a <code>Toolkit</code> subclass.
+     * <p>
+     *  获取应用程序或小程序的<code> EventQueue </code>实例,而不检查访问权限。出于安全原因,这只能从<code> Toolkit </code>子类中调用。
+     * 
+     * 
      * @return the <code>EventQueue</code> object
      */
     protected abstract EventQueue getSystemEventQueueImpl();
@@ -1738,6 +2194,10 @@ public abstract class Toolkit {
      * Creates the peer for a DragSourceContext.
      * Always throws InvalidDndOperationException if
      * GraphicsEnvironment.isHeadless() returns true.
+     * <p>
+     *  为DragSourceContext创建对等体。如果GraphicsEnvironment.isHeadless()返回true,则始终抛出InvalidDndOperationException。
+     * 
+     * 
      * @see java.awt.GraphicsEnvironment#isHeadless
      */
     public abstract DragSourceContextPeer createDragSourceContextPeer(DragGestureEvent dge) throws InvalidDnDOperationException;
@@ -1749,6 +2209,12 @@ public abstract class Toolkit {
      *
      * subclasses should override this to provide their own implementation
      *
+     * <p>
+     *  创建一个具体的,平台相关的,请求的抽象DragGestureRecognizer类的子类,并将其与DragSource,Component和DragGestureListener指定的关联。
+     * 
+     *  子类应该重写这个来提供自己的实现
+     * 
+     * 
      * @param abstractRecognizerClass The abstract class of the required recognizer
      * @param ds                      The DragSource
      * @param c                       The Component target for the DragGestureRecognizer
@@ -1775,6 +2241,12 @@ public abstract class Toolkit {
      * representation for an underlying platform dependent desktop setting.
      * For more information on desktop properties supported by the AWT see
      * <a href="doc-files/DesktopProperties.html">AWT Desktop Properties</a>.
+     * <p>
+     *  获取指定的桌面属性的值。
+     * 
+     *  桌面属性是Toolkit全局性质的资源的唯一命名值。通常,它也是底层平台相关桌面设置的抽象表示。
+     * 有关AWT支持的桌面属性的详细信息,请参阅<a href="doc-files/DesktopProperties.html"> AWT桌面属性</a>。
+     * 
      */
     public final synchronized Object getDesktopProperty(String propertyName) {
         // This is a workaround for headless toolkits.  It would be
@@ -1818,6 +2290,9 @@ public abstract class Toolkit {
     /**
      * Sets the named desktop property to the specified value and fires a
      * property change event to notify any listeners that the value has changed.
+     * <p>
+     *  将命名的桌面属性设置为指定的值,并触发属性更改事件以通知任何侦听器值已更改。
+     * 
      */
     protected final void setDesktopProperty(String name, Object newValue) {
         // This is a workaround for headless toolkits.  It would be
@@ -1845,6 +2320,9 @@ public abstract class Toolkit {
 
     /**
      * an opportunity to lazily evaluate desktop property values.
+     * <p>
+     *  懒散地评估桌面属性值的机会。
+     * 
      */
     protected Object lazilyLoadDesktopProperty(String name) {
         return null;
@@ -1852,6 +2330,9 @@ public abstract class Toolkit {
 
     /**
      * initializeDesktopProperties
+     * <p>
+     *  initializeDesktopProperties
+     * 
      */
     protected void initializeDesktopProperties() {
     }
@@ -1863,6 +2344,11 @@ public abstract class Toolkit {
      * If {@code name} is {@code null} or {@code pcl} is {@code null},
      * no exception is thrown and no action is performed.
      *
+     * <p>
+     * 为指定的桌面属性添加指定的属性更改侦听器。添加{@link java.beans.PropertyChangeListenerProxy}对象时,将忽略其属性名称,并添加包装的侦听器。
+     * 如果{@code name}为{@code null}或{@code pcl}为{@code null},则不会抛出任何异常,也不会执行任何操作。
+     * 
+     * 
      * @param   name The name of the property to listen for
      * @param   pcl The property change listener
      * @see PropertyChangeSupport#addPropertyChangeListener(String,
@@ -1881,6 +2367,11 @@ public abstract class Toolkit {
      * If {@code name} is {@code null} or {@code pcl} is {@code null},
      * no exception is thrown and no action is performed.
      *
+     * <p>
+     *  删除指定的桌面属性的指定的属性更改侦听器。当删除{@link java.beans.PropertyChangeListenerProxy}对象时,将忽略其属性名称,并删除包装的侦听器。
+     * 如果{@code name}为{@code null}或{@code pcl}为{@code null},则不会抛出任何异常,也不会执行任何操作。
+     * 
+     * 
      * @param   name The name of the property to remove
      * @param   pcl The property change listener
      * @see PropertyChangeSupport#removePropertyChangeListener(String,
@@ -1897,6 +2388,11 @@ public abstract class Toolkit {
      * contains {@link java.beans.PropertyChangeListenerProxy} objects
      * that associate listeners with the names of desktop properties.
      *
+     * <p>
+     *  返回在此工具包上注册的所有属性更改侦听器的数组。
+     * 返回的数组包含{@link java.beans.PropertyChangeListenerProxy}对象,这些对象将侦听器与桌面属性的名称相关联。
+     * 
+     * 
      * @return all of this toolkit's {@link PropertyChangeListener}
      *         objects wrapped in {@code java.beans.PropertyChangeListenerProxy} objects
      *         or an empty array  if no listeners are added
@@ -1912,6 +2408,10 @@ public abstract class Toolkit {
      * Returns an array of all property change listeners
      * associated with the specified name of a desktop property.
      *
+     * <p>
+     *  返回与桌面属性的指定名称相关联的所有属性更改侦听器的数组。
+     * 
+     * 
      * @param  propertyName the named property
      * @return all of the {@code PropertyChangeListener} objects
      *         associated with the specified name of a desktop property
@@ -1933,6 +2433,10 @@ public abstract class Toolkit {
      * Returns whether the always-on-top mode is supported by this toolkit.
      * To detect whether the always-on-top mode is supported for a
      * particular Window, use {@link Window#isAlwaysOnTopSupported}.
+     * <p>
+     *  返回此工具包是否支持始终在顶模式。要检测特定窗口是否支持始终在顶模式,请使用{@link Window#isAlwaysOnTopSupported}。
+     * 
+     * 
      * @return <code>true</code>, if current toolkit supports the always-on-top mode,
      *     otherwise returns <code>false</code>
      * @see Window#isAlwaysOnTopSupported
@@ -1948,6 +2452,10 @@ public abstract class Toolkit {
      * a dialog with unsupported modality type is created, then
      * <code>Dialog.ModalityType.MODELESS</code> is used instead.
      *
+     * <p>
+     *  返回此工具包是否支持给定的模态类型。如果创建了具有不支持的模态类型的对话框,则使用<code> Dialog.ModalityType.MODELESS </code>。
+     * 
+     * 
      * @param modalityType modality type to be checked for support by this toolkit
      *
      * @return <code>true</code>, if current toolkit supports given modality
@@ -1966,6 +2474,10 @@ public abstract class Toolkit {
      * toolkit. If an unsupported modal exclusion type property is set on a window,
      * then <code>Dialog.ModalExclusionType.NO_EXCLUDE</code> is used instead.
      *
+     * <p>
+     * 返回此工具包是否支持给定的模态排除类型。如果在窗口上设置了不受支持的模式排除类型属性,则使用<code> Dialog.ModalExclusionType.NO_EXCLUDE </code>。
+     * 
+     * 
      * @param modalExclusionType modal exclusion type to be checked for support by this toolkit
      *
      * @return <code>true</code>, if current toolkit supports given modal exclusion
@@ -1990,6 +2502,9 @@ public abstract class Toolkit {
     /*
      * Extracts a "pure" AWTEventListener from a AWTEventListenerProxy,
      * if the listener is proxied.
+     * <p>
+     *  如果侦听器被代理,则从AWTEventListenerProxy提取"纯"AWTEventListener。
+     * 
      */
     static private AWTEventListener deProxyAWTEventListener(AWTEventListener l)
     {
@@ -2026,6 +2541,20 @@ public abstract class Toolkit {
      *
      * If listener is null, no exception is thrown and no action is performed.
      *
+     * <p>
+     *  添加AWTEventListener以接收符合给定<code> eventMask </code>的系统范围内分发的所有AWTEvent。
+     * <p>
+     *  首先,如果有安全管理器,则使用<code> AWTPermission("listenToAllAWTEvents")</code>权限调用其<code> checkPermission </code>
+     * 方法。
+     * 这可能导致SecurityException。
+     * <p>
+     *  <code> eventMask </code>是要接收的事件类型的位掩码。它是通过将<code> AWTEvent </code>中定义的事件掩码进行位或运算来构造的。
+     * <p>
+     *  注意：事件监听器的使用不推荐用于正常的应用程序使用,但仅用于支持特殊用途的工具,包括对辅助功能,事件记录/播放和诊断跟踪的支持。
+     * 
+     *  如果侦听器为null,则不抛出异常,并且不执行任何操作。
+     * 
+     * 
      * @param    listener   the event listener.
      * @param    eventMask  the bitmask of event types to receive
      * @throws SecurityException
@@ -2096,6 +2625,18 @@ public abstract class Toolkit {
      *
      * If listener is null, no exception is thrown and no action is performed.
      *
+     * <p>
+     *  从接收调度的AWTEvent中移除AWTEventListener。
+     * <p>
+     *  首先,如果有安全管理器,则使用<code> AWTPermission("listenToAllAWTEvents")</code>权限调用其<code> checkPermission </code>
+     * 方法。
+     * 这可能导致SecurityException。
+     * <p>
+     * 注意：事件监听器的使用不推荐用于正常的应用程序使用,但仅用于支持特殊用途的工具,包括对辅助功能,事件记录/播放和诊断跟踪的支持。
+     * 
+     *  如果侦听器为null,则不抛出异常,并且不执行任何操作。
+     * 
+     * 
      * @param    listener   the event listener.
      * @throws SecurityException
      *        if a security manager exists and its
@@ -2165,6 +2706,13 @@ public abstract class Toolkit {
      * Note that listener objects
      * added multiple times appear only once in the returned array.
      *
+     * <p>
+     *  返回此工具包上注册的所有<code> AWTEventListener </code>的数组。
+     * 如果有安全管理员,则会使用{@code AWTPermission("listenToAllAWTEvents")}权限调用其{@code checkPermission}方法。
+     * 这可能导致SecurityException。侦听器可以在<code> AWTEventListenerProxy </code>对象中返回,这些对象还包含给定侦听器的事件掩码。
+     * 注意,多次添加的侦听器对象在返回的数组中只出现一次。
+     * 
+     * 
      * @return all of the <code>AWTEventListener</code>s or an empty
      *         array if no listeners are currently registered
      * @throws SecurityException
@@ -2214,6 +2762,13 @@ public abstract class Toolkit {
      * Note that listener objects
      * added multiple times appear only once in the returned array.
      *
+     * <p>
+     *  返回此工具包上注册的所有<code> AWTEventListener </code>的数组,该数组侦听{@code eventMask}参数中指定的所有事件类型。
+     * 如果有安全管理员,则会使用{@code AWTPermission("listenToAllAWTEvents")}权限调用其{@code checkPermission}方法。
+     * 这可能导致SecurityException。侦听器可以在<code> AWTEventListenerProxy </code>对象中返回,这些对象还包含给定侦听器的事件掩码。
+     * 注意,多次添加的侦听器对象在返回的数组中只出现一次。
+     * 
+     * 
      * @param  eventMask the bitmask of event types to listen for
      * @return all of the <code>AWTEventListener</code>s registered
      *         on this toolkit for the specified
@@ -2257,6 +2812,10 @@ public abstract class Toolkit {
      * This method notifies any AWTEventListeners that an event
      * is about to be dispatched.
      *
+     * <p>
+     *  此方法通知任何AWTEventListeners事件将要分派。
+     * 
+     * 
      * @param theEvent the event which will be dispatched.
      */
     void notifyAWTEventListeners(AWTEvent theEvent) {
@@ -2433,6 +2992,10 @@ public abstract class Toolkit {
      * of the given input method highlight, or null if no mapping is found.
      * The style field of the input method highlight is ignored. The map
      * returned is unmodifiable.
+     * <p>
+     * 返回给定输入法高亮的抽象级别描述的视觉属性的映射,如果未找到映射,则返回null。忽略输入法高亮显示的样式字段。返回的映射是不可修改的。
+     * 
+     * 
      * @param highlight input method highlight
      * @return style attribute map, or <code>null</code>
      * @exception HeadlessException if
@@ -2537,6 +3100,9 @@ public abstract class Toolkit {
         /*
          * we do expect that all other fireXXX() methods of java.beans.PropertyChangeSupport
          * use this method.  If this will be changed we will need to change this class.
+         * <p>
+         *  我们确实期望java.beans.PropertyChangeSupport的所有其他fireXXX()方法使用此方法。如果这将被改变,我们将需要改变这个类。
+         * 
          */
         @Override
         public void firePropertyChange(final PropertyChangeEvent evt) {
@@ -2589,6 +3155,15 @@ public abstract class Toolkit {
     * initialized with {@code true}.
     * Changing this value after the {@code Toolkit} class initialization will have no effect.
     * <p>
+    * <p>
+    *  报告是否允许处理来自额外鼠标按钮的事件并将其发布到{@code EventQueue}。
+    * <br>
+    *  要更改返回值,必须在{@code Toolkit}类初始化之前设置{@code sun.awt.enableExtraMouseButtons}属性。此设置可以通过以下命令在应用程序启动时完成：
+    * <pre>
+    *  java -Dsun.awt.enableExtraMouseButtons = false应用程序
+    * </pre>
+    *  或者,可以通过使用以下代码在应用程序中设置属性：
+    * 
     * @exception HeadlessException if GraphicsEnvironment.isHeadless() returns true
     * @return {@code true} if events from extra mouse buttons are allowed to be processed and posted;
     *         {@code false} otherwise

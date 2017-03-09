@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import sun.swing.text.html.FrameEditorPaneTag;
  * &lt;FRAME&gt; tag.  Supports the frameborder, scrolling,
  * marginwidth and marginheight attributes.
  *
+ * <p>
+ *  实现FrameView,旨在支持HTML&lt; FRAME&gt;标签。支持frameborder,scrolling,marginwidth和marginheight属性。
+ * 
+ * 
  * @author    Sunita Mani
  */
 
@@ -57,6 +62,10 @@ class FrameView extends ComponentView implements HyperlinkListener {
     /**
      * Creates a new Frame.
      *
+     * <p>
+     *  创建新的帧。
+     * 
+     * 
      * @param elem the element to represent.
      */
     public FrameView(Element elem) {
@@ -126,6 +135,10 @@ class FrameView extends ComponentView implements HyperlinkListener {
      * or not based on whether the JTextComponent that
      * contains it is editable.
      *
+     * <p>
+     *  设置FrameView的父视图。还根据包含它的JTextComponent是否可编辑来确定FrameView是否应该是可编辑的。
+     * 
+     * 
      * @param parent View
      */
     public void setParent(View parent) {
@@ -143,6 +156,10 @@ class FrameView extends ComponentView implements HyperlinkListener {
      * contains it is editable. And then proceeds to call
      * the superclass to do the paint().
      *
+     * <p>
+     *  还根据包含它的JTextComponent是否可编辑来确定FrameView是否应该是可编辑的。然后继续调用超类做paint()。
+     * 
+     * 
      * @param parent View
      * @see text.ComponentView#paint
      */
@@ -161,6 +178,9 @@ class FrameView extends ComponentView implements HyperlinkListener {
     /**
      * If the marginwidth or marginheight attributes have been specified,
      * then the JEditorPane's margin's are set to the new values.
+     * <p>
+     *  如果已指定marginwidth或marginheight属性,则将JEditorPane的边距设置为新值。
+     * 
      */
     private void setMargin() {
         int margin = 0;
@@ -200,6 +220,9 @@ class FrameView extends ComponentView implements HyperlinkListener {
      * If the frameborder attribute has been specified, either in the frame,
      * or by the frames enclosing frameset, the JScrollPane's setBorder()
      * method is invoked to achieve the desired look.
+     * <p>
+     *  如果已经指定frameborder属性,或者在帧中,或者通过包围框架集的帧,JScrollPane的setBorder()方法被调用以实现所需的外观。
+     * 
      */
     private void setBorder() {
 
@@ -217,6 +240,9 @@ class FrameView extends ComponentView implements HyperlinkListener {
      * This method creates the JScrollPane.  The scrollbar policy is determined by
      * the scrolling attribute.  If not defined, the default is "auto" which
      * maps to the scrollbar's being displayed as needed.
+     * <p>
+     *  此方法创建JScrollPane。滚动条策略由滚动属性确定。如果未定义,默认值为"auto",映射到根据需要显示的滚动条。
+     * 
      */
     private void createScrollPane() {
         AttributeSet attributes = getElement().getAttributes();
@@ -250,6 +276,9 @@ class FrameView extends ComponentView implements HyperlinkListener {
     /**
      * Finds the outermost FrameSetView.  It then
      * returns that FrameSetView's container.
+     * <p>
+     *  查找最外面的FrameSetView。然后它返回FrameSetView的容器。
+     * 
      */
     JEditorPane getOutermostJEditorPane() {
 
@@ -271,6 +300,9 @@ class FrameView extends ComponentView implements HyperlinkListener {
     /**
      * Returns true if this frame is contained within
      * a nested frameset.
+     * <p>
+     *  如果此框架包含在嵌套框架集中,则返回true。
+     * 
      */
     private boolean inNestedFrameSet() {
         FrameSetView parent = (FrameSetView)getParent();
@@ -289,6 +321,12 @@ class FrameView extends ComponentView implements HyperlinkListener {
      * method also invokes the setPage() method and explicitly
      * replaces the current document with the destination url.
      *
+     * <p>
+     * 相对于超链接的更改的通知。此方法搜索最外面的JEditorPane,然后向该框架触发一个HTMLFrameHyperlinkEvent。
+     * 此外,如果目标是_parent,并且没有嵌套的框架集,则目标被重置为_top。
+     * 如果目标是_top,除了将事件触发到最外层的JEditorPane之外,此方法还会调用setPage()方法,并使用目标URL显式替换当前文档。
+     * 
+     * 
      * @param HyperlinkEvent
      */
     public void hyperlinkUpdate(HyperlinkEvent evt) {
@@ -358,6 +396,10 @@ class FrameView extends ComponentView implements HyperlinkListener {
      * in a location that this view is responsible for.  Currently this view
      * handles changes to its SRC attribute.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。当前,此视图处理对其SRC属性的更改。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -400,6 +442,10 @@ class FrameView extends ComponentView implements HyperlinkListener {
     /**
      * Move POST data from temporary storage into the target document property.
      *
+     * <p>
+     *  将POST数据从临时存储移动到目标文档属性。
+     * 
+     * 
      * @return the POST data or null if no data found
      */
     private Object movePostData(JEditorPane targetPane, String frameName) {
@@ -429,6 +475,10 @@ class FrameView extends ComponentView implements HyperlinkListener {
      * Determines the minimum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *  <code>View.Y_AXIS</code>
      * @return the preferred span; given that we do not
@@ -444,6 +494,10 @@ class FrameView extends ComponentView implements HyperlinkListener {
      * Determines the maximum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最大跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *  <code>View.Y_AXIS</code>
      * @return the preferred span; given that we do not
@@ -457,6 +511,8 @@ class FrameView extends ComponentView implements HyperlinkListener {
 
     /** Editor pane rendering frame of HTML document
      *  It uses the same editor kits classes as outermost JEditorPane
+     * <p>
+     *  它使用与最外面的JEditorPane相同的编辑器包类
      */
     class FrameEditorPane extends JEditorPane implements FrameEditorPaneTag {
         public EditorKit getEditorKitForContentType(String type) {

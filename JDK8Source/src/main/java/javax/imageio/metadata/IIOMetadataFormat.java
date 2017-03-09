@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,27 @@ import javax.imageio.ImageTypeSpecifier;
  * representing such objects textually.
  * </ul>
  *
+ * <p>
+ *  描述从<code> IIOMetadata.getAsTree </code>返回的元数据文档结构并传递给<code> IIOMetadata.setFromTree </code>和<code> m
+ * ergeTree </code>的对象。
+ * 文档结构由关于可以属于给定父元素类型的子元素的类型和数量的一组约束,可以属于元素的属性的名称,类型和值,以及属性的类型和值来描述。代码>对象</code>引用,可以存储在节点。
+ * 
+ *  <p> N.B：实现此接口的类应包含一个声明为<code> public static getInstance()</code>的方法,该方法返回类的实例。
+ * 通常,实现将仅构建单个实例并且对其进行高速缓存以用于<code> getInstance </code>的未来调用。
+ * 
+ *  <p>可以由此类描述的结构是使用XML文档类型定义(DTD)可表达的结构的子集,其中添加了关于属性的数据类型的一些基本信息,以及存储<code> / code>引用。
+ * 在将来,XML模式可以用于表示这些结构,以及许多其他结构。
+ * 
+ *  <p> IIOMetadataFormat </code>描述的结构和DTD之间的差异如下：
+ * 
+ * <ul>
+ *  <li>元素不能包含文本或混合包含嵌入标记的文本。
+ * 
+ * <li>元素的子元素必须符合<code> CHILD _ * </code>常量的文档中描述的几个简单模式之一;
+ * 
+ *  <li>元素的内存中表示形式可能包含对<code> Object </code>的引用。没有规定以文本方式表示这些对象。
+ * </ul>
+ * 
  */
 public interface IIOMetadataFormat {
 
@@ -77,6 +99,9 @@ public interface IIOMetadataFormat {
      * A constant returned by <code>getChildPolicy</code> to indicate
      * that an element may not have any children.  In other words, it
      * is required to be a leaf node.
+     * <p>
+     *  <code> getChildPolicy </code>返回的常量,表示元素可能没有任何子元素。换句话说,它需要是叶节点。
+     * 
      */
     int CHILD_POLICY_EMPTY = 0;
 
@@ -85,6 +110,10 @@ public interface IIOMetadataFormat {
      * that an element must have a single instance of each of its
      * legal child elements, in order.  In DTD terms, the contents of
      * the element are defined by a sequence <code>a,b,c,d,...</code>.
+     * <p>
+     *  <code> getChildPolicy </code>返回的常量,表示元素必须按顺序具有每个其法定子元素的单个实例。
+     * 在DTD术语中,元素的内容由序列<code> a,b,c,d,... </code>定义。
+     * 
      */
     int CHILD_POLICY_ALL = 1;
 
@@ -94,6 +123,10 @@ public interface IIOMetadataFormat {
      * legal child elements, in order.  In DTD terms, the contents of
      * the element are defined by a sequence
      * <code>a?,b?,c?,d?,...</code>.
+     * <p>
+     *  <code> getChildPolicy </code>返回的常量,用于指示元素必须按顺序具有每个其合法子元素的零个或一个实例。
+     * 在DTD术语中,元素的内容由序列<code> a,b,c',d',... </code>定义。
+     * 
      */
     int CHILD_POLICY_SOME = 2;
 
@@ -103,6 +136,10 @@ public interface IIOMetadataFormat {
      * among its legal child elements.  In DTD terms, the contents of
      * the element are defined by a selection
      * <code>a|b|c|d|...</code>.
+     * <p>
+     *  <code> getChildPolicy </code>返回的常量,表示元素必须有零个或一个子元素,从其合法的子元素中选择。
+     * 在DTD术语中,元素的内容由选择<code> a | b | c | d | ... </code>定义。
+     * 
      */
     int CHILD_POLICY_CHOICE = 3;
 
@@ -111,6 +148,10 @@ public interface IIOMetadataFormat {
      * that an element must have a sequence of instances of any of its
      * legal child elements.  In DTD terms, the contents of the
      * element are defined by a sequence <code>(a|b|c|d|...)*</code>.
+     * <p>
+     *  <code> getChildPolicy </code>返回的常量,表示元素必须具有其任何合法子元素的实例序列。
+     * 在DTD术语中,元素的内容由序列<code>(a | b | c | d | ...)* </code>定义。
+     * 
      */
     int CHILD_POLICY_SEQUENCE = 4;
 
@@ -119,18 +160,28 @@ public interface IIOMetadataFormat {
      * that an element must have zero or more instances of its unique
      * legal child element.  In DTD terms, the contents of the element
      * are defined by a starred expression <code>a*</code>.
+     * <p>
+     * <code> getChildPolicy </code>返回的常量,用于指示元素必须具有零个或多个其唯一法定子元素的实例。
+     * 在DTD术语中,元素的内容由星号表达式<code> a * </code>定义。
+     * 
      */
     int CHILD_POLICY_REPEAT = 5;
 
     /**
      * The largest valid <code>CHILD_POLICY_*</code> constant,
      * to be used for range checks.
+     * <p>
+     *  最大的有效<code> CHILD_POLICY _ * </code>常量,用于范围检查。
+     * 
      */
     int CHILD_POLICY_MAX = CHILD_POLICY_REPEAT;
 
     /**
      * A constant returned by <code>getObjectValueType</code> to
      * indicate the absence of a user object.
+     * <p>
+     *  由<code> getObjectValueType </code>返回的常量,用于指示缺少用户对象。
+     * 
      */
     int VALUE_NONE = 0;
 
@@ -138,6 +189,9 @@ public interface IIOMetadataFormat {
      * A constant returned by <code>getAttributeValueType</code> and
      * <code>getObjectValueType</code> to indicate that the attribute
      * or user object may be set a single, arbitrary value.
+     * <p>
+     *  由<code> getAttributeValueType </code>和<code> getObjectValueType </code>返回的常量,用于指示属性或用户对象可以设置单个任意值。
+     * 
      */
     int VALUE_ARBITRARY = 1;
 
@@ -149,6 +203,11 @@ public interface IIOMetadataFormat {
      * recommended that ranges of integers be inclusive on both ends,
      * and that exclusive ranges be used only for floating-point data.
      *
+     * <p>
+     *  由<code> getAttributeValueType </code>和<code> getObjectValueType </code>返回的常量,用于指示属性或用户对象可以设置值的范围。
+     * 范围的最小值和最大值都是排斥的。建议整数范围在两端包含,并且排除范围仅用于浮点数据。
+     * 
+     * 
      * @see #VALUE_RANGE_MIN_MAX_INCLUSIVE
      */
     int VALUE_RANGE = 2;
@@ -163,6 +222,13 @@ public interface IIOMetadataFormat {
      * <code>getAttributeValueType</code>or
      * <code>getObjectValueType</code> to determine if the minimum
      * value of the range is inclusive.
+     * <p>
+     *  可以通过<code> VALUE_RANGE </code>进行or'ed获取<code> VALUE_RANGE_MIN_INCLUSIVE </code>和<code> VALUE_RANGE_M
+     * AX_INCLUSIVE </code>的值,以获取<code> VALUE_RANGE_MIN_MAX_INCLUSIVE </code>。
+     * 
+     *  <p>类似地,该值可以与<code> getAttributeValueType </code>或<code> getObjectValueType </code>的值进行and运算,以确定该范围的最
+     * 小值是否包括在内。
+     * 
      */
     int VALUE_RANGE_MIN_INCLUSIVE_MASK = 4;
 
@@ -176,6 +242,13 @@ public interface IIOMetadataFormat {
      * <code>getAttributeValueType</code>or
      * <code>getObjectValueType</code> to determine if the maximum
      * value of the range is inclusive.
+     * <p>
+     * 可以通过<code> VALUE_RANGE </code>进行or'ed获得<code> VALUE_RANGE_MAX_INCLUSIVE </code>和<code> VALUE_RANGE_MI
+     * N_INCLUSIVE </code>的值,以获取<code> VALUE_RANGE_MIN_MAX_INCLUSIVE </code>。
+     * 
+     *  <p>类似地,该值可以与<code> getAttributeValueType </code>或<code> getObjectValueType </code>的值进行and运算,以确定该范围的最
+     * 大值是否包含。
+     * 
      */
     int VALUE_RANGE_MAX_INCLUSIVE_MASK = 8;
 
@@ -184,6 +257,10 @@ public interface IIOMetadataFormat {
      * <code>getObjectValueType</code> to indicate that the attribute
      * or user object may be set to a range of values.  The minimum
      * (but not the maximum) value of the range is inclusive.
+     * <p>
+     *  由<code> getAttributeValueType </code>和<code> getObjectValueType </code>返回的常量,用于指示属性或用户对象可以设置为值的范围。
+     * 范围的最小(但不是最大)值包括在内。
+     * 
      */
     int VALUE_RANGE_MIN_INCLUSIVE = VALUE_RANGE |
         VALUE_RANGE_MIN_INCLUSIVE_MASK;
@@ -193,6 +270,10 @@ public interface IIOMetadataFormat {
      * <code>getObjectValueType</code> to indicate that the attribute
      * or user object may be set to a range of values.  The maximum
      * (but not the minimum) value of the range is inclusive.
+     * <p>
+     *  由<code> getAttributeValueType </code>和<code> getObjectValueType </code>返回的常量,用于指示属性或用户对象可以设置为值的范围。
+     * 范围的最大(但不是最小)值包括在内。
+     * 
      */
     int VALUE_RANGE_MAX_INCLUSIVE = VALUE_RANGE |
         VALUE_RANGE_MAX_INCLUSIVE_MASK;
@@ -204,6 +285,10 @@ public interface IIOMetadataFormat {
      * and maximum values of the range are inclusive.  It is
      * recommended that ranges of integers be inclusive on both ends,
      * and that exclusive ranges be used only for floating-point data.
+     * <p>
+     *  由<code> getAttributeValueType </code>和<code> getObjectValueType </code>返回的常量,用于指示属性或用户对象可以设置值的范围。
+     * 范围的最小值和最大值都包括在内。建议整数范围在两端包含,并且排除范围仅用于浮点数据。
+     * 
      */
     int VALUE_RANGE_MIN_MAX_INCLUSIVE =
         VALUE_RANGE |
@@ -220,6 +305,13 @@ public interface IIOMetadataFormat {
      *
      * <p> Attribute values of type <code>DATATYPE_BOOLEAN</code>
      * should be marked as enumerations.
+     * <p>
+     * 由<code> getAttributeValueType </code>和<code> getObjectValueType </code>返回的常量,用于指示属性或用户对象可以设置多个枚举值中的一个
+     * 。
+     * 在属性的情况下,这些值是<code> String </code> s;对于对象,它们是实现给定类或接口的<code> Object </code>。
+     * 
+     *  <p>类型<code> DATATYPE_BOOLEAN </code>的属性值应标记为枚举。
+     * 
      */
     int VALUE_ENUMERATION = 16;
 
@@ -230,6 +322,11 @@ public interface IIOMetadataFormat {
      * case of attributes, the list will consist of
      * whitespace-separated values within a <code>String</code>; for
      * objects, an array will be used.
+     * <p>
+     *  由<code> getAttributeValueType </code>和<code> getObjectValueType </code>返回的常量,用于指示属性或用户对象可以设置为值的列表或数组
+     * 。
+     * 在属性的情况下,列表将由<code> String </code>中的空格分隔值组成;对于对象,将使用数组。
+     * 
      */
     int VALUE_LIST = 32;
 
@@ -237,6 +334,9 @@ public interface IIOMetadataFormat {
      * A constant returned by <code>getAttributeDataType</code>
      * indicating that the value of an attribute is a general Unicode
      * string.
+     * <p>
+     *  由<code> getAttributeDataType </code>返回的常量,表示属性的值是一般的Unicode字符串。
+     * 
      */
     int DATATYPE_STRING = 0;
 
@@ -248,6 +348,10 @@ public interface IIOMetadataFormat {
      * enumerations, and the permitted values should be the string
      * literal values "TRUE" or "FALSE", although a plugin may also
      * recognise lower or mixed case equivalents.
+     * <p>
+     *  由<code> getAttributeDataType </code>返回的常量,表示属性的值是布尔值"true"或"false"之一。
+     * 类型为DATATYPE_BOOLEAN的属性值应标记为枚举,允许的值应为字符串字面值"TRUE"或"FALSE",虽然插件也可能识别较低或混合大小写的等效值。
+     * 
      */
     int DATATYPE_BOOLEAN = 1;
 
@@ -255,6 +359,9 @@ public interface IIOMetadataFormat {
      * A constant returned by <code>getAttributeDataType</code>
      * indicating that the value of an attribute is a string
      * representation of an integer.
+     * <p>
+     *  由<code> getAttributeDataType </code>返回的常量,表示属性的值是整数的字符串表示形式。
+     * 
      */
     int DATATYPE_INTEGER = 2;
 
@@ -262,6 +369,9 @@ public interface IIOMetadataFormat {
      * A constant returned by <code>getAttributeDataType</code>
      * indicating that the value of an attribute is a string
      * representation of a decimal floating-point number.
+     * <p>
+     * 由<code> getAttributeDataType </code>返回的常量,表示属性的值是十进制浮点数的字符串表示形式。
+     * 
      */
     int DATATYPE_FLOAT = 3;
 
@@ -270,6 +380,9 @@ public interface IIOMetadataFormat {
      * indicating that the value of an attribute is a string
      * representation of a double-precision decimal floating-point
      * number.
+     * <p>
+     *  由<code> getAttributeDataType </code>返回的常量,表示属性的值是双精度十进制浮点数的字符串表示形式。
+     * 
      */
     int DATATYPE_DOUBLE = 4;
 
@@ -278,6 +391,10 @@ public interface IIOMetadataFormat {
     /**
      * Returns the name of the root element of the format.
      *
+     * <p>
+     *  返回格式的根元素的名称。
+     * 
+     * 
      * @return a <code>String</code>.
      */
     String getRootName();
@@ -292,6 +409,11 @@ public interface IIOMetadataFormat {
      * element that describes the primary colors of the image, which
      * would not be allowed when writing a grayscale image.
      *
+     * <p>
+     *  如果元素(及其下面的子树)被允许出现在由<code> ImageTypeSpecifier </code>定义的给定类型的图像的元数据文档中,则返回<code> true </code>。
+     * 例如,元数据文档格式可以包含描述图像的原色的元素,其在写入灰度图像时将不被允许。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param imageType an <code>ImageTypeSpecifier</code> indicating
      * the type of the image that will be associated with the
@@ -309,6 +431,10 @@ public interface IIOMetadataFormat {
      * might be required to have at least 3 children, one for each
      * primary.
      *
+     * <p>
+     *  返回具有子策略<code> CHILD_POLICY_REPEAT </code>的已命名元素的最小子数。例如,表示颜色主要信息的元素可能需要至少有3个子元素,每个子元素有一个子元素。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return an <code>int</code>.
@@ -329,6 +455,11 @@ public interface IIOMetadataFormat {
      * <code>Integer.MAX_VALUE</code> may be used to specify that
      * there is no upper bound.
      *
+     * <p>
+     *  返回具有子策略<code> CHILD_POLICY_REPEAT </code>的已命名元素的最大子数。例如,表示8位调色板中的条目的元素可以允许重复多达256次。
+     * 值<code> Integer.MAX_VALUE </code>可用于指定没有上限。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return an <code>int</code>.
@@ -350,6 +481,13 @@ public interface IIOMetadataFormat {
      * default <code>Locale</code> returned by <code>Locale.getLocale</code>
      * will be used.
      *
+     * <p>
+     * 返回包含指定元素或<code> null </code>的描述的<code> String </code>。如果可能,将对提供的<code> Locale </code>进行本地化描述。
+     * 
+     *  <p>如果<code> locale </code>是<code> null </code>,则会使用<code> Locale.getLocale </code>返回的当前默认<code> Loca
+     * le </code>。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param locale the <code>Locale</code> for which localization
      * will be attempted.
@@ -368,6 +506,10 @@ public interface IIOMetadataFormat {
      * <code>CHILD_POLICY_</code>, indicating the legal pattern of
      * children for the named element.
      *
+     * <p>
+     *  返回以<code> CHILD_POLICY _ </code>开头的常量,指示指定元素的子元素的法律模式。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return one of the <code>CHILD_POLICY_*</code> constants.
@@ -384,6 +526,10 @@ public interface IIOMetadataFormat {
      * element, in the order in which they should appear.  If the
      * element cannot have children, <code>null</code> is returned.
      *
+     * <p>
+     *  返回一个<code> String </code> s数组,表示允许作为指定元素的子元素的元素的名称,按照它们应该出现的顺序。如果元素不能有子元素,则返回<code> null </code>。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return an array of <code>String</code>s, or null.
@@ -400,6 +546,10 @@ public interface IIOMetadataFormat {
      * Returns an array of <code>String</code>s listing the names of
      * the attributes that may be associated with the named element.
      *
+     * <p>
+     *  返回一个<code> String </code>数组,列出可能与指定元素相关联的属性的名称。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return an array of <code>String</code>s.
@@ -417,6 +567,10 @@ public interface IIOMetadataFormat {
      * specified range, constrained to be one of a set of enumerated
      * values, or are a whitespace-separated list of arbitrary values.
      *
+     * <p>
+     *  返回以<code> VALUE _ </code>开头的常量,指示指定元素中给定属性的值是否是任意的,被限制在指定范围内,被限制为枚举值集合中的一个,或者是任意值的空格分隔的列表。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param attrName the name of the attribute being queried.
      *
@@ -439,6 +593,11 @@ public interface IIOMetadataFormat {
      * <code>VALUE_LIST</code>, then the legal value is a
      * whitespace-spearated list of values of the returned datatype.
      *
+     * <p>
+     *  返回以<code> DATATYPE _ </code>开头的常量,指示指定元素中给定属性的值的格式和解释。
+     * 如果<code> getAttributeValueType </code>返回<code> VALUE_LIST </code>,则合法值是返回的数据类型的值的空白格式列表。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param attrName the name of the attribute being queried.
      *
@@ -457,6 +616,10 @@ public interface IIOMetadataFormat {
      * Returns <code>true</code> if the named attribute must be
      * present within the named element.
      *
+     * <p>
+     * 如果命名的属性必须存在于命名的元素中,则返回<code> true </code>。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param attrName the name of the attribute being queried.
      *
@@ -477,6 +640,10 @@ public interface IIOMetadataFormat {
      * <code>String</code>, or <code>null</code> if no default value
      * is available.
      *
+     * <p>
+     *  如果没有默认值可用,则返回命名属性的默认值,如果它没有显式地出现在命名元素中,则为<code> String </code>或<code> null </code>。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param attrName the name of the attribute being queried.
      *
@@ -499,6 +666,11 @@ public interface IIOMetadataFormat {
      * <code>getAttributeValueType</code> returns
      * <code>VALUE_ENUMERATION</code>.
      *
+     * <p>
+     *  返回包含指定元素中给定属性的合法枚举值的<code> String </code> s数组。
+     * 此方法只应在<code> getAttributeValueType </code>返回<code> VALUE_ENUMERATION </code>时调用。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param attrName the name of the attribute being queried.
      *
@@ -525,6 +697,12 @@ public interface IIOMetadataFormat {
      * <code>getAttributeValueType</code> returns
      * <code>VALUE_RANGE_*</code>.
      *
+     * <p>
+     *  返回属性的最小合法值。该值是包含还是排它可以由<code> getAttributeValueType </code>的值确定。
+     * 该值作为<code> String </code>返回;其解释取决于<code> getAttributeDataType </code>的值。
+     * 仅当<code> getAttributeValueType </code>返回<code> VALUE_RANGE _ * </code>时,才应调用此方法。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param attrName the name of the attribute being queried.
      *
@@ -552,6 +730,12 @@ public interface IIOMetadataFormat {
      * <code>getAttributeValueType</code> returns
      * <code>VALUE_RANGE_*</code>.
      *
+     * <p>
+     *  返回属性的最大合法值。该值是包含还是排它可以由<code> getAttributeValueType </code>的值确定。
+     * 该值作为<code> String </code>返回;其解释取决于<code> getAttributeDataType </code>的值。
+     * 仅当<code> getAttributeValueType </code>返回<code> VALUE_RANGE _ * </code>时,才应调用此方法。
+     * 
+     * 
      * @param elementName the name of the element being queried, as a
      * <code>String</code>.
      * @param attrName the name of the attribute being queried.
@@ -578,6 +762,11 @@ public interface IIOMetadataFormat {
      * <code>getAttributeValueType</code> returns
      * <code>VALUE_LIST</code>.
      *
+     * <p>
+     * 返回可用于定义此属性的列表项的最小数量。属性本身定义为包含多个以空格分隔的项目的<code> String </code>。
+     * 仅当<code> getAttributeValueType </code>返回<code> VALUE_LIST </code>时,才应调用此方法。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param attrName the name of the attribute being queried.
      *
@@ -605,6 +794,12 @@ public interface IIOMetadataFormat {
      * <code>getAttributeValueType</code> returns
      * <code>VALUE_LIST</code>.
      *
+     * <p>
+     *  返回可用于定义此属性的列表项的最大数量。值<code> Integer.MAX_VALUE </code>可用于指定没有上限。
+     * 属性本身定义为包含多个以空格分隔的项目的<code> String </code>。
+     * 仅当<code> getAttributeValueType </code>返回<code> VALUE_LIST </code>时,才应调用此方法。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      * @param attrName the name of the attribute being queried.
      *
@@ -631,6 +826,13 @@ public interface IIOMetadataFormat {
      * default <code>Locale</code> returned by <code>Locale.getLocale</code>
      * will be used.
      *
+     * <p>
+     *  返回包含指定属性或<code> null </code>的描述的<code> String </code>。如果可能,将对提供的<code> Locale </code>进行本地化描述。
+     * 
+     *  <p>如果<code> locale </code>是<code> null </code>,则会使用<code> Locale.getLocale </code>返回的当前默认<code> Loca
+     * le </code>。
+     * 
+     * 
      * @param elementName the name of the element.
      * @param attrName the name of the attribute.
      * @param locale the <code>Locale</code> for which localization
@@ -661,6 +863,13 @@ public interface IIOMetadataFormat {
      * defined as a range must implement the <code>Comparable</code>
      * interface.
      *
+     * <p>
+     *  返回以<code> VALUE _ </code>开头的枚举值中的一个,表示对于<code> Object </code>引用允许的值的类型(枚举,范围或数组)。
+     * 如果给定元素中没有对象值,则此方法的结果为<code> VALUE_NONE </code>。
+     * 
+     *  其合法值定义为范围的<p> <code> Object </code>引用必须实现<code> Comparable </code>接口。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return one of the <code>VALUE_*</code> constants.
@@ -686,6 +895,14 @@ public interface IIOMetadataFormat {
      * defined as a range must implement the <code>Comparable</code>
      * interface.
      *
+     * <p>
+     * 返回存储在元素中的<code> Object </code>引用的<code> Class </code>类型。
+     * 如果此元素可能不包含<code> Object </code>引用,将抛出<code> IllegalArgumentException </code>。
+     * 如果类类型是数组,该字段表示<code> int </code> s的数组的底层类类型(<i> eg </i>),该方法将返回<code> int.class < / code>)。
+     * 
+     *  其合法值定义为范围的<p> <code> Object </code>引用必须实现<code> Comparable </code>接口。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return a <code>Class</code> object.
@@ -704,6 +921,10 @@ public interface IIOMetadataFormat {
      * value for the <code>Object</code> reference within
      * the named element.
      *
+     * <p>
+     *  返回包含指定元素中<code> Object </code>引用的默认值的<code> Object </code>。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return an <code>Object</code>.
@@ -729,6 +950,14 @@ public interface IIOMetadataFormat {
      * this method, as defined by the <code>==</code> operator (as
      * opposed to the <code>Object.equals</code> method).
      *
+     * <p>
+     *  返回一个包含指定元素中<code> Object </code>引用的合法枚举值的<code> Object </code>数组。
+     * 此方法只应在<code> getObjectValueType </code>返回<code> VALUE_ENUMERATION </code>时调用。
+     * 
+     *  <p>与接受枚举值的节点相关联的<code> Object </code>必须等于由此方法返回的值之一,由<code> == </code>运算符定义到<code> Object.equals </code>
+     * 方法)。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return an array of <code>Object</code>s.
@@ -752,6 +981,11 @@ public interface IIOMetadataFormat {
      * called if <code>getObjectValueType</code> returns one of the
      * constants starting with <code>VALUE_RANGE</code>.
      *
+     * <p>
+     * 返回指定元素中<code> Object </code>引用的最小合法值。该值是包含还是排斥可以由<code> getObjectValueType </code>的值确定。
+     * 仅当<code> getObjectValueType </code>返回以<code> VALUE_RANGE </code>开头的常量之一时,才应调用此方法。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return the smallest legal value for the attribute.
@@ -775,6 +1009,11 @@ public interface IIOMetadataFormat {
      * called if <code>getObjectValueType</code> returns one of the
      * constants starting with <code>VALUE_RANGE</code>.
      *
+     * <p>
+     *  返回指定元素中<code> Object </code>引用的最大合法值。该值是包含还是排斥可以由<code> getObjectValueType </code>的值确定。
+     * 仅当<code> getObjectValueType </code>返回以<code> VALUE_RANGE </code>开头的常量之一时,才应调用此方法。
+     * 
+     * 
      * @return the smallest legal value for the attribute.
      *
      * @param elementName the name of the element being queried.
@@ -797,6 +1036,11 @@ public interface IIOMetadataFormat {
      * <code>getObjectValueType</code> returns
      * <code>VALUE_LIST</code>.
      *
+     * <p>
+     *  返回可用于在指定元素中定义<code> Object </code>引用的数组元素的最小数量。
+     * 仅当<code> getObjectValueType </code>返回<code> VALUE_LIST </code>时,才应调用此方法。
+     * 
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return the smallest valid array length for the
@@ -821,6 +1065,10 @@ public interface IIOMetadataFormat {
      * only be called if <code>getObjectValueType</code> returns
      * <code>VALUE_LIST</code>.
      *
+     * <p>
+     *  返回可用于在命名元素中定义<code> Object </code>引用的数组元素的最大数目。值<code> Integer.MAX_VALUE </code>可用于指定没有上限。
+     * 仅当<code> getObjectValueType </code>返回<code> VALUE_LIST </code>时,才应调用此方法。
+     * 
      * @param elementName the name of the element being queried.
      *
      * @return the largest valid array length for the

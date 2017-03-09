@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2003-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 
@@ -33,6 +43,10 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLConfigurationException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  @ xerces.internal
+ * 
+ * 
  * @author  Neeraj Bajaj
  *
  * @version $Id: CMNodeFactory.java,v 1.7 2010-11-01 04:39:58 joehw Exp $
@@ -63,6 +77,9 @@ public class CMNodeFactory {
     /**
      * Error reporter. This property identifier is:
      * http://apache.org/xml/properties/internal/error-reporter
+     * <p>
+     *  错误报告。此属性标识符为：http://apache.org/xml/properties/internal/error-reporter
+     * 
      */
     private XMLErrorReporter fErrorReporter;
 
@@ -134,6 +151,10 @@ public class CMNodeFactory {
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置属性的值。当属性更改值时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,12 +49,26 @@ import com.sun.jmx.snmp.SnmpStatusException;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ * <p>
+ *  此接口定义了必须由需要与{@link com.sun.jmx.snmp.agent.SnmpStandardObjectServer}对象交互的SNMP元数据对象实施的方法。
+ * </p>
+ * <p>
+ *  当在标准元数据模式(默认)中运行时,所有这些方法通常由<code> mibgen </code>生成。
+ * </p>
+ *  <p> <b> <i>此接口在生成的元数据和SNMP运行时之间内部使用,您不需要担心它,因为您永远不必直接使用它。 </b> </i> </p>
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  **/
 public interface SnmpStandardMetaServer {
     /**
      * Returns the value of the scalar object identified by the given
      * OID arc.
      *
+     * <p>
+     * 
      * @param arc OID arc of the querried scalar object.
      *
      * @return The <CODE>SnmpValue</CODE> of the scalar object identified
@@ -75,6 +90,10 @@ public interface SnmpStandardMetaServer {
      * Sets the value of the scalar object identified by the given
      * OID arc.
      *
+     * <p>
+     *  返回由给定OID弧标识的标量对象的值。
+     * 
+     * 
      * @param x New value for the scalar object identified by
      *    <CODE>arc</CODE>
      *
@@ -99,6 +118,10 @@ public interface SnmpStandardMetaServer {
      * Checks that the new desired value of the scalar object identified
      * by the given OID arc is valid.
      *
+     * <p>
+     *  设置由给定OID弧标识的标量对象的值。
+     * 
+     * 
      * @param x New value for the scalar object identified by
      *    <CODE>arc</CODE>
      *

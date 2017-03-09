@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,16 @@ import javax.imageio.metadata.IIOMetadata;
  * <code>getRaster</code> will return a non-<code>null</code> value.
  * Subclasses are responsible for ensuring this behavior.
  *
+ * <p>
+ *  用于聚合图像的简单容器类,一组缩略图(预览)图像和表示与图像相关联的元数据的对象。
+ * 
+ *  <p>图像数据可以采用<code> RenderedImage </code>或<code> Raster </code>的形式。
+ * 返回<code> IIOImage </code>的读取器方法将始终使用<code> RenderedImage </code>引用返回<code> BufferedImage </code>。
+ * 接受<code> IIOImage </code>的写方法将始终接受<code> RenderedImage </code>,并且可以选择接受<code> Raster </code>。
+ * 
+ *  <p> <code> getRenderedImage </code>和<code> getRaster </code>中的一个将返回非<code> null </code>值。子类负责确保此行为。
+ * 
+ * 
  * @see ImageReader#readAll(int, ImageReadParam)
  * @see ImageReader#readAll(java.util.Iterator)
  * @see ImageWriter#write(javax.imageio.metadata.IIOMetadata,
@@ -61,11 +72,17 @@ public class IIOImage {
 
     /**
      * The <code>RenderedImage</code> being referenced.
+     * <p>
+     *  被引用的<code> RenderedImage </code>。
+     * 
      */
     protected RenderedImage image;
 
     /**
      * The <code>Raster</code> being referenced.
+     * <p>
+     *  被引用的<code> Raster </code>。
+     * 
      */
     protected Raster raster;
 
@@ -73,12 +90,19 @@ public class IIOImage {
      * A <code>List</code> of <code>BufferedImage</code> thumbnails,
      * or <code>null</code>.  Non-<code>BufferedImage</code> objects
      * must not be stored in this <code>List</code>.
+     * <p>
+     *  <code> BufferedImage </code>缩略图的<code>列表</code>或<code> null </code>。
+     * 非<code> BufferedImage </code>对象不能存储在此<code> List </code>中。
+     * 
      */
     protected List<? extends BufferedImage> thumbnails = null;
 
     /**
      * An <code>IIOMetadata</code> object containing metadata
      * associated with the image.
+     * <p>
+     *  包含与图像相关联的元数据的<code> IIOMetadata </code>对象。
+     * 
      */
     protected IIOMetadata metadata;
 
@@ -93,6 +117,14 @@ public class IIOImage {
      * <code>null</code> or contain only <code>BufferedImage</code>
      * objects.
      *
+     * <p>
+     *  构造包含<code> RenderedImage </code>的<code> IIOImage </code>,以及与其关联的缩略图和元数据。
+     * 
+     *  <p>所有参数都通过引用存储。
+     * 
+     * <p> <code>缩略图</code>参数必须是<code> null </code>或只包含<code> BufferedImage </code>对象。
+     * 
+     * 
      * @param image a <code>RenderedImage</code>.
      * @param thumbnails a <code>List</code> of <code>BufferedImage</code>s,
      * or <code>null</code>.
@@ -121,6 +153,12 @@ public class IIOImage {
      *
      * <p> All parameters are stored by reference.
      *
+     * <p>
+     *  构造包含<code> Raster </code>的<code> IIOImage </code>,以及与其关联的缩略图和元数据。
+     * 
+     *  <p>所有参数都通过引用存储。
+     * 
+     * 
      * @param raster a <code>Raster</code>.
      * @param thumbnails a <code>List</code> of <code>BufferedImage</code>s,
      * or <code>null</code>.
@@ -146,6 +184,10 @@ public class IIOImage {
      * Returns the currently set <code>RenderedImage</code>, or
      * <code>null</code> if only a <code>Raster</code> is available.
      *
+     * <p>
+     *  如果只有<code> Raster </code>可用,则返回当前设置的<code> RenderedImage </code>或<code> null </code>。
+     * 
+     * 
      * @return a <code>RenderedImage</code>, or <code>null</code>.
      *
      * @see #setRenderedImage
@@ -161,6 +203,10 @@ public class IIOImage {
      * stored by reference.  Any existing <code>Raster</code> is
      * discarded.
      *
+     * <p>
+     *  设置当前<code> RenderedImage </code>。该值通过引用存储。任何现有的<code> Raster </code>被丢弃。
+     * 
+     * 
      * @param image a <code>RenderedImage</code>.
      *
      * @exception IllegalArgumentException if <code>image</code> is
@@ -182,6 +228,11 @@ public class IIOImage {
      * Returns <code>true</code> if this <code>IIOImage</code> stores
      * a <code>Raster</code> rather than a <code>RenderedImage</code>.
      *
+     * <p>
+     *  如果此<code> IIOImage </code>存储<code> Raster </code>而不是<code> RenderedImage </code>,则返回<code> true </code>
+     * 。
+     * 
+     * 
      * @return <code>true</code> if a <code>Raster</code> is
      * available.
      */
@@ -196,6 +247,10 @@ public class IIOImage {
      * <code>null</code> if only a <code>RenderedImage</code> is
      * available.
      *
+     * <p>
+     *  如果只有<code> RenderedImage </code>可用,则返回当前设置的<code> Raster </code>或<code> null </code>。
+     * 
+     * 
      * @return a <code>Raster</code>, or <code>null</code>.
      *
      * @see #setRaster
@@ -211,6 +266,10 @@ public class IIOImage {
      * stored by reference.  Any existing <code>RenderedImage</code> is
      * discarded.
      *
+     * <p>
+     *  设置当前<code> Raster </code>。该值通过引用存储。任何现有的<code> RenderedImage </code>被丢弃。
+     * 
+     * 
      * @param raster a <code>Raster</code>.
      *
      * @exception IllegalArgumentException if <code>raster</code> is
@@ -232,6 +291,10 @@ public class IIOImage {
      * Returns the number of thumbnails stored in this
      * <code>IIOImage</code>.
      *
+     * <p>
+     *  返回存储在此<code> IIOImage </code>中的缩略图的数量。
+     * 
+     * 
      * @return the number of thumbnails, as an <code>int</code>.
      */
     public int getNumThumbnails() {
@@ -241,6 +304,10 @@ public class IIOImage {
     /**
      * Returns a thumbnail associated with the main image.
      *
+     * <p>
+     *  返回与主图像关联的缩略图。
+     * 
+     * 
      * @param index the index of the desired thumbnail image.
      *
      * @return a thumbnail image, as a <code>BufferedImage</code>.
@@ -266,6 +333,10 @@ public class IIOImage {
      * <code>BufferedImage</code>s, or <code>null</code> if none is
      * set.  A live reference is returned.
      *
+     * <p>
+     *  返回缩略图<code> BufferedImage </code> s或<code> null </code>(如果未设置)的当前<code> List </code>返回实时引用。
+     * 
+     * 
      * @return the current <code>List</code> of
      * <code>BufferedImage</code> thumbnails, or <code>null</code>.
      *
@@ -285,6 +356,13 @@ public class IIOImage {
      * <code>null</code> or contain only <code>BufferedImage</code>
      * objects.
      *
+     * <p>
+     *  将缩略图列表设置为<code> BufferedImage </code>的新<code> List </code>或<code> null </code>。
+     * 将删除对上一个<code> List </code>的引用。
+     * 
+     *  <p> <code>缩略图</code>参数必须是<code> null </code>或只包含<code> BufferedImage </code>对象。
+     * 
+     * 
      * @param thumbnails a <code>List</code> of
      * <code>BufferedImage</code> thumbnails, or <code>null</code>.
      *
@@ -299,6 +377,10 @@ public class IIOImage {
      * Returns a reference to the current <code>IIOMetadata</code>
      * object, or <code>null</code> is none is set.
      *
+     * <p>
+     * 返回对当前<code> IIOMetadata </code>对象的引用,或<code> null </code>为none。
+     * 
+     * 
      * @return an <code>IIOMetadata</code> object, or <code>null</code>.
      *
      * @see #setMetadata
@@ -311,6 +393,9 @@ public class IIOImage {
      * Sets the <code>IIOMetadata</code> to a new object, or
      * <code>null</code>.
      *
+     * <p>
+     *  将<code> IIOMetadata </code>设置为新对象,或<code> null </code>。
+     * 
      * @param metadata an <code>IIOMetadata</code> object, or
      * <code>null</code>.
      *

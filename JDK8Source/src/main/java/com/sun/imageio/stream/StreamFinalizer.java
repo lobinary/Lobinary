@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,14 @@ import javax.imageio.stream.ImageInputStream;
  * rarest of circumstances: when a user has subclassed one of the public
  * stream classes.  (It should be no worse than the old days when the public
  * stream classes had non-empty finalize() methods.)
+ * <p>
+ *  小类,以帮助在垃圾回收之前正确关闭ImageInputStream实例。
+ *  ImageInputStreamImpl类定义了一个finalize()方法,但是在一些公共子类(例如FileImageInputStream)中,为了性能原因,我们覆盖了finalize()方法为空
+ * ,而是依赖于Disposer机制来关闭/处理资源。
+ *  小类,以帮助在垃圾回收之前正确关闭ImageInputStream实例。
+ * 这是很好的,当这些类之一直接实例化(例如新的FileImageInputStream()),但在不太可能的情况下,用户定义其中一个流的自己的子类,我们需要一些方法来回到ImageInputStreamI
+ * mpl的行为,将调用close()作为完成的一部分。
+ *  小类,以帮助在垃圾回收之前正确关闭ImageInputStream实例。
  */
 public class StreamFinalizer {
     private ImageInputStream stream;

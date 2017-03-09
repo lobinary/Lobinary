@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -238,6 +239,9 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
     /**
      * Returns the Presentation Manager for the current thread group, using the ThreadGroup-specific
      * AppContext to hold it. Creates and records one if needed.
+     * <p>
+     *  返回当前线程组的Presentation Manager,使用特定于ThreadGroup的AppContext来保存它。如果需要,创建和记录一个。
+     * 
      */
     public static PresentationManager getPresentationManager()
     {
@@ -264,6 +268,9 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
     /** Get the appropriate StubFactoryFactory.  This
      * will be dynamic or static depending on whether
      * com.sun.CORBA.ORBUseDynamicStub is true or false.
+     * <p>
+     *  将是动态或静态的,具体取决于com.sun.CORBA.ORBUseDynamicStub是true还是false。
+     * 
      */
     public static PresentationManager.StubFactoryFactory
         getStubFactoryFactory()
@@ -380,6 +387,9 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
      * always through an exception: either a ForwardException to
      * allow another server to handle the request, or else an error
      * indication.  XXX Remove after ORT for ORBD work is integrated.
+     * <p>
+     *  处理给定对象键的错误服务器ID。这应该总是通过一个异常：一个ForwardException允许另一个服务器处理请求,否则一个错误指示。 XXX ORB之后删除ORBD工作是集成的。
+     * 
      */
     public abstract void handleBadServerId( ObjectKey okey ) ;
     public abstract void setBadServerIdHandler( BadServerIdHandler handler ) ;
@@ -399,6 +409,9 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
 
     /** Return this ORB's transient server ID.  This is needed for
      * initializing object adapters.
+     * <p>
+     *  初始化对象适配器。
+     * 
      */
     public abstract int getTransientServerId();
 
@@ -420,35 +433,54 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
 
     /** Set the resolver used in this ORB.  This resolver will be used for list_initial_services
      * and resolve_initial_references.
+     * <p>
+     *  和resolve_initial_references。
+     * 
      */
     public abstract void setResolver( Resolver resolver ) ;
 
     /** Get the resolver used in this ORB.  This resolver will be used for list_initial_services
      * and resolve_initial_references.
+     * <p>
+     *  和resolve_initial_references。
+     * 
      */
     public abstract Resolver getResolver() ;
 
     /** Set the LocalResolver used in this ORB.  This LocalResolver is used for
      * register_initial_reference only.
+     * <p>
+     *  仅register_initial_reference。
+     * 
      */
     public abstract void setLocalResolver( LocalResolver resolver ) ;
 
     /** Get the LocalResolver used in this ORB.  This LocalResolver is used for
      * register_initial_reference only.
+     * <p>
+     *  仅register_initial_reference。
+     * 
      */
     public abstract LocalResolver getLocalResolver() ;
 
     /** Set the operation used in string_to_object calls.  The Operation must expect a
      * String and return an org.omg.CORBA.Object.
+     * <p>
+     *  String并返回一个org.omg.CORBA.Object。
+     * 
      */
     public abstract void setURLOperation( Operation stringToObject ) ;
 
     /** Get the operation used in string_to_object calls.  The Operation must expect a
      * String and return an org.omg.CORBA.Object.
+     * <p>
+     *  String并返回一个org.omg.CORBA.Object。
+     * 
      */
     public abstract Operation getURLOperation() ;
 
     /** Set the ServerRequestDispatcher that should be used for handling INS requests.
+    /* <p>
      */
     public abstract void setINSDelegate( CorbaServerRequestDispatcher insDelegate ) ;
 
@@ -456,6 +488,9 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
 
     /** Factory finders for the various parts of the IOR: tagged components, tagged
      * profiles, and tagged profile templates.
+     * <p>
+     *  配置文件和标记的配置文件模板。
+     * 
      */
     public abstract TaggedComponentFactoryFinder getTaggedComponentFactoryFinder() ;
     public abstract IdentifiableFactoryFinder getTaggedProfileFactoryFinder() ;
@@ -468,6 +503,9 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
 
     /**
      * Returns the logger based on the category.
+     * <p>
+     *  根据类别返回记录器。
+     * 
      */
     public Logger getLogger( String domain )
     {
@@ -512,6 +550,9 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
 
     /** get the log wrapper class (its type is dependent on the exceptionGroup) for the
      * given log domain and exception group in this ORB instance.
+     * <p>
+     *  在此ORB实例中给定日志域和异常组。
+     * 
      */
     public LogWrapperBase getLogWrapper( String logDomain,
         String exceptionGroup, LogWrapperFactory factory )
@@ -529,6 +570,8 @@ public abstract class ORB extends com.sun.corba.se.org.omg.CORBA.ORB
 
     /** get the log wrapper class (its type is dependent on the exceptionGroup) for the
      * given log domain and exception group in this ORB instance.
+     * <p>
+     *  在此ORB实例中给定日志域和异常组。
      */
     public static LogWrapperBase staticGetLogWrapper( String logDomain,
         String exceptionGroup, LogWrapperFactory factory )

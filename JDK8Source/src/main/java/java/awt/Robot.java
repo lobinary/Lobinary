@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,6 +63,18 @@ import sun.security.util.SecurityConstants;
  * Applications that use Robot for purposes other than self-testing should
  * handle these error conditions gracefully.
  *
+ * <p>
+ *  该类用于生成本地系统输入事件,用于测试自动化,自运行演示以及需要控制鼠标和键盘的其他应用程序。 Robot的主要目的是促进Java平台实现的自动化测试。
+ * <p>
+ *  使用类来生成输入事件不同于将事件发布到AWT事件队列或AWT组件,因为事件是在平台的本机输入队列中生成的。
+ * 例如,<code> Robot.mouseMove </code>实际上会移动鼠标光标,而不仅仅是生成鼠标移动事件。
+ * <p>
+ *  注意,一些平台需要特殊的权限或扩展来访问低级输入控制。如果当前平台配置不允许输入控制,则当尝试构造Robot对象时将抛出<code> AWTException </code>。
+ * 例如,如果X服务器不支持(或未启用)XTEST 2.2标准扩展,X-Window系统将抛出异常。
+ * <p>
+ *  使用Robot用于自我测试以外的目的应用程序应该正常处理这些错误条件。
+ * 
+ * 
  * @author      Robi Khan
  * @since       1.3
  */
@@ -78,6 +91,11 @@ public class Robot {
      * Constructs a Robot object in the coordinate system of the primary screen.
      * <p>
      *
+     * <p>
+     *  在主屏幕的坐标系中构建Robot对象。
+     * <p>
+     * 
+     * 
      * @throws  AWTException if the platform configuration does not allow
      * low-level input control.  This exception is always thrown when
      * GraphicsEnvironment.isHeadless() returns true
@@ -109,6 +127,16 @@ public class Robot {
      * If screen devices are reconfigured such that the coordinate system is
      * affected, the behavior of existing Robot objects is undefined.
      *
+     * <p>
+     * 为给定的屏幕设备创建机器人。传递给robot方法调用的坐标(如mouseMove和createScreenCapture)将被解释为与指定屏幕位于同一坐标系中。注意,根据平台配置,多个屏幕可以：
+     * <ul>
+     *  <li>共享相同的坐标系统以形成组合的虚拟屏幕</li> <li>使用不同的坐标系统作为独立的屏幕</li>
+     * </ul>
+     *  这个构造函数用于后一种情况。
+     * <p>
+     *  如果重新配置屏幕设备以使坐标系受影响,则未定义现有机器人对象的行为。
+     * 
+     * 
      * @param screen    A screen GraphicsDevice indicating the coordinate
      *                  system the Robot will operate in.
      * @throws  AWTException if the platform configuration does not allow
@@ -192,6 +220,10 @@ public class Robot {
 
     /**
      * Moves mouse pointer to given screen coordinates.
+     * <p>
+     *  将鼠标指针移动到给定的屏幕坐标。
+     * 
+     * 
      * @param x         X position
      * @param y         Y position
      */
@@ -204,6 +236,10 @@ public class Robot {
      * Presses one or more mouse buttons.  The mouse buttons should
      * be released using the {@link #mouseRelease(int)} method.
      *
+     * <p>
+     *  按一个或多个鼠标按钮。鼠标按钮应该使用{@link #mouseRelease(int)}方法释放。
+     * 
+     * 
      * @param buttons the Button mask; a combination of one or more
      * mouse button masks.
      * <p>
@@ -261,6 +297,10 @@ public class Robot {
     /**
      * Releases one or more mouse buttons.
      *
+     * <p>
+     *  释放一个或多个鼠标按钮。
+     * 
+     * 
      * @param buttons the Button mask; a combination of one or more
      * mouse button masks.
      * <p>
@@ -324,6 +364,10 @@ public class Robot {
     /**
      * Rotates the scroll wheel on wheel-equipped mice.
      *
+     * <p>
+     *  旋转装有轮子的鼠标上的滚轮。
+     * 
+     * 
      * @param wheelAmt  number of "notches" to move the mouse wheel
      *                  Negative values indicate movement up/away from the user,
      *                  positive values indicate movement down/towards the user.
@@ -343,6 +387,12 @@ public class Robot {
      * (e.g. <code>KeyEvent.VK_SHIFT</code> could mean either the
      * left or right shift key) will map to the left key.
      *
+     * <p>
+     *  按给定键。键应该使用<code> keyRelease </code>方法释放。
+     * <p>
+     *  具有多个与其相关联的物理键的键代码(例如,<code> KeyEvent.VK_SHIFT </code>可以表示左或右Shift键)将映射到左键。
+     * 
+     * 
      * @param   keycode Key to press (e.g. <code>KeyEvent.VK_A</code>)
      * @throws  IllegalArgumentException if <code>keycode</code> is not
      *          a valid key
@@ -362,6 +412,12 @@ public class Robot {
      * (e.g. <code>KeyEvent.VK_SHIFT</code> could mean either the
      * left or right shift key) will map to the left key.
      *
+     * <p>
+     *  释放给定的键。
+     * <p>
+     *  具有多个与其相关联的物理键的键代码(例如,<code> KeyEvent.VK_SHIFT </code>可以表示左或右Shift键)将映射到左键。
+     * 
+     * 
      * @param   keycode Key to release (e.g. <code>KeyEvent.VK_A</code>)
      * @throws  IllegalArgumentException if <code>keycode</code> is not a
      *          valid key
@@ -386,6 +442,10 @@ public class Robot {
 
     /**
      * Returns the color of a pixel at the given screen coordinates.
+     * <p>
+     *  返回给定屏幕坐标处像素的颜色。
+     * 
+     * 
      * @param   x       X position of pixel
      * @param   y       Y position of pixel
      * @return  Color of the pixel
@@ -398,6 +458,10 @@ public class Robot {
     /**
      * Creates an image containing pixels read from the screen.  This image does
      * not include the mouse cursor.
+     * <p>
+     * 创建包含从屏幕读取的像素的图像。此图像不包括鼠标光标。
+     * 
+     * 
      * @param   screenRect      Rect to capture in screen coordinates
      * @return  The captured image
      * @throws  IllegalArgumentException if <code>screenRect</code> width and height are not greater than zero
@@ -419,11 +483,18 @@ public class Robot {
              * Fix for 4285201
              * Create a DirectColorModel equivalent to the default RGB ColorModel,
              * except with no Alpha component.
+             * <p>
+             *  修正为4285201创建一个DirectColorModel等效于默认的RGB ColorModel,除了没有Alpha组件。
+             * 
              */
 
             screenCapCM = new DirectColorModel(24,
                                                /* red mask */    0x00FF0000,
+                                               /* <p>
+                                               /* 
                                                /* green mask */  0x0000FF00,
+                                               /* <p>
+                                               /* 
                                                /* blue mask */   0x000000FF);
         }
 
@@ -465,6 +536,33 @@ public class Robot {
 
     /*
      * Called after an event is generated
+     * <p>
+     *  }}
+     * 
+     *  //需要在抓取像素之前同步工具包,因为在某些情况下,渲染到屏幕可能会被延迟Toolkit.getDefaultToolkit()。sync();
+     * 
+     *  int pixels []; int [] bandmasks = new int [3];
+     * 
+     *  pixels = peer.getRGBPixels(screenRect); buffer = new DataBufferInt(pixels,pixels.length);
+     * 
+     *  bandmasks [0] = screenCapCM.getRedMask(); bandmasks [1] = screenCapCM.getGreenMask(); bandmasks [2] 
+     * = screenCapCM.getBlueMask();。
+     * 
+     *  raster = Raster.createPackedRaster(buffer,screenRect.width,screenRect.height,screenRect.width,bandma
+     * sks,null); SunWritableRaster.makeTrackable(buffer);。
+     * 
+     *  image = new BufferedImage(screenCapCM,raster,false,null);
+     * 
+     *  返回图像; }}
+     * 
+     *  private Rectangle(Rectangle rect){if(rect.width <= 0 || rect.height <= 0){throw new IllegalArgumentException("Rectangle width and height must be> 0"); }
+     * }。
+     * 
+     *  private static void checkScreenCaptureAllowed(){SecurityManager security = System.getSecurityManager(); if(security！= null){security.checkPermission(SecurityConstants.AWT.READ_DISPLAY_PIXELS_PERMISSION); }
+     * }。
+     * 
+     *  / *在生成事件后调用
+     * 
      */
     private void afterEvent() {
         autoWaitForIdle();
@@ -474,6 +572,10 @@ public class Robot {
     /**
      * Returns whether this Robot automatically invokes <code>waitForIdle</code>
      * after generating an event.
+     * <p>
+     *  返回此Robot是否在生成事件后自动调用<code> waitForIdle </code>。
+     * 
+     * 
      * @return Whether <code>waitForIdle</code> is automatically called
      */
     public synchronized boolean isAutoWaitForIdle() {
@@ -483,6 +585,10 @@ public class Robot {
     /**
      * Sets whether this Robot automatically invokes <code>waitForIdle</code>
      * after generating an event.
+     * <p>
+     * 设置此Robot在生成事件后是否自动调用<code> waitForIdle </code>。
+     * 
+     * 
      * @param   isOn    Whether <code>waitForIdle</code> is automatically invoked
      */
     public synchronized void setAutoWaitForIdle(boolean isOn) {
@@ -491,6 +597,9 @@ public class Robot {
 
     /*
      * Calls waitForIdle after every event if so desired.
+     * <p>
+     *  如果需要,在每个事件后调用waitForIdle。
+     * 
      */
     private void autoWaitForIdle() {
         if (isAutoWaitForIdle) {
@@ -500,6 +609,9 @@ public class Robot {
 
     /**
      * Returns the number of milliseconds this Robot sleeps after generating an event.
+     * <p>
+     *  返回此机器人在生成事件后休眠的毫秒数。
+     * 
      */
     public synchronized int getAutoDelay() {
         return autoDelay;
@@ -507,6 +619,10 @@ public class Robot {
 
     /**
      * Sets the number of milliseconds this Robot sleeps after generating an event.
+     * <p>
+     *  设置机器人在生成事件后休眠的毫秒数。
+     * 
+     * 
      * @throws  IllegalArgumentException If <code>ms</code> is not between 0 and 60,000 milliseconds inclusive
      */
     public synchronized void setAutoDelay(int ms) {
@@ -516,6 +632,9 @@ public class Robot {
 
     /*
      * Automatically sleeps for the specified interval after event generated.
+     * <p>
+     *  在事件生成后自动休眠指定的时间间隔。
+     * 
      */
     private void autoDelay() {
         delay(autoDelay);
@@ -525,6 +644,10 @@ public class Robot {
      * Sleeps for the specified time.
      * To catch any <code>InterruptedException</code>s that occur,
      * <code>Thread.sleep()</code> may be used instead.
+     * <p>
+     *  睡眠指定的时间。要捕获发生的任何<code> InterruptedException </code>,可以改用<code> Thread.sleep()</code>。
+     * 
+     * 
      * @param   ms      time to sleep in milliseconds
      * @throws  IllegalArgumentException if <code>ms</code> is not between 0 and 60,000 milliseconds inclusive
      * @see     java.lang.Thread#sleep
@@ -546,6 +669,10 @@ public class Robot {
 
     /**
      * Waits until all events currently on the event queue have been processed.
+     * <p>
+     *  等待直到事件队列上的所有事件都已处理完毕。
+     * 
+     * 
      * @throws  IllegalThreadStateException if called on the AWT event dispatching thread
      */
     public synchronized void waitForIdle() {
@@ -577,6 +704,9 @@ public class Robot {
     /**
      * Returns a string representation of this Robot.
      *
+     * <p>
+     *  返回此Robot的字符串表示形式。
+     * 
      * @return  the string representation.
      */
     public synchronized String toString() {

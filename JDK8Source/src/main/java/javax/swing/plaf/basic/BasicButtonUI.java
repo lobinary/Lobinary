@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import javax.swing.text.View;
 /**
  * BasicButton implementation
  *
+ * <p>
+ *  BasicButton实现
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class BasicButtonUI extends ButtonUI{
@@ -187,6 +192,9 @@ public class BasicButtonUI extends ButtonUI{
      * ButtonUI.paint() calls.  Re-using rectangles rather than
      * allocating them in each paint call substantially reduced the time
      * it took paint to run.  Obviously, this method can't be re-entered.
+     * <p>
+     *  ButtonUI.paint()调用。重新使用矩形而不是在每个绘制调用中分配它们大大减少了绘画运行的时间。显然,这种方法不能重新输入。
+     * 
      */
     private static Rectangle viewRect = new Rectangle();
     private static Rectangle textRect = new Rectangle();
@@ -297,6 +305,9 @@ public class BasicButtonUI extends ButtonUI{
     /**
      * As of Java 2 platform v 1.4 this method should not be used or overriden.
      * Use the paintText method which takes the AbstractButton argument.
+     * <p>
+     *  从Java 2平台v 1.4这个方法不应该使用或覆盖。使用接受AbstractButton参数的paintText方法。
+     * 
      */
     protected void paintText(Graphics g, JComponent c, Rectangle textRect, String text) {
         AbstractButton b = (AbstractButton) c;
@@ -326,6 +337,10 @@ public class BasicButtonUI extends ButtonUI{
     /**
      * Method which renders the text of the current button.
      * <p>
+     * <p>
+     *  呈现当前按钮的文本的方法。
+     * <p>
+     * 
      * @param g Graphics context
      * @param b Current button to render
      * @param textRect Bounding rectangle to render the text.
@@ -388,6 +403,10 @@ public class BasicButtonUI extends ButtonUI{
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -410,6 +429,10 @@ public class BasicButtonUI extends ButtonUI{
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -454,6 +477,8 @@ public class BasicButtonUI extends ButtonUI{
     /**
      * Returns the ButtonListener for the passed in Button, or null if one
      * could not be found.
+     * <p>
+     *  返回Button中传递的ButtonListener,如果找不到,则返回null。
      */
     private BasicButtonListener getButtonListener(AbstractButton b) {
         MouseMotionListener[] listeners = b.getMouseMotionListeners();

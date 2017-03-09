@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Whitespace.java,v 1.5 2005/09/28 13:48:18 pvedula Exp $
+ * <p>
+ *  $ Id：Whitespace.java,v 1.5 2005/09/28 13:48:18 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -44,6 +57,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  */
 final class Whitespace extends TopLevelElement {
@@ -64,6 +79,9 @@ final class Whitespace extends TopLevelElement {
 
     /**
      * Auxillary class for encapsulating a single strip/preserve rule
+     * <p>
+     *  用于封装单个条带/保留规则的辅助类
+     * 
      */
     private final static class WhitespaceRule {
         private final int _action;
@@ -74,6 +92,9 @@ final class Whitespace extends TopLevelElement {
 
         /**
          * Strip/preserve rule constructor
+         * <p>
+         *  剥离/保留规则构造函数
+         * 
          */
         public WhitespaceRule(int action, String element, int precedence) {
             // Determine the action (strip or preserve) for this rule
@@ -111,6 +132,9 @@ final class Whitespace extends TopLevelElement {
 
         /**
          * For sorting rules depending on priority
+         * <p>
+         *  用于根据优先级排序规则
+         * 
          */
         public int compareTo(WhitespaceRule other) {
             return _priority < other._priority
@@ -128,6 +152,9 @@ final class Whitespace extends TopLevelElement {
     /**
      * Parse the attributes of the xsl:strip/preserve-space element.
      * The element should have not contents (ignored if any).
+     * <p>
+     *  解析xsl：strip / preserve-space元素的属性。元素应该没有内容(如果有的话,忽略)。
+     * 
      */
     public void parseContents(Parser parser) {
         // Determine if this is an xsl:strip- or preserve-space element
@@ -175,6 +202,9 @@ final class Whitespace extends TopLevelElement {
     /**
      * De-tokenize the elements listed in the 'elements' attribute and
      * instanciate a set of strip/preserve rules.
+     * <p>
+     *  对"elements"属性中列出的元素进行标记化,并实现一组条带/保留规则。
+     * 
      */
     public Vector getRules() {
         final Vector rules = new Vector();
@@ -192,6 +222,9 @@ final class Whitespace extends TopLevelElement {
     /**
      * Scans through the rules vector and looks for a rule of higher
      * priority that contradicts the current rule.
+     * <p>
+     *  扫描规则向量,并寻找与当前规则相矛盾的更高优先级的规则。
+     * 
      */
     private static WhitespaceRule findContradictingRule(Vector rules,
                                                         WhitespaceRule rule) {
@@ -207,6 +240,9 @@ final class Whitespace extends TopLevelElement {
              * See if there is a contradicting rule with higher priority.
              * If the rules has the same action then this rule is redundant,
              * if they have different action then this rule will never win.
+             * <p>
+             *  看看是否存在具有更高优先级的矛盾规则。如果规则具有相同的动作,则该规则是多余的,如果它们具有不同的动作,则该规则将永远不会赢。
+             * 
              */
             switch (currentRule.getStrength()) {
             case RULE_ALL:
@@ -231,6 +267,9 @@ final class Whitespace extends TopLevelElement {
     /**
      * Orders a set or rules by priority, removes redundant rules and rules
      * that are shadowed by stronger, contradicting rules.
+     * <p>
+     * 按优先级排序一组或多个规则,删除由更强大,矛盾的规则遮蔽的冗余规则和规则。
+     * 
      */
     private static int prioritizeRules(Vector rules) {
         WhitespaceRule currentRule;
@@ -327,10 +366,17 @@ final class Whitespace extends TopLevelElement {
         il.append(DUP);
         il.append(new INVOKESTATIC(prt));
     }
+    /* <p>
+    /*  private static void compileDebug(ClassGenerator classGen,InstructionList il){final ConstantPoolGen cpg = classGen.getConstantPool(); final int prt = cpg.addMethodref("java / lang / System / out","println","(Ljava / lang / String;)V"); i.append(DUP); il.append(new INVOKESTATIC(prt)); }
+    /* }。
+    /* 
     */
 
     /**
      * Compiles the predicate method
+     * <p>
+     *  编译谓词方法
+     * 
      */
     private static void compilePredicate(Vector rules,
                                          int defaultAction,
@@ -430,6 +476,9 @@ final class Whitespace extends TopLevelElement {
 
     /**
      * Compiles the predicate method
+     * <p>
+     *  编译谓词方法
+     * 
      */
     private static void compileDefault(int defaultAction,
                                        ClassGenerator classGen) {
@@ -468,6 +517,12 @@ final class Whitespace extends TopLevelElement {
      *    - USE_PREDICATE  (run the method generated by this method)
      *    - STRIP_SPACE    (always strip whitespace text-nodes)
      *    - PRESERVE_SPACE (always preserve whitespace text-nodes)
+     * <p>
+     *  获取一个WhitespaceRule对象的向量,并生成一个谓词方法。
+     * 此方法返回translets默认动作处理空格文本节点： -  USE_PREDICATE(运行此方法生成的方法) -  STRIP_SPACE(总是带空白文本节点) -  PRESERVE_SPACE(
+     * 始终保留空白文本节点)。
+     *  获取一个WhitespaceRule对象的向量,并生成一个谓词方法。
+     * 
      */
     public static int translateRules(Vector rules,
                                      ClassGenerator classGen) {
@@ -486,6 +541,9 @@ final class Whitespace extends TopLevelElement {
 
     /**
      * Sorts a range of rules with regard to PRIORITY only
+     * <p>
+     *  只对PRIORITY进行排序一系列规则
+     * 
      */
     private static void quicksort(Vector rules, int p, int r) {
         while (p < r) {
@@ -497,6 +555,9 @@ final class Whitespace extends TopLevelElement {
 
     /**
      * Used with quicksort method above
+     * <p>
+     *  与上述快速排序方法一起使用
+     * 
      */
     private static int partition(Vector rules, int p, int r) {
         final WhitespaceRule x = (WhitespaceRule)rules.elementAt((p+r) >>> 1);
@@ -519,6 +580,9 @@ final class Whitespace extends TopLevelElement {
 
     /**
      * Type-check contents/attributes - nothing to do...
+     * <p>
+     *  类型检查内容/属性 - 无关...
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         return Type.Void; // We don't return anything.
@@ -526,6 +590,8 @@ final class Whitespace extends TopLevelElement {
 
     /**
      * This method should not produce any code
+     * <p>
+     *  这个方法不应该产生任何代码
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
     }

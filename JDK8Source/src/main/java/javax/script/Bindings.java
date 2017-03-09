@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.util.Map;
  * A mapping of key/value pairs, all of whose keys are
  * <code>Strings</code>.
  *
+ * <p>
+ *  键/值对的映射,其所有键是<code> Strings </code>。
+ * 
+ * 
  * @author Mike Grogan
  * @since 1.6
  */
@@ -37,6 +42,10 @@ public interface Bindings extends Map<String, Object> {
     /**
      * Set a named value.
      *
+     * <p>
+     *  设置命名值。
+     * 
+     * 
      * @param name The name associated with the value.
      * @param value The value associated with the name.
      *
@@ -50,6 +59,10 @@ public interface Bindings extends Map<String, Object> {
 
     /**
      * Adds all the mappings in a given <code>Map</code> to this <code>Bindings</code>.
+     * <p>
+     *  将给定<code> Map </code>中的所有映射添加到此<code> Bindings </code>。
+     * 
+     * 
      * @param toMerge The <code>Map</code> to merge with this one.
      *
      * @throws NullPointerException
@@ -66,6 +79,12 @@ public interface Bindings extends Map<String, Object> {
      * <tt>(key==null ? k==null : key.equals(k))</tt>.  (There can be
      * at most one such mapping.)
      *
+     * <p>
+     *  如果此地图包含指定键的映射,则返回<tt> true </tt>。
+     * 更正式地,如果且仅当此映射包含关键字<tt> k </tt>的映射,使得<tt>(key == null?k == null：key)时,返回<tt> true </tt>。
+     *  equals(k))</tt>。 (最多只能有一个这样的映射。)。
+     * 
+     * 
      * @param key key whose presence in this map is to be tested.
      * @return <tt>true</tt> if this map contains a mapping for the specified
      *         key.
@@ -89,6 +108,15 @@ public interface Bindings extends Map<String, Object> {
      * key.equals(k))</tt>, then this method returns <tt>v</tt>; otherwise
      * it returns <tt>null</tt>.  (There can be at most one such mapping.)
      *
+     * <p>
+     *  返回此映射映射指定键的值。如果映射不包含此键的映射,则返回<tt> null </tt>。
+     * 返回值<tt> null </tt>不一定表示该映射不包含键的映射;还有可能映射将键明确映射到<tt> null </tt>。 <tt> containsKey </tt>操作可用于区分这两种情况。
+     * 
+     *  <p>更正式地说,如果此映射包含从键<tt> k </tt>到值<tt> v </tt>的映射,使得<tt>(key == null?k == null： key.equals(k))</tt>,则此
+     * 方法返回<tt> v </tt>;否则返回<tt> null </tt>。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     * 
      * @param key key whose associated value is to be returned.
      * @return the value to which this map maps the specified key, or
      *         <tt>null</tt> if the map contains no mapping for this key.
@@ -113,6 +141,13 @@ public interface Bindings extends Map<String, Object> {
      * supports <tt>null</tt> values.)  The map will not contain a mapping for
      * the specified  key once the call returns.
      *
+     * <p>
+     * 如果此映射存在,则从此映射中删除此映射的映射(可选操作)。
+     * 更正式地,如果该映射包含从键<tt> k </tt>到值<tt> v </tt>的映射,使得<code>(key == null?k == null：key.equals ))</code>,则删除该映
+     * 射。
+     * 如果此映射存在,则从此映射中删除此映射的映射(可选操作)。 (地图最多只能包含一个这样的映射。)。
+     * 
+     * 
      * @param key key whose mapping is to be removed from the map.
      * @return previous value associated with specified key, or <tt>null</tt>
      *         if there was no mapping for key.

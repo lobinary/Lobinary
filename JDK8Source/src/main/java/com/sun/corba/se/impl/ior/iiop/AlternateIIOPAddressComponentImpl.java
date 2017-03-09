@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,8 @@ import com.sun.corba.se.spi.ior.iiop.AlternateIIOPAddressComponent ;
 import org.omg.IOP.TAG_ALTERNATE_IIOP_ADDRESS ;
 
 /**
+/* <p>
+/* 
  * @author Ken Cavanaugh
  */
 public class AlternateIIOPAddressComponentImpl extends TaggedComponentBase

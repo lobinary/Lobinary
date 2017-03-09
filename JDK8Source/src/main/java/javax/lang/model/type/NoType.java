@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ import javax.lang.model.element.ExecutableElement;
  *   of {@code java.lang.Object}.
  * </ul>
  *
+ * <p>
+ *  在没有实际类型是合适的情况下使用的伪类型。 {@code NoType}的类型有：
+ * <ul>
+ *  <li> {@ link TypeKind#VOID VOID}  - 对应于关键字{@code void}。
+ *  <li> {@ link TypeKind#PACKAGE PACKAGE}  - 包元素的伪类型。
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;

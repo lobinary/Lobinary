@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,8 @@ import sun.nio.cs.ArrayEncoder;
 
 /**
  * Utility class for zipfile name and comment decoding and encoding
+ * <p>
+ *  zip文件名和注释解码和编码的实用程序类
  */
 
 final class ZipCoder {

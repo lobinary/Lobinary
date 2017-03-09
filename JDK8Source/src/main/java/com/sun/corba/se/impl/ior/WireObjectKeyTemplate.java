@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,8 @@ import com.sun.corba.se.impl.encoding.CDRInputStream ;
 import com.sun.corba.se.impl.logging.IORSystemException ;
 
 /**
+/* <p>
+/* 
  * @author Ken Cavanaugh
  */
 public class WireObjectKeyTemplate implements ObjectKeyTemplate
@@ -117,6 +120,9 @@ public class WireObjectKeyTemplate implements ObjectKeyTemplate
     * problems since we need to check whether unusual object references
     * are local or not.  It seems that the easiest way to handle this is
     * to return an invalid server id.
+    * <p>
+    *  问题,因为我们需要检查异常对象引用是否是本地的。似乎最简单的处理方法是返回一个无效的服务器id。
+    * 
     */
     public int getServerId()
     {
@@ -135,6 +141,8 @@ public class WireObjectKeyTemplate implements ObjectKeyTemplate
 
     /** Adapter ID is not available, since our
     * ORB did not implement the object carrying this key.
+    * <p>
+    *  ORB没有实现携带此键的对象。
     */
     public byte[] getAdapterId()
     {

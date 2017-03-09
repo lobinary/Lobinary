@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,33 @@
  * Business Machines, Inc., http://www.apache.org.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)1999-2002 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得将"Xerces"和"Apache Software Foundation"名称用于支持或推广从本软件衍生的产品。如需书面许可,请联系apache@apache.org。
+ * 
+ *  未经Apache软件基金会事先书面许可,从本软件派生的产品可能不会被称为"Apache",也不可能出现在他们的名字中。
+ * 
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款,最初是基于软件版权(c)1999,国际商业机器公司,http://www.apache.org。
+ * 有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dtd;
@@ -96,6 +124,12 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource;
  *
  * @xerces.internal
  *
+ * <p>
+ *  一个DTD语法。该类实现了DTD信息的XNI处理程序接口,以便它可以从回调中自动构建适当的验证结构。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Eric Ye, IBM
  * @author Jeffrey Rodriguez, IBM
  * @author Andy Clark, IBM
@@ -170,6 +204,10 @@ public class DTDGrammar
 
     /**
      * Element declaration type.
+     * <p>
+     *  元素声明类型。
+     * 
+     * 
      * @see XMLElementDecl
      */
     private short fElementDeclType[][] = new short[INITIAL_CHUNK_COUNT][];
@@ -177,12 +215,18 @@ public class DTDGrammar
     /**
      * Element declaration content spec index. This index value is used
      * to refer to the content spec information tables.
+     * <p>
+     *  元素声明内容规范索引。此索引值用于引用内容规范信息表。
+     * 
      */
     private int fElementDeclContentSpecIndex[][] = new int[INITIAL_CHUNK_COUNT][];
 
     /**
      * Element declaration content model validator. This validator is
      * constructed from the content spec nodes.
+     * <p>
+     * 元素声明内容模型验证器。该验证器由内容规范节点构成。
+     * 
      */
     private ContentModelValidator fElementDeclContentModelValidator[][] = new ContentModelValidator[INITIAL_CHUNK_COUNT][];
 
@@ -205,6 +249,10 @@ public class DTDGrammar
 
     /**
      * Attribute declaration type.
+     * <p>
+     *  属性声明类型。
+     * 
+     * 
      * @see XMLAttributeDecl
      */
     private short fAttributeDeclType[][] = new short[INITIAL_CHUNK_COUNT][];
@@ -350,6 +398,10 @@ public class DTDGrammar
     /**
      * Returns true if the specified element declaration is external.
      *
+     * <p>
+     *  如果指定的元素声明是外部的,则返回true。
+     * 
+     * 
      * @param elementDeclIndex The element declaration index.
      */
     public boolean getElementDeclIsExternal(int elementDeclIndex) {
@@ -367,6 +419,10 @@ public class DTDGrammar
     /**
      * Returns true if the specified attribute declaration is external.
      *
+     * <p>
+     *  如果指定的属性声明是外部的,则返回true。
+     * 
+     * 
      * @param attributeDeclIndex Attribute declaration index.
      */
     public boolean getAttributeDeclIsExternal(int attributeDeclIndex) {
@@ -404,6 +460,10 @@ public class DTDGrammar
     /**
      * The start of the DTD.
      *
+     * <p>
+     *  DTD的开始。
+     * 
+     * 
      * @param locator  The document locator, or null if the document
      *                 location cannot be reported during the parsing of
      *                 the document DTD. However, it is <em>strongly</em>
@@ -431,6 +491,13 @@ public class DTDGrammar
      * startParameterEntity method with the entity name "[dtd]" <em>before</em> calling
      * the startDTD method.
      *
+     * <p>
+     *  此方法通知实体的开始。 DTD具有伪名称"[dtd]",参数实体名称以"％"开头。
+     * <p>
+     *  <strong>注意：</strong>由于DTD是一个实体,因此通过调用具有实体名称"[dtd]"<em>之前的startParameterEntity方法来通知处理程序DTD实体的开始</em>调
+     * 用startDTD方法。
+     * 
+     * 
      * @param name     The name of the parameter entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -461,6 +528,10 @@ public class DTDGrammar
     /**
      * The start of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的开始。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -480,6 +551,12 @@ public class DTDGrammar
      * endEntity method with the entity name "[dtd]" <em>after</em> calling
      * the endDTD method.
      *
+     * <p>
+     *  此方法通知实体的结束。 DTD具有伪名称"[dtd]",参数实体名称以"％"开头。
+     * <p>
+     *  <strong>注意：</strong>由于DTD是一个实体,通过在</em>之后调用具有实体名称"[dtd]"<em>的endEntity方法,将通知处理程序结束DTD实体调用endDTD方法。
+     * 
+     * 
      * @param name The name of the entity.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -495,6 +572,10 @@ public class DTDGrammar
     /**
      * The end of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -507,6 +588,10 @@ public class DTDGrammar
     /**
      * An element declaration.
      *
+     * <p>
+     *  元素声明。
+     * 
+     * 
      * @param name         The name of the element.
      * @param contentModel The element content model.
      * @param augs Additional information that may include infoset
@@ -579,6 +664,10 @@ public class DTDGrammar
     /**
      * An attribute declaration.
      *
+     * <p>
+     *  属性声明。
+     * 
+     * 
      * @param elementName   The name of the element that this attribute
      *                      is associated with.
      * @param attributeName The name of the attribute.
@@ -709,6 +798,10 @@ public class DTDGrammar
     /**
      * An internal entity declaration.
      *
+     * <p>
+     *  内部实体声明。
+     * 
+     * 
      * @param name The name of the entity. Parameter entity names start with
      *             '%', whereas the name of a general entity is just the
      *             entity name.
@@ -742,6 +835,10 @@ public class DTDGrammar
     /**
      * An external entity declaration.
      *
+     * <p>
+     *  外部实体声明。
+     * 
+     * 
      * @param name     The name of the entity. Parameter entity names start
      *                 with '%', whereas the name of a general entity is just
      *                 the entity name.
@@ -773,6 +870,10 @@ public class DTDGrammar
     /**
      * An unparsed entity declaration.
      *
+     * <p>
+     *  未解析的实体声明。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier    An object containing all location information
      *                      pertinent to this entity.
@@ -803,6 +904,10 @@ public class DTDGrammar
     /**
      * A notation declaration
      *
+     * <p>
+     *  符号声明
+     * 
+     * 
      * @param name     The name of the notation.
      * @param identifier    An object containing all location information
      *                      pertinent to this notation.
@@ -827,6 +932,10 @@ public class DTDGrammar
     /**
      * The end of the DTD.
      *
+     * <p>
+     *  DTD的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -869,6 +978,12 @@ public class DTDGrammar
      * <strong>Note:</strong> This method is only called for external
      * parameter entities referenced in the DTD.
      *
+     * <p>
+     *  通知实体中存在TextDecl行。如果存在,此方法将在startEntity调用之后立即调用。
+     * <p>
+     * <strong>注意</strong>：仅在DTD中引用的外部参数实体才调用此方法。
+     * 
+     * 
      * @param version  The XML version, or null if not specified.
      * @param encoding The IANA encoding name of the entity.
      *
@@ -882,6 +997,10 @@ public class DTDGrammar
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text The text in the comment.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -900,6 +1019,12 @@ public class DTDGrammar
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     *  一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augs Additional information that may include infoset
@@ -912,6 +1037,10 @@ public class DTDGrammar
     /**
      * The start of an attribute list.
      *
+     * <p>
+     *  属性列表的开始。
+     * 
+     * 
      * @param elementName The name of the element that this attribute
      *                    list is associated with.
      * @param augs Additional information that may include infoset
@@ -923,6 +1052,10 @@ public class DTDGrammar
 
     /**
      * The end of an attribute list.
+     * <p>
+     *  属性列表的结尾。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -932,6 +1065,10 @@ public class DTDGrammar
     /**
      * The start of a conditional section.
      *
+     * <p>
+     *  条件段的开始。
+     * 
+     * 
      * @param type The type of the conditional section. This value will
      *             either be CONDITIONAL_INCLUDE or CONDITIONAL_IGNORE.
      * @param augs Additional information that may include infoset
@@ -947,6 +1084,10 @@ public class DTDGrammar
     /**
      * Characters within an IGNORE conditional section.
      *
+     * <p>
+     *  IGNORE条件部分中的字符。
+     * 
+     * 
      * @param text The ignored text.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -956,6 +1097,10 @@ public class DTDGrammar
 
     /**
      * The end of a conditional section.
+     * <p>
+     *  条件段的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -981,6 +1126,10 @@ public class DTDGrammar
      * model, specific methods may be called between the call to the
      * startContentModel method and the call to the endContentModel method.
      *
+     * <p>
+     *  内容模型的开始。根据内容模型的类型,可以在调用startContentModel方法和调用endContentModel方法之间调用特定方法。
+     * 
+     * 
      * @param elementName The name of the element.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -1004,6 +1153,10 @@ public class DTDGrammar
      * <code>pcdata()</code> method. A children content model will
      * contain additional groups and/or elements.
      *
+     * <p>
+     *  混合或儿童内容模型的开始。混合内容模型将立即调用<code> pcdata()</code>方法。子内容模型将包含其他组和/或元素。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -1022,6 +1175,10 @@ public class DTDGrammar
      * mixed content model. This method will be the first called
      * following the content model's <code>startGroup()</code>.
      *
+     * <p>
+     *  表示混合内容模型的组中的"#PCDATA"的外观。这个方法将首先被调用遵循内容模型的<code> startGroup()</code>。
+     * 
+     * 
      *@param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1036,6 +1193,10 @@ public class DTDGrammar
     /**
      * A referenced element in a mixed or children content model.
      *
+     * <p>
+     *  混合或子内容模型中引用的元素。
+     * 
+     * 
      * @param elementName The name of the referenced element.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -1062,6 +1223,10 @@ public class DTDGrammar
      * The separator between choices or sequences of a mixed or children
      * content model.
      *
+     * <p>
+     *  混合或子内容模型的选择或序列之间的分隔符。
+     * 
+     * 
      * @param separator The type of children separator.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -1094,6 +1259,10 @@ public class DTDGrammar
      * The occurrence count for a child in a children content model or
      * for the mixed content model group.
      *
+     * <p>
+     * 子内容模型中的子级或混合内容模型组的子级的发生计数。
+     * 
+     * 
      * @param occurrence The occurrence count for the last element
      *                   or group.
      * @param augs Additional information that may include infoset
@@ -1121,6 +1290,10 @@ public class DTDGrammar
     /**
      * The end of a group for mixed or children content models.
      *
+     * <p>
+     *  一个组的结尾的混合或儿童内容模型。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -1142,6 +1315,10 @@ public class DTDGrammar
     /**
      * A content model of ANY.
      *
+     * <p>
+     *  ANY的内容模型。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -1154,6 +1331,10 @@ public class DTDGrammar
     /**
      * A content model of EMPTY.
      *
+     * <p>
+     *  EMPTY的内容模型。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -1165,6 +1346,10 @@ public class DTDGrammar
 
     /**
      * The end of a content model.
+     * <p>
+     *  内容模型的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1190,6 +1375,10 @@ public class DTDGrammar
      * Returns the index of the first element declaration. This index
      * is then used to query more information about the element declaration.
      *
+     * <p>
+     *  返回第一个元素声明的索引。此索引然后用于查询有关元素声明的更多信息。
+     * 
+     * 
      * @see #getNextElementDeclIndex
      * @see #getElementDecl
      */
@@ -1201,6 +1390,10 @@ public class DTDGrammar
      * Returns the next index of the element declaration following the
      * specified element declaration.
      *
+     * <p>
+     *  返回指定元素声明后的元素声明的下一个索引。
+     * 
+     * 
      * @param elementDeclIndex The element declaration index.
      */
     public int getNextElementDeclIndex(int elementDeclIndex) {
@@ -1211,6 +1404,10 @@ public class DTDGrammar
     /**
      * getElementDeclIndex
      *
+     * <p>
+     *  getElementDeclIndex
+     * 
+     * 
      * @param elementDeclName
      *
      * @return index of the elementDeclName in scope
@@ -1222,6 +1419,8 @@ public class DTDGrammar
     } // getElementDeclIndex(String):int
 
     /** Returns the element decl index.
+    /* <p>
+    /* 
      * @param elementDeclQName qualilfied name of the element
      */
     public int getElementDeclIndex(QName elementDeclQName) {
@@ -1230,6 +1429,9 @@ public class DTDGrammar
 
                 /** make separate function for getting contentSpecType of element.
       * we can avoid setting of the element values.
+      * <p>
+      *  我们可以避免设置元素值。
+      * 
                 */
 
                 public short getContentSpecType(int elementIndex){
@@ -1252,6 +1454,10 @@ public class DTDGrammar
     /**
      * getElementDecl
      *
+     * <p>
+     *  getElementDecl
+     * 
+     * 
      * @param elementDeclIndex
      * @param elementDecl The values of this structure are set by this call.
      *
@@ -1304,6 +1510,10 @@ public class DTDGrammar
     /**
      * getFirstAttributeDeclIndex
      *
+     * <p>
+     *  getFirstAttributeDeclIndex
+     * 
+     * 
      * @param elementDeclIndex
      *
      * @return index of the first attribute for element declaration elementDeclIndex
@@ -1318,6 +1528,10 @@ public class DTDGrammar
     /**
      * getNextAttributeDeclIndex
      *
+     * <p>
+     *  getNextAttributeDeclIndex
+     * 
+     * 
      * @param attributeDeclIndex
      *
      * @return index of the next attribute of the attribute at attributeDeclIndex
@@ -1332,6 +1546,10 @@ public class DTDGrammar
     /**
      * getAttributeDecl
      *
+     * <p>
+     *  getAttributeDecl
+     * 
+     * 
      * @param attributeDeclIndex
      * @param attributeDecl The values of this structure are set by this call.
      *
@@ -1371,6 +1589,10 @@ public class DTDGrammar
     /**
      * Returns whether the given attribute is of type CDATA or not
      *
+     * <p>
+     *  返回给定属性是否为CDATA类型
+     * 
+     * 
      * @param elName The element name.
      * @param atName The attribute name.
      *
@@ -1388,6 +1610,10 @@ public class DTDGrammar
     /**
      * getEntityDeclIndex
      *
+     * <p>
+     *  getEntityDeclIndex
+     * 
+     * 
      * @param entityDeclName
      *
      * @return the index of the EntityDecl
@@ -1403,6 +1629,10 @@ public class DTDGrammar
     /**
      * getEntityDecl
      *
+     * <p>
+     *  getEntityDecl
+     * 
+     * 
      * @param entityDeclIndex
      * @param entityDecl
      *
@@ -1431,6 +1661,10 @@ public class DTDGrammar
     /**
      * getNotationDeclIndex
      *
+     * <p>
+     *  getNotationDeclIndex
+     * 
+     * 
      * @param notationDeclName
      *
      * @return the index if found a notation with the name, otherwise -1.
@@ -1446,6 +1680,10 @@ public class DTDGrammar
     /**
      * getNotationDecl
      *
+     * <p>
+     *  getNotationDecl
+     * 
+     * 
      * @param notationDeclIndex
      * @param notationDecl
      *
@@ -1471,6 +1709,10 @@ public class DTDGrammar
     /**
      * getContentSpec
      *
+     * <p>
+     *  getContentSpec
+     * 
+     * 
      * @param contentSpecIndex
      * @param contentSpec
      *
@@ -1493,6 +1735,9 @@ public class DTDGrammar
      * Returns the index to the content spec for the given element
      * declaration, or <code>-1</code> if the element declaration
      * index was invalid.
+     * <p>
+     *  返回给定元素声明的内容规范的索引,如果元素声明索引无效,则返回<code> -1 </code>。
+     * 
      */
     public int getContentSpecIndex(int elementDeclIndex) {
         if (elementDeclIndex < 0 || elementDeclIndex >= fElementDeclCount) {
@@ -1506,6 +1751,10 @@ public class DTDGrammar
     /**
      * getContentSpecAsString
      *
+     * <p>
+     *  getContentSpecAsString
+     * 
+     * 
      * @param elementDeclIndex
      *
      * @return String
@@ -1705,6 +1954,9 @@ public class DTDGrammar
 
     /**
      * Adds the content spec to the given element declaration.
+     * <p>
+     *  将内容规范添加到给定元素声明。
+     * 
      */
     protected void addContentSpecToElement(XMLElementDecl elementDecl) {
         if ((fDepth == 0 || (fDepth == 1 && elementDecl.type == XMLElementDecl.TYPE_MIXED)) &&
@@ -1726,6 +1978,10 @@ public class DTDGrammar
     /**
      * getElementContentModelValidator
      *
+     * <p>
+     *  getElementContentModelValidator
+     * 
+     * 
      * @param elementDeclIndex
      *
      * @return its ContentModelValidator if any.
@@ -1753,6 +2009,10 @@ public class DTDGrammar
         /***
         if ( contentSpecIndex == -1 )
             return null;
+        /* <p>
+        /*  if(contentSpecIndex == -1)return null;
+        /* 
+        /* 
         /***/
 
         XMLContentSpec  contentSpec = new XMLContentSpec();
@@ -1981,6 +2241,10 @@ public class DTDGrammar
     /**
      * Create an XMLContentSpec for a single non-leaf
      *
+     * <p>
+     *  为单个非叶创建XMLContentSpec
+     * 
+     * 
      * @param nodeType the type of XMLContentSpec to create - from XMLContentSpec.CONTENTSPECNODE_*
      * @param nodeValue handle to an XMLContentSpec
      * @return handle to the newly create XMLContentSpec
@@ -2002,6 +2266,10 @@ public class DTDGrammar
     /**
      * create an XMLContentSpec for a leaf
      *
+     * <p>
+     *  为叶生成XMLContentSpec
+     * 
+     * 
      * @param   elementName  the name (Element) for the node
      * @return handle to the newly create XMLContentSpec
      */
@@ -2023,6 +2291,10 @@ public class DTDGrammar
     /**
      * Create an XMLContentSpec for a two child leaf
      *
+     * <p>
+     *  为两个子叶创建一个XMLContentSpec
+     * 
+     * 
      * @param nodeType the type of XMLContentSpec to create - from XMLContentSpec.CONTENTSPECNODE_*
      * @param leftNodeIndex handle to an XMLContentSpec
      * @param rightNodeIndex handle to an XMLContentSpec
@@ -2218,6 +2490,9 @@ public class DTDGrammar
      * create the content model object. It looks for some special case simple
      * models and creates SimpleContentModel objects for those. For the rest
      * it creates the standard DFA style model.
+     * <p>
+     *  当元素具有"CHILDREN"模型时,将调用此方法来创建内容模型对象。它寻找一些特殊情况下简单的模型并为那些创建SimpleContentModel对象。其余部分则创建标准DFA样式模型。
+     * 
      */
     private synchronized ContentModelValidator createChildModel(int contentSpecIndex) {
 
@@ -2386,6 +2661,10 @@ public class DTDGrammar
      * Build a vector of valid QNames from Content Spec
      * table.
      *
+     * <p>
+     * 从内容规范表构建有效QNames的向量。
+     * 
+     * 
      * @param contentSpecIndex
      *               Content Spec index
      * @param vectorQName
@@ -2640,6 +2919,12 @@ public class DTDGrammar
      *
      * @xerces.internal
      *
+     * <p>
+     *  <code> contentSpecTree </code>方法的子列表。
+     * 
+     *  @ xerces.internal
+     * 
+     * 
      * @author Eric Ye, IBM
      */
     private static class ChildrenList {
@@ -2679,6 +2964,10 @@ public class DTDGrammar
      *
      * @xerces.internal
      *
+     * <p>
+     *  一个简单的Hashtable实现,它使用一个元组(String,String)作为键和int作为值。
+     * 
+     * 
      * @author Eric Ye, IBM
      * @author Andy Clark, IBM
      */

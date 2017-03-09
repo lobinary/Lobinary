@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -34,6 +44,14 @@ import org.w3c.dom.DOMException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  AttrNSImpl从AttrImpl继承并添加命名空间支持。
+ * <P>
+ *  限定名称是节点名称,我们存储localName,也用于所有查询。另一方面,我们在必要时重新计算前缀。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Andy Clark, IBM
  * @author Ralf Pfeiffer, IBM
@@ -64,11 +82,17 @@ public class AttrNSImpl
 
     /*
      * Default constructor
+     * <p>
+     *  默认构造函数
+     * 
      */
     public AttrNSImpl(){}
 
    /**
      * DOM2: Constructor for Namespace implementation.
+     * <p>
+     *  DOM2：命名空间实现的构造方法。
+     * 
      */
     protected AttrNSImpl(CoreDocumentImpl ownerDocument,
                          String namespaceURI,
@@ -150,6 +174,10 @@ public class AttrNSImpl
     /**
      * NON-DOM: resets this node and sets specified values for the node
      *
+     * <p>
+     *  NON-DOM：重置此节点并为该节点设置指定的值
+     * 
+     * 
      * @param ownerDocument
      * @param namespaceURI
      * @param qualifiedName
@@ -186,6 +214,16 @@ public class AttrNSImpl
      *
      * For nodes created with a DOM Level 1 method, such as createElement
      * from the Document interface, this is null.
+     * <p>
+     *  在DOM级别2中引入。<p>
+     * 
+     *  此节点的命名空间URI,如果未指定,则为null。<p>
+     * 
+     *  这不是一个计算值,它是基于对范围中的命名空间声明的检查的命名空间查找的结果。它只是在创建时提供的命名空间URI。<p>
+     * 
+     *  对于使用DOM Level 1方法创建的节点(如Document接口中的createElement),此值为null。
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      */
     public String getNamespaceURI()
@@ -207,6 +245,14 @@ public class AttrNSImpl
      * For nodes created with a DOM Level 1 method, such as createElement
      * from the Document interface, this is null. <p>
      *
+     * <p>
+     * 在DOM级别2中引入。<p>
+     * 
+     *  此节点的命名空间前缀,如果未指定,则为null。 <p>
+     * 
+     *  对于使用DOM Level 1方法创建的节点(如Document接口中的createElement),此值为null。 <p>
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      */
     public String getPrefix()
@@ -225,6 +271,12 @@ public class AttrNSImpl
      * holds the qualified name, as well as the tagName and name attributes of
      * the Element and Attr interfaces, when applicable.<p>
      *
+     * <p>
+     *  在DOM级别2中引入。<p>
+     * 
+     *  请注意,设置此属性会更改nodeName属性,该属性包含限定名称,以及Element和Attr接口的tagName和name属性(如果适用)。<p>
+     * 
+     * 
      * @param prefix The namespace prefix of this node, or null(empty string) if it is unspecified.
      *
      * @exception INVALID_CHARACTER_ERR
@@ -285,6 +337,12 @@ public class AttrNSImpl
      * Introduced in DOM Level 2. <p>
      *
      * Returns the local part of the qualified name of this node.
+     * <p>
+     *  在DOM级别2中引入。<p>
+     * 
+     *  返回此节点的限定名称的局部部分。
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      */
     public String getLocalName()
@@ -297,6 +355,8 @@ public class AttrNSImpl
 
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.TypeInfo#getTypeName()
      */
     public String getTypeName() {
@@ -314,6 +374,10 @@ public class AttrNSImpl
      * Checks if a type is derived from another by restriction. See:
      * http://www.w3.org/TR/DOM-Level-3-Core/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     *  在DOM级别3中引入。<p>检查类型是否通过限制从另一个派生。
+     * 参见：http://www.w3.org/TR/DOM-Level-3-Core/core.html#TypeInfo-isDerivedFrom。
+     * 
      * @param ancestorNS
      *        The namspace of the ancestor type declaration
      * @param ancestorName
@@ -337,6 +401,9 @@ public class AttrNSImpl
     }
 
     /**
+    /* <p>
+    /* 
+    /* 
      * @see org.w3c.dom.TypeInfo#getTypeNamespace()
      */
     public String getTypeNamespace() {

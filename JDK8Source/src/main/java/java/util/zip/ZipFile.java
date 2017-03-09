@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,12 @@ import static java.util.zip.ZipUtils.*;
  * or method in this class will cause a {@link NullPointerException} to be
  * thrown.
  *
+ * <p>
+ *  此类用于从zip文件读取条目。
+ * 
+ *  <p>除非另有说明,否则将<tt> null </tt>参数传递给此类中的构造函数或方法将导致抛出{@link NullPointerException}。
+ * 
+ * 
  * @author      David Connelly
  */
 public
@@ -70,6 +77,9 @@ class ZipFile implements ZipConstants, Closeable {
 
     /**
      * Mode flag to open a zip file for reading.
+     * <p>
+     *  模式标志打开一个zip文件进行阅读。
+     * 
      */
     public static final int OPEN_READ = 0x1;
 
@@ -79,6 +89,9 @@ class ZipFile implements ZipConstants, Closeable {
      * that it is closed, but its contents will remain accessible via the
      * <tt>ZipFile</tt> object until either the close method is invoked or the
      * virtual machine exits.
+     * <p>
+     *  模式标志打开一个zip文件,并标记为删除。该文件将在打开时刻和关闭时刻之间删除一段时间,但其内容仍可通过<tt> ZipFile </tt>对象访问,直到调用close方法或虚拟机退出。
+     * 
      */
     public static final int OPEN_DELETE = 0x4;
 
@@ -109,6 +122,14 @@ class ZipFile implements ZipConstants, Closeable {
      * <p>The UTF-8 {@link java.nio.charset.Charset charset} is used to
      * decode the entry names and comments.
      *
+     * <p>
+     *  打开一个zip文件进行阅读。
+     * 
+     *  <p>首先,如果有安全管理器,则以<code> name </code>参数作为其参数调用其<code> checkRead </code>方法,以确保允许读取。
+     * 
+     *  <p> UTF-8 {@link java.nio.charset.Charset charset}用于解码条目名称和注释。
+     * 
+     * 
      * @param name the name of the zip file
      * @throws ZipException if a ZIP format error has occurred
      * @throws IOException if an I/O error has occurred
@@ -133,6 +154,15 @@ class ZipFile implements ZipConstants, Closeable {
      * <p>The UTF-8 {@link java.nio.charset.Charset charset} is used to
      * decode the entry names and comments
      *
+     * <p>
+     *  打开新的<code> ZipFile </code>以指定模式从指定的<code> File </code>对象读取。
+     *  mode参数必须为<tt> OPEN_READ </tt>或<tt> OPEN_READ | OPEN_DELETE </tt>。
+     * 
+     *  <p>首先,如果有安全管理器,则以<code> name </code>参数作为其参数调用其<code> checkRead </code>方法,以确保允许读取。
+     * 
+     *  <p> UTF-8 {@link java.nio.charset.Charset charset}用于解码条目名称和注释
+     * 
+     * 
      * @param file the ZIP file to be opened for reading
      * @param mode the mode in which the file is to be opened
      * @throws ZipException if a ZIP format error has occurred
@@ -156,6 +186,12 @@ class ZipFile implements ZipConstants, Closeable {
      * <p>The UTF-8 {@link java.nio.charset.Charset charset} is used to
      * decode the entry names and comments.
      *
+     * <p>
+     * 打开ZIP文件以读取指定的File对象。
+     * 
+     *  <p> UTF-8 {@link java.nio.charset.Charset charset}用于解码条目名称和注释。
+     * 
+     * 
      * @param file the ZIP file to be opened for reading
      * @throws ZipException if a ZIP format error has occurred
      * @throws IOException if an I/O error has occurred
@@ -175,6 +211,13 @@ class ZipFile implements ZipConstants, Closeable {
      * method is called with the <code>name</code> argument as its argument to
      * ensure the read is allowed.
      *
+     * <p>
+     *  打开新的<code> ZipFile </code>以指定模式从指定的<code> File </code>对象读取。
+     *  mode参数必须为<tt> OPEN_READ </tt>或<tt> OPEN_READ | OPEN_DELETE </tt>。
+     * 
+     *  <p>首先,如果有安全管理器,则以<code> name </code>参数作为其参数调用其<code> checkRead </code>方法,以确保允许读取。
+     * 
+     * 
      * @param file the ZIP file to be opened for reading
      * @param mode the mode in which the file is to be opened
      * @param charset
@@ -232,6 +275,12 @@ class ZipFile implements ZipConstants, Closeable {
      * method is called with the <code>name</code> argument as its argument
      * to ensure the read is allowed.
      *
+     * <p>
+     *  打开一个zip文件进行阅读。
+     * 
+     *  <p>首先,如果有安全管理器,则以<code> name </code>参数作为其参数调用其<code> checkRead </code>方法,以确保允许读取。
+     * 
+     * 
      * @param name the name of the zip file
      * @param charset
      *        the {@linkplain java.nio.charset.Charset charset} to
@@ -256,6 +305,10 @@ class ZipFile implements ZipConstants, Closeable {
 
     /**
      * Opens a ZIP file for reading given the specified File object.
+     * <p>
+     *  打开ZIP文件以读取指定的File对象。
+     * 
+     * 
      * @param file the ZIP file to be opened for reading
      * @param charset
      *        The {@linkplain java.nio.charset.Charset charset} to be
@@ -277,6 +330,10 @@ class ZipFile implements ZipConstants, Closeable {
     /**
      * Returns the zip file comment, or null if none.
      *
+     * <p>
+     *  返回zip文件注释,如果没有,则返回null。
+     * 
+     * 
      * @return the comment string for the zip file, or null if none
      *
      * @throws IllegalStateException if the zip file has been closed
@@ -297,6 +354,10 @@ class ZipFile implements ZipConstants, Closeable {
      * Returns the zip file entry for the specified name, or null
      * if not found.
      *
+     * <p>
+     *  返回指定名称的zip文件条目,如果找不到,则返回null。
+     * 
+     * 
      * @param name the name of the entry
      * @return the zip file entry, or null if not found
      * @throws IllegalStateException if the zip file has been closed
@@ -335,6 +396,12 @@ class ZipFile implements ZipConstants, Closeable {
      * <p> Closing this ZIP file will, in turn, close all input
      * streams that have been returned by invocations of this method.
      *
+     * <p>
+     *  返回用于读取指定zip文件条目的内容的输入流。
+     * 
+     *  <p>关闭此ZIP文件将关闭通过调用此方法返回的所有输入流。
+     * 
+     * 
      * @param entry the zip file entry
      * @return the input stream for reading the contents of the specified
      * zip file entry.
@@ -442,6 +509,9 @@ class ZipFile implements ZipConstants, Closeable {
     /*
      * Gets an inflater from the list of available inflaters or allocates
      * a new one.
+     * <p>
+     *  从可用气泡列表中获取膨胀器或分配一个新气球。
+     * 
      */
     private Inflater getInflater() {
         Inflater inf;
@@ -457,6 +527,9 @@ class ZipFile implements ZipConstants, Closeable {
 
     /*
      * Releases the specified inflater to the list of available inflaters.
+     * <p>
+     *  将指定的inflater释放到可用的inflaters列表。
+     * 
      */
     private void releaseInflater(Inflater inf) {
         if (false == inf.ended()) {
@@ -472,6 +545,10 @@ class ZipFile implements ZipConstants, Closeable {
 
     /**
      * Returns the path name of the ZIP file.
+     * <p>
+     *  返回ZIP文件的路径名。
+     * 
+     * 
      * @return the path name of the ZIP file
      */
     public String getName() {
@@ -531,6 +608,10 @@ class ZipFile implements ZipConstants, Closeable {
 
     /**
      * Returns an enumeration of the ZIP file entries.
+     * <p>
+     *  返回ZIP文件条目的枚举。
+     * 
+     * 
      * @return an enumeration of the ZIP file entries
      * @throws IllegalStateException if the zip file has been closed
      */
@@ -543,6 +624,10 @@ class ZipFile implements ZipConstants, Closeable {
      * Entries appear in the {@code Stream} in the order they appear in
      * the central directory of the ZIP file.
      *
+     * <p>
+     * 在ZIP文件条目上返回有序的{@code Stream}。项目会以显示在ZIP档案中央目录中的顺序显示在{@code Stream}中。
+     * 
+     * 
      * @return an ordered {@code Stream} of entries in this ZIP file
      * @throws IllegalStateException if the zip file has been closed
      * @since 1.8
@@ -590,6 +675,10 @@ class ZipFile implements ZipConstants, Closeable {
 
     /**
      * Returns the number of entries in the ZIP file.
+     * <p>
+     *  返回ZIP文件中的条目数。
+     * 
+     * 
      * @return the number of entries in the ZIP file
      * @throws IllegalStateException if the zip file has been closed
      */
@@ -604,6 +693,10 @@ class ZipFile implements ZipConstants, Closeable {
      * previously returned by invocations of the {@link #getInputStream
      * getInputStream} method.
      *
+     * <p>
+     *  关闭ZIP文件。 <p>关闭此ZIP文件将关闭之前通过调用{@link #getInputStream getInputStream}方法返回的所有输入流。
+     * 
+     * 
      * @throws IOException if an I/O error has occurred
      */
     public void close() throws IOException {
@@ -656,6 +749,14 @@ class ZipFile implements ZipConstants, Closeable {
      * This will prevent holding up system resources for an undetermined
      * length of time.
      *
+     * <p>
+     *  确保此ZipFile对象持有的系统资源在没有更多引用时被释放。
+     * 
+     * <p>
+     *  由于GC会调用此方法的时间尚未确定,因此强烈建议应用程序在访问此<code> ZipFile </code>后立即调用<code> close </code>方法。
+     * 这将防止在未确定的时间长度内阻塞系统资源。
+     * 
+     * 
      * @throws IOException if an I/O error has occurred
      * @see    java.util.zip.ZipFile#close()
      */
@@ -684,6 +785,7 @@ class ZipFile implements ZipConstants, Closeable {
     /*
      * Inner class implementing the input stream used to read a
      * (possibly compressed) zip file entry.
+     * <p>
      */
    private class ZipFileInputStream extends InputStream {
         private volatile boolean closeRequested = false;
@@ -790,6 +892,9 @@ class ZipFile implements ZipConstants, Closeable {
     /**
      * Returns {@code true} if, and only if, the zip file begins with {@code
      * LOCSIG}.
+     * <p>
+     *  内部类实现输入流用于读取(可能是压缩的)zip文件条目。
+     * 
      */
     private boolean startsWithLocHeader() {
         return locsig;

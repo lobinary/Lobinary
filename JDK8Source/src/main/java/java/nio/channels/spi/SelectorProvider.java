@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,21 @@ import sun.security.action.GetPropertyAction;
  * threads.  </p>
  *
  *
+ * <p>
+ *  选择器和可选通道的服务提供程序类。
+ * 
+ *  <p>选择器提供程序是此类的一个具体子类,它具有零参数构造函数,并实现下面指定的抽象方法。
+ *  Java虚拟机的给定调用维护单个系统范围的默认提供程序实例,该实例由{@link #provider()provider}方法返回。该方法的第一次调用将定位下面指定的默认提供程序。
+ * 
+ *  <p>系统范围的默认提供程序由{@link java.nio.channels.DatagramChannel#open DatagramChannel}的静态<tt> open </t>方法使用,{@link java.nio.channels.Pipe #open Pipe}
+ * ,{@link java.nio.channels.Selector#open Selector},{@link java.nio.channels.ServerSocketChannel#open ServerSocketChannel}
+ * 和{@link java.nio.channels.SocketChannel#open SocketChannel}类。
+ * 它也被{@link java.lang.System#inheritedChannel System.inheritedChannel()}方法使用。
+ * 程序可以通过实例化该提供者然后直接调用该类中定义的<tt>打开</tt>方法来使用除默认提供者之外的提供者。
+ * 
+ *  <p>此类中的所有方法都可安全地用于多个并发线程。 </p>
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -74,6 +90,10 @@ public abstract class SelectorProvider {
     /**
      * Initializes a new instance of this class.
      *
+     * <p>
+     *  初始化此类的新实例。
+     * 
+     * 
      * @throws  SecurityException
      *          If a security manager has been installed and it denies
      *          {@link RuntimePermission}<tt>("selectorProvider")</tt>
@@ -159,6 +179,27 @@ public abstract class SelectorProvider {
      * <p> Subsequent invocations of this method return the provider that was
      * returned by the first invocation.  </p>
      *
+     * <p>
+     * 返回此虚拟机调用的系统级默认选择器提供程序。
+     * 
+     *  <p>此方法的第一个调用如下所示定位默认提供程序对象：</p>
+     * 
+     * <ol>
+     * 
+     *  <li> <p>如果定义了系统属性<tt> java.nio.channels.spi.SelectorProvider </tt>,那么它将被视为具体提供程序类的完全限定名称。
+     * 类被加载和实例化;如果此过程失败,则抛出未指定的错误。 </p> </li>。
+     * 
+     *  <li> <p>如果提供程序类已安装在系统类加载器可见的jar文件中,并且该jar文件包含名为<tt> java.nio.channels.spi.SelectorProvider < / tt>在资
+     * 源目录<tt> META-INF / services </tt>中,那么将获取该文件中指定的第一个类名。
+     * 类被加载和实例化;如果此过程失败,则抛出未指定的错误。 </p> </li>。
+     * 
+     *  <li> <p>最后,如果没有通过上述任何方法指定提供程序,则系统默认提供程序类将被实例化,并返回结果。 </p> </li>
+     * 
+     * </ol>
+     * 
+     *  <p>此方法的后续调用返回由第一次调用返回的提供程序。 </p>
+     * 
+     * 
      * @return  The system-wide default selector provider
      */
     public static SelectorProvider provider() {
@@ -182,6 +223,10 @@ public abstract class SelectorProvider {
     /**
      * Opens a datagram channel.
      *
+     * <p>
+     *  打开数据报通道。
+     * 
+     * 
      * @return  The new channel
      *
      * @throws  IOException
@@ -193,6 +238,10 @@ public abstract class SelectorProvider {
     /**
      * Opens a datagram channel.
      *
+     * <p>
+     *  打开数据报通道。
+     * 
+     * 
      * @param   family
      *          The protocol family
      *
@@ -211,6 +260,10 @@ public abstract class SelectorProvider {
     /**
      * Opens a pipe.
      *
+     * <p>
+     *  打开管道。
+     * 
+     * 
      * @return  The new pipe
      *
      * @throws  IOException
@@ -222,6 +275,10 @@ public abstract class SelectorProvider {
     /**
      * Opens a selector.
      *
+     * <p>
+     *  打开选择器。
+     * 
+     * 
      * @return  The new selector
      *
      * @throws  IOException
@@ -233,6 +290,10 @@ public abstract class SelectorProvider {
     /**
      * Opens a server-socket channel.
      *
+     * <p>
+     *  打开服务器套接字通道。
+     * 
+     * 
      * @return  The new channel
      *
      * @throws  IOException
@@ -244,6 +305,10 @@ public abstract class SelectorProvider {
     /**
      * Opens a socket channel.
      *
+     * <p>
+     *  打开套接字通道。
+     * 
+     * 
      * @return  The new channel
      *
      * @throws  IOException
@@ -299,6 +364,20 @@ public abstract class SelectorProvider {
      * returned. Subsequent invocations of this method return the same
      * channel. </p>
      *
+     * <p>
+     *  返回从创建此Java虚拟机的实体继承的通道。
+     * 
+     * <p>在许多操作系统上,可以以允许进程从创建进程的实体继承通道的方式启动进程(如Java虚拟机)。这样做的方式是系统相关的,信道可以连接到的可能实体也是这样。
+     * 例如,在UNIX系统上,Internet服务守护程序(<i> inetd </i>)用于在请求在关联的网络端口上到达时启动程序以服务请求。在此示例中,启动的进程继承了表示网络套接字的通道。
+     * 
+     *  <p>如果继承的频道代表网络套接字,则由此方法返回的{@link java.nio.channels.Channel Channel}类型确定如下：
+     * 
+     * <ul>
+     * 
+     *  <li> <p>如果继承的通道代表面向流的连接套接字,则返回{@link java.nio.channels.SocketChannel SocketChannel}。
+     * 套接字通道至少最初是处于阻塞模式,绑定到套接字地址,并且连接到对等体。 </p> </li>。
+     * 
+     * 
      * @return  The inherited channel, if any, otherwise <tt>null</tt>.
      *
      * @throws  IOException

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,20 @@ import javax.lang.model.element.*;
  *         {@code List<VariableElement>} fs = fieldsIn(someClass.getEnclosedElements());
  * </pre></blockquote>
  *
+ * <p>
+ *  用于从元素集合中仅选择感兴趣的元素的过滤器。返回的集合和列表是新集合,并且使用该参数作为后备存储。此类中的方法不会尝试防止同时修改参数。返回的集合和列表是可变的,但对并发访问不安全。
+ * 返回的集具有与设置为方法的参数相同的迭代顺序。
+ * 
+ *  <p>如果包含{@code null}的迭代和集合作为参数传递给此类中的方法,那么将抛出{@code NullPointerException}。
+ * 
+ *  <p>请注意,<i>静态导入</i>语句可以使调用此类中的方法的文本更简洁;例如：
+ * 
+ *  <blockquote> <pre> import static javax.lang.model.util.ElementFilter。
+ * *; ... {@code List <VariableElement>} fs = fieldsIn(someClass.getEnclosedElements()); </pre> </blockquote>
+ * 。
+ *  <blockquote> <pre> import static javax.lang.model.util.ElementFilter。
+ * 
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;
@@ -85,6 +100,10 @@ public class ElementFilter {
                                                ElementKind.ANNOTATION_TYPE));
     /**
      * Returns a list of fields in {@code elements}.
+     * <p>
+     *  返回{@code elements}中的字段列表。
+     * 
+     * 
      * @return a list of fields in {@code elements}
      * @param elements the elements to filter
      */
@@ -95,6 +114,10 @@ public class ElementFilter {
 
     /**
      * Returns a set of fields in {@code elements}.
+     * <p>
+     *  返回{@code elements}中的一组字段。
+     * 
+     * 
      * @return a set of fields in {@code elements}
      * @param elements the elements to filter
      */
@@ -105,6 +128,10 @@ public class ElementFilter {
 
     /**
      * Returns a list of constructors in {@code elements}.
+     * <p>
+     *  返回{@code elements}中的构造函数列表。
+     * 
+     * 
      * @return a list of constructors in {@code elements}
      * @param elements the elements to filter
      */
@@ -115,6 +142,10 @@ public class ElementFilter {
 
     /**
      * Returns a set of constructors in {@code elements}.
+     * <p>
+     *  返回一组{@code elements}中的构造函数。
+     * 
+     * 
      * @return a set of constructors in {@code elements}
      * @param elements the elements to filter
      */
@@ -125,6 +156,10 @@ public class ElementFilter {
 
     /**
      * Returns a list of methods in {@code elements}.
+     * <p>
+     *  返回{@code elements}中的方法列表。
+     * 
+     * 
      * @return a list of methods in {@code elements}
      * @param elements the elements to filter
      */
@@ -135,6 +170,10 @@ public class ElementFilter {
 
     /**
      * Returns a set of methods in {@code elements}.
+     * <p>
+     *  返回{@code elements}中的一组方法。
+     * 
+     * 
      * @return a set of methods in {@code elements}
      * @param elements the elements to filter
      */
@@ -145,6 +184,10 @@ public class ElementFilter {
 
     /**
      * Returns a list of types in {@code elements}.
+     * <p>
+     *  返回{@code elements}中的类型列表。
+     * 
+     * 
      * @return a list of types in {@code elements}
      * @param elements the elements to filter
      */
@@ -155,6 +198,10 @@ public class ElementFilter {
 
     /**
      * Returns a set of types in {@code elements}.
+     * <p>
+     *  返回{@code elements}中的一组类型。
+     * 
+     * 
      * @return a set of types in {@code elements}
      * @param elements the elements to filter
      */
@@ -165,6 +212,10 @@ public class ElementFilter {
 
     /**
      * Returns a list of packages in {@code elements}.
+     * <p>
+     *  返回{@code elements}中的软件包列表。
+     * 
+     * 
      * @return a list of packages in {@code elements}
      * @param elements the elements to filter
      */
@@ -175,6 +226,9 @@ public class ElementFilter {
 
     /**
      * Returns a set of packages in {@code elements}.
+     * <p>
+     * 返回{@code elements}中的一组包。
+     * 
      * @return a set of packages in {@code elements}
      * @param elements the elements to filter
      */

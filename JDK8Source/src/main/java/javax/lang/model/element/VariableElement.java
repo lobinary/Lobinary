@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import javax.lang.model.util.Elements;
  * parameter, local variable, resource variable, or exception
  * parameter.
  *
+ * <p>
+ *  表示字段,{@code enum}常量,方法或构造函数参数,局部变量,资源变量或异常参数。
+ * 
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;
@@ -53,6 +58,14 @@ public interface VariableElement extends Element {
      * constant value, a field's type must be either a primitive type
      * or {@code String}.
      *
+     * <p>
+     *  如果这是一个初始化为编译时常量的{@code final}字段,则返回此变量的值。否则返回{@code null}。该值将是原始类型或{@code String}。
+     * 如果值是原始类型,则将其包装在适当的包装类中(例如{@link Integer})。
+     * 
+     *  <p>请注意,并非所有{@code final}字段都具有常数值。特别是,{@code enum}常数不是</em>被认为是编译时常量。
+     * 要具有常量值,字段的类型必须是原始类型或{@code String}。
+     * 
+     * 
      * @return the value of this variable if this is a {@code final}
      * field initialized to a compile-time constant, or {@code null}
      * otherwise
@@ -72,6 +85,12 @@ public interface VariableElement extends Element {
      * names are not available, an implementation may synthesize names
      * subject to the distinctness requirement above.
      *
+     * <p>
+     *  返回此变量元素的简单名称。
+     * 
+     *  <p>对于方法和构造函数参数,每个参数的名称必须与同一可执行文件的所有其他参数的名称不同。如果原始源名称不可用,则实现可以综合具有上述区别性要求的名称。
+     * 
+     * 
      * @return the simple name of this variable element
      */
     @Override
@@ -83,6 +102,10 @@ public interface VariableElement extends Element {
      * The enclosing element of a method or constructor parameter is
      * the executable declaring the parameter.
      *
+     * <p>
+     *  返回此变量的包围元素。
+     * 
+     * 
      * @return the enclosing element of this variable
      */
     @Override

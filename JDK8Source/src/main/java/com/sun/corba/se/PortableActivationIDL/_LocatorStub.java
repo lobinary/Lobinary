@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -15,6 +16,9 @@ public class _LocatorStub extends org.omg.CORBA.portable.ObjectImpl implements c
   /** locate server - returns the port with a specific type for all registered
 	* ORBs of an active server.
 	* Starts the server if it is not already running.
+	* <p>
+	*  活动服务器的ORB。启动服务器(如果服务器尚未运行)。
+	* 
 	*/
   public com.sun.corba.se.PortableActivationIDL.LocatorPackage.ServerLocationPerType locateServer (String serverId, String endPoint) throws com.sun.corba.se.PortableActivationIDL.NoSuchEndPoint, com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown
   {
@@ -48,6 +52,9 @@ public class _LocatorStub extends org.omg.CORBA.portable.ObjectImpl implements c
   /** locate server - returns all ports registered with a specified ORB for
 	* an active server
 	* Starts the server if it is not already running.
+	* <p>
+	*  活动服务器如果服务器尚未运行,则启动该服务器。
+	* 
 	*/
   public com.sun.corba.se.PortableActivationIDL.LocatorPackage.ServerLocationPerORB locateServerForORB (String serverId, String orbId) throws com.sun.corba.se.PortableActivationIDL.InvalidORBid, com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown
   {
@@ -79,6 +86,7 @@ public class _LocatorStub extends org.omg.CORBA.portable.ObjectImpl implements c
 
 
   /** get the port for the endpoint of the locator
+  /* <p>
 	*/
   public int getEndpoint (String endPointType) throws com.sun.corba.se.PortableActivationIDL.NoSuchEndPoint
   {
@@ -106,6 +114,8 @@ public class _LocatorStub extends org.omg.CORBA.portable.ObjectImpl implements c
 
   /** Useful from external BadServerIdHandlers which need
 	* to pick a particular port type.
+	* <p>
+	*  选择特定的端口类型。
 	*/
   public int getServerPortForType (com.sun.corba.se.PortableActivationIDL.LocatorPackage.ServerLocationPerORB location, String endPointType) throws com.sun.corba.se.PortableActivationIDL.NoSuchEndPoint
   {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -255,6 +259,92 @@ import java.util.concurrent.locks.LockSupport;
  * should create tiered phasers to accommodate arbitrarily large sets
  * of participants.
  *
+ * <p>
+ *  可重用的同步屏障,功能类似于{@link java.util.concurrent.CyclicBarrier CyclicBarrier}和{@link java.util.concurrent.CountDownLatch CountDownLatch}
+ * ,但支持更灵活的使用。
+ * 
+ *  <p> <b>注册。</b>与其他障碍的情况不同,在移动电话上注册的用户<em> </em>同步的数量可能会随时间而变化。
+ * 任务可以随时注册(使用方法{@link #register},{@link #bulkRegister}或构建方初始数量的形式),并且可选择在任何到达时取消注册(使用{@link #arriveAndDeregister}
+ * ) 。
+ *  <p> <b>注册。</b>与其他障碍的情况不同,在移动电话上注册的用户<em> </em>同步的数量可能会随时间而变化。
+ * 与大多数基本同步结构的情况一样,注册和注销仅影响内部计数;他们不建立任何进一步的内部簿记,所以任务不能查询他们是否注册。 (但是,您可以通过继承此类来介绍此类记账。)。
+ * 
+ * <p> <b>同步。</b>与{@code CyclicBarrier}一样,{@code Phaser}可能会重复等待。
+ * 方法{@link #arriveAndAwaitAdvance}的效果类似于{@link java.util.concurrent.CyclicBarrier#await CyclicBarrier.await}
+ * 。
+ * <p> <b>同步。</b>与{@code CyclicBarrier}一样,{@code Phaser}可能会重复等待。移相器的每一代具有相关联的相位数。
+ * 阶段号从零开始,并且当所有各方到达移相器时递增,在达到{@code Integer.MAX_VALUE}后绕回零。
+ * 相位编号的使用使得能够通过两种可由任何注册方调用的方法来独立控制到达移相器处和等待其他操作时的动作：。
+ * 
+ * <ul>
+ * 
+ *  <li> <b>到达。</b>方法{@link #arrive}和{@link #arriveAndDeregister}记录到达。
+ * 这些方法不会阻塞,但返回相关的<em>到达阶段号码</em>;即施加到达的移相器的相位编号。当给定阶段的最后一方到达时,执行可选动作并且阶段前进。
+ * 这些动作由触发相位超前的一方执行,并通过重写方法{@link #onAdvance(int,int)}进行排列,这也控制终止。
+ * 覆盖此方法与向{@code CyclicBarrier}提供屏障操作类似,但更灵活。
+ * 
+ * <li> <b>等待。</b>方法{@link #awaitAdvance}需要一个指示到达阶段编号的参数,并且在移动台前进到(或已经处于)其他阶段时返回。
+ * 与使用{@code CyclicBarrier}的类似构造不同,方法{@code awaitAdvance}继续等待,即使等待的线程被中断。
+ * 中断和超时版本也可用,但是任务等待可中断或超时时遇到的异常不会更改移相器的状态。
+ * 如果有必要,您可以在这些异常的处理程序内执行任何关联恢复,通常是在调用{@code forceTermination}之后。
+ * 相移也可以由在{@link ForkJoinPool}中执行的任务使用,这将确保足够的并行性以在其他被阻塞等待一个阶段前进时执行任务。
+ * 
+ * </ul>
+ * 
+ * <p> <b>终止。</b>移动者可以输入<em>终止</em>状态,可以使用{@link #isTerminated}方法进行检查。在终止时,所有同步方法立即返回,而不等待提前,如负返回值所示。
+ * 同样,终止注册的尝试也没有效果。当{@code onAdvance}的调用返回{@code true}时,触发终止。如果注销已导致注册方数量变为零,则默认实现将返回{@code true}。
+ * 如下所示,当相位器控制具有固定次数的迭代的动作时,通常方便的是重写该方法以在当前相位数达到阈值时引起终止。
+ * 方法{@link #forceTermination}也可以突然释放等待的线程,并允许它们终止。
+ * 
+ *  <p> <b>分层。</b> Phasers可以<em>分层</em>(即以树结构构造),以减少争用。可以替代地设置具有大量方的会产生大量同步争用成本的对等体,使得子阶段的组共享共同的父亲。
+ * 这可以大大增加吞吐量,即使其引起更大的每操作开销。
+ * 
+ * <p>在分层相移树中,儿童移动器与其父代的注册和注销将自动管理。
+ * 每当儿童移动器的注册方数量变为非零({@link #Phaser(Phaser,int)}构造函数{@link #register}或{@link #bulkRegister}中确定的值)时,子phas
+ * er已向其父级注册。
+ * <p>在分层相移树中,儿童移动器与其父代的注册和注销将自动管理。每当调用{@link #arriveAndDeregister}的结果,注册的对象数量变为零时,子移动器将从其父对象中注销。
+ * 
+ *  <p> <b>监视。</b>虽然同步方法只能由注册方调用,但移动器的当前状态可能由任何呼叫方监视。
+ * 在任何给定时刻,总共有{@link #getRegisteredParties}方,其中{@link #getArrivedParties}已到达当前阶段({@link #getPhase})。
+ * 当剩余的({@link #getUnarrivedParties})方到达时,阶段前进。由这些方法返回的值可以反映瞬时状态,因此对于同步控制通常不是有用的。
+ * 方法{@link #toString}以便于非正式监控的形式返回这些状态查询的快照。
+ * 
+ *  <p> <b>示例用法：</b>
+ * 
+ *  <p>可以使用{@code Phaser}而不是{@code CountDownLatch}来控制服务可变数量的参与者的一次性操作。典型的习惯是为方法设置这个首先注册,然后启动动作,然后注销,如：
+ * 
+ * <pre> {@code void runTasks(List <Runnable> tasks){final Phaser phaser = new Phaser(1); //"1"注册自我创建和启动线程(最终Runnable任务：任务){phaser.register(); new Thread(){public void run(){phaser.arriveAndAwaitAdvance(); //等待所有创建task.run(); }
+ * } .start(); }}。
+ * 
+ *  //允许线程启动和注销自phaser.arriveAndDeregister(); }} </pre>
+ * 
+ *  <p>导致一组线程针对给定数量的迭代重复执行操作的一种方法是覆盖{@code onAdvance}：
+ * 
+ *  <pre> {@code void startTasks(List <Runnable> tasks,final int iterations){final Phaser phaser = new Phaser(){protected boolean onAdvance(int phase,int registeredParties){return phase> = iterations || registeredParties == 0; }
+ * }; phaser.register(); for(final Runnable task：tasks){phaser.register(); new Thread(){public void run(){do {task.run(); phaser.arriveAndAwaitAdvance(); }
+ *  while(！phaser.isTerminated()); }} .start(); } phaser.arriveAndDeregister(); // deregister self,do no
+ * t wait}} </pre>。
+ * 
+ *  如果主任务以后必须等待终止,它可以重新注册,然后执行一个类似的循环：<pre> {@code // ... phaser.register(); while(！phaser.isTerminated())phaser.arriveAndAwaitAdvance();}
+ *  </pre>。
+ * 
+ *  <p>相关构造可用于在上下文中等待特定的阶段号,其中确保阶段永远不会绕过{@code Integer.MAX_VALUE}。例如：
+ * 
+ * <pre> {@code void awaitPhase(Phaser phaser,int phase){int p = phaser.register(); //假设调用者未注册while(p <phase){if(phaser.isTerminated())// ...处理意外终止else p = phaser.arriveAndAwaitAdvance(); } phaser.arriveAndDeregister(); }} </pre>
+ * 。
+ * 
+ *  <p>要使用phasers树创建一组{@code n}任务,您可以使用以下形式的代码,假设任务类具有接受构造函数注册的{@code Phaser}的构造函数。
+ * 在调用{@code build(new Task [n],0,n,new Phaser())}之后,可以启动这些任务,例如通过提交到池：。
+ * 
+ *  <pre> {@ code void build(Task [] tasks,int lo,int hi,Phaser ph){if(hi  -  lo> TASKS_PER_PHASER){for(int i = lo; i <hi; i + = TASKS_PER_PHASER){ int j = Math.min(i + TASKS_PER_PHASER,hi); build(tasks,i,j,new Phaser(ph)); }} else {for(int i = lo; i <hi; ++ i)tasks [i] = new Task(ph); //假设新的任务(ph)执行ph.register()}}} </pre>
+ * 。
+ * 
+ *  {@code TASKS_PER_PHASER}的最佳值主要取决于预期的同步率。低至4的值可能适用于极小的每相任务主体(因此高速率),或者对于非常大的任务主体可达到数百。
+ * 
+ * <p> <b>实现注释</b>：此实现将最大数量限制为65535.尝试注册其他方会导致{@code IllegalStateException}。
+ * 但是,您可以并且应该创建分层相移器以适应任意大的参与者集合。
+ * 
+ * 
  * @since 1.7
  * @author Doug Lea
  */
@@ -263,6 +353,9 @@ public class Phaser {
      * This class implements an extension of X10 "clocks".  Thanks to
      * Vijay Saraswat for the idea, and to Vivek Sarkar for
      * enhancements to extend functionality.
+     * <p>
+     *  这个类实现了X10"clocks"的扩展。感谢Vijay Saraswat的想法,和Vivek Sarkar的增强功能扩展。
+     * 
      */
 
     /**
@@ -291,6 +384,19 @@ public class Phaser {
      * The phase of a subphaser is allowed to lag that of its
      * ancestors until it is actually accessed -- see method
      * reconcileState.
+     * <p>
+     *  主状态表示,保存四个位字段：
+     * 
+     *  未命中 - 尚未达到屏障的数目(比特0-15)方 - 要等待的方的数目(比特16-31)相位 - 生成屏障(比特32-62)终止集如果屏障终止(位63 /符号)
+     * 
+     *  除非没有注册方的移动者通过具有零方和非移动方的非法状态(在下面被编码为EMPTY)来区分。
+     * 
+     *  为了有效地维持原子性,这些值被打包成单个(原子)长。良好的性能依赖于保持状态解码和编码简单,并保持竞态窗口短。
+     * 
+     *  通过CAS执行所有状态更新,除了子移相器的初始注册(即,具有非空父亲的移动器)。在这种(相对罕见的)情况下,我们使用内置同步锁定,而首次注册与其父。
+     * 
+     * 子相位的相位允许滞后于其祖先的相位,直到它被实际访问 - 参见方法reconcileState。
+     * 
      */
     private volatile long state;
 
@@ -332,11 +438,17 @@ public class Phaser {
 
     /**
      * The parent of this phaser, or null if none
+     * <p>
+     *  此phaser的父级,如果没有,则为null
+     * 
      */
     private final Phaser parent;
 
     /**
      * The root of phaser tree. Equals this if not in a tree.
+     * <p>
+     *  移相器树的根。等于这,如果不是在树中。
+     * 
      */
     private final Phaser root;
 
@@ -345,6 +457,9 @@ public class Phaser {
      * contention when releasing some threads while adding others, we
      * use two of them, alternating across even and odd phases.
      * Subphasers share queues with root to speed up releases.
+     * <p>
+     *  头的Treiber堆等待的螺纹。为了在添加其他线程的同时释放某些线程时消除争用,我们使用它们中的两个,在偶数和奇数阶段交替。子进程使用root共享队列以加速发布。
+     * 
      */
     private final AtomicReference<QNode> evenQ;
     private final AtomicReference<QNode> oddQ;
@@ -355,6 +470,9 @@ public class Phaser {
 
     /**
      * Returns message string for bounds exceptions on arrival.
+     * <p>
+     *  返回到达时的边界异常的消息字符串。
+     * 
      */
     private String badArrive(long s) {
         return "Attempted arrival of unregistered party for " +
@@ -363,6 +481,9 @@ public class Phaser {
 
     /**
      * Returns message string for bounds exceptions on registration.
+     * <p>
+     *  返回注册时边界异常的消息字符串。
+     * 
      */
     private String badRegister(long s) {
         return "Attempt to register more than " +
@@ -374,6 +495,10 @@ public class Phaser {
      * Manually tuned to speed up and minimize race windows for the
      * common case of just decrementing unarrived field.
      *
+     * <p>
+     *  主要实现方法到达和arrivalAndDeregister。手动调整以加快和最小化种族窗口,只是减少未到达字段的常见情况。
+     * 
+     * 
      * @param adjust value to subtract from state;
      *               ONE_ARRIVAL for arrive,
      *               ONE_DEREGISTER for arriveAndDeregister
@@ -421,6 +546,10 @@ public class Phaser {
     /**
      * Implementation of register, bulkRegister
      *
+     * <p>
+     *  寄存器的实现,批量注册
+     * 
+     * 
      * @param registrations number to add to both parties and
      * unarrived fields. Must be greater than zero.
      */
@@ -484,6 +613,11 @@ public class Phaser {
      * their own advance by setting unarrived to parties (or if
      * parties is zero, resetting to unregistered EMPTY state).
      *
+     * <p>
+     *  如有必要,解决从根的滞后相位传播。
+     * 调节通常发生在root已经提前,但是subphasers还没有这样做,在这种情况下,他们必须通过设置unarrived到各方(或如果方为零,重置为未注册的EMPTY状态)完成自己的提前。
+     * 
+     * 
      * @return reconciled state
      */
     private long reconcileState() {
@@ -509,6 +643,9 @@ public class Phaser {
      * Creates a new phaser with no initially registered parties, no
      * parent, and initial phase number 0. Any thread using this
      * phaser will need to first register for it.
+     * <p>
+     *  创建一个新的移相器,没有初始注册方,没有父,并且初始阶段编号为0.任何使用此移相器的线程将需要首先注册它。
+     * 
      */
     public Phaser() {
         this(null, 0);
@@ -518,6 +655,10 @@ public class Phaser {
      * Creates a new phaser with the given number of registered
      * unarrived parties, no parent, and initial phase number 0.
      *
+     * <p>
+     *  创建一个新的移相器,其中包含给定数量的已注册未移动方,无父项,初始阶段编号0。
+     * 
+     * 
      * @param parties the number of parties required to advance to the
      * next phase
      * @throws IllegalArgumentException if parties less than zero
@@ -530,6 +671,10 @@ public class Phaser {
     /**
      * Equivalent to {@link #Phaser(Phaser, int) Phaser(parent, 0)}.
      *
+     * <p>
+     *  相当于{@link #Phaser(Phaser,int)Phaser(parent,0)}。
+     * 
+     * 
      * @param parent the parent phaser
      */
     public Phaser(Phaser parent) {
@@ -542,6 +687,10 @@ public class Phaser {
      * and the given number of parties is greater than zero, this
      * child phaser is registered with its parent.
      *
+     * <p>
+     * 使用给定的父级和已注册未移动方的数量创建新移动器。当给定父节点非空且给定数量的参与方大于零时,此子节点phaser将向其父节点注册。
+     * 
+     * 
      * @param parent the parent phaser
      * @param parties the number of parties required to advance to the
      * next phase
@@ -581,6 +730,11 @@ public class Phaser {
      * this phaser is terminated, the attempt to register has
      * no effect, and a negative value is returned.
      *
+     * <p>
+     *  给这个移动者添加一个新的无名派对。如果正在进行{@link #onAdvance}的调用,则此方法可能会在返回前等待其完成。
+     * 如果此移动器有父级,并且此移相器以前没有注册方,则此子移动器也向其父级注册。如果该移相器终止,则注册尝试不起作用,并返回负值。
+     * 
+     * 
      * @return the arrival phase number to which this registration
      * applied.  If this value is negative, then this phaser has
      * terminated, in which case registration has no effect.
@@ -601,6 +755,11 @@ public class Phaser {
      * If this phaser is terminated, the attempt to register has no
      * effect, and a negative value is returned.
      *
+     * <p>
+     *  将给定数量的新未携带方添加到此移相器。如果正在进行{@link #onAdvance}的调用,则此方法可能会在返回前等待其完成。
+     * 如果此移动器具有父项,并且给定数量的参与方大于零,并且此移动器以前没有注册方,则此子项移动器也向其父项注册。如果该移相器终止,则注册尝试不起作用,并返回负值。
+     * 
+     * 
      * @param parties the number of additional parties required to
      * advance to the next phase
      * @return the arrival phase number to which this registration
@@ -626,6 +785,12 @@ public class Phaser {
      * IllegalStateException} only upon some subsequent operation on
      * this phaser, if ever.
      *
+     * <p>
+     *  到达这个相位器,不等待别人到达。
+     * 
+     *  <p>这是未注册方调用此方法的使用错误。但是,此错误可能会导致{@code IllegalStateException}只有一些后续操作此移动器,如果有。
+     * 
+     * 
      * @return the arrival phase number, or a negative value if terminated
      * @throws IllegalStateException if not terminated and the number
      * of unarrived parties would become negative
@@ -646,6 +811,12 @@ public class Phaser {
      * IllegalStateException} only upon some subsequent operation on
      * this phaser, if ever.
      *
+     * <p>
+     * 到达这个phaser和deregisters从它,而不等待别人到达。注销减少了在未来阶段推进的各方的数量。如果此移动器具有父级,并且注销导致此移动者具有零个参与方,则该移相器也从其父级注销。
+     * 
+     *  <p>这是未注册方调用此方法的使用错误。但是,此错误可能会导致{@code IllegalStateException}只有一些后续操作此移动器,如果有。
+     * 
+     * 
      * @return the arrival phase number, or a negative value if terminated
      * @throws IllegalStateException if not terminated and the number
      * of registered or unarrived parties would become negative
@@ -667,6 +838,14 @@ public class Phaser {
      * IllegalStateException} only upon some subsequent operation on
      * this phaser, if ever.
      *
+     * <p>
+     *  到达这个相位器,等待别人。等效于{@code awaitAdvance(arrival())}。
+     * 如果您需要等待中断或超时,您可以使用{@code awaitAdvance}方法的其他形式之一类似的结构进行排列。
+     * 如果您需要在抵达时取消注册,请使用{@code awaitAdvance(arrivalAndDeregister())}。
+     * 
+     *  <p>这是未注册方调用此方法的使用错误。但是,此错误可能会导致{@code IllegalStateException}只有一些后续操作此移动器,如果有。
+     * 
+     * 
      * @return the arrival phase number, or the (negative)
      * {@linkplain #getPhase() current phase} if terminated
      * @throws IllegalStateException if not terminated and the number
@@ -713,6 +892,10 @@ public class Phaser {
      * value, returning immediately if the current phase is not equal
      * to the given phase value or this phaser is terminated.
      *
+     * <p>
+     *  等待该移相器的相位从给定相位值提前,如果当前相位不等于给定相位值则立即返回,或者该移相器终止。
+     * 
+     * 
      * @param phase an arrival phase number, or negative value if
      * terminated; this argument is normally the value returned by a
      * previous call to {@code arrive} or {@code arriveAndDeregister}.
@@ -738,6 +921,10 @@ public class Phaser {
      * not equal to the given phase value or this phaser is
      * terminated.
      *
+     * <p>
+     * 等待该移相器的阶段从给定的相位值提前,如果在等待期间中断则抛出{@code InterruptedException},或者如果当前相位不等于给定相位值则立即返回,或者该移相器被终止。
+     * 
+     * 
      * @param phase an arrival phase number, or negative value if
      * terminated; this argument is normally the value returned by a
      * previous call to {@code arrive} or {@code arriveAndDeregister}.
@@ -769,6 +956,10 @@ public class Phaser {
      * returning immediately if the current phase is not equal to the
      * given phase value or this phaser is terminated.
      *
+     * <p>
+     *  等待该移相器的阶段从给定的相位值或给定超时提前,如果在等待期间中断则抛出{@code InterruptedException},或者如果当前相位不等于给定相位值则立即返回,或者该移相器是终止。
+     * 
+     * 
      * @param phase an arrival phase number, or negative value if
      * terminated; this argument is normally the value returned by a
      * previous call to {@code arrive} or {@code arriveAndDeregister}.
@@ -810,6 +1001,10 @@ public class Phaser {
      * method has no effect.  This method may be useful for
      * coordinating recovery after one or more tasks encounter
      * unexpected exceptions.
+     * <p>
+     *  强制该移相器进入终止状态。注册方的数量不受影响。如果该移相器是移相器的分层集合的成员,则集合中的所有移相器被终止。如果此移相器已终止,则此方法无效。
+     * 此方法可能有助于在一个或多个任务遇到意外异常后协调恢复。
+     * 
      */
     public void forceTermination() {
         // Only need to change root state
@@ -833,6 +1028,11 @@ public class Phaser {
      * in which case the prevailing phase prior to termination
      * may be obtained via {@code getPhase() + Integer.MIN_VALUE}.
      *
+     * <p>
+     *  返回当前阶段编号。最大阶段数为{@code Integer.MAX_VALUE},之后它将从零开始重新开始。
+     * 在终止时,阶段号为负,在这种情况下,终止之前的主要阶段可以通过{@code getPhase()+ Integer.MIN_VALUE}获得。
+     * 
+     * 
      * @return the phase number, or a negative value if terminated
      */
     public final int getPhase() {
@@ -842,6 +1042,10 @@ public class Phaser {
     /**
      * Returns the number of parties registered at this phaser.
      *
+     * <p>
+     *  返回在此移动器处注册的对方的数量。
+     * 
+     * 
      * @return the number of parties
      */
     public int getRegisteredParties() {
@@ -853,6 +1057,10 @@ public class Phaser {
      * the current phase of this phaser. If this phaser has terminated,
      * the returned value is meaningless and arbitrary.
      *
+     * <p>
+     *  返回已到达此移相器当前阶段的已注册参与方的数量。如果这个移相器已经终止,返回的值是无意义的和任意的。
+     * 
+     * 
      * @return the number of arrived parties
      */
     public int getArrivedParties() {
@@ -864,6 +1072,10 @@ public class Phaser {
      * arrived at the current phase of this phaser. If this phaser has
      * terminated, the returned value is meaningless and arbitrary.
      *
+     * <p>
+     * 返回尚未到达此移相器的当前阶段的已注册参与方的数量。如果这个移相器已经终止,返回的值是无意义的和任意的。
+     * 
+     * 
      * @return the number of unarrived parties
      */
     public int getUnarrivedParties() {
@@ -873,6 +1085,10 @@ public class Phaser {
     /**
      * Returns the parent of this phaser, or {@code null} if none.
      *
+     * <p>
+     *  返回此phaser的父级,或{@code null}(如果没有)。
+     * 
+     * 
      * @return the parent of this phaser, or {@code null} if none
      */
     public Phaser getParent() {
@@ -883,6 +1099,10 @@ public class Phaser {
      * Returns the root ancestor of this phaser, which is the same as
      * this phaser if it has no parent.
      *
+     * <p>
+     *  返回此phaser的根祖先,如果没有父,则与此phaser相同。
+     * 
+     * 
      * @return the root ancestor of this phaser
      */
     public Phaser getRoot() {
@@ -892,6 +1112,10 @@ public class Phaser {
     /**
      * Returns {@code true} if this phaser has been terminated.
      *
+     * <p>
+     *  如果此移动器已终止,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this phaser has been terminated
      */
     public boolean isTerminated() {
@@ -933,6 +1157,22 @@ public class Phaser {
      *   protected boolean onAdvance(int phase, int parties) { return false; }
      * }}</pre>
      *
+     * <p>
+     *  可覆盖方法,用于在即将到来的相位超前时执行动作,并控制终止。这个方法在一个移动者前进时被调用(当所有其他等待方都处于休眠状态时)。
+     * 如果这个方法返回{@code true},这个phaser将在提前设置为最终终止状态,并且对{@link #isTerminated}的后续调用将返回true。
+     * 调用此方法时抛出的任何(未检查的)异常或错误将传播到尝试提前此移相器的一方,在这种情况下不会发生提前。
+     * 
+     *  <p>此方法的参数提供了当前转换的主要状态。在{@code onAdvance}中调用到达,注册和等待方法对此移相器的影响未指定,不应依赖。
+     * 
+     *  <p>如果此移相器是分层的一组移相器的成员,则{@code onAdvance}仅在每个移动上的根移相器被调用。
+     * 
+     * <p>为了支持最常见的用例,当方调用{@code arrivalAndDeregister}的结果,注册方数量变为零时,此方法的默认实现将返回{@code true}。
+     * 您可以禁用此行为,从而在以后注册时启用继续,通过覆盖此方法始终返回{@code false}：。
+     * 
+     *  <pre> {@code Phaser phaser = new Phaser(){protected boolean onAdvance(int phase,int parties){return false; }
+     * }} </pre>。
+     * 
+     * 
      * @param phase the current phase number on entry to this method,
      * before this phaser is advanced
      * @param registeredParties the current number of registered parties
@@ -949,6 +1189,11 @@ public class Phaser {
      * followed by the number of registered parties, and {@code
      * "arrived = "} followed by the number of arrived parties.
      *
+     * <p>
+     *  返回一个字符串标识这个phaser,以及它的状态。
+     * 括号中的状态包括字符串{@code"phase ="},后跟阶段编号{@code"parties ="},后面跟注注册方数量,{@code"arrived ="}后跟到达方数量。
+     * 
+     * 
      * @return a string identifying this phaser, as well as its state
      */
     public String toString() {
@@ -957,6 +1202,9 @@ public class Phaser {
 
     /**
      * Implementation of toString and string-based error messages
+     * <p>
+     *  实现基于toString和字符串的错误消息
+     * 
      */
     private String stateToString(long s) {
         return super.toString() +
@@ -969,6 +1217,9 @@ public class Phaser {
 
     /**
      * Removes and signals threads from queue for phase.
+     * <p>
+     *  从队列中删除和信号线程的阶段。
+     * 
      */
     private void releaseWaiters(int phase) {
         QNode q;   // first element of queue
@@ -991,6 +1242,10 @@ public class Phaser {
      * head of queue, which suffices to reduce memory footprint in
      * most usages.
      *
+     * <p>
+     *  releaseWaiters的变体,另外尝试删除任何节点,不再等待超时或中断提前。目前,只有当它们在队列的头部时,才移除节点,这足以在大多数使用中减少存储器占用。
+     * 
+     * 
      * @return current phase on exit
      */
     private int abortWait(int phase) {
@@ -1021,6 +1276,12 @@ public class Phaser {
      * and there appear to be enough CPUs available, it spins
      * SPINS_PER_ARRIVAL more times before blocking. The value trades
      * off good-citizenship vs big unnecessary slowdowns.
+     * <p>
+     * 在等待提前,每个到达时等待时阻塞之前旋转的次数。
+     * 在多处理器上,完全阻塞和一次唤醒大量线程通常是一个非常缓慢的过程,因此当线程定期到达时,我们使用可充电自旋来避免它：当internalAwaitAdvance中的线程在阻塞之前注意到另一个到达,要有足够
+     * 的CPU可用,它会阻塞前旋转SPINS_PER_ARRIVAL多次。
+     * 在等待提前,每个到达时等待时阻塞之前旋转的次数。价值交易的良好公民vs大不必要的放缓。
+     * 
      */
     static final int SPINS_PER_ARRIVAL = (NCPU < 2) ? 1 : 1 << 8;
 
@@ -1028,6 +1289,10 @@ public class Phaser {
      * Possibly blocks and waits for phase to advance unless aborted.
      * Call only on root phaser.
      *
+     * <p>
+     *  可能阻塞并等待相位提前,除非中止。仅在根移相器上调用。
+     * 
+     * 
      * @param phase current phase
      * @param node if non-null, the wait node to track interrupt and timeout;
      * if null, denotes noninterruptible wait
@@ -1085,6 +1350,8 @@ public class Phaser {
 
     /**
      * Wait nodes for Treiber stack representing wait queue
+     * <p>
+     *  等待Treiber堆栈的节点表示等待队列
      */
     static final class QNode implements ForkJoinPool.ManagedBlocker {
         final Phaser phaser;

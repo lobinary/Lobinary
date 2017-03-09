@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,8 @@ package java.text;
  * DontCareFieldPosition defines no-op FieldDelegate. Its
  * singleton is used for the format methods that don't take a
  * FieldPosition.
+ * <p>
+ *  DontCareFieldPosition定义无操作FieldDelegate。它的单例用于不采用FieldPosition的格式方法。
  */
 class DontCareFieldPosition extends FieldPosition {
     // The singleton of DontCareFieldPosition.

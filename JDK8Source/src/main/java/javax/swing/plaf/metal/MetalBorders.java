@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,10 @@ import sun.swing.StringUIClientPropertyKey;
 
 /**
  * Factory object that can vend Borders appropriate for the metal L &amp; F.
+ * <p>
+ *  工厂对象可以售卖适合金属L&amp; F。
+ * 
+ * 
  * @author Steve Wilson
  */
 
@@ -52,6 +57,9 @@ public class MetalBorders {
     /**
      * Client property indicating the button shouldn't provide a rollover
      * indicator. Only used with the Ocean theme.
+     * <p>
+     *  指示按钮的客户端属性不应提供翻转指示符。仅用于海洋主题。
+     * 
      */
     static Object NO_BUTTON_ROLLOVER =
         new StringUIClientPropertyKey("NoButtonRollover");
@@ -246,6 +254,10 @@ public class MetalBorders {
 
     /**
      * Border for a Frame.
+     * <p>
+     *  框架的边界。
+     * 
+     * 
      * @since 1.4
      */
     static class FrameBorder extends AbstractBorder implements UIResource {
@@ -308,6 +320,10 @@ public class MetalBorders {
 
     /**
      * Border for a Frame.
+     * <p>
+     *  框架的边界。
+     * 
+     * 
      * @since 1.4
      */
     static class DialogBorder extends AbstractBorder implements UIResource
@@ -401,6 +417,10 @@ public class MetalBorders {
 
     /**
      * Border for an Error Dialog.
+     * <p>
+     *  错误对话框边框。
+     * 
+     * 
      * @since 1.4
      */
     static class ErrorDialogBorder extends DialogBorder implements UIResource
@@ -414,6 +434,10 @@ public class MetalBorders {
     /**
      * Border for a QuestionDialog.  Also used for a JFileChooser and a
      * JColorChooser..
+     * <p>
+     *  问题的边界对话。也用于JFileChooser和JColorChooser ..
+     * 
+     * 
      * @since 1.4
      */
     static class QuestionDialogBorder extends DialogBorder implements UIResource
@@ -426,6 +450,10 @@ public class MetalBorders {
 
     /**
      * Border for a Warning Dialog.
+     * <p>
+     *  警告对话框边框。
+     * 
+     * 
      * @since 1.4
      */
     static class WarningDialogBorder extends DialogBorder implements UIResource
@@ -438,6 +466,10 @@ public class MetalBorders {
 
     /**
      * Border for a Palette.
+     * <p>
+     *  调色板的边框。
+     * 
+     * 
      * @since 1.3
      */
     public static class PaletteBorder extends AbstractBorder implements UIResource {
@@ -651,6 +683,11 @@ public class MetalBorders {
      *
      * Note: This is identical to the package private class
      * BasicBorders.RolloverMarginBorder and should probably be consolidated.
+     * <p>
+     *  边界像边缘边界,但如果边距已由开发人员明确设置,则它将仅满足边际。
+     * 
+     *  注意：这与包私有类BasicBorders.RolloverMarginBorder相同,应该合并。
+     * 
      */
     static class RolloverMarginBorder extends EmptyBorder {
 
@@ -767,6 +804,10 @@ public class MetalBorders {
 
     /**
      * Returns a border instance for a JButton
+     * <p>
+     *  返回JButton的边框实例
+     * 
+     * 
      * @since 1.3
      */
     public static Border getButtonBorder() {
@@ -782,6 +823,10 @@ public class MetalBorders {
 
     /**
      * Returns a border instance for a text component
+     * <p>
+     *  返回文本组件的边框实例
+     * 
+     * 
      * @since 1.3
      */
     public static Border getTextBorder() {
@@ -797,6 +842,10 @@ public class MetalBorders {
 
     /**
      * Returns a border instance for a JTextField
+     * <p>
+     *  返回JTextField的边界实例
+     * 
+     * 
      * @since 1.3
      */
     public static Border getTextFieldBorder() {
@@ -878,6 +927,10 @@ public class MetalBorders {
 
     /**
      * Returns a border instance for a JToggleButton
+     * <p>
+     *  返回JToggleButton的边框实例
+     * 
+     * 
      * @since 1.3
      */
     public static Border getToggleButtonBorder() {
@@ -890,6 +943,8 @@ public class MetalBorders {
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.3
      */
     public static class ToggleButtonBorder extends ButtonBorder {
@@ -922,6 +977,10 @@ public class MetalBorders {
 
     /**
      * Border for a Table Header
+     * <p>
+     *  表头的边框
+     * 
+     * 
      * @since 1.3
      */
     public static class TableHeaderBorder extends javax.swing.border.AbstractBorder {
@@ -948,6 +1007,9 @@ public class MetalBorders {
 
     /**
      * Returns a border instance for a Desktop Icon
+     * <p>
+     *  返回桌面图标的边框实例
+     * 
      * @since 1.3
      */
     public static Border getDesktopIconBorder() {

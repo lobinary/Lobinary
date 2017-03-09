@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,24 @@ import com.sun.jmx.remote.util.EnvHelp;
  * {@link PasswordCallback} and that they return a {@link Subject} filled-in
  * with a {@link Principal}, for those users that are successfully
  * authenticated.</p>
+ * <p>
+ *  <p>此类代表基于{@link JMXAuthenticator}界面的<a href="{@docRoot}/../guide/security/jaas/JAASRefGuide.html">基于
+ * JAAS </a>的实现。
+ * </p >。
+ * 
+ *  <p>通过将提供的用户凭据传递给一个或多个认证机制({@link LoginModule})进行验证,以进行验证。
+ * 认证机制通过调用{@link NameCallback}和/或{@link PasswordCallback}来获取用户的凭据。
+ * 如果身份验证成功,则会返回使用{@link Principal}填写的经过身份验证的{@link Subject}。然后将根据此<code> Subject </code>执行授权检查。</p>。
+ * 
+ *  <p>默认情况下,配置单个基于文件的身份验证机制{@link FileLoginModule}(<code> FileLoginConfig </code>)。</p>
+ * 
+ * <p>要覆盖默认配置,请使用JRE / lib / management / management.properties文件中描述的<code> com.sun.management.jmxremote
+ * .login.config </code>管理属性。
+ * 将此属性设置为JAAS配置条目的名称,并确保该条目由安装的{@link Configuration}加载。
+ * 此外,请确保条目中指定的身份验证机制通过调用{@link NameCallback}和{@link PasswordCallback}获取用户的凭据,并返回填充{@link Principal}的{@link Subject}
+ * 对于已成功通过身份验证的用户。
+ * 将此属性设置为JAAS配置条目的名称,并确保该条目由安装的{@link Configuration}加载。</p>。
+ * 
  */
 public final class JMXPluggableAuthenticator implements JMXAuthenticator {
 
@@ -81,6 +100,10 @@ public final class JMXPluggableAuthenticator implements JMXAuthenticator {
      * Creates an instance of <code>JMXPluggableAuthenticator</code>
      * and initializes it with a {@link LoginContext}.
      *
+     * <p>
+     *  创建<code> JMXPluggableAuthenticator </code>的实例,并使用{@link LoginContext}初始化它。
+     * 
+     * 
      * @param env the environment containing configuration properties for the
      *            authenticator. Can be null, which is equivalent to an empty
      *            Map.
@@ -142,6 +165,10 @@ public final class JMXPluggableAuthenticator implements JMXAuthenticator {
      * Authenticate the <code>MBeanServerConnection</code> client
      * with the given client credentials.
      *
+     * <p>
+     *  使用给定的客户端凭据验证<code> MBeanServerConnection </code>客户端。
+     * 
+     * 
      * @param credentials the user-defined credentials to be passed in
      * to the server in order to authenticate the user before creating
      * the <code>MBeanServerConnection</code>.  This parameter must
@@ -258,11 +285,17 @@ public final class JMXPluggableAuthenticator implements JMXAuthenticator {
  * originally supplied by the JMX user) to the JAAS login module performing
  * the authentication. No interactive user prompting is required because the
  * credentials are already available to this class (via its enclosing class).
+ * <p>
+ *  此回调处理程序将用户名和密码(最初由JMX用户提供)提供给执行身份验证的JAAS登录模块。不需要交互式用户提示,因为凭据已经可用于此类(通过其封装类)。
+ * 
  */
 private final class JMXCallbackHandler implements CallbackHandler {
 
     /**
      * Sets the username and password in the appropriate Callback object.
+     * <p>
+     *  在相应的回调对象中设置用户名和密码。
+     * 
      */
     public void handle(Callback[] callbacks)
         throws IOException, UnsupportedCallbackException {
@@ -291,6 +324,11 @@ private final class JMXCallbackHandler implements CallbackHandler {
  *         com.sun.jmx.remote.security.FileLoginModule required;
  *     };
  * </pre>
+ * <p>
+ *  此类定义了基于文件的身份验证的JAAS配置。它等价于以下文本配置条目：
+ * <pre>
+ *  JMXPluggableAuthenticator {com.sun.jmx.remote.security.FileLoginModule required; };
+ * </pre>
  */
 private static class FileLoginConfig extends Configuration {
 
@@ -307,6 +345,10 @@ private static class FileLoginConfig extends Configuration {
     /**
      * Creates an instance of <code>FileLoginConfig</code>
      *
+     * <p>
+     *  创建<code> FileLoginConfig </code>的实例
+     * 
+     * 
      * @param passwordFile A filepath that identifies the password file to use.
      *                     If null then the default password file is used.
      */
@@ -329,6 +371,9 @@ private static class FileLoginConfig extends Configuration {
 
     /**
      * Gets the JAAS configuration for file-based authentication
+     * <p>
+     * 获取用于基于文件的身份验证的JAAS配置
+     * 
      */
     public AppConfigurationEntry[] getAppConfigurationEntry(String name) {
 
@@ -337,6 +382,8 @@ private static class FileLoginConfig extends Configuration {
 
     /**
      * Refreshes the configuration.
+     * <p>
+     *  刷新配置。
      */
     public void refresh() {
         // the configuration is fixed

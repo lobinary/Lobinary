@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -19,6 +20,11 @@ public interface TAG_RMI_CUSTOM_MAX_STREAM_FORMAT
      * and version 2 for GIOP 1.3 and higher.
      *
      * See Java to IDL ptc/02-01-12 1.4.11.
+     * <p>
+     *  RMI-IIOP有多个流格式版本。
+     * 服务器可以通过包括TAG_RMI_CUSTOM_MAX_STREAM_FORMAT标记的组件来指定其最大版本,或者依赖于版本1(对于GIOP 1.2和更低)和版本2(对于GIOP 1.3和更高版本)的默
+     * 认值。
+     *  RMI-IIOP有多个流格式版本。
      */
   public static final int value = (int)(38L);
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,12 @@ import java.awt.image.ImageFilter;
  * paradigm. Examples of these image operators are: {@link ConvolveOp},
  * {@link AffineTransformOp} and {@link LookupOp}.
  *
+ * <p>
+ *  <code> BufferedImageFilter </code>类将<code> ImageFilter </code>作为子类,以提供使用单源/单目的图像运算符({@link BufferedImageOp}
+ * )过滤<code> Image Producer / Consumer / Observer范例中的BufferedImage </code>。
+ * 这些图像运算符的示例是：{@link ConvolveOp},{@link AffineTransformOp}和{@link LookupOp}。
+ * 
+ * 
  * @see ImageFilter
  * @see BufferedImage
  * @see BufferedImageOp
@@ -54,6 +61,10 @@ public class BufferedImageFilter extends ImageFilter implements Cloneable {
     /**
      * Constructs a <code>BufferedImageFilter</code> with the
      * specified single-source/single-destination operator.
+     * <p>
+     *  使用指定的单源/单目标运算符构造<code> BufferedImageFilter </code>。
+     * 
+     * 
      * @param op the specified <code>BufferedImageOp</code> to
      *           use to filter a <code>BufferedImage</code>
      * @throws NullPointerException if op is null
@@ -68,6 +79,10 @@ public class BufferedImageFilter extends ImageFilter implements Cloneable {
 
     /**
      * Returns the <code>BufferedImageOp</code>.
+     * <p>
+     *  返回<code> BufferedImageOp </code>。
+     * 
+     * 
      * @return the operator of this <code>BufferedImageFilter</code>.
      */
     public BufferedImageOp getBufferedImageOp() {
@@ -86,6 +101,13 @@ public class BufferedImageFilter extends ImageFilter implements Cloneable {
      * operation could result in problems with retrieving the requested
      * pixels.
      * <p>
+     * <p>
+     *  过滤{@link ImageConsumer}界面的{@link ImageConsumer#setDimensions(int,int)setDimensions}方法中提供的信息。
+     * <p>
+     *  注意：此方法旨在由其像素正在被过滤的<code> Image </code>的{@link ImageProducer}调用。
+     * 使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能会导致检索请求的像素时出现问题。
+     * <p>
+     * 
      * @param width the width to which to set the width of this
      *        <code>BufferedImageFilter</code>
      * @param height the height to which to set the height of this
@@ -117,6 +139,17 @@ public class BufferedImageFilter extends ImageFilter implements Cloneable {
      * should avoid calling this method directly since that
      * operation could result in problems with retrieving the
      * requested pixels.
+     * <p>
+     *  过滤<code> ImageConsumer </code>界面的{@link ImageConsumer#setColorModel(ColorModel)setColorModel}方法中提供的信
+     * 息。
+     * <p>
+     *  如果<code> model </code>是<code> null </code>,此方法清除此<code> BufferedImageFilter </code>的当前<code> ColorMo
+     * del </code>。
+     * <p>
+     * 注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能会导致检索请求的像素时出现问题。
+     * 
+     * 
      * @param model the {@link ColorModel} to which to set the
      *        <code>ColorModel</code> of this <code>BufferedImageFilter</code>
      * @see ImageConsumer#setColorModel
@@ -153,6 +186,13 @@ public class BufferedImageFilter extends ImageFilter implements Cloneable {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     *  过滤在<code> ImageConsumer </code>接口的<code> setPixels </code>方法中提供的信息,该方法接收字节数组。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能会导致检索请求的像素时出现问题。
+     * 
+     * 
      * @throws IllegalArgumentException if width or height are less than
      * zero.
      * @see ImageConsumer#setPixels(int, int, int, int, ColorModel, byte[],
@@ -240,6 +280,13 @@ public class BufferedImageFilter extends ImageFilter implements Cloneable {
      * retrieve pixels from an image should avoid calling this method
      * directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     *  过滤在<code> ImageConsumer </code>接口的<code> setPixels </code>方法中提供的信息,该接口采用整数数组。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能会导致检索请求的像素时出现问题。
+     * 
+     * 
      * @throws IllegalArgumentException if width or height are less than
      * zero.
      * @see ImageConsumer#setPixels(int, int, int, int, ColorModel, int[],
@@ -330,6 +377,11 @@ public class BufferedImageFilter extends ImageFilter implements Cloneable {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     *  过滤在<code> ImageConsumer </code>界面的<code> imageComplete </code>方法中提供的信息。
+     * <p>
+     * 注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 
      * @param status the status of image loading
      * @throws ImagingOpException if there was a problem calling the filter
      * method of the <code>BufferedImageOp</code> associated with this

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.management.*;
  * Exposes the remote management interface of the MLet
  * MBean.
  *
+ * <p>
+ *  显示MLet MBean的远程管理接口。
+ * 
+ * 
  * @since 1.5
  */
 public interface MLetMBean   {
@@ -51,6 +56,11 @@ public interface MLetMBean   {
      * encoding. The MBeans specified in the MLET file will be
      * instantiated and registered in the MBean server.
      *
+     * <p>
+     *  加载包含定义要添加到MBean服务器的MBean的MLET标记的文本文件。文本文件的位置由URL指定。使用UTF-8编码读取文本文件。
+     * 在MLET文件中指定的MBean将被实例化并在MBean服务器中注册。
+     * 
+     * 
      * @param url The URL of the text file to be loaded as String object.
      *
      * @return A set containing one entry per MLET tag in the m-let
@@ -74,6 +84,11 @@ public interface MLetMBean   {
      * encoding. The MBeans specified in the MLET file will be
      * instantiated and registered in the MBean server.
      *
+     * <p>
+     *  加载包含定义要添加到MBean服务器的MBean的MLET标记的文本文件。文本文件的位置由URL指定。使用UTF-8编码读取文本文件。
+     * 在MLET文件中指定的MBean将被实例化并在MBean服务器中注册。
+     * 
+     * 
      * @param url The URL of the text file to be loaded as URL object.
      *
      * @return A set containing one entry per MLET tag in the m-let
@@ -94,6 +109,10 @@ public interface MLetMBean   {
      * Appends the specified URL to the list of URLs to search for classes and
      * resources.
      *
+     * <p>
+     *  将指定的URL附加到URL列表中以搜索类和资源。
+     * 
+     * 
      * @param url the URL to add.
      */
     public void addURL(URL url) ;
@@ -102,6 +121,10 @@ public interface MLetMBean   {
      * Appends the specified URL to the list of URLs to search for classes and
      * resources.
      *
+     * <p>
+     *  将指定的URL附加到URL列表中以搜索类和资源。
+     * 
+     * 
      * @param url the URL to add.
      *
      * @exception ServiceNotFoundException The specified URL is malformed.
@@ -113,6 +136,10 @@ public interface MLetMBean   {
      * This includes the original list of URLs specified to the constructor,
      * along with any URLs subsequently appended by the addURL() method.
      *
+     * <p>
+     *  返回用于加载类和资源的网址的搜索路径。这包括指定给构造函数的原始URL列表,以及随后由addURL()方法附加的任何URL。
+     * 
+     * 
      * @return the list of URLs.
      */
     public URL[] getURLs();
@@ -122,6 +149,10 @@ public interface MLetMBean   {
      *   independent of the location of the code.
      *   The name of a resource is a "/"-separated path name that identifies the resource.
      *
+     * <p>
+     *  资源是可以通过类代码以独立于代码的位置的方式访问的一些数据(图像,音频,文本等)。资源的名称是标识资源的"/"分隔的路径名。
+     * 
+     * 
      * @param name The resource name
      *
      * @return  An URL for reading the resource, or null if the resource could not be found or the caller doesn't have adequate privileges to get the
@@ -132,6 +163,10 @@ public interface MLetMBean   {
     /** Returns an input stream for reading the specified resource. The search order is described in the documentation for
      *  getResource(String).
      *
+     * <p>
+     *  getResource(String)。
+     * 
+     * 
      * @param name  The resource name
      *
      * @return An input stream for reading the resource, or null if the resource could not be found
@@ -146,6 +181,10 @@ public interface MLetMBean   {
      * The name of a resource is a "/"-separated path name that
      * identifies the resource.
      *
+     * <p>
+     * 查找具有给定名称的所有资源。资源是可以通过类代码以独立于代码的位置的方式访问的一些数据(图像,音频,文本等)。资源的名称是标识资源的"/"分隔的路径名。
+     * 
+     * 
      * @param name The  resource name.
      *
      * @return An enumeration of URL to the resource. If no resources
@@ -161,6 +200,10 @@ public interface MLetMBean   {
      * Gets the current directory used by the library loader for
      * storing native libraries before they are loaded into memory.
      *
+     * <p>
+     *  获取库加载器用于在将本机库加载到内存之前存储本机库所使用的当前目录。
+     * 
+     * 
      * @return The current directory used by the library loader.
      *
      * @see #setLibraryDirectory
@@ -174,6 +217,9 @@ public interface MLetMBean   {
      * Sets the directory used by the library loader for storing
      * native libraries before they are loaded into memory.
      *
+     * <p>
+     *  设置库加载器用于在将本机库加载到内存之前存储本机库的目录。
+     * 
      * @param libdir The directory used by the library loader.
      *
      * @see #getLibraryDirectory

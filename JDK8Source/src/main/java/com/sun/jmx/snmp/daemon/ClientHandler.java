@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,8 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_ADAPTOR_LOGGER;
 /**
  * The <CODE>ClientHandler</CODE> class is the base class of each
  * adaptor.<p>
+ * <p>
+ *  <CODE> ClientHandler </CODE>类是每个适配器的基类。<p>
  */
 
 abstract class ClientHandler implements Runnable {

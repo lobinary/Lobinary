@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 
@@ -56,6 +66,17 @@ import org.xml.sax.SAXException;
  * org.xml.sax.DocumentHandler#endDocument}.
  *
  *
+ * <p>
+ *  实现一个支持DOM和SAX序列化的文本序列化器。有关使用说明,请参阅{@link Serializer}。
+ * <p>
+ *  如果使用输出流,则从输出格式(默认为<tt> UTF-8 </tt>)获取编码。如果使用写入程序,请确保写入程序使用与输出格式中指定的相同的编码(如果适用)。
+ * <p>
+ *  序列化器支持DOM和SAX。 DOM序列化通过调用{@link #serialize}完成,SAX序列化通过触发SAX事件并使用序列化程序作为文档处理程序来完成。
+ * <p>
+ *  如果在序列化时发生I / O异常,则序列化器不会直接抛出异常,而只是在序列化结束时抛出异常(DOM或SAX的{@link org.xml.sax.DocumentHandler#endDocument}
+ * 。
+ * 
+ * 
  * @author <a href="mailto:arkin@intalio.com">Assaf Arkin</a>
  * @see Serializer
  */
@@ -68,6 +89,9 @@ public class TextSerializer
      * Constructs a new serializer. The serializer cannot be used without
      * calling {@link #setOutputCharStream} or {@link #setOutputByteStream}
      * first.
+     * <p>
+     * 构造新的序列化程序。不调用{@link #setOutputCharStream}或{@link #setOutputByteStream}时,不能使用序列化器。
+     * 
      */
     public TextSerializer()
     {
@@ -227,6 +251,12 @@ public class TextSerializer
      * pre-root comments and PIs that were accumulated in the document
      * (see {@link #serializePreRoot}). Pre-root will be serialized even if
      * this is not the first root element of the document.
+     * <p>
+     *  调用通过根元素序列化文档的DOCTYPE。
+     * <p>
+     *  此方法将检查它是否尚未被调用({@link #_started}),将序列化文档类型声明,并将序列化所有在根文档中累积的注释和PI(参见{@link #serializePreRoot })。
+     * 预根将被序列化,即使这不是文档的第一个根元素。
+     * 
      */
     protected void startDocument( String rootTagName )
         throws IOException
@@ -245,6 +275,9 @@ public class TextSerializer
      * Called to serialize a DOM element. Equivalent to calling {@link
      * #startElement}, {@link #endElement} and serializing everything
      * inbetween, but better optimized.
+     * <p>
+     *  被称为序列化DOM元素。相当于调用{@link #startElement},{@link #endElement}并将其中的所有内容序列化,但进行了更好的优化。
+     * 
      */
     protected void serializeElement( Element elem )
         throws IOException
@@ -299,6 +332,9 @@ public class TextSerializer
     /**
      * Serialize the DOM node. This method is unique to the Text serializer.
      *
+     * <p>
+     *  序列化DOM节点。此方法对于文本序列化程序是唯一的。
+     * 
      * @param node The node to serialize
      */
     protected void serializeNode( Node node )

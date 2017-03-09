@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,12 @@ import com.sun.java.swing.plaf.windows.TMSchema.State;
  * for short term storage or RMI between applications running the same
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
+ * <p>
+ *  Windows组件的翻译。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
  */
 public class WindowsMenuUI extends BasicMenuUI {
     protected Integer menuBarHeight;
@@ -69,6 +76,9 @@ public class WindowsMenuUI extends BasicMenuUI {
                     /*
                      * Only paint rollover if no other menu on menubar is
                      * selected
+                     * <p>
+                     *  如果没有选择菜单上的其他菜单,则仅绘制翻转
+                     * 
                      */
                     State stateTmp = state;
                     state = (menu.isEnabled()) ? State.HOT
@@ -93,6 +103,9 @@ public class WindowsMenuUI extends BasicMenuUI {
 
                 /*
                  * on Vista top level menu for non active frame looks disabled
+                 * <p>
+                 *  在Vista顶级菜单为非活动帧看起来禁用
+                 * 
                  */
                 if (((JMenu) menu).isTopLevelMenu() && WindowsMenuItemUI.isVistaPainting()) {
                     if (! WindowsMenuBarUI.isActive(menu)) {
@@ -125,6 +138,10 @@ public class WindowsMenuUI extends BasicMenuUI {
 
     /**
      * Draws the background of the menu.
+     * <p>
+     *  绘制菜单的背景。
+     * 
+     * 
      * @since 1.4
      */
     protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
@@ -200,6 +217,10 @@ public class WindowsMenuUI extends BasicMenuUI {
     /**
      * Method which renders the text of the current menu item.
      * <p>
+     * <p>
+     *  呈现当前菜单项的文本的方法。
+     * <p>
+     * 
      * @param g Graphics context
      * @param menuItem Current menu item to render
      * @param textRect Bounding rectangle to render the text.
@@ -248,6 +269,9 @@ public class WindowsMenuUI extends BasicMenuUI {
     /**
      * This class implements a mouse handler that sets the rollover flag to
      * true when the mouse enters the menu and false when it exits.
+     * <p>
+     *  这个类实现了一个鼠标处理程序,当鼠标进入菜单时将滚动标记设置为true,退出时设置为false。
+     * 
      * @since 1.4
      */
     protected class WindowsMouseInputHandler extends BasicMenuUI.MouseInputHandler {

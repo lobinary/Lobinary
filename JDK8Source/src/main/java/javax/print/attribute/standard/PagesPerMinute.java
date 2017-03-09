@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,14 @@ import javax.print.attribute.PrintServiceAttribute;
  * name.
  * <P>
  *
+ * <p>
+ *  类PagesPerMinute是整数值打印属性,其指示可以由该打印机生成的最近整数的每分钟页面的标称数量(例如,单面,黑白)。此属性是信息性的,而不是服务保证。
+ * 一般来说,它是在营销文献中用来描述设备的值。值为0表示处理页面所需的时间超过两分钟的设备。
+ * <P>
+ *  <B> IPP兼容性：</B>整数值给出IPP整数值。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class PagesPerMinute extends IntegerSyntax
@@ -52,6 +61,10 @@ public final class PagesPerMinute extends IntegerSyntax
      * Construct a new pages per minute attribute with the given integer
      * value.
      *
+     * <p>
+     *  使用给定的整数值构造每分钟新页面属性。
+     * 
+     * 
      * @param  value  Integer value.
      *
      * @exception  IllegalArgumentException
@@ -75,6 +88,18 @@ public final class PagesPerMinute extends IntegerSyntax
      * value are equal.
      * </OL>
      *
+     * <p>
+     *  返回此每分钟页面属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是PagesPerMinute类的实例。
+     * <LI>
+     *  此每分钟属性值和<CODE>对象</CODE>的值相等。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this pages per
@@ -91,6 +116,8 @@ public final class PagesPerMinute extends IntegerSyntax
      * <P>
      * For class PagesPerMinute, the category is class PagesPerMinute itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -105,6 +132,12 @@ public final class PagesPerMinute extends IntegerSyntax
      * For class PagesPerMinute, the
      * category name is <CODE>"pages-per-minute"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于PagesPerMinute类,类别是PagesPerMinute类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

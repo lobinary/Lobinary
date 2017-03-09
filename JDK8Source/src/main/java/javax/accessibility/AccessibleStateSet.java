@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.util.ResourceBundle;
  * current overall state of the object, such as whether it is enabled,
  * has focus, etc.
  *
+ * <p>
+ *  AccessibleStateSet类确定组件的状态集。组件的状态集是一组AccessibleState对象和描述。 E.G.,对象的当前总体状态,例如它是否被启用,具有焦点等。
+ * 
+ * 
  * @see AccessibleState
  *
  * @author      Willie Walker
@@ -44,6 +49,10 @@ public class AccessibleStateSet {
 
     /**
      * Each entry in the Vector represents an AccessibleState.
+     * <p>
+     *  向量中的每个条目表示一个AccessibleState。
+     * 
+     * 
      * @see #add
      * @see #addAll
      * @see #remove
@@ -55,6 +64,9 @@ public class AccessibleStateSet {
 
     /**
      * Creates a new empty state set.
+     * <p>
+     *  创建新的空状态集。
+     * 
      */
     public AccessibleStateSet() {
         states = null;
@@ -64,6 +76,10 @@ public class AccessibleStateSet {
      * Creates a new state with the initial set of states contained in
      * the array of states passed in.  Duplicate entries are ignored.
      *
+     * <p>
+     *  使用传入的状态数组中包含的初始状态集创建新状态。重复条目将被忽略。
+     * 
+     * 
      * @param states an array of AccessibleState describing the state set.
      */
     public AccessibleStateSet(AccessibleState[] states) {
@@ -83,6 +99,10 @@ public class AccessibleStateSet {
      * set is unchanged and the return value is false.  Otherwise,
      * the state is added to the state set and the return value is
      * true.
+     * <p>
+     *  如果当前状态集尚未存在,则将新状态添加到当前状态集。如果状态已经处于设置的状态,则状态集不变,返回值为false。否则,状态将添加到状态集,返回值为true。
+     * 
+     * 
      * @param state the state to add to the state set
      * @return true if state is added to the state set; false if the state set
      * is unchanged
@@ -106,6 +126,10 @@ public class AccessibleStateSet {
     /**
      * Adds all of the states to the existing state set.  Duplicate entries
      * are ignored.
+     * <p>
+     *  将所有状态添加到现有状态集。重复的条目将被忽略。
+     * 
+     * 
      * @param states  AccessibleState array describing the state set.
      */
     public void addAll(AccessibleState[] states) {
@@ -127,6 +151,10 @@ public class AccessibleStateSet {
      * will be false.  If the state is in the state set, it will be removed
      * from the set and the return value will be true.
      *
+     * <p>
+     *  从当前状态集中删除状态。如果状态不在集合中,则状态集将保持不变,返回值为false。如果状态处于设置的状态,它将从集合中移除,返回值将为true。
+     * 
+     * 
      * @param state the state to remove from the state set
      * @return true if the state is in the state set; false if the state set
      * will be unchanged
@@ -141,6 +169,9 @@ public class AccessibleStateSet {
 
     /**
      * Removes all the states from the current state set.
+     * <p>
+     *  从当前状态集中删除所有状态。
+     * 
      */
     public void clear() {
         if (states != null) {
@@ -150,6 +181,10 @@ public class AccessibleStateSet {
 
     /**
      * Checks if the current state is in the state set.
+     * <p>
+     *  检查当前状态是否处于设置的状态。
+     * 
+     * 
      * @param state the state
      * @return true if the state is in the state set; otherwise false
      */
@@ -163,6 +198,10 @@ public class AccessibleStateSet {
 
     /**
      * Returns the current state set as an array of AccessibleState
+     * <p>
+     *  返回设置为AccessibleState数组的当前状态
+     * 
+     * 
      * @return AccessibleState array containing the current state.
      */
     public AccessibleState[] toArray() {
@@ -181,6 +220,9 @@ public class AccessibleStateSet {
      * Creates a localized String representing all the states in the set
      * using the default locale.
      *
+     * <p>
+     *  使用默认语言环境创建表示集合中所有状态的本地化字符串。
+     * 
      * @return comma separated localized String
      * @see AccessibleBundle#toDisplayString
      */

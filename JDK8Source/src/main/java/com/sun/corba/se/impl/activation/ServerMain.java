@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,8 @@ import com.sun.corba.se.spi.activation.ActivatorHelper ;
 import com.sun.corba.se.impl.orbutil.ORBConstants ;
 
 /**
+/* <p>
+/* 
  * @author      Ken Cavanaugh
  * @since       JDK1.2
  */
@@ -50,6 +53,10 @@ public class ServerMain
     * 3.  Remove ServerCallback from POAORB.
     * 4.  Needs to be merged with Harold's changes to support SSL.
     * 5.  Logs need to be internationalized.
+    * <p>
+    *  1.重写所有使用ORB属性以从某处使用常量。字符串分散在这里,ORB类和ServerTableEntry之间。 2.考虑一个更一般的日志工具。 3.从POAORB中删除ServerCallback。
+    *  4.需要与Harold的更改合并以支持SSL。日志需要国际化。
+    * 
     */
 
     public final static int OK = 0;
@@ -104,6 +111,7 @@ public class ServerMain
     }
 
     /** Write a time-stamped message to the indicated PrintStream.
+    /* <p>
     */
     private static void writeLogMessage( PrintStream pstream, String msg )
     {
@@ -112,6 +120,7 @@ public class ServerMain
     }
 
     /** Write information to standard out only.
+    /* <p>
     */
     public static void logInformation( String msg )
     {
@@ -119,6 +128,7 @@ public class ServerMain
     }
 
     /** Write error message to standard out and standard err.
+    /* <p>
     */
     public static void logError( String msg )
     {
@@ -130,6 +140,8 @@ public class ServerMain
     * System.exit( code ).  If code == OK, write a normal termination
     * message to standard out, otherwise write an abnormal termination
     * message to standard out and standard error.
+    * <p>
+    *  System.exit(code)。如果code == OK,写一个正常的终止消息到标准输出,否则写一个异常终止消息到标准输出和标准错误。
     */
     public static void logTerminal( String msg, int code )
     {

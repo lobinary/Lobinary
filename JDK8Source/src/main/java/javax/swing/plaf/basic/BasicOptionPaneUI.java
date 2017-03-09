@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -73,6 +74,22 @@ import sun.security.action.GetPropertyAction;
  * The <code>Container</code>, message, icon, and buttons are all
  * determined from abstract methods.
  *
+ * <p>
+ *  提供<code> JOptionPane </code>的基本外观和感觉。
+ *  <code> BasicMessagePaneUI </code>提供了将图标,消息和按钮放入<code> Container </code>中的方法。一般来说,布局将如下所示：。
+ * <pre>
+ *  ------------------ | i |消息| | c |消息| | o |消息| | n |消息| ------------------ |按钮| | ________________ |。
+ * </pre>
+ *  图标是包含在<code> JLabel </code>中的<code> Icon </code>的一个实例。
+ * 消息是一个不透明的对象,并测试以下内容：如果消息是<code> Component </code>,它被添加到<code> Container </code>,如果它是一个<code> Icon <代码>
+ * 它被包装在一个<code> JLabel </code>中并添加到<code> Container </code>中,否则它被包装在一个<code> JLabel </code>中。
+ *  图标是包含在<code> JLabel </code>中的<code> Icon </code>的一个实例。
+ * <p>
+ *  上述布局在选项窗格的<code> ComponentOrientation </code>属性是从左到右水平时使用。布局将针对其他方向进行适当调整。
+ * <p>
+ *  <code>容器</code>,消息,图标和按钮均由抽象方法确定。
+ * 
+ * 
  * @author James Gosling
  * @author Scott Violet
  * @author Amy Fowler
@@ -87,12 +104,17 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * <code>JOptionPane</code> that the receiver is providing the
      * look and feel for.
+     * <p>
+     *  <code> JOptionPane </code>接收器提供的外观和感觉。
+     * 
      */
     protected JOptionPane         optionPane;
 
     protected Dimension minimumSize;
 
     /** JComponent provide for input if optionPane.getWantsInput() returns
+    /* <p>
+    /* 
      * true. */
     protected JComponent          inputComponent;
 
@@ -100,6 +122,8 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     protected Component           initialFocusComponent;
 
     /** This is set to true in validateComponent if a Component is contained
+    /* <p>
+    /* 
      * in either the message or the buttons. */
     protected boolean             hasCustomComponents;
 
@@ -125,6 +149,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
 
     /**
       * Creates a new BasicOptionPaneUI instance.
+      * <p>
+      *  创建一个新的BasicOptionPaneUI实例。
+      * 
       */
     public static ComponentUI createUI(JComponent x) {
         return new BasicOptionPaneUI();
@@ -133,6 +160,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
       * Installs the receiver as the L&amp;F for the passed in
       * <code>JOptionPane</code>.
+      * <p>
+      *  将接收器安装为<code> JOptionPane </code>中传递的L&amp; F。
+      * 
       */
     public void installUI(JComponent c) {
         optionPane = (JOptionPane)c;
@@ -146,6 +176,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
       * Removes the receiver from the L&amp;F controller of the passed in split
       * pane.
+      * <p>
+      *  从传入的拆分窗格的L&amp; F控制器中删除接收器。
+      * 
       */
     public void uninstallUI(JComponent c) {
         uninstallComponents();
@@ -245,6 +278,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Returns the minimum size the option pane should be. Primarily
      * provided for subclassers wishing to offer a different minimum size.
+     * <p>
+     * 返回选项窗格应为的最小大小。主要提供给希望提供不同最小尺寸的子类。
+     * 
      */
     public Dimension getMinimumOptionPaneSize() {
         if (minimumSize == null) {
@@ -260,6 +296,10 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * size that is returned is the maximum of the preferred size of
      * the <code>LayoutManager</code> for the <code>JOptionPane</code>, and
      * <code>getMinimumOptionPaneSize</code>.
+     * <p>
+     *  如果<code> c </code>是包含接收器的<code> JOptionPane </code>,则返回的首选大小是<code> LayoutManager </code>的首选大小的最大值<code>
+     *  JOptionPane </code>和<code> getMinimumOptionPaneSize </code>。
+     * 
      */
     public Dimension getPreferredSize(JComponent c) {
         if (c == optionPane) {
@@ -284,6 +324,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * Messaged from installComponents to create a Container containing the
      * body of the message. The icon is the created by calling
      * <code>addIcon</code>.
+     * <p>
+     *  从installComponents消息以创建包含消息正文的Container。该图标是通过调用<code> addIcon </code>创建的。
+     * 
      */
     protected Container createMessageArea() {
         JPanel top = new JPanel();
@@ -335,6 +378,15 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * <code>internallyCreated</code> is true if Objc is an instance
      * of Component and was created internally by this method (this is
      * used to correctly set hasCustomComponents only if !internallyCreated).
+     * <p>
+     *  创建适当的对象来表示<code> msg </code>,并将它放置到<code> container </code>中。
+     * 如果<code> msg </code>是Component的一个实例,则直接添加它,如果它是一个Icon,则创建一个JLabel来表示它,否则为该字符串创建一个JLabel,如果<code> d < code>
+     * 是一个Object [],这个方法将被递归调用给孩子。
+     *  创建适当的对象来表示<code> msg </code>,并将它放置到<code> container </code>中。
+     *  <code> internalCreated </code>为true如果Objc是Component的一个实例,并且是由这个方法内部创建的(这只用于正确设置hasCustomComponents,只
+     * 有！internalCreated)。
+     *  创建适当的对象来表示<code> msg </code>,并将它放置到<code> container </code>中。
+     * 
      */
     protected void addMessageComponents(Container container,
                                      GridBagConstraints cons,
@@ -433,6 +485,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Returns the message to display from the JOptionPane the receiver is
      * providing the look and feel for.
+     * <p>
+     *  返回从JOptionPane显示的消息,接收器提供的外观和感觉。
+     * 
      */
     protected Object getMessage() {
         inputComponent = null;
@@ -441,6 +496,10 @@ public class BasicOptionPaneUI extends OptionPaneUI {
                 /* Create a user component to capture the input. If the
                    selectionValues are non null the component and there
                    are < 20 values it'll be a combobox, if non null and
+                /* <p>
+                /*  selectionValues非零组件,并且有<20个值,它将是一个组合框,如果非null和
+                /* 
+                /* 
                    >= 20, it'll be a list, otherwise it'll be a textfield. */
                 Object             message = optionPane.getMessage();
                 Object[]           sValues = optionPane.getSelectionValues();
@@ -516,6 +575,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * Creates and adds a JLabel representing the icon returned from
      * <code>getIcon</code> to <code>top</code>. This is messaged from
      * <code>createMessageArea</code>
+     * <p>
+     *  创建并添加一个表示从<code> getIcon </code>返回<code> top </code>的图标的JLabel。这是从<code> createMessageArea </code>
+     * 
      */
     protected void addIcon(Container top) {
         /* Create the icon. */
@@ -534,6 +596,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * Returns the icon from the JOptionPane the receiver is providing
      * the look and feel for, or the default icon as returned from
      * <code>getDefaultIcon</code>.
+     * <p>
+     * 从JOptionPane返回图标,接收器提供的外观和感觉,或从<code> getDefaultIcon </code>返回的默认图标。
+     * 
      */
     protected Icon getIcon() {
         Icon      mIcon = (optionPane == null ? null : optionPane.getIcon());
@@ -545,6 +610,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
 
     /**
      * Returns the icon to use for the passed in type.
+     * <p>
+     *  返回要用于传入类型的图标。
+     * 
      */
     protected Icon getIconForType(int messageType) {
         if(messageType < 0 || messageType > 3)
@@ -572,6 +640,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
 
     /**
      * Returns the maximum number of characters to place on a line.
+     * <p>
+     *  返回要放置在一行上的最大字符数。
+     * 
      */
     protected int getMaxCharactersPerLineCount() {
         return optionPane.getMaxCharactersPerLineCount();
@@ -580,6 +651,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
    /**
      * Recursively creates new JLabel instances to represent <code>d</code>.
      * Each JLabel instance is added to <code>c</code>.
+     * <p>
+     *  递归地创建新的JLabel实例来表示<code> d </code>。每个JLabel实例都添加到<code> c </code>。
+     * 
      */
     protected void burstStringInto(Container c, String d, int maxll) {
         // Primitive line wrapping
@@ -609,6 +683,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Creates and returns a Container containing the buttons. The buttons
      * are created by calling <code>getButtons</code>.
+     * <p>
+     *  创建并返回包含按钮的容器。这些按钮是通过调用<code> getButtons </code>创建的。
+     * 
      */
     protected Container createButtonArea() {
         JPanel bottom = new JPanel();
@@ -637,6 +714,10 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * differs from addMessageComponents in that it will recurse on
      * <code>buttons</code> and that if button is not a Component
      * it will create an instance of JButton.
+     * <p>
+     *  创建适当的对象来代表<code>按钮</code>中的每个对象,并将其添加到<code> container </code>中。
+     * 这与addMessageComponents的不同之处在于它将在<code>按钮</code>上递归,并且如果按钮不是组件,它将创建一个JButton的实例。
+     * 
      */
     protected void addButtonComponents(Container container, Object[] buttons,
                                  int initialIndex) {
@@ -716,6 +797,10 @@ public class BasicOptionPaneUI extends OptionPaneUI {
                               setSyncAllWidths((sizeButtonsToSame && createdAll));
             /* Set the padding, windows seems to use 8 if <= 2 components,
                otherwise 4 is used. It may actually just be the size of the
+            /* <p>
+            /*  否则使用4。它可能实际上只是大小的
+            /* 
+            /* 
                buttons is always the same, not sure. */
             if (DefaultLookup.getBoolean(optionPane, this,
                    "OptionPane.setButtonMargin", true) && sizeButtonsToSame &&
@@ -744,6 +829,12 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * YES_NO_OPTION, yesNoOptions is returned, if the type is
      * YES_NO_CANCEL_OPTION yesNoCancelOptions is returned, otherwise
      * defaultButtons are returned.
+     * <p>
+     *  返回从JOptionPane显示的按钮,接收器提供的外观和感觉。
+     * 如果JOptionPane有选项集,它们将被提供,否则如果optionType为YES_NO_OPTION,则返回yesNoOptions,如果类型为YES_NO_CANCEL_OPTION,则返回ye
+     * sNOCancelOptions,否则返回defaultButtons。
+     *  返回从JOptionPane显示的按钮,接收器提供的外观和感觉。
+     * 
      */
     protected Object[] getButtons() {
         if (optionPane != null) {
@@ -829,6 +920,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Returns true, basic L&amp;F wants all the buttons to have the same
      * width.
+     * <p>
+     *  返回true,基本L&amp; F要求所有按钮具有相同的宽度。
+     * 
      */
     protected boolean getSizeButtonsToSameWidth() {
         return true;
@@ -838,6 +932,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * Returns the initial index into the buttons to select. The index
      * is calculated from the initial value from the JOptionPane and
      * options of the JOptionPane or 0.
+     * <p>
+     *  将初始索引返回到要选择的按钮。索引根据JOptionPane的初始值和JOptionPane的选项或0计算。
+     * 
      */
     protected int getInitialValueIndex() {
         if (optionPane != null) {
@@ -860,6 +957,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Sets the input value in the option pane the receiver is providing
      * the look and feel for based on the value in the inputComponent.
+     * <p>
+     * 在选项窗格中设置输入值,接收器根据inputComponent中的值提供外观和感觉。
+     * 
      */
     protected void resetInputValue() {
         if(inputComponent != null && (inputComponent instanceof JTextField)) {
@@ -879,6 +979,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * If inputComponent is non-null, the focus is requested on that,
      * otherwise request focus on the default value
+     * <p>
+     *  如果inputComponent是非null,则请求焦点,否则请求焦点在默认值
+     * 
      */
     public void selectInitialValue(JOptionPane op) {
         if (inputComponent != null)
@@ -899,6 +1002,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Returns true if in the last call to validateComponent the message
      * or buttons contained a subclass of Component.
+     * <p>
+     *  返回true如果在最后一次调用validateComponent消息或按钮包含Component的子类。
+     * 
      */
     public boolean containsCustomComponents(JOptionPane op) {
         return hasCustomComponents;
@@ -913,6 +1019,12 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      *
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicOptionPaneUI}.
+     * <p>
+     *  <code> ButtonAreaLayout </code>的行为方式类似于<code> FlowLayout </code>。它从左到右排列所有组件。
+     * 如果<code> syncAllWidths </code>为true,则每个组件的宽度将设置为最大的首选大小宽度。
+     * 
+     *  该类应当被视为"受保护的"内部类。实例化它只在{@code BasicOptionPaneUI}的子类中。
+     * 
      */
     public static class ButtonAreaLayout implements LayoutManager {
         protected boolean           syncAllWidths;
@@ -925,6 +1037,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
          * Indicates whether or not centersChildren should be used vs
          * the orientation. This is done for backward compatibility
          * for subclassers.
+         * <p>
+         *  指示是否应使用centersChildren与方向。这是为了向后兼容子类。
+         * 
          */
         private boolean useOrientation;
 
@@ -1116,6 +1231,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicOptionPaneUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在{@code BasicOptionPaneUI}的子类中。
+     * 
      */
     public class PropertyChangeHandler implements PropertyChangeListener {
         /**
@@ -1123,6 +1241,10 @@ public class BasicOptionPaneUI extends OptionPaneUI {
          * optionPane and is one of the ICON_PROPERTY, MESSAGE_PROPERTY,
          * OPTIONS_PROPERTY or INITIAL_VALUE_PROPERTY,
          * validateComponent is invoked.
+         * <p>
+         *  如果PropertyChangeEvent <code> e </code>的源等于optionPane,并且是ICON_PROPERTY,MESSAGE_PROPERTY,OPTIONS_PROPE
+         * RTY或INITIAL_VALUE_PROPERTY中的一个,则调用validateComponent。
+         * 
          */
         public void propertyChange(PropertyChangeEvent e) {
             getHandler().propertyChange(e);
@@ -1132,6 +1254,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Configures any necessary colors/fonts for the specified label
      * used representing the message.
+     * <p>
+     *  为用于表示消息的指定标签配置任何必需的颜色/字体。
+     * 
      */
     private void configureMessageLabel(JLabel label) {
         Color color = (Color)DefaultLookup.get(optionPane, this,
@@ -1149,6 +1274,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Configures any necessary colors/fonts for the specified button
      * used representing the button portion of the optionpane.
+     * <p>
+     *  为用于表示选项窗格按钮部分的指定按钮配置任何必需的颜色/字体。
+     * 
      */
     private void configureButton(JButton button) {
         Font buttonFont = (Font)DefaultLookup.get(optionPane, this,
@@ -1161,6 +1289,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicOptionPaneUI}.
+     * <p>
+     * 该类应当被视为"受保护的"内部类。实例化它只在{@code BasicOptionPaneUI}的子类中。
+     * 
      */
     public class ButtonActionListener implements ActionListener {
         protected int buttonIndex;
@@ -1178,6 +1309,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
                  * if custom options were specified, if the option type is
                  * DEFAULT_OPTION, OR if option type is set to a predefined
                  * one and the user chose the affirmative answer.
+                 * <p>
+                 *  如果指定了自定义选项,如果选项类型为DEFAULT_OPTION,或如果选项类型设置为预定义的选项,并且用户选择了肯定回答。
+                 * 
                  */
                 if (inputComponent != null) {
                     if (options != null ||
@@ -1338,6 +1472,10 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * want the ActionListener to be notified so that we can push the
      * change to the JOptionPane, but we also want additional bindings
      * (those of the JRootPane) to be processed as well.
+     * <p>
+     *  一个JTextField,允许您指定一个KeyStrokes数组,无论它们是否在JTextField上注册,都将处理它们的绑定。
+     * 这是因为我们真的想要通知ActionListener,以便我们可以将更改推送到JOptionPane,但是我们还希望处理其他绑定(JRootPane的)。
+     * 
      */
     private static class MultiplexingTextField extends JTextField {
         private KeyStroke[] strokes;
@@ -1349,6 +1487,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
         /**
          * Sets the KeyStrokes that will be additional processed for
          * ancestor bindings.
+         * <p>
+         *  设置将为祖先绑定进行额外处理的KeyStrokes。
+         * 
          */
         void setKeyStrokes(KeyStroke[] strokes) {
             this.strokes = strokes;
@@ -1379,6 +1520,9 @@ public class BasicOptionPaneUI extends OptionPaneUI {
     /**
      * Registered in the ActionMap. Sets the value of the option pane
      * to <code>JOptionPane.CLOSED_OPTION</code>.
+     * <p>
+     *  注册在ActionMap中。将选项窗格的值设置为<code> JOptionPane.CLOSED_OPTION </code>。
+     * 
      */
     private static class Actions extends UIAction {
         private static final String CLOSE = "close";
@@ -1401,6 +1545,8 @@ public class BasicOptionPaneUI extends OptionPaneUI {
      * This class is used to create the default buttons. This indirection is
      * used so that addButtonComponents can tell which Buttons were created
      * by us vs subclassers or from the JOptionPane itself.
+     * <p>
+     *  此类用于创建默认按钮。使用这种间接,使得addButtonComponents可以告诉我们哪些按钮由我们vs子类创建或从JOptionPane本身创建。
      */
     private static class ButtonFactory {
         private String text;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,21 @@ import javax.lang.model.util.*;
  * packages that are only required to run on Java SE 8 and higher
  * platform versions.
  *
+ * <p>
+ *  程序元素的访客,在访客设计模式的风格。实现此接口的类用于在元素在编译时未知的情况下对元素进行操作。
+ * 当访问者传递给元素的{@link Element#accept accept}方法时,会调用最适合该元素的<tt>访问<i> XYZ </i> </tt>方法。
+ * 
+ *  <p>实现此接口的类可能会抛出一个{@code NullPointerException},如果附加参数{@code p}是{@code null};有关详细信息,请参阅实现类的文档。
+ * 
+ *  <p> <b>警告：</b>可能的方法将被添加到此接口,以适应新的,目前未知的语言结构添加到未来版本的Java和贸易;编程语言。因此,直接实现此接口的访问者类可能与未来版本的平台不兼容。
+ * 为了避免这种源不兼容,鼓励访问者实现扩展实现此接口的适当的抽象访问类。然而,API通常应该使用这个访问者接口作为参数,返回类型等的类型,而不是一个抽象类。
+ * 
+ * <p>请注意,如果添加为<em>默认方法</em>,则可以以源<em>兼容</em>方式添加适应新语言结构的方法。
+ * 但是,默认方法仅适用于Java SE 8和更高版本,并且Java SE 8中捆绑的{@code javax.lang.model。*}包也需要在Java SE 7上运行。
+ * 因此,默认方法<em >不能</em>用于扩展{@code javax.lang.model。*}以涵盖Java SE 8语言功能。
+ * 但是,在仅需要在Java SE 8和更高版本的平台上运行的{@code javax.lang.model。*}软件包的后续版本中可以使用默认方法。
+ * 
+ * 
  * @param <R> the return type of this visitor's methods.  Use {@link
  *            Void} for visitors that do not need to return results.
  * @param <P> the type of the additional parameter to this visitor's
@@ -80,6 +96,10 @@ import javax.lang.model.util.*;
 public interface ElementVisitor<R, P> {
     /**
      * Visits an element.
+     * <p>
+     *  访问元素。
+     * 
+     * 
      * @param e  the element to visit
      * @param p  a visitor-specified parameter
      * @return a visitor-specified result
@@ -88,6 +108,10 @@ public interface ElementVisitor<R, P> {
 
     /**
      * A convenience method equivalent to {@code v.visit(e, null)}.
+     * <p>
+     *  一个相当于{@code v.visit(e,null)}的方便方法。
+     * 
+     * 
      * @param e  the element to visit
      * @return a visitor-specified result
      */
@@ -95,6 +119,10 @@ public interface ElementVisitor<R, P> {
 
     /**
      * Visits a package element.
+     * <p>
+     *  访问包元素。
+     * 
+     * 
      * @param e  the element to visit
      * @param p  a visitor-specified parameter
      * @return a visitor-specified result
@@ -103,6 +131,10 @@ public interface ElementVisitor<R, P> {
 
     /**
      * Visits a type element.
+     * <p>
+     *  访问类型元素。
+     * 
+     * 
      * @param e  the element to visit
      * @param p  a visitor-specified parameter
      * @return a visitor-specified result
@@ -111,6 +143,10 @@ public interface ElementVisitor<R, P> {
 
     /**
      * Visits a variable element.
+     * <p>
+     *  访问可变元素。
+     * 
+     * 
      * @param e  the element to visit
      * @param p  a visitor-specified parameter
      * @return a visitor-specified result
@@ -119,6 +155,10 @@ public interface ElementVisitor<R, P> {
 
     /**
      * Visits an executable element.
+     * <p>
+     *  访问可执行元素。
+     * 
+     * 
      * @param e  the element to visit
      * @param p  a visitor-specified parameter
      * @return a visitor-specified result
@@ -127,6 +167,10 @@ public interface ElementVisitor<R, P> {
 
     /**
      * Visits a type parameter element.
+     * <p>
+     *  访问类型参数元素。
+     * 
+     * 
      * @param e  the element to visit
      * @param p  a visitor-specified parameter
      * @return a visitor-specified result
@@ -138,6 +182,9 @@ public interface ElementVisitor<R, P> {
      * This can occur if the language evolves and new kinds
      * of elements are added to the {@code Element} hierarchy.
      *
+     * <p>
+     *  访问一种未知的元素。如果语言演变并且将新种类的元素添加到{@code Element}层次结构中,则可能发生这种情况。
+     * 
      * @param e  the element to visit
      * @param p  a visitor-specified parameter
      * @return a visitor-specified result

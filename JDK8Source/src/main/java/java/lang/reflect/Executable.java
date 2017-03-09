@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,27 +39,43 @@ import sun.reflect.generics.repository.ConstructorRepository;
  * A shared superclass for the common functionality of {@link Method}
  * and {@link Constructor}.
  *
+ * <p>
+ *  用于{@link Method}和{@link Constructor}的通用功能的共享超类。
+ * 
+ * 
  * @since 1.8
  */
 public abstract class Executable extends AccessibleObject
     implements Member, GenericDeclaration {
     /*
      * Only grant package-visibility to the constructor.
+     * <p>
+     *  仅授予构造函数的软件包可见性。
+     * 
      */
     Executable() {}
 
     /**
      * Accessor method to allow code sharing
+     * <p>
+     *  访问者方法允许代码共享
+     * 
      */
     abstract byte[] getAnnotationBytes();
 
     /**
      * Accessor method to allow code sharing
+     * <p>
+     *  访问者方法允许代码共享
+     * 
      */
     abstract Executable getRoot();
 
     /**
      * Does the Executable have generic information.
+     * <p>
+     *  可执行文件是否具有通用信息。
+     * 
      */
     abstract boolean hasGenericInformation();
 
@@ -136,6 +153,9 @@ public abstract class Executable extends AccessibleObject
     /**
      * Generate toString header information specific to a method or
      * constructor.
+     * <p>
+     *  生成特定于方法或构造函数的toString标题信息。
+     * 
      */
     abstract void specificToStringHeader(StringBuilder sb);
 
@@ -193,23 +213,35 @@ public abstract class Executable extends AccessibleObject
     /**
      * Generate toGenericString header information specific to a
      * method or constructor.
+     * <p>
+     *  生成特定于方法或构造函数的toGenericString标头信息。
+     * 
      */
     abstract void specificToGenericStringHeader(StringBuilder sb);
 
     /**
      * Returns the {@code Class} object representing the class or interface
      * that declares the executable represented by this object.
+     * <p>
+     *  返回表示声明此对象所表示的可执行文件的类或接口的{@code Class}对象。
+     * 
      */
     public abstract Class<?> getDeclaringClass();
 
     /**
      * Returns the name of the executable represented by this object.
+     * <p>
+     *  返回此对象表示的可执行文件的名称。
+     * 
      */
     public abstract String getName();
 
     /**
      * Returns the Java language {@linkplain Modifier modifiers} for
      * the executable represented by this object.
+     * <p>
+     *  返回此对象所表示的可执行文件的Java语言{@linkplain Modifier修饰符}。
+     * 
      */
     public abstract int getModifiers();
 
@@ -220,6 +252,11 @@ public abstract class Executable extends AccessibleObject
      * array of length 0 if the underlying generic declaration declares no type
      * variables.
      *
+     * <p>
+     *  返回一个{@code TypeVariable}对象数组,它们以声明顺序表示由此{@code GenericDeclaration}对象表示的通用声明声明的类型变量。
+     * 如果底层通用声明没有声明类型变量,则返回长度为0的数组。
+     * 
+     * 
      * @return an array of {@code TypeVariable} objects that represent
      *     the type variables declared by this generic declaration
      * @throws GenericSignatureFormatError if the generic
@@ -235,6 +272,10 @@ public abstract class Executable extends AccessibleObject
      * represented by this object.  Returns an array of length
      * 0 if the underlying executable takes no parameters.
      *
+     * <p>
+     *  返回一个{@code Class}对象的数组,它们以声明顺序表示由此对象表示的可执行文件的形式参数类型。如果基础可执行文件不带参数,则返回长度为0的数组。
+     * 
+     * 
      * @return the parameter types for the executable this object
      * represents
      */
@@ -245,6 +286,10 @@ public abstract class Executable extends AccessibleObject
      * declared or implicitly declared or neither) for the executable
      * represented by this object.
      *
+     * <p>
+     * 返回由此对象表示的可执行文件的形式参数数(无论是显式声明还是隐含声明,或不返回)。
+     * 
+     * 
      * @since 1.8
      * @return The number of formal parameters for the executable this
      * object represents
@@ -266,6 +311,14 @@ public abstract class Executable extends AccessibleObject
      * <p>If a formal parameter type is a type variable or a parameterized
      * type, it is created. Otherwise, it is resolved.
      *
+     * <p>
+     *  返回一个{@code Type}对象数组,它们以声明顺序表示由此对象表示的可执行文件的形式参数类型。如果基础可执行文件不带参数,则返回长度为0的数组。
+     * 
+     *  <p>如果形式参数类型是参数化类型,则返回的{@code Type}对象必须准确反映源代码中使用的实际类型参数。
+     * 
+     *  <p>如果形式参数类型是类型变量或参数化类型,则会创建它。否则,它被解决。
+     * 
+     * 
      * @return an array of {@code Type}s that represent the formal
      *     parameter types of the underlying executable, in declaration order
      * @throws GenericSignatureFormatError
@@ -289,6 +342,9 @@ public abstract class Executable extends AccessibleObject
     /**
      * Behaves like {@code getGenericParameterTypes}, but returns type
      * information for all parameters, including synthetic parameters.
+     * <p>
+     *  行为像{@code getGenericParameterTypes},但返回所有参数的类型信息,包括综合参数。
+     * 
      */
     Type[] getAllGenericParameterTypes() {
         final boolean genericInfo = hasGenericInformation();
@@ -343,6 +399,12 @@ public abstract class Executable extends AccessibleObject
      * have unique names, or names that are legal identifiers in the
      * Java programming language (JLS 3.8).
      *
+     * <p>
+     *  返回一个{@code Parameter}对象数组,表示该对象所代表的底层可执行程序的所有参数。如果可执行文件没有参数,则返回长度为0的数组。
+     * 
+     *  <p>基本可执行文件的参数不一定具有唯一的名称,或者是Java编程语言(JLS 3.8)中的合法标识符的名称。
+     * 
+     * 
      * @since 1.8
      * @throws MalformedParametersException if the class file contains
      * a MethodParameters attribute that is improperly formatted.
@@ -451,6 +513,10 @@ public abstract class Executable extends AccessibleObject
      * length 0 if the executable declares no exceptions in its {@code
      * throws} clause.
      *
+     * <p>
+     *  返回一个{@code Class}对象数组,表示由此对象表示的底层可执行程序声明抛出的异常类型。如果可执行程序在其{@code throws}子句中声明没有异常,则返回长度为0的数组。
+     * 
+     * 
      * @return the exception types declared as being thrown by the
      * executable this object represents
      */
@@ -465,6 +531,12 @@ public abstract class Executable extends AccessibleObject
      * <p>If an exception type is a type variable or a parameterized
      * type, it is created. Otherwise, it is resolved.
      *
+     * <p>
+     * 返回一个{@code Type}对象数组,它们表示此可执行对象声明抛出的异常。如果底层可执行程序在其{@code throws}子句中声明没有异常,则返回长度为0的数组。
+     * 
+     *  <p>如果异常类型是类型变量或参数化类型,则会创建它。否则,它被解决。
+     * 
+     * 
      * @return an array of Types that represent the exception types
      *     thrown by the underlying executable
      * @throws GenericSignatureFormatError
@@ -489,6 +561,10 @@ public abstract class Executable extends AccessibleObject
     /**
      * Returns a string describing this {@code Executable}, including
      * any type parameters.
+     * <p>
+     *  返回描述此{@code Executable}的字符串,包括任何类型参数。
+     * 
+     * 
      * @return a string describing this {@code Executable}, including
      * any type parameters
      */
@@ -498,6 +574,10 @@ public abstract class Executable extends AccessibleObject
      * Returns {@code true} if this executable was declared to take a
      * variable number of arguments; returns {@code false} otherwise.
      *
+     * <p>
+     *  如果此可执行文件声明为接受可变数量的参数,则返回{@code true};否则返回{@code false}。
+     * 
+     * 
      * @return {@code true} if an only if this executable was declared
      * to take a variable number of arguments.
      */
@@ -509,6 +589,10 @@ public abstract class Executable extends AccessibleObject
      * Returns {@code true} if this executable is a synthetic
      * construct; returns {@code false} otherwise.
      *
+     * <p>
+     *  如果此可执行文件是合成结构,则返回{@code true};否则返回{@code false}。
+     * 
+     * 
      * @return true if and only if this executable is a synthetic
      * construct as defined by
      * <cite>The Java&trade; Language Specification</cite>.
@@ -540,6 +624,16 @@ public abstract class Executable extends AccessibleObject
      * ("synthetic") to the parameter list for a method.  See {@link
      * java.lang.reflect.Parameter} for more information.
      *
+     * <p>
+     *  返回一个{@code Annotation}数组的数组,它表示由该对象表示的{@code Executable}的声明顺序中的形式参数的注释。
+     * 合成和强制参数(参见下面的解释),例如外部"this"参数到内部类构造函数将在返回的数组中表示。如果可执行文件没有参数(意味着没有形式,没有合成,并且没有强制的参数),将返回零长度数组。
+     * 如果{@code Executable}有一个或多个参数,则会为每个没有注释的参数返回长度为零的嵌套数组。包含在返回的数组中的注释对象是可序列化的。
+     * 这个方法的调用者可以自由修改返回的数组;它对返回给其他调用者的数组没有影响。
+     * 
+     * 编译器可以添加在源("强制的")中隐式声明的额外参数,以及既不在方法的参数列表中的源("合成")中隐式地或显式地声明的参数。
+     * 有关详细信息,请参阅{@link java.lang.reflect.Parameter}。
+     * 
+     * 
      * @see java.lang.reflect.Parameter
      * @see java.lang.reflect.Parameter#getAnnotations
      * @return an array of arrays that represent the annotations on
@@ -565,6 +659,10 @@ public abstract class Executable extends AccessibleObject
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException  {@inheritDoc}
      */
     public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
@@ -574,6 +672,10 @@ public abstract class Executable extends AccessibleObject
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.8
      */
@@ -586,6 +688,9 @@ public abstract class Executable extends AccessibleObject
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public Annotation[] getDeclaredAnnotations()  {
         return AnnotationParser.toArray(declaredAnnotations());
@@ -621,6 +726,14 @@ public abstract class Executable extends AccessibleObject
      * AnnotatedType} object represents the use of a type to specify the return
      * type of the method.
      *
+     * <p>
+     *  返回一个{@code AnnotatedType}对象,它表示使用类型来指定此可执行文件所表示的方法/构造函数的返回类型。
+     * 
+     *  如果此{@code Executable}对象表示构造函数,则{@code AnnotatedType}对象表示构造对象的类型。
+     * 
+     *  如果{@code Executable}对象表示一个方法,{@code AnnotatedType}对象表示使用类型来指定方法的返回类型。
+     * 
+     * 
      * @return an object representing the return type of the method
      * or constructor represented by this {@code Executable}
      *
@@ -634,6 +747,10 @@ public abstract class Executable extends AccessibleObject
      * specify the return type of the method/constructor represented by this
      * Executable.
      *
+     * <p>
+     *  返回一个AnnotatedType对象,它表示使用一个类型来指定由此可执行文件表示的方法/构造函数的返回类型。
+     * 
+     * 
      * @since 1.8
      */
     AnnotatedType getAnnotatedReturnType0(Type returnType) {
@@ -662,6 +779,15 @@ public abstract class Executable extends AccessibleObject
      * If this {@code Executable} object represents a static method, then the
      * return value is null.
      *
+     * <p>
+     *  返回一个{@code AnnotatedType}对象,它表示使用类型来指定由此可执行对象表示的方法/构造函数的接收器类型。
+     * 仅当方法/构造函数具有<em>接收器参数</em>(JLS 8.4.1)时,方法/构造函数的接收器类型才可用。
+     * 
+     * 如果此{@code Executable}对象表示没有接收者参数的构造函数或实例方法,或者其类型上没有注释的接收者参数,则返回值是一个{@code AnnotatedType}对象,无注释。
+     * 
+     *  如果此{@code Executable}对象表示静态方法,则返回值为null。
+     * 
+     * 
      * @return an object representing the receiver type of the method or
      * constructor represented by this {@code Executable}
      *
@@ -689,6 +815,12 @@ public abstract class Executable extends AccessibleObject
      * Returns an array of length 0 if the method/constructor declares no
      * parameters.
      *
+     * <p>
+     *  返回一个{@code AnnotatedType}对象数组,表示使用类型来指定此可执行文件所表示的方法/构造函数的形式参数类型。数组中对象的顺序对应于方法/构造函数的声明中形式参数类型的顺序。
+     * 
+     *  如果方法/构造函数声明没有参数,则返回长度为0的数组。
+     * 
+     * 
      * @return an array of objects representing the types of the
      * formal parameters of the method or constructor represented by this
      * {@code Executable}
@@ -715,6 +847,10 @@ public abstract class Executable extends AccessibleObject
      * Returns an array of length 0 if the method/constructor declares no
      * exceptions.
      *
+     * <p>
+     *  返回一个{@code AnnotatedType}对象数组,表示使用类型来指定由此可执行文件表示的方法/构造函数的声明的异常。数组中对象的顺序与方法/构造函数的声明中的异常类型的顺序相对应。
+     * 
+     * 
      * @return an array of objects representing the declared
      * exceptions of the method or constructor represented by this {@code
      * Executable}

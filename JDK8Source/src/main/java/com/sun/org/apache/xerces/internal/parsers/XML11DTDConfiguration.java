@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -98,6 +108,32 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLPullParserConfiguration;
  *   <li>http://apache.org/xml/properties/internal/datatype-validator-factory</li>
  *  </ul>
  * </ul>
+ * <p>
+ *  此类是用于解析XML 1.0和XML 1.1文档的仅DTD解析器配置。
+ * 
+ * <p>
+ *  此类识别以下功能和属性：
+ * <ul>
+ *  <li>功能
+ * <ul>
+ *  <li> http://xml.org/sax/features/validation </li> <li> http://xml.org/sax/features/namespaces </li> 
+ * <li> http://xml.org / sax / features / external-general-entities </li> <li> http://xml.org/sax/featur
+ * es/external-parameter-entities </li> <li> http://apache.org/xml / features / continue-after-fatal-err
+ * or </li> <li> http://apache.org/xml/features/load-external-dtd </li>。
+ * </ul>
+ *  <li>属性
+ * <ul>
+ * <li> http://xml.org/sax/properties/xml-string </li> <li> http://apache.org/xml/properties/internal/sy
+ * mbol-table </li> <li> http ：//apache.org/xml/properties/internal/error-handler </li> <li> http://apac
+ * he.org/xml/properties/internal/entity-resolver </li> <li> http：/ /apache.org/xml/properties/internal/
+ * error-reporter </li> <li> http://apache.org/xml/properties/internal/entity-manager </li> <li> http：//
+ *  apache .org / xml / properties / internal / document-scanner </li> <li> http://apache.org/xml/proper
+ * ties/internal/dtd-scanner </li> <li> http://apache.org / xml / properties / internal / grammar-pool </li>
+ *  <li> http://apache.org/xml/properties/internal/validator/dtd </li> <li> http://apache.org/xml / prop
+ * erties / internal / datatype-validator-factory </li>。
+ * </ul>
+ * </ul>
+ * 
  * @author Elena Litani, IBM
  * @author Neil Graham, IBM
  * @author Michael Glavassevich, IBM
@@ -245,12 +281,18 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * True if a parse is in progress. This state is needed because
      * some features/properties cannot be set while parsing (e.g.
      * validation and namespaces).
+     * <p>
+     *  如果解析正在进行,则为true。需要此状态,因为在解析(例如验证和命名空间)时无法设置某些功能/属性。
+     * 
      */
     protected boolean fParseInProgress = false;
 
     /**
      * fConfigUpdated is set to true if there has been any change to the configuration settings,
      * i.e a feature or a property was changed.
+     * <p>
+     *  如果配置设置有任何更改(即某个功能或属性已更改),则fConfigUpdated设置为true。
+     * 
      */
     protected boolean fConfigUpdated = false;
 
@@ -341,6 +383,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
     /**
      * Constructs a parser configuration using the specified symbol table.
      *
+     * <p>
+     *  使用指定的符号表构造解析器配置。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      */
     public XML11DTDConfiguration(SymbolTable symbolTable) {
@@ -355,6 +401,12 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表和语法池构造解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      * @param grammarPool The grammar pool to use.
      */
@@ -370,6 +422,12 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表,语法池和父设置构造一个解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable    The symbol table to use.
      * @param grammarPool    The grammar pool to use.
      * @param parentSettings The parent settings.
@@ -502,6 +560,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
     /**
      * Sets the input source for the document to parse.
      *
+     * <p>
+     * 设置文档解析的输入源。
+     * 
+     * 
      * @param inputSource The document's input source.
      *
      * @exception XMLConfigurationException Thrown if there is a
@@ -526,6 +588,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception XNIException Thrown if the parser does not support the
@@ -540,6 +606,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
          * Sets the document handler on the last component in the pipeline
          * to receive information about the document.
          *
+         * <p>
+         *  在管道中的最后一个组件上设置文档处理程序,以接收有关文档的信息。
+         * 
+         * 
          * @param documentHandler   The document handler.
          */
         public void setDocumentHandler(XMLDocumentHandler documentHandler) {
@@ -560,6 +630,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
         /**
          * Sets the DTD handler.
          *
+         * <p>
+         *  设置DTD处理程序。
+         * 
+         * 
          * @param dtdHandler The DTD handler.
          */
         public void setDTDHandler(XMLDTDHandler dtdHandler) {
@@ -574,6 +648,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
         /**
          * Sets the DTD content model handler.
          *
+         * <p>
+         *  设置DTD内容模型处理程序。
+         * 
+         * 
          * @param handler The DTD content model handler.
          */
         public void setDTDContentModelHandler(XMLDTDContentModelHandler handler) {
@@ -589,6 +667,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
          * Sets the resolver used to resolve external entities. The EntityResolver
          * interface supports resolution of public and system identifiers.
          *
+         * <p>
+         *  设置用于解析外部实体的解析器。 EntityResolver接口支持公共和系统标识符的解析。
+         * 
+         * 
          * @param resolver The new entity resolver. Passing a null value will
          *                 uninstall the currently installed resolver.
          */
@@ -599,6 +681,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
         /**
          * Return the current entity resolver.
          *
+         * <p>
+         *  返回当前实体解析器。
+         * 
+         * 
          * @return The current entity resolver, or null if none
          *         has been registered.
          * @see #setEntityResolver
@@ -620,6 +706,14 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
          * middle of a parse, and the SAX parser must begin using the new
          * handler immediately.</p>
          *
+         * <p>
+         *  允许应用程序注册错误事件处理程序。
+         * 
+         *  <p>如果应用程序未注册错误处理程序,则SAX解析器报告的所有错误事件将被忽略;然而,正常处理可能不会继续。强烈建议所有SAX应用程序实现错误处理程序,以避免意外的错误。</p>
+         * 
+         *  <p>应用程序可能在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。</p>
+         * 
+         * 
          * @param errorHandler The error handler.
          * @exception java.lang.NullPointerException If the handler
          *            argument is null.
@@ -632,6 +726,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
         /**
          * Return the current error handler.
          *
+         * <p>
+         *  返回当前错误处理程序。
+         * 
+         * 
          * @return The current error handler, or null if none
          *         has been registered.
          * @see #setErrorHandler
@@ -646,6 +744,9 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * If the application decides to terminate parsing before the xml document
      * is fully parsed, the application should call this method to free any
      * resource allocated during parsing. For example, close all opened streams.
+     * <p>
+     *  如果应用程序决定在xml文档完全解析之前终止解析,则应用程序应调用此方法以释放在解析期间分配的任何资源。例如,关闭所有打开的流。
+     * 
      */
     public void cleanup() {
         fEntityManager.closeReaders();
@@ -654,6 +755,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
     /**
      * Parses the specified input source.
      *
+     * <p>
+     *  解析指定的输入源。
+     * 
+     * 
      * @param source The input source.
      *
      * @exception XNIException Throws exception on XNI error.
@@ -763,6 +868,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
         /**
          * Returns the state of a feature.
          *
+         * <p>
+         *  返回要素的状态。
+         * 
+         * 
          * @param featureId The feature identifier.
                  * @return true if the feature is supported
          *
@@ -789,6 +898,12 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
          * might not recognize the feature, and if it does recognize
          * it, it might not be able to fulfill the request.
          *
+         * <p>
+         *  设置要素的状态。
+         * 
+         *  设置SAX2解析器中任何功能的状态。解析器可能无法识别该功能,如果它识别它,它可能无法满足该请求。
+         * 
+         * 
          * @param featureId The unique identifier (URI) of the feature.
          * @param state The requested state of the feature (true or false).
          *
@@ -830,6 +945,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
         /**
          * setProperty
          *
+         * <p>
+         *  setProperty
+         * 
+         * 
          * @param propertyId
          * @param value
          */
@@ -873,6 +992,9 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
 
         /**
          * reset all XML 1.0 components before parsing and namespace context
+         * <p>
+         * 在解析和命名空间上下文之前重置所有XML 1.0组件
+         * 
          */
         protected void reset() throws XNIException {
                 int count = fComponents.size();
@@ -885,6 +1007,9 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
 
         /**
          * reset all common components before parsing
+         * <p>
+         *  在解析之前重置所有公共组件
+         * 
          */
         protected void resetCommon() throws XNIException {
                 // reset common components
@@ -898,6 +1023,9 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
 
         /**
          * reset all components before parsing and namespace context
+         * <p>
+         *  在解析和命名空间上下文之前重置所有组件
+         * 
          */
         protected void resetXML11() throws XNIException {
                 // reset every component
@@ -912,6 +1040,9 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
     /**
      *  Configures the XML 1.1 pipeline.
      *  Note: this method also resets the new XML11 components.
+     * <p>
+     *  配置XML 1.1管道。注意：此方法还会重置新的XML11组件。
+     * 
      */
     protected void configureXML11Pipeline() {
         if (fCurrentDVFactory != fXML11DatatypeFactory) {
@@ -1058,6 +1189,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * Check a feature. If feature is know and supported, this method simply
      * returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查功能。如果特性是知道和支持的,这个方法简单地返回。否则,抛出适当的异常。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      *
      * @throws XMLConfigurationException Thrown for configuration error.
@@ -1144,6 +1279,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * Check a property. If the property is know and supported, this method
      * simply returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查属性。如果属性是知道和支持,这个方法简单地返回。否则,抛出适当的异常。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      *
@@ -1205,6 +1344,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * also add all of the component's recognized features and properties
      * to the list of default recognized features and properties.
      *
+     * <p>
+     *  向解析器配置中添加一个组件。此方法还会将所有组件的已识别要素和属性添加到默认的已识别要素和属性列表中。
+     * 
+     * 
      * @param component The component to add.
      */
     protected void addComponent(XMLComponent component) {
@@ -1223,6 +1366,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * also add all of the component's recognized features and properties
      * to the list of default recognized features and properties.
      *
+     * <p>
+     *  向解析器配置中添加公共组件。此方法还会将所有组件的已识别要素和属性添加到默认的已识别要素和属性列表中。
+     * 
+     * 
      * @param component The component to add.
      */
     protected void addCommonComponent(XMLComponent component) {
@@ -1241,6 +1388,10 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * also add all of the component's recognized features and properties
      * to the list of default recognized features and properties.
      *
+     * <p>
+     *  将XML 1.1组件添加到解析器配置。此方法还会将所有组件的已识别要素和属性添加到默认的已识别要素和属性列表中。
+     * 
+     * 
      * @param component The component to add.
      */
     protected void addXML11Component(XMLComponent component) {
@@ -1260,6 +1411,9 @@ public class XML11DTDConfiguration extends ParserConfigurationSettings
      * sets default values on the configuration for features and
      * properties which were previously absent from the configuration.
      *
+     * <p>
+     *  将所有组件的已识别要素和属性添加到默认已识别要素和属性的列表中,并在配置上设置先前在配置中不存在的要素和属性的默认值。
+     * 
      * @param component The component whose recognized features
      * and properties will be added to the configuration
      */

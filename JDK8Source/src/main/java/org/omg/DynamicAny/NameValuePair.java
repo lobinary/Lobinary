@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -13,11 +14,16 @@ public final class NameValuePair implements org.omg.CORBA.portable.IDLEntity
 
   /**
         * The name associated with the Any.
+        * <p>
+        *  与任何相关联的名称。
+        * 
         */
   public String id = null;
 
   /**
         * The Any value associated with the name.
+        * <p>
+        *  与名称关联的任何值。
         */
   public org.omg.CORBA.Any value = null;
 

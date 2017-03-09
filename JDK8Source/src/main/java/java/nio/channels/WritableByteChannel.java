@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,13 @@ import java.nio.ByteBuffer;
  * the type of the channel. </p>
  *
  *
+ * <p>
+ *  可写入字节的通道。
+ * 
+ *  <p>在任何给定时间,可写通道上只有一个写操作正在进行。如果一个线程在通道上启动写操作,则试图启动另一个写操作的任何其他线程将阻塞,直到第一操作完成。
+ * 其他种类的I / O操作是否可以与写操作同时进行取决于通道的类型。 </p>。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -76,6 +84,16 @@ public interface WritableByteChannel
      * invocation of this method will block until the first operation is
      * complete. </p>
      *
+     * <p>
+     *  从给定缓冲区向此通道写入一个字节序列。
+     * 
+     *  <p>尝试向信道写入<i> r </i>个字节,其中<i> r </i>是缓冲区中剩余的字节数,即<tt> src .remaining()</tt>,此时调用此方法。
+     * 
+     *  <p>假设写入长度为n的字节序列,其中<tt> 0 </tt> <tt> <= </tt>&lt; i>&nbsp; <tt>&lt; = </tt>&nbsp; <i> r </i>。
+     * 这个字节序列将从索引p i开始从缓冲器传送,其中p i是在调用该方法时缓冲器的位置;所写的最后一个字节的索引将为<i> p </i> <tt> + </tt> <i> n </i> <tt>  -  </tt>
+     *  tt> 1 </tt>。
+     *  <p>假设写入长度为n的字节序列,其中<tt> 0 </tt> <tt> <= </tt>&lt; i>&nbsp; <tt>&lt; = </tt>&nbsp; <i> r </i>。
+     * 
      * @param  src
      *         The buffer from which bytes are to be retrieved
      *

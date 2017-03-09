@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,11 @@ import sun.swing.UIAction;
  * The basic L&amp;F for a hierarchical data structure.
  * <p>
  *
+ * <p>
+ *  层次数据结构的基本L&amp; F。
+ * <p>
+ * 
+ * 
  * @author Scott Violet
  * @author Shannon Hickey (drag and drop)
  */
@@ -70,16 +76,25 @@ public class BasicTreeUI extends TreeUI
     /**
       * Color used to draw hash marks.  If <code>null</code> no hash marks
       * will be drawn.
+      * <p>
+      *  用于绘制散列标记的颜色。如果<code> null </code>,则不会绘制散列标记。
+      * 
       */
     private Color hashColor;
 
     /** Distance between left margin and where vertical dashes will be
+    /* <p>
+    /* 
       * drawn. */
     protected int               leftChildIndent;
     /** Distance to add to leftChildIndent to determine where cell
+    /* <p>
+    /* 
       * contents will be drawn. */
     protected int               rightChildIndent;
     /** Total distance that will be indented.  The sum of leftChildIndent
+    /* <p>
+    /* 
       * and rightChildIndent. */
     protected int               totalChildIndent;
 
@@ -96,6 +111,8 @@ public class BasicTreeUI extends TreeUI
     transient protected TreeCellRenderer   currentCellRenderer;
 
     /** Set to true if the renderer that is currently in the tree was
+    /* <p>
+    /* 
      * created by this instance. */
     protected boolean           createdRenderer;
 
@@ -103,10 +120,14 @@ public class BasicTreeUI extends TreeUI
     transient protected TreeCellEditor     cellEditor;
 
     /** Set to true if editor that is currently in the tree was
+    /* <p>
+    /* 
      * created by this instance. */
     protected boolean           createdCellEditor;
 
     /** Set to false when editing and shouldSelectCell() returns true meaning
+    /* <p>
+    /* 
       * the node should be selected before editing, used in completeEditing. */
     protected boolean           stopEditingInCompleteEditing;
 
@@ -131,6 +152,10 @@ public class BasicTreeUI extends TreeUI
 
     /** True if doing optimizations for a largeModel. Subclasses that
      * don't support this may wish to override createLayoutCache to not
+     * <p>
+     *  不支持这个可能希望覆盖createLayoutCache不能
+     * 
+     * 
      * return a FixedHeightLayoutCache instance. */
     protected boolean           largeModel;
 
@@ -145,12 +170,18 @@ public class BasicTreeUI extends TreeUI
 
     /** How much the depth should be offset to properly calculate
      * x locations. This is based on whether or not the root is visible,
+     * <p>
+     *  x个位置。这是基于根是否可见,
+     * 
+     * 
      * and if the root handles are visible. */
     protected int               depthOffset;
 
     // Following 4 ivars are only valid when editing.
 
     /** When editing, this will be the Component that is doing the actual
+    /* <p>
+    /* 
       * editing. */
     protected Component         editingComponent;
 
@@ -158,6 +189,8 @@ public class BasicTreeUI extends TreeUI
     protected TreePath          editingPath;
 
     /** Row that is being edited. Should only be referenced if
+    /* <p>
+    /* 
      * editingComponent is not null. */
     protected int               editingRow;
 
@@ -167,6 +200,8 @@ public class BasicTreeUI extends TreeUI
     /** Row correspondin to lead path. */
     private int                 leadRow;
     /** If true, the property change event for LEAD_SELECTION_PATH_PROPERTY,
+    /* <p>
+    /* 
      * or ANCHOR_SELECTION_PATH_PROPERTY will not generate a repaint. */
     private boolean             ignoreLAChange;
 
@@ -180,6 +215,8 @@ public class BasicTreeUI extends TreeUI
     private FocusListener focusListener;
     private KeyListener keyListener;
     /** Used for large models, listens for moved/resized events and
+    /* <p>
+    /* 
      * updates the validCachedPreferredSize bit accordingly. */
     private ComponentListener   componentListener;
     /** Listens for CellEditor events. */
@@ -200,6 +237,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * The time factor to treate the series of typed alphanumeric key
      * as prefix for first letter navigation.
+     * <p>
+     *  将一系列键入的字母数字键作为第一个字母导航的前缀的时间因子。
+     * 
      */
     private long timeFactor = 1000L;
 
@@ -208,6 +248,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * A temporary variable for communication between startEditingOnRelease
      * and startEditing.
+     * <p>
+     *  用于在startEditingOnRelease和startEditing之间进行通信的临时变量。
+     * 
      */
     private MouseEvent releaseEvent;
 
@@ -341,6 +384,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Updates the componentListener, if necessary.
+     * <p>
+     *  如有必要,更新componentListener。
+     * 
      */
     protected void setLargeModel(boolean largeModel) {
         if(getRowHeight() < 1)
@@ -361,6 +407,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Sets the row height, this is forwarded to the treeState.
+     * <p>
+     *  设置行高,这被转发到treeState。
+     * 
      */
     protected void setRowHeight(int rowHeight) {
         completeEditing();
@@ -378,6 +427,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Sets the TreeCellRenderer to <code>tcr</code>. This invokes
      * <code>updateRenderer</code>.
+     * <p>
+     *  将TreeCellRenderer设置为<code> tcr </code>。这会调用<code> updateRenderer </code>。
+     * 
      */
     protected void setCellRenderer(TreeCellRenderer tcr) {
         completeEditing();
@@ -391,6 +443,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Return currentCellRenderer, which will either be the trees
      * renderer, or defaultCellRenderer, which ever wasn't null.
+     * <p>
+     *  返回currentCellRenderer,它将是tree renderer或defaultCellRenderer,它们不是null。
+     * 
      */
     protected TreeCellRenderer getCellRenderer() {
         return currentCellRenderer;
@@ -398,6 +453,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Sets the TreeModel.
+     * <p>
+     *  设置TreeModel。
+     * 
      */
     protected void setModel(TreeModel model) {
         completeEditing();
@@ -421,6 +479,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Sets the root to being visible.
+     * <p>
+     *  将根设置为可见。
+     * 
      */
     protected void setRootVisible(boolean newValue) {
         completeEditing();
@@ -438,6 +499,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Determines whether the node handles are to be displayed.
+     * <p>
+     *  确定是否显示节点句柄。
+     * 
      */
     protected void setShowsRootHandles(boolean newValue) {
         completeEditing();
@@ -454,6 +518,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Sets the cell editor.
+     * <p>
+     *  设置单元格编辑器。
+     * 
      */
     protected void setCellEditor(TreeCellEditor editor) {
         updateCellEditor();
@@ -465,6 +532,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Configures the receiver to allow, or not allow, editing.
+     * <p>
+     *  配置接收器以允许或不允许编辑。
+     * 
      */
     protected void setEditable(boolean newValue) {
         updateCellEditor();
@@ -477,6 +547,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Resets the selection model. The appropriate listener are installed
      * on the model.
+     * <p>
+     *  重设选择模型。相应的侦听器安装在模型上。
+     * 
      */
     protected void setSelectionModel(TreeSelectionModel newLSM) {
         completeEditing();
@@ -516,6 +589,9 @@ public class BasicTreeUI extends TreeUI
       * Returns the Rectangle enclosing the label portion that the
       * last item in path will be drawn into.  Will return null if
       * any component in path is currently valid.
+      * <p>
+      *  返回包含路径中最后一个项目将被绘制的标签部分的Rectangle。如果路径中的任何组件当前有效,则返回null。
+      * 
       */
     public Rectangle getPathBounds(JTree tree, TreePath path) {
         if(tree != null && treeState != null) {
@@ -542,6 +618,9 @@ public class BasicTreeUI extends TreeUI
     /**
       * Returns the path for passed in row.  If row is not visible
       * null is returned.
+      * <p>
+      *  返回在行中传递的路径。如果行不可见,则返回null。
+      * 
       */
     public TreePath getPathForRow(JTree tree, int row) {
         return (treeState != null) ? treeState.getPathForRow(row) : null;
@@ -551,6 +630,9 @@ public class BasicTreeUI extends TreeUI
       * Returns the row that the last item identified in path is visible
       * at.  Will return -1 if any of the elements in path are not
       * currently visible.
+      * <p>
+      * 返回在路径中标识的最后一个项目所在的行在哪里可见。如果路径中的任何元素当前不可见,将返回-1。
+      * 
       */
     public int getRowForPath(JTree tree, TreePath path) {
         return (treeState != null) ? treeState.getRowForPath(path) : -1;
@@ -558,6 +640,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
       * Returns the number of rows that are being displayed.
+      * <p>
+      *  返回要显示的行数。
+      * 
       */
     public int getRowCount(JTree tree) {
         return (treeState != null) ? treeState.getRowCount() : 0;
@@ -569,6 +654,9 @@ public class BasicTreeUI extends TreeUI
       * it'll always return a valid path.  If you need to test if the
       * returned object is exactly at x, y you should get the bounds for
       * the returned path and test x, y against that.
+      * <p>
+      *  返回最接近x,y的节点的路径。如果目前没有可见的,这将返回null,否则它将总是返回一个有效的路径。如果你需要测试返回的对象是否正好在x,y,你应该得到返回的路径的边界,并测试x,y。
+      * 
       */
     public TreePath getClosestPathForLocation(JTree tree, int x, int y) {
         if(tree != null && treeState != null) {
@@ -583,6 +671,9 @@ public class BasicTreeUI extends TreeUI
     /**
       * Returns true if the tree is being edited.  The item that is being
       * edited can be returned by getEditingPath().
+      * <p>
+      *  如果树正在编辑,则返回true。正在编辑的项目可以通过getEditingPath()返回。
+      * 
       */
     public boolean isEditing(JTree tree) {
         return (editingComponent != null);
@@ -592,6 +683,9 @@ public class BasicTreeUI extends TreeUI
       * Stops the current editing session.  This has no effect if the
       * tree isn't being edited.  Returns true if the editor allows the
       * editing session to stop.
+      * <p>
+      *  停止当前编辑会话。如果树没有被编辑,这没有效果。如果编辑器允许编辑会话停止,则返回true。
+      * 
       */
     public boolean stopEditing(JTree tree) {
         if(editingComponent != null && cellEditor.stopCellEditing()) {
@@ -603,6 +697,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
       * Cancels the current editing session.
+      * <p>
+      *  取消当前编辑会话。
+      * 
       */
     public void cancelEditing(JTree tree) {
         if(editingComponent != null) {
@@ -613,6 +710,9 @@ public class BasicTreeUI extends TreeUI
     /**
       * Selects the last item in path and tries to edit it.  Editing will
       * fail if the CellEditor won't allow it for the selected item.
+      * <p>
+      *  选择路径中的最后一个项目并尝试编辑它。如果CellEditor不允许所选项目,编辑将失败。
+      * 
       */
     public void startEditingAtPath(JTree tree, TreePath path) {
         tree.scrollPathToVisible(path);
@@ -622,6 +722,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Returns the path to the element that is being edited.
+     * <p>
+     *  返回正在编辑的元素的路径。
+     * 
      */
     public TreePath getEditingPath(JTree tree) {
         return editingPath;
@@ -652,6 +755,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Invoked after the <code>tree</code> instance variable has been
      * set, but before any defaults/listeners have been installed.
+     * <p>
+     *  在设置了<code> tree </code>实例变量之后,但在安装任何默认/监听器之前调用。
+     * 
      */
     protected void prepareForUIInstall() {
         drawingCache = new Hashtable<TreePath,Boolean>(7);
@@ -672,6 +778,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Invoked from installUI after all the defaults/listeners have been
      * installed.
+     * <p>
+     *  在安装所有默认/侦听器后从installUI调用。
+     * 
      */
     protected void completeUIInstall() {
         // Custom install code
@@ -826,6 +935,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Intalls the subcomponents of the tree, which is the renderer pane.
+     * <p>
+     *  调用树的子组件,它是渲染器窗格。
+     * 
      */
     protected void installComponents() {
         if ((rendererPane = createCellRendererPane()) != null) {
@@ -840,6 +952,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates an instance of NodeDimensions that is able to determine
      * the size of a given node in the tree.
+     * <p>
+     *  创建NodeDimensions的实例,该实例能够确定树中给定节点的大小。
+     * 
      */
     protected AbstractLayoutCache.NodeDimensions createNodeDimensions() {
         return new NodeDimensionsHandler();
@@ -848,6 +963,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates a listener that is responsible that updates the UI based on
      * how the tree changes.
+     * <p>
+     *  创建一个监听器,负责根据树的更改来更新UI。
+     * 
      */
     protected PropertyChangeListener createPropertyChangeListener() {
         return getHandler();
@@ -863,6 +981,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates the listener responsible for updating the selection based on
      * mouse events.
+     * <p>
+     * 创建负责根据鼠标事件更新选择的侦听器。
+     * 
      */
     protected MouseListener createMouseListener() {
         return getHandler();
@@ -871,6 +992,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates a listener that is responsible for updating the display
      * when focus is lost/gained.
+     * <p>
+     *  创建一个监听器,负责在丢失/获得焦点时更新显示。
+     * 
      */
     protected FocusListener createFocusListener() {
         return getHandler();
@@ -879,6 +1003,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates the listener reponsible for getting key events from
      * the tree.
+     * <p>
+     *  创建从树中获取关键事件的监听器。
+     * 
      */
     protected KeyListener createKeyListener() {
         return getHandler();
@@ -887,6 +1014,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates the listener responsible for getting property change
      * events from the selection model.
+     * <p>
+     *  创建负责从选择模型获取属性更改事件的侦听器。
+     * 
      */
     protected PropertyChangeListener createSelectionModelPropertyChangeListener() {
         return getHandler();
@@ -895,6 +1025,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates the listener that updates the display based on selection change
      * methods.
+     * <p>
+     *  创建基于选择更改方法更新显示的侦听器。
+     * 
      */
     protected TreeSelectionListener createTreeSelectionListener() {
         return getHandler();
@@ -902,6 +1035,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Creates a listener to handle events from the current editor.
+     * <p>
+     *  创建一个监听器来处理来自当前编辑器的事件。
+     * 
      */
     protected CellEditorListener createCellEditorListener() {
         return getHandler();
@@ -911,6 +1047,9 @@ public class BasicTreeUI extends TreeUI
      * Creates and returns a new ComponentHandler. This is used for
      * the large model to mark the validCachedPreferredSize as invalid
      * when the component moves.
+     * <p>
+     *  创建并返回一个新的ComponentHandler。这用于大型模型,当组件移动时将validCachedPreferredSize标记为无效。
+     * 
      */
     protected ComponentListener createComponentListener() {
         return new ComponentHandler();
@@ -919,6 +1058,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates and returns the object responsible for updating the treestate
      * when nodes expanded state changes.
+     * <p>
+     *  当节点扩展状态更改时,创建并返回负责更新treestate的对象。
+     * 
      */
     protected TreeExpansionListener createTreeExpansionListener() {
         return getHandler();
@@ -927,6 +1069,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Creates the object responsible for managing what is expanded, as
      * well as the size of nodes.
+     * <p>
+     *  创建负责管理扩展内容的对象,以及节点的大小。
+     * 
      */
     protected AbstractLayoutCache createLayoutCache() {
         if(isLargeModel() && getRowHeight() > 0) {
@@ -937,6 +1082,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Returns the renderer pane that renderer components are placed in.
+     * <p>
+     *  返回渲染器组件所在的渲染器窗格。
+     * 
      */
     protected CellRendererPane createCellRendererPane() {
         return new CellRendererPane();
@@ -944,6 +1092,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
       * Creates a default cell editor.
+      * <p>
+      *  创建默认单元格编辑器。
+      * 
       */
     protected TreeCellEditor createDefaultCellEditor() {
         if(currentCellRenderer != null &&
@@ -959,6 +1110,9 @@ public class BasicTreeUI extends TreeUI
     /**
       * Returns the default cell renderer that is used to do the
       * stamping of each node.
+      * <p>
+      *  返回用于对每个节点进行标记的默认单元格渲染器。
+      * 
       */
     protected TreeCellRenderer createDefaultCellRenderer() {
         return new DefaultTreeCellRenderer();
@@ -966,6 +1120,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Returns a listener that can update the tree when the model changes.
+     * <p>
+     *  返回一个监听器,当模型更改时可以更新树。
+     * 
      */
     protected TreeModelListener createTreeModelListener() {
         return getHandler();
@@ -1070,6 +1227,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Uninstalls the renderer pane.
+     * <p>
+     *  卸载渲染器窗格。
+     * 
      */
     protected void uninstallComponents() {
         if(rendererPane != null) {
@@ -1079,6 +1239,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Recomputes the right margin, and invalidates any tree states
+     * <p>
+     *  重新计算右边距,并使任何树状态无效
+     * 
      */
     private void redoTheLayout() {
         if (treeState != null) {
@@ -1089,6 +1252,10 @@ public class BasicTreeUI extends TreeUI
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -1121,6 +1288,10 @@ public class BasicTreeUI extends TreeUI
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -1246,6 +1417,11 @@ public class BasicTreeUI extends TreeUI
      * nodes. This is meant for {@code javax.swing.DropMode.INSERT} and
      * {@code javax.swing.DropMode.ON_OR_INSERT} drop modes.
      *
+     * <p>
+     *  告诉{@code DropLocation}是否应该用节点之间的一行来表示。
+     * 这适用于{@code javax.swing.DropMode.INSERT}和{@code javax.swing.DropMode.ON_OR_INSERT}放置模式。
+     * 
+     * 
      * @param loc a {@code DropLocation}
      * @return {@code true} if the drop location should be shown as a line
      * @since 1.7
@@ -1257,6 +1433,10 @@ public class BasicTreeUI extends TreeUI
     /**
      * Paints the drop line.
      *
+     * <p>
+     * 画下降线。
+     * 
+     * 
      * @param g {@code Graphics} object to draw on
      * @since 1.7
      */
@@ -1277,6 +1457,10 @@ public class BasicTreeUI extends TreeUI
     /**
      * Returns a unbounding box for the drop line.
      *
+     * <p>
+     *  返回下拉行的无界框。
+     * 
+     * 
      * @param loc a {@code DropLocation}
      * @return bounding box for the drop line
      * @since 1.7
@@ -1343,6 +1527,10 @@ public class BasicTreeUI extends TreeUI
      * Paints the horizontal part of the leg. The receiver should
      * NOT modify <code>clipBounds</code>, or <code>insets</code>.<p>
      * NOTE: <code>parentRow</code> can be -1 if the root is not visible.
+     * <p>
+     *  涂抹腿的水平部分。接收者不应该修改<code> clipBounds </code>或<code> insets </>。
+     * <p>注意：如果根不可见,<code> parentRow </code>可以是-1。
+     * 
      */
     protected void paintHorizontalPartOfLeg(Graphics g, Rectangle clipBounds,
                                             Insets insets, Rectangle bounds,
@@ -1399,6 +1587,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Paints the vertical part of the leg. The receiver should
      * NOT modify <code>clipBounds</code>, <code>insets</code>.
+     * <p>
+     *  涂抹腿的垂直部分。接收者不应该修改<code> clipBounds </code>,<code> insets </code>。
+     * 
      */
     protected void paintVerticalPartOfLeg(Graphics g, Rectangle clipBounds,
                                           Insets insets, TreePath path) {
@@ -1474,6 +1665,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Paints the expand (toggle) part of a row. The receiver should
      * NOT modify <code>clipBounds</code>, or <code>insets</code>.
+     * <p>
+     *  描绘行的展开(切换)部分。接收者不应该修改<code> clipBounds </code>或<code> insets </code>。
+     * 
      */
     protected void paintExpandControl(Graphics g,
                                       Rectangle clipBounds, Insets insets,
@@ -1513,6 +1707,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Paints the renderer part of a row. The receiver should
      * NOT modify <code>clipBounds</code>, or <code>insets</code>.
+     * <p>
+     *  描画一行的渲染器部分。接收者不应该修改<code> clipBounds </code>或<code> insets </code>。
+     * 
      */
     protected void paintRow(Graphics g, Rectangle clipBounds,
                             Insets insets, Rectangle bounds, TreePath path,
@@ -1544,6 +1741,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Returns true if the expand (toggle) control should be drawn for
      * the specified row.
+     * <p>
+     *  如果应为指定的行绘制展开(切换)控件,则返回true。
+     * 
      */
     protected boolean shouldPaintExpandControl(TreePath path, int row,
                                                boolean isExpanded,
@@ -1562,6 +1762,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Paints a vertical line.
+     * <p>
+     *  画一条垂直线。
+     * 
      */
     protected void paintVerticalLine(Graphics g, JComponent c, int x, int top,
                                     int bottom) {
@@ -1574,6 +1777,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Paints a horizontal line.
+     * <p>
+     *  画一条水平线。
+     * 
      */
     protected void paintHorizontalLine(Graphics g, JComponent c, int y,
                                       int left, int right) {
@@ -1587,6 +1793,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * The vertical element of legs between nodes starts at the bottom of the
      * parent node by default.  This method makes the leg start below that.
+     * <p>
+     *  默认情况下,节点之间的腿的垂直元素从父节点的底部开始。这种方法使腿开始低于那个。
+     * 
      */
     protected int getVerticalLegBuffer() {
         return 0;
@@ -1596,6 +1805,9 @@ public class BasicTreeUI extends TreeUI
      * The horizontal element of legs between nodes starts at the
      * right of the left-hand side of the child node by default.  This
      * method makes the leg end before that.
+     * <p>
+     *  默认情况下,节点之间的腿的水平元素从子节点的左侧开始。这种方法使腿部之前。
+     * 
      */
     protected int getHorizontalLegBuffer() {
         return 0;
@@ -1656,6 +1868,10 @@ public class BasicTreeUI extends TreeUI
      * to be correct and will not throw an Exception if the row or depth
      * doesn't match that of the tree.
      *
+     * <p>
+     *  返回沿x轴的位置,以呈现特定行。返回值不包括JTree上指定的任何Insets。这不会检查行或深度的有效性,假定它是正确的,并且如果行或深度不匹配树的行或深度,则不会抛出异常。
+     * 
+     * 
      * @param row Row to return x location for
      * @param depth Depth of the row
      * @return amount to indent the given row.
@@ -1668,6 +1884,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Makes all the nodes that are expanded in JTree expanded in LayoutCache.
      * This invokes updateExpandedDescendants with the root path.
+     * <p>
+     *  使在JTree中扩展的所有节点在LayoutCache中扩展。这将使用根路径调用updateExpandedDescendants。
+     * 
      */
     protected void updateLayoutCacheExpandedNodes() {
         if(treeModel != null && treeModel.getRoot() != null)
@@ -1689,6 +1908,9 @@ public class BasicTreeUI extends TreeUI
      * Updates the expanded state of all the descendants of <code>path</code>
      * by getting the expanded descendants from the tree and forwarding
      * to the tree state.
+     * <p>
+     * 通过从树中获取扩展后代并转发到树状态来更新<code> path </code>的所有后代的展开状态。
+     * 
      */
     protected void updateExpandedDescendants(TreePath path) {
         completeEditing();
@@ -1710,6 +1932,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Returns a path to the last child of <code>parent</code>.
+     * <p>
+     *  返回<code> parent </code>的最后一个子节点的路径。
+     * 
      */
     protected TreePath getLastChildPath(TreePath parent) {
         if(treeModel != null) {
@@ -1725,6 +1950,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Updates how much each depth should be offset by.
+     * <p>
+     *  更新每个深度应偏移多少。
+     * 
      */
     protected void updateDepthOffset() {
         if(isRootVisible()) {
@@ -1743,6 +1971,9 @@ public class BasicTreeUI extends TreeUI
       * Updates the cellEditor based on the editability of the JTree that
       * we're contained in.  If the tree is editable but doesn't have a
       * cellEditor, a basic one will be used.
+      * <p>
+      *  基于我们所包含的JTree的可编辑性更新cellEditor。如果树是可编辑的,但没有cellEditor,则将使用基本的。
+      * 
       */
     protected void updateCellEditor() {
         TreeCellEditor        newEditor;
@@ -1778,6 +2009,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
       * Messaged from the tree we're in when the renderer has changed.
+      * <p>
+      *  当渲染器发生变化时,我们从树上消失。
+      * 
       */
     protected void updateRenderer() {
         if(tree != null) {
@@ -1806,6 +2040,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Resets the TreeState instance based on the tree we're providing the
      * look and feel for.
+     * <p>
+     *  基于我们为其提供外观的树,重置TreeState实例。
+     * 
      */
     protected void configureLayoutCache() {
         if(treeState != null && tree != null) {
@@ -1843,6 +2080,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Marks the cached size as being invalid, and messages the
      * tree with <code>treeDidChange</code>.
+     * <p>
+     *  将缓存大小标记为无效,并使用<code> treeDidChange </code>消息树。
+     * 
      */
     protected void updateSize() {
         validCachedPreferredSize = false;
@@ -1860,6 +2100,10 @@ public class BasicTreeUI extends TreeUI
      * For left to right orientations, the size is determined from the
      * current AbstractLayoutCache. For RTL orientations, the preferred size
      * becomes the width minus the minimum x position.
+     * <p>
+     *  更新从<code> getPreferredSize()</code>返回的<code> preferredSize </code>实例变量。
+     * <p>对于从左到右的方向,大小取决于当前的AbstractLayoutCache。对于RTL方向,优选大小变为宽度减去最小x位置。
+     * 
      */
     protected void updateCachedPreferredSize() {
         if(treeState != null) {
@@ -1908,6 +2152,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
       * Messaged from the VisibleTreeNode after it has been expanded.
+      * <p>
+      *  在VisibleTreeNode展开后从VisibleTreeNode消息。
+      * 
       */
     protected void pathWasExpanded(TreePath path) {
         if(tree != null) {
@@ -1917,6 +2164,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
       * Messaged from the VisibleTreeNode after it has collapsed.
+      * <p>
+      *  在VisibleTreeNode崩溃后从VisibleTreeNode消息。
+      * 
       */
     protected void pathWasCollapsed(TreePath path) {
         if(tree != null) {
@@ -1927,6 +2177,9 @@ public class BasicTreeUI extends TreeUI
     /**
       * Ensures that the rows identified by beginRow through endRow are
       * visible.
+      * <p>
+      *  确保由beginRow到endRow标识的行可见。
+      * 
       */
     protected void ensureRowsAreVisible(int beginRow, int endRow) {
         if(tree != null && beginRow >= 0 && endRow < getRowCount(tree)) {
@@ -1971,12 +2224,14 @@ public class BasicTreeUI extends TreeUI
     }
 
     /** Sets the preferred minimum size.
+    /* <p>
       */
     public void setPreferredMinSize(Dimension newSize) {
         preferredMinSize = newSize;
     }
 
     /** Returns the minimum preferred size.
+    /* <p>
       */
     public Dimension getPreferredMinSize() {
         if(preferredMinSize == null)
@@ -1986,6 +2241,9 @@ public class BasicTreeUI extends TreeUI
 
     /** Returns the preferred size to properly display the tree,
       * this is a cover method for getPreferredSize(c, true).
+      * <p>
+      *  这是一个覆盖方法getPreferredSize(c,true)。
+      * 
       */
     public Dimension getPreferredSize(JComponent c) {
         return getPreferredSize(c, true);
@@ -1994,6 +2252,9 @@ public class BasicTreeUI extends TreeUI
     /** Returns the preferred size to represent the tree in
       * <I>c</I>.  If <I>checkConsistency</I> is true
       * <b>checkConsistency</b> is messaged first.
+      * <p>
+      *  </i>。如果<I> checkConsistency </I>为真,则<b> checkConsistency </b>首先消息。
+      * 
       */
     public Dimension getPreferredSize(JComponent c,
                                       boolean checkConsistency) {
@@ -2017,6 +2278,9 @@ public class BasicTreeUI extends TreeUI
     /**
       * Returns the minimum size for this component.  Which will be
       * the min preferred size or 0, 0.
+      * <p>
+      *  返回此组件的最小大小。这将是最小的首选大小或0,0。
+      * 
       */
     public Dimension getMinimumSize(JComponent c) {
         if(this.getPreferredMinSize() != null)
@@ -2027,6 +2291,9 @@ public class BasicTreeUI extends TreeUI
     /**
       * Returns the maximum size for this component, which will be the
       * preferred size if the instance is currently in a JTree, or 0, 0.
+      * <p>
+      * 返回此组件的最大大小,如果实例当前位于JTree或0,0中,则此大小将是首选大小。
+      * 
       */
     public Dimension getMaximumSize(JComponent c) {
         if(tree != null)
@@ -2044,6 +2311,10 @@ public class BasicTreeUI extends TreeUI
      * invoked on the current editor. Then completeEditing will
      * be messaged with false, true, false to cancel any lingering
      * editing.
+     * <p>
+     *  停止编辑会话的消息。如果接收器提供的外观和感觉从<code> getInvokesStopCellEditing </code>返回true,stopCellEditing将在当前编辑器上调用。
+     * 然后completeEditing将被消息与false,true,false以取消任何延迟编辑。
+     * 
      */
     protected void completeEditing() {
         /* If should invoke stopCellEditing, try that */
@@ -2052,6 +2323,8 @@ public class BasicTreeUI extends TreeUI
             cellEditor.stopCellEditing();
         }
         /* Invoke cancelCellEditing, this will do nothing if stopCellEditing
+        /* <p>
+        /* 
            was successful. */
         completeEditing(false, true, false);
     }
@@ -2061,6 +2334,10 @@ public class BasicTreeUI extends TreeUI
       * is messaged with stopEditing, if messageCancel is true the
       * editor is messaged with cancelEditing. If messageTree is true
       * the treeModel is messaged with valueForPathChanged.
+      * <p>
+      *  停止编辑会话。如果messageStop为true,则编辑器将使用stopEditing消息,如果messageCancel为true,编辑器将使用cancelEditing消息。
+      * 如果messageTree为true,则treeModel将与valueForPathChanged通信。
+      * 
       */
     protected void completeEditing(boolean messageStop,
                                    boolean messageCancel,
@@ -2116,6 +2393,9 @@ public class BasicTreeUI extends TreeUI
       * Will start editing for node if there is a cellEditor and
       * shouldSelectCell returns true.<p>
       * This assumes that path is valid and visible.
+      * <p>
+      *  如果有一个cellEditor和shouldSelectCell返回true,将开始编辑节点。<p>这假定路径是有效的和可见的。
+      * 
       */
     protected boolean startEditing(TreePath path, MouseEvent event) {
         if (isEditing(tree) && tree.getInvokesStopCellEditing() &&
@@ -2180,6 +2460,8 @@ public class BasicTreeUI extends TreeUI
 
                 if(event != null) {
                     /* Find the component that will get forwarded all the
+                    /* <p>
+                    /* 
                        mouse events until mouseReleased. */
                     Point          componentPoint = SwingUtilities.convertPoint
                         (tree, new Point(event.getX(), event.getY()),
@@ -2187,6 +2469,10 @@ public class BasicTreeUI extends TreeUI
 
                     /* Create an instance of BasicTreeMouseListener to handle
                        passing the mouse/motion events to the necessary
+                    /* <p>
+                    /*  将鼠标/运动事件传递到必要的
+                    /* 
+                    /* 
                        component. */
                     // We really want similar behavior to getMouseEventTarget,
                     // but it is package private.
@@ -2224,6 +2510,9 @@ public class BasicTreeUI extends TreeUI
      * If the <code>mouseX</code> and <code>mouseY</code> are in the
      * expand/collapse region of the <code>row</code>, this will toggle
      * the row.
+     * <p>
+     *  如果<code> mouseX </code>和<code> mouseY </code>位于<code> row </code>的展开/折叠区域,
+     * 
      */
     protected void checkForClickInExpandControl(TreePath path,
                                                 int mouseX, int mouseY) {
@@ -2236,6 +2525,9 @@ public class BasicTreeUI extends TreeUI
      * Returns true if <code>mouseX</code> and <code>mouseY</code> fall
      * in the area of row that is used to expand/collapse the node and
      * the node at <code>row</code> does not represent a leaf.
+     * <p>
+     *  如果<code> mouseX </code>和<code> mouseY </code>位于用于展开/折叠节点的行区域中,并且<code> row </code>上的节点不代表一片树叶。
+     * 
      */
     protected boolean isLocationInExpandControl(TreePath path,
                                                 int mouseX, int mouseY) {
@@ -2267,6 +2559,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Messaged when the user clicks the particular row, this invokes
      * toggleExpandState.
+     * <p>
+     *  当用户点击特定行时,消息会调用toggleExpandState。
+     * 
      */
     protected void handleExpandControlClick(TreePath path, int mouseX,
                                             int mouseY) {
@@ -2278,6 +2573,9 @@ public class BasicTreeUI extends TreeUI
      * If expanding a path and JTree scrolls on expand, ensureRowsAreVisible
      * is invoked to scroll as many of the children to visible as possible
      * (tries to scroll to last visible descendant of path).
+     * <p>
+     * 如果未展开则展开路径,如果展开则折叠行。如果展开一个路径,并且JTree在展开时滚动,则调用ensureRowsAreVisible来尽可能多地滚动子对象以尝试滚动到最后一个可见的路径后代。
+     * 
      */
     protected void toggleExpandState(TreePath path) {
         if(!tree.isExpanded(path)) {
@@ -2302,6 +2600,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Returning true signifies a mouse event on the node should toggle
      * the selection of only the row under mouse.
+     * <p>
+     *  返回true表示节点上的鼠标事件应该仅切换鼠标下方的行的选择。
+     * 
      */
     protected boolean isToggleSelectionEvent(MouseEvent event) {
         return (SwingUtilities.isLeftMouseButton(event) &&
@@ -2311,6 +2612,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Returning true signifies a mouse event on the node should select
      * from the anchor point.
+     * <p>
+     *  返回true表示节点上的鼠标事件应从锚点中选择。
+     * 
      */
     protected boolean isMultiSelectEvent(MouseEvent event) {
         return (SwingUtilities.isLeftMouseButton(event) &&
@@ -2321,6 +2625,9 @@ public class BasicTreeUI extends TreeUI
      * Returning true indicates the row under the mouse should be toggled
      * based on the event. This is invoked after checkForClickInExpandControl,
      * implying the location is not in the expand (toggle) control
+     * <p>
+     *  返回true表示应根据事件切换鼠标下的行。这是在checkForClickInExpandControl之后调用的,这意味着位置不在展开(切换)控件中
+     * 
      */
     protected boolean isToggleEvent(MouseEvent event) {
         if(!SwingUtilities.isLeftMouseButton(event)) {
@@ -2341,6 +2648,10 @@ public class BasicTreeUI extends TreeUI
      * a multi selection event, the selection is updated from the
      * anchor point. Otherwise the row is selected, and if the event
      * specified a toggle event the row is expanded/collapsed.
+     * <p>
+     *  消息以更新基于特定行上的MouseEvent的选择。如果事件是切换选择事件,则该行被选择或被取消选择。如果事件标识多选择事件,则从锚点更新选择。
+     * 否则,将选择该行,如果事件指定了切换事件,则该行将展开/折叠。
+     * 
      */
     protected void selectPathForEvent(TreePath path, MouseEvent event) {
         /* Adjust from the anchor point. */
@@ -2398,6 +2709,8 @@ public class BasicTreeUI extends TreeUI
     }
 
     /**
+    /* <p>
+    /* 
      * @return true if the node at <code>row</code> is a leaf.
      */
     protected boolean isLeaf(int row) {
@@ -2467,6 +2780,10 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Updates the lead row of the selection.
+     * <p>
+     *  更新选择的引导行。
+     * 
+     * 
      * @since 1.7
      */
     protected void updateLeadSelectionRow() {
@@ -2476,6 +2793,10 @@ public class BasicTreeUI extends TreeUI
     /**
      * Returns the lead row of the selection.
      *
+     * <p>
+     *  返回选择的引导行。
+     * 
+     * 
      * @return selection lead row
      * @since 1.7
      */
@@ -2486,6 +2807,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Extends the selection from the anchor to make <code>newLead</code>
      * the lead of the selection. This does not scroll.
+     * <p>
+     *  从锚点扩展选择以使<code> newLead </code>选择的引导。这不滚动。
+     * 
      */
     private void extendSelection(TreePath newLead) {
         TreePath           aPath = getAnchorSelectionPath();
@@ -2511,6 +2835,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Invokes <code>repaint</code> on the JTree for the passed in TreePath,
      * <code>path</code>.
+     * <p>
+     *  在JTree上调用传递到TreePath,<code> path </code>中的<code> repaint </code>。
+     * 
      */
     private void repaintPath(TreePath path) {
         if (path != null) {
@@ -2523,6 +2850,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Updates the TreeState in response to nodes expanding/collapsing.
+     * <p>
+     *  更新TreeState以响应节点展开/折叠。
+     * 
      */
     public class TreeExpansionHandler implements TreeExpansionListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -2532,6 +2862,9 @@ public class BasicTreeUI extends TreeUI
 
         /**
          * Called whenever an item in the tree has been expanded.
+         * <p>
+         *  当树中的项目已展开时调用。
+         * 
          */
         public void treeExpanded(TreeExpansionEvent event) {
             getHandler().treeExpanded(event);
@@ -2539,6 +2872,9 @@ public class BasicTreeUI extends TreeUI
 
         /**
          * Called whenever an item in the tree has been collapsed.
+         * <p>
+         *  当树中的项目已折叠时调用。
+         * 
          */
         public void treeCollapsed(TreeExpansionEvent event) {
             getHandler().treeCollapsed(event);
@@ -2548,10 +2884,15 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Updates the preferred size when scrolling (if necessary).
+     * <p>
+     * 更新滚动时的首选大小(如有必要)。
+     * 
      */
     public class ComponentHandler extends ComponentAdapter implements
                  ActionListener {
         /** Timer used when inside a scrollpane and the scrollbar is
+        /* <p>
+        /* 
          * adjusting. */
         protected Timer                timer;
         /** ScrollBar that is being adjusted. */
@@ -2583,6 +2924,9 @@ public class BasicTreeUI extends TreeUI
         /**
          * Creates, if necessary, and starts a Timer to check if need to
          * resize the bounds.
+         * <p>
+         *  如果需要,创建,并启动一个计时器来检查是否需要调整边界的大小。
+         * 
          */
         protected void startTimer() {
             if(timer == null) {
@@ -2595,6 +2939,9 @@ public class BasicTreeUI extends TreeUI
         /**
          * Returns the JScrollPane housing the JTree, or null if one isn't
          * found.
+         * <p>
+         *  返回包含JTree的JScrollPane,如果找不到,返回null。
+         * 
          */
         protected JScrollPane getScrollPane() {
             Component       c = tree.getParent();
@@ -2609,6 +2956,9 @@ public class BasicTreeUI extends TreeUI
         /**
          * Public as a result of Timer. If the scrollBar is null, or
          * not adjusting, this stops the timer and updates the sizing.
+         * <p>
+         *  公共为定时器的结果。如果scrollBar为null或不调整,这将停止计时器并更新大小。
+         * 
          */
         public void actionPerformed(ActionEvent ae) {
             if(scrollBar == null || !scrollBar.getValueIsAdjusting()) {
@@ -2624,6 +2974,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Forwards all TreeModel events to the TreeState.
+     * <p>
+     *  将所有TreeModel事件转发到TreeState。
+     * 
      */
     public class TreeModelHandler implements TreeModelListener {
 
@@ -2653,6 +3006,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Listens for changes in the selection model and updates the display
      * accordingly.
+     * <p>
+     *  监听选择模型中的更改,并相应地更新显示。
+     * 
      */
     public class TreeSelectionHandler implements TreeSelectionListener {
 
@@ -2664,6 +3020,9 @@ public class BasicTreeUI extends TreeUI
         /**
          * Messaged when the selection changes in the tree we're displaying
          * for.  Stops editing, messages super and displays the changed paths.
+         * <p>
+         *  当选择在我们显示的树中更改时消失。停止编辑,消息超级并显示更改的路径。
+         * 
          */
         public void valueChanged(TreeSelectionEvent event) {
             getHandler().valueChanged(event);
@@ -2674,6 +3033,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Listener responsible for getting cell editing events and updating
      * the tree accordingly.
+     * <p>
+     *  监听器负责获取单元格编辑事件并相应地更新树。
+     * 
      */
     public class CellEditorHandler implements CellEditorListener {
 
@@ -2697,6 +3059,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * This is used to get multiple key down events to appropriately generate
      * events.
+     * <p>
+     *  这用于获得多个键按下事件以适当地生成事件。
+     * 
      */
     public class KeyHandler extends KeyAdapter {
 
@@ -2723,6 +3088,11 @@ public class BasicTreeUI extends TreeUI
          * pressed by the user. Subsequent same key presses
          * move the keyboard focus to the next object that
          * starts with the same letter.
+         * <p>
+         *  在键入键时调用。
+         * 
+         *  将键盘焦点移动到第一个字母与用户按下的字母数字键相匹配的第一个元素。后续相同的按键将键盘焦点移动到以相同字母开始的下一个对象。
+         * 
          */
         public void keyTyped(KeyEvent e) {
             getHandler().keyTyped(e);
@@ -2740,6 +3110,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * Repaints the lead selection row when focus is lost/gained.
+     * <p>
+     *  当丢失/获得焦点时,重新绘制潜在客户选择行。
+     * 
      */
     public class FocusHandler implements FocusListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -2750,6 +3123,9 @@ public class BasicTreeUI extends TreeUI
         /**
          * Invoked when focus is activated on the tree we're in, redraws the
          * lead row.
+         * <p>
+         *  在我们所在的树上激活焦点时调用,重绘导图行。
+         * 
          */
         public void focusGained(FocusEvent e) {
             getHandler().focusGained(e);
@@ -2758,6 +3134,9 @@ public class BasicTreeUI extends TreeUI
         /**
          * Invoked when focus is activated on the tree we're in, redraws the
          * lead row.
+         * <p>
+         *  在我们所在的树上激活焦点时调用,重绘导图行。
+         * 
          */
         public void focusLost(FocusEvent e) {
             getHandler().focusLost(e);
@@ -2769,12 +3148,18 @@ public class BasicTreeUI extends TreeUI
      * Class responsible for getting size of node, method is forwarded
      * to BasicTreeUI method. X location does not include insets, that is
      * handled in getPathBounds.
+     * <p>
+     *  类负责获取节点的大小,方法转发到BasicTreeUI方法。 X位置不包括insets,这是在getPathBounds中处理。
+     * 
      */
     // This returns locations that don't include any Insets.
     public class NodeDimensionsHandler extends
                  AbstractLayoutCache.NodeDimensions {
         /**
          * Responsible for getting the size of a particular node.
+         * <p>
+         *  负责获取特定节点的大小。
+         * 
          */
         public Rectangle getNodeDimensions(Object value, int row,
                                            int depth, boolean expanded,
@@ -2829,6 +3214,8 @@ public class BasicTreeUI extends TreeUI
         }
 
         /**
+        /* <p>
+        /* 
          * @return amount to indent the given row.
          */
         protected int getRowX(int row, int depth) {
@@ -2841,6 +3228,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * TreeMouseListener is responsible for updating the selection
      * based on mouse events.
+     * <p>
+     * TreeMouseListener负责根据鼠标事件更新选择。
+     * 
      */
     public class MouseHandler extends MouseAdapter implements MouseMotionListener
  {
@@ -2851,6 +3241,9 @@ public class BasicTreeUI extends TreeUI
 
         /**
          * Invoked when a mouse button has been pressed on a component.
+         * <p>
+         *  在组件上按下鼠标按钮时调用。
+         * 
          */
         public void mousePressed(MouseEvent e) {
             getHandler().mousePressed(e);
@@ -2863,6 +3256,10 @@ public class BasicTreeUI extends TreeUI
         /**
          * Invoked when the mouse button has been moved on a component
          * (with no buttons no down).
+         * <p>
+         *  在组件上移动鼠标按钮时调用(没有按钮没有向下)。
+         * 
+         * 
          * @since 1.4
          */
         public void mouseMoved(MouseEvent e) {
@@ -2878,6 +3275,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * PropertyChangeListener for the tree. Updates the appropriate
      * variable, or TreeState, based on what changes.
+     * <p>
+     *  树的PropertyChangeListener。根据什么更改更新适当的变量或TreeState。
+     * 
      */
     public class PropertyChangeHandler implements
                        PropertyChangeListener {
@@ -2896,6 +3296,9 @@ public class BasicTreeUI extends TreeUI
     /**
      * Listener on the TreeSelectionModel, resets the row selection if
      * any of the properties of the model change.
+     * <p>
+     *  监听器在TreeSelectionModel上,如果模型的任何属性发生更改,则重置行选择。
+     * 
      */
     public class SelectionModelPropertyChangeHandler implements
                       PropertyChangeListener {
@@ -2915,12 +3318,19 @@ public class BasicTreeUI extends TreeUI
      * <code>TreeTraverseAction</code> is the action used for left/right keys.
      * Will toggle the expandedness of a node, as well as potentially
      * incrementing the selection.
+     * <p>
+     *  <code> TreeTraverseAction </code>是用于左/右键的操作。将切换节点的扩展,以及潜在地增加选择。
+     * 
      */
     public class TreeTraverseAction extends AbstractAction {
         /** Determines direction to traverse, 1 means expand, -1 means
+        /* <p>
+        /* 
           * collapse. */
         protected int direction;
         /** True if the selection is reset, false means only the lead path
+        /* <p>
+        /* 
          * changes. */
         private boolean changeSelection;
 
@@ -2947,6 +3357,7 @@ public class BasicTreeUI extends TreeUI
 
 
     /** TreePageAction handles page up and page down events.
+    /* <p>
       */
     public class TreePageAction extends AbstractAction {
         /** Specifies the direction to adjust the selection by. */
@@ -2982,11 +3393,16 @@ public class BasicTreeUI extends TreeUI
 
     /** TreeIncrementAction is used to handle up/down actions.  Selection
       * is moved up or down based on direction.
+      * <p>
+      *  基于方向向上或向下移动。
+      * 
       */
     public class TreeIncrementAction extends AbstractAction  {
         /** Specifies the direction to adjust the selection by. */
         protected int         direction;
         /** If true the new item is added to the selection, if false the
+        /* <p>
+        /* 
          * selection is reset. */
         private boolean       addToSelection;
         private boolean       changeSelection;
@@ -3019,6 +3435,9 @@ public class BasicTreeUI extends TreeUI
       * TreeHomeAction is used to handle end/home actions.
       * Scrolls either the first or last cell to be visible based on
       * direction.
+      * <p>
+      *  TreeHomeAction用于处理end / home动作。根据方向滚动第一个或最后一个单元格可见。
+      * 
       */
     public class TreeHomeAction extends AbstractAction {
         protected int            direction;
@@ -3053,6 +3472,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
       * For the first selected row expandedness will be toggled.
+      * <p>
+      *  对于第一个选定的行,展开式将被切换。
+      * 
       */
     public class TreeToggleAction extends AbstractAction {
         public TreeToggleAction(String name) {
@@ -3072,6 +3494,9 @@ public class BasicTreeUI extends TreeUI
 
     /**
      * ActionListener that invokes cancelEditing when action performed.
+     * <p>
+     *  ActionListener在执行操作时调用cancelEditing。
+     * 
      */
     public class TreeCancelEditingAction extends AbstractAction {
         public TreeCancelEditingAction(String name) {
@@ -3094,6 +3519,9 @@ public class BasicTreeUI extends TreeUI
       * including mouse motion events, until the mouse is released to
       * the destination it is constructed with. It is assumed all the
       * events are currently target at source.
+      * <p>
+      *  MouseInputHandler处理传递所有鼠标事件,包括鼠标运动事件,直到鼠标释放到其构造的目的地。假设所有事件当前目标在源。
+      * 
       */
     public class MouseInputHandler extends Object implements
                      MouseInputListener
@@ -3192,6 +3620,10 @@ public class BasicTreeUI extends TreeUI
         /**
          * Create a Transferable to use as the source for a data transfer.
          *
+         * <p>
+         *  创建一个可转移以用作数据传输的源。
+         * 
+         * 
          * @param c  The component holding the data to be transfered.  This
          *  argument is provided to enable sharing of TransferHandlers by
          *  multiple components.
@@ -3255,6 +3687,9 @@ public class BasicTreeUI extends TreeUI
          * Selection paths are in selection order.  The conversion to
          * HTML requires display order.  This method resorts the paths
          * to be in the display order.
+         * <p>
+         *  选择路径按照选择顺序。转换为HTML需要显示顺序。此方法将路径设置为按显示顺序。
+         * 
          */
         TreePath[] getDisplayOrderPaths(TreePath[] paths) {
             // sort the paths to display order rather than selection order
@@ -3300,6 +3735,12 @@ public class BasicTreeUI extends TreeUI
          * focus to the next object that starts with the same letter until another
          * key is pressed, then it is treated as the prefix with appropriate number
          * of the same letters followed by first typed another letter.
+         * <p>
+         *  在键入键时调用。
+         * 
+         * 将键盘焦点移动到第一个元素,前缀与用户按下的延迟小于<code> timeFactor </code>属性值的字母数字键序列匹配(如果未定义,则为1000毫秒)。
+         * 后续相同的按键将键盘焦点移动到以相同的字母开始的下一个对象,直到按下另一个键,然后它被视为具有适当数目的相同字母的前缀,之后是第一个键入的另一个字母。
+         * 
          */
         public void keyTyped(KeyEvent e) {
             // handle first letter navigation
@@ -3358,6 +3799,11 @@ public class BasicTreeUI extends TreeUI
          *
          * Checks to see if the key event is a navigation key to prevent
          * dispatching these keys for the first letter navigation.
+         * <p>
+         *  在按下键时调用。
+         * 
+         *  检查键事件是否是导航键,以防止分派这些键用于第一个字母导航。
+         * 
          */
         public void keyPressed(KeyEvent e) {
             if (tree != null && isNavigationKey(e)) {
@@ -3374,6 +3820,9 @@ public class BasicTreeUI extends TreeUI
          * Returns whether or not the supplied key event maps to a key that is used for
          * navigation.  This is used for optimizing key input by only passing non-
          * navigation keys to the first letter navigation mechanism.
+         * <p>
+         *  返回提供的键事件是否映射到用于导航的键。这用于通过仅将非导航键传递到第一字母导航机制来优化键输入。
+         * 
          */
         private boolean isNavigationKey(KeyEvent event) {
             InputMap inputMap = tree.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
@@ -3525,6 +3974,9 @@ public class BasicTreeUI extends TreeUI
 
         /**
          * Invoked when a mouse button has been pressed on a component.
+         * <p>
+         *  在组件上按下鼠标按钮时调用。
+         * 
          */
         public void mousePressed(MouseEvent e) {
             if (SwingUtilities2.shouldIgnore(e, tree)) {
@@ -3638,6 +4090,9 @@ public class BasicTreeUI extends TreeUI
         /**
          * Invoked when the mouse button has been moved on a component
          * (with no buttons no down).
+         * <p>
+         *  在组件上移动鼠标按钮时调用(没有按钮没有向下)。
+         * 
          */
         public void mouseMoved(MouseEvent e) {
         }
@@ -4386,6 +4841,8 @@ public class BasicTreeUI extends TreeUI
                     newIndex = 0;
                 else {
                     /* Try and expand the node, otherwise go to next
+                    /* <p>
+                    /* 
                        node. */
                     if(direction == 1) {
                         TreePath minSelPath = ui.getPathForRow(tree, minSelIndex);

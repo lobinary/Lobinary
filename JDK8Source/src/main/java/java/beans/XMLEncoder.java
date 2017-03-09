@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -197,6 +198,73 @@ import java.nio.charset.UnsupportedCharsetException;
  * <a
  href="http://java.sun.com/products/jfc/tsc/articles/persistence4">Using XMLEncoder</a>,
  * an article in <em>The Swing Connection.</em>
+ * <p>
+ *  <code> XMLEncoder </code>类是<code> ObjectOutputStream </code>的补充替代方法,可以用来生成<em> JavaBean </em>的文本表示,方
+ * 法与<code> > ObjectOutputStream </code>可用于创建<code> Serializable </code>对象的二进制表示。
+ * 例如,以下片段可用于创建所提供的<em> JavaBean </em>及其所有属性的文本表示：。
+ * <pre>
+ *  XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Test.xml"))); e.writeOb
+ * ject(new JButton("Hello,world")); e.close();。
+ * </pre>
+ *  尽管它们的API的相似性,但是<code> XMLEncoder </code>类专门设计用于将JavaBean </em>的图形归档为其公共属性的文本表示。
+ * 像Java源文件一样,以这种方式编写的文档对所涉及类的实现中的更改具有自然的豁免。继续推荐用于进程间通信和通用序列化的<code> ObjectOutputStream </code>。
+ * <p>
+ * <code> XMLEncoder </code>类为JavaBean </em>提供了一个默认的表示形式,其中它们被表示为符合XML规范的1.0版本的XML文档和Unicode的UTF-8字符编码/ 
+ * ISO 10646字符集。
+ * 由<code> XMLEncoder </code>类生成的XML文档是：。
+ * <ul>
+ * <li>
+ *  <em>便携式和版本恢复</em>：它们对任何类的私有实现没有依赖性,因此,如Java源文件,它们可以在可能具有不同版本的一些类的环境之间以及在VM之间交换来自不同的供应商。
+ * <li>
+ *  <em>结构紧凑</em>：<code> XMLEncoder </code>类在内部使用了一个<em>冗余消除</em>算法,因此Bean属性的默认值不会写入流。
+ * <li>
+ *  <em>容错</em>：文件中的非结构性错误(由文件损坏或对存档中的类所做的API更改引起)仍保持本地化状态,以便读取器报告错误并继续加载不受错误影响的文档部分。
+ * </ul>
+ * <p>
+ *  下面是包含来自<em> swing </em>工具包的一些用户界面组件的XML归档的示例：
+ * <pre>
+ * &lt;?xml version ="1.0"encoding ="UTF-8"?&gt; &lt; java version ="1.0"class ="java.beans.XMLDecoder"&
+ * gt; &lt; object class ="javax.swing.JFrame"&gt; &lt; void property ="name"&gt; &lt; string&gt; frame1
+ * &lt; / string&gt; &lt; / void&gt; &lt; void property ="bounds"&gt; &lt; object class ="java.awt.Recta
+ * ngle"&gt; &lt; int&gt; 0&lt; / int&gt; &lt; int&gt; 0&lt; / int&gt; &lt; int&gt; 200&lt; / int&gt; &l
+ * t; int&gt; 200&lt; / int&gt; &lt; / object&gt; &lt; / void&gt; &lt; void property ="contentPane"&gt; 
+ * &lt; void method ="add"&gt; &lt; object class ="javax.swing.JButton"&gt; &lt; void property ="label"&
+ * gt; &lt; string&gt; Hello&lt; / string&gt; &lt; / void&gt; &lt; / object&gt; &lt; / void&gt; &lt; / v
+ * oid&gt; &lt; void property ="visible"&gt; &lt; boolean&gt; true&lt; / boolean&gt; &lt; / void&gt; &lt
+ * ; / object&gt; &lt; / java&gt;。
+ * </pre>
+ *  XML语法使用以下约定：
+ * <ul>
+ * <li>
+ *  每个元素代表一个方法调用。
+ * <li>
+ *  "对象"标签表示一个<em>表达式</em>,其值将用作包围元素的参数。
+ * <li>
+ *  "void"标签表示将被执行的<em>语句</em>,但其结果将不会用作包围方法的参数。
+ * <li>
+ *  包含元素的元素使用那些元素作为参数,除非它们有标签："void"。
+ * <li>
+ *  方法的名称由"method"属性表示。
+ * <li>
+ *  XML的标准"id"和"idref"属性用于引用以前的表达式 - 以便处理对象图形中的圆形。
+ * <li>
+ * "类"属性用于明确指定静态方法或构造函数的目标;其值是类的完全限定名称。
+ * <li>
+ *  如果没有由"类"属性定义目标,则使用外部上下文作为目标执行具有"void"标记的元素。
+ * <li>
+ *  Java的String类被特殊处理,并写入&lt; string&gt; Hello,world&lt; / string&gt;其中字符串的字符使用UTF-8字符编码转换为字节。
+ * </ul>
+ * <p>
+ *  虽然可以仅使用这三个标签来编写所有对象图,但是包括以下定义,使得可以更简洁地表示公共数据结构：
+ * <p>
+ * <ul>
+ * <li>
+ *  默认方法名称为"new"。
+ * <li>
+ *  对Java类的引用以&lt; class&gt; javax.swing.JButton&lt; / class&gt;的形式编写。
+ * <li>
+ *  Java基本类型的包装器类的实例使用基本类型的名称作为标记来编写。
+ * 
  * @see XMLDecoder
  * @see java.io.ObjectOutputStream
  *
@@ -230,6 +298,28 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
      * Creates a new XML encoder to write out <em>JavaBeans</em>
      * to the stream <code>out</code> using an XML encoding.
      *
+     * <p>
+     * 例如,<code> Integer </code>类的实例可以被写为：&lt; int&gt; 123&lt; / int&gt ;.注意,<code> XMLEncoder </code>类使用Jav
+     * a的反射包,其中Java的原始类型和它们相关联的"包装类"之间的转换在内部处理。
+     *  Java基本类型的包装器类的实例使用基本类型的名称作为标记来编写。 <code> XMLEncoder </code>类的API本身只处理<code> Object </code>。
+     * <li>
+     * 在表示其名称以"get"开头的nullary方法的元素中,"method"属性被替换为"property"属性,其值通过删除"get"前缀并对结果进行非资格化。
+     * <li>
+     *  在表示其名称以"set"开头的monadic方法的元素中,"method"属性被替换为"property"属性,其值通过去除"set"前缀给出,并对结果进行去量化。
+     * <li>
+     *  在表示采用一个整数参数的名为"get"的方法的元素中,"method"属性被替换为"index"属性,其值为第一个参数的值。
+     * <li>
+     *  在表示具有两个参数的名为"set"的方法的元素中,第一个参数是整数,"method"属性被替换为"index"属性,其值为第一个参数的值。
+     * <li>
+     *  对数组的引用使用"array"标签写入。 "类"和"长度"属性分别指定数组的子类型及其长度。
+     * </ul>
+     * 
+     * p>
+     *  有关详情,您还可以查看<a href="http://java.sun.com/products/jfc/tsc/articles/persistence4">使用XMLEncoder </a>,文章
+     * <em>摇摆连接。
+     * </em>。
+     * 
+     * 
      * @param out  the stream to which the XML representation of
      *             the objects will be written
      *
@@ -247,6 +337,10 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
      * to the stream <code>out</code> using the given <code>charset</code>
      * starting from the given <code>indentation</code>.
      *
+     * <p>
+     *  创建一个新的XML编码器,使用XML编码将<em> JavaBeans </em>写入流<code> out </code>。
+     * 
+     * 
      * @param out          the stream to which the XML representation of
      *                     the objects will be written
      * @param charset      the name of the requested charset;
@@ -295,6 +389,10 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
     /**
      * Sets the owner of this encoder to <code>owner</code>.
      *
+     * <p>
+     *  创建新的XML编码器,使用给定的<code> charset </code>从给定的<code>缩进</code>开始将<em> JavaBeans </em> 。
+     * 
+     * 
      * @param owner The owner of this encoder.
      *
      * @see #getOwner
@@ -307,6 +405,10 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
     /**
      * Gets the owner of this encoder.
      *
+     * <p>
+     * 将此编码器的所有者设置为<code>所有者</code>。
+     * 
+     * 
      * @return The owner of this encoder.
      *
      * @see #setOwner
@@ -318,6 +420,10 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
     /**
      * Write an XML representation of the specified object to the output.
      *
+     * <p>
+     *  获取此编码器的所有者。
+     * 
+     * 
      * @param o The object to be written to the stream.
      *
      * @see XMLDecoder#readObject
@@ -388,6 +494,10 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
      * This method should only be invoked within the context
      * of initializing a persistence delegate.
      *
+     * <p>
+     *  将指定对象的XML表示形式写入输出。
+     * 
+     * 
      * @param oldStm The statement that will be written
      *               to the stream.
      * @see java.beans.PersistenceDelegate#initialize
@@ -405,6 +515,11 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
                Test case is:
                    os.setOwner(this);
                    os.writeObject(this);
+            /* <p>
+            /*  记录语句,以便在流刷新时编码器将生成实际输出。
+            /* <P>
+            /*  此方法只应在初始化持久性委托的上下文中调用。
+            /* 
             */
             mark(oldStm);
             Object target = oldStm.getTarget();
@@ -441,6 +556,10 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
      * XMLEncoder, see
      * http://java.sun.com/products/jfc/tsc/articles/persistence4/#i18n
      *
+     * <p>
+     *  注意,我们必须首先做标记,因为我们可能需要此语句中的上一个值的结果。测试用例是：os.setOwner(this); os.writeObject(this);
+     * 
+     * 
      * @param oldExp The expression that will be written
      *               to the stream.
      * @see java.beans.PersistenceDelegate#initialize
@@ -463,6 +582,13 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
      * written to the stream since the last time <code>flush</code>
      * was called. After flushing, all internal references to the
      * values that were written to this stream are cleared.
+     * <p>
+     *  记录表达式,以便在流刷新时编码器将生成实际输出。
+     * <P>
+     *  此方法只应在初始化持久性委托或设置编码器以从资源束读取的上下文中调用。
+     * <P>
+     *  有关将资源束与XMLEncoder配合使用的更多信息,请参阅http://java.sun.com/products/jfc/tsc/articles/persistence4/#i18n
+     * 
      */
     public void flush() {
         if (!preambleWritten) { // Don't do this in constructor - it throws ... pending.
@@ -525,6 +651,9 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
      * This method calls <code>flush</code>, writes the closing
      * postamble and then closes the output stream associated
      * with this stream.
+     * <p>
+     *  如果尚未写入,则该方法写出与XML编码相关联的前导,然后写出自从上次调用<code> flush </code>以来写入流的所有值。刷新后,对写入此流的值的所有内部引用都将被清除。
+     * 
      */
     public void close() {
         flush();
@@ -565,6 +694,10 @@ public class XMLEncoder extends Encoder implements AutoCloseable {
      *            | [#x10000-#x10ffff]
      * </par>
      *
+     * <p>
+     *  此方法调用<code> flush </code>,写入结束后缀,然后关闭与此流相关的输出流。
+     * 
+     * 
      * @param code  the 32-bit Unicode code point being tested
      * @return  <code>true</code> if the Unicode code point is valid,
      *          <code>false</code> otherwise

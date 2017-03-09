@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,6 +92,31 @@ import java.text.AttributedCharacterIterator;
  * All drawing or writing is done in the current color,
  * using the current paint mode, and in the current font.
  *
+ * <p>
+ *  <code> Graphics </code>类是所有图形上下文的抽象基类,允许应用程序绘制在各种设备上实现的组件,以及屏幕外图像。
+ * <p>
+ *  <code> Graphics </code>对象封装Java支持的基本呈现操作所需的状态信息。该状态信息包括以下属性：
+ * 
+ * <ul>
+ *  <li>要绘制的<code>组件</code>对象。 <li>用于渲染和裁剪坐标的翻译原点。 <li>当前剪辑。 <li>当前颜色。 <li>当前字体。
+ *  <li>当前逻辑像素操作函数(XOR或Paint)。 <li>当前的XOR交替颜色(参见{@link Graphics#setXORMode})。
+ * </ul>
+ * <p>
+ *  坐标是无穷薄的,位于输出设备的像素之间。绘制图形轮廓的操作通过遍历像素之间的无限细路径进行操作,其中像素大小的笔悬挂下来并且在路径上的锚点的右边。填充图形的操作通过填充无限薄路径的内部来操作。
+ * 渲染水平文本的操作使字符字形的上升部分完全高于基线坐标。
+ * <p>
+ *  图形笔从其穿过的路径向下悬挂并向右悬挂。这具有以下含义：
+ * <ul>
+ * <li>如果您绘制一个覆盖给定矩形的图形,则与填充由该相同矩形限定的图形相比,该图形在右侧和底部边缘占用一个额外的一行像素。
+ *  <li>如果您沿着与文本行基线相同的<i> y </i>坐标绘制水平线,则该线将完全绘制在文本下方,除了任何下降线。
+ *  </ul> <p>作为<code> Graphics </code>对象的方法的参数出现的所有坐标都被视为相对于调用之前的<code> Graphics </code>对象的翻译原点方法。
+ * <p>
+ *  所有渲染操作只修改位于由用户空间中的{@link Shape}指定的当前剪辑边界的区域内的像素,并且由程序使用<code> Graphics </code>对象控制。
+ * 该<i>用户剪辑</i>被转换成设备空间,并与由窗口和设备范围的可见性定义的<i>设备剪辑</i>组合。用户剪辑和设备剪辑的组合定义了<i>复合剪辑</i>,其确定最终剪辑区域。
+ * 用户剪辑不能由呈现系统修改以反映所得到的复合剪辑。用户剪辑只能通过<code> setClip </code>或<code> clipRect </code>方法进行更改。
+ * 所有绘图或写入都是以当前颜色,使用当前绘制模式和当前字体完成的。
+ * 
+ * 
  * @author      Sami Shaio
  * @author      Arthur van Hoff
  * @see     java.awt.Component
@@ -112,6 +138,13 @@ public abstract class Graphics {
      * cannot call this constructor directly. Graphics contexts are
      * obtained from other graphics contexts or are created by calling
      * <code>getGraphics</code> on a component.
+     * <p>
+     * 构造一个新的<code> Graphics </code>对象。这个构造函数是图形上下文的默认构造函数。
+     * <p>
+     *  由于<code> Graphics </code>是一个抽象类,应用程序不能直接调用此构造函数。
+     * 图形上下文从其他图形上下文中获取,或者通过在组件上调用<code> getGraphics </code>创建。
+     * 
+     * 
      * @see        java.awt.Graphics#create()
      * @see        java.awt.Component#getGraphics
      */
@@ -121,6 +154,10 @@ public abstract class Graphics {
     /**
      * Creates a new <code>Graphics</code> object that is
      * a copy of this <code>Graphics</code> object.
+     * <p>
+     *  创建一个新的<code> Graphics </code>对象,它是这个<code> Graphics </code>对象的副本。
+     * 
+     * 
      * @return     a new graphics context that is a copy of
      *                       this graphics context.
      */
@@ -152,6 +189,21 @@ public abstract class Graphics {
      * arguments.
      * </ul>
      * <p>
+     * <p>
+     *  基于此<code> Graphics </code>对象创建一个新的<code> Graphics </code>对象,但带有一个新的翻译和剪裁区域。
+     * 新的<code> Graphics </code>对象的起点已转换为指定点(<i> x </i>,<y> y </i>)。其剪裁区域由原始剪裁区域与指定矩形的交叉点确定。
+     * 参数都在原始<code> Graphics </code>对象的坐标系中解释。新的图形上下文与原始图形上下文相同,除了两个方面：。
+     * 
+     * <ul>
+     * <li>
+     *  新的图形上下文由(<i> x </i>,<y> y </i>)翻译。
+     * 也就是说,新图形上下文中的点(<code> 0 </code>,<code> 0 </code>)与(<i> x </i> i> y </i>)。
+     * <li>
+     * 除了从原始图形上下文继承的任何(经转换的)剪切矩形之外,新的图形上下文还具有附加的剪切矩形。
+     * 新剪切矩形的原点在(<code> 0 </code>,<code> 0 </code>),其大小由<code> width </code>和<code> height </code>参数。
+     * </ul>
+     * <p>
+     * 
      * @param      x   the <i>x</i> coordinate.
      * @param      y   the <i>y</i> coordinate.
      * @param      width   the width of the clipping rectangle.
@@ -176,6 +228,11 @@ public abstract class Graphics {
      * original coordinate system.  All coordinates used in subsequent
      * rendering operations on this graphics context will be relative
      * to this new origin.
+     * <p>
+     *  将图形上下文的原点转换为当前坐标系中的点(<i> x </i>,<y> y </i>)。
+     * 修改此图形上下文,以使其新来源对应于此图形上下文的原始坐标系中的点(<i> x </i>,<y> y </i>)。在此图形上下文上的后续渲染操作中使用的所有坐标将相对于该新的原点。
+     * 
+     * 
      * @param  x   the <i>x</i> coordinate.
      * @param  y   the <i>y</i> coordinate.
      */
@@ -183,6 +240,10 @@ public abstract class Graphics {
 
     /**
      * Gets this graphics context's current color.
+     * <p>
+     *  获取此图形上下文的当前颜色。
+     * 
+     * 
      * @return    this graphics context's current color.
      * @see       java.awt.Color
      * @see       java.awt.Graphics#setColor(Color)
@@ -193,6 +254,10 @@ public abstract class Graphics {
      * Sets this graphics context's current color to the specified
      * color. All subsequent graphics operations using this graphics
      * context use this specified color.
+     * <p>
+     *  将此图形上下文的当前颜色设置为指定的颜色。使用此图形上下文的所有后续图形操作都使用此指定的颜色。
+     * 
+     * 
      * @param     c   the new rendering color.
      * @see       java.awt.Color
      * @see       java.awt.Graphics#getColor
@@ -205,6 +270,9 @@ public abstract class Graphics {
      * This sets the logical pixel operation function to the paint or
      * overwrite mode.  All subsequent rendering operations will
      * overwrite the destination with the current color.
+     * <p>
+     *  设置此图形上下文的绘制模式,以使用此图形上下文的当前颜色覆盖目标。这将逻辑像素操作功能设置为绘画或覆盖模式。所有后续的渲染操作都将使用当前颜色覆盖目标。
+     * 
      */
     public abstract void setPaintMode();
 
@@ -221,12 +289,24 @@ public abstract class Graphics {
      * Pixels that are of colors other than those two colors are changed
      * in an unpredictable but reversible manner; if the same figure is
      * drawn twice, then all pixels are restored to their original values.
+     * <p>
+     * 将此图形上下文的绘制模式设置为在此图形上下文的当前颜色和新的指定颜色之间交替。这指定在XOR模式中执行逻辑像素操作,XOR模式在当前颜色和指定的XOR颜色之间交替像素。
+     * <p>
+     *  当执行绘制操作时,作为当前颜色的像素被改变为指定颜色,反之亦然。
+     * <p>
+     *  除了这两种颜色之外的颜色的像素以不可预测但可逆的方式改变;如果相同的图被绘制两次,则所有像素被恢复到它们的原始值。
+     * 
+     * 
      * @param     c1 the XOR alternation color
      */
     public abstract void setXORMode(Color c1);
 
     /**
      * Gets the current font.
+     * <p>
+     *  获取当前字体。
+     * 
+     * 
      * @return    this graphics context's current font.
      * @see       java.awt.Font
      * @see       java.awt.Graphics#setFont(Font)
@@ -237,6 +317,10 @@ public abstract class Graphics {
      * Sets this graphics context's font to the specified font.
      * All subsequent text operations using this graphics context
      * use this font. A null argument is silently ignored.
+     * <p>
+     *  将此图形上下文的字体设置为指定的字体。使用此图形上下文的所有后续文本操作都使用此字体。默认忽略null参数。
+     * 
+     * 
      * @param  font   the font.
      * @see     java.awt.Graphics#getFont
      * @see     java.awt.Graphics#drawString(java.lang.String, int, int)
@@ -247,6 +331,10 @@ public abstract class Graphics {
 
     /**
      * Gets the font metrics of the current font.
+     * <p>
+     *  获取当前字体的字体指标。
+     * 
+     * 
      * @return    the font metrics of this graphics
      *                    context's current font.
      * @see       java.awt.Graphics#getFont
@@ -259,6 +347,10 @@ public abstract class Graphics {
 
     /**
      * Gets the font metrics for the specified font.
+     * <p>
+     *  获取指定字体的字体指标。
+     * 
+     * 
      * @return    the font metrics for the specified font.
      * @param     f the specified font
      * @see       java.awt.Graphics#getFont
@@ -277,6 +369,11 @@ public abstract class Graphics {
      * <code>null</code>.
      * The coordinates in the rectangle are relative to the coordinate
      * system origin of this graphics context.
+     * <p>
+     *  返回当前剪切区域的边界矩形。此方法引用用户剪辑,该剪辑独立于与设备边界和窗口可见性相关联的剪辑。
+     * 如果先前没有设置剪辑,或者如果使用<code> setClip(null)</code>清除剪辑,则此方法返回<code> null </code>。矩形中的坐标是相对于该图形上下文的坐标系原点的。
+     * 
+     * 
      * @return      the bounding rectangle of the current clipping area,
      *              or <code>null</code> if no clip is set.
      * @see         java.awt.Graphics#getClip
@@ -299,6 +396,12 @@ public abstract class Graphics {
      * This method can only be used to make the current clip smaller.
      * To set the current clip larger, use any of the setClip methods.
      * Rendering operations have no effect outside of the clipping area.
+     * <p>
+     * 使用指定的矩形交叉当前剪辑。所得到的剪切区域是当前剪切区域和指定矩形的交集。
+     * 如果没有当前剪辑区域,或者因为剪辑从未被设置,或者剪辑已经使用<code> setClip(null)</code>清除,指定的矩形将成为新的剪辑。
+     * 此方法设置用户剪辑,该剪辑独立于与设备边界和窗口可见性相关联的剪辑。此方法只能用于使当前剪辑更小。要将当前剪辑设置为更大,请使用任何setClip方法。渲染操作在剪裁区域外没有效果。
+     * 
+     * 
      * @param x the x coordinate of the rectangle to intersect the clip with
      * @param y the y coordinate of the rectangle to intersect the clip with
      * @param width the width of the rectangle to intersect the clip with
@@ -314,6 +417,10 @@ public abstract class Graphics {
      * independent of the clipping associated with device bounds
      * and window visibility.
      * Rendering operations have no effect outside of the clipping area.
+     * <p>
+     *  将当前剪辑设置为给定坐标指定的矩形。此方法设置用户剪辑,该剪辑独立于与设备边界和窗口可见性相关联的剪辑。渲染操作在剪裁区域外没有效果。
+     * 
+     * 
      * @param       x the <i>x</i> coordinate of the new clip rectangle.
      * @param       y the <i>y</i> coordinate of the new clip rectangle.
      * @param       width the width of the new clip rectangle.
@@ -332,6 +439,11 @@ public abstract class Graphics {
      * If no clip has previously been set, or if the clip has been
      * cleared using <code>setClip(null)</code>, this method returns
      * <code>null</code>.
+     * <p>
+     *  获取当前剪切区域。此方法返回用户剪辑,该剪辑独立于与设备边界和窗口可见性相关联的裁剪。
+     * 如果先前没有设置剪辑,或者如果使用<code> setClip(null)</code>清除剪辑,则此方法返回<code> null </code>。
+     * 
+     * 
      * @return      a <code>Shape</code> object representing the
      *              current clipping area, or <code>null</code> if
      *              no clip is set.
@@ -353,6 +465,13 @@ public abstract class Graphics {
      * <code>Rectangle</code> objects.  This method sets the
      * user clip, which is independent of the clipping associated
      * with device bounds and window visibility.
+     * <p>
+     * 将当前剪辑区域设置为任意剪辑形状。并非所有实现<code> Shape </code>接口的对象都可以用来设置剪辑。
+     * 保证支持的唯一<code> Shape </code>对象是通过<code> getClip </code>方法和<code> Rectangle </code>获得的<code> Shape </code>
+     * 对象>对象。
+     * 将当前剪辑区域设置为任意剪辑形状。并非所有实现<code> Shape </code>接口的对象都可以用来设置剪辑。此方法设置用户剪辑,该剪辑独立于与设备边界和窗口可见性相关联的剪辑。
+     * 
+     * 
      * @param clip the <code>Shape</code> to use to set the clip
      * @see         java.awt.Graphics#getClip()
      * @see         java.awt.Graphics#clipRect
@@ -373,6 +492,14 @@ public abstract class Graphics {
      * <code>copyArea</code> will be unable to copy the associated
      * pixels. The area that is omitted can be refreshed by calling
      * the component's <code>paint</code> method.
+     * <p>
+     *  将组件的一个区域复制由<code> dx </code>和<code> dy </code>指定的距离。
+     * 从<code> x </code>和<code> y </code>指定的点,此方法向下向右复制。
+     * 要向左或向上复制组件的区域,请为<code> dx </code>或<code> dy </code>指定负值。
+     * 如果源矩形的一部分位于组件的边界之外,或者被另一个窗口或组件遮蔽,则<code> copyArea </code>将无法复制相关联的像素。
+     * 省略的区域可以通过调用组件的<code> paint </code>方法进行刷新。
+     * 
+     * 
      * @param       x the <i>x</i> coordinate of the source rectangle.
      * @param       y the <i>y</i> coordinate of the source rectangle.
      * @param       width the width of the source rectangle.
@@ -387,6 +514,10 @@ public abstract class Graphics {
      * Draws a line, using the current color, between the points
      * <code>(x1,&nbsp;y1)</code> and <code>(x2,&nbsp;y2)</code>
      * in this graphics context's coordinate system.
+     * <p>
+     *  使用当前颜色在此图形上下文的坐标系中的<code>(x1,&nbsp; y1)</code>和<code>(x2,&nbsp; y2)</code>之间绘制一条线。
+     * 
+     * 
      * @param   x1  the first point's <i>x</i> coordinate.
      * @param   y1  the first point's <i>y</i> coordinate.
      * @param   x2  the second point's <i>x</i> coordinate.
@@ -404,6 +535,12 @@ public abstract class Graphics {
      * <code>width</code> pixels wide by
      * <code>height</code> pixels tall.
      * The rectangle is filled using the graphics context's current color.
+     * <p>
+     * 填充指定的矩形。矩形的左右边缘位于<code> x </code>和<code> x&nbsp; +&nbsp; width&nbsp;  - &nbsp; 1 </code>。
+     * 顶部和底部边缘位于<code> y </code>和<code> y&nbsp; +&nbsp; height&nbsp;  - &nbsp; 1 </code>。
+     * 生成的矩形覆盖<code> width </code>像素宽,<code> height </code>像素高的区域。使用图形上下文的当前颜色填充矩形。
+     * 
+     * 
      * @param         x   the <i>x</i> coordinate
      *                         of the rectangle to be filled.
      * @param         y   the <i>y</i> coordinate
@@ -422,6 +559,11 @@ public abstract class Graphics {
      * The top and bottom edges are at
      * <code>y</code> and <code>y&nbsp;+&nbsp;height</code>.
      * The rectangle is drawn using the graphics context's current color.
+     * <p>
+     *  绘制指定矩形的轮廓。矩形的左右边缘位于<code> x </code>和<code> x&nbsp; + width </code>。
+     * 顶部和底部边缘位于<code> y </code>和<code> y&nbsp; +&nbsp; height </code>。矩形是使用图形上下文的当前颜色绘制的。
+     * 
+     * 
      * @param         x   the <i>x</i> coordinate
      *                         of the rectangle to be drawn.
      * @param         y   the <i>y</i> coordinate
@@ -455,6 +597,13 @@ public abstract class Graphics {
      * of offscreen images may be system dependent. Applications should
      * use <code>setColor</code> followed by <code>fillRect</code> to
      * ensure that an offscreen image is cleared to a specific color.
+     * <p>
+     *  通过用当前绘图表面的背景颜色填充指定的矩形来清除指定的矩形。此操作不使用当前绘画模式。
+     * <p>
+     *  从Java 1.1版开始,屏幕外图片的背景颜色可能与系统有关。
+     * 应用程序应使用<code> setColor </code>后跟<code> fillRect </code>以确保屏幕外图像被清除为特定颜色。
+     * 
+     * 
      * @param       x the <i>x</i> coordinate of the rectangle to clear.
      * @param       y the <i>y</i> coordinate of the rectangle to clear.
      * @param       width the width of the rectangle to clear.
@@ -473,6 +622,11 @@ public abstract class Graphics {
      * are at <code>x</code> and <code>x&nbsp;+&nbsp;width</code>,
      * respectively. The top and bottom edges of the rectangle are at
      * <code>y</code> and <code>y&nbsp;+&nbsp;height</code>.
+     * <p>
+     *  使用此图形上下文的当前颜色绘制轮廓圆角矩形。矩形的左边缘和右边缘分别位于<code> x </code>和<code> x&nbsp; +&nbsp; width </code>。
+     * 矩形的顶部和底部边缘位于<code> y </code>和<code> y&nbsp; +&nbsp; height </code>。
+     * 
+     * 
      * @param      x the <i>x</i> coordinate of the rectangle to be drawn.
      * @param      y the <i>y</i> coordinate of the rectangle to be drawn.
      * @param      width the width of the rectangle to be drawn.
@@ -492,6 +646,12 @@ public abstract class Graphics {
      * are at <code>x</code> and <code>x&nbsp;+&nbsp;width&nbsp;-&nbsp;1</code>,
      * respectively. The top and bottom edges of the rectangle are at
      * <code>y</code> and <code>y&nbsp;+&nbsp;height&nbsp;-&nbsp;1</code>.
+     * <p>
+     * 使用当前颜色填充指定的圆角矩形。
+     * 矩形的左边缘和右边缘分别位于<code> x </code>和<code> x&nbsp; +&nbsp; width&nbsp;  - &nbsp; 1 </code>。
+     * 矩形的顶部和底部边缘位于<code> y </code>和<code> y&nbsp; +&nbsp; height&nbsp;  - &nbsp; 1 </code>。
+     * 
+     * 
      * @param       x the <i>x</i> coordinate of the rectangle to be filled.
      * @param       y the <i>y</i> coordinate of the rectangle to be filled.
      * @param       width the width of the rectangle to be filled.
@@ -515,6 +675,13 @@ public abstract class Graphics {
      * The resulting rectangle covers an area that is
      * <code>width&nbsp;+&nbsp;1</code> pixels wide
      * by <code>height&nbsp;+&nbsp;1</code> pixels tall.
+     * <p>
+     *  绘制指定矩形的3-D突出轮廓。矩形的边缘被突出显示,使得它们看起来是从左上角被斜切和点亮。
+     * <p>
+     *  基于当前颜色确定用于突出效果的颜色。
+     * 生成的矩形覆盖了<code> width&nbsp; +&nbsp; 1&lt; / code&gt;像素宽&lt; code&gt;高度&nbsp; +&nbsp; 1 </code>像素高的区域。
+     * 
+     * 
      * @param       x the <i>x</i> coordinate of the rectangle to be drawn.
      * @param       y the <i>y</i> coordinate of the rectangle to be drawn.
      * @param       width the width of the rectangle to be drawn.
@@ -545,6 +712,10 @@ public abstract class Graphics {
      * as if the edges were beveled and lit from the upper left corner.
      * The colors used for the highlighting effect will be determined from
      * the current color.
+     * <p>
+     *  绘制填充有当前颜色的三维突出显示的矩形。矩形的边缘将被突出显示,使得它看起来好像边缘从左上角被斜切和点亮。用于突出效果的颜色将根据当前颜色确定。
+     * 
+     * 
      * @param       x the <i>x</i> coordinate of the rectangle to be filled.
      * @param       y the <i>y</i> coordinate of the rectangle to be filled.
      * @param       width the width of the rectangle to be filled.
@@ -582,6 +753,13 @@ public abstract class Graphics {
      * The oval covers an area that is
      * <code>width&nbsp;+&nbsp;1</code> pixels wide
      * and <code>height&nbsp;+&nbsp;1</code> pixels tall.
+     * <p>
+     *  绘制椭圆的轮廓。
+     * 结果是圆形或椭圆形适合由<code> x </code>,<code> y </code>,<code> width </code>和<code> height </code >参数。
+     * <p>
+     *  椭圆形区域包含<code> width&nbsp; +&lt; 1&lt; / code&gt;像素宽和<code>高度&nbsp; +&nbsp; 1 </code>像素高的区域。
+     * 
+     * 
      * @param       x the <i>x</i> coordinate of the upper left
      *                     corner of the oval to be drawn.
      * @param       y the <i>y</i> coordinate of the upper left
@@ -595,6 +773,10 @@ public abstract class Graphics {
     /**
      * Fills an oval bounded by the specified rectangle with the
      * current color.
+     * <p>
+     *  使用当前颜色填充由指定矩形界定的椭圆。
+     * 
+     * 
      * @param       x the <i>x</i> coordinate of the upper left corner
      *                     of the oval to be filled.
      * @param       y the <i>y</i> coordinate of the upper left corner
@@ -631,6 +813,19 @@ public abstract class Graphics {
      * noticeably longer in one axis than the other, the angles to the
      * start and end of the arc segment will be skewed farther along the
      * longer axis of the bounds.
+     * <p>
+     *  绘制覆盖指定矩形的圆形或椭圆弧的轮廓。
+     * <p>
+     * 结果弧开始于<code> startAngle </code>,并使用当前颜色扩展<code> arcAngle </code>度。角度被解释为0度处于3点钟位置。
+     * 正值表示逆时针旋转,而负值表示顺时针旋转。
+     * <p>
+     *  圆弧的中心是起点为(<i> x </i>,<y> y </i>)的矩形的中心,其大小由<code> width </code>和<code> height </code>参数。
+     * <p>
+     *  生成的圆弧覆盖了<code> width&nbsp; +&nbsp; 1 </code>像素宽和<code> height&nbsp; +&nbsp; 1 </code>像素高的区域。
+     * <p>
+     *  相对于边界矩形的非正方形范围指定角度,使得45度总是落在从椭圆的中心到边界矩形的右上角的线上。因此,如果边界矩形在一个轴上比另一个明显更长,则与弧段的开始和结束的角度将沿着边界的较长轴偏移得更远。
+     * 
+     * 
      * @param        x the <i>x</i> coordinate of the
      *                    upper-left corner of the arc to be drawn.
      * @param        y the <i>y</i>  coordinate of the
@@ -670,6 +865,18 @@ public abstract class Graphics {
      * noticeably longer in one axis than the other, the angles to the
      * start and end of the arc segment will be skewed farther along the
      * longer axis of the bounds.
+     * <p>
+     *  填充覆盖指定矩形的圆形或椭圆弧。
+     * <p>
+     *  结果弧开始于<code> startAngle </code>,并延伸<arc> arcAngle </code>度。角度被解释为0度处于3点钟位置。正值表示逆时针旋转,而负值表示顺时针旋转。
+     * <p>
+     * 圆弧的中心是起点为(<i> x </i>,<y> y </i>)的矩形的中心,其大小由<code> width </code>和<code> height </code>参数。
+     * <p>
+     *  生成的圆弧覆盖了<code> width&nbsp; +&nbsp; 1 </code>像素宽和<code> height&nbsp; +&nbsp; 1 </code>像素高的区域。
+     * <p>
+     *  相对于边界矩形的非正方形范围指定角度,使得45度总是落在从椭圆的中心到边界矩形的右上角的线上。因此,如果边界矩形在一个轴上比另一个明显更长,则与弧段的开始和结束的角度将沿着边界的较长轴偏移得更远。
+     * 
+     * 
      * @param        x the <i>x</i> coordinate of the
      *                    upper-left corner of the arc to be filled.
      * @param        y the <i>y</i>  coordinate of the
@@ -690,6 +897,10 @@ public abstract class Graphics {
      * Each pair of (<i>x</i>,&nbsp;<i>y</i>) coordinates defines a point.
      * The figure is not closed if the first point
      * differs from the last point.
+     * <p>
+     *  绘制由<x> x </i>和<y>坐标数组定义的连接线序列。每对(<x> x,<y>)坐标定义一个点。如果第一个点与最后一个点不同,则图形不关闭。
+     * 
+     * 
      * @param       xPoints an array of <i>x</i> points
      * @param       yPoints an array of <i>y</i> points
      * @param       nPoints the total number of points
@@ -712,6 +923,14 @@ public abstract class Graphics {
      * 1&nbsp;&le;&nbsp;<i>i</i>&nbsp;&le;&nbsp;<code>nPoints</code>.
      * The figure is automatically closed by drawing a line connecting
      * the final point to the first point, if those points are different.
+     * <p>
+     *  绘制由<i> x </i>和<y> y </i>坐标数组定义的封闭多边形。每对(<x> x,<y>)坐标定义一个点。
+     * <p>
+     * 此方法绘制由<code> nPoint </code>线段定义的多边形,其中第一个<code> nPoint&nbsp;  -  1 </code>线段是来自<code>(xPoints [i&nbsp
+     * ;  - i> i </i>&nbsp;&le;&nbsp; <code> nPoints </code>。
+     * 如果这些点不同,则通过绘制将最终点连接到第一点的线自动关闭图形。
+     * 
+     * 
      * @param        xPoints   a an array of <code>x</code> coordinates.
      * @param        yPoints   a an array of <code>y</code> coordinates.
      * @param        nPoints   a the total number of points.
@@ -724,6 +943,10 @@ public abstract class Graphics {
     /**
      * Draws the outline of a polygon defined by the specified
      * <code>Polygon</code> object.
+     * <p>
+     *  绘制由指定的<code>多边形</code>对象定义的多边形的轮廓。
+     * 
+     * 
      * @param        p the polygon to draw.
      * @see          java.awt.Graphics#fillPolygon
      * @see          java.awt.Graphics#drawPolyline
@@ -747,6 +970,16 @@ public abstract class Graphics {
      * <p>
      * The area inside the polygon is defined using an
      * even-odd fill rule, also known as the alternating rule.
+     * <p>
+     *  填充由<i> x </i>和<y> y </i>坐标数组定义的封闭多边形。
+     * <p>
+     *  此方法绘制由<code> nPoint </code>线段定义的多边形,其中第一个<code> nPoint&nbsp;  -  1 </code>线段是来自<code>(xPoints [i&nbs
+     * p;  - &nbsp; i> i </i>&nbsp;&le;&nbsp; <code> nPoints </code>。
+     * 如果这些点不同,则通过绘制将最终点连接到第一点的线自动关闭图形。
+     * <p>
+     *  多边形内的区域使用偶奇填充规则(也称为交替规则)来定义。
+     * 
+     * 
      * @param        xPoints   a an array of <code>x</code> coordinates.
      * @param        yPoints   a an array of <code>y</code> coordinates.
      * @param        nPoints   a the total number of points.
@@ -761,6 +994,12 @@ public abstract class Graphics {
      * <p>
      * The area inside the polygon is defined using an
      * even-odd fill rule, also known as the alternating rule.
+     * <p>
+     *  使用图形上下文的当前颜色填充由指定的Polygon对象定义的多边形。
+     * <p>
+     *  多边形内的区域使用偶奇填充规则(也称为交替规则)来定义。
+     * 
+     * 
      * @param        p the polygon to fill.
      * @see          java.awt.Graphics#drawPolygon(int[], int[], int)
      */
@@ -773,6 +1012,10 @@ public abstract class Graphics {
      * graphics context's current font and color. The baseline of the
      * leftmost character is at position (<i>x</i>,&nbsp;<i>y</i>) in this
      * graphics context's coordinate system.
+     * <p>
+     * 使用此图形上下文的当前字体和颜色绘制由指定字符串给定的文本。最左边字符的基线在该图形上下文的坐标系中的位置(<i> x </i>,<y> y </i>)。
+     * 
+     * 
      * @param       str      the string to be drawn.
      * @param       x        the <i>x</i> coordinate.
      * @param       y        the <i>y</i> coordinate.
@@ -789,6 +1032,12 @@ public abstract class Graphics {
      * <p>
      * The baseline of the leftmost character is at position
      * (<i>x</i>,&nbsp;<i>y</i>) in this graphics context's coordinate system.
+     * <p>
+     *  根据{@link java.awt.font.TextAttribute TextAttribute}类的规范,呈现指定的迭代器的文本,并应用其属性。
+     * <p>
+     *  最左边字符的基线在该图形上下文的坐标系中的位置(<i> x </i>,<y> y </i>)。
+     * 
+     * 
      * @param       iterator the iterator whose text is to be drawn
      * @param       x        the <i>x</i> coordinate.
      * @param       y        the <i>y</i> coordinate.
@@ -805,6 +1054,10 @@ public abstract class Graphics {
      * graphics context's current font and color. The baseline of the
      * first character is at position (<i>x</i>,&nbsp;<i>y</i>) in this
      * graphics context's coordinate system.
+     * <p>
+     *  使用此图形上下文的当前字体和颜色绘制由指定字符数组给出的文本。第一个字符的基线位于此图形上下文的坐标系中的位置(<i> x </i>,<y> y </i>)。
+     * 
+     * 
      * @param data the array of characters to be drawn
      * @param offset the start offset in the data
      * @param length the number of characters to be drawn
@@ -831,6 +1084,12 @@ public abstract class Graphics {
      * Use of this method is not recommended as each byte is interpreted
      * as a Unicode code point in the range 0 to 255, and so can only be
      * used to draw Latin characters in that range.
+     * <p>
+     *  使用此图形上下文的当前字体和颜色绘制由指定的字节数组给出的文本。第一个字符的基线位于此图形上下文的坐标系中的位置(<i> x </i>,<y> y </i>)。
+     * <p>
+     *  不推荐使用此方法,因为每个字节都被解释为范围在0到255之间的Unicode代码点,因此只能用于在该范围内绘制拉丁字符。
+     * 
+     * 
      * @param data the data to be drawn
      * @param offset the start offset in the data
      * @param length the number of bytes that are drawn
@@ -867,6 +1126,15 @@ public abstract class Graphics {
      * or it is time to draw another frame of animation,
      * the process that loads the image notifies
      * the specified image observer.
+     * <p>
+     *  绘制与当前可用的指定图像一样多的图像。在此图形上下文的坐标空间中,图像的左上角以(<i> x </i>,<y> y </i>)绘制。图像中的透明像素不会影响已经存在的像素。
+     * <p>
+     * 此方法在所有情况下都会立即返回,即使完整图像尚未加载,并且尚未对当前输出设备进行抖动和转换。
+     * <p>
+     *  如果图像已经完全加载并且其像素不再被改变,则<code> drawImage </code>返回<code> true </code>。
+     * 否则,<code> drawImage </code>返回<code> false </code>,并且随着更多的图像变得可用或是绘制另一帧动画,加载图像的过程通知指定的图像观察者。
+     * 
+     * 
      * @param    img the specified image to be drawn. This method does
      *               nothing if <code>img</code> is null.
      * @param    x   the <i>x</i> coordinate.
@@ -904,6 +1172,18 @@ public abstract class Graphics {
      * image has been constructed for this output device.  Each size of
      * the image may be cached separately and generated from the original
      * data in a separate image production sequence.
+     * <p>
+     *  绘制与已经缩放以适合指定矩形内部的指定图像一样多。
+     * <p>
+     *  图像在此图形上下文的坐标空间的指定矩形内绘制,并且如果必要,则被缩放。透明像素不影响已经存在的任何像素。
+     * <p>
+     *  此方法在所有情况下都会立即返回,即使整个图像尚未缩放,抖动和转换为当前输出设备。
+     * 如果当前输出表示尚未完成,则<code> drawImage </code>返回<code> false </code>。
+     * 随着更多的图像变得可用,加载图像的过程通过调用其<code> imageUpdate </code>方法通知图像观察者。
+     * <p>
+     * 图像的缩放版本不一定立即可用,因为已经为该输出设备构建了图像的未缩放版本。图像的每个大小可以单独高速缓存并且在单独的图像产生序列中从原始数据生成。
+     * 
+     * 
      * @param    img    the specified image to be drawn. This method does
      *                  nothing if <code>img</code> is null.
      * @param    x      the <i>x</i> coordinate.
@@ -946,6 +1226,17 @@ public abstract class Graphics {
      * or it is time to draw another frame of animation,
      * the process that loads the image notifies
      * the specified image observer.
+     * <p>
+     *  绘制与当前可用的指定图像一样多的图像。在此图形上下文的坐标空间中,图像的左上角以(<i> x </i>,<y> y </i>)绘制。透明像素以指定的背景颜色绘制。
+     * <p>
+     *  此操作等效于使用给定颜色填充指定图像的宽度和高度的矩形,然后在其上绘制图像,但可能更有效。
+     * <p>
+     *  此方法在所有情况下都会立即返回,即使完整图像尚未加载,并且尚未对当前输出设备进行抖动和转换。
+     * <p>
+     *  如果图像已经完全加载并且其像素不再被改变,则<code> drawImage </code>返回<code> true </code>。
+     * 否则,<code> drawImage </code>返回<code> false </code>,并且随着更多的图像变得可用或是绘制另一帧动画,加载图像的过程通知指定的图像观察者。
+     * 
+     * 
      * @param    img the specified image to be drawn. This method does
      *               nothing if <code>img</code> is null.
      * @param    x      the <i>x</i> coordinate.
@@ -989,6 +1280,17 @@ public abstract class Graphics {
      * image has been constructed for this output device.  Each size of
      * the image may be cached separately and generated from the original
      * data in a separate image production sequence.
+     * <p>
+     *  绘制与已经缩放以适合指定矩形内部的指定图像一样多。
+     * <p>
+     * 图像在此图形上下文的坐标空间的指定矩形内绘制,并且如果必要,则被缩放。透明像素以指定的背景颜色绘制。此操作等效于使用给定颜色填充指定图像的宽度和高度的矩形,然后在其上绘制图像,但可能更有效。
+     * <p>
+     *  此方法在所有情况下都会立即返回,即使整个图像尚未缩放,抖动和转换为当前输出设备。
+     * 如果当前输出表示还没有完成,那么<​​code> drawImage </code>返回<code> false </code>。随着更多的图像变得可用,加载图像的过程通知指定的图像观察者。
+     * <p>
+     *  图像的缩放版本不一定立即可用,因为已经为该输出设备构建了图像的未缩放版本。图像的每个大小可以单独高速缓存并且在单独的图像产生序列中从原始数据生成。
+     * 
+     * 
      * @param    img       the specified image to be drawn. This method does
      *                     nothing if <code>img</code> is null.
      * @param    x         the <i>x</i> coordinate.
@@ -1033,6 +1335,16 @@ public abstract class Graphics {
      * the destination rectangle, and the second source coordinate is
      * mapped to the second destination coordinate. The subimage is
      * scaled and flipped as needed to preserve those mappings.
+     * <p>
+     *  绘制指定图像的指定区域作为当前可用的指定区域,缩放它在飞行中以适合目标可绘制表面的指定区域内。透明像素不影响已经存在的任何像素。
+     * <p>
+     * 在所有情况下,即使要绘制的图像区域尚未缩放,抖动和转换为当前输出设备,此方法也会立即返回。
+     * 如果当前输出表示还没有完成,那么<​​code> drawImage </code>返回<code> false </code>。随着更多的图像变得可用,加载图像的过程通知指定的图像观察者。
+     * <p>
+     *  此方法始终使用未缩放版本的图像来渲染缩放的矩形并即时执行所需的缩放。它不使用缓存的缩放版本的图像进行此操作。
+     * 执行从源到目的地的图像缩放,使得源矩形的第一坐标被映射到目的地矩形的第一坐标,并且第二源坐标被映射到第二目的地坐标。根据需要缩放和翻转子图像以保留这些映射。
+     * 
+     * 
      * @param       img the specified image to be drawn. This method does
      *                  nothing if <code>img</code> is null.
      * @param       dx1 the <i>x</i> coordinate of the first corner of the
@@ -1092,6 +1404,18 @@ public abstract class Graphics {
      * the destination rectangle, and the second source coordinate is
      * mapped to the second destination coordinate. The subimage is
      * scaled and flipped as needed to preserve those mappings.
+     * <p>
+     *  绘制指定图像的指定区域作为当前可用的指定区域,缩放它在飞行中以适合目标可绘制表面的指定区域内。
+     * <p>
+     *  透明像素以指定的背景颜色绘制。此操作等效于使用给定颜色填充指定图像的宽度和高度的矩形,然后在其上绘制图像,但可能更有效。
+     * <p>
+     * 在所有情况下,即使要绘制的图像区域尚未缩放,抖动和转换为当前输出设备,此方法也会立即返回。
+     * 如果当前输出表示还没有完成,那么<​​code> drawImage </code>返回<code> false </code>。随着更多的图像变得可用,加载图像的过程通知指定的图像观察者。
+     * <p>
+     *  此方法始终使用未缩放版本的图像来渲染缩放的矩形并即时执行所需的缩放。它不使用缓存的缩放版本的图像进行此操作。
+     * 执行从源到目的地的图像缩放,使得源矩形的第一坐标被映射到目的地矩形的第一坐标,并且第二源坐标被映射到第二目的地坐标。根据需要缩放和翻转子图像以保留这些映射。
+     * 
+     * 
      * @param       img the specified image to be drawn. This method does
      *                  nothing if <code>img</code> is null.
      * @param       dx1 the <i>x</i> coordinate of the first corner of the
@@ -1148,6 +1472,18 @@ public abstract class Graphics {
      * call <code>dispose</code> when finished using
      * a <code>Graphics</code> object only if it was created
      * directly from a component or another <code>Graphics</code> object.
+     * <p>
+     *  处理此图形上下文并释放它正在使用的任何系统资源。在调用<code> dispose </code>之后,不能使用<code> Graphics </code>对象。
+     * <p>
+     * 当Java程序运行时,可以在短时间内创建大量的<code> Graphics </code>对象。
+     * 尽管垃圾收集器的完成过程也丢弃了相同的系统资源,但是优选地通过调用该方法手动释放相关联的资源,而不是依赖可能不会长时间运行完成的完成过程。
+     * <p>
+     *  作为元素的<code> paint </code>和<code> update </code>方法的参数提供的图形对象在这些方法返回时由系统自动释放。
+     * 为了提高效率,只有当直接从组件或另一个<code> Graphics </code>对象创建时,程序员在使用<code> Graphics </code>对象时才应该调用<code> dispose </code>
+     * 。
+     *  作为元素的<code> paint </code>和<code> update </code>方法的参数提供的图形对象在这些方法返回时由系统自动释放。
+     * 
+     * 
      * @see         java.awt.Graphics#finalize
      * @see         java.awt.Component#paint
      * @see         java.awt.Component#update
@@ -1158,6 +1494,10 @@ public abstract class Graphics {
 
     /**
      * Disposes of this graphics context once it is no longer referenced.
+     * <p>
+     *  一旦不再引用此图形上下文。
+     * 
+     * 
      * @see #dispose
      */
     public void finalize() {
@@ -1167,6 +1507,10 @@ public abstract class Graphics {
     /**
      * Returns a <code>String</code> object representing this
      *                        <code>Graphics</code> object's value.
+     * <p>
+     *  返回表示此<code> Graphics </code>对象值的<code> String </code>对象。
+     * 
+     * 
      * @return       a string representation of this graphics context.
      */
     public String toString() {
@@ -1175,6 +1519,10 @@ public abstract class Graphics {
 
     /**
      * Returns the bounding rectangle of the current clipping area.
+     * <p>
+     *  返回当前剪切区域的边界矩形。
+     * 
+     * 
      * @return      the bounding rectangle of the current clipping area
      *              or <code>null</code> if no clip is set.
      * @deprecated As of JDK version 1.1,
@@ -1203,6 +1551,12 @@ public abstract class Graphics {
      * methods of this graphics context as well as the clipping
      * associated with the device or image bounds and window visibility.
      *
+     * <p>
+     * 如果指定的矩形区域可能与当前剪切区域相交,则返回true。指定的矩形区域的坐标在用户坐标空间中,并且相对于该图形上下文的坐标系原点。
+     * 该方法可以使用快速计算结果但是即使指定的矩形区域不与剪切区域相交也有时可能返回真的算法。所使用的特定算法因此可以折衷速度的精度,但是它将永远不会返回假,除非它能保证指定的矩形区域不与当前剪切区域相交。
+     * 该方法使用的剪辑区域可以表示通过该图形上下文的剪辑方法指定的用户剪辑的交集以及与设备或图像边界和窗口可见性相关联的剪辑。
+     * 
+     * 
      * @param x the x coordinate of the rectangle to test against the clip
      * @param y the y coordinate of the rectangle to test against the clip
      * @param width the width of the rectangle to test against the clip
@@ -1233,6 +1587,10 @@ public abstract class Graphics {
      *  If no clip has previously been set, or if the clip has been
      * cleared using <code>setClip(null)</code>, this method returns the
      * specified <code>Rectangle</code>.
+     * <p>
+     *  返回当前剪切区域的边界矩形。矩形中的坐标是相对于该图形上下文的坐标系原点的。
+     * 此方法不同于{@link #getClipBounds()getClipBounds},因为使用现有的矩形而不是分配新的矩形。此方法引用用户剪辑,该剪辑独立于与设备边界和窗口可见性相关联的剪辑。
+     * 
      * @param  r    the rectangle where the current clipping area is
      *              copied to.  Any current values in this rectangle are
      *              overwritten.

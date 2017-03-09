@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,21 @@ package javax.sound.sampled;
  * queued in the data line's buffer.  If the buffer does overflow,
  * the oldest queued data is discarded and replaced by new data.
  *
+ * <p>
+ *  目标数据行是一种<code> {@ link DataLine} </code>,可以从中读取音频数据。最常见的示例是从音频捕获设备获取其数据的数据线。 (该器件实现为向目标数据线写入的混频器。
+ * <p>
+ *  请注意,此接口的命名约定反映了行与其混合器之间的关系。从应用的角度来看,目标数据线可以用作音频数据的源。
+ * <p>
+ *  可以通过使用适当的<code> {@ link DataLine.Info)调用<code> Mixer </code>的<code> {@ link Mixer#getLine getLine} </code>
+ * 方法从混合器获得目标数据线} </code>对象。
+ * <p>
+ *  <code> TargetDataLine </code>接口提供了一种从目标数据行的缓冲区读取捕获数据的方法。
+ * 记录音频的应用程序应该足够快地从目标数据行读取数据,以防止缓冲区溢出,这可能导致不连续在捕获的数据中被感知为点击。
+ * 应用程序可以使用<code> DataLine </code>接口中定义的<code> {@ link DataLine#available available} </code>方法来确定当前在数据行缓
+ * 冲区中排队的数据量。
+ * 记录音频的应用程序应该足够快地从目标数据行读取数据,以防止缓冲区溢出,这可能导致不连续在捕获的数据中被感知为点击。如果缓冲区没有溢出,则最旧的排队数据被丢弃并被新数据替代。
+ * 
+ * 
  * @author Kara Kytle
  * @see Mixer
  * @see DataLine
@@ -82,6 +98,19 @@ public interface TargetDataLine extends DataLine {
      * to reopen such a line will always result in a
      * <code>LineUnavailableException</code>.
      *
+     * <p>
+     * 打开具有指定格式和请求的缓冲区大小的行,使该行获取任何所需的系统资源并运行。
+     * <p>
+     *  缓冲区大小以字节为单位指定,但必须表示整数个采样帧。调用具有不满足此要求的请求的缓冲区大小的此方法可能会导致IllegalArgumentException。
+     * 开放线路的实际缓冲区大小可能与请求的缓冲区大小不同。实际设置的值可以通过随后调用<code> {@ link DataLine#getBufferSize} </code>。
+     * <p>
+     *  如果此操作成功,则将该行标记为打开,并将<code> {@ link LineEvent.Type#OPEN OPEN} </code>事件分派到该行的侦听器。
+     * <p>
+     *  在已经打开的行上调用此方法是非法的,可能会导致<code> IllegalStateException </code>。
+     * <p>
+     *  有些行,一旦关闭,就无法重新打开。尝试重新打开这样的行将总是导致<code> LineUnavailableException </code>。
+     * 
+     * 
      * @param format the desired audio format
      * @param bufferSize the desired buffer size, in bytes.
      * @throws LineUnavailableException if the line cannot be
@@ -122,6 +151,19 @@ public interface TargetDataLine extends DataLine {
      * to reopen such a line will always result in a
      * <code>LineUnavailableException</code>.
      *
+     * <p>
+     *  打开具有指定格式的行,使该行获取任何所需的系统资源并运行。
+     * 
+     * <p>
+     *  实现选择缓冲器大小,其以字节为单位测量,但包含整数个样本帧。系统选择的缓冲区大小可以通过随后调用<code> {@ link DataLine#getBufferSize} </code>
+     * <p>
+     * 如果此操作成功,则将该行标记为打开,并将<code> {@ link LineEvent.Type#OPEN OPEN} </code>事件分派到该行的侦听器。
+     * <p>
+     *  在已经打开的行上调用此方法是非法的,可能会导致<code> IllegalStateException </code>。
+     * <p>
+     *  有些行,一旦关闭,就无法重新打开。尝试重新打开这样的行将总是导致<code> LineUnavailableException </code>。
+     * 
+     * 
      * @param format the desired audio format
      * @throws LineUnavailableException if the line cannot be
      * opened due to resource restrictions
@@ -164,6 +206,16 @@ public interface TargetDataLine extends DataLine {
      * number of bytes representing a non-integral number of sample frames cannot
      * be fulfilled and may result in an IllegalArgumentException.
      *
+     * <p>
+     *  从数据线的输入缓冲区读取音频数据。将请求的字节数读入指定的数组,从指定的数组偏移量开始,以字节为单位。此方法阻塞,直到已读取所请求的数据量。
+     * 但是,如果数据线在读取请求量之前关闭,停止,耗尽或刷新,则该方法不再阻塞,而是返回到目前为止读取的字节数。
+     * <p>
+     *  可以使用<code> DataLine </code>接口的<code> {@ link DataLine#available available} </code>方法确定可以无阻塞地读取的字节数。
+     *  (虽然保证可以读取这个字节数而不阻塞,但不能保证尝试读取其他数据会被阻塞。)。
+     * <p>
+     *  要读取的字节数必须表示采样帧的整数数量,例如：
+     * <br>
+     * 
      * @param b a byte array that will contain the requested input data when
      * this method returns
      * @param off the offset from the beginning of the array, in bytes
@@ -185,6 +237,12 @@ public interface TargetDataLine extends DataLine {
      * Obtains the number of sample frames of audio data that can be read from
      * the target data line without blocking.  Note that the return value
      * measures sample frames, not bytes.
+     * <p>
+     *  <center> <code> [bytes read]％[frame size in bytes] == 0 </code> </center>
+     * <br>
+     * 返回值将始终满足此要求。读取表示非整数个样本帧的多个字节的请求不能被满足,并且可能导致IllegalArgumentException。
+     * 
+     * 
      * @return the number of sample frames currently available for reading
      * @see SourceDataLine#availableWrite
      */

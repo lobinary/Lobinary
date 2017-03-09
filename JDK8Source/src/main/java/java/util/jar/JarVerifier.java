@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,8 @@ import sun.security.util.Debug;
 
 /**
  *
+ * <p>
+ * 
  * @author      Roland Schemers
  */
 class JarVerifier {
@@ -48,10 +51,14 @@ class JarVerifier {
     static final Debug debug = Debug.getInstance("jar");
 
     /* a table mapping names to code signers, for jar entries that have
+    /* <p>
+    /* 
        had their actual hashes verified */
     private Hashtable<String, CodeSigner[]> verifiedSigners;
 
     /* a table mapping names to code signers, for jar entries that have
+    /* <p>
+    /* 
        passed the .SF/.DSA/.EC -> MANIFEST check */
     private Hashtable<String, CodeSigner[]> sigFileSigners;
 
@@ -59,6 +66,8 @@ class JarVerifier {
     private Hashtable<String, byte[]> sigFileData;
 
     /** "queue" of pending PKCS7 blocks that we couldn't parse
+    /* <p>
+    /* 
      *  until we parsed the .SF file */
     private ArrayList<SignatureFileVerifier> pendingBlocks;
 
@@ -75,6 +84,8 @@ class JarVerifier {
     private boolean anyToVerify = true;
 
     /* The output stream to use when keeping track of files we are interested
+    /* <p>
+    /* 
        in */
     private ByteArrayOutputStream baos;
 
@@ -107,6 +118,9 @@ class JarVerifier {
      * This method scans to see which entry we're parsing and
      * keeps various state information depending on what type of
      * file is being parsed.
+     * <p>
+     *  此方法扫描以查看我们正在解析的条目,并保留各种状态信息取决于正在解析的文件类型。
+     * 
      */
     public void beginEntry(JarEntry je, ManifestEntryVerifier mev)
         throws IOException
@@ -128,6 +142,10 @@ class JarVerifier {
          *    a. digest mismatch between a manifest section and
          *       the SF section.
          *    b. digest mismatch between the actual jar entry and the manifest
+         * <p>
+         *  假设：1.清单应该是META-INF目录中的第一个条目。 2.SF / .DSA / .EC文件遵循清单,在任何正常条目之前3.任何以下将抛出一个SecurityException：a。
+         * 清单段和SF段之间的摘要不匹配。 b。实际jar条目和清单之间的摘要不匹配。
+         * 
          */
 
         if (parsingMeta) {
@@ -194,6 +212,9 @@ class JarVerifier {
 
     /**
      * update a single byte.
+     * <p>
+     *  更新单个字节。
+     * 
      */
 
     public void update(int b, ManifestEntryVerifier mev)
@@ -212,6 +233,9 @@ class JarVerifier {
 
     /**
      * update an array of bytes.
+     * <p>
+     *  更新字节数组。
+     * 
      */
 
     public void update(int n, byte[] b, int off, int len,
@@ -231,6 +255,9 @@ class JarVerifier {
 
     /**
      * called when we reach the end of entry in one of the read() methods.
+     * <p>
+     *  当我们在一个read()方法中到达结束时调用。
+     * 
      */
     private void processEntry(ManifestEntryVerifier mev)
         throws IOException
@@ -335,6 +362,10 @@ class JarVerifier {
     /**
      * Return an array of java.security.cert.Certificate objects for
      * the given file in the jar.
+     * <p>
+     *  返回jar中给定文件的java.security.cert.Certificate对象的数组。
+     * 
+     * 
      * @deprecated
      */
     @Deprecated
@@ -352,6 +383,9 @@ class JarVerifier {
      * return an array of CodeSigner objects for
      * the given file in the jar. this array is not cloned.
      *
+     * <p>
+     *  返回jar中给定文件的CodeSigner对象数组。这个数组不是克隆的。
+     * 
      */
     public CodeSigner[] getCodeSigners(String name)
     {
@@ -365,6 +399,9 @@ class JarVerifier {
             /*
              * Force a read of the entry data to generate the
              * verification hash.
+             * <p>
+             *  强制读取条目数据以生成验证散列。
+             * 
              */
             try {
                 InputStream s = jar.getInputStream(entry);
@@ -383,6 +420,9 @@ class JarVerifier {
     /*
      * Convert an array of signers into an array of concatenated certificate
      * arrays.
+     * <p>
+     *  将签名者数组转换为连接的证书数组数组。
+     * 
      */
     private static java.security.cert.Certificate[] mapSignersToCertArray(
         CodeSigner[] signers) {
@@ -405,6 +445,9 @@ class JarVerifier {
      * returns true if there no files to verify.
      * should only be called after all the META-INF entries
      * have been processed.
+     * <p>
+     *  如果没有要验证的文件,则返回true。应该仅在所有META-INF条目都被处理后才被调用。
+     * 
      */
     boolean nothingToVerify()
     {
@@ -416,6 +459,9 @@ class JarVerifier {
      * META-INF entries, and if we re-read one of them, don't
      * re-process it. Also gets rid of any data structures
      * we needed when parsing META-INF entries.
+     * <p>
+     *  调用让我们知道我们已经处理了所有的META-INF条目,如果我们重新读取其中一个,不要重新处理它。也解决了我们在解析META-INF条目时需要的任何数据结构。
+     * 
      */
     void doneWithMeta()
     {
@@ -513,6 +559,9 @@ class JarVerifier {
      * Create a unique mapping from codeSigner cache entries to CodeSource.
      * In theory, multiple URLs origins could map to a single locally cached
      * and shared JAR file although in practice there will be a single URL in use.
+     * <p>
+     * 创建从codeSigner缓存条目到CodeSource的唯一映射。理论上,多个URL起点可以映射到单个本地缓存和共享的JAR文件,尽管实际上将使用单个URL。
+     * 
      */
     private synchronized CodeSource mapSignersToCodeSource(URL url, CodeSigner[] signers) {
         Map<CodeSigner[], CodeSource> map;
@@ -550,6 +599,9 @@ class JarVerifier {
 
     /*
      * Match CodeSource to a CodeSigner[] in the signer cache.
+     * <p>
+     *  将CodeSource与签名缓存中的CodeSigner []匹配。
+     * 
      */
     private CodeSigner[] findMatchingSigners(CodeSource cs) {
         if (cs instanceof VerifierCodeSource) {
@@ -562,6 +614,9 @@ class JarVerifier {
         /*
          * In practice signers should always be optimized above
          * but this handles a CodeSource of any type, just in case.
+         * <p>
+         *  在实践中,签名者应该总是在上面优化,但是它处理任何类型的CodeSource,以防万一。
+         * 
          */
         CodeSource[] sources = mapSignersToCodeSources(cs.getLocation(), getJarCodeSigners(), true);
         List<CodeSource> sourceList = new ArrayList<>();
@@ -583,6 +638,9 @@ class JarVerifier {
     /*
      * Instances of this class hold uncopied references to internal
      * signing data that can be compared by object reference identity.
+     * <p>
+     *  此类的实例保存对内部签名数据的未封装引用,可以通过对象引用标识进行比较。
+     * 
      */
     private static class VerifierCodeSource extends CodeSource {
         private static final long serialVersionUID = -9047366145967768825L;
@@ -611,6 +669,10 @@ class JarVerifier {
          * singleton signerCache or signerCacheCert entries for each unique signer.
          * No CodeSigner<->Certificate[] conversion is required.
          * We use these assumptions to optimize equality comparisons.
+         * <p>
+         *  所有VerifierCodeSource实例都是基于每个唯一签署者的singleton signerCache或signerCacheCert条目构建的。
+         * 不需要CodeSigner < - > Certificate []转换。我们使用这些假设来优化均衡比较。
+         * 
          */
         public boolean equals(Object obj) {
             if (obj == this) {
@@ -623,6 +685,9 @@ class JarVerifier {
                  * Only compare against other per-signer singletons constructed
                  * on behalf of the same JarFile instance. Otherwise, compare
                  * things the slower way.
+                 * <p>
+                 *  仅与代表同一JarFile实例构建的其他每个签名者单例进行比较。否则,比较慢的方式。
+                 * 
                  */
                 if (isSameDomain(that.csdomain)) {
                     if (that.vsigners != this.vsigners
@@ -661,6 +726,9 @@ class JarVerifier {
              * Snapshot signer state so it doesn't change on us. We care
              * only about the asserted signatures. Verification of
              * signature validity happens via the JarEntry apis.
+             * <p>
+             *  快照签名者状态,所以它不会改变我们。我们只关心所声明的签名。签名有效性的验证通过JarEntry apis进行。
+             * 
              */
             signerMap = new HashMap<>(verifiedSigners.size() + sigFileSigners.size());
             signerMap.putAll(verifiedSigners);
@@ -677,6 +745,9 @@ class JarVerifier {
         /*
          * Grab a single copy of the CodeSigner arrays. Check
          * to see if we can optimize CodeSigner equality test.
+         * <p>
+         *  获取CodeSigner数组的单个副本。检查我们是否可以优化Code​​Signer等式测试。
+         * 
          */
         List<CodeSigner[]> req = new ArrayList<>(cs.length);
         for (int i = 0; i < cs.length; i++) {
@@ -732,6 +803,9 @@ class JarVerifier {
     /*
      * Like entries() but screens out internal JAR mechanism entries
      * and includes signed entries with no ZIP data.
+     * <p>
+     *  like entries(),但是屏蔽了内部JAR机制条目,并包括没有ZIP数据的签名条目。
+     * 
      */
     public Enumeration<JarEntry> entries2(final JarFile jar, Enumeration<? extends ZipEntry> e) {
         final Map<String, CodeSigner[]> map = new HashMap<>();
@@ -804,6 +878,8 @@ class JarVerifier {
             /*
              * Grab entries from ZIP directory but screen out
              * metadata.
+             * <p>
+             *  从ZIP目录抓取条目,但是屏蔽掉元数据。
              */
             public boolean hasMoreElements() {
                 if (name != null) {

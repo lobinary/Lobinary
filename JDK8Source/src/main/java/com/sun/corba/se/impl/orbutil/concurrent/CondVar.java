@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,13 @@
   Date       Who                What
   11Jun1998  dl               Create public version
   08dec2001  kmc              Added support for Reentrant Mutexes
+/* <p>
+/*  文件：ConditionVariable.java
+/* 
+/*  最初由Doug Lea编写并发布到公共领域。这可能被用于任何目的,无论如何没有确认。感谢Sun Microsystems Labs的帮助和支持,并且每个人都贡献,测试和使用此代码。
+/* 
+/*  历史：日期谁谁11Jun1998 dl创建公开版本08dec2001 kmc添加对重入互斥的支持
+/* 
 */
 
 package com.sun.corba.se.impl.orbutil.concurrent;
@@ -149,6 +157,29 @@ import com.sun.corba.se.impl.orbutil.ORBUtility ;
  * }
  *
  * </pre>
+ * <p>
+ *  这个类是专为POSIX pthreads编程的粉丝。如果你把自己限制在Mutexes和CondVars,你可以使用你最喜欢的结构。不要随机混合使用同步方法或块。
+ * <p>
+ *  方法名称和行为与POSIX中的方法名称和行为是合理的。
+ * <p>
+ *  <b>示例用法</b>这是一个有界缓冲区的完整版本,它实现了BoundedChannel接口,以POSIX编程书籍中的样式进行编写。
+ * <pre>
+ *  class CVBuffer implements BoundedChannel {private final Mutex mutex; private final CondVar notFull; private final CondVar notEmpty; private int count = 0; private int takePtr = 0; private int putPtr = 0; private final Object [] array;。
+ * 
+ *  public CVBuffer(int capacity){array = new Object [capacity]; mutex = new Mutex(); notFull = new CondVar(mutex); notEmpty = new CondVar(mutex); }
+ * }。
+ * 
+ * public int capacity(){return array.length; }}
+ * 
+ *  public void put(Object x)throws InterruptedException {mutex.acquire(); try {while(count == array.length){notFull.await(); }
+ *  array [putPtr] = x; putPtr =(putPtr + 1)％array.length; ++ count; notEmpty.signal(); } finally {mutex.release(); }
+ * }。
+ * 
+ *  public Object take()throws InterruptedException {Object x = null; mutex.acquire(); try {while(count == 0){notEmpty.await(); }
+ *  x = array [takePtr]; array [takePtr] = null; takePtr =(takePtr + 1)％array.length; - 计数; notFull.sign
+ * al(); } finally {mutex.release(); } return x; }}。
+ * 
+ * 
  * @see Mutex
  * <p>[<a href="http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html"> Introduction to this package. </a>]
 
@@ -185,6 +216,17 @@ public class CondVar {
   /**
    * Create a new CondVar that relies on the given mutual
    * exclusion lock.
+   * <p>
+   *  public boolean offer(Object x,long msecs)throws InterruptedException {mutex.acquire(); try {if(count == array.length){notFull.timedwait(msecs); if(count == array.length)return false; }
+   *  array [putPtr] = x; putPtr =(putPtr + 1)％array.length; ++ count; notEmpty.signal(); return true; } f
+   * inally {mutex.release(); }}。
+   * 
+   *  public Object poll(long msecs)throws InterruptedException {Object x = null; mutex.acquire(); try {if(count == 0){notEmpty.timedwait(msecs); if(count == 0)return null; }
+   *  x = array [takePtr]; array [takePtr] = null; takePtr =(takePtr + 1)％array.length; - 计数; notFull.sign
+   * al(); } finally {mutex.release(); } return x; }}。
+   * 
+   * </pre>
+   * 
    * @param mutex A mutual exclusion lock which must either be non-reentrant,
    * or else be ReentrantMutex.
    * Standard usage is to supply an instance of <code>Mutex</code>,
@@ -215,6 +257,10 @@ public class CondVar {
    * Wait for notification. This operation at least momentarily
    * releases the mutex. The mutex is always held upon return,
    * even if interrupted.
+   * <p>
+   *  创建一个依赖于给定的互斥锁的新CondVar。
+   * 
+   * 
    * @exception InterruptedException if the thread was interrupted
    * before or during the wait. However, if the thread is interrupted
    * after the wait but during mutex re-acquisition, the interruption
@@ -266,6 +312,10 @@ public class CondVar {
     * This operation at least momentarily
     * releases the mutex. The mutex is always held upon return,
     * even if interrupted.
+    * <p>
+    *  等待通知。此操作至少暂时释放互斥体。互斥量总是在返回时保持,即使中断。
+    * 
+    * 
     * @param msecs The time to wait. A value less than or equal to zero
     * causes a momentarily release
     * and re-acquire of the mutex, and always returns false.
@@ -329,6 +379,10 @@ public class CondVar {
     * Notify a waiting thread.
     * If one exists, a non-interrupted thread will return
     * normally (i.e., not via InterruptedException) from await or timedwait.
+    * <p>
+    * 等待最多msecs的通知。此操作至少暂时释放互斥体。互斥量总是在返回时保持,即使中断。
+    * 
+    * 
     **/
     public synchronized void signal() {
         notify();

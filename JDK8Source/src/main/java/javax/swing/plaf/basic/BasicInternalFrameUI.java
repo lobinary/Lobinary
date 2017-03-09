@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import sun.swing.UIAction;
 /**
  * A basic L&amp;F implementation of JInternalFrame.
  *
+ * <p>
+ *  JInternalFrame的基本L&amp; F实现。
+ * 
+ * 
  * @author David Kloba
  * @author Rich Schiavi
  */
@@ -74,6 +79,10 @@ public class BasicInternalFrameUI extends InternalFrameUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -192,6 +201,8 @@ public class BasicInternalFrameUI extends InternalFrameUI
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.3
      */
     protected void installListeners() {
@@ -279,6 +290,8 @@ public class BasicInternalFrameUI extends InternalFrameUI
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.3
      */
     protected void uninstallListeners() {
@@ -354,6 +367,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
       * Installs necessary mouse handlers on <code>newPane</code>
       * and adds it to the frame.
       * Reverse process for the <code>currentPane</code>.
+      * <p>
+      *  在<code> newPane </code>上安装必要的鼠标处理程序,并将其添加到框架中。 <code> currentPane </code>的反向过程。
+      * 
       */
     protected void replacePane(JComponent currentPane, JComponent newPane) {
         if(currentPane != null) {
@@ -484,6 +500,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
         /**
          * Detects changes in state from the JInternalFrame and handles
          * actions.
+         * <p>
+         *  检测来自JInternalFrame的状态更改,并处理操作。
+         * 
          */
         public void propertyChange(PropertyChangeEvent evt) {
             getHandler().propertyChange(evt);
@@ -521,6 +540,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
       * find the JDesktop component and returns the desktopManager from
       * it. If this fails, it will return a default DesktopManager that
       * should work in arbitrary parents.
+      * <p>
+      *  找到JDesktop组件并从中返回desktopManager。如果这失败,它将返回一个默认的DesktopManager,应该在任意父级工作。
+      * 
       */
     protected DesktopManager getDesktopManager() {
         if(frame.getDesktopPane() != null
@@ -539,6 +561,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
      * This method is called when the user wants to close the frame.
      * The <code>playCloseSound</code> Action is fired.
      * This action is delegated to the desktopManager.
+     * <p>
+     *  当用户想要关闭框架时调用此方法。 <code> playCloseSound </code>操作被触发。此操作委派给desktopManager。
+     * 
      */
     protected void closeFrame(JInternalFrame f) {
         // Internal Frame Auditory Cue Activation
@@ -551,6 +576,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
      * This method is called when the user wants to maximize the frame.
      * The <code>playMaximizeSound</code> Action is fired.
      * This action is delegated to the desktopManager.
+     * <p>
+     *  当用户想要最大化帧时,调用此方法。 <code> playMaximizeSound </code>操作被触发。此操作委派给desktopManager。
+     * 
      */
     protected void maximizeFrame(JInternalFrame f) {
         // Internal Frame Auditory Cue Activation
@@ -563,6 +591,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
      * This method is called when the user wants to minimize the frame.
      * The <code>playRestoreDownSound</code> Action is fired.
      * This action is delegated to the desktopManager.
+     * <p>
+     *  当用户想要最小化帧时调用此方法。 <code> playRestoreDownSound </code>操作被触发。此操作委派给desktopManager。
+     * 
      */
     protected void minimizeFrame(JInternalFrame f) {
         // Internal Frame Auditory Cue Activation
@@ -579,6 +610,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
      * This method is called when the user wants to iconify the frame.
      * The <code>playMinimizeSound</code> Action is fired.
      * This action is delegated to the desktopManager.
+     * <p>
+     *  当用户想要对图框进行图标化时,调用此方法。 <code> playMinimizeSound </code>操作被触发。此操作委派给desktopManager。
+     * 
      */
     protected void iconifyFrame(JInternalFrame f) {
         // Internal Frame Auditory Cue Activation
@@ -591,6 +625,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
      * This method is called when the user wants to deiconify the frame.
      * The <code>playRestoreUpSound</code> Action is fired.
      * This action is delegated to the desktopManager.
+     * <p>
+     * 当用户想要对帧进行解映射时,调用此方法。 <code> playRestoreUpSound </code>操作被触发。此操作委派给desktopManager。
+     * 
      */
     protected void deiconifyFrame(JInternalFrame f) {
         // Internal Frame Auditory Cue Activation
@@ -605,12 +642,18 @@ public class BasicInternalFrameUI extends InternalFrameUI
 
     /** This method is called when the frame becomes selected.
       * This action is delegated to the desktopManager.
+      * <p>
+      *  此操作委派给desktopManager。
+      * 
       */
     protected void activateFrame(JInternalFrame f) {
         getDesktopManager().activateFrame(f);
     }
     /** This method is called when the frame is no longer selected.
       * This action is delegated to the desktopManager.
+      * <p>
+      *  此操作委派给desktopManager。
+      * 
       */
     protected void deactivateFrame(JInternalFrame f) {
         getDesktopManager().deactivateFrame(f);
@@ -621,6 +664,9 @@ public class BasicInternalFrameUI extends InternalFrameUI
     /////////////////////////////////////////////////////////////////////////
     /**
      * Listens for border adjustments.
+     * <p>
+     *  监听边框调整。
+     * 
      */
     protected class BorderListener extends MouseInputAdapter implements SwingConstants
     {
@@ -770,6 +816,8 @@ public class BasicInternalFrameUI extends InternalFrameUI
                     }
                 } else {
                   /* the mouse press happened inside the frame, not in the
+                  /* <p>
+                  /* 
                      border */
                   discardRelease = true;
                   return;

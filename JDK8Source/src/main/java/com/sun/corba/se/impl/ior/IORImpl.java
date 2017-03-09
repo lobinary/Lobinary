@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -76,6 +77,10 @@ import com.sun.corba.se.spi.ior.iiop.IIOPProfile ;
 * However, enforcing this restriction requires overriding all
 * of the addXXX methods inherited from List, so no check
 * is included here.
+* <p>
+*  只有扩展TaggedProfile的对象才能添加到IOR中。但是,实施此限制需要覆盖从List继承的所有addXXX方法,因此此处不包括检查。
+* 
+* 
 * @author Ken Cavanaugh
 */
 public class IORImpl extends IdentifiableContainerBase implements IOR
@@ -98,6 +103,10 @@ public class IORImpl extends IdentifiableContainerBase implements IOR
      * mutiple TaggedProfile instances has the same ObjectId in each
      * TaggedProfile, as otherwise the IOR could never be created through
      * an ObjectReferenceFactory.
+     * <p>
+     *  IORTemplate或IORTemplateList作为参数;否则它是从第一次调用getIORTemplates的TaggedProfile实例的列表中派生的。
+     * 注意,我们假设具有多个TaggedProfile实例的IOR在每个TaggedProfile中具有相同的ObjectId,否则IOR永远不能通过ObjectReferenceFactory创建。
+     * 
      */
     private IORTemplateList iortemps = null ;
 
@@ -124,6 +133,7 @@ public class IORImpl extends IdentifiableContainerBase implements IOR
     }
 
     /** Construct an empty IOR.  This is needed for null object references.
+    /* <p>
     */
     public IORImpl( ORB orb )
     {
@@ -140,6 +150,9 @@ public class IORImpl extends IdentifiableContainerBase implements IOR
 
     /** Construct an IOR from an IORTemplate by applying the same
     * object id to each TaggedProfileTemplate in the IORTemplate.
+    * <p>
+    *  对象ID到IORTemplate中的每个TaggedProfileTemplate。
+    * 
     */
     public IORImpl( ORB orb, String typeId, IORTemplate iortemp, ObjectId id)
     {
@@ -170,6 +183,9 @@ public class IORImpl extends IdentifiableContainerBase implements IOR
 
     /** Construct an IOR from an IORTemplate by applying the same
     * object id to each TaggedProfileTemplate in the IORTemplate.
+    * <p>
+    *  对象ID到IORTemplate中的每个TaggedProfileTemplate。
+    * 
     */
     public IORImpl( ORB orb, String typeId, IORTemplateList iortemps, ObjectId id)
     {
@@ -308,6 +324,24 @@ public class IORImpl extends IdentifiableContainerBase implements IOR
      * from the IORTemplateList that is equal to this IOR,
      * which can only happen if not every TaggedProfile in the
      * IOR has the same ObjectId.
+     * <p>
+     *  }}
+     * 
+     *  public boolean isEquivalent(IOR ior){Iterator myIterator = iterator(); Iterator otherIterator = ior.iterator(); while(myIterator.hasNext()&& otherIterator.hasNext()){TaggedProfile myProfile =(TaggedProfile)(myIterator.next()); TaggedProfile otherProfile =(TaggedProfile)(otherIterator.next()); if(！myProfile.isEquivalent(otherProfile))return false; }
+     * }。
+     * 
+     *  return myIterator.hasNext()== otherIterator.hasNext(); }}
+     * 
+     *  private void initializeIORTemplateList(){//将ObjectKeyTemplate映射到IORTemplate映射oktempToIORTemplate = new HashMap();。
+     * 
+     * iortemps = IORFactories.makeIORTemplateList();迭代器iter = iterator(); ObjectId oid = null; //用于检查所有配置文件
+     * 是否具有相同的oid。
+     *  while(iter.hasNext()){TaggedProfile prof =(TaggedProfile)(iter.next()); TaggedProfileTemplate ptemp = prof.getTaggedProfileTemplate(); ObjectKeyTemplate oktemp = prof.getObjectKeyTemplate();。
+     * 
+     *  //检查所有配置文件的所有oid是否相同：如果它们不是,则抛出异常。
+     *  if(oid == null)oid = prof.getObjectId(); else if(！oid.equals(prof.getObjectId()))throw wrapper.badOi
+     * dInIorTemplateList();。
+     *  //检查所有配置文件的所有oid是否相同：如果它们不是,则抛出异常。
      */
     public synchronized IORTemplateList getIORTemplates()
     {
@@ -320,6 +354,15 @@ public class IORImpl extends IdentifiableContainerBase implements IOR
     /** Return the first IIOPProfile in this IOR.
      * XXX THIS IS TEMPORARY FOR BACKWARDS COMPATIBILITY AND WILL BE REMOVED
      * SOON!
+     * <p>
+     * 
+     *  //找到或创建oktemp的IORTemplate。
+     *  IORTemplate iortemp =(IORTemplate)(oktempToIORTemplate.get(oktemp)); if(iortemp == null){iortemp = IORFactories.makeIORTemplate(oktemp); oktempToIORTemplate.put(oktemp,iortemp); iortemps.add(iortemp); }
+     * }。
+     *  //找到或创建oktemp的IORTemplate。
+     * 
+     *  iortemp.add(ptemp); }}
+     * 
      */
     public IIOPProfile getProfile()
     {

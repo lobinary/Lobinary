@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -76,6 +77,9 @@ public class BootstrapResolverImpl implements Resolver {
      * parameter. We do not want to extend BootStrap protocol any further,
      * as INS handles most of what BootStrap can handle in a portable way.
      *
+     * <p>
+     *  对于BootStrap操作,我们不希望有多个参数。我们不想进一步扩展BootStrap协议,因为INS处理大多数BootStrap可以以可移植的方式处理。
+     * 
      * @return InputStream which contains the response from the
      * BootStrapOperation.
      */

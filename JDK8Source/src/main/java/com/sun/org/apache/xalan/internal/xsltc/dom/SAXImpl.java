@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SAXImpl.java,v 1.5 2005/09/28 13:48:37 pvedula Exp $
+ * <p>
+ *  $ Id：SAXImpl.java,v 1.5 2005/09/28 13:48:37 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -72,6 +85,15 @@ import org.xml.sax.SAXException;
  * unparsed entity.
  *
  * <p>SAXImpl extends SAX2DTM2 instead of SAX2DTM for better performance.
+ * <p>
+ *  SAXImpl是SAX输入源的核心模型。 SAXImpl对象通常是从XSLTCDTMManager创建的。
+ * 
+ *  <p> DOMSource输入使用DOM2SAX + SAXImpl处理。 SAXImpl有几个特定的​​字段(例如_node2Ids,_document)来保存DOM相关的信息。
+ * 当DOM和SAX之间的处理行为必须不同时,使用它们。这些例子包括id函数和未解析的实体。
+ * 
+ *  <p> SAXImpl扩展了SAX2DTM2,而不是SAX2DTM,以获得更好的性能。
+ * 
+ * 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -153,6 +175,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Define the origin of the document from which the tree was built
+     * <p>
+     *  定义构建树的文档的来源
+     * 
      */
     public void setDocumentURI(String uri) {
         if (uri != null) {
@@ -162,6 +187,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the origin of the document from which the tree was built
+     * <p>
+     *  返回构建树的文档的原点
+     * 
      */
     public String getDocumentURI() {
         String baseURI = getDocumentBaseURI();
@@ -181,6 +209,9 @@ public final class SAXImpl extends SAX2DTM2
      * Lookup a namespace URI from a prefix starting at node. This method
      * is used in the execution of xsl:element when the prefix is not known
      * at compile time.
+     * <p>
+     * 从节点开始的前缀中查找命名空间URI。当前缀在编译时未知时,此方法用于执行xsl：element。
+     * 
      */
     public String lookupNamespace(int node, String prefix)
         throws TransletException
@@ -210,6 +241,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns 'true' if a specific node is an element (of any type)
+     * <p>
+     *  如果特定节点是元素(任何类型),则返回'true'
+     * 
      */
     public boolean isElement(final int node) {
         return getNodeType(node) == DTM.ELEMENT_NODE;
@@ -217,6 +251,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns 'true' if a specific node is an attribute (of any type)
+     * <p>
+     *  如果特定节点是属性(任何类型),则返回'true'
+     * 
      */
     public boolean isAttribute(final int node) {
         return getNodeType(node) == DTM.ATTRIBUTE_NODE;
@@ -224,6 +261,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the number of nodes in the tree (used for indexing)
+     * <p>
+     *  返回树中的节点数(用于建立索引)
+     * 
      */
     public int getSize() {
         return getNumberOfNodes();
@@ -231,6 +271,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Part of the DOM interface - no function here.
+     * <p>
+     *  部分DOM接口 - 这里没有功能。
+     * 
      */
     public void setFilter(StripFilter filter) {
     }
@@ -238,6 +281,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns true if node1 comes before node2 in document order
+     * <p>
+     *  如果node1在文档顺序中位于node2之前,则返回true
+     * 
      */
     public boolean lessThan(int node1, int node2) {
         if (node1 == DTM.NULL) {
@@ -253,6 +299,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Create an org.w3c.dom.Node from a node in the tree
+     * <p>
+     *  从树中的节点创建org.w3c.dom.Node
+     * 
      */
     public Node makeNode(int index) {
         if (_nodes == null) {
@@ -275,6 +324,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Create an org.w3c.dom.Node from a node in an iterator
      * The iterator most be started before this method is called
+     * <p>
+     *  从迭代器中的节点创建org.w3c.dom.Node迭代器最多在调用此方法之前启动
+     * 
      */
     public Node makeNode(DTMAxisIterator iter) {
         return makeNode(iter.next());
@@ -282,6 +334,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Create an org.w3c.dom.NodeList from a node in the tree
+     * <p>
+     *  从树中的节点创建org.w3c.dom.NodeList
+     * 
      */
     public NodeList makeNodeList(int index) {
         if (_nodeLists == null) {
@@ -305,6 +360,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Create an org.w3c.dom.NodeList from a node iterator
      * The iterator most be started before this method is called
+     * <p>
+     *  从节点iterator创建org.w3c.dom.NodeList迭代器最多在调用此方法之前启动
+     * 
      */
     public NodeList makeNodeList(DTMAxisIterator iter) {
         return new DTMAxisIterNodeList(this, iter);
@@ -313,6 +371,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Iterator that returns the namespace nodes as defined by the XPath data
      * model for a given node, filtered by extended type ID.
+     * <p>
+     *  Iterator返回由扩展类型ID过滤的给定节点的XPath数据模型定义的命名空间节点。
+     * 
      */
     public class TypedNamespaceIterator extends NamespaceIterator {
 
@@ -322,6 +383,10 @@ public final class SAXImpl extends SAX2DTM2
          * Constructor TypedChildrenIterator
          *
          *
+         * <p>
+         *  构造函数TypedChildrenIterator
+         * 
+         * 
          * @param nodeType The extended type ID being requested.
          */
         public TypedNamespaceIterator(int nodeType) {
@@ -334,6 +399,10 @@ public final class SAXImpl extends SAX2DTM2
        /**
         * Get the next node in the iteration.
         *
+        * <p>
+        *  获取迭代中的下一个节点。
+        * 
+        * 
         * @return The next node handle in the iteration, or END.
         */
         public int next() {
@@ -355,6 +424,9 @@ public final class SAXImpl extends SAX2DTM2
     /**************************************************************
      * This is a specialised iterator for predicates comparing node or
      * attribute values to variable or parameter values.
+     * <p>
+     *  这是用于谓词的专用迭代器,用于将节点或属性值与变量或参数值进行比较。
+     * 
      */
     private final class NodeValueIterator extends InternalAxisIteratorBase
     {
@@ -454,6 +526,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Encapsulates an iterator in an OrderedIterator to ensure node order
+     * <p>
+     *  在OrderedIterator中封装迭代器以确保节点顺序
+     * 
      */
     public DTMAxisIterator orderNodes(DTMAxisIterator source, int node)
     {
@@ -464,6 +539,9 @@ public final class SAXImpl extends SAX2DTM2
      * Returns singleton iterator containg the document root
      * Works for them main document (mark == 0).  It cannot be made
      * to point to any other node through setStartNode().
+     * <p>
+     *  返回包含文档根的单例迭代器为它们工作主文档(mark == 0)。它不能通过setStartNode()指向任何其他节点。
+     * 
      */
     public DTMAxisIterator getIterator()
     {
@@ -472,6 +550,9 @@ public final class SAXImpl extends SAX2DTM2
 
      /**
      * Get mapping from DOM namespace types to external namespace types
+     * <p>
+     *  获取从DOM命名空间类型到外部命名空间类型的映射
+     * 
      */
     public int getNSType(int node)
     {
@@ -487,6 +568,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the namespace type of a specific node
+     * <p>
+     *  返回特定节点的命名空间类型
+     * 
      */
     public int getNamespaceType(final int node)
     {
@@ -495,6 +579,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Sets up a translet-to-dom type mapping table
+     * <p>
+     *  设置translet-to-dom类型映射表
+     * 
      */
     private int[] setupMapping(String[] names, String[] uris, int[] types, int nNames) {
         // Padding with number of names, because they
@@ -510,6 +597,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the internal type associated with an expanded QName
+     * <p>
+     * 返回与扩展的QName关联的内部类型
+     * 
      */
     public int getGeneralizedType(final String name) {
         return getGeneralizedType(name, true);
@@ -517,6 +607,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the internal type associated with an expanded QName
+     * <p>
+     *  返回与扩展的QName关联的内部类型
+     * 
      */
     public int getGeneralizedType(final String name, boolean searchOnly) {
         String lName, ns = null;
@@ -550,6 +643,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Get mapping from DOM element/attribute types to external types
+     * <p>
+     *  从DOM元素/属性类型到外部类型的映射
+     * 
      */
     public short[] getMapping(String[] names, String[] uris, int[] types)
     {
@@ -590,6 +686,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Get mapping from external element/attribute types to DOM types
+     * <p>
+     *  获取从外部元素/属性类型到DOM类型的映射
+     * 
      */
     public int[] getReverseMapping(String[] names, String[] uris, int[] types)
     {
@@ -612,6 +711,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Get mapping from DOM element/attribute types to external types.
      * This method is used when the document is not fully built.
+     * <p>
+     *  从DOM元素/属性类型到外部类型的映射。当文档未完全构建时使用此方法。
+     * 
      */
     private short[] getMapping2(String[] names, String[] uris, int[] types)
     {
@@ -663,6 +765,9 @@ public final class SAXImpl extends SAX2DTM2
     }
     /**
      * Get mapping from DOM namespace types to external namespace types
+     * <p>
+     *  获取从DOM命名空间类型到外部命名空间类型的映射
+     * 
      */
     public short[] getNamespaceMapping(String[] namespaces)
     {
@@ -690,6 +795,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Get mapping from external namespace types to DOM namespace types
+     * <p>
+     *  获取从外部命名空间类型到DOM命名空间类型的映射
+     * 
      */
     public short[] getReverseNamespaceMapping(String[] namespaces)
     {
@@ -708,6 +816,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Construct a SAXImpl object using the default block size.
+     * <p>
+     *  使用默认块大小构造SAXImpl对象。
+     * 
      */
     public SAXImpl(XSLTCDTMManager mgr, Source source,
                    int dtmIdentity, DTMWSFilter whiteSpaceFilter,
@@ -720,6 +831,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Construct a SAXImpl object using the given block size.
+     * <p>
+     *  使用给定的块大小构造一个SAXImpl对象。
+     * 
      */
     public SAXImpl(XSLTCDTMManager mgr, Source source,
                    int dtmIdentity, DTMWSFilter whiteSpaceFilter,
@@ -761,6 +875,10 @@ public final class SAXImpl extends SAX2DTM2
     * After the migration, the new DTMManager will treat the DTM as
     * one that is built by itself.
     * This is used to support DTM sharing between multiple transformations.
+    * <p>
+    *  将使用旧DTMManager构建的DTM迁移到新的DTMManager。迁移后,新的DTMManager会将DTM视为由其自身构建的DTM。这用于支持多个转换之间的DTM共享。
+    * 
+    * 
     * @param manager the DTMManager
     */
     public void migrateTo(DTMManager manager) {
@@ -773,6 +891,10 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Return the node identity for a given id String
      *
+     * <p>
+     *  返回给定id字符串的节点标识
+     * 
+     * 
      * @param idString The id String
      * @return The identity of the node whose id is the given String.
      */
@@ -790,6 +912,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Return true if the input source is DOMSource.
+     * <p>
+     *  如果输入源是DOMSource,则返回true。
+     * 
      */
     public boolean hasDOMSource()
     {
@@ -803,6 +928,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Call this when an xml:space attribute is encountered to
      * define the whitespace strip/preserve settings.
+     * <p>
+     *  当遇到xml：space属性以定义空白条/保留设置时调用此方法。
+     * 
      */
     private void xmlSpaceDefine(String val, final int node)
     {
@@ -816,6 +944,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Call this from endElement() to revert strip/preserve setting
      * to whatever it was before the corresponding startElement().
+     * <p>
+     *  从endElement()调用此函数将条/保存设置恢复到相应的startElement()之前的任何值。
+     * 
      */
     private void xmlSpaceRevert(final int node)
     {
@@ -829,6 +960,10 @@ public final class SAXImpl extends SAX2DTM2
      * Find out whether or not to strip whitespace nodes.
      *
      *
+     * <p>
+     *  找出是否去除空白节点。
+     * 
+     * 
      * @return whether or not to strip whitespace nodes.
      */
     protected boolean getShouldStripWhitespace()
@@ -838,6 +973,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Creates a text-node and checks if it is a whitespace node.
+     * <p>
+     *  创建文本节点并检查它是否是空格节点。
+     * 
      */
     private void handleTextEscaping() {
         if (_disableEscaping && _textNodeToProcess != DTM.NULL
@@ -864,6 +1002,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * SAX2: Receive notification of character data.
+     * <p>
+     *  SAX2：接收字符数据的通知。
+     * 
      */
     public void characters(char[] ch, int start, int length) throws SAXException
     {
@@ -875,6 +1016,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * SAX2: Receive notification of the beginning of a document.
+     * <p>
+     *  SAX2：接收文档开头的通知。
+     * 
      */
     public void startDocument() throws SAXException
     {
@@ -886,6 +1030,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * SAX2: Receive notification of the end of a document.
+     * <p>
+     *  SAX2：接收文档结束的通知。
+     * 
      */
     public void endDocument() throws SAXException
     {
@@ -898,6 +1045,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Specialized interface used by DOM2SAX. This one has an extra Node
      * parameter to build the Node -> id map.
+     * <p>
+     * DOM2SAX使用的专用接口。这个有一个额外的Node参数来构建Node  - > id map。
+     * 
      */
     public void startElement(String uri, String localName,
                              String qname, Attributes attributes,
@@ -913,6 +1063,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * SAX2: Receive notification of the beginning of an element.
+     * <p>
+     *  SAX2：接收元素开头的通知。
+     * 
      */
     public void startElement(String uri, String localName,
                  String qname, Attributes attributes)
@@ -935,6 +1088,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * SAX2: Receive notification of the end of an element.
+     * <p>
+     *  SAX2：接收元素结束的通知。
+     * 
      */
     public void endElement(String namespaceURI, String localName, String qname)
         throws SAXException
@@ -951,6 +1107,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * SAX2: Receive notification of a processing instruction.
+     * <p>
+     *  SAX2：接收处理指令的通知。
+     * 
      */
     public void processingInstruction(String target, String data)
         throws SAXException
@@ -962,6 +1121,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * SAX2: Receive notification of ignorable whitespace in element
      * content. Similar to characters(char[], int, int).
+     * <p>
+     *  SAX2：在元素内容中接收可忽略的空格的通知。类似于字符(char [],int,int)。
+     * 
      */
     public void ignorableWhitespace(char[] ch, int start, int length)
         throws SAXException
@@ -972,6 +1134,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * SAX2: Begin the scope of a prefix-URI Namespace mapping.
+     * <p>
+     *  SAX2：开始前缀-URI命名空间映射的范围。
+     * 
      */
     public void startPrefixMapping(String prefix, String uri)
         throws SAXException
@@ -994,6 +1159,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * SAX2: Report an XML comment anywhere in the document.
+     * <p>
+     *  SAX2：在文档中的任何位置报告XML注释。
+     * 
      */
     public void comment(char[] ch, int start, int length)
         throws SAXException
@@ -1014,6 +1182,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Prints the whole tree to standard output
+     * <p>
+     *  将整个树打印到标准输出
+     * 
      */
     public void print(int node, int level)
     {
@@ -1047,6 +1218,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the name of a node (attribute or element).
+     * <p>
+     *  返回节点(属性或元素)的名称。
+     * 
      */
     public String getNodeName(final int node)
     {
@@ -1069,6 +1243,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the namespace URI to which a node belongs
+     * <p>
+     *  返回节点所属的命名空间URI
+     * 
      */
     public String getNamespaceName(final int node)
     {
@@ -1083,6 +1260,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the attribute node of a given type (if any) for an element
+     * <p>
+     *  返回元素的给定类型(如果有)的属性节点
+     * 
      */
     public int getAttributeNode(final int type, final int element)
     {
@@ -1097,6 +1277,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the value of a given attribute type of a given element
+     * <p>
+     *  返回给定元素的给定属性类型的值
+     * 
      */
     public String getAttributeValue(final int type, final int element)
     {
@@ -1106,6 +1289,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * This method is for testing/debugging only
+     * <p>
+     *  此方法仅用于测试/调试
+     * 
      */
     public String getAttributeValue(final String name, final int element)
     {
@@ -1114,6 +1300,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns an iterator with all the children of a given node
+     * <p>
+     *  返回具有给定节点的所有子项的迭代器
+     * 
      */
     public DTMAxisIterator getChildren(final int node)
     {
@@ -1123,6 +1312,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Returns an iterator with all children of a specific type
      * for a given node (element)
+     * <p>
+     *  返回具有给定节点(元素)的特定类型的所有子元素的迭代器,
+     * 
      */
     public DTMAxisIterator getTypedChildren(final int type)
     {
@@ -1134,6 +1326,9 @@ public final class SAXImpl extends SAX2DTM2
      * supported XPath axes (only namespace::) is not supported.
      * Returns a bare-bones iterator that must be initialized
      * with a start node (using iterator.setStartNode()).
+     * <p>
+     *  这是实现支持的XPath轴的迭代器的快捷方式(仅命名空间：:)不受支持。返回一个裸体迭代器,它必须使用一个起始节点初始化(使用iterator.setStartNode())。
+     * 
      */
     public DTMAxisIterator getAxisIterator(final int axis)
     {
@@ -1177,6 +1372,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Similar to getAxisIterator, but this one returns an iterator
      * containing nodes of a typed axis (ex.: child::foo)
+     * <p>
+     *  与getAxisIterator类似,但是这个方法返回一个包含类型轴节点的迭代器(例如：child :: foo)
+     * 
      */
     public DTMAxisIterator getTypedAxisIterator(int axis, int type)
     {
@@ -1232,6 +1430,12 @@ public final class SAXImpl extends SAX2DTM2
      * such as with <xsl:apply-templates select="blob/foo:*"/>
      * The 'axis' specifies the axis for the base iterator from which the
      * nodes are taken, while 'ns' specifies the namespace URI type.
+     * <p>
+     * 不要认为这会为命名空间轴返回一个迭代器。
+     * 它返回一个具有属于某个命名空间的节点的迭代器,例如<xsl：apply-templates select ="blob / foo：*"/>'axis'指定从中获取节点的基本迭代器的轴,而'ns'指定命
+     * 名空间URI类型。
+     * 不要认为这会为命名空间轴返回一个迭代器。
+     * 
      */
     public DTMAxisIterator getNamespaceAxisIterator(int axis, int ns)
     {
@@ -1257,24 +1461,37 @@ public final class SAXImpl extends SAX2DTM2
      * Iterator that handles node tests that test for a namespace, but have
      * a wild card for the local name of the node, i.e., node tests of the
      * form <axis>::<prefix>:*
+     * <p>
+     *  迭代器,用于处理测试命名空间的节点测试,但是具有用于节点的本地名称的通配符,即<axis> :: <prefix>：形式的节点测试：
+     * 
      */
     public final class NamespaceWildcardIterator
         extends InternalAxisIteratorBase
     {
         /**
          * The namespace type index.
+         * <p>
+         *  命名空间类型索引。
+         * 
          */
         protected int m_nsType;
 
         /**
          * A nested typed axis iterator that retrieves nodes of the principal
          * node kind for that axis.
+         * <p>
+         *  嵌套类型轴迭代器,检索该轴的主节点类型的节点。
+         * 
          */
         protected DTMAxisIterator m_baseIterator;
 
         /**
          * Constructor NamespaceWildcard
          *
+         * <p>
+         *  构造函数名称空间
+         * 
+         * 
          * @param axis The axis that this iterator will traverse
          * @param nsType The namespace type index
          */
@@ -1307,6 +1524,10 @@ public final class SAXImpl extends SAX2DTM2
          * Set start to END should 'close' the iterator,
          * i.e. subsequent call to next() should return END.
          *
+         * <p>
+         *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+         * 
+         * 
          * @param node Sets the root of the iteration.
          *
          * @return A DTMAxisIterator set to the start of the iteration.
@@ -1323,6 +1544,10 @@ public final class SAXImpl extends SAX2DTM2
         /**
          * Get the next node in the iteration.
          *
+         * <p>
+         *  获取迭代中的下一个节点。
+         * 
+         * 
          * @return The next node handle in the iteration, or END.
          */
         public int next() {
@@ -1342,6 +1567,10 @@ public final class SAXImpl extends SAX2DTM2
          * Returns a deep copy of this iterator.  The cloned iterator is not
          * reset.
          *
+         * <p>
+         *  返回此迭代器的深度副本。克隆的迭代器不会重置。
+         * 
+         * 
          * @return a deep copy of this iterator.
          */
         public DTMAxisIterator cloneIterator() {
@@ -1365,6 +1594,10 @@ public final class SAXImpl extends SAX2DTM2
         /**
          * True if this iterator has a reversed axis.
          *
+         * <p>
+         *  如果此迭代器具有反转轴,则为true。
+         * 
+         * 
          * @return <code>true</code> if this iterator is a reversed axis.
          */
         public boolean isReverse() {
@@ -1385,6 +1618,9 @@ public final class SAXImpl extends SAX2DTM2
      * given node. The functionality chould be achieved by putting a
      * filter on top of a basic child iterator, but a specialised
      * iterator is used for efficiency (both speed and size of translet).
+     * <p>
+     *  Iterator返回给定节点的给定命名空间内的子节点。该功能可以通过在基本子迭代器的顶部放置一个过滤器来实现,但是一个专门的迭代器用于效率(速度和translet的速度和大小)。
+     * 
      */
     public final class NamespaceChildrenIterator
         extends InternalAxisIteratorBase
@@ -1397,6 +1633,10 @@ public final class SAXImpl extends SAX2DTM2
          * Constructor NamespaceChildrenIterator
          *
          *
+         * <p>
+         *  构造函数NamespaceChildrenIterator
+         * 
+         * 
          * @param type The extended type ID being requested.
          */
         public NamespaceChildrenIterator(final int type) {
@@ -1407,6 +1647,10 @@ public final class SAXImpl extends SAX2DTM2
          * Set start to END should 'close' the iterator,
          * i.e. subsequent call to next() should return END.
          *
+         * <p>
+         *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+         * 
+         * 
          * @param node Sets the root of the iteration.
          *
          * @return A DTMAxisIterator set to the start of the iteration.
@@ -1430,6 +1674,10 @@ public final class SAXImpl extends SAX2DTM2
         /**
          * Get the next node in the iteration.
          *
+         * <p>
+         *  获取迭代中的下一个节点。
+         * 
+         * 
          * @return The next node handle in the iteration, or END.
          */
         public int next() {
@@ -1455,6 +1703,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Iterator that returns attributes within a given namespace for a node.
+     * <p>
+     *  返回节点的给定命名空间内的属性的迭代器。
+     * 
      */
     public final class NamespaceAttributeIterator
             extends InternalAxisIteratorBase
@@ -1467,6 +1718,10 @@ public final class SAXImpl extends SAX2DTM2
          * Constructor NamespaceAttributeIterator
          *
          *
+         * <p>
+         *  构造函数NamespaceAttributeIterator
+         * 
+         * 
          * @param nsType The extended type ID being requested.
          */
         public NamespaceAttributeIterator(int nsType) {
@@ -1479,6 +1734,10 @@ public final class SAXImpl extends SAX2DTM2
          * Set start to END should 'close' the iterator,
          * i.e. subsequent call to next() should return END.
          *
+         * <p>
+         * 将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+         * 
+         * 
          * @param node Sets the root of the iteration.
          *
          * @return A DTMAxisIterator set to the start of the iteration.
@@ -1512,6 +1771,10 @@ public final class SAXImpl extends SAX2DTM2
         /**
          * Get the next node in the iteration.
          *
+         * <p>
+         *  获取迭代中的下一个节点。
+         * 
+         * 
          * @return The next node handle in the iteration, or END.
          */
         public int next() {
@@ -1540,6 +1803,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Returns an iterator with all descendants of a node that are of
      * a given type.
+     * <p>
+     *  返回具有给定类型的节点的所有后代的迭代器。
+     * 
      */
     public DTMAxisIterator getTypedDescendantIterator(int type)
     {
@@ -1548,6 +1814,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns the nth descendant of a node
+     * <p>
+     *  返回节点的第n个子节点
+     * 
      */
     public DTMAxisIterator getNthDescendant(int type, int n, boolean includeself)
     {
@@ -1557,6 +1826,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Copy the string value of a node directly to an output handler
+     * <p>
+     *  将节点的字符串值直接复制到输出处理程序
+     * 
      */
     public void characters(final int node, SerializationHandler handler)
         throws TransletException
@@ -1572,6 +1844,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Copy a node-set to an output handler
+     * <p>
+     *  将节点集复制到输出处理程序
+     * 
      */
     public void copy(DTMAxisIterator nodes, SerializationHandler handler)
         throws TransletException
@@ -1584,6 +1859,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Copy the whole tree to an output handler
+     * <p>
+     *  将整个树复制到输出处理程序
+     * 
      */
     public void copy(SerializationHandler handler) throws TransletException
     {
@@ -1596,6 +1874,11 @@ public final class SAXImpl extends SAX2DTM2
      * TODO: Copy namespace declarations. Can't be done until we
      *       add namespace nodes and keep track of NS prefixes
      * TODO: Copy comment nodes
+     * <p>
+     *  执行深度复制(参考XSLs copy-of())
+     * 
+     *  TODO：复制命名空间声明。直到我们添加命名空间节点并跟踪NS前缀才能完成TODO：复制注释节点
+     * 
      */
     public void copy(final int node, SerializationHandler handler)
         throws TransletException
@@ -1685,6 +1968,9 @@ public final class SAXImpl extends SAX2DTM2
     }
     /**
      * Copies a processing instruction node to an output handler
+     * <p>
+     *  将处理指令节点复制到输出处理程序
+     * 
      */
     private void copyPI(final int node, SerializationHandler handler)
         throws TransletException
@@ -1701,6 +1987,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Performs a shallow copy (ref. XSLs copy())
+     * <p>
+     *  执行浅拷贝(ref。XSLs copy())
+     * 
      */
     public String shallowCopy(final int node, SerializationHandler handler)
         throws TransletException
@@ -1750,6 +2039,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Returns a node' defined language for a node (if any)
+     * <p>
+     *  返回节点的定义语言(如果有)
+     * 
      */
     public String getLanguage(int node)
     {
@@ -1772,6 +2064,9 @@ public final class SAXImpl extends SAX2DTM2
      * Returns an instance of the DOMBuilder inner class
      * This class will consume the input document through a SAX2
      * interface and populate the tree.
+     * <p>
+     *  返回DOMBuilder内部类的实例此类将通过SAX2接口使用输入文档并填充树。
+     * 
      */
     public DOMBuilder getBuilder()
     {
@@ -1781,6 +2076,9 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Return a SerializationHandler for output handling.
      * This method is used by Result Tree Fragments.
+     * <p>
+     *  返回SerializationHandler以进行输出处理。此方法由结果树片段使用。
+     * 
      */
     public SerializationHandler getOutputDomBuilder()
     {
@@ -1789,6 +2087,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * Return a instance of a DOM class to be used as an RTF
+     * <p>
+     *  返回一个要用作RTF的DOM类的实例
+     * 
      */
     public DOM getResultTreeFrag(int initSize, int rtfType)
     {
@@ -1798,6 +2099,10 @@ public final class SAXImpl extends SAX2DTM2
     /**
      * Return a instance of a DOM class to be used as an RTF
      *
+     * <p>
+     *  返回一个要用作RTF的DOM类的实例
+     * 
+     * 
      * @param initSize The initial size of the DOM.
      * @param rtfType The type of the RTF
      * @param addToManager true if the RTF should be registered with the DTMManager.
@@ -1841,6 +2146,9 @@ public final class SAXImpl extends SAX2DTM2
 
     /**
      * %HZ% Need Javadoc
+     * <p>
+     *  ％HZ％需要Javadoc
+     * 
      */
     public Hashtable getElementsWithIDs() {
         if (m_idAttributes == null) {
@@ -1869,6 +2177,8 @@ public final class SAXImpl extends SAX2DTM2
      * entity with the specified name in the same document as the context
      * node (see [3.3 Unparsed Entities]). It returns the empty string if
      * there is no such entity.
+     * <p>
+     *  getUnparsedEntityURI函数返回在与上下文节点相同的文档中具有指定名称的未解析实体的URI(参见[3.3 Unparsed Entities])。如果没有这样的实体,它返回空字符串。
      */
     public String getUnparsedEntityURI(String name)
     {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package javax.naming.ldap;
  * This class represents an event fired in response to an unsolicited
  * notification sent by the LDAP server.
  *
+ * <p>
+ *  此类表示响应LDAP服务器发送的主动通知而触发的事件。
+ * 
+ * 
  * @author Rosanna Lee
  * @author Scott Seligman
  * @author Vincent Ryan
@@ -44,6 +49,10 @@ package javax.naming.ldap;
 public class UnsolicitedNotificationEvent extends java.util.EventObject {
     /**
      * The notification that caused this event to be fired.
+     * <p>
+     *  导致触发此事件的通知。
+     * 
+     * 
      * @serial
      */
     private UnsolicitedNotification notice;
@@ -51,6 +60,10 @@ public class UnsolicitedNotificationEvent extends java.util.EventObject {
     /**
      * Constructs a new instance of <tt>UnsolicitedNotificationEvent</tt>.
      *
+     * <p>
+     *  构造一个<tt> UnsolicitedNotificationEvent </tt>的新实例。
+     * 
+     * 
      * @param src The non-null source that fired the event.
      * @param notice The non-null unsolicited notification.
      */
@@ -63,6 +76,10 @@ public class UnsolicitedNotificationEvent extends java.util.EventObject {
 
     /**
      * Returns the unsolicited notification.
+     * <p>
+     *  返回主动通知。
+     * 
+     * 
      * @return The non-null unsolicited notification that caused this
      * event to be fired.
      */
@@ -73,6 +90,9 @@ public class UnsolicitedNotificationEvent extends java.util.EventObject {
     /**
      * Invokes the <tt>notificationReceived()</tt> method on
      * a listener using this event.
+     * <p>
+     *  使用此事件在侦听器上调用<tt> notificationReceived()</tt>方法。
+     * 
      * @param listener The non-null listener on which to invoke
      * <tt>notificationReceived</tt>.
      */

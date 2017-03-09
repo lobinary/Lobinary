@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -76,6 +77,32 @@ import javax.print.attribute.PrintRequestAttribute;
  * does not equal an integral number of &#181;m).
  * <p>
  * <B>IPP Compatibility:</B> MediaPrintableArea is not an IPP attribute.
+ * <p>
+ *  MediaPrintableArea类是用于区分可打印和不可打印的介质区域的打印属性。
+ * <p>
+ *  在介质的整体尺寸内,可打印区域被指定为矩形。
+ * <p>
+ *  由于打印机硬件限制,大多数打印机无法在介质的整个表面上打印。该类可以用于查询假定的打印作业的可接受的值,并且请求在打印作业中要使用的可打印区域的约束内的区域。
+ * <p>
+ *  为了查询可打印区域,客户端必须提供合适的上下文。没有至少指定所使用的介质的尺寸,不能获得可打印区域的有意义的值。
+ * <p>
+ *  该属性不是根据与纸张边缘的距离描述的,部分地强调该属性不是独立于特定介质,而是必须在选择其他属性的上下文中描述。此外,客户端通常更方便地使用可打印区域。
+ * <p>
+ * 硬件的最小边距不仅是打印机的属性,而且可以是介质尺寸,方向,介质类型和任何指定的完成的函数。
+ *  <code> PrintService </code>提供了在合适的上下文中查询属性支持的值的方法：参见{@link javax.print.PrintService#getSupportedAttributeValues(Class,DocFlavor,AttributeSet)PrintService.getSupportedAttributeValues。
+ * 硬件的最小边距不仅是打印机的属性,而且可以是介质尺寸,方向,介质类型和任何指定的完成的函数。
+ * <p>
+ *  矩形可打印区域定义如下：无论在请求上下文中指定的方向如何,(x,y)原点都以纵向模式位于纸张的左上角。例如,纵向或横向的A4纸可打印区域的高度为{@literal>}。
+ * <p>
+ *  可打印区域属性的值在内部以微米(μm)为单位存储为整数,其中1微米= 10 -6米= 1/1000毫米= 1/25400英寸。
+ * 这允许尺寸精确地表示为1/1000mm(=1μm)或1/100英寸(=254μm)的精度。如果以英寸表示。
+ * 
+ *  这允许尺寸精确地表示为1/8英寸(=3175μm)的精度,而不是1/16英寸(因为1/16英寸
+ * 
+ *  不等于μm的整数)。
+ * <p>
+ *  <B> IPP兼容性：</B> MediaPrintableArea不是IPP属性。
+ * 
  */
 
 public final class MediaPrintableArea
@@ -89,17 +116,27 @@ public final class MediaPrintableArea
     /**
      * Value to indicate units of inches (in). It is actually the conversion
      * factor by which to multiply inches to yield &#181;m (25400).
+     * <p>
+     *  用于指示英寸单位的值(in)。它实际上是将英寸乘以产量μm(25400)的转换因子。
+     * 
      */
     public static final int INCH = 25400;
 
     /**
      * Value to indicate units of millimeters (mm). It is actually the
      * conversion factor by which to multiply mm to yield &#181;m (1000).
+     * <p>
+     * 值表示单位为毫米(mm)。它实际上是将mm乘以mm得到μm(1000)的转换因子。
+     * 
      */
     public static final int MM = 1000;
 
     /**
       * Constructs a MediaPrintableArea object from floating point values.
+      * <p>
+      *  根据浮点值构造MediaPrintableArea对象。
+      * 
+      * 
       * @param x      printable x
       * @param y      printable y
       * @param w      printable width
@@ -126,6 +163,10 @@ public final class MediaPrintableArea
 
     /**
       * Constructs a MediaPrintableArea object from integer values.
+      * <p>
+      *  从整数值构造MediaPrintableArea对象。
+      * 
+      * 
       * @param x      printable x
       * @param y      printable y
       * @param w      printable width
@@ -152,6 +193,10 @@ public final class MediaPrintableArea
     /**
      * Get the printable area as an array of 4 values in the order
      * x, y, w, h. The values returned are in the given units.
+     * <p>
+     *  将可打印区域按照x,y,w,h的顺序作为4个值的数组。返回的值以给定单位表示。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #INCH INCH} or
      *     {@link #MM MM}.
@@ -169,6 +214,10 @@ public final class MediaPrintableArea
     /**
      * Get the x location of the origin of the printable area in the
      * specified units.
+     * <p>
+     *  以指定的单位获取可打印区域的原点的x位置。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #INCH INCH} or
      *     {@link #MM MM}.
@@ -186,6 +235,10 @@ public final class MediaPrintableArea
     /**
      * Get the y location of the origin of the printable area in the
      * specified units.
+     * <p>
+     *  以指定的单位获取可打印区域的原点的y位置。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #INCH INCH} or
      *     {@link #MM MM}.
@@ -202,6 +255,10 @@ public final class MediaPrintableArea
 
     /**
      * Get the width of the printable area in the specified units.
+     * <p>
+     *  以指定的单位获取可打印区域的宽度。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #INCH INCH} or
      *     {@link #MM MM}.
@@ -217,6 +274,10 @@ public final class MediaPrintableArea
 
     /**
      * Get the height of the printable area in the specified units.
+     * <p>
+     *  以指定的单位获取可打印区域的高度。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #INCH INCH} or
      *     {@link #MM MM}.
@@ -243,6 +304,18 @@ public final class MediaPrintableArea
      * The origin and dimensions are the same.
      * </OL>
      *
+     * <p>
+     *  返回此媒体边距属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是MediaPrintableArea类的实例。
+     * <LI>
+     *  原点和尺寸相同。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this media margins
@@ -266,6 +339,12 @@ public final class MediaPrintableArea
      * For class MediaPrintableArea, the category is
      * class MediaPrintableArea itself.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于MediaPrintableArea类,类别是MediaPrintableArea类本身。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -281,6 +360,12 @@ public final class MediaPrintableArea
      * the category name is <CODE>"media-printable-area"</CODE>.
      * <p>This is not an IPP V1.1 attribute.
      *
+     * <p>
+     *  获取此属性值为实例的类别的名称。
+     * <P>
+     *  对于MediaPrintableArea类,类别名称为<CODE>"media-printable-area"</CODE>。 <p>这不是IPP V1.1属性。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {
@@ -291,6 +376,10 @@ public final class MediaPrintableArea
      * Returns a string version of this rectangular size attribute in the
      * given units.
      *
+     * <p>
+     *  以给定单位返回此矩形大小属性的字符串版本。
+     * 
+     * 
      * @param  units
      *     Unit conversion factor, e.g. {@link #INCH INCH} or
      *     {@link #MM MM}.
@@ -314,6 +403,9 @@ public final class MediaPrintableArea
 
     /**
      * Returns a string version of this rectangular size attribute in mm.
+     * <p>
+     *  以毫米为单位返回此矩形尺寸属性的字符串版本。
+     * 
      */
     public String toString() {
         return(toString(MM, "mm"));
@@ -321,6 +413,8 @@ public final class MediaPrintableArea
 
     /**
      * Returns a hash code value for this attribute.
+     * <p>
+     * 返回此属性的哈希码值。
      */
     public int hashCode() {
         return x + 37*y + 43*w + 47*h;

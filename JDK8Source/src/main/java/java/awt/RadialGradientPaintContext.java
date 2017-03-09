@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,11 @@ import java.awt.image.ColorModel;
  * the circle to look approximately elliptical, by means of a
  * gradient transform passed into the RadialGradientPaint constructor.
  *
+ * <p>
+ *  提供RadialGradientPaint的实际实现。这是进行像素处理的地方。
+ *  RadialGradienPaint只支持圆形渐变,但是应该可以通过传递到RadialGradientPaint构造函数中的渐变变换来缩放圆以查看近似椭圆。
+ * 
+ * 
  * @author Nicholas Talian, Vincent Hardy, Jim Graham, Jerry Evans
  */
 final class RadialGradientPaintContext extends MultipleGradientPaintContext {
@@ -66,6 +72,9 @@ final class RadialGradientPaintContext extends MultipleGradientPaintContext {
     /**
      * This value represents the solution when focusX == X.  It is called
      * trivial because it is easier to calculate than the general case.
+     * <p>
+     *  此值表示focusX == X时的解决方案。它被称为平凡,因为它比一般情况更容易计算。
+     * 
      */
     private float trivial;
 
@@ -75,6 +84,10 @@ final class RadialGradientPaintContext extends MultipleGradientPaintContext {
     /**
      * Constructor for RadialGradientPaintContext.
      *
+     * <p>
+     *  RadialGradientPaintContext的构造函数。
+     * 
+     * 
      * @param paint the {@code RadialGradientPaint} from which this context
      *              is created
      * @param cm the {@code ColorModel} that receives
@@ -167,6 +180,10 @@ final class RadialGradientPaintContext extends MultipleGradientPaintContext {
      * Return a Raster containing the colors generated for the graphics
      * operation.
      *
+     * <p>
+     *  返回包含为图形操作生成的颜色的栅格。
+     * 
+     * 
      * @param x,y,w,h the area in device space for which colors are
      * generated.
      */
@@ -184,6 +201,9 @@ final class RadialGradientPaintContext extends MultipleGradientPaintContext {
      * This code works in the simplest of cases, where the focus == center
      * point, the gradient is noncyclic, and the gradient lookup method is
      * fast (single array index, no conversion necessary).
+     * <p>
+     *  这个代码在最简单的情况下工作,其中焦点==中心点,渐变是非循环的,并且梯度查找方法是快速的(单个数组索引,不需要转换)。
+     * 
      */
     private void simpleNonCyclicFillRaster(int pixels[], int off, int adjust,
                                            int x, int y, int w, int h)
@@ -221,6 +241,18 @@ final class RadialGradientPaintContext extends MultipleGradientPaintContext {
          *   gRel /= radiusSq
          *   DP   /= radiusSq
          *   SD   /= radiusSq
+         * <p>
+         *  尺寸以获得要使用的颜色的分数。
+         * 
+         * 沿着扫描线的每个步骤将(a00,a10)添加到(X,Y)。
+         * 如果我们预先计算：对于行的开始,gRel = X ^ 2 + Y ^ 2,则对于每个步骤,我们需要计算：gRel'=(X + a00)^ 2 +(Y + a10)^ 2 = 2 + 2 * X * a0
+         * 0 + a00 ^ 2 + Y ^ 2 + 2 * Y * a10 + a10 ^ 2 =(X ^ 2 + Y ^ 2)+ 2 * (其中DP = X,Y和Y之间的点乘积),其中,X,Y和Y分别是(a 
+         * 1,a 2,对于之后的步骤,我们得到：gRel"=(X + 2 * a00)^ 2 +(Y + 2 * a10)^ 2 = X ^ 2 + 4 * X * a00 + 4 * a00 ^ 2 + Y ^
+         *  2 + 4 * Y * a10 + 4 * a10 ^ 2 =(X ^ 2 + Y ^ 2)+ 4 *(X * a00 + Y * a10)+ 4 *(a00 ^ 2 + a10 ^ 2)= gRel
+         *  + 4 * DP + 4 * SD = gRel'+ 2 * DP + 3 * SD增量改变：(gRel"gRel') - (gRel' gRel)=(2 * DP + 3 * SD) - (2 * 
+         * DP + SD)= 2 * SD注意,该值仅取决于变换矩阵的(逆)变换矩阵,因此是循环的常数。
+         * 沿着扫描线的每个步骤将(a00,a10)添加到(X,Y)。为了使这个相对于单位圆,我们需要将所有值如下分割：[XY] / =半径gRel / =半径Sq DP / =半径Sq SD / =半径Rs。
+         * 
          */
         // coordinates of UL corner in "user space" relative to center
         float rowX = (a00*x) + (a01*y) + constA;
@@ -255,6 +287,11 @@ final class RadialGradientPaintContext extends MultipleGradientPaintContext {
              *   out to the left  - quick fill until gRel < 1, updating gRel
              *   in the heart     - slow fraction=sqrt fill while gRel < 1
              *   out to the right - quick fill rest of scanline, ignore gRel
+             * <p>
+             * 我们不需要为这些值计算sqrt(gRel),因为sqrt(N> = 1)==(M> = 1)。注意,gRel遵循抛物线,对于每个扫描线上的中心周围的小区域,抛物线只能<1。
+             * 特别是：gDeltaDelta总是正的,gDelta是<0,直到它穿过中点,然后> 0到那个区域的左右,它总是> = 1到无穷大,所以我们可以处理3个区域的线：向左 - 快速填充,直到gRel <1,更新心脏中的gRel  - 慢分数= sqrt填充,而gRel <1向右 - 快速填充扫描线的其余部分,忽略gRel。
+             * 我们不需要为这些值计算sqrt(gRel),因为sqrt(N> = 1)==(M> = 1)。注意,gRel遵循抛物线,对于每个扫描线上的中心周围的小区域,抛物线只能<1。
+             * 
              */
             int i = 0;
             // Quick fill for "out to the left"
@@ -326,6 +363,11 @@ final class RadialGradientPaintContext extends MultipleGradientPaintContext {
      * Replacing y in the circle equation and solving using the quadratic
      * formula produces the following set of equations.  Constant factors have
      * been extracted out of the inner loop.
+     * <p>
+     *  填充栅格,当点落在100％停止圆的周边之外时循环渐变颜色。
+     * 
+     *  此计算首先计算从焦点到光栅中当前点的直线与渐变圆周长的交点。
+     * 
      */
     private void cyclicCircularGradientFillRaster(int pixels[], int off,
                                                   int adjust,

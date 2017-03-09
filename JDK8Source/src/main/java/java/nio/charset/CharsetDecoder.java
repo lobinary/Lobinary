@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -124,6 +125,58 @@ import java.util.Arrays;
  * threads.  </p>
  *
  *
+ * <p>
+ *  一种引擎,可以将特定字符集中的字节序列转换为十六位Unicode字符序列。
+ * 
+ *  <a name="steps"> </a>
+ * 
+ *  <p>输入字节序列在字节缓冲器或一系列这样的缓冲器中提供。输出字符序列被写入字符缓冲器或一系列这样的缓冲器。通过进行以下的方法调用序列(下文中称为"解码操作")来始终使用解码器：
+ * 
+ * <ol>
+ * 
+ *  <li> <p>通过{@link #reset reset}方法重置解码器,除非之前未使用过; </p> </li>
+ * 
+ *  <li> <p>调用{@link #decode decode}方法零次或多次,只要可能有其他输入可用,对<tt> endOfInput </tt>参数传递<tt> false </tt>以及填充所述
+ * 输入缓冲器并在调用之间刷新所述输出缓冲器; </p> </li>。
+ * 
+ *  <li> <p>最后调用{@link #decode decode}方法,对<tt> endOfInput </tt>参数传递<tt> true </tt>;然后</p> </li>
+ * 
+ *  <li> <p>调用{@link #flush flush}方法,以便解码器可以将任何内部状态刷新到输出缓冲区。 </p> </li>
+ * 
+ * </ol>
+ * 
+ * 每次调用{@link #decode decode}方法将从输入缓冲区解码尽可能多的字节,将生成的字符写入输出缓冲区。
+ * 当需要更多输入时,输出缓冲区中没有足够空间或发生解码错误时,{@link #decode decode}方法返回。在每种情况下,返回一个{@link CoderResult}对象以描述终止的原因。
+ * 调用者可以检查此对象并填充输入缓冲区,刷新输出缓冲区,或尝试从解码错误中恢复(如果合适),然后重试。
+ * 
+ *  <a name="ce"> </a>
+ * 
+ *  <p>有两种一般类型的解码错误。如果输入字节序列对于此字符集不合法,则输入被认为是<i>格式错误</i>。
+ * 如果输入字节序列是合法的,但是不能映射到有效的Unicode字符,则遇到不可映射的字符</i>。
+ * 
+ *  <a name="cae"> </a>
+ * 
+ *  <p>如何处理解码错误取决于对{@link CodingErrorAction}类的实例描述的那种错误类型请求的操作。
+ * 可能的错误操作是通过返回的{@link CoderResult}对象或{@linkplain CodingErrorAction#REPLACE replace}将错误的{@linkplain CodingErrorAction#IGNORE ignore}
+ * 错误的输入{@linkplain CodingErrorAction#REPORT report}具有替换字符串的当前值的错误输入。
+ *  <p>如何处理解码错误取决于对{@link CodingErrorAction}类的实例描述的那种错误类型请求的操作。更换。
+ * 
+ * 具有初始值<tt>"\ uFFFD"</tt>;
+ * 
+ *  它的值可以通过{@link #replaceWith(java.lang.String)replaceWith}方法更改。
+ * 
+ *  <p>格式错误输入和不可映射字符错误的默认操作是{@linkplain CodingErrorAction#REPORT report}。
+ * 格式错误的输入错误操作可以通过{@link #onMalformedInput(CodingErrorAction)onMalformedInput}方法更改;可以通过{@link #onUnmappableCharacter(CodingErrorAction)onUnmappableCharacter}
+ * 方法更改不可映射字符操作。
+ *  <p>格式错误输入和不可映射字符错误的默认操作是{@linkplain CodingErrorAction#REPORT report}。
+ * 
+ *  <p>此类设计用于处理解码过程的许多细节,包括执行错误操作。
+ * 用于特定字符集的解码器(其是该类的具体子类)仅需要实现抽象{@link #decodeLoop decodeLoop}方法,其封装了基本解码循环。
+ * 另外,维护内部状态的子类应该覆盖{@link #implFlush implFlush}和{@link #implReset implReset}方法。
+ * 
+ *  <p>此类的实例不适合由多个并发线程使用。 </p>
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -163,6 +216,10 @@ public abstract class CharsetDecoder {
      * Initializes a new decoder.  The new decoder will have the given
      * chars-per-byte and replacement values.
      *
+     * <p>
+     *  初始化一个新的解码器。新的解码器将具有给定的字节每字节和替换值。
+     * 
+     * 
      * @param  cs
      *         The charset that created this decoder
      *
@@ -212,6 +269,10 @@ public abstract class CharsetDecoder {
      * chars-per-byte values and its replacement will be the
      * string <tt>"&#92;uFFFD"</tt>.
      *
+     * <p>
+     *  初始化一个新的解码器。新的解码器将具有给定的字节每字节值,并且其替换将是字符串<tt>"\ uFFFD"</tt>。
+     * 
+     * 
      * @param  cs
      *         The charset that created this decoder
      *
@@ -238,6 +299,10 @@ public abstract class CharsetDecoder {
     /**
      * Returns the charset that created this decoder.
      *
+     * <p>
+     *  返回创建此解码器的字符集。
+     * 
+     * 
      * @return  This decoder's charset
      */
     public final Charset charset() {
@@ -247,6 +312,10 @@ public abstract class CharsetDecoder {
     /**
      * Returns this decoder's replacement value.
      *
+     * <p>
+     *  返回此解码器的替换值。
+     * 
+     * 
      * @return  This decoder's current replacement,
      *          which is never <tt>null</tt> and is never empty
      */
@@ -266,6 +335,12 @@ public abstract class CharsetDecoder {
      * method, passing the new replacement, after checking that the new
      * replacement is acceptable.  </p>
      *
+     * <p>
+     *  更改此解码器的替换值。
+     * 
+     * <p>此方法调用{@link #implReplaceWith implReplaceWith}方法,在检查新替换是否可接受后,传递新替换。 </p>
+     * 
+     * 
      * @param  newReplacement  The replacement value
      *
 
@@ -311,6 +386,12 @@ public abstract class CharsetDecoder {
      * should be overridden by decoders that require notification of changes to
      * the replacement.  </p>
      *
+     * <p>
+     *  报告对此解码器的替换值的更改。
+     * 
+     *  <p>此方法的默认实现不执行任何操作。该方法应当由需要通知更换更换的解码器覆盖。 </p>
+     * 
+     * 
      * @param  newReplacement    The replacement value
      */
     protected void implReplaceWith(String newReplacement) {
@@ -359,6 +440,10 @@ public abstract class CharsetDecoder {
     /**
      * Returns this decoder's current action for malformed-input errors.
      *
+     * <p>
+     *  返回此解码器对错误输入错误的当前操作。
+     * 
+     * 
      * @return The current malformed-input action, which is never <tt>null</tt>
      */
     public CodingErrorAction malformedInputAction() {
@@ -371,6 +456,12 @@ public abstract class CharsetDecoder {
      * <p> This method invokes the {@link #implOnMalformedInput
      * implOnMalformedInput} method, passing the new action.  </p>
      *
+     * <p>
+     *  更改此解码器对错误输入错误的操作。
+     * 
+     *  <p>此方法调用{@link #implOnMalformedInput implOnMalformedInput}方法,传递新操作。 </p>
+     * 
+     * 
      * @param  newAction  The new action; must not be <tt>null</tt>
      *
      * @return  This decoder
@@ -393,6 +484,12 @@ public abstract class CharsetDecoder {
      * should be overridden by decoders that require notification of changes to
      * the malformed-input action.  </p>
      *
+     * <p>
+     *  报告对此解码器格式不正确的输入操作的更改。
+     * 
+     *  <p>此方法的默认实现不执行任何操作。该方法应当由需要通知对格式错误输入动作的改变的解码器覆盖。 </p>
+     * 
+     * 
      * @param  newAction  The new action
      */
     protected void implOnMalformedInput(CodingErrorAction newAction) { }
@@ -400,6 +497,10 @@ public abstract class CharsetDecoder {
     /**
      * Returns this decoder's current action for unmappable-character errors.
      *
+     * <p>
+     *  返回此解码器的当前操作的不可映射字符错误。
+     * 
+     * 
      * @return The current unmappable-character action, which is never
      *         <tt>null</tt>
      */
@@ -413,6 +514,12 @@ public abstract class CharsetDecoder {
      * <p> This method invokes the {@link #implOnUnmappableCharacter
      * implOnUnmappableCharacter} method, passing the new action.  </p>
      *
+     * <p>
+     *  更改此解码器对不可映射字符错误的操作。
+     * 
+     *  <p>此方法调用{@link #implOnUnmappableCharacter implOnUnmappableCharacter}方法,传递新操作。 </p>
+     * 
+     * 
      * @param  newAction  The new action; must not be <tt>null</tt>
      *
      * @return  This decoder
@@ -437,6 +544,12 @@ public abstract class CharsetDecoder {
      * should be overridden by decoders that require notification of changes to
      * the unmappable-character action.  </p>
      *
+     * <p>
+     *  报告对此解码器不可映射字符操作的更改。
+     * 
+     *  <p>此方法的默认实现不执行任何操作。此方法应该被需要通知对不可映射字符操作的改变的解码器覆盖。 </p>
+     * 
+     * 
      * @param  newAction  The new action
      */
     protected void implOnUnmappableCharacter(CodingErrorAction newAction) { }
@@ -446,6 +559,10 @@ public abstract class CharsetDecoder {
      * byte of input.  This heuristic value may be used to estimate the size
      * of the output buffer required for a given input sequence.
      *
+     * <p>
+     * 返回将为输入的每个字节生成的平均字符数。该启发式值可以用于估计给定输入序列所需的输出缓冲区的大小。
+     * 
+     * 
      * @return  The average number of characters produced
      *          per byte of input
      */
@@ -458,6 +575,10 @@ public abstract class CharsetDecoder {
      * byte of input.  This value may be used to compute the worst-case size
      * of the output buffer required for a given input sequence.
      *
+     * <p>
+     *  返回将为输入的每个字节生成的最大字符数。该值可用于计算给定输入序列所需的输出缓冲区的最坏情况大小。
+     * 
+     * 
      * @return  The maximum number of characters that will be produced per
      *          byte of input
      */
@@ -539,6 +660,48 @@ public abstract class CharsetDecoder {
      * reinvoking it as necessary.  </p>
      *
      *
+     * <p>
+     *  从给定的输入缓冲区解码尽可能多的字节,将结果写入给定的输出缓冲区。
+     * 
+     *  <p>缓冲区从其当前位置开始读取和写入。
+     * 最多只能读取{@link Buffer#remaining in.remaining()}字节,最多只能写入{@link Buffer#remaining out.remaining()}字符。
+     * 缓冲区的位置将被提前以反映读取的字节和写入的字符,但不会修改它们的标记和限制。
+     * 
+     *  <p>除了从输入缓冲区读取字节并将字符写入输出缓冲区之外,此方法还返回一个{@link CoderResult}对象以描述其终止的原因：
+     * 
+     * <ul>
+     * 
+     *  <li> <p> {@link CoderResult#UNDERFLOW}表示尽可能多的输入缓冲区已解码。
+     * 如果没有其他输入,则调用者可以继续进行<a href="#steps">解码操作</a>的下一步。否则,应该再次使用进一步的输入来调用此方法。 </p> </li>。
+     * 
+     * <li> <p> {@link CoderResult#OVERFLOW}表示输出缓冲区中没有足够的空间来解码任何更多字节。
+     * 应该使用具有更多{@linkplain Buffer#remaining remaining}个字符的输出缓冲区再次调用此方法。这通常通过从输出缓冲器中排出任何解码的字符来完成。
+     *  </p> </li>。
+     * 
+     *  <li> <p> {@linkplain CoderResult#malformedForLength格式错误的输入}结果表示检测到格式错误的输入错误。
+     * 格式错误的字节从输入缓冲区(可能递增)的位置开始;可以通过调用结果对象的{@link CoderResult#length()length}方法来确定畸形字节的数量。
+     * 此情况仅适用于此解码器的{@linkplain #onMalformedInput畸形操作}为{@link CodingErrorAction#REPORT};否则将根据请求忽略或替换格式错误的输入。
+     *  </p> </li>。
+     * 
+     * <li> <p> {@linkplain CoderResult#unmappableForLength unmappable-character}结果表示检测到不可映射字符错误。
+     * 解码不可映射字符的字节从输入缓冲区的(可能递增的)位置开始;可以通过调用结果对象的{@link CoderResult#length()length}方法来确定这样的字节的数量。
+     * 此情况仅适用于此解码器的{@linkplain #onUnmappableCharacter unmappable action} {@link CodingErrorAction#REPORT};否则
+     * 将根据请求忽略或替换不可映射的字符。
+     * 解码不可映射字符的字节从输入缓冲区的(可能递增的)位置开始;可以通过调用结果对象的{@link CoderResult#length()length}方法来确定这样的字节的数量。
+     *  </p> </li>。
+     * 
+     * </ul>
+     * 
+     *  在任何情况下,如果要在相同的解码操作中重新调用此方法,则应注意保留输入缓冲区中剩余的任何字节,以便它们可用于下一次调用。
+     * 
+     * <p> <tt> endOfInput </tt>参数建议此方法是否调用程序可以提供超出给定输入缓冲区中包含的输入的进一步输入。
+     * 如果有可能提供额外的输入,那么调用者应该为此参数传递<tt> false </tt>;如果没有提供进一步输入的可能性,则调用者应该传递<tt> true </tt>。
+     * 这不是错误的,事实上很常见,在一次调用中传递<tt> false </tt>,后来发现没有其他输入实际可用。
+     * 然而,至关重要的是,在调用序列中最终调用此方法总是传递<tt> true </tt>,以便任何剩余的未解码输入将被视为格式错误。
+     * 
+     *  <p>此方法通过调用{@link #decodeLoop decodeLoop}方法,解释其结果,处理错误条件以及根据需要重新启动它来工作。 </p>
+     * 
+     * 
      * @param  in
      *         The input byte buffer
      *
@@ -649,6 +812,22 @@ public abstract class CharsetDecoder {
      * <p> This method invokes the {@link #implFlush implFlush} method to
      * perform the actual flushing operation.  </p>
      *
+     * <p>
+     *  刷新此解码器。
+     * 
+     *  <p>一些解码器保持内部状态,一旦读取了整个输入序列,可能需要将一些最后字符写入输出缓冲器。
+     * 
+     *  <p>任何附加输出将从当前位置开始写入输出缓冲区。最多会写入{@link Buffer#remaining out.remaining()}个字符。
+     * 缓冲区的位置将适当地前进,但其标记和限​​制不会被修改。
+     * 
+     * <p>如果此方法成功完成,则会返回{@link CoderResult#UNDERFLOW}。如果输出缓冲区中没有足够的空间,则返回{@link CoderResult#OVERFLOW}。
+     * 如果发生这种情况,则必须再次调用此方法,并使用具有更多空间的输出缓冲区,以完成当前的<a href="#steps">解码操作</a>。
+     * 
+     *  <p>如果此解码器已经刷新,则调用此方法不起作用。
+     * 
+     *  <p>此方法调用{@link #implFlush implFlush}方法来执行实际的刷新操作。 </p>
+     * 
+     * 
      * @param  out
      *         The output character buffer
      *
@@ -685,6 +864,13 @@ public abstract class CharsetDecoder {
      * by decoders that may need to write final characters to the output buffer
      * once the entire input sequence has been read. </p>
      *
+     * <p>
+     *  刷新此解码器。
+     * 
+     *  <p>此方法的默认实现不执行任何操作,并始终返回{@link CoderResult#UNDERFLOW}。该方法应当被解码器覆盖,一旦读取了整个输入序列,解码器可能需要将最终字符写入输出缓冲器。
+     *  </p>。
+     * 
+     * 
      * @param  out
      *         The output character buffer
      *
@@ -702,6 +888,12 @@ public abstract class CharsetDecoder {
      * {@link #implReset() implReset} method in order to perform any
      * charset-specific reset actions.  </p>
      *
+     * <p>
+     *  复位此解码器,清除任何内部状态。
+     * 
+     *  <p>此方法重置与字符集无关的状态,并调用{@link #implReset()implReset}方法,以执行任何字符集特定的重置操作。 </p>
+     * 
+     * 
      * @return  This decoder
      *
      */
@@ -716,6 +908,11 @@ public abstract class CharsetDecoder {
      *
      * <p> The default implementation of this method does nothing.  This method
      * should be overridden by decoders that maintain internal state.  </p>
+     * <p>
+     *  复位此解码器,清除任何字符集特定的内部状态。
+     * 
+     *  <p>此方法的默认实现不执行任何操作。这种方法应该被保持内部状态的解码器覆盖。 </p>
+     * 
      */
     protected void implReset() { }
 
@@ -746,6 +943,21 @@ public abstract class CharsetDecoder {
      * returning {@link CoderResult#UNDERFLOW} until it receives sufficient
      * input.  </p>
      *
+     * <p>
+     *  将一个或多个字节解码为一个或多个字符。
+     * 
+     * <p>此方法封装基本解码循环,解码尽可能多的字节,直到它用完输出,在输出缓冲区中用完空间或遇到解码错误。此方法由{@link #decode decode}方法调用,该方法处理结果解释和错误恢复。
+     * 
+     *  <p>缓冲区从其当前位置开始读取和写入。
+     * 最多只能读取{@link Buffer#remaining in.remaining()}字节,最多只能写入{@link Buffer#remaining out.remaining()}字符。
+     * 缓冲区的位置将被提前以反映读取的字节和写入的字符,但不会修改它们的标记和限制。
+     * 
+     *  <p>此方法以与{@link #decode decode}方法相同的方式返回{@link CoderResult}对象,以描述其终止的原因。
+     * 该方法的大多数实现将通过返回适当的结果对象以通过{@link #decode decode}方法解释来处理解码错误。优化的实现可以替代地检查相关的错误动作并且实现该动作本身。
+     * 
+     *  <p>此方法的实现可以通过返回{@link CoderResult#UNDERFLOW}来执行任意先行,直到它接收到足够的输入。 </p>
+     * 
+     * 
      * @param  in
      *         The input byte buffer
      *
@@ -767,6 +979,13 @@ public abstract class CharsetDecoder {
      * decoder.  This method should therefore not be invoked if a decoding
      * operation is already in progress.  </p>
      *
+     * <p>
+     *  便利方法将单个输入字节缓冲区的剩余内容解码为新分配的字符缓冲区。
+     * 
+     * <p>此方法实施整个<a href="#steps">解码操作</a>;即它重置该解码器,然后解码给定字节缓冲器中的字节,最后刷新该解码器。因此,如果解码操作已经在进行中,则不应该调用该方法。
+     *  </p>。
+     * 
+     * 
      * @param  in
      *         The input byte buffer
      *
@@ -828,6 +1047,12 @@ public abstract class CharsetDecoder {
      * <tt>false</tt>; it should be overridden by auto-detecting decoders to
      * return <tt>true</tt>.  </p>
      *
+     * <p>
+     *  告诉解码器是否实现自动检测字符集。
+     * 
+     *  <p>此方法的默认实现始终返回<tt> false </tt>;它应该被自动检测解码器覆盖以返回<tt> true </tt>。 </p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this decoder implements an
      *          auto-detecting charset
      */
@@ -855,6 +1080,17 @@ public abstract class CharsetDecoder {
      * auto-detecting decoders to return <tt>true</tt> once the input charset
      * has been determined.  </p>
      *
+     * <p>
+     *  判断此解码器是否已检测到字符集</i>(可选操作)</i>。
+     * 
+     *  <p>如果此解码器在解码操作期间在单个点处实现自动检测字符集,则此方法可开始返回<tt> true </tt>以指示在输入字节序列中检测到特定字符集。
+     * 发生这种情况后,可以调用{@link #detectedCharset detectedCharset}方法来检索检测到的字符集。
+     * 
+     *  <p>此方法返回<tt> false </tt>并不表示尚未解码任何字节。一些自动检测解码器能够解码一些或甚至全部输入字节序列,而不固定在特定字符集上。
+     * 
+     *  <p>此方法的默认实现始终会抛出{@link UnsupportedOperationException};一旦输入字符集被确定,自动检测解码器应该覆盖它以返回<tt> true </tt>。
+     *  </p>。
+     * 
      * @return  <tt>true</tt> if, and only if, this decoder has detected a
      *          specific charset
      *
@@ -880,6 +1116,9 @@ public abstract class CharsetDecoder {
      * UnsupportedOperationException}; it should be overridden by
      * auto-detecting decoders to return the appropriate value.  </p>
      *
+     * <p>
+     * 
+     * 
      * @return  The charset detected by this auto-detecting decoder,
      *          or <tt>null</tt> if the charset has not yet been determined
      *

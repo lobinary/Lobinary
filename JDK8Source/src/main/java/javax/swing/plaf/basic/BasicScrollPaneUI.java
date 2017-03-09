@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,10 @@ import java.awt.event.*;
 /**
  * A default L&amp;F implementation of ScrollPaneUI.
  *
+ * <p>
+ *  ScrollPaneUI的默认L&amp; F实现。
+ * 
+ * 
  * @author Hans Muller
  */
 public class BasicScrollPaneUI
@@ -62,11 +67,17 @@ public class BasicScrollPaneUI
 
     /**
      * PropertyChangeListener installed on the vertical scrollbar.
+     * <p>
+     *  PropertyChangeListener安装在垂直滚动条上。
+     * 
      */
     private PropertyChangeListener vsbPropertyChangeListener;
 
     /**
      * PropertyChangeListener installed on the horizontal scrollbar.
+     * <p>
+     *  PropertyChangeListener安装在水平滚动条上。
+     * 
      */
     private PropertyChangeListener hsbPropertyChangeListener;
 
@@ -76,6 +87,9 @@ public class BasicScrollPaneUI
      * State flag that shows whether setValue() was called from a user program
      * before the value of "extent" was set in right-to-left component
      * orientation.
+     * <p>
+     *  状态标志,表示在以从右到左组件方向设置"extent"的值之前,是否从用户程序调用了setValue()。
+     * 
      */
     private boolean setValueCalled = false;
 
@@ -109,6 +123,8 @@ public class BasicScrollPaneUI
 
 
     /**
+    /* <p>
+    /* 
      * @return new Dimension(Short.MAX_VALUE, Short.MAX_VALUE)
      */
     public Dimension getMaximumSize(JComponent c) {
@@ -297,10 +313,14 @@ public class BasicScrollPaneUI
 
                     /* Use a particular formula to calculate "value"
                      * until effective x coordinate is calculated.
+                     * <p>
+                     *  直到计算出有效x坐标。
+                     * 
                      */
                     if (setValueCalled && ((max - currentValue) == viewPosition.x)) {
                         value = Math.max(0, Math.min(max - extent, currentValue));
                         /* After "extent" is set, turn setValueCalled flag off.
+                        /* <p>
                          */
                         if (extent != 0) {
                             setValueCalled = false;
@@ -321,6 +341,11 @@ public class BasicScrollPaneUI
                             * However, this seems a trivial bug and adding a
                             * fix makes this often-called method slow, so I'll
                             * leave it until someone claims.
+                            * <p>
+                            *  viewPosition.x类似于Integer.MIN_VALUE,因为(max  -  extent  -  viewPositoiin.x)会导致溢出。结果,值变为零。
+                            *  (例如,在用户程序中的setViewPosition(Integer.MAX_VALUE,...)引起溢出,它的期望值是(max  -  extent)。
+                            * )然而,这似乎是一个微不足道的错误,添加一个修复使这种经常被称为方法慢,所以我会离开它,直到有人声称。
+                            * 
                             */
                             value = Math.max(0, Math.min(max - extent, max - extent - viewPosition.x));
                             if (oldExtent > extent) {
@@ -356,6 +381,10 @@ public class BasicScrollPaneUI
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -421,6 +450,10 @@ public class BasicScrollPaneUI
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -439,6 +472,9 @@ public class BasicScrollPaneUI
 
     /**
      * Listener for viewport events.
+     * <p>
+     *  视口事件的侦听器。
+     * 
      */
     public class ViewportChangeHandler implements ChangeListener
     {
@@ -460,6 +496,9 @@ public class BasicScrollPaneUI
 
     /**
      * Horizontal scrollbar listener.
+     * <p>
+     *  水平滚动条监听器。
+     * 
      */
     public class HSBChangeListener implements ChangeListener
     {
@@ -478,6 +517,9 @@ public class BasicScrollPaneUI
     /**
      * Returns a <code>PropertyChangeListener</code> that will be installed
      * on the horizontal <code>JScrollBar</code>.
+     * <p>
+     *  返回将安装在水平<code> JScrollBar </code>上的<code> PropertyChangeListener </code>。
+     * 
      */
     private PropertyChangeListener createHSBPropertyChangeListener() {
         return getHandler();
@@ -490,6 +532,9 @@ public class BasicScrollPaneUI
 
     /**
      * Vertical scrollbar listener.
+     * <p>
+     *  垂直滚动条监听器。
+     * 
      */
     public class VSBChangeListener implements ChangeListener
     {
@@ -509,6 +554,9 @@ public class BasicScrollPaneUI
     /**
      * Returns a <code>PropertyChangeListener</code> that will be installed
      * on the vertical <code>JScrollBar</code>.
+     * <p>
+     *  返回将安装在垂直<code> JScrollBar </code>上的<code> PropertyChangeListener </code>。
+     * 
      */
     private PropertyChangeListener createVSBPropertyChangeListener() {
         return getHandler();
@@ -526,6 +574,12 @@ public class BasicScrollPaneUI
      * <code>isWheelScrollingEnabled</code>
      * method returns false, no scrolling occurs.
      *
+     * <p>
+     * MouseWheelHandler是一个实现MouseWheelListener接口的内部类。
+     *  MouseWheelHandler通过适当地滚动JScrollPane来响应MouseWheelEvents。
+     * 如果滚动窗格的<code> isWheelScrollingEnabled </code>方法返回false,则不会发生滚动。
+     * 
+     * 
      * @see javax.swing.JScrollPane#isWheelScrollingEnabled
      * @see #createMouseWheelListener
      * @see java.awt.event.MouseWheelListener
@@ -543,6 +597,10 @@ public class BasicScrollPaneUI
          * Called when the mouse wheel is rotated while over a
          * JScrollPane.
          *
+         * <p>
+         *  当鼠标滚轮在JScrollPane上旋转时调用。
+         * 
+         * 
          * @param e     MouseWheelEvent to be handled
          * @since 1.4
          */
@@ -556,6 +614,10 @@ public class BasicScrollPaneUI
      * JScrollPane by installUI().  The returned MouseWheelListener is used
      * to handle mouse wheel-driven scrolling.
      *
+     * <p>
+     *  创建MouseWheelListener的实例,通过installUI()将其添加到JScrollPane。返回的MouseWheelListener用于处理鼠标滚轮驱动的滚动。
+     * 
+     * 
      * @return      MouseWheelListener which implements wheel-driven scrolling
      * @see #installUI
      * @see MouseWheelHandler
@@ -698,6 +760,15 @@ public class BasicScrollPaneUI
      * }
      * </pre>
      *
+     * <p>
+     *  创建由installUI()添加到JScrollPane的PropertyChangeListener的实例。子类可以覆盖此方法以返回自定义PropertyChangeListener,例如
+     * <pre>
+     *  class MyScrollPaneUI extends BasicScrollPaneUI {protected PropertyChangeListener <b> createPropertyChangeListener </b>(){return new MyPropertyChangeListener(); }
+     *  public class MyPropertyChangeListener extends PropertyChangeListener {public void propertyChange(PropertyChangeEvent e){if(e.getPropertyName()。
+     * equals("viewport")){//当视口改变时做一些额外的工作} super.propertyChange }}}。
+     * </pre>
+     * 
+     * 
      * @see java.beans.PropertyChangeListener
      * @see #installUI
      */
@@ -1066,11 +1137,13 @@ public class BasicScrollPaneUI
                 int oldX = p.x;
 
                 /* Set new X coordinate based on "value".
+                /* <p>
                  */
                 p.x = max - extent - value;
 
                 /* If setValue() was called before "extent" was fixed,
                  * turn setValueCalled flag on.
+                 * <p>
                  */
                 if ((extent == 0) && (value != 0) && (oldX == max)) {
                     setValueCalled = true;
@@ -1078,6 +1151,9 @@ public class BasicScrollPaneUI
                     /* When a pane without a horizontal scroll bar was
                      * reduced and the bar appeared, the viewport should
                      * show the right side of the view.
+                     * <p>
+                     *  打开setValueCalled标志。
+                     * 
                      */
                     if ((extent != 0) && (oldX < 0) && (p.x == 0)) {
                         p.x += value;

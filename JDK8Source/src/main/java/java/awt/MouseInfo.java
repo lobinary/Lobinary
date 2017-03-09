@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import sun.security.util.SecurityConstants;
  * <code>MouseInfo</code>  provides methods for getting information about the mouse,
  * such as mouse pointer location and the number of mouse buttons.
  *
+ * <p>
+ *  <code> MouseInfo </code>提供了获取鼠标信息的方法,例如鼠标指针位置和鼠标按钮数量。
+ * 
+ * 
  * @author     Roman Poborchiy
  * @since 1.5
  */
@@ -38,6 +43,9 @@ public class MouseInfo {
 
     /**
      * Private constructor to prevent instantiation.
+     * <p>
+     *  私有构造函数来阻止实例化。
+     * 
      */
     private MouseInfo() {
     }
@@ -60,6 +68,14 @@ public class MouseInfo {
      * permission before creating and returning a <code>PointerInfo</code>
      * object. This may result in a <code>SecurityException</code>.
      *
+     * <p>
+     *  返回一个代表鼠标指针当前位置的<code> PointerInfo </code>实例。
+     * 存储在此<code> PointerInfo </code>中的<code> GraphicsDevice </code>包含鼠标指针。
+     * 用于鼠标位置的坐标系取决于<code> GraphicsDevice </code>是否是虚拟屏幕设备的一部分。
+     * 对于虚拟屏幕设备,坐标在虚拟坐标系中给出,否则它们在<code> GraphicsDevice </code>的坐标系中返回。
+     * 有关虚拟屏幕设备的详细信息,请参阅{@link GraphicsConfiguration}。在没有鼠标的系统上,返回<code> null </code>。
+     * <p>
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless() returns true
      * @exception SecurityException if a security manager exists and its
      *            <code>checkPermission</code> method doesn't allow the operation
@@ -113,6 +129,11 @@ public class MouseInfo {
      * Returns the number of buttons on the mouse.
      * On systems without a mouse, returns <code>-1</code>.
      *
+     * <p>
+     *  如果有安全管理器,则在创建并返回<code> PointerInfo </code>对象之前,使用<code> AWTPermission("watchMousePointer")</code>权限调
+     * 用其<code> checkPermission </code>这可能会导致<code> SecurityException </code>。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless() returns true
      * @return number of buttons on the mouse
      * @since 1.5

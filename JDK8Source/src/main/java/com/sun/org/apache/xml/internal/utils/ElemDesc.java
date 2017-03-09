@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ElemDesc.java,v 1.2.4.1 2005/09/15 08:15:44 suresh_emailid Exp $
+ * <p>
+ *  $ Id：ElemDesc.java,v 1.2.4.1 2005/09/15 08:15:44 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -28,6 +41,9 @@ import java.util.Hashtable;
  * This class is in support of SerializerToHTML, and acts as a sort
  * of element representative for HTML elements.
  * @xsl.usage internal
+ * <p>
+ *  这个类支持SerializerToHTML,并且作为一种代表HTML元素的元素。 @ xsl.usage internal
+ * 
  */
 class ElemDesc
 {
@@ -40,6 +56,10 @@ class ElemDesc
    * may be set at a time, bitwise-ORed together. Mnemonic and bits
    * have been assigned to the flag values. NOTE: Some bits are
    * currently assigned multiple mnemonics; it is the caller's
+   * <p>
+   *  格式化文档。这用作位向量;可以一次设置多于一个标志,一起按位或。助记符和位已分配给标志值。注意：某些位当前被分配多个助记符;它是调用者的
+   * 
+   * 
    * responsibility to disambiguate these if necessary. */
   int m_flags;
 
@@ -115,6 +135,10 @@ class ElemDesc
   /**
    * Construct an ElementDescription with an initial set of flags.
    *
+   * <p>
+   *  构造具有初始标志集的ElementDescription。
+   * 
+   * 
    * @param flags Element flags
    * @see m_flags
    */
@@ -132,6 +156,13 @@ class ElemDesc
    * test is performed as a bitwise AND, not an equality test, so a
    * 0 bit in the input means "don't test", not "must be set false".
    *
+   * <p>
+   *  "is(这个元素由这些标志描述)"。
+   * 
+   * 这可能更适当地称为areFlagsSet()。它接受一个整数(用作位向量),并检查所有相应的位是否在我们的内部标志中设置。
+   * 请注意,此测试是按位AND运算,而不是相等测试,因此输入中的0位表示"不测试",而不是"必须设置为假"。
+   * 
+   * 
    * @param flags Vector of flags to compare against this element's flags
    *
    * @return true if the flags set in the parameter are also set in the
@@ -150,6 +181,10 @@ class ElemDesc
    * Set a new attribute for this element
    *
    *
+   * <p>
+   *  为此元素设置新属性
+   * 
+   * 
    * @param name Attribute name
    * @param flags Attibute flags
    */
@@ -166,6 +201,9 @@ class ElemDesc
    * Find out if a flag is set in a given attribute of this element
    *
    *
+   * <p>
+   *  找出在此元素的给定属性中是否设置了标志
+   * 
    * @param name Attribute name
    * @param flags Flag to check
    *

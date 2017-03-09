@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,18 @@ import sun.util.logging.LoggingSupport;
  * is {@linkplain java.util.IllegalFormatException illegal},
  * the default format is implementation-specific.
  *
+ * <p>
+ *  以人类可读的格式打印{@code LogRecord}的简要摘要。摘要通常为1或2行。
+ * 
+ * <p>
+ * <a name="formatting">
+ *  <b>配置：</b> </a> {@code SimpleFormatter}是使用{@code}中指定的<a href="../Formatter.html#syntax">格式字符串</a>初始化
+ * 的java.util.logging.SimpleFormatter.format}属性设置为{@linkplain #format format}日志消息。
+ * 此属性可以在{@linkplain LogManager#getProperty logging properties}配置文件中定义或作为系统属性。
+ * 如果在日志记录属性和系统属性中设置此属性,则将使用系统属性中指定的格式字符串。
+ * 如果未定义此属性或给定的格式字符串为{@linkplain java.util.IllegalFormatException illegal},则默认格式为实现特定的。
+ * 
+ * 
  * @since 1.4
  * @see java.util.Formatter
  */
@@ -134,6 +147,29 @@ public class SimpleFormatter extends Formatter {
      * It is recommended to use the {@link Formatter#formatMessage}
      * convenience method to localize and format the message field.
      *
+     * <p>
+     *  格式化给定的LogRecord。
+     * <p>
+     *  可以通过在<a href="#formatting"> {@code java.util.logging.SimpleFormatter)中指定<a href="../Formatter.html#syntax">格式字符串</a>来自定义格式.format}
+     *  </a>属性。
+     * 给定的{@code LogRecord}将被格式化,如同通过调用：。
+     * <pre>
+     *  {@link String#format String.format}(format,date,source,logger,level,message,thrown);
+     * </pre>
+     *  其中参数为：<br>
+     * <ol>
+     * <li> {@ code format}  -  {@code java.util.logging.SimpleFormatter.format}属性中指定的{@link java.util.Formatter java.util.Formatter}
+     * 格式字符串或默认格式。
+     *  li> <li> {@ code date}  - 表示日志记录的{@linkplain LogRecord#getMillis事件时间}的{@link Date}对象。
+     * </li> <li> {@ code source}呼叫者(如果可用) </li> <li> {@ code level}  -  {@linkplain Level#getLocalizedName log level}
+     * 。
+     *  li> <li> {@ code date}  - 表示日志记录的{@linkplain LogRecord#getMillis事件时间}的{@link Date}对象。
+     * </li> </li> > <li> {@ code message}  - 从{@link Formatter#formatMessage(LogRecord)}方法返回的格式化日志消息。
+     * 它使用{@link java.text.MessageFormat java.text}格式,不使用{@code java.util.Formatter format}参数。
+     * </li> <li> {@ code thrown}  - 一个字符串, @linkplain LogRecord#getThrown throwable}与日志记录及其回溯相关联,以换行符开头,如果有
+     * 的话;否则为空字符串。
+     * 它使用{@link java.text.MessageFormat java.text}格式,不使用{@code java.util.Formatter format}参数。</li>。
+     * 
      * @param record the log record to be formatted.
      * @return a formatted log record
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Template.java,v 1.2.4.1 2005/09/12 11:30:11 pvedula Exp $
+ * <p>
+ *  $ Id：Template.java,v 1.2.4.1 2005/09/12 11:30:11 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -40,6 +53,8 @@ import com.sun.org.apache.xml.internal.utils.XML11Char;
 
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -126,6 +141,9 @@ public final class Template extends TopLevelElement {
 
     /**
      * Compare this template to another. First checks priority, then position.
+     * <p>
+     *  将此模板与另一个模板进行比较。首先检查优先级,然后检查位置。
+     * 
      */
     public int compareTo(Object template) {
         Template other = (Template)template;
@@ -263,6 +281,9 @@ public final class Template extends TopLevelElement {
      *     only child node
      *  o) set the empty Stylesheet as our parent
      *  o) set this template as the Stylesheet's only child
+     * <p>
+     *  当解析器意识到它是一个简化的样式表,它将创建一个空的样式表对象与样式表的根元素(一个LiteralElement对象)作为其唯一的孩子。
+     * 然后,Stylesheet对象将创建此Template对象并调用此方法以强制某些特定的行为。
      */
     public void parseSimplified(Stylesheet stylesheet, Parser parser) {
 

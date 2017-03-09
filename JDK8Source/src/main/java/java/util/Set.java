@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,30 @@ package java.util;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  不包含重复元素的集合。
+ * 更正式地,集合不包含<code> e1 </code>和<code> e2 </code>的元素对,使得<code> e1.equals(e2)</code>,并且至多一个空元素。
+ * 如其名称所暗示的,该接口对数学<i>集</i>抽象进行建模。
+ * 
+ *  <p> <tt> Set </tt>界面对所有构造函数的合同以及<tt> add </tt>接口添加了额外的规定,除了继承<tt>集合</tt> tt>,<tt>等于</tt>和<tt> hashCo
+ * de </tt>方法。
+ * 为了方便起见,这里还包括其他继承方法的声明。 (伴随这些声明的规范是根据<tt>设置</tt>界面定制的,但不包含任何其他规定。)。
+ * 
+ *  <p>构造函数的附加规定是,并不奇怪,所有构造函数必须创建一个不包含重复元素(如上定义)的集合。
+ * 
+ *  <p>注意：如果可变对象用作设置元素,则必须非常小心。如果对象的值以影响<tt>等于</tt>比较的方式更改,而对象是集合中的元素,则不指定集合的​​行为。
+ * 这种禁止的一个特殊情况是,一个集合不允许包含自身作为一个元素。
+ * 
+ * <p>某些集合实现对它们可能包含的元素有限制。例如,一些实现禁止空元素,并且一些实现对它们的元素的类型具有限制。
+ * 尝试添加不合格元素会抛出未检查的异常,通常为<tt> NullPointerException </tt>或<tt> ClassCastException </tt>。
+ * 尝试查询不合格元素的存在可能会抛出异常,或者它可能只是返回false;一些实现将展示前一行为,一些将展示后者。
+ * 更一般地,尝试对不合格元素的操作可以抛出异常或者它可以成功,在执行的选择时,其完成不会导致不合格元素插入到集合中。这种异常在此接口的规范中标记为"可选"。
+ * 
+ *  <p>此接口是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @param <E> the type of elements maintained by this set
  *
  * @author  Josh Bloch
@@ -90,6 +115,10 @@ public interface Set<E> extends Collection<E> {
      * set contains more than <tt>Integer.MAX_VALUE</tt> elements, returns
      * <tt>Integer.MAX_VALUE</tt>.
      *
+     * <p>
+     *  返回此集合中的元素数(其基数)。如果此集合包含多于<tt> Integer.MAX_VALUE </tt>个元素,则返回<tt> Integer.MAX_VALUE </tt>。
+     * 
+     * 
      * @return the number of elements in this set (its cardinality)
      */
     int size();
@@ -97,6 +126,10 @@ public interface Set<E> extends Collection<E> {
     /**
      * Returns <tt>true</tt> if this set contains no elements.
      *
+     * <p>
+     *  如果此集合不包含元素,则返回<tt> true </tt>。
+     * 
+     * 
      * @return <tt>true</tt> if this set contains no elements
      */
     boolean isEmpty();
@@ -107,6 +140,13 @@ public interface Set<E> extends Collection<E> {
      * contains an element <tt>e</tt> such that
      * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
      *
+     * <p>
+     *  如果此集合包含指定的元素,则返回<tt> true </tt>。
+     * 更正式地说,如果且仅当此集合包含一个元素<tt> e </tt>,使得<tt>(o == null&nbsp;?&nbsp; e == null&nbsp;：&nbsp; ; o.equals(e))</tt>
+     * 。
+     *  如果此集合包含指定的元素,则返回<tt> true </tt>。
+     * 
+     * 
      * @param o element whose presence in this set is to be tested
      * @return <tt>true</tt> if this set contains the specified element
      * @throws ClassCastException if the type of the specified element
@@ -123,6 +163,10 @@ public interface Set<E> extends Collection<E> {
      * returned in no particular order (unless this set is an instance of some
      * class that provides a guarantee).
      *
+     * <p>
+     * 返回此集合中的元素的迭代器。元素不按特定顺序返回(除非此集合是提供保证的某个类的实例)。
+     * 
+     * 
      * @return an iterator over the elements in this set
      */
     Iterator<E> iterator();
@@ -141,6 +185,14 @@ public interface Set<E> extends Collection<E> {
      * <p>This method acts as bridge between array-based and collection-based
      * APIs.
      *
+     * <p>
+     *  返回一个包含此集合中所有元素的数组。如果这个集合对它的元素被它的迭代器返回的顺序作出任何保证,那么这个方法必须以相同的顺序返回这些元素。
+     * 
+     *  <p>返回的数组将是"安全的",因为没有对它的引用由此集合维护。 (换句话说,这个方法必须分配一个新数组,即使这个数组支持数组)。因此调用者可以自由地修改返回的数组。
+     * 
+     *  <p>此方法充当基于阵列和基于集合的API之间的桥梁。
+     * 
+     * 
      * @return an array containing all the elements in this set
      */
     Object[] toArray();
@@ -178,6 +230,24 @@ public interface Set<E> extends Collection<E> {
      * Note that <tt>toArray(new Object[0])</tt> is identical in function to
      * <tt>toArray()</tt>.
      *
+     * <p>
+     *  返回一个包含此集合中所有元素的数组;返回的数组的运行时类型是指定数组的运行时类型。如果集合适合指定的数组,则返回其中。否则,将使用指定数组的运行时类型和此集合的大小分配新数组。
+     * 
+     *  <p>如果此集合适合具有空余空间的指定数组(即,数组具有比此集合更多的元素),则紧接集合结尾的数组中的元素将设置为<tt> null </tt >。
+     *  (如果调用者知道此集合不包含任何空元素,则这在确定此集合的长度</i> </i>时非常有用。)。
+     * 
+     * <p>如果此集合对其元素由其迭代器返回的顺序作出任何保证,则此方法必须以相同的顺序返回元素。
+     * 
+     *  <p>与{@link #toArray()}方法类似,此方法充当基于数组和基于集合的API之间的桥梁。此外,该方法允许对输出阵列的运行时类型的精确控制,并且在某些情况下可以用于节省分配成本。
+     * 
+     *  <p>假设<tt> x </tt>是一个已知只包含字符串的集合。以下代码可用于将集合转储到新分配的<tt> String </tt>数组中：
+     * 
+     * <pre>
+     *  String [] y = x.toArray(new String [0]); </pre>
+     * 
+     *  注意,<tt> toArray(new Object [0])</tt>在功能上与<tt> toArray()</tt>相同。
+     * 
+     * 
      * @param a the array into which the elements of this set are to be
      *        stored, if it is big enough; otherwise, a new array of the same
      *        runtime type is allocated for this purpose.
@@ -210,6 +280,16 @@ public interface Set<E> extends Collection<E> {
      * Individual set implementations should clearly document any
      * restrictions on the elements that they may contain.
      *
+     * <p>
+     *  如果指定的元素不存在(可选操作),则将该元素添加到此集合。
+     * 更正式地,如果集合不包含元素<tt> e2 </tt>,使得<tt>(e == null&nbsp;?&nbsp; e2 == null&nbsp; ;：e.equals(e2))</tt>。
+     * 如果此集合已包含元素,则调用使集合保持不变,并返回<tt> false </tt>。结合对构造函数的限制,这确保集合从不包含重复的元素。
+     * 
+     * <p>上述规定并不意味着集合必须接受所有元素;集合可以拒绝添加任何特定元素,包括<tt> null </tt>,并抛出异常,如{@link Collection#add Collection.add}的
+     * 规范中所述。
+     * 单个集合实现应清楚地记录对它们可能包含的元素的任何限制。
+     * 
+     * 
      * @param e element to be added to this set
      * @return <tt>true</tt> if this set did not already contain the specified
      *         element
@@ -235,6 +315,13 @@ public interface Set<E> extends Collection<E> {
      * result of the call).  (This set will not contain the element once the
      * call returns.)
      *
+     * <p>
+     *  从此集合中删除指定元素(如果存在)(可选操作)。
+     * 更正式地,删除元素<tt> e </tt>,使得<tt>(o == null&nbsp;?&nbsp; e == null&nbsp;：&nbsp; o.equals(e))</tt> set包含这样的
+     * 元素。
+     *  从此集合中删除指定元素(如果存在)(可选操作)。如果此集合包含元素(或等效地,如果此集合作为调用的结果而更改),则返回<tt> true </tt>。 (这个集合在调用返回后不会包含元素。)。
+     * 
+     * 
      * @param o object to be removed from this set, if present
      * @return <tt>true</tt> if this set contained the specified element
      * @throws ClassCastException if the type of the specified element
@@ -256,6 +343,10 @@ public interface Set<E> extends Collection<E> {
      * specified collection.  If the specified collection is also a set, this
      * method returns <tt>true</tt> if it is a <i>subset</i> of this set.
      *
+     * <p>
+     *  如果此集合包含指定集合的​​所有元素,则返回<tt> true </tt>。如果指定的集合也是集合,则此方法返回<tt> true </tt>,如果它是此集合的<i>子集</i>。
+     * 
+     * 
      * @param  c collection to be checked for containment in this set
      * @return <tt>true</tt> if this set contains all of the elements of the
      *         specified collection
@@ -280,6 +371,11 @@ public interface Set<E> extends Collection<E> {
      * sets.  The behavior of this operation is undefined if the specified
      * collection is modified while the operation is in progress.
      *
+     * <p>
+     *  将指定集合中的所有元素添加到此集合(如果它们尚未存在)(可选操作)。
+     * 如果指定的集合也是一个集合,则<tt> addAll </tt>操作有效地修改此集合,以使其值为两个集合的<i> union </i>。如果在操作正在进行时修改指定的集合,则此操作的行为是未定义的。
+     * 
+     * 
      * @param  c collection containing elements to be added to this set
      * @return <tt>true</tt> if this set changed as a result of the call
      *
@@ -304,6 +400,10 @@ public interface Set<E> extends Collection<E> {
      * operation effectively modifies this set so that its value is the
      * <i>intersection</i> of the two sets.
      *
+     * <p>
+     * 仅保留此集中包含在指定集合中的元素(可选操作)。换句话说,从此集合中删除未包含在指定集合中的所有元素。如果指定的集合也是一个集合,则此操作有效地修改此集合,以使其值为两个集合的<i>交集</i>。
+     * 
+     * 
      * @param  c collection containing elements to be retained in this set
      * @return <tt>true</tt> if this set changed as a result of the call
      * @throws UnsupportedOperationException if the <tt>retainAll</tt> operation
@@ -326,6 +426,10 @@ public interface Set<E> extends Collection<E> {
      * set so that its value is the <i>asymmetric set difference</i> of
      * the two sets.
      *
+     * <p>
+     *  从此集合中删除包含在指定集合中的所有元素(可选操作)。如果指定的集合也是集合,则此操作有效地修改该集合,使得其值是两个集合的<i>非对称集合差异</i>。
+     * 
+     * 
      * @param  c collection containing elements to be removed from this set
      * @return <tt>true</tt> if this set changed as a result of the call
      * @throws UnsupportedOperationException if the <tt>removeAll</tt> operation
@@ -346,6 +450,10 @@ public interface Set<E> extends Collection<E> {
      * Removes all of the elements from this set (optional operation).
      * The set will be empty after this call returns.
      *
+     * <p>
+     *  删除此集合中的所有元素(可选操作)。此调用返回后,集合将为空。
+     * 
+     * 
      * @throws UnsupportedOperationException if the <tt>clear</tt> method
      *         is not supported by this set
      */
@@ -363,6 +471,12 @@ public interface Set<E> extends Collection<E> {
      * equals method works properly across different implementations of the
      * set interface.
      *
+     * <p>
+     *  将指定的对象与此设置相比较以确保相等。
+     * 返回<tt> true </tt>如果指定的对象也是一个集合,这两个集合具有相同的大小,并且指定集合的​​每个成员都包含在此集合中(或者等效地,此集合的每个成员都包含在指定集)。
+     * 此定义确保equals方法在集合接口的不同实现中正常工作。
+     * 
+     * 
      * @param o object to be compared for equality with this set
      * @return <tt>true</tt> if the specified object is equal to this set
      */
@@ -377,6 +491,13 @@ public interface Set<E> extends Collection<E> {
      * and <tt>s2</tt>, as required by the general contract of
      * {@link Object#hashCode}.
      *
+     * <p>
+     * 返回此集合的哈希码值。集合的哈希码被定义为集合中的元素的哈希码的总和,其中<tt> null </tt>元素的哈希码被定义为零。
+     * 这可以确保<tt> s1.equals(s2)</tt>意味着任何两个集合<tt> s1 </tt>的<tt> s1.hashCode()== s2.hashCode()</tt> <tt> s2 </tt>
+     * ,根据{@link Object#hashCode}的一般合同的要求。
+     * 返回此集合的哈希码值。集合的哈希码被定义为集合中的元素的哈希码的总和,其中<tt> null </tt>元素的哈希码被定义为零。
+     * 
+     * 
      * @return the hash code value for this set
      * @see Object#equals(Object)
      * @see Set#equals(Object)
@@ -403,6 +524,14 @@ public interface Set<E> extends Collection<E> {
      * The created {@code Spliterator} additionally reports
      * {@link Spliterator#SUBSIZED}.
      *
+     * <p>
+     *  在此集合中的元素上创建{@code Spliterator}。
+     * 
+     *  <p> {@code Spliterator}报告{@link Spliterator#DISTINCT}。实施应记录附加特性值的报告。
+     * 
+     *  @implSpec默认实现从集合的{@code Iterator}中创建<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>分隔符。
+     * 分隔符继承集合的迭代器的<em> fail-fast </em>属性。
+     * 
      * @return a {@code Spliterator} over the elements in this set
      * @since 1.8
      */

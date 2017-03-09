@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,14 @@ import javax.print.attribute.PrintJobAttribute;
  * returns the IPP string representation of the attribute value.
  * <P>
  *
+ * <p>
+ *  类PrintQuality是打印属性类,枚举,用于指定打印机用于作业的打印质量。
+ * <P>
+ *  <B> IPP兼容性：</B> <CODE> getName()</CODE>返回的类别名称是IPP属性名称。枚举的整数值是IPP枚举值。
+ *  <code> toString()</code>方法返回属性值的IPP字符串表示形式。
+ * <P>
+ * 
+ * 
  * @author  David Mendenhall
  * @author  Alan Kaminsky
  */
@@ -49,16 +58,25 @@ public class PrintQuality extends EnumSyntax
     private static final long serialVersionUID = -3072341285225858365L;
     /**
      * Lowest quality available on the printer.
+     * <p>
+     *  打印机上可用的最低质量。
+     * 
      */
     public static final PrintQuality DRAFT = new PrintQuality(3);
 
     /**
      * Normal or intermediate quality on the printer.
+     * <p>
+     *  打印机上的正常或中等质量。
+     * 
      */
     public static final PrintQuality NORMAL = new PrintQuality(4);
 
     /**
      * Highest quality available on the printer.
+     * <p>
+     *  打印机上可用的最高质量。
+     * 
      */
     public static final PrintQuality HIGH = new PrintQuality(5);
 
@@ -66,6 +84,10 @@ public class PrintQuality extends EnumSyntax
      * Construct a new print quality enumeration value with the given integer
      * value.
      *
+     * <p>
+     *  使用给定的整数值构造新的打印质量枚举值。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected PrintQuality(int value) {
@@ -86,6 +108,9 @@ public class PrintQuality extends EnumSyntax
 
     /**
      * Returns the string table for class PrintQuality.
+     * <p>
+     *  返回类PrintQuality的字符串表。
+     * 
      */
     protected String[] getStringTable() {
         return (String[])myStringTable.clone();
@@ -93,6 +118,9 @@ public class PrintQuality extends EnumSyntax
 
     /**
      * Returns the enumeration value table for class PrintQuality.
+     * <p>
+     *  返回类PrintQuality的枚举值表。
+     * 
      */
     protected EnumSyntax[] getEnumValueTable() {
         return (EnumSyntax[])myEnumValueTable.clone();
@@ -100,6 +128,9 @@ public class PrintQuality extends EnumSyntax
 
     /**
      * Returns the lowest integer value used by class PrintQuality.
+     * <p>
+     *  返回类PrintQuality使用的最小整数值。
+     * 
      */
     protected int getOffset() {
         return 3;
@@ -112,6 +143,12 @@ public class PrintQuality extends EnumSyntax
      * For class PrintQuality and any vendor-defined subclasses, the category is
      * class PrintQuality itself.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于PrintQuality类和任何供应商定义的子类,类别是PrintQuality本身。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -126,6 +163,10 @@ public class PrintQuality extends EnumSyntax
      * For class PrintQuality and any vendor-defined subclasses, the category
      * name is <CODE>"print-quality"</CODE>.
      *
+     * <p>
+     *  获取此属性值为实例的类别的名称。
+     * <P>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

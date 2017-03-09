@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,17 @@ import java.awt.*;
  * milliseconds, the tooltip will immediately be shown, otherwise the
  * tooltip will be shown again after <code>initialDelay</code> milliseconds.
  *
+ * <p>
+ *  管理系统中的所有<code> ToolTips </code>。
+ * <p>
+ *  ToolTipManager包含许多属性,用于配置工具提示变为可见所需的时间,以及它们隐藏多久。考虑一个组件具有基于鼠标所在位置的不同工具提示,例如JTree。
+ * 当鼠标移动到JTree中并且在具有有效工具提示的区域上时,工具提示将在<code> initialDelay </code>毫秒之后变为可见。
+ * 在<code> dismissDelay </code>毫秒后,工具提示将被隐藏。如果鼠标在具有有效工具提示的区域上,并且工具提示当前可见,则当鼠标移动到没有有效工具提示的区域时,工具提示将被隐藏。
+ * 如果鼠标然后返回到在<code> reshowDelay </code>毫秒内具有有效工具提示的区域,则工具提示将立即显示,否则在<code> initialDelay </code>毫秒之后,工具提示
+ * 将再次显示。
+ * 在<code> dismissDelay </code>毫秒后,工具提示将被隐藏。如果鼠标在具有有效工具提示的区域上,并且工具提示当前可见,则当鼠标移动到没有有效工具提示的区域时,工具提示将被隐藏。
+ * 
+ * 
  * @see JComponent#createToolTip
  * @author Dave Moore
  * @author Rich Schiavi
@@ -61,6 +73,9 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     transient Popup tipWindow;
     /** The Window tip is being displayed in. This will be non-null if
      * the Window tip is in differs from that of insideComponent's Window.
+     * <p>
+     *  窗口提示与insideComponent的窗口不同。
+     * 
      */
     private Window window;
     JToolTip tip;
@@ -100,6 +115,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Enables or disables the tooltip.
      *
+     * <p>
+     *  启用或禁用工具提示。
+     * 
+     * 
      * @param flag  true to enable the tip, false otherwise
      */
     public void setEnabled(boolean flag) {
@@ -112,6 +131,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Returns true if this object is enabled.
      *
+     * <p>
+     *  如果启用此对象,则返回true。
+     * 
+     * 
      * @return true if this object is enabled, false otherwise
      */
     public boolean isEnabled() {
@@ -125,6 +148,11 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      * disable this feature. You have to do disable it if your
      * application mixes light weight and heavy weights components.
      *
+     * <p>
+     * 当显示<code> JToolTip </code>时,<code> ToolTipManager </code>选择使用轻量级的<code> JPanel </code>此方法允许您禁用此功能。
+     * 如果你的应用程序混合了轻量级和重量级的组件,你必须禁用它。
+     * 
+     * 
      * @param aFlag true if a lightweight panel is desired, false otherwise
      *
      */
@@ -137,6 +165,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      * are in use, or false if heavyweight (native peer)
      * <code>Tooltips</code> are being used.
      *
+     * <p>
+     *  如果正在使用轻量级(全Java)<code>工具提示</code>,则返回true;如果使用重量级(本地对等)<code>工具提示</code>,则返回true。
+     * 
+     * 
      * @return true if lightweight <code>ToolTips</code> are in use
      */
     public boolean isLightWeightPopupEnabled() {
@@ -147,6 +179,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Specifies the initial delay value.
      *
+     * <p>
+     *  指定初始延迟值。
+     * 
+     * 
      * @param milliseconds  the number of milliseconds to delay
      *        (after the cursor has paused) before displaying the
      *        tooltip
@@ -159,6 +195,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Returns the initial delay value.
      *
+     * <p>
+     *  返回初始延迟值。
+     * 
+     * 
      * @return an integer representing the initial delay value,
      *          in milliseconds
      * @see #setInitialDelay
@@ -170,6 +210,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Specifies the dismissal delay value.
      *
+     * <p>
+     *  指定消除延迟值。
+     * 
+     * 
      * @param milliseconds  the number of milliseconds to delay
      *        before taking away the tooltip
      * @see #getDismissDelay
@@ -181,6 +225,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Returns the dismissal delay value.
      *
+     * <p>
+     *  返回消除延迟值。
+     * 
+     * 
      * @return an integer representing the dismissal delay value,
      *          in milliseconds
      * @see #setDismissDelay
@@ -200,6 +248,14 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      * will have to wait an additional <code>initialDelay</code>
      * milliseconds before the tooltip is shown again.
      *
+     * <p>
+     *  用于指定用户在显示工具提示之前等待<code> initialDelay </code>毫秒之前的时间量。
+     * 也就是说,如果工具提示被隐藏,并且用户移动到具有在<code>毫秒</code>毫秒内的有效工具提示的相同组件的区域中,则将立即显示工具提示。
+     * 否则,如果用户在<code> milliseconds </code>毫秒后移动到具有有效工具提示的区域,则用户必须等待额外的<code> initialDelay </code>毫秒,然后再次显示工具
+     * 提示。
+     * 也就是说,如果工具提示被隐藏,并且用户移动到具有在<code>毫秒</code>毫秒内的有效工具提示的相同组件的区域中,则将立即显示工具提示。
+     * 
+     * 
      * @param milliseconds time in milliseconds
      * @see #getReshowDelay
      */
@@ -210,6 +266,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Returns the reshow delay property.
      *
+     * <p>
+     *  返回reshow延迟属性。
+     * 
+     * 
      * @return reshown delay property
      * @see #setReshowDelay
      */
@@ -379,6 +439,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Returns a shared <code>ToolTipManager</code> instance.
      *
+     * <p>
+     *  返回一个共享的<code> ToolTipManager </code>实例。
+     * 
+     * 
      * @return a shared <code>ToolTipManager</code> object
      */
     public static ToolTipManager sharedInstance() {
@@ -401,6 +465,13 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      * as <code>JLabel</code>, are not made focus traversable as a result
      * of invoking this method.
      *
+     * <p>
+     *  注册用于工具提示管理的组件。
+     * <p>
+     * 这将注册键绑定以显示和隐藏工具提示文本,只有<code>组件</code>有焦点绑定。
+     * 这样做使得通常不能被聚焦可遍历的组件(例如<code> JLabel </code>)不会由于调用此方法而成为可遍历的焦点。
+     * 
+     * 
      * @param component  a <code>JComponent</code> object to add
      * @see JComponent#isFocusTraversable
      */
@@ -416,6 +487,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Removes a component from tooltip control.
      *
+     * <p>
+     *  从工具提示控件中删除组件。
+     * 
+     * 
      * @param component  a <code>JComponent</code> object to remove
      */
     public void unregisterComponent(JComponent component) {
@@ -429,6 +504,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      *  Called when the mouse enters the region of a component.
      *  This determines whether the tool tip should be shown.
      *
+     * <p>
+     *  当鼠标进入组件的区域时调用。这决定是否应该显示工具提示。
+     * 
+     * 
      *  @param event  the event in question
      */
     public void mouseEntered(MouseEvent event) {
@@ -492,6 +571,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      *  Called when the mouse exits the region of a component.
      *  Any tool tip showing should be hidden.
      *
+     * <p>
+     *  当鼠标退出组件的区域时调用。任何工具提示显示应隐藏。
+     * 
+     * 
      *  @param event  the event in question
      */
     public void mouseExited(MouseEvent event) {
@@ -563,6 +646,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      *  Called when the mouse is pressed.
      *  Any tool tip showing should be hidden.
      *
+     * <p>
+     *  按下鼠标时调用。任何工具提示显示应隐藏。
+     * 
+     * 
      *  @param event  the event in question
      */
     public void mousePressed(MouseEvent event) {
@@ -578,6 +665,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      *  Called when the mouse is pressed and dragged.
      *  Does nothing.
      *
+     * <p>
+     *  按下并拖动鼠标时调用。什么也没做。
+     * 
+     * 
      *  @param event  the event in question
      */
     public void mouseDragged(MouseEvent event) {
@@ -588,6 +679,10 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      *  Called when the mouse is moved.
      *  Determines whether the tool tip should be displayed.
      *
+     * <p>
+     *  当鼠标移动时调用。确定是否应显示工具提示。
+     * 
+     * 
      *  @param event  the event in question
      */
     public void mouseMoved(MouseEvent event) {
@@ -617,6 +712,9 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
     /**
      * Checks to see if the tooltip needs to be changed in response to
      * the MouseMoved event <code>event</code>.
+     * <p>
+     *  检查是否需要更改工具提示以响应MouseMoved事件<code>事件</code>。
+     * 
      */
     private void checkForTipChange(MouseEvent event) {
         JComponent component = (JComponent)event.getSource();
@@ -702,6 +800,9 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
    * mouse-entered or mouse-moved, whichever occurs first.  Once the
    * tooltip has been initiated, we can remove this listener and rely
    * solely on mouse-entered to initiate the tooltip.
+   * <p>
+   *  以捕获当鼠标已经在组件的边界内时打开工具提示的情况。这样,工具提示将在鼠标输入或鼠标移动时启动,以先发生者为准。一旦工具提示启动,我们可以删除此侦听器,并完全依靠鼠标输入来启动工具提示。
+   * 
    */
     private class MoveBeforeEnterListener extends MouseMotionAdapter {
         public void mouseMoved(MouseEvent e) {
@@ -840,6 +941,9 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
      *
      * Post Tip: Ctrl+F1
      * Unpost Tip: Esc and Ctrl+F1
+     * <p>
+     *  在组件上以便处理辅助功能键。这将适用于L&F全球
+     * 
      */
     private class AccessibilityKeyListener extends KeyAdapter {
         public void keyPressed(KeyEvent e) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -108,19 +109,39 @@ import javax.management.loading.ClassLoaderRepository;
  * <BR>
  * <CODE>JMImplementation:type=MBeanServerDelegate</CODE>.
  *
+ * <p>
+ *  这是代理端的MBean操作的默认类。它包含创建,注册和删除MBeans所需的方法以及注册MBean的访问方法。这是JMX基础结构的核心组件。
+ * <P>
+ *  添加到MBean服务器的每个MBean都变得易于管理：其属性和操作可通过连接到该MBean服务器的连接器/适配器远程访问。不能在MBean服务器中注册Java对象,除非它是符合JMX的MBean。
+ * <P>
+ *  当MBean在MBean服务器中注册或注销时,将发出{@link javax.management.MBeanServerNotification MBeanServerNotification}通知
+ * 。
+ * 要将对象注册为监听器到MBeanServerNotifications,您应该使用<CODE> ObjectName </CODE>来调用MBean服务器方法{@link #addNotificationListener addNotificationListener}
+ *  {@link javax.management.MBeanServerDelegate MBeanServerDelegate}。
+ * 此<CODE> ObjectName </CODE>是：。
+ * <BR>
+ *  <CODE> JMImplementation：type = MBeanServerDelegate </CODE>。
+ * 
+ * 
  * @since 1.5
  */
 public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
 
     /** The MBeanInstantiator object used by the
+    /* <p>
+    /* 
      *  DefaultMBeanServerInterceptor */
     private final transient MBeanInstantiator instantiator;
 
     /** The MBean server object that is associated to the
+    /* <p>
+    /* 
      *  DefaultMBeanServerInterceptor */
     private transient MBeanServer server = null;
 
     /** The MBean server delegate object that is associated to the
+    /* <p>
+    /* 
      *  DefaultMBeanServerInterceptor */
     private final transient MBeanServerDelegate delegate;
 
@@ -147,6 +168,11 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * repository instance.
      * <p>Do not forget to call <code>initialize(outer,delegate)</code>
      * before using this object.
+     * <p>
+     *  使用指定的存储库实例创建DefaultMBeanServerInterceptor。
+     *  <p>在使用此对象之前不要忘记调用<code> initialize(outer,delegate)</code>。
+     * 
+     * 
      * @param outer A pointer to the MBeanServer object that must be
      *        passed to the MBeans when invoking their
      *        {@link javax.management.MBeanRegistration} interface.
@@ -207,6 +233,8 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
                                params, signature);
         } catch (InstanceNotFoundException e) {
             /* Can only happen if loaderName doesn't exist, but we just
+            /* <p>
+            /* 
                passed null, so we shouldn't get this exception.  */
             throw EnvHelp.initCause(
                 new IllegalArgumentException("Unexpected exception: " + e), e);
@@ -396,6 +424,22 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
 
            This implies that we must be very careful to ensure that
            the name is removed from the set and waiters notified, no
+        /* <p>
+        /* 异常,则unregisterMBean失败。这允许MBean拒绝取消注册。如果它成功返回,则unregisterMBean可以继续。
+        /* 在这种情况下,preDeregister可能已经清理了一些状态,并且不会期望第二次调用。
+        /* 因此,如果两个线程尝试同时取消注册相同的MBean,则其中一个必须等​​待另一个线程(a)调用preDeregister并获取异常或(b)成功调用preDeregister并注销MBean。
+        /* 假设线程T1取消注册MBean,并且线程T2尝试取消注册相同的MBean,因此等待T1。然后,如果T1的preDeregister结束需要由T2保持的锁,则死锁是可能的。
+        /* 给定刚才描述的语义,似乎没有任何办法来避免这种情况。这不会发生在代码中明确的任何给定的MBean什么线程可以取消注册MBean。
+        /* 
+        /*  另一方面,我们显然不希望一个注销MBean A的线程必须等待另一个注销另一个MBean B的线程(参见错误6318664)。在这种情况下的僵局可以合理地认为是无偿的。
+        /* 所以在preDeregister调用之间持有一个全局锁将是坏的。
+        /* 
+        /* 所以我们有一组ObjectNames,某些线程当前正在注销。当线程想要注销名称时,它必须首先检查名称是否在集合中,如果是,则必须等待。
+        /* 当线程成功注销名称时,它从集合中删除名称,并通知任何等待的线程集合已更改。
+        /* 
+        /*  这意味着我们必须非常小心,以确保名称从集合和服务员通知,删除
+        /* 
+        /* 
            matter what code path is taken.  */
 
         synchronized (beingUnregistered) {
@@ -824,6 +868,8 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
     }
 
     /* Centralize some of the tedious exception wrapping demanded by the JMX
+    /* <p>
+    /* 
        spec. */
     private static void rethrow(Throwable t)
             throws ReflectionException {
@@ -874,6 +920,19 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      *     MBeanRegistration interface, it invokes postRegister()
      *     on the object.</li>
      * </ul>
+     * <p>
+     *  使用给定的<code> name </code>在存储库中注册<code>对象</code>。
+     * 在执行所有MBean一致性测试后,此方法由各种createMBean()flavor和registerMBean()调用。
+     * <p>
+     *  此方法不执行任何类型的测试合规性,并且调用者应确保给定的<code>对象</code>符合MBean。
+     * <p>
+     *  这种方法执行对象注册所需的所有基本步骤：
+     * <ul>
+     *  <li>如果<code>对象</code>实现了MBeanRegistration接口,它将调用对象上的preRegister()。
+     * </li> <li>然后将对象添加到给定的<code> / code> / code>。
+     * </li>最后,如果<code>对象</code>实现了MBeanRegistration接口,它会调用对象的postRegister。
+     * </ul>
+     * 
      * @param object A reference to a MBean compliant object.
      * @param name   The ObjectName of the <code>object</code> MBean.
      * @return the actual ObjectName with which the object was registered.
@@ -1076,6 +1135,9 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
     /**
      * Gets a specific MBean controlled by the DefaultMBeanServerInterceptor.
      * The name must have a non-default domain.
+     * <p>
+     *  获取由DefaultMBeanServerInterceptor控制的特定MBean。名称必须具有非默认域。
+     * 
      */
     private DynamicMBean getMBean(ObjectName name)
         throws InstanceNotFoundException {
@@ -1114,6 +1176,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
            to get a non-default-domain name.  We depend on the
            fact that toString() works like that and that it
            leaves wildcards in place (so we can detect an error
+        /* <p>
+        /* toString()将在此实现中返回。所以我们可以在其前面粘贴默认域,以获取非默认域名。我们依赖于这样的事实,toString()工作原理,它留下通配符到位(所以我们可以检测错误
+        /* 
+        /* 
            if one is supplied where it shouldn't be).  */
         final String completeName = domain + name;
 
@@ -1167,6 +1233,27 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * on a given MBean, and removing it when the MBean is removed.
      * This is probably more costly in memory, but could be useful if
      * some day we don't want to rely on weak references.
+     * <p>
+     *  通知处理。
+     * 
+     *  这不是微不足道的,因为MBeanServer将接收到的通知的源从一个MBean的引用转换为该MBean的ObjectName。虽然这使得通知发送更容易为MBean作家,它是一个相当大的成本。
+     * 我们需要替换通知的来源,如果还有直接注册到MBean的监听器(不通过MBean服务器),这基本上是错误的。我们还需要将由MBeanServer的客户端提供的侦听器封装为在转发之前执行替换的侦听器。
+     * 这就是为什么我们强烈阻止人们在他们的通知的源中放置MBean引用的原因。相反,他们应该安排自己放置ObjectName。
+     * 
+     *  然而,现有的代码依赖于替换,所以我们坚持。
+     * 
+     *  这里是我们如何处理它。当你添加一个监听器,我们在它周围做一个ListenerWrapper。
+     * 我们在listenerWrappers映射中查找,如果已经有一个包含给定的ObjectName的监听器,我们重用它。
+     * 此映射是一个WeakHashMap,因此不再注册任何MBean的侦听器可以进行垃圾回收。
+     * 
+     * 我们不能使用更简单的解决方案,例如总是创建一个新的包装器,或者总是使用MBean注册相同的监听器,并使用回传来找到客户端的原始监听器。
+     * 原因是我们需要支持removeListener变量,删除具有给定监听器的广播公司中的所有(监听器,过滤器,回传)三元组。我们没有办法检查广播公司内部的三元组列表。
+     * 因此,同一客户端侦听器必须始终映射到向广播公司注册的同一侦听器。
+     * 
+     *  另一个可能的解决方案是从ObjectName映射到listener包装器(或者listener包装器的IdentityHashMap)列表,使这个列表第一次在给定的MBean上添加一个监听器,并在删除
+     * MBean时删除它。
+     * 这在内存中可能更昂贵,但如果有时我们不想依赖弱引用,这可能是有用的。
+     * 
      */
     public void addNotificationListener(ObjectName name,
                                         NotificationListener listener,
@@ -1325,6 +1412,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
         /* We could simplify the code by assigning broadcaster after
            assigning listenerWrapper, but that would change the error
            behavior when both the broadcaster and the listener are
+        /* <p>
+        /*  分配listenerWrapper,但这将改变广播者和监听者都是的错误行为
+        /* 
+        /* 
            erroneous.  */
 
         Class<? extends NotificationBroadcaster> reqClass =
@@ -1434,6 +1525,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
     /**
      * <p>Return the {@link java.lang.ClassLoader} that was used for
      * loading the class of the named MBean.
+     * <p>
+     *  <p>返回用于加载命名MBean的类的{@link java.lang.ClassLoader}。
+     * 
+     * 
      * @param mbeanName The ObjectName of the MBean.
      * @return The ClassLoader used for that MBean.
      * @exception InstanceNotFoundException if the named MBean is not found.
@@ -1448,6 +1543,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
 
     /**
      * <p>Return the named {@link java.lang.ClassLoader}.
+     * <p>
+     *  <p>返回命名的{@link java.lang.ClassLoader}。
+     * 
+     * 
      * @param loaderName The ObjectName of the ClassLoader.
      * @return The named ClassLoader.
      * @exception InstanceNotFoundException if the named ClassLoader
@@ -1477,6 +1576,9 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
     /**
      * Sends an MBeanServerNotifications with the specified type for the
      * MBean with the specified ObjectName
+     * <p>
+     *  使用指定的ObjectName发送具有指定类型的MBean的MBeanServerNotifications
+     * 
      */
     private void sendNotification(String NotifType, ObjectName name) {
 
@@ -1500,6 +1602,9 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
 
     /**
      * Applies the specified queries to the set of NamedObjects.
+     * <p>
+     *  将指定的查询应用于NamedObject集合。
+     * 
      */
     private Set<ObjectName>
         objectNamesFromFilteredNamedObjects(Set<NamedObject> list,
@@ -1535,6 +1640,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
                  * unusual case where the user creates a custom
                  * QueryExp that calls a nested query on another
                  * MBeanServer.
+                 * <p>
+                 * query.setMBeanServer可能是QueryEval.setMBeanServer,因此返回旧值。
+                 * 由于该方法使用了ThreadLocal变量,因此只有在用户创建自定义QueryExp并调用另一个MBeanServer上的嵌套查询时,才需要此代码。
+                 * 
                  */
                 query.setMBeanServer(oldServer);
             }
@@ -1544,6 +1653,9 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
 
     /**
      * Applies the specified queries to the set of NamedObjects.
+     * <p>
+     *  将指定的查询应用于NamedObject集合。
+     * 
      */
     private Set<ObjectInstance>
         objectInstancesFromFilteredNamedObjects(Set<NamedObject> list,
@@ -1583,6 +1695,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
                  * unusual case where the user creates a custom
                  * QueryExp that calls a nested query on another
                  * MBeanServer.
+                 * <p>
+                 *  query.setMBeanServer可能是QueryEval.setMBeanServer,因此返回旧值。
+                 * 由于该方法使用了ThreadLocal变量,因此只有在用户创建自定义QueryExp并调用另一个MBeanServer上的嵌套查询时,才需要此代码。
+                 * 
                  */
                 query.setMBeanServer(oldServer);
             }
@@ -1606,6 +1722,9 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
 
     /**
      * Applies the specified queries to the set of ObjectInstances.
+     * <p>
+     *  将指定的查询应用于ObjectInstances集合。
+     * 
      */
     private Set<ObjectInstance>
             filterListOfObjectInstances(Set<ObjectInstance> list,
@@ -1635,6 +1754,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
                      * unusual case where the user creates a custom
                      * QueryExp that calls a nested query on another
                      * MBeanServer.
+                     * <p>
+                     *  query.setMBeanServer可能是QueryEval.setMBeanServer,因此返回旧值。
+                     * 由于该方法使用了ThreadLocal变量,因此只有在用户创建自定义QueryExp并调用另一个MBeanServer上的嵌套查询时,才需要此代码。
+                     * 
                      */
                     query.setMBeanServer(oldServer);
                 }
@@ -1661,6 +1784,15 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * (listener,name,mbean) set.  But we do not want this canonical
      * wrapper to be referenced strongly.  Therefore we put it inside
      * a WeakReference and that is the value in the WeakHashMap.
+     * <p>
+     *  获取此侦听器,名称和mbean的现有包装器(如果有)。否则,如果"create"为true,则创建并返回一个。否则,返回null。
+     * 
+     * 我们使用WeakHashMap,如果对用户侦听器的唯一引用是在listenerWrappers中,它可以被垃圾收集。这需要一定的谨慎,因为只有WeakHashMap中的键是弱的;该值很强。
+     * 我们需要恢复现有的包装器对象(不只是一个等于它的对象),所以我们希望listenerWrappers将任何ListenerWrapper映射到规范的ListenerWrapper(listener,na
+     * me,mbean)集合。
+     * 我们使用WeakHashMap,如果对用户侦听器的唯一引用是在listenerWrappers中,它可以被垃圾收集。这需要一定的谨慎,因为只有WeakHashMap中的键是弱的;该值很强。
+     * 但是我们不希望强制引用这个规范的包装。因此,我们将它放在WeakReference中,这是WeakHashMap中的值。
+     * 
      */
     private NotificationListener getListenerWrapper(NotificationListener l,
                                                     ObjectName name,
@@ -1750,6 +1882,9 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
              * notifications over that connection.  However, this
              * seems rather drastic, so instead we propagate the
              * exception and let the broadcaster handle it.
+             * <p>
+             *  监听器不应该抛出异常。如果这个,我们可以从MBean中删除它。这可能表示连接器已停止工作,例如,通过该连接发送未来通知没有意义。然而,这似乎相当剧烈,所以我们传播异常,让广播公司处理它。
+             * 
              */
             listener.handleNotification(notification, handback);
         }
@@ -1768,6 +1903,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
              * different MBean objects at different times.  We do the
              * comparisons in this order to avoid the slow
              * ObjectName.equals when possible.
+             * <p>
+             *  我们比较所有三个,如果相同的MBean对象取消注册,然后重新注册不同的名称,或相同的名称在不同的时间分配到两个不同的MBean对象。
+             * 我们按照这个顺序进行比较,以避免在可能的情况下缓慢的ObjectName.equals。
+             * 
              */
         }
 
@@ -1786,6 +1925,11 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
              * is not recommended because MBeanRegistration will
              * break).  But even in these unusual cases the hash code
              * does not have to be unique.
+             * <p>
+             * 我们不在散列中包括name.hashCode(),因为计算速度很慢,通常我们不会有两个ListenerWrapper实例具有相同的mbean但是不同的ObjectNames。
+             * 这可能发生,如果MBean从一个名称注销并重新注册与另一个,并且之间没有垃圾回收;或者如果同一对象在两个名称下注册(这是不推荐的,因为MBeanRegistration将中断)。
+             * 但是即使在这些不常见的情况下,哈希码也不必是唯一的。
+             * 
              */
         }
 
@@ -1862,6 +2006,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * been called.
      * The method {@code done()} will be called in registerMBean or
      * unregisterMBean, at the end.
+     * <p>
+     *  一个registrationContext,它可以在调用postRegister(或postDeregister)之后在存储库锁之外执行额外的事后注册操作(或发布注销操作)。
+     * 方法{@code done()}将在registerMBean或unregisterMBean中调用,最后。
+     * 
      */
     private static interface ResourceContext extends RegistrationContext {
         public void done();
@@ -1879,6 +2027,12 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * returns ResourceContext for special resources such as ClassLoaders
      * or JMXNamespaces. For regular MBean this method returns
      * ResourceContext.NONE.
+     * <p>
+     *  在存储库中添加MBean,发送MBeanServerNotification.REGISTRATION_NOTIFICATION,为特殊资源(如ClassLoaders或JMXNamespaces)返
+     * 回ResourceContext。
+     * 对于常规MBean,此方法返回ResourceContext.NONE。
+     * 
+     * 
      * @return a ResourceContext for special resources such as ClassLoaders
      *         or JMXNamespaces.
      */
@@ -1922,6 +2076,12 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * or JMXNamespaces, or null. For regular MBean this method returns
      * ResourceContext.NONE.
      *
+     * <p>
+     *  删除存储库中的MBean,发送MBeanServerNotification.UNREGISTRATION_NOTIFICATION,为特殊资源(如ClassLoaders或JMXNamespaces
+     * )返回ResourceContext或null。
+     * 对于常规MBean,此方法返回ResourceContext.NONE。
+     * 
+     * 
      * @return a ResourceContext for special resources such as ClassLoaders
      *         or JMXNamespaces.
      */
@@ -1959,6 +2119,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * Registers a ClassLoader with the CLR.
      * This method is called by the ResourceContext from within the
      * repository lock.
+     * <p>
+     *  使用CLR注册ClassLoader。此方法由ResourceContext从存储库锁定中调用。
+     * 
+     * 
      * @param loader       The ClassLoader.
      * @param logicalName  The ClassLoader MBean ObjectName.
      */
@@ -1972,6 +2136,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
          * explicitly named (e.g. as the loader in createMBean) but
          * does not add it to the list that is consulted by
          * ClassLoaderRepository.loadClass.
+         * <p>
+         * 当新注册的MBean是ClassLoader时调用。如果是,请告诉ClassLoaderRepository(CLR)。我们这样做即使加载器是PrivateClassLoader。
+         * 在这种情况下,CLR会记住加载器在显式命名时使用(例如作为createMBean中的加载器),但不会将其添加到由ClassLoaderRepository.loadClass查询的列表中。
+         * 
          */
         final ModifiableClassLoaderRepository clr = getInstantiatorCLR();
         if (clr == null) {
@@ -1990,6 +2158,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * Unregisters a ClassLoader from the CLR.
      * This method is called by the ResourceContext from within the
      * repository lock.
+     * <p>
+     *  从CLR注销一个ClassLoader。此方法由ResourceContext从存储库锁定中调用。
+     * 
+     * 
      * @param loader       The ClassLoader.
      * @param logicalName  The ClassLoader MBean ObjectName.
      */
@@ -1997,6 +2169,9 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
             final ObjectName logicalName) {
         /**
          * Removes the  MBean from the default loader repository.
+         * <p>
+         *  从默认加载器存储库中删除MBean。
+         * 
          */
         if (loader != server.getClass().getClassLoader()) {
             final ModifiableClassLoaderRepository clr = getInstantiatorCLR();
@@ -2015,6 +2190,11 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * when the associated MBean is added to or resp. removed from the
      * repository.
      *
+     * <p>
+     *  为ClassLoader MBean创建ResourceContext。资源上下文可以将ClassLoader添加到(ResourceContext.registering)或者。
+     * 当相关MBean添加到或分别从CLR中删除ClassLoader(ResourceContext.unregistered)。从存储库中删除。
+     * 
+     * 
      * @param loader       The ClassLoader MBean being registered or
      *                     unregistered.
      * @param logicalName  The name of the ClassLoader MBean.
@@ -2045,6 +2225,10 @@ public class DefaultMBeanServerInterceptor implements MBeanServerInterceptor {
      * ResourceContext.NONE.
      * At this time, only ClassLoaders need a ResourceContext.
      *
+     * <p>
+     *  为给定资源创建一个ResourceContext。如果资源不需要ResourceContext,则返回ResourceContext.NONE。
+     * 此时,只有ClassLoaders需要一个ResourceContext。
+     * 
      * @param resource     The resource being registered or unregistered.
      * @param logicalName  The name of the associated MBean.
      * @return

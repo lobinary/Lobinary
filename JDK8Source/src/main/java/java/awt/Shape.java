@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,26 @@ import java.awt.geom.Rectangle2D;
  * determining if a shape contains or intersects a rectangle or if a
  * shape contains a point.
  *
+ * <p>
+ *  <code> Shape </code>接口为表示某种形状的几何形状的对象提供了定义。
+ *  <code> Shape </code>由{@link PathIterator}对象描述,它可以表示<code> Shape </code>的轮廓,以及用于确定轮廓如何将2D平面划分为内部和外部点。
+ *  <code> Shape </code>接口为表示某种形状的几何形状的对象提供了定义。
+ * 每个<code> Shape </code>对象提供回调以获取几何的边界框,确定点或矩形是否部分或全部位于<code> Shape </code>内部,并检索<code> PathIterator </code>
+ * 对象,描述<code> Shape </code>大纲的轨迹路径。
+ *  <code> Shape </code>接口为表示某种形状的几何形状的对象提供了定义。
+ * <p>
+ *  <a name="def_insideness"> <b>隐性定义：</b> </a>当且仅当以下情况时,点被认为位于<code> Shape </code>中：
+ * <ul>
+ *  <li>它完全位于<code> Shape </code>边界<i>或</i>内
+ * <li>
+ *  它正好位于<code> Shape </code>边界<i>和</i>上,与增加的<code> X </code>方向上的点直接相邻的空间完全在边界<i> </i>
+ * <li>
+ *  它正好位于水平边界段<b>上,并且<y> </b>在增加<code> Y </code>方向上与该点直接相邻的空间在边界内。
+ * </ul>
+ * <p> <code>包含</code>和<code> intersects </code>方法认为<code> Shape </code>的内部是它所包含的区域,就好像它被填充一样。
+ * 这意味着这些方法认为未闭合的形状被隐含地闭合,用于确定形状是否包含或相交于矩形或者如果形状包含点。
+ * 
+ * 
  * @see java.awt.geom.PathIterator
  * @see java.awt.geom.AffineTransform
  * @see java.awt.geom.FlatteningPathIterator
@@ -114,6 +135,33 @@ public interface Shape {
      * <p>
      *  {@code bounds.contains(x,y)} does not imply {@code shape.contains(x,y)}
      * </p>
+     * <p>
+     *  返回一个完整包含<code> Shape </code>的整数{@link Rectangle}。
+     * 注意,不能保证返回的<code> Rectangle </code>是包围<code> Shape </code>的最小边界框,只是<code> Shape </code> <code> Rectang
+     * le </code>。
+     *  返回一个完整包含<code> Shape </code>的整数{@link Rectangle}。
+     * 如果<code> Shape </code>溢出整数数据类型的有限范围,则返回的<code> Rectangle </code>也可能无法完全包含<code> Shape </code>。
+     * 由于代码的更大的灵活性,<code> getBounds2D </code>方法通常返回更紧的边界框。
+     * 
+     * <p>
+     *  请注意,<a href="{@docRoot}/java/awt/Shape.html#def_insideness">隐藏性定义</a>可能会导致{@code shape}的定义轮廓上的点不能被认为
+     * 包含在返回的{@code bounds}对象中,但仅在这些点也不被认为包含在原始{@code shape}中的情况下。
+     * </p>
+     * <p>
+     * 如果根据{@link #contains(double x,double y)contains(point)}方法,{@code point}在{@code shape}中,那么它必须在返回的{@code Rectangle}
+     * 对象根据{@code #contains(double x,double y)contains(point)}方法的{@code bounds}。
+     * 特别：。
+     * </p>
+     * <p>
+     *  {@code shape.contains(x,y)}需要{@code bounds.contains(x,y)}
+     * </p>
+     * <p>
+     *  如果{@code point}不在{@code shape}内,则它可能仍包含在{@code bounds}对象中：
+     * </p>
+     * <p>
+     *  {@code bounds.contains(x,y)}并不意味着{@code shape.contains(x,y)}
+     * </p>
+     * 
      * @return an integer <code>Rectangle</code> that completely encloses
      *                 the <code>Shape</code>.
      * @see #getBounds2D
@@ -159,6 +207,34 @@ public interface Shape {
      * <p>
      *  {@code bounds.contains(p)} does not imply {@code shape.contains(p)}
      * </p>
+     * <p>
+     *  返回<code> Shape </code>的高精度和更精确的边界框比<code> getBounds </code>方法。
+     * 注意,不能保证返回的{@link Rectangle2D}是包围<code> Shape </code>的最小边界框,只是<code> Shape </code>完全在指定的<code> Rectang
+     * le2D </code>。
+     *  返回<code> Shape </code>的高精度和更精确的边界框比<code> getBounds </code>方法。
+     * 这个方法返回的边界框通常比<code> getBounds </code>方法返回的边框更紧,而且不会由于溢出问题而失败,因为返回值可以是<code> Rectangle2D </code>的一个实例使
+     * 用双精度值存储维度。
+     *  返回<code> Shape </code>的高精度和更精确的边界框比<code> getBounds </code>方法。
+     * 
+     * <p>
+     * 请注意,<a href="{@docRoot}/java/awt/Shape.html#def_insideness">隐藏性定义</a>可能会导致{@code shape}的定义轮廓上的点不能被认为包
+     * 含在返回的{@code bounds}对象中,但仅在这些点也不被认为包含在原始{@code shape}中的情况下。
+     * </p>
+     * <p>
+     *  如果根据{@link #contains(Point2D p)contains(point)}方法,{@code point}在{@code shape}中,那么它必须在返回的{@code Rectangle2D}
+     *  {@code bounds}的{@link #contains(Point2D p)contains(point)}方法。
+     * 特别：。
+     * </p>
+     * <p>
+     *  {@code shape.contains(p)}需要{@code bounds.contains(p)}
+     * </p>
+     * <p>
+     *  如果{@code point}不在{@code shape}内,则它可能仍包含在{@code bounds}对象中：
+     * </p>
+     * <p>
+     *  {@code bounds.contains(p)}并不意味着{@code shape.contains(p)}
+     * </p>
+     * 
      * @return an instance of <code>Rectangle2D</code> that is a
      *                 high-precision bounding box of the <code>Shape</code>.
      * @see #getBounds
@@ -171,6 +247,12 @@ public interface Shape {
      * <code>Shape</code>, as described by the
      * <a href="{@docRoot}/java/awt/Shape.html#def_insideness">
      * definition of insideness</a>.
+     * <p>
+     *  测试指定的坐标是否在<code> Shape </code>的边界内,如
+     * <a href="{@docRoot}/java/awt/Shape.html#def_insideness">
+     *  隐性的定义</a>。
+     * 
+     * 
      * @param x the specified X coordinate to be tested
      * @param y the specified Y coordinate to be tested
      * @return <code>true</code> if the specified coordinates are inside
@@ -185,6 +267,12 @@ public interface Shape {
      * of the <code>Shape</code>, as described by the
      * <a href="{@docRoot}/java/awt/Shape.html#def_insideness">
      * definition of insideness</a>.
+     * <p>
+     *  测试指定的{@link Point2D}是否在<code> Shape </code>的边界内,如
+     * <a href="{@docRoot}/java/awt/Shape.html#def_insideness">
+     *  隐性的定义</a>。
+     * 
+     * 
      * @param p the specified <code>Point2D</code> to be tested
      * @return <code>true</code> if the specified <code>Point2D</code> is
      *          inside the boundary of the <code>Shape</code>;
@@ -218,6 +306,21 @@ public interface Shape {
      * {@code Shape} objects and therefore can be used if a more precise
      * answer is required.
      *
+     * <p>
+     *  测试<code> Shape </code>内部是否与指定矩形区域的内部相交。
+     * 如果任何点包含在<code> Shape </code>和指定的矩形区域的内部,则认为矩形区域与<code> Shape </code>相交。
+     * <p>
+     * {@code Shape.intersects()}方法允许{@code Shape}实现在以下情况下保守地返回{@code true}：
+     * <ul>
+     * <li>
+     *  矩形区域和<code> Shape </code>相交的概率很高,但是
+     * <li>
+     *  准确地确定这个交叉的计算是非常昂贵的。
+     * </ul>
+     *  这意味着对于某些{@code Shapes},即使矩形区域与{@code Shape}不相交,此方法也可能返回{@code true}。
+     *  {@link java.awt.geom.Area Area}类比大多数{@code Shape}对象执行几何交集的更精确的计算,因此可以在需要更精确的答案时使用。
+     * 
+     * 
      * @param x the X coordinate of the upper-left corner
      *          of the specified rectangular area
      * @param y the Y coordinate of the upper-left corner
@@ -254,6 +357,19 @@ public interface Shape {
      * {@code Shape} objects and therefore can be used if a more precise
      * answer is required.
      *
+     * <p>
+     *  测试<code> Shape </code>内部是否与指定的<code> Rectangle2D </code>内部相交。
+     *  {@code Shape.intersects()}方法允许{@code Shape}实现在以下情况下保守地返回{@code true}：。
+     * <ul>
+     * <li>
+     *  很可能<code> Rectangle2D </code>和<code> Shape </code>相交,但是
+     * <li>
+     *  准确地确定这个交叉的计算是非常昂贵的。
+     * </ul>
+     *  这意味着对于某些{@code Shapes},即使{@code Rectangle2D}与{@code Shape}不相交,此方法也可能返回{@code true}。
+     *  {@link java.awt.geom.Area Area}类比大多数{@code Shape}对象执行几何交集的更精确的计算,因此可以在需要更精确的答案时使用。
+     * 
+     * 
      * @param r the specified <code>Rectangle2D</code>
      * @return <code>true</code> if the interior of the <code>Shape</code> and
      *          the interior of the specified <code>Rectangle2D</code>
@@ -290,6 +406,21 @@ public interface Shape {
      * {@code Shape} objects and therefore can be used if a more precise
      * answer is required.
      *
+     * <p>
+     * 测试<code> Shape </code>的内部是否完全包含指定的矩形区域。
+     * 位于矩形区域内的所有坐标必须位于<code> Shape </code>内,整个矩形区域被视为包含在<code> Shape </code>中。
+     * <p>
+     *  {@code Shape.contains()}方法允许{@code Shape}实现在以下情况下保守地返回{@code false}：
+     * <ul>
+     * <li>
+     *  <code> intersect </code>方法返回<code> true </code>和
+     * <li>
+     *  确定<code> Shape </code>是否完全包含矩形区域的计算是非常昂贵的。
+     * </ul>
+     *  这意味着对于某些{@code Shapes},即使{@code Shape}包含矩形区域,此方法也可能返回{@code false}。
+     *  {@link java.awt.geom.Area Area}类比大多数{@code Shape}对象执行更准确的几何计算,因此如果需要更精确的答案,可以使用它。
+     * 
+     * 
      * @param x the X coordinate of the upper-left corner
      *          of the specified rectangular area
      * @param y the Y coordinate of the upper-left corner
@@ -330,6 +461,19 @@ public interface Shape {
      * {@code Shape} objects and therefore can be used if a more precise
      * answer is required.
      *
+     * <p>
+     *  测试<code> Shape </code>内部是否包含指定的<code> Rectangle2D </code>。
+     *  {@code Shape.contains()}方法允许{@code Shape}实现在以下情况下保守地返回{@code false}：。
+     * <ul>
+     * <li>
+     *  <code> intersect </code>方法返回<code> true </code>和
+     * <li>
+     *  确定<code> Shape </code>是否完全包含<code> Rectangle2D </code>的计算过于昂贵。
+     * </ul>
+     * 这意味着对于某些{@code Shapes},即使{@code Shape}包含{@code Rectangle2D},此方法也可能返回{@code false}。
+     *  {@link java.awt.geom.Area Area}类比大多数{@code Shape}对象执行更准确的几何计算,因此如果需要更精确的答案,可以使用它。
+     * 
+     * 
      * @param r The specified <code>Rectangle2D</code>
      * @return <code>true</code> if the interior of the <code>Shape</code>
      *          entirely contains the <code>Rectangle2D</code>;
@@ -360,6 +504,15 @@ public interface Shape {
      * that are in process from any changes that might occur to the original
      * object's geometry during such iterations.
      *
+     * <p>
+     *  返回沿着<code> Shape </code>边界迭代的迭代器对象,并提供对<code> Shape </code>大纲的几何体的访问。
+     * 如果指定了可选的{@link AffineTransform},则迭代中返回的坐标将相应地进行转换。
+     * <p>
+     *  每次调用此方法时,都会返回一个新的<code> PathIterator </code>对象,该对象独立于任何其他<code> PathIterator </code>对象时间。
+     * <p>
+     *  建议但不是保证,实现<code> Shape </code>接口的对象隔离在迭代期间可能发生到原始对象的几何的任何改变的过程中的迭代。
+     * 
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to the
      *          coordinates as they are returned in the iteration, or
      *          <code>null</code> if untransformed coordinates are desired
@@ -400,6 +553,15 @@ public interface Shape {
      * that are in process from any changes that might occur to the original
      * object's geometry during such iterations.
      *
+     * <p>
+     *  返回沿着<code> Shape </code>边界迭代的迭代器对象,并提供对<code> Shape </code>轮廓几何图形的平面视图的访问。
+     * <p>
+     *  迭代器只返回SEG_MOVETO,SEG_LINETO和SEG_CLOSE点类型。
+     * <p>
+     *  如果指定了可选的<code> AffineTransform </code>,则迭代中返回的坐标将相应地进行转换。
+     * <p>
+     * 曲线段的细分量由<code> flatness </code>参数控制,该参数指定未平坦变换曲线上的任何点可以偏离返回的平坦路径段的最大距离。
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to the
      *          coordinates as they are returned in the iteration, or
      *          <code>null</code> if untransformed coordinates are desired

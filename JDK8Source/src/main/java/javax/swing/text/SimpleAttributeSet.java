@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,13 @@ import java.util.LinkedHashMap;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  使用哈希表的MutableAttributeSet的直接实现。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Tim Prinzing
  */
 public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cloneable
@@ -54,6 +62,9 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
 
     /**
      * An empty attribute set.
+     * <p>
+     *  空属性集。
+     * 
      */
     public static final AttributeSet EMPTY = new EmptyAttributeSet();
 
@@ -61,6 +72,9 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
 
     /**
      * Creates a new attribute set.
+     * <p>
+     *  创建新的属性集。
+     * 
      */
     public SimpleAttributeSet() {
     }
@@ -68,6 +82,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Creates a new attribute set based on a supplied set of attributes.
      *
+     * <p>
+     *  基于提供的一组属性创建新的属性集。
+     * 
+     * 
      * @param source the set of attributes
      */
     public SimpleAttributeSet(AttributeSet source) {
@@ -77,6 +95,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Checks whether the set of attributes is empty.
      *
+     * <p>
+     *  检查属性集是否为空。
+     * 
+     * 
      * @return true if the set is empty else false
      */
     public boolean isEmpty()
@@ -87,6 +109,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Gets a count of the number of attributes.
      *
+     * <p>
+     *  获取属性数的计数。
+     * 
+     * 
      * @return the count
      */
     public int getAttributeCount() {
@@ -96,6 +122,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Tells whether a given attribute is defined.
      *
+     * <p>
+     *  告诉是否定义了给定的属性。
+     * 
+     * 
      * @param attrName the attribute name
      * @return true if the attribute is defined
      */
@@ -106,6 +136,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Compares two attribute sets.
      *
+     * <p>
+     *  比较两个属性集。
+     * 
+     * 
      * @param attr the second attribute set
      * @return true if the sets are equal, false otherwise
      */
@@ -117,6 +151,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Makes a copy of the attributes.
      *
+     * <p>
+     *  创建属性的副本。
+     * 
+     * 
      * @return the copy
      */
     public AttributeSet copyAttributes() {
@@ -126,6 +164,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Gets the names of the attributes in the set.
      *
+     * <p>
+     *  获取集合中属性的名称。
+     * 
+     * 
      * @return the names as an <code>Enumeration</code>
      */
     public Enumeration<?> getAttributeNames() {
@@ -135,6 +177,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Gets the value of an attribute.
      *
+     * <p>
+     *  获取属性的值。
+     * 
+     * 
      * @param name the attribute name
      * @return the value
      */
@@ -153,6 +199,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
      * Checks whether the attribute list contains a
      * specified attribute name/value pair.
      *
+     * <p>
+     *  检查属性列表是否包含指定的属性名称/值对。
+     * 
+     * 
      * @param name the name
      * @param value the value
      * @return true if the name/value pair is in the list
@@ -165,6 +215,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
      * Checks whether the attribute list contains all the
      * specified name/value pairs.
      *
+     * <p>
+     *  检查属性列表是否包含所有指定的名称/值对。
+     * 
+     * 
      * @param attributes the attribute list
      * @return true if the list contains all the name/value pairs
      */
@@ -183,6 +237,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Adds an attribute to the list.
      *
+     * <p>
+     *  向列表中添加属性。
+     * 
+     * 
      * @param name the attribute name
      * @param value the attribute value
      */
@@ -193,6 +251,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Adds a set of attributes to the list.
      *
+     * <p>
+     *  向列表中添加一组属性。
+     * 
+     * 
      * @param attributes the set of attributes to add
      */
     public void addAttributes(AttributeSet attributes) {
@@ -206,6 +268,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Removes an attribute from the list.
      *
+     * <p>
+     *  从列表中删除属性。
+     * 
+     * 
      * @param name the attribute name
      */
     public void removeAttribute(Object name) {
@@ -215,6 +281,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Removes a set of attributes from the list.
      *
+     * <p>
+     *  从列表中删除一组属性。
+     * 
+     * 
      * @param names the set of names to remove
      */
     public void removeAttributes(Enumeration<?> names) {
@@ -225,6 +295,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Removes a set of attributes from the list.
      *
+     * <p>
+     *  从列表中删除一组属性。
+     * 
+     * 
      * @param attributes the set of attributes to remove
      */
     public void removeAttributes(AttributeSet attributes) {
@@ -249,6 +323,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
      * are no other sets of attributes to resolve
      * through.
      *
+     * <p>
+     * 获取解析父代。如果属性未在本地定义,则这是要解析的属性集。如果没有其他属性集要解析,则此值为null。
+     * 
+     * 
      * @return the parent
      */
     public AttributeSet getResolveParent() {
@@ -258,6 +336,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Sets the resolving parent.
      *
+     * <p>
+     *  设置解析父代。
+     * 
+     * 
      * @param parent the parent
      */
     public void setResolveParent(AttributeSet parent) {
@@ -269,6 +351,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Clones a set of attributes.
      *
+     * <p>
+     *  克隆一组属性。
+     * 
+     * 
      * @return the new set of attributes
      */
     public Object clone() {
@@ -284,6 +370,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
 
     /**
      * Returns a hashcode for this set of attributes.
+     * <p>
+     *  返回此属性集的哈希码。
+     * 
+     * 
      * @return     a hashcode value for this set of attributes.
      */
     public int hashCode() {
@@ -294,6 +384,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
      * Compares this object to the specified object.
      * The result is <code>true</code> if the object is an equivalent
      * set of attributes.
+     * <p>
+     *  将此对象与指定的对象进行比较。如果对象是等效的一组属性,结果是<code> true </code>。
+     * 
+     * 
      * @param     obj   the object to compare this attribute set with
      * @return    <code>true</code> if the objects are equal;
      *            <code>false</code> otherwise
@@ -312,6 +406,10 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
     /**
      * Converts the attribute set to a String.
      *
+     * <p>
+     *  将属性集转换为字符串。
+     * 
+     * 
      * @return the string
      */
     public String toString() {
@@ -344,6 +442,8 @@ public class SimpleAttributeSet implements MutableAttributeSet, Serializable, Cl
 
     /**
      * An AttributeSet that is always empty.
+     * <p>
+     *  始终为空的AttributeSet。
      */
     static class EmptyAttributeSet implements AttributeSet, Serializable {
         static final long serialVersionUID = -8714803568785904228L;

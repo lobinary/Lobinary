@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,20 @@ import sun.nio.cs.StreamDecoder;
  *   = new BufferedReader(new InputStreamReader(System.in));
  * </pre>
  *
+ * <p>
+ *  InputStreamReader是从字节流到字符流的桥梁：它使用指定的{@link java.nio.charset.Charset charset}读取字节并将其解码为字符。
+ * 它使用的字符集可以通过名称指定或可以明确给出,或者可以接受平台的默认字符集。
+ * 
+ *  <p>每次调用InputStreamReader的read()方法之一都可能导致从底层字节输入流中读取一个或多个字节。
+ * 为了实现字节到字符的有效转换,可以从底层流先读取比满足当前读取操作所需的更多字节。
+ * 
+ *  <p>为了提高效率,请考虑在BufferedReader中封装一个InputStreamReader。例如：
+ * 
+ * <pre>
+ *  BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+ * </pre>
+ * 
+ * 
  * @see BufferedReader
  * @see InputStream
  * @see java.nio.charset.Charset
@@ -66,6 +81,10 @@ public class InputStreamReader extends Reader {
     /**
      * Creates an InputStreamReader that uses the default charset.
      *
+     * <p>
+     *  创建使用默认字符集的InputStreamReader。
+     * 
+     * 
      * @param  in   An InputStream
      */
     public InputStreamReader(InputStream in) {
@@ -81,6 +100,10 @@ public class InputStreamReader extends Reader {
     /**
      * Creates an InputStreamReader that uses the named charset.
      *
+     * <p>
+     *  创建使用命名的字符集的InputStreamReader。
+     * 
+     * 
      * @param  in
      *         An InputStream
      *
@@ -103,6 +126,10 @@ public class InputStreamReader extends Reader {
     /**
      * Creates an InputStreamReader that uses the given charset.
      *
+     * <p>
+     *  创建使用给定字符集的InputStreamReader。
+     * 
+     * 
      * @param  in       An InputStream
      * @param  cs       A charset
      *
@@ -119,6 +146,10 @@ public class InputStreamReader extends Reader {
     /**
      * Creates an InputStreamReader that uses the given charset decoder.
      *
+     * <p>
+     *  创建使用给定字符集解码器的InputStreamReader。
+     * 
+     * 
      * @param  in       An InputStream
      * @param  dec      A charset decoder
      *
@@ -144,6 +175,15 @@ public class InputStreamReader extends Reader {
      * the constructor. This method will return <code>null</code> if the
      * stream has been closed.
      * </p>
+     * <p>
+     *  返回此流使用的字符编码的名称。
+     * 
+     *  <p>如果编码具有历史名称,则返回该名称;否则返回编码的规范名称。
+     * 
+     * <p>如果此实例是使用{@link #InputStreamReader(InputStream,String)}构造函数创建的,则对于编码唯一的返回名称可能与传递给构造函数的名称不同。
+     * 如果流已关闭,此方法将返回<code> null </code>。
+     * </p>
+     * 
      * @return The historical name of this encoding, or
      *         <code>null</code> if the stream has been closed
      *
@@ -159,6 +199,10 @@ public class InputStreamReader extends Reader {
     /**
      * Reads a single character.
      *
+     * <p>
+     *  读取单个字符。
+     * 
+     * 
      * @return The character read, or -1 if the end of the stream has been
      *         reached
      *
@@ -171,6 +215,10 @@ public class InputStreamReader extends Reader {
     /**
      * Reads characters into a portion of an array.
      *
+     * <p>
+     *  将字符读入数组的一部分。
+     * 
+     * 
      * @param      cbuf     Destination buffer
      * @param      offset   Offset at which to start storing characters
      * @param      length   Maximum number of characters to read
@@ -189,6 +237,9 @@ public class InputStreamReader extends Reader {
      * ready if its input buffer is not empty, or if bytes are available to be
      * read from the underlying byte stream.
      *
+     * <p>
+     *  告诉这个流是否准备好被读取。如果InputStreamReader的输入缓冲区不为空,或者如果有字节可用于从底层字节流读取,则它就准备就绪。
+     * 
      * @exception  IOException  If an I/O error occurs
      */
     public boolean ready() throws IOException {

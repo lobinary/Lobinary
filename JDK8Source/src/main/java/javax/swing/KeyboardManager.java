@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,22 @@ import sun.awt.EmbeddedFrame;
   * then we move up to the InternalFrame's creator and see if anyone wants the event (and so on and so on).
   *
   *
+  * <p>
+  *  KeyboardManager类用于帮助调度WHEN_IN_FOCUSED_WINDOW样式操作的键盘操作。具有其他条件的操作在JComponent中直接处理。
+  * 
+  *  这里是一个关于键盘调度应该如何工作至少我理解它的符号的描述。
+  * 
+  *  KeyEvents被分派到关注的组件。焦点管理器在处理此事件时首先破解。如果焦点管理器不想要它,那么JComponent调用super.processKeyEvent()这允许侦听器处理事件的机会。
+  * 
+  *  如果没有一个监听器"消耗"事件,那么keybindings得到一个镜头。这是事情开始变得有趣。首先,用WHEN_FOCUSED条件定义的KeyStokes获得一个机会。
+  * 如果没有这些想要事件,那么组件行走,虽然它的父母寻找类型WHEN_ANCESTOR_OF_FOCUSED_COMPONENT的操作。
+  * 
+  *  如果没有人拿过它,那么它在这里。然后,我们查找为WHEN_IN_FOCUSED_WINDOW事件注册的组件,并触发它们。注意,如果没有找到那些,那么我们将事件传递给菜单栏,让它们有一个裂缝。
+  * 它们的处理方式不同。
+  * 
+  * 最后,我们检查是否正在查看内部框架。如果我们没有人想要该事件,那么我们移动到InternalFrame的创建者,看看是否有人想要该事件(等等)。
+  * 
+  * 
   * @see InputMap
   */
 class KeyboardManager {
@@ -67,12 +84,18 @@ class KeyboardManager {
 
     /**
       * maps top-level containers to a sub-hashtable full of keystrokes
+      * <p>
+      *  将顶级容器映射到一个充满击键的子哈希表
+      * 
       */
     Hashtable<Container, Hashtable> containerMap = new Hashtable<Container, Hashtable>();
 
     /**
       * Maps component/keystroke pairs to a topLevel container
       * This is mainly used for fast unregister operations
+      * <p>
+      *  将组件/键击对映射到topLevel容器此主要用于快速注销操作
+      * 
       */
     Hashtable<ComponentKeyStrokePair, Container> componentKeyStrokeMap = new Hashtable<ComponentKeyStrokePair, Container>();
 
@@ -89,6 +112,9 @@ class KeyboardManager {
       * case.
       * Other types of keystrokes will be handled by walking the hierarchy
       * That simplifies some potentially hairy stuff.
+      * <p>
+      *  这里是用于WHEN_IN_FOCUSED_WINDOW情况的寄存器击键。其他类型的击键将通过行走层次结构来处理。这简化了一些潜在的毛绒东西。
+      * 
       */
      public void registerKeyStroke(KeyStroke k, JComponent c) {
          Container topContainer = getTopAncestor(c);
@@ -135,6 +161,9 @@ class KeyboardManager {
 
      /**
        * Find the top focusable Window, Applet, or InternalFrame
+       * <p>
+       *  找到顶部可聚焦的窗口,Applet或InternalFrame
+       * 
        */
      private static Container getTopAncestor(JComponent c) {
         for(Container p = c.getParent(); p != null; p = p.getParent()) {
@@ -204,6 +233,9 @@ class KeyboardManager {
       * to see if any chidren (or subchildren) of the specified container
       * want a crack at the event.
       * If one of them wants it, then it will "DO-THE-RIGHT-THING"
+      * <p>
+      *  当聚焦的组件(并且没有它的祖先)想要键事件时,调用此方法。这将查找击键,以查看指定容器的任何chidren(或子子孙)是否想要在事件中破解。如果他们中的一个想要它,那么它会"做正确的"
+      * 
       */
     public boolean fireKeyboardAction(KeyEvent e, boolean pressed, Container topAncestor) {
 
@@ -365,6 +397,8 @@ class KeyboardManager {
       * This class is used to create keys for a hashtable
       * which looks up topContainers based on component, keystroke pairs
       * This is used to make unregistering KeyStrokes fast
+      * <p>
+      *  这个类用于创建一个哈希表的键,根据组件,键击对查找topContainers这用于使注销KeyStrokes快速
       */
     class ComponentKeyStrokePair {
         Object component;

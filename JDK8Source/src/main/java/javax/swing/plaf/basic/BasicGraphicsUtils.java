@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,8 @@ import sun.swing.SwingUtilities2;
 
 
 /*
+/* <p>
+/* 
  * @author Hans Muller
  */
 
@@ -82,6 +85,10 @@ public class BasicGraphicsUtils
      * Returns the amount of space taken up by a border drawn by
      * <code>drawEtchedRect()</code>
      *
+     * <p>
+     *  返回由<code> drawEtchedRect()</code>绘制的边框占用的空间量
+     * 
+     * 
      * @return  the inset of an etched rect
      */
     public static Insets getEtchedInsets() {
@@ -113,6 +120,10 @@ public class BasicGraphicsUtils
      * Returns the amount of space taken up by a border drawn by
      * <code>drawGroove()</code>
      *
+     * <p>
+     *  返回由<code> drawGroove()</code>绘制的边框占用的空间量
+     * 
+     * 
      * @return  the inset of a groove border
      */
     public static Insets getGrooveInsets() {
@@ -202,6 +213,9 @@ public class BasicGraphicsUtils
      *  The first occurrence of <code>underlineChar</code>
      *  in text will be underlined. The matching algorithm is
      *  not case sensitive.
+     * <p>
+     *  就像<code> g.drawString </code>会。文本中第一个出现的<code> underlineChar </code>将加下划线。匹配算法不区分大小写。
+     * 
      */
     public static void drawString(Graphics g,String text,int underlinedChar,int x,int y) {
         int index=-1;
@@ -234,6 +248,12 @@ public class BasicGraphicsUtils
      * bounds of <code>text</code> (including &lt; 0), nothing will be
      * underlined.
      *
+     * <p>
+     *  在位置(<code> x </code>,<code> y </code>)中使用图形<code> g </code>绘制一个字符串,就像<code> g.drawString </code>文本中索
+     * 引<code> underlinedIndex </code>处的字符将带下划线。
+     * 如果<code> index </code>超出<code> text </code>(包括<0)的界限,则不会加下划线。
+     * 
+     * 
      * @param g Graphics to draw with
      * @param text String to draw
      * @param underlinedIndex Index of character in text to underline
@@ -288,6 +308,9 @@ public class BasicGraphicsUtils
 
         /* The preferred size of the button is the size of
          * the text and icon rectangles plus the buttons insets.
+         * <p>
+         *  文本和图标矩形加上按钮插图。
+         * 
          */
 
         Rectangle r = iconR.union(textR);
@@ -302,6 +325,8 @@ public class BasicGraphicsUtils
     /*
      * Convenience function for determining ComponentOrientation.  Helps us
      * avoid having Munge directives throughout the code.
+     * <p>
+     *  用于确定ComponentOrientation的便捷功能。帮助我们避免在整个代码中有Munge指令。
      */
     static boolean isLeftToRight( Component c ) {
         return c.getComponentOrientation().isLeftToRight();

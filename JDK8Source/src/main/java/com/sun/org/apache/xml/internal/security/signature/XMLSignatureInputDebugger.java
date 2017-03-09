@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.signature;
 
@@ -40,6 +49,9 @@ import org.w3c.dom.ProcessingInstruction;
 
 /**
  * Class XMLSignatureInputDebugger
+ * <p>
+ *  类XMLSignatureInputDebugger
+ * 
  */
 public class XMLSignatureInputDebugger {
 
@@ -117,6 +129,10 @@ public class XMLSignatureInputDebugger {
     /**
      * Constructor XMLSignatureInputDebugger
      *
+     * <p>
+     *  构造函数XMLSignatureInputDebugger
+     * 
+     * 
      * @param xmlSignatureInput the signature to pretty print
      */
     public XMLSignatureInputDebugger(XMLSignatureInput xmlSignatureInput) {
@@ -130,6 +146,10 @@ public class XMLSignatureInputDebugger {
     /**
      * Constructor XMLSignatureInputDebugger
      *
+     * <p>
+     *  构造函数XMLSignatureInputDebugger
+     * 
+     * 
      * @param xmlSignatureInput the signatur to pretty print
      * @param inclusiveNamespace
      */
@@ -144,6 +164,10 @@ public class XMLSignatureInputDebugger {
     /**
      * Method getHTMLRepresentation
      *
+     * <p>
+     *  方法getHTMLRepresentation
+     * 
+     * 
      * @return The HTML Representation.
      * @throws XMLSignatureException
      */
@@ -176,6 +200,10 @@ public class XMLSignatureInputDebugger {
     /**
      * Method canonicalizeXPathNodeSet
      *
+     * <p>
+     *  方法canonicalizeXPathNodeSet
+     * 
+     * 
      * @param currentNode
      * @throws XMLSignatureException
      * @throws IOException
@@ -267,6 +295,10 @@ public class XMLSignatureInputDebugger {
                  * sequence of mixed text and CDATA nodes. But we must output
                  * them all, so we must search:
                  *
+                 * <p>
+                 *  XPath数据模型允许只选择混合文本和CDATA节点序列中的第一个。但是我们必须输出它们,所以我们必须搜索：
+                 * 
+                 * 
                  * @see http://nagoya.apache.org/bugzilla/show_bug.cgi?id=6329
                  */
                 this.outputTextToWriter(nextSibling.getNodeValue());
@@ -368,6 +400,10 @@ public class XMLSignatureInputDebugger {
      * Checks whether a Comment or ProcessingInstruction is before or after the
      * document element. This is needed for prepending or appending "\n"s.
      *
+     * <p>
+     *  检查注释或ProcessingInstruction是在文档元素之前还是之后。这是预先添加或附加"\ n"所需的。
+     * 
+     * 
      * @param currentNode
      *            comment or pi to check
      * @return NODE_BEFORE_DOCUMENT_ELEMENT,
@@ -421,6 +457,17 @@ public class XMLSignatureInputDebugger {
      * is represented by the character reference <CODE>&amp;#xD;</CODE>)</LI>
      * </UL>
      *
+     * <p>
+     *  规范化{@link属性}值
+     * 
+     *  通过替换来修改节点的字符串值
+     * <UL>
+     * <CODE>&amp; lt; </CODE> </LI>所有开头括号(<)的所有&符号(& <LI>所有带有<CODE>&amp; quot; </CODE> </LI> <LI>的引号标记字符以及空
+     * 格字符<CODE>#x9 </CODE>,#xA和#xD, 。
+     * 字符引用以大写十六进制写入,没有前导零(例如,<CODE> #xD </CODE>由字符引用<CODE>&amp; #xD; </CODE>表示)</。
+     * </UL>
+     * 
+     * 
      * @param name
      * @param value
      * @throws IOException
@@ -473,6 +520,8 @@ public class XMLSignatureInputDebugger {
     /**
      * Normalizes a {@link org.w3c.dom.Comment} value
      *
+     * <p>
+     * 
      * @param currentPI
      * @throws IOException
      */
@@ -539,6 +588,10 @@ public class XMLSignatureInputDebugger {
     /**
      * Method outputCommentToWriter
      *
+     * <p>
+     *  值规范化{@link org.w3c.dom.Comment}值
+     * 
+     * 
      * @param currentComment
      * @throws IOException
      */
@@ -582,6 +635,10 @@ public class XMLSignatureInputDebugger {
     /**
      * Method outputTextToWriter
      *
+     * <p>
+     *  方法outputCommentToWriter
+     * 
+     * 
      * @param text
      * @throws IOException
      */

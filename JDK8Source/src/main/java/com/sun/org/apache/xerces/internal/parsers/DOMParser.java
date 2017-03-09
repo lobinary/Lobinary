@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -55,6 +65,10 @@ import org.xml.sax.helpers.LocatorImpl;
  * parser with a document scanner, a dtd scanner, and a validator, as
  * well as a grammar pool.
  *
+ * <p>
+ *  这是主要的Xerces DOM解析器类。它使用带有文档扫描器,dtd扫描器和验证器的抽象DOM解析器,以及语法池。
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Andy Clark, IBM
  *
@@ -116,6 +130,9 @@ public class DOMParser
 
     /**
      * Constructs a DOM parser using the specified parser configuration.
+     * <p>
+     *  使用指定的解析器配置构造DOM解析器。
+     * 
      */
     public DOMParser(XMLParserConfiguration config) {
         super(config);
@@ -123,6 +140,9 @@ public class DOMParser
 
     /**
      * Constructs a DOM parser using the dtd/xml schema parser configuration.
+     * <p>
+     *  使用dtd / xml模式解析器配置构造DOM解析器。
+     * 
      */
     public DOMParser() {
         this(null, null);
@@ -130,6 +150,9 @@ public class DOMParser
 
     /**
      * Constructs a DOM parser using the specified symbol table.
+     * <p>
+     *  使用指定的符号表构造DOM解析器。
+     * 
      */
     public DOMParser(SymbolTable symbolTable) {
         this(symbolTable, null);
@@ -139,6 +162,9 @@ public class DOMParser
     /**
      * Constructs a DOM parser using the specified symbol table and
      * grammar pool.
+     * <p>
+     *  使用指定的符号表和语法池构造DOM解析器。
+     * 
      */
     public DOMParser(SymbolTable symbolTable, XMLGrammarPool grammarPool) {
         super(new XIncludeAwareParserConfiguration());
@@ -168,6 +194,15 @@ public class DOMParser
      *     parse(new InputSource(systemId));
      * </pre>
      *
+     * <p>
+     *  解析由给定系统标识符指定的输入源。
+     * <p>
+     *  此方法等效于以下操作：
+     * <pre>
+     *  parse(new InputSource(systemId));
+     * </pre>
+     * 
+     * 
      * @param systemId The system identifier (URI).
      *
      * @exception org.xml.sax.SAXException Throws exception on SAX error.
@@ -223,6 +258,10 @@ public class DOMParser
     /**
      * parse
      *
+     * <p>
+     *  解析
+     * 
+     * 
      * @param inputSource
      *
      * @exception org.xml.sax.SAXException
@@ -285,6 +324,10 @@ public class DOMParser
      * Sets the resolver used to resolve external entities. The EntityResolver
      * interface supports resolution of public and system identifiers.
      *
+     * <p>
+     *  设置用于解析外部实体的解析器。 EntityResolver接口支持公共和系统标识符的解析。
+     * 
+     * 
      * @param resolver The new entity resolver. Passing a null value will
      *                 uninstall the currently installed resolver.
      */
@@ -322,6 +365,10 @@ public class DOMParser
     /**
      * Return the current entity resolver.
      *
+     * <p>
+     *  返回当前实体解析器。
+     * 
+     * 
      * @return The current entity resolver, or null if none
      *         has been registered.
      * @see #setEntityResolver
@@ -363,6 +410,14 @@ public class DOMParser
      * middle of a parse, and the SAX parser must begin using the new
      * handler immediately.</p>
      *
+     * <p>
+     * 允许应用程序注册错误事件处理程序。
+     * 
+     *  <p>如果应用程序未注册错误处理程序,则SAX解析器报告的所有错误事件将被忽略;然而,正常处理可能不会继续。强烈建议所有SAX应用程序实现错误处理程序,以避免意外的错误。</p>
+     * 
+     *  <p>应用程序可能在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。</p>
+     * 
+     * 
      * @param errorHandler The error handler.
      * @exception java.lang.NullPointerException If the handler
      *            argument is null.
@@ -390,6 +445,10 @@ public class DOMParser
     /**
      * Return the current error handler.
      *
+     * <p>
+     *  返回当前错误处理程序。
+     * 
+     * 
      * @return The current error handler, or null if none
      *         has been registered.
      * @see #setErrorHandler
@@ -417,6 +476,10 @@ public class DOMParser
      * might not recognize the feature, and if it does recognize
      * it, it might not be able to fulfill the request.
      *
+     * <p>
+     *  设置SAX2解析器中任何功能的状态。解析器可能无法识别该功能,如果它识别它,它可能无法满足该请求。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      * @param state The requested state of the feature (true or false).
      *
@@ -472,6 +535,12 @@ public class DOMParser
      * Query the current state of any feature in a SAX2 parser.  The
      * parser might not recognize the feature.
      *
+     * <p>
+     *  查询要素的状态。
+     * 
+     *  查询SAX2解析器中任何功能的当前状态。解析器可能无法识别该功能。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature
      *                  being set.
      * @return The current state of the feature.
@@ -520,6 +589,10 @@ public class DOMParser
      * might not recognize the property, and if it does recognize
      * it, it might not support the requested value.
      *
+     * <p>
+     *  设置SAX2解析器中任何属性的值。解析器可能无法识别属性,并且如果它识别它,它可能不支持请求的值。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      * @param value The value to which the property is being set.
@@ -535,6 +608,9 @@ public class DOMParser
         /**
          * It's possible for users to set a security manager through the interface.
          * If it's the old SecurityManager, convert it to the new XMLSecurityManager
+         * <p>
+         *  用户可以通过界面设置安全管理器。如果是旧的SecurityManager,请将其转换为新的XMLSecurityManager
+         * 
          */
         if (propertyId.equals(Constants.SECURITY_MANAGER)) {
             securityManager = XMLSecurityManager.convert(value, securityManager);
@@ -567,6 +643,9 @@ public class DOMParser
              * this is a direct call to this parser, not a subclass since
              * internally the support of this property is done through
              * XMLSecurityPropertyManager
+             * <p>
+             *  这是一个直接调用这个解析器,而不是一个子类,因为在内部支持这个属性是通过XMLSecurityPropertyManager
+             * 
              */
             securityPropertyManager.setValue(index, XMLSecurityPropertyManager.State.APIPROPERTY, (String)value);
         } else {
@@ -605,6 +684,12 @@ public class DOMParser
      * Return the current value of a property in a SAX2 parser.
      * The parser might not recognize the property.
      *
+     * <p>
+     *  查询属性的值。
+     * 
+     *  返回SAX2解析器中属性的当前值。解析器可能无法识别属性。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      * @return The current value of the property.
@@ -659,6 +744,7 @@ public class DOMParser
 
     /**
      * Returns this parser's XMLParserConfiguration.
+     * <p>
      */
     public XMLParserConfiguration getXMLParserConfiguration() {
         return fConfiguration;

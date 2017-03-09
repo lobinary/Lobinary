@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import java.util.Objects;
  * this class are immutable.  Subclasses may be mutable but this is
  * not recommended.
  *
+ * <p>
+ *  描述公开用于管理的MBean属性。这个类的实例是不可变的。子类可以是可变的,但这不是推荐。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -54,6 +59,11 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
            this class with JMX 1.1 and jmx.serial.form=1.0.  However,
            the serialization without that property is the same, and
            that is the only form required by JMX 1.2.
+        /* <p>
+        /*  在JMX 1.0和JMX 1.1之间,即使JMX 1.1没有此类的兼容性代码。
+        /* 因此,这个类与JMX 1.2和jmx.serial.form = 1.0产生的序列化与此类与JMX 1.1和jmx.serial.form = 1.0生成的序列化不同。
+        /* 但是,没有该属性的序列化是相同的,这是JMX 1.2所需的唯一形式。
+        /* 
         */
         long uid = 8644704819898565848L;
         try {
@@ -71,21 +81,29 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
         new MBeanAttributeInfo[0];
 
     /**
+    /* <p>
+    /* 
      * @serial The actual attribute type.
      */
     private final String attributeType;
 
     /**
+    /* <p>
+    /* 
      * @serial The attribute write right.
      */
     private final boolean isWrite;
 
     /**
+    /* <p>
+    /* 
      * @serial The attribute read right.
      */
     private final boolean isRead;
 
     /**
+    /* <p>
+    /* 
      * @serial Indicates if this method is a "is"
      */
     private final boolean is;
@@ -94,6 +112,10 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Constructs an <CODE>MBeanAttributeInfo</CODE> object.
      *
+     * <p>
+     *  构造一个<CODE> MBeanAttributeInfo </CODE>对象。
+     * 
+     * 
      * @param name The name of the attribute.
      * @param type The type or class name of the attribute.
      * @param description A human readable description of the attribute.
@@ -120,6 +142,10 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Constructs an <CODE>MBeanAttributeInfo</CODE> object.
      *
+     * <p>
+     *  构造一个<CODE> MBeanAttributeInfo </CODE>对象。
+     * 
+     * 
      * @param name The name of the attribute.
      * @param type The type or class name of the attribute.
      * @param description A human readable description of the attribute.
@@ -168,6 +194,11 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
      * annotations on the {@code Method} objects that contain the
      * {@link DescriptorKey} meta-annotation.
      *
+     * <p>
+     *  <p>此构造函数使用简单属性的名称,以及用于读取和写入属性的方法对象。
+     * 构造对象的{@link描述符}将包含由包含{@link DescriptorKey}元注释的{@code Method}对象上的任何注释贡献的字段。
+     * 
+     * 
      * @param name The programmatic name of the attribute.
      * @param description A human readable description of the attribute.
      * @param getter The method used for reading the attribute value.
@@ -200,6 +231,12 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
      *
      * <p>Since this class is immutable, cloning is chiefly of
      * interest to subclasses.</p>
+     * <p>
+     *  <p>返回此实例的浅克隆。通过简单调用<tt> super.clone()</tt>获得克隆,从而调用由<tt> Object.clone()</tt>实现的默认本机浅克隆机制。
+     * 不会对任何内部字段进行更深层次的克隆。</p>。
+     * 
+     *  <p>由于这个类是不可变的,克隆主要是子类的兴趣。</p>
+     * 
      */
      public Object clone () {
          try {
@@ -213,6 +250,10 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Returns the class name of the attribute.
      *
+     * <p>
+     *  返回属性的类名。
+     * 
+     * 
      * @return the class name.
      */
     public String getType() {
@@ -222,6 +263,10 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Whether the value of the attribute can be read.
      *
+     * <p>
+     * 是否可以读取属性的值。
+     * 
+     * 
      * @return True if the attribute can be read, false otherwise.
      */
     public boolean isReadable() {
@@ -231,6 +276,10 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Whether new values can be written to the attribute.
      *
+     * <p>
+     *  是否可以将新值写入属性。
+     * 
+     * 
      * @return True if the attribute can be written to, false otherwise.
      */
     public boolean isWritable() {
@@ -240,6 +289,10 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Indicates if this attribute has an "is" getter.
      *
+     * <p>
+     *  指示此属性是否具有"is"getter。
+     * 
+     * 
      * @return true if this attribute has an "is" getter.
      */
     public boolean isIs() {
@@ -272,6 +325,10 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Compare this MBeanAttributeInfo to another.
      *
+     * <p>
+     *  将此MBeanAttributeInfo与另一个比较。
+     * 
+     * 
      * @param o the object to compare to.
      *
      * @return true if and only if <code>o</code> is an MBeanAttributeInfo such
@@ -300,6 +357,10 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
        names or types.  The penalty we pay when this assumption is
        wrong should be less than the penalty we would pay if it were
        right and we needlessly hashed in the description and parameter
+    /* <p>
+    /*  如果两个操作不同,它们可能会有不同的名称或类型。当这个假设错误时,我们所支付的惩罚应该小于我们在正确的情况下支付的惩罚,并且我们不必要地在描述和参数中散列
+    /* 
+    /* 
        array.  */
     public int hashCode() {
         return Objects.hash(getName(), getType());
@@ -314,6 +375,8 @@ public class MBeanAttributeInfo extends MBeanFeatureInfo implements Cloneable {
 
     /**
      * Finds the type of the attribute.
+     * <p>
+     *  查找属性的类型。
      */
     private static String attributeType(Method getter, Method setter)
             throws IntrospectionException {

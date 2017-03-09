@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import javax.swing.JPasswordField;
  * in the associated component (if it can narrow the
  * component to a JPasswordField).
  *
+ * <p>
+ *  实现适合在JPasswordField UI实现中使用的视图。这基本上是一个字段ui,它的内容作为在关联组件中指定的回显字符(如果它可以将组件缩小到一个JPasswordField)。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     View
  */
@@ -43,6 +48,10 @@ public class PasswordView extends FieldView {
     /**
      * Constructs a new view wrapped on an element.
      *
+     * <p>
+     *  构造包裹在元素上的新视图。
+     * 
+     * 
      * @param elem the element
      */
     public PasswordView(Element elem) {
@@ -54,6 +63,10 @@ public class PasswordView extends FieldView {
      * text.  This sets the foreground color and echos the characters
      * using the value returned by getEchoChar().
      *
+     * <p>
+     *  将模型中的给定范围渲染为正常未选择的文本。这将设置前景颜色并使用getEchoChar()返回的值回显字符。
+     * 
+     * 
      * @param g the graphics context
      * @param x the starting X coordinate &gt;= 0
      * @param y the starting Y coordinate &gt;= 0
@@ -93,6 +106,10 @@ public class PasswordView extends FieldView {
      * the selected background.  Uses the result of getEchoChar() to
      * display the characters.
      *
+     * <p>
+     *  将模型中的给定范围渲染为选定文本。这被实现来渲染在托管组件中指定的颜色的文本。它假定荧光笔将呈现所选择的背景。使用getEchoChar()的结果显示字符。
+     * 
+     * 
      * @param g the graphics context
      * @param x the starting X coordinate &gt;= 0
      * @param y the starting Y coordinate &gt;= 0
@@ -125,6 +142,10 @@ public class PasswordView extends FieldView {
      * object is set to the appropriate foreground color for selected
      * or unselected text.
      *
+     * <p>
+     *  呈现回显字符,或用于显示密码字符的任何图形。 Graphics对象中的颜色设置为所选或未选择的文本的相应前景颜色。
+     * 
+     * 
      * @param g the graphics context
      * @param x the starting X coordinate &gt;= 0
      * @param y the starting Y coordinate &gt;= 0
@@ -142,6 +163,10 @@ public class PasswordView extends FieldView {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param a the allocated region to render into
      * @return the bounding box of the given position
@@ -172,6 +197,10 @@ public class PasswordView extends FieldView {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param fx the X coordinate &gt;= 0.0f
      * @param fy the Y coordinate &gt;= 0.0f
      * @param a the allocated region to render into
@@ -209,6 +238,9 @@ public class PasswordView extends FieldView {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return   the span the view would like to be rendered into &gt;= 0.
      *           Typically the view is told to render into the span

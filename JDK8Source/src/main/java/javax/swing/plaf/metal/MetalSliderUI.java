@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,13 @@ import javax.swing.plaf.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  SliderUI的Java L&amp; F实现。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Tom Santos
  */
 public class MetalSliderUI extends BasicSliderUI {
@@ -66,6 +74,10 @@ public class MetalSliderUI extends BasicSliderUI {
     * A default horizontal thumb <code>Icon</code>. This field might not be
     * used. To change the <code>Icon</code> used by this delegate directly set it
     * using the <code>Slider.horizontalThumbIcon</code> UIManager property.
+    * <p>
+    *  默认的横向缩略图<code> Icon </code>。可能不使用此字段。
+    * 要更改此代理使用的<code>图标</code>,请使用<code> Slider.horizo​​ntalThumbIcon </code> UIManager属性直接设置。
+    * 
     */
     protected static Icon horizThumbIcon;
 
@@ -73,6 +85,10 @@ public class MetalSliderUI extends BasicSliderUI {
     * A default vertical thumb <code>Icon</code>. This field might not be
     * used. To change the <code>Icon</code> used by this delegate directly set it
     * using the <code>Slider.verticalThumbIcon</code> UIManager property.
+    * <p>
+    *  默认垂直缩略图<code>图标</code>。可能不使用此字段。
+    * 要更改此代理使用的<code>图标</code>,请使用<code> Slider.verticalThumbIcon </code> UIManager属性直接设置。
+    * 
     */
     protected static Icon vertThumbIcon;
 
@@ -167,6 +183,9 @@ public class MetalSliderUI extends BasicSliderUI {
 
     /**
      * Returns a rectangle enclosing the track that will be painted.
+     * <p>
+     *  返回包围将要绘制的轨道的矩形。
+     * 
      */
     private Rectangle getPaintTrackRect() {
         int trackLeft = 0, trackRight, trackTop = 0, trackBottom;
@@ -476,6 +495,9 @@ public class MetalSliderUI extends BasicSliderUI {
      * Gets the height of the tick area for horizontal sliders and the width of the
      * tick area for vertical sliders.  BasicSliderUI uses the returned value to
      * determine the tick area rectangle.
+     * <p>
+     *  获取水平滑块的刻度区域的高度和垂直滑块的刻度区域的宽度。 BasicSliderUI使用返回的值来确定刻度区矩形。
+     * 
      */
     public int getTickLength() {
         return slider.getOrientation() == JSlider.HORIZONTAL ? safeLength + TICK_BUFFER + 1 :
@@ -484,6 +506,9 @@ public class MetalSliderUI extends BasicSliderUI {
 
     /**
      * Returns the shorter dimension of the track.
+     * <p>
+     *  返回轨道的较短尺寸。
+     * 
      */
     protected int getTrackWidth() {
         // This strange calculation is here to keep the
@@ -503,6 +528,9 @@ public class MetalSliderUI extends BasicSliderUI {
     /**
      * Returns the longer dimension of the slide bar.  (The slide bar is only the
      * part that runs directly under the thumb)
+     * <p>
+     *  返回滑动条的较长尺寸。 (滑动条只是直接在拇指下面运行的部分)
+     * 
      */
     protected int getTrackLength() {
         if ( slider.getOrientation() == JSlider.HORIZONTAL ) {
@@ -513,6 +541,8 @@ public class MetalSliderUI extends BasicSliderUI {
 
     /**
      * Returns the amount that the thumb goes past the slide bar.
+     * <p>
+     *  返回拇指经过滑动条的量。
      */
     protected int getThumbOverhang() {
         return (int)(getThumbSize().getHeight()-getTrackWidth())/2;

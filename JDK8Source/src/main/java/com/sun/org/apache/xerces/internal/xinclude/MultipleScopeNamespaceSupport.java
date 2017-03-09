@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2003-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xerces.internal.xinclude;
 
@@ -35,6 +45,12 @@ import com.sun.org.apache.xerces.internal.xni.NamespaceContext;
  * searched for in the current context, then the ancestors of the current context,
  * up to the beginning of the current scope.  Other scopes are not searched.
  *
+ * <p>
+ *  这个NamespaceContext的实现能够维护命名空间/前缀绑定的多个范围。这在元素不总是适合于继承其祖先的命名空间绑定(例如XInclude中包含的元素)的情况下非常有用。
+ * 
+ *  当搜索URI以匹配前缀或匹配URI的前缀时,在当前上下文中搜索URI,然后在当前上下文的祖先中搜索,直到当前范围的开始。不搜索其他范围。
+ * 
+ * 
  * @author Peter McCracken, IBM
  *
  */
@@ -45,6 +61,7 @@ public class MultipleScopeNamespaceSupport extends NamespaceSupport {
 
     /**
      *
+     * <p>
      */
     public MultipleScopeNamespaceSupport() {
         super();
@@ -53,6 +70,8 @@ public class MultipleScopeNamespaceSupport extends NamespaceSupport {
     }
 
     /**
+    /* <p>
+    /* 
      * @param context
      */
     public MultipleScopeNamespaceSupport(NamespaceContext context) {
@@ -62,6 +81,8 @@ public class MultipleScopeNamespaceSupport extends NamespaceSupport {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#getAllPrefixes()
      */
     public Enumeration getAllPrefixes() {
@@ -100,6 +121,8 @@ public class MultipleScopeNamespaceSupport extends NamespaceSupport {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#getPrefix(java.lang.String)
      */
     public String getPrefix(String uri) {
@@ -107,6 +130,8 @@ public class MultipleScopeNamespaceSupport extends NamespaceSupport {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.NamespaceContext#getURI(java.lang.String)
      */
     public String getURI(String prefix) {
@@ -165,6 +190,9 @@ public class MultipleScopeNamespaceSupport extends NamespaceSupport {
     /**
      * Only resets the current scope -- all namespaces defined in lower scopes
      * remain valid after a call to reset.
+     * <p>
+     *  仅重置当前作用域 - 在调用复位后,在较低作用域中定义的所有命名空间仍保持有效。
+     * 
      */
     public void reset() {
         fCurrentContext = fScope[fCurrentScope];
@@ -174,6 +202,9 @@ public class MultipleScopeNamespaceSupport extends NamespaceSupport {
     /**
      * Begins a new scope.  None of the previous namespace bindings will be used,
      * until the new scope is popped with popScope()
+     * <p>
+     *  开始一个新的范围。不会使用先前的命名空间绑定,直到新作用域弹出popScope()
+     * 
      */
     public void pushScope() {
         if (fCurrentScope + 1 == fScope.length) {
@@ -188,6 +219,8 @@ public class MultipleScopeNamespaceSupport extends NamespaceSupport {
     /**
      * Pops the current scope.  The namespace bindings from the new current scope
      * are then used for searching for namespaces and prefixes.
+     * <p>
+     * 弹出当前作用域。然后,使用来自新当前作用域的命名空间绑定来搜索命名空间和前缀。
      */
     public void popScope() {
         fCurrentContext = fScope[fCurrentScope--];

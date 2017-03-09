@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,11 @@ package java.io;
  * <code>File</code>, and by the Abstract Window Toolkit's file
  * dialog component.
  *
+ * <p>
+ *  实现此接口的类的实例用于过滤文件名。
+ * 这些实例用于过滤类<code> File </code>的<code> list </code>方法中的目录列表,以及Abstract Window Toolkit的文件对话框组件。
+ * 
+ * 
  * @author  Arthur van Hoff
  * @author  Jonathan Payne
  * @see     java.awt.FileDialog#setFilenameFilter(java.io.FilenameFilter)
@@ -44,6 +50,8 @@ public interface FilenameFilter {
     /**
      * Tests if a specified file should be included in a file list.
      *
+     * <p>
+     * 
      * @param   dir    the directory in which the file was found.
      * @param   name   the name of the file.
      * @return  <code>true</code> if and only if the name should be

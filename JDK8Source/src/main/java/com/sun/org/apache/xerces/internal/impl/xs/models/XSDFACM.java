@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.models;
@@ -44,6 +54,12 @@ import java.util.HashMap;
  *
  * @xerces.internal
  *
+ * <p>
+ *  DFAContentModel是执行所有非平凡元素内容验证的XSCMValidator的实现。此类执行从正则表达式到DFA的转换,然后在其验证算法中使用它。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neil Graham, IBM
  * @version $Id: XSDFACM.java,v 1.9 2010/08/06 23:49:43 joehw Exp $
  */
@@ -72,17 +88,27 @@ public class XSDFACM
      * of the built DFA information that must be kept around to do the
      * actual validation.  Note tat since either XSElementDecl or XSParticleDecl object
      * can live here, we've got to use an Object.
+     * <p>
+     *  这是唯一输入符号元素到每个状态的每输入符号转换表条目的索引的映射。这是已构建的DFA信息的一部分,必须保留这些信息才能进行实际验证。
+     * 注意,因为XSElementDecl或XSParticleDecl对象可以存在这里,我们必须使用一个对象。
+     * 
      */
     private Object fElemMap[] = null;
 
     /**
      * This is a map of whether the element map contains information
      * related to ANY models.
+     * <p>
+     *  这是元素映射是否包含与ANY模型相关的信息的映射。
+     * 
      */
     private int fElemMapType[] = null;
 
     /**
      * id of the unique input symbol
+     * <p>
+     *  唯一输入符号的id
+     * 
      */
     private int fElemMapId[] = null;
 
@@ -93,6 +119,9 @@ public class XSDFACM
      * This is an array of booleans, one per state (there are
      * fTransTableSize states in the DFA) that indicates whether that
      * state is a final state.
+     * <p>
+     * 这是一个布尔数组,每个状态一个(在DFA中有fTransTableSize状态),指示该状态是否为最终状态。
+     * 
      */
     private boolean fFinalStateFlags[] = null;
 
@@ -100,6 +129,9 @@ public class XSDFACM
      * The list of follow positions for each NFA position (i.e. for each
      * non-epsilon leaf node.) This is only used during the building of
      * the DFA, and is let go afterwards.
+     * <p>
+     *  每个NFA位置的跟随位置列表(即,对于每个非epsilon叶节点)。这仅在DFA的构建期间使用,并且随后放行。
+     * 
      */
     private CMStateSet fFollowList[] = null;
 
@@ -108,18 +140,27 @@ public class XSDFACM
      * only non-null during the building of the DFA (just so that it
      * does not have to be passed all around.) Once the DFA is built,
      * this is no longer required so its nulled out.
+     * <p>
+     *  这是我们的中间表示的头节点。在DFA构建期间,它只是非null(只是为了不必将其全部传递)。构建DFA后,就不再需要这样做,因此将其置零。
+     * 
      */
     private CMNode fHeadNode = null;
 
     /**
      * The count of leaf nodes. This is an important number that set some
      * limits on the sizes of data structures in the DFA process.
+     * <p>
+     *  叶节点的计数。这是一个重要的数字,对DFA过程中的数据结构的大小设置了一些限制。
+     * 
      */
     private int fLeafCount = 0;
 
     /**
      * An array of non-epsilon leaf nodes, which is used during the DFA
      * build operation, then dropped.
+     * <p>
+     *  在DFA构建操作期间使用的非epsilon叶节点的数组,然后删除。
+     * 
      */
     private XSCMLeaf fLeafList[] = null;
 
@@ -137,11 +178,20 @@ public class XSDFACM
      * <p>
      * The fElemMap array handles mapping from element indexes to
      * positions in the second dimension of the transition table.
+     * <p>
+     *  这是转换表,这是所有努力的主要副产品。它是一个int数组的数组。第一个维度是我们在DFA中结束的状态数。第二个维度是内容模型中的唯一元素的数量(fElemMapSize)。
+     * 第二维中的每个条目指示给定第一维的开始状态的输入的新状态。
+     * <p>
+     *  fElemMap数组处理从元素索引到转换表的第二维中的位置的映射。
+     * 
      */
     private int fTransTable[][] = null;
     /**
      * Array containing occurence information for looping states
      * which use counters to check minOccurs/maxOccurs.
+     * <p>
+     *  包含用于循环状态的出现信息的数组,其使用计数器来检查minOccurs / maxOccurs。
+     * 
      */
     private Occurence [] fCountingStates = null;
     static final class Occurence {
@@ -164,6 +214,9 @@ public class XSDFACM
     /**
      * The number of valid entries in the transition table, and in the other
      * related tables such as fFinalStateFlags.
+     * <p>
+     * 转换表中的有效条目数,以及其他相关表(如fFinalStateFlags)中的有效条目数。
+     * 
      */
     private int fTransTableSize = 0;
 
@@ -173,6 +226,9 @@ public class XSDFACM
      * to count the a's to later check against n and m. Counter
      * set to -1 if element (or wildcard) not optimized by
      * constant space algorithm.
+     * <p>
+     *  用于a {n,m}形式的所有for元素(或通配符)的计数器数组,其中n> 1且m <=无限。用于计数a,以便以后检查n和m。如果元素(或通配符)未通过常量空间算法优化,则计数器设置为-1。
+     * 
      */
     private int fElemMapCounter[];
 
@@ -181,6 +237,9 @@ public class XSDFACM
      * of the form a{n,m} where n > 1 and m <= unbounded. This array
      * stores the n's for those elements (or wildcards) for which
      * the constant space algorithm applies (or -1 otherwise).
+     * <p>
+     *  a {n,m}形式的所有for元素(或通配符)的下界数组,其中n> 1和m <=无界。此数组存储常量空间算法适用的那些元素(或通配符)的n(否则为-1)。
+     * 
      */
     private int fElemMapCounterLowerBound[];
 
@@ -190,6 +249,9 @@ public class XSDFACM
      * stores the n's for those elements (or wildcards) for which
      * the constant space algorithm applies, or -1 if algorithm does
      * not apply or m = unbounded.
+     * <p>
+     *  a {n,m}形式的所有for元素(或通配符)的上界数组,其中n> 1且m <=无界。此数组存储常量空间算法适用的那些元素(或通配符)的n,如果算法不适用或m =无界,则存储-1。
+     * 
      */
     private int fElemMapCounterUpperBound[];   // -1 if no upper bound
 
@@ -202,6 +264,10 @@ public class XSDFACM
     /**
      * Constructs a DFA content model.
      *
+     * <p>
+     *  构造DFA内容模型。
+     * 
+     * 
      * @param syntaxTree    The syntax tree of the content model.
      * @param leafCount     The number of leaves.
      *
@@ -250,6 +316,10 @@ public class XSDFACM
     /**
      * check whether the given state is one of the final states
      *
+     * <p>
+     *  检查给定状态是否是最终状态之一
+     * 
+     * 
      * @param state       the state to check
      *
      * @return whether it's a final state
@@ -262,6 +332,10 @@ public class XSDFACM
     /**
      * one transition only
      *
+     * <p>
+     *  仅一个转换
+     * 
+     * 
      * @param curElem The current element's QName
      * @param state stack to store the previous state
      * @param subGroupHandler the substitution group handler
@@ -491,6 +565,10 @@ public class XSDFACM
     /**
      * Builds the internal DFA transition table from the given syntax tree.
      *
+     * <p>
+     *  根据给定的语法树构建内部DFA转换表。
+     * 
+     * 
      * @param syntaxTree The syntax tree.
      *
      * @exception RuntimeException Thrown if DFA cannot be built.
@@ -535,6 +613,13 @@ public class XSDFACM
          *
          * The modification drastically reduces computation time of
          * "(a, (b, a+, (c, (b, a+)+, a+, (d,  (c, (b, a+)+, a+)+, (b, a+)+, a+)+)+)+)+"
+         * <p>
+         *  使用以下规则。可空(x +)：= nullable(x),first(x +)：= first(x),last(x +)： x),last(x?)：= last(x)
+         * 
+         *  与x *相同的计算结果应用于x +
+         * 
+         *  修改大大减少了"(a,(b,a +),a +,(d,(c,(b,a +)+,a +)+,(b,a +) +,a +)+)+)+)+"
+         * 
          */
 
         //
@@ -655,6 +740,10 @@ public class XSDFACM
          * Optimization(Jan, 2001); We sort fLeafList according to
          * elemIndex which is *uniquely* associated to each leaf.
          * We are *assuming* that each element appears in at least one leaf.
+         * <p>
+         * 优化(2001年1月);我们根据elemIndex对fLeafList进行排序,这是与每个叶子唯一关联的。我们*假设*每个元素出现在至少一个叶子。
+         * 
+         * 
          **/
 
         int[] fLeafSorter = new int[fLeafCount + fElemMapSize];
@@ -717,6 +806,9 @@ public class XSDFACM
 
         /* Optimization(Jan, 2001); This is faster for
          * a large content model such as, "(t001+|t002+|.... |t500+)".
+         * <p>
+         *  诸如"(t001 + | t002 + | .... | t500 +)"的大内容模型。
+         * 
          */
 
         HashMap stateTable = new HashMap();
@@ -885,6 +977,10 @@ public class XSDFACM
     /**
      * Calculates the follow list of the current node.
      *
+     * <p>
+     *  计算当前节点的跟随列表。
+     * 
+     * 
      * @param nodeCur The curent node.
      *
      * @exception RuntimeException Thrown if follow list cannot be calculated.
@@ -952,6 +1048,10 @@ public class XSDFACM
     /**
      * Dumps the tree of the current node to standard output.
      *
+     * <p>
+     *  将当前节点的树转储到标准输出。
+     * 
+     * 
      * @param nodeCur The current node.
      * @param level   The maximum levels to output.
      *
@@ -1040,6 +1140,9 @@ public class XSDFACM
      * -1 is used to represent bad transitions in the transition table
      * entry for each state. So each entry is initialized to an all -1
      * array. This method creates a new entry and initializes it.
+     * <p>
+     *  -1用于表示每个状态的转换表条目中的错误转换。因此每个条目都被初始化为一个全-1数组。此方法创建一个新条目并对其进行初始化。
+     * 
      */
     private int[] makeDefStateList()
     {
@@ -1089,6 +1192,10 @@ public class XSDFACM
     /**
      * check whether this content violates UPA constraint.
      *
+     * <p>
+     *  检查此内容是否违反UPA约束。
+     * 
+     * 
      * @param subGroupHandler the substitution group handler
      * @return true if this content model contains other or list wildcard
      */
@@ -1165,6 +1272,10 @@ public class XSDFACM
      * works if the state is in error, in which case it returns what should
      * have been seen.
      *
+     * <p>
+     *  检查哪些元素在此时显示有效。如果状态是错误的,这种方法也工作,在这种情况下,它返回应该已经看到的。
+     * 
+     * 
      * @param state  the current state
      * @return       a Vector whose entries are instances of
      *               either XSWildcardDecl or XSElementDecl.
@@ -1215,6 +1326,9 @@ public class XSDFACM
      * to be passed when formatting error message. Each parameter
      * is associated with the error code that preceeds it in
      * the list.
+     * <p>
+     *  由恒定空间算法用于{n,m},对于n> 1和m <=无界。如果在将{n,m}包含到a *(或a +)中以检查n和m边界之后,仲裁模型的验证成功,则由校验器调用。
+     * 如果边界验证成功,则返回<code> null </code>。如果没有,则返回带有错误信息的字符串列表。返回的列表中的偶数条目都是错误代码(用于查找属性),奇数条目是格式化错误消息时要传递的参数。
      */
     public ArrayList checkMinMaxBounds() {
         ArrayList result = null;

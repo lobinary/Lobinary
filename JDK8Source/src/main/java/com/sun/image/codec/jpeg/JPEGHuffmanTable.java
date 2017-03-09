@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -12,6 +13,15 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ * COPYRIGHT(c)1997-1998 Eastman Kodak公司。
+ *  *** *根据United *** *国家法典第17章的未发表的作品。版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ *  *** *根据United *** *国家法典第17章的未发表的作品。版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package com.sun.image.codec.jpeg;
@@ -26,12 +36,20 @@ package com.sun.image.codec.jpeg;
  * implementations.  We expect that equivalent functionality will eventually
  * be available in a core API or standard extension.
  * <p>
+ * <p>
+ * <p>
+ *  请注意,com.sun.image.codec.jpeg包中的类不是核心Java API的一部分。它们是Sun的JDK和JRE发行版的一部分。
+ * 虽然其他许可证持有者可能选择分发这些类,但开发人员不能依赖其在非Sun实施中的可用性。我们期望等效功能最终将在核心API或标准扩展中可用。
+ * <p>
  */
 public class JPEGHuffmanTable {
 
         /**
          * The maximum number of symbol lengths
          * (max symbol length in bits = 16)
+         * <p>
+         *  符号长度的最大数目(以位为单位的最大符号长度= 16)
+         * 
          */
     private static final int HUFF_MAX_LEN=17;
 
@@ -144,6 +162,9 @@ public class JPEGHuffmanTable {
 
         /**
          * Private constructor used to construct the Standard Huffman tables
+         * <p>
+         *  私有构造函数用于构造标准霍夫曼表
+         * 
          */
     private JPEGHuffmanTable() {
                 lengths = null;
@@ -152,6 +173,10 @@ public class JPEGHuffmanTable {
 
     /**
      * Creates a Huffman Table and initializes it.
+     * <p>
+     *  创建一个Huffman表并初始化它。
+     * 
+     * 
      * @param lengths lengths[k] = # of symbols with codes of length k
      * bits; lengths[0] is ignored
      * @param symbols symbols in order of increasing code length
@@ -193,6 +218,9 @@ public class JPEGHuffmanTable {
          * they gave us at least enough symbols for the symbol length
          * counts. Eventually this might check that there aren't duplicate
          * symbols.
+         * <p>
+         *  这检查他们给我们的表不是'非法的'它检查符号长度计数是可能的,并且他们给我们至少足够的符号的符号长度计数。最终,这可能检查没有重复的符号。
+         * 
          */
         private void checkTable() {
                 int numVals=2;
@@ -219,6 +247,10 @@ public class JPEGHuffmanTable {
         /**
          * Return a copy of the array containing the number of symbols
          * for each length in the Huffman table.
+         * <p>
+         * 在霍夫曼表中返回包含每个长度的符号数的数组的副本。
+         * 
+         * 
          * @return A short array where array[k] = # of symbols in the
          *         table of length k. array[0] is unused
          */
@@ -232,6 +264,9 @@ public class JPEGHuffmanTable {
          * Return an array containing the Huffman symbols arranged by
          * increasing length.  To make use of this array you must refer
          * the the lengths array.
+         * <p>
+         *  返回包含通过增加长度排列的霍夫曼符号的数组。要使用这个数组,你必须引用长度数组。
+         * 
          * @return A short array of Huffman symbols
      */
     public short[] getSymbols() {

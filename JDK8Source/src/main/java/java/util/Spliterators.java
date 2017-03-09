@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,11 @@ import java.util.function.LongConsumer;
  * {@link Spliterator.OfInt}, {@link Spliterator.OfLong}, and
  * {@link Spliterator.OfDouble}.
  *
+ * <p>
+ *  用于操作或创建{@link Spliterator}及其原始特殊化{@link Spliterator.OfInt},{@link Spliterator.OfLong}和{@link Spliterator.OfDouble}
+ * 的实例的静态类和方法。
+ * 
+ * 
  * @see Spliterator
  * @since 1.8
  */
@@ -52,6 +58,13 @@ public final class Spliterators {
      * {@link Spliterator#SUBSIZED}.  Calls to
      * {@link java.util.Spliterator#trySplit()} always return {@code null}.
      *
+     * <p>
+     *  创建空的{@code Spliterator}
+     * 
+     *  <p>空Spliceator报告{@link Spliterator#SIZED}和{@link Spliterator#SUBSIZED}。
+     * 对{@link java.util.Spliterator#trySplit()}的调用始终返回{@code null}。
+     * 
+     * 
      * @param <T> Type of elements
      * @return An empty spliterator
      */
@@ -70,6 +83,13 @@ public final class Spliterators {
      * {@link Spliterator#SUBSIZED}.  Calls to
      * {@link java.util.Spliterator#trySplit()} always return {@code null}.
      *
+     * <p>
+     *  创建一个空的{@code Spliterator.OfInt}
+     * 
+     *  <p>空Spliceator报告{@link Spliterator#SIZED}和{@link Spliterator#SUBSIZED}。
+     * 对{@link java.util.Spliterator#trySplit()}的调用始终返回{@code null}。
+     * 
+     * 
      * @return An empty spliterator
      */
     public static Spliterator.OfInt emptyIntSpliterator() {
@@ -86,6 +106,13 @@ public final class Spliterators {
      * {@link Spliterator#SUBSIZED}.  Calls to
      * {@link java.util.Spliterator#trySplit()} always return {@code null}.
      *
+     * <p>
+     *  创建空的{@code Spliterator.OfLong}
+     * 
+     *  <p>空Spliceator报告{@link Spliterator#SIZED}和{@link Spliterator#SUBSIZED}。
+     * 对{@link java.util.Spliterator#trySplit()}的调用始终返回{@code null}。
+     * 
+     * 
      * @return An empty spliterator
      */
     public static Spliterator.OfLong emptyLongSpliterator() {
@@ -102,6 +129,13 @@ public final class Spliterators {
      * {@link Spliterator#SUBSIZED}.  Calls to
      * {@link java.util.Spliterator#trySplit()} always return {@code null}.
      *
+     * <p>
+     *  创建一个空的{@code Spliterator.OfDouble}
+     * 
+     *  <p>空Spliceator报告{@link Spliterator#SIZED}和{@link Spliterator#SUBSIZED}。
+     * 对{@link java.util.Spliterator#trySplit()}的调用始终返回{@code null}。
+     * 
+     * 
      * @return An empty spliterator
      */
     public static Spliterator.OfDouble emptyDoubleSpliterator() {
@@ -128,6 +162,16 @@ public final class Spliterators {
      * characteristics for the spliterator to report; it is common to
      * additionally specify {@code IMMUTABLE} and {@code ORDERED}.
      *
+     * <p>
+     *  使用自定义的Spliterator特性集,创建覆盖给定数组元素的{@code Spliterator}。
+     * 
+     * <p>提供此方法作为对于将其元素的部分存储在数组中并且需要对分割器特性进行精细控制的分割器的实现方便。
+     * 大多数其他需要数组的Spliterator的情况下,应该使用{@link Arrays#spliterator(Object [])}。
+     * 
+     *  <p>返回的分词器总是报告{@code SIZED}和{@code SUBSIZED}的特征。
+     * 呼叫者可以提供用于报告的分裂器的附加特征;通常另外指定{@code IMMUTABLE}和{@code ORDERED}。
+     * 
+     * 
      * @param <T> Type of elements
      * @param array The array, assumed to be unmodified during use
      * @param additionalCharacteristics Additional spliterator characteristics
@@ -158,6 +202,16 @@ public final class Spliterators {
      * characteristics for the spliterator to report; it is common to
      * additionally specify {@code IMMUTABLE} and {@code ORDERED}.
      *
+     * <p>
+     *  使用自定义的一组spliterator特性,创建覆盖给定数组元素范围的{@code Spliterator}。
+     * 
+     *  <p>提供此方法作为对于将其元素的部分存储在数组中并且需要对分割器特性进行精细控制的分割器的实现方便。
+     * 大多数其他需要数组的Spliterator的情况下,应该使用{@link Arrays#spliterator(Object [])}。
+     * 
+     *  <p>返回的分词器总是报告{@code SIZED}和{@code SUBSIZED}的特征。
+     * 呼叫者可以提供用于报告的分裂器的附加特征;通常另外指定{@code IMMUTABLE}和{@code ORDERED}。
+     * 
+     * 
      * @param <T> Type of elements
      * @param array The array, assumed to be unmodified during use
      * @param fromIndex The least index (inclusive) to cover
@@ -193,6 +247,16 @@ public final class Spliterators {
      * characteristics for the spliterator to report; it is common to
      * additionally specify {@code IMMUTABLE} and {@code ORDERED}.
      *
+     * <p>
+     *  使用自定义的一组spliterator特性,创建覆盖给定数组元素的{@code Spliterator.OfInt}。
+     * 
+     * <p>提供此方法作为对于将其元素的部分存储在数组中并且需要对分割器特性进行精细控制的分割器的实现方便。
+     * 对于需要数组的Spliterator的大多数其他情况,应该使用{@link Arrays#spliterator(int [])}。
+     * 
+     *  <p>返回的分词器总是报告{@code SIZED}和{@code SUBSIZED}的特征。
+     * 呼叫者可以提供用于报告的分裂器的附加特征;通常另外指定{@code IMMUTABLE}和{@code ORDERED}。
+     * 
+     * 
      * @param array The array, assumed to be unmodified during use
      * @param additionalCharacteristics Additional spliterator characteristics
      *        of this spliterator's source or elements beyond {@code SIZED} and
@@ -221,6 +285,16 @@ public final class Spliterators {
      * characteristics for the spliterator to report; it is common to
      * additionally specify {@code IMMUTABLE} and {@code ORDERED}.
      *
+     * <p>
+     *  使用自定义的Spliterator特性集,创建覆盖给定数组元素范围的{@code Spliterator.OfInt}。
+     * 
+     *  <p>提供此方法作为对于将其元素的部分存储在数组中并且需要对分割器特性进行精细控制的分割器的实现方便。
+     * 大多数其他需要数组的Spliterator的情况,应该使用{@link Arrays#spliterator(int [],int,int)}。
+     * 
+     *  <p>返回的分词器总是报告{@code SIZED}和{@code SUBSIZED}的特征。
+     * 呼叫者可以提供用于报告的分裂器的附加特征;通常另外指定{@code IMMUTABLE}和{@code ORDERED}。
+     * 
+     * 
      * @param array The array, assumed to be unmodified during use
      * @param fromIndex The least index (inclusive) to cover
      * @param toIndex One past the greatest index to cover
@@ -255,6 +329,16 @@ public final class Spliterators {
      * characteristics for the spliterator to report; it is common to
      * additionally specify {@code IMMUTABLE} and {@code ORDERED}.
      *
+     * <p>
+     *  使用自定义的一组spliterator特性,创建覆盖给定数组元素的{@code Spliterator.OfLong}。
+     * 
+     * <p>提供此方法作为对于将其元素的部分存储在数组中并且需要对分割器特性进行精细控制的分割器的实现方便。
+     * 大多数其他需要数组的Spliterator的情况下,应该使用{@link Arrays#spliterator(long [])}。
+     * 
+     *  <p>返回的分词器总是报告{@code SIZED}和{@code SUBSIZED}的特征。
+     * 呼叫者可以提供用于报告的分裂器的附加特征;通常另外指定{@code IMMUTABLE}和{@code ORDERED}。
+     * 
+     * 
      * @param array The array, assumed to be unmodified during use
      * @param additionalCharacteristics Additional spliterator characteristics
      *        of this spliterator's source or elements beyond {@code SIZED} and
@@ -287,6 +371,19 @@ public final class Spliterators {
      * often be used instead, which returns a spliterator that reports
      * {@code SIZED}, {@code SUBSIZED}, {@code IMMUTABLE}, and {@code ORDERED}.
      *
+     * <p>
+     *  使用自定义的一组spliterator特性,创建覆盖给定数组元素范围的{@code Spliterator.OfLong}。
+     * 
+     *  <p>提供此方法作为对于将其元素的部分存储在数组中并且需要对分割器特性进行精细控制的分割器的实现方便。
+     * 对于需要数组的Spliterator的大多数其他情况,应该使用{@link Arrays#spliterator(long [],int,int)}。
+     * 
+     * <p>返回的分词器总是报告{@code SIZED}和{@code SUBSIZED}的特征。呼叫者可以提供用于报告器的附加特性。
+     *  (例如,如果已知阵列不会被进一步修改,请指定{@code IMMUTABLE};如果数组数据被认为具有遇到顺序,请指定{@code ORDERED})。
+     * 通常可以使用方法{@link Arrays#spliterator(long [],int,int)},它返回一个报告{@code SIZED},{@code SUBSIZED},{@code IMMUTABLE}
+     * 和{ @code ORDERED}。
+     *  (例如,如果已知阵列不会被进一步修改,请指定{@code IMMUTABLE};如果数组数据被认为具有遇到顺序,请指定{@code ORDERED})。
+     * 
+     * 
      * @param array The array, assumed to be unmodified during use
      * @param fromIndex The least index (inclusive) to cover
      * @param toIndex One past the greatest index to cover
@@ -321,6 +418,16 @@ public final class Spliterators {
      * characteristics for the spliterator to report; it is common to
      * additionally specify {@code IMMUTABLE} and {@code ORDERED}.
      *
+     * <p>
+     *  使用自定义的一组spliterator特性,创建覆盖给定数组元素的{@code Spliterator.OfDouble}。
+     * 
+     *  <p>提供此方法作为对于将其元素的部分存储在数组中并且需要对分割器特性进行精细控制的分割器的实现方便。
+     * 大多数其他需要数组的Spliterator的情况,应该使用{@link Arrays#spliterator(double [])}。
+     * 
+     *  <p>返回的分词器总是报告{@code SIZED}和{@code SUBSIZED}的特征。
+     * 呼叫者可以提供用于报告的分裂器的附加特征;通常另外指定{@code IMMUTABLE}和{@code ORDERED}。
+     * 
+     * 
      * @param array The array, assumed to be unmodified during use
      * @param additionalCharacteristics Additional spliterator characteristics
      *        of this spliterator's source or elements beyond {@code SIZED} and
@@ -353,6 +460,19 @@ public final class Spliterators {
      * often be used instead, which returns a spliterator that reports
      * {@code SIZED}, {@code SUBSIZED}, {@code IMMUTABLE}, and {@code ORDERED}.
      *
+     * <p>
+     *  使用自定义的Spliterator特性集,创建覆盖给定数组元素范围的{@code Spliterator.OfDouble}。
+     * 
+     * <p>提供此方法作为对于将其元素的部分存储在数组中并且需要对分割器特性进行精细控制的分割器的实现方便。
+     * 对于需要数组的Spliterator的大多数其他情况,应该使用{@link Arrays#spliterator(double [],int,int)}。
+     * 
+     *  <p>返回的分词器总是报告{@code SIZED}和{@code SUBSIZED}的特征。呼叫者可以提供用于报告器的附加特性。
+     *  (例如,如果已知阵列不会被进一步修改,请指定{@code IMMUTABLE};如果数组数据被认为具有遇到顺序,请指定{@code ORDERED})。
+     * 通常可以使用方法{@link Arrays#spliterator(long [],int,int)},它返回一个报告{@code SIZED},{@code SUBSIZED},{@code IMMUTABLE}
+     * 和{ @code ORDERED}。
+     *  (例如,如果已知阵列不会被进一步修改,请指定{@code IMMUTABLE};如果数组数据被认为具有遇到顺序,请指定{@code ORDERED})。
+     * 
+     * 
      * @param array The array, assumed to be unmodified during use
      * @param fromIndex The least index (inclusive) to cover
      * @param toIndex One past the greatest index to cover
@@ -375,6 +495,10 @@ public final class Spliterators {
     /**
      * Validate inclusive start index and exclusive end index against the length
      * of an array.
+     * <p>
+     *  根据数组的长度验证包含起始索引和排除结束索引。
+     * 
+     * 
      * @param arrayLength The length of the array
      * @param origin The inclusive start index
      * @param fence The exclusive end index
@@ -407,6 +531,14 @@ public final class Spliterators {
      * the <em>fail-fast</em> properties of the collection's iterator, and
      * implements {@code trySplit} to permit limited parallelism.
      *
+     * <p>
+     *  使用给定集合的{@link java.util.Collection#iterator()}作为元素来源创建{@code Spliterator},并将其{@link java.util.Collection#size()}
+     * 作为其初始大小进行报告。
+     * 
+     *  <p>分割器是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>,继承集合的迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     * 
      * @param <T> Type of elements
      * @param c The collection
      * @param characteristics Characteristics of this spliterator's source or
@@ -435,6 +567,15 @@ public final class Spliterators {
      * operated on after the spliterator is returned, or the initially reported
      * size is not equal to the actual number of elements in the source.
      *
+     * <p>
+     * 使用给定的{@code Iterator}作为元素的来源,并使用给定的最初报告的大小创建{@code Spliterator}。
+     * 
+     *  <p>分割器不是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>继承迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     *  元素的遍历应通过拼接器完成。如果迭代器在返回分割器之后被操作,或者初始报告的大小不等于源中的元素的实际数量,则分割和遍历的行为是未定义的。
+     * 
+     * 
      * @param <T> Type of elements
      * @param iterator The iterator for the source
      * @param size The number of elements in the source, to be reported as
@@ -465,6 +606,15 @@ public final class Spliterators {
      * The behaviour of splitting and traversal is undefined if the iterator is
      * operated on after the spliterator is returned.
      *
+     * <p>
+     *  使用给定的{@code Iterator}作为元素的源,创建{@code Spliterator},而无需初始大小估算。
+     * 
+     *  <p>分割器不是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>继承迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     *  元素的遍历应通过拼接器完成。如果迭代器在拆分器返回后运行,则拆分和遍历的行为是未定义的。
+     * 
+     * 
      * @param <T> Type of elements
      * @param iterator The iterator for the source
      * @param characteristics Characteristics of this spliterator's source
@@ -493,6 +643,15 @@ public final class Spliterators {
      * operated on after the spliterator is returned, or the initially reported
      * size is not equal to the actual number of elements in the source.
      *
+     * <p>
+     *  使用给定的{@code IntStream.IntIterator}作为元素的源,并使用给定的最初报告的大小创建{@code Spliterator.OfInt}。
+     * 
+     * <p>分割器不是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>继承迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     *  元素的遍历应通过拼接器完成。如果迭代器在返回分割器之后被操作,或者初始报告的大小不等于源中的元素的实际数量,则分割和遍历的行为是未定义的。
+     * 
+     * 
      * @param iterator The iterator for the source
      * @param size The number of elements in the source, to be reported as
      *        initial {@code estimateSize}.
@@ -523,6 +682,15 @@ public final class Spliterators {
      * The behaviour of splitting and traversal is undefined if the iterator is
      * operated on after the spliterator is returned.
      *
+     * <p>
+     *  使用给定的{@code IntStream.IntIterator}作为元素的源,创建{@code Spliterator.OfInt},没有初始大小估计。
+     * 
+     *  <p>分割器不是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>继承迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     *  元素的遍历应通过拼接器完成。如果迭代器在拆分器返回后运行,则拆分和遍历的行为是未定义的。
+     * 
+     * 
      * @param iterator The iterator for the source
      * @param characteristics Characteristics of this spliterator's source
      *        or elements ({@code SIZED} and {@code SUBSIZED}, if supplied, are
@@ -550,6 +718,15 @@ public final class Spliterators {
      * operated on after the spliterator is returned, or the initially reported
      * size is not equal to the actual number of elements in the source.
      *
+     * <p>
+     *  使用给定的{@code LongStream.LongIterator}作为元素源,并使用给定的最初报告的大小创建{@code Spliterator.OfLong}。
+     * 
+     *  <p>分割器不是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>继承迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     * 元素的遍历应通过拼接器完成。如果迭代器在返回分割器之后被操作,或者初始报告的大小不等于源中的元素的实际数量,则分割和遍历的行为是未定义的。
+     * 
+     * 
      * @param iterator The iterator for the source
      * @param size The number of elements in the source, to be reported as
      *        initial {@code estimateSize}.
@@ -580,6 +757,15 @@ public final class Spliterators {
      * The behaviour of splitting and traversal is undefined if the iterator is
      * operated on after the spliterator is returned.
      *
+     * <p>
+     *  使用给定的{@code LongStream.LongIterator}作为元素的源,创建{@code Spliterator.OfLong},而无需初始大小估算。
+     * 
+     *  <p>分割器不是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>继承迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     *  元素的遍历应通过拼接器完成。如果迭代器在拆分器返回后运行,则拆分和遍历的行为是未定义的。
+     * 
+     * 
      * @param iterator The iterator for the source
      * @param characteristics Characteristics of this spliterator's source
      *        or elements ({@code SIZED} and {@code SUBSIZED}, if supplied, are
@@ -607,6 +793,15 @@ public final class Spliterators {
      * operated on after the spliterator is returned, or the initially reported
      * size is not equal to the actual number of elements in the source.
      *
+     * <p>
+     *  使用给定的{@code DoubleStream.DoubleIterator}作为元素的来源,并使用给定的最初报告的大小创建{@code Spliterator.OfDouble}。
+     * 
+     *  <p>分割器不是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>继承迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     *  元素的遍历应通过拼接器完成。如果迭代器在返回分割器之后被操作,或者初始报告的大小不等于源中的元素的实际数量,则分割和遍历的行为是未定义的。
+     * 
+     * 
      * @param iterator The iterator for the source
      * @param size The number of elements in the source, to be reported as
      *        initial {@code estimateSize}
@@ -637,6 +832,15 @@ public final class Spliterators {
      * The behaviour of splitting and traversal is undefined if the iterator is
      * operated on after the spliterator is returned.
      *
+     * <p>
+     * 使用给定的{@code DoubleStream.DoubleIterator}作为元素来源创建{@code Spliterator.OfDouble},而无需初始大小估算。
+     * 
+     *  <p>分割器不是<em> <a href="Spliterator.html#binding">延迟绑定</a> </em>继承迭代器的<em> fail-fast </em>属性,并实现{@code trySplit}
+     * 以允许有限的并行性。
+     * 
+     *  元素的遍历应通过拼接器完成。如果迭代器在拆分器返回后运行,则拆分和遍历的行为是未定义的。
+     * 
+     * 
      * @param iterator The iterator for the source
      * @param characteristics Characteristics of this spliterator's source
      *        or elements ({@code SIZED} and {@code SUBSIZED}, if supplied, are
@@ -658,6 +862,12 @@ public final class Spliterators {
      * The behaviour of traversal is undefined if the spliterator is operated
      * after the iterator is returned.
      *
+     * <p>
+     *  从{@code Spliterator}创建{@code迭代器}。
+     * 
+     *  <p>元素的遍历应该通过迭代器完成。如果在迭代器返回后操作分割器,则遍历的行为是未定义的。
+     * 
+     * 
      * @param <T> Type of elements
      * @param spliterator The spliterator
      * @return An iterator
@@ -704,6 +914,12 @@ public final class Spliterators {
      * The behaviour of traversal is undefined if the spliterator is operated
      * after the iterator is returned.
      *
+     * <p>
+     *  从{@code Spliterator.OfInt}创建{@code PrimitiveIterator.OfInt}。
+     * 
+     *  <p>元素的遍历应该通过迭代器完成。如果在迭代器返回后操作分割器,则遍历的行为是未定义的。
+     * 
+     * 
      * @param spliterator The spliterator
      * @return An iterator
      * @throws NullPointerException if the given spliterator is {@code null}
@@ -749,6 +965,12 @@ public final class Spliterators {
      * The behaviour of traversal is undefined if the spliterator is operated
      * after the iterator is returned.
      *
+     * <p>
+     *  从{@code Spliterator.OfLong}创建{@code PrimitiveIterator.OfLong}。
+     * 
+     *  <p>元素的遍历应该通过迭代器完成。如果在迭代器返回后操作分割器,则遍历的行为是未定义的。
+     * 
+     * 
      * @param spliterator The spliterator
      * @return An iterator
      * @throws NullPointerException if the given spliterator is {@code null}
@@ -794,6 +1016,12 @@ public final class Spliterators {
      * The behaviour of traversal is undefined if the spliterator is operated
      * after the iterator is returned.
      *
+     * <p>
+     *  从{@code Spliterator.OfDouble}创建{@code PrimitiveIterator.OfDouble}。
+     * 
+     * <p>元素的遍历应该通过迭代器完成。如果在迭代器返回后操作分割器,则遍历的行为是未定义的。
+     * 
+     * 
      * @param spliterator The spliterator
      * @return An iterator
      * @throws NullPointerException if the given spliterator is {@code null}
@@ -888,6 +1116,9 @@ public final class Spliterators {
     /**
      * A Spliterator designed for use by sources that traverse and split
      * elements maintained in an unmodifiable {@code Object[]} array.
+     * <p>
+     *  一个Spliterator,设计用于遍历和拆分保存在不可修改的{@code Object []}数组中的元素。
+     * 
      */
     static final class ArraySpliterator<T> implements Spliterator<T> {
         /**
@@ -896,6 +1127,10 @@ public final class Spliterators {
          * screen arguments to ensure they are exactly of type Object[]
          * so long as no methods write into the array or serialize it,
          * which we ensure here by defining this class as final.
+         * <p>
+         *  数组,显式地键入Object []。
+         * 与一些其他类不同(参见例如CR 6260652),我们不需要屏幕参数,以确保它们完全是Object []类型,只要没有方法写入数组或序列化它,我们在这里通过定义类作为final。
+         * 
          */
         private final Object[] array;
         private int index;        // current index, modified on advance/split
@@ -904,6 +1139,10 @@ public final class Spliterators {
 
         /**
          * Creates a spliterator covering all of the given array.
+         * <p>
+         *  创建一个覆盖所有给定数组的spliterator。
+         * 
+         * 
          * @param array the array, assumed to be unmodified during use
          * @param additionalCharacteristics Additional spliterator characteristics
          * of this spliterator's source or elements beyond {@code SIZED} and
@@ -915,6 +1154,10 @@ public final class Spliterators {
 
         /**
          * Creates a spliterator covering the given array and range
+         * <p>
+         *  创建覆盖给定数组和范围的spliterator
+         * 
+         * 
          * @param array the array, assumed to be unmodified during use
          * @param origin the least index (inclusive) to cover
          * @param fence one past the greatest index to cover
@@ -980,6 +1223,9 @@ public final class Spliterators {
     /**
      * A Spliterator.OfInt designed for use by sources that traverse and split
      * elements maintained in an unmodifiable {@code int[]} array.
+     * <p>
+     *  Spliterator.OfInt设计用于遍历和拆分在不可修改的{@code int []}数组中维护的元素的源。
+     * 
      */
     static final class IntArraySpliterator implements Spliterator.OfInt {
         private final int[] array;
@@ -989,6 +1235,10 @@ public final class Spliterators {
 
         /**
          * Creates a spliterator covering all of the given array.
+         * <p>
+         *  创建一个覆盖所有给定数组的spliterator。
+         * 
+         * 
          * @param array the array, assumed to be unmodified during use
          * @param additionalCharacteristics Additional spliterator characteristics
          *        of this spliterator's source or elements beyond {@code SIZED} and
@@ -1000,6 +1250,10 @@ public final class Spliterators {
 
         /**
          * Creates a spliterator covering the given array and range
+         * <p>
+         *  创建覆盖给定数组和范围的spliterator
+         * 
+         * 
          * @param array the array, assumed to be unmodified during use
          * @param origin the least index (inclusive) to cover
          * @param fence one past the greatest index to cover
@@ -1063,6 +1317,9 @@ public final class Spliterators {
     /**
      * A Spliterator.OfLong designed for use by sources that traverse and split
      * elements maintained in an unmodifiable {@code int[]} array.
+     * <p>
+     *  Splitator.OfLong设计用于遍历和拆分维护在不可修改的{@code int []}数组中的元素。
+     * 
      */
     static final class LongArraySpliterator implements Spliterator.OfLong {
         private final long[] array;
@@ -1072,6 +1329,10 @@ public final class Spliterators {
 
         /**
          * Creates a spliterator covering all of the given array.
+         * <p>
+         *  创建一个覆盖所有给定数组的spliterator。
+         * 
+         * 
          * @param array the array, assumed to be unmodified during use
          * @param additionalCharacteristics Additional spliterator characteristics
          *        of this spliterator's source or elements beyond {@code SIZED} and
@@ -1083,6 +1344,10 @@ public final class Spliterators {
 
         /**
          * Creates a spliterator covering the given array and range
+         * <p>
+         *  创建覆盖给定数组和范围的spliterator
+         * 
+         * 
          * @param array the array, assumed to be unmodified during use
          * @param origin the least index (inclusive) to cover
          * @param fence one past the greatest index to cover
@@ -1146,6 +1411,9 @@ public final class Spliterators {
     /**
      * A Spliterator.OfDouble designed for use by sources that traverse and split
      * elements maintained in an unmodifiable {@code int[]} array.
+     * <p>
+     *  Splitator.OfDouble设计为由遍历和拆分在不可修改的{@code int []}数组中维护的元素的源使用。
+     * 
      */
     static final class DoubleArraySpliterator implements Spliterator.OfDouble {
         private final double[] array;
@@ -1155,6 +1423,10 @@ public final class Spliterators {
 
         /**
          * Creates a spliterator covering all of the given array.
+         * <p>
+         *  创建一个覆盖所有给定数组的spliterator。
+         * 
+         * 
          * @param array the array, assumed to be unmodified during use
          * @param additionalCharacteristics Additional spliterator characteristics
          *        of this spliterator's source or elements beyond {@code SIZED} and
@@ -1166,6 +1438,10 @@ public final class Spliterators {
 
         /**
          * Creates a spliterator covering the given array and range
+         * <p>
+         *  创建覆盖给定数组和范围的spliterator
+         * 
+         * 
          * @param array the array, assumed to be unmodified during use
          * @param origin the least index (inclusive) to cover
          * @param fence one past the greatest index to cover
@@ -1250,6 +1526,18 @@ public final class Spliterators {
      * extending this class, such as when there is already an iterator
      * available to use.
      *
+     * <p>
+     * 实现{@code trySplit}以允许有限并行性的抽象{@code Spliterator}。
+     * 
+     *  <p>扩展类只需实现{@link #tryAdvance(java.util.function.Consumer)tryAdvance}。
+     * 扩展类应该覆盖{@link #forEachRemaining(java.util.function.Consumer)forEach},如果它可以提供更高性能的实现。
+     * 
+     *  @apiNote当不可能或难以以允许平衡并行计算的方式高效地划分元素时,该类是用于创建分裂器的有用辅助。
+     * 
+     *  <p>使用这个类的一个替代方法,也允许有限的并行性,是从迭代器创建一个spliterator(参见{@link #spliterator(Iterator,long,int)}。
+     * 根据使用迭代器的情况可能更容易或者比扩展这个类更方便,比如当已经有一个迭代器可用时。
+     * 
+     * 
      * @see #spliterator(Iterator, long, int)
      * @since 1.8
      */
@@ -1264,6 +1552,10 @@ public final class Spliterators {
          * Creates a spliterator reporting the given estimated size and
          * additionalCharacteristics.
          *
+         * <p>
+         *  创建报告给定估计大小和其他特征的分隔符。
+         * 
+         * 
          * @param est the estimated size of this spliterator if known, otherwise
          *        {@code Long.MAX_VALUE}.
          * @param additionalCharacteristics properties of this spliterator's
@@ -1290,6 +1582,11 @@ public final class Spliterators {
          * {@inheritDoc}
          *
          * This implementation permits limited parallelism.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  这种实现允许有限的并行性。
+         * 
          */
         @Override
         public Spliterator<T> trySplit() {
@@ -1305,6 +1602,11 @@ public final class Spliterators {
              * whether or not either are known.  We generate
              * O(sqrt(#elements)) splits, allowing O(sqrt(#cores))
              * potential speedup.
+             * <p>
+             * 拆分成算术增加批量大小的数组。这只会提高并行性能,如果per-element Consumer操作比将它们转换到数组更昂贵。
+             * 使用分割大小的算术级数提供了开销与并行性界限,不特别优先或惩罚轻量级与重量级元素操作的情况,不论是否为#elements与#cores的组合,无论是否已知。
+             * 我们生成O(sqrt(#elements))拆分,允许O(sqrt(#cores))潜在加速。
+             * 
              */
             HoldingConsumer<T> holder = new HoldingConsumer<>();
             long s = est;
@@ -1332,6 +1634,11 @@ public final class Spliterators {
          * This implementation returns the estimated size as reported when
          * created and, if the estimate size is known, decreases in size when
          * split.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec此实现返回创建时报告的估计大小,如果估计大小已知,则拆分时大小减小。
+         * 
          */
         @Override
         public long estimateSize() {
@@ -1344,6 +1651,11 @@ public final class Spliterators {
          * @implSpec
          * This implementation returns the characteristics as reported when
          * created.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec此实现返回创建时报告的特性。
+         * 
          */
         @Override
         public int characteristics() {
@@ -1373,6 +1685,19 @@ public final class Spliterators {
      * convenient than extending this class. For example, if there is already an
      * iterator available to use then there is no need to extend this class.
      *
+     * <p>
+     *  实现{@code trySplit}以允许有限并行性的抽象{@code Spliterator.OfInt}。
+     * 
+     *  <p>要实现分割器,扩展类只需要实现{@link #tryAdvance(java.util.function.IntConsumer)} tryAdvance}。
+     * 扩展类应该重写{@link #forEachRemaining(java.util.function.IntConsumer)} forEach}如果它可以提供更高性能的实现。
+     * 
+     *  @apiNote当不可能或难以以允许平衡并行计算的方式高效地划分元素时,该类是用于创建分裂器的有用辅助。
+     * 
+     * <p>另一种使用这个类的方法,也允许有限的并行性,是从迭代器创建一个分割器(见{@link #spliterator(java.util.PrimitiveIterator.OfInt,long,int)}
+     * 。
+     * 根据情况使用迭代器可能比扩展这个类更容易或更方便。例如,如果已经有一个可用的迭代器,那么不需要扩展这个类。
+     * 
+     * 
      * @see #spliterator(java.util.PrimitiveIterator.OfInt, long, int)
      * @since 1.8
      */
@@ -1387,6 +1712,10 @@ public final class Spliterators {
          * Creates a spliterator reporting the given estimated size and
          * characteristics.
          *
+         * <p>
+         *  创建报告给定的估计大小和特征的分割器。
+         * 
+         * 
          * @param est the estimated size of this spliterator if known, otherwise
          *        {@code Long.MAX_VALUE}.
          * @param additionalCharacteristics properties of this spliterator's
@@ -1413,6 +1742,11 @@ public final class Spliterators {
          * {@inheritDoc}
          *
          * This implementation permits limited parallelism.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  这种实现允许有限的并行性。
+         * 
          */
         @Override
         public Spliterator.OfInt trySplit() {
@@ -1442,6 +1776,11 @@ public final class Spliterators {
          * This implementation returns the estimated size as reported when
          * created and, if the estimate size is known, decreases in size when
          * split.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec此实现返回创建时报告的估计大小,如果估计大小已知,则拆分时大小减小。
+         * 
          */
         @Override
         public long estimateSize() {
@@ -1454,6 +1793,11 @@ public final class Spliterators {
          * @implSpec
          * This implementation returns the characteristics as reported when
          * created.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec此实现返回创建时报告的特性。
+         * 
          */
         @Override
         public int characteristics() {
@@ -1483,6 +1827,19 @@ public final class Spliterators {
      * convenient than extending this class. For example, if there is already an
      * iterator available to use then there is no need to extend this class.
      *
+     * <p>
+     *  实现{@code trySplit}以允许有限并行性的抽象{@code Spliterator.OfLong}。
+     * 
+     *  <p>要实现分隔符,扩展类只需要实现{@link #tryAdvance(java.util.function.LongConsumer)} tryAdvance}。
+     * 扩展类应该重写{@link #forEachRemaining(java.util.function.LongConsumer)} forEach}如果它可以提供更高性能的实现。
+     * 
+     *  @apiNote当不可能或难以以允许平衡并行计算的方式高效地划分元素时,该类是用于创建分裂器的有用辅助。
+     * 
+     * <p>另一种使用这个类的方法,也允许有限的并行性,是从迭代器创建一个分割器(见{@link #spliterator(java.util.PrimitiveIterator.OfLong,long,int)}
+     * 。
+     * 根据情况使用迭代器可能比扩展这个类更容易或更方便。例如,如果已经有一个可用的迭代器,那么不需要扩展这个类。
+     * 
+     * 
      * @see #spliterator(java.util.PrimitiveIterator.OfLong, long, int)
      * @since 1.8
      */
@@ -1497,6 +1854,10 @@ public final class Spliterators {
          * Creates a spliterator reporting the given estimated size and
          * characteristics.
          *
+         * <p>
+         *  创建报告给定的估计大小和特征的分割器。
+         * 
+         * 
          * @param est the estimated size of this spliterator if known, otherwise
          *        {@code Long.MAX_VALUE}.
          * @param additionalCharacteristics properties of this spliterator's
@@ -1523,6 +1884,11 @@ public final class Spliterators {
          * {@inheritDoc}
          *
          * This implementation permits limited parallelism.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  这种实现允许有限的并行性。
+         * 
          */
         @Override
         public Spliterator.OfLong trySplit() {
@@ -1552,6 +1918,11 @@ public final class Spliterators {
          * This implementation returns the estimated size as reported when
          * created and, if the estimate size is known, decreases in size when
          * split.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec此实现返回创建时报告的估计大小,如果估计大小已知,则拆分时大小减小。
+         * 
          */
         @Override
         public long estimateSize() {
@@ -1564,6 +1935,11 @@ public final class Spliterators {
          * @implSpec
          * This implementation returns the characteristics as reported when
          * created.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec此实现返回创建时报告的特性。
+         * 
          */
         @Override
         public int characteristics() {
@@ -1593,6 +1969,19 @@ public final class Spliterators {
      * convenient than extending this class. For example, if there is already an
      * iterator available to use then there is no need to extend this class.
      *
+     * <p>
+     *  实现{@code trySplit}以允许有限并行性的抽象{@code Spliterator.OfDouble}。
+     * 
+     *  <p>要实现分隔符,扩展类只需要实现{@link #tryAdvance(java.util.function.DoubleConsumer)} tryAdvance}。
+     * 扩展类应该重写{@link #forEachRemaining(java.util.function.DoubleConsumer)} forEach}如果它可以提供更高性能的实现。
+     * 
+     *  @apiNote当不可能或难以以允许平衡并行计算的方式高效地划分元素时,该类是用于创建分裂器的有用辅助。
+     * 
+     * <p>另一种使用这个类的方法,也允许有限的并行性,是从迭代器创建一个分割器(见{@link #spliterator(java.util.PrimitiveIterator.OfDouble,long,int)}
+     * 。
+     * 根据情况使用迭代器可能比扩展这个类更容易或更方便。例如,如果已经有一个可用的迭代器,那么不需要扩展这个类。
+     * 
+     * 
      * @see #spliterator(java.util.PrimitiveIterator.OfDouble, long, int)
      * @since 1.8
      */
@@ -1607,6 +1996,10 @@ public final class Spliterators {
          * Creates a spliterator reporting the given estimated size and
          * characteristics.
          *
+         * <p>
+         *  创建报告给定的估计大小和特征的分割器。
+         * 
+         * 
          * @param est the estimated size of this spliterator if known, otherwise
          *        {@code Long.MAX_VALUE}.
          * @param additionalCharacteristics properties of this spliterator's
@@ -1633,6 +2026,11 @@ public final class Spliterators {
          * {@inheritDoc}
          *
          * This implementation permits limited parallelism.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  这种实现允许有限的并行性。
+         * 
          */
         @Override
         public Spliterator.OfDouble trySplit() {
@@ -1662,6 +2060,11 @@ public final class Spliterators {
          * This implementation returns the estimated size as reported when
          * created and, if the estimate size is known, decreases in size when
          * split.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec此实现返回创建时报告的估计大小,如果估计大小已知,则拆分时大小减小。
+         * 
          */
         @Override
         public long estimateSize() {
@@ -1674,6 +2077,11 @@ public final class Spliterators {
          * @implSpec
          * This implementation returns the characteristics as reported when
          * created.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec此实现返回创建时报告的特性。
+         * 
          */
         @Override
         public int characteristics() {
@@ -1687,6 +2095,9 @@ public final class Spliterators {
      * A Spliterator using a given Iterator for element
      * operations. The spliterator implements {@code trySplit} to
      * permit limited parallelism.
+     * <p>
+     *  使用给定迭代器的Spliterator用于元素操作。 spliterator实现{@code trySplit}以允许有限的并行性。
+     * 
      */
     static class IteratorSpliterator<T> implements Spliterator<T> {
         static final int BATCH_UNIT = 1 << 10;  // batch array size increment
@@ -1703,6 +2114,10 @@ public final class Spliterators {
          * and reporting its {@link java.util.Collection#size()) as its initial
          * size.
          *
+         * <p>
+         *  使用给定的集合的{@link java.util.Collection#iterator())创建一个分割器进行遍历,并报告其{@link java.util.Collection#size())作为其初始大小。
+         * 
+         * 
          * @param c the collection
          * @param characteristics properties of this spliterator's
          *        source or elements.
@@ -1720,6 +2135,10 @@ public final class Spliterators {
          * for traversal, and reporting the given initial size
          * and characteristics.
          *
+         * <p>
+         *  使用给定的迭代器创建一个spliterator用于遍历,并报告给定的初始大小和特性。
+         * 
+         * 
          * @param iterator the iterator for the source
          * @param size the number of elements in the source
          * @param characteristics properties of this spliterator's
@@ -1739,6 +2158,10 @@ public final class Spliterators {
          * for traversal, and reporting the given initial size
          * and characteristics.
          *
+         * <p>
+         *  使用给定的迭代器创建一个spliterator用于遍历,并报告给定的初始大小和特性。
+         * 
+         * 
          * @param iterator the iterator for the source
          * @param characteristics properties of this spliterator's
          * source or elements.
@@ -1764,6 +2187,11 @@ public final class Spliterators {
              * whether or not either are known.  We generate
              * O(sqrt(#elements)) splits, allowing O(sqrt(#cores))
              * potential speedup.
+             * <p>
+             * 拆分成算术增加批量大小的数组。这只会提高并行性能,如果per-element Consumer操作比将它们转换到数组更昂贵。
+             * 使用分割大小的算术级数提供了开销与并行性界限,不特别优先或惩罚轻量级与重量级元素操作的情况,不论是否为#elements与#cores的组合,无论是否已知。
+             * 我们生成O(sqrt(#elements))拆分,允许O(sqrt(#cores))潜在加速。
+             * 
              */
             Iterator<? extends T> i;
             long s;
@@ -1839,6 +2267,9 @@ public final class Spliterators {
      * A Spliterator.OfInt using a given IntStream.IntIterator for element
      * operations. The spliterator implements {@code trySplit} to
      * permit limited parallelism.
+     * <p>
+     *  Spliterator.OfInt使用给定的IntStream.IntIterator元素操作。 spliterator实现{@code trySplit}以允许有限的并行性。
+     * 
      */
     static final class IntIteratorSpliterator implements Spliterator.OfInt {
         static final int BATCH_UNIT = IteratorSpliterator.BATCH_UNIT;
@@ -1853,6 +2284,10 @@ public final class Spliterators {
          * for traversal, and reporting the given initial size
          * and characteristics.
          *
+         * <p>
+         *  使用给定的迭代器创建一个spliterator用于遍历,并报告给定的初始大小和特性。
+         * 
+         * 
          * @param iterator the iterator for the source
          * @param size the number of elements in the source
          * @param characteristics properties of this spliterator's
@@ -1871,6 +2306,10 @@ public final class Spliterators {
          * source of unknown size, reporting the given
          * characteristics.
          *
+         * <p>
+         *  使用给定的迭代器为未知大小的源创建分隔符,报告给定的特征。
+         * 
+         * 
          * @param iterator the iterator for the source
          * @param characteristics properties of this spliterator's
          * source or elements.
@@ -1947,6 +2386,10 @@ public final class Spliterators {
          * for traversal, and reporting the given initial size
          * and characteristics.
          *
+         * <p>
+         *  使用给定的迭代器创建一个spliterator用于遍历,并报告给定的初始大小和特性。
+         * 
+         * 
          * @param iterator the iterator for the source
          * @param size the number of elements in the source
          * @param characteristics properties of this spliterator's
@@ -1965,6 +2408,10 @@ public final class Spliterators {
          * source of unknown size, reporting the given
          * characteristics.
          *
+         * <p>
+         *  使用给定的迭代器为未知大小的源创建分隔符,报告给定的特征。
+         * 
+         * 
          * @param iterator the iterator for the source
          * @param characteristics properties of this spliterator's
          * source or elements.
@@ -2041,6 +2488,10 @@ public final class Spliterators {
          * for traversal, and reporting the given initial size
          * and characteristics.
          *
+         * <p>
+         *  使用给定的迭代器创建一个spliterator用于遍历,并报告给定的初始大小和特性。
+         * 
+         * 
          * @param iterator the iterator for the source
          * @param size the number of elements in the source
          * @param characteristics properties of this spliterator's
@@ -2059,6 +2510,9 @@ public final class Spliterators {
          * source of unknown size, reporting the given
          * characteristics.
          *
+         * <p>
+         *  使用给定的迭代器为未知大小的源创建分隔符,报告给定的特征。
+         * 
          * @param iterator the iterator for the source
          * @param characteristics properties of this spliterator's
          * source or elements.

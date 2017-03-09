@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,12 @@ import java.util.ArrayList;
  * method for management access to the individual
  * {@code Logger} objects available at runtime.
  *
+ * <p>
+ *  日志记录是LoggingMXBean的实现类。
+ * 
+ *  <tt> LoggingMXBean </tt>界面提供了一种标准方法,用于管理访问运行时可用的各个{@code Logger}对象。
+ * 
+ * 
  * @author Ron Mann
  * @author Mandy Chung
  * @since 1.5
@@ -50,6 +57,7 @@ class Logging implements LoggingMXBean {
 
     /** Constructor of Logging which is the implementation class
      *  of LoggingMXBean.
+     * <p>
      */
     Logging() {
     }

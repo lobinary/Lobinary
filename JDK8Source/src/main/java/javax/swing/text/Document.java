@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -171,6 +172,94 @@ import javax.swing.event.*;
  * <a href="http://java.sun.com/products/jfc/tsc/articles/text/element_interface">
  * The Element Interface</a>.
  *
+ * <p>
+ * <p>
+ *  <code> Document </code>是用作文本的容器,用作swing文本组件的模型。这个接口的目标是从非常简单的需求(纯文本文本字段)到复杂的需求(例如HTML或XML文档)。
+ * 
+ *  <p> <b> <font size = + 1>内容</font> </b>
+ * <p>
+ *  在最简单的层次上,文本可以被建模为线性的字符序列。为了支持国际化,Swing文本模型使用<a href="http://www.unicode.org/"> unicode </a>字符。
+ * 在文本组件中显示的字符序列通常被称为组件的<em>内容</em>。
+ * <p>
+ *  要引用序列中的位置,所使用的坐标是两个字符之间的位置。如下图所示,文本文档中的位置可以称为位置或偏移量。此位置为零。
+ *  <p style ="text-align：center"> <img src ="doc-files / Document-coord.gif"。
+ * alt="The following text describes this graphic.">
+ * <p>
+ *  在该示例中,如果文档的内容是序列"快速棕狐狸",如前图所示,恰好在单词"The"之前的位置是0,并且单词"The"之后的位置和之前其后面的空格是3.序列"The"中的整个字符序列被称为<em>范围</em>
+ * 。
+ *  <p>以下方法允许访问组成内容的字符数据。
+ * <ul>
+ * <li> {@ link #getLength()} <li> {@ link #getText(int,int)} <li> {@ link #getText(int,int,javax.swing.text.Segment)}
+ * 。
+ * </ul>
+ *  <p> <b> <font size = + 1>结构</font> </b>
+ * <p>
+ *  文本很少被表示为无特征的内容。相反,文本通常具有与其相关联的某种结构。具体什么结构被建模取决于特定的Document实现。它可能是简单的没有结构(即一个简单的文本字段),或者它可能是类似下面的图。
+ *  <p style ="text-align：center"> <img src ="doc-files / Document-structure.gif"。
+ * alt="Diagram shows Book->Chapter->Paragraph">
+ * <p>
+ *  结构单元(即树的节点)由<a href="Element.html">元素</a>界面引用。每个元素可以用一组属性标记。
+ * 这些属性(名称/值对)由<a href="AttributeSet.html"> AttributeSet </a>界面定义。 <p>以下方法允许访问文档结构。
+ * <ul>
+ *  <li> {@ link #getDefaultRootElement()} <li> {@ link #getRootElements()}
+ * </ul>
+ * 
+ *  <p> <b> <font size = + 1>突变</font> </b>
+ * <p>
+ *  所有文档都需要能够添加和删除简单文本。通常,通过来自键盘或鼠标的手势插入和移除文本。插入或移除对文档结构的影响完全取决于文档的实现。 <p>以下方法与文档内容的突变相关：
+ * <ul>
+ *  <li> {@ link #insertString(int,java.lang.String,javax.swing.text.AttributeSet)} <li> {@ link #remove(int,int)}
+ *  <li> {@ link #createPosition )}。
+ * </ul>
+ * 
+ * <p> <b> <font size = + 1>通知</font> </b>
+ * <p>
+ *  对<code>文档</code>的变更必须传达给感兴趣的观察者。更改通知遵循为JavaBean指定的事件模型准则。
+ * 在JavaBeans事件模型中,一旦分派事件通知,所有侦听器必须在事件源发生任何进一步突变之前通知。此外,不保证交货的顺序。
+ * <p>
+ *  通知是作为两个单独的事件提供的,<a href="../event/DocumentEvent.html"> DocumentEvent </a>和<a href="../event/UndoableEditEvent.html">
+ *  UndoableEditEvent </a> 。
+ * 如果通过其api对<code> Document </code>作出突变,则<code> DocumentEvent </code>将被发送到所有注册的<code> DocumentListeners 
+ * </code>。
+ * 如果<code> Document </code>实现支持撤消/重做功能,则<code> UndoableEditEvent </code>将被发送到所有注册的<code> UndoableEditLi
+ * stener </code>。
+ * 如果撤消了可撤销的编辑,则应从文档中触发<code> DocumentEvent </code>以指示其再次更改。
+ * 在这种情况下,应该没有生成<code> UndoableEditEvent </code>,因为该编辑实际上是更改的来源,而不是通过其api对<code> Document </code>的突变。
+ *  <p style ="text-align：center"> <img src ="doc-files / Document-notification.gif"。
+ * alt="The preceding text describes this graphic.">
+ * <p>
+ * 参考上面的图,假设左侧所示的组件使由蓝色矩形表示的文档对象变形。文档通过向两个组件视图分派DocumentEvent来响应,并向侦听逻辑发送UndoableEditEvent,该逻辑维护历史缓冲器。
+ * <p>
+ *  现在假设右侧显示的组件改变了同一个文档。同样,文档向两个组件视图分派DocumentEvent,并向正在维护历史缓冲区的侦听逻辑发送UndoableEditEvent。
+ * <p>
+ *  如果历史缓冲区随后被回退(即最后一个UndoableEdit被撤消),则DocumentEvent被发送到两个视图,使得它们都反映文档的未发生的突变(即去除正确的组件的突变)。
+ * 如果历史缓冲区再次回滚另一个更改,则另一个DocumentEvent将发送到这两个视图,从而使它们在文档中反映已撤消的突变 - 即删除左侧组件的突变。
+ * <p>
+ *  与观察文档的突变相关的方法是：
+ * <ul>
+ * <li> <a href="#addDocumentListener(javax.swing.event.DocumentListener)"> addDocumentListener(Document
+ * Listener)</a> <li> <a href="#removeDocumentListener(javax.swing.event.DocumentListener)"> removeDocum
+ * entListener(DocumentListener)</a> <li> <a href="#addUndoableEditListener(javax.swing.event.UndoableEditListener)">
+ *  addUndoableEditListener(UndoableEditListener)</a> <li> <a href ="#removeUndoableEditListener(javax。
+ *  swing.event.UndoableEditListener)"> removeUndoableEditListener(UndoableEditListener)</a>。
+ * </ul>
+ * 
+ *  <p> <b> <font size = + 1>属性</font> </b>
+ * <p>
+ *  文档实现通常在运行时具有与它们相关联的一些属性集合。
+ * 两个众所周知的属性是<a href="#StreamDescriptionProperty"> StreamDescriptionProperty </a>,可用于描述<code> Document </code>
+ * 的来源,<a href ="#TitleProperty" > TitleProperty </a>,可用于命名<code> Document </code>。
+ *  文档实现通常在运行时具有与它们相关联的一些属性集合。与属性相关的方法有：。
+ * <ul>
+ *  <li> {@ link #getProperty(java.lang.Object)} <li> {@ link #putProperty(java.lang.Object,java.lang.Object)}
+ * 。
+ * </ul>
+ * 
+ *  <p>有关<code>文档</code>类的详细信息,请参阅<a href="http://java.sun.com/products/jfc/tsc"> Swing连接</a>以及特别是文章,
+ * <a href="http://java.sun.com/products/jfc/tsc/articles/text/element_interface">
+ *  元素接口</a>。
+ * 
+ * 
  * @author  Timothy Prinzing
  *
  * @see javax.swing.event.DocumentEvent
@@ -187,6 +276,10 @@ public interface Document {
      * Returns number of characters of content currently
      * in the document.
      *
+     * <p>
+     *  返回文档中当前内容的字符数。
+     * 
+     * 
      * @return number of characters &gt;= 0
      */
     public int getLength();
@@ -195,6 +288,10 @@ public interface Document {
      * Registers the given observer to begin receiving notifications
      * when changes are made to the document.
      *
+     * <p>
+     *  注册给定的观察者,以便在对文档进行更改时开始接收通知。
+     * 
+     * 
      * @param listener the observer to register
      * @see Document#removeDocumentListener
      */
@@ -204,6 +301,10 @@ public interface Document {
      * Unregisters the given observer from the notification list
      * so it will no longer receive change updates.
      *
+     * <p>
+     * 从通知列表中取消注册给定的观察者,因此它将不再接收更改更新。
+     * 
+     * 
      * @param listener the observer to register
      * @see Document#addDocumentListener
      */
@@ -213,6 +314,10 @@ public interface Document {
      * Registers the given observer to begin receiving notifications
      * when undoable edits are made to the document.
      *
+     * <p>
+     *  注册给定的观察器,以在对文档进行可撤销的编辑时开始接收通知。
+     * 
+     * 
      * @param listener the observer to register
      * @see javax.swing.event.UndoableEditEvent
      */
@@ -222,6 +327,10 @@ public interface Document {
      * Unregisters the given observer from the notification list
      * so it will no longer receive updates.
      *
+     * <p>
+     *  从通知列表中取消注册给定的观察者,因此它将不再接收更新。
+     * 
+     * 
      * @param listener the observer to register
      * @see javax.swing.event.UndoableEditEvent
      */
@@ -230,6 +339,10 @@ public interface Document {
     /**
      * Gets the properties associated with the document.
      *
+     * <p>
+     *  获取与文档相关联的属性。
+     * 
+     * 
      * @param key a non-<code>null</code> property key
      * @return the properties
      * @see #putProperty(Object, Object)
@@ -243,6 +356,13 @@ public interface Document {
      * <a href="#TitleProperty"><code>TitleProperty</code></a>.
      * Other properties, such as author, may also be defined.
      *
+     * <p>
+     *  将属性与文档关联。
+     * 提供的两个标准属性键为：<a href="#StreamDescriptionProperty"> <code> StreamDescriptionProperty </code> </a>和<a href="#TitleProperty">
+     *  <code> TitleProperty </code> </a> 。
+     *  将属性与文档关联。也可以定义其他属性,例如作者。
+     * 
+     * 
      * @param key the non-<code>null</code> property key
      * @param value the property value
      * @see #getProperty(Object)
@@ -280,6 +400,20 @@ public interface Document {
      * If the Document supports undo/redo, an UndoableEditEvent will
      * also be generated.
      *
+     * <p>
+     *  删除文档内容的一部分。这将导致DocumentEvent.EventType.REMOVE类型的DocumentEvent被发送到已注册的DocumentListeners,除非抛出异常。
+     * 通知将通过调用DocumentListeners上的removeUpdate方法发送给侦听器。
+     * <p>
+     *  为了确保面对并发的合理行为,在发生突变之后调度事件。这意味着,在发送删除通知时,文档已经更新,并且由<code> createPosition </code>创建的任何标记已经更改。
+     * 对于移除,移除范围的结束向下折叠到范围的开始,并且移除范围中的任何标记都将折叠到范围的开头。
+     *  <p style ="text-align：center"> <img src ="doc-files / Document-remove.gif"。
+     * alt="Diagram shows removal of 'quick' from 'The quick brown fox.'">
+     * <p>
+     * 如果文档结构因删除而更改,则响应更改插入和删除元素的详细信息也将包含在生成的DocumentEvent中。它是由一个文档的实现决定如何结构应该改变响应删除。
+     * <p>
+     *  如果文档支持撤消/重做,也将生成UndoableEditEvent。
+     * 
+     * 
      * @param offs  the offset from the beginning &gt;= 0
      * @param len   the number of characters to remove &gt;= 0
      * @exception BadLocationException  some portion of the removal range
@@ -313,6 +447,17 @@ public interface Document {
      * If the Document supports undo/redo, an UndoableEditEvent will
      * also be generated.
      *
+     * <p>
+     *  插入一串内容。这将导致DocumentEvent.EventType.INSERT类型的DocumentEvent发送到已注册的DocumentListers,除非抛出异常。
+     *  DocumentEvent将通过调用DocumentListener上的insertUpdate方法来传递。生成的DocumentEvent的偏移量和长度将指示对文档实际做了哪些更改。
+     *  <p style ="text-align：center"> <img src ="doc-files / Document-insert.gif"。
+     * alt="Diagram shows insertion of 'quick' in 'The quick brown fox'">
+     * <p>
+     *  如果文档结构因插入而更改,则响应于更改插入和删除元素的详细信息也将包含在生成的DocumentEvent中。它是由一个文档的实现决定如何结构应该改变响应插入。
+     * <p>
+     *  如果文档支持撤消/重做,也将生成UndoableEditEvent。
+     * 
+     * 
      * @param offset  the offset into the document to insert the content &gt;= 0.
      *    All positions that track change at or after the given location
      *    will move.
@@ -332,6 +477,10 @@ public interface Document {
      * Fetches the text contained within the given portion
      * of the document.
      *
+     * <p>
+     *  获取文档给定部分中包含的文本。
+     * 
+     * 
      * @param offset  the offset into the document representing the desired
      *   start of the text &gt;= 0
      * @param length  the length of the desired string &gt;= 0
@@ -370,6 +519,21 @@ public interface Document {
      *
      * </code></pre>
      *
+     * <p>
+     *  获取文档给定部分中包含的文本。
+     * <p>
+     * 如果txt参数的partialReturn属性为false,则段中返回的数据将是请求的整个长度,根据数据的存储方式,可能或可能不是副本。
+     * 如果partialReturn属性为true,则只返回无需创建副本即可返回的文本量。使用部分返回将为正在扫描文档的大部分的情况提供更好的性能。以下是使用部分返回访问整个文档的示例：。
+     * 
+     *  <pre> <code>
+     * 
+     *  &nbsp; int nleft = doc.getDocumentLength(); &nbsp; segment text = new Segment(); &nbsp; int offs = 0
+     * ; &nbsp; text.setPartialReturn(true); &nbsp; while(nleft> 0){&nbsp; doc.getText(offs,nleft,text); &nbsp; // do somethinging with text&nbsp; nleft  -  = text.count; &nbsp; offs + = text.count; &nbsp; }
+     * }。
+     * 
+     *  </code> </pre>
+     * 
+     * 
      * @param offset  the offset into the document representing the desired
      *   start of the text &gt;= 0
      * @param length  the length of the desired string &gt;= 0
@@ -386,6 +550,10 @@ public interface Document {
      * position returned can be counted on to track change and stay
      * located at the beginning of the document.
      *
+     * <p>
+     *  返回表示文档开头的位置。返回的位置可以计入跟踪更改并保留位于文档开头。
+     * 
+     * 
      * @return the position
      */
     public Position getStartPosition();
@@ -395,6 +563,10 @@ public interface Document {
      * position returned can be counted on to track change and stay
      * located at the end of the document.
      *
+     * <p>
+     *  返回表示文档结尾的位置。返回的位置可以计入跟踪更改并保留位于文档末尾。
+     * 
+     * 
      * @return the position
      */
     public Position getEndPosition();
@@ -409,6 +581,11 @@ public interface Document {
      * insertion is forced to a position that follows the
      * original position.
      *
+     * <p>
+     * 此方法允许应用程序标记字符内容序列中的位置。然后,可以使用此标记跟踪更改,因为在内容中插入和删除。
+     * 策略是插入总是发生在当前位置(最常见的情况)之前,除非插入位置是零,在这种情况下插入被强制到跟随原始位置的位置。
+     * 
+     * 
      * @param offs  the offset from the start of the document &gt;= 0
      * @return the position
      * @exception BadLocationException  if the given position does not
@@ -433,6 +610,16 @@ public interface Document {
      * <li>Annotations.
      * </ul>
      *
+     * <p>
+     *  返回定义的所有根元素。
+     * <p>
+     *  通常只有一个文档结构,但是界面支持在文本数据上构建任意数量的结构投影。文档可以具有多个根元素以支持多个文档结构。一些例子可能是：
+     * </p>
+     * <ul>
+     *  <li>文字方向。 <li>词汇令牌流。 <li>解析树。 <li>转换为原生格式以外的格式。 <li>修改规格。 <li>注释。
+     * </ul>
+     * 
+     * 
      * @return the root element
      */
     public Element[] getRootElements();
@@ -442,6 +629,10 @@ public interface Document {
      * unless some other mechanism for assigning views to element
      * structures is provided.
      *
+     * <p>
+     *  返回视图应该基于的根元素,除非提供了将视图分配给元素结构的一些其他机制。
+     * 
+     * 
      * @return the root element
      */
     public Element getDefaultRootElement();
@@ -454,6 +645,10 @@ public interface Document {
      * is being executed.  The runnable itself may <em>not</em>
      * make any mutations.
      *
+     * <p>
+     *  允许在存在并发性的情况下安全地呈现模型(如果模型支持异步更新)。给定的runnable将以允许其在执行可运行的时候安全地读取模型而没有改变的方式执行。可运行的本身可能不会</em>进行任何突变。
+     * 
+     * 
      * @param r a <code>Runnable</code> used to render the model
      */
     public void render(Runnable r);
@@ -463,12 +658,17 @@ public interface Document {
      * used to initialize the document.  This should be used
      * if the document was initialized from a stream and
      * anything is known about the stream.
+     * <p>
+     * 用于初始化文档的流的描述的属性名称。如果文档是从流初始化的,并且已知有关流的任何内容,则应使用此选项。
+     * 
      */
     public static final String StreamDescriptionProperty = "stream";
 
     /**
      * The property name for the title of the document, if
      * there is one.
+     * <p>
+     *  文档标题的属性名称(如果有的话)。
      */
     public static final String TitleProperty = "title";
 

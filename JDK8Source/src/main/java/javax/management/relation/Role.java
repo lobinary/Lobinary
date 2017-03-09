@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,12 @@ import javax.management.ObjectName;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-279985518429862552L</code>.
  *
+ * <p>
+ *  表示角色：包括角色名称和引用的MBean(通过其ObjectNames)。角色值总是表示为ArrayList集合(ObjectNames)以均化访问。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> -279985518429862552L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -83,6 +90,8 @@ public class Role implements Serializable {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField name String Role name
      * @serialField objectNameList List {@link List} of {@link ObjectName}s of referenced MBeans
      */
@@ -112,11 +121,15 @@ public class Role implements Serializable {
     //
 
     /**
+    /* <p>
+    /* 
      * @serial Role name
      */
     private String name = null;
 
     /**
+    /* <p>
+    /* 
      * @serial {@link List} of {@link ObjectName}s of referenced MBeans
      */
     private List<ObjectName> objectNameList = new ArrayList<ObjectName>();
@@ -131,6 +144,10 @@ public class Role implements Serializable {
      * an MBean server.  That check will be made when the role is set
      * in a relation.
      *
+     * <p>
+     *  <p>创建一个新的Role对象。不会检查角色值中的ObjectName是否存在于MBean服务器中。当角色在关系中设置时,将进行检查。
+     * 
+     * 
      * @param roleName  role name
      * @param roleValue  role value (List of ObjectName objects)
      *
@@ -158,6 +175,10 @@ public class Role implements Serializable {
     /**
      * Retrieves role name.
      *
+     * <p>
+     *  检索角色名称。
+     * 
+     * 
      * @return the role name.
      *
      * @see #setRoleName
@@ -169,6 +190,10 @@ public class Role implements Serializable {
     /**
      * Retrieves role value.
      *
+     * <p>
+     *  检索角色值。
+     * 
+     * 
      * @return ArrayList of ObjectName objects for referenced MBeans.
      *
      * @see #setRoleValue
@@ -180,6 +205,10 @@ public class Role implements Serializable {
     /**
      * Sets role name.
      *
+     * <p>
+     *  设置角色名称。
+     * 
+     * 
      * @param roleName  role name
      *
      * @exception IllegalArgumentException  if null parameter
@@ -201,6 +230,10 @@ public class Role implements Serializable {
     /**
      * Sets role value.
      *
+     * <p>
+     *  设置角色值。
+     * 
+     * 
      * @param roleValue  List of ObjectName objects for referenced
      * MBeans.
      *
@@ -223,6 +256,10 @@ public class Role implements Serializable {
     /**
      * Returns a string describing the role.
      *
+     * <p>
+     *  返回描述角色的字符串。
+     * 
+     * 
      * @return the description of the role.
      */
     public String toString() {
@@ -246,6 +283,10 @@ public class Role implements Serializable {
     /**
      * Clone the role object.
      *
+     * <p>
+     *  克隆角色对象。
+     * 
+     * 
      * @return a Role that is an independent copy of the current Role object.
      */
     public Object clone() {
@@ -260,6 +301,10 @@ public class Role implements Serializable {
     /**
      * Returns a string for the given role value.
      *
+     * <p>
+     *  返回给定角色值的字符串。
+     * 
+     * 
      * @param roleValue  List of ObjectName objects
      *
      * @return A String consisting of the ObjectNames separated by
@@ -286,6 +331,9 @@ public class Role implements Serializable {
 
     /**
      * Deserializes a {@link Role} from an {@link ObjectInputStream}.
+     * <p>
+     *  将{@link角色}从{@link ObjectInputStream}反序列化。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -316,6 +364,8 @@ public class Role implements Serializable {
 
     /**
      * Serializes a {@link Role} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link角色}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

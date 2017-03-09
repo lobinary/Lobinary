@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SerializerFactory.java,v 1.2.4.1 2005/09/15 08:15:24 suresh_emailid Exp $
+ * <p>
+ *  $ Id：SerializerFactory.java,v 1.2.4.1 2005/09/15 08:15:24 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -57,6 +70,24 @@ import org.xml.sax.ContentHandler;
    * <p>
    * The non-standard property keys supported are defined in {@link OutputPropertiesFactory}.
    *
+   * <p>
+   *  这个类是一个公共API,它是一个用于创建序列化程序的工厂。
+   * 
+   *  传递给getSerializer()方法的属性对象应由OutputPropertiesFactory创建。
+   * 虽然用于创建序列化程序的属性对象不需要从OutputPropertiesFactory获取,但使用此出厂确保为给定输出"方法"设置默认键/值属性。
+   * 
+   * <p>
+   * 支持的标准属性键包括："method","version","encoding","omit-xml-declaration","standalone",doctype-public","doctype
+   * -system","cdata-section- "indent","media-type"。
+   * 这些属性键及其值在XSLT建议中描述,参见{@link <a href ="http://www.w3.org/TR/1999/REC-xslt- 19991116"> XSLT 1.0推荐</a>}。
+   * 
+   * <p>
+   *  "cdata-section-elements"属性键的值是空格分隔的元素列表。如果元素在命名空间中,则以下面的格式传递值：{uri} localName
+   * 
+   * <p>
+   *  支持的非标准属性键在{@link OutputPropertiesFactory}中定义。
+   * 
+   * 
    * @see OutputPropertiesFactory
    * @see Method
    * @see Serializer
@@ -65,6 +96,7 @@ public final class SerializerFactory
 {
   /**
    * This constructor is private just to prevent the creation of such an object.
+   * <p>
    */
 
   private SerializerFactory() {
@@ -72,6 +104,9 @@ public final class SerializerFactory
   }
   /**
    * Associates output methods to default output formats.
+   * <p>
+   *  这个构造函数是私有的,只是为了防止创建这样的对象。
+   * 
    */
   private static Hashtable m_formats = new Hashtable();
 
@@ -82,6 +117,10 @@ public final class SerializerFactory
    * an exception of some type will be thrown.
    * For a list of the output "method" key values see {@link Method}.
    *
+   * <p>
+   *  将输出方法与默认输出格式相关联。
+   * 
+   * 
    * @param format The output format, minimally the "method" property must be set.
    * @return A suitable serializer.
    * @throws IllegalArgumentException if method is
@@ -144,6 +183,9 @@ public final class SerializerFactory
               /*
                *  This  must be a user defined Serializer.
                *  It had better implement ContentHandler.
+               * <p>
+               *  返回指定输出方法的序列化程序。输出方法由与"方法"键关联的属性的值指定。如果没有支持指定输出方法的实现,将抛出某种类型的异常。有关输出"方法"键值的列表,请参见{@link Method}。
+               * 
                */
                if (obj instanceof ContentHandler)
                {
@@ -153,6 +195,9 @@ public final class SerializerFactory
                    * but we need to wrap it with ToXMLSAXHandler which
                    * will collect SAX-like events and emit true
                    * SAX ContentHandler events to the users handler.
+                   * <p>
+                   *  这必须是用户定义的序列化程序。它有更好的实现ContentHandler。
+                   * 
                    */
                   className = SerializerConstants.DEFAULT_SAX_SERIALIZER;
                   cls = ObjectFactory.findProviderClass(className, true);

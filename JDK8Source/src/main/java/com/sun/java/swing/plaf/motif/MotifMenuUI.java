@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * A Motif L&F implementation of MenuUI.
  * <p>
  *
+ * <p>
+ *  MenuUI的Motif L&F实现。
+ * <p>
+ * 
  * @author Georges Saab
  * @author Rich Schiavi
  */

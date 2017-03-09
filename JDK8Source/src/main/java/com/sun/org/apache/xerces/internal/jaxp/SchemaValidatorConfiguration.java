@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp;
@@ -34,6 +44,10 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLConfigurationException;
 /**
  * <p>Parser configuration for Xerces' XMLSchemaValidator.</p>
  *
+ * <p>
+ *  <p> Xerces的XMLSchemaValidator的解析器配置。</p>
+ * 
+ * 
  * @version $Id: SchemaValidatorConfiguration.java,v 1.5 2010-11-01 04:40:06 joehw Exp $
  */
 final class SchemaValidatorConfiguration implements XMLComponentManager {
@@ -83,6 +97,9 @@ final class SchemaValidatorConfiguration implements XMLComponentManager {
     /**
      * Tracks whether the validator should use components from
      * the grammar pool to the exclusion of all others.
+     * <p>
+     *  跟踪验证器是否应使用语法池中的组件,排除所有其他组件。
+     * 
      */
     private final boolean fUseGrammarPoolOnly;
 
@@ -109,6 +126,10 @@ final class SchemaValidatorConfiguration implements XMLComponentManager {
     /**
      * Returns the state of a feature.
      *
+     * <p>
+     *  返回要素的状态。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @return true if the feature is supported
      *
@@ -153,6 +174,9 @@ final class SchemaValidatorConfiguration implements XMLComponentManager {
     /**
      * Returns the value of a property.
      *
+     * <p>
+     *  返回属性的值。
+     * 
      * @param propertyId The property identifier.
      * @return the value of the property
      *

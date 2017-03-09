@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ApplyImports.java,v 1.2.4.1 2005/09/13 12:22:02 pvedula Exp $
+ * <p>
+ *  $ Id：ApplyImports.java,v 1.2.4.1 2005/09/13 12:22:02 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -53,6 +66,9 @@ final class ApplyImports extends Instruction {
 
     /**
      * Returns true if this <xsl:apply-imports/> element has parameters
+     * <p>
+     *  如果此<xsl：apply-imports />元素具有参数,则返回true
+     * 
      */
     public boolean hasWithParams() {
         return hasContents();
@@ -64,6 +80,9 @@ final class ApplyImports extends Instruction {
      * element occured. The templates that are imported by the stylesheet in
      * which this element occured will all have higher import precedence than
      * the integer returned by this method.
+     * <p>
+     *  确定导入或包含在样式表中的<xsl：apply-imported />元素的最低导入优先级。由此元素出现的样式表导入的模板将具有比此方法返回的整数更高的导入优先级。
+     * 
      */
     private int getMinPrecedence(int max) {
         // Move to root of include tree
@@ -77,6 +96,9 @@ final class ApplyImports extends Instruction {
 
     /**
      * Parse the attributes and contents of an <xsl:apply-imports/> element.
+     * <p>
+     *  解析<xsl：apply-imports />元素的属性和内容。
+     * 
      */
     public void parseContents(Parser parser) {
         // Indicate to the top-level stylesheet that all templates must be
@@ -97,6 +119,9 @@ final class ApplyImports extends Instruction {
 
     /**
      * Type-check the attributes/contents of an <xsl:apply-imports/> element.
+     * <p>
+     *  键入 - 检查<xsl：apply-imports />元素的属性/内容。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         typeCheckContents(stable);              // with-params
@@ -106,6 +131,8 @@ final class ApplyImports extends Instruction {
     /**
      * Translate call-template. A parameter frame is pushed only if
      * some template in the stylesheet uses parameters.
+     * <p>
+     *  翻译调用模板。仅当样式表中的某些模板使用参数时,才推送参数框架。
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         final Stylesheet stylesheet = classGen.getStylesheet();

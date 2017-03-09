@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import sun.swing.*;
 /**
  * BasicMenuItem implementation
  *
+ * <p>
+ *  BasicMenuItem实现
+ * 
+ * 
  * @author Georges Saab
  * @author David Karlton
  * @author Arnaud Weber
@@ -56,6 +61,10 @@ public class BasicMenuItemUI extends MenuItemUI
 
     /**
      * Accelerator delimiter string, such as {@code '+'} in {@code 'Ctrl+C'}.
+     * <p>
+     *  加速器定界符字符串,例如{@code'Ctrl + C'}中的{@code'+'}。
+     * 
+     * 
      * @since 1.7
      */
     protected String acceleratorDelimiter;
@@ -73,6 +82,13 @@ public class BasicMenuItemUI extends MenuItemUI
      * <code>PropertyChangeListener</code> override
      * <code>createPropertyChangeListener</code>.
      *
+     * <p>
+     *  从<code> createPropertyChangeListener </code>返回的<code> PropertyChangeListener </code>。
+     * 您不需要访问此字段,而是您想要自定义<code> PropertyChangeListener </code> override <code> createPropertyChangeListener 
+     * </code>。
+     *  从<code> createPropertyChangeListener </code>返回的<code> PropertyChangeListener </code>。
+     * 
+     * 
      * @since 1.6
      * @see #createPropertyChangeListener
      */
@@ -202,6 +218,8 @@ public class BasicMenuItemUI extends MenuItemUI
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.3
      */
     protected void installComponents(JMenuItem menuItem){
@@ -261,6 +279,8 @@ public class BasicMenuItemUI extends MenuItemUI
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.3
      */
     protected void uninstallComponents(JMenuItem menuItem){
@@ -312,6 +332,10 @@ public class BasicMenuItemUI extends MenuItemUI
      * the menu item.
      * If this method returns null then it will not be added to the menu item.
      *
+     * <p>
+     *  创建将添加到菜单项的<code> PropertyChangeListener </code>。如果此方法返回null,则不会将其添加到菜单项。
+     * 
+     * 
      * @return an instance of a <code>PropertyChangeListener</code> or null
      * @since 1.6
      */
@@ -466,6 +490,9 @@ public class BasicMenuItemUI extends MenuItemUI
      * so override update (which fills the background of opaque
      * components by default) to just call paint().
      *
+     * <p>
+     *  我们在paintMenuItem()中绘制背景,因此覆盖update(默认情况下填充了不透明组件的背景),只需调用paint()。
+     * 
      */
     public void update(Graphics g, JComponent c) {
         paint(g, c);
@@ -633,6 +660,10 @@ public class BasicMenuItemUI extends MenuItemUI
     /**
      * Draws the background of the menu item.
      *
+     * <p>
+     *  绘制菜单项的背景。
+     * 
+     * 
      * @param g the paint graphics
      * @param menuItem menu item to be painted
      * @param bgColor selection background color
@@ -665,6 +696,10 @@ public class BasicMenuItemUI extends MenuItemUI
     /**
      * Renders the text of the current menu item.
      * <p>
+     * <p>
+     *  呈现当前菜单项的文本。
+     * <p>
+     * 
      * @param g graphics context
      * @param menuItem menu item to render
      * @param textRect bounding rectangle for rendering the text
@@ -735,6 +770,10 @@ public class BasicMenuItemUI extends MenuItemUI
             printMenuElementArray(oldPath, false);
             System.out.println("New array : ");
             printMenuElementArray(newPath, false);
+            /* <p>
+            /*  System.out.println("Sibling condition  - "); System.out.println("Old array："); printMenuElementArray
+            /* (oldPath,false); System.out.println("New array："); printMenuElementArray(newPath,false);。
+            /* 
             */
         }
         return newPath;
@@ -809,6 +848,10 @@ public class BasicMenuItemUI extends MenuItemUI
      * such as clearing the selected path and messaging the
      * JMenuItem's doClick() method.
      *
+     * <p>
+     *  当要激活菜单项时调用此方法。此方法处理菜单项激活的一些细节,例如清除所选路径和消息传递JMenuItem的doClick()方法。
+     * 
+     * 
      * @param msm  A MenuSelectionManager. The visual feedback and
      *             internal bookkeeping tasks are delegated to
      *             this MenuSelectionManager. If <code>null</code> is
@@ -841,6 +884,11 @@ public class BasicMenuItemUI extends MenuItemUI
      * WindowsInternalFrameTitlePaneUI.java, and
      * MotifInternalFrameTitlePaneUI.java.
      *
+     * <p>
+     * 这是为了查看所讨论的菜单项是否是内部框架上的系统菜单的一部分。
+     * 正在检查的字符串可以在MetalInternalFrameTitlePaneUI.java,WindowsInternalFrameTitlePaneUI.java和MotifInternalFrame
+     * TitlePaneUI.java中找到。
+     * 
      * @since 1.4
      */
     private boolean isInternalFrameSystemMenu() {

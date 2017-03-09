@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XSLTC.java,v 1.2.4.1 2005/09/05 09:51:38 pvedula Exp $
+ * <p>
+ *  $ Id：XSLTC.java,v 1.2.4.1 2005/09/05 09:51:38 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -57,6 +70,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author G. Todd Miller
@@ -131,11 +146,17 @@ public final class XSLTC {
      * inlining used to be the default, but we have found that
      * Hotspots does a better job with shorter methods, so the
      * default is *not* to inline now.
+     * <p>
+     *  如果请求模板内联,请设置为true。模板内联以前是默认的,但我们发现热点使用更短的方法更好的工作,所以默认是*不是*现在内联。
+     * 
      */
     private boolean _templateInlining = false;
 
     /**
      * State of the secure processing feature.
+     * <p>
+     *  安全处理功能的状态。
+     * 
      */
     private boolean _isSecureProcessing = false;
 
@@ -143,10 +164,16 @@ public final class XSLTC {
 
     /**
      * protocols allowed for external references set by the stylesheet processing instruction, Import and Include element.
+     * <p>
+     *  允许由样式表处理指令设置的外部引用的协议,Import和Include元素。
+     * 
      */
     private String _accessExternalStylesheet = XalanConstants.EXTERNAL_ACCESS_DEFAULT;
      /**
      * protocols allowed for external DTD references in source file and/or stylesheet.
+     * <p>
+     *  允许在源文件和/或样式表中的外部DTD引用的协议。
+     * 
      */
     private String _accessExternalDTD = XalanConstants.EXTERNAL_ACCESS_DEFAULT;
 
@@ -156,6 +183,9 @@ public final class XSLTC {
 
     /**
     *  Extension function class loader variables
+    * <p>
+    *  扩展函数类加载器变量
+    * 
     */
 
     /* Class loader reference that will be used for external extension functions loading */
@@ -163,11 +193,17 @@ public final class XSLTC {
 
     /**
     *  HashMap with the loaded classes
+    * <p>
+    *  HashMap与加载的类
+    * 
     */
     private final Map<String, Class> _externalExtensionFunctions;
 
     /**
      * XSLTC compiler constructor
+     * <p>
+     *  XSLTC编译器构造器
+     * 
      */
     public XSLTC(boolean useServicesMechanism, FeatureManager featureManager) {
         _parser = new Parser(this, useServicesMechanism);
@@ -178,6 +214,9 @@ public final class XSLTC {
 
     /**
      * Set the state of the secure processing feature.
+     * <p>
+     *  设置安全处理功能的状态。
+     * 
      */
     public void setSecureProcessing(boolean flag) {
         _isSecureProcessing = flag;
@@ -185,12 +224,18 @@ public final class XSLTC {
 
     /**
      * Return the state of the secure processing feature.
+     * <p>
+     *  返回安全处理功能的状态。
+     * 
      */
     public boolean isSecureProcessing() {
         return _isSecureProcessing;
     }
     /**
      * Return the state of the services mechanism feature.
+     * <p>
+     *  返回服务机制功能的状态。
+     * 
      */
     public boolean useServicesMechnism() {
         return _useServicesMechanism;
@@ -198,6 +243,9 @@ public final class XSLTC {
 
     /**
      * Set the state of the services mechanism feature.
+     * <p>
+     * 设置服务机制功能的状态。
+     * 
      */
     public void setServicesMechnism(boolean flag) {
         _useServicesMechanism = flag;
@@ -205,6 +253,10 @@ public final class XSLTC {
 
      /**
      * Return the value of the specified feature
+     * <p>
+     *  返回指定要素的值
+     * 
+     * 
      * @param name name of the feature
      * @return true if the feature is enabled, false otherwise
      */
@@ -214,6 +266,9 @@ public final class XSLTC {
 
     /**
      * Return allowed protocols for accessing external stylesheet.
+     * <p>
+     *  返回允许访问外部样式表的协议。
+     * 
      */
     public Object getProperty(String name) {
         if (name.equals(XMLConstants.ACCESS_EXTERNAL_STYLESHEET)) {
@@ -231,6 +286,9 @@ public final class XSLTC {
 
     /**
      * Set allowed protocols for accessing external stylesheet.
+     * <p>
+     *  设置允许访问外部样式表的协议。
+     * 
      */
     public void setProperty(String name, Object value) {
         if (name.equals(XMLConstants.ACCESS_EXTERNAL_STYLESHEET)) {
@@ -243,6 +301,8 @@ public final class XSLTC {
         } else if (name.equals(XalanConstants.JDK_EXTENSION_CLASSLOADER)) {
             _extensionClassLoader = (ClassLoader) value;
             /* Clear the external extension functions HashMap if extension class
+            /* <p>
+            /* 
                loader was changed */
             _externalExtensionFunctions.clear();
         }
@@ -250,6 +310,9 @@ public final class XSLTC {
 
     /**
      * Only for user by the internal TrAX implementation.
+     * <p>
+     *  仅供用户通过内部TrAX实现。
+     * 
      */
     public Parser getParser() {
         return _parser;
@@ -257,6 +320,9 @@ public final class XSLTC {
 
     /**
      * Only for user by the internal TrAX implementation.
+     * <p>
+     *  仅供用户通过内部TrAX实现。
+     * 
      */
     public void setOutputType(int type) {
         _outputType = type;
@@ -264,6 +330,9 @@ public final class XSLTC {
 
     /**
      * Only for user by the internal TrAX implementation.
+     * <p>
+     *  仅供用户通过内部TrAX实现。
+     * 
      */
     public Properties getOutputProperties() {
         return _parser.getOutputProperties();
@@ -271,6 +340,9 @@ public final class XSLTC {
 
     /**
      * Initializes the compiler to compile a new stylesheet
+     * <p>
+     *  初始化编译器以编译新的样式表
+     * 
      */
     public void init() {
         reset();
@@ -289,6 +361,9 @@ public final class XSLTC {
      * Function loads an external extension functions.
      * The filtering of function types (external,internal) takes place in FunctionCall class
      *
+     * <p>
+     *  功能加载外部扩展功能。函数类型(外部,内部)的过滤发生在FunctionCall类中
+     * 
      */
     Class loadExternalFunction(String name) throws ClassNotFoundException {
         Class loaded = null;
@@ -309,6 +384,9 @@ public final class XSLTC {
     /*
      * Returns unmodifiable view of HashMap with loaded external extension
      * functions - will be needed for the TransformerImpl
+     * <p>
+     *  返回带有加载的外部扩展函数的HashMap的不可修改视图 - 将需要TransformerImpl
+     * 
     */
     public Map<String, Class> getExternalExtensionFunctions() {
         return Collections.unmodifiableMap(_externalExtensionFunctions);
@@ -316,6 +394,9 @@ public final class XSLTC {
 
     /**
      * Initializes the compiler to produce a new translet
+     * <p>
+     *  初始化编译器以产生新的translet
+     * 
      */
     private void reset() {
         _nextGType      = DTM.NTYPES;
@@ -347,6 +428,10 @@ public final class XSLTC {
     /**
      * Defines an external SourceLoader to provide the compiler with documents
      * referenced in xsl:include/import
+     * <p>
+     *  定义外部SourceLoader以向编译器提供在xsl：include / import中引用的文档
+     * 
+     * 
      * @param loader The SourceLoader to use for include/import
      */
     public void setSourceLoader(SourceLoader loader) {
@@ -358,12 +443,18 @@ public final class XSLTC {
      * default is to do inlining, but this causes problems when the
      * stylesheets have a large number of templates (e.g. branch targets
      * exceeding 64K or a length of a method exceeding 64K).
+     * <p>
+     *  设置一个标志,指示模板是否要内联。默认是做内联,但是当样式表有大量模板时(例如,分支目标超过64K或方法长度超过64K)会导致问题。
+     * 
      */
     public void setTemplateInlining(boolean templateInlining) {
         _templateInlining = templateInlining;
     }
      /**
      * Return the state of the template inlining feature.
+     * <p>
+     *  返回模板内联函数的状态。
+     * 
      */
     public boolean getTemplateInlining() {
         return _templateInlining;
@@ -373,6 +464,10 @@ public final class XSLTC {
      * Set the parameters to use to locate the correct <?xml-stylesheet ...?>
      * processing instruction in the case where the input document to the
      * compiler (and parser) is an XML document.
+     * <p>
+     *  设置要使用的参数,以便在编译器(和解析器)的输入文档是XML文档的情况下找到正确的<?xml-stylesheet ...?>处理指令。
+     * 
+     * 
      * @param media The media attribute to be matched. May be null, in which
      * case the prefered templates will be used (i.e. alternate = no).
      * @param title The value of the title attribute to match. May be null.
@@ -384,6 +479,10 @@ public final class XSLTC {
 
     /**
      * Compiles an XSL stylesheet pointed to by a URL
+     * <p>
+     *  编译URL指向的XSL样式表
+     * 
+     * 
      * @param url An URL containing the input XSL stylesheet
      */
     public boolean compile(URL url) {
@@ -402,6 +501,10 @@ public final class XSLTC {
 
     /**
      * Compiles an XSL stylesheet pointed to by a URL
+     * <p>
+     *  编译URL指向的XSL样式表
+     * 
+     * 
      * @param url An URL containing the input XSL stylesheet
      * @param name The name to assign to the translet class
      */
@@ -421,6 +524,10 @@ public final class XSLTC {
 
     /**
      * Compiles an XSL stylesheet passed in through an InputStream
+     * <p>
+     *  编译通过InputStream传入的XSL样式表
+     * 
+     * 
      * @param stream An InputStream that will pass in the stylesheet contents
      * @param name The name of the translet class to generate
      * @return 'true' if the compilation was successful
@@ -433,6 +540,10 @@ public final class XSLTC {
 
     /**
      * Compiles an XSL stylesheet passed in through an InputStream
+     * <p>
+     * 编译通过InputStream传入的XSL样式表
+     * 
+     * 
      * @param input An InputSource that will pass in the stylesheet contents
      * @param name The name of the translet class to generate - can be null
      * @return 'true' if the compilation was successful
@@ -513,6 +624,13 @@ public final class XSLTC {
 
     /**
      * Compiles a set of stylesheets pointed to by a Vector of URLs
+     * <p>
+     *  _parser.reportError(Constants.FATAL,new ErrorMsg(ErrorMsg.JAXP_COMPILE_ERR,e)); } catch(Error e){if(_debug)e.printStackTrace(); _parser.reportError(Constants.FATAL,new ErrorMsg(ErrorMsg.JAXP_COMPILE_ERR,e)); }
+     *  finally {_reader = null; // reset this here to确保它不被重用} return！_parser.errorsFound(); }}。
+     * 
+     *  / **编译由URL的向量指向的一组样式表
+     * 
+     * 
      * @param stylesheets A Vector containing URLs pointing to the stylesheets
      * @return 'true' if the compilation was successful
      */
@@ -548,6 +666,10 @@ public final class XSLTC {
 
     /**
      * Returns an array of bytecode arrays generated by a compilation.
+     * <p>
+     *  返回由编译生成的字节码数组的数组。
+     * 
+     * 
      * @return JVM bytecodes that represent translet class definition
      */
     public byte[][] getBytecodes() {
@@ -561,6 +683,10 @@ public final class XSLTC {
     /**
      * Compiles a stylesheet pointed to by a URL. The result is put in a
      * set of byte arrays. One byte array for each generated class.
+     * <p>
+     *  编译URL指向的样式表。结果放在一组字节数组中。每个生成的类一个字节数组。
+     * 
+     * 
      * @param name The name of the translet class to generate
      * @param input An InputSource that will pass in the stylesheet contents
      * @param outputType The output type
@@ -577,6 +703,10 @@ public final class XSLTC {
     /**
      * Compiles a stylesheet pointed to by a URL. The result is put in a
      * set of byte arrays. One byte array for each generated class.
+     * <p>
+     *  编译URL指向的样式表。结果放在一组字节数组中。每个生成的类一个字节数组。
+     * 
+     * 
      * @param name The name of the translet class to generate
      * @param input An InputSource that will pass in the stylesheet contents
      * @return JVM bytecodes that represent translet class definition
@@ -587,6 +717,10 @@ public final class XSLTC {
 
     /**
      * Set the XMLReader to use for parsing the next input stylesheet
+     * <p>
+     *  设置XMLReader用于解析下一个输入样式表
+     * 
+     * 
      * @param reader XMLReader (SAX2 parser) to use
      */
     public void setXMLReader(XMLReader reader) {
@@ -595,6 +729,9 @@ public final class XSLTC {
 
     /**
      * Get the XMLReader to use for parsing the next input stylesheet
+     * <p>
+     *  获取用于解析下一个输入样式表的XMLReader
+     * 
      */
     public XMLReader getXMLReader() {
         return _reader ;
@@ -602,6 +739,10 @@ public final class XSLTC {
 
     /**
      * Get a Vector containing all compile error messages
+     * <p>
+     *  获取包含所有编译错误消息的向量
+     * 
+     * 
      * @return A Vector containing all compile error messages
      */
     public Vector getErrors() {
@@ -610,6 +751,10 @@ public final class XSLTC {
 
     /**
      * Get a Vector containing all compile warning messages
+     * <p>
+     *  获取包含所有编译警告消息的向量
+     * 
+     * 
      * @return A Vector containing all compile error messages
      */
     public Vector getWarnings() {
@@ -618,6 +763,9 @@ public final class XSLTC {
 
     /**
      * Print all compile error messages to standard output
+     * <p>
+     *  将所有编译错误消息打印到标准输出
+     * 
      */
     public void printErrors() {
         _parser.printErrors();
@@ -625,6 +773,9 @@ public final class XSLTC {
 
     /**
      * Print all compile warning messages to standard output
+     * <p>
+     *  将所有编译警告消息打印到标准输出
+     * 
      */
     public void printWarnings() {
         _parser.printWarnings();
@@ -633,6 +784,9 @@ public final class XSLTC {
     /**
      * This method is called by the XPathParser when it encounters a call
      * to the document() function. Affects the DOM used by the translet.
+     * <p>
+     *  XPathParser在遇到对document()函数的调用时调用此方法。影响translet使用的DOM。
+     * 
      */
     protected void setMultiDocument(boolean flag) {
         _multiDocument = flag;
@@ -645,6 +799,9 @@ public final class XSLTC {
     /**
      * This method is called by the XPathParser when it encounters a call
      * to the nodeset() extension function. Implies multi document.
+     * <p>
+     *  当XPathParser遇到对nodeset()扩展函数的调用时,将调用此方法。隐含多文档。
+     * 
      */
     protected void setCallsNodeset(boolean flag) {
         if (flag) setMultiDocument(flag);
@@ -667,6 +824,10 @@ public final class XSLTC {
      * Set the class name for the generated translet. This class name is
      * overridden if multiple stylesheets are compiled in one go using the
      * compile(Vector urls) method.
+     * <p>
+     * 设置生成的translet的类名。如果使用compile(Vector urls)方法一次编译多个样式表,将覆盖此类名。
+     * 
+     * 
      * @param className The name to assign to the translet class
      */
     public void setClassName(String className) {
@@ -682,6 +843,9 @@ public final class XSLTC {
 
     /**
      * Get the class name for the generated translet.
+     * <p>
+     *  获取生成的translet的类名。
+     * 
      */
     public String getClassName() {
         return _className;
@@ -690,6 +854,9 @@ public final class XSLTC {
     /**
      * Convert for Java class name of local system file name.
      * (Replace '.' with '/' on UNIX and replace '.' by '\' on Windows/DOS.)
+     * <p>
+     *  转换本地系统文件名的Java类名。 (在UNIX上将'。'替换为'/',并在Windows / DOS上用'\'替换'。'。)
+     * 
      */
     private String classFileName(final String className) {
         return className.replace('.', File.separatorChar) + ".class";
@@ -697,6 +864,9 @@ public final class XSLTC {
 
     /**
      * Generate an output File object to send the translet to
+     * <p>
+     *  生成一个输出File对象以将translet发送到
+     * 
      */
     private File getOutputFile(String className) {
         if (_destDir != null)
@@ -708,6 +878,9 @@ public final class XSLTC {
     /**
      * Set the destination directory for the translet.
      * The current working directory will be used by default.
+     * <p>
+     *  设置translet的目标目录。默认情况下将使用当前工作目录。
+     * 
      */
     public boolean setDestDirectory(String dstDirName) {
         final File dir = new File(dstDirName);
@@ -723,6 +896,9 @@ public final class XSLTC {
 
     /**
      * Set an optional package name for the translet and auxiliary classes
+     * <p>
+     *  为translet和辅助类设置可选的包名称
+     * 
      */
     public void setPackageName(String packageName) {
         _packageName = packageName;
@@ -732,6 +908,9 @@ public final class XSLTC {
     /**
      * Set the name of an optional JAR-file to dump the translet and
      * auxiliary classes to
+     * <p>
+     *  设置可选的JAR文件的名称以将translet和辅助类转储到
+     * 
      */
     public void setJarFileName(String jarFileName) {
         final String JAR_EXT = ".jar";
@@ -748,6 +927,9 @@ public final class XSLTC {
 
     /**
      * Set the top-level stylesheet
+     * <p>
+     *  设置顶级样式表
+     * 
      */
     public void setStylesheet(Stylesheet stylesheet) {
         if (_stylesheet == null) _stylesheet = stylesheet;
@@ -755,6 +937,9 @@ public final class XSLTC {
 
     /**
      * Returns the top-level stylesheet
+     * <p>
+     *  返回顶级样式表
+     * 
      */
     public Stylesheet getStylesheet() {
         return _stylesheet;
@@ -763,6 +948,9 @@ public final class XSLTC {
     /**
      * Registers an attribute and gives it a type so that it can be mapped to
      * DOM attribute types at run-time.
+     * <p>
+     *  注册一个属性并给它一个类型,以便它可以在运行时映射到DOM属性类型。
+     * 
      */
     public int registerAttribute(QName name) {
         Integer code = (Integer)_attributes.get(name.toString());
@@ -785,6 +973,9 @@ public final class XSLTC {
     /**
      * Registers an element and gives it a type so that it can be mapped to
      * DOM element types at run-time.
+     * <p>
+     *  注册一个元素并给它一个类型,以便它可以在运行时映射到DOM元素类型。
+     * 
      */
     public int registerElement(QName name) {
         // Register element (full QName)
@@ -802,6 +993,9 @@ public final class XSLTC {
      /**
       * Registers a namespace prefix and gives it a type so that it can be mapped to
       * DOM namespace types at run-time.
+      * <p>
+      *  注册一个命名空间前缀并给它一个类型,以便它可以在运行时映射到DOM命名空间类型。
+      * 
       */
 
     public int registerNamespacePrefix(QName name) {
@@ -824,6 +1018,9 @@ public final class XSLTC {
     /**
      * Registers a namespace and gives it a type so that it can be mapped to
      * DOM namespace types at run-time.
+     * <p>
+     *  注册一个命名空间并给它一个类型,以便它可以在运行时映射到DOM命名空间类型。
+     * 
      */
     public int registerNamespace(String namespaceURI) {
         Integer code = (Integer)_namespaces.get(namespaceURI);
@@ -870,6 +1067,9 @@ public final class XSLTC {
     /**
      * Returns a unique name for every helper class needed to
      * execute a translet.
+     * <p>
+     *  返回执行translet所需的每个帮助类的唯一名称。
+     * 
      */
     public String getHelperClassName() {
         return getClassName() + '$' + _helperClassSerial++;
@@ -924,6 +1124,9 @@ public final class XSLTC {
 
     /**
      * File separators are converted to forward slashes for ZIP files.
+     * <p>
+     *  文件分隔符转换为ZIP文件的正斜杠。
+     * 
      */
     private String entryName(File f) throws IOException {
         return f.getName().replace(File.separatorChar, '/');
@@ -931,6 +1134,9 @@ public final class XSLTC {
 
     /**
      * Generate output JAR-file and packages
+     * <p>
+     *  生成输出JAR文件和包
+     * 
      */
     public void outputToJar() throws IOException {
         // create the manifest
@@ -969,6 +1175,9 @@ public final class XSLTC {
 
     /**
      * Turn debugging messages on/off
+     * <p>
+     *  打开/关闭调试消息
+     * 
      */
     public void setDebug(boolean debug) {
         _debug = debug;
@@ -976,6 +1185,9 @@ public final class XSLTC {
 
     /**
      * Get current debugging message setting
+     * <p>
+     *  获取当前调试消息设置
+     * 
      */
     public boolean debug() {
         return _debug;
@@ -986,6 +1198,10 @@ public final class XSLTC {
      * Retrieve a string representation of the character data to be stored
      * in the translet as a <code>char[]</code>.  There may be more than
      * one such array required.
+     * <p>
+     * 检索要作为<code> char [] </code>存储在translet中的字符数据的字符串表示。可能有多个这样的阵列需要。
+     * 
+     * 
      * @param index The index of the <code>char[]</code>.  Zero-based.
      * @return String The character data to be stored in the corresponding
      *               <code>char[]</code>.
@@ -997,6 +1213,9 @@ public final class XSLTC {
     /**
      * Get the number of char[] arrays, thus far, that will be created to
      * store literal text in the stylesheet.
+     * <p>
+     *  获取char []数组的数目,到目前为止,将被创建来存储文本文本在样式表中。
+     * 
      */
     public int getCharacterDataCount() {
         return (m_characterData != null) ? m_characterData.size() : 0;
@@ -1005,6 +1224,9 @@ public final class XSLTC {
     /**
      * Add literal text to char arrays that will be used to store character
      * data in the stylesheet.
+     * <p>
+     *  将字符文本添加到将用于在样式表中存储字符数据的字符数组。
+     * 
      * @param newData String data to be added to char arrays.
      *                Pre-condition:  <code>newData.length() &le; 21845</code>
      * @return int offset at which character data will be stored

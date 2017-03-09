@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import javax.lang.model.element.Name;
  *
  * @jls section 14.16
  *
+ * <p>
+ *  "continue"语句的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  继续;继续<em>标签</em>;
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

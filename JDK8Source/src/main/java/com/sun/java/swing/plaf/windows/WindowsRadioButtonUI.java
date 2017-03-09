@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,12 @@ import java.awt.*;
  * for short term storage or RMI between applications running the same
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
+ * <p>
+ *  Windows组件的翻译。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
  */
 public class WindowsRadioButtonUI extends BasicRadioButtonUI
 {
@@ -104,6 +111,9 @@ public class WindowsRadioButtonUI extends BasicRadioButtonUI
 
     /**
      * Overridden method to render the text without the mnemonic
+     * <p>
+     *  覆盖的方法来呈现没有助记符的文本
+     * 
      */
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         WindowsGraphicsUtils.paintText(g, b, textRect, text, getTextShiftOffset());
@@ -123,6 +133,8 @@ public class WindowsRadioButtonUI extends BasicRadioButtonUI
 
         /* Ensure that the width and height of the button is odd,
          * to allow for the focus line if focus is painted
+         * <p>
+         *  以便在焦点被绘时允许焦点线
          */
         AbstractButton b = (AbstractButton)c;
         if (d != null && b.isFocusPainted()) {

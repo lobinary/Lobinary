@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,12 @@ import java.net.InetAddress;
  * <p>
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  定义SNMP协议适配器使用的基于用户的ACL。
+ * <p>
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @since 1.5
  */
 
@@ -44,6 +51,10 @@ public interface UserAcl {
     /**
      * Returns the name of the ACL.
      *
+     * <p>
+     *  返回ACL的名称。
+     * 
+     * 
      * @return The name of the ACL.
      */
     public String getName();
@@ -51,6 +62,10 @@ public interface UserAcl {
     /**
      * Checks whether or not the specified user has <CODE>READ</CODE> access.
      *
+     * <p>
+     *  检查指定的用户是否具有<CODE> READ </CODE>访问权限。
+     * 
+     * 
      * @param user The user name to check.
      *
      * @return <CODE>true</CODE> if the host has read permission, <CODE>false</CODE> otherwise.
@@ -60,6 +75,10 @@ public interface UserAcl {
     /**
      * Checks whether or not the specified user and context name have <CODE>READ</CODE> access.
      *
+     * <p>
+     *  检查指定的用户和上下文名称是否具有<CODE> READ </CODE>访问权限。
+     * 
+     * 
      * @param user The user name to check.
      * @param contextName The context name associated with the user.
      * @param securityLevel The request security level.
@@ -70,6 +89,10 @@ public interface UserAcl {
     /**
      * Checks whether or not a context name is defined.
      *
+     * <p>
+     *  检查是否定义了上下文名称。
+     * 
+     * 
      * @param contextName The context name to check.
      *
      * @return <CODE>true</CODE> if the context is known, <CODE>false</CODE> otherwise.
@@ -79,6 +102,10 @@ public interface UserAcl {
     /**
      * Checks whether or not the specified user has <CODE>WRITE</CODE> access.
      *
+     * <p>
+     *  检查指定的用户是否具有<CODE> WRITE </CODE>访问权限。
+     * 
+     * 
      * @param user The user to check.
      *
      * @return <CODE>true</CODE> if the user has write permission, <CODE>false</CODE> otherwise.
@@ -88,6 +115,9 @@ public interface UserAcl {
     /**
      * Checks whether or not the specified user and context name have <CODE>WRITE</CODE> access.
      *
+     * <p>
+     *  检查指定的用户和上下文名称是否具有<CODE> WRITE </CODE>访问权限。
+     * 
      * @param user The user name to check.
      * @param contextName The context name associated with the user.
      * @param securityLevel The request security level.

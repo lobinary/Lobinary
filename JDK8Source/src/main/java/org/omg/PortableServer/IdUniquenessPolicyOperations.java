@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -13,12 +14,17 @@ package org.omg.PortableServer;
 	 * The IdUniquenessPolicy specifies whether the servants 
 	 * activated in the created POA must have unique object i
 	 * identities. The default is UNIQUE_ID.
+	 * <p>
+	 *  IdUniquenessPolicy指定在创建的POA中激活的服务器是否必须具有唯一的对象标识。默认值为UNIQUE_ID。
+	 * 
 	 */
 public interface IdUniquenessPolicyOperations  extends org.omg.CORBA.PolicyOperations
 {
 
   /**
 	 * specifies the policy value
+	 * <p>
+	 *  指定策略值
 	 */
   org.omg.PortableServer.IdUniquenessPolicyValue value ();
 } // interface IdUniquenessPolicyOperations

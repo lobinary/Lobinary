@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -70,6 +71,25 @@ import java.io.*;
  * Which approach the decoder takes is left to the
  * implementation.
  *
+ * <p>
+ *  HTML表单解码的实用程序类。此类包含用于解码来自<CODE>应用程序/ x-www形式 -  urlencoded </CODE> MIME格式的String的静态方法。
+ * <p>
+ *  转换过程与URLEncoder类使用的过程相反。
+ * 假设编码字符串中的所有字符都是以下之一："{@ code a}"通过"{@ code z}","{@ code A}"通过"{@ code Z}","{@ code 0}" {@ code}}和"{@ code}
+ * ","{@ code}","{@ code}"和"{@ code}}" "。
+ *  转换过程与URLEncoder类使用的过程相反。字符"{@ code％}"是允许的,但被解释为特殊转义序列的开始。
+ * <p>
+ *  在转换中应用以下规则：
+ * 
+ * <ul>
+ * <li>字母数字字符"{@ code a}"通过"{@ code z}","{@ code A}"通过"{@ code Z}"和"{@ code 0}"通过"{@ code 9}"保持不变。
+ *  <li>特殊字符"{@ code。}","{@ code  - }","{@ code *}"和"{@ code _}"保持不变。
+ *  <li>加号"{@ code +}"被转换成空格字符" &nbsp; ", 。
+ *  <li>"<i> {@ code％xy} </i>"形式的序列将被视为表示一个字节,其中<i> xy </i>是8位的两位十六进制表示形式。
+ * 然后,连续包含这些字节序列中的一个或多个的所有子字符串将被其编码将导致这些连续字节的字符替换。可以指定用于解码这些字符的编码方案,或者如果未指定,则将使用平台的默认编码。
+ * </ul>
+ * <p>
+ * 
  * @author  Mark Chamness
  * @author  Michael McCloskey
  * @since   1.2
@@ -85,6 +105,11 @@ public class URLDecoder {
      * The platform's default encoding is used to determine what characters
      * are represented by any consecutive sequences of the form
      * "<i>{@code %xy}</i>".
+     * <p>
+     *  有两种可能的方法,其中该解码器可以处理非法字符串。它可能会留下非法字符单独或它可以抛出一个{@link java.lang.IllegalArgumentException}。
+     * 解码器采用哪种方法留给实现。
+     * 
+     * 
      * @param s the {@code String} to decode
      * @deprecated The resulting string may vary depending on the platform's
      *          default encoding. Instead, use the decode(String,String) method
@@ -118,6 +143,10 @@ public class URLDecoder {
      * UTF-8 should be used. Not doing so may introduce
      * incompatibilities.</em>
      *
+     * <p>
+     *  解码一个{@code x-www-form-urlencoded}字符串。平台的默认编码用于确定由"<i> {@ code％xy} </i>"形式的任何连续序列表示的字符。
+     * 
+     * 
      * @param s the {@code String} to decode
      * @param enc   The name of a supported
      *    <a href="../lang/package-summary.html#charenc">character
@@ -159,6 +188,12 @@ public class URLDecoder {
                  * consecutive  bytes obtained this way to whatever
                  * character(s) they represent in the provided
                  * encoding.
+                 * <p>
+                 * 使用特定的编码方案解码{@code application / x-www-form-urlencoded}字符串。
+                 * 提供的编码用于确定由"<i> {@ code％xy} </i>"形式的任何连续序列表示的字符。
+                 * <p>
+                 *  <em> <strong>注意：</strong> <a href =
+                 * "http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">
                  */
 
                 try {

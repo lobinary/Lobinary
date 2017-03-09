@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,15 @@ import java.util.List;
  *
  * @jls section 14.2
  *
+ * <p>
+ *  语句块的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  {}
+ * 
+ *  {<em>语句</em>}
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,12 @@ import java.security.AccessController;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-4679739485102359104L</code>.
  *
+ * <p>
+ *  此类表示作为关系约束的参数的数字。 NumericValueExp可以在需要ValueExp的任何地方使用。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> -4679739485102359104L </code>。
+ * 
+ * 
  * @serial include
  *
  * @since 1.5
@@ -78,6 +85,8 @@ class NumericValueExp extends QueryEval implements ValueExp {
     private static final long serialVersionUID;
 
     /**
+    /* <p>
+    /* 
      * @serialField val Number The numeric value
      *
      * <p>The <b>serialVersionUID</b> of this class is <code>-4679739485102359104L</code>.
@@ -108,6 +117,9 @@ class NumericValueExp extends QueryEval implements ValueExp {
 
     /**
      * Basic constructor.
+     * <p>
+     *  基本构造函数。
+     * 
      */
     public NumericValueExp() {
     }
@@ -120,6 +132,9 @@ class NumericValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns a double numeric value
+     * <p>
+     *  返回双精度数值
+     * 
      */
     public double doubleValue()  {
       if (val instanceof Long || val instanceof Integer)
@@ -131,6 +146,9 @@ class NumericValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns a long numeric value
+     * <p>
+     *  返回长数字值
+     * 
      */
     public long longValue()  {
       if (val instanceof Long || val instanceof Integer)
@@ -142,6 +160,9 @@ class NumericValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns true is if the numeric value is a long, false otherwise.
+     * <p>
+     *  返回true是如果数字值为long,否则为false。
+     * 
      */
     public boolean isLong()  {
         return (val instanceof Long || val instanceof Integer);
@@ -149,6 +170,9 @@ class NumericValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns the string representing the object
+     * <p>
+     *  返回表示对象的字符串
+     * 
      */
     public String toString()  {
       if (val == null)
@@ -168,6 +192,10 @@ class NumericValueExp extends QueryEval implements ValueExp {
     /**
      * Applies the ValueExp on a MBean.
      *
+     * <p>
+     *  将ValueExp应用于MBean。
+     * 
+     * 
      * @param name The name of the MBean on which the ValueExp will be applied.
      *
      * @return  The <CODE>ValueExp</CODE>.
@@ -185,6 +213,9 @@ class NumericValueExp extends QueryEval implements ValueExp {
 
     /**
      * Deserializes a {@link NumericValueExp} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link NumericValueExp}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -231,6 +262,8 @@ class NumericValueExp extends QueryEval implements ValueExp {
 
     /**
      * Serializes a {@link NumericValueExp} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link NumericValueExp}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

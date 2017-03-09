@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,11 @@ package javax.print.event;
   * <p>
   * To monitor a particular job see {@link PrintJobListener} and
   * {@link PrintJobAttributeListener}.
+  * <p>
+  *  此侦听器接口的实现附加到{@link javax.print.PrintService PrintService}以监视打印服务的状态。
+  * <p>
+  *  要监视特定作业,请参阅{@link PrintJobListener}和{@link PrintJobAttributeListener}。
+  * 
   */
 
 public interface PrintServiceAttributeListener {
@@ -41,6 +47,8 @@ public interface PrintServiceAttributeListener {
      * The service will call this method on an event notification thread.
      * The client should not perform lengthy processing in this callback
      * or subsequent event notifications may be blocked.
+     * <p>
+     * 
      * @param psae the event being notified
      */
     public void attributeUpdate(PrintServiceAttributeEvent psae) ;

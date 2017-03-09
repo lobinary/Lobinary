@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -29,6 +30,18 @@ package org.omg.DynamicAny;
     * the complex types, such as DynStruct, if appropriate. Then, the value can be initialized by means of
     * invoking operations on the resulting object. Finally, the to_any operation can be invoked
     * to create an any value from the constructed DynAny.
+    * <p>
+    *  DynAny对象可以通过调用DynAnyFactory对象上的操作来创建。通常只有两种方法来创建DynAny对象：
+    * <UL>
+    *  <LI>调用对现有DynAny对象的操作<LI>调用对DynAnyFactory对象的操作
+    * </UL>
+    * 构造的DynAny对象支持允许创建新的DynAny对象的操作,这些对象封装了对某些组成部分的值的访问。 DynAny对象还支持用于创建新DynAny对象的复制操作。
+    * 通过调用具有设置为字符串常量"DynAnyFactory"的identifier参数的ORB.resolve_initial_references(),可以获得对DynAnyFactory对象的引用。
+    *  <P>任何动态解释通常涉及使用create_dyn_any()创建DynAny对象作为第一步。
+    * 根据任何类型,可以将生成的DynAny对象引用缩小为DynFixed,DynStruct,DynSequence,DynArray,DynUnion,DynEnum或DynValue对象引用。
+    *  <P>任何动态创建都涉及使用create_dyn_any_from_type_code()创建DynAny对象,传递与要创建的值相关联的TypeCode。
+    * 返回的引用缩小到复杂类型之一,如DynStruct(如果适用)。然后,可以通过对生成的对象调用操作来初始化该值。最后,可以调用to_any操作以从构造的DynAny创建任何值。
+    * 
     */
 public class _DynAnyFactoryStub extends org.omg.CORBA.portable.ObjectImpl implements org.omg.DynamicAny.DynAnyFactory
 {
@@ -43,6 +56,11 @@ public class _DynAnyFactoryStub extends org.omg.CORBA.portable.ObjectImpl implem
         * The current position of the created DynAny is set to zero if the passed value has components,
         * to -1 otherwise
         *
+        * <p>
+        * 从任何值创建一个新的DynAny对象。与任何值相关联的TypeCode的副本将分配给生成的DynAny对象。与DynAny对象关联的值是原始any中的值的副本。
+        * 如果传递的值具有组件,则创建的DynAny的当前位置设置为零,否则设置为-1。
+        * 
+        * 
         * @exception InconsistentTypeCode if value has a TypeCode with a TCKind of tk_Principal,
         * tk_native, or tk_abstract_interface
         */
@@ -89,6 +107,14 @@ public class _DynAnyFactoryStub extends org.omg.CORBA.portable.ObjectImpl implem
         *     initialized to its default value.
         * <LI>For DynValue and DynValueBox it initializes to a null value.
         * </UL>
+        * <p>
+        *  从TypeCode创建DynAny。根据TypeCode,创建的对象可以是DynAny类型或其派生类型之一,例如DynStruct。返回的引用可以缩小为派生类型。
+        * 在所有情况下,从TypeCode构造的DynAny具有初始默认值。基本类型的默认值为：。
+        * <UL>
+        *  <LI> false表示布尔<LI>零表示数字类型<LI>零表示类型octet,char和wchar <LI>字符串和wstring的空字符串<LI>任何值的类型代码<LI>的TCKind值tk_nu
+        * ll,包含TCKind值为tk_null类型且无值的类型代码的TCKind值。
+        * </UL>
+        *  对于复杂类型,创建相应的DynAny将分配如下的默认值：
         */
   public org.omg.DynamicAny.DynAny create_dyn_any_from_type_code (org.omg.CORBA.TypeCode type) throws org.omg.DynamicAny.DynAnyFactoryPackage.InconsistentTypeCode
   {

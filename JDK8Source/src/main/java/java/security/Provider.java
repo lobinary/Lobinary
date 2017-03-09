@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,36 @@ import java.util.function.Function;
  *     <td>{@code provider.getClass().getName()}</td>
  * </table>
  *
+ * <p>
+ *  此类表示Java安全API的"提供程序",其中提供程序实现Java安全性的某些或所有部分。提供商可以实施的服务包括：
+ * 
+ * <ul>
+ * 
+ *  <li>算法(例如DSA,RSA,MD5或SHA-1)。
+ * 
+ *  <li>密钥生成,转换和管理功能(例如针对算法特定密钥)。
+ * 
+ * /ul>
+ * 
+ *  <p>每个提供程序都有一个名称和一个版本号,并在安装的每个运行时配置。
+ * 
+ *  <p>请参阅"Java加密架构API规范&amp;实用程序"中的<a href = "../../../technotes/guides/security/crypto/CryptoSpec.html#Provider">
+ * 提供程序类</a>。
+ * 参考"以获得关于特定类型的提供者,加密服务提供者如何工作和安装的信息。但是,请注意,提供程序可以用于实现Java中的任何安全服务,该安全服务使用可插入架构,可选择适合其下的实施。
+ * 
+ *  <p>某些提供程序实施可能在其操作期间遇到不可恢复的内部错误,例如无法与安全令牌通信。应使用{@link ProviderException}来指示此类错误。
+ * 
+ * <p>服务类型{@code Provider}保留供安全框架使用。此类服务无法由应用程序添加,删除或修改。以下属性自动放置在每个Provider对象中：
+ * <table cellspacing=4>
+ *  <caption> <b>自动置于提供者对象中的属性</b> </caption> <tr> <th>名称</th> <th>值</th> <tr> <td> {@ code Provider .id name}
+ *  </td> <td> {@ code String.valueOf(provider.getName())} </td> <tr> <td> {@ code Provider.id version} 
+ * </td> <td> {@code String.valueOf(provider.getVersion())} </td> <tr> <td> {@ code Provider.id info} </td>
+ *  <td> {@ code String.valueOf(provider.getInfo )}} </td> <tr> <td> {@ code Provider.id className} </td>
+ *  <td> {@ code provider.getClass()。
+ * getName()} </td>。
+ * </table>
+ * 
+ * 
  * @author Benjamin Renaud
  * @author Andreas Sterbenz
  */
@@ -97,6 +128,10 @@ public abstract class Provider extends Properties {
     /**
      * The provider name.
      *
+     * <p>
+     *  提供程序名称。
+     * 
+     * 
      * @serial
      */
     private String name;
@@ -104,6 +139,10 @@ public abstract class Provider extends Properties {
     /**
      * A description of the provider and its services.
      *
+     * <p>
+     *  提供商及其服务的描述。
+     * 
+     * 
      * @serial
      */
     private String info;
@@ -111,6 +150,10 @@ public abstract class Provider extends Properties {
     /**
      * The provider version number.
      *
+     * <p>
+     *  提供程序版本号。
+     * 
+     * 
      * @serial
      */
     private double version;
@@ -125,6 +168,10 @@ public abstract class Provider extends Properties {
      * Constructs a provider with the specified name, version number,
      * and information.
      *
+     * <p>
+     *  构造具有指定的名称,版本号和信息的提供程序。
+     * 
+     * 
      * @param name the provider name.
      *
      * @param version the provider version number.
@@ -142,6 +189,10 @@ public abstract class Provider extends Properties {
     /**
      * Returns the name of this provider.
      *
+     * <p>
+     *  返回此提供程序的名称。
+     * 
+     * 
      * @return the name of this provider.
      */
     public String getName() {
@@ -151,6 +202,10 @@ public abstract class Provider extends Properties {
     /**
      * Returns the version number for this provider.
      *
+     * <p>
+     *  返回此提供程序的版本号。
+     * 
+     * 
      * @return the version number for this provider.
      */
     public double getVersion() {
@@ -161,6 +216,10 @@ public abstract class Provider extends Properties {
      * Returns a human-readable description of the provider and its
      * services.  This may return an HTML page, with relevant links.
      *
+     * <p>
+     *  返回提供者及其服务的人类可读描述。这可能返回一个HTML页面,其中包含相关链接。
+     * 
+     * 
      * @return a description of the provider and its services.
      */
     public String getInfo() {
@@ -171,6 +230,10 @@ public abstract class Provider extends Properties {
      * Returns a string with the name and the version number
      * of this provider.
      *
+     * <p>
+     *  返回包含此提供程序的名称和版本号的字符串。
+     * 
+     * 
      * @return the string with the name and the version number
      * for this provider.
      */
@@ -182,6 +245,9 @@ public abstract class Provider extends Properties {
      * override the following methods to ensure that provider
      * information can only be changed if the caller has the appropriate
      * permissions.
+     * <p>
+     *  覆盖以下方法以确保仅当调用者具有适当的权限时才能更改提供程序信息。
+     * 
      */
 
     /**
@@ -193,6 +259,13 @@ public abstract class Provider extends Properties {
      * (where {@code name} is the provider name) to see if it's ok to clear
      * this provider.
      *
+     * <p>
+     *  清除此提供程序,以使其不再包含用于查找提供程序实现的设施的属性。
+     * 
+     * <p>如果启用了安全管理器,则会使用字符串{@code"clearProviderProperties。
+     * "+ name}(其中{@code name}是提供程序名称)调用其{@code checkSecurityAccess}方法,以查看是否可以清除此提供程序。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -212,6 +285,10 @@ public abstract class Provider extends Properties {
     /**
      * Reads a property list (key and element pairs) from the input stream.
      *
+     * <p>
+     *  从输入流读取属性列表(键和元素对)。
+     * 
+     * 
      * @param inStream   the input stream.
      * @exception  IOException  if an error occurred when reading from the
      *               input stream.
@@ -233,6 +310,10 @@ public abstract class Provider extends Properties {
      * These mappings will replace any properties that this provider had
      * for any of the keys currently in the specified Map.
      *
+     * <p>
+     *  将指定映射中的所有映射复制到此提供程序。这些映射将替换此提供者对于当前在指定映射中的任何键具有的任何属性。
+     * 
+     * 
      * @since 1.2
      */
     @Override
@@ -248,6 +329,10 @@ public abstract class Provider extends Properties {
      * Returns an unmodifiable Set view of the property entries contained
      * in this Provider.
      *
+     * <p>
+     *  返回此提供程序中包含的属性条目的不可修改的Set视图。
+     * 
+     * 
      * @see   java.util.Map.Entry
      * @since 1.2
      */
@@ -276,6 +361,10 @@ public abstract class Provider extends Properties {
      * Returns an unmodifiable Set view of the property keys contained in
      * this provider.
      *
+     * <p>
+     *  返回此提供程序中包含的属性键的不可修改的Set视图。
+     * 
+     * 
      * @since 1.2
      */
     @Override
@@ -288,6 +377,10 @@ public abstract class Provider extends Properties {
      * Returns an unmodifiable Collection view of the property values
      * contained in this provider.
      *
+     * <p>
+     *  返回此提供程序中包含的属性值的不可修改的集合视图。
+     * 
+     * 
      * @since 1.2
      */
     @Override
@@ -305,6 +398,13 @@ public abstract class Provider extends Properties {
      * where {@code name} is the provider name, to see if it's ok to set this
      * provider's property values.
      *
+     * <p>
+     *  将{@code key}属性设置为指定的{@code value}。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,设置此提供程序的属性值。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -332,6 +432,13 @@ public abstract class Provider extends Properties {
      * where {@code name} is the provider name, to see if it's ok to set this
      * provider's property values.
      *
+     * <p>
+     *  如果指定的键尚未与某个值相关联(或映射到{@code null}),则将其与给定值相关联并返回{@code null},否则返回当前值。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,设置此提供程序的属性值。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -358,6 +465,13 @@ public abstract class Provider extends Properties {
      * where {@code name} is the provider name, to see if it's ok to remove this
      * provider's properties.
      *
+     * <p>
+     * 删除{@code key}属性(及其对应的{@code value})。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"removeProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,删除此提供程序的属性。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -383,6 +497,13 @@ public abstract class Provider extends Properties {
      * where {@code name} is the provider name, to see if it's ok to remove this
      * provider's properties.
      *
+     * <p>
+     *  仅当指定键的条目当前映射到指定值时,才删除该条目。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"removeProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,删除此提供程序的属性。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -408,6 +529,13 @@ public abstract class Provider extends Properties {
      * where {@code name} is the provider name, to see if it's ok to set this
      * provider's property values.
      *
+     * <p>
+     *  仅当当前映射到指定值时替换指定键的条目。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,设置此提供程序的属性值。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -435,6 +563,13 @@ public abstract class Provider extends Properties {
      * where {@code name} is the provider name, to see if it's ok to set this
      * provider's property values.
      *
+     * <p>
+     *  仅当指定键的条目当前映射到某个值时,才替换该条目。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,设置此提供程序的属性值。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -463,6 +598,13 @@ public abstract class Provider extends Properties {
      * where {@code name} is the provider name, to see if it's ok to set this
      * provider's property values.
      *
+     * <p>
+     * 将每个条目的值替换为调用该条目上的给定函数的结果,条目集由迭代器返回,直到所有条目都被处理或函数抛出异常。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,设置此提供程序的属性值。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -491,6 +633,13 @@ public abstract class Provider extends Properties {
      * provider name, to see if it's ok to set this provider's property values
      * and remove this provider's properties.
      *
+     * <p>
+     *  尝试计算指定键及其当前映射值的映射(如果没有当前映射,则为{@code null})。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。"+ name}和{@code"removeProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,以查看是否可以设置此提供程序的属性值并删除此提供程序的属性。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -522,6 +671,13 @@ public abstract class Provider extends Properties {
      * provider name, to see if it's ok to set this provider's property values
      * and remove this provider's properties.
      *
+     * <p>
+     *  如果指定的键尚未与某个值相关联(或映射到{@code null}),则尝试使用给定的映射函数计算其值,并将其输入到此映射中,除非{@code null}。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。"+ name}和{@code"removeProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,以查看是否可以设置此提供程序的属性值并删除此提供程序的属性。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -551,6 +707,13 @@ public abstract class Provider extends Properties {
      * provider name, to see if it's ok to set this provider's property values
      * and remove this provider's properties.
      *
+     * <p>
+     * 如果指定键的值存在且非空,则尝试计算给定键和其当前映射值的新映射。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。"+ name}和{@code"removeProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,以查看是否可以设置此提供程序的属性值并删除此提供程序的属性。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -583,6 +746,13 @@ public abstract class Provider extends Properties {
      * provider name, to see if it's ok to set this provider's property values
      * and remove this provider's properties.
      *
+     * <p>
+     *  如果指定的键尚未与值关联或与空值相关联,则将其与给定值相关联。否则,用给定重映射函数的结果替换值,如果结果为null,则删除。当组合键的多个映射值时,该方法可以是有用的。
+     * 
+     *  <p>如果启用了安全管理器,则会使用字符串{@code"putProviderProperty。"+ name}和{@code"removeProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,以查看是否可以设置此提供程序的属性值并删除此提供程序的属性。
+     * 
+     * 
      * @throws  SecurityException
      *          if a security manager exists and its {@link
      *          java.lang.SecurityManager#checkSecurityAccess} method
@@ -608,6 +778,8 @@ public abstract class Provider extends Properties {
         return super.get(key);
     }
     /**
+    /* <p>
+    /* 
      * @since 1.8
      */
     @Override
@@ -617,6 +789,8 @@ public abstract class Provider extends Properties {
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.8
      */
     @Override
@@ -720,6 +894,9 @@ public abstract class Provider extends Properties {
      * Copies all of the mappings from the specified Map to this provider.
      * Internal method to be called AFTER the security check has been
      * performed.
+     * <p>
+     *  将指定映射中的所有映射复制到此提供程序。执行安全检查后要调用的内部方法。
+     * 
      */
     private void implPutAll(Map<?,?> t) {
         for (Map.Entry<?,?> e : t.entrySet()) {
@@ -894,6 +1071,9 @@ public abstract class Provider extends Properties {
     /**
      * Ensure all the legacy String properties are fully parsed into
      * service objects.
+     * <p>
+     *  确保所有的旧String属性完全解析为服务对象。
+     * 
      */
     private void ensureLegacyParsed() {
         if ((legacyChanged == false) || (legacyStrings == null)) {
@@ -915,6 +1095,9 @@ public abstract class Provider extends Properties {
     /**
      * Remove all invalid services from the Map. Invalid services can only
      * occur if the legacy properties are inconsistent or incomplete.
+     * <p>
+     *  从地图中删除所有无效的服务。无效服务只有在旧属性不一致或不完整时才会发生。
+     * 
      */
     private void removeInvalidServices(Map<ServiceKey,Service> map) {
         for (Iterator<Map.Entry<ServiceKey, Service>> t =
@@ -1019,6 +1202,13 @@ public abstract class Provider extends Properties {
      * {@link #putService putService()} and one added via {@link #put put()},
      * the service added via {@link #putService putService()} is returned.
      *
+     * <p>
+     * 获取描述此Provider的实现的服务,指定类型的此算法或别名。如果不存在此类实现,则此方法返回null。
+     * 如果有两个匹配服务,使用{@link #putService putService()}添加到此提供程序,通过{@link #put put()}添加一个服务,通过{@link #putService putService()}
+     * 添加的服务是回。
+     * 获取描述此Provider的实现的服务,指定类型的此算法或别名。如果不存在此类实现,则此方法返回null。
+     * 
+     * 
      * @param type the type of {@link Service service} requested
      * (for example, {@code MessageDigest})
      * @param algorithm the case insensitive algorithm name (or alternate
@@ -1062,6 +1252,10 @@ public abstract class Provider extends Properties {
      * Get an unmodifiable Set of all services supported by
      * this Provider.
      *
+     * <p>
+     *  获取此提供程序支持的所有服务的不可修改集。
+     * 
+     * 
      * @return an unmodifiable Set of all services supported by
      * this Provider
      *
@@ -1106,6 +1300,19 @@ public abstract class Provider extends Properties {
      * a {@code SecurityPermission("putProviderProperty."+name)}
      * permission.
      *
+     * <p>
+     *  添加服务。如果存在具有相同算法名称的相同类型的服务,并且使用{@link #putService putService()}添加该服务,则该服务将被新服务替换。
+     * 此方法还以此中描述的格式将有关此服务的信息放在提供程序的Hashtable值中。
+     * <a href="../../../technotes/guides/security/crypto/CryptoSpec.html">
+     *  Java加密架构API规范&amp;参考</a>。
+     * 
+     *  <p>此外,如果有安全管理器,则会使用字符串{@code"putProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,确定设置此提供程序的属性值。
+     * 如果使用{@code checkSecurityAccess}的默认实现(即该方法不被覆盖),那么这将导致使用{@code SecurityPermission("putProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,确定设置此提供程序的属性值。
+     * ")调用安全管理器的{@code checkPermission}方法。 + name)}权限。
+     * 
+     * 
      * @param s the Service to add
      *
      * @throws SecurityException
@@ -1147,6 +1354,9 @@ public abstract class Provider extends Properties {
     /**
      * Put the string properties for this Service in this Provider's
      * Hashtable.
+     * <p>
+     *  将此服务的字符串属性放在此提供程序的散列表中。
+     * 
      */
     private void putPropertyStrings(Service s) {
         String type = s.getType();
@@ -1165,6 +1375,9 @@ public abstract class Provider extends Properties {
     /**
      * Remove the string properties for this Service from this Provider's
      * Hashtable.
+     * <p>
+     *  从此提供程序的散列表中删除此服务的字符串属性。
+     * 
      */
     private void removePropertyStrings(Service s) {
         String type = s.getType();
@@ -1198,6 +1411,17 @@ public abstract class Provider extends Properties {
      * {@code SecurityPermission("removeProviderProperty."+name)}
      * permission.
      *
+     * <p>
+     * 移除先前使用{@link #putService putService()}添加的服务。指定的服务将从此提供程序中删除。
+     * 它将不再由{@link #getService getService()}返回,其信息将从此提供商的Hashtable中删除。
+     * 
+     *  <p>此外,如果有安全管理器,则会使用字符串{@code"removeProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,确定删除此提供程序的属性。
+     * 如果使用{@code checkSecurityAccess}的默认实现(即该方法不被覆盖),那么这会导致使用{@code SecurityPermission("removeProviderProperty。
+     * "+ name}调用其{@code checkSecurityAccess}方法,其中{@code name}是提供程序名称,确定删除此提供程序的属性。
+     * ")调用安全管理器的{@code checkPermission}方法。 + name)}权限。
+     * 
+     * 
      * @param s the Service to be removed
      *
      * @throws  SecurityException
@@ -1383,6 +1607,20 @@ public abstract class Provider extends Properties {
      *
      * <p>Instances of this class are immutable.
      *
+     * <p>
+     *  安全服务的描述。它封装了服务的属性,并包含一个工厂方法来获取这个服务的新实现实例。
+     * 
+     *  <p>每个服务都有一个提供程序,提供服务,类型,算法名称以及实现服务的类的名称。 (可选)还包括此服务(别名)和属性的备用算法名称列表,这是一个(名称,值)String对的映射。
+     * 
+     * <p>此类定义了方法{@link #supportsParameter supportsParameter()}和{@link #newInstance newInstance()},它们在Java安全
+     * 框架搜索合适的服务并实例化时使用。
+     * 这些方法的有效参数取决于服务的类型。对于在Java SE中定义的服务类型,请参阅。
+     * <a href="../../../technotes/guides/security/crypto/CryptoSpec.html">
+     *  Java加密架构API规范&amp;参考</a>有效值。请注意,Java SE之外的组件可以定义其他类型的服务及其行为。
+     * 
+     *  <p>此类的实例是不可变的。
+     * 
+     * 
      * @since 1.5
      */
     public static class Service {
@@ -1442,6 +1680,10 @@ public abstract class Provider extends Properties {
         /**
          * Construct a new service.
          *
+         * <p>
+         *  构建新服务。
+         * 
+         * 
          * @param provider the provider that offers this service
          * @param type the type of this service
          * @param algorithm the algorithm name
@@ -1482,6 +1724,10 @@ public abstract class Provider extends Properties {
         /**
          * Get the type of this service. For example, {@code MessageDigest}.
          *
+         * <p>
+         *  获取此服务的类型。例如,{@code MessageDigest}。
+         * 
+         * 
          * @return the type of this service
          */
         public final String getType() {
@@ -1492,6 +1738,10 @@ public abstract class Provider extends Properties {
          * Return the name of the algorithm of this service. For example,
          * {@code SHA-1}.
          *
+         * <p>
+         *  返回此服务的算法的名称。例如,{@code SHA-1}。
+         * 
+         * 
          * @return the algorithm of this service
          */
         public final String getAlgorithm() {
@@ -1501,6 +1751,10 @@ public abstract class Provider extends Properties {
         /**
          * Return the Provider of this service.
          *
+         * <p>
+         *  返回此服务的提供程序。
+         * 
+         * 
          * @return the Provider of this service
          */
         public final Provider getProvider() {
@@ -1510,6 +1764,10 @@ public abstract class Provider extends Properties {
         /**
          * Return the name of the class implementing this service.
          *
+         * <p>
+         *  返回实现此服务的类的名称。
+         * 
+         * 
          * @return the name of the class implementing this service
          */
         public final String getClassName() {
@@ -1525,6 +1783,10 @@ public abstract class Provider extends Properties {
          * Return the value of the specified attribute or null if this
          * attribute is not set for this Service.
          *
+         * <p>
+         *  返回指定属性的值,如果未为此服务设置此属性,则返回null。
+         * 
+         * 
          * @param name the name of the requested attribute
          *
          * @return the value of the specified attribute or null if the
@@ -1555,6 +1817,14 @@ public abstract class Provider extends Properties {
          * Java Cryptography Architecture API Specification &amp;
          * Reference</a>.
          *
+         * <p>
+         *  返回此服务描述的实现的新实例。安全提供程序框架使用此方法来构造实现。应用程序通常不需要调用它。
+         * 
+         *  <p>默认实现使用反射来调用此类服务​​的标准构造函数。安全提供程序可以覆盖此方法以不同的方式实现实例化。有关对各种服务类型有效的constructorParameter的详细信息和值,请参阅
+         * <a href="../../../technotes/guides/security/crypto/CryptoSpec.html">
+         * Java加密架构API规范&amp;参考</a>。
+         * 
+         * 
          * @param constructorParameter the value to pass to the constructor,
          * or null if this type of service does not use a constructorParameter.
          *
@@ -1654,6 +1924,9 @@ public abstract class Provider extends Properties {
          * Generic code path for unknown engine types. Call the
          * no-args constructor if constructorParameter is null, otherwise
          * use the first matching constructor.
+         * <p>
+         *  未知引擎类型的通用代码路径。如果constructorParameter为null,则调用no-args构造函数,否则使用第一个匹配构造函数。
+         * 
          */
         private Object newInstanceGeneric(Object constructorParameter)
                 throws Exception {
@@ -1705,6 +1978,15 @@ public abstract class Provider extends Properties {
          * Reference</a>.
          * Security providers can override it to implement their own test.
          *
+         * <p>
+         *  测试此服务是否可以使用指定的参数。如果此服务无法使用参数,则返回false。如果此服务可以使用参数,如果快速测试不可行或状态未知,则返回true。
+         * 
+         *  <p>安全提供程序框架对某些类型的服务使用此方法,以快速排除不匹配的实施以供考虑。应用程序通常不需要调用它。
+         * 
+         *  <p>有关各种服务类型有效的参数的详细信息和值,请参阅此类的顶部和
+         * <a href="../../../technotes/guides/security/crypto/CryptoSpec.html">
+         *  Java加密架构API规范&amp;参考</a>。安全提供者可以覆盖它来实现自己的测试。
+         * 
          * @param parameter the parameter to test
          *
          * @return false if this this service cannot use the specified
@@ -1748,6 +2030,8 @@ public abstract class Provider extends Properties {
         /**
          * Return whether this service has its Supported* properties for
          * keys defined. Parses the attributes if not yet initialized.
+         * <p>
+         * 
          */
         private boolean hasKeyAttributes() {
             Boolean b = hasKeyAttributes;
@@ -1830,6 +2114,10 @@ public abstract class Provider extends Properties {
         /**
          * Return a String representation of this service.
          *
+         * <p>
+         *  返回此服务是否具有定义的键的Supported *属性。解析属性(如果尚未初始化)。
+         * 
+         * 
          * @return a String representation of this service.
          */
         public String toString() {

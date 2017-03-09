@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,9 @@ import java.util.function.IntConsumer;
  *
  * @implNote
  * The implementation is based on the code for the Array-based spliterators.
+ * <p>
+ *  一个Spliterator.OfInt,用于遍历和拆分CharBuffer中维护的元素。
+ * 
  */
 class CharBufferSpliterator implements Spliterator.OfInt {
     private final CharBuffer buffer;

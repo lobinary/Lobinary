@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ public class SubjectDelegator {
     /* Return the AccessControlContext appropriate to execute an
        operation on behalf of the delegatedSubject.  If the
        authenticatedAccessControlContext does not have permission to
+    /* <p>
+    /*  操作代表delegatedSubject。如果authenticatedAccessControlContext没有权限
+    /* 
+    /* 
        delegate to that subject, throw SecurityException.  */
     public AccessControlContext
         delegatedContext(AccessControlContext authenticatedACC,
@@ -89,6 +94,10 @@ public class SubjectDelegator {
      * server creator codebase contains a subject delegation permission for
      * each principal present in the authenticated subject.
      *
+     * <p>
+     *  检查连接器服务器创建者是否可以承认已验证主题中每个主体的身份,即检查连接器服务器创建者代码库是否包含已验证主题中存在的每个主体的主题委派权限。
+     * 
+     * 
      * @return {@code true} if the connector server creator can delegate to all
      * the authenticated principals in the subject. Otherwise, {@code false}.
      */
@@ -110,6 +119,9 @@ public class SubjectDelegator {
 
     /**
      * Retrieves the {@linkplain Subject} principals
+     * <p>
+     *  检索{@linkplain Subject}原则
+     * 
      * @param subject The subject
      * @return If the {@code Subject} is immutable it will return the principals directly.
      *         If the {@code Subject} is mutable it will create an unmodifiable copy.

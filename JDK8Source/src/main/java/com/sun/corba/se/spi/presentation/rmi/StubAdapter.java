@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,10 @@ import com.sun.corba.se.impl.oa.poa.POAManagerImpl ;
  * We cannot simply change ObjectImpl as it is a standard API.
  * We also cannot change the code generation of Stubs, as that
  * is also standard.  Hence I am left with this ugly class.
+ * <p>
+ *  独立于存根类型。此类存在,因为ObjectImpl没有为3委托和类型id方法的接口,因此DynamicStub具有不同的类型。我们不能简单地改变ObjectImpl,因为它是一个标准的API。
+ * 我们也不能改变Stubs的代码生成,因为这也是标准。因此我留下这个丑陋的类。
+ * 
  */
 public abstract class StubAdapter
 {
@@ -86,6 +91,7 @@ public abstract class StubAdapter
     }
 
     /** Use implicit activation to get an object reference for the servant.
+    /* <p>
      */
     public static org.omg.CORBA.Object activateServant( Servant servant )
     {
@@ -113,6 +119,9 @@ public abstract class StubAdapter
 
     /** Given any Tie, return the corresponding object refernce, activating
      * the Servant if necessary.
+     * <p>
+     *  仆人如有必要。
+     * 
      */
     public static org.omg.CORBA.Object activateTie( Tie tie )
     {
@@ -121,6 +130,10 @@ public abstract class StubAdapter
          * default results in an ObjectImpl-based Tie, while rmic -iiop -poa
          * results in a Servant-based Tie.  Dynamic RMI-IIOP also uses Servant-based
          * Ties (see impl.presentation.rmi.ReflectiveTie).
+         * <p>
+         *  这取决于使用的代码生成的样式。 rmic-iiop默认情况下产生一个基于ObjectImpl的Tie,而rmic -iiop -poa导致基于Servant的Tie。
+         * 动态RMI-IIOP还使用基于Servant的绑定(参见impl.presentation.rmi.ReflectiveTie)。
+         * 
          */
         if (tie instanceof ObjectImpl) {
             return tie.thisObject() ;
@@ -135,6 +148,7 @@ public abstract class StubAdapter
 
     /** This also gets the delegate from a Servant by
      * using Servant._this_object()
+     * <p>
      */
     public static Delegate getDelegate( Object stub )
     {

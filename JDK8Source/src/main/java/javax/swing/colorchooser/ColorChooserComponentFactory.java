@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,11 @@ import javax.swing.JComponent;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  设计用于生产预配置的"附件"对象以插入颜色选择器的类。
+ * 
+ * <p>
+ * 
  * @author Steve Wilson
  */
 public class ColorChooserComponentFactory {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ import sun.management.MonitorInfoCompositeData;
  * with attributes as specified in
  * the {@link #from from} method.
  *
+ * <p>
+ *  有关对象监视器锁的信息。当在该对象上输入同步块或方法时,对象监视器将被锁定。
+ * 
+ *  <h3> MXBean映射</h3> <tt> MonitorInfo </tt>映射到具有{@link #from from}方法中指定的属性的{@link CompositeData CompositeData}
+ * 。
+ * 
+ * 
  * @author  Mandy Chung
  * @since   1.6
  */
@@ -48,6 +56,10 @@ public class MonitorInfo extends LockInfo {
     /**
      * Construct a <tt>MonitorInfo</tt> object.
      *
+     * <p>
+     *  构造<tt> MonitorInfo </tt>对象。
+     * 
+     * 
      * @param className the fully qualified name of the class of the lock object.
      * @param identityHashCode the {@link System#identityHashCode
      *                         identity hash code} of the lock object.
@@ -81,6 +93,10 @@ public class MonitorInfo extends LockInfo {
      * was locked.  The depth is the index to the <tt>StackTraceElement</tt>
      * array returned in the {@link ThreadInfo#getStackTrace} method.
      *
+     * <p>
+     *  返回对象监视器锁定的堆栈跟踪中的深度。深度是{@link ThreadInfo#getStackTrace}方法中返回的<tt> StackTraceElement </tt>数组的索引。
+     * 
+     * 
      * @return the depth in the stack trace where the object monitor
      *         was locked, or a negative number if not available.
      */
@@ -91,6 +107,10 @@ public class MonitorInfo extends LockInfo {
     /**
      * Returns the stack frame that locked the object monitor.
      *
+     * <p>
+     *  返回锁定对象监视器的堆栈框架。
+     * 
+     * 
      * @return <tt>StackTraceElement</tt> that locked the object monitor,
      *         or <tt>null</tt> if not available.
      */
@@ -126,6 +146,18 @@ public class MonitorInfo extends LockInfo {
      * </table>
      * </blockquote>
      *
+     * <p>
+     *  返回由给定的<tt> CompositeData </tt>表示的<tt> MonitorInfo </tt>对象。
+     * 给定的<tt> CompositeData </tt>必须包含以下属性以及在中指定的属性。
+     * <a href="LockInfo.html#MappedType">
+     *  映射类型</a> {@link LockInfo}类：
+     * <blockquote>
+     * <table border summary="The attributes and their types the given CompositeData contains">
+     * <tr>
+     *  <th align = left>属性名称</th> <th align = left>键入</th>
+     * </tr>
+     * <tr>
+     * 
      * @param cd <tt>CompositeData</tt> representing a <tt>MonitorInfo</tt>
      *
      * @throws IllegalArgumentException if <tt>cd</tt> does not

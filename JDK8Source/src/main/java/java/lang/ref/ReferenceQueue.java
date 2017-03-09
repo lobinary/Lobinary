@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package java.lang.ref;
  * Reference queues, to which registered reference objects are appended by the
  * garbage collector after the appropriate reachability changes are detected.
  *
+ * <p>
+ *  引用队列,在检测到适当的可达性变化之后,垃圾收集器将向其添加注册的引用对象。
+ * 
+ * 
  * @author   Mark Reinhold
  * @since    1.2
  */
@@ -37,6 +42,9 @@ public class ReferenceQueue<T> {
 
     /**
      * Constructs a new reference-object queue.
+     * <p>
+     *  构造新的引用对象队列。
+     * 
      */
     public ReferenceQueue() { }
 
@@ -98,6 +106,10 @@ public class ReferenceQueue<T> {
      * available without further delay then it is removed from the queue and
      * returned.  Otherwise this method immediately returns <tt>null</tt>.
      *
+     * <p>
+     *  轮询此队列以查看引用对象是否可用。如果没有进一步延迟可用,那么它将从队列中删除并返回。否则,此方法会立即返回<tt> null </tt>。
+     * 
+     * 
      * @return  A reference object, if one was immediately available,
      *          otherwise <code>null</code>
      */
@@ -116,6 +128,12 @@ public class ReferenceQueue<T> {
      * <p> This method does not offer real-time guarantees: It schedules the
      * timeout as if by invoking the {@link Object#wait(long)} method.
      *
+     * <p>
+     *  删除此队列中的下一个引用对象,阻塞直到其中一个引用对象可用或指定的超时期限过期。
+     * 
+     *  <p>此方法不提供实时保证：它调度超时,如同通过调用{@link Object#wait(long)}方法。
+     * 
+     * 
      * @param  timeout  If positive, block for up to <code>timeout</code>
      *                  milliseconds while waiting for a reference to be
      *                  added to this queue.  If zero, block indefinitely.
@@ -157,6 +175,8 @@ public class ReferenceQueue<T> {
      * Removes the next reference object in this queue, blocking until one
      * becomes available.
      *
+     * <p>
+     * 
      * @return A reference object, blocking until one becomes available
      * @throws  InterruptedException  If the wait is interrupted
      */

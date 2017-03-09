@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,12 @@ import java.io.Serializable;
  * The actual storage representation of the coordinates is left to
  * the subclass.
  *
+ * <p>
+ *  <code> Ellipse2D </code>类描述了一个由框架矩形定义的椭圆。
+ * <p>
+ *  这个类只是存储2D椭圆的所有对象的抽象超类。坐标的实际存储表示是留给子类的。
+ * 
+ * 
  * @author      Jim Graham
  * @since 1.2
  */
@@ -44,12 +51,20 @@ public abstract class Ellipse2D extends RectangularShape {
     /**
      * The <code>Float</code> class defines an ellipse specified
      * in <code>float</code> precision.
+     * <p>
+     *  <code> Float </code>类定义了<code> float </code>精度中指定的椭圆。
+     * 
+     * 
      * @since 1.2
      */
     public static class Float extends Ellipse2D implements Serializable {
         /**
          * The X coordinate of the upper-left corner of the
          * framing rectangle of this {@code Ellipse2D}.
+         * <p>
+         *  此{@code Ellipse2D}的框架矩形的左上角的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -58,6 +73,10 @@ public abstract class Ellipse2D extends RectangularShape {
         /**
          * The Y coordinate of the upper-left corner of the
          * framing rectangle of this {@code Ellipse2D}.
+         * <p>
+         *  此{@code Ellipse2D}的框架矩形的左上角的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -65,6 +84,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * The overall width of this <code>Ellipse2D</code>.
+         * <p>
+         *  这个<code> Ellipse2D </code>的总宽度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -72,6 +95,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * The overall height of this <code>Ellipse2D</code>.
+         * <p>
+         *  这个<code> Ellipse2D </code>的总高度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -80,6 +107,10 @@ public abstract class Ellipse2D extends RectangularShape {
         /**
          * Constructs a new <code>Ellipse2D</code>, initialized to
          * location (0,&nbsp;0) and size (0,&nbsp;0).
+         * <p>
+         *  构造一个新的<code> Ellipse2D </code>,初始化为位置(0,&nbsp; 0)和大小(0,&nbsp; 0)。
+         * 
+         * 
          * @since 1.2
          */
         public Float() {
@@ -89,6 +120,10 @@ public abstract class Ellipse2D extends RectangularShape {
          * Constructs and initializes an <code>Ellipse2D</code> from the
          * specified coordinates.
          *
+         * <p>
+         *  从指定的坐标构造并初始化一个<code> Ellipse2D </code>。
+         * 
+         * 
          * @param x the X coordinate of the upper-left corner
          *          of the framing rectangle
          * @param y the Y coordinate of the upper-left corner
@@ -103,6 +138,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX() {
@@ -111,6 +150,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY() {
@@ -119,6 +162,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getWidth() {
@@ -127,6 +174,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getHeight() {
@@ -135,6 +186,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public boolean isEmpty() {
@@ -145,6 +200,10 @@ public abstract class Ellipse2D extends RectangularShape {
          * Sets the location and size of the framing rectangle of this
          * <code>Shape</code> to the specified rectangular values.
          *
+         * <p>
+         *  将<code> Shape </code>的框架矩形的位置和大小设置为指定的矩形值。
+         * 
+         * 
          * @param x the X coordinate of the upper-left corner of the
          *              specified rectangular shape
          * @param y the Y coordinate of the upper-left corner of the
@@ -162,6 +221,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setFrame(double x, double y, double w, double h) {
@@ -173,6 +236,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -181,6 +248,9 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -6633761252372475977L;
     }
@@ -188,12 +258,20 @@ public abstract class Ellipse2D extends RectangularShape {
     /**
      * The <code>Double</code> class defines an ellipse specified
      * in <code>double</code> precision.
+     * <p>
+     *  <code> Double </code>类定义了<code> double </code>精度中指定的椭圆。
+     * 
+     * 
      * @since 1.2
      */
     public static class Double extends Ellipse2D implements Serializable {
         /**
          * The X coordinate of the upper-left corner of the
          * framing rectangle of this {@code Ellipse2D}.
+         * <p>
+         *  此{@code Ellipse2D}的框架矩形的左上角的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -202,6 +280,10 @@ public abstract class Ellipse2D extends RectangularShape {
         /**
          * The Y coordinate of the upper-left corner of the
          * framing rectangle of this {@code Ellipse2D}.
+         * <p>
+         * 此{@code Ellipse2D}的框架矩形的左上角的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -209,6 +291,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * The overall width of this <code>Ellipse2D</code>.
+         * <p>
+         *  这个<code> Ellipse2D </code>的总宽度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -216,6 +302,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * The overall height of the <code>Ellipse2D</code>.
+         * <p>
+         *  <code> Ellipse2D </code>的总高度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -224,6 +314,10 @@ public abstract class Ellipse2D extends RectangularShape {
         /**
          * Constructs a new <code>Ellipse2D</code>, initialized to
          * location (0,&nbsp;0) and size (0,&nbsp;0).
+         * <p>
+         *  构造一个新的<code> Ellipse2D </code>,初始化为位置(0,&nbsp; 0)和大小(0,&nbsp; 0)。
+         * 
+         * 
          * @since 1.2
          */
         public Double() {
@@ -233,6 +327,10 @@ public abstract class Ellipse2D extends RectangularShape {
          * Constructs and initializes an <code>Ellipse2D</code> from the
          * specified coordinates.
          *
+         * <p>
+         *  从指定的坐标构造并初始化一个<code> Ellipse2D </code>。
+         * 
+         * 
          * @param x the X coordinate of the upper-left corner
          *        of the framing rectangle
          * @param y the Y coordinate of the upper-left corner
@@ -247,6 +345,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX() {
@@ -255,6 +357,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY() {
@@ -263,6 +369,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getWidth() {
@@ -271,6 +381,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getHeight() {
@@ -279,6 +393,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public boolean isEmpty() {
@@ -287,6 +405,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setFrame(double x, double y, double w, double h) {
@@ -298,6 +420,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -306,6 +432,9 @@ public abstract class Ellipse2D extends RectangularShape {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 5555464816372320683L;
     }
@@ -317,6 +446,10 @@ public abstract class Ellipse2D extends RectangularShape {
      * the information necessary to satisfy the various accessor
      * methods below.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类。类型特定的实现子类可用于实例化并且提供用于存储满足下面的各种存取器方法所必需的信息的多种格式。
+     * 
+     * 
      * @see java.awt.geom.Ellipse2D.Float
      * @see java.awt.geom.Ellipse2D.Double
      * @since 1.2
@@ -326,6 +459,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y) {
@@ -346,6 +483,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(double x, double y, double w, double h) {
@@ -393,6 +534,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y, double w, double h) {
@@ -410,6 +555,13 @@ public abstract class Ellipse2D extends RectangularShape {
      * modifications to the geometry of this <code>Ellipse2D</code>
      * object do not affect any iterations of that geometry that
      * are already in process.
+     * <p>
+     *  返回定义此<code> Ellipse2D </code>边界的迭代对象。
+     * 这个类的迭代器是多线程安全的,这意味着这个<code> Ellipse2D </code>类保证对这个<code> Ellipse2D </code>对象的几何形状的修改不影响该几何的任何迭代已经在进行
+     * 中。
+     *  返回定义此<code> Ellipse2D </code>边界的迭代对象。
+     * 
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to
      * the coordinates as they are returned in the iteration, or
      * <code>null</code> if untransformed coordinates are desired
@@ -424,6 +576,10 @@ public abstract class Ellipse2D extends RectangularShape {
 
     /**
      * Returns the hashcode for this <code>Ellipse2D</code>.
+     * <p>
+     *  返回此<code> Ellipse2D </code>的哈希码。
+     * 
+     * 
      * @return the hashcode for this <code>Ellipse2D</code>.
      * @since 1.6
      */
@@ -441,6 +597,11 @@ public abstract class Ellipse2D extends RectangularShape {
      * <code>Object</code> is equal to this <code>Ellipse2D</code>
      * if it is an instance of <code>Ellipse2D</code> and if its
      * location and size are the same as this <code>Ellipse2D</code>.
+     * <p>
+     * 确定指定的<code> Object </code>是否等于此<code> Ellipse2D </code>。
+     * 如果它是<code> Ellipse2D </code>的一个实例,并且它的位置和大小与此<code>对象</code>相同,则指定的<code> Object </code> Ellipse2D </code>
+     * 。
+     * 
      * @param obj  an <code>Object</code> to be compared with this
      *             <code>Ellipse2D</code>.
      * @return  <code>true</code> if <code>obj</code> is an instance

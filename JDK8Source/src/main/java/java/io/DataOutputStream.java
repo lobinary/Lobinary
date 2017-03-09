@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ package java.io;
  * types to an output stream in a portable way. An application can
  * then use a data input stream to read the data back in.
  *
+ * <p>
+ *  数据输出流允许应用程序以可移植的方式将原始Java数据类型写入输出流。然后,应用程序可以使用数据输入流读取数据。
+ * 
+ * 
  * @author  unascribed
  * @see     java.io.DataInputStream
  * @since   JDK1.0
@@ -39,11 +44,17 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
     /**
      * The number of bytes written to the data output stream so far.
      * If this counter overflows, it will be wrapped to Integer.MAX_VALUE.
+     * <p>
+     *  到目前为止写入数据输出流的字节数。如果此计数器溢出,它将被包装到Integer.MAX_VALUE。
+     * 
      */
     protected int written;
 
     /**
      * bytearr is initialized on demand by writeUTF
+     * <p>
+     *  bytearr根据需要由writeUTF初始化
+     * 
      */
     private byte[] bytearr = null;
 
@@ -52,6 +63,10 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * underlying output stream. The counter <code>written</code> is
      * set to zero.
      *
+     * <p>
+     *  创建新的数据输出流,将数据写入指定的基础输出流。写入的计数器<code> </code>设置为零。
+     * 
+     * 
      * @param   out   the underlying output stream, to be saved for later
      *                use.
      * @see     java.io.FilterOutputStream#out
@@ -63,6 +78,9 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
     /**
      * Increases the written counter by the specified value
      * until it reaches Integer.MAX_VALUE.
+     * <p>
+     *  将写入的计数器增加指定值,直到达到Integer.MAX_VALUE。
+     * 
      */
     private void incCount(int value) {
         int temp = written + value;
@@ -80,6 +98,12 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * <p>
      * Implements the <code>write</code> method of <code>OutputStream</code>.
      *
+     * <p>
+     *  将指定的字节(参数<code> b </code>的低8位)写入底层输出流。如果没有抛出异常,则写入</code>的计数器<code>增加<code> 1 </code>。
+     * <p>
+     *  实现<code> OutputStream </code>的<code> write </code>方法。
+     * 
+     * 
      * @param      b   the <code>byte</code> to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -95,6 +119,11 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * If no exception is thrown, the counter <code>written</code> is
      * incremented by <code>len</code>.
      *
+     * <p>
+     *  从指定的字节数组开始,从偏移<code> off </code>将<code> len </code>字节写入底层输出流。
+     * 如果没有抛出异常,则写入</code>的计数器<code>增加<code> len </code>。
+     * 
+     * 
      * @param      b     the data.
      * @param      off   the start offset in the data.
      * @param      len   the number of bytes to write.
@@ -115,6 +144,12 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * The <code>flush</code> method of <code>DataOutputStream</code>
      * calls the <code>flush</code> method of its underlying output stream.
      *
+     * <p>
+     *  刷新此数据输出流。这将强制任何缓冲的输出字节被写出到流。
+     * <p>
+     *  <code> DataOutputStream </code>的<code> flush </code>方法调用其底层输出流的<code> flush </code>方法。
+     * 
+     * 
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
      * @see        java.io.OutputStream#flush()
@@ -131,6 +166,12 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * thrown, the counter <code>written</code> is incremented by
      * <code>1</code>.
      *
+     * <p>
+     * 以底层输出流的1字节值写入<code> boolean </code>。
+     * 值<code> true </code>被写为值<code>(byte)1 </code>;值<code> false </code>被写为值<code>(byte)0 </code>。
+     * 如果没有抛出异常,则写入</code>的计数器<code>增加<code> 1 </code>。
+     * 
+     * 
      * @param      v   a <code>boolean</code> value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -145,6 +186,10 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * a 1-byte value. If no exception is thrown, the counter
      * <code>written</code> is incremented by <code>1</code>.
      *
+     * <p>
+     *  将底层输出流的<code>字节</code>写为1字节值。如果没有抛出异常,则写入</code>的计数器<code>增加<code> 1 </code>。
+     * 
+     * 
      * @param      v   a <code>byte</code> value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -159,6 +204,10 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * bytes, high byte first. If no exception is thrown, the counter
      * <code>written</code> is incremented by <code>2</code>.
      *
+     * <p>
+     *  将<code> short </code>写入底层输出流为两个字节,高字节优先。如果没有抛出异常,则写入的<code> </code>的计数器递增<code> 2 </code>。
+     * 
+     * 
      * @param      v   a <code>short</code> to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -174,6 +223,10 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * 2-byte value, high byte first. If no exception is thrown, the
      * counter <code>written</code> is incremented by <code>2</code>.
      *
+     * <p>
+     *  将<code> char </code>写入底层输出流作为2字节值,高字节优先。如果没有抛出异常,则写入的<code> </code>的计数器递增<code> 2 </code>。
+     * 
+     * 
      * @param      v   a <code>char</code> value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -189,6 +242,10 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * bytes, high byte first. If no exception is thrown, the counter
      * <code>written</code> is incremented by <code>4</code>.
      *
+     * <p>
+     *  将<code> int </code>写入底层输出流作为四个字节,高字节优先。如果没有抛出异常,则写入</code>的计数器<code>增加<code> 4 </code>。
+     * 
+     * 
      * @param      v   an <code>int</code> to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -208,6 +265,10 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * bytes, high byte first. In no exception is thrown, the counter
      * <code>written</code> is incremented by <code>8</code>.
      *
+     * <p>
+     *  将<code> long </code>写入底层输出流为八个字节,高字节优先。没有异常被抛出,计数器<code>写</code>增加<code> 8 </code>。
+     * 
+     * 
      * @param      v   a <code>long</code> to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -233,6 +294,12 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * exception is thrown, the counter <code>written</code> is
      * incremented by <code>4</code>.
      *
+     * <p>
+     * 使用<code> Float </code>类中的<code> floatToIntBits </code>方法将float参数转换为<code> int </code>,然后将<code> int </code>
+     * 底层的输出流为4字节数量,高字节优先。
+     * 如果没有抛出异常,则写入</code>的计数器<code>增加<code> 4 </code>。
+     * 
+     * 
      * @param      v   a <code>float</code> value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -250,6 +317,12 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * exception is thrown, the counter <code>written</code> is
      * incremented by <code>8</code>.
      *
+     * <p>
+     *  使用<code> Double </code>类中的<code> doubleToLongBits </code>方法将双引数转换为<code> long </code>,然后将<code> long
+     *  </code>底层输出流为8字节数量,高字节优先。
+     * 如果没有抛出异常,则写入</code>的计数器<code>增加<code> 8 </code>。
+     * 
+     * 
      * @param      v   a <code>double</code> value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -266,6 +339,10 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * thrown, the counter <code>written</code> is incremented by the
      * length of <code>s</code>.
      *
+     * <p>
+     *  将字符串作为字节序列写入底层输出流。字符串中的每个字符按顺序通过丢弃其高8位而被写出。如果没有抛出异常,则写入</code>的计数器<code>增加<code> s </code>的长度。
+     * 
+     * 
      * @param      s   a string of bytes to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterOutputStream#out
@@ -285,6 +362,11 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * thrown, the counter <code>written</code> is incremented by twice
      * the length of <code>s</code>.
      *
+     * <p>
+     *  将字符串作为字符序列写入底层输出流。每个字符写入数据输出流,就像通过<code> writeChar </code>方法。
+     * 如果没有抛出异常,则写入</code>的计数器<code>将增加<code> s </code>长度的两倍。
+     * 
+     * 
      * @param      s   a <code>String</code> value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.DataOutputStream#writeChar(int)
@@ -316,6 +398,14 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * plus the length of <code>str</code>, and at most two plus
      * thrice the length of <code>str</code>.
      *
+     * <p>
+     *  使用<a href="DataInput.html#modified-utf-8">修改的UTF-8 </a>编码以机器无关的方式将字符串写入底层输出流。
+     * <p>
+     * 首先,两个字节被写入输出流,如同通过给出跟随的字节数的<code> writeShort </code>方法。这个值是实际写出的字节数,而不是字符串的长度。
+     * 在长度之后,使用对于字符的修改的UTF-8编码,依次输出字符串的每个字符。如果没有抛出异常,则写入</code>的计数器<code>将增加写入输出流的字节总数。
+     * 这将是至少两个加上<code> str </code>的长度,并且最多两个加三倍的<code> str </code>的长度。
+     * 
+     * 
      * @param      str   a string to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -338,6 +428,13 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * plus the length of <code>str</code>, and at most two plus
      * thrice the length of <code>str</code>.
      *
+     * <p>
+     *  使用<a href="DataInput.html#modified-utf-8">修改的UTF-8 </a>编码,以机器无关的方式将字符串写入指定的DataOutput。
+     * <p>
+     *  首先,两个字节被写入输出,如同通过给出跟随的字节数的<code> writeShort </code>方法。这个值是实际写出的字节数,而不是字符串的长度。
+     * 在长度之后,使用对于字符的修改的UTF-8编码,依次输出字符串的每个字符。如果没有抛出异常,则写入</code>的计数器<code>将增加写入输出流的字节总数。
+     * 这将是至少两个加上<code> str </code>的长度,并且最多两个加三倍的<code> str </code>的长度。
+     * 
      * @param      str   a string to be written.
      * @param      out   destination to write to
      * @return     The number of bytes written out.
@@ -407,6 +504,9 @@ class DataOutputStream extends FilterOutputStream implements DataOutput {
      * the number of bytes written to this data output stream so far.
      * If the counter overflows, it will be wrapped to Integer.MAX_VALUE.
      *
+     * <p>
+     * 
+     * 
      * @return  the value of the <code>written</code> field.
      * @see     java.io.DataOutputStream#written
      */

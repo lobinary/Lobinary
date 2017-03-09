@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,25 @@ import java.awt.Graphics2D;
  *
  * <p>This interface makes no guarantees of threadsafety.</p>
  *
+ * <p>
+ *  <p>绘画代表。 Painter接口只定义一个方法,<code> paint </code>。它用于开发人员可以更改组件的绘制例程而不必求助于对该组件进行子类化的情况。
+ * 在进行任何形式的绘画委托时,它也是非常有用的。</p>。
+ * 
+ *  <p> <code> Painter </code>是Java2D代码的简单封装,使得重用现有<code> Painter </code>或将它们组合在一起变得相当简单。
+ * 这个接口的实现也很容易写,所以如果你找不到你需要的<code> Painter </code>,你可以用最少的努力写一个。编写<code> Painter </code>需要了解Java2D。
+ * </p>。
+ * 
+ *  <p>可以使用type参数创建<code> Painter </code>。此类型将在<code> paint </code>方法中预期。
+ * 例如,您可能希望编写一个仅适用于{@link java.awt.Component}的子类的<code> Painter </code>。
+ * 在这种情况下,当声明<code> Painter </code>时,您可以声明它需要一个<code> Component </code>,允许paint方法是类型安全的。例如：。
+ * <pre>
+ *  {@code Painter <Component> p = new Painter <Component>(){public void paint(Graphics2D g,Component c,int width,int height){g.setColor(c.getBackground()); //等等}
+ * }}。
+ * </pre>
+ * 
+ * <p>此接口不保证线程安全。</p>
+ * 
+ * 
  * @author rbair
  */
 public interface Painter<T> {
@@ -98,6 +118,18 @@ public interface Painter<T> {
      * also be black on the left, white on the right, and a smooth gradient painted
      * between.</p>
      *
+     * <p>
+     *  <p>呈现给定的{@link java.awt.Graphics2D}对象。此方法的实现可以</em>修改<code> Graphics2D </code>上的状态,并且在完成后不需要恢复该状态。
+     * 在大多数情况下,建议调用者传递临时图形对象。 <code> Graphics2D </code>不能为空。</p>。
+     * 
+     *  <p>图形对象上的状态可以通过<code> paint </code>方法来执行,但可能不是。例如,在<code> Painter </code>实现中可以或不可以设置图形上的抗锯齿渲染提示。
+     * </p>。
+     * 
+     *  <p>提供的对象参数用作可选的配置参数。例如,它可以是<code> Component </code>类型。
+     * 一个<code> Painter </code>,它期望它可以从<code> Component </code>读取状态,并使用状态绘画。例如,一个实现可以读取backgroundColor并使用它。
+     * </p>。
+     * 
+     * 
      * @param g The Graphics2D to render to. This must not be null.
      * @param object an optional configuration parameter. This may be null.
      * @param width width of the area to paint.

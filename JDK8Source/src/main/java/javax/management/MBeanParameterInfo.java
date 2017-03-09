@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import java.util.Objects;
  * Instances of this class are immutable.  Subclasses may be mutable
  * but this is not recommended.
  *
+ * <p>
+ *  描述MBean公开的操作的参数。这个类的实例是不可变的。子类可以是可变的,但这不是推荐。
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanParameterInfo extends MBeanFeatureInfo implements Cloneable {
@@ -44,6 +49,8 @@ public class MBeanParameterInfo extends MBeanFeatureInfo implements Cloneable {
     static final MBeanParameterInfo[] NO_PARAMS = new MBeanParameterInfo[0];
 
     /**
+    /* <p>
+    /* 
      * @serial The type or class name of the data.
      */
     private final String type;
@@ -52,6 +59,10 @@ public class MBeanParameterInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Constructs an <CODE>MBeanParameterInfo</CODE> object.
      *
+     * <p>
+     *  构造一个<CODE> MBeanParameterInfo </CODE>对象。
+     * 
+     * 
      * @param name The name of the data
      * @param type The type or class name of the data
      * @param description A human readable description of the data. Optional.
@@ -65,6 +76,10 @@ public class MBeanParameterInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Constructs an <CODE>MBeanParameterInfo</CODE> object.
      *
+     * <p>
+     *  构造一个<CODE> MBeanParameterInfo </CODE>对象。
+     * 
+     * 
      * @param name The name of the data
      * @param type The type or class name of the data
      * @param description A human readable description of the data. Optional.
@@ -92,6 +107,12 @@ public class MBeanParameterInfo extends MBeanFeatureInfo implements Cloneable {
      *
      * <p>Since this class is immutable, cloning is chiefly of
      * interest to subclasses.</p>
+     * <p>
+     *  <p>返回此实例的浅克隆。通过简单调用<tt> super.clone()</tt>获得克隆,从而调用由<tt> Object.clone()</tt>实现的默认本机浅克隆机制。
+     * 不会对任何内部字段进行更深层次的克隆。</p>。
+     * 
+     *  <p>由于这个类是不可变的,克隆主要是子类的兴趣。</p>
+     * 
      */
      public Object clone () {
          try {
@@ -105,6 +126,10 @@ public class MBeanParameterInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Returns the type or class name of the data.
      *
+     * <p>
+     *  返回数据的类型或类名。
+     * 
+     * 
      * @return the type string.
      */
     public String getType() {
@@ -124,6 +149,9 @@ public class MBeanParameterInfo extends MBeanFeatureInfo implements Cloneable {
     /**
      * Compare this MBeanParameterInfo to another.
      *
+     * <p>
+     *  将此MBeanParameterInfo与另一个比较。
+     * 
      * @param o the object to compare to.
      *
      * @return true if and only if <code>o</code> is an MBeanParameterInfo such

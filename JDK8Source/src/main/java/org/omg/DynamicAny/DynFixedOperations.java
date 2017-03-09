@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -13,12 +14,18 @@ package org.omg.DynamicAny;
     * DynFixed objects support the manipulation of IDL fixed values.
     * Because IDL does not have a generic type that can represent fixed types with arbitrary
     * number of digits and arbitrary scale, the operations use the IDL string type.
+    * <p>
+    *  DynFixed对象支持对IDL固定值的操作。因为IDL没有可以表示具有任意数量的数字和任意比例的固定类型的通用类型,所以操作使用IDL字符串类型。
+    * 
     */
 public interface DynFixedOperations  extends org.omg.DynamicAny.DynAnyOperations
 {
 
   /**
         * Returns the value of a DynFixed.
+        * <p>
+        *  返回DynFixed的值。
+        * 
         */
   String get_value ();
 
@@ -29,6 +36,10 @@ public interface DynFixedOperations  extends org.omg.DynamicAny.DynAnyOperations
         * without loss of precision. If val has more fractional digits than can be represented in the DynFixed,
         * fractional digits are truncated and the return value is false.
         *
+        * <p>
+        *  设置DynFixed的值。 val字符串必须包含与IDL定点文字使用的格式相同的固定字符串常量。但是,尾随d或D是可选的。如果val可以表示为DynFixed而不损失精度,则返回值为true。
+        * 如果val具有比在DynFixed中可以表示的更多的小数位数,则小数数字将被截断,返回值为false。
+        * 
         * @exception TypeMismatch If val does not contain a valid fixed-point literal or contains extraneous
         *            characters other than leading or trailing white space
         * @exception InvalidValue If val contains a value whose scale exceeds that of the DynFixed

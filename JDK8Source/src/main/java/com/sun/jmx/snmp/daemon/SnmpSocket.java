@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -28,6 +29,11 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_ADAPTOR_LOGGER;
  * A socket imposes an upper limit on size of inform response packet. Any
  * packet which exceeds this limit is truncated. By default, this
  * limit is {@link SnmpAdaptorServer#bufferSize}.
+ * <p>
+ *  此类创建一个SNMP数据报套接字。此类有方法有助于将SNMP通知请求数据包发送到指定设备的任意端口。它还运行一个专用于在套接字上接收SNMP通知响应的线程。
+ * <BR>
+ *  套接字对通知响应包的大小施加上限。任何超过此限制的数据包都将被截断。默认情况下,此限制为{@link SnmpAdaptorServer#bufferSize}。
+ * 
  */
 
 final class SnmpSocket implements java.lang.Runnable {
@@ -50,6 +56,10 @@ final class SnmpSocket implements java.lang.Runnable {
 
     /**
      * Creates a new <CODE>SnmpSocket</CODE> object.
+     * <p>
+     *  创建一个新的<CODE> SnmpSocket </CODE>对象。
+     * 
+     * 
      * @param rspHdlr A Datagram handler.
      * @param bufferSize The SNMP adaptor buffer size.
      * @exception SocketException A socket could not be created.
@@ -77,6 +87,10 @@ final class SnmpSocket implements java.lang.Runnable {
 
     /**
      * Sends a datagram packet to a specified device at specified port.
+     * <p>
+     *  将数据包发送到指定端口的指定设备。
+     * 
+     * 
      * @param buff The packet data.
      * @param length The packet length.
      * @param addr The destination address.
@@ -91,6 +105,10 @@ final class SnmpSocket implements java.lang.Runnable {
 
     /**
      * Sends a datagram packet to a specified device at specified port.
+     * <p>
+     *  将数据包发送到指定端口的指定设备。
+     * 
+     * 
      * @param dgrmpkt The datagram packet.
      * @exception IOException Signals that an I/O exception of some sort has occurred.
      */
@@ -117,6 +135,10 @@ final class SnmpSocket implements java.lang.Runnable {
 
     /**
      * Checks if the socket is initialised correctly and if it is still active.
+     * <p>
+     *  检查套接字是否正确初始化,以及是否仍处于活动状态。
+     * 
+     * 
      * @return <CODE>true</CODE> if the socket is initialised correctly and if it is still active,
      * <CODE>false</CODE> otherwise.
      */
@@ -126,6 +148,9 @@ final class SnmpSocket implements java.lang.Runnable {
 
     /**
      * Closes the socket and its associated resources.
+     * <p>
+     *  关闭套接字及其相关资源。
+     * 
      */
     public synchronized void close() {
 
@@ -172,6 +197,9 @@ final class SnmpSocket implements java.lang.Runnable {
     /**
      * Dispatcher method for this socket thread. This is the dispatcher method
      * which goes in an endless-loop and waits for receiving datagram packets on the socket.
+     * <p>
+     *  这个套接字线程的Dispatcher方法。这是dispatcher方法,它进入无限循环,并等待在套接字上接收数据报包。
+     * 
      */
     @Override
     public void run() {
@@ -258,6 +286,10 @@ final class SnmpSocket implements java.lang.Runnable {
      * This method is called by the garbage collector on an object
      * when garbage collection determines that there are no more references to the object.
      * <P>Closes the datagram socket and stops the socket thread associated to this SNMP socket.
+     * <p>
+     *  <CODE> SnmpSocket </CODE>对象的终结器。当垃圾回收确定没有对对象的更多引用时,垃圾收集器在对象上调用此方法。
+     *  <P>关闭数据报套接字,并停止与此SNMP套接字关联的套接字线程。
+     * 
      */
     @Override
     protected synchronized void finalize() {
@@ -269,6 +301,7 @@ final class SnmpSocket implements java.lang.Runnable {
 
     /*
      * Keep this locked so that send can't happen.
+     * <p>
      */
     private synchronized void handleJavaError(Throwable thr) {
         if (thr instanceof OutOfMemoryError) {

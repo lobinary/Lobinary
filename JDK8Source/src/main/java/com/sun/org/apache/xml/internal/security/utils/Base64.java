@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils;
 
@@ -39,6 +48,10 @@ import org.w3c.dom.Text;
  * Optimized code. (raw version taken from oreilly.jonathan.util,
  * and currently org.apache.xerces.ds.util.Base64)
  *
+ * <p>
+ *  实现MIME的Base64编码和解码转换。优化代码。 (原始版本取自oreilly.jonathan.util,目前为org.apache.xerces.ds.util.Base64)
+ * 
+ * 
  * @author Raul Benito(Of the xerces copy, and little adaptations).
  * @author Anli Shundi
  * @author Christian Geuer-Pollmann
@@ -105,6 +118,12 @@ public class Base64 {
      * <b>N.B.:</B> <code>{@link BigInteger}<code>'s toByteArray
      * returns eventually longer arrays because of the leading sign-bit.
      *
+     * <p>
+     *  返回<code> {@ link BigInteger} <code>的字节数组表示形式。不输出符号位。
+     * 
+     *  <b> <b> </b> <code> {@ link BigInteger} <code>的toByteArray最终返回更长的数组,因为前面的符号位。
+     * 
+     * 
      * @param big <code>BigInteger<code> to be converted
      * @param bitlen <code>int<code> the desired length in bits of the representation
      * @return a byte array with <code>bitlen</code> bits of <code>big</code>
@@ -146,6 +165,10 @@ public class Base64 {
     /**
      * Encode in Base64 the given <code>{@link BigInteger}<code>.
      *
+     * <p>
+     *  在Base64中编码给定的<code> {@ link BigInteger} <code>。
+     * 
+     * 
      * @param big
      * @return String with Base64 encoding
      */
@@ -160,6 +183,12 @@ public class Base64 {
      * <b>N.B.:</B> <code>{@link BigInteger}<code>'s toByteArray
      * returns eventually longer arrays because of the leading sign-bit.
      *
+     * <p>
+     *  返回<code> {@ link BigInteger} <code>的字节数组表示形式。不输出符号位。
+     * 
+     * <b> <b> </b> <code> {@ link BigInteger} <code>的toByteArray最终返回更长的数组,因为前面的符号位。
+     * 
+     * 
      * @param big <code>BigInteger<code> to be converted
      * @param bitlen <code>int<code> the desired length in bits of the representation
      * @return a byte array with <code>bitlen</code> bits of <code>big</code>
@@ -201,6 +230,10 @@ public class Base64 {
     /**
      * Method decodeBigIntegerFromElement
      *
+     * <p>
+     *  方法decodeBigIntegerFromElement
+     * 
+     * 
      * @param element
      * @return the biginteger obtained from the node
      * @throws Base64DecodingException
@@ -213,6 +246,10 @@ public class Base64 {
     /**
      * Method decodeBigIntegerFromText
      *
+     * <p>
+     *  方法decodeBigIntegerFromText
+     * 
+     * 
      * @param text
      * @return the biginter obtained from the text node
      * @throws Base64DecodingException
@@ -226,6 +263,10 @@ public class Base64 {
      * This method takes an (empty) Element and a BigInteger and adds the
      * base64 encoded BigInteger to the Element.
      *
+     * <p>
+     *  此方法接受(空)Element和BigInteger,并将base64编码的BigInteger添加到元素。
+     * 
+     * 
      * @param element
      * @param biginteger
      */
@@ -249,6 +290,12 @@ public class Base64 {
      * Takes the <CODE>Text</CODE> children of the Element and interprets
      * them as input for the <CODE>Base64.decode()</CODE> function.
      *
+     * <p>
+     *  方法解码
+     * 
+     *  获取元素的<CODE>文本</CODE>子代,并将其解释为<CODE> Base64.decode()</CODE>函数的输入。
+     * 
+     * 
      * @param element
      * @return the byte obtained of the decoding the element
      * $todo$ not tested yet
@@ -274,6 +321,10 @@ public class Base64 {
     /**
      * Method encodeToElement
      *
+     * <p>
+     *  方法encodeToElement
+     * 
+     * 
      * @param doc
      * @param localName
      * @param bytes
@@ -292,6 +343,10 @@ public class Base64 {
     /**
      * Method decode
      *
+     * <p>
+     *  方法解码
+     * 
+     * 
      * @param base64
      * @return the UTF bytes of the base64
      * @throws Base64DecodingException
@@ -305,6 +360,10 @@ public class Base64 {
      * Encode a byte array and fold lines at the standard 76th character unless
      * ignore line breaks property is set.
      *
+     * <p>
+     *  编码字节数组并在标准第76个字符处折叠线,除非设置了忽略换行符属性。
+     * 
+     * 
      * @param binaryData <code>byte[]<code> to be base64 encoded
      * @return the <code>String<code> with encoded data
      */
@@ -318,6 +377,10 @@ public class Base64 {
      * Base64 decode the lines from the reader and return an InputStream
      * with the bytes.
      *
+     * <p>
+     *  Base64解码读取器中的行,并返回带有字节的InputStream。
+     * 
+     * 
      * @param reader
      * @return InputStream with the decoded bytes
      * @exception IOException passes what the reader throws
@@ -356,6 +419,10 @@ public class Base64 {
     /**
      * Encodes hex octets into Base64
      *
+     * <p>
+     *  将十六进制八进制编码为Base64
+     * 
+     * 
      * @param binaryData Array containing binaryData
      * @return Encoded Base64 array
      */
@@ -363,6 +430,10 @@ public class Base64 {
      * Encode a byte array in Base64 format and return an optionally
      * wrapped line.
      *
+     * <p>
+     *  以Base64格式编码字节数组,并返回可选包装行。
+     * 
+     * 
      * @param binaryData <code>byte[]</code> data to be encoded
      * @param length <code>int<code> length of wrapped lines; No wrapping if less than 4.
      * @return a <code>String</code> with encoded data
@@ -472,6 +543,10 @@ public class Base64 {
     /**
      * Decodes Base64 data into octets
      *
+     * <p>
+     *  将Base64数据解码为八位字节
+     * 
+     * 
      * @param encoded String containing base64 encoded data
      * @return byte array containing the decoded data
      * @throws Base64DecodingException if there is a problem decoding the data
@@ -591,6 +666,10 @@ public class Base64 {
     /**
      * Decodes Base64 data into outputstream
      *
+     * <p>
+     *  将Base64数据解码到输出流
+     * 
+     * 
      * @param base64Data String containing Base64 data
      * @param os the outputstream
      * @throws IOException
@@ -606,6 +685,10 @@ public class Base64 {
     /**
      * Decodes Base64 data into outputstream
      *
+     * <p>
+     *  将Base64数据解码到输出流
+     * 
+     * 
      * @param base64Data Byte array containing Base64 data
      * @param os the outputstream
      * @throws IOException
@@ -697,6 +780,10 @@ public class Base64 {
     /**
      * Decodes Base64 data into  outputstream
      *
+     * <p>
+     *  将Base64数据解码到输出流
+     * 
+     * 
      * @param is containing Base64 data
      * @param os the outputstream
      * @throws IOException
@@ -776,6 +863,9 @@ public class Base64 {
     /**
      * remove WhiteSpace from MIME containing encoded Base64 data.
      *
+     * <p>
+     *  从包含编码的Base64数据的MIME中删除WhiteSpace。
+     * 
      * @param data  the byte array of base64 data (with WS)
      * @return      the new length
      */

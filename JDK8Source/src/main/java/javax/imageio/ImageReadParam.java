@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -123,6 +124,54 @@ import java.awt.image.BufferedImage;
  * supported).
  *
  *
+ * <p>
+ *  描述流如何被解码的类。该类或其子类的实例用于向<code> ImageReader </code>的实例提供指定的"how-to"信息。
+ * 
+ *  编码为文件或流的一部分的图像可以被认为在多个维度中延伸：宽度和高度的空间维度,带的数量以及渐进解码通道的数量。该类允许选择所有这些维度中的图像的连续(超)矩形子区域用于解码。
+ * 另外,空间维度可以不连续地子采样。
+ * 最后,可以通过控制目标图像的<code> ColorModel </code>和<code> SampleModel </code>来指定颜色和格式转换,方法是提供一个<code> BufferedIm
+ * age </code> <code> ImageTypeSpecifier </code>。
+ * 另外,空间维度可以不连续地子采样。
+ * 
+ *  <p> <code> ImageReadParam </code>对象用于指定如何在Java Image I / O框架的上下文中对来自流的输入进行图像或一组图像的转换。
+ * 用于特定图像格式的插件将从其<code> ImageReader </code>实现的<code> getDefaultReadParam </code>方法中返回<code> ImageReadPar
+ * am </code>的实例。
+ *  <p> <code> ImageReadParam </code>对象用于指定如何在Java Image I / O框架的上下文中对来自流的输入进行图像或一组图像的转换。
+ * 
+ * <p>由<code> ImageReadParam </code>实例维护的状态与正在解码的任何特定图像无关。
+ * 当发生实际解码时,将读取参数中设置的值与将从流接收解码的图像数据的目的地<code> BufferedImage </code>的正被解码的图像的实际属性组合。
+ * 例如,使用<code> setSourceRegion </code>设置的源区域将首先与实际有效的源区域相交。
+ * 结果将通过<code> getDestinationOffset </code>返回的值进行转换,并将生成的矩形与实际有效的目标区域相交,以生成将要写入的目标区域。
+ * 
+ *  <p>由<code> ImageReadParam </code>指定的参数将应用于图像,如下所示。
+ * 首先,如果通过<code> setSourceRenderSize </code>设置了渲染大小,则整个解码图像以由<code> getSourceRenderSize </code>给出的大小渲染。
+ * 否则,图像具有由<code> ImageReader.getWidth </code>和<code> ImageReader.getHeight </code>给出的自然大小。
+ * 
+ *  <p>接下来,图像将根据<code> getSourceXOffset </code>,<code> getSourceYOffset </code>,<code> getSourceWidth </code>
+ * 和<code> getSourceHeight </code >。
+ * 
+ * <p>然后根据{@link IIOParam#setSourceSubsampling IIOParam.setSourceSubsampling}中给出的因子对生成的区域进行子采样。
+ * 第一个像素,每行像素数和行数均取决于子采样设置。
+ * 调用结果矩形的最小X和Y坐标(<code> minX </code>,<code> minY </code>),其宽度<code> w </code>代码>。
+ * 
+ *  <p>此矩形由(<code> getDestinationOffset()。x </code>,<code> getDestinationOffset()。
+ * y </code>)偏移并针对目标边界进行裁剪。如果没有设置目的地图像,则目的地被定义为具有<code> getDestinationOffset()。
+ * x </code> + <code> w </code>的宽度,以及<code> getDestinationOffset y </code> + <code> h </code>,以便源区域的所有像素
+ * 可以写入目的地。
+ * y </code>)偏移并针对目标边界进行裁剪。如果没有设置目的地图像,则目的地被定义为具有<code> getDestinationOffset()。
+ * 
+ *  <p>在子采样之后,在目标图像内,并且由<code> getSourceMinProgressivePass </code>和<code> getSourceNumProgressivePasses 
+ * </code>指定的渐进遍中写入的像素被传递到下一个步。
+ * 
+ *  最后,根据<code> setDestinationBands </code>的注释中描述的算法将每个像素的源样本映射到目的地频带。
+ * 
+ * <p>插件编写器可以通过提供一个实现附加的插件特定接口的子类来扩展<code> ImageReadParam </code>的功能。它是由插件来记录什么接口可用以及如何使用它们。
+ * 读者将默认忽略他们不知道的<code> ImageReadParam </code>子类的任何扩展功能。
+ * 此外,他们可以忽略通过<code> getDefaultReadParam </code>创建自己的<code> ImageReadParam </code>实例时通常禁用的任何可选功能。
+ * 
+ *  <p>请注意,除非存在某种功能的查询方法,否则必须由所有<code> ImageReader </code>实现(</i>源渲染大小是可选的,但必须支持子采样) 。
+ * 
+ * 
  * @see ImageReader
  * @see ImageWriter
  * @see ImageWriteParam
@@ -138,6 +187,12 @@ public class ImageReadParam extends IIOParam {
      * <p> <code>ImageReader</code>s that do not support setting of
      * the source render size should set this value to
      * <code>false</code>.
+     * <p>
+     *  <code> true </code>如果此<code> ImageReadParam </code>允许设置源渲染尺寸。默认情况下,值为<code> false </code>。
+     * 子类必须手动设置此值。
+     * 
+     *  不支持设置源渲染大小的<p> <code> ImageReader </code>应将此值设置为<code> false </code>。
+     * 
      */
     protected boolean canSetSourceRenderSize = false;
 
@@ -148,6 +203,11 @@ public class ImageReadParam extends IIOParam {
      *
      * <p> <code>ImageReader</code>s that do not support setting of
      * the source render size may ignore this value.
+     * <p>
+     *  如果<code> canSetSourceRenderSize </code>是<code> true </code>或<code> null </code>,则源的期望呈现宽度和高度。
+     * 
+     *  不支持设置源渲染大小的<p> <code> ImageReader </code>可能会忽略此值。
+     * 
      */
     protected Dimension sourceRenderSize = null;
 
@@ -155,6 +215,9 @@ public class ImageReadParam extends IIOParam {
      * The current destination <code>BufferedImage</code>, or
      * <code>null</code> if none has been set.  By default, the value
      * is <code>null</code>.
+     * <p>
+     *  当前目标<code> BufferedImage </code>或<code> null </code>(如果没有设置)。默认情况下,值为<code> null </code>。
+     * 
      */
     protected BufferedImage destination = null;
 
@@ -162,6 +225,9 @@ public class ImageReadParam extends IIOParam {
      * The set of destination bands to be used, as an array of
      * <code>int</code>s.  By default, the value is <code>null</code>,
      * indicating all destination bands should be written in order.
+     * <p>
+     * 要使用的目的频带集,作为<code> int </code>的数组。默认情况下,值为<code> null </code>,表示所有目标频带应按顺序写入。
+     * 
      */
     protected int[] destinationBands = null;
 
@@ -173,6 +239,11 @@ public class ImageReadParam extends IIOParam {
      *
      * <p> Subclasses should ensure that this value is
      * non-negative.
+     * <p>
+     *  从源读取的渐进式最小索引。默认情况下,该值设置为0,表示应该解码以第一个可用通道开头的通过。
+     * 
+     *  <p>子类应确保此值为非负数。
+     * 
      */
     protected int minProgressivePass = 0;
 
@@ -187,11 +258,22 @@ public class ImageReadParam extends IIOParam {
      * <code>Integer.MAX_VALUE</code>, then <code>minProgressivePass +
      * numProgressivePasses - 1</code> should not exceed
      * <code>Integer.MAX_VALUE</code>.
+     * <p>
+     *  从源读取的逐行扫描的最大数量。默认情况下,该值设置为<code> Integer.MAX_VALUE </code>,表示应该解码直到并包括最后一个可用通行的通过。
+     * 
+     *  <p>子类应确保此值为正。
+     * 此外,如果值不是<code> Integer.MAX_VALUE </code>,则<code> minProgressivePass + numProgressivePasses  -  1 </code>
+     * 不应超过<code> Integer.MAX_VALUE </code>。
+     *  <p>子类应确保此值为正。
+     * 
      */
     protected int numProgressivePasses = Integer.MAX_VALUE;
 
     /**
      * Constructs an <code>ImageReadParam</code>.
+     * <p>
+     *  构造一个<code> ImageReadParam </code>。
+     * 
      */
     public ImageReadParam() {}
 
@@ -223,6 +305,19 @@ public class ImageReadParam extends IIOParam {
      * <code>getImageTypes</code> method.  If it does not, the reader
      * will throw an <code>IIOException</code>.
      *
+     * <p>
+     *  提供<code> BufferedImage </code>作为解码像素数据的目标位置。
+     * 当前设置的图像将被<code> read </code>,<code> readAll </code>和<code> readRaster </code>方法写入,并且这些方法将返回对它的引用。
+     * 
+     *  <p>上述方法中的像素数据将从由<code> getDestinationOffset </code>指定的偏移量开始写入。
+     * 
+     *  <p>如果<code> destination </code>是<code> null </code>,那些方法将返回新创建的<code> BufferedImage </code>。
+     * 
+     * <p>在读取时,检查图像以验证其<code> ColorModel </code>和<code> SampleModel </code>对应于从<code> ImageTypeSpecifier </code>
+     * 返回的<code> <code> ImageReader </code>的<code> getImageTypes </code>方法。
+     * 如果没有,读者会抛出一个<code> IIOException </code>。
+     * 
+     * 
      * @param destination the BufferedImage to be written to, or
      * <code>null</code>.
      *
@@ -237,6 +332,10 @@ public class ImageReadParam extends IIOParam {
      * <code>setDestination</code> method, or <code>null</code>
      * if none is set.
      *
+     * <p>
+     *  返回由<code> setDestination </code>方法当前设置的<code> BufferedImage </code>,如果没有设置,则返回<code> null </code>。
+     * 
+     * 
      * @return the BufferedImage to be written to.
      *
      * @see #setDestination
@@ -268,6 +367,19 @@ public class ImageReadParam extends IIOParam {
      * <code>ImageReader.checkReadParamBandSettings</code> method may
      * be used to automate this test.
      *
+     * <p>
+     *  设置要放置数据的目标波段的索引。不允许重复索引。
+     * 
+     *  <p> <code> null </code>值表示将使用所有目标波段。
+     * 
+     *  <p>如果未指定目标图像,选择目标带子集将不会影响读取的输出图像中的带数;所创建的目标图像仍然具有与从未调用该方法时相同的频带数。
+     * 如果目的图像中需要不同数量的带,则必须使用<code> ImageReadParam.setDestination </code>方法提供图像。
+     * 
+     *  <p>在读取或写入时,如果已经指定大于最大目标频带索引的值,或者如果源频带的数量和源频带的数量已经被指定,则读取器或写入器将抛出<code> IllegalArgumentException </code>
+     * 要使用的目的频带不同。
+     *  <code> ImageReader.checkReadParamBandSettings </code>方法可用于自动执行此测试。
+     * 
+     * 
      * @param destinationBands an array of integer band indices to be
      * used.
      *
@@ -303,6 +415,10 @@ public class ImageReadParam extends IIOParam {
      * If no value has been set, <code>null</code> is returned to
      * indicate that all destination bands will be used.
      *
+     * <p>
+     * 返回要放置数据的波段索引集。如果没有设置值,则返回<code> null </code>以指示将使用所有目的地频带。
+     * 
+     * 
      * @return the indices of the destination bands to be used,
      * or <code>null</code>.
      *
@@ -325,6 +441,13 @@ public class ImageReadParam extends IIOParam {
      * <code>setSourceRenderSize</code> will throw an
      * <code>UnsupportedOperationException</code>.
      *
+     * <p>
+     *  如果此读取器允许源图像通过<code> setSourceRenderSize </code>方法在解码过程中作为任意大小进行渲染,则返回<code> true </code>。
+     * 如果此方法返回<code> false </code>,对<code> setSourceRenderSize </code>的调用将抛出<code> UnsupportedOperationExcep
+     * tion </code>。
+     *  如果此读取器允许源图像通过<code> setSourceRenderSize </code>方法在解码过程中作为任意大小进行渲染,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if setting source rendering size is
      * supported.
      *
@@ -356,6 +479,19 @@ public class ImageReadParam extends IIOParam {
      * <p> To remove the render size setting, pass in a value of
      * <code>null</code> for <code>size</code>.
      *
+     * <p>
+     *  如果图像能够以任意大小渲染,请将源宽度和高度设置为提供的值。
+     * 注意,从<code> getWidth </code>和<code> getHeight </code>方法返回的<code> ImageReader </code>值不受此方法的影响;它们将继续返回图
+     * 像的默认大小。
+     *  如果图像能够以任意大小渲染,请将源宽度和高度设置为提供的值。类似地,如果图像也被平铺,则瓦片宽度和高度以默认尺寸给出。
+     * 
+     *  <p>通常,应该选择宽度和高度,以便从<code> ImageReader.getAspectRatio </code>返回的宽度与高度的比率接近图像的宽高比。
+     * 
+     *  <p>如果此插件不允许设置渲染大小,则会抛出<code> UnsupportedOperationException </code>。
+     * 
+     *  <p>要移除渲染大小设置,请为<code> size </code>输入<code> null </code>的值。
+     * 
+     * 
      * @param size a <code>Dimension</code> indicating the desired
      * width and height.
      *
@@ -392,6 +528,10 @@ public class ImageReadParam extends IIOParam {
      * <code>setSourceRenderSize</code> method.  A
      * <code>null</code>value indicates that no setting has been made.
      *
+     * <p>
+     * 返回源图像在解码期间渲染的宽度和高度,如果它们已通过<code> setSourceRenderSize </code>方法设置。 <code> null </code>值表示未进行任何设置。
+     * 
+     * 
      * @return the rendered width and height of the source image
      * as a <code>Dimension</code>.
      *
@@ -429,6 +569,20 @@ public class ImageReadParam extends IIOParam {
      * method; the same effect may be obtained by calling
      * <code>setSourceProgressivePasses(0, Integer.MAX_VALUE)</code>.
      *
+     * <p>
+     *  设置将要解码的渐进遍数的范围。超出此范围的通过将被忽略。
+     * 
+     *  逐行扫描是整个图像的重新编码,通常是逐渐更高的有效分辨率,但是需要更大的传输带宽。逐行编码的最常见的用法是以JPEG格式找到的,其中连续的遍次包括高频图像内容的更详细的表示。
+     * 
+     *  <p>在解码期间,基于流中可用的实际遍数来确定要解码的实际遍数。因此,如果<code> minPass + numPasses-1 </code>大于最后可用遍的索引,则解码将以该遍结束。
+     * 
+     *  <p> <code> Integer.MAX_VALUE </code>的<code> numPasses </code>值表示应读取从<code> minPass </code>向前的所有传递。
+     * 否则,最后一次通过的索引(<i> ie。
+     * </i>,<code> minPass + numPasses  -  1 </code>)不能超过<code> Integer.MAX_VALUE </code>。
+     * 
+     *  <p>没有<code> unsetSourceProgressivePasses </code>方法;通过调用<code> setSourceProgressivePasses(0,Integer.M
+     * AX_VALUE)</code>可以获得相同的效果。
+     * 
      * @param minPass the index of the first pass to be decoded.
      * @param numPasses the maximum number of passes to be decoded.
      *
@@ -464,6 +618,9 @@ public class ImageReadParam extends IIOParam {
      * decoded. If no value has been set, 0 will be returned (which is
      * the correct value).
      *
+     * <p>
+     * 
+     * 
      * @return the index of the first pass that will be decoded.
      *
      * @see #setSourceProgressivePasses
@@ -480,6 +637,10 @@ public class ImageReadParam extends IIOParam {
      * <code>getSourceMinProgressivePass() +
      * getSourceNumProgressivePasses() - 1</code>.
      *
+     * <p>
+     * 返回将要解码的第一个渐进式遍的索引。如果没有设置值,将返回0(这是正确的值)。
+     * 
+     * 
      * @return the index of the last pass to be read, or
      * <code>Integer.MAX_VALUE</code>.
      */
@@ -497,6 +658,12 @@ public class ImageReadParam extends IIOParam {
      * <code>Integer.MAX_VALUE</code> will be returned (which is the
      * correct value).
      *
+     * <p>
+     *  如果<code> getSourceNumProgressivePasses </code>等于<code> Integer.MAX_VALUE </code>,则返回<code> Integer.M
+     * AX_VALUE </code>。
+     * 否则,返回<code> getSourceMinProgressivePass()+ getSourceNumProgressivePasses() -  1 </code>。
+     * 
+     * 
      * @return the number of the passes that will be decoded.
      *
      * @see #setSourceProgressivePasses

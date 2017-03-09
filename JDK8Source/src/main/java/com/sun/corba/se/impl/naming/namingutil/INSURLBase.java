@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ package com.sun.corba.se.impl.naming.namingutil;
  *  will be stored in this object. This object is capable of storing multiple
  *  Host profiles as defined in the CorbaLoc grammer.
  *
+ * <p>
+ *  将被存储在此对象中。此对象能够存储如CorbaLoc语法器中定义的多个主机配置文件。
+ * 
  *  @author  Hemanth
  */
 public abstract class INSURLBase implements INSURL {

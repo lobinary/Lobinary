@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,24 @@ package java.security;
  * AccessControlContext that has both the combined ProtectionDomains
  * as well as the {@code DomainCombiner}.
  *
+ * <p>
+ *  {@code DomainCombiner}提供了一种动态更新与当前{@code AccessControlContext}相关联的ProtectionDomains的方法。
+ * 
+ *  <p> {@code DomainCombiner}作为参数传递给{@code AccessControlContext}的相应构造函数。
+ * 然后将新构造的上下文传递给{@code AccessController.doPrivileged(...,context)}方法,以将提供的上下文(和关联的{@code DomainCombiner}
+ * )与当前执行的Thread绑定。
+ *  <p> {@code DomainCombiner}作为参数传递给{@code AccessControlContext}的相应构造函数。
+ * 随后调用{@code AccessController.getContext}或{@code AccessController.checkPermission}会导致调用{@code DomainCombiner.combine}
+ * 。
+ *  <p> {@code DomainCombiner}作为参数传递给{@code AccessControlContext}的相应构造函数。
+ * 
+ * <p> combine方法有两个参数。
+ * 第一个参数表示来自当前执行Thread的ProtectionDomains数组,因为最近一次调用{@code AccessController.doPrivileged}。
+ * 如果没有调用doPrivileged,那么第一个参数将包含当前执行Thread的所有ProtectionDomains。
+ * 第二个参数表示一个继承的ProtectionDomains数组,它可以是{@code null}。 ProtectionDomains可以从父线程或从特权上下文继承。
+ * 如果没有调用doPrivileged,那么第二个参数将包含从父Thread继承的ProtectionDomains。
+ * 如果对doPrivileged进行了一次或多次调用,并且最近的调用是doPrivileged(action,context),则第二个参数将包含来自特权上下文的ProtectionDomains。
+ * 
  * @see AccessController
  * @see AccessControlContext
  * @since 1.3
@@ -89,6 +108,16 @@ public interface DomainCombiner {
      *
      * <p>
      *
+     * <p>
+     * 如果最近的调用是doPrivileged(action),那么没有特权上下文,第二个参数将是{@code null}。
+     * 
+     * <p> {@code combine}方法调查ProtectionDomains的两个输入数组,并返回包含更新后的ProtectionDomains的单个数组。
+     * 在最简单的情况下,{@code combine}方法将两个堆栈合并为一个。在更复杂的情况下,{@code combine}方法返回一个修改的ProtectionDomains堆栈。
+     * 修改可能已添加了新的ProtectionDomains,删除了某些ProtectionDomains或仅更新了现有的ProtectionDomains。
+     * 也允许对ProtectionDomain进行重新排序和其他优化。通常,{@code combine}方法的更新基于封装在{@code DomainCombiner}中的信息。
+     * 
+     *  <p>在{@code AccessController.getContext}方法从{@code DomainCombiner}接收到ProtectionDomains的组合堆栈后,它返回一个新的Ac
+     * 
      * @param currentDomains the ProtectionDomains associated with the
      *          current execution Thread, up to the most recent
      *          privileged {@code ProtectionDomain}.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -28,6 +29,11 @@ public interface TAG_ORB_TYPE
      * The <code>TAG_ORB_TYPE</code> component can appear at most once in 
      * any IOR profile. For profiles supporting IIOP 1.1 or greater, it 
      * is optionally present.
+     * <p>
+     *  在现实世界中通常有用的是能够识别对象引用来自的特定类型的ORB,解决该特定ORB的问题,或者利用共享的效率。
+     * <p>
+     *  <code> TAG_ORB_TYPE </code>组件具有类型为unsigned long(Java long)的关联值,编码为CDR封装,指定由OMG针对始发ORB的ORB类型分配的ORB类型I
+     * D。
      */
   public static final int value = (int)(0L);
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,12 @@ import javax.swing.text.*;
  * for short term storage or RMI between applications running the same
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
+ * <p>
+ *  Windows文本呈现。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
  */
 public abstract class WindowsTextUI extends BasicTextUI {
     /**
@@ -52,6 +59,10 @@ public abstract class WindowsTextUI extends BasicTextUI {
      * can be redefined to provide something else that implements
      * the InputPosition interface or a subclass of DefaultCaret.
      *
+     * <p>
+     *  创建用于插入符的对象。默认情况下创建WindowsCaret的实例。此方法可以重新定义,以提供其他实现InputPosition接口或DefaultCaret的子类。
+     * 
+     * 
      * @return the caret object
      */
     protected Caret createCaret() {
@@ -67,6 +78,10 @@ public abstract class WindowsTextUI extends BasicTextUI {
         /**
          * Gets the painter for the Highlighter.
          *
+         * <p>
+         *  获取荧光笔的画家。
+         * 
+         * 
          * @return the painter
          */
         protected Highlighter.HighlightPainter getSelectionPainter() {
@@ -86,6 +101,10 @@ public abstract class WindowsTextUI extends BasicTextUI {
         /**
          * Paints a highlight.
          *
+         * <p>
+         *  画一个亮点。
+         * 
+         * 
          * @param g the graphics context
          * @param offs0 the starting model offset >= 0
          * @param offs1 the ending model offset >= offs1
@@ -155,6 +174,9 @@ public abstract class WindowsTextUI extends BasicTextUI {
         /**
          * Paints a portion of a highlight.
          *
+         * <p>
+         *  描绘高亮的一部分。
+         * 
          * @param g the graphics context
          * @param offs0 the starting model offset >= 0
          * @param offs1 the ending model offset >= offs1

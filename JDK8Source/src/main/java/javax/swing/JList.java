@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -261,6 +262,111 @@ import static sun.swing.SwingUtilities2.Section.*;
  * in <a href="https://docs.oracle.com/javase/tutorial/"><em>The Java Tutorial</em></a>
  * for further documentation.
  * <p>
+ * <p>
+ *  显示对象列表并允许用户选择一个或多个项的组件。单独的模型{@code ListModel}维护列表的内容。
+ * <p>
+ *  使用{@code JList}构造函数可以轻松地显示对象的数组或Vector,该构造函数会为您自动构建只读{@code ListModel}实例：
+ * <pre>
+ *  {@code //创建一个显示字符串数组的JList
+ * 
+ *  String [] data = {"one","two","three","four"}; JList <String> myList = new JList <String>(data);
+ * 
+ *  //创建一个JList,显示JList.class的超类,//创建一个填充了这些数据的Vector
+ * 
+ *  向量<Class <?>> superClasses = new Vector <Class <?>>(); class <JList> rootClass = javax.swing.JList.c
+ * lass; for(Class <?> cls = rootClass; cls！= null; cls = cls.getSuperclass()){superClasses.addElement(cls); }
+ *  JList <Class <?>> myList = new JList <Class <?>>(superClasses);。
+ * 
+ *  //自动创建的模型存储在JList的"model"//属性中,您可以检索它
+ * 
+ *  ListModel <Class <?>> model = myList.getModel(); for(int i = 0; i <model.getSize(); i ++){System.out.println(model.getElementAt(i)); }}。
+ * </pre>
+ * <p>
+ * 可以通过构造函数或{@code setModel}方法将{@code ListModel}直接提供给{@code JList}。内容不需要是静态的 - 项目的数量,并且项目的值可以随时间改变。
+ * 正确的{@code ListModel}实现通知每次发生更改时已添加到其中的{@code javax.swing.event.ListDataListener}的集合。
+ * 这些更改的特点是{@code javax.swing.event.ListDataEvent},它标识已修改,添加或删除的列表索引的范围。
+ *  {@code JList}的{@code ListUI}负责通过监听模型来保持视觉表示的最新更改。
+ * <p>
+ *  简单的动态内容{@code JList}应用程序可以使用{@code DefaultListModel}类来维护列表元素。
+ * 这个类实现了{@code ListModel}接口,并且还提供了一个<code> java.util.Vector </code>类API。
+ * 需要更多自定义<code> ListModel </code>实现的应用程序可能希望将{@code AbstractListModel}子类化,这为管理和通知侦听器提供了基本支持。
+ * 例如,{@code AbstractListModel}的只读实现：。
+ * <pre>
+ *  {@code //这个列表模型有大约2 ^ 16个元素。享受滚动。
+ * 
+ *  ListModel <String> bigData = new AbstractListModel <String>(){public int getSize(){return Short.MAX_VALUE; }
+ *  public String getElementAt(int index){return"Index"+ index; }}; }}。
+ * </pre>
+ * <p>
+ * {@code JList}的选择状态由另一个单独的模型({@code ListSelectionModel})的实例管理。
+ *  {@code JList}使用构造上的选择模型初始化,并且还包含查询或设置此选择模型的方法。此外,{@code JList}提供了方便的方法来轻松管理选择。
+ * 这些方法(例如{@code setSelectedIndex}和{@code getSelectedValue})是处理与选择模型交互的详细信息的覆盖方法。
+ * 默认情况下,{@code JList}的选择模型配置为允许一次选择项目的任意组合;选择模式{@code MULTIPLE_INTERVAL_SELECTION}。
+ * 可以直接在选择模型上或通过{@code JList}的覆盖方法更改选择模式。响应用户手势更新选择模型的责任在于列表的{@code ListUI}。
+ * <p>
+ *  正确的{@code ListSelectionModel}实现通知每次对选择进行更改时添加到其中的{@code javax.swing.event.ListSelectionListener}的集合。
+ * 这些更改的特点是{@code javax.swing.event.ListSelectionEvent},它标识选择更改的范围。
+ * <p>
+ *  监听列表选择中的更改的首选方法是将{@code ListSelectionListener}直接添加到{@code JList}。
+ *  {@code JList}然后负责监听选择模型并通知你的监听器有变化。
+ * <p>
+ * 负责收听选择更改,以保持列表的视觉表示更新列表的{@code ListUI}。
+ * <p>
+ *  <a name="renderer"> </a> {@code JList}中的单元格绘画由称为单元格渲染器的委托处理,作为{@code cellRenderer}属性安装在列表中。
+ * 渲染器提供了一个{@code java.awt.Component},它像"橡皮图章"一样用于绘制单元格。
+ * 每次需要绘制单元格时,列表的{@code ListUI}会询问单元格渲染器的组件,将其移动到位,并通过其{@code paint}方法绘制单元格的内容。
+ * 默认单元格渲染器使用{@code JLabel}组件进行渲染,由列表的{@code ListUI}安装。你可以使用如下代码替换自己的渲染器：。
+ * <pre>
+ *  {@code //显示列表中每个对象的图标和字符串。
+ * 
+ *  class MyCellRenderer extends JLabel implements ListCellRenderer <Object> {final static ImageIcon longIcon = new ImageIcon("long.gif"); final static ImageIcon shortIcon = new ImageIcon("short.gif");。
+ * 
+ *  //这是由ListCellRenderer定义的唯一方法。 //我们每次调用时都重新配置JLabel。
+ * 
+ * public Component getListCellRendererComponent(JList <list> list,//列表Object值,//显示的值int index,// cell i
+ * ndex boolean isSelected,// is cell selected boolean cellHasFocus)//单元格有焦点{String s = value.toString(); setText(s); setIcon((s.length()> 10)?longIcon：shortIcon); if(isSelected){setBackground(list.getSelectionBackground()); setForeground(list.getSelectionForeground()); }
+ *  else {setBackground(list.getBackground()); setForeground(list.getForeground()); } setEnabled(list.is
+ * Enabled()); setFont(list.getFont()); setOpaque(true);返回这个; }}。
+ * 
+ *  myList.setCellRenderer(new MyCellRenderer()); }}
+ * </pre>
+ * <p>
+ *  单元格渲染器的另一个工作是帮助确定列表的大小信息。默认情况下,列表的{@code ListUI}通过询问单元格渲染器的每个列表项的首选大小来确定单元格的大小。这对于大的项目列表可能是昂贵的。
+ * 要避免这些计算,您可以在列表上设置{@code fixedCellWidth}和{@code fixedCellHeight},或根据单个原型值自动计算这些值：<a name="prototype_example">
+ *  </a>。
+ *  单元格渲染器的另一个工作是帮助确定列表的大小信息。默认情况下,列表的{@code ListUI}通过询问单元格渲染器的每个列表项的首选大小来确定单元格的大小。这对于大的项目列表可能是昂贵的。
+ * <pre>
+ *  {@code JList <String> bigDataList = new JList <String>(bigData);
+ * 
+ * //我们不希望JList实现计算所有列表单元格的宽度//或高度,因此我们给它一个字符串//,它和我们需要的任何单元格一样大。
+ * 它使用这个来计算fixedCellWidth和fixedCellHeight //属性的值。
+ * 
+ *  bigDataList.setPrototypeCellValue("Index 1234567890"); }}
+ * </pre>
+ * <p>
+ *  {@code JList}不实现直接滚动。要创建滚动的列表,请将其视为{@code JScrollPane}的视口视图。例如：
+ * <pre>
+ *  JScrollPane scrollPane = new JScrollPane(myList);
+ * 
+ *  //或在两个步骤：JScrollPane scrollPane = new JScrollPane(); scrollPane.getViewport()。setView(myList);
+ * </pre>
+ * <p>
+ *  {@code JList}不提供任何特殊的双重或三重(或N)鼠标点击处理,但如果您希望对这些事件采取行动,则可以轻松添加{@code MouseListener}。
+ * 使用{@code locationToIndex}方法来确定单击哪个单元格。例如：。
+ * <pre>
+ *  MouseListener mouseListener = new MouseAdapter(){public void mouseClicked(MouseEvent e){if(e.getClickCount()== 2){int index = list.locationToIndex(e.getPoint()); System.out.println("双击项目"+索引); }
+ * }}; list.addMouseListener(mouseListener);。
+ * </pre>
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * <p>
+ *  请参阅<a href ="https://docs.oracle中的<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/list.html">
+ * 如何使用列表</a> .com / javase / tutorial /"> <em> Java教程</em> </a>。
+ * <p>
+ * 
  * @see ListModel
  * @see AbstractListModel
  * @see DefaultListModel
@@ -280,6 +386,8 @@ import static sun.swing.SwingUtilities2.Section.*;
 public class JList<E> extends JComponent implements Scrollable, Accessible
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -288,6 +396,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Indicates a vertical layout of cells, in a single column;
      * the default layout.
+     * <p>
+     *  表示单个列的垂直布局;默认布局。
+     * 
+     * 
      * @see #setLayoutOrientation
      * @since 1.4
      */
@@ -296,6 +408,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Indicates a "newspaper style" layout with cells flowing vertically
      * then horizontally.
+     * <p>
+     *  表示"报纸样式"布局,单元格垂直然后水平。
+     * 
+     * 
      * @see #setLayoutOrientation
      * @since 1.4
      */
@@ -304,6 +420,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Indicates a "newspaper style" layout with cells flowing horizontally
      * then vertically.
+     * <p>
+     *  表示"报纸样式"布局,单元格水平然后垂直。
+     * 
+     * 
      * @see #setLayoutOrientation
      * @since 1.4
      */
@@ -325,16 +445,25 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
     /**
      * How to lay out the cells; defaults to <code>VERTICAL</code>.
+     * <p>
+     *  如何铺设细胞;默认为<code> VERTICAL </code>。
+     * 
      */
     private int layoutOrientation;
 
     /**
      * The drop mode for this component.
+     * <p>
+     *  此组件的放置模式。
+     * 
      */
     private DropMode dropMode = DropMode.USE_SELECTION;
 
     /**
      * The drop location.
+     * <p>
+     *  放置位置。
+     * 
      */
     private transient DropLocation dropLocation;
 
@@ -342,6 +471,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * A subclass of <code>TransferHandler.DropLocation</code> representing
      * a drop location for a <code>JList</code>.
      *
+     * <p>
+     *  <code> TransferHandler.DropLocation </code>的子类,表示<code> JList </code>的放置位置。
+     * 
+     * 
      * @see #getDropLocation
      * @since 1.6
      */
@@ -370,6 +503,15 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * <code>-1</code> indicates that the drop occurred over empty space,
          * and no index could be calculated.
          *
+         * <p>
+         * 返回应将丢弃数据放在列表中的索引。值的解释取决于在相关组件上设置的下降模式。
+         * 如果删除模式是<code> DropMode.USE_SELECTION </code>或<code> DropMode.ON </code>,则返回值是列表中某一行的索引。
+         * 如果删除模式为<code> DropMode.INSERT </code>,则返回值指的是应插入数据的索引。
+         * 如果删除模式是<code> DropMode.ON_OR_INSERT </code>,则<code> isInsert()</code>的值指示索引是行的索引还是插入索引。
+         * <p>
+         *  <code> -1 </code>表示删除发生在空白空间上,并且不能计算索引。
+         * 
+         * 
          * @return the drop index
          */
         public int getIndex() {
@@ -380,6 +522,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * Returns whether or not this location represents an insert
          * location.
          *
+         * <p>
+         *  返回此位置是否表示插入位置。
+         * 
+         * 
          * @return whether or not this is an insert location
          */
         public boolean isInsert() {
@@ -392,6 +538,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * and the content and format of the returned string may vary
          * between implementations.
          *
+         * <p>
+         *  返回此放置位置的字符串表示形式。此方法旨在用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+         * 
+         * 
          * @return a string representation of this drop location
          */
         public String toString() {
@@ -410,6 +560,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * This constructor registers the list with the {@code ToolTipManager},
      * allowing for tooltips to be provided by the cell renderers.
      *
+     * <p>
+     *  构造{@code JList},显示指定的{@code非空}模型中的元素。所有{@code JList}构造函数委托给这一个。
+     * <p>
+     *  这个构造函数使用{@code ToolTipManager}注册列表,允许单元格渲染器提供工具提示。
+     * 
+     * 
      * @param dataModel the model for the list
      * @exception IllegalArgumentException if the model is {@code null}
      */
@@ -445,6 +601,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * references the given array directly. Attempts to modify the array
      * after constructing the list results in undefined behavior.
      *
+     * <p>
+     *  构造一个显示指定数组中的元素的<code> JList </code>。这个构造函数为给定的数组创建一个只读模型,然后委托给一个{@code ListModel}的构造函数。
+     * <p>
+     * 尝试向此方法传递{@code null}值会导致未定义的行为,并且很可能会出现异常。创建的模型直接引用给定的数组。在构造列表之后尝试修改数组会导致未定义的行为。
+     * 
+     * 
      * @param  listData  the array of Objects to be loaded into the data model,
      *                   {@code non-null}
      */
@@ -470,6 +632,14 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * references the given {@code Vector} directly. Attempts to modify the
      * {@code Vector} after constructing the list results in undefined behavior.
      *
+     * <p>
+     *  构造一个显示指定的<code> Vector </code>中的元素的<code> JList </code>。
+     * 这个构造函数为给定的{@code Vector}创建一个只读模型,然后委托给一个{@code ListModel}的构造函数。
+     * <p>
+     *  尝试向此方法传递{@code null}值会导致未定义的行为,并且很可能会出现异常。创建的模型直接引用给定的{@code Vector}。
+     * 尝试在构造列表后修改{@code Vector}会导致未定义的行为。
+     * 
+     * 
      * @param  listData  the <code>Vector</code> to be loaded into the
      *                   data model, {@code non-null}
      */
@@ -485,6 +655,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
     /**
      * Constructs a <code>JList</code> with an empty, read-only, model.
+     * <p>
+     *  用一个空的,只读的模型构造一个<code> JList </code>。
+     * 
      */
     public JList() {
         this (
@@ -500,6 +673,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns the {@code ListUI}, the look and feel object that
      * renders this component.
      *
+     * <p>
+     *  返回{@code ListUI},呈现此组件的外观对象。
+     * 
+     * 
      * @return the <code>ListUI</code> object that renders this component
      */
     public ListUI getUI() {
@@ -511,6 +688,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Sets the {@code ListUI}, the look and feel object that
      * renders this component.
      *
+     * <p>
+     *  设置{@code ListUI},呈现此组件的外观对象。
+     * 
+     * 
      * @param ui  the <code>ListUI</code> object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -531,6 +712,11 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * the cell renderer and its children to be updated, by calling
      * {@code SwingUtilities.updateComponentTreeUI} on it.
      *
+     * <p>
+     *  通过将{@code ListUI}属性设置为当前外观提供的值来重置该属性。
+     * 如果当前单元格渲染器是由开发人员安装的(而不是外观和感觉本身),这也通过调用{@code SwingUtilities.updateComponentTreeUI}来更新单元格渲染器及其子节点。
+     * 
+     * 
      * @see UIManager#getUI
      * @see SwingUtilities#updateComponentTreeUI
      */
@@ -549,6 +735,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * up the name of the {@code javax.swing.plaf.ListUI} class that defines
      * the look and feel for this component.
      *
+     * <p>
+     * 返回{@code"ListUI"},用于查找定义此组件的外观的{@code javax.swing.plaf.ListUI}类的名称的<code> UIDefaults </code>键。
+     * 
+     * 
      * @return the string "ListUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -566,6 +756,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * This method sets fixedCellWidth and fixedCellHeight but does <b>not</b>
      * generate PropertyChangeEvents for them.
      *
+     * <p>
+     *  此方法由setPrototypeCellValue和setCellRenderer调用,以从prototypeCellValue的当前值(如果它不为null)更新fixedCellWidth和fixe
+     * dCellHeight属性。
+     * <p>
+     *  此方法设置fixedCellWidth和fixedCellHeight,但<b>不</b>为它们生成PropertyChangeEvents。
+     * 
+     * 
      * @see #setPrototypeCellValue
      * @see #setCellRenderer
      */
@@ -582,6 +779,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
              * been done here.  So we temporarily set the one "inherited"
              * property that may affect the renderer components preferred size:
              * its font.
+             * <p>
+             *  CellRendererPane然而我们不能假设已经在这里完成。所以我们临时设置一个"继承"属性,可能影响渲染器组件首选大小：它的字体。
+             * 
              */
             Font f = c.getFont();
             c.setFont(getFont());
@@ -600,6 +800,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * fixed width and height for cells. This can be {@code null} if there
      * is no such value.
      *
+     * <p>
+     *  返回"原型"单元格值 - 用于计算单元格的固定宽度和高度的值。如果没有这样的值,这可以是{@code null}。
+     * 
+     * 
      * @return the value of the {@code prototypeCellValue} property
      * @see #setPrototypeCellValue
      */
@@ -631,6 +835,22 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置{@code prototypeCellValue}属性,然后(如果新值为{@code non-null}),通过请求单元格渲染器组件为给定值计算{@code fixedCellWidth}和{@code fixedCellHeight}
+     * 属性(和索引0)从单元格渲染器,并使用该组件的首选大小。
+     * <p>
+     *  当列表太长而不允许{@code ListUI}计算每个单元格的宽度/高度,并且已知单个单元格值占用与其他任何单元格相同的空间时,此方法很有用。所谓的原型。
+     * <p>
+     * 虽然可以通过此方法修改{@code prototypeCellValue},{@code fixedCellHeight}和{@code fixedCellWidth}属性中的所有三个,但仅当{@code prototypeCellValue}
+     * 属性更改时才会发送{@code PropertyChangeEvent}通知。
+     * <p>
+     *  要查看设置此属性的示例,请参见上面的<a href="#prototype_example">类说明</a>。
+     * <p>
+     *  此属性的默认值为<code> null </code>。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param prototypeCellValue  the value on which to base
      *                          <code>fixedCellWidth</code> and
      *                          <code>fixedCellHeight</code>
@@ -649,6 +869,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
         /* If the prototypeCellValue has changed and is non-null,
          * then recompute fixedCellWidth and fixedCellHeight.
+         * <p>
+         *  然后重新计算fixedCellWidth和fixedCellHeight。
+         * 
          */
 
         if ((prototypeCellValue != null) && !prototypeCellValue.equals(oldValue)) {
@@ -662,6 +885,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Returns the value of the {@code fixedCellWidth} property.
      *
+     * <p>
+     *  返回{@code fixedCellWidth}属性的值。
+     * 
+     * 
      * @return the fixed cell width
      * @see #setFixedCellWidth
      */
@@ -679,6 +906,15 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置用于列表中每个单元格宽度的固定值。
+     * 如果{@code width}为-1,则通过将<code> getPreferredSize </code>应用于每个列表元素的单元格渲染器组件,在{@code ListUI}中计算单元格宽度。
+     * <p>
+     *  此属性的默认值为{@code -1}。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param width the width to be used for all cells in the list
      * @see #setPrototypeCellValue
      * @see #setFixedCellWidth
@@ -698,6 +934,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Returns the value of the {@code fixedCellHeight} property.
      *
+     * <p>
+     *  返回{@code fixedCellHeight}属性的值。
+     * 
+     * 
      * @return the fixed cell height
      * @see #setFixedCellHeight
      */
@@ -715,6 +955,15 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置要用于列表中每个单元格的高度的固定值。
+     * 如果{@code height}为-1,则通过对每个列表元素应用<code> getPreferredSize </code>到单元格渲染器组件,在{@code ListUI}中计算单元格高度。
+     * <p>
+     *  此属性的默认值为{@code -1}。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param height the height to be used for for all cells in the list
      * @see #setPrototypeCellValue
      * @see #setFixedCellWidth
@@ -734,6 +983,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Returns the object responsible for painting list items.
      *
+     * <p>
+     *  返回负责绘制列表项的对象。
+     * 
+     * 
      * @return the value of the {@code cellRenderer} property
      * @see #setCellRenderer
      */
@@ -758,6 +1011,18 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     * 设置用于绘制列表中每个单元格的委托。 <a href="#renderer">类级文档</a>详细讨论了单元格渲染器的作业。
+     * <p>
+     *  如果{@code prototypeCellValue}属性是{@code non-null},设置单元格渲染器也会导致{@code fixedCellWidth}和{@code fixedCellHeight}
+     * 属性被重新计算。
+     * 但是,对于<code> cellRenderer </code>属性只生成一个<code> PropertyChangeEvent </code>。
+     * <p>
+     *  此属性的默认值由{@code ListUI}委托提供,即通过外观实现。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param cellRenderer the <code>ListCellRenderer</code>
      *                          that paints list cells
      * @see #getCellRenderer
@@ -772,6 +1037,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
         /* If the cellRenderer has changed and prototypeCellValue
          * was set, then recompute fixedCellWidth and fixedCellHeight.
+         * <p>
+         *  设置,然后重新计算fixedCellWidth和fixedCellHeight。
+         * 
          */
         if ((cellRenderer != null) && !cellRenderer.equals(oldValue)) {
             updateFixedCellSize();
@@ -787,6 +1055,11 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * of items in the selected state, as do the renderers installed by most
      * {@code ListUI} implementations.
      *
+     * <p>
+     *  返回用于绘制所选项目的前景的颜色。
+     *  {@code DefaultListCellRenderer}使用此颜色来绘制处于选定状态的项目的前景,大多数{@code ListUI}实现安装的渲染器也是如此。
+     * 
+     * 
      * @return the color to draw the foreground of selected items
      * @see #setSelectionForeground
      * @see DefaultListCellRenderer
@@ -808,6 +1081,15 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置用于绘制所选项目的前景的颜色,哪些单元格渲染器可用于渲染文本和图形。
+     *  {@code DefaultListCellRenderer}使用此颜色来绘制处于选定状态的项目的前景,大多数{@code ListUI}实现安装的渲染器也是如此。
+     * <p>
+     *  此属性的默认值由外观实现定义。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param selectionForeground  the {@code Color} to use in the foreground
      *                             for selected list items
      * @see #getSelectionForeground
@@ -834,6 +1116,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * of items in the selected state, as do the renderers installed by most
      * {@code ListUI} implementations.
      *
+     * <p>
+     * 返回用于绘制所选项目背景的颜色。 {@code DefaultListCellRenderer}使用此颜色来绘制处于选定状态的项目的背景,大多数{@code ListUI}实现安装的渲染器也是如此。
+     * 
+     * 
      * @return the color to draw the background of selected items
      * @see #setSelectionBackground
      * @see DefaultListCellRenderer
@@ -855,6 +1141,15 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置用于绘制所选项目背景的颜色,哪些单元格渲染器可以使用填充所选单元格。
+     *  {@code DefaultListCellRenderer}使用这种颜色来填充处于选定状态的项目的背景,大多数{@code ListUI}实现安装的渲染器也是如此。
+     * <p>
+     *  此属性的默认值由外观实现定义。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param selectionBackground  the {@code Color} to use for the
      *                             background of selected cells
      * @see #getSelectionBackground
@@ -880,6 +1175,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * documentation for {@link #setVisibleRowCount} for details on how to
      * interpret this value.
      *
+     * <p>
+     *  返回{@code visibleRowCount}属性的值。有关如何解释此值的详细信息,请参阅{@link #setVisibleRowCount}的文档。
+     * 
+     * 
      * @return the value of the {@code visibleRowCount} property.
      * @see #setVisibleRowCount
      */
@@ -911,6 +1210,22 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置{@code visibleRowCount}属性,它根据布局方向有不同的含义：对于{@code VERTICAL}布局方向,这将设置首选的行数,而不需要滚动;对于其它取向,其影响细胞的包裹。
+     * <p>
+     *  在{@code VERTICAL}方向中：<br>设置此属性会影响{@link #getPreferredScrollableViewportSize}方法的返回值,该方法用于计算封闭视口的首选大小。
+     * 有关更多详细信息,请参阅该方法的文档。
+     * <p>
+     * 在{@code HORIZONTAL_WRAP}和{@code VERTICAL_WRAP}方向中：<br>这会影响单元格的包装方式。
+     * 有关详细信息,请参阅{@link #setLayoutOrientation}的文档。
+     * <p>
+     *  此属性的默认值为{@code 8}。
+     * <p>
+     *  使用负值调用此方法会导致将属性设置为{@code 0}。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param visibleRowCount  an integer specifying the preferred number of
      *                         rows to display without requiring scrolling
      * @see #getVisibleRowCount
@@ -938,6 +1253,11 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * horizontally, or {@code HORIZONTAL_WRAP} if the layout is "newspaper
      * style" with the content flowing horizontally then vertically.
      *
+     * <p>
+     *  返回列表的布局方向属性：{@code VERTICAL}(如果布局是单列单元格),{@code VERTICAL_WRAP}(如果布局是"报纸样式",内容垂直然后水平),或{@code HORIZONTAL_WRAP }
+     * 如果布局是"报纸样式",内容水平然后垂直。
+     * 
+     * 
      * @return the value of the {@code layoutOrientation} property
      * @see #setLayoutOrientation
      * @since 1.4
@@ -988,6 +1308,32 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * The default value of this property is <code>VERTICAL</code>.
      *
+     * <p>
+     *  定义列表单元格的布局方式。考虑一个带有五个单元格的{@code JList}。单元格可以以下列方式之一进行布局：
+     * 
+     * <pre>
+     *  垂直：0 1 2 3 4
+     * 
+     *  HORIZONTAL_WRAP：0 1 2 3 4
+     * 
+     *  VERTICAL_WRAP：0 3 1 4 2
+     * </pre>
+     * <p>
+     *  这些布局的描述如下：
+     * 
+     *  <table border ="1"
+     * summary="Describes layouts VERTICAL, HORIZONTAL_WRAP, and VERTICAL_WRAP">
+     * <tr> <th> <p style ="text-align：left">值</p> </th> <th> <p style ="text-align：left">说明</p> </th > </tr>
+     *  <tr> <td> <code> VERTICAL </code> <td>单元格垂直放置在单个列中。
+     *  <tr> <td> <code> HORIZONTAL_WRAP </code> <td>单元格被水平排列,根据需要包装到新行。
+     * 如果{@code visibleRowCount}属性小于或等于零,则换行由列表的宽度决定;否则包装是以确保列表中的{@code visibleRowCount}行的方式完成的。
+     *  <tr> <td> <code> VERTICAL_WRAP </code> <td>单元格被垂直布局,必要时包装到新列。
+     * 如果{@code visibleRowCount}属性小于或等于零,则包装由列表的高度决定;否则换行在{@code visibleRowCount}行完成。
+     * </table>
+     * <p>
+     *  此属性的默认值为<code> VERTICAL </code>。
+     * 
+     * 
      * @param layoutOrientation the new layout orientation, one of:
      *        {@code VERTICAL}, {@code HORIZONTAL_WRAP} or {@code VERTICAL_WRAP}
      * @see #getLayoutOrientation
@@ -1028,6 +1374,11 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * If nothing is visible or the list is empty, {@code -1} is returned.
      * Note that the returned cell may only be partially visible.
      *
+     * <p>
+     *  返回当前可见的最小列表索引。在从左到右的{@code componentOrientation}中,第一个可见单元格最靠近列表的左上角。在从右到左的方向,它被发现最接近右上角。
+     * 如果没有可见或列表为空,则返回{@code -1}。请注意,返回的单元格只能部分可见。
+     * 
+     * 
      * @return the index of the first visible cell
      * @see #getLastVisibleIndex
      * @see JComponent#getVisibleRect
@@ -1058,6 +1409,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * If nothing is visible or the list is empty, {@code -1} is returned.
      * Note that the returned cell may only be partially visible.
      *
+     * <p>
+     *  返回当前可见的最大列表索引。如果没有可见或列表为空,则返回{@code -1}。请注意,返回的单元格只能部分可见。
+     * 
+     * 
      * @return the index of the last visible cell
      * @see #getFirstVisibleIndex
      * @see JComponent#getVisibleRect
@@ -1139,6 +1494,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * If the given index is outside the list's range of cells, this method
      * results in nothing.
      *
+     * <p>
+     * 在封闭视口中滚动列表,使指定的单元格完全可见。这将调用{@code scrollRectToVisible}与指定单元格的边界。
+     * 要使此方法起作用,{@code JList}必须位于<code> JViewport </code>中。
+     * <p>
+     *  如果给定的索引在列表的单元格范围之外,此方法不会产生任何结果。
+     * 
+     * 
      * @param index  the index of the cell to make visible
      * @see JComponent#scrollRectToVisible
      * @see #getVisibleRect
@@ -1168,6 +1530,17 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * begin a drag and drop operation by calling {@code exportAsDrag} on the
      * list's {@code TransferHandler}.
      *
+     * <p>
+     *  打开或关闭自动拖动处理。为了启用自动拖动处理,此属性应设置为{@code true},并且列表的{@code TransferHandler}需要为{@code non-null}。
+     *  {@code dragEnabled}属性的默认值为{@code false}。
+     * <p>
+     *  尊重此属性并识别用户拖动手势的工作在于外观和感觉实现,特别是列表的{@code ListUI}。
+     * 当启用自动拖动处理时,每当用户在项目上按下鼠标按钮,然后将鼠标移动几个像素时,大多数外观和感觉(包括子类{@code BasicLookAndFeel})开始拖放操作。
+     * 因此,将此属性设置为{@code true}可能会对选择行为产生微妙的影响。
+     * <p>
+     *  如果使用忽略此属性的外观,您仍然可以通过在列表的{@code TransferHandler}上调用{@code exportAsDrag}来开始拖放操作。
+     * 
+     * 
      * @param b whether or not to enable automatic drag handling
      * @exception HeadlessException if
      *            <code>b</code> is <code>true</code> and
@@ -1193,6 +1566,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Returns whether or not automatic drag handling is enabled.
      *
+     * <p>
+     *  返回是否启用自动拖动处理。
+     * 
+     * 
      * @return the value of the {@code dragEnabled} property
      * @see #setDragEnabled
      * @since 1.4
@@ -1219,6 +1596,18 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * The drop mode is only meaningful if this component has a
      * <code>TransferHandler</code> that accepts drops.
      *
+     * <p>
+     * 设置此组件的放置模式。为了向后兼容,此属性的默认值为<code> DropMode.USE_SELECTION </code>。然而,为了改进的用户体验,推荐使用其它模式之一。
+     * 例如,<code> DropMode.ON </code>提供了类似的行为来显示所选项目,但这样做不会影响列表中的实际选择。
+     * <p>
+     *  <code> JList </code>支持以下放置模式：
+     * <ul>
+     *  <li> <code> DropMode.USE_SELECTION </code> </li> <li> <code> DropMode.ON </code> </li> <li> <code> D
+     * ropMode.INSERT </code> > <li> <code> DropMode.ON_OR_INSERT </code> </li>。
+     * </ul>
+     *  drop模式只有在这个组件有一个接受drop的<code> TransferHandler </code>时才有意义。
+     * 
+     * 
      * @param dropMode the drop mode to use
      * @throws IllegalArgumentException if the drop mode is unsupported
      *         or <code>null</code>
@@ -1246,6 +1635,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Returns the drop mode for this component.
      *
+     * <p>
+     *  返回此组件的放置模式。
+     * 
+     * 
      * @return the drop mode for this component
      * @see #setDropMode
      * @since 1.6
@@ -1258,6 +1651,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Calculates a drop location in this component, representing where a
      * drop at the given point should insert data.
      *
+     * <p>
+     *  计算此组件中的放置位置,表示给定点的放置应插入数据的位置。
+     * 
+     * 
      * @param p the point to calculate a drop location for
      * @return the drop location, or <code>null</code>
      */
@@ -1368,6 +1765,15 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * said state, and of course return <code>null</code> since there's
      * no longer anything to store.
      *
+     * <p>
+     *  在DnD操作期间调用以设置或清除丢弃位置。在某些情况下,组件可能需要暂时使用它的内部选择来指示丢弃位置。为了帮助实现这一点,该方法返回并接受状态对象作为参数。该状态对象可用于存储并稍后恢复选择状态。
+     * 无论此方法返回将作为状态参数传递回它在未来的调用。如果它希望DnD系统继续存储相同的状态,它必须每次都通过它。以下是使用方法：。
+     * <p>
+     * 让我们说,在第一次调用这个方法时,组件决定保存一些状态(因为它将使用选择来显示drop索引)。它可以返回一个状态对象给调用者封装任何保存的选择状态。在第二次调用时,我们假定放置位置正在更改为其他值。
+     * 该组件不需要恢复任何东西,所以它只是传回相同的状态对象,让DnD系统继续存储它。最后,让我们说这个方法是用<code> null </code>。这意味着DnD现在完成这个组件,意味着它应该恢复状态。
+     * 在这一点上,它可以使用状态参数来恢复所述状态,当然返回<code> null </code>,因为不再存储任何东西。
+     * 
+     * 
      * @param location the drop location (as calculated by
      *        <code>dropLocationForPoint</code>) or <code>null</code>
      *        if there's no longer a valid drop location
@@ -1442,6 +1848,18 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * painting and/or replace the default cell renderer, may need to honor
      * this property.
      *
+     * <p>
+     *  返回此组件在组件上的DnD操作期间可视地指示为放置位置的位置,或{@code null}(如果当前未显示位置)。
+     * <p>
+     *  此方法不是用于从{@code TransferHandler}查询丢弃位置,因为丢弃位置仅在{@code TransferHandler}的<code> canImport </code>返回并允许位
+     * 置之后设置显示。
+     * <p>
+     *  当此属性更改时,组件会触发名为"dropLocation"的属性更改事件。
+     * <p>
+     * 默认情况下,侦听对此属性的更改和指示删除位置的责任在视觉上在列表的{@code ListUI},它可以直接绘制它和/或安装单元格渲染器这样做。
+     * 希望实现自定义拖放位置绘制和/或替换默认单元格渲染器的开发人员可能需要尊重此属性。
+     * 
+     * 
      * @return the drop location
      * @see #setDropMode
      * @see TransferHandler#canImport(TransferHandler.TransferSupport)
@@ -1455,6 +1873,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns the next list element whose {@code toString} value
      * starts with the given prefix.
      *
+     * <p>
+     *  返回下一个列表元素,其{@code toString}值以给定前缀开头。
+     * 
+     * 
      * @param prefix the string to test for a match
      * @param startIndex the index for starting the search
      * @param bias the search direction, either
@@ -1519,6 +1941,16 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <code>JList</code> is unregistered, by way of a call to
      * {@code setToolTipText(null)}, tips from the renderers will no longer display.
      *
+     * <p>
+     *  返回要用于给定事件的工具提示文本。
+     * 这将覆盖{@code JComponent}的{@code getToolTipText},首先检查事件发生的单元格的单元格渲染器组件,返回其工具提示文本(如果有)。
+     * 此实现允许您在单元格级别上通过在单元格渲染器组件上使用{@code setToolTipText}指定工具提示文本。
+     * <p>
+     *  <strong>注意</strong>：对于<code> JList </code>以这种方式正确显示其渲染器的工具提示,<code> JList </code>必须是注册的组件与<code> Too
+     * lTipManager < / code>。
+     * 此注册在构造函数中自动完成。但是,如果稍后<code> JList </code>未注册,通过调用{@code setToolTipText(null)},来自渲染器的提示将不再显示。
+     * 
+     * 
      * @param event the {@code MouseEvent} to fetch the tooltip text for
      * @see JComponent#setToolTipText
      * @see JComponent#getToolTipText
@@ -1568,6 +2000,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
     /**
      * --- ListUI Delegations ---
+     * <p>
+     *  --- ListUI代理---
+     * 
      */
 
 
@@ -1582,6 +2017,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * in the list's {@code ListUI}. It returns {@code -1} if the list has
      * no {@code ListUI}.
      *
+     * <p>
+     * 返回最接近列表坐标系中给定位置的单元格索引。要确定单元格是否实际包含指定的位置,请将该点与单元格的边界(由{@code getCellBounds}提供)进行比较。
+     * 如果模型为空,此方法返回{@code -1}。
+     * <p>
+     *  这是一个覆盖方法,在列表的{@code ListUI}中委托同名方法。如果列表没有{@code ListUI},则返回{@code -1}。
+     * 
+     * 
      * @param location the coordinates of the point
      * @return the cell index closest to the given location, or {@code -1}
      */
@@ -1599,6 +2041,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * in the list's {@code ListUI}. It returns {@code null} if the list has
      * no {@code ListUI}.
      *
+     * <p>
+     *  返回列表坐标系中指定项目的原点。如果索引无效,此方法返回{@code null}。
+     * <p>
+     *  这是一个覆盖方法,在列表的{@code ListUI}中委托同名方法。如果列表没有{@code ListUI},则返回{@code null}。
+     * 
+     * 
      * @param index the cell index
      * @return the origin of the cell, or {@code null}
      */
@@ -1622,6 +2070,14 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * in the list's {@code ListUI}. It returns {@code null} if the list has
      * no {@code ListUI}.
      *
+     * <p>
+     *  在列表的坐标系中返回由两个索引指定的单元格范围的边界矩形。这些索引可以按任何顺序提供。
+     * <p>
+     *  如果较小的索引在列表的单元格范围之外,则此方法返回{@code null}。如果较小的索引有效,但较大的索引在列表的范围之外,则只返回第一个索引的边界。否则,返回有效范围的边界。
+     * <p>
+     *  这是一个覆盖方法,在列表的{@code ListUI}中委托同名方法。如果列表没有{@code ListUI},则返回{@code null}。
+     * 
+     * 
      * @param index0 the first index in the range
      * @param index1 the second index in the range
      * @return the bounding rectangle for the range of cells, or {@code null}
@@ -1634,6 +2090,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
     /**
      * --- ListModel Support ---
+     * <p>
+     *  --- ListModel支持---
+     * 
      */
 
 
@@ -1641,6 +2100,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns the data model that holds the list of items displayed
      * by the <code>JList</code> component.
      *
+     * <p>
+     *  返回保存由<code> JList </code>组件显示的项目列表的数据模型。
+     * 
+     * 
      * @return the <code>ListModel</code> that provides the displayed
      *                          list of items
      * @see #setModel
@@ -1656,6 +2119,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     * 设置表示列表的内容或"值"的模型,通知属性更改侦听器,然后清除列表的选择。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param model  the <code>ListModel</code> that provides the
      *                                          list of items for display
      * @exception IllegalArgumentException  if <code>model</code> is
@@ -1687,6 +2156,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * references the given array directly. Attempts to modify the array
      * after invoking this method results in undefined behavior.
      *
+     * <p>
+     *  从项目数组构造只读<code> ListModel </code>,并使用此模型调用{@code setModel}。
+     * <p>
+     *  尝试向此方法传递{@code null}值会导致未定义的行为,并且很可能会出现异常。创建的模型直接引用给定的数组。尝试在调用此方法后修改数组会导致未定义的行为。
+     * 
+     * 
      * @param listData an array of {@code E} containing the items to
      *        display in the list
      * @see #setModel
@@ -1710,6 +2185,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * references the given {@code Vector} directly. Attempts to modify the
      * {@code Vector} after invoking this method results in undefined behavior.
      *
+     * <p>
+     *  从<code> Vector </code>构造只读<code> ListModel </code>,并使用此模型调用{@code setModel}。
+     * <p>
+     *  尝试向此方法传递{@code null}值会导致未定义的行为,并且很可能会出现异常。创建的模型直接引用给定的{@code Vector}。
+     * 尝试在调用此方法后修改{@code Vector}会导致未定义的行为。
+     * 
+     * 
      * @param listData a <code>Vector</code> containing the items to
      *                                          display in the list
      * @see #setModel
@@ -1726,6 +2208,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
     /**
      * --- ListSelectionModel delegations and extensions ---
+     * <p>
+     *  --- ListSelectionModel委托和扩展---
+     * 
      */
 
 
@@ -1734,6 +2219,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * during construction to initialize the list's selection model
      * property.
      *
+     * <p>
+     *  返回{@code DefaultListSelectionModel}的实例;在构造期间调用以初始化列表的选择模型属性。
+     * 
+     * 
      * @return a {@code DefaultListSelecitonModel}, used to initialize
      *         the list's selection model property during construction
      * @see #setSelectionModel
@@ -1749,6 +2238,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * selection state of the list. See the class level documentation for more
      * details.
      *
+     * <p>
+     *  返回当前选择模型。选择模型维护列表的选择状态。有关更多详细信息,请参阅类级文档。
+     * 
+     * 
      * @return the <code>ListSelectionModel</code> that maintains the
      *         list's selections
      *
@@ -1771,6 +2264,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * as the source, and the specified arguments, and sends it to the
      * registered {@code ListSelectionListeners}.
      *
+     * <p>
+     * 通知{@code ListSelectionListener}直接添加到对选择模型所做的选择更改列表中。
+     *  {@code JList}侦听对选择模型中的选择所做的更改,并通过调用此方法将通知直接转发到添加到列表中的侦听器。
+     * <p>
+     *  此方法构造一个{@code ListSelectionEvent},此列表作为源和指定的参数,并将其发送到已注册的{@code ListSelectionListeners}。
+     * 
+     * 
      * @param firstIndex the first index in the range, {@code <= lastIndex}
      * @param lastIndex the last index in the range, {@code >= firstIndex}
      * @param isAdjusting whether or not this is one in a series of
@@ -1803,6 +2303,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * the selectionModel to the JList ListSelectionListeners.  The
      * forwarded events only differ from the originals in that their
      * source is the JList instead of the selectionModel itself.
+     * <p>
+     *  selectionModel到JList ListSelectionListeners。转发的事件只不同于原始的,因为它们的源是JList而不是selectionModel本身。
+     * 
      */
     private class ListSelectionHandler implements ListSelectionListener, Serializable
     {
@@ -1822,6 +2325,11 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * each change. {@code ListSelectionEvent}s sent to the listener have a
      * {@code source} property set to this list.
      *
+     * <p>
+     *  向列表添加侦听器,每当对选择进行更改时通知侦听器;监听选择状态变化的首选方式。 {@code JList}负责监听选择模型中的选择状态变化,并通知给定的监听器每个变化。
+     *  {@code ListSelectionEvent}发送到侦听器时,会将{@code source}属性设置为此列表。
+     * 
+     * 
      * @param listener the {@code ListSelectionListener} to add
      * @see #getSelectionModel
      * @see #getListSelectionListeners
@@ -1840,6 +2348,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Removes a selection listener from the list.
      *
+     * <p>
+     *  从列表中删除选择侦听器。
+     * 
+     * 
      * @param listener the {@code ListSelectionListener} to remove
      * @see #addListSelectionListener
      * @see #getSelectionModel
@@ -1853,6 +2365,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns an array of all the {@code ListSelectionListener}s added
      * to this {@code JList} by way of {@code addListSelectionListener}.
      *
+     * <p>
+     *  通过{@code addListSelectionListener}返回添加到此{@code JList}的所有{@code ListSelectionListener}的数组。
+     * 
+     * 
      * @return all of the {@code ListSelectionListener}s on this list, or
      *         an empty array if no listeners have been added
      * @see #addListSelectionListener
@@ -1872,6 +2388,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  将列表的<code> selectionModel </code>设置为非<code> null </code> <code> ListSelectionModel </code>实现。
+     * 选择模型处理单个选择,连续范围选择和不连续选择的任务。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param selectionModel  the <code>ListSelectionModel</code> that
      *                          implements the selections
      * @exception IllegalArgumentException   if <code>selectionModel</code>
@@ -1888,6 +2411,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
         /* Remove the forwarding ListSelectionListener from the old
          * selectionModel, and add it to the new one, if necessary.
+         * <p>
+         * selectionModel,并将其添加到新的,如果需要。
+         * 
          */
         if (selectionListener != null) {
             this.selectionModel.removeListSelectionListener(selectionListener);
@@ -1922,6 +2448,21 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      *   This mode is the default.
      * </ul>
      *
+     * <p>
+     *  设置列表的选择模式。这是一种直接在选择模型上设置选择模式的覆盖方法。
+     * <p>
+     *  以下列表描述了接受的选择模式：
+     * <ul>
+     *  <li> {@ code ListSelectionModel.SINGLE_SELECTION}  - 一次只能选择一个列表索引。
+     * 在这种模式下,{@code setSelectionInterval}和{@code addSelectionInterval}是等效的,都将当前选择替换为由第二个参数("lead")表示的索引。
+     *  <li> {@ code ListSelectionModel.SINGLE_INTERVAL_SELECTION}  - 一次只能选择一个连续的时间间隔。
+     * 在这种模式下,{@code addSelectionInterval}的行为类似于{@code setSelectionInterval}(替换当前选择),除非给定的间隔与现有选择直接相邻或重叠,并可用
+     * 于增大选择。
+     *  <li> {@ code ListSelectionModel.SINGLE_INTERVAL_SELECTION}  - 一次只能选择一个连续的时间间隔。
+     * <li> @code ListSelectionModel.MULTIPLE_INTERVAL_SELECTION}  - 在此模式下,对可选择的内容没有限制,此模式是默认模式。
+     * </ul>
+     * 
+     * 
      * @param selectionMode the selection mode
      * @see #getSelectionMode
      * @throws IllegalArgumentException if the selection mode isn't
@@ -1941,6 +2482,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * method that delegates to the method of the same name on the
      * list's selection model.
      *
+     * <p>
+     *  返回列表的当前选择模式。这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @return the current selection mode
      * @see #setSelectionMode
      */
@@ -1953,6 +2498,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns the anchor selection index. This is a cover method that
      * delegates to the method of the same name on the list's selection model.
      *
+     * <p>
+     *  返回锚选择索引。这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @return the anchor selection index
      * @see ListSelectionModel#getAnchorSelectionIndex
      */
@@ -1965,6 +2514,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns the lead selection index. This is a cover method that
      * delegates to the method of the same name on the list's selection model.
      *
+     * <p>
+     *  返回潜在客户选择索引。这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @return the lead selection index
      * @see ListSelectionModel#getLeadSelectionIndex
      * @beaninfo
@@ -1980,6 +2533,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * is empty. This is a cover method that delegates to the method of the same
      * name on the list's selection model.
      *
+     * <p>
+     * 返回最小的选定单元格索引,如果选择为空,则返回{@code -1}。这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @return the smallest selected cell index, or {@code -1}
      * @see ListSelectionModel#getMinSelectionIndex
      */
@@ -1993,6 +2550,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * is empty. This is a cover method that delegates to the method of the same
      * name on the list's selection model.
      *
+     * <p>
+     *  返回最大的选定单元格索引,如果选择为空,则返回{@code -1}。这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @return the largest selected cell index
      * @see ListSelectionModel#getMaxSelectionIndex
      */
@@ -2006,6 +2567,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * else {@code false}. This is a cover method that delegates to the method
      * of the same name on the list's selection model.
      *
+     * <p>
+     *  如果选择了指定的索引,则返回{@code true},否则返回{@code false}。这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @param index index to be queried for selection state
      * @return {@code true} if the specified index is selected,
      *         else {@code false}
@@ -2022,6 +2587,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * This is a cover method that delegates to the method of the same
      * name on the list's selection model.
      *
+     * <p>
+     *  如果没有选择,返回{@code true},否则返回{@code false}。这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @return {@code true} if nothing is selected, else {@code false}
      * @see ListSelectionModel#isSelectionEmpty
      * @see #clearSelection
@@ -2036,6 +2605,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * will return {@code true}. This is a cover method that delegates to the
      * method of the same name on the list's selection model.
      *
+     * <p>
+     *  清除选择;调用此方法后,{@code isSelectionEmpty}将返回{@code true}。这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @see ListSelectionModel#clearSelection
      * @see #isSelectionEmpty
      */
@@ -2053,6 +2626,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Refer to the documentation of the selection model class being used
      * for details on how values less than {@code 0} are handled.
      *
+     * <p>
+     *  选择指定的间隔。包括{@code anchor}和{@code lead}索引。 {@code anchor}不必小于或等于{@code lead}。
+     * 这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * <p>
+     *  有关如何处理小于{@code 0}的值的详细信息,请参阅用于选择模型类的文档。
+     * 
+     * 
      * @param anchor the first index to select
      * @param lead the last index to select
      * @see ListSelectionModel#setSelectionInterval
@@ -2076,6 +2656,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Refer to the documentation of the selection model class being used
      * for details on how values less than {@code 0} are handled.
      *
+     * <p>
+     * 将选择设置为指定时间间隔与当前选择的并集。包括{@code anchor}和{@code lead}索引。 {@code anchor}不必小于或等于{@code lead}。
+     * 这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * <p>
+     *  有关如何处理小于{@code 0}的值的详细信息,请参阅用于选择模型类的文档。
+     * 
+     * 
      * @param anchor the first index to add to the selection
      * @param lead the last index to add to the selection
      * @see ListSelectionModel#addSelectionInterval
@@ -2099,6 +2686,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Refer to the documentation of the selection model class being used
      * for details on how values less than {@code 0} are handled.
      *
+     * <p>
+     *  将选择设置为指定间隔和当前选择的设置差值。将删除{@code index0}和{@code index1}索引。 {@code index0}不必小于或等于{@code index1}。
+     * 这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * <p>
+     *  有关如何处理小于{@code 0}的值的详细信息,请参阅用于选择模型类的文档。
+     * 
+     * 
      * @param index0 the first index to remove from the selection
      * @param index1 the last index to remove from the selection
      * @see ListSelectionModel#removeSelectionInterval
@@ -2131,6 +2725,16 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * {@link javax.swing.ListSelectionModel#setValueIsAdjusting} for
      * more details.
      *
+     * <p>
+     *  设置选择模型的{@code valueIsAdjusting}属性。当{@code true}时,即将发生的选择更改应视为单次更改的一部分。此属性在内部使用,开发人员通常不需要调用此方法。
+     * 例如,当模型响应用户拖动而更新时,属性的值在启动拖动时设置为{@code true},并在拖动完成时设置为{@code false}。这允许侦听器仅在更改已完成时更新,而不是处理所有中间值。
+     * <p>
+     * 如果进行一系列应该被视为单个更改的一部分的更改,您可能需要直接使用它。
+     * <p>
+     *  这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 有关更多详细信息,请参阅{@link javax.swing.ListSelectionModel#setValueIsAdjusting}的文档。
+     * 
+     * 
      * @param b the new value for the property
      * @see ListSelectionModel#setValueIsAdjusting
      * @see javax.swing.event.ListSelectionEvent#getValueIsAdjusting
@@ -2147,6 +2751,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * This is a cover method that delegates to the method of the same name on
      * the list's selection model.
      *
+     * <p>
+     *  返回选择模型的{@code isAdjusting}属性的值。
+     * <p>
+     *  这是一个覆盖方法,它在列表的选择模型上委托同名的方法。
+     * 
+     * 
      * @return the value of the selection model's {@code isAdjusting} property.
      *
      * @see #setValueIsAdjusting
@@ -2161,6 +2771,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns an array of all of the selected indices, in increasing
      * order.
      *
+     * <p>
+     *  以递增的顺序返回所有所选索引的数组。
+     * 
+     * 
      * @return all of the selected indices, in increasing order,
      *         or an empty array if nothing is selected
      * @see #removeSelectionInterval
@@ -2196,6 +2810,11 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * documentation for the selection model class being used for details on
      * how values less than {@code 0} are handled.
      *
+     * <p>
+     *  选择单个单元格。如果给定的索引大于或等于模型大小,则不执行任何操作。这是一个方便的方法,在选择模型上使用{@code setSelectionInterval}。
+     * 有关如何处理小于{@code 0}的值的详细信息,请参阅用于选择模型类的文档。
+     * 
+     * 
      * @param index the index of the cell to select
      * @see ListSelectionModel#setSelectionInterval
      * @see #isSelectedIndex
@@ -2219,6 +2838,11 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Refer to the documentation of the selection model class being used for
      * details on how values less than {@code 0} are handled.
      *
+     * <p>
+     *  将选择更改为由给定数组指定的索引集。大于或等于模型大小的指数将被忽略。这是一个方便的方法,清除选择,然后在选择模型上使用{@code addSelectionInterval}添加索引。
+     * 有关如何处理小于{@code 0}的值的详细信息,请参阅用于选择模型类的文档。
+     * 
+     * 
      * @param indices an array of the indices of the cells to select,
      *                {@code non-null}
      * @see ListSelectionModel#addSelectionInterval
@@ -2242,6 +2866,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns an array of all the selected values, in increasing order based
      * on their indices in the list.
      *
+     * <p>
+     *  返回所有选定值的数组,按照列表中的索引按升序排列。
+     * 
+     * 
      * @return the selected values, or an empty array if nothing is selected
      * @see #isSelectedIndex
      * @see #getModel
@@ -2277,6 +2905,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Returns a list of all the selected items, in increasing order based
      * on their indices in the list.
      *
+     * <p>
+     *  根据列表中的索引以递增顺序返回所有选定项目的列表。
+     * 
+     * 
      * @return the selected items, or an empty list if nothing is selected
      * @see #isSelectedIndex
      * @see #getModel
@@ -2313,6 +2945,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * This method is a cover that delegates to {@code getMinSelectionIndex}.
      *
+     * <p>
+     * 返回最小的选定单元格索引; <i>选择</i>时,在列表中只选择一个项目。当选择多个项目时,它只是最小的所选索引。如果没有选择,则返回{@code -1}。
+     * <p>
+     *  此方法是委托{@code getMinSelectionIndex}的封面。
+     * 
+     * 
      * @return the smallest selected cell index
      * @see #getMinSelectionIndex
      * @see #addListSelectionListener
@@ -2331,6 +2969,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * This is a convenience method that simply returns the model value for
      * {@code getMinSelectionIndex}.
      *
+     * <p>
+     *  返回最小选定单元格索引的值; <i>所选值</i>,当列表中只选择一个项目时。当选择多个项目时,它只是所选最小索引的值。如果没有选择,则返回{@code null}。
+     * <p>
+     *  这是一个方便的方法,只返回{@code getMinSelectionIndex}的模型值。
+     * 
+     * 
      * @return the first selected value
      * @see #getMinSelectionIndex
      * @see #getModel
@@ -2345,6 +2989,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /**
      * Selects the specified object from the list.
      *
+     * <p>
+     *  从列表中选择指定的对象。
+     * 
+     * 
      * @param anObject      the object to select
      * @param shouldScroll  {@code true} if the list should scroll to display
      *                      the selected object, if one exists; otherwise {@code false}
@@ -2372,6 +3020,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
     /**
      * --- The Scrollable Implementation ---
+     * <p>
+     *  ---滚动实现---
+     * 
      */
 
     private void checkScrollableParameters(Rectangle visibleRect, int orientation) {
@@ -2420,6 +3071,27 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * The list's {@code ListUI} is expected to override {@code getPreferredSize}
      * to return an appropriate value.
      *
+     * <p>
+     *  计算显示{@code visibleRowCount}行所需的视口大小。此方法返回的值取决于布局方向：
+     * <p>
+     *  <b> {@ code VERTICAL}：</b>
+     * <br>
+     *  如果已经设置了{@code fixedCellWidth}和{@code fixedCellHeight}(显式地或通过指定原型单元格值),这是微不足道的。
+     * 宽度只是{@code fixedCellWidth}加上列表的水平插图。高度是{@code fixedCellHeight}乘以{@code visibleRowCount},加上列表的垂直插入。
+     * <p>
+     * 如果没有指定{@code fixedCellWidth}或{@code fixedCellHeight},则使用启发式。
+     * 如果模型为空,则宽度为{@code fixedCellWidth}(如果大于{@code 0})或硬编码值{@code 256}。
+     * 如果{@code fixedCellHeight}大于{@code 0},则高度为{@code fixedCellHeight}乘以{@code visibleRowCount},否则为{@code 16}
+     * 的硬编码值乘以{@ code visibleRowCount}。
+     * 如果模型为空,则宽度为{@code fixedCellWidth}(如果大于{@code 0})或硬编码值{@code 256}。
+     * <p>
+     *  如果模型不为空,则宽度为首选大小的宽度,通常为最宽列表元素的宽度。高度是{@code fixedCellHeight}乘以{@code visibleRowCount},加上列表的垂直插入。
+     * <p>
+     *  <b> {@ code VERTICAL_WRAP}或{@code HORIZONTAL_WRAP}：</b>
+     * <br>
+     *  此方法简单地从{@code getPreferredSize}返回值。列表的{@code ListUI}应覆盖{@code getPreferredSize}以返回适当的值。
+     * 
+     * 
      * @return a dimension containing the size of the viewport needed
      *          to display {@code visibleRowCount} rows
      * @see #getPreferredScrollableViewportSize
@@ -2472,6 +3144,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * then the list's font size is returned (or {@code 1} if the font is
      * {@code null}).
      *
+     * <p>
+     *  返回滚动到显示下一行或上一行(用于垂直滚动)或列(用于水平滚动)的距离。
+     * <p>
+     *  对于水平滚动,如果布局方向为{@code VERTICAL},则返回列表的字体大小(如果字体为{@code null},则为{@code 1})。
+     * 
+     * 
      * @param visibleRect the view area visible within the viewport
      * @param orientation {@code SwingConstants.HORIZONTAL} or
      *                    {@code SwingConstants.VERTICAL}
@@ -2507,6 +3185,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
                     /* The first row is completely visible and it's row 0.
                      * We're done.
+                     * <p>
+                     *  我们完成了。
+                     * 
                      */
                     if ((r.y == visibleRect.y) && (row == 0))  {
                         return 0;
@@ -2514,6 +3195,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
                     /* The first row is completely visible, return the
                      * height of the previous row or 0 if the first row
                      * is the top row of the list.
+                     * <p>
+                     *  如果第一行是列表的第一行,则为上一行的高度或0。
+                     * 
                      */
                     else if (r.y == visibleRect.y) {
                         Point loc = r.getLocation();
@@ -2528,6 +3212,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
                     }
                     /* The first row is partially visible, return the
                      * height of hidden part.
+                     * <p>
+                     *  隐藏部分的高度。
+                     * 
                      */
                     else {
                         return visibleRect.y - r.y;
@@ -2618,6 +3305,26 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * Note that the value of {@code visibleRect} must be the equal to
      * {@code this.getVisibleRect()}.
      *
+     * <p>
+     *  返回滚动到显示下一个或上一个块的距离。
+     * <p>
+     *  对于垂直滚动,使用以下规则：
+     * <ul>
+     * <li>如果向下滚动,则返回滚动的距离,以便最后一个可见元素成为第一个完全可见的元素<li>如果向上滚动,则返回滚动的距离,以便第一个可见元素成为最后一个完全可见的元素<li >如果列表为空,则返回{@code visibleRect.height}
+     * 。
+     * </ul>
+     * <p>
+     *  对于水平滚动,当布局方向为{@code VERTICAL_WRAP}或{@code HORIZONTAL_WRAP}时：
+     * <ul>
+     *  <li>如果向右滚动,则返回滚动距离,以便最后一个可见元素成为第一个完全可见元素<li>如果向左滚动,则返回滚动距离,以使第一个可见元素成为最后一个完全可见元素<li >如果列表为空,则返回{@code visibleRect.width}
+     * 。
+     * </ul>
+     * <p>
+     *  对于水平滚动和{@code VERTICAL}方向,返回{@code visibleRect.width}。
+     * <p>
+     *  注意,{@code visibleRect}的值必须等于{@code this.getVisibleRect()}。
+     * 
+     * 
      * @param visibleRect the view area visible within the viewport
      * @param orientation {@code SwingConstants.HORIZONTAL} or
      *                    {@code SwingConstants.VERTICAL}
@@ -2758,6 +3465,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * horizontal scrolling if the {@code JViewport} is itself embedded in a
      * {@code JScrollPane}.
      *
+     * <p>
+     *  如果{@code JList}显示在{@code JViewport}中且视口比列表的首选宽度宽,或者布局方向为{@code HORIZONTAL_WRAP}和{@code visibleRowCount < = 0};否则返回{@code false}。
+     * <p>
+     *  如果{@code false},那么不跟踪视口的宽度。如果{@code JViewport}本身嵌入在{@code JScrollPane}中,这允许水平滚动。
+     * 
+     * 
      * @return whether or not an enclosing viewport should force the list's
      *         width to match its own
      * @see Scrollable#getScrollableTracksViewportWidth
@@ -2784,6 +3497,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * vertical scrolling if the {@code JViewport} is itself embedded in a
      * {@code JScrollPane}.
      *
+     * <p>
+     * 如果{@code JList}显示在{@code JViewport}中,且视口高于列表的首选高度,或者布局方向为{@code VERTICAL_WRAP}和{@code visibleRowCount < = 0};否则返回{@code false}。
+     * <p>
+     *  如果{@code false},那么不跟踪视口的高度。这允许垂直滚动,如果{@code JViewport}本身嵌入在{@code JScrollPane}。
+     * 
+     * 
      * @return whether or not an enclosing viewport should force the list's
      *         height to match its own
      * @see Scrollable#getScrollableTracksViewportHeight
@@ -2804,6 +3523,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
     /*
      * See {@code readObject} and {@code writeObject} in {@code JComponent}
      * for more information about serialization in Swing.
+     * <p>
+     *  有关在Swing中序列化的更多信息,请参阅{@code readComponent}中的{@code readObject}和{@code writeObject}。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -2824,6 +3546,11 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * between implementations. The returned {@code String} may be empty,
      * but may not be {@code null}.
      *
+     * <p>
+     *  返回此{@code JList}的{@code String}表示形式。此方法仅用于调试目的,并且返回的{@code String}的内容和格式可能因实现而异。
+     * 返回的{@code String}可能为空,但可能不是{@code null}。
+     * 
+     * 
      * @return  a {@code String} representation of this {@code JList}.
      */
     protected String paramString() {
@@ -2847,6 +3574,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
 
     /**
      * --- Accessibility Support ---
+     * <p>
+     *  ---辅助功能
+     * 
      */
 
     /**
@@ -2856,6 +3586,13 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * <p>
      * A new {@code AccessibleJList} instance is created if necessary.
      *
+     * <p>
+     *  获取与此{@code JList}相关联的{@code AccessibleContext}。
+     * 对于{@code JList},{@code AccessibleContext}采用{@code AccessibleJList}的形式。
+     * <p>
+     *  如有必要,将创建一个新的{@code AccessibleJList}实例。
+     * 
+     * 
      * @return an {@code AccessibleJList} that serves as the
      *         {@code AccessibleContext} of this {@code JList}
      */
@@ -2880,6 +3617,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现{@code JList}类的辅助功能支持。它提供了适用于列出用户界面元素的Java辅助功能API的实现。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class AccessibleJList extends AccessibleJComponent
         implements AccessibleSelection, PropertyChangeListener,
@@ -2901,6 +3644,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * listeners to those for reporting changes there via the Accessibility
          * PropertyChange mechanism.
          *
+         * <p>
+         *  属性更改侦听器更改方法。用于跟踪对DataModel和ListSelectionModel的更改,以便将监听器重新设置为通过辅助功能属性更改机制报告更改的监听器。
+         * 
+         * 
          * @param e PropertyChangeEvent
          */
         public void propertyChange(PropertyChangeEvent e) {
@@ -2938,6 +3685,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * List Selection Listener value change method. Used to fire
          * the property change
          *
+         * <p>
+         *  列表选择监听器值更改方法。用于触发属性更改
+         * 
+         * 
          * @param e ListSelectionEvent
          *
          */
@@ -2982,6 +3733,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * List Data Listener interval added method. Used to fire the visible data property change
          *
+         * <p>
+         *  列表数据侦听器间隔添加方法。用于触发可见数据属性更改
+         * 
+         * 
          * @param e ListDataEvent
          *
          */
@@ -2993,6 +3748,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * List Data Listener interval removed method. Used to fire the visible data property change
          *
+         * <p>
+         *  列表数据侦听器间隔删除方法。用于触发可见数据属性更改
+         * 
+         * 
          * @param e ListDataEvent
          *
          */
@@ -3004,6 +3763,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * List Data Listener contents changed method. Used to fire the visible data property change
          *
+         * <p>
+         *  列表数据监听器内容更改方法。用于触发可见数据属性更改
+         * 
+         * 
          * @param e ListDataEvent
          *
          */
@@ -3017,6 +3780,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * Get the state set of this object.
          *
+         * <p>
+         *  获取此对象的状态集。
+         * 
+         * 
          * @return an instance of AccessibleState containing the current state
          * of the object
          * @see AccessibleState
@@ -3033,6 +3800,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -3046,6 +3817,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * the local coordinate <code>Point</code>, if one exists.
          * Otherwise returns <code>null</code>.
          *
+         * <p>
+         *  返回包含在本地坐标<code> Point </code>(如果存在)中的<code> Accessible </code>子代。否则返回<code> null </code>。
+         * 
+         * 
          * @return the <code>Accessible</code> at the specified
          *    location, if it exists
          */
@@ -3063,6 +3838,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * of the children of this object implement Accessible, than this
          * method should return the number of children of this object.
          *
+         * <p>
+         *  返回对象中可访问的子项数。如果这个对象的所有子对象实现Accessible,那么这个方法应该返回这个对象的子对象数。
+         * 
+         * 
          * @return the number of accessible children in the object.
          */
         public int getAccessibleChildrenCount() {
@@ -3072,6 +3851,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * Return the nth Accessible child of the object.
          *
+         * <p>
+         *  返回对象的第n个Accessible子项。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the nth Accessible child of the object
          */
@@ -3089,6 +3872,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * return this object, which is responsible for implementing the
          * AccessibleSelection interface on behalf of itself.
          *
+         * <p>
+         * 获取与此对象关联的AccessibleSelection。在为此类实现Java Accessibility API时,返回此对象,它负责代表自身实现AccessibleSelection接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleSelection getAccessibleSelection() {
@@ -3102,6 +3889,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * Returns the number of items currently selected.
          * If no items are selected, the return value will be 0.
          *
+         * <p>
+         *  返回当前选择的项目数。如果未选择任何项目,则返回值将为0。
+         * 
+         * 
          * @return the number of items currently selected.
          */
          public int getAccessibleSelectionCount() {
@@ -3114,6 +3905,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * fewer items selected than the integer passed in, the return
          * value will be <code>null</code>.
          *
+         * <p>
+         *  返回表示对象中指定的选定项目的Accessible。如果没有选择,或者选择的项目少于传递的整数,则返回值将为<code> null </code>。
+         * 
+         * 
          * @param i the zero-based index of selected items
          * @return an Accessible containing the selected item
          */
@@ -3129,6 +3924,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * Returns true if the current child of this object is selected.
          *
+         * <p>
+         *  如果选择此对象的当前子项,则返回true。
+         * 
+         * 
          * @param i the zero-based index of the child in this Accessible
          * object.
          * @see AccessibleContext#getAccessibleChild
@@ -3144,6 +3943,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * it replaces any existing selection in the object.  If the
          * specified item is already selected, this method has no effect.
          *
+         * <p>
+         *  将对象中指定的选定项目添加到对象的选择。如果对象支持多个选择,则将指定的项目添加到任何现有选择,否则将替换对象中的任何现有选择。如果已选择指定的项目,则此方法无效。
+         * 
+         * 
          * @param i the zero-based index of selectable items
          */
          public void addAccessibleSelection(int i) {
@@ -3155,6 +3958,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
          * selection.  If the specified item isn't currently selected, this
          * method has no effect.
          *
+         * <p>
+         *  从对象的选择中删除对象中指定的选定项目。如果当前未选择指定的项目,则此方法无效。
+         * 
+         * 
          * @param i the zero-based index of selectable items
          */
          public void removeAccessibleSelection(int i) {
@@ -3164,6 +3971,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * Clears the selection in the object, so that nothing in the
          * object is selected.
+         * <p>
+         *  清除对象中的选择,以便不选择对象中的任何内容。
+         * 
          */
          public void clearAccessibleSelection() {
              JList.this.clearSelection();
@@ -3172,6 +3982,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         /**
          * Causes every selected item in the object to be selected
          * if the object supports multiple selections.
+         * <p>
+         *  如果对象支持多个选择,则导致选择对象中的每个选定项目。
+         * 
          */
          public void selectAllAccessibleSelection() {
              JList.this.addSelectionInterval(0, getAccessibleChildrenCount() -1);
@@ -3180,6 +3993,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
           /**
            * This class implements accessibility support appropriate
            * for list children.
+           * <p>
+           *  此类实现适用于列表孩子的辅助功能支持。
+           * 
            */
         protected class AccessibleJListChild extends AccessibleContext
                 implements Accessible, AccessibleComponent {
@@ -3242,6 +4058,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
             * implementation of the Java Accessibility API for this class,
             * returns this object, which is its own AccessibleContext.
             *
+            * <p>
+            * 获取此对象的AccessibleContext。在为该类实现Java Accessibility API时,返回此对象,这是它自己的AccessibleContext。
+            * 
+            * 
             * @return this object
             */
             public AccessibleContext getAccessibleContext() {
@@ -3380,6 +4200,10 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
             * return this object, which is responsible for implementing the
             * AccessibleComponent interface on behalf of itself.
             *
+            * <p>
+            *  获取与此对象关联的AccessibleComponent。在为该类实现Java Accessibility API时,返回此对象,该对象负责代表自身实现AccessibleComponent接口。
+            * 
+            * 
             * @return this object
             */
             public AccessibleComponent getAccessibleComponent() {
@@ -3716,6 +4540,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
              * of an array of <code>AccessibleIcon</code>s or a <code>null</code> array
              * if the renderer component contains no icons.
              *
+             * <p>
+             *  如果渲染器组件不包含图标,则返回元素渲染器的图标作为<code> AccessibleIcon </code> s或<code> null </code>数组中唯一的数组。
+             * 
              * @return an array containing the accessible icon
              *         or a <code>null</code> array if none
              * @since 1.3

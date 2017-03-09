@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SuballocatedIntVector.java,v 1.3 2005/09/28 13:49:22 pvedula Exp $
+ * <p>
+ *  $ Id：SuballocatedIntVector.java,v 1.3 2005/09/28 13:49:22 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -41,6 +54,19 @@ package com.sun.org.apache.xml.internal.utils;
  * That's pushing me toward just letting reads from unset indices
  * throw exceptions or return stale data; safer behavior would have
  * performance costs.
+ * <p>
+ *  一个非常简单的表,存储一个int列表。非常类似于我们的IntVector类(相同的API)的API;不同的内部存储。
+ * 
+ *  此版本使用数组数组解决方案。
+ * 读/写访问因此比简单的IntVector慢一点,并且由于顶层数组,基本存储是一个微小的高 - 但是追加是O(1)快,而不是O(N ** 2)慢,将在那些长向量正在建立的情况下淹没这些成本。
+ * 
+ *  已知的问题：
+ * 
+ *  有些方法是私有的,因为它们尚未正确测试。
+ * 
+ * 检索性能至关重要,因为这是DTM模型的核心。 (追加性能几乎同样重要。)这让我只是让读取从未设置的索引抛出异常或返回陈旧的数据;更安全的行为会产生性能成本。
+ * 
+ * 
  * */
 public class SuballocatedIntVector
 {
@@ -68,6 +94,9 @@ public class SuballocatedIntVector
   /** "Shortcut" handle to most recently added row of m_map.
    * Very helpful during construction.
    * @xsl.usage internal
+   * <p>
+   *  在施工期间非常有帮助。 @ xsl.usage internal
+   * 
    */
   protected int m_buildCache[];
   protected int m_buildCacheStartIndex;
@@ -77,6 +106,9 @@ public class SuballocatedIntVector
    * Default constructor.  Note that the default
    * block size is currently 2K, which may be overkill for
    * small lists and undershootng for large ones.
+   * <p>
+   *  默认构造函数。请注意,默认块大小当前为2K,对于小列表可能过大,而对于大列表则不足。
+   * 
    */
   public SuballocatedIntVector()
   {
@@ -88,6 +120,10 @@ public class SuballocatedIntVector
    * of blocks. For efficiency, we will round the requested size
    * off to a power of two.
    *
+   * <p>
+   *  使用给定的块大小和块数构造一个IntVector。为了效率,我们将请求的大小舍入到二的幂。
+   * 
+   * 
    * @param blocksize Size of block to allocate
    * @param numblocks Number of blocks to allocate
    * */
@@ -110,6 +146,10 @@ public class SuballocatedIntVector
   /** Construct a IntVector, using the given block size and
    * the default number of blocks (32).
    *
+   * <p>
+   *  默认块数(32)。
+   * 
+   * 
    * @param blocksize Size of block to allocate
    * */
   public SuballocatedIntVector(int blocksize)
@@ -120,6 +160,10 @@ public class SuballocatedIntVector
   /**
    * Get the length of the list.
    *
+   * <p>
+   *  获取列表的长度。
+   * 
+   * 
    * @return length of the list
    */
   public int size()
@@ -131,6 +175,10 @@ public class SuballocatedIntVector
    * Set the length of the list. This will only work to truncate the list, and
    * even then it has not been heavily tested and may not be trustworthy.
    *
+   * <p>
+   *  设置列表的长度。这只会工作截断列表,甚至那么它没有经过严格测试,可能不可靠。
+   * 
+   * 
    * @return length of the list
    */
   public void setSize(int sz)
@@ -142,6 +190,10 @@ public class SuballocatedIntVector
   /**
    * Append a int onto the vector.
    *
+   * <p>
+   *  将一个int附加到向量。
+   * 
+   * 
    * @param value Int to add to the list
    */
   public  void addElement(int value)
@@ -187,6 +239,10 @@ public class SuballocatedIntVector
   /**
    * Append several int values onto the vector.
    *
+   * <p>
+   *  将几个int值附加到向量。
+   * 
+   * 
    * @param value Int to add to the list
    */
   private  void addElements(int value, int numberOfElements)
@@ -228,6 +284,10 @@ public class SuballocatedIntVector
    * Append several slots onto the vector, but do not set the values.
    * Note: "Not Set" means the value is unspecified.
    *
+   * <p>
+   *  将多个插槽添加到向量上,但不要设置值。注意："未设置"表示该值未指定。
+   * 
+   * 
    * @param numberOfElements Int to add to the list
    */
   private  void addElements(int numberOfElements)
@@ -251,6 +311,12 @@ public class SuballocatedIntVector
    *
    * Insertion may be an EXPENSIVE operation!
    *
+   * <p>
+   *  在指定的索引处将指定的节点插入到此向量中。该向量中具有大于或等于指定索引的索引的每个分量向上移位,以使索引1大于其先前的值。
+   * 
+   *  插入可能是费用操作！
+   * 
+   * 
    * @param value Int to insert
    * @param at Index of where to insert
    */
@@ -308,6 +374,9 @@ public class SuballocatedIntVector
 
   /**
    * Wipe it out. Currently defined as equivalent to setSize(0).
+   * <p>
+   *  擦干净。目前定义为等价于setSize(0)。
+   * 
    */
   public void removeAllElements()
   {
@@ -323,6 +392,10 @@ public class SuballocatedIntVector
    * downward to have an index one smaller than the value it had
    * previously.
    *
+   * <p>
+   * 从此向量中删除参数的第一次出现。如果在该向量中找到对象,则具有大于或等于对象的索引的索引的向量中的每个分量向下移位,以使索引1小于其先前的值。
+   * 
+   * 
    * @param s Int to remove from array
    *
    * @return True if the int was removed, false if it was not found
@@ -342,6 +415,10 @@ public class SuballocatedIntVector
    * index is shifted downward to have an index one smaller than
    * the value it had previously.
    *
+   * <p>
+   *  删除指定索引处的组件。该向量中具有大于或等于指定索引的索引的每个分量向下移动,以使索引1小于其先前的值。
+   * 
+   * 
    * @param at index of where to remove and int
    */
   private  void removeElementAt(int at)
@@ -383,6 +460,12 @@ public class SuballocatedIntVector
    * The index must be a value greater than or equal to 0 and less
    * than the current size of the vector.
    *
+   * <p>
+   *  将该向量的指定索引处的组件设置为指定的对象。在该位置的前一个组件被丢弃。
+   * 
+   *  索引必须是大于或等于0且小于向量当前大小的值。
+   * 
+   * 
    * @param value object to set
    * @param at    Index of where to set the object
    */
@@ -418,6 +501,10 @@ public class SuballocatedIntVector
    * Get the nth element. This is often at the innermost loop of an
    * application, so performance is critical.
    *
+   * <p>
+   *  获取第n个元素。这通常在应用程序的最内层循环,因此性能至关重要。
+   * 
+   * 
    * @param i index of value to get
    *
    * @return value at given index. If that value wasn't previously set,
@@ -447,6 +534,10 @@ public class SuballocatedIntVector
   /**
    * Tell if the table contains the given node.
    *
+   * <p>
+   *  告诉表是否包含给定的节点。
+   * 
+   * 
    * @param s object to look for
    *
    * @return true if the object is in the list
@@ -461,6 +552,10 @@ public class SuballocatedIntVector
    * beginning the search at index, and testing for equality
    * using the equals method.
    *
+   * <p>
+   *  搜索给定参数的第一次出现,在索引处开始搜索,并使用equals方法测试等式。
+   * 
+   * 
    * @param elem object to look for
    * @param index Index of where to begin search
    * @return the index of the first occurrence of the object
@@ -501,6 +596,10 @@ public class SuballocatedIntVector
    * beginning the search at index, and testing for equality
    * using the equals method.
    *
+   * <p>
+   *  搜索给定参数的第一次出现,在索引处开始搜索,并使用equals方法测试等式。
+   * 
+   * 
    * @param elem object to look for
    * @return the index of the first occurrence of the object
    * argument in this vector at position index or later in the
@@ -516,6 +615,10 @@ public class SuballocatedIntVector
    * beginning the search at index, and testing for equality
    * using the equals method.
    *
+   * <p>
+   *  搜索给定参数的第一次出现,在索引处开始搜索,并使用equals方法测试等式。
+   * 
+   * 
    * @param elem Object to look for
    * @return the index of the first occurrence of the object
    * argument in this vector at position index or later in the
@@ -540,6 +643,10 @@ public class SuballocatedIntVector
 
   /**
    * Return the internal m_map0 array
+   * <p>
+   *  返回内部m_map0数组
+   * 
+   * 
    * @return the m_map0 array
    */
   public final int[] getMap0()
@@ -549,6 +656,9 @@ public class SuballocatedIntVector
 
   /**
    * Return the m_map double array
+   * <p>
+   *  返回m_map double数组
+   * 
    * @return the internal map of array of arrays
    */
   public final int[][] getMap()

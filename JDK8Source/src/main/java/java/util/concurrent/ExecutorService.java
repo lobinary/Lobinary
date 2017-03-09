@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -131,6 +135,46 @@ import java.util.Collection;
  * any actions taken by that task, which in turn <i>happen-before</i> the
  * result is retrieved via {@code Future.get()}.
  *
+ * <p>
+ *  一个{@link Executor},它提供了管理终止的方法和可以产生{@link Future}的方法,用于跟踪一个或多个异步任务的进度。
+ * 
+ *  <p> {@code ExecutorService}可以关闭,这会导致它拒绝新任务。提供了两种不同的方法来关闭{@code ExecutorService}。
+ *  {@link #shutdown}方法将允许先前提交的任务在终止前执行,而{@link #shutdownNow}方法可防止等待任务启动并尝试停止当前正在执行的任务。
+ * 在终止时,执行程序没有任何活动执行的任务,没有等待执行的任务,并且不能提交新任务。未使用的{@code ExecutorService}应该关闭以允许回收其资源。
+ * 
+ * <p>通过创建并返回可用于取消执行和/或等待完成的{@link Future},{@code submit}扩展基本方法{@link Executor#execute(Runnable)}。
+ * 方法{@code invokeAny}和{@code invokeAll}执行最常用的批量执行形式,执行一组任务,然后等待至少一个或全部完成。
+ *  (类{@link ExecutorCompletionService}可用于编写这些方法的自定义变体。)。
+ * 
+ *  <p> {@link Executors}类为此程序包中提供的执行程序服务提供了工厂方法。
+ * 
+ *  <h3>使用示例</h3>
+ * 
+ *  这里是一个网络服务的草图,其中线程池中的线程服务传入请求。它使用预配置的{@link Executors#newFixedThreadPool}工厂方法：
+ * 
+ *  <pre> {@code类NetworkService实现Runnable {private final ServerSocket serverSocket; private final ExecutorService pool;。
+ * 
+ *  public NetworkService(int port,int poolSize)throws IOException {serverSocket = new ServerSocket(port); pool = Executors.newFixedThreadPool(poolSize); }
+ * }。
+ * 
+ *  public void run(){//运行服务尝试{for(;;){pool.execute(new Handler(serverSocket.accept())); }} catch(IOExce
+ * ption ex){pool.shutdown(); }}}。
+ * 
+ *  类Handler实现Runnable {private final Socket socket; Handler(Socket socket){this.socket = socket; } publ
+ * ic void run(){// socket上的读取和服务请求}}} </pre>。
+ * 
+ * 以下方法在两个阶段关闭{@code ExecutorService},首先通过调用{@code shutdown}拒绝接收的任务,然后调用{@code shutdownNow}(如有必要)取消任何延迟任
+ * 务：。
+ * 
+ *  <pre> {@code void shutdownAndAwaitTermination(ExecutorService pool){pool.shutdown(); //禁止新任务被提交try {//如果(！pool.awaitTermination(60,TimeUnit.SECONDS)){pool.shutdownNow();}
+ * 等待一段时间, //取消当前正在执行的任务//等待一段时间,任务响应被取消if(！pool.awaitTermination(60,TimeUnit.SECONDS))System.err.printl
+ * n("池未终止"); }} catch(InterruptedException ie){//(重新)取消当前线程也中断pool.shutdownNow(); //保持中断状态Thread.currentThread()。
+ * interrupt(); }}} </pre>。
+ * 
+ *  <p>内存一致性影响：在将{@code Runnable}或{@code Callable}任务提交给{@code ExecutorService} <a href="package-summary.html#MemoryVisibility">
+ * 之前,线程中的操作<i>发生在</i>之前</i>任何由该任务采取的动作,而这又发生在通过{@code Future.get()}检索的结果之前。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -145,6 +189,12 @@ public interface ExecutorService extends Executor {
      * complete execution.  Use {@link #awaitTermination awaitTermination}
      * to do that.
      *
+     * <p>
+     *  启动有序关闭,其中执行先前提交的任务,但不会接受新任务。如果已关闭,调用没有其他效果。
+     * 
+     * <p>此方法不等待先前提交的任务完成执行。使用{@link #awaitTermination awaitTermination}这样做。
+     * 
+     * 
      * @throws SecurityException if a security manager exists and
      *         shutting down this ExecutorService may manipulate
      *         threads that the caller is not permitted to modify
@@ -169,6 +219,14 @@ public interface ExecutorService extends Executor {
      * implementations will cancel via {@link Thread#interrupt}, so any
      * task that fails to respond to interrupts may never terminate.
      *
+     * <p>
+     *  尝试停止所有正在执行的任务,停止等待任务的处理,并返回等待执行的任务的列表。
+     * 
+     *  <p>此方法不等待主动执行任务终止。使用{@link #awaitTermination awaitTermination}这样做。
+     * 
+     *  <p>除了尽力尝试停止处理主动执行的任务之外,没有任何保证。例如,典型的实现将通过{@link Thread#interrupt}取消,因此任何未能响应中断的任务可能永远不会终止。
+     * 
+     * 
      * @return list of tasks that never commenced execution
      * @throws SecurityException if a security manager exists and
      *         shutting down this ExecutorService may manipulate
@@ -183,6 +241,10 @@ public interface ExecutorService extends Executor {
     /**
      * Returns {@code true} if this executor has been shut down.
      *
+     * <p>
+     *  如果此执行器已关闭,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this executor has been shut down
      */
     boolean isShutdown();
@@ -192,6 +254,11 @@ public interface ExecutorService extends Executor {
      * Note that {@code isTerminated} is never {@code true} unless
      * either {@code shutdown} or {@code shutdownNow} was called first.
      *
+     * <p>
+     *  如果所有任务在关闭后完成,则返回{@code true}。
+     * 请注意,除非先调用{@code shutdown}或{@code shutdownNow},否则{@code isTerminated}永远不会是{@code true}。
+     * 
+     * 
      * @return {@code true} if all tasks have completed following shut down
      */
     boolean isTerminated();
@@ -201,6 +268,10 @@ public interface ExecutorService extends Executor {
      * request, or the timeout occurs, or the current thread is
      * interrupted, whichever happens first.
      *
+     * <p>
+     *  阻塞直到所有任务在关闭请求后完成执行,或超时发生,或当前线程被中断,以先发生者为准。
+     * 
+     * 
      * @param timeout the maximum time to wait
      * @param unit the time unit of the timeout argument
      * @return {@code true} if this executor terminated and
@@ -226,6 +297,16 @@ public interface ExecutorService extends Executor {
      * for example, {@link java.security.PrivilegedAction} to
      * {@link Callable} form so they can be submitted.
      *
+     * <p>
+     *  提交要执行的值返回任务,并返回代表任务的待处理结果的Future。 Future的{@code get}方法将在成功完成后返回任务的结果。
+     * 
+     * <p>
+     *  如果你想立即阻塞等待任务,你可以使用{@code result = exec.submit(aCallable).get();}形式的构造,
+     * 
+     * <p>注意：{@link Executors}类包含一组方法,可将其他常见的类似闭包的对象(例如{@link java.security.PrivilegedAction})转换为{@link Callable}
+     * 表单,以便他们可以提交。
+     * 
+     * 
      * @param task the task to submit
      * @param <T> the type of the task's result
      * @return a Future representing pending completion of the task
@@ -240,6 +321,10 @@ public interface ExecutorService extends Executor {
      * representing that task. The Future's {@code get} method will
      * return the given result upon successful completion.
      *
+     * <p>
+     *  提交Runnable任务以执行,并返回代表该任务的Future。未来的{@code get}方法将在成功完成后返回给定的结果。
+     * 
+     * 
      * @param task the task to submit
      * @param result the result to return
      * @param <T> the type of the result
@@ -255,6 +340,10 @@ public interface ExecutorService extends Executor {
      * representing that task. The Future's {@code get} method will
      * return {@code null} upon <em>successful</em> completion.
      *
+     * <p>
+     *  提交Runnable任务以执行,并返回代表该任务的Future。未来的{@code get}方法会在<em>成功</em>完成后返回{@code null}。
+     * 
+     * 
      * @param task the task to submit
      * @return a Future representing pending completion of the task
      * @throws RejectedExecutionException if the task cannot be
@@ -273,6 +362,11 @@ public interface ExecutorService extends Executor {
      * The results of this method are undefined if the given
      * collection is modified while this operation is in progress.
      *
+     * <p>
+     *  执行给定的任务,返回一个期货的列表,保存他们的状态和结果,当所有完成。 {@link Future#isDone}对于返回的列表的每个元素都是{@code true}。
+     * 请注意,<em>完成的</em>任务可能已正常终止或抛出异常。如果在此操作正在进行时修改给定集合,则此方法的结果是未定义的。
+     * 
+     * 
      * @param tasks the collection of tasks
      * @param <T> the type of the values returned from the tasks
      * @return a list of Futures representing the tasks, in the same
@@ -299,6 +393,11 @@ public interface ExecutorService extends Executor {
      * The results of this method are undefined if the given
      * collection is modified while this operation is in progress.
      *
+     * <p>
+     *  执行给定的任务,在所有完成或超时到期时返回保持其状态和结果的期货的列表,以先发生者为准。 {@link Future#isDone}对于返回的列表的每个元素都是{@code true}。
+     * 返回后,未完成的任务将被取消。请注意,<em>完成的</em>任务可能已正常终止或抛出异常。如果在此操作正在进行时修改给定集合,则此方法的结果是未定义的。
+     * 
+     * 
      * @param tasks the collection of tasks
      * @param timeout the maximum time to wait
      * @param unit the time unit of the timeout argument
@@ -327,6 +426,10 @@ public interface ExecutorService extends Executor {
      * The results of this method are undefined if the given
      * collection is modified while this operation is in progress.
      *
+     * <p>
+     * 执行给定的任务,返回已成功完成的结果(即,不抛出异常),如果有的话。在正常或异常返回时,未完成的任务被取消。如果在此操作正在进行时修改给定集合,则此方法的结果是未定义的。
+     * 
+     * 
      * @param tasks the collection of tasks
      * @param <T> the type of the values returned from the tasks
      * @return the result returned by one of the tasks
@@ -350,6 +453,9 @@ public interface ExecutorService extends Executor {
      * The results of this method are undefined if the given
      * collection is modified while this operation is in progress.
      *
+     * <p>
+     *  执行给定任务,返回已成功完成的任务的结果(即,不抛出异常),如果在给定超时时间之前有任何操作。在正常或异常返回时,未完成的任务被取消。如果在此操作正在进行时修改给定集合,则此方法的结果是未定义的。
+     * 
      * @param tasks the collection of tasks
      * @param timeout the maximum time to wait
      * @param unit the time unit of the timeout argument

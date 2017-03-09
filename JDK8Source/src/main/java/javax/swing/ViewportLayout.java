@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,14 @@ import java.io.Serializable;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> JViewport </code>的默认布局管理器。 <code> ViewportLayout </code>定义了一个应用于大多数应用程序的布局策略。
+ * 视口使其视图与视口的大小相同,但它不会使视图小于其最小大小。随着视口增长,视图保持底部对齐,直到整个视图可见,随后视图保持顶部对齐。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Hans Muller
  */
 public class ViewportLayout implements LayoutManager, Serializable
@@ -63,6 +72,10 @@ public class ViewportLayout implements LayoutManager, Serializable
 
     /**
      * Adds the specified component to the layout. Not used by this class.
+     * <p>
+     *  将指定的组件添加到布局。不被这个类使用。
+     * 
+     * 
      * @param name the name of the component
      * @param c the the component to be added
      */
@@ -71,6 +84,10 @@ public class ViewportLayout implements LayoutManager, Serializable
     /**
      * Removes the specified component from the layout. Not used by
      * this class.
+     * <p>
+     *  从布局中删除指定的组件。不被这个类使用。
+     * 
+     * 
      * @param c the component to remove
      */
     public void removeLayoutComponent(Component c) { }
@@ -79,6 +96,10 @@ public class ViewportLayout implements LayoutManager, Serializable
     /**
      * Returns the preferred dimensions for this layout given the components
      * in the specified target container.
+     * <p>
+     *  给定指定目标容器中的组件时,返回此布局的首选维度。
+     * 
+     * 
      * @param parent the component which needs to be laid out
      * @return a <code>Dimension</code> object containing the
      *          preferred dimensions
@@ -102,6 +123,10 @@ public class ViewportLayout implements LayoutManager, Serializable
      * Returns the minimum dimensions needed to layout the components
      * contained in the specified target container.
      *
+     * <p>
+     *  返回布局包含在指定目标容器中的组件所需的最小维度。
+     * 
+     * 
      * @param parent the component which needs to be laid out
      * @return a <code>Dimension</code> object containing the minimum
      *          dimensions
@@ -115,6 +140,10 @@ public class ViewportLayout implements LayoutManager, Serializable
     /**
      * Called by the AWT when the specified container needs to be laid out.
      *
+     * <p>
+     *  当指定的容器需要布局时由AWT调用。
+     * 
+     * 
      * @param parent  the container to lay out
      *
      * @throws AWTError if the target isn't the container specified to the
@@ -135,6 +164,9 @@ public class ViewportLayout implements LayoutManager, Serializable
 
         /* All of the dimensions below are in view coordinates, except
          * vpSize which we're converting.
+         * <p>
+         *  我们正在转换的vpSize。
+         * 
          */
 
         Insets insets = vp.getInsets();
@@ -158,6 +190,9 @@ public class ViewportLayout implements LayoutManager, Serializable
          * right of the view, right justify the view or left justify
          * the view when the width of the view is smaller than the
          * container.
+         * <p>
+         * 右视图,右对齐视图或在视图的宽度小于容器时左对齐视图。
+         * 
          */
         if (scrollableView == null ||
             vp.getParent() == null ||
@@ -176,6 +211,9 @@ public class ViewportLayout implements LayoutManager, Serializable
         /* If the new viewport size would leave empty space below the
          * view, bottom justify the view or top justify the view when
          * the height of the view is smaller than the container.
+         * <p>
+         *  视图,底部对齐视图或顶部对齐视图,当视图的高度小于容器。
+         * 
          */
         if ((viewPosition.y + extentSize.height) > viewSize.height) {
             viewPosition.y = Math.max(0, viewSize.height - extentSize.height);
@@ -188,6 +226,9 @@ public class ViewportLayout implements LayoutManager, Serializable
          * If the origin of the view is showing and the viewport is
          * bigger than the views preferred size, then make the view
          * the same size as the viewport.
+         * <p>
+         *  应该将wrt更改为视口,即如果视图不是Scrollable的实例,则按如下所示调整视图大小。
+         * 
          */
         if (scrollableView == null) {
             if ((viewPosition.x == 0) && (vpSize.width > viewPrefSize.width)) {

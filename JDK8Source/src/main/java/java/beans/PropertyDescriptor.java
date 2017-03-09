@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import java.lang.reflect.Constructor;
 /**
  * A PropertyDescriptor describes one property that a Java Bean
  * exports via a pair of accessor methods.
+ * <p>
+ *  PropertyDescriptor描述了Java Bean通过一对访问器方法导出的一个属性。
+ * 
  */
 public class PropertyDescriptor extends FeatureDescriptor {
 
@@ -59,6 +63,12 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * property name should start with a lower case character, which will
      * be capitalized in the method names.
      *
+     * <p>
+     *  通过使用getFoo和setFoo访问器方法为符合标准Java约定的属性构造PropertyDescriptor。
+     * 因此,如果参数名称是"fred",它将假定writer方法是"setFred",并且reader方法是"getFred"(或者对于布尔属性是"isFred")。
+     * 请注意,属性名称应以小写字符开头,这将在方法名称中大写。
+     * 
+     * 
      * @param propertyName The programmatic name of the property.
      * @param beanClass The Class object for the target bean.  For
      *          example sun.beans.OurButton.class.
@@ -76,6 +86,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * This constructor takes the name of a simple property, and method
      * names for reading and writing the property.
      *
+     * <p>
+     *  此构造函数使用简单属性的名称,以及用于读取和写入属性的方法名称。
+     * 
+     * 
      * @param propertyName The programmatic name of the property.
      * @param beanClass The Class object for the target bean.  For
      *          example sun.beans.OurButton.class.
@@ -120,6 +134,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * This constructor takes the name of a simple property, and Method
      * objects for reading and writing the property.
      *
+     * <p>
+     *  此构造函数使用简单属性的名称,以及用于读取和写入属性的方法对象。
+     * 
+     * 
      * @param propertyName The programmatic name of the property.
      * @param readMethod The method used for reading the property value.
      *          May be null if the property is write-only.
@@ -142,6 +160,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Creates <code>PropertyDescriptor</code> for the specified bean
      * with the specified name and methods to read/write the property value.
      *
+     * <p>
+     *  为具有指定名称和方法的指定bean创建<code> PropertyDescriptor </code>,以读取/写入属性值。
+     * 
+     * 
      * @param bean   the type of the target bean
      * @param base   the base name of the property (the rest of the method name)
      * @param read   the method used for reading the property value
@@ -170,6 +192,11 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Returns {@code null} if the type is an indexed property
      * that does not support non-indexed access.
      *
+     * <p>
+     *  返回属性的Java类型信息。注意,{@code Class}对象可以描述原始的Java类型,例如{@code int}。此类型由读取方法返回或用作写入方法的参数类型。
+     * 如果类型是不支持非索引访问的索引属性,则返回{@code null}。
+     * 
+     * 
      * @return the {@code Class} object that represents the Java type info,
      *         or {@code null} if the type cannot be determined
      */
@@ -199,6 +226,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
     /**
      * Gets the method that should be used to read the property value.
      *
+     * <p>
+     *  获取应用于读取属性值的方法。
+     * 
+     * 
      * @return The method that should be used to read the property value.
      * May return null if the property can't be read.
      */
@@ -242,6 +273,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
     /**
      * Sets the method that should be used to read the property value.
      *
+     * <p>
+     *  设置应用于读取属性值的方法。
+     * 
+     * 
      * @param readMethod The new read method.
      * @throws IntrospectionException if the read method is invalid
      */
@@ -263,6 +298,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
     /**
      * Gets the method that should be used to write the property value.
      *
+     * <p>
+     * 获取应用于写入属性值的方法。
+     * 
+     * 
      * @return The method that should be used to write the property value.
      * May return null if the property can't be written.
      */
@@ -312,6 +351,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
     /**
      * Sets the method that should be used to write the property value.
      *
+     * <p>
+     *  设置应用于写入属性值的方法。
+     * 
+     * 
      * @param writeMethod The new write method.
      * @throws IntrospectionException if the write method is invalid
      */
@@ -332,6 +375,9 @@ public class PropertyDescriptor extends FeatureDescriptor {
 
     /**
      * Overridden to ensure that a super class doesn't take precedent
+     * <p>
+     *  重写以确保超类不会成为先例
+     * 
      */
     void setClass0(Class<?> clz) {
         if (getClass0() != null && clz.isAssignableFrom(getClass0())) {
@@ -345,6 +391,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Updates to "bound" properties will cause a "PropertyChange" event to
      * get fired when the property is changed.
      *
+     * <p>
+     *  更新"绑定"属性将导致在属性更改时触发"PropertyChange"事件。
+     * 
+     * 
      * @return True if this is a bound property.
      */
     public boolean isBound() {
@@ -355,6 +405,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Updates to "bound" properties will cause a "PropertyChange" event to
      * get fired when the property is changed.
      *
+     * <p>
+     *  更新"绑定"属性将导致在属性更改时触发"PropertyChange"事件。
+     * 
+     * 
      * @param bound True if this is a bound property.
      */
     public void setBound(boolean bound) {
@@ -365,6 +419,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Attempted updates to "Constrained" properties will cause a "VetoableChange"
      * event to get fired when the property is changed.
      *
+     * <p>
+     *  尝试更新"Constrained"属性将导致在更改属性时触发"VetoableChange"事件。
+     * 
+     * 
      * @return True if this is a constrained property.
      */
     public boolean isConstrained() {
@@ -375,6 +433,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Attempted updates to "Constrained" properties will cause a "VetoableChange"
      * event to get fired when the property is changed.
      *
+     * <p>
+     *  尝试更新"Constrained"属性将导致在更改属性时触发"VetoableChange"事件。
+     * 
+     * 
      * @param constrained True if this is a constrained property.
      */
     public void setConstrained(boolean constrained) {
@@ -388,6 +450,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * PropertyEditor with a given property, then you can do it with
      * this method.
      *
+     * <p>
+     *  通常PropertyEditor将使用PropertyEditorManager找到。但是,如果由于某种原因要将特定PropertyEditor与给定属性关联,则可以使用此方法。
+     * 
+     * 
      * @param propertyEditorClass  The Class for the desired PropertyEditor.
      */
     public void setPropertyEditorClass(Class<?> propertyEditorClass) {
@@ -398,6 +464,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Gets any explicit PropertyEditor Class that has been registered
      * for this property.
      *
+     * <p>
+     *  获取已为此属性注册的任何显式PropertyEditor类。
+     * 
+     * 
      * @return Any explicit PropertyEditor Class that has been registered
      *          for this property.  Normally this will return "null",
      *          indicating that no special editor has been registered,
@@ -418,6 +488,12 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Object argument then it will be invoked using the bean parameter
      * as the argument. Otherwise, the default constructor will be invoked.
      *
+     * <p>
+     *  使用当前属性编辑器类构造属性编辑器的实例。
+     * <p>
+     *  如果属性编辑器类具有一个带有Object参数的公共构造函数,那么它将使用bean参数作为参数来调用。否则,将调用默认构造函数。
+     * 
+     * 
      * @param bean the source object
      * @return a property editor instance or null if a property editor has
      *         not been defined or cannot be created
@@ -456,6 +532,11 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * are the same if the read, write, property types, property editor and
      * flags  are equivalent.
      *
+     * <p>
+     *  将此<code> PropertyDescriptor </code>与指定的对象进行比较。如果对象相同,则返回true。
+     * 如果读,写,属性类型,属性编辑器和标志是等效的,两个<code> PropertyDescriptor </code>是相同的。
+     * 
+     * 
      * @since 1.4
      */
     public boolean equals(Object obj) {
@@ -489,6 +570,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
     /**
      * Package private helper method for Descriptor .equals methods.
      *
+     * <p>
+     * 用于Descriptor .equals方法的包专用助手方法。
+     * 
+     * 
      * @param a first method to compare
      * @param b second method to compare
      * @return boolean to indicate that the methods are equivalent
@@ -512,6 +597,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Merge two property descriptors.  Where they conflict, give the
      * second argument (y) priority over the first argument (x).
      *
+     * <p>
+     *  包私有构造函数。合并两个属性描述符。在它们冲突的地方,给第二个参数(y)优先于第一个参数(x)。
+     * 
+     * 
      * @param x  The first (lower priority) PropertyDescriptor
      * @param y  The second (higher priority) PropertyDescriptor
      */
@@ -599,6 +688,9 @@ public class PropertyDescriptor extends FeatureDescriptor {
     /*
      * Package-private dup constructor.
      * This must isolate the new object from any changes to the old object.
+     * <p>
+     *  Package-private dup构造函数。这必须将新对象与对旧对象的任何更改隔离。
+     * 
      */
     PropertyDescriptor(PropertyDescriptor old) {
         super(old);
@@ -629,6 +721,10 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Returns the property type that corresponds to the read and write method.
      * The type precedence is given to the readMethod.
      *
+     * <p>
+     *  返回与读取和写入方法对应的属性类型。类型优先级给予readMethod。
+     * 
+     * 
      * @return the type of the property descriptor or null if both
      *         read and write methods are null.
      * @throws IntrospectionException if the read or write method is invalid
@@ -671,6 +767,9 @@ public class PropertyDescriptor extends FeatureDescriptor {
      * Returns a hash code value for the object.
      * See {@link java.lang.Object#hashCode} for a complete description.
      *
+     * <p>
+     *  返回对象的哈希码值。有关完整的说明,请参阅{@link java.lang.Object#hashCode}。
+     * 
      * @return a hash code value for this object.
      * @since 1.5
      */

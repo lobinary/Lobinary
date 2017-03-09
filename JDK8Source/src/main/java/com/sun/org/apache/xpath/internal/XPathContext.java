@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XPathContext.java,v 1.2.4.2 2005/09/15 01:37:55 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XPathContext.java,v 1.2.4.2 2005/09/15 01:37:55 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal;
 
@@ -57,6 +70,11 @@ import org.xml.sax.XMLReader;
  *
  * <p>This class extends DTMManager but does not directly implement it.</p>
  * @xsl.usage advanced
+ * <p>
+ *  XPath的运行时执行上下文的默认类。
+ * 
+ *  <p>此类扩展了DTMManager,但不直接实现它。</p> @ xsl.usage advanced
+ * 
  */
 public class XPathContext extends DTMManager // implements ExpressionContext
 {
@@ -70,6 +88,11 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * the DTMs if the problem occurs multiple times. I'm not sure that's
    * really a net win versus discarding the DTM and starting a new one...
    * but the retained RTF DTM will have been tail-pruned so should be small.
+   * <p>
+   *  结果树片段的缓存的"可重用"DTM堆栈。这是一个kluge来处理在旧的RTF完成之前启动RTF的问题。
+   * 
+   *  ％REVIEW％我使用一个向量而不是堆栈,所以我们可以重复使用DTMs如果问题发生多次。我不知道这真的是一个净赢,而丢弃DTM,并开始一个新的...但保留的RTF DTM将被尾部修剪,所以应该是小。
+   * 
    */
   private Vector m_rtfdtm_stack=null;
   /** Index of currently active RTF DTM in m_rtfdtm_stack */
@@ -78,17 +101,26 @@ public class XPathContext extends DTMManager // implements ExpressionContext
  /**
    * Most recent "reusable" DTM for Global Result Tree Fragments. No stack is
    * required since we're never going to pop these.
+   * <p>
+   *  最近的"可重用"DTM的全局结果树片段。不需要堆栈,因为我们永远不会弹出这些。
+   * 
    */
   private SAX2RTFDTM m_global_rtfdtm=null;
 
   /**
    * HashMap of cached the DTMXRTreeFrag objects, which are identified by DTM IDs.
    * The object are just wrappers for DTMs which are used in  XRTreeFrag.
+   * <p>
+   * HashMap缓存了DTMXRTreeFrag对象,这些对象由DTM ID标识。对象只是用于XRTreeFrag中的DTM的包装器。
+   * 
    */
   private HashMap m_DTMXRTreeFrags = null;
 
   /**
    * state of the secure processing feature.
+   * <p>
+   *  状态的安全处理特征。
+   * 
    */
   private boolean m_isSecureProcessing = false;
 
@@ -98,6 +130,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Though XPathContext context extends
    * the DTMManager, it really is a proxy for this object, which
    * is the real DTMManager.
+   * <p>
+   *  虽然XPathContext上下文扩展了DTMManager,但它实际上是这个对象的代理,这是真正的DTMManager。
+   * 
    */
   protected DTMManager m_dtmManager = null;
 
@@ -106,6 +141,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * the DTMManager, it really is a proxy for the real DTMManager.  If a
    * caller needs to make a lot of calls to the DTMManager, it is faster
    * if it gets the real one from this function.
+   * <p>
+   *  返回DTMManager对象。虽然XPathContext上下文扩展了DTMManager,但它实际上是真正的DTMManager的代理。
+   * 如果调用者需要对DTMManager进行很多调用,如果它从这个函数获取真正的调用,它会更快。
+   * 
    */
    public DTMManager getDTMManager()
    {
@@ -114,6 +153,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Set the state of the secure processing feature
+   * <p>
+   *  设置安全处理功能的状态
+   * 
    */
   public void setSecureProcessing(boolean flag)
   {
@@ -122,6 +164,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Return the state of the secure processing feature
+   * <p>
+   *  返回安全处理功能的状态
+   * 
    */
   public boolean isSecureProcessing()
   {
@@ -137,6 +182,11 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * (I think more parameters will need to be added for error handling, and entity
    * resolution).
    *
+   * <p>
+   *  获取DTM的实例,加载来自指定源的内容。如果唯一标志为真,将始终返回一个新实例。否则,由DTMManager返回一个新的实例或者它已经创建的实例,并且可能被别人使用。
+   *  (我认为需要添加更多的参数用于错误处理和实体解析)。
+   * 
+   * 
    * @param source the specification of the source object, which may be null,
    *               in which case it is assumed that node construction will take
    *               by some other means.
@@ -161,6 +211,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get an instance of a DTM that "owns" a node handle.
    *
+   * <p>
+   *  获取"拥有"节点句柄的DTM的实例。
+   * 
+   * 
    * @param nodeHandle the nodeHandle.
    *
    * @return a non-null DTM reference.
@@ -174,6 +228,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Given a W3C DOM node, try and return a DTM handle.
    * Note: calling this may be non-optimal.
    *
+   * <p>
+   *  给定一个W3C DOM节点,尝试并返回一个DTM句柄。注意：调用这可能是非最佳的。
+   * 
+   * 
    * @param node Non-null reference to a DOM node.
    *
    * @return a valid DTM handle.
@@ -186,6 +244,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 //
   /**
    * %TBD% Doc
+   * <p>
+   *  ％TBD％Doc
+   * 
    */
   public int getDTMIdentity(DTM dtm)
   {
@@ -194,6 +255,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 //
   /**
    * Creates an empty <code>DocumentFragment</code> object.
+   * <p>
+   *  创建一个空的<code> DocumentFragment </code>对象。
+   * 
+   * 
    * @return A new <code>DocumentFragment handle</code>.
    */
   public DTM createDocumentFragment()
@@ -206,6 +271,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * DTMs without system IDs are always hard deleted.
    * State: experimental.
    *
+   * <p>
+   *  将DTM发布到lru池,或完全删除引用。无系统ID的DTM始终被硬删除。状态：实验。
+   * 
+   * 
    * @param dtm The DTM to be released.
    * @param shouldHardDelete True if the DTM should be removed no matter what.
    * @return true if the DTM was removed, false if it was put back in a lru pool.
@@ -230,6 +299,11 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * <a href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or
    * a <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
+   * <p>
+   * 根据XPath <a href="http://www.w3.org/TR/xpath#NT-LocationPath> LocationPath </a>或<a href ="创建新的<code> D
+   * TMIterator </code> http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr </a>。
+   * 
+   * 
    * @param xpathCompiler ??? Somehow we need to pass in a subpart of the
    * expression.  I hate to do this with strings, since the larger expression
    * has already been parsed.
@@ -247,6 +321,11 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * <a href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or
    * a <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
+   * <p>
+   *  根据XPath <a href="http://www.w3.org/TR/xpath#NT-LocationPath> LocationPath </a>或<a href ="创建新的<code> 
+   * DTMIterator </code> http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr </a>。
+   * 
+   * 
    * @param xpathString Must be a valid string expressing a
    * <a href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or
    * a <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
@@ -266,6 +345,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * a DTMFilter.  The traversal semantics are defined as the descendant
    * access.
    *
+   * <p>
+   *  仅基于whatToShow和DTMFilter创建一个新的<code> DTMIterator </code>。遍历语义被定义为后代访问。
+   * 
+   * 
    * @param whatToShow This flag specifies which node types may appear in
    *   the logical view of the tree presented by the iterator. See the
    *   description of <code>NodeFilter</code> for the set of possible
@@ -287,6 +370,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Create a new <code>DTMIterator</code> that holds exactly one node.
    *
+   * <p>
+   *  创建一个只包含一个节点的新<> DTMIterator </code>。
+   * 
+   * 
    * @param node The node handle that the DTMIterator will iterate to.
    *
    * @return The newly created <code>DTMIterator</code>.
@@ -302,6 +389,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Create an XPathContext instance.
+   * <p>
+   *  创建XPathContext实例。
+   * 
    */
   public XPathContext()
   {
@@ -314,6 +404,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    **This constructor doesn't seem to be used anywhere -- huizhe wang**
    * Create an XPathContext instance.
+   * <p>
+   *  这个构造函数似乎没有在任何地方使用 -  huizhe wang **创建一个XPathContext实例。
+   * 
+   * 
    * @param owner Value that can be retrieved via the getOwnerObject() method.
    * @see #getOwnerObject
    */
@@ -340,6 +434,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Reset for new run.
+   * <p>
+   *  重置为新运行。
+   * 
    */
   public void reset()
   {
@@ -383,6 +480,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the current locater in the stylesheet.
    *
+   * <p>
+   *  在样式表中设置当前定位器。
+   * 
+   * 
    * @param location The location within the stylesheet.
    */
   public void setSAXLocator(SourceLocator location)
@@ -393,6 +494,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the current locater in the stylesheet.
    *
+   * <p>
+   *  在样式表中设置当前定位器。
+   * 
+   * 
    * @param location The location within the stylesheet.
    */
   public void pushSAXLocator(SourceLocator location)
@@ -404,6 +509,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Push a slot on the locations stack so that setSAXLocator can be
    * repeatedly called.
    *
+   * <p>
+   *  推送位置堆栈上的一个插槽,以便可以重复调用setSAXLocator。
+   * 
    */
   public void pushSAXLocatorNull()
   {
@@ -413,6 +521,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Pop the current locater.
+   * <p>
+   *  弹出当前定位器。
+   * 
    */
   public void popSAXLocator()
   {
@@ -422,6 +533,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get the current locater in the stylesheet.
    *
+   * <p>
+   *  获取样式表中的当前定位器。
+   * 
+   * 
    * @return The location within the stylesheet, or null if not known.
    */
   public SourceLocator getSAXLocator()
@@ -431,11 +546,17 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /** The owner context of this XPathContext.  In the case of XSLT, this will be a
    *  Transformer object.
+   * <p>
+   *  变压器对象。
+   * 
    */
   private Object m_owner;
 
   /** The owner context of this XPathContext.  In the case of XSLT, this will be a
    *  Transformer object.
+   * <p>
+   *  变压器对象。
+   * 
    */
   private Method m_ownerGetErrorListener;
 
@@ -443,6 +564,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Get the "owner" context of this context, which should be,
    * in the case of XSLT, the Transformer object.  This is needed
    * so that XSLT functions can get the Transformer.
+   * <p>
+   *  获取此上下文的"所有者"上下文,在XSLT的情况下,应为Transformer对象。这是需要的,所以XSLT函数可以得到Transformer。
+   * 
+   * 
    * @return The owner object passed into the constructor, or null.
    */
   public Object getOwnerObject()
@@ -455,6 +580,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * The stack of Variable stacks.  A VariableStack will be
    * pushed onto this stack for each template invocation.
+   * <p>
+   *  可变栈的堆栈。每个模板调用都会将一个VariableStack压入此堆栈。
+   * 
    */
   private VariableStack m_variableStacks = new VariableStack();
 
@@ -462,6 +590,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Get the variable stack, which is in charge of variables and
    * parameters.
    *
+   * <p>
+   *  获取变量堆栈,它负责变量和参数。
+   * 
+   * 
    * @return the variable stack, which should not be null.
    */
   public final VariableStack getVarStack()
@@ -473,6 +605,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Get the variable stack, which is in charge of variables and
    * parameters.
    *
+   * <p>
+   *  获取变量堆栈,它负责变量和参数。
+   * 
+   * 
    * @param varStack non-null reference to the variable stack.
    */
   public final void setVarStack(VariableStack varStack)
@@ -483,12 +619,18 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   // ================ SourceTreeManager ===================
 
   /** The source tree manager, which associates Source objects to source
+  /* <p>
+  /* 
    *  tree nodes. */
   private SourceTreeManager m_sourceTreeManager = new SourceTreeManager();
 
   /**
    * Get the SourceTreeManager associated with this execution context.
    *
+   * <p>
+   * 获取与此执行上下文相关联的SourceTreeManager。
+   * 
+   * 
    * @return the SourceTreeManager associated with this execution context.
    */
   public final SourceTreeManager getSourceTreeManager()
@@ -499,6 +641,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the SourceTreeManager associated with this execution context.
    *
+   * <p>
+   *  设置与此执行上下文相关联的SourceTreeManager。
+   * 
+   * 
    * @param mgr the SourceTreeManager to be associated with this
    *        execution context.
    */
@@ -514,12 +660,19 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /** A default ErrorListener in case our m_errorListener was not specified and our
    *  owner either does not have an ErrorListener or has a null one.
+   * <p>
+   *  owner或者没有ErrorListener或者有一个null。
+   * 
    */
   private ErrorListener m_defaultErrorListener;
 
   /**
    * Get the ErrorListener where errors and warnings are to be reported.
    *
+   * <p>
+   *  获取ErrorListener,以报告错误和警告。
+   * 
+   * 
    * @return A non-null ErrorListener reference.
    */
   public final ErrorListener getErrorListener()
@@ -549,6 +702,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the ErrorListener where errors and warnings are to be reported.
    *
+   * <p>
+   *  设置ErrorListener,以报告错误和警告。
+   * 
+   * 
    * @param listener A non-null ErrorListener reference.
    */
   public void setErrorListener(ErrorListener listener) throws IllegalArgumentException
@@ -562,12 +719,18 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   // =================================================
 
   /** The TrAX URI Resolver for resolving URIs from the document(...)
+  /* <p>
+  /* 
    *  function to source tree nodes.  */
   private URIResolver m_uriResolver;
 
   /**
    * Get the URIResolver associated with this execution context.
    *
+   * <p>
+   *  获取与此执行上下文相关联的URIResolver。
+   * 
+   * 
    * @return a URI resolver, which may be null.
    */
   public final URIResolver getURIResolver()
@@ -578,6 +741,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the URIResolver associated with this execution context.
    *
+   * <p>
+   *  设置与此执行上下文相关联的URIResolver。
+   * 
+   * 
    * @param resolver the URIResolver to be associated with this
    *        execution context, may be null to clear an already set resolver.
    */
@@ -594,6 +761,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get primary XMLReader associated with this execution context.
    *
+   * <p>
+   *  获取与此执行上下文相关联的主XMLReader。
+   * 
+   * 
    * @return The reader of the primary source tree.
    */
   public final XMLReader getPrimaryReader()
@@ -604,6 +775,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set primary XMLReader associated with this execution context.
    *
+   * <p>
+   *  设置与此执行上下文相关联的主XMLReader。
+   * 
+   * 
    * @param reader The reader of the primary source tree.
    */
   public void setPrimaryReader(XMLReader reader)
@@ -623,6 +798,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * The current context node list.
+   * <p>
+   *  当前上下文节点列表。
+   * 
    */
   private Stack m_contextNodeLists = new Stack();
 
@@ -632,6 +810,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get the current context node list.
    *
+   * <p>
+   *  获取当前上下文节点列表。
+   * 
+   * 
    * @return  the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>,
    * also referred to here as a <term>context node list</term>.
    */
@@ -647,6 +829,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the current context node list.
    *
+   * <p>
+   *  设置当前上下文节点列表。
+   * 
+   * 
    * @param nl the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>,
    * also referred to here as a <term>context node list</term>.
    * @xsl.usage internal
@@ -659,6 +845,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Pop the current context node list.
    * @xsl.usage internal
+   * <p>
+   *  弹出当前上下文节点列表。 @ xsl.usage internal
+   * 
    */
   public final void popContextNodeList()
   {
@@ -671,12 +860,19 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * The amount to use for stacks that record information during the
    * recursive execution.
+   * <p>
+   *  用于在递归执行期间记录信息的堆栈的数量。
+   * 
    */
   public static final int RECURSIONLIMIT = (1024*4);
 
   /** The stack of <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a> objects.
    *  Not to be confused with the current node list.  %REVIEW% Note that there
    *  are no bounds check and resize for this stack, so if it is blown, it's all
+   * <p>
+   *  不要与当前节点列表混淆。 ％REVIEW％注意,这个堆栈没有边界检查和重新调整大小,所以如果它被炸了,就是全部
+   * 
+   * 
    *  over.  */
   private IntStack m_currentNodes = new IntStack(RECURSIONLIMIT);
 
@@ -688,6 +884,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get the current context node.
    *
+   * <p>
+   *  获取当前上下文节点。
+   * 
+   * 
    * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
    */
   public final int getCurrentNode()
@@ -698,6 +898,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the current context node and expression node.
    *
+   * <p>
+   *  设置当前上下文节点和表达式节点。
+   * 
+   * 
    * @param cn the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
    * @param en the sub-expression context node.
    */
@@ -709,6 +913,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Set the current context node.
+   * <p>
+   *  设置当前上下文节点。
+   * 
    */
   public final void popCurrentNodeAndExpression()
   {
@@ -719,6 +926,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Push the current context node, expression node, and prefix resolver.
    *
+   * <p>
+   *  推送当前上下文节点,表达式节点和前缀解析器。
+   * 
+   * 
    * @param cn the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
    * @param en the sub-expression context node.
    * @param nc the namespace context (prefix resolver.
@@ -732,6 +943,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Pop the current context node, expression node, and prefix resolver.
+   * <p>
+   *  弹出当前上下文节点,表达式节点和前缀解析器。
+   * 
    */
   public final void popExpressionState()
   {
@@ -745,6 +959,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the current context node.
    *
+   * <p>
+   *  设置当前上下文节点。
+   * 
+   * 
    * @param n the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
    */
   public final void pushCurrentNode(int n)
@@ -754,6 +972,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Pop the current context node.
+   * <p>
+   *  弹出当前上下文节点。
+   * 
    */
   public final void popCurrentNode()
   {
@@ -762,6 +983,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Set the current predicate root.
+   * <p>
+   *  设置当前谓词根。
+   * 
    */
   public final void pushPredicateRoot(int n)
   {
@@ -770,6 +994,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Pop the current predicate root.
+   * <p>
+   *  弹出当前谓词根。
+   * 
    */
   public final void popPredicateRoot()
   {
@@ -778,6 +1005,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Get the current predicate root.
+   * <p>
+   *  获取当前谓词根。
+   * 
    */
   public final int getPredicateRoot()
   {
@@ -786,6 +1016,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Set the current location path iterator root.
+   * <p>
+   *  设置当前位置路径的迭代器根。
+   * 
    */
   public final void pushIteratorRoot(int n)
   {
@@ -794,6 +1027,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Pop the current location path iterator root.
+   * <p>
+   *  弹出当前位置路径的迭代器根。
+   * 
    */
   public final void popIteratorRoot()
   {
@@ -802,6 +1038,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Get the current location path iterator root.
+   * <p>
+   * 获取当前位置路径的迭代器根。
+   * 
    */
   public final int getIteratorRoot()
   {
@@ -841,6 +1080,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get the current node that is the expression's context (i.e. for current() support).
    *
+   * <p>
+   *  获取作为表达式上下文的当前节点(即对于current()支持)。
+   * 
+   * 
    * @return The current sub-expression node.
    */
   public final int getCurrentExpressionNode()
@@ -851,6 +1094,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the current node that is the expression's context (i.e. for current() support).
    *
+   * <p>
+   *  设置作为表达式上下文的当前节点(即对于current()支持)。
+   * 
+   * 
    * @param n The sub-expression node to be current.
    */
   public final void pushCurrentExpressionNode(int n)
@@ -861,6 +1108,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Pop the current node that is the expression's context
    * (i.e. for current() support).
+   * <p>
+   *  弹出是表达式上下文(即current()支持)的当前节点。
+   * 
    */
   public final void popCurrentExpressionNode()
   {
@@ -873,6 +1123,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get the current namespace context for the xpath.
    *
+   * <p>
+   *  获取xpath的当前命名空间上下文。
+   * 
+   * 
    * @return the current prefix resolver for resolving prefixes to
    *         namespace URLs.
    */
@@ -884,6 +1138,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get the current namespace context for the xpath.
    *
+   * <p>
+   *  获取xpath的当前命名空间上下文。
+   * 
+   * 
    * @param pr the prefix resolver to be used for resolving prefixes to
    *         namespace URLs.
    */
@@ -895,6 +1153,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Push a current namespace context for the xpath.
    *
+   * <p>
+   *  推送xpath的当前命名空间上下文。
+   * 
+   * 
    * @param pr the prefix resolver to be used for resolving prefixes to
    *         namespace URLs.
    */
@@ -906,6 +1168,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Just increment the namespace contest stack, so that setNamespaceContext
    * can be used on the slot.
+   * <p>
+   *  只需增加命名空间比赛堆栈,以便可以在插槽上使用setNamespaceContext。
+   * 
    */
   public final void pushNamespaceContextNull()
   {
@@ -914,6 +1179,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Pop the current namespace context for the xpath.
+   * <p>
+   *  弹出xpath的当前命名空间上下文。
+   * 
    */
   public final void popNamespaceContext()
   {
@@ -926,6 +1194,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Stack of AxesIterators.
+   * <p>
+   *  堆栈轴迭代器。
+   * 
    */
   private Stack m_axesIteratorStack = new Stack();
 
@@ -935,6 +1206,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Push a TreeWalker on the stack.
    *
+   * <p>
+   *  在堆栈上推一个TreeWalker。
+   * 
+   * 
    * @param iter A sub-context AxesWalker.
    * @xsl.usage internal
    */
@@ -946,6 +1221,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Pop the last pushed axes iterator.
    * @xsl.usage internal
+   * <p>
+   *  弹出最后一个推动轴迭代器。 @ xsl.usage internal
+   * 
    */
   public final void popSubContextList()
   {
@@ -955,6 +1233,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get the current axes iterator, or return null if none.
    *
+   * <p>
+   *  获取当前轴迭代器,或者如果没有返回null。
+   * 
+   * 
    * @return the sub-context node list.
    * @xsl.usage internal
    */
@@ -968,6 +1250,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Get the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>
    * as defined by the XSLT spec.
    *
+   * <p>
+   *  获取由XSLT规范定义的<a href="http://www.w3.org/TR/xslt#dt-current-node-list">当前节点列表</a>。
+   * 
+   * 
    * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>.
    * @xsl.usage internal
    */
@@ -983,6 +1269,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Get the current context node.
+   * <p>
+   *  获取当前上下文节点。
+   * 
+   * 
    * @return The current context node.
    */
   public final int getContextNode()
@@ -992,6 +1282,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /**
    * Get the current context node list.
+   * <p>
+   *  获取当前上下文节点列表。
+   * 
+   * 
    * @return An iterator for the current context list, as
    * defined in XSLT.
    */
@@ -1018,6 +1312,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * The the expression context for extensions for this context.
    *
+   * <p>
+   *  此上下文的扩展的表达式上下文。
+   * 
+   * 
    * @return An object that implements the ExpressionContext.
    */
   public ExpressionContext getExpressionContext()
@@ -1032,6 +1330,11 @@ public class XPathContext extends DTMManager // implements ExpressionContext
      * Extensions should use this judiciously and only when special processing
      * requirements cannot be met another way.  Consider requesting an enhancement
      * to the ExpressionContext interface to avoid having to call this method.
+     * <p>
+     *  返回与此XPathExpressionContext相关联的XPathContext。扩展应该明智地使用这种方式,只有当特殊的处理要求不能满足另一种方式。
+     * 考虑请求增强ExpressionContext接口,以避免调用此方法。
+     * 
+     * 
      * @return the XPathContext associated with this XPathExpressionContext.
      */
      public XPathContext getXPathContext()
@@ -1044,6 +1347,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
      * the DTMManager, it really is a proxy for the real DTMManager.  If a
      * caller needs to make a lot of calls to the DTMManager, it is faster
      * if it gets the real one from this function.
+     * <p>
+     * 返回DTMManager对象。虽然XPathContext上下文扩展了DTMManager,但它实际上是真正的DTMManager的代理。
+     * 如果调用者需要对DTMManager进行很多调用,如果它从这个函数获取真正的调用,它会更快。
+     * 
      */
      public DTMManager getDTMManager()
      {
@@ -1052,6 +1359,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
     /**
      * Get the current context node.
+     * <p>
+     *  获取当前上下文节点。
+     * 
+     * 
      * @return The current context node.
      */
     public org.w3c.dom.Node getContextNode()
@@ -1063,6 +1374,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
     /**
      * Get the current context node list.
+     * <p>
+     *  获取当前上下文节点列表。
+     * 
+     * 
      * @return An iterator for the current context list, as
      * defined in XSLT.
      */
@@ -1073,6 +1388,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
     /**
      * Get the error listener.
+     * <p>
+     *  获取错误侦听器。
+     * 
+     * 
      * @return The registered error listener.
      */
     public ErrorListener getErrorListener()
@@ -1081,6 +1400,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     }
     /**
      * Return the state of the services mechanism feature.
+     * <p>
+     *  返回服务机制功能的状态。
+     * 
      */
     public boolean useServicesMechnism() {
         return m_useServicesMechanism;
@@ -1088,6 +1410,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
     /**
      * Set the state of the services mechanism feature.
+     * <p>
+     *  设置服务机制功能的状态。
+     * 
      */
     public void setServicesMechnism(boolean flag) {
         m_useServicesMechanism = flag;
@@ -1095,6 +1420,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
     /**
      * Get the value of a node as a number.
+     * <p>
+     *  获取节点的值作为数字。
+     * 
+     * 
      * @param n Node to be converted to a number.  May be null.
      * @return value of n as a number.
      */
@@ -1109,6 +1438,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
     /**
      * Get the value of a node as a string.
+     * <p>
+     *  以字符串形式获取节点的值。
+     * 
+     * 
      * @param n Node to be converted to a string.  May be null.
      * @return value of n as a string, or an empty string if n is null.
      */
@@ -1123,6 +1456,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
     /**
      * Get a variable based on it's qualified name.
+     * <p>
+     *  基于其限定名称获取变量。
+     * 
+     * 
      * @param qname The qualified name of the variable.
      * @return The evaluated value of the variable.
      * @throws javax.xml.transform.TransformerException
@@ -1150,6 +1487,13 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * be discarded, hence we need to allocate them separately and don't actually need
    * a stack to track them.
    *
+   * <p>
+   *  获取一个DTM用作全局结果树片段的容器。这总是一个实例(派生自?等效于?)SAX2DTM,因为每个RTF是通过临时重定向我们的SAX输出到它。它可以是包含多个片段的单个DTM,如果实现支持的话。
+   * 
+   *  注意：此方法和getRTFDTM()之间的区别是,后者从动态变量堆栈(m_rtfdtm_stack)分配空间,由于退出定义这些变量的模板,可以再次删除它们。
+   * 全局变量可能被绑定得晚(见XUnresolvedVariable),并且永远不想被丢弃,因此我们需要单独分配它们,并且实际上不需要栈来跟踪它们。
+   * 
+   * 
    * @return a non-null DTM reference.
    */
   public DTM getGlobalRTFDTM()
@@ -1184,6 +1528,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * output to it. It may be a single DTM containing for multiple fragments,
    * if the implementation supports that.
    *
+   * <p>
+   * 获取一个DTM用作动态结果树片段的容器。这总是一个实例(派生自?等效于?)SAX2DTM,因为每个RTF是通过临时重定向我们的SAX输出到它。它可以是包含多个片段的单个DTM,如果实现支持的话。
+   * 
+   * 
    * @return a non-null DTM reference.
    */
   public DTM getRTFDTM()
@@ -1239,6 +1587,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /** Push the RTFDTM's context mark, to allows discarding RTFs added after this
    * point. (If it doesn't exist we don't push, since we might still be able to
    * get away with not creating it. That requires that excessive pops be harmless.)
+   * <p>
+   *  点。 (如果它不存在,我们不推动,因为我们可能仍然能够摆脱不创建它,这需要过多的流浪是无害的。)
+   * 
+   * 
    * */
   public void pushRTFContext()
   {
@@ -1260,6 +1612,15 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Basically: If pop says this DTM is now empty, then return to the previous
    * if one exists, in whatever state we left it in. UGLY, but hopefully the
    * situation which forces us to consider this will arise exceedingly rarely.
+   * <p>
+   *  标记设置。
+   * 
+   *  如果没有RTF DTM,没有什么可以弹出,这将变成无操作。如果push被调用之前发出,我们指望popRewindMark被定义为overpopping只是重置为空的事实。
+   * 
+   *  复杂因素：如果出现了一个奇怪的产生式RTF到构建RTF的情况,我们需要处理弹回到以前的RTF DTM的情况。基本上：如果pop说这个DTM现在是空的,然后返回到上一个如果存在,无论我们留在什么状态。
+   * UGLY,但希望的情况,迫使我们考虑这将极少出现。
+   * 
+   * 
    * */
   public void popRTFContext()
   {
@@ -1288,6 +1649,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Gets DTMXRTreeFrag object if one has already been created.
    * Creates new DTMXRTreeFrag object and adds to m_DTMXRTreeFrags  HashMap,
    * otherwise.
+   * <p>
+   * 
    * @param dtmIdentity
    * @return DTMXRTreeFrag
    */
@@ -1308,6 +1671,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Cleans DTMXRTreeFrag objects by removing references
    * to DTM and XPathContext objects.
+   * <p>
+   *  获取DTMXRTreeFrag对象(如果已创建)。创建新的DTMXRTreeFrag对象,并添加到m_DTMXRTreeFrags HashMap,否则。
+   * 
    */
   private final void releaseDTMXRTreeFrags(){
     if(m_DTMXRTreeFrags == null){

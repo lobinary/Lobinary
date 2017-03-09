@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,18 @@ import javax.print.attribute.PrintJobAttribute;
  * localized to give the IPP name and natural language values.
  * <P>
  *
+ * <p>
+ *  类JobSheets是一个打印属性类,枚举,用于确定必须使用作业打印哪些作业开始和结束工作表(如果有)。 JobSheets类声明标准作业表值的关键字。
+ * 还可以通过定义JobSheets类的子类来创建作业表属性的实现或站点定义的名称。
+ * <P>
+ *  根据特定JobSheets值的含义,JobSheets属性对多点打印作业(具有多个文档的作业)的影响可能会受到{@link MultipleDocumentHandling MultipleDocumentHandling}
+ * 作业属性的影响。
+ * <P>
+ *  <B> IPP兼容性：</B> <CODE> getName()</CODE>返回的类别名称是IPP属性名称。枚举的整数值是IPP枚举值。
+ *  <code> toString()</code>方法返回属性值的IPP字符串表示形式。对于子类,属性值必须本地化以给出IPP名称和自然语言值。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public class JobSheets extends EnumSyntax
@@ -60,6 +73,9 @@ public class JobSheets extends EnumSyntax
 
     /**
      * No job sheets are printed.
+     * <p>
+     *  不打印作业页。
+     * 
      */
     public static final JobSheets NONE = new JobSheets(0);
 
@@ -67,6 +83,9 @@ public class JobSheets extends EnumSyntax
      * One or more site specific standard job sheets are printed. e.g. a
      * single start sheet is printed, or both start and end sheets are
      * printed.
+     * <p>
+     *  打印一个或多个特定于站点的标准作业表。例如打印单张开始纸张,或者打印开始和结束纸张。
+     * 
      */
     public static final JobSheets STANDARD = new JobSheets(1);
 
@@ -74,6 +93,10 @@ public class JobSheets extends EnumSyntax
      * Construct a new job sheets enumeration value with the given integer
      * value.
      *
+     * <p>
+     *  使用给定的整数值构造新的作业表枚举值。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected JobSheets(int value) {
@@ -92,6 +115,9 @@ public class JobSheets extends EnumSyntax
 
     /**
      * Returns the string table for class JobSheets.
+     * <p>
+     *  返回JobSheets类的字符串表。
+     * 
      */
     protected String[] getStringTable() {
         return (String[])myStringTable.clone();
@@ -99,6 +125,9 @@ public class JobSheets extends EnumSyntax
 
     /**
      * Returns the enumeration value table for class JobSheets.
+     * <p>
+     *  返回类JobSheets的枚举值表。
+     * 
      */
     protected EnumSyntax[] getEnumValueTable() {
         return (EnumSyntax[])myEnumValueTable.clone();
@@ -111,6 +140,12 @@ public class JobSheets extends EnumSyntax
      * For class JobSheets and any vendor-defined subclasses, the category is
      * class JobSheets itself.
      *
+     * <p>
+     * 获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于JobSheets类和任何供应商定义的子类,类别是JobSheets类本身。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -125,6 +160,10 @@ public class JobSheets extends EnumSyntax
      * For class JobSheets and any vendor-defined subclasses, the category
      * name is <CODE>"job-sheets"</CODE>.
      *
+     * <p>
+     *  获取此属性值为实例的类别的名称。
+     * <P>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -187,6 +188,85 @@ import javax.accessibility.*;
  *   attribute: isContainer false
  * description: A text component to edit various types of content.
  *
+ * <p>
+ *  用于编辑各种内容的文本组件。
+ * 您可以在<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/text.html">使用文本组件</a>中找到如何使用编
+ * 辑器窗格的说明信息和示例, Java教程</em>中的一个部分。
+ *  用于编辑各种内容的文本组件。
+ * 
+ * <p>
+ *  此组件使用<code> EditorKit </code>的实现来完成其行为。它有效地转换为适当类型的文本编辑器的内容类型。
+ * 编辑器在任何给定时间绑定的内容类型由当前安装的<code> EditorKit </code>确定。
+ * 如果内容设置为新的URL,则其类型用于确定应用于加载内容的<code> EditorKit </code>。
+ * <p>
+ *  默认情况下,以下类型的内容是已知的：
+ * <dl>
+ *  <dt> <b> text / plain </b> <dd>纯文本,这是默认的给定类型无法识别。
+ * 在这种情况下使用的工具包是<code> DefaultEditorKit </code>的扩展,生成一个包装的纯文本视图。 <dt> <b> text / html </b> <dd> HTML文本。
+ * 在这种情况下使用的工具包是类<code> javax.swing.text.html.HTMLEditorKit </code>,它提供了对HTML 3.2的支持。
+ *  <dt> <b> text / rtf </b> <dd> RTF文本。
+ * 在这种情况下使用的工具包是<code> javax.swing.text.rtf.RTFEditorKit </code>类,它提供了对富文本格式的有限支持。
+ * </dl>
+ * <p>
+ * 有几种方法可以将内容加载到此组件中。
+ * <ol>
+ * <li>
+ *  {@link #setText setText}方法可用于从字符串初始化组件。在这种情况下,将使用当前的<code> EditorKit </code>,内容类型应该是这种类型。
+ * <li>
+ *  {@link #read read}方法可用于从<code> Reader </code>初始化组件。
+ * 请注意,如果内容类型是HTML,则无法解析相对引用(例如对于图像等内容),除非&lt; base&gt;标记,或者设置<code> HTMLDocument </code>上的<em> Base </em>
+ * 属性。
+ *  {@link #read read}方法可用于从<code> Reader </code>初始化组件。
+ * 在这种情况下,将使用当前的<code> EditorKit </code>,内容类型应该是这种类型。
+ * <li>
+ *  {@link #setPage setPage}方法可用于从网址初始化组件。在这种情况下,内容类型将从URL确定,并且将设置该内容类型的注册<code> EditorKit </code>。
+ * </ol>
+ * <p>
+ *  某些种类的内容可以通过生成超链接事件来提供超链接支持。
+ * 如果<code> JEditorPane </code> <em>不可编辑</em>(<code> JEditorPane.setEditable(false); </code>),HTML <code>
+ *  EditorKit </code>被调用)。
+ *  某些种类的内容可以通过生成超链接事件来提供超链接支持。如果HTML框架嵌入在文档中,典型的响应将是更改当前文档的一部分。
+ * 以下代码片段是一个可能的超链接侦听器实现,它特别处理HTML框架事件,并且只显示任何其他激活的超链接。
+ * <pre>
+ * 
+ * &nbsp;类Hyperactive实现HyperlinkListener {&nbsp; &nbsp; public void hyperlinkUpdate(HyperlinkEvent e){&nbsp; if(e.getEventType()== HyperlinkEvent.EventType.ACTIVATED){&nbsp; JEdi​​torPane pane =(JEditorPane)e.getSource(); &nbsp; if(e instanceof HTMLFrameHyperlinkEvent){&nbsp; HTMLFrameHyperlinkEvent evt =(HTMLFrameHyperlinkEvent)e; &nbsp; HTMLDocument doc =(HTMLDocument)pane.getDocument(); &nbsp; doc.processHTMLFrameHyperlinkEvent(evt); &nbsp; }
+ *  else {&nbsp;尝试{&nbsp; pane.setPage(e.getURL()); &nbsp; } catch(Throwable t){&nbsp; t.printStackTrace(); &nbsp; }
+ * &nbsp; }&nbsp; }&nbsp; }&nbsp; }}。
+ * 
+ * </pre>
+ * <p>
+ *  有关自定义<b> text / html </b>如何显示的信息,请参阅{@link#W3C_LENGTH_UNITS}和{@link #HONOR_DISPLAY_PROPERTIES}
+ * <p>
+ * 一些文档中的文化依赖信息通过称为字符编码的机制来处理。字符编码是字符集(字母,表意字符,数字,符号或控制函数)的成员到特定数字代码值的无歧义映射。它表示文件的存储方式。
+ * 示例字符编码为ISO-8859-1,ISO-8859-5,Shift-jis,Euc-jp和UTF-8。
+ * 当文件传递给用户代理(<code> JEditorPane </code>)时,它将转换为文档字符集(ISO-10646 aka Unicode)。
+ * <p>
+ *  有多种方法可以使用<code> JEditorPane </code>来实现字符集映射。
+ * <ol>
+ * <li>
+ *  一种方法是将字符集指定为MIME类型的参数。这将通过调用{@link #setContentType setContentType}方法来建立。
+ * 如果内容由{@link #setPage setPage}方法加载,则内容类型将根据网址的规范设置。它直接加载文件,内容类型将预期在加载之前已设置。
+ * <li>
+ * 可以指定字符集的另一种方式是在文档本身。这需要在确定所需的字符集之前读取文档。
+ * 为了处理这一点,期望<code> EditorKit </code> .read操作引发将被捕获的<code> ChangedCharSetException </code>。
+ * 然后使用新的读取器重新启动读取,该读取器使用<code> ChangedCharSetException </code>(这是<code> IOException </code>)中指定的字符集。
+ * </ol>
+ * <p>
+ * <dl>
+ *  <dt> <b> <font size = + 1>换行符</font> </b>
+ * <dd>
+ *  有关如何处理新行的讨论,请参见<a href="text/DefaultEditorKit.html"> DefaultEditorKit </a>。
+ * </dl>
+ * 
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ *  @beaninfo属性：isContainer false description：一个文本组件,用于编辑各种类型的内容。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class JEditorPane extends JTextComponent {
@@ -194,6 +274,9 @@ public class JEditorPane extends JTextComponent {
     /**
      * Creates a new <code>JEditorPane</code>.
      * The document model is set to <code>null</code>.
+     * <p>
+     *  创建新的<code> JEditorPane </code>。文档模型设置为<code> null </code>。
+     * 
      */
     public JEditorPane() {
         super();
@@ -255,6 +338,10 @@ public class JEditorPane extends JTextComponent {
     /**
      * Creates a <code>JEditorPane</code> based on a specified URL for input.
      *
+     * <p>
+     *  基于指定的URL输入创建<code> JEditorPane </code>。
+     * 
+     * 
      * @param initialPage the URL
      * @exception IOException if the URL is <code>null</code>
      *          or cannot be accessed
@@ -268,6 +355,10 @@ public class JEditorPane extends JTextComponent {
      * Creates a <code>JEditorPane</code> based on a string containing
      * a URL specification.
      *
+     * <p>
+     * 基于包含URL规范的字符串创建<code> JEditorPane </code>。
+     * 
+     * 
      * @param url the URL
      * @exception IOException if the URL is <code>null</code> or
      *          cannot be accessed
@@ -282,6 +373,11 @@ public class JEditorPane extends JTextComponent {
      * to the given text.  This is a convenience constructor that calls the
      * <code>setContentType</code> and <code>setText</code> methods.
      *
+     * <p>
+     *  创建已初始化为给定文本的<code> JEditorPane </code>。
+     * 这是一个方便的构造函数,调用<code> setContentType </code>和<code> setText </code>方法。
+     * 
+     * 
      * @param type mime type of the given text
      * @param text the text to initialize with; may be <code>null</code>
      * @exception NullPointerException if the <code>type</code> parameter
@@ -297,6 +393,10 @@ public class JEditorPane extends JTextComponent {
      * Adds a hyperlink listener for notification of any changes, for example
      * when a link is selected and entered.
      *
+     * <p>
+     *  添加超链接侦听器以通知任何更改,例如,当选择并输入链接时。
+     * 
+     * 
      * @param listener the listener
      */
     public synchronized void addHyperlinkListener(HyperlinkListener listener) {
@@ -306,6 +406,10 @@ public class JEditorPane extends JTextComponent {
     /**
      * Removes a hyperlink listener.
      *
+     * <p>
+     *  删除超链接侦听器。
+     * 
+     * 
      * @param listener the listener
      */
     public synchronized void removeHyperlinkListener(HyperlinkListener listener) {
@@ -316,6 +420,10 @@ public class JEditorPane extends JTextComponent {
      * Returns an array of all the <code>HyperLinkListener</code>s added
      * to this JEditorPane with addHyperlinkListener().
      *
+     * <p>
+     *  返回通过addHyperlinkListener()添加到此JEditorPane的所有<code> HyperLinkListener </code>数组。
+     * 
+     * 
      * @return all of the <code>HyperLinkListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -332,6 +440,11 @@ public class JEditorPane extends JTextComponent {
      * was activity with a link.  The listener list is processed
      * last to first.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。如果支持超链接的内容类型当前处于活动状态且存在链接活动,则通常由当前安装的<code> EditorKit </code>调用。
+     * 侦听器列表是从最后到第一个处理的。
+     * 
+     * 
      * @param e the event
      * @see EventListenerList
      */
@@ -404,6 +517,31 @@ public class JEditorPane extends JTextComponent {
      * property change event will be fired when the other
      * thread is done whether the load was successful or not.
      *
+     * <p>
+     *  设置显示的当前URL。设置窗格的内容类型,如果窗格的编辑器工具包为非<code> null </code>,则会创建一个新的默认文档并读入URL。
+     * 如果URL包含引用位置,则将通过调用<code> scrollToReference </code>方法滚动到该位置。如果所需的URL是当前正在显示的URL,则不会重新加载文档。
+     * 要强制文档重新加载,需要清除文档的流描述属性。以下代码显示了如何完成此操作：。
+     * 
+     * <pre>
+     * 文档doc = jEditorPane.getDocument(); doc.putProperty(Document.StreamDescriptionProperty,null);
+     * </pre>
+     * 
+     *  如果所需的URL不是当前正在显示的URL,则调用<code> getStream </code>方法以使子类控制提供的流。
+     * <p>
+     *  这可以同步或异步加载,具体取决于<code> EditorKit </code>返回的文档。
+     * 如果<code> Document </code>的类型为<code> AbstractDocument </code>,并且由<code> AbstractDocument.getAsynchrono
+     * usLoadPriority </code>返回的值大于或等于零,使用该优先级加载在单独的线程上。
+     *  这可以同步或异步加载,具体取决于<code> EditorKit </code>返回的文档。
+     * <p>
+     *  如果文档是同步加载的,则在被安装到编辑器中之前,将通过调用<code> setDocument </code>来填充该流,这是绑定的并将触发属性更改事件。
+     * 如果抛出<code> IOException </code>,部分加载的文档将被丢弃,并且文档或页面属性更改事件也不会触发。
+     * 如果文档已成功加载并安装,那么UI将为其构建一个视图,如果需要,将滚动该视图,然后触发页面属性更改事件。
+     * <p>
+     * 如果文档被异步加载,文档将立即使用对<code> setDocument </code>的调用安装到编辑器中,这将激活文档属性更改事件,然后将创建一个线程,它将开始进行实际加载。
+     * 在这种情况下,页面属性更改事件不会直接通过调用此方法触发,而是在完成加载的线程完成时触发。它也将在事件分派线程上触发。
+     * 由于调用线程在其他线程失败的情况下不能抛出<code> IOException </code>,因此当其他线程完成时,页面属性更改事件将被触发,无论加载是否成功。
+     * 
+     * 
      * @param page the URL of the page
      * @exception IOException for a <code>null</code> or invalid
      *          page specification, or exception from the stream being read
@@ -487,6 +625,9 @@ public class JEditorPane extends JTextComponent {
 
     /**
      * Create model and initialize document properties from page properties.
+     * <p>
+     *  从页面属性创建模型并初始化文档属性。
+     * 
      */
     private Document initializeModel(EditorKit kit, URL page) {
         Document doc = kit.createDefaultDocument();
@@ -507,6 +648,9 @@ public class JEditorPane extends JTextComponent {
 
     /**
      * Return load priority for the document or -1 if priority not supported.
+     * <p>
+     *  返回文档的负载优先级,如果不支持优先级,则返回-1。
+     * 
      */
     private int getAsynchronousLoadPriority(Document doc) {
         return (doc instanceof AbstractDocument ?
@@ -521,6 +665,13 @@ public class JEditorPane extends JTextComponent {
      * the read. Otherwise it calls the superclass
      * method which loads the model as plain text.
      *
+     * <p>
+     *  此方法从流初始化。
+     * 如果工具包设置为<code> HTMLEditorKit </code>类型,并且<code> desc </code>参数是<code> HTMLDocument </code>,那么它会调用<code>
+     *  HTMLEditorKit <代码>启动读取。
+     *  此方法从流初始化。否则,它调用将类型加载为纯文本的超类方法。
+     * 
+     * 
      * @param in the stream from which to read
      * @param desc an object describing the stream
      * @exception IOException as thrown by the stream being
@@ -551,6 +702,11 @@ public class JEditorPane extends JTextComponent {
      * Therefore the <code>read</code> operation
      * is then restarted after building a new Reader with the new charset.
      *
+     * <p>
+     *  此方法调用<code> EditorKit </code>启动读取。在抛出<code> ChangedCharSetException </code>的情况下,此异常将包含新的CharSet。
+     * 因此,在使用新的字符集构建新的Reader之后,重新启动<code> read </code>操作。
+     * 
+     * 
      * @param in the inputstream to use
      * @param doc the document to load
      *
@@ -600,11 +756,17 @@ public class JEditorPane extends JTextComponent {
 
     /**
      * Loads a stream into the text document model.
+     * <p>
+     * 将流装载到文本文档模型中。
+     * 
      */
     class PageLoader extends SwingWorker<URL, Object> {
 
         /**
          * Construct an asynchronous page loader.
+         * <p>
+         *  构造异步页面加载器。
+         * 
          */
         PageLoader(Document doc, InputStream in, URL old, URL page) {
             this.in = in;
@@ -617,6 +779,9 @@ public class JEditorPane extends JTextComponent {
          * Try to load the document, then scroll the view
          * to the reference (if specified).  When done, fire
          * a page property change event.
+         * <p>
+         *  尝试加载文档,然后将视图滚动到引用(如果指定)。完成后,触发网页媒体资源更改事件。
+         * 
          */
         protected URL doInBackground() {
             boolean pageLoaded = false;
@@ -684,16 +849,25 @@ public class JEditorPane extends JTextComponent {
 
         /**
          * The stream to load the document with
+         * <p>
+         *  用于加载文档的流
+         * 
          */
         InputStream in;
 
         /**
          * URL of the old page that was replaced (for the property change event)
+         * <p>
+         *  已替换的旧页面的网址(对于属性更改事件)
+         * 
          */
         URL old;
 
         /**
          * URL of the page being loaded (for the property change event)
+         * <p>
+         *  正在加载的网页的网址(对于属性更改事件)
+         * 
          */
         URL page;
 
@@ -701,6 +875,9 @@ public class JEditorPane extends JTextComponent {
          * The Document instance to load into. This is cached in case a
          * new Document is created between the time the thread this is created
          * and run.
+         * <p>
+         *  要加载到的文档实例。这将被缓存,以防在创建和运行线程之间创建新的文档。
+         * 
          */
         Document doc;
     }
@@ -722,6 +899,14 @@ public class JEditorPane extends JTextComponent {
      * the <code>Document.StreamDescriptionProperty</code> so that relative
      * URL's can be properly resolved.
      *
+     * <p>
+     *  获取给定网址的流,即将通过<code> setPage </code>方法加载。默认情况下,这只是打开URL并返回流。这可以重新实现,以做有用的事情,如从缓存中读取流,监视流的进度等。
+     * <p>
+     *  这个方法应该具有建立内容类型的副作用,因此设置适当的<code> EditorKit </code>来加载流。
+     * <p>
+     *  如果该流是http连接,则将遵循重定向,并且所得到的URL将被设置为<code> Document.StreamDescriptionProperty </code>,以便可以正确地解析相对URL。
+     * 
+     * 
      * @param page  the URL of the page
      */
     protected InputStream getStream(URL page) throws IOException {
@@ -739,6 +924,9 @@ public class JEditorPane extends JTextComponent {
             /*
              * In the case of a redirect, we want to actually change the URL
              * that was input to the new, redirected URL
+             * <p>
+             *  在重定向的情况下,我们希望实际更改输入到新的重定向网址的网址
+             * 
              */
             if (redirect) {
                 String loc = conn.getHeaderField("Location");
@@ -773,6 +961,9 @@ public class JEditorPane extends JTextComponent {
 
     /**
      * Handle URL connection properties (most notably, content type).
+     * <p>
+     *  处理URL连接属性(最显着的是内容类型)。
+     * 
      */
     private void handleConnectionProperties(URLConnection conn) {
         if (pageProperties == null) {
@@ -824,6 +1015,12 @@ public class JEditorPane extends JTextComponent {
      * This method will have no effect if the component
      * is not visible.
      *
+     * <p>
+     * 将视图滚动到给定的参考位置(即,正在显示的URL的<code> UL.getRef </code>方法返回的值)。默认情况下,此方法仅知道如何在HTMLDocument中查找引用。
+     * 实现调用<code> scrollRectToVisible </code>方法来完成实际的滚动。如果对于HTML以外的文档类型需要滚动到参考位置,则应重新实现此方法。
+     * 如果组件不可见,此方法将不起作用。
+     * 
+     * 
      * @param reference the named location to scroll to
      */
     public void scrollToReference(String reference) {
@@ -862,6 +1059,10 @@ public class JEditorPane extends JTextComponent {
      * will return <code>null</code>, and relative URL's will not be
      * resolved.
      *
+     * <p>
+     *  获取显示的当前URL。如果在创建文档时未指定URL,则会返回<code> null </code>,相对URL将无法解析。
+     * 
+     * 
      * @return the URL, or <code>null</code> if none
      */
     public URL getPage() {
@@ -871,6 +1072,10 @@ public class JEditorPane extends JTextComponent {
     /**
      * Sets the current URL being displayed.
      *
+     * <p>
+     *  设置显示的当前URL。
+     * 
+     * 
      * @param url the URL for display
      * @exception IOException for a <code>null</code> or invalid URL
      *          specification
@@ -886,6 +1091,10 @@ public class JEditorPane extends JTextComponent {
     /**
      * Gets the class ID for the UI.
      *
+     * <p>
+     *  获取UI的类ID。
+     * 
+     * 
      * @return the string "EditorPaneUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -898,6 +1107,10 @@ public class JEditorPane extends JTextComponent {
      * Creates the default editor kit (<code>PlainEditorKit</code>) for when
      * the component is first created.
      *
+     * <p>
+     *  创建组件首次创建时的默认编辑器工具包(<code> PlainEditorKit </code>)。
+     * 
+     * 
      * @return the editor kit
      */
     protected EditorKit createDefaultEditorKit() {
@@ -909,6 +1122,10 @@ public class JEditorPane extends JTextComponent {
      * <code>createDefaultEditorKit</code> is called to set up a default
      * if necessary.
      *
+     * <p>
+     *  获取当前安装的工具箱以处理内容。如果需要,调用<code> createDefaultEditorKit </code>设置默认值。
+     * 
+     * 
      * @return the editor kit
      */
     public EditorKit getEditorKit() {
@@ -925,6 +1142,10 @@ public class JEditorPane extends JTextComponent {
      * defined to be the type associated with the
      * currently installed <code>EditorKit</code>.
      *
+     * <p>
+     *  获取此编辑器当前设置要处理的内容类型。这被定义为与当前安装的<code> EditorKit </code>相关联的类型。
+     * 
+     * 
      * @return the content type, <code>null</code> if no editor kit set
      */
     public final String getContentType() {
@@ -952,6 +1173,18 @@ public class JEditorPane extends JTextComponent {
      * will be loaded using the <code>EditorKit</code> registered
      * for plain text, <code>text/plain</code>.
      *
+     * <p>
+     *  设置此编辑器处理的内容类型。
+     * 如果可以成功找到编辑器工具包,则调用<code> getEditorKitForContentType </code>,然后<code> setEditorKit </code>。
+     * 这是最方便的方法,可以用来替代直接调用<code> setEditorKit </code>。
+     * <p>
+     * 如果有一个指定为内容类型规范的参数的字符集定义,则在使用关联的<code> EditorKit </code>加载输入流时将使用该字符集定义。
+     * 例如,如果类型指定为<code> text / html; charset = EUC-JP </code>将使用<code> EditorKit </code>注册<code> text / html
+     *  </code>加载内容并将读取器提供给<code> EditorKit </code>将unicode加载到文档中将使用<code> EUC-JP </code>字符集转换为unicode。
+     * 如果有一个指定为内容类型规范的参数的字符集定义,则在使用关联的<code> EditorKit </code>加载输入流时将使用该字符集定义。
+     * 如果不能识别类型,将使用注册为纯文本<code> text / plain </code>的<code> EditorKit </code>加载内容。
+     * 
+     * 
      * @param type the non-<code>null</code> mime type for the content editing
      *   support
      * @see #getContentType
@@ -988,6 +1221,9 @@ public class JEditorPane extends JTextComponent {
     /**
      * This method gets the charset information specified as part
      * of the content type in the http header information.
+     * <p>
+     *  此方法获取在http头信息中指定为内容类型的一部分的字符集信息。
+     * 
      */
     private void setCharsetFromContentTypeParameters(String paramlist) {
         String charset;
@@ -1039,6 +1275,14 @@ public class JEditorPane extends JTextComponent {
      * to be called on behalf of the caller to ensure integrity
      * of the internal state.</em>
      *
+     * <p>
+     *  设置当前安装的用于处理内容的工具包。这是用于建立编辑器的内容类型的bound属性。任何旧套件首先卸载,然后如果套件是非<code> null </code>,则安装新套件,并为其创建默认文档。
+     * 当调用<code> setEditorKit </code>时,总会触发<code> PropertyChange </code>事件("editorKit"。
+     * <p>
+     *  <em>注意：这有改变模型的副作用,因为<code> EditorKit </code>是如何建模特定类型的内容的源。
+     * 此方法将导致代表调用者调用<code> setDocument </code>以确保内部状态的完整性。</em>。
+     * 
+     * 
      * @param kit the desired editor behavior
      * @see #getEditorKit
      * @beaninfo
@@ -1076,6 +1320,15 @@ public class JEditorPane extends JTextComponent {
      * be reimplemented to use the Java Activation
      * Framework, for example.
      *
+     * <p>
+     * 获取用于指定类型内容的编辑器工具包。当请求的类型与当前安装的类型不匹配时,将调用此方法。
+     * 如果组件没有为给定类型注册<code> EditorKit </code>,它将尝试从默认的<code> EditorKit </code>注册表中创建一个<code> EditorKit </code>
+     * 。
+     * 获取用于指定类型内容的编辑器工具包。当请求的类型与当前安装的类型不匹配时,将调用此方法。如果失败,则使用<code> PlainEditorKit </code>,假设所有文本文档都可以表示为纯文本。
+     * <p>
+     *  此方法可以重新实现以使用其他类型的注册表。例如,可以重新实现以使用Java激活框架。
+     * 
+     * 
      * @param type the non-<code>null</code> content type
      * @return the editor kit
      */
@@ -1102,6 +1355,11 @@ public class JEditorPane extends JTextComponent {
      * with <code>createEditorKitForContentType</code> to install handlers for
      * content types with a look-and-feel bias.
      *
+     * <p>
+     *  直接设置用于给定类型的编辑器工具包。
+     *  look-and-feel实现可以结合使用<code> createEditorKitForContentType </code>来为内容类型安装具有外观感觉偏差的处理程序。
+     * 
+     * 
      * @param type the non-<code>null</code> content type
      * @param k the editor kit to be set
      */
@@ -1122,6 +1380,11 @@ public class JEditorPane extends JTextComponent {
      * attributes currently defined for input.  If the component is not
      * editable, beep and return.
      *
+     * <p>
+     *  用由给定字符串表示的新内容替换当前选择的内容。如果没有选择,这相当于给定文本的插入。如果没有替换文本(即内容字符串为空或<code> null </code>),则相当于删除当前选择。
+     * 替换文本将具有当前为输入定义的属性。如果组件不可编辑,蜂鸣和返回。
+     * 
+     * 
      * @param content  the content to replace the selection with.  This
      *   value can be <code>null</code>
      */
@@ -1177,6 +1440,14 @@ public class JEditorPane extends JTextComponent {
      * Once a prototype <code>EditorKit</code> instance is successfully
      * located, it is cloned and the clone is returned.
      *
+     * <p>
+     * 从编辑器工具箱的默认注册表创建给定类型的处理程序。如有必要,将创建注册表。如果注册的类尚未加载,则尝试动态加载给定类型的工具箱的原型。
+     * 如果类型是用<code> ClassLoader </code>注册的,那么<code> ClassLoader </code>将用于加载原型。
+     * 如果没有注册的<code> ClassLoader </code>,则<code> Class.forName </code>将用于加载原型。
+     * <p>
+     *  成功定位原型<code> EditorKit </code>实例后,将对其进行克隆并返回克隆。
+     * 
+     * 
      * @param type the content type
      * @return the editor kit, or <code>null</code> if there is nothing
      *   registered for the given type
@@ -1222,6 +1493,11 @@ public class JEditorPane extends JTextComponent {
      * <code>EditorKit</code> will be loaded with <code>Class.forName</code>
      * when registered with this method.
      *
+     * <p>
+     *  建立<code> type </code>到<code> classname </code>的默认绑定。该类将在以后实际需要时动态加载,并且可以在尝试使用之前安全地更改,以避免加载不需要的类。
+     * 当使用此方法注册时,原型<code> EditorKit </code>将加载<code> Class.forName </code>。
+     * 
+     * 
      * @param type the non-<code>null</code> content type
      * @param classname the class to load later
      */
@@ -1238,6 +1514,11 @@ public class JEditorPane extends JTextComponent {
      * and can be safely changed
      * before attempted uses to avoid loading unwanted classes.
      *
+     * <p>
+     *  建立<code> type </code>到<code> classname </code>的默认绑定。
+     * 该类将在实际需要时使用给定的<code> ClassLoader </code>动态加载,并且可以在尝试使用之前安全地更改,以避免加载不需要的类。
+     * 
+     * 
      * @param type the non-<code>null</code> content type
      * @param classname the class to load later
      * @param loader the <code>ClassLoader</code> to use to load the name
@@ -1252,6 +1533,10 @@ public class JEditorPane extends JTextComponent {
      * Returns the currently registered <code>EditorKit</code>
      * class name for the type <code>type</code>.
      *
+     * <p>
+     *  返回<code>类型</code>类型的当前注册的<code> EditorKit </code>类名称。
+     * 
+     * 
      * @param type  the non-<code>null</code> content type
      *
      * @since 1.3
@@ -1284,6 +1569,9 @@ public class JEditorPane extends JTextComponent {
      * is done this way instead of via a static as the static is only
      * called once when running in plugin resulting in the entries only
      * appearing in the first applet.
+     * <p>
+     * 这是在每次访问注册表时调用。加载是这样做的,而不是通过静态,因为静态只是在插件运行时调用一次,导致条目只出现在第一个小程序中。
+     * 
      */
     private static void loadDefaultKitsIfNecessary() {
         if (SwingUtilities.appContextGet(kitTypeRegistryKey) == null) {
@@ -1326,6 +1614,12 @@ public class JEditorPane extends JTextComponent {
      * shrink down to their minimum size and then be laid out at
      * their minimum size, refusing to shrink any further.
      *
+     * <p>
+     *  返回<code> JEditorPane </code>的首选大小。 <code> JEditorPane </code>的首选大小与超类的首选大小稍有不同。
+     * 如果视口的大小小于组件的最小大小,则跟踪宽度或高度的可滚动定义将变为false。默认的视口布局将给出首选的大小,这在滚动条正在跟踪的情况下是不需要的。
+     * 在这种情况下,将<em>正常</em>首选大小调整为最小大小。这允许像HTML表这样的东西缩小到它们的最小尺寸,然后以最小尺寸布局,拒绝进一步缩小。
+     * 
+     * 
      * @return a <code>Dimension</code> containing the preferred size
      */
     public Dimension getPreferredSize() {
@@ -1397,6 +1691,23 @@ public class JEditorPane extends JTextComponent {
      * would be replaced after it was initialized with the contents of the
      * string.
      *
+     * <p>
+     *  将此<code> TextComponent </code>的文本设置为指定的内容,预期为此编辑器的内容类型的格式。
+     * 例如,如果类型设置为<code> text / html </code>,则该字符串应按HTML指定。
+     * <p>
+     * 这是实现删除当前文档的内容,并使用当前的<code> EditorKit </code>解析给定的字符串来替换它们。这通过不改变模型,同时支持当前在该组件上设置的内容类型来给出超类的语义。
+     * 假设先前的内容相对较小,并且先前的内容没有副作用。这两个假设都可能被违反,并导致不良的结果。为避免这种情况,请创建一个新文档<code> getEditorKit()。
+     * createDefaultDocument()</code>,并将现有的<code> Document </code>替换为新的。您可以放心,以前的<code>文档</code>不会有任何延迟状态。
+     * <ol>
+     * <li>
+     *  将现有模型留在原处意味着旧视图将被删除,并且创建新视图,其中替换文档将避免旧视图的拆除。
+     * <li>
+     *  某些格式(如HTML)可以在文档中安装可能影响未来内容的内容。 HTML可以嵌入会影响下一个意外安装的内容的样式信息。
+     * </ol>
+     * <p>
+     *  使用字符串加载此组件的另一种方法是创建一个StringReader并调用read方法。在这种情况下,模型将在用字符串的内容初始化之后被替换。
+     * 
+     * 
      * @param t the new text to be set; if <code>null</code> the old
      *    text will be deleted
      * @see #getText
@@ -1428,6 +1739,11 @@ public class JEditorPane extends JTextComponent {
      * This is implemented to call <code>JTextComponent.write</code> with
      * a <code>StringWriter</code>.
      *
+     * <p>
+     * 根据此编辑器的内容类型返回此<code> TextComponent </code>中包含的文本。如果在尝试检索文本时抛出异常,将返回<code> null </code>。
+     * 这被实现为用<code> StringWriter </code>调用<code> JTextComponent.write </code>。
+     * 
+     * 
      * @return the text
      * @see #setText
      */
@@ -1449,6 +1765,10 @@ public class JEditorPane extends JTextComponent {
      * Returns true if a viewport should always force the width of this
      * <code>Scrollable</code> to match the width of the viewport.
      *
+     * <p>
+     *  如果视口应始终强制此<code> Scrollable </code>的宽度匹配视口的宽度,则返回true。
+     * 
+     * 
      * @return true if a viewport should force the Scrollables width to
      * match its own, false otherwise
      */
@@ -1471,6 +1791,10 @@ public class JEditorPane extends JTextComponent {
      * Returns true if a viewport should always force the height of this
      * <code>Scrollable</code> to match the height of the viewport.
      *
+     * <p>
+     *  如果视口应始终强制此<code> Scrollable </code>的高度匹配视口的高度,则返回true。
+     * 
+     * 
      * @return true if a viewport should force the
      *          <code>Scrollable</code>'s height to match its own,
      *          false otherwise
@@ -1498,6 +1822,10 @@ public class JEditorPane extends JTextComponent {
      * See <code>readObject</code> and <code>writeObject</code> in
      * <code>JComponent</code> for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅<code> readComponent </code>中的<code> readObject </code>和<code> writeObject </code>
+     * 。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -1516,6 +1844,9 @@ public class JEditorPane extends JTextComponent {
 
     /**
      * Current content binding of the editor.
+     * <p>
+     *  编辑器的当前内容绑定。
+     * 
      */
     private EditorKit kit;
     private boolean isUserSetEditorKit;
@@ -1527,11 +1858,17 @@ public class JEditorPane extends JTextComponent {
 
     /**
      * Table of registered type handlers for this editor.
+     * <p>
+     *  此编辑器的注册类型处理程序的表。
+     * 
      */
     private Hashtable<String, EditorKit> typeHandlers;
 
     /*
      * Private AppContext keys for this class's static variables.
+     * <p>
+     *  这个类的静态变量的私有AppContext键。
+     * 
      */
     private static final Object kitRegistryKey =
         new StringBuffer("JEditorPane.kitRegistry");
@@ -1541,6 +1878,8 @@ public class JEditorPane extends JTextComponent {
         new StringBuffer("JEditorPane.kitLoaderRegistry");
 
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -1556,6 +1895,14 @@ public class JEditorPane extends JTextComponent {
      * it set the client {@link #putClientProperty property} with this name
      * to <code>Boolean.TRUE</code>.
      *
+     * <p>
+     *  用于指示是否为客户端属性的键
+     * <a href="http://www.w3.org/TR/CSS21/syndata.html#length-units">
+     *  w3c兼容</a>长度单位用于html呈现。
+     * <p>
+     *  默认情况下不启用;以使其能够将此名称的客户端{@link #putClientProperty property}设置为<code> Boolean.TRUE </code>。
+     * 
+     * 
      * @since 1.5
      */
     public static final String W3C_LENGTH_UNITS = "JEditorPane.w3cLengthUnits";
@@ -1570,6 +1917,12 @@ public class JEditorPane extends JTextComponent {
      * to enable it set the client {@link #putClientProperty property} with
      * this name to <code>Boolean.TRUE</code>.
      *
+     * <p>
+     *  客户端属性的键,用于指示在样式文本中未指定字体或前景色时是否使用组件的默认字体和前景色。
+     * <p>
+     *  默认值取决于外观和感觉;以使其能够将此名称的客户端{@link #putClientProperty property}设置为<code> Boolean.TRUE </code>。
+     * 
+     * 
      * @since 1.5
      */
     public static final String HONOR_DISPLAY_PROPERTIES = "JEditorPane.honorDisplayProperties";
@@ -1584,6 +1937,11 @@ public class JEditorPane extends JTextComponent {
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     * 返回此<code> JEditorPane </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JEditorPane</code>
      */
     protected String paramString() {
@@ -1609,6 +1967,11 @@ public class JEditorPane extends JTextComponent {
      * AccessibleJEditorPane.
      * A new AccessibleJEditorPane instance is created if necessary.
      *
+     * <p>
+     *  获取与此JEditorPane关联的AccessibleContext。对于编辑器窗格,AccessibleContext采用AccessibleJEditorPane的形式。
+     * 如果需要,将创建一个新的AccessibleJEditorPane实例。
+     * 
+     * 
      * @return an AccessibleJEditorPane that serves as the
      *         AccessibleContext of this JEditorPane
      */
@@ -1639,6 +2002,12 @@ public class JEditorPane extends JTextComponent {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现了对<code> JEditorPane </code>类的辅助功能支持。它提供了适用于编辑器窗格用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class AccessibleJEditorPane extends AccessibleJTextComponent {
 
@@ -1647,6 +2016,11 @@ public class JEditorPane extends JTextComponent {
          * property isn't set, returns the content type of this
          * <code>JEditorPane</code> instead (e.g. "plain/text", "html/text").
          *
+         * <p>
+         *  获取此对象的accessibleDescription属性。
+         * 如果未设置此属性,则会返回此<code> JEditorPane </code>的内容类型(例如"plain / text","html / text")。
+         * 
+         * 
          * @return the localized description of the object; <code>null</code>
          *      if this object does not have a description
          *
@@ -1668,6 +2042,10 @@ public class JEditorPane extends JTextComponent {
         /**
          * Gets the state set of this object.
          *
+         * <p>
+         *  获取此对象的状态集。
+         * 
+         * 
          * @return an instance of AccessibleStateSet describing the states
          * of the object
          * @see AccessibleStateSet
@@ -1693,6 +2071,13 @@ public class JEditorPane extends JTextComponent {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 这个类提供对<code> AccessibleHypertext </code>的支持,并且用于在<code> JEditorPane </code>中安装的<code> EditorKit </code>
+     * 是<code> HTMLEditorKit </code>代码>。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class AccessibleJEditorPaneHTML extends AccessibleJEditorPane {
 
@@ -1710,6 +2095,10 @@ public class JEditorPane extends JTextComponent {
         /**
          * Returns the number of accessible children of the object.
          *
+         * <p>
+         *  返回对象的可访问子项数。
+         * 
+         * 
          * @return the number of accessible children of the object.
          */
         public int getAccessibleChildrenCount() {
@@ -1726,6 +2115,10 @@ public class JEditorPane extends JTextComponent {
          * of an Accessible child is at index 0, the second child is at index 1,
          * and so on.
          *
+         * <p>
+         *  返回对象的指定Accessible子项。可访问对象的可访问子对象是基于零的,因此可访问子对象的第一个子对象位于索引0,第二个子对象位于索引1,依此类推。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the Accessible child of the object
          * @see #getAccessibleChildrenCount
@@ -1742,6 +2135,10 @@ public class JEditorPane extends JTextComponent {
          * Returns the Accessible child, if one exists, contained at the local
          * coordinate Point.
          *
+         * <p>
+         *  返回Accessible child(如果存在)包含在本地坐标Point。
+         * 
+         * 
          * @param p The point relative to the coordinate system of this object.
          * @return the Accessible, if it exists, at the specified location;
          * otherwise null
@@ -1773,6 +2170,11 @@ public class JEditorPane extends JTextComponent {
      * there is an HTML document being displayed in this
      * <code>JEditorPane</code>.
      *
+     * <p>
+     *  AccessibleJEditorPaneHTML.getAccessibleText </code>返回的内容。
+     * 
+     *  提供对<code> AccessibleHypertext </code>的支持,以防在此<code> JEditorPane </code>中显示一个HTML文档。
+     * 
      */
     protected class JEditorPaneAccessibleHypertextSupport
     extends AccessibleJEditorPane implements AccessibleHypertext {
@@ -1789,6 +2191,10 @@ public class JEditorPane extends JTextComponent {
              * changed, this method returns whether this Link is valid
              * anymore (with respect to the document it references).
              *
+             * <p>
+             *  由于与链接相关联的文档可能已更改,此方法将返回此链接是否再次有效(相对于其引用的文档)。
+             * 
+             * 
              * @return a flag indicating whether this link is still valid with
              *         respect to the AccessibleHypertext it belongs to
              */
@@ -1802,6 +2208,10 @@ public class JEditorPane extends JTextComponent {
              * "default" action of this LINK object (e.g. in an HTML imagemap).
              * In general, links will have only one AccessibleAction in them.
              *
+             * <p>
+             * 返回此链接中可用的可用操作数如果有多个,第一个不被视为此LINK对象的"默认"操作(例如在HTML图像映射中)。一般来说,链接中只有一个AccessibleAction。
+             * 
+             * 
              * @return the zero-based number of Actions in this object
              */
             public int getAccessibleActionCount() {
@@ -1811,6 +2221,10 @@ public class JEditorPane extends JTextComponent {
             /**
              * Perform the specified Action on the object
              *
+             * <p>
+             *  对对象执行指定的Action
+             * 
+             * 
              * @param i zero-based index of actions
              * @return true if the the action was performed; else false.
              * @see #getAccessibleActionCount
@@ -1834,6 +2248,10 @@ public class JEditorPane extends JTextComponent {
              * within the document associated with the element
              * which contains this link.
              *
+             * <p>
+             *  返回此特定链接操作的String描述。返回的字符串是与包含此链接的元素相关联的文档中的文本。
+             * 
+             * 
              * @param i zero-based index of the actions
              * @return a String description of the action
              * @see #getAccessibleActionCount
@@ -1856,6 +2274,10 @@ public class JEditorPane extends JTextComponent {
             /**
              * Returns a URL object that represents the link.
              *
+             * <p>
+             *  返回表示链接的网址对象。
+             * 
+             * 
              * @param i zero-based index of the actions
              * @return an URL representing the HTML link itself
              * @see #getAccessibleActionCount
@@ -1891,6 +2313,13 @@ public class JEditorPane extends JTextComponent {
              *   &lt;a HREF="#top"&gt;&lt;img src="top-hat.gif" alt="top hat"&gt;&lt;/a&gt;
              * this might return the object ImageIcon("top-hat.gif", "top hat");
              *
+             * <p>
+             *  返回表示链接锚点的对象,适用于该链接。例如。从HTML：<a href="http://www.sun.com/access">辅助功能</a>此方法将返回一个包含文本"辅助功能"的字符串。
+             * 
+             *  类似地,从此HTML：&lt; a HREF ="#top"&gt;&lt; img src ="top-hat.gif"alt ="top hat"&gt;&lt; / a&这可能返回对象Image
+             * Icon("top-hat.gif","top hat");。
+             * 
+             * 
              * @param i zero-based index of the actions
              * @return an Object representing the hypertext anchor
              * @see #getAccessibleActionCount
@@ -1904,6 +2333,10 @@ public class JEditorPane extends JTextComponent {
              * Get the index with the hypertext document at which this
              * link begins
              *
+             * <p>
+             *  获取与此链接开始的超文本文档的索引
+             * 
+             * 
              * @return index of start of link
              */
             public int getStartIndex() {
@@ -1914,6 +2347,10 @@ public class JEditorPane extends JTextComponent {
              * Get the index with the hypertext document at which this
              * link ends
              *
+             * <p>
+             *  获取与此链接结束的超文本文档的索引
+             * 
+             * 
              * @return index of end of link
              */
             public int getEndIndex() {
@@ -1939,6 +2376,9 @@ public class JEditorPane extends JTextComponent {
 
         /**
          * Build the private table mapping links to locations in the text
+         * <p>
+         *  构建私有表映射链接到文本中的位置
+         * 
          */
         private void buildLinkTable() {
             hyperlinks.removeAllElements();
@@ -1966,6 +2406,9 @@ public class JEditorPane extends JTextComponent {
 
         /**
          * Make one of these puppies
+         * <p>
+         *  做一个这些小狗
+         * 
          */
         public JEditorPaneAccessibleHypertextSupport() {
             hyperlinks = new LinkVector();
@@ -1988,6 +2431,10 @@ public class JEditorPane extends JTextComponent {
         /**
          * Returns the number of links within this hypertext doc.
          *
+         * <p>
+         *  返回此超文本文档中的链接数。
+         * 
+         * 
          * @return number of links in this hypertext doc.
          */
         public int getLinkCount() {
@@ -2002,6 +2449,10 @@ public class JEditorPane extends JTextComponent {
          * is associated with this character index, or -1 if there
          * is no hyperlink associated with this index.
          *
+         * <p>
+         *  将索引返回到与此字符索引相关联的超链接数组,如果没有与此索引相关联的超链接,则返回-1。
+         * 
+         * 
          * @param  charIndex index within the text
          * @return index into the set of hyperlinks for this hypertext doc.
          */
@@ -2029,6 +2480,10 @@ public class JEditorPane extends JTextComponent {
          * index.  If there is no hyperlink at this index, it returns
          * null.
          *
+         * <p>
+         *  将索引返回到索引的超链接数组。如果此索引处没有超链接,则返回null。
+         * 
+         * 
          * @param linkIndex into the set of hyperlinks for this hypertext doc.
          * @return string representation of the hyperlink
          */
@@ -2047,6 +2502,10 @@ public class JEditorPane extends JTextComponent {
          * Returns the contiguous text within the document that
          * is associated with this hyperlink.
          *
+         * <p>
+         * 返回文档中与此超链接相关联的连续文本。
+         * 
+         * 
          * @param linkIndex into the set of hyperlinks for this hypertext doc.
          * @return the contiguous text sharing the link at this index
          */
@@ -2078,6 +2537,10 @@ public class JEditorPane extends JTextComponent {
          * kit.  The default is to have the UI produce the
          * factory, so this method has no implementation.
          *
+         * <p>
+         *  获取适合于生产此套件生产的任何型号视图的工厂。默认是让UI产生工厂,所以这个方法没有实现。
+         * 
+         * 
          * @return the view factory
          */
         public ViewFactory getViewFactory() {
@@ -2088,6 +2551,10 @@ public class JEditorPane extends JTextComponent {
          * Creates a view from the given structural element of a
          * document.
          *
+         * <p>
+         *  从文档的给定结构元素创建视图。
+         * 
+         * 
          * @param elem  the piece of the document to build a view of
          * @return the view
          * @see View
@@ -2119,6 +2586,16 @@ public class JEditorPane extends JTextComponent {
         /**
          * Paragraph for representing plain-text lines that support
          * bidirectional text.
+         * <p>
+         *  if((i18nFlag！= null)&& i18nFlag.equals(Boolean.TRUE)){//构建一个支持bidi的视图return createI18N(elem); } else
+         *  {return new WrappedPlainView(elem); }}。
+         * 
+         *  查看createI18N(Element elem){String kind = elem.getName(); if(kind！= null){if(kind.equals(AbstractDocument.ContentElementName)){return new PlainParagraph(elem); }
+         *  else if(kind.equals(AbstractDocument.ParagraphElementName)){return new BoxView(elem,View.Y_AXIS); }}
+         *  return null; }}。
+         * 
+         *  / **用于表示支持双向文本的纯文本行的段落。
+         * 
          */
         static class PlainParagraph extends javax.swing.text.ParagraphView {
 
@@ -2142,6 +2619,9 @@ public class JEditorPane extends JTextComponent {
             /**
              * Fetch the constraining span to flow against for
              * the given child index.
+             * <p>
+             *  获取针对给定子索引的约束范围。
+             * 
              */
             public int getFlowSpan(int index) {
                 Component c = getContainer();
@@ -2177,6 +2657,9 @@ public class JEditorPane extends JTextComponent {
              * of the model, gives the logical child views access to the
              * view hierarchy, and calculates a preferred span.  It doesn't
              * do any rendering, layout, or model/view translation.
+             * <p>
+             *  此类可用于表示流的逻辑视图。它保持孩子更新以反映模型的状态,给予逻辑子视图访问视图层次结构,并计算首选跨度。它不做任何渲染,布局或模型/视图转换。
+             * 
              */
             static class LogicalView extends CompositeView {
 
@@ -2225,6 +2708,10 @@ public class JEditorPane extends JTextComponent {
                  * if they fit without breaking) and then execute the
                  * superclass behavior.
                  *
+                 * <p>
+                 *  将DocumentEvent转发给给定的子视图。这被实现为将子视图重新显示为逻辑视图(如果它们适合而没有断开,则子项可能已经由流中的行进行了父项),然后执行超类行为。
+                 * 
+                 * 
                  * @param v the child view to forward the event to.
                  * @param e the change information from the associated document
                  * @param a the current allocation of the view
@@ -2279,6 +2766,10 @@ public class JEditorPane extends JTextComponent {
  * keys are converted to lower case, vals are left as is....
  *
  * author Dave Brown
+ * <p>
+ * 敏感的：从一个字符串like：'timeout = 15,max = 5'创建一个字符串数组：{{"timeout","15"},{"max","5"}}从一个像： ="FuzzFace"Foo ="B
+ * iz Bar Baz"'创建一个像(没有字面引号)：{{"basic",null},{"realm","FuzzFace"} {"foo","Biz Bar Baz" }}键转换为小写,vals保留为.
+ * ...。
  */
 
 

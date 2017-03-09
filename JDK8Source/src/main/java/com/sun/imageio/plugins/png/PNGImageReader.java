@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -110,6 +111,9 @@ public class PNGImageReader extends ImageReader {
      * one is derived from the ASCII values of its 4-character name.  For
      * example, IHDR_TYPE is calculated as follows:
      *            ('I' << 24) | ('H' << 16) | ('D' << 8) | 'R'
+     * <p>
+     *  注意：以下块类型常量是自动生成的。每一个都是从它的4个字符的名称的ASCII值导出的。例如,IHDR_TYPE计算如下：('I'<< 24)| ('H'<< 16)| ('D'<< 8)| 'R'
+     * 
      */
 
     // Critical chunks
@@ -418,6 +422,9 @@ public class PNGImageReader extends ImageReader {
          * hIST chunk is specified in bytes and
          * hIST chunk consists of 2 byte elements
          * (so we expect length is even).
+         * <p>
+         *  hIST块以字节指定,hIST块由2字节元素组成(因此我们预期长度为偶数)。
+         * 
          */
         metadata.hIST_histogram = new char[chunkLength/2];
         stream.readFully(metadata.hIST_histogram,
@@ -658,6 +665,10 @@ public class PNGImageReader extends ImageReader {
          * ignoreMetadata flag is set, and only if this is not a palette
          * image (in that case, we need to read the metadata to get the
          * tRNS chunk, which is needed for the getImageTypes() method).
+         * <p>
+         *  优化：如果设置了ignoreMetadata标志,我们可以跳过剩余的元数据,并且只有这不是调色板图像(在这种情况下,我们需要读取元数据以获取tRNS块,这是getImageTypes()方法所需要的)
+         * 。
+         * 
          */
         int colorType = metadata.IHDR_colorType;
         if (ignoreMetadata && colorType != PNG_COLOR_PALETTE) {
@@ -1290,6 +1301,10 @@ public class PNGImageReader extends ImageReader {
             * explicitly create the Inflater instance and free its resources
             * when we are done with the InflaterInputStream by calling
             * inf.end();
+            * <p>
+            *  本地(非GC可见)资源。当流被关闭时,这通常隐含地释放。然而,由于InflaterInputStream包装客户端提供的输入流,我们不能关闭它。但应用程序可能需要依靠GC终结来关闭流。
+            * 因此,为了确保及时释放本地资源,当我们通过调用inf.end()完成InflaterInputStream时,我们显式创建Inflater实例并释放它的资源;。
+            * 
             */
             inf = new Inflater();
             is = new InflaterInputStream(is, inf);
@@ -1305,6 +1320,11 @@ public class PNGImageReader extends ImageReader {
              * defined on the level of application, so we will not
              * try to estimate the required amount of the memory and/or
              * handle OOM in any way.
+             * <p>
+             *  NB：PNG规范声明宽度和高度的有效范围是[1,2 ^ 31-1],因此,由于内存限制,我们可能无法为目标映像分配缓冲区。
+             * 
+             * 然而,这种情况的恢复策略应该在应用程序级别上定义,因此我们不会尝试以任何方式估计所需的内存量和/或处理OOM。
+             * 
              */
             theImage = getDestination(param,
                                       getImageTypes(0),
@@ -1459,6 +1479,20 @@ public class PNGImageReader extends ImageReader {
              *
              * In order to avoid this contradiction we need to extend the
              * palette arrays to the limit defined by the bitDepth.
+             * <p>
+             *  PLTE块规范说：
+             * 
+             *  调色板条目的数量不能超过可以在图像比特深度中表示的范围(例如,对于4的比特深度,2 ^ 4 = 16)。允许具有比位深度允许的更少的条目。在这种情况下,在图像数据中找到的任何超出范围的像素值是错误。
+             * 
+             *  http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html#C.PLTE
+             * 
+             *  因此,调色板长度小于2 ^ bitDepth的情况在PNG规格的视图中是合法的。
+             * 
+             *  然而,createIndexed()方法的规范要求调色板长度和可能的调色板条目数(2 ^ bitDepth)的完全相等。
+             * 
+             *  {@link javax.imageio.ImageTypeSpecifier.html#createIndexed}
+             * 
+             *  为了避免这种矛盾,我们需要将调色板数组扩展到由bitDepth定义的限制。
              */
 
             int plength = 1 << bitDepth;
@@ -1568,6 +1602,8 @@ public class PNGImageReader extends ImageReader {
      *
      * After this changes we should override getRawImageType()
      * to return last element of image types list.
+     * <p>
+     * 
      */
     public ImageTypeSpecifier getRawImageType(int imageIndex)
       throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -47,6 +57,11 @@ import com.sun.org.apache.xerces.internal.utils.ObjectFactory;
  * By default, it does no grammar caching; but it provides ways for
  * user applications to do so.
  *
+ * <p>
+ *  <p>此类为用户提供了一种简便的方法来预先分配各种类型的语法。默认情况下,它知道如何预处理外部DTD和模式;它为用户应用程序提供了一种简单的方法来注册知道如何解析其他语法类型的类。
+ * 默认情况下,它不进行语法缓存;但它为用户应用程序提供了这样做的方法。
+ * 
+ * 
  * @author Neil Graham, IBM
  *
  * @version $Id: XMLGrammarPreparser.java,v 1.7 2010-11-01 04:40:10 joehw Exp $
@@ -123,6 +138,10 @@ public class XMLGrammarPreparser {
     /**
      * Constructs a preparser using the specified symbol table.
      *
+     * <p>
+     *  使用指定的符号表构造预分配器。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      */
     public XMLGrammarPreparser (SymbolTable symbolTable) {
@@ -145,6 +164,10 @@ public class XMLGrammarPreparser {
     * facilities for that grammar type.
     * This should be called by the application immediately
     * after creating this object and before initializing any properties/features.
+    * <p>
+    *  注册一种语法类型以使其可以计算。如果第二个参数为null,解析器将使用其内置的设施为该语法类型。这应该在创建此对象之后并在初始化任何属性/特征之前立即由应用程序调用。
+    * 
+    * 
     * @param type   URI identifying the type of the grammar
     * @param loader an object capable of preparsing that type; null if the ppreparser should use built-in knowledge.
     * @return true if successful; false if no built-in knowledge of
@@ -175,6 +198,10 @@ public class XMLGrammarPreparser {
      * XMLInputSource.
      * This method also adds this grammar to the XMLGrammarPool
      *
+     * <p>
+     * 从由XMLInputSource标识的位置解析语法。此方法还将此语法添加到XMLGrammarPool
+     * 
+     * 
      * @param type The type of the grammar to be constructed
      * @param is The XMLInputSource containing this grammar's
      * information
@@ -210,6 +237,10 @@ public class XMLGrammarPreparser {
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception XNIException Thrown if the parser does not support the
@@ -229,6 +260,10 @@ public class XMLGrammarPreparser {
     /**
      * Sets the error handler.
      *
+     * <p>
+     *  设置错误处理程序。
+     * 
+     * 
      * @param errorHandler The error handler.
      */
     public void setErrorHandler(XMLErrorHandler errorHandler) {
@@ -243,6 +278,10 @@ public class XMLGrammarPreparser {
     /**
      * Sets the entity resolver.
      *
+     * <p>
+     *  设置实体解析器。
+     * 
+     * 
      * @param entityResolver The new entity resolver.
      */
     public void setEntityResolver(XMLEntityResolver entityResolver) {
@@ -257,6 +296,9 @@ public class XMLGrammarPreparser {
     /**
      * Sets the grammar pool.
      *
+     * <p>
+     *  设置语法池。
+     * 
      * @param grammarPool The new grammar pool.
      */
     public void setGrammarPool(XMLGrammarPool grammarPool) {

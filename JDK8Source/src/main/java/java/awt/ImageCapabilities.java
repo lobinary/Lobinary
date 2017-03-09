@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,10 @@ package java.awt;
 
 /**
  * Capabilities and properties of images.
+ * <p>
+ *  图像的功能和属性。
+ * 
+ * 
  * @author Michael Martak
  * @since 1.4
  */
@@ -36,6 +41,10 @@ public class ImageCapabilities implements Cloneable {
 
     /**
      * Creates a new object for specifying image capabilities.
+     * <p>
+     *  创建用于指定图像功能的新对象。
+     * 
+     * 
      * @param accelerated whether or not an accelerated image is desired
      */
     public ImageCapabilities(boolean accelerated) {
@@ -46,6 +55,10 @@ public class ImageCapabilities implements Cloneable {
      * Returns <code>true</code> if the object whose capabilities are
      * encapsulated in this <code>ImageCapabilities</code> can be or is
      * accelerated.
+     * <p>
+     *  如果能力被封装在此<code> ImageCapabilities </code>中的对象可以被加速或被加速,则返回<code> true </code>。
+     * 
+     * 
      * @return whether or not an image can be, or is, accelerated.  There are
      * various platform-specific ways to accelerate an image, including
      * pixmaps, VRAM, AGP.  This is the general acceleration method (as
@@ -59,6 +72,10 @@ public class ImageCapabilities implements Cloneable {
      * Returns <code>true</code> if the <code>VolatileImage</code>
      * described by this <code>ImageCapabilities</code> can lose
      * its surfaces.
+     * <p>
+     *  如果此<code> ImageCapabilities </code>描述的<code> VolatileImage </code>可能丢失其表面,则返回<code> true </code>。
+     * 
+     * 
      * @return whether or not a volatile image is subject to losing its surfaces
      * at the whim of the operating system.
      */
@@ -67,6 +84,8 @@ public class ImageCapabilities implements Cloneable {
     }
 
     /**
+    /* <p>
+    /* 
      * @return a copy of this ImageCapabilities object.
      */
     public Object clone() {

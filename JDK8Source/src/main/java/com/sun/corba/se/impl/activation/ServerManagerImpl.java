@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,8 @@ package com.sun.corba.se.impl.activation;
 
 /**
  *
+ * <p>
+ * 
  * @author      Rohit Garg
  * @author      Ken Cavanaugh
  * @author      Hemanth Puttaswamy
@@ -533,6 +536,8 @@ public class ServerManagerImpl extends _ServerManagerImplBase
 
     /** This method is used to obtain the registered ports for an ORB.
     * This is useful for custom Bad server ID handlers in ORBD.
+    * <p>
+    *  这对于ORBD中的自定义错误服务器ID处理程序很有用。
     */
     public ServerLocationPerORB locateServerForORB (int serverId, String orbId)
         throws InvalidORBid, ServerNotRegistered, ServerHeldDown

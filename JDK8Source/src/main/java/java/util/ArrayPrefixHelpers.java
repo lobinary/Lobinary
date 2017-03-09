@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,9 @@ package java.util;
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 import java.util.concurrent.ForkJoinPool;
@@ -40,6 +44,10 @@ import java.util.function.DoubleBinaryOperator;
 /**
  * ForkJoin tasks to perform Arrays.parallelPrefix operations.
  *
+ * <p>
+ *  ForkJoin任务执行Arrays.parallelPrefix操作。
+ * 
+ * 
  * @author Doug Lea
  * @since 1.8
  */
@@ -87,6 +95,15 @@ class ArrayPrefixHelpers {
      * are simple copy/paste/adapt variants of each other.  (The
      * double and int versions differ from long version soley by
      * replacing "long" (with case-matching)).
+     * <p>
+     *  并行前缀(也称为累积,扫描)任务类基于Guy Blelloch的原始算法(http://www.cs.cmu.edu/~scandal/alg/scan.html)：保持除以两个阈值段大小,然后：通过
+     * 1：为每个段创建部分和的树通过2：对于每个段,累积具有左兄弟的偏移。
+     * 
+     *  这个版本提高了FJ框架内的性能,主要是通过允许准备左侧的第二遍继续进行,即使一些右侧第一遍仍然执行。它还组合用于最左边段的第一遍和第二遍,并且跳过用于最右边分段的第一遍(其结果不需要第二遍)。
+     * 它类似地设法避免要求用户通过跟踪第一现有元素用作基础的那些段/子任务来提供用于累积的标识基础。
+     * 
+     * 管理这个需要依赖于在状态/状态的pendingCount中的一些位：CUMULATE,SUMMED和FINISHED。 CUMULATE是主相位。当为假时,段仅计算它们的和。
+     * 当为真时,它们累积数组元素。 CUMULATE在第二遍开始时设置为根,然后向下传播。但是它也可以为具有lo == 0的子树设置较早(树的左脊)。 SUMMED是一个一位加入计数。
      */
 
     // see above

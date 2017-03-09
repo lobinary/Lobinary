@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,11 @@ import java.io.*;
  * the stack, when an end tag is enountered an element is popped
  * of the stack.
  *
+ * <p>
+ *  一堆标签。在解析HTML文档时使用。它和ContentModelStates一起定义了读取文档时解析器的完整状态。
+ * 当遇到一个开始标记时,一个元素被推入堆栈,当一个结束标记被加载时,一个元素被弹出堆栈。
+ * 
+ * 
  * @see Parser
  * @see DTD
  * @see ContentModelState
@@ -56,6 +62,9 @@ class TagStack implements DTDConstants {
 
     /**
      * Construct a stack element.
+     * <p>
+     *  构造一个堆栈元素。
+     * 
      */
     TagStack(TagElement tag, TagStack next) {
         this.tag = tag;
@@ -97,6 +106,9 @@ class TagStack implements DTDConstants {
     /**
      * Return the element that must come next in the
      * input stream.
+     * <p>
+     *  返回输入流中必须位于下一个的元素。
+     * 
      */
     public Element first() {
         return (state != null) ? state.first() : null;
@@ -105,6 +117,9 @@ class TagStack implements DTDConstants {
     /**
      * Return the ContentModel that must be satisfied by
      * what comes next in the input stream.
+     * <p>
+     *  返回ContentModel,它必须满足输入流中接下来的内容。
+     * 
      */
     public ContentModel contentModel() {
         if (state == null) {
@@ -119,6 +134,9 @@ class TagStack implements DTDConstants {
      * the index specified by the parameter is part of
      * the exclusions specified in the DTD for the element
      * currently on the TagStack.
+     * <p>
+     *  如果由参数指定的索引包含的元素是当前在TagStack上的元素的DTD中指定的排除项的一部分,则返回true。
+     * 
      */
     boolean excluded(int elemIndex) {
         return (exclusions != null) && exclusions.get(elem.getIndex());
@@ -129,6 +147,9 @@ class TagStack implements DTDConstants {
      * Advance the state by reducing the given element.
      * Returns false if the element is not legal and the
      * state is not advanced.
+     * <p>
+     *  通过减少给定的元素提前状态。如果元素不合法且状态不高级,则返回false。
+     * 
      */
     boolean advance(Element elem) {
         if ((exclusions != null) && exclusions.get(elem.getIndex())) {
@@ -148,6 +169,9 @@ class TagStack implements DTDConstants {
 
     /**
      * Return true if the current state can be terminated.
+     * <p>
+     *  如果当前状态可以终止,则返回true。
+     * 
      */
     boolean terminate() {
         return (state == null) || state.terminate();
@@ -155,6 +179,8 @@ class TagStack implements DTDConstants {
 
     /**
      * Convert to a string.
+     * <p>
+     *  转换为字符串。
      */
     public String toString() {
         return (next == null) ?

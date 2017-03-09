@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,15 @@ import java.net.URL;
  * and is specified in  {@link javax.xml.bind.Unmarshaller} and
  * {@link javax.xml.bind.Marshaller}.
  *
+ * <p>
+ * <p>
+ *  JAXB 1.0只有默认验证事件处理程序。这是从JAXBContext创建的所有对象的默认处理程序,该对象管理由JAXB 1.0绑定编译器生成的模式派生代码。
+ * 
+ * <p>
+ *  此处理程序会导致解组和验证操作在第一个错误或致命错误上失败。
+ * 
+ * <p>
+ * 
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see javax.xml.bind.Unmarshaller
  * @see javax.xml.bind.Validator
@@ -100,6 +110,10 @@ public class DefaultValidationEventHandler implements ValidationEventHandler {
     /**
      * Calculate a location message for the event
      *
+     * <p>
+     *  在JAXB 2.0或更高版本之后,此处理程序不是JAXB映射类的默认处理程序。
+     * 默认验证事件处理已更改,并在{@link javax.xml.bind.Unmarshaller}和{@link javax.xml.bind.Marshaller}中指定。
+     * 
      */
     private String getLocation(ValidationEvent event) {
         StringBuffer msg = new StringBuffer();

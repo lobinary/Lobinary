@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -76,6 +86,10 @@ import org.xml.sax.SAXException;
  * parser with a document scanner, a dtd scanner, and a validator, as
  * well as a grammar pool.
  *
+ * <p>
+ *  这是Xerces DOM Builder类。它使用带有文档扫描器,dtd扫描器和验证器的抽象DOM解析器,以及语法池。
+ * 
+ * 
  * @author Pavani Mukthipudi, Sun Microsystems Inc.
  * @author Elena Litani, IBM
  * @author Rahul Srivastava, Sun Microsystems Inc.
@@ -165,6 +179,9 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
 
     /**
      * Constructs a DOM Builder using the standard parser configuration.
+     * <p>
+     *  使用标准解析器配置构造DOM构建器。
+     * 
      */
     public DOMParserImpl (XMLParserConfiguration config, String schemaType) {
         this (config);
@@ -192,6 +209,9 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
 
     /**
      * Constructs a DOM Builder using the specified parser configuration.
+     * <p>
+     *  使用指定的解析器配置构造DOM构建器。
+     * 
      */
     public DOMParserImpl (XMLParserConfiguration config) {
         super (config);
@@ -257,6 +277,9 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
 
     /**
      * Constructs a DOM Builder using the specified symbol table.
+     * <p>
+     *  使用指定的符号表构造DOM构建器。
+     * 
      */
     public DOMParserImpl (SymbolTable symbolTable) {
         this (new XIncludeAwareParserConfiguration());
@@ -269,6 +292,9 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
     /**
      * Constructs a DOM Builder using the specified symbol table and
      * grammar pool.
+     * <p>
+     *  使用指定的符号表和语法池构造DOM构建器。
+     * 
      */
     public DOMParserImpl (SymbolTable symbolTable, XMLGrammarPool grammarPool) {
         this (new XIncludeAwareParserConfiguration());
@@ -284,6 +310,10 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
     /**
      * Resets the parser state.
      *
+     * <p>
+     *  重置解析器状态。
+     * 
+     * 
      * @throws SAXException Thrown on initialization error.
      */
     public void reset () {
@@ -321,6 +351,10 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
      * element is the document element) or to terminate the parse early. If
      * the document is being validated when it's loaded the validation
      * happens before the filter is called.
+     * <p>
+     * 当应用程序提供一个过滤器时,解析器将在完成每个<code> Element </code>节点的构造时调用过滤器。过滤器实现可以选择从正在构造的文档中删除元素(除非元素是文档元素)或者提前终止解析。
+     * 如果在加载文档时验证文档,则在调用过滤器之前进行验证。
+     * 
      */
     public LSParserFilter getFilter () {
         return fDOMFilter;
@@ -334,6 +368,10 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
      * element is the document element) or to terminate the parse early. If
      * the document is being validated when it's loaded the validation
      * happens before the filter is called.
+     * <p>
+     *  当应用程序提供一个过滤器时,解析器将在完成每个<code> Element </code>节点的构造时调用过滤器。过滤器实现可以选择从正在构造的文档中删除元素(除非元素是文档元素)或者提前终止解析。
+     * 如果在加载文档时验证文档,则在调用过滤器之前进行验证。
+     * 
      */
     public void setFilter (LSParserFilter filter) {
         fDOMFilter = filter;
@@ -344,6 +382,9 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
 
     /**
      * Set parameters and properties
+     * <p>
+     *  设置参数和属性
+     * 
      */
     public void setParameter (String name, Object value) throws DOMException {
         // set features
@@ -632,6 +673,9 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
 
     /**
      * Look up the value of a feature or a property.
+     * <p>
+     *  查找要素或属性的值。
+     * 
      */
     public Object getParameter (String name) throws DOMException {
         if (name.equalsIgnoreCase (Constants.DOM_COMMENTS)) {
@@ -863,6 +907,11 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
      * <code>DOMConfiguration</code> object and for which at least one value
      * can be set by the application. Note that this list can also contain
      * parameter names defined outside this specification.
+     * <p>
+     *  DOM级别3 CR  - 实验。
+     * 
+     *  此<> DOMConfiguration </code>对象支持的参数列表,并且应用程序可以为其设置至少一个值。注意,此列表还可以包含在此规范之外定义的参数名称。
+     * 
      */
     public DOMStringList getParameterNames () {
         if (fRecognizedParameters == null){
@@ -909,6 +958,9 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
      * If the URI contains a fragment identifier (see section 4.1 in ), the
      * behavior is not defined by this specification.
      *
+     * <p>
+     *  从由URI引用标识的位置解析XML文档。如果URI包含片段标识符(参见第4.1节),则此规范未定义行为。
+     * 
      */
     public Document parseURI (String uri) throws LSException {
 
@@ -967,6 +1019,9 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
      * Parse an XML document from a resource identified by an
      * <code>LSInput</code>.
      *
+     * <p>
+     *  从由<code> LSInput </code>标识的资源解析XML文档。
+     * 
      */
     public Document parse (LSInput is) throws LSException {
 
@@ -1034,6 +1089,12 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
      * and <code>action</code> arguments. When parsing the input stream the
      * context node is used for resolving unbound namespace prefixes.
      *
+     * <p>
+     * 从由<code> LSInput </code>标识的资源中解析XML文档或片段,并将内容插入到现有文档中用<code> contextNode </code>和<code> action </code >
+     * 参数。
+     * 当解析输入流时,上下文节点用于解析未绑定的命名空间前缀。
+     * 
+     * 
      * @param is  The <code>LSInput</code> from which the source
      *   document is to be read.
      * @param cnode  The <code>Node</code> that is used as the context for
@@ -1056,6 +1117,10 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
     /**
      * NON-DOM: convert LSInput to XNIInputSource
      *
+     * <p>
+     *  NON-DOM：将LSInput转换为XNIInputSource
+     * 
+     * 
      * @param is
      * @return
      */
@@ -1103,6 +1168,8 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.ls.LSParser#getAsync()
      */
     public boolean getAsync () {
@@ -1110,6 +1177,8 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.ls.LSParser#getBusy()
      */
     public boolean getBusy () {
@@ -1117,6 +1186,8 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.ls.DOMParser#abort()
      */
     public void abort () {
@@ -1147,6 +1218,10 @@ extends AbstractDOMParser implements LSParser, DOMConfiguration {
      * be followed by the endElement method, with no intervening methods.
      * Overriding the parent to handle DOM_NAMESPACE_DECLARATIONS=false.
      *
+     * <p>
+     *  元素的开始。如果文档通过使用空标签指定start元素,那么startElement方法将立即跟随endElement方法,没有中间方法。
+     * 覆盖父级以处理DOM_NAMESPACE_DECLARATIONS = false。
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs     Additional information that may include infoset augmentations

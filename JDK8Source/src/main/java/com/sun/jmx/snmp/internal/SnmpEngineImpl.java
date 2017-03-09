@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,21 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_LOGGER;
  * is set in the method <CODE>setFactory</CODE>.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此引擎符合RFC 2571.它是SNMP实体(代理,管理器...)中的主要对象。引擎与一个{@link com.sun.jmx.snmp.SnmpEngineId}相关联。
+ * 检索engineId的方式链接到引擎被实例化的方式。有关更多详细信息,请参阅每个<CODE> SnmpEngine </CODE>构造函数。
+ * 引擎由一组子系统{@link com.sun.jmx.snmp.internal.SnmpSubSystem}组成。 <CODE> SNMP </CODE>引擎可以包含：。
+ * ul>
+ *  li>邮件处理子系统：{@link com.sun.jmx.snmp.internal.SnmpMsgProcessingSubSystem} </li> li>安全子系统：{@link com.sun.jmx.snmp.internal.SnmpSecuritySubSystem}
+ *  </li > li>访问控制子系统：{@link com.sun.jmx.snmp.internal.SnmpAccessControlSubSystem} </li>。
+ * /ul>
+ *  P>每个子系统包含一组模型。模型是特定处理的实现(例如：在RFC 2574中定义的基于用户的安全模型是处理认证和隐私的功能元件)。
+ * /P>
+ *  引擎实例化基于工厂。
+ * 此工厂强制实施{@link com.sun.jmx.snmp.SnmpEngineFactory SnmpEngineFactory},在方法<CODE> setFactory </CODE>中设置。
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
+ * 
  * @since 1.5
  */
 public class SnmpEngineImpl implements SnmpEngine, Serializable {
@@ -75,33 +91,54 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
     /**
      * Security level. No authentication, no privacy. Value is 0,
      * as defined in RFC 2572
+     * <p>
+     *  安全级别。没有身份验证,没有隐私。值为0,如RFC 2572中定义
+     * 
      */
     public static final int noAuthNoPriv = 0;
     /**
      * Security level. Authentication, no privacy. Value is 1, as
      * defined in RFC 2572
+     * <p>
+     * 安全级别。认证,没有隐私。值为1,如RFC 2572中定义
+     * 
      */
     public static final int authNoPriv = 1;
     /**
      * Security level. Authentication, privacy. Value is 3,
      * as defined in RFC 2572
+     * <p>
+     *  安全级别。认证,隐私。值为3,如RFC 2572中定义
+     * 
      */
     public static final int authPriv = 3;
     /**
      * Flag that indicates that a report is to be sent. Value is 4, as defined in RFC 2572
+     * <p>
+     *  表示要发送报告的标志。值为4,如RFC 2572中定义
+     * 
      */
     public static final int reportableFlag = 4;
 
     /**
      * Mask used to isolate authentication information within a message flag.
+     * <p>
+     *  用于在消息标志中隔离认证信息的掩码。
+     * 
      */
     public static final int authMask = 1;
     /**
      * Mask used to isolate privacy information within a message flag.
+     * <p>
+     *  用于在消息标志中隔离隐私信息的掩码。
+     * 
      */
     public static final int privMask = 2;
     /**
      * Mask used to isolate authentication and privacy information within a message flag.
+     * <p>
+     *  用于在消息标志内隔离认证和隐私信息的掩码。
+     * 
      */
     public static final int authPrivMask = 3;
 
@@ -123,6 +160,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Gets the engine time in seconds. This is the time from the last reboot.
+     * <p>
+     *  获取引擎时间(以秒为单位)。这是从上次重新启动的时间。
+     * 
+     * 
      * @return The time from the last reboot.
      */
     public synchronized int getEngineTime() {
@@ -145,6 +186,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Gets the engine Id. This is unique for each engine.
+     * <p>
+     *  获取引擎Id。这对于每个引擎是唯一的。
+     * 
+     * 
      * @return The engine Id object.
      */
     public SnmpEngineId getEngineId() {
@@ -153,6 +198,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Gets the Usm key handler.
+     * <p>
+     *  获取Usm键处理程序。
+     * 
+     * 
      * @return The key handler.
      */
     public SnmpUsmKeyHandler getUsmKeyHandler() {
@@ -161,6 +210,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Gets the engine Lcd.
+     * <p>
+     *  获取引擎Lcd。
+     * 
+     * 
      * @return The engine Lcd.
      */
     public SnmpLcd getLcd() {
@@ -168,6 +221,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
     }
     /**
      * Gets the engine boot number. This is the number of time this engine has rebooted. Each time an <CODE>SnmpEngine</CODE> is instantiated, it will read this value in its Lcd, and store back the value incremented by one.
+     * <p>
+     *  获取引擎引导号。这是引擎重新启动的时间。每次实例化一个<CODE> SnmpEngine </CODE>时,它将在其Lcd中读取该值,并将返回值递增1。
+     * 
+     * 
      * @return The engine's number of reboot.
      */
     public int getEngineBoots() {
@@ -183,6 +240,15 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
      * <li> If not, a time based engineID is computed.</li>
      * </ul>
      * This constructor should be called by an <CODE>SnmpEngineFactory</CODE>. Don't call it directly.
+     * <p>
+     *  构造函数。本地配置数据存储被传递到引擎。它将用于存储和检索数据(引擎标识,引擎启动)。 <P>警告：SnmpEngineId的计算如下：
+     * <ul>
+     *  <li>如果提供的lcd文件包含属性"localEngineID",则会使用此属性值。</li>。 <li>如果不是,则传递的engineID不为null,则使用此引擎ID。
+     * </li> <li>如果不是,则计算基于时间的engineID。</li>。
+     * </ul>
+     *  此构造函数应由<CODE> SnmpEngineFactory </CODE>调用。不要直接调用它。
+     * 
+     * 
      * @param fact The factory used to instantiate this engine.
      * @param lcd The local configuration datastore.
      * @param engineid The engine ID to use. If null is provided, an SnmpEngineId is computed using the current time.
@@ -215,6 +281,14 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
      * <li> If not, the passed address and port are used to compute one.</li>
      * </ul>
      * This constructor should be called by an <CODE>SnmpEngineFactory</CODE>. Don't call it directly.
+     * <p>
+     * 构造函数。本地配置数据存储被传递到引擎。它将用于存储和检索数据(引擎ID,引擎启动)。 <P>警告：SnmpEngineId的计算如下：
+     * <ul>
+     *  <li>如果提供的lcd文件包含属性"localEngineID",则会使用此属性值。</li>。 <li>如果不是,则传递的地址和端口用于计算一个。</li>
+     * </ul>
+     *  此构造函数应由<CODE> SnmpEngineFactory </CODE>调用。不要直接调用它。
+     * 
+     * 
      * @param fact The factory used to instantiate this engine.
      * @param lcd The local configuration datastore.
      * @param port UDP port to use in order to calculate the engine ID.
@@ -249,6 +323,14 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
      * <li> If not, The passed port is used to compute one.</li>
      * </ul>
      * This constructor should be called by an <CODE>SnmpEngineFactory</CODE>. Don't call it directly.
+     * <p>
+     *  构造函数。本地配置数据存储被传递到引擎。它将用于存储和检索数据(引擎ID,引擎启动)。 <P>警告：SnmpEngineId的计算如下：
+     * <ul>
+     *  <li>如果提供的lcd文件包含属性"localEngineID",则会使用此属性值。</li>。 <li>如果不是,则传递的端口用于计算一个。</li>
+     * </ul>
+     *  此构造函数应由<CODE> SnmpEngineFactory </CODE>调用。不要直接调用它。
+     * 
+     * 
      * @param fact The factory used to instantiate this engine.
      * @param lcd The local configuration datastore
      * @param port UDP port to use in order to calculate the engine ID.
@@ -282,6 +364,14 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
      * </ul>
      * When no configuration nor java property is set for the engine ID value, a unique time based engine ID will be generated.
      * This constructor should be called by an <CODE>SnmpEngineFactory</CODE>. Don't call it directly.
+     * <p>
+     *  构造函数。本地配置数据存储被传递到引擎。它将用于存储和检索数据(引擎ID,引擎启动)。 <P>警告：SnmpEngineId的计算如下：
+     * <ul>
+     *  <li>如果提供的lcd文件包含属性"localEngineID",则会使用此属性值。</li>。 <li>如果不是,则计算基于时间的engineID。</li>
+     * </ul>
+     * 当没有为引擎ID值设置配置或java属性时,将生成唯一的基于时间的引擎ID。此构造函数应由<CODE> SnmpEngineFactory </CODE>调用。不要直接调用它。
+     * 
+     * 
      * @param fact The factory used to instantiate this engine.
      * @param lcd The local configuration datastore.
      */
@@ -305,6 +395,9 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Access Control will check the oids. By default is false.
+     * <p>
+     *  访问控制将检查oids。默认为false。
+     * 
      */
     public synchronized void activateCheckOid() {
         checkOid = true;
@@ -312,6 +405,9 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Access Control will not check the oids. By default is false.
+     * <p>
+     *  访问控制不会检查oids。默认为false。
+     * 
      */
     public synchronized void deactivateCheckOid() {
         checkOid = false;
@@ -319,6 +415,9 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Access Control check or not the oids. By default is false.
+     * <p>
+     *  访问控制是否检查oids。默认为false。
+     * 
      */
     public synchronized boolean isCheckOidActivated() {
         return checkOid;
@@ -364,6 +463,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Returns the Message Processing Sub System.
+     * <p>
+     *  返回消息处理子系统。
+     * 
+     * 
      * @return The Message Processing Sub System.
      */
     public SnmpMsgProcessingSubSystem getMsgProcessingSubSystem() {
@@ -372,6 +475,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Sets the Message Processing Sub System.
+     * <p>
+     *  设置消息处理子系统。
+     * 
+     * 
      * @param sys The Message Processing Sub System.
      */
     public void setMsgProcessingSubSystem(SnmpMsgProcessingSubSystem sys) {
@@ -380,6 +487,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
      /**
      * Returns the Security Sub System.
+     * <p>
+     *  返回安全子系统。
+     * 
+     * 
      * @return The Security Sub System.
      */
     public SnmpSecuritySubSystem getSecuritySubSystem() {
@@ -387,6 +498,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
     }
     /**
      * Sets the Security Sub System.
+     * <p>
+     *  设置安全子系统。
+     * 
+     * 
      * @param sys The Security Sub System.
      */
     public void setSecuritySubSystem(SnmpSecuritySubSystem sys) {
@@ -394,6 +509,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
     }
      /**
      * Sets the Access Control Sub System.
+     * <p>
+     *  设置访问控制子系统。
+     * 
+     * 
      * @param sys The Access Control Sub System.
      */
     public void setAccessControlSubSystem(SnmpAccessControlSubSystem sys) {
@@ -402,6 +521,10 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
 
     /**
      * Returns the Access Control Sub System.
+     * <p>
+     *  返回访问控制子系统。
+     * 
+     * 
      * @return The Access Control Sub System.
      */
     public SnmpAccessControlSubSystem getAccessControlSubSystem() {
@@ -409,6 +532,9 @@ public class SnmpEngineImpl implements SnmpEngine, Serializable {
     }
     /**
      * Checks the passed msg flags according to the rules specified in RFC 2572.
+     * <p>
+     *  根据RFC 2572中指定的规则检查传递的msg标志。
+     * 
      * @param msgFlags The msg flags.
      */
     public static void checkSecurityLevel(byte msgFlags)

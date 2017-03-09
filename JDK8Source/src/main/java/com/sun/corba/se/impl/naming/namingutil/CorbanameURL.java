@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ import com.sun.corba.se.spi.logging.CORBALogDomains;
  *  profiles as defined in the CorbaName grammer.
  *
  *  @Author Hemanth
+ * <p>
+ *  corbaname：来自-ORBInitDef和-ORBDefaultInitDef的URL定义将存储在此对象中。此对象能够存储CorbaName语法中定义的CorbaLoc概要文件。
+ * 
+ *  @作者Hemanth
+ * 
  */
 public class CorbanameURL extends INSURLBase
 {
@@ -44,6 +50,9 @@ public class CorbanameURL extends INSURLBase
      * This constructor takes a corbaname: url with 'corbaname:' prefix stripped
      * and initializes all the variables accordingly. If there are any parsing
      * errors then BAD_PARAM exception is raised.
+     * <p>
+     *  此构造函数采用corbaname：url与"corbaname："前缀,并相应地初始化所有变量。如果有任何解析错误,则会引发BAD_PARAM异常。
+     * 
      */
     public CorbanameURL( String aURL ) {
         String url = aURL;
@@ -96,6 +105,9 @@ public class CorbanameURL extends INSURLBase
 
     /**
      * A Utility method to throw BAD_PARAM exception.
+     * <p>
+     *  抛出BAD_PARAM异常的实用程序方法。
+     * 
      */
     private void badAddress( java.lang.Throwable e )
         throws org.omg.CORBA.BAD_PARAM
@@ -106,6 +118,8 @@ public class CorbanameURL extends INSURLBase
     /**
      * A Utility method to copy all the variables from CorbalocURL object to
      * this instance.
+     * <p>
+     *  一个Utility方法将所有变量从CorbalocURL对象复制到此实例。
      */
     private void copyINSURL( INSURL url ) {
         rirFlag = url.getRIRFlag( );

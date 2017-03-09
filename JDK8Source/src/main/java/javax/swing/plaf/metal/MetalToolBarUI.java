@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,11 @@ import javax.swing.plaf.basic.*;
  * is a "combined" view/controller.
  * <p>
  *
+ * <p>
+ *  金属外观和感觉ToolBarUI的实现。这个实现是一个"组合"视图/控制器。
+ * <p>
+ * 
+ * 
  * @author Jeff Shapiro
  */
 public class MetalToolBarUI extends BasicToolBarUI
@@ -60,6 +66,9 @@ public class MetalToolBarUI extends BasicToolBarUI
      * An array of WeakReferences that point to JComponents. This will contain
      * instances of JToolBars and JMenuBars and is used to find
      * JToolBars/JMenuBars that border each other.
+     * <p>
+     *  指向JComponents的WeakReferences数组。这将包含JToolBars和JMenuBars的实例,并用于查找彼此边界的JToolBars / JMenuBars。
+     * 
      */
     private static List<WeakReference<JComponent>> components = new ArrayList<WeakReference<JComponent>>();
 
@@ -67,6 +76,10 @@ public class MetalToolBarUI extends BasicToolBarUI
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法。
+     * 
+     * 
      * @see #createContainerListener
      */
     protected ContainerListener contListener;
@@ -75,6 +88,10 @@ public class MetalToolBarUI extends BasicToolBarUI
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法。
+     * 
+     * 
      * @see #createRolloverListener
      */
     protected PropertyChangeListener rolloverListener;
@@ -83,11 +100,17 @@ public class MetalToolBarUI extends BasicToolBarUI
 
     /**
      * Last menubar the toolbar touched.  This is only useful for ocean.
+     * <p>
+     *  最后一个菜单触摸工具栏。这只对海洋有用。
+     * 
      */
     private JMenuBar lastMenuBar;
 
     /**
      * Registers the specified component.
+     * <p>
+     *  注册指定的组件。
+     * 
      */
     synchronized static void register(JComponent c) {
         if (c == null) {
@@ -100,6 +123,9 @@ public class MetalToolBarUI extends BasicToolBarUI
 
     /**
      * Unregisters the specified component.
+     * <p>
+     *  取消注册指定的组件。
+     * 
      */
     synchronized static void unregister(JComponent c) {
         for (int counter = components.size() - 1; counter >= 0; counter--) {
@@ -116,6 +142,9 @@ public class MetalToolBarUI extends BasicToolBarUI
     /**
      * Finds a previously registered component of class <code>target</code>
      * that shares the JRootPane ancestor of <code>from</code>.
+     * <p>
+     *  查找以前注册的类<code> target </code>的组件,该组件共享<code>从</code>的JRootPane祖先。
+     * 
      */
     synchronized static Object findRegisteredComponentOfType(JComponent from,
                                                              Class target) {
@@ -141,6 +170,9 @@ public class MetalToolBarUI extends BasicToolBarUI
     /**
      * Returns true if the passed in JMenuBar is above a horizontal
      * JToolBar.
+     * <p>
+     *  如果JMenuBar中传递的值高于水平JToolBar,则返回true。
+     * 
      */
     static boolean doesMenuBarBorderToolBar(JMenuBar c) {
         JToolBar tb = (JToolBar)MetalToolBarUI.
@@ -213,6 +245,9 @@ public class MetalToolBarUI extends BasicToolBarUI
 
     /**
      * Creates a non rollover border for Toggle buttons in the toolbar.
+     * <p>
+     *  为工具栏中的切换按钮创建非翻转边框。
+     * 
      */
     private Border createNonRolloverToggleBorder() {
         return createNonRolloverBorder();
@@ -248,6 +283,10 @@ public class MetalToolBarUI extends BasicToolBarUI
      * If this method returns null then it will not be added to the
      * toolbar.
      *
+     * <p>
+     *  创建将添加到JToolBar的容器侦听器。如果此方法返回null,那么它不会被添加到工具栏。
+     * 
+     * 
      * @return an instance of a <code>ContainerListener</code> or null
      */
     protected ContainerListener createContainerListener() {
@@ -259,6 +298,10 @@ public class MetalToolBarUI extends BasicToolBarUI
      * If this method returns null then it will not be added to the
      * toolbar.
      *
+     * <p>
+     *  创建将添加到JToolBar的属性更改侦听器。如果此方法返回null,那么它不会被添加到工具栏。
+     * 
+     * 
      * @return an instance of a <code>PropertyChangeListener</code> or null
      */
     protected PropertyChangeListener createRolloverListener() {
@@ -283,6 +326,9 @@ public class MetalToolBarUI extends BasicToolBarUI
      * If necessary paints the background of the component, then invokes
      * <code>paint</code>.
      *
+     * <p>
+     *  如果需要绘制组件的背景,然后调用<code> paint </code>。
+     * 
      * @param g Graphics to paint to
      * @param c JComponent painting on
      * @throws NullPointerException if <code>g</code> or <code>c</code> is

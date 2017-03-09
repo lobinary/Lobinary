@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.encryption;
 
@@ -45,6 +54,14 @@ import com.sun.org.apache.xml.internal.security.utils.Base64;
  * quickly and easily retrieve the encrypted bytes from an EncryptedType
  * object
  *
+ * <p>
+ *  <code> XMLCipherInput </code>用于包装传递到XMLCipher加密操作的输入。
+ * 
+ *  在解密模式下,它需要一个<code> CipherData </code>对象,并允许调用者将CipherData解引用为它实际表示的加密字节。这照顾所有base64编码等。
+ * 
+ *  虽然主要是一个内部类,这可以由应用程序快速和轻松地从加密类型对象检索加密字节
+ * 
+ * 
  * @author Berin Lautenbach
  */
 public class XMLCipherInput {
@@ -63,6 +80,10 @@ public class XMLCipherInput {
     /**
      * Constructor for processing encrypted octets
      *
+     * <p>
+     *  用于处理加密的八位字节的构造函数
+     * 
+     * 
      * @param data The <code>CipherData</code> object to read the bytes from
      * @throws XMLEncryptionException {@link XMLEncryptionException}
      */
@@ -77,6 +98,10 @@ public class XMLCipherInput {
     /**
      * Constructor for processing encrypted octets
      *
+     * <p>
+     *  用于处理加密的八位字节的构造函数
+     * 
+     * 
      * @param input The <code>EncryptedType</code> object to read
      * the bytes from.
      * @throws XMLEncryptionException {@link XMLEncryptionException}
@@ -91,6 +116,9 @@ public class XMLCipherInput {
 
     /**
      * Set whether secure validation is enabled or not. The default is false.
+     * <p>
+     * 设置是否启用安全验证。默认值为false。
+     * 
      */
     public void setSecureValidation(boolean secureValidation) {
         this.secureValidation = secureValidation;
@@ -99,6 +127,10 @@ public class XMLCipherInput {
     /**
      * Dereferences the input and returns it as a single byte array.
      *
+     * <p>
+     *  解除输入并将其作为单个字节数组返回。
+     * 
+     * 
      * @throws XMLEncryptionException
      * @return The decripted bytes.
      */
@@ -111,6 +143,9 @@ public class XMLCipherInput {
 
     /**
      * Internal method to get bytes in decryption mode
+     * <p>
+     *  在解密模式下获取字节的内部方法
+     * 
      * @return the decrypted bytes
      * @throws XMLEncryptionException
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * $Id: DOMSignContext.java,v 1.9 2005/05/10 16:31:14 mullan Exp $
+ * <p>
+ *  $ Id：DOMSignContext.java,v 1.9 2005/05/10 16:31:14 mullan Exp $
+ * 
  */
 package javax.xml.crypto.dsig.dom;
 
@@ -46,6 +50,15 @@ import org.w3c.dom.Node;
  * (for example, you should not use the same <code>DOMSignContext</code>
  * instance to sign two different {@link XMLSignature} objects).
  *
+ * <p>
+ *  特定于DOM的{@link XMLSignContext}。此类包含其他方法来指定DOM树中的位置,在生成签名时,{@link XMLSignature}对象将被编组。
+ * 
+ *  <p>请注意,<code> DOMSignContext </code>实例可以包含特定于与其一起使用的XML签名结构的信息和状态。
+ * 如果使用具有不同签名结构的<code> DOMSignContext </code>(例如,不应使用相同的<code> DOMSignContext </code>实例签署两个不同的{@link XMLSignature}
+ * 对象),结果是不可预测的, 。
+ *  <p>请注意,<code> DOMSignContext </code>实例可以包含特定于与其一起使用的XML签名结构的信息和状态。
+ * 
+ * 
  * @author Sean Mullan
  * @author JSR 105 Expert Group
  * @since 1.6
@@ -64,6 +77,16 @@ public class DOMSignContext extends DOMCryptoContext implements XMLSignContext {
      * child element of the specified parent node unless a next sibling node is
      * specified by invoking the {@link #setNextSibling setNextSibling} method.
      *
+     * <p>
+     *  使用指定的签名密钥和父节点创建<code> DOMSignContext </code>。
+     * 签名密钥存储在{@link #getKeySelector getKeySelector}方法返回的{@link KeySelector#singletonKeySelector singleton KeySelector}
+     * 中。
+     *  使用指定的签名密钥和父节点创建<code> DOMSignContext </code>。
+     * 编组的<code> XMLSignature </code>将作为指定父节点的最后一个子元素添加,除非通过调用{@link #setNextSibling setNextSibling}方法指定下一个兄
+     * 弟节点。
+     *  使用指定的签名密钥和父节点创建<code> DOMSignContext </code>。
+     * 
+     * 
      * @param signingKey the signing key
      * @param parent the parent node
      * @throws NullPointerException if <code>signingKey</code> or
@@ -89,6 +112,14 @@ public class DOMSignContext extends DOMCryptoContext implements XMLSignContext {
      * element of the specified parent node and immediately before the
      * specified next sibling node.
      *
+     * <p>
+     * 使用指定的签名密钥,父节点和下一个兄弟节点创建<code> DOMSignContext </code>。
+     * 签名密钥存储在{@link #getKeySelector getKeySelector}方法返回的{@link KeySelector#singletonKeySelector singleton KeySelector}
+     * 中。
+     * 使用指定的签名密钥,父节点和下一个兄弟节点创建<code> DOMSignContext </code>。
+     * 经过编组的<code> XMLSignature </code>将作为指定父节点的子元素并且紧接在指定的下一个兄弟节点之前插入。
+     * 
+     * 
      * @param signingKey the signing key
      * @param parent the parent node
      * @param nextSibling the next sibling node
@@ -117,6 +148,13 @@ public class DOMSignContext extends DOMCryptoContext implements XMLSignContext {
      * sibling node is specified by invoking the
      * {@link #setNextSibling setNextSibling} method.
      *
+     * <p>
+     *  使用指定的键选择器和父节点创建<code> DOMSignContext </code>。
+     * 编组的<code> XMLSignature </code>将作为指定父节点的最后一个子元素添加,除非通过调用{@link #setNextSibling setNextSibling}方法指定下一个兄
+     * 弟节点。
+     *  使用指定的键选择器和父节点创建<code> DOMSignContext </code>。
+     * 
+     * 
      * @param ks the key selector
      * @param parent the parent node
      * @throws NullPointerException if <code>ks</code> or <code>parent</code>
@@ -139,6 +177,11 @@ public class DOMSignContext extends DOMCryptoContext implements XMLSignContext {
      * will be inserted as a child element of the specified parent node and
      * immediately before the specified next sibling node.
      *
+     * <p>
+     *  使用指定的键选择器,父节点和下一个兄弟节点创建<code> DOMSignContext </code>。
+     * 经过编组的<code> XMLSignature </code>将作为指定父节点的子元素并且紧接在指定的下一个兄弟节点之前插入。
+     * 
+     * 
      * @param ks the key selector
      * @param parent the parent node
      * @param nextSibling the next sibling node
@@ -163,6 +206,10 @@ public class DOMSignContext extends DOMCryptoContext implements XMLSignContext {
     /**
      * Sets the parent node.
      *
+     * <p>
+     *  设置父节点。
+     * 
+     * 
      * @param parent the parent node. The marshalled <code>XMLSignature</code>
      *    will be added as a child element of this node.
      * @throws NullPointerException if <code>parent</code> is <code>null</code>
@@ -178,6 +225,10 @@ public class DOMSignContext extends DOMCryptoContext implements XMLSignContext {
     /**
      * Sets the next sibling node.
      *
+     * <p>
+     *  设置下一个兄弟节点。
+     * 
+     * 
      * @param nextSibling the next sibling node. The marshalled
      *    <code>XMLSignature</code> will be inserted immediately before this
      *    node. Specify <code>null</code> to remove the current setting.
@@ -190,6 +241,10 @@ public class DOMSignContext extends DOMCryptoContext implements XMLSignContext {
     /**
      * Returns the parent node.
      *
+     * <p>
+     *  返回父节点。
+     * 
+     * 
      * @return the parent node (never <code>null</code>)
      * @see #setParent(Node)
      */
@@ -200,6 +255,9 @@ public class DOMSignContext extends DOMCryptoContext implements XMLSignContext {
     /**
      * Returns the nextSibling node.
      *
+     * <p>
+     *  返回nextSibling节点。
+     * 
      * @return the nextSibling node, or <code>null</code> if not specified.
      * @see #setNextSibling(Node)
      */

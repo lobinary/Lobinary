@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,11 @@ import javax.management.MBeanServer;
  * <code>JMXServerErrorException</code> instance contains the original
  * <code>Error</code> that occurred as its cause.
  *
+ * <p>
+ *  在处理远程MBean服务器中的调用时抛出<code>错误</code>时,作为远程​​{@link MBeanServer}方法调用的结果抛出异常。
+ *  <code> JMXServerErrorException </code>实例包含作为其原因发生的原始<code>错误</code>。
+ * 
+ * 
  * @see java.rmi.ServerError
  * @since 1.5
  */
@@ -49,6 +55,10 @@ public class JMXServerErrorException extends IOException {
      * Constructs a <code>JMXServerErrorException</code> with the specified
      * detail message and nested error.
      *
+     * <p>
+     *  构造具有指定的详细消息和嵌套错误的<code> JMXServerErrorException </code>。
+     * 
+     * 
      * @param s the detail message.
      * @param err the nested error.  An instance of this class can be
      * constructed where this parameter is null, but the standard
@@ -64,6 +74,8 @@ public class JMXServerErrorException extends IOException {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial An {@link Error} that caused this exception to be thrown.
      * @see #getCause()
      **/

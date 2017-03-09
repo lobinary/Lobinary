@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,8 @@ import com.sun.corba.se.impl.encoding.CodeSetComponentInfo;
 import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public interface CorbaConnection
@@ -165,6 +168,7 @@ public interface CorbaConnection
     public void serverRequestProcessingEnds();
 
     /** Clean up all connection resources.  Used when shutting down an ORB.
+    /* <p>
      */
     public void closeConnectionResources();
 }

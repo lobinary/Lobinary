@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,22 @@ import java.awt.Component;
  * of any particular {@code ContainerEvent} instance is not
  * in the range from {@code CONTAINER_FIRST} to {@code CONTAINER_LAST}.
  *
+ * <p>
+ *  表示由于添加或删除组件而导致容器内容更改的低级事件。
+ * <P>
+ *  集装箱事件仅用于通知目的; AWT将在内部自动处理对容器内容的改变,使得程序正确地工作,而不管程序是否正在接收这些事件。
+ * <P>
+ *  此低级事件由容器对象(例如Panel)在向其添加或删除组件时生成。
+ * 事件传递到每个使用组件的<code> addContainerListener </code>方法注册接收此类事件的每个<code> ContainerListener </code>或<code> C
+ * ontainerAdapter </code>对象。
+ *  此低级事件由容器对象(例如Panel)在向其添加或删除组件时生成。
+ *  (<code> ContainerAdapter </code>对象实现<code> ContainerListener </code>接口。
+ * )当事件发生时,每个这样的监听器对象都会获得这个<code> ContainerEvent </code>。
+ * <p>
+ *  如果任何特定{@code ContainerEvent}实例的{@code id}参数不在{@code CONTAINER_FIRST}到{@code CONTAINER_LAST}的范围内,则会导致
+ * 未指定的行为。
+ * 
+ * 
  * @see ContainerAdapter
  * @see ContainerListener
  * @see <a href="https://docs.oracle.com/javase/tutorial/uiswing/events/containerlistener.html">Tutorial: Writing a Container Listener</a>
@@ -62,21 +79,33 @@ public class ContainerEvent extends ComponentEvent {
 
     /**
      * The first number in the range of ids used for container events.
+     * <p>
+     *  用于容器事件的ids范围中的第一个数字。
+     * 
      */
     public static final int CONTAINER_FIRST             = 300;
 
     /**
      * The last number in the range of ids used for container events.
+     * <p>
+     *  用于容器事件的ids范围中的最后一个数字。
+     * 
      */
     public static final int CONTAINER_LAST              = 301;
 
    /**
      * This event indicates that a component was added to the container.
+     * <p>
+     *  此事件表示已将某个组件添加到容器中。
+     * 
      */
     public static final int COMPONENT_ADDED     = CONTAINER_FIRST;
 
     /**
      * This event indicates that a component was removed from the container.
+     * <p>
+     *  此事件表示组件已从容器中删除。
+     * 
      */
     public static final int COMPONENT_REMOVED = 1 + CONTAINER_FIRST;
 
@@ -84,6 +113,10 @@ public class ContainerEvent extends ComponentEvent {
      * The non-null component that is being added or
      * removed from the Container.
      *
+     * <p>
+     * 正在从Container添加或删除的非空组件。
+     * 
+     * 
      * @serial
      * @see #getChild()
      */
@@ -91,6 +124,9 @@ public class ContainerEvent extends ComponentEvent {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -4114942250539772041L;
 
@@ -100,6 +136,11 @@ public class ContainerEvent extends ComponentEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造一个<code> ContainerEvent </code>对象。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source The <code>Component</code> object (container)
      *               that originated the event
      * @param id     An integer indicating the type of event.
@@ -119,6 +160,10 @@ public class ContainerEvent extends ComponentEvent {
     /**
      * Returns the originator of the event.
      *
+     * <p>
+     *  返回事件的发起者。
+     * 
+     * 
      * @return the <code>Container</code> object that originated
      * the event, or <code>null</code> if the object is not a
      * <code>Container</code>.
@@ -130,6 +175,10 @@ public class ContainerEvent extends ComponentEvent {
     /**
      * Returns the component that was affected by the event.
      *
+     * <p>
+     *  返回受事件影响的组件。
+     * 
+     * 
      * @return the Component object that was added or removed
      */
     public Component getChild() {
@@ -140,6 +189,9 @@ public class ContainerEvent extends ComponentEvent {
      * Returns a parameter string identifying this event.
      * This method is useful for event-logging and for debugging.
      *
+     * <p>
+     *  返回标识此事件的参数字符串。此方法对事件记录和调试非常有用。
+     * 
      * @return a string identifying the event and its attributes
      */
     public String paramString() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,17 @@ import java.io.ByteArrayInputStream;
  * retain a handle onto the digest object, and clone it for each
  * digest to be computed, leaving the orginal digest untouched.
  *
+ * <p>
+ *  透明流,使用通过流的位更新相关的消息摘要。
+ * 
+ *  <p>要完成消息摘要计算,请在调用此摘要输入流的{@link #read()read}方法之后,调用相关消息摘要中的{@code digest}方法之一。
+ * 
+ *  <p>可以打开或关闭此流(请参阅{@link #on(boolean)on})。当它打开时,调用其中一个{@code read}方法将导致消息摘要的更新。但是当它关​​闭时,消息摘要不会更新。
+ * 默认值为流开启。
+ * 
+ *  <p>请注意,digest对象只能计算一个摘要(参见{@link MessageDigest}),因此为了计算中间摘要,调用者应该保留对摘要对象的句柄,并对每个摘要进行克隆,保持原始消化不变。
+ * 
+ * 
  * @see MessageDigest
  *
  * @see DigestOutputStream
@@ -70,6 +82,9 @@ public class DigestInputStream extends FilterInputStream {
 
     /**
      * The message digest associated with this stream.
+     * <p>
+     *  与此流关联的消息摘要。
+     * 
      */
     protected MessageDigest digest;
 
@@ -77,6 +92,10 @@ public class DigestInputStream extends FilterInputStream {
      * Creates a digest input stream, using the specified input stream
      * and message digest.
      *
+     * <p>
+     *  使用指定的输入流和消息摘要创建摘要输入流。
+     * 
+     * 
      * @param stream the input stream.
      *
      * @param digest the message digest to associate with this stream.
@@ -89,6 +108,10 @@ public class DigestInputStream extends FilterInputStream {
     /**
      * Returns the message digest associated with this stream.
      *
+     * <p>
+     *  返回与此流相关联的消息摘要。
+     * 
+     * 
      * @return the message digest associated with this stream.
      * @see #setMessageDigest(java.security.MessageDigest)
      */
@@ -99,6 +122,10 @@ public class DigestInputStream extends FilterInputStream {
     /**
      * Associates the specified message digest with this stream.
      *
+     * <p>
+     *  将指定的消息摘要与此流相关联。
+     * 
+     * 
      * @param digest the message digest to be associated with this stream.
      * @see #getMessageDigest()
      */
@@ -114,6 +141,11 @@ public class DigestInputStream extends FilterInputStream {
      * will then call {@code update} on the message digest associated
      * with this stream, passing it the byte read.
      *
+     * <p>
+     * 读取一个字节,并更新消息摘要(如果摘要函数打开)。也就是说,该方法从输入流读取一个字节,阻塞直到该字节被实际读取。
+     * 如果摘要函数打开(参见{@link #on(boolean)on}),此方法将调用与此流相关联的消息摘要上的{@code update},将其读取的字节传递给它。
+     * 
+     * 
      * @return the byte read.
      *
      * @exception IOException if an I/O error occurs.
@@ -139,6 +171,11 @@ public class DigestInputStream extends FilterInputStream {
      * on the message digest associated with this stream, passing it
      * the data.
      *
+     * <p>
+     *  读取字节数组,并更新消息摘要(如果摘要函数打开)。也就是说,这个方法从输入流读取到{@code len}字节到数组{@code b},从offset {@code off}开始。
+     * 此方法阻塞,直到数据实际读取。如果摘要函数打开(参见{@link #on(boolean)on}),此方法将调用与此流相关联的消息摘要上的{@code update},并传递数据。
+     * 
+     * 
      * @param b the array into which the data is read.
      *
      * @param off the starting offset into {@code b} of where the
@@ -171,6 +208,10 @@ public class DigestInputStream extends FilterInputStream {
      * update on the message digest.  But when it is off, the message
      * digest is not updated.
      *
+     * <p>
+     *  打开或关闭摘要功能。默认值为on。当它打开时,调用其中一个{@code read}方法将导致消息摘要的更新。但是当它关​​闭时,消息摘要不会更新。
+     * 
+     * 
      * @param on true to turn the digest function on, false to turn
      * it off.
      */
@@ -181,6 +222,8 @@ public class DigestInputStream extends FilterInputStream {
     /**
      * Prints a string representation of this digest input stream and
      * its associated message digest object.
+     * <p>
+     *  打印此摘要输入流及其关联的消息摘要对象的字符串表示。
      */
      public String toString() {
          return "[Digest Input Stream] " + digest.toString();

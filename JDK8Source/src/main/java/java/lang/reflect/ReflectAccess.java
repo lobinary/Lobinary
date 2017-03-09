@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ import sun.reflect.ConstructorAccessor;
 
 /** Package-private class implementing the
     sun.reflect.LangReflectAccess interface, allowing the java.lang
+/* <p>
+/*  sun.reflect.LangReflectAccess接口,允许java.lang
+/* 
     package to instantiate objects in this package. */
 
 class ReflectAccess implements sun.reflect.LangReflectAccess {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -163,6 +164,50 @@ import sun.awt.image.MultiResolutionToolkitImage;
  * }
  * } </pre></blockquote><hr>
  *
+ * <p>
+ *  <code> MediaTracker </code>类是一个实用程序类,用于跟踪多个媒体对象的状态。媒体对象可以包括音频剪辑以及图像,尽管当前仅支持图像。
+ * <p>
+ *  要使用媒体跟踪器,请创建<code> MediaTracker </code>的实例,并为要跟踪的每个图像调用其<code> addImage </code>方法。
+ * 此外,每个图像可以分配唯一的标识符。此标识符控制提取图像的优先级顺序。它还可以用于识别可以独立等待的图像的唯一子集。具有较低ID的图像优先于具有较高ID的图像。
+ * 
+ * <p>
+ * 
+ *  跟踪动画图像可能不总是有用的,因为动画图像加载和绘画的多部分性质,但它是支持。 <code> MediaTracker </code>将第一帧完全加载后的动画图像视为完全加载。
+ * 此时,<code> MediaTracker </code>会通知任何服务器图像已完全加载。
+ * 如果没有<code> ImageObserver </code>在第一帧完成加载时观察图像,则图像可能会自动刷新以节省资源(请参阅{@link Image#flush()})。
+ * 
+ * <p>
+ *  下面是使用<code> MediaTracker </code>的示例：
+ * <p>
+ * <hr> <blockquote> <pre> {@ code import java.applet.Applet; import java.awt.Color; import java.awt.Image; import java.awt.Graphics; import java.awt.MediaTracker;。
+ * 
+ *  public class ImageBlaster extends Applet implements Runnable {MediaTracker tracker;图像bg; Image anim [] = new Image [5]; int index;线程动画;。
+ * 
+ *  //获取背景的图像(id == 0)//和动画帧(id == 1)//并将它们添加到MediaTracker public void init(){tracker = new MediaTracker(this); bg = getImage(getDocumentBase(),"images / background.gif"); tracker.addImage(bg,0); for(int i = 0; i <5; i ++){anim [i] = getImage(getDocumentBase(),"images / anim"+ i +"。
+ *  tracker.addImage(anim [i],1); }}。
+ * 
+ *  //启动动画线程。 public void start(){animator = new Thread(this); animator.start(); }}
+ * 
+ *  //停止动画线程。 public void stop(){animator = null; }}
+ * 
+ *  //运行动画线程。 //首先等待背景图像完全加载//并绘制。然后等待所有的动画//帧完成加载。最后,循环和//递增动画帧索引。
+ *  public void run(){try {tracker.waitForID(0); tracker.waitForID(1); } catch(InterruptedException e){return; }
+ *  Thread me = Thread.currentThread(); while(animator == me){try {Thread.sleep(100); } catch(Interrupte
+ * dException e){break; } synchronized(this){index ++; if(index> = anim.length){index = 0; }} repaint();
+ *  }}。
+ *  //运行动画线程。 //首先等待背景图像完全加载//并绘制。然后等待所有的动画//帧完成加载。最后,循环和//递增动画帧索引。
+ * 
+ * //背景图像填充框架,所以我们//不需要清除重绘的applet。 //只需调用paint方法。 public void update(Graphics g){paint(g); }}
+ * 
+ *  //绘制一个大的红色矩形,如果有任何错误//加载图像。否则总是绘制//背景,以便它在加载时以递增方式显示。
+ * 最后,只有当所有的帧(id == 1)完成加载时,//绘制当前动画//帧,以便我们不会得到部分动画。
+ *  public void paint(Graphics g){if((tracker.statusAll(false)&MediaTracker.ERRORED)！= 0){g.setColor(Color.red); g.fillRect(0,0,size()。
+ * 最后,只有当所有的帧(id == 1)完成加载时,//绘制当前动画//帧,以便我们不会得到部分动画。width,size()。
+ * height);返回; } g.drawImage(bg,0,0,this); if(tracker.statusID(1,false)== MediaTracker.COMPLETE){g.drawImage(anim [index],10,10,this); }
+ * }}} </pre> </blockquote> <hr>。
+ * 最后,只有当所有的帧(id == 1)完成加载时,//绘制当前动画//帧,以便我们不会得到部分动画。width,size()。
+ * 
+ * 
  * @author      Jim Graham
  * @since       JDK1.0
  */
@@ -173,6 +218,10 @@ public class MediaTracker implements java.io.Serializable {
      * tracked by a media tracker where the image will
      * eventually be drawn.
      *
+     * <p>
+     *  给定的<code> Component </code>将由媒体跟踪器跟踪,最终将绘制图像。
+     * 
+     * 
      * @serial
      * @see #MediaTracker(Component)
      */
@@ -181,6 +230,10 @@ public class MediaTracker implements java.io.Serializable {
      * The head of the list of <code>Images</code> that is being
      * tracked by the <code>MediaTracker</code>.
      *
+     * <p>
+     *  由<code> MediaTracker </code>跟踪的<code> Images </code>列表的头部。
+     * 
+     * 
      * @serial
      * @see #addImage(Image, int)
      * @see #removeImage(Image)
@@ -189,11 +242,18 @@ public class MediaTracker implements java.io.Serializable {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -483174189758638095L;
 
     /**
      * Creates a media tracker to track images for a given component.
+     * <p>
+     *  创建媒体跟踪器以跟踪给定组件的图像。
+     * 
+     * 
      * @param     comp the component on which the images
      *                     will eventually be drawn
      */
@@ -205,6 +265,10 @@ public class MediaTracker implements java.io.Serializable {
      * Adds an image to the list of images being tracked by this media
      * tracker. The image will eventually be rendered at its default
      * (unscaled) size.
+     * <p>
+     *  将图像添加到此媒体跟踪器正在跟踪的图片列表。图像最终将以默认(非标度)大小渲染。
+     * 
+     * 
      * @param     image   the image to be tracked
      * @param     id      an identifier used to track this image
      */
@@ -217,6 +281,10 @@ public class MediaTracker implements java.io.Serializable {
      * by this media tracker. The image will eventually be
      * rendered at the indicated width and height.
      *
+     * <p>
+     *  将缩放的图像添加到此媒体跟踪器正在跟踪的图像列表。图像最终将以指定的宽度和高度渲染。
+     * 
+     * 
      * @param     image   the image to be tracked
      * @param     id   an identifier that can be used to track this image
      * @param     w    the width at which the image is rendered
@@ -238,6 +306,10 @@ public class MediaTracker implements java.io.Serializable {
     }
     /**
      * Flag indicating that media is currently being loaded.
+     * <p>
+     *  表示媒体当前正在加载的标志。
+     * 
+     * 
      * @see         java.awt.MediaTracker#statusAll
      * @see         java.awt.MediaTracker#statusID
      */
@@ -245,6 +317,10 @@ public class MediaTracker implements java.io.Serializable {
 
     /**
      * Flag indicating that the downloading of media was aborted.
+     * <p>
+     * 标志表示下载媒体已中止。
+     * 
+     * 
      * @see         java.awt.MediaTracker#statusAll
      * @see         java.awt.MediaTracker#statusID
      */
@@ -253,6 +329,10 @@ public class MediaTracker implements java.io.Serializable {
     /**
      * Flag indicating that the downloading of media encountered
      * an error.
+     * <p>
+     *  标志表示下载媒体时遇到错误。
+     * 
+     * 
      * @see         java.awt.MediaTracker#statusAll
      * @see         java.awt.MediaTracker#statusID
      */
@@ -261,6 +341,10 @@ public class MediaTracker implements java.io.Serializable {
     /**
      * Flag indicating that the downloading of media was completed
      * successfully.
+     * <p>
+     *  表示介质下载已成功完成的标志。
+     * 
+     * 
      * @see         java.awt.MediaTracker#statusAll
      * @see         java.awt.MediaTracker#statusID
      */
@@ -279,6 +363,14 @@ public class MediaTracker implements java.io.Serializable {
      * image is considered to have finished loading. Use the
      * <code>isErrorAny</code> or <code>isErrorID</code> methods to
      * check for errors.
+     * <p>
+     *  检查此媒体跟踪器正在跟踪的所有图片是否已完成加载。
+     * <p>
+     *  如果尚未加载图像,此方法不会开始加载图像。
+     * <p>
+     *  如果在加载或缩放图像时出现错误,则该图像将被视为已完成加载。使用<code> isErrorAny </code>或<code> isErrorID </code>方法检查错误。
+     * 
+     * 
      * @return      <code>true</code> if all images have finished loading,
      *                       have been aborted, or have encountered
      *                       an error; <code>false</code> otherwise
@@ -303,6 +395,14 @@ public class MediaTracker implements java.io.Serializable {
      * image is considered to have finished loading. Use the
      * <code>isErrorAny</code> and <code>isErrorID</code> methods to
      * check for errors.
+     * <p>
+     *  检查此媒体跟踪器正在跟踪的所有图片是否已完成加载。
+     * <p>
+     *  如果<code> load </code>标志的值为<code> true </code>,那么此方法将开始加载尚未加载的任何图像。
+     * <p>
+     *  如果在加载或缩放图像时出错,该图像将被视为已完成加载。使用<code> isErrorAny </code>和<code> isErrorID </code>方法检查错误。
+     * 
+     * 
      * @param       load   if <code>true</code>, start loading any
      *                       images that are not yet being loaded
      * @return      <code>true</code> if all images have finished loading,
@@ -331,6 +431,10 @@ public class MediaTracker implements java.io.Serializable {
 
     /**
      * Checks the error status of all of the images.
+     * <p>
+     *  检查所有图像的错误状态。
+     * 
+     * 
      * @return   <code>true</code> if any of the images tracked
      *                  by this media tracker had an error during
      *                  loading; <code>false</code> otherwise
@@ -350,6 +454,10 @@ public class MediaTracker implements java.io.Serializable {
 
     /**
      * Returns a list of all media that have encountered an error.
+     * <p>
+     *  返回遇到错误的所有介质的列表。
+     * 
+     * 
      * @return       an array of media objects tracked by this
      *                        media tracker that have encountered
      *                        an error, or <code>null</code> if
@@ -390,6 +498,12 @@ public class MediaTracker implements java.io.Serializable {
      * image is considered to have finished loading. Use the
      * <code>isErrorAny</code> or <code>isErrorID</code> methods to
      * check for errors.
+     * <p>
+     *  开始加载此媒体跟踪器跟踪的所有图像。此方法等待,直到正在跟踪的所有图像都已完成加载。
+     * <p>
+     *  如果在加载或缩放图像时出现错误,则该图像将被视为已完成加载。使用<code> isErrorAny </code>或<code> isErrorID </code>方法检查错误。
+     * 
+     * 
      * @see         java.awt.MediaTracker#waitForID(int)
      * @see         java.awt.MediaTracker#waitForAll(long)
      * @see         java.awt.MediaTracker#isErrorAny
@@ -411,6 +525,12 @@ public class MediaTracker implements java.io.Serializable {
      * that image is considered to have finished loading. Use the
      * <code>isErrorAny</code> or <code>isErrorID</code> methods to
      * check for errors.
+     * <p>
+     * 开始加载此媒体跟踪器跟踪的所有图像。此方法等待直到所有正在跟踪的映像已完成加载,或直到通过<code> ms </code>参数指定的以毫秒为单位的时间长度。
+     * <p>
+     *  如果在加载或缩放图像时出现错误,则该图像将被视为已完成加载。使用<code> isErrorAny </code>或<code> isErrorID </code>方法检查错误。
+     * 
+     * 
      * @param       ms       the number of milliseconds to wait
      *                       for the loading to complete
      * @return      <code>true</code> if all images were successfully
@@ -459,6 +579,16 @@ public class MediaTracker implements java.io.Serializable {
      * If the value of <code>load</code> is <code>true</code>, then
      * this method starts loading any images that are not yet being loaded.
      *
+     * <p>
+     *  计算并返回此媒体跟踪器跟踪的所有媒体的状态的按位包含<b> OR </b>。
+     * <p>
+     *  <code> MediaTracker </code>类定义的可能标志是<code> LOADING </code>,<code> ABORTED </code>,<code> ERRORED </code>
+     * 和<code> COMPLETE </code >。
+     * 未开始加载的图像的状态为零。
+     * <p>
+     *  如果<code> load </code>的值为<code> true </code>,则此方法将开始加载尚未加载的任何图像。
+     * 
+     * 
      * @param        load   if <code>true</code>, start loading
      *                            any images that are not yet being loaded
      * @return       the bitwise inclusive <b>OR</b> of the status of
@@ -494,6 +624,14 @@ public class MediaTracker implements java.io.Serializable {
      * image is considered to have finished loading. Use the
      * <code>isErrorAny</code> or <code>isErrorID</code> methods to
      * check for errors.
+     * <p>
+     *  检查此媒体跟踪器跟踪的用指定标识符标记的所有图像是否已完成加载。
+     * <p>
+     *  如果尚未加载图像,此方法不会开始加载图像。
+     * <p>
+     *  如果在加载或缩放图像时出现错误,则该图像将被视为已完成加载。使用<code> isErrorAny </code>或<code> isErrorID </code>方法检查错误。
+     * 
+     * 
      * @param       id   the identifier of the images to check
      * @return      <code>true</code> if all images have finished loading,
      *                       have been aborted, or have encountered
@@ -519,6 +657,14 @@ public class MediaTracker implements java.io.Serializable {
      * image is considered to have finished loading. Use the
      * <code>isErrorAny</code> or <code>isErrorID</code> methods to
      * check for errors.
+     * <p>
+     *  检查此媒体跟踪器跟踪的用指定标识符标记的所有图像是否已完成加载。
+     * <p>
+     * 如果<code> load </code>标志的值为<code> true </code>,那么此方法将开始加载尚未加载的任何图像。
+     * <p>
+     *  如果在加载或缩放图像时出现错误,则该图像将被视为已完成加载。使用<code> isErrorAny </code>或<code> isErrorID </code>方法检查错误。
+     * 
+     * 
      * @param       id       the identifier of the images to check
      * @param       load     if <code>true</code>, start loading any
      *                       images that are not yet being loaded
@@ -552,6 +698,10 @@ public class MediaTracker implements java.io.Serializable {
     /**
      * Checks the error status of all of the images tracked by this
      * media tracker with the specified identifier.
+     * <p>
+     *  使用指定的标识符检查此媒体跟踪器跟踪的所有图像的错误状态。
+     * 
+     * 
      * @param        id   the identifier of the images to check
      * @return       <code>true</code> if any of the images with the
      *                          specified identifier had an error during
@@ -575,6 +725,10 @@ public class MediaTracker implements java.io.Serializable {
     /**
      * Returns a list of media with the specified ID that
      * have encountered an error.
+     * <p>
+     *  返回具有指定ID且已遇到错误的介质列表。
+     * 
+     * 
      * @param       id   the identifier of the images to check
      * @return      an array of media objects tracked by this media
      *                       tracker with the specified identifier
@@ -621,6 +775,12 @@ public class MediaTracker implements java.io.Serializable {
      * image is considered to have finished loading. Use the
      * <code>isErrorAny</code> and <code>isErrorID</code> methods to
      * check for errors.
+     * <p>
+     *  开始使用指定的标识符加载此媒体跟踪器跟踪的所有图像。此方法等待直到具有指定标识符的所有图像都已完成加载。
+     * <p>
+     *  如果在加载或缩放图像时出现错误,则该图像将被视为已完成加载。使用<code> isErrorAny </code>和<code> isErrorID </code>方法检查错误。
+     * 
+     * 
      * @param         id   the identifier of the images to check
      * @see           java.awt.MediaTracker#waitForAll
      * @see           java.awt.MediaTracker#isErrorAny()
@@ -643,6 +803,13 @@ public class MediaTracker implements java.io.Serializable {
      * image is considered to have finished loading. Use the
      * <code>statusID</code>, <code>isErrorID</code>, and
      * <code>isErrorAny</code> methods to check for errors.
+     * <p>
+     *  开始使用指定的标识符加载此媒体跟踪器跟踪的所有图像。此方法等待,直到所有具有指定标识符的映像已完成加载,或直到通过<code> ms </code>参数指定的以毫秒为单位的时间长度。
+     * <p>
+     *  如果在加载或缩放图像时出现错误,则该图像将被视为已完成加载。
+     * 使用<code> statusID </code>,<code> isErrorID </code>和<code> isErrorAny </code>方法检查错误。
+     * 
+     * 
      * @param         id   the identifier of the images to check
      * @param         ms   the length of time, in milliseconds, to wait
      *                           for the loading to complete
@@ -691,6 +858,16 @@ public class MediaTracker implements java.io.Serializable {
      * <p>
      * If the value of <code>load</code> is <code>true</code>, then
      * this method starts loading any images that are not yet being loaded.
+     * <p>
+     * 计算并返回包含此媒体跟踪器所跟踪的指定标识符的所有媒体的状态的按位包含<b> OR </b>。
+     * <p>
+     *  <code> MediaTracker </code>类定义的可能标志是<code> LOADING </code>,<code> ABORTED </code>,<code> ERRORED </code>
+     * 和<code> COMPLETE </code >。
+     * 未开始加载的图像的状态为零。
+     * <p>
+     *  如果<code> load </code>的值为<code> true </code>,则此方法将开始加载尚未加载的任何图像。
+     * 
+     * 
      * @param        id   the identifier of the images to check
      * @param        load   if <code>true</code>, start loading
      *                            any images that are not yet being loaded
@@ -723,6 +900,10 @@ public class MediaTracker implements java.io.Serializable {
      * Removes the specified image from this media tracker.
      * All instances of the specified image are removed,
      * regardless of scale or ID.
+     * <p>
+     *  从此媒体跟踪器中删除指定的图像。将删除指定图像的所有实例,而不考虑比例或ID。
+     * 
+     * 
      * @param   image     the image to be removed
      * @see     java.awt.MediaTracker#removeImage(java.awt.Image, int)
      * @see     java.awt.MediaTracker#removeImage(java.awt.Image, int, int, int)
@@ -761,6 +942,10 @@ public class MediaTracker implements java.io.Serializable {
      * ID of this media tracker.
      * All instances of <code>Image</code> being tracked
      * under the specified ID are removed regardless of scale.
+     * <p>
+     *  从此媒体跟踪器的指定跟踪ID中删除指定的图片。将删除在指定ID下跟踪的<code> Image </code>的所有实例,而不考虑比例。
+     * 
+     * 
      * @param      image the image to be removed
      * @param      id the tracking ID from which to remove the image
      * @see        java.awt.MediaTracker#removeImage(java.awt.Image)
@@ -799,6 +984,10 @@ public class MediaTracker implements java.io.Serializable {
      * Removes the specified image with the specified
      * width, height, and ID from this media tracker.
      * Only the specified instance (with any duplicates) is removed.
+     * <p>
+     *  从此媒体跟踪器中删除指定宽度,高度和ID的指定图像。只有指定的实例(包含任何重复项)被删除。
+     * 
+     * 
      * @param   image the image to be removed
      * @param   id the tracking ID from which to remove the image
      * @param   width the width to remove (-1 for unscaled)
@@ -928,6 +1117,8 @@ java.io.Serializable {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
      */
     private static final long serialVersionUID = 4739377000350280650L;
 

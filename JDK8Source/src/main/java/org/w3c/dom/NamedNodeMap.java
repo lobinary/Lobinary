@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究联合会信息学和数学,庆应大学)。版权所有。这项工作根据W3C(r)软件许可证[1]分发,希望它有用,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证。
+ * 
+ *  [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * 
  */
 
 package org.w3c.dom;
@@ -52,10 +60,23 @@ package org.w3c.dom;
  * and does not imply that the DOM specifies an order to these Nodes.
  * <p><code>NamedNodeMap</code> objects in the DOM are live.
  * <p>See also the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>Document Object Model (DOM) Level 3 Core Specification</a>.
+ * <p>
+ *  实现<code> NamedNodeMap </code>接口的对象用于表示可以按名称访问的节点集合。
+ * 注意<code> NamedNodeMap </code>不会继承<code> NodeList </code>; <code> NamedNodeMaps </code>不以任何特定顺序维护。
+ * 实现<code> NamedNodeMap </code>的对象中包含的对象也可以通过序号索引访问,但这只是为了方便枚举<code> NamedNodeMap </code>的内容, DOM为这些节点指
+ * 定顺序。
+ * 注意<code> NamedNodeMap </code>不会继承<code> NodeList </code>; <code> NamedNodeMaps </code>不以任何特定顺序维护。
+ *  DOM中的<p> <code> NamedNodeMap </code>对象是活的。
+ *  <p>另请参阅<a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>文档对象模型(DOM)3级核心规范< a>。
+ * 
  */
 public interface NamedNodeMap {
     /**
      * Retrieves a node specified by name.
+     * <p>
+     *  检索由名称指定的节点。
+     * 
+     * 
      * @param name The <code>nodeName</code> of a node to retrieve.
      * @return A <code>Node</code> (of any type) with the specified
      *   <code>nodeName</code>, or <code>null</code> if it does not identify
@@ -72,6 +93,12 @@ public interface NamedNodeMap {
      * (those that have a "special" string value) cannot be stored as the
      * names would clash. This is seen as preferable to allowing nodes to be
      * aliased.
+     * <p>
+     * 使用其<code> nodeName </code>属性添加节点。如果具有该名称的节点已经存在于此映射中,则它将被新映射替换。替换节点本身不起作用。
+     *  <br>由于<code> nodeName </code>属性用于派生节点必须存储的名称,因此不能将某些类型的多个节点(具有"特殊"字符串值的节点)存储为名称会发生冲突。
+     * 这被认为是允许节点混叠的优选方案。
+     * 
+     * 
      * @param arg A node to store in this map. The node will later be
      *   accessible using the value of its <code>nodeName</code> attribute.
      * @return If the new <code>Node</code> replaces an existing node the
@@ -100,6 +127,10 @@ public interface NamedNodeMap {
      * default value, an attribute immediately appears containing the
      * default value as well as the corresponding namespace URI, local name,
      * and prefix when applicable.
+     * <p>
+     *  删除名称指定的节点。当此映射包含附加到元素的属性时,如果已知已删除的属性具有默认值,则在适用时,将立即出现包含默认值以及对应的命名空间URI,本地名称和前缀的属性。
+     * 
+     * 
      * @param name The <code>nodeName</code> of the node to remove.
      * @return The node removed from this map if a node with such a name
      *   exists.
@@ -115,6 +146,10 @@ public interface NamedNodeMap {
      * Returns the <code>index</code>th item in the map. If <code>index</code>
      * is greater than or equal to the number of nodes in this map, this
      * returns <code>null</code>.
+     * <p>
+     *  返回地图中的<code> index </code> th项。如果<code> index </code>大于或等于此映射中的节点数,则返回<code> null </code>。
+     * 
+     * 
      * @param index Index into this map.
      * @return The node at the <code>index</code>th position in the map, or
      *   <code>null</code> if that is not a valid index.
@@ -124,6 +159,9 @@ public interface NamedNodeMap {
     /**
      * The number of nodes in this map. The range of valid child node indices
      * is <code>0</code> to <code>length-1</code> inclusive.
+     * <p>
+     *  此映射中的节点数。有效子节点索引的范围是<code> 0 </code>到<code> length-1 </code>。
+     * 
      */
     public int getLength();
 
@@ -132,6 +170,13 @@ public interface NamedNodeMap {
      * <br>Per [<a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'>XML Namespaces</a>]
      * , applications must use the value null as the namespaceURI parameter
      * for methods if they wish to have no namespace.
+     * <p>
+     *  检索由本地名称和命名空间URI指定的节点。
+     *  <br>根据[<a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'> XML命名空间</a>],应用程序必须使用值null作为name
+     * spaceURI参数,如果他们希望没有命名空间。
+     *  检索由本地名称和命名空间URI指定的节点。
+     * 
+     * 
      * @param namespaceURI The namespace URI of the node to retrieve.
      * @param localName The local name of the node to retrieve.
      * @return A <code>Node</code> (of any type) with the specified local
@@ -155,6 +200,14 @@ public interface NamedNodeMap {
      * <br>Per [<a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'>XML Namespaces</a>]
      * , applications must use the value null as the namespaceURI parameter
      * for methods if they wish to have no namespace.
+     * <p>
+     * 使用其<code> namespaceURI </code>和<code> localName </code>添加节点。
+     * 如果具有该名称空间URI和该本地名称的节点已经存在于此映射中,则它将被新映射替换。替换节点本身不起作用。
+     *  <br>根据[<a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'> XML命名空间</a>],应用程序必须使用值null作为name
+     * spaceURI参数,如果他们希望没有命名空间。
+     * 如果具有该名称空间URI和该本地名称的节点已经存在于此映射中,则它将被新映射替换。替换节点本身不起作用。
+     * 
+     * 
      * @param arg A node to store in this map. The node will later be
      *   accessible using the value of its <code>namespaceURI</code> and
      *   <code>localName</code> attributes.
@@ -192,6 +245,11 @@ public interface NamedNodeMap {
      * <br>Per [<a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'>XML Namespaces</a>]
      * , applications must use the value null as the namespaceURI parameter
      * for methods if they wish to have no namespace.
+     * <p>
+     *  删除由本地名称和命名空间URI指定的节点。当此映射包含由<code> Node </code>接口的attributes属性返回的附加到元素的属性时,可以知道已移除的属性具有默认值。
+     * 如果是这样,将立即出现一个属性,包含默认值以及相应的命名空间URI,本地名称和前缀(如果适用)。
+     *  <br>根据[<a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'> XML命名空间</a>],应用程序必须使用值null作为name
+     * 
      * @param namespaceURI The namespace URI of the node to remove.
      * @param localName The local name of the node to remove.
      * @return The node removed from this map if a node with such a local

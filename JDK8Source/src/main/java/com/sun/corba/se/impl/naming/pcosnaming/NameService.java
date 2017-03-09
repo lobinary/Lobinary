@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,8 @@ import com.sun.corba.se.spi.orb.ORB ;
 import com.sun.corba.se.impl.orbutil.ORBConstants ;
 
 /**
+/* <p>
+/* 
  * @author      Hemanth Puttaswamy
  * @since       JDK1.2
  */
@@ -56,6 +59,10 @@ public class NameService
 
     /**
      * Create NameService which starts the Root Naming Context in Persistent CosNaming
+     * <p>
+     *  创建NameService,它在持久性CosNaming中启动根命名上下文
+     * 
+     * 
      * @param orb an ORB object.
      * @param logDir a File
      * @exception java.lang.Exception a Java exception.
@@ -121,6 +128,9 @@ public class NameService
 
     /**
      * This method returns the Root Naming Context
+     * <p>
+     *  此方法返回根命名上下文
+     * 
      */
     public NamingContext initialNamingContext()
     {
@@ -130,6 +140,9 @@ public class NameService
     /**
      * This method returns nsPOA which is the only POA that we use for
      * Persistent Naming Contexts.
+     * <p>
+     *  此方法返回nsPOA,这是我们用于持久命名上下文的唯一POA。
+     * 
      */
     POA getNSPOA( ) {
         return nsPOA;
@@ -141,6 +154,10 @@ public class NameService
      * NamingContextImpl. It is not a public API. NewContext is in this class
      * because a Persiten reference has to be created with Persistent NameService
      * POA.
+     * <p>
+     *  此方法创建一个NewContext,这将从NamingContextImpl内部调用。它不是一个公共API。
+     *  NewContext在此类中,因为必须使用Persistent NameService POA创建Persiten引用。
+     * 
      */
     public NamingContext NewContext( ) throws org.omg.CORBA.SystemException
     {
@@ -185,6 +202,10 @@ public class NameService
 
     /**
      * getObjectReferenceFromKey returns the Object reference from the objectkey using POA.create_reference_with_id method
+     * <p>
+     *  getObjectReferenceFromKey使用POA.create_reference_with_id方法从objectkey返回Object引用
+     * 
+     * 
      * @param Object Key as String
      * @returns reference an CORBA.Object.
      */
@@ -204,6 +225,9 @@ public class NameService
 
     /**
      * getObjectKey gets the Object Key from the reference using POA.reference_to_id method
+     * <p>
+     *  getObjectKey使用POA.reference_to_id方法从引用中获取对象键
+     * 
      * @param reference an CORBA.Object.
      * @returns Object Key as String
      */

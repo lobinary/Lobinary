@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,12 @@ import java.util.Set;
  * The in-degree of the node (that is, number of nodes that point to
  * the current node) may be queried.
  *
+ * <p>
+ *  有向图中的节点。
+ * 除了包含与节点相关联的用户数据的任意<code> Object </code>,每个节点维护当前节点所指向的节点的<code> Set </code>(可从<code> getOutNodes </code>
+ * )。
+ *  有向图中的节点。可以查询节点的内部度(即,指向当前节点的节点的数量)。
+ * 
  */
 class DigraphNode implements Cloneable, Serializable {
 
@@ -47,6 +54,9 @@ class DigraphNode implements Cloneable, Serializable {
     /**
      * A <code>Set</code> of neighboring nodes pointed to by this
      * node.
+     * <p>
+     *  设置此节点所指向的相邻节点的<code>设置</code>。
+     * 
      */
     protected Set outNodes = new HashSet();
 
@@ -56,6 +66,9 @@ class DigraphNode implements Cloneable, Serializable {
     /**
      * A <code>Set</code> of neighboring nodes that point to this
      * node.
+     * <p>
+     *  指向此节点的相邻节点的<code>设置</code>。
+     * 
      */
     private Set inNodes = new HashSet();
 
@@ -71,6 +84,9 @@ class DigraphNode implements Cloneable, Serializable {
     /**
      * Returns an <code>Iterator</code> containing the nodes pointed
      * to by this node.
+     * <p>
+     *  返回包含此节点所指向的节点的<code>迭代器</code>。
+     * 
      */
     public Iterator getOutNodes() {
         return outNodes.iterator();
@@ -80,6 +96,10 @@ class DigraphNode implements Cloneable, Serializable {
      * Adds a directed edge to the graph.  The outNodes list of this
      * node is updated and the in-degree of the other node is incremented.
      *
+     * <p>
+     *  向图形添加有向边。更新此节点的outNodes列表,并增加其他节点的in-degree。
+     * 
+     * 
      * @param node a <code>DigraphNode</code>.
      *
      * @return <code>true</code> if the node was not previously the
@@ -100,6 +120,10 @@ class DigraphNode implements Cloneable, Serializable {
      * Returns <code>true</code> if an edge exists between this node
      * and the given node.
      *
+     * <p>
+     *  如果此节点与给定节点之间存在边,则返回<code> true </code>。
+     * 
+     * 
      * @param node a <code>DigraphNode</code>.
      *
      * @return <code>true</code> if the node is the target of an edge.
@@ -112,6 +136,10 @@ class DigraphNode implements Cloneable, Serializable {
      * Removes a directed edge from the graph.  The outNodes list of this
      * node is updated and the in-degree of the other node is decremented.
      *
+     * <p>
+     *  从图形中删除有向边。更新此节点的outNodes列表,并减少其他节点的in-degree。
+     * 
+     * 
      * @return <code>true</code> if the node was previously the target
      * of an edge.
      */
@@ -129,6 +157,8 @@ class DigraphNode implements Cloneable, Serializable {
     /**
      * Removes this node from the graph, updating neighboring nodes
      * appropriately.
+     * <p>
+     *  从图中删除此节点,适当地更新邻居节点。
      */
     public void dispose() {
         Object[] inNodesArray = inNodes.toArray();

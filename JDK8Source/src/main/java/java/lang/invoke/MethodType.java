@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,31 @@ import sun.invoke.util.VerifyType;
  * all classes named in the descriptor must be accessible, and will be loaded.
  * (But the classes need not be initialized, as is the case with a {@code CONSTANT_Class}.)
  * This loading may occur at any time before the {@code MethodType} object is first derived.
+ * <p>
+ *  方法类型表示方法句柄接受和返回的参数和返回类型,或者方法句柄调用者传递和预期的参数和返回类型。
+ * 方法类型必须在方法句柄和所有调用者之间正确匹配,JVM的操作在{@link MethodHandle#invokeExact MethodHandle.invokeExact}和{@link MethodHandle#invoke MethodHandle.invoke}
+ * 的调用期间强制执行此匹配,和{@code invokedynamic}指令的执行期间。
+ *  方法类型表示方法句柄接受和返回的参数和返回类型,或者方法句柄调用者传递和预期的参数和返回类型。
+ * <p>
+ *  结构是一种返回类型,伴随有任意数量的参数类型。类型(原始,{@code void}和引用)由{@link Class}对象表示。
+ *  (为了便于说明,我们将{@code void}看作是一个类型,事实上,它表示没有返回类型。
+ * <p>
+ *  {@code MethodType}的所有实例都是不可变的。如果两个实例比较相等,则它们是完全可互换的。平等取决于返回和参数类型之间的成对对应,而不是别的。
+ * <p>
+ *  此类型只能通过工厂方法创建。所有的工厂方法可以缓存值,尽管缓存不能保证。一些工厂方法是静态的,而另一些是修改前体方法类型的虚拟方法,例如通过改变所选择的参数。
+ * <p>
+ * 对参数类型组进行操作的工厂方法有两个版本,以便Java数组和Java列表可用于处理参数类型组。
+ * 查询方法{@code parameterArray}和{@code parameterList}也提供了数组和列表之间的选择。
+ * <p>
+ *  {@code MethodType}对象有时派生自字节码指令,例如{@code invokedynamic},特别是从与类文件的常量池中的指令相关联的类型描述符字符串。
+ * <p>
+ *  像类和字符串一样,方法类型也可以直接在类文件的常量池中表示为常量。可以通过引用合适的{@code CONSTANT_MethodType}常量池条目的{@code ldc}指令来加载方法类型。
+ * 该条目引用描述符字符串的{@code CONSTANT_Utf8}拼写。 (有关方法类型常量的详细信息,请参阅Java虚拟机规范的4.4.8和5.4.3.5节)。
+ * <p>
+ *  当JVM从描述符字符串实现{@code MethodType}时,在描述符中命名的所有类都必须可访问,并且将被加载。 (但是类不需要初始化,就像{@code CONSTANT_Class})。
+ * 这种加载可能发生在{@code MethodType}对象首次派生之前的任何时候。
+ * 
+ * 
  * @author John Rose, JSR 292 EG
  */
 public final
@@ -103,6 +129,9 @@ class MethodType implements java.io.Serializable {
 
     /**
      * Check the given parameters for validity and store them into the final fields.
+     * <p>
+     *  检查给定的参数的有效性,并将它们存储在最终字段中。
+     * 
      */
     private MethodType(Class<?> rtype, Class<?>[] ptypes, boolean trusted) {
         checkRtype(rtype);
@@ -116,6 +145,9 @@ class MethodType implements java.io.Serializable {
      * Construct a temporary unchecked instance of MethodType for use only as a key to the intern table.
      * Does not check the given parameters for validity, and must be discarded after it is used as a searching key.
      * The parameters are reversed for this constructor, so that is is not accidentally used.
+     * <p>
+     * 构造MethodType的临时未检查实例,仅用作实体表的键。不检查给定的参数的有效性,并且在用作搜索关键字后必须丢弃。此构造函数的参数相反,因此不会意外使用。
+     * 
      */
     private MethodType(Class<?>[] ptypes, Class<?> rtype) {
         this.rtype = rtype;
@@ -123,7 +155,11 @@ class MethodType implements java.io.Serializable {
     }
 
     /*trusted*/ MethodTypeForm form() { return form; }
+    /* <p>
+    /* 
     /*trusted*/ Class<?> rtype() { return rtype; }
+    /* <p>
+    /* 
     /*trusted*/ Class<?>[] ptypes() { return ptypes; }
 
     void setForm(MethodTypeForm f) { form = f; }
@@ -135,6 +171,12 @@ class MethodType implements java.io.Serializable {
      *  The longest possible invocation will look like
      *  {@code staticMethod(arg1, arg2, ..., arg255)} or
      *  {@code x.virtualMethod(arg1, arg2, ..., arg254)}.
+     * <p>
+     *  void setForm(MethodTypeForm f){form = f; }}
+     * 
+     *  / **此数字由JVM规范强制为255,是任何Java方法在其参数列表中可以接收的最大<em>插槽数</em>。它限制JVM签名和方法类型对象。
+     * 最长的调用将看起来像{@code staticMethod(arg1,arg2,...,arg255)}或{@code x.virtualMethod(arg1,arg2,...,arg254)}。
+     * 
      */
     /*non-public*/ static final int MAX_JVM_ARITY = 255;  // this is mandated by the JVM spec.
 
@@ -144,6 +186,10 @@ class MethodType implements java.io.Serializable {
      *  beginning of the argument list used to invoke the method handle.
      *  The longest possible invocation will look like
      *  {@code mh.invoke(arg1, arg2, ..., arg254)}.
+     * <p>
+     *  / **该数字是方法句柄的最大数目,254。它是从绝对的JVM强​​制的数据中减去1得到的,它是在用于调用的自变量列表的开头由方法句柄本身占用的时隙方法句柄。
+     * 最长的调用将看起来像{@code mh.invoke(arg1,arg2,...,arg254)}。
+     * 
      */
     // Issue:  Should we allow MH.invokeWithArguments to go to the full 255?
     /*non-public*/ static final int MAX_MH_ARITY = MAX_JVM_ARITY-1;  // deduct one for mh receiver
@@ -155,6 +201,10 @@ class MethodType implements java.io.Serializable {
      *  list used to invoke the target method handle.
      *  The longest possible invocation will look like
      *  {@code invokermh.invoke(targetmh, arg1, arg2, ..., arg253)}.
+     * <p>
+     *  / **这个数字是方法句柄调用器的最大的数,253.它是从绝对的JVM强​​制的方法中减去两个,它们是invoke方法句柄占用的槽和目标方法句柄,它们都是在用于调用目标方法句柄的参数列表的开头。
+     * 最长的调用将看起来像{@code invokermh.invoke(targetmh,arg1,arg2,...,arg253)}。
+     * 
      */
     /*non-public*/ static final int MAX_MH_INVOKER_ARITY = MAX_MH_ARITY-1;  // deduct one more for invoker
 
@@ -166,6 +216,12 @@ class MethodType implements java.io.Serializable {
         if (ptype == void.class)
             throw newIllegalArgumentException("parameter type cannot be void");
     }
+    /* <p>
+    /* private static void checkRtype(Class <?> rtype){Objects.requireNonNull(rtype); } private static void 
+    /* checkPtype(Class <?> ptype){Objects.requireNonNull(ptype); if(ptype == void.class)throw newIllegalArgumentException("parameter type can not be void"); }
+    /* }。
+    /* 
+    /* 
     /** Return number of extra slots (count of long/double args). */
     private static int checkPtypes(Class<?>[] ptypes) {
         int slots = 0;
@@ -195,6 +251,10 @@ class MethodType implements java.io.Serializable {
 
     /**
      * Finds or creates an instance of the given method type.
+     * <p>
+     *  查找或创建给定方法类型的实例。
+     * 
+     * 
      * @param rtype  the return type
      * @param ptypes the parameter types
      * @return a method type with the given components
@@ -209,6 +269,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Finds or creates a method type with the given components.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     *  使用给定的组件查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param rtype  the return type
      * @param ptypes the parameter types
      * @return a method type with the given components
@@ -231,6 +295,11 @@ class MethodType implements java.io.Serializable {
      * Finds or creates a method type with the given components.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
      * The leading parameter type is prepended to the remaining array.
+     * <p>
+     *  使用给定的组件查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 前导参数类型预留到剩余数组。
+     * 
+     * 
      * @param rtype  the return type
      * @param ptype0 the first parameter type
      * @param ptypes the remaining parameter types
@@ -250,6 +319,11 @@ class MethodType implements java.io.Serializable {
      * Finds or creates a method type with the given components.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
      * The resulting method has no parameter types.
+     * <p>
+     *  使用给定的组件查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 生成的方法没有参数类型。
+     * 
+     * 
      * @param rtype  the return type
      * @return a method type with the given return value
      * @throws NullPointerException if {@code rtype} is null
@@ -263,6 +337,11 @@ class MethodType implements java.io.Serializable {
      * Finds or creates a method type with the given components.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
      * The resulting method has the single given parameter type.
+     * <p>
+     *  使用给定的组件查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 结果方法具有单个给定的参数类型。
+     * 
+     * 
      * @param rtype  the return type
      * @param ptype0 the parameter type
      * @return a method type with the given return value and parameter type
@@ -279,6 +358,11 @@ class MethodType implements java.io.Serializable {
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
      * The resulting method has the same parameter types as {@code ptypes},
      * and the specified return type.
+     * <p>
+     *  使用给定的组件查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 生成的方法具有与{@code ptypes}相同的参数类型和指定的返回类型。
+     * 
+     * 
      * @param rtype  the return type
      * @param ptypes the method type which supplies the parameter types
      * @return a method type with the given components
@@ -291,6 +375,10 @@ class MethodType implements java.io.Serializable {
 
     /**
      * Sole factory method to find or create an interned method type.
+     * <p>
+     *  单独的工厂方法找到或创建一个interned方法类型。
+     * 
+     * 
      * @param rtype desired return type
      * @param ptypes desired parameter types
      * @param trusted whether the ptypes can be used without cloning
@@ -316,6 +404,17 @@ class MethodType implements java.io.Serializable {
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
      * All parameters and the return type will be {@code Object},
      * except the final array parameter if any, which will be {@code Object[]}.
+     * <p>
+     * 方法类型makeImpl(类<?> rtype,类<?> [] ptypes,布尔值受信任){MethodType mt = internTable.get(new MethodType(ptypes,rtype)); if(mt！= null)return mt; if(ptypes.length == 0){ptypes = NO_PTYPES; trusted = true; }
+     *  mt = new MethodType(rtype,ptypes,trusted); //将对象提升为Real Thing,并重新打开mt.form = MethodTypeForm.findForm
+     * (mt); return internTable.add(mt); } private static final MethodType [] objectOnlyTypes = new MethodTy
+     * pe [20];。
+     * 
+     *  / **查找或创建一个方法类型,其组件为{@code Object},带有可选的尾部{@code Object []}数组。
+     *  {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 所有参数和返回类型都将是{@code Object},除了最终的数组参数(如果有),它将是{@code Object []}。
+     * 
+     * 
      * @param objectArgCount number of parameters (excluding the final array parameter if any)
      * @param finalArray whether there will be a trailing array parameter, of type {@code Object[]}
      * @return a generally applicable method type, for all calls of the given fixed argument count and a collected array of further arguments
@@ -346,6 +445,11 @@ class MethodType implements java.io.Serializable {
      * Finds or creates a method type whose components are all {@code Object}.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
      * All parameters and the return type will be Object.
+     * <p>
+     *  查找或创建一个方法类型,其组件都是{@code Object}。
+     *  {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。所有参数和返回类型都将是Object。
+     * 
+     * 
      * @param objectArgCount number of parameters
      * @return a generally applicable method type, for all calls of the given argument count
      * @throws IllegalArgumentException if {@code objectArgCount} is negative or greater than 255
@@ -359,6 +463,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Finds or creates a method type with a single different parameter type.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     *  查找或创建具有单个不同参数类型的方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param num    the index (zero-based) of the parameter type to change
      * @param nptype a new parameter type to replace the old one with
      * @return the same type, except with the selected parameter changed
@@ -377,6 +485,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Finds or creates a method type with additional parameter types.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     *  使用其他参数类型查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param num    the position (zero-based) of the inserted parameter type(s)
      * @param ptypesToInsert zero or more new parameter types to insert into the parameter list
      * @return the same type, except with the selected parameter(s) inserted
@@ -402,6 +514,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Finds or creates a method type with additional parameter types.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     * 使用其他参数类型查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param ptypesToInsert zero or more new parameter types to insert after the end of the parameter list
      * @return the same type, except with the selected parameter(s) appended
      * @throws IllegalArgumentException if any element of {@code ptypesToInsert} is {@code void.class}
@@ -415,6 +531,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Finds or creates a method type with additional parameter types.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     *  使用其他参数类型查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param num    the position (zero-based) of the inserted parameter type(s)
      * @param ptypesToInsert zero or more new parameter types to insert into the parameter list
      * @return the same type, except with the selected parameter(s) inserted
@@ -430,6 +550,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Finds or creates a method type with additional parameter types.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     *  使用其他参数类型查找或创建方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param ptypesToInsert zero or more new parameter types to insert after the end of the parameter list
      * @return the same type, except with the selected parameter(s) appended
      * @throws IllegalArgumentException if any element of {@code ptypesToInsert} is {@code void.class}
@@ -443,6 +567,10 @@ class MethodType implements java.io.Serializable {
      /**
      * Finds or creates a method type with modified parameter types.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     *  查找或创建具有修改的参数类型的方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param start  the position (zero-based) of the first replaced parameter type(s)
      * @param end    the position (zero-based) after the last replaced parameter type(s)
      * @param ptypesToInsert zero or more new parameter types to insert into the parameter list
@@ -467,6 +595,12 @@ class MethodType implements java.io.Serializable {
     }
 
     /** Replace the last arrayLength parameter types with the component type of arrayType.
+    /* <p>
+    /*  if(start == end)return insertParameterTypes(start,ptypesToInsert); int len = ptypes.length; if(！(0 <= start && start <= end && end <= len))throw newIndexOutOfBoundsException("start ="+ start +"end ="+ end); int ilen = ptypesToInsert.length; if(ilen == 0)return dropParameterTypes(start,end); return dropParameterTypes(start,end).insertParameterTypes(start,ptypesToInsert); }}。
+    /* 
+    /*  / **将最后一个arrayLength参数类型替换为arrayType的组件类型。
+    /* 
+    /* 
      * @param arrayType any array type
      * @param arrayLength the number of parameter types to change
      * @return the resulting type
@@ -499,6 +633,17 @@ class MethodType implements java.io.Serializable {
     }
 
     /** Return the leading parameter type, which must exist and be a reference.
+    /* <p>
+    /* assert(parameterCount()> = arrayLength); int spreadPos = ptypes.length  -  arrayLength; if(arrayLengt
+    /* h == 0)return this; //没有改变if(arrayType == Object []。
+    /* class){if(isGeneric())return this; //没有什么要改变if(spreadPos == 0){//没有领先的参数保存; go generic MethodType res = genericMethodType(arrayLength); if(rtype！= Object.class){res = res.changeReturnType(rtype); }
+    /*  return res; }} class <?> elemType = arrayType.getComponentType(); assert(elemType！= null); for(int i
+    /*  = spreadPos; i <ptypes.length; i ++){if(ptypes [i]！= elemType){Class <?> [] fixedPtypes = ptypes.clone Arrays.fill(fixedPtypes,i,ptypes.length,elemType); return methodType(rtype,fixedPtypes); }
+    /* } return this; // arguments check out;不用找了 }。
+    /* 
+    /*  / **返回前导参数类型,它必须存在并作为参考。
+    /* 
+    /* 
      *  @return the leading parameter type, after error checks
      */
     /*non-public*/ Class<?> leadingReferenceParameter() {
@@ -510,6 +655,13 @@ class MethodType implements java.io.Serializable {
     }
 
     /** Delete the last parameter type and replace it with arrayLength copies of the component type of arrayType.
+    /* <p>
+    /*  类<p>; if(ptypes.length == 0 ||(ptype = ptypes [0])。
+    /* isPrimitive())throw newIllegalArgumentException("no leading reference parameter"); return ptype; }}。
+    /* 
+    /*  / **删除最后一个参数类型并将其替换为arrayLength arrayType的组件类型的副本。
+    /* 
+    /* 
      * @param arrayType any array type
      * @param arrayLength the number of parameter types to insert
      * @return the resulting type
@@ -538,6 +690,18 @@ class MethodType implements java.io.Serializable {
     /**
      * Finds or creates a method type with some parameter types omitted.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     * assert(parameterCount()> = 1);断言(lastParameterType()。
+     * isAssignableFrom(arrayType)); MethodType res; if(arrayType == Object []。
+     * class){res = genericMethodType(arrayLength); if(rtype！= Object.class){res = res.changeReturnType(rtype); }
+     * } else {Class <?> elemType = arrayType.getComponentType(); assert(elemType！= null); res = methodType(rtype,Collections.nCopies(arrayLength,elemType)); }
+     *  if(ptypes.length == 1){return res; } else {return res.insertParameterTypes(0,parameterList()。
+     * isAssignableFrom(arrayType)); MethodType res; if(arrayType == Object []。
+     * subList(0,ptypes.length-1)); }}。
+     * 
+     *  / **查找或创建一些省略某些参数类型的方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param start  the index (zero-based) of the first parameter type to remove
      * @param end    the index (greater than {@code start}) of the first parameter type after not to remove
      * @return the same type, except with the selected parameter(s) removed
@@ -575,6 +739,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Finds or creates a method type with a different return type.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+     * <p>
+     *  查找或创建具有不同返回类型的方法类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 
+     * 
      * @param nrtype a return parameter type to replace the old one with
      * @return the same type, except with the return type change
      * @throws NullPointerException if {@code nrtype} is null
@@ -587,6 +755,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Reports if this type contains a primitive argument or return value.
      * The return type {@code void} counts as a primitive.
+     * <p>
+     *  报告此类型是否包含原始参数或返回值。返回类型{@code void}计为原始。
+     * 
+     * 
      * @return true if any of the types are primitives
      */
     public boolean hasPrimitives() {
@@ -598,6 +770,10 @@ class MethodType implements java.io.Serializable {
      * Wrappers are types which box primitive values, such as {@link Integer}.
      * The reference type {@code java.lang.Void} counts as a wrapper,
      * if it occurs as a return type.
+     * <p>
+     *  报告此类型是否包含包装器参数或返回值。包装器是包含原始值的类型,例如{@link Integer}。引用类型{@code java.lang.Void}计数为包装器,如果它作为返回类型发生。
+     * 
+     * 
      * @return true if any of the types are wrappers
      */
     public boolean hasWrappers() {
@@ -608,6 +784,11 @@ class MethodType implements java.io.Serializable {
      * Erases all reference types to {@code Object}.
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
      * All primitive types (including {@code void}) will remain unchanged.
+     * <p>
+     *  将所有引用类型删除为{@code Object}。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 所有原始类型(包括{@code void})将保持不变。
+     * 
+     * 
      * @return a version of the original type with all reference types replaced
      */
     public MethodType erase() {
@@ -618,6 +799,11 @@ class MethodType implements java.io.Serializable {
      * Erases all reference types to {@code Object}, and all subword types to {@code int}.
      * This is the reduced type polymorphism used by private methods
      * such as {@link MethodHandle#invokeBasic invokeBasic}.
+     * <p>
+     * 将所有引用类型删除为{@code Object},将所有子类型删除为{@code int}。
+     * 这是私有方法使用的简化类型多态性,例如{@link MethodHandle#invokeBasic invokeBasic}。
+     * 
+     * 
      * @return a version of the original type with all reference and subword types replaced
      */
     /*non-public*/ MethodType basicType() {
@@ -625,6 +811,12 @@ class MethodType implements java.io.Serializable {
     }
 
     /**
+    /* <p>
+    /*  return form.basicType(); }}
+    /* 
+    /*  / **
+    /* 
+    /* 
      * @return a version of the original type with MethodHandle prepended as the first argument
      */
     /*non-public*/ MethodType invokerType() {
@@ -636,6 +828,13 @@ class MethodType implements java.io.Serializable {
      * Convenience method for {@link #genericMethodType(int) genericMethodType}.
      * The expression {@code type.wrap().erase()} produces the same value
      * as {@code type.generic()}.
+     * <p>
+     *  return insertParameterTypes(0,MethodHandle.class); }}
+     * 
+     *  / **将所有类型(引用和原语)转换为{@code Object}。 {@link #genericMethodType(int)genericMethodType}的便利方法。
+     * 表达式{@code type.wrap()。erase()}产生与{@code type.generic()}相同的值。
+     * 
+     * 
      * @return a version of the original type with all types replaced
      */
     public MethodType generic() {
@@ -653,6 +852,14 @@ class MethodType implements java.io.Serializable {
      * A {@code void} return type is changed to the type {@code java.lang.Void}.
      * The expression {@code type.wrap().erase()} produces the same value
      * as {@code type.generic()}.
+     * <p>
+     *  return this == erase()&&！hasPrimitives(); }}
+     * 
+     *  / **将所有基本类型转换为相应的包装类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 所有引用类型(包括包装类型)将保持不变。 {@code void}返回类型更改为类型{@code java.lang.Void}。表达式{@code type.wrap()。
+     * erase()}产生与{@code type.generic()}相同的值。
+     * 
+     * 
      * @return a version of the original type with all primitive types replaced
      */
     public MethodType wrap() {
@@ -664,6 +871,11 @@ class MethodType implements java.io.Serializable {
      * Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
      * All primitive types (including {@code void}) will remain unchanged.
      * A return type of {@code java.lang.Void} is changed to {@code void}.
+     * <p>
+     *  将所有包装器类型转换为其对应的基本类型。 {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 所有原始类型(包括{@code void})将保持不变。 {@code java.lang.Void}的返回类型更改为{@code void}。
+     * 
+     * 
      * @return a version of the original type with all wrapper types replaced
      */
     public MethodType unwrap() {
@@ -698,6 +910,10 @@ class MethodType implements java.io.Serializable {
 
     /**
      * Returns the parameter type at the specified index, within this method type.
+     * <p>
+     *  返回此方法类型中指定索引处的参数类型。
+     * 
+     * 
      * @param num the index (zero-based) of the desired parameter type
      * @return the selected parameter type
      * @throws IndexOutOfBoundsException if {@code num} is not a valid index into {@code parameterArray()}
@@ -707,6 +923,10 @@ class MethodType implements java.io.Serializable {
     }
     /**
      * Returns the number of parameter types in this method type.
+     * <p>
+     *  返回此方法类型中的参数类型的数量。
+     * 
+     * 
      * @return the number of parameter types
      */
     public int parameterCount() {
@@ -714,6 +934,10 @@ class MethodType implements java.io.Serializable {
     }
     /**
      * Returns the return type of this method type.
+     * <p>
+     *  返回此方法类型的返回类型。
+     * 
+     * 
      * @return the return type
      */
     public Class<?> returnType() {
@@ -723,6 +947,10 @@ class MethodType implements java.io.Serializable {
     /**
      * Presents the parameter types as a list (a convenience method).
      * The list will be immutable.
+     * <p>
+     * 将参数类型作为列表呈现(方便方法)。该列表将是不可变的。
+     * 
+     * 
      * @return the parameter types (as an immutable list)
      */
     public List<Class<?>> parameterList() {
@@ -737,6 +965,12 @@ class MethodType implements java.io.Serializable {
     /**
      * Presents the parameter types as an array (a convenience method).
      * Changes to the array will not result in changes to the type.
+     * <p>
+     *  int len = ptypes.length; return len == 0? void.class：ptypes [len-1]; }}
+     * 
+     *  / **将参数类型表示为数组(方便的方法)。对数组的更改不会导致类型更改。
+     * 
+     * 
      * @return the parameter types (as a fresh copy if necessary)
      */
     public Class<?>[] parameterArray() {
@@ -747,6 +981,10 @@ class MethodType implements java.io.Serializable {
      * Compares the specified object with this type for equality.
      * That is, it returns <tt>true</tt> if and only if the specified object
      * is also a method type with exactly the same parameters and return type.
+     * <p>
+     *  将指定的对象与此类型进行比较以确保相等。也就是说,当且仅当指定的对象也是具有完全相同的参数和返回类型的方法类型时,它返回<tt> true </tt>。
+     * 
+     * 
      * @param x object to compare
      * @see Object#equals(Object)
      */
@@ -765,6 +1003,10 @@ class MethodType implements java.io.Serializable {
      * It is defined to be the same as the hashcode of a List
      * whose elements are the return type followed by the
      * parameter types.
+     * <p>
+     *  返回此方法类型的哈希码值。它被定义为与List的哈希码相同,其元素是返回类型,后跟参数类型。
+     * 
+     * 
      * @return the hash code value for this method type
      * @see Object#hashCode()
      * @see #equals(Object)
@@ -787,6 +1029,11 @@ class MethodType implements java.io.Serializable {
      * <p>
      * Each type is represented by its
      * {@link java.lang.Class#getSimpleName simple name}.
+     * <p>
+     *  返回方法类型的字符串表示形式,形式为{@code"(PT0,PT1 ...)RT"}。方法类型的字符串表示形式是括号括起来的括号,逗号分隔的类型名称列表,紧接着是返回类型。
+     * <p>
+     *  每个类型都由其{@link java.lang.Class#getSimpleName simple name}表示。
+     * 
      */
     @Override
     public String toString() {
@@ -803,6 +1050,9 @@ class MethodType implements java.io.Serializable {
 
     /** True if the old return type can always be viewed (w/o casting) under new return type,
      *  and the new parameters can be viewed (w/o casting) under the old parameter types.
+     * <p>
+     *  并且可以在旧参数类型下查看(w / o铸造)新参数。
+     * 
      */
     /*non-public*/
     boolean isViewableAs(MethodType newType, boolean keepInterfaces) {
@@ -859,6 +1109,9 @@ class MethodType implements java.io.Serializable {
 
     /** Returns true if MHs.explicitCastArguments produces the same result as MH.asType.
      *  If the type conversion is impossible for either, the result should be false.
+     * <p>
+     *  如果类型转换不可能,则结果应为false。
+     * 
      */
     /*non-public*/
     boolean explicitCastEquivalentToAsType(MethodType newType) {
@@ -893,6 +1146,14 @@ class MethodType implements java.io.Serializable {
      *  3b. unboxing of null is permitted (creates a zero primitive value)
      * Other than interfaces, reference-to-reference conversions are the same.
      * Boxing primitives to references is the same for both operators.
+     * <p>
+     * 并具有相同的效果。
+     *  MHs.eCA具有对MH.asType的以下"升级"：1.接口未经检查(即被视为对别名的别名)因此,{@code Object-> CharSequence}在这两种情况下都是可能的,但具有不同的语义
+     * 2 。
+     * 并具有相同的效果。
+     * 支持原始到原始转换的完整矩阵像{@code long-> byte}这样的缩小和类似{@code boolean-> int}的基本类型,asType不支持,但asType支持的任何东西都是等价的MH。
+     * 并具有相同的效果。 3a。开箱转换之后可以是原始转换的完整矩阵3b。允许解除空值(创建一个零原始值)除了接口之外,引用到引用的转换是相同的。对于两个运算符,引用的装箱原语是相同的。
+     * 
      */
     private static boolean explicitCastEquivalentToAsType(Class<?> src, Class<?> dst) {
         if (src == dst || dst == Object.class || dst == void.class)  return true;
@@ -981,12 +1242,23 @@ class MethodType implements java.io.Serializable {
      * <p>
      * This method is included for the benefit of applications that must
      * generate bytecodes that process method handles and invokedynamic.
+     * <p>
+     *  这种类型。注意(由于历史原因)JVM需要第二个堆栈槽来传递long和double参数。
+     * 因此,此方法返回{@link #parameterCount()parameterCount}加上long和double参数的数量(如果有)。
+     * <p>
+     *  包括此方法是为了有利于必须生成处理方法句柄和调用的动态的字节码的应用程序。
+     * 
+     * 
      * @return the number of JVM stack slots for this type's parameters
      */
     /*non-public*/ int parameterSlotCount() {
         return form.parameterSlotCount();
     }
 
+    /* <p>
+    /*  return form.parameterSlotCount(); }}
+    /* 
+    /* 
     /*non-public*/ Invokers invokers() {
         Invokers inv = invokers;
         if (inv != null)  return inv;
@@ -1012,6 +1284,18 @@ class MethodType implements java.io.Serializable {
      * <p>
      * This method is included for the benefit of applications that must
      * generate bytecodes that process method handles and invokedynamic.
+     * <p>
+     *  调用者inv = invokers; if(inv！= null)return inv; invokers = inv = new Invokers(this); return inv; }}
+     * 
+     * / **报告包含和位于给定位置之后的所有参数的JVM堆栈槽的数量,它必须在0到{@code parameterCount}的范围内。连续参数被更浅地堆叠,并且参数根据它们的后沿在字节码中索引。
+     * 因此,为了获得参数{@code N}的去话呼叫堆栈中的深度,在位置{@code N + 1}获得其后沿的{@code parameterSlotDepth}。
+     * <p>
+     *  类型为{@code long}和{@code double}的参数占用两个堆栈槽(由于历史原因),所有其他占用一个。
+     * 因此,返回的数字是在给定参数之后<em>包括</em>和<em>的参数数量<em>加上</em>之后或之后的long或double参数的数量给定参数的参数。
+     * <p>
+     *  包括此方法是为了有利于必须生成处理方法句柄和调用的动态的字节码的应用程序。
+     * 
+     * 
      * @param num an index (zero-based, inclusive) within the parameter types
      * @return the index of the (shallowest) JVM stack slot transmitting the
      *         given parameter
@@ -1030,6 +1314,16 @@ class MethodType implements java.io.Serializable {
      * <p>
      * This method is included for the benefit of applications that must
      * generate bytecodes that process method handles and invokedynamic.
+     * <p>
+     *  if(num <0 || num> ptypes.length)parameterType(num); // force a range check return form.parameterToAr
+     * gSlot(num-1); }}。
+     * 
+     *  / **报告从此类型的方法接收返回值所需的JVM堆栈槽数。
+     * 如果{@link #returnType()返回类型}是void,它将为零,否则如果返回类型为long或double,它将是两个,否则为一个。
+     * <p>
+     *  包括此方法是为了有利于必须生成处理方法句柄和调用的动态的字节码的应用程序。
+     * 
+     * 
      * @return the number of JVM stack slots (0, 1, or 2) for this type's return value
      * Will be removed for PFD.
      */
@@ -1050,6 +1344,18 @@ class MethodType implements java.io.Serializable {
      * <p>
      * This method is included for the benefit of applications that must
      * generate bytecodes that process method handles and {@code invokedynamic}.
+     * <p>
+     *  return form.returnSlotCount(); }}
+     * 
+     * / **查找或创建一个方法类型的实例,给定其字节码描述符的拼写。
+     *  {@link #methodType(java.lang.Class,java.lang.Class [])methodType}的便利方法。
+     * 嵌入在描述符字符串中的任何类或接口名将通过调用{@link ClassLoader#loadClass(java.lang.String)}在给定加载器(或如果它为null,在系统类加载器上)解析。
+     * <p>
+     *  注意,有可能遇到不能由这种方法构造的方法类型,因为它们的组件类型不能从公共类加载器中获得。
+     * <p>
+     *  包括这个方法的好处是必须生成处理方法句柄和{@code invokedynamic}的字节码的应用程序。
+     * 
+     * 
      * @param descriptor a bytecode-level type descriptor string "(T...)T"
      * @param loader the class loader in which to look up the types
      * @return a method type matching the bytecode-level type descriptor
@@ -1082,6 +1388,18 @@ class MethodType implements java.io.Serializable {
      * generate bytecodes that process method handles and {@code invokedynamic}.
      * {@link #fromMethodDescriptorString(java.lang.String, java.lang.ClassLoader) fromMethodDescriptorString},
      * because the latter requires a suitable class loader argument.
+     * <p>
+     *  生成方法类型的字节码描述符表示。
+     * <p>
+     *  请注意,这不是{@link #fromMethodDescriptorString fromMethodDescriptorString}的严格逆。
+     * 在描述符字符串中查看时,共享公用名称但具有不同类装入器的两个不同类将显示相同。
+     * <p>
+     *  包括这个方法的好处是必须生成处理方法句柄和{@code invokedynamic}的字节码的应用程序。
+     *  {@link #fromMethodDescriptorString(java.lang.String,java.lang.ClassLoader)fromMethodDescriptorString}
+     * ,因为后者需要一个合适的类加载器参数。
+     *  包括这个方法的好处是必须生成处理方法句柄和{@code invokedynamic}的字节码的应用程序。
+     * 
+     * 
      * @return the bytecode type descriptor representation
      */
     public String toMethodDescriptorString() {
@@ -1101,12 +1419,23 @@ class MethodType implements java.io.Serializable {
 
     /**
      * There are no serializable fields for {@code MethodType}.
+     * <p>
+     *  return BytecodeDescriptor.unparse(cls); }}
+     * 
+     *  ///序列化。
+     * 
+     *  / ** {@code MethodType}没有可序列化字段。
+     * 
      */
     private static final java.io.ObjectStreamField[] serialPersistentFields = { };
 
     /**
      * Save the {@code MethodType} instance to a stream.
      *
+     * <p>
+     * 将{@code MethodType}实例保存到流中。
+     * 
+     * 
      * @serialData
      * For portability, the serialized format does not refer to named fields.
      * Instead, the return type and parameter type arrays are written directly
@@ -1137,6 +1466,11 @@ s.writeObject(this.parameterArray());
      * It provides the parameters to the factory method called by
      * {@link #readResolve readResolve}.
      * After that call it is discarded.
+     * <p>
+     *  从流重新构建{@code MethodType}实例(即,反序列化它)。此实例是具有伪造最终字段的scratch对象。
+     * 它为由{@link #readResolve readResolve}调用的工厂方法提供参数。在该呼叫之后,它被丢弃。
+     * 
+     * 
      * @param s the stream to read the object from
      * @throws java.io.IOException if there is a problem reading the object
      * @throws ClassNotFoundException if one of the component classes cannot be resolved
@@ -1162,6 +1496,9 @@ s.writeObject(this.parameterArray());
     /**
      * For serialization only.
      * Sets the final fields to null, pending {@code Unsafe.putObject}.
+     * <p>
+     *  仅用于序列化。将最终字段设置为null,等待{@code Unsafe.putObject}。
+     * 
      */
     private MethodType() {
         this.rtype = null;
@@ -1192,6 +1529,10 @@ s.writeObject(this.parameterArray());
     /**
      * Resolves and initializes a {@code MethodType} object
      * after serialization.
+     * <p>
+     *  序列化后解析和初始化{@code MethodType}对象。
+     * 
+     * 
      * @return the fully initialized {@code MethodType} object
      */
     private Object readResolve() {
@@ -1204,6 +1545,10 @@ s.writeObject(this.parameterArray());
     /**
      * Simple implementation of weak concurrent intern set.
      *
+     * <p>
+     *  简单实现弱并发实体集。
+     * 
+     * 
      * @param <T> interned type
      */
     private static class ConcurrentWeakInternSet<T> {
@@ -1220,6 +1565,10 @@ s.writeObject(this.parameterArray());
          * Get the existing interned element.
          * This method returns null if no element is interned.
          *
+         * <p>
+         *  获取现有的interned元素。如果没有元素被实现,此方法返回null。
+         * 
+         * 
          * @param elem element to look up
          * @return the interned element
          */
@@ -1243,6 +1592,9 @@ s.writeObject(this.parameterArray());
          * Under the race against another add(), it can return <i>different</i>
          * element, if another thread beats us to interning it.
          *
+         * <p>
+         *  实现元素。始终返回非空元素,与实体集中的一个匹配。在与另一个add()的竞争下,如果另一个线程跳过我们到interning它,它可以返回<i>不同</i>元素。
+         * 
          * @param elem element to add
          * @return element that was actually added
          */

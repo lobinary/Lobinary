@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: FunctionCall.java,v 1.2.4.1 2005/09/12 10:31:32 pvedula Exp $
+ * <p>
+ *  $ Id：FunctionCall.java,v 1.2.4.1 2005/09/12 10:31:32 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -58,6 +71,8 @@ import com.sun.org.apache.xalan.internal.utils.ObjectFactory;
 import java.util.Objects;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -118,6 +133,9 @@ class FunctionCall extends Expression {
 
     /**
      * Stores reference to object for non-static Java calls
+     * <p>
+     *  存储对非静态Java调用的对象的引用
+     * 
      */
     Expression _thisArgument = null;
 
@@ -152,6 +170,9 @@ class FunctionCall extends Expression {
      * inner class to used in internal2Java mappings, contains
      * the Java type and the distance between the internal type and
      * the Java type.
+     * <p>
+     *  在internal2Java映射中使用的内部类,包含Java类型以及内部类型和Java类型之间的距离。
+     * 
      */
     static class JavaType {
         public Class  type;
@@ -178,6 +199,9 @@ class FunctionCall extends Expression {
      * 1. From internal types to Java types and
      * 2. From Java types to internal types.
      * These two tables are used when calling external (Java) functions.
+     * <p>
+     *  定义2个转换表：1.从内部类型到Java类型,2.从Java类型到内部类型。这两个表在调用外部(Java)函数时使用。
+     * 
      */
     static {
         try {
@@ -331,6 +355,9 @@ class FunctionCall extends Expression {
     /**
      * Type check a function call. Since different type conversions apply,
      * type checking is different for standard and external (Java) functions.
+     * <p>
+     *  类型检查函数调用。由于应用了不同类型的转换,因此标准和外部(Java)函数的类型检查是不同的。
+     * 
      */
     @Override
     public Type typeCheck(SymbolTable stable)
@@ -411,6 +438,9 @@ class FunctionCall extends Expression {
      * Type check a call to a standard function. Insert CastExprs when needed.
      * If as a result of the insertion of a CastExpr a type check error is
      * thrown, then catch it and re-throw it with a new "this".
+     * <p>
+     *  类型检查对标准函数的调用。需要时插入CastExprs。如果由于插入一个CastExpr类型检查错误抛出,然后捕获它,并重新抛出它与一个新的"这"。
+     * 
      */
     public Type typeCheckStandard(SymbolTable stable) throws TypeCheckError {
         _fname.clearNamespace();        // HACK!!!
@@ -516,6 +546,9 @@ class FunctionCall extends Expression {
      * must exist for all its arguments and its return type.
      * Every method of name <code>_fname</code> is inspected
      * as a possible candidate.
+     * <p>
+     * 类型检查对外部(Java)方法的调用。该方法必须是公共的,并且必须对其所有参数及其返回类型存在法律类型转换。名称<code> _fname </code>的每个方法被检查为可能的候选。
+     * 
      */
     public Type typeCheckExternal(SymbolTable stable) throws TypeCheckError {
         int nArgs = _arguments.size();
@@ -562,6 +595,10 @@ class FunctionCall extends Expression {
                  * Warning will _NOT_ be issued is the call is properly
                  * wrapped in an <xsl:if> or <xsl:when> element. For details
                  * see If.parserContents() and When.parserContents()
+                 * <p>
+                 *  如果外部函数无法解析,请警告用户。警告将_NOT_被发出是调用正确包裹在<xsl：if>或<xsl：when>元素。
+                 * 有关详细信息,请参阅If.parserContents()和When.parserContents()。
+                 * 
                  */
                 final Parser parser = getParser();
                 if (parser != null) {
@@ -663,6 +700,9 @@ class FunctionCall extends Expression {
 
     /**
      * Type check the actual arguments of this function call.
+     * <p>
+     *  类型检查此函数调用的实际参数。
+     * 
      */
     public Vector typeCheckArgs(SymbolTable stable) throws TypeCheckError {
         final Vector result = new Vector();
@@ -693,6 +733,9 @@ class FunctionCall extends Expression {
     /**
      * Compile the function call and treat as an expression
      * Update true/false-lists.
+     * <p>
+     *  编译函数调用并将其视为表达式更新true / false-lists。
+     * 
      */
     @Override
     public void translateDesynthesized(ClassGenerator classGen,
@@ -714,6 +757,9 @@ class FunctionCall extends Expression {
     /**
      * Translate a function call. The compiled code will leave the function's
      * return value on the JVM's stack.
+     * <p>
+     *  翻译函数调用。编译的代码将在JVM的堆栈上保留函数的返回值。
+     * 
      */
     @Override
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
@@ -894,6 +940,9 @@ class FunctionCall extends Expression {
      * Returns a vector with all methods named <code>_fname</code>
      * after stripping its namespace or <code>null</code>
      * if no such methods exist.
+     * <p>
+     *  在剥离其命名空间或<code> null </code>之后,如果不存在此类方法,则返回具有所有名为<code> _fname </code>的方法的向量。
+     * 
      */
     private Vector findMethods() {
 
@@ -956,6 +1005,9 @@ class FunctionCall extends Expression {
      * Returns a vector with all constructors named <code>_fname</code>
      * after stripping its namespace or <code>null</code>
      * if no such methods exist.
+     * <p>
+     *  如果不存在此类方法,则在剥离其命名空间或<code> null </code>之后返回具有所有名为<code> _fname </code>的构造函数的向量。
+     * 
      */
     private Vector findConstructors() {
         Vector result = null;
@@ -998,6 +1050,9 @@ class FunctionCall extends Expression {
 
     /**
      * Compute the JVM signature for the class.
+     * <p>
+     *  计算类的JVM签名。
+     * 
      */
     static final String getSignature(Class clazz) {
         if (clazz.isArray()) {
@@ -1051,6 +1106,9 @@ class FunctionCall extends Expression {
 
     /**
      * Compute the JVM method descriptor for the method.
+     * <p>
+     *  计算方法的JVM方法描述符。
+     * 
      */
     static final String getSignature(Method meth) {
         final StringBuffer sb = new StringBuffer();
@@ -1065,6 +1123,9 @@ class FunctionCall extends Expression {
 
     /**
      * Compute the JVM constructor descriptor for the constructor.
+     * <p>
+     *  计算构造函数的JVM构造函数描述符。
+     * 
      */
     static final String getSignature(Constructor cons) {
         final StringBuffer sb = new StringBuffer();
@@ -1078,6 +1139,9 @@ class FunctionCall extends Expression {
 
     /**
      * Return the signature of the current method
+     * <p>
+     *  返回当前方法的签名
+     * 
      */
     private String getMethodSignature(Vector argsType) {
         final StringBuffer buf = new StringBuffer(_className);
@@ -1098,6 +1162,9 @@ class FunctionCall extends Expression {
      * To support EXSLT extensions, convert names with dash to allowable Java names:
      * e.g., convert abc-xyz to abcXyz.
      * Note: dashes only appear in middle of an EXSLT function or element name.
+     * <p>
+     *  要支持EXSLT扩展,请将带有破折号的名称转换为允许的Java名称：例如,将abc-xyz转换为abcXyz。注意：破折号只会出现在EXSLT函数或元素名称的中间。
+     * 
      */
     protected static String replaceDash(String name)
     {
@@ -1115,6 +1182,8 @@ class FunctionCall extends Expression {
     /**
      * Translate code to call the BasisLibrary.unallowed_extensionF(String)
      * method.
+     * <p>
+     *  翻译代码以调用BasisLibrary.unallowed_extensionF(String)方法。
      */
     private void translateUnallowedExtension(ConstantPoolGen cpg,
                                              InstructionList il) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: PredicatedNodeTest.java,v 1.2.4.2 2005/09/14 19:45:20 jeffsuttor Exp $
+ * <p>
+ *  $ Id：PredicatedNodeTest.java,v 1.2.4.2 2005/09/14 19:45:20 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -40,6 +53,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Construct an AxesWalker using a LocPathIterator.
    *
+   * <p>
+   *  使用LocPathIterator构造AxesWalker。
+   * 
+   * 
    * @param locPathIterator non-null reference to the parent iterator.
    */
   PredicatedNodeTest(LocPathIterator locPathIterator)
@@ -50,6 +67,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Construct an AxesWalker.  The location path iterator will have to be set
    * before use.
+   * <p>
+   *  构建AxesWalker。位置路径迭代器必须在使用前设置。
+   * 
    */
   PredicatedNodeTest()
   {
@@ -58,6 +78,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Read the object from a serialization stream.
    *
+   * <p>
+   *  从序列化流中读取对象。
+   * 
+   * 
    * @param stream Input stream to read from
    *
    * @throws java.io.IOException
@@ -81,6 +105,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Get a cloned PrdicatedNodeTest.
    *
+   * <p>
+   *  获取克隆的PrdicatedNodeTest。
+   * 
+   * 
    * @return A new PredicatedNodeTest that can be used without mutating this one.
    *
    * @throws CloneNotSupportedException
@@ -113,6 +141,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Get the number of predicates that this walker has.
    *
+   * <p>
+   *  获取这个步行者拥有的谓词数量。
+   * 
+   * 
    * @return the number of predicates that this walker has.
    */
   public int getPredicateCount()
@@ -130,6 +162,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * one from the old, and then reassigns the predicates value.  All this
    * to keep from having to have a predicate count value.
    *
+   * <p>
+   *  设置此walker具有的谓词数。这会做更多的想法,因为它创建一个新的谓词数组的大小的计数参数,并复制计数谓词到新的一个从旧,然后重新分配谓词值。所有这一切,不必有一个谓词计数值。
+   * 
+   * 
    * @param count The number of predicates, which must be equal or less
    *               than the existing count.
    */
@@ -152,6 +188,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Init predicate info.
    *
+   * <p>
+   *  Init谓词信息。
+   * 
+   * 
    * @param compiler The Compiler object that has information about this
    *                 walker in the op map.
    * @param opPos The op code position of this location step.
@@ -181,6 +221,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * Get a predicate expression at the given index.
    *
    *
+   * <p>
+   *  在给定的索引处获取谓词表达式。
+   * 
+   * 
    * @param index Index of the predicate.
    *
    * @return A predicate expression.
@@ -193,6 +237,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Get the current sub-context position.
    *
+   * <p>
+   *  获取当前子上下文位置。
+   * 
+   * 
    * @return The node position of this walker in the sub-context node list.
    */
   public int getProximityPosition()
@@ -205,6 +253,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Get the current sub-context position.
    *
+   * <p>
+   * 获取当前子上下文位置。
+   * 
+   * 
    * @param xctxt The XPath runtime context.
    *
    * @return The node position of this walker in the sub-context node list.
@@ -218,6 +270,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * Get the index of the last node that can be itterated to.
    *
    *
+   * <p>
+   *  获取可以重写的最后一个节点的索引。
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return the index of the last node that can be itterated to.
@@ -227,6 +283,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Get the current sub-context position.
    *
+   * <p>
+   *  获取当前子上下文位置。
+   * 
+   * 
    * @param predicateIndex The index of the predicate where the proximity
    *                       should be taken from.
    *
@@ -239,6 +299,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
   /**
    * Reset the proximity positions counts.
+   * <p>
+   *  重置接近位置计数。
+   * 
    */
   public void resetProximityPositions()
   {
@@ -266,6 +329,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Init the proximity position to zero for a forward axes.
    *
+   * <p>
+   *  将前进轴的接近位置初始化为零。
+   * 
+   * 
    * @param i The index into the m_proximityPositions array.
    *
    * @throws javax.xml.transform.TransformerException
@@ -278,6 +345,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Count forward one proximity position.
    *
+   * <p>
+   *  向前计算一个接近位置。
+   * 
+   * 
    * @param i The index into the m_proximityPositions array, where the increment
    *          will occur.
    */
@@ -293,6 +364,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Tells if this is a reverse axes.
    *
+   * <p>
+   *  告诉这是否是一个反向轴。
+   * 
+   * 
    * @return false, unless a derived class overrides.
    */
   public boolean isReverseAxes()
@@ -303,6 +378,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Get which predicate is executing.
    *
+   * <p>
+   *  获取哪个谓词正在执行。
+   * 
+   * 
    * @return The current predicate index, or -1 if no predicate is executing.
    */
   public int getPredicateIndex()
@@ -313,6 +392,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Process the predicates.
    *
+   * <p>
+   *  处理谓词。
+   * 
+   * 
    * @param context The current context node.
    * @param xctxt The XPath runtime context.
    *
@@ -409,6 +492,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * This function is used to fixup variables from QNames to stack frame
    * indexes at stylesheet build time.
+   * <p>
+   *  此函数用于在样式表构建时将QNames中的变量固定到堆栈帧索引。
+   * 
+   * 
    * @param vars List of QNames that correspond to variables.  This list
    * should be searched backwards for the first qualified name that
    * corresponds to the variable reference qname.  The position of the
@@ -432,6 +519,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Diagnostics.
    *
+   * <p>
+   *  诊断。
+   * 
+   * 
    * @param n Node to give diagnostic information about, or null.
    *
    * @return Informative string about the argument.
@@ -456,6 +547,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * TreeWalker or NodeIterator. This function will be called by the
    * implementation of TreeWalker and NodeIterator; it is not intended to
    * be called directly from user code.
+   * <p>
+   *  测试指定的节点在TreeWalker或NodeIterator的逻辑视图中是否可见。这个函数将通过TreeWalker和NodeIterator的实现来调用;它不打算从用户代码直接调用。
+   * 
+   * 
    * @param n  The node to check to see if it passes the filter or not.
    * @return  a constant to determine whether the node is accepted,
    *   rejected, or skipped, as defined  above .
@@ -503,6 +598,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * Get the owning location path iterator.
    *
+   * <p>
+   *  获取所拥有的位置路径迭代器。
+   * 
+   * 
    * @return the owning location path iterator, which should not be null.
    */
   public LocPathIterator getLocPathIterator()
@@ -514,6 +613,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * Set the location path iterator owner for this walker.  Besides
    * initialization, this function is called during cloning operations.
    *
+   * <p>
+   *  设置此步行器的位置路径迭代器所有者。除了初始化,在克隆操作期间调用此函数。
+   * 
+   * 
    * @param li non-null reference to the owning location path iterator.
    */
   public void setLocPathIterator(LocPathIterator li)
@@ -527,6 +630,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * Tell if this expression or it's subexpressions can traverse outside
    * the current subtree.
    *
+   * <p>
+   *  告诉这个表达式或它的子表达式是否可以遍历当前子树。
+   * 
+   * 
    * @return true if traversal outside the context node's subtree can occur.
    */
    public boolean canTraverseOutsideSubtree()
@@ -545,6 +652,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
          * each member.  If the called visitor method returns
          * false, the subtree should not be called.
          *
+         * <p>
+         *  这将遍历听证,调用每个成员的访问者。如果被调用的visitor方法返回false,则不应该调用子树。
+         * 
+         * 
          * @param visitor The visitor whose appropriate method will be called.
          */
         public void callPredicateVisitors(XPathVisitor visitor)
@@ -565,6 +676,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
         }
 
     /**
+    /* <p>
+    /* 
      * @see Expression#deepEquals(Expression)
      */
     public boolean deepEquals(Expression expr)
@@ -595,16 +708,25 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   transient protected boolean m_foundLast = false;
 
   /** The owning location path iterator.
+  /* <p>
+  /* 
    *  @serial */
   protected LocPathIterator m_lpi;
 
   /**
    * Which predicate we are executing.
+   * <p>
+   *  我们正在执行的谓词。
+   * 
    */
   transient int m_predicateIndex = -1;
 
   /** The list of predicate expressions. Is static and does not need
    *  to be deep cloned.
+   * <p>
+   *  被深克隆。
+   * 
+   * 
    *  @serial
    */
   private Expression[] m_predicates;
@@ -612,6 +734,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /**
    * An array of counts that correspond to the number
    * of predicates the step contains.
+   * <p>
+   *  对应于步骤包含的谓词数的计数数组。
+   * 
    */
   transient protected int[] m_proximityPositions;
 
@@ -628,6 +753,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
         }
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#getExpression()
      */
     public Expression getExpression()
@@ -637,6 +764,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#setExpression(Expression)
      */
     public void setExpression(Expression exp)

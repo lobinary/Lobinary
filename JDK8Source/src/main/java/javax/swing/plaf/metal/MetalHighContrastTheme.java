@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.awt.*;
  * A high contrast theme. This is used on Windows if the system property
  * awt.highContrast.on is true.
  *
+ * <p>
+ *  高对比度主题。如果系统属性awt.highContrast.on为true,则在Windows上使用。
+ * 
+ * 
  * @author Michael C. Albers
  */
 class MetalHighContrastTheme extends DefaultMetalTheme {
@@ -182,6 +187,8 @@ class MetalHighContrastTheme extends DefaultMetalTheme {
 
     /**
      * Returns true if this is a theme provided by the core platform.
+     * <p>
+     *  如果这是核心平台提供的主题,则返回true。
      */
     boolean isSystemTheme() {
         return (getClass() == MetalHighContrastTheme.class);

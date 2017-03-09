@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@ package java.io;
  * Only the low eight bits of each character in the string are used by
  * this class.
  *
+ * <p>
+ *  这个类允许应用程序创建一个输入流,其中读取的字节由字符串的内容提供。应用程序还可以使用<code> ByteArrayInputStream </code>从字节数组中读取字节。
+ * <p>
+ *  这个类只使用字符串中每个字符的低8位。
+ * 
+ * 
  * @author     Arthur van Hoff
  * @see        java.io.ByteArrayInputStream
  * @see        java.io.StringReader
@@ -47,12 +54,19 @@ public
 class StringBufferInputStream extends InputStream {
     /**
      * The string from which bytes are read.
+     * <p>
+     *  读取字节的字符串。
+     * 
      */
     protected String buffer;
 
     /**
      * The index of the next character to read from the input stream buffer.
      *
+     * <p>
+     *  要从输入流缓冲区读取的下一个字符的索引。
+     * 
+     * 
      * @see        java.io.StringBufferInputStream#buffer
      */
     protected int pos;
@@ -60,6 +74,10 @@ class StringBufferInputStream extends InputStream {
     /**
      * The number of valid characters in the input stream buffer.
      *
+     * <p>
+     *  输入流缓冲区中的有效字符数。
+     * 
+     * 
      * @see        java.io.StringBufferInputStream#buffer
      */
     protected int count;
@@ -67,6 +85,10 @@ class StringBufferInputStream extends InputStream {
     /**
      * Creates a string input stream to read data from the specified string.
      *
+     * <p>
+     *  创建字符串输入流以从指定的字符串读取数据。
+     * 
+     * 
      * @param      s   the underlying input buffer.
      */
     public StringBufferInputStream(String s) {
@@ -85,6 +107,13 @@ class StringBufferInputStream extends InputStream {
      * <code>StringBufferInputStream</code> cannot block. It returns the
      * low eight bits of the next character in this input stream's buffer.
      *
+     * <p>
+     *  从此输入流读取数据的下一个字节。值字节作为<code> 0 </code>到<code> 255 </code>范围内的<code> int </code>返回。
+     * 如果没有字节可用,因为已经到达流的结尾,则返回值<code> -1 </code>。
+     * <p>
+     *  <code> String StringBufferInputStream </code>的<code> read </code>方法无法阻止。它返回此输入流缓冲区中下一个字符的低8位。
+     * 
+     * 
      * @return     the next byte of data, or <code>-1</code> if the end of the
      *             stream is reached.
      */
@@ -101,6 +130,13 @@ class StringBufferInputStream extends InputStream {
      * low eight bits from the characters in this input stream's buffer into
      * the byte array argument.
      *
+     * <p>
+     *  从此输入流中读取最多<code> len </code>字节的数据为字节数组。
+     * <p>
+     *  <code> String StringBufferInputStream </code>的<code> read </code>方法无法阻止。
+     * 它将此输入流缓冲区中的字符的低8位复制到字节数组参数中。
+     * 
+     * 
      * @param      b     the buffer into which the data is read.
      * @param      off   the start offset of the data.
      * @param      len   the maximum number of bytes read.
@@ -137,6 +173,10 @@ class StringBufferInputStream extends InputStream {
      * Skips <code>n</code> bytes of input from this input stream. Fewer
      * bytes might be skipped if the end of the input stream is reached.
      *
+     * <p>
+     * 从此输入流跳过<code> n </code>个字节的输入。如果到达输入流的末尾,可能跳过较少的字节。
+     * 
+     * 
      * @param      n   the number of bytes to be skipped.
      * @return     the actual number of bytes skipped.
      */
@@ -155,6 +195,10 @@ class StringBufferInputStream extends InputStream {
      * Returns the number of bytes that can be read from the input
      * stream without blocking.
      *
+     * <p>
+     *  返回可以从输入流读取但不阻塞的字节数。
+     * 
+     * 
      * @return     the value of <code>count&nbsp;-&nbsp;pos</code>, which is the
      *             number of bytes remaining to be read from the input buffer.
      */
@@ -165,6 +209,8 @@ class StringBufferInputStream extends InputStream {
     /**
      * Resets the input stream to begin reading from the first character
      * of this input stream's underlying buffer.
+     * <p>
+     *  重置输入流以从此输入流的底层缓冲区的第一个字符开始读取。
      */
     public synchronized void reset() {
         pos = 0;

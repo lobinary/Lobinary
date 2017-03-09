@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,14 @@ package javax.xml.bind;
  * validation would produce locators containing information appropriate to the
  * source of the XML data (file, url, Node, etc).
  *
+ * <p>
+ *  封装ValidationEvent的位置。
+ * 
+ * <p>
+ *  <tt> ValidationEventLocator </tt>指示<tt> ValidationEvent </tt>发生的位置。根据检测到错误或警告时执行的验证类型,将设置不同的字段。
+ * 例如,按需验证将产生包含对Java内容树中对象的引用的定位符,而取消组合时间验证将产生包含适合于XML数据源(文件,URL,节点等)的信息的定位符。
+ * 
+ * 
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see Validator
  * @see ValidationEvent
@@ -47,6 +56,10 @@ public interface ValidationEventLocator {
     /**
      * Return the name of the XML source as a URL if available
      *
+     * <p>
+     *  返回XML源的名称作为URL(如果可用)
+     * 
+     * 
      * @return the name of the XML source as a URL or null if unavailable
      */
     public java.net.URL getURL();
@@ -54,6 +67,10 @@ public interface ValidationEventLocator {
     /**
      * Return the byte offset if available
      *
+     * <p>
+     *  返回字节偏移(如果可用)
+     * 
+     * 
      * @return the byte offset into the input source or -1 if unavailable
      */
     public int getOffset();
@@ -61,6 +78,10 @@ public interface ValidationEventLocator {
     /**
      * Return the line number if available
      *
+     * <p>
+     *  返回行号(如果可用)
+     * 
+     * 
      * @return the line number or -1 if unavailable
      */
     public int getLineNumber();
@@ -68,6 +89,10 @@ public interface ValidationEventLocator {
     /**
      * Return the column number if available
      *
+     * <p>
+     *  返回列号(如果可用)
+     * 
+     * 
      * @return the column number or -1 if unavailable
      */
     public int getColumnNumber();
@@ -75,6 +100,10 @@ public interface ValidationEventLocator {
     /**
      * Return a reference to the object in the Java content tree if available
      *
+     * <p>
+     *  返回对Java内容树中的对象的引用(如果可用)
+     * 
+     * 
      * @return a reference to the object in the Java content tree or null if
      *         unavailable
      */
@@ -83,6 +112,9 @@ public interface ValidationEventLocator {
     /**
      * Return a reference to the DOM Node if available
      *
+     * <p>
+     *  返回对DOM节点的引用(如果可用)
+     * 
      * @return a reference to the DOM Node or null if unavailable
      */
     public org.w3c.dom.Node getNode();

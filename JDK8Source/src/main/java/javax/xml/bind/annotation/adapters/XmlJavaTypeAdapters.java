@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,16 @@ import java.lang.annotation.Target;
  * <p>See "Package Specification" in javax.xml.bind.package javadoc for
  * additional common information.</p>
  *
+ * <p>
+ * <p>
+ *  用于多个@ {@ link XmlJavaTypeAdapter}注释的容器。
+ * 
+ *  <p>程序元素上不允许使用同一类型的多个注释。因此,此注释用作多个@XmlJavaTypeAdapter的容器注释,如下所示：
+ * 
+ * <pre>
+ *  @XmlJavaTypeAdapters({@XmlJavaTypeAdapter(...),@ XmlJavaTypeAdapter(...)})
+ * </pre>
+ * 
  * @author <ul><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlJavaTypeAdapter
  * @since JAXB2.0
@@ -57,6 +68,11 @@ import java.lang.annotation.Target;
 public @interface XmlJavaTypeAdapters {
     /**
      * Collection of @{@link XmlJavaTypeAdapter} annotations
+     * <p>
+     * 
+     *  <p> <tt> @XmlJavaTypeAdapters </tt>注释适用于在包级别定义不同类型的{@link XmlJavaTypeAdapter}注释。
+     * 
+     *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
      */
     XmlJavaTypeAdapter[] value();
 }

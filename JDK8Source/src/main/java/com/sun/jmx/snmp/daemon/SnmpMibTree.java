@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,9 @@ import com.sun.jmx.snmp.agent.SnmpMibAgent;
 /**
  * The class is used for building a tree representation of the different
  * root oids of the supported MIBs. Each node is associated to a specific MIB.
+ * <p>
+ *  该类用于构建支持的MIB的不同根节点的树表示。每个节点都与特定的MIB相关联。
+ * 
  */
 final class SnmpMibTree {
 
@@ -104,6 +108,10 @@ final class SnmpMibTree {
             return;
         node.removeAgent(agent);
     }
+    /* <p>
+    /*  public void unregister(SnmpMibAgent agent){long [] oid = agent.getRootOid(); TreeNode node = root.retrieveMatchingBranch(oid,0); if(node == null)return; node.removeAgent(agent); }
+    /* }。
+    /* 
     */
     public void printTree() {
         root.printTree(">");
@@ -177,6 +185,7 @@ final class SnmpMibTree {
         /**
          * Only the treeNode class can create an instance of treeNode.
          * The creation occurs when registering a new oid.
+         * <p>
          */
         private TreeNode(long nodeValue, SnmpMibAgent agent, TreeNode sup) {
             this.nodeValue= nodeValue;

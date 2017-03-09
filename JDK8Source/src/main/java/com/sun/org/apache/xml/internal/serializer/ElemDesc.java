@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ElemDesc.java,v 1.2.4.1 2005/09/15 08:15:15 suresh_emailid Exp $
+ * <p>
+ *  $ Id：ElemDesc.java,v 1.2.4.1 2005/09/15 08:15:15 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -30,6 +43,13 @@ import com.sun.org.apache.xml.internal.serializer.utils.StringToIntTable;
  * This class is public because XSLTC uses it, it is not a public API.
  *
  * @xsl.usage internal
+ * <p>
+ *  这个类有一系列描述HTML元素的标志(位值)
+ * 
+ *  这个类是public的,因为XSLTC使用它,它不是一个公共API。
+ * 
+ *  @ xsl.usage internal
+ * 
  */
 public final class ElemDesc
 {
@@ -39,6 +59,9 @@ public final class ElemDesc
     /**
      * Table of attribute names to integers, which contain bit flags telling about
      *  the attributes.
+     * <p>
+     *  属性名称到整数的表,其包含告知属性的位标志。
+     * 
      */
     private StringToIntTable m_attrs = null;
 
@@ -121,6 +144,10 @@ public final class ElemDesc
      * Construct an ElemDesc from a set of bit flags.
      *
      *
+     * <p>
+     *  从一组位标志构造ElemDesc。
+     * 
+     * 
      * @param flags Bit flags that describe the basic properties of this element type.
      */
     ElemDesc(int flags)
@@ -132,6 +159,10 @@ public final class ElemDesc
      * Tell if this element type has the basic bit properties that are passed
      * as an argument.
      *
+     * <p>
+     *  告诉这个元素类型是否有作为参数传递的基本位属性。
+     * 
+     * 
      * @param flags Bit flags that describe the basic properties of interest.
      *
      * @return true if any of the flag bits are true.
@@ -151,6 +182,10 @@ public final class ElemDesc
      * Set an attribute name and it's bit properties.
      *
      *
+     * <p>
+     *  设置属性名称及其位属性。
+     * 
+     * 
      * @param name non-null name of attribute, in upper case.
      * @param flags flag bits.
      */
@@ -166,6 +201,9 @@ public final class ElemDesc
     /**
      * Tell if any of the bits of interest are set for a named attribute type.
      *
+     * <p>
+     *  告诉是否为命名的属性类型设置了任何感兴趣的位。
+     * 
      * @param name non-null reference to attribute name, in any case.
      * @param flags flag mask.
      *

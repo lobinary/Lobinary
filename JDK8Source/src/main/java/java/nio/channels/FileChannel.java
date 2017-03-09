@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -142,6 +143,68 @@ import java.util.Collections;
  * of the data are done in a single atomic operation is system-dependent and
  * therefore unspecified.
  *
+ * <p>
+ *  用于读取,写入,映射和操作文件的通道。
+ * 
+ *  <p>文件通道是连接到文件的{@link SeekableByteChannel}。
+ * 它在其文件中具有当前<i>位置</i>,其可以是{@link #position()查询</i>}和{@link #position(long)<i> i>}。
+ * 文件本身包含可读长度的可读长度字节序列,可以查询其当前的{@link #size <i> size </i>}。
+ * 当字节被写入超出当前大小时,文件的大小增加;当{@link #truncate <i>截断</i>}时,文件的大小减小。
+ * 文件还可以具有一些相关联的元数据,诸如访问许可,内容类型和最后修改时间;这个类不定义元数据访问的方法。
+ * 
+ *  <p>除了熟悉的字节通道的读,写和关闭操作之外,此类还定义了以下特定于文件的操作：</p>
+ * 
+ * <ul>
+ * 
+ *  <li> <p>字元可以是档案中绝对位置的{@link #read(ByteBuffer,long)read}或{@link #write(ByteBuffer,long)<i>写入</i>}方式不影
+ * 响通道的当前位置。
+ *  </p> </li>。
+ * 
+ * <li> <p>文件的某个区域可能会{@link #map <i>映射</i>}直接进入内存;对于大文件,这通常比调用通常的<tt>读</tt>或<tt>写</tt>方法更有效率。
+ *  </p> </li>。
+ * 
+ *  <li> <p>对文件所做的更新可能会{@link #force <i>强制退出</i>}到底层存储设备,以确保在系统崩溃时数据不会丢失。 </p> </li>
+ * 
+ *  <li> <p>字节可以从文件{@link #transferTo <i>转移到其他某个渠道</i>},而{@link #transferFrom <i>反之亦然</i>方式可以由许多操作系统优化到非常快速的直接传输到文件系统缓存或从文件系统缓存直接传输。
+ *  </p> </li>。
+ * 
+ *  <li> <p>文件的某个区域可能被{@link FileLock <i>锁定</i>}阻止其他程序访问。 </p> </li>
+ * 
+ * </ul>
+ * 
+ *  <p>文件通道可安全地用于多个并发线程。 {@link Channel#close close}方法可以在{@link Channel}界面指定的任何时间调用。
+ * 在任何给定时间只有一个涉及频道位置或可以改变其文件大小的操作正在进行;在第一个仍然在进行中尝试启动第二个这样的操作将阻塞直到第一个操作完成。
+ * 其他操作,特别是那些采取明确位置的操作,可以同时进行;它们是否实际上这样做取决于基本实现,因此未指定。
+ * 
+ * <p>此类的实例提供的文件的视图保证与同一程序中其他实例提供的同一文件的其他视图一致。
+ * 然而,由于由底层操作系统执行的缓存和由网络文件系统协议引起的延迟,由该类的实例提供的视图可以或者可以不与由其它并发运行的程序看到的视图一致。
+ * 无论这些其他程序的编写语言,以及它们是在同一台机器上运行还是在其他机器上运行,都是如此。任何这种不一致的确切性质是系统依赖的,因此未指定。
+ * 
+ * <p>通过调用此类定义的{@link #open open}方法之一创建文件通道。
+ * 还可以从现有的{@link java.io.FileInputStream#getChannel FileInputStream},{@link java.io.FileOutputStream#getChannel FileOutputStream}
+ * 或{@link java.io.RandomAccessFile#getChannel RandomAccessFile}对象中获取文件通道通过调用该对象的<tt> getChannel </tt>方法
+ * ,该方法返回连接到同一底层文件的文件通道。
+ * <p>通过调用此类定义的{@link #open open}方法之一创建文件通道。
+ * 在从现有流或随机存取文件获得文件通道的情况下,文件通道的状态与其<tt> getChannel </tt>方法返回通道的对象的状态密切相关。
+ * 改变通道的位置,无论是明确地还是通过读取或写入字节,将改变原始对象的文件位置,反之亦然。通过文件通道更改文件的长度将改变通过原始对象看到的长度,反之亦然。
+ * 通过写入字节来更改文件的内容将改变由原始对象看到的内容,反之亦然。
+ * 
+ * <a name="open-mode"> </a> <p>在各个点,此类指定需要"开放阅读","开放写作"或"开放阅读和写作"的实例。
+ * 通过{@link java.io.FileInputStream}实例的{@link java.io.FileInputStream#getChannel getChannel}方法获取的渠道将开放供阅
+ * 读。
+ * <a name="open-mode"> </a> <p>在各个点,此类指定需要"开放阅读","开放写作"或"开放阅读和写作"的实例。
+ * 通过{@link java.io.FileOutputStream}实例的{@link java.io.FileOutputStream#getChannel getChannel}方法获得的渠道将开放
+ * 供撰写。
+ * <a name="open-mode"> </a> <p>在各个点,此类指定需要"开放阅读","开放写作"或"开放阅读和写作"的实例。
+ * 最后,通过{@link java.io.RandomAccessFile}实例的{@link java.io.RandomAccessFile#getChannel getChannel}方法获得的通道
+ * 将被读取,如果实例是使用模式<tt>"r"创建的, </tt>,如果实例是使用模式<tt>"rw"</tt>创建的,将会打开进行读取和写入。
+ * <a name="open-mode"> </a> <p>在各个点,此类指定需要"开放阅读","开放写作"或"开放阅读和写作"的实例。
+ * 
+ *  <a name="append-mode"> </a> <p>开放写入的文件通道可能处于<i>附加模式</i>,例如,如果它是从文件输出流获取的通过调用{@link java.io.FileOutputStream#FileOutputStream(java.io.File,boolean)FileOutputStream(File,boolean)}
+ * 构造函数并传递<tt> true </tt>来创建第二个参数。
+ * 在该模式中,相对写入操作的每次调用首先将位置提前到文件的结尾,然后写入所请求的数据。数据的位置的前进和数据的写入是否在单个原子操作中完成是系统相关的,因此是未指定的。
+ * 
+ * 
  * @see java.io.FileInputStream#getChannel()
  * @see java.io.FileOutputStream#getChannel()
  * @see java.io.RandomAccessFile#getChannel()
@@ -158,6 +221,9 @@ public abstract class FileChannel
 {
     /**
      * Initializes a new instance of this class.
+     * <p>
+     * 初始化此类的新实例。
+     * 
      */
     protected FileChannel() { }
 
@@ -248,6 +314,61 @@ public abstract class FileChannel
      * FileSystemProvider#newFileChannel newFileChannel} method on the
      * provider that created the {@code Path}.
      *
+     * <p>
+     *  打开或创建文件,返回文件通道以访问文件。
+     * 
+     *  <p> {@code options}参数确定如何打开文件。
+     *  {@link StandardOpenOption#READ READ}和{@link StandardOpenOption#WRITE WRITE}选项可确定是否应打开文件进行读取和/或写入。
+     * 如果数组中不包含任何选项(或{@link StandardOpenOption#APPEND APPEND}选项),则会打开文件进行读取。默认情况下,读取或写入在文件的开头开始。
+     * 
+     *  <p>除了{@code READ}和{@code WRITE}之外,还可能有以下选项：
+     * 
+     * <table border=1 cellpadding=5 summary="">
+     *  <tr> <th>选项</th> <th>描述</th> </tr>
+     * <tr>
+     *  <td> {@link StandardOpenOption#APPEND APPEND} </td> <td>如果此选项存在,则文件将打开以进行写入,并且每次调用通道的{@code write}方法
+     * 首先将位置提前到然后写入所请求的数据。
+     * 数据的位置的前进和数据的写入是否在单个原子操作中完成是系统相关的,因此是未指定的。此选项不能与{@code READ}或{@code TRUNCATE_EXISTING}选项结合使用。 </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@link StandardOpenOption#TRUNCATE_EXISTING TRUNCATE_EXISTING} </td> <td>如果此选项存在,则现有文件将被截断为0字节大
+     * 小。
+     * 仅当打开文件以进行读取时,将忽略此选项。 </td>。
+     * </tr>
+     * <tr>
+     * <td> {@link StandardOpenOption#CREATE_NEW CREATE_NEW} </td> <td>如果此选项存在,则会创建一个新文件,如果该文件已存在,则会失败。
+     * 当创建文件时,检查文件的存在以及文件的创建(如果不存在)相对于其他文件系统操作是原子的。仅当打开文件以进行读取时,将忽略此选项。 </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@link StandardOpenOption#CREATE CREATE} </td> <td>如果存在此选项,则会打开现有文件(如果存在),否则将创建一个新文件。
+     * 当创建文件时,检查文件的存在以及文件的创建(如果不存在)相对于其他文件系统操作是原子的。如果还存在{@code CREATE_NEW}选项或打开文件仅用于读取,将忽略此选项。 </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@link StandardOpenOption#DELETE_ON_CLOSE DELETE_ON_CLOSE} </td> <td>当此选项存在时,该实施会尝试在{@link关闭时</em> #close close}
+     * 方法。
+     * 如果未调用{@code close}方法,则会尝试在Java虚拟机终止时尝试删除该文件。<em> </em> </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@ link StandardOpenOption#SPARSE SPARSE} </td> <td>在创建新文件时,此选项是一个<em>提示</em>,新文件将是稀疏的。
+     * 不创建新文件时忽略此选项。 </td>。
+     * </tr>
+     * <tr>
+     * <td> {@link StandardOpenOption#SYNC SYNC} </td> <td>需要将对文件内容或元数据的每次更新与底层存储设备同步写入。
+     *  (请参见<a href="../file/package-summary.html#integrity">同步I / O文件完整性</a>)。 </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@link StandardOpenOption#DSYNC DSYNC} </td> <td>需要对文件内容的每次更新都与底层存储设备同步写入。
+     *  (请参见<a href="../file/package-summary.html#integrity">同步I / O文件完整性</a>)。 </td>。
+     * </tr>
+     * </table>
+     * 
+     *  <p>实施也可以支持其他选项。
+     * 
+     *  <p> {@code attrs}参数是文件{@link FileAttribute文件属性}的可选数组,用于在创建文件时自动设置。
+     * 
+     *  <p>新频道是通过在创建{@code Path}的提供商上调用{@link FileSystemProvider#newFileChannel newFileChannel}方法创建的。
+     * 
+     * 
      * @param   path
      *          The path of the file to open or create
      * @param   options
@@ -301,6 +422,16 @@ public abstract class FileChannel
      * where {@code opts} is a set of the options specified in the {@code
      * options} array.
      *
+     * <p>
+     *  打开或创建文件,返回文件通道以访问文件。
+     * 
+     *  <p>此方法的调用行为与调用完全相同
+     * <pre>
+     *  fc.{@link #open(Path,Set,FileAttribute [])open}(file,opts,new FileAttribute&lt;?&gt; [0]);
+     * </pre>
+     *  其中{@code opts}是在{@code options}数组中指定的一组选项。
+     * 
+     * 
      * @param   path
      *          The path of the file to open or create
      * @param   options
@@ -344,6 +475,11 @@ public abstract class FileChannel
      * then the file position is updated with the number of bytes actually
      * read.  Otherwise this method behaves exactly as specified in the {@link
      * ReadableByteChannel} interface. </p>
+     * <p>
+     *  从该通道读取一个字节序列到给定的缓冲区。
+     * 
+     * <p>从此通道当前文件位置开始读取字节,然后使用实际读取的字节数更新文件位置。否则,此方法的行为与{@link ReadableByteChannel}接口中指定的完全相同。 </p>
+     * 
      */
     public abstract int read(ByteBuffer dst) throws IOException;
 
@@ -355,6 +491,11 @@ public abstract class FileChannel
      * then the file position is updated with the number of bytes actually
      * read.  Otherwise this method behaves exactly as specified in the {@link
      * ScatteringByteChannel} interface.  </p>
+     * <p>
+     *  将来自该通道的字节序列读取到给定缓冲器的子序列中。
+     * 
+     *  <p>从此通道当前文件位置开始读取字节,然后使用实际读取的字节数更新文件位置。否则,此方法的行为与{@link ScatteringByteChannel}接口中指定的完全相同。 </p>
+     * 
      */
     public abstract long read(ByteBuffer[] dsts, int offset, int length)
         throws IOException;
@@ -366,6 +507,11 @@ public abstract class FileChannel
      * then the file position is updated with the number of bytes actually
      * read.  Otherwise this method behaves exactly as specified in the {@link
      * ScatteringByteChannel} interface.  </p>
+     * <p>
+     *  从该通道读取一个字节序列到给定的缓冲区。
+     * 
+     *  <p>从此通道当前文件位置开始读取字节,然后使用实际读取的字节数更新文件位置。否则,此方法的行为与{@link ScatteringByteChannel}接口中指定的完全相同。 </p>
+     * 
      */
     public final long read(ByteBuffer[] dsts) throws IOException {
         return read(dsts, 0, dsts.length);
@@ -381,6 +527,12 @@ public abstract class FileChannel
      * with the number of bytes actually written.  Otherwise this method
      * behaves exactly as specified by the {@link WritableByteChannel}
      * interface. </p>
+     * <p>
+     *  从给定缓冲区向此通道写入一个字节序列。
+     * 
+     *  <p>从此通道的当前文件位置开始写入字节,除非通道处于附加模式,在这种情况下,位置首先前进到文件结尾。如果需要,生成文件以容纳写入的字节,然后用实际写入的字节数更新文件位置。
+     * 否则,此方法的行为与{@link WritableByteChannel}接口指定的完全相同。 </p>。
+     * 
      */
     public abstract int write(ByteBuffer src) throws IOException;
 
@@ -395,6 +547,12 @@ public abstract class FileChannel
      * with the number of bytes actually written.  Otherwise this method
      * behaves exactly as specified in the {@link GatheringByteChannel}
      * interface.  </p>
+     * <p>
+     *  从给定缓冲区的子序列向该通道写入一个字节序列。
+     * 
+     * <p>从此通道的当前文件位置开始写入字节,除非通道处于附加模式,在这种情况下,位置首先前进到文件结尾。如果需要,生成文件以容纳写入的字节,然后用实际写入的字节数更新文件位置。
+     * 否则,此方法的行为与{@link GatheringByteChannel}接口中指定的完全相同。 </p>。
+     * 
      */
     public abstract long write(ByteBuffer[] srcs, int offset, int length)
         throws IOException;
@@ -409,6 +567,12 @@ public abstract class FileChannel
      * with the number of bytes actually written.  Otherwise this method
      * behaves exactly as specified in the {@link GatheringByteChannel}
      * interface.  </p>
+     * <p>
+     *  从给定的缓冲区向此通道写入一个字节序列。
+     * 
+     *  <p>从此通道的当前文件位置开始写入字节,除非通道处于附加模式,在这种情况下,位置首先前进到文件结尾。如果需要,生成文件以容纳写入的字节,然后用实际写入的字节数更新文件位置。
+     * 否则,此方法的行为与{@link GatheringByteChannel}接口中指定的完全相同。 </p>。
+     * 
      */
     public final long write(ByteBuffer[] srcs) throws IOException {
         return write(srcs, 0, srcs.length);
@@ -420,6 +584,10 @@ public abstract class FileChannel
     /**
      * Returns this channel's file position.
      *
+     * <p>
+     *  返回此频道的文件位置。
+     * 
+     * 
      * @return  This channel's file position,
      *          a non-negative integer counting the number of bytes
      *          from the beginning of the file to the current position
@@ -443,6 +611,13 @@ public abstract class FileChannel
      * the values of any bytes between the previous end-of-file and the
      * newly-written bytes are unspecified.  </p>
      *
+     * <p>
+     *  设置此通道的文件位置。
+     * 
+     *  <p>将位置设置为大于文件当前大小的值是合法的,但不会更改文件的大小。稍后在这种位置读取字节的尝试将立即返回文件结束指示。
+     * 以后尝试在这样的位置写入字节将导致文件增长以容纳新的字节;在上一个文件结束和新写入的字节之间的任何字节的值是未指定的。 </p>。
+     * 
+     * 
      * @param  newPosition
      *         The new position, a non-negative integer counting
      *         the number of bytes from the beginning of the file
@@ -463,6 +638,10 @@ public abstract class FileChannel
     /**
      * Returns the current size of this channel's file.
      *
+     * <p>
+     * 返回此频道文件的当前大小。
+     * 
+     * 
      * @return  The current size of this channel's file,
      *          measured in bytes
      *
@@ -484,6 +663,14 @@ public abstract class FileChannel
      * position is greater than the given size then it is set to that size.
      * </p>
      *
+     * <p>
+     *  将此频道的文件截断为指定大小。
+     * 
+     *  <p>如果给定的大小小于文件的当前大小,则文件将被截断,丢弃超出文件新结尾的任何字节。如果给定的大小大于或等于文件的当前大小,则不会修改文件。
+     * 在任一情况下,如果该通道的文件位置大于给定大小,则将其设置为该大小。
+     * </p>
+     * 
+     * 
      * @param  size
      *         The new size, a non-negative byte count
      *
@@ -539,6 +726,25 @@ public abstract class FileChannel
      * MappedByteBuffer#force force} method of the mapped byte buffer will
      * force changes made to the buffer's content to be written.  </p>
      *
+     * <p>
+     *  强制将此频道文件的所有更新写入包含该频道的存储设备。
+     * 
+     *  <p>如果此频道的文件位于本地存储设备上,则当此方法返回时,将确保自此频道创建以来对文件所做的所有更改或自上次调用此方法以来已写入该设备。这有助于确保关键信息在系统崩溃的情况下不会丢失。
+     * 
+     *  <p>如果文件不驻留在本地设备上,则不进行此类保证。
+     * 
+     * <p> <tt> metaData </tt>参数可用于限制此方法需要执行的I / O操作数。
+     * 对此参数传递<tt> false </tt>表示只有对文件内容的更新才需要写入存储;传递<tt> true </tt>表示必须写入对文件内容和元数据的更新,这通常需要至少一个I / O操作。
+     * 此参数是否实际上具有任何效果取决于底层操作系统,因此未指定。
+     * 
+     *  <p>调用此方法可能会导致发生I / O操作,即使只打开通道进行读取。例如,一些操作系统将最后访问时间保持为文件的元数据的一部分,并且每当读取文件时都更新该时间。
+     * 这是否实际完成是系统依赖的,因此未指定。
+     * 
+     *  <p>此方法仅保证通过此类中定义的方法强制对此通道文件所做的更改。
+     * 它可以或可以不强制通过修改通过调用{@link #map map}方法获得的{@link MappedByteBuffer <i>映射的字节缓冲区</i>}的内容而做出的改变。
+     * 调用映射字节缓冲区的{@link MappedByteBuffer#force force}方法将强制写入对缓冲区内容所做的更改。 </p>。
+     * 
+     * 
      * @param   metaData
      *          If <tt>true</tt> then this method is required to force changes
      *          to both the file's content and metadata to be written to
@@ -578,6 +784,17 @@ public abstract class FileChannel
      * operating systems can transfer bytes directly from the filesystem cache
      * to the target channel without actually copying them.  </p>
      *
+     * <p>
+     *  将字节从此通道的文件传输到给定的可写字节通道。
+     * 
+     * <p>尝试从此频道文件中的给定<tt>位置</tt>开始读取<tt>计数</tt>字节,并将其写入目标频道。该方法的调用可以或可以不传送所有请求的字节;是否这样做取决于渠道的性质和状态。
+     * 如果此通道的文件包含少于<tt>计数</tt>的字节开始于给定的<tt>位置</tt>,或者目标通道是非阻塞的,并且它具有在其输出缓冲区中少于<tt> count </tt>个字节。
+     * 
+     *  <p>此方法不会修改此频道的位置。如果给定位置大于文件的当前大小,则不传输任何字节。如果目标通道具有位置,则从该位置开始写入字节,然后该位置增加写入的字节数。
+     * 
+     *  <p>此方法比从此通道读取并写入目标通道的简单循环更有效率。许多操作系统可以将字节直接从文件系统缓存传输到目标通道,而不实际复制它们。 </p>
+     * 
+     * 
      * @param  position
      *         The position within the file at which the transfer is to begin;
      *         must be non-negative
@@ -645,6 +862,17 @@ public abstract class FileChannel
      * operating systems can transfer bytes directly from the source channel
      * into the filesystem cache without actually copying them.  </p>
      *
+     * <p>
+     *  将字节从给定的可读字节通道传输到此通道的文件中。
+     * 
+     * <p>尝试从源通道读取最多<tt>个</tt>个字节,并将它们从给定的<tt>位置</tt>开始写入此通道的文件。该方法的调用可以或可以不传送所有请求的字节;是否这样做取决于渠道的性质和状态。
+     * 如果源通道少于<tt>计数</tt>剩余字节,或源通道为非阻塞且少于<tt>计数</tt>字节,则传输的字节数少于请求的字节数立即在其输入缓冲区中可用。
+     * 
+     *  <p>此方法不会修改此频道的位置。如果给定位置大于文件的当前大小,则不传输任何字节。如果源通道具有位置,则从该位置开始读取字节,然后该位置增加读取的字节数。
+     * 
+     *  <p>此方法比从源通道读取并写入此通道的简单循环更有效率。许多操作系统可以将字节直接从源通道传输到文件系统缓存中,而不实际复制它们。 </p>
+     * 
+     * 
      * @param  src
      *         The source channel
      *
@@ -697,6 +925,13 @@ public abstract class FileChannel
      * method does not modify this channel's position.  If the given position
      * is greater than the file's current size then no bytes are read.  </p>
      *
+     * <p>
+     *  从给定的文件位置开始,从该通道读取一个字节序列到给定的缓冲区。
+     * 
+     * <p>此方法的工作方式与{@link #read(ByteBuffer)}方法相同,除了字节是从给定文件位置开始读取,而不是在通道的当前位置读取。此方法不会修改此通道的位置。
+     * 如果给定位置大于文件的当前大小,则不读取任何字节。 </p>。
+     * 
+     * 
      * @param  dst
      *         The buffer into which bytes are to be transferred
      *
@@ -744,6 +979,13 @@ public abstract class FileChannel
      * grown to accommodate the new bytes; the values of any bytes between the
      * previous end-of-file and the newly-written bytes are unspecified.  </p>
      *
+     * <p>
+     *  从给定的文件位置开始,从给定缓冲区向该通道写入一个字节序列。
+     * 
+     *  <p>此方法的工作方式与{@link #write(ByteBuffer)}方法相同,除了字节是从给定文件位置开始写入,而不是在通道的当前位置。此方法不会修改此通道的位置。
+     * 如果给定位置大于文件的当前大小,则文件将增长以容纳新字节;在上一个文件结束和新写入的字节之间的任何字节的值是未指定的。 </p>。
+     * 
+     * 
      * @param  src
      *         The buffer from which bytes are to be transferred
      *
@@ -783,6 +1025,10 @@ public abstract class FileChannel
     /**
      * A typesafe enumeration for file-mapping modes.
      *
+     * <p>
+     *  文件映射模式的类型安全枚举。
+     * 
+     * 
      * @since 1.4
      *
      * @see java.nio.channels.FileChannel#map
@@ -791,18 +1037,27 @@ public abstract class FileChannel
 
         /**
          * Mode for a read-only mapping.
+         * <p>
+         *  只读映射的模式。
+         * 
          */
         public static final MapMode READ_ONLY
             = new MapMode("READ_ONLY");
 
         /**
          * Mode for a read/write mapping.
+         * <p>
+         *  读/写映射的模式。
+         * 
          */
         public static final MapMode READ_WRITE
             = new MapMode("READ_WRITE");
 
         /**
          * Mode for a private (copy-on-write) mapping.
+         * <p>
+         *  私人(写时复制)映射的模式。
+         * 
          */
         public static final MapMode PRIVATE
             = new MapMode("PRIVATE");
@@ -816,6 +1071,10 @@ public abstract class FileChannel
         /**
          * Returns a string describing this file-mapping mode.
          *
+         * <p>
+         *  返回描述此文件映射模式的字符串。
+         * 
+         * 
          * @return  A descriptive string
          */
         public String toString() {
@@ -877,6 +1136,39 @@ public abstract class FileChannel
      * standpoint of performance it is generally only worth mapping relatively
      * large files into memory.  </p>
      *
+     * <p>
+     *  将此频道文件的某个区域直接映射到内存中。
+     * 
+     *  <p>文件的区域可以以三种模式之一映射到存储器：
+     * </p>
+     * 
+     * <ul>
+     * 
+     *  <li> <p> <i>只读：</i>任何修改结果缓冲区的尝试都会导致{@link java.nio.ReadOnlyBufferException}被抛出。
+     *  ({@link MapMode#READ_ONLY MapMode.READ_ONLY})</p> </li>。
+     * 
+     * <li> <p> <i>读/写：</i>对生成的缓冲区所做的更改将最终传播到文件;它们可以或者可以不被映射相同文件的其他程序可见。
+     *  ({@link MapMode#READ_WRITE MapMode.READ_WRITE})</p> </li>。
+     * 
+     *  <li> <p> <i>私人：</i>对生成的缓冲区所做的更改不会传播到该文件,并且对映射了相同文件的其他程序不可见;相反,它们将导致创建缓冲区的修改部分的私有副本。
+     *  ({@link MapMode#PRIVATE MapMode.PRIVATE})</p> </li>。
+     * 
+     * </ul>
+     * 
+     *  <p>对于只读映射,此通道必须已打开以进行读取;对于读/写或私有映射,该通道必须已经被打开用于读取和写入。
+     * 
+     *  <p>此方法返回的{@link MappedByteBuffer <i>映射字节缓冲区</i>}将具有零位置和<tt>大小</tt>的限制和容量;其标记将未定义。
+     * 缓冲区及其所表示的映射将保持有效,直到缓冲区本身被垃圾回收。
+     * 
+     *  <p>映射一旦建立,就不依赖于用于创建它的文件通道。特别地,关闭通道对映射的有效性没有影响。
+     * 
+     * <p>内存映射文件的许多细节固有地依赖于底层操作系统,因此未指定。当请求的区域未完全包含在此通道的文件中时,此方法的行为未指定。
+     * 未指定对由此程序或另一程序对底层文件的内容或大小进行的修改是否被传播到缓冲区。未指定将缓冲区的更改传播到文件的速率。
+     * 
+     *  <p>对于大多数操作系统,将文件映射到内存比通过通常的{@link #read read}和{@link #write write}方法读取或写入几十千字节的数据更为昂贵。
+     * 从性能的角度来看,它通常只值得将相对较大的文件映射到内存中。 </p>。
+     * 
+     * 
      * @param  mode
      *         One of the constants {@link MapMode#READ_ONLY READ_ONLY}, {@link
      *         MapMode#READ_WRITE READ_WRITE}, or {@link MapMode#PRIVATE
@@ -957,6 +1249,27 @@ public abstract class FileChannel
      * They are not suitable for controlling access to a file by multiple
      * threads within the same virtual machine.  </p>
      *
+     * <p>
+     *  在此频道文件的给定区域获取锁定。
+     * 
+     *  <p>此方法的调用将阻塞,直到该区域可以锁定,此通道关闭,或调用线程中断,以先到者为准。
+     * 
+     *  <p>如果此通道在调用此方法期间被另一个线程关闭,那么将抛出{@link AsynchronousCloseException}。
+     * 
+     * <p>如果调用线程在等待获取锁期间被中断,那么它的中断状态将被设置,并且将抛出一个{@link FileLockInterruptionException}。
+     * 如果调用此方法时调用者的中断状态被设置,那么该异常将立即抛出;线程的中断状态将不会改变。
+     * 
+     *  <p>由<tt>位置</tt>和<tt>大小</tt>参数指定的区域不需要包含在实际底层文件中,甚至不会重叠。
+     * 锁定区域大小固定;如果锁定区域最初包含文件的结尾并且文件增长超过该区域,则该文件的新部分将不被锁所覆盖。
+     * 如果文件预计在大小上增长并且需要对整个文件进行锁定,则应该锁定从零开始并且不小于文件的预期最大大小的区域。
+     * 零参数{@link #lock()}方法只锁定大小为{@link Long#MAX_VALUE}的区域。
+     * 
+     *  <p>某些操作系统不支持共享锁,在这种情况下,共享锁的请求会自动转换为独占锁的请求。
+     * 可以通过调用所得锁对象的{@link FileLock#isShared()isShared}方法来测试新获取的锁是共享还是排他。
+     * 
+     *  <p>文件锁定代表整个Java虚拟机。它们不适合控制同一虚拟机中的多个线程对文件的访问。 </p>
+     * 
+     * 
      * @param  position
      *         The position at which the locked region is to start; must be
      *         non-negative
@@ -1020,6 +1333,15 @@ public abstract class FileChannel
      * <pre>
      *     fc.{@link #lock(long,long,boolean) lock}(0L, Long.MAX_VALUE, false) </pre>
      *
+     * <p>
+     * 获取此频道文件的独占锁。
+     * 
+     *  <p>以<tt> fc.lock()</tt>的形式调用此方法的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  fc.{@link #lock(long,long,boolean)lock}(0L,Long.MAX_VALUE,false)</pre>
+     * 
+     * 
      * @return  A lock object representing the newly-acquired lock
      *
      * @throws  ClosedChannelException
@@ -1084,6 +1406,20 @@ public abstract class FileChannel
      * They are not suitable for controlling access to a file by multiple
      * threads within the same virtual machine.  </p>
      *
+     * <p>
+     *  尝试在此频道文件的给定区域上获取锁定。
+     * 
+     *  <p>此方法不阻止。调用总是立即返回,或者已经获得了对所请求区域的锁定,或者没有这样做。如果由于重叠锁由另一个程序持有而无法获取锁,则它返回<tt> null </tt>。
+     * 如果由于任何其他原因无法获取锁,那么会抛出一个适当的异常。
+     * 
+     *  <p>由<tt>位置</tt>和<tt>大小</tt>参数指定的区域不需要包含在实际底层文件中,甚至不会重叠。
+     * 锁定区域大小固定;如果锁定区域最初包含文件的结尾并且文件增长超过该区域,则该文件的新部分将不被锁所覆盖。
+     * 如果文件预计在大小上增长并且需要对整个文件进行锁定,则应该锁定从零开始并且不小于文件的预期最大大小的区域。
+     * 零参数{@link #tryLock()}方法只锁定大小为{@link Long#MAX_VALUE}的区域。
+     * 
+     * <p>某些操作系统不支持共享锁,在这种情况下,共享锁的请求将自动转换为独占锁的请求。
+     * 可以通过调用所得锁对象的{@link FileLock#isShared()isShared}方法来测试新获取的锁是共享还是排他。
+     * 
      * @param  position
      *         The position at which the locked region is to start; must be
      *         non-negative
@@ -1131,6 +1467,11 @@ public abstract class FileChannel
      * <pre>
      *     fc.{@link #tryLock(long,long,boolean) tryLock}(0L, Long.MAX_VALUE, false) </pre>
      *
+     * <p>
+     * 
+     *  <p>文件锁定代表整个Java虚拟机。它们不适合控制同一虚拟机中的多个线程对文件的访问。 </p>
+     * 
+     * 
      * @return  A lock object representing the newly-acquired lock,
      *          or <tt>null</tt> if the lock could not be acquired
      *          because another program holds an overlapping lock

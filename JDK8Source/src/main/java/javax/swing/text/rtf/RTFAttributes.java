@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -211,6 +212,8 @@ class RTFAttributes
         public boolean set(MutableAttributeSet target)
         {
             /* TODO: There's some ambiguity about whether this should
+            /* <p>
+            /* 
                *set* or *toggle* the attribute. */
             target.addAttribute(swingName, True);
 
@@ -409,6 +412,9 @@ class RTFAttributes
                 /* TODO: What is the proper behavior if the Swing object does
                    not specify a value, and we don't know its default value?
                    Currently we pretend that the RTF default value is
+                /* <p>
+                /*  没有指定一个值,而且我们不知道它的默认值呢?目前我们假设RTF默认值是
+                /* 
                    equivalent (probably a workable assumption) */
                 return true;
             }

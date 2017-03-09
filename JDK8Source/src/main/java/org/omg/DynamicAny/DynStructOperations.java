@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -12,6 +13,9 @@ package org.omg.DynamicAny;
 /**
     * DynStruct objects support the manipulation of IDL struct and exception values.
     * Members of the exceptions are handled in the same way as members of a struct.
+    * <p>
+    *  DynStruct对象支持对IDL结构和异常值的操作。异常的成员以与结构体的成员相同的方式处理。
+    * 
     */
 public interface DynStructOperations  extends org.omg.DynamicAny.DynAnyOperations
 {
@@ -21,6 +25,10 @@ public interface DynStructOperations  extends org.omg.DynamicAny.DynAnyOperation
         * This operation may return an empty string since the TypeCode of the value being
         * manipulated may not contain the names of members.
         *
+        * <p>
+        *  返回当前位置处的成员的名称。此操作可能返回一个空字符串,因为正在操作的值的TypeCode可能不包含成员的名称。
+        * 
+        * 
         * @exception TypeMismatch if the DynStruct represents an empty exception.
         * @exception InvalidValue if the current position does not indicate a member
         */
@@ -29,6 +37,10 @@ public interface DynStructOperations  extends org.omg.DynamicAny.DynAnyOperation
   /**
         * Returns the TCKind associated with the member at the current position.
         *
+        * <p>
+        *  返回与当前位置的成员关联的TCKind。
+        * 
+        * 
         * @exception TypeMismatch if the DynStruct represents an empty exception.
         * @exception InvalidValue if the current position does not indicate a member
         */
@@ -41,6 +53,10 @@ public interface DynStructOperations  extends org.omg.DynamicAny.DynAnyOperation
         * as indicated by the DynStruct's TypeCode. The current position is not affected.
         * The member names in the returned sequence will be empty strings if the DynStruct's TypeCode
         * does not contain member names.
+        * <p>
+        *  返回一个NameValuePairs序列,描述与DynStruct对象关联的结构中每个成员的名称和值。该序列包含与DynStruct的TypeCode所指示的成员的声明顺序相同的顺序的成员。
+        * 当前位置不受影响。如果DynStruct的TypeCode不包含成员名,则返回序列中的成员名称将为空字符串。
+        * 
         */
   org.omg.DynamicAny.NameValuePair[] get_members ();
 
@@ -52,6 +68,11 @@ public interface DynStructOperations  extends org.omg.DynamicAny.DynAnyOperation
         * of the struct as indicated by the DynStruct's TypeCode or they must be empty strings.
         * The operation makes no attempt to assign member values based on member names.
         *
+        * <p>
+        * 初始化来自NameValuePairs序列的DynStruct对象关联的结构数据值。如果所传递的序列具有非零长度,则操作将当前位置设置为零。否则,如果传递一个空序列,则当前位置设置为-1。
+        *  <P>成员必须以它们在结构的IDL规范中出现的顺序出现在NameValuePairs中,如DynStruct的TypeCode所指示的,否则它们必须为空字符串。该操作不会尝试根据成员名称分配成员值。
+        * 
+        * 
         * @exception TypeMismatch if the member names supplied in the passed sequence do not match the
         *            corresponding member name in the DynStruct's TypeCode and they are not empty strings
         * @exception InvalidValue if the passed sequence has a number of elements that disagrees
@@ -66,6 +87,10 @@ public interface DynStructOperations  extends org.omg.DynamicAny.DynAnyOperation
         * as indicated by the DynStruct's TypeCode. The current position is not affected.
         * The member names in the returned sequence will be empty strings if the DynStruct's TypeCode
         * does not contain member names.
+        * <p>
+        *  返回一个NameDynAnyPairs序列,描述与DynStruct对象关联的结构中每个成员的名称和值。该序列包含与DynStruct的TypeCode指示的成员的声明顺序相同的顺序的成员。
+        * 当前位置不受影响。如果DynStruct的TypeCode不包含成员名,则返回序列中的成员名称将为空字符串。
+        * 
         */
   org.omg.DynamicAny.NameDynAnyPair[] get_members_as_dyn_any ();
 
@@ -77,6 +102,10 @@ public interface DynStructOperations  extends org.omg.DynamicAny.DynAnyOperation
         * of the struct as indicated by the DynStruct's TypeCode or they must be empty strings.
         * The operation makes no attempt to assign member values based on member names.
         *
+        * <p>
+        * 初始化与NameDynAnyPairs序列中的DynStruct对象关联的结构数据值。如果所传递的序列具有非零长度,则操作将当前位置设置为零。否则,如果传递一个空序列,则当前位置设置为-1。
+        *  <P>成员必须以它们在结构的IDL规范中出现的顺序出现在NameDynAnyPairs中,如DynStruct的TypeCode所指示的,否则它们必须为空字符串。
+        * 
         * @exception TypeMismatch if the member names supplied in the passed sequence do not match the
         *            corresponding member name in the DynStruct's TypeCode and they are not empty strings
         * @exception InvalidValue if the passed sequence has a number of elements that disagrees

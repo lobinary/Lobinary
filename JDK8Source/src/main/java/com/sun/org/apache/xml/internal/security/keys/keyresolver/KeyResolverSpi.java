@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.keys.keyresolver;
 
@@ -41,6 +50,14 @@ import org.w3c.dom.Element;
  *  &lt;KeyResolver URI="http://www.w3.org/2000/09/xmldsig#KeyValue"
  *   JAVACLASS="MyPackage.MyKeyValueImpl"//gt;
  * </PRE>
+ * <p>
+ *  这个类是一个子KeyInfo Element的抽象类。
+ * 
+ *  如果你想要你的KeyResolver,首先你必须扩展这个类,并在config.xml中注册如下
+ * <PRE>
+ *  &lt; KeyResolver URI ="http://www.w3.org/2000/09/xmldsig#KeyValue"JAVACLASS ="MyPackage.MyKeyValueIm
+ * pl"// gt;。
+ * </PRE>
  */
 public abstract class KeyResolverSpi {
 
@@ -53,6 +70,9 @@ public abstract class KeyResolverSpi {
 
     /**
      * Set whether secure validation is enabled or not. The default is false.
+     * <p>
+     *  设置是否启用安全验证。默认值为false。
+     * 
      */
     public void setSecureValidation(boolean secureValidation) {
         this.secureValidation = secureValidation;
@@ -61,6 +81,10 @@ public abstract class KeyResolverSpi {
     /**
      * This method returns whether the KeyResolverSpi is able to perform the requested action.
      *
+     * <p>
+     *  此方法返回KeyResolverSpi是否能够执行请求的操作。
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -73,6 +97,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineResolvePublicKey
      *
+     * <p>
+     *  方法engineResolvePublicKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -89,6 +117,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineLookupAndResolvePublicKey
      *
+     * <p>
+     *  方法engineLookupAndResolvePublicKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -123,6 +155,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineResolveCertificate
      *
+     * <p>
+     *  方法engineResolveCertificate
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -139,6 +175,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineLookupResolveX509Certificate
      *
+     * <p>
+     *  方法engineLookupResolveX509Certificate
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -159,6 +199,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineResolveSecretKey
      *
+     * <p>
+     * 方法engineResolveSecretKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -175,6 +219,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineLookupAndResolveSecretKey
      *
+     * <p>
+     *  方法engineLookupAndResolveSecretKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -195,6 +243,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineLookupAndResolvePrivateKey
      *
+     * <p>
+     *  方法engineLookupAndResolvePrivateKey
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -216,6 +268,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineSetProperty
      *
+     * <p>
+     *  方法engineSetProperty
+     * 
+     * 
      * @param key
      * @param value
      */
@@ -229,6 +285,10 @@ public abstract class KeyResolverSpi {
     /**
      * Method engineGetProperty
      *
+     * <p>
+     *  方法engineGetProperty
+     * 
+     * 
      * @param key
      * @return obtain the property appointed by key
      */
@@ -243,6 +303,9 @@ public abstract class KeyResolverSpi {
     /**
      * Method understandsProperty
      *
+     * <p>
+     *  方法understandsProperty
+     * 
      * @param propertyToTest
      * @return true if understood the property
      */

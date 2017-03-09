@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SystemIDResolver.java,v 1.2.4.1 2005/09/15 08:15:58 suresh_emailid Exp $
+ * <p>
+ *  $ Id：SystemIDResolver.java,v 1.2.4.1 2005/09/15 08:15:58 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -36,6 +49,12 @@ import com.sun.org.apache.xml.internal.utils.URI.MalformedURIException;
  * fact that it's declared to throw TransformerException.  Please
  * see code comments for details on how resolution is performed.</p>
  * @xsl.usage internal
+ * <p>
+ *  此类用于将相对URI和SystemID字符串解析为绝对URI。
+ * 
+ *  <p>这是一个用于解析URI的通用实用程序,而不是声明为抛出TransformerException的事实。有关如何执行分辨率的详细信息,请参阅代码注释。
+ * </p> @ xsl.usage internal。
+ * 
  */
 public class SystemIDResolver
 {
@@ -50,6 +69,14 @@ public class SystemIDResolver
    * relative path. The space and backslash characters are also replaced to
    * generate a good absolute URI.</p>
    *
+   * <p>
+   *  从给定的相对URI(本地路径)获取绝对URI。
+   * 
+   * <p>相对URI是本地文件系统路径。路径可以是绝对路径或相对路径。
+   * 如果它是相对路径,则相对于系统属性"user.dir"(如果可用)进行解析;如果不是(即在Applet也许抛出SecurityException),那么我们只是返回相对路径。
+   * 空格和反斜线字符也将替换为生成良好的绝对URI。</p>。
+   * 
+   * 
    * @param localPath The relative URI to resolve
    *
    * @return Resolved absolute URI
@@ -92,6 +119,10 @@ public class SystemIDResolver
   /**
    * Return an absolute path from a relative path.
    *
+   * <p>
+   *  从相对路径返回绝对路径。
+   * 
+   * 
    * @param relativePath A relative path
    * @return The absolute path
    */
@@ -103,6 +134,10 @@ public class SystemIDResolver
   /**
    * Return true if the systemId denotes an absolute URI .
    *
+   * <p>
+   *  如果systemId表示绝对URI,则返回true。
+   * 
+   * 
    * @param systemId The systemId string
    * @return true if the systemId is an an absolute URI
    */
@@ -112,11 +147,19 @@ public class SystemIDResolver
       *   Authors should be aware that a path segment which contains a colon
       * character cannot be used as the first segment of a relative URI path
       * (e.g., "this:that"), because it would be mistaken for a scheme name.
+      * <p>
+      *  作者应该注意,包含冒号字符的路径段不能用作相对URI路径的第一个段(例如,"this：that"),因为它将被误认为是方案名称。
+      * 
+      * 
      **/
      /**
       * %REVIEW% Can we assume here that systemId is a valid URI?
       * It looks like we cannot ( See discussion of this common problem in
       * Bugzilla Bug 22777 ).
+      * <p>
+      *  ％REVIEW％我们可以假设systemId是一个有效的URI?看起来我们不能(在Bugzilla Bug 22777中看到这个常见问题的讨论)。
+      * 
+      * 
      **/
      //"fix" for Bugzilla Bug 22777
     if(isWindowsAbsolutePath(systemId)){
@@ -144,6 +187,10 @@ public class SystemIDResolver
   /**
    * Return true if the local path is an absolute path.
    *
+   * <p>
+   *  如果本地路径是绝对路径,则返回true。
+   * 
+   * 
    * @param systemId The path string
    * @return true if the path is absolute
    */
@@ -159,6 +206,10 @@ public class SystemIDResolver
    /**
    * Return true if the local path is a Windows absolute path.
    *
+   * <p>
+   *  如果本地路径是Windows绝对路径,则返回true。
+   * 
+   * 
    * @param systemId The path string
    * @return true if the path is a Windows absolute path
    */
@@ -180,6 +231,10 @@ public class SystemIDResolver
    * Replace spaces with "%20" and backslashes with forward slashes in
    * the input string to generate a well-formed URI string.
    *
+   * <p>
+   *  用"％20"替换空格,在输入字符串中使用正斜杠替换反斜杠,以生成格式正确的URI字符串。
+   * 
+   * 
    * @param str The input string
    * @return The string after conversion
    */
@@ -211,6 +266,10 @@ public class SystemIDResolver
   /**
    * Take a SystemID string and try to turn it into a good absolute URI.
    *
+   * <p>
+   *  取一个SystemID字符串,并尝试将其变成一个良好的绝对URI。
+   * 
+   * 
    * @param systemId A URI string, which may be absolute or relative.
    *
    * @return The resolved absolute URI
@@ -267,6 +326,9 @@ public class SystemIDResolver
   /**
    * Take a SystemID string and try to turn it into a good absolute URI.
    *
+   * <p>
+   *  取一个SystemID字符串,并尝试将其变成一个良好的绝对URI。
+   * 
    * @param urlString SystemID string
    * @param base The URI string used as the base for resolving the systemID
    *

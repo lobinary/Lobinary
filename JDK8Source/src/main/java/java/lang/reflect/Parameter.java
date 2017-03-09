@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,12 @@ import sun.reflect.annotation.AnnotationSupport;
  * including its name and modifiers.  It also provides an alternate
  * means of obtaining attributes for the parameter.
  *
+ * <p>
+ *  有关方法参数的信息。
+ * 
+ *  {@code Parameter}提供有关方法参数的信息,包括其名称和修饰符。它还提供了一种获取参数属性的备用方法。
+ * 
+ * 
  * @since 1.8
  */
 public final class Parameter implements AnnotatedElement {
@@ -54,6 +61,12 @@ public final class Parameter implements AnnotatedElement {
      * absent, however, then {@code Executable} uses this constructor
      * to synthesize them.
      *
+     * <p>
+     *  {@code Parameter}的Package-private构造函数。
+     * 
+     *  如果方法参数数据存在于类文件中,则JVM直接创建{@code Parameter}对象。如果它不存在,然而,{@code Executable}使用这个构造函数来合成它们。
+     * 
+     * 
      * @param name The name of the parameter.
      * @param modifiers The modifier flags for the parameter.
      * @param executable The executable which defines this parameter.
@@ -72,6 +85,10 @@ public final class Parameter implements AnnotatedElement {
     /**
      * Compares based on the executable and the index.
      *
+     * <p>
+     *  基于可执行文件和索引进行比较。
+     * 
+     * 
      * @param obj The object to compare.
      * @return Whether or not this is equal to the argument.
      */
@@ -88,6 +105,10 @@ public final class Parameter implements AnnotatedElement {
      * Returns a hash code based on the executable's hash code and the
      * index.
      *
+     * <p>
+     *  返回基于可执行文件的哈希码和索引的哈希码。
+     * 
+     * 
      * @return A hash code based on the executable's hash code.
      */
     public int hashCode() {
@@ -100,6 +121,10 @@ public final class Parameter implements AnnotatedElement {
      * is determined by the {@literal MethodParameters} attribute of
      * the method which declares the parameter.
      *
+     * <p>
+     *  如果参数具有根据类文件的名称,则返回true;否则返回false。参数是否具有名称由声明该参数的方法的{@literal MethodParameters}属性确定。
+     * 
+     * 
      * @return true if and only if the parameter has a name according
      * to the class file.
      */
@@ -117,6 +142,13 @@ public final class Parameter implements AnnotatedElement {
      * arity, followed by a space, followed by the name of the
      * parameter.
      *
+     * <p>
+     *  返回描述此参数的字符串。
+     * 格式是参数的修饰符,如果有的话,按照<cite> Java&trade;语言规范</cite>,其后是参数的完全限定类型(如果参数是变量arity,则不包括最后一个[]),后跟"...",如果参数是变量
+     * arity,后跟参数的名称。
+     *  返回描述此参数的字符串。
+     * 
+     * 
      * @return A string representation of the parameter and associated
      * information.
      */
@@ -144,6 +176,10 @@ public final class Parameter implements AnnotatedElement {
     /**
      * Return the {@code Executable} which declares this parameter.
      *
+     * <p>
+     *  返回声明此参数的{@code Executable}。
+     * 
+     * 
      * @return The {@code Executable} declaring this parameter.
      */
     public Executable getDeclaringExecutable() {
@@ -154,6 +190,10 @@ public final class Parameter implements AnnotatedElement {
      * Get the modifier flags for this the parameter represented by
      * this {@code Parameter} object.
      *
+     * <p>
+     * 获取此{@code Parameter}对象所表示的参数的修饰符标志。
+     * 
+     * 
      * @return The modifier flags for this parameter.
      */
     public int getModifiers() {
@@ -168,6 +208,11 @@ public final class Parameter implements AnnotatedElement {
      * the parameter in the descriptor of the method which declares
      * the parameter.
      *
+     * <p>
+     *  返回参数的名称。如果参数的名称为{@linkplain #isNamePresent()present},那么此方法将返回类文件提供的名称。
+     * 否则,此方法合成格式argN的名称,其中N是声明该参数的方法的描述符中的参数的索引。
+     * 
+     * 
      * @return The name of the parameter, either provided by the class
      *         file or synthesized if the class file does not provide
      *         a name.
@@ -192,6 +237,10 @@ public final class Parameter implements AnnotatedElement {
      * type for the parameter represented by this {@code Parameter}
      * object.
      *
+     * <p>
+     *  返回一个{@code Type}对象,该对象标识由此{@code Parameter}对象表示的参数的参数化类型。
+     * 
+     * 
      * @return a {@code Type} object identifying the parameterized
      * type of the parameter represented by this object
      */
@@ -212,6 +261,10 @@ public final class Parameter implements AnnotatedElement {
      * declared type for the parameter represented by this
      * {@code Parameter} object.
      *
+     * <p>
+     *  返回{@code Class}对象,该对象标识由此{@code Parameter}对象表示的参数的声明类型。
+     * 
+     * 
      * @return a {@code Class} object identifying the declared
      * type of the parameter represented by this object
      */
@@ -228,6 +281,10 @@ public final class Parameter implements AnnotatedElement {
      * Returns an AnnotatedType object that represents the use of a type to
      * specify the type of the formal parameter represented by this Parameter.
      *
+     * <p>
+     *  返回一个AnnotatedType对象,它表示使用一个类型来指定由此参数表示的形式参数的类型。
+     * 
+     * 
      * @return an {@code AnnotatedType} object representing the use of a type
      *         to specify the type of the formal parameter represented by this
      *         Parameter
@@ -243,6 +300,10 @@ public final class Parameter implements AnnotatedElement {
      * Returns {@code true} if this parameter is implicitly declared
      * in source code; returns {@code false} otherwise.
      *
+     * <p>
+     *  如果此参数在源代码中被隐式声明,则返回{@code true};否则返回{@code false}。
+     * 
+     * 
      * @return true if and only if this parameter is implicitly
      * declared as defined by <cite>The Java&trade; Language
      * Specification</cite>.
@@ -257,6 +318,12 @@ public final class Parameter implements AnnotatedElement {
      * otherwise.
      *
      * @jls 13.1 The Form of a Binary
+     * <p>
+     *  如果此参数在源代码中既未隐式也未显式声明,则返回{@code true};否则返回{@code false}。
+     * 
+     *  @jls 13.1二进制的形式
+     * 
+     * 
      * @return true if and only if this parameter is a synthetic
      * construct as defined by
      * <cite>The Java&trade; Language Specification</cite>.
@@ -269,6 +336,10 @@ public final class Parameter implements AnnotatedElement {
      * Returns {@code true} if this parameter represents a variable
      * argument list; returns {@code false} otherwise.
      *
+     * <p>
+     *  如果此参数表示变量参数列表,则返回{@code true};否则返回{@code false}。
+     * 
+     * 
      * @return {@code true} if an only if this parameter represents a
      * variable argument list.
      */
@@ -280,6 +351,10 @@ public final class Parameter implements AnnotatedElement {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      */
     public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
@@ -289,6 +364,10 @@ public final class Parameter implements AnnotatedElement {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -300,12 +379,17 @@ public final class Parameter implements AnnotatedElement {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public Annotation[] getDeclaredAnnotations() {
         return executable.getParameterAnnotations()[index];
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      */
     public <T extends Annotation> T getDeclaredAnnotation(Class<T> annotationClass) {
@@ -316,6 +400,8 @@ public final class Parameter implements AnnotatedElement {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -328,6 +414,8 @@ public final class Parameter implements AnnotatedElement {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     public Annotation[] getAnnotations() {
         return getDeclaredAnnotations();

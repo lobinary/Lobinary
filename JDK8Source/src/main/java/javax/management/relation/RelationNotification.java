@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,12 @@ import static com.sun.jmx.mbeanserver.Util.cast;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-6871117877523310399L</code>.
  *
+ * <p>
+ *  关系服务中的更改的通知。当通过关系服务创建关系时,或者在关系服务中添加了MBean作为关系,或者在关系中更新了角色,或者从关系服务中删除了关系时,将发送RelationNotification通知。
+ * 
+ *  <p>此类别的<b> serialVersionUID </b>是<code> -6871117877523310399L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -100,6 +107,8 @@ public class RelationNotification extends Notification {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField relationId String Relation identifier of
      * created/removed/updated relation
      * @serialField relationTypeName String Relation type name of
@@ -143,26 +152,44 @@ public class RelationNotification extends Notification {
 
     /**
      * Type for the creation of an internal relation.
+     * <p>
+     *  用于创建内部关系的类型。
+     * 
      */
     public static final String RELATION_BASIC_CREATION = "jmx.relation.creation.basic";
     /**
      * Type for the relation MBean added into the Relation Service.
+     * <p>
+     *  在关系服务中添加的关系MBean的类型。
+     * 
      */
     public static final String RELATION_MBEAN_CREATION = "jmx.relation.creation.mbean";
     /**
      * Type for an update of an internal relation.
+     * <p>
+     *  键入内部关系的更新。
+     * 
      */
     public static final String RELATION_BASIC_UPDATE = "jmx.relation.update.basic";
     /**
      * Type for the update of a relation MBean.
+     * <p>
+     *  键入更新关系MBean。
+     * 
      */
     public static final String RELATION_MBEAN_UPDATE = "jmx.relation.update.mbean";
     /**
      * Type for the removal from the Relation Service of an internal relation.
+     * <p>
+     *  键入用于从关系服务中删除内部关系。
+     * 
      */
     public static final String RELATION_BASIC_REMOVAL = "jmx.relation.removal.basic";
     /**
      * Type for the removal from the Relation Service of a relation MBean.
+     * <p>
+     *  键入从关系服务中删除关系MBean。
+     * 
      */
     public static final String RELATION_MBEAN_REMOVAL = "jmx.relation.removal.mbean";
 
@@ -171,38 +198,52 @@ public class RelationNotification extends Notification {
     //
 
     /**
+    /* <p>
+    /* 
      * @serial Relation identifier of created/removed/updated relation
      */
     private String relationId = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Relation type name of created/removed/updated relation
      */
     private String relationTypeName = null;
 
     /**
+    /* <p>
+    /* 
      * @serial {@link ObjectName} of the relation MBean of created/removed/updated relation
      *         (only if the relation is represented by an MBean)
      */
     private ObjectName relationObjName = null;
 
     /**
+    /* <p>
+    /* 
      * @serial List of {@link ObjectName}s of referenced MBeans to be unregistered due to
      *         relation removal
      */
     private List<ObjectName> unregisterMBeanList = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Name of updated role (only for role update)
      */
     private String roleName = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Old role value ({@link ArrayList} of {@link ObjectName}s) (only for role update)
      */
     private List<ObjectName> oldRoleValue = null;
 
     /**
+    /* <p>
+    /* 
      * @serial New role value ({@link ArrayList} of {@link ObjectName}s) (only for role update)
      */
     private List<ObjectName> newRoleValue = null;
@@ -216,6 +257,10 @@ public class RelationNotification extends Notification {
      * object created internally in the Relation Service, or an MBean added as a
      * relation) or for a relation removal from the Relation Service.
      *
+     * <p>
+     *  为关系创建(在关系服务中内部创建的RelationSupport对象或作为关系添加的MBean)或从关系服务中删除关系创建通知。
+     * 
+     * 
      * @param notifType  type of the notification; either:
      * <P>- RELATION_BASIC_CREATION
      * <P>- RELATION_MBEAN_CREATION
@@ -273,6 +318,10 @@ public class RelationNotification extends Notification {
     /**
      * Creates a notification for a role update in a relation.
      *
+     * <p>
+     *  为关系中的角色更新创建通知。
+     * 
+     * 
      * @param notifType  type of the notification; either:
      * <P>- RELATION_BASIC_UPDATE
      * <P>- RELATION_MBEAN_UPDATE
@@ -330,6 +379,10 @@ public class RelationNotification extends Notification {
     /**
      * Returns the relation identifier of created/removed/updated relation.
      *
+     * <p>
+     *  返回创建/删除/更新的关系的关系标识符。
+     * 
+     * 
      * @return the relation id.
      */
     public String getRelationId() {
@@ -339,6 +392,10 @@ public class RelationNotification extends Notification {
     /**
      * Returns the relation type name of created/removed/updated relation.
      *
+     * <p>
+     *  返回创建/移除/更新的关系的关系类型名称。
+     * 
+     * 
      * @return the relation type name.
      */
     public String getRelationTypeName() {
@@ -349,6 +406,10 @@ public class RelationNotification extends Notification {
      * Returns the ObjectName of the
      * created/removed/updated relation.
      *
+     * <p>
+     *  返回创建/删除/更新的关系的ObjectName。
+     * 
+     * 
      * @return the ObjectName if the relation is an MBean, otherwise null.
      */
     public ObjectName getObjectName() {
@@ -359,6 +420,10 @@ public class RelationNotification extends Notification {
      * Returns the list of ObjectNames of MBeans expected to be unregistered
      * due to a relation removal (only for relation removal).
      *
+     * <p>
+     *  返回由于关系删除而预期未注册的MBeans的ObjectName的列表(仅用于关系删除)。
+     * 
+     * 
      * @return a {@link List} of {@link ObjectName}.
      */
     public List<ObjectName> getMBeansToUnregister() {
@@ -374,6 +439,10 @@ public class RelationNotification extends Notification {
     /**
      * Returns name of updated role of updated relation (only for role update).
      *
+     * <p>
+     * 返回更新关系的更新角色的名称(仅适用于角色更新)。
+     * 
+     * 
      * @return the name of the updated role.
      */
     public String getRoleName() {
@@ -387,6 +456,10 @@ public class RelationNotification extends Notification {
     /**
      * Returns old value of updated role (only for role update).
      *
+     * <p>
+     *  返回已更新角色的旧值(仅适用于角色更新)。
+     * 
+     * 
      * @return the old value of the updated role.
      */
     public List<ObjectName> getOldRoleValue() {
@@ -402,6 +475,10 @@ public class RelationNotification extends Notification {
     /**
      * Returns new value of updated role (only for role update).
      *
+     * <p>
+     *  返回已更新角色的新值(仅适用于角色更新)。
+     * 
+     * 
      * @return the new value of the updated role.
      */
     public List<ObjectName> getNewRoleValue() {
@@ -530,6 +607,9 @@ public class RelationNotification extends Notification {
 
     /**
      * Deserializes a {@link RelationNotification} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link RelationNotification}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -588,6 +668,8 @@ public class RelationNotification extends Notification {
 
     /**
      * Serializes a {@link RelationNotification} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link RelationNotification}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2013,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -91,6 +110,14 @@ import java.util.Objects;
  * @implSpec
  * This class is immutable nad thread-safe.
  *
+ * <p>
+ *  以标准年 - 月 - 日日历系统表示的期间。
+ * <p>
+ *  此类由寻求处理非ISO日历系统中的日期的应用程序使用。例如,日本,民族,泰国佛教和其他。
+ * 
+ *  @implSpec这个类是不可变的nad线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 final class ChronoPeriodImpl
@@ -99,34 +126,55 @@ final class ChronoPeriodImpl
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 57387258289L;
 
     /**
      * The set of supported units.
+     * <p>
+     *  支持的单位集。
+     * 
      */
     private static final List<TemporalUnit> SUPPORTED_UNITS =
             Collections.unmodifiableList(Arrays.<TemporalUnit>asList(YEARS, MONTHS, DAYS));
 
     /**
      * The chronology.
+     * <p>
+     *  年表。
+     * 
      */
     private final Chronology chrono;
     /**
      * The number of years.
+     * <p>
+     *  年数。
+     * 
      */
     final int years;
     /**
      * The number of months.
+     * <p>
+     *  月数。
+     * 
      */
     final int months;
     /**
      * The number of days.
+     * <p>
+     *  天数。
+     * 
      */
     final int days;
 
     /**
      * Creates an instance.
+     * <p>
+     *  创建实例。
+     * 
      */
     ChronoPeriodImpl(Chronology chrono, int years, int months, int days) {
         Objects.requireNonNull(chrono, "chrono");
@@ -195,6 +243,10 @@ final class ChronoPeriodImpl
     /**
      * Obtains an instance of {@code ChronoPeriodImpl} from a temporal amount.
      *
+     * <p>
+     *  从时间量获取{@code ChronoPeriodImpl}的实例。
+     * 
+     * 
      * @param amount  the temporal amount to convert, not null
      * @return the period, not null
      */
@@ -243,6 +295,10 @@ final class ChronoPeriodImpl
     /**
      * Calculates the range of months.
      *
+     * <p>
+     *  计算月份的范围。
+     * 
+     * 
      * @return the month range, -1 if not fixed range
      */
     private long monthRange() {
@@ -306,6 +362,9 @@ final class ChronoPeriodImpl
 
     /**
      * Validates that the temporal has the correct chronology.
+     * <p>
+     *  验证时间具有正确的年表。
+     * 
      */
     private void validateChrono(TemporalAccessor temporal) {
         Objects.requireNonNull(temporal, "temporal");
@@ -367,6 +426,13 @@ final class ChronoPeriodImpl
      *  out.writeInt(days);
      * </pre>
      *
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.chrono.Ser">专用序列化表单</a>撰写年表。
+     * <pre>
+     * out.writeByte(12); //将此标识为ChronoPeriodImpl out.writeUTF(getId()); //年表out.writeInt(年); out.writeInt(m
+     * onths); out.writeInt(days);。
+     * </pre>
+     * 
      * @return the instance of {@code Ser}, not null
      */
     protected Object writeReplace() {
@@ -376,6 +442,9 @@ final class ChronoPeriodImpl
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     * 
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

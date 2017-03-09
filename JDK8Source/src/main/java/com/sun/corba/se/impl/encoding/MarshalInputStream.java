@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,12 +65,18 @@ public interface MarshalInputStream {
 
     /*
      * The methods necessary to support RMI
+     * <p>
+     *  支持RMI所需的方法
+     * 
      */
     public org.omg.CORBA.Object read_Object(Class stubClass);
     public java.io.Serializable read_value() throws Exception;
 
     /*
      * Additional Methods
+     * <p>
+     *  附加方法
+     * 
      */
     public void consumeEndian();
 
@@ -85,6 +92,9 @@ public interface MarshalInputStream {
      * This must be called once before unmarshaling valuetypes or anything
      * that uses repository IDs.  The ORB's version should be set
      * to the desired value prior to calling.
+     * <p>
+     *  在解压缩值类型或使用存储库ID的任何内容之前,必须调用此方法。在调用之前,ORB的版本应设置为所需的值。
+     * 
      */
     public void performORBVersionSpecificInit();
 
@@ -97,6 +107,9 @@ public interface MarshalInputStream {
      * code set service context for the first time.  Initially,
      * we use ISO8859-1 to read the operation name (it can't
      * be more than ASCII).
+     * <p>
+     *  告诉输入流null任何代码集转换器引用,如果需要转换器,强制它重新获取它们。当服务器输入流需要在首次读取代码集服务上下文之后将连接的char代码集转换器切换到不同的东西时使用。
+     * 最初,我们使用ISO8859-1读取操作名称(它不能大于ASCII)。
      */
     public void resetCodeSetConverters();
 }

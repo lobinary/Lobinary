@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -84,6 +85,9 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage;
 
 /**
  * Provides portable interceptor functionality.
+ * <p>
+ *  提供便携式拦截器功能。
+ * 
  */
 public class PIHandlerImpl implements PIHandler
 {
@@ -291,6 +295,12 @@ public class PIHandlerImpl implements PIHandler
      *
      * This must be called at the end of ORB.destroy.  Note that this is not
      * part of the PIHandler interface, since ORBImpl implements the ORB interface.
+     * <p>
+     *  ptc / 00-08-06 p 205："当应用程序调用ORB :: destroy时,ORB 1)等待所有正在进行的请求完成2)为每个拦截器调用Interceptor :: destroy操作3)
+     * 完成销毁ORB"。
+     * 
+     *  这必须在ORB.destroy结尾处调用。注意,这不是PIHandler接口的一部分,因为ORBImpl实现了ORB接口。
+     * 
      */
     public void destroyInterceptors() {
         interceptorList.destroyAll();
@@ -325,6 +335,10 @@ public class PIHandlerImpl implements PIHandler
     /*
      *****************
      * Client PI hooks
+     * <p>
+     *  ***************客户端PI挂钩
+     * 
+     * 
      *****************/
 
     public void disableInterceptorsThisThread() {
@@ -556,6 +570,10 @@ public class PIHandlerImpl implements PIHandler
     /*
      *****************
      * Server PI hooks
+     * <p>
+     *  ***************服务器PI挂钩
+     * 
+     * 
      *****************/
 
     public void invokeServerPIStartingPoint()
@@ -733,6 +751,10 @@ public class PIHandlerImpl implements PIHandler
     /*
      **********************************************************************
      *  The following methods are private utility methods.
+     * <p>
+     *  **************************************************** ******************以下方法是私有实用程序方法。
+     * 
+     * 
      ************************************************************************/
 
     /**
@@ -741,6 +763,11 @@ public class PIHandlerImpl implements PIHandler
      * factored out into this utility method.
      * <p>
      * This method will NOT work for ending points.
+     * <p>
+     *  处理服务器请求拦截器的起始点和中间点的异常。这是已经被分解到这个实用程序方法中的公共代码。
+     * <p>
+     *  此方法不适用于结束点。
+     * 
      */
     private void serverPIHandleExceptions( ServerRequestInfoImpl info )
     {
@@ -765,6 +792,10 @@ public class PIHandlerImpl implements PIHandler
      * REPLY_MESSAGE_TO_PI_REPLY_STATUS.  The reverse lookup need not be
      * performed as quickly since it is only executed in exception
      * conditions.
+     * <p>
+     *  将PI回复状态转换为ReplyMessage常数的实用方法。这是对REPLY_MESSAGE_TO_PI_REPLY_STATUS中定义的表的反向查找。
+     * 反向查找不需要快速执行,因为它仅在异常条件下执行。
+     * 
      */
     private int convertPIReplyStatusToReplyMessage( short replyStatus ) {
         int result = 0;
@@ -781,6 +812,9 @@ public class PIHandlerImpl implements PIHandler
      * Convenience method to get the ClientRequestInfoImpl object off the
      * top of the ThreadLocal stack.  Throws an INTERNAL exception if
      * the Info stack is empty.
+     * <p>
+     *  方便的方法来获取ClientRequestInfoImpl对象的顶部的ThreadLocal堆栈。如果Info堆栈为空,则抛出INTERNAL异常。
+     * 
      */
     private ClientRequestInfoImpl peekClientRequestInfoImplStack() {
         RequestInfoStack infoStack =
@@ -798,6 +832,9 @@ public class PIHandlerImpl implements PIHandler
     /**
      * Convenience method to get the ServerRequestInfoImpl object off the
      * top of the ThreadLocal stack.  Returns null if there are none.
+     * <p>
+     * 方便的方法来获取ServerRequestInfoImpl对象的顶部的ThreadLocal堆栈。如果没有,则返回null。
+     * 
      */
     private ServerRequestInfoImpl peekServerRequestInfoImplStack() {
         RequestInfoStack infoStack =
@@ -816,6 +853,9 @@ public class PIHandlerImpl implements PIHandler
     /**
      * Convenience method to determine whether Client PI is enabled
      * for requests on this thread.
+     * <p>
+     *  确定是否为此线程上的请求启用客户端PI的方便方法。
+     * 
      */
     private boolean isClientPIEnabledForThisThread() {
         RequestInfoStack infoStack =
@@ -825,6 +865,9 @@ public class PIHandlerImpl implements PIHandler
 
     /**
      * Call pre_init on all ORB initializers
+     * <p>
+     *  在所有ORB初始化器上调用pre_init
+     * 
      */
     private void preInitORBInitializers( ORBInitInfoImpl info ) {
 
@@ -850,6 +893,9 @@ public class PIHandlerImpl implements PIHandler
 
     /**
      * Call post_init on all ORB initializers
+     * <p>
+     *  在所有ORB初始化器上调用post_init
+     * 
      */
     private void postInitORBInitializers( ORBInitInfoImpl info ) {
 
@@ -876,6 +922,9 @@ public class PIHandlerImpl implements PIHandler
     /**
      * Creates the ORBInitInfo object to be passed to ORB intializers'
      * pre_init and post_init methods
+     * <p>
+     *  创建要传递给ORB初始化器的pre_init和post_init方法的ORBInitInfo对象
+     * 
      */
     private ORBInitInfoImpl createORBInitInfo() {
         ORBInitInfoImpl result = null;
@@ -901,6 +950,14 @@ public class PIHandlerImpl implements PIHandler
      *   <li>INTERCEPTOR_TYPE_IOR - IORInterceptor
      * </ul>
      *
+     * <p>
+     *  当拦截器需要注册时,由ORBInitInfo调用。类型为以下之一：
+     * <ul>
+     *  <li> INTERCEPTOR_TYPE_CLIENT  -  ClientRequestInterceptor <li> INTERCEPTOR_TYPE_SERVER  -  ServerReq
+     * uestInterceptor <li> INTERCEPTOR_TYPE_IOR  -  IORInterceptor。
+     * </ul>
+     * 
+     * 
      * @exception DuplicateName Thrown if an interceptor of the given
      *     name already exists for the given type.
      */
@@ -930,6 +987,9 @@ public class PIHandlerImpl implements PIHandler
     /**
      * Called when an invalid null parameter was passed.  Throws a
      * BAD_PARAM with a minor code of 1
+     * <p>
+     *  当传递无效的空参数时调用。投掷BAD_PARAM,次要代码为1
+     * 
      */
     private void nullParam()
         throws BAD_PARAM
@@ -944,6 +1004,10 @@ public class PIHandlerImpl implements PIHandler
      *  not registered.
      *  _REVISIT_, Once Policy Framework work is completed, Reorganize
      *  this method to com.sun.corba.se.spi.orb.ORB.
+     * <p>
+     *  类。此方法查找给定策略类型的策略工厂,并从工厂实例化策略对象。它将抛出PolicyError异常,如果PolicyFactory为给定类型未注册。
+     *  _REVISIT_,一旦策略框架工作完成,将此方法重组为com.sun.corba.se.spi.orb.ORB。
+     * 
      */
     public org.omg.CORBA.Policy create_policy(int type, org.omg.CORBA.Any val)
         throws org.omg.CORBA.PolicyError
@@ -970,6 +1034,7 @@ public class PIHandlerImpl implements PIHandler
     /** This method registers the Policy Factory in the policyFactoryTable,
      *  which is a HashMap. This method is made package private, because
      *  it is used internally by the  Interceptors.
+     * <p>
      */
     public void registerPolicyFactory( int type, PolicyFactory factory ) {
         if( policyFactoryTable == null ) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import java.util.ServiceLoader;
 /**
  * Implementation of {@link XPathFactory#newInstance(String)}.
  *
+ * <p>
+ *  实现{@link XPathFactory#newInstance(String)}。
+ * 
+ * 
  * @author <a href="Kohsuke.Kawaguchi@Sun.com">Kohsuke Kawaguchi</a>
  * @version $Revision: 1.7 $, $Date: 2010-11-01 04:36:14 $
  * @since 1.5
@@ -60,17 +65,27 @@ class XPathFactoryFinder  {
 
     /**
      * <p>Cache properties for performance.</p>
+     * <p>
+     *  <p>性能的缓存属性。</p>
+     * 
      */
     private static final Properties cacheProps = new Properties();
 
     /**
      * <p>First time requires initialization overhead.</p>
+     * <p>
+     *  <p>首次需要初始化开销。</p>
+     * 
      */
     private volatile static boolean firstTime = true;
 
     /**
      * <p>Conditional debug printing.</p>
      *
+     * <p>
+     *  <p>条件调试打印。</p>
+     * 
+     * 
      * @param msg to print
      */
     private static void debugPrintln(String msg) {
@@ -81,6 +96,9 @@ class XPathFactoryFinder  {
 
     /**
      * <p><code>ClassLoader</code> to use to find <code>XPathFactory</code>.</p>
+     * <p>
+     *  <p> <code> ClassLoader </code>用于查找<code> XPathFactory </code>。</p>
+     * 
      */
     private final ClassLoader classLoader;
 
@@ -88,6 +106,10 @@ class XPathFactoryFinder  {
      * <p>Constructor that specifies <code>ClassLoader</code> to use
      * to find <code>XPathFactory</code>.</p>
      *
+     * <p>
+     *  <p>指定<code> ClassLoader </code>以用于查找<code> XPathFactory </code>的构造方法。</p>
+     * 
+     * 
      * @param loader
      *      to be used to load resource and {@link XPathFactory}
      *      implementations during the resolution process.
@@ -123,6 +145,10 @@ class XPathFactoryFinder  {
      * <p>Creates a new {@link XPathFactory} object for the specified
      * object model.</p>
      *
+     * <p>
+     *  <p>为指定的对象模型创建一个新的{@link XPathFactory}对象。</p>
+     * 
+     * 
      * @param uri
      *       Identifies the underlying object model.
      *
@@ -147,6 +173,10 @@ class XPathFactoryFinder  {
     /**
      * <p>Lookup a {@link XPathFactory} for the given object model.</p>
      *
+     * <p>
+     *  <p>查找给定对象模型的{@link XPathFactory}。</p>
+     * 
+     * 
      * @param uri identifies the object model.
      *
      * @return {@link XPathFactory} for the given object model.
@@ -232,6 +262,8 @@ class XPathFactoryFinder  {
 
     /** <p>Create class using appropriate ClassLoader.</p>
      *
+     * <p>
+     * 
      * @param className Name of class to create.
      * @return Created class or <code>null</code>.
      */
@@ -265,6 +297,10 @@ class XPathFactoryFinder  {
     /**
      * <p>Creates an instance of the specified and returns it.</p>
      *
+     * <p>
+     *  <p>创建指定的实例并返回它。</p>
+     * 
+     * 
      * @param className
      *      fully qualified class name to be instantiated.
      *
@@ -325,6 +361,9 @@ class XPathFactoryFinder  {
     /**
      * Try to construct using newXPathFactoryNoServiceLoader
      *   method if available.
+     * <p>
+     *  尝试使用newXPathFactoryNoServiceLoader方法(如果可用)。
+     * 
      */
     private static XPathFactory newInstanceNoServiceLoader(
          Class<?> providerClass
@@ -382,6 +421,10 @@ class XPathFactoryFinder  {
      * Finds a service provider subclass of XPathFactory that supports the
      * given object model using the ServiceLoader.
      *
+     * <p>
+     *  使用ServiceLoader查找支持给定对象模型的XPathFactory的服务提供程序子类。
+     * 
+     * 
      * @param objectModel URI of object model to support.
      * @return An XPathFactory supporting the specified object model, or null
      *         if none is found.
@@ -422,6 +465,9 @@ class XPathFactoryFinder  {
     /**
      * <p>Search the specified classloader for the given classname.</p>
      *
+     * <p>
+     *  <p>在指定的classloader中搜索给定的类名。</p>
+     * 
      * @param classname the fully qualified name of the class to search for
      * @param loader the classloader to search
      *

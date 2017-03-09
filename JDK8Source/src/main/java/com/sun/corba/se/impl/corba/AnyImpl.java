@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.corba;
@@ -126,6 +130,9 @@ public class AnyImpl extends Any
     /*
      * This boolean array tells us if a given typecode must be
      * streamed. Objects that are immutable don't have to be streamed.
+     * <p>
+     *  这个布尔数组告诉我们是否必须流式传输给定的类型代码。不可变的对象不必流式传输。
+     * 
      */
     static boolean isStreamed[] = {
         false,  // null
@@ -180,6 +187,9 @@ public class AnyImpl extends Any
      * A constructor that sets the Any to contain a null. It also marks
      * the value as being invalid so that extractions throw an exception
      * until an insertion has been performed.
+     * <p>
+     *  将Any设置为包含null的构造函数。它还将该值标记为无效,以使提取在执行插入之前抛出异常。
+     * 
      */
     public AnyImpl(ORB orb)
     {
@@ -223,6 +233,11 @@ public class AnyImpl extends Any
      * returns the type of the element contained in the Any.
      *
      * @result          the TypeCode for the element in the Any
+     * <p>
+     *  返回Any中包含的元素的类型。
+     * 
+     *  @为Any中的元素生成TypeCode
+     * 
      */
     public TypeCode type() {
         return typeCode;
@@ -248,6 +263,10 @@ public class AnyImpl extends Any
     /**
      * sets the type of the element to be contained in the Any.
      *
+     * <p>
+     *  设置要包含在Any中的元素的类型。
+     * 
+     * 
      * @param tc                the TypeCode for the element in the Any
      */
     public void type(TypeCode tc)
@@ -266,6 +285,10 @@ public class AnyImpl extends Any
     /**
      * checks for equality between Anys.
      *
+     * <p>
+     *  检查Anys之间的平等。
+     * 
+     * 
      * @param otherAny  the Any to be compared with.
      * @result          true if the Anys are equal, false otherwise.
      */
@@ -509,6 +532,11 @@ public class AnyImpl extends Any
      * returns an output stream that an Any value can be marshaled into.
      *
      * @result          the OutputStream to marshal value of Any into
+     * <p>
+     *  返回一个Any值可以被封送入的输出流。
+     * 
+     *  @result OutputStream to marshal value of Any into
+     * 
      */
     public org.omg.CORBA.portable.OutputStream create_output_stream()
     {
@@ -526,6 +554,11 @@ public class AnyImpl extends Any
      * returns an input stream that an Any value can be marshaled out of.
      *
      * @result          the InputStream to marshal value of Any out of.
+     * <p>
+     *  返回一个Any值可以被封送出的输入流。
+     * 
+     *  @result InputStream to marshal value of Any out of。
+     * 
      */
     public org.omg.CORBA.portable.InputStream create_input_stream()
     {
@@ -617,6 +650,10 @@ public class AnyImpl extends Any
     /**
      * takes a streamable and inserts its reference into the any
      *
+     * <p>
+     *  接受一个流媒体,并将其引用插入任何
+     * 
+     * 
      * @param s         the streamable to insert
      */
     public void insert_Streamable(Streamable s)
@@ -638,6 +675,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_short(short s)
     {
@@ -688,6 +728,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public short extract_short()
     {
@@ -698,6 +741,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_long(int l)
     {
@@ -714,6 +760,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public int extract_long()
     {
@@ -724,6 +773,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_ushort(short s)
     {
@@ -735,6 +787,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     * 请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public short extract_ushort()
     {
@@ -745,6 +800,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_ulong(int l)
     {
@@ -756,6 +814,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public int extract_ulong()
     {
@@ -766,6 +827,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_float(float f)
     {
@@ -777,6 +841,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public float extract_float()
     {
@@ -787,6 +854,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_double(double d)
     {
@@ -798,6 +868,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public double extract_double()
     {
@@ -808,6 +881,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_longlong(long l)
     {
@@ -819,6 +895,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public long extract_longlong()
     {
@@ -829,6 +908,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_ulonglong(long l)
     {
@@ -840,6 +922,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public long extract_ulonglong()
     {
@@ -850,6 +935,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_boolean(boolean b)
     {
@@ -861,6 +949,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public boolean extract_boolean()
     {
@@ -871,6 +962,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_char(char c)
     {
@@ -882,6 +976,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public char extract_char()
     {
@@ -892,6 +989,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_wchar(char c)
     {
@@ -903,6 +1003,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public char extract_wchar()
     {
@@ -914,6 +1017,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_octet(byte b)
     {
@@ -925,6 +1031,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public byte extract_octet()
     {
@@ -935,6 +1044,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_string(String s)
     {
@@ -962,6 +1074,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     * 请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public String extract_string()
     {
@@ -972,6 +1087,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_wstring(String s)
     {
@@ -999,6 +1117,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public String extract_wstring()
     {
@@ -1009,6 +1130,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_any(Any a)
     {
@@ -1021,6 +1145,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public Any extract_any()
     {
@@ -1031,6 +1158,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_Object(org.omg.CORBA.Object o)
     {
@@ -1054,6 +1184,9 @@ public class AnyImpl extends Any
     /**
      * A variant of the insertion operation that takes a typecode
      * argument as well.
+     * <p>
+     *  插入操作的变体,也接受类型代码参数。
+     * 
      */
     public void insert_Object(org.omg.CORBA.Object o, TypeCode tc)
     {
@@ -1075,6 +1208,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public org.omg.CORBA.Object extract_Object()
     {
@@ -1098,6 +1234,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public void insert_TypeCode(TypeCode tc)
     {
@@ -1109,6 +1248,9 @@ public class AnyImpl extends Any
 
     /**
      * See the description of the <a href="#anyOps">general Any operations.</a>
+     * <p>
+     *  请参阅<a href="#anyOps">常规任何操作</a>的说明
+     * 
      */
     public TypeCode extract_TypeCode()
     {
@@ -1118,6 +1260,8 @@ public class AnyImpl extends Any
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated
      */
     @Deprecated
@@ -1129,6 +1273,8 @@ public class AnyImpl extends Any
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated
      */
     @Deprecated
@@ -1143,6 +1289,9 @@ public class AnyImpl extends Any
      * some kind.  It shouldn't just be an RMI-IIOP type.  Currently,
      * we accept and will produce RMI repIds with the latest
      * calculations if given a non-IDLEntity Serializable.
+     * <p>
+     *  注意Serializable真的应该是某种IDLEntity。它不应该只是一个RMI-IIOP类型。目前,如果给出非IDLEntity可序列化,我们接受并将产生具有最新计算的RMI记录。
+     * 
      */
     public Serializable extract_Value()
     {
@@ -1220,6 +1369,11 @@ public class AnyImpl extends Any
      *
      * The ORB passed in should have the desired ORBVersion.  It
      * is used to generate the type codes.
+     * <p>
+     *  insert_Value和Util.writeAny的实用方法。
+     * 
+     *  传入的ORB应该具有所需的ORBVersion。它用于生成类型代码。
+     * 
      */
     public TypeCode createTypeCodeForClass (java.lang.Class c, ORB tcORB)
     {
@@ -1281,6 +1435,9 @@ public class AnyImpl extends Any
      * It's used by createTypeCodeForClass.  The tcORB passed in
      * should have the desired ORB version, and is used to
      * create the type codes.
+     * <p>
+     *  它看起来像是从io.ValueUtility复制的某点。
+     * 
      */
     private TypeCode getPrimitiveTypeCodeForClass (Class c, ORB tcORB)
     {

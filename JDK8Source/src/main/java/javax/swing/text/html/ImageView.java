@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,12 @@ import javax.swing.event.*;
  * While this class has been part of swing for a while now, it is public
  * as of 1.4.
  *
+ * <p>
+ *  图像的视图,旨在支持HTML&lt; IMG&gt;标签。支持通过标记的HEIGHT和WIDTH属性进行缩放。如果图像无法加载,通过<code> ALT </code>属性指定的任何文本将被渲染。
+ * <p>
+ *  虽然这个类已经成为摆动的一部分,现在,它是公共的1.4。
+ * 
+ * 
  * @author  Scott Violet
  * @see IconView
  * @since 1.4
@@ -53,23 +60,40 @@ public class ImageView extends View {
      * delay. If this were true, a bunch of immediate repaints would get
      * generated that end up significantly delaying the loading of the image
      * (or anything else going on for that matter).
+     * <p>
+     *  如果为真,当一些位可用时,重新绘制。
+     * <p>
+     *  这被设置为false,因为swing不提供需要延迟的重绘。如果这是真的,将产生一束立即重绘,最终显着延迟图像(或任何其他事情进行)的加载。
+     * 
      */
     private static boolean sIsInc = false;
     /**
      * Repaint delay when some of the bits are available.
+     * <p>
+     *  当某些位可用时重新绘制延迟。
+     * 
      */
     private static int sIncRate = 100;
     /**
      * Property name for pending image icon
+     * <p>
+     *  待处理图像图标的属性名称
+     * 
      */
     private static final String PENDING_IMAGE = "html.pendingImage";
     /**
      * Property name for missing image icon
+     * <p>
+     *  缺少图像图标的属性名称
+     * 
      */
     private static final String MISSING_IMAGE = "html.missingImage";
 
     /**
      * Document property for image cache.
+     * <p>
+     *  图像缓存的文档属性。
+     * 
      */
     private static final String IMAGE_CACHE_PROPERTY = "imageCache";
 
@@ -81,6 +105,9 @@ public class ImageView extends View {
 
     /**
      * Default border to use if one is not specified.
+     * <p>
+     *  要使用的默认边框(如果未指定)。
+     * 
      */
     private static final int DEFAULT_BORDER = 2;
 
@@ -100,6 +127,10 @@ public class ImageView extends View {
     private int height;
     /** Bitmask containing some of the above bitmask values. Because the
      * image loading notification can happen on another thread access to
+     * <p>
+     *  图像加载通知可以发生在另一个线程访问
+     * 
+     * 
      * this is synchronized (at least for modifying it). */
     private int state;
     private Container container;
@@ -116,11 +147,17 @@ public class ImageView extends View {
     /**
      * We don't directly implement ImageObserver, instead we use an instance
      * that calls back to us.
+     * <p>
+     *  我们不直接实现ImageObserver,而是使用一个回调给我们的实例。
+     * 
      */
     private ImageObserver imageObserver;
     /**
      * Used for alt text. Will be non-null if the image couldn't be found,
      * and there is valid alt text.
+     * <p>
+     *  用于替换文本。如果无法找到图片,将为非空,并且有有效的替代文字。
+     * 
      */
     private View altView;
     /** Alignment along the vertical (Y) axis. */
@@ -131,6 +168,10 @@ public class ImageView extends View {
     /**
      * Creates a new view that represents an IMG element.
      *
+     * <p>
+     *  创建表示IMG元素的新视图。
+     * 
+     * 
      * @param elem the element to create a view for
      */
     public ImageView(Element elem) {
@@ -144,6 +185,9 @@ public class ImageView extends View {
      * Returns the text to display if the image can't be loaded. This is
      * obtained from the Elements attribute set with the attribute name
      * <code>HTML.Attribute.ALT</code>.
+     * <p>
+     *  如果无法加载图像,则返回要显示的文本。这可通过使用属性名称<code> HTML.Attribute.ALT </code>设置的Elements属性获取。
+     * 
      */
     public String getAltText() {
         return (String)getElement().getAttributes().getAttribute
@@ -153,6 +197,9 @@ public class ImageView extends View {
     /**
      * Return a URL for the image source,
      * or null if it could not be determined.
+     * <p>
+     * 返回图像源的URL,如果无法确定,则返回null。
+     * 
      */
     public URL getImageURL() {
         String src = (String)getElement().getAttributes().
@@ -172,6 +219,9 @@ public class ImageView extends View {
 
     /**
      * Returns the icon to use if the image couldn't be found.
+     * <p>
+     *  返回无法找到图片时要使用的图标。
+     * 
      */
     public Icon getNoImageIcon() {
         return (Icon) UIManager.getLookAndFeelDefaults().get(MISSING_IMAGE);
@@ -179,6 +229,9 @@ public class ImageView extends View {
 
     /**
      * Returns the icon to use while in the process of loading the image.
+     * <p>
+     *  返回在加载图像的过程中使用的图标。
+     * 
      */
     public Icon getLoadingImageIcon() {
         return (Icon) UIManager.getLookAndFeelDefaults().get(PENDING_IMAGE);
@@ -186,6 +239,9 @@ public class ImageView extends View {
 
     /**
      * Returns the image to render.
+     * <p>
+     *  返回要呈现的图像。
+     * 
      */
     public Image getImage() {
         sync();
@@ -208,6 +264,9 @@ public class ImageView extends View {
      * the image we be loaded when first asked for, otherwise it will
      * be loaded asynchronously. The default is to not load synchronously,
      * that is to load the image asynchronously.
+     * <p>
+     *  设置图像的加载方式。如果<code> newValue </code>为true,我们在第一次请求时加载图片,否则将异步加载。默认值是不同步加载,即异步加载图像。
+     * 
      */
     public void setLoadsSynchronously(boolean newValue) {
         synchronized(this) {
@@ -222,6 +281,9 @@ public class ImageView extends View {
 
     /**
      * Returns true if the image should be loaded when first asked for.
+     * <p>
+     *  如果首次请求时应加载图片,则返回true。
+     * 
      */
     public boolean getLoadsSynchronously() {
         return ((state & SYNC_LOAD_FLAG) != 0);
@@ -229,6 +291,9 @@ public class ImageView extends View {
 
     /**
      * Convenience method to get the StyleSheet.
+     * <p>
+     *  方便的方法来获取StyleSheet。
+     * 
      */
     protected StyleSheet getStyleSheet() {
         HTMLDocument doc = (HTMLDocument) getDocument();
@@ -239,6 +304,9 @@ public class ImageView extends View {
      * Fetches the attributes to use when rendering.  This is
      * implemented to multiplex the attributes specified in the
      * model with a StyleSheet.
+     * <p>
+     *  获取渲染时要使用的属性。这被实现为将在模型中指定的属性与StyleSheet复用。
+     * 
      */
     public AttributeSet getAttributes() {
         sync();
@@ -250,6 +318,10 @@ public class ImageView extends View {
      * <code>ALT</code> attribute. This is overriden to return
      * <code>getAltText</code>.
      *
+     * <p>
+     *  对于图像,工具提示文本来自使用<code> ALT </code>属性指定的文本。这被覆盖以返回<code> getAltText </code>。
+     * 
+     * 
      * @see JTextComponent#getToolTipText
      */
     public String getToolTipText(float x, float y, Shape allocation) {
@@ -258,6 +330,9 @@ public class ImageView extends View {
 
     /**
      * Update any cached values that come from attributes.
+     * <p>
+     *  更新来自属性的任何缓存值。
+     * 
      */
     protected void setPropertiesFromAttributes() {
         StyleSheet sheet = getStyleSheet();
@@ -310,6 +385,9 @@ public class ImageView extends View {
     /**
      * Establishes the parent view for this view.
      * Seize this moment to cache the AWT Container I'm in.
+     * <p>
+     *  为此视图建立父视图。抓住这一刻,缓存我在的AWT容器。
+     * 
      */
     public void setParent(View parent) {
         View oldParent = getParent();
@@ -324,6 +402,9 @@ public class ImageView extends View {
 
     /**
      * Invoked when the Elements attributes have changed. Recreates the image.
+     * <p>
+     *  当Elements属性已更改时调用。重新创建图像。
+     * 
      */
     public void changedUpdate(DocumentEvent e, Shape a, ViewFactory f) {
         super.changedUpdate(e,a,f);
@@ -339,6 +420,10 @@ public class ImageView extends View {
     /**
      * Paints the View.
      *
+     * <p>
+     *  绘制视图。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param a the allocated region to render into
      * @see View#paint
@@ -433,6 +518,10 @@ public class ImageView extends View {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
+     * 
      * @param axis may be either X_AXIS or Y_AXIS
      * @return   the span the view would like to be rendered into;
      *           typically the view is told to render into the span
@@ -488,6 +577,10 @@ public class ImageView extends View {
      * bottom of the icon along the y axis, and the default
      * along the x axis.
      *
+     * <p>
+     *  确定沿着轴的该视图的期望对准。这是为了使对齐到图标的底部沿y轴,默认沿着x轴。
+     * 
+     * 
      * @param axis may be either X_AXIS or Y_AXIS
      * @return the desired alignment; this should be a value
      *   between 0.0 and 1.0 where 0 indicates alignment at the
@@ -508,6 +601,10 @@ public class ImageView extends View {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param pos the position to convert
      * @param a the allocated region to render into
      * @return the bounding box of the given position
@@ -533,6 +630,10 @@ public class ImageView extends View {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     * 提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param x the X coordinate
      * @param y the Y coordinate
      * @param a the allocated region to render into
@@ -554,6 +655,10 @@ public class ImageView extends View {
      * Sets the size of the view.  This should cause
      * layout of the view if it has any layout duties.
      *
+     * <p>
+     *  设置视图的大小。如果它有任何布局的职责,这应该导致视图的布局。
+     * 
+     * 
      * @param width the width &gt;= 0
      * @param height the height &gt;= 0
      */
@@ -572,6 +677,9 @@ public class ImageView extends View {
 
     /**
      * Returns true if this image within a link?
+     * <p>
+     *  如果此图片在链接中,则返回true?
+     * 
      */
     private boolean isLink() {
         return ((state & LINK_FLAG) == LINK_FLAG);
@@ -579,6 +687,9 @@ public class ImageView extends View {
 
     /**
      * Returns true if the passed in image has a non-zero width and height.
+     * <p>
+     *  如果传入的图像具有非零的宽度和高度,则返回true。
+     * 
      */
     private boolean hasPixels(Image image) {
         return image != null &&
@@ -589,6 +700,9 @@ public class ImageView extends View {
     /**
      * Returns the preferred span of the View used to display the alt text,
      * or 0 if the view does not exist.
+     * <p>
+     *  返回用于显示替代文本的视图的首选跨度,如果视图不存在,则返回0。
+     * 
      */
     private float getPreferredSpanFromAltView(int axis) {
         if (getImage() == null) {
@@ -604,6 +718,9 @@ public class ImageView extends View {
     /**
      * Request that this view be repainted.
      * Assumes the view is still at its last-drawn location.
+     * <p>
+     *  请求重新绘制此视图。假定视图仍在其最后绘制的位置。
+     * 
      */
     private void repaint(long delay) {
         if (container != null && fBounds != null) {
@@ -615,6 +732,9 @@ public class ImageView extends View {
     /**
      * Convenience method for getting an integer attribute from the elements
      * AttributeSet.
+     * <p>
+     *  方便从元素AttributeSet获取整数属性的方法。
+     * 
      */
     private int getIntAttr(HTML.Attribute name, int deflt) {
         AttributeSet attr = getElement().getAttributes();
@@ -638,6 +758,9 @@ public class ImageView extends View {
 
     /**
      * Makes sure the necessary properties and image is loaded.
+     * <p>
+     *  确保加载必需的属性和图像。
+     * 
      */
     private void sync() {
         int s = state;
@@ -657,6 +780,9 @@ public class ImageView extends View {
      * Loads the image and updates the size accordingly. This should be
      * invoked instead of invoking <code>loadImage</code> or
      * <code>updateImageSize</code> directly.
+     * <p>
+     *  加载图像并相应更新大小。这应该被调用,而不是直接调用<code> loadImage </code>或<code> updateImageSize </code>。
+     * 
      */
     private void refreshImage() {
         synchronized(this) {
@@ -686,6 +812,9 @@ public class ImageView extends View {
     /**
      * Loads the image from the URL <code>getImageURL</code>. This should
      * only be invoked from <code>refreshImage</code>.
+     * <p>
+     *  从URL <code> getImageURL </code>加载图片。这只能从<code> refreshImage </code>中调用。
+     * 
      */
     private void loadImage() {
         URL src = getImageURL();
@@ -711,6 +840,9 @@ public class ImageView extends View {
     /**
      * Recreates and reloads the image.  This should
      * only be invoked from <code>refreshImage</code>.
+     * <p>
+     *  重新创建并重新加载图像。这只能从<code> refreshImage </code>中调用。
+     * 
      */
     private void updateImageSize() {
         int newWidth = 0;
@@ -798,6 +930,9 @@ public class ImageView extends View {
 
     /**
      * Updates the view representing the alt text.
+     * <p>
+     *  更新表示替代文字的视图。
+     * 
      */
     private void updateAltTextView() {
         String text = getAltText();
@@ -814,6 +949,9 @@ public class ImageView extends View {
 
     /**
      * Returns the view to use for alternate text. This may be null.
+     * <p>
+     *  返回用于备用文本的视图。这可能为null。
+     * 
      */
     private View getAltView() {
         View view;
@@ -830,6 +968,9 @@ public class ImageView extends View {
     /**
      * Invokes <code>preferenceChanged</code> on the event displatching
      * thread.
+     * <p>
+     *  在事件调度线程上调用<code> preferenceChanged </code>。
+     * 
      */
     private void safePreferenceChanged() {
         if (SwingUtilities.isEventDispatchThread()) {
@@ -854,6 +995,9 @@ public class ImageView extends View {
     /**
      * ImageHandler implements the ImageObserver to correctly update the
      * display as new parts of the image become available.
+     * <p>
+     *  ImageHandler实现ImageObserver以在图像的新部分可用时正确更新显示。
+     * 
      */
     private class ImageHandler implements ImageObserver {
         // This can come on any thread. If we are in the process of reloading
@@ -945,6 +1089,8 @@ public class ImageView extends View {
      * ImageLabelView is used if the image can't be loaded, and
      * the attribute specified an alt attribute. It overriden a handle of
      * methods as the text is hardcoded and does not come from the document.
+     * <p>
+     * 如果无法加载图像,则使用ImageLabelView,并且该属性指定了alt属性。它覆盖方法的句柄,因为文本是硬编码的,而不是来自文档。
      */
     private class ImageLabelView extends InlineView {
         private Segment segment;

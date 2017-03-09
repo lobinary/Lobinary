@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,8 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import com.sun.corba.se.impl.logging.OMGSystemException;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class CDROutputObject extends CorbaOutputObject
@@ -166,6 +169,10 @@ public class CDROutputObject extends CorbaOutputObject
      * Write the contents of the CDROutputStream to the specified
      * output stream.  Has the side-effect of pushing any current
      * Message onto the Message list.
+     * <p>
+     *  将CDROutputStream的内容写入指定的输出流。有任何当前消息推送到消息列表的副作用。
+     * 
+     * 
      * @param s The output stream to write to.
      */
     public void writeTo(CorbaConnection connection)
@@ -231,6 +238,10 @@ public class CDROutputObject extends CorbaOutputObject
      *
      * In the local case, there is no Connection, so use the
      * local code sets.
+     * <p>
+     *  覆盖默认CDR工厂行为以从连接获取协商的代码集。
+     * 
+     *  这些仅仅每个消息调用一次,第一次需要。
      */
     protected CodeSetConversion.CTBConverter createCharCTBConverter() {
         CodeSetComponentInfo.CodeSetContext codesets = getCodeSets();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -70,6 +71,27 @@ import java.nio.charset.StandardCharsets;
  * method of this class will cause a {@link java.lang.NullPointerException
  * NullPointerException} to be thrown.
  *
+ * <p>
+ *  该类仅由用于获得用于Base64编码方案的编码器和解码器的静态方法组成。
+ * 此类的实现支持以下类型的Base64,如<a href="http://www.ietf.org/rfc/rfc4648.txt"> RFC 4648 </a>和<a href ="http： //www.ietf.org/rfc/rfc2045.txt">
+ *  RFC 2045 </a>。
+ *  该类仅由用于获得用于Base64编码方案的编码器和解码器的静态方法组成。
+ * 
+ * <ul>
+ *  <li> <a name="basic"> <b>基本</b> </a> <p>使用RFC 4648和RFC 2045的表1中规定的用于编码和解码操作的"Base64字母表"。
+ * 编码器不添加任何换行(行分隔符)字符。解码器拒绝包含base64字母外的字符的数据。</p> </li>。
+ * 
+ *  <li> <a name="url"> <b>网址和文件名安全</b> </a> <p>使用RFC 4648表2中指定的"网址和文件名安全Base64字母表"进行编码和解码。
+ * 编码器不添加任何换行(行分隔符)字符。解码器拒绝包含base64字母外的字符的数据。</p> </li>。
+ * 
+ * <li> <a name="mime"> <b> MIME </b> </a> <p>使用RFC 2045表1中指定的"Base64字母表"进行编码和解码操作。
+ * 编码输出必须以不超过76个字符的行表示,并使用回车符{@code'\ r'},然后紧跟换行符{@code'\ n'}作为行分隔符。没有行分隔符添加到编码输出的末尾。
+ * 所有行分隔符或base64字母表中未找到的其他字符在解码操作中将被忽略。</p> </li>。
+ * </ul>
+ * 
+ *  <p>除非另有说明,否则将{@code null}参数传递给此类的方法将导致抛出{@link java.lang.NullPointerException NullPointerException}。
+ * 
+ * 
  * @author  Xueming Shen
  * @since   1.8
  */
@@ -82,6 +104,10 @@ public class Base64 {
      * Returns a {@link Encoder} that encodes using the
      * <a href="#basic">Basic</a> type base64 encoding scheme.
      *
+     * <p>
+     *  返回使用<a href="#basic">基本</a>类型base64编码方案进行编码的{@link Encoder}。
+     * 
+     * 
      * @return  A Base64 encoder.
      */
     public static Encoder getEncoder() {
@@ -93,6 +119,10 @@ public class Base64 {
      * <a href="#url">URL and Filename safe</a> type base64
      * encoding scheme.
      *
+     * <p>
+     *  返回使用<a href="#url">网址和文件名安全</a>类型base64编码方案进行编码的{@link Encoder}。
+     * 
+     * 
      * @return  A Base64 encoder.
      */
     public static Encoder getUrlEncoder() {
@@ -103,6 +133,10 @@ public class Base64 {
      * Returns a {@link Encoder} that encodes using the
      * <a href="#mime">MIME</a> type base64 encoding scheme.
      *
+     * <p>
+     *  返回使用<a href="#mime"> MIME </a>类型base64编码方案进行编码的{@link Encoder}。
+     * 
+     * 
      * @return  A Base64 encoder.
      */
     public static Encoder getMimeEncoder() {
@@ -114,6 +148,10 @@ public class Base64 {
      * <a href="#mime">MIME</a> type base64 encoding scheme
      * with specified line length and line separators.
      *
+     * <p>
+     *  返回使用<a href="#mime"> MIME </a>类型base64编码方案(使用指定的行长和行分隔符)进行编码的{@link Encoder}。
+     * 
+     * 
      * @param   lineLength
      *          the length of each output line (rounded down to nearest multiple
      *          of 4). If {@code lineLength <= 0} the output will not be separated
@@ -145,6 +183,10 @@ public class Base64 {
      * Returns a {@link Decoder} that decodes using the
      * <a href="#basic">Basic</a> type base64 encoding scheme.
      *
+     * <p>
+     *  返回使用<a href="#basic"> Basic </a>类型base64编码方案解码的{@link解码器}。
+     * 
+     * 
      * @return  A Base64 decoder.
      */
     public static Decoder getDecoder() {
@@ -156,6 +198,10 @@ public class Base64 {
      * <a href="#url">URL and Filename safe</a> type base64
      * encoding scheme.
      *
+     * <p>
+     *  返回使用<a href="#url"> URL和文件名安全</a>类型base64编码方案解码的{@link解码器}。
+     * 
+     * 
      * @return  A Base64 decoder.
      */
     public static Decoder getUrlDecoder() {
@@ -166,6 +212,10 @@ public class Base64 {
      * Returns a {@link Decoder} that decodes using the
      * <a href="#mime">MIME</a> type base64 decoding scheme.
      *
+     * <p>
+     * 返回{@link}解码器解码使用<a href="#mime"> MIME类型</A>的base64解码方案。
+     * 
+     * 
      * @return  A Base64 decoder.
      */
     public static Decoder getMimeDecoder() {
@@ -184,6 +234,14 @@ public class Base64 {
      * {@link java.lang.NullPointerException NullPointerException} to
      * be thrown.
      *
+     * <p>
+     *  在RFC 4648和RFC 2045规定此类实现了使用Base64编码方案编码字节数据的编码器。
+     * 
+     *  <p> {@link Encoder}类的实例可安全地用于多个并发线程。
+     * 
+     *  <p>除非另有说明,否则将{@code null}参数传递给此类的方法将导致抛出{@link java.lang.NullPointerException NullPointerException}。
+     * 
+     * 
      * @see     Decoder
      * @since   1.8
      */
@@ -205,6 +263,9 @@ public class Base64 {
          * This array is a lookup table that translates 6-bit positive integer
          * index values into their "Base64 Alphabet" equivalents as specified
          * in "Table 1: The Base64 Alphabet" of RFC 2045 (and RFC 4648).
+         * <p>
+         *  该数组是将6位正整数索引值转换为RFC 2045(和RFC 4648)的"表1：Base64字母表"中规定的它们的"Base64 Alphabet"等效值的查找表。
+         * 
          */
         private static final char[] toBase64 = {
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -218,6 +279,9 @@ public class Base64 {
          * It's the lookup table for "URL and Filename safe Base64" as specified
          * in Table 2 of the RFC 4648, with the '+' and '/' changed to '-' and
          * '_'. This table is used when BASE64_URL is specified.
+         * <p>
+         *  它是RFC 4648的表2中指定的"URL和文件名安全Base64"的查找表,"+"和"/"更改为" - "和"_"。指定BASE64_URL时使用此表。
+         * 
          */
         private static final char[] toBase64URL = {
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -252,6 +316,10 @@ public class Base64 {
          * byte array using the {@link Base64} encoding scheme. The returned byte
          * array is of the length of the resulting bytes.
          *
+         * <p>
+         *  使用{@link Base64}编码方案将指定字节数组中的所有字节编码为新分配的字节数组。返回的字节数组是结果字节的长度。
+         * 
+         * 
          * @param   src
          *          the byte array to encode
          * @return  A newly-allocated byte array containing the resulting
@@ -276,6 +344,12 @@ public class Base64 {
          * all bytes from the input byte array. No bytes will be written to the
          * output byte array if the output byte array is not big enough.
          *
+         * <p>
+         *  使用{@link Base64}编码方案对来自指定字节数组的所有字节进行编码,将结果字节写入给定输出字节数组,从偏移0开始。
+         * 
+         * <p>这种方法的调用者的责任是确保输出字节数组{@code dst}有足够的空间来对来自输入字节数组的所有字节进行编码。如果输出字节数组不够大,则不会有字节写入输出字节数组。
+         * 
+         * 
          * @param   src
          *          the byte array to encode
          * @param   dst
@@ -306,6 +380,15 @@ public class Base64 {
          * effect as invoking
          * {@code new String(encode(src), StandardCharsets.ISO_8859_1)}.
          *
+         * <p>
+         *  使用{@link Base64}编码方案将指定的字节数组编码为字符串。
+         * 
+         *  <p>此方法首先将所有输入字节编码为base64编码字节数组,然后使用编码的字节数组和{@link java.nio.charset.StandardCharsets#ISO_8859_1 ISO-8859-1}
+         * 字符集构造一个新的字符串。
+         * 
+         *  <p>换句话说,调用此方法与调用{@code new String(encode(src),StandardCharsets.ISO_8859_1)}具有完全相同的效果。
+         * 
+         * 
          * @param   src
          *          the byte array to encode
          * @return  A String containing the resulting Base64 encoded characters
@@ -326,6 +409,12 @@ public class Base64 {
          * output buffer's position will be zero and its limit will be the
          * number of resulting encoded bytes.
          *
+         * <p>
+         *  使用{@link Base64}编码方案将来自指定字节缓冲区的所有剩余字节编码为新分配的ByteBuffer。
+         * 
+         *  返回时,源缓冲区的位置将更新到其限制;其极限不会改变。返回的输出缓冲区的位置将为零,其限制将是生成的编码字节数。
+         * 
+         * 
          * @param   buffer
          *          the source ByteBuffer to encode
          * @return  A newly-allocated byte buffer containing the encoded bytes.
@@ -359,6 +448,12 @@ public class Base64 {
          * output stream. Closing the returned output stream will close the underlying
          * output stream.
          *
+         * <p>
+         *  使用{@link Base64}编码方案包装用于编码字节数据的输出流。
+         * 
+         *  <p>建议在使用后立即关闭返回的输出流,在此期间,它会将所有可能的剩余字节刷新到底层输出流。关闭返回的输出流将关闭底层输出流。
+         * 
+         * 
          * @param   os
          *          the output stream.
          * @return  the output stream for encoding the byte data into the
@@ -379,6 +474,12 @@ public class Base64 {
          * this invocation. The returned encoder instance should be used for
          * non-padding encoding operation.
          *
+         * <p>
+         * 返回与此等效编码的编码器实例,但不会在编码字节数据的末尾添加任何填充字符。
+         * 
+         *  <p>此编码器实例的编码方案不受此调用的影响。返回的编码器实例应该用于非填充编码操作。
+         * 
+         * 
          * @return an equivalent encoder that encodes without adding any
          *         padding character at the end
          */
@@ -461,6 +562,20 @@ public class Base64 {
      * {@link java.lang.NullPointerException NullPointerException} to
      * be thrown.
      *
+     * <p>
+     *  这个类实现了一个解码器,用于使用RFC 4648和RFC 2045中规定的Base64编码方案解码字节数据。
+     * 
+     *  <p> Base64填充字符{@code'='}被接受并解释为编码字节数据的结尾,但不是必需的。
+     * 因此,如果编码字节数据的最后单元只有两个或三个Base64字符(没有填充相应的填充字符),则它们被解码,就好像后面跟着填充字符一样。
+     * 如果在最后单元中存在填充字符,则必须存在正确数量的填充字符,否则在解码期间抛出{@code IllegalArgumentException}(从Base64流读取时为{@code IOException}
+     * )。
+     * 因此,如果编码字节数据的最后单元只有两个或三个Base64字符(没有填充相应的填充字符),则它们被解码,就好像后面跟着填充字符一样。
+     * 
+     *  <p> {@link Decoder}类的实例可安全地用于多个并发线程。
+     * 
+     *  <p>除非另有说明,否则将{@code null}参数传递给此类的方法将导致抛出{@link java.lang.NullPointerException NullPointerException}。
+     * 
+     * 
      * @see     Encoder
      * @since   1.8
      */
@@ -481,6 +596,9 @@ public class Base64 {
          * are not in the Base64 alphabet but fall within the bounds of
          * the array are encoded to -1.
          *
+         * <p>
+         * 用于将从"Base64字母表"(如RFC 2045的表1中所指定)的Unicode字符解码为其6位正整数等效值的查找表。不在Base64字母表中但落在数组边界内的字符将编码为-1。
+         * 
          */
         private static final int[] fromBase64 = new int[256];
         static {
@@ -493,6 +611,9 @@ public class Base64 {
         /**
          * Lookup table for decoding "URL and Filename safe Base64 Alphabet"
          * as specified in Table2 of the RFC 4648.
+         * <p>
+         *  用于解码"URL和文件名安全Base64字母表"的查找表,如RFC 4648的Table2中所指定。
+         * 
          */
         private static final int[] fromBase64URL = new int[256];
 
@@ -513,6 +634,10 @@ public class Base64 {
          * byte array. The returned byte array is of the length of the resulting
          * bytes.
          *
+         * <p>
+         *  使用{@link Base64}编码方案解码来自输入字节数组的所有字节,将结果写入新分配的输出字节数组。返回的字节数组是结果字节的长度。
+         * 
+         * 
          * @param   src
          *          the byte array to decode
          *
@@ -537,6 +662,12 @@ public class Base64 {
          * <p> An invocation of this method has exactly the same effect as invoking
          * {@code decode(src.getBytes(StandardCharsets.ISO_8859_1))}
          *
+         * <p>
+         *  使用{@link Base64}编码方案将Base64编码字符串解码为新分配的字节数组。
+         * 
+         *  <p>调用此方法与调用{@code decode(src.getBytes(StandardCharsets.ISO_8859_1))}具有完全相同的效果。
+         * 
+         * 
          * @param   src
          *          the string to decode
          *
@@ -563,6 +694,14 @@ public class Base64 {
          * then some bytes may have been written to the output byte array before
          * IllegalargumentException is thrown.
          *
+         * <p>
+         *  使用{@link Base64}编码方案从输入字节数组解码所有字节,将结果写入给定输出字节数组,从偏移0开始。
+         * 
+         *  <p>这种方法的调用者的责任是确保输出字节数组{@code dst}有足够的空间来解码来自输入字节数组的所有字节。如果输出字节数组不够大,则不会有字节写入输出字节数组。
+         * 
+         *  <p>如果输入字节数组不是有效的Base64编码方案,则在抛出IllegalargumentException之前,某些字节可能已被写入输出字节数组。
+         * 
+         * 
          * @param   src
          *          the byte array to decode
          * @param   dst
@@ -595,6 +734,14 @@ public class Base64 {
          * is not in valid Base64 encoding scheme. The position of the input
          * buffer will not be advanced in this case.
          *
+         * <p>
+         * 使用{@link Base64}编码方案解码来自输入字节缓冲区的所有字节,将结果写入新分配的ByteBuffer。
+         * 
+         *  <p>返回后,源缓冲区的位置将更新到其限制;其极限不会改变。返回的输出缓冲区的位置将为零,其限制将是生成的解码字节数
+         * 
+         *  <p>如果输入缓冲区不是有效的Base64编码方案,则会抛出{@code IllegalArgumentException}。在这种情况下,输入缓冲区的位置不会提前。
+         * 
+         * 
          * @param   buffer
          *          the ByteBuffer to decode
          *
@@ -636,6 +783,14 @@ public class Base64 {
          * <p> Closing the returned input stream will close the underlying
          * input stream.
          *
+         * <p>
+         *  返回用于解码{@link Base64}编码字节流的输入流。
+         * 
+         *  <p>返回的{@code InputStream}的{@code read}方法在读取无法解码的字节时将抛出{@code IOException}。
+         * 
+         *  <p>关闭返回的输入流将关闭底层输入流。
+         * 
+         * 
          * @param   is
          *          the input stream
          *
@@ -748,6 +903,7 @@ public class Base64 {
 
     /*
      * An output stream for encoding bytes into the Base64.
+     * <p>
      */
     private static class EncOutputStream extends FilterOutputStream {
 
@@ -860,6 +1016,9 @@ public class Base64 {
 
     /*
      * An input stream for decoding Base64 bytes
+     * <p>
+     *  用于将字节编码到Base64中的输出流。
+     * 
      */
     private static class DecInputStream extends InputStream {
 

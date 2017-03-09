@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import static sun.invoke.util.Wrapper.isWrapperType;
  * Abstract implementation of a lambda metafactory which provides parameter
  * unrolling and input validation.
  *
+ * <p>
+ *  抽象实现一个lambda元桉,提供参数展开和输入验证。
+ * 
+ * 
  * @see LambdaMetafactory
  */
 /* package */ abstract class AbstractValidatingLambdaMetafactory {
@@ -49,6 +54,11 @@ import static sun.invoke.util.Wrapper.isWrapperType;
      *         JJ<Integer> iii = (new CC())::impl;
      *         System.out.printf(">>> %s\n", iii.foo(44));
      * }}
+     * <p>
+     *  / *对于上下文,以下字段的注释用它们的值用引号标记,给定此程序：interface II <T> {Object foo(T x); } interface JJ <R extends Number>
+     *  extends II <R> {} class CC {String impl(int i){return"impl："+ i; }} class X {public static void main(String [] args){JJ <Integer> iii =(new CC()):: impl; System.out.printf(">>>％s \ n",iii.foo(44)); }
+     * }。
+     * 
      */
     final Class<?> targetClass;               // The class calling the meta-factory via invokedynamic "class X"
     final MethodType invokedType;             // The type of the invoked method "(CC)II"
@@ -70,6 +80,10 @@ import static sun.invoke.util.Wrapper.isWrapperType;
     /**
      * Meta-factory constructor.
      *
+     * <p>
+     *  元工厂构造函数。
+     * 
+     * 
      * @param caller Stacked automatically by VM; represents a lookup context
      *               with the accessibility privileges of the caller.
      * @param invokedType Stacked automatically by VM; the signature of the
@@ -159,6 +173,10 @@ import static sun.invoke.util.Wrapper.isWrapperType;
     /**
      * Build the CallSite.
      *
+     * <p>
+     *  构建CallSite。
+     * 
+     * 
      * @return a CallSite, which, when invoked, will return an instance of the
      * functional interface
      * @throws ReflectiveOperationException
@@ -168,6 +186,10 @@ import static sun.invoke.util.Wrapper.isWrapperType;
 
     /**
      * Check the meta-factory arguments for errors
+     * <p>
+     *  检查元工厂参数是否有错误
+     * 
+     * 
      * @throws LambdaConversionException if there are improper conversions
      */
     void validateMetafactoryArgs() throws LambdaConversionException {
@@ -297,6 +319,10 @@ import static sun.invoke.util.Wrapper.isWrapperType;
 
     /**
      * Check type adaptability for parameter types.
+     * <p>
+     *  检查参数类型的类型适应性。
+     * 
+     * 
      * @param fromType Type to convert from
      * @param toType Type to convert to
      * @param strict If true, do strict checks, else allow that fromType may be parameterized
@@ -338,6 +364,10 @@ import static sun.invoke.util.Wrapper.isWrapperType;
     /**
      * Check type adaptability for return types --
      * special handling of void type) and parameterized fromType
+     * <p>
+     *  检查返回类型的类型适应性 -  void类型的特殊处理)和参数化fromType
+     * 
+     * 
      * @return True if 'fromType' can be converted to 'toType'
      */
     private boolean isAdaptableToAsReturn(Class<?> fromType, Class<?> toType) {
@@ -370,6 +400,12 @@ import static sun.invoke.util.Wrapper.isWrapperType;
             }
         });
     }
+    /* <p>
+    /*  static final Executor logPool = Executors.newSingleThreadExecutor(); protected void void()返回一个新的对象,然
+    /* 后返回一个新的对象。
+    /*  }}。
+    /* 
+    /* 
     ***********************/
 
 }

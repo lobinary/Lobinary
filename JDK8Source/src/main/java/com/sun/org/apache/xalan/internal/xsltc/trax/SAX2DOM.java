@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SAX2DOM.java,v 1.8.2.1 2006/12/04 18:45:41 spericas Exp $
+ * <p>
+ *  $ Id：SAX2DOM.java,v 1.8.2.1 2006/12/04 18:45:41 spericas Exp $
+ * 
  */
 
 
@@ -47,6 +60,8 @@ import org.xml.sax.ext.LexicalHandler;
 import org.xml.sax.ext.Locator2;
 
 /**
+/* <p>
+/* 
  * @author G. Todd Miller
  * @author Sunitha Reddy
  * @author Huizhe Wang
@@ -69,6 +84,9 @@ public class SAX2DOM implements ContentHandler, LexicalHandler, Constants {
      * JAXP document builder factory. Create a single instance and use
      * synchronization because the Javadoc is not explicit about
      * thread safety.
+     * <p>
+     *  JAXP文档生成器工厂。创建单个实例并使用同步,因为Javadoc不是关于线程安全的显式。
+     * 
      */
     private DocumentBuilderFactory _factory =
             DocumentBuilderFactory.newInstance();
@@ -185,6 +203,10 @@ public class SAX2DOM implements ContentHandler, LexicalHandler, Constants {
                 tmp.setAttributeNS(attrs.getURI(i), attrs.getQName(i),
                     attrs.getValue(i));
             }
+/* <p>
+/*  for(int i = 0; i <nattrs; i ++){if(attrs.getLocalName(i)== null){tmp.setAttribute(attrs.getQName(i),attrs.getValue(i)); } else {tmp.setAttributeNS(attrs.getURI(i),attrs.getQName(i),attrs.getValue(i)); }}。
+/* 
+/* 
         } */
 
 
@@ -244,12 +266,18 @@ public class SAX2DOM implements ContentHandler, LexicalHandler, Constants {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void ignorableWhitespace(char[] ch, int start, int length) {
     }
 
     /**
      * adds processing instruction node to DOM.
+     * <p>
+     *  向DOM添加处理指令节点。
+     * 
      */
     public void processingInstruction(String target, String data) {
         appendTextNode();
@@ -269,6 +297,9 @@ public class SAX2DOM implements ContentHandler, LexicalHandler, Constants {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setDocumentLocator(Locator locator) {
         this.locator = locator;
@@ -277,6 +308,9 @@ public class SAX2DOM implements ContentHandler, LexicalHandler, Constants {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void skippedEntity(String name) {
     }
@@ -284,6 +318,8 @@ public class SAX2DOM implements ContentHandler, LexicalHandler, Constants {
 
     /**
      * Lexical Handler method to create comment node in DOM tree.
+     * <p>
+     *  Lexical Handler方法在DOM树中创建注释节点。
      */
     public void comment(char[] ch, int start, int length) {
         appendTextNode();

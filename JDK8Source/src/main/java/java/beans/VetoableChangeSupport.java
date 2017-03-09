@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -76,6 +77,32 @@ import java.util.Map.Entry;
  * (and restore) any listeners that are themselves serializable.  Any
  * non-serializable listeners will be skipped during serialization.
  *
+ * <p>
+ *  这是一个可以由支持约束属性的bean使用的实用程序类。它管理一个监听器列表,并向它们发送{@link PropertyChangeEvent}。
+ * 您可以使用此类的实例作为您的bean的成员字段,并将这些类型的工作委托给它。可以为所有属性或由名称指定的属性注册{@link VetoableChangeListener}。
+ * <p>
+ *  这里是一个{@code VetoableChangeSupport}使用的例子,遵循JavaBeans&trade中的规则和建议;规范：<pre> {@ code public class MyBean {private final VetoableChangeSupport vcs = new VetoableChangeSupport(this);。
+ * 
+ *  public void addVetoableChangeListener(VetoableChangeListener listener){this.vcs.addVetoableChangeListener(listener); }
+ * }。
+ * 
+ *  public void removeVetoableChangeListener(VetoableChangeListener listener){this.vcs.removeVetoableChangeListener(listener); }
+ * }。
+ * 
+ *  private String value;
+ * 
+ *  public String getValue(){return this.value; }}
+ * 
+ *  public void setValue(String newValue)throws PropertyVetoException {String oldValue = this.value; this.vcs.fireVetoableChange("value",oldValue,newValue); this.value = newValue; }
+ * }。
+ * 
+ *  [...]}} </pre>
+ * <p>
+ *  {@code VetoableChangeSupport}实例是线程安全的。
+ * <p>
+ * 这个类是可序列化的。当它被序列化时,它将保存(和恢复)任何本身可序列化的监听器。在序列化期间将跳过任何不可序列化的侦听器。
+ * 
+ * 
  * @see PropertyChangeSupport
  */
 public class VetoableChangeSupport implements Serializable {
@@ -84,6 +111,10 @@ public class VetoableChangeSupport implements Serializable {
     /**
      * Constructs a <code>VetoableChangeSupport</code> object.
      *
+     * <p>
+     *  构造一个<code> VetoableChangeSupport </code>对象。
+     * 
+     * 
      * @param sourceBean  The bean to be given as the source for any events.
      */
     public VetoableChangeSupport(Object sourceBean) {
@@ -101,6 +132,11 @@ public class VetoableChangeSupport implements Serializable {
      * If <code>listener</code> is null, no exception is thrown and no action
      * is taken.
      *
+     * <p>
+     *  将VetoableChangeListener添加到侦听器列表。侦听器为所有属性注册。相同的侦听器对象可以多次添加,并且将被调用的次数与添加的次数相同。
+     * 如果<code> listener </code>为null,则不会抛出任何异常,并且不会执行任何操作。
+     * 
+     * 
      * @param listener  The VetoableChangeListener to be added
      */
     public void addVetoableChangeListener(VetoableChangeListener listener) {
@@ -127,6 +163,12 @@ public class VetoableChangeSupport implements Serializable {
      * If <code>listener</code> is null, or was never added, no exception is
      * thrown and no action is taken.
      *
+     * <p>
+     *  从侦听器列表中删除VetoableChangeListener。这将删除为所有属性注册的VetoableChangeListener。
+     * 如果<code> listener </code>被多次添加到同一个事件源,它会在删除后少一点时间通知。
+     * 如果<code> listener </code>为空,或从未添加,则不抛出任何异常,并且不执行任何操作。
+     * 
+     * 
      * @param listener  The VetoableChangeListener to be removed
      */
     public void removeVetoableChangeListener(VetoableChangeListener listener) {
@@ -170,6 +212,16 @@ public class VetoableChangeSupport implements Serializable {
      * }
      * }</pre>
      *
+     * <p>
+     *  返回使用addVetoableChangeListener()添加到VetoableChangeSupport对象的所有侦听器的数组。
+     * <p>
+     *  如果一些侦听器已经添加了命名属性,则返回的数组将是VetoableChangeListeners和<code> VetoableChangeListenerProxy </code>的混合。
+     * 如果调用方法有兴趣区分侦听器,那么它必须测试每个元素以查看它是否为<code> VetoableChangeListenerProxy </code>,执行转换并检查参数。
+     * 
+     * <pre> {@ code VetoableChangeListener [] listeners = bean.getVetoableChangeListeners(); for(int i = 0; i <listeners.length; i ++){if(listeners [i] instanceof VetoableChangeListenerProxy){VetoableChangeListenerProxy proxy =(VetoableChangeListenerProxy)listeners [i]; if(proxy.getPropertyName()。
+     * equals("foo")){//代理是一个VetoableChangeListener,它与名为"foo"的属性相关联}}}} </pre>。
+     * 
+     * 
      * @see VetoableChangeListenerProxy
      * @return all of the <code>VetoableChangeListeners</code> added or an
      *         empty array if no listeners have been added
@@ -189,6 +241,12 @@ public class VetoableChangeSupport implements Serializable {
      * If <code>propertyName</code> or <code>listener</code> is null, no
      * exception is thrown and no action is taken.
      *
+     * <p>
+     *  为特定属性添加VetoableChangeListener。侦听器将仅在fireVetoableChange上的调用命名该特定属性时调用。可以多次添加相同的侦听器对象。
+     * 对于每个属性,侦听器将调用它为该属性添加的次数。
+     * 如果<code> propertyName </code>或<code> listener </code>为null,则不会抛出任何异常,并且不会执行任何操作。
+     * 
+     * 
      * @param propertyName  The name of the property to listen on.
      * @param listener  The VetoableChangeListener to be added
      */
@@ -214,6 +272,12 @@ public class VetoableChangeSupport implements Serializable {
      * If <code>listener</code> is null, or was never added for the specified
      * property, no exception is thrown and no action is taken.
      *
+     * <p>
+     *  删除特定属性的VetoableChangeListener。如果<code> listener </code>被多次添加到指定属性的同一个事件源中,则在删除后将少一点时间通知它。
+     * 如果<code> propertyName </code>为null,则不会抛出任何异常,并且不会执行任何操作。
+     * 如果<code> listener </code>为null,或者从未为指定的属性添加,则不会抛出任何异常,因此不会执行任何操作。
+     * 
+     * 
      * @param propertyName  The name of the property that was listened on.
      * @param listener  The VetoableChangeListener to be removed
      */
@@ -233,6 +297,10 @@ public class VetoableChangeSupport implements Serializable {
      * Returns an array of all the listeners which have been associated
      * with the named property.
      *
+     * <p>
+     *  返回与命名属性关联的所有侦听器的数组。
+     * 
+     * 
      * @param propertyName  The name of the property being listened to
      * @return all the <code>VetoableChangeListeners</code> associated with
      *         the named property.  If no such listeners have been added,
@@ -260,6 +328,19 @@ public class VetoableChangeSupport implements Serializable {
      * This is merely a convenience wrapper around the more general
      * {@link #fireVetoableChange(PropertyChangeEvent)} method.
      *
+     * <p>
+     * 将已约束的属性更新报告给已注册以跟踪所有属性或具有指定名称的属性的更新的侦听器。
+     * <p>
+     *  任何侦听器都可以抛出一个{@code PropertyVetoException}来否决更新。
+     * 如果其中一个监听器否决了更新,这个方法传递一个新的"撤销"{@code PropertyChangeEvent},它将恢复为旧的值给所有已经确认此更新的监听器,并再次抛出{@code PropertyVetoException}
+     * 。
+     *  任何侦听器都可以抛出一个{@code PropertyVetoException}来否决更新。
+     * <p>
+     *  如果旧值和新值相等且非空,则不触发事件。
+     * <p>
+     *  这只是一个更通用的{@link #fireVetoableChange(PropertyChangeEvent)}方法的便利包装。
+     * 
+     * 
      * @param propertyName  the programmatic name of the property that is about to change
      * @param oldValue      the old value of the property
      * @param newValue      the new value of the property
@@ -288,6 +369,19 @@ public class VetoableChangeSupport implements Serializable {
      * This is merely a convenience wrapper around the more general
      * {@link #fireVetoableChange(String, Object, Object)} method.
      *
+     * <p>
+     *  向已注册以跟踪所有属性或具有指定名称的属性的更新的侦听器报告整数受限属性更新。
+     * <p>
+     *  任何侦听器都可以抛出一个{@code PropertyVetoException}来否决更新。
+     * 如果其中一个监听器否决了更新,这个方法传递一个新的"撤销"{@code PropertyChangeEvent},它将恢复为旧的值给所有已经确认此更新的监听器,并再次抛出{@code PropertyVetoException}
+     * 。
+     *  任何侦听器都可以抛出一个{@code PropertyVetoException}来否决更新。
+     * <p>
+     *  如果旧值和新值相等,则不会触发事件。
+     * <p>
+     *  这只是一个更通用的{@link #fireVetoableChange(String,Object,Object)}方法的便利包装。
+     * 
+     * 
      * @param propertyName  the programmatic name of the property that is about to change
      * @param oldValue      the old value of the property
      * @param newValue      the new value of the property
@@ -316,6 +410,19 @@ public class VetoableChangeSupport implements Serializable {
      * This is merely a convenience wrapper around the more general
      * {@link #fireVetoableChange(String, Object, Object)} method.
      *
+     * <p>
+     *  向已注册以跟踪所有属性或具有指定名称的属性的更新的侦听器报告布尔约束属性更新。
+     * <p>
+     * 任何侦听器都可以抛出一个{@code PropertyVetoException}来否决更新。
+     * 如果其中一个监听器否决了更新,这个方法传递一个新的"撤销"{@code PropertyChangeEvent},它将恢复为旧的值给所有已经确认此更新的监听器,并再次抛出{@code PropertyVetoException}
+     * 。
+     * 任何侦听器都可以抛出一个{@code PropertyVetoException}来否决更新。
+     * <p>
+     *  如果旧值和新值相等,则不会触发事件。
+     * <p>
+     *  这只是一个更通用的{@link #fireVetoableChange(String,Object,Object)}方法的便利包装。
+     * 
+     * 
      * @param propertyName  the programmatic name of the property that is about to change
      * @param oldValue      the old value of the property
      * @param newValue      the new value of the property
@@ -341,6 +448,17 @@ public class VetoableChangeSupport implements Serializable {
      * <p>
      * No event is fired if the given event's old and new values are equal and non-null.
      *
+     * <p>
+     *  对已注册以跟踪所有属性或具有指定名称的属性的更新的侦听器触发属性更改事件。
+     * <p>
+     *  任何侦听器都可以抛出一个{@code PropertyVetoException}来否决更新。
+     * 如果其中一个监听器否决了更新,这个方法传递一个新的"撤销"{@code PropertyChangeEvent},它将恢复为旧的值给所有已经确认此更新的监听器,并再次抛出{@code PropertyVetoException}
+     * 。
+     *  任何侦听器都可以抛出一个{@code PropertyVetoException}来否决更新。
+     * <p>
+     *  如果给定事件的旧值和新值相等且非空,则不会触发任何事件。
+     * 
+     * 
      * @param event  the {@code PropertyChangeEvent} to be fired
      * @throws PropertyVetoException if one of listeners vetoes the property update
      */
@@ -397,6 +515,10 @@ public class VetoableChangeSupport implements Serializable {
      * those registered on all properties.  If <code>propertyName</code>
      * is null, only check for listeners registered on all properties.
      *
+     * <p>
+     *  检查是否有特定属性的任何侦听器,包括在所有属性上注册的侦听器。如果<code> propertyName </code>为null,则只检查在所有属性上注册的侦听器。
+     * 
+     * 
      * @param propertyName  the property name.
      * @return true if there are one or more listeners for the given property
      */
@@ -405,6 +527,8 @@ public class VetoableChangeSupport implements Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @serialData Null terminated list of <code>VetoableChangeListeners</code>.
      * <p>
      * At serialization time we skip non-serializable listeners and
@@ -469,10 +593,15 @@ public class VetoableChangeSupport implements Serializable {
 
     /**
      * The object to be provided as the "source" for any generated events.
+     * <p>
+     *  要作为任何生成的事件的"源"提供的对象。
+     * 
      */
     private Object source;
 
     /**
+    /* <p>
+    /* 
      * @serialField children                                   Hashtable
      * @serialField source                                     Object
      * @serialField vetoableChangeSupportSerializedDataVersion int
@@ -485,12 +614,19 @@ public class VetoableChangeSupport implements Serializable {
 
     /**
      * Serialization version ID, so we're compatible with JDK 1.1
+     * <p>
+     *  序列化版本ID,因此我们与JDK 1.1兼容
+     * 
      */
     static final long serialVersionUID = -5090210921595982017L;
 
     /**
      * This is a {@link ChangeListenerMap ChangeListenerMap} implementation
      * that works with {@link VetoableChangeListener VetoableChangeListener} objects.
+     * <p>
+     * 这是一个与{@link VetoableChangeListener VetoableChangeListener}对象一起使用的{@link ChangeListenerMap ChangeListenerMap}
+     * 实现。
+     * 
      */
     private static final class VetoableChangeListenerMap extends ChangeListenerMap<VetoableChangeListener> {
         private static final VetoableChangeListener[] EMPTY = {};
@@ -500,6 +636,11 @@ public class VetoableChangeSupport implements Serializable {
          * This method uses the same instance of the empty array
          * when {@code length} equals {@code 0}.
          *
+         * <p>
+         *  创建一个{@link VetoableChangeListener VetoableChangeListener}对象的数组。
+         * 当{@code length}等于{@code 0}时,此方法使用空数组的相同实例。
+         * 
+         * 
          * @param length  the array length
          * @return        an array with specified length
          */
@@ -514,6 +655,10 @@ public class VetoableChangeSupport implements Serializable {
          * Creates a {@link VetoableChangeListenerProxy VetoableChangeListenerProxy}
          * object for the specified property.
          *
+         * <p>
+         *  为指定的属性创建{@link VetoableChangeListenerProxy VetoableChangeListenerProxy}对象。
+         * 
+         * 
          * @param name      the name of the property to listen on
          * @param listener  the listener to process events
          * @return          a {@code VetoableChangeListenerProxy} object
@@ -525,6 +670,8 @@ public class VetoableChangeSupport implements Serializable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
          */
         public final VetoableChangeListener extract(VetoableChangeListener listener) {
             while (listener instanceof VetoableChangeListenerProxy) {

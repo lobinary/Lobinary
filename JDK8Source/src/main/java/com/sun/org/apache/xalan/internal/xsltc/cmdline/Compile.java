@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Compile.java,v 1.2.4.1 2005/08/31 11:24:13 pvedula Exp $
+ * <p>
+ *  $ Id：Compile.java,v 1.2.4.1 2005/08/31 11:24:13 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.cmdline;
@@ -34,6 +47,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.XSLTC;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMsg;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author G. Todd Miller
@@ -69,6 +84,10 @@ public final class Compile {
      * handling to a separate package (ie. make one xsltc.cmdline.Compiler
      * class that contains this main() method and one xsltc.cmdline.Transform
      * class that contains the DefaultRun stuff).
+     * <p>
+     *  此方法实现了命令行编译器。有关说明,请参阅USAGE_STRING常数。
+     * 将命令行处理移动到单独的包(即,make一个包含此main()方法的xsltc.cmdline.Compiler类和包含DefaultRun东西的一个xsltc.cmdline.Transform类)是
+     * 有意义的。
      */
     public static void main(String[] args) {
         try {

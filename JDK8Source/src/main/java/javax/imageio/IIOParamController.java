@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -89,6 +90,23 @@ package javax.imageio;
  * compute the settings, call the <code>IIOParam.setXXX</code>
  * methods, and return <code>true</code>.
  *
+ * <p>
+ *  要由可以通过放置GUI以从用户获取值或通过其他方式确定<code> IIOParam </code>对象的设置的对象实现的接口。
+ * 该接口仅仅指定调用控制器的通用<code> activate </code>方法,而不考虑控制器如何获得值(即,<i> </i>,控制器是放置GUI还是仅计算集合的值与此接口无关)。
+ * 
+ *  <p>在<code> activate </code>方法中,控制器通过查询<code> IIOParam </code>对象的<code> get </code>方法获取初始值,通过任何方式修改值,
+ *  <code> IIOParam </code>对象的<code>设置</code>方法来修改相应的设置。
+ * 通常,这些<code> set </code>方法将在最后提交时立即被调用,以便取消操作不会干扰现有值。
+ * 一般来说,应用程序可能期望当<code> activate </code>方法返回<code> true </code>时,<code> IIOParam </code>对象可以用于读取或写入操作。
+ * 
+ *  <p>供应商可以选择为他们为特定插件定义的<code> IIOParam </code>子类提供GUI。这些可以在相应的<code> IIOParam </code>子类中设置为默认控制器。
+ * 
+ * <p>应用程序可以覆盖任何默认GUI,并提供嵌入其自己框架中的自己的控制器。
+ * 所需要的是<code> activate </code>方法行为模式(不返回直到被取消或提交),虽然它不需要建立一个显式模式对话框。这种非模态GUI组件将大致编码如下：。
+ * 
+ * <br>
+ * <pre>
+ * 
  * @see IIOParam#setController
  * @see IIOParam#getController
  * @see IIOParam#getDefaultController
@@ -106,6 +124,16 @@ public interface IIOParamController {
      * <code>IIOParam</code> object will be disturbed (<i>i.e.</i>,
      * the user canceled the operation).
      *
+     * <p>
+     *  class MyGUI extends SomeComponent implements IIOParamController {
+     * 
+     *  public MyGUI(){// ... setEnabled(false); }}
+     * 
+     *  public boolean activate(IIOParam param){//如果需要,禁用其他组件setEnabled(true); //去睡眠,直到被取消或提交boolean ret = false; if(！cancelled){//在param上设置值ret = true; }
+     *  setEnabled(false); // enable any components disabled above return ret; }}。
+     * </pre>
+     * 
+     * 
      * @param param the <code>IIOParam</code> object to be modified.
      *
      * @return <code>true</code> if the <code>IIOParam</code> has been

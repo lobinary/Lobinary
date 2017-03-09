@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -10,6 +11,8 @@ package com.sun.corba.se.PortableActivationIDL;
 
 
 /** ORB callback interface, passed to Activator in registerORB method.
+/* <p>
+/* 
     */
 public abstract class _ORBProxyImplBase extends org.omg.CORBA.portable.ObjectImpl
                 implements com.sun.corba.se.PortableActivationIDL.ORBProxy, org.omg.CORBA.portable.InvokeHandler
@@ -43,6 +46,7 @@ public abstract class _ORBProxyImplBase extends org.omg.CORBA.portable.ObjectImp
 	* a side effect.  This should always happen before this call can complete.
 	* This method returns true if adapter activation succeeded, otherwise it
 	* returns false.
+	* <p>
 	*/
        case 0:  // PortableActivationIDL/ORBProxy/activate_adapter
        {

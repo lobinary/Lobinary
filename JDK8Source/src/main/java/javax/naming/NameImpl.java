@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import java.util.NoSuchElementException;
   * The implementation class for CompoundName and CompositeName.
   * This class is package private.
   *
+  * <p>
+  *  CompoundName和CompositeName的实现类。这个类是包私有的。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @author Aravindan Ranganathan
@@ -336,6 +341,12 @@ class NameImpl {
         }
         return (false);
     }
+/* <p>
+/*  //确定此组件是否需要任何转义。
+/*  private final boolean escapingNeeded(String comp){int len = comp.length(); for(int i = 0; i <len; i ++){if(i == 0){if(isA(comp,0,syntaxBeginQuote1)|| isA(comp,0,syntaxBeginQuote2)){return(true); }} if(isSeparator(comp,i)){return(true); } if(isA(comp,i,syntaxEscape)){i + = syntaxEscape.length(); if(i> = len || isMeta(comp,i)){return(true); }
+/* }} return(false); }}。
+/*  //确定此组件是否需要任何转义。
+/* 
 */
     private final String stringifyComp(String comp) {
         int len = comp.length();
@@ -507,6 +518,7 @@ class NameImpl {
       *
       * Note: using syntax of this NameImpl and ignoring
       * that of comparison target.
+      * <p>
       */
     public int compareTo(NameImpl obj) {
         if (this == obj) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.awt.image.ColorModel;
  * Provides the actual implementation for the LinearGradientPaint.
  * This is where the pixel processing is done.
  *
+ * <p>
+ *  提供LinearGradientPaint的实际实现。这是进行像素处理的地方。
+ * 
+ * 
  * @see java.awt.LinearGradientPaint
  * @see java.awt.PaintContext
  * @see java.awt.Paint
@@ -47,12 +52,19 @@ final class LinearGradientPaintContext extends MultipleGradientPaintContext {
      * The following invariants are used to process the gradient value from
      * a device space coordinate, (X, Y):
      *     g(X, Y) = dgdX*X + dgdY*Y + gc
+     * <p>
+     *  以下不变量用于处理来自设备空间坐标(X,Y)的梯度值：g(X,Y)= dgdX * X + dgdY * Y + gc
+     * 
      */
     private float dgdX, dgdY, gc;
 
     /**
      * Constructor for LinearGradientPaintContext.
      *
+     * <p>
+     *  LinearGradientPaintContext的构造函数。
+     * 
+     * 
      * @param paint the {@code LinearGradientPaint} from which this context
      *              is created
      * @param cm {@code ColorModel} that receives
@@ -127,6 +139,9 @@ final class LinearGradientPaintContext extends MultipleGradientPaintContext {
      * operation.  This is where the area is filled with colors distributed
      * linearly.
      *
+     * <p>
+     *  返回包含为图形操作生成的颜色的栅格。这是该区域填充有线性分布的颜色的地方。
+     * 
      * @param x,y,w,h the area in device space for which colors are
      * generated.
      */

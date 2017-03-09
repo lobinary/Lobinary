@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.transforms;
 
@@ -47,6 +56,12 @@ import org.w3c.dom.NodeList;
  * The output from the last Transform is the input for the
  * <code>DigestMethod algorithm</code>
  *
+ * <p>
+ *  对数据执行的{@link com.sun.org.apache.xml.internal.security.transforms.Transform}步骤的持有人。
+ * 第一个Transform的输入是取消引用<code> Reference </code>元素的<code> URI </code>属性的结果。
+ * 最后一个变换的输出是<code> DigestMethod算法</code>的输入。
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  * @see Transform
  * @see com.sun.org.apache.xml.internal.security.signature.Reference
@@ -114,6 +129,10 @@ public class Transforms extends SignatureElementProxy {
     /**
      * Constructs {@link Transforms}.
      *
+     * <p>
+     *  构造{@link Transforms}。
+     * 
+     * 
      * @param doc the {@link Document} in which <code>XMLSignature</code> will
      * be placed
      */
@@ -126,6 +145,10 @@ public class Transforms extends SignatureElementProxy {
      * Constructs {@link Transforms} from {@link Element} which is
      * <code>Transforms</code> Element
      *
+     * <p>
+     *  构造来自{@link Element}的{@link Transforms},它是<code> Transforms </code>元素
+     * 
+     * 
      * @param element  is <code>Transforms</code> element
      * @param BaseURI the URI where the XML instance was stored
      * @throws DOMException
@@ -151,6 +174,9 @@ public class Transforms extends SignatureElementProxy {
 
     /**
      * Set whether secure validation is enabled or not. The default is false.
+     * <p>
+     *  设置是否启用安全验证。默认值为false。
+     * 
      */
     public void setSecureValidation(boolean secureValidation) {
         this.secureValidation = secureValidation;
@@ -160,6 +186,10 @@ public class Transforms extends SignatureElementProxy {
      * Adds the <code>Transform</code> with the specified <code>Transform
      * algorithm URI</code>
      *
+     * <p>
+     * 使用指定的<code> Transform algorithm URI </code>添加<code> Transform </code>
+     * 
+     * 
      * @param transformURI the URI form of transform that indicates which
      * transformation is applied to data
      * @throws TransformationException
@@ -182,6 +212,10 @@ public class Transforms extends SignatureElementProxy {
      * Adds the <code>Transform</code> with the specified <code>Transform
      * algorithm URI</code>
      *
+     * <p>
+     *  使用指定的<code> Transform algorithm URI </code>添加<code> Transform </code>
+     * 
+     * 
      * @param transformURI the URI form of transform that indicates which
      * transformation is applied to data
      * @param contextElement
@@ -206,6 +240,10 @@ public class Transforms extends SignatureElementProxy {
      * Adds the <code>Transform</code> with the specified <code>Transform
      * algorithm URI</code>.
      *
+     * <p>
+     *  使用指定的<code> Transform algorithm URI </code>添加<code> Transform </code>。
+     * 
+     * 
      * @param transformURI the URI form of transform that indicates which
      * transformation is applied to data
      * @param contextNodes
@@ -225,6 +263,10 @@ public class Transforms extends SignatureElementProxy {
     /**
      * Adds a user-provided Transform step.
      *
+     * <p>
+     *  添加用户提供的变换步骤。
+     * 
+     * 
      * @param transform {@link Transform} object
      */
     private void addTransform(Transform transform) {
@@ -242,6 +284,10 @@ public class Transforms extends SignatureElementProxy {
      * Applies all included <code>Transform</code>s to xmlSignatureInput and
      * returns the result of these transformations.
      *
+     * <p>
+     *  将所有包含的<code> Transform </code>应用于xmlSignatureInput并返回这些转换的结果。
+     * 
+     * 
      * @param xmlSignatureInput the input for the <code>Transform</code>s
      * @return the result of the <code>Transforms</code>
      * @throws TransformationException
@@ -256,6 +302,10 @@ public class Transforms extends SignatureElementProxy {
      * Applies all included <code>Transform</code>s to xmlSignatureInput and
      * returns the result of these transformations.
      *
+     * <p>
+     *  将所有包含的<code> Transform </code>应用于xmlSignatureInput并返回这些转换的结果。
+     * 
+     * 
      * @param xmlSignatureInput the input for the <code>Transform</code>s
      * @param os where to output the last transformation.
      * @return the result of the <code>Transforms</code>
@@ -305,6 +355,10 @@ public class Transforms extends SignatureElementProxy {
     /**
      * Return the nonnegative number of transformations.
      *
+     * <p>
+     *  返回非负的转换数。
+     * 
+     * 
      * @return the number of transformations
      */
     public int getLength() {
@@ -319,6 +373,10 @@ public class Transforms extends SignatureElementProxy {
      * Return the <it>i</it><sup>th</sup> <code>{@link Transform}</code>.
      * Valid <code>i</code> values are 0 to <code>{@link #getLength}-1</code>.
      *
+     * <p>
+     *  返回<it> i </it> <sup> th </sup> <code> {@ link Transform} </code>。
+     * 有效的<code> i </code>值为0到<code> {@ link #getLength} -1 </code>。
+     * 
      * @param i index of {@link Transform} to return
      * @return the <it>i</it><sup>th</sup> Transform
      * @throws TransformationException

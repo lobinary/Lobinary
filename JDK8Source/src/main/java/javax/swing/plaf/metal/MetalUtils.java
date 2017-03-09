@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import sun.swing.ImageIconUIResource;
 /**
  * This is a dumping ground for random stuff we want to use in several places.
  *
+ * <p>
+ *  这是一个倾销的地方,我们想要在几个地方使用随机的东西。
+ * 
+ * 
  * @author Steve Wilson
  */
 
@@ -48,6 +53,9 @@ class MetalUtils {
 
     /**
       * This draws the "Flush 3D Border" which is used throughout the Metal L&F
+      * <p>
+      *  这绘制了"Flush 3D Border",这是在Metal L&F中使用的
+      * 
       */
     static void drawFlush3DBorder(Graphics g, int x, int y, int w, int h) {
         g.translate( x, y);
@@ -64,6 +72,9 @@ class MetalUtils {
     /**
       * This draws a variant "Flush 3D Border"
       * It is used for things like pressed buttons.
+      * <p>
+      *  这将绘制一个变体"冲洗3D边框"它用于像按下按钮的东西。
+      * 
       */
     static void drawPressed3DBorder(Graphics g, Rectangle r) {
         drawPressed3DBorder( g, r.x, r.y, r.width, r.height );
@@ -79,6 +90,9 @@ class MetalUtils {
     /**
       * This draws a variant "Flush 3D Border"
       * It is used for things like pressed buttons.
+      * <p>
+      *  这将绘制一个变体"冲洗3D边框"它用于像按下按钮的东西。
+      * 
       */
     static void drawPressed3DBorder(Graphics g, int x, int y, int w, int h) {
         g.translate( x, y);
@@ -95,6 +109,9 @@ class MetalUtils {
       * This draws a variant "Flush 3D Border"
       * It is used for things like active toggle buttons.
       * This is used rarely.
+      * <p>
+      *  这将绘制一个变体"冲洗3D边框"它用于像活动切换按钮的东西。这很少使用。
+      * 
       */
     static void drawDark3DBorder(Graphics g, Rectangle r) {
         drawDark3DBorder(g, r.x, r.y, r.width, r.height);
@@ -104,6 +121,9 @@ class MetalUtils {
       * This draws a variant "Flush 3D Border"
       * It is used for things like active toggle buttons.
       * This is used rarely.
+      * <p>
+      *  这将绘制一个变体"冲洗3D边框"它用于像活动切换按钮的东西。这很少使用。
+      * 
       */
     static void drawDark3DBorder(Graphics g, int x, int y, int w, int h) {
         g.translate( x, y);
@@ -163,6 +183,9 @@ class MetalUtils {
     /*
      * Convenience function for determining ComponentOrientation.  Helps us
      * avoid having Munge directives throughout the code.
+     * <p>
+     *  用于确定ComponentOrientation的便捷功能。帮助我们避免在整个代码中有Munge指令。
+     * 
      */
     static boolean isLeftToRight( Component c ) {
         return c.getComponentOrientation().isLeftToRight();
@@ -198,6 +221,14 @@ class MetalUtils {
      * <li>The remaining size will be filled with a gradient from c1 to c3.
      * </ol>
      *
+     * <p>
+     *  绘制径向类型渐变。如果<code> vertical </code>为true,或者水平,则会垂直绘制渐变。 UIManager键由五个值组成：r1 r2 c1 c2 c3。
+     * 梯度被分解成从原点开始依次绘制的四个块。
+     * <ol>
+     *  <li>渐变r1从c1到c2的尺寸<li>矩形r2为c2中尺寸的％。 <li>渐变从c2到c1的大小的r1％<li>剩余的大小将填充从c1到c3的渐变。
+     * </ol>
+     * 
+     * 
      * @param c Component rendering to
      * @param g Graphics to draw to.
      * @param key UIManager key used to look up gradient values.
@@ -229,6 +260,9 @@ class MetalUtils {
         /**
          * Instance used for painting.  This is the only instance that is
          * ever created.
+         * <p>
+         *  用于绘画的实例。这是唯一的实例。
+         * 
          */
         public static final GradientPainter INSTANCE = new GradientPainter(8);
 
@@ -238,10 +272,16 @@ class MetalUtils {
 
         /**
          * This is the actual width we're painting in, or last painted to.
+         * <p>
+         *  这是我们画在或最后画的实际宽度。
+         * 
          */
         private int w;
         /**
          * This is the actual height we're painting in, or last painted to
+         * <p>
+         *  这是我们画的实际高度,或最后画的高度
+         * 
          */
         private int h;
 
@@ -380,6 +420,9 @@ class MetalUtils {
 
     /**
      * Returns true if the specified widget is in a toolbar.
+     * <p>
+     * 如果指定的窗口小部件在工具栏中,则返回true。
+     * 
      */
     static boolean isToolBarButton(JComponent c) {
         return (c.getParent() instanceof JToolBar);
@@ -409,6 +452,9 @@ class MetalUtils {
 
     /**
      * Used to create a disabled Icon with the ocean look.
+     * <p>
+     *  用于创建一个禁用图标与海洋的样子。
+     * 
      */
     private static class OceanDisabledButtonImageFilter extends RGBImageFilter{
         private float min;
@@ -434,6 +480,8 @@ class MetalUtils {
 
     /**
      * Used to create the rollover icons with the ocean look.
+     * <p>
+     *  用于创建带有海洋外观的翻转图标。
      */
     private static class OceanToolBarImageFilter extends RGBImageFilter {
         OceanToolBarImageFilter() {

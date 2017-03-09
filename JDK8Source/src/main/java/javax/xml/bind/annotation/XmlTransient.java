@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -87,6 +88,26 @@ import static java.lang.annotation.RetentionPolicy.*;
  *   &lt;/xs:complexType>
  * </pre>
  *
+ * <p>
+ * <p>
+ *  防止将JavaBean属性/类型映射到XML表示。
+ * <p>
+ *  <tt> @XmlTransient </tt>注释有助于解决JavaBean属性名称和字段名称之间的名称冲突,或防止字段/属性的映射。
+ * 当资源化的JavaBean属性名称和字段名称相同时,会发生名称冲突。
+ * 如果JavaBean属性引用字段,那么可以通过使用<tt> @XmlTransient </tt>注释阻止字段或JavaBean属性的映射来解析名称冲突。
+ * 
+ * <p>
+ *  当放置在类上时,它表示该类本身不应映射到XML。此类的属性将与其派生类一起映射到XML,就好像类是内联的一样。
+ * 
+ *  <p> <b>使用</b> </p> <p> <tt> @XmlTransient </tt>注释可用于以下程序元素：
+ * <ul>
+ *  <li>一个JavaBean属性</li> <li>字段</li> <li>类</li>
+ * </ul>
+ * 
+ *  <p> <tt> @XmlTransient </tt>与所有其他JAXB定义的注释互斥。 </p>
+ * 
+ *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since JAXB2.0
  */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom.events;
@@ -26,6 +36,9 @@ import org.w3c.dom.events.MutationEvent;
 /**
  * @xerces.internal
  *
+ * <p>
+ *  @ xerces.internal
+ * 
  */
 
 public class MutationEventImpl
@@ -50,6 +63,9 @@ implements MutationEvent
     /** @return the name of the Attr which
         changed, for DOMAttrModified events.
         Undefined for others.
+    /* <p>
+    /*  已更改,用于DOMAttrModified事件。未定义为其他人。
+    /* 
         */
     public String getAttrName()
     {
@@ -60,6 +76,10 @@ implements MutationEvent
      *  <code>attrChange</code> indicates the type of change which triggered
      * the DOMAttrModified event. The values can be <code>MODIFICATION</code>
      * , <code>ADDITION</code>, or <code>REMOVAL</code>.
+     * <p>
+     *  <code> attrChange </code>表示触发DOMAttrModified事件的更改类型。
+     * 值可以是<code> MODIFICATION </code>,<code> ADDITION </code>或<code> REMOVAL </code>。
+     * 
      */
     public short getAttrChange()
     {
@@ -69,6 +89,9 @@ implements MutationEvent
     /** @return the new string value of the Attr for DOMAttrModified events, or
         of the CharacterData node for DOMCharDataModifed events.
         Undefined for others.
+    /* <p>
+    /*  DOMCharDataModifed事件的CharacterData节点。未定义为其他人。
+    /* 
         */
     public String getNewValue()
     {
@@ -78,6 +101,9 @@ implements MutationEvent
     /** @return the previous string value of the Attr for DOMAttrModified events, or
         of the CharacterData node for DOMCharDataModifed events.
         Undefined for others.
+    /* <p>
+    /*  DOMCharDataModifed事件的CharacterData节点。未定义为其他人。
+    /* 
         */
     public String getPrevValue()
     {
@@ -88,6 +114,9 @@ implements MutationEvent
         node was dispatched to. For DOMNodeRemoved, it is the node which
         was removed.
         No other uses are currently defined.
+    /* <p>
+    /*  节点已分派到。对于DOMNodeRemoved,它是被删除的节点。目前没有定义其他用途。
+    /* 
         */
     public Node getRelatedNode()
     {
@@ -96,6 +125,8 @@ implements MutationEvent
 
     /** Initialize a mutation event, or overwrite the event's current
         settings with new values of the parameters.
+    /* <p>
+    /*  设置具有新的参数值。
         */
     public void initMutationEvent(String typeArg, boolean canBubbleArg,
         boolean cancelableArg, Node relatedNodeArg, String prevValueArg,

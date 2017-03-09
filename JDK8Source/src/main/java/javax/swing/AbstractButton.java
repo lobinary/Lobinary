@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -70,6 +71,22 @@ import java.util.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  定义按钮和菜单项的常见行为。
+ * <p>
+ *  可以通过<code> <a href="Action.html">操作</a> </code>配置按钮,并在某种程度上控制。
+ * 除了直接配置按钮外,使用<code> Action </code>按钮还有许多好处。
+ * 有关详情,请参阅<a href="Action.html#buttonActions"> Swing组件支持<code>操作</code> </a>,您可以在<a href ="https：// docs中找到更多信息.oracle.com / javase / tutorial / uiswing / misc / action.html">
+ * 如何使用操作</a>,<em> Java教程</em>中的一节。
+ * 除了直接配置按钮外,使用<code> Action </code>按钮还有许多好处。
+ * <p>
+ *  有关详情,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/button.html">如何使用按钮,复选框和
+ * 单选按钮</a>,在Java教程</em>中。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public abstract class AbstractButton extends JComponent implements ItemSelectable, SwingConstants {
@@ -102,20 +119,32 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Identifies a change to having the border drawn,
      * or having it not drawn.
+     * <p>
+     *  标识对已绘制边框或未绘制边框的更改。
+     * 
      */
     public static final String BORDER_PAINTED_CHANGED_PROPERTY = "borderPainted";
     /**
      * Identifies a change to having the border highlighted when focused,
      * or not.
+     * <p>
+     *  标识在聚焦时是否突出显示边框的更改。
+     * 
      */
     public static final String FOCUS_PAINTED_CHANGED_PROPERTY = "focusPainted";
     /**
      * Identifies a change from rollover enabled to disabled or back
      * to enabled.
+     * <p>
+     * 标识从启用翻转到停用或返回启用的更改。
+     * 
      */
     public static final String ROLLOVER_ENABLED_CHANGED_PROPERTY = "rolloverEnabled";
     /**
      * Identifies a change to having the button paint the content area.
+     * <p>
+     *  标识将按钮绘制到内容区域的更改。
+     * 
      */
     public static final String CONTENT_AREA_FILLED_CHANGED_PROPERTY = "contentAreaFilled";
 
@@ -126,33 +155,51 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Identifies a change to the icon used when the button has been
      * pressed.
+     * <p>
+     *  标识按钮被按下时使用的图标的更改。
+     * 
      */
     public static final String PRESSED_ICON_CHANGED_PROPERTY = "pressedIcon";
     /**
      * Identifies a change to the icon used when the button has
      * been selected.
+     * <p>
+     *  标识在选择按钮时使用的图标的更改。
+     * 
      */
     public static final String SELECTED_ICON_CHANGED_PROPERTY = "selectedIcon";
 
     /**
      * Identifies a change to the icon used when the cursor is over
      * the button.
+     * <p>
+     *  标识当光标在按钮上方时使用的图标的更改。
+     * 
      */
     public static final String ROLLOVER_ICON_CHANGED_PROPERTY = "rolloverIcon";
     /**
      * Identifies a change to the icon used when the cursor is
      * over the button and it has been selected.
+     * <p>
+     *  标识当光标在按钮上方并且已被选择时使用的图标的更改。
+     * 
      */
     public static final String ROLLOVER_SELECTED_ICON_CHANGED_PROPERTY = "rolloverSelectedIcon";
 
     /**
      * Identifies a change to the icon used when the button has
      * been disabled.
+     * <p>
+     *  标识对按钮已禁用时使用的图标的更改。
+     * 
      */
     public static final String DISABLED_ICON_CHANGED_PROPERTY = "disabledIcon";
     /**
      * Identifies a change to the icon used when the button has been
      * disabled and selected.
+     * <p>
+     *  标识对按钮已禁用和选择时使用的图标的更改。
+     * 
      */
     public static final String DISABLED_SELECTED_ICON_CHANGED_PROPERTY = "disabledSelectedIcon";
 
@@ -210,19 +257,31 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Combined listeners: ActionListener, ChangeListener, ItemListener.
+     * <p>
+     *  组合侦听器：ActionListener,ChangeListener,ItemListener。
+     * 
      */
     private Handler handler;
 
     /**
      * The button model's <code>changeListener</code>.
+     * <p>
+     *  按钮模型的<code> changeListener </code>。
+     * 
      */
     protected ChangeListener changeListener = null;
     /**
      * The button model's <code>ActionListener</code>.
+     * <p>
+     *  按钮模型的<code> ActionListener </code>。
+     * 
      */
     protected ActionListener actionListener = null;
     /**
      * The button model's <code>ItemListener</code>.
+     * <p>
+     *  按钮模型的<code> ItemListener </code>。
+     * 
      */
     protected ItemListener itemListener = null;
 
@@ -231,6 +290,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * instance since the
      * event's only state is the source property.  The source of events
      * generated is always "this".
+     * <p>
+     *  由于事件的唯一状态是源属性,因此每个按钮实例只需要一个<code> ChangeEvent </code>。生成的事件的源始终是"this"。
+     * 
      */
     protected transient ChangeEvent changeEvent;
 
@@ -242,6 +304,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * This is useful only if an <code>Action</code> has been
      * installed on the button.
      *
+     * <p>
+     *  设置<code> hideActionText </code>属性,该属性确定按钮是否显示来自<code> Action </code>的文本。
+     * 这只有在按钮上安装了<code> Action </code>时才有用。
+     * 
+     * 
      * @param hideActionText <code>true</code> if the button's
      *                       <code>text</code> property should not reflect
      *                       that of the <code>Action</code>; the default is
@@ -272,6 +339,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * <code>Action</code>.  This is useful only if an <code>Action</code>
      * has been installed on the button.
      *
+     * <p>
+     *  返回<code> hideActionText </code>属性的值,该属性确定按钮是否显示来自<code> Action </code>的文本。
+     * 这只有在按钮上安装了<code> Action </code>时才有用。
+     * 
+     * 
      * @return <code>true</code> if the button's <code>text</code>
      *         property should not reflect that of the
      *         <code>Action</code>; the default is <code>false</code>
@@ -283,6 +355,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the button's text.
+     * <p>
+     *  返回按钮的文本。
+     * 
+     * 
      * @return the buttons text
      * @see #setText
      */
@@ -292,6 +368,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the button's text.
+     * <p>
+     *  设置按钮的文本。
+     * 
+     * 
      * @param text the string used to set the text
      * @see #getText
      * @beaninfo
@@ -321,6 +401,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Returns the state of the button. True if the
      * toggle button is selected, false if it's not.
+     * <p>
+     * 返回按钮的状态。如果选择切换按钮,则为True,否则为false。
+     * 
+     * 
      * @return true if the toggle button is selected, otherwise false
      */
     public boolean isSelected() {
@@ -332,6 +416,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * trigger an <code>actionEvent</code>.
      * Call <code>doClick</code> to perform a programmatic action change.
      *
+     * <p>
+     *  设置按钮的状态。请注意,此方法不会触发<code> actionEvent </code>。调用<code> doClick </code>可执行程序化操作更改。
+     * 
+     * 
      * @param b  true if the button is selected, otherwise false
      */
     public void setSelected(boolean b) {
@@ -351,6 +439,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Programmatically perform a "click". This does the same
      * thing as if the user had pressed and released the button.
+     * <p>
+     *  以编程方式执行"点击"。这做同样的事情,如果用户按下并释放按钮。
+     * 
      */
     public void doClick() {
         doClick(68);
@@ -362,6 +453,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * The button stays visually "pressed" for <code>pressTime</code>
      *  milliseconds.
      *
+     * <p>
+     *  以编程方式执行"点击"。这做同样的事情,如果用户按下并释放按钮。对于<code> pressTime </code>毫秒,按钮保持视觉上"按下"。
+     * 
+     * 
      * @param pressTime the time to "hold down" the button, in milliseconds
      */
     public void doClick(int pressTime) {
@@ -387,6 +482,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * appropriate margin space (else this property will
      * effectively be ignored).
      *
+     * <p>
+     *  在按钮边框和标签之间设置边距空间。设置为<code> null </code>将使按钮使用默认边距。按钮的默认<code> Border </code>对象将使用此值创建适当的边距。
+     * 但是,如果在按钮上设置了非默认边框,那么<code> Border </code>对象负责创建适当的边距空间(否则此属性将被有效地忽略)。
+     * 
+     * 
      * @param m the space between the border and the label
      *
      * @beaninfo
@@ -421,6 +521,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Returns the margin between the button's border and
      * the label.
      *
+     * <p>
+     *  返回按钮边框和标签之间的边距。
+     * 
+     * 
      * @return an <code>Insets</code> object specifying the margin
      *          between the botton's border and the label
      * @see #setMargin
@@ -431,6 +535,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the default icon.
+     * <p>
+     *  返回默认图标。
+     * 
+     * 
      * @return the default <code>Icon</code>
      * @see #setIcon
      */
@@ -443,6 +551,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * also used as the "pressed" and "disabled" icon if
      * there is no explicitly set pressed icon.
      *
+     * <p>
+     *  设置按钮的默认图标。如果没有明确设置按下的图标,则该图标也用作"按下"和"禁用"图标。
+     * 
+     * 
      * @param defaultIcon the icon used as the default image
      * @see #getIcon
      * @see #setPressedIcon
@@ -459,6 +571,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * generated the disabled icon for this component,
          * (i.e. setDisabledIcon() was never called) then
          * clear the disabledIcon field.
+         * <p>
+         *  生成此组件的禁用图标(即,从未调用setDisabledIcon()),然后清除disabledIcon字段。
+         * 
          */
         if (defaultIcon != oldValue && (disabledIcon instanceof UIResource)) {
             disabledIcon = null;
@@ -482,6 +597,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the pressed icon for the button.
+     * <p>
+     *  返回按钮的按下图标。
+     * 
+     * 
      * @return the <code>pressedIcon</code> property
      * @see #setPressedIcon
      */
@@ -491,6 +610,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the pressed icon for the button.
+     * <p>
+     *  设置按钮的按下图标。
+     * 
+     * 
      * @param pressedIcon the icon used as the "pressed" image
      * @see #getPressedIcon
      * @beaninfo
@@ -516,6 +639,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the selected icon for the button.
+     * <p>
+     *  返回按钮的选定图标。
+     * 
+     * 
      * @return the <code>selectedIcon</code> property
      * @see #setSelectedIcon
      */
@@ -525,6 +652,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the selected icon for the button.
+     * <p>
+     * 设置按钮的选定图标。
+     * 
+     * 
      * @param selectedIcon the icon used as the "selected" image
      * @see #getSelectedIcon
      * @beaninfo
@@ -540,6 +671,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * generated the disabled selected icon for this component,
          * (i.e. setDisabledSelectedIcon() was never called) then
          * clear the disabledSelectedIcon field.
+         * <p>
+         *  生成此组件的已禁用的选定图标(即,从未调用setDisabledSelectedIcon()),然后清除disabledSelectedIcon字段。
+         * 
          */
         if (selectedIcon != oldValue &&
             disabledSelectedIcon instanceof UIResource) {
@@ -562,6 +696,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the rollover icon for the button.
+     * <p>
+     *  返回按钮的翻转图标。
+     * 
+     * 
      * @return the <code>rolloverIcon</code> property
      * @see #setRolloverIcon
      */
@@ -571,6 +709,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the rollover icon for the button.
+     * <p>
+     *  设置按钮的翻转图标。
+     * 
+     * 
      * @param rolloverIcon the icon used as the "rollover" image
      * @see #getRolloverIcon
      * @beaninfo
@@ -598,6 +740,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the rollover selection icon for the button.
+     * <p>
+     *  返回按钮的翻转选择图标。
+     * 
+     * 
      * @return the <code>rolloverSelectedIcon</code> property
      * @see #setRolloverSelectedIcon
      */
@@ -607,6 +753,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the rollover selected icon for the button.
+     * <p>
+     *  设置按钮的翻转选择图标。
+     * 
+     * 
      * @param rolloverSelectedIcon the icon used as the
      *          "selected rollover" image
      * @see #getRolloverSelectedIcon
@@ -642,6 +792,12 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Some look and feels might not render the disabled Icon, in which
      * case they will ignore this.
      *
+     * <p>
+     *  返回按钮被禁用时使用的图标。如果没有设置禁用图标,这将转发呼叫的外观和感觉来构造适当的禁用图标。
+     * <p>
+     *  一些外观和感觉可能不会呈现禁用的图标,在这种情况下,他们会忽略这一点。
+     * 
+     * 
      * @return the <code>disabledIcon</code> property
      * @see #getPressedIcon
      * @see #setDisabledIcon
@@ -660,6 +816,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the disabled icon for the button.
+     * <p>
+     *  设置按钮的禁用图标。
+     * 
+     * 
      * @param disabledIcon the icon used as the disabled image
      * @see #getDisabledIcon
      * @beaninfo
@@ -693,6 +853,13 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Some look and feels might not render the disabled selected Icon, in
      * which case they will ignore this.
      *
+     * <p>
+     *  返回按钮被禁用和选择时使用的图标。
+     * 如果没有设置禁用的选择图标,这将转发对LookAndFeel的调用,以从选择图标(如果已设置)和<code> getDisabledIcon()</code>构造适当的禁用图标。
+     * <p>
+     *  一些外观和感觉可能不会呈现禁用的选定图标,在这种情况下,他们将忽略此。
+     * 
+     * 
      * @return the <code>disabledSelectedIcon</code> property
      * @see #getDisabledIcon
      * @see #setDisabledSelectedIcon
@@ -712,6 +879,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the disabled selection icon for the button.
+     * <p>
+     *  设置按钮的禁用选择图标。
+     * 
+     * 
      * @param disabledSelectedIcon the icon used as the disabled
      *          selection image
      * @see #getDisabledSelectedIcon
@@ -744,6 +915,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Returns the vertical alignment of the text and icon.
      *
+     * <p>
+     *  返回文本和图标的垂直对齐方式。
+     * 
+     * 
      * @return the <code>verticalAlignment</code> property, one of the
      *          following values:
      * <ul>
@@ -758,6 +933,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the vertical alignment of the icon and text.
+     * <p>
+     *  设置图标和文本的垂直对齐方式。
+     * 
+     * 
      * @param alignment one of the following values:
      * <ul>
      * <li>{@code SwingConstants.CENTER} (the default)
@@ -786,6 +965,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * {@code AbstractButton}'s default is {@code SwingConstants.CENTER},
      * but subclasses such as {@code JCheckBox} may use a different default.
      *
+     * <p>
+     *  返回图标和文本的水平对齐方式。
+     *  {@code AbstractButton}的默认值为{@code SwingConstants.CENTER},但是子类(例如{@code JCheckBox})可能使用不同的默认值。
+     * 
+     * 
      * @return the <code>horizontalAlignment</code> property,
      *             one of the following values:
      * <ul>
@@ -805,6 +989,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * {@code AbstractButton}'s default is {@code SwingConstants.CENTER},
      * but subclasses such as {@code JCheckBox} may use a different default.
      *
+     * <p>
+     * 设置图标和文本的水平对齐方式。
+     *  {@code AbstractButton}的默认值为{@code SwingConstants.CENTER},但是子类(例如{@code JCheckBox})可能使用不同的默认值。
+     * 
+     * 
      * @param alignment the alignment value, one of the following values:
      * <ul>
      *   <li>{@code SwingConstants.RIGHT}
@@ -838,6 +1027,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the vertical position of the text relative to the icon.
+     * <p>
+     *  返回文本相对于图标的垂直位置。
+     * 
+     * 
      * @return the <code>verticalTextPosition</code> property,
      *          one of the following values:
      * <ul>
@@ -852,6 +1045,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the vertical position of the text relative to the icon.
+     * <p>
+     *  设置文本相对于图标的垂直位置。
+     * 
+     * 
      * @param textPosition  one of the following values:
      * <ul>
      * <li>{@code SwingConstants.CENTER} (the default)
@@ -877,6 +1074,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the horizontal position of the text relative to the icon.
+     * <p>
+     *  返回文本相对于图标的水平位置。
+     * 
+     * 
      * @return the <code>horizontalTextPosition</code> property,
      *          one of the following values:
      * <ul>
@@ -893,6 +1094,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the horizontal position of the text relative to the icon.
+     * <p>
+     *  设置文本相对于图标的水平位置。
+     * 
+     * 
      * @param textPosition one of the following values:
      * <ul>
      * <li>{@code SwingConstants.RIGHT}
@@ -929,6 +1134,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Returns the amount of space between the text and the icon
      * displayed in this button.
      *
+     * <p>
+     *  返回文本和此按钮中显示的图标之间的空格大小。
+     * 
+     * 
      * @return an int equal to the number of pixels between the text
      *         and the icon.
      * @since 1.4
@@ -946,6 +1155,14 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  如果同时设置了图标和文本属性,则此属性定义它们之间的空格。
+     * <p>
+     *  此属性的默认值为4像素。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @since 1.4
      * @see #getIconTextGap
      * @beaninfo
@@ -977,6 +1194,14 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      *   <li>{@code SwingConstants.TRAILING}
      * </ul>
      *
+     * <p>
+     *  验证{@code key}参数是{@code horizo​​ntalAlignment}和{@code horizo​​ntalTextPosition}属性的合法值。有效值为：
+     * <ul>
+     *  <li> {@ code SwingConstants.LIGHT} <li> {@ code SwingConstants.LEFTING} <li> {@ code SwingConstants.CENTER}
+     *  <li> {@ code SwingConstants.LEADING}。
+     * </ul>
+     * 
+     * 
      * @param key the property value to check
      * @param exception the message to use in the
      *        {@code IllegalArgumentException} that is thrown for an invalid
@@ -1008,6 +1233,14 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      *   <li>{@code SwingConstants.BOTTOM}
      * </ul>
      *
+     * <p>
+     *  验证{@code key}参数是垂直属性的合法值。有效值为：
+     * <ul>
+     *  <li> {@ code SwingConstants.CENTER} <li> {@ code SwingConstants.TOP} <li> {@ code SwingConstants.BOTTOM}
+     * 。
+     * </ul>
+     * 
+     * 
      * @param key the property value to check
      * @param exception the message to use in the
      *        {@code IllegalArgumentException} that is thrown for an invalid
@@ -1027,6 +1260,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      *{@inheritDoc}
      *
+     * <p>
+     *  @inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     public void removeNotify() {
@@ -1038,6 +1275,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the action command for this button.
+     * <p>
+     *  设置此按钮的操作命令。
+     * 
+     * 
      * @param actionCommand the action command for this button
      */
     public void setActionCommand(String actionCommand) {
@@ -1046,6 +1287,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the action command for this button.
+     * <p>
+     *  返回此按钮的操作命令。
+     * 
+     * 
      * @return the action command for this button
      */
     public String getActionCommand() {
@@ -1084,6 +1329,24 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * {@code actionPropertyChanged} method when a property in the
      * {@code Action} changes.
      *
+     * <p>
+     * 设置<code> Action </code>。
+     * 新<code> Action </code>替换任何先前设置的<code> Action </code>,但不影响<code> addActionListener </code>独立添加的<code> 
+     * ActionListeners </code>。
+     * 设置<code> Action </code>。如果<code> Action </code>已经是按钮的注册<code> ActionListener </code>,则不会重新注册。
+     * <p>
+     *  设置<code> Action </code>会立即更改<a href="Action.html#buttonActions"> Swing组件支持<code> Action </code> </a>
+     * 中描述的所有属性。
+     * 随后,按钮的属性会随着<code> Action </code>的属性更改而自动更新。
+     * <p>
+     *  此方法使用其他三种方法来设置和帮助跟踪<code> Action </code>的属性值。
+     * 它使用<code> configurePropertiesFromAction </code>方法立即更改按钮的属性。
+     * 要跟踪<code> Action </code>的属性值的更改,此方法注册<code> createActionPropertyChangeListener </code>返回的<code> Prope
+     * rtyChangeListener </code>。
+     * 它使用<code> configurePropertiesFromAction </code>方法立即更改按钮的属性。
+     *  {@code Action}中的属性更改时,默认的{@code PropertyChangeListener}调用{@code actionPropertyChanged}方法。
+     * 
+     * 
      * @param a the <code>Action</code> for the <code>AbstractButton</code>,
      *          or <code>null</code>
      * @since 1.3
@@ -1136,6 +1399,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * <code>ActionEvent</code> source, or <code>null</code>
      * if no <code>Action</code> is set.
      *
+     * <p>
+     *  如果未设置<code> Action </code>,则为此<code> ActionEvent </code>源或<code> null </code>返回当前设置的<code> Action </code>
+     * 。
+     * 
+     * 
      * @return the <code>Action</code> for this <code>ActionEvent</code>
      *          source, or <code>null</code>
      * @since 1.3
@@ -1152,6 +1420,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Swing Components Supporting <code>Action</code></a> for more
      * details as to which properties this sets.
      *
+     * <p>
+     * 设置此按钮上的属性以匹配指定的<code> Action </code>中的属性。
+     * 有关此设置的属性的更多详细信息,请参阅<a href="Action.html#buttonActions"> Swing组件支持<code> Action </code> </a>。
+     * 
+     * 
      * @param a the <code>Action</code> from which to get the properties,
      *          or <code>null</code>
      * @since 1.3
@@ -1187,6 +1460,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Button subclasses that support mirroring the selected state from
      * the action should override this to return true.  AbstractButton's
      * implementation returns false.
+     * <p>
+     *  支持从操作中镜像选定状态的按钮子类应覆盖此子句以返回true。 AbstractButton的实现返回false。
+     * 
      */
     boolean shouldUpdateSelectedStateFromAction() {
         return false;
@@ -1205,6 +1481,14 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Swing Components Supporting <code>Action</code></a> for a list of
      * the properties this method sets.
      *
+     * <p>
+     *  更新按钮的状态以响应关联操作中的属性更改。
+     * 此方法从{@code createActionPropertyChangeListener}返回的{@code PropertyChangeListener}中调用。子类通常不需要调用这个。
+     * 支持其他{@code Action}属性的子类应该覆盖此类和{@code configurePropertiesFromAction}。
+     * <p>
+     *  请参阅<a href="Action.html#buttonActions"> Swing组件支持<code>操作</code> </a>中的表格,了解此方法设置的属性列表。
+     * 
+     * 
      * @param action the <code>Action</code> associated with this button
      * @param propertyName the name of the property that changed
      * @since 1.6
@@ -1303,6 +1587,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * here, but not wired up.  Subclasses like JToggleButton and
      * JCheckBoxMenuItem make use of it.
      *
+     * <p>
+     *  从动作设置按钮的选择状态。这里定义,但没有接线。像JToggleButton和JCheckBoxMenuItem这样的子类使用它。
+     * 
+     * 
      * @param a the Action
      */
     private void setSelectedFromAction(Action a) {
@@ -1335,6 +1623,12 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * inner class.  If you do the lifetime of the button will be tied to
      * that of the <code>Action</code>.
      *
+     * <p>
+     *  创建并返回一个<code> PropertyChangeListener </code>,它负责侦听来自指定<code> Action </code>的更改并更新相应的属性。
+     * <p>
+     *  <b>警告：</b>如果你子类化这不创建一个匿名内部类。如果你做的按钮的生命周期将绑定到<code> Action </code>。
+     * 
+     * 
      * @param a the button's action
      * @since 1.3
      * @see Action
@@ -1369,6 +1663,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Gets the <code>borderPainted</code> property.
      *
+     * <p>
+     * 获取<code> borderPainted </code>属性。
+     * 
+     * 
      * @return the value of the <code>borderPainted</code> property
      * @see #setBorderPainted
      */
@@ -1386,6 +1684,13 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * the <code>borderPainted</code> property,
      * in which case they ignore this.
      *
+     * <p>
+     *  设置<code> borderPainted </code>属性。如果<code> true </code>并且按钮有边框,则绘制边框。
+     *  <code> borderPainted </code>属性的默认值为<code> true </code>。
+     * <p>
+     *  一些外观和感觉可能不支持<code> borderPainted </code>属性,在这种情况下,他们忽略此。
+     * 
+     * 
      * @param b if true and border property is not <code>null</code>,
      *          the border is painted
      * @see #isBorderPainted
@@ -1408,6 +1713,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Paint the button's border if <code>BorderPainted</code>
      * property is true and the button has a border.
+     * <p>
+     *  如果<code> BorderPainted </code>属性为true并且按钮有边框,则绘制按钮的边框。
+     * 
+     * 
      * @param g the <code>Graphics</code> context in which to paint
      *
      * @see #paint
@@ -1422,6 +1731,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Gets the <code>paintFocus</code> property.
      *
+     * <p>
+     *  获取<code> paintFocus </code>属性。
+     * 
+     * 
      * @return the <code>paintFocus</code> property
      * @see #setFocusPainted
      */
@@ -1437,6 +1750,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Some look and feels might not paint focus state;
      * they will ignore this property.
      *
+     * <p>
+     *  设置<code> paintFocus </code>属性,对于要绘制的焦点状态,它必须是<code> true </code>。
+     *  <code> paintFocus </code>属性的默认值为<code> true </code>。一些外观和感觉可能不画焦点状态;他们将忽略此属性。
+     * 
+     * 
      * @param b if <code>true</code>, the focus state should be painted
      * @see #isFocusPainted
      * @beaninfo
@@ -1457,6 +1775,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Gets the <code>contentAreaFilled</code> property.
      *
+     * <p>
+     *  获取<code> contentAreaFilled </code>属性。
+     * 
+     * 
      * @return the <code>contentAreaFilled</code> property
      * @see #setContentAreaFilled
      */
@@ -1478,6 +1800,16 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * The exact behavior of calling this function varies on a
      * component-by-component and L&amp;F-by-L&amp;F basis.
      *
+     * <p>
+     *  设置<code> contentAreaFilled </code>属性。如果<code> true </code>,该按钮将绘制内容区域。
+     * 如果你想有一个透明按钮,例如一个只有图标的按钮,那么你应该设置为<code> false </code>。不要调用<code> setOpaque(false)</code>。
+     *  <code> contentAreaFilled </code>属性的默认值为<code> true </code>。
+     * <p>
+     *  此函数可能会导致组件的opaque属性更改。
+     * <p>
+     *  调用该函数的确切行为在逐个组件和L&amp; F-L&amp; F的基础上变化。
+     * 
+     * 
      * @param b if true, the content should be filled; if false
      *          the content area is not filled
      * @see #isContentAreaFilled
@@ -1501,6 +1833,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Gets the <code>rolloverEnabled</code> property.
      *
+     * <p>
+     *  获取<code> rolloverEnabled </code>属性。
+     * 
+     * 
      * @return the value of the <code>rolloverEnabled</code> property
      * @see #setRolloverEnabled
      */
@@ -1516,6 +1852,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Some look and feels might not implement rollover effects;
      * they will ignore this property.
      *
+     * <p>
+     * 设置<code> rolloverEnabled </code>属性,它必须是<code> true </code>才会发生翻转效果。
+     *  <code> rolloverEnabled </code>属性的默认值为<code> false </code>。一些外观和感觉可能不会实现翻转效果;他们将忽略此属性。
+     * 
+     * 
      * @param b if <code>true</code>, rollover effects should be painted
      * @see #isRolloverEnabled
      * @beaninfo
@@ -1535,6 +1876,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the keyboard mnemonic from the the current model.
+     * <p>
+     *  从当前模型返回键盘助记符。
+     * 
+     * 
      * @return the keyboard mnemonic from the model
      */
     public int getMnemonic() {
@@ -1562,6 +1907,16 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * the button's label string, the first occurrence of it
      * will be underlined to indicate the mnemonic to the user.
      *
+     * <p>
+     *  在当前模型上设置键盘助记符。助记符是当与外观和感觉无调剂修饰符(通常为Alt)组合时,如果焦点被包含在该按钮的祖先窗口内的某个位置,则激活该按钮的键。
+     * <p>
+     *  助记符必须对应于键盘上的单个键,并且应使用<code> java.awt.event.KeyEvent </code>中定义的<code> VK_XXX </code>键代码之一来指定。
+     * 这些代码和国际键盘的更广泛的代码可以通过<code> java.awt.event.KeyEvent.getExtendedKeyCodeForChar </code>获得。
+     * 助记符不区分大小写,因此具有相应键码的键事件将导致按钮被激活,无论是否按下Shift键。
+     * <p>
+     *  如果在按钮的标签字符串中找到由助记符定义的字符,则它的第一次出现将被加下划线以向用户指示助记符。
+     * 
+     * 
      * @param mnemonic the key code which represents the mnemonic
      * @see     java.awt.event.KeyEvent
      * @see     #setDisplayedMnemonicIndex
@@ -1583,6 +1938,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * to handle character values which fall between 'a' and 'z' or
      * 'A' and 'Z'.
      *
+     * <p>
+     *  此方法现在已过时,请使用<code> setMnemonic(int)</code>为按钮设置助记符。此方法仅设计为处理在'a'和'z'或'A'和'Z'之间的字符值。
+     * 
+     * 
      * @param mnemonic  a char specifying the mnemonic value
      * @see #setMnemonic(int)
      * @beaninfo
@@ -1613,6 +1972,15 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * <code>setDisplayedMnemonicIndex(5)</code> after invoking
      * <code>setMnemonic(KeyEvent.VK_A)</code>.
      *
+     * <p>
+     * 提供关于文本中应当装饰哪个字符以表示助记符的外观和感觉的提示。不是所有的外观和感觉可能支持这一点。值-1表示没有助记符,助记符不包含在字符串中,或​​者开发人员不希望显示助记符。
+     * <p>
+     *  此值将更新为与助记符更改相关的属性(例如助记符本身,文本...)。如果你不希望默认字符被加下划线,你应该只需要调用这个。
+     * 例如,如果文本是"另存为",助记符为'a',并且您想要将'A'装饰为'保存<u> A </u>',则必须调用调用<code> setMnemonic(KeyEvent.VK_A)</code>之后的<code>
+     *  setDisplayedMnemonicIndex(5)</code>。
+     *  此值将更新为与助记符更改相关的属性(例如助记符本身,文本...)。如果你不希望默认字符被加下划线,你应该只需要调用这个。
+     * 
+     * 
      * @since 1.4
      * @param index Index into the String to underline
      * @exception IllegalArgumentException will be thrown if <code>index</code>
@@ -1649,6 +2017,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Returns the character, as an index, that the look and feel should
      * provide decoration for as representing the mnemonic character.
      *
+     * <p>
+     *  返回作为索引的字符,外观应该提供装饰作为代表助记符的字符。
+     * 
+     * 
      * @since 1.4
      * @return index representing mnemonic character
      * @see #setDisplayedMnemonicIndex
@@ -1662,6 +2034,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * is called when either text or mnemonic changes. The new
      * value of the displayedMnemonicIndex property is the index
      * of the first occurrence of mnemonic in text.
+     * <p>
+     *  更新displayedMnemonicIndex属性。当文本或助记符更改时调用此方法。 displayedMnemonicIndex属性的新值是文本中第一次出现助记符的索引。
+     * 
      */
     private void updateDisplayedMnemonicIndex(String text, int mnemonic) {
         setDisplayedMnemonicIndex(
@@ -1672,6 +2047,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Brings the mnemonic property in accordance with model's mnemonic.
      * This is called when model's mnemonic changes. Also updates the
      * displayedMnemonicIndex property.
+     * <p>
+     *  根据模型的助记符提供助记符属性。这在模型的助记符改变时被调用。还更新displayedMnemonicIndex属性。
+     * 
      */
     private void updateMnemonicProperties() {
         int newMnemonic = model.getMnemonic();
@@ -1699,6 +2077,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * in a dialog), this threshhold should be set to an appropriate
      * positive value.
      *
+     * <p>
+     * 设置鼠标按下事件之间按钮生成相应操作事件所需的时间(以毫秒为单位)。在初始鼠标按压发生(和动作事件生成)之后,小于阈值的间隔上发生的任何后续鼠标按压事件将被忽略,并且不生成相应的动作事件。
+     * 默认情况下,阈值为0,这意味着对于每个鼠标按下,无论鼠标点击发生多快,都会触发一个动作事件。在不希望这种行为的按钮中(例如,对话框中的"确定"按钮),该阈值应设置为适当的正值。
+     * 
+     * 
      * @see #getMultiClickThreshhold
      * @param threshhold the amount of time required between mouse
      *        press events to generate corresponding action events
@@ -1717,6 +2100,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * mouse press events for the button to generate the corresponding
      * action events.
      *
+     * <p>
+     *  获取鼠标按下事件之间按钮生成相应操作事件所需的时间(以毫秒为单位)。
+     * 
+     * 
      * @see #setMultiClickThreshhold
      * @return the amount of time required between mouse press events
      *         to generate corresponding action events
@@ -1728,6 +2115,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the model that this button represents.
+     * <p>
+     *  返回此按钮代表的模型。
+     * 
+     * 
      * @return the <code>model</code> property
      * @see #setModel
      */
@@ -1737,6 +2128,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the model that this button represents.
+     * <p>
+     *  设置此按钮代表的模型。
+     * 
+     * 
      * @param newModel the new <code>ButtonModel</code>
      * @see #getModel
      * @beaninfo
@@ -1788,6 +2183,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Returns the L&amp;F object that renders this component.
+     * <p>
+     *  返回呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @return the ButtonUI object
      * @see #setUI
      */
@@ -1798,6 +2197,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Sets the L&amp;F object that renders this component.
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @param ui the <code>ButtonUI</code> L&amp;F object
      * @see #getUI
      * @beaninfo
@@ -1827,6 +2230,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      *      setUI((ButtonUI)UIManager.getUI(
      *          "ButtonUI", "javax.swing.plaf.basic.BasicButtonUI", this));
      * </pre>
+     * <p>
+     *  将UI属性重置为当前外观的值。 <code> AbstractButton </code>的子类型应该覆盖此更新UI。例如,<code> JButton </code>可能会执行以下操作：
+     * <pre>
+     *  setUI((ButtonUI)UIManager.getUI("ButtonUI","javax.swing.plaf.basic.BasicButtonUI",this));
+     * </pre>
      */
     public void updateUI() {
     }
@@ -1837,6 +2245,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * {@link java.awt.Container#addImpl(Component, Object, int)}
      * for a complete description of this method.
      *
+     * <p>
+     *  在指定索引处将指定的组件添加到此容器中,有关此方法的完整说明,请参阅{@link java.awt.Container#addImpl(Component,Object,int)}。
+     * 
+     * 
      * @param     comp the component to be added
      * @param     constraints an object expressing layout constraints
      *                 for this component
@@ -1861,6 +2273,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * {@link java.awt.Container#setLayout(LayoutManager)}
      * for a complete description of this method.
      *
+     * <p>
+     * 设置此容器的布局管理器,有关此方法的完整说明,请参阅{@link java.awt.Container#setLayout(LayoutManager)}。
+     * 
+     * 
      * @param mgr the specified layout manager
      * @since 1.5
      */
@@ -1871,6 +2287,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Adds a <code>ChangeListener</code> to the button.
+     * <p>
+     *  向按钮添加<code> ChangeListener </code>。
+     * 
+     * 
      * @param l the listener to be added
      */
     public void addChangeListener(ChangeListener l) {
@@ -1879,6 +2299,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Removes a ChangeListener from the button.
+     * <p>
+     *  从按钮中删除ChangeListener。
+     * 
+     * 
      * @param l the listener to be removed
      */
     public void removeChangeListener(ChangeListener l) {
@@ -1889,6 +2313,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Returns an array of all the <code>ChangeListener</code>s added
      * to this AbstractButton with addChangeListener().
      *
+     * <p>
+     *  返回使用addChangeListener()添加到此AbstractButton的所有<code> ChangeListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ChangeListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -1901,6 +2329,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Notifies all listeners that have registered interest for
      * notification on this event type.  The event instance
      * is lazily created.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。延迟创建事件实例。
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireStateChanged() {
@@ -1920,6 +2352,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Adds an <code>ActionListener</code> to the button.
+     * <p>
+     *  向按钮添加<code> ActionListener </code>。
+     * 
+     * 
      * @param l the <code>ActionListener</code> to be added
      */
     public void addActionListener(ActionListener l) {
@@ -1932,6 +2368,11 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * for the button, then the <code>Action</code>
      * is set to <code>null</code>.
      *
+     * <p>
+     *  从按钮中删除<code> ActionListener </code>。
+     * 如果侦听器是当前为该按钮设置的<code> Action </code>,则<code> Action </code>设置为<code> null </code>。
+     * 
+     * 
      * @param l the listener to be removed
      */
     public void removeActionListener(ActionListener l) {
@@ -1946,6 +2387,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Returns an array of all the <code>ActionListener</code>s added
      * to this AbstractButton with addActionListener().
      *
+     * <p>
+     *  返回通过addActionListener()添加到此AbstractButton的所有<code> ActionListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ActionListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -1959,6 +2404,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * can override this to return another <code>ChangeListener</code>
      * implementation.
      *
+     * <p>
+     *  想要处理<code> ChangeEvents </code>的子类可以覆盖此方法,以返回另一个<code> ChangeListener </code>实现。
+     * 
+     * 
      * @return the new <code>ChangeListener</code>
      */
     protected ChangeListener createChangeListener() {
@@ -1976,6 +2425,12 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  将<code> ChangeListener </code>扩展为可序列化。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     @SuppressWarnings("serial")
     protected class ButtonChangeListener implements ChangeListener, Serializable {
@@ -1996,6 +2451,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * is lazily created using the <code>event</code>
      * parameter.
      *
+     * <p>
+     * 通知所有已注册有关此事件类型的通知的收件人。事件实例使用<code> event </code>参数进行延迟创建。
+     * 
+     * 
      * @param event  the <code>ActionEvent</code> object
      * @see EventListenerList
      */
@@ -2029,6 +2488,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * notification on this event type.  The event instance
      * is lazily created using the <code>event</code> parameter.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用<code> event </code>参数进行延迟创建。
+     * 
+     * 
      * @param event  the <code>ItemEvent</code> object
      * @see EventListenerList
      */
@@ -2082,6 +2545,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Enables (or disables) the button.
+     * <p>
+     *  启用(或禁用)按钮。
+     * 
+     * 
      * @param b  true to enable the button, otherwise false
      */
     public void setEnabled(boolean b) {
@@ -2097,6 +2564,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Returns the label text.
      *
+     * <p>
+     *  返回标签文本。
+     * 
+     * 
      * @return a <code>String</code> containing the label
      * @deprecated - Replaced by <code>getText</code>
      */
@@ -2108,6 +2579,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
     /**
      * Sets the label text.
      *
+     * <p>
+     *  设置标签文本。
+     * 
+     * 
      * @param label  a <code>String</code> containing the text
      * @deprecated - Replaced by <code>setText(text)</code>
      * @beaninfo
@@ -2121,6 +2596,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Adds an <code>ItemListener</code> to the <code>checkbox</code>.
+     * <p>
+     *  在<code>复选框</code>中添加<code> ItemListener </code>。
+     * 
+     * 
      * @param l  the <code>ItemListener</code> to be added
      */
     public void addItemListener(ItemListener l) {
@@ -2129,6 +2608,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
     /**
      * Removes an <code>ItemListener</code> from the button.
+     * <p>
+     *  从按钮中删除<code> ItemListener </code>。
+     * 
+     * 
      * @param l the <code>ItemListener</code> to be removed
      */
     public void removeItemListener(ItemListener l) {
@@ -2139,6 +2622,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Returns an array of all the <code>ItemListener</code>s added
      * to this AbstractButton with addItemListener().
      *
+     * <p>
+     *  返回使用addItemListener()添加到此AbstractButton的所有<code> ItemListener </code>数组。
+     * 
+     * 
      * @return all of the <code>ItemListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -2151,6 +2638,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Returns an array (length 1) containing the label or
      * <code>null</code> if the button is not selected.
      *
+     * <p>
+     *  如果未选择此按钮,则返回包含标签或<code> null </code>的数组(长度1)。
+     * 
+     * 
      * @return an array containing 1 Object: the text of the button,
      *         if the item is selected; otherwise <code>null</code>
      */
@@ -2185,6 +2676,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * <code>Image</code> is not equal to the
      * passed in <code>Image</code> <code>img</code>.
      *
+     * <p>
+     *  如果当前<code> Icon </code>的<code> Image </code>不等于<code> Image </code> <code> img </code>中传递的值, 。
+     * 
+     * 
      * @param img  the <code>Image</code> to be compared
      * @param infoflags flags used to repaint the button when the image
      *          is updated and which determine how much is to be painted
@@ -2265,6 +2760,13 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * Overriding <code>paramString</code> to provide information about the
      * specific new aspects of the JFC components.
      *
+     * <p>
+     *  返回此<code> AbstractButton </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * <P>
+     *  覆盖<code> paramString </code>以提供有关JFC组件的特定新方面的信息。
+     * 
+     * 
      * @return  a string representation of this <code>AbstractButton</code>
      */
     protected String paramString() {
@@ -2382,6 +2884,13 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 这个类实现了对<code> AbstractButton </code>类的辅助功能支持。它提供了适用于按钮和菜单项用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @since 1.4
      */
     protected abstract class AccessibleAbstractButton
@@ -2391,6 +2900,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns the accessible name of this object.
          *
+         * <p>
+         *  返回此对象的可访问名称。
+         * 
+         * 
          * @return the localized name of the object -- can be
          *              <code>null</code> if this
          *              object does not have a name
@@ -2413,6 +2926,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Get the AccessibleIcons associated with this object if one
          * or more exist.  Otherwise return null.
+         * <p>
+         *  如果一个或多个存在,获取与此对象相关联的AccessibleIcons。否则返回null。
+         * 
+         * 
          * @since 1.3
          */
         public AccessibleIcon [] getAccessibleIcon() {
@@ -2431,6 +2948,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Get the state set of this object.
          *
+         * <p>
+         *  获取此对象的状态集。
+         * 
+         * 
          * @return an instance of AccessibleState containing the current state
          * of the object
          * @see AccessibleState
@@ -2455,6 +2976,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Get the AccessibleRelationSet associated with this object if one
          * exists.  Otherwise return null.
+         * <p>
+         *  获取与此对象关联的AccessibleRelationSet(如果存在)。否则返回null。
+         * 
+         * 
          * @see AccessibleRelation
          * @since 1.3
          */
@@ -2497,6 +3022,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * return this object, which is responsible for implementing the
          * AccessibleAction interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleAction。在为该类实现Java辅助功能API时,返回此对象,该对象负责代表自身实现AccessibleAction接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleAction getAccessibleAction() {
@@ -2509,6 +3038,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * return this object, which is responsible for implementing the
          * AccessibleValue interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleValue。在为该类实现Java Accessibility API时,返回此对象,该对象负责代表自身实现AccessibleValue接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleValue getAccessibleValue() {
@@ -2520,6 +3053,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * default behavior of a button is to have one action - toggle
          * the button.
          *
+         * <p>
+         *  返回此对象中可用的操作数。按钮的默认行为是具有一个动作 - 切换按钮。
+         * 
+         * 
          * @return 1, the number of Actions in this object
          */
         public int getAccessibleActionCount() {
@@ -2529,6 +3066,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Return a description of the specified action of the object.
          *
+         * <p>
+         * 返回对象的指定操作的描述。
+         * 
+         * 
          * @param i zero-based index of the actions
          */
         public String getAccessibleActionDescription(int i) {
@@ -2542,6 +3083,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Perform the specified Action on the object
          *
+         * <p>
+         *  对对象执行指定的Action
+         * 
+         * 
          * @param i zero-based index of actions
          * @return true if the the action was performed; else false.
          */
@@ -2557,6 +3102,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Get the value of this object as a Number.
          *
+         * <p>
+         *  获取此对象的值作为数字。
+         * 
+         * 
          * @return An Integer of 0 if this isn't selected or an Integer of 1 if
          * this is selected.
          * @see AbstractButton#isSelected
@@ -2572,6 +3121,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Set the value of this object as a Number.
          *
+         * <p>
+         *  将此对象的值设置为Number。
+         * 
+         * 
          * @return True if the value was set.
          */
         public boolean setCurrentAccessibleValue(Number n) {
@@ -2591,6 +3144,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Get the minimum value of this object as a Number.
          *
+         * <p>
+         *  获取此对象的最小值作为数字。
+         * 
+         * 
          * @return an Integer of 0.
          */
         public Number getMinimumAccessibleValue() {
@@ -2600,6 +3157,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Get the maximum value of this object as a Number.
          *
+         * <p>
+         *  获取此对象的最大值作为数字。
+         * 
+         * 
          * @return An Integer of 1.
          */
         public Number getMaximumAccessibleValue() {
@@ -2628,6 +3189,12 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * is a valid top-level window) for this method to be able
          * to return a meaningful value.
          *
+         * <p>
+         *  给定一个点在局部坐标,返回该点下的字符的从零开始的索引。如果该点无效,则此方法返回-1。
+         * 
+         *  注意：AbstractButton必须具有有效的大小(例如,已经添加到父容器,其祖先容器是有效的顶级窗口),以使此方法能够返回有意义的值。
+         * 
+         * 
          * @param p the Point in local coordinates
          * @return the zero-based index of the character under Point p; if
          * Point is invalid returns -1.
@@ -2660,6 +3227,12 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * is a valid top-level window) for this method to be able
          * to return a meaningful value.
          *
+         * <p>
+         *  确定给定索引处字符的边界框到字符串中。边界在本地坐标中返回。如果索引无效,则返回一个空的矩形。
+         * 
+         *  注意：AbstractButton必须具有有效的大小(例如,已经添加到父容器,其祖先容器是有效的顶级窗口),以使此方法能够返回有意义的值。
+         * 
+         * 
          * @param i the index into the String
          * @return the screen coordinates of the character's the bounding box,
          * if index is invalid returns an empty rectangle.
@@ -2689,6 +3262,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Return the number of characters (valid indicies)
          *
+         * <p>
+         *  返回字符数(有效指示)
+         * 
+         * 
          * @return the number of characters
          * @since 1.3
          */
@@ -2709,6 +3286,12 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          *
          * Note: That to the right of the caret will have the same index
          * value as the offset (the caret is between two characters).
+         * <p>
+         *  返回插入符号的从零开始的偏移量。
+         * 
+         *  注意：插入符右侧的索引值与偏移量相同(插入符号在两个字符之间)。
+         * 
+         * 
          * @return the zero-based offset of the caret.
          * @since 1.3
          */
@@ -2720,6 +3303,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns the String at a given index.
          *
+         * <p>
+         *  返回给定索引处的String。
+         * 
+         * 
          * @param part the AccessibleText.CHARACTER, AccessibleText.WORD,
          * or AccessibleText.SENTENCE to retrieve
          * @param index an index within the text &gt;= 0
@@ -2767,6 +3354,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns the String after a given index.
          *
+         * <p>
+         *  返回给定索引后的String。
+         * 
+         * 
          * @param part the AccessibleText.CHARACTER, AccessibleText.WORD,
          * or AccessibleText.SENTENCE to retrieve
          * @param index an index within the text &gt;= 0
@@ -2831,6 +3422,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns the String before a given index.
          *
+         * <p>
+         *  返回给定索引之前的String。
+         * 
+         * 
          * @param part the AccessibleText.CHARACTER, AccessibleText.WORD,
          *   or AccessibleText.SENTENCE to retrieve
          * @param index an index within the text &gt;= 0
@@ -2891,6 +3486,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Return the AttributeSet for a given character at a given index
          *
+         * <p>
+         *  返回给定字符在给定索引的AttributeSet
+         * 
+         * 
          * @param i the zero-based index into the text
          * @return the AttributeSet of the character
          * @since 1.3
@@ -2915,6 +3514,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * If there is no selection, but there is
          * a caret, the start and end offsets will be the same.
          *
+         * <p>
+         * 返回所选文本内的起始偏移量。如果没有选择,但有一个插入符号,开始和结束偏移将是相同的。
+         * 
+         * 
          * @return the index into the text of the start of the selection
          * @since 1.3
          */
@@ -2928,6 +3531,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
          * If there is no selection, but there is
          * a caret, the start and end offsets will be the same.
          *
+         * <p>
+         *  返回所选文本内的结束偏移量。如果没有选择,但有一个插入符号,开始和结束偏移将是相同的。
+         * 
+         * 
          * @return the index into the text of the end of the selection
          * @since 1.3
          */
@@ -2939,6 +3546,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns the portion of the text that is selected.
          *
+         * <p>
+         *  返回所选文本的部分。
+         * 
+         * 
          * @return the String portion of the text that is selected
          * @since 1.3
          */
@@ -2950,6 +3561,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /*
          * Returns the text substring starting at the specified
          * offset with the specified length.
+         * <p>
+         *  返回以指定长度在指定偏移处开始的文本子字符串。
+         * 
          */
         private String getText(int offset, int length)
             throws BadLocationException {
@@ -2967,6 +3581,9 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
 
         /*
          * Returns the bounding rectangle for the component text.
+         * <p>
+         *  返回组件文本的边界矩形。
+         * 
          */
         private Rectangle getTextRectangle() {
 
@@ -3010,6 +3627,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns the AccessibleExtendedComponent
          *
+         * <p>
+         *  返回AccessibleExtendedComponent
+         * 
+         * 
          * @return the AccessibleExtendedComponent
          */
         AccessibleExtendedComponent getAccessibleExtendedComponent() {
@@ -3019,6 +3640,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns the tool tip text
          *
+         * <p>
+         *  返回工具提示文本
+         * 
+         * 
          * @return the tool tip text, if supported, of the object;
          * otherwise, null
          * @since 1.4
@@ -3030,6 +3655,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns the titled border text
          *
+         * <p>
+         *  返回标题边框文本
+         * 
+         * 
          * @return the titled border text, if supported, of the object;
          * otherwise, null
          * @since 1.4
@@ -3041,6 +3670,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
         /**
          * Returns key bindings associated with this object
          *
+         * <p>
+         *  返回与此对象关联的键绑定
+         * 
+         * 
          * @return the key bindings, if supported, of the object;
          * otherwise, null
          * @see AccessibleKeyBinding
@@ -3064,6 +3697,10 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
             /**
              * Returns the number of key bindings for this object
              *
+             * <p>
+             *  返回此对象的键绑定数
+             * 
+             * 
              * @return the zero-based number of key bindings for this object
              */
             public int getAccessibleKeyBindingCount() {
@@ -3089,6 +3726,12 @@ public abstract class AbstractButton extends JComponent implements ItemSelectabl
              * }
              * </code></nf>
              *
+             * <p>
+             *  返回此对象的键绑定。返回的值是一个java.lang.Object,它必须根据键的底层实现转换为适当的类型。
+             * 例如,如果返回的对象是javax.swing.KeyStroke,则此方法的用户应执行以下操作：<nf> <code> Component c = <获取具有键绑定的组件> AccessibleCont
+             * ext ac = c.getAccessibleContext (); AccessibleKeyBinding akb = ac.getAccessibleKeyBinding(); for(int 
+             * i = 0; i <akb.getAccessibleKeyBindingCount(); i ++){Object o = akb.getAccessibleKeyBinding(i); if(o instanceof javax.swing.KeyStroke){javax.swing.KeyStroke keyStroke =(javax.swing.KeyStroke)o;。
+             * 
              * @param i zero-based index of the key bindings
              * @return a javax.lang.Object which specifies the key binding
              * @exception IllegalArgumentException if the index is

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -72,6 +73,11 @@ import com.sun.corba.se.impl.orbutil.ORBUtility;
  * is in place, we want this operation to convert string to INSURL, which has mainly
  * a public resolver method that returns an object reference.
  *
+ * <p>
+ *  此类提供了一个将CORBA INS URL字符串转换为CORBA对象引用的操作。它最终将变得可扩展,但现在它简单地封装了现有的实现。
+ * 一旦完全可扩展性到位,我们希望此操作将字符串转换为INSURL,它主要有一个返回对象引用的公共解析器方法。
+ * 
+ * 
  * @author  Hemanth
  * @author  Ken
  */
@@ -104,6 +110,9 @@ public class INSURLOperationImpl implements Operation
 
     /** This static method takes a Stringified IOR and converts it into IOR object.
       * It is the caller's responsibility to only pass strings that start with "IOR:".
+      * <p>
+      *  调用者只负责传递以"IOR："开头的字符串。
+      * 
       */
     private org.omg.CORBA.Object getIORFromString( String str )
     {
@@ -153,6 +162,10 @@ public class INSURLOperationImpl implements Operation
     /**
      *  resolves a corbaloc: url that is encapsulated in a CorbalocURL object.
      *
+     * <p>
+     *  解析封装在CorbalocURL对象中的corbaloc：url。
+     * 
+     * 
      *  @return the CORBA.Object if resolution is successful
      */
     private org.omg.CORBA.Object resolveCorbaloc(
@@ -172,6 +185,10 @@ public class INSURLOperationImpl implements Operation
     /**
      *  resolves a corbaname: url that is encapsulated in a CorbanameURL object.
      *
+     * <p>
+     *  解析封装在CorbanameURL对象中的corbaname：url。
+     * 
+     * 
      *  @return the CORBA.Object if resolution is successful
      */
     private org.omg.CORBA.Object resolveCorbaname( CorbanameURL theCorbaName ) {
@@ -212,6 +229,10 @@ public class INSURLOperationImpl implements Operation
     /**
      *  This is an internal method to get the IOR from the CorbalocURL object.
      *
+     * <p>
+     *  这是从CorbalocURL对象获取IOR的内部方法。
+     * 
+     * 
      *  @return the CORBA.Object if resolution is successful
      */
      private org.omg.CORBA.Object getIORUsingCorbaloc( INSURL corbalocObject )
@@ -298,6 +319,11 @@ public class INSURLOperationImpl implements Operation
      *  may not be Persistent in all the implementations.
      *  _REVISIT_ to clear the rootNamingContext in case of COMM_FAILURE.
      *
+     * <p>
+     *  这是corbaname：resolution所必需的。目前,我们没有缓存RootNamingContext作为对rootNamingContext的引用,在所有实现中可能不是Persistent。
+     *  _REVISIT_在COMM_FAILURE的情况下清除rootNamingContext。
+     * 
+     * 
      *  @return the org.omg.COSNaming.NamingContextExt if resolution is
      *   successful
      *
@@ -320,6 +346,7 @@ public class INSURLOperationImpl implements Operation
     /**
      *  A utility method to clear the RootNamingContext, if there is an
      *  exception in resolving CosNaming:Name from the RootNamingContext,
+     * <p>
      */
     private void clearRootNamingContextCache( ) {
         synchronized( rootContextCacheLock ) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,16 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ ************** ********************************************
+ * ******** **** * COPYRIGHT(c)Eastman Kodak Company,1997 *** *根据United *** *国家法典第17章的未发表的作品。
+ * 版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ * 版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package java.awt.color;
@@ -83,6 +94,37 @@ import sun.java2d.cmm.ProfileDeferralInfo;
  * The inverse transform is performed by converting PCS XYZ components to linear
  * RGB components through the inverse of the above 3x3 matrix, and then converting
  * linear RGB to device RGB through inverses of the TRCs.
+ * <p>
+ *  ICC_ProfileRGB类是ICC_Profile类的子类,表示满足以下条件的概要文件：
+ * <ul>
+ *  <li>个人资料的颜色空间类型为RGB。
+ * </li> <li>个人资料包含<code> redColorantTag </code>,<code> greenColorantTag </code> code> redTRCTag </code>
+ * ,<code> greenTRCTag </code>,<code> blueTRCTag </code>和<code> mediaWhitePointTag </code>。
+ *  <li>个人资料的颜色空间类型为RGB。
+ * </ul>
+ *  当满足这些条件时,<code> ICC_Profile </code> <code> getInstance </code>方法将返回一个<code> ICC_ProfileRGB </code>对象
+ * 。
+ * 三分量,基于矩阵的输入分布和RGB显示分布是这种类型的分布的示例。
+ * <p>
+ * 此配置文件类提供颜色变换矩阵和查找表,Java或本机方法在某些情况下可以直接使用以优化颜色转换。
+ * <p>
+ *  为了从设备配置文件颜色空间变换到CIEXYZ配置文件连接空间,首先通过相应的色调再现曲线(TRC)的查找来将每个设备颜色分量线性化。
+ * 使用从RGB着色剂构造的3×3矩阵将所得的线性RGB分量转换为CIEXYZ PCS。
+ * <pre>
+ * 
+ *  &nbsp; linearR = redTRC [deviceR]
+ * 
+ *  &nbsp; linearG = greenTRC [deviceG]
+ * 
+ *  &nbsp; linearB = blueTRC [deviceB]
+ * 
+ *  &nbsp; _ _ _ _ _ _#&nbsp; [PCSX] [redColorantX greenColorantX blueColorantX] [linearR]&nbsp; [] [] [
+ * ]&nbsp; [PCSY] = [redColorantY greenColorantY blueColorantY] [linearG]&nbsp; [] ; [_ PCSZ _] [_ redCo
+ * lorantZ greenColorantZ blueColorantZ _] [_ linearB _]。
+ * 
+ * </pre>
+ *  通过上述3×3矩阵的逆,将PCS XYZ分量转换为线性RGB分量,然后通过TRC的逆转换线性RGB到设备RGB,执行逆变换。
+ * 
  */
 
 
@@ -94,16 +136,25 @@ extends ICC_Profile {
 
     /**
      * Used to get a gamma value or TRC for the red component.
+     * <p>
+     *  用于获取红色分量的伽马值或TRC。
+     * 
      */
     public static final int REDCOMPONENT = 0;
 
     /**
      * Used to get a gamma value or TRC for the green component.
+     * <p>
+     *  用于获取绿色组件的gamma值或TRC。
+     * 
      */
     public static final int GREENCOMPONENT = 1;
 
     /**
      * Used to get a gamma value or TRC for the blue component.
+     * <p>
+     * 用于获取蓝色分量的伽马值或TRC。
+     * 
      */
     public static final int BLUECOMPONENT = 2;
 
@@ -111,6 +162,10 @@ extends ICC_Profile {
     /**
      * Constructs an new <code>ICC_ProfileRGB</code> from a CMM ID.
      *
+     * <p>
+     *  从CMM ID构造新的<code> ICC_ProfileRGB </code>。
+     * 
+     * 
      * @param p The CMM ID for the profile.
      *
      */
@@ -122,6 +177,10 @@ extends ICC_Profile {
      * Constructs a new <code>ICC_ProfileRGB</code> from a
      * ProfileDeferralInfo object.
      *
+     * <p>
+     *  从ProfileDeferralInfo对象构造新的<code> ICC_ProfileRGB </code>。
+     * 
+     * 
      * @param pdi
      */
     ICC_ProfileRGB(ProfileDeferralInfo pdi) {
@@ -133,6 +192,10 @@ extends ICC_Profile {
      * Returns an array that contains the components of the profile's
      * <CODE>mediaWhitePointTag</CODE>.
      *
+     * <p>
+     *  返回包含配置文件<CODE> mediaWhitePointTag </CODE>的组件的数组。
+     * 
+     * 
      * @return A 3-element <CODE>float</CODE> array containing the x, y,
      * and z components of the profile's <CODE>mediaWhitePointTag</CODE>.
      */
@@ -150,6 +213,13 @@ extends ICC_Profile {
      * direction of the profile--from the profile color space
      * to the CIEXYZ PCS.
      *
+     * <p>
+     *  返回从配置文件的<CODE> redColorantTag </CODE>,<CODE> greenColorantTag </CODE>和<CODE> blueColorantTag </CODE>
+     * 的X,Y和Z分量构造的3x3 <CODE> float </CODE> CODE>。
+     * <p>
+     *  此矩阵可用于从轮廓颜色空间到CIEXYZ PCS的轮廓的正向方向上的颜色变换。
+     * 
+     * 
      * @return A 3x3 <CODE>float</CODE> array that contains the x, y, and z
      * components of the profile's <CODE>redColorantTag</CODE>,
      * <CODE>greenColorantTag</CODE>, and <CODE>blueColorantTag</CODE>.
@@ -191,6 +261,17 @@ extends ICC_Profile {
      * &nbsp;        linearComponent = deviceComponent
      *
      *</pre>
+     * <p>
+     *  返回表示特定组件的色调再现曲线(TRC)的伽马值。组件参数必须是REDCOMPONENT,GREENCOMPONENT或BLUECOMPONENT中的一个。
+     * <p>
+     *  如果配置文件将相应组件的TRC表示为表而不是单个gamma值,则会抛出异常。在这种情况下,实际的表可以通过{@link #getTRC(int)}方法获得。
+     * 当使用伽马值时,线性分量(R,G或B)计算如下：。
+     * <pre>
+     * 
+     *  &nbsp; gamma&nbsp; linearComponent = deviceComponent
+     * 
+     * /pre>
+     * 
      * @param component The <CODE>ICC_ProfileRGB</CODE> constant that
      * represents the component whose TRC you want to retrieve
      * @return the gamma value as a float.
@@ -244,6 +325,8 @@ extends ICC_Profile {
      * throws an exception.  In this case, the {@link #getGamma(int)}
      * method should be used to get the gamma value.
      *
+     * <p>
+     * 
      * @param component The <CODE>ICC_ProfileRGB</CODE> constant that
      * represents the component whose TRC you want to retrieve:
      * <CODE>REDCOMPONENT</CODE>, <CODE>GREENCOMPONENT</CODE>, or

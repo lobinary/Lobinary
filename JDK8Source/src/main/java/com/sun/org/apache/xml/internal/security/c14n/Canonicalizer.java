@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.c14n;
 
@@ -49,6 +58,8 @@ import org.xml.sax.InputSource;
 
 /**
  *
+ * <p>
+ * 
  * @author Christian Geuer-Pollmann
  */
 public class Canonicalizer {
@@ -59,42 +70,66 @@ public class Canonicalizer {
     /**
      * XPath Expression for selecting every node and continuous comments joined
      * in only one node
+     * <p>
+     *  XPath表达式,用于选择只在一个节点中连接的每个节点和连续注释
+     * 
      */
     public static final String XPATH_C14N_WITH_COMMENTS_SINGLE_NODE =
         "(.//. | .//@* | .//namespace::*)";
 
     /**
      * The URL defined in XML-SEC Rec for inclusive c14n <b>without</b> comments.
+     * <p>
+     *  在XML-SEC Rec中为包含c14n <b>而不包含</b>注释定义的URL。
+     * 
      */
     public static final String ALGO_ID_C14N_OMIT_COMMENTS =
         "http://www.w3.org/TR/2001/REC-xml-c14n-20010315";
     /**
      * The URL defined in XML-SEC Rec for inclusive c14n <b>with</b> comments.
+     * <p>
+     *  在XML-SEC Rec中为包含c14n <b>和</b>注释定义的URL。
+     * 
      */
     public static final String ALGO_ID_C14N_WITH_COMMENTS =
         ALGO_ID_C14N_OMIT_COMMENTS + "#WithComments";
     /**
      * The URL defined in XML-SEC Rec for exclusive c14n <b>without</b> comments.
+     * <p>
+     *  在XML-SEC Rec中为排除c14n <b>而不包含</b>注释定义的URL。
+     * 
      */
     public static final String ALGO_ID_C14N_EXCL_OMIT_COMMENTS =
         "http://www.w3.org/2001/10/xml-exc-c14n#";
     /**
      * The URL defined in XML-SEC Rec for exclusive c14n <b>with</b> comments.
+     * <p>
+     *  在XML-SEC Rec中为独占c14n <b>和</b>注释定义的URL。
+     * 
      */
     public static final String ALGO_ID_C14N_EXCL_WITH_COMMENTS =
         ALGO_ID_C14N_EXCL_OMIT_COMMENTS + "WithComments";
     /**
      * The URI for inclusive c14n 1.1 <b>without</b> comments.
+     * <p>
+     *  包含c14n 1.1 <b>的URI,不含</b>注释。
+     * 
      */
     public static final String ALGO_ID_C14N11_OMIT_COMMENTS =
         "http://www.w3.org/2006/12/xml-c14n11";
     /**
      * The URI for inclusive c14n 1.1 <b>with</b> comments.
+     * <p>
+     *  包含c14n 1.1 <b>与</b>注释的URI。
+     * 
      */
     public static final String ALGO_ID_C14N11_WITH_COMMENTS =
         ALGO_ID_C14N11_OMIT_COMMENTS + "#WithComments";
     /**
      * Non-standard algorithm to serialize the physical representation for XML Encryption
+     * <p>
+     *  非标准算法来序列化XML加密的物理表示
+     * 
      */
     public static final String ALGO_ID_C14N_PHYSICAL =
         "http://santuario.apache.org/c14n/physical";
@@ -107,6 +142,10 @@ public class Canonicalizer {
     /**
      * Constructor Canonicalizer
      *
+     * <p>
+     * 构造函数
+     * 
+     * 
      * @param algorithmURI
      * @throws InvalidCanonicalizerException
      */
@@ -128,6 +167,10 @@ public class Canonicalizer {
     /**
      * Method getInstance
      *
+     * <p>
+     *  方法getInstance
+     * 
+     * 
      * @param algorithmURI
      * @return a Canonicalizer instance ready for the job
      * @throws InvalidCanonicalizerException
@@ -140,6 +183,10 @@ public class Canonicalizer {
     /**
      * Method register
      *
+     * <p>
+     *  方法寄存器
+     * 
+     * 
      * @param algorithmURI
      * @param implementingClass
      * @throws AlgorithmAlreadyRegisteredException
@@ -167,6 +214,10 @@ public class Canonicalizer {
     /**
      * Method register
      *
+     * <p>
+     *  方法寄存器
+     * 
+     * 
      * @param algorithmURI
      * @param implementingClass
      * @throws AlgorithmAlreadyRegisteredException
@@ -189,6 +240,9 @@ public class Canonicalizer {
 
     /**
      * This method registers the default algorithms.
+     * <p>
+     *  此方法注册默认算法。
+     * 
      */
     public static void registerDefaultAlgorithms() {
         canonicalizerHash.put(
@@ -224,6 +278,10 @@ public class Canonicalizer {
     /**
      * Method getURI
      *
+     * <p>
+     *  方法getURI
+     * 
+     * 
      * @return the URI defined for this c14n instance.
      */
     public final String getURI() {
@@ -233,6 +291,10 @@ public class Canonicalizer {
     /**
      * Method getIncludeComments
      *
+     * <p>
+     *  方法getIncludeComments
+     * 
+     * 
      * @return true if the c14n respect the comments.
      */
     public boolean getIncludeComments() {
@@ -244,6 +306,10 @@ public class Canonicalizer {
      * canonicalize non-wellformed sequences if they are well-formed after being
      * wrapped with a <CODE>&gt;a&lt;...&gt;/a&lt;</CODE>.
      *
+     * <p>
+     *  此方法尝试规范化给定的字节。如果它们在用<CODE>&gt; a&lt; ...&gt; / a&lt;&lt; / CODE&gt;包装之后形成良好,则可以甚至规范非成形序列。
+     * 
+     * 
      * @param inputBytes
      * @return the result of the canonicalization.
      * @throws CanonicalizationException
@@ -286,6 +352,15 @@ public class Canonicalizer {
          * declaration are used to help create the canonical form, even
          * though the document type declaration is not retained in the
          * canonical form.
+         * <p>
+         *  对于来自规范的一些测试向量,必须有用于ID属性,默认属性值,NMTOKENS等的验证解析器。不幸的是,测试向量确实使用不同的DTD或甚至没有DTD。
+         * 所以Xerces 1.3.1对使用ErrorHandlers触发了很多警告。
+         * 
+         *  规格文字：
+         * 
+         *  输入八位字节流必须包含格式良好的XML文档,但输入不需要验证。然而,属性值归一化和实体参考解析必须根据验证XML处理器的行为来执行。
+         * 此外,在每个元素中创建默认属性的节点(在ATTLIST中用AttValue声明但未指定)。因此,文档类型声明中的声明用于帮助创建规范形式,即使文档类型声明没有保留在规范形式中。
+         * 
          */
         db.setErrorHandler(new com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler());
 
@@ -296,6 +371,10 @@ public class Canonicalizer {
     /**
      * Canonicalizes the subtree rooted by <CODE>node</CODE>.
      *
+     * <p>
+     *  规范化以<CODE>节点</CODE>为根的子树。
+     * 
+     * 
      * @param node The node to canonicalize
      * @return the result of the c14n.
      *
@@ -308,6 +387,10 @@ public class Canonicalizer {
     /**
      * Canonicalizes the subtree rooted by <CODE>node</CODE>.
      *
+     * <p>
+     *  规范化以<CODE>节点</CODE>为根的子树。
+     * 
+     * 
      * @param node
      * @param inclusiveNamespaces
      * @return the result of the c14n.
@@ -322,6 +405,10 @@ public class Canonicalizer {
      * Canonicalizes an XPath node set. The <CODE>xpathNodeSet</CODE> is treated
      * as a list of XPath nodes, not as a list of subtrees.
      *
+     * <p>
+     *  规范化XPath节点集。 <CODE> xpathNodeSet </CODE>被视为XPath节点列表,而不是子树列表。
+     * 
+     * 
      * @param xpathNodeSet
      * @return the result of the c14n.
      * @throws CanonicalizationException
@@ -335,6 +422,10 @@ public class Canonicalizer {
      * Canonicalizes an XPath node set. The <CODE>xpathNodeSet</CODE> is treated
      * as a list of XPath nodes, not as a list of subtrees.
      *
+     * <p>
+     * 规范化XPath节点集。 <CODE> xpathNodeSet </CODE>被视为XPath节点列表,而不是子树列表。
+     * 
+     * 
      * @param xpathNodeSet
      * @param inclusiveNamespaces
      * @return the result of the c14n.
@@ -350,6 +441,10 @@ public class Canonicalizer {
     /**
      * Canonicalizes an XPath node set.
      *
+     * <p>
+     *  规范化XPath节点集。
+     * 
+     * 
      * @param xpathNodeSet
      * @return the result of the c14n.
      * @throws CanonicalizationException
@@ -362,6 +457,10 @@ public class Canonicalizer {
     /**
      * Canonicalizes an XPath node set.
      *
+     * <p>
+     *  规范化XPath节点集。
+     * 
+     * 
      * @param xpathNodeSet
      * @param inclusiveNamespaces
      * @return the result of the c14n.
@@ -377,6 +476,10 @@ public class Canonicalizer {
     /**
      * Sets the writer where the canonicalization ends.  ByteArrayOutputStream
      * if none is set.
+     * <p>
+     *  设置规范化结束的刻录机。 ByteArrayOutputStream如果没有设置。
+     * 
+     * 
      * @param os
      */
     public void setWriter(OutputStream os) {
@@ -386,6 +489,10 @@ public class Canonicalizer {
     /**
      * Returns the name of the implementing {@link CanonicalizerSpi} class
      *
+     * <p>
+     *  返回实现的{@link CanonicalizerSpi}类的名称
+     * 
+     * 
      * @return the name of the implementing {@link CanonicalizerSpi} class
      */
     public String getImplementingCanonicalizerClass() {
@@ -394,6 +501,8 @@ public class Canonicalizer {
 
     /**
      * Set the canonicalizer behaviour to not reset.
+     * <p>
+     *  将规范器行为设置为不重置。
      */
     public void notReset() {
         canonicalizerSpi.reset = false;

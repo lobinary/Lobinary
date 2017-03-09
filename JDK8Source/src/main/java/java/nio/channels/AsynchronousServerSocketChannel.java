@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -88,6 +89,44 @@ import java.io.IOException;
  *  });
  * </pre>
  *
+ * <p>
+ *  用于面向流的监听套接字的异步通道。
+ * 
+ *  <p>通过调用此类的{@link #open open}方法创建异步服务器套接字通道。新创建的异步服务器套接字通道已打开但尚未绑定。
+ * 它可以绑定到本地地址并配置为通过调用{@link #bind(SocketAddress,int)bind}方法侦听连接。
+ * 一旦绑定,{@link #accept(Object,CompletionHandler)accept}方法用于启动接受到通道套接字的连接。
+ * 尝试在未绑定的频道上调用<tt> accept </tt>方法将导致抛出{@link NotYetBoundException}。
+ * 
+ *  <p>此类型的通道可安全地用于多个并发线程,但最多只有一个接受操作可以随时出现。
+ * 如果线程在上一个接受操作完成之前启动一个接受操作,那么将抛出{@link AcceptPendingException}。
+ * 
+ *  <p>使用{@link #setOption(SocketOption,Object)setOption}方法配置套接字选项。此类型的通道支持以下选项：
+ * <blockquote>
+ * <table border summary="Socket options">
+ * <tr>
+ *  <th>选项名称</th> <th>说明</th>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_RCVBUF SO_RCVBUF} </td> <td>套接字接收缓冲区的大小</td>
+ * </tr>
+ * <tr>
+ * <td> {@link java.net.StandardSocketOptions#SO_REUSEADDR SO_REUSEADDR} </td> <td>重新使用地址</td>
+ * </tr>
+ * </table>
+ * </blockquote>
+ *  还可以支持附加(实现特定)选项。
+ * 
+ *  <p> <b>使用示例：</b>
+ * <pre>
+ *  final AsynchronousServerSocketChannel listener = AsynchronousServerSocketChannel.open()。
+ * bind(new InetSocketAddress(5000));。
+ * 
+ *  listener.accept(null,new CompletionHandler&lt; AsynchronousSocketChannel,Void&gt;(){public void completed(AsynchronousSocketChannel ch,Void att){// accept the next connection listener.accept(null,this);。
+ * 
+ *  //处理这个连接句柄(ch); } public void failed(Throwable exc,Void att){...}});
+ * </pre>
+ * 
+ * 
  * @since 1.7
  */
 
@@ -99,6 +138,10 @@ public abstract class AsynchronousServerSocketChannel
     /**
      * Initializes a new instance of this class.
      *
+     * <p>
+     *  初始化此类的新实例。
+     * 
+     * 
      * @param  provider
      *         The provider that created this channel
      */
@@ -109,6 +152,10 @@ public abstract class AsynchronousServerSocketChannel
     /**
      * Returns the provider that created this channel.
      *
+     * <p>
+     *  返回创建此渠道的提供商。
+     * 
+     * 
      * @return  The provider that created this channel
      */
     public final AsynchronousChannelProvider provider() {
@@ -126,6 +173,14 @@ public abstract class AsynchronousServerSocketChannel
      * resulting channel is created by the system-wide default provider, and
      * bound to the <em>default group</em>.
      *
+     * <p>
+     *  打开异步服务器套接字通道。
+     * 
+     *  <p>新频道是通过在创建给定组的{@link java.nio.channels.spi.AsynchronousChannelProvider}对象上调用{@link java.nio.channels.spi.AsynchronousChannelProvider#openAsynchronousServerSocketChannel openAsynchronousServerSocketChannel}
+     * 方法创建的。
+     * 如果group参数为<tt> null </tt>,则生成的频道由系统级默认提供商创建,并绑定到默认组</em>。
+     * 
+     * 
      * @param   group
      *          The group to which the newly constructed channel should be bound,
      *          or <tt>null</tt> for the default group
@@ -155,6 +210,13 @@ public abstract class AsynchronousServerSocketChannel
      * open((AsynchronousChannelGroup)null);
      * </pre></blockquote>
      *
+     * <p>
+     *  打开异步服务器套接字通道。
+     * 
+     *  <p>此方法返回绑定到<em>默认组</em>的异步服务器套接字通道。
+     * 这个方法等同于计算表达式：<blockquote> <pre> open((AsynchronousChannelGroup)null); </pre> </blockquote>。
+     * 
+     * 
      * @return  A new asynchronous server socket channel
      *
      * @throws  IOException
@@ -175,6 +237,12 @@ public abstract class AsynchronousServerSocketChannel
      * bind(local, 0);
      * </pre></blockquote>
      *
+     * <p>
+     * 将通道的套接字绑定到本地地址,并将套接字配置为侦听连接。
+     * 
+     *  <p>此方法的调用等效于以下内容：<blockquote> <pre> bind(local,0); </pre> </blockquote>
+     * 
+     * 
      * @param   local
      *          The local address to bind the socket, or <tt>null</tt> to bind
      *          to an automatically assigned socket address
@@ -208,6 +276,15 @@ public abstract class AsynchronousServerSocketChannel
      * the value {@code 0}, or a negative value, then an implementation specific
      * default is used.
      *
+     * <p>
+     *  将通道的套接字绑定到本地地址,并将套接字配置为侦听连接。
+     * 
+     *  <p>此方法用于在套接字和本地地址之间建立关联。一旦建立了关联,则套接字保持绑定,直到关联的频道关闭。
+     * 
+     *  <p> {@code backlog}参数是套接字上挂起连接的最大数量。它的确切语义是实现特定的。具体地,实现可以施加最大长度,或者可以选择忽略参数等。
+     * 如果{@code backlog}参数的值为{@code 0}或负值,则使用特定于实现的默认值。
+     * 
+     * 
      * @param   local
      *          The local address to bind the socket, or {@code null} to bind
      *          to an automatically assigned socket address
@@ -232,6 +309,8 @@ public abstract class AsynchronousServerSocketChannel
         throws IOException;
 
     /**
+    /* <p>
+    /* 
      * @throws  IllegalArgumentException                {@inheritDoc}
      * @throws  ClosedChannelException                  {@inheritDoc}
      * @throws  IOException                             {@inheritDoc}
@@ -268,6 +347,24 @@ public abstract class AsynchronousServerSocketChannel
      * the connection is closed and the operation completes with a {@link
      * SecurityException}.
      *
+     * <p>
+     *  接受连接。
+     * 
+     *  <p>此方法启动异步操作以接受对此通道的套接字所做的连接。 {@code handler}参数是在接受连接(或操作失败)时调用的完成处理程序。
+     * 传递给完成处理程序的结果是到新连接的{@link AsynchronousSocketChannel}。
+     * 
+     * <p>当接受新连接时,生成的{@code AsynchronousSocketChannel}将绑定到与此通道相同的{@link AsynchronousChannelGroup}。
+     * 如果组是{@link AsynchronousChannelGroup#isShutdown shutdown}并且连接被接受,则连接将关闭,操作将使用{@code IOException}完成并导致{@link ShutdownChannelGroupException}
+     * 。
+     * <p>当接受新连接时,生成的{@code AsynchronousSocketChannel}将绑定到与此通道相同的{@link AsynchronousChannelGroup}。
+     * 
+     *  <p>要允许并发处理新连接,当立即接受新连接时,启动线程不会直接调用完成处理程序(请参见<a href="AsynchronousChannelGroup.html#threading">线程</a>
+     * ) 。
+     * 
+     *  <p>如果安装了安全管理器,则它会验证安全管理器的{@link SecurityManager#checkAccept checkAccept}方法是否允许连接的远程端点的地址和端口号。
+     * 权限检查使用受此方法的调用上下文限制的权限执行。如果权限检查失败,则连接将关闭,操作将使用{@link SecurityException}完成。
+     * 
+     * 
      * @param   <A>
      *          The type of the attachment
      * @param   attachment
@@ -296,6 +393,8 @@ public abstract class AsynchronousServerSocketChannel
      * Future}'s {@link Future#get() get} method returns the {@link
      * AsynchronousSocketChannel} to the new connection on successful completion.
      *
+     * <p>
+     * 
      * @return  a {@code Future} object representing the pending result
      *
      * @throws  AcceptPendingException
@@ -315,6 +414,14 @@ public abstract class AsynchronousServerSocketChannel
      * {@link java.net.InetAddress#getLoopbackAddress loopback} address and the
      * local port of the channel's socket is returned.
      *
+     * <p>
+     *  接受连接。
+     * 
+     * <p>此方法启动异步操作以接受对此通道的套接字建立的连接。
+     * 该方法的行为方式与{@link #accept(Object,CompletionHandler)}方法完全相同,只是不是指定完成处理程序,而是返回表示未决结果的{@code Future}。
+     *  {@code Future}的{@link Future#get()get}方法会在成功完成时向新连接返回{@link AsynchronousSocketChannel}。
+     * 
+     * 
      * @return  The {@code SocketAddress} that the socket is bound to, or the
      *          {@code SocketAddress} representing the loopback address if
      *          denied by the security manager, or {@code null} if the

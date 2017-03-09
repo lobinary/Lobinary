@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xpath.regex;
@@ -28,6 +38,12 @@ import java.util.Locale;
  *
  * @xerces.internal
  *
+ * <p>
+ *  XML模式的正则表达式解析器。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author TAMURA Kent &lt;kent@trl.ibm.co.jp&gt;
  * @version $Id: ParserForXMLSchema.java,v 1.9 2010-11-12 18:09:45 joehw Exp $
  */
@@ -166,6 +182,12 @@ class ParserForXMLSchema extends RegexParser {
      * cc-normal-c      ::= &lt;any character except [, ], \&gt;
      * from-to-range    ::= cc-normal-c '-' cc-normal-c
      *
+     * <p>
+     *  解析字符类表达式,而不是字符类转义。
+     * 
+     *  c-c-expression :: ='['c-group']'c-group :: =阳性c-group |负-c-组cc-减去正c-组:: =(c-范围| cc-逃避)+阴性c-组:: ='^'正
+     * c-组cc-减法= =(正c-负c组)减法减法:: =' - 'cc表达式c范围:: =单范围|从范围单范围:: = multi-c-escape | category-c-escape | block
+     * 
      * @param useNrage Ignored.
      * @return This returns no NrageToken.
      */

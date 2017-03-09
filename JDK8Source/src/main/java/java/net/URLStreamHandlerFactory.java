@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,12 @@ package java.net;
  * It is used by the {@code URL} class to create a
  * {@code URLStreamHandler} for a specific protocol.
  *
+ * <p>
+ *  此接口定义了{@code URL}流协议处理程序的工厂。
+ * <p>
+ *  {@code URL}类用于为特定协议创建{@code URLStreamHandler}。
+ * 
+ * 
  * @author  Arthur van Hoff
  * @see     java.net.URL
  * @see     java.net.URLStreamHandler
@@ -42,6 +49,8 @@ public interface URLStreamHandlerFactory {
      * Creates a new {@code URLStreamHandler} instance with the specified
      * protocol.
      *
+     * <p>
+     * 
      * @param   protocol   the protocol ("{@code ftp}",
      *                     "{@code http}", "{@code nntp}", etc.).
      * @return  a {@code URLStreamHandler} for the specific protocol.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码。
+ * 版权所有。
+ *  **************************************************** ************** ********************************
+ * **** ****************************。
+ * 版权所有。
+ * 
+ * 
  ******************************************************************/
 
 package java.awt.image;
@@ -60,6 +71,16 @@ package java.awt.image;
  *                  - pixelBitStride;
  *      int pixel = (element >> shift) & ((1 << pixelBitStride) - 1);
  * }</pre>
+ * <p>
+ *  <code> MultiPixelPackedSampleModel </code>类表示单带图像,可以将多个单样本像素打包到一个数据元素中。不允许像素跨越数据元素。
+ * 数据类型可以是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT或DataBuffer.TYPE_INT。
+ * 每个像素必须是2的位数的幂,并且2个像素的数量的幂必须恰好适合于一个数据元素。像素位步长等于每像素的位数。扫描线跨距在数据元素中,并且最后几个数据元素可以用未使用的像素填充。
+ * 数据位偏移是从{@link DataBuffer}开始到第一个像素的位的偏移量,必须是像素位跨距的倍数。
+ * <p>
+ * 下面的代码示出从<code> DataBuffer </code> <code> data </code>中提取像素<code> x,</code>的像素位并将像素数据存储在<code> > dataT
+ * ype </code>：<pre> {@ code int dataElementSize = DataBuffer.getDataTypeSize(dataType); int bitnum = dataBitOffset + x * pixelBitStride; int element = data.getElem(y * scanlineStride + bitnum / dataElementSize); int shift = dataElementSize  - (bitnum&(dataElementSize-1)) -  pixelBitStride; int pixel =(element >> shift)&((1 << pixelBitStride)-1); } </pre>
+ * 。
+ * 
  */
 
 public class MultiPixelPackedSampleModel extends SampleModel
@@ -73,6 +94,9 @@ public class MultiPixelPackedSampleModel extends SampleModel
     /**
       * The number of pixels that fit in a data element.  Also used
       * as the number of bits per pixel.
+      * <p>
+      *  适合数据元素的像素数。也用作每像素的位数。
+      * 
       */
     int pixelsPerDataElement;
 
@@ -80,6 +104,7 @@ public class MultiPixelPackedSampleModel extends SampleModel
     int dataElementSize;
 
     /** The bit offset into the data array where the first pixel begins.
+    /* <p>
      */
     int dataBitOffset;
 
@@ -89,6 +114,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
     /**
      * Constructs a <code>MultiPixelPackedSampleModel</code> with the
      * specified data type, width, height and number of bits per pixel.
+     * <p>
+     *  构造具有指定数据类型,宽度,高度和每像素位数的<code> MultiPixelPackedSampleModel </code>。
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width, in pixels, of the region of
      *                  image data described
@@ -121,6 +150,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * Constructs a <code>MultiPixelPackedSampleModel</code> with
      * specified data type, width, height, number of bits per pixel,
      * scanline stride and data bit offset.
+     * <p>
+     *  构造具有指定数据类型,宽度,高度,每像素位数,扫描线跨距和数据位偏移量的<code> MultiPixelPackedSampleModel </code>。
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width, in pixels, of the region of
      *                  image data described
@@ -172,6 +205,13 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * <code>MultiPixelPackedSampleModel</code> has the
      * same storage data type and number of bits per pixel as this
      * <code>MultiPixelPackedSampleModel</code>.
+     * <p>
+     *  使用指定的宽度和高度创建新的<code> MultiPixelPackedSampleModel </code>。
+     * 新的<code> MultiPixelPackedSampleModel </code>具有与此<code> MultiPixelPackedSampleModel </code>相同的存储数据类型和每
+     * 像素的位数。
+     *  使用指定的宽度和高度创建新的<code> MultiPixelPackedSampleModel </code>。
+     * 
+     * 
      * @param w the specified width
      * @param h the specified height
      * @return a {@link SampleModel} with the specified width and height
@@ -192,6 +232,12 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * <code>DataBuffer</code> object's data type and size
      * is consistent with this <code>MultiPixelPackedSampleModel</code>.
      * The <code>DataBuffer</code> has a single bank.
+     * <p>
+     *  创建与此<code> MultiPixelPackedSampleModel </code>对应的<code> DataBuffer </code>。
+     *  <code> DataBuffer </code>对象的数据类型和大小与此<code> MultiPixelPackedSampleModel </code>一致。
+     *  <code> DataBuffer </code>有一个银行。
+     * 
+     * 
      * @return a <code>DataBuffer</code> with the same data type and
      * size as this <code>MultiPixelPackedSampleModel</code>.
      */
@@ -218,6 +264,11 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * via the {@link #getDataElements} and {@link #setDataElements}
      * methods.  For a <code>MultiPixelPackedSampleModel</code>, this is
      * one.
+     * <p>
+     * 返回通过{@link #getDataElements}和{@link #setDataElements}方法传输一个像素所需的数据元素数。
+     * 对于<code> MultiPixelPackedSampleModel </code>,这是一个。
+     * 
+     * 
      * @return the number of data elements.
      */
     public int getNumDataElements() {
@@ -226,6 +277,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
 
     /**
      * Returns the number of bits per sample for all bands.
+     * <p>
+     *  返回所有波段的每个样本的比特数。
+     * 
+     * 
      * @return the number of bits per sample.
      */
     public int[] getSampleSize() {
@@ -235,6 +290,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
 
     /**
      * Returns the number of bits per sample for the specified band.
+     * <p>
+     *  返回指定波段的每个样本的比特数。
+     * 
+     * 
      * @param band the specified band
      * @return the number of bits per sample for the specified band.
      */
@@ -244,6 +303,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
 
     /**
      * Returns the offset of pixel (x,&nbsp;y) in data array elements.
+     * <p>
+     *  返回数据数组元素中像素(x,&nbsp; y)的偏移量。
+     * 
+     * 
      * @param x the X coordinate of the specified pixel
      * @param y the Y coordinate of the specified pixel
      * @return the offset of the specified pixel.
@@ -258,6 +321,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
      *  Returns the offset, in bits, into the data element in which it is
      *  stored for the <code>x</code>th pixel of a scanline.
      *  This offset is the same for all scanlines.
+     * <p>
+     *  返回存储为扫描线的<code> x </code>像素的数据元素的偏移量(以位为单位)。该偏移对于所有扫描线是相同的。
+     * 
+     * 
      *  @param x the specified pixel
      *  @return the bit offset of the specified pixel.
      */
@@ -267,6 +334,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
 
     /**
      * Returns the scanline stride.
+     * <p>
+     *  返回扫描线跨度。
+     * 
+     * 
      * @return the scanline stride of this
      * <code>MultiPixelPackedSampleModel</code>.
      */
@@ -277,6 +348,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
     /**
      * Returns the pixel bit stride in bits.  This value is the same as
      * the number of bits per pixel.
+     * <p>
+     *  返回以位为单位的像素位跨距。该值与每个像素的位数相同。
+     * 
+     * 
      * @return the <code>pixelBitStride</code> of this
      * <code>MultiPixelPackedSampleModel</code>.
      */
@@ -286,6 +361,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
 
     /**
      * Returns the data bit offset in bits.
+     * <p>
+     *  返回以位为单位的数据位偏移量。
+     * 
+     * 
      * @return the <code>dataBitOffset</code> of this
      * <code>MultiPixelPackedSampleModel</code>.
      */
@@ -300,6 +379,12 @@ public class MultiPixelPackedSampleModel extends SampleModel
      *  storage DataType.  The TransferType is one of
      *  DataBuffer.TYPE_BYTE, DataBuffer.TYPE_USHORT,
      *  or DataBuffer.TYPE_INT.
+     * <p>
+     *  通过<code> getDataElements </code>和<code> setDataElements </code>方法返回用于传输像素的TransferType。
+     *  TransferType可能与存储DataType相同,也可能不相同。
+     *  TransferType是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT或DataBuffer.TYPE_INT中的一个。
+     * 
+     * 
      *  @return the transfertype.
      */
     public int getTransferType() {
@@ -318,6 +403,11 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * <code>MultiPixelPackedSampleModel</code> only has one band, the
      * bands argument must have a length of one and indicate the zeroth
      * band.
+     * <p>
+     *  使用此<code> MultiPixelPackedSampleModel </code>的波段子集创建新的<code> MultiPixelPackedSampleModel </code>。
+     * 由于<code> MultiPixelPackedSampleModel </code>只有一个band,bands参数的长度必须为1,并指示第零个波段。
+     * 
+     * 
      * @param bands the specified bands
      * @return a new <code>SampleModel</code> with a subset of bands of
      * this <code>MultiPixelPackedSampleModel</code>.
@@ -341,6 +431,11 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * pixel located at (x,&nbsp;y).  An
      * <code>ArrayIndexOutOfBoundsException</code> is thrown if the
      * coordinates are not in bounds.
+     * <p>
+     *  作为<code> int </code>返回位于(x,&nbsp; y)的像素的指定带中的样本。
+     * 如果坐标不在边界中,则抛出<code> ArrayIndexOutOfBoundsException </code>。
+     * 
+     * 
      * @param x         the X coordinate of the specified pixel
      * @param y         the Y coordinate of the specified pixel
      * @param b         the band to return, which is assumed to be 0
@@ -372,6 +467,11 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * <code>int</code> for input.
      * An <code>ArrayIndexOutOfBoundsException</code> is thrown if the
      * coordinates are not in bounds.
+     * <p>
+     * 使用<code> int </code>为输入在<code> DataBuffer </code>中位于(x,&nbsp; y)的像素设置指定频带中的样本。
+     * 如果坐标不在边界中,则抛出<code> ArrayIndexOutOfBoundsException </code>。
+     * 
+     * 
      * @param x the X coordinate of the specified pixel
      * @param y the Y coordinate of the specified pixel
      * @param b the band to return, which is assumed to be 0
@@ -435,6 +535,31 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * <code>ArrayIndexOutOfBoundsException</code> is thrown if the
      * coordinates are not in bounds, or if <code>obj</code> is not
      * <code>null</code> and is not large enough to hold the pixel data.
+     * <p>
+     *  返回类型TransferType的基本数组中单个像素的数据。
+     * 对于<code> MultiPixelPackedSampleModel </code>,该数组有一个元素,类型是最小的DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHO
+     * RT或DataBuffer.TYPE_INT,可以容纳单个像素。
+     *  返回类型TransferType的基本数组中单个像素的数据。
+     * 通常,<code> obj </code>应该作为<code> null </code>传递,以便自动创建<code> Object </code>,并且是正确的基本数据类型。
+     * <p>
+     *  以下代码说明从<code> DataBuffer </code> <code> db1 </code>传输一个像素的数据,其存储布局由<code> MultiPixelPackedSampleMode
+     * l </code> <code> mppsm1 </code>到<code> DataBuffer </code> <code> db2 </code>,其存储布局由<code> MultiPixelP
+     * ackedSampleModel </code> <code> mppsm2 </code>描述。
+     * 传输通常比使用<code> getPixel </code>或<code> setPixel </code>更有效。
+     * <pre>
+     *  MultiPixelPackedSampleModel mppsm1,mppsm2; DataBufferInt db1,db2; mppsm2.setDataElements(x,y,mppsm1.
+     * getDataElements(x,y,null,db1),db2);。
+     * </pre>
+     * 如果<code> SampleModels </code>具有相同的数目,则使用<code> getDataElements </code>或<code> setDataElements </code>
+     * 在两个<code> DataBuffer / SampleModel </code>每个样本具有相同的比特数,并且TransferTypes是相同的。
+     * <p>
+     *  如果<code> obj </code>不是<code> null </code>,它应该是TransferType类型的原始数组。
+     * 否则,抛出<code> ClassCastException </code>。
+     * 如果坐标不在边界中,或者<code> obj </code>不是<code> null </code>且不足以容纳像素数据,则会抛出<code> ArrayIndexOutOfBoundsExcepti
+     * on </code>。
+     * 否则,抛出<code> ClassCastException </code>。
+     * 
+     * 
      * @param x the X coordinate of the specified pixel
      * @param y the Y coordinate of the specified pixel
      * @param obj a primitive array in which to return the pixel data or
@@ -520,6 +645,10 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * of an <code>int</code> array.
      * <code>ArrayIndexOutOfBoundsException</code> is thrown if the
      * coordinates are not in bounds.
+     * <p>
+     *  返回<code> int </code>数组的第一个元素中指定的单频带像素。如果坐标不在边界中,则抛出<code> ArrayIndexOutOfBoundsException </code>。
+     * 
+     * 
      * @param x the X coordinate of the specified pixel
      * @param y the Y coordinate of the specified pixel
      * @param iArray the array containing the pixel to be returned or
@@ -583,6 +712,20 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * <code>ArrayIndexOutOfBoundsException</code> is thrown if the
      * coordinates are not in bounds, or if <code>obj</code> is not large
      * enough to hold the pixel data.
+     * <p>
+     *  在TransferType类型的基本数组中设置指定<code> DataBuffer </code>中单个像素的数据。
+     * 对于<code> MultiPixelPackedSampleModel </code>,只有数组的第一个元素保存有效数据,并且类型必须是可以容纳单个像素的DataBuffer.TYPE_BYTE,Da
+     * taBuffer.TYPE_USHORT或DataBuffer.TYPE_INT中最小的。
+     *  在TransferType类型的基本数组中设置指定<code> DataBuffer </code>中单个像素的数据。
+     * <p>
+     * 以下代码说明从<code> DataBuffer </code> <code> db1 </code>传输一个像素的数据,其存储布局由<code> MultiPixelPackedSampleModel
+     *  </code> <code> mppsm1 </code>到<code> DataBuffer </code> <code> db2 </code>,其存储布局由<code> MultiPixelPa
+     * ckedSampleModel </code> <code> mppsm2 </code>描述。
+     * 传输通常比使用<code> getPixel </code>或<code> setPixel </code>更有效。
+     * <pre>
+     *  MultiPixelPackedSampleModel mppsm1,mppsm2; DataBufferInt db1,db2; mppsm2.setDataElements(x,y,mppsm1.
+     * getDataElements(x,y,null,db1),db2);。
+     * 
      * @param x the X coordinate of the pixel location
      * @param y the Y coordinate of the pixel location
      * @param obj a primitive array containing pixel data
@@ -633,6 +776,14 @@ public class MultiPixelPackedSampleModel extends SampleModel
      * <code>int</code> array for input.
      * <code>ArrayIndexOutOfBoundsException</code> is thrown if
      * the coordinates are not in bounds.
+     * <p>
+     * </pre>
+     *  如果<code> SampleModel </code>对象具有相同的数字,则使用<code> getDataElements </code>或<code> setDataElements </code>
+     * 在两个<code> DataBuffer / SampleModel </code>的带,相应的带具有相同数量的每样本的比特,并且TransferTypes是相同的。
+     * <p>
+     *  <code> obj </code>必须是TransferType类型的原始数组。否则,抛出<code> ClassCastException </code>。
+     * 如果坐标不在边界中,或者如果<code> obj </code>不足够大以容纳像素数据,则会抛出<code> ArrayIndexOutOfBoundsException </code>。
+     * 
      * @param x the X coordinate of the pixel location
      * @param y the Y coordinate of the pixel location
      * @param iArray the input pixel in an <code>int</code> array

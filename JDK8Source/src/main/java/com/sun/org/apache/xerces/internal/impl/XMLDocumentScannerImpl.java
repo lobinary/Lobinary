@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  */
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -54,6 +64,12 @@ import javax.xml.stream.events.XMLEvent;
  * efficiently build pull parser. Lot of improvements have been done and
  * the code has been added to support stax functionality/features.
  *
+ * <p>
+ *  这个类负责扫描XML文档结构和内容。
+ * 
+ *  这个类已经根据更适合有效构建pull解析器的新设计进行了修改。大量的改进已经完成,代码已添加到支持stax功能/功能。
+ * 
+ * 
  * @author Neeraj Bajaj, Sun Microsystems
  * @author K.Venugopal, Sun Microsystems
  * @author Glenn Marcy, IBM
@@ -247,6 +263,10 @@ public class XMLDocumentScannerImpl
     /**
      * Sets the input source.
      *
+     * <p>
+     *  设置输入源。
+     * 
+     * 
      * @param inputSource The input source.
      *
      * @throws IOException Thrown on i/o error.
@@ -300,6 +320,10 @@ public class XMLDocumentScannerImpl
      * about any features and properties that affect the operation of the
      * component.
      *
+     * <p>
+     *  复位组件。组件可以向组件管理器查询影响组件操作的任何特征和属性。
+     * 
+     * 
      * @param componentManager The component manager.
      *
      * @throws SAXException Thrown by component on initialization error.
@@ -361,6 +385,9 @@ public class XMLDocumentScannerImpl
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的要素标识符列表。如果此组件未识别任何功能,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedFeatures() {
         String[] featureIds = super.getRecognizedFeatures();
@@ -380,6 +407,12 @@ public class XMLDocumentScannerImpl
      * <strong>Note:</strong> Components should silently ignore features
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置要素的状态。当特性改变状态时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     * <strong>注意：</strong>组件应默认忽略不影响组件操作的功能。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -415,6 +448,9 @@ public class XMLDocumentScannerImpl
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符列表。如果此组件未识别任何属性,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedProperties() {
         String[] propertyIds = super.getRecognizedProperties();
@@ -434,6 +470,12 @@ public class XMLDocumentScannerImpl
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置属性的值。当属性更改值时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应静默忽略不影响组件操作的属性。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *
@@ -472,6 +514,10 @@ public class XMLDocumentScannerImpl
      * component does not want to report a default value for this
      * feature.
      *
+     * <p>
+     *  返回特征的默认状态,如果此组件不希望报告此特征的默认值,则返回null。
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @since Xerces 2.2.0
@@ -491,6 +537,10 @@ public class XMLDocumentScannerImpl
      * component does not want to report a default value for this
      * property.
      *
+     * <p>
+     *  返回属性的默认状态,如果此组件不希望报告此属性的默认值,则返回null。
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @since Xerces 2.2.0
@@ -513,6 +563,10 @@ public class XMLDocumentScannerImpl
      * pseudo-name of "[dtd]" parameter entity names start with '%'; and
      * general entities are just specified by their name.
      *
+     * <p>
+     *  此方法通知实体的开始。 DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和一般实体只是由他们的名字指定。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -554,6 +608,10 @@ public class XMLDocumentScannerImpl
      * of "[dtd]" parameter entity names start with '%'; and general entities
      * are just specified by their name.
      *
+     * <p>
+     *  此方法通知实体的结束。 DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和一般实体只是由他们的名字指定。
+     * 
+     * 
      * @param name The name of the entity.
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -599,6 +657,8 @@ public class XMLDocumentScannerImpl
 
     /** return the next state on the input
      *
+     * <p>
+     * 
      * @return int
      */
 
@@ -725,6 +785,12 @@ public class XMLDocumentScannerImpl
      * efficiently build pull parser. Lots of performance improvements have been done and
      * the code has been added to support stax functionality/features.
      *
+     * <p>
+     *  驱动程序处理XMLDecl扫描。
+     * 
+     *  这个类已经根据更适合有效构建pull解析器的新设计进行了修改。已经进行了大量的性能改进,并且添加了代码以支持stax功能/功能。
+     * 
+     * 
      * @author Neeraj Bajaj, Sun Microsystems.
      *
      * @author Andy Clark, IBM
@@ -803,6 +869,10 @@ public class XMLDocumentScannerImpl
     /**
      * Driver to handle prolog scanning.
      *
+     * <p>
+     *  驱动程序处理prolog扫描。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected final class PrologDriver
@@ -819,6 +889,13 @@ public class XMLDocumentScannerImpl
          * can read ahead of the section of document (state returned) just read and
          * can maintain a different internal state.
          *
+         * <p>
+         * 驱动解析器到输入上的下一个状态/事件。解析器保证停止在下一个状态/事件。
+         * 
+         *  内部XML文档分为几个状态。每个状态表示XML文档的一部分。当此函数正常返回时,它已读取XML文档的部分并返回与已读取的文档的部分相对应的状态。
+         * 对于优化,特定驱动程序可以提前读取刚刚读取的文档部分(返回的状态),并可以保持不同的内部状态。
+         * 
+         * 
          * @return state representing the section of document just read.
          *
          * @throws IOException  Thrown on i/o error.
@@ -898,6 +975,9 @@ public class XMLDocumentScannerImpl
                         //from now onwards this would be handled by fContentDriver,in the same next() call
                         return fContentDriver.next();
                     }
+                    /* <p>
+                    /*  //此部分由FragmentContentHandler处理case SCANNER_STATE_ROOT_ELEMENT：{//我们读取了'<'和开始读取开始元素标记setScannerState(SCANNER_STATE_START_ELEMENT_TAG); setDriver(fContentDriver); //从现在开始,这将由fContentDriver处理,在同一next()调用return fContentDriver.next(); }}。
+                    /* 
                      */
                     case SCANNER_STATE_COMMENT: {
                         //this function fills the data..
@@ -1011,6 +1091,9 @@ public class XMLDocumentScannerImpl
                      * setScannerState(SCANNER_STATE_ROOT_ELEMENT);
                      * setDriver(fContentDriver);
                      * }
+                     * <p>
+                     *  if(complete){if(fEntityScanner.scanChar()！='<'){reportFatalError("RootElementRequired",null); } setScannerState(SCANNER_STATE_ROOT_ELEMENT); setDriver(fContentDriver); }}。
+                     * 
                      */
                 }
             }
@@ -1032,6 +1115,10 @@ public class XMLDocumentScannerImpl
     /**
      * Driver to handle the internal and external DTD subsets.
      *
+     * <p>
+     *  驱动程序处理内部和外部DTD子集。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected final class DTDDriver
@@ -1065,6 +1152,10 @@ public class XMLDocumentScannerImpl
         /**
          * Dispatch an XML "event".
          *
+         * <p>
+         *  分派XML"事件"。
+         * 
+         * 
          * @param complete True if this driver is intended to scan
          *                 and dispatch as much as possible.
          *
@@ -1147,6 +1238,12 @@ public class XMLDocumentScannerImpl
                             setScannerState(SCANNER_STATE_DTD_EXTERNAL_DECLS);
                             again = true;
                             break;
+                            /* <p>
+                            /*  fDTDDescription.setValues(fDoctypePublicId,fDoctypeSystemId,null,null); fDTDDescription.setRootName(
+                            /* fDoctypeName); XMLInputSource xmlInputSource = fEntityManager.resolveEntity(fDTDDescription); fDTDSca
+                            /* nner.setInputSource(xmlInputSource); setScannerState(SCANNER_STATE_DTD_EXTERNAL_DECLS); again = true;
+                            /* 打破;。
+                            /* 
                              */
 
                             resourceIdentifier.setValues(fDoctypePublicId, fDoctypeSystemId, null, null);
@@ -1217,6 +1314,10 @@ public class XMLDocumentScannerImpl
     /**
      * Driver to handle content scanning.
      *
+     * <p>
+     *  驱动程序处理内容扫描。
+     * 
+     * 
      * @author Andy Clark, IBM
      * @author Eric Ye, IBM
      */
@@ -1237,6 +1338,10 @@ public class XMLDocumentScannerImpl
          * to add code to handle scanning for a the "DOCTYPE" string
          * after the string "<!" has been scanned.
          *
+         * <p>
+         * 扫描DOCTYPE钩子。这个方法是一个钩子,子类添加代码来处理"DOCTYPE"字符串后的字符串"<！已扫描。
+         * 
+         * 
          * @return True if the "DOCTYPE" was scanned; false if "DOCTYPE"
          *          was not scanned.
          */
@@ -1260,6 +1365,11 @@ public class XMLDocumentScannerImpl
          * scanner must handle the trailing miscellanous section of
          * the document after the end of the document's root element.
          *
+         * <p>
+         *  元素深度iz零。这个方法是一个钩子,当元素深度达到零时,子类添加代码来处理。当扫描文档片段时,元素深度为零是正常的。
+         * 但是,当扫描完整的XML文档时,扫描器必须在文档的根元素结束后处理文档的尾部错误部分。
+         * 
+         * 
          * @return True if the caller should stop and return true which
          *          allows the scanner to switch to a new scanning
          *          driver. A return value of false indicates that
@@ -1281,6 +1391,10 @@ public class XMLDocumentScannerImpl
          * "root" element. However, when scanning a full XML document,
          * the scanner must handle the root element specially.
          *
+         * <p>
+         *  扫描根元素钩子。此方法是一个钩子,用于子类添加代码来处理根元素的扫描。扫描文档片段时,没有"root"元素。但是,当扫描完整的XML文档时,扫描程序必须特别处理根元素。
+         * 
+         * 
          * @return True if the caller should stop and return true which
          *          allows the scanner to switch to a new scanning
          *          driver. A return value of false indicates that
@@ -1304,6 +1418,9 @@ public class XMLDocumentScannerImpl
          * a document fragment is OK if the markup depth is zero.
          * However, when scanning a full XML document, an end of file
          * is always premature.
+         * <p>
+         *  文件结束钩。这个方法是一个钩子,用于子类添加处理文件结尾的代码。如果标记深度为零,则文档片段中的文件末尾为OK。但是,当扫描完整的XML文档时,文件的结尾总是为时过早。
+         * 
          */
         protected void endOfFileHook(EOFException e)
         throws IOException, XNIException {
@@ -1347,6 +1464,10 @@ public class XMLDocumentScannerImpl
     /**
      * Driver to handle trailing miscellaneous section scanning.
      *
+     * <p>
+     *  驱动程序处理尾随其他部分扫描。
+     * 
+     * 
      * @author Andy Clark, IBM
      * @author Eric Ye, IBM
      */
@@ -1478,12 +1599,18 @@ public class XMLDocumentScannerImpl
 
     /**
      * Implements XMLBufferListener interface.
+     * <p>
+     *  实现XMLBufferListener接口。
+     * 
      */
 
 
     /**
      * receives callbacks from {@link XMLEntityReader } when buffer
      * is being changed.
+     * <p>
+     *  当缓冲区正在更改时从{@link XMLEntityReader}接收回调。
+     * 
      * @param refreshPosition
      */
     public void refresh(int refreshPosition){

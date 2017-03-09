@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,9 @@ import com.sun.corba.se.impl.orbutil.ORBUtility ;
 /** POAManagerImpl is the implementation of the POAManager interface.
  *  Its public methods are activate(), hold_requests(), discard_requests()
  *  and deactivate().
+ * <p>
+ *  它的公共方法是activate(),hold_requests(),discard_requests()和deactivate()。
+ * 
  */
 
 public class POAManagerImpl extends org.omg.CORBA.LocalObject implements
@@ -200,11 +204,24 @@ public class POAManagerImpl extends org.omg.CORBA.LocalObject implements
  * On waking up, each waiter verifies that the condition it was waiting
  * for is satisfied, otherwise it goes back into a wait().
  *
+ * <p>
+ *  以下四个公共方法用于更改POAManager的状态。
+ * 
+ *  关于同步代码设计的注意事项：有4个地方需要等待一个条件： - 在hold_requests,discard_requests,deactivate,enter有一个线程通知一个条件的5个地方： - 在
+ * activate,hold_requests, discard_requests,deactivate,exit。
+ * 
+ *  由于每个通知需要在4个地方中的几个地方唤醒服务者,并且由于Java中的wait()在休眠之前释放了它的监视器上的锁定,这很简单,只有一个监视对象："this"。因此,所有通知将唤醒所有服务员。
+ * 在唤醒时,每个服务器验证它等待的条件是否满足,否则返回到wait()。
+ * 
+ * 
  ****************************************************************************/
 
     /**
      * <code>activate</code>
      * <b>Spec: pages 3-14 thru 3-18</b>
+     * <p>
+     *  <code> activate </code> <b> Spec：pages 3-14 thru 3-18 </b>
+     * 
      */
     public synchronized void activate()
         throws org.omg.PortableServer.POAManagerPackage.AdapterInactive
@@ -240,6 +257,9 @@ public class POAManagerImpl extends org.omg.CORBA.LocalObject implements
     /**
      * <code>hold_requests</code>
      * <b>Spec: pages 3-14 thru 3-18</b>
+     * <p>
+     *  <code> hold_requests </code> <b>规格：第3-14到3-18页</b>
+     * 
      */
     public synchronized void hold_requests(boolean wait_for_completion)
         throws org.omg.PortableServer.POAManagerPackage.AdapterInactive
@@ -280,6 +300,9 @@ public class POAManagerImpl extends org.omg.CORBA.LocalObject implements
     /**
      * <code>discard_requests</code>
      * <b>Spec: pages 3-14 thru 3-18</b>
+     * <p>
+     *  <code> discard_requests </code> <b>规格：第3-14到3-18页</b>
+     * 
      */
     public synchronized void discard_requests(boolean wait_for_completion)
         throws org.omg.PortableServer.POAManagerPackage.AdapterInactive
@@ -323,6 +346,9 @@ public class POAManagerImpl extends org.omg.CORBA.LocalObject implements
      * <code>deactivate</code>
      * <b>Spec: pages 3-14 thru 3-18</b>
      * Note: INACTIVE is a permanent state.
+     * <p>
+     *  <code>停用</code> <b>规格：第3-14页至第3-18页</b>注意：INACTIVE是永久状态。
+     * 
      */
 
     public void deactivate(boolean etherealize_objects, boolean wait_for_completion)
@@ -443,6 +469,9 @@ public class POAManagerImpl extends org.omg.CORBA.LocalObject implements
     /**
      * Added according to the spec CORBA V2.3; this returns the
      * state of the POAManager
+     * <p>
+     *  根据规范CORBA V2.3添加;这返回POAManager的状态
+     * 
      */
 
     public org.omg.PortableServer.POAManagerPackage.State get_state () {
@@ -451,6 +480,10 @@ public class POAManagerImpl extends org.omg.CORBA.LocalObject implements
 
 /****************************************************************************
  * The following methods are used on the invocation path.
+ * <p>
+ *  在调用路径上使用以下方法。
+ * 
+ * 
  ****************************************************************************/
 
     // called from POA.find_POA before calling
@@ -534,6 +567,8 @@ public class POAManagerImpl extends org.omg.CORBA.LocalObject implements
 
     /** Activate the POAManager if no explicit state change has ever been
      * previously invoked.
+     * <p>
+     *  以前调用。
      */
     public synchronized void implicitActivation()
     {

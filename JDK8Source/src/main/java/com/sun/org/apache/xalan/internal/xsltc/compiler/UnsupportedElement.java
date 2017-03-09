@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: UnsupportedElement.java,v 1.2.4.1 2005/09/05 09:26:51 pvedula Exp $
+ * <p>
+ *  $ Id：UnsupportedElement.java,v 1.2.4.1 2005/09/05 09:26:51 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -38,6 +51,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  */
 final class UnsupportedElement extends SyntaxTreeNode {
@@ -48,6 +63,9 @@ final class UnsupportedElement extends SyntaxTreeNode {
 
     /**
      * Basic consutrcor - stores element uri/prefix/localname
+     * <p>
+     *  基本consutrcor  - 存储元素uri / prefix / localname
+     * 
      */
     public UnsupportedElement(String uri, String prefix, String local, boolean isExtension) {
         super(uri, prefix, local);
@@ -62,6 +80,10 @@ final class UnsupportedElement extends SyntaxTreeNode {
      * of this XSLT processor. The error message passed to this method
      * should describe the unsupported element itself and what category
      * the element belongs in.
+     * <p>
+     *  有不同类别的不支持的元素(相信或不相信)：XSLT命名空间中有元素(这些将是尚未实现的元素),有其他XSLT处理器的扩展,还有这个XSLT处理器的无法识别的扩展元素。
+     * 传递给此方法的错误消息应描述不受支持的元素本身和元素所属的类别。
+     * 
      */
     public void setErrorMessage(ErrorMsg message) {
         _message = message;
@@ -69,6 +91,9 @@ final class UnsupportedElement extends SyntaxTreeNode {
 
     /**
      * Displays the contents of this element
+     * <p>
+     *  显示此元素的内容
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -80,6 +105,9 @@ final class UnsupportedElement extends SyntaxTreeNode {
 
     /**
      * Scan and process all fallback children of the unsupported element.
+     * <p>
+     *  扫描并处理不受支持元素的所有后备子项。
+     * 
      */
     private void processFallbacks(Parser parser) {
 
@@ -103,6 +131,9 @@ final class UnsupportedElement extends SyntaxTreeNode {
 
     /**
      * Find any fallback in the descendant nodes; then activate & parse it
+     * <p>
+     *  在后代节点中找到任何后备;然后激活并解析它
+     * 
      */
     public void parseContents(Parser parser) {
         processFallbacks(parser);
@@ -110,6 +141,9 @@ final class UnsupportedElement extends SyntaxTreeNode {
 
     /**
      * Run type check on the fallback element (if any).
+     * <p>
+     *  对后备元素执行类型检查(如果有)。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         if (_fallbacks != null) {
@@ -124,6 +158,8 @@ final class UnsupportedElement extends SyntaxTreeNode {
 
     /**
      * Translate the fallback element (if any).
+     * <p>
+     * 翻译后备元素(如果有)。
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         if (_fallbacks != null) {

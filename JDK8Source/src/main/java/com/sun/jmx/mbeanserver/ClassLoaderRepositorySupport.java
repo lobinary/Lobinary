@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,10 @@ import sun.reflect.misc.ReflectUtil;
  * It provides the necessary methods to load classes using the
  * registered Class Loaders.
  *
+ * <p>
+ *  此类保留在MBean Server中注册的类加载器的列表。它提供了使用注册的类装载器加载类的必要方法。
+ * 
+ * 
  * @since 1.5
  */
 final class ClassLoaderRepositorySupport
@@ -55,6 +60,10 @@ final class ClassLoaderRepositorySupport
        that is a ClassLoader.  The same object could be registered
        under two different names (even though this is not recommended)
        so if we did not do this we could disturb the defined
+    /* <p>
+    /*  我们可以在注销作为ClassLoader的MBean时删除正确的条目。同一个对象可以注册两个不同的名称(即使这不是推荐),所以如果我们没有这样做,我们可以打扰定义
+    /* 
+    /* 
        semantics for the order of ClassLoaders in the repository.  */
     private static class LoaderEntry {
         ObjectName name; // can be null
@@ -77,6 +86,11 @@ final class ClassLoaderRepositorySupport
      * is small, probably less than ten, and that the vast majority
      * of operations are searches (loadClass) which are by definition
      * linear.
+     * <p>
+     *  类装载器列表只应对此对象执行只读操作。
+     * 
+     *  我们对这个数组进行O(n)运算,例如。当删除ClassLoader时。假设元素的数量很小,可能小于10,并且绝大多数操作是搜索(loadClass),根据定义它们是线性的。
+     * 
      */
     private LoaderEntry[] loaders = EMPTY_LOADER_ARRAY;
 
@@ -84,6 +98,10 @@ final class ClassLoaderRepositorySupport
      * Same behavior as add(Object o) in {@link java.util.List}.
      * Replace the loader list with a new one in which the new
      * loader has been added.
+     * <p>
+     *  与{@link java.util.List}中的add(Object o)行为相同。将一个新的加载器列表添加到新加载器中。
+     * 
+     * 
      **/
     private synchronized boolean add(ObjectName name, ClassLoader cl) {
         List<LoaderEntry> l =
@@ -104,6 +122,14 @@ final class ClassLoaderRepositorySupport
      * the first entry with a matching ObjectName is removed,
      * regardless of whether ClassLoader values match.  (In fact,
      * the ClassLoader parameter will usually be null in this case.)
+     * <p>
+     *  与{@link java.util.List}中的remove(Object o)行为相同。使用新的装载器已被删除的新装载器列表替换。
+     * 
+     * ObjectName可以为null,在这种情况下,要删除的条目也必须具有空ObjectName,并且ClassLoader值必须匹配。
+     * 如果ObjectName不为null,那么将删除具有匹配ObjectName的第一个条目,而不管ClassLoader值是否匹配。 (实际上,在这种情况下,ClassLoader参数通常为null。
+     * )。
+     * 
+     * 
      **/
     private synchronized boolean remove(ObjectName name, ClassLoader cl) {
         final int size = loaders.length;
@@ -128,12 +154,18 @@ final class ClassLoaderRepositorySupport
 
     /**
      * List of valid search
+     * <p>
+     *  有效搜索列表
+     * 
      */
     private final Map<String,List<ClassLoader>> search =
         new Hashtable<String,List<ClassLoader>>(10);
 
     /**
      * List of named class loaders.
+     * <p>
+     *  命名类加载器列表。
+     * 
      */
     private final Map<ObjectName,ClassLoader> loadersWithNames =
         new Hashtable<ObjectName,ClassLoader>(10);
@@ -222,6 +254,10 @@ final class ClassLoaderRepositorySupport
                    dependencies C->D->E with loaders {E D C} in the
                    CLR in that order, you would expect to be able to
                    load C.  The problem is that while resolving D, CLR
+                /* <p>
+                /*  MLet"在这里,我们调用了loadClass(className,null)方法来防止无限递归,但是MLet只在CLR中查询它之前的加载器的规则(通过loadClassBefore)意味着递归不会发
+                /* 生,测试在这里造成一些合法的类加载失败例如,如果你有依赖关系C-> D-> E加载器{EDC}在CLR中的顺序,你会希望能够加载C.问题是,解析D,CLR。
+                /* 
                    delegation is disabled, so it can't find E.  */
                 return Class.forName(className, false, cl);
             } catch (ClassNotFoundException e) {

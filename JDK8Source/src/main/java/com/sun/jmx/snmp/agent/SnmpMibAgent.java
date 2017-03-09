@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,13 @@ import com.sun.jmx.snmp.SnmpEngine;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  用于表示SNMP代理的抽象类。
+ * 
+ *  该类由SNMP协议适配器用作SNMP代理中的入口点进行查询。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public abstract class SnmpMibAgent
@@ -65,6 +73,9 @@ public abstract class SnmpMibAgent
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public SnmpMibAgent() {
     }
@@ -77,6 +88,10 @@ public abstract class SnmpMibAgent
      * Initializes the MIB (with no registration of the MBeans into the
      * MBean server).
      *
+     * <p>
+     *  初始化MIB(无需将MBean注册到MBean服务器中)。
+     * 
+     * 
      * @exception IllegalAccessException The MIB can not be initialized.
      */
     public abstract void init() throws IllegalAccessException;
@@ -85,6 +100,10 @@ public abstract class SnmpMibAgent
      * Initializes the MIB but each single MBean representing the MIB
      * is inserted into the MBean server.
      *
+     * <p>
+     *  初始化MIB,但表示MIB的每个单个MBean都插入到MBean服务器中。
+     * 
+     * 
      * @param server The MBean server to register the service with.
      * @param name The object name.
      *
@@ -99,6 +118,9 @@ public abstract class SnmpMibAgent
 
     /**
      * Not used in this context.
+     * <p>
+     *  在此上下文中未使用。
+     * 
      */
     @Override
     public void postRegister (Boolean registrationDone) {
@@ -106,6 +128,9 @@ public abstract class SnmpMibAgent
 
     /**
      * Not used in this context.
+     * <p>
+     *  在此上下文中未使用。
+     * 
      */
     @Override
     public void preDeregister() throws java.lang.Exception {
@@ -113,6 +138,9 @@ public abstract class SnmpMibAgent
 
     /**
      * Not used in this context.
+     * <p>
+     *  在此上下文中未使用。
+     * 
      */
     @Override
     public void postDeregister() {
@@ -123,6 +151,10 @@ public abstract class SnmpMibAgent
      * This method must update the SnmpVarBinds contained in the
      * <var>{@link SnmpMibRequest} req</var> parameter.
      *
+     * <p>
+     *  处理<CODE> get </CODE>操作。此方法必须更新<var> {@ link SnmpMibRequest} req </var>参数中包含的SnmpVarBinds。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variable to
      *            be retrieved. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -138,6 +170,10 @@ public abstract class SnmpMibAgent
      * This method must update the SnmpVarBinds contained in the
      * <var>{@link SnmpMibRequest} req</var> parameter.
      *
+     * <p>
+     *  处理<CODE> getNext </CODE>操作。此方法必须更新<var> {@ link SnmpMibRequest} req </var>参数中包含的SnmpVarBinds。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of
      *            OIDs from which the next variables should be retrieved.
      *            This list is composed of <CODE>SnmpVarBind</CODE> objects.
@@ -153,6 +189,10 @@ public abstract class SnmpMibAgent
      * This method must update the SnmpVarBinds contained in the
      * <var>{@link SnmpMibRequest} req</var> parameter.
      *
+     * <p>
+     *  处理<CODE> getBulk </CODE>操作。此方法必须更新<var> {@ link SnmpMibRequest} req </var>参数中包含的SnmpVarBinds。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variable to
      *            be retrieved. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -180,6 +220,11 @@ public abstract class SnmpMibAgent
      * This method is called during the second phase of the SET two-phase
      * commit.
      *
+     * <p>
+     *  处理<CODE>设置</CODE>操作。此方法必须更新<var> {@ link SnmpMibRequest} req </var>参数中包含的SnmpVarBinds。
+     * 在SET两阶段提交的第二阶段期间调用此方法。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variable to
      *            be set. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -202,6 +247,11 @@ public abstract class SnmpMibAgent
      * This method is called during the first phase of the SET two-phase
      * commit.
      *
+     * <p>
+     * 检查是否可以执行<CODE>设置</CODE>操作。如果无法执行操作,则该方法应该抛出<CODE> SnmpStatusException </CODE>。
+     * 此方法在SET两阶段提交的第一阶段期间被调用。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variable to
      *            be set. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -218,6 +268,10 @@ public abstract class SnmpMibAgent
      * <P>The root object identifier is the object identifier uniquely
      * identifying the MIB.
      *
+     * <p>
+     *  获取MIB的根对象标识符。 <P>根对象标识符是唯一地标识MIB的对象标识符。
+     * 
+     * 
      * @return The root object identifier.
      */
     public abstract long[] getRootOid();
@@ -230,6 +284,10 @@ public abstract class SnmpMibAgent
      * Gets the reference to the MBean server in which the SNMP MIB is
      * registered.
      *
+     * <p>
+     *  获取对注册了SNMP MIB的MBean服务器的引用。
+     * 
+     * 
      * @return The MBean server or null if the MIB is not registered in any
      *     MBean server.
      */
@@ -242,6 +300,10 @@ public abstract class SnmpMibAgent
      * Gets the reference to the SNMP protocol adaptor to which the MIB is
      * bound.
      *
+     * <p>
+     *  获取对MIB绑定的SNMP协议适配器的引用。
+     * 
+     * 
      * @return The SNMP MIB handler.
      */
     @Override
@@ -253,6 +315,10 @@ public abstract class SnmpMibAgent
      * Sets the reference to the SNMP protocol adaptor through which the MIB
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler.
      *
+     * <p>
+     *  设置SNMP协议适配器的引用,通过该协议适配器可以访问MIB,并将该新MIB添加到SNMP MIB处理程序中。
+     * 
+     * 
      * @param stack The SNMP MIB handler.
      */
     @Override
@@ -271,6 +337,11 @@ public abstract class SnmpMibAgent
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler.
      * This method is to be called to set a specific agent to a specific OID. This can be useful when dealing with MIB overlapping.
      * Some OID can be implemented in more than one MIB. In this case, the OID nearest the agent will be used on SNMP operations.
+     * <p>
+     *  设置SNMP协议适配器的引用,通过该协议适配器可以访问MIB,并将该新MIB添加到SNMP MIB处理程序中。调用此方法以将特定代理设置为特定OID。这在处理MIB重叠时很有用。
+     * 一些OID可以在多个MIB中实现。在这种情况下,最靠近代理的OID将用于SNMP操作。
+     * 
+     * 
      * @param stack The SNMP MIB handler.
      * @param oids The set of OIDs this agent implements.
      *
@@ -292,6 +363,10 @@ public abstract class SnmpMibAgent
      * will be SNMP accessible and adds this new MIB in the SNMP MIB handler.
      * Adds a new contextualized MIB in the SNMP MIB handler.
      *
+     * <p>
+     *  设置SNMP协议适配器的引用,通过该协议适配器可以访问MIB,并将此新的MIB添加到SNMP MIB处理程序中。在SNMP MIB处理程序中添加新的上下文化MIB。
+     * 
+     * 
      * @param stack The SNMP MIB handler.
      * @param contextName The MIB context name. If null is passed, will be registered in the default context.
      *
@@ -314,6 +389,10 @@ public abstract class SnmpMibAgent
      * will be SNMP accessible and adds this new MIB in the SNMP MIB handler.
      * Adds a new contextualized MIB in the SNMP MIB handler.
      *
+     * <p>
+     *  设置SNMP协议适配器的引用,通过该协议适配器可以访问MIB,并将此新的MIB添加到SNMP MIB处理程序中。在SNMP MIB处理程序中添加新的上下文化MIB。
+     * 
+     * 
      * @param stack The SNMP MIB handler.
      * @param contextName The MIB context name. If null is passed, will be registered in the default context.
      * @param oids The set of OIDs this agent implements.
@@ -338,6 +417,10 @@ public abstract class SnmpMibAgent
      * Gets the object name of the SNMP protocol adaptor to which the MIB
      * is bound.
      *
+     * <p>
+     * 获取MIB绑定的SNMP协议适配器的对象名称。
+     * 
+     * 
      * @return The name of the SNMP protocol adaptor.
      */
     @Override
@@ -350,6 +433,10 @@ public abstract class SnmpMibAgent
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler
      * associated to the specified <CODE>name</CODE>.
      *
+     * <p>
+     *  设置对MIB进行SNMP访问的SNMP协议适配器的引用,并将该新MIB添加到与指定的<CODE>名称</CODE>相关联的SNMP MIB处理程序中。
+     * 
+     * 
      * @param name The name of the SNMP protocol adaptor.
      *
      * @exception InstanceNotFoundException The SNMP protocol adaptor does
@@ -394,6 +481,11 @@ public abstract class SnmpMibAgent
      * associated to the specified <CODE>name</CODE>.
      * This method is to be called to set a specific agent to a specific OID. This can be useful when dealing with MIB overlapping.
      * Some OID can be implemented in more than one MIB. In this case, the OID nearer agent will be used on SNMP operations.
+     * <p>
+     *  设置对MIB进行SNMP访问的SNMP协议适配器的引用,并将该新MIB添加到与指定的<CODE>名称</CODE>相关联的SNMP MIB处理程序中。调用此方法以将特定代理设置为特定OID。
+     * 这在处理MIB重叠时很有用。一些OID可以在多个MIB中实现。在这种情况下,OID近端代理将用于SNMP操作。
+     * 
+     * 
      * @param name The name of the SNMP protocol adaptor.
      * @param oids The set of OIDs this agent implements.
      * @exception InstanceNotFoundException The SNMP protocol adaptor does
@@ -440,6 +532,10 @@ public abstract class SnmpMibAgent
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler
      * associated to the specified <CODE>name</CODE>.
      *
+     * <p>
+     *  设置对MIB进行SNMP访问的SNMP协议适配器的引用,并将该新MIB添加到与指定的<CODE>名称</CODE>相关联的SNMP MIB处理程序中。
+     * 
+     * 
      * @param name The name of the SNMP protocol adaptor.
      * @param contextName The MIB context name. If null is passed, will be registered in the default context.
      * @exception InstanceNotFoundException The SNMP protocol adaptor does
@@ -487,6 +583,10 @@ public abstract class SnmpMibAgent
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler
      * associated to the specified <CODE>name</CODE>.
      *
+     * <p>
+     *  设置对MIB进行SNMP访问的SNMP协议适配器的引用,并将该新MIB添加到与指定的<CODE>名称</CODE>相关联的SNMP MIB处理程序中。
+     * 
+     * 
      * @param name The name of the SNMP protocol adaptor.
      * @param contextName The MIB context name. If null is passed, will be registered in the default context.
      * @param oids The set of OIDs this agent implements.
@@ -537,6 +637,10 @@ public abstract class SnmpMibAgent
      * As a reminder, only bound MIBs can be accessed through SNMP protocol
      * adaptor.
      *
+     * <p>
+     *  指示MIB模块是否绑定到SNMP协议适配器。作为提醒,只有绑定的MIB可以通过SNMP协议适配器访问。
+     * 
+     * 
      * @return <CODE>true</CODE> if the MIB module is bound,
      *         <CODE>false</CODE> otherwise.
      */
@@ -551,6 +655,10 @@ public abstract class SnmpMibAgent
     /**
      * Gets the MIB name.
      *
+     * <p>
+     *  获取MIB名称。
+     * 
+     * 
      * @return The MIB name.
      */
     @Override
@@ -560,6 +668,10 @@ public abstract class SnmpMibAgent
 
     /**
      * This is a factory method for creating new SnmpMibRequest objects.
+     * <p>
+     *  这是一个用于创建新的SnmpMibRequest对象的工厂方法。
+     * 
+     * 
      * @param reqPdu The received PDU.
      * @param vblist   The vector of SnmpVarBind objects in which the
      *        MIB concerned by this request is involved.
@@ -587,6 +699,10 @@ public abstract class SnmpMibAgent
     }
     /**
      * This is a factory method for creating new SnmpMibRequest objects.
+     * <p>
+     *  这是一个用于创建新的SnmpMibRequest对象的工厂方法。
+     * 
+     * 
      * @param engine The local engine.
      * @param reqPdu The received pdu.
      * @param vblist The vector of SnmpVarBind objects in which the
@@ -629,6 +745,11 @@ public abstract class SnmpMibAgent
      * The method implements the <CODE>getBulk</CODE> operation by calling
      * appropriately the <CODE>getNext</CODE> method.
      *
+     * <p>
+     * 使用调用<CODE> getNext </CODE>来处理<CODE> getBulk </CODE>操作。
+     * 该方法通过适当地调用<CODE> getNext </CODE>方法来实现<CODE> getBulk </CODE>操作。
+     * 
+     * 
      * @param req The SnmpMibRequest containing the variable list to be
      *        retrieved.
      *
@@ -695,6 +816,10 @@ public abstract class SnmpMibAgent
      * This method creates a new Vector which does not contain the first
      * element up to the specified limit.
      *
+     * <p>
+     *  此方法创建一个新向量,其中不包含直到指定限制的第一个元素。
+     * 
+     * 
      * @param original The original vector.
      * @param limit The limit.
      */
@@ -741,12 +866,20 @@ public abstract class SnmpMibAgent
 
     /**
      * The object name of the MIB.
+     * <p>
+     *  MIB的对象名称。
+     * 
+     * 
      * @serial
      */
     protected String mibName;
 
     /**
      * The reference to the MBean server.
+     * <p>
+     *  对MBean服务器的引用。
+     * 
+     * 
      * @serial
      */
     protected MBeanServer server;
@@ -757,12 +890,18 @@ public abstract class SnmpMibAgent
 
     /**
      * The object name of the SNMP protocol adaptor.
+     * <p>
+     *  SNMP协议适配器的对象名称。
+     * 
+     * 
      * @serial
      */
     private ObjectName adaptorName;
 
     /**
      * The reference to the SNMP stack.
+     * <p>
+     *  对SNMP堆栈的引用。
      */
     private transient SnmpMibHandler adaptor;
 }

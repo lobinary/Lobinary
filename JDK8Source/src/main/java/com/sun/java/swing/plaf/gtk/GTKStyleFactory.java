@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,8 @@ import com.sun.java.swing.plaf.gtk.GTKEngine.WidgetType;
 
 /**
  *
+ * <p>
+ * 
  * @author Scott Violet
  */
 class GTKStyleFactory extends SynthStyleFactory {
@@ -42,6 +45,9 @@ class GTKStyleFactory extends SynthStyleFactory {
      * the hash key is simply the WidgetType, but in more complex cases
      * it will be a ComplexKey object that contains arguments to help
      * differentiate similar styles.
+     * <p>
+     *  保存已访问的所有样式。在大多数通常情况下,哈希键是简单的WidgetType,但在更复杂的情况下,它将是一个ComplexKey对象,包含参数,以帮助区分类似的风格。
+     * 
      */
     private final Map<Object, GTKStyle> stylesCache;
 
@@ -55,6 +61,10 @@ class GTKStyleFactory extends SynthStyleFactory {
      * Returns the <code>GTKStyle</code> to use based on the
      * <code>Region</code> id
      *
+     * <p>
+     *  根据<code> Region </code> id返回要使用的<code> GTKStyle </code>
+     * 
+     * 
      * @param c this parameter isn't used, may be null.
      * @param id of the region to get the style.
      */
@@ -123,6 +133,8 @@ class GTKStyleFactory extends SynthStyleFactory {
      * cache.  In most cases only the WidgetType is used for lookup, but
      * in some complex cases, other Object arguments can be specified
      * via a ComplexKey to differentiate the various styles.
+     * <p>
+     *  表示用于从高速缓存中提取GTKStyle对象的散列键。在大多数情况下,只有WidgetType用于查找,但在某些复杂的情况下,可以通过ComplexKey指定其他Object参数来区分不同的样式。
      */
     private static class ComplexKey {
         private final WidgetType wt;

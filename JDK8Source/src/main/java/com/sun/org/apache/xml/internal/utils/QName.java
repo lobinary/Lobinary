@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: QName.java,v 1.2.4.1 2005/09/15 08:15:52 suresh_emailid Exp $
+ * <p>
+ *  $ Id：QName.java,v 1.2.4.1 2005/09/15 08:15:52 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -42,6 +55,11 @@ import org.w3c.dom.Element;
  * is used as the name of the object. The default namespace is not used for
  * unprefixed names."
  * @xsl.usage general
+ * <p>
+ * 用于表示限定名称的类："内部XSLT对象的名称,特别是命名模板(参见[7命名模板]),模式(参见[6.7模式]),属性集(参见[8.1.4命名属性,则使用对名称出现的属性有效的命名空间声明将前缀扩展为U
+ * RI引用。
+ * 由名称的本地部分和可能的空URI引用组成的扩展名称用作对象的名称。默认名称空间不用于不带前缀的名称。 @ xsl.usage general。
+ * 
  */
 public class QName implements java.io.Serializable
 {
@@ -49,30 +67,49 @@ public class QName implements java.io.Serializable
 
   /**
    * The local name.
+   * <p>
+   *  本地名称。
+   * 
+   * 
    * @serial
    */
   protected String _localName;
 
   /**
    * The namespace URI.
+   * <p>
+   *  命名空间URI。
+   * 
+   * 
    * @serial
    */
   protected String _namespaceURI;
 
   /**
    * The namespace prefix.
+   * <p>
+   *  命名空间前缀。
+   * 
+   * 
    * @serial
    */
   protected String _prefix;
 
   /**
    * The XML namespace.
+   * <p>
+   *  XML命名空间。
+   * 
    */
   public static final String S_XMLNAMESPACEURI =
     "http://www.w3.org/XML/1998/namespace";
 
   /**
    * The cached hashcode, which is calculated at construction time.
+   * <p>
+   *  缓存的哈希码,在构造时计算。
+   * 
+   * 
    * @serial
    */
   private int m_hashCode;
@@ -80,6 +117,9 @@ public class QName implements java.io.Serializable
   /**
    * Constructs an empty QName.
    * 20001019: Try making this public, to support Serializable? -- JKESS
+   * <p>
+   *  构造一个空的QName。 20001019：尝试让这个公开,支持Serializable? -  JKESS
+   * 
    */
   public QName(){}
 
@@ -87,6 +127,10 @@ public class QName implements java.io.Serializable
    * Constructs a new QName with the specified namespace URI and
    * local name.
    *
+   * <p>
+   *  使用指定的命名空间URI和本地名称构造一个新的QName。
+   * 
+   * 
    * @param namespaceURI The namespace URI if known, or null
    * @param localName The local name
    */
@@ -99,6 +143,10 @@ public class QName implements java.io.Serializable
    * Constructs a new QName with the specified namespace URI and
    * local name.
    *
+   * <p>
+   *  使用指定的命名空间URI和本地名称构造新的QName。
+   * 
+   * 
    * @param namespaceURI The namespace URI if known, or null
    * @param localName The local name
    * @param validate If true the new QName will be validated and an IllegalArgumentException will
@@ -131,6 +179,10 @@ public class QName implements java.io.Serializable
    * Constructs a new QName with the specified namespace URI, prefix
    * and local name.
    *
+   * <p>
+   *  构造具有指定的命名空间URI,前缀和本地名称的新QName。
+   * 
+   * 
    * @param namespaceURI The namespace URI if known, or null
    * @param prefix The namespace prefix is known, or null
    * @param localName The local name
@@ -145,6 +197,10 @@ public class QName implements java.io.Serializable
    * Constructs a new QName with the specified namespace URI, prefix
    * and local name.
    *
+   * <p>
+   *  构造具有指定的命名空间URI,前缀和本地名称的新QName。
+   * 
+   * 
    * @param namespaceURI The namespace URI if known, or null
    * @param prefix The namespace prefix is known, or null
    * @param localName The local name
@@ -185,6 +241,10 @@ public class QName implements java.io.Serializable
    * Construct a QName from a string, without namespace resolution.  Good
    * for a few odd cases.
    *
+   * <p>
+   *  从字符串构造QName,没有命名空间解析。适合几个奇怪的情况。
+   * 
+   * 
    * @param localName Local part of qualified name
    *
    */
@@ -197,6 +257,10 @@ public class QName implements java.io.Serializable
    * Construct a QName from a string, without namespace resolution.  Good
    * for a few odd cases.
    *
+   * <p>
+   *  从字符串构造QName,没有命名空间解析。适合几个奇怪的情况。
+   * 
+   * 
    * @param localName Local part of qualified name
    * @param validate If true the new QName will be validated and an IllegalArgumentException will
    *                 be thrown if it is invalid.
@@ -228,6 +292,10 @@ public class QName implements java.io.Serializable
    * using the given namespace stack. The default namespace is
    * not resolved.
    *
+   * <p>
+   * 从字符串构造QName,使用给定的命名空间堆栈解析前缀。未解析默认命名空间。
+   * 
+   * 
    * @param qname Qualified name to resolve
    * @param namespaces Namespace stack to use to resolve namespace
    */
@@ -241,6 +309,10 @@ public class QName implements java.io.Serializable
    * using the given namespace stack. The default namespace is
    * not resolved.
    *
+   * <p>
+   *  从字符串构造QName,使用给定的命名空间堆栈解析前缀。未解析默认命名空间。
+   * 
+   * 
    * @param qname Qualified name to resolve
    * @param namespaces Namespace stack to use to resolve namespace
    * @param validate If true the new QName will be validated and an IllegalArgumentException will
@@ -319,6 +391,10 @@ public class QName implements java.io.Serializable
    * using the given namespace context and prefix resolver.
    * The default namespace is not resolved.
    *
+   * <p>
+   *  从字符串构造QName,使用给定的命名空间上下文和前缀解析器解析前缀。未解析默认命名空间。
+   * 
+   * 
    * @param qname Qualified name to resolve
    * @param namespaceContext Namespace Context to use
    * @param resolver Prefix resolver for this context
@@ -334,6 +410,10 @@ public class QName implements java.io.Serializable
    * using the given namespace context and prefix resolver.
    * The default namespace is not resolved.
    *
+   * <p>
+   *  从字符串构造QName,使用给定的命名空间上下文和前缀解析器解析前缀。未解析默认命名空间。
+   * 
+   * 
    * @param qname Qualified name to resolve
    * @param namespaceContext Namespace Context to use
    * @param resolver Prefix resolver for this context
@@ -408,6 +488,10 @@ public class QName implements java.io.Serializable
    * using the given namespace stack. The default namespace is
    * not resolved.
    *
+   * <p>
+   *  从字符串构造QName,使用给定的命名空间堆栈解析前缀。未解析默认命名空间。
+   * 
+   * 
    * @param qname Qualified name to resolve
    * @param resolver Prefix resolver for this context
    */
@@ -421,6 +505,10 @@ public class QName implements java.io.Serializable
    * using the given namespace stack. The default namespace is
    * not resolved.
    *
+   * <p>
+   *  从字符串构造QName,使用给定的命名空间堆栈解析前缀。未解析默认命名空间。
+   * 
+   * 
    * @param qname Qualified name to resolve
    * @param resolver Prefix resolver for this context
    * @param validate If true the new QName will be validated and an IllegalArgumentException will
@@ -486,6 +574,10 @@ public class QName implements java.io.Serializable
    * Returns the namespace URI. Returns null if the namespace URI
    * is not known.
    *
+   * <p>
+   *  返回名称空间URI。如果名称空间URI未知,则返回null。
+   * 
+   * 
    * @return The namespace URI, or null
    */
   public String getNamespaceURI()
@@ -497,6 +589,10 @@ public class QName implements java.io.Serializable
    * Returns the namespace prefix. Returns null if the namespace
    * prefix is not known.
    *
+   * <p>
+   *  返回命名空间前缀。如果未知名称空间前缀,则返回null。
+   * 
+   * 
    * @return The namespace prefix, or null
    */
   public String getPrefix()
@@ -507,6 +603,10 @@ public class QName implements java.io.Serializable
   /**
    * Returns the local part of the qualified name.
    *
+   * <p>
+   *  返回限定名称的局部部分。
+   * 
+   * 
    * @return The local part of the qualified name
    */
   public String getLocalName()
@@ -519,6 +619,10 @@ public class QName implements java.io.Serializable
    * prefix if available, or the '{ns}foo' notation if not. Performs
    * string concatenation, so beware of performance issues.
    *
+   * <p>
+   *  返回限定名称的字符串表示形式,使用前缀(如果可用)或"{ns} foo"表示法(如果没有)。执行字符串连接,因此要小心性能问题。
+   * 
+   * 
    * @return the string representation of the namespace
    */
   public String toString()
@@ -535,6 +639,10 @@ public class QName implements java.io.Serializable
    * the '{ns}foo' notation. Performs
    * string concatenation, so beware of performance issues.
    *
+   * <p>
+   *  使用"{ns} foo"表示法返回限定名称的字符串表示形式。执行字符串连接,因此要小心性能问题。
+   * 
+   * 
    * @return the string representation of the namespace
    */
   public String toNamespacedString()
@@ -548,6 +656,10 @@ public class QName implements java.io.Serializable
   /**
    * Get the namespace of the qualified name.
    *
+   * <p>
+   *  获取限定名称的命名空间。
+   * 
+   * 
    * @return the namespace URI of the qualified name
    */
   public String getNamespace()
@@ -558,6 +670,10 @@ public class QName implements java.io.Serializable
   /**
    * Get the local part of the qualified name.
    *
+   * <p>
+   *  获取限定名称的本地部分。
+   * 
+   * 
    * @return the local part of the qualified name
    */
   public String getLocalPart()
@@ -568,6 +684,10 @@ public class QName implements java.io.Serializable
   /**
    * Return the cached hashcode of the qualified name.
    *
+   * <p>
+   *  返回限定名称的缓存哈希码。
+   * 
+   * 
    * @return the cached hashcode of the qualified name
    */
   public int hashCode()
@@ -580,6 +700,10 @@ public class QName implements java.io.Serializable
    * the passed object is a string and it matches
    * the name of the arg.
    *
+   * <p>
+   * 覆盖等于,并同意我们相等,如果传递的对象是一个字符串,它匹配的arg的名称。
+   * 
+   * 
    * @param ns Namespace URI to compare to
    * @param localPart Local part of qualified name to compare to
    *
@@ -601,6 +725,10 @@ public class QName implements java.io.Serializable
    * the passed object is a QName and it matches
    * the name of the arg.
    *
+   * <p>
+   *  覆盖等于并同意我们相等,如果传递的对象是一个QName,它匹配的arg的名称。
+   * 
+   * 
    * @return True if the qualified names are equal
    */
   public boolean equals(Object object)
@@ -627,6 +755,10 @@ public class QName implements java.io.Serializable
    * Given a string, create and return a QName object
    *
    *
+   * <p>
+   *  给定一个字符串,创建并返回一个QName对象
+   * 
+   * 
    * @param name String to use to create QName
    *
    * @return a QName object
@@ -651,6 +783,10 @@ public class QName implements java.io.Serializable
    * This function tells if a raw attribute name is a
    * xmlns attribute.
    *
+   * <p>
+   *  此函数告诉原始属性名称是否为xmlns属性。
+   * 
+   * 
    * @param attRawName Raw name of attribute
    *
    * @return True if the attribute starts with or is equal to xmlns
@@ -667,6 +803,10 @@ public class QName implements java.io.Serializable
    * This function tells if a raw attribute name is a
    * xmlns attribute.
    *
+   * <p>
+   *  此函数告诉原始属性名称是否为xmlns属性。
+   * 
+   * 
    * @param attRawName Raw name of attribute
    *
    * @return Prefix of attribute
@@ -682,6 +822,10 @@ public class QName implements java.io.Serializable
   /**
    * Returns the local name of the given node.
    *
+   * <p>
+   *  返回给定节点的本地名称。
+   * 
+   * 
    * @param qname Input name
    *
    * @return Local part of the name if prefixed, or the given name if not
@@ -697,6 +841,9 @@ public class QName implements java.io.Serializable
   /**
    * Returns the local name of the given node.
    *
+   * <p>
+   *  返回给定节点的本地名称。
+   * 
    * @param qname Input name
    *
    * @return Prefix of name or empty string if none there

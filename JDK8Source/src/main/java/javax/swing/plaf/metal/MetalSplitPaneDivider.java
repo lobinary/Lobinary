@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ import javax.swing.plaf.basic.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  金属的分裂窗格分隔
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Steve Wilson
  * @author Ralph kar
  */
@@ -100,6 +108,9 @@ class MetalSplitPaneDivider extends BasicSplitPaneDivider
     /**
      * Creates and return an instance of JButton that can be used to
      * collapse the left component in the metal split pane.
+     * <p>
+     *  创建并返回JButton的实例,可用于折叠金属拆分窗格中的左侧组件。
+     * 
      */
     protected JButton createLeftOneTouchButton() {
         JButton b = new JButton() {
@@ -198,6 +209,9 @@ class MetalSplitPaneDivider extends BasicSplitPaneDivider
 
     /**
      * If necessary <code>c</code> is made opaque.
+     * <p>
+     *  如果必要<code> c </code>被设置为不透明。
+     * 
      */
     private void maybeMakeButtonOpaque(JComponent c) {
         Object opaque = UIManager.get("SplitPane.oneTouchButtonsOpaque");
@@ -209,6 +223,9 @@ class MetalSplitPaneDivider extends BasicSplitPaneDivider
     /**
      * Creates and return an instance of JButton that can be used to
      * collapse the right component in the metal split pane.
+     * <p>
+     *  创建并返回一个JButton实例,可用于在金属拆分窗格中折叠正确的组件。
+     * 
      */
     protected JButton createRightOneTouchButton() {
         JButton b = new JButton() {
@@ -311,6 +328,11 @@ class MetalSplitPaneDivider extends BasicSplitPaneDivider
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of MetalSplitPaneDivider.
+     * <p>
+     *  用于布局MetalSplitPaneDivider。分隔线的布局包括适当地移动左/右按钮。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在MetalSplitPaneDivider的子类中实例化它。
+     * 
      */
     public class MetalDividerLayout implements LayoutManager {
 
@@ -388,6 +410,7 @@ class MetalSplitPaneDivider extends BasicSplitPaneDivider
      * The following methods only exist in order to be able to access protected
      * members in the superclass, because these are otherwise not available
      * in any inner class.
+     * <p>
      */
 
     int getOneTouchSizeFromSuper() {

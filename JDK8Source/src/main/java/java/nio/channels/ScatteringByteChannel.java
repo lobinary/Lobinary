@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,13 @@ import java.nio.ByteBuffer;
  * GatheringByteChannel} interface.  </p>
  *
  *
+ * <p>
+ *  可以将字节读入缓冲区序列的通道。
+ * 
+ *  散射读操作在单次调用中将字节序列读取到给定缓冲器序列中的一个或多个中。当实现网络协议或文件格式(例如,将数据分组成由一个或多个固定长度的报头以及可变长度的主体组成的段)时,分散读取通常是有用的。
+ * 在{@link GatheringByteChannel}接口中定义类似的<i>收集</i>写入操作。 </p>。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -81,6 +89,20 @@ public interface ScatteringByteChannel
      * invocation of this method will block until the first operation is
      * complete. </p>
      *
+     * <p>
+     *  将来自该通道的字节序列读取到给定缓冲器的子序列中。
+     * 
+     *  <p>此方法的调用尝试从此通道读取最多r个字节,其中<i> r </i>是给定缓冲区阵列的指定子序列剩余的字节总数, 那是,
+     * 
+     *  <blockquote> <pre> dsts [offset] .remaining()+ dsts [offset + 1] .remaining()+ ... + dsts [offset + 
+     * length-1] .remaining()</。
+     * 
+     *  在调用此方法的时刻。
+     * 
+     * <p>假设读取长度为n的字节序列,其中<tt> 0 </tt> <tt> <= </tt>&lt; i>&nbsp; <tt>&lt; = </tt>&nbsp; <i> r </i>。
+     * 直到该序列的第一个<tt> dsts [offset] .remaining()</tt>字节传输到缓冲区<tt> dsts [offset] </tt>,直到下一个<tt> dsts [ 尽可能多的字
+     * 节被传送到每个缓冲器,因此除了最后更新的缓冲器之外,每个更新的缓冲器的最终位置被保证等于该缓冲器的限制。
+     * 
      * @param  dsts
      *         The buffers into which bytes are to be transferred
      *
@@ -132,6 +154,12 @@ public interface ScatteringByteChannel
      * <blockquote><pre>
      * c.read(dsts, 0, dsts.length);</pre></blockquote>
      *
+     * <p>
+     * <p>假设读取长度为n的字节序列,其中<tt> 0 </tt> <tt> <= </tt>&lt; i>&nbsp; <tt>&lt; = </tt>&nbsp; <i> r </i>。
+     * 
+     *  <p>此方法可能随时被调用。如果另一个线程已经在该通道上启动了读取操作,则该方法的调用将阻塞,直到第一操作完成。 </p>
+     * 
+     * 
      * @param  dsts
      *         The buffers into which bytes are to be transferred
      *

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import java.util.Objects;
  * immutable.  Subclasses may be mutable but this is not
  * recommended.</p>
  *
+ * <p>
+ *  <p>提供MBean描述符对象的一般信息。所描述的特征可以是属性,操作,参数或通知。这个类的实例是不可变的。子类可以是可变的,但不建议这样做。</p>
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanFeatureInfo implements Serializable, DescriptorRead {
@@ -52,6 +57,10 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
      * {@link #getName} rather than reading this field, and that they
      * not change it.
      *
+     * <p>
+     *  功能的名称。建议子类调用{@link #getName},而不是阅读此字段,并且不要更改它。
+     * 
+     * 
      * @serial The name of the feature.
      */
     protected String name;
@@ -61,11 +70,17 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
      * recommended that subclasses call {@link #getDescription} rather
      * than reading this field, and that they not change it.
      *
+     * <p>
+     *  特征的人类可读的描述。建议子类调用{@link #getDescription}而不是阅读此字段,并且不要更改它。
+     * 
+     * 
      * @serial The human-readable description of the feature.
      */
     protected String description;
 
     /**
+    /* <p>
+    /* 
      * @serial The Descriptor for this MBeanFeatureInfo.  This field
      * can be null, which is equivalent to an empty Descriptor.
      */
@@ -77,6 +92,11 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
      * constructor is equivalent to {@code MBeanFeatureInfo(name,
      * description, (Descriptor) null}.
      *
+     * <p>
+     *  构造一个<CODE> MBeanFeatureInfo </CODE>对象。
+     * 这个构造函数等价于{@code MBeanFeatureInfo(name,description,(Descriptor)null}。
+     * 
+     * 
      * @param name The name of the feature.
      * @param description A human readable description of the feature.
      */
@@ -87,6 +107,10 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
     /**
      * Constructs an <CODE>MBeanFeatureInfo</CODE> object.
      *
+     * <p>
+     *  构造一个<CODE> MBeanFeatureInfo </CODE>对象。
+     * 
+     * 
      * @param name The name of the feature.
      * @param description A human readable description of the feature.
      * @param descriptor The descriptor for the feature.  This may be null
@@ -104,6 +128,10 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
     /**
      * Returns the name of the feature.
      *
+     * <p>
+     *  返回要素的名称。
+     * 
+     * 
      * @return the name of the feature.
      */
     public String getName() {
@@ -113,6 +141,10 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
     /**
      * Returns the human-readable description of the feature.
      *
+     * <p>
+     *  返回特征的人性化描述。
+     * 
+     * 
      * @return the human-readable description of the feature.
      */
     public String getDescription() {
@@ -123,6 +155,10 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
      * Returns the descriptor for the feature.  Changing the returned value
      * will have no affect on the original descriptor.
      *
+     * <p>
+     *  返回要素的描述符。更改返回值将不会影响原始描述符。
+     * 
+     * 
      * @return a descriptor that is either immutable or a copy of the original.
      *
      * @since 1.6
@@ -134,6 +170,10 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
     /**
      * Compare this MBeanFeatureInfo to another.
      *
+     * <p>
+     *  将此MBeanFeatureInfo与另一个比较。
+     * 
+     * 
      * @param o the object to compare to.
      *
      * @return true if and only if <code>o</code> is an MBeanFeatureInfo such
@@ -160,6 +200,10 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
 
     /**
      * Serializes an {@link MBeanFeatureInfo} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link MBeanFeatureInfo}序列化为{@link ObjectOutputStream}。
+     * 
+     * 
      * @serialData
      * For compatibility reasons, an object of this class is serialized as follows.
      * <p>
@@ -204,6 +248,9 @@ public class MBeanFeatureInfo implements Serializable, DescriptorRead {
 
     /**
      * Deserializes an {@link MBeanFeatureInfo} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link MBeanFeatureInfo}。
+     * 
      * @serialData
      * For compatibility reasons, an object of this class is deserialized as follows.
      * <p>

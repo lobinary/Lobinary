@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import java.util.function.IntFunction;
 /**
  * Factory methods for transforming streams into sorted streams.
  *
+ * <p>
+ *  将流转换为排序流的工厂方法。
+ * 
+ * 
  * @since 1.8
  */
 final class SortedOps {
@@ -44,6 +49,10 @@ final class SortedOps {
     /**
      * Appends a "sorted" operation to the provided stream.
      *
+     * <p>
+     *  将"排序"操作附加到提供的流。
+     * 
+     * 
      * @param <T> the type of both input and output elements
      * @param upstream a reference stream with element type T
      */
@@ -54,6 +63,10 @@ final class SortedOps {
     /**
      * Appends a "sorted" operation to the provided stream.
      *
+     * <p>
+     *  将"排序"操作附加到提供的流。
+     * 
+     * 
      * @param <T> the type of both input and output elements
      * @param upstream a reference stream with element type T
      * @param comparator the comparator to order elements by
@@ -66,6 +79,10 @@ final class SortedOps {
     /**
      * Appends a "sorted" operation to the provided stream.
      *
+     * <p>
+     *  将"排序"操作附加到提供的流。
+     * 
+     * 
      * @param <T> the type of both input and output elements
      * @param upstream a reference stream with element type T
      */
@@ -76,6 +93,10 @@ final class SortedOps {
     /**
      * Appends a "sorted" operation to the provided stream.
      *
+     * <p>
+     *  将"排序"操作附加到提供的流。
+     * 
+     * 
      * @param <T> the type of both input and output elements
      * @param upstream a reference stream with element type T
      */
@@ -86,6 +107,10 @@ final class SortedOps {
     /**
      * Appends a "sorted" operation to the provided stream.
      *
+     * <p>
+     *  将"排序"操作附加到提供的流。
+     * 
+     * 
      * @param <T> the type of both input and output elements
      * @param upstream a reference stream with element type T
      */
@@ -95,10 +120,16 @@ final class SortedOps {
 
     /**
      * Specialized subtype for sorting reference streams
+     * <p>
+     *  用于对引用流进行排序的专用子类型
+     * 
      */
     private static final class OfRef<T> extends ReferencePipeline.StatefulOp<T, T> {
         /**
          * Comparator used for sorting
+         * <p>
+         *  比较器用于排序
+         * 
          */
         private final boolean isNaturalSort;
         private final Comparator<? super T> comparator;
@@ -106,6 +137,9 @@ final class SortedOps {
         /**
          * Sort using natural order of {@literal <T>} which must be
          * {@code Comparable}.
+         * <p>
+         *  使用必须为{@code Comparable}的{@literal <T>}的自然顺序排序。
+         * 
          */
         OfRef(AbstractPipeline<?, T, ?> upstream) {
             super(upstream, StreamShape.REFERENCE,
@@ -120,6 +154,10 @@ final class SortedOps {
         /**
          * Sort using the provided comparator.
          *
+         * <p>
+         *  使用提供的比较器进行排序。
+         * 
+         * 
          * @param comparator The comparator to be used to evaluate ordering.
          */
         OfRef(AbstractPipeline<?, T, ?> upstream, Comparator<? super T> comparator) {
@@ -163,6 +201,9 @@ final class SortedOps {
 
     /**
      * Specialized subtype for sorting int streams.
+     * <p>
+     *  用于排序int流的专用子类型。
+     * 
      */
     private static final class OfInt extends IntPipeline.StatefulOp<Integer> {
         OfInt(AbstractPipeline<?, Integer, ?> upstream) {
@@ -202,6 +243,9 @@ final class SortedOps {
 
     /**
      * Specialized subtype for sorting long streams.
+     * <p>
+     *  用于排序长流的专用子类型。
+     * 
      */
     private static final class OfLong extends LongPipeline.StatefulOp<Long> {
         OfLong(AbstractPipeline<?, Long, ?> upstream) {
@@ -241,6 +285,9 @@ final class SortedOps {
 
     /**
      * Specialized subtype for sorting double streams.
+     * <p>
+     *  用于对双流进行排序的专用子类型。
+     * 
      */
     private static final class OfDouble extends DoublePipeline.StatefulOp<Double> {
         OfDouble(AbstractPipeline<?, Double, ?> upstream) {
@@ -300,6 +347,18 @@ final class SortedOps {
      * required to produce a result, may flow through the pipeline.  This can
      * occur, in general (not restricted to just sorting), for short-circuiting
      * parallel pipelines.
+     * <p>
+     *  摘要{@link Sink}用于在引用流上实现排序。
+     * 
+     * <p>
+     *  注意：以下文档适用于参考和所有原始接收器。
+     * <p>
+     * 排序接收器首先接受所有元素,然后缓冲到数组或可重新调整大小的数据结构中,如果管道的大小分别已知或未知。在宿协议的结尾,这些元素被排序,然后被推向下游。
+     * 这个类记录是否调用{@link #cancellationRequested}。如果是这样,可以推断,将源元件推入流水线的源知道流水线是短路的。
+     * 在这种情况下,子元素向下游推送元素将通过调用{@code downstream.cancellationRequested()}并在推送元素之前检查结果{@code false}来保留短路协议。
+     * <p>
+     *  请注意,上述行为是使用顺序流排序的优化。这不是一个错误,比生成结果所严格要求的更多的元素可能流过管道。这可以发生,通常(不限于只是排序),用于短路并行管道。
+     * 
      */
     private static abstract class AbstractRefSortingSink<T> extends Sink.ChainedReference<T, T> {
         protected final Comparator<? super T> comparator;
@@ -315,6 +374,10 @@ final class SortedOps {
          * Records is cancellation is requested so short-circuiting behaviour
          * can be preserved when the sorted elements are pushed downstream.
          *
+         * <p>
+         *  要求记录取消,以便在向下游推送排序的元素时保留短路行为。
+         * 
+         * 
          * @return false, as this sink never short-circuits.
          */
         @Override
@@ -326,6 +389,9 @@ final class SortedOps {
 
     /**
      * {@link Sink} for implementing sort on SIZED reference streams.
+     * <p>
+     *  {@link Sink}用于在SIZED引用流上实现排序。
+     * 
      */
     private static final class SizedRefSortingSink<T> extends AbstractRefSortingSink<T> {
         private T[] array;
@@ -367,6 +433,9 @@ final class SortedOps {
 
     /**
      * {@link Sink} for implementing sort on reference streams.
+     * <p>
+     *  {@link Sink}用于在引用流上实现排序。
+     * 
      */
     private static final class RefSortingSink<T> extends AbstractRefSortingSink<T> {
         private ArrayList<T> list;
@@ -407,6 +476,9 @@ final class SortedOps {
 
     /**
      * Abstract {@link Sink} for implementing sort on int streams.
+     * <p>
+     *  摘要{@link Sink}用于在int流上实现排序。
+     * 
      */
     private static abstract class AbstractIntSortingSink extends Sink.ChainedInt<Integer> {
         protected boolean cancellationWasRequested;
@@ -424,6 +496,9 @@ final class SortedOps {
 
     /**
      * {@link Sink} for implementing sort on SIZED int streams.
+     * <p>
+     *  {@link Sink}用于在SIZED int流上实现排序。
+     * 
      */
     private static final class SizedIntSortingSink extends AbstractIntSortingSink {
         private int[] array;
@@ -464,6 +539,9 @@ final class SortedOps {
 
     /**
      * {@link Sink} for implementing sort on int streams.
+     * <p>
+     *  {@link Sink}用于在int流上实现排序。
+     * 
      */
     private static final class IntSortingSink extends AbstractIntSortingSink {
         private SpinedBuffer.OfInt b;
@@ -505,6 +583,9 @@ final class SortedOps {
 
     /**
      * Abstract {@link Sink} for implementing sort on long streams.
+     * <p>
+     *  摘要{@link Sink}用于对长流执行排序。
+     * 
      */
     private static abstract class AbstractLongSortingSink extends Sink.ChainedLong<Long> {
         protected boolean cancellationWasRequested;
@@ -522,6 +603,9 @@ final class SortedOps {
 
     /**
      * {@link Sink} for implementing sort on SIZED long streams.
+     * <p>
+     * {@link Sink}用于在SIZED长流上实现排序。
+     * 
      */
     private static final class SizedLongSortingSink extends AbstractLongSortingSink {
         private long[] array;
@@ -562,6 +646,9 @@ final class SortedOps {
 
     /**
      * {@link Sink} for implementing sort on long streams.
+     * <p>
+     *  {@link Sink}用于在长流上实现排序。
+     * 
      */
     private static final class LongSortingSink extends AbstractLongSortingSink {
         private SpinedBuffer.OfLong b;
@@ -603,6 +690,9 @@ final class SortedOps {
 
     /**
      * Abstract {@link Sink} for implementing sort on long streams.
+     * <p>
+     *  摘要{@link Sink}用于对长流执行排序。
+     * 
      */
     private static abstract class AbstractDoubleSortingSink extends Sink.ChainedDouble<Double> {
         protected boolean cancellationWasRequested;
@@ -620,6 +710,9 @@ final class SortedOps {
 
     /**
      * {@link Sink} for implementing sort on SIZED double streams.
+     * <p>
+     *  {@link Sink}用于在SIZED双流上实现排序。
+     * 
      */
     private static final class SizedDoubleSortingSink extends AbstractDoubleSortingSink {
         private double[] array;
@@ -660,6 +753,8 @@ final class SortedOps {
 
     /**
      * {@link Sink} for implementing sort on double streams.
+     * <p>
+     *  {@link Sink},用于在双流上实现排序。
      */
     private static final class DoubleSortingSink extends AbstractDoubleSortingSink {
         private SpinedBuffer.OfDouble b;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,9 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 
 /**
  * This is delegates to the real implementation.
+ * <p>
+ *  这是代表真正的实现。
+ * 
  */
 public abstract class CDROutputStream
     extends org.omg.CORBA_2_3.portable.OutputStream
@@ -359,6 +363,8 @@ public abstract class CDROutputStream
 
     /**
      * return true if our ByteBuffer is sharing/equal to bb
+     * <p>
+     *  如果我们的ByteBuffer共享/等于bb,则返回true
      */
     protected final boolean isSharing(ByteBuffer bb) {
         return (getByteBuffer() ==  bb);

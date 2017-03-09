@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -36,6 +37,16 @@ public interface TAG_ALTERNATE_IIOP_ADDRESS
      * where one or more <code>TAG_ALTERNATE_IIOP_ADDRESS</code> components 
      * are present in a <code>TAG_INTERNET_IOP</code> Profile, no order of 
      * use is prescribed by Version 1.2 of IIOP.
+     * <p>
+     *  在同一对象键用于多个互联网位置的情况下,以下标准IOR组件被定义用于IIOP版本1.2中的支持。
+     * <p>
+     *  <code> TAG_ALTERNATE_IIOP_ADDRESS </code>组件具有类型的关联值：
+     * <code>
+     * <pre>
+     *  struct {string HostID,short Port};
+     * </pre>
+     * </code>
+     *  编码为CDR封装。
      */
   public static final int value = (int)(3L);
 }

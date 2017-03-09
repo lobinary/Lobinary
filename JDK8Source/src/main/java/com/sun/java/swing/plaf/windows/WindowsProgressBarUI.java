@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,13 @@ import static com.sun.java.swing.plaf.windows.XPStyle.Skin;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  Windows组件的翻译。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Michael C. Albers
  */
 public class WindowsProgressBarUI extends BasicProgressBarUI
@@ -70,6 +78,10 @@ public class WindowsProgressBarUI extends BasicProgressBarUI
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -206,6 +218,10 @@ public class WindowsProgressBarUI extends BasicProgressBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     protected void setAnimationIndex(int newValue) {
@@ -229,6 +245,10 @@ public class WindowsProgressBarUI extends BasicProgressBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     protected int getBoxLength(int availableLength, int otherDimension) {
@@ -241,6 +261,9 @@ public class WindowsProgressBarUI extends BasicProgressBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      * @since 1.6
      */
     protected Rectangle getBox(Rectangle r) {

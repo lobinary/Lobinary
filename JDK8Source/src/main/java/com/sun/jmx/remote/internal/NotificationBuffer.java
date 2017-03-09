@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ public interface NotificationBuffer {
      * operation will block until one arrives, subject to the
      * timeout.</p>
      *
+     * <p>
+     *  <p>提取符合指定倾听者的通知。</p>
+     * 
+     *  <p>此操作只考虑序号至少为<code> startSequenceNumber </code>的通知。
+     * 它不会超过<code> timeout </code>,并且只会返回不超过<code> maxNotifications </code>的通知。</p>。
+     * 
+     * 
      * @param filter an object that will add notifications to a
      * {@code List<TargetedNotification>} if they match the current
      * listeners with their filters.
@@ -67,6 +75,9 @@ public interface NotificationBuffer {
 
     /**
      * <p>Discard this buffer.</p>
+     * <p>
+     *  <p>如果没有符合条件的通知,则操作将阻止,直到到达为止,但会超时。</p>
+     * 
      */
     public void dispose();
 }

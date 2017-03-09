@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import com.sun.source.tree.*;
  * A path of tree nodes, typically used to represent the sequence of ancestor
  * nodes of a tree node up to the top level CompilationUnitTree node.
  *
+ * <p>
+ *  树节点的路径,通常用于表示树节点的祖先节点到顶层CompilationUnitTree节点的序列。
+ * 
+ * 
  * @author Jonathan Gibbons
  * @since 1.6
  */
@@ -40,6 +45,10 @@ import com.sun.source.tree.*;
 public class TreePath implements Iterable<Tree> {
     /**
      * Gets a tree path for a tree node within a compilation unit.
+     * <p>
+     *  获取编译单元中树节点的树路径。
+     * 
+     * 
      * @return null if the node is not found
      */
     public static TreePath getPath(CompilationUnitTree unit, Tree target) {
@@ -48,6 +57,10 @@ public class TreePath implements Iterable<Tree> {
 
     /**
      * Gets a tree path for a tree node within a subtree identified by a TreePath object.
+     * <p>
+     *  获取由TreePath对象标识的子树内的树节点的树路径。
+     * 
+     * 
      * @return null if the node is not found
      */
     public static TreePath getPath(TreePath path, Tree target) {
@@ -85,6 +98,9 @@ public class TreePath implements Iterable<Tree> {
 
     /**
      * Creates a TreePath for a root node.
+     * <p>
+     *  为根节点创建TreePath。
+     * 
      */
     public TreePath(CompilationUnitTree t) {
         this(null, t);
@@ -92,6 +108,9 @@ public class TreePath implements Iterable<Tree> {
 
     /**
      * Creates a TreePath for a child node.
+     * <p>
+     *  为子节点创建TreePath。
+     * 
      */
     public TreePath(TreePath p, Tree t) {
         if (t.getKind() == Tree.Kind.COMPILATION_UNIT) {
@@ -106,6 +125,9 @@ public class TreePath implements Iterable<Tree> {
     }
     /**
      * Get the compilation unit associated with this path.
+     * <p>
+     *  获取与此路径关联的编译单元。
+     * 
      */
     public CompilationUnitTree getCompilationUnit() {
         return compilationUnit;
@@ -113,6 +135,9 @@ public class TreePath implements Iterable<Tree> {
 
     /**
      * Get the leaf node for this path.
+     * <p>
+     *  获取此路径的叶节点。
+     * 
      */
     public Tree getLeaf() {
         return leaf;
@@ -120,6 +145,9 @@ public class TreePath implements Iterable<Tree> {
 
     /**
      * Get the path for the enclosing node, or null if there is no enclosing node.
+     * <p>
+     *  获取封闭节点的路径,如果没有封闭节点,则返回null。
+     * 
      */
     public TreePath getParentPath() {
         return parent;
@@ -127,6 +155,8 @@ public class TreePath implements Iterable<Tree> {
 
     /**
      *  Iterates from leaves to root.
+     * <p>
+     *  从叶子到根。
      */
     @Override
     public Iterator<Tree> iterator() {

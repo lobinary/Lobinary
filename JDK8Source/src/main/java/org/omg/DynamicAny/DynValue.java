@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -20,6 +21,7 @@ package org.omg.DynamicAny;
     * implementation to break by violating internal constraints. Access to private members is provided to support
     * such activities as ORB bridging and debugging and should not be used to arbitrarily violate
     * the encapsulation of the value type. 
+    * <p>
     */
 public interface DynValue extends DynValueOperations, org.omg.DynamicAny.DynValueCommon, org.omg.CORBA.portable.IDLEntity 
 {

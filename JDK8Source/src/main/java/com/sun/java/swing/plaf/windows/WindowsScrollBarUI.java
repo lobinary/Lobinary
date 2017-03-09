@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,12 @@ import static com.sun.java.swing.plaf.windows.XPStyle.Skin;
  * for short term storage or RMI between applications running the same
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
+ * <p>
+ *  Windows组件的翻译。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
  */
 public class WindowsScrollBarUI extends BasicScrollBarUI {
     private Grid thumbGrid;
@@ -57,6 +64,10 @@ public class WindowsScrollBarUI extends BasicScrollBarUI {
     /**
      * Creates a UI for a JScrollBar.
      *
+     * <p>
+     *  为JScrollBar创建一个UI。
+     * 
+     * 
      * @param c the text field
      * @return the UI
      */
@@ -129,6 +140,10 @@ public class WindowsScrollBarUI extends BasicScrollBarUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     @Override
@@ -278,6 +293,10 @@ public class WindowsScrollBarUI extends BasicScrollBarUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     @Override
@@ -295,6 +314,9 @@ public class WindowsScrollBarUI extends BasicScrollBarUI {
      * WindowsArrowButton is used for the buttons to position the
      * document up/down. It differs from BasicArrowButton in that the
      * preferred size is always a square.
+     * <p>
+     *  WindowsArrowButton用于按钮上下放置文档。它与BasicArrowButton的不同之处在于,首选大小总是一个正方形。
+     * 
      */
     private class WindowsArrowButton extends BasicArrowButton {
 
@@ -389,6 +411,12 @@ public class WindowsScrollBarUI extends BasicScrollBarUI {
      * of the foreground/background colors. Further the Grid is held through
      * a WeakRef so that it can be freed when no longer needed. As the
      * Grid is rather expensive to draw, it is drawn in a BufferedImage.
+     * <p>
+     *  如果更多的类需要使用它,这应该被拉出到自己的类。
+     * <p>
+     *  网格用于绘制窗口滚动条的轨道。网格被缓存在HashMap中,键是前景/背景颜色的rgb组件。此外,Grid通过WeakRef保存,以便在不再需要时可以释放。
+     * 因为网格绘制相当昂贵,所以在BufferedImage中绘制。
+     * 
      */
     private static class Grid {
         private static final int BUFFER_SIZE = 64;
@@ -430,6 +458,9 @@ public class WindowsScrollBarUI extends BasicScrollBarUI {
         /**
          * Paints the grid into the specified Graphics at the specified
          * location.
+         * <p>
+         *  将网格绘制到指定位置的指定图形中。
+         * 
          */
         public void paint(Graphics g, int x, int y, int w, int h) {
             Rectangle clipRect = g.getClipBounds();
@@ -471,6 +502,8 @@ public class WindowsScrollBarUI extends BasicScrollBarUI {
 
         /**
          * Actually renders the grid into the Graphics <code>g</code>.
+         * <p>
+         *  实际上将网格转换为Graphics <code> g </code>。
          */
         private void paintGrid(Graphics g, Color fg, Color bg) {
             Rectangle clipRect = g.getClipBounds();

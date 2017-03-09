@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ package org.omg.CORBA;
 /** Defines the methods used to write primitive data types to output streams
 * for marshalling custom value types.  This interface is used by user
 * written custom marshalling code for custom value types.
+* <p>
+*  用于编组自定义值类型。此接口由用户自定义编组代码用于自定义值类型使用。
+* 
+* 
 * @see org.omg.CORBA.DataInputStream
 * @see org.omg.CORBA.CustomMarshal
 */
@@ -35,36 +40,60 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
 {
     /**
     * Writes the Any value to the output stream.
+    * <p>
+    *  将Any值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_any (org.omg.CORBA.Any value);
 
     /**
     * Writes the boolean value to the output stream.
+    * <p>
+    *  将布尔值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_boolean (boolean value);
 
     /**
     * Writes the IDL character value to the output stream.
+    * <p>
+    *  将IDL字符值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_char (char value);
 
     /**
     * Writes the IDL wide character value to the output stream.
+    * <p>
+    *  将IDL宽字符值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_wchar (char value);
 
     /**
     * Writes the IDL octet value (represented as a Java byte) to the output stream.
+    * <p>
+    *  将IDL八位字节值(表示为Java字节)写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_octet (byte value);
 
     /**
     * Writes the IDL short value to the output stream.
+    * <p>
+    *  将IDL short值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_short (short value);
@@ -72,24 +101,40 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the IDL unsigned short value (represented as a Java short
     * value) to the output stream.
+    * <p>
+    *  将IDL无符号short值(表示为Java short值)写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_ushort (short value);
 
     /**
     * Writes the IDL long value (represented as a Java int) to the output stream.
+    * <p>
+    *  将IDL long值(表示为Java int)写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_long (int value);
 
     /**
     * Writes the IDL unsigned long value (represented as a Java int) to the output stream.
+    * <p>
+    *  将IDL unsigned long值(表示为Java int)写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_ulong (int value);
 
     /**
     * Writes the IDL long long value (represented as a Java long) to the output stream.
+    * <p>
+    *  将IDL long long值(表示为Java long)写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_longlong (long value);
@@ -97,18 +142,30 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the IDL unsigned long long value (represented as a Java long)
     * to the output stream.
+    * <p>
+    *  将IDL unsigned long long值(表示为Java long)写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_ulonglong (long value);
 
     /**
     * Writes the IDL float value to the output stream.
+    * <p>
+    *  将IDL浮点值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_float (float value);
 
     /**
     * Writes the IDL double value to the output stream.
+    * <p>
+    *  将IDL double值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_double (double value);
@@ -117,36 +174,60 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
 
     /**
     * Writes the IDL string value to the output stream.
+    * <p>
+    *  将IDL字符串值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_string (String value);
 
     /**
     * Writes the IDL wide string value (represented as a Java String) to the output stream.
+    * <p>
+    *  将IDL宽字符串值(表示为Java字符串)写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_wstring (String value);
 
     /**
     * Writes the IDL CORBA::Object value to the output stream.
+    * <p>
+    *  将IDL CORBA :: Object值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_Object (org.omg.CORBA.Object value);
 
     /**
     * Writes the IDL Abstract interface type to the output stream.
+    * <p>
+    *  将IDL抽象接口类型写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_Abstract (java.lang.Object value);
 
     /**
     * Writes the IDL value type value to the output stream.
+    * <p>
+    *  将IDL值类型值写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_Value (java.io.Serializable value);
 
     /**
     * Writes the typecode to the output stream.
+    * <p>
+    *  将类型代码写入输出流。
+    * 
+    * 
     * @param value The value to be written.
     */
     void write_TypeCode (org.omg.CORBA.TypeCode value);
@@ -154,6 +235,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL Anys from offset for length elements to the
     * output stream.
+    * <p>
+    * 将长度元素的IDL Anys数组从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -164,6 +249,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL booleans from offset for length elements to the
     * output stream.
+    * <p>
+    *  将IDL布尔的数组从offset的长度元素写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -174,6 +263,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL characters from offset for length elements to the
     * output stream.
+    * <p>
+    *  将长度元素的IDL字符数组从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -184,6 +277,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL wide characters from offset for length elements to the
     * output stream.
+    * <p>
+    *  将长度元素的IDL宽字符数组从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -194,6 +291,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL octets from offset for length elements to the
     * output stream.
+    * <p>
+    *  将长度元素的IDL字节数组从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -204,6 +305,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL shorts from offset for length elements to the
     * output stream.
+    * <p>
+    *  将长度元素的IDL短整型数组从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -214,6 +319,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL unsigned shorts (represented as Java shorts)
     * from offset for length elements to the output stream.
+    * <p>
+    *  将长度元素的IDL无符号短整型数组(表示为Java shorts)从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -224,6 +333,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL longs from offset for length elements to the
     * output stream.
+    * <p>
+    *  将长度元素的IDL长度的数组从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -234,6 +347,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL unsigned longs (represented as Java ints)
     * from offset for length elements to the output stream.
+    * <p>
+    *  将长度元素的IDL无符号长整型数组(表示为Java int)从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -244,6 +361,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL unsigned long longs (represented as Java longs)
     * from offset for length elements to the output stream.
+    * <p>
+    *  将长度元素的IDL无符号长整型数组(表示为Java长整型)从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -254,6 +375,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL long longs from offset for length elements to the
     * output stream.
+    * <p>
+    *  将长度元素的偏移量的IDL长整型数组写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -264,6 +389,10 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL floats from offset for length elements to the
     * output stream.
+    * <p>
+    *  将长度元素的IDL浮点数组从偏移量写入输出流。
+    * 
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.
@@ -274,6 +403,9 @@ public interface DataOutputStream extends org.omg.CORBA.portable.ValueBase
     /**
     * Writes the array of IDL doubles from offset for length elements to the
     * output stream.
+    * <p>
+    *  从长度元素的偏移量到输出流中写入IDL双精度数组。
+    * 
     * @param seq The array to be written.
     * @param offset The index into seq of the first element to write to the
     * output stream.

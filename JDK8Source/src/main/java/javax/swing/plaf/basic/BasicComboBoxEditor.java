@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import sun.reflect.misc.MethodUtil;
 /**
  * The default editor for editable combo boxes. The editor is implemented as a JTextField.
  *
+ * <p>
+ *  可编辑组合框的默认编辑器。编辑器被实现为JTextField。
+ * 
+ * 
  * @author Arnaud Weber
  * @author Mark Davidson
  */
@@ -56,6 +61,10 @@ public class BasicComboBoxEditor implements ComboBoxEditor,FocusListener {
      * Creates the internal editor component. Override this to provide
      * a custom implementation.
      *
+     * <p>
+     *  创建内部编辑器组件。覆盖此选项以提供自定义实现。
+     * 
+     * 
      * @return a new editor component
      * @since 1.6
      */
@@ -68,6 +77,10 @@ public class BasicComboBoxEditor implements ComboBoxEditor,FocusListener {
     /**
      * Sets the item that should be edited.
      *
+     * <p>
+     *  设置应该编辑的项目。
+     * 
+     * 
      * @param anObject the displayed value of the editor
      */
     public void setItem(Object anObject) {
@@ -165,6 +178,10 @@ public class BasicComboBoxEditor implements ComboBoxEditor,FocusListener {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  实现UIResource的BasicComboBoxEditor的子类。
+     *  BasicComboBoxEditor不直接实现UIResource,以便应用程序可以安全地覆盖与BasicListCellRenderer子类的cellRenderer属性。
+     * <p>
      */
     public static class UIResource extends BasicComboBoxEditor
     implements javax.swing.plaf.UIResource {

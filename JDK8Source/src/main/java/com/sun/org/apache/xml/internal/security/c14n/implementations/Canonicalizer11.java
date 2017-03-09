@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.c14n.implementations;
 
@@ -53,6 +62,10 @@ import com.sun.org.apache.xml.internal.security.utils.XMLUtils;
  * Canonical XML Version 1.1</A>, a W3C Proposed Recommendation from 29
  * January 2008.
  *
+ * <p>
+ *  从2008年1月29日起实施<A HREF="http://www.w3.org/TR/2008/PR-xml-c14n11-20080129/">规范XML版本1.1 </A>,W3C建议的建议。
+ * 
+ * 
  * @author Sean Mullan
  * @author Raul Benito
  */
@@ -191,6 +204,10 @@ public abstract class Canonicalizer11 extends CanonicalizerBase {
     /**
      * Constructor Canonicalizer11
      *
+     * <p>
+     *  构造函数Canonicalizer11
+     * 
+     * 
      * @param includeComments
      */
     public Canonicalizer11(boolean includeComments) {
@@ -200,6 +217,10 @@ public abstract class Canonicalizer11 extends CanonicalizerBase {
     /**
      * Always throws a CanonicalizationException because this is inclusive c14n.
      *
+     * <p>
+     *  总是抛出CanonicalizationException,因为这是包含c14n。
+     * 
+     * 
      * @param xpathNodeSet
      * @param inclusiveNamespaces
      * @return none it always fails
@@ -214,6 +235,10 @@ public abstract class Canonicalizer11 extends CanonicalizerBase {
     /**
      * Always throws a CanonicalizationException because this is inclusive c14n.
      *
+     * <p>
+     *  总是抛出CanonicalizationException,因为这是包含c14n。
+     * 
+     * 
      * @param rootNode
      * @param inclusiveNamespaces
      * @return none it always fails
@@ -235,6 +260,13 @@ public abstract class Canonicalizer11 extends CanonicalizerBase {
      * So if the element in question isRoot of c14n, it's parent is not in the
      * node set, as well as all other ancestors.
      *
+     * <p>
+     *  返回要为给定元素输出的Attr []。
+     * <br>
+     * 此方法的代码是{@link #handleAttributes(Element,NameSpaceSymbTable)}的副本,而它考虑到子树-c14n是基于良好子树的。
+     * 因此,如果有问题的元素是ROW的c14n,它的父不在节点集,以及所有其他祖先。
+     * 
+     * 
      * @param element
      * @param ns
      * @return the Attr[]s to be output
@@ -301,6 +333,12 @@ public abstract class Canonicalizer11 extends CanonicalizerBase {
      * {@link com.sun.org.apache.xml.internal.security.utils.XMLUtils#circumventBug2650(
      * org.w3c.dom.Document)}.
      *
+     * <p>
+     *  返回要为给定元素输出的Attr []。
+     * <br>
+     *  重要信息：此方法需要在修改的DOM树上工作,即使用{@link com.sun.org.apache.xml.internal.security.utils.XMLUtils#circumventBug2650(org.w3c.dom。
+     * 文件)}。
+     * 
      * @param element
      * @param ns
      * @return the Attr[]s to be output
@@ -345,6 +383,8 @@ public abstract class Canonicalizer11 extends CanonicalizerBase {
                     /* except omit namespace node with local name xml, which defines
                      * the xml prefix, if its string value is
                      * http://www.w3.org/XML/1998/namespace.
+                     * <p>
+                     * 
                      */
                     // add the prefix binding to the ns symb table.
                     if (isVisible(attribute))  {

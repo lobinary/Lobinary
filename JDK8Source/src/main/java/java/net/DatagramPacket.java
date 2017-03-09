@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,12 @@ package java.net;
  * differently, and might arrive in any order. Packet delivery is
  * not guaranteed.
  *
+ * <p>
+ *  这个类表示一个数据包。
+ * <p>
+ *  数据报分组用于实现无连接分组传递服务。每个消息仅仅基于包中包含的信息从一个机器路由到另一个机器。从一个机器发送到另一个机器的多个分组可能被不同地路由,并且可能以任何顺序到达。不保证包交付。
+ * 
+ * 
  * @author  Pavani Diwanji
  * @author  Benjamin Renaud
  * @since   JDK1.0
@@ -44,6 +51,9 @@ class DatagramPacket {
 
     /**
      * Perform class initialization
+     * <p>
+     *  执行类初始化
+     * 
      */
     static {
         java.security.AccessController.doPrivileged(
@@ -59,6 +69,9 @@ class DatagramPacket {
     /*
      * The fields of this class are package-private since DatagramSocketImpl
      * classes needs to access them.
+     * <p>
+     *  这个类的字段是package-private,因为DatagramSocketImpl类需要访问它们。
+     * 
      */
     byte[] buf;
     int offset;
@@ -74,6 +87,12 @@ class DatagramPacket {
      * The {@code length} argument must be less than or equal to
      * {@code buf.length}.
      *
+     * <p>
+     *  构造{@code DatagramPacket}以接收长度为{@code length}的数据包,指定缓冲区中的偏移量。
+     * <p>
+     *  {@code length}参数必须小于或等于{@code buf.length}。
+     * 
+     * 
      * @param   buf      buffer for holding the incoming datagram.
      * @param   offset   the offset for the buffer
      * @param   length   the number of bytes to read.
@@ -93,6 +112,12 @@ class DatagramPacket {
      * The {@code length} argument must be less than or equal to
      * {@code buf.length}.
      *
+     * <p>
+     *  构造用于接收长度为{@code length}的数据包的{@code DatagramPacket}。
+     * <p>
+     *  {@code length}参数必须小于或等于{@code buf.length}。
+     * 
+     * 
      * @param   buf      buffer for holding the incoming datagram.
      * @param   length   the number of bytes to read.
      */
@@ -107,6 +132,11 @@ class DatagramPacket {
      * {@code length} argument must be less than or equal to
      * {@code buf.length}.
      *
+     * <p>
+     *  构造一个数据报数据包,​​用于将长度为{@code length},偏移量为{@code ioffset}的数据包发送到指定主机上指定的端口号。
+     *  {@code length}参数必须小于或等于{@code buf.length}。
+     * 
+     * 
      * @param   buf      the packet data.
      * @param   offset   the packet data offset.
      * @param   length   the packet data length.
@@ -130,6 +160,11 @@ class DatagramPacket {
      * {@code length} argument must be less than or equal to
      * {@code buf.length}.
      *
+     * <p>
+     *  构造一个数据报数据包,​​用于将长度为{@code length},偏移量为{@code ioffset}的数据包发送到指定主机上指定的端口号。
+     *  {@code length}参数必须小于或等于{@code buf.length}。
+     * 
+     * 
      * @param   buf      the packet data.
      * @param   offset   the packet data offset.
      * @param   length   the packet data length.
@@ -150,6 +185,10 @@ class DatagramPacket {
      * host. The {@code length} argument must be less than or equal
      * to {@code buf.length}.
      *
+     * <p>
+     * 构造用于将长度为{@code length}的数据包发送到指定主机上指定的端口号的数据报数据包。 {@code length}参数必须小于或等于{@code buf.length}。
+     * 
+     * 
      * @param   buf      the packet data.
      * @param   length   the packet length.
      * @param   address  the destination address.
@@ -167,6 +206,10 @@ class DatagramPacket {
      * host. The {@code length} argument must be less than or equal
      * to {@code buf.length}.
      *
+     * <p>
+     *  构造用于将长度为{@code length}的数据包发送到指定主机上指定的端口号的数据报数据包。 {@code length}参数必须小于或等于{@code buf.length}。
+     * 
+     * 
      * @param   buf      the packet data.
      * @param   length   the packet length.
      * @param   address  the destination address.
@@ -182,6 +225,10 @@ class DatagramPacket {
      * Returns the IP address of the machine to which this datagram is being
      * sent or from which the datagram was received.
      *
+     * <p>
+     *  返回此数据报发送到或从其接收数据报的机器的IP地址。
+     * 
+     * 
      * @return  the IP address of the machine to which this datagram is being
      *          sent or from which the datagram was received.
      * @see     java.net.InetAddress
@@ -195,6 +242,10 @@ class DatagramPacket {
      * Returns the port number on the remote host to which this datagram is
      * being sent or from which the datagram was received.
      *
+     * <p>
+     *  返回此数据报发送到或从其接收数据报的远程主机上的端口号。
+     * 
+     * 
      * @return  the port number on the remote host to which this datagram is
      *          being sent or from which the datagram was received.
      * @see #setPort(int)
@@ -208,6 +259,10 @@ class DatagramPacket {
      * starts from the {@code offset} in the buffer,
      * and runs for {@code length} long.
      *
+     * <p>
+     *  返回数据缓冲区。接收的数据或要发送的数据从缓冲区中的{@code offset}开始,并运行{@code length} long。
+     * 
+     * 
      * @return  the buffer used to receive or  send data
      * @see #setData(byte[], int, int)
      */
@@ -219,6 +274,10 @@ class DatagramPacket {
      * Returns the offset of the data to be sent or the offset of the
      * data received.
      *
+     * <p>
+     *  返回要发送的数据的偏移量或接收到的数据的偏移量。
+     * 
+     * 
      * @return  the offset of the data to be sent or the offset of the
      *          data received.
      *
@@ -232,6 +291,10 @@ class DatagramPacket {
      * Returns the length of the data to be sent or the length of the
      * data received.
      *
+     * <p>
+     *  返回要发送的数据的长度或接收的数据的长度。
+     * 
+     * 
      * @return  the length of the data to be sent or the length of the
      *          data received.
      * @see #setLength(int)
@@ -244,6 +307,10 @@ class DatagramPacket {
      * Set the data buffer for this packet. This sets the
      * data, length and offset of the packet.
      *
+     * <p>
+     *  设置此数据包的数据缓冲区。这将设置数据包的数据,长度和偏移量。
+     * 
+     * 
      * @param buf the buffer to set for this packet
      *
      * @param offset the offset into the data
@@ -275,6 +342,10 @@ class DatagramPacket {
     /**
      * Sets the IP address of the machine to which this datagram
      * is being sent.
+     * <p>
+     *  设置要发送此数据报的机器的IP地址。
+     * 
+     * 
      * @param iaddr the {@code InetAddress}
      * @since   JDK1.1
      * @see #getAddress()
@@ -286,6 +357,10 @@ class DatagramPacket {
     /**
      * Sets the port number on the remote host to which this datagram
      * is being sent.
+     * <p>
+     *  设置要发送此数据报的远程主机上的端口号。
+     * 
+     * 
      * @param iport the port number
      * @since   JDK1.1
      * @see #getPort()
@@ -301,6 +376,10 @@ class DatagramPacket {
      * Sets the SocketAddress (usually IP address + port number) of the remote
      * host to which this datagram is being sent.
      *
+     * <p>
+     *  设置此数据报发送到的远程主机的SocketAddress(通常为IP地址+端口号)。
+     * 
+     * 
      * @param address the {@code SocketAddress}
      * @throws  IllegalArgumentException if address is null or is a
      *          SocketAddress subclass not supported by this socket
@@ -322,6 +401,10 @@ class DatagramPacket {
      * Gets the SocketAddress (usually IP address + port number) of the remote
      * host that this packet is being sent to or is coming from.
      *
+     * <p>
+     *  获取此数据包发送到或来自的远程主机的SocketAddress(通常为IP地址+端口号)。
+     * 
+     * 
      * @return the {@code SocketAddress}
      * @since 1.4
      * @see #setSocketAddress
@@ -335,6 +418,10 @@ class DatagramPacket {
      * this DatagramPacket set to 0, and the length set to
      * the length of {@code buf}.
      *
+     * <p>
+     * 设置此数据包的数据缓冲区。将此DatagramPacket的偏移量设置为0,并将长度设置为{@code buf}的长度。
+     * 
+     * 
      * @param buf the buffer to set for this packet.
      *
      * @exception NullPointerException if the argument is null.
@@ -361,6 +448,10 @@ class DatagramPacket {
      * will be used for receiving data. The length must be lesser or
      * equal to the offset plus the length of the packet's buffer.
      *
+     * <p>
+     *  设置此数据包的长度。分组的长度是将要发送的分组的数据缓冲区的字节数,或者将用于接收数据的分组的数据缓冲区的字节数。长度必须小于或等于偏移量加上包缓冲区的长度。
+     * 
+     * 
      * @param length the length to set for this packet.
      *
      * @exception IllegalArgumentException if the length is negative
@@ -383,6 +474,8 @@ class DatagramPacket {
 
     /**
      * Perform class load-time initializations.
+     * <p>
+     *  执行类装入时初始化。
      */
     private native static void init();
 }

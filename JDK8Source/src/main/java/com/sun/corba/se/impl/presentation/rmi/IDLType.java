@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@ package com.sun.corba.se.impl.presentation.rmi ;
 
 /**
  * Holds information about the OMG IDL mapping of a Java type.
+ * <p>
+ *  保存有关Java类型的OMG IDL映射的信息。
+ * 
  */
 public class IDLType {
 
@@ -117,6 +121,8 @@ public class IDLType {
      * True if this type doesn't have a containing module.  This
      * would be true of a java type defined in the default package
      * or a primitive.
+     * <p>
+     *  如果此类型没有包含模块,则为true。这对于在默认包或原语中定义的java类型是正确的。
      */
     public boolean hasModule() {
         return (modules_.length > 0) ;

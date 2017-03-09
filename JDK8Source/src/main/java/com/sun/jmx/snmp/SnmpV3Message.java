@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,17 +92,46 @@ import com.sun.jmx.snmp.SnmpPduBulkType;
  * </PRE>
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  是SNMP V3数据包的部分解码表示。
+ * <P>
+ *  这个类可以在开发自定义管理器或代理时使用。
+ * <P>
+ *  <CODE> SnmpV3Message </CODE>类直接映射到RFC 2572中定义的消息语法。
+ * <BLOCKQUOTE>
+ * <PRE>
+ *  SNMPv3Message :: = SEQUENCE {msgVersion INTEGER(0 ... 2147483647), - 管理参数msgGlobalData HeaderData, - 安全模型特定的参数 - 由安全模型定义的格式msgSecurityParameters OCTET STRING,msgData ScopedPduData}
+ *  HeaderData :: = SEQUENCE {msgID INTEGER(0..2147483647),msgMaxSize INTEGER(484..2147483647),。
+ * 
+ *  msgFlags OCTET STRING(SIZE(1)),... .... 1 authFlag  -  ....。
+ *  privFlag  -  .... .1 .. reportableFlag  - 请注意： -  .... ..00是OK,表示noAuthNoPriv  -  .... ..01是OK,表示aut
+ * hNoPriv  -  ... 。
+ *  msgFlags OCTET STRING(SIZE(1)),... .... 1 authFlag  -  ....。..10保留,不得使用。
+ *  -  .... ..11是OK,表示authPriv。
+ * 
+ *  msgSecurityModel INTEGER(1..2147483647)}
+ * </BLOCKQUOTE>
+ * </PRE>
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @since 1.5
  */
 public class SnmpV3Message extends SnmpMsg {
 
     /**
      * Message identifier.
+     * <p>
+     *  消息标识符。
+     * 
      */
     public int msgId = 0;
 
     /**
      * Message max size the pdu sender can deal with.
+     * <p>
+     *  邮件最大大小pdu发件人可以处理。
+     * 
      */
     public int msgMaxSize = 0;
     /**
@@ -116,31 +146,55 @@ public class SnmpV3Message extends SnmpMsg {
      * --  .... ..10   reserved, must NOT be used.
      * --  .... ..11   is OK, means authPriv
      *</PRE>
+     * <p>
+     *  消息标志。可报告的标志和安全级别。</P>
+     * PRE>
+     *  -  .... ... 1 authFlag  -  ....。
+     *  privFlag  -  .... .1 .. reportableFlag  - 请注意： -  .... ..00是OK,表示noAuthNoPriv  -  .... ..01是OK,表示aut
+     * hNoPriv  -  ... 。
+     *  -  .... ... 1 authFlag  -  ....。..10保留,不得使用。 -  .... ..11是OK,表示authPriv。
+     * /PRE>
      */
     public byte msgFlags = 0;
     /**
      * The security model the security sub system MUST use in order to deal with this pdu (eg: User based Security Model Id = 3).
+     * <p>
+     *  安全子系统必须使用的安全模型为了处理这个pdu(例如：基于用户的安全模型Id = 3)。
+     * 
      */
     public int msgSecurityModel = 0;
     /**
      * The unmarshalled security parameters.
+     * <p>
+     *  未组合的安全参数。
+     * 
      */
     public byte[] msgSecurityParameters = null;
     /**
      * The context engine Id in which the pdu must be handled (Generaly the local engine Id).
+     * <p>
+     *  必须处理pdu的上下文引擎Id(通常为本地引擎Id)。
+     * 
      */
     public byte[] contextEngineId = null;
     /**
      * The context name in which the OID has to be interpreted.
+     * <p>
+     *  必须解释OID的上下文名称。
+     * 
      */
     public byte[] contextName = null;
     /** The encrypted form of the scoped pdu (Only relevant when dealing with privacy).
+    /* <p>
      */
     public byte[] encryptedPdu = null;
 
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
      */
     public SnmpV3Message() {
     }
@@ -148,6 +202,10 @@ public class SnmpV3Message extends SnmpMsg {
      * Encodes this message and puts the result in the specified byte array.
      * For internal use only.
      *
+     * <p>
+     *  对此消息进行编码,并将结果放入指定的字节数组中。仅限内部使用。
+     * 
+     * 
      * @param outputBytes An array to receive the resulting encoding.
      *
      * @exception ArrayIndexOutOfBoundsException If the result does not fit
@@ -168,6 +226,10 @@ public class SnmpV3Message extends SnmpMsg {
      * Decodes the specified bytes and initializes this message.
      * For internal use only.
      *
+     * <p>
+     *  解码指定的字节并初始化此消息。仅限内部使用。
+     * 
+     * 
      * @param inputBytes The bytes to be decoded.
      *
      * @exception SnmpStatusException If the specified bytes are not a valid encoding.
@@ -235,6 +297,10 @@ public class SnmpV3Message extends SnmpMsg {
 
     /**
      * Returns the associated request Id.
+     * <p>
+     *  返回关联的请求标识。
+     * 
+     * 
      * @param data The flat message.
      * @return The request Id.
      */
@@ -270,6 +336,15 @@ public class SnmpV3Message extends SnmpMsg {
      * If the encoding length exceeds <CODE>maxDataLength</CODE>,
      * the method throws an exception.
      *
+     * <p>
+     *  使用指定的<CODE> pdu </CODE>初始化此消息。
+     * <P>
+     *  此方法使用<CODE> maxDataLength </CODE>字节数组初始化数据字段。它编码<CODE> pdu </CODE>。
+     * 所得到的编码存储在数据字段中,并且编码的长度存储在<CODE> dataLength </CODE>中。
+     * <p>
+     *  如果编码长度超过<CODE> maxDataLength </CODE>,则该方法将抛出异常。
+     * 
+     * 
      * @param p The PDU to be encoded.
      * @param maxDataLength The maximum length permitted for the data field.
      *
@@ -380,6 +455,12 @@ public class SnmpV3Message extends SnmpMsg {
      * <P>
      * This method decodes the data field and returns the resulting PDU.
      *
+     * <p>
+     *  获取此消息中编码的PDU。
+     * <P>
+     *  此方法解码数据字段并返回生成的PDU。
+     * 
+     * 
      * @return The resulting PDU.
      * @exception SnmpStatusException If the encoding is not valid.
      */
@@ -475,6 +556,8 @@ public class SnmpV3Message extends SnmpMsg {
     /**
      * Dumps this message in a string.
      *
+     * <p>
+     * 
      * @return The string containing the dump.
      */
     public String printMessage() {

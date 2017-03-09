@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import sun.reflect.misc.MethodUtil;
  * Convenient base class for defining Painter instances for rendering a
  * region or component in Nimbus.
  *
+ * <p>
+ *  方便的基类用于定义Painter实例以在Nimbus中呈现区域或组件。
+ * 
+ * 
  * @author Jasper Potts
  * @author Richard Bair
  */
@@ -49,10 +54,19 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      *
      * This field is retrieved from subclasses on each paint operation. It is up
      * to the subclass to compute and cache the PaintContext over multiple calls.
+     * <p>
+     *  PaintContext,它拥有缓存提示和x / y值解码所需的许多状态。
+     * 上下文中包含的数据通常只计算一次,并在多次绘制调用中重用,而其他值(w,h,f,leftWidth,等等)重新计算每次调用paint。
+     * 
+     *  此字段从每个绘制操作的子类检索。它是由子类来计算和缓存PaintContext通过多个调用。
+     * 
      */
     private PaintContext ctx;
     /**
      * The scaling factor. Recomputed on each call to paint.
+     * <p>
+     *  缩放因子。在每次调用paint时重新计算。
+     * 
      */
     private float f;
     /*
@@ -80,65 +94,123 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
 
       The various widths/heights are used to decode control points. The
       various scales are used to decode bezier handles (or anchors).
+    /* <p>
+    /*  用于基于画布大小和伸展插图解码x / y值的各种度量。
+    /* 
+    /*  在每次调用paint时,我们首先要求子类为PaintContext。从上下文我们得到画布大小和拉伸插图,以及算法是否应该"倒置",意味着中心部分保持固定的大小,其他部分缩放。
+    /* 
+    /*  然后,我们使用这些值来计算一系列度量(下面列出),用于解码特定轴(x或y)中的点。
+    /* 
+    /* leftWidth表示在考虑任何缩放因子(例如DPI缩放)之后从区域的左边缘到第一伸展插入物的距离。 centerWidth是leftWidth和rightWidth之间的距离。
+    /*  rightWidth是从右边缘到右插图的距离(在应用缩放之后)。
+    /* 
+    /*  topHeight,centerHeight和bottomHeight也有相同的逻辑。
+    /* 
+    /*  leftScale表示左部分所占用的宽度的比例。相同的逻辑应用于其他标度。
+    /* 
+    /*  各种宽度/高度用于解码控制点。各种比例用于解码贝塞尔手柄(或锚点)。
+    /* 
     */
     /**
      * The width of the left section. Recomputed on each call to paint.
+     * <p>
+     *  左部分的宽度。在每次调用paint时重新计算。
+     * 
      */
     private float leftWidth;
     /**
      * The height of the top section. Recomputed on each call to paint.
+     * <p>
+     *  顶部的高度。在每次调用paint时重新计算。
+     * 
      */
     private float topHeight;
     /**
      * The width of the center section. Recomputed on each call to paint.
+     * <p>
+     *  中心部分的宽度。在每次调用paint时重新计算。
+     * 
      */
     private float centerWidth;
     /**
      * The height of the center section. Recomputed on each call to paint.
+     * <p>
+     *  中心部分的高度。在每次调用paint时重新计算。
+     * 
      */
     private float centerHeight;
     /**
      * The width of the right section. Recomputed on each call to paint.
+     * <p>
+     *  右部分的宽度。在每次调用paint时重新计算。
+     * 
      */
     private float rightWidth;
     /**
      * The height of the bottom section. Recomputed on each call to paint.
+     * <p>
+     *  底部的高度。在每次调用paint时重新计算。
+     * 
      */
     private float bottomHeight;
     /**
      * The scaling factor to use for the left section. Recomputed on each call to paint.
+     * <p>
+     *  用于左侧部分的缩放因子。在每次调用paint时重新计算。
+     * 
      */
     private float leftScale;
     /**
      * The scaling factor to use for the top section. Recomputed on each call to paint.
+     * <p>
+     *  用于顶部的缩放因子。在每次调用paint时重新计算。
+     * 
      */
     private float topScale;
     /**
      * The scaling factor to use for the center section, in the horizontal
      * direction. Recomputed on each call to paint.
+     * <p>
+     *  用于中心部分的缩放因子,在水平方向。在每次调用paint时重新计算。
+     * 
      */
     private float centerHScale;
     /**
      * The scaling factor to use for the center section, in the vertical
      * direction. Recomputed on each call to paint.
+     * <p>
+     *  用于中心部分的缩放因子,垂直方向。在每次调用paint时重新计算。
+     * 
      */
     private float centerVScale;
     /**
      * The scaling factor to use for the right section. Recomputed on each call to paint.
+     * <p>
+     * 用于右侧部分的缩放因子。在每次调用paint时重新计算。
+     * 
      */
     private float rightScale;
     /**
      * The scaling factor to use for the bottom section. Recomputed on each call to paint.
+     * <p>
+     *  用于底部的缩放因子。在每次调用paint时重新计算。
+     * 
      */
     private float bottomScale;
 
     /**
      * Create a new AbstractRegionPainter
+     * <p>
+     *  创建一个新的AbstractRegionPainter
+     * 
      */
     protected AbstractRegionPainter() { }
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public final void paint(Graphics2D g, JComponent c, int w, int h) {
@@ -166,6 +238,10 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * to include in the image cache lookups. This is checked for every call
      * of the paint(g, c, w, h) method.
      *
+     * <p>
+     *  获取绘图器实现想要包括在图像缓存查找中的任何额外属性。这是为每次调用paint(g,c,w,h)方法检查。
+     * 
+     * 
      * @param c The component on the current paint call
      * @return Array of extra objects to be included in the cache key
      */
@@ -183,6 +259,13 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * <p> This method allows for subclasses to package the painting of different states
      * with possibly different canvas sizes, etc, into one AbstractRegionPainter implementation.</p>
      *
+     * <p>
+     *  <p>获取此绘画操作的PaintContext。这种方法在每种颜料上调用,因此应该快速,不产生垃圾。 PaintContext包含诸如缓存提示之类的信息。
+     * 它还包含在运行时解码点所需的数据,例如拉伸插入,定义编码点的画布大小,以及拉伸插入是否反转。</p>。
+     * 
+     *  <p>此方法允许子类将具有可能不同的画布大小等的不同状态的绘画打包到一个AbstractRegionPainter实现中。</p>
+     * 
+     * 
      * @return a PaintContext associated with this paint operation.
      */
     protected abstract PaintContext getPaintContext();
@@ -194,6 +277,11 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * the Graphics object prior to rendering, regardless of whether the render operation is
      * performed to an intermediate buffer or directly to the display.</p>
      *
+     * <p>
+     *  <p>配置给定的Graphics2D。通常,渲染提示或合成规则在绘制之前应用于Graphics2D对象,这应该影响所有后续绘制操作。
+     * 此方法提供了一个方便的钩子,用于在渲染之前配置Graphics对象,无论渲染操作是执行到中间缓冲区还是直接到显示器。</p>。
+     * 
+     * 
      * @param g The Graphics2D object to configure. Will not be null.
      */
     protected void configureGraphics(Graphics2D g) {
@@ -208,6 +296,12 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * and a height of <code>height</code>. For performance reasons, you may want to read
      * the clip from the Graphics2D object and only render within that space.
      *
+     * <p>
+     * 实际上执行喷涂操作。子类必须实现此方法。传递的图形对象可以表示正被渲染的实际表面,或者它可以是中间缓冲器。它也已经预翻译。
+     * 简单地渲染组件,就像它位于0,0,宽度为<code> width </code>和高度<code> height </code>。
+     * 出于性能原因,您可能需要从Graphics2D对象中读取剪辑,并且只在该空间内呈现。
+     * 
+     * 
      * @param g The Graphics2D surface to paint to
      * @param c The JComponent related to the drawing event. For example, if the
      *          region being rendered is Button, then <code>c</code> will be a
@@ -226,6 +320,10 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * Decodes and returns a float value representing the actual pixel location for
      * the given encoded X value.
      *
+     * <p>
+     *  解码并返回表示给定编码X值的实际像素位置的浮点值。
+     * 
+     * 
      * @param x an encoded x value (0...1, or 1...2, or 2...3)
      * @return the decoded x value
      * @throws IllegalArgumentException
@@ -247,6 +345,10 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * Decodes and returns a float value representing the actual pixel location for
      * the given encoded y value.
      *
+     * <p>
+     *  解码并返回表示给定编码y值的实际像素位置的浮点值。
+     * 
+     * 
      * @param y an encoded y value (0...1, or 1...2, or 2...3)
      * @return the decoded y value
      * @throws IllegalArgumentException
@@ -269,6 +371,10 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * the anchor point given the encoded X value of the control point, and the offset
      * distance to the anchor from that control point.
      *
+     * <p>
+     *  解码并返回一个float值,表示给定控制点的编码X值的锚点的实际像素位置,以及到该控制点的锚点的偏移距离。
+     * 
+     * 
      * @param x an encoded x value of the bezier control point (0...1, or 1...2, or 2...3)
      * @param dx the offset distance to the anchor from the control point x
      * @return the decoded x location of the control point
@@ -292,6 +398,10 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * the anchor point given the encoded Y value of the control point, and the offset
      * distance to the anchor from that control point.
      *
+     * <p>
+     *  解码并返回一个float值,该值表示给定控制点的编码Y值的锚点的实际像素位置,以及到该控制点的锚点的偏移距离。
+     * 
+     * 
      * @param y an encoded y value of the bezier control point (0...1, or 1...2, or 2...3)
      * @param dy the offset distance to the anchor from the control point y
      * @return the decoded y position of the control point
@@ -314,6 +424,10 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * Decodes and returns a color, which is derived from a base color in UI
      * defaults.
      *
+     * <p>
+     *  解码并返回一种颜色,该颜色来自UI默认值中的基本颜色。
+     * 
+     * 
      * @param key     A key corresponding to the value in the UI Defaults table
      *                of UIManager where the base color is defined
      * @param hOffset The hue offset used for derivation.
@@ -339,6 +453,10 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * Decodes and returns a color, which is derived from a offset between two
      * other colors.
      *
+     * <p>
+     *  解码并返回一种颜色,该颜色来自两种其他颜色之间的偏移。
+     * 
+     * 
      * @param color1   The first color
      * @param color2   The second color
      * @param midPoint The offset between color 1 and color 2, a value of 0.0 is
@@ -357,6 +475,11 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * end points are equal. In such a case, the end y point is slightly
      * increased to avoid the overlap.
      *
+     * <p>
+     * 给定用于创建LinearGradientPaint的参数,此方法将创建并返回线性渐变涂料。此方法的一个主要目的是避免创建一个起始和终止点相等的LinearGradientPaint。
+     * 在这种情况下,稍微增加结束y点以避免重叠。
+     * 
+     * 
      * @param x1
      * @param y1
      * @param x2
@@ -388,6 +511,11 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * is non-positive. In such a case, the radius is just slightly
      * increased to avoid 0.
      *
+     * <p>
+     *  给定用于创建RadialGradientPaint的参数,此方法将创建并返回径向渐变涂料。此方法的一个主要目的是避免创建一个半径为非正的RadialGradientPaint。
+     * 在这种情况下,半径稍微增加以避免0。
+     * 
+     * 
      * @param x
      * @param y
      * @param r
@@ -417,6 +545,11 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * property with key <code>property</code>. If that still fails to return
      * a Color then <code>defaultColor</code> is returned.
      *
+     * <p>
+     *  从给定的JComponent获取颜色属性。首先检查<code> getXXX()</code>方法,如果失败,将检查具有键<code>属性</code>的客户端属性。
+     * 如果仍然无法返回颜色,则返回<code> defaultColor </code>。
+     * 
+     * 
      * @param c The component to get the color property from
      * @param property The name of a bean style property or client property
      * @param defaultColor The color to return if no color was obtained from
@@ -486,6 +619,9 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
      * class are created once, and reused for each paint request without modification.
      * This class contains values useful when hinting the cache engine, and when decoding
      * control points and bezier curve anchors.
+     * <p>
+     *  一个封装状态的类在绘画时很有用。通常,此类的实例被创建一次,并且对每个绘图请求重复使用而不进行修改。此类包含在提示缓存引擎时以及解码控制点和贝塞尔曲线锚点时有用的值。
+     * 
      */
     protected static class PaintContext {
         protected static enum CacheMode {
@@ -514,6 +650,10 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
          * Creates a new PaintContext which does not attempt to cache or scale any cached
          * images.
          *
+         * <p>
+         *  创建一个新的PaintContext,不尝试缓存或缩放任何缓存的图像。
+         * 
+         * 
          * @param insets The stretching insets. May be null. If null, then assumed to be 0, 0, 0, 0.
          * @param canvasSize The size of the canvas used when encoding the various x/y values. May be null.
          *                   If null, then it is assumed that there are no encoded values, and any calls
@@ -527,6 +667,9 @@ public abstract class AbstractRegionPainter implements Painter<JComponent> {
         /**
          * Creates a new PaintContext.
          *
+         * <p>
+         *  创建一个新的PaintContext。
+         * 
          * @param insets The stretching insets. May be null. If null, then assumed to be 0, 0, 0, 0.
          * @param canvasSize The size of the canvas used when encoding the various x/y values. May be null.
          *                   If null, then it is assumed that there are no encoded values, and any calls

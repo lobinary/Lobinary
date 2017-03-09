@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -152,6 +153,70 @@ import javax.accessibility.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> JLayeredPane </code>为JFC / Swing容器添加深度,允许组件在需要时相互重叠。
+ *  <code> Integer </code>对象指定容器中的每个组件的深度,其中较高编号的组件位于"顶部"的其他组分。
+ * 有关面向任务的文档和使用分层窗格的示例,请参见<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/layeredpane.html">
+ * 如何使用分层窗格</a> ,在Java教程</em>中的一个部分。
+ *  <code> Integer </code>对象指定容器中的每个组件的深度,其中较高编号的组件位于"顶部"的其他组分。
+ * 
+ * <TABLE STYLE="FLOAT:RIGHT" BORDER="0" SUMMARY="layout">
+ * <TR>
+ * <TD ALIGN="CENTER">
+ *  <P STYLE ="TEXT-ALIGN：CENTER"> <IMG SRC ="doc-files / JLayeredPane-1.gif"alt ="以下文字描述此图片。
+ * WIDTH="269" HEIGHT="264" STYLE="FLOAT:BOTTOM; BORDER=0">
+ * </TD>
+ * </TR>
+ * </TABLE>
+ *  为了方便起见,<code> JLayeredPane </code>将深度范围划分为几个不同的图层。将组件放入其中一个层可以很容易地确保组件正确重叠,而不必担心为特定深度指定数字：
+ * <DL>
+ * <DT> <FONT SIZE ="2"> DEFAULT_LAYER </FONT> </DT> <DD>标准层,大多数组件都在那里。这最底层。
+ *  <DT> <FONT SIZE ="2"> PALETTE_LAYER </FONT> </DT> <DD>调色板层位于默认图层上方。用于浮动工具栏和调色板,因此它们可以位于其他组件上方。
+ *  <DT> <FONT SIZE ="2"> MODAL_LAYER </FONT> </DT> <DD>用于模态对话框的图层。它们将出现在容器中的任何工具栏,调色板或标准组件的顶部。
+ *  <DT> <FONT SIZE ="2"> POPUP_LAYER </FONT> </DT> <DD>弹出层显示在对话框上方。
+ * 这样,与组合框,工具提示和其他帮助文本相关联的弹出窗口将显示在生成它们的组件,调色板或对话框的上方。
+ *  <DT> <FONT SIZE ="2"> DRAG_LAYER </FONT> </DT> <DD>拖动组件时,将其重新分配到拖动层,确保它位于容器中的每个其他组件上。
+ * 当完成拖动时,它可以重新分配到其正常层。
+ * </DL>
+ *  <code> JLayeredPane </code>方法<code> moveToFront(Component)</code>,<code> moveToBack(Component)</code>
+ * 和<code> setPosition </code>可用于重新定位组件其层。
+ *  <code> setLayer </code>方法也可用于更改组件的当前图层。
+ * 
+ * <h2>详细</h2> <code> JLayeredPane </code>管理像<code> Container </code>这样的子元素列表,但允许定义其中的几个层。
+ * 同一层中的子代理与正常的<code> Container </code>对象一样被管理,增加的特性是当子组件重叠时,较高层中的子级显示在较低层中的子级之上。
+ * <p>
+ *  每个层是不同的整数。通过在添加调用期间传递<code> Integer </code>对象,可以在<code> Component </code>上设置图层属性。<br>例如：
+ * <PRE>
+ *  layeredPane.add(child,JLayeredPane.DEFAULT_LAYER);或layeredPane.add(child,new Integer(10));
+ * </PRE>
+ *  还可以通过在组件的父代码的<code> JLayeredPane </code>上调用<PRE> layeredPaneParent.setLayer(child,10)</PRE>来设置图层属性。
+ * 该图层应在</i>将子项添加到父项之前设置为<i>。
+ * <p>
+ *  较高数字层显示在较低数字层上方。因此,使用用于各个分量的层和字母的数字,代表性列表顺序将如下：<PRE> 5a,5b,5c,2a,2b,2c,1a </PRE>其中最左边的分量最接近顶部的显示。
+ * <p>
+ *  通过调用<code> moveToFront </code>或<code> moveToBack </code>,可以将组件移动到其层中的顶部或底部位置。
+ * <p>
+ * 也可以直接指定层中的组件的位置。有效位置的范围从0到小于该层中组件数量的1。值-1表示最底部位置。值0表示最高位置。与层数不同,在显示中较高的位置值<i> </i>。
+ * <blockquote>
+ *  <b>注意：</b>此序列(由java.awt.Container定义)与图层编号序列相反。
+ * 通常,你将使用<code> moveToFront </code>,<code> moveToBack </code>和<code> setLayer </code>。
+ * </blockquote>
+ *  下面是使用方法add(Component,layer,position)的一些例子：调用add(5x,5,-1)得到：<PRE> 5a,5b,5c,5x,2a,2b,2c,1a </PRE >
+ * 
+ *  调用add(5z,5,2)得到：5a,5b,5z,5c,5x,2a,2b,2c,1a </PRE>
+ * 
+ *  调用add(3a,3,7)得到：5a,5b,5z,5c,5x,3a,2a,2b,2c,1a </PRE>
+ * 
+ *  使用正常的油漆/事件机制导致1a出现在底部,5a超过所有其他组件。
+ * <p>
+ *  <b>注意：</b>这些图层只是一个逻辑构造,LayoutManagers会影响此容器的所有子组件,而不考虑图层设置。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  */
 @SuppressWarnings("serial")
@@ -171,6 +236,10 @@ public class JLayeredPane extends JComponent implements Accessible {
       * This layer is normally only use to position the contentPane and menuBar
       * components of JFrame.
       * Equivalent to new Integer(-30000).
+      * <p>
+      *  此图层通常只用于定位JFrame的contentPane和menuBar组件。相当于新的整数(-30000)。
+      * 
+      * 
       * @see JFrame
       */
     public final static Integer FRAME_CONTENT_LAYER = new Integer(-30000);
@@ -238,6 +307,10 @@ public class JLayeredPane extends JComponent implements Accessible {
      * Remove the indexed component from this pane.
      * This is the absolute index, ignoring layers.
      *
+     * <p>
+     *  从此窗格中删除索引的组件。这是绝对指数,忽略图层。
+     * 
+     * 
      * @param index  an int specifying the component to remove
      * @see #getIndexOf
      */
@@ -253,6 +326,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /**
      * Removes all the components from this container.
      *
+     * <p>
+     *  从此容器中删除所有组件。
+     * 
+     * 
      * @since 1.5
      */
     public void removeAll() {
@@ -271,6 +348,10 @@ public class JLayeredPane extends JComponent implements Accessible {
      * Returns false if components in the pane can overlap, which makes
      * optimized drawing impossible. Otherwise, returns true.
      *
+     * <p>
+     *  如果窗格中的组件可能重叠,则返回false,这使得无法进行优化绘制。否则,返回true。
+     * 
+     * 
      * @return false if components can overlap, else true
      * @see JComponent#isOptimizedDrawingEnabled
      */
@@ -287,6 +368,10 @@ public class JLayeredPane extends JComponent implements Accessible {
       * Normally you should use the instance method setLayer(), in order to
       * get the desired side-effects (like repainting).
       *
+      * <p>
+      *  任何副作用像setLayer()(绘画,添加/删除等)。通常你应该使用实例方法setLayer(),以获得所需的副作用(如重绘)。
+      * 
+      * 
       * @param c      the JComponent to move
       * @param layer  an int specifying the layer to move it to
       * @see #setLayer
@@ -303,6 +388,10 @@ public class JLayeredPane extends JComponent implements Accessible {
       * does not cause any side effects like setLayer(). (painting, add/remove, etc)
       * Normally you should use the instance method getLayer().
       *
+      * <p>
+      *  不会导致任何副作用像setLayer()。 (绘画,添加/删除等)通常你应该使用实例方法getLayer()。
+      * 
+      * 
       * @param c  the JComponent to check
       * @return   an int specifying the component's layer
       */
@@ -318,6 +407,10 @@ public class JLayeredPane extends JComponent implements Accessible {
       * JLayeredPane at their root, so any component in a JFrame will
       * have a JLayeredPane parent.
       *
+      * <p>
+      *  包含指定的组件。请注意,所有JFrames在其根目录下都有一个JLayeredPane,因此JFrame中的任何组件都将有一个JLayeredPane父级。
+      * 
+      * 
       * @param c the Component to check
       * @return the JLayeredPane that contains the component, or
       *         null if no JLayeredPane is found in the component
@@ -338,6 +431,10 @@ public class JLayeredPane extends JComponent implements Accessible {
       * making it the bottommost component in that layer.
       * Should be called before adding to parent.
       *
+      * <p>
+      *  使其成为该层中最底部的部件。应在添加到父代之前调用。
+      * 
+      * 
       * @param c     the Component to set the layer for
       * @param layer an int specifying the layer to set, where
       *              lower numbers are closer to the bottom
@@ -349,6 +446,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /** Sets the layer attribute for the specified component and
       * also sets its position within that layer.
       *
+      * <p>
+      *  也设置其在该层中的位置。
+      * 
+      * 
       * @param c         the Component to set the layer for
       * @param layer     an int specifying the layer to set, where
       *                  lower numbers are closer to the bottom
@@ -385,6 +486,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /**
      * Returns the layer attribute for the specified Component.
      *
+     * <p>
+     *  返回指定组件的图层属性。
+     * 
+     * 
      * @param c  the Component to check
      * @return an int specifying the component's current layer
      */
@@ -406,6 +511,10 @@ public class JLayeredPane extends JComponent implements Accessible {
      * Index numbers, like position numbers, have the topmost component
      * at index zero. Larger numbers are closer to the bottom.
      *
+     * <p>
+     * 返回指定组件的索引。这是绝对指数,忽略图层。索引号(如位置编号)在索引为零时具有最高的分量。较大的数字更接近底部。
+     * 
+     * 
      * @param c  the Component to check
      * @return an int specifying the component's index
      */
@@ -423,6 +532,10 @@ public class JLayeredPane extends JComponent implements Accessible {
      * Moves the component to the top of the components in its current layer
      * (position 0).
      *
+     * <p>
+     *  将组件移动到当前图层(位置0)中组件的顶部。
+     * 
+     * 
      * @param c the Component to move
      * @see #setPosition(Component, int)
      */
@@ -434,6 +547,10 @@ public class JLayeredPane extends JComponent implements Accessible {
      * Moves the component to the bottom of the components in its current layer
      * (position -1).
      *
+     * <p>
+     *  将组件移动到当前图层中的组件底部(位置-1)。
+     * 
+     * 
      * @param c the Component to move
      * @see #setPosition(Component, int)
      */
@@ -451,6 +568,12 @@ public class JLayeredPane extends JComponent implements Accessible {
      * to the top (0 is topmost), and higher position numbers are closer to
      * the bottom.
      *
+     * <p>
+     *  将组件移动到当前图层中的<code> position </code>,其中0是图层中最顶层的位置,-1是最底层的位置。
+     * <p>
+     *  <b>注意：</b>位置编号由java.awt.Container定义,与层编号相反。下面的位置数字更靠近顶部(0是最上面的),更高的位置数字更接近底部。
+     * 
+     * 
      * @param c         the Component to move
      * @param position  an int in the range -1..N-1, where N is the number of
      *                  components in the component's current layer
@@ -462,6 +585,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /**
      * Get the relative position of the component within its layer.
      *
+     * <p>
+     *  获取组件在其图层中的相对位置。
+     * 
+     * 
      * @param c  the Component to check
      * @return an int giving the component's position, where 0 is the
      *         topmost position and the highest index value = the count
@@ -492,6 +619,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /** Returns the highest layer value from all current children.
       * Returns 0 if there are no children.
       *
+      * <p>
+      *  如果没有子项,则返回0。
+      * 
+      * 
       * @return an int indicating the layer of the topmost component in the
       *         pane, or zero if there are no children
       */
@@ -504,6 +635,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /** Returns the lowest layer value from all current children.
       * Returns 0 if there are no children.
       *
+      * <p>
+      *  如果没有子项,则返回0。
+      * 
+      * 
       * @return an int indicating the layer of the bottommost component in the
       *         pane, or zero if there are no children
       */
@@ -517,6 +652,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /**
      * Returns the number of children currently in the specified layer.
      *
+     * <p>
+     *  返回当前在指定图层中的子项数。
+     * 
+     * 
      * @param layer  an int specifying the layer to check
      * @return an int specifying the number of components in that layer
      */
@@ -541,6 +680,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /**
      * Returns an array of the components in the specified layer.
      *
+     * <p>
+     *  返回指定图层中的组件数组。
+     * 
+     * 
      * @param layer  an int specifying the layer to check
      * @return an array of Components contained in that layer
      */
@@ -567,6 +710,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /**
      * Paints this JLayeredPane within the specified graphics context.
      *
+     * <p>
+     *  在指定的图形上下文中绘制此JLayeredPane。
+     * 
+     * 
      * @param g  the Graphics context within which to paint
      */
     public void paint(Graphics g) {
@@ -593,6 +740,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /**
      * Returns the hashtable that maps components to layers.
      *
+     * <p>
+     *  返回将组件映射到图层的散列表。
+     * 
+     * 
      * @return the Hashtable used to map components to their layers
      */
     protected Hashtable<Component,Integer> getComponentToLayer() {
@@ -604,6 +755,10 @@ public class JLayeredPane extends JComponent implements Accessible {
     /**
      * Returns the Integer object associated with a specified layer.
      *
+     * <p>
+     *  返回与指定图层关联的整数对象。
+     * 
+     * 
      * @param layer an int specifying the layer
      * @return an Integer object for that layer
      */
@@ -635,6 +790,10 @@ public class JLayeredPane extends JComponent implements Accessible {
      * Primitive method that determines the proper location to
      * insert a new child based on layer and position requests.
      *
+     * <p>
+     *  基于层和位置请求确定插入新子节点的合适位置的基本方法。
+     * 
+     * 
      * @param layer     an int specifying the layer
      * @param position  an int specifying the position within the layer
      * @return an int giving the (absolute) insertion-index
@@ -651,6 +810,10 @@ public class JLayeredPane extends JComponent implements Accessible {
      * not remove the component from the containment hierarchy though
      * we need to ignore it when calculating the insertion index.
      *
+     * <p>
+     * 此方法是insertIndexForLayer()的扩展版本以支持setLayer,它使用Container.setZOrder,它不会从包含层次结构中删除组件,但是在计算插入索引时我们需要忽略它。
+     * 
+     * 
      * @param comp      component to ignore when determining index
      * @param layer     an int specifying the layer
      * @param position  an int specifying the position within the layer
@@ -724,6 +887,10 @@ public class JLayeredPane extends JComponent implements Accessible {
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此JLayeredPane的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this JLayeredPane.
      */
     protected String paramString() {
@@ -744,6 +911,11 @@ public class JLayeredPane extends JComponent implements Accessible {
      * AccessibleJLayeredPane.
      * A new AccessibleJLayeredPane instance is created if necessary.
      *
+     * <p>
+     *  获取与此JLayeredPane关联的AccessibleContext。对于分层窗格,AccessibleContext采用AccessibleJLayeredPane的形式。
+     * 如果需要,将创建一个新的AccessibleJLayeredPane实例。
+     * 
+     * 
      * @return an AccessibleJLayeredPane that serves as the
      *         AccessibleContext of this JLayeredPane
      */
@@ -768,6 +940,11 @@ public class JLayeredPane extends JComponent implements Accessible {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现了对<code> JLayeredPane </code>类的辅助功能支持。它提供了适用于分层窗格用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
      */
     @SuppressWarnings("serial")
     protected class AccessibleJLayeredPane extends AccessibleJComponent {
@@ -775,6 +952,9 @@ public class JLayeredPane extends JComponent implements Accessible {
         /**
          * Get the role of this object.
          *
+         * <p>
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole

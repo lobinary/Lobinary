@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,11 +30,18 @@ package java.util.zip;
  * This interface defines the constants that are used by the classes
  * which manipulate ZIP files.
  *
+ * <p>
+ *  此接口定义由操作ZIP文件的类使用的常量。
+ * 
+ * 
  * @author      David Connelly
  */
 interface ZipConstants {
     /*
      * Header signatures
+     * <p>
+     *  标题签名
+     * 
      */
     static long LOCSIG = 0x04034b50L;   // "PK\003\004"
     static long EXTSIG = 0x08074b50L;   // "PK\007\008"
@@ -42,6 +50,9 @@ interface ZipConstants {
 
     /*
      * Header sizes in bytes (including signatures)
+     * <p>
+     *  标头大小(以字节为单位)(包括签名)
+     * 
      */
     static final int LOCHDR = 30;       // LOC header size
     static final int EXTHDR = 16;       // EXT header size
@@ -50,6 +61,9 @@ interface ZipConstants {
 
     /*
      * Local file (LOC) header field offsets
+     * <p>
+     *  本地文件(LOC)头字段偏移
+     * 
      */
     static final int LOCVER = 4;        // version needed to extract
     static final int LOCFLG = 6;        // general purpose bit flag
@@ -63,6 +77,9 @@ interface ZipConstants {
 
     /*
      * Extra local (EXT) header field offsets
+     * <p>
+     *  额外本地(EXT)头字段偏移量
+     * 
      */
     static final int EXTCRC = 4;        // uncompressed file crc-32 value
     static final int EXTSIZ = 8;        // compressed size
@@ -70,6 +87,9 @@ interface ZipConstants {
 
     /*
      * Central directory (CEN) header field offsets
+     * <p>
+     *  中心目录(CEN)头字段偏移量
+     * 
      */
     static final int CENVEM = 4;        // version made by
     static final int CENVER = 6;        // version needed to extract
@@ -89,6 +109,8 @@ interface ZipConstants {
 
     /*
      * End of central directory (END) header field offsets
+     * <p>
+     *  中央目录结束(END)头字段偏移
      */
     static final int ENDSUB = 8;        // number of entries on this disk
     static final int ENDTOT = 10;       // total number of entries

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,22 @@ import com.sun.source.doctree.*;
  *   }
  * </pre>
  *
+ * <p>
+ *  访问所有子树节点的TreeVisitor。要访问特定类型的节点,只需覆盖相应的visitXYZ方法。在你的方法中,调用super.visitXYZ访问后代节点。
+ * 
+ *  <p> visitXYZ方法的默认实现将确定结果如下：
+ * <ul>
+ *  <li>如果被访问的节点没有子节点,则结果将为null。 <li>如果被访问的节点有一个子节点,则结果将是对该子节点调用{@code scan}的结果。子节点可以是简单节点,也可以是节点列表。
+ *  <li>如果被访问的节点有多个子节点,则结果将通过依次调用{@code scan}每个子节点,然后将第一次之后的每个扫描的结果与迄今为止的累积结果组合,由{@link #reduce}方法确定。
+ * 每个子节点可以是节点列表的简单节点。 {@code reduce}方法的默认行为是visitXYZ方法的结果是最后一个子节点扫描的结果。
+ * </ul>
+ * 
+ *  <p>以下是计算树中错误节点数的示例：
+ * <pre>
+ * class CountErrors extends DocTreeScanner&lt; Integer,Void&gt; {{@literal @}覆盖public Integer visitErro
+ * neous(ErroneousTree节点,Void p){return 1; } {@literal @}覆盖public Integer reduce(Integer r1,Integer r2){return(r1 == null?0：r1)+(r2 == null?0：r2); }
+ * }。
+ * 
  * @since 1.8
  */
 @jdk.Exported
@@ -72,6 +89,9 @@ public class DocTreeScanner<R,P> implements DocTreeVisitor<R,P> {
 
     /**
      * Scan a single node.
+     * <p>
+     * </pre>
+     * 
      */
     public R scan(DocTree node, P p) {
         return (node == null) ? null : node.accept(this, p);
@@ -83,6 +103,9 @@ public class DocTreeScanner<R,P> implements DocTreeVisitor<R,P> {
 
     /**
      * Scan a list of nodes.
+     * <p>
+     *  扫描单个节点。
+     * 
      */
     public R scan(Iterable<? extends DocTree> nodes, P p) {
         R r = null;
@@ -104,6 +127,9 @@ public class DocTreeScanner<R,P> implements DocTreeVisitor<R,P> {
      * Reduces two results into a combined result.
      * The default implementation is to return the first parameter.
      * The general contract of the method is that it may take any action whatsoever.
+     * <p>
+     *  扫描节点列表。
+     * 
      */
     public R reduce(R r1, R r2) {
         return r1;
@@ -112,6 +138,10 @@ public class DocTreeScanner<R,P> implements DocTreeVisitor<R,P> {
 
 /* ***************************************************************************
  * Visitor methods
+ * <p>
+ *  将两个结果减少为组合结果。默认实现是返回第一个参数。该方法的一般合同是,它可以采取任何行动。
+ * 
+ * 
  ****************************************************************************/
 
     @Override

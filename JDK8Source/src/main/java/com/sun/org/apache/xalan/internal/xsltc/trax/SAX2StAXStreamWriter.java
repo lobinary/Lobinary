@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.Locator2;
 
 /**
+/* <p>
+/* 
  * @author Sunitha Reddy
  */
 
@@ -144,6 +147,10 @@ public class SAX2StAXStreamWriter extends SAX2StAXBaseWriter {
                             }
 
 
+                        /* <p>
+                        /*  final int nDecls = namespaces.size(); for(int i = 0; i <nDecls; i ++){final String prefix =(String)namespaces.elementAt(i); if(prefix.length()== 0){writer.setDefaultNamespace((String)namespaces.elementAt(++ i)); } else {writer.setPrefix(prefix,(String)namespaces.elementAt(++ i)); }}。
+                        /* 
+                        /* 
                         }*/
 
                         // write attributes

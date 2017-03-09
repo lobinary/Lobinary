@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import java.beans.PropertyChangeEvent;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  为{@link javax.swing.JTextField}提供Synth L&amp; F UI委托。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Shannon Hickey
  * @since 1.7
  */
@@ -57,6 +65,10 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
     /**
      * Creates a UI for a JTextField.
      *
+     * <p>
+     *  为JTextField创建一个UI。
+     * 
+     * 
      * @param c the text field
      * @return the UI object
      */
@@ -149,6 +161,9 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -167,6 +182,12 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -189,6 +210,11 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
      * derived from {@code AbstractDocument}).  This enables the
      * model to potentially be updated asynchronously.
      *
+     * <p>
+     *  绘制指定的组件。 <p>这是路由到{@link #paintSafely}方法,保证模型在渲染(如果关联模型派生自{@code AbstractDocument})时不会从此线程的视图更改。
+     * 这使得模型可能被异步更新。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -204,6 +230,9 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -214,6 +243,9 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
     /**
      * {@inheritDoc}
      * Overridden to do nothing.
+     * <p>
+     *  {@inheritDoc}覆盖,不做任何操作。
+     * 
      */
     @Override
     protected void paintBackground(Graphics g) {
@@ -229,6 +261,11 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
      * properties in JTextComponent itself are handled prior
      * to calling this method).
      *
+     * <p>
+     * 当在相关联的JTextComponent上更改绑定属性时,将调用此方法。这是一个钩子,UI实现可以改变以反映UI如何显示JTextComponent子类的绑定属性。
+     * 这被实现为不执行任何操作(即,在调用此方法之前处理对JTextComponent本身中的属性的响应)。
+     * 
+     * 
      * @param evt the property change event
      */
     @Override
@@ -241,6 +278,9 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installDefaults() {
@@ -252,6 +292,8 @@ public class SynthTextFieldUI extends BasicTextFieldUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     protected void uninstallDefaults() {

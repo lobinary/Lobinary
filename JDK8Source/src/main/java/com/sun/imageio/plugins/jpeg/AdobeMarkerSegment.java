@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import org.w3c.dom.NamedNodeMap;
 
 /**
  * An Adobe APP14 (Application-Specific) marker segment.
+ * <p>
+ *  Adobe APP14(应用程序特定)标记段。
+ * 
  */
 class AdobeMarkerSegment extends MarkerSegment {
     int version;
@@ -105,6 +109,8 @@ class AdobeMarkerSegment extends MarkerSegment {
     /**
      * Writes the data for this segment to the stream in
      * valid JPEG format.
+     * <p>
+     *  以有效的JPEG格式将此段的数据写入流。
      */
     void write(ImageOutputStream ios) throws IOException {
         length = 14;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp.validation;
@@ -64,6 +74,10 @@ import org.xml.sax.SAXParseException;
 /**
  * {@link SchemaFactory} for XML Schema.
  *
+ * <p>
+ *  {@link SchemaFactory} for XML模式。
+ * 
+ * 
  * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  * @version $Id: XMLSchemaFactory.java,v 1.11 2010-11-01 04:40:08 joehw Exp $
  */
@@ -120,6 +134,9 @@ public final class XMLSchemaFactory extends SchemaFactory {
      * Indicates whether implementation parts should use
      *   service loader (or similar).
      * Note the default value (false) is the safe option..
+     * <p>
+     *  指示实施部分是否应使用服务加载程序(或类似)。请注意,默认值(false)是安全选项。
+     * 
      */
     private final boolean fUseServicesMechanism;
 
@@ -152,6 +169,10 @@ public final class XMLSchemaFactory extends SchemaFactory {
     /**
      * <p>Is specified schema supported by this <code>SchemaFactory</code>?</p>
      *
+     * <p>
+     *  <p>此<code> SchemaFactory </code> </p>支持指定的模式
+     * 
+     * 
      * @param schemaLanguage Specifies the schema language which the returned <code>SchemaFactory</code> will understand.
      *    <code>schemaLanguage</code> must specify a <a href="#schemaLanguage">valid</a> schema language.
      *
@@ -475,6 +496,9 @@ public final class XMLSchemaFactory extends SchemaFactory {
     /**
      * Extension of XMLGrammarPoolImpl which exposes the number of
      * grammars stored in the grammar pool.
+     * <p>
+     *  扩展XMLGrammarPoolImpl,暴露存储在语法池中的语法数。
+     * 
      */
     static class XMLGrammarPoolImplExtension extends XMLGrammarPoolImpl {
 
@@ -497,6 +521,9 @@ public final class XMLSchemaFactory extends SchemaFactory {
 
     /**
      * A grammar pool which wraps another.
+     * <p>
+     *  一个语法池包裹另一个。
+     * 
      */
     static class XMLGrammarPoolWrapper implements XMLGrammarPool {
 
@@ -504,6 +531,9 @@ public final class XMLSchemaFactory extends SchemaFactory {
 
         /*
          * XMLGrammarPool methods
+         * <p>
+         *  XMLGrammarPool方法
+         * 
          */
 
         public Grammar[] retrieveInitialGrammarSet(String grammarType) {
@@ -532,6 +562,8 @@ public final class XMLSchemaFactory extends SchemaFactory {
 
         /*
          * Other methods
+         * <p>
+         *  其他方法
          */
 
         void setGrammarPool(XMLGrammarPool grammarPool) {

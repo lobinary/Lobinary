@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ForwardPositionIterator.java,v 1.2.4.1 2005/09/06 06:22:05 pvedula Exp $
+ * <p>
+ *  $ Id：ForwardPositionIterator.java,v 1.2.4.1 2005/09/06 06:22:05 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -59,6 +72,16 @@ import com.sun.org.apache.xml.internal.dtm.ref.DTMAxisIteratorBase;
  * to maintain its own position counter, which seems
  * redundant.)
  *
+ * <p>
+ *  这个迭代器是一个包装器,它总是以文档顺序返回节点的位置。
+ * 它对于在XSLT元素(例如xsl：for-each,xsl：apply-templates等)的上下文中调用position()的情况是需要的。
+ * 
+ *  在DTMDefaultBaseIterators中定义的DTMAxisIterators中的getPosition()方法总是返回文档顺序中的位置,在祖先,祖先或自己,上一个和上一个同级的情况下,XP
+ * ath是反向的。
+ * 
+ * XSLTC使用BasisLibrary.positionF()方法实现position(),并使用DTMAxisIterator.isReverse()方法确定getPosition()的结果是否应解释
+ * 为等于position()。
+ * 
  * @deprecated This class exists only for backwards compatibility with old
  *             translets.  New code should not reference it.
  */

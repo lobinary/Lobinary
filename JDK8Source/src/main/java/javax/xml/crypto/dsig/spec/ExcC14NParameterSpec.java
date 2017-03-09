@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * $Id: ExcC14NParameterSpec.java,v 1.7 2005/05/13 18:45:42 mullan Exp $
+ * <p>
+ *  $ Id：ExcC14NParameterSpec.java,v 1.7 2005/05/13 18:45:42 mullan Exp $
+ * 
  */
 package javax.xml.crypto.dsig.spec;
 
@@ -52,6 +56,20 @@ import java.util.List;
  * &lt;/schema&gt;
  * </code></pre>
  *
+ * <p>
+ *  W3C建议的参数：
+ * <a href="http://www.w3.org/TR/xml-exc-c14n/">
+ *  独家XML规范化(C14N)算法</a>。参数包括可选的包含名称空间前缀列表。
+ * 独占XML规范化参数的XML模式定义定义为：<pre> <code>&lt; schema xmlns ="http://www.w3.org/2001/XMLSchema"xmlns：ec ="htt
+ * p：// www .w3.org / 2001/10 / xml-exc-c14n#"targetNamespace ="http://www.w3.org/2001/10/xml-exc-c14n#"
+ * version ="0.1"elementFormDefault ="qualified" &gt;。
+ *  独家XML规范化(C14N)算法</a>。参数包括可选的包含名称空间前缀列表。
+ * 
+ *  &lt; element name ="InclusiveNamespaces"type ="ec：InclusiveNamespaces"/&gt; &lt; complexType name ="
+ * InclusiveNamespaces"&gt; &lt; attribute name ="PrefixList"type ="xsd：string"/&gt; &lt; / complexType&
+ * gt; &lt; / schema&gt; </code> </pre>。
+ * 
+ * 
  * @author Sean Mullan
  * @author JSR 105 Expert Group
  * @since 1.6
@@ -63,12 +81,18 @@ public final class ExcC14NParameterSpec implements C14NMethodParameterSpec {
 
     /**
      * Indicates the default namespace ("#default").
+     * <p>
+     *  表示默认命名空间("#default")。
+     * 
      */
     public static final String DEFAULT = "#default";
 
     /**
      * Creates a <code>ExcC14NParameterSpec</code> with an empty prefix
      * list.
+     * <p>
+     *  创建一个带有空前缀列表的<code> ExcC14NParameterSpec </code>。
+     * 
      */
     public ExcC14NParameterSpec() {
         preList = Collections.emptyList();
@@ -79,6 +103,10 @@ public final class ExcC14NParameterSpec implements C14NMethodParameterSpec {
      * of prefixes. The list is copied to protect against subsequent
      * modification.
      *
+     * <p>
+     *  使用指定的前缀列表创建<code> ExcC14NParameterSpec </code>。复制列表以防止后续修改。
+     * 
+     * 
      * @param prefixList the inclusive namespace prefix list. Each entry in
      *    the list is a <code>String</code> that represents a namespace prefix.
      * @throws NullPointerException if <code>prefixList</code> is
@@ -111,6 +139,10 @@ public final class ExcC14NParameterSpec implements C14NMethodParameterSpec {
      * <p>This implementation returns an {@link
      * java.util.Collections#unmodifiableList unmodifiable list}.
      *
+     * <p>
+     *  返回包含的名称空间前缀列表。列表中的每个条目都是代表命名空间前缀的<code> String </code>。
+     * 
+     * 
      * @return the inclusive namespace prefix list (may be empty but never
      *    <code>null</code>)
      */

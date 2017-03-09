@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -1017,6 +1018,9 @@ public class GIFImageReader extends ImageReader {
     /**
      * Remove all settings including global settings such as
      * <code>Locale</code>s and listeners, as well as stream settings.
+     * <p>
+     *  删除所有设置,包括全局设置,如<code> Locale </code>和监听器,以及流设置。
+     * 
      */
     public void reset() {
         super.reset();
@@ -1025,6 +1029,8 @@ public class GIFImageReader extends ImageReader {
 
     /**
      * Remove local settings based on parsing of a stream.
+     * <p>
+     *  根据流的解析删除本地设置。
      */
     private void resetStreamSettings() {
         gotHeader = false;

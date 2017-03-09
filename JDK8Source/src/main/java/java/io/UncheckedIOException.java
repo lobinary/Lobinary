@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ import java.util.Objects;
 /**
  * Wraps an {@link IOException} with an unchecked exception.
  *
+ * <p>
+ *  使用未选中的异常封装{@link IOException}。
+ * 
+ * 
  * @since   1.8
  */
 public class UncheckedIOException extends RuntimeException {
@@ -37,6 +42,10 @@ public class UncheckedIOException extends RuntimeException {
     /**
      * Constructs an instance of this class.
      *
+     * <p>
+     *  构造此类的实例。
+     * 
+     * 
      * @param   message
      *          the detail message, can be null
      * @param   cause
@@ -52,6 +61,10 @@ public class UncheckedIOException extends RuntimeException {
     /**
      * Constructs an instance of this class.
      *
+     * <p>
+     *  构造此类的实例。
+     * 
+     * 
      * @param   cause
      *          the {@code IOException}
      *
@@ -65,6 +78,10 @@ public class UncheckedIOException extends RuntimeException {
     /**
      * Returns the cause of this exception.
      *
+     * <p>
+     *  返回此异常的原因。
+     * 
+     * 
      * @return  the {@code IOException} which is the cause of this exception.
      */
     @Override
@@ -75,6 +92,9 @@ public class UncheckedIOException extends RuntimeException {
     /**
      * Called to read the object from a stream.
      *
+     * <p>
+     *  调用从流中读取对象。
+     * 
      * @throws  InvalidObjectException
      *          if the object is invalid or has a cause that is not
      *          an {@code IOException}

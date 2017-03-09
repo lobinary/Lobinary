@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Hashtree2Node.java,v 1.2.4.1 2005/09/15 08:15:45 suresh_emailid Exp $
+ * <p>
+ *  $ Id：Hashtree2Node.java,v 1.2.4.1 2005/09/15 08:15:45 suresh_emailid Exp $
+ * 
  */
 
 package com.sun.org.apache.xml.internal.utils;
@@ -36,6 +49,12 @@ import org.w3c.dom.Node;
  *
  * Please maintain JDK 1.1.x compatibility; no Collections!
  *
+ * <p>
+ *  简单的静态实用程序将Hashtable转换为节点。
+ * 
+ *  请保持JDK 1.1.x兼容性;没有收藏！
+ * 
+ * 
  * @see com.sun.org.apache.xalan.internal.xslt.EnvironmentCheck
  * @see com.sun.org.apache.xalan.internal.lib.Extensions
  * @author shane_curcuru@us.ibm.com
@@ -57,6 +76,12 @@ public abstract class Hashtree2Node
      * Element with exception info; if that doesn't work we simply
      * return without doing anything else byt printStackTrace().</p>
      *
+     * <p>
+     *  将Hashtable转换为节点树。
+     * 
+     *  <p>散列可能有Hashtables作为值(在这种情况下我们递归)或其他值,在这种情况下,我们打印为&lt; item>元素,'key'属性与键的值,元素内容作为值。</p>
+     * 
+     * 
      * @param hash to get info from (may have sub-hashtables)
      * @param name to use as parent element for appended node
      * futurework could have namespace and prefix as well

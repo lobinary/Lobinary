@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp;
@@ -35,6 +45,8 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
 /**
+/* <p>
+/* 
  * @author Rajiv Mordani
  * @author Edwin Goei
  * @version $Id: DocumentBuilderFactoryImpl.java,v 1.8 2010-11-01 04:40:06 joehw Exp $
@@ -48,12 +60,18 @@ public class DocumentBuilderFactoryImpl extends DocumentBuilderFactory {
 
     /**
      * State of the secure processing feature, initially <code>false</code>
+     * <p>
+     *  安全处理功能的状态,最初为<code> false </code>
+     * 
      */
     private boolean fSecureProcess = true;
 
     /**
      * Creates a new instance of a {@link javax.xml.parsers.DocumentBuilder}
      * using the currently configured parameters.
+     * <p>
+     *  使用当前配置的参数创建{@link javax.xml.parsers.DocumentBuilder}的新实例。
+     * 
      */
     public DocumentBuilder newDocumentBuilder()
         throws ParserConfigurationException
@@ -83,6 +101,10 @@ public class DocumentBuilderFactoryImpl extends DocumentBuilderFactory {
     /**
      * Allows the user to set specific attributes on the underlying
      * implementation.
+     * <p>
+     *  允许用户在底层实现上设置特定属性。
+     * 
+     * 
      * @param name    name of attribute
      * @param value   null means to remove attribute
      */
@@ -120,6 +142,8 @@ public class DocumentBuilderFactoryImpl extends DocumentBuilderFactory {
     /**
      * Allows the user to retrieve specific attributes on the underlying
      * implementation.
+     * <p>
+     *  允许用户检索基础实现上的特定属性。
      */
     public Object getAttribute(String name)
         throws IllegalArgumentException

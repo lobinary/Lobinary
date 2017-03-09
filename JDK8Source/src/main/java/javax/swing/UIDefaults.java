@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,13 @@ import sun.util.CoreResourceBundleControl;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  Swing组件的默认表。应用程序可以通过<code> UIManager </code>设置/获取默认值。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see UIManager
  * @author Hans Muller
  */
@@ -87,11 +95,17 @@ public class UIDefaults extends Hashtable<Object,Object>
      * so as to avoid an exception being thrown when a value is asked for.
      * Access to this should be done while holding a lock on the
      * UIDefaults, eg synchronized(this).
+     * <p>
+     *  从区域设置映射到ResourceBundle的缓存映射。这样做是为了避免在请求值时抛出异常。应该在对UIDefaults持有锁时进行访问,例如synchronized(this)。
+     * 
      */
     private Map<Locale, Map<String, Object>> resourceCache;
 
     /**
      * Creates an empty defaults table.
+     * <p>
+     *  创建一个空的默认值表。
+     * 
      */
     public UIDefaults() {
         this(700, .75f);
@@ -101,6 +115,10 @@ public class UIDefaults extends Hashtable<Object,Object>
      * Creates an empty defaults table with the specified initial capacity and
      * load factor.
      *
+     * <p>
+     *  创建具有指定的初始容量和负载因子的空默认值表。
+     * 
+     * 
      * @param initialCapacity   the initial capacity of the defaults table
      * @param loadFactor        the load factor of the defaults table
      * @see java.util.Hashtable
@@ -123,6 +141,13 @@ public class UIDefaults extends Hashtable<Object,Object>
         }
         UIDefaults myDefaults = new UIDefaults(uiDefaults);
      * </pre>
+     * <p>
+     *  创建使用指定键/值对初始化的默认表。例如：
+     * <pre>
+     *  Object [] uiDefaults = {"Font",new Font("Dialog",Font.BOLD,12),"Color",Color.red,"five",new Integer(5)}
+     *  UIDefaults myDefaults = new UIDefaults(uiDefaults) ;。
+     * </pre>
+     * 
      * @param keyValueList  an array of objects containing the key/value
      *          pairs
      */
@@ -150,6 +175,17 @@ public class UIDefaults extends Hashtable<Object,Object>
      * <code>ActiveValues</code> are not supported in the resource bundles.
 
      *
+     * <p>
+     * 返回键的值。
+     * 如果值是<code> UIDefaults.LazyValue </code>,则实际值用<code> LazyValue.createValue()</code>计算,表项被替换,并返回实际值。
+     * 如果值为<code> UIDefaults.ActiveValue </code>,则表项不会被替换 - 该值使用<code> ActiveValue.createValue()</code>对每个<code>
+     *  get >调用。
+     * 如果值是<code> UIDefaults.LazyValue </code>,则实际值用<code> LazyValue.createValue()</code>计算,表项被替换,并返回实际值。
+     * 
+     *  如果在表中找不到密钥,那么在此对象维护的资源束列表中搜索密钥。最近使用<code> getDefaultLocale </code>返回的语言环境添加资源包。
+     *  <code> LazyValues </code>和<code> ActiveValues </code>在资源束中不受支持。
+     * 
+     * 
      * @param key the desired key
      * @return the value for <code>key</code>
      * @see LazyValue
@@ -167,10 +203,16 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * Looks up up the given key in our Hashtable and resolves LazyValues
      * or ActiveValues.
+     * <p>
+     *  在我们的Hashtable中查找给定的键,并解析LazyValues或ActiveValues。
+     * 
      */
     private Object getFromHashtable(Object key) {
         /* Quickly handle the common case, without grabbing
          * a lock.
+         * <p>
+         *  锁。
+         * 
          */
         Object value = super.get(key);
         if ((value != PENDING) &&
@@ -184,6 +226,9 @@ public class UIDefaults extends Hashtable<Object,Object>
          * the lock and construct the ActiveValue or the LazyValue.
          * We use the special value PENDING to mark LazyValues that
          * are being constructed.
+         * <p>
+         *  线程然后等待然后返回新值,否则丢弃锁并构造ActiveValue或LazyValue。我们使用特殊值PENDING来标记正在构建的LazyValues。
+         * 
          */
         synchronized(this) {
             value = super.get(key);
@@ -209,11 +254,17 @@ public class UIDefaults extends Hashtable<Object,Object>
 
         /* At this point we know that the value of key was
          * a LazyValue or an ActiveValue.
+         * <p>
+         *  LazyValue或ActiveValue。
+         * 
          */
         if (value instanceof LazyValue) {
             try {
                 /* If an exception is thrown we'll just put the LazyValue
                  * back in the table.
+                 * <p>
+                 *  回到表中。
+                 * 
                  */
                 value = ((LazyValue)value).createValue(this);
             }
@@ -253,6 +304,17 @@ public class UIDefaults extends Hashtable<Object,Object>
      * <code>LazyValues</code> and <code>ActiveValues</code> are not supported
      * in the resource bundles.
      *
+     * <p>
+     * 返回与给定语言环境关联的键的值。
+     * 如果值是<code> UIDefaults.LazyValue </code>,则实际值用<code> LazyValue.createValue()</code>计算,表项被替换,并返回实际值。
+     * 如果值为<code> UIDefaults.ActiveValue </code>,则表项不会被替换 - 该值使用<code> ActiveValue.createValue()</code>对每个<code>
+     *  get >调用。
+     * 如果值是<code> UIDefaults.LazyValue </code>,则实际值用<code> LazyValue.createValue()</code>计算,表项被替换,并返回实际值。
+     * 
+     *  如果在表中找不到密钥,那么在此对象维护的资源束列表中搜索密钥。最近使用给定的区域设置首先添加资源束。
+     *  <code> LazyValues </code>和<code> ActiveValues </code>在资源束中不受支持。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired <code>locale</code>
      * @return the value for <code>key</code>
@@ -269,6 +331,9 @@ public class UIDefaults extends Hashtable<Object,Object>
 
     /**
      * Looks up given key in our resource bundles.
+     * <p>
+     *  在我们的资源包中查找给定的键。
+     * 
      */
     private Object getFromResourceBundle(Object key, Locale l) {
 
@@ -293,6 +358,9 @@ public class UIDefaults extends Hashtable<Object,Object>
 
     /**
      * Returns a Map of the known resources for the given locale.
+     * <p>
+     *  返回给定语言环境的已知资源的映射。
+     * 
      */
     private Map<String, Object> getResourceCache(Locale l) {
         Map<String, Object> values = resourceCache.get(l);
@@ -335,6 +403,12 @@ public class UIDefaults extends Hashtable<Object,Object>
      * equal to the old one, fire a <code>PropertyChangeEvent</code>.
      * If value is <code>null</code>, the key is removed from the table.
      *
+     * <p>
+     *  为所有区域设置<code> key </code>的值为<code> value </code>。
+     * 如果<code> key </code>是一个字符串,并且新值不等于旧的值,则触发一个<code> PropertyChangeEvent </code>。
+     * 如果值为<code> null </code>,则从表中删除键。
+     * 
+     * 
      * @param key    the unique <code>Object</code> who's value will be used
      *          to retrieve the data value associated with it
      * @param value  the new <code>Object</code> to store as data under
@@ -359,6 +433,11 @@ public class UIDefaults extends Hashtable<Object,Object>
      * <code>propertyName</code> will be "UIDefaults".  The key/value pairs are
      * added for all locales.
      *
+     * <p>
+     *  将所有键/值对放在数据库中,并无条件地生成一个<code> PropertyChangeEvent </code>。
+     * 事件oldValue和newValue将是<code> null </code>,它的<code> propertyName </code>将是"UIDefaults"。将为所有区域设置添加键/值对。
+     * 
+     * 
      * @param keyValueList  an array of key/value pairs
      * @see #put
      * @see java.util.Hashtable#put
@@ -380,6 +459,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> is a <code>Font</code> return it,
      * otherwise return <code>null</code>.
+     * <p>
+     *  如果<code> key </code>的值是<code> Font </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @return if the value for <code>key</code> is a <code>Font</code>,
      *          return the <code>Font</code> object; otherwise return
@@ -394,6 +477,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is a <code>Font</code> return it, otherwise return <code>null</code>.
+     * <p>
+     * 如果给定<code> Locale </code>的<code> key </code>的值为<code> Font </code>,则返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired locale
      * @return if the value for <code>key</code> and <code>Locale</code>
@@ -410,6 +497,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> is a <code>Color</code> return it,
      * otherwise return <code>null</code>.
+     * <p>
+     *  如果<code> key </code>的值是<code> Color </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @return if the value for <code>key</code> is a <code>Color</code>,
      *          return the <code>Color</code> object; otherwise return
@@ -424,6 +515,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is a <code>Color</code> return it, otherwise return <code>null</code>.
+     * <p>
+     *  如果给定<code> Locale </code>的<code> key </code>的值为<code> Color </code>,则返回它,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired locale
      * @return if the value for <code>key</code> and <code>Locale</code>
@@ -441,6 +536,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> is an <code>Icon</code> return it,
      * otherwise return <code>null</code>.
+     * <p>
+     *  如果<code> key </code>的值是<code> Icon </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @return if the value for <code>key</code> is an <code>Icon</code>,
      *          return the <code>Icon</code> object; otherwise return
@@ -455,6 +554,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is an <code>Icon</code> return it, otherwise return <code>null</code>.
+     * <p>
+     *  如果给定<code> Locale </code>的<code> key </code>的值是<code> Icon </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired locale
      * @return if the value for <code>key</code> and <code>Locale</code>
@@ -472,6 +575,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> is a <code>Border</code> return it,
      * otherwise return <code>null</code>.
+     * <p>
+     *  如果<code> key </code>的值是<code> Border </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @return if the value for <code>key</code> is a <code>Border</code>,
      *          return the <code>Border</code> object; otherwise return
@@ -486,6 +593,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is a <code>Border</code> return it, otherwise return <code>null</code>.
+     * <p>
+     *  如果给定<code> Locale </code>的<code> key </code>的值为<code> Border </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired locale
      * @return if the value for <code>key</code> and <code>Locale</code>
@@ -503,6 +614,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> is a <code>String</code> return it,
      * otherwise return <code>null</code>.
+     * <p>
+     *  如果<code> key </code>的值是<code> String </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @return if the value for <code>key</code> is a <code>String</code>,
      *          return the <code>String</code> object; otherwise return
@@ -516,6 +631,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is a <code>String</code> return it, otherwise return <code>null</code>.
+     * <p>
+     *  如果给定<code> Locale </code>的<code> key </code>的值为<code> String </code>,则返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired <code>Locale</code>
      * @return if the value for <code>key</code> for the given
@@ -532,6 +651,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> is an <code>Integer</code> return its
      * integer value, otherwise return 0.
+     * <p>
+     *  如果<code> key </code>的值是<code> Integer </code>,则返回其整数值,否则返回0。
+     * 
+     * 
      * @param key the desired key
      * @return if the value for <code>key</code> is an <code>Integer</code>,
      *          return its value, otherwise return 0
@@ -545,6 +668,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is an <code>Integer</code> return its integer value, otherwise return 0.
+     * <p>
+     *  如果给定<code> Locale </code>的<code>键</code>的值是<code> Integer </code>,则返回其整数值,否则返回0。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired locale
      * @return if the value for <code>key</code> and <code>Locale</code>
@@ -562,6 +689,10 @@ public class UIDefaults extends Hashtable<Object,Object>
      * If the value of <code>key</code> is boolean, return the
      * boolean value, otherwise return false.
      *
+     * <p>
+     *  如果<code> key </code>的值为boolean,则返回布尔值,否则返回false。
+     * 
+     * 
      * @param key an <code>Object</code> specifying the key for the desired boolean value
      * @return if the value of <code>key</code> is boolean, return the
      *         boolean value, otherwise return false.
@@ -577,6 +708,10 @@ public class UIDefaults extends Hashtable<Object,Object>
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is boolean, return the boolean value, otherwise return false.
      *
+     * <p>
+     * 如果给定<code> Locale </code>的<code>键</code>的值为boolean,则返回布尔值,否则返回false。
+     * 
+     * 
      * @param key an <code>Object</code> specifying the key for the desired boolean value
      * @param l the desired locale
      * @return if the value for <code>key</code> and <code>Locale</code>
@@ -593,6 +728,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> is an <code>Insets</code> return it,
      * otherwise return <code>null</code>.
+     * <p>
+     *  如果<code> key </code>的值是<code> Insets </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @return if the value for <code>key</code> is an <code>Insets</code>,
      *          return the <code>Insets</code> object; otherwise return
@@ -607,6 +746,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is an <code>Insets</code> return it, otherwise return <code>null</code>.
+     * <p>
+     *  如果给定<code> Locale </code>的<code> key </code>的值是<code> Insets </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired locale
      * @return if the value for <code>key</code> and <code>Locale</code>
@@ -624,6 +767,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> is a <code>Dimension</code> return it,
      * otherwise return <code>null</code>.
+     * <p>
+     *  如果<code> key </code>的值是<code> Dimension </code>返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @return if the value for <code>key</code> is a <code>Dimension</code>,
      *          return the <code>Dimension</code> object; otherwise return
@@ -638,6 +785,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * If the value of <code>key</code> for the given <code>Locale</code>
      * is a <code>Dimension</code> return it, otherwise return <code>null</code>.
+     * <p>
+     *  如果给定<code> Locale </code>的<code> key </code>的值为<code> Dimension </code>,则返回,否则返回<code> null </code>。
+     * 
+     * 
      * @param key the desired key
      * @param l the desired locale
      * @return if the value for <code>key</code> and <code>Locale</code>
@@ -667,6 +818,17 @@ public class UIDefaults extends Hashtable<Object,Object>
      * This method is used by <code>getUI</code>, it's usually
      * not necessary to call it directly.
      *
+     * <p>
+     *  <code> get(uidClassID)</code>的值必须是实现相应的<code> ComponentUI </code>类的类的<code> String </code>名称。
+     * 如果类之前没有被加载,这个方法查找类与<code> uiClassLoader.loadClass()</code>如果提供非<code> null </code>类加载器,<code> classFo
+     * rName )</code>。
+     *  <code> get(uidClassID)</code>的值必须是实现相应的<code> ComponentUI </code>类的类的<code> String </code>名称。
+     * <p>
+     *  如果<code> uiClassID </code>的映射存在,或者找不到指定的类,则返回<code> null </code>。
+     * <p>
+     *  此方法由<code> getUI </code>使用,通常不需要直接调用它。
+     * 
+     * 
      * @param uiClassID  a string containing the class ID
      * @param uiClassLoader the object which will load the class
      * @return the value of <code>Class.forName(get(uidClassID))</code>
@@ -709,6 +871,10 @@ public class UIDefaults extends Hashtable<Object,Object>
     /**
      * Returns the L&amp;F class that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F类。
+     * 
+     * 
      * @param uiClassID a string containing the class ID
      * @return the Class object returned by
      *          <code>getUIClass(uiClassID, null)</code>
@@ -723,6 +889,10 @@ public class UIDefaults extends Hashtable<Object,Object>
      * it calls this method before returning <code>null</code>.
      * Subclasses may choose to do more or less here.
      *
+     * <p>
+     *  如果<code> getUI()</code>由于任何原因失败,它会在返回<code> null </code>之前调用此方法。子类可以选择做更多或更少的在这里。
+     * 
+     * 
      * @param msg message string to print
      * @see #getUI
      */
@@ -747,6 +917,13 @@ public class UIDefaults extends Hashtable<Object,Object>
      * <li> Use the implementation classes static <code>createUI()</code>
      * method to construct a look and feel delegate.
      * </ul>
+     * <p>
+     * 为指定的组件创建一个<code> ComponentUI </code>实现。换句话说,为<code> target </code>创建外观和感觉特定的委托对象。这是通过两个步骤完成的：
+     * <ul>
+     *  <li>在<code> target.getUIClassID()</code>返回的值下查找<code> ComponentUI </code>实现类的名称。
+     *  <li>使用实现类static <code> createUI()</code>方法构造一个外观感觉委托。
+     * </ul>
+     * 
      * @param target  the <code>JComponent</code> which needs a UI
      * @return the <code>ComponentUI</code> object
      */
@@ -788,6 +965,12 @@ public class UIDefaults extends Hashtable<Object,Object>
      * A <code>PropertyChangeEvent</code> will get fired whenever a default
      * is changed.
      *
+     * <p>
+     *  向侦听器列表中添加<code> PropertyChangeListener </code>。侦听器为所有属性注册。
+     * <p>
+     *  当更改默认值时,会触发<code> PropertyChangeEvent </code>。
+     * 
+     * 
      * @param listener  the <code>PropertyChangeListener</code> to be added
      * @see java.beans.PropertyChangeSupport
      */
@@ -804,6 +987,10 @@ public class UIDefaults extends Hashtable<Object,Object>
      * This removes a <code>PropertyChangeListener</code> that was registered
      * for all properties.
      *
+     * <p>
+     *  从侦听器列表中删除<code> PropertyChangeListener </code>。这将删除为所有属性注册的<code> PropertyChangeListener </code>。
+     * 
+     * 
      * @param listener  the <code>PropertyChangeListener</code> to be removed
      * @see java.beans.PropertyChangeSupport
      */
@@ -818,6 +1005,10 @@ public class UIDefaults extends Hashtable<Object,Object>
      * Returns an array of all the <code>PropertyChangeListener</code>s added
      * to this UIDefaults with addPropertyChangeListener().
      *
+     * <p>
+     *  返回通过addPropertyChangeListener()添加到此UIDefaults的所有<code> PropertyChangeListener </code>数组。
+     * 
+     * 
      * @return all of the <code>PropertyChangeListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -836,6 +1027,13 @@ public class UIDefaults extends Hashtable<Object,Object>
      * listener list isn't empty, then fire a
      * <code>PropertyChange</code> event to each listener.
      *
+     * <p>
+     *  支持报告绑定的属性更改。
+     * 如果oldValue和newValue不相等,并且<code> PropertyChangeEvent </code> x侦听器列表不为空,那么为每个侦听器触发一个<code> PropertyChan
+     * ge </code>事件。
+     *  支持报告绑定的属性更改。
+     * 
+     * 
      * @param propertyName  the programmatic name of the property
      *          that was changed
      * @param oldValue  the old value of the property
@@ -855,6 +1053,10 @@ public class UIDefaults extends Hashtable<Object,Object>
      * reverse order they were added.  In other words, the most recently added
      * bundle is searched first.
      *
+     * <p>
+     *  将资源束添加到搜索本地化值的资源束列表中。按照它们添加的相反顺序搜索资源束。换句话说,首先搜索最近添加的束。
+     * 
+     * 
      * @param bundleName  the base name of the resource bundle to be added
      * @see java.util.ResourceBundle
      * @see #removeResourceBundle
@@ -878,6 +1080,10 @@ public class UIDefaults extends Hashtable<Object,Object>
      * Removes a resource bundle from the list of resource bundles that are
      * searched for localized defaults.
      *
+     * <p>
+     *  从搜索本地化默认值的资源束列表中删除资源束。
+     * 
+     * 
      * @param bundleName  the base name of the resource bundle to be removed
      * @see java.util.ResourceBundle
      * @see #addResourceBundle
@@ -898,6 +1104,11 @@ public class UIDefaults extends Hashtable<Object,Object>
      * default locale.  The default locale exists to provide compatibility with
      * pre 1.4 behaviour.
      *
+     * <p>
+     * 设置默认区域设置。默认语言环境用于通过不带区域设置参数的<code> get </code>方法检索本地化值。
+     * 从1.4版本开始,Swing UI对象应该使用其组件的语言环境而不是默认语言环境来检索本地化值。提供默认语言环境以提供与1.4之前的行为的兼容性。
+     * 
+     * 
      * @param l the new default locale
      * @see #getDefaultLocale
      * @see #get(Object)
@@ -916,6 +1127,11 @@ public class UIDefaults extends Hashtable<Object,Object>
      * default locale.  The default locale exists to provide compatibility with
      * pre 1.4 behaviour.
      *
+     * <p>
+     *  返回默认语言环境。默认语言环境用于通过不带区域设置参数的<code> get </code>方法检索本地化值。
+     * 从1.4版本开始,Swing UI对象应该使用其组件的语言环境而不是默认语言环境来检索本地化值。提供默认语言环境以提供与1.4之前的行为的兼容性。
+     * 
+     * 
      * @return the default locale
      * @see #setDefaultLocale
      * @see #get(Object)
@@ -949,6 +1165,20 @@ public class UIDefaults extends Hashtable<Object,Object>
      *  uiDefaultsTable.put("MyBorder", borderLazyValue);
      * </pre>
      *
+     * <p>
+     *  这个类允许在默认表中存储一个没有被构造的条目,直到第一次使用<code> getXXX(key)</code>方法之一查找。惰性值对于构造昂贵或很少被检索的默认值是有用的。
+     * 第一次检索<code> LazyValue </code>时,通过调用<code> LazyValue.createValue()</code>来计算它的"实际值",实际值用于替换<code> Lazy
+     * Value <代码>在<code> UIDefaults </code>表中。
+     *  这个类允许在默认表中存储一个没有被构造的条目,直到第一次使用<code> getXXX(key)</code>方法之一查找。惰性值对于构造昂贵或很少被检索的默认值是有用的。
+     * 对同一键的后续查找返回实际值。下面是构建<code> Border </code>的<code> LazyValue </code>示例：。
+     * <pre>
+     * 对象borderLazyValue = new UIDefaults.LazyValue(){public Object createValue(UIDefaults table){return new BorderFactory.createLoweredBevelBorder(); }
+     * };。
+     * 
+     *  uiDefaultsTable.put("MyBorder",borderLazyValue);
+     * </pre>
+     * 
+     * 
      * @see UIDefaults#get
      */
     public interface LazyValue {
@@ -959,6 +1189,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * the real value, which is then stored in the table and
          * returned to the calling method.
          *
+         * <p>
+         *  创建从<code> UIDefaults </code>表中检索的实际值。当从表中检索实现此接口的对象时,此方法用于创建实际值,然后存储在表中并返回到调用方法。
+         * 
+         * 
          * @param table  a <code>UIDefaults</code> table
          * @return the created <code>Object</code>
          */
@@ -982,6 +1216,17 @@ public class UIDefaults extends Hashtable<Object,Object>
      *  uiDefaultsTable.put("MyRenderer", cellRendererActiveValue);
      * </pre>
      *
+     * <p>
+     *  这个类允许在每次使用<code> getXXX(key)</code>方法查找时构造的defaults表中存储一个条目。
+     * 下面是构建一个<code> DefaultListCellRenderer </code>的<code> ActiveValue </code>示例：。
+     * <pre>
+     *  Object cellRendererActiveValue = new UIDefaults.ActiveValue(){public Object createValue(UIDefaults table){return new DefaultListCellRenderer(); }
+     * };。
+     * 
+     *  uiDefaultsTable.put("MyRenderer",cellRendererActiveValue);
+     * </pre>
+     * 
+     * 
      * @see UIDefaults#get
      */
     public interface ActiveValue {
@@ -989,6 +1234,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * Creates the value retrieved from the <code>UIDefaults</code> table.
          * The object is created each time it is accessed.
          *
+         * <p>
+         *  创建从<code> UIDefaults </code>表中检索的值。每次访问对象时都会创建对象。
+         * 
+         * 
          * @param table  a <code>UIDefaults</code> table
          * @return the created <code>Object</code>
          */
@@ -1005,6 +1254,11 @@ public class UIDefaults extends Hashtable<Object,Object>
      * a Look and Feel is loaded, at the cost of a slight performance
      * reduction the first time <code>createValue</code> is called
      * (since Reflection APIs are used).
+     * <p>
+     * 这个类提供了一个<code> LazyValue </code>的实现,它可以用来延迟要创建的实例的Class的加载。它还避免为<code> LazyValue </code>子类创建一个匿名内部类。
+     * 这两个都提高了在加载Look和Feel时的性能,代价是第一次调用<code> createValue </code>(由于使用了Reflection API),性能有所降低。
+     * 
+     * 
      * @since 1.3
      */
     public static class ProxyLazyValue implements LazyValue {
@@ -1017,6 +1271,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * Creates a <code>LazyValue</code> which will construct an instance
          * when asked.
          *
+         * <p>
+         *  创建一个<code> LazyValue </code>,它会在请求时构造一个实例。
+         * 
+         * 
          * @param c    a <code>String</code> specifying the classname
          *             of the instance to be created on demand
          */
@@ -1027,6 +1285,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * Creates a <code>LazyValue</code> which will construct an instance
          * when asked.
          *
+         * <p>
+         *  创建一个<code> LazyValue </code>,它会在请求时构造一个实例。
+         * 
+         * 
          * @param c    a <code>String</code> specifying the classname of
          *              the class
          *              containing a static method to be called for
@@ -1041,6 +1303,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * Creates a <code>LazyValue</code> which will construct an instance
          * when asked.
          *
+         * <p>
+         *  创建一个<code> LazyValue </code>,它会在请求时构造一个实例。
+         * 
+         * 
          * @param c    a <code>String</code> specifying the classname
          *              of the instance to be created on demand
          * @param o    an array of <code>Objects</code> to be passed as
@@ -1053,6 +1319,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * Creates a <code>LazyValue</code> which will construct an instance
          * when asked.
          *
+         * <p>
+         *  创建一个<code> LazyValue </code>,它会在请求时构造一个实例。
+         * 
+         * 
          * @param c    a <code>String</code> specifying the classname
          *              of the class
          *              containing a static method to be called for
@@ -1075,6 +1345,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * Creates the value retrieved from the <code>UIDefaults</code> table.
          * The object is created each time it is accessed.
          *
+         * <p>
+         *  创建从<code> UIDefaults </code>表中检索的值。每次访问对象时都会创建对象。
+         * 
+         * 
          * @param table  a <code>UIDefaults</code> table
          * @return the created <code>Object</code>
          */
@@ -1131,6 +1405,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * by substituting primitive types for their Object counterparts,
          * and superclasses for subclasses used to add the
          * <code>UIResource</code> tag.
+         * <p>
+         *  将提供的类类型数组强制转换为一个看起来像Reflection API期望的类型的数组。
+         * 这是通过用原始类型替换它们的Object对象,以及用于添加<code> UIResource </code>标签的子类的超类。
+         * 
          */
         private Class[] getClassArray(Object[] args) {
             Class[] types = null;
@@ -1139,6 +1417,10 @@ public class UIDefaults extends Hashtable<Object,Object>
                 for (int i = 0; i< args.length; i++) {
                     /* PENDING(ges): At present only the primitive types
                        used are handled correctly; this should eventually
+                    /* <p>
+                    /*  使用正确处理;这应该最终
+                    /* 
+                    /* 
                        handle all primitive types */
                     if (args[i] instanceof java.lang.Integer) {
                         types[i]=Integer.TYPE;
@@ -1152,6 +1434,9 @@ public class UIDefaults extends Hashtable<Object,Object>
                            directly instead of adding a massive amount
                            of mechanism for this.  Eventually this will
                            probably need to handle the general case as well.
+                        /* <p>
+                        /*  搜索为构造函数/方法查找提供的参数的超类。由于我们只有一个需要这种情况,我们直接替换,而不是为此添加大量的机制。最终,这可能需要处理一般情况。
+                        /* 
                            */
                         types[i]=java.awt.Color.class;
                     } else {
@@ -1186,6 +1471,13 @@ public class UIDefaults extends Hashtable<Object,Object>
      * (eg "alt SPACE") and
      * the odd number entries being the value to use in the
      * <code>InputMap</code> (and the key in the <code>ActionMap</code>).
+     * <p>
+     * <code> LazyInputMap </code>将在其<code> createValue </code>方法中创建一个<code> InputMap </code>。绑定在构造函数中传递。
+     * 绑定是一个数组,偶数条目是字符串<code> KeyStrokes </code>(例如"alt SPACE"),奇数条目是要在<code> InputMap </code>键入<code> Actio
+     * nMap </code>)。
+     * <code> LazyInputMap </code>将在其<code> createValue </code>方法中创建一个<code> InputMap </code>。绑定在构造函数中传递。
+     * 
+     * 
      * @since 1.3
      */
     public static class LazyInputMap implements LazyValue {
@@ -1200,6 +1492,10 @@ public class UIDefaults extends Hashtable<Object,Object>
          * Creates an <code>InputMap</code> with the bindings that are
          * passed in.
          *
+         * <p>
+         *  使用传入的绑定创建<code> InputMap </code>。
+         * 
+         * 
          * @param table a <code>UIDefaults</code> table
          * @return the <code>InputMap</code>
          */
@@ -1233,6 +1529,14 @@ public class UIDefaults extends Hashtable<Object,Object>
      * Pattern which is converted to the xxx.titleAndMnemonic key:
      * (xxxTitle, xxxMnemonic)
      *
+     * <p>
+     *  <code> TextAndMnemonicHashMap </code>存储swing资源字符串。许多字符串可以有一个助记符。
+     * 例如：FileChooser.saveButton.textAndMnemonic =&Save对于这种情况,方法get为键"FileChooser.saveButtonText"返回"Save",为键
+     * "FileChooser.saveButtonMememonic"返回助记符"S"。
+     *  <code> TextAndMnemonicHashMap </code>存储swing资源字符串。许多字符串可以有一个助记符。
+     * 
+     *  对于由<code> TextAndMnemonicHashMap </code>类检查的文本和助记符后缀,有几种模式。
+     * 转换为xxx.textAndMnemonic键的模式：(xxxNameText,xxxNameMnemonic)(xxxNameText,xxxMnemonic)(xxx.nameText,xxx.mn
      */
     private static class TextAndMnemonicHashMap extends HashMap<String, Object> {
 

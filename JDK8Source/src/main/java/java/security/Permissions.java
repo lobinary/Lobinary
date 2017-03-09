@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,25 @@ import java.io.IOException;
  * not <em>fail-fast</em>.  Modifications to a collection should not be
  * performed while enumerating over that collection.
  *
+ * <p>
+ *  此类表示多个权限的异构集合。也就是说,它包含组织成PermissionCollections的不同类型的Permission对象。
+ * 例如,如果将任何{@code java.io.FilePermission}对象添加到此类的实例,则它们都存储在单个PermissionCollection中。
+ * 它是通过调用FilePermission类中的{@code newPermissionCollection}方法返回的PermissionCollection。
+ * 类似地,任何{@code java.lang.RuntimePermission}对象存储在通过调用RuntimePermission类中的{@code newPermissionCollection}
+ * 方法返回的PermissionCollection中。
+ * 它是通过调用FilePermission类中的{@code newPermissionCollection}方法返回的PermissionCollection。
+ * 因此,此类表示PermissionCollections的集合。
+ * 
+ *  <p>当调用{@code add}方法添加权限时,权限存储在相应的PermissionCollection中。
+ * 如果尚未存在此类集合,则会确定Permission对象的类,并在该类上调用{@code newPermissionCollection}方法来创建PermissionCollection并将其添加到Pe
+ * rmissions对象。
+ *  <p>当调用{@code add}方法添加权限时,权限存储在相应的PermissionCollection中。
+ * 如果{@code newPermissionCollection}返回null,那么将创建并使用使用散列表的默认PermissionCollection。
+ * 每个哈希表条目都存储一个Permission对象作为键和值。
+ * 
+ * <p>通过{@code elements}方法返回的枚举不是快速失败的<em> </em>。在对该集合进行枚举时,不应对集合进行修改。
+ * 
+ * 
  * @see Permission
  * @see PermissionCollection
  * @see AllPermission
@@ -84,6 +104,9 @@ implements Serializable
     /**
      * Key is permissions Class, value is PermissionCollection for that class.
      * Not serialized; see serialization section at end of class.
+     * <p>
+     *  键是权限类,值是该类的PermissionCollection。未序列化;请参见类末尾的序列化部分。
+     * 
      */
     private transient Map<Class<?>, PermissionCollection> permsMap;
 
@@ -97,6 +120,9 @@ implements Serializable
 
     /**
      * Creates a new Permissions object containing no PermissionCollections.
+     * <p>
+     *  创建不包含PermissionCollections的新Permissions对象。
+     * 
      */
     public Permissions() {
         permsMap = new HashMap<Class<?>, PermissionCollection>(11);
@@ -113,6 +139,13 @@ implements Serializable
      * a new PermissionCollection object (and adds the permission to it)
      * if an appropriate collection does not yet exist. <p>
      *
+     * <p>
+     *  将权限对象添加到权限所属类的PermissionCollection。
+     * 例如,如果<i>权限</i>是FilePermission,则会将其添加到此Permissions对象中存储的FilePermissionCollection。
+     * 
+     *  如果适当的集合不存在,此方法将创建一个新的PermissionCollection对象(并向其添加权限)。 <p>
+     * 
+     * 
      * @param permission the Permission object to add.
      *
      * @exception SecurityException if this Permissions object is
@@ -163,6 +196,17 @@ implements Serializable
      * <p>Additionally, if this PermissionCollection contains the
      * AllPermission, this method will always return true.
      * <p>
+     * <p>
+     *  检查此对象的PermissionCollection对于指定权限类的权限是否意味着在<i>权限</i>对象中表示的权限。
+     * 如果相应PermissionCollection(例如,FilePermission的FilePermissionCollection)中的权限组合一起暗示指定的权限,则返回true。
+     * 
+     * <p>例如,假设在此Permissions对象中有一个FilePermissionCollection,并且它包含一个FilePermission,它为"/ tmp"目录的所有子目录中的所有文件指定"读
+     * 取"访问,另一个FilePermission指定"写入"访问对于"/ tmp / scratch / foo"目录中的所有文件。
+     * 然后,如果使用指定对"/ tmp / scratch / foo"目录中的文件进行"读取"和"写入"访问的权限调用{@code implies}方法,则返回{@code true}。
+     * 
+     *  <p>此外,如果此PermissionCollection包含AllPermission,此方法将始终返回true。
+     * <p>
+     * 
      * @param permission the Permission object to check.
      *
      * @return true if "permission" is implied by the permissions in the
@@ -192,6 +236,10 @@ implements Serializable
      * Returns an enumeration of all the Permission objects in all the
      * PermissionCollections in this Permissions object.
      *
+     * <p>
+     *  返回此权限对象中所有PermissionCollections中所有Permission对象的枚举。
+     * 
+     * 
      * @return an enumeration of all the Permissions.
      */
 
@@ -234,6 +282,23 @@ implements Serializable
      * implies() because it incurs the additional overhead of creating and
      * adding an empty PermissionCollection that will just return false.
      * It should be set to true when invoked from add().
+     * <p>
+     *  在此权限对象中获取与<i> p </i>类型相同的权限的PermissionCollection。
+     * 例如,如果<i> p </i>是FilePermission,则将返回此Permissions对象中存储的FilePermissionCollection。
+     * 
+     * 如果createEmpty为true,则此方法为指定类型的权限对象(如果尚不存在)创建一个新的PermissionCollection对象。
+     * 为此,它首先调用<i> p </i>上的{@code newPermissionCollection}方法。
+     * 类的子类如果需要在特定的PermissionCollection对象中存储他们的权限,Permission会覆盖该方法,以便在调用{@code PermissionCollection.implies}
+     * 方法时提供正确的语义。
+     * 为此,它首先调用<i> p </i>上的{@code newPermissionCollection}方法。
+     * 如果调用返回PermissionCollection,那么该集合存储在此Permissions对象中。
+     * 如果调用返回null并且createEmpty为true,那么此方法将实例化并存储使用散列表存储其权限对象的默认PermissionCollection。
+     * 
+     *  由于确定要使用的PermissionCollection的开销,为未解析的权限创建空的PermissionCollection时,将忽略createEmpty。
+     * 
+     *  当从implies()调用此方法时,createEmpty应设置为false,因为它会产生创建和添加只返回false的空PermissionCollection的额外开销。
+     * 从add()调用时,它应设置为true。
+     * 
      */
     private PermissionCollection getPermissionCollection(Permission p,
         boolean createEmpty) {
@@ -269,6 +334,10 @@ implements Serializable
     /**
      * Resolves any unresolved permissions of type p.
      *
+     * <p>
+     *  解析类型p的任何未解析的权限。
+     * 
+     * 
      * @param p the type of unresolved permission to resolve
      *
      * @return PermissionCollection containing the unresolved permissions,
@@ -339,6 +408,8 @@ implements Serializable
     // private Hashtable perms;
 
     /**
+    /* <p>
+    /* 
      * @serialField perms java.util.Hashtable
      *     A table of the Permission classes and PermissionCollections.
      * @serialField allPermission java.security.PermissionCollection
@@ -349,12 +420,17 @@ implements Serializable
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData Default fields.
      */
     /*
      * Writes the contents of the permsMap field out as a Hashtable for
      * serialization compatibility with earlier releases. allPermission
      * unchanged.
+     * <p>
+     *  将permsMap字段的内容写为与早期版本的序列化兼容性的Hashtable。 allPermission不变。
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -377,6 +453,9 @@ implements Serializable
     /*
      * Reads in a Hashtable of Class/PermissionCollections and saves them in the
      * permsMap field. Reads in allPermission.
+     * <p>
+     *  在类/哈希表中读取,并将它们保存在permsMap字段中。读取所有权限。
+     * 
      */
     private void readObject(ObjectInputStream in) throws IOException,
     ClassNotFoundException {
@@ -465,6 +544,10 @@ final class PermissionsEnumerator implements Enumeration<Permission> {
 /**
  * A PermissionsHash stores a homogeneous set of permissions in a hashtable.
  *
+ * <p>
+ * PermissionsHash在散列表中存储一组同质的权限。
+ * 
+ * 
  * @see Permission
  * @see Permissions
  *
@@ -480,11 +563,17 @@ implements Serializable
     /**
      * Key and value are (same) permissions objects.
      * Not serialized; see serialization section at end of class.
+     * <p>
+     *  键和值是(相同)权限对象。未序列化;请参见类末尾的序列化部分。
+     * 
      */
     private transient Map<Permission, Permission> permsMap;
 
     /**
      * Create an empty PermissionsHash object.
+     * <p>
+     *  创建一个空的PermissionsHash对象。
+     * 
      */
 
     PermissionsHash() {
@@ -494,6 +583,10 @@ implements Serializable
     /**
      * Adds a permission to the PermissionsHash.
      *
+     * <p>
+     *  向PermissionsHash添加权限。
+     * 
+     * 
      * @param permission the Permission object to add.
      */
 
@@ -507,6 +600,10 @@ implements Serializable
      * Check and see if this set of permissions implies the permissions
      * expressed in "permission".
      *
+     * <p>
+     *  检查并确定这组权限是否意味着在"权限"中表达的权限。
+     * 
+     * 
      * @param permission the Permission object to compare
      *
      * @return true if "permission" is a proper subset of a permission in
@@ -535,6 +632,10 @@ implements Serializable
     /**
      * Returns an enumeration of all the Permission objects in the container.
      *
+     * <p>
+     *  返回容器中所有Permission对象的枚举。
+     * 
+     * 
      * @return an enumeration of all the Permissions.
      */
 
@@ -550,6 +651,8 @@ implements Serializable
     // which had the serializable field:
     // private Hashtable perms;
     /**
+    /* <p>
+    /* 
      * @serialField perms java.util.Hashtable
      *     A table of the Permissions (both key and value are same).
      */
@@ -558,11 +661,16 @@ implements Serializable
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData Default fields.
      */
     /*
      * Writes the contents of the permsMap field out as a Hashtable for
      * serialization compatibility with earlier releases.
+     * <p>
+     *  将permsMap字段的内容写为与早期版本的序列化兼容性的Hashtable。
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -583,6 +691,8 @@ implements Serializable
     /*
      * Reads in a Hashtable of Permission/Permission and saves them in the
      * permsMap field.
+     * <p>
+     *  读取一个Hashtable of Permission / Permission并将它们保存在permsMap字段中。
      */
     private void readObject(ObjectInputStream in) throws IOException,
     ClassNotFoundException {

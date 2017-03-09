@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XNumber.java,v 1.2.4.2 2005/09/14 20:34:46 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XNumber.java,v 1.2.4.2 2005/09/14 20:34:46 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.objects;
 
@@ -30,18 +43,27 @@ import com.sun.org.apache.xpath.internal.XPathVisitor;
  * This class represents an XPath number, and is capable of
  * converting the number to other types, such as a string.
  * @xsl.usage general
+ * <p>
+ *  此类表示XPath编号,并且能够将数字转换为其他类型,例如字符串。 @ xsl.usage general
+ * 
  */
 public class XNumber extends XObject
 {
     static final long serialVersionUID = -2720400709619020193L;
 
   /** Value of the XNumber object.
+  /* <p>
+  /* 
    *  @serial         */
   double m_val;
 
   /**
    * Construct a XNodeSet object.
    *
+   * <p>
+   *  构造一个XNodeSet对象。
+   * 
+   * 
    * @param d Value of the object
    */
   public XNumber(double d)
@@ -54,6 +76,10 @@ public class XNumber extends XObject
   /**
    * Construct a XNodeSet object.
    *
+   * <p>
+   *  构造一个XNodeSet对象。
+   * 
+   * 
    * @param num Value of the object
    */
   public XNumber(Number num)
@@ -68,6 +94,10 @@ public class XNumber extends XObject
   /**
    * Tell that this is a CLASS_NUMBER.
    *
+   * <p>
+   *  告诉这是CLASS_NUMBER。
+   * 
+   * 
    * @return node type CLASS_NUMBER
    */
   public int getType()
@@ -79,6 +109,10 @@ public class XNumber extends XObject
    * Given a request type, return the equivalent string.
    * For diagnostic purposes.
    *
+   * <p>
+   *  给定一个请求类型,返回等效的字符串。用于诊断目的。
+   * 
+   * 
    * @return type string "#NUMBER"
    */
   public String getTypeString()
@@ -89,6 +123,10 @@ public class XNumber extends XObject
   /**
    * Cast result object to a number.
    *
+   * <p>
+   *  将结果对象转换为数字。
+   * 
+   * 
    * @return the value of the XNumber object
    */
   public double num()
@@ -99,6 +137,10 @@ public class XNumber extends XObject
   /**
    * Evaluate expression to a number.
    *
+   * <p>
+   *  将表达式计算为数字。
+   * 
+   * 
    * @return 0.0
    *
    * @throws javax.xml.transform.TransformerException
@@ -113,6 +155,10 @@ public class XNumber extends XObject
   /**
    * Cast result object to a boolean.
    *
+   * <p>
+   *  将结果对象转换为布尔值。
+   * 
+   * 
    * @return false if the value is NaN or equal to 0.0
    */
   public boolean bool()
@@ -123,6 +169,10 @@ public class XNumber extends XObject
 //  /**
 //   * Cast result object to a string.
 //   *
+//   * <p>
+//   *  // *将结果对象转换为字符串。 // *
+//   * 
+//   * 
 //   * @return "NaN" if the number is NaN, Infinity or -Infinity if
 //   * the number is infinite or the string value of the number.
 //   */
@@ -273,6 +323,10 @@ public class XNumber extends XObject
   /**
    * Cast result object to a string.
    *
+   * <p>
+   *  将结果对象转换为字符串。
+   * 
+   * 
    * @return "NaN" if the number is NaN, Infinity or -Infinity if
    * the number is infinite or the string value of the number.
    */
@@ -351,6 +405,10 @@ public class XNumber extends XObject
    * Return a string of '0' of the given length
    *
    *
+   * <p>
+   *  返回给定长度的字符串'0'
+   * 
+   * 
    * @param n Length of the string to be returned
    *
    * @return a string of '0' with the given length
@@ -374,6 +432,10 @@ public class XNumber extends XObject
    * Return a java object that's closest to the representation
    * that should be handed to an extension.
    *
+   * <p>
+   *  返回最接近应该传递给扩展的表示的java对象。
+   * 
+   * 
    * @return The value of this XNumber as a Double object
    */
   public Object object()
@@ -386,6 +448,10 @@ public class XNumber extends XObject
   /**
    * Tell if two objects are functionally equal.
    *
+   * <p>
+   *  告诉两个对象在功能上是否相等。
+   * 
+   * 
    * @param obj2 Object to compare this to
    *
    * @return true if the two objects are equal
@@ -420,6 +486,10 @@ public class XNumber extends XObject
    * position predicate can indicate that no more searching has to occur.
    *
    *
+   * <p>
+   * 告诉这个表达式是否返回一个稳定的数字,在表达式的迭代期间不会改变。这用于确定接近位置谓词是否可以指示不必进行更多搜索。
+   * 
+   * 
    * @return true if the expression represents a stable number.
    */
   public boolean isStableNumber()
@@ -428,6 +498,8 @@ public class XNumber extends XObject
   }
 
   /**
+  /* <p>
+  /* 
    * @see com.sun.org.apache.xpath.internal.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)

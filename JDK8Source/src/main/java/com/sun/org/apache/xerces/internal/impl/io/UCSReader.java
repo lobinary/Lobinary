@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.io;
@@ -33,6 +43,12 @@ import com.sun.xml.internal.stream.util.ThreadLocalBufferAllocator;
  *
  * @xerces.internal
  *
+ * <p>
+ *  UCS-2和UCS-4编码的读卡器。 (即,来自ISO-10646-UCS-(2 | 4)的编码)。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neil Graham, IBM
  *
  */
@@ -45,6 +61,9 @@ public class UCSReader extends Reader {
     /** Default byte buffer size (8192, larger than that of ASCIIReader
      * since it's reasonable to surmise that the average UCS-4-encoded
      * file should be 4 times as large as the average ASCII-encoded file).
+     * <p>
+     *  因为可以合理地推测,平均UCS-4编码文件应该是平均ASCII编码文件的4倍大)。
+     * 
      */
     public static final int DEFAULT_BUFFER_SIZE = 8192;
 
@@ -75,6 +94,10 @@ public class UCSReader extends Reader {
      * using the default buffer size.  The Endian-ness and whether this is
      * UCS-2 or UCS-4 needs also to be known in advance.
      *
+     * <p>
+     *  使用默认缓冲区大小从指定的输入流构造ASCII读取器。端点,以及这是UCS-2还是UCS-4还需要预先知道。
+     * 
+     * 
      * @param inputStream The input stream.
      * @param encoding One of UCS2LE, UCS2BE, UCS4LE or UCS4BE.
      */
@@ -87,6 +110,10 @@ public class UCSReader extends Reader {
      * and buffer size.  The Endian-ness and whether this is
      * UCS-2 or UCS-4 needs also to be known in advance.
      *
+     * <p>
+     *  从指定的输入流和缓冲区大小构造ASCII读取器。端点,以及这是UCS-2还是UCS-4还需要预先知道。
+     * 
+     * 
      * @param inputStream The input stream.
      * @param size        The initial buffer size.
      * @param encoding One of UCS2LE, UCS2BE, UCS4LE or UCS4BE.
@@ -112,6 +139,12 @@ public class UCSReader extends Reader {
      * <p> Subclasses that intend to support efficient single-character input
      * should override this method.
      *
+     * <p>
+     *  读取单个字符。此方法将阻塞,直到一个字符可用,I / O错误发生或达到流的结束。
+     * 
+     * <p>打算支持高效单字符输入的子类应该覆盖此方法。
+     * 
+     * 
      * @return     The character read, as an integer in the range 0 to 127
      *             (<tt>0x00-0x7f</tt>), or -1 if the end of the stream has
      *             been reached
@@ -150,6 +183,10 @@ public class UCSReader extends Reader {
      * until some input is available, an I/O error occurs, or the end of the
      * stream is reached.
      *
+     * <p>
+     *  将字符读入数组的一部分。此方法将阻塞,直到某些输入可用,发生I / O错误或达到流的结束。
+     * 
+     * 
      * @param      ch     Destination buffer
      * @param      offset Offset at which to start storing characters
      * @param      length Maximum number of characters to read
@@ -221,6 +258,10 @@ public class UCSReader extends Reader {
      * Skip characters.  This method will block until some characters are
      * available, an I/O error occurs, or the end of the stream is reached.
      *
+     * <p>
+     *  跳过字符。此方法将阻塞,直到一些字符可用,I / O错误发生或到达流的结束。
+     * 
+     * 
      * @param  n  The number of characters to skip
      *
      * @return    The number of characters actually skipped
@@ -243,6 +284,10 @@ public class UCSReader extends Reader {
     /**
      * Tell whether this stream is ready to be read.
      *
+     * <p>
+     *  告诉这个流是否准备好被读取。
+     * 
+     * 
      * @return True if the next read() is guaranteed not to block for input,
      * false otherwise.  Note that returning false does not guarantee that the
      * next read will block.
@@ -255,6 +300,9 @@ public class UCSReader extends Reader {
 
     /**
      * Tell whether this stream supports the mark() operation.
+     * <p>
+     *  告诉这个流是否支持mark()操作。
+     * 
      */
     public boolean markSupported() {
             return fInputStream.markSupported();
@@ -265,6 +313,10 @@ public class UCSReader extends Reader {
      * will attempt to reposition the stream to this point.  Not all
      * character-input streams support the mark() operation.
      *
+     * <p>
+     *  标记流中的当前位置。后续对reset()的调用将尝试将流重新定位到此点。不是所有的字符输入流都支持mark()操作。
+     * 
+     * 
      * @param  readAheadLimit  Limit on the number of characters that may be
      *                         read while still preserving the mark.  After
      *                         reading this many characters, attempting to
@@ -285,6 +337,11 @@ public class UCSReader extends Reader {
      * character-input streams support the reset() operation, and some support
      * reset() without supporting mark().
      *
+     * <p>
+     *  重置流。如果流已被标记,则尝试将其重新定位在标记处。如果流没有被标记,则尝试以适合于特定流的某种方式来重置流,例如通过将其重新定位到其起始点。
+     * 不是所有的字符输入流都支持reset()操作,有些支持reset()而不支持mark()。
+     * 
+     * 
      * @exception  IOException  If the stream has not been marked,
      *                          or if the mark has been invalidated,
      *                          or if the stream does not support reset(),
@@ -299,6 +356,8 @@ public class UCSReader extends Reader {
      * ready(), mark(), or reset() invocations will throw an IOException.
      * Closing a previously-closed stream, however, has no effect.
      *
+     * <p>
+     * 
      * @exception  IOException  If an I/O error occurs
      */
      public void close() throws IOException {

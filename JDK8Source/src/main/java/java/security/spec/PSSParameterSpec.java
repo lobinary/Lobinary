@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -66,6 +67,27 @@ import java.security.spec.MGF1ParameterSpec;
  *     SaltLength   -- 20
  *     TrailerField -- 1
  *
+ * <p>
+ *  此类别指定了<a href="http://www.ietf.org/rfc/rfc3447.txt"> PKCS#1 v2.1 </a>标准中定义的RSA-PSS签名方案的参数规范。
+ * 
+ *  <p>其在PKCS#1标准中的ASN.1定义描述如下：
+ * <pre>
+ *  RSASSA-PSS-params :: = SEQUENCE {hashAlgorithm [0] OAEP-PSSDigestAlgorithms DEFAULT sha1,maskGenAlgorithm [1] PKCS1MGFAlgorithms DEFAULT mgf1SHA1,saltLength [2] INTEGER DEFAULT 20,trailerField [3] INTEGER DEFAULT 1}
+ * 。
+ * </pre>
+ *  哪里
+ * <pre>
+ *  OAEP-PSSDigestAlgorithms ALGORITHM-IDENTIFIER :: = {{OID id-sha1 PARAMETERS NULL} | {OID id-sha224 PARAMETERS NULL}
+ *  | {OID id-sha256 PARAMETERS NULL} | {OID id-sha384 PARAMETERS NULL} | {OID id-sha512 PARAMETERS NULL}
+ * ,...  - 允许以后扩展 - }。
+ * 
+ *  PKCS1MGFAlgorithms ALGORITHM-IDENTIFIER :: = {{OID id-mgf1 PARAMETERS OAEP-PSSDigestAlgorithms},... 
+ *  - 允许将来扩展 - }。
+ * </pre>
+ *  <p>注意：PSSParameterSpec.DEFAULT使用以下内容：消息摘要 - "SHA-1"掩码生成函数(mgf) -  mgf的"MGF1"参数 -  MGF1ParameterSpec.
+ * SHA1 SaltLength  -  20 TrailerField  -  1。
+ * 
+ * 
  * @see MGF1ParameterSpec
  * @see AlgorithmParameterSpec
  * @see java.security.Signature
@@ -86,6 +108,10 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
 
     /**
      * The PSS parameter set with all default values.
+     * <p>
+     *  PSS参数设置为所有默认值。
+     * 
+     * 
      * @since 1.5
      */
     public static final PSSParameterSpec DEFAULT = new PSSParameterSpec();
@@ -93,6 +119,9 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
     /**
      * Constructs a new {@code PSSParameterSpec} as defined in
      * the PKCS #1 standard using the default values.
+     * <p>
+     *  使用默认值构造PKCS#1标准中定义的新{@code PSSParameterSpec}。
+     * 
      */
     private PSSParameterSpec() {
     }
@@ -103,6 +132,10 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
      * mask generation function, parameters for mask generation
      * function, salt length, and trailer field values.
      *
+     * <p>
+     * 使用指定的消息摘要,掩码生成函数,掩码生成函数的参数,盐长度和尾部字段值,创建PKCS#1标准中定义的新{@code PSSParameterSpec}。
+     * 
+     * 
      * @param mdName the algorithm name of the hash function.
      * @param mgfName the algorithm name of the mask generation
      * function.
@@ -147,6 +180,10 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
      * using the specified salt length and other default values as
      * defined in PKCS#1.
      *
+     * <p>
+     *  使用指定的盐长度和PKCS#1中定义的其他默认值创建新的{@code PSSParameterSpec}。
+     * 
+     * 
      * @param saltLen the length of salt in bits to be used in PKCS#1
      * PSS encoding.
      * @exception IllegalArgumentException if {@code saltLen} is
@@ -163,6 +200,10 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
     /**
      * Returns the message digest algorithm name.
      *
+     * <p>
+     *  返回消息摘要算法名称。
+     * 
+     * 
      * @return the message digest algorithm name.
      * @since 1.5
      */
@@ -173,6 +214,10 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
     /**
      * Returns the mask generation function algorithm name.
      *
+     * <p>
+     *  返回掩码生成函数算法名称。
+     * 
+     * 
      * @return the mask generation function algorithm name.
      *
      * @since 1.5
@@ -184,6 +229,10 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
     /**
      * Returns the parameters for the mask generation function.
      *
+     * <p>
+     *  返回掩码生成函数的参数。
+     * 
+     * 
      * @return the parameters for the mask generation function.
      * @since 1.5
      */
@@ -194,6 +243,10 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
     /**
      * Returns the salt length in bits.
      *
+     * <p>
+     *  返回盐长度(以位为单位)。
+     * 
+     * 
      * @return the salt length.
      */
     public int getSaltLength() {
@@ -203,6 +256,9 @@ public class PSSParameterSpec implements AlgorithmParameterSpec {
     /**
      * Returns the value for the trailer field, i.e. bc in PKCS#1 v2.1.
      *
+     * <p>
+     *  返回trailer字段的值,即PKCS#1 v2.1中的bc。
+     * 
      * @return the value for the trailer field, i.e. bc in PKCS#1 v2.1.
      * @since 1.5
      */

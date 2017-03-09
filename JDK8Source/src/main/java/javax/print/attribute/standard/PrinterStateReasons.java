@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -79,6 +80,35 @@ import javax.print.attribute.PrintServiceAttribute;
  * attribute name.
  * <P>
  *
+ * <p>
+ *  类PrinterStateReasons是一个打印属性类,一组枚举值,提供有关打印机当前状态的附加信息,即增加打印机{@link PrinterState PrinterState}属性值的信息。
+ * <P>
+ *  {@link PrinterStateReason PrinterStateReason}的实例不会直接显示在打印服务的属性集中。
+ * 相反,PrinterStateReasons属性显示在打印服务的属性集中。
+ *  PrinterStateReasons属性包含与打印服务状态相关的零个,一个或多个{@link PrinterStateReason PrinterStateReason}对象,每个{@link PrinterStateReason PrinterStateReason}
+ * 对象与REPORT的{@link严重性严重性}级别相关联最不严重),WARNING或ERROR(最严重)。
+ * 相反,PrinterStateReasons属性显示在打印服务的属性集中。
+ * 当相应条件成为打印机的相应条件时,打印机向打印服务的PrinterStateReasons属性添加{@link PrinterStateReason PrinterStateReason}对象,并且当相
+ * 应条件变为false时,打印机再次删除{@link PrinterStateReason PrinterStateReason}对象,而不管是否打印服务的整体{@link PrinterState PrinterState}
+ * 也更改了。
+ * 相反,PrinterStateReasons属性显示在打印服务的属性集中。
+ * <P>
+ * 类PrinterStateReasons从类{@link java.util.HashMap java.util.HashMap}继承其实现。
+ * 地图中的每个条目都由{@link PrinterStateReason PrinterStateReason}对象(键)映射到{@link严重性严重性}对象(值)构成：。
+ * <P>
+ *  与大多数打印属性不同,大多数打印属性一旦构造,类PrinterStateReasons设计为可变的;您可以向现有的PrinterStateReasons对象添加{@link PrinterStateReason PrinterStateReason}
+ * 对象,然后再次删除它们。
+ * 但是,像类{@link java.util.HashMap java.util.HashMap},类PrinterStateReasons不是多线程安全的。
+ * 如果一个PrinterStateReasons对象将被多个线程使用,请确保同步其操作(例如,使用从类{@link java.util.Collections java.util.Collections}
+ * 获取的同步映射视图)。
+ * 但是,像类{@link java.util.HashMap java.util.HashMap},类PrinterStateReasons不是多线程安全的。
+ * <P>
+ *  <B> IPP兼容性：</B>每个{@link PrinterStateReason PrinterStateReason}对象和关联的{@link严重性严重性}对象的<CODE> toString(
+ * )</CODE>方法返回的字符串值与连字符(<CODE>" - "</CODE>)",给出IPP关键字值。
+ * 由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class PrinterStateReasons
@@ -91,6 +121,9 @@ public final class PrinterStateReasons
     /**
      * Construct a new, empty printer state reasons attribute; the underlying
      * hash map has the default initial capacity and load factor.
+     * <p>
+     *  构造一个新的,空的打印机状态原因属性;底层哈希映射具有默认的初始容量和负载因子。
+     * 
      */
     public PrinterStateReasons() {
         super();
@@ -100,6 +133,10 @@ public final class PrinterStateReasons
      * super a new, empty printer state reasons attribute; the underlying
      * hash map has the given initial capacity and the default load factor.
      *
+     * <p>
+     * 超级新的,空打印机状态原因属性;底层哈希图具有给定的初始容量和默认负载因子。
+     * 
+     * 
      * @param  initialCapacity  Initial capacity.
      *
      * @throws IllegalArgumentException if the initial capacity is less
@@ -113,6 +150,10 @@ public final class PrinterStateReasons
      * Construct a new, empty printer state reasons attribute; the underlying
      * hash map has the given initial capacity and load factor.
      *
+     * <p>
+     *  构造一个新的,空的打印机状态原因属性;底层哈希图具有给定的初始容量和负载因子。
+     * 
+     * 
      * @param  initialCapacity  Initial capacity.
      * @param  loadFactor       Load factor.
      *
@@ -131,6 +172,12 @@ public final class PrinterStateReasons
      * {@link java.util.HashMap#HashMap(java.util.Map)
      * HashMap(Map)}.
      *
+     * <p>
+     *  构造包含与给定地图相同的{@link PrinterStateReason PrinterStateReason} --to  -  {@ link Severity Severity}映射的新打印机
+     * 状态reason属性。
+     * 底层哈希图的初始容量和负载因子是在超类构造函数{@link java.util.HashMap#HashMap(java.util.Map)HashMap(Map)}中指定的。
+     * 
+     * 
      * @param  map  Map to copy.
      *
      * @exception  NullPointerException
@@ -154,6 +201,10 @@ public final class PrinterStateReasons
      * printer state reasons attribute previously contained a mapping for the
      * given printer state reason, the old value is replaced.
      *
+     * <p>
+     *  将给定的打印机状态原因添加到此打印机状态reason属性,将其与给定的严重性级别相关联。如果此打印机状态原因属性先前包含给定打印机状态原因的映射,则旧值被替换。
+     * 
+     * 
      * @param  reason    Printer state reason. This must be an instance of
      *                    class {@link PrinterStateReason PrinterStateReason}.
      * @param  severity  Severity of the printer state reason. This must be
@@ -190,6 +241,12 @@ public final class PrinterStateReasons
      * For class PrinterStateReasons, the
      * category is class PrinterStateReasons itself.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于PrinterStateReasons类,类别是PrinterStateReasons类本身。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -204,6 +261,12 @@ public final class PrinterStateReasons
      * For class PrinterStateReasons, the
      * category name is <CODE>"printer-state-reasons"</CODE>.
      *
+     * <p>
+     *  获取此属性值为实例的类别的名称。
+     * <P>
+     *  对于PrinterStateReasons类,类别名称为<CODE>"printer-state-reasons"</CODE>。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {
@@ -222,6 +285,11 @@ public final class PrinterStateReasons
      * The set view does not support element insertion or
      * removal. The set view's iterator does not support element removal.
      *
+     * <p>
+     * 在此PrinterStateReasons属性中的给定严重性级别获取单个打印机状态原因属性的不可修改集视图。
+     * 集合视图中的每个元素都是{@link PrinterStateReason PrinterStateReason}对象。
+     * 集合视图中的唯一元素是映射到给定严重性值的{@link PrinterStateReason PrinterStateReason}对象。
+     * 
      * @param  severity  Severity level.
      *
      * @return  Set view of the individual {@link PrinterStateReason

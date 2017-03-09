@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -13,11 +14,16 @@ public final class NameDynAnyPair implements org.omg.CORBA.portable.IDLEntity
 
   /**
         * The name associated with the DynAny.
+        * <p>
+        *  与DynAny相关联的名称。
+        * 
         */
   public String id = null;
 
   /**
         * The DynAny value associated with the name.
+        * <p>
+        *  与名称关联的DynAny值。
         */
   public org.omg.DynamicAny.DynAny value = null;
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xerces.internal.impl.xs;
 
@@ -39,6 +49,11 @@ import org.xml.sax.SAXException;
  * This is an implementation of the XSAnnotation schema component.
  *
  * @xerces.internal
+ * <p>
+ *  这是XSAnnotation模式组件的实现。
+ * 
+ *  @ xerces.internal
+ * 
  */
 public class XSAnnotationImpl implements XSAnnotation {
 
@@ -65,6 +80,13 @@ public class XSAnnotationImpl implements XSAnnotation {
      * attributes nodes of the serialized <code>annotation</code>, otherwise
      * the corresponding events for all in-scope namespace declaration are
      * sent via specified document handler.
+     * <p>
+     *  将注释的内容写入指定的DOM对象。
+     * 如果指定的<code> target </code>对象是<code>注释</code>元素的DOM范围内命名空间声明,则作为序列化<code>注释</code>的属性节点添加,否则,所有范围内命名空间
+     * 声明的事件都通过指定的文档处理程序发送。
+     *  将注释的内容写入指定的DOM对象。
+     * 
+     * 
      * @param target  A target pointer to the annotation target object, i.e.
      *   <code>org.w3c.dom.Document</code>,
      *   <code>org.xml.sax.ContentHandler</code>.
@@ -86,6 +108,9 @@ public class XSAnnotationImpl implements XSAnnotation {
 
     /**
      * A text representation of annotation.
+     * <p>
+     *  注释的文本表示。
+     * 
      */
     public String getAnnotationString() {
         return fData;
@@ -96,6 +121,9 @@ public class XSAnnotationImpl implements XSAnnotation {
     /**
      *  The <code>type</code> of this object, i.e.
      * <code>ELEMENT_DECLARATION</code>.
+     * <p>
+     *  此对象的<code> type </code>,即<code> ELEMENT_DECLARATION </code>。
+     * 
      */
     public short getType() {
         return XSConstants.ANNOTATION;
@@ -104,6 +132,9 @@ public class XSAnnotationImpl implements XSAnnotation {
     /**
      * The name of type <code>NCName</code> of this declaration as defined in
      * XML Namespaces.
+     * <p>
+     *  在XML命名空间中定义的此声明的类型<code> NCName </code>的名称。
+     * 
      */
     public String getName() {
         return null;
@@ -112,6 +143,9 @@ public class XSAnnotationImpl implements XSAnnotation {
     /**
      *  The [target namespace] of this object, or <code>null</code> if it is
      * unspecified.
+     * <p>
+     *  此对象的[目标命名空间],如果未指定,则为<code> null </code>。
+     * 
      */
     public String getNamespace() {
         return null;
@@ -121,6 +155,8 @@ public class XSAnnotationImpl implements XSAnnotation {
      * A namespace schema information item corresponding to the target
      * namespace of the component, if it's globally declared; or null
      * otherwise.
+     * <p>
+     * 一个命名空间模式信息项,对应于组件的目标命名空间,如果它是全局声明的;否则为空。
      */
     public XSNamespaceItem getNamespaceItem() {
         return null;

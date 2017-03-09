@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -153,6 +154,52 @@ import javax.management.MBeanServer;
  * the new read-only <code>Map</code>. The associated value is the
  * calling thread's context class loader.</p>
  *
+ * <p>
+ *  <p>工厂创建JMX API连接器服务器。没有此类的实例。</p>
+ * 
+ *  <p>每个连接器服务器都由{@link JMXConnectorServerProvider}的实例创建。此实例如下所示。
+ * 假设给定的{@link JMXServiceURL}看起来像<code>"service：jmx：<em> protocol </em>：<em> remaining </em>"</code>。
+ * 然后,工厂将尝试为<code> <em>协议</em> </code>找到适当的{@link JMXConnectorServerProvider}。
+ *  <code> <em> protocol </em> </code>中的每个字符<code> + </code>或<code>  -  </code>会被替换为<code>。
+ * </code> <code> _ </code>。</p>。
+ * 
+ *  <p>如下搜索<em>提供程序包列表</em>：</p>
+ * 
+ * <ol>
+ * 
+ *  <li>如果{@link #newJMXConnectorServer(JMXServiceURL,Map,MBeanServer)newJMXConnectorServer}的<code> envi
+ * ronment </code>参数包含密钥<code> jmx.remote.protocol.provider.pkgs </code>关联值是提供程序包列表。
+ * 
+ *  <li>否则,如果系统属性<code> jmx.remote.protocol.provider.pkgs </code>存在,则其值为提供程序包列表。
+ * 
+ *  <li>否则,没有提供程序包列表。
+ * 
+ * </ol>
+ * 
+ * <p>提供程序包列表是一个字符串,解释为用竖线(<code> | </code>)分隔的非空Java包名称的列表。如果字符串为空,那么提供程序包列表也是如此。
+ * 如果提供程序包列表不是字符串,或者它包含一个为空字符串的元素,则会抛出{@link JMXProviderException}。</p>。
+ * 
+ *  <p>如果提供程序包列表存在且不为空,则对于列表中的每个元素<code> <em> pkg </em> </code>,工厂将尝试加载类
+ * 
+ * <blockquote>
+ *  <code> <em> pkg </em>。<em> protocol </em> .ServerProvider </code>
+ * </blockquote>
+ * 
+ *  <p>如果{@link #newJMXConnectorServer(JMXServiceURL,Map,MBeanServer)newJMXConnectorServer}的<code> envir
+ * onment </code>参数包含键<j>那么相关联的值是用于加载提供程序的类加载器。
+ * 如果相关联的值不是{@link java.lang.ClassLoader}的实例,则会抛出{@link java.lang.IllegalArgumentException}。</p>。
+ * 
+ *  <p>如果<code> jmx.remote.protocol.provider.class.loader </code>键不存在于<code> environment </code>参数中,则使用调
+ * 用线程的上下文类加载器。
+ *  p>。
+ * 
+ *  <p>如果尝试加载此类会生成{@link ClassNotFoundException},则会继续搜索处理程序,并显示列表的下一个元素。</p>
+ * 
+ * <p>否则,由{@link JMXProviderException} {@link JMXProviderException#getCause()<em> cause </em>}指示基本异常的{@link JMXProviderException}
+ * 指示提供程序发现问题,如下所示：</p>。
+ * 
+ * <ul>
+ * 
  * @since 1.5
  */
 public class JMXConnectorServerFactory {
@@ -163,6 +210,29 @@ public class JMXConnectorServerFactory {
      * requests received from the client, possibly after consulting an
      * MBean-specific class loader.  The value associated with this
      * attribute is an instance of {@link ClassLoader}.</p>
+     * <p>
+     * 
+     *  <li>如果尝试加载类会产生除<code> ClassNotFoundException </code>之外的异常,即<em> cause </em>;
+     * 
+     *  <li>如果类的{@link Class#newInstance()}产生异常,即<em> cause </em>。
+     * 
+     * </ul>
+     * 
+     *  <p>如果没有通过上述步骤找到提供者,包括没有提供者包列表的默认情况,那么实现将使用自己的提供者<code> <em> protocol </em> </code>或者如果没有,它会抛出一个<code>
+     *  MalformedURLException </code>。
+     * 实现可以选择通过其他方式找到提供商。例如,它可以支持<a。
+     * href="{@docRoot}/../technotes/guides/jar/jar.html#Service Provider">
+     *  服务提供程序的JAR约定</a>,其中服务接口为<code> JMXConnectorServerProvider </code>。</p>
+     * 
+     *  <p>每个实现都必须使用默认的RMI传输支持RMI连接器协议,使用字符串<code> rmi </code>指定。
+     * 实现可以可选地支持RMI连接器协议与用字符串<code> iiop </code>指定的RMI / IIOP传输。</p>。
+     * 
+     *  <p>一旦找到提供者,<code> newJMXConnectorServer </code>方法的结果是在提供者上调用{@link JMXConnectorServerProvider#newJMXConnectorServer(JMXServiceURL,Map,MBeanServer)newJMXConnectorServer}
+     * 的结果。
+     * </p>。
+     * 
+     * <p>传递给<code> JMXConnectorServerProvider </code>的<code> Map </code>参数是一个新的只读<code> Map </code>,其中包含<code>
+     * 环境</code>参数到{@link #newJMXConnectorServer(JMXServiceURL,Map,MBeanServer)JMXConnectorServerFactory.newJMXConnectorServer}
      */
     public static final String DEFAULT_CLASS_LOADER =
         JMXConnectorFactory.DEFAULT_CLASS_LOADER;
@@ -174,6 +244,12 @@ public class JMXConnectorServerFactory {
      * MBean-specific class loader.  The value associated with this
      * attribute is an instance of {@link javax.management.ObjectName
      * ObjectName}.</p>
+     * <p>
+     * ,如果有的话。
+     * 此外,如果<code> jmx.remote.protocol.provider.class.loader </code>键不存在于<code> environment </code>参数中,它将被添加
+     * 到新的只读<code>地图</code>。
+     * 相关的值是调用线程的上下文类加载器。</p>。
+     * 
      */
     public static final String DEFAULT_CLASS_LOADER_NAME =
         "jmx.remote.default.class.loader.name";
@@ -183,6 +259,10 @@ public class JMXConnectorServerFactory {
      * that are consulted when looking for the handler for a protocol.
      * The value associated with this attribute is a string with
      * package names separated by vertical bars (<code>|</code>).</p>
+     * <p>
+     *  <p>指定默认类装入器的属性的名称。这个类加载器用于反序列化从客户端接收的请求中的对象,可能在咨询MBean特定的类加载器之后。与此属性关联的值是{@link ClassLoader}的实例。
+     * </p>。
+     * 
      */
     public static final String PROTOCOL_PROVIDER_PACKAGES =
         "jmx.remote.protocol.provider.pkgs";
@@ -192,6 +272,10 @@ public class JMXConnectorServerFactory {
      * loader for loading protocol providers.
      * The value associated with this attribute is an instance
      * of {@link ClassLoader}.</p>
+     * <p>
+     *  <p>指定默认类装入器MBean名称的属性的名称。这个类加载器用于反序列化从客户端接收的请求中的对象,可能在咨询MBean特定的类加载器之后。
+     * 与此属性关联的值是{@link javax.management.ObjectName ObjectName}的实例。</p>。
+     * 
      */
     public static final String PROTOCOL_PROVIDER_CLASS_LOADER =
         "jmx.remote.protocol.provider.class.loader";
@@ -251,6 +335,10 @@ public class JMXConnectorServerFactory {
      * resultant server is not started until its {@link
      * JMXConnectorServer#start() start} method is called.</p>
      *
+     * <p>
+     *  <p>指定在查找协议的处理程序时查询的提供程序包的属性的名称。与此属性关联的值是一个字符串,其中包名称由竖线(<code> | </code>)分隔。</p>
+     * 
+     * 
      * @param serviceURL the address of the new connector server.  The
      * actual address of the new connector server, as returned by its
      * {@link JMXConnectorServer#getAddress() getAddress} method, will

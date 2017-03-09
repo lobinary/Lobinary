@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,11 @@ import javax.swing.event.*;
  * a closed interval, i.e. the interval includes both index0 and
  * index1.
  *
+ * <p>
+ *  此接口表示显示具有稳定索引的值列表的任何组件的选择的当前状态。选择被建模为一组间隔,每个间隔表示所选列表元素的连续范围。
+ * 用于修改所选间隔集合的方法都采用表示闭合间隔的一对索引index0和index1,即,间隔包括index0和index1。
+ * 
+ * 
  * @author Hans Muller
  * @author Philip Milne
  * @see DefaultListSelectionModel
@@ -49,6 +55,10 @@ public interface ListSelectionModel
      * A value for the selectionMode property: select one list index
      * at a time.
      *
+     * <p>
+     *  selectionMode属性的值：一次选择一个列表索引。
+     * 
+     * 
      * @see #setSelectionMode
      */
     int SINGLE_SELECTION = 0;
@@ -57,6 +67,10 @@ public interface ListSelectionModel
      * A value for the selectionMode property: select one contiguous
      * range of indices at a time.
      *
+     * <p>
+     *  selectionMode属性的值：一次选择一个连续的索引范围。
+     * 
+     * 
      * @see #setSelectionMode
      */
     int SINGLE_INTERVAL_SELECTION = 1;
@@ -65,6 +79,10 @@ public interface ListSelectionModel
      * A value for the selectionMode property: select one or more
      * contiguous ranges of indices at a time.
      *
+     * <p>
+     *  selectionMode属性的值：一次选择一个或多个连续的索引范围。
+     * 
+     * 
      * @see #setSelectionMode
      */
     int MULTIPLE_INTERVAL_SELECTION = 2;
@@ -81,6 +99,14 @@ public interface ListSelectionModel
      * If this represents a change to the current selection, then each
      * {@code ListSelectionListener} is notified of the change.
      *
+     * <p>
+     *  将选择更改为{@code index0}和{@code index1}(含)之间。 {@code index0}不必小于或等于{@code index1}。
+     * <p>
+     *  在{@code SINGLE_SELECTION}选择模式中,仅使用第二个索引。
+     * <p>
+     *  如果这代表对当前选择的更改,则会向每个{@code ListSelectionListener}通知更改。
+     * 
+     * 
      * @param index0 one end of the interval.
      * @param index1 other end of the interval
      * @see #addListSelectionListener
@@ -103,6 +129,17 @@ public interface ListSelectionModel
      * If this represents a change to the current selection, then each
      * {@code ListSelectionListener} is notified of the change.
      *
+     * <p>
+     *  将选择更改为{@code index0}和{@code index1}(含)之间的当前选择和索引的集合并集。 {@code index0}不必小于或等于{@code index1}。
+     * <p>
+     * 在{@code SINGLE_SELECTION}选择模式下,这相当于调用{@code setSelectionInterval},并且仅使用第二个索引。
+     * 在{@code SINGLE_INTERVAL_SELECTION}选择模式中,此方法的行为类似于{@code setSelectionInterval},除非给定的间隔与现有选择直接相邻或重叠,因此可
+     * 用于增大选择。
+     * 在{@code SINGLE_SELECTION}选择模式下,这相当于调用{@code setSelectionInterval},并且仅使用第二个索引。
+     * <p>
+     *  如果这代表对当前选择的更改,则会向每个{@code ListSelectionListener}通知更改。
+     * 
+     * 
      * @param index0 one end of the interval.
      * @param index1 other end of the interval
      * @see #addListSelectionListener
@@ -125,6 +162,15 @@ public interface ListSelectionModel
      * If this represents a change to the current selection, then each
      * {@code ListSelectionListener} is notified of the change.
      *
+     * <p>
+     *  将选择更改为当前选择和{@code index0}和{@code index1}(含)之间的索引的设置差异。 {@code index0}不必小于或等于{@code index1}。
+     * <p>
+     *  在{@code SINGLE_INTERVAL_SELECTION}选择模式中,如果移除会产生两个不相交的选择,则移除会延伸到选择的较大一端。
+     * 例如,如果选择是{@code 0-10},并且提供索引{@code 5,6}(以任何顺序),结果选择是{@code 0-4}。
+     * <p>
+     *  如果这代表对当前选择的更改,则会向每个{@code ListSelectionListener}通知更改。
+     * 
+     * 
      * @param index0 one end of the interval.
      * @param index1 other end of the interval
      * @see #addListSelectionListener
@@ -134,18 +180,27 @@ public interface ListSelectionModel
 
     /**
      * Returns the first selected index or -1 if the selection is empty.
+     * <p>
+     *  返回第一个选定的索引,如果选择为空,则返回-1。
+     * 
      */
     int getMinSelectionIndex();
 
 
     /**
      * Returns the last selected index or -1 if the selection is empty.
+     * <p>
+     *  返回最后选择的索引,如果选择为空,则返回-1。
+     * 
      */
     int getMaxSelectionIndex();
 
 
     /**
      * Returns true if the specified index is selected.
+     * <p>
+     *  如果选择了指定的索引,则返回true。
+     * 
      */
     boolean isSelectedIndex(int index);
 
@@ -158,6 +213,11 @@ public interface ListSelectionModel
      * indices specially, e.g. Windows95 displays the lead index with a
      * dotted yellow outline.
      *
+     * <p>
+     * 将最近一次调用的第一个索引参数返回到setSelectionInterval(),addSelectionInterval()或removeSelectionInterval()。
+     * 最近的index0被认为是"锚",最近的index1被认为是"lead"。一些接口特别显示这些索引,例如。 Windows95显示带有黄色虚线轮廓的销售线索索引。
+     * 
+     * 
      * @see #getLeadSelectionIndex
      * @see #setSelectionInterval
      * @see #addSelectionInterval
@@ -168,6 +228,10 @@ public interface ListSelectionModel
     /**
      * Set the anchor selection index.
      *
+     * <p>
+     *  设置锚选择索引。
+     * 
+     * 
      * @see #getAnchorSelectionIndex
      */
     void setAnchorSelectionIndex(int index);
@@ -177,6 +241,10 @@ public interface ListSelectionModel
      * Return the second index argument from the most recent call to
      * setSelectionInterval(), addSelectionInterval() or removeSelectionInterval().
      *
+     * <p>
+     *  将最近一次调用的第二个索引参数返回到setSelectionInterval(),addSelectionInterval()或removeSelectionInterval()。
+     * 
+     * 
      * @see #getAnchorSelectionIndex
      * @see #setSelectionInterval
      * @see #addSelectionInterval
@@ -186,6 +254,10 @@ public interface ListSelectionModel
     /**
      * Set the lead selection index.
      *
+     * <p>
+     *  设置潜在客户选择指数。
+     * 
+     * 
      * @see #getLeadSelectionIndex
      */
     void setLeadSelectionIndex(int index);
@@ -194,12 +266,19 @@ public interface ListSelectionModel
      * Change the selection to the empty set.  If this represents
      * a change to the current selection then notify each ListSelectionListener.
      *
+     * <p>
+     *  将选择更改为空集。如果这表示对当前选择的更改,则通知每个ListSelectionListener。
+     * 
+     * 
      * @see #addListSelectionListener
      */
     void clearSelection();
 
     /**
      * Returns true if no indices are selected.
+     * <p>
+     *  如果未选择索引,则返回true。
+     * 
      */
     boolean isSelectionEmpty();
 
@@ -207,6 +286,9 @@ public interface ListSelectionModel
      * Insert length indices beginning before/after index.  This is typically
      * called to sync the selection model with a corresponding change
      * in the data model.
+     * <p>
+     *  插入在索引之前/之后开始的长度索引。这通常被称为将选择模型与数据模型中的对应变化同步。
+     * 
      */
     void insertIndexInterval(int index, int length, boolean before);
 
@@ -214,6 +296,9 @@ public interface ListSelectionModel
      * Remove the indices in the interval index0,index1 (inclusive) from
      * the selection model.  This is typically called to sync the selection
      * model width a corresponding change in the data model.
+     * <p>
+     *  从选择模型中删除区间index0,index1(包括)中的索引。这通常被称为将选择模型宽度与数据模型中的对应变化同步。
+     * 
      */
     void removeIndexInterval(int index0, int index1);
 
@@ -239,6 +324,18 @@ public interface ListSelectionModel
      * selection change (if there was one), with the event's
      * {@code valueIsAdjusting} property set to {@code false}.
      *
+     * <p>
+     *  设置{@code valueIsAdjusting}属性,指示是否将来的选择更改视为单个更改的一部分。
+     * 此属性的值用于初始化生成的{@code ListSelectionEvent}的{@code valueIsAdjusting}属性。
+     * <p>
+     * 例如,如果选择是响应用户拖动而更新的,则当启动拖动时,此属性可设置为{@code true},并在完成拖动时设置为{@code false}。
+     * 在拖动期间,侦听器接收带有{@code valueIsAdjusting}属性设置为{@code true}的事件。在拖动结束时,更改完成后,侦听器将接收一个值设置为{@code false}的事件。
+     * 监听器可以使用此模式,如果他们希望仅在更改已完成时更新。
+     * <p>
+     *  将此属性设置为{@code true}会开始一系列更改,这些更改将被视为单个更改的一部分。
+     * 当属性更改回{@code false}时,会发送一个事件来表示整个选择更改(如果有),并将事件的{@code valueIsAdjusting}属性设置为{@code false}。
+     * 
+     * 
      * @param valueIsAdjusting the new value of the property
      * @see #getValueIsAdjusting
      * @see javax.swing.event.ListSelectionEvent#getValueIsAdjusting
@@ -248,6 +345,10 @@ public interface ListSelectionModel
     /**
      * Returns {@code true} if the selection is undergoing a series of changes.
      *
+     * <p>
+     *  如果选择正在进行一系列更改,则返回{@code true}。
+     * 
+     * 
      * @return true if the selection is undergoing a series of changes
      * @see #setValueIsAdjusting
      */
@@ -272,6 +373,18 @@ public interface ListSelectionModel
      *   In this mode, there's no restriction on what can be selected.
      * </ul>
      *
+     * <p>
+     *  设置选择模式。以下列表描述了接受的选择模式：
+     * <ul>
+     * <li> {@ code ListSelectionModel.SINGLE_SELECTION}  - 一次只能选择一个列表索引。
+     * 在这种模式下,{@code setSelectionInterval}和{@code addSelectionInterval}是等价的,都将当前选择替换为由第二个参数("lead")表示的索引。
+     *  <li> {@ code ListSelectionModel.SINGLE_INTERVAL_SELECTION}  - 一次只能选择一个连续的时间间隔。
+     * 在这种模式下,{@code addSelectionInterval}的行为类似于{@code setSelectionInterval}(替换当前选择),除非给定的间隔与现有选择直接相邻或重叠,因此可
+     * 以用来增长它。
+     *  <li> {@ code ListSelectionModel.SINGLE_INTERVAL_SELECTION}  - 一次只能选择一个连续的时间间隔。
+     *  <li> {@ code ListSelectionModel.MULTIPLE_INTERVAL_SELECTION}  - 在此模式下,对可选择的内容没有限制。
+     * </ul>
+     * 
      * @see #getSelectionMode
      * @throws IllegalArgumentException if the selection mode isn't
      *         one of those allowed
@@ -281,6 +394,9 @@ public interface ListSelectionModel
     /**
      * Returns the current selection mode.
      *
+     * <p>
+     * 
+     * 
      * @return the current selection mode
      * @see #setSelectionMode
      */
@@ -290,6 +406,10 @@ public interface ListSelectionModel
      * Add a listener to the list that's notified each time a change
      * to the selection occurs.
      *
+     * <p>
+     *  返回当前选择模式。
+     * 
+     * 
      * @param x the ListSelectionListener
      * @see #removeListSelectionListener
      * @see #setSelectionInterval
@@ -305,6 +425,10 @@ public interface ListSelectionModel
      * Remove a listener from the list that's notified each time a
      * change to the selection occurs.
      *
+     * <p>
+     *  将监听器添加到每当发生选择更改时通知的列表中。
+     * 
+     * 
      * @param x the ListSelectionListener
      * @see #addListSelectionListener
      */

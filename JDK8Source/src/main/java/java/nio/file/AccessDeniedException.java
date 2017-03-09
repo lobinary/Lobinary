@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,13 @@ package java.nio.file;
  * SecurityException} thrown by access controllers or security managers when
  * access to a file is denied.
  *
+ * <p>
+ *  拒绝文件系统操作时抛出的检查异常,通常是由于文件权限或其他访问检查。
+ * 
+ *  <p>此异常与访问控制器或安全管理器在拒绝对文件的访问时抛出的{@link java.security.AccessControlException AccessControlException}或{@link SecurityException}
+ * 无关。
+ * 
+ * 
  * @since 1.7
  */
 
@@ -45,6 +53,10 @@ public class AccessDeniedException
     /**
      * Constructs an instance of this class.
      *
+     * <p>
+     *  构造此类的实例。
+     * 
+     * 
      * @param   file
      *          a string identifying the file or {@code null} if not known
      */
@@ -55,6 +67,9 @@ public class AccessDeniedException
     /**
      * Constructs an instance of this class.
      *
+     * <p>
+     *  构造此类的实例。
+     * 
      * @param   file
      *          a string identifying the file or {@code null} if not known
      * @param   other

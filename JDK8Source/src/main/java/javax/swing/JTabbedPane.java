@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -100,6 +101,38 @@ import java.io.IOException;
  *    description: A component which provides a tab folder metaphor for
  *                 displaying one component from a set of components.
  *
+ * <p>
+ *  允许用户通过单击具有给定标题和/或图标的选项卡在一组组件之间切换的组件。
+ * 有关使用标签式窗格的示例和信息,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/tabbedpane.html">
+ * 如何使用标签式窗格</a>, <em> Java教程</em>。
+ *  允许用户通过单击具有给定标题和/或图标的选项卡在一组组件之间切换的组件。
+ * <p>
+ *  通过使用<code> addTab </code>和<code> insertTab </code>方法将标签/组件添加到<code> TabbedPane </code>对象中。
+ * 标签由与其被添加的位置相对应的索引表示,其中第一标签具有等于0的索引,并且最后一个标签具有等于标签计数减1的索引。
+ * <p>
+ *  <code> TabbedPane </code>使用<code> SingleSelectionModel </code>来表示选项卡索引集和当前选定的索引。
+ * 如果标签计数大于0,那么将始终有一个选定的索引,默认情况下将被初始化为第一个选项卡。如果选项卡计数为0,则选定的索引将为-1。
+ * <p>
+ *  选项卡标题可以通过<code> Component </code>来呈现。例如,以下产生类似的结果：
+ * <pre>
+ * //在这种情况下,外观会呈现标签的标题。 tabbedPane.addTab("Tab",myComponent); //在这种情况下,自定义组件负责呈现标签的//标题。
+ *  tabbedPane.addTab(null,myComponent); tabbedPane.setTabComponentAt(0,new JLabel("Tab"));。
+ * </pre>
+ *  后者通常用于需要更复杂的用户交互,需要选项卡上的自定义组件。例如,您可以提供一个动画的自定义组件或具有用于关闭该选项卡的小部件的自定义组件。
+ * <p>
+ *  如果为选项卡指定组件,<code> JTabbedPane </code>将不会呈现您为该选项卡指定的任何文本或图标。
+ * <p>
+ *  <strong>注意</strong>：不要直接在标签页组件上使用<code> setVisible </code>使其可见,而改用<code> setSelectedComponent </code>
+ * 或<code> setSelectedIndex </code> 。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * @beaninfo属性：isContainer true description：提供一个tab文件夹隐喻的组件,用于显示一组组件中的一个组件。
+ * 
+ * 
  * @author Dave Moore
  * @author Philip Milne
  * @author Amy Fowler
@@ -112,6 +145,9 @@ public class JTabbedPane extends JComponent
    /**
     * The tab layout policy for wrapping tabs in multiple runs when all
     * tabs will not fit within a single run.
+    * <p>
+    *  当所有选项卡都不适合单个运行时,用于在多个运行中包装选项卡的选项卡布局策略。
+    * 
     */
     public static final int WRAP_TAB_LAYOUT = 0;
 
@@ -120,11 +156,16 @@ public class JTabbedPane extends JComponent
     * the tabs will not fit within a single run.  If all the tabs do
     * not fit within a single run the look and feel will provide a way
     * to navigate to hidden tabs.
+    * <p>
+    *  当所有选项卡都不适合单个运行时,用于提供可用选项卡子集的选项卡布局策略。如果所有选项卡不适合单个运行,外观和感觉将提供一种导航到隐藏选项卡的方法。
+    * 
     */
     public static final int SCROLL_TAB_LAYOUT = 1;
 
 
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -132,6 +173,10 @@ public class JTabbedPane extends JComponent
 
     /**
      * Where the tabs are placed.
+     * <p>
+     *  放置选项卡的位置。
+     * 
+     * 
      * @see #setTabPlacement
      */
     protected int tabPlacement = TOP;
@@ -146,6 +191,9 @@ public class JTabbedPane extends JComponent
     /**
      * The <code>changeListener</code> is the listener we add to the
      * model.
+     * <p>
+     *  <code> changeListener </code>是我们添加到模型的监听器。
+     * 
      */
     protected ChangeListener changeListener = null;
 
@@ -159,12 +207,19 @@ public class JTabbedPane extends JComponent
      * instance since the
      * event's only (read-only) state is the source property.  The source
      * of events generated here is always "this".
+     * <p>
+     *  由于事件的只读(只读)状态是源属性,因此每个<code> TabPane </code>实例只需要一个<code> ChangeEvent </code>。这里生成的事件源始终是"this"。
+     * 
      */
     protected transient ChangeEvent changeEvent = null;
 
     /**
      * Creates an empty <code>TabbedPane</code> with a default
      * tab placement of <code>JTabbedPane.TOP</code>.
+     * <p>
+     *  使用<code> JTabbedPane.TOP </code>的默认标签位置创建一个空的<code> TabbedPane </code>。
+     * 
+     * 
      * @see #addTab
      */
     public JTabbedPane() {
@@ -176,6 +231,11 @@ public class JTabbedPane extends JComponent
      * of either: <code>JTabbedPane.TOP</code>, <code>JTabbedPane.BOTTOM</code>,
      * <code>JTabbedPane.LEFT</code>, or <code>JTabbedPane.RIGHT</code>.
      *
+     * <p>
+     *  使用指定的标签位置创建一个空的<code> TabbedPane </code>：<code> JTabbedPane.TOP </code>,<code> JTabbedPane.BOTTOM </code>
+     * ,<code> JTabbedPane.LEFT </code >或<code> JTabbedPane.RIGHT </code>。
+     * 
+     * 
      * @param tabPlacement the placement for the tabs relative to the content
      * @see #addTab
      */
@@ -191,6 +251,14 @@ public class JTabbedPane extends JComponent
      * Tab layout policy may be either: <code>JTabbedPane.WRAP_TAB_LAYOUT</code>
      * or <code>JTabbedPane.SCROLL_TAB_LAYOUT</code>.
      *
+     * <p>
+     *  使用指定的标签布置和标签布局策略创建一个空的<code> TabbedPane </code>。
+     * 标签位置可以是：<code> JTabbedPane.TOP </code>,<code> JTabbedPane.BOTTOM </code>,<code> JTabbedPane.LEFT </code>
+     * 或<code> JTabbedPane.RIGHT </code> 。
+     *  使用指定的标签布置和标签布局策略创建一个空的<code> TabbedPane </code>。
+     * 制表符布局策略可以是：<code> JTabbedPane.WRAP_TAB_LAYOUT </code>或<code> JTabbedPane.SCROLL_TAB_LAYOUT </code>。
+     * 
+     * 
      * @param tabPlacement the placement for the tabs relative to the content
      * @param tabLayoutPolicy the policy for laying out tabs when all tabs will not fit on one run
      * @exception IllegalArgumentException if tab placement or tab layout policy are not
@@ -209,6 +277,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the UI object which implements the L&amp;F for this component.
      *
+     * <p>
+     * 返回实现此组件的L&amp; F的UI对象。
+     * 
+     * 
      * @return a <code>TabbedPaneUI</code> object
      * @see #setUI
      */
@@ -219,6 +291,10 @@ public class JTabbedPane extends JComponent
     /**
      * Sets the UI object which implements the L&amp;F for this component.
      *
+     * <p>
+     *  设置实现此组件的L&amp; F的UI对象。
+     * 
+     * 
      * @param ui the new UI object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -241,6 +317,10 @@ public class JTabbedPane extends JComponent
     /**
      * Resets the UI property to a value from the current look and feel.
      *
+     * <p>
+     *  将UI属性重置为当前外观的值。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -252,6 +332,10 @@ public class JTabbedPane extends JComponent
      * Returns the name of the UI class that implements the
      * L&amp;F for this component.
      *
+     * <p>
+     *  返回实现此组件的L&amp; F的UI类的名称。
+     * 
+     * 
      * @return the string "TabbedPaneUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -264,6 +348,9 @@ public class JTabbedPane extends JComponent
     /**
      * We pass <code>ModelChanged</code> events along to the listeners with
      * the tabbedpane (instead of the model itself) as the event source.
+     * <p>
+     *  我们将<code> ModelChanged </code>事件传递给具有选项卡式窗格(而不是模型本身)作为事件源的侦听器。
+     * 
      */
     protected class ModelListener implements ChangeListener, Serializable {
         public void stateChanged(ChangeEvent e) {
@@ -276,6 +363,11 @@ public class JTabbedPane extends JComponent
      * can override this to return a subclass of <code>ModelListener</code> or
      * another <code>ChangeListener</code> implementation.
      *
+     * <p>
+     *  想要处理<code> ChangeEvents </code>的子类可以覆盖此类,以返回<code> ModelListener </code>或另一个<code> ChangeListener </code>
+     * 实现的子类。
+     * 
+     * 
      * @see #fireStateChanged
      */
     protected ChangeListener createChangeListener() {
@@ -285,6 +377,10 @@ public class JTabbedPane extends JComponent
     /**
      * Adds a <code>ChangeListener</code> to this tabbedpane.
      *
+     * <p>
+     *  在此标签栏中添加<code> ChangeListener </code>。
+     * 
+     * 
      * @param l the <code>ChangeListener</code> to add
      * @see #fireStateChanged
      * @see #removeChangeListener
@@ -296,6 +392,10 @@ public class JTabbedPane extends JComponent
     /**
      * Removes a <code>ChangeListener</code> from this tabbedpane.
      *
+     * <p>
+     *  从此选项卡式窗格中删除<code> ChangeListener </code>。
+     * 
+     * 
      * @param l the <code>ChangeListener</code> to remove
      * @see #fireStateChanged
      * @see #addChangeListener
@@ -308,6 +408,11 @@ public class JTabbedPane extends JComponent
      * Returns an array of all the <code>ChangeListener</code>s added
      * to this <code>JTabbedPane</code> with <code>addChangeListener</code>.
      *
+     * <p>
+     *  返回使用<code> addChangeListener </code>添加到此<code> JTabbedPane </code>中的所有<code> ChangeListener </code>的
+     * 数组。
+     * 
+     * 
      * @return all of the <code>ChangeListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -327,6 +432,12 @@ public class JTabbedPane extends JComponent
      * same, but a new tab moves to that index. Events are fired for all of
      * these cases.
      *
+     * <p>
+     *  使用此{@code JTabbedPane}作为源,向每个已注册的侦听器发送{@code ChangeEvent}。
+     * 每当对所选索引或{@code JTabbedPane}中的所选选项卡进行更改时,将调用此方法。通常,所选索引和所选标签一起改变。
+     * 但是,在某些情况下,如选项卡添加,选定的索引更改,同一选项卡仍保持选中状态。还有其他情况,例如删除所选标签,其中索引保持不变,但新标签移动到该索引。所有这些情况都会触发事件。
+     * 
+     * 
      * @see #addChangeListener
      * @see EventListenerList
      */
@@ -348,6 +459,13 @@ public class JTabbedPane extends JComponent
          * of backward compatibility. Therefore, when making changes to
          * this code, ensure that the BasicTabbedPaneUI code is kept in
          * synch.
+         * <p>
+         * 隐藏和显示所选选项卡的内容。它复制已经存在于BasicTabbedPaneUI中的逻辑,在布局传递期间处理的逻辑。
+         * 这个代码存在允许开发人员做以前的模型很难完成的等待布局传递来处理可见性更改的模型;例如请求关注新的可见组件。
+         * 
+         *  对于平均代码,使用典型的JTabbedPane方法,现在将处理所有可见性更改。但是,BasicTabbedPaneUI中的代码仍然存在,用于向后兼容性。
+         * 因此,在更改此代码时,请确保BasicTabbedPaneUI代码保持同步。
+         * 
          */
 
         int selIndex = getSelectedIndex();
@@ -376,6 +494,9 @@ public class JTabbedPane extends JComponent
                  * is inside this if-statement for good reason: Tabbed pane
                  * should continue to show the previously visible component
                  * if there is no component for the chosen tab.
+                 * <p>
+                 *  是在这个if语句内有很好的理由：如果所选择的选项卡没有组件,选项卡式窗格应该继续显示以前可见的组件。
+                 * 
                  */
 
                 /* if there was a previous visible component */
@@ -421,6 +542,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the model associated with this tabbedpane.
      *
+     * <p>
+     *  返回与此标签页相关联的模型。
+     * 
+     * 
      * @see #setModel
      */
     public SingleSelectionModel getModel() {
@@ -430,6 +555,10 @@ public class JTabbedPane extends JComponent
     /**
      * Sets the model to be used with this tabbedpane.
      *
+     * <p>
+     *  设置要与此选项卡窗格一起使用的模型。
+     * 
+     * 
      * @param model the model to be used
      * @see #getModel
      * @beaninfo
@@ -457,6 +586,10 @@ public class JTabbedPane extends JComponent
 
     /**
      * Returns the placement of the tabs for this tabbedpane.
+     * <p>
+     *  返回此选项卡窗格的选项卡的位置。
+     * 
+     * 
      * @see #setTabPlacement
      */
     public int getTabPlacement() {
@@ -473,6 +606,15 @@ public class JTabbedPane extends JComponent
      * </ul>
      * The default value, if not set, is <code>SwingConstants.TOP</code>.
      *
+     * <p>
+     *  设置此选项卡窗格的选项卡位置。
+     * 可能的值有：<ul> <li> <code> JTabbedPane.TFT </code> <li> <code> JTabbedPane.BOTTOM </code> <li> <code>代码> 
+     * JTabbedPane.RIGHT </code>。
+     *  设置此选项卡窗格的选项卡位置。
+     * </ul>
+     *  默认值(如果未设置)为<code> SwingConstants.TOP </code>。
+     * 
+     * 
      * @param tabPlacement the placement for the tabs relative to the content
      * @exception IllegalArgumentException if tab placement value isn't one
      *                          of the above valid values
@@ -505,6 +647,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the policy used by the tabbedpane to layout the tabs when all the
      * tabs will not fit within a single run.
+     * <p>
+     *  返回当所有选项卡不适合单个运行时,选项卡式窗格布局选项卡所使用的策略。
+     * 
+     * 
      * @see #setTabLayoutPolicy
      * @since 1.4
      */
@@ -527,6 +673,17 @@ public class JTabbedPane extends JComponent
      * layout policies, in which case the value of this property may be
      * ignored.
      *
+     * <p>
+     * 设置当所有选项卡在单次运行中不合适时,选项卡式窗格在布局选项卡时将使用的策略。可能的值为：
+     * <ul>
+     *  <li> <code> JTabbedPane.WRAP_TAB_LAYOUT </code> <li> <code> JTabbedPane.SCROLL_TAB_LAYOUT </code>
+     * </ul>
+     * 
+     *  如果UI未设置默认值,则为<code> JTabbedPane.WRAP_TAB_LAYOUT </code>。
+     * <p>
+     *  某些外观和感觉可能只支持可能的布局策略的一个子集,在这种情况下,此属性的值可能会被忽略。
+     * 
+     * 
      * @param tabLayoutPolicy the policy used to layout the tabs
      * @exception IllegalArgumentException if layoutPolicy value isn't one
      *                          of the above valid values
@@ -559,6 +716,10 @@ public class JTabbedPane extends JComponent
      * Returns the currently selected index for this tabbedpane.
      * Returns -1 if there is no currently selected tab.
      *
+     * <p>
+     *  返回此选项卡式窗格的当前选定的索引。如果当前没有选择标签,则返回-1。
+     * 
+     * 
      * @return the index of the selected tab
      * @see #setSelectedIndex
      */
@@ -574,6 +735,10 @@ public class JTabbedPane extends JComponent
      * value is specified when the tabbedpane contains one or more tabs, then
      * the results will be implementation defined.
      *
+     * <p>
+     *  设置此选项卡式窗格的所选索引。索引必须是有效的索引索引或-1,表示不应选择选项卡(也可以在选项卡窗格中没有选项卡时使用)。如果在选项卡式窗格包含一个或多个选项卡时指定了-1值,则结果将由实现定义。
+     * 
+     * 
      * @param index  the index to be selected
      * @exception IndexOutOfBoundsException if index is out of range
      *            {@code (index < -1 || index >= tab count)}
@@ -645,6 +810,10 @@ public class JTabbedPane extends JComponent
      * Returns the currently selected component for this tabbedpane.
      * Returns <code>null</code> if there is no currently selected tab.
      *
+     * <p>
+     *  返回此选项卡式窗格的当前选定组件。如果当前没有选择标签,则返回<code> null </code>。
+     * 
+     * 
      * @return the component corresponding to the selected tab
      * @see #setSelectedComponent
      */
@@ -662,6 +831,10 @@ public class JTabbedPane extends JComponent
      * will automatically set the <code>selectedIndex</code> to the index
      * corresponding to the specified component.
      *
+     * <p>
+     *  设置此选项卡式窗格的所选组件。这将自动将<code> selectedIndex </code>设置为对应于指定组件的索引。
+     * 
+     * 
      * @exception IllegalArgumentException if component not found in tabbed
      *          pane
      * @see #getSelectedComponent
@@ -683,6 +856,10 @@ public class JTabbedPane extends JComponent
      * represented by the given title and/or icon, either of which may
      * be {@code null}.
      *
+     * <p>
+     *  在给定组件的给定索引处插入一个新的选项卡,由给定的标题和/或图标表示,其中任何一个都可以是{@code null}。
+     * 
+     * 
      * @param title the title to be displayed on the tab
      * @param icon the icon to be displayed on the tab
      * @param component the component to be displayed when this tab is clicked.
@@ -755,6 +932,11 @@ public class JTabbedPane extends JComponent
      * either of which can be <code>null</code>.
      * Cover method for <code>insertTab</code>.
      *
+     * <p>
+     * 添加由<code> title </code>和/或<code>图标</code>表示的<code>组件</code>和<code>提示</code>,其中可以是<code> null </code>。
+     *  <code> insertTab </code>的覆盖方法。
+     * 
+     * 
      * @param title the title to be displayed in this tab
      * @param icon the icon to be displayed in this tab
      * @param component the component to be displayed when this tab is clicked
@@ -772,6 +954,11 @@ public class JTabbedPane extends JComponent
      * and/or <code>icon</code>, either of which can be <code>null</code>.
      * Cover method for <code>insertTab</code>.
      *
+     * <p>
+     *  添加由<code> title </code>和/或<code>图标</code>表示的<code>组件</code>,其中可以是<code> null </code>。
+     *  <code> insertTab </code>的覆盖方法。
+     * 
+     * 
      * @param title the title to be displayed in this tab
      * @param icon the icon to be displayed in this tab
      * @param component the component to be displayed when this tab is clicked
@@ -788,6 +975,10 @@ public class JTabbedPane extends JComponent
      * and no icon.
      * Cover method for <code>insertTab</code>.
      *
+     * <p>
+     *  添加由<code> title </code>表示的<code>组件</code>,没有图标。 <code> insertTab </code>的覆盖方法。
+     * 
+     * 
      * @param title the title to be displayed in this tab
      * @param component the component to be displayed when this tab is clicked
      *
@@ -804,6 +995,10 @@ public class JTabbedPane extends JComponent
      * <code>component.getName</code>.
      * Cover method for <code>insertTab</code>.
      *
+     * <p>
+     *  添加一个<code>组件</code>,其标签标题默认为调用<code> component.getName </code>的组件名称。 <code> insertTab </code>的覆盖方法。
+     * 
+     * 
      * @param component the component to be displayed when this tab is clicked
      * @return the component
      *
@@ -823,6 +1018,10 @@ public class JTabbedPane extends JComponent
      * Adds a <code>component</code> with the specified tab title.
      * Cover method for <code>insertTab</code>.
      *
+     * <p>
+     *  使用指定的标签名称添加<code>组件</code>。 <code> insertTab </code>的覆盖方法。
+     * 
+     * 
      * @param title the title to be displayed in this tab
      * @param component the component to be displayed when this tab is clicked
      * @return the component
@@ -844,6 +1043,10 @@ public class JTabbedPane extends JComponent
      * title defaulting to the name of the component.
      * Cover method for <code>insertTab</code>.
      *
+     * <p>
+     *  在指定的标签索引处添加一个<code>组件</code>,标签标题默认为组件名称。 <code> insertTab </code>的覆盖方法。
+     * 
+     * 
      * @param component the component to be displayed when this tab is clicked
      * @param index the position to insert this new tab
      * @return the component
@@ -870,6 +1073,12 @@ public class JTabbedPane extends JComponent
      * otherwise the component's name will be used as the tab title.
      * Cover method for <code>insertTab</code>.
      *
+     * <p>
+     *  在标签窗格中添加<code>组件</code>。
+     * 如果<code>约束</code>是<code> String </code>或<code> Icon </code>,它将用于选项卡标题,否则组件的名称将用作选项卡标题。
+     *  <code> insertTab </code>的覆盖方法。
+     * 
+     * 
      * @param component the component to be displayed when this tab is clicked
      * @param constraints the object to be displayed in the tab
      *
@@ -897,6 +1106,12 @@ public class JTabbedPane extends JComponent
      * otherwise the component's name will be used as the tab title.
      * Cover method for <code>insertTab</code>.
      *
+     * <p>
+     *  在指定的标签索引处添加<code>组件</code>。
+     * 如果<code>约束</code>是<code> String </code>或<code> Icon </code>,它将用于选项卡标题,否则组件的名称将用作选项卡标题。
+     *  <code> insertTab </code>的覆盖方法。
+     * 
+     * 
      * @param component the component to be displayed when this tab is clicked
      * @param constraints the object to be displayed in the tab
      * @param index the position to insert this new tab
@@ -922,6 +1137,10 @@ public class JTabbedPane extends JComponent
      * After the component associated with <code>index</code> is removed,
      * its visibility is reset to true to ensure it will be visible
      * if added to other containers.
+     * <p>
+     * 删除<code> index </code>上的选项卡。与<code> index </code>关联的组件被删除后,其可见性将重置为true,以确保它添加到其他容器时可见。
+     * 
+     * 
      * @param index the index of the tab to be removed
      * @exception IndexOutOfBoundsException if index is out of range
      *            {@code (index < 0 || index >= tab count)}
@@ -1016,6 +1235,10 @@ public class JTabbedPane extends JComponent
      * <code>JTabbedPane</code>. The method does nothing
      * if the <code>component</code> is null.
      *
+     * <p>
+     *  从<code> JTabbedPane </code>中删除指定的<code> Component </code>。如果<code>组件</code>为空,该方法不执行任何操作。
+     * 
+     * 
      * @param component the component to remove from the tabbedpane
      * @see #addTab
      * @see #removeTabAt
@@ -1040,6 +1263,10 @@ public class JTabbedPane extends JComponent
     /**
      * Removes the tab and component which corresponds to the specified index.
      *
+     * <p>
+     *  删除与指定索引对应的选项卡和组件。
+     * 
+     * 
      * @param index the index of the component to remove from the
      *          <code>tabbedpane</code>
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1055,6 +1282,10 @@ public class JTabbedPane extends JComponent
      * Removes all the tabs and their corresponding components
      * from the <code>tabbedpane</code>.
      *
+     * <p>
+     *  从<code>选项卡式窗格</code>中删除所有选项卡及其对应的组件。
+     * 
+     * 
      * @see #addTab
      * @see #removeTabAt
      */
@@ -1072,6 +1303,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the number of tabs in this <code>tabbedpane</code>.
      *
+     * <p>
+     *  返回此<code>选项卡式窗格</code>中的标签数量。
+     * 
+     * 
      * @return an integer specifying the number of tabbed pages
      */
     public int getTabCount() {
@@ -1081,6 +1316,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the number of tab runs currently used to display
      * the tabs.
+     * <p>
+     *  返回当前用于显示选项卡的选项卡运行数。
+     * 
+     * 
      * @return an integer giving the number of rows if the
      *          <code>tabPlacement</code>
      *          is <code>TOP</code> or <code>BOTTOM</code>
@@ -1102,6 +1341,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the tab title at <code>index</code>.
      *
+     * <p>
+     *  返回<code> index </code>的标签标题。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return the title at <code>index</code>
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1115,6 +1358,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the tab icon at <code>index</code>.
      *
+     * <p>
+     *  返回<code> index </code>的标签图标。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return the icon at <code>index</code>
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1134,6 +1381,11 @@ public class JTabbedPane extends JComponent
      * Icon. Some look and feels might not render the disabled Icon,
      * in which case it won't be created.
      *
+     * <p>
+     *  返回<code> index </code>处的禁用选项卡图标。如果<code> index </code>处不存在选项卡禁用图标,则会将调用转发到外观和感觉,以从相应启用的图标构建适当的禁用图标。
+     * 一些外观和感觉可能不会呈现禁用的图标,在这种情况下,它不会被创建。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return the icon at <code>index</code>
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1152,6 +1404,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the tab tooltip text at <code>index</code>.
      *
+     * <p>
+     *  返回<code> index </code>处的制表符工具提示文本。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return a string containing the tool tip text at <code>index</code>
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1167,6 +1423,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the tab background color at <code>index</code>.
      *
+     * <p>
+     *  返回<code> index </code>的标签背景颜色。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return the <code>Color</code> of the tab background at
      *          <code>index</code>
@@ -1182,6 +1442,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the tab foreground color at <code>index</code>.
      *
+     * <p>
+     *  返回<code> index </code>处的标签前景颜色。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return the <code>Color</code> of the tab foreground at
      *          <code>index</code>
@@ -1198,6 +1462,10 @@ public class JTabbedPane extends JComponent
      * Returns whether or not the tab at <code>index</code> is
      * currently enabled.
      *
+     * <p>
+     *  返回<code> index </code>的标签是否当前已启用。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return true if the tab at <code>index</code> is enabled;
      *          false otherwise
@@ -1213,6 +1481,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the component at <code>index</code>.
      *
+     * <p>
+     *  返回<code> index </code>的组件。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return the <code>Component</code> at <code>index</code>
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1230,6 +1502,10 @@ public class JTabbedPane extends JComponent
      * mouseless modifier (usually Alt) will activate the specified
      * tab.
      *
+     * <p>
+     * 返回用于访问指定标签的键盘助记符。助记符是当与外观和感觉的无调节修饰符(通常为Alt)组合时将激活指定的选项卡的键。
+     * 
+     * 
      * @since 1.4
      * @param tabIndex the index of the tab that the mnemonic refers to
      * @return the key code which represents the mnemonic;
@@ -1251,6 +1527,10 @@ public class JTabbedPane extends JComponent
      * Returns the character, as an index, that the look and feel should
      * provide decoration for as representing the mnemonic character.
      *
+     * <p>
+     *  返回作为索引的字符,外观应该提供装饰作为代表助记符的字符。
+     * 
+     * 
      * @since 1.4
      * @param tabIndex the index of the tab that the mnemonic refers to
      * @return index representing mnemonic character if one exists;
@@ -1275,6 +1555,11 @@ public class JTabbedPane extends JComponent
      * If there is no UI set on this <code>tabbedpane</code>,
      * then returns <code>null</code>.
      *
+     * <p>
+     *  返回<code> index </code>处的制表符边界。如果此索引处的标签当前在UI中不可见,则返回<code> null </code>。
+     * 如果在<code>标签栏</code>上没有设置UI,则返回<code> null </code>。
+     * 
+     * 
      * @param index the index to be queried
      * @return a <code>Rectangle</code> containing the tab bounds at
      *          <code>index</code>, or <code>null</code> if tab at
@@ -1300,6 +1585,11 @@ public class JTabbedPane extends JComponent
      * The title is not shown if a tab component for this tab was specified.
      * An internal exception is raised if there is no tab at that index.
      *
+     * <p>
+     *  将<code> index </code>的标题设置为<code> title </code>,可以是<code> null </code>。如果指定了此选项卡的选项卡组件,则不会显示标题。
+     * 如果该索引处没有制表符,则会引发内部异常。
+     * 
+     * 
      * @param index the tab index where the title should be set
      * @param title the title to be displayed in the tab
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1342,6 +1632,12 @@ public class JTabbedPane extends JComponent
      * The icon is not shown if a tab component for this tab was specified.
      * An internal exception is raised if there is no tab at that index.
      *
+     * <p>
+     *  将<code> index </code>上的图标设置为<code>图标</code>,可以是<code> null </code>。这不会在<code>图标</code>上设置禁用图标。
+     * 如果新图标与当前图标不同,并且未显式设置禁用图标,LookAndFeel将要求生成禁用图标。要显式设置禁用图标,请使用<code> setDisableIconAt()</code>。
+     * 如果指定了此选项卡的选项卡组件,则不会显示该图标。如果该索引处没有制表符,则会引发内部异常。
+     * 
+     * 
      * @param index the tab index where the icon should be set
      * @param icon the icon to be displayed in the tab
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1365,6 +1661,9 @@ public class JTabbedPane extends JComponent
             /* If the default icon has really changed and we had
              * generated the disabled icon for this page, then
              * clear the disabledIcon field of the page.
+             * <p>
+             *  生成此页面的禁用图标,然后清除页面的disabledIcon字段。
+             * 
              */
             if (page.disabledIcon instanceof UIResource) {
                 page.disabledIcon = null;
@@ -1386,6 +1685,10 @@ public class JTabbedPane extends JComponent
      * which can be <code>null</code>.
      * An internal exception is raised if there is no tab at that index.
      *
+     * <p>
+     * 将<code> index </code>的禁用图标设置为<code>图标</code>,可以是<code> null </code>。如果该索引处没有制表符,则会引发内部异常。
+     * 
+     * 
      * @param index the tab index where the disabled icon should be set
      * @param disabledIcon the icon to be displayed in the tab when disabled
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1411,6 +1714,11 @@ public class JTabbedPane extends JComponent
      * which can be <code>null</code>.
      * An internal exception is raised if there is no tab at that index.
      *
+     * <p>
+     *  将<code> index </code>处的工具提示文本设置为<code> toolTipText </code>,可以是<code> null </code>。
+     * 如果该索引处没有制表符,则会引发内部异常。
+     * 
+     * 
      * @param index the tab index where the tooltip text should be set
      * @param toolTipText the tooltip text to be displayed for the tab
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1447,6 +1755,14 @@ public class JTabbedPane extends JComponent
      * It is up to the look and feel to honor this property, some may
      * choose to ignore it.
      *
+     * <p>
+     *  将<code> index </code>的背景颜色设置为<code>背景</code>,可以是<code> null </code>,在这种情况下,标签的背景颜色将默认为<代码> tabbedpan
+     * e </code>。
+     * 如果该索引处没有制表符,则会引发内部异常。
+     * <p>
+     *  它是由外观和感觉来尊重这个属性,有些人可能会选择忽略它。
+     * 
+     * 
      * @param index the tab index where the background should be set
      * @param background the color to be displayed in the tab's background
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1480,6 +1796,14 @@ public class JTabbedPane extends JComponent
      * It is up to the look and feel to honor this property, some may
      * choose to ignore it.
      *
+     * <p>
+     *  将<code> index </code>的前景颜色设置为<code> foreground </code>,可以是<code> null </code>,在这种情况下,标签的前景颜色将默认为<代码>
+     *  tabbedpane </code>。
+     * 如果该索引处没有制表符,则会引发内部异常。
+     * <p>
+     *  它是由外观和感觉来尊重这个属性,有些人可能会选择忽略它。
+     * 
+     * 
      * @param index the tab index where the foreground should be set
      * @param foreground the color to be displayed as the tab's foreground
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1507,6 +1831,10 @@ public class JTabbedPane extends JComponent
      * Sets whether or not the tab at <code>index</code> is enabled.
      * An internal exception is raised if there is no tab at that index.
      *
+     * <p>
+     *  设置是否启用<code> index </code>处的选项卡。如果该索引处没有制表符,则会引发内部异常。
+     * 
+     * 
      * @param index the tab index which should be enabled/disabled
      * @param enabled whether or not the tab should be enabled
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1527,6 +1855,10 @@ public class JTabbedPane extends JComponent
      * Sets the component at <code>index</code> to <code>component</code>.
      * An internal exception is raised if there is no tab at that index.
      *
+     * <p>
+     *  将<code> index </code>处的组件设置为<code> component </code>。如果该索引处没有制表符,则会引发内部异常。
+     * 
+     * 
      * @param index the tab index where this component is being placed
      * @param component the component for the tab
      * @exception IndexOutOfBoundsException if index is out of range
@@ -1601,6 +1933,15 @@ public class JTabbedPane extends JComponent
      * that each tab has a unique mnemonic or unpredictable results may
      * occur.
      *
+     * <p>
+     * 提供关于文本中应当装饰哪个字符以表示助记符的外观和感觉的提示。不是所有的外观和感觉可能支持这一点。值-1表示此选项卡没有助记符,或者您不希望为此选项卡显示助记符。
+     * <p>
+     *  此值将更新为与助记符更改相关的属性(例如助记符本身,文本...)。如果你不希望默认字符被加下划线,你应该只需要调用这个。
+     * 例如,如果标签索引3处的文本是"Apple Price",助记符为"p",并且您希望将"P"装饰为"Apple <u> P </u>必须在调用<code> setMnemonicAt(3,KeyEven
+     * t.VK_P)</code>之后调用<code> setDisplayedMnemonicIndex(3,6)</code>。
+     *  此值将更新为与助记符更改相关的属性(例如助记符本身,文本...)。如果你不希望默认字符被加下划线,你应该只需要调用这个。 <p>请注意,程序员有责任确保每个标签都有唯一的助记符或不可预测的结果。
+     * 
+     * 
      * @since 1.4
      * @param tabIndex the index of the tab that the mnemonic refers to
      * @param mnemonicIndex index into the <code>String</code> to underline
@@ -1645,6 +1986,16 @@ public class JTabbedPane extends JComponent
      * This will update the displayed mnemonic property for the specified
      * tab.
      *
+     * <p>
+     *  设置用于访问指定标签的键盘助记符。助记符是当与外观和感觉的无调节修饰符(通常为Alt)组合时将激活指定的选项卡的键。
+     * <p>
+     * 助记符必须对应于键盘上的单个键,并且应使用<code> java.awt.event.KeyEvent </code>中定义的<code> VK_XXX </code>键码之一或扩展键码之一通过<code>
+     *  java.awt.event.KeyEvent.getExtendedKeyCodeForChar </code>获取。
+     * 助记符不区分大小写,因此具有相应键码的键事件将导致按钮被激活,无论是否按下Shift键。
+     * <p>
+     *  这将更新指定选项卡的显示助记符属性。
+     * 
+     * 
      * @since 1.4
      * @param tabIndex the index of the tab that the mnemonic refers to
      * @param mnemonic the key code which represents the mnemonic
@@ -1674,6 +2025,10 @@ public class JTabbedPane extends JComponent
      * Returns the first tab index with a given <code>title</code>,  or
      * -1 if no tab has this title.
      *
+     * <p>
+     *  返回带有给定<code> title </code>的第一个制表符索引,如果没有标题具有此标题,则返回-1。
+     * 
+     * 
      * @param title the title for the tab
      * @return the first tab index which matches <code>title</code>, or
      *          -1 if no tab has this title
@@ -1691,6 +2046,10 @@ public class JTabbedPane extends JComponent
      * Returns the first tab index with a given <code>icon</code>,
      * or -1 if no tab has this icon.
      *
+     * <p>
+     *  返回带有给定<code>图标</code>的第一个标签索引,如果没有标签有此图标,则返回-1。
+     * 
+     * 
      * @param icon the icon for the tab
      * @return the first tab index which matches <code>icon</code>,
      *          or -1 if no tab has this icon
@@ -1710,6 +2069,10 @@ public class JTabbedPane extends JComponent
      * Returns the index of the tab for the specified component.
      * Returns -1 if there is no tab for this component.
      *
+     * <p>
+     *  返回指定组件的选项卡的索引。如果此组件没有选项卡,则返回-1。
+     * 
+     * 
      * @param component the component for the tab
      * @return the first tab which matches this component, or -1
      *          if there is no tab for this component
@@ -1730,6 +2093,10 @@ public class JTabbedPane extends JComponent
      * intersect the specified location.  Returns -1 if no tab
      * intersects the location.
      *
+     * <p>
+     *  返回与其边界与指定位置相交的选项卡对应的选项卡索引。如果没有标签与位置相交,则返回-1。
+     * 
+     * 
      * @param x the x location relative to this tabbedpane
      * @param y the y location relative to this tabbedpane
      * @return the tab index which intersects the location, or
@@ -1748,6 +2115,10 @@ public class JTabbedPane extends JComponent
      * Returns the tooltip text for the component determined by the
      * mouse event location.
      *
+     * <p>
+     *  返回由鼠标事件位置确定的组件的工具提示文本。
+     * 
+     * 
      * @param event  the <code>MouseEvent</code> that tells where the
      *          cursor is lingering
      * @return the <code>String</code> containing the tooltip text
@@ -1774,6 +2145,10 @@ public class JTabbedPane extends JComponent
      * See <code>readObject</code> and <code>writeObject</code> in
      * <code>JComponent</code> for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅<code> readComponent </code>中的<code> readObject </code>和<code> writeObject </code>
+     * 。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -1789,6 +2164,9 @@ public class JTabbedPane extends JComponent
     /* Called from the <code>JComponent</code>'s
      * <code>EnableSerializationFocusListener</code> to
      * do any Swing-specific pre-serialization configuration.
+     * <p>
+     *  <code> EnableSerializationFocusListener </code>可以执行任何Swing特定的预序列化配置。
+     * 
      */
     void compWriteObjectNotify() {
         super.compWriteObjectNotify();
@@ -1803,6 +2181,10 @@ public class JTabbedPane extends JComponent
      * See <code>readObject</code> and <code>writeObject</code> in
      * <code>JComponent</code> for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅<code> readComponent </code>中的<code> readObject </code>和<code> writeObject </code>
+     * 。
+     * 
      */
     private void readObject(ObjectInputStream s)
         throws IOException, ClassNotFoundException
@@ -1827,6 +2209,11 @@ public class JTabbedPane extends JComponent
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     * 返回此<code> JTabbedPane </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this JTabbedPane.
      */
     protected String paramString() {
@@ -1858,6 +2245,11 @@ public class JTabbedPane extends JComponent
      * AccessibleJTabbedPane.
      * A new AccessibleJTabbedPane instance is created if necessary.
      *
+     * <p>
+     *  获取与此JTabbedPane关联的AccessibleContext。对于选项卡式窗格,AccessibleContext采用AccessibleJTabbedPane的形式。
+     * 如果需要,将创建一个新的AccessibleJTabbedPane实例。
+     * 
+     * 
      * @return an AccessibleJTabbedPane that serves as the
      *         AccessibleContext of this JTabbedPane
      */
@@ -1888,6 +2280,12 @@ public class JTabbedPane extends JComponent
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现了对<code> JTabbedPane </code>类的辅助功能支持。它提供了适用于标签式窗格用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class AccessibleJTabbedPane extends AccessibleJComponent
         implements AccessibleSelection, ChangeListener {
@@ -1896,6 +2294,10 @@ public class JTabbedPane extends JComponent
          * Returns the accessible name of this object, or {@code null} if
          * there is no accessible name.
          *
+         * <p>
+         *  返回此对象的可访问名称,如果没有可访问的名称,则返回{@code null}。
+         * 
+         * 
          * @return the accessible name of this object, nor {@code null}.
          * @since 1.6
          */
@@ -1921,6 +2323,9 @@ public class JTabbedPane extends JComponent
 
         /**
          *  Constructs an AccessibleJTabbedPane
+         * <p>
+         *  构造一个AccessableJTabbedPane
+         * 
          */
         public AccessibleJTabbedPane() {
             super();
@@ -1936,6 +2341,10 @@ public class JTabbedPane extends JComponent
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of
          *          the object
          */
@@ -1946,6 +2355,10 @@ public class JTabbedPane extends JComponent
         /**
          * Returns the number of accessible children in the object.
          *
+         * <p>
+         *  返回对象中可访问的子项数。
+         * 
+         * 
          * @return the number of accessible children in the object.
          */
         public int getAccessibleChildrenCount() {
@@ -1955,6 +2368,10 @@ public class JTabbedPane extends JComponent
         /**
          * Return the specified Accessible child of the object.
          *
+         * <p>
+         *  返回对象的指定Accessible子项。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the Accessible child of the object
          * @exception IllegalArgumentException if index is out of bounds
@@ -1973,6 +2390,11 @@ public class JTabbedPane extends JComponent
          * returns this object, which is responsible for implementing the
          * <code>AccessibleSelection</code> interface on behalf of itself.
          *
+         * <p>
+         * 获取与此对象关联的<code> AccessibleSelection </code>。
+         * 在为该类实现Java辅助功能API时,返回此对象,该对象负责代表自身实现<code> AccessibleSelection </code>接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleSelection getAccessibleSelection() {
@@ -1984,6 +2406,10 @@ public class JTabbedPane extends JComponent
          * the local coordinate <code>Point</code>, if one exists.
          * Otherwise returns the currently selected tab.
          *
+         * <p>
+         *  返回包含在本地坐标<code> Point </code>(如果存在)中的<code> Accessible </code>子代。否则返回当前选择的选项卡。
+         * 
+         * 
          * @return the <code>Accessible</code> at the specified
          *    location, if it exists
          */
@@ -2060,6 +2486,9 @@ public class JTabbedPane extends JComponent
 
         /*
          * initializes the AccessibleContext for the page
+         * <p>
+         *  初始化页面的AccessibleContext
+         * 
          */
         void initAccessibleContext() {
             if (JTabbedPane.this.accessibleContext != null &&
@@ -2068,6 +2497,9 @@ public class JTabbedPane extends JComponent
                  * Do initialization if the AccessibleJTabbedPane
                  * has been instantiated. We do not want to load
                  * Accessibility classes unnecessarily.
+                 * <p>
+                 *  如果AccessibleJTabbedPane已实例化,请进行初始化。我们不想不必要地加载可访问性类。
+                 * 
                  */
                 AccessibleContext ac;
                 ac = component.getAccessibleContext();
@@ -2088,6 +2520,9 @@ public class JTabbedPane extends JComponent
 
         /*
          * Sets the page displayed mnemonic index
+         * <p>
+         *  设置页面显示助记索引
+         * 
          */
         void setDisplayedMnemonicIndex(int mnemonicIndex) {
             if (this.mnemonicIndex != mnemonicIndex) {
@@ -2105,6 +2540,9 @@ public class JTabbedPane extends JComponent
 
         /*
          * Returns the page displayed mnemonic index
+         * <p>
+         *  返回页面显示的助记符索引
+         * 
          */
         int getDisplayedMnemonicIndex() {
             return this.mnemonicIndex;
@@ -2313,6 +2751,10 @@ public class JTabbedPane extends JComponent
         /**
          * Returns an AccessibleIcon
          *
+         * <p>
+         *  返回AccessibleIcon
+         * 
+         * 
          * @return the enabled icon if one exists and the page
          * is enabled. Otherwise, returns the disabled icon if
          * one exists and the page is disabled.  Otherwise, null
@@ -2350,6 +2792,13 @@ public class JTabbedPane extends JComponent
     * Note: The component must not be one that the developer has
     *       already added to the tabbed pane.
     *
+    * <p>
+    *  设置负责呈现指定标签的标题的组件。空值意味着<code> JTabbedPane </code>将渲染指定标签的标题和/或图标。
+    * 非空值意味着组件将渲染标题,并且<code> JTabbedPane </code>将不渲染标题和/或图标。
+    * <p>
+    *  注意：组件不能是开发人员已经添加到选项卡式窗格的组件。
+    * 
+    * 
     * @param index the tab index where the component should be set
     * @param component the component to render the title for the
     *                  specified tab
@@ -2383,6 +2832,10 @@ public class JTabbedPane extends JComponent
     /**
      * Returns the tab component at <code>index</code>.
      *
+     * <p>
+     *  返回<code> index </code>处的制表符组件。
+     * 
+     * 
      * @param index  the index of the item being queried
      * @return the tab component at <code>index</code>
      * @exception IndexOutOfBoundsException if index is out of range
@@ -2399,6 +2852,9 @@ public class JTabbedPane extends JComponent
      * Returns the index of the tab for the specified tab component.
      * Returns -1 if there is no tab for this tab component.
      *
+     * <p>
+     *  返回指定Tab组件的选项卡的索引。如果此选项卡组件没有选项卡,则返回-1。
+     * 
      * @param tabComponent the tab component for the tab
      * @return the first tab which matches this tab component, or -1
      *          if there is no tab for this tab component

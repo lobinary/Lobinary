@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import java.util.*;
  * <code>LogStream</code> provides a mechanism for logging errors that are
  * of possible interest to those monitoring a system.
  *
+ * <p>
+ *  <code> LogStream </code>提供了一种机制,用于记录那些监视系统的用户可能感兴趣的错误。
+ * 
+ * 
  * @author  Ann Wollrath (lots of code stolen from Ken Arnold)
  * @since   JDK1.1
  * @deprecated no replacement
@@ -62,6 +67,10 @@ public class LogStream extends PrintStream {
      * Create a new LogStream object.  Since this only constructor is
      * private, users must have a LogStream created through the "log"
      * method.
+     * <p>
+     *  创建一个新的LogStream对象。由于这个唯一的构造函数是私有的,所以用户必须具有通过"log"方法创建的LogStream。
+     * 
+     * 
      * @param name string identifying messages from this log
      * @out output stream that log messages will be sent to
      * @since JDK1.1
@@ -81,6 +90,10 @@ public class LogStream extends PrintStream {
      * Return the LogStream identified by the given name.  If
      * a log corresponding to "name" does not exist, a log using
      * the default stream is created.
+     * <p>
+     *  返回由给定名称标识的LogStream。如果对应于"name"的日志不存在,则创建使用默认流的日志。
+     * 
+     * 
      * @param name name identifying the desired LogStream
      * @return log associated with given name
      * @since JDK1.1
@@ -101,6 +114,10 @@ public class LogStream extends PrintStream {
 
     /**
      * Return the current default stream for new logs.
+     * <p>
+     *  返回新日志的当前默认流。
+     * 
+     * 
      * @return default log stream
      * @see #setDefaultStream
      * @since JDK1.1
@@ -113,6 +130,10 @@ public class LogStream extends PrintStream {
 
     /**
      * Set the default stream for new logs.
+     * <p>
+     *  设置新日志的默认流。
+     * 
+     * 
      * @param newDefault new default log stream
      * @see #getDefaultStream
      * @since JDK1.1
@@ -132,6 +153,10 @@ public class LogStream extends PrintStream {
 
     /**
      * Return the current stream to which output from this log is sent.
+     * <p>
+     *  返回从此日志的输出发送到的当前流。
+     * 
+     * 
      * @return output stream for this log
      * @see #setOutputStream
      * @since JDK1.1
@@ -145,6 +170,10 @@ public class LogStream extends PrintStream {
 
     /**
      * Set the stream to which output from this log is sent.
+     * <p>
+     *  设置发送此日志的输出的流。
+     * 
+     * 
      * @param out new output stream for this log
      * @see #getOutputStream
      * @since JDK1.1
@@ -164,6 +193,10 @@ public class LogStream extends PrintStream {
      * the byte is appended to the internal buffer.  If it is a newline,
      * then the currently buffered line is sent to the log's output
      * stream, prefixed with the appropriate logging information.
+     * <p>
+     *  向流中写入一个字节的数据。如果它不是换行符,则将该字节附加到内部缓冲区。如果它是换行符,则当前缓冲的行被发送到日志的输出流,并以适当的日志信息为前缀。
+     * 
+     * 
      * @since JDK1.1
      * @deprecated no replacement
      */
@@ -208,6 +241,10 @@ public class LogStream extends PrintStream {
 
     /**
      * Write a subarray of bytes.  Pass each through write byte method.
+     * <p>
+     *  写一个字节数组。每个通过写字节方法。
+     * 
+     * 
      * @since JDK1.1
      * @deprecated no replacement
      */
@@ -222,6 +259,10 @@ public class LogStream extends PrintStream {
 
     /**
      * Return log name as string representation.
+     * <p>
+     *  返回日志名称作为字符串表示形式。
+     * 
+     * 
      * @return log name
      * @since JDK1.1
      * @deprecated no replacement
@@ -242,6 +283,9 @@ public class LogStream extends PrintStream {
     /**
      * Convert a string name of a logging level to its internal
      * integer representation.
+     * <p>
+     *  将日志记录级别的字符串名称转换为其内部整数表示形式。
+     * 
      * @param s name of logging level (e.g., 'SILENT', 'BRIEF', 'VERBOSE')
      * @return corresponding integer log level
      * @since JDK1.1

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -188,6 +189,88 @@ import javax.lang.model.SourceVersion;
  * to extend {@link AbstractProcessor} rather than implementing this
  * interface directly.
  *
+ * <p>
+ *  注释处理器的接口。
+ * 
+ *  <p>注释处理发生在{@linkplain javax.annotation.processing.RoundEnvironment rounds}序列中。
+ * 在每一轮中,可以要求处理器{@linkplain #process process}在先前轮次产生的源文件和类文件上找到的注释的子集。
+ * 第一轮处理的输入是工具运行的初始输入;这些初始输入可以被认为是虚拟零次处理的输出。如果要求处理器在给定轮次上处理,则将要求其在后续轮次(包括最后一轮轮次)上处理,即使没有要处理的注释。
+ * 工具基础设施还可以要求处理器处理由工具的操作隐式生成的文件。
+ * 
+ *  <p> {@code Processor}的每个实现都必须提供一个公开的无参构造函数,以供工具用来实例化处理器。工具基础设施将与实现此接口的类进行交互,如下所示：
+ * 
+ * <ol>
+ * 
+ *  <li>如果未使用现有的{@code Processor}对象,则要创建处理器实例,工具将调用处理器类的无参构造函数。
+ * 
+ *  <li>接下来,该工具使用适当的{@code ProcessingEnvironment}调用{@link #init init}方法。
+ * 
+ * <li>之后,该工具会调用{@link #getSupportedAnnotationTypes getSupportedAnnotationTypes},{@link #getSupportedOptions getSupportedOptions}
+ * 和{@link #getSupportedSourceVersion getSupportedSourceVersion}。
+ * 这些方法仅每次运行调用一次,而不是每次调用。
+ * 
+ *  <li>视情况,工具会调用{@code Processor}对象上的{@link #process process}方法;为每个回合创建了一个新的{@code Processor}对象<em> </em>
+ * 。
+ * 
+ * </ol>
+ * 
+ *  如果在没有遵循上述协议的情况下创建和使用处理器对象,则处理器的行为不由该接口规范定义。
+ * 
+ * <p>工具使用<i>发现过程</i>来查找注释处理器,并决定是否应运行它们。通过配置该工具,可以控制该组潜在的处理器。
+ * 例如,对于{@link javax.tools.JavaCompiler JavaCompiler},要运行的候选处理器的列表可以是{@linkplain javax.tools.JavaCompiler.CompilationTask#setProcessors set directly}
+ * 或由{@linkplain javax.tools。
+ * <p>工具使用<i>发现过程</i>来查找注释处理器,并决定是否应运行它们。通过配置该工具,可以控制该组潜在的处理器。
+ *  StandardLocation#ANNOTATION_PROCESSOR_PATH搜索路径}用于{@linkplain java.util.ServiceLoader服务样式}查找。
+ * 其他工具实现可以具有不同的配置机制,例如命令行选项;有关详细信息,请参阅特定工具的文档。
+ * 该工具要求{@linkplain #process run}的哪些处理器是{@linkplain RoundEnvironment#getRootElements根元素}上的注释类型<em> {@ linkplain AnnotatedConstruct present}
+ *  </em>的函数,{@ linkplain #getSupportedAnnotationTypes注释类型处理器支持},以及处理器{@linkplain #process是否声明其处理的注释类型}。
+ * 其他工具实现可以具有不同的配置机制,例如命令行选项;有关详细信息,请参阅特定工具的文档。将要求处理器处理它支持的注释类型的子集,可能是空集合。
+ * 
+ * 对于给定的轮次,工具计算在根元素中包含的元素上存在的注释类型集合。如果存在至少一个注释类型,则当处理器要求注释类型时,从不匹配的注释类型的集合中去除它们。
+ * 当集合为空或没有更多的处理器可用时,轮次已运行到完成。如果不存在注释类型,则仍然发生注释处理,但是只有支持处理所有注释类型{@code"*"}的通用处理器</i>可以声明(空)注释类型集合。
+ * 
+ *  <p>如果在一个回合的根元素中包含的元素上存在至少一个该类型的注释,则认为注释类型存在。
+ * 为此,类型参数被认为由其{@linkplain TypeParameterElement#getGenericElement generic element}包围。
+ * 在计算注释类型是否存在时,将忽略{@linkplain java.lang.annotation.ElementType#TYPE_USE type uses}的注释,而不是元素上的注释。
+ * 
+ * <p>如果符合{@link AnnotatedConstruct}中给出的定义,则会出现注释。简而言之,如果注释直接存在或通过继承存在,则认为注释存在用于发现的目的。
+ * 注释不是</em>由于被容器注释包装而被认为是存在的。
+ * 在操作上,这等价于一个元素上存在的注释,当且仅当它包含在对该元素调用的{@link Elements#getAllAnnotationMirrors(Element)}的结果中时。
+ * 由于不认为容器注释内的注释存在,为了正确处理{@linkplain java.lang.annotation.Repeatable可重复注释类型},建议处理器将可重复注释类型及其包含注释类型包括在{@linkplain #getSupportedAnnotationTypes()支持的注释类型}
+ * 。
+ * 在操作上,这等价于一个元素上存在的注释,当且仅当它包含在对该元素调用的{@link Elements#getAllAnnotationMirrors(Element)}的结果中时。
+ * 
+ *  <p>请注意,如果处理器支持{@code"*"}并返回{@code true},则会声明所有注释。
+ * 因此,用于例如实现附加有效性检查的通用处理器应当返回{@code false},以便不阻止其他这样的检查器能够运行。
+ * 
+ * <p>如果处理器抛出未捕获的异常,则工具可能会停止其他活动的注释处理器。
+ * 如果处理器产生错误,当前轮次将运行到完成,并且后续轮次将指示{@linkplain RoundEnvironment#errorRaised错误被抛出}。
+ * 由于注释处理器在协作环境中运行,因此处理器应该仅在没有错误恢复或报告可行的情况下抛出未捕获异常。
+ * 
+ *  <p>工具环境不需要支持以多线程方式访问环境资源的注释处理器,无论是{@linkplain RoundEnvironment per round}还是{@linkplain ProcessingEnvironment cross-round}
+ * 。
+ * 
+ *  <p>如果返回注释处理程序的配置信息的方法返回{@code null},返回其他无效输入或抛出异常,则工具基础结构必须将此视为错误条件。
+ * 
+ *  <p>为了在不同工具实现中运行时运行稳健,注解处理器应具有以下属性：
+ * 
+ * <ol>
+ * 
+ *  <li>处理给定输入的结果不是是否存在其他输入(正交性)的函数。
+ * 
+ *  <li>处理相同的输入会产生相同的输出(一致性)。
+ * 
+ *  <li>处理输入<i> A </i>后接处理输入</i>等同于处理<B> </A>(交换性)
+ * 
+ *  <li>处理输入不依赖于其他注释处理器的输出(独立性)
+ * 
+ * </ol>
+ * 
+ * <p> {@link Filer}界面讨论了处理器如何对文件执行操作的限制。
+ * 
+ *  <p>请注意,此接口的实现者可能会发现扩展{@link AbstractProcessor}方便,而不是直接实现此接口。
+ * 
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;
@@ -223,6 +306,25 @@ public interface Processor {
      * options provided by a user are unrecognized by any processor,
      * in which case it may wish to report a warning.
      *
+     * <p>
+     *  返回此处理器可识别的选项。
+     * 处理工具的实现必须提供一种方法,使处理器特定的选项不同于传递给工具本身的选项,参见{@link ProcessingEnvironment#getOptions getOptions}。
+     * 
+     *  <p>集合中返回的每个字符串必须是{@linkplain javax.lang.model.SourceVersion#isIdentifier identifiers}的句点分隔序列：
+     * 
+     * <blockquote>
+     * <dl>
+     *  <dt> <i> SupportedOptionString：</i> <dd> <i>标识符</i>
+     * 
+     *  <dt> <i>标识符：</i> <dd> <i>标识符</i> <dd> <i>标识符</i> {@code}
+     * 
+     *  <dt> <i>标识符：</i> <dd>语法标识符,包括关键字和文字
+     * </dl>
+     * </blockquote>
+     * 
+     *  <p>工具可能使用此信息来确定用户提供的任何选项是否被任何处理器无法识别,在这种情况下,它可能希望报告警告。
+     * 
+     * 
      * @return the options recognized by this processor or an
      *         empty collection if none
      * @see javax.annotation.processing.SupportedOptions
@@ -259,6 +361,25 @@ public interface Processor {
      * where <i>TypeName</i> is as defined in
      * <cite>The Java&trade; Language Specification</cite>.
      *
+     * <p>
+     * 返回此处理器支持的注释类型的名称。结果的元素可以是支持的注释类型的规范(完全限定)名称。或者,它可以是"<tt> <i> name </i>。"</tt>"的形式。
+     * 表示具有以"<tt> <i> name。</i> </tt>"开头的规范名称的所有注释类型的集合。最后,{@code"*"}本身表示所有注释类型的集合,包括空集。
+     * 注意,处理器不应声明{@code"*"},除非它实际上处理所有文件;声明不必要的注释可能会导致某些环境的性能下降。
+     * 
+     *  <p>集合中返回的每个字符串必须被以下语法接受：
+     * 
+     * <blockquote>
+     * <dl>
+     *  <dt> <i> SupportedAnnotationTypeString：</i> <dd> <i> TypeName </i> <i> DotStar </i> <sub> <i> opt </i>
+     *  </tt> * </tt>。
+     * 
+     *  <dt> <i> DotStar：</i> <dd> <tt>。</tt> <tt> * </tt>
+     * </dl>
+     * </blockquote>
+     * 
+     *  其中<i> TypeName </i>是在<cite> Java&trade;语言规范</cite>。
+     * 
+     * 
      * @return the names of the annotation types supported by this processor
      * @see javax.annotation.processing.SupportedAnnotationTypes
      * @jls 3.8 Identifiers
@@ -270,6 +391,10 @@ public interface Processor {
      * Returns the latest source version supported by this annotation
      * processor.
      *
+     * <p>
+     *  返回此注释处理器支持的最新源版本。
+     * 
+     * 
      * @return the latest source version supported by this annotation
      * processor.
      * @see javax.annotation.processing.SupportedSourceVersion
@@ -280,6 +405,10 @@ public interface Processor {
     /**
      * Initializes the processor with the processing environment.
      *
+     * <p>
+     *  使用处理环境初始化处理器。
+     * 
+     * 
      * @param processingEnv environment for facilities the tool framework
      * provides to the processor
      */
@@ -300,6 +429,14 @@ public interface Processor {
      * "*"} and the root elements have no annotations.  A {@code
      * Processor} must gracefully handle an empty set of annotations.
      *
+     * <p>
+     * 在源自先前轮次的类型元素上处理一组注释类型,并返回此处理器是否声明了这些注释类型。
+     * 如果返回{@code true},则会声明注释类型,并且不会要求后续处理器处理它们;如果返回{@code false},那么注释类型是未声明的,并且可能要求后续处理器处理它们。
+     * 处理器可以总是返回相同的布尔值或者可以基于所选择的标准改变结果。
+     * 
+     *  <p>如果处理器支持{@code"*"}且根元素没有注释,输入集将为空。 {@code Processor}必须优雅地处理一组空注释。
+     * 
+     * 
      * @param annotations the annotation types requested to be processed
      * @param roundEnv  environment for information about the current and prior round
      * @return whether or not the set of annotation types are claimed by this processor
@@ -426,6 +563,47 @@ public interface Processor {
     * </pre>
     * </blockquote>
     *
+    * <p>
+    *  返回到工具基础结构中的一个可迭代的建议完成注释。由于要求完成,所以关于注释提供的信息可能是不完整的,就像对于源代码片段。处理器可以返回空的可迭代。
+    * 注释处理器应当集中精力为注释成员提供具有处理器已知的附加有效性约束的完成,例如值应在1和10之间的{@code int}成员或应该由已知语法识别的字符串成员,例如正则表达式或URL。
+    * 
+    * <p>由于不完整的程序正在建模,一些参数可能只有部分信息,或者可能是{@code null}。
+    *  {@code element}和{@code userText}中的至少一个必须为非 -  {@ code null}。
+    * 如果{@code element}不是{@ code null},{@code annotation}和{@code member}可能是{@code null}。
+    * 如果一些参数是{@code null},则处理器不能抛出{@code NullPointerException};如果处理器没有基于所提供的信息提供的完成,则可以返回空的可迭代。
+    * 处理器还可以返回具有空值串和描述为什么没有完成的消息的单个完成。
+    * 
+    *  <p>完成是信息性的,可能反映注释处理器执行的其他有效性检查。例如,考虑简单注释：
+    * 
+    * <blockquote>
+    * <pre>
+    *  @MersennePrime {int value(); }}
+    * </pre>
+    * </blockquote>
+    * 
+    *  (A Mersenne素数是形式2的质数<sup> <i> </i> </sup>  -  1)。
+    * 给定此注释类型的{@code AnnotationMirror},所有可以返回{@code int}范围,而不检查{@code getCompletions}的任何其他参数：。
+    * 
+    * <blockquote>
+    * <pre>
+    *  import static javax.annotation.processing.Completions。
+    * *; ... return("127")的(...)的Arrays.asList({@ link Completions#of(String)of}("3" ("2147483647")的("8191"
+    * ),("131071"),("524287"。
+    *  import static javax.annotation.processing.Completions。
+    * </pre>
+    * </blockquote>
+    * 
+    *  更丰富的完成集将包括每个素数的数量：
+    * 
+    * <blockquote>
+    * <pre>
+    * 返回("31","31")的("7","M3")的返回Arrays.asList({@ link Completions#of(String,String)of}("3","M2" ("524197")
+    * 的("131071","M17")的("127","M7"),("8191","M13" ;"M19"),("2147483647","M31"));。
+    * </pre>
+    * </blockquote>
+    * 
+    *  但是,如果{@code userText}可用,可以检查以查看是否只有一个子集的Mersenne素数是有效的。例如,如果用户已键入
+    * 
     * @param element the element being annotated
     * @param annotation the (perhaps partial) annotation being
     *                   applied to the element

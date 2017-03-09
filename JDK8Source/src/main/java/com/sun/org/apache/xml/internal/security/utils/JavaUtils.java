@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils;
 
@@ -32,6 +41,10 @@ import java.security.SecurityPermission;
 
 /**
  * A collection of different, general-purpose methods for JAVA-specific things
+ * <p>
+ *  针对JAVA特定事物的不同的通用方法的集合
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  */
 public class JavaUtils {
@@ -51,6 +64,10 @@ public class JavaUtils {
     /**
      * Method getBytesFromFile
      *
+     * <p>
+     *  方法getBytesFromFile
+     * 
+     * 
      * @param fileName
      * @return the bytes read from the file
      *
@@ -90,6 +107,10 @@ public class JavaUtils {
     /**
      * Method writeBytesToFilename
      *
+     * <p>
+     *  方法writeBytesToFilename
+     * 
+     * 
      * @param filename
      * @param bytes
      */
@@ -125,6 +146,10 @@ public class JavaUtils {
      * This method reads all bytes from the given InputStream till EOF and
      * returns them as a byte array.
      *
+     * <p>
+     *  此方法从给定的InputStream读取所有字节,直到EOF,并将它们作为字节数组返回。
+     * 
+     * 
      * @param inputStream
      * @return the bytes read from the stream
      *
@@ -156,6 +181,9 @@ public class JavaUtils {
      * and the caller is not allowed to register an implementation of an
      * algorithm, transform, or other security sensitive XML Signature function.
      *
+     * <p>
+     *  如果安装了安全管理器并且调用方不允许注册算法,转换或其他安全敏感的XML签名函数的实现,则会抛出{@code SecurityException}。
+     * 
      * @throws SecurityException if a security manager is installed and the
      *    caller has not been granted the
      *    {@literal "com.sun.org.apache.xml.internal.security.register"}

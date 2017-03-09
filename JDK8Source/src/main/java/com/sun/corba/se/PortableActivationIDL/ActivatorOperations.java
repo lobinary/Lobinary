@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -12,12 +13,16 @@ public interface ActivatorOperations
 {
 
   /** A new ORB started server registers itself with the Activator
+  /* <p>
 	*/
   void registerServer (String serverId, com.sun.corba.se.PortableActivationIDL.ServerProxy serverObj) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered;
 
   /** A server is shutting down that was started by this activator.
 	* Complete termination of the server is detected by the death of the
 	* process implementing the server.
+	* <p>
+	*  实现服务器的进程的死亡检测到服务器的完全终止。
+	* 
 	*/
   void serverGoingDown (String serverId);
 
@@ -25,49 +30,70 @@ public interface ActivatorOperations
 	* the transport endpoints and the ORB proxy callback object.
 	* Note that we cannot detect when an ORB shuts down, although
 	* all of the POA shutdowns should still be reported.
+	* <p>
+	*  传输端点和ORB代理回调对象。请注意,我们无法检测到ORB何时关闭,虽然所有POA关机仍应报告。
+	* 
 	*/
   void registerORB (String serverId, String orbId, com.sun.corba.se.PortableActivationIDL.ORBProxy orb, com.sun.corba.se.PortableActivationIDL.EndPointInfo[] endPointInfo) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.NoSuchEndPoint, com.sun.corba.se.PortableActivationIDL.ORBAlreadyRegistered;
 
   /** Construct or find an ORBD object template corresponding to the 
 	* server's object template and return it.  Called whenever a 
 	* persistent POA is created.
+	* <p>
+	*  服务器的对象模板并返回它。每当创建持久POA时调用。
+	* 
 	*/
   org.omg.PortableInterceptor.ObjectReferenceTemplate registerPOA (String serverId, String orbId, org.omg.PortableInterceptor.ObjectReferenceTemplate poaTemplate);
 
   /** Called whenever a POA is destroyed.
+  /* <p>
 	*/
   void poaDestroyed (String serverId, String orbId, org.omg.PortableInterceptor.ObjectReferenceTemplate poaTemplate);
 
   /** If the server is not running, start it up.  This is allowed
 	* whether or not the server has been installed.
+	* <p>
+	*  无论服务器是否已安装。
+	* 
 	*/
   void activate (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerAlreadyActive, com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown;
 
   /** If the server is running, shut it down
+  /* <p>
 	*/
   void shutdown (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotActive, com.sun.corba.se.PortableActivationIDL.ServerNotRegistered;
 
   /** Invoke the server install hook.  If the server is not 
 	* currently running, this method will activate it.
+	* <p>
+	*  当前运行,这个方法会激活它。
+	* 
 	*/
   void install (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown, com.sun.corba.se.PortableActivationIDL.ServerAlreadyInstalled;
 
   /** Invoke the server uninstall hook.  If the server is not
 	* currently running, this method will activate it.
 	* After this hook completes, the server may still be running.
+	* <p>
+	*  当前运行,这个方法会激活它。此挂接完成后,服务器可能仍在运行。
+	* 
 	*/
   void uninstall (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown, com.sun.corba.se.PortableActivationIDL.ServerAlreadyUninstalled;
 
   /** list active servers
+  /* <p>
 	*/
   String[] getActiveServers ();
 
   /** list all registered ORBs for a server
+  /* <p>
 	*/
   String[] getORBNames (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered;
 
   /** Find the server template that corresponds to the ORBD's
 	* adapter id.
+	* <p>
+	*  适配器标识。
 	*/
   org.omg.PortableInterceptor.ObjectReferenceTemplate lookupPOATemplate (String serverId, String orbId, String[] orbAdapterName);
 } // interface ActivatorOperations

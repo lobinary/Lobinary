@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: IntType.java,v 1.2.4.1 2005/09/05 11:14:44 pvedula Exp $
+ * <p>
+ *  $ Id：IntType.java,v 1.2.4.1 2005/09/05 11:14:44 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -50,6 +63,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.FlowList;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
@@ -73,6 +88,8 @@ public final class IntType extends NumberType {
     }
 
     /**
+    /* <p>
+    /* 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#distanceTo
      */
     public int distanceTo(Type type) {
@@ -89,6 +106,10 @@ public final class IntType extends NumberType {
     /**
      * Translates an integer into an object of internal type <code>type</code>.
      *
+     * <p>
+     *  将整数转换为内部类型<code> type </code>的对象。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -115,6 +136,10 @@ public final class IntType extends NumberType {
     /**
      * Expects an integer on the stack and pushes a real.
      *
+     * <p>
+     *  在栈上看到一个整数,并推送一个真实的。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -126,6 +151,10 @@ public final class IntType extends NumberType {
      * Expects an integer on the stack and pushes its string value by calling
      * <code>Integer.toString(int i)</code>.
      *
+     * <p>
+     *  在栈上看到一个整数,并通过调用<code> Integer.toString(int i)</code>来推送它的字符串值。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -141,6 +170,10 @@ public final class IntType extends NumberType {
      * Expects an integer on the stack and pushes a 0 if its value is 0 and
      * a 1 otherwise.
      *
+     * <p>
+     *  期望堆栈上的整数,如果其值为0则推送0,否则为1。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -158,6 +191,10 @@ public final class IntType extends NumberType {
      * boolean. It does not push a 0 or a 1 but instead returns branchhandle
      * list to be appended to the false list.
      *
+     * <p>
+     *  在栈上看到一个整数,并将其转换为非合成布尔值。它不推动0或1,而是返回分支句柄列表附加到false列表。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateToDesynthesized
      */
     public FlowList translateToDesynthesized(ClassGenerator classGen,
@@ -172,6 +209,10 @@ public final class IntType extends NumberType {
      * Boxed integers are represented by an instance of
      * <code>java.lang.Integer</code>.
      *
+     * <p>
+     *  期望堆栈上的整数,并推送一个带框的整数。框式整数由<code> java.lang.Integer </code>的实例表示。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -189,6 +230,9 @@ public final class IntType extends NumberType {
      * Translates an integer into the Java type denoted by <code>clazz</code>.
      * Expects an integer on the stack and pushes a number of the appropriate
      * type after coercion.
+     * <p>
+     * 将整数转换为由<code> clazz </code>表示的Java类型。期望堆栈上的整数,并强制后推送一个适当的类型的数字。
+     * 
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
                             Class clazz) {
@@ -228,6 +272,9 @@ public final class IntType extends NumberType {
 
     /**
      * Translates an object of this type to its boxed representation.
+     * <p>
+     *  将此类型的对象转换为其框化表示。
+     * 
      */
     public void translateBox(ClassGenerator classGen,
                              MethodGenerator methodGen) {
@@ -236,6 +283,8 @@ public final class IntType extends NumberType {
 
     /**
      * Translates an object of this type to its unboxed representation.
+     * <p>
+     *  将此类型的对象转换为其未装箱的表示。
      */
     public void translateUnBox(ClassGenerator classGen,
                                MethodGenerator methodGen) {

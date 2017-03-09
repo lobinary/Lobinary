@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -81,6 +82,24 @@ import javax.security.auth.Subject;
  * of a method is not specified here, it is the same as in the
  * corresponding <code>MBeanServerConnection</code> method.
  *
+ * <p>
+ *  <p>用于将MBeanServer请求从客户端转发到服务器端的MBeanServer实现的RMI对象。有一个Remote对象为连接到RMI连接器的每个远程客户端实现此接口。</p>
+ * 
+ *  <p>用户代码通常不会引用此界面。它被指定为公共API的一部分,以便该API的不同实现将互操作。</p>
+ * 
+ *  <p>为了确保客户端参数将在服务器端使用正确的类加载器进行反序列化,客户端参数(如用于调用方法的参数)将封装在{@link MarshalledObject}中。
+ * 此接口的实现必须首先为操作及其目标获取适当的类装入器,然后使用此类装入器反序列化经过编组的参数。
+ * 除非另有说明,一个<code> MarshalledObject </code>或<code> MarshalledObject [] </code>参数不能为null;如果是,行为是未指定的。
+ * </p>。
+ * 
+ *  <p>类加载方面详细介绍
+ * <a href="{@docRoot}/../technotes/guides/jmx/JMX_1_4_specification.pdf">
+ *  JMX规范,版本1.4 </a> PDF文档。</p>
+ * 
+ *  <p>此接口中的大多数方法是{@link MBeanServerConnection}接口中的并行方法。
+ * 在这里没有指定方法的行为的一个方面,它与相应的<code> MBeanServerConnection </code>方法中的相同。
+ * 
+ * 
  * @since 1.5
  */
 /*
@@ -89,6 +108,10 @@ import javax.security.auth.Subject;
  * reason is that it was only added in Mustang (Java SE 6), whereas versions
  * 1.4 and 2.0 of the JMX API must be implementable on Tiger per our
  * commitments for JSR 255.  This is also why we suppress rawtypes warnings.
+ * <p>
+ * 请注意,我们从MarshalledObject中省略了type参数,即使它将向文档添加有用的信息。
+ * 原因是它只在Mustang(Java SE 6)中添加,而JMX API的1.4和2.0版本必须能够在Tiger上根据JSR 255的承诺实现。这也是为什么我们禁止生成原型警告。
+ * 
  */
 @SuppressWarnings("rawtypes")
 public interface RMIConnection extends Closeable, Remote {
@@ -96,6 +119,10 @@ public interface RMIConnection extends Closeable, Remote {
      * <p>Returns the connection ID.  This string is different for
      * every open connection to a given RMI connector server.</p>
      *
+     * <p>
+     *  <p>返回连接ID。此字符串对于给定RMI连接器服务器的每个打开连接都不同。</p>
+     * 
+     * 
      * @return the connection ID
      *
      * @see RMIConnector#connect RMIConnector.connect
@@ -109,6 +136,10 @@ public interface RMIConnection extends Closeable, Remote {
      * object implementing this interface is unexported, so further
      * remote calls to it will fail.</p>
      *
+     * <p>
+     *  <p>关闭此连接。从此方法返回时,实现此接口的RMI对象将不导出,因此对其进行的远程调用将失败。</p>
+     * 
+     * 
      * @throws IOException if the connection could not be closed,
      * or the Remote object could not be unexported, or there was a
      * communication failure when transmitting the remote close
@@ -121,6 +152,10 @@ public interface RMIConnection extends Closeable, Remote {
      * javax.management.MBeanServerConnection#createMBean(String,
      * ObjectName)}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#createMBean(String,ObjectName)}。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param delegationSubject The <code>Subject</code> containing the
@@ -172,6 +207,10 @@ public interface RMIConnection extends Closeable, Remote {
      * javax.management.MBeanServerConnection#createMBean(String,
      * ObjectName, ObjectName)}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#createMBean(String,ObjectName,ObjectName)}。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param loaderName The object name of the class loader to be used.
@@ -229,6 +268,12 @@ public interface RMIConnection extends Closeable, Remote {
      * ObjectName, Object[], String[])}.  The <code>Object[]</code>
      * parameter is wrapped in a <code>MarshalledObject</code>.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#createMBean(String,ObjectName,Object [],String [])}
+     * 。
+     *  <code> Object [] </code>参数包裹在<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param params An array containing the parameters of the
@@ -291,6 +336,12 @@ public interface RMIConnection extends Closeable, Remote {
      * <code>Object[]</code> parameter is wrapped in a
      * <code>MarshalledObject</code>.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#createMBean(String,ObjectName,ObjectName,Object [],String [])}
+     * 。
+     *  <code> Object [] </code>参数包裹在<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param className The class name of the MBean to be instantiated.
      * @param name The object name of the MBean. May be null.
      * @param loaderName The object name of the class loader to be used.
@@ -355,6 +406,10 @@ public interface RMIConnection extends Closeable, Remote {
      * Handles the method
      * {@link javax.management.MBeanServerConnection#unregisterMBean(ObjectName)}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#unregisterMBean(ObjectName)}。
+     * 
+     * 
      * @param name The object name of the MBean to be unregistered.
      * @param delegationSubject The <code>Subject</code> containing the
      * delegation principals or <code>null</code> if the authentication
@@ -384,6 +439,10 @@ public interface RMIConnection extends Closeable, Remote {
      * Handles the method
      * {@link javax.management.MBeanServerConnection#getObjectInstance(ObjectName)}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#getObjectInstance(ObjectName)}。
+     * 
+     * 
      * @param name The object name of the MBean.
      * @param delegationSubject The <code>Subject</code> containing the
      * delegation principals or <code>null</code> if the authentication
@@ -413,6 +472,11 @@ public interface RMIConnection extends Closeable, Remote {
      * QueryExp)}.  The <code>QueryExp</code> is wrapped in a
      * <code>MarshalledObject</code>.
      *
+     * <p>
+     * 处理方法{@link javax.management.MBeanServerConnection#queryMBeans(ObjectName,QueryExp)}。
+     *  <code> QueryExp </code>包装在<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param name The object name pattern identifying the MBeans to
      * be retrieved. If null or no domain and key properties are
      * specified, all the MBeans registered will be retrieved.
@@ -444,6 +508,11 @@ public interface RMIConnection extends Closeable, Remote {
      * QueryExp)}.  The <code>QueryExp</code> is wrapped in a
      * <code>MarshalledObject</code>.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#queryNames(ObjectName,QueryExp)}。
+     *  <code> QueryExp </code>包装在<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param name The object name pattern identifying the MBean names
      * to be retrieved. If null or no domain and key properties are
      * specified, the name of all registered MBeans will be retrieved.
@@ -473,6 +542,10 @@ public interface RMIConnection extends Closeable, Remote {
      * Handles the method
      * {@link javax.management.MBeanServerConnection#isRegistered(ObjectName)}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#isRegistered(ObjectName)}。
+     * 
+     * 
      * @param name The object name of the MBean to be checked.
      * @param delegationSubject The <code>Subject</code> containing the
      * delegation principals or <code>null</code> if the authentication
@@ -495,6 +568,10 @@ public interface RMIConnection extends Closeable, Remote {
      * Handles the method
      * {@link javax.management.MBeanServerConnection#getMBeanCount()}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#getMBeanCount()}。
+     * 
+     * 
      * @param delegationSubject The <code>Subject</code> containing the
      * delegation principals or <code>null</code> if the authentication
      * principal is used instead.
@@ -513,6 +590,10 @@ public interface RMIConnection extends Closeable, Remote {
      * javax.management.MBeanServerConnection#getAttribute(ObjectName,
      * String)}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#getAttribute(ObjectName,String)}。
+     * 
+     * 
      * @param name The object name of the MBean from which the
      * attribute is to be retrieved.
      * @param attribute A String specifying the name of the attribute
@@ -559,6 +640,10 @@ public interface RMIConnection extends Closeable, Remote {
      * javax.management.MBeanServerConnection#getAttributes(ObjectName,
      * String[])}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#getAttributes(ObjectName,String [])}。
+     * 
+     * 
      * @param name The object name of the MBean from which the
      * attributes are retrieved.
      * @param attributes A list of the attributes to be retrieved.
@@ -595,6 +680,11 @@ public interface RMIConnection extends Closeable, Remote {
      * Attribute)}.  The <code>Attribute</code> parameter is wrapped
      * in a <code>MarshalledObject</code>.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#setAttribute(ObjectName,Attribute)}。
+     *  <code> Attribute </code>参数包裹在<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param name The name of the MBean within which the attribute is
      * to be set.
      * @param attribute The identification of the attribute to be set
@@ -642,6 +732,11 @@ public interface RMIConnection extends Closeable, Remote {
      * AttributeList)}.  The <code>AttributeList</code> parameter is
      * wrapped in a <code>MarshalledObject</code>.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#setAttributes(ObjectName,AttributeList)}。
+     *  <code> AttributeList </code>参数包裹在<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param name The object name of the MBean within which the
      * attributes are to be set.
      * @param attributes A list of attributes: The identification of
@@ -681,6 +776,11 @@ public interface RMIConnection extends Closeable, Remote {
      * String, Object[], String[])}.  The <code>Object[]</code>
      * parameter is wrapped in a <code>MarshalledObject</code>.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#invoke(ObjectName,String,Object [],String [])}。
+     *  <code> Object [] </code>参数包裹在<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param name The object name of the MBean on which the method is
      * to be invoked.
      * @param operationName The name of the operation to be invoked.
@@ -729,6 +829,10 @@ public interface RMIConnection extends Closeable, Remote {
      * Handles the method
      * {@link javax.management.MBeanServerConnection#getDefaultDomain()}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#getDefaultDomain()}。
+     * 
+     * 
      * @param delegationSubject The <code>Subject</code> containing the
      * delegation principals or <code>null</code> if the authentication
      * principal is used instead.
@@ -746,6 +850,10 @@ public interface RMIConnection extends Closeable, Remote {
      * Handles the method
      * {@link javax.management.MBeanServerConnection#getDomains()}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#getDomains()}。
+     * 
+     * 
      * @param delegationSubject The <code>Subject</code> containing the
      * delegation principals or <code>null</code> if the authentication
      * principal is used instead.
@@ -763,6 +871,10 @@ public interface RMIConnection extends Closeable, Remote {
      * Handles the method
      * {@link javax.management.MBeanServerConnection#getMBeanInfo(ObjectName)}.
      *
+     * <p>
+     * 处理方法{@link javax.management.MBeanServerConnection#getMBeanInfo(ObjectName)}。
+     * 
+     * 
      * @param name The name of the MBean to analyze
      * @param delegationSubject The <code>Subject</code> containing the
      * delegation principals or <code>null</code> if the authentication
@@ -796,6 +908,10 @@ public interface RMIConnection extends Closeable, Remote {
      * javax.management.MBeanServerConnection#isInstanceOf(ObjectName,
      * String)}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#isInstanceOf(ObjectName,String)}。
+     * 
+     * 
      * @param name The <code>ObjectName</code> of the MBean.
      * @param className The name of the class.
      * @param delegationSubject The <code>Subject</code> containing the
@@ -828,6 +944,13 @@ public interface RMIConnection extends Closeable, Remote {
      * (handback) parameter is also wrapped in a
      * <code>MarshalledObject</code>.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#addNotificationListener(ObjectName,ObjectName,NotificationFilter,Object)}
+     * 。
+     *  <code> NotificationFilter </code>参数封装在<code> MarshalledObject </code>中。
+     *  <code> Object </code>(handback)参数也包裹在一个<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be added.
      * @param listener The object name of the listener which will
@@ -871,6 +994,11 @@ public interface RMIConnection extends Closeable, Remote {
      * javax.management.MBeanServerConnection#removeNotificationListener(ObjectName,
      * ObjectName)}.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#removeNotificationListener(ObjectName,ObjectName)}
+     * 。
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be removed.
      * @param listener The object name of the listener to be removed.
@@ -907,6 +1035,13 @@ public interface RMIConnection extends Closeable, Remote {
      * <code>MarshalledObject</code>.  The <code>Object</code>
      * parameter is also wrapped in a <code>MarshalledObject</code>.
      *
+     * <p>
+     *  处理方法{@link javax.management.MBeanServerConnection#removeNotificationListener(ObjectName,ObjectName,NotificationFilter,Object)}
+     * 。
+     *  <code> NotificationFilter </code>参数封装在<code> MarshalledObject </code>中。
+     *  <code> Object </code>参数也包裹在<code> MarshalledObject </code>中。
+     * 
+     * 
      * @param name The name of the MBean on which the listener should
      * be removed.
      * @param listener A listener that was previously added to this
@@ -967,6 +1102,20 @@ public interface RMIConnection extends Closeable, Remote {
      * registered, then the operation fails with an exception, and no
      * names or filters are registered.</p>
      *
+     * <p>
+     *  <p>处理方法{@link javax.management.MBeanServerConnection#addNotificationListener(ObjectName,NotificationListener,NotificationFilter,Object)}
+     * 。
+     * </p>。
+     * 
+     *  <p>注册与给定过滤器匹配的给定MBean的通知。远程客户端随后可以使用{@link #fetchNotifications fetchNotifications}方法检索通知。</p>
+     * 
+     * <p>对于每个侦听器,原始的<code> NotificationListener </code>和<code> handback </code>保存在客户端;为了客户机能够识别它们,服务器生成并返回唯
+     * 一的<code> listenerID </code>。
+     * 此<code> listenerID </code>与<code>通知</code>一起转发到远程客户端。</p>。
+     * 
+     *  <p>如果无法注册给定(名称,过滤器)对中的任何一个,则操作会失败,并显示异常,并且不会注册任何名称或过滤器。</p>
+     * 
+     * 
      * @param names the <code>ObjectNames</code> identifying the
      * MBeans emitting the Notifications.
      * @param filters an array of marshalled representations of the
@@ -1018,6 +1167,18 @@ public interface RMIConnection extends Closeable, Remote {
      * #addNotificationListeners(ObjectName[], MarshalledObject[],
      * Subject[])} method.</p>
      *
+     * <p>
+     *  <p>处理{@link javax.management.MBeanServerConnection#removeNotificationListener(ObjectName,NotificationListener)removeNotificationListener(ObjectName,NotificationListener)}
+     * 和{@link javax.management.MBeanServerConnection#removeNotificationListener(ObjectName,NotificationListener,NotificationFilter,Object)removeNotificationListener ,NotificationListener,NotificationFilter,Object)}
+     * 方法。
+     * </p>。
+     * 
+     *  <p>此方法从MBean服务器中的给定MBean中删除一个或多个<code> NotificationListener </code>。</p>
+     * 
+     *  <p> <code> NotificationListeners </code>由{@link #addNotificationListeners(ObjectName [],MarshalledObject [],Subject [])}
+     * 方法返回的ID标识。
+     * </p>。
+     * 
      * @param name the <code>ObjectName</code> identifying the MBean
      * emitting the Notifications.
      * @param listenerIDs the list of the IDs corresponding to the
@@ -1062,6 +1223,9 @@ public interface RMIConnection extends Closeable, Remote {
      * by {@link #addNotificationListeners(ObjectName[],
      * MarshalledObject[], Subject[])}.</p>
      *
+     * <p>
+     * 
+     * 
      * @param clientSequenceNumber the first sequence number that the
      * client is interested in.  If negative, it is interpreted as
      * meaning the sequence number that the next notification will

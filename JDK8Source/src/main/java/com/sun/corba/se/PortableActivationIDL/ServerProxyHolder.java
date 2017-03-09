@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 /**
@@ -9,6 +10,9 @@ package com.sun.corba.se.PortableActivationIDL;
 
 
 /** Server callback interface, passed to Activator in registerServer method.
+/* <p>
+/* com / sun / corba / se / PortableActivationIDL / ServerProxyHolder.java。
+/* 
     */
 public final class ServerProxyHolder implements org.omg.CORBA.portable.Streamable
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import static java.util.logging.Level.*;
  * providers of compilers.  This class complements the
  * functionality of {@link java.util.ServiceLoader}.
  *
+ * <p>
+ *  提供用于定位工具提供程序的方法,例如,编译器的提供程序。这个类补充了{@link java.util.ServiceLoader}的功能。
+ * 
+ * 
  * @author Peter von der Ah&eacute;
  * @since 1.6
  */
@@ -56,6 +61,11 @@ public class ToolProvider {
      * debugging:
      *
      *     java ... -Dsun.tools.ToolProvider ...
+     * <p>
+     *  定义系统属性"sun.tools.ToolProvider"以启用调试：
+     * 
+     *  java ... -Dsun.tools.ToolProvider ...
+     * 
      */
     static <T> T trace(Level level, Object reason) {
         // NOTE: do not make this method private as it affects stack traces
@@ -95,6 +105,10 @@ public class ToolProvider {
     /**
      * Gets the Java&trade; programming language compiler provided
      * with this platform.
+     * <p>
+     *  获取Java和贸易;编程语言编译器提供这个平台。
+     * 
+     * 
      * @return the compiler provided with this platform or
      * {@code null} if no compiler is provided
      */
@@ -108,6 +122,10 @@ public class ToolProvider {
     /**
      * Gets the Java&trade; programming language documentation tool provided
      * with this platform.
+     * <p>
+     *  获取Java和贸易;编程语言文档工具。
+     * 
+     * 
      * @return the documentation tool provided with this platform or
      * {@code null} if no documentation tool is provided
      */
@@ -121,6 +139,9 @@ public class ToolProvider {
      * {@linkplain java.util.ServiceLoader service provider mechanism}
      * for locating user installed tools.
      *
+     * <p>
+     *  返回此平台提供的工具的类加载器。这不包括用户安装的工具。使用{@linkplain java.util.ServiceLoader服务提供程序机制}查找用户安装的工具。
+     * 
      * @return the class loader for tools provided with this platform
      * or {@code null} if no tools are provided
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究联合会信息学和数学,庆应大学)。版权所有。这项工作根据W3C(r)软件许可证[1]分发,希望它有用,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证。
+ * 
+ *  [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * 
  */
 
 
@@ -77,6 +85,23 @@ import java.security.PrivilegedAction;
  * DOMImplementationSources.
  * </p>
  *
+ * <p>
+ *  使应用程序能够获取<code> DOMImplementation </code>实例的工厂。
+ * 
+ * <p>
+ *  例：
+ * </p>
+ * 
+ * <pre class='example'>
+ *  //获取DOMImplementation注册表的实例DOMImplementationRegistry registry = DOMImplementationRegistry.newInstanc
+ * e(); //获取DOM实现的第3级XML模块DOMImplementation domImpl = registry.getDOMImplementation("XML 3.0");。
+ * </pre>
+ * 
+ * <p>
+ *  这为应用程序提供了与实现无关的启动点。 DOM实现可以修改此类以满足新的安全标准或为DOMImplementationSource列表提供*额外的回退。
+ * </p>
+ * 
+ * 
  * @see DOMImplementation
  * @see DOMImplementationSource
  * @since DOM Level 3
@@ -85,22 +110,34 @@ public final class DOMImplementationRegistry {
     /**
      * The system property to specify the
      * DOMImplementationSource class names.
+     * <p>
+     *  系统属性指定DOMImplementationSource类的名称。
+     * 
      */
     public static final String PROPERTY =
         "org.w3c.dom.DOMImplementationSourceList";
 
     /**
      * Default columns per line.
+     * <p>
+     *  每行默认列。
+     * 
      */
     private static final int DEFAULT_LINE_LENGTH = 80;
 
     /**
      * The list of DOMImplementationSources.
+     * <p>
+     *  DOMImplementationSources的列表。
+     * 
      */
     private Vector sources;
 
     /**
      * Default class name.
+     * <p>
+     *  默认类名。
+     * 
      */
     private static final String FALLBACK_CLASS =
             "com.sun.org.apache.xerces.internal.dom.DOMXSImplementationSourceImpl";
@@ -108,6 +145,10 @@ public final class DOMImplementationRegistry {
             "com.sun.org.apache.xerces.internal.dom";
     /**
      * Private constructor.
+     * <p>
+     *  私有构造函数。
+     * 
+     * 
      * @param srcs Vector List of DOMImplementationSources
      */
     private DOMImplementationRegistry(final Vector srcs) {
@@ -130,6 +171,16 @@ public final class DOMImplementationRegistry {
      * in the class name list is instantiated and any exceptions
      * encountered are thrown to the application.
      *
+     * <p>
+     *  获取<code> DOMImplementationRegistry </code>的新实例。
+     * 
+     * 根据上下文,通过首先检查Java系统属性<code> org.w3c.dom.DOMImplementationSourceList </code>和服务的值,应用程序或实现来初始化<code> DOM
+     * ImplementationRegistry </code>提供者,其内容在"<code> META_INF / services / org.w3c.dom.DOMImplementationSour
+     * ceList </code>"。
+     * 此属性的值是一个用空格分隔的实现<code> DOMImplementationSource </code>接口的可用类的名称列表。
+     * 类名列表中列出的每个类都会实例化,并且遇到的任何异常都会被抛出到应用程序中。
+     * 
+     * 
      * @return an initialized instance of DOMImplementationRegistry
      * @throws ClassNotFoundException
      *     If any specified class can not be found
@@ -195,6 +246,10 @@ public final class DOMImplementationRegistry {
      * Return the first implementation that has the desired
      * features, or <code>null</code> if none is found.
      *
+     * <p>
+     *  返回具有所需功能的第一个实现,如果没有找到,则返回<code> null </code>。
+     * 
+     * 
      * @param features
      *            A string that specifies which features are required. This is
      *            a space separated list in which each feature is specified by
@@ -221,6 +276,10 @@ public final class DOMImplementationRegistry {
      * Return a list of implementations that support the
      * desired features.
      *
+     * <p>
+     *  返回支持所需功能的实现列表。
+     * 
+     * 
      * @param features
      *            A string that specifies which features are required. This is
      *            a space separated list in which each feature is specified by
@@ -263,6 +322,10 @@ public final class DOMImplementationRegistry {
     /**
      * Register an implementation.
      *
+     * <p>
+     *  注册实现。
+     * 
+     * 
      * @param s The source to be registered, may not be <code>null</code>
      */
     public void addSource(final DOMImplementationSource s) {
@@ -278,6 +341,10 @@ public final class DOMImplementationRegistry {
      *
      * Gets a class loader.
      *
+     * <p>
+     *  获取类加载器。
+     * 
+     * 
      * @return A class loader, possibly <code>null</code>
      */
     private static ClassLoader getClassLoader() {
@@ -300,6 +367,10 @@ public final class DOMImplementationRegistry {
      * META_INF/services/org.w3c.dom.DOMImplementationSourceList
      * from the provided ClassLoader.
      *
+     * <p>
+     *  此方法尝试从所提供的ClassLoader返回资源META_INF / services / org.w3c.dom.DOMImplementationSourceList的第一行。
+     * 
+     * 
      * @param classLoader classLoader, may not be <code>null</code>.
      * @return first line of resource, or <code>null</code>
      */
@@ -335,6 +406,10 @@ public final class DOMImplementationRegistry {
     /**
      * A simple JRE (Java Runtime Environment) 1.1 test
      *
+     * <p>
+     *  一个简单的JRE(Java Runtime Environment)1.1测试
+     * 
+     * 
      * @return <code>true</code> if JRE 1.1
      */
     private static boolean isJRE11() {
@@ -354,6 +429,10 @@ public final class DOMImplementationRegistry {
      * This method returns the ContextClassLoader or <code>null</code> if
      * running in a JRE 1.1
      *
+     * <p>
+     *  如果在JRE 1.1中运行,此方法将返回ContextClassLoader或<code> null </code>
+     * 
+     * 
      * @return The Context Classloader
      */
     private static ClassLoader getContextClassLoader() {
@@ -378,6 +457,10 @@ public final class DOMImplementationRegistry {
      * after checking access control privileges. For a JRE 1.1, this check is
      * not done.
      *
+     * <p>
+     *  此方法在检查访问控制权限后返回由指定名称指示的系统属性。对于JRE 1.1,此检查未完成。
+     * 
+     * 
      * @param name the name of the system property
      * @return the system property
      */
@@ -396,6 +479,10 @@ public final class DOMImplementationRegistry {
      * META_INF/services/org.w3c.dom.DOMImplementationSourceList after checking
      * access control privileges. For a JRE 1.1, this check is not done.
      *
+     * <p>
+     *  此方法在检查访问控制权限后为读取资源META_INF / services / org.w3c.dom.DOMImplementationSourceList返回一个Inputstream。
+     * 对于JRE 1.1,此检查未完成。
+     * 
      * @param classLoader classLoader
      * @param name the resource
      * @return an Inputstream for the resource specified

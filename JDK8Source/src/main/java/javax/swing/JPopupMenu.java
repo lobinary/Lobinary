@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -79,6 +80,22 @@ import java.applet.Applet;
  *   attribute: isContainer false
  * description: A small window that pops up and displays a series of choices.
  *
+ * <p>
+ *  弹出菜单的实现 - 一个小窗口弹出并显示一系列选择。 <code> JPopupMenu </code>用于当用户选择菜单栏上的项目时出现的菜单。它也用于当选择激活它的菜单项时出现的"拉右"菜单。
+ * 最后,一个<code> JPopupMenu </code>也可以在你想要菜单出现的任何地方使用。例如,当用户在指定区域中右键单击时。
+ * <p>
+ *  有关使用弹出式菜单的信息和示例,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html">如何
+ * 使用菜单</a>。
+ *  Java教程。</em>。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ *  @beaninfo属性：isContainer false description：一个小窗口,弹出并显示一系列选择。
+ * 
+ * 
  * @author Georges Saab
  * @author David Karlton
  * @author Arnaud Weber
@@ -87,6 +104,8 @@ import java.applet.Applet;
 public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -94,6 +113,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
     /**
      * Key used in AppContext to determine if light way popups are the default.
+     * <p>
+     * 在AppContext中使用的键来确定光照方式弹出窗口是否为默认。
+     * 
      */
     private static final Object defaultLWPopupEnabledKey =
         new StringBuffer("JPopupMenu.defaultLWPopupEnabledKey");
@@ -119,16 +141,25 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
     /**
      * Used to indicate if lightweight popups should be used.
+     * <p>
+     *  用于指示是否应使用轻量级弹出窗口。
+     * 
      */
     private    boolean   lightWeightPopup         = true;
 
     /*
      * Model for the selected subcontrol.
+     * <p>
+     *  所选子控件的模型。
+     * 
      */
     private SingleSelectionModel selectionModel;
 
     /* Lock object used in place of class object for synchronization.
      * (4187686)
+     * <p>
+     *  (4187686)
+     * 
      */
     private static final Object classLock = new Object();
 
@@ -141,6 +172,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      *  Sets the default value of the <code>lightWeightPopupEnabled</code>
      *  property.
      *
+     * <p>
+     *  设置<code> lightWeightPopupEnabled </code>属性的默认值。
+     * 
+     * 
      *  @param aFlag <code>true</code> if popups can be lightweight,
      *               otherwise <code>false</code>
      *  @see #getDefaultLightWeightPopupEnabled
@@ -155,6 +190,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      *  Gets the <code>defaultLightWeightPopupEnabled</code> property,
      *  which by default is <code>true</code>.
      *
+     * <p>
+     *  获取<code> defaultLightWeightPopupEnabled </code>属性,默认情况下为<code> true </code>。
+     * 
+     * 
      *  @return the value of the <code>defaultLightWeightPopupEnabled</code>
      *          property
      *
@@ -173,6 +212,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
     /**
      * Constructs a <code>JPopupMenu</code> without an "invoker".
+     * <p>
+     *  构造一个没有"调用者"的<code> JPopupMenu </code>。
+     * 
      */
     public JPopupMenu() {
         this(null);
@@ -181,6 +223,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Constructs a <code>JPopupMenu</code> with the specified title.
      *
+     * <p>
+     *  构造具有指定标题的<code> JPopupMenu </code>。
+     * 
+     * 
      * @param label  the string that a UI may use to display as a title
      * for the popup menu.
      */
@@ -198,6 +244,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Returns the look and feel (L&amp;F) object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的外观和感觉(L&amp; F)对象。
+     * 
+     * 
      * @return the <code>PopupMenuUI</code> object that renders this component
      */
     public PopupMenuUI getUI() {
@@ -207,6 +257,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Sets the L&amp;F object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @param ui the new <code>PopupMenuUI</code> L&amp;F object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -222,6 +276,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Resets the UI property to a value from the current look and feel.
      *
+     * <p>
+     *  将UI属性重置为当前外观的值。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -232,6 +290,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Returns the name of the L&amp;F class that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F类的名称。
+     * 
+     * 
      * @return the string "PopupMenuUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -247,6 +309,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Processes key stroke events such as mnemonics and accelerators.
      *
+     * <p>
+     *  处理关键笔划事件,如助记符和加速器。
+     * 
+     * 
      * @param evt  the key event to be processed
      */
     protected void processKeyEvent(KeyEvent evt) {
@@ -261,6 +327,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Returns the model object that handles single selections.
      *
+     * <p>
+     *  返回处理单个选择的模型对象。
+     * 
+     * 
      * @return the <code>selectionModel</code> property
      * @see SingleSelectionModel
      */
@@ -271,6 +341,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Sets the model object to handle single selections.
      *
+     * <p>
+     *  设置模型对象以处理单个选择。
+     * 
+     * 
      * @param model the new <code>SingleSelectionModel</code>
      * @see SingleSelectionModel
      * @beaninfo
@@ -284,6 +358,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Appends the specified menu item to the end of this menu.
      *
+     * <p>
+     *  将指定的菜单项添加到此菜单的末尾。
+     * 
+     * 
      * @param menuItem the <code>JMenuItem</code> to add
      * @return the <code>JMenuItem</code> added
      */
@@ -296,6 +374,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Creates a new menu item with the specified text and appends
      * it to the end of this menu.
      *
+     * <p>
+     *  创建具有指定文本的新菜单项,并将其附加到此菜单的末尾。
+     * 
+     * 
      * @param s the string for the menu item to be added
      */
     public JMenuItem add(String s) {
@@ -306,6 +388,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Appends a new menu item to the end of the menu which
      * dispatches the specified <code>Action</code> object.
      *
+     * <p>
+     *  将新的菜单项附加到菜单的末尾,该菜单项分派指定的<code> Action </code>对象。
+     * 
+     * 
      * @param a the <code>Action</code> to add to the menu
      * @return the new menu item
      * @see Action
@@ -323,6 +409,11 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * <p>
      * This adustment may be cancelled by invoking the application with
      * -Djavax.swing.adjustPopupLocationToFit=false
+     * <p>
+     *  返回已调整以考虑桌面边界,任务栏和多显示器配置的点。
+     * <p>
+     *  此调用可以通过调用具有-Djavax.swing.adjustPopupLocationToFit = false的应用程序来取消
+     * 
      */
     Point adjustPopupLocationToFitScreen(int xPosition, int yPosition) {
         Point popupLocation = new Point(xPosition, yPosition);
@@ -385,6 +476,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Tries to find GraphicsConfiguration
      * that contains the mouse cursor position.
      * Can return null.
+     * <p>
+     * 尝试查找包含鼠标光标位置的GraphicsConfiguration。可以返回null。
+     * 
      */
     private GraphicsConfiguration getCurrentGraphicsConfiguration(
             Point popupLocation) {
@@ -411,6 +505,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
     /**
      * Returns whether popup is allowed to be shown above the task bar.
+     * <p>
+     *  返回是否允许弹出窗口显示在任务栏上方。
+     * 
      */
     static boolean canPopupOverlapTaskBar() {
         boolean result = true;
@@ -427,6 +524,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Factory method which creates the <code>JMenuItem</code> for
      * <code>Actions</code> added to the <code>JPopupMenu</code>.
      *
+     * <p>
+     *  为添加到<code> JPopupMenu </code>中的<code> Actions </code>创建<code> JMenuItem </code>的工厂方法。
+     * 
+     * 
      * @param a the <code>Action</code> for the menu item to be added
      * @return the new menu item
      * @see Action
@@ -451,6 +552,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Returns a properly configured <code>PropertyChangeListener</code>
      * which updates the control as changes to the <code>Action</code> occur.
+     * <p>
+     *  返回正确配置的<code> PropertyChangeListener </code>,该更改将随着对<code> Action </code>发生的更改而更新控件。
+     * 
      */
     protected PropertyChangeListener createActionChangeListener(JMenuItem b) {
         return b.createActionPropertyChangeListener0(b.getAction());
@@ -459,6 +563,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Removes the component at the specified index from this popup menu.
      *
+     * <p>
+     *  从此弹出菜单中删除指定索引处的组件。
+     * 
+     * 
      * @param       pos the position of the item to be removed
      * @exception   IllegalArgumentException if the value of
      *                          <code>pos</code> &lt; 0, or if the value of
@@ -489,6 +597,12 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Some look and feels might always use heavyweight popups,
      * no matter what the value of this property.
      *
+     * <p>
+     *  设置<code> lightWeightPopupEnabled </code>属性的值,默认为<code> true </code>。
+     * 默认情况下,当外观显示弹出窗口时,它可以选择使用轻量级(全Java)弹出窗口。轻量级弹出窗口比重量级(本地对等)窗口更高效,但轻量级和重量级组件在GUI中不能很好地混合。
+     * 如果您的应用程序混合轻量级和重量级组件,则应禁用轻量级弹出窗口。一些外观和感觉可能总是使用重量级弹出窗口,无论这个属性的值。
+     * 
+     * 
      * @param aFlag  <code>false</code> to disable lightweight popups
      * @beaninfo
      * description: Determines whether lightweight popups are used when possible
@@ -505,6 +619,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Gets the <code>lightWeightPopupEnabled</code> property.
      *
+     * <p>
+     *  获取<code> lightWeightPopupEnabled </code>属性。
+     * 
+     * 
      * @return the value of the <code>lightWeightPopupEnabled</code> property
      * @see #setLightWeightPopupEnabled
      */
@@ -515,6 +633,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Returns the popup menu's label
      *
+     * <p>
+     *  返回弹出菜单的标签
+     * 
+     * 
      * @return a string containing the popup menu's label
      * @see #setLabel
      */
@@ -526,6 +648,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Sets the popup menu's label.  Different look and feels may choose
      * to display or not display this.
      *
+     * <p>
+     *  设置弹出菜单的标签。不同的外观和感觉可以选择显示或不显示此。
+     * 
+     * 
      * @param label a string specifying the label for the popup menu
      *
      * @see #setLabel
@@ -548,6 +674,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
     /**
      * Appends a new separator at the end of the menu.
+     * <p>
+     *  在菜单末尾追加一个新的分隔符。
+     * 
      */
     public void addSeparator() {
         add( new JPopupMenu.Separator() );
@@ -557,6 +686,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Inserts a menu item for the specified <code>Action</code> object at
      * a given position.
      *
+     * <p>
+     *  在给定位置插入指定<code> Action </code>对象的菜单项。
+     * 
+     * 
      * @param a  the <code>Action</code> object to insert
      * @param index      specifies the position at which to insert the
      *                   <code>Action</code>, where 0 is the first
@@ -573,6 +706,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Inserts the specified component into the menu at a given
      * position.
      *
+     * <p>
+     *  将指定的组件插入到给定位置的菜单中。
+     * 
+     * 
      * @param component  the <code>Component</code> to insert
      * @param index      specifies the position at which
      *                   to insert the component, where 0 is the first
@@ -590,6 +727,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
         /* Remove the item at index, nitems-index times
            storing them in a temporary vector in the
            order they appear on the menu.
+        /* <p>
+        /* 将它们按照它们在菜单上出现的顺序存储在临时向量中。
+        /* 
            */
         for (int i = index ; i < nitems; i++) {
             tempItems.addElement(getComponent(index));
@@ -600,6 +740,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
         /* Add the removed items back to the menu, they are
            already in the correct order in the temp vector.
+        /* <p>
+        /*  已经在temp矢量中的正确顺序。
+        /* 
            */
         for (Component tempItem : tempItems) {
             add(tempItem);
@@ -609,6 +752,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      *  Adds a <code>PopupMenu</code> listener.
      *
+     * <p>
+     *  添加<code> PopupMenu </code>侦听器。
+     * 
+     * 
      *  @param l  the <code>PopupMenuListener</code> to add
      */
     public void addPopupMenuListener(PopupMenuListener l) {
@@ -618,6 +765,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Removes a <code>PopupMenu</code> listener.
      *
+     * <p>
+     *  删除<code> PopupMenu </code>侦听器。
+     * 
+     * 
      * @param l  the <code>PopupMenuListener</code> to remove
      */
     public void removePopupMenuListener(PopupMenuListener l) {
@@ -628,6 +779,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Returns an array of all the <code>PopupMenuListener</code>s added
      * to this JMenuItem with addPopupMenuListener().
      *
+     * <p>
+     *  返回通过addPopupMenuListener()添加到此JMenuItem的所有<code> PopupMenuListener </code>数组。
+     * 
+     * 
      * @return all of the <code>PopupMenuListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -639,6 +794,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Adds a <code>MenuKeyListener</code> to the popup menu.
      *
+     * <p>
+     *  在弹出式菜单中添加<code> MenuKeyListener </code>。
+     * 
+     * 
      * @param l the <code>MenuKeyListener</code> to be added
      * @since 1.5
      */
@@ -649,6 +808,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Removes a <code>MenuKeyListener</code> from the popup menu.
      *
+     * <p>
+     *  从弹出式菜单中删除<code> MenuKeyListener </code>。
+     * 
+     * 
      * @param l the <code>MenuKeyListener</code> to be removed
      * @since 1.5
      */
@@ -660,6 +823,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Returns an array of all the <code>MenuKeyListener</code>s added
      * to this JPopupMenu with addMenuKeyListener().
      *
+     * <p>
+     *  返回使用addMenuKeyListener()添加到此JPopupMenu的所有<code> MenuKeyListener </code>的数组。
+     * 
+     * 
      * @return all of the <code>MenuKeyListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.5
@@ -671,6 +838,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Notifies <code>PopupMenuListener</code>s that this popup menu will
      * become visible.
+     * <p>
+     *  通知<code> PopupMenuListener </code>这个弹出式菜单将变为可见。
+     * 
      */
     protected void firePopupMenuWillBecomeVisible() {
         Object[] listeners = listenerList.getListenerList();
@@ -687,6 +857,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Notifies <code>PopupMenuListener</code>s that this popup menu will
      * become invisible.
+     * <p>
+     *  通知<code> PopupMenuListener </code>表示此弹出式菜单将不可见。
+     * 
      */
     protected void firePopupMenuWillBecomeInvisible() {
         Object[] listeners = listenerList.getListenerList();
@@ -703,6 +876,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Notifies <code>PopupMenuListeners</code> that this popup menu is
      * cancelled.
+     * <p>
+     *  通知<code> PopupMenuListeners </code>此弹出式菜单已取消。
+     * 
      */
     protected void firePopupMenuCanceled() {
         Object[] listeners = listenerList.getListenerList();
@@ -719,6 +895,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Always returns true since popups, by definition, should always
      * be on top of all other windows.
+     * <p>
+     *  始终返回true,因为根据定义,弹出窗口应始终位于所有其他窗口之上。
+     * 
+     * 
      * @return true
      */
     // package private
@@ -729,6 +909,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Lays out the container so that it uses the minimum space
      * needed to display its contents.
+     * <p>
+     *  放出容器,以便使用显示其内容所需的最小空间。
+     * 
      */
     public void pack() {
         if(popup != null) {
@@ -746,6 +929,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Sets the visibility of the popup menu.
      *
+     * <p>
+     *  设置弹出菜单的可见性。
+     * 
+     * 
      * @param b true to make the popup visible, or false to
      *          hide it
      * @beaninfo
@@ -813,6 +1000,12 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * <p>
      * This does NOT fire any events, it is up the caller to dispatch
      * the necessary events.
+     * <p>
+     *  从已经调用<code> show </code>的<code> PopupMenuUI </code>中检索<code> Popup </code>如果当前<code>弹出</code>是非null,
+     * 这将调用<code> dispose </code>,然后<code>显示</code>新的。
+     * <p>
+     *  这不会触发任何事件,它是调用者调度必要的事件。
+     * 
      */
     private void showPopup() {
         Popup oldPopup = popup;
@@ -845,6 +1038,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Returns true if the popup menu is visible (currently
      * being displayed).
+     * <p>
+     *  如果弹出菜单可见(当前正在显示),则返回true。
+     * 
      */
     public boolean isVisible() {
         return popup != null;
@@ -859,6 +1055,12 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * the requested data, so that the {@code JPopupMenu} object is placed and sized
      * in a way that corresponds closely to the desktop settings.
      *
+     * <p>
+     * 使用x,y坐标设置弹出式菜单左上角的位置。
+     * <p>
+     *  该方法更改几何相关数据。因此,本地窗口系统可以忽略这样的请求,或者它可以修改所请求的数据,使得{@code JPopupMenu}对象以与桌面设置紧密对应的方式放置和调整大小。
+     * 
+     * 
      * @param x the x coordinate of the popup's new position
      *          in the screen's coordinate space
      * @param y the y coordinate of the popup's new position
@@ -881,6 +1083,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Returns true if the popup menu is a standalone popup menu
      * rather than the submenu of a <code>JMenu</code>.
      *
+     * <p>
+     *  如果弹出菜单是一个独立的弹出菜单,而不是<code> JMenu </code>的子菜单,则返回true。
+     * 
+     * 
      * @return true if this menu is a standalone popup menu, otherwise false
      */
     private boolean isPopupMenu() {
@@ -891,6 +1097,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Returns the component which is the 'invoker' of this
      * popup menu.
      *
+     * <p>
+     *  返回此弹出式菜单的"调用者"组件。
+     * 
+     * 
      * @return the <code>Component</code> in which the popup menu is displayed
      */
     public Component getInvoker() {
@@ -901,6 +1111,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Sets the invoker of this popup menu -- the component in which
      * the popup menu menu is to be displayed.
      *
+     * <p>
+     *  设置此弹出菜单的调用器 - 要显示弹出菜单菜单的组件。
+     * 
+     * 
      * @param invoker the <code>Component</code> in which the popup
      *          menu is displayed
      * @beaninfo
@@ -921,6 +1135,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Displays the popup menu at the position x,y in the coordinate
      * space of the component invoker.
      *
+     * <p>
+     *  在组件调用器的坐标空间中的位置x,y处显示弹出菜单。
+     * 
+     * 
      * @param invoker the component in whose space the popup menu is to appear
      * @param x the x coordinate in invoker's coordinate space at which
      * the popup menu is to be displayed
@@ -969,6 +1187,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Returns the popup menu which is at the root of the menu system
      * for this popup menu.
      *
+     * <p>
+     *  返回此弹出菜单的菜单系统根目录下的弹出菜单。
+     * 
+     * 
      * @return the topmost grandparent <code>JPopupMenu</code>
      */
     JPopupMenu getRootPopupMenu() {
@@ -986,6 +1208,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Returns the component at the specified index.
      *
+     * <p>
+     *  返回指定索引处的组件。
+     * 
+     * 
      * @param i  the index of the component, where 0 is the first
      * @return the <code>Component</code> at that index
      * @deprecated replaced by {@link java.awt.Container#getComponent(int)}
@@ -998,6 +1224,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Returns the index of the specified component.
      *
+     * <p>
+     *  返回指定组件的索引。
+     * 
+     * 
      * @param  c the <code>Component</code> to find
      * @return the index of the component, where 0 is the first;
      *         or -1 if the component is not found
@@ -1017,6 +1247,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Sets the size of the Popup window using a <code>Dimension</code> object.
      * This is equivalent to <code>setPreferredSize(d)</code>.
      *
+     * <p>
+     *  使用<code> Dimension </code>对象设置Popup窗口的大小。这相当于<code> setPreferredSize(d)</code>。
+     * 
+     * 
      * @param d   the <code>Dimension</code> specifying the new size
      * of this component.
      * @beaninfo
@@ -1040,6 +1274,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * height. This is equivalent to
      *  <code>setPreferredSize(new Dimension(width, height))</code>.
      *
+     * <p>
+     *  将弹出窗口的大小设置为指定的宽度和高度。这相当于<code> setPreferredSize(new Dimension(width,height))</code>。
+     * 
+     * 
      * @param width the new width of the Popup in pixels
      * @param height the new height of the Popup in pixels
      * @beaninfo
@@ -1053,6 +1291,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Sets the currently selected component,  This will result
      * in a change to the selection model.
      *
+     * <p>
+     *  设置当前选定的组件,这将导致选择模型的更改。
+     * 
+     * 
      * @param sel the <code>Component</code> to select
      * @beaninfo
      * description: The selected component on the popup menu
@@ -1068,6 +1310,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Checks whether the border should be painted.
      *
+     * <p>
+     *  检查是否应该绘制边框。
+     * 
+     * 
      * @return true if the border is painted, false otherwise
      * @see #setBorderPainted
      */
@@ -1078,6 +1324,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Sets whether the border should be painted.
      *
+     * <p>
+     *  设置是否应该绘制边框。
+     * 
+     * 
      * @param b if true, the border is painted.
      * @see #isBorderPainted
      * @beaninfo
@@ -1091,6 +1341,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Paints the popup menu's border if the <code>borderPainted</code>
      * property is <code>true</code>.
+     * <p>
+     *  如果<code> borderPainted </code>属性是<code> true </code>,则绘制弹出菜单的边框。
+     * 
+     * 
      * @param g  the <code>Graphics</code> object
      *
      * @see JComponent#paint
@@ -1106,6 +1360,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Returns the margin, in pixels, between the popup menu's border and
      * its containers.
      *
+     * <p>
+     * 返回弹出菜单边框和其容器之间的边距(以像素为单位)。
+     * 
+     * 
      * @return an <code>Insets</code> object containing the margin values.
      */
     public Insets getMargin() {
@@ -1121,6 +1379,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Examines the list of menu items to determine whether
      * <code>popup</code> is a popup menu.
      *
+     * <p>
+     *  检查菜单项列表以确定<code>弹出</code>是否是弹出式菜单。
+     * 
+     * 
      * @param popup  a <code>JPopupMenu</code>
      * @return true if <code>popup</code>
      */
@@ -1160,6 +1422,11 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JPopupMenu </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JPopupMenu</code>.
      */
     protected String paramString() {
@@ -1190,6 +1457,11 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * AccessibleJPopupMenu.
      * A new AccessibleJPopupMenu instance is created if necessary.
      *
+     * <p>
+     *  获取与此JPopupMenu相关联的AccessibleContext。对于JPopupMenus,AccessibleContext采用AccessibleJPopupMenu的形式。
+     * 如果需要,将创建一个新的AccessibleJPopupMenu实例。
+     * 
+     * 
      * @return an AccessibleJPopupMenu that serves as the
      *         AccessibleContext of this JPopupMenu
      */
@@ -1205,6 +1477,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * <code>JPopupMenu</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to popup menu user-interface
      * elements.
+     * <p>
+     *  此类实现<code> JPopupMenu </code>类的辅助功能支持。它提供了适用于弹出菜单用户界面元素的Java可访问性API的实现。
+     * 
      */
     @SuppressWarnings("serial")
     protected class AccessibleJPopupMenu extends AccessibleJComponent
@@ -1213,6 +1488,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
         /**
          * AccessibleJPopupMenu constructor
          *
+         * <p>
+         *  AccessibleJPopupMenu构造函数
+         * 
+         * 
          * @since 1.5
          */
         protected AccessibleJPopupMenu() {
@@ -1222,6 +1501,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of
          * the object
          */
@@ -1231,6 +1514,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
         /**
          * This method gets called when a bound property is changed.
+         * <p>
+         *  当绑定属性更改时,将调用此方法。
+         * 
+         * 
          * @param e A <code>PropertyChangeEvent</code> object describing
          * the event source and the property that has changed. Must not be null.
          *
@@ -1253,6 +1540,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
         /*
          * Handles popup "visible" PropertyChangeEvent
+         * <p>
+         *  处理弹出"可见"PropertyChangeEvent
+         * 
          */
         private void handlePopupIsVisibleEvent(boolean visible) {
             if (visible) {
@@ -1271,6 +1561,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
         /*
          * Fires AccessibleActiveDescendant PropertyChangeEvent to notify listeners
          * on the popup menu invoker that a popup list item has been selected
+         * <p>
+         *  Fires AccessibleActiveDescendant PropertyChangeEvent用于在弹出菜单调用器上通知侦听器已选择弹出列表项
+         * 
          */
         private void fireActiveDescendant() {
             if (JPopupMenu.this instanceof BasicComboPopup) {
@@ -1362,6 +1655,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * This method is required to conform to the
      * <code>MenuElement</code> interface, but it not implemented.
+     * <p>
+     *  此方法需要符合<code> MenuElement </code>接口,但未实现。
+     * 
+     * 
      * @see MenuElement#processMouseEvent(MouseEvent, MenuElement[], MenuSelectionManager)
      */
     public void processMouseEvent(MouseEvent event,MenuElement path[],MenuSelectionManager manager) {}
@@ -1374,6 +1671,12 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Note: you do not have to forward the event to sub-components.
      * This is done automatically by the <code>MenuSelectionManager</code>.
      *
+     * <p>
+     *  处理从<code> MenuSelectionManager </code>转发的键事件,并根据需要使用<code> MenuSelectionManager </code>的API更改菜单选项。
+     * <p>
+     * 注意：您不必将事件转发到子组件。这是由<code> MenuSelectionManager </code>自动完成的。
+     * 
+     * 
      * @param e  a <code>KeyEvent</code>
      * @param path the <code>MenuElement</code> path array
      * @param manager   the <code>MenuSelectionManager</code>
@@ -1394,6 +1697,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
     /**
      * Handles a keystroke in a menu.
      *
+     * <p>
+     *  在菜单中处理击键。
+     * 
+     * 
      * @param e  a <code>MenuKeyEvent</code> object
      * @since 1.5
      */
@@ -1414,6 +1721,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Notifies all listeners that have registered interest for
      * notification on this event type.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。
+     * 
+     * 
      * @param event a <code>MenuKeyEvent</code>
      * @see EventListenerList
      */
@@ -1430,6 +1741,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Notifies all listeners that have registered interest for
      * notification on this event type.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。
+     * 
+     * 
      * @param event a <code>MenuKeyEvent</code>
      * @see EventListenerList
      */
@@ -1446,6 +1761,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Notifies all listeners that have registered interest for
      * notification on this event type.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。
+     * 
+     * 
      * @param event a <code>MenuKeyEvent</code>
      * @see EventListenerList
      */
@@ -1464,6 +1783,11 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * <code>javax.swing.MenuElement</code> interface.
      * Overrides <code>MenuElement.menuSelectionChanged</code>.
      *
+     * <p>
+     *  当菜单选择更改以激活或停用此菜单时消息。这实现了<code> javax.swing.MenuElement </code>接口。
+     * 覆盖<code> MenuElement.menuSelectionChanged </code>。
+     * 
+     * 
      * @param isIncluded  true if this menu is active, false if
      *        it is not
      * @see MenuElement#menuSelectionChanged(boolean)
@@ -1491,6 +1815,11 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * an empty array.  This method is required to conform to the
      * <code>MenuElement</code> interface.
      *
+     * <p>
+     *  返回一个包含此菜单组件子菜单的<code> MenuElement </code>数组。它只会返回符合<code> JMenuElement </code>接口的项目。
+     * 如果弹出菜单是<code> null </code>返回一个空数组。此方法需要符合<code> MenuElement </code>界面。
+     * 
+     * 
      * @return an array of <code>MenuElement</code> objects
      * @see MenuElement#getSubElements
      */
@@ -1515,6 +1844,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
     /**
      * Returns this <code>JPopupMenu</code> component.
+     * <p>
+     *  返回这个<code> JPopupMenu </code>组件。
+     * 
+     * 
      * @return this <code>JPopupMenu</code> object
      * @see MenuElement#getComponent
      */
@@ -1525,6 +1858,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
 
     /**
      * A popup menu-specific separator.
+     * <p>
+     *  特定于弹出式菜单的分隔符。
+     * 
      */
     @SuppressWarnings("serial")
     static public class Separator extends JSeparator
@@ -1537,6 +1873,10 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
         /**
          * Returns the name of the L&amp;F class that renders this component.
          *
+         * <p>
+         *  返回呈现此组件的L&amp; F类的名称。
+         * 
+         * 
          * @return the string "PopupMenuSeparatorUI"
          * @see JComponent#getUIClassID
          * @see UIDefaults#getUI
@@ -1552,6 +1892,9 @@ public class JPopupMenu extends JComponent implements Accessible,MenuElement {
      * Returns true if the <code>MouseEvent</code> is considered a popup trigger
      * by the <code>JPopupMenu</code>'s currently installed UI.
      *
+     * <p>
+     *  如果<code> MouseEvent </code>被<code> JPopupMenu </code>当前安装的UI视为弹出触发器,则返回true。
+     * 
      * @return true if the mouse event is a popup trigger
      * @since 1.3
      */

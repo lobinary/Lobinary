@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.algorithms.implementations;
 
@@ -42,6 +51,8 @@ import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 /**
  *
+ * <p>
+ * 
  * @author $Author: raul $
  * @author Alex Dupre
  */
@@ -63,6 +74,12 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
      * The JAVA JCE ECDSA Signature algorithm creates ASN.1 encoded (r,s) value
      * pairs; the XML Signature requires the core BigInteger values.
      *
+     * <p>
+     *  将ASN.1 ECDSA值转换为XML签名ECDSA值。
+     * 
+     *  JAVA JCE ECDSA签名算法创建ASN.1编码(r,s)值对; XML签名需要核心BigInteger值。
+     * 
+     * 
      * @param asn1Bytes
      * @return the decode bytes
      *
@@ -118,6 +135,12 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
      * The JAVA JCE ECDSA Signature algorithm creates ASN.1 encoded (r,s) value
      * pairs; the XML Signature requires the core BigInteger values.
      *
+     * <p>
+     *  将XML签名ECDSA值转换为ASN.1 DSA值。
+     * 
+     *  JAVA JCE ECDSA签名算法创建ASN.1编码(r,s)值对; XML签名需要核心BigInteger值。
+     * 
+     * 
      * @param xmldsigBytes
      * @return the encoded ASN.1 bytes
      *
@@ -183,6 +206,10 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
     /**
      * Constructor SignatureRSA
      *
+     * <p>
+     *  构造符SignatureRSA
+     * 
+     * 
      * @throws XMLSignatureException
      */
     public SignatureECDSA() throws XMLSignatureException {
@@ -369,12 +396,20 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
     /**
      * Class SignatureRSASHA1
      *
+     * <p>
+     *  类签名RSASHA1
+     * 
+     * 
      * @author $Author: marcx $
      */
     public static class SignatureECDSASHA1 extends SignatureECDSA {
         /**
          * Constructor SignatureRSASHA1
          *
+         * <p>
+         *  构造符签名RSASHA1
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public SignatureECDSASHA1() throws XMLSignatureException {
@@ -390,6 +425,10 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
     /**
      * Class SignatureRSASHA256
      *
+     * <p>
+     *  类签名RSASHA256
+     * 
+     * 
      * @author Alex Dupre
      */
     public static class SignatureECDSASHA256 extends SignatureECDSA {
@@ -397,6 +436,10 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
         /**
          * Constructor SignatureRSASHA256
          *
+         * <p>
+         *  构造符签名RSASHA256
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public SignatureECDSASHA256() throws XMLSignatureException {
@@ -412,6 +455,10 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
     /**
      * Class SignatureRSASHA384
      *
+     * <p>
+     *  类签名RSASHA384
+     * 
+     * 
      * @author Alex Dupre
      */
     public static class SignatureECDSASHA384 extends SignatureECDSA {
@@ -419,6 +466,10 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
         /**
          * Constructor SignatureRSASHA384
          *
+         * <p>
+         *  构建体SignatureRSASHA384
+         * 
+         * 
          * @throws XMLSignatureException
          */
         public SignatureECDSASHA384() throws XMLSignatureException {
@@ -434,6 +485,10 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
     /**
      * Class SignatureRSASHA512
      *
+     * <p>
+     * 类签名RSASHA512
+     * 
+     * 
      * @author Alex Dupre
      */
     public static class SignatureECDSASHA512 extends SignatureECDSA {
@@ -441,6 +496,9 @@ public abstract class SignatureECDSA extends SignatureAlgorithmSpi {
         /**
          * Constructor SignatureRSASHA512
          *
+         * <p>
+         *  构造符签名RSASHA512
+         * 
          * @throws XMLSignatureException
          */
         public SignatureECDSASHA512() throws XMLSignatureException {

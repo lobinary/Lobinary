@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,9 @@ import org.omg.CORBA.INTERNAL ;
  * multiple IDs per servant are allowed.  This class suppots bidirectional
  * traversal of the key-servant association.  Access to an instance of this
  * class is serialized by the POA mutex.
+ * <p>
+ *  他们的钥匙。有两种变体,以支持是否允许每个服务方多个ID。此类支持键 - 服务方关联的双向遍历。对该类的实例的访问由POA互斥体序列化。
+ * 
  */
 public abstract class ActiveObjectMap
 {
@@ -113,6 +117,8 @@ public abstract class ActiveObjectMap
 
     /** get Returbs the entry assigned to the key, or creates a new
     * entry in state INVALID if none is present.
+    * <p>
+    *  如果不存在,则状态为INVALID的条目。
     */
     public final AOMEntry get(Key key)
     {

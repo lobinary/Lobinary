@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: LiteralElement.java,v 1.2.4.1 2005/09/13 12:38:33 pvedula Exp $
+ * <p>
+ *  $ Id：LiteralElement.java,v 1.2.4.1 2005/09/13 12:38:33 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -41,6 +54,8 @@ import com.sun.org.apache.xml.internal.serializer.ElemDesc;
 import com.sun.org.apache.xml.internal.serializer.ToHTMLStream;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -61,6 +76,9 @@ final class LiteralElement extends Instruction {
 
     /**
      * Returns the QName for this literal element
+     * <p>
+     *  返回此文字元素的QName
+     * 
      */
     public QName getName() {
         return _qname;
@@ -68,6 +86,9 @@ final class LiteralElement extends Instruction {
 
     /**
      * Displays the contents of this literal element
+     * <p>
+     *  显示此文本元素的内容
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -77,6 +98,9 @@ final class LiteralElement extends Instruction {
 
     /**
      * Returns the namespace URI for which a prefix is pointing to
+     * <p>
+     *  返回前缀所指向的命名空间URI
+     * 
      */
     private String accessedNamespace(String prefix) {
         if (_literalElemParent != null) {
@@ -93,6 +117,9 @@ final class LiteralElement extends Instruction {
      * Method used to keep track of what namespaces that are references by
      * this literal element and its attributes. The output must contain a
      * definition for each namespace, so we stuff them in a hashtable.
+     * <p>
+     *  用于跟踪由此文字元素及其属性引用的命名空间的方法。输出必须包含每个命名空间的定义,因此我们将它们放在散列表中。
+     * 
      */
     public void registerNamespace(String prefix, String uri,
                                   SymbolTable stable, boolean declared) {
@@ -131,6 +158,9 @@ final class LiteralElement extends Instruction {
      * Translates the prefix of a QName according to the rules set in
      * the attributes of xsl:stylesheet. Also registers a QName to assure
      * that the output element contains the necessary namespace declarations.
+     * <p>
+     *  根据xsl：stylesheet属性中设置的规则翻译QName的前缀。还注册一个QName,以确保输出元素包含必要的命名空间声明。
+     * 
      */
     private String translateQName(QName qname, SymbolTable stable) {
         // Break up the QName and get prefix:localname strings
@@ -166,6 +196,9 @@ final class LiteralElement extends Instruction {
 
     /**
      * Add an attribute to this element
+     * <p>
+     *  向此元素添加属性
+     * 
      */
     public void addAttribute(SyntaxTreeNode attribute) {
         if (_attributeElements == null) {
@@ -176,6 +209,9 @@ final class LiteralElement extends Instruction {
 
     /**
      * Set the first attribute of this element
+     * <p>
+     *  设置此元素的第一个属性
+     * 
      */
     public void setFirstAttribute(SyntaxTreeNode attribute) {
         if (_attributeElements == null) {
@@ -187,6 +223,9 @@ final class LiteralElement extends Instruction {
     /**
      * Type-check the contents of this element. The element itself does not
      * need any type checking as it leaves nothign on the JVM's stack.
+     * <p>
+     * 键入 - 检查此元素的内容。元素本身不需要任何类型检查,因为它离开不在JVM的堆栈。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         // Type-check all attributes
@@ -206,6 +245,9 @@ final class LiteralElement extends Instruction {
      * This method starts at a given node, traverses all namespace mappings,
      * and assembles a list of all prefixes that (for the given node) maps
      * to _ANY_ namespace URI. Used by literal result elements to determine
+     * <p>
+     *  此方法从给定节点开始,遍历所有命名空间映射,并汇编(对于给定节点)映射到_ANY_命名空间URI的所有前缀的列表。由字面结果元素用于确定
+     * 
      */
     public Enumeration getNamespaceScope(SyntaxTreeNode node) {
         Hashtable all = new Hashtable();
@@ -229,6 +271,9 @@ final class LiteralElement extends Instruction {
     /**
      * Determines the final QName for the element and its attributes.
      * Registers all namespaces that are used by the element/attributes
+     * <p>
+     *  确定元素及其属性的最终QName。注册元素/属性使用的所有命名空间
+     * 
      */
     public void parseContents(Parser parser) {
         final SymbolTable stable = parser.getSymbolTable();
@@ -327,6 +372,9 @@ final class LiteralElement extends Instruction {
      * then the element contents, and then the element end tag. Since the
      * value of an attribute may depend on a variable, variables must be
      * compiled first.
+     * <p>
+     *  将发出文字元素的代码编译到输出处理程序,首先是开始标记,然后是命名空间声明,然后是属性,然后是元素内容,然后是元素结束标记。由于属性的值可能取决于变量,因此必须首先编译变量。
+     * 
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
 
@@ -378,6 +426,9 @@ final class LiteralElement extends Instruction {
             /*
              * If our XslElement parent redeclares the default NS, and this
              * element doesn't, it must be redeclared one more time.
+             * <p>
+             *  如果我们的XslElement父重定义默认NS,并且这个元素没有,它必须重新声明一次。
+             * 
              */
             if (!declaresDefaultNS && (_parent instanceof XslElement)
                     && ((XslElement) _parent).declaresDefaultNS())
@@ -410,6 +461,9 @@ final class LiteralElement extends Instruction {
 
     /**
      * Return true if the output method is html.
+     * <p>
+     *  如果输出方法是html,则返回true。
+     * 
      */
     private boolean isHTMLOutput() {
         return getStylesheet().getOutputMethod() == Stylesheet.HTML_OUTPUT;
@@ -419,6 +473,9 @@ final class LiteralElement extends Instruction {
      * Return the ElemDesc object for an HTML element.
      * Return null if the output method is not HTML or this is not a
      * valid HTML element.
+     * <p>
+     *  返回一个HTML元素的ElemDesc对象。如果输出方法不是HTML,或者这不是有效的HTML元素,则返回null。
+     * 
      */
     public ElemDesc getElemDesc() {
         if (isHTMLOutput()) {
@@ -430,6 +487,9 @@ final class LiteralElement extends Instruction {
 
     /**
      * Return true if all attributes of this LRE have unique names.
+     * <p>
+     *  如果此LRE的所有属性都具有唯一的名称,则返回true。
+     * 
      */
     public boolean allAttributesUnique() {
         return _allAttributesUnique;
@@ -437,6 +497,9 @@ final class LiteralElement extends Instruction {
 
     /**
      * Check whether all attributes are unique.
+     * <p>
+     *  检查所有属性是否唯一。
+     * 
      */
     private boolean checkAttributesUnique() {
          boolean hasHiddenXslAttribute = canProduceAttributeNodes(this, true);
@@ -489,6 +552,9 @@ final class LiteralElement extends Instruction {
      * to an element. Only return false when we are sure that no attribute node is produced.
      * Return true if we are not sure. If the flag ignoreXslAttribute is true, the direct
      * <xsl:attribute> children of the current node are not included in the check.
+     * <p>
+     *  如果给定的SyntaxTreeNode下的指令可以为元素生成属性节点,则返回true。只有当我们确定没有产生属性节点时才返回false。如果我们不确定,返回true。
+     * 如果标记ignoreXslAttribute为true,则当前节点的直接<xsl：attribute>子项不包括在检查中。
      */
     private boolean canProduceAttributeNodes(SyntaxTreeNode node, boolean ignoreXslAttribute) {
         Vector contents = node.getContents();

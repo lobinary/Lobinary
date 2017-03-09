@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import java.io.IOException;
 /**
  * Helper class to support copying or moving files when the source and target
  * are associated with different providers.
+ * <p>
+ *  辅助类,用于在源和目标与不同的提供程序相关联时支持复制或移动文件。
+ * 
  */
 
 class CopyMoveHelper {
@@ -39,6 +43,9 @@ class CopyMoveHelper {
 
     /**
      * Parses the arguments for a file copy operation.
+     * <p>
+     *  解析文件复制操作的参数。
+     * 
      */
     private static class CopyOptions {
         boolean replaceExisting = false;
@@ -74,6 +81,9 @@ class CopyMoveHelper {
     /**
      * Converts the given array of options for moving a file to options suitable
      * for copying the file when a move is implemented as copy + delete.
+     * <p>
+     *  当将移动实施为复制+删除时,将用于将文件移动的给定选项数组转换为适合于复制文件的选项。
+     * 
      */
     private static CopyOption[] convertMoveToCopyOptions(CopyOption... options)
         throws AtomicMoveNotSupportedException
@@ -96,6 +106,9 @@ class CopyMoveHelper {
     /**
      * Simple copy for use when source and target are associated with different
      * providers
+     * <p>
+     *  当源和目标与不同的提供程序相关联时使用的简单副本
+     * 
      */
     static void copyToForeignTarget(Path source, Path target,
                                     CopyOption... options)
@@ -150,6 +163,8 @@ class CopyMoveHelper {
     /**
      * Simple move implements as copy+delete for use when source and target are
      * associated with different providers
+     * <p>
+     *  简单移动实现为复制+删除,以便在源和目标与不同的提供程序相关联时使用
      */
     static void moveToForeignTarget(Path source, Path target,
                                     CopyOption... options) throws IOException

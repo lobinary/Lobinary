@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ package javax.security.auth.callback;
  * if appropriate, to return requested information back to the
  * underlying security services.
  *
+ * <p>
+ *  <p>此接口的实现传递给{@code CallbackHandler},使底层安全服务能够与调用应用程序交互,以检索特定的身份验证数据(如用户名和密码),或显示某些信息,例如错误和警告消息。
+ * 
+ *  <p> {@code Callback}实施不会检索或显示底层安全服务请求的信息。
+ * 
  * @see javax.security.auth.callback.CallbackHandler
  * @see javax.security.auth.callback.ChoiceCallback
  * @see javax.security.auth.callback.ConfirmationCallback

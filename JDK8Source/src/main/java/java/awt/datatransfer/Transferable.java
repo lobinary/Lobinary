@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,14 @@ import java.io.IOException;
  * How to Use Drag and Drop and Data Transfer</a>,
  * a section in <em>The Java Tutorial</em>, for more information.
  *
+ * <p>
+ *  定义可用于为传输操作提供数据的类的接口。
+ * <p>
+ *  有关使用Swing使用数据传输的信息,请参阅
+ * <a href="https://docs.oracle.com/javase/tutorial/uiswing/dnd/index.html">
+ *  如何使用拖放和数据传输</a>,有关更多信息,请参阅<em> Java教程</em>中的一节。
+ * 
+ * 
  * @author      Amy Fowler
  */
 
@@ -45,6 +54,10 @@ public interface Transferable {
      * Returns an array of DataFlavor objects indicating the flavors the data
      * can be provided in.  The array should be ordered according to preference
      * for providing the data (from most richly descriptive to least descriptive).
+     * <p>
+     *  返回一个DataFlavor对象的数组,指示可以提供数据的风格。数组应根据提供数据的优先级排序(从最丰富描述到最不描述)。
+     * 
+     * 
      * @return an array of data flavors in which this data can be transferred
      */
     public DataFlavor[] getTransferDataFlavors();
@@ -52,6 +65,10 @@ public interface Transferable {
     /**
      * Returns whether or not the specified data flavor is supported for
      * this object.
+     * <p>
+     *  返回此对象是否支持指定的数据flavor。
+     * 
+     * 
      * @param flavor the requested flavor for the data
      * @return boolean indicating whether or not the data flavor is supported
      */
@@ -61,6 +78,9 @@ public interface Transferable {
      * Returns an object which represents the data to be transferred.  The class
      * of the object returned is defined by the representation class of the flavor.
      *
+     * <p>
+     *  返回表示要传输的数据的对象。返回的对象的类由flavor的表示类定义。
+     * 
      * @param flavor the requested flavor for the data
      * @see DataFlavor#getRepresentationClass
      * @exception IOException                if the data is no longer available

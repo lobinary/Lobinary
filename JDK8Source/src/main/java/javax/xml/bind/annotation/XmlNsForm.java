@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,22 @@ package javax.xml.bind.annotation;
  *   </tbody>
  * </table>
  *
+ * <p>
+ *  XML模式命名空间限定条件的枚举。
+ * 
+ *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
+ * 
+ *  <p> <b>使用</b>
+ * <p>
+ *  命名空间限定值用在此packge中定义的注释中。枚举值映射如下：
+ * 
+ * <p>
+ * <table border="1" cellpadding="4" cellspacing="3">
+ * <tbody>
+ * <tr>
+ *  <td> <b>枚举值</b​​> </td> <td> <b> XML模式值</b​​> </td>
+ * </tr>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since JAXB2.0
  */

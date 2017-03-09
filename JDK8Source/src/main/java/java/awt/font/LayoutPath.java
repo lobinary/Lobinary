@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * (C) Copyright IBM Corp. 2005, All Rights Reserved.
+ * <p>
+ *  (C)Copyright IBM Corp. 2005,保留所有权利。
+ * 
  */
 package java.awt.font;
 
@@ -38,6 +42,11 @@ import java.awt.geom.Point2D;
  * Locations are represented as a <code>Point2D</code>, where x is the advance and
  * y is the offset.
  *
+ * <p>
+ *  LayoutPath提供了相对于基线的位置和用户空间中的点之间的映射。位置包括沿基线的前进,以及在前进处垂直于基线的偏移。沿着垂线的正值在从基线向量顺时针旋转90度的方向上。
+ * 位置表示为<code> Point2D </code>,其中x是提前量,y是偏移量。
+ * 
+ * 
  * @since 1.6
  */
 public abstract class LayoutPath {
@@ -47,6 +56,10 @@ public abstract class LayoutPath {
      * from the point to the path (e.g., the magnitude of the offset
      * will be smallest).  If there is more than one such location,
      * the location with the smallest advance is chosen.
+     * <p>
+     *  将用户空间中的点转换为相对于路径的位置。选择位置以便使从点到路径的距离最小化(例如,偏移的大小将是最小的)。如果存在多于一个这样的位置,则选择具有最小前进的位置。
+     * 
+     * 
      * @param point the point to convert.  If it is not the same
      * object as location, point will remain unmodified by this call.
      * @param location a <code>Point2D</code> to hold the returned location.
@@ -66,6 +79,9 @@ public abstract class LayoutPath {
      * the location's advance.  If this is the case, the value of
      * 'preceding' is used to disambiguate the portion of the path
      * whose location and slope is to be used to interpret the offset.
+     * <p>
+     *  将相对于路径的位置转换为用户坐标中的点。路径可能突然弯曲或在该位置的前进处不相交。如果是这种情况,则使用"在前"的值来消除路径的位置和斜率将被用于解释偏移的部分。
+     * 
      * @param location a <code>Point2D</code> representing the advance (in x) and
      * offset (in y) of a location relative to the path.  If location
      * is not the same object as point, location will remain

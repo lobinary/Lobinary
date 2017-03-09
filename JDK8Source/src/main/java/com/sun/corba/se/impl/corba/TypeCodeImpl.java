@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -894,6 +895,9 @@ public final class TypeCodeImpl extends TypeCode
     /**
     * The equivalent operation is used by the ORB when determining type equivalence
     * for values stored in an IDL any.
+    * <p>
+    *  当确定存储在IDL any中的值的类型等价时,ORB使用等效操作。
+    * 
     */
     public boolean equivalent(TypeCode tc) {
         if (tc == this) {
@@ -1925,6 +1929,10 @@ public final class TypeCodeImpl extends TypeCode
      * See AnyImpl read_value and write_value for usage.
      * The state of this TypeCodeImpl instance isn't changed, only used
      * by the Any to do the correct copy.
+     * <p>
+     *  这不是TypeCodeImpl对象的副本,而是复制此类型代码表示的值。有关使用情况,请参阅AnyImpl read_value和write_value。
+     * 此TypeCodeImpl实例的状态不会更改,只有由Any使用才能执行正确的副本。
+     * 
      */
     protected void copy(org.omg.CORBA.portable.InputStream src,
         org.omg.CORBA.portable.OutputStream dst)
@@ -2074,6 +2082,9 @@ public final class TypeCodeImpl extends TypeCode
                     _memberTypes[labelIndex].copy(src, dst);
                 }
             }
+    /* <p>
+    /*  {Any discriminator = new AnyImpl(_orb); discriminator.read_value(src,_discriminator); discriminator.write_value(dst); int labelIndex = currentUnionMemberIndex(discriminator); if(labelIndex == -1){//检查是否找不到标签if(_defaultIndex == -1)// throw exception如果默认值不是预期值throw new MARSHAL(); else //必须是默认分支类型_memberTypes [_defaultIndex] .copy(src,dst); }
+    /*  else {_memberTypes [labelIndex] .copy(src,dst); }}。
     */
             {
                 Any tagValue = new AnyImpl( (ORB)src.orb());

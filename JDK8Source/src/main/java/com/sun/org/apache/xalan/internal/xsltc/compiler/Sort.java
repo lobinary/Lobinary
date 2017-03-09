@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Sort.java,v 1.2.4.1 2005/09/12 11:08:12 pvedula Exp $
+ * <p>
+ *  $ Id：Sort.java,v 1.2.4.1 2005/09/12 11:08:12 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -66,6 +79,8 @@ import com.sun.org.apache.xml.internal.dtm.Axis;
 
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -90,6 +105,9 @@ final class Sort extends Instruction implements Closure {
     /**
      * Returns true if this closure is compiled in an inner class (i.e.
      * if this is a real closure).
+     * <p>
+     *  如果此闭包在内部类中编译(即如果这是一个真正的闭包),则返回true。
+     * 
      */
     public boolean inInnerClass() {
         return (_className != null);
@@ -97,6 +115,9 @@ final class Sort extends Instruction implements Closure {
 
     /**
      * Returns a reference to its parent closure or null if outermost.
+     * <p>
+     *  返回对其父闭包的引用,如果最外层则返回null。
+     * 
      */
     public Closure getParentClosure() {
         return null;
@@ -105,6 +126,9 @@ final class Sort extends Instruction implements Closure {
     /**
      * Returns the name of the auxiliary class or null if this predicate
      * is compiled inside the Translet.
+     * <p>
+     *  返回辅助类的名称,如果此谓词在Translet中编译,则返回null。
+     * 
      */
     public String getInnerClassName() {
         return _className;
@@ -112,6 +136,9 @@ final class Sort extends Instruction implements Closure {
 
     /**
      * Add new variable to the closure.
+     * <p>
+     *  向闭包添加新变量。
+     * 
      */
     public void addVariable(VariableRefBase variableRef) {
         if (_closureVars == null) {
@@ -133,6 +160,9 @@ final class Sort extends Instruction implements Closure {
 
     /**
      * Parse the attributes of the xsl:sort element
+     * <p>
+     *  解析xsl：sort元素的属性
+     * 
      */
     public void parseContents(Parser parser) {
 
@@ -179,6 +209,9 @@ final class Sort extends Instruction implements Closure {
     /**
      * Run type checks on the attributes; expression must return a string
      * which we will use as a sort key
+     * <p>
+     *  对属性的运行类型检查;表达式必须返回一个字符串,我们将使用它作为排序键
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         final Type tselect = _select.typeCheck(stable);
@@ -198,6 +231,9 @@ final class Sort extends Instruction implements Closure {
     /**
      * These two methods are needed in the static methods that compile the
      * overloaded NodeSortRecord.compareType() and NodeSortRecord.sortOrder()
+     * <p>
+     *  在编译重载的NodeSortRecord.compareType()和NodeSortRecord.sortOrder()的静态方法中需要这两个方法。
+     * 
      */
     public void translateSortType(ClassGenerator classGen,
                                   MethodGenerator methodGen) {
@@ -225,6 +261,9 @@ final class Sort extends Instruction implements Closure {
      * This method compiles code for the select expression for this
      * xsl:sort element. The method is called from the static code-generating
      * methods in this class.
+     * <p>
+     * 此方法为此xsl：sort元素的select表达式编译代码。该方法从该类中的静态代码生成方法中调用。
+     * 
      */
     public void translateSelect(ClassGenerator classGen,
                                 MethodGenerator methodGen) {
@@ -233,6 +272,9 @@ final class Sort extends Instruction implements Closure {
 
     /**
      * This method should not produce any code
+     * <p>
+     *  这个方法不应该产生任何代码
+     * 
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         // empty
@@ -242,6 +284,9 @@ final class Sort extends Instruction implements Closure {
      * Compiles code that instantiates a SortingIterator object.
      * This object's constructor needs referencdes to the current iterator
      * and a node sort record producing objects as its parameters.
+     * <p>
+     *  编译实例化SortingIterator对象的代码。此对象的构造函数需要引用当前迭代器和一个生成对象作为其参数的节点排序记录。
+     * 
      */
     public static void translateSortIterator(ClassGenerator classGen,
                                       MethodGenerator methodGen,
@@ -311,6 +356,9 @@ final class Sort extends Instruction implements Closure {
     /**
      * Compiles code that instantiates a NodeSortRecordFactory object which
      * will produce NodeSortRecord objects of a specific type.
+     * <p>
+     *  编译实例化NodeSortRecordFactory对象的代码,该对象将生成特定类型的NodeSortRecord对象。
+     * 
      */
     public static void compileSortRecordFactory(Vector sortObjects,
         ClassGenerator classGen, MethodGenerator methodGen)
@@ -599,6 +647,9 @@ final class Sort extends Instruction implements Closure {
 
     /**
      * Create a new auxillary class extending NodeSortRecord.
+     * <p>
+     *  创建一个扩展NodeSortRecord的辅助类。
+     * 
      */
     private static String compileSortRecord(Vector sortObjects,
                                             ClassGenerator classGen,
@@ -659,6 +710,9 @@ final class Sort extends Instruction implements Closure {
      * Create a constructor for the new class. Updates the reference to the
      * collator in the super calls only when the stylesheet specifies a new
      * language in xsl:sort.
+     * <p>
+     *  为新类创建一个构造函数。仅当样式表在xsl：sort中指定新语言时,才更新超级调用中对collat​​or的引用。
+     * 
      */
     private static MethodGenerator compileInit(Vector sortObjects,
                                            NodeSortRecordGenerator sortRecord,
@@ -687,6 +741,8 @@ final class Sort extends Instruction implements Closure {
 
     /**
      * Compiles a method that overloads NodeSortRecord.extractValueFromDOM()
+     * <p>
+     *  编译重载NodeSortRecord.extractValueFromDOM()的方法
      */
     private static MethodGenerator compileExtract(Vector sortObjects,
                                          NodeSortRecordGenerator sortRecord,

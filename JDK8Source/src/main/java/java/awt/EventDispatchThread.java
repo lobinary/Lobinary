@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,14 @@ import sun.awt.EventQueueDelegate;
  * secondary event pump will exit automatically as soon as the Condtional
  * evaluate()s to false and an additional Event is pumped and dispatched.
  *
+ * <p>
+ *  EventDispatchThread是一个包私有AWT类,它将事件从EventQueue中取出,并将它们分派到相应的AWT组件。
+ * 
+ *  线程启动一个"永久"事件泵,并在其run()方法中调用pumpEvents(Conditional)。
+ * 事件处理程序可以选择在任何时候阻塞此事件泵,但应通过再次调用pumpEvents(有条件)启动一个新泵(<b>不是</b>一个新的EventDispatchThread)。
+ * 只要Condtional evaluate()为false并且附加事件被泵送和分派,该辅助事件泵将自动退出。
+ * 
+ * 
  * @author Tom Ball
  * @author Amy Fowler
  * @author Fred Ecks
@@ -72,6 +81,9 @@ class EventDispatchThread extends Thread {
 
     /*
      * Must be called on EDT only, that's why no synchronization
+     * <p>
+     *  必须在EDT上调用,这就是为什么没有同步
+     * 
      */
     public void stopDispatching() {
         doDispatch = false;
@@ -248,6 +260,9 @@ class EventDispatchThread extends Thread {
                  * the modalComponent hierarchy.
                  * KeyEvent is handled by using enqueueKeyEvent
                  * in Dialog.show
+                 * <p>
+                 *  过滤掉在modalComponent层次结构之外的MouseEvent和ActionEvent。 KeyEvent通过在Dialog.show中使用enqueueKeyEvent来处理
+                 * 
                  */
                 if (Component.isInstanceOf(modalComponent, "javax.swing.JInternalFrame")) {
                     /*
@@ -255,6 +270,8 @@ class EventDispatchThread extends Thread {
                      * for some component from another heavyweight than modalComp,
                      * it is accepted. If heavyweight is the same - we still accept
                      * event and perform further filtering in LightweightDispatcher
+                     * <p>
+                     *  模态内部框架单独处理。如果事件是来自另一个重量超过modalComp的一些组件,它被接受。如果重量相同 - 我们仍然接受事件并在LightweightDispatcher中执行进一步过滤
                      */
                     return windowClosingEvent ? FilterAction.REJECT : FilterAction.ACCEPT;
                 }

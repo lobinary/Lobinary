@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,9 @@ import sun.security.action.GetPropertyAction;
 /**
  * Helper class to support creation of temporary files and directories with
  * initial attributes.
+ * <p>
+ *  辅助类支持创建具有初始属性的临时文件和目录。
+ * 
  */
 
 class TempFileHelper {
@@ -76,6 +80,9 @@ class TempFileHelper {
     /**
      * Creates a file or directory in in the given given directory (or in the
      * temporary directory if dir is {@code null}).
+     * <p>
+     *  在给定的给定目录中创建文件或目录(如果dir为{@code null},则在临时目录中)。
+     * 
      */
     private static Path create(Path dir,
                                String prefix,
@@ -151,6 +158,9 @@ class TempFileHelper {
     /**
      * Creates a temporary file in the given directory, or in in the
      * temporary directory if dir is {@code null}.
+     * <p>
+     *  在给定目录中创建临时文件,如果dir为{@code null},则在临时目录中创建。
+     * 
      */
     static Path createTempFile(Path dir,
                                String prefix,
@@ -164,6 +174,8 @@ class TempFileHelper {
     /**
      * Creates a temporary directory in the given directory, or in in the
      * temporary directory if dir is {@code null}.
+     * <p>
+     *  在给定目录中创建临时目录,如果dir为{@code null},则在临时目录中创建。
      */
     static Path createTempDirectory(Path dir,
                                     String prefix,

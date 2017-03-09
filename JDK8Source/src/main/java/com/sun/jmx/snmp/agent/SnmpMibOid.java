@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,13 @@ import com.sun.jmx.snmp.SnmpStatusException;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  表示SNMP MIB中既不是组也不是变量的节点。此类定义了子节点的列表和允许操作子节点的方法。
+ * <P>
+ *  这个类在内部使用,由<CODE> mibgen </CODE>生成的类使用。你不应该直接使用这个类。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public class SnmpMibOid extends SnmpMibNode implements Serializable {
@@ -58,6 +66,9 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public SnmpMibOid() {
     }
@@ -71,6 +82,13 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
      * <p> This method should be overridden in subclasses.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE> get </CODE>操作。
+     * 
+     *  <p>此方法应在子类中覆盖。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -95,6 +113,13 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
      * <p> This method should be overridden in subclasses.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE>设置</CODE>操作。
+     * 
+     *  <p>此方法应在子类中覆盖。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -119,6 +144,13 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
      * <p> This method should be overridden in subclasses.
      * <p>
      *
+     * <p>
+     *  一般处理<CODE>检查</CODE>操作。
+     * 
+     *  <p>此方法应在子类中覆盖。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -269,6 +301,9 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
 
     /**
      * Computes the root OID of the MIB.
+     * <p>
+     *  计算MIB的根OID。
+     * 
      */
     @Override
     public void getRootOid(Vector<Integer> result) {
@@ -289,6 +324,9 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
 
     /**
      * Registers a specific node in the tree.
+     * <p>
+     *  在树中注册特定节点。
+     * 
      */
     public void registerNode(String oidString ,SnmpMibNode node)
         throws IllegalAccessException {
@@ -301,6 +339,9 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
 
     /**
      * Registers a specific node in the tree.
+     * <p>
+     *  在树中注册特定节点。
+     * 
      */
     void registerNode(long[] oid, int cursor ,SnmpMibNode node)
         throws IllegalAccessException {
@@ -421,6 +462,10 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
      * This method is a patch that fixes the problem of registering
      * a subnode before its father node.
      *
+     * <p>
+     *  将此节点的子节点导出到将替换OID树中的此节点的兄弟节点。此方法是修补在父节点之前注册子节点的问题的补丁。
+     * 
+     * 
      **/
     void exportChildren(SnmpMibOid brother)
         throws IllegalAccessException {
@@ -532,11 +577,16 @@ public class SnmpMibOid extends SnmpMibNode implements Serializable {
 
     /**
      * Contains the list of sub nodes.
+     * <p>
+     *  包含子节点的列表。
+     * 
      */
     private NonSyncVector<SnmpMibNode> children = new NonSyncVector<>(1);
 
     /**
      * The number of sub nodes.
+     * <p>
+     *  子节点的数量。
      */
     private int nbChildren= 0;
 

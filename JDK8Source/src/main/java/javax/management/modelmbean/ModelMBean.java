@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -59,6 +62,21 @@ import javax.management.RuntimeOperationsException;
  * not have to be thrown by the implementation except in the scenarios described in the specification
  * and javadoc.
  *
+ * <p>
+ *  此接口必须由ModelMBeans实现。每个JMX代理都必须附带此接口的实现。
+ * <P>
+ *  希望可管理的Java资源使用MBeanServer的createMBean方法实例化ModelMBean。
+ * 然后,资源为ModelMBean实例设置ModelMBeanInfo(带有Descriptors)。
+ * 通过ModelMBean的ModelMBeanInfo公开的属性和操作可以从MBean,连接器/适配器(如其他MBean)访问。
+ * 通过ModelMBeanInfo描述符,可以定义托管应用程序中的值和方法,并将其映射到ModelMBean的属性和操作。
+ * 此映射可以在开发期间在XML格式的文件中定义,也可以在运行时以动态和编程方式定义。
+ * <P>
+ *  在MBeanServer中实例化的每个ModelMBean变得易于管理：其属性和操作可通过连接到该MBeanServer的连接器/适配器远程访问。
+ * 不能在MBeanServer中注册Java对象,除非它是符合JMX的MBean。通过实例化ModelMBean,保证MBean有效的资源。
+ * <P>
+ * 必须在每个公共方法上抛出MBeanException和RuntimeOperationsException。这允许包装来自分布式通信(RMI,EJB等)的异常。
+ * 这些异常不必由实现抛出,除非在规范和javadoc中描述的情况。
+ * 
  * @since 1.5
  */
 
@@ -81,6 +99,9 @@ public interface ModelMBean extends
          * a {@link javax.management.RuntimeOperationsException} wrapping an
          * {@link IllegalStateException}
          *
+         * <p>
+         * 
+         * 
          * @param inModelMBeanInfo The ModelMBeanInfo object to be used
          *        by the ModelMBean.
          *
@@ -102,6 +123,13 @@ public interface ModelMBean extends
          * execute all methods in this ModelMBean management interface
          * (MBeanInfo and Descriptors).
          *
+         * <p>
+         *  使用传入的ModelMBeanInfo初始化ModelMBean对象。只要未向MBeanServer注册,就可以在ModelMBean上设置自定义的ModelMBeanInfo。
+         * <br>
+         *  一旦在ModelMBean上自定义并设置了ModelMBean的ModelMBeanInfo(带有Descriptors),就可以向MBeanServer注册ModelMBean。
+         * <P>
+         *  如果ModelMBean当前已注册,则此方法会抛出一个{@link javax.management.RuntimeOperationsException}包装一个{@link IllegalStateException}
+         * 
          * @param mr Object that is the managed resource
          * @param mr_type The type of reference for the managed resource.  Can be: ObjectReference,
          *               Handle, IOR, EJBHandle, RMIReference.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,11 @@ import java.util.Locale;
  * value is immutable.
  * <P>
  *
+ * <p>
+ *  类TextSyntax是一个抽象基类,提供其值为字符串的所有属性的通用实现。文本属性包括指示自然语言的区域设置。因此,文本属性始终表示已本地化的字符串。一旦构造,文本属性的值是不可变的。
+ * <P>
+ * 
+ * 
  * @author  David Mendenhall
  * @author  Alan Kaminsky
  */
@@ -46,12 +52,20 @@ public abstract class TextSyntax implements Serializable, Cloneable {
 
     /**
      * String value of this text attribute.
+     * <p>
+     *  此文本属性的字符串值。
+     * 
+     * 
      * @serial
      */
     private String value;
 
     /**
      * Locale of this text attribute.
+     * <p>
+     *  此文本属性的区域设置。
+     * 
+     * 
      * @serial
      */
     private Locale locale;
@@ -59,6 +73,10 @@ public abstract class TextSyntax implements Serializable, Cloneable {
     /**
      * Constructs a TextAttribute with the specified string and locale.
      *
+     * <p>
+     *  构造具有指定字符串和语言环境的TextAttribute。
+     * 
+     * 
      * @param  value   Text string.
      * @param  locale  Natural language of the text string. null
      * is interpreted to mean the default locale for as returned
@@ -88,6 +106,10 @@ public abstract class TextSyntax implements Serializable, Cloneable {
 
     /**
      * Returns this text attribute's text string.
+     * <p>
+     *  返回此文本属性的文本字符串。
+     * 
+     * 
      * @return the text string.
      */
     public String getValue() {
@@ -96,6 +118,10 @@ public abstract class TextSyntax implements Serializable, Cloneable {
 
     /**
      * Returns this text attribute's text string's natural language (locale).
+     * <p>
+     *  返回此文本属性的文本字符串的自然语言(区域设置)。
+     * 
+     * 
      * @return the locale
      */
     public Locale getLocale() {
@@ -105,6 +131,10 @@ public abstract class TextSyntax implements Serializable, Cloneable {
     /**
      * Returns a hashcode for this text attribute.
      *
+     * <p>
+     *  返回此文本属性的哈希码。
+     * 
+     * 
      * @return  A hashcode value for this object.
      */
     public int hashCode() {
@@ -127,6 +157,16 @@ public abstract class TextSyntax implements Serializable, Cloneable {
      * equal.
      * </OL>
      *
+     * <p>
+     *  返回此文本属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE> object </CODE>是TextSyntax类的实例。
+     * <LI>
+     *  此文本属性的底层字符串和<CODE>对象</CODE>的底层字符串是相等的。
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this text
@@ -143,6 +183,12 @@ public abstract class TextSyntax implements Serializable, Cloneable {
      * Returns a String identifying this text attribute. The String is
      * the attribute's underlying text string.
      *
+     * <p>
+     * <LI>
+     *  此文本属性的区域设置和<CODE>对象</CODE>的区域设置是相等的。
+     * </OL>
+     * 
+     * 
      * @return  A String identifying this object.
      */
     public String toString(){

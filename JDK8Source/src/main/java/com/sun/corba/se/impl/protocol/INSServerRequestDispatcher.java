@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.protocol;
@@ -50,6 +54,10 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException;
  * finds the target IOR and does location forward.
  * XXX PI points are not invoked in either dispatch() or locate() method this
  * should be fixed in Tiger.
+ * <p>
+ *  INSServerRequestDispatcher处理所有与INS相关的发现请求。 INS服务可以使用ORB.register_initial_reference()注册。
+ * 这个Singleton子合同只找到目标IOR,并将位置向前。 XXX在调度()或locate()方法中不调用PI点,这应该在Tiger中修复。
+ * 
  */
 public class INSServerRequestDispatcher
     implements CorbaServerRequestDispatcher
@@ -85,6 +93,7 @@ public class INSServerRequestDispatcher
 
     /**
      * getINSReference if it is registered in INSObjectKeyMap.
+     * <p>
      */
     private IOR getINSReference( String insKey ) {
         IOR entry = ORBUtility.getIOR( orb.getLocalResolver().resolve( insKey ) ) ;

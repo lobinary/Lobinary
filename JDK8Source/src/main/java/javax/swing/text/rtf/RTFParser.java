@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,12 @@ import java.lang.*;
  * Normally programmers will only use <b>RTFFilter</b>, a subclass of this class that knows what to
  * do with the tokens this class parses.
  *
+ * <p>
+ *  <b> RTFParser </b>是<b> AbstractFilter </b>的子类,它理解基本的RTF语法,并向其子类传递控制字,文本和开始/结束组指示的流。
+ * 
+ *  通常程序员只会使用<b> RTFFilter </b>,这个类的子类知道对该类进行解析的令牌做什么。
+ * 
+ * 
  * @see AbstractFilter
  * @see RTFFilter
  */
@@ -55,6 +62,10 @@ abstract class RTFParser extends AbstractFilter
 
   /** A stream to which to write warnings and debugging information
    *  while parsing. This is set to <code>System.out</code> to log
+   * <p>
+   *  同时解析。这被设置为<code> System.out </code>以进行日志
+   * 
+   * 
    *  any anomalous information to stdout. */
   protected PrintStream warnings;
 
@@ -71,9 +82,15 @@ abstract class RTFParser extends AbstractFilter
 
   /** Implemented by subclasses to interpret a parameter-less RTF keyword.
    *  The keyword is passed without the leading '/' or any delimiting
+   * <p>
+   *  传递的关键字不带前导'/'或任何分隔符
+   * 
+   * 
    *  whitespace. */
   public abstract boolean handleKeyword(String keyword);
   /** Implemented by subclasses to interpret a keyword with a parameter.
+  /* <p>
+  /* 
    *  @param keyword   The keyword, as with <code>handleKeyword(String)</code>.
    *  @param parameter The parameter following the keyword. */
   public abstract boolean handleKeyword(String keyword, int parameter);
@@ -84,6 +101,8 @@ abstract class RTFParser extends AbstractFilter
   /** Implemented by subclasses to handle the contents of the \bin keyword. */
   public abstract void handleBinaryBlob(byte[] data);
   /** Implemented by subclasses to react to an increase
+  /* <p>
+  /* 
    *  in the nesting level. */
   public abstract void begingroup();
   /** Implemented by subclasses to react to the end of a group. */
@@ -294,6 +313,10 @@ abstract class RTFParser extends AbstractFilter
   /** Flushes any buffered but not yet written characters.
    *  Subclasses which override this method should call this
    *  method <em>before</em> flushing
+   * <p>
+   *  覆盖此方法的子类应在</em>冲洗之前调用此方法
+   * 
+   * 
    *  any of their own buffers. */
   public void flush()
     throws IOException
@@ -307,6 +330,8 @@ abstract class RTFParser extends AbstractFilter
   }
 
   /** Closes the parser. Currently, this simply does a <code>flush()</code>,
+  /* <p>
+  /* 
    *  followed by some minimal consistency checks. */
   public void close()
     throws IOException
@@ -320,6 +345,8 @@ abstract class RTFParser extends AbstractFilter
       /* probably not */
 
       /* this will cause subclasses to behave more reasonably
+      /* <p>
+      /* 
          some of the time */
       while (level > 0) {
           endgroup();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,12 @@ import javax.management.NotCompliantMBeanException;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>2504952983494636987L</code>.
  *
+ * <p>
+ *  RoleInfo对象总结关系类型中的角色。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> 2504952983494636987L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -88,6 +95,8 @@ public class RoleInfo implements Serializable {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField name String Role name
      * @serialField isReadable boolean Read access mode: <code>true</code> if role is readable
      * @serialField isWritable boolean Write access mode: <code>true</code> if role is writable
@@ -123,6 +132,9 @@ public class RoleInfo implements Serializable {
 
     /**
      * To specify an unlimited cardinality.
+     * <p>
+     *  指定无限基数。
+     * 
      */
     public static final int ROLE_CARDINALITY_INFINITY = -1;
 
@@ -131,36 +143,50 @@ public class RoleInfo implements Serializable {
     //
 
     /**
+    /* <p>
+    /* 
      * @serial Role name
      */
     private String name = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Read access mode: <code>true</code> if role is readable
      */
     private boolean isReadable;
 
     /**
+    /* <p>
+    /* 
      * @serial Write access mode: <code>true</code> if role is writable
      */
     private boolean isWritable;
 
     /**
+    /* <p>
+    /* 
      * @serial Role description
      */
     private String description = null;
 
     /**
+    /* <p>
+    /* 
      * @serial Minimum degree (i.e. minimum number of referenced MBeans in corresponding role)
      */
     private int minDegree;
 
     /**
+    /* <p>
+    /* 
      * @serial Maximum degree (i.e. maximum number of referenced MBeans in corresponding role)
      */
     private int maxDegree;
 
     /**
+    /* <p>
+    /* 
      * @serial Name of class of MBean(s) expected to be referenced in corresponding role
      */
     private String referencedMBeanClassName = null;
@@ -172,6 +198,10 @@ public class RoleInfo implements Serializable {
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param roleName  name of the role.
      * @param mbeanClassName  name of the class of MBean(s) expected to
      * be referenced in corresponding role.  If an MBean <em>M</em> is in
@@ -225,6 +255,10 @@ public class RoleInfo implements Serializable {
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param roleName  name of the role
      * @param mbeanClassName  name of the class of MBean(s) expected to
      * be referenced in corresponding role.  If an MBean <em>M</em> is in
@@ -273,6 +307,10 @@ public class RoleInfo implements Serializable {
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param roleName  name of the role
      * @param mbeanClassName  name of the class of MBean(s) expected to
      * be referenced in corresponding role.  If an MBean <em>M</em> is in
@@ -316,6 +354,10 @@ public class RoleInfo implements Serializable {
     /**
      * Copy constructor.
      *
+     * <p>
+     *  复制构造函数。
+     * 
+     * 
      * @param roleInfo the <tt>RoleInfo</tt> instance to be copied.
      *
      * @exception IllegalArgumentException  if null parameter
@@ -351,6 +393,10 @@ public class RoleInfo implements Serializable {
     /**
      * Returns the name of the role.
      *
+     * <p>
+     *  返回角色的名称。
+     * 
+     * 
      * @return the name of the role.
      */
     public String getName() {
@@ -360,6 +406,10 @@ public class RoleInfo implements Serializable {
     /**
      * Returns read access mode for the role (true if it is readable).
      *
+     * <p>
+     *  返回角色的读访问方式(如果可读,则为true)。
+     * 
+     * 
      * @return true if the role is readable.
      */
     public boolean isReadable() {
@@ -369,6 +419,10 @@ public class RoleInfo implements Serializable {
     /**
      * Returns write access mode for the role (true if it is writable).
      *
+     * <p>
+     *  返回角色的写访问模式(如果可写,则为true)。
+     * 
+     * 
      * @return true if the role is writable.
      */
     public boolean isWritable() {
@@ -378,6 +432,10 @@ public class RoleInfo implements Serializable {
     /**
      * Returns description text for the role.
      *
+     * <p>
+     *  返回角色的描述文本。
+     * 
+     * 
      * @return the description of the role.
      */
     public String getDescription() {
@@ -387,6 +445,10 @@ public class RoleInfo implements Serializable {
     /**
      * Returns minimum degree for corresponding role reference.
      *
+     * <p>
+     *  返回对应角色引用的最小度。
+     * 
+     * 
      * @return the minimum degree.
      */
     public int getMinDegree() {
@@ -396,6 +458,10 @@ public class RoleInfo implements Serializable {
     /**
      * Returns maximum degree for corresponding role reference.
      *
+     * <p>
+     *  返回对应角色引用的最大度数。
+     * 
+     * 
      * @return the maximum degree.
      */
     public int getMaxDegree() {
@@ -406,6 +472,10 @@ public class RoleInfo implements Serializable {
      * <p>Returns name of type of MBean expected to be referenced in
      * corresponding role.</p>
      *
+     * <p>
+     *  <p>返回预期在相应角色中引用的MBean的类型的名称。</p>
+     * 
+     * 
      * @return the name of the referenced type.
      */
     public String getRefMBeanClassName() {
@@ -416,6 +486,10 @@ public class RoleInfo implements Serializable {
      * Returns true if the <tt>value</tt> parameter is greater than or equal to
      * the expected minimum degree, false otherwise.
      *
+     * <p>
+     *  如果<tt> value </tt>参数大于或等于预期的最小度数,则返回true,否则返回false。
+     * 
+     * 
      * @param value  the value to be checked
      *
      * @return true if greater than or equal to minimum degree, false otherwise.
@@ -434,6 +508,10 @@ public class RoleInfo implements Serializable {
      * Returns true if the <tt>value</tt> parameter is lower than or equal to
      * the expected maximum degree, false otherwise.
      *
+     * <p>
+     *  如果<tt> value </tt>参数小于或等于预期的最大值,则返回true,否则返回false。
+     * 
+     * 
      * @param value  the value to be checked
      *
      * @return true if lower than or equal to maximum degree, false otherwise.
@@ -452,6 +530,10 @@ public class RoleInfo implements Serializable {
     /**
      * Returns a string describing the role info.
      *
+     * <p>
+     *  返回描述角色信息的字符串。
+     * 
+     * 
      * @return a description of the role info.
      */
     public String toString() {
@@ -526,6 +608,9 @@ public class RoleInfo implements Serializable {
 
     /**
      * Deserializes a {@link RoleInfo} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link RoleInfo}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -581,6 +666,8 @@ public class RoleInfo implements Serializable {
 
     /**
      * Serializes a {@link RoleInfo} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link RoleInfo}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

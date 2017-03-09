@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,25 @@ import sun.security.util.*;
  * {@code X509Certificate} return X500Principals representing the
  * issuer and subject fields of the certificate.
  *
+ * <p>
+ *  <p>此类别代表X.500 {@code Principal}。
+ *  {@code X500Principal}由可分辨名称表示,例如"CN = Duke,OU = JavaSoft,O = Sun Microsystems,C = US"。
+ * 
+ *  <p>此类可以通过使用可分辨名称的字符串表示形式或使用可分辨名称的ASN.1 DER编码字节表示形式来实例化。
+ * 专有名称的字符串表示的当前规范在<a href="http://www.ietf.org/rfc/rfc2253.txt"> RFC 2253：轻量级目录访问协议(v3)中定义：UTF-8可分辨名称的字
+ * 符串表示</a>。
+ *  <p>此类可以通过使用可分辨名称的字符串表示形式或使用可分辨名称的ASN.1 DER编码字节表示形式来实例化。
+ * 但是,此类接受来自RFC 2253和<a href="http://www.ietf.org/rfc/rfc1779.txt"> RFC 1779：可识别名称的字符串表示形式</a>的字符串格式,以及还
+ * 可以识别<a href="http://www.ietf.org/rfc/rfc3280.txt"> RFC 3280：Internet X.509公钥基础结构证书和CRL配置文件中定义的OID(对象标
+ * 识符)的属性类型关键字</a>。
+ *  <p>此类可以通过使用可分辨名称的字符串表示形式或使用可分辨名称的ASN.1 DER编码字节表示形式来实例化。
+ * 
+ *  <p>此{@code X500Principal}的字符串表示形式可以通过调用{@code getName}方法获得。
+ * 
+ *  <p>请注意,{@code X509Certificate}的{@code getSubjectX500Principal}和{@code getIssuerX500Principal}方法返回代表证
+ * 书的发行者和主题字段的X500Principals。
+ * 
+ * 
  * @see java.security.cert.X509Certificate
  * @since 1.4
  */
@@ -67,14 +87,23 @@ public final class X500Principal implements Principal, java.io.Serializable {
 
     /**
      * RFC 1779 String format of Distinguished Names.
+     * <p>
+     * RFC 1779可分辨名称的字符串格式。
+     * 
      */
     public static final String RFC1779 = "RFC1779";
     /**
      * RFC 2253 String format of Distinguished Names.
+     * <p>
+     *  RFC 2253可分辨名称的字符串格式。
+     * 
      */
     public static final String RFC2253 = "RFC2253";
     /**
      * Canonical String format of Distinguished Names.
+     * <p>
+     *  可分辨名称的规范字符串格式。
+     * 
      */
     public static final String CANONICAL = "CANONICAL";
 
@@ -82,6 +111,11 @@ public final class X500Principal implements Principal, java.io.Serializable {
      * The X500Name representing this principal.
      *
      * NOTE: this field is reflectively accessed from within X500Name.
+     * <p>
+     *  代表此主体的X500Name。
+     * 
+     *  注意：此字段从X500Name内反射访问。
+     * 
      */
     private transient X500Name thisX500Name;
 
@@ -91,6 +125,11 @@ public final class X500Principal implements Principal, java.io.Serializable {
      * NOTE: The constructor is package private. It is intended to be accessed
      * using privileged reflection from classes in sun.security.*.
      * Currently referenced from sun.security.x509.X500Name.asX500Principal().
+     * <p>
+     *  通过包装X500Name创建X500Principal。
+     * 
+     *  注意：构造函数是包私有的。它旨在使用sun.security。*中类的特权反射访问。目前从sun.security.x509.X500Name.asX500Principal()引用。
+     * 
      */
     X500Principal(X500Name x500Name) {
         thisX500Name = x500Name;
@@ -118,6 +157,22 @@ public final class X500Principal implements Principal, java.io.Serializable {
      *
      * <p>{@code numericoid = number 1*( DOT number ) }
      *
+     * <p>
+     *  从X.500可分辨名称的字符串表示形式创建{@code X500Principal}(例如："CN = Duke,OU = JavaSoft,O = Sun Microsystems,C = US")
+     * 。
+     * 可分辨名称必须使用RFC 1779或RFC 2253中定义的语法指定(格式是可以接受的)。
+     * 
+     *  <p>此构造函数识别在RFC 1779和RFC 2253(并列在{@link #getName(String format)getName(String format)})中定义的属性类型关键字,以及
+     * T,DNQ或DNQUALIFIER,SURNAME, GIVENNAME,INITIALS,GENERATION,EMAILADDRESS和SERIALNUMBER关键字,其对象标识符(OID)在RFC
+     *  3280及其后续版本中定义。
+     * 任何其他属性类型必须指定为OID。
+     * 
+     *  <p>此实施强制实施比RFC 1779和2253中定义的更严格的OID语法。
+     * 它使用在<a href="http://www.ietf.org/rfc/rfc4512.txt"> RFC中定义的更正确的语法4512 </a>,它指定OID至少包含2个数字：。
+     * 
+     *  <p> {@ code numericoid = number 1 *(DOT number)}
+     * 
+     * 
      * @param name an X.500 distinguished name in RFC 1779 or RFC 2253 format
      * @exception NullPointerException if the {@code name}
      *                  is {@code null}
@@ -153,6 +208,21 @@ public final class X500Principal implements Principal, java.io.Serializable {
      *
      * <p>{@code numericoid = number 1*( DOT number ) }
      *
+     * <p>
+     * 从X.500可分辨名称的字符串表示形式创建{@code X500Principal}(例如："CN = Duke,OU = JavaSoft,O = Sun Microsystems,C = US")。
+     * 可分辨名称必须使用RFC 1779或RFC 2253中定义的语法指定(格式是可以接受的)。
+     * 
+     *  <p>此构造函数识别{@link#X500Principal(String)}中指定的属性类型关键字,并识别在{@code keywordMap}参数中包含条目的其他关键字。
+     *  keywordMap中的关键字条目优先于{@code X500Principal(String)}识别的默认关键字。关键字必须在所有大写字母中指定,否则它们将被忽略。
+     * 错误指定的关键字将被忽略;但是如果名称中的关键字映射到不正确指定的对象标识符(OID),则会抛出{@code IllegalArgumentException}。
+     * 允许有2个不同的关键字映射到同一OID。
+     * 
+     *  <p>此实施强制实施比RFC 1779和2253中定义的更严格的OID语法。
+     * 它使用在<a href="http://www.ietf.org/rfc/rfc4512.txt"> RFC中定义的更正确的语法4512 </a>,它指定OID至少包含2个数字：。
+     * 
+     *  <p> {@ code numericoid = number 1 *(DOT number)}
+     * 
+     * 
      * @param name an X.500 distinguished name in RFC 1779 or RFC 2253 format
      * @param keywordMap an attribute type keyword map, where each key is a
      *   keyword String that maps to a corresponding object identifier in String
@@ -216,6 +286,22 @@ public final class X500Principal implements Principal, java.io.Serializable {
      *       bmpString               BMPString (SIZE (1..MAX)) }
      * }</pre>
      *
+     * <p>
+     *  以ASN.1 DER编码形式的专有名称创建{@code X500Principal}。该结构的ASN.1表示法如下。
+     *  <pre> {@ code Name :: = CHOICE {RDNSequence}。
+     * 
+     *  RDNSequence :: = SEQUENCE OF RelativeDistinguishedName
+     * 
+     * RelativeDistinguishedName :: = SET SIZE(1.. MAX)of AttributeTypeAndValue
+     * 
+     *  AttributeTypeAndValue :: = SEQUENCE {type AttributeType,value AttributeValue}
+     * 
+     *  AttributeType :: = OBJECT IDENTIFIER
+     * 
+     *  AttributeValue :: = ANY DEFINED BY AttributeType .... DirectoryString :: = CHOICE {teletexString TeletexString(SIZE(1..MAX)),printableString PrintableString(SIZE(1..MAX)),universalString UniversalString(SIZE MAX)),utf8String UTF8String(SIZE(1..MAX)),bmpString BMPString(SIZE(1..MAX))}
+     * } </pre>。
+     * 
+     * 
      * @param name a byte array containing the distinguished name in ASN.1
      * DER encoded form
      * @throws IllegalArgumentException if an encoding error occurs
@@ -242,6 +328,13 @@ public final class X500Principal implements Principal, java.io.Serializable {
      * <p> The read position of the input stream is positioned
      * to the next available byte after the encoded distinguished name.
      *
+     * <p>
+     *  从包含ASN.1 DER编码形式的专有名称的{@code InputStream}中创建{@code X500Principal}。
+     * 此结构的ASN.1符号在{@link#X500Principal(byte [] name)X500Principal(byte [] name}}的文档中提供。
+     * 
+     *  <p>输入流的读取位置位于编码的可分辨名称后的下一个可用字节。
+     * 
+     * 
      * @param is an {@code InputStream} containing the distinguished
      *          name in ASN.1 DER encoded form
      *
@@ -286,6 +379,12 @@ public final class X500Principal implements Principal, java.io.Serializable {
      * <p>This method is equivalent to calling
      * {@code getName(X500Principal.RFC2253)}.
      *
+     * <p>
+     *  使用RFC 2253中定义的格式返回X.500可分辨名称的字符串表示形式。
+     * 
+     *  <p>此方法相当于调用{@code getName(X500Principal.RFC2253)}。
+     * 
+     * 
      * @return the distinguished name of this {@code X500Principal}
      */
     public String getName() {
@@ -347,6 +446,29 @@ public final class X500Principal implements Principal, java.io.Serializable {
      *
      * <p> Additional standard formats may be introduced in the future.
      *
+     * <p>
+     *  返回使用指定格式的X.500可分辨名称的字符串表示形式。格式的有效值为"RFC1779","RFC2253"和"CANONICAL"(不区分大小写)。
+     * 
+     * <p>如果指定"RFC1779"作为格式,则此方法将发出在RFC 1779(CN,L,ST,O,OU,C,STREET)中定义的属性类型关键字。任何其他属性类型作为OID发出。
+     * 
+     *  <p>如果指定"RFC2253"作为格式,则此方法发出在RFC 2253(CN,L,ST,O,OU,C,STREET,DC,UID)中定义的属性类型关键字。任何其他属性类型作为OID发出。
+     * 在严格的阅读下,RFC 2253只指定一个UTF-8字符串表示。此方法返回的字符串是通过解码此UTF-8表示形式实现的Unicode字符串。
+     * 
+     *  <p>如果指定了"CANONICAL"作为格式,此方法将返回具有以下附加规范化的RFC 2253一致性字符串表示形式：
+     * 
+     * <ol>
+     * <li>前导零会从以点分十进制OID编码的属性类型中删除<li>类型为PrintableString和UTF8String的DirectoryString属性值不以十六进制格式输出<li> Direct
+     * oryString输出除PrintableString和UTF8String之外的类型的属性值十六进制格式<li>从非十六进制属性值中除去前导和尾随空格字符(除非该值完全由空格字符组成)<li>一个或多
+     * 个空格字符的内部子字符串转换为非空格字符的单个空格十六进制属性值<li>包含多个属性值断言(AVA)的相对区分名称按以下顺序输出：包含标准关键字的AVA的字母排序,后面是包含OID关键字的AVA的数字排
+     * 序。
+     *  <li>转义的属性值中的唯一字符是RFC 2253状态的第2.4节必须转义的字符(使用前面的反斜杠字符进行转义)<li>整个名称使用{@code String .toUpperCase(Locale.US)}
+     *  <li>使用{@code String.toLowerCase(Locale.US)}将整个名称转换为小写。
+     * <li>最后使用规范化形式KD对名称进行规范化,如Unicode中所述标准和UAX#15。
+     * </ol>
+     * 
+     *  <p>将来可能会推出其他标准格式。
+     * 
+     * 
      * @param format the format to use
      *
      * @return a string representation of this {@code X500Principal}
@@ -389,6 +511,19 @@ public final class X500Principal implements Principal, java.io.Serializable {
      * you are unsure if these keywords will be recognized by other
      * implementations.
      *
+     * <p>
+     * 返回使用指定格式的X.500可分辨名称的字符串表示形式。格式的有效值为"RFC1779"和"RFC2253"(不区分大小写)。
+     * 不允许使用"CANONICAL",并且将抛出{@code IllegalArgumentException}。
+     * 
+     *  <p>此方法以{@link #getName(String)}中指定的格式返回字符串,并为在{@code oidMap}参数中具有条目的OID发出其他属性类型关键字。
+     *  oidMap中的OID条目优先于{@code getName(String)}识别的默认OID。
+     * 忽略不正确指定的OID;但是如果名称中的OID映射到不正确指定的关键字,则会抛出{@code IllegalArgumentException}。
+     * 
+     *  <p>将来可能会推出其他标准格式。
+     * 
+     *  <p>警告：其他实现可能无法识别其他属性类型关键字;因此如果您不确定这些关键字是否会被其他实现识别,请不要使用此方法。
+     * 
+     * 
      * @param format the format to use
      * @param oidMap an OID map, where each key is an object identifier in
      *  String form (a sequence of nonnegative integers separated by periods)
@@ -425,6 +560,13 @@ public final class X500Principal implements Principal, java.io.Serializable {
      * <p>Note that the byte array returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  以ASN.1 DER编码形式返回可分辨名称。
+     * 此结构的ASN.1符号在{@link#X500Principal(byte [] name)X500Principal(byte [] name}}的文档中提供。
+     * 
+     *  <p>请注意,将返回的字节数组进行克隆以防止后续修改。
+     * 
+     * 
      * @return a byte array containing the distinguished name in ASN.1 DER
      * encoded form
      */
@@ -440,6 +582,10 @@ public final class X500Principal implements Principal, java.io.Serializable {
      * Return a user-friendly string representation of this
      * {@code X500Principal}.
      *
+     * <p>
+     *  返回此{@code X500Principal}的用户友好的字符串表示形式。
+     * 
+     * 
      * @return a string representation of this {@code X500Principal}
      */
     public String toString() {
@@ -458,6 +604,15 @@ public final class X500Principal implements Principal, java.io.Serializable {
      *
      * <p> This implementation is compliant with the requirements of RFC 3280.
      *
+     * <p>
+     *  比较指定的{@code Object}与此{@code X500Principal}的相等性。
+     * 
+     * <p>具体来说,如果{@code Object} <i> o </i>是{@code X500Principal},并且如果相应的规范字符串表示(通过{@code getName (X500Principal.CANONICAL)}
+     * 方法)和<i> o </i>是相等的。
+     * 
+     *  <p>此实施符合RFC 3280的要求。
+     * 
+     * 
      * @param o Object to be compared for equality with this
      *          {@code X500Principal}
      *
@@ -481,6 +636,12 @@ public final class X500Principal implements Principal, java.io.Serializable {
      * <p> The hash code is calculated via:
      * {@code getName(X500Principal.CANONICAL).hashCode()}
      *
+     * <p>
+     *  返回此{@code X500Principal}的哈希码。
+     * 
+     *  <p>哈希码通过以下方式计算：{@code getName(X500Principal.CANONICAL).hashCode()}
+     * 
+     * 
      * @return a hash code for this {@code X500Principal}
      */
     public int hashCode() {
@@ -490,6 +651,10 @@ public final class X500Principal implements Principal, java.io.Serializable {
     /**
      * Save the X500Principal object to a stream.
      *
+     * <p>
+     *  将X500Principal对象保存到流。
+     * 
+     * 
      * @serialData this {@code X500Principal} is serialized
      *          by writing out its DER-encoded form
      *          (the value of {@code getEncoded} is serialized).
@@ -501,6 +666,8 @@ public final class X500Principal implements Principal, java.io.Serializable {
 
     /**
      * Reads this object from a stream (i.e., deserializes it).
+     * <p>
+     *  从流中读取此对象(即,对其进行反序列化)。
      */
     private void readObject(java.io.ObjectInputStream s)
         throws java.io.IOException,

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,14 @@ import com.sun.corba.se.pept.protocol.MessageMediator;
  * <p>Note: the protocol block may also use the <code>OutputObject</code> to
  * set header metadata.</p>
  *
+ * <p>
+ *  <p> <code> OutputObject </code>是呈现块用于将编程语言类型数据提供给要编码并在消息中发送的编码块的接口。 </p>
+ * 
+ *  <p> <code> OutputObject </code>的实现包含编码数据。
+ * 当表示块将编程语言类型数据提供给<code> OutputObject </code>时,<code> OutputObject </code>的实现负责将该数据转换为特定编码的数据的编码表示。
+ *  p>。
+ * 
+ * 
  * @author Harold Carr
 */
 public interface OutputObject

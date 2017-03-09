@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,27 @@ import java.util.Enumeration;
   * Subsequent invocation of any method on that enumeration
   * will yield undefined results.
   *
+  * <p>
+  *  此接口用于枚举javax.naming和javax.naming.directory包中的方法返回的列表。它扩展枚举允许在枚举期间抛出异常。
+  * p>
+  *  当诸如list(),listBindings()或search()的方法返回NamingEnumeration时,所有遇到的异常都保留,直到所有结果都返回。
+  * 在枚举结束时,抛出异常(通过hasMore());。
+  * <p>
+  *  例如,如果list()只返回部分答案,则相应的异常将是PartialResultException。 list()首先返回一个NamingEnumeration。
+  * 当最后的结果由NamingEnumeration的next()返回时,调用hasMore()将导致抛出PartialResultException。
+  * p>
+  *  在另一个示例中,如果search()方法被调用时指定的大小限制为'n'。如果答案包含多于n个结果,search()将首先返回一个NamingEnumeration。
+  * 当通过调用NamingEnumeration上的next()返回第n个结果时,当调用hasMore()时会抛出SizeLimitExceedException。
+  * p>
+  * 注意,如果程序使用hasMoreElements()和nextElement()而不是遍历NamingEnumeration,因为这些方法不能抛出异常,不会抛出异常。
+  * 相反,在前面的示例中,在nextElement()返回第n个结果后,调用hasMoreElements()将返回false。
+  * p>
+  *  还要注意,当枚举中没有元素时,如果程序调用next()或nextElement(),则抛出NoSuchElementException。
+  * 程序可以通过使用hasMore()和hasMoreElements()来检查是否已达到枚举的结束,从而避免此异常。
+  * p>
+  *  如果在枚举期间抛出异常,枚举将无效。随后调用该枚举上的任何方法将产生未定义的结果。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -92,6 +114,13 @@ public interface NamingEnumeration<T> extends Enumeration<T> {
       * that there was a problem in obtaining the next element,
       * for example, due to a referral or server unavailability, etc.
       *
+      * <p>
+      *  检索枚举中的下一个元素。此方法允许命名在检索要由应用程序捕获和处理的下一个元素时遇到的异常。
+      * <p>
+      *  注意,<tt> next()</tt>也可以抛出运行时异常NoSuchElementException以指示调用者正在尝试枚举超出枚举结束。
+      * 这与NamingException不同,NamingException表示在获取下一个元素时出现问题,例如由于引用或服务器不可用等原因。
+      * 
+      * 
       * @return         The possibly null element in the enumeration.
       *     null is only valid for enumerations that can return
       *     null (e.g. Attribute.getAll() returns an enumeration of
@@ -110,6 +139,10 @@ public interface NamingEnumeration<T> extends Enumeration<T> {
       * determining whether there are more elements to be caught and handled
       * by the application.
       *
+      * <p>
+      * 确定枚举中是否还有其他元素。此方法允许在确定是否有更多元素被应用程序捕获和处理时遇到的命名异常。
+      * 
+      * 
       * @return         true if there is more in the enumeration ; false otherwise.
       * @exception NamingException
       *                 If a naming exception is encountered while attempting
@@ -139,6 +172,13 @@ public interface NamingEnumeration<T> extends Enumeration<T> {
      * Implementations are encouraged to use appropriate algorithms to
      * manage their resources when client omits the <tt>close()</tt> calls.
      *
+     * <p>
+     *  关闭此枚举。
+     * 
+     *  在此枚举上调用此方法后,枚举将无效,随后对其任何方法的调用将产生未定义的结果。此方法用于中止枚举以释放资源。
+     * 如果枚举进行到结束 - 即,直到<tt> hasMoreElements()</tt>或<tt> hasMore()</tt>返回<tt> false </tt>  - 资源将被释放并且不需要显式调用<tt>
+     *  close()</tt>。
+     * 
      * @exception NamingException If a naming exception is encountered
      * while closing the enumeration.
      * @since 1.3

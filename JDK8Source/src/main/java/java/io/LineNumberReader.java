@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,15 @@ package java.io;
  * line feed ('\n'), a carriage return ('\r'), or a carriage return followed
  * immediately by a linefeed.
  *
+ * <p>
+ *  缓冲的字符输入流,其跟踪行号。此类定义方法{@link #setLineNumber(int)}和{@link #getLineNumber()}分别设置和获取当前行号。
+ * 
+ *  <p>默认情况下,行编号从0开始。该数字在读取数据时在每个<a href="#lt">行终止符</a>处递增,并且可以通过调用<tt> setLineNumber (int)</tt>。
+ * 但请注意,<tt> setLineNumber(int)</tt>实际上不会更改流中的当前位置;它只更改<tt> getLineNumber()</tt>返回的值。
+ * 
+ *  <p>线被认为是<a name="lt">终止于</a>换行符('\ n'),回车符('\ r')或回车符然后立即换行。
+ * 
+ * 
  * @author      Mark Reinhold
  * @since       JDK1.1
  */
@@ -65,6 +75,10 @@ public class LineNumberReader extends BufferedReader {
      * Create a new line-numbering reader, using the default input-buffer
      * size.
      *
+     * <p>
+     *  使用默认的输入缓冲区大小创建一个新的行号码阅读器。
+     * 
+     * 
      * @param  in
      *         A Reader object to provide the underlying stream
      */
@@ -76,6 +90,10 @@ public class LineNumberReader extends BufferedReader {
      * Create a new line-numbering reader, reading characters into a buffer of
      * the given size.
      *
+     * <p>
+     *  创建一个新的行号码阅读器,读取字符到给定大小的缓冲区。
+     * 
+     * 
      * @param  in
      *         A Reader object to provide the underlying stream
      *
@@ -89,6 +107,10 @@ public class LineNumberReader extends BufferedReader {
     /**
      * Set the current line number.
      *
+     * <p>
+     *  设置当前行号。
+     * 
+     * 
      * @param  lineNumber
      *         An int specifying the line number
      *
@@ -101,6 +123,10 @@ public class LineNumberReader extends BufferedReader {
     /**
      * Get the current line number.
      *
+     * <p>
+     *  获取当前行号。
+     * 
+     * 
      * @return  The current line number
      *
      * @see #setLineNumber
@@ -114,6 +140,10 @@ public class LineNumberReader extends BufferedReader {
      * compressed into single newline ('\n') characters.  Whenever a line
      * terminator is read the current line number is incremented.
      *
+     * <p>
+     *  读取单个字符。 <a href="#lt">行终结符</a>压缩为单个换行符('\ n')个字符。无论何时读取行终止符,当前行号都会递增。
+     * 
+     * 
      * @return  The character read, or -1 if the end of the stream has been
      *          reached
      *
@@ -145,6 +175,10 @@ public class LineNumberReader extends BufferedReader {
      * href="#lt">line terminator</a> is read the current line number is
      * incremented.
      *
+     * <p>
+     *  将字符读入数组的一部分。每当读取<a href="#lt">行终结符</a>时,当前行号都会递增。
+     * 
+     * 
      * @param  cbuf
      *         Destination buffer
      *
@@ -189,6 +223,10 @@ public class LineNumberReader extends BufferedReader {
      * Read a line of text.  Whenever a <a href="#lt">line terminator</a> is
      * read the current line number is incremented.
      *
+     * <p>
+     * 读一行文本。每当读取<a href="#lt">行终结符</a>时,当前行号都会递增。
+     * 
+     * 
      * @return  A String containing the contents of the line, not including
      *          any <a href="#lt">line termination characters</a>, or
      *          <tt>null</tt> if the end of the stream has been reached
@@ -215,6 +253,10 @@ public class LineNumberReader extends BufferedReader {
     /**
      * Skip characters.
      *
+     * <p>
+     *  跳过字符。
+     * 
+     * 
      * @param  n
      *         The number of characters to skip
      *
@@ -249,6 +291,10 @@ public class LineNumberReader extends BufferedReader {
      * will attempt to reposition the stream to this point, and will also reset
      * the line number appropriately.
      *
+     * <p>
+     *  标记流中的当前位置。后续调用reset()将尝试将流重新定位到此点,并且还将适当地重置行号。
+     * 
+     * 
      * @param  readAheadLimit
      *         Limit on the number of characters that may be read while still
      *         preserving the mark.  After reading this many characters,
@@ -268,6 +314,9 @@ public class LineNumberReader extends BufferedReader {
     /**
      * Reset the stream to the most recent mark.
      *
+     * <p>
+     *  将流重置为最近的标记。
+     * 
      * @throws  IOException
      *          If the stream has not been marked, or if the mark has been
      *          invalidated

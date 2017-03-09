@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ package java.awt.peer;
  * nor invoke any of the peer methods directly on the peer
  * instances.
  *
+ * <p>
+ *  LightweightPeer接口将组件标记为取决于本机容器,因此可以将与窗口相关的事件路由到组件。因为这仅适用于组件及其扩展,所以此接口扩展ComponentPeer。
+ * <p>
+ * 
  * @author Timothy Prinzing
  */
 public interface LightweightPeer extends ComponentPeer {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会或其许可方(如适用)。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.resolver;
@@ -115,6 +125,63 @@ import sun.reflect.misc.ReflectUtil;
  * </tbody>
  * </table>
  *
+ * <p>
+ *  CatalogManager提供了目录属性的接口。
+ * 
+ *  <p>属性可以来自两个位置：从系统属性或从<i> CatalogManager.properties </i>文件。此类为两者提供了一个透明的接口,系统属性优先于属性文件值。</p>
+ * 
+ *  <p>下表总结了属性：</p>
+ * 
+ * <table border="1">
+ * <thead>
+ * <tr>
+ *  <td>系统属性</td> <td> CatalogManager.propertiesholar属性</td> <td>说明</td>
+ * </tr>
+ * </thead>
+ * <tbody>
+ * <tr>
+ *  <td> xml.catalog.ignoreMissing </td> <td> </td> <td>如果为true,则缺少<i> CatalogManager.properties </i>文件或
+ * 该文件中缺少的属性将不会生成警告消息。
+ * 另请参见<i> ignoreMissingProperties </i>方法。</td>。
+ * </tr>
+ * 
+ * <tr>
+ * <td> xml.catalog.files </td> <td>目录</td> <td>目录文件的<emph>分号分隔的</emph>列表。</td>
+ * </tr>
+ * 
+ * <tr>
+ *  <td> </td> <td> relative-catalogs </td> <td>如果为false,则相对目录URI相对于<i> CatalogManager.properties </i>文件
+ * 的基本URI是绝对的。
+ * 此设置仅适用于从</emph> <i> CatalogManager.properties </i>文件</td>中的<i>目录</i>属性<。
+ * </tr>
+ * 
+ * <tr>
+ *  <td> xml.catalog.verbosity </td> <td> verbosity </td> <td>如果非零,Catalog类将打印信息和调试消息。数字越大,消息越多。</td>
+ * </tr>
+ * 
+ * <tr>
+ *  <td> xml.catalog.prefer </td> <td>首选</td> <td>首选哪个标识符,"public"或"system"?</td>
+ * </tr>
+ * 
+ * <tr>
+ *  <td> xml.catalog.staticCatalog </td> <td> static-catalogue </td> <td>是否应为所有解析构建单个目录,或者为每个解析器创建不同的目录?
+ * </td>。
+ * </tr>
+ * 
+ * <tr>
+ *  <td> xml.catalog.allowPI </td> <td> allow-oasis-xml-catalog-pi </td> <td>如果源文档包含"oasis-xml-catalog"处
+ * 理说明, ?</td>。
+ * </tr>
+ * 
+ * <tr>
+ *  <td> xml.catalog.className </td> <td> catalog-class-name </td> <td>如果您使用方便类<tt> com.sun.org.apache.x
+ * ml.internal。
+ *  resolver.tools。* </tt>),此设置允许您指定用于基础目录的备用类名。</td>。
+ * </tr>
+ * </tbody>
+ * </table>
+ * 
+ * 
  * @see Catalog
  *
  * @author Norman Walsh
@@ -200,6 +267,9 @@ public class CatalogManager {
      * Indicates whether implementation parts should use
      *   service loader (or similar).
      * Note the default value (false) is the safe option..
+     * <p>
+     *  指示实施部分是否应使用服务加载程序(或类似)。请注意,默认值(false)是安全选项。
+     * 
      */
     private boolean useServicesMechanism;
 
@@ -207,6 +277,9 @@ public class CatalogManager {
    *
    * <p>This field is public so that objects that have access to this
    * CatalogManager can use this debug object.</p>
+   * <p>
+   * <p>此字段是公共的,以便有权访问此CatalogManager的对象可以使用此调试对象。<​​/ p>
+   * 
    */
   public Debug debug = null;
 
@@ -245,6 +318,9 @@ public class CatalogManager {
   /**
    * Load the properties from the propertyFile and build the
    * resources from it.
+   * <p>
+   *  从属性文件加载属性并从中构建资源。
+   * 
    */
   private synchronized void readProperties() {
     try {
@@ -287,6 +363,9 @@ public class CatalogManager {
 
   /**
    * Allow access to the static CatalogManager
+   * <p>
+   *  允许访问静态CatalogManager
+   * 
    */
   public static CatalogManager getStaticManager() {
     return staticManager;
@@ -298,6 +377,11 @@ public class CatalogManager {
    * <p>If true, missing or unreadable property files will
    * not be reported. Otherwise, a message will be sent to System.err.
    * </p>
+   * <p>
+   *  如何处理缺少的属性?
+   * 
+   *  <p>如果为true,则不会报告遗漏或不可读的属性文件。否则,将向System.err发送一条消息。
+   * </p>
    */
   public boolean getIgnoreMissingProperties() {
     return ignoreMissingProperties;
@@ -308,6 +392,11 @@ public class CatalogManager {
    *
    * <p>If ignore is true, missing or unreadable property files will
    * not be reported. Otherwise, a message will be sent to System.err.
+   * </p>
+   * <p>
+   *  如何处理缺少的属性?
+   * 
+   *  <p>如果忽略为true,则不会报告丢失或不可读的属性文件。否则,将向System.err发送一条消息。
    * </p>
    */
   public void setIgnoreMissingProperties(boolean ignore) {
@@ -321,6 +410,13 @@ public class CatalogManager {
    * not be reported. Otherwise, a message will be sent to System.err.
    * </p>
    *
+   * <p>
+   *  如何处理缺少的属性?
+   * 
+   *  <p>如果忽略为true,则不会报告丢失或不可读的属性文件。否则,将向System.err发送一条消息。
+   * </p>
+   * 
+   * 
    * @deprecated No longer static; use get/set methods.
    */
   public void ignoreMissingProperties(boolean ignore) {
@@ -330,6 +426,10 @@ public class CatalogManager {
   /**
    * Obtain the verbosity setting from the properties.
    *
+   * <p>
+   *  从属性获取详细程度设置。
+   * 
+   * 
    * @return The verbosity level from the propertyFile or the
    * defaultVerbosity.
    */
@@ -372,6 +472,9 @@ public class CatalogManager {
 
   /**
    * What is the current verbosity?
+   * <p>
+   *  什么是当前的冗长?
+   * 
    */
   public int getVerbosity() {
     if (verbosity == null) {
@@ -383,6 +486,9 @@ public class CatalogManager {
 
   /**
    * Set the current verbosity.
+   * <p>
+   *  设置当前详细程度。
+   * 
    */
   public void setVerbosity (int verbosity) {
     this.verbosity = new Integer(verbosity);
@@ -392,6 +498,10 @@ public class CatalogManager {
   /**
    * What is the current verbosity?
    *
+   * <p>
+   *  什么是当前的冗长?
+   * 
+   * 
    * @deprecated No longer static; use get/set methods.
    */
   public int verbosity () {
@@ -401,6 +511,10 @@ public class CatalogManager {
   /**
    * Obtain the relativeCatalogs setting from the properties.
    *
+   * <p>
+   *  从属性获取relativeCatalogs设置。
+   * 
+   * 
    * @return The relativeCatalogs setting from the propertyFile or the
    * defaultRelativeCatalogs.
    */
@@ -436,6 +550,16 @@ public class CatalogManager {
    * <p>In the properties, a value of 'yes', 'true', or '1' is considered
    * true, anything else is false.</p>
    *
+   * <p>
+   *  获取relativeCatalogs设置。
+   * 
+   *  <p>当查询catalogFiles属性时使用此属性。如果为true,则返回相对商品文件名。如果为false,则在返回它们之前,相对商品文件名相对于属性文件是绝对的。</p>
+   * 
+   *  <p>当目录文件来自属性文件时,此属性<emph>仅适用于</emph>。如果它们来自系统属性或默认列表,则它们从不被认为是相对的。 (他们是什么?)</p>
+   * 
+   * <p>在属性中,"yes","true"或"1"的值被视为真,任何其他都为假。</p>
+   * 
+   * 
    * @return The relativeCatalogs setting from the propertyFile or the
    * defaultRelativeCatalogs.
    */
@@ -450,6 +574,10 @@ public class CatalogManager {
   /**
    * Set the relativeCatalogs setting.
    *
+   * <p>
+   *  设置relativeCatalogs设置。
+   * 
+   * 
    * @see #getRelativeCatalogs()
    */
   public void setRelativeCatalogs (boolean relative) {
@@ -459,6 +587,10 @@ public class CatalogManager {
   /**
    * Get the relativeCatalogs setting.
    *
+   * <p>
+   *  获取relativeCatalogs设置。
+   * 
+   * 
    * @deprecated No longer static; use get/set methods.
    */
   public boolean relativeCatalogs () {
@@ -468,6 +600,10 @@ public class CatalogManager {
   /**
    * Obtain the list of catalog files from the properties.
    *
+   * <p>
+   *  从属性获取目录文件的列表。
+   * 
+   * 
    * @return A semicolon delimited list of catlog file URIs
    */
   private String queryCatalogFiles () {
@@ -497,6 +633,10 @@ public class CatalogManager {
   /**
    * Return the current list of catalog files.
    *
+   * <p>
+   *  返回目录文件的当前列表。
+   * 
+   * 
    * @return A vector of the catalog file names or null if no catalogs
    * are available in the properties.
    */
@@ -528,6 +668,9 @@ public class CatalogManager {
 
   /**
    * Set the list of catalog files.
+   * <p>
+   *  设置目录文件的列表。
+   * 
    */
   public void setCatalogFiles(String fileList) {
     catalogFiles = fileList;
@@ -537,6 +680,10 @@ public class CatalogManager {
   /**
    * Return the current list of catalog files.
    *
+   * <p>
+   *  返回目录文件的当前列表。
+   * 
+   * 
    * @return A vector of the catalog file names or null if no catalogs
    * are available in the properties.
    *
@@ -552,6 +699,12 @@ public class CatalogManager {
    * <p>In the properties, a value of 'public' is true,
    * anything else is false.</p>
    *
+   * <p>
+   *  从属性获取preferPublic设置。
+   * 
+   *  <p>在属性中,"public"的值为true,其他都为false。</p>
+   * 
+   * 
    * @return True if prefer is public or the
    * defaultPreferSetting.
    */
@@ -578,6 +731,10 @@ public class CatalogManager {
   /**
    * Return the current prefer public setting.
    *
+   * <p>
+   *  返回当前喜欢的公共设置。
+   * 
+   * 
    * @return True if public identifiers are preferred.
    */
   public boolean getPreferPublic () {
@@ -589,6 +746,9 @@ public class CatalogManager {
 
   /**
    * Set the prefer public setting.
+   * <p>
+   *  设置首选公开设置。
+   * 
    */
   public void setPreferPublic (boolean preferPublic) {
     this.preferPublic = new Boolean(preferPublic);
@@ -597,6 +757,10 @@ public class CatalogManager {
   /**
    * Return the current prefer public setting.
    *
+   * <p>
+   *  返回当前喜欢的公共设置。
+   * 
+   * 
    * @return True if public identifiers are preferred.
    *
    * @deprecated No longer static; use get/set methods.
@@ -611,6 +775,12 @@ public class CatalogManager {
    * <p>In the properties, a value of 'yes', 'true', or '1' is considered
    * true, anything else is false.</p>
    *
+   * <p>
+   *  从属性获取静态目录设置。
+   * 
+   *  <p>在属性中,"yes","true"或"1"的值被视为真,任何其他都为假。</p>
+   * 
+   * 
    * @return The static-catalog setting from the propertyFile or the
    * defaultUseStaticCatalog.
    */
@@ -638,6 +808,9 @@ public class CatalogManager {
 
   /**
    * Get the current use static catalog setting.
+   * <p>
+   *  获取当前使用的静态目录设置。
+   * 
    */
   public boolean getUseStaticCatalog() {
     if (useStaticCatalog == null) {
@@ -649,6 +822,9 @@ public class CatalogManager {
 
   /**
    * Set the use static catalog setting.
+   * <p>
+   *  设置使用静态目录设置。
+   * 
    */
   public void setUseStaticCatalog(boolean useStatic) {
     useStaticCatalog = new Boolean(useStatic);
@@ -657,6 +833,10 @@ public class CatalogManager {
   /**
    * Get the current use static catalog setting.
    *
+   * <p>
+   *  获取当前使用的静态目录设置。
+   * 
+   * 
    * @deprecated No longer static; use get/set methods.
    */
   public boolean staticCatalog() {
@@ -667,6 +847,11 @@ public class CatalogManager {
    * Get a new catalog instance.
    *
    * This method always returns a new instance of the underlying catalog class.
+   * <p>
+   *  获取新的目录实例。
+   * 
+   *  此方法总是返回基础目录类的新实例。
+   * 
    */
   public Catalog getPrivateCatalog() {
     Catalog catalog = staticCatalog;
@@ -718,6 +903,11 @@ public class CatalogManager {
    *
    * If this manager uses static catalogs, the same static catalog will
    * always be returned. Otherwise a new catalog will be returned.
+   * <p>
+   *  获取目录实例。
+   * 
+   *  如果此管理器使用静态目录,将始终返回相同的静态目录。否则将返回新目录。
+   * 
    */
   public Catalog getCatalog() {
     Catalog catalog = staticCatalog;
@@ -742,6 +932,12 @@ public class CatalogManager {
    * <p>In the properties, a value of 'yes', 'true', or '1' is considered
    * true, anything else is false.</p>
    *
+   * <p>
+   *  <p>从属性获取oasisXMLCatalogPI设置。</p>
+   * 
+   *  <p>在属性中,"yes","true"或"1"的值被视为真,任何其他都为假。</p>
+   * 
+   * 
    * @return The oasisXMLCatalogPI setting from the propertyFile or the
    * defaultOasisXMLCatalogPI.
    */
@@ -769,6 +965,9 @@ public class CatalogManager {
 
   /**
    * Get the current XML Catalog PI setting.
+   * <p>
+   *  获取当前的XML目录PI设置。
+   * 
    */
   public boolean getAllowOasisXMLCatalogPI () {
     if (oasisXMLCatalogPI == null) {
@@ -783,6 +982,9 @@ public class CatalogManager {
   }
   /**
    * Set the XML Catalog PI setting
+   * <p>
+   *  设置XML目录PI设置
+   * 
    */
   public void setAllowOasisXMLCatalogPI(boolean allowPI) {
     oasisXMLCatalogPI = new Boolean(allowPI);
@@ -791,6 +993,10 @@ public class CatalogManager {
   /**
    * Get the current XML Catalog PI setting.
    *
+   * <p>
+   *  获取当前的XML目录PI设置。
+   * 
+   * 
    * @deprecated No longer static; use get/set methods.
    */
   public boolean allowOasisXMLCatalogPI() {
@@ -800,6 +1006,9 @@ public class CatalogManager {
   /**
    * Obtain the Catalog class name setting from the properties.
    *
+   * <p>
+   *  从属性获取目录类名称设置。
+   * 
    */
   public String queryCatalogClassName () {
     String className = SecuritySupport.getSystemProperty(pClassname);
@@ -819,6 +1028,9 @@ public class CatalogManager {
 
   /**
    * Get the current Catalog class name.
+   * <p>
+   * 获取当前目录类名称。
+   * 
    */
   public String getCatalogClassName() {
     if (catalogClassName == null) {
@@ -830,6 +1042,9 @@ public class CatalogManager {
 
   /**
    * Set the Catalog class name.
+   * <p>
+   *  设置Catalog类名称。
+   * 
    */
   public void setCatalogClassName(String className) {
     catalogClassName = className;
@@ -838,6 +1053,9 @@ public class CatalogManager {
   /**
    * Get the current Catalog class name.
    *
+   * <p>
+   *  获取当前目录类名称。
+   * 
    * @deprecated No longer static; use get/set methods.
    */
   public String catalogClassName() {

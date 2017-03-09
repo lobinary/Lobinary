@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SecuritySupport.java,v 1.1.2.1 2005/08/01 02:08:48 jeffsuttor Exp $
+ * <p>
+ *  $ Id：SecuritySupport.java,v 1.1.2.1 2005/08/01 02:08:48 jeffsuttor Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.utils;
@@ -45,6 +58,11 @@ import java.util.Properties;
  * package private and therefore is not exposed as part of any API.
  *
  * @xerces.internal
+ * <p>
+ *  这个类是为每个子包重复,所以保持同步。它是包私有的,因此不作为任何API的一部分公开。
+ * 
+ *  @ xerces.internal
+ * 
  */
 public final class SecuritySupport {
 
@@ -52,6 +70,9 @@ public final class SecuritySupport {
 
     /**
      * Return an instance of this class.
+     * <p>
+     *  返回此类的实例。
+     * 
      */
     public static SecuritySupport getInstance() {
         return securitySupport;
@@ -131,6 +152,9 @@ public final class SecuritySupport {
     /**
      * Return resource using the same classloader for the ObjectFactory by
      * default or bootclassloader when Security Manager is in place
+     * <p>
+     *  当安全管理器就位时,使用默认情况下的ObjectFactory或bootclassloader的相同类加载器返回资源
+     * 
      */
     public static InputStream getResourceAsStream(final String name) {
         if (System.getSecurityManager()!=null) {
@@ -157,6 +181,10 @@ public final class SecuritySupport {
 
     /**
      * Gets a resource bundle using the specified base name, the default locale, and the caller's class loader.
+     * <p>
+     *  使用指定的基本名称,默认语言环境和调用者的类装入器获取资源束。
+     * 
+     * 
      * @param bundle the base name of the resource bundle, a fully qualified class name
      * @return a resource bundle for the given base name and the default locale
      */
@@ -166,6 +194,10 @@ public final class SecuritySupport {
 
     /**
      * Gets a resource bundle using the specified base name and locale, and the caller's class loader.
+     * <p>
+     *  使用指定的基本名称和语言环境以及调用者的类装入器获取资源束。
+     * 
+     * 
      * @param bundle the base name of the resource bundle, a fully qualified class name
      * @param locale the locale for which a resource bundle is desired
      * @return a resource bundle for the given base name and locale
@@ -206,6 +238,10 @@ public final class SecuritySupport {
     /**
      * Strip off path from an URI
      *
+     * <p>
+     *  从URI中删除路径
+     * 
+     * 
      * @param uri an URI with full path
      * @return the file name only
      */
@@ -223,6 +259,10 @@ public final class SecuritySupport {
     /**
      * Check the protocol used in the systemId against allowed protocols
      *
+     * <p>
+     *  根据允许的协议检查systemId中使用的协议
+     * 
+     * 
      * @param systemId the Id of the URI
      * @param allowedProtocols a list of allowed protocols separated by comma
      * @param accessAny keyword to indicate allowing any protocol
@@ -258,6 +298,10 @@ public final class SecuritySupport {
      * Check if the protocol is in the allowed list of protocols. The check
      * is case-insensitive while ignoring whitespaces.
      *
+     * <p>
+     * 检查协议是否在允许的协议列表中。该检查是不区分大小写而忽略空白。
+     * 
+     * 
      * @param protocol a protocol
      * @param allowedProtocols a list of allowed protocols
      * @return true if the protocol is in the list
@@ -280,6 +324,10 @@ public final class SecuritySupport {
      * Read JAXP system property in this order: system property,
      * $java.home/lib/jaxp.properties if the system property is not specified
      *
+     * <p>
+     *  按以下顺序读取JAXP系统属性：system property,$ java.home / lib / jaxp.properties如果未指定系统属性
+     * 
+     * 
      * @param propertyId the Id of the property
      * @return the value of the property
      */
@@ -295,6 +343,10 @@ public final class SecuritySupport {
      * Read from $java.home/lib/jaxp.properties for the specified property
      * The program
      *
+     * <p>
+     *  从$ java.home / lib / jaxp.properties中读取指定的属性程序
+     * 
+     * 
      * @param propertyId the Id of the property
      * @return the value of the property
      */
@@ -333,11 +385,16 @@ public final class SecuritySupport {
 
     /**
      * Cache for properties in java.home/lib/jaxp.properties
+     * <p>
+     *  缓存java.home / lib / jaxp.properties中的属性
+     * 
      */
     static final Properties cacheProps = new Properties();
 
     /**
      * Flag indicating if the program has tried reading java.home/lib/jaxp.properties
+     * <p>
+     *  标志指示程序是否已尝试读取java.home / lib / jaxp.properties
      */
     static volatile boolean firstTime = true;
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,8 @@ import com.sun.corba.se.spi.orb.ORB;
  * implementation.  Non-default constructors are avoided in
  * the delegation to separate instantiation from initialization,
  * so we use init methods.
+ * <p>
+ *  描述CDROutputStream委托并提供一些实现。在委托中避免非默认构造函数来分离实例化和初始化,所以我们使用init方法。
  */
 abstract class CDROutputStreamBase extends java.io.OutputStream
 {

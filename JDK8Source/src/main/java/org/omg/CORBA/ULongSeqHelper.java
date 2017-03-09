@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,15 @@ package org.omg.CORBA;
 *       <a href="http://cgi.omg.org/cgi-bin/doc?ptc/00-01-08">ptc/00-01-08</a>
 *       </li>
 *   </ul>
+* <p>
+*  <tt> ULongSeq </tt>的帮助器。
+* 有关帮助文件的详细信息,请参阅<a href="doc-files/generatedfiles.html#helper">"生成的文件：帮助程序文件"</a>。
+* <P> org / omg / CORBA / ULongSeqHelper.java生成者IDL到Java编译器(portable),版本"3.0"from streams.idl 13 May 19
+* 99 22:41:36 o'clock GMT + 00：00。
+* 有关帮助文件的详细信息,请参阅<a href="doc-files/generatedfiles.html#helper">"生成的文件：帮助程序文件"</a>。
+* 
+*  类定义已修改为符合以下OMG规范：
+* <ul>
 */
 
 public abstract class ULongSeqHelper

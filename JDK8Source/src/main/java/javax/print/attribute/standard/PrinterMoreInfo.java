@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,17 @@ import javax.print.attribute.PrintServiceAttribute;
  * gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  类PrinterMoreInfo是一个打印属性类,一个URI,用于获取有关此特定打印机的更多信息。例如,这可以是引用web浏览器可访问的HTML页面的HTTP类型URI。
+ * 从此URI获取的信息用于最终用户消费。可以从此URI访问打印服务API范围之外的功能。该信息旨在特定于此打印机实例和特定于站点的服务(例如作业定价,提供的服务,最终用户帮助)。
+ * <P>
+ *  相比之下,{@link PrinterMoreInfoManufacturer PrinterMoreInfoManufacturer}属性用于查找有关此常规类型的打印机而不是此特定打印机的更多信息。
+ * <P>
+ *  <B> IPP兼容性：</B> <CODE> toString()</CODE>返回的字符串形式给出了IPP uri值。
+ * 由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class PrinterMoreInfo extends URISyntax
@@ -61,6 +73,10 @@ public final class PrinterMoreInfo extends URISyntax
     /**
      * Constructs a new printer more info attribute with the specified URI.
      *
+     * <p>
+     *  使用指定的URI构造新的打印机更多信息属性。
+     * 
+     * 
      * @param  uri  URI.
      *
      * @exception  NullPointerException
@@ -84,6 +100,18 @@ public final class PrinterMoreInfo extends URISyntax
      * are equal.
      * </OL>
      *
+     * <p>
+     *  返回此打印机的more info属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是PrinterMoreInfo类的实例。
+     * <LI>
+     *  此打印机的info属性的URI和<CODE>对象</CODE>的URI是相等的。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this printer
@@ -100,6 +128,8 @@ public final class PrinterMoreInfo extends URISyntax
      * <P>
      * For class PrinterMoreInfo, the category is class PrinterMoreInfo itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -114,6 +144,12 @@ public final class PrinterMoreInfo extends URISyntax
      * For class PrinterMoreInfo, the
      * category name is <CODE>"printer-more-info"</CODE>.
      *
+     * <p>
+     * 获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于PrinterMoreInfo类,类别是PrinterMoreInfo类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

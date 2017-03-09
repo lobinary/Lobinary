@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import javax.swing.plaf.basic.BasicComboBoxEditor;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  Metal可编辑组合框的默认编辑器
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Steve Wilson
  */
 public class MetalComboBoxEditor extends BasicComboBoxEditor {
@@ -82,6 +90,9 @@ public class MetalComboBoxEditor extends BasicComboBoxEditor {
    /**
     * The default editor border <code>Insets</code>. This field
     * might not be used.
+    * <p>
+    *  默认编辑器边框<code> Insets </code>。可能不使用此字段。
+    * 
     */
     protected static Insets editorBorderInsets = new Insets( 2, 2, 2, 0 );
 
@@ -132,6 +143,10 @@ public class MetalComboBoxEditor extends BasicComboBoxEditor {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  实现UIResource的BasicComboBoxEditor的子类。
+     *  BasicComboBoxEditor不直接实现UIResource,以便应用程序可以安全地覆盖与BasicListCellRenderer子类的cellRenderer属性。
+     * <p>
      */
     public static class UIResource extends MetalComboBoxEditor
     implements javax.swing.plaf.UIResource {

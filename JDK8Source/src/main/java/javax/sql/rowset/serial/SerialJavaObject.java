@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,18 +54,36 @@ import sun.reflect.misc.ReflectUtil;
  * SerialJavaObject is to be used by more than one thread then access to the
  * SerialJavaObject should be controlled by appropriate synchronization.
  *
+ * <p>
+ *  值为Java <code> JAVA_OBJECT </code>值的Java编程语言中的可序列化映射。
+ * 假设Java对象实现<code> Serializable </code>接口,该类简单地包装序列化过程。
+ * <P>
+ *  然而,如果序列化是不可能的,因为Java对象不是可立即序列化的,这个类将尝试序列化所有非静态成员以允许对象状态被序列化。
+ * 静态或瞬态字段不能序列化;试图序列化它们将导致<code> SerialException </code>对象被抛出。
+ * 
+ *  <h3>线程安全</h3>
+ * 
+ *  SerialJavaObject不能安全地用于多个并发线程。如果一个SerialJavaObject被多个线程使用,那么对SerialJavaObject的访问应该由适当的同步控制。
+ * 
+ * 
  * @author Jonathan Bruce
  */
 public class SerialJavaObject implements Serializable, Cloneable {
 
     /**
      * Placeholder for object to be serialized.
+     * <p>
+     *  要序列化的对象的占位符。
+     * 
      */
     private Object obj;
 
 
    /**
     * Placeholder for all fields in the <code>JavaObject</code> being serialized.
+    * <p>
+    *  正在序列化的<code> JavaObject </code>中的所有字段的占位符。
+    * 
     */
     private transient Field[] fields;
 
@@ -72,6 +91,11 @@ public class SerialJavaObject implements Serializable, Cloneable {
      * Constructor for <code>SerialJavaObject</code> helper class.
      * <p>
      *
+     * <p>
+     *  <code> SerialJavaObject </code>帮助程序类的构造方法。
+     * <p>
+     * 
+     * 
      * @param obj the Java <code>Object</code> to be serialized
      * @throws SerialException if the object is found not to be serializable
      */
@@ -107,6 +131,10 @@ public class SerialJavaObject implements Serializable, Cloneable {
      * Returns an <code>Object</code> that is a copy of this <code>SerialJavaObject</code>
      * object.
      *
+     * <p>
+     *  返回一个<code> Object </code>,它是这个<code> SerialJavaObject </code>对象的副本。
+     * 
+     * 
      * @return a copy of this <code>SerialJavaObject</code> object as an
      *         <code>Object</code> in the Java programming language
      * @throws SerialException if the instance is corrupt
@@ -119,6 +147,10 @@ public class SerialJavaObject implements Serializable, Cloneable {
      * Returns an array of <code>Field</code> objects that contains each
      * field of the object that this helper class is serializing.
      *
+     * <p>
+     *  返回一个<code> Field </code>对象的数组,其中包含该帮助类序列化的对象的每个字段。
+     * 
+     * 
      * @return an array of <code>Field</code> objects
      * @throws SerialException if an error is encountered accessing
      * the serialized object
@@ -140,6 +172,9 @@ public class SerialJavaObject implements Serializable, Cloneable {
                 /*
                  * Check if the caller is allowed to access the specified class's package.
                  * If access is denied, throw a SecurityException.
+                 * <p>
+                 *  检查调用者是否被允许访问指定类的包。如果访问被拒绝,抛出一个SecurityException。
+                 * 
                  */
                 Class<?> caller = sun.reflect.Reflection.getCallerClass();
                 if (ReflectUtil.needsPackageAccessCheck(caller.getClassLoader(),
@@ -157,6 +192,9 @@ public class SerialJavaObject implements Serializable, Cloneable {
     /**
      * The identifier that assists in the serialization of this
      * <code>SerialJavaObject</code> object.
+     * <p>
+     * 有助于序列化<code> SerialJavaObject </code>对象的标识符。
+     * 
      */
     static final long serialVersionUID = -1465795139032831023L;
 
@@ -164,6 +202,9 @@ public class SerialJavaObject implements Serializable, Cloneable {
      * A container for the warnings issued on this <code>SerialJavaObject</code>
      * object. When there are multiple warnings, each warning is chained to the
      * previous warning.
+     * <p>
+     *  在此<code> SerialJavaObject </code>对象上发出的警告的容器。当有多个警告时,每个警告链接到先前的警告。
+     * 
      */
     Vector<RowSetWarning> chain;
 
@@ -173,6 +214,11 @@ public class SerialJavaObject implements Serializable, Cloneable {
      * is not {@code null} and is a {@code SerialJavaObject}
      * object that is identical to this object
      *
+     * <p>
+     *  将此SerialJavaObject与指定的对象进行比较。
+     * 结果是{@code true}当且仅当参数不是{@code null},并且是与此对象相同的{@code SerialJavaObject}对象。
+     * 
+     * 
      * @param  o The object to compare this {@code SerialJavaObject} against
      *
      * @return  {@code true} if the given object represents a {@code SerialJavaObject}
@@ -195,6 +241,10 @@ public class SerialJavaObject implements Serializable, Cloneable {
      * {@code SerialJavaObject} object is taken as the hash code of
      * the {@code Object} it stores
      *
+     * <p>
+     *  返回此SerialJavaObject的散列代码。 {@code SerialJavaObject}对象的哈希码被作为它存储的{@code Object}的哈希码
+     * 
+     * 
      * @return  a hash code value for this object.
      */
     public int hashCode() {
@@ -204,6 +254,10 @@ public class SerialJavaObject implements Serializable, Cloneable {
     /**
      * Returns a clone of this {@code SerialJavaObject}.
      *
+     * <p>
+     *  返回此{@code SerialJavaObject}的克隆。
+     * 
+     * 
      * @return  a clone of this SerialJavaObject
      */
 
@@ -222,6 +276,9 @@ public class SerialJavaObject implements Serializable, Cloneable {
 
     /**
      * Registers the given warning.
+     * <p>
+     *  注册给定的警告。
+     * 
      */
     private void setWarning(RowSetWarning e) {
         if (chain == null) {
@@ -233,6 +290,9 @@ public class SerialJavaObject implements Serializable, Cloneable {
     /**
      * readObject is called to restore the state of the {@code SerialJavaObject}
      * from a stream.
+     * <p>
+     *  readObject被调用以从流中恢复{@code SerialJavaObject}的状态。
+     * 
      */
     private void readObject(ObjectInputStream s)
             throws IOException, ClassNotFoundException {
@@ -258,6 +318,9 @@ public class SerialJavaObject implements Serializable, Cloneable {
     /**
      * writeObject is called to save the state of the {@code SerialJavaObject}
      * to a stream.
+     * <p>
+     *  writeObject被调用来将{@code SerialJavaObject}的状态保存到流。
+     * 
      */
     private void writeObject(ObjectOutputStream s)
             throws IOException {
@@ -269,6 +332,8 @@ public class SerialJavaObject implements Serializable, Cloneable {
 
     /*
      * Check to see if there are any Static Fields in this object
+     * <p>
+     *  检查此对象中是否存在任何静态字段
      */
     private static boolean hasStaticFields(Field[] fields) {
         for (Field field : fields) {

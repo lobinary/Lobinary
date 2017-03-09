@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,10 @@ import sun.swing.UIAction;
 /**
  * A Basic L&amp;F implementation of SliderUI.
  *
+ * <p>
+ *  SliderUI的基本L&amp; F实现。
+ * 
+ * 
  * @author Tom Santos
  */
 public class BasicSliderUI extends SliderUI{
@@ -85,11 +90,17 @@ public class BasicSliderUI extends SliderUI{
 
     /**
      * Whther or not sameLabelBaselines is up to date.
+     * <p>
+     *  是否是sameLabelBaselines是最新的。
+     * 
      */
     private boolean checkedLabelBaselines;
     /**
      * Whether or not all the entries in the labeltable have the same
      * baseline.
+     * <p>
+     *  标签表中的所有条目是否具有相同的基线。
+     * 
      */
     private boolean sameLabelBaselines;
 
@@ -109,6 +120,10 @@ public class BasicSliderUI extends SliderUI{
     /**
      * Returns true if the user is dragging the slider.
      *
+     * <p>
+     *  如果用户正在拖动滑块,则返回true。
+     * 
+     * 
      * @return true if the user is dragging the slider
      * @since 1.5
      */
@@ -292,6 +307,9 @@ public class BasicSliderUI extends SliderUI{
 
     /**
      * Populates ComboBox's actions.
+     * <p>
+     *  填充ComboBox的操作。
+     * 
      */
     static void loadActionMap(LazyActionMap map) {
         map.put(new Actions(Actions.POSITIVE_UNIT_INCREMENT));
@@ -312,6 +330,10 @@ public class BasicSliderUI extends SliderUI{
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -372,6 +394,10 @@ public class BasicSliderUI extends SliderUI{
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -390,6 +416,10 @@ public class BasicSliderUI extends SliderUI{
      * Returns true if all the labels from the label table have the same
      * baseline.
      *
+     * <p>
+     *  如果标签表中的所有标签具有相同的基线,则返回true。
+     * 
+     * 
      * @return true if all the labels from the label table have the
      *         same baseline
      * @since 1.6
@@ -660,6 +690,10 @@ public class BasicSliderUI extends SliderUI{
      * tick area for vertical sliders.  BasicSliderUI uses the returned value to
      * determine the tick area rectangle.  If you want to give your ticks some room,
      * make this larger than you need and paint your ticks away from the sides in paintTicks().
+     * <p>
+     *  获取水平滑块的刻度区域的高度和垂直滑块的刻度区域的宽度。 BasicSliderUI使用返回的值来确定刻度区矩形。
+     * 如果你想给你的蜱一些空间,使它大于你需要,并在paintTicks()绘制你的蜱从两边。
+     * 
      */
     protected int getTickLength() {
         return 8;
@@ -837,6 +871,10 @@ public class BasicSliderUI extends SliderUI{
     /**
      * Returns the biggest value that has an entry in the label table.
      *
+     * <p>
+     *  返回在标签表中具有条目的最大值。
+     * 
+     * 
      * @return biggest value that has an entry in the label table, or
      *         null.
      * @since 1.6
@@ -866,6 +904,10 @@ public class BasicSliderUI extends SliderUI{
     /**
      * Returns the smallest value that has an entry in the label table.
      *
+     * <p>
+     *  返回在标签表中具有条目的最小值。
+     * 
+     * 
      * @return smallest value that has an entry in the label table, or
      *         null.
      * @since 1.6
@@ -895,6 +937,10 @@ public class BasicSliderUI extends SliderUI{
 
     /**
      * Returns the label that corresponds to the highest slider value in the label table.
+     * <p>
+     *  返回与标签表中最高滑块值对应的标签。
+     * 
+     * 
      * @see JSlider#setLabelTable
      */
     protected Component getLowestValueLabel() {
@@ -907,6 +953,10 @@ public class BasicSliderUI extends SliderUI{
 
     /**
      * Returns the label that corresponds to the lowest slider value in the label table.
+     * <p>
+     *  返回与标签表中最低滑块值对应的标签。
+     * 
+     * 
      * @see JSlider#setLabelTable
      */
     protected Component getHighestValueLabel() {
@@ -1168,6 +1218,10 @@ public class BasicSliderUI extends SliderUI{
     /**
      * Called for every label in the label table.  Used to draw the labels for horizontal sliders.
      * The graphics have been translated to labelRect.y already.
+     * <p>
+     *  调用标签表中的每个标签。用于绘制水平滑块的标签。图形已经翻译为labelRect.y。
+     * 
+     * 
      * @see JSlider#setLabelTable
      */
     protected void paintHorizontalLabel( Graphics g, int value, Component label ) {
@@ -1181,6 +1235,10 @@ public class BasicSliderUI extends SliderUI{
     /**
      * Called for every label in the label table.  Used to draw the labels for vertical sliders.
      * The graphics have been translated to labelRect.x already.
+     * <p>
+     *  调用标签表中的每个标签。用于绘制垂直滑块的标签。图形已经翻译为labelRect.x。
+     * 
+     * 
      * @see JSlider#setLabelTable
      */
     protected void paintVerticalLabel( Graphics g, int value, Component label ) {
@@ -1345,6 +1403,9 @@ public class BasicSliderUI extends SliderUI{
      * This function is called when a mousePressed was detected in the track, not
      * in the thumb.  The default behavior is to scroll by block.  You can
      *  override this method to stop it from scrolling or to add additional behavior.
+     * <p>
+     * 当在轨道中检测到mousePressed时调用此函数,而不是在缩略图中。默认行为是按块滚动。您可以覆盖此方法以阻止其滚动或添加其他行为。
+     * 
      */
     protected void scrollDueToClickInTrack( int dir ) {
         scrollByBlock( dir );
@@ -1384,6 +1445,10 @@ public class BasicSliderUI extends SliderUI{
      * done on the arguments.  In particular if <code>trackHeight</code> is
      * negative undefined results may occur.
      *
+     * <p>
+     *  返回指定值的y位置。没有检查参数。特别是如果<code> trackHeight </code>是负的,可能会出现未定义的结果。
+     * 
+     * 
      * @param value the slider value to get the location for
      * @param trackY y-origin of the track
      * @param trackHeight the height of the track
@@ -1417,6 +1482,9 @@ public class BasicSliderUI extends SliderUI{
      * track at the the bottom or the top, this method sets the value to either
      * the minimum or maximum value of the slider, depending on if the slider
      * is inverted or not.
+     * <p>
+     *  返回y位置的值。如果{@code yPos}超出底部或顶部的轨道,则此方法会将值设置为滑块的最小值或最大值,具体取决于滑块是否反转。
+     * 
      */
     public int valueForYPosition( int yPos ) {
         int value;
@@ -1449,6 +1517,9 @@ public class BasicSliderUI extends SliderUI{
      * track at the left or the right, this method sets the value to either the
      * minimum or maximum value of the slider, depending on if the slider is
      * inverted or not.
+     * <p>
+     *  返回x位置的值。如果{@code xPos}超出左侧或右侧的轨道,则此方法会将值设置为滑块的最小值或最大值,具体取决于滑块是否反转。
+     * 
      */
     public int valueForXPosition( int xPos ) {
         int value;
@@ -1543,6 +1614,11 @@ public class BasicSliderUI extends SliderUI{
      *
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  数据模型侦听器。
+     * 
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class ChangeHandler implements ChangeListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -1562,6 +1638,11 @@ public class BasicSliderUI extends SliderUI{
      *
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  跟踪鼠标移动。
+     * 
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class TrackListener extends MouseInputAdapter {
         protected transient int offset;
@@ -1586,6 +1667,9 @@ public class BasicSliderUI extends SliderUI{
         * otherwise increase it by one page.  If there is no
         * thumb then page up if the mouse is in the upper half
         * of the track.
+        * <p>
+        *  如果鼠标在"thumb"组件上方按下,则将滚动条值减少一页("向上翻页"),否则将其增加一页。如果没有拇指,然后向上翻页,如果鼠标在轨道的上半部分。
+        * 
         */
         public void mousePressed(MouseEvent e) {
             if (!slider.isEnabled()) {
@@ -1733,6 +1817,9 @@ public class BasicSliderUI extends SliderUI{
         /**
         * Set the models value to the position of the top/left
         * of the thumb relative to the origin of the track.
+        * <p>
+        *  将模型值设置为相对于轨道原点的大拇指顶部/左侧的位置。
+        * 
         */
         public void mouseDragged(MouseEvent e) {
             int thumbMiddle;
@@ -1806,6 +1893,11 @@ public class BasicSliderUI extends SliderUI{
      *
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     * 滚动事件侦听器。
+     * 
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class ScrollListener implements ActionListener {
         // changed this class to public to avoid bogus IllegalAccessException
@@ -1850,6 +1942,11 @@ public class BasicSliderUI extends SliderUI{
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  调整事件大小的侦听器。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class ComponentHandler extends ComponentAdapter {
         // NOTE: This class exists only for backward compatibility. All
@@ -1866,6 +1963,11 @@ public class BasicSliderUI extends SliderUI{
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  焦点更改监听器。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     public class FocusHandler implements FocusListener {
         // NOTE: This class exists only for backward compatibility. All
@@ -1893,6 +1995,13 @@ public class BasicSliderUI extends SliderUI{
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of <code>Foo</code>.
+     * <p>
+     *  从Java 2平台v1.3这个未记录的类不再使用。
+     * 推荐的创建绑定的方法是使用<code> ActionMap </code>和<code> InputMap </code>的组合来包含从KeyStroke到动作描述的映射。
+     *  InputMap通常在LookAndFeel表中描述。
+     * <p>
+     *  有关更多详细信息,请参阅键绑定规范。
+     * <p>
      */
     public class ActionScroller extends AbstractAction {
         // NOTE: This class exists only for backward compatibility. All
@@ -1926,6 +2035,9 @@ public class BasicSliderUI extends SliderUI{
 
     /**
      * A static version of the above.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在<code> Foo </code>的子类中实例化它。
+     * 
      */
     static class SharedActionScroller extends AbstractAction {
         // NOTE: This class exists only for backward compatibility. All

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,18 @@ import java.io.Serializable;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  这是<code> ComboPopup </code>接口的基本实现。
+ * 
+ *  此类表示组合框的弹出部分的ui。
+ * <p>
+ *  所有事件处理都由使用<code> createxxxListener()</code>方法和内部类创建的侦听器类处理。
+ * 您可以通过覆盖<code> createxxxListener()</code>方法并提供自己的事件侦听器或从此类中提供的子类化来更改此类的行为。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Tom Santos
  * @author Mark Davidson
  */
@@ -79,6 +92,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用访问器方法。
+     * 
+     * 
      * @see #getList
      * @see #createList
      */
@@ -87,6 +104,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法
+     * 
+     * 
      * @see #createScroller
      */
     protected JScrollPane              scroller;
@@ -94,6 +115,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * As of Java 2 platform v1.4 this previously undocumented field is no
      * longer used.
+     * <p>
+     *  从Java 2平台v1.4这个以前未记录的字段不再使用。
+     * 
      */
     protected boolean                  valueIsAdjusting = false;
 
@@ -101,6 +125,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * Implementation of all the listener classes.
+     * <p>
+     *  实现所有监听器类。
+     * 
      */
     private Handler handler;
 
@@ -108,6 +135,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor or create methods instead.
      *
+     * <p>
+     * 此受保护字段是实现特定的。不要直接访问或覆盖。使用访问器或创建方法。
+     * 
+     * 
      * @see #getMouseMotionListener
      * @see #createMouseMotionListener
      */
@@ -116,6 +147,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor or create methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。使用访问器或创建方法。
+     * 
+     * 
      * @see #getMouseListener
      * @see #createMouseListener
      */
@@ -125,6 +160,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the accessor or create methods instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。使用访问器或创建方法。
+     * 
+     * 
      * @see #getKeyListener
      * @see #createKeyListener
      */
@@ -134,6 +173,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法。
+     * 
+     * 
      * @see #createListSelectionListener
      */
     protected ListSelectionListener    listSelectionListener;
@@ -143,6 +186,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法。
+     * 
+     * 
      * @see #createListMouseListener
      */
     protected MouseListener            listMouseListener;
@@ -150,6 +197,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法
+     * 
+     * 
      * @see #createListMouseMotionListener
      */
     protected MouseMotionListener      listMouseMotionListener;
@@ -159,6 +210,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法
+     * 
+     * 
      * @see #createPropertyChangeListener
      */
     protected PropertyChangeListener   propertyChangeListener;
@@ -168,6 +223,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法
+     * 
+     * 
      * @see #createListDataListener
      */
     protected ListDataListener         listDataListener;
@@ -176,6 +235,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * This protected field is implementation specific. Do not access directly
      * or override. Use the create method instead
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。请改用create方法
+     * 
+     * 
      * @see #createItemListener
      */
     protected ItemListener             itemListener;
@@ -183,6 +246,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * This protected field is implementation specific. Do not access directly
      * or override.
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。
+     * 
      */
     protected Timer                    autoscrollTimer;
     protected boolean                  hasEntered = false;
@@ -199,6 +265,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * Implementation of ComboPopup.show().
+     * <p>
+     *  实现ComboPopup.show()。
+     * 
      */
     public void show() {
         comboBox.firePopupMenuWillBecomeVisible();
@@ -210,6 +279,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * Implementation of ComboPopup.hide().
+     * <p>
+     *  实现ComboPopup.hide()。
+     * 
      */
     public void hide() {
         MenuSelectionManager manager = MenuSelectionManager.defaultManager();
@@ -227,6 +299,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * Implementation of ComboPopup.getList().
+     * <p>
+     *  实现ComboPopup.getList()。
+     * 
      */
     public JList getList() {
         return list;
@@ -235,6 +310,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * Implementation of ComboPopup.getMouseListener().
      *
+     * <p>
+     *  实现ComboPopup.getMouseListener()。
+     * 
+     * 
      * @return a <code>MouseListener</code> or null
      * @see ComboPopup#getMouseListener
      */
@@ -248,6 +327,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * Implementation of ComboPopup.getMouseMotionListener().
      *
+     * <p>
+     *  ComboPopup.getMouseMotionListener()的实现。
+     * 
+     * 
      * @return a <code>MouseMotionListener</code> or null
      * @see ComboPopup#getMouseMotionListener
      */
@@ -261,6 +344,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * Implementation of ComboPopup.getKeyListener().
      *
+     * <p>
+     *  实现ComboPopup.getKeyListener()。
+     * 
+     * 
      * @return a <code>KeyListener</code> or null
      * @see ComboPopup#getKeyListener
      */
@@ -275,6 +362,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * Called when the UI is uninstalling.  Since this popup isn't in the component
      * tree, it won't get it's uninstallUI() called.  It removes the listeners that
      * were added in addComboBoxListeners().
+     * <p>
+     * 在UI卸载时调用。因为这个弹出框不在组件树中,它不会得到它的uninstallUI()调用。它删除在addComboBoxListeners()中添加的侦听器。
+     * 
      */
     public void uninstallingUI() {
         if (propertyChangeListener != null) {
@@ -299,6 +389,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * Removes the listeners from the combo box model
      *
+     * <p>
+     *  从组合框模型中删除侦听器
+     * 
+     * 
      * @param model The combo box model to install listeners
      * @see #installComboBoxModelListeners
      */
@@ -365,6 +459,12 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * When overriding this method, make sure to maintain the existing
      * behavior.
      *
+     * <p>
+     *  创建一个监听器,它将监视组合框上的鼠标按钮和释放事件。
+     * 
+     *  <strong>警告：</strong>覆盖此方法时,请务必保持现有行为。
+     * 
+     * 
      * @return a <code>MouseListener</code> which will be added to
      * the combo box or null
      */
@@ -380,6 +480,12 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * When overriding this method, make sure to maintain the existing
      * behavior.
      *
+     * <p>
+     *  创建将添加到组合框的鼠标移动侦听器。
+     * 
+     *  <strong>警告：</strong>覆盖此方法时,请务必保持现有行为。
+     * 
+     * 
      * @return a <code>MouseMotionListener</code> which will be added to
      *         the combo box or null
      */
@@ -391,6 +497,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * Creates the key listener that will be added to the combo box. If
      * this method returns null then it will not be added to the combo box.
      *
+     * <p>
+     *  创建将添加到组合框的键监听器。如果此方法返回null,那么它不会被添加到组合框。
+     * 
+     * 
      * @return a <code>KeyListener</code> or null
      */
     protected KeyListener createKeyListener() {
@@ -402,6 +512,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * the popup's list.  If this method returns null then it will not
      * be added to the popup list.
      *
+     * <p>
+     *  创建一个列表选择监听器,在弹出的列表中监视选择更改。如果此方法返回null,那么它不会被添加到弹出列表。
+     * 
+     * 
      * @return an instance of a <code>ListSelectionListener</code> or null
      */
     protected ListSelectionListener createListSelectionListener() {
@@ -413,6 +527,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * <code>ComboBoxModel</code>. If this method returns null then
      * it will not be added to the combo box model.
      *
+     * <p>
+     *  创建将添加到<code> ComboBoxModel </code>中的列表数据侦听器。如果此方法返回null,那么它不会被添加到组合框模型。
+     * 
+     * 
      * @return an instance of a <code>ListDataListener</code> or null
      */
     protected ListDataListener createListDataListener() {
@@ -424,6 +542,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * the popup's list. If this method returns null then it will
      * not be added to the combo box.
      *
+     * <p>
+     *  创建在弹出的列表中监视鼠标事件的鼠标监听器。如果此方法返回null,那么它不会被添加到组合框。
+     * 
+     * 
      * @return an instance of a <code>MouseListener</code> or null
      */
     protected MouseListener createListMouseListener() {
@@ -435,6 +557,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * events in the popup's list. If this method returns null then it will
      * not be added to the combo box.
      *
+     * <p>
+     *  创建在弹出式列表中监视鼠标运动事件的鼠标运动监听器。如果此方法返回null,那么它不会被添加到组合框。
+     * 
+     * 
      * @return an instance of a <code>MouseMotionListener</code> or null
      */
     protected MouseMotionListener createListMouseMotionListener() {
@@ -446,6 +572,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * the combo box. If this method returns null then it will not
      * be added to the combo box.
      *
+     * <p>
+     * 创建一个<code> PropertyChangeListener </code>,它将被添加到组合框。如果此方法返回null,那么它不会被添加到组合框。
+     * 
+     * 
      * @return an instance of a <code>PropertyChangeListener</code> or null
      */
     protected PropertyChangeListener createPropertyChangeListener() {
@@ -460,6 +590,12 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * Subclasses may override this method to return instances of their own
      * ItemEvent handlers.
      *
+     * <p>
+     *  创建将添加到组合框中的<code> ItemListener </code>。如果此方法返回null,那么它不会被添加到组合框。
+     * <p>
+     *  子类可以覆盖此方法以返回它们自己的ItemEvent处理程序的实例。
+     * 
+     * 
      * @return an instance of an <code>ItemListener</code> or null
      */
     protected ItemListener createItemListener() {
@@ -478,6 +614,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * the items in the combo box model. This method is called when the UI class
      * is created.
      *
+     * <p>
+     *  创建弹出窗口中使用的JList以显示组合框模型中的项目。创建UI类时调用此方法。
+     * 
+     * 
      * @return a <code>JList</code> used to display the combo box items
      */
     protected JList createList() {
@@ -505,6 +645,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * popup. This method is called when the UI class
      * is created.
      *
+     * <p>
+     *  配置用于在弹出窗口中保存组合框项目的列表。创建UI类时调用此方法。
+     * 
+     * 
      * @see #createList
      */
     protected void configureList() {
@@ -523,6 +667,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * Adds the listeners to the list control.
+     * <p>
+     *  将侦听器添加到列表控件。
+     * 
      */
     protected void installListListeners() {
         if ((listMouseListener = createListMouseListener()) != null) {
@@ -554,6 +701,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * Creates the scroll pane which houses the scrollable list.
+     * <p>
+     *  创建包含可滚动列表的滚动窗格。
+     * 
      */
     protected JScrollPane createScroller() {
         JScrollPane sp = new JScrollPane( list,
@@ -567,6 +717,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * Configures the scrollable portion which holds the list within
      * the combo box popup. This method is called when the UI class
      * is created.
+     * <p>
+     *  在组合框弹出窗口中配置保存列表的可滚动部分。创建UI类时调用此方法。
+     * 
      */
     protected void configureScroller() {
         scroller.setFocusable( false );
@@ -577,6 +730,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * Configures the popup portion of the combo box. This method is called
      * when the UI class is created.
+     * <p>
+     *  配置组合框的弹出部分。创建UI类时调用此方法。
+     * 
      */
     protected void configurePopup() {
         setLayout( new BoxLayout( this, BoxLayout.Y_AXIS ) );
@@ -590,6 +746,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * This method adds the necessary listeners to the JComboBox.
+     * <p>
+     *  此方法将必要的侦听器添加到JComboBox。
+     * 
      */
     protected void installComboBoxListeners() {
         if ((propertyChangeListener = createPropertyChangeListener()) != null) {
@@ -606,6 +765,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * on the combo box model should be removed in
      * <code>uninstallComboBoxModelListeners</code>.
      *
+     * <p>
+     *  在组合框模型上安装侦听器。组合框模型上安装的任何侦听器都应该在<code> uninstallComboBoxModelListeners </code>中删除。
+     * 
+     * 
      * @param model The combo box model to install listeners
      * @see #uninstallComboBoxModelListeners
      */
@@ -625,6 +788,12 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
         comboBox.registerKeyboardAction( action,
                                          KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, 0 ),
+        /* <p>
+        /*  ActionListener action = new ActionListener(){public void actionPerformed(ActionEvent e){}};
+        /* 
+        /*  comboBox.registerKeyboardAction(action,KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0),
+        /* 
+        /* 
                                          JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ); */
 
     }
@@ -657,12 +826,24 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * be sure to invoke the superclass
      * version of each method.
      *
+     * <p>
+     * 要在组合框上注册的侦听器(<em>不是</em>的弹出菜单)来处理影响弹出菜单状态的鼠标事件。这个监听器的主要目的是使弹出菜单出现和消失。
+     * 如果在拖动期间鼠标在列表上释放,此侦听器还可通过设置选择来帮助单击和拖动方案。
+     * 
+     * <p>
+     *  <strong>警告：</strong>我们建议您<em>不</em>创建此类的子类。如果绝对必须创建一个子类,请务必调用每个方法的超类版本。
+     * 
+     * 
      * @see BasicComboPopup#createMouseListener
      */
     protected class InvocationMouseHandler extends MouseAdapter {
         /**
          * Responds to mouse-pressed events on the combo box.
          *
+         * <p>
+         *  响应组合框上的鼠标按下事件。
+         * 
+         * 
          * @param e the mouse-press event to be handled
          */
         public void mousePressed( MouseEvent e ) {
@@ -673,6 +854,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
          * Responds to the user terminating
          * a click or drag that began on the combo box.
          *
+         * <p>
+         *  响应用户终止在组合框上开始的点击或拖动。
+         * 
+         * 
          * @param e the mouse-release event to be handled
          */
         public void mouseReleased( MouseEvent e ) {
@@ -683,6 +868,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * This listener watches for dragging and updates the current selection in the
      * list if it is dragging over the list.
+     * <p>
+     *  此监听器监视拖动并更新列表中的当前选择(如果它在列表上拖动)。
+     * 
      */
     protected class InvocationMouseMotionHandler extends MouseMotionAdapter {
         public void mouseDragged( MouseEvent e ) {
@@ -696,6 +884,11 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * <p>
      * All the functionality of this class has been included in
      * BasicComboBoxUI ActionMap/InputMap methods.
+     * <p>
+     *  从Java 2平台v 1.4,这个类现在已过时,只包括向后的API兼容性。不要实例化或子类化。
+     * <p>
+     *  此类的所有功能已包含在BasicComboBoxUI ActionMap / InputMap方法中。
+     * 
      */
     public class InvocationKeyHandler extends KeyAdapter {
         public void keyReleased( KeyEvent e ) {}
@@ -705,6 +898,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * As of Java 2 platform v 1.4, this class is now obsolete, doesn't do anything, and
      * is only included for backwards API compatibility. Do not call or
      * override.
+     * <p>
+     *  从Java 2平台v 1.4,这个类现在已过时,不做任何事情,只包括向后的API兼容性。不要调用或覆盖。
+     * 
      */
     protected class ListSelectionHandler implements ListSelectionListener {
         public void valueChanged( ListSelectionEvent e ) {}
@@ -717,6 +913,12 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * <p>
      * The functionality has been migrated into <code>ItemHandler</code>.
      *
+     * <p>
+     *  从1.4开始,这个类现在已经过时了,不做任何事情,只是为了向后兼容API而包含的。不要调用或覆盖。
+     * <p>
+     *  该功能已迁移到<code> ItemHandler </code>中。
+     * 
+     * 
      * @see #createItemListener
      */
     public class ListDataHandler implements ListDataListener {
@@ -731,6 +933,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * This listener hides the popup when the mouse is released in the list.
+     * <p>
+     *  当鼠标在列表中释放时,此侦听器隐藏弹出窗口。
+     * 
      */
     protected class ListMouseHandler extends MouseAdapter {
         public void mousePressed( MouseEvent e ) {
@@ -743,6 +948,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * This listener changes the selected item as you move the mouse over the list.
      * The selection change is not committed to the model, this is for user feedback only.
+     * <p>
+     * 当您将鼠标移动到列表上时,此监听器会更改所选项目。选择更改不会提交给模型,这只适用于用户反馈。
+     * 
      */
     protected class ListMouseMotionHandler extends MouseMotionAdapter {
         public void mouseMoved( MouseEvent anEvent ) {
@@ -753,6 +961,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * This listener watches for changes to the selection in the
      * combo box.
+     * <p>
+     *  此侦听器监视对组合框中的选择所做的更改。
+     * 
      */
     protected class ItemHandler implements ItemListener {
         public void itemStateChanged( ItemEvent e ) {
@@ -768,6 +979,12 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * call the superclass methods to ensure that the combo popup correctly
      * handles property changes.
      *
+     * <p>
+     *  此侦听器监视已在组合框中更改的绑定属性。
+     * <p>
+     *  希望监听组合框属性更改的子类应调用超类方法以确保组合弹出框正确处理属性更改。
+     * 
+     * 
      * @see #createPropertyChangeListener
      */
     protected class PropertyChangeHandler implements PropertyChangeListener {
@@ -990,6 +1207,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * Overridden to unconditionally return false.
+     * <p>
+     *  重写到无条件返回false。
+     * 
      */
     public boolean isFocusTraversable() {
         return false;
@@ -1002,6 +1222,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * This protected method is implementation specific and should be private.
      * do not call or override.
+     * <p>
+     *  这种受保护的方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
      */
     protected void startAutoScrolling( int direction ) {
         // XXX - should be a private method within InvocationMouseMotionHandler
@@ -1039,6 +1262,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * This protected method is implementation specific and should be private.
      * do not call or override.
+     * <p>
+     *  这种受保护的方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
      */
     protected void stopAutoScrolling() {
         isAutoScrolling = false;
@@ -1052,6 +1278,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * This protected method is implementation specific and should be private.
      * do not call or override.
+     * <p>
+     *  这种受保护的方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
      */
     protected void autoScrollUp() {
         int index = list.getSelectedIndex();
@@ -1064,6 +1293,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * This protected method is implementation specific and should be private.
      * do not call or override.
+     * <p>
+     *  这种受保护的方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
      */
     protected void autoScrollDown() {
         int index = list.getSelectedIndex();
@@ -1087,6 +1319,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * Gets the AccessibleContext associated with this BasicComboPopup.
      * The AccessibleContext will have its parent set to the ComboBox.
      *
+     * <p>
+     *  获取与此BasicComboPopup相关联的AccessibleContext。 AccessibleContext将其父设置为ComboBox。
+     * 
+     * 
      * @return an AccessibleContext for the BasicComboPopup
      * @since 1.5
      */
@@ -1102,6 +1338,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * send the focus when the popup is brought up.  The standard implementation
      * delegates the focus to the editor (if the combo box is editable) or to
      * the JComboBox if it is not editable.
+     * <p>
+     *  这是一个实用程序方法,帮助事件处理程序找出在弹出窗口时发送焦点。标准实现将焦点委托给编辑器(如果组合框是可编辑的)或JComboBox如果它不可编辑。
+     * 
      */
     protected void delegateFocus( MouseEvent e ) {
         if ( comboBox.isEditable() ) {
@@ -1118,6 +1357,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * Makes the popup visible if it is hidden and makes it hidden if it is
      * visible.
+     * <p>
+     *  使弹出窗口可见,如果它是隐藏的,并使其隐藏,如果它是可见的。
+     * 
      */
     protected void togglePopup() {
         if ( isVisible() ) {
@@ -1133,6 +1375,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * method is used to synchronize the list selection with the
      * combo box selection.
      *
+     * <p>
+     * 将列表选择索引设置为selectedIndex。此方法用于将列表选择与组合框选择同步。
+     * 
+     * 
      * @param selectedIndex the index to set the list
      */
     private void setListSelection(int selectedIndex) {
@@ -1166,6 +1412,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * Retrieves the height of the popup based on the current
      * ListCellRenderer and the maximum row count.
+     * <p>
+     *  根据当前的ListCellRenderer和最大行数检索弹出窗口的高度。
+     * 
      */
     protected int getPopupHeightForRowCount(int maxRowCount) {
         // Set the cached value of the minimum row count
@@ -1205,6 +1454,10 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
      * no transformations are required, then the returned rectangle will
      * have the same values as the parameters.
      *
+     * <p>
+     *  基于组合框位置和封闭屏幕边界计算组合框的弹出部分的位置和大小。如果不需要转换,则返回的矩形将具有与参数相同的值。
+     * 
+     * 
      * @param px starting x location
      * @param py starting y location
      * @param pw starting width
@@ -1241,6 +1494,9 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
 
     /**
      * Calculates the upper left location of the Popup.
+     * <p>
+     *  计算Popup的左上角位置。
+     * 
      */
     private Point getPopupLocation() {
         Dimension popupSize = comboBox.getSize();
@@ -1267,6 +1523,8 @@ public class BasicComboPopup extends JPopupMenu implements ComboPopup {
     /**
      * A utility method used by the event listeners.  Given a mouse event, it changes
      * the list selection to the list item below the mouse.
+     * <p>
+     *  事件侦听器使用的实用程序方法。给定鼠标事件,它将列表选择更改为鼠标下方的列表项。
      */
     protected void updateListBoxSelectionForEvent(MouseEvent anEvent,boolean shouldScroll) {
         // XXX - only seems to be called from this class. shouldScroll flag is

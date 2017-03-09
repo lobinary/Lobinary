@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -11,6 +12,8 @@ package org.omg.PortableInterceptor;
 
 /**
    * All Portable Interceptors implement Interceptor.
+   * <p>
+   * 
    */
 public interface Interceptor extends InterceptorOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
 {

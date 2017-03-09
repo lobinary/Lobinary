@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,10 @@ import sun.rmi.server.UnicastServerRef2;
  * creates client connections as RMI objects exported through JRMP.
  * User code does not usually reference this class directly.</p>
  *
+ * <p>
+ *  <p>通过JRMP导出并将客户端连接创建为通过JRMP导出的RMI对象的{@link RMIServer}对象。用户代码通常不直接引用此类。</p>
+ * 
+ * 
  * @see RMIServerImpl
  *
  * @since 1.5
@@ -56,6 +61,10 @@ public class RMIJRMPServerImpl extends RMIServerImpl {
      * <p>Creates a new {@link RMIServer} object that will be exported
      * on the given port using the given socket factories.</p>
      *
+     * <p>
+     *  <p>创建一个新的{@link RMIServer}对象,该对象将使用给定的套接字工厂在给定端口上导出。</p>
+     * 
+     * 
      * @param port the port on which this object and the {@link
      * RMIConnectionImpl} objects it creates will be exported.  Can be
      * zero, to indicate any available port.
@@ -136,6 +145,10 @@ public class RMIJRMPServerImpl extends RMIServerImpl {
     /**
      * <p>Returns a serializable stub for this {@link RMIServer} object.</p>
      *
+     * <p>
+     *  <p>返回此{@link RMIServer}对象的可序列化存根。</p>
+     * 
+     * 
      * @return a serializable stub.
      *
      * @exception IOException if the stub cannot be obtained - e.g the
@@ -151,6 +164,11 @@ public class RMIJRMPServerImpl extends RMIServerImpl {
      * {@link RMIConnection} object are the ones supplied
      * to the <code>RMIJRMPServerImpl</code> constructor.</p>
      *
+     * <p>
+     *  <p>创建新的客户端连接作为通过JRMP导出的RMI对象。
+     * 新的{@link RMIConnection}对象的端口和套接字工厂是提供给<code> RMIJRMPServerImpl </code>构造函数的端口和套接字工厂。</p>。
+     * 
+     * 
      * @param connectionId the ID of the new connection. Every
      * connection opened by this connector server will have a
      * different id.  The behavior is unspecified if this parameter is
@@ -185,6 +203,8 @@ public class RMIJRMPServerImpl extends RMIServerImpl {
      * unexporting this object.  After returning from this method, the
      * connector server must not accept any new connections.</p>
      *
+     * <p>
+     * 
      * @exception IOException if the attempt to close the connector
      * server failed.
      */

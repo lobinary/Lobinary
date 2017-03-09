@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.spi.activation;
 
 /**
@@ -9,6 +10,9 @@ package com.sun.corba.se.spi.activation;
 
 
 /** Server callback API, passed to Activator in active method.
+/* <p>
+/* com / sun / corba / se / spi / activation / ServerHolder.java。
+/* 
     */
 public final class ServerHolder implements org.omg.CORBA.portable.Streamable
 {

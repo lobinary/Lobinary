@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,13 @@ import javax.swing.border.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  提供JEditorPane的外观和感觉。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class BasicEditorPaneUI extends BasicTextUI {
@@ -55,6 +63,10 @@ public class BasicEditorPaneUI extends BasicTextUI {
     /**
      * Creates a UI for the JTextPane.
      *
+     * <p>
+     *  创建JTextPane的UI。
+     * 
+     * 
      * @param c the JTextPane component
      * @return the UI
      */
@@ -64,6 +76,9 @@ public class BasicEditorPaneUI extends BasicTextUI {
 
     /**
      * Creates a new BasicEditorPaneUI.
+     * <p>
+     *  创建一个新的BasicEditorPaneUI。
+     * 
      */
     public BasicEditorPaneUI() {
         super();
@@ -74,6 +89,10 @@ public class BasicEditorPaneUI extends BasicTextUI {
      * UIManager.  This is used as a prefix to all the standard
      * text properties.
      *
+     * <p>
+     *  获取用作通过UIManager查找属性的键的名称。这用作所有标准文本属性的前缀。
+     * 
+     * 
      * @return the name ("EditorPane")
      */
     protected String getPropertyPrefix() {
@@ -83,6 +102,10 @@ public class BasicEditorPaneUI extends BasicTextUI {
     /**
      *{@inheritDoc}
      *
+     * <p>
+     *  @inheritDoc}
+     * 
+     * 
      * @since 1.5
      */
     public void installUI(JComponent c) {
@@ -94,6 +117,10 @@ public class BasicEditorPaneUI extends BasicTextUI {
     /**
      *{@inheritDoc}
      *
+     * <p>
+     *  @inheritDoc}
+     * 
+     * 
      * @since 1.5
      */
     public void uninstallUI(JComponent c) {
@@ -105,6 +132,10 @@ public class BasicEditorPaneUI extends BasicTextUI {
      * Fetches the EditorKit for the UI.  This is whatever is
      * currently set in the associated JEditorPane.
      *
+     * <p>
+     *  获取UI的EditorKit。这是当前在相关联的JEditorPane中设置的任何内容。
+     * 
+     * 
      * @return the editor capabilities
      * @see TextUI#getEditorKit
      */
@@ -116,6 +147,9 @@ public class BasicEditorPaneUI extends BasicTextUI {
     /**
      * Fetch an action map to use.  The map for a JEditorPane
      * is not shared because it changes with the EditorKit.
+     * <p>
+     *  获取要使用的操作映射。 JEdi​​torPane的映射不会共享,因为它会随EditorKit而改变。
+     * 
      */
     ActionMap getActionMap() {
         ActionMap am = new ActionMapUIResource();
@@ -144,6 +178,11 @@ public class BasicEditorPaneUI extends BasicTextUI {
      * This is implemented to rebuild the ActionMap based upon an
      * EditorKit change.
      *
+     * <p>
+     *  当在相关联的JTextComponent上更改绑定属性时,将调用此方法。这是一个钩子,UI实现可以改变以反映UI如何显示JTextComponent子类的绑定属性。
+     * 这是为了基于EditorKit更改重建ActionMap。
+     * 
+     * 
      * @param evt the property change event
      */
     protected void propertyChange(PropertyChangeEvent evt) {
@@ -267,6 +306,9 @@ public class BasicEditorPaneUI extends BasicTextUI {
      * Attribute key to reference the default font.
      * used in javax.swing.text.StyleContext.getFont
      * to resolve the default font.
+     * <p>
+     *  属性键引用默认字体。在javax.swing.text.StyleContext.getFont中使用以解析默认字体。
+     * 
      */
     private static final String FONT_ATTRIBUTE_KEY = "FONT_ATTRIBUTE_KEY";
 
@@ -332,6 +374,10 @@ public class BasicEditorPaneUI extends BasicTextUI {
     /**
      * Update the color in the default style of the document.
      *
+     * <p>
+     * 更新文档的默认样式中的颜色。
+     * 
+     * 
      * @param color the new color to use or null to remove the color attribute
      *              from the document's style
      */
@@ -357,6 +403,9 @@ public class BasicEditorPaneUI extends BasicTextUI {
     /**
      * Update the font in the default style of the document.
      *
+     * <p>
+     *  更新文档的默认样式中的字体。
+     * 
      * @param font the new font to use or null to remove the font attribute
      *             from the document's style
      */

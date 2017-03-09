@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -255,6 +256,110 @@ import sun.reflect.Reflection;
  * the code privileges so that checking always continues beyond the caller of
  * that {@code doPrivileged} method.
  *
+ * <p>
+ *  <p> AccessController类用于访问控制操作和决策。
+ * 
+ *  <p>更具体地说,AccessController类用于三个目的：
+ * 
+ * <ul>
+ *  <li>基于当前有效的安全策略<li>来决定是否允许或拒绝对关键系统资源的访问,以将代码标记为"特权",从而影响后续访问确定,<li> >以获得当前调用上下文的"快照",因此可以相对于所保存的上下文进
+ * 行来自不同上下文的访问控制决策。
+ *  </ul>。
+ * 
+ *  <p> {@link #checkPermission(Permission)checkPermission}方法决定是否授予或拒绝指定权限所指示的存取要求。示例呼叫如下所示。
+ * 在本示例中,{@code checkPermission}将确定是否向"/ temp"目录中名为"testFile"的文件授予"读取"访问权限。
+ * 
+ * <pre>
+ * 
+ *  FilePermission perm = new FilePermission("/ temp / testFile","read"); AccessController.checkPermissi
+ * on(perm);。
+ * 
+ * </pre>
+ * 
+ *  <p>如果允许请求访问,{@code checkPermission}会安静返回。如果拒绝,则抛出AccessControlException。
+ * 如果请求的权限类型不正确或包含无效值,那么也可能抛出AccessControlException。尽可能提供此类信息。
+ * 
+ * 假设当前线程遍历m个调用者,按照调用者1到调用者2到调用者m的顺序。然后调用者m调用{@code checkPermission}方法。
+ *  {@code checkPermission}方法根据以下算法确定是授予还是拒绝访问：。
+ * 
+ *  <pre> {@code for(int i = m; i> 0; i--){
+ * 
+ *  if(caller i的域没有权限)throw AccessControlException
+ * 
+ *  else if(caller i被标记为特权){if(在调用doPrivileged中指定上下文)context.checkPermission(permission)if(在doPrivileged的调用中指定了有限权限){for(each limited permission){if (有限权限意味着请求的权限)return; }
+ * } else return; }}。
+ * 
+ *  //接下来,检查创建线程时继承的上下文。 //每当一个新线程被创建时,在那时的AccessControlContext被存储并与新线程相关联,作为//"继承"上下文。
+ * 
+ *  inheritedContext.checkPermission(permission); } </pre>
+ * 
+ * <p>来电者可以标示为「有特权」(请参阅{@link #doPrivileged(PrivilegedAction)doPrivileged}以下)。
+ * 当进行访问控制决策时,{@code checkPermission}方法通过没有上下文参数的{@code doPrivileged}调用停止检查它是否到达被标记为"特权"的调用者(有关上下文参数的信息,
+ * 请参见下文)。
+ * <p>来电者可以标示为「有特权」(请参阅{@link #doPrivileged(PrivilegedAction)doPrivileged}以下)。
+ * 如果该调用者的域具有指定的权限,并且至少有一个限制权限参数(如果有)意味着请求的权限,则不进行进一步检查,并且{@code checkPermission}静默返回,表示允许请求的访问。
+ * 如果该域没有指定的权限,则会抛出异常,像往常一样。
+ * 如果调用者的域具有指定的权限,但并未暗示在调用{@code doPrivileged}中提供的任何限制权限参数,则权限检查会继续,直到没有更多调用者或另一个{@code doPrivileged}调用匹
+ * 配请求权限并正常返回。
+ * 如果该域没有指定的权限,则会抛出异常,像往常一样。
+ * 
+ *  <p>"特权"功能的正常使用如下。如果不需要从"特权"块中返回值,请执行以下操作：
+ * 
+ *  <pre> {@code somemethod(){...在这里的普通代码... AccessController.doPrivileged(new PrivilegedAction <Void>(){public Void run(){//特权代码在这里,例如：System.loadLibrary ("awt"); return null; // nothing to return}
+ * }); ... normal code here ...}} </pre>。
+ * 
+ * <p>
+ * PrivilegedAction是一个具有单个方法的接口,命名为{@code run}。上面的例子显示了该接口的实现的创建;提供了{@code run}方法的具体实现。
+ * 当调用{@code doPrivileged}时,PrivilegedAction实现的实例被传递给它。
+ *  {@code doPrivileged}方法在启用特权后从PrivilegedAction实现中调用{@code run}方法,并返回{@code run}方法的返回值作为{@code doPrivileged}
+ * 返回值(在此示例中忽略该值) )。
+ * 当调用{@code doPrivileged}时,PrivilegedAction实现的实例被传递给它。
+ * 
+ *  <p>如果您需要返回值,可以执行以下操作：
+ * 
+ *  <pre> {@code somemethod(){... normal code here ... String user = AccessController.doPrivileged(new PrivilegedAction <String>(){public String run(){return System.getProperty("user.name" );}
+ * }); ... normal code here ...}} </pre>。
+ * 
+ *  <p>如果在{@code run}方法中执行的操作可能会抛出"已检查"异常(在方法的{@code throws}子句中列出的异常),那么您需要使用{@code PrivilegedExceptionAction}
+ * 接口而不是{@code PrivilegedAction}接口：。
+ * 
+ * <p> {@code somemethod()throws FileNotFoundException {...正常代码在这里... try {FileInputStream fis = AccessController.doPrivileged(new PrivilegedExceptionAction <FileInputStream>(){public FileInputStream run()throws FileNotFoundException {return new FileInputStream "someFile");}
+ * }); } catch(PrivilegedActionException e){// e.getException()应该是FileNotFoundException的一个实例,//因为只有"checked"异常将被"包装"在一个PrivilegedActionException。
+ *  throw(FileNotFoundException)e.getException(); } ... normal code here ...}} </pre>。
+ * 
+ *  <p>在使用"特权"结构时非常小心,并且始终记住使特权代码段尽可能小。您可以传递{@code Permission}参数以进一步限制"特权"的范围(请参见下文)。
+ * 
+ *  <p>请注意,{@code checkPermission}总是在当前正在执行的线程的上下文中执行安全检查。
+ * 有时,应该在给定上下文中进行的安全检查实际上需要在<i>不同的上下文(例如,从工作者线程内)中完成。
+ * 为此情况提供了{@link #getContext()getContext}方法和AccessControlContext类。
+ *  {@code getContext}方法获取当前调用上下文的"快照",并将其放在AccessControlContext对象中,它返回。示例调用如下：。
+ * 
+ * <pre>
+ * 
+ *  AccessControlContext acc = AccessController.getContext()
+ * 
+ * </pre>
+ * 
+ * <p>
+ * AccessControlContext本身有一个{@code checkPermission}方法,该方法基于上下文<i> it </i>封装而不是当前执行线程的访问决策。
+ * 不同上下文中的代码因此可以在先前保存的AccessControlContext对象上调用该方法。示例调用如下：。
+ * 
+ * <pre>
+ * 
+ *  acc.checkPermission(permission)
+ * 
+ * </pre>
+ * 
+ *  <p>还有一些时候,你不知道先验检查上下文的权限。在这些情况下,您可以使用接受上下文的doPrivileged方法。您还可以通过传递其他{@code Permission}参数来限制特权代码的范围。
+ * 
+ * <pre> {@code somemethod(){AccessController.doPrivileged(new PrivilegedAction <Object>(){public Object run(){//代码在这里。
+ * 这个// run方法中的任何权限检查将要求//调用者的保护域和快照的//上下文具有所需的权限如果一个被请求的//权限不是由限制FilePermission //参数隐含的,那么线程的检查继续超过doPr
+ * ivileged的调用者。
+ * }},acc ,new FilePermission("/ temp / *",read)); ... normal code here ...}} </pre> <p>传递{@code AllPermission}
+ * 实例的限制{@code Permission}参数相当于调用等效的{@code doPrivileged}方法, {@code Permission}个参数。
+ * 传递长度为零的{@code Permission}数组会禁用代码权限,因此检查总是继续超出{@code doPrivileged}方法的调用者。
+ * 
+ * 
  * @see AccessControlContext
  *
  * @author Li Gong
@@ -265,6 +370,9 @@ public final class AccessController {
 
     /**
      * Don't allow anyone to instantiate an AccessController
+     * <p>
+     *  不允许任何人实例化AccessController
+     * 
      */
     private AccessController() { }
 
@@ -279,6 +387,14 @@ public final class AccessController {
      * <p> Note that any DomainCombiner associated with the current
      * AccessControlContext will be ignored while the action is performed.
      *
+     * <p>
+     *  执行指定的{@code PrivilegedAction}启用权限。使用呼叫者的保护域所拥有的所有</i>权限来执行动作。
+     * 
+     *  <p>如果操作的{@code run}方法抛出(未检查的)异常,它将传播通过此方法。
+     * 
+     *  <p>请注意,在执行操作时,将忽略与当前AccessControlContext关联的任何DomainCombiner。
+     * 
+     * 
      * @param <T> the type of the value returned by the PrivilegedAction's
      *                  {@code run} method.
      *
@@ -308,6 +424,14 @@ public final class AccessController {
      * <p> This method preserves the current AccessControlContext's
      * DomainCombiner (which may be null) while the action is performed.
      *
+     * <p>
+     * 执行指定的{@code PrivilegedAction}启用权限。使用呼叫者的保护域所拥有的所有</i>权限来执行动作。
+     * 
+     *  <p>如果操作的{@code run}方法抛出(未检查的)异常,它将传播通过此方法。
+     * 
+     *  <p>此方法在执行操作时保留当前AccessControlContext的DomainCombiner(可能为null)。
+     * 
+     * 
      * @param <T> the type of the value returned by the PrivilegedAction's
      *                  {@code run} method.
      *
@@ -351,6 +475,16 @@ public final class AccessController {
      * {@link java.security.SecurityPermission}, then the action is performed
      * with no permissions.
      *
+     * <p>
+     *  使用指定的{@code AccessControlContext}启用和限制的权限执行指定的{@code PrivilegedAction}。
+     * 该操作使用呼叫者保护域拥有的权限和由指定的{@code AccessControlContext}表示的域拥有的权限的交集执行。
+     * <p>
+     *  如果操作的{@code run}方法抛出一个(未检查的)异常,它将传播通过这个方法。
+     * <p>
+     *  如果安装了安全管理器并且未通过系统代码创建指定的{@code AccessControlContext},并且未向调用者的{@code ProtectionDomain}授予{@literal"createAccessControlContext"}
+     *  {@link java.security.SecurityPermission}那么将在没有权限的情况下执行操作。
+     * 
+     * 
      * @param <T> the type of the value returned by the PrivilegedAction's
      *                  {@code run} method.
      * @param action the action to be performed.
@@ -393,6 +527,18 @@ public final class AccessController {
      * {@link java.security.SecurityPermission}, then the action is performed
      * with no permissions.
      *
+     * <p>
+     *  使用指定的{@code AccessControlContext}启用和限制的特权以及由指定的{@code Permission}参数限制的特权范围执行指定的{@code PrivilegedAction}
+     * 。
+     * 
+     * 该操作使用呼叫者保护域拥有的权限和由指定的{@code AccessControlContext}表示的域拥有的权限的交集执行。
+     * <p>
+     *  如果操作的{@code run}方法抛出一个(未检查的)异常,它将传播通过这个方法。
+     * <p>
+     *  如果安装了安全管理器并且未通过系统代码创建指定的{@code AccessControlContext},并且未向调用者的{@code ProtectionDomain}授予{@literal"createAccessControlContext"}
+     *  {@link java.security.SecurityPermission}那么将在没有权限的情况下执行操作。
+     * 
+     * 
      * @param <T> the type of the value returned by the PrivilegedAction's
      *                  {@code run} method.
      * @param action the action to be performed.
@@ -454,6 +600,20 @@ public final class AccessController {
      * {@link java.security.SecurityPermission}, then the action is performed
      * with no permissions.
      *
+     * <p>
+     *  使用指定的{@code AccessControlContext}启用和限制的特权以及由指定的{@code Permission}参数限制的特权范围执行指定的{@code PrivilegedAction}
+     * 。
+     * 
+     *  该操作使用呼叫者保护域拥有的权限和由指定的{@code AccessControlContext}表示的域拥有的权限的交集执行。
+     * <p>
+     *  如果操作的{@code run}方法抛出一个(未检查的)异常,它将传播通过这个方法。
+     * 
+     *  <p>此方法在执行操作时保留当前AccessControlContext的DomainCombiner(可能为null)。
+     * <p>
+     * 如果安装了安全管理器并且未通过系统代码创建指定的{@code AccessControlContext},并且未向调用者的{@code ProtectionDomain}授予{@literal"createAccessControlContext"}
+     *  {@link java.security.SecurityPermission}那么将在没有权限的情况下执行操作。
+     * 
+     * 
      * @param <T> the type of the value returned by the PrivilegedAction's
      *                  {@code run} method.
      * @param action the action to be performed.
@@ -506,6 +666,14 @@ public final class AccessController {
      * <p> Note that any DomainCombiner associated with the current
      * AccessControlContext will be ignored while the action is performed.
      *
+     * <p>
+     *  执行指定的{@code PrivilegedExceptionAction}并启用权限。使用呼叫者的保护域所拥有的所有</i>权限来执行动作。
+     * 
+     *  <p>如果操作的{@code run}方法抛出未经检查的<i> </i>异常,它将传播通过此方法。
+     * 
+     *  <p>请注意,在执行操作时,将忽略与当前AccessControlContext关联的任何DomainCombiner。
+     * 
+     * 
      * @param <T> the type of the value returned by the
      *                  PrivilegedExceptionAction's {@code run} method.
      *
@@ -539,6 +707,14 @@ public final class AccessController {
      * <p> This method preserves the current AccessControlContext's
      * DomainCombiner (which may be null) while the action is performed.
      *
+     * <p>
+     *  执行指定的{@code PrivilegedExceptionAction}并启用权限。使用呼叫者的保护域所拥有的所有</i>权限来执行动作。
+     * 
+     *  <p>如果操作的{@code run}方法抛出未经检查的<i> </i>异常,它将传播通过此方法。
+     * 
+     *  <p>此方法在执行操作时保留当前AccessControlContext的DomainCombiner(可能为null)。
+     * 
+     * 
      * @param <T> the type of the value returned by the
      *                  PrivilegedExceptionAction's {@code run} method.
      *
@@ -571,6 +747,9 @@ public final class AccessController {
 
     /**
      * preserve the combiner across the doPrivileged call
+     * <p>
+     *  保留跨越doPrivileged调用的组合器
+     * 
      */
     private static AccessControlContext preserveCombiner(DomainCombiner combiner,
                                                          Class<?> caller)
@@ -580,6 +759,9 @@ public final class AccessController {
 
     /**
      * Create a wrapper to contain the limited privilege scope data.
+     * <p>
+     *  创建包含有限权限范围数据的包装器。
+     * 
      */
     private static AccessControlContext
         createWrapper(DomainCombiner combiner, Class<?> caller,
@@ -629,6 +811,16 @@ public final class AccessController {
      * {@link java.security.SecurityPermission}, then the action is performed
      * with no permissions.
      *
+     * <p>
+     * 使用指定的{@code AccessControlContext}启用和限制的权限执行指定的{@code PrivilegedExceptionAction}。
+     * 该操作使用呼叫者保护域拥有的权限和由指定的{@code AccessControlContext}表示的域拥有的权限的交集执行。
+     * <p>
+     *  如果操作的{@code run}方法抛出未经检查的<i> </i>异常,它将通过此​​方法传播。
+     * <p>
+     *  如果安装了安全管理器并且未通过系统代码创建指定的{@code AccessControlContext},并且未向调用者的{@code ProtectionDomain}授予{@literal"createAccessControlContext"}
+     *  {@link java.security.SecurityPermission}那么将在没有权限的情况下执行操作。
+     * 
+     * 
      * @param <T> the type of the value returned by the
      *                  PrivilegedExceptionAction's {@code run} method.
      * @param action the action to be performed
@@ -675,6 +867,18 @@ public final class AccessController {
      * {@link java.security.SecurityPermission}, then the action is performed
      * with no permissions.
      *
+     * <p>
+     *  以指定的{@code AccessControlContext}启用和限制的特权并且由指定的{@code Permission}参数限制的特权范围执行指定的{@code PrivilegedExceptionAction}
+     * 。
+     * 
+     *  该操作使用呼叫者保护域拥有的权限和由指定的{@code AccessControlContext}表示的域拥有的权限的交集执行。
+     * <p>
+     *  如果操作的{@code run}方法抛出一个(未检查的)异常,它将传播通过这个方法。
+     * <p>
+     * 如果安装了安全管理器并且未通过系统代码创建指定的{@code AccessControlContext},并且未向调用者的{@code ProtectionDomain}授予{@literal"createAccessControlContext"}
+     *  {@link java.security.SecurityPermission}那么将在没有权限的情况下执行操作。
+     * 
+     * 
      * @param <T> the type of the value returned by the
      *                  PrivilegedExceptionAction's {@code run} method.
      * @param action the action to be performed.
@@ -738,6 +942,20 @@ public final class AccessController {
      * {@link java.security.SecurityPermission}, then the action is performed
      * with no permissions.
      *
+     * <p>
+     *  以指定的{@code AccessControlContext}启用和限制的特权并且由指定的{@code Permission}参数限制的特权范围执行指定的{@code PrivilegedExceptionAction}
+     * 。
+     * 
+     *  该操作使用呼叫者保护域拥有的权限和由指定的{@code AccessControlContext}表示的域拥有的权限的交集执行。
+     * <p>
+     *  如果操作的{@code run}方法抛出一个(未检查的)异常,它将传播通过这个方法。
+     * 
+     *  <p>此方法在执行操作时保留当前AccessControlContext的DomainCombiner(可能为null)。
+     * <p>
+     *  如果安装了安全管理器并且未通过系统代码创建指定的{@code AccessControlContext},并且未向调用者的{@code ProtectionDomain}授予{@literal"createAccessControlContext"}
+     *  {@link java.security.SecurityPermission}那么将在没有权限的情况下执行操作。
+     * 
+     * 
      * @param <T> the type of the value returned by the
      *                  PrivilegedExceptionAction's {@code run} method.
      * @param action the action to be performed.
@@ -789,6 +1007,10 @@ public final class AccessController {
      * starting at the first class with a non-null
      * ProtectionDomain.
      *
+     * <p>
+     *  返回AccessControl上下文。即它获得堆栈上所有调用者的保护域,从具有非null ProtectionDomain的第一个类开始。
+     * 
+     * 
      * @return the access control context based on the current stack or
      *         null if there was only privileged system code.
      */
@@ -800,6 +1022,9 @@ public final class AccessController {
      * Returns the "inherited" AccessControl context. This is the context
      * that existed when the thread was created. Package private so
      * AccessControlContext can use it.
+     * <p>
+     * 返回"继承的"AccessControl上下文。这是创建线程时存在的上下文。包私人所以AccessControlContext可以使用它。
+     * 
      */
 
     static native AccessControlContext getInheritedAccessControlContext();
@@ -810,6 +1035,11 @@ public final class AccessController {
      * limited privilege scope, and places it in an AccessControlContext object.
      * This context may then be checked at a later point, possibly in another thread.
      *
+     * <p>
+     *  此方法接受当前调用上下文的"快照",其中包括当前线程继承的AccessControlContext和任何有限权限范围,并将其放置在AccessControlContext对象中。
+     * 然后可以在稍后的点,可能在另一线程中检查该上下文。
+     * 
+     * 
      * @see AccessControlContext
      *
      * @return the AccessControlContext based on the current context.
@@ -836,6 +1066,10 @@ public final class AccessController {
      * getPermission method of the AccessControlException returns the
      * {@code perm} Permission object instance.
      *
+     * <p>
+     *  根据当前的AccessControlContext和安全策略确定是否允许或拒绝由指定的权限指示的访问请求。如果允许访问请求,此方法会静默返回,否则会抛出AccessControlException。
+     *  AccessControlException的getPermission方法返回{@code perm} Permission对象实例。
+     * 
      * @param perm the requested permission.
      *
      * @exception AccessControlException if the specified permission

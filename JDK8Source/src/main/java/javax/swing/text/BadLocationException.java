@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ package javax.swing.text;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  此异常用于报告文档模型中的错误位置(即尝试引用不存在的位置)。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 @SuppressWarnings("serial")
@@ -45,6 +53,10 @@ public class BadLocationException extends Exception
     /**
      * Creates a new BadLocationException object.
      *
+     * <p>
+     *  创建一个新的BadLocationException对象。
+     * 
+     * 
      * @param s         a string indicating what was wrong with the arguments
      * @param offs      offset within the document that was requested &gt;= 0
      */
@@ -56,6 +68,9 @@ public class BadLocationException extends Exception
     /**
      * Returns the offset into the document that was not legal.
      *
+     * <p>
+     *  返回文档中不合法的偏移量。
+     * 
      * @return the offset &gt;= 0
      */
     public int offsetRequested() {

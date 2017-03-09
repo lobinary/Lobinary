@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -14,6 +15,9 @@ public interface SUCCESSFUL
   /**
    * Indicates a successful Reply Status. One possible value for 
    * <code>RequestInfo.reply_status</code>.
+   * <p>
+   * 
+   * 
    * @see RequestInfo#reply_status
    * @see SYSTEM_EXCEPTION
    * @see USER_EXCEPTION

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XObjectFactory.java,v 1.1.2.1 2005/08/01 01:29:30 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XObjectFactory.java,v 1.1.2.1 2005/08/01 01:29:30 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.objects;
 
@@ -38,6 +51,10 @@ public class XObjectFactory
    * function can not make an XObject that exposes DOM Nodes, NodeLists, and
    * NodeIterators to the XSLT stylesheet as node-sets.
    *
+   * <p>
+   *  基于传递的对象的类型创建正确的XObject。此函数不能使XObject将DOM节点,节点列表和NodeIterator暴露给XSLT样式表作为节点集。
+   * 
+   * 
    * @param val The java object which this object will wrap.
    *
    * @return the right XObject based on the type of the object passed.
@@ -76,6 +93,9 @@ public class XObjectFactory
    * This function <emph>can</emph> make an XObject that exposes DOM Nodes, NodeLists, and
    * NodeIterators to the XSLT stylesheet as node-sets.
    *
+   * <p>
+   *  基于传递的对象的类型创建正确的XObject。此函数<emph>可以</emph>制作一个XObject,将DOM节点,NodeLists和NodeIterator暴露给XSLT样式表作为节点集。
+   * 
    * @param val The java object which this object will wrap.
    * @param xctxt The XPath context.
    *

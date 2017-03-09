@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -84,6 +85,34 @@ import java.util.WeakHashMap;
  * with the same {@code Class} for {@code equals} to return true.
  * </ul>
  *
+ * <p>
+ *  <p> {@ link InvocationHandler}将MBean的管理接口中的方法通过MBean服务器转发到MBean。</p>
+ * 
+ *  <p>给定一个{@link MBeanServerConnection},该MBean服务器中MBean的{@link ObjectName}和一个描述MBean的管理接口的Java接口<code> 
+ * Intf </code>标准MBean或MXBean,此类可用于构建MBean的代理。
+ * 代理实现接口<code> Intf </code>,使得它的所有方法都通过MBean服务器转发到MBean。</p>。
+ * 
+ *  <p>如果{@code InvocationHandler}是针对MXBean的,那么方法的参数将从MXBean接口中声明的类型转换为相应的映射类型,并将返回值从映射类型转换为声明类型。
+ * 例如,使用方法<br>。
+ * 
+ *  {@code public List <String> reverse(List <String> list);} <br>
+ * 
+ *  并且给定{@code List <String>}的映射类型是{@code String []},对{@code proxy.reverse(someList)}的调用将{@code someList}
+ * 从{@code List <String>}到{@code String []},调用MBean操作{@code reverse},然后将返回的{@code String []}转换为{@code List <String>}
+ * 。
+ * 
+ * <p>当在代理上使用此调用处理程序调用时,Object.toString(),Object.hashCode()或Object.equals(Object)方法作为代理MBean上的方法转发到MBean
+ * 服务器,它出现在代理的接口之一。
+ * 对于使用{@link JMX#newMBeanProxy(MBeanServerConnection,ObjectName,Class)JMX.newMBeanProxy}或{@link JMX#newMXBeanProxy(MBeanServerConnection,ObjectName,Class)JMX.newMXBeanProxy}
+ * 创建的代理,这意味着该方法必须出现在标准MBean或MXBean接口。
+ * 否则这些方法具有以下行为：。
+ * <ul>
+ *  <li> toString()返回代理的字符串表示<li> hashCode()返回代理的哈希代码,使得两个相同的代理具有相同的哈希代码<li>当且仅当对象参数与​​此代理具有相同的代理类,其MBea
+ * nServerInvocationHandler具有相同的MBeanServerConnection和ObjectName;如果{@code MBeanServerInvocationHandler}是
+ * 用{@code Class}参数构造的,那么另一个必须用{@code equals}的{@code equals}构造成返回true。
+ * </ul>
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanServerInvocationHandler implements InvocationHandler {
@@ -102,6 +131,17 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
      * to {@code new MBeanServerInvocationHandler(connection,
      * objectName, false)}.</p>
      *
+     * <p>
+     * <p>将方法通过MBean服务器转发到标准MBean的调用处理程序。
+     * 可以调用此构造函数,而不是依赖{@link JMX#newMBeanProxy(MBeanServerConnection,ObjectName,Class)JMX.newMBeanProxy},例如,
+     * 如果您需要向{@link Proxy#newProxyInstance Proxy提供不同的{@link ClassLoader} newProxyInstance}。
+     * <p>将方法通过MBean服务器转发到标准MBean的调用处理程序。</p>。
+     * 
+     *  <p>此构造函数不适用于MXBean。
+     * 使用{@link #MBeanServerInvocationHandler(MBeanServerConnection,ObjectName,boolean)}。
+     * 这个构造函数等同于{@code new MBeanServerInvocationHandler(connection,objectName,false)}。</p>。
+     * 
+     * 
      * @param connection the MBean server connection through which all
      * methods of a proxy using this handler will be forwarded.
      *
@@ -123,6 +163,13 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
      * different {@link ClassLoader} to {@link Proxy#newProxyInstance
      * Proxy.newProxyInstance}.</p>
      *
+     * <p>
+     *  <p>可以通过MBean服务器将方法转发到标准MBean或MXBean的调用处理程序。
+     * 可以调用此构造函数而不是依赖{@link JMX#newMXBeanProxy(MBeanServerConnection,ObjectName,Class)JMX.newMXBeanProxy},例如
+     * ,如果您需要向{@link Proxy#newProxyInstance Proxy提供一个不同的{@link ClassLoader} newProxyInstance}。
+     *  <p>可以通过MBean服务器将方法转发到标准MBean或MXBean的调用处理程序。</p>。
+     * 
+     * 
      * @param connection the MBean server connection through which all
      * methods of a proxy using this handler will be forwarded.
      *
@@ -153,6 +200,10 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
      * <p>The MBean server connection through which the methods of
      * a proxy using this handler are forwarded.</p>
      *
+     * <p>
+     *  <p> MBean服务器连接,通过该连接,转发使用此处理程序的代理的方法。</p>
+     * 
+     * 
      * @return the MBean server connection.
      *
      * @since 1.6
@@ -165,6 +216,10 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
      * <p>The name of the MBean within the MBean server to which methods
      * are forwarded.
      *
+     * <p>
+     *  <p> MBean服务器中要转发方法的MBean的名称。
+     * 
+     * 
      * @return the object name.
      *
      * @since 1.6
@@ -177,6 +232,10 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
      * <p>If true, the proxy is for an MXBean, and appropriate mappings
      * are applied to method parameters and return values.
      *
+     * <p>
+     *  <p>如果为true,则代理针对MXBean,并将适当的映射应用于方法参数和返回值。
+     * 
+     * 
      * @return whether the proxy is for an MXBean.
      *
      * @since 1.6
@@ -204,6 +263,20 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
      * <code>interfaceClass</code> and the second, if present, is
      * <code>NotificationEmitter.class</code>.
      *
+     * <p>
+     * <p>通过将其方法通过给定的MBean服务器转发到指定的MBean,返回实现给定接口的代理。
+     * 从1.6开始,此方法优先使用{@link JMX#newMBeanProxy(MBeanServerConnection,ObjectName,Class)}和{@link JMX#newMBeanProxy(MBeanServerConnection,ObjectName,Class,boolean)}
+     * 。
+     * <p>通过将其方法通过给定的MBean服务器转发到指定的MBean,返回实现给定接口的代理。</p>。
+     * 
+     *  <p>此方法相当于{@link Proxy#newProxyInstance Proxy.newProxyInstance} <code>(interfaceClass.getClassLoader(
+     * ),interfaces,handler)</code>。
+     * 这里<code> handler </code>是{@link #MBeanServerInvocationHandler new MBeanServerInvocationHandler(connection,objectName)}
+     * 的结果,<code> interfaces </code>是一个数组,如果<code> notificationBroadcaster <代码>为false,如果为真则为2。
+     *  <code> interfaces </code>的第一个元素是<code> interfaceClass </code>,第二个元素(如果存在)是<code> NotificationEmitter
+     * .class </code>。
+     * 
+     * 
      * @param connection the MBean server to forward to.
      * @param objectName the name of the MBean within
      * <code>connection</code> to forward to.
@@ -257,6 +330,10 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
 
                 /* Inexplicably, InvocationHandler specifies that args is null
                    when the method takes no arguments rather than a
+                /* <p>
+                /*  当方法不使用参数而不是a
+                /* 
+                /* 
                    zero-length array.  */
                 final int nargs = (args == null) ? 0 : args.length;
 
@@ -310,6 +387,11 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
            proxy mechanism in an UndeclaredThrowableException unless
            it happens to be declared in the "throws" clause of the
            method being invoked on the proxy.
+        /* <p>
+        /*  由MBeanServerConnection.invoke声明的这些异常之一： -  RemoteException：无法与MBeanServer通信; -  InstanceNotFoundExce
+        /* ption：objectName未注册; -  ReflectionException：objectName已注册,但没有调用该方法。
+        /* 在所有这些情况下,异常将由UndeclaredThrowableException中的代理机制包装,除非它恰好在代理上调用的方法的"throws"子句中声明。
+        /* 
          */
     }
 
@@ -347,6 +429,10 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
             /* The various throws of IllegalArgumentException here
                should not happen, since we know what the methods in
                NotificationBroadcaster and NotificationEmitter
+            /* <p>
+            /* 不应该发生,因为我们知道NotificationBroadcaster和NotificationEmitter中的方法
+            /* 
+            /* 
                are.  */
             if (nargs != 3) {
                 final String msg =
@@ -354,6 +440,8 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
                 throw new IllegalArgumentException(msg);
             }
             /* Other inconsistencies will produce ClassCastException
+            /* <p>
+            /* 
                below.  */
 
             NotificationListener listener = (NotificationListener) args[0];
@@ -368,6 +456,8 @@ public class MBeanServerInvocationHandler implements InvocationHandler {
         } else if (methodName.equals("removeNotificationListener")) {
 
             /* NullPointerException if method with no args, but that
+            /* <p>
+            /* 
                shouldn't happen because removeNL does have args.  */
             NotificationListener listener = (NotificationListener) args[0];
 

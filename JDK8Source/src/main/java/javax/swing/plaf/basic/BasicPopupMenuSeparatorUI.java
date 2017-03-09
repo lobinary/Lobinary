@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import javax.swing.plaf.ComponentUI;
  * A Basic L&amp;F implementation of PopupMenuSeparatorUI.  This implementation
  * is a "combined" view/controller.
  *
+ * <p>
+ *  PopupMenuSeparatorUI的基本L&amp; F实现。这个实现是一个"组合"视图/控制器。
+ * 
  * @author Jeff Shapiro
  */
 

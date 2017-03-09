@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -88,6 +89,32 @@ import com.sun.imageio.plugins.jpeg.JPEG;
  * see the <A HREF="../../metadata/doc-files/jpeg_metadata.html">JPEG
  * metadata format specification and usage notes</A>.
  *
+ * <p>
+ *  该类增加了在使用内置的JPEG编写器插件时设置JPEG量化和霍夫曼表的能力,并且要求为图像计算优化的霍夫曼表。
+ * 此类的实例将从内置的JPEG <code> ImageWriter </code>的<code> getDefaultImageWriteParam </code>方法返回。
+ * 
+ *  <p>这些添加的主要目的是允许在编码缩写流中使用表的规范。内置的JPEG写入器还将接受普通的<code> ImageWriteParam </code>,在这种情况下,写入器将在内部构建必要的表。
+ * 
+ *  <p>在任一种情况下,<code> ImageWriteParam </code>中的质量设置具有与基础库相同的含义：1.00表示所有1的量化表,0.75表示"标准",视觉无损量化表,0.00表示所有
+ * 255的水化表。
+ * 
+ *  <p>虽然缩写流的表通常通过首先编写仅包含表的缩写流来指定,但在一些应用中,表是提前固定的。这个类允许直接从客户端代码指定表。
+ * 
+ * <p>通常,这些表在传递给编写器的<code> IIOMetadata </code>对象中指定,并且这些对象中包含的任何表都将写入流。如果在元数据中没有指定表,则写入缩写流。
+ * 如果元数据中没有包含表,并且没有在<code> JPEGImageWriteParam </code>中指定表,则使用"标准"视觉无损表来对缩略流进行编码。
+ * 当必须在不向流写入任何表的情况下写入缩写流时,必须使用此类来指定表。为了使用这个类,传递给writer的元数据对象必须不包含表,并且不必提供流元数据。
+ * 有关默认表的更多信息,请参阅{@link JPEGQTable JPEGQTable}和{@link JPEGHuffmanTable JPEGHuffmanTable}。
+ * 
+ *  <p>作者的<code> getDefaultWriteParam </code>方法返回的默认<code> JPEGImageWriteParam </code>不包含表。
+ * 默认表包含在作者返回的默认<code> IIOMetadata </code>对象中。
+ * 
+ * <p>如果元数据包含表,则会忽略<code> JPEGImageWriteParam </code>中给出的表。
+ * 此外,一旦已经写入一组表,则只有元数据中的表可以覆盖它们用于随后的写入,无论是相同的流还是不同的流。
+ * 为了使用这个类指定新表,必须调用writer的{@link javax.imageio.ImageWriter#reset reset}方法。
+ * 
+ * <p>
+ *  有关内置JPEG插件操作的详情,请参阅<A HREF="../../metadata/doc-files/jpeg_metadata.html"> JPEG元数据格式规范和使用说明</A >。
+ * 
  */
 public class JPEGImageWriteParam extends ImageWriteParam {
 
@@ -110,6 +137,11 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * named "JPEG", is supported.  The default compression quality is
      * 0.75.
      *
+     * <p>
+     *  构造一个<code> JPEGImageWriteParam </code>。不支持平铺。支持逐行编码。默认渐进模式为MODE_DISABLED。支持单一形式的压缩,名为"JPEG"。
+     * 默认压缩质量为0.75。
+     * 
+     * 
      * @param locale a <code>Locale</code> to be used by the
      * superclass to localize compression type names and quality
      * descriptions, or <code>null</code>.
@@ -130,6 +162,12 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * <p> The default implementation resets the compression quality
      * to <code>0.75F</code>.
      *
+     * <p>
+     *  删除任何先前的压缩质量设置。
+     * 
+     *  <p>默认实现将压缩质量重置为<code> 0.75F </code>。
+     * 
+     * 
      * @exception IllegalStateException if the compression mode is not
      * <code>MODE_EXPLICIT</code>.
      */
@@ -145,6 +183,10 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * Returns <code>false</code> since the JPEG plug-in only supports
      * lossy compression.
      *
+     * <p>
+     *  返回<code> false </code>,因为JPEG插件仅支持有损压缩。
+     * 
+     * 
      * @return <code>false</code>.
      *
      * @exception IllegalStateException if the compression mode is not
@@ -184,6 +226,10 @@ public class JPEGImageWriteParam extends ImageWriteParam {
     /**
      * Returns <code>true</code> if tables are currently set.
      *
+     * <p>
+     *  如果当前设置了表,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if tables are present.
      */
     public boolean areTablesSet() {
@@ -200,6 +246,11 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * in the metadata are assumed to be equivalent to indices into
      * these arrays.  The argument arrays are copied by this method.
      *
+     * <p>
+     * 设置在编码缩写流中使用的量化和霍夫曼表。每种类型最多可以有4个表。如果在元数据中指定了表,则会忽略这些表。所有参数必须为非<code> null </code>。
+     * 两个霍夫曼表的数组必须具有相同数量的元素。假设元数据中的帧和扫描头中的表说明符等同于这些数组中的索引。参数数组由此方法复制。
+     * 
+     * 
      * @param qTables An array of quantization table objects.
      * @param DCHuffmanTables An array of Huffman table objects.
      * @param ACHuffmanTables An array of Huffman table objects.
@@ -231,6 +282,10 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * Removes any quantization and Huffman tables that are currently
      * set.
      *
+     * <p>
+     *  删除当前设置的任何量化和霍夫曼表。
+     * 
+     * 
      * @see #setEncodeTables
      */
     public void unsetEncodeTables() {
@@ -244,6 +299,10 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * most recent call to <code>setEncodeTables</code>, or
      * <code>null</code> if tables are not currently set.
      *
+     * <p>
+     *  返回在最近一次调用<code> setEncodeTables </code>或<code> null </code>时设置的量化表数组的副本,如果当前未设置表。
+     * 
+     * 
      * @return an array of <code>JPEGQTable</code> objects, or
      * <code>null</code>.
      *
@@ -258,6 +317,10 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * most recent call to <code>setEncodeTables</code>, or
      * <code>null</code> if tables are not currently set.
      *
+     * <p>
+     *  返回在最近一次调用<code> setEncodeTables </code>时设置的DC Huffman表数组的副本,如果当前未设置表,则返回<code> null </code>。
+     * 
+     * 
      * @return an array of <code>JPEGHuffmanTable</code> objects, or
      * <code>null</code>.
      *
@@ -274,6 +337,10 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * most recent call to <code>setEncodeTables</code>, or
      * <code>null</code> if tables are not currently set.
      *
+     * <p>
+     *  返回在最近一次调用<code> setEncodeTables </code>时设置的AC Huffman表数组的副本,如果当前未设置表,则返回<code> null </code>。
+     * 
+     * 
      * @return an array of <code>JPEGHuffmanTable</code> objects, or
      * <code>null</code>.
      *
@@ -294,6 +361,11 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * written with this flag set to <code>true</code> will
      * always contain Huffman tables.
      *
+     * <p>
+     *  告诉写者为图像生成优化的霍夫曼表作为写入过程的一部分。默认值为<code> false </code>。如果此标志设置为<code> true </code>,它将覆盖元数据中指定的任何表。
+     * 注意,这意味着使用此标志设置为<code> true </code>的任何图像将始终包含Huffman表。
+     * 
+     * 
      * @param optimize A boolean indicating whether to generate
      * optimized Huffman tables when writing.
      *
@@ -309,6 +381,10 @@ public class JPEGImageWriteParam extends ImageWriteParam {
      * <code>false</code> if <code>setOptimizeHuffmanTables</code>
      * has never been called.
      *
+     * <p>
+     * 如果<code> setOptimizeHuffmanTables </code>从未被调用,则返回传递到最近对<code> setOptimizeHuffmanTables </code>或<code>
+     *  false </code>的调用中的值。
+     * 
      * @return <code>true</code> if the writer will generate optimized
      * Huffman tables.
      *

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,16 @@ package java.security.cert;
  * parameters. The type of parameters needed may vary between different types
  * of {@code CertStore}s.
  *
+ * <p>
+ *  {@code CertStore}参数的规范。
+ * <p>
+ *  此接口的目的是对所有{@code CertStore}参数规范进行分组(并提供类型安全性)。所有{@code CertStore}参数规范必须实现此接口。
+ * <p>
+ *  通常,{@code CertStoreParameters}对象作为参数传递到{@link CertStore#getInstance CertStore.getInstance}方法之一。
+ *  {@code getInstance}方法返回用于检索{@code Certificate}和{@code CRL}的{@code CertStore}。
+ * 返回的{@code CertStore}将使用指定的参数初始化。所需的参数类型可能因不同类型的{@code CertStore}而异。
+ * 
+ * 
  * @see CertStore#getInstance
  *
  * @since       1.4
@@ -74,6 +85,14 @@ public interface CertStoreParameters extends Cloneable {
      * Each subclass should state the precise behavior of this method so
      * that users and developers know what to expect.
      *
+     * <p>
+     *  制作此{@code CertStoreParameters}的副本。
+     * <p>
+     *  "copy"的精确含义可能取决于{@code CertStoreParameters}对象的类。典型的实现执行该对象的"深度复制",但这不是绝对的要求。
+     * 一些实现可以执行该对象的一些或所有字段的"浅拷贝"。
+     * <p>
+     * 请注意,{@code CertStore.getInstance}方法创建指定的{@code CertStoreParameters}的副本。
+     * 
      * @return a copy of this {@code CertStoreParameters}
      */
     Object clone();

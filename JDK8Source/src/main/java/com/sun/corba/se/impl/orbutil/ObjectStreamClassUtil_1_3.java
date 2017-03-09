@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -144,6 +145,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
                                 /* Include in the hash all fields except those that are
                                  * transient or static.
+                                 * <p>
+                                 *  瞬态或静态。
+                                 * 
                                  */
                 int m = f.getModifiers();
                 if (Modifier.isTransient(m) || Modifier.isStatic(m))
@@ -155,6 +159,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
             /* Compute the hash value for this class.
              * Use only the first 64 bits of the hash.
+             * <p>
+             *  只使用哈希的前64位。
+             * 
              */
             data.flush();
             byte hasharray[] = md.digest();
@@ -175,6 +182,9 @@ public final class ObjectStreamClassUtil_1_3 {
      * Compute a hash for the specified class.  Incrementally add
      * items to the hash accumulating in the digest stream.
      * Fold the hash into a long.  Use the SHA secure hash function.
+     * <p>
+     *  计算指定类的哈希值。增量地将项目添加到在摘要流中累积的散列中。将哈希折叠成一个长。使用SHA安全散列函数。
+     * 
      */
     private static long _computeSerialVersionUID(Class cl) {
         ByteArrayOutputStream devnull = new ByteArrayOutputStream(512);
@@ -198,6 +208,9 @@ public final class ObjectStreamClassUtil_1_3 {
              * This is required so correct hashes can be computed
              * for existing class files.
              * Previously this hack was previously present in the VM.
+             * <p>
+             *  接口如果接口有一些方法。 ABSTRACT位反映方法数> 0。这是必需的,因此可以为现有类文件计算正确的散列。以前,此黑客以前存在于VM中。
+             * 
              */
             Method[] method = cl.getDeclaredMethods();
             if ((classaccess & Modifier.INTERFACE) != 0) {
@@ -213,6 +226,9 @@ public final class ObjectStreamClassUtil_1_3 {
              * Get the list of interfaces supported,
              * Accumulate their names their names in Lexical order
              * and add them to the hash
+             * <p>
+             *  获取支持的接口列表,按词法顺序收集名称及其名称,并将它们添加到哈希
+             * 
              */
             if (!cl.isArray()) {
                 /* In 1.2fcs, getInterfaces() was modified to return
@@ -220,6 +236,9 @@ public final class ObjectStreamClassUtil_1_3 {
                  * called on array classes.  These values would upset
                  * the computation of the hash, so we explicitly omit
                  * them from its computation.
+                 * <p>
+                 *  {java.lang.Cloneable,java.io.Serializable}在数组类上调用时。这些值将破坏散列的计算,因此我们从其计算中明确省略它们。
+                 * 
                  */
 
                 Class interfaces[] = cl.getInterfaces();
@@ -239,6 +258,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
                 /* Include in the hash all fields except those that are
                  * private transient and private static.
+                 * <p>
+                 *  私有瞬态和私有静态。
+                 * 
                  */
                 int m = f.getModifiers();
                 if (Modifier.isPrivate(m) &&
@@ -261,6 +283,9 @@ public final class ObjectStreamClassUtil_1_3 {
              * Get the list of constructors including name and signature
              * Sort lexically, add all except the private constructors
              * to the hash with their access flags
+             * <p>
+             *  获取构造函数的列表,包括名称和签名排序,添加除了私有构造函数的所有的构造函数到它们的访问标志的哈希
+             * 
              */
 
             MethodSignature[] constructors =
@@ -277,6 +302,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
             /* Include in the hash all methods except those that are
              * private transient and private static.
+             * <p>
+             *  私有瞬态和私有静态。
+             * 
              */
             MethodSignature[] methods =
                 MethodSignature.removePrivateAndSort(method);
@@ -291,6 +319,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
             /* Compute the hash value for this class.
              * Use only the first 64 bits of the hash.
+             * <p>
+             *  只使用哈希的前64位。
+             * 
              */
             data.flush();
             byte hasharray[] = md.digest();
@@ -308,6 +339,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
     /*
      * Comparator object for Classes and Interfaces
+     * <p>
+     *  类和接口的比较器对象
+     * 
      */
     private static Comparator compareClassByName =
         new CompareClassByName();
@@ -322,6 +356,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
     /*
      * Comparator object for Members, Fields, and Methods
+     * <p>
+     *  成员,字段和方法的比较器对象
+     * 
      */
     private static Comparator compareMemberByName =
         new CompareMemberByName();
@@ -344,6 +381,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
     /**
      * Compute the JVM signature for the class.
+     * <p>
+     *  计算类的JVM签名。
+     * 
      */
     private static String getSignature(Class clazz) {
         String type = null;
@@ -388,6 +428,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
     /*
      * Compute the JVM method descriptor for the method.
+     * <p>
+     *  计算方法的JVM方法描述符。
+     * 
      */
     private static String getSignature(Method meth) {
         StringBuffer sb = new StringBuffer();
@@ -405,6 +448,9 @@ public final class ObjectStreamClassUtil_1_3 {
 
     /*
      * Compute the JVM constructor descriptor for the constructor.
+     * <p>
+     *  计算构造函数的JVM构造函数描述符。
+     * 
      */
     private static String getSignature(Constructor cons) {
         StringBuffer sb = new StringBuffer();
@@ -432,8 +478,12 @@ public final class ObjectStreamClassUtil_1_3 {
         String signature;      // cached parameter signature
 
         /* Given an array of Method or Constructor members,
+        /* <p>
+        /* 
            return a sorted array of the non-private members.*/
         /* A better implementation would be to implement the returned data
+        /* <p>
+        /* 
            structure as an insertion sorted link list.*/
         static MethodSignature[] removePrivateAndSort(Member[] m) {
             int numNonPrivate = 0;
@@ -456,6 +506,8 @@ public final class ObjectStreamClassUtil_1_3 {
         }
 
         /* Assumes that o1 and o2 are either both methods
+        /* <p>
+        /* 
            or both constructors.*/
         public int compare(Object o1, Object o2) {
             /* Arrays.sort calls compare when o1 and o2 are equal.*/
@@ -497,6 +549,8 @@ public final class ObjectStreamClassUtil_1_3 {
     /**
      * Returns true if the given class defines a static initializer method,
      * false otherwise.
+     * <p>
+     * 如果给定类定义了静态初始化方法,则返回true,否则返回false。
      */
     private static boolean hasStaticInitializer(Class cl) {
         if (hasStaticInitializerMethod == null) {

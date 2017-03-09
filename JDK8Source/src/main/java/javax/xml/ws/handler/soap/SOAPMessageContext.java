@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,11 @@ import java.util.Set;
  *  the standard Java API for the representation of a SOAP 1.1 message
  *  with attachments.
  *
+ * <p>
+ *  提供对RPC请求或响应的SOAP消息的访问。
+ *  <code> javax.xml.soap.SOAPMessage </code>指定用于带有附件的SOAP 1.1消息的表示形式的标准Java API。
+ * 
+ * 
  *  @see javax.xml.soap.SOAPMessage
  *
  *  @since JAX-WS 2.0
@@ -47,6 +53,10 @@ public interface SOAPMessageContext
    *  to the returned <code>SOAPMessage</code> change the message in-place, there
    *  is no need to subsequently call <code>setMessage</code>.
    *
+   * <p>
+   *  到返回的<code> SOAPMessage </code>就地更改消息,没有必要随后调用<code> setMessage </code>。
+   * 
+   * 
    *  @return Returns the <code>SOAPMessage</code>; returns <code>null</code> if no
    *          <code>SOAPMessage</code> is present in this message context
   **/
@@ -54,6 +64,8 @@ public interface SOAPMessageContext
 
   /** Sets the SOAPMessage in this message context
    *
+   * <p>
+   * 
    *  @param  message SOAP message
    *  @throws WebServiceException If any error during the setting
    *          of the <code>SOAPMessage</code> in this message context
@@ -66,6 +78,10 @@ public interface SOAPMessageContext
    *  message context. Note that a SOAP message can contain multiple headers
    *  with the same qualified name.
    *
+   * <p>
+   *  消息上下文。请注意,SOAP消息可以包含具有相同限定名称的多个标头。
+   * 
+   * 
    *  @param  header The XML qualified name of the SOAP header(s).
    *  @param  context The JAXBContext that should be used to unmarshall the
    *          header
@@ -93,6 +109,11 @@ public interface SOAPMessageContext
    *  SOAP actor roles are invariant during the processing of
    *  SOAP message through the handler chain.
    *
+   * <p>
+   *  的处理程序链。
+   * 请注意,SOAP actor角色适用于SOAP节点,并使用{@link javax.xml.ws.soap.SOAPBinding#setRoles}和{@link javax.xml.ws.soap.SOAPBinding#getRoles}
+   * 进行管理。
+   * 
    *  @return Array of <code>String</code> for SOAP actor roles
   **/
   public Set<String> getRoles();

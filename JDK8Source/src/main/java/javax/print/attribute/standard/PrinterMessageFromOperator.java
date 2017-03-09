@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,19 @@ import javax.print.attribute.PrintServiceAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  类PrinterMessageFromOperator是打印属性类,文本属性,其提供来自操作者,系统管理员或"智能"过程的消息以向终端用户指示关于打印机的信息或状态,诸如为什么它不可用或何时它预计可用
+ * 。
+ * <P>
+ *  打印服务的属性集包括零个实例或PrinterMessageFromOperator属性的一个实例,不超过一个实例。
+ * 新的PrinterMessageFromOperator属性替换现有的PrinterMessageFromOperator属性(如果有)。
+ * 换句话说,PrinterMessageFromOperator不打算作为历史日志。
+ * 如果希望,客户端可以检测对打印服务的PrinterMessageFromOperator属性的更改,并维护客户端自己的PrinterMessageFromOperator属性值的历史日志。
+ * <P>
+ *  <B> IPP兼容性：</B>字符串值给出IPP名称值。语言环境提供IPP自然语言。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class PrinterMessageFromOperator   extends TextSyntax
@@ -64,6 +78,10 @@ public final class PrinterMessageFromOperator   extends TextSyntax
      * Constructs a new printer message from operator attribute with the
      * given message and locale.
      *
+     * <p>
+     *  根据给定消息和区域设置构造来自操作员属性的新打印机消息。
+     * 
+     * 
      * @param  message  Message.
      * @param  locale   Natural language of the text string. null
      * is interpreted to mean the default locale as returned
@@ -94,6 +112,19 @@ public final class PrinterMessageFromOperator   extends TextSyntax
      * <CODE>object</CODE>'s locale are equal.
      * </OL>
      *
+     * <p>
+     *  返回此打印机消息是否来自operator属性等同于传入的in对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     * <CODE>对象</CODE>是PrinterMessageFromOperator类的实例。
+     * <LI>
+     *  来自操作符属性的底层字符串和<CODE>对象</CODE>的底层字符串的打印机消息是相等的。
+     * <LI>
+     *  来自操作员属性的区域设置和<CODE>对象</CODE>的打印机消息是相等的。
+     * </OL>
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this printer
@@ -111,6 +142,9 @@ public final class PrinterMessageFromOperator   extends TextSyntax
      * For class PrinterMessageFromOperator,
      * the category is class PrinterMessageFromOperator itself.
      *
+     * <p>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -125,6 +159,12 @@ public final class PrinterMessageFromOperator   extends TextSyntax
      * For class PrinterMessageFromOperator,
      * the category name is <CODE>"printer-message-from-operator"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于PrinterMessageFromOperator类,类别是PrinterMessageFromOperator类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

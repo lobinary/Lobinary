@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import java.util.function.Supplier;
  * Spliterator implementations for wrapping and delegating spliterators, used
  * in the implementation of the {@link Stream#spliterator()} method.
  *
+ * <p>
+ *  用于包装和委托分割器的分割器实现,用于实现{@link Stream#spliterator()}方法。
+ * 
+ * 
  * @since 1.8
  */
 class StreamSpliterators {
@@ -56,6 +61,13 @@ class StreamSpliterators {
      *
      * <p>A wrapping spliterator produced from a sequential stream
      * cannot be split if there are stateful operations present.
+     * <p>
+     *  抽象包装Spliterator,在第一次操作时绑定到管道辅助器的Spliterator。
+     * 
+     *  <p>此分隔符不是后期绑定,并且在首次操作时将绑定到源分支器。
+     * 
+     *  <p>如果存在有状态操作,则不能拆分从连续流生成的包装Spliterator。
+     * 
      */
     private static abstract class AbstractWrappingSpliterator<P_IN, P_OUT,
                                                               T_BUFFER extends AbstractSpinedBuffer>
@@ -66,6 +78,9 @@ class StreamSpliterators {
 
         /**
          * True if this spliterator supports splitting
+         * <p>
+         *  如果此拆分器支持拆分,则为真
+         * 
          */
         final boolean isParallel;
 
@@ -74,18 +89,27 @@ class StreamSpliterators {
         /**
          * Supplier for the source spliterator.  Client provides either a
          * spliterator or a supplier.
+         * <p>
+         *  源拼接器的供应商。客户端提供分割器或供应商。
+         * 
          */
         private Supplier<Spliterator<P_IN>> spliteratorSupplier;
 
         /**
          * Source spliterator.  Either provided from client or obtained from
          * supplier.
+         * <p>
+         *  源拼接器。从客户提供或从供应商获得。
+         * 
          */
         Spliterator<P_IN> spliterator;
 
         /**
          * Sink chain for the downstream stages of the pipeline, ultimately
          * leading to the buffer. Used during partial traversal.
+         * <p>
+         *  流水线用于流水线的下游阶段,最终导致缓冲。在部分遍历期间使用。
+         * 
          */
         Sink<P_IN> bufferSink;
 
@@ -93,6 +117,9 @@ class StreamSpliterators {
          * A function that advances one element of the spliterator, pushing
          * it to bufferSink.  Returns whether any elements were processed.
          * Used during partial traversal.
+         * <p>
+         *  向前移动分割器的一个元素,将其推送到bufferSink的函数。返回是否处理了任何元素。在部分遍历期间使用。
+         * 
          */
         BooleanSupplier pusher;
 
@@ -105,12 +132,18 @@ class StreamSpliterators {
         /**
          * True if full traversal has occurred (with possible cancelation).
          * If doing a partial traversal, there may be still elements in buffer.
+         * <p>
+         *  如果发生完全遍历,则为真(可能取消)。如果进行部分遍历,缓冲区中可能仍有元素。
+         * 
          */
         boolean finished;
 
         /**
          * Construct an AbstractWrappingSpliterator from a
          * {@code Supplier<Spliterator>}.
+         * <p>
+         *  从{@code Supplier <Spliterator>}构造AbstractWrappingSpliterator。
+         * 
          */
         AbstractWrappingSpliterator(PipelineHelper<P_OUT> ph,
                                     Supplier<Spliterator<P_IN>> spliteratorSupplier,
@@ -124,6 +157,9 @@ class StreamSpliterators {
         /**
          * Construct an AbstractWrappingSpliterator from a
          * {@code Spliterator}.
+         * <p>
+         *  从{@code Spliterator}构造AbstractWrappingSpliterator。
+         * 
          */
         AbstractWrappingSpliterator(PipelineHelper<P_OUT> ph,
                                     Spliterator<P_IN> spliterator,
@@ -136,6 +172,9 @@ class StreamSpliterators {
 
         /**
          * Called before advancing to set up spliterator, if needed.
+         * <p>
+         *  如果需要,在进入设置分离器之前调用。
+         * 
          */
         final void init() {
             if (spliterator == null) {
@@ -147,6 +186,10 @@ class StreamSpliterators {
         /**
          * Get an element from the source, pushing it into the sink chain,
          * setting up the buffer if needed
+         * <p>
+         * 从源中获取一个元素,将其推入sink链,如果需要,设置缓冲区
+         * 
+         * 
          * @return whether there are elements to consume from the buffer
          */
         final boolean doAdvance() {
@@ -175,12 +218,18 @@ class StreamSpliterators {
         /**
          * Invokes the shape-specific constructor with the provided arguments
          * and returns the result.
+         * <p>
+         *  使用提供的参数调用特定于形状的构造函数并返回结果。
+         * 
          */
         abstract AbstractWrappingSpliterator<P_IN, P_OUT, ?> wrap(Spliterator<P_IN> s);
 
         /**
          * Initializes buffer, sink chain, and pusher for a shape-specific
          * implementation.
+         * <p>
+         *  对于特定于形状的实现,初始化缓冲区,sink链和推进器。
+         * 
          */
         abstract void initPartialTraversalState();
 
@@ -199,6 +248,10 @@ class StreamSpliterators {
         /**
          * If the buffer is empty, push elements into the sink chain until
          * the source is empty or cancellation is requested.
+         * <p>
+         *  如果缓冲区为空,将元素推入汇聚链,直到源为空或请求取消。
+         * 
+         * 
          * @return whether there are elements to consume from the buffer
          */
         private boolean fillBuffer() {
@@ -496,6 +549,10 @@ class StreamSpliterators {
      * Spliterator implementation that delegates to an underlying spliterator,
      * acquiring the spliterator from a {@code Supplier<Spliterator>} on the
      * first call to any spliterator method.
+     * <p>
+     *  Spliterator实现,它委托给底层的分割器,在第一次调用任何spliterator方法时从{@code Supplier <Spliterator>}获取分割器。
+     * 
+     * 
      * @param <T>
      */
     static class DelegatingSpliterator<T, T_SPLITR extends Spliterator<T>>
@@ -606,6 +663,9 @@ class StreamSpliterators {
      * A slice Spliterator from a source Spliterator that reports
      * {@code SUBSIZED}.
      *
+     * <p>
+     *  来自源分类器的切片分割器,报告{@code SUBSIZED}。
+     * 
      */
     static abstract class SliceSpliterator<T, T_SPLITR extends Spliterator<T>> {
         // The start index of the slice
@@ -898,6 +958,11 @@ class StreamSpliterators {
      * spliterator be the result of a previous pipeline stage that was
      * collected to a {@code Node}. It is the order of the pipeline stage
      * that governs whether the this slice spliterator is to be used or not.
+     * <p>
+     *  切片拆分器,不保留源拆分器的顺序(如果有)。
+     * 
+     *  注意：源分枝器可能报告{@code ORDERED},因为分割器是收集到{@code Node}的前一个流水线阶段的结果。它是管道级的顺序,其决定是否使用该片分离器。
+     * 
      */
     static abstract class UnorderedSliceSpliterator<T, T_SPLITR extends Spliterator<T>> {
         static final int CHUNK_SIZE = 1 << 7;
@@ -933,6 +998,13 @@ class StreamSpliterators {
          * if we are not limiting.  The user should consult the method
          * {@code checkPermits()} before acquiring data elements.
          *
+         * <p>
+         *  获取跳过或处理元素的权限。调用者必须首先获取元素,然后参考这个方法来指导如何处理数据。
+         * 
+         *  <p>我们使用{@code AtomicLong}以原子方式维护计数器,如果我们限制,则初始化为skip + limit,或者如果我们没有限制,则跳过。
+         * 用户应该在获取数据元素之前查阅方法{@code checkPermits()}。
+         * 
+         * 
          * @param numElements the number of elements the caller has in hand
          * @return the number of elements that should be processed; any
          * remaining elements should be discarded.
@@ -1057,6 +1129,10 @@ class StreamSpliterators {
         /**
          * Concrete sub-types must also be an instance of type {@code T_CONS}.
          *
+         * <p>
+         *  具体子类型也必须是{@code T_CONS}类型的实例。
+         * 
+         * 
          * @param <T_BUFF> the type of the spined buffer. Must also be a type of
          *        {@code T_CONS}.
          */
@@ -1235,6 +1311,9 @@ class StreamSpliterators {
     /**
      * A wrapping spliterator that only reports distinct elements of the
      * underlying spliterator. Does not preserve size and encounter order.
+     * <p>
+     * 一个封装分隔符,只报告底层分隔符的不同元素。不保留大小和遇到顺序。
+     * 
      */
     static final class DistinctSpliterator<T> implements Spliterator<T>, Consumer<T> {
 
@@ -1323,6 +1402,10 @@ class StreamSpliterators {
      * <p>The {@code forEachRemaining} method if invoked will never terminate.
      * The {@code tryAdvance} method always returns true.
      *
+     * <p>
+     *  一个无限次供给元素的Spliterator。
+     * 
+     *  <p>拆分将估计大小分成两部分,并在估计大小为0时停止。
      */
     static abstract class InfiniteSupplyingSpliterator<T> implements Spliterator<T> {
         long estimate;

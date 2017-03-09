@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer.POAManagerPackage;
 
 
@@ -11,6 +12,8 @@ package org.omg.PortableServer.POAManagerPackage;
 
 /**
 	 * Specifies the states for the POAManager
+	 * <p>
+	 * 
 	 */
 public class State implements org.omg.CORBA.portable.IDLEntity
 {

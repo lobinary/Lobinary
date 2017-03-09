@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,10 +36,16 @@ import org.w3c.dom.Node;
 
 /**
      * A DRI (Define Restart Interval) marker segment.
+     * <p>
+     *  DRI(定义重新启动间隔)标记段。
+     * 
      */
 class DRIMarkerSegment extends MarkerSegment {
     /**
      * Restart interval, or 0 if none is specified.
+     * <p>
+     *  重新启动间隔,如果未指定,则为0。
+     * 
      */
     int restartInterval = 0;
 
@@ -70,6 +77,8 @@ class DRIMarkerSegment extends MarkerSegment {
     /**
      * Writes the data for this segment to the stream in
      * valid JPEG format.
+     * <p>
+     *  以有效的JPEG格式将此段的数据写入流。
      */
     void write(ImageOutputStream ios) throws IOException {
         // We don't write DRI segments; the IJG library does.

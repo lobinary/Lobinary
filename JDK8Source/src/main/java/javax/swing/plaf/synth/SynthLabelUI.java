@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import java.beans.PropertyChangeEvent;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JLabel}.
  *
+ * <p>
+ *  为{@link javax.swing.JLabel}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.7
  */
@@ -49,6 +54,10 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
     /**
      * Returns the LabelUI implementation used for the skins look and feel.
      *
+     * <p>
+     *  返回用于外观外观的LabelUI实现。
+     * 
+     * 
      * @param c component to create UI object for
      * @return the UI object
      */
@@ -58,6 +67,9 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installDefaults(JLabel c) {
@@ -72,6 +84,9 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallDefaults(JLabel c){
@@ -84,6 +99,9 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -105,6 +123,9 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public int getBaseline(JComponent c, int width, int height) {
@@ -162,6 +183,12 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -182,6 +209,10 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -197,6 +228,10 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
     /**
      * Paints the specified component.
      *
+     * <p>
+     *  绘制指定的组件。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -218,6 +253,9 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -227,6 +265,9 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getPreferredSize(JComponent c) {
@@ -248,6 +289,9 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getMinimumSize(JComponent c) {
@@ -269,6 +313,9 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getMaximumSize(JComponent c) {
@@ -290,6 +337,8 @@ public class SynthLabelUI extends BasicLabelUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     public void propertyChange(PropertyChangeEvent e) {

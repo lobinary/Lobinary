@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -75,6 +76,28 @@ import sun.security.util.SecurityConstants;
  * provider's implementation of the {@code implies}
  * method and its PermissionCollection caching strategy.
  *
+ * <p>
+ *  Policy对象负责确定在Java运行时环境中执行的代码是否具有执行安全敏感操作的权限。
+ * 
+ *  <p>在任何给定时间,只有一个策略对象安装在运行时。可以通过调用{@code setPolicy}方法安装Policy对象。
+ * 可以通过调用{@code getPolicy}方法获取已安装的Policy对象。
+ * 
+ *  <p>如果在运行时中没有安装Policy对象,调用{@code getPolicy}将安装默认Policy实现(该抽象类的默认子类实现)的实例。
+ * 可以通过将{@code policy.provider}安全属性的值设置为所需策略子类实现的完全限定名称来更改默认策略实现。
+ * 
+ *  <p>应用程序代码可以直接子类化Policy以提供自定义实现。此外,可以通过调用具有标准类型的{@code getInstance}工厂方法之一来构造Policy对象的实例。
+ * 默认策略类型为"JavaPolicy"。
+ * 
+ * <p>安装策略实例后(默认情况下或通过调用{@code setPolicy}),Java运行时在需要确定是否执行代码(封装在ProtectionDomain中)时调用其{@code implies}可以
+ * 执行SecurityManager保护的操作。
+ * 策略对象如何检索其策略数据取决于策略实施本身。策略数据可以存储在例如平面ASCII文件,策略类的串行化二进制文件或数据库中。
+ * 
+ *  <p> {@code refresh}方法会导致该策略对象刷新/重新载入其数据。此操作是实现相关的。
+ * 例如,如果策略对象将其数据存储在配置文件中,调用{@code refresh}将使其重新读取配置策略文件。如果不支持刷新操作,则此方法不执行任何操作。
+ * 请注意,刷新的策略可能不会对特定ProtectionDomain中的类产生影响。
+ * 这取决于Policy提供程序对{@code implies}方法及其PermissionCollection缓存策略的实现。
+ * 
+ * 
  * @author Roland Schemers
  * @author Gary Ellison
  * @see java.security.Provider
@@ -87,6 +110,10 @@ public abstract class Policy {
 
     /**
      * A read-only empty PermissionCollection instance.
+     * <p>
+     *  只读空PermissionCollection实例。
+     * 
+     * 
      * @since 1.6
      */
     public static final PermissionCollection UNSUPPORTED_EMPTY_COLLECTION =
@@ -136,6 +163,13 @@ public abstract class Policy {
      * {@code SecurityPermission("getPolicy")} permission
      * to ensure it's ok to get the Policy object.
      *
+     * <p>
+     *  返回已安装的Policy对象。此值不应缓存,因为它可能通过调用{@code setPolicy}更改。
+     * 此方法首先使用{@code SecurityPermission("getPolicy")}权限调用{@code SecurityManager.checkPermission},以确保可以获取Poli
+     * cy对象。
+     *  返回已安装的Policy对象。此值不应缓存,因为它可能通过调用{@code setPolicy}更改。
+     * 
+     * 
      * @return the installed Policy.
      *
      * @throws SecurityException
@@ -158,6 +192,10 @@ public abstract class Policy {
      * Returns the installed Policy object, skipping the security check.
      * Used by ProtectionDomain and getPolicy.
      *
+     * <p>
+     * 返回已安装的Policy对象,跳过安全检查。由ProtectionDomain和getPolicy使用。
+     * 
+     * 
      * @return the installed Policy.
      */
     static Policy getPolicyNoCheck()
@@ -190,6 +228,9 @@ public abstract class Policy {
                          * provider that is on the bootclasspath.
                          * If it loads then shift gears to using the configured
                          * provider.
+                         * <p>
+                         *  policy_class似乎是一个扩展,所以我们必须通过bootclasspath上的策略提供程序引导加载它。如果它加载,然后换档到使用配置的提供程序。
+                         * 
                          */
 
                         // install the bootstrap provider to avoid recursion
@@ -226,6 +267,9 @@ public abstract class Policy {
                         /*
                          * if it loaded install it as the policy provider. Otherwise
                          * continue to use the system default implementation
+                         * <p>
+                         *  如果加载它作为策略提供程序安装。否则继续使用系统默认实现
+                         * 
                          */
                         if (pol != null) {
                             pinfo = new PolicyInfo(pol, true);
@@ -250,6 +294,11 @@ public abstract class Policy {
      * {@code SecurityPermission("setPolicy")}
      * permission to ensure it's ok to set the Policy.
      *
+     * <p>
+     *  设置系统范围的Policy对象。
+     * 此方法首先使用{@code SecurityPermission("setPolicy")}权限调用{@code SecurityManager.checkPermission},以确保可以设置策略。
+     * 
+     * 
      * @param p the new system Policy object.
      *
      * @throws SecurityException
@@ -278,6 +327,10 @@ public abstract class Policy {
      * Initialize superclass state such that a legacy provider can
      * handle queries for itself.
      *
+     * <p>
+     *  初始化超类状态,使得传统提供程序可以处理其自身的查询。
+     * 
+     * 
      * @since 1.4
      */
     private static void initPolicy (final Policy p) {
@@ -300,6 +353,15 @@ public abstract class Policy {
          * This Policy superclass caches away the ProtectionDomain and
          * statically binds permissions so that legacy Policy
          * implementations will continue to function.
+         * <p>
+         *  不在bootclasspath上的策略提供程序可能触发执行对Policy.implies或Policy.getPermissions的调用的安全检查。
+         * 如果发生这种情况,提供程序必须能够回答自己的ProtectionDomain,而不触发额外的安全检查,否则策略实现将以无限递归结束。
+         * 
+         *  为了减轻这种情况,提供程序可以收集它自己的ProtectionDomain并在安装时关联PermissionCollection。
+         * 当前安装的策略提供程序(如果有)将在此过程中处理对Policy.implies或Policy.getPermissions的调用。
+         * 
+         *  此策略超类缓存ProtectionDomain并静态绑定权限,以便旧策略实现将继续运行。
+         * 
          */
 
         ProtectionDomain policyDomain =
@@ -313,6 +375,9 @@ public abstract class Policy {
          * Collect the permissions granted to this protection domain
          * so that the provider can be security checked while processing
          * calls to Policy.implies or Policy.getPermissions.
+         * <p>
+         * 收集授予此保护域的权限,以便在处理对Policy.implies或Policy.getPermissions的调用时可以对提供程序进行安全检查。
+         * 
          */
         PermissionCollection policyPerms = null;
         synchronized (p) {
@@ -353,6 +418,14 @@ public abstract class Policy {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回指定类型的Policy对象。
+     * 
+     *  <p>此方法遍历注册的安全提供程序列表,从最优先的提供程序开始。将返回一个新的Policy对象,用于封装来自支持指定类型的第一个Provider的PolicySpi实现。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param type the specified Policy type.  See the Policy section in the
      *    <a href=
      *    "{@docRoot}/../technotes/guides/security/StandardNames.html#Policy">
@@ -407,6 +480,14 @@ public abstract class Policy {
      * <p> Note that the list of registered providers may be retrieved via
      * the {@link Security#getProviders() Security.getProviders()} method.
      *
+     * <p>
+     *  返回指定类型的Policy对象。
+     * 
+     *  <p>返回一个新的Policy对象,用于封装来自指定提供者的PolicySpi实现。指定的提供程序必须在提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     * 
      * @param type the specified Policy type.  See the Policy section in the
      *    <a href=
      *    "{@docRoot}/../technotes/guides/security/StandardNames.html#Policy">
@@ -471,6 +552,12 @@ public abstract class Policy {
      * object is returned.  Note that the specified Provider object
      * does not have to be registered in the provider list.
      *
+     * <p>
+     *  返回指定类型的Policy对象。
+     * 
+     *  <p>返回一个新的Policy对象,用于封装来自指定的Provider对象的PolicySpi实现。请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     * 
      * @param type the specified Policy type.  See the Policy section in the
      *    <a href=
      *    "{@docRoot}/../technotes/guides/security/StandardNames.html#Policy">
@@ -539,6 +626,12 @@ public abstract class Policy {
      * was obtained via a call to {@code Policy.getInstance}.
      * Otherwise this method returns null.
      *
+     * <p>
+     *  返回本政策的提供者。
+     * 
+     *  <p>此政策实例只有通过调用{@code Policy.getInstance}获得的提供程序。否则,此方法返回null。
+     * 
+     * 
      * @return the Provider of this Policy, or null.
      *
      * @since 1.6
@@ -554,6 +647,12 @@ public abstract class Policy {
      * was obtained via a call to {@code Policy.getInstance}.
      * Otherwise this method returns null.
      *
+     * <p>
+     *  返回此策略的类型。
+     * 
+     * <p>此政策实例只有通过调用{@code Policy.getInstance}获得的类型。否则,此方法返回null。
+     * 
+     * 
      * @return the type of this Policy, or null.
      *
      * @since 1.6
@@ -569,6 +668,12 @@ public abstract class Policy {
      * was obtained via a call to {@code Policy.getInstance}.
      * Otherwise this method returns null.
      *
+     * <p>
+     *  返回策略参数。
+     * 
+     *  <p>此政策实例只有通过调用{@code Policy.getInstance}获得的参数。否则,此方法返回null。
+     * 
+     * 
      * @return Policy parameters, or null.
      *
      * @since 1.6
@@ -593,6 +698,15 @@ public abstract class Policy {
      * overridden if the policy implementation can return a set of
      * permissions granted to a CodeSource.
      *
+     * <p>
+     *  返回一个PermissionCollection对象,其中包含授予指定CodeSource的权限集。
+     * 
+     *  <p>不鼓励应用程序调用此方法,因为所有策略实现可能不支持此操作。应用程序应该完全依靠{@code implies}方法来执行策略检查。
+     * 如果应用程序绝对必须调用getPermissions方法,则应调用{@code getPermissions(ProtectionDomain)}。
+     * 
+     *  <p>此方法的默认实现返回Policy.UNSUPPORTED_EMPTY_COLLECTION。如果策略实现可以返回授予CodeSource的一组权限,则可以覆盖此方法。
+     * 
+     * 
      * @param codesource the CodeSource to which the returned
      *          PermissionCollection has been granted.
      *
@@ -629,6 +743,21 @@ public abstract class Policy {
      * <p> This method can be overridden if the policy implementation
      * supports returning a set of permissions granted to a ProtectionDomain.
      *
+     * <p>
+     *  返回包含授予指定ProtectionDomain的权限集的PermissionCollection对象。
+     * 
+     *  <p>不鼓励应用程序调用此方法,因为所有策略实现可能不支持此操作。应用程序应该依靠{@code implies}方法来执行策略检查。
+     * 
+     * <p>此方法的默认实现首先检索通过{@code getPermissions(CodeSource)}(CodeSource取自指定的ProtectionDomain)返回的权限,以及位于指定Prote
+     * ctionDomain内的权限。
+     * 所有这些权限然后组合并在新的PermissionCollection对象中返回。
+     * 如果{@code getPermissions(CodeSource)}返回Policy.UNSUPPORTED_EMPTY_COLLECTION,则此方法返回在新PermissionCollectio
+     * n对象中包含在指定ProtectionDomain内的权限。
+     * 所有这些权限然后组合并在新的PermissionCollection对象中返回。
+     * 
+     *  <p>如果策略实现支持返回授予ProtectionDomain的一组权限,则可以覆盖此方法。
+     * 
+     * 
      * @param domain the ProtectionDomain to which the returned
      *          PermissionCollection has been granted.
      *
@@ -676,6 +805,9 @@ public abstract class Policy {
 
     /**
      * add static permissions to provided permission collection
+     * <p>
+     *  向提供的权限集合添加静态权限
+     * 
      */
     private void addStaticPerms(PermissionCollection perms,
                                 PermissionCollection statics) {
@@ -694,6 +826,10 @@ public abstract class Policy {
      * the ProtectionDomain and tests whether the permission is
      * granted.
      *
+     * <p>
+     *  评估授予ProtectionDomain的权限的全局策略,并测试是否授予该权限。
+     * 
+     * 
      * @param domain the ProtectionDomain to test
      * @param permission the Permission object to be tested for implication.
      *
@@ -739,12 +875,20 @@ public abstract class Policy {
      * <p> The default implementation of this method does nothing.
      * This method should be overridden if a refresh operation is supported
      * by the policy implementation.
+     * <p>
+     *  刷新/重新加载策略配置。此方法的行为取决于实现。例如,在基于文件的策略上调用{@code refresh}将导致该文件被重新读取。
+     * 
+     *  <p>此方法的默认实现不执行任何操作。如果策略实现支持刷新操作,则应覆盖此方法。
+     * 
      */
     public void refresh() { }
 
     /**
      * This subclass is returned by the getInstance calls.  All Policy calls
      * are delegated to the underlying PolicySpi.
+     * <p>
+     *  此子类由getInstance调用返回。所有策略调用都委派给基础PolicySpi。
+     * 
      */
     private static class PolicyDelegate extends Policy {
 
@@ -788,6 +932,10 @@ public abstract class Policy {
     /**
      * This represents a marker interface for Policy parameters.
      *
+     * <p>
+     *  这表示策略参数的标记界面。
+     * 
+     * 
      * @since 1.6
      */
     public static interface Parameters { }
@@ -798,6 +946,10 @@ public abstract class Policy {
      * {@code getPermissions(ProtectionDomain)}
      * methods in the Policy class when those operations are not
      * supported by the Policy implementation.
+     * <p>
+     * 此类表示当策略实施不支持这些操作时,从策略类中的{@code getPermissions(CodeSource)}和{@code getPermissions(ProtectionDomain)}方法
+     * 返回的只读空PermissionCollection对象。
+     * 
      */
     private static class UnsupportedEmptyCollection
         extends PermissionCollection {
@@ -808,6 +960,9 @@ public abstract class Policy {
 
         /**
          * Create a read-only empty PermissionCollection object.
+         * <p>
+         *  创建只读空PermissionCollection对象。
+         * 
          */
         public UnsupportedEmptyCollection() {
             this.perms = new Permissions();
@@ -818,6 +973,10 @@ public abstract class Policy {
          * Adds a permission object to the current collection of permission
          * objects.
          *
+         * <p>
+         *  将权限对象添加到权限对象的当前集合。
+         * 
+         * 
          * @param permission the Permission object to add.
          *
          * @exception SecurityException - if this PermissionCollection object
@@ -831,6 +990,10 @@ public abstract class Policy {
          * Checks to see if the specified permission is implied by the
          * collection of Permission objects held in this PermissionCollection.
          *
+         * <p>
+         *  检查以确定指定的权限是否由该PermissionCollection中保存的Permission对象的集合隐含。
+         * 
+         * 
          * @param permission the Permission object to compare.
          *
          * @return true if "permission" is implied by the permissions in
@@ -844,6 +1007,9 @@ public abstract class Policy {
          * Returns an enumeration of all the Permission objects in the
          * collection.
          *
+         * <p>
+         *  返回集合中所有Permission对象的枚举。
+         * 
          * @return an enumeration of all the Permissions.
          */
         @Override public Enumeration<Permission> elements() {

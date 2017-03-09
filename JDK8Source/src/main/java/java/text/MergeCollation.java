@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996,1997  - 保留所有权利(C)版权所有IBM Corp. 1996,1997  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.text;
@@ -56,6 +63,13 @@ import java.util.ArrayList;
  * That is: "a < b < c < d" is the same as "a < b & b < c & c < d" OR
  * "a < b < d & b < c"
  * XXX: make '' be a single quote.
+ * <p>
+ *  用于归一化和合并排序规则的实用程序类。
+ * 模式是<entry> *形式的字符串,其中<entry>具有以下形式：<pattern>：= <entry> * <entry>：= <separator> <chars> {" ：="=",",",";","<","&"<chars>和<extension>都是任意字符串。
+ *  用于归一化和合并排序规则的实用程序类。无参考空格被忽略。 'xxx'可用于引用字符与Collat​​or的一个区别是&用于复位到当前点。或者,换句话说,它引入了将被添加到旧的新序列。
+ * 也就是说："a <b <c <d"与"a <b&b <​​c&c <d"OR"a <b <d&b <c"XXX：make" 。
+ * 
+ * 
  * @see PatternEntry
  * @author             Mark Davis, Helena Shih
  */
@@ -64,6 +78,10 @@ final class MergeCollation {
 
     /**
      * Creates from a pattern
+     * <p>
+     *  从模式创建
+     * 
+     * 
      * @exception ParseException If the input pattern is incorrect.
      */
     public MergeCollation(String pattern) throws ParseException
@@ -75,6 +93,9 @@ final class MergeCollation {
 
     /**
      * recovers current pattern
+     * <p>
+     *  恢复电流模式
+     * 
      */
     public String getPattern() {
         return getPattern(true);
@@ -82,6 +103,10 @@ final class MergeCollation {
 
     /**
      * recovers current pattern.
+     * <p>
+     *  恢复电流模式。
+     * 
+     * 
      * @param withWhiteSpace puts spacing around the entries, and \n
      * before & and <
      */
@@ -131,6 +156,10 @@ final class MergeCollation {
 
     /**
      * emits the pattern for collation builder.
+     * <p>
+     *  发出排序规则生成器的模式。
+     * 
+     * 
      * @return emits the string in the format understable to the collation
      * builder.
      */
@@ -140,6 +169,10 @@ final class MergeCollation {
 
     /**
      * emits the pattern for collation builder.
+     * <p>
+     *  发出排序规则生成器的模式。
+     * 
+     * 
      * @param withWhiteSpace puts spacing around the entries, and \n
      * before & and <
      * @return emits the string in the format understable to the collation
@@ -159,6 +192,9 @@ final class MergeCollation {
 
     /**
      * sets the pattern.
+     * <p>
+     * 设置模式。
+     * 
      */
     public void setPattern(String pattern) throws ParseException
     {
@@ -168,6 +204,10 @@ final class MergeCollation {
 
     /**
      * adds a pattern to the current one.
+     * <p>
+     *  添加一个模式到当前的。
+     * 
+     * 
      * @param pattern the new pattern to be added
      */
     public void addPattern(String pattern) throws ParseException
@@ -186,6 +226,10 @@ final class MergeCollation {
 
     /**
      * gets count of separate entries
+     * <p>
+     *  获取单独条目的计数
+     * 
+     * 
      * @return the size of pattern entries
      */
     public int getCount() {
@@ -194,6 +238,10 @@ final class MergeCollation {
 
     /**
      * gets count of separate entries
+     * <p>
+     *  获取单独条目的计数
+     * 
+     * 
      * @param index the offset of the desired pattern entry
      * @return the requested pattern entry
      */
@@ -231,6 +279,8 @@ final class MergeCollation {
       be the current. (If the current is not in patterns, signal an error).
       If not, then remove the current entry, and add it after lastEntry
       (which is usually at the end).
+    /* <p>
+    /*  如果强度为RESET,则只需将lastEntry更改为当前值即可。 (如果电流不在模式,信号错误)。如果没有,那么删除当前条目,并在lastEntry(通常在结尾)之后添加它。
       */
     private final void fixEntry(PatternEntry newEntry) throws ParseException
     {

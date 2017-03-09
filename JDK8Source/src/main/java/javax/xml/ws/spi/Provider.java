@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,11 @@ import org.w3c.dom.Element;
  * <code>Endpoint</code> objects.
  * <p>
  *
+ * <p>
+ *  服务提供程序<code> ServiceDelegate </code>和<code> Endpoint </code>对象。
+ * <p>
+ * 
+ * 
  * @since JAX-WS 2.0
  */
 public abstract class Provider {
@@ -49,6 +55,9 @@ public abstract class Provider {
      * A constant representing the property used to lookup the
      * name of a <code>Provider</code> implementation
      * class.
+     * <p>
+     *  一个常量,表示用于查找<code> Provider </code>实现类的名称的属性。
+     * 
      */
     static public final String JAXWSPROVIDER_PROPERTY
             = "javax.xml.ws.spi.Provider";
@@ -56,6 +65,10 @@ public abstract class Provider {
     /**
      * A constant representing the name of the default
      * <code>Provider</code> implementation class.
+     * <p>
+     *  表示默认<code> Provider </code>实现类的名称的常量。
+     * 
+     * 
      **/
     // Using two strings so that package renaming doesn't change it
     static final String DEFAULT_JAXWSPROVIDER
@@ -64,6 +77,9 @@ public abstract class Provider {
     /**
      * Take advantage of Java SE 6's java.util.ServiceLoader API.
      * Using reflection so that there is no compile-time dependency on SE 6.
+     * <p>
+     *  利用Java SE 6的java.util.ServiceLoader API。使用反射,以便没有对SE 6的编译时依赖。
+     * 
      */
     static private final Method loadMethod;
     static private final Method iteratorMethod;
@@ -86,6 +102,9 @@ public abstract class Provider {
 
     /**
      * Creates a new instance of Provider
+     * <p>
+     *  创建一个新的Provider实例
+     * 
      */
     protected Provider() {
     }
@@ -119,6 +138,27 @@ public abstract class Provider {
      * </li>
      * </ul>
      *
+     * <p>
+     *  创建新的提供程序对象。
+     * <p>
+     *  用于定位要使用的提供程序子类的算法由以下步骤组成：
+     * <p>
+     * <ul>
+     * <li>
+     *  如果存在名称为<code> META-INF / services / javax.xml.ws.spi.Provider </code>的资源,则其第一行(如果存在)用作UTF-8编码的名称实现类。
+     * </li>
+     * <li>
+     *  如果$ java.home / lib / jaxws.properties文件存在,并且它可以通过<code> java.util.Properties.load(InputStream)</code>
+     * 方法读取,并且它包含一个条目,其关键字是<code> javax .xml.ws.spi.Provider </code>,那么该条目的值将用作实现类的名称。
+     * </li>
+     * <li>
+     *  如果定义了名为<code> javax.xml.ws.spi.Provider </code>的系统属性,那么它的值将用作实现类的名称。
+     * </li>
+     * <li>
+     *  最后,使用默认实现类名。
+     * </li>
+     * </ul>
+     * 
      */
     public static Provider provider() {
         try {
@@ -170,6 +210,10 @@ public abstract class Provider {
     /**
      * Creates a service delegate object.
      * <p>
+     * <p>
+     *  创建服务委托对象。
+     * <p>
+     * 
      * @param wsdlDocumentLocation A URL pointing to the WSDL document
      *        for the service, or <code>null</code> if there isn't one.
      * @param serviceName The qualified name of the service.
@@ -184,6 +228,10 @@ public abstract class Provider {
     /**
      * Creates a service delegate object.
      * <p>
+     * <p>
+     *  创建服务委托对象。
+     * <p>
+     * 
      * @param wsdlDocumentLocation A URL pointing to the WSDL document
      *        for the service, or <code>null</code> if there isn't one.
      * @param serviceName The qualified name of the service.
@@ -208,6 +256,10 @@ public abstract class Provider {
      * Creates an endpoint object with the provided binding and implementation
      * object.
      *
+     * <p>
+     * 使用提供的绑定和实现对象创建端点对象。
+     * 
+     * 
      * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP)
      * @param implementor A service implementation object to which
      *        incoming requests will be dispatched. The corresponding
@@ -223,6 +275,10 @@ public abstract class Provider {
      * Creates and publishes an endpoint object with the specified
      * address and implementation object.
      *
+     * <p>
+     *  创建和发布具有指定地址和实现对象的端点对象。
+     * 
+     * 
      * @param address A URI specifying the address and transport/protocol
      *        to use. A http: URI MUST result in the SOAP 1.1/HTTP
      *        binding being used. Implementations may support other
@@ -240,6 +296,10 @@ public abstract class Provider {
      * read an EndpointReference from the infoset contained in
      * <code>eprInfoset</code>.
      *
+     * <p>
+     *  从包含在<code> eprInfoset </code>中的信息集读取EndpointReference。
+     * 
+     * 
      * @param eprInfoset infoset for EndpointReference
      *
      * @return the <code>EndpointReference</code> unmarshalled from
@@ -278,6 +338,19 @@ public abstract class Provider {
      * <code>serviceName</code> metadata.
      *
      *
+     * <p>
+     *  getPort方法返回一个代理。
+     * 如果在<code> endpointReference </code>中有任何引用参数,那么这些引用参数必须作为SOAP头部显示,表明它们是发送到端点的所有消息的引用参数。
+     * 参数<code> serviceEndpointInterface </code>指定返回的代理支持的服务端点接口。
+     * 参数<code> endpointReference </code>指定将由返回的代理调用的端点。
+     * 在该方法的实现中,JAX-WS运行时系统负责选择协议绑定(和端口)并相应地从<code> serviceEndpointInterface </code>和<code>的WSDL元数据配置代理, End
+     * pointReference </code>。
+     * 参数<code> endpointReference </code>指定将由返回的代理调用的端点。
+     * 对于这种成功返回代理的方法,WSDL元数据必须是可用的,并且<code> endpointReference </code>必须包含一个理解为<code> serviceName </code>元数据的
+     * 实现。
+     * 参数<code> endpointReference </code>指定将由返回的代理调用的端点。
+     * 
+     * 
      * @param endpointReference the EndpointReference that will
      * be invoked by the returned proxy.
      * @param serviceEndpointInterface Service endpoint interface
@@ -329,6 +402,20 @@ public abstract class Provider {
      * same Java EE application, a
      * <code>javax.lang.IllegalStateException</code> MUST be thrown.
      *
+     * <p>
+     *  工厂方法创建一个<code> W3CEndpointReference </code>。
+     * 
+     * <p>
+     * 通过指定<code> address </code>属性以及任何其他所需的属性,此方法可用于为任何端点创建<code> W3CEndpointReference </code>。
+     * 此方法还可用于为由相同Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>。
+     * 为此,可以提供<code>地址</code>属性,或者该方法可以自动确定由相同Java EE应用发布并由<code>地址</code>标识的端点的< > serviceName </code>和<code>
+     *  portName </code>属性。
+     * 此方法还可用于为由相同Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>。
+     * 如果<code> address </code>是<code> null </code>且<code> serviceName </code>和<code> portName </code>不标识由同一
+     * Java EE应用程序发布的端点,必须抛出<code> javax.lang.IllegalStateException </code>。
+     * 此方法还可用于为由相同Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>。
+     * 
+     * 
      * @param address Specifies the address of the target endpoint
      * @param serviceName Qualified name of the service in the WSDL.
      * @param portName Qualified name of the endpoint in the WSDL.
@@ -395,6 +482,19 @@ public abstract class Provider {
      * same Java EE application, a
      * <code>javax.lang.IllegalStateException</code> MUST be thrown.
      *
+     * <p>
+     *  工厂方法创建一个<code> W3CEndpointReference </code>。
+     * 使用此方法,可以使用扩展元素和属性创建<code> W3CEndpointReference </code>实例。 <code> Provider </code>实现必须覆盖默认实现。
+     * 
+     * <p>
+     * 通过指定<code> address </code>属性以及任何其他所需的属性,此方法可用于为任何端点创建<code> W3CEndpointReference </code>。
+     * 此方法还可用于为由相同Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>。
+     * 为此,可以提供<code>地址</code>属性,或者该方法可以自动确定由相同Java EE应用发布并由<code>地址</code>标识的端点的< > serviceName </code>和<code>
+     *  portName </code>属性。
+     * 此方法还可用于为由相同Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>。
+     * 如果<code> address </code>是<code> null </code>且<code> serviceName </code>和<code> portName </code>不标识由同一
+     * Java EE应用程序发布的端点,必须抛出<code> javax.lang.IllegalStateException </code>。
+     * 
      * @param address Specifies the address of the target endpoint
      * @param interfaceName the <code>wsam:InterfaceName</code> element in the
      * <code>wsa:Metadata</code> element.
@@ -455,6 +555,10 @@ public abstract class Provider {
      * <code>Provider</code> implementations must override the
      * default implementation.
      *
+     * <p>
+     * 此方法还可用于为由相同Java EE应用程序发布的端点创建<code> W3CEndpointReference </code>。
+     * 
+     * 
      * @param address A URI specifying the address and transport/protocol
      *        to use. A http: URI MUST result in the SOAP 1.1/HTTP
      *        binding being used. Implementations may support other
@@ -479,6 +583,10 @@ public abstract class Provider {
      * object and web service features. <code>Provider</code> implementations
      * must override the default implementation.
      *
+     * <p>
+     *  创建并发布具有指定地址,实现对象和Web服务功能的端点对象。 <code> Provider </code>实现必须覆盖默认实现。
+     * 
+     * 
      * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP)
      * @param implementor A service implementation object to which
      *        incoming requests will be dispatched. The corresponding
@@ -501,6 +609,10 @@ public abstract class Provider {
      * this to create Endpoint objects. <code>Provider</code>
      * implementations must override the default implementation.
      *
+     * <p>
+     *  使用提供的绑定,实现对象和Web服务功能创建端点对象。 <code> Provider </code>实现必须覆盖默认实现。
+     * 
+     * 
      * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP).
      *        Can be null.
      * @param implementorClass A service implementation class that

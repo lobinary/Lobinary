@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import sun.swing.*;
 /**
  * BasicTableHeaderUI implementation
  *
+ * <p>
+ *  BasicTableHeaderUI实现
+ * 
+ * 
  * @author Alan Chung
  * @author Philip Milne
  */
@@ -90,6 +95,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicTableHeaderUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code BasicTableHeaderUI}的子类中实例化它。
+     * 
      */
     public class MouseInputHandler implements MouseInputListener {
 
@@ -301,6 +309,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
 
     /**
      * Creates the mouse listener for the JTableHeader.
+     * <p>
+     *  为JTableHeader创建鼠标监听器。
+     * 
      */
     protected MouseInputListener createMouseInputListener() {
         return new MouseInputHandler();
@@ -333,6 +344,10 @@ public class BasicTableHeaderUI extends TableHeaderUI {
      * current value is either null or a UIResource, other properties are set
      * if the current value is null.
      *
+     * <p>
+     *  初始化JTableHeader属性,如字体,前景和背景。仅当字体,前景和背景属性的当前值为null或UIResource时,才设置它们,如果当前值为null,则设置其他属性。
+     * 
+     * 
      * @see #installUI
      */
     protected void installDefaults() {
@@ -343,6 +358,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
 
     /**
      * Attaches listeners to the JTableHeader.
+     * <p>
+     *  将侦听器附加到JTableHeader。
+     * 
      */
     protected void installListeners() {
         mouseInputListener = createMouseInputListener();
@@ -354,6 +372,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
 
     /**
      * Register all keyboard actions on the JTableHeader.
+     * <p>
+     *  在JTableHeader上注册所有键盘操作。
+     * 
      */
     protected void installKeyboardActions() {
         InputMap keyMap = (InputMap)DefaultLookup.get(header, this,
@@ -387,6 +408,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
 
     /**
      * Unregisters default key actions.
+     * <p>
+     *  取消注册默认关键操作。
+     * 
      */
     protected void uninstallKeyboardActions() {
         SwingUtilities.replaceUIInputMap(header, JComponent.WHEN_FOCUSED, null);
@@ -395,6 +419,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
 
     /**
      * Populates TableHeader's actions.
+     * <p>
+     *  填充TableHeader的操作。
+     * 
      */
     static void loadActionMap(LazyActionMap map) {
         map.put(new Actions(Actions.TOGGLE_SORT_ORDER));
@@ -416,6 +443,10 @@ public class BasicTableHeaderUI extends TableHeaderUI {
      * currently is. When the mouse is not over the table header,
      * -1 is returned.
      *
+     * <p>
+     *  返回鼠标当前所在的列标题的索引。当鼠标不在表头上时,返回-1。
+     * 
+     * 
      * @see #rolloverColumnUpdated(int, int)
      * @return the index of the current rollover column
      * @since 1.6
@@ -429,6 +460,10 @@ public class BasicTableHeaderUI extends TableHeaderUI {
      * header is updated. Every look and feel that supports a rollover effect
      * in a table header should override this method and repaint the header.
      *
+     * <p>
+     *  每次更新表头中的滚动列时,都会调用此方法。在表头中支持滚动效果的每个外观都应该覆盖此方法并重新绘制头。
+     * 
+     * 
      * @param oldColumn the index of the previous rollover column or -1 if the
      * mouse was not over a column
      * @param newColumn the index of the new rollover column or -1 if the mouse
@@ -481,6 +516,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
     /**
      * Selects the specified column in the table header. Repaints the
      * affected header cells and makes sure the newly selected one is visible.
+     * <p>
+     *  选择表头中指定的列。重新绘制受影响的标题单元格,并确保新选择的单元格可见。
+     * 
      */
     void selectColumn(int newColIndex) {
         selectColumn(newColIndex, true);
@@ -500,6 +538,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
     /**
      * Used by selectColumn to scroll horizontally, if necessary,
      * to ensure that the newly selected column is visible.
+     * <p>
+     *  由selectColumn用于水平滚动,如有必要,以确保新选择的列可见。
+     * 
      */
     private void scrollToColumn(int col) {
         Container container;
@@ -565,6 +606,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
                 /* If this table is in AUTO_RESIZE_OFF mode and
                  * has a horizontal scrollbar, we need to update
                  * a view's position.
+                 * <p>
+                 *  有一个水平滚动条,我们需要更新视图的位置。
+                 * 
                  */
                 if ((newHeaderWidth >= viewportWidth) &&
                     (table.getAutoResizeMode() == JTable.AUTO_RESIZE_OFF)) {
@@ -585,6 +629,10 @@ public class BasicTableHeaderUI extends TableHeaderUI {
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -769,6 +817,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
     /**
      * Return the minimum size of the header. The minimum width is the sum
      * of the minimum widths of each column (plus inter-cell spacing).
+     * <p>
+     * 返回标头的最小大小。最小宽度是每列的最小宽度之和(加上单元间间距)。
+     * 
      */
     public Dimension getMinimumSize(JComponent c) {
         long width = 0;
@@ -785,6 +836,9 @@ public class BasicTableHeaderUI extends TableHeaderUI {
      * maximum of the preferred heights of all of the components provided
      * by the header renderers. The preferred width is the sum of the
      * preferred widths of each column (plus inter-cell spacing).
+     * <p>
+     *  返回首选的首选大小。优选的高度是由标题渲染器提供的所有组件的优选高度的最大值。优选的宽度是每列的优选宽度的总和(加上单元间间隔)。
+     * 
      */
     public Dimension getPreferredSize(JComponent c) {
         long width = 0;
@@ -799,6 +853,8 @@ public class BasicTableHeaderUI extends TableHeaderUI {
     /**
      * Return the maximum size of the header. The maximum width is the sum
      * of the maximum widths of each column (plus inter-cell spacing).
+     * <p>
+     *  返回标头的最大大小。最大宽度是每列的最大宽度之和(加上单元间间距)。
      */
     public Dimension getMaximumSize(JComponent c) {
         long width = 0;

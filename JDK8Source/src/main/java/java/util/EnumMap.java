@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -72,6 +73,31 @@ import sun.misc.SharedSecrets;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  用于枚举类型键的专用{@link Map}实现。枚举映射中的所有键必须来自在创建映射时显式或隐式指定的单个枚举类型。枚举映射在内部表示为数组。这种表示是非常紧凑和有效的。
+ * 
+ *  <p>枚举映射以其键的<i>自然顺序</i>(枚举常量的声明顺序)进行维护。
+ * 这反映在集合视图({@link #keySet()},{@link #entrySet()}和{@link #values()})返回的迭代器中。
+ * 
+ *  <p>集合视图返回的迭代器<i>弱一致</i>：它们永远不会抛出{@link ConcurrentModificationException},它们可能或可能不会显示迭代时发生的对地图的任何修改的影响
+ * 进行中。
+ * 
+ *  <p>不允许空密钥。尝试插入空键将抛出{@link NullPointerException}。然而,尝试测试空键的存在或删除一个将正常工作。允许空值。
+ * 
+ * <P>与大多数集合实现<tt> EnumMap </tt>不同步。如果多个线程同时访问枚举映射,并且至少有一个线程修改映射,那么它应该在外部同步。这通常通过在自然地封装枚举映射的某个对象上同步来实现。
+ * 如果不存在这样的对象,则应该使用{@link Collections#synchronizeMap}方法"包装"映射。这最好在创建时完成,以防止意外的不同步访问：。
+ * 
+ * <pre>
+ *  Map&lt; EnumKey,V&gt; m = Collections.synchronizedMap(new EnumMap&lt; EnumKey,V&gt;(...));
+ * </pre>
+ * 
+ *  <p>实现注释：所有基本操作在常量时间执行。他们很可能(虽然不能保证)比他们的{@link HashMap}同行。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @author Josh Bloch
  * @see EnumSet
  * @since 1.5
@@ -82,12 +108,19 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     /**
      * The <tt>Class</tt> object for the enum type of all the keys of this map.
      *
+     * <p>
+     *  此地图所有键的枚举类型的<tt> Class </tt>对象。
+     * 
+     * 
      * @serial
      */
     private final Class<K> keyType;
 
     /**
      * All of the values comprising K.  (Cached for performance.)
+     * <p>
+     *  所有的值包括K.(为性能而缓存)
+     * 
      */
     private transient K[] keyUniverse;
 
@@ -95,16 +128,25 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * Array representation of this map.  The ith element is the value
      * to which universe[i] is currently mapped, or null if it isn't
      * mapped to anything, or NULL if it's mapped to null.
+     * <p>
+     *  此映射的数组表示形式。第i个元素是universe [i]当前映射到的值,如果没有映射到任何值,则为null,如果映射到null,则为NULL。
+     * 
      */
     private transient Object[] vals;
 
     /**
      * The number of mappings in this map.
+     * <p>
+     *  此映射中的映射数。
+     * 
      */
     private transient int size = 0;
 
     /**
      * Distinguished non-null value for representing null values.
+     * <p>
+     *  用于表示空值的可区分的非空值。
+     * 
      */
     private static final Object NULL = new Object() {
         public int hashCode() {
@@ -130,6 +172,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     /**
      * Creates an empty enum map with the specified key type.
      *
+     * <p>
+     *  创建具有指定键类型的空枚举映射。
+     * 
+     * 
      * @param keyType the class object of the key type for this enum map
      * @throws NullPointerException if <tt>keyType</tt> is null
      */
@@ -143,6 +189,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * Creates an enum map with the same key type as the specified enum
      * map, initially containing the same mappings (if any).
      *
+     * <p>
+     *  创建与指定的枚举映射具有相同键类型的枚举映射,初始包含相同的映射(如果有)。
+     * 
+     * 
      * @param m the enum map from which to initialize this enum map
      * @throws NullPointerException if <tt>m</tt> is null
      */
@@ -160,6 +210,11 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * must contain at least one mapping (in order to determine the new
      * enum map's key type).
      *
+     * <p>
+     * 创建从指定的地图初始化的枚举图。如果指定的映射是<tt> EnumMap </tt>实例,此构造函数的行为与{@link #EnumMap(EnumMap)}相同。
+     * 否则,指定的映射必须至少包含一个映射(以便确定新的枚举映射的键类型)。
+     * 
+     * 
      * @param m the map from which to initialize this enum map
      * @throws IllegalArgumentException if <tt>m</tt> is not an
      *     <tt>EnumMap</tt> instance and contains no mappings
@@ -187,6 +242,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     /**
      * Returns the number of key-value mappings in this map.
      *
+     * <p>
+     *  返回此地图中的键值映射的数量。
+     * 
+     * 
      * @return the number of key-value mappings in this map
      */
     public int size() {
@@ -197,6 +256,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * Returns <tt>true</tt> if this map maps one or more keys to the
      * specified value.
      *
+     * <p>
+     *  如果此映射将一个或多个键映射到指定的值,则返回<tt> true </tt>。
+     * 
+     * 
      * @param value the value whose presence in this map is to be tested
      * @return <tt>true</tt> if this map maps one or more keys to this value
      */
@@ -214,6 +277,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * Returns <tt>true</tt> if this map contains a mapping for the specified
      * key.
      *
+     * <p>
+     *  如果此地图包含指定键的映射,则返回<tt> true </tt>。
+     * 
+     * 
      * @param key the key whose presence in this map is to be tested
      * @return <tt>true</tt> if this map contains a mapping for the specified
      *            key
@@ -241,6 +308,15 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * possible that the map explicitly maps the key to {@code null}.
      * The {@link #containsKey containsKey} operation may be used to
      * distinguish these two cases.
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回{@code null}。
+     * 
+     *  更正式地说,如果此映射包含从密钥{@code k}到值{@code v}的映射,使得{@code(key == k)},则此方法返回{@code v} ;否则返回{@code null}。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     *  <p> {@code null}的返回值不一定</i>表示地图不包含键的映射;也有可能映射将键明确映射到{@code null}。
+     *  {@link #containsKey containsKey}操作可用于区分这两种情况。
+     * 
      */
     public V get(Object key) {
         return (isValidKey(key) ?
@@ -254,6 +330,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * If the map previously contained a mapping for this key, the old
      * value is replaced.
      *
+     * <p>
+     *  将指定的值与此映射中的指定键相关联。如果映射先前包含此键的映射,则替换旧值。
+     * 
+     * 
      * @param key the key with which the specified value is to be associated
      * @param value the value to be associated with the specified key
      *
@@ -277,6 +357,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     /**
      * Removes the mapping for this key from this map if present.
      *
+     * <p>
+     *  如果存在,从此映射中删除此密钥的映射。
+     * 
+     * 
      * @param key the key whose mapping is to be removed from the map
      * @return the previous value associated with specified key, or
      *     <tt>null</tt> if there was no entry for key.  (A <tt>null</tt>
@@ -309,6 +393,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     /**
      * Returns true if key is of the proper type to be a key in this
      * enum map.
+     * <p>
+     *  如果键的类型正确,则返回true,作为此枚举映射中的键。
+     * 
      */
     private boolean isValidKey(Object key) {
         if (key == null)
@@ -326,6 +413,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * These mappings will replace any mappings that this map had for
      * any of the keys currently in the specified map.
      *
+     * <p>
+     * 将指定映射中的所有映射复制到此映射。这些映射将替换该映射对于当前在指定映射中的任何键的任何映射。
+     * 
+     * 
      * @param m the mappings to be stored in this map
      * @throws NullPointerException the specified map is null, or if
      *     one or more keys in the specified map are null
@@ -354,6 +445,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
 
     /**
      * Removes all mappings from this map.
+     * <p>
+     *  从此地图中删除所有映射。
+     * 
      */
     public void clear() {
         Arrays.fill(vals, null);
@@ -366,6 +460,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * This field is initialized to contain an instance of the entry set
      * view the first time this view is requested.  The view is stateless,
      * so there's no reason to create more than one.
+     * <p>
+     *  该字段被初始化为包含该视图第一次被请求时的条目集视图的实例。该视图是无状态的,因此没有理由创建多个。
+     * 
      */
     private transient Set<Map.Entry<K,V>> entrySet;
 
@@ -376,6 +473,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * in their natural order (the order in which the enum constants
      * are declared).
      *
+     * <p>
+     *  返回此地图中包含的键的{@link Set}视图。返回的集合遵循{@link Map#keySet()}中概述的一般合同。集合的迭代器将按照它们的自然顺序(枚举常量的声明顺序)返回键。
+     * 
+     * 
      * @return a set view of the keys contained in this enum map
      */
     public Set<K> keySet() {
@@ -414,6 +515,11 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * which is their natural order (the order in which the enum constants
      * are declared).
      *
+     * <p>
+     *  返回此地图中包含的值的{@link Collection}视图。返回的集合遵守{@link Map#values()}中概述的一般合同。
+     * 集合的迭代器将按照它们相应的键出现在map中的顺序返回这些值,这是它们的自然顺序(枚举常量被声明的顺序)。
+     * 
+     * 
      * @return a collection view of the values contained in this map
      */
     public Collection<V> values() {
@@ -458,6 +564,11 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * mappings in the order their keys appear in map, which is their
      * natural order (the order in which the enum constants are declared).
      *
+     * <p>
+     *  返回此地图中包含的映射的{@link Set}视图。返回的集合遵循{@link Map#keySet()}中概述的一般合同。
+     * 集合的迭代器将按照它们的键出现在map中的顺序返回映射,这是它们的自然顺序(枚举常量的声明顺序)。
+     * 
+     * 
      * @return a set view of the mappings contained in this enum map
      */
     public Set<Map.Entry<K,V>> entrySet() {
@@ -648,6 +759,11 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * represent the same mappings, as specified in the {@link
      * Map#equals(Object)} contract.
      *
+     * <p>
+     * 将指定的对象与此映射进行比较以实现相等性。
+     * 如果给定对象也是一个映射,并且这两个映射表示与{@link Map#equals(Object)}合同中指定的映射相同的映射,则返回<tt> true </tt>。
+     * 
+     * 
      * @param o the object to be compared for equality with this map
      * @return <tt>true</tt> if the specified object is equal to this map
      */
@@ -698,6 +814,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     /**
      * Returns the hash code value for this map.  The hash code of a map is
      * defined to be the sum of the hash codes of each entry in the map.
+     * <p>
+     *  返回此地图的哈希码值。映射的哈希码被定义为映射中每个条目的哈希码的总和。
+     * 
      */
     public int hashCode() {
         int h = 0;
@@ -719,6 +838,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * Returns a shallow copy of this enum map.  (The values themselves
      * are not cloned.
      *
+     * <p>
+     *  返回此枚举映射的浅副本。 (值本身不被克隆。
+     * 
+     * 
      * @return a shallow copy of this enum map
      */
     @SuppressWarnings("unchecked")
@@ -736,6 +859,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
 
     /**
      * Throws an exception if e is not of the correct type for this enum set.
+     * <p>
+     *  如果e不是此枚举集合的正确类型,则抛出异常。
+     * 
      */
     private void typeCheck(K key) {
         Class<?> keyClass = key.getClass();
@@ -746,6 +872,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     /**
      * Returns all of the values comprising K.
      * The result is uncloned, cached, and shared by all callers.
+     * <p>
+     *  返回包含K的所有值。结果未克隆,缓存,并由所有调用者共享。
+     * 
      */
     private static <K extends Enum<K>> K[] getKeyUniverse(Class<K> keyType) {
         return SharedSecrets.getJavaLangAccess()
@@ -758,6 +887,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      * Save the state of the <tt>EnumMap</tt> instance to a stream (i.e.,
      * serialize it).
      *
+     * <p>
+     *  将<tt> EnumMap </tt>实例的状态保存到流(即序列化)。
+     * 
+     * 
      * @serialData The <i>size</i> of the enum map (the number of key-value
      *             mappings) is emitted (int), followed by the key (Object)
      *             and value (Object) for each key-value mapping represented
@@ -786,6 +919,8 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     /**
      * Reconstitute the <tt>EnumMap</tt> instance from a stream (i.e.,
      * deserialize it).
+     * <p>
+     *  从流重新构建<tt> EnumMap </tt>实例(即,反序列化它)。
      */
     @SuppressWarnings("unchecked")
     private void readObject(java.io.ObjectInputStream s)

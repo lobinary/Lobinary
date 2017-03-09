@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: NodeTest.java,v 1.2.4.2 2005/09/15 00:21:14 jeffsuttor Exp $
+ * <p>
+ *  $ Id：NodeTest.java,v 1.2.4.2 2005/09/15 00:21:14 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.patterns;
 
@@ -36,6 +49,9 @@ import com.sun.org.apache.xpath.internal.objects.XObject;
  * This is the basic node test class for both match patterns and location path
  * steps.
  * @xsl.usage advanced
+ * <p>
+ *  这是匹配模式和位置​​路径步骤的基本节点测试类。 @ xsl.usage advanced
+ * 
  */
 public class NodeTest extends Expression
 {
@@ -43,6 +59,10 @@ public class NodeTest extends Expression
 
   /**
    * The namespace or local name for node tests with a wildcard.
+   * <p>
+   *  使用通配符的节点测试的命名空间或本地名称。
+   * 
+   * 
    *  @see <a href="http://www.w3.org/TR/xpath#NT-NameTest">the XPath NameTest production.</a>
    */
   public static final String WILD = "*";
@@ -50,12 +70,19 @@ public class NodeTest extends Expression
   /**
    * The URL to pass to the Node#supports method, to see if the
    * DOM has already been stripped of whitespace nodes.
+   * <p>
+   *  传递给Node#的URL支持方法,以查看DOM是否已经去除了空白节点。
+   * 
    */
   public static final String SUPPORTS_PRE_STRIPPING =
     "http://xml.apache.org/xpath/features/whitespace-pre-stripping";
 
   /**
    * This attribute determines which node types are accepted.
+   * <p>
+   *  此属性确定接受哪些节点类型。
+   * 
+   * 
    * @serial
    */
   protected int m_whatToShow;
@@ -63,6 +90,9 @@ public class NodeTest extends Expression
   /**
    * Special bitmap for match patterns starting with a function.
    * Make sure this does not conflict with {@link org.w3c.dom.traversal.NodeFilter}.
+   * <p>
+   *  用于从函数开始的匹配模式的特殊位图。请确保这不与{@link org.w3c.dom.traversal.NodeFilter}冲突。
+   * 
    */
   public static final int SHOW_BYFUNCTION = 0x00010000;
 
@@ -71,6 +101,10 @@ public class NodeTest extends Expression
    * These constants are defined in the {@link org.w3c.dom.traversal.NodeFilter}
    * interface.
    *
+   * <p>
+   *  此属性确定接受哪些节点类型。这些常量在{@link org.w3c.dom.traversal.NodeFilter}接口中定义。
+   * 
+   * 
    * @return bitset mainly defined in {@link org.w3c.dom.traversal.NodeFilter}.
    */
   public int getWhatToShow()
@@ -83,6 +117,10 @@ public class NodeTest extends Expression
    * These constants are defined in the {@link org.w3c.dom.traversal.NodeFilter}
    * interface.
    *
+   * <p>
+   * 此属性确定接受哪些节点类型。这些常量在{@link org.w3c.dom.traversal.NodeFilter}接口中定义。
+   * 
+   * 
    * @param what bitset mainly defined in {@link org.w3c.dom.traversal.NodeFilter}.
    */
   public void setWhatToShow(int what)
@@ -92,6 +130,10 @@ public class NodeTest extends Expression
 
   /**
    * The namespace to be tested for, which may be null.
+   * <p>
+   *  要测试的名称空间,可以为null。
+   * 
+   * 
    *  @serial
    */
   String m_namespace;
@@ -99,6 +141,10 @@ public class NodeTest extends Expression
   /**
    * Return the namespace to be tested.
    *
+   * <p>
+   *  返回要测试的命名空间。
+   * 
+   * 
    * @return The namespace to be tested for, or {@link #WILD}, or null.
    */
   public String getNamespace()
@@ -109,6 +155,10 @@ public class NodeTest extends Expression
   /**
    * Set the namespace to be tested.
    *
+   * <p>
+   *  设置要测试的命名空间。
+   * 
+   * 
    * @param ns The namespace to be tested for, or {@link #WILD}, or null.
    */
   public void setNamespace(String ns)
@@ -118,6 +168,10 @@ public class NodeTest extends Expression
 
   /**
    * The local name to be tested for.
+   * <p>
+   *  要测试的本地名称。
+   * 
+   * 
    *  @serial
    */
   protected String m_name;
@@ -125,6 +179,10 @@ public class NodeTest extends Expression
   /**
    * Return the local name to be tested.
    *
+   * <p>
+   *  返回要测试的本地名称。
+   * 
+   * 
    * @return the local name to be tested, or {@link #WILD}, or an empty string.
    */
   public String getLocalName()
@@ -135,6 +193,10 @@ public class NodeTest extends Expression
   /**
    * Set the local name to be tested.
    *
+   * <p>
+   *  设置要测试的本地名。
+   * 
+   * 
    * @param name the local name to be tested, or {@link #WILD}, or an empty string.
    */
   public void setLocalName(String name)
@@ -149,12 +211,23 @@ public class NodeTest extends Expression
    *  {@link #SCORE_NSWILD},
    *  {@link #SCORE_QNAME}, or
    *  {@link #SCORE_OTHER}.
+   * <p>
+   *  该测试的静态计算得分。
+   *  {@link #SCORE_NODETEST},{@link #SCORE_NONE},{@link #SCORE_NSWILD},{@link #SCORE_QNAME}或{@link #SCORE_OTHER}
+   * 之一。
+   *  该测试的静态计算得分。
+   * 
+   * 
    *  @serial
    */
   XNumber m_score;
 
   /**
    * The match score if the pattern consists of just a NodeTest.
+   * <p>
+   *  如果模式仅由NodeTest组成,则匹配分数。
+   * 
+   * 
    *  @see <a href="http://www.w3.org/TR/xslt#conflict">XSLT Specification - 5.5 Conflict Resolution for Template Rules</a>
    */
   public static final XNumber SCORE_NODETEST =
@@ -162,6 +235,10 @@ public class NodeTest extends Expression
 
   /**
    * The match score if the pattern pattern has the form NCName:*.
+   * <p>
+   *  如果模式模式具有NCName：*形式,则匹配分数。
+   * 
+   * 
    *  @see <a href="http://www.w3.org/TR/xslt#conflict">XSLT Specification - 5.5 Conflict Resolution for Template Rules</a>
    */
   public static final XNumber SCORE_NSWILD =
@@ -170,6 +247,10 @@ public class NodeTest extends Expression
   /**
    * The match score if the pattern has the form
    * of a QName optionally preceded by an @ character.
+   * <p>
+   *  如果模式具有QName的形式(可选地前面带有@字符),则匹配分数。
+   * 
+   * 
    *  @see <a href="http://www.w3.org/TR/xslt#conflict">XSLT Specification - 5.5 Conflict Resolution for Template Rules</a>
    */
   public static final XNumber SCORE_QNAME =
@@ -178,6 +259,10 @@ public class NodeTest extends Expression
   /**
    * The match score if the pattern consists of something
    * other than just a NodeTest or just a qname.
+   * <p>
+   *  如果模式由除NodeTest之外的其他内容或仅由qname组成的匹配分数。
+   * 
+   * 
    *  @see <a href="http://www.w3.org/TR/xslt#conflict">XSLT Specification - 5.5 Conflict Resolution for Template Rules</a>
    */
   public static final XNumber SCORE_OTHER =
@@ -185,6 +270,10 @@ public class NodeTest extends Expression
 
   /**
    * The match score if no match is made.
+   * <p>
+   *  如果没有匹配的匹配分数。
+   * 
+   * 
    *  @see <a href="http://www.w3.org/TR/xslt#conflict">XSLT Specification - 5.5 Conflict Resolution for Template Rules</a>
    */
   public static final XNumber SCORE_NONE =
@@ -194,6 +283,10 @@ public class NodeTest extends Expression
    * Construct an NodeTest that tests for namespaces and node names.
    *
    *
+   * <p>
+   *  构造一个用于测试名称空间和节点名称的NodeTest。
+   * 
+   * 
    * @param whatToShow Bit set defined mainly by {@link org.w3c.dom.traversal.NodeFilter}.
    * @param namespace The namespace to be tested.
    * @param name The local name to be tested.
@@ -207,6 +300,10 @@ public class NodeTest extends Expression
    * Construct an NodeTest that doesn't test for node names.
    *
    *
+   * <p>
+   *  构造不测试节点名称的NodeTest。
+   * 
+   * 
    * @param whatToShow Bit set defined mainly by {@link org.w3c.dom.traversal.NodeFilter}.
    */
   public NodeTest(int whatToShow)
@@ -215,6 +312,8 @@ public class NodeTest extends Expression
   }
 
   /**
+  /* <p>
+  /* 
    * @see Expression#deepEquals(Expression)
    */
   public boolean deepEquals(Expression expr)
@@ -255,6 +354,9 @@ public class NodeTest extends Expression
 
   /**
    * Null argument constructor.
+   * <p>
+   *  空参数构造函数。
+   * 
    */
   public NodeTest(){}
 
@@ -263,6 +365,10 @@ public class NodeTest extends Expression
    * calculating the score that this test will return if a test succeeds.
    *
    *
+   * <p>
+   *  通过设置whatToShow属性来初始化此节点测试,并计算测试成功时此测试将返回的分数。
+   * 
+   * 
    * @param whatToShow Bit set defined mainly by {@link org.w3c.dom.traversal.NodeFilter}.
    */
   public void initNodeTest(int whatToShow)
@@ -279,6 +385,10 @@ public class NodeTest extends Expression
    * calculating the score that this test will return if a test succeeds.
    *
    *
+   * <p>
+   *  通过设置whatToShow属性以及命名空间和本地名称,并计算测试成功时此测试将返回的分数来初始化此节点测试。
+   * 
+   * 
    * @param whatToShow Bit set defined mainly by {@link org.w3c.dom.traversal.NodeFilter}.
    * @param namespace The namespace to be tested.
    * @param name The local name to be tested.
@@ -295,12 +405,20 @@ public class NodeTest extends Expression
 
   /**
    * True if this test has a null namespace and a local name of {@link #WILD}.
+   * <p>
+   *  如果此测试具有空命名空间和本地名称{@link #WILD},则为true。
+   * 
+   * 
    *  @serial
    */
   private boolean m_isTotallyWild;
 
   /**
    * Get the static score for this node test.
+   * <p>
+   *  获取此节点测试的静态分数。
+   * 
+   * 
    * @return Should be one of the SCORE_XXX constants.
    */
   public XNumber getStaticScore()
@@ -310,6 +428,10 @@ public class NodeTest extends Expression
 
   /**
    * Set the static score for this node test.
+   * <p>
+   * 设置此节点测试的静态分数。
+   * 
+   * 
    * @param score Should be one of the SCORE_XXX constants.
    */
   public void setStaticScore(XNumber score)
@@ -319,6 +441,9 @@ public class NodeTest extends Expression
 
   /**
    * Static calc of match score.
+   * <p>
+   *  静态计算匹配得分。
+   * 
    */
   protected void calcScore()
   {
@@ -340,6 +465,10 @@ public class NodeTest extends Expression
    * Get the score that this test will return if a test succeeds.
    *
    *
+   * <p>
+   *  获取测试成功后此测试将返回的分数。
+   * 
+   * 
    * @return the score that this test will return if a test succeeds.
    */
   public double getDefaultScore()
@@ -350,6 +479,10 @@ public class NodeTest extends Expression
   /**
    * Tell what node type to test, if not DTMFilter.SHOW_ALL.
    *
+   * <p>
+   *  告诉测试什么节点类型,如果没有DTMFilter.SHOW_ALL。
+   * 
+   * 
    * @param whatToShow Bit set defined mainly by
    *        {@link com.sun.org.apache.xml.internal.dtm.DTMFilter}.
    * @return the node type for the whatToShow.  Since whatToShow can specify
@@ -409,6 +542,10 @@ public class NodeTest extends Expression
    * Do a diagnostics dump of a whatToShow bit set.
    *
    *
+   * <p>
+   *  执行whatToShow位设置的诊断转储。
+   * 
+   * 
    * @param whatToShow Bit set defined mainly by
    *        {@link com.sun.org.apache.xml.internal.dtm.DTMFilter}.
    */
@@ -477,6 +614,10 @@ public class NodeTest extends Expression
    * the name t is wild and the name p is non-null, or the two
    * strings are equal.
    *
+   * <p>
+   *  如果两个名称都为空或名称t为wild并且名称p为非空,或两个字符串相等,则两个名称相等。
+   * 
+   * 
    * @param p part string from the node.
    * @param t target string, which may be {@link #WILD}.
    *
@@ -494,6 +635,10 @@ public class NodeTest extends Expression
    * This is temporary to patch over Xerces issue with representing DOM
    * namespaces as "".
    *
+   * <p>
+   *  这是临时的补丁Xerces问题,将DOM命名空间表示为""。
+   * 
+   * 
    * @param p part string from the node, which may represent the null namespace
    *        as null or as "".
    * @param t target string, which may be {@link #WILD}.
@@ -513,6 +658,10 @@ public class NodeTest extends Expression
    * Tell what the test score is for the given node.
    *
    *
+   * <p>
+   *  告诉给定节点的测试分数。
+   * 
+   * 
    * @param xctxt XPath runtime context.
    * @param context The node being tested.
    *
@@ -587,6 +736,10 @@ public class NodeTest extends Expression
    * Tell what the test score is for the given node.
    *
    *
+   * <p>
+   *  告诉给定节点的测试分数。
+   * 
+   * 
    * @param xctxt XPath runtime context.
    * @param context The node being tested.
    *
@@ -659,6 +812,10 @@ public class NodeTest extends Expression
   /**
    * Test the current node to see if it matches the given node test.
    *
+   * <p>
+   *  测试当前节点,看看它是否匹配给定的节点测试。
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return {@link com.sun.org.apache.xpath.internal.patterns.NodeTest#SCORE_NODETEST},
@@ -677,6 +834,9 @@ public class NodeTest extends Expression
 
   /**
    * Node tests by themselves do not need to fix up variables.
+   * <p>
+   *  节点测试本身不需要修复变量。
+   * 
    */
   public void fixupVariables(java.util.Vector vars, int globalsSize)
   {
@@ -684,6 +844,8 @@ public class NodeTest extends Expression
   }
 
   /**
+  /* <p>
+  /* 
    * @see com.sun.org.apache.xpath.internal.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)

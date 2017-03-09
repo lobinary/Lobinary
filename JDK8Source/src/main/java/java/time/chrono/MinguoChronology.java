@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -103,26 +122,56 @@ import java.util.Map;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  Minguo日历系统。
+ * <p>
+ *  这个年表定义了Minguo日历系统的规则。这种日历系统主要用于中华民国,通常称为台湾。
+ * 日期对齐,使{@code 0001-01-01(Minguo)}为{@code 1912-01-01(ISO)}。
+ * <p>
+ *  字段定义如下：
+ * <ul>
+ * <li> era  - 有两个时代,当前的"共和国"(ERA_ROC)和前一个时代(ERA_BEFORE_ROC)。 <li>年代 - 当前时代的年代从第一年的时代开始一致地增加。
+ * 对于前一个时代,随着时间的推移,这一年逐渐增加。当前时代的价值等于ISO proleptic-year减去1911年。
+ * <li> proleptic-year  -  propptic-year  - 这个年代与当前时代的年代相同。对于前一个时代,年份为零,然后为负值。
+ * 该值等于ISO proleptic-year减去1911年。<li> year-of-year  -  Minguo年份与ISO完全匹配。 <li>日期 - 月份日期与ISO完全匹配。
+ *  <li> day-of-year  -  Minguo day-of-year完全符合ISO。 <li>闰年 -  Minguo闰年模式与ISO完全匹配,因此这两个日历永远不会失步。
+ * </ul>
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 public final class MinguoChronology extends AbstractChronology implements Serializable {
 
     /**
      * Singleton instance for the Minguo chronology.
+     * <p>
+     *  单语实例为Minguo年表。
+     * 
      */
     public static final MinguoChronology INSTANCE = new MinguoChronology();
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 1039765215346859963L;
     /**
      * The difference in years between ISO and Minguo.
+     * <p>
+     *  ISO和Minguo之间的年份差异。
+     * 
      */
     static final int YEARS_DIFFERENCE = 1911;
 
     /**
      * Restricted constructor.
+     * <p>
+     *  受限制的构造函数。
+     * 
      */
     private MinguoChronology() {
     }
@@ -134,6 +183,12 @@ public final class MinguoChronology extends AbstractChronology implements Serial
      * The ID uniquely identifies the {@code Chronology}.
      * It can be used to lookup the {@code Chronology} using {@link #of(String)}.
      *
+     * <p>
+     *  获取年表的ID  - "Minguo"。
+     * <p>
+     *  ID唯一标识{@code Chronology}。它可以用于使用{@link #of(String)}查找{@code Chronology}。
+     * 
+     * 
      * @return the chronology ID - 'Minguo'
      * @see #getCalendarType()
      */
@@ -151,6 +206,13 @@ public final class MinguoChronology extends AbstractChronology implements Serial
      * It can also be used as part of a locale, accessible via
      * {@link Locale#getUnicodeLocaleType(String)} with the key 'ca'.
      *
+     * <p>
+     *  获取基础日历系统的日历类型 - 'roc'。
+     * <p>
+     * 日历类型是由<em> Unicode区域设置数据标记语言(LDML)</em>规范定义的标识符。它可以用于使用{@link #of(String)}查找{@code Chronology}。
+     * 它也可以作为区域设置的一部分,通过{@link Locale#getUnicodeLocaleType(String)}访问,使用键'ca'。
+     * 
+     * 
      * @return the calendar system type - 'roc'
      * @see #getId()
      */
@@ -164,6 +226,10 @@ public final class MinguoChronology extends AbstractChronology implements Serial
      * Obtains a local date in Minguo calendar system from the
      * era, year-of-era, month-of-year and day-of-month fields.
      *
+     * <p>
+     *  从时代,年份,年份和月份字段获取Minguo日历系统中的本地日期。
+     * 
+     * 
      * @param era  the Minguo era, not null
      * @param yearOfEra  the year-of-era
      * @param month  the month-of-year
@@ -181,6 +247,10 @@ public final class MinguoChronology extends AbstractChronology implements Serial
      * Obtains a local date in Minguo calendar system from the
      * proleptic-year, month-of-year and day-of-month fields.
      *
+     * <p>
+     *  从Manguo日历系统中从原始年,月和月日字段中获取本地日期。
+     * 
+     * 
      * @param prolepticYear  the proleptic-year
      * @param month  the month-of-year
      * @param dayOfMonth  the day-of-month
@@ -196,6 +266,10 @@ public final class MinguoChronology extends AbstractChronology implements Serial
      * Obtains a local date in Minguo calendar system from the
      * era, year-of-era and day-of-year fields.
      *
+     * <p>
+     *  从时代,年代和年年字段获取Minguo日历系统中的本地日期。
+     * 
+     * 
      * @param era  the Minguo era, not null
      * @param yearOfEra  the year-of-era
      * @param dayOfYear  the day-of-year
@@ -212,6 +286,10 @@ public final class MinguoChronology extends AbstractChronology implements Serial
      * Obtains a local date in Minguo calendar system from the
      * proleptic-year and day-of-year fields.
      *
+     * <p>
+     *  从引渡年和年年字段获取Minguo日历系统中的本地日期。
+     * 
+     * 
      * @param prolepticYear  the proleptic-year
      * @param dayOfYear  the day-of-year
      * @return the Minguo local date, not null
@@ -225,6 +303,10 @@ public final class MinguoChronology extends AbstractChronology implements Serial
     /**
      * Obtains a local date in the Minguo calendar system from the epoch-day.
      *
+     * <p>
+     *  从纪元日在Minguo日历系统中获取本地日期。
+     * 
+     * 
      * @param epochDay  the epoch day
      * @return the Minguo local date, not null
      * @throws DateTimeException if unable to create the date
@@ -283,6 +365,12 @@ public final class MinguoChronology extends AbstractChronology implements Serial
      * This method does not validate the year passed in, and only has a
      * well-defined result for years in the supported range.
      *
+     * <p>
+     *  检查指定的年份是否为闰年。
+     * <p>
+     *  Minguo闰年的发生完全符合ISO闰年。此方法不会验证传入的年份,并且在支持范围内的年份中只有明确定义的结果。
+     * 
+     * 
      * @param prolepticYear  the proleptic-year to check, not validated for range
      * @return true if the year is a leap year
      */
@@ -339,6 +427,10 @@ public final class MinguoChronology extends AbstractChronology implements Serial
     /**
      * Writes the Chronology using a
      * <a href="../../../serialized-form.html#java.time.chrono.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.chrono.Ser">专用序列化表单</a>撰写年表。
+     * 
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(1);     // identifies a Chronology
@@ -355,6 +447,9 @@ public final class MinguoChronology extends AbstractChronology implements Serial
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

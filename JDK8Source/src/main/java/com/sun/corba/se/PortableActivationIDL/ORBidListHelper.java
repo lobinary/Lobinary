@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -10,6 +11,9 @@ package com.sun.corba.se.PortableActivationIDL;
 
 
 /** A list of ORB IDs.
+/* <p>
+/* com / sun / corba / se / PortableActivationIDL / ORBidListHelper.java。
+/* 
     */
 abstract public class ORBidListHelper
 {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ import java.security.*;
  * the security policy file.
  *
  *
+ * <p>
+ *  当SecurityManager运行的代码调用其中一个日志记录控制方法(例如Logger.setLevel)时,SecurityManager将检查的权限。
+ * <p>
+ *  目前只有一个命名为LoggingPermission。这是"控制",它允许控制日志配置,例如通过添加或删除处理程序,添加或删除过滤器或更改日志记录级别。
+ * <p>
+ *  程序员通常不直接创建LoggingPermission对象。相反,它们由基于读取安全策略文件的安全策略代码创建。
+ * 
  * @since 1.4
  * @see java.security.BasicPermission
  * @see java.security.Permission
@@ -59,6 +67,9 @@ public final class LoggingPermission extends java.security.BasicPermission {
     /**
      * Creates a new LoggingPermission object.
      *
+     * <p>
+     * 
+     * 
      * @param name Permission name.  Must be "control".
      * @param actions Must be either null or the empty string.
      *

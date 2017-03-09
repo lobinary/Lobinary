@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,10 @@ import sun.swing.SwingUtilities2;
 /**
  * A Basic L&amp;F implementation of the SplitPaneUI.
  *
+ * <p>
+ *  SplitPaneUI的基本L&amp; F实现。
+ * 
+ * 
  * @author Scott Violet
  * @author Steve Wilson
  * @author Ralph Kar
@@ -55,6 +60,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * The divider used for non-continuous layout is added to the split pane
      * with this object.
+     * <p>
+     *  用于非连续布局的分隔符将添加到具有此对象的拆分窗格中。
+     * 
      */
     protected static final String NON_CONTINUOUS_DIVIDER =
         "nonContinuousDivider";
@@ -63,6 +71,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * How far (relative) the divider does move when it is moved around by
      * the cursor keys on the keyboard.
+     * <p>
+     *  当键盘上的光标键移动分隔符时,分隔符移动的距离(相对距离)。
+     * 
      */
     protected static int KEYBOARD_DIVIDER_MOVE_OFFSET = 3;
 
@@ -70,30 +81,45 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * JSplitPane instance this instance is providing
      * the look and feel for.
+     * <p>
+     *  JSplitPane实例这个实例提供了外观和感觉。
+     * 
      */
     protected JSplitPane splitPane;
 
 
     /**
      * LayoutManager that is created and placed into the split pane.
+     * <p>
+     *  创建并放置到拆分窗格中的LayoutManager。
+     * 
      */
     protected BasicHorizontalLayoutManager layoutManager;
 
 
     /**
      * Instance of the divider for this JSplitPane.
+     * <p>
+     *  此JSplitPane的分隔符实例。
+     * 
      */
     protected BasicSplitPaneDivider divider;
 
 
     /**
      * Instance of the PropertyChangeListener for this JSplitPane.
+     * <p>
+     *  此JSplitPane的PropertyChangeListener的实例。
+     * 
      */
     protected PropertyChangeListener propertyChangeListener;
 
 
     /**
      * Instance of the FocusListener for this JSplitPane.
+     * <p>
+     *  此JSplitPane的FocusListener的实例。
+     * 
      */
     protected FocusListener focusListener;
 
@@ -103,18 +129,27 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Keys to use for forward focus traversal when the JComponent is
      * managing focus.
+     * <p>
+     *  当JComponent正在管理焦点时,用于正向聚焦遍历的键。
+     * 
      */
     private Set<KeyStroke> managingFocusForwardTraversalKeys;
 
     /**
      * Keys to use for backward focus traversal when the JComponent is
      * managing focus.
+     * <p>
+     *  当JComponent正在管理焦点时,用于向后焦点遍历的键。
+     * 
      */
     private Set<KeyStroke> managingFocusBackwardTraversalKeys;
 
 
     /**
      * The size of the divider while the dragging session is valid.
+     * <p>
+     *  拖动会话期间分隔符的大小有效。
+     * 
      */
     protected int dividerSize;
 
@@ -122,6 +157,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Instance for the shadow of the divider when non continuous layout
      * is being used.
+     * <p>
+     *  当使用非连续布局时,分隔符的阴影的实例。
+     * 
      */
     protected Component nonContinuousLayoutDivider;
 
@@ -129,12 +167,18 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Set to true in startDragging if any of the children
      * (not including the nonContinuousLayoutDivider) are heavy weights.
+     * <p>
+     *  如果任何子项(不包括nonContinuousLayoutDivider)是重量级,则在startDragging中设置为true。
+     * 
      */
     protected boolean draggingHW;
 
 
     /**
      * Location of the divider when the dragging session began.
+     * <p>
+     *  拖动会话开始时分隔符的位置。
+     * 
      */
     protected int beginDragDividerLocation;
 
@@ -145,6 +189,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -155,6 +203,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     * 从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -165,6 +217,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -175,6 +231,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -185,6 +245,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -195,6 +259,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -205,6 +273,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -216,6 +288,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -226,6 +302,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     * 从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -236,6 +316,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -246,6 +330,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -256,6 +344,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -287,6 +379,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Creates a new BasicSplitPaneUI instance
+     * <p>
+     *  创建一个新的BasicSplitPaneUI实例
+     * 
      */
     public static ComponentUI createUI(JComponent x) {
         return new BasicSplitPaneUI();
@@ -307,6 +402,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Installs the UI.
+     * <p>
+     *  安装UI。
+     * 
      */
     public void installUI(JComponent c) {
         splitPane = (JSplitPane) c;
@@ -322,6 +420,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Installs the UI defaults.
+     * <p>
+     *  安装UI默认值。
+     * 
      */
     protected void installDefaults(){
         LookAndFeel.installBorder(splitPane, "SplitPane.border");
@@ -356,6 +457,8 @@ public class BasicSplitPaneUI extends SplitPaneUI
         resetLayoutManager();
 
         /* Install the nonContinuousLayoutDivider here to avoid having to
+        /* <p>
+        /* 
         add/remove everything later. */
         if(nonContinuousLayoutDivider == null) {
             setNonContinuousLayoutDivider(
@@ -386,6 +489,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Installs the event listeners for the UI.
+     * <p>
+     *  为UI安装事件侦听器。
+     * 
      */
     protected void installListeners() {
         if ((propertyChangeListener = createPropertyChangeListener()) !=
@@ -401,6 +507,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Installs the keyboard actions for the UI.
+     * <p>
+     *  安装UI的键盘操作。
+     * 
      */
     protected void installKeyboardActions() {
         InputMap km = getInputMap(JComponent.
@@ -423,6 +532,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Uninstalls the UI.
+     * <p>
+     *  卸载UI。
+     * 
      */
     public void uninstallUI(JComponent c) {
         uninstallKeyboardActions();
@@ -436,6 +548,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Uninstalls the UI defaults.
+     * <p>
+     *  卸载UI默认值。
+     * 
      */
     protected void uninstallDefaults() {
         if(splitPane.getLayout() == layoutManager) {
@@ -471,6 +586,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Uninstalls the event listeners for the UI.
+     * <p>
+     *  卸载UI的事件侦听器。
+     * 
      */
     protected void uninstallListeners() {
         if (propertyChangeListener != null) {
@@ -493,6 +611,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Uninstalls the keyboard actions for the UI.
+     * <p>
+     *  卸载UI的键盘操作。
+     * 
      */
     protected void uninstallKeyboardActions() {
         SwingUtilities.replaceUIActionMap(splitPane, null);
@@ -504,6 +625,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Creates a PropertyChangeListener for the JSplitPane UI.
+     * <p>
+     *  为JSplitPane UI创建PropertyChangeListener。
+     * 
      */
     protected PropertyChangeListener createPropertyChangeListener() {
         return getHandler();
@@ -519,6 +643,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Creates a FocusListener for the JSplitPane UI.
+     * <p>
+     *  为JSplitPane UI创建FocusListener。
+     * 
      */
     protected FocusListener createFocusListener() {
         return getHandler();
@@ -536,6 +663,15 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Creates a ActionListener for the JSplitPane UI that listens for
      * specific key presses.
      *
+     * <p>
+     * 从Java 2平台v1.3这个方法不再使用。
+     * 以前使用此方法的子类应该创建一个包装ActionListener的Action,并通过重写<code> installKeyboardActions </code>并将Action放入SplitPane
+     * 的ActionMap中来注册该Action。
+     * 从Java 2平台v1.3这个方法不再使用。有关更多详细信息,请参阅键绑定规范。
+     * <p>
+     *  为监听特定按键的JSplitPane UI创建一个ActionListener。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -555,6 +691,15 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Creates a ActionListener for the JSplitPane UI that listens for
      * specific key presses.
      *
+     * <p>
+     *  从Java 2平台v1.3这个方法不再使用。
+     * 以前使用此方法的子类应该创建一个包装ActionListener的Action,并通过重写<code> installKeyboardActions </code>并将Action放入SplitPane
+     * 的ActionMap中来注册该Action。
+     *  从Java 2平台v1.3这个方法不再使用。有关更多详细信息,请参阅键绑定规范。
+     * <p>
+     *  为监听特定按键的JSplitPane UI创建一个ActionListener。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -574,6 +719,15 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Creates a ActionListener for the JSplitPane UI that listens for
      * specific key presses.
      *
+     * <p>
+     *  从Java 2平台v1.3这个方法不再使用。
+     * 以前使用此方法的子类应该创建一个包装ActionListener的Action,并通过重写<code> installKeyboardActions </code>并将Action放入SplitPane
+     * 的ActionMap中来注册该Action。
+     *  从Java 2平台v1.3这个方法不再使用。有关更多详细信息,请参阅键绑定规范。
+     * <p>
+     *  为监听特定按键的JSplitPane UI创建一个ActionListener。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -593,6 +747,15 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Creates a ActionListener for the JSplitPane UI that listens for
      * specific key presses.
      *
+     * <p>
+     * 从Java 2平台v1.3这个方法不再使用。
+     * 以前使用此方法的子类应该创建一个包装ActionListener的Action,并通过重写<code> installKeyboardActions </code>并将Action放入SplitPane
+     * 的ActionMap中来注册该Action。
+     * 从Java 2平台v1.3这个方法不再使用。有关更多详细信息,请参阅键绑定规范。
+     * <p>
+     *  为监听特定按键的JSplitPane UI创建一个ActionListener。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -612,6 +775,15 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Creates a ActionListener for the JSplitPane UI that listens for
      * specific key presses.
      *
+     * <p>
+     *  从Java 2平台v1.3这个方法不再使用。
+     * 以前使用此方法的子类应该创建一个包装ActionListener的Action,并通过重写<code> installKeyboardActions </code>并将Action放入SplitPane
+     * 的ActionMap中来注册该Action。
+     *  从Java 2平台v1.3这个方法不再使用。有关更多详细信息,请参阅键绑定规范。
+     * <p>
+     *  为监听特定按键的JSplitPane UI创建一个ActionListener。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -622,6 +794,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Returns the orientation for the JSplitPane.
+     * <p>
+     *  返回JSplitPane的方向。
+     * 
      */
     public int getOrientation() {
         return orientation;
@@ -630,6 +805,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Set the orientation for the JSplitPane.
+     * <p>
+     *  设置JSplitPane的方向。
+     * 
      */
     public void setOrientation(int orientation) {
         this.orientation = orientation;
@@ -638,6 +816,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Determines whether the JSplitPane is set to use a continuous layout.
+     * <p>
+     *  确定JSplitPane是否设置为使用连续布局。
+     * 
      */
     public boolean isContinuousLayout() {
         return continuousLayout;
@@ -646,6 +827,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Turn continuous layout on/off.
+     * <p>
+     *  打开/关闭连续布局。
+     * 
      */
     public void setContinuousLayout(boolean b) {
         continuousLayout = b;
@@ -654,6 +838,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Returns the last drag location of the JSplitPane.
+     * <p>
+     *  返回JSplitPane的最后一个拖动位置。
+     * 
      */
     public int getLastDragLocation() {
         return lastDragLocation;
@@ -662,12 +849,17 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Set the last drag location of the JSplitPane.
+     * <p>
+     *  设置JSplitPane的最后一个拖动位置。
+     * 
      */
     public void setLastDragLocation(int l) {
         lastDragLocation = l;
     }
 
     /**
+    /* <p>
+    /* 
      * @return increment via keyboard methods.
      */
     int getKeyboardMoveIncrement() {
@@ -680,6 +872,11 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicSplitPaneUI.
+     * <p>
+     *  JSplitPane UI使用的PropertyChangeListener的实现。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicSplitPaneUI的子类中。
+     * 
      */
     public class PropertyHandler implements PropertyChangeListener
     {
@@ -692,6 +889,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * Messaged from the <code>JSplitPane</code> the receiver is
          * contained in.  May potentially reset the layout manager and cause a
          * <code>validate</code> to be sent.
+         * <p>
+         * 来自<code> JSplitPane </code>的消息包含在接收器中。可能重置布局管理器并导致发送<code>验证</code>。
+         * 
          */
         public void propertyChange(PropertyChangeEvent e) {
             getHandler().propertyChange(e);
@@ -704,6 +904,11 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicSplitPaneUI.
+     * <p>
+     *  JSplitPane UI使用的FocusListener的实现。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicSplitPaneUI的子类中。
+     * 
      */
     public class FocusHandler extends FocusAdapter
     {
@@ -727,6 +932,11 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicSplitPaneUI.
+     * <p>
+     *  JSplitPane UI用于处理特定按键的ActionListener的实现。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicSplitPaneUI的子类中。
+     * 
      */
     public class KeyboardUpLeftHandler implements ActionListener
     {
@@ -744,6 +954,11 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicSplitPaneUI.
+     * <p>
+     *  JSplitPane UI用于处理特定按键的ActionListener的实现。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicSplitPaneUI的子类中。
+     * 
      */
     public class KeyboardDownRightHandler implements ActionListener
     {
@@ -762,6 +977,11 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicSplitPaneUI.
+     * <p>
+     *  JSplitPane UI用于处理特定按键的ActionListener的实现。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicSplitPaneUI的子类中。
+     * 
      */
     public class KeyboardHomeHandler implements ActionListener
     {
@@ -779,6 +999,11 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicSplitPaneUI.
+     * <p>
+     *  JSplitPane UI用于处理特定按键的ActionListener的实现。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicSplitPaneUI的子类中。
+     * 
      */
     public class KeyboardEndHandler implements ActionListener
     {
@@ -807,6 +1032,11 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * <p>
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of BasicSplitPaneUI.
+     * <p>
+     *  JSplitPane UI用于处理特定按键的ActionListener的实现。
+     * <p>
+     *  该类应当被视为"受保护的"内部类。实例化它只在BasicSplitPaneUI的子类中。
+     * 
      */
     public class KeyboardResizeToggleHandler implements ActionListener
     {
@@ -819,6 +1049,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Returns the divider between the top Components.
+     * <p>
+     * 返回顶部组件之间的分隔符。
+     * 
      */
     public BasicSplitPaneDivider getDivider() {
         return divider;
@@ -828,6 +1061,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Returns the default non continuous layout divider, which is an
      * instance of {@code Canvas} that fills in the background with dark gray.
+     * <p>
+     *  返回默认的非连续布局分隔符,它是以深灰色填充背景的{@code Canvas}的实例。
+     * 
      */
     protected Component createDefaultNonContinuousLayoutDivider() {
         return new Canvas() {
@@ -852,6 +1088,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * not continuously layout. This divider will only be used during a
      * dragging session. It is recommended that the passed in component
      * be a heavy weight.
+     * <p>
+     *  当splitPane配置为不连续布局时,设置要使用的分频器。此分隔符仅在拖动会话期间使用。建议传入的组件重量很重。
+     * 
      */
     protected void setNonContinuousLayoutDivider(Component newDivider) {
         setNonContinuousLayoutDivider(newDivider, true);
@@ -860,6 +1099,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Sets the divider to use.
+     * <p>
+     *  设置要使用的分频器。
+     * 
      */
     protected void setNonContinuousLayoutDivider(Component newDivider,
         boolean rememberSizes) {
@@ -905,6 +1147,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Returns the divider to use when the splitPane is configured to
      * not continuously layout. This divider will only be used during a
      * dragging session.
+     * <p>
+     *  返回当splitPane配置为不连续布局时要使用的分隔符。此分隔符仅在拖动会话期间使用。
+     * 
      */
     public Component getNonContinuousLayoutDivider() {
         return nonContinuousLayoutDivider;
@@ -914,6 +1159,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Returns the splitpane this instance is currently contained
      * in.
+     * <p>
+     *  返回此实例当前包含的splitpane。
+     * 
      */
     public JSplitPane getSplitPane() {
         return splitPane;
@@ -922,6 +1170,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Creates the default divider.
+     * <p>
+     *  创建默认分频器。
+     * 
      */
     public BasicSplitPaneDivider createDefaultDivider() {
         return new BasicSplitPaneDivider(this);
@@ -930,6 +1181,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Messaged to reset the preferred sizes.
+     * <p>
+     *  消息以重置首选大小。
+     * 
      */
     public void resetToPreferredSizes(JSplitPane jc) {
         if(splitPane != null) {
@@ -942,6 +1196,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Sets the location of the divider to location.
+     * <p>
+     *  将分隔符的位置设置为位置。
+     * 
      */
     public void setDividerLocation(JSplitPane jc, int location) {
         if (!ignoreDividerLocationChange) {
@@ -971,6 +1228,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Returns the location of the divider, which may differ from what
      * the splitpane thinks the location of the divider is.
+     * <p>
+     *  返回分隔符的位置,这可能与拆分窗口认为分隔符的位置不同。
+     * 
      */
     public int getDividerLocation(JSplitPane jc) {
         if(orientation == JSplitPane.HORIZONTAL_SPLIT)
@@ -981,6 +1241,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Gets the minimum location of the divider.
+     * <p>
+     *  获取分隔线的最小位置。
+     * 
      */
     public int getMinimumDividerLocation(JSplitPane jc) {
         int       minLoc = 0;
@@ -1008,6 +1271,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Gets the maximum location of the divider.
+     * <p>
+     *  获取分隔线的最大位置。
+     * 
      */
     public int getMaximumDividerLocation(JSplitPane jc) {
         Dimension splitPaneSize = splitPane.getSize();
@@ -1041,6 +1307,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Called when the specified split pane has finished painting
      * its children.
+     * <p>
+     *  当指定的分割窗格完成绘制其子代时调用。
+     * 
      */
     public void finishedPaintingChildren(JSplitPane sp, Graphics g) {
         if(sp == splitPane && getLastDragLocation() != -1 &&
@@ -1061,6 +1330,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void paint(Graphics g, JComponent jc) {
         if (!painted && splitPane.getDividerLocation()<0) {
@@ -1074,6 +1346,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Returns the preferred size for the passed in component,
      * This is passed off to the current layout manager.
+     * <p>
+     *  返回传入组件的首选大小,这将传递到当前布局管理器。
+     * 
      */
     public Dimension getPreferredSize(JComponent jc) {
         if(splitPane != null)
@@ -1085,6 +1360,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Returns the minimum size for the passed in component,
      * This is passed off to the current layout manager.
+     * <p>
+     *  返回传入组件的最小大小,这将传递到当前布局管理器。
+     * 
      */
     public Dimension getMinimumSize(JComponent jc) {
         if(splitPane != null)
@@ -1096,6 +1374,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Returns the maximum size for the passed in component,
      * This is passed off to the current layout manager.
+     * <p>
+     *  返回传入组件的最大大小,这被传递到当前布局管理器。
+     * 
      */
     public Dimension getMaximumSize(JComponent jc) {
         if(splitPane != null)
@@ -1107,6 +1388,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Returns the insets. The insets are returned from the border insets
      * of the current border.
+     * <p>
+     *  返回插图。插入从当前边界的边框插入返回。
+     * 
      */
     public Insets getInsets(JComponent jc) {
         return null;
@@ -1116,6 +1400,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Resets the layout manager based on orientation and messages it
      * with invalidateLayout to pull in appropriate Components.
+     * <p>
+     * 根据方向重置布局管理器,并使用invalidateLayout发送消息,以拉入相应的组件。
+     * 
      */
     protected void resetLayoutManager() {
         if(orientation == JSplitPane.HORIZONTAL_SPLIT) {
@@ -1131,6 +1418,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * Set the value to indicate if one of the splitpane sides is expanded.
+     * <p>
+     *  设置值以指示是否扩展了其中一个分裂面。
+     * 
      */
     void setKeepHidden(boolean keepHidden) {
         this.keepHidden = keepHidden;
@@ -1138,6 +1428,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
     /**
      * The value returned indicates if one of the splitpane sides is expanded.
+     * <p>
+     *  返回的值指示是否扩展了其中一个分裂面。
+     * 
+     * 
      * @return true if one of the splitpane sides is expanded, false otherwise.
      */
     private boolean getKeepHidden() {
@@ -1147,6 +1441,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Should be messaged before the dragging session starts, resets
      * lastDragLocation and dividerSize.
+     * <p>
+     *  在拖动会话开始之前应该发送消息,重置lastDragLocation和dividerSize。
+     * 
      */
     protected void startDragging() {
         Component       leftC = splitPane.getLeftComponent();
@@ -1188,6 +1485,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * Messaged during a dragging session to move the divider to the
      * passed in location. If continuousLayout is true the location is
      * reset and the splitPane validated.
+     * <p>
+     *  在拖动会话期间消息,将分隔符移动到传入的位置。如果continuousLayout为true,则会重置位置,并验证splitPane。
+     * 
      */
     protected void dragDividerTo(int location) {
         if(getLastDragLocation() != location) {
@@ -1230,6 +1530,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * Messaged to finish the dragging session. If not continuous display
      * the dividers location will be reset.
+     * <p>
+     *  消息完成拖动会话。如果不连续显示,分频器位置将被重置。
+     * 
      */
     protected void finishDraggingTo(int location) {
         dragDividerTo(location);
@@ -1258,6 +1561,12 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * <p>
      * Returns the width of one side of the divider border.
      *
+     * <p>
+     *  从Java 2平台v1.3这个方法不再使用。相反,你应该在分隔线上设置边框。
+     * <p>
+     *  返回分隔边框一侧的宽度。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3, instead set the border on the
      * divider.
      */
@@ -1270,6 +1579,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
     /**
      * LayoutManager for JSplitPanes that have an orientation of
      * HORIZONTAL_SPLIT.
+     * <p>
+     *  具有HORIZONTAL_SPLIT方向的JSplitPanes的LayoutManager。
+     * 
      */
     public class BasicHorizontalLayoutManager implements LayoutManager2
     {
@@ -1301,6 +1613,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Does the actual layout.
+         * <p>
+         *  是否实际布局。
+         * 
          */
         public void layoutContainer(Container container) {
             Dimension   containerSize = container.getSize();
@@ -1404,6 +1719,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * Adds the component at place.  Place must be one of
          * JSplitPane.LEFT, RIGHT, TOP, BOTTOM, or null (for the
          * divider).
+         * <p>
+         *  在地方添加组件。地方必须是JSplitPane.LEFT,RIGHT,TOP,BOTTOM或null(用于分隔符)之一。
+         * 
          */
         public void addLayoutComponent(String place, Component component) {
             boolean isValid = true;
@@ -1440,6 +1758,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * Returns the minimum size needed to contain the children.
          * The width is the sum of all the children's min widths and
          * the height is the largest of the children's minimum heights.
+         * <p>
+         *  返回包含子元素所需的最小大小。宽度是所有儿童最小宽度的总和,高度是儿童最小高度中最大的。
+         * 
          */
         public Dimension minimumLayoutSize(Container container) {
             int         minPrimary = 0;
@@ -1473,6 +1794,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * Returns the preferred size needed to contain the children.
          * The width is the sum of all the preferred widths of the children and
          * the height is the largest preferred height of the children.
+         * <p>
+         *  返回包含子元素所需的首选大小。宽度是孩子的所有优选宽度的总和,高度是孩子的最大优选高度。
+         * 
          */
         public Dimension preferredLayoutSize(Container container) {
             int         prePrimary = 0;
@@ -1505,6 +1829,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Removes the specified component from our knowledge.
+         * <p>
+         *  从我们的知识中删除指定的组件。
+         * 
          */
         public void removeLayoutComponent(Component component) {
             for(int counter = 0; counter < 3; counter++) {
@@ -1525,6 +1852,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
         /**
          * Adds the specified component to the layout, using the specified
          * constraint object.
+         * <p>
+         * 使用指定的约束对象将指定的组件添加到布局。
+         * 
+         * 
          * @param comp the component to be added
          * @param constraints  where/how the component is added to the layout.
          */
@@ -1545,6 +1876,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * components.  The value should be a number between 0 and 1
          * where 0 represents alignment along the origin, 1 is aligned
          * the furthest away from the origin, 0.5 is centered, etc.
+         * <p>
+         *  返回沿x轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+         * 
          */
         public float getLayoutAlignmentX(Container target) {
             return 0.0f;
@@ -1557,6 +1891,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * components.  The value should be a number between 0 and 1
          * where 0 represents alignment along the origin, 1 is aligned
          * the furthest away from the origin, 0.5 is centered, etc.
+         * <p>
+         *  返回沿y轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+         * 
          */
         public float getLayoutAlignmentY(Container target) {
             return 0.0f;
@@ -1567,6 +1904,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * Does nothing. If the developer really wants to change the
          * size of one of the views JSplitPane.resetToPreferredSizes should
          * be messaged.
+         * <p>
+         *  什么也没做。如果开发人员真的想改变其中一个视图的大小JSplitPane.resetToPreferredSizes应该被消息。
+         * 
          */
         public void invalidateLayout(Container c) {
         }
@@ -1575,6 +1915,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
         /**
          * Returns the maximum layout size, which is Integer.MAX_VALUE
          * in both directions.
+         * <p>
+         *  返回最大布局大小,即两个方向上的Integer.MAX_VALUE。
+         * 
          */
         public Dimension maximumLayoutSize(Container target) {
             return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
@@ -1588,6 +1931,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
         /**
          * Marks the receiver so that the next time this instance is
          * laid out it'll ask for the preferred sizes.
+         * <p>
+         *  标记接收器,以便下次该实例布局时,它会询问首选大小。
+         * 
          */
         public void resetToPreferredSizes() {
             doReset = true;
@@ -1595,6 +1941,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Resets the size of the Component at the passed in location.
+         * <p>
+         *  重置在传入位置的组件的大小。
+         * 
          */
         protected void resetSizeAt(int index) {
             sizes[index] = 0;
@@ -1604,6 +1953,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Sets the sizes to <code>newSizes</code>.
+         * <p>
+         *  将大小设置为<code> newSizes </code>。
+         * 
          */
         protected void setSizes(int[] newSizes) {
             System.arraycopy(newSizes, 0, sizes, 0, 3);
@@ -1612,6 +1964,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Returns the sizes of the components.
+         * <p>
+         *  返回组件的大小。
+         * 
          */
         protected int[] getSizes() {
             int[]         retSizes = new int[3];
@@ -1623,6 +1978,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Returns the width of the passed in Components preferred size.
+         * <p>
+         *  返回传入的组件首选大小的宽度。
+         * 
          */
         protected int getPreferredSizeOfComponent(Component c) {
             return getSizeForPrimaryAxis(c.getPreferredSize());
@@ -1631,6 +1989,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Returns the width of the passed in Components minimum size.
+         * <p>
+         *  返回传入的组件最小大小的宽度。
+         * 
          */
         int getMinimumSizeOfComponent(Component c) {
             return getSizeForPrimaryAxis(c.getMinimumSize());
@@ -1639,6 +2000,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Returns the width of the passed in component.
+         * <p>
+         *  返回传入组件的宽度。
+         * 
          */
         protected int getSizeOfComponent(Component c) {
             return getSizeForPrimaryAxis(c.getSize());
@@ -1648,6 +2012,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
         /**
          * Returns the available width based on the container size and
          * Insets.
+         * <p>
+         *  根据容器大小和Insets返回可用宽度。
+         * 
          */
         protected int getAvailableSize(Dimension containerSize,
                                        Insets insets) {
@@ -1662,6 +2029,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
         /**
          * Returns the left inset, unless the Insets are null in which case
          * 0 is returned.
+         * <p>
+         *  返回左插入,除非Insets为null,在这种情况下返回0。
+         * 
          */
         protected int getInitialLocation(Insets insets) {
             if(insets != null)
@@ -1674,6 +2044,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * Sets the width of the component c to be size, placing its
          * x location at location, y to the insets.top and height
          * to the containersize.height less the top and bottom insets.
+         * <p>
+         * 将组件c的宽度设置为size,将x位置放在位置,y放在insets.top,高度放在containersize.height减去顶部和底部插入。
+         * 
          */
         protected void setComponentToSize(Component c, int size,
                                           int location, Insets insets,
@@ -1701,6 +2074,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * If the axis == 0, the width is returned, otherwise the height.
+         * <p>
+         *  如果axis == 0,则返回宽度,否则返回height。
+         * 
          */
         int getSizeForPrimaryAxis(Dimension size) {
             if (axis == 0) {
@@ -1711,6 +2087,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * If the axis == 0, the width is returned, otherwise the height.
+         * <p>
+         *  如果axis == 0,则返回宽度,否则返回height。
+         * 
          */
         int getSizeForSecondaryAxis(Dimension size) {
             if (axis == 0) {
@@ -1727,6 +2106,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
          *    0    false   - right
          *    1    true    - top
          *    1    false   - bottom
+         * <p>
+         *  返回由轴和<code> isTop </code> <p>标识的插入的特定值axis isTop 0 true  -  left 0 false  -  right 1 true  -  top 1 
+         * false  -  bottom。
+         * 
          */
         int getSizeForPrimaryAxis(Insets insets, boolean isTop) {
             if (axis == 0) {
@@ -1749,6 +2132,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
          *    0    false   - right
          *    1    true    - top
          *    1    false   - bottom
+         * <p>
+         *  返回由轴和<code> isTop </code> <p>标识的插入的特定值axis isTop 0 true  -  left 0 false  -  right 1 true  -  top 1 
+         * false  -  bottom。
+         * 
          */
         int getSizeForSecondaryAxis(Insets insets, boolean isTop) {
             if (axis == 0) {
@@ -1767,6 +2154,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * Determines the components. This should be called whenever
          * a new instance of this is installed into an existing
          * SplitPane.
+         * <p>
+         *  确定组件。每当将新实例安装到现有SplitPane中时,应调用此方法。
+         * 
          */
         protected void updateComponents() {
             Component comp;
@@ -1819,6 +2209,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
         /**
          * Resets the size of the first component to <code>leftSize</code>,
          * and the right component to the remainder of the space.
+         * <p>
+         *  将第一个组件的大小重置为<code> leftSize </code>,将右侧组件重置为空间的其余部分。
+         * 
          */
         void setDividerLocation(int leftSize, int availableSize) {
             boolean          lValid = (components[0] != null &&
@@ -1851,6 +2244,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Returns an array of the minimum sizes of the components.
+         * <p>
+         *  返回组件的最小大小的数组。
+         * 
          */
         int[] getPreferredSizes() {
             int[]         retValue = new int[3];
@@ -1870,6 +2266,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Returns an array of the minimum sizes of the components.
+         * <p>
+         *  返回组件的最小大小的数组。
+         * 
          */
         int[] getMinimumSizes() {
             int[]         retValue = new int[3];
@@ -1891,6 +2290,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
 
         /**
          * Resets the components to their preferred sizes.
+         * <p>
+         *  将组件重置为其首选大小。
+         * 
          */
         void resetToPreferredSizes(int availableSize) {
             // Set the sizes to the preferred sizes (if fits), otherwise
@@ -1922,6 +2324,10 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * (divider won't get any extra space) based on the weighting. This
          * attempts to honor the min size of the components.
          *
+         * <p>
+         *  基于加权,在两个组件之间分配<code>空间</code>(分隔符不会获得任何额外的空间)。这试图满足组件的最小尺寸。
+         * 
+         * 
          * @param keepHidden if true and one of the components is 0x0
          *                   it gets none of the extra space
          */
@@ -2016,6 +2422,9 @@ public class BasicSplitPaneUI extends SplitPaneUI
      * LayoutManager used for JSplitPanes with an orientation of
      * VERTICAL_SPLIT.
      *
+     * <p>
+     *  LayoutManager用于具有VERTICAL_SPLIT方向的JSplitPanes。
+     * 
      */
     public class BasicVerticalLayoutManager extends
             BasicHorizontalLayoutManager
@@ -2034,6 +2443,8 @@ public class BasicSplitPaneUI extends SplitPaneUI
          * Messaged from the <code>JSplitPane</code> the receiver is
          * contained in.  May potentially reset the layout manager and cause a
          * <code>validate</code> to be sent.
+         * <p>
+         *  来自<code> JSplitPane </code>的消息包含在接收器中。可能重置布局管理器并导致发送<code>验证</code>。
          */
         public void propertyChange(PropertyChangeEvent e) {
             if(e.getSource() == splitPane) {

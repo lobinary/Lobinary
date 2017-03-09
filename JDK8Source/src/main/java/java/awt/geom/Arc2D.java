@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,20 @@ import java.io.Serializable;
  * The actual storage representation of the coordinates is left to
  * the subclass.
  *
+ * <p>
+ *  <CODE> Arc2D </CODE>是存储由框架矩形,起始角,角度范围(弧的长度)和闭包类型(<CODE> OPEN </CODE)定义的2D弧的所有对象的抽象超类>,<CODE> CHORD </CODE>
+ * 或<CODE> PIE </CODE>)。
+ * <p>
+ * <a name="inscribes">
+ *  弧是整个椭圆的部分截面,其内接于其父{@link RectangularShape}的框架矩形。
+ * </a>
+ * <a name="angles">
+ *  角度相对于非正方形框架矩形指定,使得45度总是落在从椭圆的中心到框架矩形的右上角的线上。因此,如果框架矩形沿着一个轴比另一个明显更长,则到弧段的开始和结束的角度将沿着框架的较长轴偏移得更远。
+ * </a>
+ * <p>
+ *  坐标的实际存储表示是留给子类的。
+ * 
+ * 
  * @author      Jim Graham
  * @since 1.2
  */
@@ -58,6 +73,10 @@ public abstract class Arc2D extends RectangularShape {
     /**
      * The closure type for an open arc with no path segments
      * connecting the two ends of the arc segment.
+     * <p>
+     *  对于没有连接弧段的两端的路径段的开放弧的闭合类型。
+     * 
+     * 
      * @since 1.2
      */
     public final static int OPEN = 0;
@@ -66,6 +85,10 @@ public abstract class Arc2D extends RectangularShape {
      * The closure type for an arc closed by drawing a straight
      * line segment from the start of the arc segment to the end of the
      * arc segment.
+     * <p>
+     *  通过从弧段的起点到弧段的终点绘制直线段来关闭弧的闭合类型。
+     * 
+     * 
      * @since 1.2
      */
     public final static int CHORD = 1;
@@ -74,18 +97,30 @@ public abstract class Arc2D extends RectangularShape {
      * The closure type for an arc closed by drawing straight line
      * segments from the start of the arc segment to the center
      * of the full ellipse and from that point to the end of the arc segment.
+     * <p>
+     *  通过从圆弧段的起点到整个椭圆的中心并从该点到圆弧段的终点绘制直线段闭合的圆弧的闭合类型。
+     * 
+     * 
      * @since 1.2
      */
     public final static int PIE = 2;
 
     /**
      * This class defines an arc specified in {@code float} precision.
+     * <p>
+     *  这个类定义了{@code float} precision中指定的弧。
+     * 
+     * 
      * @since 1.2
      */
     public static class Float extends Arc2D implements Serializable {
         /**
          * The X coordinate of the upper-left corner of the framing
          * rectangle of the arc.
+         * <p>
+         * 弧的框架矩形的左上角的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -94,6 +129,10 @@ public abstract class Arc2D extends RectangularShape {
         /**
          * The Y coordinate of the upper-left corner of the framing
          * rectangle of the arc.
+         * <p>
+         *  圆弧框架矩形的左上角的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -103,6 +142,10 @@ public abstract class Arc2D extends RectangularShape {
          * The overall width of the full ellipse of which this arc is
          * a partial section (not considering the
          * angular extents).
+         * <p>
+         *  整个椭圆的总宽度,其中该弧是部分截面(不考虑角度范围)。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -112,6 +155,10 @@ public abstract class Arc2D extends RectangularShape {
          * The overall height of the full ellipse of which this arc is
          * a partial section (not considering the
          * angular extents).
+         * <p>
+         *  整个椭圆的总高度,其中该弧是部分截面(不考虑角度范围)。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -119,6 +166,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * The starting angle of the arc in degrees.
+         * <p>
+         *  圆弧的起始角度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -126,6 +177,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * The angular extent of the arc in degrees.
+         * <p>
+         *  弧度的角度范围。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -134,6 +189,10 @@ public abstract class Arc2D extends RectangularShape {
         /**
          * Constructs a new OPEN arc, initialized to location (0, 0),
          * size (0, 0), angular extents (start = 0, extent = 0).
+         * <p>
+         *  构造一个新的OPEN弧,初始化为位置(0,0),大小(0,0),角度范围(start = 0,extent = 0)。
+         * 
+         * 
          * @since 1.2
          */
         public Float() {
@@ -145,6 +204,10 @@ public abstract class Arc2D extends RectangularShape {
          * size (0, 0), angular extents (start = 0, extent = 0), and
          * the specified closure type.
          *
+         * <p>
+         *  构造一个新弧,初始化为位置(0,0),大小(0,0),角度范围(start = 0,extent = 0)和指定的闭包类型。
+         * 
+         * 
          * @param type The closure type for the arc:
          * {@link #OPEN}, {@link #CHORD}, or {@link #PIE}.
          * @since 1.2
@@ -157,6 +220,10 @@ public abstract class Arc2D extends RectangularShape {
          * Constructs a new arc, initialized to the specified location,
          * size, angular extents, and closure type.
          *
+         * <p>
+         *  构造一个新的弧,初始化为指定的位置,大小,角度范围和闭合类型。
+         * 
+         * 
          * @param x The X coordinate of the upper-left corner of
          *          the arc's framing rectangle.
          * @param y The Y coordinate of the upper-left corner of
@@ -186,6 +253,10 @@ public abstract class Arc2D extends RectangularShape {
          * Constructs a new arc, initialized to the specified location,
          * size, angular extents, and closure type.
          *
+         * <p>
+         *  构造一个新的弧,初始化为指定的位置,大小,角度范围和闭合类型。
+         * 
+         * 
          * @param ellipseBounds The framing rectangle that defines the
          * outer boundary of the full ellipse of which this arc is a
          * partial section.
@@ -212,6 +283,10 @@ public abstract class Arc2D extends RectangularShape {
          * <a href="Arc2D.html#inscribes">partially inscribes</a>
          * the framing rectangle of this {@code RectangularShape}.
          *
+         * <p>
+         *  {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+         * 
+         * 
          * @since 1.2
          */
         public double getX() {
@@ -224,6 +299,10 @@ public abstract class Arc2D extends RectangularShape {
          * <a href="Arc2D.html#inscribes">partially inscribes</a>
          * the framing rectangle of this {@code RectangularShape}.
          *
+         * <p>
+         *  {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+         * 
+         * 
          * @since 1.2
          */
         public double getY() {
@@ -236,6 +315,10 @@ public abstract class Arc2D extends RectangularShape {
          * <a href="Arc2D.html#inscribes">partially inscribes</a>
          * the framing rectangle of this {@code RectangularShape}.
          *
+         * <p>
+         *  {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+         * 
+         * 
          * @since 1.2
          */
         public double getWidth() {
@@ -248,6 +331,10 @@ public abstract class Arc2D extends RectangularShape {
          * <a href="Arc2D.html#inscribes">partially inscribes</a>
          * the framing rectangle of this {@code RectangularShape}.
          *
+         * <p>
+         * {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+         * 
+         * 
          * @since 1.2
          */
         public double getHeight() {
@@ -256,6 +343,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getAngleStart() {
@@ -264,6 +355,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getAngleExtent() {
@@ -272,6 +367,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public boolean isEmpty() {
@@ -280,6 +379,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setArc(double x, double y, double w, double h,
@@ -295,6 +398,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setAngleStart(double angSt) {
@@ -303,6 +410,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setAngleExtent(double angExt) {
@@ -311,6 +422,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         protected Rectangle2D makeBounds(double x, double y,
@@ -321,6 +436,9 @@ public abstract class Arc2D extends RectangularShape {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 9130893014586380278L;
 
@@ -330,6 +448,10 @@ public abstract class Arc2D extends RectangularShape {
          * indicating the arc type of this <code>Arc2D</code>
          * instance.
          *
+         * <p>
+         *  将默认可序列化字段写入<code> ObjectOutputStream </code>后跟一个字节,指示此<code> Arc2D </code>实例的弧类型。
+         * 
+         * 
          * @serialData
          * <ol>
          * <li>The default serializable fields.
@@ -352,6 +474,10 @@ public abstract class Arc2D extends RectangularShape {
          * indicating the arc type of this <code>Arc2D</code>
          * instance.
          *
+         * <p>
+         *  从<code> ObjectInputStream </code>中读取默认可序列化字段,后跟一个指示此<code> Arc2D </code>实例的弧类型的字节。
+         * 
+         * 
          * @serialData
          * <ol>
          * <li>The default serializable fields.
@@ -375,12 +501,20 @@ public abstract class Arc2D extends RectangularShape {
 
     /**
      * This class defines an arc specified in {@code double} precision.
+     * <p>
+     *  此类定义在{@code double} precision中指定的弧。
+     * 
+     * 
      * @since 1.2
      */
     public static class Double extends Arc2D implements Serializable {
         /**
          * The X coordinate of the upper-left corner of the framing
          * rectangle of the arc.
+         * <p>
+         *  弧的框架矩形的左上角的X坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -389,6 +523,10 @@ public abstract class Arc2D extends RectangularShape {
         /**
          * The Y coordinate of the upper-left corner of the framing
          * rectangle of the arc.
+         * <p>
+         *  圆弧框架矩形的左上角的Y坐标。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -397,6 +535,10 @@ public abstract class Arc2D extends RectangularShape {
         /**
          * The overall width of the full ellipse of which this arc is
          * a partial section (not considering the angular extents).
+         * <p>
+         *  整个椭圆的总宽度,其中该弧是部分截面(不考虑角度范围)。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -405,6 +547,10 @@ public abstract class Arc2D extends RectangularShape {
         /**
          * The overall height of the full ellipse of which this arc is
          * a partial section (not considering the angular extents).
+         * <p>
+         *  整个椭圆的总高度,其中该弧是部分截面(不考虑角度范围)。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -412,6 +558,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * The starting angle of the arc in degrees.
+         * <p>
+         *  圆弧的起始角度。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -419,6 +569,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * The angular extent of the arc in degrees.
+         * <p>
+         *  弧度的角度范围。
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -427,6 +581,10 @@ public abstract class Arc2D extends RectangularShape {
         /**
          * Constructs a new OPEN arc, initialized to location (0, 0),
          * size (0, 0), angular extents (start = 0, extent = 0).
+         * <p>
+         *  构造一个新的OPEN弧,初始化为位置(0,0),大小(0,0),角度范围(start = 0,extent = 0)。
+         * 
+         * 
          * @since 1.2
          */
         public Double() {
@@ -438,6 +596,10 @@ public abstract class Arc2D extends RectangularShape {
          * size (0, 0), angular extents (start = 0, extent = 0), and
          * the specified closure type.
          *
+         * <p>
+         *  构造一个新弧,初始化为位置(0,0),大小(0,0),角度范围(start = 0,extent = 0)和指定的闭包类型。
+         * 
+         * 
          * @param type The closure type for the arc:
          * {@link #OPEN}, {@link #CHORD}, or {@link #PIE}.
          * @since 1.2
@@ -450,6 +612,10 @@ public abstract class Arc2D extends RectangularShape {
          * Constructs a new arc, initialized to the specified location,
          * size, angular extents, and closure type.
          *
+         * <p>
+         *  构造一个新的弧,初始化为指定的位置,大小,角度范围和闭合类型。
+         * 
+         * 
          * @param x The X coordinate of the upper-left corner
          *          of the arc's framing rectangle.
          * @param y The Y coordinate of the upper-left corner
@@ -479,6 +645,10 @@ public abstract class Arc2D extends RectangularShape {
          * Constructs a new arc, initialized to the specified location,
          * size, angular extents, and closure type.
          *
+         * <p>
+         * 构造一个新的弧,初始化为指定的位置,大小,角度范围和闭合类型。
+         * 
+         * 
          * @param ellipseBounds The framing rectangle that defines the
          * outer boundary of the full ellipse of which this arc is a
          * partial section.
@@ -505,6 +675,10 @@ public abstract class Arc2D extends RectangularShape {
          * <a href="Arc2D.html#inscribes">partially inscribes</a>
          * the framing rectangle of this {@code RectangularShape}.
          *
+         * <p>
+         *  {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+         * 
+         * 
          * @since 1.2
          */
         public double getX() {
@@ -517,6 +691,10 @@ public abstract class Arc2D extends RectangularShape {
          * <a href="Arc2D.html#inscribes">partially inscribes</a>
          * the framing rectangle of this {@code RectangularShape}.
          *
+         * <p>
+         *  {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+         * 
+         * 
          * @since 1.2
          */
         public double getY() {
@@ -529,6 +707,10 @@ public abstract class Arc2D extends RectangularShape {
          * <a href="Arc2D.html#inscribes">partially inscribes</a>
          * the framing rectangle of this {@code RectangularShape}.
          *
+         * <p>
+         *  {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+         * 
+         * 
          * @since 1.2
          */
         public double getWidth() {
@@ -541,6 +723,10 @@ public abstract class Arc2D extends RectangularShape {
          * <a href="Arc2D.html#inscribes">partially inscribes</a>
          * the framing rectangle of this {@code RectangularShape}.
          *
+         * <p>
+         *  {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+         * 
+         * 
          * @since 1.2
          */
         public double getHeight() {
@@ -549,6 +735,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getAngleStart() {
@@ -557,6 +747,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getAngleExtent() {
@@ -565,6 +759,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public boolean isEmpty() {
@@ -573,6 +771,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setArc(double x, double y, double w, double h,
@@ -588,6 +790,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setAngleStart(double angSt) {
@@ -596,6 +802,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setAngleExtent(double angExt) {
@@ -604,6 +814,10 @@ public abstract class Arc2D extends RectangularShape {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         protected Rectangle2D makeBounds(double x, double y,
@@ -613,6 +827,9 @@ public abstract class Arc2D extends RectangularShape {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 1.6 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 728264085846882001L;
 
@@ -622,6 +839,10 @@ public abstract class Arc2D extends RectangularShape {
          * indicating the arc type of this <code>Arc2D</code>
          * instance.
          *
+         * <p>
+         *  将默认可序列化字段写入<code> ObjectOutputStream </code>后跟一个字节,指示此<code> Arc2D </code>实例的弧类型。
+         * 
+         * 
          * @serialData
          * <ol>
          * <li>The default serializable fields.
@@ -644,6 +865,10 @@ public abstract class Arc2D extends RectangularShape {
          * indicating the arc type of this <code>Arc2D</code>
          * instance.
          *
+         * <p>
+         *  从<code> ObjectInputStream </code>中读取默认可序列化字段,后跟一个指示此<code> Arc2D </code>实例的弧类型的字节。
+         * 
+         * 
          * @serialData
          * <ol>
          * <li>The default serializable fields.
@@ -678,6 +903,12 @@ public abstract class Arc2D extends RectangularShape {
      * type of {@link #OPEN}.  It is provided only to enable
      * serialization of subclasses.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类。类型特定的实现子类可用于实例化并且提供用于存储满足下面的各种存取器方法所必需的信息的多种格式。
+     * <p>
+     * 此构造函数创建一个默认闭包类型为{@link #OPEN}的对象。它仅用于启用子类的序列化。
+     * 
+     * 
      * @see java.awt.geom.Arc2D.Float
      * @see java.awt.geom.Arc2D.Double
      */
@@ -692,6 +923,10 @@ public abstract class Arc2D extends RectangularShape {
      * the information necessary to satisfy the various accessor
      * methods below.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类。类型特定的实现子类可用于实例化并且提供用于存储满足下面的各种存取器方法所必需的信息的多种格式。
+     * 
+     * 
      * @param type The closure type of this arc:
      * {@link #OPEN}, {@link #CHORD}, or {@link #PIE}.
      * @see java.awt.geom.Arc2D.Float
@@ -705,6 +940,10 @@ public abstract class Arc2D extends RectangularShape {
     /**
      * Returns the starting angle of the arc.
      *
+     * <p>
+     *  返回弧的起始角度。
+     * 
+     * 
      * @return A double value that represents the starting angle
      * of the arc in degrees.
      * @see #setAngleStart
@@ -715,6 +954,10 @@ public abstract class Arc2D extends RectangularShape {
     /**
      * Returns the angular extent of the arc.
      *
+     * <p>
+     *  返回弧的角度范围。
+     * 
+     * 
      * @return A double value that represents the angular extent
      * of the arc in degrees.
      * @see #setAngleExtent
@@ -725,6 +968,10 @@ public abstract class Arc2D extends RectangularShape {
     /**
      * Returns the arc closure type of the arc: {@link #OPEN},
      * {@link #CHORD}, or {@link #PIE}.
+     * <p>
+     *  返回圆弧的闭环类型：{@link #OPEN},{@link #CHORD}或{@link #PIE}。
+     * 
+     * 
      * @return One of the integer constant closure types defined
      * in this class.
      * @see #setArcType
@@ -739,6 +986,10 @@ public abstract class Arc2D extends RectangularShape {
      * intersection of the ray from the center defined by the
      * starting angle and the elliptical boundary of the arc.
      *
+     * <p>
+     *  返回弧的起点。这个点是从起始角度定义的中心的光线与弧的椭圆边界的交点。
+     * 
+     * 
      * @return A <CODE>Point2D</CODE> object representing the
      * x,y coordinates of the starting point of the arc.
      * @since 1.2
@@ -756,6 +1007,10 @@ public abstract class Arc2D extends RectangularShape {
      * starting angle plus the angular extent of the arc and the
      * elliptical boundary of the arc.
      *
+     * <p>
+     *  返回圆弧的终点。这个点是由起始角度加上弧的角度范围和弧的椭圆边界限定的中心的光线的交点。
+     * 
+     * 
      * @return A <CODE>Point2D</CODE> object representing the
      * x,y coordinates  of the ending point of the arc.
      * @since 1.2
@@ -771,6 +1026,10 @@ public abstract class Arc2D extends RectangularShape {
      * Sets the location, size, angular extents, and closure type of
      * this arc to the specified double values.
      *
+     * <p>
+     *  将此弧的位置,大小,角度范围和闭合类型设置为指定的double值。
+     * 
+     * 
      * @param x The X coordinate of the upper-left corner of the arc.
      * @param y The Y coordinate of the upper-left corner of the arc.
      * @param w The overall width of the full ellipse of which
@@ -790,6 +1049,10 @@ public abstract class Arc2D extends RectangularShape {
      * Sets the location, size, angular extents, and closure type of
      * this arc to the specified values.
      *
+     * <p>
+     *  将此弧的位置,大小,角度范围和闭合类型设置为指定的值。
+     * 
+     * 
      * @param loc The <CODE>Point2D</CODE> representing the coordinates of
      * the upper-left corner of the arc.
      * @param size The <CODE>Dimension2D</CODE> representing the width
@@ -811,6 +1074,10 @@ public abstract class Arc2D extends RectangularShape {
      * Sets the location, size, angular extents, and closure type of
      * this arc to the specified values.
      *
+     * <p>
+     *  将此弧的位置,大小,角度范围和闭合类型设置为指定的值。
+     * 
+     * 
      * @param rect The framing rectangle that defines the
      * outer boundary of the full ellipse of which this arc is a
      * partial section.
@@ -829,6 +1096,10 @@ public abstract class Arc2D extends RectangularShape {
     /**
      * Sets this arc to be the same as the specified arc.
      *
+     * <p>
+     *  将此圆弧设置为与指定圆弧相同。
+     * 
+     * 
      * @param a The <CODE>Arc2D</CODE> to use to set the arc's values.
      * @since 1.2
      */
@@ -842,6 +1113,10 @@ public abstract class Arc2D extends RectangularShape {
      * this arc to the specified values. The arc is defined by a center
      * point and a radius rather than a framing rectangle for the full ellipse.
      *
+     * <p>
+     *  将此弧的位置,边界,角度范围和闭合类型设置为指定的值。弧由中心点和半径定义,而不是整个椭圆的框架矩形。
+     * 
+     * 
      * @param x The X coordinate of the center of the arc.
      * @param y The Y coordinate of the center of the arc.
      * @param radius The radius of the arc.
@@ -864,6 +1139,10 @@ public abstract class Arc2D extends RectangularShape {
      * the line specified by points (p2, p3), and the arc has the
      * specified radius.
      *
+     * <p>
+     * 将此弧的位置,边界和角度范围设置为指定的值。圆弧的起始角度与点(p1,p2)指定的直线相切,结束角与由点(p2,p3)指定的直线相切,圆弧具有指定的半径。
+     * 
+     * 
      * @param p1 The first point that defines the arc. The starting
      * angle of the arc is tangent to the line specified by points (p1, p2).
      * @param p2 The second point that defines the arc. The starting
@@ -915,6 +1194,10 @@ public abstract class Arc2D extends RectangularShape {
      * Sets the starting angle of this arc to the specified double
      * value.
      *
+     * <p>
+     *  将此弧的起始角度设置为指定的double值。
+     * 
+     * 
      * @param angSt The starting angle of the arc in degrees.
      * @see #getAngleStart
      * @since 1.2
@@ -925,6 +1208,10 @@ public abstract class Arc2D extends RectangularShape {
      * Sets the angular extent of this arc to the specified double
      * value.
      *
+     * <p>
+     *  将此弧的角度范围设置为指定的double值。
+     * 
+     * 
      * @param angExt The angular extent of the arc in degrees.
      * @see #getAngleExtent
      * @since 1.2
@@ -936,6 +1223,10 @@ public abstract class Arc2D extends RectangularShape {
      * specified point defines relative to the center of this arc.
      * The angular extent of the arc will remain the same.
      *
+     * <p>
+     *  将此弧的起始角度设置为指定点相对于此弧的中心定义的角度。弧的角度范围将保持相同。
+     * 
+     * 
      * @param p The <CODE>Point2D</CODE> that defines the starting angle.
      * @see #getAngleStart
      * @since 1.2
@@ -956,6 +1247,10 @@ public abstract class Arc2D extends RectangularShape {
      * The arc will always be non-empty and extend counterclockwise
      * from the first point around to the second point.
      *
+     * <p>
+     *  使用两组坐标设置此弧的起始角度和角度范围。第一组坐标用于确定起点相对于弧的中心的角度。第二组坐标用于确定端点相对于弧的中心的角度。圆弧将永远是非空的,并从第一点逆时针延伸到第二点。
+     * 
+     * 
      * @param x1 The X coordinate of the arc's starting point.
      * @param y1 The Y coordinate of the arc's starting point.
      * @param x2 The X coordinate of the arc's ending point.
@@ -989,6 +1284,10 @@ public abstract class Arc2D extends RectangularShape {
      * The arc will always be non-empty and extend counterclockwise
      * from the first point around to the second point.
      *
+     * <p>
+     *  使用两点设置此弧的起始角度和角度范围。第一点用于确定起点相对于圆弧中心的角度。第二点用于确定端点相对于圆弧中心的角度。圆弧将永远是非空的,并从第一点逆时针延伸到第二点。
+     * 
+     * 
      * @param p1 The <CODE>Point2D</CODE> that defines the arc's
      * starting point.
      * @param p2 The <CODE>Point2D</CODE> that defines the arc's
@@ -1003,6 +1302,10 @@ public abstract class Arc2D extends RectangularShape {
      * Sets the closure type of this arc to the specified value:
      * <CODE>OPEN</CODE>, <CODE>CHORD</CODE>, or <CODE>PIE</CODE>.
      *
+     * <p>
+     *  将此弧的闭合类型设置为指定的值：<CODE> OPEN </CODE>,<CODE> CHORD </CODE>或<CODE> PIE </CODE>。
+     * 
+     * 
      * @param type The integer constant that represents the closure
      * type of this arc: {@link #OPEN}, {@link #CHORD}, or
      * {@link #PIE}.
@@ -1025,6 +1328,10 @@ public abstract class Arc2D extends RectangularShape {
      * <a href="Arc2D.html#inscribes">partially inscribes</a>
      * the framing rectangle of this {@code RectangularShape}.
      *
+     * <p>
+     * {@inheritDoc}请注意,弧{<a href="Arc2D.html#inscribes">部分内接</a>此{@code RectangularShape}的框架矩形。
+     * 
+     * 
      * @since 1.2
      */
     public void setFrame(double x, double y, double w, double h) {
@@ -1043,6 +1350,14 @@ public abstract class Arc2D extends RectangularShape {
      * enclosing ellipse of this <code>Arc2D</code> without considering
      * the starting and ending angles of this <code>Arc2D</code>.
      *
+     * <p>
+     *  返回圆弧的高精度框架矩形。
+     * 框架矩形只包含<code> Arc2D </code>中位于起始角和结束角之间的部分,并且包含饼形图,如果此<code> Arc2D </code>有一个<code> PIE <代码>闭包类型。
+     * <p>
+     *  此方法与{@link RectangularShape#getBounds()getBounds}不同,因为<code> getBounds </code>方法仅返回此<code> Arc2D </code>
+     * 的封闭椭圆的边界,这个<code> Arc2D </code>的结束角度。
+     * 
+     * 
      * @return the <CODE>Rectangle2D</CODE> that represents the arc's
      * framing rectangle.
      * @since 1.2
@@ -1095,6 +1410,10 @@ public abstract class Arc2D extends RectangularShape {
      * to hold the parameters calculated to be the framing rectangle
      * of this arc.
      *
+     * <p>
+     *  构造适当精度的<code> Rectangle2D </code>,以保存计算为此弧的框架矩形的参数。
+     * 
+     * 
      * @param x The X coordinate of the upper-left corner of the
      * framing rectangle.
      * @param y The Y coordinate of the upper-left corner of the
@@ -1110,6 +1429,9 @@ public abstract class Arc2D extends RectangularShape {
 
     /*
      * Normalizes the specified angle into the range -180 to 180.
+     * <p>
+     *  将指定的角度标准化到-180到180的范围内。
+     * 
      */
     static double normalizeDegrees(double angle) {
         if (angle > 180.0) {
@@ -1140,6 +1462,10 @@ public abstract class Arc2D extends RectangularShape {
      * Determines whether or not the specified angle is within the
      * angular extents of the arc.
      *
+     * <p>
+     *  确定指定的角度是否在弧的角度范围内。
+     * 
+     * 
      * @param angle The angle to test.
      *
      * @return <CODE>true</CODE> if the arc contains the angle,
@@ -1171,6 +1497,10 @@ public abstract class Arc2D extends RectangularShape {
      * Determines whether or not the specified point is inside the boundary
      * of the arc.
      *
+     * <p>
+     *  确定指定点是否在圆弧的边界内。
+     * 
+     * 
      * @param x The X coordinate of the point to test.
      * @param y The Y coordinate of the point to test.
      *
@@ -1234,6 +1564,10 @@ public abstract class Arc2D extends RectangularShape {
      * Determines whether or not the interior of the arc intersects
      * the interior of the specified rectangle.
      *
+     * <p>
+     *  确定圆弧内部是否与指定矩形内部相交。
+     * 
+     * 
      * @param x The X coordinate of the rectangle's upper-left corner.
      * @param y The Y coordinate of the rectangle's upper-left corner.
      * @param w The width of the rectangle.
@@ -1287,6 +1621,11 @@ public abstract class Arc2D extends RectangularShape {
          * (max(center x, start point x, end point x),
          *  max(center y, start point y, end point y)).
          * So we'll check axis segments outside of rectangle above.
+         * <p>
+         * 尝试抓住在具有左顶角坐标(min(中心x,起点x,终点x),min(中心y,起点y,终点y))和直角底角之外的区域中与弧相交的矩形坐标(max(中心x,起点x,终点x),max(中心y,起点y,终点y)
+         * )。
+         * 因此,我们将检查上面矩形以外的轴段。
+         * 
          */
         if (ayc >= y && ayc <= yh) { // 0 and 180
             if ((sx < xw && ex < xw && axc < xw &&
@@ -1311,6 +1650,9 @@ public abstract class Arc2D extends RectangularShape {
          * than 180, because we should cover case of rectangle, which
          * situated between center of arc and chord, but does not
          * intersect the chord.
+         * <p>
+         *  对于PIE,我们应该用饼图检查交叉;对于弧度大于180的弧也应该这样做,因为我们应该覆盖位于弧和中心之间但不与弦交叉的矩形的情况。
+         * 
          */
         Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
         if (type == PIE || Math.abs(ext) > 180) {
@@ -1339,6 +1681,10 @@ public abstract class Arc2D extends RectangularShape {
      * Determines whether or not the interior of the arc entirely contains
      * the specified rectangle.
      *
+     * <p>
+     *  确定圆弧内部是否完全包含指定的矩形。
+     * 
+     * 
      * @param x The X coordinate of the rectangle's upper-left corner.
      * @param y The Y coordinate of the rectangle's upper-left corner.
      * @param w The width of the rectangle.
@@ -1356,6 +1702,10 @@ public abstract class Arc2D extends RectangularShape {
      * Determines whether or not the interior of the arc entirely contains
      * the specified rectangle.
      *
+     * <p>
+     *  确定圆弧内部是否完全包含指定的矩形。
+     * 
+     * 
      * @param r The <CODE>Rectangle2D</CODE> to test.
      *
      * @return <CODE>true</CODE> if the arc contains the rectangle,
@@ -1414,6 +1764,10 @@ public abstract class Arc2D extends RectangularShape {
      * do not affect any iterations of that geometry that
      * are already in process.
      *
+     * <p>
+     *  返回定义弧的边界的迭代对象。这个迭代器是多线程安全的。 <code> Arc2D </code>保证对弧几何的修改不会影响已经在处理中的几何的任何迭代。
+     * 
+     * 
      * @param at an optional <CODE>AffineTransform</CODE> to be applied
      * to the coordinates as they are returned in the iteration, or null
      * if the untransformed coordinates are desired.
@@ -1427,6 +1781,10 @@ public abstract class Arc2D extends RectangularShape {
 
     /**
      * Returns the hashcode for this <code>Arc2D</code>.
+     * <p>
+     *  返回此<code> Arc2D </code>的哈希码。
+     * 
+     * 
      * @return the hashcode for this <code>Arc2D</code>.
      * @since 1.6
      */
@@ -1448,6 +1806,11 @@ public abstract class Arc2D extends RectangularShape {
      * if it is an instance of <code>Arc2D</code> and if its
      * location, size, arc extents and type are the same as this
      * <code>Arc2D</code>.
+     * <p>
+     *  确定指定的<code> Object </code>是否等于此<code> Arc2D </code>。
+     * 如果它是<code> Arc2D </code>的一个实例,并且它的位置,大小,弧度范围和类型相同,则指定的<code> Object </code>等于此<code> Arc2D </code>作为<code>
+     *  Arc2D </code>。
+     * 
      * @param obj  an <code>Object</code> to be compared with this
      *             <code>Arc2D</code>.
      * @return  <code>true</code> if <code>obj</code> is an instance

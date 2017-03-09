@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,23 @@ import java.util.Collection;
  * {@code engineGetCertificates} and {@code engineGetCRLs} methods.
  * More sophisticated ones may allow truly concurrent access.
  *
+ * <p>
+ *  {@link CertStore CertStore}类的<i>服务提供程序接口</i>(<b> SPI </b>)。
+ * 所有{@code CertStore}实现必须包括一个扩展这个类({@code CertStoreSpi})的类(SPI类),它提供了一个类型为{@code CertStoreParameters}的单
+ * 一参数的构造函数,并实现所有的方法。
+ *  {@link CertStore CertStore}类的<i>服务提供程序接口</i>(<b> SPI </b>)。通常,此类的实例只应通过{@code CertStore}类访问。
+ * 有关详细信息,请参阅Java加密体系结构。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  所有{@code CertStoreSpi}对象的公共方法必须是线程安全的。也就是说,多个线程可以同时在单个{@code CertStoreSpi}对象(或多个对象)上调用这些方法,没有不良影响。
+ * 这允许{@code CertPathBuilder}搜索CRL,同时例如搜索另外的证书。
+ * <p>
+ *  简单的{@code CertStoreSpi}实施可能会通过向其{@code engineGetCertificates}和{@code engineGetCRLs}方法中添加{@code synchronized}
+ * 关键字来确保线程安全。
+ * 更复杂的可以允许真正的并发访问。
+ * 
+ * 
  * @since       1.4
  * @author      Steve Hanna
  */
@@ -60,6 +78,10 @@ public abstract class CertStoreSpi {
     /**
      * The sole constructor.
      *
+     * <p>
+     *  唯一的构造函数。
+     * 
+     * 
      * @param params the initialization parameters (may be {@code null})
      * @throws InvalidAlgorithmParameterException if the initialization
      * parameters are inappropriate for this {@code CertStoreSpi}
@@ -85,6 +107,18 @@ public abstract class CertStoreSpi {
      * specific criteria that can be used to find the certificates. Issuer
      * and/or subject names are especially useful criteria.
      *
+     * <p>
+     *  返回与指定的选择器匹配的{@code Certificate}的{@code Collection}。
+     * 如果没有{@code Certificate}与选择器匹配,则会返回一个空的{@code Collection}。
+     * <p>
+     * 对于某些{@code CertStore}类型,生成的{@code Collection}可能不包含与选择器匹配的{@code Certificate}的<b>全部</b>。
+     * 例如,LDAP {@code CertStore}不能搜索目录中的所有条目。相反,它可能只是搜索可能包含它正在寻找的{@code Certificate}的条目。
+     * <p>
+     *  某些{@code CertStore}实现(尤其是LDAP {@code CertStore})可能会抛出{@code CertStoreException},除非提供了包含可用于查找证书的特定条件的
+     * 非空{@code CertSelector}。
+     * 发行人和/或主题名称是特别有用的标准。
+     * 
+     * 
      * @param selector A {@code CertSelector} used to select which
      *  {@code Certificate}s should be returned. Specify {@code null}
      *  to return all {@code Certificate}s (if supported).
@@ -113,6 +147,8 @@ public abstract class CertStoreSpi {
      * specific criteria that can be used to find the CRLs. Issuer names
      * and/or the certificate to be checked are especially useful.
      *
+     * <p>
+     * 
      * @param selector A {@code CRLSelector} used to select which
      *  {@code CRL}s should be returned. Specify {@code null}
      *  to return all {@code CRL}s (if supported).

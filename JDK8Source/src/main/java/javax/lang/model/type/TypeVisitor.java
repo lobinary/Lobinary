@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,21 @@ import javax.lang.model.element.*;
  * packages that are only required to run on Java SE 8 and higher
  * platform versions.
  *
+ * <p>
+ *  类型的访客,在访客设计模式的风格。实现此接口的类用于在类型在编译时未知的类型上操作。
+ * 当访问者传递到类型的{@link TypeMirror#accept accept}方法时,会调用最适合该类型的<tt>访问<i> XYZ </i> </tt>方法。
+ * 
+ *  <p>实现此接口的类可能会抛出一个{@code NullPointerException},如果附加参数{@code p}是{@code null};有关详细信息,请参阅实现类的文档。
+ * 
+ *  <p> <b>警告：</b>可能的方法将被添加到此接口,以适应新的,目前未知的语言结构添加到未来版本的Java和贸易;编程语言。因此,直接实现此接口的访问者类可能与未来版本的平台不兼容。
+ * 为了避免这种源不兼容,鼓励访问者实现扩展实现此接口的适当的抽象访问类。然而,API通常应该使用这个访问者接口作为参数,返回类型等的类型,而不是一个抽象类。
+ * 
+ * <p>请注意,如果添加为<em>默认方法</em>,则可以以源<em>兼容</em>方式添加适应新语言结构的方法。
+ * 但是,默认方法仅适用于Java SE 8和更高版本,并且Java SE 8中捆绑的{@code javax.lang.model。*}包也需要在Java SE 7上运行。
+ * 因此,默认方法<em >不能</em>用于扩展{@code javax.lang.model。*}以涵盖Java SE 8语言功能。
+ * 但是,在仅需要在Java SE 8和更高版本的平台上运行的{@code javax.lang.model。*}软件包的后续版本中可以使用默认方法。
+ * 
+ * 
  * @param <R> the return type of this visitor's methods.  Use {@link
  *            Void} for visitors that do not need to return results.
  * @param <P> the type of the additional parameter to this visitor's
@@ -78,6 +94,10 @@ import javax.lang.model.element.*;
 public interface TypeVisitor<R, P> {
     /**
      * Visits a type.
+     * <p>
+     *  访问类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -86,6 +106,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * A convenience method equivalent to {@code v.visit(t, null)}.
+     * <p>
+     *  一个相当于{@code v.visit(t,null)}的方便方法。
+     * 
+     * 
      * @param t the element to visit
      * @return  a visitor-specified result
      */
@@ -93,6 +117,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits a primitive type.
+     * <p>
+     *  访问基本类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -101,6 +129,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits the null type.
+     * <p>
+     *  访问null类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -109,6 +141,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits an array type.
+     * <p>
+     *  访问数组类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -117,6 +153,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits a declared type.
+     * <p>
+     *  访问声明的类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -125,6 +165,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits an error type.
+     * <p>
+     *  访问错误类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -133,6 +177,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits a type variable.
+     * <p>
+     *  访问类型变量。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -141,6 +189,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits a wildcard type.
+     * <p>
+     *  访问通配符类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -149,6 +201,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits an executable type.
+     * <p>
+     *  访问可执行文件类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -157,6 +213,10 @@ public interface TypeVisitor<R, P> {
 
     /**
      * Visits a {@link NoType} instance.
+     * <p>
+     *  访问{@link NoType}实例。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -167,6 +227,10 @@ public interface TypeVisitor<R, P> {
      * Visits an unknown kind of type.
      * This can occur if the language evolves and new kinds
      * of types are added to the {@code TypeMirror} hierarchy.
+     * <p>
+     *  访问未知类型的类型。如果语言发展并且将新类型的类型添加到{@code TypeMirror}层次结构中,就会发生这种情况。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -178,6 +242,10 @@ public interface TypeVisitor<R, P> {
     /**
      * Visits a union type.
      *
+     * <p>
+     *  访问联合类型。
+     * 
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result
@@ -188,6 +256,9 @@ public interface TypeVisitor<R, P> {
     /**
      * Visits an intersection type.
      *
+     * <p>
+     *  访问十字路口类型。
+     * 
      * @param t the type to visit
      * @param p a visitor-specified parameter
      * @return  a visitor-specified result

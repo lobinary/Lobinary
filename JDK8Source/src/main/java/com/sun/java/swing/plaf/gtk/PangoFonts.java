@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,8 @@ import sun.font.FontConfigManager;
 import sun.font.FontUtilities;
 
 /**
+/* <p>
+/* 
  * @author Shannon Hickey
  * @author Leif Samuelsson
  */
@@ -53,6 +56,11 @@ class PangoFonts {
      * That is something that must be solved at the X11 level
      * Note that in an X11 multi-screen environment, the default screen
      * is the one used by the JRE so it is safe to use it here.
+     * <p>
+     *  计算此L&F中字体的默认比例因子,以匹配报告的屏幕分辨率。 Java 2D指定了72dpi的默认用户空间比例。这不太可能对应于真实屏幕的。 Xserver报告可用于调整此值的值。
+     * 并且Java 2D通过归一化变换来曝光它。然而,许多Xserver报告硬编码的90dpi,而其他报告基于可能不正确的数据的计算值。
+     * 这是必须在X11级别解决的事情请注意,在X11多屏幕环境中,默认屏幕是JRE使用的屏幕,因此在这里使用它是安全的。
+     * 
      */
     private static double fontScale;
 
@@ -74,6 +82,10 @@ class PangoFonts {
      * Parses a String containing a pango font description and returns
      * a Font object.
      *
+     * <p>
+     *  解析一个包含pango字体描述的字符串,并返回一个Font对象。
+     * 
+     * 
      * @param pangoName a String describing a pango font
      *                  e.g. "Sans Italic 10"
      * @return a Font object as a FontUIResource
@@ -158,6 +170,21 @@ class PangoFonts {
          * setting depending on the screen resolution to achieve perceived
          * equivalent sizes. If such a change were ever to be made in GTK
          * we would need to update for that.
+         * <p>
+         * Java 2D字体点大小在72dpi的用户空间比例。 GTK允许用户配置"dpi"属性,用于缩放用于匹配用户首选项的字体。
+         * 为了匹配GTK应用程序的字体大小,我们需要获得这个DPI并进行如下调整：一些版本的GTK使用XSETTINGS(如果可用)动态监视用户发起的DPI更改以供GTK应用程序使用。
+         * 此值还可用作Xft.dpi X资源。这可能是字体偏好API的函数和/或它请求工具箱更新桌面的默认值的方式。
+         * 这种双重方法可能是必要的,因为GTK的其他版本或者一些应用程序决定了只有在启动时使用X资源才能使用的大小。
+         * 如果未设置该资源,则GTK使用公式DisplayHeight(dpy,screen)/ DisplayHeightMM(dpy,screen)* 25.4(25.4mm == 1英寸)缩放Xserver
+         * 报告的DPI分辨率。
+         * 这种双重方法可能是必要的,因为GTK的其他版本或者一些应用程序决定了只有在启动时使用X资源才能使用的大小。
+         *  JDK直接跟踪Xft.dpi XSETTINGS属性,因此它可以通过跟踪该值来动态地更改字体大小。如果该资源不可用,则使用与GTK相同的后退公式(请参阅fontScale的计算)。
+         * 
+         * GTK的Xft.dpi的默认设置是96 dpi(似乎-1显然也可以意味着"默认")。但是,如果没有设置属性,则不使用此默认值。缺少资源时的真实默认值是Xserver报告的dpi。
+         * 最后,该DPI用于计算最近的Java 2D字体72 dpi字体大小。
+         * 有些情况下,JDK行为可能不会完全模仿GTK本机应用程序行为：1)当GTK应用程序无法动态跟踪更改(不使用XSETTINGS)时,JDK将调整大小,但其他应用程序不会。
+         * 这是确定的,因为JDK展示了首选行为,这可能是所有后来的GTK应用程序的行为2)当一个GTK应用程序不使用XSETTINGS,由于某种原因XRDB属性不存在。
+         *  JDK将选择XSETTINGS,GTK应用程序将使用Xserver默认值。
          */
         double dsize = size;
         int dpi = 96;
@@ -173,12 +200,20 @@ class PangoFonts {
             }
             /* The Java rasteriser assumes pts are in a user space of
              * 72 dpi, so we need to adjust for that.
+             * <p>
+             * 因为JDK不可能知道一些其他GTK应用程序不使用XSETTINGS它不可能解释这一点,在任何情况下,它是一个问题的值将不得不不同。除了当用户显式删除X资源数据库条目时,它似乎也不太可能出现。
+             * 还有一些其他问题需要注意的未来：GTK指定Xft.dpi值作为服务器范围,当用于具有2个不同的X屏幕的不同物理DPI的系统时,字体大小将不可避免地显示不同。
+             * 这将是一个更加用户友好的设计,以进一步调整一个设置取决于屏幕分辨率,以实现感知等效尺寸。如果这样的变化曾经在GTK中进行,我们将需要更新。
+             * 
              */
             dsize = ((double)(dpi * size)/ 72.0);
         } else {
             /* If there's no property, GTK scales for the resolution
              * reported by the Xserver using the formula listed above.
              * fontScale already accounts for the 72 dpi Java 2D space.
+             * <p>
+             * 72 dpi,因此我们需要调整。
+             * 
              */
             dsize = size * fontScale;
         }
@@ -209,6 +244,10 @@ class PangoFonts {
      * Parses a String containing a pango font description and returns
      * the (unscaled) font size as an integer.
      *
+     * <p>
+     *  由Xserver使用上面列出的公式报告。 fontScale已经占用了72 dpi的Java 2D空间。
+     * 
+     * 
      * @param pangoName a String describing a pango font
      * @return the size of the font described by pangoName (e.g. if
      *         pangoName is "Sans Italic 10", then this method returns 10)

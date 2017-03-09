@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,12 @@ package java.net;
  * This interface is used by the {@code URLStreamHandler} class
  * to create a {@code ContentHandler} for a MIME type.
  *
+ * <p>
+ *  这个接口定义了内容处理程序的工厂。此接口的实现应将MIME类型映射到{@code ContentHandler}的实例。
+ * <p>
+ *  此接口由{@code URLStreamHandler}类用于为MIME类型创建{@code ContentHandler}。
+ * 
+ * 
  * @author  James Gosling
  * @see     java.net.ContentHandler
  * @see     java.net.URLStreamHandler
@@ -43,6 +50,8 @@ public interface ContentHandlerFactory {
      * Creates a new {@code ContentHandler} to read an object from
      * a {@code URLStreamHandler}.
      *
+     * <p>
+     * 
      * @param   mimetype   the MIME type for which a content handler is desired.
 
      * @return  a new {@code ContentHandler} to read an object from a

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import static com.sun.java.swing.plaf.windows.TMSchema.*;
  * A collection of static utility methods used for rendering the Windows look
  * and feel.
  *
+ * <p>
+ *  用于渲染Windows外观的静态实用程序方法的集合。
+ * 
+ * 
  * @author Mark Davidson
  * @since 1.4
  */
@@ -48,6 +53,10 @@ public class WindowsGraphicsUtils {
      * This is here because the WindowsUI hierarchy doesn't match the Component hierarchy. All
      * the overriden paintText methods of the ButtonUI delegates will call this static method.
      * <p>
+     * <p>
+     *  在没有助记符的Windows中呈现文本字符串。这是因为WindowsUI层次结构与组件层次结构不匹配。所有覆盖的paintText方法的ButtonUI委托都会调用这个静态方法。
+     * <p>
+     * 
      * @param g Graphics context
      * @param b Current button to render
      * @param textRect Bounding rectangle to render the text.
@@ -90,6 +99,10 @@ public class WindowsGraphicsUtils {
                  * armed menuitem. Foreground must be set in appropriate
                  * Windows* class because these colors passes from
                  * BasicMenuItemUI as protected fields and we can't
+                 * <p>
+                 *  武装的menuitem。前台必须在适当的Windows *类中设置,因为这些颜色从BasicMenuItemUI传递为受保护的字段,我们不能
+                 * 
+                 * 
                  * reach them from this class */
                 g.setColor(b.getForeground());
             }
@@ -172,6 +185,9 @@ public class WindowsGraphicsUtils {
     /*
      * Repaints all the components with the mnemonics in the given window and
      * all its owned windows.
+     * <p>
+     *  使用给定窗口中的助记符和其所有的窗口重绘所有组件。
+     * 
      */
     static void repaintMnemonicsInWindow(Window w) {
         if(w == null || !w.isShowing()) {
@@ -189,6 +205,8 @@ public class WindowsGraphicsUtils {
     /*
      * Repaints all the components with the mnemonics in container.
      * Recursively searches for all the subcomponents.
+     * <p>
+     *  用容器中的助记符重绘所有组件。递归搜索所有子组件。
      */
     static void repaintMnemonicsInContainer(Container cont) {
         Component c;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * SoftReferences so they will be dropped by the GC if heap memory gets tight. When our size hits max pixel count least
  * recently requested images are removed first.
  *
+ * <p>
+ *  ImageCache  - 由任意参数集关键的固定像素计数大小的缓存。所有图像都使用SoftReferences保存,因此如果堆内存紧张,它们将被GC删除。
+ * 当我们的大小匹配最大像素计数最少最近请求的图像被首先移除。
+ * 
+ * 
  * @author Created by Jasper Potts (Aug 7, 2007)
  */
 class ImageCache {
@@ -88,6 +94,10 @@ class ImageCache {
     /**
      * Check if the image size is to big to be stored in the cache
      *
+     * <p>
+     *  检查图像大小是否很大以存储在缓存中
+     * 
+     * 
      * @param w The image width
      * @param h The image height
      * @return True if the image size is less than max
@@ -99,6 +109,10 @@ class ImageCache {
     /**
      * Get the cached image for given keys
      *
+     * <p>
+     *  获取给定键的缓存图像
+     * 
+     * 
      * @param config The graphics configuration, needed if cached image is a Volatile Image. Used as part of cache key
      * @param w      The image width, used as part of cache key
      * @param h      The image height, used as part of cache key
@@ -123,6 +137,9 @@ class ImageCache {
     /**
      * Sets the cached image for the specified constraints.
      *
+     * <p>
+     *  为指定的约束设置缓存的图像。
+     * 
      * @param image  The image to store in cache
      * @param config The graphics configuration, needed if cached image is a Volatile Image. Used as part of cache key
      * @param w      The image width, used as part of cache key

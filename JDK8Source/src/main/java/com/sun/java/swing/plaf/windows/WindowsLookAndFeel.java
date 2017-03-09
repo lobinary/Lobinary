@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,14 @@
  * such as the wrong colors showing up, and is generally not
  * encouraged.
  *
+ * <p>
+ *  <p>这些类设计为在安装相应的<code> LookAndFeel </code>类时使用(<code> UIManager.setLookAndFeel(new <i> XXX </i> LookA
+ * ndFeel())</code> )。
+ * 在安装不同的<code> LookAndFeel </code>时使用它们可能会产生意外的结果,包括异常。
+ * 另外,改变由<code> UIManager </code>维护的<code> LookAndFeel </code>而不更新任何<code> JComponent </code>的相应<Component>
+ *  ComponentUI </code>结果,如出现错误的颜色,一般不鼓励。
+ * 在安装不同的<code> LookAndFeel </code>时使用它们可能会产生意外的结果,包括异常。
+ * 
  */
 
 package com.sun.java.swing.plaf.windows;
@@ -88,6 +97,13 @@ import com.sun.java.swing.plaf.windows.WindowsIconFactory.VistaMenuItemCheckIcon
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  实现Windows95 / 98 / NT / 2000外观。未专门为Windows实现的UI类将默认为在Basic中实现的类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author unattributed
  */
 public class WindowsLookAndFeel extends BasicLookAndFeel
@@ -98,6 +114,10 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * when set to Boolean.TRUE, will cause getDisabledIcon to use an
      * alternate algorithm for creating disabled icons to produce icons
      * that appear similar to the native Windows file chooser
+     * <p>
+     * 一个客户端属性,可以与任何JComponent一起使用,最终将调用LookAndFeel.getDisabledIcon方法。
+     * 此客户端属性设置为Boolean.TRUE时,将导致getDisabledIcon使用备用算法创建禁用的图标,以生成类似于本机Windows文件选择器的图标。
+     * 
      */
     static final Object HI_RES_DISABLED_ICON_CLIENT_KEY =
         new StringUIClientPropertyKey(
@@ -117,11 +137,17 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
 
     /**
      * Base dialog units along the horizontal axis.
+     * <p>
+     *  基本对话单元沿水平轴。
+     * 
      */
     private int baseUnitX;
 
     /**
      * Base dialog units along the vertical axis.
+     * <p>
+     *  基本对话单元沿垂直轴。
+     * 
      */
     private int baseUnitY;
 
@@ -185,6 +211,11 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * map those constants to a BasicComponentUI class of the
      * appropriate type.
      *
+     * <p>
+     *  初始化uiClassID到BasicComponentUI映射。 JComponent类定义了自己的uiClassID常量(参见AbstractComponent.getUIClassID)。
+     * 此表必须将这些常量映射到相应类型的BasicComponentUI类。
+     * 
+     * 
      * @see BasicLookAndFeel#getDefaults
      */
     protected void initClassDefaults(UIDefaults table)
@@ -240,6 +271,10 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * created on a native Windows platform we use the SystemColor
      * values, otherwise we create color objects whose values match
      * the defaults Windows95 colors.
+     * <p>
+     *  将SystemColors加载到默认值表中。 SystemColor默认值的键与SystemColor中的公共字段的名称相同。
+     * 如果在本地Windows平台上创建表,我们使用SystemColor值,否则我们创建的颜色对象的值与默认的Windows95颜色匹配。
+     * 
      */
     protected void initSystemColorDefaults(UIDefaults table)
     {
@@ -282,6 +317,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
    /**
      * Initialize the defaults table with the name of the ResourceBundle
      * used for getting localized defaults.
+     * <p>
+     *  使用用于获取本地化默认值的ResourceBundle的名称初始化defaults表。
+     * 
      */
     private void initResourceBundle(UIDefaults table) {
         table.addResourceBundle( "com.sun.java.swing.plaf.windows.resources.windows" );
@@ -372,6 +410,18 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
                        "KP_RIGHT", DefaultEditorKit.forwardAction,
                         "KP_LEFT", DefaultEditorKit.backwardAction,
                           "ENTER", JTextField.notifyAction,
+             "control BACK_SLASH", "unselect"/* <p>
+             "control BACK_SLASH", "unselect"/* "shift LEFT",DefaultEditorKit.selectionBackwardAction,"shift RIGHT",DefaultEditorKit.selectionForward
+             "control BACK_SLASH", "unselect"/* Action,"control LEFT",DefaultEditorKit.previousWordAction,"control RIGHT",DefaultEditorKit.nextWordAc
+             "control BACK_SLASH", "unselect"/* tion,"control shift LEFT",DefaultEditorKit.selectionPreviousWordAction,"control shift RIGHT ",Default
+             "control BACK_SLASH", "unselect"/* EditorKit.selectionNextWordAction,"HOME",DefaultEditorKit.beginLineAction,"END",DefaultEditorKit.endL
+             "control BACK_SLASH", "unselect"/* ineAction,"shift HOME",DefaultEditorKit.selectionBeginLineAction,"shift END",DefaultEditorKit.selecti
+             "control BACK_SLASH", "unselect"/* onEndLineAction,"BACK_SPACE",DefaultEditorKit.deletePrevCharAction,"shift ,"RIGHT",DefaultEditorKit.f
+             "control BACK_SLASH", "unselect"/* orwardAction,"Default","Default","Default","Delete" "LEFT",DefaultEditorKit.backwardAction,"KP_RIGHT"
+             "control BACK_SLASH", "unselect"/* ,DefaultEditorKit.forwardAction,"KP_LEFT",DefaultEditorKit.backwardAction,"ENTER",JTextField.notifyAc
+             "control BACK_SLASH", "unselect"/* tion,。
+             "control BACK_SLASH", "unselect"/* 
+             "control BACK_SLASH", "unselect"/* 
                 "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 
@@ -406,6 +456,17 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
                        "KP_RIGHT", DefaultEditorKit.forwardAction,
                         "KP_LEFT", DefaultEditorKit.backwardAction,
                           "ENTER", JTextField.notifyAction,
+             "control BACK_SLASH", "unselect"/* <p>
+             "control BACK_SLASH", "unselect"/* "shift LEFT",DefaultEditorKit.selectionBackwardAction,"shift RIGHT",DefaultEditorKit.selectionForward
+             "control BACK_SLASH", "unselect"/* Action,"control LEFT",DefaultEditorKit.beginLineAction,"control RIGHT",DefaultEditorKit.endLineAction
+             "control BACK_SLASH", "unselect"/* ,"control shift LEFT",DefaultEditorKit.selectionBeginLineAction,"control shift RIGHT ",DefaultEditorK
+             "control BACK_SLASH", "unselect"/* it.selectionEndLineAction,"HOME",DefaultEditorKit.beginLineAction,"END",DefaultEditorKit.endLineActio
+             "control BACK_SLASH", "unselect"/* n,"shift HOME",DefaultEditorKit.selectionBeginLineAction,"shift END",DefaultEditorKit.selectionEndLin
+             "control BACK_SLASH", "unselect"/* eAction,"BACK_SPACE",DefaultEditorKit.deletePrevCharAction,"shift ,"LEFT",DefaultEditorKit.backwardAc
+             "control BACK_SLASH", "unselect"/* tion,"KP_RIGHT",DefaultEditorKit.forwardAction,"KP_LEFT","Default_Value_Text" ",DefaultEditorKit.back
+             "control BACK_SLASH", "unselect"/* wardAction,"ENTER",JTextField.notifyAction,。
+             "control BACK_SLASH", "unselect"/* 
+             "control BACK_SLASH", "unselect"/* 
                 "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 
@@ -460,6 +521,23 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
                       "control T", "next-link-action",
                 "control shift T", "previous-link-action",
                   "control SPACE", "activate-link-action",
+             "control BACK_SLASH", "unselect"/* <p>
+             "control BACK_SLASH", "unselect"/* "HOME",DefaultEditorKit.beginLineAction,"END",DefaultEditorKit.endLineAction,"shift HOME",DefaultEdit
+             "control BACK_SLASH", "unselect"/* orKit.selectionBeginLineAction,"shift END",DefaultEditorKit.selectionEndLineAction,"control HOME",Def
+             "control BACK_SLASH", "unselect"/* aultEditorKit.beginAction,"control END",DefaultEditorKit。
+             "control BACK_SLASH", "unselect"/*  endAction,"控制shift HOME",DefaultEditorKit.selectionBeginAction,"控制shift END",DefaultEditorKit.select
+             "control BACK_SLASH", "unselect"/* ionEndAction,"UP",DefaultEditorKit.upAction,"DOWN",DefaultEditorKit.downAction,"BACK_SPACE",DefaultEd
+             "control BACK_SLASH", "unselect"/* itorKit.deletePrevCharAction,"shift BACK_SPACE" ,DefaultEditorKit.deletePrevCharAction,"ctrl H",Defau
+             "control BACK_SLASH", "unselect"/* ltEditorKit.deletePrevCharAction,"DELETE",DefaultEditorKit.deleteNextCharAction,"ctrl DELETE",Default
+             "control BACK_SLASH", "unselect"/* EditorKit.deleteNextWordAction,"ctrl BACK_SPACE",DefaultEditorKit.deletePrevWordAction,"RIGHT",Defaul
+             "control BACK_SLASH", "unselect"/* tEditorKit.forwardAction,"LEFT ",DefaultEditorKit.pageAction,"PAGE_UP",DefaultEditorKit.pageUpAction,
+             "control BACK_SLASH", "unselect"/* "PAGE_DOWN",DefaultEditorKit.pageDownAction,"shift PAGE_UP","selection-page-up" ,"shift PAGE_DOWN","s
+             "control BACK_SLASH", "unselect"/* election-page-down","ctrl shift PAGE_UP","selection-page-left","ctrl shift PAGE_DOWN","selection-page
+             "control BACK_SLASH", "unselect"/* -right","shift UP",DefaultEditorKit.selectionUpAction ,"shift DOWN",DefaultEditorKit.selectionDownAct
+             "control BACK_SLASH", "unselect"/* ion,"ENTER",DefaultEditorKit.insertBreakAction,"TAB",DefaultEditorKit.insertTabAction,"control T","ne
+             "control BACK_SLASH", "unselect"/* xt-link-action","control shift T"动作","控制SPACE","激活链接动作"。
+             "control BACK_SLASH", "unselect"/* 
+             "control BACK_SLASH", "unselect"/* 
                 "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 
@@ -567,6 +645,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
              * as a client property on the JComponent. Use the same key name
              * for both client property and UIDefaults.
              * Also need to set up listeners for changes in these settings.
+             * <p>
+             * JComponent.setUI()检索这个并使它作为JComponent上的客户端属性可用。对客户端属性和UIDefaults使用相同的密钥名称。还需要为这些设置中的更改设置侦听器。
+             * 
              */
             Object aaTextInfo = SwingUtilities2.AATextInfo.getAATextInfo(true);
             table.put(SwingUtilities2.AA_TEXT_PROPERTY_KEY, aaTextInfo);
@@ -1612,6 +1693,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
         /*
          * acceleratorSelectionForeground color is the same as
          * acceleratorForeground
+         * <p>
+         *  acceleratorSelectionForeground颜色与acceleratorForeground相同
+         * 
          */
         for (int i = 0, j = 0; i < menuClasses.length; i++) {
             String key = menuClasses[i] + ".acceleratorSelectionForeground";
@@ -1711,6 +1795,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
 
         /*
          * JPopupMenu has a bit of free space around menu items
+         * <p>
+         *  JPopupMenu在菜单项周围有一点空闲空间
+         * 
          */
         String POPUP_MENU_BORDER = "PopupMenu.border";
 
@@ -1741,6 +1828,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * a DesktopProperty representing the font. If the font can't be
      * represented in the current encoding this will return null and
      * turn off the use of system fonts.
+     * <p>
+     *  如果我们支持从桌面加载字体,这将返回一个表示字体的DesktopProperty。如果字体无法在当前编码中表示,则将返回null并关闭系统字体的使用。
+     * 
      */
     private Object getDesktopFontValue(String fontName, Object backup) {
         if (useSystemFontSettings) {
@@ -1956,6 +2046,10 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * This method is a non operation if the underlying operating system
      * does not support the mnemonic hiding feature.
      *
+     * <p>
+     *  设置隐藏助记符标志的状态。此标志由组件UI代理使用,以确定是否应渲染助记符。如果底层操作系统不支持助记符隐藏功能,则此方法是非操作的。
+     * 
+     * 
      * @param hide true if mnemonics should be hidden
      * @since 1.4
      */
@@ -1972,6 +2066,10 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * Gets the state of the hide mnemonic flag. This only has meaning
      * if this feature is supported by the underlying OS.
      *
+     * <p>
+     *  获取隐藏助记符的状态。这只有在底层操作系统支持此功能时才有意义。
+     * 
+     * 
      * @return true if mnemonics are hidden, otherwise, false
      * @see #setMnemonicHidden
      * @since 1.4
@@ -1990,6 +2088,10 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * component UI delegates as a hint to determine which style the component
      * should be rendered.
      *
+     * <p>
+     *  获取标志的状态,指示是否应呈现旧的Windows外观。此标志由组件UI委派用作提示以确定应呈现组件的样式。
+     * 
+     * 
      * @return true if Windows 95 and Windows NT 4 look and feel should
      *         be rendered
      * @since 1.4
@@ -2012,6 +2114,15 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * results.
      * </p>
      *
+     * <p>
+     * <p>
+     *  当用户尝试无效操作时调用,例如粘贴到具有焦点的不可编辑的<code> JTextField </code>中。
+     * </p>
+     * <p>
+     *  如果用户在桌面上启用了可视错误指示,此方法将闪烁活动窗口的字幕栏。用户还可以设置属性awt.visualbell = true来实现相同的结果。
+     * </p>
+     * 
+     * 
      * @param component Component the error occurred in, may be
      *                  null indicating the error condition is
      *                  not directly associated with a
@@ -2025,6 +2136,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
 
     /**
      * {@inheritDoc}
+     * <p>
+     * {@inheritDoc}
+     * 
      */
     public LayoutStyle getLayoutStyle() {
         LayoutStyle style = this.style;
@@ -2051,6 +2165,18 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * This <code>Action</code>'s <code>actionPerformed</code> method
      * is fired by the <code>playSound</code> method.
      *
+     * <p>
+     *  返回<code> Action </code>。
+     * <P>
+     *  此操作包含呈现听觉提示的信息和逻辑。传递给此方法的<code> Object </code>包含呈现听觉提示所需的信息。
+     * 通常,此<code> Object </code>是指向<code> Toolkit </code> <code> desktopProperty </code>的<code> String </code>
+     * 。
+     *  此操作包含呈现听觉提示的信息和逻辑。传递给此方法的<code> Object </code>包含呈现听觉提示所需的信息。
+     * 这个<code> desktopProperty </code>是由AWT和Windows操作系统解决。
+     * <P>
+     *  此<code> Action </code>的<code> actionPerformed </code>方法由<code> playSound </code>方法触发。
+     * 
+     * 
      * @return      an Action which knows how to render the auditory
      *              cue for one particular system or user activity
      * @see #playSound(Action)
@@ -2090,6 +2216,12 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
      * effectively a pointer down into the Win32 OS that knows how to
      * play the right sound.
      *
+     * <p>
+     *  将名称String传递给超级构造函数。这用于以后识别Action并决定是否播放它。存储资源String。它用于获取音频资源。
+     * 在这种情况下,资源是由<code> Toolkit </code>提供的<code> Runnable </code>。
+     * 这个<code> Runnable </code>实际上是一个指向Win32操作系统的指针,知道如何播放正确的声音。
+     * 
+     * 
      * @since 1.4
      */
     private static class AudioAction extends AbstractAction {
@@ -2098,6 +2230,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
         /**
          * We use the String as the name of the Action and as a pointer to
          * the underlying OSes audio resource.
+         * <p>
+         *  我们使用String作为Action的名称,并作为指向底层OSes音频资源的指针。
+         * 
          */
         public AudioAction(String name, String resource) {
             super(name);
@@ -2118,6 +2253,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
     /**
      * Gets an <code>Icon</code> from the native libraries if available,
      * otherwise gets it from an image resource file.
+     * <p>
+     *  从本机库获取<code> Icon </code>(如果可用),否则从图像资源文件中获取。
+     * 
      */
     private static class LazyWindowsIcon implements UIDefaults.LazyValue {
         private String nativeImage;
@@ -2145,6 +2283,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
     /**
      * Gets an <code>Icon</code> from the native libraries if available.
      * A desktop property is used to trigger reloading the icon when needed.
+     * <p>
+     *  从本机库(如果可用)获取<code>图标</code>。桌面属性用于在需要时触发重新加载图标。
+     * 
      */
     private class ActiveWindowsIcon implements UIDefaults.ActiveValue {
         private Icon icon;
@@ -2190,6 +2331,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
 
     /**
      * Icon backed-up by XP Skin.
+     * <p>
+     *  由XP皮肤备份的图标。
+     * 
      */
     private static class SkinIcon implements Icon, UIResource {
         private final Part part;
@@ -2203,6 +2347,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
          * Draw the icon at the specified location.  Icon implementations
          * may use the Component argument to get properties useful for
          * painting, e.g. the foreground or background color.
+         * <p>
+         *  在指定位置绘制图标。图标实现可以使用Component参数来获得对绘画有用的属性,例如。前景或背景颜色。
+         * 
          */
         public void paintIcon(Component c, Graphics g, int x, int y) {
             XPStyle xp = XPStyle.getXP();
@@ -2216,6 +2363,10 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
         /**
          * Returns the icon's width.
          *
+         * <p>
+         * 返回图标的宽度。
+         * 
+         * 
          * @return an int specifying the fixed width of the icon.
          */
         public int getIconWidth() {
@@ -2232,6 +2383,10 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
         /**
          * Returns the icon's height.
          *
+         * <p>
+         *  返回图标的高度。
+         * 
+         * 
          * @return an int specifying the fixed height of the icon.
          */
         public int getIconHeight() {
@@ -2249,6 +2404,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
     /**
      * DesktopProperty for fonts. If a font with the name 'MS Sans Serif'
      * is returned, it is mapped to 'Microsoft Sans Serif'.
+     * <p>
+     *  用于字体的DesktopProperty。如果返回名称为"MS Sans Serif"的字体,则映射到"Microsoft Sans Serif"。
+     * 
      */
     private static class WindowsFontProperty extends DesktopProperty {
         WindowsFontProperty(String key, Object backup) {
@@ -2309,6 +2467,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
     /**
      * DesktopProperty for fonts that only gets sizes from the desktop,
      * font name and style are passed into the constructor
+     * <p>
+     *  用于仅从桌面,字体名称和样式获取大小的字体的DesktopProperty会传递到构造函数中
+     * 
      */
     private static class WindowsFontSizeProperty extends DesktopProperty {
         private String fontName;
@@ -2339,6 +2500,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
     /**
      * A value wrapper that actively retrieves values from xp or falls back
      * to the classic value if not running XP styles.
+     * <p>
+     *  主动从xp检索值或者如果不运行XP样式则返回到经典值的值包装器。
+     * 
      */
     private static class XPValue implements UIDefaults.ActiveValue {
         protected Object classicValue, xpValue;
@@ -2542,6 +2706,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
     /**
      * Converts the dialog unit argument to pixels along the specified
      * axis.
+     * <p>
+     *  将对话单位参数转换为沿指定轴的像素。
+     * 
      */
     private int dluToPixels(int dlu, int direction) {
         if (baseUnitX == 0) {
@@ -2558,6 +2725,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
 
     /**
      * Calculates the dialog unit mapping.
+     * <p>
+     *  计算对话单位映射。
+     * 
      */
     private void calculateBaseUnits() {
         // This calculation comes from:
@@ -2574,6 +2744,9 @@ public class WindowsLookAndFeel extends BasicLookAndFeel
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
      * @since 1.6
      */
     public Icon getDisabledIcon(JComponent component, Icon icon) {

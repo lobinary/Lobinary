@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -135,6 +136,9 @@ public abstract class ObjectWriter {
     *   header(\n
     *       append*\n *
     *   )\n
+    * <p>
+    *  startObject(str)header(elem)\ n startObject(startElement append * endElement)* endObject header(\ n 
+    * append * \ n *)\ n。
     */
     private static class IndentingObjectWriter extends ObjectWriter {
         private int level ;

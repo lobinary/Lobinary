@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,7 @@ import com.sun.java.swing.plaf.gtk.GTKConstants.Orientation;
 import com.sun.java.swing.plaf.gtk.GTKConstants.ShadowType;
 
 /**
+/* <p>
  */
 class GTKIconFactory {
     static final int CHECK_ICON_EXTRA_INSET        = 1;

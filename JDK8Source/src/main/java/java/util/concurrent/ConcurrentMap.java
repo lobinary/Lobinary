@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -55,6 +59,17 @@ import java.util.function.Function;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  {@link java.util.Map}提供线程安全性和原子性保证。
+ * 
+ *  <p>内存一致性效果：与其他并发集合一样,在将对象放入{@code ConcurrentMap}作为键或值之前,线程中的操作<a href="package-summary.html#MemoryVisibility">
+ *  <i > happens-before </i> </a>之后,从另一个线程中的{@code ConcurrentMap}访问或删除该对象。
+ * 
+ *  <p>此接口是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  * @param <K> the type of keys maintained by this map
@@ -70,6 +85,13 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * the key is absent. Implementations which support null values
      * <strong>must</strong> override this default implementation.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implNote这个实现假设ConcurrentMap不能包含空值,并且{@code get()}明确返回null意味着键不存在。
+     * 支持空值<strong>的实现必须</strong>覆盖此默认实现。
+     * 
+     * 
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      * @since 1.8
@@ -95,6 +117,16 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * {@code getValue()} indicates that the entry has been removed and cannot
      * be processed. Operation continues for subsequent entries.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implSpec对于这个{@code map},默认实现是等效的：<pre> {@code for((Map.Entry <K,V> entry：map.entrySet())action.accept(entry.getKey ),entry.getValue());}
+     *  </pre>。
+     * 
+     *  @implNote默认实现假设{@code getKey()}或{@code getValue()}抛出的{@code IllegalStateException}表示该条目已删除,无法处理。
+     * 操作继续进行后续条目。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.8
      */
@@ -131,6 +163,17 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * @implNote This implementation intentionally re-abstracts the
      * inappropriate default provided in {@code Map}.
      *
+     * <p>
+     * 如果指定的键尚未与某个值相关联,请将其与给定的值相关联。
+     * 这相当于<pre> {@code if(！map.containsKey(key))return map.put(key,value); else return map.get(key); } </pre>
+     * 。
+     * 如果指定的键尚未与某个值相关联,请将其与给定的值相关联。
+     * 
+     *  除了该动作是以原子方式执行的。
+     * 
+     *  @implNote此实现有意重新抽象{@code Map}中提供的不当默认值。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param value value to be associated with the specified key
      * @return the previous value associated with the specified key, or
@@ -165,6 +208,17 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * @implNote This implementation intentionally re-abstracts the
      * inappropriate default provided in {@code Map}.
      *
+     * <p>
+     *  仅当当前映射到给定值时,才删除键的条目。
+     * 这相当于<pre> {@code if(map.containsKey(key)&& Objects.equals(map.get(key),value)){map.remove(key); return true; }
+     *  else return false; } </pre>。
+     *  仅当当前映射到给定值时,才删除键的条目。
+     * 
+     *  除了该动作是以原子方式执行的。
+     * 
+     *  @implNote此实现有意重新抽象{@code Map}中提供的不当默认值。
+     * 
+     * 
      * @param key key with which the specified value is associated
      * @param value value expected to be associated with the specified key
      * @return {@code true} if the value was removed
@@ -195,6 +249,17 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * @implNote This implementation intentionally re-abstracts the
      * inappropriate default provided in {@code Map}.
      *
+     * <p>
+     *  仅当当前映射到给定值时替换键的条目。
+     * 这等效于<pre> {@code if(map.containsKey(key)&& Objects.equals(map.get(key),oldValue)){map.put(key,newValue); return true; }
+     *  else return false; } </pre>。
+     *  仅当当前映射到给定值时替换键的条目。
+     * 
+     *  除了该动作是以原子方式执行的。
+     * 
+     *  @implNote此实现有意重新抽象{@code Map}中提供的不当默认值。
+     * 
+     * 
      * @param key key with which the specified value is associated
      * @param oldValue value expected to be associated with the specified key
      * @param newValue value to be associated with the specified key
@@ -225,6 +290,15 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * @implNote This implementation intentionally re-abstracts the
      * inappropriate default provided in {@code Map}.
      *
+     * <p>
+     *  仅当当前映射到某个值时替换键的条目。
+     * 这相当于<pre> {@code if(map.containsKey(key)){return map.put(key,value); } else return null; } </pre>。
+     * 
+     *  除了该动作是以原子方式执行的。
+     * 
+     * @implNote此实现有意重新抽象{@code Map}中提供的不当默认值。
+     * 
+     * 
      * @param key key with which the specified value is associated
      * @param value value to be associated with the specified key
      * @return the previous value associated with the specified key, or
@@ -265,6 +339,17 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * absent. Implementations which support null values <strong>must</strong>
      * override this default implementation.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implSpec <p>对于这个{@code map},默认实现是等价的：<pre> {@code for((Map.Entry <K,V> entry：map.entrySet())do {K k = entry.getKey(); V v = entry.getValue();}
+     *  while(！replace(k,v,function.apply(k,v)));} </pre>。
+     * 
+     *  默认实现可以在多个线程尝试更新时重试这些步骤,包括针对给定键可能重复地调用该函数。
+     * 
+     *  <p>此实现假定ConcurrentMap不能包含空值,而{@code get()}返回null明确意味着键不存在。支持空值<strong>的实现必须</strong>覆盖此默认实现。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      * @throws ClassCastException {@inheritDoc}
@@ -310,6 +395,19 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * absent. Implementations which support null values <strong>must</strong>
      * override this default implementation.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implSpec默认实现等效于此{@code map}的以下步骤,然后返回当前值或{@code null}(如果现在缺少)：
+     * 
+     *  <pre> {@code if(map.get(key)== null){V newValue = mappingFunction.apply(key); if(newValue！= null)return map.putIfAbsent(key,newValue); }
+     * } </pre>。
+     * 
+     *  默认实现可以在多个线程尝试更新时重试这些步骤,包括可能多次调用映射函数。
+     * 
+     * <p>此实现假定ConcurrentMap不能包含空值,而{@code get()}返回null明确意味着键不存在。支持空值<strong>的实现必须</strong>覆盖此默认实现。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -353,6 +451,19 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * absent. Implementations which support null values <strong>must</strong>
      * override this default implementation.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implSpec默认实现等效于对此{@code map}执行以下步骤,然后返回当前值或{@code null}(如果现在不存在)。 ：
+     * 
+     *  <pre> {@code if(map.get(key)！= null){V oldValue = map.get(key); V newValue = remappingFunction.apply(key,oldValue); if(newValue！= null)map.replace(key,oldValue,newValue); else map.remove(key,oldValue); }
+     * } </pre>。
+     * 
+     *  当多个线程尝试更新时,默认实现可以重试这些步骤,包括潜在地多次调用重映射功能。
+     * 
+     *  <p>此实现假定ConcurrentMap不能包含空值,而{@code get()}返回null明确意味着键不存在。支持空值<strong>的实现必须</strong>覆盖此默认实现。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -407,6 +518,19 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * absent. Implementations which support null values <strong>must</strong>
      * override this default implementation.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implSpec默认实现等效于对此{@code map}执行以下步骤,然后返回当前值或{@code null}(如果不存在)：
+     * 
+     * <pre> {@code V oldValue = map.get(key); V newValue = remappingFunction.apply(key,oldValue); if(newValue！= null){if(newValue！= null)map.replace(key,oldValue,newValue); else map.remove(key,oldValue); }
+     *  else {if(newValue！= null)map.putIfAbsent(key,newValue); else return null; }} </pre>。
+     * 
+     *  当多个线程尝试更新时,默认实现可以重试这些步骤,包括潜在地多次调用重映射功能。
+     * 
+     *  <p>此实现假定ConcurrentMap不能包含空值,而{@code get()}返回null明确意味着键不存在。支持空值<strong>的实现必须</strong>覆盖此默认实现。
+     * 
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -486,6 +610,14 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
      * absent. Implementations which support null values <strong>must</strong>
      * override this default implementation.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     *  @implSpec默认实现等效于对此{@code map}执行以下步骤,然后返回当前值或{@code null}(如果不存在)：
+     * 
+     *  <pre> {@code V oldValue = map.get(key); V newValue =(oldValue == null)? value：remappingFunction.apply(oldValue,value); if(newValue == null)map.remove(key); else map.put(key,newValue); }
+     *  </pre>。
+     * 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}

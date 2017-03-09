@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -117,6 +118,46 @@ import java.math.BigInteger;
  * marked final.  You can subclass this class for other reasons, but
  * you cannot override or modify the behaviour of those methods.
  *
+ * <p>
+ *  <code> IndexColorModel </code>类是一个<code> ColorModel </code>类,它使用由单个样本组成的像素值,该样本是在默认sRGB颜色空间中的固定色彩映射的
+ * 索引。
+ * 色彩映射指定对应于每个索引的红色,绿色,蓝色和可选的alpha组件。所有分量在色彩图中表示为8位无符号整数值。
+ * 一些构造函数允许调用者通过在<code> BigInteger </code>对象中设置的位指示哪些颜色映射条目有效并且表示不可用的颜色,从而在颜色映射中指定"空洞"。
+ * 这种颜色模型类似于X11伪彩色视觉。
+ * <p>
+ *  一些构造器提供了为色彩映射中的每个像素指定α分量的手段,而其他构造器不提供这样的手段,或者在一些情况下,提供指示色彩图数据是否包含α值的标志。
+ * 如果没有为构造函数提供alpha,则为每个条目假定不透明的alpha分量(alpha = 1.0)。可以提供可选的透明像素值,其指示要被使得完全透明的像素,而不管为该像素值提供或假设的任何α分量。
+ * 注意,一个<code> IndexColorModel </code>对象的颜色分量从不预先乘以alpha分量。
+ * <p>
+ * <a name="transparency">
+ * 通过检查色彩映射中颜色的alpha分量,并在考虑可选的alpha值和指定的任何透明索引之后选择最具体的值,确定<code> IndexColorModel </code>对象的透明度。
+ * 仅当色彩映射中的所有有效颜色都不透明且没有有效的透明像素时,透明度值为<code> Transparency.OPAQUE </code>。
+ * 如果色彩映射中的所有有效颜色是完全不透明的(alpha = 1.0)或完全透明的(alpha = 0.0),通常在指定有效的透明像素时发生,该值为<code> Transparency.BITMASK 
+ * </code>。
+ * 仅当色彩映射中的所有有效颜色都不透明且没有有效的透明像素时,透明度值为<code> Transparency.OPAQUE </code>。
+ * 否则,值为<code> Transparency.TRANSLUCENT </code>,表示一些有效颜色具有既不完全透明又不完全不透明(0.0 <α<1.0)的α分量。
+ * </a>
+ * 
+ * <p>
+ *  如果<code> IndexColorModel </code>对象的透明度值为<code> Transparency.OPAQUE </code>,那么<code> hasAlpha </code>
+ * 和<code> getNumComponents </code>从<code> ColorModel </code>)分别返回false和3。
+ * 对于任何其他透明度值,<code> hasAlpha </code>返回true,<code> getNumComponents </code>返回4。
+ * 
+ * <p>
+ * <a name="index_values">
+ * 用于索引到色彩映射表中的值取自像素表示的最低有效位<em> n </em>,其中<em> n </em>基于构造函数中指定的像素大小。
+ * 对于小于8位的像素大小,<em> n </em>向上取整为2的幂(3变为4,5,6,7变为8)。对于8和16位之间的像素大小,<em> n </em>等于像素大小。此类不支持大于16位的像素大小。
+ * 在像素表示中忽略超过<em> n </em>的高阶位。大于或等于映射大小但小于2 <sup> <em> n </em> </sup>的索引值未定义,对于所有颜色和alpha分量返回0。
+ * </a>
+ * <p>
+ *  对于使用<code> transferType </code>类型的基本数组像素表示的那些方法,数组长度总是为1。
+ * 支持的传输类型是<code> DataBuffer.TYPE_BYTE </code>和<code> DataBuffer.TYPE_USHORT </code>。
+ * 单个int像素表示对于该类的所有对象有效,因为总是可以在单个int中表示与该类一起使用的像素值。
+ * 因此,由于无效的像素值,使用此表示的方法不会抛出<code> IllegalArgumentException </code>。
+ * <p>
+ * 这个类中的许多方法是最终的。原因是底层本地图形代码对这个类的布局和操作做出假设,这些假设反映在这里标记为final的方法的实现中。由于其他原因,您可以对此类进行子类化,但不能覆盖或修改这些方法的行为。
+ * 
+ * 
  * @see ColorModel
  * @see ColorSpace
  * @see DataBuffer
@@ -153,6 +194,14 @@ public class IndexColorModel extends ColorModel {
      * <code>Transparency.OPAQUE</code>.
      * The transfer type is the smallest of <code>DataBuffer.TYPE_BYTE</code>
      * or <code>DataBuffer.TYPE_USHORT</code> that can hold a single pixel.
+     * <p>
+     *  从指定的红色,绿色和蓝色组件数组构造一个<code> IndexColorModel </code>。
+     * 此颜色模型描述的像素都具有255个非标准化的alpha分量(1.0标准化),这意味着它们完全不透明。指定颜色分量的所有数组必须至少具有指定数量的条目。
+     *  <code> ColorSpace </code>是默认的sRGB空间。
+     * 由于此构造函数的任何参数中没有Alpha信息,因此透明度值始终为<code> Transparency.OPAQUE </code>。
+     * 传输类型是可以容纳单个像素的<code> DataBuffer.TYPE_BYTE </code>或<code> DataBuffer.TYPE_USHORT </code>中最小的。
+     * 
+     * 
      * @param bits      the number of bits each pixel occupies
      * @param size      the size of the color component arrays
      * @param r         the array of red color components
@@ -192,6 +241,16 @@ public class IndexColorModel extends ColorModel {
      * The transfer type is the smallest of <code>DataBuffer.TYPE_BYTE</code>
      * or <code>DataBuffer.TYPE_USHORT</code> that can hold a
      * single pixel.
+     * <p>
+     * 从给定的红色,绿色和蓝色组件数组构造一个<code> IndexColorModel </code>。
+     * 由该颜色模型描述的像素都具有255个未归一化的α分量(1.0被归一化),这意味着它们是完全不透明的,除了指示的像素被制成透明的。指定颜色分量的所有数组必须至少具有指定数量的条目。
+     *  <code> ColorSpace </code>是默认的sRGB空间。
+     * 透明度值可以是<code> Transparency.OPAQUE </code>或<code> Transparency.BITMASK </code>,具体取决于参数,具体取决于<a href="#transparency">
+     * 类描述</a>以上。
+     *  <code> ColorSpace </code>是默认的sRGB空间。
+     * 传输类型是可以容纳单个像素的<code> DataBuffer.TYPE_BYTE </code>或<code> DataBuffer.TYPE_USHORT </code>中最小的。
+     * 
+     * 
      * @param bits      the number of bits each pixel occupies
      * @param size      the size of the color component arrays
      * @param r         the array of red color components
@@ -231,6 +290,15 @@ public class IndexColorModel extends ColorModel {
      * in the <a href="#transparency">class description</a> above.
      * The transfer type is the smallest of <code>DataBuffer.TYPE_BYTE</code>
      * or <code>DataBuffer.TYPE_USHORT</code> that can hold a single pixel.
+     * <p>
+     *  从给定的红,绿,蓝和alpha分量数组构造一个<code> IndexColorModel </code>。指定组件的所有数组必须至少具有指定数量的条目。
+     *  <code> ColorSpace </code>是默认的sRGB空间。
+     * 透明度值可以是<code> Transparency.OPAQUE </code>,<code> Transparency.BITMASK </code>或<code> Transparency.TRA
+     * NSLUCENT </code>中的任何一个,具体取决于参数, a href ="#transparency">类别说明</a>。
+     *  <code> ColorSpace </code>是默认的sRGB空间。
+     * 传输类型是可以容纳单个像素的<code> DataBuffer.TYPE_BYTE </code>或<code> DataBuffer.TYPE_USHORT </code>中最小的。
+     * 
+     * 
      * @param bits      the number of bits each pixel occupies
      * @param size      the size of the color component arrays
      * @param r         the array of red color components
@@ -271,6 +339,15 @@ public class IndexColorModel extends ColorModel {
      * <code>DataBuffer.TYPE_BYTE</code> or <code>DataBuffer.TYPE_USHORT</code>
      * that can hold a single pixel.
      *
+     * <p>
+     * 从交错的红色,绿色,蓝色和可选的alpha组件的单个数组构造一个<code> IndexColorModel </code>。数组中必须有足够的值来填充指定大小的所有所需组件数组。
+     *  <code> ColorSpace </code>是默认的sRGB空间。
+     * 透明度值可以是<code> Transparency.OPAQUE </code>,<code> Transparency.BITMASK </code>或<code> Transparency.TRA
+     * NSLUCENT </code>中的任何一个,具体取决于参数, a href ="#transparency">类别说明</a>。
+     *  <code> ColorSpace </code>是默认的sRGB空间。
+     * 传输类型是可以容纳单个像素的<code> DataBuffer.TYPE_BYTE </code>或<code> DataBuffer.TYPE_USHORT </code>中最小的。
+     * 
+     * 
      * @param bits      the number of bits each pixel occupies
      * @param size      the size of the color component arrays
      * @param cmap      the array of color components
@@ -307,6 +384,15 @@ public class IndexColorModel extends ColorModel {
      * The transfer type is the smallest of
      * <code>DataBuffer.TYPE_BYTE</code> or <code>DataBuffer.TYPE_USHORT</code>
      * that can hold a single pixel.
+     * <p>
+     *  从交错的红色,绿色,蓝色和可选的alpha组件的单个数组构造一个<code> IndexColorModel </code>。指定的透明索引表示完全透明的像素,无论为其指定的任何alpha值。
+     * 数组中必须有足够的值来填充指定大小的所有所需组件数组。 <code> ColorSpace </code>是默认的sRGB空间。
+     * 透明度值可以是<code> Transparency.OPAQUE </code>,<code> Transparency.BITMASK </code>或<code> Transparency.TRA
+     * NSLUCENT </code>中的任何一个,具体取决于参数, a href ="#transparency">类别说明</a>。
+     * 数组中必须有足够的值来填充指定大小的所有所需组件数组。 <code> ColorSpace </code>是默认的sRGB空间。
+     * 传输类型是可以容纳单个像素的<code> DataBuffer.TYPE_BYTE </code>或<code> DataBuffer.TYPE_USHORT </code>中最小的。
+     * 
+     * 
      * @param bits      the number of bits each pixel occupies
      * @param size      the size of the color component arrays
      * @param cmap      the array of color components
@@ -384,6 +470,14 @@ public class IndexColorModel extends ColorModel {
      * or <code>Transparency.TRANSLUCENT</code>
      * depending on the arguments, as specified
      * in the <a href="#transparency">class description</a> above.
+     * <p>
+     * 从一个int数组构造一个<code> IndexColorModel </code>,其中每个int由默认RGB颜色模型格式中的红色,绿色,蓝色和可选的alpha组件组成。
+     * 指定的透明索引表示完全透明的像素,无论为其指定的任何alpha值。数组中必须有足够的值来填充指定大小的所有所需组件数组。 <code> ColorSpace </code>是默认的sRGB空间。
+     * 透明度值可以是<code> Transparency.OPAQUE </code>,<code> Transparency.BITMASK </code>或<code> Transparency.TRA
+     * NSLUCENT </code>中的任何一个,具体取决于参数, a href ="#transparency">类别说明</a>。
+     * 指定的透明索引表示完全透明的像素,无论为其指定的任何alpha值。数组中必须有足够的值来填充指定大小的所有所需组件数组。 <code> ColorSpace </code>是默认的sRGB空间。
+     * 
+     * 
      * @param bits      the number of bits each pixel occupies
      * @param size      the size of the color component arrays
      * @param cmap      the array of color components
@@ -450,6 +544,17 @@ public class IndexColorModel extends ColorModel {
      * in the <code>cmap</code> array.  A pixel is valid if the
      * <code>BigInteger</code> value at that index is set, and is invalid
      * if the <code>BigInteger</code> bit  at that index is not set.
+     * <p>
+     * 从<code> int </code>数组构造<code> IndexColorModel </code>,其中每个<code> int </code>由默认RGB颜色模型格式中的红,绿, 。
+     * 数组中必须有足够的值来填充指定大小的所有所需组件数组。 <code> ColorSpace </code>是默认的sRGB空间。
+     * 透明度值可以是<code> Transparency.OPAQUE </code>,<code> Transparency.BITMASK </code>或<code> Transparency.TRA
+     * NSLUCENT </code>中的任何一个,具体取决于参数, a href ="#transparency">类别说明</a>。
+     * 数组中必须有足够的值来填充指定大小的所有所需组件数组。 <code> ColorSpace </code>是默认的sRGB空间。
+     * 传输类型必须是<code> DataBuffer.TYPE_BYTE </code> <code> DataBuffer.TYPE_USHORT </code>之一。
+     *  <code> BigInteger </code>对象指定<code> cmap </code>数组中的有效/无效像素。
+     * 如果设置了该索引处的<code> BigInteger </code>值,则像素有效,如果未设置该索引处的<code> BigInteger </code>位,则该像素无效。
+     * 
+     * 
      * @param bits the number of bits each pixel occupies
      * @param size the size of the color component array
      * @param cmap the array of color components
@@ -599,6 +704,10 @@ public class IndexColorModel extends ColorModel {
     /**
      * Returns the transparency.  Returns either OPAQUE, BITMASK,
      * or TRANSLUCENT
+     * <p>
+     *  返回透明度。返回OPAQUE,BITMASK或TRANSLUCENT
+     * 
+     * 
      * @return the transparency of this <code>IndexColorModel</code>
      * @see Transparency#OPAQUE
      * @see Transparency#BITMASK
@@ -612,6 +721,10 @@ public class IndexColorModel extends ColorModel {
      * Returns an array of the number of bits for each color/alpha component.
      * The array contains the color components in the order red, green,
      * blue, followed by the alpha component, if present.
+     * <p>
+     *  返回每个颜色/ alpha组件的位数的数组。该数组包含红色,绿色,蓝色顺序的颜色分量,后跟alpha分量(如果存在)。
+     * 
+     * 
      * @return an array containing the number of bits of each color
      *         and alpha component of this <code>IndexColorModel</code>
      */
@@ -632,6 +745,10 @@ public class IndexColorModel extends ColorModel {
     /**
      * Returns the size of the color/alpha component arrays in this
      * <code>IndexColorModel</code>.
+     * <p>
+     *  返回此<code> IndexColorModel </code>中的颜色/ alpha组件数组的大小。
+     * 
+     * 
      * @return the size of the color and alpha component arrays.
      */
     final public int getMapSize() {
@@ -646,6 +763,11 @@ public class IndexColorModel extends ColorModel {
      * index, then that index will be preferred, otherwise,
      * the index of any pixel which happens to be fully transparent
      * may be returned.
+     * <p>
+     * 如果没有alpha值为0的像素,则返回此<code> IndexColorModel </code>或-1中的透明像素的索引。
+     * 如果透明像素在其构造函数之一的索引中明确指定,索引将是优选的,否则,可以返回恰好是完全透明的任何像素的索引。
+     * 
+     * 
      * @return the index of a transparent pixel in this
      *         <code>IndexColorModel</code> object, or -1 if there
      *         is no such pixel
@@ -658,6 +780,10 @@ public class IndexColorModel extends ColorModel {
      * Copies the array of red color components into the specified array.
      * Only the initial entries of the array as specified by
      * {@link #getMapSize() getMapSize} are written.
+     * <p>
+     *  将红色分量数组复制到指定的数组中。只有由{@link #getMapSize()getMapSize}指定的数组的初始条目被写入。
+     * 
+     * 
      * @param r the specified array into which the elements of the
      *      array of red color components are copied
      */
@@ -671,6 +797,10 @@ public class IndexColorModel extends ColorModel {
      * Copies the array of green color components into the specified array.
      * Only the initial entries of the array as specified by
      * <code>getMapSize</code> are written.
+     * <p>
+     *  将绿色组件数组复制到指定的数组中。只有由<code> getMapSize </code>指定的数组的初始条目被写入。
+     * 
+     * 
      * @param g the specified array into which the elements of the
      *      array of green color components are copied
      */
@@ -684,6 +814,10 @@ public class IndexColorModel extends ColorModel {
      * Copies the array of blue color components into the specified array.
      * Only the initial entries of the array as specified by
      * <code>getMapSize</code> are written.
+     * <p>
+     *  将蓝色组件数组复制到指定的数组中。只有由<code> getMapSize </code>指定的数组的初始条目被写入。
+     * 
+     * 
      * @param b the specified array into which the elements of the
      *      array of blue color components are copied
      */
@@ -697,6 +831,10 @@ public class IndexColorModel extends ColorModel {
      * Copies the array of alpha transparency components into the
      * specified array.  Only the initial entries of the array as specified
      * by <code>getMapSize</code> are written.
+     * <p>
+     *  将Alpha透明度组件数组复制到指定的数组中。只有由<code> getMapSize </code>指定的数组的初始条目被写入。
+     * 
+     * 
      * @param a the specified array into which the elements of the
      *      array of alpha components are copied
      */
@@ -713,6 +851,11 @@ public class IndexColorModel extends ColorModel {
      * the initial entries of the array as specified by
      * <code>getMapSize</code> are
      * written.
+     * <p>
+     *  将每个索引的数据从颜色和alpha组件数组转换为默认RGB ColorModel格式的int,并将生成的32位ARGB值复制到指定的数组中。
+     * 只有由<code> getMapSize </code>指定的数组的初始条目被写入。
+     * 
+     * 
      * @param rgb the specified array into which the converted ARGB
      *        values from this array of color and alpha components
      *        are copied.
@@ -752,6 +895,10 @@ public class IndexColorModel extends ColorModel {
      * value, which is based on the value of pixel_bits.  The pixel_mask
      * value is used to mask off the pixel parameters for methods such
      * as getRed(), getGreen(), getBlue(), getAlpha(), and getRGB().
+     * <p>
+     * 此方法从构造函数中调用以设置pixel_mask值,该值基于pixel_bits的值。
+     *  pixel_mask值用于屏蔽像getRed(),getGreen(),getBlue(),getAlpha()和getRGB()等方法的像素参数。
+     * 
      */
     private final void calculatePixelMask() {
         // Note that we adjust the mask so that our masking behavior here
@@ -773,6 +920,11 @@ public class IndexColorModel extends ColorModel {
      * <a href="#index_values">class description</a> above, are used to
      * calculate the returned value.
      * The returned value is a non pre-multiplied value.
+     * <p>
+     *  返回指定像素的红色分量,在默认RGB ColorSpace(sRGB)中从0到255缩放。像素值指定为int。
+     * 只有像上面的<a href="#index_values">类描述</a>中指定的像素值的较低的<em> n </em>位用于计算返回值。返回的值是非预乘的值。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the value of the red color component for the specified pixel
      */
@@ -788,6 +940,11 @@ public class IndexColorModel extends ColorModel {
      * <a href="#index_values">class description</a> above, are used to
      * calculate the returned value.
      * The returned value is a non pre-multiplied value.
+     * <p>
+     *  返回指定像素的绿色分量,在默认RGB ColorSpace(sRGB)中从0到255。像素值指定为int。
+     * 只有像上面的<a href="#index_values">类描述</a>中指定的像素值的较低的<em> n </em>位用于计算返回值。返回的值是非预乘的值。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the value of the green color component for the specified pixel
      */
@@ -803,6 +960,11 @@ public class IndexColorModel extends ColorModel {
      * <a href="#index_values">class description</a> above, are used to
      * calculate the returned value.
      * The returned value is a non pre-multiplied value.
+     * <p>
+     *  返回指定像素的蓝色分量,在默认RGB ColorSpace(sRGB)中从0到255。像素值指定为int。
+     * 只有像上面的<a href="#index_values">类描述</a>中指定的像素值的较低的<em> n </em>位用于计算返回值。返回的值是非预乘的值。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the value of the blue color component for the specified pixel
      */
@@ -816,6 +978,11 @@ public class IndexColorModel extends ColorModel {
      * Only the lower <em>n</em> bits of the pixel value, as specified in the
      * <a href="#index_values">class description</a> above, are used to
      * calculate the returned value.
+     * <p>
+     * 返回指定像素的alpha分量,从0到255缩放。像素值指定为int。
+     * 只有像上面的<a href="#index_values">类描述</a>中指定的像素值的较低的<em> n </em>位用于计算返回值。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the value of the alpha component for the specified pixel
      */
@@ -830,6 +997,11 @@ public class IndexColorModel extends ColorModel {
      * <a href="#index_values">class description</a> above, are used to
      * calculate the returned value.
      * The returned value is in a non pre-multiplied format.
+     * <p>
+     *  以默认的RGB颜色模型格式返回像素的颜色/ alpha分量。像素值指定为int。
+     * 只有像上面的<a href="#index_values">类描述</a>中指定的像素值的较低的<em> n </em>位用于计算返回值。返回的值采用非预扩展格式。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the color and alpha components of the specified pixel
      * @see ColorModel#getRGBdefault
@@ -860,6 +1032,22 @@ public class IndexColorModel extends ColorModel {
      * override it then they throw an exception if they use an
      * unsupported <code>transferType</code>.
      *
+     * <p>
+     *  返回此ColorModel中的像素的数据元素数组表示,给定默认RGB颜色模型中的整数像素表示。
+     * 然后可以将该数组传递给{@link WritableRaster}对象的{@link WritableRaster#setDataElements(int,int,java.lang.Object)setDataElements}
+     * 方法。
+     *  返回此ColorModel中的像素的数据元素数组表示,给定默认RGB颜色模型中的整数像素表示。如果像素变量是<code> null </code>,则会分配一个新的数组。
+     * 如果<code> pixel </code>不是<code> null </code>,它必须是<code> transferType </code>类型的原始数组;否则,抛出<code> ClassC
+     * astException </code>。
+     *  返回此ColorModel中的像素的数据元素数组表示,给定默认RGB颜色模型中的整数像素表示。如果像素变量是<code> null </code>,则会分配一个新的数组。
+     * 如果<code> pixel </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     *  返回此ColorModel中的像素的数据元素数组表示,给定默认RGB颜色模型中的整数像素表示。如果像素变量是<code> null </code>,则会分配一个新的数组。返回像素阵列。
+     * <p>
+     * 由于<code> IndexColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它们
+     * 会抛出异常。
+     * 
+     * 
      * @param rgb the integer pixel representation in the default RGB
      * color model
      * @param pixel the specified pixel
@@ -1080,6 +1268,18 @@ public class IndexColorModel extends ColorModel {
      * is thrown if  the <code>components</code> array is not <code>null</code> and is
      * not large enough to hold all the color and alpha components
      * starting at <code>offset</code>.
+     * <p>
+     *  返回此<code> ColorModel </code>中指定像素的非标准化颜色/ alpha分量数组。像素值指定为int。
+     * 如果<code> components </code>数组是<code> null </code>,则会分配一个包含<code> offset + getNumComponents()</code>元素
+     * 的新数组。
+     *  返回此<code> ColorModel </code>中指定像素的非标准化颜色/ alpha分量数组。像素值指定为int。
+     * 返回<code> components </code>数组,只有<code> hasAlpha </code>返回true时才包含alpha组件。
+     * 颜色/ alpha组件存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * 如果<code> components </code>数组不是<code> null </code>,并且不够大,不足以容纳所有的颜色和alpha组件从<code>开始,则抛出<code> ArrayI
+     * ndexOutOfBoundsException </code> offset </code>。
+     * 颜色/ alpha组件存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * 
+     * 
      * @param pixel the specified pixel
      * @param components the array to receive the color and alpha
      * components of the specified pixel
@@ -1135,6 +1335,26 @@ public class IndexColorModel extends ColorModel {
      * override it then they throw an exception if they use an
      * unsupported <code>transferType</code>.
      *
+     * <p>
+     * 返回此<code> ColorModel </code>中指定像素的非标准化颜色/ alpha分量数组。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。
+     * 如果<code> pixel </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 如果<code> pixel </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 如果<code> pixel </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 如果<code> components </code>数组是<code> null </code>,则会分配一个包含<code> offset + getNumComponents()</code>元素
+     * 的新数组。
+     * 如果<code> pixel </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 返回<code> components </code>数组,只有<code> hasAlpha </code>返回true时才包含alpha组件。
+     * 颜色/ alpha组件存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * 如果<code> components </code>数组不是<code> null </code>,并且不够大,不足以容纳所有的颜色和alpha组件开始<code>也会抛出<code> ArrayIn
+     * dexOutOfBoundsException </code> > offset </code>。
+     * 颜色/ alpha组件存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * <p>
+     *  由于<code> IndexColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它
+     * 们会抛出异常。
+     * 
+     * 
      * @param pixel the specified pixel
      * @param components an array that receives the color and alpha
      * components of the specified pixel
@@ -1189,6 +1409,14 @@ public class IndexColorModel extends ColorModel {
      * <code>ColorModel</code> can be subclassed, subclasses inherit the
      * implementation of this method and if they don't override it then
      * they throw an exception if they use an unsupported transferType.
+     * <p>
+     * 返回在给定非标准化颜色/ alpha分量数组的情况下,在<code> ColorModel </code>中表示为int的像素值。
+     * 如果<code> components </code>数组大小不足以容纳从<code> offset </code>开始的所有颜色和alpha分量,则会抛出<code> ArrayIndexOutOfB
+     * oundsException </code>。
+     * 返回在给定非标准化颜色/ alpha分量数组的情况下,在<code> ColorModel </code>中表示为int的像素值。
+     * 由于<code> ColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的transferType,它们会抛出异常。
+     * 
+     * 
      * @param components an array of unnormalized color and alpha
      * components
      * @param offset the index into <code>components</code> at which to
@@ -1255,6 +1483,21 @@ public class IndexColorModel extends ColorModel {
      * override it then they throw an exception if they use an
      * unsupported <code>transferType</code>
      *
+     * <p>
+     *  返回这个<code> ColorModel </code>中的像素的数据元素数组表示,给定一个非规格化的颜色/ alpha分量数组。
+     * 然后可以将该数组传递给<code> WritableRaster </code>对象的<code> setDataElements </code>方法。
+     * 如果<code> components </code>数组大小不足以容纳从<code> offset </code>开始的所有颜色和alpha分量,则会抛出<code> ArrayIndexOutOfB
+     * oundsException </code>。
+     * 然后可以将该数组传递给<code> WritableRaster </code>对象的<code> setDataElements </code>方法。
+     * 如果像素变量是<code> null </code>,则会分配一个新的数组。
+     * 如果<code> pixel </code>不是<code> null </code>,它必须是<code> transferType </code>类型的原始数组;否则,抛出<code> ClassC
+     * astException </code>。
+     * 如果像素变量是<code> null </code>,则会分配一个新的数组。
+     * 如果像素大小不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException </code>。
+     * <p>
+     * 由于<code> IndexColorModel </code>可以被子类化,子类继承这个方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>
+     * 
+     * 
      * @param components an array of unnormalized color and alpha
      * components
      * @param offset the index into <code>components</code> at which to
@@ -1297,6 +1540,14 @@ public class IndexColorModel extends ColorModel {
      * subclass that supports greater than 16 bits per pixel must
      * override this method.
      *
+     * <p>
+     *  创建具有指定宽度和高度的<code> WritableRaster </code>,其具有与此<code> ColorModel </code>兼容的数据布局(<code> SampleModel </code>
+     * )。
+     * 此方法仅适用于每像素16位或更少位的颜色模型。
+     * <p>
+     *  由于<code> IndexColorModel </code>可以被子类化,任何支持每个像素大于16位的子类必须覆盖此方法。
+     * 
+     * 
      * @param w the width to apply to the new <code>WritableRaster</code>
      * @param h the height to apply to the new <code>WritableRaster</code>
      * @return a <code>WritableRaster</code> object with the specified
@@ -1334,6 +1585,11 @@ public class IndexColorModel extends ColorModel {
       * Returns <code>true</code> if <code>raster</code> is compatible
       * with this <code>ColorModel</code> or <code>false</code> if it
       * is not compatible with this <code>ColorModel</code>.
+      * <p>
+      *  如果<code> raster </code>与此<code> ColorModel </code>或<code> false </code>兼容,则返回<code> true </code> </code>
+      * 。
+      * 
+      * 
       * @param raster the {@link Raster} object to test for compatibility
       * @return <code>true</code> if <code>raster</code> is compatible
       * with this <code>ColorModel</code>; <code>false</code> otherwise.
@@ -1350,6 +1606,10 @@ public class IndexColorModel extends ColorModel {
      * Creates a <code>SampleModel</code> with the specified
      * width and height that has a data layout compatible with
      * this <code>ColorModel</code>.
+     * <p>
+     *  创建一个具有指定宽度和高度的<code> SampleModel </code>,其数据布局与此<code> ColorModel </code>兼容。
+     * 
+     * 
      * @param w the width to apply to the new <code>SampleModel</code>
      * @param h the height to apply to the new <code>SampleModel</code>
      * @return a <code>SampleModel</code> object with the specified
@@ -1375,6 +1635,11 @@ public class IndexColorModel extends ColorModel {
      * Checks if the specified <code>SampleModel</code> is compatible
      * with this <code>ColorModel</code>.  If <code>sm</code> is
      * <code>null</code>, this method returns <code>false</code>.
+     * <p>
+     *  检查指定的<code> SampleModel </code>是否与此<code> ColorModel </code>兼容。
+     * 如果<code> sm </code>是<code> null </code>,则此方法返回<code> false </code>。
+     * 
+     * 
      * @param sm the specified <code>SampleModel</code>,
      *           or <code>null</code>
      * @return <code>true</code> if the specified <code>SampleModel</code>
@@ -1413,6 +1678,14 @@ public class IndexColorModel extends ColorModel {
      * If <code>forceARGB</code> is <code>true</code>, a TYPE_INT_ARGB image is
      * returned regardless of whether or not this <code>ColorModel</code>
      * has an alpha component array or a transparent pixel.
+     * <p>
+     * 返回一个具有<code> Raster </code>的像素数据的TYPE_INT_ARGB或TYPE_INT_RGB的新<代码> BufferedImage </code>,通过使用颜色/ alpha
+     * 扩展源代码<code> Raster </code>这个<code> ColorModel </code>的组件数组。
+     * 只有上述<a href="#index_values">类别描述</a>中指定的源代码<code> Raster </code>中每个索引值的较低<em> n <用于计算返回的图像中的颜色/ alpha值。
+     * 如果<code> forceARGB </code>是<code> true </code>,则返回TYPE_INT_ARGB图像,而不管此<color> ColorModel </code>是否具有a
+     * lpha组件数组或透明像素。
+     * 
+     * 
      * @param raster the specified <code>Raster</code>
      * @param forceARGB if <code>true</code>, the returned
      *     <code>BufferedImage</code> is TYPE_INT_ARGB; otherwise it is
@@ -1469,6 +1742,10 @@ public class IndexColorModel extends ColorModel {
 
     /**
      * Returns whether or not the pixel is valid.
+     * <p>
+     *  返回像素是否有效。
+     * 
+     * 
      * @param pixel the specified pixel value
      * @return <code>true</code> if <code>pixel</code>
      * is valid; <code>false</code> otherwise.
@@ -1481,6 +1758,10 @@ public class IndexColorModel extends ColorModel {
 
     /**
      * Returns whether or not all of the pixels are valid.
+     * <p>
+     *  返回所有像素是否有效。
+     * 
+     * 
      * @return <code>true</code> if all pixels are valid;
      * <code>false</code> otherwise.
      * @since 1.3
@@ -1496,6 +1777,12 @@ public class IndexColorModel extends ColorModel {
      * if the <code>BigInteger</code> value at that index is not set.
      * The only valid ranges to query in the <code>BigInteger</code> are
      * between 0 and the map size.
+     * <p>
+     *  返回一个<code> BigInteger </code>,表示色彩映射中的有效/无效像素。
+     * 如果设置了该索引处的<code> BigInteger </code>值,则该位有效,如果未设置该索引处的<code> BigInteger </code>值,则该位无效。
+     * 在<code> BigInteger </code>中查询的唯一有效范围是0和地图大小之间。
+     * 
+     * 
      * @return a <code>BigInteger</code> indicating the valid/invalid pixels.
      * @since 1.3
      */
@@ -1512,6 +1799,9 @@ public class IndexColorModel extends ColorModel {
      * Disposes of system resources associated with this
      * <code>ColorModel</code> once this <code>ColorModel</code> is no
      * longer referenced.
+     * <p>
+     *  一旦这个<code> ColorModel </code>不再被引用,就会处理与此<code> ColorModel </code>相关联的系统资源。
+     * 
      */
     public void finalize() {
     }
@@ -1519,6 +1809,9 @@ public class IndexColorModel extends ColorModel {
     /**
      * Returns the <code>String</code> representation of the contents of
      * this <code>ColorModel</code>object.
+     * <p>
+     *  返回此<code> ColorModel </code>对象的内容的<code> String </code>表示形式。
+     * 
      * @return a <code>String</code> representing the contents of this
      * <code>ColorModel</code> object.
      */

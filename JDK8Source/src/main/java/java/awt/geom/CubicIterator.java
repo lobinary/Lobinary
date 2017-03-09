@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import java.util.*;
  * A utility class to iterate over the path segments of a cubic curve
  * segment through the PathIterator interface.
  *
+ * <p>
+ *  一个实用程序类,通过PathIterator接口对三次曲线段的路径段进行迭代。
+ * 
+ * 
  * @author      Jim Graham
  */
 class CubicIterator implements PathIterator {
@@ -46,6 +51,10 @@ class CubicIterator implements PathIterator {
     /**
      * Return the winding rule for determining the insideness of the
      * path.
+     * <p>
+     *  返回绕组规则以确定路径的隐藏性。
+     * 
+     * 
      * @see #WIND_EVEN_ODD
      * @see #WIND_NON_ZERO
      */
@@ -55,6 +64,10 @@ class CubicIterator implements PathIterator {
 
     /**
      * Tests if there are more points to read.
+     * <p>
+     *  测试是否有更多的要读取的点。
+     * 
+     * 
      * @return true if there are more points to read
      */
     public boolean isDone() {
@@ -65,6 +78,9 @@ class CubicIterator implements PathIterator {
      * Moves the iterator to the next segment of the path forwards
      * along the primary direction of traversal as long as there are
      * more points in that direction.
+     * <p>
+     *  只要在该方向上有更多的点,将迭代器沿着遍历的主要方向向前移动到路径的下一段。
+     * 
      */
     public void next() {
         index++;
@@ -82,6 +98,12 @@ class CubicIterator implements PathIterator {
      * SEG_QUADTO will return two points,
      * SEG_CUBICTO will return 3 points
      * and SEG_CLOSE will not return any points.
+     * <p>
+     *  返回迭代中当前路径段的坐标和类型。返回值是路径段类型：SEG_MOVETO,SEG_LINETO,SEG_QUADTO,SEG_CUBICTO或SEG_CLOSE。
+     * 必须传入长度为6的float数组,并可用于存储点的坐标。每个点都存储为一对float x,y坐标。
+     *  SEG_MOVETO和SEG_LINETO类型将返回一个点,SEG_QUADTO将返回两个点,SEG_CUBICTO将返回3个点,SEG_CLOSE将不返回任何点。
+     * 
+     * 
      * @see #SEG_MOVETO
      * @see #SEG_LINETO
      * @see #SEG_QUADTO
@@ -124,6 +146,10 @@ class CubicIterator implements PathIterator {
      * SEG_QUADTO will return two points,
      * SEG_CUBICTO will return 3 points
      * and SEG_CLOSE will not return any points.
+     * <p>
+     * 返回迭代中当前路径段的坐标和类型。返回值是路径段类型：SEG_MOVETO,SEG_LINETO,SEG_QUADTO,SEG_CUBICTO或SEG_CLOSE。
+     * 必须传入长度为6的双数组,并可用于存储点的坐标。每个点被存储为一对双x,y坐标。
+     * 
      * @see #SEG_MOVETO
      * @see #SEG_LINETO
      * @see #SEG_QUADTO

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,12 +37,20 @@ import java.util.Arrays;
  * For more information about the operation of the standard JPEG plug-in,
  * see the <A HREF="../../metadata/doc-files/jpeg_metadata.html">JPEG
  * metadata format specification and usage notes</A>
+ * <p>
+ *  封装单个JPEG霍夫曼表的类。为从JPEG规范的附件K获取的"标准"表提供字段。这些是用作默认值的表。
+ * <p>
+ *  有关标准JPEG插件操作的详情,请参阅<A HREF="../../metadata/doc-files/jpeg_metadata.html"> JPEG元数据格式规范和使用说明</A>
+ * 
  */
 
 public class JPEGHuffmanTable {
 
     /* The data for the publically defined tables, as specified in ITU T.81
      * JPEG specification section K3.3 and used in the IJG library.
+     * <p>
+     *  JPEG规范部分K3.3,并在IJG库中使用。
+     * 
      */
     private static final short[] StdDCLuminanceLengths = {
         0x00, 0x01, 0x05, 0x01, 0x01, 0x01, 0x01, 0x01,
@@ -123,6 +132,9 @@ public class JPEGHuffmanTable {
 
     /**
      * The standard DC luminance Huffman table.
+     * <p>
+     *  标准DC亮度Huffman表。
+     * 
      */
     public static final JPEGHuffmanTable
         StdDCLuminance = new JPEGHuffmanTable(StdDCLuminanceLengths,
@@ -130,6 +142,9 @@ public class JPEGHuffmanTable {
 
     /**
      * The standard DC chrominance Huffman table.
+     * <p>
+     *  标准DC色度霍夫曼表。
+     * 
      */
     public static final JPEGHuffmanTable
         StdDCChrominance = new JPEGHuffmanTable(StdDCChrominanceLengths,
@@ -137,6 +152,9 @@ public class JPEGHuffmanTable {
 
     /**
      * The standard AC luminance Huffman table.
+     * <p>
+     *  标准交流亮度霍夫曼表。
+     * 
      */
     public static final JPEGHuffmanTable
         StdACLuminance = new JPEGHuffmanTable(StdACLuminanceLengths,
@@ -144,6 +162,9 @@ public class JPEGHuffmanTable {
 
     /**
      * The standard AC chrominance Huffman table.
+     * <p>
+     *  标准AC色度霍夫曼表。
+     * 
      */
     public static final JPEGHuffmanTable
         StdACChrominance = new JPEGHuffmanTable(StdACChrominanceLengths,
@@ -157,6 +178,10 @@ public class JPEGHuffmanTable {
      * The arrays must describe a possible Huffman table.
      * For example, 3 codes cannot be expressed with a single bit.
      *
+     * <p>
+     *  创建一个霍夫曼表并初始化它。复制输入数组。数组必须描述一个可能的霍夫曼表。例如,3个代码不能用单个位表示。
+     * 
+     * 
      * @param lengths an array of {@code short}s where <code>lengths[k]</code>
      * is equal to the number of values with corresponding codes of
      * length <code>k + 1</code> bits.
@@ -215,6 +240,10 @@ public class JPEGHuffmanTable {
      * Returns an array of <code>short</code>s containing the number of values
      * for each length in the Huffman table. The returned array is a copy.
      *
+     * <p>
+     *  返回一个<code> short </code>数组,其中包含Huffman表中每个长度的值数。返回的数组是一个副本。
+     * 
+     * 
      * @return a <code>short</code> array where <code>array[k-1]</code>
      * is equal to the number of values in the table of length <code>k</code>.
      * @see #getValues
@@ -229,6 +258,10 @@ public class JPEGHuffmanTable {
      * The interpretation of the array is dependent on the values returned
      * from <code>getLengths</code>. The returned array is a copy.
      *
+     * <p>
+     *  返回包含通过增加其对应代码长度排列的值的<code> short </code> s数组。数组的解释取决于从<code> getLengths </code>返回的值。返回的数组是一个副本。
+     * 
+     * 
      * @return a <code>short</code> array of values.
      * @see #getLengths
      */
@@ -238,6 +271,9 @@ public class JPEGHuffmanTable {
 
     /**
      * Returns a {@code String} representing this Huffman table.
+     * <p>
+     *  返回表示此霍夫曼表的{@code String}。
+     * 
      * @return a {@code String} representing this Huffman table.
      */
     public String toString() {

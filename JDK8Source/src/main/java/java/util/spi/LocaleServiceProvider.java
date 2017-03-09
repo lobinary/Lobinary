@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -137,6 +138,47 @@ import java.util.Locale;
  * Environment implementation. Specifying "JRE,SPI" is identical to the default
  * behavior, which is compatibile with the prior releases.
  *
+ * <p>
+ * <p>
+ *  这是所有区域性敏感服务提供程序接口(SPI)的超类。
+ * <p>
+ *  区域性敏感服务提供程序接口是与<code> java.text </code>和<code> java.util </code>包中区域性敏感类相对应的接口。
+ * 这些接口支持构建区域性敏感对象和检索这些包的本地化名称。
+ * 用于在<code> java.text </code>和<code> java.util </code>包中进行名称检索的区域性敏感的工厂方法和方法使用提供程序接口的实现来支持超出所支持的区域集由Jav
+ * a运行时环境本身。
+ * 这些接口支持构建区域性敏感对象和检索这些包的本地化名称。
+ * 
+ * <h3>区域敏感服务提供程序实施的包装</h3>这些区域敏感服务的实现使用<a href ="../../../../ technotes / guides / extensions / index.html ">
+ *  Java扩展机制</a>作为已安装的扩展。
+ * 提供程序使用资源目录META-INF / services中的提供程序配置文件来标识自身,使用完全限定的提供程序接口类名作为文件名。该文件应包含完全合格的具体提供程序类名称列表,每行一个。
+ * 一行通过换行符('\ n'),回车符('\ r')或回车符后紧跟换行符中的任何一个终止。忽略每个名称周围的空格和制表符以及空行。
+ * 注释字符为'#'('\ u0023');在每行上,忽略第一个注释字符后面的所有字符。该文件必须以UTF-8编码。
+ * <p>
+ *  如果特定的具体提供程序类在多个配置文件中命名,或者在同一配置文件中多次命名,则将忽略重复项。指定特定提供者的配置文件不需要位于与提供者本身相同的jar文件或其他分发单元中。
+ * 提供程序必须可以从最初查询以查找配置文件的同一类加载器访问;这不一定是加载文件的类加载器。
+ * <p>
+ * 例如,{@link java.text.spi.DateFormatProvider DateFormatProvider}类的实现应采用包含文件的jar文件的形式：
+ * <pre>
+ *  META-INF / services / java.text.spi.DateFormatProvider
+ * </pre>
+ *  而文件<code> java.text.spi.DateFormatProvider </code>应该有一行如：
+ * <pre>
+ *  <code> com.foo.DateFormatProviderImpl </code>
+ * </pre>
+ *  这是实现<code> DateFormatProvider </code>的类的完全限定类名。 <h4>调用区域敏感服务</h4>
+ * <p>
+ * 用于在<code> java.text </code>和<code> java.util </code>包中进行名称检索的区域敏感的工厂方法和方法在需要时调用服务提供程序方法以支持所请求的语言环境。
+ * 方法首先检查Java运行时环境本身是否支持请求的语言环境,并使用其支持(如果可用)。
+ * 否则,他们调用已安装的提供程序的{@link #isSupportedLocale(Locale)isSupportedLocale}方法,以找到支持请求的语言环境的适当接口。
+ * 如果找到这样的提供者,则调用其它方法以获得所请求的对象或名称。
+ * 在检查是否支持区域设置时,默认情况下会忽略<a href="../Locale.html#def_extensions">区域设置的扩展程序</a>。
+ *  (如果还要检查语言环境的扩展,则必须覆盖{@code isSupportedLocale}方法。
+ * )如果Java运行时环境本身和安装的提供程序都不支持请求的语言环境,则方法将遍历候选语言环境列表,并重复可用性检查每个,直到找到匹配。
+ * 用于创建候选语言环境列表的算法与默认情况下由<code> ResourceBundle </code>使用的算法相同(有关详细信息,请参阅{@link java.util.ResourceBundle.Control#getCandidateLocales getCandidateLocales}
+ * )。
+ * )如果Java运行时环境本身和安装的提供程序都不支持请求的语言环境,则方法将遍历候选语言环境列表,并重复可用性检查每个,直到找到匹配。
+ * 即使从候选列表中解析出某个区域设置,也会使用包含{@code Locale}扩展名的原始请求的区域设置调用返回请求的对象或名称的方法。
+ * 
  * @since        1.6
  */
 public abstract class LocaleServiceProvider {
@@ -144,6 +186,27 @@ public abstract class LocaleServiceProvider {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  Java运行时环境必须支持所有区域性敏感服务的根区域设置,以保证此过程终止。
+     * <p>
+     * 允许名称提供程序(但不是其他对象的提供程序)对某些名称请求返回null,即使对于他们声明支持的语言环境,将它们包含在<code> getAvailableLocales </code>的返回值中也是如此
+     * 。
+     * 类似地,Java运行时环境本身可能不具有其支持的所有语言环境的所有名称。这是因为请求名称的对象集可能很大,并且随时间变化,因此完全覆盖它们并不总是可行的。
+     * 如果Java运行时环境或提供程序返回null而不是名称,则查找将按照上述方法进行,就好像不支持语言环境一样。
+     * <p>
+     *  从JDK8开始,可以使用"java.locale.providers"系统属性配置区域设置敏感服务的搜索顺序。此系统属性声明用户查找区域设置敏感服务的首选顺序,用逗号分隔。
+     * 它只在Java运行时启动时读取,因此稍后调用System.setProperty()将不会影响顺序。
+     * <p>
+     *  例如,如果在属性中指定以下内容：
+     * <pre>
+     *  java.locale.providers = SPI,JRE
+     * </pre>
+     *  其中"SPI"表示在已安装的SPI提供程序中实现的区域性敏感服务,"JRE"表示Java运行时环境中的区域性敏感服务,首先查找SPI提供程序中的区域敏感服务。
+     * <p>
+     * 还有两个其他可能的区域性敏感服务提供商,即"CLDR",它是基于Unicode Consortium的<a href="http://cldr.unicode.org/"> CLDR项目</a>的提供商
+     * ,以及"HOST "这是反映用户在底层操作系统中的自定义设置的提供程序。
+     * 这两个提供程序可能不可用,这取决于Java Runtime Environment实现。指定"JRE,SPI"与默认行为相同,这与早期版本兼容。
+     * 
      */
     protected LocaleServiceProvider() {
     }
@@ -157,6 +220,8 @@ public abstract class LocaleServiceProvider {
      * <p>The array returned by this method should not include two or more
      * {@code Locale} objects only differing in their extensions.
      *
+     * <p>
+     * 
      * @return An array of all locales for which this locale service provider
      * can provide localized objects or names.
      */
@@ -180,6 +245,10 @@ public abstract class LocaleServiceProvider {
      * implementations may not be affected by any particular numbering systems,
      * and in that case, extensions for numbering systems should be ignored.
      *
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
+     * 
      * @param locale a {@code Locale} to be tested
      * @return {@code true} if the given {@code locale} is supported by this
      *         provider; {@code false} otherwise.

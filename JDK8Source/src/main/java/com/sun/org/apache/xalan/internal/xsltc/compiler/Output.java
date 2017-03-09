@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Output.java,v 1.2.4.1 2005/09/12 10:53:00 pvedula Exp $
+ * <p>
+ *  $ Id：Output.java,v 1.2.4.1 2005/09/12 10:53:00 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -42,6 +55,8 @@ import com.sun.org.apache.xml.internal.serializer.Encodings;
 import com.sun.org.apache.xml.internal.utils.XML11Char;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -74,6 +89,9 @@ final class Output extends TopLevelElement {
 
     /**
      * Displays the contents of this element (for debugging)
+     * <p>
+     *  显示此元素的内容(用于调试)
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -84,6 +102,9 @@ final class Output extends TopLevelElement {
      * Disables this <xsl:output> element in case where there are some other
      * <xsl:output> element (from a different imported/included stylesheet)
      * with higher precedence.
+     * <p>
+     *  如果存在具有更高优先级的其他<xsl：output>元素(来自不同的导入/包含样式表),则禁用此<xsl：output>元素。
+     * 
      */
     public void disable() {
         _disabled = true;
@@ -140,6 +161,9 @@ final class Output extends TopLevelElement {
 
     /**
      * Scans the attribute list for the xsl:output instruction
+     * <p>
+     *  扫描xsl：output指令的属性列表
+     * 
      */
     public void parseContents(Parser parser) {
         final Properties outputProperties = new Properties();
@@ -316,6 +340,8 @@ final class Output extends TopLevelElement {
     /**
      * Compile code that passes the information in this <xsl:output> element
      * to the appropriate fields in the translet
+     * <p>
+     *  编译将此<xsl：output>元素中的信息传递到translet中相应字段的代码
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
 

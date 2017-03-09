@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SimpleResultTreeImpl.java,v 1.2.4.1 2005/09/06 10:09:25 pvedula Exp $
+ * <p>
+ *  $ Id：SimpleResultTreeImpl.java,v 1.2.4.1 2005/09/06 10:09:25 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.xsltc.dom;
 
@@ -60,6 +73,16 @@ import javax.xml.transform.SourceLocator;
  * This class implements DOM and SerializationHandler. It also implements the DTM interface
  * for support in MultiDOM. The nested iterators (SimpleIterator and SingletonIterator) are
  * used to support the nodeset() extension function.
+ * <p>
+ *  此类表示用于简单结果树片段(RTF)的轻量级DOM模型。简单的RTF是只有一个Text节点的RTF。 Text节点可以由Text,xsl：value-of和xsl：number指令的组合生成。
+ * 它也可以通过一个控制结构(xsl：if或xsl：choose)生成,其主体是纯文本。
+ * <p>
+ *  SimpleResultTreeImpl只有两个节点,即ROOT节点及其Text子节点。所有DOM接口都被覆盖了这一点。例如,getStringValue()接口返回Text节点的值。
+ * 此类从characters()接口接收字符数据。
+ * <p>
+ * 这个类实现了DOM和SerializationHandler。它还实现了DTM接口,以支持MultiDOM。
+ * 嵌套迭代器(SimpleIterator和SingletonIterator)用于支持nodeset()扩展函数。
+ * 
  */
 public class SimpleResultTreeImpl extends EmptySerializer implements DOM, DTM
 {
@@ -71,6 +94,11 @@ public class SimpleResultTreeImpl extends EmptySerializer implements DOM, DTM
      *
      * This iterator only handles two nodes (RTF_ROOT and RTF_TEXT). If the type is set,
      * it will also match the node type with the given type.
+     * <p>
+     *  SimpleIterator被设计为支持nodeset()扩展函数。它有一个遍历方向参数。 DOWN方向用于子轴和后代轴,而UP方向用于父轴和后代轴。
+     * 
+     *  此迭代器只处理两个节点(RTF_ROOT和RTF_TEXT)。如果设置了类型,它也将匹配给定类型的节点类型。
+     * 
      */
     public final class SimpleIterator extends DTMAxisIteratorBase
     {
@@ -168,6 +196,9 @@ public class SimpleResultTreeImpl extends EmptySerializer implements DOM, DTM
 
     /**
      * The SingletonIterator is used for the self axis.
+     * <p>
+     *  SingletonIterator用于自轴。
+     * 
      */
     public final class SingletonIterator extends DTMAxisIteratorBase
     {
@@ -476,6 +507,11 @@ public class SimpleResultTreeImpl extends EmptySerializer implements DOM, DTM
      *
      * The escape setting should be taken care of when outputting to
      * a handler.
+     * <p>
+     *  将节点的字符内容分配给输出处理程序。
+     * 
+     *  在输出到处理程序时,应该注意转义设置。
+     * 
      */
     public void characters(final int node, SerializationHandler handler)
         throws TransletException
@@ -569,6 +605,9 @@ public class SimpleResultTreeImpl extends EmptySerializer implements DOM, DTM
 
     /**
      * Return the node identity from a node handle.
+     * <p>
+     *  从节点句柄返回节点标识。
+     * 
      */
     public int getNodeIdent(final int nodehandle)
     {
@@ -577,6 +616,9 @@ public class SimpleResultTreeImpl extends EmptySerializer implements DOM, DTM
 
     /**
      * Return the node handle from a node identity.
+     * <p>
+     *  从节点标识返回节点句柄。
+     * 
      */
     public int getNodeHandle(final int nodeId)
     {
@@ -619,6 +661,9 @@ public class SimpleResultTreeImpl extends EmptySerializer implements DOM, DTM
      * We only need to override the endDocument, characters, and
      * setEscaping interfaces. A simple RTF does not have element
      * nodes. We do not need to touch startElement and endElement.
+     * <p>
+     *  我们只需要重写endDocument,characters和setEscaping接口。一个简单的RTF没有元素节点。我们不需要触摸startElement和endElement。
+     * 
      */
 
     public void startDocument() throws SAXException
@@ -707,6 +752,9 @@ public class SimpleResultTreeImpl extends EmptySerializer implements DOM, DTM
      *
      * The following interfaces are just placeholders. The implementation
      * does not have an impact because they will not be used.
+     * <p>
+     *  在此类中不使用DTM接口。实现DTM接口是MultiDOM的要求。如果我们有一个更好的方式来处理多个文档,我们可以摆脱DTM依赖。
+     * 
      */
 
     public void setFeature(String featureId, boolean state)

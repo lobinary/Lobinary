@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package javax.management;
 /**
  * This class represents a boolean value. A BooleanValueExp may be
  * used anywhere a ValueExp is required.
+ * <p>
+ *  这个类表示一个布尔值。 BooleanValueExp可以在需要ValueExp的任何地方使用。
+ * 
+ * 
  * @serial include
  *
  * @since 1.5
@@ -39,6 +44,8 @@ class BooleanValueExp extends QueryEval implements ValueExp {
     private static final long serialVersionUID = 7754922052666594581L;
 
     /**
+    /* <p>
+    /* 
      * @serial The boolean value
      */
     private boolean val = false;
@@ -62,6 +69,9 @@ class BooleanValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns the string representing the object.
+     * <p>
+     *  返回表示对象的字符串。
+     * 
      */
     public String toString()  {
         return String.valueOf(val);
@@ -70,6 +80,9 @@ class BooleanValueExp extends QueryEval implements ValueExp {
     /**
      * Applies the ValueExp on a MBean.
      *
+     * <p>
+     *  将ValueExp应用于MBean。
+     * 
      * @param name The name of the MBean on which the ValueExp will be applied.
      *
      * @return  The <CODE>ValueExp</CODE>.

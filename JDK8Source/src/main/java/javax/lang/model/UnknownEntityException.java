@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,12 @@ package javax.lang.model;
  * <p>A common superclass for those exceptions allows a single catch
  * block to have code handling them uniformly.
  *
+ * <p>
+ *  表示遇到未知类型实体的异常超类。如果语言演变和引入新的结构类型,就会出现这种情况。此异常的子类可能会被访问​​者抛出,以指示为该语言的先前版本创建了访问者。
+ * 
+ *  <p>这些异常的通用超类允许单个catch块使代码一致地处理它们。
+ * 
+ * 
  * @author Joseph D. Darcy
  * @see javax.lang.model.element.UnknownElementException
  * @see javax.lang.model.element.UnknownAnnotationValueException
@@ -49,6 +56,8 @@ public class UnknownEntityException extends RuntimeException {
      * Creates a new {@code UnknownEntityException} with the specified
      * detail message.
      *
+     * <p>
+     * 
      * @param message the detail message
      */
     protected UnknownEntityException(String message) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp;
@@ -40,6 +50,10 @@ import com.sun.org.apache.xerces.internal.util.SAXMessageFormatter;
  * <code>javax.xml.parsers.SAXParserFactory</code>. This is the platform
  * default implementation for the platform.
  *
+ * <p>
+ *  这是<code> javax.xml.parsers.SAXParserFactory </code>的实现特定类。这是平台的平台默认实现。
+ * 
+ * 
  * @author Rajiv Mordani
  * @author Edwin Goei
  *
@@ -65,12 +79,19 @@ public class SAXParserFactoryImpl extends SAXParserFactory {
 
     /**
      * State of the secure processing feature, initially <code>false</code>
+     * <p>
+     *  安全处理功能的状态,最初为<code> false </code>
+     * 
      */
     private boolean fSecureProcess = true;
 
     /**
      * Creates a new instance of <code>SAXParser</code> using the currently
      * configured factory parameters.
+     * <p>
+     *  使用当前配置的出厂参数创建<code> SAXParser </code>的新实例。
+     * 
+     * 
      * @return javax.xml.parsers.SAXParser
      */
     public SAXParser newSAXParser()
@@ -88,6 +109,9 @@ public class SAXParserFactoryImpl extends SAXParserFactory {
 
     /**
      * Common code for translating exceptions
+     * <p>
+     *  翻译异常的常用代码
+     * 
      */
     private SAXParserImpl newSAXParserImpl()
         throws ParserConfigurationException, SAXNotRecognizedException,
@@ -109,6 +133,9 @@ public class SAXParserFactoryImpl extends SAXParserFactory {
     /**
      * Sets the particular feature in the underlying implementation of
      * org.xml.sax.XMLReader.
+     * <p>
+     *  设置org.xml.sax.XMLReader的基础实现中的特定功能。
+     * 
      */
     public void setFeature(String name, boolean value)
         throws ParserConfigurationException, SAXNotRecognizedException,
@@ -146,6 +173,8 @@ public class SAXParserFactoryImpl extends SAXParserFactory {
     /**
      * returns the particular property requested for in the underlying
      * implementation of org.xml.sax.XMLReader.
+     * <p>
+     *  返回在org.xml.sax.XMLReader的基础实现中请求的特定属性。
      */
     public boolean getFeature(String name)
         throws ParserConfigurationException, SAXNotRecognizedException,

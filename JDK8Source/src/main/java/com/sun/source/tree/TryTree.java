@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,13 @@ import java.util.List;
  *
  * @jls section 14.20
  *
+ * <p>
+ *  一个'try'语句的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  尝试<em>阻止</em> <em>捕获</em>最后<em> finallyBlock </em>
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xerces.internal.dom.events;
 
@@ -32,6 +42,12 @@ import org.w3c.dom.events.EventTarget;
  *
  * @xerces.internal
  *
+ * <p>
+ *  EventImpl是基本的"通用"DOM Level 2事件对象的实现。它可以由更专门的事件集子类化。
+ * 注意在我们的实现中,事件是可重新分派的(dispatch在开始之前清除stopPropagation和preventDefault标志);我相信这是DOM的意图,但我没有看到这种效果的明确声明。
+ * 
+ *  @ xerces.internal
+ * 
  */
 public class EventImpl implements Event
 {
@@ -52,6 +68,11 @@ public class EventImpl implements Event
         may be reinvoked. At least one initialization is required; repeated
         initializations overwrite the event with new values of their
         parameters.
+    /* <p>
+    /*  初始化调用来设置大多数只读字段。其他在调度期间由事件子系统设置和复位。
+    /* <p>
+    /*  注意,init()和子类特定的initWhatever()调用可以被重新调用。至少需要一次初始化;重复初始化用其参数的新值覆盖事件。
+    /* 
     */
     public void initEvent(String eventTypeArg, boolean canBubbleArg,
                         boolean cancelableArg)
@@ -65,6 +86,9 @@ public class EventImpl implements Event
 
     /** @return true iff this Event is of a class and type which supports
         bubbling. In the generic case, this is True.
+    /* <p>
+    /*  冒泡。在通用情况下,这是True。
+    /* 
         */
     public boolean getBubbles()
     {
@@ -74,6 +98,9 @@ public class EventImpl implements Event
     /** @return true iff this Event is of a class and type which (a) has a
         Default Behavior in this DOM, and (b)allows cancellation (blocking)
         of that behavior. In the generic case, this is False.
+    /* <p>
+    /* 此DOM中的默认行为,以及(b)允许取消(阻止)该行为。在通用情况下,这是False。
+    /* 
         */
     public boolean getCancelable()
     {
@@ -82,6 +109,10 @@ public class EventImpl implements Event
 
     /** @return the Node (EventTarget) whose EventListeners are currently
         being processed. During capture and bubble phases, this may not be
+    /* <p>
+    /*  正在处理。在捕获和气泡阶段,这可能不是
+    /* 
+    /* 
         the target node. */
     public EventTarget getCurrentTarget()
     {
@@ -90,6 +121,10 @@ public class EventImpl implements Event
 
     /** @return the current processing phase for this event --
         CAPTURING_PHASE, AT_TARGET, BUBBLING_PHASE. (There may be
+    /* <p>
+    /*  CAPTURING_PHASE,AT_TARGET,BUBBLING_PHASE。 (可能有
+    /* 
+    /* 
         an internal DEFAULT_PHASE as well, but the users won't see it.) */
     public short getEventPhase()
     {
@@ -98,6 +133,9 @@ public class EventImpl implements Event
 
     /** @return the EventTarget (Node) to which the event was originally
         dispatched.
+    /* <p>
+    /*  调度。
+    /* 
         */
     public EventTarget getTarget()
     {
@@ -105,6 +143,7 @@ public class EventImpl implements Event
     }
 
     /** @return event name as a string
+    /* <p>
     */
     public String getType()
     {
@@ -118,6 +157,10 @@ public class EventImpl implements Event
     /** Causes exit from in-progress event dispatch before the next
         currentTarget is selected. Replaces the preventBubble() and
         preventCapture() methods which were present in early drafts;
+    /* <p>
+    /*  选择currentTarget。替换早期草案中存在的preventBubble()和preventCapture()方法;
+    /* 
+    /* 
         they may be reintroduced in future levels of the DOM. */
     public void stopPropagation()
     {
@@ -126,6 +169,8 @@ public class EventImpl implements Event
 
     /** Prevents any default processing built into the target node from
         occurring.
+    /* <p>
+    /*  发生。
       */
     public void preventDefault()
     {

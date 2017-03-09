@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ToHTMLSAXHandler.java,v 1.3 2005/09/28 13:49:07 pvedula Exp $
+ * <p>
+ *  $ Id：ToHTMLSAXHandler.java,v 1.3 2005/09/28 13:49:07 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xml.internal.serializer;
@@ -45,21 +58,38 @@ import org.xml.sax.ext.LexicalHandler;
  * This class is not a public API.
  *
  * @xsl.usage internal
+ * <p>
+ *  此类接受类似SAX的调用,然后发送真正的SAX调用到包装的SAX处理程序。有优化知道最终的输出是HTML。
+ * 
+ *  此类不是公共API。
+ * 
+ *  @ xsl.usage internal
+ * 
  */
 public final class ToHTMLSAXHandler extends ToSAXHandler
 {
         /**
          *  Handle document type declaration (for first element only)
+         * <p>
+         *  处理文档类型声明(仅适用于第一个元素)
+         * 
          */
         private boolean m_dtdHandled = false;
 
     /**
      * Keeps track of whether output escaping is currently enabled
+     * <p>
+     *  跟踪当前是否启用输出转义
+     * 
      */
     protected boolean m_escapeSetting = true;
 
     /**
      * Returns null.
+     * <p>
+     *  返回null。
+     * 
+     * 
      * @return null
      * @see Serializer#getOutputFormat()
      */
@@ -70,6 +100,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Reurns null
+     * <p>
+     *  Reurns null
+     * 
+     * 
      * @return null
      * @see Serializer#getOutputStream()
      */
@@ -80,6 +114,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Returns null
+     * <p>
+     *  返回null
+     * 
+     * 
      * @return null
      * @see Serializer#getWriter()
      */
@@ -91,6 +129,9 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * Does nothing.
      *
+     * <p>
+     *  什么也没做。
+     * 
      */
     public void indent(int n) throws SAXException
     {
@@ -98,6 +139,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see DOMSerializer#serialize(Node)
      */
     public void serialize(Node node) throws IOException
@@ -109,6 +154,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * Turns special character escaping on/off.
      *
      *
+     * <p>
+     *  打开/关闭特殊字符转义。
+     * 
+     * 
      * @param escape true if escaping is to be set on.
      *
      * @see SerializationHandler#setEscaping(boolean)
@@ -129,6 +178,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing
+     * <p>
+     *  什么也没做
+     * 
+     * 
      * @param indent the number of spaces to indent per indentation level
      * (ignored)
      * @see SerializationHandler#setIndent(boolean)
@@ -139,6 +192,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @param format this parameter is not used
      * @see Serializer#setOutputFormat(Properties)
      */
@@ -148,6 +205,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @param output this parameter is ignored
      * @see Serializer#setOutputStream(OutputStream)
      */
@@ -158,6 +219,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @param writer this parameter is ignored.
      * @see Serializer#setWriter(Writer)
      */
@@ -166,11 +231,17 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.DeclHandler#attributeDecl(String, String, String, String, String)
      */
     /**
      * Does nothing.
      *
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @param eName this parameter is ignored
      * @param aName this parameter is ignored
      * @param type this parameter is ignored
@@ -191,6 +262,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.ext.DeclHandler#elementDecl(String, String)
      */
     public void elementDecl(String name, String model) throws SAXException
@@ -199,6 +274,8 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.DeclHandler#externalEntityDecl(String, String, String)
      */
     public void externalEntityDecl(String arg0, String arg1, String arg2)
@@ -209,6 +286,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * Does nothing.
      *
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.DTDHandler#unparsedEntityDecl
      */
     public void internalEntityDecl(String name, String value)
@@ -228,6 +309,14 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * still be attached to the name.</p>
      *
      *
+     * <p>
+     *  接收元素结束的通知。
+     * 
+     * <p> SAX解析器将在XML文档中每个元素的末尾调用此方法;每个endElement()事件都会有一个相应的startElement()事件(即使元素为空)。</p>
+     * 
+     *  <p>如果元素名称有名称空间前缀,则前缀仍会附加到名称。</p>
+     * 
+     * 
      * @param uri The Namespace URI, or the empty string if the
      *        element has no Namespace URI or if Namespace
      *        processing is not being performed.
@@ -253,6 +342,9 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
      */
     public void endPrefixMapping(String prefix) throws SAXException
     {
@@ -260,6 +352,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
      */
     public void ignorableWhitespace(char[] ch, int start, int length)
@@ -278,6 +374,14 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * section 2.8) or a text declaration (XML 1.0, section 4.3.1)
      * using this method.</p>
      *
+     * <p>
+     *  接收处理指令的通知。
+     * 
+     *  <p>对于找到的每个处理指令,解析器将调用此方法一次：请注意,处理指令可能发生在主文档元素之前或之后。</p>
+     * 
+     *  <p> SAX解析器不应使用此方法报告XML声明(XML 1.0,第2.8节)或文本声明(XML 1.0,第4.3.1节)。</p>
+     * 
+     * 
      * @param target The processing instruction target.
      * @param data The processing instruction data, or null if
      *        none was supplied.
@@ -301,6 +405,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#setDocumentLocator(Locator)
      */
     public void setDocumentLocator(Locator arg0)
@@ -310,6 +418,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#skippedEntity(String)
      */
     public void skippedEntity(String arg0) throws SAXException
@@ -322,6 +434,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * or after this call, that is associated with this element.
      *
      *
+     * <p>
+     *  接收元素开头的通知,虽然这是一个SAX方法,但在此调用之前或之后可能会发生附加的命名空间或属性信息,这与此元素相关联。
+     * 
+     * 
      * @param namespaceURI The Namespace URI, or the empty string if the
      *        element has no Namespace URI or if Namespace
      *        processing is not being performed.
@@ -356,6 +472,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * Receive notification of a comment anywhere in the document. This callback
      * will be used for comments inside or outside the document element.
+     * <p>
+     *  在文档中的任何位置接收评论的通知。此回调将用于文档元素内部或外部的注释。
+     * 
+     * 
      * @param ch An array holding the characters in the comment.
      * @param start The starting position in the array.
      * @param length The number of characters to use from the array.
@@ -377,6 +497,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#endCDATA()
      */
     public void endCDATA() throws SAXException
@@ -386,6 +510,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#endDTD()
      */
     public void endDTD() throws SAXException
@@ -394,6 +522,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#startCDATA()
      */
     public void startCDATA() throws SAXException
@@ -402,6 +534,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Does nothing.
+     * <p>
+     *  什么也没做。
+     * 
+     * 
      * @see org.xml.sax.ext.LexicalHandler#startEntity(String)
      */
     public void startEntity(String arg0) throws SAXException
@@ -417,6 +553,12 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * (because of an unrecoverable error) or reached the end of
      * input.</p>
      *
+     * <p>
+     *  接收文档结束的通知。
+     * 
+     *  <p> SAX解析器将仅调用此方法一次,它将是解析期间调用的最后一个方法。解析器不应该调用此方法,直到它放弃了解析(因为一个不可恢复的错误)或到达输入的结束。</p>
+     * 
+     * 
      * @throws org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.
      *
@@ -438,6 +580,9 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * This method is called when all the data needed for a call to the
      * SAX handler's startElement() method has been gathered.
+     * <p>
+     * 当调用SAX处理程序的startElement()方法所需的所有数据都已收集时,调用此方法。
+     * 
      */
     protected void closeStartTag() throws SAXException
     {
@@ -456,6 +601,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Do nothing.
+     * <p>
+     *  没做什么。
+     * 
+     * 
      * @see SerializationHandler#close()
      */
     public void close()
@@ -466,6 +615,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * Receive notification of character data.
      *
+     * <p>
+     *  接收字符数据的通知。
+     * 
+     * 
      * @param chars The string of characters to process.
      *
      * @throws org.xml.sax.SAXException
@@ -486,6 +639,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * A constructor
+     * <p>
+     *  构造函数
+     * 
+     * 
      * @param handler the wrapped SAX content handler
      * @param encoding the encoding of the output HTML document
      */
@@ -495,6 +652,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     }
     /**
      * A constructor.
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param handler the wrapped SAX content handler
      * @param lex the wrapped lexical handler
      * @param encoding the encoding of the output HTML document
@@ -510,6 +671,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * An element starts, but attributes are not fully known yet.
      *
+     * <p>
+     *  元素开始,但属性尚未完全知晓。
+     * 
+     * 
      * @param elementNamespaceURI the URI of the namespace of the element
      * (optional)
      * @param elementLocalName the element name, but without prefix
@@ -547,6 +712,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * An element starts, but attributes are not fully known yet.
      *
+     * <p>
+     *  元素开始,但属性尚未完全知晓。
+     * 
+     * 
      * @param elementName the element name, with prefix, if any
      *
      * @see ExtendedContentHandler#startElement(String)
@@ -558,6 +727,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
 
     /**
      * Receive notification of the end of an element.
+     * <p>
+     *  接收元素结束的通知。
+     * 
+     * 
      * @param elementName The element type name
      * @throws org.xml.sax.SAXException Any SAX exception, possibly
      *     wrapping another exception.
@@ -591,6 +764,17 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * ignorableWhitespace() method rather than this one (validating
      * parsers must do so).</p>
      *
+     * <p>
+     *  接收字符数据的通知。
+     * 
+     *  <p>解析器将调用此方法来报告每个字符数据块。
+     *  SAX解析器可以返回单个块中的所有连续字符数据,或者它们可以将其拆分成几个块;然而,任何单个事件中的所有字符必须来自同一外部实体,以便定位器提供有用的信息。</p>。
+     * 
+     *  <p>应用程序不得尝试从指定范围之外的数组读取。</p>
+     * 
+     *  <p>请注意,一些解析器将使用ignorableWhitespace()方法而不是这一个(验证解析器必须这样做)报告空格。</p>
+     * 
+     * 
      * @param ch The characters from the XML document.
      * @param off The start position in the array.
      * @param len The number of characters to read from the array.
@@ -617,6 +801,9 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * This method flushes any pending events, which can be startDocument()
      * closing the opening tag of an element, or closing an open CDATA section.
+     * <p>
+     *  此方法刷新任何挂起的事件,可以是startDocument()关闭元素的开始标签,或关闭打开的CDATA节。
+     * 
      */
     public void flushPending() throws SAXException
     {
@@ -637,6 +824,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * that is soon to follow. Need to close any open start tag to make
      * sure than any name space attributes due to this event are associated wih
      * the up comming element, not the current one.
+     * <p>
+     *  处理前缀/ uri映射,它与即将跟随的startElement()相关联。需要关闭任何打开的开始标记,以确保比任何名称空间属性由于此事件与上升的通信元素相关联,而不是当前的。
+     * 
+     * 
      * @see ExtendedContentHandler#startPrefixMapping
      *
      * @param prefix The Namespace prefix being declared.
@@ -670,6 +861,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * This call will close any open tags so that the prefix mapping
      * will not apply to the current element, but the up comming child.
      *
+     * <p>
+     * 在另一个元素即将开始之前开始前缀URI命名空间映射的范围。此调用将关闭任何打开的标签,以便前缀映射不会应用于当前元素,但是上一个孩子。
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#startPrefixMapping
      *
      * @param prefix The Namespace prefix being declared.
@@ -691,6 +886,11 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * startElement() and before and endElement().
      * startPrefixMapping(prefix,uri) would be used before the
      * startElement() call.
+     * <p>
+     *  在使用startElement()和before和endElement()启动元素之后指示前缀/ uri命名空间映射时,将使用此方法。
+     *  startPrefixMapping(prefix,uri)将在startElement()调用之前使用。
+     * 
+     * 
      * @param prefix the prefix associated with the given URI.
      * @param uri the URI of the namespace
      *
@@ -722,6 +922,10 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
      * re-use, so that you don't need to create a new serializer
      * (mostly for performance reasons).
      *
+     * <p>
+     *  尝试重置超类并重置此类以供重用,以便您不需要创建新的序列化程序(主要是出于性能原因)。
+     * 
+     * 
      * @return true if the class was successfuly reset.
      * @see Serializer#reset()
      */
@@ -739,6 +943,8 @@ public final class ToHTMLSAXHandler extends ToSAXHandler
     /**
      * Reset all of the fields owned by ToHTMLSAXHandler class
      *
+     * <p>
+     *  重置ToHTMLSAXHandler类拥有的所有字段
      */
     private void resetToHTMLSAXHandler()
     {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,12 +43,19 @@ import javax.swing.UIManager;
  * implementation which treats text as styled text and
  * provides a minimal set of actions for editing styled text.
  *
+ * <p>
+ *  这是文本组件需要的一组事物,它是一些<em>类型</em>文本文档的合理功能的编辑器。此实现提供了一种默认实现,将文本视为样式文本,并提供了一组用于编辑样式文本的最小动作。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class StyledEditorKit extends DefaultEditorKit {
 
     /**
      * Creates a new EditorKit used for styled documents.
+     * <p>
+     *  创建用于样式文档的新EditorKit。
+     * 
      */
     public StyledEditorKit() {
         createInputAttributeUpdated();
@@ -63,6 +71,10 @@ public class StyledEditorKit extends DefaultEditorKit {
      * use the input attributes to carry out their
      * actions.
      *
+     * <p>
+     *  获取窗格的输入属性。当插入符移动并且没有选择时,输入属性将自动更改以反映当前插入符位置的字符属性。样式编辑操作使用输入属性来执行其操作。
+     * 
+     * 
      * @return the attribute set
      */
     public MutableAttributeSet getInputAttributes() {
@@ -73,6 +85,10 @@ public class StyledEditorKit extends DefaultEditorKit {
      * Fetches the element representing the current
      * run of character attributes for the caret.
      *
+     * <p>
+     *  获取表示插入符的字符属性的当前运行的元素。
+     * 
+     * 
      * @return the element
      */
     public Element getCharacterAttributeRun() {
@@ -87,6 +103,10 @@ public class StyledEditorKit extends DefaultEditorKit {
      * augmented by the collection of commands defined
      * locally for style operations.
      *
+     * <p>
+     *  获取编辑器的命令列表。这是由超类支持的命令列表,由本地为样式操作定义的命令集合扩充。
+     * 
+     * 
      * @return the command list
      */
     public Action[] getActions() {
@@ -97,6 +117,10 @@ public class StyledEditorKit extends DefaultEditorKit {
      * Creates an uninitialized text storage model
      * that is appropriate for this type of editor.
      *
+     * <p>
+     *  创建适合此类型编辑器的未初始化文本存储模型。
+     * 
+     * 
      * @return the model
      */
     public Document createDefaultDocument() {
@@ -107,6 +131,10 @@ public class StyledEditorKit extends DefaultEditorKit {
      * Called when the kit is being installed into
      * a JEditorPane.
      *
+     * <p>
+     *  当工具包安装到JEditorPane中时调用。
+     * 
+     * 
      * @param c the JEditorPane
      */
     public void install(JEditorPane c) {
@@ -124,6 +152,10 @@ public class StyledEditorKit extends DefaultEditorKit {
      * JEditorPane.  This is used to unregister any
      * listeners that were attached.
      *
+     * <p>
+     *  在从JEditorPane中删除工具包时调用。这用于注销附加的任何侦听器。
+     * 
+     * 
      * @param c the JEditorPane
      */
     public void deinstall(JEditorPane c) {
@@ -148,6 +180,14 @@ public class StyledEditorKit extends DefaultEditorKit {
      * <li>StyleConstants.IconElementName
      * </ul>
      *
+     * <p>
+     *  获取适合于生产此套件生产的任何型号视图的工厂。这被实现为返回以下种类的元素的View实现：
+     * <ul>
+     * <li> AbstractDocument.ContentElementName <li> AbstractDocument.ParagraphElementName <li> AbstractDocu
+     * ment.SectionElementName <li> StyleConstants.ComponentElementName <li> StyleConstants.IconElementName。
+     * </ul>
+     * 
+     * 
      * @return the factory
      */
     public ViewFactory getViewFactory() {
@@ -157,6 +197,10 @@ public class StyledEditorKit extends DefaultEditorKit {
     /**
      * Creates a copy of the editor kit.
      *
+     * <p>
+     *  创建编辑器工具包的副本。
+     * 
+     * 
      * @return the copy
      */
     public Object clone() {
@@ -169,6 +213,9 @@ public class StyledEditorKit extends DefaultEditorKit {
 
     /**
      * Creates the AttributeSet used for the selection.
+     * <p>
+     *  创建用于选择的AttributeSet。
+     * 
      */
     private void createInputAttributes() {
         inputAttributes = new SimpleAttributeSet() {
@@ -185,6 +232,9 @@ public class StyledEditorKit extends DefaultEditorKit {
 
     /**
      * Creates a new <code>AttributeTracker</code>.
+     * <p>
+     *  创建新的<code> AttributeTracker </code>。
+     * 
      */
     private void createInputAttributeUpdated() {
         inputAttributeUpdater = new AttributeTracker();
@@ -199,6 +249,9 @@ public class StyledEditorKit extends DefaultEditorKit {
     /**
      * This is the set of attributes used to store the
      * input attributes.
+     * <p>
+     *  这是用于存储输入属性的属性集。
+     * 
      */
     MutableAttributeSet inputAttributes;
 
@@ -207,6 +260,9 @@ public class StyledEditorKit extends DefaultEditorKit {
      * the text component that the EditorKit gets installed
      * into.  This should keep the input attributes updated
      * for use by the styled actions.
+     * <p>
+     *  此侦听器将附加到EditorKit安装到的文本组件的插入符号。这应该保持输入属性更新为样式化操作使用。
+     * 
      */
     private AttributeTracker inputAttributeUpdater;
 
@@ -217,12 +273,19 @@ public class StyledEditorKit extends DefaultEditorKit {
      * <p>This implements PropertyChangeListener to update the
      * input attributes when the Document changes, as if the Document
      * changes the attributes will almost certainly change.
+     * <p>
+     *  跟踪插入符移动并保持输入属性设置为反映插入符位置处的当前属性定义集。
+     *  <p>这实现了PropertyChangeListener,以在Document更改时更新输入属性,如同Document更改属性几乎肯定会更改。
+     * 
      */
     class AttributeTracker implements CaretListener, PropertyChangeListener, Serializable {
 
         /**
          * Updates the attributes. <code>dot</code> and <code>mark</code>
          * mark give the positions of the selection in <code>c</code>.
+         * <p>
+         *  更新属性。 <code> dot </code>和<code> mark </code>标记给出<code> c </code>中选择的位置。
+         * 
          */
         void updateInputAttributes(int dot, int mark, JTextComponent c) {
             // EditorKit might not have installed the StyledDocument yet.
@@ -254,6 +317,9 @@ public class StyledEditorKit extends DefaultEditorKit {
                      * mixing in an interface to indicate that condition.
                      * When we can add things again this logic needs to be
                      * improved!!
+                     * <p>
+                     *  PENDING(prinz)表示单个字形位置并且不能插入的所有属性应该从输入属性中删除...这需要在接口中混合以指示该条件。当我们可以再添加东西这个逻辑需要改进！
+                     * 
                      */
                 currentRun = run;
                 createInputAttributes(currentRun, getInputAttributes());
@@ -285,6 +351,10 @@ public class StyledEditorKit extends DefaultEditorKit {
      * are in <code>set</code>.<p>
      * This is called anytime the caret moves over a different location.
      *
+     * <p>
+     * 将<code> element </code>的AttributeSet中的键/值复制到<code> set </code>中。这不会复制组件,图标或元素名称属性。
+     * 子类可能希望细化什么是什么,什么是不复制的。但是请务必先删除<code> set </code>中的所有属性。<p>这是在插入符移动到其他位置时调用的。
+     * 
      */
     protected void createInputAttributes(Element element,
                                          MutableAttributeSet set) {
@@ -374,12 +444,25 @@ public class StyledEditorKit extends DefaultEditorKit {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  一个动作,假设它是在安装了StyledEditorKit(或子类)的JEditorPane上触发的。这有一些方便的方法来引起字符或段落级属性更改。
+     * 如果一个StyledDocument,一个JEditorPane或一个StyledEditorKit的假设不成立,方便方法将抛出IllegalArgumentException异常。
+     * <p>
+     *  如果源可以缩小到JEditorPane类型,那么操作处理的组件将是ActionEvent的源。如果源不能缩小,则最近聚焦的文本成分被改变。如果这两种情况都不是这种情况,则无法执行操作。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public abstract static class StyledTextAction extends TextAction {
 
         /**
          * Creates a new StyledTextAction from a string action name.
          *
+         * <p>
+         *  从字符串操作名称创建新的StyledTextAction。
+         * 
+         * 
          * @param nm the name of the action
          */
         public StyledTextAction(String nm) {
@@ -389,6 +472,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Gets the target editor for an action.
          *
+         * <p>
+         * 获取操作的目标编辑器。
+         * 
+         * 
          * @param e the action event
          * @return the editor
          */
@@ -403,6 +490,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Gets the document associated with an editor pane.
          *
+         * <p>
+         *  获取与编辑器窗格关联的文档。
+         * 
+         * 
          * @param e the editor
          * @return the document
          * @exception IllegalArgumentException for the wrong document type
@@ -418,6 +509,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Gets the editor kit associated with an editor pane.
          *
+         * <p>
+         *  获取与编辑器窗格相关联的编辑器工具包。
+         * 
+         * 
          * @param e the editor pane
          * @return the kit
          * @exception IllegalArgumentException for the wrong document type
@@ -438,6 +533,10 @@ public class StyledEditorKit extends DefaultEditorKit {
          * the input attribute set which defines the attributes
          * for any new text that gets inserted.
          *
+         * <p>
+         *  将给定的属性应用于字符内容。如果存在选择,则属性应用于选择范围。如果没有选择,则属性应用于输入属性集,该属性集定义插入的任何新文本的属性。
+         * 
+         * 
          * @param editor the editor
          * @param attr the attributes
          * @param replace   if true, then replace the existing attributes first
@@ -465,6 +564,10 @@ public class StyledEditorKit extends DefaultEditorKit {
          * if there is no selection, the attributes are applied
          * to the paragraph at the current caret position.
          *
+         * <p>
+         *  将给定的属性应用于段落。如果存在选择,则属性应用于与选择相交的段落。如果没有选择,则将属性应用于当前插入符位置处的段落。
+         * 
+         * 
          * @param editor the editor
          * @param attr the attributes
          * @param replace   if true, replace the existing attributes first
@@ -493,12 +596,22 @@ public class StyledEditorKit extends DefaultEditorKit {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  在关联的JEditorPane中设置字体系列的操作。这将使用指定为ActionEvent上的命令字符串的族,如果有一个,否则将使用初始化的族。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class FontFamilyAction extends StyledTextAction {
 
         /**
          * Creates a new FontFamilyAction.
          *
+         * <p>
+         *  创建一个新的FontFamilyAction。
+         * 
+         * 
          * @param nm the action name
          * @param family the font family
          */
@@ -510,6 +623,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Sets the font family.
          *
+         * <p>
+         *  设置字体系列。
+         * 
+         * 
          * @param e the event
          */
         public void actionPerformed(ActionEvent e) {
@@ -549,12 +666,22 @@ public class StyledEditorKit extends DefaultEditorKit {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 在关联的JEditorPane中设置字体大小的操作。这将使用在ActionEvent上指定为命令字符串的大小(如果有),否则将使用初始化的大小。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class FontSizeAction extends StyledTextAction {
 
         /**
          * Creates a new FontSizeAction.
          *
+         * <p>
+         *  创建一个新的FontSizeAction。
+         * 
+         * 
          * @param nm the action name
          * @param size the font size
          */
@@ -566,6 +693,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Sets the font size.
          *
+         * <p>
+         *  设置字体大小。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -616,12 +747,26 @@ public class StyledEditorKit extends DefaultEditorKit {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  设置前景色的操作。这将为目标JEditorPane的当前选定范围设置<code> StyleConstants.Foreground </code>属性。
+     * 这通过在与目标JEditorPane相关联的样式文档上调用<code> StyledDocument.setCharacterAttributes </code>来完成。
+     * <p>
+     *  如果目标文本组件被指定为ActionEvent的源并且有命令字符串,则命令字符串将被解释为前景颜色。
+     * 它将通过调用<code> Color.decode </code>来解释,因此应该是该方法的合法输入。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class ForegroundAction extends StyledTextAction {
 
         /**
          * Creates a new ForegroundAction.
          *
+         * <p>
+         *  创建一个新的ForegroundAction。
+         * 
+         * 
          * @param nm the action name
          * @param fg the foreground color
          */
@@ -633,6 +778,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Sets the foreground color.
          *
+         * <p>
+         *  设置前景颜色。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -682,12 +831,26 @@ public class StyledEditorKit extends DefaultEditorKit {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  设置段落对齐的操作。这将为目标JEditorPane的当前选定范围设置<code> StyleConstants.Alignment </code>属性。
+     * 这通过在与目标JEditorPane相关联的样式文档上调用<code> StyledDocument.setParagraphAttributes </code>来完成。
+     * <p>
+     *  如果目标文本组件被指定为ActionEvent的源并且有一个命令字符串,则命令字符串将被解释为一个整数,该整数应该是<code> StyleConstants.Alignment </code>属性的
+     * 合法值之一。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class AlignmentAction extends StyledTextAction {
 
         /**
          * Creates a new AlignmentAction.
          *
+         * <p>
+         *  创建一个新的AlignmentAction。
+         * 
+         * 
          * @param nm the action name
          * @param a the alignment &gt;= 0
          */
@@ -699,6 +862,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Sets the alignment.
          *
+         * <p>
+         *  设置对齐方式。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -732,11 +899,20 @@ public class StyledEditorKit extends DefaultEditorKit {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * 用于切换粗体属性的操作。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class BoldAction extends StyledTextAction {
 
         /**
          * Constructs a new BoldAction.
+         * <p>
+         *  构造一个新的BoldAction。
+         * 
          */
         public BoldAction() {
             super("font-bold");
@@ -745,6 +921,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Toggles the bold attribute.
          *
+         * <p>
+         *  切换粗体属性。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -771,11 +951,20 @@ public class StyledEditorKit extends DefaultEditorKit {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  用于切换斜体属性的操作。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class ItalicAction extends StyledTextAction {
 
         /**
          * Constructs a new ItalicAction.
+         * <p>
+         *  构造一个新的ItalicAction。
+         * 
          */
         public ItalicAction() {
             super("font-italic");
@@ -784,6 +973,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Toggles the italic attribute.
          *
+         * <p>
+         *  切换斜体属性。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -810,11 +1003,20 @@ public class StyledEditorKit extends DefaultEditorKit {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  切换下划线属性的操作。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class UnderlineAction extends StyledTextAction {
 
         /**
          * Constructs a new UnderlineAction.
+         * <p>
+         * 构造一个新的UnderlineAction。
+         * 
          */
         public UnderlineAction() {
             super("font-underline");
@@ -823,6 +1025,10 @@ public class StyledEditorKit extends DefaultEditorKit {
         /**
          * Toggles the Underline attribute.
          *
+         * <p>
+         *  切换下划线属性。
+         * 
+         * 
          * @param e the action event
          */
         public void actionPerformed(ActionEvent e) {
@@ -845,6 +1051,9 @@ public class StyledEditorKit extends DefaultEditorKit {
      * its <code>actionPerformed</code> method is invoked, a newline
      * is inserted. Beyond that, this will reset the input attributes to
      * what they were before the newline was inserted.
+     * <p>
+     *  StyledInsertBreakAction与<code> DefaultEditorKit.InsertBreakAction </code>的行为类似。
+     * 这就是当它的<code> actionPerformed </code>方法被调用时,插入一个换行符。除此之外,这会将输入属性重置为插入换行符之前的内容。
      */
     static class StyledInsertBreakAction extends StyledTextAction {
         private SimpleAttributeSet tempSet;

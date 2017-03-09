@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,26 @@ import javax.imageio.stream.ImageInputStream;
  * of large tables, should be deferred at least until the first
  * invocation of this method.
  *
+ * <p>
+ *  用于<code> ImageReader </code>的服务提供程序接口(SPI)。有关服务提供程序类的更多信息,请参阅<code> IIORegistry </code>类的类注释。
+ * 
+ *  <p>每个<code> ImageReaderSpi </code>提供了与它相关的<code> ImageReader </code>类的几种类型的信息。
+ * 
+ *  <p>通过<code> getVendorName </code>,<code> getDescription </code>和<code> getVersion </code可以获得定义SPI类的供应商的名称和类的简要描述>
+ * 方法。
+ * 这些方法可以被国际化以提供特定于场所的输出。这些方法主要旨在提供可用于组织弹出菜单或其它列表的简短的,人类可读的信息。
+ * 
+ *  <p>与服务相关联的格式名称,文件后缀和MIME类型的列表可以通过<code> getFormatNames </code>,<code> getFileSuffixes </code>和<code>
+ *  getMIMETypes </代码>方法。
+ * 这些方法可以用于基于手动格式选择,文件命名或MIME关联来识别用于解码特定文件或流的候选<code> ImageReader </code>(例如,当通过HTTP访问文件或作为电子邮件附件)。
+ * 
+ * <p>通过<code> canDecodeInput </code>方法提供更可靠的方法来确定哪些<code> ImageReader </code>可能能够解析特定数据流。
+ * 这种方法允许服务提供商检查实际流内容。
+ * 
+ *  <p>最后,可以通过调用<code> createReaderInstance </code>方法获得与此服务提供程序关联的<code> ImageReader </code>类的实例。
+ * 任何重量级初始化,例如加载本机库或创建大表,都应该推迟,直到第一次调用此方法。
+ * 
+ * 
  * @see IIORegistry
  * @see javax.imageio.ImageReader
  *
@@ -77,6 +98,10 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * A single-element array, initially containing
      * <code>ImageInputStream.class</code>, to be returned from
      * <code>getInputTypes</code>.
+     * <p>
+     *  一个单元素数组,最初包含<code> ImageInputStream.class </code>,从<code> getInputTypes </code>返回。
+     * 
+     * 
      * @deprecated Instead of using this field, directly create
      * the equivalent array <code>{ ImageInputStream.class }</code>.
      */
@@ -87,6 +112,9 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
     /**
      * An array of <code>Class</code> objects to be returned from
      * <code>getInputTypes</code>, initially <code>null</code>.
+     * <p>
+     *  从<code> getInputTypes </code>返回的<code> Class </code>对象数组,最初为<code> null </code>。
+     * 
      */
     protected Class[] inputTypes = null;
 
@@ -94,12 +122,18 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * An array of strings to be returned from
      * <code>getImageWriterSpiNames</code>, initially
      * <code>null</code>.
+     * <p>
+     *  要从<code> getImageWriterSpiNames </code>返回的字符串数组,最初为<code> null </code>。
+     * 
      */
     protected String[] writerSpiNames = null;
 
     /**
      * The <code>Class</code> of the reader, initially
      * <code>null</code>.
+     * <p>
+     *  读者的<code> Class </code>,最初<code> null </code>。
+     * 
      */
     private Class readerClass = null;
 
@@ -108,6 +142,9 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * the subclass to initialize instance variables and/or override
      * method implementations in order to provide working versions of
      * all methods.
+     * <p>
+     *  构造一个空白的<code> ImageReaderSpi </code>。它是由子类初始化实例变量和/或覆盖方法实现为了提供所有方法的工作版本。
+     * 
      */
     protected ImageReaderSpi() {
     }
@@ -116,6 +153,10 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * Constructs an <code>ImageReaderSpi</code> with a given
      * set of values.
      *
+     * <p>
+     *  用给定的一组值构造一个<code> ImageReaderSpi </code>。
+     * 
+     * 
      * @param vendorName the vendor name, as a non-<code>null</code>
      * <code>String</code>.
      * @param version a version identifier, as a non-<code>null</code>
@@ -251,6 +292,12 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * containing <code>ImageInputStream.class</code> should be
      * returned.
      *
+     * <p>
+     *  返回一个<code> Class </code>对象的数组,指示可以将哪些类型的对象用作读取器的<code> setInput </code>方法的参数。
+     * 
+     * <p>对于大多数只接受来自<code> ImageInputStream </code>的输入的读者,应该返回包含<code> ImageInputStream.class </code>的单元素数组。
+     * 
+     * 
      * @return a non-<code>null</code> array of
      * <code>Class</code>objects of length at least 1.
      */
@@ -288,6 +335,19 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * classes returned by <code>getInputTypes</code>, the method
      * should simply return <code>false</code>.
      *
+     * <p>
+     *  如果提供的源对象显示为此读取器支持的格式,则返回<code> true </code>。
+     * 从此方法返回<code> true </code>不能保证读取将成功,只是基于对流内容的简短检查似乎有合理的成功机会。
+     * 如果源是<code> ImageInputStream </code>,实现将通常检查流的前几个字节与该格式相关联的"幻数"。一旦实际读取已经开始,读取器仍然可以在解码完成之前的任何时间指示失败。
+     * 
+     *  <p>重要的是,对象的状态不被干扰,以便其他<code> ImageReaderSpi </code>可以正确地确定它们是否能够解码对象。
+     * 特别地,如果源是<code> ImageInputStream </code>,则应当使用<code>标记</code> / <code>重置</code>对来保留流位置。
+     * 
+     *  <p>格式,例如"raw",可能会尝试读取几乎任何流,应返回<code> false </code>,以避免被优先于更接近的匹配调用。
+     * 
+     *  <p>如果<code> source </code>不是<code> getInputTypes </code>返回的类的实例,则该方法应该返回<code> false </code>。
+     * 
+     * 
      * @param source the object (typically an
      * <code>ImageInputStream</code>) to be decoded.
      *
@@ -310,6 +370,12 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * <p> The default implementation simply returns
      * <code>createReaderInstance(null)</code>.
      *
+     * <p>
+     * 返回与此服务提供商相关联的<code> ImageReader </code>实现的实例。返回的对象最初将处于初始状态,就像它的<code> reset </code>方法被调用。
+     * 
+     *  <p>默认实现只返回<code> createReaderInstance(null)</code>。
+     * 
+     * 
      * @return an <code>ImageReader</code> instance.
      *
      * @exception IOException if an error occurs during loading,
@@ -333,6 +399,14 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * <p> Typically, a plug-in will implement this method using code
      * such as <code>return new MyImageReader(this)</code>.
      *
+     * <p>
+     *  返回与此服务提供商相关联的<code> ImageReader </code>实现的实例。返回的对象最初将处于初始状态,就像它的<code> reset </code>方法被调用。
+     * 
+     *  <p>在构建时可以向插件提供<code> Object </code>。对象的本质是完全插件特定的。
+     * 
+     *  <p>通常,插件将使用<code> return new MyImageReader(this)</code>等代码来实现此方法。
+     * 
+     * 
      * @param extension a plug-in specific extension object, which may
      * be <code>null</code>.
      *
@@ -358,6 +432,12 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * name passed into the constructor.  This method may be overridden
      * if more sophisticated checking is required.
      *
+     * <p>
+     *  如果传入的<code> ImageReader </code>对象是与此服务提供程序关联的<code> ImageReader </code>的实例,则返回<code> true </code>
+     * 
+     *  <p>默认实现将<code> reader </code>参数的完全限定类名与传递到构造函数中的类名相比较。如果需要更复杂的检查,则可以覆盖此方法。
+     * 
+     * 
      * @param reader an <code>ImageReader</code> instance.
      *
      * @return <code>true</code> if <code>reader</code> is recognized.
@@ -400,6 +480,14 @@ public abstract class ImageReaderSpi extends ImageReaderWriterSpi {
      * understand anything about the internal structure of the
      * meta-data, or even about the image format.
      *
+     * <p>
+     * 返回一个<code> String </code>数组,其中包含所有<code> ImageWriterSpi </code>类的完全限定名称,可以理解与<code> ImageReader </code>
+     * 如果没有指定此类<code> ImageWriter </code>,则此服务提供程序或<code> null </code>。
+     * 如果返回非<code> null </code>值,则它必须具有非零长度。
+     * 
+     *  <p>数组中的第一个项目必须是"首选"编写器的服务提供程序的名称,因为它将用于实例化由<code> ImageIO.getImageWriter(ImageReader)返回的<code> Image
+     * Writer </code> )</code>。
+     * 
      * @return an array of <code>String</code>s of length at least 1
      * containing names of <code>ImageWriterSpi</code>, or
      * <code>null</code>.

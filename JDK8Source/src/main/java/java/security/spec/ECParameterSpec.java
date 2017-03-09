@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.math.BigInteger;
  * This immutable class specifies the set of domain parameters
  * used with elliptic curve cryptography (ECC).
  *
+ * <p>
+ *  这个不可变类指定了与椭圆曲线密码术(ECC)一起使用的一组域参数。
+ * 
+ * 
  * @see AlgorithmParameterSpec
  *
  * @author Valerie Peng
@@ -46,6 +51,10 @@ public class ECParameterSpec implements AlgorithmParameterSpec {
     /**
      * Creates elliptic curve domain parameters based on the
      * specified values.
+     * <p>
+     *  基于指定的值创建椭圆曲线域参数。
+     * 
+     * 
      * @param curve the elliptic curve which this parameter
      * defines.
      * @param g the generator which is also known as the base point.
@@ -81,6 +90,10 @@ public class ECParameterSpec implements AlgorithmParameterSpec {
 
     /**
      * Returns the elliptic curve that this parameter defines.
+     * <p>
+     *  返回此参数定义的椭圆曲线。
+     * 
+     * 
      * @return the elliptic curve that this parameter defines.
      */
     public EllipticCurve getCurve() {
@@ -89,6 +102,10 @@ public class ECParameterSpec implements AlgorithmParameterSpec {
 
     /**
      * Returns the generator which is also known as the base point.
+     * <p>
+     *  返回也称为基点的生成器。
+     * 
+     * 
      * @return the generator which is also known as the base point.
      */
     public ECPoint getGenerator() {
@@ -97,6 +114,10 @@ public class ECParameterSpec implements AlgorithmParameterSpec {
 
     /**
      * Returns the order of the generator.
+     * <p>
+     *  返回生成器的顺序。
+     * 
+     * 
      * @return the order of the generator.
      */
     public BigInteger getOrder() {
@@ -105,6 +126,9 @@ public class ECParameterSpec implements AlgorithmParameterSpec {
 
     /**
      * Returns the cofactor.
+     * <p>
+     *  返回辅助因子。
+     * 
      * @return the cofactor.
      */
     public int getCofactor() {

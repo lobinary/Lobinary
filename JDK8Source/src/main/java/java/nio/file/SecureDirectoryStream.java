@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,21 @@ import java.io.IOException;
  * against the <i>original path</i> of the directory (irrespective of if the
  * directory is moved since it was opened).
  *
+ * <p>
+ *  {@code DirectoryStream},用于定义相对于打开目录的文件的操作。
+ *  {@code SecureDirectoryStream}旨在供需要遍历文件树或以无竞争方式在目录上操作的复杂或安全敏感的应用程序使用。当不能孤立地执行文件操作序列时,可能出现竞争条件。
+ * 由此接口定义的每个文件操作都指定相对路径。对文件的所有访问都是相对于打开的目录,而不管目录是否被打开时被攻击者移动或替换。
+ *  {@code SecureDirectoryStream}也可以用作虚拟工作目录<em> </em>。
+ * 
+ *  <p> {@code SecureDirectoryStream}需要底层操作系统的相应支持。
+ * 如果某个实现支持此功能,则{@link Files#newDirectoryStream newDirectoryStream}方法返回的{@code DirectoryStream}将是一个{@code SecureDirectoryStream}
+ * ,并且必须强制转换为该类型,才能调用此接口定义的方法。
+ *  <p> {@code SecureDirectoryStream}需要底层操作系统的相应支持。
+ * 
+ * <p>在默认的{@link java.nio.file.spi.FileSystemProvider provider}的情况下,并且设置了安全管理器,则使用通过将给定的相对路径解析为< i>目录的原始
+ * 路径</i>(无论目录是否从打开开始移动)。
+ * 
+ * 
  * @since   1.7
  */
 
@@ -75,6 +91,16 @@ public interface SecureDirectoryStream<T>
      * directory stream used to create it. Closing this directory stream has no
      * effect upon newly created directory stream.
      *
+     * <p>
+     *  打开给定路径标识的目录,返回{@code SecureDirectoryStream}以遍历目录中的条目。
+     * 
+     *  <p>对于{@code path}参数是{@link Path#isAbsolute absolute}路径的情况,此方法完全按照{@link Files#newDirectoryStream(Path)newDirectoryStream}
+     * 方法指定的方式工作。
+     * 当参数是相对路径时,要打开的目录是相对于此打开目录。如果文件是符号链接,则可以使用{@link LinkOption#NOFOLLOW_LINKS NOFOLLOW_LINKS}选项确保此方法失败。
+     * 
+     *  <p>新目录流创建后,不依赖于用于创建目录流。关闭此目录流对新创建的目录流没有任何影响。
+     * 
+     * 
      * @param   path
      *          the path to the directory to open
      * @param   options
@@ -114,6 +140,19 @@ public interface SecureDirectoryStream<T>
      * used to create it. Closing this directory stream has no effect upon the
      * channel.
      *
+     * <p>
+     *  在此目录中打开或创建文件,返回可查找的字节通道以访问文件。
+     * 
+     * <p>对于{@code path}参数是{@link Path#isAbsolute absolute}路径的情况,此方法完全按照{@link Files#newByteChannel Files.newByteChannel}
+     * 方法指定的方式工作。
+     * 当参数是相对路径时,要打开或创建的文件是相对于此打开目录的。
+     * 除了{@code Files.newByteChannel}方法定义的选项之外,如果文件是符号链接,可以使用{@link LinkOption#NOFOLLOW_LINKS NOFOLLOW_LINKS}
+     * 选项确保此方法失败。
+     * 当参数是相对路径时,要打开或创建的文件是相对于此打开目录的。
+     * 
+     *  <p>频道创建后,不依赖于用于创建它的目录流。关闭此目录流对通道没有影响。
+     * 
+     * 
      * @param   path
      *          the path of the file to open open or create
      * @param   options
@@ -161,6 +200,13 @@ public interface SecureDirectoryStream<T>
      * parameter is a relative path then the file to delete is relative to
      * this open directory.
      *
+     * <p>
+     *  删除文件。
+     * 
+     *  <p>与{@link Files#delete delete()}方法不同,此方法不会首先检查文件以确定文件是否为目录。该方法是否删除目录是系统相关的,因此不指定。
+     * 如果文件是符号链接,则链接本身,而不是链接的最终目标,被删除。当参数是相对路径时,要删除的文件是相对于此打开目录的。
+     * 
+     * 
      * @param   path
      *          the path of the file to delete
      *
@@ -186,6 +232,13 @@ public interface SecureDirectoryStream<T>
      * therefore not specified. When the parameter is a relative path then the
      * directory to delete is relative to this open directory.
      *
+     * <p>
+     *  删除目录。
+     * 
+     *  <p>与{@link Files#delete delete()}方法不同,此方法不会首先检查文件以确定文件是否为目录。是否通过此方法删除非目录是系统相关的,因此不指定。
+     * 当参数是相对路径时,要删除的目录是相对于此打开目录的。
+     * 
+     * 
      * @param   path
      *          the path of the directory to delete
      *
@@ -221,6 +274,15 @@ public interface SecureDirectoryStream<T>
      * exists then it is implementation specific if it is replaced or this
      * method fails.
      *
+     * <p>
+     * 将文件从此目录移动到另一个目录。
+     * 
+     *  <p>当指定{@link StandardCopyOption#ATOMIC_MOVE ATOMIC_MOVE}选项时,此方法的工作方式与{@link Files#move move}方法类似。
+     * 也就是说,此方法将文件作为原子文件系统操作移动。如果{@code srcpath}参数是{@link Path#isAbsolute absolute}路径,那么它将定位源文件。
+     * 如果参数是相对路径,则它相对于此打开目录定位。如果{@code targetpath}参数是绝对的,那么它将定位目标文件(忽略{@code targetdir}参数)。
+     * 如果参数是相对路径,它相对于由{@code targetdir}参数标识的开放目录。在所有情况下,如果目标文件存在,则它是实现特定的,如果它被替换或该方法失败。
+     * 
+     * 
      * @param   srcpath
      *          the name of the file to move
      * @param   targetdir
@@ -262,6 +324,18 @@ public interface SecureDirectoryStream<T>
      * then all methods to read or update attributes will throw {@link
      * ClosedDirectoryStreamException ClosedDirectoryStreamException}.
      *
+     * <p>
+     *  返回一个新的文件属性视图,以访问此目录的文件属性。
+     * 
+     *  <p>生成的文件属性视图可用于读取或更新此(打开的)目录的属性。 {@code type}参数指定属性视图的类型,如果支持,该方法将返回该类型的实例。
+     * 调用此方法以获取{@link BasicFileAttributeView}总是返回绑定到此打开目录的类的实例。
+     * 
+     * <p>生成的文件属性视图的状态与此目录流密切相关。
+     * 一旦目录流是{@link #close closed},那么所有读取或更新属性的方法都会抛出{@link ClosedDirectoryStreamException ClosedDirectoryStreamException}
+     * 。
+     * <p>生成的文件属性视图的状态与此目录流密切相关。
+     * 
+     * 
      * @param   <V>
      *          The {@code FileAttributeView} type
      * @param   type
@@ -292,6 +366,13 @@ public interface SecureDirectoryStream<T>
      * is created but methods to read or update attributes of the file will
      * fail when invoked and the file does not exist.
      *
+     * <p>
+     *  返回一个新的文件属性视图,以访问此目录中文件的文件属性。
+     * 
+     *  <p>生成的文件属性视图可用于读取或更新此目录中文件的属性。 {@code type}参数指定属性视图的类型,如果支持,该方法将返回该类型的实例。
+     * 调用此方法以获取{@link BasicFileAttributeView}总是返回绑定到目录中文件的类的实例。
+     * 
+     * 
      * @param   <V>
      *          The {@code FileAttributeView} type
      * @param   path

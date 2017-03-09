@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import sun.swing.MenuItemCheckIconFactory;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  可以销售的工厂对象适用于Windows L&F的图标
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author David Kloba
  * @author Georges Saab
  * @author Rich Schiavi
@@ -590,6 +598,10 @@ public class WindowsIconFactory implements Serializable
             g.setColor(Color.orange);
             g.fill3DRect(x,y,getIconWidth(), getIconHeight(), true);
             g.setColor(oldColor);
+            /* <p>
+            /*  color oldColor = g.getColor(); g.setColor(Color.orange); g.fill3DRect(x,y,getIconWidth(),getIconHeig
+            /* ht(),true); g.setColor(oldColor);。
+            /* 
             */
         }
         public int getIconWidth() { return 9; }
@@ -604,6 +616,10 @@ public class WindowsIconFactory implements Serializable
             g.setColor(Color.green);
             g.fill3DRect(x,y,getIconWidth(), getIconHeight(), true);
             g.setColor(oldColor);
+            /* <p>
+            /*  color oldColor = g.getColor(); g.setColor(Color.green); g.fill3DRect(x,y,getIconWidth(),getIconHeigh
+            /* t(),true); g.setColor(oldColor);。
+            /* 
             */
         }
         public int getIconWidth() { return 4; }
@@ -724,6 +740,9 @@ public class WindowsIconFactory implements Serializable
          * CheckIcon for JMenuItem, JMenu, JCheckBoxMenuItem and
          * JRadioButtonMenuItem.
          * Note: to be used on Vista only.
+         * <p>
+         *  CheckIcon用于JMenuItem,JMenu,JCheckBoxMenuItem和JRadioButtonMenuItem。注意：仅在Vista上使用。
+         * 
          */
         private static class VistaMenuItemCheckIcon
               implements Icon, UIResource, Serializable {
@@ -883,6 +902,9 @@ public class WindowsIconFactory implements Serializable
             /**
              * Check if developer changed icon in the UI table.
              *
+             * <p>
+             *  检查UI表中开发者是否更改了图标。
+             * 
              * @return the icon to use or {@code null} if the current one is to
              * be used
              */

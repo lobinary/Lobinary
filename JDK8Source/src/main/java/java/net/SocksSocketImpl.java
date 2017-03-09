@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,9 @@ import sun.net.www.ParseUtil;
  * SOCKS (V4 & V5) TCP socket implementation (RFC 1928).
  * This is a subclass of PlainSocketImpl.
  * Note this class should <b>NOT</b> be public.
+ * <p>
+ *  SOCKS(V4和V5)TCP套接字实现(RFC 1928)。这是PlainSocketImpl的子类。注意这个类应该<b>不</b>是公开的。
+ * 
  */
 
 class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
@@ -134,6 +138,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
 
     /**
      * Provides the authentication machanism required by the proxy.
+     * <p>
+     *  提供代理所需的身份验证机制。
+     * 
      */
     private boolean authenticate(byte method, InputStream in,
                                  BufferedOutputStream out) throws IOException {
@@ -150,6 +157,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
          * User/Password authentication. Try, in that order :
          * - The application provided Authenticator, if any
          * - the user.name & no password (backward compatibility behavior).
+         * <p>
+         *  用户/密码验证。尝试,按顺序： - 应用程序提供的Authenticator,如果有 - 用户名和无密码(向后兼容性行为)。
+         * 
          */
         if (method == USER_PASSW) {
             String userName;
@@ -193,6 +203,8 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
             int i = readSocksReply(in, data, deadlineMillis);
             if (i != 2 || data[1] != 0) {
                 /* RFC 1929 specifies that the connection MUST be closed if
+                /* <p>
+                /* 
                    authentication fails */
                 out.close();
                 in.close();
@@ -205,6 +217,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
          * GSSAPI authentication mechanism.
          * Unfortunately the RFC seems out of sync with the Reference
          * implementation. I'll leave this in for future completion.
+         * <p>
+         *  GSSAPI认证机制。不幸的是,RFC似乎与Reference实现不同步。我将把这留在以后完成。
+         * 
          */
 //      if (method == GSSAPI) {
 //          try {
@@ -249,6 +264,8 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
 //              }
 //          } catch (GSSException e) {
 //              /* RFC 1961 states that if Context initialisation fails the connection
+//              /* <p>
+//              /* 
 //                 MUST be closed */
 //              e.printStackTrace();
 //              in.close();
@@ -315,6 +332,10 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
      * grants the connections, then the connect is successful and all
      * further traffic will go to the "real" endpoint.
      *
+     * <p>
+     *  将Socks Socket连接到指定的端点。它将首先连接到SOCKS代理并协商访问。如果代理授予连接,则连接成功,所有进一步的流量将进入"真实"端点。
+     * 
+     * 
      * @param   endpoint        the {@code SocketAddress} to connect to.
      * @param   timeout         the timeout value in milliseconds
      * @throws  IOException     if the connection can't be established.
@@ -359,6 +380,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
             if (sel == null) {
                 /*
                  * No default proxySelector --> direct connection
+                 * <p>
+                 *  没有默认proxySelector  - >直接连接
+                 * 
                  */
                 super.connect(epoint, remainingMillis(deadlineMillis));
                 return;
@@ -422,6 +446,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
             /*
              * If server is still null at this point, none of the proxy
              * worked
+             * <p>
+             *  如果服务器在这一点仍然为空,没有一个代理工作
+             * 
              */
             if (server == null) {
                 throw new SocketException("Can't connect to SOCKS proxy:"
@@ -650,6 +677,10 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
      * means "accept incoming connection from", so the SocketAddress is the
      * the one of the host we do accept connection from.
      *
+     * <p>
+     *  将绑定请求发送到SOCKS代理。在SOCKS协议中,绑定意味着"接受传入连接",因此SocketAddress是我们接受连接的主机之一。
+     * 
+     * 
      * @param      saddr   the Socket address of the remote host.
      * @exception  IOException  if an I/O error occurs when binding this socket.
      */
@@ -675,6 +706,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
             if (sel == null) {
                 /*
                  * No default proxySelector --> direct connection
+                 * <p>
+                 *  没有默认proxySelector  - >直接连接
+                 * 
                  */
                 return;
             }
@@ -743,6 +777,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
             /*
              * If server is still null at this point, none of the proxy
              * worked
+             * <p>
+             *  如果服务器在这一点仍然为空,没有一个代理工作
+             * 
              */
             if (server == null || cmdsock == null) {
                 throw new SocketException("Can't connect to SOCKS proxy:"
@@ -914,6 +951,10 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
     /**
      * Accepts a connection from a specific host.
      *
+     * <p>
+     *  接受特定主机的连接。
+     * 
+     * 
      * @param      s   the accepted connection.
      * @param      saddr the socket address of the host we do accept
      *               connection from
@@ -1003,6 +1044,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
          * This is where we have to do some fancy stuff.
          * The datastream from the socket "accepted" by the proxy will
          * come through the cmdSocket. So we have to swap the socketImpls
+         * <p>
+         * 这是我们必须做一些花哨的东西。来自套接字的数据流由代理"接受"将通过cmdSocket。所以我们必须交换socketImpls
+         * 
          */
         if (s instanceof SocksSocketImpl) {
             ((SocksSocketImpl)s).external_address = real_end;
@@ -1032,6 +1076,10 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
     /**
      * Returns the value of this socket's {@code address} field.
      *
+     * <p>
+     *  返回此套接字的{@code address}字段的值。
+     * 
+     * 
      * @return  the value of this socket's {@code address} field.
      * @see     java.net.SocketImpl#address
      */
@@ -1046,6 +1094,9 @@ class SocksSocketImpl extends PlainSocketImpl implements SocksConsts {
     /**
      * Returns the value of this socket's {@code port} field.
      *
+     * <p>
+     *  返回此套接字的{@code port}字段的值。
+     * 
      * @return  the value of this socket's {@code port} field.
      * @see     java.net.SocketImpl#port
      */

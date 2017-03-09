@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,24 @@ import sun.reflect.misc.ReflectUtil;
  * stream to the method <code>SQLData.readSQL</code>, which in turn
  * calls the <code>SQLInputImpl</code> reader methods
  * to read the attributes from the input stream.
+ * <p>
+ *  用于自定义映射用户定义类型(UDT)的输入流。 <code> SQLInputImpl </code>对象是一个输入流,它包含作为UDT属性的值流。
+ * <p>
+ *  当在具有自定义映射的SQL结构化或不同类型上调用方法<code> getObject </code>时,此类由驱动程序在幕后使用;程序员从不直接调用<code> SQLInputImpl </code>
+ * 方法。
+ * 在这里提供它们是为了方便那些写<code> RowSet </code>实现的人。
+ * <P>
+ *  <code> SQLInputImpl </code>类提供了一组类似于<code> ResultSet </code> getter方法的读者方法。
+ * 这些方法可以读取<code> SQLInputImpl </code>对象中的值。
+ * <P>
+ * 方法<code> wasNull </code>用于确定读取的最后一个值是否为SQL <code> NULL </code>。
+ * 当使用实现接口<code> SQLData </code>的类的对象调用方法<code> getObject </code>时,JDBC驱动程序调用<code> SQLData.getSQLType </code>
+ * 以确定自定义映射的UDT的SQL类型。
+ * 方法<code> wasNull </code>用于确定读取的最后一个值是否为SQL <code> NULL </code>。
+ * 驱动程序创建一个<code> SQLInputImpl </code>的实例,用UDT的属性填充它。
+ * 然后驱动程序将输入流传递给方法<code> SQLData.readSQL </code>,它会调用<code> SQLInputImpl </code>阅读器方法从输入流读取属性。
+ * 
+ * 
  * @since 1.5
  * @see java.sql.SQLData
  */
@@ -64,6 +83,9 @@ public class SQLInputImpl implements SQLInput {
     /**
      * <code>true</code> if the last value returned was <code>SQL NULL</code>;
      * <code>false</code> otherwise.
+     * <p>
+     *  <code> true </code>如果返回的最后一个值是<code> SQL NULL </code>; <code> false </code>。
+     * 
      */
     private boolean lastValueWasNull;
 
@@ -71,6 +93,9 @@ public class SQLInputImpl implements SQLInput {
      * The current index into the array of SQL structured type attributes
      * that will be read from this <code>SQLInputImpl</code> object and
      * mapped to the fields of a class in the Java programming language.
+     * <p>
+     *  当前索引到SQL结构类型属性数组中,将从此<code> SQLInputImpl </code>对象读取,并映射到Java编程语言中的类的字段。
+     * 
      */
     private int idx;
 
@@ -78,6 +103,9 @@ public class SQLInputImpl implements SQLInput {
      * The array of attributes to be read from this stream.  The order
      * of the attributes is the same as the order in which they were
      * listed in the SQL definition of the UDT.
+     * <p>
+     *  要从此流读取的属性数组。属性的顺序与它们在UDT的SQL定义中列出的顺序相同。
+     * 
      */
     private Object attrib[];
 
@@ -89,6 +117,10 @@ public class SQLInputImpl implements SQLInput {
      * <code>Class</code> object for a class that implements
      * <code>SQLData</code> (the Java class that defines how the UDT
      * will be mapped).
+     * <p>
+     * 当调用方法<code> readObject </code>时使用的类型映射。这是一个<code> java.util.Map </code>对象,其中可能有零个或多个条目。
+     * 每个条目由一个实现<code> SQLData </code>的类的一个UDT(要映射的值)和<code> Class </code>对象的完全限定名组成, UDT将被映射)。
+     * 
      */
     private Map<String,Class<?>> map;
 
@@ -100,6 +132,11 @@ public class SQLInputImpl implements SQLInput {
      * the attribute will be mapped according to the corresponding
      * <code>SQLData</code> implementation.
      *
+     * <p>
+     *  创建使用给定的属性数组和给定类型映射初始化的<code> SQLInputImpl </code>对象。
+     * 如果任何属性是其名称在类型映射中的条目中的UDT,则将根据相应的<code> SQLData </code>实现映射该属性。
+     * 
+     * 
      * @param attributes an array of <code>Object</code> instances in which
      *        each element is an attribute of a UDT. The order of the
      *        attributes in the array is the same order in which
@@ -134,6 +171,10 @@ public class SQLInputImpl implements SQLInput {
      * Retrieves the next attribute in this <code>SQLInputImpl</code> object
      * as an <code>Object</code> in the Java programming language.
      *
+     * <p>
+     *  在Java程序设计语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> Object </code>。
+     * 
+     * 
      * @return the next value in the input stream
      *         as an <code>Object</code> in the Java programming language
      * @throws SQLException if the read position is located at an invalid
@@ -165,6 +206,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as defined by a <code>SQLData</code>
      * implementation.
      * <p>
+     * <p>
+     *  在Java编程语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> String </code>。
+     * <p>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <p>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *     if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -183,6 +230,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as defined by a <code>SQLData</code>
      * implementation.
      * <p>
+     * <p>
+     *  在Java编程语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> boolean </code>。
+     * <p>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <p>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *     if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -202,6 +255,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as defined by a <code>SQLData</code>
      * implementation.
      * <p>
+     * <p>
+     * 在Java编程语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> byte </code>。
+     * <p>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <p>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *     if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -220,6 +279,12 @@ public class SQLInputImpl implements SQLInput {
      * returned type is the expected type; this responsibility is delegated
      * to the UDT mapping as defined by a <code>SQLData</code> implementation.
      * <P>
+     * <p>
+     *  在Java编程语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> short </code>。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <P>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *       if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -238,6 +303,12 @@ public class SQLInputImpl implements SQLInput {
      * returned type is the expected type; this responsibility is delegated
      * to the UDT mapping as defined by a <code>SQLData</code> implementation.
      * <P>
+     * <p>
+     *  在Java编程语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> int </code>。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <P>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *       if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -256,6 +327,12 @@ public class SQLInputImpl implements SQLInput {
      * returned type is the expected type; this responsibility is delegated
      * to the UDT mapping as defined by a <code>SQLData</code> implementation.
      * <P>
+     * <p>
+     *  在Java编程语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> long </code>。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <P>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *       if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -274,6 +351,12 @@ public class SQLInputImpl implements SQLInput {
      * returned type is the expected type; this responsibility is delegated
      * to the UDT mapping as defined by a <code>SQLData</code> implementation.
      * <P>
+     * <p>
+     *  在Java编程语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> float </code>。
+     * <P>
+     * 此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <P>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *       if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -292,6 +375,12 @@ public class SQLInputImpl implements SQLInput {
      * returned type is the expected type; this responsibility is delegated
      * to the UDT mapping as defined by a <code>SQLData</code> implementation.
      * <P>
+     * <p>
+     *  在Java编程语言中将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> double </code>。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <P>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *       if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -310,6 +399,12 @@ public class SQLInputImpl implements SQLInput {
      * returned type is the expected type; this responsibility is delegated
      * to the UDT mapping as defined by a <code>SQLData</code> implementation.
      * <P>
+     * <p>
+     *  将<code> SQLInputImpl </code>对象中的下一个属性检索为<code> java.math.BigDecimal </code>。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <P>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *       if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -327,6 +422,12 @@ public class SQLInputImpl implements SQLInput {
      * returned type is the expected type; this responsibility is delegated
      * to the UDT mapping as defined by a <code>SQLData</code> implementation.
      * <P>
+     * <p>
+     *  以字节数组的形式获取此<code> SQLInputImpl </code>对象中的下一个属性。
+     * <p>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <P>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *       if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -344,6 +445,12 @@ public class SQLInputImpl implements SQLInput {
      * returned type is the expected type; this responsibility is delegated
      * to the UDT mapping as defined by a <code>SQLData</code> implementation.
      * <P>
+     * <p>
+     *  将<code> SQLInputImpl </code>中的下一个属性作为<code> java.sql.Date </code>对象检索。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否是预期类型;此职责委托给由<code> SQLData </code>实现定义的UDT映射。
+     * <P>
+     * 
      * @return the next attribute in this <code>SQLInputImpl</code> object;
      *       if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -362,6 +469,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as implemented by a <code>SQLData</code>
      * implementation.
      *
+     * <p>
+     * 将<code> SQLInputImpl </code>对象中的下一个属性作为<code> java.sql.Time </code>对象检索。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否为预期类型,因为此职责被委派给由<code> SQLData </code>实现实现的UDT映射。
+     * 
+     * 
      * @return the attribute; if the value is <code>SQL NULL</code>, return
      * <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -375,6 +488,10 @@ public class SQLInputImpl implements SQLInput {
      * Retrieves the next attribute in this <code>SQLInputImpl</code> object as
      * a <code>java.sql.Timestamp</code> object.
      *
+     * <p>
+     *  将<code> SQLInputImpl </code>对象中的下一个属性作为<code> java.sql.Timestamp </code>对象检索。
+     * 
+     * 
      * @return the attribute; if the value is <code>SQL NULL</code>, return
      * <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -393,6 +510,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as implemented by a <code>SQLData</code>
      * implementation.
      *
+     * <p>
+     *  在此<c>> SQLInputImpl </code>对象中将下一个属性检索为Unicode字符流。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否为预期类型,因为此职责被委派给由<code> SQLData </code>实现实现的UDT映射。
+     * 
+     * 
      * @return the attribute; if the value is <code>SQL NULL</code>, return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
      * position; or if there are no further values in the stream.
@@ -410,6 +533,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as implemented by a <code>SQLData</code>
      * implementation.
      *
+     * <p>
+     *  以ASCII字符流形式返回此<c> <b> </b> </b> </b>对象中的下一个属性。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否为预期类型,因为此职责被委派给由<code> SQLData </code>实现实现的UDT映射。
+     * 
+     * 
      * @return the attribute; if the value is <code>SQL NULL</code>,
      * return <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -428,6 +557,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as implemented by a <code>SQLData</code>
      * implementation.
      *
+     * <p>
+     *  以非解释字节流的形式返回此<code> SQLInputImpl </code>对象中的下一个属性。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否为预期类型,因为此职责被委派给由<code> SQLData </code>实现实现的UDT映射。
+     * 
+     * 
      * @return the attribute; if the value is <code>SQL NULL</code>, return
      * <code>null</code>
      * @throws SQLException if the read position is located at an invalid
@@ -461,6 +596,17 @@ public class SQLInputImpl implements SQLInput {
      * method then calls the appropriate <code>SQLInputImpl.readXXX</code>
      * methods to retrieve the attribute values from the stream.
      *
+     * <p>
+     * 以Java程序设计语言中的<code> Object </code>检索此<code> SQLInputImpl </code>对象头部的值。
+     * 返回的对象的实际类型由Java编程语言中的SQL类型到类型的默认映射确定,除非有自定义映射,在这种情况下,返回的对象的类型由此流的类型映射确定。
+     * <P>
+     *  启用JDBC技术的驱动程序在将流传递到应用程序之前向流注册类型映射。
+     * <P>
+     *  当流头部的数据是SQL <code> NULL </code>时,此方法返回<code> null </code>。
+     * 如果数据是具有自定义映射的SQL结构化或不同类型,则此方法确定流头处的数据的SQL类型,构造适当类的对象,并调用方法<code> SQLData.readSQL < / code>。
+     * 然后,<code> readSQL </code>方法调用相应的<code> SQLInputImpl.readXXX </code>方法从流中检索属性值。
+     * 
+     * 
      * @return the value at the head of the stream as an <code>Object</code>
      *         in the Java programming language; <code>null</code> if
      *         the value is SQL <code>NULL</code>
@@ -497,6 +643,10 @@ public class SQLInputImpl implements SQLInput {
      * Retrieves the value at the head of this <code>SQLInputImpl</code> object
      * as a <code>Ref</code> object in the Java programming language.
      *
+     * <p>
+     *  将此<code> SQLInputImpl </code>对象的头部的值作为Java编程语言中的<code> Ref </code>对象检索。
+     * 
+     * 
      * @return a <code>Ref</code> object representing the SQL
      *         <code>REF</code> value at the head of the stream; if the value
      *         is <code>SQL NULL</code> return <code>null</code>
@@ -517,6 +667,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as implemented by a <code>SQLData</code>
      * implementation.
      *
+     * <p>
+     *  将此代码<code> SQLInputImpl </code>顶部的<code> BLOB </code>值作为Java编程语言中的<code> Blob </code>对象检索。
+     * <P>
+     * 此方法不执行类型安全检查以确定返回的类型是否为预期类型,因为此职责被委派给由<code> SQLData </code>实现实现的UDT映射。
+     * 
+     * 
      * @return a <code>Blob</code> object representing the SQL
      *         <code>BLOB</code> value at the head of this stream;
      *         if the value is <code>SQL NULL</code>, return
@@ -538,6 +694,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as implemented by a <code>SQLData</code>
      * implementation.
      *
+     * <p>
+     *  在Java编程语言中,将<code> SQLInputImpl </code>对象前面的<code> CLOB </code>值作为<code> Clob </code>对象检索。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否为预期类型,因为此职责被委派给由<code> SQLData </code>实现实现的UDT映射。
+     * 
+     * 
      * @return a <code>Clob</code> object representing the SQL
      *         <code>CLOB</code> value at the head of the stream;
      *         if the value is <code>SQL NULL</code>, return
@@ -559,6 +721,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as implemented by a <code>SQLData</code>
      * implementation.
      *
+     * <p>
+     *  从流中读取SQL <code> ARRAY </code>值,并将其作为Java编程语言中的<code> Array </code>对象返回。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否为预期类型,因为此职责被委派给由<code> SQLData </code>实现实现的UDT映射。
+     * 
+     * 
      * @return an <code>Array</code> object representing the SQL
      *         <code>ARRAY</code> value at the head of the stream; *
      *         if the value is <code>SQL NULL</code>, return
@@ -575,6 +743,10 @@ public class SQLInputImpl implements SQLInput {
      * Ascertains whether the last value read from this
      * <code>SQLInputImpl</code> object was <code>null</code>.
      *
+     * <p>
+     *  确定从此<code> SQLInputImpl </code>对象读取的最后一个值是<code> null </code>。
+     * 
+     * 
      * @return <code>true</code> if the SQL value read most recently was
      *         <code>null</code>; otherwise, <code>false</code>; by default it
      *         will return false
@@ -595,6 +767,12 @@ public class SQLInputImpl implements SQLInput {
      * to the UDT mapping as implemented by a <code>SQLData</code>
      * implementation.
      *
+     * <p>
+     *  从流中读取SQL <code> DATALINK </code>值,并将其作为Java编程语言中的<code> URL </code>对象返回。
+     * <P>
+     *  此方法不执行类型安全检查以确定返回的类型是否为预期类型,因为此职责被委派给由<code> SQLData </code>实现实现的UDT映射。
+     * 
+     * 
      * @return an <code>URL</code> object representing the SQL
      *         <code>DATALINK</code> value at the head of the stream; *
      *         if the value is <code>SQL NULL</code>, return
@@ -612,6 +790,10 @@ public class SQLInputImpl implements SQLInput {
      * Reads an SQL <code>NCLOB</code> value from the stream and returns it as a
      * <code>Clob</code> object in the Java programming language.
      *
+     * <p>
+     * 从流中读取SQL <code> NCLOB </code>值,并将其作为Java编程语言中的<code> Clob </code>对象返回。
+     * 
+     * 
      * @return a <code>NClob</code> object representing data of the SQL <code>NCLOB</code> value
      * at the head of the stream; <code>null</code> if the value read is
      * SQL <code>NULL</code>
@@ -628,6 +810,11 @@ public class SQLInputImpl implements SQLInput {
      * accessing  <code>NCHAR</code>,<code>NVARCHAR</code>
      * and <code>LONGNVARCHAR</code> columns.
      *
+     * <p>
+     *  读取流中的下一个属性,并以Java编程语言中的<code> String </code>返回它。
+     * 它用于访问<code> NCHAR </code>,<code> NVARCHAR </code>和<code> LONGNVARCHAR </code>列。
+     * 
+     * 
      * @return the attribute; if the value is SQL <code>NULL</code>, returns <code>null</code>
      * @exception SQLException if a database access error occurs
      * @since 1.6
@@ -640,6 +827,10 @@ public class SQLInputImpl implements SQLInput {
      * Reads an SQL <code>XML</code> value from the stream and returns it as a
      * <code>SQLXML</code> object in the Java programming language.
      *
+     * <p>
+     *  从流中读取SQL <code> XML </code>值,并将其作为Java编程语言中的<code> SQLXML </code>对象返回。
+     * 
+     * 
      * @return a <code>SQLXML</code> object representing data of the SQL <code>XML</code> value
      * at the head of the stream; <code>null</code> if the value read is
      * SQL <code>NULL</code>
@@ -654,6 +845,9 @@ public class SQLInputImpl implements SQLInput {
      * Reads an SQL <code>ROWID</code> value from the stream and returns it as a
      * <code>RowId</code> object in the Java programming language.
      *
+     * <p>
+     *  从流中读取SQL <code> ROWID </code>值,并将其作为Java编程语言中的<code> RowId </code>对象返回。
+     * 
      * @return a <code>RowId</code> object representing data of the SQL <code>ROWID</code> value
      * at the head of the stream; <code>null</code> if the value read is
      * SQL <code>NULL</code>

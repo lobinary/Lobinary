@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,20 @@ import java.util.ResourceBundle;
  * they maintain the Object uniqueness property across serialization
  * by defining a suitable readResolve method.
  *
+ * <p>
+ *  Level类定义了一组可用于控制日志输出的标准日志记录级别。日志记录级对象是有序的,由有序整数指定。在给定级别启用日志记录还可以在所有更高级别上进行日志记录。
+ * <p>
+ *  客户端通常应使用预定义的级别常量,如Level.SEVERE。
+ * <p>
+ *  级别按降序排列：
+ * <ul>
+ *  <li>严重(最高价值)<li>警告<li>信息<li>配置<li> FINE <li> FINER <li> FINEST
+ * </ul>
+ *  此外,还有一个级别OFF,可用于关闭日志记录,以及一个级别ALL,可用于启用所有消息的日志记录。
+ * <p>
+ *  第三方可以通过子类化Level来定义附加的日志记录级别。在这种情况下,子类应注意选择唯一的整数级值,并确保它们通过定义一个合适的readResolve方法在序列化中维护Object唯一性属性。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -67,16 +82,22 @@ public class Level implements java.io.Serializable {
     private static final String defaultBundle = "sun.util.logging.resources.logging";
 
     /**
+    /* <p>
+    /* 
      * @serial  The non-localized name of the level.
      */
     private final String name;
 
     /**
+    /* <p>
+    /* 
      * @serial  The integer value of the level.
      */
     private final int value;
 
     /**
+    /* <p>
+    /* 
      * @serial The resource bundle name to be used in localizing the level name.
      */
     private final String resourceBundleName;
@@ -88,6 +109,9 @@ public class Level implements java.io.Serializable {
     /**
      * OFF is a special level that can be used to turn off logging.
      * This level is initialized to <CODE>Integer.MAX_VALUE</CODE>.
+     * <p>
+     *  OFF是可用于关闭日志记录的特殊级别。此级别初始化为<CODE> Integer.MAX_VALUE </CODE>。
+     * 
      */
     public static final Level OFF = new Level("OFF",Integer.MAX_VALUE, defaultBundle);
 
@@ -99,6 +123,11 @@ public class Level implements java.io.Serializable {
      * program execution.   They should be reasonably intelligible
      * to end users and to system administrators.
      * This level is initialized to <CODE>1000</CODE>.
+     * <p>
+     *  SEVERE是指示严重故障的消息级别。
+     * <p>
+     * 一般来说,SEVERE消息应描述相当重要的事件,这将阻止正常的程序执行。它们应该对于最终用户和系统管理员是合理的。此级别初始化为<CODE> 1000 </CODE>。
+     * 
      */
     public static final Level SEVERE = new Level("SEVERE",1000, defaultBundle);
 
@@ -109,6 +138,11 @@ public class Level implements java.io.Serializable {
      * be of interest to end users or system managers, or which
      * indicate potential problems.
      * This level is initialized to <CODE>900</CODE>.
+     * <p>
+     *  WARNING是指示潜在问题的消息级别。
+     * <p>
+     *  一般来说,警告消息应描述最终用户或系统管理员感兴趣的事件或指示潜在问题的事件。此级别初始化为<CODE> 900 </CODE>。
+     * 
      */
     public static final Level WARNING = new Level("WARNING", 900, defaultBundle);
 
@@ -120,6 +154,11 @@ public class Level implements java.io.Serializable {
      * used for reasonably significant messages that will
      * make sense to end users and system administrators.
      * This level is initialized to <CODE>800</CODE>.
+     * <p>
+     *  INFO是信息消息的消息级别。
+     * <p>
+     *  通常,INFO消息将被写入控制台或其等价物。因此,INFO级别应该仅用于对最终用户和系统管理员有意义的合理重要的消息。此级别初始化为<CODE> 800 </CODE>。
+     * 
      */
     public static final Level INFO = new Level("INFO", 800, defaultBundle);
 
@@ -132,6 +171,11 @@ public class Level implements java.io.Serializable {
      * For example, CONFIG message might include the CPU type,
      * the graphics depth, the GUI look-and-feel, etc.
      * This level is initialized to <CODE>700</CODE>.
+     * <p>
+     *  CONFIG是静态配置消息的消息级别。
+     * <p>
+     *  CONFIG消息旨在提供各种静态配置信息,以帮助调试可能与特定配置相关联的问题。例如,CONFIG消息可能包括CPU类型,图形深度,GUI外观等。此级别初始化为<CODE> 700 </CODE>。
+     * 
      */
     public static final Level CONFIG = new Level("CONFIG", 700, defaultBundle);
 
@@ -153,6 +197,16 @@ public class Level implements java.io.Serializable {
      * failures.  Issues indicating potential performance problems
      * are also worth logging as FINE.
      * This level is initialized to <CODE>500</CODE>.
+     * <p>
+     *  FINE是提供跟踪信息的消息级别。
+     * <p>
+     * 所有FINE,FINER和FINEST都用于相对详细的跟踪。
+     * 三个级别的确切含义将在子系统之间变化,但一般来说,FINEST应用于最大量的详细输出,FINER用于较不详细的输出,FINE用于最小量(和最重要的)消息。
+     * <p>
+     *  通常,FINE级别应该用于对特定子系统没有特殊兴趣的开发人员广泛感兴趣的信息。
+     * <p>
+     *  FINE消息可能包括轻微(可恢复)故障。表示潜在性能问题的问题也值得记录为FINE。此级别初始化为<CODE> 500 </CODE>。
+     * 
      */
     public static final Level FINE = new Level("FINE", 500, defaultBundle);
 
@@ -161,18 +215,27 @@ public class Level implements java.io.Serializable {
      * By default logging calls for entering, returning, or throwing
      * an exception are traced at this level.
      * This level is initialized to <CODE>400</CODE>.
+     * <p>
+     *  FINER表示相当详细的跟踪消息。默认情况下,在此级别跟踪进入,返回或抛出异常的日志调用。此级别初始化为<CODE> 400 </CODE>。
+     * 
      */
     public static final Level FINER = new Level("FINER", 400, defaultBundle);
 
     /**
      * FINEST indicates a highly detailed tracing message.
      * This level is initialized to <CODE>300</CODE>.
+     * <p>
+     *  FINEST表示高度详细的跟踪消息。此级别初始化为<CODE> 300 </CODE>。
+     * 
      */
     public static final Level FINEST = new Level("FINEST", 300, defaultBundle);
 
     /**
      * ALL indicates that all messages should be logged.
      * This level is initialized to <CODE>Integer.MIN_VALUE</CODE>.
+     * <p>
+     *  ALL表示应记录所有消息。此级别初始化为<CODE> Integer.MIN_VALUE </CODE>。
+     * 
      */
     public static final Level ALL = new Level("ALL", Integer.MIN_VALUE, defaultBundle);
 
@@ -184,6 +247,13 @@ public class Level implements java.io.Serializable {
      * objects such as SEVERE or FINEST.  However, if clients need to
      * add new logging levels, they may subclass Level and define new
      * constants.
+     * <p>
+     *  使用给定的整数值创建命名级别。
+     * <p>
+     *  请注意,此构造函数是"protected"以允许子类化。一般来说,日志的客户端应该使用一个常量级对象,如SEVERE或FINEST。
+     * 但是,如果客户端需要添加新的日志记录级别,则它们可以子类化Level并定义新的常量。
+     * 
+     * 
      * @param name  the name of the Level, for example "SEVERE".
      * @param value an integer value for the level.
      * @throws NullPointerException if the name is null
@@ -196,6 +266,10 @@ public class Level implements java.io.Serializable {
      * Create a named Level with a given integer value and a
      * given localization resource name.
      * <p>
+     * <p>
+     * 使用给定的整数值和给定的本地化资源名称创建命名的级别。
+     * <p>
+     * 
      * @param name  the name of the Level, for example "SEVERE".
      * @param value an integer value for the level.
      * @param resourceBundleName name of a resource bundle to use in
@@ -227,6 +301,10 @@ public class Level implements java.io.Serializable {
      * Return the level's localization resource bundle name, or
      * null if no localization bundle is defined.
      *
+     * <p>
+     *  返回级别的本地化资源束名称,如果未定义本地化束,则返回null。
+     * 
+     * 
      * @return localization resource bundle name
      */
     public String getResourceBundleName() {
@@ -236,6 +314,10 @@ public class Level implements java.io.Serializable {
     /**
      * Return the non-localized string name of the Level.
      *
+     * <p>
+     *  返回级别的非本地化字符串名称。
+     * 
+     * 
      * @return non-localized name
      */
     public String getName() {
@@ -249,6 +331,12 @@ public class Level implements java.io.Serializable {
      * If no localization information is available, the
      * non-localized name is returned.
      *
+     * <p>
+     *  返回当前默认语言环境的级别的本地化字符串名称。
+     * <p>
+     *  如果没有可用的本地化信息,则返回非本地化名称。
+     * 
+     * 
      * @return localized name
      */
     public String getLocalizedName() {
@@ -381,6 +469,10 @@ public class Level implements java.io.Serializable {
     /**
      * Returns a string representation of this Level.
      *
+     * <p>
+     *  返回此级别的字符串表示形式。
+     * 
+     * 
      * @return the non-localized name of the Level, for example "INFO".
      */
     @Override
@@ -392,6 +484,10 @@ public class Level implements java.io.Serializable {
      * Get the integer value for this level.  This integer value
      * can be used for efficient ordering comparisons between
      * Level objects.
+     * <p>
+     *  获取此级别的整数值。此整数值可用于级对象之间的有效排序比较。
+     * 
+     * 
      * @return the integer value for this level.
      */
     public final int intValue() {
@@ -426,6 +522,16 @@ public class Level implements java.io.Serializable {
      * <li>     "1000"
      * </ul>
      *
+     * <p>
+     *  将级别名称字符串解析为级别。
+     * <p>
+     *  参数字符串可以由级别名称或整数值组成。
+     * <p>
+     *  例如：
+     * <ul>
+     *  <li>"SEVERE"<li>"1000"
+     * </ul>
+     * 
      * @param  name   string to be parsed
      * @throws NullPointerException if the name is null
      * @throws IllegalArgumentException if the value is not valid.
@@ -484,6 +590,9 @@ public class Level implements java.io.Serializable {
 
     /**
      * Compare two objects for value equality.
+     * <p>
+     * 
+     * 
      * @return true if and only if the two objects have the same level value.
      */
     @Override
@@ -498,6 +607,10 @@ public class Level implements java.io.Serializable {
 
     /**
      * Generate a hashcode.
+     * <p>
+     *  比较两个对象的值相等。
+     * 
+     * 
      * @return a hashcode based on the level value
      */
     @Override

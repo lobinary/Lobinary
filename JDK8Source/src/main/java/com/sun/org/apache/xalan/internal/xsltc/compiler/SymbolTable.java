@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SymbolTable.java,v 1.5 2005/09/28 13:48:16 pvedula Exp $
+ * <p>
+ *  $ Id：SymbolTable.java,v 1.5 2005/09/28 13:48:16 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -31,6 +44,8 @@ import java.util.Vector;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.MethodType;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -136,6 +151,9 @@ final class SymbolTable {
      * Add a primitive operator or function to the symbol table. To avoid
      * name clashes with user-defined names, the prefix <tt>PrimopPrefix</tt>
      * is prepended.
+     * <p>
+     *  向符号表中添加一个基本操作符或函数。要避免与用户定义的名称冲突,请添加前缀<tt> PrimopPrefix </tt>。
+     * 
      */
     public void addPrimop(String name, MethodType mtype) {
         Vector methods = (Vector)_primops.get(name);
@@ -148,6 +166,9 @@ final class SymbolTable {
     /**
      * Lookup a primitive operator or function in the symbol table by
      * prepending the prefix <tt>PrimopPrefix</tt>.
+     * <p>
+     *  通过在前缀<tt> PrimopPrefix </tt>之前查找符号表中的原始运算符或函数。
+     * 
      */
     public Vector lookupPrimop(String name) {
         return (Vector)_primops.get(name);
@@ -156,6 +177,9 @@ final class SymbolTable {
     /**
      * This is used for xsl:attribute elements that have a "namespace"
      * attribute that is currently not defined using xmlns:
+     * <p>
+     *  这用于具有当前未使用xmlns定义的"namespace"属性的xsl：attribute元素：
+     * 
      */
     private int _nsCounter = 0;
 
@@ -165,6 +189,9 @@ final class SymbolTable {
 
     /**
      * Use a namespace prefix to lookup a namespace URI
+     * <p>
+     *  使用命名空间前缀来查找命名空间URI
+     * 
      */
     private SyntaxTreeNode _current = null;
 
@@ -179,6 +206,9 @@ final class SymbolTable {
 
     /**
      * Adds an alias for a namespace prefix
+     * <p>
+     *  为命名空间前缀添加别名
+     * 
      */
     public void addPrefixAlias(String prefix, String alias) {
         if (_aliases == null) _aliases = new Hashtable();
@@ -187,6 +217,9 @@ final class SymbolTable {
 
     /**
      * Retrieves any alias for a given namespace prefix
+     * <p>
+     *  检索给定命名空间前缀的任何别名
+     * 
      */
     public String lookupPrefixAlias(String prefix) {
         if (_aliases == null) return null;
@@ -196,6 +229,9 @@ final class SymbolTable {
     /**
      * Register a namespace URI so that it will not be declared in the output
      * unless it is actually referenced in the output.
+     * <p>
+     *  注册命名空间URI,以便它不会在输出中声明,除非它在输出中实际引用。
+     * 
      */
     public void excludeURI(String uri) {
         // The null-namespace cannot be excluded
@@ -216,6 +252,9 @@ final class SymbolTable {
     /**
      * Exclude a series of namespaces given by a list of whitespace
      * separated namespace prefixes.
+     * <p>
+     * 排除由空格分隔的命名空间前缀列表给出的一系列命名空间。
+     * 
      */
     public void excludeNamespaces(String prefixes) {
         if (prefixes != null) {
@@ -234,6 +273,9 @@ final class SymbolTable {
 
     /**
      * Check if a namespace should not be declared in the output (unless used)
+     * <p>
+     *  检查是否不应在输出中声明命名空间(除非使用)
+     * 
      */
     public boolean isExcludedNamespace(String uri) {
         if (uri != null && _excludedURI != null) {
@@ -245,6 +287,9 @@ final class SymbolTable {
 
     /**
      * Turn of namespace declaration exclusion
+     * <p>
+     *  转义命名空间声明排除
+     * 
      */
     public void unExcludeNamespaces(String prefixes) {
         if (_excludedURI == null) return;
@@ -269,6 +314,10 @@ final class SymbolTable {
      * new stylesheet, a call to this method is needed to clear the current set
      * of excluded namespaces temporarily.  Every call to this method requires
      * a corresponding call to {@link #popExcludedNamespacesContext()}.
+     * <p>
+     *  通过样式表排除命名空间不会扩展到样式表导入或包含的任何样式表。在输入新样式表的上下文时,需要调用此方法以临时清除当前排除的名称空间集。
+     * 每次调用此方法都需要对{@link #popExcludedNamespacesContext()}进行相应的调用。
+     * 
      */
     public void pushExcludedNamespacesContext() {
         if (_excludedURIStack == null) {
@@ -284,6 +333,7 @@ final class SymbolTable {
      * stylesheet, a call to this method is needed to restore the set of
      * excluded namespaces that was in effect prior to entering the context of
      * the current stylesheet.
+     * <p>
      */
     public void popExcludedNamespacesContext() {
         _excludedURI = (Hashtable) _excludedURIStack.pop();

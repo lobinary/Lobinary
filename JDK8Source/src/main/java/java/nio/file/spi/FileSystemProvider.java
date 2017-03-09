@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -71,6 +72,25 @@ import java.security.PrivilegedAction;
  * <p> All of the methods in this class are safe for use by multiple concurrent
  * threads.
  *
+ * <p>
+ *  文件系统的服务提供程序类。 {@link java.nio.file.Files}类定义的方法通常会委托给这个类的实例。
+ * 
+ *  <p>文件系统提供程序是实现此类定义的抽象方法的此类的具体实现。提供程序由{@code URI} {@link #getScheme()scheme}标识。默认提供程序由URI方案"file"标识。
+ * 它创建{@link FileSystem},提供对Java虚拟机可访问的文件系统的访问。 {@link FileSystems}类定义如何定位和加载文件系统提供程序。
+ * 默认提供程序通常是系统默认提供程序,但如果设置了系统属性{@code java.nio.file.spi.DefaultFileSystemProvider},则可以覆盖默认提供程序。
+ * 在这种情况下,提供程序具有一个参数构造函数,其形式参数类型为{@code FileSystemProvider}。所有其他提供程序具有初始化提供程序的零参数构造函数。
+ * 
+ * <p>提供程序是一个或多个{@link FileSystem}实例的工厂。每个文件系统由{@code URI}标识,其中URI的方案与提供商的{@link #getScheme scheme}匹配。
+ * 例如,默认文件系统由URI {@code"file：///"}标识。例如,基于存储器的文件系统可以由诸如{@code"memory：///?name = logfs"}之类的URI标识。
+ *  {@link #newFileSystem newFileSystem}方法可用于创建文件系统,{@link #getFileSystem getFileSystem}方法可用于获取对提供程序创建的现
+ * 有文件系统的引用。
+ * 例如,默认文件系统由URI {@code"file：///"}标识。例如,基于存储器的文件系统可以由诸如{@code"memory：///?name = logfs"}之类的URI标识。
+ * 如果提供程序是单个文件系统的工厂,那么如果在初始化提供程序时创建文件系统,或者稍后调用{@code newFileSystem}方法时,它是与提供程序相关的。
+ * 在默认提供程序的情况下,{@code FileSystem}在提供程序初始化时创建。
+ * 
+ *  <p>此类中的所有方法都可安全地用于多个并发线程。
+ * 
+ * 
  * @since 1.7
  */
 
@@ -100,6 +120,12 @@ public abstract class FileSystemProvider {
      * loading of other installed providers. If circular loading of installed
      * providers is detected then an unspecified error is thrown.
      *
+     * <p>
+     *  初始化此类的新实例。
+     * 
+     *  <p>在构建期间,提供者可以安全地访问与默认提供者相关联的文件,但需要注意避免其他已安装的提供者的循环加载。如果检测到已安装的提供程序的循环加载,则抛出未指定的错误。
+     * 
+     * 
      * @throws  SecurityException
      *          If a security manager has been installed and it denies
      *          {@link RuntimePermission}<tt>("fileSystemProvider")</tt>
@@ -143,6 +169,12 @@ public abstract class FileSystemProvider {
      * initialized (if not already initialized) and loads any other installed
      * providers as described by the {@link FileSystems} class.
      *
+     * <p>
+     *  返回已安装的文件系统提供程序的列表。
+     * 
+     * <p>此方法的第一次调用导致默认提供程序被初始化(如果尚未初始化),并加载任何其他已安装的提供程序,如{@link FileSystems}类所述。
+     * 
+     * 
      * @return  An unmodifiable list of the installed file system providers. The
      *          list contains at least one element, that is the default file
      *          system provider
@@ -182,6 +214,10 @@ public abstract class FileSystemProvider {
     /**
      * Returns the URI scheme that identifies this provider.
      *
+     * <p>
+     *  返回标识此提供程序的URI方案。
+     * 
+     * 
      * @return  The URI scheme
      */
     public abstract String getScheme();
@@ -204,6 +240,16 @@ public abstract class FileSystemProvider {
      * provider allows a new file system to be created with the same URI as a
      * file system it previously created.
      *
+     * <p>
+     *  构造由URI标识的新{@code FileSystem}对象。此方法由{@link FileSystems#newFileSystem(URI,Map)}方法调用,以打开由URI标识的新文件系统。
+     * 
+     *  <p> {@code uri}参数是一个绝对的分层URI,方案与此提供商支持的方案相同(不考虑大小写)。 URI的确切形式高度依赖于提供程序。
+     *  {@code env}参数是用于配置文件系统的特定于提供程序的属性的映射。
+     * 
+     *  <p>如果文件系统已经存在,此方法会抛出{@link FileSystemAlreadyExistsException},因为它之前是通过调用此方法创建的。
+     * 一旦文件系统是{@link java.nio.file.FileSystem#close Closed},它是依赖于提供程序的,如果提供程序允许使用与之前创建的文件系统相同的URI创建一个新文件系统。
+     * 
+     * 
      * @param   uri
      *          URI reference
      * @param   env
@@ -253,6 +299,21 @@ public abstract class FileSystemProvider {
      * existing file system. In the case of the {@link FileSystems#getDefault
      * default} file system, no permission check is required.
      *
+     * <p>
+     *  返回此提供程序创建的现有{@code FileSystem}。
+     * 
+     * <p>此方法返回对通过调用{@link #newFileSystem(URI,Map)newFileSystem(URI,Map)}方法创建的{@code FileSystem}的引用。
+     * 文件系统创建的{@link #newFileSystem(Path,Map)newFileSystem(Path,Map)}方法不会返回此方法。文件系统由其{@code URI}标识。
+     * 其确切的形式高度依赖于供应商。在默认提供者的情况下,URI的路径组件是{@code"/"},权限,查询和片段组件是未定义的(未定义的组件由{@code null}表示)。
+     * 
+     *  <p>如果此方法返回对封闭文件系统的引用或抛出{@link FileSystemNotFoundException},则此提供程序创建的文件系统为{@link java.nio.file.FileSystem#close Closed}
+     * 时,它是与提供程序相关的。
+     * 如果提供程序允许使用与之前创建的文件系统相同的URI创建新的文件系统,则该方法在文件系统关闭后(以及在{@link# newFileSystem newFileSystem}方法)。
+     * 
+     *  <p>如果安装了安全管理器,则提供程序实现可能需要在返回对现有文件系统的引用之前检查权限。
+     * 对于{@link FileSystems#getDefault default}文件系统,不需要进行权限检查。
+     * 
+     * 
      * @param   uri
      *          URI reference
      *
@@ -284,6 +345,15 @@ public abstract class FileSystemProvider {
      * FileSystems#getDefault default} file system, no permission check is
      * required.
      *
+     * <p>
+     * 通过转换给定的{@link URI}返回{@code Path}对象。生成的{@code Path}与已存在的或自动构建的{@link FileSystem}相关联。
+     * 
+     *  <p> URI的确切形式与文件系统提供程序相关。在默认提供者的情况下,URI方案是{@code"file"},并且给定的URI具有非空路径组件,未定义的查询和片段组件。
+     * 生成的{@code Path}与默认的{@link FileSystems#getDefault default} {@code FileSystem}相关联。
+     * 
+     *  <p>如果安装了安全管理器,则提供程序实现可能需要检查权限。对于{@link FileSystems#getDefault default}文件系统,不需要进行权限检查。
+     * 
+     * 
      * @param   uri
      *          The URI to convert
      *
@@ -315,6 +385,15 @@ public abstract class FileSystemProvider {
      * it throws {@code UnsupportedOperationException}. The default implementation
      * of this method throws {@code UnsupportedOperationException}.
      *
+     * <p>
+     *  构造新的{@code FileSystem}以作为文件系统访问文件的内容。
+     * 
+     *  <p>此方法适用于伪文件系统的专业提供者,其中一个或多个文件的内容被视为文件系统。 {@code env}参数是用于配置文件系统的特定于提供程序的属性的映射。
+     * 
+     *  <p>如果此提供程序不支持创建此类文件系统,或者提供程序无法识别给定文件的文件类型,则会抛出{@code UnsupportedOperationException}。
+     * 此方法的默认实现引发{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param   path
      *          The path to the file
      * @param   env
@@ -352,6 +431,12 @@ public abstract class FileSystemProvider {
      * stream that reads bytes from the channel. This method should be overridden
      * where appropriate.
      *
+     * <p>
+     * 打开文件,返回输入流以从文件读取。此方法完全按照{@link Files#newInputStream}方法指定的方式工作。
+     * 
+     *  <p>此方法的默认实现打开了一个文件通道,就像调用{@link #newByteChannel}方法,并构造一个从通道读取字节的流。在适当的情况下应该覆盖此方法。
+     * 
+     * 
      * @param   path
      *          the path to the file to open
      * @param   options
@@ -394,6 +479,12 @@ public abstract class FileSystemProvider {
      * stream that writes bytes to the channel. This method should be overridden
      * where appropriate.
      *
+     * <p>
+     *  打开或创建文件,返回可用于将字节写入文件的输出流。此方法完全按照{@link Files#newOutputStream}方法指定的方式工作。
+     * 
+     *  <p>此方法的默认实现打开一个通道到文件,如同通过调用{@link #newByteChannel}方法,并构造一个流写入字节到通道。在适当的情况下应该覆盖此方法。
+     * 
+     * 
      * @param   path
      *          the path to the file to open or create
      * @param   options
@@ -444,6 +535,13 @@ public abstract class FileSystemProvider {
      * support the creation of file channels. When not overridden, the default
      * implementation throws {@code UnsupportedOperationException}.
      *
+     * <p>
+     *  打开或创建用于读取和/或写入的文件,返回文件通道以访问文件。
+     * 此方法完全按照{@link FileChannel#open(Path,Set,FileAttribute [])FileChannel.open}方法指定的方式工作。
+     * 不支持构造文件通道所需的所有功能的提供程序会抛出{@code UnsupportedOperationException}。默认提供程序需要支持创建文件通道。
+     * 当不重写时,默认实现会抛出{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param   path
      *          the path of the file to open or create
      * @param   options
@@ -488,6 +586,14 @@ public abstract class FileSystemProvider {
      * file channels. When not overridden, the default implementation of this
      * method throws {@code UnsupportedOperationException}.
      *
+     * <p>
+     * 打开或创建用于读取和/或写入的文件,返回异步文件通道以访问文件。
+     * 此方法完全按照{@link AsynchronousFileChannel#open(Path,Set,ExecutorService,FileAttribute [])AsynchronousFileChannel.open}
+     * 方法指定的方式工作。
+     * 打开或创建用于读取和/或写入的文件,返回异步文件通道以访问文件。不支持构造异步文件通道所需的所有功能的提供程序会抛出{@code UnsupportedOperationException}。
+     * 默认提供程序需要支持异步文件通道的创建。当不重写时,此方法的默认实现将抛出{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param   path
      *          the path of the file to open or create
      * @param   options
@@ -530,6 +636,10 @@ public abstract class FileSystemProvider {
      * file. This method works in exactly the manner specified by the {@link
      * Files#newByteChannel(Path,Set,FileAttribute[])} method.
      *
+     * <p>
+     *  打开或创建文件,返回可查找的字节通道以访问文件。此方法完全按照{@link Files#newByteChannel(Path,Set,FileAttribute [])}方法指定的方式工作。
+     * 
+     * 
      * @param   path
      *          the path to the file to open or create
      * @param   options
@@ -572,6 +682,13 @@ public abstract class FileSystemProvider {
      * Files#newDirectoryStream(java.nio.file.Path, java.nio.file.DirectoryStream.Filter)}
      * method.
      *
+     * <p>
+     *  打开目录,返回{@code DirectoryStream}以遍历目录中的条目。
+     * 此方法完全按照{@link Files#newDirectoryStream(java.nio.file.Path,java.nio.file.DirectoryStream.Filter)}方法指定的
+     * 方式工作。
+     *  打开目录,返回{@code DirectoryStream}以遍历目录中的条目。
+     * 
+     * 
      * @param   dir
      *          the path to the directory
      * @param   filter
@@ -596,6 +713,10 @@ public abstract class FileSystemProvider {
      * Creates a new directory. This method works in exactly the manner
      * specified by the {@link Files#createDirectory} method.
      *
+     * <p>
+     *  创建新目录。此方法完全按照{@link Files#createDirectory}方法指定的方式工作。
+     * 
+     * 
      * @param   dir
      *          the directory to create
      * @param   attrs
@@ -625,6 +746,12 @@ public abstract class FileSystemProvider {
      * <p> The default implementation of this method throws {@code
      * UnsupportedOperationException}.
      *
+     * <p>
+     *  创建到目标的符号链接。此方法完全按照{@link Files#createSymbolicLink}方法指定的方式工作。
+     * 
+     *  <p>此方法的默认实现引发{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param   link
      *          the path of the symbolic link to create
      * @param   target
@@ -662,6 +789,12 @@ public abstract class FileSystemProvider {
      * <p> The default implementation of this method throws {@code
      * UnsupportedOperationException}.
      *
+     * <p>
+     * 为现有文件创建新的链接(目录条目)。此方法完全按照{@link Files#createLink}方法指定的方式工作。
+     * 
+     *  <p>此方法的默认实现引发{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param   link
      *          the link (directory entry) to create
      * @param   existing
@@ -690,6 +823,10 @@ public abstract class FileSystemProvider {
      * Deletes a file. This method works in exactly the  manner specified by the
      * {@link Files#delete} method.
      *
+     * <p>
+     *  删除文件。此方法的工作方式与{@link Files#delete}方法指定的完全相同。
+     * 
+     * 
      * @param   path
      *          the path to the file to delete
      *
@@ -716,6 +853,12 @@ public abstract class FileSystemProvider {
      * #delete} ignoring the {@code NoSuchFileException} when the file does not
      * exist. It may be overridden where appropriate.
      *
+     * <p>
+     *  删除文件(如果存在)。此方法完全按照{@link Files#deleteIfExists}方法指定的方式工作。
+     * 
+     *  <p>此方法的默认实现只是在文件不存在时调用{@link #delete}忽略{@code NoSuchFileException}。它可以在适当的地方覆盖。
+     * 
+     * 
      * @param   path
      *          the path to the file to delete
      *
@@ -750,6 +893,12 @@ public abstract class FileSystemProvider {
      * <p> The default implementation of this method throws {@code
      * UnsupportedOperationException}.
      *
+     * <p>
+     *  读取符号链接的目标。此方法完全按照{@link Files#readSymbolicLink}方法指定的方式工作。
+     * 
+     *  <p>此方法的默认实现引发{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param   link
      *          the path to the symbolic link
      *
@@ -777,6 +926,10 @@ public abstract class FileSystemProvider {
      * except that both the source and target paths must be associated with
      * this provider.
      *
+     * <p>
+     *  将文件复制到目标文件。此方法完全按照{@link Files#copy(Path,Path,CopyOption [])}方法指定的方式工作,只是源路径和目标路径都必须与此提供程序相关联。
+     * 
+     * 
      * @param   source
      *          the path to the file to copy
      * @param   target
@@ -813,6 +966,10 @@ public abstract class FileSystemProvider {
      * manner specified by the {@link Files#move} method except that both the
      * source and target paths must be associated with this provider.
      *
+     * <p>
+     *  将文件移动或重命名为目标文件。此方法完全按照{@link Files#move}方法指定的方式工作,除了源路径和目标路径都必须与此提供程序相关联。
+     * 
+     * 
      * @param   source
      *          the path to the file to move
      * @param   target
@@ -848,6 +1005,10 @@ public abstract class FileSystemProvider {
      * Tests if two paths locate the same file. This method works in exactly the
      * manner specified by the {@link Files#isSameFile} method.
      *
+     * <p>
+     *  测试两个路径是否找到相同的文件。此方法完全按照{@link Files#isSameFile}方法指定的方式工作。
+     * 
+     * 
      * @param   path
      *          one path to the file
      * @param   path2
@@ -872,6 +1033,12 @@ public abstract class FileSystemProvider {
      *
      * <p> This method is invoked by the {@link Files#isHidden isHidden} method.
      *
+     * <p>
+     * 指出文件是否被视为"隐藏"</em>。此方法完全按照{@link Files#isHidden}方法指定的方式工作。
+     * 
+     *  <p>此方法由{@link Files#isHidden isHidden}方法调用。
+     * 
+     * 
      * @param   path
      *          the path to the file to test
      *
@@ -891,6 +1058,10 @@ public abstract class FileSystemProvider {
      * is located. This method works in exactly the manner specified by the
      * {@link Files#getFileStore} method.
      *
+     * <p>
+     *  返回表示文件所在文件存储区的{@link FileStore}。此方法的工作方式与{@link Files#getFileStore}方法指定的完全相同。
+     * 
+     * 
      * @param   path
      *          the path to the file
      *
@@ -953,6 +1124,28 @@ public abstract class FileSystemProvider {
      * attributes and so in some implementations this method may not be atomic
      * with respect to other file system operations.
      *
+     * <p>
+     *  检查文件的存在性和可选的可访问性。
+     * 
+     *  <p>此方法可由{@link Files#isReadable isReadable},{@link Files#isWritable isWritable}和{@link Files#isExecutable isExecutable}
+     * 方法使用,以检查文件的辅助功能。
+     * 
+     *  <p>此方法检查文件的存在,并且此Java虚拟机具有适当的权限,以允许根据{@code modes}参数中指定的所有访问模式访问该文件,如下所示：
+     * 
+     * <table border=1 cellpadding=5 summary="">
+     *  <tr> <th>价值</th> <th>描述</th> </tr>
+     * <tr>
+     *  <td> {@link AccessMode#READ READ} </td> <td>检查文件是否存在,以及Java虚拟机是否有读取文件的权限。 </td>
+     * </tr>
+     * <tr>
+     *  <td> {@link AccessMode#WRITE WRITE} </td> <td>检查文件是否存在,并且Java虚拟机有权写入文件</td>
+     * </tr>
+     * <tr>
+     * <td> {@link AccessMode#EXECUTE EXECUTE} </td> <td>检查文件是否存在,以及Java虚拟机是否具有{@link Runtime#exec execute}文
+     * 件的权限。
+     * 检查对目录的访问时,语义可能不同。例如,在UNIX系统上,检查{@code EXECUTE}访问权限检查Java虚拟机是否有权搜索目录以访问文件或子目录。 </td>。
+     * </tr>
+     * 
      * @param   path
      *          the path to the file to check
      * @param   modes
@@ -988,6 +1181,15 @@ public abstract class FileSystemProvider {
      * exactly the manner specified by the {@link Files#getFileAttributeView}
      * method.
      *
+     * <p>
+     * </table>
+     * 
+     *  <p>如果{@code modes}参数的长度为零,则检查文件的存在。
+     * 
+     *  <p>如果此对象引用的文件是符号链接,此方法遵循符号链接。根据实现,此方法可能需要读取文件权限,访问控制列表或其他文件属性,以便检查对文件的有效访问。
+     * 为了确定对文件的有效访问可能需要访问几个属性,因此在一些实现中,该方法相对于其他文件系统操作可能不是原子的。
+     * 
+     * 
      * @param   <V>
      *          The {@code FileAttributeView} type
      * @param   path
@@ -1008,6 +1210,10 @@ public abstract class FileSystemProvider {
      * exactly the manner specified by the {@link
      * Files#readAttributes(Path,Class,LinkOption[])} method.
      *
+     * <p>
+     *  返回给定类型的文件属性视图。此方法完全按照{@link Files#getFileAttributeView}方法指定的方式工作。
+     * 
+     * 
      * @param   <A>
      *          The {@code BasicFileAttributes} type
      * @param   path
@@ -1037,6 +1243,10 @@ public abstract class FileSystemProvider {
      * exactly the manner specified by the {@link
      * Files#readAttributes(Path,String,LinkOption[])} method.
      *
+     * <p>
+     *  作为批量操作读取文件的属性。此方法完全按照{@link Files#readAttributes(Path,Class,LinkOption [])}方法指定的方式工作。
+     * 
+     * 
      * @param   path
      *          the path to the file
      * @param   attributes
@@ -1069,6 +1279,10 @@ public abstract class FileSystemProvider {
      * Sets the value of a file attribute. This method works in exactly the
      * manner specified by the {@link Files#setAttribute} method.
      *
+     * <p>
+     *  将一组文件属性作为批量操作读取。此方法完全按照{@link Files#readAttributes(Path,String,LinkOption [])}方法指定的方式工作。
+     * 
+     * 
      * @param   path
      *          the path to the file
      * @param   attribute

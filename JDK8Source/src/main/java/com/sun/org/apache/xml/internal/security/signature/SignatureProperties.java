@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.signature;
 
@@ -36,6 +45,11 @@ import org.w3c.dom.Element;
  * concerning the generation of the signature.
  * for example, data-time stamp, serial number of cryptographic hardware.
  *
+ * <p>
+ *  句柄<code>&lt; ds：SignatureProperties&gt; </code>元素此元素保存{@link SignatureProperty}关于生成签名的附加信息项。
+ * 例如,数据时间戳,密码硬件的序列号。
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  */
 public class SignatureProperties extends SignatureElementProxy {
@@ -43,6 +57,10 @@ public class SignatureProperties extends SignatureElementProxy {
     /**
      * Constructor SignatureProperties
      *
+     * <p>
+     *  构造符签名属性
+     * 
+     * 
      * @param doc
      */
     public SignatureProperties(Document doc) {
@@ -53,6 +71,10 @@ public class SignatureProperties extends SignatureElementProxy {
 
     /**
      * Constructs {@link SignatureProperties} from {@link Element}
+     * <p>
+     *  构造{@link SignatureProperties} {@link Element}
+     * 
+     * 
      * @param element <code>SignatureProperties</code> element
      * @param BaseURI the URI of the resource where the XML instance was stored
      * @throws XMLSecurityException
@@ -79,6 +101,10 @@ public class SignatureProperties extends SignatureElementProxy {
     /**
      * Return the nonnegative number of added SignatureProperty elements.
      *
+     * <p>
+     *  返回添加的SignatureProperty元素的非负数。
+     * 
+     * 
      * @return the number of SignatureProperty elements
      */
     public int getLength() {
@@ -92,6 +118,11 @@ public class SignatureProperties extends SignatureElementProxy {
      * Return the <it>i</it><sup>th</sup> SignatureProperty. Valid <code>i</code>
      * values are 0 to <code>{link@ getSize}-1</code>.
      *
+     * <p>
+     *  返回<it> i </it> <sup> th </sup> SignatureProperty。
+     * 有效的<code> i </code>值为0到<code> {link @ getSize} -1 </code>。
+     * 
+     * 
      * @param i Index of the requested {@link SignatureProperty}
      * @return the <it>i</it><sup>th</sup> SignatureProperty
      * @throws XMLSignatureException
@@ -113,6 +144,10 @@ public class SignatureProperties extends SignatureElementProxy {
     /**
      * Sets the <code>Id</code> attribute
      *
+     * <p>
+     *  设置<code> Id </code>属性
+     * 
+     * 
      * @param Id the <code>Id</code> attribute
      */
     public void setId(String Id) {
@@ -125,6 +160,10 @@ public class SignatureProperties extends SignatureElementProxy {
     /**
      * Returns the <code>Id</code> attribute
      *
+     * <p>
+     * 返回<code> Id </code>属性
+     * 
+     * 
      * @return the <code>Id</code> attribute
      */
     public String getId() {
@@ -134,6 +173,9 @@ public class SignatureProperties extends SignatureElementProxy {
     /**
      * Method addSignatureProperty
      *
+     * <p>
+     *  方法addSignatureProperty
+     * 
      * @param sp
      */
     public void addSignatureProperty(SignatureProperty sp) {

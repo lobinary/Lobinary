@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,9 @@ import java.util.Vector;
 
 /**
  * This class provides some general purpose beans control methods.
+ * <p>
+ *  这个类提供了一些通用的bean控制方法。
+ * 
  */
 
 public class Beans {
@@ -61,6 +65,11 @@ public class Beans {
      * <p>
      * Instantiate a JavaBean.
      * </p>
+     * <p>
+     * <p>
+     *  实例化JavaBean。
+     * </p>
+     * 
      * @return a JavaBean
      * @param     cls         the class-loader from which we should create
      *                        the bean.  If this is null, then the system
@@ -81,6 +90,11 @@ public class Beans {
      * <p>
      * Instantiate a JavaBean.
      * </p>
+     * <p>
+     * <p>
+     *  实例化JavaBean。
+     * </p>
+     * 
      * @return a JavaBean
      *
      * @param     cls         the class-loader from which we should create
@@ -137,6 +151,27 @@ public class Beans {
      * the JDK appletviewer (for a reference browser environment) and the
      * BDK BeanBox (for a reference bean container).
      *
+     * <p>
+     *  实例化bean。
+     * <p>
+     *  该bean是基于相对于类加载器的名称创建的。此名称应为点分隔名称,例如"a.b.c"。
+     * <p>
+     *  在Bean 1.0中,给定的名称可以指示序列化对象或类。将来可能增加其他机制。在bean 1.0中,我们首先尝试将beanName视为序列化对象名称,然后作为类名称。
+     * <p>
+     *  当使用beanName作为序列化对象名称时,我们将给定的beanName转换为资源路径名,并添加一个尾随的".ser"后缀。然后,我们尝试从该资源加载序列化对象。
+     * <p>
+     *  例如,给定beanName"xy",Beans.instantiate将首先尝试从资源"x / y.ser"中读取序列化对象,如果失败,它将尝试加载类"xy"并创建一个实例的类。
+     * <p>
+     *  如果bean是java.applet.Applet的子类型,那么它会给出一些特殊的初始化。首先,它提供了默认的AppletStub和AppletContext。
+     * 第二,如果它是从类名实例化的,applet的"init"方法被调用。 (如果bean被反序列化,则跳过此步骤。)。
+     * <p>
+     * 注意,对于是applet的bean,调用者在applet上调用"start"的责任。为了正确的行为,这应该在小程序被添加到可见的AWT容器中之后完成。
+     * <p>
+     *  注意,通过beans.instantiate创建的applet在与浏览器中运行的applet稍微不同的环境中运行。
+     * 特别是,bean applet没有访问"参数",因此他们可能希望提供属性get / set方法来设置参数值。
+     * 我们建议bean-applet开发人员针对JDK appletviewer(用于引用浏览器环境)和BDK BeanBox(用于引用bean容器)测试他们的bean-applets。
+     * 
+     * 
      * @return a JavaBean
      * @param     cls         the class-loader from which we should create
      *                        the bean.  If this is null, then the system
@@ -223,6 +258,9 @@ public class Beans {
 
             /*
              * Try to instantiate the class.
+             * <p>
+             *  尝试实例化类。
+             * 
              */
 
             try {
@@ -351,6 +389,14 @@ public class Beans {
      * This method is provided in Beans 1.0 as a hook to allow the
      * addition of more flexible bean behaviour in the future.
      *
+     * <p>
+     *  从给定的bean,获取表示该源对象的指定类型视图的对象。
+     * <p>
+     *  结果可以是相同的对象或不同的对象。如果请求的目标视图不可用,则返回给定的bean。
+     * <p>
+     *  此方法在Beans 1.0中作为一个钩子提供,以允许在将来添加更灵活的bean行为。
+     * 
+     * 
      * @return an object representing a specified type view of the
      * source object
      * @param bean        Object from which we want to obtain a view.
@@ -367,6 +413,10 @@ public class Beans {
      * can be used on the given bean to obtain an object that
      * represents the specified targetType type view.
      *
+     * <p>
+     *  检查bean是否可以被视为给定的目标类型。如果可以在给定的bean上使用Beans.getInstanceof方法来获取表示指定的targetType类型视图的对象,则结果为true。
+     * 
+     * 
      * @param bean  Bean from which we want to obtain a view.
      * @param targetType  The type of view we'd like to get.
      * @return "true" if the given bean supports the given targetType.
@@ -379,6 +429,10 @@ public class Beans {
     /**
      * Test if we are in design-mode.
      *
+     * <p>
+     *  测试我们是否处于设计模式。
+     * 
+     * 
      * @return  True if we are running in an application construction
      *          environment.
      *
@@ -391,6 +445,10 @@ public class Beans {
     /**
      * Determines whether beans can assume a GUI is available.
      *
+     * <p>
+     *  确定bean是否可以假定GUI可用。
+     * 
+     * 
      * @return  True if we are running in an environment where beans
      *     can assume that an interactive GUI is available, so they
      *     can pop up dialog boxes, etc.  This will normally return
@@ -415,6 +473,13 @@ public class Beans {
      * its <code>checkPropertiesAccess</code>
      * method is called. This could result in a SecurityException.
      *
+     * <p>
+     *  用于指示我们是否正在应用程序构建器环境中运行。
+     * 
+     * <p>请注意,此方法已进行安全检查,并且不可用于(例如)不受信任的小程序。更具体地说,如果有一个安全管理器,它的<code> checkPropertiesAccess </code>方法被调用。
+     * 这可能导致SecurityException。
+     * 
+     * 
      * @param isDesignTime  True if we're in an application builder tool.
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkPropertiesAccess</code> method doesn't allow setting
@@ -441,6 +506,13 @@ public class Beans {
      * its <code>checkPropertiesAccess</code>
      * method is called. This could result in a SecurityException.
      *
+     * <p>
+     *  用于指示我们是否在GUI交互可用的环境中运行。
+     * 
+     *  <p>请注意,此方法已进行安全检查,并且不可用于(例如)不受信任的小程序。更具体地说,如果有一个安全管理器,它的<code> checkPropertiesAccess </code>方法被调用。
+     * 这可能导致SecurityException。
+     * 
+     * 
      * @param isGuiAvailable  True if GUI interaction is available.
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkPropertiesAccess</code> method doesn't allow setting
@@ -461,6 +533,9 @@ public class Beans {
 /**
  * This subclass of ObjectInputStream delegates loading of classes to
  * an existing ClassLoader.
+ * <p>
+ *  ObjectInputStream的这个子类将类的加载委托给现有的ClassLoader。
+ * 
  */
 
 class ObjectInputStreamWithLoader extends ObjectInputStream
@@ -469,6 +544,9 @@ class ObjectInputStreamWithLoader extends ObjectInputStream
 
     /**
      * Loader must be non-null;
+     * <p>
+     *  装载器必须是非null;
+     * 
      */
 
     public ObjectInputStreamWithLoader(InputStream in, ClassLoader loader)
@@ -483,6 +561,9 @@ class ObjectInputStreamWithLoader extends ObjectInputStream
 
     /**
      * Use the given ClassLoader rather than using the system class
+     * <p>
+     *  使用给定的ClassLoader而不是使用系统类
+     * 
      */
     @SuppressWarnings("rawtypes")
     protected Class resolveClass(ObjectStreamClass classDesc)
@@ -496,6 +577,9 @@ class ObjectInputStreamWithLoader extends ObjectInputStream
 /**
  * Package private support class.  This provides a default AppletContext
  * for beans which are applets.
+ * <p>
+ *  包私有支持类。这为applet提供了一个默认的AppletContext。
+ * 
  */
 
 class BeansAppletContext implements AppletContext {
@@ -581,6 +665,8 @@ class BeansAppletContext implements AppletContext {
 /**
  * Package private support class.  This provides an AppletStub
  * for beans which are applets.
+ * <p>
+ *  包私有支持类。这为applet提供了一个AppletStub。
  */
 class BeansAppletStub implements AppletStub {
     transient boolean active;

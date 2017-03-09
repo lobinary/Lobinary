@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 /**
@@ -207,6 +211,48 @@
  * {@link java.lang.Double#doubleToRawLongBits} and
  * {@link java.lang.Double#longBitsToDouble} conversions.
  *
+ * <p>
+ *  一个小工具包,支持对单变量进行无锁线程安全编程。本质上,这个包中的类将{@code volatile}值,字段和数组元素的概念扩展到还提供以下形式的原子条件更新操作的概念：
+ * 
+ *  <pre> {@code boolean compareAndSet(expectedValue,updateValue);} </pre>
+ * 
+ *  <p>此方法(在不同类之间的参数类型不同)原子性地将变量设置为{@code updateValue},如果它当前持有{@code expectedValue},则报告{@code true}成功。
+ * 此包中的类还包含获取和无条件设置值的方法,以及下面描述的较弱的条件原子更新操作{@code weakCompareAndSet}。
+ * 
+ *  这些方法的规范使得实现可以使用在当代处理器上可用的有效的机器级原子指令。然而在一些平台上,支撑可能需要某种形式的内部锁定。因此,这些方法不是严格保证是非阻塞的 - 线程可以在执行操作之前暂时阻塞。
+ * 
+ * <p>类{@link java.util.concurrent.atomic.AtomicBoolean},{@link java.util.concurrent.atomic.AtomicInteger}
+ * ,{@link java.util.concurrent.atomic.AtomicLong}和{ @link java.util.concurrent.atomic.AtomicReference}每
+ * 个都提供对相应类型的单个变量的访问和更新。
+ * 每个类还为该类型提供适当的实用程序方法。例如,类{@code AtomicLong}和{@code AtomicInteger}提供原子增量方法。一个应用程序是生成序列号,如：。
+ * 
+ *  <pre> {@code class Sequencer {private final AtomicLong sequenceNumber = new AtomicLong(0); public long next(){return sequenceNumber.getAndIncrement(); }
+ * }} </pre>。
+ * 
+ *  <p>直接定义新的效用函数,像{@code getAndIncrement},将函数原子地应用到值。
+ * 例如,给定一些变换<pre> {@code long transform(long input)} </pre>。
+ * 
+ *  写你的实用程序方法如下：<pre> {@code long getAndTransform(AtomicLong var){long prev,next; do {prev = var.get(); next = transform(prev); }
+ *  while(！var.compareAndSet(prev,next)); return prev; // return next; for transformAndGet}} </pre>。
+ * 
+ *  <p>对于原子的访问和更新的记忆效应通常遵循挥发物的规则,如所述
+ * <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html#jls-17.4">
+ *  Java语言规范(17.4内存模型)</a>：
+ * 
+ * <ul>
+ * 
+ *  <li> {@code get}具有读取{@code volatile}变量的记忆效应。
+ * 
+ * <li> {@code set}具有写入(分配){@code volatile}变量的记忆效应。
+ * 
+ *  <li> {@code lazySet}具有写入(分配){@code volatile}变量的记忆效应,除了它允许对后续(但不是以前的)内存操作重新排序,而这些内存操作本身不会对普通非{ @code volatile}
+ * 写入。
+ * 在其他使用上下文中,{@code lazySet}可能会在为了垃圾回收而清除一个从不会再次访问的引用时应用。
+ * 
+ *  <li> {@ code weakCompareAndSet}以原子方式读取并有条件地写入变量,但不会<em> </em>创建任何发生前的排序,因此不会保证以前或后续读取和写入任何变量{@code weakCompareAndSet}
+ * 的目标。
+ * 
+ * 
  * @since 1.5
  */
 package java.util.concurrent.atomic;

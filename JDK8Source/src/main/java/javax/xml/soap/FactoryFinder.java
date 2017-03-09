@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ class FactoryFinder {
      * Creates an instance of the specified class using the specified
      * <code>ClassLoader</code> object.
      *
+     * <p>
+     *  使用指定的<code> ClassLoader </code>对象创建指定类的实例。
+     * 
+     * 
      * @exception SOAPException if the given class could not be found
      *            or could not be instantiated
      */
@@ -59,6 +64,12 @@ class FactoryFinder {
      * <P>
      * This method is package private so that this code can be shared.
      *
+     * <p>
+     *  查找给定工厂名称的实现<code> Class </code>对象,如果失败,则返回null。
+     * <P>
+     *  此方法是包私有的,以便此代码可以共享。
+     * 
+     * 
      * @return the <code>Class</code> object of the specified message factory;
      *         or <code>null</code>
      *
@@ -81,6 +92,13 @@ class FactoryFinder {
      * <P>
      * This method is package private so that this code can be shared.
      *
+     * <p>
+     *  找到给定工厂名称的实现<code> Class </code>对象,或者如果失败,找到给定备用类名称的<code> Class </code>对象。必须按顺序使用提供的参数。
+     * 如果使用第一个参数成功,第二个参数不会被使用。
+     * <P>
+     *  此方法是包私有的,以便此代码可以共享。
+     * 
+     * 
      * @return the <code>Class</code> object of the specified message factory;
      *         may be <code>null</code>
      *
@@ -109,6 +127,13 @@ class FactoryFinder {
      * <P>
      * This method is package private so that this code can be shared.
      *
+     * <p>
+     *  找到给定工厂名的实现<code> Class </code>对象,或者如果失败,找到给定默认类名的<code> Class </code>对象,但只有<code> tryFallback < code>
+     * 是<code> true </code>。
+     * 提供的参数必须按顺序使用如果使用第一个参数成功,则不会使用第二个参数。注意,即使不尝试回退,也可能需要默认类名,因此可以处理某些错误条件。
+     * <P>
+     *  此方法是包私有的,以便此代码可以共享。
+     * 
      * @return the <code>Class</code> object of the specified message factory;
      *         may not be <code>null</code>
      *
@@ -199,6 +224,8 @@ class FactoryFinder {
      * class being loaded. If this is the specified default factory class and it
      * is restricted by package.access we get a SecurityException and can do a
      * Class.forName() on it so it will be loaded by the bootstrap class loader.
+     * <p>
+     * 
      */
     private static Class safeLoadClass(String className,
                                        ClassLoader classLoader)

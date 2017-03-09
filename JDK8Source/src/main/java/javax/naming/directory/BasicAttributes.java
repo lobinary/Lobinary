@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,19 @@ import javax.naming.NamingEnumeration;
   * multithreaded access. Multiple threads trying to access and modify
   * a single BasicAttributes instance should lock the object.
   *
+  * <p>
+  *  这个类提供了Attributes接口的基本实现。
+  * p>
+  *  BasicAttributes是区分大小写或不区分大小写(大小写忽略)。此属性在调用BasicAttributes构造函数时确定。
+  * 在不区分大小写的BasicAttributes中,在搜索属性或添加属性时忽略其属性标识符的情况。在区分大小写的BasicAttributes中,这种情况很重要。
+  * p>
+  *  当BasicAttributes类需要创建一个属性时,它使用BasicAttribute。没有对BasicAttribute的其他依赖。
+  * p>
+  *  请注意,BasicAttributes的更新(例如添加或删除属性)不会影响目录中的相应表示。只有使用DirContext接口中的操作才能更新目录。
+  * p>
+  *  BasicAttributes实例不会与并发多线程访问同步。尝试访问和修改单个BasicAttributes实例的多个线程应锁定该对象。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -71,6 +85,10 @@ import javax.naming.NamingEnumeration;
 public class BasicAttributes implements Attributes {
     /**
      * Indicates whether case of attribute ids is ignored.
+     * <p>
+     *  指示属性ID的大小写是否被忽略。
+     * 
+     * 
      * @serial
      */
     private boolean ignoreCase = false;
@@ -85,6 +103,9 @@ public class BasicAttributes implements Attributes {
       * Constructs a new instance of Attributes.
       * The character case of attribute identifiers
       * is significant when subsequently retrieving or adding attributes.
+      * <p>
+      *  构造属性的新实例。当随后检索或添加属性时,属性标识符的字符大小是重要的。
+      * 
       */
     public BasicAttributes() {
     }
@@ -93,6 +114,10 @@ public class BasicAttributes implements Attributes {
       * Constructs a new instance of Attributes.
       * If <code>ignoreCase</code> is true, the character case of attribute
       * identifiers is ignored; otherwise the case is significant.
+      * <p>
+      * 构造属性的新实例。如果<code> ignoreCase </code>为true,则忽略属性标识符的字符大小写;否则情况重大。
+      * 
+      * 
       * @param ignoreCase true means this attribute set will ignore
       *                   the case of its attribute identifiers
       *                   when retrieving or adding attributes;
@@ -108,6 +133,10 @@ public class BasicAttributes implements Attributes {
       * created attribute.
       * The character case of attribute identifiers
       * is significant when subsequently retrieving or adding attributes.
+      * <p>
+      *  构造具有一个属性的属性的新实例。由attrID和val指定的属性将添加到新创建的属性。当随后检索或添加属性时,属性标识符的字符大小是重要的。
+      * 
+      * 
       * @param attrID   non-null The id of the attribute to add.
       * @param val The value of the attribute to add. If null, a null
       *        value is added to the attribute.
@@ -123,6 +152,10 @@ public class BasicAttributes implements Attributes {
       * created attribute.
       * If <code>ignoreCase</code> is true, the character case of attribute
       * identifiers is ignored; otherwise the case is significant.
+      * <p>
+      *  构造具有一个属性的属性的新实例。由attrID和val指定的属性将添加到新创建的属性。如果<code> ignoreCase </code>为true,则忽略属性标识符的字符大小写;否则情况重大。
+      * 
+      * 
       * @param attrID   non-null The id of the attribute to add.
       *           If this attribute set ignores the character
       *           case of its attribute ids, the case of attrID
@@ -196,6 +229,10 @@ public class BasicAttributes implements Attributes {
      * of each attribute. The contents of this string is useful
      * for debugging and is not meant to be interpreted programmatically.
      *
+     * <p>
+     *  生成此属性集的字符串表示形式。该字符串由每个属性标识符和每个属性的内容组成。这个字符串的内容对于调试是有用的,并不意味着以编程方式解释。
+     * 
+     * 
      * @return A non-null string listing the contents of this attribute set.
      */
     public String toString() {
@@ -219,6 +256,14 @@ public class BasicAttributes implements Attributes {
      * it should override <tt>hashCode()</tt>
      * as well so that two <tt>Attributes</tt> instances that are equal
      * have the same hash code.
+     * <p>
+     * 确定此<tt> BasicAttributes </tt>是否等于另一个<tt>属性</tt>两个<tt>属性</tt>相等(如果它们都是<tt>属性</tt>的实例)属性ID的情况相同,并且包含相同的
+     * 属性。
+     * 使用<tt> Object.equals()</tt>检查此<tt> BasicAttributes </tt>中的每个<tt> Attribute </tt>是否相等,其可能被<tt> Attribu
+     * te < / tt>)。
+     * 如果子类覆盖<tt> equals()</tt>,它应该重写<tt> hashCode()</tt>,以使两个相等的实例具有相同的哈希码。
+     * 
+     * 
      * @param obj the possibly null object to compare against.
      *
      * @return true If obj is equal to this BasicAttributes.
@@ -264,6 +309,13 @@ public class BasicAttributes implements Attributes {
      * as well so that two <tt>Attributes</tt> instances that are equal
      * have the same hash code.
      *
+     * <p>
+     *  计算此BasicAttributes的哈希码。
+     * p>
+     *  通过添加该对象的属性的哈希码来计算哈希码。如果此BasicAttributes忽略其属性ID的情况,则会将一个添加到散列码。
+     * 如果子类覆盖<tt> hashCode()</tt>,它应该重写<tt> equals()</tt>,以使两个相等的实例具有相同的哈希码。
+     * 
+     * 
      * @return an int representing the hash code of this BasicAttributes instance.
      * @see #equals
      */
@@ -280,6 +332,10 @@ public class BasicAttributes implements Attributes {
 
     /**
      * Overridden to avoid exposing implementation details.
+     * <p>
+     *  覆盖以避免暴露实施详细信息。
+     * 
+     * 
      * @serialData Default field (ignoreCase flag -- a boolean), followed by
      * the number of attributes in the set
      * (an int), and then the individual Attribute objects.
@@ -296,6 +352,9 @@ public class BasicAttributes implements Attributes {
 
     /**
      * Overridden to avoid exposing implementation details.
+     * <p>
+     *  覆盖以避免暴露实施详细信息。
+     * 
      */
     private void readObject(java.io.ObjectInputStream s)
             throws java.io.IOException, ClassNotFoundException {
@@ -373,6 +432,8 @@ class IDEnumImpl implements NamingEnumeration<String> {
 
     /**
      * Use serialVersionUID from JNDI 1.1.1 for interoperability.
+     * <p>
+     *  从JNDI 1.1.1使用serialVersionUID以实现互操作性。
      */
     private static final long serialVersionUID = 4980164073184639448L;
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.c14n.implementations;
 
@@ -53,6 +62,15 @@ import org.xml.sax.SAXException;
  * <BR />
  * <i>THIS </i> implementation is a complete rewrite of the algorithm.
  *
+ * <p>
+ *  实现" <A HREF="http://www.w3.org/TR/2002/REC-xml-exc-c14n-20020718/">独家XML规范化版本1.0 </A>" <BR /> Credit
+ * s：在重构Canonicalizer框架期间,Ren? Software AG的Kollmorgen提交了一个ExclC14n的实现,它适用于旧的体系结构,并且在很大程度上依赖于我原来的(和缓慢的)"规
+ * 范XML"的实现。
+ * 一个大"谢谢"任仁?为了这。
+ * <BR />
+ *  <i> THIS </i>实现是算法的完全重写。
+ * 
+ * 
  * @author Christian Geuer-Pollmann <geuerp@apache.org>
  * @version $Revision: 1147448 $
  * @see <a href="http://www.w3.org/TR/2002/REC-xml-exc-c14n-20020718/ Exclusive#">
@@ -66,6 +84,9 @@ public abstract class Canonicalizer20010315Excl extends CanonicalizerBase {
     /**
       * This Set contains the names (Strings like "xmlns" or "xmlns:foo") of
       * the inclusive namespaces.
+      * <p>
+      *  此集合包含包含名称空间的名称(类似"xmlns"或"xmlns：foo"的字符串)。
+      * 
       */
     private SortedSet<String> inclusiveNSSet;
 
@@ -74,6 +95,10 @@ public abstract class Canonicalizer20010315Excl extends CanonicalizerBase {
     /**
      * Constructor Canonicalizer20010315Excl
      *
+     * <p>
+     * 构造函数Canonicalizer20010315Excl
+     * 
+     * 
      * @param includeComments
      */
     public Canonicalizer20010315Excl(boolean includeComments) {
@@ -83,6 +108,10 @@ public abstract class Canonicalizer20010315Excl extends CanonicalizerBase {
     /**
      * Method engineCanonicalizeSubTree
      * @inheritDoc
+     * <p>
+     *  方法engineCanonicalizeSubTree @inheritDoc
+     * 
+     * 
      * @param rootNode
      *
      * @throws CanonicalizationException
@@ -95,6 +124,10 @@ public abstract class Canonicalizer20010315Excl extends CanonicalizerBase {
     /**
      * Method engineCanonicalizeSubTree
      *  @inheritDoc
+     * <p>
+     *  方法engineCanonicalizeSubTree @inheritDoc
+     * 
+     * 
      * @param rootNode
      * @param inclusiveNamespaces
      *
@@ -108,6 +141,10 @@ public abstract class Canonicalizer20010315Excl extends CanonicalizerBase {
 
     /**
      * Method engineCanonicalizeSubTree
+     * <p>
+     *  方法engineCanonicalizeSubTree
+     * 
+     * 
      * @param rootNode
      * @param inclusiveNamespaces
      * @param excl A element to exclude from the c14n process.
@@ -123,6 +160,8 @@ public abstract class Canonicalizer20010315Excl extends CanonicalizerBase {
 
     /**
      *
+     * <p>
+     * 
      * @param rootNode
      * @param inclusiveNamespaces
      * @return the rootNode c14n.
@@ -138,6 +177,10 @@ public abstract class Canonicalizer20010315Excl extends CanonicalizerBase {
     /**
      * Method engineCanonicalizeXPathNodeSet
      * @inheritDoc
+     * <p>
+     *  方法engineCanonicalizeXPathNodeSet @inheritDoc
+     * 
+     * 
      * @param xpathNodeSet
      * @param inclusiveNamespaces
      * @throws CanonicalizationException
@@ -214,6 +257,9 @@ public abstract class Canonicalizer20010315Excl extends CanonicalizerBase {
 
     /**
      * @inheritDoc
+     * <p>
+     *  @inheritDoc
+     * 
      * @param element
      * @throws CanonicalizationException
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,12 @@ import sun.awt.AWTAccessor;
  * it blocks the rest of the application until the user has
  * chosen a file.
  *
+ * <p>
+ *  <code> FileDialog </code>类显示一个对话窗口,用户可以从中选择文件。
+ * <p>
+ *  由于它是一个模式对话框,当应用程序调用其<code> show </code>方法显示对话框时,它会阻止应用程序的其余部分,直到用户选择了一个文件。
+ * 
+ * 
  * @see Window#show
  *
  * @author      Sami Shaio
@@ -51,12 +58,18 @@ public class FileDialog extends Dialog {
     /**
      * This constant value indicates that the purpose of the file
      * dialog window is to locate a file from which to read.
+     * <p>
+     *  此常量值表示文件对话框窗口的目的是定位要从中读取的文件。
+     * 
      */
     public static final int LOAD = 0;
 
     /**
      * This constant value indicates that the purpose of the file
      * dialog window is to locate a file to which to write.
+     * <p>
+     *  此常量值表示文件对话框窗口的目的是定位要写入的文件。
+     * 
      */
     public static final int SAVE = 1;
 
@@ -66,6 +79,11 @@ public class FileDialog extends Dialog {
      * This integer will represent one or the other.
      * If the mode is not specified it will default to <code>LOAD</code>.
      *
+     * <p>
+     *  有两种<code> FileDialog </code>模式：<code> LOAD </code>和<code> SAVE </code>。此整数将表示一个或另一个。
+     * 如果没有指定模式,它将默认为<code> LOAD </code>。
+     * 
+     * 
      * @serial
      * @see getMode()
      * @see setMode()
@@ -78,6 +96,10 @@ public class FileDialog extends Dialog {
      * The string specifying the directory to display
      * in the file dialog.  This variable may be <code>null</code>.
      *
+     * <p>
+     *  指定要在文件对话框中显示的目录的字符串。此变量可以是<code> null </code>。
+     * 
+     * 
      * @serial
      * @see getDirectory()
      * @see setDirectory()
@@ -89,6 +111,10 @@ public class FileDialog extends Dialog {
      * filename text field in the file dialog.
      * This variable may be <code>null</code>.
      *
+     * <p>
+     *  指定文件对话框中文件名文本字段的初始值的字符串。此变量可以是<code> null </code>。
+     * 
+     * 
      * @serial
      * @see getFile()
      * @see setFile()
@@ -98,6 +124,10 @@ public class FileDialog extends Dialog {
     /**
      * Contains the File instances for all the files that the user selects.
      *
+     * <p>
+     *  包含用户选择的所有文件的文件实例。
+     * 
+     * 
      * @serial
      * @see #getFiles
      * @since 1.7
@@ -107,6 +137,10 @@ public class FileDialog extends Dialog {
     /**
      * Represents whether the file dialog allows the multiple file selection.
      *
+     * <p>
+     *  表示文件对话框是否允许多个文件选择。
+     * 
+     * 
      * @serial
      * @see #setMultipleMode
      * @see #isMultipleMode
@@ -120,6 +154,10 @@ public class FileDialog extends Dialog {
      * names are accepted by this filter.
      * This variable may be <code>null</code>.
      *
+     * <p>
+     *  用作文件对话框的文件名过滤器的过滤器。文件对话框将只显示此过滤器接受其名称的文件。此变量可以是<code> null </code>。
+     * 
+     * 
      * @serial
      * @see #getFilenameFilter()
      * @see #setFilenameFilter()
@@ -132,6 +170,9 @@ public class FileDialog extends Dialog {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
      private static final long serialVersionUID = 5035145889651310422L;
 
@@ -167,6 +208,9 @@ public class FileDialog extends Dialog {
     /**
      * Initialize JNI field and method IDs for fields that may be
        accessed from C.
+     * <p>
+     * 初始化可从C访问的字段的JNI字段和方法ID。
+     * 
      */
     private static native void initIDs();
 
@@ -175,6 +219,10 @@ public class FileDialog extends Dialog {
      * file dialog is initially empty.  This is a convenience method for
      * <code>FileDialog(parent, "", LOAD)</code>.
      *
+     * <p>
+     *  创建用于加载文件的文件对话框。文件对话框的标题最初为空。这是<code> FileDialog(parent,"",LOAD)</code>的一个方便的方法。
+     * 
+     * 
      * @param parent the owner of the dialog
      * @since JDK1.1
      */
@@ -188,6 +236,10 @@ public class FileDialog extends Dialog {
      * This is a convenience method for
      * <code>FileDialog(parent, title, LOAD)</code>.
      *
+     * <p>
+     *  创建具有用于加载文件的指定标题的文件对话框窗口。显示的文件是当前目录中的文件。这是<code> FileDialog(parent,title,LOAD)</code>的一个方便的方法。
+     * 
+     * 
      * @param     parent   the owner of the dialog
      * @param     title    the title of the dialog
      */
@@ -205,6 +257,13 @@ public class FileDialog extends Dialog {
      * <code>mode</code> is <code>SAVE</code>, the file dialog is finding
      * a place to write a file.
      *
+     * <p>
+     *  创建具有用于加载或保存文件的指定标题的文件对话框窗口。
+     * <p>
+     *  如果<code> mode </code>的值为<code> LOAD </code>,则文件对话框将找到要读取的文件,并且显示的文件是当前目录中的文件。
+     * 如果<code> mode </code>的值为<code> SAVE </code>,则文件对话框找到一个写入文件的位置。
+     * 
+     * 
      * @param     parent   the owner of the dialog
      * @param     title   the title of the dialog
      * @param     mode   the mode of the dialog; either
@@ -225,6 +284,10 @@ public class FileDialog extends Dialog {
      * file dialog is initially empty.  This is a convenience method for
      * <code>FileDialog(parent, "", LOAD)</code>.
      *
+     * <p>
+     *  创建用于加载文件的文件对话框。文件对话框的标题最初为空。这是<code> FileDialog(parent,"",LOAD)</code>的一个方便的方法。
+     * 
+     * 
      * @param     parent   the owner of the dialog
      * @exception java.lang.IllegalArgumentException if the <code>parent</code>'s
      *            <code>GraphicsConfiguration</code>
@@ -246,6 +309,10 @@ public class FileDialog extends Dialog {
      * This is a convenience method for
      * <code>FileDialog(parent, title, LOAD)</code>.
      *
+     * <p>
+     *  创建具有用于加载文件的指定标题的文件对话框窗口。显示的文件是当前目录中的文件。这是<code> FileDialog(parent,title,LOAD)</code>的一个方便的方法。
+     * 
+     * 
      * @param     parent   the owner of the dialog
      * @param     title    the title of the dialog; a <code>null</code> value
      *                     will be accepted without causing a
@@ -274,6 +341,13 @@ public class FileDialog extends Dialog {
      * <code>mode</code> is <code>SAVE</code>, the file dialog is finding
      * a place to write a file.
      *
+     * <p>
+     *  创建具有用于加载或保存文件的指定标题的文件对话框窗口。
+     * <p>
+     * 如果<code> mode </code>的值为<code> LOAD </code>,则文件对话框将找到要读取的文件,并且显示的文件是当前目录中的文件。
+     * 如果<code> mode </code>的值为<code> SAVE </code>,则文件对话框找到一个写入文件的位置。
+     * 
+     * 
      * @param     parent   the owner of the dialog
      * @param     title    the title of the dialog; a <code>null</code> value
      *                     will be accepted without causing a
@@ -303,6 +377,9 @@ public class FileDialog extends Dialog {
     /**
      * Constructs a name for this component. Called by <code>getName()</code>
      * when the name is <code>null</code>.
+     * <p>
+     *  构造此组件的名称。当名称为<code> null </code>时,由<code> getName()</code>调用。
+     * 
      */
     String constructComponentName() {
         synchronized (FileDialog.class) {
@@ -313,6 +390,9 @@ public class FileDialog extends Dialog {
     /**
      * Creates the file dialog's peer.  The peer allows us to change the look
      * of the file dialog without changing its functionality.
+     * <p>
+     *  创建文件对话框的对等体。对等体允许我们改变文件对话框的外观,而不改变其功能。
+     * 
      */
     public void addNotify() {
         synchronized(getTreeLock()) {
@@ -329,6 +409,10 @@ public class FileDialog extends Dialog {
      * Indicates whether this file dialog box is for loading from a file
      * or for saving to a file.
      *
+     * <p>
+     *  指示此文件对话框是用于从文件加载还是保存到文件。
+     * 
+     * 
      * @return   the mode of this file dialog window, either
      *               <code>FileDialog.LOAD</code> or
      *               <code>FileDialog.SAVE</code>
@@ -345,6 +429,10 @@ public class FileDialog extends Dialog {
      * a legal value, an exception will be thrown and <code>mode</code>
      * will not be set.
      *
+     * <p>
+     *  设置文件对话框的模式。如果<code> mode </code>不是合法值,则会抛出异常,并且不会设置<code> mode </code>。
+     * 
+     * 
      * @param      mode  the mode for this file dialog, either
      *                 <code>FileDialog.LOAD</code> or
      *                 <code>FileDialog.SAVE</code>
@@ -369,6 +457,10 @@ public class FileDialog extends Dialog {
     /**
      * Gets the directory of this file dialog.
      *
+     * <p>
+     *  获取此文件对话框的目录。
+     * 
+     * 
      * @return  the (potentially <code>null</code> or invalid)
      *          directory of this <code>FileDialog</code>
      * @see       java.awt.FileDialog#setDirectory
@@ -388,6 +480,13 @@ public class FileDialog extends Dialog {
      * Specifying "" as the directory is exactly equivalent to
      * specifying <code>null</code> as the directory.
      *
+     * <p>
+     *  将此文件对话框窗口的目录设置为指定的目录。指定<code> null </code>或无效目录意味着实现定义的默认值。但是,在用户选择文件之前,不会实现此默认值。
+     * 直到这一点,<code> getDirectory()</code>将返回传递到此方法的值。
+     * <p>
+     *  指定""作为目录等同于将<code> null </code>指定为目录。
+     * 
+     * 
      * @param     dir   the specified directory
      * @see       java.awt.FileDialog#getDirectory
      */
@@ -403,6 +502,10 @@ public class FileDialog extends Dialog {
      * Gets the selected file of this file dialog.  If the user
      * selected <code>CANCEL</code>, the returned file is <code>null</code>.
      *
+     * <p>
+     *  获取此文件对话框的所选文件。如果用户选择<code> CANCEL </code>,则返回的文件为<code> null </code>。
+     * 
+     * 
      * @return    the currently selected file of this file dialog window,
      *                or <code>null</code> if none is selected
      * @see       java.awt.FileDialog#setFile
@@ -417,6 +520,12 @@ public class FileDialog extends Dialog {
      * If the user cancels the file dialog,
      * then the method returns an empty array.
      *
+     * <p>
+     *  返回用户选择的文件。
+     * <p>
+     *  如果用户取消文件对话框,则该方法返回一个空数组。
+     * 
+     * 
      * @return    files that the user selects or an empty array
      *            if the user cancels the file dialog.
      * @see       #setFile(String)
@@ -439,6 +548,12 @@ public class FileDialog extends Dialog {
      * Note that the method is private and it's intended to be used
      * by the peers through the AWTAccessor API.
      *
+     * <p>
+     * 存储用户选择的所有文件的名称。
+     * 
+     *  请注意,该方法是私有的,并且打算由对等体通过AWTAccessor API使用。
+     * 
+     * 
      * @param files     the array that contains the short names of
      *                  all the files that the user selects.
      *
@@ -467,6 +582,16 @@ public class FileDialog extends Dialog {
      * Specifying "" as the file is exactly equivalent to specifying
      * {@code null} as the file.
      *
+     * <p>
+     *  将此文件对话框窗口的所选文件设置为指定的文件。如果在首次显示文件对话框窗口之前设置该文件,则该文件将成为默认文件。
+     * <p>
+     *  显示对话框时,将选择指定的文件。选择的种类取决于文件存在,对话框类型和本机平台。例如,文件可以在文件列表中突出显示,或者文件名编辑框可以用文件名填充。
+     * <p>
+     *  此方法接受完整的文件路径或带有扩展名的文件名(如果与{@code setDirectory}方法一起使用)。
+     * <p>
+     *  指定""作为文件完全等同于指定{@code null}作为文件。
+     * 
+     * 
      * @param    file   the file being set
      * @see      #getFile
      * @see      #getFiles
@@ -482,6 +607,10 @@ public class FileDialog extends Dialog {
     /**
      * Enables or disables multiple file selection for the file dialog.
      *
+     * <p>
+     *  启用或禁用文件对话框的多个文件选择。
+     * 
+     * 
      * @param enable    if {@code true}, multiple file selection is enabled;
      *                  {@code false} - disabled.
      * @see #isMultipleMode
@@ -496,6 +625,10 @@ public class FileDialog extends Dialog {
     /**
      * Returns whether the file dialog allows the multiple file selection.
      *
+     * <p>
+     *  返回文件对话框是否允许多个文件选择。
+     * 
+     * 
      * @return          {@code true} if the file dialog allows the multiple
      *                  file selection; {@code false} otherwise.
      * @see #setMultipleMode
@@ -513,6 +646,10 @@ public class FileDialog extends Dialog {
      * window.  Filename filters do not function in Sun's reference
      * implementation for Microsoft Windows.
      *
+     * <p>
+     *  确定此文件对话框的文件名过滤器。文件名过滤器允许用户指定哪些文件出现在文件对话框窗口中。文件名过滤器在Sun的Microsoft Windows参考实现中不起作用。
+     * 
+     * 
      * @return    this file dialog's filename filter
      * @see       java.io.FilenameFilter
      * @see       java.awt.FileDialog#setFilenameFilter
@@ -527,6 +664,10 @@ public class FileDialog extends Dialog {
      * Filename filters do not function in Sun's reference
      * implementation for Microsoft Windows.
      *
+     * <p>
+     *  将此文件对话框窗口的文件名过滤器设置为指定的过滤器。文件名过滤器在Sun的Microsoft Windows参考实现中不起作用。
+     * 
+     * 
      * @param   filter   the specified filter
      * @see     java.io.FilenameFilter
      * @see     java.awt.FileDialog#getFilenameFilter
@@ -545,6 +686,10 @@ public class FileDialog extends Dialog {
      * either a <code>dir</code> or a <code>file</code>
      * equal to an empty string to <code>null</code>.
      *
+     * <p>
+     * 读取<code> ObjectInputStream </code>,并通过将等于空字符串的<code> dir </code>或<code>文件</code>转换为<code> null <代码>。
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      */
     private void readObject(ObjectInputStream s)
@@ -568,6 +713,10 @@ public class FileDialog extends Dialog {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     *  返回一个表示此<code> FileDialog </code>窗口状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
      * @return  the parameter string of this file dialog window
      */
     protected String paramString() {

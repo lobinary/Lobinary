@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import javax.security.auth.callback.*;
  * cryptographic service provider who wishes to supply the implementation
  * of a keystore for a particular keystore type.
  *
+ * <p>
+ *  此类为{@code KeyStore}类定义了<i>服务提供程序接口</i>(<b> SPI </b>)。该类中的所有抽象方法必须由希望为特定密钥库类型提供密钥库实现的每个加密服务提供者实现。
+ * 
+ * 
  * @author Jan Luehe
  *
  *
@@ -60,6 +65,13 @@ public abstract class KeyStoreSpi {
      * or by a call to {@code setEntry} with a
      * {@code PrivateKeyEntry} or {@code SecretKeyEntry}.
      *
+     * <p>
+     *  返回与给定别名相关联的键,使用给定的密码来恢复它。
+     * 该键必须已通过调用{@code setKeyEntry}或通过使用{@code PrivateKeyEntry}或{@code SecretKeyEntry}调用{@code setEntry}与别名相
+     * 关联。
+     *  返回与给定别名相关联的键,使用给定的密码来恢复它。
+     * 
+     * 
      * @param alias the alias name
      * @param password the password for recovering the key
      *
@@ -81,6 +93,11 @@ public abstract class KeyStoreSpi {
      * or by a call to {@code setEntry} with a
      * {@code PrivateKeyEntry}.
      *
+     * <p>
+     *  返回与给定别名相关联的证书链。
+     * 证书链必须已通过对{@code setKeyEntry}的调用或通过使用{@code PrivateKeyEntry}的{@code setEntry}的调用与别名相关联。
+     * 
+     * 
      * @param alias the alias name
      *
      * @return the certificate chain (ordered with the user's certificate first
@@ -105,6 +122,16 @@ public abstract class KeyStoreSpi {
      * then the first element of the certificate chain in that entry
      * (if a chain exists) is returned.
      *
+     * <p>
+     *  返回与给定别名相关联的证书。
+     * 
+     *  <p>如果给定的别名标识了通过调用{@code setCertificateEntry}创建的条目,或通过使用{@code TrustedCertificateEntry}调用{@code setEntry}
+     * 创建的条目,则该条目中包含的受信任证书回。
+     * 
+     *  <p>如果给定的别名标识了通过调用{@code setKeyEntry}创建的条目,或通过使用{@code PrivateKeyEntry}调用{@code setEntry}创建的条目,则证书链的第
+     * 一个元素返回该条目(如果存在链)。
+     * 
+     * 
      * @param alias the alias name
      *
      * @return the certificate, or null if the given alias does not exist or
@@ -115,6 +142,10 @@ public abstract class KeyStoreSpi {
     /**
      * Returns the creation date of the entry identified by the given alias.
      *
+     * <p>
+     * 返回由给定别名标识的条目的创建日期。
+     * 
+     * 
      * @param alias the alias name
      *
      * @return the creation date of this entry, or null if the given alias does
@@ -134,6 +165,14 @@ public abstract class KeyStoreSpi {
      * associated with it is overridden by the given key (and possibly
      * certificate chain).
      *
+     * <p>
+     *  将给定的键分配给给定的别名,用给定的密码保护它。
+     * 
+     *  <p>如果给定的键是{@code java.security.PrivateKey}类型,它必须伴随着证书链,证明相应的公钥。
+     * 
+     *  <p>如果给定的别名已经存在,与其相关联的密钥库信息将被给定的密钥(以及可能的证书链)覆盖。
+     * 
+     * 
      * @param alias the alias name
      * @param key the key to be associated with the alias
      * @param password the password to protect the key
@@ -162,6 +201,14 @@ public abstract class KeyStoreSpi {
      * associated with it is overridden by the given key (and possibly
      * certificate chain).
      *
+     * <p>
+     *  将给定的键(已经被保护)分配给给定的别名。
+     * 
+     *  <p>如果受保护的密钥类型为{@code java.security.PrivateKey},则必须附带证书链,证明相应的公钥。
+     * 
+     *  <p>如果给定的别名已经存在,与其相关联的密钥库信息将被给定的密钥(以及可能的证书链)覆盖。
+     * 
+     * 
      * @param alias the alias name
      * @param key the key (in protected format) to be associated with the alias
      * @param chain the certificate chain for the corresponding public
@@ -184,6 +231,13 @@ public abstract class KeyStoreSpi {
      * the trusted certificate in the existing entry
      * is overridden by the given certificate.
      *
+     * <p>
+     *  将给定的证书分配给给定的别名。
+     * 
+     *  <p>如果给定别名标识通过调用{@code setCertificateEntry}创建的现有条目,或通过使用{@code TrustedCertificateEntry}调用{@code setEntry}
+     * 创建的现有条目,则现有条目中的受信任证书将被覆盖由给定的证书。
+     * 
+     * 
      * @param alias the alias name
      * @param cert the certificate
      *
@@ -198,6 +252,10 @@ public abstract class KeyStoreSpi {
     /**
      * Deletes the entry identified by the given alias from this keystore.
      *
+     * <p>
+     *  从此密钥库中删除由给定别名标识的条目。
+     * 
+     * 
      * @param alias the alias name
      *
      * @exception KeyStoreException if the entry cannot be removed.
@@ -208,6 +266,10 @@ public abstract class KeyStoreSpi {
     /**
      * Lists all the alias names of this keystore.
      *
+     * <p>
+     *  列出此密钥库的所有别名。
+     * 
+     * 
      * @return enumeration of the alias names
      */
     public abstract Enumeration<String> engineAliases();
@@ -215,6 +277,10 @@ public abstract class KeyStoreSpi {
     /**
      * Checks if the given alias exists in this keystore.
      *
+     * <p>
+     *  检查此密钥库中是否存在给定别名。
+     * 
+     * 
      * @param alias the alias name
      *
      * @return true if the alias exists, false otherwise
@@ -224,6 +290,10 @@ public abstract class KeyStoreSpi {
     /**
      * Retrieves the number of entries in this keystore.
      *
+     * <p>
+     *  检索此密钥库中的条目数。
+     * 
+     * 
      * @return the number of entries in this keystore
      */
     public abstract int engineSize();
@@ -234,6 +304,11 @@ public abstract class KeyStoreSpi {
      * or created by a call to {@code setEntry} with a
      * {@code PrivateKeyEntry} or a {@code SecretKeyEntry}.
      *
+     * <p>
+     * 如果由给定别名标识的条目是通过调用{@code setKeyEntry}创建的,或者通过使用{@code PrivateKeyEntry}或{@code SecretKeyEntry}调用{@code setEntry}
+     * 创建的条目,则返回true。
+     * 
+     * 
      * @param alias the alias for the keystore entry to be checked
      *
      * @return true if the entry identified by the given alias is a
@@ -247,6 +322,11 @@ public abstract class KeyStoreSpi {
      * or created by a call to {@code setEntry} with a
      * {@code TrustedCertificateEntry}.
      *
+     * <p>
+     *  如果由给定别名标识的条目是通过调用{@code setCertificateEntry}创建的,或者通过使用{@code TrustedCertificateEntry}调用{@code setEntry}
+     * 创建的条目,则返回true。
+     * 
+     * 
      * @param alias the alias for the keystore entry to be checked
      *
      * @return true if the entry identified by the given alias contains a
@@ -272,6 +352,18 @@ public abstract class KeyStoreSpi {
      * then the given certificate is compared to the first
      * element of that entry's certificate chain.
      *
+     * <p>
+     *  返回其证书与给定证书匹配的第一个密钥库条目的(别名)名称。
+     * 
+     *  <p>此方法尝试将给定的证书与每个密钥库条目进行匹配。
+     * 如果正在考虑的条目是通过调用{@code setCertificateEntry}创建的,或者通过使用{@code TrustedCertificateEntry}对{@code setEntry}的调
+     * 用创建,则将给定的证书与该条目的证书进行比较。
+     *  <p>此方法尝试将给定的证书与每个密钥库条目进行匹配。
+     * 
+     *  <p>如果正在考虑的条目是通过调用{@code setKeyEntry}创建的,或者通过使用{@code PrivateKeyEntry}调用{@code setEntry}创建,那么给定的证书将与第
+     * 一个元素该条目的证书链。
+     * 
+     * 
      * @param cert the certificate to match with.
      *
      * @return the alias name of the first entry with matching certificate,
@@ -283,6 +375,10 @@ public abstract class KeyStoreSpi {
      * Stores this keystore to the given output stream, and protects its
      * integrity with the given password.
      *
+     * <p>
+     *  将此密钥库存储到给定的输出流,并使用给定的密码保护其完整性。
+     * 
+     * 
      * @param stream the output stream to which this keystore is written.
      * @param password the password to generate the keystore integrity check
      *
@@ -299,6 +395,10 @@ public abstract class KeyStoreSpi {
      * Stores this keystore using the given
      * {@code KeyStore.LoadStoreParmeter}.
      *
+     * <p>
+     *  使用给定的{@code KeyStore.LoadStoreParmeter}存储此密钥库。
+     * 
+     * 
      * @param param the {@code KeyStore.LoadStoreParmeter}
      *          that specifies how to store the keystore,
      *          which may be {@code null}
@@ -329,6 +429,12 @@ public abstract class KeyStoreSpi {
      * If a password is not given for integrity checking,
      * then integrity checking is not performed.
      *
+     * <p>
+     *  从给定的输入流加载密钥库。
+     * 
+     * <p>可以给出密码以解锁密钥库(例如,密钥库驻留在硬件令牌设备上),或者检查密钥库数据的完整性。如果未给出完整性检查的密码,则不执行完整性检查。
+     * 
+     * 
      * @param stream the input stream from which the keystore is loaded,
      * or {@code null}
      * @param password the password used to check the integrity of
@@ -356,6 +462,12 @@ public abstract class KeyStoreSpi {
      * <p> Note that if this KeyStore has already been loaded, it is
      * reinitialized and loaded again from the given parameter.
      *
+     * <p>
+     *  使用给定的{@code KeyStore.LoadStoreParameter}加载密钥库。
+     * 
+     *  <p>请注意,如果此KeyStore已加载,则会重新初始化并从给定参数重新加载。
+     * 
+     * 
      * @param param the {@code KeyStore.LoadStoreParameter}
      *          that specifies how to load the keystore,
      *          which may be {@code null}
@@ -422,6 +534,10 @@ public abstract class KeyStoreSpi {
      * Gets a {@code KeyStore.Entry} for the specified alias
      * with the specified protection parameter.
      *
+     * <p>
+     *  为指定的具有指定保护参数的别名获取{@code KeyStore.Entry}。
+     * 
+     * 
      * @param alias get the {@code KeyStore.Entry} for this alias
      * @param protParam the {@code ProtectionParameter}
      *          used to protect the {@code Entry},
@@ -491,6 +607,12 @@ public abstract class KeyStoreSpi {
      * <p> If an entry already exists for the specified alias,
      * it is overridden.
      *
+     * <p>
+     *  在指定的别名下保存{@code KeyStore.Entry}。指定的保护参数用于保护{@code Entry}。
+     * 
+     *  <p>如果指定别名的某个条目已存在,则将覆盖该条目。
+     * 
+     * 
      * @param alias save the {@code KeyStore.Entry} under this alias
      * @param entry the {@code Entry} to save
      * @param protParam the {@code ProtectionParameter}
@@ -564,6 +686,8 @@ public abstract class KeyStoreSpi {
      * {@code alias} is an instance or subclass of the specified
      * {@code entryClass}.
      *
+     * <p>
+     * 
      * @param alias the alias name
      * @param entryClass the entry class
      *

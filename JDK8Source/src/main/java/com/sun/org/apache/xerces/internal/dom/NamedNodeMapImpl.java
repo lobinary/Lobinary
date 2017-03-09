@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -56,6 +66,21 @@ import org.w3c.dom.Node;
  *
  * @xerces.internal
  *
+ * <p>
+ *  NamedNodeMaps表示可以按名称访问的节点集合。实体和符号节点存储在附加到DocumentType的NamedNodeMaps中。
+ * 属性放置在一个NamedNodeMap附加到他们相关的elem。然而,因为属性需要更多的工作,例如触发突变事件,它们存储在NamedNodeMapImpl的子类中。
+ * <P>
+ *  每个名称只能存储一个节点;尝试存储另一个将替换以前的值。
+ * <P>
+ *  注意："主"存储密钥取自节点的NodeName属性。 "secondary"存储键是DOM级别2节点访问时的namespaceURI和localName。
+ * 所有节点,甚至DOM 2级节点存储在由主"节点名称"键排序的单个向量中。
+ * <P>
+ * 注意：item()的整数索引_not_意味着指定的节点必须存储在数组中;这只是一种访问方法。还要注意,这些指数是"活的";如果有人改变地图的内容,则与节点相关联的索引可能改变。
+ * <P>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @version $Id: NamedNodeMapImpl.java,v 1.8 2010-11-01 04:39:39 joehw Exp $
  * @since  PR-DOM-Level-1-19980818.
  */
@@ -102,6 +127,9 @@ public class NamedNodeMapImpl
      * Caveat: This is a count rather than an index, so the
      * highest-numbered node at any time can be accessed via
      * item(getLength()-1).
+     * <p>
+     *  报告此NamedNodeMap中当前存储的节点数。注意：这是一个计数,而不是一个索引,所以任何时候最高编号的节点可以通过item(getLength() -  1)访问。
+     * 
      */
     public int getLength() {
         return (nodes != null) ? nodes.size() : 0;
@@ -110,6 +138,10 @@ public class NamedNodeMapImpl
     /**
      * Retrieve an item from the map by 0-based index.
      *
+     * <p>
+     *  通过基于0的索引从地图检索项目。
+     * 
+     * 
      * @param index Which item to retrieve. Note that indices are just an
      * enumeration of the current contents; they aren't guaranteed to be
      * stable, nor do they imply any promises about the order of the
@@ -129,6 +161,10 @@ public class NamedNodeMapImpl
     /**
      * Retrieve a node by name.
      *
+     * <p>
+     *  按名称检索节点。
+     * 
+     * 
      * @param name Name of a node to look up.
      * @return the Node (of unspecified sub-class) stored with that name, or
      * null if no value has been assigned to that name.
@@ -144,6 +180,10 @@ public class NamedNodeMapImpl
      * Introduced in DOM Level 2. <p>
      * Retrieves a node specified by local name and namespace URI.
      *
+     * <p>
+     *  在DOM级别2中引入。<p>检索由本地名称和命名空间URI指定的节点。
+     * 
+     * 
      * @param namespaceURI  The namespace URI of the node to retrieve.
      *                      When it is null or an empty string, this
      *                      method behaves like getNamedItem.
@@ -164,6 +204,10 @@ public class NamedNodeMapImpl
      * stored under, multiple nodes of certain types (those that have a "special" string
      * value) cannot be stored as the names would clash. This is seen as preferable to
      * allowing nodes to be aliased.
+     * <p>
+     *  使用其nodeName属性添加节点。由于nodeName属性用于派生节点必须存储的名称,因此当名称冲突时,不能存储某些类型的多个节点(具有"特殊"字符串值的节点)。这被认为是允许节点混叠的优选方案。
+     * 
+     * 
      * @see org.w3c.dom.NamedNodeMap#setNamedItem
      * @return If the new Node replaces an existing node the replaced Node is returned,
      *      otherwise null is returned.
@@ -208,6 +252,10 @@ public class NamedNodeMapImpl
 
     /**
      * Adds a node using its namespaceURI and localName.
+     * <p>
+     *  使用其namespaceURI和localName添加节点。
+     * 
+     * 
      * @see org.w3c.dom.NamedNodeMap#setNamedItem
      * @return If the new Node replaces an existing node the replaced Node is returned,
      *      otherwise null is returned.
@@ -259,6 +307,10 @@ public class NamedNodeMapImpl
 
     /**
      * Removes a node specified by name.
+     * <p>
+     *  删除名称指定的节点。
+     * 
+     * 
      * @param name The name of a node to remove.
      * @return The node removed from the map if a node with such a name exists.
      */
@@ -288,6 +340,10 @@ public class NamedNodeMapImpl
     /**
      * Introduced in DOM Level 2. <p>
      * Removes a node specified by local name and namespace URI.
+     * <p>
+     *  在DOM级别2中引入。<p>删除由本地名称和命名空间URI指定的节点。
+     * 
+     * 
      * @param namespaceURI
      *                      The namespace URI of the node to remove.
      *                      When it is null or an empty string, this
@@ -328,6 +384,9 @@ public class NamedNodeMapImpl
     /**
      * Cloning a NamedNodeMap is a DEEP OPERATION; it always clones
      * all the nodes contained in the map.
+     * <p>
+     *  克隆一个NamedNodeMap是一个DEEP操作;它总是克隆地图中包含的所有节点。
+     * 
      */
 
     public NamedNodeMapImpl cloneMap(NodeImpl ownerNode) {
@@ -366,6 +425,10 @@ public class NamedNodeMapImpl
      * NamedNodeMaps readonly too. I expect that in fact the shallow
      * version of this operation will never be
      *
+     * <p>
+     *  内部子程序允许只读节点使其包含的NamedNodeMaps只读。我期望事实上浅操作的版本永远不会
+     * 
+     * 
      * @param readOnly boolean true to make read-only, false to permit editing.
      * @param deep boolean true to pass this request along to the contained
      * nodes, false to only toggle the NamedNodeMap itself. I expect that
@@ -384,6 +447,9 @@ public class NamedNodeMapImpl
     /**
      * Internal subroutine returns this NodeNameMap's (shallow) readOnly value.
      *
+     * <p>
+     *  内部子程序返回此NodeNameMap的(shallow)readOnly值。
+     * 
      */
     boolean getReadOnly() {
         return isReadOnly();
@@ -397,6 +463,9 @@ public class NamedNodeMapImpl
     /**
      * NON-DOM
      * set the ownerDocument of this node, and the attributes it contains
+     * <p>
+     * NON-DOM设置此节点的ownerDocument及其包含的属性
+     * 
      */
     protected void setOwnerDocument(CoreDocumentImpl doc) {
         if (nodes != null) {
@@ -439,6 +508,10 @@ public class NamedNodeMapImpl
      * Subroutine: Locate the named item, or the point at which said item
      * should be added.
      *
+     * <p>
+     *  子程序：找到指定的项目,或者添加所述项目的点。
+     * 
+     * 
      * @param name Name of a node to look up.
      *
      * @return If positive or zero, the index of the found item.
@@ -480,6 +553,7 @@ public class NamedNodeMapImpl
 
 
     /** This findNamePoint is for DOM Level 2 Namespaces.
+    /* <p>
      */
     protected int findNamePoint(String namespaceURI, String name) {
 
@@ -533,6 +607,9 @@ public class NamedNodeMapImpl
 
     /**
       * NON-DOM: Remove attribute at specified index
+      * <p>
+      *  NON-DOM：在指定索引处删除属性
+      * 
       */
     protected void removeItem(int index) {
        if (nodes != null && index < nodes.size()){
@@ -574,6 +651,10 @@ public class NamedNodeMapImpl
     /**
      * NON-DOM: copy content of this map into the specified ArrayList
      *
+     * <p>
+     *  NON-DOM：将此映射的内容复制到指定的ArrayList中
+     * 
+     * 
      * @param list   ArrayList to copy information into.
      * @return A copy of this node named map
      */
@@ -597,6 +678,8 @@ public class NamedNodeMapImpl
 
     /**
       * NON-DOM remove all elements from this map
+      * <p>
+      *  NON-DOM删除此地图中的所有元素
       */
     public void removeAll (){
         if (nodes != null) {

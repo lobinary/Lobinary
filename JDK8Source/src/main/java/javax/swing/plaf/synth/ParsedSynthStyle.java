@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import sun.swing.plaf.synth.DefaultSynthStyle;
 /**
  * ParsedSynthStyle are the SynthStyle's that SynthParser creates.
  *
+ * <p>
+ *  ParsedSynthStyle是SynthParser创建的SynthStyle。
+ * 
  * @author Scott Violet
  */
 class ParsedSynthStyle extends DefaultSynthStyle {

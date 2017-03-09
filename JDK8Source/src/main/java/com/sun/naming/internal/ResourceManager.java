@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,10 @@ import javax.naming.*;
 /**
   * The ResourceManager class facilitates the reading of JNDI resource files.
   *
+  * <p>
+  *  ResourceManager类有助于读取JNDI资源文件。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   */
@@ -52,17 +57,26 @@ public final class ResourceManager {
 
     /*
      * Name of provider resource files (without the package-name prefix.)
+     * <p>
+     *  提供程序资源文件的名称(不带包名称前缀)。
+     * 
      */
     private static final String PROVIDER_RESOURCE_FILE_NAME =
             "jndiprovider.properties";
 
     /*
      * Name of application resource files.
+     * <p>
+     *  应用程序资源文件的名称。
+     * 
      */
     private static final String APP_RESOURCE_FILE_NAME = "jndi.properties";
 
     /*
      * Name of properties file in <java.home>/lib.
+     * <p>
+     *  属性文件的名称在<java.home> / lib中。
+     * 
      */
     private static final String JRELIB_PROPERTY_FILE_NAME = "jndi.properties";
 
@@ -70,12 +84,18 @@ public final class ResourceManager {
      * Internal environment property, that when set to "true", disables
      * application resource files lookup to prevent recursion issues
      * when validating signed JARs.
+     * <p>
+     *  内部环境属性,设置为"true"时,将禁用应用程序资源文件查找,以防止在验证签名的JAR时出现递归问题。
+     * 
      */
     private static final String DISABLE_APP_RESOURCE_FILES =
         "com.sun.naming.disable.app.resource.files";
 
     /*
      * The standard JNDI properties that specify colon-separated lists.
+     * <p>
+     *  指定以冒号分隔的列表的标准JNDI属性。
+     * 
      */
     private static final String[] listProperties = {
         Context.OBJECT_FACTORIES,
@@ -94,6 +114,9 @@ public final class ResourceManager {
      * file is keyed on a class in the resource file's package.
      * One from application resource files is keyed on the thread's
      * context class loader.
+     * <p>
+     *  ResourceManager已构建的属性的高速缓存。来自提供程序资源文件的Hashtable以资源文件包中的类为关键。一个来自应用程序资源文件的关键是线程的上下文类加载器。
+     * 
      */
     // WeakHashMap<Class | ClassLoader, Hashtable>
     private static final WeakHashMap<Object, Hashtable<? super String, Object>>
@@ -106,6 +129,11 @@ public final class ResourceManager {
      * on propValue.  Value is a list of class or factory objects,
      * weakly referenced so as not to prevent GC of the class loader.
      * Used in getFactories().
+     * <p>
+     *  工厂对象的缓存(ObjectFactory,StateFactory,ControlFactory)。
+     * 
+     *  两级缓存首先在上下文类加载器上键入,然后在propValue上。值是一个类或工厂对象的列表,弱引用,以便不阻止类加载器的GC。用于getFactories()。
+     * 
      */
     private static final
         WeakHashMap<ClassLoader, Map<String, List<NamedWeakReference<Object>>>>
@@ -119,6 +147,12 @@ public final class ResourceManager {
      * referenced so as not to prevent GC of the class loader) or
      * NO_FACTORY if a previous search revealed no factory.  Used in
      * getFactory().
+     * <p>
+     *  URL工厂对象(ObjectFactory)的缓存。
+     * 
+     *  一个两级缓存首先在上下文类加载器,然后在classSuffix + propValue。 Value是工厂本身(弱引用,以便不阻止类加载器的GC)或NO_FACTORY,如果以前的搜索没有发现工厂。
+     * 用于getFactory()。
+     * 
      */
     private static final
         WeakHashMap<ClassLoader, Map<String, WeakReference<Object>>>
@@ -129,6 +163,9 @@ public final class ResourceManager {
     /**
      * A class to allow JNDI properties be specified as applet parameters
      * without creating a static dependency on java.applet.
+     * <p>
+     * 允许将JNDI属性指定为applet参数的类,而不对java.applet创建静态依赖关系。
+     * 
      */
     private static class AppletParameter {
         private static final Class<?> clazz = getClass("java.applet.Applet");
@@ -158,6 +195,9 @@ public final class ResourceManager {
 
         /**
          * Returns the value of the applet's named parameter.
+         * <p>
+         *  返回小程序的命名参数的值。
+         * 
          */
         static Object get(Object applet, String name) {
             // if clazz is null then applet cannot be an Applet.
@@ -189,6 +229,12 @@ public final class ResourceManager {
      * <p> This method will modify <tt>env</tt> and save
      * a reference to it.  The caller may no longer modify it.
      *
+     * <p>
+     *  给定传递给初始上下文构造函数的环境参数,返回该初始上下文的完整环境(从不为空)。这基于环境参数,小程序参数(如果适用),系统属性和所有应用程序资源文件。
+     * 
+     *  <p>此方法将修改<tt> env </tt>并保存对它的引用。呼叫者可能不再修改它。
+     * 
+     * 
      * @param env       environment passed to initial context constructor.
      *                  Null indicates an empty environment.
      *
@@ -257,6 +303,14 @@ public final class ResourceManager {
       *
       * Returns null if no value is found.
       *
+      * <p>
+      *  从环境或从与给定上下文相关联的提供程序资源文件检索属性。该环境可能依次包含来自小应用程序参数,系统属性或应用程序资源文件的值。
+      * 
+      *  如果<tt> concat </tt>为true,并且环境和提供程序资源文件都包含属性,则两个值将连接(使用"："分隔符)。
+      * 
+      *  如果未找到值,则返回null。
+      * 
+      * 
       * @param propName The non-null property name
       * @param env      The possibly null environment properties
       * @param ctx      The possibly null context
@@ -314,6 +368,20 @@ public final class ResourceManager {
      * but a cached Class object might be replaced by an instantiated factory
      * object.
      *
+     * <p>
+     *  检索由属性指定的工厂类/对象的枚举。
+     * 
+     *  该属性从环境和与给定上下文相关联的提供程序资源文件中获取,并连接。请参阅getProperty()。生成的属性值是类名称的列表。
+     * p>
+     * 然后,该方法使用当前线程的上下文类加载器加载每个类,并将它们保存在列表中。任何无法加载的类都将被忽略。然后将生成的列表缓存在两级哈希表中,首先由上下文类加载器键入,然后由属性的值键入。
+     * 下一次,同一上下文类加载器的线程调用此方法时,他们可以使用缓存的列表。
+     * p>
+     *  从缓存中获取列表或通过从属性值中创建一个列表之后,此方法将使用列表创建并返回一个FactoryEnumeration。
+     * 当遍历FactoryEnumeration时,列表中的缓存的Class对象被实例化并被工厂对象本身的实例替代。类对象和工厂都包装在弱引用中,以防止类加载器的GC。
+     * p>
+     *  注意,多个线程可以通过FactoryEnumeration访问同一个缓存列表,它在每个next()期间锁定列表。列表的大小不会改变,但缓存的Class对象可能会被实例化的工厂对象替换。
+     * 
+     * 
      * @param propName  The non-null property name
      * @param env       The possibly null environment properties
      * @param ctx       The possibly null context
@@ -396,6 +464,16 @@ public final class ResourceManager {
      * If no factory can be loaded, NO_FACTORY is recorded in the table
      * so that next time it'll return quickly.
      *
+     * <p>
+     *  从属性中指定的包列表中检索工厂。
+     * 
+     *  该属性是从环境和与给定上下文相关联并连接的提供程序资源文件获取的。 classSuffix被添加到此列表的末尾。请参阅getProperty()。生成的属性值是包前缀列表。
+     * p>
+     * 然后,此方法通过将每个包前缀与classSuffix连接来构造类名称列表,并尝试加载和实例化该类,直到成功为止。任何无法加载的类都将被忽略。
+     * 然后将生成的对象缓存在两级哈希表中,首先由上下文类加载器键入,然后由属性的值和classSuffix键入。下一次,同一上下文类加载器的线程调用此方法时,它们使用缓存的工厂。
+     * 如果没有工厂可以加载,NO_FACTORY被记录在表中,以便下次它将迅速返回。
+     * 
+     * 
      * @param propName  The non-null property name
      * @param env       The possibly null environment properties
      * @param ctx       The possibly null context
@@ -489,6 +567,10 @@ public final class ResourceManager {
      * object is null or the resource file cannot be found.  The
      * results are cached.
      *
+     * <p>
+     *  返回包含在对象包的提供程序资源文件中的属性。如果对象为空或无法找到资源文件,则返回空哈希表。结果被缓存。
+     * 
+     * 
      * @throws NamingException if an error occurs while reading the file.
      */
     private static Hashtable<? super String, Object>
@@ -540,6 +622,12 @@ public final class ResourceManager {
      * careful consideration to this before storing sensitive
      * information there.
      *
+     * <p>
+     *  返回从合并所有可用于此线程的上下文类加载器的应用程序资源文件产生的Hashtable(从不为null)。 <java.home> / lib中的属性文件也被合并。结果被缓存。
+     * 
+     *  安全注意事项：1. JNDI需要读取应用程序资源文件的权限。 2.任何类都将能够使用JNDI在其自己的类路径中查看应用程序资源文件的内容。在存储敏感信息之前,请仔细考虑这一点。
+     * 
+     * 
      * @throws NamingException if an error occurs while reading a resource
      *  file.
      */
@@ -617,6 +705,10 @@ public final class ResourceManager {
      * For each property in both hash tables that is one of the
      * standard JNDI properties that specify colon-separated lists,
      * the values are concatenated and stored in props1.
+     * <p>
+     * 将属性从一个哈希表合并到另一个哈希表。 props2中不在props1中的每个属性都添加到props1。
+     * 对于作为指定以冒号分隔的列表的标准JNDI属性之一的两个哈希表中的每个属性,值连接并存储在props1中。
+     * 
      */
     private static void mergeTables(Hashtable<? super String, Object> props1,
                                     Hashtable<? super String, Object> props2) {
@@ -635,6 +727,7 @@ public final class ResourceManager {
     /*
      * Is a property one of the standard JNDI properties that specify
      * colon-separated lists?
+     * <p>
      */
     private static boolean isListProperty(String prop) {
         prop = prop.intern();

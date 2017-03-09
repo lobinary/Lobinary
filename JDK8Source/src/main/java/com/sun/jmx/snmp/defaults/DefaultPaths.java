@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ import java.util.StringTokenizer;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此类表示Java DMK使用的一组默认目录。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @since 1.5
  */
 public class DefaultPaths {
@@ -57,6 +64,12 @@ public class DefaultPaths {
      * The default value of the installation directory is:
      * <CODE>&lt;base_dir&gt; + File.separator + SUNWjdmk + File.separator + jdmk5.0 </CODE>
      *
+     * <p>
+     *  返回Java DMK的安装目录。
+     * 
+     *  安装目录的默认值为：<CODE>&lt; base_dir&gt; + File.separator + SUNWjdmk + File.separator + jdmk5.0 </CODE>
+     * 
+     * 
      * @return Java DMK installation directory.
      */
     public static String getInstallDir() {
@@ -72,6 +85,12 @@ public class DefaultPaths {
      * The default value of the installation directory is:
      * <CODE>&lt;base_dir&gt; + File.separator + SUNWjdmk + File.separator + jdmk5.0 </CODE>
      *
+     * <p>
+     *  返回与dirname连接的Java DMK的安装目录。
+     * 
+     *  安装目录的默认值为：<CODE>&lt; base_dir&gt; + File.separator + SUNWjdmk + File.separator + jdmk5.0 </CODE>
+     * 
+     * 
      * @param dirname The directory to be appended.
      *
      * @return Java DMK installation directory + <CODE>File.separator</CODE> + <CODE>dirname</CODE>.
@@ -95,6 +114,10 @@ public class DefaultPaths {
     /**
      * Sets the installation directory for Java DMK.
      *
+     * <p>
+     *  设置Java DMK的安装目录。
+     * 
+     * 
      * @param dirname The directory where Java DMK resides.
      */
     public static void setInstallDir(String dirname) {
@@ -109,6 +132,15 @@ public class DefaultPaths {
      * <LI><CODE>DefaultPaths.getInstallDir("etc")</CODE>.
      * </UL>
      *
+     * <p>
+     *  返回Java DMK的<CODE> etc </CODE>目录。
+     * <P>
+     *  <CODE> etc </CODE>目录的默认值为：
+     * <UL>
+     *  <LI> <CODE> DefaultPaths.getInstallDir("etc")</CODE>。
+     * </UL>
+     * 
+     * 
      * @return Java DMK <CODE>etc</CODE> directory.
      */
     public static String getEtcDir() {
@@ -126,6 +158,15 @@ public class DefaultPaths {
      * <LI><CODE>DefaultPaths.getInstallDir("etc")</CODE>.
      * </UL>
      *
+     * <p>
+     *  返回与dirname连接的Java DMK的<CODE> etc </CODE>目录。
+     * <P>
+     *  <CODE> etc </CODE>目录的默认值为：
+     * <UL>
+     *  <LI> <CODE> DefaultPaths.getInstallDir("etc")</CODE>。
+     * </UL>
+     * 
+     * 
      * @param dirname The directory to be appended.
      *
      * @return Java DMK <CODE>etc</CODE> directory + <CODE>File.separator</CODE> + <CODE>dirname</CODE>.
@@ -149,6 +190,10 @@ public class DefaultPaths {
     /**
      * Sets the <CODE>etc</CODE> directory for Java DMK.
      *
+     * <p>
+     *  为Java DMK设置<CODE> etc </CODE>目录。
+     * 
+     * 
      * @param dirname The <CODE>etc</CODE> directory for Java DMK.
      */
     public static void setEtcDir(String dirname) {
@@ -163,6 +208,15 @@ public class DefaultPaths {
      * <LI><CODE>DefaultPaths.getInstallDir("tmp")</CODE>.
      * </UL>
      *
+     * <p>
+     *  返回产品的<CODE> tmp </CODE>目录。
+     * <P>
+     *  <CODE> tmp </CODE>目录的默认值为：
+     * <UL>
+     *  <LI> <CODE> DefaultPaths.getInstallDir("tmp")</CODE>。
+     * </UL>
+     * 
+     * 
      * @return Java DMK <CODE>tmp</CODE> directory.
      */
     public static String getTmpDir() {
@@ -180,6 +234,15 @@ public class DefaultPaths {
      * <LI><CODE>DefaultPaths.getInstallDir("tmp")</CODE>.
      * </UL>
      *
+     * <p>
+     *  返回与dirname连接的Java DMK的<CODE> tmp </CODE>目录。
+     * <P>
+     *  <CODE> tmp </CODE>目录的默认值为：
+     * <UL>
+     * <LI> <CODE> DefaultPaths.getInstallDir("tmp")</CODE>。
+     * </UL>
+     * 
+     * 
      * @param dirname The directory to be appended.
      *
      * @return Java DMK <CODE>tmp</CODE> directory + <CODE>File.separator</CODE> + <CODE>dirname</CODE>.
@@ -203,6 +266,8 @@ public class DefaultPaths {
     /**
      * Sets the <CODE>tmp</CODE> directory for the product
      *
+     * <p>
+     * 
      * @param dirname The <CODE>tmp</CODE> directory for Java DMK.
      */
     public static void setTmpDir(String dirname) {
@@ -238,6 +303,9 @@ public class DefaultPaths {
 
     /**
      * Directories used by Java DMK.
+     * <p>
+     *  设置产品的<CODE> tmp </CODE>目录
+     * 
      */
     private static String etcDir;
     private static String tmpDir;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,12 @@ import java.util.Enumeration;
  * implementation of the NamingContextImpl. The TransientBindingIterator
  * implementation receives a hash table of InternalBindingValues, and uses
  * an Enumeration to iterate over the contents of the hash table.
+ * <p>
+ *  TransientBindingIterator类实现由BindingIteratorImpl定义的抽象方法,以与NamingContextImpl的TransientNamingContext实现一
+ * 起使用。
+ *  TransientBindingIterator实现接收一个InternalBindingValues的散列表,并使用枚举来遍历散列表的内容。
+ * 
+ * 
  * @see BindingIteratorImpl
  * @see TransientNamingContext
  */
@@ -61,6 +68,10 @@ public class PersistentBindingIterator extends BindingIteratorImpl
     private POA biPOA;
     /**
      * Constructs a new PersistentBindingIterator object.
+     * <p>
+     *  构造一个新的PersistentBindingIterator对象。
+     * 
+     * 
      * @param orb a org.omg.CORBA.ORB object.
      * @param aTable A hashtable containing InternalBindingValues which is
      * the content of the PersistentNamingContext.
@@ -83,6 +94,10 @@ public class PersistentBindingIterator extends BindingIteratorImpl
    * Returns the next binding in the NamingContext. Uses the enumeration
    * object to determine if there are more bindings and if so, returns
    * the next binding from the InternalBindingValue.
+   * <p>
+   *  返回NamingContext中的下一个绑定。使用枚举对象确定是否有更多绑定,如果是,则返回来自InternalBindingValue的下一个绑定。
+   * 
+   * 
    * @param b The Binding as an out parameter.
    * @return true if there were more bindings.
    */
@@ -111,6 +126,10 @@ public class PersistentBindingIterator extends BindingIteratorImpl
 
     /**
    * Destroys this BindingIterator by disconnecting from the ORB
+   * <p>
+   *  通过从ORB断开连接来销毁此BindingIterator
+   * 
+   * 
    * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA system exceptions.
    */
     final public void Destroy()
@@ -129,6 +148,9 @@ public class PersistentBindingIterator extends BindingIteratorImpl
 
     /**
    * Returns the remaining number of elements in the iterator.
+   * <p>
+   *  返回迭代器中剩余的元素数。
+   * 
    * @return the remaining number of elements in the iterator.
    */
     public final int RemainingElements() {

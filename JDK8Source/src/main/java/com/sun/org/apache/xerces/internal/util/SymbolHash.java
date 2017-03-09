@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -27,6 +37,12 @@ package com.sun.org.apache.xerces.internal.util;
  * <p>
  * The hash code uses the same algorithm as SymbolTable class.
  *
+ * <p>
+ *  此类是用于字符串到对象映射的不同步哈希表主要。
+ * <p>
+ *  哈希码使用与SymbolTable类相同的算法。
+ * 
+ * 
  * @author Elena Litani
  * @version $Id: SymbolHash.java,v 1.7 2010-11-01 04:40:14 joehw Exp $
  */
@@ -61,6 +77,10 @@ public class SymbolHash {
     /**
      * Constructs a key table with a given size.
      *
+     * <p>
+     *  构造具有给定大小的键表。
+     * 
+     * 
      * @param size  the size of the key table.
      */
     public SymbolHash(int size) {
@@ -77,6 +97,10 @@ public class SymbolHash {
      * the previous value associated with this key is overwritten by the new
      * value.
      *
+     * <p>
+     *  将键/值映射添加到键表。如果键已经存在,则与此键相关联的先前值将被新值覆盖。
+     * 
+     * 
      * @param key
      * @param value
      */
@@ -99,6 +123,10 @@ public class SymbolHash {
     /**
      * Get the value associated with the given key.
      *
+     * <p>
+     *  获取与给定键相关联的值。
+     * 
+     * 
      * @param key
      * @return the value associated with the given key.
      */
@@ -114,6 +142,10 @@ public class SymbolHash {
     /**
      * Get the number of key/value pairs stored in this table.
      *
+     * <p>
+     *  获取存储在此表中的键/值对的数量。
+     * 
+     * 
      * @return the number of key/value pairs stored in this table.
      */
     public int getLength() {
@@ -123,6 +155,10 @@ public class SymbolHash {
     /**
      * Add all values to the given array. The array must have enough entry.
      *
+     * <p>
+     *  将所有值添加到给定数组。数组必须有足够的条目。
+     * 
+     * 
      * @param elements  the array to store the elements
      * @param from      where to start store element in the array
      * @return          number of elements copied to the array
@@ -139,6 +175,9 @@ public class SymbolHash {
 
     /**
      * Return key/value pairs of all entries in the map
+     * <p>
+     *  返回映射中所有条目的键/值对
+     * 
      */
     public Object[] getEntries() {
         Object[] entries = new Object[fNum << 1];
@@ -154,6 +193,9 @@ public class SymbolHash {
 
     /**
      * Make a clone of this object.
+     * <p>
+     *  克隆此对象。
+     * 
      */
     public SymbolHash makeClone() {
         SymbolHash newTable = new SymbolHash(fTableSize);
@@ -168,6 +210,9 @@ public class SymbolHash {
     /**
      * Remove all key/value assocaition. This tries to save a bit of GC'ing
      * by at least keeping the fBuckets array around.
+     * <p>
+     *  删除所有键/值关联。这试图通过至少保持fBuckets数组来节省一些GC'ing。
+     * 
      */
     public void clear() {
         for (int i=0; i<fTableSize; i++) {
@@ -192,6 +237,8 @@ public class SymbolHash {
     /**
      * This class is a key table entry. Each entry acts as a node
      * in a linked list.
+     * <p>
+     * 这个类是一个键表项。每个条目充当链接列表中的节点。
      */
     protected static final class Entry {
         // key/value

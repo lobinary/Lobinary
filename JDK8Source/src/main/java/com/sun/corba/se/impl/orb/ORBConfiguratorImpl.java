@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -236,6 +237,9 @@ public class ORBConfiguratorImpl implements ORBConfigurator {
      * This is made somewhat complex because we are currently supporting
      * the ContactInfoList/Acceptor *AND* the legacy SocketFactory
      * transport architecture.
+     * <p>
+     *  这是有点复杂,因为我们目前支持ContactInfoList / Acceptor * AND *传统的SocketFactory传输架构。
+     * 
      */
     private void initializeTransport(final ORB orb)
     {
@@ -347,6 +351,9 @@ public class ORBConfiguratorImpl implements ORBConfigurator {
 
     /*
      * Legacy: name.
+     * <p>
+     *  遗产：名称。
+     * 
      */
     // REVISIT: see ORBD. make factory in TransportDefault.
     private void createAndRegisterAcceptor(ORB orb,
@@ -602,6 +609,8 @@ public class ORBConfiguratorImpl implements ORBConfigurator {
         /* Register the server delegate that implements the ancient bootstrap
          * naming protocol.  This takes an object key of either "INIT" or
          * "TINI" to allow for big or little endian implementations.
+         * <p>
+         *  命名协议。这需要一个"INIT"或"TINI"的对象键,以允许大或小endian实现。
          */
         CorbaServerRequestDispatcher bootsd =
             RequestDispatcherDefault.makeBootstrapServerRequestDispatcher(

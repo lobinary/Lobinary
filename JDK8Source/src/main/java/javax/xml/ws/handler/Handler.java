@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import javax.xml.ws.handler.MessageContext;
 /** The <code>Handler</code> interface
  *  is the base interface for JAX-WS handlers.
  *
+ * <p>
+ *  是JAX-WS处理程序的基本接口。
+ * 
+ * 
  *  @since JAX-WS 2.0
 **/
 public interface Handler<C extends MessageContext> {
@@ -39,6 +44,10 @@ public interface Handler<C extends MessageContext> {
    *  of inbound and outbound messages. Refer to the description of the handler
    *  framework in the JAX-WS specification for full details.
    *
+   * <p>
+   *  的入站和出站邮件。有关完整的详细信息,请参阅JAX-WS规范中的处理程序框架的描述。
+   * 
+   * 
    *  @param context the message context.
    *  @return An indication of whether handler processing should continue for
    *  the current message
@@ -59,6 +68,10 @@ public interface Handler<C extends MessageContext> {
    *  processing.  Refer to the description of the handler
    *  framework in the JAX-WS specification for full details.
    *
+   * <p>
+   *  处理。有关完整的详细信息,请参阅JAX-WS规范中的处理程序框架的描述。
+   * 
+   * 
    *  @param context the message context
    *  @return An indication of whether handler fault processing should continue
    *  for the current message
@@ -81,6 +94,9 @@ public interface Handler<C extends MessageContext> {
    * the description of the handler
    * framework in the JAX-WS specification for full details.
    *
+   * <p>
+   *  在刚好在JAX-WS运行时分派消息,故障或异常之前的消息交换模式的结束时调用。有关完整的详细信息,请参阅JAX-WS规范中的处理程序框架的描述。
+   * 
    * @param context the message context
   **/
   public void close(MessageContext context);

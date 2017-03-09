@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,12 @@ import javax.management.MBeanServer;
  * JMXConnectorServerFactory#newJMXConnectorServer(JMXServiceURL,Map,MBeanServer)
  * newJMXConnectorServer} method.</p>
  *
+ * <p>
+ *  <p>使用给定协议创建JMX API连接器服务器的提供程序。
+ * 此接口的实例由{@link JMXConnectorServerFactory}作为其{@link JMXConnectorServerFactory#newJMXConnectorServer(JMXServiceURL,Map,MBeanServer)newJMXConnectorServer}
+ * 方法的一部分创建。
+ *  <p>使用给定协议创建JMX API连接器服务器的提供程序。</p>。
+ * 
  * @since 1.5
  */
 public interface JMXConnectorServerProvider {
@@ -45,6 +52,9 @@ public interface JMXConnectorServerProvider {
      * successful call to this method produces a different
      * <code>JMXConnectorServer</code> object.</p>
      *
+     * <p>
+     * 
+     * 
      * @param serviceURL the address of the new connector server.  The
      * actual address of the new connector server, as returned by its
      * {@link JMXConnectorServer#getAddress() getAddress} method, will

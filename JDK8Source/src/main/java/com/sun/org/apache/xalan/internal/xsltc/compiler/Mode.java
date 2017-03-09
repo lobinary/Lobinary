@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Mode.java,v 1.2.4.1 2005/09/19 05:18:11 pvedula Exp $
+ * <p>
+ *  $ Id：Mode.java,v 1.2.4.1 2005/09/19 05:18:11 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -56,6 +69,10 @@ import com.sun.org.apache.xml.internal.dtm.DTM;
  * Mode gathers all the templates belonging to a given mode;
  * it is responsible for generating an appropriate
  * applyTemplates + (mode name) method in the translet.
+ * <p>
+ *  模式收集属于给定模式的所有模板;它负责在translet中生成适当的applyTemplates +(模式名称)方法。
+ * 
+ * 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -66,109 +83,173 @@ final class Mode implements Constants {
 
     /**
      * The name of this mode as defined in the stylesheet.
+     * <p>
+     *  在模式表中定义的此模式的名称。
+     * 
      */
     private final QName _name;
 
     /**
      * A reference to the stylesheet object that owns this mode.
+     * <p>
+     *  对拥有此模式的样式表对象的引用。
+     * 
      */
     private final Stylesheet _stylesheet;
 
     /**
      * The name of the method in which this mode is compiled.
+     * <p>
+     *  编译此模式的方法的名称。
+     * 
      */
     private final String _methodName;
 
     /**
      * A vector of all the templates in this mode.
+     * <p>
+     *  此模式下所有模板的向量。
+     * 
      */
     private Vector _templates;
 
     /**
      * Group for patterns with node()-type kernel and child axis.
+     * <p>
+     *  使用node() - 类型内核和子轴的模式组。
+     * 
      */
     private Vector _childNodeGroup = null;
 
     /**
      * Test sequence for patterns with node()-type kernel and child axis.
+     * <p>
+     *  node() - 内核和子轴的模式的测试序列。
+     * 
      */
     private TestSeq _childNodeTestSeq = null;
 
     /**
      * Group for patterns with node()-type kernel and attribute axis.
+     * <p>
+     *  组的模式与node() - 类型内核和属性轴。
+     * 
      */
     private Vector _attribNodeGroup = null;
 
     /**
      * Test sequence for patterns with node()-type kernel and attribute axis.
+     * <p>
+     *  node() - 类型内核和属性轴的模式的测试序列。
+     * 
      */
     private TestSeq _attribNodeTestSeq = null;
 
     /**
      * Group for patterns with id() or key()-type kernel.
+     * <p>
+     *  使用id()或key() - 类型内核的模式的组。
+     * 
      */
     private Vector _idxGroup = null;
 
     /**
      * Test sequence for patterns with id() or key()-type kernel.
+     * <p>
+     * 使用id()或key() - 类型内核的模式的测试序列。
+     * 
      */
     private TestSeq _idxTestSeq = null;
 
     /**
      * Group for patterns with any other kernel type.
+     * <p>
+     *  使用任何其他内核类型的模式组。
+     * 
      */
     private Vector[] _patternGroups;
 
     /**
      * Test sequence for patterns with any other kernel type.
+     * <p>
+     *  具有任何其他内核类型的模式的测试顺序。
+     * 
      */
     private TestSeq[] _testSeq;
 
 
     /**
      * A mapping between templates and test sequences.
+     * <p>
+     *  模板和测试序列之间的映射。
+     * 
      */
     private Hashtable _neededTemplates = new Hashtable();
 
     /**
      * A mapping between named templates and Mode objects.
+     * <p>
+     *  命名模板和Mode对象之间的映射。
+     * 
      */
     private Hashtable _namedTemplates = new Hashtable();
 
     /**
      * A mapping between templates and instruction handles.
+     * <p>
+     *  模板和指令句柄之间的映射。
+     * 
      */
     private Hashtable _templateIHs = new Hashtable();
 
     /**
      * A mapping between templates and instruction lists.
+     * <p>
+     *  模板和指令列表之间的映射。
+     * 
      */
     private Hashtable _templateILs = new Hashtable();
 
     /**
      * A reference to the pattern matching the root node.
+     * <p>
+     *  引用与根节点匹配的模式。
+     * 
      */
     private LocationPathPattern _rootPattern = null;
 
     /**
      * Stores ranges of template precendences for the compilation
      * of apply-imports (a Hashtable for historical reasons).
+     * <p>
+     *  存储用于汇编应用程序导入(由于历史原因而为Hashtable)的模板前提范围。
+     * 
      */
     private Hashtable _importLevels = null;
 
     /**
      * A mapping between key names and keys.
+     * <p>
+     *  键名和键之间的映射。
+     * 
      */
     private Hashtable _keys = null;
 
     /**
      * Variable index for the current node used in code generation.
+     * <p>
+     *  代码生成中使用的当前节点的变量索引。
+     * 
      */
     private int _currentIndex;
 
     /**
      * Creates a new Mode.
      *
+     * <p>
+     *  创建新模式。
+     * 
+     * 
      * @param name A textual representation of the mode's QName
      * @param stylesheet The Stylesheet in which the mode occured
      * @param suffix A suffix to append to the method name for this mode
@@ -187,6 +268,10 @@ final class Mode implements Constants {
      * compiled for this mode. Normally takes the form 'applyTemplates()'
      * or * 'applyTemplates2()'.
      *
+     * <p>
+     *  返回将为此模式编译的方法(_not_函数)的名称。通常采用'applyTemplates()'或*'applyTemplates2()'的形式。
+     * 
+     * 
      * @return Method name for this mode
      */
     public String functionName() {
@@ -203,6 +288,9 @@ final class Mode implements Constants {
 
     /**
      * Shortcut to get the class compiled for this mode (will be inlined).
+     * <p>
+     *  获取为此模式编译的类的快捷方式(将被内联)。
+     * 
      */
     private String getClassName() {
         return _stylesheet.getClassName();
@@ -243,6 +331,9 @@ final class Mode implements Constants {
 
     /**
      * Process all the test patterns in this mode
+     * <p>
+     *  在此模式下处理所有测试模式
+     * 
      */
     public void processPatterns(Hashtable keys) {
         _keys = keys;
@@ -255,6 +346,13 @@ for (int i = 0; i < _templates.size(); i++) {
     System.out.println("priority = " + ((Template)_templates.elementAt(i)).getPriority());
     System.out.println("position = " + ((Template)_templates.elementAt(i)).getPosition());
 }
+/* <p>
+/*  System.out.println("Before Sort"+ _name); for(int i = 0; i <_templates.size(); i ++){System.out.println("name ="+((Template)_templates.elementAt(i))。
+/* getName()); System.out.println("pattern ="+((Template)_templates.elementAt(i))。
+/* getPattern()); System.out.println("priority ="+((Template)_templates.elementAt(i))。
+/* getPriority()); System.out.println("position ="+((Template)_templates.elementAt(i))。
+/* getPosition()); }}。
+/* 
 */
 
         _templates = quicksort(_templates, 0, _templates.size() - 1);
@@ -267,6 +365,13 @@ for (int i = 0; i < _templates.size(); i++) {
     System.out.println("priority = " + ((Template)_templates.elementAt(i)).getPriority());
     System.out.println("position = " + ((Template)_templates.elementAt(i)).getPosition());
 }
+/* <p>
+/* System.out.println("\ n After Sort"+ _name); for(int i = 0; i <_templates.size(); i ++){System.out.println("name ="+((Template)_templates.elementAt(i))。
+/* getName()); System.out.println("pattern ="+((Template)_templates.elementAt(i))。
+/* getPattern()); System.out.println("priority ="+((Template)_templates.elementAt(i))。
+/* getPriority()); System.out.println("position ="+((Template)_templates.elementAt(i))。
+/* getPosition()); }}。
+/* 
 */
 
         // Traverse all templates
@@ -279,6 +384,9 @@ for (int i = 0; i < _templates.size(); i++) {
              * Add this template to a table of named templates if it has a name.
              * If there are multiple templates with the same name, all but one
              * (the one with highest priority) will be disabled.
+             * <p>
+             *  如果具有名称,请将此模板添加到命名模板的表中。如果有多个具有相同名称的模板,则只有一个(优先级最高的模板)将被禁用。
+             * 
              */
             if (template.isNamed() && !template.disabled()) {
                 _namedTemplates.put(template, this);
@@ -297,6 +405,9 @@ for (int i = 0; i < _templates.size(); i++) {
      * This method will break up alternative patterns (ie. unions of patterns,
      * such as match="A/B | C/B") and add the basic patterns to their
      * respective pattern groups.
+     * <p>
+     *  该方法将分解替代模式(即,模式的联合,例如match ="A / B | C / B"),并将基本模式添加到它们各自的模式组。
+     * 
      */
     private void flattenAlternative(Pattern pattern,
                                     Template template,
@@ -327,6 +438,9 @@ for (int i = 0; i < _templates.size(); i++) {
     /**
      * Group patterns by NodeTests of their last Step
      * Keep them sorted by priority within group
+     * <p>
+     *  通过NodeTests对它们的最后一步的组模式按组中的优先级排序
+     * 
      */
     private void addPatternToGroup(final LocationPathPattern lpp) {
         // id() and key()-type patterns do not have a kernel type
@@ -349,6 +463,9 @@ for (int i = 0; i < _templates.size(); i++) {
 
     /**
      * Adds a pattern to a pattern group
+     * <p>
+     *  将模式添加到模式组
+     * 
      */
     private void addPattern(int kernelType, LocationPathPattern pattern) {
         // Make sure the array of pattern groups is long enough
@@ -402,6 +519,9 @@ for (int i = 0; i < _templates.size(); i++) {
     /**
      * Complete test sequences of a given type by adding all patterns
      * from a given group.
+     * <p>
+     *  通过添加给定组中的所有模式,完成给定类型的测试序列。
+     * 
      */
     private void completeTestSequences(int nodeType, Vector patterns) {
         if (patterns != null) {
@@ -422,6 +542,9 @@ for (int i = 0; i < _templates.size(); i++) {
      * Build test sequences. The first step is to complete the test sequences
      * by including patterns of "*" and "node()" kernel to all element test
      * sequences, and of "@*" to all attribute test sequences.
+     * <p>
+     *  构建测试序列。第一步是通过将"*"和"node()"内核的模式包括到所有元素测试序列中,并且将"@ *"包括到所有属性测试序列中来完成测试序列。
+     * 
      */
     private void prepareTestSequences() {
         final Vector starGroup = _patternGroups[DTM.ELEMENT_NODE];
@@ -497,6 +620,10 @@ for (int i = 0; i < _templates.size(); i++) {
             _attribNodeTestSeq.reduce();
             _attribNodeTestSeq.findTemplates(_neededTemplates);
         }
+/* <p>
+/*  if(_attribNodeGroup！= null && _attribNodeGroup.size()> 0){_attribNodeTestSeq = new TestSeq(_attribNodeGroup,-1,this); _attribNodeTestSeq.reduce(); _attribNodeTestSeq.findTemplates(_neededTemplates); }
+/* }。
+/* 
 */
 
         if (_idxGroup != null && _idxGroup.size() > 0) {
@@ -622,6 +749,9 @@ for (int i = 0; i < _templates.size(); i++) {
 
     /**
      * Compiles the default handling for DOM elements: traverse all children
+     * <p>
+     *  编译DOM元素的默认处理：遍历所有子代
+     * 
      */
     private InstructionList compileDefaultRecursion(ClassGenerator classGen,
                                                     MethodGenerator methodGen,
@@ -650,6 +780,9 @@ for (int i = 0; i < _templates.size(); i++) {
     /**
      * Compiles the default action for DOM text nodes and attribute nodes:
      * output the node's text value
+     * <p>
+     * 编译DOM文本节点和属性节点的默认操作：输出节点的文本值
+     * 
      */
     private InstructionList compileDefaultText(ClassGenerator classGen,
                                                MethodGenerator methodGen,
@@ -735,6 +868,9 @@ for (int i = 0; i < _templates.size(); i++) {
    /**
      * Compiles the applyTemplates() method and adds it to the translet.
      * This is the main dispatch method.
+     * <p>
+     *  编译applyTemplates()方法并将其添加到translet。这是主要的调度方法。
+     * 
      */
     public void compileApplyTemplates(ClassGenerator classGen) {
         final XSLTC xsltc = classGen.getParser().getXSLTC();
@@ -1400,6 +1536,9 @@ for (int i = 0; i < _templates.size(); i++) {
 
     /**
       * Peephole optimization.
+      * <p>
+      *  窥视孔优化。
+      * 
       */
     private void peepHoleOptimization(MethodGenerator methodGen) {
         InstructionList il = methodGen.getInstructionList();
@@ -1508,6 +1647,9 @@ for (int i = 0; i < _templates.size(); i++) {
 
     /**
      * Auxiliary method to determine if a qname is an attribute.
+     * <p>
+     *  确定qname是否为属性的辅助方法。
+     * 
      */
     private static boolean isAttributeName(String qname) {
         final int col = qname.lastIndexOf(':') + 1;
@@ -1517,6 +1659,8 @@ for (int i = 0; i < _templates.size(); i++) {
     /**
      * Auxiliary method to determine if a qname is a namespace
      * qualified "*".
+     * <p>
+     *  辅助方法来确定一个qname是否是一个命名空间限定"*"。
      */
     private static boolean isNamespaceName(String qname) {
         final int col = qname.lastIndexOf(':');

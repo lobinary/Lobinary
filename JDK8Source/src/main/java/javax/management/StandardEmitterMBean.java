@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,25 @@ package javax.management;
  *     mbs.registerMBean(mbean, objectName);
  *     </pre>
  *
+ * <p>
+ *  <p> MBean,其管理接口由Java接口上的反射确定,并发出通知。</p>
+ * 
+ *  <p>以下示例显示如何使用公共构造函数{@link #StandardEmitterMBean(Object,Class,NotificationEmitter)StandardEmitterMBean(implementation,mbeanInterface,emitter)}
+ * 创建一个MBean,发出任何实现类名称的通知<i> Impl < / i>,具有由任何接口Intf </i>定义的管理接口(对于当前标准MBeans),以及具有接口{@link NotificationEmitter}
+ * 的任何实现。
+ * 该示例使用{@link NotificationBroadcasterSupport}类作为接口{@link NotificationEmitter}的实现。</p>。
+ * 
+ * <pre>
+ *  MBeanServer mbs; ... final String [] types = new String [] {"sun.disc.space","sun.disc.alarm"}; fina
+ * l MBeanNotificationInfo info = new MBeanNotificationInfo(types,Notification.class.getName(),"关于磁盘信息的通
+ * 知。
+ *  final NotificationEmitter emitter = new NotificationBroadcasterSupport(info);。
+ * 
+ *  final Intf impl = new Impl(...); final object mbean = new StandardEmitterMBean(impl,Intf.class,emitt
+ * er); mbs.registerMBean(mbean,objectName);。
+ * </pre>
+ * 
+ * 
  * @see StandardMBean
  *
  * @since 1.6
@@ -91,6 +111,20 @@ public class StandardEmitterMBean extends StandardMBean
      * that will have no effect on this object's
      * {@code getNotificationInfo()}.</p>
      *
+     * <p>
+     * <p>创建一个MBean,其管理接口由{@code mbeanInterface}指定,使用给定的实现,通知由给定的{@code NotificationEmitter}处理。
+     * 生成的MBean通过将其方法转发到{@code emitter}来实现{@code NotificationEmitter}接口。
+     *  {@code implementation}和{@code emitter}是同一个对象,这是合法有用的。</p>。
+     * 
+     *  <p>如果{@code emitter}是{@code NotificationBroadcasterSupport}的实例,那么MBean的{@link #sendNotification sendNotification}
+     * 方法将调用{@code emitter.}{@link NotificationBroadcasterSupport#sendNotification sendNotification}。
+     * </p>。
+     * 
+     *  <p> {@link #getNotificationInfo()}在新MBean上返回的数组是在构建时由{@code emitter.}{@link NotificationBroadcaster#getNotificationInfo getNotificationInfo()}
+     * 返回的数组的副本。
+     * 如果{@code emitter.getNotificationInfo()}返回的数组稍后发生变化,那么对该对象的{@code getNotificationInfo()}没有影响。</p>。
+     * 
+     * 
      * @param implementation the implementation of the MBean interface.
      * @param mbeanInterface a Standard MBean interface.
      * @param emitter the object that will handle notifications.
@@ -129,6 +163,20 @@ public class StandardEmitterMBean extends StandardMBean
      * that will have no effect on this object's
      * {@code getNotificationInfo()}.</p>
      *
+     * <p>
+     * <p>创建一个MBean,其管理接口由{@code mbeanInterface}指定,使用给定的实现,通知由给定的{@code NotificationEmitter}处理。
+     * 此构造函数可用于制作标准MBeans或MXBeans。生成的MBean通过将其方法转发到{@code emitter}来实现{@code NotificationEmitter}接口。
+     *  {@code implementation}和{@code emitter}是同一个对象,这是合法有用的。</p>。
+     * 
+     *  <p>如果{@code emitter}是{@code NotificationBroadcasterSupport}的实例,那么MBean的{@link #sendNotification sendNotification}
+     * 方法将调用{@code emitter.}{@link NotificationBroadcasterSupport#sendNotification sendNotification}。
+     * </p>。
+     * 
+     *  <p> {@link #getNotificationInfo()}在新MBean上返回的数组是在构建时由{@code emitter.}{@link NotificationBroadcaster#getNotificationInfo getNotificationInfo()}
+     * 返回的数组的副本。
+     * 如果{@code emitter.getNotificationInfo()}返回的数组稍后发生变化,那么对该对象的{@code getNotificationInfo()}没有影响。</p>。
+     * 
+     * 
      * @param implementation the implementation of the MBean interface.
      * @param mbeanInterface a Standard MBean interface.
      * @param isMXBean If true, the {@code mbeanInterface} parameter
@@ -178,6 +226,21 @@ public class StandardEmitterMBean extends StandardMBean
      * <p>This constructor must be called from a subclass that implements
      * the given {@code mbeanInterface}.</p>
      *
+     * <p>
+     *  <p>创建一个MBean,其管理接口由{@code mbeanInterface}指定,其中通知由给定的{@code NotificationEmitter}处理。
+     * 生成的MBean通过将其方法转发到{@code emitter}来实现{@code NotificationEmitter}接口。</p>。
+     * 
+     * <p>如果{@code emitter}是{@code NotificationBroadcasterSupport}的实例,那么MBean的{@link #sendNotification sendNotification}
+     * 方法将调用{@code emitter.}{@link NotificationBroadcasterSupport#sendNotification sendNotification}。
+     * </p>。
+     * 
+     *  <p> {@link #getNotificationInfo()}在新MBean上返回的数组是在构建时由{@code emitter.}{@link NotificationBroadcaster#getNotificationInfo getNotificationInfo()}
+     * 返回的数组的副本。
+     * 如果{@code emitter.getNotificationInfo()}返回的数组稍后发生变化,那么对该对象的{@code getNotificationInfo()}没有影响。</p>。
+     * 
+     *  <p>此构造函数必须从实现给定{@code mbeanInterface}的子类中调用。</p>
+     * 
+     * 
      * @param mbeanInterface a StandardMBean interface.
      * @param emitter the object that will handle notifications.
      *
@@ -215,6 +278,21 @@ public class StandardEmitterMBean extends StandardMBean
      * <p>This constructor must be called from a subclass that implements
      * the given {@code mbeanInterface}.</p>
      *
+     * <p>
+     *  <p>创建一个MBean,其管理接口由{@code mbeanInterface}指定,其中通知由给定的{@code NotificationEmitter}处理。
+     * 此构造函数可用于制作标准MBeans或MXBeans。生成的MBean通过将其方法转发到{@code emitter}来实现{@code NotificationEmitter}接口。</p>。
+     * 
+     *  <p>如果{@code emitter}是{@code NotificationBroadcasterSupport}的实例,那么MBean的{@link #sendNotification sendNotification}
+     * 方法将调用{@code emitter.}{@link NotificationBroadcasterSupport#sendNotification sendNotification}。
+     * </p>。
+     * 
+     * <p> {@link #getNotificationInfo()}在新MBean上返回的数组是在构建时由{@code emitter.}{@link NotificationBroadcaster#getNotificationInfo getNotificationInfo()}
+     * 返回的数组的副本。
+     * 如果{@code emitter.getNotificationInfo()}返回的数组稍后发生变化,那么对该对象的{@code getNotificationInfo()}没有影响。</p>。
+     * 
+     *  <p>此构造函数必须从实现给定{@code mbeanInterface}的子类中调用。</p>
+     * 
+     * 
      * @param mbeanInterface a StandardMBean interface.
      * @param isMXBean If true, the {@code mbeanInterface} parameter
      * names an MXBean interface and the resultant MBean is an MXBean.
@@ -279,6 +357,8 @@ public class StandardEmitterMBean extends StandardMBean
      * NotificationBroadcasterSupport#sendNotification
      * sendNotification}.</p>
      *
+     * <p>
+     * 
      * @param n the notification to send.
      *
      * @throws ClassCastException if the {@code emitter} parameter to the
@@ -303,6 +383,14 @@ public class StandardEmitterMBean extends StandardMBean
      * <p>The default implementation of this method returns
      * {@link #getNotificationInfo()}.</p>
      *
+     * <p>
+     *  <p>发送通知。</p>
+     * 
+     *  <p>如果构造函数的{@code emitter}参数是{@code NotificationBroadcasterSupport}的实例,则此方法将调用{@code emitter.}{@link NotificationBroadcasterSupport#sendNotification sendNotification}
+     * 。
+     * </p>。
+     * 
+     * 
      * @param info The default MBeanInfo derived by reflection.
      * @return the MBeanNotificationInfo[] for the new MBeanInfo.
      */

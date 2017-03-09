@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -76,6 +80,25 @@ import java.util.stream.StreamSupport;
  * seed unless the {@linkplain System#getProperty system property}
  * {@code java.util.secureRandomSeed} is set to {@code true}.
  *
+ * <p>
+ *  一个随机数发生器隔离到当前线程。
+ * 与{@link java.lang.Math}类使用的全局{@link java.util.Random}生成器类似,{@code ThreadLocalRandom}用内部生成的种子初始化,否则不能被
+ * 修改。
+ *  一个随机数发生器隔离到当前线程。如果适用,在并发程序中使用{@code ThreadLocalRandom}而不是共享的{@code Random}对象通常会遇到更少的开销和争用。
+ * 当多个任务(例如,每个{@link ForkJoinTask})在线程池中并行使用随机数时,使用{@code ThreadLocalRandom}是特别合适的。
+ * 
+ *  <p>这个类的用法通常应该是：{@code ThreadLocalRandom.current()。
+ * nextX(...)}(其中{@code X}是{@code Int},{@code Long}等等)。
+ * 当所有的用法都是这种形式时,永远不可能意外地跨多个线程共享一个{@code ThreadLocalRandom}。
+ * 
+ *  <p>此类还提供了其他常用的有界随机生成方法。
+ * 
+ * <p> {@code ThreadLocalRandom}的实例不是加密安全的。请考虑在安全敏感的应用程序中使用{@link java.security.SecureRandom}。
+ * 此外,默认构造的实例不使用加密随机种子,除非{@linkplain System#getProperty系统属性} {@code java.util.secureRandomSeed}设置为{@code true}
+ * 。
+ * <p> {@code ThreadLocalRandom}的实例不是加密安全的。请考虑在安全敏感的应用程序中使用{@link java.security.SecureRandom}。
+ * 
+ * 
  * @since 1.7
  * @author Doug Lea
  */
@@ -123,6 +146,25 @@ public class ThreadLocalRandom extends Random {
      * pair of them. As is true for the base class version of this
      * method, this time/space tradeoff is probably never worthwhile,
      * but we provide identical statistical properties.
+     * <p>
+     *  这个类实现了java.util.Random API(和子类Random),使用一个访问Thread类(主要是字段threadLocalRandomSeed)中保存的随机数状态的单个静态实例。
+     * 这样做,它还提供了一个管理包私有实用程序的家,这些实用程序依赖于维护ThreadLocalRandom实例所需的完全相同的状态。
+     * 我们利用对初始化标志字段的需要,还将其用作"探测器" - 用于争用避免的自调整线程哈希以及保守地用于避免另外令人惊讶的次要简单(xorShift)随机种子用户通过劫持ThreadLocalRandom序
+     * 列。
+     * 这样做,它还提供了一个管理包私有实用程序的家,这些实用程序依赖于维护ThreadLocalRandom实例所需的完全相同的状态。
+     * 双重用途是方便的婚姻,但是是减少大多数并发程序的应用程序级开销和占用空间的简单而有效的方法。
+     * 
+     *  即使这个类子类化java.util.Random,它使用与java.util.SplittableRandom相同的基本算法。 (有关说明,请参阅其内部文档,因为这里不再重复。
+     * )因为ThreadLocalRandoms不是可拆分的,所以我们只使用一个64位的gamma。
+     * 
+     * 因为这个类在与Thread类不同的包中,所以字段访问方法使用Unsafe来绕过访问控制规则。
+     * 为了符合随机超类构造函数的要求,公共静态ThreadLocalRandom维护一个"已初始化"字段,以便拒绝对setSeed的用户调用,同时仍然允许从构造函数调用。
+     * 注意,序列化是完全不必要的,因为只有一个静态单例。但是我们生成一个包含"rnd"和"initialized"字段的串行格式,以确保版本之间的兼容性。
+     * 
+     *  非核心方法的实现与SplittableRandom中的大部分相同,部分派生自该类的先前版本。
+     * 
+     *  下一个本地高斯螺纹本地支持非常少用的下一个高斯方法,通过为它们的一对中的第二个提供保持器。对于这个方法的基类版本是真的,这个时间/空间权衡可能是不值得的,但我们提供相同的统计属性。
+     * 
      */
 
     /** Generates per-thread initialization/probe field */
@@ -131,6 +173,9 @@ public class ThreadLocalRandom extends Random {
 
     /**
      * The next seed for default constructors.
+     * <p>
+     *  默认构造函数的下一个种子。
+     * 
      */
     private static final AtomicLong seeder = new AtomicLong(initialSeed());
 
@@ -151,16 +196,25 @@ public class ThreadLocalRandom extends Random {
 
     /**
      * The seed increment
+     * <p>
+     *  种子增量
+     * 
      */
     private static final long GAMMA = 0x9e3779b97f4a7c15L;
 
     /**
      * The increment for generating probe values
+     * <p>
+     *  生成探针值的增量
+     * 
      */
     private static final int PROBE_INCREMENT = 0x9e3779b9;
 
     /**
      * The increment of seeder per new instance
+     * <p>
+     *  每个新实例的seeder增量
+     * 
      */
     private static final long SEEDER_INCREMENT = 0xbb67ae8584caa73bL;
 
@@ -186,6 +240,9 @@ public class ThreadLocalRandom extends Random {
     /**
      * Field used only during singleton initialization.
      * True when constructor completes.
+     * <p>
+     *  仅在单例初始化期间使用字段。构造函数完成时为True。
+     * 
      */
     boolean initialized;
 
@@ -203,6 +260,10 @@ public class ThreadLocalRandom extends Random {
      * thread local seed value needs to be generated. Note that even
      * though the initialization is purely thread-local, we need to
      * rely on (static) atomic generators to initialize the values.
+     * <p>
+     * 初始化当前线程的线程字段。只有当Thread.threadLocalRandomProbe为零时才调用,表示需要生成线程本地种子值。
+     * 注意,即使初始化是纯线程本地的,我们需要依靠(静态)原子发生器来初始化值。
+     * 
      */
     static final void localInit() {
         int p = probeGenerator.addAndGet(PROBE_INCREMENT);
@@ -216,6 +277,10 @@ public class ThreadLocalRandom extends Random {
     /**
      * Returns the current thread's {@code ThreadLocalRandom}.
      *
+     * <p>
+     *  返回当前线程的{@code ThreadLocalRandom}。
+     * 
+     * 
      * @return the current thread's {@code ThreadLocalRandom}
      */
     public static ThreadLocalRandom current() {
@@ -228,6 +293,10 @@ public class ThreadLocalRandom extends Random {
      * Throws {@code UnsupportedOperationException}.  Setting seeds in
      * this generator is not supported.
      *
+     * <p>
+     *  引发{@code UnsupportedOperationException}。不支持在此生成器中设置种子。
+     * 
+     * 
      * @throws UnsupportedOperationException always
      */
     public void setSeed(long seed) {
@@ -258,6 +327,10 @@ public class ThreadLocalRandom extends Random {
      * origin is greater than bound, acts as unbounded form of
      * nextLong, else as bounded form.
      *
+     * <p>
+     *  LongStream Spliterators使用的nextLong的形式。如果origin大于bound,则作为nextLong的无界形式,否则作为有界形式。
+     * 
+     * 
      * @param origin the least value, unless greater than bound
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
@@ -287,6 +360,10 @@ public class ThreadLocalRandom extends Random {
      * The form of nextInt used by IntStream Spliterators.
      * Exactly the same as long version, except for types.
      *
+     * <p>
+     *  IntStream Spliterators使用的nextInt的形式。完全与长版本相同,除了类型。
+     * 
+     * 
      * @param origin the least value, unless greater than bound
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
@@ -315,6 +392,10 @@ public class ThreadLocalRandom extends Random {
     /**
      * The form of nextDouble used by DoubleStream Spliterators.
      *
+     * <p>
+     *  DoubleStream Spliterators使用的nextDouble的形式。
+     * 
+     * 
      * @param origin the least value, unless greater than bound
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
@@ -332,6 +413,10 @@ public class ThreadLocalRandom extends Random {
     /**
      * Returns a pseudorandom {@code int} value.
      *
+     * <p>
+     *  返回伪随机{@code int}值。
+     * 
+     * 
      * @return a pseudorandom {@code int} value
      */
     public int nextInt() {
@@ -342,6 +427,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a pseudorandom {@code int} value between zero (inclusive)
      * and the specified bound (exclusive).
      *
+     * <p>
+     *  返回零(包括)和指定的bound(exclusive)之间的伪随机{@code int}值。
+     * 
+     * 
      * @param bound the upper bound (exclusive).  Must be positive.
      * @return a pseudorandom {@code int} value between zero
      *         (inclusive) and the bound (exclusive)
@@ -367,6 +456,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a pseudorandom {@code int} value between the specified
      * origin (inclusive) and the specified bound (exclusive).
      *
+     * <p>
+     *  返回指定原点(包括)和指定的bound(exclusive)之间的伪随机{@code int}值。
+     * 
+     * 
      * @param origin the least value returned
      * @param bound the upper bound (exclusive)
      * @return a pseudorandom {@code int} value between the origin
@@ -383,6 +476,10 @@ public class ThreadLocalRandom extends Random {
     /**
      * Returns a pseudorandom {@code long} value.
      *
+     * <p>
+     *  返回伪随机{@code long}值。
+     * 
+     * 
      * @return a pseudorandom {@code long} value
      */
     public long nextLong() {
@@ -393,6 +490,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a pseudorandom {@code long} value between zero (inclusive)
      * and the specified bound (exclusive).
      *
+     * <p>
+     *  返回零(包括)和指定的bound(exclusive)之间的伪随机{@code long}值。
+     * 
+     * 
      * @param bound the upper bound (exclusive).  Must be positive.
      * @return a pseudorandom {@code long} value between zero
      *         (inclusive) and the bound (exclusive)
@@ -418,6 +519,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a pseudorandom {@code long} value between the specified
      * origin (inclusive) and the specified bound (exclusive).
      *
+     * <p>
+     *  返回指定的原点(包括)和指定的bound(exclusive)之间的伪随机{@code long}值。
+     * 
+     * 
      * @param origin the least value returned
      * @param bound the upper bound (exclusive)
      * @return a pseudorandom {@code long} value between the origin
@@ -435,6 +540,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a pseudorandom {@code double} value between zero
      * (inclusive) and one (exclusive).
      *
+     * <p>
+     *  返回零(包括)和一(不包括)之间的伪随机{@code double}值。
+     * 
+     * 
      * @return a pseudorandom {@code double} value between zero
      *         (inclusive) and one (exclusive)
      */
@@ -446,6 +555,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a pseudorandom {@code double} value between 0.0
      * (inclusive) and the specified bound (exclusive).
      *
+     * <p>
+     * 返回0.0(包括)和指定的bound(exclusive)之间的伪随机{@code double}值。
+     * 
+     * 
      * @param bound the upper bound (exclusive).  Must be positive.
      * @return a pseudorandom {@code double} value between zero
      *         (inclusive) and the bound (exclusive)
@@ -463,6 +576,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a pseudorandom {@code double} value between the specified
      * origin (inclusive) and bound (exclusive).
      *
+     * <p>
+     *  返回指定原点(包括)和bound(exclusive)之间的伪随机{@code double}值。
+     * 
+     * 
      * @param origin the least value returned
      * @param bound the upper bound (exclusive)
      * @return a pseudorandom {@code double} value between the origin
@@ -479,6 +596,10 @@ public class ThreadLocalRandom extends Random {
     /**
      * Returns a pseudorandom {@code boolean} value.
      *
+     * <p>
+     *  返回伪随机{@code boolean}值。
+     * 
+     * 
      * @return a pseudorandom {@code boolean} value
      */
     public boolean nextBoolean() {
@@ -489,6 +610,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a pseudorandom {@code float} value between zero
      * (inclusive) and one (exclusive).
      *
+     * <p>
+     *  返回零(包括)和一(排它)之间的伪随机{@code float}值。
+     * 
+     * 
      * @return a pseudorandom {@code float} value between zero
      *         (inclusive) and one (exclusive)
      */
@@ -521,6 +646,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a stream producing the given {@code streamSize} number of
      * pseudorandom {@code int} values.
      *
+     * <p>
+     *  返回产生给定{@code streamSize}伪随机{@code int}值的流。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @return a stream of pseudorandom {@code int} values
      * @throws IllegalArgumentException if {@code streamSize} is
@@ -543,6 +672,12 @@ public class ThreadLocalRandom extends Random {
      * @implNote This method is implemented to be equivalent to {@code
      * ints(Long.MAX_VALUE)}.
      *
+     * <p>
+     *  返回一个有效无限的伪随机流{@code int}值。
+     * 
+     *  @implNote此方法实现为等效于{@code ints(Long.MAX_VALUE)}。
+     * 
+     * 
      * @return a stream of pseudorandom {@code int} values
      * @since 1.8
      */
@@ -558,6 +693,10 @@ public class ThreadLocalRandom extends Random {
      * of pseudorandom {@code int} values, each conforming to the given
      * origin (inclusive) and bound (exclusive).
      *
+     * <p>
+     *  返回生成给定{@code streamSize}伪随机{@code int}值的流,每个值都符合给定的起点(包含)和bound(exclusive)。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
@@ -588,6 +727,12 @@ public class ThreadLocalRandom extends Random {
      * @implNote This method is implemented to be equivalent to {@code
      * ints(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      *
+     * <p>
+     *  返回一个有效无限的伪随机流{@code int}值,每个值都符合给定的起点(包含)和bound(exclusive)。
+     * 
+     *  @implNote此方法实现为等同于{@code ints(Long.MAX_VALUE,randomNumberOrigin,randomNumberBound)}。
+     * 
+     * 
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
      * @return a stream of pseudorandom {@code int} values,
@@ -609,6 +754,10 @@ public class ThreadLocalRandom extends Random {
      * Returns a stream producing the given {@code streamSize} number of
      * pseudorandom {@code long} values.
      *
+     * <p>
+     *  返回生成给定{@code streamSize}伪随机数{@code long}值的流。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @return a stream of pseudorandom {@code long} values
      * @throws IllegalArgumentException if {@code streamSize} is
@@ -631,6 +780,12 @@ public class ThreadLocalRandom extends Random {
      * @implNote This method is implemented to be equivalent to {@code
      * longs(Long.MAX_VALUE)}.
      *
+     * <p>
+     *  返回有效无限的伪随机{@code long}值流。
+     * 
+     *  @implNote此方法实现为等效于{@code longs(Long.MAX_VALUE)}。
+     * 
+     * 
      * @return a stream of pseudorandom {@code long} values
      * @since 1.8
      */
@@ -646,6 +801,10 @@ public class ThreadLocalRandom extends Random {
      * pseudorandom {@code long}, each conforming to the given origin
      * (inclusive) and bound (exclusive).
      *
+     * <p>
+     *  返回产生给定{@code streamSize}伪随机{@code long}的数据流,每个数据都符合给定的原点(包括)和bound(exclusive)。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
@@ -676,6 +835,12 @@ public class ThreadLocalRandom extends Random {
      * @implNote This method is implemented to be equivalent to {@code
      * longs(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      *
+     * <p>
+     * 返回有效无限的伪随机{@code long}值流,每个值都符合给定的起点(包含)和bound(exclusive)。
+     * 
+     *  @implNote此方法实现为等效于{@code longs(Long.MAX_VALUE,randomNumberOrigin,randomNumberBound)}。
+     * 
+     * 
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
      * @return a stream of pseudorandom {@code long} values,
@@ -698,6 +863,10 @@ public class ThreadLocalRandom extends Random {
      * pseudorandom {@code double} values, each between zero
      * (inclusive) and one (exclusive).
      *
+     * <p>
+     *  返回产生给定{@code streamSize}伪随机{@code double}值的流,每个值在零(包括)和一个(不包括)之间。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @return a stream of {@code double} values
      * @throws IllegalArgumentException if {@code streamSize} is
@@ -721,6 +890,12 @@ public class ThreadLocalRandom extends Random {
      * @implNote This method is implemented to be equivalent to {@code
      * doubles(Long.MAX_VALUE)}.
      *
+     * <p>
+     *  返回有效无限的伪随机{@code double}值,每个值在零(包括)和一个(排除)之间。
+     * 
+     *  @implNote此方法实现为等效于{@code doubles(Long.MAX_VALUE)}。
+     * 
+     * 
      * @return a stream of pseudorandom {@code double} values
      * @since 1.8
      */
@@ -736,6 +911,10 @@ public class ThreadLocalRandom extends Random {
      * pseudorandom {@code double} values, each conforming to the given origin
      * (inclusive) and bound (exclusive).
      *
+     * <p>
+     *  返回产生给定{@code streamSize}伪随机{@code double}值的流,每个值都符合给定的起点(包括)和bound(exclusive)。
+     * 
+     * 
      * @param streamSize the number of values to generate
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
@@ -767,6 +946,12 @@ public class ThreadLocalRandom extends Random {
      * @implNote This method is implemented to be equivalent to {@code
      * doubles(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      *
+     * <p>
+     *  返回有效无限的伪随机{@code double}值流,每个值都符合给定的起点(包含)和bound(exclusive)。
+     * 
+     *  @implNote这个方法被实现为等同于{@code doubles(Long.MAX_VALUE,randomNumberOrigin,randomNumberBound)}。
+     * 
+     * 
      * @param randomNumberOrigin the origin (inclusive) of each random value
      * @param randomNumberBound the bound (exclusive) of each random value
      * @return a stream of pseudorandom {@code double} values,
@@ -791,6 +976,10 @@ public class ThreadLocalRandom extends Random {
      * Long.MAX_VALUE. For splits, it uses the standard divide-by-two
      * approach. The long and double versions of this class are
      * identical except for types.
+     * <p>
+     *  用于int流的分割器。我们将四个int版本复用到一个类中,通过将一个小于origin的bound作为无界处理,还将"infinite"视为等同于Long.MAX_VALUE。
+     * 对于分割,它使用标准的二分法。除类型外,此类的long和double版本是相同的。
+     * 
      */
     static final class RandomIntsSpliterator implements Spliterator.OfInt {
         long index;
@@ -845,6 +1034,9 @@ public class ThreadLocalRandom extends Random {
 
     /**
      * Spliterator for long streams.
+     * <p>
+     *  长流的分离器。
+     * 
      */
     static final class RandomLongsSpliterator implements Spliterator.OfLong {
         long index;
@@ -900,6 +1092,9 @@ public class ThreadLocalRandom extends Random {
 
     /**
      * Spliterator for double streams.
+     * <p>
+     *  双流的分离器。
+     * 
      */
     static final class RandomDoublesSpliterator implements Spliterator.OfDouble {
         long index;
@@ -970,12 +1165,24 @@ public class ThreadLocalRandom extends Random {
      *
      * Note: Because of package-protection issues, versions of some
      * these methods also appear in some subpackage classes.
+     * <p>
+     * 下面的方法的用法的描述可以在使用它们的类中找到。简而言之,线程的"探测"值是一个非零的哈希码,(相对于两个冲突空间的任何幂,它(可能)不会与其他现有线程发生冲突。
+     * 当它碰撞时,它是伪随机调整(使用Marsaglia XorShift)。
+     *  nextSecondarySeed方法在与ThreadLocalRandom相同的上下文中使用,但仅用于瞬态使用,例如随机自适应自旋/块序列,其中便宜的RNG就足够了,并且原则上可以破坏主Thread
+     * LocalRandom的用户可见统计属性,如果我们是使用它。
+     * 当它碰撞时,它是伪随机调整(使用Marsaglia XorShift)。
+     * 
+     *  注意：由于包保护问题,一些这些方法的版本也出现在一些子包类中。
+     * 
      */
 
     /**
      * Returns the probe value for the current thread without forcing
      * initialization. Note that invoking ThreadLocalRandom.current()
      * can be used to force initialization on zero return.
+     * <p>
+     *  返回当前线程的探测值,而不强制初始化。注意,调用ThreadLocalRandom.current()可以用于在零返回时强制初始化。
+     * 
      */
     static final int getProbe() {
         return UNSAFE.getInt(Thread.currentThread(), PROBE);
@@ -984,6 +1191,9 @@ public class ThreadLocalRandom extends Random {
     /**
      * Pseudo-randomly advances and records the given probe value for the
      * given thread.
+     * <p>
+     *  伪随机前进并记录给定线程的给定探针值。
+     * 
      */
     static final int advanceProbe(int probe) {
         probe ^= probe << 13;   // xorshift
@@ -995,6 +1205,9 @@ public class ThreadLocalRandom extends Random {
 
     /**
      * Returns the pseudo-randomly initialized or updated secondary seed.
+     * <p>
+     *  返回伪随机初始化或更新的辅助种子。
+     * 
      */
     static final int nextSecondarySeed() {
         int r;
@@ -1018,6 +1231,8 @@ public class ThreadLocalRandom extends Random {
     private static final long serialVersionUID = -5851777807851030925L;
 
     /**
+    /* <p>
+    /* 
      * @serialField rnd long
      *              seed for random computations
      * @serialField initialized boolean
@@ -1030,6 +1245,10 @@ public class ThreadLocalRandom extends Random {
 
     /**
      * Saves the {@code ThreadLocalRandom} to a stream (that is, serializes it).
+     * <p>
+     *  将{@code ThreadLocalRandom}保存到流(即序列化它)。
+     * 
+     * 
      * @param s the stream
      * @throws java.io.IOException if an I/O error occurs
      */
@@ -1044,6 +1263,9 @@ public class ThreadLocalRandom extends Random {
 
     /**
      * Returns the {@link #current() current} thread's {@code ThreadLocalRandom}.
+     * <p>
+     *  返回{@link #current()current}线程的{@code ThreadLocalRandom}。
+     * 
      * @return the {@link #current() current} thread's {@code ThreadLocalRandom}
      */
     private Object readResolve() {

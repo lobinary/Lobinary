@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -90,6 +91,8 @@ import sun.corba.SharedSecrets;
 /** Initialize the parser data for the standard ORB parser.  This is used both
  * to implement ORBDataParserImpl and to provide the basic testing framework
  * for ORBDataParserImpl.
+ * <p>
+ *  实现ORBDataParserImpl并为ORBDataParserImpl提供基本的测试框架。
  */
 public class ParserTable {
     private static String MY_CLASS_NAME = ParserTable.class.getName() ;

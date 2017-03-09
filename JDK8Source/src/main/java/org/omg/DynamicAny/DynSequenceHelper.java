@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -11,6 +12,8 @@ package org.omg.DynamicAny;
 
 /**
     * DynSequence objects support the manipulation of IDL sequences.
+    * <p>
+    * 
     */
 abstract public class DynSequenceHelper
 {

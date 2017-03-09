@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.util.function.IntFunction;
  * Factory methods for transforming streams into duplicate-free streams, using
  * {@link Object#equals(Object)} to determine equality.
  *
+ * <p>
+ *  用于将流转换为无重复流的工厂方法,使用{@link Object#equals(Object)}确定等式。
+ * 
+ * 
  * @since 1.8
  */
 final class DistinctOps {
@@ -47,6 +52,9 @@ final class DistinctOps {
      * Appends a "distinct" operation to the provided stream, and returns the
      * new stream.
      *
+     * <p>
+     *  向所提供的流附加"不同"操作,并返回新流。
+     * 
      * @param <T> the type of both input and output elements
      * @param upstream a reference stream with element type T
      * @return the new stream

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,19 @@ import java.awt.AWTEvent;
  * of any particular {@code InvocationEvent} instance is not
  * in the range from {@code INVOCATION_FIRST} to {@code INVOCATION_LAST}.
  *
+ * <p>
+ *  当由AWT事件分派器线程分派时,在<code> Runnable </code>上执行<code> run()</code>方法的事件。
+ * 这个类可以用作<code> ActiveEvent </code>的引用实现,而不是声明一个新类并定义<code> dispatch()</code>。<p>。
+ * 
+ *  此类的实例通过调用<code> invokeLater </code>和<code> invokeAndWait </code>而放置在<code> EventQueue </code>上。
+ * 客户端代码可以使用此事实为<code> invokeLater </code>和<code> invokeAndWait </code>写入替换函数,而不在任何<code> AWTEventListen
+ * er </code>对象中编写特殊情况代码。
+ *  此类的实例通过调用<code> invokeLater </code>和<code> invokeAndWait </code>而放置在<code> EventQueue </code>上。
+ * <p>
+ *  如果任何特定{@code InvocationEvent}实例的{@code id}参数不在{@code INVOCATION_FIRST}到{@code INVOCATION_LAST}的范围内,则
+ * 会导致未指定的行为。
+ * 
+ * 
  * @author      Fred Ecks
  * @author      David Mendenhall
  *
@@ -69,21 +83,33 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
 
     /**
      * Marks the first integer id for the range of invocation event ids.
+     * <p>
+     *  标记调用事件标识范围的第一个整数ID。
+     * 
      */
     public static final int INVOCATION_FIRST = 1200;
 
     /**
      * The default id for all InvocationEvents.
+     * <p>
+     *  所有InvocationEvents的默认ID。
+     * 
      */
     public static final int INVOCATION_DEFAULT = INVOCATION_FIRST;
 
     /**
      * Marks the last integer id for the range of invocation event ids.
+     * <p>
+     *  标记调用事件标识范围的最后一个整数ID。
+     * 
      */
     public static final int INVOCATION_LAST = INVOCATION_DEFAULT;
 
     /**
      * The Runnable whose run() method will be called.
+     * <p>
+     *  Runnable的run()方法将被调用。
+     * 
      */
     protected Runnable runnable;
 
@@ -92,6 +118,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * immediately after the Runnable.run() method has returned or thrown an exception
      * or after the event was disposed.
      *
+     * <p>
+     *  (可能为null)对象的notifyAll()方法将在Runnable.run()方法返回或抛出异常之后立即被调用,或者事件被处理后。
+     * 
+     * 
      * @see #isDispatched
      */
     protected volatile Object notifier;
@@ -100,6 +130,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * The (potentially null) Runnable whose run() method will be called
      * immediately after the event was dispatched or disposed.
      *
+     * <p>
+     *  (可能为空)Runnable的run()方法将在事件被分派或处理后立即被调用。
+     * 
+     * 
      * @see #isDispatched
      * @since 1.8
      */
@@ -109,6 +143,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * Indicates whether the <code>run()</code> method of the <code>runnable</code>
      * was executed or not.
      *
+     * <p>
+     * 指示<code> runnable </code>的<code> run()</code>方法是否已执行。
+     * 
+     * 
      * @see #isDispatched
      * @since 1.7
      */
@@ -118,6 +156,9 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * Set to true if dispatch() catches Throwable and stores it in the
      * exception instance variable. If false, Throwables are propagated up
      * to the EventDispatchThread's dispatch loop.
+     * <p>
+     *  如果dispatch()捕获Throwable并将其存储在异常实例变量中,则设置为true。如果为false,Throwables传播到EventDispatchThread的分派循环。
+     * 
      */
     protected boolean catchExceptions;
 
@@ -125,6 +166,9 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * The (potentially null) Exception thrown during execution of the
      * Runnable.run() method. This variable will also be null if a particular
      * instance does not catch exceptions.
+     * <p>
+     *  在执行Runnable.run()方法期间抛出的(可能为null)异常。如果特定实例不捕获异常,此变量也将为null。
+     * 
      */
     private Exception exception = null;
 
@@ -132,12 +176,19 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * The (potentially null) Throwable thrown during execution of the
      * Runnable.run() method. This variable will also be null if a particular
      * instance does not catch exceptions.
+     * <p>
+     *  在执行Runnable.run()方法期间抛出的(可能为空)Throwable。如果特定实例不捕获异常,此变量也将为null。
+     * 
      */
     private Throwable throwable = null;
 
     /**
      * The timestamp of when this event occurred.
      *
+     * <p>
+     *  此事件发生的时间戳。
+     * 
+     * 
      * @serial
      * @see #getWhen
      */
@@ -145,6 +196,9 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
 
     /*
      * JDK 1.1 serialVersionUID.
+     * <p>
+     *  JDK 1.1 serialVersionUID。
+     * 
      */
     private static final long serialVersionUID = 436056344909459450L;
 
@@ -159,6 +213,14 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * <p> This method throws an <code>IllegalArgumentException</code>
      * if <code>source</code> is <code>null</code>.
      *
+     * <p>
+     *  构造一个具有指定源的<code> InvocationEvent </code>,它将在分派时执行runnable的<code> run </code>方法。 <p>这是一个方便的构造函数。
+     * 调用形式<tt> InvocationEvent(source,runnable)</tt>的行为与调用<tt>完全相同{@ link #InvocationEvent(Object,Runnable,Object,boolean)InvocationEvent}
+     *  runnable,null,false)</tt>。
+     *  构造一个具有指定源的<code> InvocationEvent </code>,它将在分派时执行runnable的<code> run </code>方法。 <p>这是一个方便的构造函数。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source    The <code>Object</code> that originated the event
      * @param runnable  The <code>Runnable</code> whose <code>run</code>
      *                  method will be executed
@@ -184,6 +246,15 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * <p>This method throws an <code>IllegalArgumentException</code>
      * if <code>source</code> is <code>null</code>.
      *
+     * <p>
+     * 构造一个具有指定源的<code> InvocationEvent </code>,它将在分派时执行runnable的<code> run </code>方法。
+     * 如果通知程序是非<code> null </code>,则<code> run </code>返回或抛出异常后,将立即调用notifyAll()</code>。
+     *  <p>调用形式<tt> InvocationEvent(source,runnable,notifier,catchThrowables)</tt>的行为与调用<tt>完全相同{@ link #InvocationEvent(Object,int,Runnable, Object,boolean)InvocationEvent}
+     * (source,InvocationEvent.INVOCATION_DEFAULT,runnable,notifier,catchThrowables)</tt>。
+     * 如果通知程序是非<code> null </code>,则<code> run </code>返回或抛出异常后,将立即调用notifyAll()</code>。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source            The <code>Object</code> that originated
      *                          the event
      * @param runnable          The <code>Runnable</code> whose
@@ -220,6 +291,12 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * <p>This method throws an <code>IllegalArgumentException</code>
      * if <code>source</code> is <code>null</code>.
      *
+     * <p>
+     *  构造一个具有指定源的<code> InvocationEvent </code>,它将在分派时执行runnable的<code> run </code>方法。
+     * 如果侦听器是非<code> null </code>,<code> listener.run()</code>将在<code> run </code>返回后抛出异常或事件被处理。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source            The <code>Object</code> that originated
      *                          the event
      * @param runnable          The <code>Runnable</code> whose
@@ -252,6 +329,12 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     * 构造具有指定的源和ID的<code> InvocationEvent </code>,它将在分派时执行runnable的<code> run </code>方法。
+     * 如果通知程序是非<code> null </code>,则<code> run </code>返回或抛出异常后,将立即调用<code> notifyAll </code>。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source            The <code>Object</code> that originated
      *                          the event
      * @param id     An integer indicating the type of event.
@@ -292,6 +375,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * Executes the Runnable's <code>run()</code> method and notifies the
      * notifier (if any) when <code>run()</code> has returned or thrown an exception.
      *
+     * <p>
+     *  执行Runnable的<code> run()</code>方法,并在<code> run()</code>返回或抛出异常时通知通知程序(如果有)。
+     * 
+     * 
      * @see #isDispatched
      */
     public void dispatch() {
@@ -319,6 +406,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * Returns any Exception caught while executing the Runnable's <code>run()
      * </code> method.
      *
+     * <p>
+     *  返回执行Runnable的<code> run()</code>方法时捕获的任何异常。
+     * 
+     * 
      * @return  A reference to the Exception if one was thrown; null if no
      *          Exception was thrown or if this InvocationEvent does not
      *          catch exceptions
@@ -331,6 +422,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * Returns any Throwable caught while executing the Runnable's <code>run()
      * </code> method.
      *
+     * <p>
+     *  返回执行Runnable的<code> run()</code>方法时捕获的任何Throwable。
+     * 
+     * 
      * @return  A reference to the Throwable if one was thrown; null if no
      *          Throwable was thrown or if this InvocationEvent does not
      *          catch Throwables
@@ -343,6 +438,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
     /**
      * Returns the timestamp of when this event occurred.
      *
+     * <p>
+     *  返回此事件发生时的时间戳。
+     * 
+     * 
      * @return this event's timestamp
      * @since 1.4
      */
@@ -373,6 +472,16 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * Otherwise, there is no guarantee that the waiting thread will ever be woken
      * from the wait.
      *
+     * <p>
+     *  如果分派事件或返回时抛出任何异常,则返回{@code true},否则返回{@code false}。该方法应该由调用{@code notifier.wait()}方法的等待线程调用。
+     * 由于虚假唤醒是可能的(如{@link Object#wait()}中所述),此方法应在等待循环中使用,以确保事件已分派：。
+     * <pre>
+     *  while(！event.isDispatched()){notifier.wait(); }}
+     * </pre>
+     *  如果等待线程在不调度事件的情况下唤醒,{@code isDispatched()}方法返回{@code false},并且再次执行{@code while}循环,从而使唤醒的线程恢复等待模式。
+     * <p>
+     * 如果{@code notifier.notifyAll()}发生在等待线程进入{@code notifier.wait()}方法之前,{@code while}循环确保等待线程不会进入{@code notifier。
+     * 
      * @return {@code true} if the event has been dispatched, or any exception
      * has been thrown while dispatching, {@code false} otherwise
      * @see #dispatch
@@ -386,6 +495,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
 
     /**
      * Called when the event was dispatched or disposed
+     * <p>
+     *  wait()}方法。否则,不能保证等待线程将永远从等待唤醒。
+     * 
+     * 
      * @param dispatched true if the event was dispatched
      *                   false if the event was disposed
      */
@@ -407,6 +520,10 @@ public class InvocationEvent extends AWTEvent implements ActiveEvent {
      * Returns a parameter string identifying this event.
      * This method is useful for event-logging and for debugging.
      *
+     * <p>
+     *  在事件被分派或处置时调用
+     * 
+     * 
      * @return  A string identifying the event and its attributes
      */
     public String paramString() {

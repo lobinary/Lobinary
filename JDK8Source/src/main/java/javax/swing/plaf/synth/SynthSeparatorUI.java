@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.swing.plaf.DimensionUIResource;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JSeparator}.
  *
+ * <p>
+ *  为{@link javax.swing.JSeparator}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author Shannon Hickey
  * @author Joshua Outwater
  * @since 1.7
@@ -50,6 +55,10 @@ public class SynthSeparatorUI extends SeparatorUI
     /**
      * Creates a new UI object for the given component.
      *
+     * <p>
+     *  为给定组件创建一个新的UI对象。
+     * 
+     * 
      * @param c component to create UI object for
      * @return the UI object
      */
@@ -59,6 +68,9 @@ public class SynthSeparatorUI extends SeparatorUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void installUI(JComponent c) {
@@ -68,6 +80,9 @@ public class SynthSeparatorUI extends SeparatorUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void uninstallUI(JComponent c) {
@@ -78,6 +93,9 @@ public class SynthSeparatorUI extends SeparatorUI
     /**
      * Installs default setting. This method is called when a
      * {@code LookAndFeel} is installed.
+     * <p>
+     *  安装默认设置。当安装{@code LookAndFeel}时调用此方法。
+     * 
      */
     public void installDefaults(JSeparator c) {
         updateStyle(c);
@@ -109,6 +127,9 @@ public class SynthSeparatorUI extends SeparatorUI
     /**
      * Uninstalls default setting. This method is called when a
      * {@code LookAndFeel} is uninstalled.
+     * <p>
+     *  卸载默认设置。卸载{@code LookAndFeel}时调用此方法。
+     * 
      */
     public void uninstallDefaults(JSeparator c) {
         SynthContext context = getContext(c, ENABLED);
@@ -121,6 +142,9 @@ public class SynthSeparatorUI extends SeparatorUI
     /**
      * Installs listeners. This method is called when a
      * {@code LookAndFeel} is installed.
+     * <p>
+     *  安装侦听器。当安装{@code LookAndFeel}时调用此方法。
+     * 
      */
     public void installListeners(JSeparator c) {
         c.addPropertyChangeListener(this);
@@ -129,6 +153,9 @@ public class SynthSeparatorUI extends SeparatorUI
     /**
      * Uninstalls listeners. This method is called when a
      * {@code LookAndFeel} is uninstalled.
+     * <p>
+     *  卸载侦听器。卸载{@code LookAndFeel}时调用此方法。
+     * 
      */
     public void uninstallListeners(JSeparator c) {
         c.removePropertyChangeListener(this);
@@ -142,6 +169,12 @@ public class SynthSeparatorUI extends SeparatorUI
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -164,6 +197,10 @@ public class SynthSeparatorUI extends SeparatorUI
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -179,6 +216,10 @@ public class SynthSeparatorUI extends SeparatorUI
     /**
      * Paints the specified component.
      *
+     * <p>
+     *  绘制指定的组件。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -192,6 +233,9 @@ public class SynthSeparatorUI extends SeparatorUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -203,6 +247,9 @@ public class SynthSeparatorUI extends SeparatorUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getPreferredSize(JComponent c) {
@@ -225,6 +272,9 @@ public class SynthSeparatorUI extends SeparatorUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getMinimumSize(JComponent c) {
@@ -233,6 +283,9 @@ public class SynthSeparatorUI extends SeparatorUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getMaximumSize(JComponent c) {
@@ -241,6 +294,8 @@ public class SynthSeparatorUI extends SeparatorUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     public SynthContext getContext(JComponent c) {

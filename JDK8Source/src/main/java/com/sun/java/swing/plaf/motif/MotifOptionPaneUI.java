@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,12 +47,22 @@ import java.awt.Rectangle;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  提供JOptionPane的CDE / Motif外观。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Scott Violet
  */
 public class MotifOptionPaneUI extends BasicOptionPaneUI
 {
     /**
       * Creates a new MotifOptionPaneUI instance.
+      * <p>
+      *  创建一个新的MotifOptionPaneUI实例。
+      * 
       */
     public static ComponentUI createUI(JComponent x) {
         return new MotifOptionPaneUI();
@@ -60,6 +71,9 @@ public class MotifOptionPaneUI extends BasicOptionPaneUI
     /**
      * Creates and returns a Container containin the buttons. The buttons
      * are created by calling <code>getButtons</code>.
+     * <p>
+     *  创建并返回包含在按钮中的Container。这些按钮是通过调用<code> getButtons </code>创建的。
+     * 
      */
     protected Container createButtonArea() {
         Container          b = super.createButtonArea();
@@ -72,6 +86,9 @@ public class MotifOptionPaneUI extends BasicOptionPaneUI
 
     /**
      * Returns null, CDE/Motif does not impose a minimum size.
+     * <p>
+     *  返回null,CDE / Motif不强加最小大小。
+     * 
      */
     public Dimension getMinimumOptionPaneSize() {
         return null;
@@ -98,6 +115,8 @@ public class MotifOptionPaneUI extends BasicOptionPaneUI
      * Creates and adds a JLabel representing the icon returned from
      * <code>getIcon</code> to <code>top</code>. This is messaged from
      * <code>createMessageArea</code>
+     * <p>
+     *  创建并添加一个表示从<code> getIcon </code>返回<code> top </code>的图标的JLabel。这是从<code> createMessageArea </code>
      */
     protected void addIcon(Container top) {
         /* Create the icon. */

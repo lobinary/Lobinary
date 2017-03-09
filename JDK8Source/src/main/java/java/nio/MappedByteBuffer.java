@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,23 @@ import sun.misc.Unsafe;
  * byte buffers. </p>
  *
  *
+ * <p>
+ *  直接字节缓冲器,其内容是文件的内存映射区域。
+ * 
+ *  <p>映射字节缓冲区通过{@link java.nio.channels.FileChannel#map FileChannel.map}方法创建。
+ * 此类使用特定于内存映射文件区域的操作扩展{@link ByteBuffer}类。
+ * 
+ *  <p>映射的字节缓冲区及其表示的文件映射保持有效,直到缓冲区本身被垃圾回收。
+ * 
+ *  <p>映射字节缓冲区的内容可以随时更改,例如,如果映射文件的相应区域的内容由此程序或其他程序更改。无论这些改变是否发生,以及何时发生,都是与操作系统相关的,因此未指定。
+ * 
+ *  <a name="inaccess"> </a> <p>映射字节缓冲区的全部或部分可能随时无法访问,例如,如果映射文件被截断。
+ * 尝试访问映射字节缓冲区的不可访问区域将不会更改缓冲区的内容,并会导致在访问时或稍后时间抛出未指定的异常。
+ * 因此,强烈建议采取适当的预防措施,以避免该程序或同时运行的程序对映射文件的操作,但读取或写入文件的内容除外。
+ * 
+ * <p>映射字节缓冲区的行为与普通直接字节​​缓冲区不同。 </p>
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -127,6 +145,15 @@ public abstract class MappedByteBuffer
      * underlying operating system may have paged out some of the buffer's data
      * by the time that an invocation of this method returns.  </p>
      *
+     * <p>
+     *  告诉这个缓冲区的内容是否驻留在物理内存中。
+     * 
+     *  <p>返回值<tt> true </tt>意味着该缓冲区中的所有数据很可能驻留在物理内存中,因此可以访问,而不会导致任何虚拟内存页错误或I / O操作。
+     * 返回值<tt> false </tt>并不一定意味着缓冲区的内容不驻留在物理内存中。
+     * 
+     *  <p>返回的值是一个提示,而不是保证,因为底层操作系统可能在调用此方法的时候调出了一些缓冲区的数据。 </p>
+     * 
+     * 
      * @return  <tt>true</tt> if it is likely that this buffer's content
      *          is resident in physical memory
      */
@@ -150,6 +177,12 @@ public abstract class MappedByteBuffer
      * method may cause some number of page faults and I/O operations to
      * occur. </p>
      *
+     * <p>
+     *  将此缓冲区的内容加载到物理内存中。
+     * 
+     *  <p>此方法尽力确保在返回时,此缓冲区的内容驻留在物理内存中。调用此方法可能会导致发生一定数量的页面错误和I / O操作。 </p>
+     * 
+     * 
      * @return  This buffer
      */
     public final MappedByteBuffer load() {
@@ -194,6 +227,12 @@ public abstract class MappedByteBuffer
      * java.nio.channels.FileChannel.MapMode#READ_WRITE}) then invoking this
      * method has no effect. </p>
      *
+     * <p>
+     *  强制对此缓冲区内容所做的任何更改将写入包含映射文件的存储设备。
+     * 
+     *  <p>如果映射到此缓冲区的文件驻留在本地存储设备上,那么当此方法返回时,它保证自从创建以来对缓冲区所做的所有更改,或者自上次调用此方法以来,将被写入到设备。
+     * 
+     * 
      * @return  This buffer
      */
     public final MappedByteBuffer force() {

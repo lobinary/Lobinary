@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: MsgKey.java,v 1.1.4.1 2005/09/08 11:03:11 suresh_emailid Exp $
+ * <p>
+ *  $ Id：MsgKey.java,v 1.1.4.1 2005/09/08 11:03:11 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer.utils;
 
@@ -30,17 +43,27 @@ package com.sun.org.apache.xml.internal.serializer.utils;
  * <p>
  * This class holds only the message keys used
  * when generating messages.
+ * <p>
+ *  这个类不是一个公共的API,它在内部被序列化器使用,是公共的,在Java意义上,只是因为它的使用跨越包边界。
+ * <p>
+ *  此类仅保存生成消息时使用的消息键。
+ * 
  */
 public class MsgKey {
 
     /** An internal error with the messages,
      * this is the message to use if the message key can't be found
+     * <p>
+     *  这是要使用的消息,如果找不到消息密钥
+     * 
      */
     public static final String BAD_MSGKEY = "BAD_MSGKEY";
 
     /**
      * An internal error with the messages,
      * this is the message to use if the message format operation failed.
+     * <p>
+     *  消息的内部错误,这是消息格式操作失败时要使用的消息。
      */
     public static final String BAD_MSGFORMAT = "BAD_MSGFORMAT";
 

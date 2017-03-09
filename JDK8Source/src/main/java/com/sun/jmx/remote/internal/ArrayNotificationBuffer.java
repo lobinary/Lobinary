@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -107,6 +108,33 @@ import com.sun.jmx.remote.util.ClassLogger;
   Since adding or removing a BufferListener to an MBean can involve
   calling user code, we are careful not to hold any locks while it is
   done.
+/* <p>
+/*  对于具有附加的ConnectorServer的每个MBeanServer对象,都有一个ArrayNotificationBuffer实例。
+/* 然后,对于连接到给定MBeanServer的每个ConnectorServer,都有一个内部类ShareBuffer的实例。因此,例如有两个ConnectorServers,它看起来像这样：。
+/* 
+/*  ConnectorServer1  - > ShareBuffer1  -  \}  - > ArrayNotificationBuffer ConnectorServer2  - > ShareBu
+/* ffer2  -  / | | v MBeanServer。
+/* 
+/*  ArrayNotificationBuffer具有NamedNotification对象的循环缓冲区。每个ConnectorServer定义通知缓冲区大小,此大小由相应的ShareBuffer记录。
+/*  ArrayNotificationBuffer的缓冲区大小是其所有ShareBuffer的最大值。添加或删除ShareBuffer时,会相应地调整ArrayNotificationBuffer大小。
+/* 
+/*  ArrayNotificationBuffer也有一个BufferListener(它是一个NotificationListener)在它附加的MBeanServer的每个NotificationBr
+/* oadcaster MBean上注册。
+/* 这个潜在的大型侦听器集合的成本是在ConnectorServers之间共享ArrayNotificationBuffer的主要动机,以及当不再有任何ConnectorServer使用它时,我们谨慎地丢弃
+/* ArrayNotificationBuffer(及其BufferListeners)的原因。
+/* 
+/* 这个类的同步本质上是复杂的。为了限制复杂性,我们只使用两个锁：
+/* 
+/*   -  globalLock控制访问MBeanServer及其ArrayNotificationBuffer之间的映射以及每个ArrayNotificationBuffer的ShareBuffers集
+/* 合。
+/* 
+/*   - 每个ArrayNotificationBuffer的实例锁控制对通知数组的访问,包括其大小,以及ArrayNotificationBuffer的dispose标志。
+/* 等待/通知机制用于指示对数组的更改。
+/* 
+/*  如果两个锁同时保持,则必须首先采用globalLock。
+/* 
+/*  由于向MBean添加或删除BufferListener可能涉及调用用户代码,因此我们在完成时不小心保留任何锁。
+/* 
  */
 public class ArrayNotificationBuffer implements NotificationBuffer {
     private boolean disposed = false;
@@ -148,6 +176,10 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
          * would be to block the second ConnectorServer until the first
          * one has finished adding all the listeners, but that would then
          * be subject to deadlock.
+         * <p>
+         *  这可以防止涉及用户代码的可能死锁,但这意味着在所有监听器准备就绪之前,在此窗口中创建和启动的第二个ConnectorServer将返回,这可能会导致令人惊讶的行为。
+         * 另一种方法是阻塞第二个ConnectorServer,直到第一个添加完所有的侦听器,然后会遇到死锁。
+         * 
          */
         if (create)
             buf.createListeners();
@@ -157,6 +189,9 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
     /* Ensure that this buffer is no longer the one that will be returned by
      * getNotificationBuffer.  This method is idempotent - calling it more
      * than once has no effect beyond that of calling it once.
+     * <p>
+     *  getNotificationBuffer。这个方法是幂等的 - 调用它不止一次没有效果超过调用它一次。
+     * 
      */
     static void removeNotificationBuffer(MBeanServer mbs) {
         synchronized (globalLock) {
@@ -281,6 +316,15 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
      * operation will block until one arrives, subject to the
      * timeout.</p>
      *
+     * <p>
+     *  <p>提取符合指定倾听者的通知。</p>
+     * 
+     * <p>此操作只考虑序号至少为<code> startSequenceNumber </code>的通知。
+     * 它不会超过<code> timeout </code>,并且只会返回不超过<code> maxNotifications </code>的通知。</p>。
+     * 
+     *  <p>如果没有符合条件的通知,则操作将阻止,直到到达为止,但会超时。</p>
+     * 
+     * 
      * @param filter an object that will add notifications to a
      * {@code List<TargetedNotification>} if they match the current
      * listeners with their filters.
@@ -339,6 +383,10 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
            Caller may legitimately supply Long.MAX_VALUE to indicate no
            timeout.  In that case the addition will overflow and produce
            a negative end time.  Set end time to Long.MAX_VALUE in that
+        /* <p>
+        /*  呼叫者可能合法地提供Long.MAX_VALUE以指示没有超时。在这种情况下,加法将溢出并产生负结束时间。将结束时间设置为Long.MAX_VALUE
+        /* 
+        /* 
            case.  We assume System.currentTimeMillis() is positive.  */
         long endTime = System.currentTimeMillis() + timeout;
         if (endTime < 0) // overflow
@@ -350,6 +398,10 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
         /* We set earliestSeq the first time through the loop.  If we
            set it here, notifications could be dropped before we
            started examining them, so earliestSeq might not correspond
+        /* <p>
+        /*  设置它,通知可以在我们开始检查它们之前,因此earliestSeq可能不对应
+        /* 
+        /* 
            to the earliest notification we examined.  */
         long earliestSeq = -1;
         long nextSeq = startSequenceNumber;
@@ -357,6 +409,8 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
             new ArrayList<TargetedNotification>();
 
         /* On exit from this loop, notifs, earliestSeq, and nextSeq must
+        /* <p>
+        /* 
            all be correct values for the returned NotificationResult.  */
         while (true) {
             logger.debug("fetchNotifications", "main loop starts");
@@ -364,10 +418,14 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
             NamedNotification candidate;
 
             /* Get the next available notification regardless of filters,
+            /* <p>
+            /* 
                or wait for one to arrive if there is none.  */
             synchronized (this) {
 
                 /* First time through.  The current earliestSequenceNumber
+                /* <p>
+                /* 
                    is the first one we could have examined.  */
                 if (earliestSeq < 0) {
                     earliestSeq = earliestSequenceNumber();
@@ -387,6 +445,10 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
                    last time through, nextSeq could now be earlier
                    than the current earliest.  If so, notifications
                    may have been lost and we return now so the caller
+                /* <p>
+                /*  上次通过,nextSeq现在可以早于当前最早。如果是,通知可能已丢失,我们现在返回,因此呼叫者
+                /* 
+                /* 
                    can see this next time it calls.  */
                 if (nextSeq < earliestSeq) {
                     logger.trace("fetchNotifications",
@@ -421,6 +483,10 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
                     /* nextSeq is the largest sequence number.  If we
                        already got notifications, return them now.
                        Otherwise wait for some to arrive, with
+                    /* <p>
+                    /*  已经收到通知,现在返回。否则等待一些到达,与
+                    /* 
+                    /* 
                        timeout.  */
                     if (notifs.size() > 0) {
                         logger.debug("fetchNotifications",
@@ -456,6 +522,10 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
                our filters.  We do this outside the synchronized block
                so we don't hold up everyone accessing the buffer
                (including notification senders) while we evaluate
+            /* <p>
+            /*  我们的过滤器。我们在同步块之外做这个,所以我们不阻止每个人访问缓冲区(包括通知发送者),而我们评估
+            /* 
+            /* 
                potentially slow filters.  */
             ObjectName name = candidate.getObjectName();
             Notification notif = candidate.getNotification();
@@ -470,6 +540,10 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
                    returned nextSeq is as large as possible.  This
                    prevents the caller from thinking it missed
                    interesting notifications when in fact we knew they
+                /* <p>
+                /*  返回的nextSeq尽可能大。这防止呼叫者认为它错过了有趣的通知,事实上我们知道他们
+                /* 
+                /* 
                    weren't.  */
                 if (maxNotifications <= 0) {
                     logger.debug("fetchNotifications",
@@ -596,6 +670,20 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
      * arbitrary user code, and this could deadlock with any locks we hold
      * (see bug 6239400).  The corollary is that we must not do any operations
      * in this method or the methods it calls that require locks.
+     * <p>
+     *  将我们的监听器添加到当前在MBean服务器中的每个NotificationBroadcaster MBean以及以后创建的每个NotificationBroadcaster。
+     * 
+     * 这将是真的很好,如果我们可以做mbs.addNotificationListener(new ObjectName("*：*"),...);绝对是下一个版本的JMX的东西。
+     * 
+     *  有一个讨厌的种族条件,我们必须处理。我们首先注册MBean创建通知,所以我们可以添加侦听器到新的MBean,然后我们查询现有的MBean以添加侦听器。
+     * 问题是,一个新的MBean可以在我们注册创建之后但在查询完成之前到达。然后我们可以在查询和MBean创建通知中看到MBean,我们最终会注册我们的监听器两次。
+     * 
+     *  为了解决这个问题,我们安排在查询完成时到达的新MBean被添加到Set createdDuringQuery,我们不立即添加监听器。
+     * 当查询完成时,我们原子性地关闭添加新名称到createdDuringQuery并将所有的名称添加到查询的结果。因为我们处理集合,无论新创建的MBean是否包括在查询结果中,结果都是相同的。
+     * 
+     *  在向MBean添加侦听器的操作期间不要保持任何锁定是重要的。 MBean的addNotificationListener可以是任意的用户代码,这可能与我们持有的任何锁死锁(参见错误6239400)。
+     * 推论是,我们不能在这个方法或者它所调用的需要锁的方法中做任何操作。
+     * 
      */
     private void createListeners() {
         logger.debug("createListeners", "starts");
@@ -618,6 +706,8 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
         }
 
         /* Spec doesn't say whether Set returned by QueryNames can be modified
+        /* <p>
+        /* 
            so we clone it. */
         Set<ObjectName> names = queryNames(null, broadcasterQuery);
         names = new HashSet<ObjectName>(names);
@@ -642,6 +732,8 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
             logger.trace("addBufferListener", e);
             /* This can happen if the MBean was unregistered just
                after the query.  Or user NotificationBroadcaster might
+            /* <p>
+            /* 
                throw unexpected exception.  */
         }
     }
@@ -734,6 +826,9 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
      * or even during its destruction.  So we always add our listener
      * (without synchronization), then we check if the buffer has been
      * destroyed and if so remove the listener we just added.
+     * <p>
+     *  后查询。或者用户NotificationBroadcaster可能
+     * 
      */
     private void createdNotification(MBeanServerNotification n) {
         final String shouldEqual =
@@ -828,6 +923,11 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
     /**
      * Iterate until we extract the real exception
      * from a stack of PrivilegedActionExceptions.
+     * <p>
+     *  createListeners方法。
+     * 
+     * 通知可以在我们的缓冲区已经被销毁或甚至在其销毁之后到达。所以我们总是添加我们的监听器(没有同步),然后我们检查缓冲区是否已被销毁,如果是这样,删除我们刚刚添加的监听器。
+     * 
      */
     private static Exception extractException(Exception e) {
         while (e instanceof PrivilegedActionException) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: FastStringBuffer.java,v 1.2.4.1 2005/09/15 08:15:44 suresh_emailid Exp $
+ * <p>
+ *  $ Id：FastStringBuffer.java,v 1.2.4.1 2005/09/15 08:15:44 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -52,6 +65,19 @@ package com.sun.org.apache.xml.internal.utils;
  * We should either re-architect that to make this safe (if possible)
  * or remove that code and clean up for performance/maintainability reasons.
  * <p>
+ * <p>
+ *  裸骨,不安全,快速字符串缓冲。无螺纹安全,无参数范围检查,外露字段。注意,在典型的应用中,StringBuffer的线程安全在任何情况下都是一个有点可疑的概念。
+ * <p>
+ *  注意,Stree和DTM使用单个FastStringBuffer作为字符串池,通过在此单个缓冲区中记录开始和长度索引。这最小化了堆开销,但当检索数据时当然需要更多的工作。
+ * <p>
+ * FastStringBuffer作为"分块缓冲区"操作。这样做可以减少在追加超出可用空间时重新复制现有信息的需要;我们只是分配另一个块并流向它。
+ *  (块的数组可能需要增长,不可否认,但是这是一个更小的对象。)当我们提取跨块的边界的字符串时,可能会出现一些多余的重复;较大的块使得较少频繁。
+ * <p>
+ *  参数化了大小值,以允许调整此代码。理论上,结果树片段可能希望与主文档的文本不同地进行调整。
+ * <p>
+ *  ％REVIEW％代码中包含了自调整实验(使用嵌套的FastStringBuffers实现块大小的变化),但是当数据可能从FSB复制到本身时,这种实现已经被证明是有问题的。
+ * 我们应该重新架构,使这个安全(如果可能)或删除该代码,并清除性能/可维护性的原因。
+ * <p>
  */
 public class FastStringBuffer
 {
@@ -70,6 +96,15 @@ public class FastStringBuffer
          * This should be used when normalize-to-SAX is called for the first chunk of a
          * multi-chunk output, or one following unsuppressed whitespace in a previous
          * chunk.
+         * <p>
+         *  //％BUG％％REVIEW％***** PROBLEM SUSPECTED：如果来自FSB的数据正在被复制回到同一个FSB(例如,从前一个变量设置的变量)//并且中间复制...有读取过程中严重故障的
+         * 风险,由于如何调整大小代码重新开始存储。
+         *  Arggh。 //如果我们想保留可变大小块功能,我们需要重新考虑//这个问题。现在,我已经迫使我们进入固定大小的模式。
+         *  static final boolean DEBUG_FORCE_FIXED_CHUNKSIZE = true;。
+         * 
+         * / **清单常量：抑制领先的空格。当对多块输出的第一个块调用标准化到SAX时,或者在先前块中的未被抑制的空格时,应该使用这个。
+         * 
+         * 
          * @see #sendNormalizedSAXcharacters(org.xml.sax.ContentHandler,int,int)
          */
         public static final int SUPPRESS_LEADING_WS=0x01;
@@ -77,12 +112,19 @@ public class FastStringBuffer
         /** Manifest constant: Suppress trailing whitespace.
          * This should be used when normalize-to-SAX is called for the last chunk of a
          * multi-chunk output; it may have to be or'ed with SUPPRESS_LEADING_WS.
+         * <p>
+         *  当对多块输出的最后一个块调用SAX时,应使用此选项;它可能必须与SUPPRESS_LEADING_WS或。
+         * 
          */
         public static final int SUPPRESS_TRAILING_WS=0x02;
 
         /** Manifest constant: Suppress both leading and trailing whitespace.
          * This should be used when normalize-to-SAX is called for a complete string.
          * (I'm not wild about the name of this one. Ideas welcome.)
+         * <p>
+         *  当为一个完整的字符串调用标准化到SAX时,应使用此选项。 (我不喜欢这个名字,想法欢迎。)
+         * 
+         * 
          * @see #sendNormalizedSAXcharacters(org.xml.sax.ContentHandler,int,int)
          */
         public static final int SUPPRESS_BOTH
@@ -91,6 +133,9 @@ public class FastStringBuffer
         /** Manifest constant: Carry trailing whitespace of one chunk as leading
          * whitespace of the next chunk. Used internally; I don't see any reason
          * to make it public right now.
+         * <p>
+         *  空格的下一个块。内部使用;我没有看到任何理由让它公开现在。
+         * 
          */
         private static final int CARRY_WS=0x04;
 
@@ -99,6 +144,9 @@ public class FastStringBuffer
    * bits of index can be used within a single chunk before flowing over
    * to the next chunk. For example, if m_chunkbits is set to 15, each
    * chunk can contain up to 2^15 (32K) characters
+   * <p>
+   *  字段m_chunkBits设置我们的分块策略,通过说在流向下一个块之前在单个块内可以使用多少比特的索引。例如,如果m_chunkbits设置为15,则每个块最多可包含2 ^ 15(32K)个字符
+   * 
    */
   int m_chunkBits = 15;
 
@@ -106,6 +154,9 @@ public class FastStringBuffer
    * Field m_maxChunkBits affects our chunk-growth strategy, by saying what
    * the largest permissible chunk size is in this particular FastStringBuffer
    * hierarchy.
+   * <p>
+   *  字段m_maxChunkBits通过说明在此特定FastStringBuffer层次结构中允许的最大块大小,影响我们的块增长策略。
+   * 
    */
   int m_maxChunkBits = 15;
 
@@ -116,6 +167,10 @@ public class FastStringBuffer
    * is set to 3, then after 8 chunks at a given size we will rebundle
    * them as the first element of a FastStringBuffer using a chunk size
    * 8 times larger (chunkBits shifted left three bits).
+   * <p>
+   *  字段m_rechunkBits影响我们的块增长策略,通过说,在我们将它们封装到下一个大小的第一个块之前应该分配一个大小的块。
+   * 例如,如果m_rechunkBits设置为3,则在给定大小的8个块之后,我们将它们重新绑定为FastStringBuffer的第一个元素,使用块大小的8倍大(chunkBits左移3位)。
+   * 
    */
   int m_rebundleBits = 2;
 
@@ -123,6 +178,9 @@ public class FastStringBuffer
    * Field m_chunkSize establishes the maximum size of one chunk of the array
    * as 2**chunkbits characters.
    * (Which may also be the minimum size if we aren't tuning for storage)
+   * <p>
+   * 字段m_chunkSize将数组的一个块的最大大小确定为2 ** chunkbits个字符。 (如果我们不调优存储,它也可以是最小大小)
+   * 
    */
   int m_chunkSize;  // =1<<(m_chunkBits-1);
 
@@ -130,6 +188,9 @@ public class FastStringBuffer
    * Field m_chunkMask is m_chunkSize-1 -- in other words, m_chunkBits
    * worth of low-order '1' bits, useful for shift-and-mask addressing
    * within the chunks.
+   * <p>
+   *  字段m_chunkMask是m_chunkSize-1  - 换句话说,m_chunkBits的低阶"1"位,对块内的移位和掩码寻址有用。
+   * 
    */
   int m_chunkMask;  // =m_chunkSize-1;
 
@@ -140,6 +201,10 @@ public class FastStringBuffer
    * references to them should be considered to be invalidated after any
    * append. However, the only time these arrays are directly exposed
    * is in the sendSAXcharacters call.
+   * <p>
+   *  字段m_array保存字符串缓冲区的文本内容,使用数组数组。注意,当需要时,可以重新分配该数组及其包含的数组,以便允许缓冲器增长;在任何附加之后,对它们的引用应被视为无效。
+   * 但是,这些数组只有直接暴露的时间是在sendSAXcharacters调用中。
+   * 
    */
   char[][] m_array;
 
@@ -151,6 +216,12 @@ public class FastStringBuffer
    * <p>
    * The insertion point for append operations is addressed by the combination
    * of m_lastChunk and m_firstFree.
+   * <p>
+   *  字段m_lastChunk是进入m_array []的索引,指向当前使用的Chunked数组的最后一个数据块。
+   * 注意,实际上可以分配附加的块,例如,如果FastStringBuffer以前被截断或者有人发出了ensureSpace请求。
+   * <p>
+   *  附加操作的插入点由m_lastChunk和m_firstFree的组合来处理。
+   * 
    */
   int m_lastChunk = 0;
 
@@ -160,6 +231,10 @@ public class FastStringBuffer
    * FastStringBuffer's current content. Since m_array[][] is zero-based,
    * the length of that content can be calculated as
    * (m_lastChunk<<m_chunkBits) + m_firstFree
+   * <p>
+   *  字段m_firstFree是进入m_array [m_lastChunk] []的索引,指向Chunked数组中不是FastStringBuffer当前内容一部分的第一个字符。
+   * 由于m_array [] []是从零开始的,所以内容的长度可以计算为(m_lastChunk << m_chunkBits)+ m_firstFree。
+   * 
    */
   int m_firstFree = 0;
 
@@ -169,6 +244,10 @@ public class FastStringBuffer
    * building a hierarchy of FastStringBuffers, where early appends use
    * a smaller chunkSize (for less wasted memory overhead) but later
    * ones use a larger chunkSize (for less heap activity overhead).
+   * <p>
+   * 字段m_innerFSB,当非空时,是一个FastStringBuffer,其总长度等于m_chunkSize,并替换m_array [0]。
+   * 这允许构建FastStringBuffers的层次结构,早期追加使用较小的chunkSize(用于较少浪费的内存开销),但后来使用较大的chunkSize(较少的堆活动开销)。
+   * 
    */
   FastStringBuffer m_innerFSB = null;
 
@@ -183,6 +262,14 @@ public class FastStringBuffer
    * An alternative would be to accept integer sizes and round to powers of two;
    * that really doesn't seem to buy us much, if anything.
    *
+   * <p>
+   *  构造一个FastStringBuffer,按照参数分配策略。
+   * <p>
+   *  为了编码方便,我已经用位数表示了两种分配大小。这是块的最终大小所需要的,以允许快速和有效的移位和掩码寻址。它对于初始尺寸不太重要,并且可以重新考虑。
+   * <p>
+   *  一个替代方法是接受整数大小和round到2的幂;这真的似乎不买我们多,如果有什么。
+   * 
+   * 
    * @param initChunkBits Length in characters of the initial allocation
    * of a chunk, expressed in log-base-2. (That is, 10 means allocate 1024
    * characters.) Later chunks will use larger allocation units, to trade off
@@ -226,6 +313,10 @@ public class FastStringBuffer
   /**
    * Construct a FastStringBuffer, using a default rebundleBits value.
    *
+   * <p>
+   *  构造一个FastStringBuffer,使用默认的rebundleBits值。
+   * 
+   * 
    * NEEDSDOC @param initChunkBits
    * NEEDSDOC @param maxChunkBits
    */
@@ -241,6 +332,12 @@ public class FastStringBuffer
    * ISSUE: Should this call assert initial size, or fixed size?
    * Now configured as initial, with a default for fixed.
    *
+   * <p>
+   *  构造一个FastStringBuffer,使用默认的maxChunkBits和rebundleBits值。
+   * <p>
+   *  问题：此调用是否应声明初始大小或固定大小?现在配置为初始,默认为固定。
+   * 
+   * 
    * NEEDSDOC @param initChunkBits
    */
   public FastStringBuffer(int initChunkBits)
@@ -250,6 +347,9 @@ public class FastStringBuffer
 
   /**
    * Construct a FastStringBuffer, using a default allocation policy.
+   * <p>
+   *  使用默认分配策略构造FastStringBuffer。
+   * 
    */
   public FastStringBuffer()
   {
@@ -265,6 +365,10 @@ public class FastStringBuffer
   /**
    * Get the length of the list. Synonym for length().
    *
+   * <p>
+   *  获取列表的长度。 length()的同义词。
+   * 
+   * 
    * @return the number of characters in the FastStringBuffer's content.
    */
   public final int size()
@@ -275,6 +379,10 @@ public class FastStringBuffer
   /**
    * Get the length of the list. Synonym for size().
    *
+   * <p>
+   *  获取列表的长度。 size()的同义词。
+   * 
+   * 
    * @return the number of characters in the FastStringBuffer's content.
    */
   public final int length()
@@ -286,6 +394,9 @@ public class FastStringBuffer
    * Discard the content of the FastStringBuffer, and most of the memory
    * that was allocated by it, restoring the initial state. Note that this
    * may eventually be different from setLength(0), which see.
+   * <p>
+   *  丢弃FastStringBuffer的内容,以及由它分配的大部分内存,恢复初始状态。注意,这可能最终不同于setLength(0),参见。
+   * 
    */
   public final void reset()
   {
@@ -320,6 +431,11 @@ public class FastStringBuffer
    * The only safe use for our setLength() is to truncate the FastStringBuffer
    * to a shorter string.
    *
+   * <p>
+   * 直接设置FastStringBuffer的存储量是多少被认为是其内容的一部分。这是一个快速但危险的操作。它不受负值保护,或者大于当前可用存储量的值...,即使存在额外存储,其内容也是不可预测的。
+   *  setLength()的唯一安全用法是将FastStringBuffer截断为较短的字符串。
+   * 
+   * 
    * @param l New length. If l<0 or l>=getLength(), this operation will
    * not report an error but future operations will almost certainly fail.
    */
@@ -353,6 +469,10 @@ public class FastStringBuffer
    * Subroutine for the public setLength() method. Deals with the fact
    * that truncation may require restoring one of the innerFSBs
    *
+   * <p>
+   *  public setLength()方法的子例程。由于截断可能需要恢复一个内部FSB的事实
+   * 
+   * 
    * NEEDSDOC @param l
    * NEEDSDOC @param rootFSB
    */
@@ -395,6 +515,14 @@ public class FastStringBuffer
    * of MutableString, rather than having StringBuffer be a separate hierarchy.
    * We'd avoid a <strong>lot</strong> of double-buffering.)
    *
+   * <p>
+   *  注意,由于没有工厂方法直接从数组数组产生一个String对象,因此需要双重拷贝,所以这个操作已经通过转移到分块数组而被去优化。
+   * 通过使用ensureCapacity,我们希望最小化构建中间StringBuffer的堆开销。
+   * <p>
+   *  (真的很遗憾,Java没有将String设计为MutableString的最后一个子类,而不是将StringBuffer作为一个单独的层次结构,我们可以避免<strong>很多</strong>的双缓
+   * 冲。
+   * 
+   * 
    * @return the contents of the FastStringBuffer as a standard Java string.
    */
   public final String toString()
@@ -413,6 +541,12 @@ public class FastStringBuffer
    * references to m_array[][] may no longer be valid....
    * though in fact they should be in this instance.
    *
+   * <p>
+   *  将单个字符附加到FastStringBuffer上,如有必要,增加存储空间。
+   * <p>
+   *  注意在调用append()之后,以前获得的对m_array [] []的引用可能不再有效....虽然实际上它们应该在这种情况下。
+   * 
+   * 
    * @param value character to be appended.
    */
   public final void append(char value)
@@ -475,6 +609,12 @@ public class FastStringBuffer
    * NOTE THAT after calling append(), previously obtained
    * references to m_array[] may no longer be valid.
    *
+   * <p>
+   *  将String的内容附加到FastStringBuffer,如果需要,增加存储。
+   * <p>
+   * 注意在调用append()之后,先前获得的对m_array []的引用可能不再有效。
+   * 
+   * 
    * @param value String whose contents are to be appended.
    */
   public final void append(String value)
@@ -557,6 +697,12 @@ public class FastStringBuffer
    * NOTE THAT after calling append(), previously obtained
    * references to m_array[] may no longer be valid.
    *
+   * <p>
+   *  将StringBuffer的内容附加到FastStringBuffer,如果需要,增加存储。
+   * <p>
+   *  注意在调用append()之后,先前获得的对m_array []的引用可能不再有效。
+   * 
+   * 
    * @param value StringBuffer whose contents are to be appended.
    */
   public final void append(StringBuffer value)
@@ -639,6 +785,12 @@ public class FastStringBuffer
    * NOTE THAT after calling append(), previously obtained
    * references to m_array[] may no longer be valid.
    *
+   * <p>
+   *  将字符数组的部分内容附加到FastStringBuffer上,如有必要,增加存储空间。
+   * <p>
+   *  注意在调用append()之后,先前获得的对m_array []的引用可能不再有效。
+   * 
+   * 
    * @param chars character array from which data is to be copied
    * @param start offset in chars of first character to be copied,
    * zero-based.
@@ -722,6 +874,12 @@ public class FastStringBuffer
    * NOTE THAT after calling append(), previously obtained
    * references to m_array[] may no longer be valid.
    *
+   * <p>
+   *  将另一个FastStringBuffer的内容附加到此FastStringBuffer上,如有必要,增加存储空间。
+   * <p>
+   *  注意在调用append()之后,先前获得的对m_array []的引用可能不再有效。
+   * 
+   * 
    * @param value FastStringBuffer whose contents are
    * to be appended.
    */
@@ -816,6 +974,8 @@ public class FastStringBuffer
   }
 
   /**
+  /* <p>
+  /* 
    * @return true if the specified range of characters are all whitespace,
    * as defined by XMLCharacterRecognizer.
    * <p>
@@ -857,6 +1017,8 @@ public class FastStringBuffer
   }
 
   /**
+  /* <p>
+  /* 
    * @param start Offset of first character in the range.
    * @param length Number of characters to send.
    * @return a new String object initialized from the specified range of
@@ -879,6 +1041,8 @@ public class FastStringBuffer
   }
 
   /**
+  /* <p>
+  /* 
    * @param sb StringBuffer to be appended to
    * @param start Offset of first character in the range.
    * @param length Number of characters to send.
@@ -906,6 +1070,15 @@ public class FastStringBuffer
    * We'd avoid a <strong>lot</strong> of double-buffering.)
    *
    *
+   * <p>
+   *  toString()和getString()的内部支持。请注意早期版本的签名更改;它现在追加到并返回由调用者提供的StringBuffer。这简化了m_innerFSB支持。
+   * <p>
+   *  注意,由于没有工厂方法直接从数组数组产生一个String对象,因此需要双重拷贝,所以这个操作已经通过转移到分块数组而被去优化。通过预设长度,我们希望最小化构建中间StringBuffer的堆开销。
+   * <p>
+   *  (真的很遗憾,Java没有将String设计为MutableString的最后一个子类,而不是将StringBuffer作为一个单独的层次结构,我们可以避免<strong>很多</strong>的双缓
+   * 冲。
+   * 
+   * 
    * @param sb
    * @param startChunk
    * @param startColumn
@@ -945,6 +1118,10 @@ public class FastStringBuffer
    * Get a single character from the string buffer.
    *
    *
+   * <p>
+   * 从字符串缓冲区获取单个字符。
+   * 
+   * 
    * @param pos character position requested.
    * @return A character from the requested position.
    */
@@ -971,6 +1148,13 @@ public class FastStringBuffer
    * across multiple blocks of memory and hence delivered as several
    * successive events.
    *
+   * <p>
+   *  将指定的字符范围作为一个或多个SAX字符()事件发送。
+   * 请注意,如果编辑FastStringBuffer,则传递给ContentHandler的缓冲区引用可能会失效;管理对FastStringBuffer的访问以防止出现此问题是用户的责任。
+   * <p>
+   *  还要注意,没有承诺输出将作为单个调用发送。在SAX中总是如此,一个逻辑字符串可以分割在多个存储器块上,并且因此作为若干连续事件传送。
+   * 
+   * 
    * @param ch SAX ContentHandler object to receive the event.
    * @param start Offset of first character in the range.
    * @param length Number of characters to send.
@@ -1018,6 +1202,10 @@ public class FastStringBuffer
    * Sends the specified range of characters as one or more SAX characters()
    * events, normalizing the characters according to XSLT rules.
    *
+   * <p>
+   *  将指定的字符范围作为一个或多个SAX字符()事件发送,根据XSLT规则对字符进行规范化。
+   * 
+   * 
    * @param ch SAX ContentHandler object to receive the event.
    * @param start Offset of first character in the range.
    * @param length Number of characters to send.
@@ -1092,6 +1280,12 @@ public class FastStringBuffer
    *
    * Note: The recursion is due to the possible recursion of inner FSBs.
    *
+   * <p>
+   *  内部方法直接规范和调度字符数组。该版本意识到如果数据由多个"块"组成,并且因此必须主动地管理前导和尾随空白的处理,则它可以被连续地多次调用的事实。
+   * 
+   *  注意：递归是由于内部FSB的可能递归。
+   * 
+   * 
    * @param ch The characters from the XML document.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -1193,6 +1387,10 @@ public class FastStringBuffer
   /**
    * Directly normalize and dispatch the character array.
    *
+   * <p>
+   *  直接规范和分派字符数组。
+   * 
+   * 
    * @param ch The characters from the XML document.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -1215,6 +1413,12 @@ public class FastStringBuffer
    * Note that, unlike sendSAXcharacters, this has to be done as a single
    * call to LexicalHandler#comment.
    *
+   * <p>
+   *  将指定的字符范围作为sax注释发送。
+   * <p>
+   *  注意,与sendSAXcharacters不同,这必须作为对LexicalHandler#comment的单个调用来完成。
+   * 
+   * 
    * @param ch SAX LexicalHandler object to receive the event.
    * @param start Offset of first character in the range.
    * @param length Number of characters to send.
@@ -1235,6 +1439,10 @@ public class FastStringBuffer
    * Copies characters from this string into the destination character
    * array.
    *
+   * <p>
+   *  将字符串从此字符串复制到目标字符数组中。
+   * 
+   * 
    * @param      srcBegin   index of the first character in the string
    *                        to copy.
    * @param      srcEnd     index after the last character in the string
@@ -1263,6 +1471,10 @@ public class FastStringBuffer
    * had its chunk size reset appropriately. IT SHOULD NEVER BE CALLED
    * EXCEPT WHEN source.length()==1<<(source.m_chunkBits+source.m_rebundleBits)
    *
+   * <p>
+   * 封装c'tor。调用此函数之后,源FastStringBuffer将被重置为使用新对象作为其m_innerFSB,并且将已适当地重置其块大小。
+   * 除了source.length()== 1 <<(source.m_chunkBits + source.m_rebundleBits),它不应该被调用除外。
+   * 
    * NEEDSDOC @param source
    */
   private FastStringBuffer(FastStringBuffer source)

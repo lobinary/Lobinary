@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,20 @@ import com.sun.media.sound.MidiUtils;
  * included to obtain the track's size, in terms of either the number of events
  * it contains or its duration in ticks.
  *
+ * <p>
+ *  MIDI轨道是独立的MIDI事件流(带时间戳的MIDI数据),可以与标准MIDI文件中的其他轨道一起存储。 MIDI规格只允许16声道的MIDI数据,但是轨道是一种解决这个限制的方法。
+ *  MIDI文件可以包含任何数量的轨道,每个轨道包含其自己的流的多达16个通道的MIDI数据。
+ * <p>
+ *  <code> Track </code>占据由<code> {@ link Sequencer} </code>：序列器播放序列播放的数据层次结构的中间层,其中包含包含MIDI事件的轨道。
+ * 定序器可以提供使各个轨道静音或独奏的控制。
+ * <p>
+ *  轨道的定时信息和分辨率由包含轨道的序列控制并存储在其中。给定的<code> Track </code>被认为属于保持其时序的特定<code> {@ link Sequence} </code>。
+ * 因此,通过调用<code> {@ link Sequence#createTrack} </code>方法而不是直接调用<code> Track </code>构造函数来创建新的(空)轨道。
+ * <p>
+ * <code> Track </code>类提供了通过添加或删除<code> MidiEvent </code>对象来编辑轨道的方法。这些操作按正确的时间顺序保留事件列表。
+ * 还包括方法以根据其包含的事件的数量或其在tick中的持续时间来获得轨道的大小。
+ * 
+ * 
  * @see Sequencer#setTrackMute
  * @see Sequencer#setTrackSolo
  *
@@ -77,6 +92,9 @@ public class Track {
     /**
      * Package-private constructor.  Constructs a new, empty Track object,
      * which initially contains one event, the meta-event End of Track.
+     * <p>
+     *  包私有构造函数。构造一个新的,空的Track对象,它最初包含一个事件,元事件End of Track。
+     * 
      */
     Track() {
         // start with the end of track event
@@ -92,6 +110,10 @@ public class Track {
      * is kept in time order, meaning that this event inserted at the
      * appropriate place in the list, not necessarily at the end.
      *
+     * <p>
+     *  向轨道添加新事件。但是,如果事件已包含在轨道中,则不会再添加。事件列表按时间顺序保存,这意味着此事件在列表中的适当位置插入,不一定在结尾。
+     * 
+     * 
      * @param event the event to add
      * @return <code>true</code> if the event did not already exist in the
      * track and was added, otherwise <code>false</code>
@@ -179,6 +201,10 @@ public class Track {
 
     /**
      * Removes the specified event from the track.
+     * <p>
+     *  从轨道中删除指定的事件。
+     * 
+     * 
      * @param event the event to remove
      * @return <code>true</code> if the event existed in the track and was removed,
      * otherwise <code>false</code>
@@ -210,6 +236,10 @@ public class Track {
 
     /**
      * Obtains the event at the specified index.
+     * <p>
+     *  在指定的索引处获取事件。
+     * 
+     * 
      * @param index the location of the desired event in the event vector
      * @throws ArrayIndexOutOfBoundsException  if the
      * specified index is negative or not less than the current size of
@@ -230,6 +260,10 @@ public class Track {
 
     /**
      * Obtains the number of events in this track.
+     * <p>
+     *  获取此轨道中的事件数。
+     * 
+     * 
      * @return the size of the track's event vector
      */
     public int size() {
@@ -244,6 +278,9 @@ public class Track {
      * duration of a tick in seconds is determined by the timing resolution
      * of the <code>Sequence</code> containing this track, and also by
      * the tempo of the music as set by the sequencer.)
+     * <p>
+     *  获取轨道的长度,以MIDI刻度表示。 (以秒为单位的节拍持续时间由包含此曲目的<code> Sequence </code>的定时分辨率决定,也由音序器设置的音乐节奏决定)。
+     * 
      * @return the duration, in ticks
      * @see Sequence#Sequence(float, int)
      * @see Sequencer#setTempoInBPM(float)

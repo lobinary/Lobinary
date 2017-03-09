@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -168,6 +169,9 @@ import com.sun.corba.se.impl.presentation.rmi.PresentationManagerImpl;
 
 /**
  * The JavaIDL ORB implementation.
+ * <p>
+ *  JavaIDL ORB实现。
+ * 
  */
 public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 {
@@ -319,6 +323,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a new ORB. Should be followed by the appropriate
      * set_parameters() call.
+     * <p>
+     *  创建一个新的ORB。之后应该进行适当的set_parameters()调用。
+     * 
      */
     public ORBImpl()
     {
@@ -343,6 +350,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
 /****************************************************************************
  * The following methods are ORB initialization
+ * <p>
+ *  以下方法是ORB初始化
+ * 
+ * 
  ****************************************************************************/
 
     // preInit initializes all non-pluggable ORB data that is independent
@@ -545,6 +556,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
 /****************************************************************************
  * The following methods are standard public CORBA ORB APIs
+ * <p>
+ *  以下方法是标准的公共CORBA ORB API
+ * 
+ * 
  ****************************************************************************/
 
     public synchronized org.omg.CORBA.portable.OutputStream create_output_stream()
@@ -560,6 +575,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * services. This method is deprecated,
      * and replaced by ORB.resolve_initial_references("NameOfCurrentObject");
      *
+     * <p>
+     *  获取当前伪对象。 Current接口用于管理线程特定的信息,供事务,安全和其他服务使用。
+     * 此方法已弃用,并替换为ORB.resolve_initial_references("NameOfCurrentObject");。
+     * 
+     * 
      * @return          a Current pseudo-object.
      * @deprecated
      */
@@ -575,6 +595,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
            then it should not be instantiated; so where does the
            ORB get a Current ?
 
+        /* <p>
+        /*  get_current的实现不清楚。
+        /*  ORB如何知道呼叫者是否需要一个Current用于事务或安全?还是假设两者只有一个实现?如果Current是线程特定的,那么它不应被实例化;所以ORB在哪里得到电流?。
+        /* 
+        /* 
            This should probably be deprecated. */
 
         throw wrapper.genericNoImpl() ;
@@ -583,6 +608,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create an NVList
      *
+     * <p>
+     *  创建NVList
+     * 
+     * 
      * @param count     size of list to create
      * @result          NVList created
      *
@@ -597,6 +626,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create an NVList corresponding to an OperationDef
      *
+     * <p>
+     *  创建与OperationDef对应的NVList
+     * 
+     * 
      * @param oper      operation def to use to create list
      * @result          NVList created
      *
@@ -612,6 +645,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * Create a NamedValue
      *
      * @result          NamedValue created
+     * <p>
+     *  创建NamedValue
+     * 
+     *  @result NamedValue created
+     * 
      */
     public synchronized NamedValue create_named_value(String s, Any any, int flags)
     {
@@ -623,6 +661,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * Create an ExceptionList
      *
      * @result          ExceptionList created
+     * <p>
+     *  创建一个ExceptionList
+     * 
+     *  @result创建ExceptionList
+     * 
      */
     public synchronized org.omg.CORBA.ExceptionList create_exception_list()
     {
@@ -634,6 +677,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * Create a ContextList
      *
      * @result          ContextList created
+     * <p>
+     *  创建一个ContextList
+     * 
+     *  @result创建了ContextList
+     * 
      */
     public synchronized org.omg.CORBA.ContextList create_context_list()
     {
@@ -645,6 +693,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * Get the default Context object
      *
      * @result          the default Context object
+     * <p>
+     *  获取默认的上下文对象
+     * 
+     *  @result默认的Context对象
+     * 
      */
     public synchronized org.omg.CORBA.Context get_default_context()
     {
@@ -656,6 +709,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * Create an Environment
      *
      * @result          Environment created
+     * <p>
+     *  创建环境
+     * 
+     *  @result环境创建
+     * 
      */
     public synchronized org.omg.CORBA.Environment create_environment()
     {
@@ -676,6 +734,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Send multiple dynamic requests asynchronously.
      *
+     * <p>
+     *  异步发送多个动态请求。
+     * 
+     * 
      * @param req         an array of request objects.
      */
     public synchronized void send_multiple_requests_deferred(Request[] req)
@@ -697,6 +759,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /**
      * Find out if any of the deferred invocations have a response yet.
+     * <p>
+     *  找出任何延迟的调用是否有响应。
+     * 
      */
     public synchronized boolean poll_next_response()
     {
@@ -719,6 +784,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * Get the next request that has gotten a response.
      *
      * @result            the next request ready with a response.
+     * <p>
+     *  获取获得响应的下一个请求。
+     * 
+     * @result下一个请求准备好响应。
+     * 
      */
     public org.omg.CORBA.Request get_next_response()
         throws org.omg.CORBA.WrongTransaction
@@ -759,6 +829,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /**
      * Notify response to ORB for get_next_response
+     * <p>
+     *  通知对ORB的响应get_next_response
+     * 
      */
     public void notifyORB()
     {
@@ -773,6 +846,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /**
      * Convert an object ref to a string.
+     * <p>
+     *  将对象引用转换为字符串。
+     * 
+     * 
      * @param obj The object to stringify.
      * @return A stringified object reference.
      */
@@ -806,6 +883,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /**
      * Convert a stringified object reference to the object it represents.
+     * <p>
+     *  将字符串对象引用转换为它表示的对象。
+     * 
+     * 
      * @param str The stringified object reference.
      * @return The unstringified object reference.
      */
@@ -848,6 +929,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Get the TypeCode for a primitive type.
      *
+     * <p>
+     *  获取基本类型的TypeCode。
+     * 
+     * 
      * @param tcKind    the integer kind for the primitive type
      * @return          the requested TypeCode
      */
@@ -860,6 +945,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for a structure.
      *
+     * <p>
+     *  为结构创建TypeCode。
+     * 
+     * 
      * @param id                the logical id for the typecode.
      * @param name      the name for the typecode.
      * @param members   an array describing the members of the TypeCode.
@@ -876,6 +965,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for a union.
      *
+     * <p>
+     *  为联合创建TypeCode。
+     * 
+     * 
      * @param id                the logical id for the typecode.
      * @param name      the name for the typecode.
      * @param discriminator_type
@@ -900,6 +993,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for an enum.
      *
+     * <p>
+     *  为枚举创建TypeCode。
+     * 
+     * 
      * @param id                the logical id for the typecode.
      * @param name      the name for the typecode.
      * @param members   an array describing the members of the TypeCode.
@@ -916,6 +1013,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for an alias.
      *
+     * <p>
+     *  为别名创建TypeCode。
+     * 
+     * 
      * @param id                the logical id for the typecode.
      * @param name      the name for the typecode.
      * @param original_type
@@ -933,6 +1034,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for an exception.
      *
+     * <p>
+     *  为异常创建TypeCode。
+     * 
+     * 
      * @param id                the logical id for the typecode.
      * @param name      the name for the typecode.
      * @param members   an array describing the members of the TypeCode.
@@ -949,6 +1054,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for an interface.
      *
+     * <p>
+     *  为接口创建TypeCode。
+     * 
+     * 
      * @param id                the logical id for the typecode.
      * @param name      the name for the typecode.
      * @return          the requested TypeCode.
@@ -963,6 +1072,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for a string.
      *
+     * <p>
+     *  为字符串创建TypeCode。
+     * 
+     * 
      * @param bound     the bound for the string.
      * @return          the requested TypeCode.
      */
@@ -975,6 +1088,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for a wide string.
      *
+     * <p>
+     *  为宽字符串创建TypeCode。
+     * 
+     * 
      * @param bound     the bound for the string.
      * @return          the requested TypeCode.
      */
@@ -987,6 +1104,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for a sequence.
      *
+     * <p>
+     *  为序列创建TypeCode。
+     * 
+     * 
      * @param bound     the bound for the sequence.
      * @param element_type
      *                  the type of elements of the sequence.
@@ -1003,6 +1124,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a recursive TypeCode in a sequence.
      *
+     * <p>
+     *  在序列中创建递归类型代码。
+     * 
+     * 
      * @param bound     the bound for the sequence.
      * @param offset    the index to the enclosing TypeCode that is
      *                  being referenced.
@@ -1019,6 +1144,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a TypeCode for an array.
      *
+     * <p>
+     *  为数组创建TypeCode。
+     * 
+     * 
      * @param length    the length of the array.
      * @param element_type
      *                  the type of elements of the array.
@@ -1081,6 +1210,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Create a new Any
      *
+     * <p>
+     *  创建新的Any
+     * 
+     * 
      * @return          the new Any created.
      */
     public synchronized Any create_any()
@@ -1119,6 +1252,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 /****************************************************************************
  * The following methods deal with listing and resolving the initial
  * (bootstrap) object references such as "NameService".
+ * <p>
+ *  以下方法处理列出和解析初始(引导)对象引用,如"NameService"。
+ * 
+ * 
  ****************************************************************************/
 
     /**
@@ -1128,6 +1265,12 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * since the localhostname
      * is inaccessible to applets. If a service properties URL was specified,
      * then it is used, otherwise the bootstrapping protocol is used.
+     * <p>
+     *  获取最初可用的CORBA服务的列表。
+     * 这不工作,除非在初始化期间指定ORBInitialHost(或者除非在AppletHost上有一个ORB运行),因为applet不能访问localhostname。
+     * 如果指定了服务属性URL,则使用它,否则使用引导协议。
+     * 
+     * 
      * @return A list of the initial services available.
      */
     public String[] list_initial_services()
@@ -1148,6 +1291,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Resolve the stringified reference of one of the initially
      * available CORBA services.
+     * <p>
+     *  解析最初可用的CORBA服务之一的字符串引用。
+     * 
+     * 
      * @param identifier The stringified object reference of the
      * desired service.
      * @return An object reference for the desired service.
@@ -1181,6 +1328,11 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * <code>ORB.resolve_initial_references( "Y" )</code> will
      * return object <code>YY</code>.
      *
+     * <p>
+     *  如果使用id,<code>"Y"</code>和对象<code> YY </code>调用此操作,则随后调用<code> ORB.resolve_initial_references("Y" / co
+     * de>将返回对象<code> YY </code>。
+     * 
+     * 
      * @param id The ID by which the initial reference will be known.
      * @param obj The initial reference itself.
      * @throws InvalidName if this operation is called with an empty string id
@@ -1225,6 +1377,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 /****************************************************************************
  * The following methods (introduced in POA / CORBA2.1) deal with
  * shutdown / single threading.
+ * <p>
+ * 以下方法(在POA / CORBA2.1中介绍)处理关闭/单线程。
+ * 
+ * 
  ****************************************************************************/
 
     public void run()
@@ -1377,6 +1533,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      *  formal/99-10-07 p 159: "If destroy is called on an ORB that has
      *  not been shut down, it will start the shutdown process and block until
      *  the ORB has shut down before it destroys the ORB."
+     * <p>
+     *  正式/ 99-10-07 p 159："如果在没有被关闭的ORB上调用destroy,它将启动关闭过程并阻塞,直到ORB关闭,然后它破坏ORB。
+     * 
      */
     public void destroy()
     {
@@ -1468,6 +1627,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Registers a value factory for a particular repository ID.
      *
+     * <p>
+     *  为特定存储库ID注册值工厂。
+     * 
+     * 
      * @param repositoryID the repository ID.
      * @param factory the factory.
      * @return the previously registered factory for the given repository ID,
@@ -1488,6 +1651,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * Unregisters a value factory for a particular repository ID.
      *
+     * <p>
+     *  取消注册特定存储库ID的值工厂。
+     * 
+     * 
      * @param repositoryID the repository ID.
      **/
     public synchronized void unregister_value_factory(String repositoryID)
@@ -1503,6 +1670,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * The value factory returned was previously registered by a call to
      * {@link #register_value_factory} or is the default factory.
      *
+     * <p>
+     *  查找并返回给定存储库ID的值工厂。返回的值工厂以前是通过调用{@link #register_value_factory}注册的,或者是默认工厂。
+     * 
+     * 
      * @param repositoryID the repository ID.
      * @return the value factory.
      * @exception org.omg.CORBA.BAD_PARAM if unable to locate a factory.
@@ -1555,6 +1726,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     /**
      * The bad server id handler is used by the Locator to
      * send back the location of a persistant server to the client.
+     * <p>
+     *  定位器使用坏的服务器id处理程序将持久性服务器的位置发送回客户机。
+     * 
      */
 
     private Object badServerIdHandlerAccessLock = new Object();
@@ -1613,6 +1787,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /** This is the implementation of the public API used to connect
      *  a servant-skeleton to the ORB.
+     * <p>
+     *  一个仆人骨架到ORB。
+     * 
      */
     public synchronized void connect(org.omg.CORBA.Object servant)
     {
@@ -1710,6 +1887,10 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /*************************************************************************
      *  The following public methods are for ORB shutdown.
+     * <p>
+     *  以下公共方法用于ORB关闭。
+     * 
+     * 
      *************************************************************************/
 
     private String getHostName(String host)
@@ -1729,6 +1910,12 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
      * getLocalHost() implementation has changed to always call the
      * InetAddress.getLocalHost().getHostAddress()
      * The above mentioned method has been removed from the connection class
+     * <p>
+     *  内部并且未授权的客户端不能访问localHost信息,最初,上面的代码是从Connection.java调用getLocalHostName。
+     * 如果主机名缓存在Connection.java中,那么它是一个安全漏洞,因为任何未授权的客户端都可以访问主机信息。有了这个更改,它被内部使用,所以安全问题解决。
+     * 在Connection.java中,getLocalHost()实现已经改变为总是调用InetAddress.getLocalHost()。
+     * getHostAddress()上面提到的方法已经从连接类中删除。
+     * 
      */
 
     private static String localHostString = null;
@@ -1748,10 +1935,17 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
  /******************************************************************************
  *  The following public methods are for ORB shutdown.
  *
+ * <p>
+ *  以下公共方法用于ORB关闭。
+ * 
+ * 
  ******************************************************************************/
 
     /** This method always returns false because the ORB never needs the
      *  main thread to do work.
+     * <p>
+     *  主线程做工作。
+     * 
      */
     public synchronized boolean work_pending()
     {
@@ -1760,6 +1954,7 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     }
 
     /** This method does nothing. It is not required by the spec to do anything!
+    /* <p>
      */
     public synchronized void perform_work()
     {
@@ -1892,6 +2087,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /** Set the resolver used in this ORB.  This resolver will be used for list_initial_services
      * and resolve_initial_references.
+     * <p>
+     *  和resolve_initial_references。
+     * 
      */
     public void setResolver( Resolver resolver )
     {
@@ -1905,6 +2103,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /** Get the resolver used in this ORB.  This resolver will be used for list_initial_services
      * and resolve_initial_references.
+     * <p>
+     * 和resolve_initial_references。
+     * 
      */
     public Resolver getResolver()
     {
@@ -1918,6 +2119,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /** Set the LocalResolver used in this ORB.  This LocalResolver is used for
      * register_initial_reference only.
+     * <p>
+     *  仅register_initial_reference。
+     * 
      */
     public void setLocalResolver( LocalResolver resolver )
     {
@@ -1931,6 +2135,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /** Get the LocalResolver used in this ORB.  This LocalResolver is used for
      * register_initial_reference only.
+     * <p>
+     *  仅register_initial_reference。
+     * 
      */
     public LocalResolver getLocalResolver()
     {
@@ -1944,6 +2151,9 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /** Set the operation used in string_to_object calls.  The Operation must expect a
      * String and return an org.omg.CORBA.Object.
+     * <p>
+     *  String并返回一个org.omg.CORBA.Object。
+     * 
      */
     public void setURLOperation( Operation stringToObject )
     {
@@ -1957,6 +2167,8 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
 
     /** Get the operation used in string_to_object calls.  The Operation must expect a
      * String and return an org.omg.CORBA.Object.
+     * <p>
+     *  String并返回一个org.omg.CORBA.Object。
      */
     public Operation getURLOperation()
     {

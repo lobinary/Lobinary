@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,16 @@ import java.util.Vector;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  不保留字符属性的普通文档。此文档的默认元素结构是文本中的行的地图。 getDefaultRootElement返回的元素是线的映射,每个子元素表示一行。
+ * 此模型不保留任何字符级属性,但每行可以使用任意一组属性进行标记。线到偏移和偏移到线平移可以使用默认根元素快速执行。由编辑触发的DocumentEvent的结构信息将指示行结构更改。
+ * <p>
+ *  默认内容存储管理由间隙缓冲器实现(GapContent)执行。当编辑连续或聚类时,它支持以高效率编辑合理的大文档,这是典型的。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     Document
  * @see     AbstractDocument
@@ -62,6 +73,9 @@ public class PlainDocument extends AbstractDocument {
      * Name of the attribute that specifies the tab
      * size for tabs contained in the content.  The
      * type for the value is Integer.
+     * <p>
+     *  指定内容中包含的选项卡的选项卡大小的属性的名称。值的类型为整数。
+     * 
      */
     public static final String tabSizeAttribute = "tabSize";
 
@@ -69,12 +83,18 @@ public class PlainDocument extends AbstractDocument {
      * Name of the attribute that specifies the maximum
      * length of a line, if there is a maximum length.
      * The type for the value is Integer.
+     * <p>
+     * 指定线的最大长度的属性的名称(如果存在最大长度)。值的类型为整数。
+     * 
      */
     public static final String lineLimitAttribute = "lineLimit";
 
     /**
      * Constructs a plain text document.  A default model using
      * <code>GapContent</code> is constructed and set.
+     * <p>
+     *  构造纯文本文档。使用<code> GapContent </code>构建和设置一个默认模型。
+     * 
      */
     public PlainDocument() {
         this(new GapContent());
@@ -84,6 +104,10 @@ public class PlainDocument extends AbstractDocument {
      * Constructs a plain text document.  A default root element is created,
      * and the tab size set to 8.
      *
+     * <p>
+     *  构造纯文本文档。将创建默认根元素,并将制表符大小设置为8。
+     * 
+     * 
      * @param c  the container for the content
      */
     public PlainDocument(Content c) {
@@ -103,6 +127,15 @@ public class PlainDocument extends AbstractDocument {
      * <A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">Concurrency
      * in Swing</A> for more information.
      *
+     * <p>
+     *  在文档中插入一些内容。插入内容会导致在发生实际更改时保持写锁定,然后通知抓取写锁定的线程上的观察者。
+     * <p>
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 有关详细信息,请参阅<A HREF="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html"> Swing中的并发
+     * </A>。
+     *  这个方法是线程安全的,虽然大多数Swing方法不是。
+     * 
+     * 
      * @param offs the starting offset &gt;= 0
      * @param str the string to insert; does nothing with null/empty strings
      * @param a the attributes for the inserted content
@@ -133,6 +166,10 @@ public class PlainDocument extends AbstractDocument {
     /**
      * Gets the default root element for the document model.
      *
+     * <p>
+     *  获取文档模型的默认根元素。
+     * 
+     * 
      * @return the root
      * @see Document#getDefaultRootElement
      */
@@ -144,6 +181,10 @@ public class PlainDocument extends AbstractDocument {
      * Creates the root element to be used to represent the
      * default document structure.
      *
+     * <p>
+     *  创建用于表示默认文档结构的根元素。
+     * 
+     * 
      * @return the element base
      */
     protected AbstractElement createDefaultRoot() {
@@ -158,6 +199,9 @@ public class PlainDocument extends AbstractDocument {
     /**
      * Get the paragraph element containing the given position.  Since this
      * document only models lines, it returns the line instead.
+     * <p>
+     *  获取包含给定位置的段落元素。由于本文档仅对线进行建模,因此返回线。
+     * 
      */
     public Element getParagraphElement(int pos){
         Element lineMap = getDefaultRootElement();
@@ -169,6 +213,10 @@ public class PlainDocument extends AbstractDocument {
      * will happen within a write lock.  Since this document simply
      * maps out lines, we refresh the line map.
      *
+     * <p>
+     *  由于文本插入更新文档结构。这将发生在写锁定内。由于此文档只是简单地绘制线条,因此我们刷新线条图。
+     * 
+     * 
      * @param chng the change event describing the dit
      * @param attr the set of attributes for the inserted text
      */
@@ -238,6 +286,9 @@ public class PlainDocument extends AbstractDocument {
      * removal spans lines.  If it does, the two lines outside
      * of the removal area are joined together.
      *
+     * <p>
+     *  由于文本删除而更新任何文档结构。这将发生在写锁定内。因为结构表示线图,所以只是检查去除是否跨越线。如果是,则移除区域外的两条线连接在一起。
+     * 
      * @param chng the change event describing the edit
      */
     protected void removeUpdate(DefaultDocumentEvent chng) {

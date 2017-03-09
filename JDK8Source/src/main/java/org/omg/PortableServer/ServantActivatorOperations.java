@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -12,6 +13,9 @@ package org.omg.PortableServer;
 /**
 	 * When the POA has the RETAIN policy it uses servant 
 	 * managers that are ServantActivators. 
+	 * <p>
+	 *  当POA具有RETAIN策略时,它使用作为ServantActivator的servant管理器。
+	 * 
 	 */
 public interface ServantActivatorOperations  extends org.omg.PortableServer.ServantManagerOperations
 {
@@ -21,6 +25,10 @@ public interface ServantActivatorOperations  extends org.omg.PortableServer.Serv
 	 * POA receives a request for an object that is not 
 	 * currently active, assuming the POA has the 
 	 * USE_SERVANT_MANAGER and RETAIN policies.
+	 * <p>
+	 *  每当POA接收到对当前不活动的对象的请求时,该操作由POA调用,假设POA具有USE_SERVANT_MANAGER和RETAIN策略。
+	 * 
+	 * 
 	 * @param oid object Id associated with the object on 
 	 *            the request was made.
 	 * @param adapter object reference for the POA in which
@@ -39,6 +47,9 @@ public interface ServantActivatorOperations  extends org.omg.PortableServer.Serv
 	 * This operation is invoked whenever a servant for 
 	 * an object is deactivated, assuming the POA has 
 	 * the USE_SERVANT_MANAGER and RETAIN policies.
+	 * <p>
+	 *  只要对象的服务方被停用,假定POA具有USE_SERVANT_MANAGER和RETAIN策略,则调用此操作。
+	 * 
 	 * @param oid object Id associated with the object 
 	 *            being deactivated.
 	 * @param adapter object reference for the POA in which

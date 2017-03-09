@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import java.io.IOException;
  * A UnresolvedPermissionCollection stores a collection
  * of UnresolvedPermission permissions.
  *
+ * <p>
+ *  UnresolvedPermissionCollection存储UnresolvedPermission权限的集合。
+ * 
+ * 
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.UnresolvedPermission
@@ -53,12 +58,18 @@ implements java.io.Serializable
      * Key is permission type, value is a list of the UnresolvedPermissions
      * of the same type.
      * Not serialized; see serialization section at end of class.
+     * <p>
+     *  键是权限类型,值是相同类型的UnresolvedPermissions的列表。未序列化;请参见类末尾的序列化部分。
+     * 
      */
     private transient Map<String, List<UnresolvedPermission>> perms;
 
     /**
      * Create an empty UnresolvedPermissionCollection object.
      *
+     * <p>
+     *  创建一个空的UnresolvedPermissionCollection对象。
+     * 
      */
     public UnresolvedPermissionCollection() {
         perms = new HashMap<String, List<UnresolvedPermission>>(11);
@@ -68,6 +79,10 @@ implements java.io.Serializable
      * Adds a permission to this UnresolvedPermissionCollection.
      * The key for the hash is the unresolved permission's type (class) name.
      *
+     * <p>
+     *  向此UnresolvedPermissionCollection添加权限。哈希的键是未解析的权限的类型(类)名称。
+     * 
+     * 
      * @param permission the Permission object to add.
      */
 
@@ -94,6 +109,9 @@ implements java.io.Serializable
     /**
      * get any unresolved permissions of the same type as p,
      * and return the List containing them.
+     * <p>
+     *  获取与p类型相同的任何未解析的权限,并返回包含它们的列表。
+     * 
      */
     List<UnresolvedPermission> getUnresolvedPermissions(Permission p) {
         synchronized (this) {
@@ -104,6 +122,9 @@ implements java.io.Serializable
     /**
      * always returns false for unresolved permissions
      *
+     * <p>
+     *  对未解析的权限始终返回false
+     * 
      */
     public boolean implies(Permission permission)
     {
@@ -114,6 +135,10 @@ implements java.io.Serializable
      * Returns an enumeration of all the UnresolvedPermission lists in the
      * container.
      *
+     * <p>
+     *  返回容器中所有UnresolvedPermission列表的枚举。
+     * 
+     * 
      * @return an enumeration of all the UnresolvedPermission objects.
      */
 
@@ -140,6 +165,8 @@ implements java.io.Serializable
     // private Hashtable permissions; // keyed on type
 
     /**
+    /* <p>
+    /* 
      * @serialField permissions java.util.Hashtable
      *     A table of the UnresolvedPermissions keyed on type, value is Vector
      *     of permissions
@@ -149,12 +176,17 @@ implements java.io.Serializable
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData Default field.
      */
     /*
      * Writes the contents of the perms field out as a Hashtable
      * in which the values are Vectors for
      * serialization compatibility with earlier releases.
+     * <p>
+     *  将perms字段的内容作为哈希表写入,其中值是与早期版本的序列化兼容性的向量。
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -188,6 +220,8 @@ implements java.io.Serializable
     /*
      * Reads in a Hashtable in which the values are Vectors of
      * UnresolvedPermissions and saves them in the perms field.
+     * <p>
+     *  在Hashtable中读取,其值为UnresolvedPermissions的矢量,并将它们保存在perms字段中。
      */
     private void readObject(ObjectInputStream in) throws IOException,
     ClassNotFoundException {

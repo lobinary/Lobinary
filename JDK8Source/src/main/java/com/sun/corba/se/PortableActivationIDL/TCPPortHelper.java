@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -13,6 +14,8 @@ package com.sun.corba.se.PortableActivationIDL;
     * transport endpoints.  The valid range is actually 0-65535, but
     * we use a long here to avoid signed/unsigned conversion headaches
     * in Java.
+    * <p>
+    * 
     */
 abstract public class TCPPortHelper
 {

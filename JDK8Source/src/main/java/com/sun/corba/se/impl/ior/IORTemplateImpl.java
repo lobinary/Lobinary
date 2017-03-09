@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,10 @@ import com.sun.corba.se.spi.orb.ORB ;
 
 /**
  * This class is a container of TaggedProfileTemplates.
+ * <p>
+ *  这个类是TaggedProfileTemplates的容器。
+ * 
+ * 
  * @author
  */
 public class IORTemplateImpl extends IdentifiableContainerBase implements IORTemplate
@@ -111,6 +116,8 @@ public class IORTemplateImpl extends IdentifiableContainerBase implements IORTem
     /** Ensure that this IORTemplate and all of its profiles can not be
     * modified.  This overrides the method inherited from
     * FreezableList through IdentifiableContainerBase.
+    * <p>
+    *  改性。这将覆盖通过IdentifiableContainerBase从FreezableList继承的方法。
     */
     public void makeImmutable()
     {

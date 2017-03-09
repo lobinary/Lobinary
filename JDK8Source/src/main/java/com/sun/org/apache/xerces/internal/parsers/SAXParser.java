@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -34,6 +44,10 @@ import org.xml.sax.SAXNotSupportedException;
  * parser with a document scanner, a dtd scanner, and a validator, as
  * well as a grammar pool.
  *
+ * <p>
+ *  这是主要的Xerces SAX解析器类。它使用带有文档扫描器,dtd扫描器和验证器的抽象SAX解析器,以及语法池。
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Andy Clark, IBM
  *
@@ -84,6 +98,9 @@ public class SAXParser
 
     /**
      * Constructs a SAX parser using the specified parser configuration.
+     * <p>
+     *  使用指定的解析器配置构造SAX解析器。
+     * 
      */
     public SAXParser(XMLParserConfiguration config) {
         super(config);
@@ -91,6 +108,9 @@ public class SAXParser
 
     /**
      * Constructs a SAX parser using the dtd/xml schema parser configuration.
+     * <p>
+     *  使用dtd / xml模式解析器配置构造一个SAX解析器。
+     * 
      */
     public SAXParser() {
         this(null, null);
@@ -98,6 +118,9 @@ public class SAXParser
 
     /**
      * Constructs a SAX parser using the specified symbol table.
+     * <p>
+     *  使用指定的符号表构造一个SAX解析器。
+     * 
      */
     public SAXParser(SymbolTable symbolTable) {
         this(symbolTable, null);
@@ -106,6 +129,9 @@ public class SAXParser
     /**
      * Constructs a SAX parser using the specified symbol table and
      * grammar pool.
+     * <p>
+     *  使用指定的符号表和语法池构造SAX解析器。
+     * 
      */
     public SAXParser(SymbolTable symbolTable, XMLGrammarPool grammarPool) {
         super(new XIncludeAwareParserConfiguration());
@@ -128,12 +154,18 @@ public class SAXParser
     /**
      * Sets the particular property in the underlying implementation of
      * org.xml.sax.XMLReader.
+     * <p>
+     *  设置org.xml.sax.XMLReader的基础实现中的特定属性。
+     * 
      */
     public void setProperty(String name, Object value)
         throws SAXNotRecognizedException, SAXNotSupportedException {
         /**
          * It's possible for users to set a security manager through the interface.
          * If it's the old SecurityManager, convert it to the new XMLSecurityManager
+         * <p>
+         *  用户可以通过界面设置安全管理器。如果是旧的SecurityManager,请将其转换为新的XMLSecurityManager
+         * 
          */
         if (name.equals(Constants.SECURITY_MANAGER)) {
             securityManager = XMLSecurityManager.convert(value, securityManager);
@@ -166,6 +198,8 @@ public class SAXParser
              * this is a direct call to this parser, not a subclass since
              * internally the support of this property is done through
              * XMLSecurityPropertyManager
+             * <p>
+             * 这是一个直接调用这个解析器,而不是一个子类,因为在内部支持这个属性是通过XMLSecurityPropertyManager
              */
             securityPropertyManager.setValue(index, XMLSecurityPropertyManager.State.APIPROPERTY, (String)value);
         } else {

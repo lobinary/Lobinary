@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -26,6 +27,9 @@
 /*
  * (C) Copyright IBM Corp. 1998-2003, All Rights Reserved
  *
+ * <p>
+ *  (C)版权所有IBM Corp. 1998-2003,保留所有权利
+ * 
  */
 
 package java.awt.font;
@@ -709,6 +713,9 @@ final class TextLine {
 
     /**
      * map a component visual index to the logical index.
+     * <p>
+     *  将组件可视索引映射到逻辑索引。
+     * 
      */
     private int getComponentLogicalIndex(int vi) {
         if (fComponentVisualOrder == null) {
@@ -719,6 +726,9 @@ final class TextLine {
 
     /**
      * map a component logical index to the visual index.
+     * <p>
+     *  将组件逻辑索引映射到可视索引。
+     * 
      */
     private int getComponentVisualIndex(int li) {
         if (fComponentVisualOrder == null) {
@@ -801,6 +811,9 @@ final class TextLine {
      * Return the union of the visual bounds of all the components.
      * This incorporates the path.  It does not include logical
      * bounds (used by carets).
+     * <p>
+     *  返回所有组件的视觉边界的并集。这包括了路径。它不包括逻辑边界(由插入符使用)。
+     * 
      */
     public Rectangle2D getVisualBounds() {
         Rectangle2D result = null;
@@ -900,6 +913,9 @@ final class TextLine {
      * display all of the text.
      * attributes==null is equivalent to using an empty Map for
      * attributes
+     * <p>
+     *  从文本创建TextLine。字体必须能够显示所有文本。 attributes == null等效于对属性使用空Map
+     * 
      */
     public static TextLine fastCreateTextLine(FontRenderContext frc,
                                               char[] chars,
@@ -995,6 +1011,9 @@ final class TextLine {
     /**
      * Returns an array in logical order of the TextLineComponents on
      * the text in the given range, with the given attributes.
+     * <p>
+     *  返回给定范围内具有给定属性的文本上的TextLineComponents的逻辑顺序的数组。
+     * 
      */
     public static TextLineComponent[] createComponentsOnRun(int runStart,
                                                             int runLimit,
@@ -1047,6 +1066,9 @@ final class TextLine {
     /**
      * Returns an array (in logical order) of the TextLineComponents representing
      * the text.  The components are both logically and visually contiguous.
+     * <p>
+     *  返回表示文本的TextLineComponents的数组(按逻辑顺序)。组件在逻辑上和视觉上都是连续的。
+     * 
      */
     public static TextLineComponent[] getComponents(StyledParagraph styledParagraph,
                                                     char[] chars,
@@ -1129,6 +1151,9 @@ final class TextLine {
      * Create a TextLine from the Font and character data over the
      * range.  The range is relative to both the StyledParagraph and the
      * character array.
+     * <p>
+     *  从范围内的字体和字符数据创建一个TextLine。范围是相对于StyledParagraph和字符数组。
+     * 
      */
     public static TextLine createLineFromText(char[] chars,
                                               StyledParagraph styledParagraph,
@@ -1158,6 +1183,9 @@ final class TextLine {
     /**
      * Compute the components order from the given components array and
      * logical-to-visual character mapping.  May return null if canonical.
+     * <p>
+     *  从给定的组件数组和逻辑到视觉字符映射计算组件顺序。如果规范,可返回null。
+     * 
      */
     private static int[] computeComponentOrder(TextLineComponent[] components,
                                                int[] charsLtoV) {
@@ -1170,6 +1198,9 @@ final class TextLine {
          * should have the highest value.  The values are then normalized
          * to map 1-1 with positions in glyphs.
          *
+         * <p>
+         * 为字形集创建视觉排序。这里重要的是,值相对于彼此具有适当的等级,而不是确切的值。例如,在视觉上出现的第一个字形集应该具有最低的值。最后一个应该有最高的值。然后将这些值标准化为图1-1与字形中的位置。
+         * 
          */
         int[] componentOrder = null;
         if (charsLtoV != null && components.length > 1) {
@@ -1189,6 +1220,9 @@ final class TextLine {
 
     /**
      * Create a TextLine from the text.  chars is just the text in the iterator.
+     * <p>
+     *  从文本创建TextLine。 chars只是迭代器中的文本。
+     * 
      */
     public static TextLine standardCreateTextLine(FontRenderContext frc,
                                                   AttributedCharacterIterator text,
@@ -1243,12 +1277,20 @@ final class TextLine {
         }
         return limit;
     }
+     * <p>
+     *  一个实用程序,用于获取逻辑和视觉上连续的一系列文本。如果整个范围确定,返回限制,否则返回开始后的第一个方向改变。我们可以做得比这更好,但它似乎不值得现在。
+     *  private static int firstVisualChunk(int order [],byte direction [],int start,int limit){if(order！= null){int min = order [start]; int max = order [start]; int count = limit  -  start; for(int i = start + 1; i <limit; i ++){min = Math.min(min,order [i]); max = Math.max(max,order [i]); if(max-min> = count){if(direction！= null){byte baseLevel = direction [start]; for(int j = start + 1; j <i; j ++){if(direction [j]！= baseLevel){return j; }}} return i; }}} return limit; }}。
+     *  一个实用程序,用于获取逻辑和视觉上连续的一系列文本。如果整个范围确定,返回限制,否则返回开始后的第一个方向改变。我们可以做得比这更好,但它似乎不值得现在。
+     * 
      */
 
     /**
      * When this returns, the ACI's current position will be at the start of the
      * first run which does NOT contain a GraphicAttribute.  If no such run exists
      * the ACI's position will be at the end, and this method will return false.
+     * <p>
+     *  当这个返回时,ACI的当前位置将在第一次运行的开始,不包含GraphicAttribute。如果没有这样的运行存在,ACI的位置将在结束,并且此方法将返回false。
+     * 
      */
     static boolean advanceToFirstFont(AttributedCharacterIterator aci) {
 
@@ -1297,6 +1339,9 @@ final class TextLine {
 
   /*
    * The new version requires that chunks be at the same level.
+   * <p>
+   *  新版本要求块在同一级别。
+   * 
    */
     private static int firstVisualChunk(int order[], byte direction[],
                                         int start, int limit)
@@ -1312,6 +1357,8 @@ final class TextLine {
   /*
    * create a new line with characters between charStart and charLimit
    * justified using the provided width and ratio.
+   * <p>
+   * 使用提供的宽度和比率创建一个包含charStart和charLimit之间的字符的新行。
    */
     public TextLine getJustifiedLine(float justificationWidth, float justifyRatio, int justStart, int justLimit) {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -41,6 +51,15 @@ import org.w3c.dom.Node;
  *
  * @xerces.internal
  *
+ * <p>
+ *  此类在文档本身中表示文档类型<em>声明</em>,<em>不是</em>文档类型定义(DTD)。 XML文档可以(或可能不)具有这样的引用。
+ * <P>
+ *  DocumentType是一种扩展DOM功能,用于XML文档,但不能用于HTML。
+ * <P>
+ *  请注意,实体和符号不再是DocumentType的子级,而是无父节点仅挂在其相应的NamedNodeMaps中。
+ * <P>
+ *  这个区域在REC-DOM-Level-1-19981001中是未知的。最值得注意的是,绝对没有为存储和使用元素和属性信息做出规定。实体和实体参考之间的联系也没有牢固地固定下来。
+ * 
  * @since  PR-DOM-Level-1-19980818.
  */
 public class DeferredDocumentTypeImpl
@@ -68,6 +87,10 @@ public class DeferredDocumentTypeImpl
     /**
      * This is the deferred constructor. Only the fNodeIndex is given here.
      * All other data, can be requested from the ownerDocument via the index.
+     * <p>
+     * 
+     *  @ xerces.internal
+     * 
      */
     DeferredDocumentTypeImpl(DeferredDocumentImpl ownerDocument, int nodeIndex) {
         super(ownerDocument, null);

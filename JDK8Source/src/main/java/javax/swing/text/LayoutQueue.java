@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import sun.awt.AppContext;
 /**
  * A queue of text layout tasks.
  *
+ * <p>
+ *  文本布局任务的队列。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     AsyncBoxView
  * @since   1.3
@@ -43,6 +48,9 @@ public class LayoutQueue {
 
     /**
      * Construct a layout queue.
+     * <p>
+     *  构造布局队列。
+     * 
      */
     public LayoutQueue() {
         tasks = new Vector<Runnable>();
@@ -50,6 +58,9 @@ public class LayoutQueue {
 
     /**
      * Fetch the default layout queue.
+     * <p>
+     *  获取默认布局队列。
+     * 
      */
     public static LayoutQueue getDefaultQueue() {
         AppContext ac = AppContext.getAppContext();
@@ -66,6 +77,10 @@ public class LayoutQueue {
     /**
      * Set the default layout queue.
      *
+     * <p>
+     *  设置默认布局队列。
+     * 
+     * 
      * @param q the new queue.
      */
     public static void setDefaultQueue(LayoutQueue q) {
@@ -77,6 +92,9 @@ public class LayoutQueue {
     /**
      * Add a task that is not needed immediately because
      * the results are not believed to be visible.
+     * <p>
+     *  添加不需要立即执行的任务,因为不认为结果是可见的。
+     * 
      */
     public synchronized void addTask(Runnable task) {
         if (worker == null) {
@@ -89,6 +107,9 @@ public class LayoutQueue {
 
     /**
      * Used by the worker thread to get a new task to execute
+     * <p>
+     *  由工作线程使用来获取一个新任务来执行
+     * 
      */
     protected synchronized Runnable waitForWork() {
         while (tasks.size() == 0) {
@@ -105,6 +126,8 @@ public class LayoutQueue {
 
     /**
      * low priority thread to perform layout work forever
+     * <p>
+     *  低优先级线程来执行布局工作永远
      */
     class LayoutThread extends Thread {
 

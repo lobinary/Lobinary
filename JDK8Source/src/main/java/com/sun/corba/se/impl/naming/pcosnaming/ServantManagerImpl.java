@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,8 @@ import org.omg.PortableServer.ServantLocatorPackage.CookieHolder;
 import com.sun.corba.se.spi.orb.ORB;
 
 /**
+/* <p>
+/* 
  * @author      Rohit Garg
  * @since       JDK1.2
  */

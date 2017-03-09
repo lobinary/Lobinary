@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -150,6 +151,63 @@ import java.beans.Transient;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  提供轻量级组件的可滚动视图。 <code> JScrollPane </code>管理视口,可选的垂直和水平滚动条以及可选的行和列标题视口。
+ * 您可以在<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/scrollpane.html">如何使用滚动窗格中找到<code>
+ *  JScrollPane </code>的面向任务的文档</a>,<em> Java教程</em>中的一个部分。
+ *  提供轻量级组件的可滚动视图。 <code> JScrollPane </code>管理视口,可选的垂直和水平滚动条以及可选的行和列标题视口。
+ * 请注意,<code> JScrollPane </code>不支持重量级组件。
+ * 
+ * <TABLE STYLE="FLOAT:RIGHT" BORDER="0" SUMMARY="layout">
+ * <TR>
+ * <TD ALIGN="CENTER">
+ *  <P STYLE ="TEXT-ALIGN：CENTER"> <IMG SRC ="doc-files / JScrollPane-1.gif"alt ="以下文字描述此图片。
+ * WIDTH="256" HEIGHT="248" STYLE="FLOAT:BOTTOM; BORDER:0px">
+ * </TD>
+ * </TR>
+ * </TABLE>
+ *  <code> JViewport </code>提供了一个窗口或"视口"到数据源 - 例如,文本文件。
+ * 该数据源是"可滚动客户端" (aka数据模型)由<code> JViewport </code>视图显示。
+ *  <code> JScrollPane </code>基本上由<code> JScrollBar </code>,<code> JViewport </code>和它们之间的接线组成,如右图所示。
+ * <p>
+ * 除了滚动条和视口之外,<code> JScrollPane </code>可以有一个列标题和一个行标题。
+ * 每个都是一个<code> JViewport </code>对象,你用<code> setRowHeaderView </code>和<code> setColumnHeaderView </code>
+ * 指定。
+ * 除了滚动条和视口之外,<code> JScrollPane </code>可以有一个列标题和一个行标题。列标题视口自动向左和向右滚动,跟踪主视口的左右滚动。 (但它不会垂直滚动。
+ * )行标题以类似的方式工作。
+ * <p>
+ *  在两个滚动条相遇处,行标题符合列标题,或者滚动条满足其中一个标题,两个组件都停止在拐角处,留下一个矩形空间,默认情况下为空。这些空间可以潜在地存在于任何数量的四个角。
+ * 在上图中,右上角空间存在并由标签"角部件"标识。
+ * <p>
+ *  可以使用<code> setCorner </code>方法将某个组件添加到特定角落来替换任意数量的这些空格。 (注意：相同的组件不能添加到多个角。
+ * )如果有一些额外的装饰或函数要添加到滚动窗格,这是有用的。每个角部件的尺寸完全由围绕其的头部和/或滚动条的尺寸确定。
+ * <p>
+ * 只有在角落中存在空的空间时,角组件才会可见。例如,将组件设置到具有列标题的滚动窗格的右上角。
+ * 如果滚动窗格的垂直滚动条不存在,也许是因为视图组件没有增长得足够大以至于不需要它,则角组件将不会显示(因为在该角落的会议中没有创建空白空间和垂直滚动条)。
+ * 强制滚动条始终显示,使用<code> setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_​​ALWAYS)</code>,将确保角组件的空间始终存在。
+ * <p>
+ *  要在主视口周围添加边框,可以使用<code> setViewportBorder </code>。 (当然,您也可以使用<code> setBorder </code>在整个滚动窗格周围添加边框。
+ * )。
+ * <p>
+ *  要执行的常见操作是设置在主视口视图小于视口时使用的背景颜色,或不透明的背景颜色。这可以通过设置视口的背景颜色,通过<code> scrollPane.getViewport()。
+ * setBackground()</code>来实现。
+ * 设置视口的颜色而不是滚动条的原因是默认情况下<code> JViewport </code>是不透明的,除了别的以外,这意味着它将使用它的背景颜色完全填充它的背景。
+ * 因此,当<code> JScrollPane </code>绘制其背景时,视口通常会在其上绘制。
+ * <p>
+ * 默认情况下,<code> JScrollPane </code>使用<code> ScrollPaneLayout </code>来处理其子组件的布局。
+ *  <code> ScrollPaneLayout </code>以两种方式之一确定要创建视口视图的大小：。
+ * <ol>
+ *  <li>如果视图实现<code> Scrollable </code>,则使用<code> getPreferredScrollableViewportSize </code>,<code> getS
+ * crollableTracksViewportWidth </code>和<code> getScrollableTracksViewportHeight </code> > <code> getPre
+ * ferredSize </code>被使用。
+ * </ol>
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see JScrollBar
  * @see JViewport
  * @see ScrollPaneLayout
@@ -173,6 +231,8 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     private Border viewportBorder;
 
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -182,6 +242,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * The display policy for the vertical scrollbar.
      * The default is
      * <code>ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED</code>.
+     * <p>
+     *  垂直滚动条的显示策略。默认值为<code> ScrollPaneConstants.VERTICAL_SCROLLBAR_​​AS_NEEDED </code>。
+     * 
+     * 
      * @see #setVerticalScrollBarPolicy
      */
     protected int verticalScrollBarPolicy = VERTICAL_SCROLLBAR_AS_NEEDED;
@@ -191,6 +255,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * The display policy for the horizontal scrollbar.
      * The default is
      * <code>ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED</code>.
+     * <p>
+     *  水平滚动条的显示策略。默认值为<code> ScrollPaneConstants.HORIZONTAL_SCROLLBAR_​​AS_NEEDED </code>。
+     * 
+     * 
      * @see #setHorizontalScrollBarPolicy
      */
     protected int horizontalScrollBarPolicy = HORIZONTAL_SCROLLBAR_AS_NEEDED;
@@ -199,6 +267,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * The scrollpane's viewport child.  Default is an empty
      * <code>JViewport</code>.
+     * <p>
+     *  滚动条的视口孩子。默认是一个空的<code> JViewport </code>。
+     * 
+     * 
      * @see #setViewport
      */
     protected JViewport viewport;
@@ -207,6 +279,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * The scrollpane's vertical scrollbar child.
      * Default is a <code>JScrollBar</code>.
+     * <p>
+     *  滚动条的垂直滚动条子。默认是一个<code> JScrollBar </code>。
+     * 
+     * 
      * @see #setVerticalScrollBar
      */
     protected JScrollBar verticalScrollBar;
@@ -215,6 +291,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * The scrollpane's horizontal scrollbar child.
      * Default is a <code>JScrollBar</code>.
+     * <p>
+     * 滚动条的水平滚动条子。默认是一个<code> JScrollBar </code>。
+     * 
+     * 
      * @see #setHorizontalScrollBar
      */
     protected JScrollBar horizontalScrollBar;
@@ -222,6 +302,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
     /**
      * The row header child.  Default is <code>null</code>.
+     * <p>
+     *  行标题子。默认为<code> null </code>。
+     * 
+     * 
      * @see #setRowHeader
      */
     protected JViewport rowHeader;
@@ -229,6 +313,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
     /**
      * The column header child.  Default is <code>null</code>.
+     * <p>
+     *  列标题子元素。默认为<code> null </code>。
+     * 
+     * 
      * @see #setColumnHeader
      */
     protected JViewport columnHeader;
@@ -237,6 +325,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * The component to display in the lower left corner.
      * Default is <code>null</code>.
+     * <p>
+     *  要显示在左下角的组件。默认为<code> null </code>。
+     * 
+     * 
      * @see #setCorner
      */
     protected Component lowerLeft;
@@ -245,6 +337,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * The component to display in the lower right corner.
      * Default is <code>null</code>.
+     * <p>
+     *  要显示在右下角的组件。默认为<code> null </code>。
+     * 
+     * 
      * @see #setCorner
      */
     protected Component lowerRight;
@@ -253,6 +349,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * The component to display in the upper left corner.
      * Default is <code>null</code>.
+     * <p>
+     *  要显示在左上角的组件。默认为<code> null </code>。
+     * 
+     * 
      * @see #setCorner
      */
     protected Component upperLeft;
@@ -261,12 +361,19 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * The component to display in the upper right corner.
      * Default is <code>null</code>.
+     * <p>
+     *  要在右上角显示的组件。默认为<code> null </code>。
+     * 
+     * 
      * @see #setCorner
      */
     protected Component upperRight;
 
     /*
      * State flag for mouse wheel scrolling
+     * <p>
+     *  鼠标滚轮滚动的状态标志
+     * 
      */
     private boolean wheelScrollState = true;
 
@@ -282,6 +389,14 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * {@link #setVerticalScrollBarPolicy} and
      * {@link #setHorizontalScrollBarPolicy}.
      *
+     * <p>
+     *  创建在视口中显示视图组件的<code> JScrollPane </code>,该视口的视图位置可以使用一对滚动条进行控制。滚动条策略指定何时显示滚动条。
+     * 例如,如果<code> vsbPolicy </code> </code>是<code> VERTICAL_SCROLLBAR_​​AS_NEEDED </code>,则只有当视图不垂直时才会出现垂直滚
+     * 动条。
+     *  创建在视口中显示视图组件的<code> JScrollPane </code>,该视口的视图位置可以使用一对滚动条进行控制。滚动条策略指定何时显示滚动条。
+     * 可用的政策设置列在{@link #setVerticalScrollBarPolicy}和{@link #setHorizo​​ntalScrollBarPolicy}。
+     * 
+     * 
      * @see #setViewportView
      *
      * @param view the component to display in the scrollpanes viewport
@@ -316,6 +431,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * component, where both horizontal and vertical scrollbars appear
      * whenever the component's contents are larger than the view.
      *
+     * <p>
+     *  创建一个显示指定组件内容的<code> JScrollPane </code>,当组件的内容大于视图时,水平和垂直滚动条都会显示。
+     * 
+     * 
      * @see #setViewportView
      * @param view the component to display in the scrollpane's viewport
      */
@@ -331,6 +450,11 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * {@link #setVerticalScrollBarPolicy} and
      * {@link #setHorizontalScrollBarPolicy}.
      *
+     * <p>
+     *  使用指定的滚动条策略创建一个空(无视口视图)<code> JScrollPane </code>。
+     * 可用的政策设置列在{@link #setVerticalScrollBarPolicy}和{@link #setHorizo​​ntalScrollBarPolicy}。
+     * 
+     * 
      * @see #setViewportView
      *
      * @param vsbPolicy an integer that specifies the vertical
@@ -346,6 +470,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * Creates an empty (no viewport view) <code>JScrollPane</code>
      * where both horizontal and vertical scrollbars appear when needed.
+     * <p>
+     * 创建一个空(无视口视图)<code> JScrollPane </code>其中水平和垂直滚动条在需要时显示。
+     * 
      */
     public JScrollPane() {
         this(null, VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -355,6 +482,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * Returns the look and feel (L&amp;F) object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的外观和感觉(L&amp; F)对象。
+     * 
+     * 
      * @return the <code>ScrollPaneUI</code> object that renders this
      *                          component
      * @see #setUI
@@ -373,6 +504,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Sets the <code>ScrollPaneUI</code> object that provides the
      * look and feel (L&amp;F) for this component.
      *
+     * <p>
+     *  设置为此组件提供外观和感觉(L&amp; F)的<code> ScrollPaneUI </code>对象。
+     * 
+     * 
      * @param ui the <code>ScrollPaneUI</code> L&amp;F object
      * @see #getUI
      */
@@ -386,6 +521,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * from the current default look and feel.
      * To be called when the default look and feel changes.
      *
+     * <p>
+     *  将当前的<code> ScrollPaneUI </code>对象替换为当前默认外观的版本。当默认的外观和感觉改变时被调用。
+     * 
+     * 
      * @see JComponent#updateUI
      * @see UIManager#getUI
      */
@@ -398,6 +537,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Returns the suffix used to construct the name of the L&amp;F class used to
      * render this component.
      *
+     * <p>
+     *  返回用于构造用于渲染此组件的L&amp; F类的名称的后缀。
+     * 
+     * 
      * @return the string "ScrollPaneUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -420,6 +563,14 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * <code>JScrollPane</code>. If <code>layout</code> is non-null, this
      * will invoke <code>syncWithScrollPane</code> on it.
      *
+     * <p>
+     *  为此<code> JScrollPane </code>设置布局管理器。
+     * 此方法覆盖<code> java.awt.Container </code>中的<code> setLayout </code>,以确保只有<code> ScrollPaneLayout </code>
+     * 的子类的<code> LayoutManager </code>用在<code> JScrollPane </code>中。
+     *  为此<code> JScrollPane </code>设置布局管理器。
+     * 如果<code> layout </code>是非空的,这将调用<code> syncWithScrollPane </code>就可以了。
+     * 
+     * 
      * @param layout the specified layout manager
      * @exception ClassCastException if layout is not a
      *                  <code>ScrollPaneLayout</code>
@@ -449,6 +600,11 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * entire tree beginning with this <code>JScrollPane</code> to be
      * validated.
      *
+     * <p>
+     *  重写为返回true,以便对此<code> JScrollPane </code>的任何后代进行<code> revalidate </code>的任何调用将导致以此代码<code> JScrollPa
+     * ne </code>开始的整个树被验证。
+     * 
+     * 
      * @return true
      * @see java.awt.Container#validate
      * @see JComponent#revalidate
@@ -466,6 +622,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
     /**
      * Returns the vertical scroll bar policy value.
+     * <p>
+     *  返回垂直滚动条策略值。
+     * 
+     * 
      * @return the <code>verticalScrollBarPolicy</code> property
      * @see #setVerticalScrollBarPolicy
      */
@@ -483,6 +643,14 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * <li><code>ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS</code>
      * </ul>
      *
+     * <p>
+     *  确定垂直滚动条何时显示在滚动条中。法律价值包括：
+     * <ul>
+     *  <li> <code> ScrollPaneConstants.VERTICAL_SCROLLBAR_​​ALWAYS </code> ScrollPaneConstants.VERTICAL_SCR
+     * OLLBAR_​​ALWAYS </code> ScrollPaneConstants.VERTICAL_SCROLLBAR_​​NEVER </code>。
+     * </ul>
+     * 
+     * 
      * @param policy one of the three values listed above
      * @exception IllegalArgumentException if <code>policy</code>
      *                          is not one of the legal values shown above
@@ -515,6 +683,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
     /**
      * Returns the horizontal scroll bar policy value.
+     * <p>
+     * 返回水平滚动条策略值。
+     * 
+     * 
      * @return the <code>horizontalScrollBarPolicy</code> property
      * @see #setHorizontalScrollBarPolicy
      */
@@ -531,6 +703,14 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * <li><code>ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS</code>
      * </ul>
      *
+     * <p>
+     *  确定水平滚动条何时出现在滚动窗格中。
+     * 选项为：<ul> <li> <code> ScrollPaneConstants.HORIZONTAL_SCROLLBAR_​​ALWAYS </code> ScrollPaneConstants.HO
+     * RIZONTAL_SCROLLBAR_​​ALWAYS </code> ScrollPaneConstants.HORIZONTAL_SCROLLBAR_​​NEVER </code>。
+     *  确定水平滚动条何时出现在滚动窗格中。
+     * </ul>
+     * 
+     * 
      * @param policy one of the three values listed above
      * @exception IllegalArgumentException if <code>policy</code>
      *                          is not one of the legal values shown above
@@ -564,6 +744,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * Returns the <code>Border</code> object that surrounds the viewport.
      *
+     * <p>
+     *  返回视口周围的<code> Border </code>对象。
+     * 
+     * 
      * @return the <code>viewportBorder</code> property
      * @see #setViewportBorder
      */
@@ -582,6 +766,13 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * The default value of this property is computed by the look
      * and feel implementation.
      *
+     * <p>
+     *  在视口周围添加边框。请注意,边框不是直接在视口上设置的,<code> JViewport </code>不支持<code> JComponent </code> border属性。
+     * 类似地,设置<code> JScrollPane </code>的视口不会影响<code> viewportBorder </code>属性。
+     * <p>
+     *  此属性的默认值由外观实现计算。
+     * 
+     * 
      * @param viewportBorder the border to be added
      * @see #getViewportBorder
      * @see #setViewport
@@ -601,6 +792,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * Returns the bounds of the viewport's border.
      *
+     * <p>
+     *  返回视口边框的边界。
+     * 
+     * 
      * @return a <code>Rectangle</code> object specifying the viewport border
      */
     public Rectangle getViewportBorderBounds()
@@ -617,6 +812,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
         /* If there's a visible column header remove the space it
          * needs from the top of borderR.
+         * <p>
+         *  需要从borderR的顶部。
+         * 
          */
 
         JViewport colHead = getColumnHeader();
@@ -628,6 +826,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
         /* If there's a visible row header remove the space it needs
          * from the left of borderR.
+         * <p>
+         *  从borderR的左边。
+         * 
          */
 
         JViewport rowHead = getRowHeader();
@@ -641,6 +842,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
         /* If there's a visible vertical scrollbar remove the space it needs
          * from the width of borderR.
+         * <p>
+         *  从borderR的宽度。
+         * 
          */
         JScrollBar vsb = getVerticalScrollBar();
         if ((vsb != null) && (vsb.isVisible())) {
@@ -653,6 +857,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
         /* If there's a visible horizontal scrollbar remove the space it needs
          * from the height of borderR.
+         * <p>
+         *  从borderR的高度。
+         * 
          */
         JScrollBar hsb = getHorizontalScrollBar();
         if ((hsb != null) && (hsb.isVisible())) {
@@ -681,6 +888,16 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  默认情况下,<code> JScrollPane </code>创建作为此类的实例的滚动条。
+     *  <code> Scrollbar </code>覆盖<code> getUnitIncrement </code>和<code> getBlockIncrement </code>方法,以便如果视口的
+     * 视图是<code> Scrollable </code>来计算这些值。
+     *  默认情况下,<code> JScrollPane </code>创建作为此类的实例的滚动条。除非单位/块增量已明确设置。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see Scrollable
      * @see JScrollPane#createVerticalScrollBar
      * @see JScrollPane#createHorizontalScrollBar
@@ -692,6 +909,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
          * If this is false the viewport's view is obtained and if it
          * is an instance of <code>Scrollable</code> the unit increment
          * from it is used.
+         * <p>
+         *  当单位增量已明确设置时设置为true。如果这是假的,则获得视口的视图,并且如果它是<code> Scrollable </code>的实例,则使用其单位增量。
+         * 
          */
         private boolean unitIncrementSet;
         /**
@@ -699,6 +919,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
          * If this is false the viewport's view is obtained and if it
          * is an instance of <code>Scrollable</code> the block increment
          * from it is used.
+         * <p>
+         *  当块增量已明确设置时设置为true。如果这是假的,则获得视口的视图,并且如果它是<code> Scrollable </code>的实例,则使用来自它的块增量。
+         * 
          */
         private boolean blockIncrementSet;
 
@@ -710,6 +933,13 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
          * <li><code>ScrollPaneConstants.HORIZONTAL</code>
          * </ul>
          *
+         * <p>
+         *  创建具有指定方向的滚动条。选项是：
+         * <ul>
+         *  <li> <code> ScrollPaneConstants.VERTICAL </code> <li> <code> ScrollPaneConstants.HORIZONTAL </code>。
+         * </ul>
+         * 
+         * 
          * @param orientation  an integer specifying one of the legal
          *      orientation values shown above
          * @since 1.4
@@ -724,6 +954,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
          * Messages super to set the value, and resets the
          * <code>unitIncrementSet</code> instance variable to true.
          *
+         * <p>
+         *  消息超级设置值,并将<code> unitIncrementSet </code>实例变量重置为true。
+         * 
+         * 
          * @param unitIncrement the new unit increment value, in pixels
          */
         public void setUnitIncrement(int unitIncrement) {
@@ -737,6 +971,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
          * view is a <code>Scrollable</code> object.
          * Otherwise return <code>super.getUnitIncrement</code>.
          *
+         * <p>
+         *  如果视口的视图是一个<code> Scrollable </code>对象,则计算滚动的单位增量。否则返回<code> super.getUnitIncrement </code>。
+         * 
+         * 
          * @param direction less than zero to scroll up/left,
          *      greater than zero for down/right
          * @return an integer, in pixels, containing the unit increment
@@ -759,6 +997,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
          * Messages super to set the value, and resets the
          * <code>blockIncrementSet</code> instance variable to true.
          *
+         * <p>
+         *  消息超级设置值,并将<code> blockIncrementSet </code>实例变量重置为true。
+         * 
+         * 
          * @param blockIncrement the new block increment value, in pixels
          */
         public void setBlockIncrement(int blockIncrement) {
@@ -774,6 +1016,11 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
          * or height.  If there's no viewport return
          * <code>super.getBlockIncrement</code>.
          *
+         * <p>
+         * 如果视口的视图是一个<code> Scrollable </code>对象,则计算用于滚动的块增量。否则<code> blockIncrement </code>等于视口的宽度或高度。
+         * 如果没有视口返回<code> super.getBlockIncrement </code>。
+         * 
+         * 
          * @param direction less than zero to scroll up/left,
          *      greater than zero for down/right
          * @return an integer, in pixels, containing the block increment
@@ -807,6 +1054,12 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Used by <code>ScrollPaneUI</code> implementations to
      * create the horizontal scrollbar.
      *
+     * <p>
+     *  默认情况下返回<code> JScrollPane.ScrollBar </code>。
+     * 子类可以覆盖此方法以强制<code> ScrollPaneUI </code>实现使用<code> JScrollBar </code>子类。
+     * 用于<code> ScrollPaneUI </code>实现来创建水平滚动条。
+     * 
+     * 
      * @return a <code>JScrollBar</code> with a horizontal orientation
      * @see JScrollBar
      */
@@ -819,6 +1072,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Returns the horizontal scroll bar that controls the viewport's
      * horizontal view position.
      *
+     * <p>
+     *  返回控制视口水平视图位置的水平滚动条。
+     * 
+     * 
      * @return the <code>horizontalScrollBar</code> property
      * @see #setHorizontalScrollBar
      */
@@ -834,6 +1091,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * This is usually unnecessary, as <code>JScrollPane</code> creates
      * horizontal and vertical scrollbars by default.
      *
+     * <p>
+     *  将控制视口水平视图位置的滚动条添加到滚动窗格。这通常是不必要的,因为<code> JScrollPane </code>默认创建水平和垂直滚动条。
+     * 
+     * 
      * @param horizontalScrollBar the horizontal scrollbar to be added
      * @see #createHorizontalScrollBar
      * @see #getHorizontalScrollBar
@@ -866,6 +1127,12 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Used by <code>ScrollPaneUI</code> implementations to create the
      * vertical scrollbar.
      *
+     * <p>
+     *  默认情况下返回<code> JScrollPane.ScrollBar </code>。
+     * 子类可以覆盖此方法以强制<code> ScrollPaneUI </code>实现使用<code> JScrollBar </code>子类。
+     * 用于<code> ScrollPaneUI </code>实现来创建垂直滚动条。
+     * 
+     * 
      * @return a <code>JScrollBar</code> with a vertical orientation
      * @see JScrollBar
      */
@@ -878,6 +1145,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Returns the vertical scroll bar that controls the viewports
      * vertical view position.
      *
+     * <p>
+     *  返回控制视口垂直视图位置的垂直滚动条。
+     * 
+     * 
      * @return the <code>verticalScrollBar</code> property
      * @see #setVerticalScrollBar
      */
@@ -893,6 +1164,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * as <code>JScrollPane</code> creates vertical and
      * horizontal scrollbars by default.
      *
+     * <p>
+     *  将控制视口垂直视图位置的滚动条添加到滚动条。这通常是不必要的,因为默认情况下<code> JScrollPane </code>创建垂直和水平滚动条。
+     * 
+     * 
      * @param verticalScrollBar the new vertical scrollbar to be added
      * @see #createVerticalScrollBar
      * @see #getVerticalScrollBar
@@ -921,6 +1196,13 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Subclasses may override this method to return a subclass of
      * <code>JViewport</code>.
      *
+     * <p>
+     * 默认情况下返回一个新的<code> JViewport </code>。
+     * 用于在<code> setViewportView </code>,<code> setRowHeaderView </code>和<code> setColumnHeaderView </code>中
+     * 创建视口(根据需要)。
+     * 默认情况下返回一个新的<code> JViewport </code>。子类可以覆盖此方法以返回<code> JViewport </code>的子类。
+     * 
+     * 
      * @return a new <code>JViewport</code>
      */
     protected JViewport createViewport() {
@@ -931,6 +1213,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
     /**
      * Returns the current <code>JViewport</code>.
      *
+     * <p>
+     *  返回当前<code> JViewport </code>。
+     * 
+     * 
      * @see #setViewport
      * @return the <code>viewport</code> property
      */
@@ -950,6 +1236,12 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * <code>setViewportView</code>
      * to add a viewport and a view to the scrollpane.
      *
+     * <p>
+     *  删除旧的视口(如果有);强制新视口的viewPosition位于+ x,+ y象限中;使用新的视口同步行和列标题(如果有的话);最后使滚动条和标题与新的视口同步。
+     * <p>
+     *  大多数应用程序会发现使用<code> setViewportView </code>向滚动窗口添加视口和视图更加方便。
+     * 
+     * 
      * @param viewport the new viewport to be used; if viewport is
      *          <code>null</code>, the old viewport is still removed
      *          and the new viewport is set to <code>null</code>
@@ -996,6 +1288,14 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * </pre>
      * Applications should not add children directly to the scrollpane.
      *
+     * <p>
+     *  如果需要,创建视口,然后设置其视图。不直接向<code> JScrollPane </code>构造函数提供视图的应用程序应该使用此方法来指定要在滚动窗格中显示的可滚动子项。例如：
+     * <pre>
+     *  JScrollPane scrollpane = new JScrollPane(); scrollpane.setViewportView(myBigComponentToScroll);
+     * </pre>
+     *  应用程序不应将子项直接添加到滚动窗格。
+     * 
+     * 
      * @param view the component to add to the viewport
      * @see #setViewport
      * @see JViewport#setView
@@ -1011,6 +1311,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
     /**
      * Returns the row header.
+     * <p>
+     *  返回行标题。
+     * 
+     * 
      * @return the <code>rowHeader</code> property
      * @see #setRowHeader
      */
@@ -1030,6 +1334,12 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * <code>setRowHeaderView</code>
      * to add a row header component and its viewport to the scroll pane.
      *
+     * <p>
+     *  删除旧的rowHeader,如果存在;如果新的rowHeader不是<code> null </code>,同步其viewPosition的y坐标与视口(如果有),然后将其添加到滚动窗格。
+     * <p>
+     * 大多数应用程序会发现使用<code> setRowHeaderView </code>更方便地将行标题组件及其视口添加到滚动窗格。
+     * 
+     * 
      * @param rowHeader the new row header to be used; if <code>null</code>
      *          the old row header is still removed and the new rowHeader
      *          is set to <code>null</code>
@@ -1066,6 +1376,14 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * scrollpane.setRowHeaderView(myBigComponentsRowHeader);
      * </pre>
      *
+     * <p>
+     *  如果需要,创建行标头视口,设置其视图,然后将行标头视口添加到滚动窗格。例如：
+     * <pre>
+     *  JScrollPane scrollpane = new JScrollPane(); scrollpane.setViewportView(myBigComponentToScroll); scro
+     * llpane.setRowHeaderView(myBigComponentsRowHeader);。
+     * </pre>
+     * 
+     * 
      * @see #setRowHeader
      * @see JViewport#setView
      * @param view the component to display as the row header
@@ -1081,6 +1399,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
     /**
      * Returns the column header.
+     * <p>
+     *  返回列标题。
+     * 
+     * 
      * @return the <code>columnHeader</code> property
      * @see #setColumnHeader
      */
@@ -1099,6 +1421,13 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * <code>setColumnHeaderView</code>
      * to add a column header component and its viewport to the scroll pane.
      *
+     * <p>
+     *  删除旧的columnHeader,如果存在;如果新的columnHeader不是<code> null </code>,将其viewPosition的x坐标与视口(如果有)同步,然后将其添加到滚动窗格
+     * 。
+     * <p>
+     *  大多数应用程序会发现使用<code> setColumnHeaderView </code>更方便地将列标题组件及其视口添加到滚动窗格。
+     * 
+     * 
      * @see #getColumnHeader
      * @see #setColumnHeaderView
      *
@@ -1134,6 +1463,14 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * scrollpane.setColumnHeaderView(myBigComponentsColumnHeader);
      * </pre>
      *
+     * <p>
+     *  如果需要,创建列标题视口,设置其视图,然后将列标题视口添加到滚动窗格。例如：
+     * <pre>
+     *  JScrollPane scrollpane = new JScrollPane(); scrollpane.setViewportView(myBigComponentToScroll); scro
+     * llpane.setColumnHeaderView(myBigComponentsColumnHeader);。
+     * </pre>
+     * 
+     * 
      * @see #setColumnHeader
      * @see JViewport#setView
      *
@@ -1161,6 +1498,16 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * <li>ScrollPaneConstants.UPPER_TRAILING_CORNER
      * </ul>
      *
+     * <p>
+     *  返回指定角落的组件。指定角的<code>键</code>值为以下之一：
+     * <ul>
+     * <LI> ScrollPaneConstants.LOWER_LEFT_CORNER <LI> ScrollPaneConstants.LOWER_RIGHT_CORNER <LI> ScrollPan
+     * eConstants.UPPER_LEFT_CORNER <LI> ScrollPaneConstants.UPPER_RIGHT_CORNER <LI> ScrollPaneConstants.LOW
+     * ER_LEADING_CORNER <LI> ScrollPaneConstants.LOWER_TRAILING_CORNER <LI> ScrollPaneConstants.UPPER_LEADI
+     * NG_CORNER <LI> ScrollPaneConstants.UPPER_TRAILING_CORNER。
+     * </ul>
+     * 
+     * 
      * @param key one of the values as shown above
      * @return the corner component (which may be <code>null</code>)
      *         identified by the given key, or <code>null</code>
@@ -1218,6 +1565,18 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * signature, <code>PropertyChange</code> events are generated with the
      * property name set to the corner key.
      *
+     * <p>
+     *  添加将出现在其中一个滚动窗口角落(如果有空间)的子级。例如,对于两个滚动条显示(在滚动条的右边缘和底部边缘),左下角组件将显示在两个滚动条的端部之间的空间中。 <b>键</b>的有效值为：
+     * <ul>
+     *  <LI> ScrollPaneConstants.LOWER_LEFT_CORNER <LI> ScrollPaneConstants.LOWER_RIGHT_CORNER <LI> ScrollPa
+     * neConstants.UPPER_LEFT_CORNER <LI> ScrollPaneConstants.UPPER_RIGHT_CORNER <LI> ScrollPaneConstants.LO
+     * WER_LEADING_CORNER <LI> ScrollPaneConstants.LOWER_TRAILING_CORNER <LI> ScrollPaneConstants.UPPER_LEAD
+     * ING_CORNER <LI> ScrollPaneConstants.UPPER_TRAILING_CORNER。
+     * </ul>
+     * <p>
+     *  虽然"corner"与任何bean属性签名不匹配,但会生成属性名称设置为角键的<code> PropertyChange </code>事件。
+     * 
+     * 
      * @param key identifies which corner the component will appear in
      * @param corner one of the following components:
      * <ul>
@@ -1276,6 +1635,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * scrollbars as determined by the
      * <code>ComponentOrientation</code> argument.
      *
+     * <p>
+     *  设置由<code> ComponentOrientation </code>参数确定的垂直和水平滚动条的方向。
+     * 
+     * 
      * @param  co one of the following values:
      * <ul>
      * <li>java.awt.ComponentOrientation.LEFT_TO_RIGHT
@@ -1296,6 +1659,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Indicates whether or not scrolling will take place in response to the
      * mouse wheel.  Wheel scrolling is enabled by default.
      *
+     * <p>
+     *  指示是否响应鼠标滚轮进行滚动。默认情况下启用滚轮滚动。
+     * 
+     * 
      * @see #setWheelScrollingEnabled
      * @since 1.4
      * @beaninfo
@@ -1308,6 +1675,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * Enables/disables scrolling in response to movement of the mouse wheel.
      * Wheel scrolling is enabled by default.
      *
+     * <p>
+     * 启用/禁用响应鼠标滚轮的移动进行滚动。默认情况下启用滚轮滚动。
+     * 
+     * 
      * @param handleWheel   <code>true</code> if scrolling should be done
      *                      automatically for a MouseWheelEvent,
      *                      <code>false</code> otherwise.
@@ -1329,6 +1700,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * See <code>readObject</code> and <code>writeObject</code> in
      * <code>JComponent</code> for more
      * information about serialization in Swing.
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅<code> readComponent </code>中的<code> readObject </code>和<code> writeObject </code>
+     * 。
+     * 
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -1350,6 +1725,11 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JScrollPane </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JScrollPane</code>.
      */
     protected String paramString() {
@@ -1416,6 +1796,11 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * AccessibleJScrollPane.
      * A new AccessibleJScrollPane instance is created if necessary.
      *
+     * <p>
+     *  获取与此JScrollPane相关联的AccessibleContext。对于滚动窗格,AccessibleContext采用AccessibleJScrollPane的形式。
+     * 如有必要,将创建一个新的AccessibleJScrollPane实例。
+     * 
+     * 
      * @return an AccessibleJScrollPane that serves as the
      *         AccessibleContext of this JScrollPane
      */
@@ -1440,6 +1825,12 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现了对<code> JScrollPane </code>类的辅助功能支持。它提供了适用于滚动窗格用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     protected class AccessibleJScrollPane extends AccessibleJComponent
         implements ChangeListener, PropertyChangeListener {
@@ -1448,6 +1839,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
         /*
          * Resets the viewport ChangeListener and PropertyChangeListener
+         * <p>
+         *  重置视口ChangeListener和PropertyChangeListener
+         * 
          */
         public void resetViewPort() {
             if (viewPort != null) {
@@ -1463,6 +1857,9 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
         /**
          * AccessibleJScrollPane constructor
+         * <p>
+         *  AccessibleJScrollPane构造函数
+         * 
          */
         public AccessibleJScrollPane() {
             super();
@@ -1484,6 +1881,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -1495,6 +1896,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
         /**
          * Invoked when the target of the listener has changed its state.
          *
+         * <p>
+         * 当侦听器的目标已更改其状态时调用。
+         * 
+         * 
          * @param e  a <code>ChangeEvent</code> object. Must not be null.
          *
          * @throws NullPointerException if the parameter is null.
@@ -1510,6 +1915,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
 
         /**
          * This method gets called when a bound property is changed.
+         * <p>
+         *  当绑定属性更改时,将调用此方法。
+         * 
+         * 
          * @param e A <code>PropertyChangeEvent</code> object describing
          * the event source and the property that has changed. Must not be null.
          *
@@ -1531,11 +1940,16 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants, Acce
         /*
          * Sets the CONTROLLER_FOR and CONTROLLED_BY AccessibleRelations for
          * the JScrollPane and JScrollBar. JScrollBar must not be null.
+         * <p>
+         *  为JScrollPane和JScrollBar设置CONTROLLER_FOR和CONTROLLED_BY AccessibleRelations。 JScrollBar不能为空。
+         * 
          */
         void setScrollBarRelations(JScrollBar scrollBar) {
             /*
              * The JScrollBar is a CONTROLLER_FOR the JScrollPane.
              * The JScrollPane is CONTROLLED_BY the JScrollBar.
+             * <p>
+             *  JScrollBar是JScrollPane的CONTROLLER_FOR。 JScrollPane是CONTROLLED_BY的JScrollBar。
              */
             AccessibleRelation controlledBy =
                 new AccessibleRelation(AccessibleRelation.CONTROLLED_BY,

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,8 @@ import sun.nio.cs.ArrayEncoder;
 
 /**
  * Utility class for string encoding and decoding.
+ * <p>
+ *  字符串编码和解码的实用程序类。
  */
 
 class StringCoding {

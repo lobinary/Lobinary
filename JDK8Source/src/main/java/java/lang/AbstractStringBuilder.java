@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,14 @@ import java.util.Arrays;
  * or method in this class will cause a {@link NullPointerException} to be
  * thrown.
  *
+ * <p>
+ *  可变字符序列。
+ * <p>
+ *  实现可修改的字符串。在任何时间点,它包含一些特定的字符序列,但是序列的长度和内容可以通过某些方法调用来改变。
+ * 
+ *  <p>除非另有说明,否则将{@code null}参数传递给此类中的构造函数或方法将导致抛出{@link NullPointerException}。
+ * 
+ * 
  * @author      Michael McCloskey
  * @author      Martin Buchholz
  * @author      Ulf Zibis
@@ -47,22 +56,34 @@ import java.util.Arrays;
 abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * The value is used for character storage.
+     * <p>
+     *  该值用于字符存储。
+     * 
      */
     char[] value;
 
     /**
      * The count is the number of characters used.
+     * <p>
+     *  计数是使用的字符数。
+     * 
      */
     int count;
 
     /**
      * This no-arg constructor is necessary for serialization of subclasses.
+     * <p>
+     *  这个无参数构造函数对于子类的序列化是必需的。
+     * 
      */
     AbstractStringBuilder() {
     }
 
     /**
      * Creates an AbstractStringBuilder of the specified capacity.
+     * <p>
+     *  创建指定容量的AbstractStringBuilder。
+     * 
      */
     AbstractStringBuilder(int capacity) {
         value = new char[capacity];
@@ -71,6 +92,10 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * Returns the length (character count).
      *
+     * <p>
+     *  返回长度(字符计数)。
+     * 
+     * 
      * @return  the length of the sequence of characters currently
      *          represented by this object
      */
@@ -84,6 +109,10 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * available for newly inserted characters, beyond which an allocation
      * will occur.
      *
+     * <p>
+     *  返回当前容量。容量是可用于新插入字符的存储量,超过该容量将进行分配。
+     * 
+     * 
      * @return  the current capacity
      */
     public int capacity() {
@@ -104,6 +133,14 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * Note that subsequent operations on this object can reduce the
      * actual capacity below that requested here.
      *
+     * <p>
+     *  确保容量至少等于指定的最小值。如果当前容量小于参数,则为新的内部数组分配更大的容量。新容量是以下的较大者：
+     * <ul>
+     *  <li> {@code minimumCapacity}参数。 <li>两倍的旧容量,加上{@code 2}。
+     * </ul>
+     *  如果{@code minimumCapacity}参数为非正数,则此方法不会执行任何操作,只会返回。请注意,此对象的后续操作可将实际容量降低到低于此处要求的容量。
+     * 
+     * 
      * @param   minimumCapacity   the minimum desired capacity.
      */
     public void ensureCapacity(int minimumCapacity) {
@@ -114,6 +151,9 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * This method has the same contract as ensureCapacity, but is
      * never synchronized.
+     * <p>
+     * 此方法具有与ensureCapacity相同的合同,但永远不会同步。
+     * 
      */
     private void ensureCapacityInternal(int minimumCapacity) {
         // overflow-conscious code
@@ -124,6 +164,9 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * This implements the expansion semantics of ensureCapacity with no
      * size check or synchronization.
+     * <p>
+     *  这实现了ensureCapacity的扩展语义,没有大小检查或同步。
+     * 
      */
     void expandCapacity(int minimumCapacity) {
         int newCapacity = value.length * 2 + 2;
@@ -143,6 +186,10 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * characters, then it may be resized to become more space efficient.
      * Calling this method may, but is not required to, affect the value
      * returned by a subsequent call to the {@link #capacity()} method.
+     * <p>
+     *  尝试减少用于字符序列的存储。如果缓冲器大于保持其当前字符序列所需的大小,则可以将其调整大小以变得更有空间效率。
+     * 调用此方法可能会影响由{@link #capacity()}方法的后续调用返回的值,但不是必需的。
+     * 
      */
     public void trimToSize() {
         if (count < value.length) {
@@ -171,6 +218,19 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * The {@code newLength} argument must be greater than or equal
      * to {@code 0}.
      *
+     * <p>
+     *  设置字符序列的长度。序列将更改为新的字符序列,其长度由参数指定。
+     * 对于小于{@code newLength}的每个非负指数k k,新字符序列中的索引k k处的字符与索引k处的字符相同, / i>在旧序列中,如果<i> k </i>小于旧字符序列的长度;否则,它是空字符
+     * {@code'\ u005Cu0000'}。
+     *  设置字符序列的长度。序列将更改为新的字符序列,其长度由参数指定。
+     * 
+     *  换句话说,如果{@code newLength}参数小于当前长度,则长度将更改为指定的长度。
+     * <p>
+     *  如果{@code newLength}参数大于或等于当前长度,则附加足够的空字符({@code'\ u005Cu0000'}),以使长度成为{@code newLength}参数。
+     * <p>
+     *  {@code newLength}参数必须大于或等于{@code 0}。
+     * 
+     * 
      * @param      newLength   the new length
      * @throws     IndexOutOfBoundsException  if the
      *               {@code newLength} argument is negative.
@@ -199,6 +259,14 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * <a href="Character.html#unicode">surrogate</a>, the surrogate
      * value is returned.
      *
+     * <p>
+     * 返回此序列中指定索引处的{@code char}值。第一个{@code char}值位于索引{@code 0},下一个位于索引{@code 1},依此类推,如数组索引。
+     * <p>
+     *  索引参数必须大于或等于{@code 0},且小于此序列的长度。
+     * 
+     *  <p>如果索引指定的{​​@code char}值为<a href="Character.html#unicode">代理</a>,则会返回代理值。
+     * 
+     * 
      * @param      index   the index of the desired {@code char} value.
      * @return     the {@code char} value at the specified index.
      * @throws     IndexOutOfBoundsException  if {@code index} is
@@ -225,6 +293,14 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * corresponding to this surrogate pair is returned. Otherwise,
      * the {@code char} value at the given index is returned.
      *
+     * <p>
+     *  返回指定索引处的字符(Unicode代码点)。
+     * 索引是指{@code char}值(Unicode代码单位),范围从{@code 0}到{@link #length()} {@ code  -  1}。
+     * 
+     *  <p>如果在给定索引处指定的{@code char}值位于高代理范围内,则以下索引小于此序列的长度,并且下面索引处的{@code char}值为低代理范围,则返回对应于该代理对的补充代码点。
+     * 否则,将返回给定索引处的{@code char}值。
+     * 
+     * 
      * @param      index the index to the {@code char} values
      * @return     the code point value of the character at the
      *             {@code index}
@@ -254,6 +330,14 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * 1} is an unpaired low-surrogate or a high-surrogate, the
      * surrogate value is returned.
      *
+     * <p>
+     *  返回指定索引之前的字符(Unicode代码点)。索引引用{@code char}值(Unicode代码单位),范围从{@code 1}到{@link #length()}。
+     * 
+     * <p>如果{@code(index  -  1)}的{@code char}值位于低代理范围,则{@code(index  -  2)}不为负数,而且{@code char}在{@code(index-2)}
+     * 处于高代理范围,则返回代理对的补充代码点值。
+     * 如果{@code index  -  1}的{@code char}值是不成对的低代理值或高代理值,则返回代理值。
+     * 
+     * 
      * @param     index the index following the code point that should be returned
      * @return    the Unicode code point value before the given index.
      * @exception IndexOutOfBoundsException if the {@code index}
@@ -277,6 +361,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code endIndex-beginIndex}. Unpaired surrogates within
      * this sequence count as one code point each.
      *
+     * <p>
+     *  返回此序列的指定文本范围内的Unicode代码点的数量。
+     * 文本范围从指定的{@code beginIndex}开始,并延伸到索引{@code endIndex  -  1}处的{@code char}。
+     * 因此,文本范围的长度(在{@code char} s中)为{@code endIndex-beginIndex}。该序列中的未配对代理计为每个代码点。
+     * 
+     * 
      * @param beginIndex the index to the first {@code char} of
      * the text range.
      * @param endIndex the index after the last {@code char} of
@@ -302,6 +392,11 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code index} and {@code codePointOffset} count as
      * one code point each.
      *
+     * <p>
+     *  返回此序列中与给定{@code index}偏移{@code codePointOffset}代码点的索引。
+     * 由{@code index}和{@code codePointOffset}给出的文本范围内的未配对代理计为每个代码点。
+     * 
+     * 
      * @param index the index to be offset
      * @param codePointOffset the offset in code points
      * @return the index within this sequence
@@ -334,6 +429,14 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * dstbegin + (srcEnd-srcBegin) - 1
      * }</pre>
      *
+     * <p>
+     *  字符从此序列复制到目标字符数组{@code dst}。要复制的第一个字符是在索引{@code srcBegin};要复制的最后一个字符位于索引{@code srcEnd-1}。
+     * 要复制的字符总数为{@code srcEnd-sr​​cBegin}。
+     * 这些字符被复制到从索引{@code dstBegin}开始并以索引结尾的{@code dst}的子阵列中：<pre> {@ code dstbegin +(srcEnd-sr​​cBegin) -  1}
+     *  </pre>。
+     * 要复制的字符总数为{@code srcEnd-sr​​cBegin}。
+     * 
+     * 
      * @param      srcBegin   start copying at this offset.
      * @param      srcEnd     stop copying at this offset.
      * @param      dst        the array to copy the data into.
@@ -370,6 +473,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * The index argument must be greater than or equal to
      * {@code 0}, and less than the length of this sequence.
      *
+     * <p>
+     * 指定索引处的字符设置为{@code ch}。该序列被改变以表示与旧字符序列相同的新字符序列,除了它在位置{@code index}处包含字符{@code ch}。
+     * <p>
+     *  索引参数必须大于或等于{@code 0},且小于此序列的长度。
+     * 
+     * 
      * @param      index   the index of the character to modify.
      * @param      ch      the new character.
      * @throws     IndexOutOfBoundsException  if {@code index} is
@@ -389,6 +498,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the characters of that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     *  追加{@code Object}参数的字符串表示形式。
+     * <p>
+     *  整体效果与使用{@link String#valueOf(Object)}方法将参数转换为字符串一样,然后该字符串的字符为{@link #append(String)added)到此字符序列。
+     * 
+     * 
      * @param   obj   an {@code Object}.
      * @return  a reference to this object.
      */
@@ -411,6 +526,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * than <i>n</i>; otherwise, it is equal to the character at index
      * <i>k-n</i> in the argument {@code str}.
      *
+     * <p>
+     *  将指定的字符串附加到此字符序列。
+     * <p>
+     *  {@code String}参数的字符按顺序附加,将此序列的长度增加参数的长度。如果{@code str}是{@code null},则会附加四个字符{@code"null"}。
+     * <p>
+     *  让<i> n </i>是在执行{@code append}方法之前的这个字符序列的长度。
+     * 然后,新字符序列中索引<k>的字符等于旧字符序列中索引k的字符,如果<k> k <比<i> </i>否则,它等于参数{@code str}中索引<k>的字符<i> k-n </i>。
+     * 
+     * 
      * @param   str   a string.
      * @return  a reference to this object.
      */
@@ -436,6 +560,8 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.8
      */
     AbstractStringBuilder append(AbstractStringBuilder asb) {
@@ -493,6 +619,19 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * characters as if the s parameter was a sequence containing the four
      * characters {@code "null"}.
      *
+     * <p>
+     *  将指定的{@code CharSequence}的子序列附加到此序列。
+     * <p>
+     * 从索引{@code start}开始的参数{@code s}的字符按顺序附加到该序列的内容直到(排他的)索引{@code end}。该序列的长度增加{@code end-start}的值。
+     * <p>
+     *  让<i> n </i>是在执行{@code append}方法之前的这个字符序列的长度。
+     * 然后,在该序列中,在该字符序列中的索引<k>的字符变为等于索引k的字符,如果<i> k <i>小于<i > n </i>;否则,它等于参数{@code s}中索引<i> k + start-n </i>
+     * 处的字符。
+     *  让<i> n </i>是在执行{@code append}方法之前的这个字符序列的长度。
+     * <p>
+     *  如果{@code s}是{@code null},那么此方法会追加字符,就像s参数是包含四个字符{@code"null"}的序列。
+     * 
+     * 
      * @param   s the sequence to append.
      * @param   start   the starting index of the subsequence to be appended.
      * @param   end     the end index of the subsequence to be appended.
@@ -531,6 +670,14 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the characters of that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     *  将{@code char}数组参数的字符串表示追加到此序列。
+     * <p>
+     *  数组参数的字符按顺序附加到此序列的内容。此序列的长度增加参数的长度。
+     * <p>
+     *  整体效果就好像参数被{@link String#valueOf(char [])}方法转换为字符串,然后该字符串的字符是{@link #append(String)attached)到这个字符序列。
+     * 
+     * 
      * @param   str   the characters to be appended.
      * @return  a reference to this object.
      */
@@ -556,6 +703,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the characters of that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     *  将{@code char}数组参数的子数组的字符串表示附加到此序列。
+     * <p>
+     * 从索引{@code offset}开始的{@code char}数组{@code str}的字符按顺序附加到此序列的内容。该序列的长度增加{@code len}的值。
+     * <p>
+     *  整体效果就好像参数通过方法{@link String#valueOf(char [],int,int)}转换为字符串,然后该字符串的字符为{@link #append(String)附加}到此字符序列
+     * 。
+     * 
+     * 
      * @param   str      the characters to be appended.
      * @param   offset   the index of the first {@code char} to append.
      * @param   len      the number of {@code char}s to append.
@@ -581,6 +737,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the characters of that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     *  将{@code boolean}参数的字符串表示追加到序列中。
+     * <p>
+     *  整体效果正如通过方法{@link String#valueOf(boolean)}将参数转换为字符串,然后该字符串的字符为{@link #append(String)attached)到此字符序列。
+     * 
+     * 
      * @param   b   a {@code boolean}.
      * @return  a reference to this object.
      */
@@ -614,6 +776,14 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the character in that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     *  将{@code char}参数的字符串表示附加到此序列。
+     * <p>
+     *  参数附加到此序列的内容。此序列的长度增加{@code 1}。
+     * <p>
+     *  整体效果就好像参数通过方法{@link String#valueOf(char)}转换为字符串,然后该字符串中的字符为{@link #append(String)attached)到此字符序列。
+     * 
+     * 
      * @param   c   a {@code char}.
      * @return  a reference to this object.
      */
@@ -633,6 +803,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the characters of that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     *  将{@code int}参数的字符串表示附加到此序列。
+     * <p>
+     *  整体效果与使用{@link String#valueOf(int)}方法将参数转换为字符串一样,然后该字符串的字符为{@link #append(String)added)到此字符序列。
+     * 
+     * 
      * @param   i   an {@code int}.
      * @return  a reference to this object.
      */
@@ -659,6 +835,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the characters of that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     * 将{@code long}参数的字符串表示形式附加到此序列。
+     * <p>
+     *  整体效果正如通过方法{@link String#valueOf(long)}将参数转换为字符串,然后该字符串的字符为{@link #append(String)added}到此字符序列。
+     * 
+     * 
      * @param   l   a {@code long}.
      * @return  a reference to this object.
      */
@@ -685,6 +867,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the characters of that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     *  将{@code float}参数的字符串表示附加到此序列。
+     * <p>
+     *  整体效果就好像参数通过方法{@link String#valueOf(float)}转换为字符串,然后该字符串的字符是{@link #append(String)added)到此字符序列。
+     * 
+     * 
      * @param   f   a {@code float}.
      * @return  a reference to this object.
      */
@@ -702,6 +890,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * and the characters of that string were then
      * {@link #append(String) appended} to this character sequence.
      *
+     * <p>
+     *  将{@code double}参数的字符串表示追加到此序列。
+     * <p>
+     *  整体效果与使用{@link String#valueOf(double)}方法将参数转换为字符串一样,然后该字符串的字符为{@link #append(String)added}到此字符序列。
+     * 
+     * 
      * @param   d   a {@code double}.
      * @return  a reference to this object.
      */
@@ -717,6 +911,11 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * sequence if no such character exists. If
      * {@code start} is equal to {@code end}, no changes are made.
      *
+     * <p>
+     *  删除此序列的子字符串中的字符。子字符串从指定的{@code start}开始,如果没有这样的字符,则扩展到索引{@code end  -  1}处的字符或序列的末尾。
+     * 如果{@code start}等于{@code end},则不会进行任何更改。
+     * 
+     * 
      * @param      start  The beginning index, inclusive.
      * @param      end    The ending index, exclusive.
      * @return     This object.
@@ -753,6 +952,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * were then {@link #append(char[]) appended} to this character
      * sequence.
      *
+     * <p>
+     *  将{@code codePoint}参数的字符串表示追加到此序列。
+     * 
+     *  <p>参数附加到此序列的内容。此序列的长度增加{@link Character#charCount(int)Character.charCount(codePoint)}。
+     * 
+     * <p>整体效果与使用{@link Character#toChars(int)}方法将参数转换为{@code char}数组一样,该数组中的字符为{@link #append(char [])attached}
+     * 到此字符序列。
+     * 
+     * 
      * @param   codePoint   a Unicode code point
      * @return  a reference to this object.
      * @exception IllegalArgumentException if the specified
@@ -786,6 +994,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code Character.charCount(thisSequence.codePointAt(index))},
      * where {@code thisSequence} is this sequence.
      *
+     * <p>
+     *  删除此序列中指定位置处的{@code char}。此序列缩短一个{@code char}。
+     * 
+     *  <p>注意：如果给定索引处的字符是补充字符,则此方法不会删除整个字符。
+     * 如果需要正确处理补充字符,请通过调用{@code Character.charCount(thisSequence.codePointAt(index))}来确定要删除的{@code char}的数量,
+     * 其中{@code thisSequence}是此序列。
+     *  <p>注意：如果给定索引处的字符是补充字符,则此方法不会删除整个字符。
+     * 
+     * 
      * @param       index  Index of {@code char} to remove
      * @return      This object.
      * @throws      StringIndexOutOfBoundsException  if the {@code index}
@@ -811,6 +1028,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * sequence will be lengthened to accommodate the
      * specified String if necessary.)
      *
+     * <p>
+     *  将此序列的子字符串中的字符替换为指定的{@code String}中的字符。
+     * 子字符串从指定的{@code start}开始,如果没有这样的字符,则扩展到索引{@code end  -  1}处的字符或序列的末尾。
+     * 首先删除子字符串中的字符,然后在{@code start}插入指定的{@code String}。 (如果需要,将延长此序列以容纳指定的字符串。)。
+     * 
+     * 
      * @param      start    The beginning index, inclusive.
      * @param      end      The ending index, exclusive.
      * @param      str   String that will replace previous contents.
@@ -845,6 +1068,10 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * substring begins at the specified index and extends to the end of
      * this sequence.
      *
+     * <p>
+     *  返回一个新的{@code String},其中包含此字符序列中当前包含的字符的子序列。子字符串从指定的索引开始,并延伸到此序列的结尾。
+     * 
+     * 
      * @param      start    The beginning index, inclusive.
      * @return     The new string.
      * @throws     StringIndexOutOfBoundsException  if {@code start} is
@@ -870,6 +1097,20 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * This method is provided so that this class can
      * implement the {@link CharSequence} interface.
      *
+     * <p>
+     *  返回作为此序列的子序列的新字符序列。
+     * 
+     * <p>表单的此方法的调用
+     * 
+     *  <pre> {@ code sb.subSequence(begin,&nbsp; end)} </pre>
+     * 
+     *  其行为与调用的方式完全相同
+     * 
+     *  <pre> {@ code sb.substring(begin,&nbsp; end)} </pre>
+     * 
+     *  提供此方法,以便此类可以实现{@link CharSequence}接口。
+     * 
+     * 
      * @param      start   the start index, inclusive.
      * @param      end     the end index, exclusive.
      * @return     the specified subsequence.
@@ -891,6 +1132,10 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * substring begins at the specified {@code start} and
      * extends to the character at index {@code end - 1}.
      *
+     * <p>
+     *  返回一个新的{@code String},其中包含此序列中当前包含的字符的子序列。子字符串从指定的{@code start}开始,并延伸到索引{@code end  -  1}处的字符。
+     * 
+     * 
      * @param      start    The beginning index, inclusive.
      * @param      end      The ending index, exclusive.
      * @return     The new string.
@@ -917,6 +1162,11 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * the position indicated by {@code index}. The length of this
      * sequence increases by {@code len} {@code char}s.
      *
+     * <p>
+     *  将{@code str}数组参数的子数组的字符串表示插入到此序列中。子阵列从指定的{@code offset}开始,并扩展{@code len} {@code char}。
+     * 子序列的字符插入到此序列中由{@code index}指示的位置。此序列的长度增加{@code len} {@code char}。
+     * 
+     * 
      * @param      index    position at which to insert subarray.
      * @param      str       A {@code char} array.
      * @param      offset   the index of the first {@code char} in subarray to
@@ -960,6 +1210,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     *  将{@code Object}参数的字符串表示插入到此字符序列中。
+     * <p>
+     *  总体效果就好像第二个参数通过方法{@link String#valueOf(Object)}转换为字符串,然后该字符串的字符为{@link #insert(int,String)inserted}这个
+     * 字符序列在指定的偏移量。
+     * <p>
+     *  {@code offset}参数必须大于或等于{@code 0},且小于或等于此序列的{@linkplain #length()length}。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      obj      an {@code Object}.
      * @return     a reference to this object.
@@ -995,6 +1254,20 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     *  将字符串插入到此字符序列中。
+     * <p>
+     * {@code String}参数的字符按顺序插入到此序列中的指定偏移处,向上移动原先位于该位置上方的任何字符,并将该序列的长度增加参数的长度。
+     * 如果{@code str}是{@code null},那么将在此序列中插入四个字符{@code"null"}。
+     * <p>
+     *  新字符序列中索引<k>的字符等于：
+     * <ul>
+     *  <li>旧字符序列中索引<i> k处的字符,如果<i> k </i>小于{@code offset} <li>索引<k> / i>在参数{@code str}中的{@ code -offset},如果
+     * <i> k </i>不小于{@code offset},但小于{@code offset + str.length } <li>旧字符序列中索引<i> k </i> {@ code -str.length()}
+     * 处的字符,如果<i> k < str.length()} </ul> <p> {@code offset}参数必须大于或等于{@code 0},且小于或等于{@linkplain #length()length}
+     * 这个序列。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      str      a string.
      * @return     a reference to this object.
@@ -1032,6 +1305,17 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     *  将{@code char}数组参数的字符串表示插入到此序列中。
+     * <p>
+     *  数组参数的字符插入到此序列的内容中由{@code offset}指示的位置。此序列的长度增加参数的长度。
+     * <p>
+     * 整体效果就好像第二个参数通过方法{@link String#valueOf(char [])}转换为字符串,然后该字符串的字符是{@link #insert(int,String)inserted }转
+     * 换为指定偏移量的字符序列。
+     * <p>
+     *  {@code offset}参数必须大于或等于{@code 0},且小于或等于此序列的{@linkplain #length()length}。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      str      a character array.
      * @return     a reference to this object.
@@ -1064,6 +1348,16 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * <p>If {@code s} is {@code null}, then the four characters
      * {@code "null"} are inserted into this sequence.
      *
+     * <p>
+     *  在此序列中插入指定的{@code CharSequence}。
+     * <p>
+     *  {@code CharSequence}参数的字符按顺序插入到此序列中的指定偏移处,向上移动任何最初位于该位置上方的字符,并将该序列的长度增加参数s的长度。
+     * <p>
+     *  此方法的结果与调用此对象的{@link #insert(int,CharSequence,int,int)insert}(dstOffset,s,0,s.length())方法完全相同。
+     * 
+     *  <p>如果{@code s}是{@code null},则将在此序列中插入四个字符{@code"null"}。
+     * 
+     * 
      * @param      dstOffset   the offset.
      * @param      s the sequence to be inserted
      * @return     a reference to this object.
@@ -1110,6 +1404,23 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * characters as if the s parameter was a sequence containing the four
      * characters {@code "null"}.
      *
+     * <p>
+     *  在此序列中插入指定{@code CharSequence}的子序列。
+     * <p>
+     *  由{@code start}和{@code end}指定的参数{@code s}的子序列按顺序插入到此序列中指定的目标偏移处,向上移动最初在该位置上方的任何字符。
+     * 该序列的长度增加{@code end-start}。
+     * <p>
+     *  在该序列中的索引k k处的字符变为等于：
+     * <ul>
+     * <li>在此序列中的索引<i> k处的字符,如果<i> k </i>小于{@code dstOffset} <li>索引<k>在参数{@code s}中的{@ code + start-dstOffset}
+     * ,如果<i> k </i>大于或等于{@code dstOffset},但小于{@code dstOffset + end-start }如果<i> k </i>大于或等于{@code dstOffset +}
+     * ,则在该序列中的索引<k> {@ code-(end-start) end-start} </ul> <p> {@code dstOffset}参数必须大于或等于{@code 0},且小于或等于此序列的
+     * {@linkplain #length()length} 。
+     *  <p> start参数必须为非负数,且不大于{@code end}。 <p>结束参数必须大于或等于{@code start},且小于或等于s的长度。
+     * 
+     *  <p>如果{@code s}是{@code null},则此方法将插入字符,就像s参数是包含四个字符{@code"null"}的序列。
+     * 
+     * 
      * @param      dstOffset   the offset in this sequence.
      * @param      s       the sequence to be inserted.
      * @param      start   the starting index of the subsequence to be inserted.
@@ -1155,6 +1466,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     *  将{@code boolean}参数的字符串表示插入到此序列中。
+     * <p>
+     *  总体效果就好像第二个参数通过方法{@link String#valueOf(boolean)}转换为字符串,然后该字符串的字符为{@link #insert(int,String)inserted}这
+     * 个字符序列在指定的偏移量。
+     * <p>
+     *  {@code offset}参数必须大于或等于{@code 0},且小于或等于此序列的{@linkplain #length()length}。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      b        a {@code boolean}.
      * @return     a reference to this object.
@@ -1178,6 +1498,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     * 将{@code char}参数的字符串表示插入到此序列中。
+     * <p>
+     *  总体效果就好像第二个参数通过方法{@link String#valueOf(char)}转换为字符串,然后该字符串中的字符为{@link #insert(int,String)inserted}这个字
+     * 符序列在指定的偏移量。
+     * <p>
+     *  {@code offset}参数必须大于或等于{@code 0},且小于或等于此序列的{@linkplain #length()length}。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      c        a {@code char}.
      * @return     a reference to this object.
@@ -1205,6 +1534,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     *  将第二个{@code int}参数的字符串表示插入到此序列中。
+     * <p>
+     *  整体效果就好像第二个参数通过方法{@link String#valueOf(int)}转换为字符串,然后该字符串的字符是{@link #insert(int,String)inserted}这个字符序
+     * 列在指定的偏移量。
+     * <p>
+     *  {@code offset}参数必须大于或等于{@code 0},且小于或等于此序列的{@linkplain #length()length}。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      i        an {@code int}.
      * @return     a reference to this object.
@@ -1228,6 +1566,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     *  将{@code long}参数的字符串表示插入到此序列中。
+     * <p>
+     *  整体效果就好像第二个参数通过方法{@link String#valueOf(long)}转换为字符串,然后该字符串的字符是{@link #insert(int,String)inserted}这个字符
+     * 序列在指定的偏移量。
+     * <p>
+     *  {@code offset}参数必须大于或等于{@code 0},且小于或等于此序列的{@linkplain #length()length}。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      l        a {@code long}.
      * @return     a reference to this object.
@@ -1251,6 +1598,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     * 将{@code float}参数的字符串表示插入到此序列中。
+     * <p>
+     *  整体效果就好像第二个参数通过方法{@link String#valueOf(float)}转换为字符串,然后该字符串的字符是{@link #insert(int,String)inserted}这个字
+     * 符序列在指定的偏移量。
+     * <p>
+     *  {@code offset}参数必须大于或等于{@code 0},且小于或等于此序列的{@linkplain #length()length}。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      f        a {@code float}.
      * @return     a reference to this object.
@@ -1274,6 +1630,15 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * {@code 0}, and less than or equal to the {@linkplain #length() length}
      * of this sequence.
      *
+     * <p>
+     *  将{@code double}参数的字符串表示插入到此序列中。
+     * <p>
+     *  总体效果就好像第二个参数通过方法{@link String#valueOf(double)}转换为字符串,然后该字符串的字符是{@link #insert(int,String)inserted}这个
+     * 字符序列在指定的偏移量。
+     * <p>
+     *  {@code offset}参数必须大于或等于{@code 0},且小于或等于此序列的{@linkplain #length()length}。
+     * 
+     * 
      * @param      offset   the offset.
      * @param      d        a {@code double}.
      * @return     a reference to this object.
@@ -1292,6 +1657,11 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * }</pre>
      * is {@code true}.
      *
+     * <p>
+     *  返回此字符串中指定子字符串第一次出现的索引。返回的整数是最小值<i> k </i>,使得：<pre> {@ code this.toString()。
+     * startsWith(str,<k>)} </@code true}。
+     * 
+     * 
      * @param   str   any string.
      * @return  if the string argument occurs as a substring within this
      *          object, then the index of the first character of the first
@@ -1312,6 +1682,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * }</pre>
      * If no such value of <i>k</i> exists, then -1 is returned.
      *
+     * <p>
+     * 返回指定子字符串第一次出现的此字符串中的索引,从指定的索引开始。
+     * 返回的整数是最小的值{@code k},其中：<pre> {@ code k> = Math.min(fromIndex,this.length())&& this.toString()。
+     * startsWith(str,k)} </pre>如果不存在这样的<i> k值,则返回-1。
+     * 
+     * 
      * @param   str         the substring for which to search.
      * @param   fromIndex   the index from which to start the search.
      * @return  the index within this string of the first occurrence of the
@@ -1331,6 +1707,11 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * }</pre>
      * is true.
      *
+     * <p>
+     *  返回此字符串中指定子字符串最右侧出现的索引。最右边的空字符串""被认为发生在索引值{@code this.length()}。
+     * 返回的索引是最大值<k>,使得<pre> {@ code this.toString()。startsWith(str,k)} </pre>是真的。
+     * 
+     * 
      * @param   str   the substring to search for.
      * @return  if the string argument occurs one or more times as a substring
      *          within this object, then the index of the first character of
@@ -1351,6 +1732,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * }</pre>
      * If no such value of <i>k</i> exists, then -1 is returned.
      *
+     * <p>
+     *  返回此字符串中指定子字符串的最后一次出现的索引。
+     * 返回的整数是最大值<i> k </i>,使得：<pre> {@ code k <= Math.min(fromIndex,this.length())&& this.toString()。
+     * startsWith(str, k)} </pre>如果不存在这样的<k>的值,则返回-1。
+     * 
+     * 
      * @param   str         the substring to search for.
      * @param   fromIndex   the index to start the search from.
      * @return  the index within this sequence of the last occurrence of the
@@ -1380,6 +1767,16 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * "\u005CuDC00\u005CuD800" produces "\u005CuD800\u005CuDC00" which is
      * a valid surrogate pair.
      *
+     * <p>
+     *  导致此字符序列被序列的反向替换。如果序列中包含任何替代对,则这些对象被视为单个字符,用于反向操作。因此,高低代理的顺序从不逆转。
+     * 
+     * 在执行{@code reverse}方法之前,让<i> n </i>是此字符序列的字符长度(而不是{@code char}值中的长度)。
+     * 然后,新字符序列中索引<k>处的字符等于旧字符序列中索引n-k-1处的字符。
+     * 
+     *  <p>请注意,反向操作可能导致在操作之前生成未配对的低代理和高代理的替代对。
+     * 例如,颠倒"\ u005CuDC00 \ u005CuD800"会生成"\ u005CuD800 \ u005CuDC00",这是一个有效的代理对。
+     * 
+     * 
      * @return  a reference to this object.
      */
     public AbstractStringBuilder reverse() {
@@ -1424,6 +1821,8 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * changes to this sequence do not affect the contents of the
      * {@code String}.
      *
+     * <p>
+     * 
      * @return  a string representation of this sequence of characters.
      */
     @Override
@@ -1431,6 +1830,10 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
 
     /**
      * Needed by {@code String} for the contentEquals method.
+     * <p>
+     *  返回表示此序列中的数据的字符串。一个新的{@code String}对象被分配并初始化为包含此对象当前表示的字符序列。然后返回此{@code String}。
+     * 对此序列的后续更改不会影响{@code String}的内容。
+     * 
      */
     final char[] getValue() {
         return value;

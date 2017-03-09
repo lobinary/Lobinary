@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -81,6 +82,34 @@ import java.util.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> DefaultMutableTreeNode </code>是树数据结构中的通用节点。
+ * 有关使用默认可变树节点的示例,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/tree.html">如何使用
+ * 树</a>。
+ *  <code> DefaultMutableTreeNode </code>是树数据结构中的通用节点。 Java教程。</em>。
+ * 
+ * <p>
+ * 
+ *  树节点最多可以有一个父节点和0个或更多个子节点。
+ *  <code> DefaultMutableTreeNode </code>提供用于检查和修改节点的父和子的操作,以及用于检查节点是其一部分的树的操作。
+ * 节点的树是可以通过在节点处开始并遵循到父节点和子节点的所有可能链接而到达的所有节点的集合。没有父节点的节点是其树的根;没有子节点的节点是叶子。树可以由许多子树组成,每个节点充当它自己的子树的根。
+ * <p>
+ *  此类提供用于以各种顺序高效地遍历树或子树或用于遵循两个节点之间的路径的枚举。
+ *  <code> DefaultMutableTreeNode </code>还可以保存对用户对象的引用,其使用由用户自己决定。
+ * 通过<code> toString()</code>请求<code> DefaultMutableTreeNode </code>字符串表示形式,返回其用户对象的字符串表示形式。
+ * <p>
+ * <b>这不是线程安全类。</b>如果您打算在多个线程中使用DefaultMutableTreeNode(或TreeNodes的树),您需要进行自己的同步。一个好的习惯是在树的根节点上同步。
+ * <p>
+ *  虽然DefaultMutableTreeNode实现了MutableTreeNode接口,并且将允许您在MutableTreeNode的任何实现中添加,但并不是DefaultMutableTreeNo
+ * de中的所有方法都适用于所有MutableTreeNodes实现。
+ * 特别是提供了一些枚举,使用这些方法中的一些假定DefaultMutableTreeNode只包含DefaultMutableNode实例。
+ * 所有的TreeNode / MutableTreeNode方法将无论添加什么实现都会像定义的一样。
+ * 
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see MutableTreeNode
  *
  * @author Rob Davis
@@ -93,6 +122,9 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * An enumeration that is always empty. This is used when an enumeration
      * of a leaf node's children is requested.
+     * <p>
+     *  始终为空的枚举。这是在请求叶节点的子节点的枚举时使用的。
+     * 
      */
     static public final Enumeration<TreeNode> EMPTY_ENUMERATION
         = Collections.emptyEnumeration();
@@ -113,6 +145,9 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * Creates a tree node that has no parent and no children, but which
      * allows children.
+     * <p>
+     *  创建一个没有父级但没有子级,但允许子级的树节点。
+     * 
      */
     public DefaultMutableTreeNode() {
         this(null);
@@ -122,6 +157,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Creates a tree node with no parent, no children, but which allows
      * children, and initializes it with the specified user object.
      *
+     * <p>
+     * 创建一个没有父节点,没有子节点,但允许子节点的树节点,并使用指定的用户对象初始化它。
+     * 
+     * 
      * @param userObject an Object provided by the user that constitutes
      *                   the node's data
      */
@@ -134,6 +173,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * the specified user object, and that allows children only if
      * specified.
      *
+     * <p>
+     *  创建没有父对象的树节点,没有子对象,使用指定的用户对象初始化,并且仅当指定了子节点时才允许子节点。
+     * 
+     * 
      * @param userObject an Object provided by the user that constitutes
      *        the node's data
      * @param allowsChildren if true, the node is allowed to have child
@@ -158,6 +201,12 @@ public class DefaultMutableTreeNode implements Cloneable,
      * <code>newChild</code> must not be null and must not be an ancestor of
      * this node.
      *
+     * <p>
+     *  从其当前父级(如果它有父级)中删除<code> newChild </code>,将子级的父级设置为此节点,然后将该子级添加到index <code> childIndex </code>处的该节点的
+     * 子级数组。
+     *  <code> newChild </code>不能为空,并且不能为此节点的祖先。
+     * 
+     * 
      * @param   newChild        the MutableTreeNode to insert under this node
      * @param   childIndex      the index in this node's child array
      *                          where this node is to be inserted
@@ -196,6 +245,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * and sets that node's parent to null. The child node to remove
      * must be a <code>MutableTreeNode</code>.
      *
+     * <p>
+     *  从此节点的子节点删除指定索引处的子节点,并将该节点的父节点设置为null。要删除的子节点必须是<code> MutableTreeNode </code>。
+     * 
+     * 
      * @param   childIndex      the index in this node's child array
      *                          of the child to remove
      * @exception       ArrayIndexOutOfBoundsException  if
@@ -214,6 +267,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * reassign a child's parent, it should not be messaged from anywhere
      * else.
      *
+     * <p>
+     *  将此节点的父代设置为<code> newParent </code>,但不会更改父代的子数组。
+     * 此方法从<code> insert()</code>和<code> remove()</code>调用以重新分配孩子的父级,它不应该从其他地方消息。
+     * 
+     * 
      * @param   newParent       this node's new parent
      */
     @Transient
@@ -224,6 +282,10 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * Returns this node's parent or null if this node has no parent.
      *
+     * <p>
+     *  返回此节点的父节点或null(如果此节点没有父节点)。
+     * 
+     * 
      * @return  this node's parent TreeNode, or null if this node has no parent
      */
     public TreeNode getParent() {
@@ -233,6 +295,10 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * Returns the child at the specified index in this node's child array.
      *
+     * <p>
+     *  返回此节点的子数组中指定索引处的子元素。
+     * 
+     * 
      * @param   index   an index into this node's child array
      * @exception       ArrayIndexOutOfBoundsException  if <code>index</code>
      *                                          is out of bounds
@@ -248,6 +314,10 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * Returns the number of children of this node.
      *
+     * <p>
+     *  返回此节点的子节点数。
+     * 
+     * 
      * @return  an int giving the number of children of this node
      */
     public int getChildCount() {
@@ -264,6 +334,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * <code>-1</code>.  This method performs a linear search and is O(n)
      * where n is the number of children.
      *
+     * <p>
+     *  返回此节点的子数组中指定子节点的索引。如果指定的节点不是此节点的子节点,则返回<code> -1 </code>。该方法执行线性搜索,并且是O(n),其中n是子节点数。
+     * 
+     * 
      * @param   aChild  the TreeNode to search for among this node's children
      * @exception       IllegalArgumentException        if <code>aChild</code>
      *                                                  is null
@@ -287,6 +361,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * children.  Modifying this node's child array invalidates any child
      * enumerations created before the modification.
      *
+     * <p>
+     * 创建并返回此节点的子节点的前向顺序枚举。修改此节点的子数组会使修改前创建的所有子枚举无效。
+     * 
+     * 
      * @return  an Enumeration of this node's children
      */
     public Enumeration children() {
@@ -304,6 +382,12 @@ public class DefaultMutableTreeNode implements Cloneable,
      * <p>
      * Note: By default, a node allows children.
      *
+     * <p>
+     *  确定此节点是否允许有子级。如果<code>允许</code>为false,则删除此节点的所有子节点。
+     * <p>
+     *  注意：默认情况下,一个节点允许子节点。
+     * 
+     * 
      * @param   allows  true if this node is allowed to have children
      */
     public void setAllowsChildren(boolean allows) {
@@ -318,6 +402,10 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * Returns true if this node is allowed to have children.
      *
+     * <p>
+     *  如果此节点允许有子项,则返回true。
+     * 
+     * 
      * @return  true if this node allows children, else false
      */
     public boolean getAllowsChildren() {
@@ -327,6 +415,10 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * Sets the user object for this node to <code>userObject</code>.
      *
+     * <p>
+     *  将此节点的用户对象设置为<code> userObject </code>。
+     * 
+     * 
      * @param   userObject      the Object that constitutes this node's
      *                          user-specified data
      * @see     #getUserObject
@@ -339,6 +431,10 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * Returns this node's user object.
      *
+     * <p>
+     *  返回此节点的用户对象。
+     * 
+     * 
      * @return  the Object stored at this node by the user
      * @see     #setUserObject
      * @see     #toString
@@ -356,6 +452,9 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Removes the subtree rooted at this node from the tree, giving this
      * node a null parent.  Does nothing if this node is the root of its
      * tree.
+     * <p>
+     *  从树中删除以此节点为根的子树,将此节点设为空父。如果此节点是其树的根,则不执行任何操作。
+     * 
      */
     public void removeFromParent() {
         MutableTreeNode parent = (MutableTreeNode)getParent();
@@ -368,6 +467,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Removes <code>aChild</code> from this node's child array, giving it a
      * null parent.
      *
+     * <p>
+     *  从此节点的子数组中删除<code> aChild </code>,赋给它一个空父亲。
+     * 
+     * 
      * @param   aChild  a child of this node to remove
      * @exception       IllegalArgumentException        if <code>aChild</code>
      *                                  is null or is not a child of this node
@@ -386,6 +489,9 @@ public class DefaultMutableTreeNode implements Cloneable,
     /**
      * Removes all of this node's children, setting their parents to null.
      * If this node has no children, this method does nothing.
+     * <p>
+     *  删除所有此节点的子项,将其父项设置为null。如果此节点没有子节点,则此方法不执行任何操作。
+     * 
      */
     public void removeAllChildren() {
         for (int i = getChildCount()-1; i >= 0; i--) {
@@ -397,6 +503,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Removes <code>newChild</code> from its parent and makes it a child of
      * this node by adding it to the end of this node's child array.
      *
+     * <p>
+     *  从其父代中删除<code> newChild </code>,并将其添加到此节点的子数组的末尾,使其成为此节点的子代。
+     * 
+     * 
      * @see             #insert
      * @param   newChild        node to add as a child of this node
      * @exception       IllegalArgumentException    if <code>newChild</code>
@@ -425,6 +535,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * operation is at worst O(h) where h is the distance from the root to
      * this node.
      *
+     * <p>
+     *  如果<code> anotherNode </code>是此节点的祖先,如果它是此节点,此节点的父级或此节点的父级的祖先,则返回true。 (注意,一个节点被认为是自己的祖先。
+     * )如果<code> anotherNode </code>为null,此方法返回false。此操作在最差O(h)处,其中h是从根到该节点的距离。
+     * 
+     * 
      * @see             #isNodeDescendant
      * @see             #getSharedAncestor
      * @param   anotherNode     node to test as an ancestor of this node
@@ -454,6 +569,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * false.  This operation is at worst O(h) where h is the distance from the
      * root to <code>anotherNode</code>.
      *
+     * <p>
+     * 如果<code> anotherNode </code>是此节点的后代,则返回true  - 如果此节点是此节点的子节点之一,或者是此节点的子节点的后代。注意,一个节点被认为是它自己的后代。
+     * 如果<code> anotherNode </code>为null,则返回false。此操作在最差O(h)处,其中h是从根到<code> anotherNode </code>的距离。
+     * 
+     * 
      * @see     #isNodeAncestor
      * @see     #getSharedAncestor
      * @param   anotherNode     node to test as descendant of this node
@@ -472,6 +592,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * <code>aNode</code> are in different trees or if <code>aNode</code> is
      * null.  A node is considered an ancestor of itself.
      *
+     * <p>
+     *  返回此节点和<code> aNode </code>的最近公共祖先。
+     * 如果此节点和<code> aNode </code>在不同的树中或<code> aNode </code>为null,则返回null。节点被认为是其自身的祖先。
+     * 
+     * 
      * @see     #isNodeAncestor
      * @see     #isNodeDescendant
      * @param   aNode   node to find common ancestor with
@@ -533,6 +658,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Returns true if and only if <code>aNode</code> is in the same tree
      * as this node.  Returns false if <code>aNode</code> is null.
      *
+     * <p>
+     *  当且仅当<code> aNode </code>与此节点位于同一树中时,返回true。如果<code> aNode </code>为null,则返回false。
+     * 
+     * 
      * @see     #getSharedAncestor
      * @see     #getRoot
      * @return  true if <code>aNode</code> is in the same tree as this node;
@@ -550,6 +679,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * <code>getLevel()</code> because it must effectively traverse the entire
      * tree rooted at this node.
      *
+     * <p>
+     *  返回根在此节点的树的深度 - 从此节点到叶的最长距离。如果此节点没有子节点,则返回0.此操作比<code> getLevel()</code>要昂贵得多,因为它必须有效地遍历以此节点为根的整个树。
+     * 
+     * 
      * @see     #getLevel
      * @return  the depth of the tree whose root is this node
      */
@@ -574,6 +707,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Returns the number of levels above this node -- the distance from
      * the root to this node.  If this node is the root, returns 0.
      *
+     * <p>
+     *  返回此节点上面的级别数 - 从根节点到此节点的距离。如果此节点是根,返回0。
+     * 
+     * 
      * @see     #getDepth
      * @return  the number of levels above this node
      */
@@ -594,6 +731,10 @@ public class DefaultMutableTreeNode implements Cloneable,
       * Returns the path from the root, to get to this node.  The last
       * element in the path is this node.
       *
+      * <p>
+      *  返回从根路径,到达此节点。路径中的最后一个元素是此节点。
+      * 
+      * 
       * @return an array of TreeNode objects giving the path, where the
       *         first element in the path is the root and the last
       *         element is this node.
@@ -608,6 +749,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * The length of the returned array gives the node's depth in the
      * tree.
      *
+     * <p>
+     *  构建节点的父节点,直到并包括根节点,其中原始节点是返回的数组中的最后一个元素。返回的数组的长度给出了树中节点的深度。
+     * 
+     * 
      * @param aNode  the TreeNode to get the path for
      * @param depth  an int giving the number of steps already taken towards
      *        the root (on recursive calls), used to size the returned array
@@ -618,6 +763,8 @@ public class DefaultMutableTreeNode implements Cloneable,
         TreeNode[]              retNodes;
 
         /* Check for null, in case someone passed in a null node, or
+        /* <p>
+        /* 
            they passed in an element that isn't rooted at root. */
         if(aNode == null) {
             if(depth == 0)
@@ -637,6 +784,9 @@ public class DefaultMutableTreeNode implements Cloneable,
       * Returns the user object path, from the root, to get to this node.
       * If some of the TreeNodes in the path have null user objects, the
       * returned path will contain nulls.
+      * <p>
+      * 返回用户对象路径,从根,到达此节点。如果路径中的某些TreeNodes具有空用户对象,则返回的路径将包含null。
+      * 
       */
     public Object[] getUserObjectPath() {
         TreeNode[]          realPath = getPath();
@@ -652,6 +802,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Returns the root of the tree that contains this node.  The root is
      * the ancestor with a null parent.
      *
+     * <p>
+     *  返回包含此节点的树的根。根是具有空父亲的祖先。
+     * 
+     * 
      * @see     #isNodeAncestor
      * @return  the root of the tree that contains this node
      */
@@ -673,6 +827,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * the only node in the tree with a null parent; every tree has exactly
      * one root.
      *
+     * <p>
+     *  如果此节点是树的根,则返回true。根是树中具有空父父的唯一节点;每棵树都有一个根。
+     * 
+     * 
      * @return  true if this node is the root of its tree
      */
     public boolean isRoot() {
@@ -686,6 +844,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * traversal.  This is an inefficient way to traverse the entire tree; use
      * an enumeration, instead.
      *
+     * <p>
+     *  返回此节点树的前序遍历中跟随此节点的节点。如果此节点是遍历的最后一个节点,则返回null。这是遍历整个树的低效方法;使用枚举,而不是。
+     * 
+     * 
      * @see     #preorderEnumeration
      * @return  the node that follows this node in a preorder traversal, or
      *          null if this node is last
@@ -726,6 +888,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * This is an inefficient way to
      * traverse the entire tree; use an enumeration, instead.
      *
+     * <p>
+     *  返回此节点树前的遍历节点的节点。如果此节点是遍历的第一个节点,则返回<code> null </code>  - 树的根。这是遍历整个树的低效方法;使用枚举,而不是。
+     * 
+     * 
      * @see     #preorderEnumeration
      * @return  the node that precedes this node in a preorder traversal, or
      *          null if this node is the first
@@ -758,6 +924,12 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Modifying the tree by inserting, removing, or moving a node invalidates
      * any enumerations created before the modification.
      *
+     * <p>
+     *  创建并返回一个枚举,遍历以preorder为根节点的子树。枚举的<code> nextElement()</code>方法返回的第一个节点是此节点。<P>
+     * 
+     *  通过插入,删除或移动节点来修改树会使修改之前创建的任何枚举无效。
+     * 
+     * 
      * @see     #postorderEnumeration
      * @return  an enumeration for traversing the tree in preorder
      */
@@ -774,6 +946,12 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Modifying the tree by inserting, removing, or moving a node invalidates
      * any enumerations created before the modification.
      *
+     * <p>
+     *  创建并返回一个枚举,遍历以postorder为根节点的子树。枚举的<code> nextElement()</code>方法返回的第一个节点是最左边的叶子。这与深度优先遍历相同
+     * 
+     * 通过插入,删除或移动节点来修改树会使修改之前创建的任何枚举无效。
+     * 
+     * 
      * @see     #depthFirstEnumeration
      * @see     #preorderEnumeration
      * @return  an enumeration for traversing the tree in postorder
@@ -790,6 +968,12 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Modifying the tree by inserting, removing, or moving a node invalidates
      * any enumerations created before the modification.
      *
+     * <p>
+     *  创建并返回枚举,遍历以宽度优先顺序在此节点上生根的子树。枚举的<code> nextElement()</code>方法返回的第一个节点是此节点。<P>
+     * 
+     *  通过插入,删除或移动节点来修改树会使修改之前创建的任何枚举无效。
+     * 
+     * 
      * @see     #depthFirstEnumeration
      * @return  an enumeration for traversing the tree in breadth-first order
      */
@@ -806,6 +990,12 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Modifying the tree by inserting, removing, or moving a node invalidates
      * any enumerations created before the modification.
      *
+     * <p>
+     *  创建并返回以深度优先顺序遍历遍历此节点的子树的枚举。枚举的<code> nextElement()</code>方法返回的第一个节点是最左边的叶子。这与后序遍历相同。<P>
+     * 
+     *  通过插入,删除或移动节点来修改树会使修改之前创建的任何枚举无效。
+     * 
+     * 
      * @see     #breadthFirstEnumeration
      * @see     #postorderEnumeration
      * @return  an enumeration for traversing the tree in depth-first order
@@ -827,6 +1017,16 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Modifying the tree by inserting, removing, or moving a node invalidates
      * any enumerations created before the modification.
      *
+     * <p>
+     *  创建并返回从<code> ancestor </code>到此节点的路径后面的枚举。
+     * 枚举的<code> nextElement()</code>方法首先返回<code> ancestor </code>,然后返回作为该节点的祖先的<code> ancestor </code>的子元素,
+     * 返回此节点。
+     *  创建并返回从<code> ancestor </code>到此节点的路径后面的枚举。枚举的创建是O(m),其中m是该节点和<code> ancestor </code>(包括)之间的节点数。
+     * 每个<code> nextElement()</code>消息是O(1)。<P>。
+     * 
+     *  通过插入,删除或移动节点来修改树会使修改之前创建的任何枚举无效。
+     * 
+     * 
      * @see             #isNodeAncestor
      * @see             #isNodeDescendant
      * @exception       IllegalArgumentException if <code>ancestor</code> is
@@ -847,6 +1047,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Returns true if <code>aNode</code> is a child of this node.  If
      * <code>aNode</code> is null, this method returns false.
      *
+     * <p>
+     * 如果<code> aNode </code>是此节点的子节点,则返回true。如果<code> aNode </code>为null,则此方法返回false。
+     * 
+     * 
      * @return  true if <code>aNode</code> is a child of this node; false if
      *                  <code>aNode</code> is null
      */
@@ -871,6 +1075,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Returns this node's first child.  If this node has no children,
      * throws NoSuchElementException.
      *
+     * <p>
+     *  返回此节点的第一个子节点。如果此节点没有子节点,则抛出NoSuchElementException。
+     * 
+     * 
      * @return  the first child of this node
      * @exception       NoSuchElementException  if this node has no children
      */
@@ -886,6 +1094,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Returns this node's last child.  If this node has no children,
      * throws NoSuchElementException.
      *
+     * <p>
+     *  返回此节点的最后一个子节点。如果此节点没有子节点,则抛出NoSuchElementException。
+     * 
+     * 
      * @return  the last child of this node
      * @exception       NoSuchElementException  if this node has no children
      */
@@ -905,6 +1117,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * <code>aChild</code> and is O(n) where n is the number of children; to
      * traverse the entire array of children, use an enumeration instead.
      *
+     * <p>
+     *  返回此节点的子数组中紧跟<code> aChild </code>后的子节点,该子节点必须是此节点的子节点。如果<code> aChild </code>是最后一个子代,则返回null。
+     * 此方法对<code> aChild </code>执行此节点的子项的线性搜索,并且是O(n),其中n是子节点数;要遍历整个数组的孩子,请使用枚举。
+     * 
+     * 
      * @see             #children
      * @exception       IllegalArgumentException if <code>aChild</code> is
      *                                  null or is not a child of this node
@@ -937,6 +1154,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * performs a linear search of this node's children for <code>aChild</code>
      * and is O(n) where n is the number of children.
      *
+     * <p>
+     *  返回此节点的子数组中紧接在<code> aChild </code>之前的子节点,该子节点必须是此节点的子节点。如果<code> aChild </code>是第一个子代,则返回null。
+     * 此方法对<code> aChild </code>执行此节点的子项的线性搜索,并且是O(n),其中n是子节点数。
+     * 
+     * 
      * @exception       IllegalArgumentException if <code>aChild</code> is null
      *                                          or is not a child of this node
      * @return  the child of this node that immediately precedes
@@ -971,6 +1193,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * same parent as) this node.  A node is its own sibling.  If
      * <code>anotherNode</code> is null, returns false.
      *
+     * <p>
+     *  如果<code> anotherNode </code>是此节点的兄弟节点(与父节点相同),则返回true。节点是它自己的兄弟。
+     * 如果<code> anotherNode </code>为null,则返回false。
+     * 
+     * 
      * @param   anotherNode     node to test as sibling of this node
      * @return  true if <code>anotherNode</code> is a sibling of this node
      */
@@ -1000,6 +1227,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * (if it has no parent or no siblings, this method returns
      * <code>1</code>).
      *
+     * <p>
+     *  返回此节点的兄弟节点数。一个节点是它自己的兄弟节点(如果没有父节点或没有兄弟节点,这个方法返回<code> 1 </code>)。
+     * 
+     * 
      * @return  the number of siblings of this node
      */
     public int getSiblingCount() {
@@ -1020,6 +1251,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * of children; to traverse the entire array, use the parent's child
      * enumeration instead.
      *
+     * <p>
+     * 返回父节点的children数组中此节点的下一个兄弟节点。如果此节点没有父节点或是父节点的最后一个子节点,则返回null。
+     * 该方法执行O(n)的线性搜索,其中n是子节点的数目;要遍历整个数组,请使用父级的子枚举。
+     * 
+     * 
      * @see     #children
      * @return  the sibling of this node that immediately follows this node
      */
@@ -1048,6 +1284,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * first child.  This method performs a linear search that is O(n) where n
      * is the number of children.
      *
+     * <p>
+     *  返回父节点的children数组中此节点的前一个兄弟节点。如果此节点没有父节点或是父节点的第一个子节点,则返回null。此方法执行O(n)的线性搜索,其中n是子数。
+     * 
+     * 
      * @return  the sibling of this node that immediately precedes this node
      */
     public DefaultMutableTreeNode getPreviousSibling() {
@@ -1080,6 +1320,11 @@ public class DefaultMutableTreeNode implements Cloneable,
      * children (e.g. to distinguish files from empty directories), use this
      * method in conjunction with <code>getAllowsChildren</code>
      *
+     * <p>
+     *  如果此节点没有子节点,则返回true。
+     * 为了区分不具有子节点的节点和不能</i>具有子节点的节点(例如,为了将文件与空目录区分开),将此方法与<code> getAllowsChildren </code>。
+     * 
+     * 
      * @see     #getAllowsChildren
      * @return  true if this node has no children
      */
@@ -1093,6 +1338,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * either this node or its first child's first leaf.
      * Returns this node if it is a leaf.
      *
+     * <p>
+     *  查找并返回作为此节点的后代的第一个叶子 - 此节点或其第一个子节点的第一个叶子。如果它是叶子,则返回此节点。
+     * 
+     * 
      * @see     #isLeaf
      * @see     #isNodeDescendant
      * @return  the first leaf in the subtree rooted at this node
@@ -1113,6 +1362,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * either this node or its last child's last leaf.
      * Returns this node if it is a leaf.
      *
+     * <p>
+     *  找到并返回这个节点的后代的最后一个叶 - 这个节点或它的最后一个孩子的最后一个叶。如果它是叶子,则返回此节点。
+     * 
+     * 
      * @see     #isLeaf
      * @see     #isNodeDescendant
      * @return  the last leaf in the subtree rooted at this node
@@ -1143,6 +1396,17 @@ public class DefaultMutableTreeNode implements Cloneable,
      * to enumerate the nodes in the tree and use <code>isLeaf</code>
      * on each node to determine which are leaves.
      *
+     * <p>
+     *  返回此节点后的叶,如果此节点是树中的最后一个叶,则返回null。
+     * <p>
+     *  在这个<code> MutableNode </code>接口的实现中,这个操作是非常低效的。为了确定下一个节点,该方法首先在父的子列表中执行线性搜索,以找到当前节点。
+     * <p>
+     * 该实现使得该操作适合于从已知位置进行短遍历。
+     * 但是要遍历树中的所有叶子,你应该使用<code> depthFirstEnumeration </code>来枚举树中的节点,并在每个节点上使用<code> isLeaf </code>来确定哪些是树叶
+     * 。
+     * 该实现使得该操作适合于从已知位置进行短遍历。
+     * 
+     * 
      * @see     #depthFirstEnumeration
      * @see     #isLeaf
      * @return  returns the next leaf past this node
@@ -1178,6 +1442,17 @@ public class DefaultMutableTreeNode implements Cloneable,
      * to enumerate the nodes in the tree and use <code>isLeaf</code>
      * on each node to determine which are leaves.
      *
+     * <p>
+     *  返回此节点之前的叶,如果此节点是树中的第一个叶,则返回null。
+     * <p>
+     *  在这个<code> MutableNode </code>接口的实现中,这个操作是非常低效的。为了确定先前的节点,该方法首先在父的子列表中执行线性搜索,以便找到当前节点。
+     * <p>
+     *  该实现使得该操作适合于从已知位置进行短遍历。
+     * 但是要遍历树中的所有叶子,你应该使用<code> depthFirstEnumeration </code>来枚举树中的节点,并在每个节点上使用<code> isLeaf </code>来确定哪些是树叶
+     * 。
+     *  该实现使得该操作适合于从已知位置进行短遍历。
+     * 
+     * 
      * @see             #depthFirstEnumeration
      * @see             #isLeaf
      * @return  returns the leaf before this node
@@ -1203,6 +1478,8 @@ public class DefaultMutableTreeNode implements Cloneable,
      * If this node is a leaf, returns <code>1</code>.  This method is O(n)
      * where n is the number of descendants of this node.
      *
+     * <p>
+     * 
      * @see     #isNodeAncestor
      * @return  the number of leaves beneath this node
      */
@@ -1235,6 +1512,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * Returns the result of sending <code>toString()</code> to this node's
      * user object, or the empty string if the node has no user object.
      *
+     * <p>
+     *  返回此节点的后代的叶子总数。如果此节点是叶,则返回<code> 1 </code>。此方法是O(n),其中n是此节点的后代数。
+     * 
+     * 
      * @see     #getUserObject
      */
     public String toString() {
@@ -1250,6 +1531,10 @@ public class DefaultMutableTreeNode implements Cloneable,
      * the new node has no parent or children and has a reference to the same
      * user object, if any.
      *
+     * <p>
+     *  返回将<code> toString()</code>发送到此节点的用户对象的结果,如果节点没有用户对象,则返回空字符串。
+     * 
+     * 
      * @return  a copy of this node
      */
     public Object clone() {

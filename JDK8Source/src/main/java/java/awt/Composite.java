@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,18 @@ import java.awt.image.ColorModel;
  * {@link AWTPermission}.  The permission check will occur when such
  * a custom object is passed to the <code>setComposite</code> method
  * of a <code>Graphics2D</code> retrieved from a {@link Component}.
+ * <p>
+ *  <code> Composite </code>接口与{@link CompositeContext}一起定义了使用底层图形区域组合绘制基元的方法。
+ * 在{@link Graphics2D}上下文中设置了<code> Composite </code>之后,它会将正在呈现的形状,文本或图像与已根据预定义规则呈现的颜色组合。
+ * 实现此接口的类提供了规则和创建特定操作的上下文的方法。
+ *  <code> CompositeContext </code>是合成操作使用的环境,由操作开始之前的<code> Graphics2D </code>创建。
+ *  <code> CompositeContext </code>包含合成操作所需的私有信息和资源。
+ * 当不再需要<code> CompositeContext </code>时,<code> Graphics2D </code>对象处理它以便回收为操作分配的资源。
+ * <p>
+ * 实现<code> Composite </code>的类的实例必须是不可变的,因为<code> Graphics2D </code>在将这些对象设置为<code> setComposite </code>
+ * 方法的属性时,克隆了<code> Graphics2D </code>对象。
+ * 这是为了避免在<code> Composite </code>对象在<code> Graphics2D </code>上下文中设置之后对<code> Composite </code>对象进行修改而导致
+ * 
  * @see AlphaComposite
  * @see CompositeContext
  * @see Graphics2D#setComposite
@@ -72,6 +85,13 @@ public interface Composite {
      * the compositing operation.  In a multi-threaded environment,
      * several contexts can exist simultaneously for a single
      * <code>Composite</code> object.
+     * <p>
+     * 的<code> Graphics2D </code>的未定义的呈现行为。
+     * <p>
+     *  由于此接口必须将目标设备或映像上的像素的内容暴露给潜在的任意代码,因此在直接呈现到屏幕设备时实现此接口的自定义对象的使用由<code> readDisplayPixels </code> {@链接AWTPermission}
+     * 。
+     * 当这样的自定义对象被传递到从{@link Component}检索的<code> Graphics2D </code>的<code> setComposite </code>方法时,将进行权限检查。
+     * 
      * @param srcColorModel  the {@link ColorModel} of the source
      * @param dstColorModel  the <code>ColorModel</code> of the destination
      * @param hints the hint that the context object uses to choose between

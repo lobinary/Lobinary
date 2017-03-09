@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,14 @@ import sun.swing.SwingUtilities2.RepaintListener;
  * Any calls to <code>repaint</code> on one of these will call into the
  * appropriate <code>addDirtyRegion</code> method.
  *
+ * <p>
+ *  此类管理重绘请求,允许重绘的数量最小化,例如通过将多个请求折叠到组件树的成员的单个重绘中。
+ * <p>
+ *  从1.6代码RepaintManager </code>处理Swing的顶级组件(<code> JApplet </code>,<code> JWindow </code>,<code> JFrame
+ *  </code>和<code> JDialog </code>)。
+ * 任何对<code> repaint </code>的调用都将调用适当的<code> addDirtyRegion </code>方法。
+ * 
+ * 
  * @author Arnaud Weber
  */
 public class RepaintManager
@@ -66,6 +75,9 @@ public class RepaintManager
     /**
      * Whether or not the RepaintManager should handle paint requests
      * for top levels.
+     * <p>
+     *  RepaintManager是否应处理顶级的绘图请求。
+     * 
      */
     static final boolean HANDLE_TOP_LEVEL_PAINT;
 
@@ -77,6 +89,9 @@ public class RepaintManager
 
     /**
      * Maps from GraphicsConfiguration to VolatileImage.
+     * <p>
+     *  从GraphicsConfiguration到VolatileImage的映射。
+     * 
      */
     private Map<GraphicsConfiguration,VolatileImage> volatileMap = new
                         HashMap<GraphicsConfiguration,VolatileImage>(1);
@@ -116,6 +131,9 @@ public class RepaintManager
 
     /**
      * Object responsible for hanlding core paint functionality.
+     * <p>
+     *  对象负责核心油漆功能。
+     * 
      */
     private PaintManager paintManager;
 
@@ -126,10 +144,16 @@ public class RepaintManager
     /**
      * Type of VolatileImage which should be used for double-buffered
      * painting.
+     * <p>
+     *  应用于双缓冲绘画的VolatileImage类型。
+     * 
      */
     private static final int volatileBufferType;
     /**
      * Value of the system property awt.nativeDoubleBuffering.
+     * <p>
+     *  系统属性的值awt.nativeDoubleBuffering。
+     * 
      */
     private static boolean nativeDoubleBuffering;
 
@@ -139,12 +163,18 @@ public class RepaintManager
 
     /**
      * Number of <code>beginPaint</code> that have been invoked.
+     * <p>
+     *  已调用的<code> beginPaint </code>数。
+     * 
      */
     private int paintDepth = 0;
 
     /**
      * Type of buffer strategy to use.  Will be one of the BUFFER_STRATEGY_
      * constants.
+     * <p>
+     *  要使用的缓冲区策略的类型。将是BUFFER_STRATEGY_常量之一。
+     * 
      */
     private short bufferStrategyType;
 
@@ -162,22 +192,34 @@ public class RepaintManager
     /**
      * True if we're in the process of painting the dirty regions.  This is
      * set to true in <code>paintDirtyRegions</code>.
+     * <p>
+     *  如果我们正在绘制脏区域的过程,则为真。这在<code> paintDirtyRegions </code>中设置为true。
+     * 
      */
     private boolean painting;
     /**
      * If the PaintManager calls into repaintRoot during painting this field
      * will be set to the root.
+     * <p>
+     *  如果PaintManager在绘画期间调用repaintRoot,此字段将设置为根。
+     * 
      */
     private JComponent repaintRoot;
 
     /**
      * The Thread that has initiated painting.  If null it
      * indicates painting is not currently in progress.
+     * <p>
+     *  开始绘画的线程。如果为空,表示绘画目前不在进行中。
+     * 
      */
     private Thread paintThread;
 
     /**
      * Runnable used to process all repaint/revalidate requests.
+     * <p>
+     *  Runnable用于处理所有重绘/重新验证请求。
+     * 
      */
     private final ProcessingRunnable processingRunnable;
 
@@ -240,6 +282,10 @@ public class RepaintManager
     /**
      * Return the RepaintManager for the calling thread given a Component.
      *
+     * <p>
+     * 返回给定组件的调用线程的RepaintManager。
+     * 
+     * 
      * @param c a Component -- unused in the default implementation, but could
      *          be used by an overridden version to return a different RepaintManager
      *          depending on the Component
@@ -257,6 +303,9 @@ public class RepaintManager
      * Returns the RepaintManager for the specified AppContext.  If
      * a RepaintManager has not been created for the specified
      * AppContext this will return null.
+     * <p>
+     *  返回指定AppContext的RepaintManager。如果没有为指定的AppContext创建RepaintManager,这将返回null。
+     * 
      */
     static RepaintManager currentManager(AppContext appContext) {
         RepaintManager rm = (RepaintManager)appContext.get(repaintManagerKey);
@@ -274,6 +323,12 @@ public class RepaintManager
      * versions of the Swing library. It simply returns the result returned by
      * {@link #currentManager(Component)}.
      *
+     * <p>
+     *  返回给定JComponent的调用线程的RepaintManager。
+     * <p>
+     *  注意：此方法存在于与早期版本的Swing库的向后二进制兼容性。它只返回{@link #currentManager(Component)}返回的结果。
+     * 
+     * 
      * @param c a JComponent -- unused
      * @return the RepaintManager object
      */
@@ -286,6 +341,10 @@ public class RepaintManager
      * Set the RepaintManager that should be used for the calling
      * thread. <b>aRepaintManager</b> will become the current RepaintManager
      * for the calling thread's thread group.
+     * <p>
+     *  设置应该用于调用线程的RepaintManager。 <b> aRepaintManager </b>将成为调用线程的线程组的当前RepaintManager。
+     * 
+     * 
      * @param aRepaintManager  the RepaintManager object to use
      */
     public static void setCurrentManager(RepaintManager aRepaintManager) {
@@ -300,6 +359,10 @@ public class RepaintManager
      * Create a new RepaintManager instance. You rarely call this constructor.
      * directly. To get the default RepaintManager, use
      * RepaintManager.currentManager(JComponent) (normally "this").
+     * <p>
+     *  创建一个新的RepaintManager实例。你很少调用这个构造函数。直。
+     * 要获取默认的RepaintManager,请使用RepaintManager.currentManager(JComponent)(通常为"this")。
+     * 
      */
     public RepaintManager() {
         // Because we can't know what a subclass is doing with the
@@ -331,6 +394,10 @@ public class RepaintManager
      * for the event dispatching thread that will validate the components
      * first isValidateRoot() ancestor.
      *
+     * <p>
+     *  将组件标记为需要布局,并为事件分派线程排队一个runnable,它将首先验证组件isValidateRoot()ancestor。
+     * 
+     * 
      * @see JComponent#isValidateRoot
      * @see #removeInvalidComponent
      */
@@ -351,6 +418,9 @@ public class RepaintManager
         /* Lazily create the invalidateComponents vector and add the
          * validateRoot if it's not there already.  If this validateRoot
          * is already in the vector, we're done.
+         * <p>
+         *  validateRoot如果它还没有。如果这个validateRoot已经在向量中,我们就完成了。
+         * 
          */
         if (invalidComponents == null) {
             invalidComponents = new ArrayList<Component>();
@@ -374,6 +444,10 @@ public class RepaintManager
     /**
      * Remove a component from the list of invalid components.
      *
+     * <p>
+     *  从无效组件列表中删除组件。
+     * 
+     * 
      * @see #addInvalidComponent
      */
     public synchronized void removeInvalidComponent(JComponent component) {
@@ -396,10 +470,15 @@ public class RepaintManager
      * If <i>c</i> already has a dirty region, the rectangle <i>(x,y,w,h)</i>
      * will be unioned with the region that should be redrawn.
      *
+     * <p>
+     *  在应刷新的组件列表中添加组件。如果<i> c已经具有脏区域,则矩形<i>(x,y,w,h)将与应当重绘的区域联合。
+     * 
+     * 
      * @see JComponent#repaint
      */
     private void addDirtyRegion0(Container c, int x, int y, int w, int h) {
         /* Special cases we don't have to bother with.
+        /* <p>
          */
         if ((w <= 0) || (h <= 0) || (c == null)) {
             return;
@@ -420,6 +499,9 @@ public class RepaintManager
          * checking c.isShowing() (and note that it's still possible
          * that c is completely obscured by an opaque ancestor in
          * the specified rectangle).
+         * <p>
+         * 窗口)。这个循环具有与检查c.isShowing()相同的效果(并且注意到c仍然可能被指定矩形中的不透明祖先完全遮蔽)。
+         * 
          */
         Component root = null;
 
@@ -464,6 +546,10 @@ public class RepaintManager
      * If <i>c</i> already has a dirty region, the rectangle <i>(x,y,w,h)</i>
      * will be unioned with the region that should be redrawn.
      *
+     * <p>
+     *  在应刷新的组件列表中添加组件。如果<i> c已经具有脏区域,则矩形<i>(x,y,w,h)将与应当重绘的区域联合。
+     * 
+     * 
      * @param c Component to repaint, null results in nothing happening.
      * @param x X coordinate of the region to repaint
      * @param y Y coordinate of the region to repaint
@@ -485,6 +571,10 @@ public class RepaintManager
      * Adds <code>window</code> to the list of <code>Component</code>s that
      * need to be repainted.
      *
+     * <p>
+     *  将<code>窗口</code>添加到需要重绘的<code> Component </code>的列表中。
+     * 
+     * 
      * @param window Window to repaint, null results in nothing happening.
      * @param x X coordinate of the region to repaint
      * @param y Y coordinate of the region to repaint
@@ -503,6 +593,10 @@ public class RepaintManager
      * Adds <code>applet</code> to the list of <code>Component</code>s that
      * need to be repainted.
      *
+     * <p>
+     *  将<code> applet </code>添加到需要重绘的<code> Component </code>的列表中。
+     * 
+     * 
      * @param applet Applet to repaint, null results in nothing happening.
      * @param x X coordinate of the region to repaint
      * @param y Y coordinate of the region to repaint
@@ -595,6 +689,10 @@ public class RepaintManager
      * Extends the dirty region for the specified component to include
      * the new region.
      *
+     * <p>
+     *  扩展指定组件的脏区域以包括新区域。
+     * 
+     * 
      * @return false if <code>c</code> is not yet marked dirty.
      */
     private synchronized boolean extendDirtyRegion(
@@ -613,6 +711,9 @@ public class RepaintManager
     /** Return the current dirty region for a component.
      *  Return an empty rectangle if the component is not
      *  dirty.
+     * <p>
+     *  如果组件不脏,返回一个空的矩形。
+     * 
      */
     public Rectangle getDirtyRegion(JComponent aComponent) {
         RepaintManager delegate = getDelegate(aComponent);
@@ -632,6 +733,9 @@ public class RepaintManager
     /**
      * Mark a component completely dirty. <b>aComponent</b> will be
      * completely painted during the next paintDirtyRegions() call.
+     * <p>
+     *  标记组件完全脏。 <b> aComponent </b>将在下一次paintDirtyRegions()调用期间完成绘制。
+     * 
      */
     public void markCompletelyDirty(JComponent aComponent) {
         RepaintManager delegate = getDelegate(aComponent);
@@ -645,6 +749,9 @@ public class RepaintManager
     /**
      * Mark a component completely clean. <b>aComponent</b> will not
      * get painted during the next paintDirtyRegions() call.
+     * <p>
+     *  标记组件完全干净。 <b> aComponent </b>不会在下一次paintDirtyRegions()调用期间绘制。
+     * 
      */
     public void markCompletelyClean(JComponent aComponent) {
         RepaintManager delegate = getDelegate(aComponent);
@@ -662,6 +769,10 @@ public class RepaintManager
      * painted during the next paintDirtyRegions(). If computing dirty regions is
      * expensive for your component, use this method and avoid computing dirty region
      * if it return true.
+     * <p>
+     *  如果<b> aComponent </b>将在下一个paintDirtyRegions()期间完全绘制,则返回true的方便方法。
+     * 如果计算脏区域对于您的组件是昂贵的,请使用此方法,并避免在返回true时计算脏区域。
+     * 
      */
     public boolean isCompletelyDirty(JComponent aComponent) {
         RepaintManager delegate = getDelegate(aComponent);
@@ -681,6 +792,10 @@ public class RepaintManager
 
     /**
      * Validate all of the components that have been marked invalid.
+     * <p>
+     *  验证所有已标记为无效的组件。
+     * 
+     * 
      * @see #addInvalidComponent
      */
     public void validateInvalidComponents() {
@@ -714,6 +829,9 @@ public class RepaintManager
      * for backward compatibility in so far as RepaintManager would previously
      * not see paint requests for top levels, so, we have to make sure
      * a subclass correctly paints any dirty top levels.
+     * <p>
+     * 这被调用来处理绘画请求。它需要向后兼容性,因为RepaintManager以前不会看到顶级的绘制请求,因此,我们必须确保子类正确地绘制任何脏的顶级。
+     * 
      */
     private void prePaintDirtyRegions() {
         Map<Component,Rectangle> dirtyComponents;
@@ -770,6 +888,10 @@ public class RepaintManager
     /**
      * Paint all of the components that have been marked dirty.
      *
+     * <p>
+     *  绘制所有已标记为脏的组件。
+     * 
+     * 
      * @see #addDirtyRegion
      */
     public void paintDirtyRegions() {
@@ -868,6 +990,9 @@ public class RepaintManager
     /**
      * Removes any components from roots that are children of
      * root.
+     * <p>
+     *  从根中删除作为根的子项的任何组件。
+     * 
      */
     private void adjustRoots(JComponent root,
                              java.util.List<Component> roots, int index) {
@@ -972,6 +1097,10 @@ public class RepaintManager
      * Returns a string that displays and identifies this
      * object's properties.
      *
+     * <p>
+     *  返回显示和标识此对象属性的字符串。
+     * 
+     * 
      * @return a String representation of this object
      */
     public synchronized String toString() {
@@ -989,6 +1118,10 @@ public class RepaintManager
      * The buffer might be smaller than <code>(proposedWidth,proposedHeight)</code>
      * This happens when the maximum double buffer size as been set for the receiving
      * repaint manager.
+     * <p>
+     *  返回应用作组件<code> c </code>的双缓冲区的屏幕外缓冲区。默认情况下,每个RepaintManager有一个双缓冲区。
+     * 缓冲区可能小于<code>(proposedWidth,proposedHeight)</code>当为接收重绘管理器设置的最大双缓冲区大小时,会发生这种情况。
+     * 
      */
     public Image getOffscreenBuffer(Component c,int proposedWidth,int proposedHeight) {
         RepaintManager delegate = getDelegate(c);
@@ -1007,6 +1140,12 @@ public class RepaintManager
    * This happens when the maximum double buffer size has been set for this
    * repaint manager.
    *
+   * <p>
+   *  返回一个易变的离屏缓冲区,该缓冲区应该用作指定组件<code> c </code>的双缓冲区。
+   * 返回的图像将是VolatileImage的实例,如果无法实例化VolatileImage对象,则返回null。
+   * 这个缓冲区可能小于<code>(proposedWidth,proposedHeight)</code>。当为此重绘管理器设置了最大双缓冲区大小时,会发生这种情况。
+   * 
+   * 
    * @see java.awt.image.VolatileImage
    * @since 1.4
    */
@@ -1141,6 +1280,10 @@ public class RepaintManager
     /**
      * Returns the maximum double buffer size.
      *
+     * <p>
+     *  返回最大双缓冲区大小。
+     * 
+     * 
      * @return a Dimension object representing the maximum size
      */
     public Dimension getDoubleBufferMaximumSize() {
@@ -1168,6 +1311,10 @@ public class RepaintManager
      * paint performance on the given platform and it is not recommended
      * that programs modify this property directly.
      *
+     * <p>
+     *  在此RepaintManager中启用或禁用双缓冲。小心：此属性的默认值设置为在给定平台上获得最佳涂料性能,不建议程序直接修改此属性。
+     * 
+     * 
      * @param aFlag  true to activate double buffering
      * @see #isDoubleBufferingEnabled
      */
@@ -1188,6 +1335,11 @@ public class RepaintManager
      * On platforms where native double buffering is not supported,
      * the default value will be <code>true</code>.
      *
+     * <p>
+     * 如果此RepaintManager是双缓冲的,则返回true。此属性的默认值可能因平台而异。
+     * 在AWT中支持原生双缓冲的平台上,默认值为<code> false </code>,以避免在Swing中进行不必要的缓冲。在不支持本机双缓冲的平台上,默认值为<code> true </code>。
+     * 
+     * 
      * @return true if this object is double buffered
      */
     public boolean isDoubleBufferingEnabled() {
@@ -1198,6 +1350,9 @@ public class RepaintManager
      * This resets the double buffer. Actually, it marks the double buffer
      * as invalid, the double buffer will then be recreated on the next
      * invocation of getOffscreenBuffer.
+     * <p>
+     *  这将重置双缓冲区。实际上,它将双缓冲区标记为无效,然后将在下一次调用getOffscreenBuffer时重新创建双缓冲区。
+     * 
      */
     void resetDoubleBuffer() {
         if (standardDoubleBuffer != null) {
@@ -1207,6 +1362,9 @@ public class RepaintManager
 
     /**
      * This resets the volatile double buffer.
+     * <p>
+     *  这将重置易失性双缓冲区。
+     * 
      */
     void resetVolatileDoubleBuffer(GraphicsConfiguration gc) {
         Image image = volatileMap.remove(gc);
@@ -1218,6 +1376,9 @@ public class RepaintManager
     /**
      * Returns true if we should use the <code>Image</code> returned
      * from <code>getVolatileOffscreenBuffer</code> to do double buffering.
+     * <p>
+     *  如果我们应该使用从<code> getVolatileOffscreenBuffer </code>返回的<code> Image </code>来执行双缓冲,则返回true。
+     * 
      */
     boolean useVolatileDoubleBuffer() {
         return volatileImageBufferEnabled;
@@ -1226,6 +1387,9 @@ public class RepaintManager
     /**
      * Returns true if the current thread is the thread painting.  This
      * will return false if no threads are painting.
+     * <p>
+     *  如果当前线程是线程绘制,则返回true。如果没有线程正在绘制,这将返回false。
+     * 
      */
     private synchronized boolean isPaintingThread() {
         return (Thread.currentThread() == paintThread);
@@ -1241,6 +1405,10 @@ public class RepaintManager
     /**
      * Paints a region of a component
      *
+     * <p>
+     *  绘制组件的区域
+     * 
+     * 
      * @param paintingComponent Component to paint
      * @param bufferComponent Component to obtain buffer for
      * @param g Graphics to paint to
@@ -1272,6 +1440,10 @@ public class RepaintManager
     /**
      * Does a copy area on the specified region.
      *
+     * <p>
+     *  在指定区域上是否有复制区域。
+     * 
+     * 
      * @param clip Whether or not the copyArea needs to be clipped to the
      *             Component's bounds.
      */
@@ -1295,6 +1467,10 @@ public class RepaintManager
      * has been immediately repainted, that is without scheduling a repaint runnable,
      * due to performing a "blit" (via calling the {@code copyArea} method).
      *
+     * <p>
+     *  由于执行"blit"(通过调用{@code copyArea}方法),通知附加的重绘监听器{@code c}组件的某个区域已被立即重绘,即没有计划重绘可运行。
+     * 
+     * 
      * @param c the component
      * @param x the x coordinate of the area
      * @param y the y coordinate of the area
@@ -1322,6 +1498,15 @@ public class RepaintManager
      *   repaintManager.endPaint();
      * }
      * </pre>
+     * <p>
+     * 在任何paint / copyArea方法调用之前调用。这之后将调用<code> endPaint </code>。
+     *  <b>警告</b>：此方法的调用者需要将调用包装在<code> try / finally </code>中,否则如果在绘制过程中抛出异常,RepaintManager可能会处于状态其中屏幕不被更新,
+     * 例如：。
+     * 在任何paint / copyArea方法调用之前调用。这之后将调用<code> endPaint </code>。
+     * <pre>
+     *  repaintManager.beginPaint(); try {repaintManager.paint(...); } finally {repaintManager.endPaint(); }
+     * }。
+     * </pre>
      */
     void beginPaint() {
         boolean multiThreadedPaint = false;
@@ -1343,6 +1528,9 @@ public class RepaintManager
 
     /**
      * Invoked after <code>beginPaint</code> has been invoked.
+     * <p>
+     *  在调用<code> beginPaint </code>之后调用。
+     * 
      */
     void endPaint() {
         if (isPaintingThread()) {
@@ -1367,6 +1555,11 @@ public class RepaintManager
      * <p>
      * WARNING: This method is invoked from the native toolkit thread, be
      * very careful as to what methods this invokes!
+     * <p>
+     *  如果可能,这将显示组件的以前渲染的部分。如果成功,这将返回true,否则为false。
+     * <p>
+     *  警告：此方法是从本机工具包线程调用,非常小心,这是什么方法调用！
+     * 
      */
     boolean show(Container c, int x, int y, int w, int h) {
         return getPaintManager().show(c, x, y, w, h);
@@ -1375,6 +1568,9 @@ public class RepaintManager
     /**
      * Invoked when the doubleBuffered or useTrueDoubleBuffering
      * properties of a JRootPane change.  This may come in on any thread.
+     * <p>
+     *  当JRootPane的doubleBuffered或useTrueDoubleBuffering属性更改时调用。这可能在任何线程进来。
+     * 
      */
     void doubleBufferingChanged(JRootPane rootPane) {
         getPaintManager().doubleBufferingChanged(rootPane);
@@ -1384,6 +1580,10 @@ public class RepaintManager
      * Sets the <code>PaintManager</code> that is used to handle all
      * double buffered painting.
      *
+     * <p>
+     *  设置用于处理所有双缓冲绘画的<code> PaintManager </code>。
+     * 
+     * 
      * @param paintManager The PaintManager to use.  Passing in null indicates
      *        the fallback PaintManager should be used.
      */
@@ -1449,10 +1649,16 @@ public class RepaintManager
      * PaintManager is used to handle all double buffered painting for
      * Swing.  Subclasses should call back into the JComponent method
      * <code>paintToOffscreen</code> to handle the actual painting.
+     * <p>
+     *  PaintManager用于处理Swing的所有双缓冲绘画。子类应该回调JComponent方法<code> paintToOffscreen </code>来处理实际绘画。
+     * 
      */
     static class PaintManager {
         /**
          * RepaintManager the PaintManager has been installed on.
+         * <p>
+         *  RepaintManager中已经安装了PaintManager。
+         * 
          */
         protected RepaintManager repaintManager;
         boolean isRepaintingRoot;
@@ -1460,6 +1666,10 @@ public class RepaintManager
         /**
          * Paints a region of a component
          *
+         * <p>
+         *  绘制组件的区域
+         * 
+         * 
          * @param paintingComponent Component to paint
          * @param bufferComponent Component to obtain buffer for
          * @param g Graphics to paint to
@@ -1511,6 +1721,9 @@ public class RepaintManager
 
         /**
          * Does a copy area on the specified region.
+         * <p>
+         *  在指定区域上是否有复制区域。
+         * 
          */
         public void copyArea(JComponent c, Graphics g, int x, int y, int w,
                              int h, int deltaX, int deltaY, boolean clip) {
@@ -1519,12 +1732,18 @@ public class RepaintManager
 
         /**
          * Invoked prior to any calls to paint or copyArea.
+         * <p>
+         *  在任何调用paint或copyArea之前调用。
+         * 
          */
         public void beginPaint() {
         }
 
         /**
          * Invoked to indicate painting has been completed.
+         * <p>
+         *  调用指示绘画已完成。
+         * 
          */
         public void endPaint() {
         }
@@ -1533,6 +1752,9 @@ public class RepaintManager
          * Shows a region of a previously rendered component.  This
          * will return true if successful, false otherwise.  The default
          * implementation returns false.
+         * <p>
+         * 显示先前渲染的组件的区域。如果成功,则返回true,否则返回false。默认实现返回false。
+         * 
          */
         public boolean show(Container c, int x, int y, int w, int h) {
             return false;
@@ -1541,12 +1763,18 @@ public class RepaintManager
         /**
          * Invoked when the doubleBuffered or useTrueDoubleBuffering
          * properties of a JRootPane change.  This may come in on any thread.
+         * <p>
+         *  当JRootPane的doubleBuffered或useTrueDoubleBuffering属性更改时调用。这可能在任何线程进来。
+         * 
          */
         public void doubleBufferingChanged(JRootPane rootPane) {
         }
 
         /**
          * Paints a portion of a component to an offscreen buffer.
+         * <p>
+         *  将组件的一部分绘制到屏幕外缓冲区。
+         * 
          */
         protected void paintDoubleBuffered(JComponent c, Image image,
                             Graphics g, int clipX, int clipY,
@@ -1592,6 +1820,9 @@ public class RepaintManager
         /**
          * If <code>image</code> is non-null with a positive size it
          * is returned, otherwise null is returned.
+         * <p>
+         *  如果<code> image </code>为非null,则返回正大小,否则返回null。
+         * 
          */
         private Image getValidImage(Image image) {
             if (image != null && image.getWidth(null) > 0 &&
@@ -1606,6 +1837,9 @@ public class RepaintManager
          * from <code>root.repaint</code> in that if the RepaintManager is
          * currently processing paint requests it'll process this request
          * with the current set of requests.
+         * <p>
+         *  计划指定组件的重绘。这不同于<code> root.repaint </code>,因为如果RepaintManager当前正在处理绘图请求,它将使用当前请求集处理此请求。
+         * 
          */
         protected void repaintRoot(JComponent root) {
             assert (repaintManager.repaintRoot == null);
@@ -1620,6 +1854,9 @@ public class RepaintManager
         /**
          * Returns true if the component being painted is the root component
          * that was previously passed to <code>repaintRoot</code>.
+         * <p>
+         *  如果要绘制的组件是先前传递到<code> repaintRoot </code>的根组件,则返回true。
+         * 
          */
         protected boolean isRepaintingRoot() {
             return isRepaintingRoot;
@@ -1628,6 +1865,9 @@ public class RepaintManager
         /**
          * Cleans up any state.  After invoked the PaintManager will no
          * longer be used anymore.
+         * <p>
+         *  清理任何状态。调用后,PaintManager将不再使用。
+         * 
          */
         protected void dispose() {
         }
@@ -1646,6 +1886,9 @@ public class RepaintManager
      * schedules a callback to notify all RepaintManagers of the display
      * changes. Only one DisplayChangedHandler is ever installed. The
      * singleton instance will schedule notification for all AppContexts.
+     * <p>
+     *  安装侦听器以检测显示更改。当显示更改时,调度回调以通知所有重绘管理器显示更改。只有一个DisplayChangedHandler被安装。单例实例将为所有AppContexts安排通知。
+     * 
      */
     private static final class DisplayChangedHandler implements
                                              DisplayChangedListener {
@@ -1686,6 +1929,9 @@ public class RepaintManager
 
     /**
      * Runnable used to process all repaint/revalidate requests.
+     * <p>
+     *  Runnable用于处理所有重绘/重新验证请求。
+     * 
      */
     private final class ProcessingRunnable implements Runnable {
         // If true, we're wainting on the EventQueue.
@@ -1694,6 +1940,8 @@ public class RepaintManager
         /**
          * Marks this processing runnable as pending. If this was not
          * already marked as pending, true is returned.
+         * <p>
+         *  将此处理标记为待处理。如果这未被标记为待处理,则返回true。
          */
         public synchronized boolean markPending() {
             if (!pending) {

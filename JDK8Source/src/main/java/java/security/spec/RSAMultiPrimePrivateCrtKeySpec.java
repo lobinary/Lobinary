@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.math.BigInteger;
  * PKCS#1 v2.1, using the Chinese Remainder Theorem (CRT) information
  * values for efficiency.
  *
+ * <p>
+ *  该类指定了PKCS#1 v2.1中定义的RSA多主密钥,使用中国剩余定理(CRT)信息值来提高效率。
+ * 
+ * 
  * @author Valerie Peng
  *
  *
@@ -66,6 +71,13 @@ public class RSAMultiPrimePrivateCrtKeySpec extends RSAPrivateKeySpec {
     * are copied to protect against subsequent modification when
     * constructing this object.
     *
+    * <p>
+    *  创建一个新的{@code RSAMultiPrimePrivateCrtKeySpec}给定在PKCS#1 v2.1中定义的模数,publicExponent,privateExponent,prim
+    * eP,primeQ,primeExponentP,primeExponentQ,crtCoefficient和otherPrimeInfo。
+    * 
+    *  <p>请注意,复制{@code otherPrimeInfo}的内容以防止在构建此对象时进行后续修改。
+    * 
+    * 
     * @param modulus the modulus n.
     * @param publicExponent the public exponent e.
     * @param privateExponent the private exponent d.
@@ -147,6 +159,10 @@ public class RSAMultiPrimePrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the public exponent.
      *
+     * <p>
+     *  返回公共指数。
+     * 
+     * 
      * @return the public exponent.
      */
     public BigInteger getPublicExponent() {
@@ -156,6 +172,10 @@ public class RSAMultiPrimePrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the primeP.
      *
+     * <p>
+     *  返回primeP。
+     * 
+     * 
      * @return the primeP.
      */
     public BigInteger getPrimeP() {
@@ -165,6 +185,10 @@ public class RSAMultiPrimePrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the primeQ.
      *
+     * <p>
+     *  返回primeQ。
+     * 
+     * 
      * @return the primeQ.
      */
     public BigInteger getPrimeQ() {
@@ -174,6 +198,10 @@ public class RSAMultiPrimePrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the primeExponentP.
      *
+     * <p>
+     *  返回primeExponentP。
+     * 
+     * 
      * @return the primeExponentP.
      */
     public BigInteger getPrimeExponentP() {
@@ -183,6 +211,10 @@ public class RSAMultiPrimePrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the primeExponentQ.
      *
+     * <p>
+     *  返回primeExponentQ。
+     * 
+     * 
      * @return the primeExponentQ.
      */
     public BigInteger getPrimeExponentQ() {
@@ -192,6 +224,10 @@ public class RSAMultiPrimePrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the crtCoefficient.
      *
+     * <p>
+     *  返回crtCoefficient。
+     * 
+     * 
      * @return the crtCoefficient.
      */
     public BigInteger getCrtCoefficient() {
@@ -202,6 +238,9 @@ public class RSAMultiPrimePrivateCrtKeySpec extends RSAPrivateKeySpec {
      * Returns a copy of the otherPrimeInfo or null if there are
      * only two prime factors (p and q).
      *
+     * <p>
+     *  返回otherPrimeInfo的副本,如果只有两个素因子(p和q),则返回null。
+     * 
      * @return the otherPrimeInfo. Returns a new array each
      * time this method is called.
      */

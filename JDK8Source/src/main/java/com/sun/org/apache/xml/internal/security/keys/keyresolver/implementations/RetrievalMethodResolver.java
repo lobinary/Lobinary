@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations;
 
@@ -67,6 +76,11 @@ import org.xml.sax.SAXException;
  * RetrievalMethodResolver cannot handle itself, resolving of the extracted
  * element is delegated back to the KeyResolver mechanism.
  *
+ * <p>
+ *  RetrievalMethodResolver可以从其他位置检索公钥和证书。使用指向位置的ds：RetrievalMethod元素指定位置。
+ * 这包括处理未封装在XML结构中的原始(二进制)X.509证书。如果检索过程遇到RetrievalMethodResolver无法处理的元素,则将解析的元素委托给KeyResolver机制。
+ * 
+ * 
  * @author $Author: raul $ modified by Dave Garcia
  */
 public class RetrievalMethodResolver extends KeyResolverSpi {
@@ -78,6 +92,10 @@ public class RetrievalMethodResolver extends KeyResolverSpi {
     /**
      * Method engineResolvePublicKey
      * @inheritDoc
+     * <p>
+     *  方法engineResolvePublicKey @inheritDoc
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -154,6 +172,10 @@ public class RetrievalMethodResolver extends KeyResolverSpi {
     /**
      * Method engineResolveX509Certificate
      * @inheritDoc
+     * <p>
+     *  方法engineResolveX509Certificate @inheritDoc
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param storage
@@ -223,6 +245,10 @@ public class RetrievalMethodResolver extends KeyResolverSpi {
 
     /**
      * Retrieves a x509Certificate from the given information
+     * <p>
+     * 从给定的信息检索x509证书
+     * 
+     * 
      * @param e
      * @param baseURI
      * @param storage
@@ -245,6 +271,10 @@ public class RetrievalMethodResolver extends KeyResolverSpi {
 
     /**
      * Retrieves a PublicKey from the given information
+     * <p>
+     *  从给定的信息中检索PublicKey
+     * 
+     * 
      * @param e
      * @param baseURI
      * @param storage
@@ -299,6 +329,10 @@ public class RetrievalMethodResolver extends KeyResolverSpi {
 
     /**
      * Resolves the input from the given retrieval method
+     * <p>
+     *  解决给定检索方法的输入
+     * 
+     * 
      * @return
      * @throws XMLSecurityException
      */
@@ -322,6 +356,10 @@ public class RetrievalMethodResolver extends KeyResolverSpi {
     /**
      * Parses a byte array and returns the parsed Element.
      *
+     * <p>
+     *  解析一个字节数组并返回解析的Element。
+     * 
+     * 
      * @param bytes
      * @return the Document Element after parsing bytes
      * @throws KeyResolverException if something goes wrong
@@ -346,6 +384,9 @@ public class RetrievalMethodResolver extends KeyResolverSpi {
     /**
      * Method engineResolveSecretKey
      * @inheritDoc
+     * <p>
+     *  方法engineResolveSecretKey @inheritDoc
+     * 
      * @param element
      * @param baseURI
      * @param storage

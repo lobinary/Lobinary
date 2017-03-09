@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -11,6 +12,7 @@ package org.omg.PortableInterceptor;
 
 /** The object reference factory.  This provides the capability of
   * creating an object reference.
+  * <p>
   */
 public interface ObjectReferenceFactory extends org.omg.CORBA.portable.ValueBase
 {
@@ -18,6 +20,9 @@ public interface ObjectReferenceFactory extends org.omg.CORBA.portable.ValueBase
   /** make_object creates a CORBA object reference according
     * to the data in this template, with the given repository ID and
     * object ID.
+    * <p>
+    *  创建对象引用。
+    * 
     */
   public abstract org.omg.CORBA.Object make_object (String repositoryId, byte[] object_id);
 

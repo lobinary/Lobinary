@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XSLTCDTMManager.java,v 1.2 2005/08/16 22:32:54 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XSLTCDTMManager.java,v 1.2 2005/08/16 22:32:54 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.xsltc.dom;
 
@@ -49,6 +62,9 @@ import org.xml.sax.XMLReader;
 
 /**
  * The default implementation for the DTMManager.
+ * <p>
+ *  DTMManager的默认实现。
+ * 
  */
 public class XSLTCDTMManager extends DTMManagerDefault
 {
@@ -62,6 +78,9 @@ public class XSLTCDTMManager extends DTMManagerDefault
     /**
      * Constructor DTMManagerDefault
      *
+     * <p>
+     *  构造函数DTMManagerDefault
+     * 
      */
     public XSLTCDTMManager()
     {
@@ -72,6 +91,9 @@ public class XSLTCDTMManager extends DTMManagerDefault
      * Obtain a new instance of a <code>DTMManager</code>.
      * This static method creates a new factory instance.
      * The current implementation just returns a new XSLTCDTMManager instance.
+     * <p>
+     *  获取<code> DTMManager </code>的新实例。这个静态方法创建一个新的工厂实例。当前实现只返回一个新的XSLTCDTMManager实例。
+     * 
      */
     public static XSLTCDTMManager newInstance()
     {
@@ -82,6 +104,10 @@ public class XSLTCDTMManager extends DTMManagerDefault
      * Creates a new instance of the XSLTC DTM Manager service.
      * Creates a new instance of the default class
      * <code>com.sun.org.apache.xalan.internal.xsltc.dom.XSLTCDTMManager</code>.
+     * <p>
+     *  创建XSLTC DTM管理器服务的新实例。
+     * 创建默认类<code> com.sun.org.apache.xalan.internal.xsltc.dom.XSLTCDTMManager </code>的新实例。
+     * 
      */
       public static XSLTCDTMManager createNewDTMManagerInstance() {
          return newInstance();
@@ -96,6 +122,11 @@ public class XSLTCDTMManager extends DTMManagerDefault
      * (I think more parameters will need to be added for error handling, and
      * entity resolution).
      *
+     * <p>
+     * 获取DTM的实例,加载来自指定源的内容。如果唯一标志为真,将始终返回一个新实例。否则,由DTMManager返回一个新的实例或者它已经创建的实例,并且可能被别人使用。
+     *  (我认为需要添加更多的参数用于错误处理和实体解析)。
+     * 
+     * 
      * @param source the specification of the source object.
      * @param unique true if the returned DTM must be unique, probably because it
      * is going to be mutated.
@@ -126,6 +157,11 @@ public class XSLTCDTMManager extends DTMManagerDefault
      * (I think more parameters will need to be added for error handling, and
      * entity resolution).
      *
+     * <p>
+     *  获取DTM的实例,加载来自指定源的内容。如果唯一标志为真,将始终返回一个新实例。否则,由DTMManager返回一个新的实例或者它已经创建的实例,并且可能被别人使用。
+     *  (我认为需要添加更多的参数用于错误处理和实体解析)。
+     * 
+     * 
      * @param source the specification of the source object.
      * @param unique true if the returned DTM must be unique, probably because it
      * is going to be mutated.
@@ -156,6 +192,11 @@ public class XSLTCDTMManager extends DTMManagerDefault
      * (I think more parameters will need to be added for error handling, and
      * entity resolution).
      *
+     * <p>
+     *  获取DTM的实例,加载来自指定源的内容。如果唯一标志为真,将始终返回一个新实例。否则,由DTMManager返回一个新的实例或者它已经创建的实例,并且可能被别人使用。
+     *  (我认为需要添加更多的参数用于错误处理和实体解析)。
+     * 
+     * 
      * @param source the specification of the source object.
      * @param unique true if the returned DTM must be unique, probably because it
      * is going to be mutated.
@@ -189,6 +230,11 @@ public class XSLTCDTMManager extends DTMManagerDefault
      * (I think more parameters will need to be added for error handling, and
      * entity resolution).
      *
+     * <p>
+     * 获取DTM的实例,加载来自指定源的内容。如果唯一标志为真,将始终返回一个新实例。否则,由DTMManager返回一个新的实例或者它已经创建的实例,并且可能被别人使用。
+     *  (我认为需要添加更多的参数用于错误处理和实体解析)。
+     * 
+     * 
      * @param source the specification of the source object.
      * @param unique true if the returned DTM must be unique, probably because it
      * is going to be mutated.
@@ -226,6 +272,10 @@ public class XSLTCDTMManager extends DTMManagerDefault
      * (I think more parameters will need to be added for error handling, and
      * entity resolution).
      *
+     * <p>
+     *  获取DTM的实例,加载来自指定源的内容。如果唯一标志为真,将始终返回一个新实例。否则,由DTMManager返回一个新的实例或者它已经创建的实例,并且可能被别人使用。
+     *  (我认为需要添加更多的参数用于错误处理和实体解析)。
+     * 
      * @param source the specification of the source object.
      * @param unique true if the returned DTM must be unique, probably because it
      * is going to be mutated.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,15 @@ import javax.swing.event.*;
  * enables subclasses to easily specialize the rendering
  * without concern for the layout aspects.
  *
+ * <p>
+ *  包线的纯文本视图(只有一种字体和颜色的文本)。此视图期望其关联元素具有表示其应该包装的行的子元素。它被实现为包含逻辑线视图的垂直框。
+ * 逻辑行视图是嵌套类,如果逻辑行太宽,不能在分配内部,则将逻辑行作为多个物理行。线视图利用外部类的状态来减少它们的内存需求。
+ * <p>
+ *  线视图通过<code> drawLine </code>方法进行所有渲染,然后通过<code> drawSelectedText </code>和<code> drawUnselectedText </code>
+ * 方法进行所有渲染。
+ * 这使得子类能够容易地专门化渲染,而不关心布局方面。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     View
  */
@@ -56,6 +66,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * Creates a new WrappedPlainView.  Lines will be wrapped
      * on character boundaries.
      *
+     * <p>
+     *  创建一个新的WrappedPlainView。行将被包裹在字符边界上。
+     * 
+     * 
      * @param elem the element underlying the view
      */
     public WrappedPlainView(Element elem) {
@@ -67,6 +81,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * either character or word boundaries depending upon the
      * setting of the wordWrap parameter.
      *
+     * <p>
+     *  创建一个新的WrappedPlainView。根据wordWrap参数的设置,可以在字符或字边界上包装线。
+     * 
+     * 
      * @param elem the element underlying the view
      * @param wordWrap should lines be wrapped on word boundaries?
      */
@@ -78,6 +96,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
     /**
      * Returns the tab size set for the document, defaulting to 8.
      *
+     * <p>
+     *  返回为文档设置的选项卡大小,默认值为8。
+     * 
+     * 
      * @return the tab size
      */
     protected int getTabSize() {
@@ -93,6 +115,11 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * <code>drawSelectedText</code> so that the way selected and
      * unselected text are rendered can be customized.
      *
+     * <p>
+     * 呈现一行文本,在结尾处抑制空格,并展开任何标签。
+     * 这被实现为调用方法<code> drawUnselectedText </code>和<code> drawSelectedText </code>,以便可以定制所选和未选择的文本的呈现方式。
+     * 
+     * 
      * @param p0 the starting document location to use &gt;= 0
      * @param p1 the ending document location to use &gt;= p1
      * @param g the graphics context
@@ -164,6 +191,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * Renders the given range in the model as normal unselected
      * text.
      *
+     * <p>
+     *  将模型中的给定范围渲染为正常未选择的文本。
+     * 
+     * 
      * @param g the graphics context
      * @param x the starting X coordinate &gt;= 0
      * @param y the starting Y coordinate &gt;= 0
@@ -189,6 +220,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * the hosting component.  It assumes the highlighter will render
      * the selected background.
      *
+     * <p>
+     *  将模型中的给定范围渲染为选定文本。这被实现来渲染在托管组件中指定的颜色的文本。它假定荧光笔将呈现所选择的背景。
+     * 
+     * 
      * @param g the graphics context
      * @param x the starting X coordinate &gt;= 0
      * @param y the starting Y coordinate &gt;= 0
@@ -212,6 +247,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * Gives access to a buffer that can be used to fetch
      * text from the associated document.
      *
+     * <p>
+     *  提供对可用于从相关联的文档获取文本的缓冲区的访问。
+     * 
+     * 
      * @return the buffer
      */
     protected final Segment getLineBuffer() {
@@ -228,6 +267,9 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * It will either break at word or character boundaries
      * depending upon the break argument given at
      * construction.
+     * <p>
+     *  这由嵌套换行视图调用以确定中断位置。这可以重新实现以改变断路行为。它将根据在构造时给出的断裂参数在字或字符边界处断开。
+     * 
      */
     protected int calculateBreakPosition(int p0, int p1) {
         int p;
@@ -255,6 +297,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * implementation creates a child view for each
      * child element.
      *
+     * <p>
+     *  加载所有子项以初始化视图。这由<code> setParent </code>方法调用。子类可以重新实现这一点,以不同的方式初始化它们的子视图。默认实现为每个子元素创建一个子视图。
+     * 
+     * 
      * @param f the view factory
      */
     protected void loadChildren(ViewFactory f) {
@@ -272,6 +318,9 @@ public class WrappedPlainView extends BoxView implements TabExpander {
     /**
      * Update the child views in response to a
      * document event.
+     * <p>
+     *  响应文档事件更新子视图。
+     * 
      */
     void updateChildren(DocumentEvent e, Shape a) {
         Element elem = getElement();
@@ -302,6 +351,9 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * of text.  This is used by the fragments
      * broken off of this view as well as this
      * view itself.
+     * <p>
+     *  加载具有给定文本范围的文本缓冲区。这被从该视图断开的片断以及此视图本身使用。
+     * 
      */
     final void loadText(Segment segment, int p0, int p1) {
         try {
@@ -326,6 +378,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * This implementation does not support things like centering so it
      * ignores the tabOffset argument.
      *
+     * <p>
+     * 返回给定参考位置后的下一个制表符停止位置。这个实现不支持像定中心这样的东西,所以它忽略了tabOffset参数。
+     * 
+     * 
      * @param x the current position &gt;= 0
      * @param tabOffset the position within the text stream
      *   that the tab occurred at &gt;= 0.
@@ -347,6 +403,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * selection positions, selection colors, and font
      * metrics for the nested lines to use.
      *
+     * <p>
+     *  使用给定的渲染表面和该表面上的区域渲染。这被实现为存储要使用的嵌套行的选择位置,选择颜色和字体度量。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param a the allocated region to render into
      *
@@ -374,6 +434,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * layout of the view along the given axis, if it
      * has any layout duties.
      *
+     * <p>
+     *  设置视图的大小。这应该导致沿给定轴的视图的布局,如果它有任何布局职责。
+     * 
+     * 
      * @param width the width &gt;= 0
      * @param height the height &gt;= 0
      */
@@ -397,6 +461,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * the metrics to determine the height of the potentially
      * wrapped lines).
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。这被实现以在首先确保当前字体度量被缓存(对于使用度量来确定潜在包装的行的高度的嵌套线)之后提供超类行为。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return  the span the view would like to be rendered into.
      *           Typically the view is told to render into the span
@@ -417,6 +485,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * the metrics to determine the height of the potentially
      * wrapped lines).
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。这被实现以在首先确保当前字体度量被缓存(对于使用度量来确定潜在包装的行的高度的嵌套线)之后提供超类行为。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return  the span the view would like to be rendered into.
      *           Typically the view is told to render into the span
@@ -437,6 +509,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * the metrics to determine the height of the potentially
      * wrapped lines).
      *
+     * <p>
+     *  确定沿轴的此视图的最大跨度。这被实现以在首先确保当前字体度量被缓存(对于使用度量来确定潜在包装的行的高度的嵌套线)之后提供超类行为。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return  the span the view would like to be rendered into.
      *           Typically the view is told to render into the span
@@ -454,6 +530,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * document in a location that this view is responsible for.
      * This is implemented to simply update the children.
      *
+     * <p>
+     *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。这被实现以简单地更新孩子。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -476,6 +556,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * document in a location that this view is responsible for.
      * This is implemented to simply update the children.
      *
+     * <p>
+     * 提供通知,说明该视图负责的位置中的文档被删除了。这被实现以简单地更新孩子。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -497,6 +581,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * Gives notification from the document that attributes were changed
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -527,6 +615,9 @@ public class WrappedPlainView extends BoxView implements TabExpander {
      * This class tries to be lightweight by carrying little
      * state of it's own and sharing the state of the outer class
      * with it's sibblings.
+     * <p>
+     *  如果不适合分配的水平空间,则折线的简单视图。这个类试图通过携带它自己的小状态和共享外部类的状态与它的sibblings是轻量级的。
+     * 
      */
     class WrappedLine extends View {
 
@@ -539,6 +630,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
          * Determines the preferred span for this view along an
          * axis.
          *
+         * <p>
+         *  确定沿着轴的此视图的首选跨度。
+         * 
+         * 
          * @param axis may be either X_AXIS or Y_AXIS
          * @return   the span the view would like to be rendered into.
          *           Typically the view is told to render into the span
@@ -571,6 +666,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
          * surface.  The view may need to do layout and create child
          * views to enable itself to render into the given allocation.
          *
+         * <p>
+         *  使用给定的渲染表面和该表面上的区域渲染。视图可能需要进行布局和创建子视图,以使自身能够呈现给定的分配。
+         * 
+         * 
          * @param g the rendering surface to use
          * @param a the allocated region to render into
          * @see View#paint
@@ -609,6 +708,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
          * Provides a mapping from the document model coordinate space
          * to the coordinate space of the view mapped to it.
          *
+         * <p>
+         *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+         * 
+         * 
          * @param pos the position to convert
          * @param a the allocated region to render into
          * @return the bounding box of the given position is returned
@@ -653,6 +756,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
          * Provides a mapping from the view coordinate space to the logical
          * coordinate space of the model.
          *
+         * <p>
+         *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+         * 
+         * 
          * @param fx the X coordinate
          * @param fy the Y coordinate
          * @param a the allocated region to render into
@@ -744,6 +851,9 @@ public class WrappedPlainView extends BoxView implements TabExpander {
         /**
          * Returns line cache. If the cache was GC'ed, recreates it.
          * If there's no cache, returns null
+         * <p>
+         *  返回行缓存。如果缓存是GC'ed,重新创建它。如果没有缓存,返回null
+         * 
          */
         final int[] getLineEnds() {
             if (lineCache == null) {
@@ -761,6 +871,10 @@ public class WrappedPlainView extends BoxView implements TabExpander {
 
         /**
          * Creates line cache if text breaks into more than one physical line.
+         * <p>
+         *  如果文本分成多个物理行,则创建行缓存。
+         * 
+         * 
          * @param startPos position to start breaking from
          * @return the cache created, ot null if text breaks into one line
          */
@@ -824,6 +938,8 @@ public class WrappedPlainView extends BoxView implements TabExpander {
          * Binary search in the cache for line containing specified offset
          * (which is relative to the beginning of the view). This method
          * assumes that cache exists.
+         * <p>
+         *  在高速缓存中对包含指定偏移量(其相对于视图的开始)的行进行二进制搜索。此方法假定高速缓存存在。
          */
         private int findLine(int offset) {
             int[] lineEnds = lineCache.get();

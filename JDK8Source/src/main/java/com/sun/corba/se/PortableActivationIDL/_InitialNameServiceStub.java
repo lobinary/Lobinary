@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -11,12 +12,17 @@ package com.sun.corba.se.PortableActivationIDL;
 
 /** Interface used to support binding references in the bootstrap name
     * service.
+    * <p>
+    * 
     */
 public class _InitialNameServiceStub extends org.omg.CORBA.portable.ObjectImpl implements com.sun.corba.se.PortableActivationIDL.InitialNameService
 {
 
 
   /** bind initial name
+  /* <p>
+  /*  服务。
+  /* 
 	*/
   public void bind (String name, org.omg.CORBA.Object obj, boolean isPersistant) throws com.sun.corba.se.PortableActivationIDL.InitialNameServicePackage.NameAlreadyBound
   {

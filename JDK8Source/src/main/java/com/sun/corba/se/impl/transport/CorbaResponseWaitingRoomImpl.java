@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,8 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.LocateReplyOrReplyMessage;
 import com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class CorbaResponseWaitingRoomImpl

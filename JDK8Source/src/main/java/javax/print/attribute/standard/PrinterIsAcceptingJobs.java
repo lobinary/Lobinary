@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,19 @@ import javax.print.attribute.PrintServiceAttribute;
  * returns the IPP string representation of the attribute value.
  * <P>
  *
+ * <p>
+ *  类PrinterIsAcceptingJobs是一个打印属性类,枚举,指示打印机当前是否能够接受作业。
+ * 此值与{@link PrinterState PrinterState}和{@link PrinterStateReasons PrinterStateReasons}属性无关,因为其值不影响当前作业;
+ * 而是影响未来的工作。
+ *  类PrinterIsAcceptingJobs是一个打印属性类,枚举,指示打印机当前是否能够接受作业。
+ * 如果值为NOT_ACCEPTING_JOBS,则即使{@link PrinterState PrinterState}为IDLE,打印机也将拒绝作业。
+ * 如果值为ACCEPTING_JOBS,则即使{@link PrinterState PrinterState}处于STOPPED状态,打印机也将接受作业。
+ * <P>
+ *  <B> IPP兼容性：</B> ACCEPTING_JOBS的IPP布尔值为"true",NOT_ACCEPTING_JOBS的IPP布尔值为"false"。
+ *  <CODE> getName()</CODE>返回的类别名称是IPP属性名称。枚举的整数值是IPP枚举值。 <code> toString()</code>方法返回属性值的IPP字符串表示形式。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class PrinterIsAcceptingJobs extends EnumSyntax
@@ -54,12 +68,18 @@ public final class PrinterIsAcceptingJobs extends EnumSyntax
 
     /**
      * The printer is currently rejecting any jobs sent to it.
+     * <p>
+     *  打印机当前拒绝发送给它的任何作业。
+     * 
      */
     public static final PrinterIsAcceptingJobs
         NOT_ACCEPTING_JOBS = new PrinterIsAcceptingJobs(0);
 
     /**
      * The printer is currently accepting jobs.
+     * <p>
+     *  打印机当前正在接受作业。
+     * 
      */
     public static final PrinterIsAcceptingJobs
         ACCEPTING_JOBS = new PrinterIsAcceptingJobs(1);
@@ -68,6 +88,10 @@ public final class PrinterIsAcceptingJobs extends EnumSyntax
      * Construct a new printer is accepting jobs enumeration value with the
      * given integer value.
      *
+     * <p>
+     *  构造一个新的打印机接受作业枚举值与给定的整数值。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected PrinterIsAcceptingJobs(int value) {
@@ -86,6 +110,9 @@ public final class PrinterIsAcceptingJobs extends EnumSyntax
 
     /**
      * Returns the string table for class PrinterIsAcceptingJobs.
+     * <p>
+     *  返回类PrinterIsAcceptingJobs的字符串表。
+     * 
      */
     protected String[] getStringTable() {
         return myStringTable;
@@ -93,6 +120,9 @@ public final class PrinterIsAcceptingJobs extends EnumSyntax
 
     /**
      * Returns the enumeration value table for class PrinterIsAcceptingJobs.
+     * <p>
+     *  返回类PrinterIsAcceptingJobs的枚举值表。
+     * 
      */
     protected EnumSyntax[] getEnumValueTable() {
         return myEnumValueTable;
@@ -105,6 +135,12 @@ public final class PrinterIsAcceptingJobs extends EnumSyntax
      * For class PrinterIsAcceptingJobs, the
      * category is class PrinterIsAcceptingJobs itself.
      *
+     * <p>
+     * 获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于PrinterIsAcceptingJobs类,类别是PrinterIsAcceptingJobs类本身。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -119,6 +155,10 @@ public final class PrinterIsAcceptingJobs extends EnumSyntax
      * For class PrinterIsAcceptingJobs, the
      * category name is <CODE>"printer-is-accepting-jobs"</CODE>.
      *
+     * <p>
+     *  获取此属性值为实例的类别的名称。
+     * <P>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

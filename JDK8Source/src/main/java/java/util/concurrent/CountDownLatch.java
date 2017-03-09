@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -150,6 +154,59 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * actions following a successful return from a corresponding
  * {@code await()} in another thread.
  *
+ * <p>
+ *  允许一个或多个线程等待直到在其他线程中执行的一组操作完成的同步辅助。
+ * 
+ *  <p>使用给定的<em>计数</em>初始化{@code CountDownLatch}。
+ *  {@link #await await}方法阻塞,直到当前计数由于调用{@link #countDown}方法而达到零,之后所有等待的线程都被释放,并且任何后续的{@link #await await}
+ * 调用立即返回。
+ *  <p>使用给定的<em>计数</em>初始化{@code CountDownLatch}。这是一次性的现象 - 计数不能重置。
+ * 如果您需要重置计数的版本,请考虑使用{@link CyclicBarrier}。
+ * 
+ *  <p> {@code CountDownLatch}是一种多功能同步工具,可用于多种用途。
+ * 以计数为1初始化的{@code CountDownLatch}用作简单的开/关锁存器或门：所有调用{@link #await await}的线程在门处等待,直到它被调用{@link#倒数}。
+ * 初始化为<em> N </em>的{@code CountDownLatch}可用于使一个线程等待,直到<em> N </em>个线程已完成某些操作,或某些操作已完成N次。
+ * 
+ * <p> {@code CountDownLatch}的一个有用的属性是它不需要调用{@code countDown}的线程等待计数达到零,然后继续,它只是阻止任何线程通过{@link #await await}
+ * ,直到所有的线程都能通过。
+ * 
+ *  <p> <b>示例用法：</b>这是一对类,其中一组工作线程使用两个倒计时锁存：
+ * <ul>
+ *  <li>第一个是启动信号,防止任何工作人员继续进行,直到驱动程序准备好继续进行; <li>第二个是完成信号,允许驾驶员等待,直到所有工人完成。
+ * </ul>
+ * 
+ *  <pre> {@code class Driver {// ... void main()throws InterruptedException {CountDownLatch startSignal = new CountDownLatch(1); CountDownLatch doneSignal = new CountDownLatch(N);。
+ * 
+ *  for(int i = 0; i <N; ++ i)//创建和启动线程new Thread(new Worker(startSignal,doneSignal))。
+ * 
+ *  doSomethingElse(); //不让运行startSignal.countDown(); //让所有线程继续doSomethingElse(); doneSignal.await(); //
+ * 等待所有完成}}。
+ * 
+ *  类Worker实现Runnable {private final CountDownLatch startSignal; private final CountDownLatch doneSignal; Worker(CountDownLatch startSignal,CountDownLatch doneSignal){this.startSignal = startSignal; this.doneSignal = doneSignal; }
+ *  public void run(){try {startSignal.await();做工作(); doneSignal.countDown(); } catch(InterruptedExcepti
+ * on ex){} // return; }}。
+ * 
+ * void doWork(){...}}} </pre>
+ * 
+ *  <p>另一个典型的用法是将问题分成N个部分,用Runnable描述每个部分,执行该部分并对锁存器计数,并将所有Runnables排队到执行器。当所有子部分完成时,协调线程将能够通过等待。
+ *  (当线程必须以这种方式重复倒计时,而不是使用{@link CyclicBarrier}。)。
+ * 
+ *  <pre> {@code class Driver2 {// ... void main()throws InterruptedException {CountDownLatch doneSignal = new CountDownLatch(N);执行器e = ...。
+ * 
+ *  for(int i = 0; i <N; ++ i)//创建和启动线程e.execute(new WorkerRunnable(doneSignal,i));
+ * 
+ *  doneSignal.await(); //等待所有完成}}
+ * 
+ *  类WorkerRunnable实现Runnable {private final CountDownLatch doneSignal; private final int i; WorkerRunnable(CountDownLatch doneSignal,int i){this.doneSignal = doneSignal; this.i = i; }
+ *  public void run(){try {doWork(i); doneSignal.countDown(); } catch(InterruptedException ex){} // retu
+ * rn; }}。
+ * 
+ *  void doWork(){...}}} </pre>
+ * 
+ *  <p>内存一致性影响：在计数达到零之前,在调用{@code countDown()} <a href="package-summary.html#MemoryVisibility"> <i>之前发生的
+ * 线程中的操作</i > </a>在另一个线程中从相应的{@code await()}成功返回后的操作。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -157,6 +214,9 @@ public class CountDownLatch {
     /**
      * Synchronization control For CountDownLatch.
      * Uses AQS state to represent count.
+     * <p>
+     *  同步控件CountDownLatch。使用AQS状态来表示计数。
+     * 
      */
     private static final class Sync extends AbstractQueuedSynchronizer {
         private static final long serialVersionUID = 4982264981922014374L;
@@ -191,6 +251,10 @@ public class CountDownLatch {
     /**
      * Constructs a {@code CountDownLatch} initialized with the given count.
      *
+     * <p>
+     * 构造一个用给定计数初始化的{@code CountDownLatch}。
+     * 
+     * 
      * @param count the number of times {@link #countDown} must be invoked
      *        before threads can pass through {@link #await}
      * @throws IllegalArgumentException if {@code count} is negative
@@ -224,6 +288,23 @@ public class CountDownLatch {
      * then {@link InterruptedException} is thrown and the current thread's
      * interrupted status is cleared.
      *
+     * <p>
+     *  导致当前线程等待,直到锁存器计数到零,除非线程{@linkplain线程#中断}。
+     * 
+     *  <p>如果当前计数为零,则此方法立即返回。
+     * 
+     *  <p>如果当前计数大于零,则当前线程变为禁用以用于线程调度目的,并处于休眠状态,直到发生以下两种情况之一：
+     * <ul>
+     *  <li>由于调用了{@link #countDown}方法,因此计数值为零;或<li>一些其他线程{@linkplain线程#中断中断}当前线程。
+     * </ul>
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     *  <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断}在等待时,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。
+     * 
+     * 
      * @throws InterruptedException if the current thread is interrupted
      *         while waiting
      */
@@ -265,6 +346,25 @@ public class CountDownLatch {
      * is returned.  If the time is less than or equal to zero, the method
      * will not wait at all.
      *
+     * <p>
+     *  导致当前线程等待,直到锁存器计数到零,除非线程{@linkplain线程#中断},或指定的等待时间过去。
+     * 
+     *  <p>如果当前计数为零,则此方法立即返回值{@code true}。
+     * 
+     *  <p>如果当前计数大于零,则当前线程因线程调度而被禁用,并处于休眠状态,直到发生以下三种情况之一：
+     * <ul>
+     * <li>由于调用了{@link #countDown}方法,因此计数值为零;或<li>一些其他线程{@linkplain线程#中断中断}当前线程;或<li>指定的等待时间已过。
+     * </ul>
+     * 
+     *  <p>如果计数到达零,那么方法返回值为{@code true}。
+     * 
+     *  <p>如果当前线程：
+     * <ul>
+     *  <li>在进入此方法时设置了中断状态;或<li>是{@linkplain线程#中断}在等待时,
+     * </ul>
+     *  那么将抛出{@link InterruptedException},并清除当前线程的中断状态。
+     * 
+     * 
      * @param timeout the maximum time to wait
      * @param unit the time unit of the {@code timeout} argument
      * @return {@code true} if the count reached zero and {@code false}
@@ -286,6 +386,9 @@ public class CountDownLatch {
      * thread scheduling purposes.
      *
      * <p>If the current count equals zero then nothing happens.
+     * <p>
+     *  <p>如果经过指定的等待时间,则返回值{@code false}。如果时间小于或等于零,则该方法将不会等待。
+     * 
      */
     public void countDown() {
         sync.releaseShared(1);
@@ -296,6 +399,14 @@ public class CountDownLatch {
      *
      * <p>This method is typically used for debugging and testing purposes.
      *
+     * <p>
+     *  减少锁存器的计数,如果计数达到零,则释放所有等待的线程。
+     * 
+     *  <p>如果当前计数大于零,则递减。如果新计数为零,则为线程调度目的重新启用所有等待的线程。
+     * 
+     *  <p>如果当前计数等于零,那么什么也不发生。
+     * 
+     * 
      * @return the current count
      */
     public long getCount() {
@@ -307,6 +418,12 @@ public class CountDownLatch {
      * The state, in brackets, includes the String {@code "Count ="}
      * followed by the current count.
      *
+     * <p>
+     *  返回当前计数。
+     * 
+     *  <p>此方法通常用于调试和测试目的。
+     * 
+     * 
      * @return a string identifying this latch, as well as its state
      */
     public String toString() {

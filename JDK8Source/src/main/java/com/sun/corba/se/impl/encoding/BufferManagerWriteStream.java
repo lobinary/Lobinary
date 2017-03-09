@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,9 @@ import org.omg.CORBA.SystemException;
 
 /**
  * Streaming buffer manager.
+ * <p>
+ *  流缓冲区管理器。
+ * 
  */
 public class BufferManagerWriteStream extends BufferManagerWrite
 {
@@ -58,6 +62,9 @@ public class BufferManagerWriteStream extends BufferManagerWrite
     /**
      * Returns the correct buffer size for this type of
      * buffer manager as set in the ORB.
+     * <p>
+     *  返回在ORB中设置的此类型缓冲区管理器的正确缓冲区大小。
+     * 
      */
     public int getBufferSize() {
         return orb.getORBData().getGIOPFragmentSize();
@@ -128,6 +135,9 @@ public class BufferManagerWriteStream extends BufferManagerWrite
      * Close the BufferManagerWrite and do any outstanding cleanup.
      *
      * No work to do for a BufferManagerWriteStream
+     * <p>
+     *  关闭BufferManagerWrite并执行任何未完成的清理。
+     * 
      */
     public void close(){};
 

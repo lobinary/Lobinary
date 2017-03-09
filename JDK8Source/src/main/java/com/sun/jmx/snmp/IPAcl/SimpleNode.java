@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,10 +86,16 @@ class SimpleNode implements Node {
 
     /*
       SR. Extend the SimpleNode definition
+    /* <p>
+    /*  SR。扩展SimpleNode定义
+    /* 
     */
 
     /**
      * Build the Trap entries from the syntactic tree.
+     * <p>
+     *  从语法树构建陷阱条目。
+     * 
      */
     public void buildTrapEntries(Hashtable<InetAddress, Vector<String>> dest) {
         if (children != null) {
@@ -102,6 +109,9 @@ class SimpleNode implements Node {
     }
     /**
      * Build the Inform entries from the syntactic tree.
+     * <p>
+     *  从语法树构建Inform条目。
+     * 
      */
     public void buildInformEntries(Hashtable<InetAddress, Vector<String>> dest) {
         if (children != null) {
@@ -116,6 +126,9 @@ class SimpleNode implements Node {
 
     /**
      * Build the Acl entries from the syntactic tree.
+     * <p>
+     *  从语法树构建Acl条目。
+     * 
      */
     public void buildAclEntries(PrincipalImpl owner, AclImpl acl) {
         if (children != null) {
@@ -134,12 +147,18 @@ class SimpleNode implements Node {
        customize the way the node appears when the tree is dumped.  If
        your output uses more than one line you should override
        toString(String), otherwise overriding toString() is probably all
+    /* <p>
+    /*  定制树转储时节点显示的方式。如果你的输出使用多行,你应该覆盖toString(String),否则覆盖toString()可能都是
+    /* 
+    /* 
        you need to do. */
 
     public String toString() { return ParserTreeConstants.jjtNodeName[id]; }
     public String toString(String prefix) { return prefix + toString(); }
 
     /* Override this method if you want to customize how the node dumps
+    /* <p>
+    /* 
        out its children. */
 
     public void dump(String prefix) {

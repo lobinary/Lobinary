@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -15,6 +16,9 @@ package org.omg.PortableServer;
 	 * receiving a request that names the child POA 
 	 * (or one of its children), or when find_POA is called 
 	 * with an activate parameter value of TRUE.
+	 * <p>
+	 *  适配器激活器为POA提供根据需要创建子POA的能力,作为接收命名子POA(或其子节点之一)的请求的副作用,或者当调用find_POA时激活参数值为TRUE 。
+	 * 
 	 */
 public interface AdapterActivatorOperations 
 {
@@ -25,6 +29,9 @@ public interface AdapterActivatorOperations
 	 * a target POA that does not exist. The ORB invokes 
 	 * this operation once for each POA that must be 
 	 * created in order for the target POA to exist.
+	 * <p>
+	 *  当ORB接收到标识不存在的目标POA的对象引用的请求时,调用此操作。 ORB对于必须创建的每个POA调用这个操作一次以便目标POA存在。
+	 * 
 	 * @param parent indicates the parent POA for the POA
 	 *               that needs to be created.
 	 * @param name identifies the name of the POA relative to

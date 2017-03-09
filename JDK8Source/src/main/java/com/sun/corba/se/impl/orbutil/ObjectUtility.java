@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,8 @@ public final class ObjectUtility {
      * return an array of that component type that consists of the
      * elements of arr1 followed by the elements of arr2.
      * Throws IllegalArgumentException otherwise.
+     * <p>
+     *  返回一个由arr1的元素组成的组件类型的数组,后跟arr2的元素。否则抛出IllegalArgumentException。
      */
     public static Object concatenateArrays( Object arr1, Object arr2 )
     {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import javax.swing.plaf.*;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  内部框架的Motif L&F实现。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Tom Ball
  */
 public class MotifInternalFrameUI extends BasicInternalFrameUI {
@@ -62,6 +70,8 @@ public class MotifInternalFrameUI extends BasicInternalFrameUI {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     * 
      * @deprecated As of Java 2 platform v1.3.
      */
     @Deprecated
@@ -198,12 +208,16 @@ public class MotifInternalFrameUI extends BasicInternalFrameUI {
     }
 
     /** This method is called when the frame becomes selected.
+    /* <p>
+    /*  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+    /* 
       */
     protected void activateFrame(JInternalFrame f) {
         super.activateFrame(f);
         setColors(f);
     }
     /** This method is called when the frame is no longer selected.
+    /* <p>
       */
     protected void deactivateFrame(JInternalFrame f) {
         setColors(f);

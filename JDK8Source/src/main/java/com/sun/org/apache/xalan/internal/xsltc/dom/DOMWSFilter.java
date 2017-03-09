@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DOMWSFilter.java,v 1.2.4.1 2005/09/06 06:14:31 pvedula Exp $
+ * <p>
+ *  $ Id：DOMWSFilter.java,v 1.2.4.1 2005/09/06 06:14:31 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.xsltc.dom;
 
@@ -34,6 +47,10 @@ import com.sun.org.apache.xml.internal.dtm.DTMWSFilter;
  * A wrapper class that adapts the
  * {@link com.sun.org.apache.xml.internal.dtm.DTMWSFilter DTMWSFilter} interface to the XSLTC
  * DOM {@link com.sun.org.apache.xalan.internal.xsltc.StripFilter StripFilter} interface.
+ * <p>
+ *  一个包装器类,用于将{@link com.sun.org.apache.xml.internal.dtm.DTMWSFilter DTMWSFilter}接口适配到XSLTC DOM {@link com.sun.org.apache.xalan.internal.xsltc.StripFilter StripFilter }
+ * 接口。
+ * 
  */
 public class DOMWSFilter implements DTMWSFilter {
 
@@ -51,6 +68,10 @@ public class DOMWSFilter implements DTMWSFilter {
      * Construct an adapter connecting the <code>DTMWSFilter</code> interface
      * to the <code>StripFilter</code> interface.
      *
+     * <p>
+     *  构造一个将<code> DTMWSFilter </code>接口连接到<code> StripFilter </code>接口的适配器。
+     * 
+     * 
      * @param translet A translet that also implements the StripFilter
      * interface.
      *
@@ -73,6 +94,9 @@ public class DOMWSFilter implements DTMWSFilter {
      * it is not normally called directly from
      * user code.
      *
+     * <p>
+     *  测试在<code> DTM </code>的逻辑视图中是否可以看到仅有空格的文本节点。通常,该函数将通过实现<code> DTM </code>来调用;它通常不直接从用户代码调用。
+     * 
      * @param node int handle of the node.
      * @param dtm the DTM that owns this node
      * @return one of <code>NOTSTRIP</code>, <code>STRIP</code> or

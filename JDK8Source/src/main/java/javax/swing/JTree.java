@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -138,6 +139,57 @@ import static sun.swing.SwingUtilities2.Section.*;
  *   attribute: isContainer false
  * description: A component that displays a set of hierarchical data as an outline.
  *
+ * <p>
+ *  <a name="jtree_description"> </a>显示一组分层数据作为大纲的控件。
+ * 您可以在<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/tree.html">如何使用树</a>中找到面向任务的文
+ * 档和使用树的示例, Java教程</em>中的一个部分。
+ *  <a name="jtree_description"> </a>显示一组分层数据作为大纲的控件。
+ * <p>
+ *  树中的特定节点可以通过<code> TreePath </code>(封装节点及其所有祖先的对象)或其显示行来标识,其中显示区域中的每一行显示一个节点。
+ *  <i>扩展</i>节点是非叶节点(由<code> TreeModel.isLeaf(node)</code>返回false标识),将在其所有祖先<i>扩展时显示其子</i>。
+ *  <i>折叠的</i>节点是隐藏它们的节点。 <i>隐藏</i>节点是处于折叠的祖先下的节点。所有的可见节点父节点都被展开,但是可以或可以不被显示。
+ * 一个<i>显示的</i>节点既可以看到,也可以在显示区域中看到。
+ * </p>
+ *  以下<code> JTree </code>方法使用"visible"表示"显示"：
+ * <ul>
+ *  <li> <code> isRootVisible()</code> <li> <code> setRootVisible()</code> <li> <code> scrollPathToVisib
+ * le()</code> <li> <code> scrollRowToVisible代码> <li> <code> getVisibleRowCount()</code> <li> <code> set
+ * VisibleRowCount()</code>。
+ * </ul>
+ * 下一组<code> JTree </code>方法使用"visible"来表示"可见"(在扩展父级下)：
+ * <ul>
+ *  <li> <code> isVisible()</code> <li> <code> makeVisible()</code>
+ * </ul>
+ *  如果您有兴趣了解选择更改何时实现<code> TreeSelectionListener </code>接口,并使用方法<code> addTreeSelectionListener </code>添
+ * 加实例。
+ * 当选择更改时,将调用<code> valueChanged </code>,即如果用户在同一节点上单击两次<code> valueChanged </code>只会被调用一次。
+ * <p>
+ *  如果您有兴趣检测双击事件,或者当用户单击某个节点时,无论是否选择该节点,我们建议您执行以下操作：
+ * </p>
+ * <pre>
+ *  最终JTree树= ...;
+ * 
+ *  MouseListener ml = new MouseAdapter(){public void <b> mousePressed </b>(MouseEvent e){int selRow = tree.getRowForLocation(e.getX(),e.​​getY()); TreePath selPath = tree.getPathForLocation(e.getX(),e.​​getY()); if(selRow！= -1){if(e.getClickCount()== 1){mySingleClick(selRow,selPath); }
+ *  else if(e.getClickCount()== 2){myDoubleClick(selRow,selPath); }}}}; tree.addMouseListener(ml);。
+ * </pre>
+ *  注意：此示例获取路径和行,但您只需要获取您感兴趣的一个。
+ * <p>
+ * 要使用<code> JTree </code>来显示复合节点(例如,包含图形图标和文本的节点),子类{@link TreeCellRenderer},并使用{@link #setCellRenderer}
+ * 告诉树使用它。
+ * 要编辑这样的节点,子类{@link TreeCellEditor}并使用{@link #setCellEditor}。
+ * </p>
+ * <p>
+ *  像所有<code> JComponent </code>类一样,您可以使用{@link InputMap}和{@link ActionMap}将{@link Action}对象与{@link KeyStroke}
+ * 关联,并在指定条件下执行操作。
+ * </p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * /p>
+ *  @beaninfo属性：isContainer false description：将一组分层数据显示为大纲的组件。
+ * 
+ * 
  * @author Rob Davis
  * @author Ray Ryan
  * @author Scott Violet
@@ -146,6 +198,8 @@ import static sun.swing.SwingUtilities2.Section.*;
 public class JTree extends JComponent implements Scrollable, Accessible
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -153,29 +207,44 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * The model that defines the tree displayed by this object.
+     * <p>
+     *  定义由此对象显示的树的模型。
+     * 
      */
     transient protected TreeModel        treeModel;
 
     /**
      * Models the set of selected nodes in this tree.
+     * <p>
+     *  对此树中选定节点的集合建模。
+     * 
      */
     transient protected TreeSelectionModel selectionModel;
 
     /**
      * True if the root node is displayed, false if its children are
      * the highest visible nodes.
+     * <p>
+     *  如果显示根节点,则为True,如果其子节点是最高可见节点,则为false。
+     * 
      */
     protected boolean                    rootVisible;
 
     /**
      * The cell used to draw nodes. If <code>null</code>, the UI uses a default
      * <code>cellRenderer</code>.
+     * <p>
+     *  用于绘制节点的单元格。如果<code> null </code>,UI使用默认的<code> cellRenderer </code>。
+     * 
      */
     transient protected TreeCellRenderer  cellRenderer;
 
     /**
      * Height to use for each display row. If this is &lt;= 0 the renderer
      * determines the height for each row.
+     * <p>
+     * 每个显示行使用的高度。如果这是&lt; = 0,则渲染器确定每行的高度。
+     * 
      */
     protected int                         rowHeight;
     private boolean                       rowHeightSet = false;
@@ -187,6 +256,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * given path is expanded, and NOT if it is visible or not. That
      * information must be determined by visiting all the parent
      * paths and seeing if they are visible.
+     * <p>
+     *  从<code> TreePath </code>到<code> Boolean </code>的映射表示是否扩展特定路径。这只指示是否扩展给定路径,如果可见或不可见,则指定NOT。
+     * 该信息必须通过访问所有父路径并查看它们是否可见来确定。
+     * 
      */
     transient private Hashtable<TreePath, Boolean> expandedState;
 
@@ -211,6 +284,16 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * and users may not know that the "list entries" are actually
      * tree nodes.
      *
+     * <p>
+     *  如果句柄显示在树的最顶层,则为true。
+     * <p>
+     *  句柄是与节点相邻显示的小图标,允许用户单击一次以展开或折叠节点。公共接口显示可以扩展的节点的加号(+)和可以折叠的节点的减号( - )。对于最高级别下面的节点,始终显示句柄。
+     * <p>
+     *  如果<code> rootVisible </code>设置指定要显示根节点,那么它是最高级别上的唯一节点。如果根节点未显示,则其所有子代都位于树的最高级别。对于除最上层之外的节点,始终显示句柄。
+     * <p>
+     *  如果根节点不可见,那么使此值为true通常是一个好处。否则,树看起来像一个列表,并且用户可能不知道"列表条目"实际上是树节点。
+     * 
+     * 
      * @see #rootVisible
      */
     protected boolean           showsRootHandles;
@@ -219,17 +302,26 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Creates a new event and passed it off the
      * <code>selectionListeners</code>.
+     * <p>
+     *  创建一个新事件并将其传递给<code> selectionListeners </code>。
+     * 
      */
     protected transient TreeSelectionRedirector selectionRedirector;
 
     /**
      * Editor for the entries.  Default is <code>null</code>
      * (tree is not editable).
+     * <p>
+     *  条目的编辑器。默认为<code> null </code>(树不可编辑)。
+     * 
      */
     transient protected TreeCellEditor          cellEditor;
 
     /**
      * Is the tree editable? Default is false.
+     * <p>
+     *  树是否可编辑?默认值为false。
+     * 
      */
     protected boolean                 editable;
 
@@ -242,6 +334,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This value is only a suggestion to the UI. Not all UIs will
      * take advantage of it. Default value is false.
+     * <p>
+     * 这棵树是大模型吗?这是一个代码优化设置。当所有节点的单元格高度相同时,可以使用大型模型。 UI将缓存非常少的信息,而不断地向模型发送消息。
+     * 没有大型模型,UI会缓存大部分信息,导致对模型的更少的方法调用。
+     * <p>
+     *  此值只是对UI的建议。并不是所有的UI都会利用它。默认值为false。
+     * 
      */
     protected boolean                 largeModel;
 
@@ -249,6 +347,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Number of rows to make visible at one time. This value is used for
      * the <code>Scrollable</code> interface. It determines the preferred
      * size of the display area.
+     * <p>
+     *  一次可见的行数。此值用于<code> Scrollable </code>界面。它确定显示区域的首选大小。
+     * 
      */
     protected int                     visibleRowCount;
 
@@ -258,49 +359,77 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * is invoked, and changes are saved. If false,
      * <code>cancelCellEditing</code> is invoked, and changes
      * are discarded. Default is false.
+     * <p>
+     *  如果为true,当通过选择改变来停止编辑时,调用树改变或其他方法中的数据<code> stopCellEditing </code>,并保存改变。
+     * 如果为false,则调用<code> cancelCellEditing </code>,并丢弃更改。默认值为false。
+     * 
      */
     protected boolean                 invokesStopCellEditing;
 
     /**
      * If true, when a node is expanded, as many of the descendants are
      * scrolled to be visible.
+     * <p>
+     *  如果为true,则当节点扩展时,许多后代都会滚动到可见。
+     * 
      */
     protected boolean                 scrollsOnExpand;
     private boolean                   scrollsOnExpandSet = false;
 
     /**
      * Number of mouse clicks before a node is expanded.
+     * <p>
+     *  扩展节点之前的鼠标点击次数。
+     * 
      */
     protected int                     toggleClickCount;
 
     /**
      * Updates the <code>expandedState</code>.
+     * <p>
+     *  更新<code> expandedState </code>。
+     * 
      */
     transient protected TreeModelListener       treeModelListener;
 
     /**
      * Used when <code>setExpandedState</code> is invoked,
      * will be a <code>Stack</code> of <code>Stack</code>s.
+     * <p>
+     *  在调用<code> setExpandedState </code>时使用,将是<code> Stack </code>的<code> Stack </code>。
+     * 
      */
     transient private Stack<Stack<TreePath>> expandedStack;
 
     /**
      * Lead selection path, may not be <code>null</code>.
+     * <p>
+     *  引线选择路径,可能不是<code> null </code>。
+     * 
      */
     private TreePath                  leadPath;
 
     /**
      * Anchor path.
+     * <p>
+     *  锚路径。
+     * 
      */
     private TreePath                  anchorPath;
 
     /**
      * True if paths in the selection should be expanded.
+     * <p>
+     *  如果应扩展选择中的路径,则为true。
+     * 
      */
     private boolean                   expandsSelectedPaths;
 
     /**
      * This is set to true for the life of the <code>setUI</code> call.
+     * <p>
+     *  这在<code> setUI </code>调用的生命周期中设置为true。
+     * 
      */
     private boolean                   settingUI;
 
@@ -309,11 +438,17 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * The drop mode for this component.
+     * <p>
+     *  此组件的放置模式。
+     * 
      */
     private DropMode dropMode = DropMode.USE_SELECTION;
 
     /**
      * The drop location.
+     * <p>
+     *  放置位置。
+     * 
      */
     private transient DropLocation dropLocation;
 
@@ -321,6 +456,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * A subclass of <code>TransferHandler.DropLocation</code> representing
      * a drop location for a <code>JTree</code>.
      *
+     * <p>
+     * <code> TransferHandler.DropLocation </code>的子类,表示<code> JTree </code>的放置位置。
+     * 
+     * 
      * @see #getDropLocation
      * @since 1.6
      */
@@ -355,6 +494,18 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * an insert index, as described above, or <code>-1</code> if
          * the drop occurred over the path itself.
          *
+         * <p>
+         *  返回相对于由<code> getPath()</code>返回的路径插入删除数据的索引。
+         * <p>
+         *  对于drop模式<code> DropMode.USE_SELECTION </code>和<code> DropMode.ON </code>,此索引不重要(并且它将始终是<code> -1 </code>
+         * )作为唯一有趣的数据是发生drop操作的路径。
+         * <p>
+         *  对于drop模式<code> DropMode.INSERT </code>,此索引指示数据应插入到由<code> getPath()</code>表示的父路径中的索引。
+         *  <code> -1 </code>表示删除发生在父本身上,并且在大多数情况下应该被视为插入到父的子列表的开始或结束。
+         * <p>
+         *  对于<code> DropMode.ON_OR_INSERT </code>,如果发生在路径本身上,则此值将是一个插入索引,如上所述,或<code> -1 </code>。
+         * 
+         * 
          * @return the child index
          * @see #getPath
          */
@@ -394,6 +545,25 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * at which it should be inserted into the path (values other than
          * <code>-1</code>).
          *
+         * <p>
+         *  返回放置在树中的数据的路径。
+         * <p>
+         *  该值的解释取决于组件上设置的下降模式。
+         * 如果删除模式是<code> DropMode.USE_SELECTION </code>或<code> DropMode.ON </code>,则返回值是树中已经(或将要)删除数据的路径。
+         *  <code> null </code>表示删除超过空白空间,不与特定路径相关联。
+         * <p>
+         * 如果drop模式是<code> DropMode.INSERT </code>,则返回值指的是应该成为新数据的父代的路径,在这种情况下<code> getChildIndex()</code>项目应插入
+         * 此父路径。
+         *  <code> null </code>路径指示没有确定父路径,这可能由于多种原因：。
+         * <ul>
+         *  <li>树没有模型<li>树中没有根<li>根已折叠<li>根是叶节点
+         * </ul>
+         *  它是由开发人员决定是否和如何他们希望处理<code> null </code>案例。
+         * <p>
+         *  如果丢弃模式是<code> DropMode.ON_OR_INSERT </code>,则可以使用<code> getChildIndex </code>来确定丢弃是否在路径本身之上(<code> -
+         * 1 </code>)或其应插入到路径中的索引(除<code> -1 </code>之外的值)。
+         * 
+         * 
          * @return the drop path
          * @see #getChildIndex
          */
@@ -407,6 +577,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * and the content and format of the returned string may vary
          * between implementations.
          *
+         * <p>
+         *  返回此放置位置的字符串表示形式。此方法旨在用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+         * 
+         * 
          * @return a string representation of this drop location
          */
         public String toString() {
@@ -419,6 +593,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * The row to expand during DnD.
+     * <p>
+     *  在DnD期间展开的行。
+     * 
      */
     private int expandRow = -1;
 
@@ -436,6 +613,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * A timer to expand nodes during drop.
+     * <p>
+     *  在下降期间扩展节点的计时器。
+     * 
      */
     private TreeTimer dropTimer;
 
@@ -446,11 +626,20 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <code>fireTreeCollapsed</code> and <code>fireTreeExpanded</code>.
      * <p>This is an ugly workaround for a way to have the UI listener
      * get notified before other listeners.
+     * <p>
+     *  当调用<code> addTreeExpansionListener </code>并且<code> settingUI </code>为true时,此ivar设置为传递到<code> Listene
+     * r </code>。
+     * 然后,在<code> fireTreeCollapsed </code>和<code> fireTreeExpanded </code>中通知此侦听器。
+     *  <p>这是一个丑陋的解决方法,让UI侦听器在其他侦听器之前获得通知。
+     * 
      */
     private transient TreeExpansionListener     uiTreeExpansionListener;
 
     /**
      * Max number of stacks to keep around.
+     * <p>
+     * 保持的最大堆栈数。
+     * 
      */
     private static int                TEMP_STACK_SIZE = 11;
 
@@ -484,12 +673,18 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /** Bound property name for <code>toggleClickCount</code>. */
     public final static String        TOGGLE_CLICK_COUNT_PROPERTY = "toggleClickCount";
     /** Bound property name for <code>leadSelectionPath</code>.
+    /* <p>
+    /* 
      * @since 1.3 */
     public final static String        LEAD_SELECTION_PATH_PROPERTY = "leadSelectionPath";
     /** Bound property name for anchor selection path.
+    /* <p>
+    /* 
      * @since 1.3 */
     public final static String        ANCHOR_SELECTION_PATH_PROPERTY = "anchorSelectionPath";
     /** Bound property name for expands selected paths property
+    /* <p>
+    /* 
      * @since 1.3 */
     public final static String        EXPANDS_SELECTED_PATHS_PROPERTY = "expandsSelectedPaths";
 
@@ -498,6 +693,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Creates and returns a sample <code>TreeModel</code>.
      * Used primarily for beanbuilders to show something interesting.
      *
+     * <p>
+     *  创建并返回示例<code> TreeModel </code>。主要用于beanbuilders显示有趣的东西。
+     * 
+     * 
      * @return the default <code>TreeModel</code>
      */
     protected static TreeModel getDefaultTreeModel() {
@@ -537,6 +736,13 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * objects as children. Otherwise, a new root is created with
      * a value of {@code "root"}.
      *
+     * <p>
+     *  返回一个<code> TreeModel </code>包装指定的对象。
+     * 如果对象是：<ul> <li> <code> Object </code>,<li> a <code> Hashtable </code>或<li> </ul>,然后创建一个新的根节点,每个传入对象作为
+     * 子节点。
+     *  返回一个<code> TreeModel </code>包装指定的对象。否则,将创建一个值为{@code"root"}的新根。
+     * 
+     * 
      * @param value  the <code>Object</code> used as the foundation for
      *          the <code>TreeModel</code>
      * @return a <code>TreeModel</code> wrapping the specified object
@@ -560,6 +766,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * The default model used by the tree defines a leaf node as any node
      * without children.
      *
+     * <p>
+     *  使用示例模型返回<code> JTree </code>。树所使用的默认模型将叶节点定义为没有子节点的任何节点。
+     * 
+     * 
      * @see DefaultTreeModel#asksAllowsChildren
      */
     public JTree() {
@@ -573,6 +783,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * By default, the tree defines a leaf node as any node without
      * children.
      *
+     * <p>
+     *  将指定数组的每个元素返回一个<code> JTree </code>作为不显示的新根节点的子节点。默认情况下,树将叶节点定义为任何没有子节点的节点。
+     * 
+     * 
      * @param value  an array of <code>Object</code>s
      * @see DefaultTreeModel#asksAllowsChildren
      */
@@ -589,6 +803,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * child of a new root node which is not displayed. By default, the
      * tree defines a leaf node as any node without children.
      *
+     * <p>
+     *  对指定的<code> Vector </code>的每个元素返回一个<code> JTree </code>作为不显示的新根节点的子节点。默认情况下,树将叶节点定义为任何没有子节点的节点。
+     * 
+     * 
      * @param value  a <code>Vector</code>
      * @see DefaultTreeModel#asksAllowsChildren
      */
@@ -606,6 +824,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * becomes a child of the new root node. By default, the tree defines
      * a leaf node as any node without children.
      *
+     * <p>
+     *  返回从不显示为root的<code> Hashtable </code>创建的<code> JTree </code>。
+     *  <code> HashTable </code>中的每个值的一半键/值对变为新根节点的子节点。默认情况下,树将叶节点定义为任何没有子节点的节点。
+     * 
+     * 
      * @param value  a <code>Hashtable</code>
      * @see DefaultTreeModel#asksAllowsChildren
      */
@@ -622,6 +845,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * which displays the root node.
      * By default, the tree defines a leaf node as any node without children.
      *
+     * <p>
+     *  返回一个以指定的<code> TreeNode </code>为根的<code> JTree </code>,显示根节点。默认情况下,树将叶节点定义为任何没有子节点的节点。
+     * 
+     * 
      * @param root  a <code>TreeNode</code> object
      * @see DefaultTreeModel#asksAllowsChildren
      */
@@ -635,6 +862,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * displays the root node and which decides whether a node is a
      * leaf node in the specified manner.
      *
+     * <p>
+     * 以指定的<code> TreeNode </code>作为其根返回<code> JTree </code>,它显示根节点,并以指定的方式决定节点是否为叶节点。
+     * 
+     * 
      * @param root  a <code>TreeNode</code> object
      * @param asksAllowsChildren  if false, any node without children is a
      *              leaf node; if true, only nodes that do not allow
@@ -649,6 +880,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns an instance of <code>JTree</code> which displays the root node
      * -- the tree is created using the specified data model.
      *
+     * <p>
+     *  返回显示根节点的<code> JTree </code>实例 - 使用指定的数据模型创建树。
+     * 
+     * 
      * @param newModel  the <code>TreeModel</code> to use as the data model
      */
     @ConstructorProperties({"model"})
@@ -673,6 +908,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the L&amp;F object that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F对象。
+     * 
+     * 
      * @return the <code>TreeUI</code> object that renders this component
      */
     public TreeUI getUI() {
@@ -684,6 +923,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param ui  the <code>TreeUI</code> L&amp;F object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -710,6 +955,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Replaces the current UI object with the latest version from the
      * <code>UIManager</code>.
      *
+     * <p>
+     *  来自<code> UIManager </code>的通知表示L&amp; F已更改。使用<code> UIManager </code>中的最新版本替换当前的UI对象。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -723,6 +972,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the name of the L&amp;F class that renders this component.
      *
+     * <p>
+     *  返回呈现此组件的L&amp; F类的名称。
+     * 
+     * 
      * @return the string "TreeUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -736,6 +989,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns the current <code>TreeCellRenderer</code>
      *  that is rendering each cell.
      *
+     * <p>
+     *  返回当前正在渲染每个单元格的<code> TreeCellRenderer </code>。
+     * 
+     * 
      * @return the <code>TreeCellRenderer</code> that is rendering each cell
      */
     public TreeCellRenderer getCellRenderer() {
@@ -748,6 +1005,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置将用于绘制每个单元格的<code> TreeCellRenderer </code>。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param x  the <code>TreeCellRenderer</code> that is to render each cell
      * @beaninfo
      *        bound: true
@@ -769,6 +1032,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
       *
+      * <p>
+      *  确定树是否可编辑。如果新设置与现有设置不同,则触发属性更改事件。
+      * <p>
+      *  这是一个bound属性。
+      * 
+      * 
       * @param flag  a boolean value, true if the tree is editable
       * @beaninfo
       *        bound: true
@@ -790,6 +1059,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the tree is editable.
      *
+     * <p>
+     *  如果树是可编辑的,则返回true。
+     * 
+     * 
      * @return true if the tree is editable
      */
     public boolean isEditable() {
@@ -804,6 +1077,13 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置单元格编辑器。 <code> null </code>值表示无法编辑树。
+     * 如果这代表<code> cellEditor </code>中的更改,则会对所有侦听器调用<code> propertyChange </code>方法。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param cellEditor the <code>TreeCellEditor</code> to use
      * @beaninfo
      *        bound: true
@@ -821,6 +1101,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the editor used to edit entries in the tree.
      *
+     * <p>
+     *  返回用于编辑树中条目的编辑器。
+     * 
+     * 
      * @return the <code>TreeCellEditor</code> in use,
      *          or <code>null</code> if the tree cannot be edited
      */
@@ -831,6 +1115,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the <code>TreeModel</code> that is providing the data.
      *
+     * <p>
+     *  返回提供数据的<code> TreeModel </code>。
+     * 
+     * 
      * @return the <code>TreeModel</code> that is providing the data
      */
     public TreeModel getModel() {
@@ -842,6 +1130,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置将提供数据的<code> TreeModel </code>。
+     * <p>
+     * 这是一个bound属性。
+     * 
+     * 
      * @param newModel the <code>TreeModel</code> that is to provide the data
      * @beaninfo
      *        bound: true
@@ -885,6 +1179,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the root node of the tree is displayed.
      *
+     * <p>
+     *  如果显示树的根节点,则返回true。
+     * 
+     * 
      * @return true if the root node of the tree is displayed
      * @see #rootVisible
      */
@@ -898,6 +1196,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  确定来自<code> TreeModel </code>的根节点是否可见。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param rootVisible true if the root node of the tree is to be displayed
      * @see #rootVisible
      * @beaninfo
@@ -925,6 +1229,13 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置<code> showsRootHandles </code>属性的值,该属性指定是否应显示节点句柄。此属性的默认值取决于用于创建<code> JTree </code>的构造函数。
+     * 一些外观和感觉可能不支持手柄;他们将忽略此属性。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param newValue <code>true</code> if root handles should be displayed;
      *                 otherwise, <code>false</code>
      * @see #showsRootHandles
@@ -951,6 +1262,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the value of the <code>showsRootHandles</code> property.
      *
+     * <p>
+     *  返回<code> showsRootHandles </code>属性的值。
+     * 
+     * 
      * @return the value of the <code>showsRootHandles</code> property
      * @see #showsRootHandles
      */
@@ -966,6 +1281,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置每个像元的高度(以像素为单位)。如果指定的值小于或等于零,则查询每一行的高度的当前单元格渲染器。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param rowHeight the height of each cell, in pixels
      * @beaninfo
      *        bound: true
@@ -986,6 +1307,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * or equal to 0 the height for each row is determined by the
      * renderer.
      *
+     * <p>
+     *  返回每行的高度。如果返回值小于或等于0,每行的高度由渲染器确定。
+     * 
      */
     public int getRowHeight()
     {
@@ -995,6 +1319,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the height of each display row is a fixed size.
      *
+     * <p>
+     *  如果每个显示行的高度是固定大小,则返回true。
+     * 
+     * 
      * @return true if the height of each row is a fixed size
      */
     public boolean isFixedRowHeight()
@@ -1009,6 +1337,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  指定UI是否应使用大型模型。 (不是所有的UI都会实现这一点。)触发LARGE_MODEL_PROPERTY的属性更改。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param newValue true to suggest a large model to the UI
      * @see #largeModel
      * @beaninfo
@@ -1026,6 +1360,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the tree is configured for a large model.
      *
+     * <p>
+     *  如果为大型模型配置了树,则返回true。
+     * 
+     * 
      * @return true if a large model is suggested
      * @see #largeModel
      */
@@ -1041,6 +1379,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * Fires a property change for the INVOKES_STOP_CELL_EDITING_PROPERTY.
      *
+     * <p>
+     *  确定当通过在树中选择另一个节点,树数据中的更改或其他方法中断编辑时会发生什么。将此属性设置为<code> true </code>会导致在编辑中断时自动保存更改。
+     * <p>
+     * 触发INVOKES_STOP_CELL_EDITING_PROPERTY的属性更改。
+     * 
+     * 
      * @param newValue true means that <code>stopCellEditing</code> is invoked
      *        when editing is interrupted, and data is saved; false means that
      *        <code>cancelCellEditing</code> is invoked, and changes are lost
@@ -1062,6 +1406,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns the indicator that tells what happens when editing is
      * interrupted.
      *
+     * <p>
+     *  返回指示当编辑中断时会发生什么的指示符。
+     * 
+     * 
      * @return the indicator that tells what happens when editing is
      *         interrupted
      * @see #setInvokesStopCellEditing
@@ -1083,6 +1431,13 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置<code> scrollsOnExpand </code>属性,该属性确定树是否可以滚动以显示先前隐藏的子项。
+     * 如果该属性是<code> true </code>(默认值),当节点扩展时,树可以使用滚动来使节点的后代的最大可能数目可见。在一些外观和感觉,树可能不需要滚动时展开;那些外观和感觉将忽略这个属性。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param newValue <code>false</code> to disable scrolling on expansion;
      *                 <code>true</code> to enable it
      * @see #getScrollsOnExpand
@@ -1103,6 +1458,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the value of the <code>scrollsOnExpand</code> property.
      *
+     * <p>
+     *  返回<code> scrollsOnExpand </code>属性的值。
+     * 
+     * 
      * @return the value of the <code>scrollsOnExpand</code> property
      */
     public boolean getScrollsOnExpand() {
@@ -1115,6 +1474,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置节点扩展或关闭之前的鼠标点击次数。默认值为2。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @since 1.3
      * @beaninfo
      *        bound: true
@@ -1131,6 +1496,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the number of mouse clicks needed to expand or close a node.
      *
+     * <p>
+     *  返回展开或关闭节点所需的鼠标点击次数。
+     * 
+     * 
      * @return number of mouse clicks before node is expanded
      * @since 1.3
      */
@@ -1152,6 +1521,16 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  配置<code> expandedSelectedPaths </code>属性。
+     * 如果为true,则任何时候通过<code> TreeSelectionModel </code>或<code> JTree </code>提供的覆盖方法更改选择,<code> TreePath </code>
+     * 展开以使它们可见(可见,意味着父路径被展开,不一定在<code> JTree </code>的可见矩形中)。
+     *  配置<code> expandedSelectedPaths </code>属性。如果为false,当选择更改节点父节点不会显示(其所有父扩展)。
+     * 如果您希望让选择模型维护不总是可见的路径(所有父代都展开),这将非常有用。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param newValue the new value for <code>expandsSelectedPaths</code>
      *
      * @since 1.3
@@ -1170,6 +1549,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * Returns the <code>expandsSelectedPaths</code> property.
+     * <p>
+     * 返回<code> expandingSelectedPaths </code>属性。
+     * 
+     * 
      * @return true if selection changes result in the parent path being
      *         expanded
      * @since 1.3
@@ -1197,6 +1580,17 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * begin a drag and drop operation by calling {@code exportAsDrag} on the
      * tree's {@code TransferHandler}.
      *
+     * <p>
+     *  打开或关闭自动拖动处理。为了启用自动拖动处理,此属性应设置为{@code true},树的{@code TransferHandler}需要为{@code non-null}。
+     *  {@code dragEnabled}属性的默认值为{@code false}。
+     * <p>
+     *  尊重这个属性和识别用户拖动手势的工作在于外观和感觉实现,特别是树的{@code TreeUI}。
+     * 当启用自动拖动处理时,每当用户在项目上按下鼠标按钮,然后将鼠标移动几个像素时,大多数外观和感觉(包括子类{@code BasicLookAndFeel})开始拖放操作。
+     * 因此,将此属性设置为{@code true}可能会对选择行为产生微妙的影响。
+     * <p>
+     *  如果使用忽略此属性的外观,您仍然可以通过在树的{@code TransferHandler}上调用{@code exportAsDrag}来开始拖放操作。
+     * 
+     * 
      * @param b whether or not to enable automatic drag handling
      * @exception HeadlessException if
      *            <code>b</code> is <code>true</code> and
@@ -1222,6 +1616,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns whether or not automatic drag handling is enabled.
      *
+     * <p>
+     *  返回是否启用自动拖动处理。
+     * 
+     * 
      * @return the value of the {@code dragEnabled} property
      * @see #setDragEnabled
      * @since 1.4
@@ -1249,6 +1647,19 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * The drop mode is only meaningful if this component has a
      * <code>TransferHandler</code> that accepts drops.
      *
+     * <p>
+     *  设置此组件的放置模式。为了向后兼容,此属性的默认值为<code> DropMode.USE_SELECTION </code>。然而,为了改进的用户体验,推荐使用其它模式之一。
+     * 例如,<code> DropMode.ON </code>提供了类似的行为,显示选择的项目,但这样做不会影响树中的实际选择。
+     * <p>
+     * <code> JTree </code>支持以下放置模式：
+     * <ul>
+     *  <li> <code> DropMode.USE_SELECTION </code> </li> <li> <code> DropMode.ON </code> </li> <li> <code> D
+     * ropMode.INSERT </code> > <li> <code> DropMode.ON_OR_INSERT </code> </li>。
+     * </ul>
+     * <p>
+     *  drop模式只有在这个组件有一个接受drop的<code> TransferHandler </code>时才有意义。
+     * 
+     * 
      * @param dropMode the drop mode to use
      * @throws IllegalArgumentException if the drop mode is unsupported
      *         or <code>null</code>
@@ -1276,6 +1687,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the drop mode for this component.
      *
+     * <p>
+     *  返回此组件的放置模式。
+     * 
+     * 
      * @return the drop mode for this component
      * @see #setDropMode
      * @since 1.6
@@ -1288,6 +1703,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Calculates a drop location in this component, representing where a
      * drop at the given point should insert data.
      *
+     * <p>
+     *  计算此组件中的放置位置,表示给定点的放置应插入数据的位置。
+     * 
+     * 
      * @param p the point to calculate a drop location for
      * @return the drop location, or <code>null</code>
      */
@@ -1410,6 +1829,15 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * said state, and of course return <code>null</code> since there's
      * no longer anything to store.
      *
+     * <p>
+     *  在DnD操作期间调用以设置或清除丢弃位置。在某些情况下,组件可能需要暂时使用它的内部选择来指示丢弃位置。为了帮助实现这一点,该方法返回并接受状态对象作为参数。该状态对象可用于存储并稍后恢复选择状态。
+     * 无论此方法返回将作为状态参数传递回它在未来的调用。如果它希望DnD系统继续存储相同的状态,它必须每次都通过它。以下是使用方法：。
+     * <p>
+     * 让我们说,在第一次调用这个方法时,组件决定保存一些状态(因为它将使用选择来显示drop索引)。它可以返回一个状态对象给调用者封装任何保存的选择状态。在第二次调用时,我们假定放置位置正在更改为其他值。
+     * 该组件不需要恢复任何东西,所以它只是传回相同的状态对象,让DnD系统继续存储它。最后,让我们说这个方法是用<code> null </code>。这意味着DnD现在完成这个组件,意味着它应该恢复状态。
+     * 在这一点上,它可以使用状态参数来恢复所述状态,当然返回<code> null </code>,因为不再存储任何东西。
+     * 
+     * 
      * @param location the drop location (as calculated by
      *        <code>dropLocationForPoint</code>) or <code>null</code>
      *        if there's no longer a valid drop location
@@ -1460,6 +1888,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Called to indicate to this component that DnD is done.
      * Allows for us to cancel the expand timer.
+     * <p>
+     *  调用以向该组件指示DnD已完成。允许我们取消展开计时器。
+     * 
      */
     void dndDone() {
         cancelDropTimer();
@@ -1479,6 +1910,15 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * When this property changes, a property change event with
      * name "dropLocation" is fired by the component.
      *
+     * <p>
+     *  返回此组件在组件上的DnD操作期间可视地指示为放置位置的位置,或{@code null}(如果当前未显示位置)。
+     * <p>
+     *  此方法不是用于从{@code TransferHandler}查询丢弃位置,因为丢弃位置仅在{@code TransferHandler}的<code> canImport </code>返回并允许位
+     * 置之后设置显示。
+     * <p>
+     *  当此属性更改时,组件会触发名为"dropLocation"的属性更改事件。
+     * 
+     * 
      * @return the drop location
      * @see #setDropMode
      * @see TransferHandler#canImport(TransferHandler.TransferSupport)
@@ -1508,6 +1948,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * is provided as an entry point for subclassers to add filtered
      * editing without having to resort to creating a new editor.
      *
+     * <p>
+     * 返回<code> isEditable </code>。这在编辑开始之前从UI调用,以确保可以编辑给定路径。这是作为子类添加过滤编辑的入口点提供的,而不必求助于创建新编辑器。
+     * 
+     * 
      * @return true if every parent node and the node itself is editable
      * @see #isEditable
      */
@@ -1526,6 +1970,13 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <code>ToolTipManager.sharedInstance().registerComponent(tree)</code>.
      * This is not done automatically!
      *
+     * <p>
+     *  覆盖<code> JComponent </code>的<code> getToolTipText </code>方法,以便允许使用渲染器的提示,如果它有文本集。
+     * <p>
+     *  注意：对于<code> JTree </code>正确显示其渲染器的工具提示,<code> JTree </code>必须是使用<code> ToolTipManager </code>注册的组件。
+     * 这可以通过调用<code> ToolTipManager.sharedInstance()。registerComponent(tree)</code>来完成。这不是自动完成的！。
+     * 
+     * 
      * @param event the <code>MouseEvent</code> that initiated the
      *          <code>ToolTip</code> display
      * @return a string containing the  tooltip or <code>null</code>
@@ -1579,6 +2030,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * all other arguments. To control the conversion, subclass this
      * method and use any of the arguments you need.
      *
+     * <p>
+     *  调用由渲染器将指定的值转换为文本。此实现返回<code> value.toString </code>,忽略所有其他参数。要控制转换,请将此方法子类化并使用您需要的任何参数。
+     * 
+     * 
      * @param value the <code>Object</code> to convert to text
      * @param selected true if the node is selected
      * @param expanded true if the node is expanded
@@ -1611,6 +2066,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * {@code isRootVisible()} is {@code true}. This returns {@code 0} if
      * the UI has not been set.
      *
+     * <p>
+     *  返回可查看节点的数量。如果一个节点的所有父节点都被展开,则该节点是可见的。如果{@code isRootVisible()}是{@code true},则根目录仅包含在此计数中。
+     * 如果尚未设置UI,则返回{@code 0}。
+     * 
+     * 
      * @return the number of viewable nodes
      */
     public int getRowCount() {
@@ -1627,6 +2087,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <code>getExpandsSelectedPaths</code> is true it is
      * exposed (made viewable).
      *
+     * <p>
+     *  选择由指定路径标识的节点。如果路径的任何组件被隐藏(在折叠节点下),并且<code> getExpandsSelectedPaths </code>为true,它将被公开(使其可见)。
+     * 
+     * 
      * @param path the <code>TreePath</code> specifying the node to select
      */
     public void setSelectionPath(TreePath path) {
@@ -1639,6 +2103,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * node), and <code>getExpandsSelectedPaths</code> is true
      * it is exposed (made viewable).
      *
+     * <p>
+     * 选择由指定的路径数组标识的节点。如果任何路径中的任何组件被隐藏(在折叠节点下),并且<code> getExpandsSelectedPaths </code>为true,它将被公开(使其可见)。
+     * 
+     * 
      * @param paths an array of <code>TreePath</code> objects that specifies
      *          the nodes to select
      */
@@ -1653,6 +2121,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  将路径标识设置为引导。可能不选择导联。领导不是由<code> JTree </code>维护,而是UI将更新它。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param newPath  the new lead path
      * @since 1.3
      * @beaninfo
@@ -1678,6 +2152,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置标识为锚点的路径。锚不是由<code> JTree </code>维护,而是UI将更新它。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param newPath  the new anchor path
      * @since 1.3
      * @beaninfo
@@ -1694,6 +2174,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Selects the node at the specified row in the display.
      *
+     * <p>
+     *  选择显示中指定行处的节点。
+     * 
+     * 
      * @param row  the row to select, where 0 is the first row in
      *             the display
      */
@@ -1712,6 +2196,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * be cleared. That is it will be as if <code>clearSelection</code>
      * was invoked.
      *
+     * <p>
+     *  选择与显示中每个指定行对应的节点。如果<code> rows </code>的特定元素是< 0或&gt; = <code> getRowCount </code>,它将被忽略。
+     * 如果<code> rows </code>中的元素都不是有效行,则选择将被清除。这就好像<code> clearSelection </code>被调用了。
+     * 
+     * 
      * @param rows  an array of ints specifying the rows to select,
      *              where 0 indicates the first row in the display
      */
@@ -1739,6 +2228,13 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * exist as children under the same parent -- each sibling must be
      * a unique object.
      *
+     * <p>
+     *  将由指定的<code> TreePath </code>标识的节点添加到当前选择。
+     * 如果路径的任何组件是不可见的,并且<code> getExpandsSelectedPaths </code>为true,则它是可见的。
+     * <p>
+     *  请注意,<code> JTree </code>不允许重复节点作为同一个父下的子节点存在 - 每个兄弟节点必须是唯一的对象。
+     * 
+     * 
      * @param path the <code>TreePath</code> to add
      */
     public void addSelectionPath(TreePath path) {
@@ -1755,6 +2251,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * exist as children under the same parent -- each sibling must be
      * a unique object.
      *
+     * <p>
+     *  将路径数组中的每个路径添加到当前选择。如果任何路径的任何组件是不可见的,并且<code> getExpandsSelectedPaths </code>为true,则它是可见的。
+     * <p>
+     * 请注意,<code> JTree </code>不允许重复节点作为同一个父下的子节点存在 - 每个兄弟节点必须是唯一的对象。
+     * 
+     * 
      * @param paths an array of <code>TreePath</code> objects that specifies
      *          the nodes to add
      */
@@ -1765,6 +2267,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Adds the path at the specified row to the current selection.
      *
+     * <p>
+     *  将指定行处的路径添加到当前选择。
+     * 
+     * 
      * @param row  an integer specifying the row of the node to add,
      *             where 0 is the first row in the display
      */
@@ -1777,6 +2283,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Adds the paths at each of the specified rows to the current selection.
      *
+     * <p>
+     *  将每个指定行的路径添加到当前选择。
+     * 
+     * 
      * @param rows  an array of ints specifying the rows to add,
      *              where 0 indicates the first row in the display
      */
@@ -1799,6 +2309,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * {@code getSelectionModel().getSelectionPath().getLastPathComponent()}.
      * This is typically only useful if the selection has one path.
      *
+     * <p>
+     *  返回所选路径的最后一个路径组件。这是{@code getSelectionModel()。getSelectionPath()。getLastPathComponent()}的一个方便的方法。
+     * 这通常仅在选择具有一个路径时有用。
+     * 
+     * 
      * @return the last path component of the selected path, or
      *         <code>null</code> if nothing is selected
      * @see TreePath#getLastPathComponent
@@ -1813,6 +2328,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * Returns the path identified as the lead.
+     * <p>
+     *  返回标识为潜在客户的路径。
+     * 
+     * 
      * @return path identified as the lead
      */
     public TreePath getLeadSelectionPath() {
@@ -1821,6 +2340,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * Returns the path identified as the anchor.
+     * <p>
+     *  返回标识为锚点的路径。
+     * 
+     * 
      * @return path identified as the anchor
      * @since 1.3
      */
@@ -1831,6 +2354,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the path to the first selected node.
      *
+     * <p>
+     *  返回第一个选定节点的路径。
+     * 
+     * 
      * @return the <code>TreePath</code> for the first selected node,
      *          or <code>null</code> if nothing is currently selected
      */
@@ -1841,6 +2368,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the paths of all selected values.
      *
+     * <p>
+     *  返回所有选定值的路径。
+     * 
+     * 
      * @return an array of <code>TreePath</code> objects indicating the selected
      *         nodes, or <code>null</code> if nothing is currently selected
      */
@@ -1857,6 +2388,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * be returned, based on the <code>TreeSelectionModel</code>
      * implementation.
      *
+     * <p>
+     *  返回所有当前选定的行。这个方法只是转发到<code> TreeSelectionModel </code>。
+     * 如果没有选择<code> null </code>或将返回一个空数组,基于<code> TreeSelectionModel </code>实现。
+     * 
+     * 
      * @return an array of integers that identifies all currently selected rows
      *         where 0 is the first row in the display
      */
@@ -1867,6 +2403,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the number of nodes selected.
      *
+     * <p>
+     *  返回所选的节点数。
+     * 
+     * 
      * @return the number of nodes selected
      */
     public int getSelectionCount() {
@@ -1877,6 +2417,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns the smallest selected row. If the selection is empty, or
      * none of the selected paths are viewable, {@code -1} is returned.
      *
+     * <p>
+     *  返回所选的最小行。如果选择为空,或者所选的路径都不可见,则返回{@code -1}。
+     * 
+     * 
      * @return the smallest selected row
      */
     public int getMinSelectionRow() {
@@ -1887,6 +2431,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns the largest selected row. If the selection is empty, or
      * none of the selected paths are viewable, {@code -1} is returned.
      *
+     * <p>
+     *  返回所选的最大行。如果选择为空,或者所选的路径都不可见,则返回{@code -1}。
+     * 
+     * 
      * @return the largest selected row
      */
     public int getMaxSelectionRow() {
@@ -1896,6 +2444,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the row index corresponding to the lead path.
      *
+     * <p>
+     *  返回与引导路径对应的行索引。
+     * 
+     * 
      * @return an integer giving the row index of the lead path,
      *          where 0 is the first row in the display; or -1
      *          if <code>leadPath</code> is <code>null</code>
@@ -1912,6 +2464,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the item identified by the path is currently selected.
      *
+     * <p>
+     *  如果当前选择了由路径标识的项目,则返回true。
+     * 
+     * 
      * @param path a <code>TreePath</code> identifying a node
      * @return true if the node is selected
      */
@@ -1922,6 +2478,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the node identified by row is selected.
      *
+     * <p>
+     *  如果选择由行标识的节点,则返回true。
+     * 
+     * 
      * @param row  an integer specifying a display row, where 0 is the first
      *             row in the display
      * @return true if the node is selected
@@ -1940,6 +2500,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * this may not return all
      * the expanded paths, or may return paths that are no longer expanded.
      *
+     * <p>
+     * 返回当前展开的路径<code> parent </code>的后代的<code> Enumeration </code>。
+     * 如果<code> parent </code>当前未展开,则会返回<code> null </code>。
+     * 如果在迭代返回的<code>枚举</code>时展开/折叠节点,这可能不会返回所有扩展路径,或可能返回不再扩展的路径。
+     * 
+     * 
      * @param parent  the path which is to be examined
      * @return an <code>Enumeration</code> of the descendents of
      *          <code>parent</code>, or <code>null</code> if
@@ -1981,6 +2547,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the node identified by the path has ever been
      * expanded.
+     * <p>
+     *  如果路径标识的节点已经展开,则返回true。
+     * 
+     * 
      * @return true if the <code>path</code> has ever been expanded
      */
     public boolean hasBeenExpanded(TreePath path) {
@@ -1990,6 +2560,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the node identified by the path is currently expanded,
      *
+     * <p>
+     *  如果路径标识的节点当前已展开,则返回true,
+     * 
+     * 
      * @param path  the <code>TreePath</code> specifying the node to check
      * @return false if any of the nodes in the node's path are collapsed,
      *               true if all nodes in the path are expanded
@@ -2013,6 +2587,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns true if the node at the specified display row is currently
      * expanded.
      *
+     * <p>
+     *  如果当前展开指定显示行的节点,则返回true。
+     * 
+     * 
      * @param row  the row to check, where 0 is the first row in the
      *             display
      * @return true if the node is currently expanded, otherwise false
@@ -2037,6 +2615,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * this will return false if any of the values in path are currently
      * not being displayed.
      *
+     * <p>
+     *  如果path标识的值当前已折叠,则返回true,如果当前未显示路径中的任何值,则返回false。
+     * 
+     * 
      * @param path  the <code>TreePath</code> to check
      * @return true if any of the nodes in the node's path are collapsed,
      *               false if all nodes in the path are expanded
@@ -2048,6 +2630,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the node at the specified display row is collapsed.
      *
+     * <p>
+     *  如果指定显示行处的节点已折叠,则返回true。
+     * 
+     * 
      * @param row  the row to check, where 0 is the first row in the
      *             display
      * @return true if the node is currently collapsed, otherwise false
@@ -2059,6 +2645,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Ensures that the node identified by path is currently viewable.
      *
+     * <p>
+     *  确保由路径标识的节点当前是可见的。
+     * 
+     * 
      * @param path  the <code>TreePath</code> to make visible
      */
     public void makeVisible(TreePath path) {
@@ -2076,6 +2666,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * which means it is either the root or all of its parents are expanded.
      * Otherwise, this method returns false.
      *
+     * <p>
+     *  如果path标识的值当前是可查看的,则返回true,这意味着它是根或其父对象都被展开。否则,此方法返回false。
+     * 
+     * 
      * @return true if the node is viewable, otherwise false
      */
     public boolean isVisible(TreePath path) {
@@ -2099,6 +2693,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * This method returns a valid rectangle, even if the specified
      * node is not currently displayed.
      *
+     * <p>
+     *  返回指定节点将被绘制到的<code> Rectangle </code>。如果路径中的任何组件被隐藏(折叠父级),则返回<code> null </code>。
+     * <p>
+     *  注意：<br>此方法返回有效的矩形,即使当前未显示指定的节点。
+     * 
+     * 
      * @param path the <code>TreePath</code> identifying the node
      * @return the <code>Rectangle</code> the node is drawn in,
      *          or <code>null</code>
@@ -2115,6 +2715,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns the <code>Rectangle</code> that the node at the specified row is
      * drawn in.
      *
+     * <p>
+     *  返回绘制指定行处节点的<code> Rectangle </code>。
+     * 
+     * 
      * @param row  the row to be drawn, where 0 is the first row in the
      *             display
      * @return the <code>Rectangle</code> the node is drawn in
@@ -2129,6 +2733,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * node identified by the path is displayed. Only works when this
      * <code>JTree</code> is contained in a <code>JScrollPane</code>.
      *
+     * <p>
+     * 确保路径中的所有路径组件都已展开(除了最后一个路径组件),并滚动以显示由路径标识的节点。
+     * 仅当此<code> JTree </code>包含在<code> JScrollPane </code>中时才有效。
+     * 
+     * 
      * @param path  the <code>TreePath</code> identifying the node to
      *          bring into view
      */
@@ -2153,6 +2762,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * is performed. Only works when this <code>JTree</code> is contained in a
      * <code>JScrollPane</code>.
      *
+     * <p>
+     *  滚动按行标识的项目,直到显示为止。执行使该行进入视图所需的最小滚动量。仅当此<code> JTree </code>包含在<code> JScrollPane </code>中时才有效。
+     * 
+     * 
      * @param row  an integer specifying the row to scroll, where 0 is the
      *             first row in the display
      */
@@ -2165,6 +2778,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * not visible, or a {@code TreeUI} has not been set, <code>null</code>
      * is returned.
      *
+     * <p>
+     *  返回指定行的路径。如果<code> row </code>不可见,或者未设置{@code TreeUI},则会返回<code> null </code>。
+     * 
+     * 
      * @param row  an integer specifying a row
      * @return the <code>TreePath</code> to the specified node,
      *          <code>null</code> if <code>row &lt; 0</code>
@@ -2182,6 +2799,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns the row that displays the node identified by the specified
      * path.
      *
+     * <p>
+     *  返回显示由指定路径标识的节点的行。
+     * 
+     * 
      * @param path  the <code>TreePath</code> identifying a node
      * @return an integer specifying the display row, where 0 is the first
      *         row in the display, or -1 if any of the elements in path
@@ -2200,6 +2821,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * expanded and viewable. If the last item in the path is a
      * leaf, this will have no effect.
      *
+     * <p>
+     *  确保由指定路径标识的节点被扩展和可见。如果路径中的最后一个项目是一个叶子,这将没有效果。
+     * 
+     * 
      * @param path  the <code>TreePath</code> identifying a node
      */
     public void expandPath(TreePath path) {
@@ -2219,6 +2844,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * If <code>row</code> is &lt; 0 or &gt;= <code>getRowCount</code> this
      * will have no effect.
      *
+     * <p>
+     *  确保指定行中的节点被展开和可见。
+     * <p>
+     *  如果<code> row </code> 0或&gt; = <code> getRowCount </code>,这将没有效果。
+     * 
+     * 
      * @param row  an integer specifying a display row, where 0 is the
      *             first row in the display
      */
@@ -2230,6 +2861,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Ensures that the node identified by the specified path is
      * collapsed and viewable.
      *
+     * <p>
+     *  确保由指定路径标识的节点被折叠和可见。
+     * 
+     * 
      * @param path  the <code>TreePath</code> identifying a node
       */
     public void collapsePath(TreePath path) {
@@ -2242,6 +2877,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * If <code>row</code> is &lt; 0 or &gt;= <code>getRowCount</code> this
      * will have no effect.
      *
+     * <p>
+     *  确保指定行中的节点已折叠。
+     * <p>
+     *  如果<code> row </code> 0或&gt; = <code> getRowCount </code>,这将没有效果。
+     * 
+     * 
      * @param row  an integer specifying a display row, where 0 is the
      *             first row in the display
       */
@@ -2252,6 +2893,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the path for the node at the specified location.
      *
+     * <p>
+     *  返回指定位置处节点的路径。
+     * 
+     * 
      * @param x an integer giving the number of pixels horizontally from
      *          the left edge of the display area, minus any left margin
      * @param y an integer giving the number of pixels vertically from
@@ -2275,6 +2920,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the row for the specified location.
      *
+     * <p>
+     *  返回指定位置的行。
+     * 
+     * 
      * @param x an integer giving the number of pixels horizontally from
      *          the left edge of the display area, minus any left margin
      * @param y an integer giving the number of pixels vertically from
@@ -2294,6 +2943,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * the node is exactly at x, y, get the node's bounds and
      * test x, y against that.
      *
+     * <p>
+     * 返回最接近x,y的节点的路径。如果当前没有节点可见,或者没有模型,则返回<code> null </code>,否则总是返回一个有效路径。要测试节点是否正好在x,y,获取节点的边界,并测试x,y。
+     * 
+     * 
      * @param x an integer giving the number of pixels horizontally from
      *          the left edge of the display area, minus any left margin
      * @param y an integer giving the number of pixels vertically from
@@ -2319,6 +2972,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * exactly at x, y, get the bounds for the node at the returned
      * row and test x, y against that.
      *
+     * <p>
+     *  将该行返回到最接近x,y的节点。如果没有节点可见或没有模型,则返回-1。否则,它总是返回一个有效的行。要测试返回的对象是否完全在x,y,在返回的行获取节点的边界,并测试x,y。
+     * 
+     * 
      * @param x an integer giving the number of pixels horizontally from
      *          the left edge of the display area, minus any left margin
      * @param y an integer giving the number of pixels vertically from
@@ -2337,6 +2994,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns true if the tree is being edited. The item that is being
      * edited can be obtained using <code>getSelectionPath</code>.
      *
+     * <p>
+     *  如果树正在编辑,则返回true。正在编辑的项目可以使用<code> getSelectionPath </code>获取。
+     * 
+     * 
      * @return true if the user is currently editing a node
      * @see #getSelectionPath
      */
@@ -2360,6 +3021,13 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * their position in the tree, use {@link #setInvokesStopCellEditing}.
      * </blockquote>
      *
+     * <p>
+     *  结束当前编辑会话。 (<code> DefaultTreeCellEditor </code>对象保存单元格中当前正在进行的任何编辑,其他实现可能会有所不同)。如果树未被编辑,则没有效果。
+     * <blockquote>
+     *  <b>注意：</b> <br>要在用户更改其在树中的位置时自动进行编辑保存,请使用{@link #setInvokesStopCellEditing}。
+     * </blockquote>
+     * 
+     * 
      * @return true if editing was in progress and is now stopped,
      *              false if editing was not in progress
      */
@@ -2374,6 +3042,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Cancels the current editing session. Has no effect if the
      * tree isn't being edited.
+     * <p>
+     *  取消当前编辑会话。如果树没有被编辑,则没有效果。
+     * 
      */
     public void  cancelEditing() {
         TreeUI                  tree = getUI();
@@ -2388,6 +3059,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * does not allow
      * editing for the specified item.
      *
+     * <p>
+     *  选择由指定路径标识的节点并启动编辑。如果<code> CellEditor </code>不允许编辑指定的项目,编辑尝试将失败。
+     * 
+     * 
      * @param path  the <code>TreePath</code> identifying a node
      */
     public void startEditingAtPath(TreePath path) {
@@ -2400,6 +3075,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the path to the element that is currently being edited.
      *
+     * <p>
+     *  返回当前正在编辑的元素的路径。
+     * 
+     * 
      * @return  the <code>TreePath</code> for the node being edited
      */
     public TreePath getEditingPath() {
@@ -2426,6 +3105,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     * 设置树的选择模型。当指定<code> null </code>值时,将使用一个空的<code> selectionModel </code>,它不允许选择。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param selectionModel the <code>TreeSelectionModel</code> to use,
      *          or <code>null</code> to disable selections
      * @see TreeSelectionModel
@@ -2469,6 +3154,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * set the selection model to <code>null</code>, which forces an empty
      * selection model to be used.
      *
+     * <p>
+     *  返回选择的模型。这应该总是返回一个非<code> null </code>值。如果不想允许任何选择,请将选择模型设置为<code> null </code>,这将强制使用空选择模型。
+     * 
+     * 
      * @see #setSelectionModel
      */
     public TreeSelectionModel getSelectionModel() {
@@ -2497,6 +3186,16 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * An empty array is returned if the row count is {@code 0}, or
      * the specified indices do not bound the viewable set of rows.
      *
+     * <p>
+     *  返回指定行之间的路径(包括端点)。如果指定的索引在可见的行集合内,或者绑定了可见的行集合,则索引受可视行集合的约束。如果指定的索引不在可见的行集内,或者不绑定可见的行集,则返回空数组。
+     * 例如,如果行计数为{@code 10},并且使用{@code -1,20}调用此方法,则指定的索引将被限制为可见的行集,并且被视为如果使用{@code 0,9}。
+     * 另一方面,如果使用{@code -10,-1}调用它,那么指定的索引不会绑定可见的行集,并返回一个空数组。
+     * <p>
+     *  参数不依赖于顺序。也就是说,{@code getPathBetweenRows(x,y)}等价于{@code getPathBetweenRows(y,x)}。
+     * <p>
+     *  如果行计数为{@code 0}或指定的索引未绑定可见的行集,则返回空数组。
+     * 
+     * 
      * @param index0 the first index in the range
      * @param index1 the last index in the range
      * @return the paths (inclusive) between the specified row indices
@@ -2540,6 +3239,14 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * setSelectionInterval(x, y)} is equivalent to
      * {@code setSelectionInterval(y, x)}.
      *
+     * <p>
+     * 选择指定间隔(包括)中的行。如果指定的索引在可见的行集内,或者绑定了可见的行集,则指定的行受可视行集约束。如果指定的索引不在可见的行集内,或者不绑定可见的行集,则清除选择。
+     * 例如,如果行计数为{@code 10},并且使用{@code -1,20}调用此方法,则指定的索引限制可见范围,并且将其视为使用{@code 0 ,9}。
+     * 另一方面,如果使用{@code -10,-1}调用它,则指定的索引不会绑定可见的行集,并且清除选择。
+     * <p>
+     *  参数不依赖于顺序。也就是说,{@code setSelectionInterval(x,y)}等价于{@code setSelectionInterval(y,x)}。
+     * 
+     * 
      * @param index0 the first index in the range to select
      * @param index1 the last index in the range to select
     */
@@ -2567,6 +3274,14 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * addSelectionInterval(x, y)} is equivalent to
      * {@code addSelectionInterval(y, x)}.
      *
+     * <p>
+     * 将指定的行(包括)添加到选择中。如果指定的索引在可见的行集合内,或者绑定了可见的行集合,则指定的索引受可视行集合的约束。如果索引不在可见的行集合内,或者不绑定可见的行集合,则选择不变。
+     * 例如,如果行计数为{@code 10},并且使用{@code -1,20}调用此方法,则指定的索引限制可见范围,并且将其视为使用{@code 0 ,9}。
+     * 另一方面,如果使用{@code -10,-1}调用它,那么指定的索引不会绑定可见的行集,并且选择不会改变。
+     * <p>
+     *  参数不依赖于顺序。也就是说,{@code addSelectionInterval(x,y)}等价于{@code addSelectionInterval(y,x)}。
+     * 
+     * 
      * @param index0 the first index in the range to add to the selection
      * @param index1 the last index in the range to add to the selection
      */
@@ -2595,6 +3310,14 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * removeSelectionInterval(x, y)} is equivalent to
      * {@code removeSelectionInterval(y, x)}.
      *
+     * <p>
+     * 从选择中删除指定的行(包括)。如果指定的索引在可见的行集合内,或者绑定了可见的行集合,则指定的索引受可视行集合的约束。如果指定的索引不在可见的行集内,或不绑定可见的行集,则选择不会更改。
+     * 例如,如果行计数为{@code 10},并且使用{@code -1,20}调用此方法,则指定的范围会限制可见范围,这被视为使用{@code 0 ,9}。
+     * 另一方面,如果使用{@code -10,-1}调用此方法,则指定的范围不会绑定可见的行集,并且选择不会更改。
+     * <p>
+     *  参数不依赖于顺序。也就是说,{@code removeSelectionInterval(x,y)}等价于{@code removeSelectionInterval(y,x)}。
+     * 
+     * 
      * @param index0 the first row to remove from the selection
      * @param index1 the last row to remove from the selection
      */
@@ -2610,6 +3333,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Removes the node identified by the specified path from the current
      * selection.
      *
+     * <p>
+     *  从当前选择中删除指定路径标识的节点。
+     * 
+     * 
      * @param path  the <code>TreePath</code> identifying a node
      */
     public void removeSelectionPath(TreePath path) {
@@ -2620,6 +3347,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Removes the nodes identified by the specified paths from the
      * current selection.
      *
+     * <p>
+     *  从当前选择中删除指定路径标识的节点。
+     * 
+     * 
      * @param paths an array of <code>TreePath</code> objects that
      *              specifies the nodes to remove
      */
@@ -2631,6 +3362,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Removes the row at the index <code>row</code> from the current
      * selection.
      *
+     * <p>
+     *  从当前选择中删除索引<code> row </code>处的行。
+     * 
+     * 
      * @param row  the row to remove
      */
     public void removeSelectionRow(int row) {
@@ -2643,6 +3378,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Removes the rows that are selected at each of the specified
      * rows.
      *
+     * <p>
+     *  删除在每个指定行中选择的行。
+     * 
+     * 
      * @param rows  an array of ints specifying display rows, where 0 is
      *             the first row in the display
      */
@@ -2661,6 +3400,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * Clears the selection.
+     * <p>
+     *  清除选择。
+     * 
      */
     public void clearSelection() {
         getSelectionModel().clearSelection();
@@ -2669,6 +3411,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns true if the selection is currently empty.
      *
+     * <p>
+     *  如果选择当前为空,则返回true。
+     * 
+     * 
      * @return true if the selection is currently empty
      */
     public boolean isSelectionEmpty() {
@@ -2678,6 +3424,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Adds a listener for <code>TreeExpansion</code> events.
      *
+     * <p>
+     *  为<code> TreeExpansion </code>事件添加侦听器。
+     * 
+     * 
      * @param tel a TreeExpansionListener that will be notified when
      *            a tree node is expanded or collapsed (a "negative
      *            expansion")
@@ -2692,6 +3442,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Removes a listener for <code>TreeExpansion</code> events.
      *
+     * <p>
+     *  删除<code> TreeExpansion </code>事件的侦听器。
+     * 
+     * 
      * @param tel the <code>TreeExpansionListener</code> to remove
      */
     public void removeTreeExpansionListener(TreeExpansionListener tel) {
@@ -2705,6 +3459,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns an array of all the <code>TreeExpansionListener</code>s added
      * to this JTree with addTreeExpansionListener().
      *
+     * <p>
+     *  返回通过addTreeExpansionListener()添加到此JTree的所有<code> TreeExpansionListener </code>数组。
+     * 
+     * 
      * @return all of the <code>TreeExpansionListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -2716,6 +3474,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Adds a listener for <code>TreeWillExpand</code> events.
      *
+     * <p>
+     * 为<code> TreeWillExpand </code>事件添加侦听器。
+     * 
+     * 
      * @param tel a <code>TreeWillExpandListener</code> that will be notified
      *            when a tree node will be expanded or collapsed (a "negative
      *            expansion")
@@ -2727,6 +3489,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Removes a listener for <code>TreeWillExpand</code> events.
      *
+     * <p>
+     *  删除<code> TreeWillExpand </code>事件的侦听器。
+     * 
+     * 
      * @param tel the <code>TreeWillExpandListener</code> to remove
      */
     public void removeTreeWillExpandListener(TreeWillExpandListener tel) {
@@ -2737,6 +3503,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns an array of all the <code>TreeWillExpandListener</code>s added
      * to this JTree with addTreeWillExpandListener().
      *
+     * <p>
+     *  返回通过addTreeWillExpandListener()添加到此JTree的所有<code> TreeWillExpandListener </code>的数组。
+     * 
+     * 
      * @return all of the <code>TreeWillExpandListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -2750,6 +3520,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * notification on this event type.  The event instance
      * is lazily created using the <code>path</code> parameter.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用<code> path </code>参数进行延迟创建。
+     * 
+     * 
      * @param path the <code>TreePath</code> indicating the node that was
      *          expanded
      * @see EventListenerList
@@ -2781,6 +3555,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * notification on this event type.  The event instance
      * is lazily created using the <code>path</code> parameter.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用<code> path </code>参数进行延迟创建。
+     * 
+     * 
      * @param path the <code>TreePath</code> indicating the node that was
      *          collapsed
      * @see EventListenerList
@@ -2812,6 +3590,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * notification on this event type.  The event instance
      * is lazily created using the <code>path</code> parameter.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用<code> path </code>参数进行延迟创建。
+     * 
+     * 
      * @param path the <code>TreePath</code> indicating the node that was
      *          expanded
      * @see EventListenerList
@@ -2838,6 +3620,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * notification on this event type.  The event instance
      * is lazily created using the <code>path</code> parameter.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用<code> path </code>参数进行延迟创建。
+     * 
+     * 
      * @param path the <code>TreePath</code> indicating the node that was
      *          expanded
      * @see EventListenerList
@@ -2862,6 +3648,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Adds a listener for <code>TreeSelection</code> events.
      *
+     * <p>
+     *  为<code> TreeSelection </code>事件添加侦听器。
+     * 
+     * 
      * @param tsl the <code>TreeSelectionListener</code> that will be notified
      *            when a node is selected or deselected (a "negative
      *            selection")
@@ -2878,6 +3668,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Removes a <code>TreeSelection</code> listener.
      *
+     * <p>
+     *  删除<code> TreeSelection </code>侦听器。
+     * 
+     * 
      * @param tsl the <code>TreeSelectionListener</code> to remove
      */
     public void removeTreeSelectionListener(TreeSelectionListener tsl) {
@@ -2894,6 +3688,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns an array of all the <code>TreeSelectionListener</code>s added
      * to this JTree with addTreeSelectionListener().
      *
+     * <p>
+     *  返回通过addTreeSelectionListener()添加到此JTree的所有<code> TreeSelectionListener </code>数组。
+     * 
+     * 
      * @return all of the <code>TreeSelectionListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -2906,6 +3704,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Notifies all listeners that have registered interest for
      * notification on this event type.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。
+     * 
+     * 
      * @param e the <code>TreeSelectionEvent</code> to be fired;
      *          generated by the
      *          <code>TreeSelectionModel</code>
@@ -2934,6 +3736,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * expanded node set (e.g nodes were expanded or collapsed, or
      * nodes were inserted into the tree). You should never have to
      * invoke this, the UI will invoke this as it needs to.
+     * <p>
+     * 当树已更改足够大,我们需要调整边界,但不够,我们需要删除扩展的节点集(例如节点被扩展或折叠,或节点插入到树中)时发送。你应该永远不必调用这个,UI将调用它,因为它需要。
+     * 
      */
     public void treeDidChange() {
         revalidate();
@@ -2948,6 +3753,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置要显示的行数。这将只有当树包含在<code> JScrollPane </code>中时才会工作,并且将调整该滚动窗格的首选大小和大小。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @param newCount the number of rows to display
      * @beaninfo
      *        bound: true
@@ -2968,6 +3779,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns the number of rows that are displayed in the display area.
      *
+     * <p>
+     *  返回显示区域中显示的行数。
+     * 
+     * 
      * @return the number of rows displayed
      */
     public int getVisibleRowCount() {
@@ -2976,6 +3791,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
     /**
      * Expands the root path, assuming the current TreeModel has been set.
+     * <p>
+     *  扩展根路径,假设当前的TreeModel已设置。
+     * 
      */
     private void expandRoot() {
         TreeModel              model = getModel();
@@ -2991,6 +3809,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <code>TreePath</code> into a String, <code>convertValueToText</code>
      * is used.
      *
+     * <p>
+     *  将TreePath返回到以前缀开头的下一个树元素。要处理<code> TreePath </code>到字符串的转换,使用<code> convertValueToText </code>。
+     * 
+     * 
      * @param prefix the string to test for a match
      * @param startingRow the row for starting the search
      * @param bias the search direction, either
@@ -3130,6 +3952,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns an object that can be archived indicating what nodes are
      * expanded and what aren't. The objects from the model are NOT
      * written out.
+     * <p>
+     *  返回可以归档的对象,指示哪些节点已扩展,哪些未扩展。模型中的对象不会被写出。
+     * 
      */
     private Object getArchivableExpandedState() {
         TreeModel       model = getModel();
@@ -3163,6 +3988,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Updates the expanded state of nodes in the tree based on the
      * previously archived state <code>state</code>.
+     * <p>
+     *  基于先前存档的状态<code>状态</code>更新树中的节点的展开状态。
+     * 
      */
     private void unarchiveExpandedState(Object state) {
         if(state instanceof Vector) {
@@ -3186,6 +4014,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * components in the <code>path</code>. If <code>path</code> is
      * the root, this will return an empty array.  If <code>path</code>
      * is <code>null</code>, <code>null</code> will be returned.
+     * <p>
+     *  返回一个整数数组,指定<code> path </code>中组件的索引。如果<code> path </code>是根,这将返回一个空数组。
+     * 如果<code> path </code>是<code> null </code>,将返回<code> null </code>。
+     * 
      */
     private int[] getModelIndexsForPath(TreePath path) {
         if(path != null) {
@@ -3211,6 +4043,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * for each of the indices in <code>indexs</code>. If <code>indexs</code>
      * or the <code>TreeModel</code> is <code>null</code>, it will return
      * <code>null</code>.
+     * <p>
+     * 返回通过为<code> indexs </code>中的每个索引获取子项而创建的<code> TreePath </code>。
+     * 如果<code> indexs </code>或<code> TreeModel </code>是<code> null </code>,它将返回<code> null </code>。
+     * 
      */
     private TreePath getPathForIndexs(int[] indexs) {
         if(indexs == null)
@@ -3246,6 +4082,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  <code> EmptySelectionModel </code>是不允许选择任何内容的<code> TreeSelectionModel </code>。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     @SuppressWarnings("serial")
     protected static class EmptySelectionModel extends
@@ -3253,6 +4095,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
     {
         /**
          * The single instance of {@code EmptySelectionModel}.
+         * <p>
+         *  {@code EmptySelectionModel}的单个实例。
+         * 
          */
         protected static final EmptySelectionModel sharedInstance =
             new EmptySelectionModel();
@@ -3260,6 +4105,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Returns the single instance of {@code EmptySelectionModel}.
          *
+         * <p>
+         *  返回{@code EmptySelectionModel}的单个实例。
+         * 
+         * 
          * @return single instance of {@code EmptySelectionModel}
          */
         static public EmptySelectionModel sharedInstance() {
@@ -3270,6 +4119,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         *  这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param paths the paths to select; this is ignored
          */
         public void setSelectionPaths(TreePath[] paths) {}
@@ -3278,6 +4131,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         *  这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param paths the paths to add to the selection; this is ignored
          */
         public void addSelectionPaths(TreePath[] paths) {}
@@ -3286,6 +4143,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         *  这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param paths the paths to remove; this is ignored
          */
         public void removeSelectionPaths(TreePath[] paths) {}
@@ -3294,6 +4155,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         *  这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param mode the selection mode; this is ignored
          * @since 1.7
          */
@@ -3304,6 +4169,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         *  这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param mapper the {@code RowMapper} instance; this is ignored
          * @since 1.7
          */
@@ -3314,6 +4183,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         *  这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param listener the listener to add; this is ignored
          * @since 1.7
          */
@@ -3324,6 +4197,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         *  这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param listener the listener to remove; this is ignored
          * @since 1.7
          */
@@ -3335,6 +4212,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         * 这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param listener the listener to add; this is ignored
          * @since 1.7
          */
@@ -3346,6 +4227,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This is overriden to do nothing; {@code EmptySelectionModel}
          * does not allow a selection.
          *
+         * <p>
+         *  这是覆盖不做什么; {@code EmptySelectionModel}不允许选择。
+         * 
+         * 
          * @param listener the listener to remove; this is ignored
          * @since 1.7
          */
@@ -3368,6 +4253,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  使用<code> JTree </code>作为源创建一个新的<code> TreeSelectionEvent </code>,并将它传递给所有的监听器。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     @SuppressWarnings("serial")
     protected class TreeSelectionRedirector implements Serializable,
@@ -3377,6 +4268,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * Invoked by the <code>TreeSelectionModel</code> when the
          * selection changes.
          *
+         * <p>
+         *  当选择更改时,由<code> TreeSelectionModel </code>调用。
+         * 
+         * 
          * @param e the <code>TreeSelectionEvent</code> generated by the
          *              <code>TreeSelectionModel</code>
          */
@@ -3397,6 +4292,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * determined from <code>getVisibleRowCount</code> and the width
      * is the current preferred width.
      *
+     * <p>
+     *  返回<code> JTree </code>的首选显示大小。高度由<code> getVisibleRowCount </code>确定,width是当前的首选宽度。
+     * 
+     * 
      * @return a <code>Dimension</code> object containing the preferred size
      */
     public Dimension getPreferredScrollableViewportSize() {
@@ -3438,6 +4337,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * or, if it is totally displayed, the height of the next row in the
      * scrolling direction.
      *
+     * <p>
+     *  返回滚动时要增加的量。该量是第一显示行的不完全在视图中的高度,或者如果它被完全显示,则是在滚动方向上的下一行的高度。
+     * 
+     * 
      * @param visibleRect the view area visible within the viewport
      * @param orientation either <code>SwingConstants.VERTICAL</code>
      *          or <code>SwingConstants.HORIZONTAL</code>
@@ -3482,6 +4385,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns the amount for a block increment, which is the height or
      * width of <code>visibleRect</code>, based on <code>orientation</code>.
      *
+     * <p>
+     *  返回块增量的数量,它是基于<code> orientation </code>的<code> visibleRect </code>的高度或宽度。
+     * 
+     * 
      * @param visibleRect the view area visible within the viewport
      * @param orientation either <code>SwingConstants.VERTICAL</code>
      *          or <code>SwingConstants.HORIZONTAL</code>
@@ -3502,6 +4409,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * the tree is smaller than the viewports width.  In other words:
      * ensure that the tree is never smaller than its viewport.
      *
+     * <p>
+     * 返回false以指示视口的宽度不确定表的宽度,除非树的首选宽度小于视口宽度。换句话说：确保树从不小于其视口。
+     * 
+     * 
      * @return whether the tree should track the width of the viewport
      * @see Scrollable#getScrollableTracksViewportWidth
      */
@@ -3519,6 +4430,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * of the tree is smaller than the viewports height.  In other words:
      * ensure that the tree is never smaller than its viewport.
      *
+     * <p>
+     *  返回false以指示视口的高度不确定表的高度,除非树的首选高度小于视口高度。换句话说：确保树从不小于其视口。
+     * 
+     * 
      * @return whether the tree should track the height of the viewport
      * @see Scrollable#getScrollableTracksViewportHeight
      */
@@ -3538,6 +4453,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <code>path</code> are marked EXPANDED, but <code>path</code> itself
      * is marked collapsed.<p>
      * This will fail if a <code>TreeWillExpandListener</code> vetos it.
+     * <p>
+     *  设置此<code> JTree </code>的展开状态。如果<code> state </code>为真,则<code> path </code>和path的所有父代标记为展开。
+     * 如果<code> state </code>为false,则<code> path </code>的所有父代标记为EXPANDED,但<code> path </code>本身标记为已折叠。
+     * <p>代码> TreeWillExpandListener </code> vetos it。
+     * 
      */
     protected void setExpandedState(TreePath path, boolean state) {
         if(path != null) {
@@ -3636,6 +4556,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * Returns an <code>Enumeration</code> of <code>TreePaths</code>
      * that have been expanded that
      * are descendants of <code>parent</code>.
+     * <p>
+     *  返回<code> parent </code>的后代的已扩展的<code> TreePaths </code>的<code>枚举</code>。
+     * 
      */
     protected Enumeration<TreePath>
         getDescendantToggledPaths(TreePath parent)
@@ -3659,6 +4582,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <code>toRemove</code>
      * that have been expanded.
      *
+     * <p>
+     *  删除已扩展的<code> toRemove </code>中的<code> TreePaths </code>的任何后代。
+     * 
+     * 
      * @param toRemove an enumeration of the paths to remove; a value of
      *        {@code null} is ignored
      * @throws ClassCastException if {@code toRemove} contains an
@@ -3685,6 +4612,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
      /**
       * Clears the cache of toggled tree paths. This does NOT send out
       * any <code>TreeExpansionListener</code> events.
+      * <p>
+      *  清除切换的树路径的缓存。这不会发出任何<code> TreeExpansionListener </code>事件。
+      * 
       */
      protected void clearToggledPaths() {
          expandedState.clear();
@@ -3698,6 +4628,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
       * <p>
       * For more information on what expanded state means, see the
       * <a href=#jtree_description>JTree description</a> above.
+      * <p>
+      *  创建并返回<code> TreeModelHandler </code>的实例。当<code> TreeModel </code>更改时,返回的对象负责更新展开状态。
+      * <p>
+      *  有关展开状态含义的详细信息,请参见上面的<a href=#jtree_description> JTree说明</a>。
+      * 
       */
      protected TreeModelListener createTreeModelListener() {
          return new TreeModelHandler();
@@ -3708,6 +4643,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * <code>path</code>. If <code>includePath</code> is true and
      * <code>path</code> is selected, it will be removed from the selection.
      *
+     * <p>
+     * 删除选择中作为<code> path </code>的后代的任何路径。
+     * 如果<code> includePath </code>为true并且选择了<code> path </code>,它将从选择中删除。
+     * 
+     * 
      * @return true if a descendant was selected
      * @since 1.3
      */
@@ -3725,6 +4665,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Returns an array of paths in the selection that are descendants of
      * <code>path</code>. The returned array may contain <code>null</code>s.
+     * <p>
+     *  返回选择中作为<code> path </code>的后代的路径数组。返回的数组可以包含<code> null </code>。
+     * 
      */
     private TreePath[] getDescendantSelectedPaths(TreePath path,
                                                   boolean includePath) {
@@ -3754,6 +4697,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
     /**
      * Removes any paths from the selection model that are descendants of
      * the nodes identified by in <code>e</code>.
+     * <p>
+     *  从选择模型中删除作为由<code> e </code>标识的节点的后代的任何路径。
+     * 
      */
     void removeDescendantSelectedPaths(TreeModelEvent e) {
         TreePath            pPath = SwingUtilities2.getTreePath(e, getModel());
@@ -3776,6 +4722,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
      /**
       * Listens to the model and updates the <code>expandedState</code>
       * accordingly when nodes are removed, or changed.
+      * <p>
+      *  监听模型,并在删除或更改节点时相应地更新<code> expandedState </code>。
+      * 
       */
     protected class TreeModelHandler implements TreeModelListener {
         public void treeNodesChanged(TreeModelEvent e) { }
@@ -3869,12 +4818,21 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  <code> DynamicUtilTreeNode </code>可以包装向量/哈希表/数组/字符串,并根据需要创建适当的子树节点。它是动态的,因为它将只创建必要的孩子。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     @SuppressWarnings("serial")
     public static class DynamicUtilTreeNode extends DefaultMutableTreeNode {
         /**
          * Does the this <code>JTree</code> have children?
          * This property is currently not implemented.
+         * <p>
+         *  这个<code> JTree </code>有孩子吗?此属性当前未实现。
+         * 
          */
         protected boolean            hasChildren;
         /** Value to create children with. */
@@ -3888,6 +4846,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * elements are added is children, otherwise if <code>children</code>
          * is a hashtable all the key/value pairs are added in the order
          * <code>Enumeration</code> returns them.
+         * <p>
+         * 将<code> children </code>中的所有子级添加到父级。
+         * 如果<code> children </code>是一个数组或向量,其所有元素都被添加为子元素,否则如果<code> children </code>是一个哈希表,所有的键/枚举</code>返回它们。
+         * 将<code> children </code>中的所有子级添加到父级。
+         * 
          */
         public static void createChildren(DefaultMutableTreeNode parent,
                                           Object children) {
@@ -3929,6 +4892,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * if empty. Otherwise, the node is not
          * allowed to have children.
          *
+         * <p>
+         *  创建具有指定对象作为其值和指定子项的节点。
+         * 对于允许孩子的节点,children-object必须是一个对象数组,一个<code> Vector </code>或一个<code> Hashtable </code>  - 即使是空的。
+         * 否则,不允许节点具有子节点。
+         * 
+         * 
          * @param value  the <code>Object</code> that is the value for the
          *              new node
          * @param children an array of <code>Object</code>s, a
@@ -3960,6 +4929,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * Returns true if this node allows children. Whether the node
          * allows children depends on how it was created.
          *
+         * <p>
+         *  如果此节点允许子节点,则返回true。节点是否允许孩子取决于它是如何创建的。
+         * 
+         * 
          * @return true if this node allows children, false otherwise
          * @see JTree.DynamicUtilTreeNode
          */
@@ -3970,6 +4943,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Returns the number of child nodes.
          *
+         * <p>
+         *  返回子节点的数量。
+         * 
+         * 
          * @return the number of child nodes
          */
         public int getChildCount() {
@@ -3985,6 +4962,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * if <code>childValue</code> is a <code>Hashtable</code>
          * each key/value pair is added in the order that
          * <code>Enumeration</code> returns the keys.
+         * <p>
+         *  根据<code> childValue </code>加载子项。
+         * 如果<code> childValue </code>是<code> Vector </code>或数组,则每个元素作为子元素添加,如果<code> childValue </code>是<code> 
+         * Hashtable </code> /值对按<code>枚举</code>返回键的顺序添加。
+         *  根据<code> childValue </code>加载子项。
+         * 
          */
         protected void loadChildren() {
             loadedChildren = true;
@@ -3993,6 +4976,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
         /**
          * Subclassed to load the children, if necessary.
+         * <p>
+         *  子类加载子项,如有必要。
+         * 
          */
         public TreeNode getChildAt(int index) {
             if(!loadedChildren)
@@ -4002,6 +4988,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
         /**
          * Subclassed to load the children, if necessary.
+         * <p>
+         *  子类加载子项,如有必要。
+         * 
          */
         public Enumeration children() {
             if(!loadedChildren)
@@ -4040,6 +5029,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JTree </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JTree</code>.
      */
     protected String paramString() {
@@ -4078,6 +5072,11 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * AccessibleJTree.
      * A new AccessibleJTree instance is created if necessary.
      *
+     * <p>
+     * 获取与此JTree相关联的AccessibleContext。对于JTrees,AccessibleContext采用AccessibleJTree的形式。
+     * 如果需要,将创建一个新的AccessibleJTree实例。
+     * 
+     * 
      * @return an AccessibleJTree that serves as the
      *         AccessibleContext of this JTree
      */
@@ -4101,6 +5100,12 @@ public class JTree extends JComponent implements Scrollable, Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现<code> JTree </code>类的辅助功能支持。它提供了适用于树用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     @SuppressWarnings("serial")
     protected class AccessibleJTree extends AccessibleJComponent
@@ -4130,6 +5135,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * Tree Selection Listener value change method. Used to fire the
          * property change
          *
+         * <p>
+         *  树选择监听器值更改方法。用于触发属性更改
+         * 
+         * 
          * @param e ListSelectionEvent
          *
          */
@@ -4146,6 +5155,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * property. It notifies screen readers  that the visual
          * appearance of the component has changed, so they can
          * notify the user.
+         * <p>
+         *  触发可见的数据属性更改通知。 "可见"数据属性表示关于组件在显示器上的显示方式,其中外观没有绑定到任何其他属性。它通知屏幕阅读器组件的视觉外观已更改,以便他们可以通知用户。
+         * 
          */
         public void fireVisibleDataPropertyChange() {
            firePropertyChange(AccessibleContext.ACCESSIBLE_VISIBLE_DATA_PROPERTY,
@@ -4157,6 +5169,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Tree Model Node change notification.
          *
+         * <p>
+         *  树模型节点更改通知。
+         * 
+         * 
          * @param e  a Tree Model event
          */
         public void treeNodesChanged(TreeModelEvent e) {
@@ -4166,6 +5182,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Tree Model Node change notification.
          *
+         * <p>
+         *  树模型节点更改通知。
+         * 
+         * 
          * @param e  a Tree node insertion event
          */
         public void treeNodesInserted(TreeModelEvent e) {
@@ -4175,6 +5195,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Tree Model Node change notification.
          *
+         * <p>
+         *  树模型节点更改通知。
+         * 
+         * 
          * @param e  a Tree node(s) removal event
          */
         public  void treeNodesRemoved(TreeModelEvent e) {
@@ -4184,6 +5208,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Tree Model structure change change notification.
          *
+         * <p>
+         *  树模型结构更改更改通知。
+         * 
+         * 
          * @param e  a Tree Model event
          */
         public  void treeStructureChanged(TreeModelEvent e) {
@@ -4193,6 +5221,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Tree Collapsed notification.
          *
+         * <p>
+         *  树已折叠通知。
+         * 
+         * 
          * @param e  a TreeExpansionEvent
          */
         public  void treeCollapsed(TreeExpansionEvent e) {
@@ -4216,6 +5248,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Tree Model Expansion notification.
          *
+         * <p>
+         *  树模型扩展通知。
+         * 
+         * 
          * @param e  a Tree node insertion event
          */
         public  void treeExpanded(TreeExpansionEvent e) {
@@ -4244,6 +5280,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         *  It notifies screen readers the active child of the component
         *  has been changed so user can be notified from there.
         *
+        * <p>
+        * 触发活动的后代属性更改通知。活动后代用于诸如列表,树和表之类的对象,它们可能有暂时的子对象。它通知屏幕阅读器组件的活动子项已更改,以便可以从中通知用户。
+        * 
+        * 
         * @param oldPath - lead path of previous active child
         * @param newPath - lead path of current active child
         *
@@ -4308,6 +5348,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -4321,6 +5365,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * contained at the local coordinate <code>Point</code>.
          * Otherwise returns <code>null</code>.
          *
+         * <p>
+         *  返回包含在本地坐标<code> Point </code>处的<code> Accessible </code>子代(如果存在)。否则返回<code> null </code>。
+         * 
+         * 
          * @param p point in local coordinates of this <code>Accessible</code>
          * @return the <code>Accessible</code>, if it exists,
          *    at the specified location; else <code>null</code>
@@ -4339,6 +5387,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * Returns the number of top-level children nodes of this
          * JTree.  Each of these nodes may in turn have children nodes.
          *
+         * <p>
+         *  返回此JTree的顶级子节点的数量。这些节点中的每一个可以依次具有子节点。
+         * 
+         * 
          * @return the number of accessible children nodes in the tree.
          */
         public int getAccessibleChildrenCount() {
@@ -4357,6 +5409,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Return the nth Accessible child of the object.
          *
+         * <p>
+         *  返回对象的第n个Accessible子项。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the nth Accessible child of the object
          */
@@ -4389,6 +5445,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Get the index of this object in its accessible parent.
          *
+         * <p>
+         *  在其可访问的父代中获取此对象的索引。
+         * 
+         * 
          * @return the index of this object in its parent.  Since a JTree
          * top-level object does not have an accessible parent.
          * @see #getAccessibleParent
@@ -4405,6 +5465,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * return this object, which is responsible for implementing the
          * AccessibleSelection interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleSelection。在为此类实现Java Accessibility API时,返回此对象,它负责代表自身实现AccessibleSelection接口。
+         * 
+         * 
          * @return this object
          */
         public AccessibleSelection getAccessibleSelection() {
@@ -4415,6 +5479,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * Returns the number of items currently selected.
          * If no items are selected, the return value will be 0.
          *
+         * <p>
+         *  返回当前选择的项目数。如果未选择任何项目,则返回值将为0。
+         * 
+         * 
          * @return the number of items currently selected.
          */
         public int getAccessibleSelectionCount() {
@@ -4434,6 +5502,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * fewer items selected than the integer passed in, the return
          * value will be null.
          *
+         * <p>
+         *  返回表示对象中指定的选定项目的Accessible。如果没有选择,或者选择的项目少于传递的整数,则返回值将为null。
+         * 
+         * 
          * @param i the zero-based index of selected items
          * @return an Accessible containing the selected item
          */
@@ -4453,6 +5525,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Returns true if the current child of this object is selected.
          *
+         * <p>
+         *  如果选择此对象的当前子项,则返回true。
+         * 
+         * 
          * @param i the zero-based index of the child in this Accessible object.
          * @see AccessibleContext#getAccessibleChild
          */
@@ -4475,6 +5551,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * it replaces any existing selection in the object.  If the
          * specified item is already selected, this method has no effect.
          *
+         * <p>
+         * 将对象中指定的选定项目添加到对象的选择。如果对象支持多个选择,则将指定的项目添加到任何现有选择,否则将替换对象中的任何现有选择。如果已选择指定的项目,则此方法无效。
+         * 
+         * 
          * @param i the zero-based index of selectable items
          */
         public void addAccessibleSelection(int i) {
@@ -4493,6 +5573,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * selection.  If the specified item isn't currently selected, this
          * method has no effect.
          *
+         * <p>
+         *  从对象的选择中删除对象中指定的选定项目。如果当前未选择指定的项目,则此方法无效。
+         * 
+         * 
          * @param i the zero-based index of selectable items
          */
         public void removeAccessibleSelection(int i) {
@@ -4509,6 +5593,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Clears the selection in the object, so that nothing in the
          * object is selected.
+         * <p>
+         *  清除对象中的选择,以便不选择对象中的任何内容。
+         * 
          */
         public void clearAccessibleSelection() {
             int childCount = getAccessibleChildrenCount();
@@ -4520,6 +5607,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
         /**
          * Causes every selected item in the object to be selected
          * if the object supports multiple selections.
+         * <p>
+         *  如果对象支持多个选择,则导致选择对象中的每个选定项目。
+         * 
          */
         public void selectAllAccessibleSelection() {
             TreeModel model = JTree.this.getModel();
@@ -4534,6 +5624,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
          * This class implements accessibility support for the
          * <code>JTree</code> child.  It provides an implementation of the
          * Java Accessibility API appropriate to tree nodes.
+         * <p>
+         *  这个类实现了<code> JTree </code>子对象的辅助功能。它提供了适用于树节点的Java Accessibility API的实现。
+         * 
          */
         protected class AccessibleJTreeNode extends AccessibleContext
             implements Accessible, AccessibleComponent, AccessibleSelection,
@@ -4549,6 +5642,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
 
             /**
              *  Constructs an AccessibleJTreeNode
+             * <p>
+             *  构造一个AccessibleJTreeNode
+             * 
+             * 
              * @since 1.4
              */
             public AccessibleJTreeNode(JTree t, TreePath p, Accessible ap) {
@@ -4583,6 +5680,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * this class, return this object, which is its own
              * AccessibleContext.
              *
+             * <p>
+             *  获取与此树节点相关联的AccessibleContext。在为此类实现Java辅助功能API时,返回此对象,这是它自己的AccessibleContext。
+             * 
+             * 
              * @return this object
              */
             public AccessibleContext getAccessibleContext() {
@@ -4625,6 +5726,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              /**
               * Get the accessible name of this object.
               *
+              * <p>
+              *  获取此对象的可访问名称。
+              * 
+              * 
               * @return the localized name of the object; null if this
               * object does not have a name
               */
@@ -4649,6 +5754,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Set the localized accessible name of this object.
              *
+             * <p>
+             *  设置此对象的本地化可访问名称。
+             * 
+             * 
              * @param s the new localized name of the object.
              */
             public void setAccessibleName(String s) {
@@ -4666,6 +5775,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Get the accessible description of this object.
              *
+             * <p>
+             *  获取此对象的可访问描述。
+             * 
+             * 
              * @return the localized description of the object; null if
              * this object does not have a description
              */
@@ -4681,6 +5794,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Set the accessible description of this object.
              *
+             * <p>
+             *  设置此对象的可访问描述。
+             * 
+             * 
              * @param s the new localized description of the object
              */
             public void setAccessibleDescription(String s) {
@@ -4695,6 +5812,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Get the role of this object.
              *
+             * <p>
+             *  获取此对象的作用。
+             * 
+             * 
              * @return an instance of AccessibleRole describing the role of the object
              * @see AccessibleRole
              */
@@ -4710,6 +5831,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Get the state set of this object.
              *
+             * <p>
+             *  获取此对象的状态集。
+             * 
+             * 
              * @return an instance of AccessibleStateSet containing the
              * current state set of the object
              * @see AccessibleState
@@ -4757,6 +5882,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Get the Accessible parent of this object.
              *
+             * <p>
+             *  获取此对象的可访问父级。
+             * 
+             * 
              * @return the Accessible parent of this object; null if this
              * object does not have an Accessible parent
              */
@@ -4790,6 +5919,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Get the index of this object in its accessible parent.
              *
+             * <p>
+             *  在其可访问的父代中获取此对象的索引。
+             * 
+             * 
              * @return the index of this object in its parent; -1 if this
              * object does not have an accessible parent.
              * @see #getAccessibleParent
@@ -4812,6 +5945,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Returns the number of accessible children in the object.
              *
+             * <p>
+             *  返回对象中可访问的子项数。
+             * 
+             * 
              * @return the number of accessible children in the object.
              */
             public int getAccessibleChildrenCount() {
@@ -4823,6 +5960,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Return the specified Accessible child of the object.
              *
+             * <p>
+             *  返回对象的指定Accessible子项。
+             * 
+             * 
              * @param i zero-based index of child
              * @return the Accessible child of the object
              */
@@ -4846,6 +5987,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * Gets the locale of the component. If the component does not have
              * a locale, then the locale of its parent is returned.
              *
+             * <p>
+             * 获取组件的语言环境。如果组件没有语言环境,那么将返回其父组件的语言环境。
+             * 
+             * 
              * @return This component's locale. If this component does not have
              * a locale, the locale of its parent is returned.
              * @exception IllegalComponentStateException
@@ -4867,6 +6012,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * Add a PropertyChangeListener to the listener list.
              * The listener is registered for all properties.
              *
+             * <p>
+             *  将PropertyChangeListener添加到侦听器列表。侦听器为所有属性注册。
+             * 
+             * 
              * @param l  The PropertyChangeListener to be added
              */
             public void addPropertyChangeListener(PropertyChangeListener l) {
@@ -4883,6 +6032,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * This removes a PropertyChangeListener that was registered
              * for all properties.
              *
+             * <p>
+             *  从侦听器列表中删除PropertyChangeListener。这将删除为所有属性注册的PropertyChangeListener。
+             * 
+             * 
              * @param l  The PropertyChangeListener to be removed
              */
             public void removePropertyChangeListener(PropertyChangeListener l) {
@@ -4900,6 +6053,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * return this object, which is responsible for implementing the
              * AccessibleAction interface on behalf of itself.
              *
+             * <p>
+             *  获取与此对象关联的AccessibleAction。在为该类实现Java辅助功能API时,返回此对象,该对象负责代表自身实现AccessibleAction接口。
+             * 
+             * 
              * @return this object
              */
             public AccessibleAction getAccessibleAction() {
@@ -4912,6 +6069,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * return this object, which is responsible for implementing the
              * AccessibleComponent interface on behalf of itself.
              *
+             * <p>
+             *  获取与此对象关联的AccessibleComponent。在为该类实现Java Accessibility API时,返回此对象,该对象负责代表自身实现AccessibleComponent接口。
+             * 
+             * 
              * @return this object
              */
             public AccessibleComponent getAccessibleComponent() {
@@ -4922,6 +6083,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * Get the AccessibleSelection associated with this object if one
              * exists.  Otherwise return null.
              *
+             * <p>
+             *  获取与此对象相关联的AccessibleSelection(如果存在)。否则返回null。
+             * 
+             * 
              * @return the AccessibleSelection, or null
              */
             public AccessibleSelection getAccessibleSelection() {
@@ -4937,6 +6102,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * Get the AccessibleText associated with this object if one
              * exists.  Otherwise return null.
              *
+             * <p>
+             *  获取与此对象相关联的AccessibleText(如果存在)。否则返回null。
+             * 
+             * 
              * @return the AccessibleText, or null
              */
             public AccessibleText getAccessibleText() {
@@ -4952,6 +6121,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * Get the AccessibleValue associated with this object if one
              * exists.  Otherwise return null.
              *
+             * <p>
+             *  获取与此对象关联的AccessibleValue(如果存在)。否则返回null。
+             * 
+             * 
              * @return the AccessibleValue, or null
              */
             public AccessibleValue getAccessibleValue() {
@@ -4969,6 +6142,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Get the background color of this object.
              *
+             * <p>
+             *  获取此对象的背景颜色。
+             * 
+             * 
              * @return the background color, if supported, of the object;
              * otherwise, null
              */
@@ -4989,6 +6166,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Set the background color of this object.
              *
+             * <p>
+             *  设置此对象的背景颜色。
+             * 
+             * 
              * @param c the new Color for the background
              */
             public void setBackground(Color c) {
@@ -5007,6 +6188,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Get the foreground color of this object.
              *
+             * <p>
+             *  获取此对象的前景色。
+             * 
+             * 
              * @return the foreground color, if supported, of the object;
              * otherwise, null
              */
@@ -5250,6 +6435,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * contained at the local coordinate <code>Point</code>.
              * Otherwise returns <code>null</code>.
              *
+             * <p>
+             *  返回包含在本地坐标<code> Point </code>处的<code> Accessible </code>子代(如果存在)。否则返回<code> null </code>。
+             * 
+             * 
              * @param p point in local coordinates of this
              *    <code>Accessible</code>
              * @return the <code>Accessible</code>, if it exists,
@@ -5321,6 +6510,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * Returns the number of items currently selected.
              * If no items are selected, the return value will be 0.
              *
+             * <p>
+             *  返回当前选择的项目数。如果未选择任何项目,则返回值将为0。
+             * 
+             * 
              * @return the number of items currently selected.
              */
             public int getAccessibleSelectionCount() {
@@ -5341,6 +6534,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * fewer items selected than the integer passed in, the return
              * value will be null.
              *
+             * <p>
+             * 返回表示对象中指定的选定项目的Accessible。如果没有选择,或者选择的项目少于传递的整数,则返回值将为null。
+             * 
+             * 
              * @param i the zero-based index of selected items
              * @return an Accessible containing the selected item
              */
@@ -5366,6 +6563,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Returns true if the current child of this object is selected.
              *
+             * <p>
+             *  如果选择此对象的当前子项,则返回true。
+             * 
+             * 
              * @param i the zero-based index of the child in this Accessible
              * object.
              * @see AccessibleContext#getAccessibleChild
@@ -5387,6 +6588,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * it replaces any existing selection in the object.  If the
              * specified item is already selected, this method has no effect.
              *
+             * <p>
+             *  将对象中指定的选定项目添加到对象的选择。如果对象支持多个选择,则将指定的项目添加到任何现有选择,否则将替换对象中的任何现有选择。如果已选择指定的项目,则此方法无效。
+             * 
+             * 
              * @param i the zero-based index of selectable items
              */
             public void addAccessibleSelection(int i) {
@@ -5405,6 +6610,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * selection.  If the specified item isn't currently selected, this
              * method has no effect.
              *
+             * <p>
+             *  从对象的选择中删除对象中指定的选定项目。如果当前未选择指定的项目,则此方法无效。
+             * 
+             * 
              * @param i the zero-based index of selectable items
              */
             public void removeAccessibleSelection(int i) {
@@ -5420,6 +6629,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Clears the selection in the object, so that nothing in the
              * object is selected.
+             * <p>
+             *  清除对象中的选择,以便不选择对象中的任何内容。
+             * 
              */
             public void clearAccessibleSelection() {
                 int childCount = getAccessibleChildrenCount();
@@ -5431,6 +6643,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
             /**
              * Causes every selected item in the object to be selected
              * if the object supports multiple selections.
+             * <p>
+             *  如果对象支持多个选择,则导致选择对象中的每个选定项目。
+             * 
              */
             public void selectAllAccessibleSelection() {
                TreeModel model = JTree.this.getModel();
@@ -5452,6 +6667,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * one action (toggle expand), in addition to any available
              * on the object behind the TreeCellRenderer.
              *
+             * <p>
+             *  返回此树节点中可用的可用操作数。如果此节点不是叶,除了在TreeCellRenderer后面的对象上有任何可用之外,还至少有一个操作(切换展开)。
+             * 
+             * 
              * @return the number of Actions in this object
              */
             public int getAccessibleActionCount() {
@@ -5471,6 +6690,10 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * description (toggle expand), in addition to any available
              * on the object behind the TreeCellRenderer.
              *
+             * <p>
+             *  返回树节点的指定操作的描述。如果此节点不是叶,除了在TreeCellRenderer后面的对象上可用的任何可用之外,还有至少一个动作描述(切换展开)。
+             * 
+             * 
              * @param i zero-based index of the actions
              * @return a description of the action
              */
@@ -5497,6 +6720,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
              * done (toggle expand), in addition to any available on the
              * object behind the TreeCellRenderer.
              *
+             * <p>
+             * 在树节点上执行指定的Action。如果这个节点不是叶子,除了在TreeCellRenderer后面的对象上有任何可用之外,还有至少一个可以完成的动作(切换展开)。
+             * 
              * @param i zero-based index of actions
              * @return true if the the action was performed; else false.
              */

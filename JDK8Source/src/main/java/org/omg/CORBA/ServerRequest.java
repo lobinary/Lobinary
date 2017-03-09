@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,22 @@ package org.omg.CORBA;
  * <code>result</code> and <code>except</code> take an <code>Any</code>
  * object as a parameter. <p>
  *
+ * <p>
+ *  捕获动态骨架接口(DSI)请求的显式状态的对象。这个类是DSI的基石,类似于DII中的<code> Request </code>对象。
+ * <P>
+ *  ORB负责创建请求的这个实施例,并将其传递到动态实现例程(DIR)。
+ * 通过实现<code> DynamicImplementation </code>类创建动态服务(DIR),该类具有单个<code> invoke </code>方法。
+ * 此方法接受一个<code> ServerRequest </code>对象。
+ * 
+ *  抽象类<code> ServerRequest </code>定义了访问方法名,请求的参数和上下文的方法,以及将请求结果设置为返回值或异常的方法。 <p>
+ * 
+ *  访问请求参数的一个微妙之处是DIR需要提供关于期望参数的类型信息,因为没有关于这些参数的编译信息。
+ * 该信息通过<code> NVList </code>提供,它是<code> NamedValue </code>对象的列表。
+ * 每个<code> NamedValue </code>对象包含一个<code> Any </code>对象,该对象又具有表示参数类型的<code> TypeCode </code>对象。 <p>。
+ * 
+ * 类似地,需要为响应提供类型信息,对于预期结果或异常,所以方法<code> result </code>和<code>(</code>除外) code> object作为参数。 <p>
+ * 
+ * 
  * @see org.omg.CORBA.DynamicImplementation
  * @see org.omg.CORBA.NVList
  * @see org.omg.CORBA.NamedValue
@@ -76,6 +93,13 @@ public abstract class ServerRequest {
      * and <code>_set_&lt;attribute_name&gt;</code>,
      * respectively.
      *
+     * <p>
+     *  检索要调用的操作的名称。根据OMG IDL的规则,这些名称在该对象的"最多派生"接口支持的所有操作中必须是唯一的。
+     * 注意,用于获取和设置属性的操作名称分别是<code> _get_&lt; attribute_name&gt; </code>和<code> _set_&lt; attribute_name&gt; </code>
+     * 。
+     *  检索要调用的操作的名称。根据OMG IDL的规则,这些名称在该对象的"最多派生"接口支持的所有操作中必须是唯一的。
+     * 
+     * 
      * @return     the name of the operation to be invoked
      * @deprecated use operation()
      */
@@ -97,6 +121,15 @@ public abstract class ServerRequest {
      * and <code>_set_&lt;attribute_name&gt;</code>,
      * respectively.
      *
+     * <p>
+     *  引发<code> org.omg.CORBA.NO_IMPLEMENT </code>异常。
+     * <P>
+     *  检索要调用的操作的名称。根据OMG IDL的规则,这些名称在该对象的"最多派生"接口支持的所有操作中必须是唯一的。
+     * 注意,用于获取和设置属性的操作名称分别是<code> _get_&lt; attribute_name&gt; </code>和<code> _set_&lt; attribute_name&gt; </code>
+     * 。
+     *  检索要调用的操作的名称。根据OMG IDL的规则,这些名称在该对象的"最多派生"接口支持的所有操作中必须是唯一的。
+     * 
+     * 
      * @return     the name of the operation to be invoked
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code>
      *      package comments for unimplemented features</a>
@@ -133,6 +166,20 @@ public abstract class ServerRequest {
      * values for any "out" arguments before returning, and may also change
      * the return values for any "inout" arguments.
      *
+     * <p>
+     *  指定方法参数类型并检索"in"和"inout"参数值。
+     * <P>
+     *  请注意,此方法已弃用;在其位置使用方法<code> arguments </code>。
+     * <P>
+     * 除非它调用方法<code> set_exception </code>,DIR必须调用此方法一次,即使方法签名不包含参数。
+     * 一旦方法<code> arguments </code>或<code> set_exception </code>被调用,在同一<code> ServerRequest </code>对象上调用<code>
+     *  arguments </code>代码> BAD_INV_ORDER </code>系统异常。
+     * 除非它调用方法<code> set_exception </code>,DIR必须调用此方法一次,即使方法签名不包含参数。
+     *  DIR必须按照它们在IDL规范(从左到右)中出现的顺序,传递到用描述操作的参数类型的TypeCodes和Flags初始化的NVList方法<code> arguments </code>。
+     * 将从<code> arguments </code>返回一个潜在不同的NVList,并提供"in"和"inout"参数值。
+     * 如果它不调用<code> set_exception </code>方法,则DIR必须在返回之前为返回的任何"out"参数提供返回值的NVList,并且还可以更改任何"inout"参数的返回值。
+     * 
+     * 
      * @param params            the arguments of the method, in the
      *                          form of an <code>NVList</code> object
      * @deprecated use the method <code>arguments</code>
@@ -165,6 +212,16 @@ public abstract class ServerRequest {
      * values for any "out" arguments before returning, and it may also change
      * the return values for any "inout" arguments.
      *
+     * <p>
+     * 指定方法参数类型并检索"in"和"inout"参数值。除非它调用方法<code> set_exception </code>,DIR必须调用此方法一次,即使方法签名不包含参数。
+     * 一旦方法<code> arguments </code>或<code> set_exception </code>被调用,在同一<code> ServerRequest </code>对象上调用<code>
+     *  arguments </code>代码> BAD_INV_ORDER </code>系统异常。
+     * 指定方法参数类型并检索"in"和"inout"参数值。除非它调用方法<code> set_exception </code>,DIR必须调用此方法一次,即使方法签名不包含参数。
+     *  DIR必须按照它们在IDL规范(从左到右)中出现的顺序,传递到用描述操作的参数类型的TypeCodes和Flags初始化的NVList方法<code> arguments </code>。
+     * 将从<code> arguments </code>返回一个潜在不同的NVList,并提供"in"和"inout"参数值。
+     * 如果它不调用<code> set_exception </code>方法,DIR必须在返回之前为返回的任何"out"参数返回值提供返回的NVList,并且它还可以更改任何"inout"参数的返回值。
+     * 
+     * 
      * @param args              the arguments of the method, in the
      *                            form of an NVList
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code>
@@ -199,6 +256,20 @@ public abstract class ServerRequest {
      * describe all parameters passed by the client, may result in a MARSHAL
      * system exception.
      *
+     * <p>
+     *  指定调用的任何返回值。
+     * <P>
+     *  请注意,此方法已弃用;在其位置使用方法<code> set_result </code>。
+     * <P>
+     * 除非调用方法<code> set_exception </code>,如果被调用的方法具有非void结果类型,则在DIR返回之前必须正好调用<code> set_result </code>方法一次。
+     * 如果操作具有void结果类型,则可以可选地使用类型为<code> tk_void </code>的<code> Any </code>对象来调用<code> set_result </code>方法一次
+     * 。
+     * 在方法<code> arguments </code>被调用之前或方法<code> set_result </code>或<code> set_exception </code>被调用后,调用<code>
+     *  set_result </code>导致BAD_INV_ORDER异常。
+     * 当IDL操作包含上下文表达式时,或者当传递给参数的NVList没有描述客户端传递的所有参数时,调用方法<code> set_result </code>而没有先前调用方法<code> ctx </code>
+     *  ,可能导致MARSHAL系统异常。
+     * 
+     * 
      * @param any an <code>Any</code> object containing the return value to be set
      * @deprecated use the method <code>set_result</code>
      */
@@ -229,6 +300,22 @@ public abstract class ServerRequest {
      * describe all parameters passed by the client, may result in a MARSHAL
      * system exception.
      *
+     * <p>
+     *  引发<code> org.omg.CORBA.NO_IMPLEMENT </code>异常。
+     * <P>
+     * 指定调用的任何返回值。
+     * 除非调用方法<code> set_exception </code>,如果被调用的方法具有非void结果类型,则在DIR返回之前必须正好调用<code> set_result </code>方法一次。
+     * 如果操作具有void结果类型,则可以可选地使用类型为<code> tk_void </code>的<code> Any </code>对象来调用<code> set_result </code>方法一次
+     * 。
+     * 除非调用方法<code> set_exception </code>,如果被调用的方法具有非void结果类型,则在DIR返回之前必须正好调用<code> set_result </code>方法一次。
+     * 在方法<code> arguments </code>被调用之前或方法<code> set_result </code>或<code> set_exception </code>被调用后,调用<code>
+     *  set_result </code>导致BAD_INV_ORDER异常。
+     * 除非调用方法<code> set_exception </code>,如果被调用的方法具有非void结果类型,则在DIR返回之前必须正好调用<code> set_result </code>方法一次。
+     * 当IDL操作包含上下文表达式时,或者当传递给参数的NVList没有描述客户端传递的所有参数时,调用方法<code> set_result </code>而没有先前调用方法<code> ctx </code>
+     *  ,可能导致MARSHAL系统异常。
+     * 除非调用方法<code> set_exception </code>,如果被调用的方法具有非void结果类型,则在DIR返回之前必须正好调用<code> set_result </code>方法一次。
+     * 
+     * 
      * @param any an <code>Any</code> object containing the return value to be set
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code>
      *      package comments for unimplemented features</a>
@@ -250,6 +337,11 @@ public abstract class ServerRequest {
      * BAD_PARAM system exception or in the client receiving an
      * UNKNOWN_EXCEPTION system exception.
      *
+     * <p>
+     *  DIR可以在任何时候调用set_exception向客户端返回异常。传递给set_exception的Any必须包含系统异常或在调用操作的IDL定义的raises表达式中指定的用户异常。
+     * 传入不包含异常的Any将导致BAD_PARAM系统异常。传递未列出的用户异常将导致DIR接收到BAD_PARAM系统异常或在接收UNKNOWN_EXCEPTION系统异常的客户端中。
+     * 
+     * 
      * @param any       the <code>Any</code> object containing the exception
      * @deprecated use set_exception()
      */
@@ -274,6 +366,14 @@ public abstract class ServerRequest {
      * BAD_PARAM system exception or in the client receiving an
      * UNKNOWN_EXCEPTION system exception.
      *
+     * <p>
+     * 引发<code> org.omg.CORBA.NO_IMPLEMENT </code>异常。
+     * <P>
+     *  将给定的异常返回给客户端。这个方法由DIR调用,它可以在任何时候调用它。传递给此方法的<code> Any </code>对象必须包含系统异常或在调用操作的IDL定义中指定的用户异常之一。
+     * 传入不包含异常的<code>任何</code>对象将导致抛出BAD_PARAM系统异常。
+     * 传递未列出的用户异常将导致DIR接收到BAD_PARAM系统异常或在接收UNKNOWN_EXCEPTION系统异常的客户端中。
+     * 
+     * 
      * @param any       the <code>Any</code> object containing the exception
      * @exception BAD_PARAM if the given <code>Any</code> object does not
      *                      contain an exception or the exception is an
@@ -300,6 +400,8 @@ public abstract class ServerRequest {
      * has been called will result in a
      * BAD_INV_ORDER system exception.
      *
+     * <p>
+     * 
      * @return                  the context object that is to be used
      *                          to resolve any context strings whose
      *                          values need to be sent with the invocation.

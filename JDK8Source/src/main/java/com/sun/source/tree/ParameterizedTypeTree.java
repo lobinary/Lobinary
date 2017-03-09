@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ import java.util.List;
  *
  * @jls section 4.5.1
  *
+ * <p>
+ *  涉及类型参数的类型表达式的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  <em>键入<em> </em> <em> typeArguments </em>&gt;
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

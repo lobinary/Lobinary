@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,9 @@
  */
 /*
  * $Id: DOMCryptoContext.java,v 1.3 2005/05/09 18:33:26 mullan Exp $
+ * <p>
+ *  $ Id：DOMCryptoContext.java,v 1.3 2005/05/09 18:33:26 mullan Exp $
+ * 
  */
 package javax.xml.crypto.dom;
 
@@ -41,6 +45,10 @@ import org.w3c.dom.Element;
  * methods that are specific to a DOM-based implementation for registering
  * and retrieving elements that contain attributes of type ID.
  *
+ * <p>
+ *  这个类提供了{@link XMLCryptoContext}接口的DOM特定实现。它还包括特定于基于DOM的实现的附加方法,用于注册和检索包含类型ID的属性的元素。
+ * 
+ * 
  * @author Sean Mullan
  * @author JSR 105 Expert Group
  * @since 1.6
@@ -58,6 +66,9 @@ public class DOMCryptoContext implements XMLCryptoContext {
 
     /**
      * Default constructor. (For invocation by subclass constructors).
+     * <p>
+     *  默认构造函数。 (对于子类构造函数的调用)。
+     * 
      */
     protected DOMCryptoContext() {}
 
@@ -66,6 +77,10 @@ public class DOMCryptoContext implements XMLCryptoContext {
      * that the specified URI maps to. It returns the <code>defaultPrefix</code>
      * if it maps to <code>null</code>.
      *
+     * <p>
+     *  此实现使用内部{@link HashMap}来获取指定URI映射到的前缀。如果映射到<code> null </code>,则返回<code> defaultPrefix </code>。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      */
     public String getNamespacePrefix(String namespaceURI,
@@ -81,6 +96,10 @@ public class DOMCryptoContext implements XMLCryptoContext {
      * This implementation uses an internal {@link HashMap} to map the URI
      * to the specified prefix.
      *
+     * <p>
+     *  此实现使用内部{@link HashMap}将URI映射到指定的前缀。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      */
     public String putNamespacePrefix(String namespaceURI, String prefix) {
@@ -103,6 +122,8 @@ public class DOMCryptoContext implements XMLCryptoContext {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalArgumentException {@inheritDoc}
      */
     public void setBaseURI(String baseURI) {
@@ -124,6 +145,10 @@ public class DOMCryptoContext implements XMLCryptoContext {
      * This implementation uses an internal {@link HashMap} to get the object
      * that the specified name maps to.
      *
+     * <p>
+     *  此实现使用内部{@link HashMap}获取指定名称映射到的对象。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      */
     public Object getProperty(String name) {
@@ -137,6 +162,10 @@ public class DOMCryptoContext implements XMLCryptoContext {
      * This implementation uses an internal {@link HashMap} to map the name
      * to the specified object.
      *
+     * <p>
+     *  此实现使用内部{@link HashMap}将名称映射到指定的对象。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      */
     public Object setProperty(String name, Object value) {
@@ -160,6 +189,12 @@ public class DOMCryptoContext implements XMLCryptoContext {
      * <p>This implementation uses an internal {@link HashMap} to get the
      * element that the specified attribute value maps to.
      *
+     * <p>
+     *  返回具有指定ID属性值的<code>元素</code>。
+     * 
+     *  <p>此实现使用内部{@link HashMap}获取指定属性值映射到的元素。
+     * 
+     * 
      * @param idValue the value of the ID
      * @return the <code>Element</code> with the specified ID attribute value,
      *    or <code>null</code> if none.
@@ -180,6 +215,12 @@ public class DOMCryptoContext implements XMLCryptoContext {
      * <p>This implementation uses an internal {@link HashMap} to map the
      * attribute's value to the specified element.
      *
+     * <p>
+     *  将名称空间URI和本地名称指定的元素属性注册为类型ID。该属性必须具有非空值。
+     * 
+     *  <p>此实现使用内部{@link HashMap}将属性的值映射到指定的元素。
+     * 
+     * 
      * @param element the element
      * @param namespaceURI the namespace URI of the attribute (specify
      *    <code>null</code> if not applicable)
@@ -217,6 +258,12 @@ public class DOMCryptoContext implements XMLCryptoContext {
      * modified while an iteration is in progress, the results of the
      * iteration are undefined.
      *
+     * <p>
+     * 在此<code> DOMCryptoContext </code>的Id /元素映射集合上返回只读迭代器。
+     * 尝试通过{@link Iterator#remove}方法修改集合会抛出<code> UnsupportedOperationException </code>。将按特定顺序返回映射。
+     * 迭代中的每个元素都表示为{@link java.util.Map.Entry}。如果在迭代正在进行时修改<code> DOMCryptoContext </code>,迭代的结果是未定义的。
+     * 
+     * 
      * @return a read-only iterator over the set of mappings
      */
     @SuppressWarnings("rawtypes")
@@ -227,6 +274,9 @@ public class DOMCryptoContext implements XMLCryptoContext {
     /**
      * This implementation uses an internal {@link HashMap} to get the object
      * that the specified key maps to.
+     * <p>
+     *  此实现使用内部{@link HashMap}来获取指定键映射到的对象。
+     * 
      */
     public Object get(Object key) {
         return objMap.get(key);
@@ -236,6 +286,9 @@ public class DOMCryptoContext implements XMLCryptoContext {
      * This implementation uses an internal {@link HashMap} to map the key
      * to the specified object.
      *
+     * <p>
+     *  此实现使用内部{@link HashMap}将键映射到指定的对象。
+     * 
      * @throws IllegalArgumentException {@inheritDoc}
      */
     public Object put(Object key, Object value) {

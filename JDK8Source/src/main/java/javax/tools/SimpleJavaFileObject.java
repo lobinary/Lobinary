@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,17 +40,28 @@ import javax.tools.JavaFileObject.Kind;
  * implementation and specification of any method of this class as
  * long as the general contract of JavaFileObject is obeyed.
  *
+ * <p>
+ *  为JavaFileObject中的大多数方法提供简单的实现。这个类被设计为子类化并用作JavaFileObject实现的基础。
+ * 子类可以覆盖此类的任何方法的实现和规范,只要遵守JavaFileObject的一般合同即可。
+ * 
+ * 
  * @author Peter von der Ah&eacute;
  * @since 1.6
  */
 public class SimpleJavaFileObject implements JavaFileObject {
     /**
      * A URI for this file object.
+     * <p>
+     *  此文件对象的URI。
+     * 
      */
     protected final URI uri;
 
     /**
      * The kind of this file object.
+     * <p>
+     *  此文件对象的种类。
+     * 
      */
     protected final Kind kind;
 
@@ -57,6 +69,10 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * Construct a SimpleJavaFileObject of the given kind and with the
      * given URI.
      *
+     * <p>
+     *  构造给定类型的SimpleJavaFileObject并使用给定的URI。
+     * 
+     * 
      * @param uri  the URI for this file object
      * @param kind the kind of this file object
      */
@@ -83,6 +99,9 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * UnsupportedOperationException}.  Subclasses can change this
      * behavior as long as the contract of {@link FileObject} is
      * obeyed.
+     * <p>
+     *  这个实现总是抛出{@linkplain UnsupportedOperationException}。子类可以改变这种行为,只要遵守{@link FileObject}的契约。
+     * 
      */
     public InputStream openInputStream() throws IOException {
         throw new UnsupportedOperationException();
@@ -93,6 +112,9 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * UnsupportedOperationException}.  Subclasses can change this
      * behavior as long as the contract of {@link FileObject} is
      * obeyed.
+     * <p>
+     *  这个实现总是抛出{@linkplain UnsupportedOperationException}。子类可以改变这种行为,只要遵守{@link FileObject}的契约。
+     * 
      */
     public OutputStream openOutputStream() throws IOException {
         throw new UnsupportedOperationException();
@@ -103,6 +125,10 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * Subclasses can change this behavior as long as the contract of
      * {@link FileObject} is obeyed.
      *
+     * <p>
+     *  将{@linkplain #getCharContent}的结果包含在阅读器中。子类可以改变这种行为,只要遵守{@link FileObject}的契约。
+     * 
+     * 
      * @param  ignoreEncodingErrors {@inheritDoc}
      * @return a Reader wrapping the result of getCharContent
      * @throws IllegalStateException {@inheritDoc}
@@ -126,6 +152,9 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * UnsupportedOperationException}.  Subclasses can change this
      * behavior as long as the contract of {@link FileObject} is
      * obeyed.
+     * <p>
+     *  这个实现总是抛出{@linkplain UnsupportedOperationException}。子类可以改变这种行为,只要遵守{@link FileObject}的契约。
+     * 
      */
     public CharSequence getCharContent(boolean ignoreEncodingErrors) throws IOException {
         throw new UnsupportedOperationException();
@@ -136,6 +165,10 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * can change this behavior as long as the contract of {@link
      * FileObject} is obeyed.
      *
+     * <p>
+     *  将Writer中的openOutputStream的结果包装。子类可以改变这种行为,只要遵守{@link FileObject}的契约。
+     * 
+     * 
      * @return a Writer wrapping the result of openOutputStream
      * @throws IllegalStateException {@inheritDoc}
      * @throws UnsupportedOperationException {@inheritDoc}
@@ -150,6 +183,10 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * this behavior as long as the contract of {@link FileObject} is
      * obeyed.
      *
+     * <p>
+     * 此实现返回{@code 0L}。子类可以改变这种行为,只要遵守{@link FileObject}的契约。
+     * 
+     * 
      * @return {@code 0L}
      */
     public long getLastModified() {
@@ -161,6 +198,10 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * behavior as long as the contract of {@link FileObject} is
      * obeyed.
      *
+     * <p>
+     *  这个实现什么也不做。子类可以改变这种行为,只要遵守{@link FileObject}的契约。
+     * 
+     * 
      * @return {@code false}
      */
     public boolean delete() {
@@ -168,6 +209,8 @@ public class SimpleJavaFileObject implements JavaFileObject {
     }
 
     /**
+    /* <p>
+    /* 
      * @return {@code this.kind}
      */
     public Kind getKind() {
@@ -187,6 +230,15 @@ public class SimpleJavaFileObject implements JavaFileObject {
      *
      * <p>Subclasses can change this behavior as long as the contract
      * of {@link JavaFileObject} is obeyed.
+     * <p>
+     *  此实现将其URI的路径与给定的简单名称进行比较。
+     * 如果给定的类型等于该对象的类型,并且路径等于{@code simpleName + kind.extension}或者如果它以{@code"/"+ simpleName + kind.extension }
+     * 。
+     *  此实现将其URI的路径与给定的简单名称进行比较。
+     * 
+     *  <p>此方法调用{@link #getKind}和{@link #toUri},并且不直接访问字段{@link #uri}和{@link #kind}。
+     * 
+     *  <p>子类可以改变这种行为,只要遵守{@link JavaFileObject}的合同。
      */
     public boolean isNameCompatible(String simpleName, Kind kind) {
         String baseName = simpleName + kind.extension;
@@ -199,6 +251,8 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * This implementation returns {@code null}.  Subclasses can
      * change this behavior as long as the contract of
      * {@link JavaFileObject} is obeyed.
+     * <p>
+     * 
      */
     public NestingKind getNestingKind() { return null; }
 
@@ -206,6 +260,9 @@ public class SimpleJavaFileObject implements JavaFileObject {
      * This implementation returns {@code null}.  Subclasses can
      * change this behavior as long as the contract of
      * {@link JavaFileObject} is obeyed.
+     * <p>
+     *  此实现返回{@code null}。子类可以改变这种行为,只要遵守{@link JavaFileObject}的契约。
+     * 
      */
     public Modifier getAccessLevel()  { return null; }
 

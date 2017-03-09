@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.io;
@@ -45,6 +49,9 @@ import java.security.PrivilegedAction ;
  * A array of these is used to declare the persistent fields of
  * a class.
  *
+ * <p>
+ *  可序列化类中的字段的描述。这些数组用于声明类的持久字段。
+ * 
  */
 public class ObjectStreamField implements Comparable
 {
@@ -59,6 +66,9 @@ public class ObjectStreamField implements Comparable
 
     /**
      * Create a named field with the specified type.
+     * <p>
+     *  创建具有指定类型的命名字段。
+     * 
      */
     ObjectStreamField(String n, Class clazz) {
         name = n;
@@ -105,6 +115,9 @@ public class ObjectStreamField implements Comparable
 
     /**
      * Create an ObjectStreamField containing a reflected Field.
+     * <p>
+     *  创建一个包含反射字段的ObjectStreamField。
+     * 
      */
     ObjectStreamField(String n, char t, Field f, String ts)
     {
@@ -122,6 +135,9 @@ public class ObjectStreamField implements Comparable
 
     /**
      * Get the name of this field.
+     * <p>
+     *  获取此字段的名称。
+     * 
      */
     public String getName() {
         return name;
@@ -129,6 +145,9 @@ public class ObjectStreamField implements Comparable
 
     /**
      * Get the type of the field.
+     * <p>
+     *  获取字段的类型。
+     * 
      */
     public Class getType() {
         if (clazz != null)
@@ -179,12 +198,18 @@ public class ObjectStreamField implements Comparable
     /*
      * Default constructor creates an empty field.
      * Usually used just to get to the sort functions.
+     * <p>
+     *  默认构造函数创建一个空字段。通常只用于获取排序函数。
+     * 
      */
     ObjectStreamField() {
     }
 
     /**
      * test if this field is a primitive or not.
+     * <p>
+     *  测试这个字段是否是原语。
+     * 
      */
     public boolean isPrimitive() {
         return (type != '[' && type != 'L');
@@ -195,6 +220,9 @@ public class ObjectStreamField implements Comparable
      * return -1 if this is smaller, 0 if equal, 1 if greater
      * types that are primitives are "smaller" than objects.
      * if equal, the names are compared.
+     * <p>
+     *  将此与另一个ObjectStreamField进行比较。如果较小,返回-1,如果相等则返回0,如果较大的原语类型比对象"小",则返回1。如果相等,则比较名称。
+     * 
      */
     public int compareTo(Object o) {
         ObjectStreamField f2 = (ObjectStreamField)o;
@@ -211,6 +239,9 @@ public class ObjectStreamField implements Comparable
      * Compare the types of two class descriptors.
      * The match if they have the same primitive types.
      * or if they are both objects and the object types match.
+     * <p>
+     *  比较两个类描述符的类型。如果它们具有相同的基本类型,则为匹配。或者如果它们都是对象并且对象类型匹配。
+     * 
      */
     public boolean typeEquals(ObjectStreamField other) {
         if (other == null || type != other.type)
@@ -227,6 +258,7 @@ public class ObjectStreamField implements Comparable
 
     /* Returns the signature of the Field.
      *
+     * <p>
      */
     public String getSignature() {
 
@@ -236,6 +268,9 @@ public class ObjectStreamField implements Comparable
 
     /**
      * Return a string describing this field.
+     * <p>
+     *  返回描述此字段的字符串。
+     * 
      */
     public String toString() {
         if (typeString != null)
@@ -250,6 +285,7 @@ public class ObjectStreamField implements Comparable
 
     /* Returns the Field ID
      *
+     * <p>
      */
     public long getFieldID() {
         return fieldID ;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.io;
@@ -67,6 +71,10 @@ import com.sun.corba.se.impl.logging.UtilSystemException ;
 /**
  * IIOPOutputStream is ...
  *
+ * <p>
+ *  IIOPOutputStream是...
+ * 
+ * 
  * @author  Stephen Lewallen
  * @since   JDK1.1.6
  */
@@ -143,6 +151,10 @@ public class IIOPOutputStream
     /**
      * Override the actions of the final method "writeObject()"
      * in ObjectOutputStream.
+     * <p>
+     *  覆盖ObjectOutputStream中最终方法"writeObject()"的操作。
+     * 
+     * 
      * @since     JDK1.1.6
      */
     public final void writeObjectOverride(Object obj)
@@ -156,6 +168,10 @@ public class IIOPOutputStream
     /**
      * Override the actions of the final method "writeObject()"
      * in ObjectOutputStream.
+     * <p>
+     *  覆盖ObjectOutputStream中最终方法"writeObject()"的操作。
+     * 
+     * 
      * @since     JDK1.1.6
      */
     public final void simpleWriteObject(Object obj, byte formatVersion)
@@ -186,6 +202,9 @@ public class IIOPOutputStream
 
         /* If the recursion depth is 0, test for and clear the pending exception.
          * If there is a pending exception throw it.
+         * <p>
+         *  如果有一个挂起的异常抛出它。
+         * 
          */
         IOException pending = abortIOException;
         if (simpleWriteDepth == 0)
@@ -203,6 +222,10 @@ public class IIOPOutputStream
     /**
      * Override the actions of the final method "defaultWriteObject()"
      * in ObjectOutputStream.
+     * <p>
+     *  覆盖ObjectOutputStream中最终方法"defaultWriteObject()"的操作。
+     * 
+     * 
      * @since     JDK1.1.6
      */
     public final void defaultWriteObjectDelegate()
@@ -227,6 +250,10 @@ public class IIOPOutputStream
     /**
      * Override the actions of the final method "enableReplaceObject()"
      * in ObjectOutputStream.
+     * <p>
+     *  覆盖ObjectOutputStream中最终方法"enableReplaceObject()"的操作。
+     * 
+     * 
      * @since     JDK1.1.6
      */
     public final boolean enableReplaceObjectDelegate(boolean enable)
@@ -273,6 +300,11 @@ public class IIOPOutputStream
      * at the same point.  Objects previously written to the stream
      * will not be refered to as already being in the stream.  They
      * will be written to the stream again.
+     * <p>
+     *  重置将忽略已写入流的任何对象的状态。状态被重置为与新的ObjectOutputStream相同。流中的当前点被标记为重置,因此相应的ObjectInputStream将在同一点重置。
+     * 先前写入流的对象不会被视为已在流中。它们将再次写入流。
+     * 
+     * 
      * @since     JDK1.1
      */
     public final void reset() throws IOException{
@@ -464,6 +496,9 @@ public class IIOPOutputStream
      * with larger than 8-bit chars).  The old behavior is preserved
      * in orbutil.IIOPInputStream_1_3 in order to interoperate with
      * our legacy ORBs.
+     * <p>
+     *  帮助方法用于纠正Kestrel bug 4367783(处理大于8位的字符)。旧行为保留在orbutil.IIOPInputStream_1_3中,以便与我们的旧ORB进行互操作。
+     * 
      */
     protected void internalWriteUTF(org.omg.CORBA.portable.OutputStream stream,
                                     String data)
@@ -487,11 +522,17 @@ public class IIOPOutputStream
     /*
      * Check for special cases of serializing objects.
      * These objects are not subject to replacement.
+     * <p>
+     *  检查序列化对象的特殊情况。这些对象不可更换。
+     * 
      */
     private boolean checkSpecialClasses(Object obj) throws IOException {
 
         /*
          * If this is a class, don't allow substitution
+         * <p>
+         *  如果这是一个类,不允许替换
+         * 
          */
         //if (obj instanceof Class) {
         //    throw new IOException("Serialization of Class not supported");
@@ -508,6 +549,9 @@ public class IIOPOutputStream
     /*
      * Check for special cases of substitutable serializing objects.
      * These classes are replaceable.
+     * <p>
+     *  检查可替代序列化对象的特殊情况。这些类是可替换的。
+     * 
      */
     private boolean checkSubstitutableSpecialClasses(Object obj)
         throws IOException
@@ -527,6 +571,9 @@ public class IIOPOutputStream
 
     /*
      * Write out the object
+     * <p>
+     * 写出对象
+     * 
      */
     private void outputObject(final Object obj) throws IOException{
 
@@ -535,6 +582,9 @@ public class IIOPOutputStream
 
         /* Get the Class descriptor for this class,
          * Throw a NotSerializableException if there is none.
+         * <p>
+         *  如果没有,则抛出NotSerializableException。
+         * 
          */
         currentClassDesc = ObjectStreamClass.lookup(currclass);
         if (currentClassDesc == null) {
@@ -545,6 +595,9 @@ public class IIOPOutputStream
         /* If the object is externalizable,
          * call writeExternal.
          * else do Serializable processing.
+         * <p>
+         *  调用writeExternal。否则做可序列化处理。
+         * 
          */
         if (currentClassDesc.isExternalizable()) {
             // Write format version
@@ -558,6 +611,9 @@ public class IIOPOutputStream
             /* The object's classes should be processed from supertype to subtype
              * Push all the clases of the current object onto a stack.
              * Remember the stack pointer where this set of classes is being pushed.
+             * <p>
+             *  将当前对象的所有clases推送到堆栈。记住栈指针在这个类被推送的地方。
+             * 
              */
             int stackMark = classDescStack.size();
             try {
@@ -573,6 +629,9 @@ public class IIOPOutputStream
                  *                set blockData = true; call the class writeObject method
                  *    If not
                  *     invoke either the defaultWriteObject method.
+                 * <p>
+                 *  对于currentClassDesc和所有推送的类描述符如果该类正在写自己的数据集blockData = true;调用类writeObject方法如果不调用defaultWriteObject方法。
+                 * 
                  */
                 do {
 
@@ -603,6 +662,9 @@ public class IIOPOutputStream
      * Invoke writer.
      * _REVISIT_ invokeObjectWriter and invokeObjectReader behave inconsistently with each other since
      * the reader returns a boolean...fix later
+     * <p>
+     *  调用writer。 _REVISIT_ invokeObjectWriter和invokeObjectReader的行为互不相同,因为读者返回一个布尔...修复了
+     * 
      */
     private void invokeObjectWriter(ObjectStreamClass osc, Object obj)
         throws IOException
@@ -754,6 +816,8 @@ public class IIOPOutputStream
 
     /* Write the fields of the specified class by invoking the appropriate
      * write* method on this class.
+     * <p>
+     *  写*方法对这个类。
      */
     private void outputClassFields(Object o, Class cl,
                                    ObjectStreamField[] fields)

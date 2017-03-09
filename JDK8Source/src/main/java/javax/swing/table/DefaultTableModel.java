@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,21 @@ import javax.swing.event.TableModelEvent;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  这是使用<code> Vectors </code>的<code> Vector </code>来存储单元格值对象的<code> TableModel </code>的实现。
+ * <p>
+ *  <strong>警告：</strong> <code> DefaultTableModel </code>返回<code> Object </code>的列类。
+ * 当<code> DefaultTableModel </code>与<code> TableRowSorter </code>配合使用时,会导致大量使用<code> toString </code>,对
+ * 于<code> String </code>类型是昂贵的。
+ *  <strong>警告：</strong> <code> DefaultTableModel </code>返回<code> Object </code>的列类。
+ * 如果您对<code> TableRowSorter </code>使用<code> DefaultTableModel </code>,强烈建议您覆盖<code> getColumnClass </code>
+ * 以返回相应的类型。
+ *  <strong>警告：</strong> <code> DefaultTableModel </code>返回<code> Object </code>的列类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Philip Milne
  *
  * @see TableModel
@@ -68,6 +84,9 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
     /**
      * The <code>Vector</code> of <code>Vectors</code> of
      * <code>Object</code> values.
+     * <p>
+     *  值</code>的<code>向量</code>的<code>向量</code>。
+     * 
      */
     protected Vector    dataVector;
 
@@ -81,6 +100,9 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
     /**
      *  Constructs a default <code>DefaultTableModel</code>
      *  which is a table of zero columns and zero rows.
+     * <p>
+     *  构造一个默认的<code> DefaultTableModel </code>,它是一个零列和零行的表。
+     * 
      */
     public DefaultTableModel() {
         this(0, 0);
@@ -97,6 +119,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  <code>rowCount</code> and <code>columnCount</code> of
      *  <code>null</code> object values.
      *
+     * <p>
+     *  使用<code> rowCount </code>和<code> columnCount </code> of <code> null </code>对象值构造<code> DefaultTableM
+     * odel </code>。
+     * 
+     * 
      * @param rowCount           the number of rows the table holds
      * @param columnCount        the number of columns the table holds
      *
@@ -113,6 +140,12 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  object values.  Each column's name will be taken from
      *  the <code>columnNames</code> vector.
      *
+     * <p>
+     * 构造具有与<code> columnNames </code>和<code> rowCount </code>(<code> null </code>对象值)中的元素一样多的列的<code> Defau
+     * ltTableModel </code>。
+     * 每个列的名称将从<code> columnNames </code>向量中获取。
+     * 
+     * 
      * @param columnNames       <code>vector</code> containing the names
      *                          of the new columns; if this is
      *                          <code>null</code> then the model has no columns
@@ -131,6 +164,12 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  object values.  Each column's name will be taken from
      *  the <code>columnNames</code> array.
      *
+     * <p>
+     *  构造具有与<code> columnNames </code>和<code> rowCount </code>(<code> null </code>对象值)中的元素一样多的列的<code> Defa
+     * ultTableModel </code>。
+     * 每个列的名称将取自<code> columnNames </code>数组。
+     * 
+     * 
      * @param columnNames       <code>array</code> containing the names
      *                          of the new columns; if this is
      *                          <code>null</code> then the model has no columns
@@ -147,6 +186,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  by passing <code>data</code> and <code>columnNames</code>
      *  to the <code>setDataVector</code> method.
      *
+     * <p>
+     *  构造一个<code> DefaultTableModel </code>并通过将<code> data </code>和<code> columnNames </code>传递给<code> setD
+     * ataVector </code>方法来初始化表。
+     * 
+     * 
      * @param data              the data of the table, a <code>Vector</code>
      *                          of <code>Vector</code>s of <code>Object</code>
      *                          values
@@ -166,6 +210,12 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  method. The first index in the <code>Object[][]</code> array is
      *  the row index and the second is the column index.
      *
+     * <p>
+     *  构造一个<code> DefaultTableModel </code>并通过将<code> data </code>和<code> columnNames </code>传递给<code> setD
+     * ataVector </code>方法来初始化表。
+     *  <code> Object [] [] </code>数组中的第一个索引是行索引,第二个是列索引。
+     * 
+     * 
      * @param data              the data of the table
      * @param columnNames       the names of the columns
      * @see #getDataVector
@@ -184,6 +234,12 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *
      *  <code>((Vector)getDataVector().elementAt(1)).elementAt(5);</code>
      *
+     * <p>
+     *  返回包含表的数据值的<code> Vectors </code>的<code> Vector </code>。包含在外向量中的向量各自是单行值。换句话说,要到达第1行第5列的单元格：<p>
+     * 
+     *  <code>((Vector)getDataVector()。elementAt(1))。elementAt(5); </code>
+     * 
+     * 
      * @return  the vector of vectors containing the tables data values
      *
      * @see #newDataAvailable
@@ -214,6 +270,17 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  <code>dataVector</code> results in unspecified behavior,
      *  an possibly an exception.
      *
+     * <p>
+     * 将当前<code> dataVector </code>实例变量替换为新的<code> Vector </code>行<code> dataVector </code>。
+     * 每行在<code> dataVector </code>中表示为<code> Object </code>值的<code>向量</code>。
+     *  <code> columnIdentifiers </code>是新列的名称。
+     *  <code> columnIdentifiers </code>中的第一个名称映射到<code> dataVector </code>中的第0列。
+     *  <code> dataVector </code>中的每一行都被调整为与<code> columnIdentifiers </code>中的列数匹配,方法是通过截断<code> Vector </code>
+     * (如果太长)或添加<code > null </code>值,如果它太短。
+     *  <code> columnIdentifiers </code>中的第一个名称映射到<code> dataVector </code>中的第0列。
+     *  <p>请注意,传递<code> dataVector </code>的<code> null </code>值会导致未指定的行为,可能是一个异常。
+     * 
+     * 
      * @param   dataVector         the new data vector
      * @param   columnIdentifiers     the names of the columns
      * @see #getDataVector
@@ -232,6 +299,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  array is the row index and the second is the column index.
      *  <code>columnIdentifiers</code> are the names of the new columns.
      *
+     * <p>
+     *  将<code> dataVector </code>实例变量中的值替换为数组<code> dataVector </code>中的值。
+     *  <code> Object [] [] </code>数组中的第一个索引是行索引,第二个是列索引。 <code> columnIdentifiers </code>是新列的名称。
+     * 
+     * 
      * @param dataVector                the new data vector
      * @param columnIdentifiers the names of the columns
      * @see #setDataVector(Vector, Vector)
@@ -243,6 +315,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
     /**
      *  Equivalent to <code>fireTableChanged</code>.
      *
+     * <p>
+     *  等同于<code> fireTableChanged </code>。
+     * 
+     * 
      * @param event  the change event
      *
      */
@@ -278,6 +354,12 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  This method also sends out a <code>tableChanged</code>
      *  notification message to all the listeners.
      *
+     * <p>
+     *  确保新行具有正确的列数。
+     * 这是通过使用<code> Vector </code>中的<code> setSize </code>方法实现的,该方法截断太长的向量,并且如果它们太短,则追加<code> null </code>。
+     * 此方法还会向所有侦听器发送一个<code> tableChanged </code>通知消息。
+     * 
+     * 
      * @param e         this <code>TableModelEvent</code> describes
      *                           where the rows were added.
      *                           If <code>null</code> it assumes
@@ -292,6 +374,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
     /**
      *  Equivalent to <code>fireTableChanged</code>.
      *
+     * <p>
+     * 等同于<code> fireTableChanged </code>。
+     * 
+     * 
      *  @param event the change event
      *
      */
@@ -301,6 +387,9 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 
     /**
      * Obsolete as of Java 2 platform v1.3.  Please use <code>setRowCount</code> instead.
+     * <p>
+     *  作为Java 2平台v1.3的已过时。请改用<code> setRowCount </code>。
+     * 
      */
     /*
      *  Sets the number of rows in the model.  If the new size is greater
@@ -308,6 +397,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  If the new size is less than the current size, all
      *  rows at index <code>rowCount</code> and greater are discarded.
      *
+     * <p>
+     *  在模型中设置行数。如果新大小大于当前大小,则将新行添加到模型的末尾如果新大小小于当前大小,则索引<code> rowCount </code>和更大值处的所有行将被丢弃。
+     * 
+     * 
      * @param   rowCount   the new number of rows
      * @see #setRowCount
      */
@@ -332,6 +425,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  If the new size is less than the current size, all
      *  rows at index <code>rowCount</code> and greater are discarded.
      *
+     * <p>
+     *  设置模型中的行数。如果新大小大于当前大小,则将新行添加到模型的末尾如果新大小小于当前大小,则索引<code> rowCount </code>和更大值处的所有行将被丢弃。
+     * 
+     * 
      *  @see #setColumnCount
      * @since 1.3
      */
@@ -344,6 +441,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  <code>null</code> values unless <code>rowData</code> is specified.
      *  Notification of the row being added will be generated.
      *
+     * <p>
+     *  在模型的末尾添加一行。除非指定<code> rowData </code>,否则新行将包含<code> null </code>值。将生成要添加的行的通知。
+     * 
+     * 
      * @param   rowData          optional data of the row being added
      */
     public void addRow(Vector rowData) {
@@ -355,6 +456,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  <code>null</code> values unless <code>rowData</code> is specified.
      *  Notification of the row being added will be generated.
      *
+     * <p>
+     *  在模型的末尾添加一行。除非指定<code> rowData </code>,否则新行将包含<code> null </code>值。将生成要添加的行的通知。
+     * 
+     * 
      * @param   rowData          optional data of the row being added
      */
     public void addRow(Object[] rowData) {
@@ -366,6 +471,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  will contain <code>null</code> values unless <code>rowData</code>
      *  is specified.  Notification of the row being added will be generated.
      *
+     * <p>
+     *  在模型中的<code> row </code>插入一行。除非指定<code> rowData </code>,否则新行将包含<code> null </code>值。将生成要添加的行的通知。
+     * 
+     * 
      * @param   row             the row index of the row to be inserted
      * @param   rowData         optional data of the row being added
      * @exception  ArrayIndexOutOfBoundsException  if the row was invalid
@@ -381,6 +490,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  will contain <code>null</code> values unless <code>rowData</code>
      *  is specified.  Notification of the row being added will be generated.
      *
+     * <p>
+     *  在模型中的<code> row </code>插入一行。除非指定<code> rowData </code>,否则新行将包含<code> null </code>值。将生成要添加的行的通知。
+     * 
+     * 
      * @param   row      the row index of the row to be inserted
      * @param   rowData          optional data of the row being added
      * @exception  ArrayIndexOutOfBoundsException  if the row was invalid
@@ -428,6 +541,19 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *          a|G|H|b|c|d|e|f|i|j|k   - after
      *  </pre>
      *
+     * <p>
+     * 将一个或多个行从包含范围<code> start </code>移动到<code> end </code>到模型中的<code>到</code>位置。
+     * 移动之后,位于索引<code> start </code>的行将位于索引<code>到</code>。此方法将向所有侦听器发送<code> tableChanged </code>通知消息。
+     * 
+     * <pre>
+     *  移动示例：
+     * 
+     *  moveRow(1,3,5); a | B | C | D | e | f | g | h | i | j | k-之前a | e | f | g | h | B | C | D | i |
+     * 
+     *  moveRow(6,7,1); a | b | c | d | e | f | G | H | i | j | k-之前a | G | H | b | c | d | e | f |
+     * </pre>
+     * 
+     * 
      * @param   start       the starting row index to be moved
      * @param   end         the ending row index to be moved
      * @param   to          the destination of the rows to be moved
@@ -455,6 +581,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  Removes the row at <code>row</code> from the model.  Notification
      *  of the row being removed will be sent to all the listeners.
      *
+     * <p>
+     *  从模型中删除<code> row </code>的行。要删除的行的通知将发送给所有侦听器。
+     * 
+     * 
      * @param   row      the row index of the row to be removed
      * @exception  ArrayIndexOutOfBoundsException  if the row was invalid
      */
@@ -475,6 +605,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      * number of columns, all the extra columns at the end of a row are
      * discarded.
      *
+     * <p>
+     *  替换模型中的列标识符。如果<code> newIdentifier </code> s的数量大于当前列数,则会将新列添加到模型中每行的末尾。
+     * 如果<code> newIdentifier </code> s的数量小于当前列数,则行末尾的所有额外列都将被丢弃。
+     * 
+     * 
      * @param   columnIdentifiers  vector of column identifiers.  If
      *                          <code>null</code>, set the model
      *                          to zero columns
@@ -492,6 +627,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      * number of columns, all the extra columns at the end of a row are
      * discarded.
      *
+     * <p>
+     *  替换模型中的列标识符。如果<code> newIdentifier </code> s的数量大于当前列数,则会将新列添加到模型中每行的末尾。
+     * 如果<code> newIdentifier </code> s的数量小于当前列数,则行末尾的所有额外列都将被丢弃。
+     * 
+     * 
      * @param   newIdentifiers  array of column identifiers.
      *                          If <code>null</code>, set
      *                          the model to zero columns
@@ -508,6 +648,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  If the new size is less than the current size, all columns at index
      *  <code>columnCount</code> and greater are discarded.
      *
+     * <p>
+     * 设置模型中的列数。如果新大小大于当前大小,则使用<code> null </code>单元格值将新列添加到模型的末尾。
+     * 如果新大小小于当前大小,则索引<code> columnCount </code>和更大值处的所有列都将被丢弃。
+     * 
+     * 
      *  @param columnCount  the new number of columns in the model
      *
      *  @see #setColumnCount
@@ -527,6 +672,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  This method is a cover for <code>addColumn(Object, Vector)</code> which
      *  uses <code>null</code> as the data vector.
      *
+     * <p>
+     *  向模型中添加列。新列将具有标识符<code> columnName </code>,其可以为null。此方法将向所有侦听器发送<code> tableChanged </code>通知消息。
+     * 这个方法是<code> addColumn(Object,Vector)</code>的封面,它使用<code> null </code>作为数据向量。
+     * 
+     * 
      * @param   columnName the identifier of the column being added
      */
     public void addColumn(Object columnName) {
@@ -543,6 +693,12 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  element going to row 0, etc.  This method will send a
      *  <code>tableChanged</code> notification message to all the listeners.
      *
+     * <p>
+     *  向模型中添加列。新列将具有标识符<code> columnName </code>,其可以为null。 <code> columnData </code>是列的数据的可选向量。
+     * 如果它是<code> null </code>,则该列用<code> null </code>值填充。否则,新数据将被添加到模型,从第一个元素开始到第0行,等等。
+     * 这个方法将发送一个<code> tableChanged </code>通知消息给所有的监听器。
+     * 
+     * 
      * @param   columnName the identifier of the column being added
      * @param   columnData       optional data of the column being added
      */
@@ -576,6 +732,12 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      *  element going to row 0, etc.  This method will send a
      *  <code>tableChanged</code> notification message to all the listeners.
      *
+     * <p>
+     * 向模型中添加列。新列将具有标识符<code> columnName </code>。 <code> columnData </code>是列的可选数据数组。
+     * 如果它是<code> null </code>,则该列用<code> null </code>值填充。否则,新数据将被添加到模型,从第一个元素开始到第0行,等等。
+     * 这个方法将发送一个<code> tableChanged </code>通知消息给所有的监听器。
+     * 
+     * 
      * @see #addColumn(Object, Vector)
      */
     public void addColumn(Object columnName, Object[] columnData) {
@@ -588,6 +750,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 
     /**
      * Returns the number of rows in this data table.
+     * <p>
+     *  返回此数据表中的行数。
+     * 
+     * 
      * @return the number of rows in the model
      */
     public int getRowCount() {
@@ -596,6 +762,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 
     /**
      * Returns the number of columns in this data table.
+     * <p>
+     *  返回此数据表中的列数。
+     * 
+     * 
      * @return the number of columns in the model
      */
     public int getColumnCount() {
@@ -605,6 +775,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
     /**
      * Returns the column name.
      *
+     * <p>
+     *  返回列名称。
+     * 
+     * 
      * @return a name for this column using the string value of the
      * appropriate member in <code>columnIdentifiers</code>.
      * If <code>columnIdentifiers</code> does not have an entry
@@ -625,6 +799,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
     /**
      * Returns true regardless of parameter values.
      *
+     * <p>
+     *  无论参数值如何,都返回true。
+     * 
+     * 
      * @param   row             the row whose value is to be queried
      * @param   column          the column whose value is to be queried
      * @return                  true
@@ -638,6 +816,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      * Returns an attribute value for the cell at <code>row</code>
      * and <code>column</code>.
      *
+     * <p>
+     *  返回<code> row </code>和<code> column </code>的单元格的属性值。
+     * 
+     * 
      * @param   row             the row whose value is to be queried
      * @param   column          the column whose value is to be queried
      * @return                  the value Object at the specified cell
@@ -654,6 +836,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
      * <code>row</code>.  <code>aValue</code> is the new value.  This method
      * will generate a <code>tableChanged</code> notification.
      *
+     * <p>
+     *  为<code> column </code>和<code> row </code>设置单元格的对象值。 <code> aValue </code>是新值。
+     * 此方法将生成<code> tableChanged </code>通知。
+     * 
+     * 
      * @param   aValue          the new value; this can be null
      * @param   row             the row whose value is to be changed
      * @param   column          the column whose value is to be changed
@@ -672,6 +859,10 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 
     /**
      * Returns a vector that contains the same objects as the array.
+     * <p>
+     *  返回包含与数组相同的对象的向量。
+     * 
+     * 
      * @param anArray  the array to be converted
      * @return  the new vector; if <code>anArray</code> is <code>null</code>,
      *                          returns <code>null</code>
@@ -689,6 +880,9 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 
     /**
      * Returns a vector of vectors that contains the same objects as the array.
+     * <p>
+     *  返回包含与数组相同的对象的向量的向量。
+     * 
      * @param anArray  the double array to be converted
      * @return the new vector of vectors; if <code>anArray</code> is
      *                          <code>null</code>, returns <code>null</code>

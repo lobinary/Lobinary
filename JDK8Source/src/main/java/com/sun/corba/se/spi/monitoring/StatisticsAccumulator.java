@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ import java.util.*;
 /**
  * <p>
  *
+ * <p>
+ * <p>
+ * 
+ * 
  * @author Hemanth Puttaswamy
  * </p>
  * <p>
@@ -83,6 +88,17 @@ public class StatisticsAccumulator {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  用户将使用此方法仅使用StatisticsAccumulator注册样本。
+ * 这是用户将用于公开统计信息的唯一方法,在内部,StatisticMonitoredAttribute将在ASAdmin请求时收集信息。
+ * </p>
+ * <p>
+ * 
+ * </p>
+ * <p>
+ * 
+ * 
  * @param value a double value to make it more precise
  * </p>
  */
@@ -99,6 +115,9 @@ public class StatisticsAccumulator {
     /**
      *  Computes the Standard Statistic Results based on the samples collected
      *  so far and provides the complete value as a formatted String
+     * <p>
+     *  基于迄今收集的样本计算标准统计结果,并以格式化的字符串形式提供完整值
+     * 
      */
     public String getValue( ) {
         return toString();
@@ -107,6 +126,9 @@ public class StatisticsAccumulator {
     /**
      *  Users can extend StatisticsAccumulator to provide the complete
      *  Stats in the format they prefer, if the default format doesn't suffice.
+     * <p>
+     *  如果默认格式不够,用户可以扩展StatisticsAccumulator以提供他们喜欢的格式的完整统计信息。
+     * 
      */
     public String toString( ) {
         return "Minimum Value = " + min + " " + unit + " " +
@@ -118,6 +140,9 @@ public class StatisticsAccumulator {
 
     /**
      *  If users choose to custom format the stats.
+     * <p>
+     *  如果用户选择自定义格式的统计。
+     * 
      */
     protected double computeAverage( ) {
         return (sampleSum / sampleCount);
@@ -129,6 +154,11 @@ public class StatisticsAccumulator {
      * there is no need to hold on to all the samples provided.
      *
      * The method is protected to let users extend and format the results.
+     * <p>
+     *  我们使用派生的标准偏差公式来计算SD。这样,没有必要坚持所提供的所有样品。
+     * 
+     *  该方法受到保护,允许用户扩展和格式化结果。
+     * 
      */
     protected double computeStandardDeviation( ) {
         double sampleSumSquare = sampleSum * sampleSum;
@@ -145,6 +175,13 @@ public class StatisticsAccumulator {
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  通过将单位提供为字符串来构造统计累加器。单位的示例是"小时","分钟","秒","毫秒","微秒"等等。,
+ * </p>
+ * <p>
+ * 
+ * 
  * @return a StatisticsAccumulator with ...
  * </p>
  * <p>
@@ -161,6 +198,9 @@ public class StatisticsAccumulator {
 
     /**
      *  Clears the samples and starts fresh on new samples.
+     * <p>
+     *  清除样品,并开始新的样品。
+     * 
      */
     void clearState( ) {
         min = Double.MAX_VALUE;
@@ -172,6 +212,8 @@ public class StatisticsAccumulator {
 
     /**
      *  This is an internal API to test StatisticsAccumulator...
+     * <p>
+     *  这是一个内部API来测试StatisticsAccumulator ...
      */
     public void unitTestValidate( String expectedUnit, double expectedMin,
         double expectedMax, long expectedSampleCount, double expectedAverage,

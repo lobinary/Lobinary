@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 /**
@@ -11,6 +12,8 @@ package com.sun.corba.se.PortableActivationIDL;
 /** Interface used to combine the Activator and Locator when both are
     * implemented together in the same process, as is currently the case
     * for our implementation.
+    * <p>
+    * 
     */
 public final class ServerManagerHolder implements org.omg.CORBA.portable.Streamable
 {

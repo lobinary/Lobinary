@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -89,6 +90,32 @@ import java.util.Arrays;
  * this one, as it supports all of the same operations but it is faster, as
  * it performs no synchronization.
  *
+ * <p>
+ *  线程安全的,可变的字符序列。字符串缓冲区就像一个{@link String},但可以修改。在任何时间点,它包含一些特定的字符序列,但是序列的长度和内容可以通过某些方法调用来改变。
+ * <p>
+ *  字符串缓冲区可以安全地被多个线程使用。这些方法在必要时被同步,使得在任何特定实例上的所有操作表现得好像它们以与由所涉及的每个单独线程进行的方法调用的顺序一致的一些串行顺序发生。
+ * <p>
+ *  {@code StringBuffer}的主要操作是{@code append}和{@code insert}方法,它们被重载以接受任何类型的数据。
+ * 每个都有效地将给定的数据转换为字符串,然后将该字符串的字符附加或插入字符串缓冲区。 {@code append}方法总是在缓冲区的末尾添加这些字符; {@code insert}方法在指定点添加字符。
+ * <p>
+ *  例如,如果{@code z}引用当前内容为{@code"start"}的字符串缓冲对象,则调用{@code z.append("le")}的方法将导致字符串缓冲区包含{@code"startle"},
+ * 而{@code z.insert(4,"le")}会改变字符串缓冲区以包含{@code"starlet"}。
+ * <p>
+ * 通常,如果sb引用{@code StringBuffer}的实例,则{@code sb.append(x)}的效果与{@code sb.insert(sb.length(),x)}相同。
+ * <p>
+ *  每当涉及源序列的操作(例如从源序列附加或插入),此类仅在执行操作的字符串缓冲区上同步,而不在源上。
+ * 请注意,虽然{@code StringBuffer}被设计为安全地从多个线程并发使用,但是如果构造函数或{@code append}或{@code insert}操作传递了跨线程共享的源序列,则调用代码
+ * 必须确保操作在操作期间具有源序列的一致且不变的视图。
+ *  每当涉及源序列的操作(例如从源序列附加或插入),此类仅在执行操作的字符串缓冲区上同步,而不在源上。这可以通过在操作的调用期间通过使用不变的源序列或者不通过线程共享源序列的调用者来满足。
+ * <p>
+ *  每个字符串缓冲区都有一个容量。只要包含在字符串缓冲器中的字符序列的长度不超过容量,就不必分配新的内部缓冲器阵列。如果内部缓冲区溢出,它会自动变大。
+ * <p>
+ *  除非另有说明,否则将{@code null}参数传递给此类中的构造函数或方法将导致抛出{@link NullPointerException}。
+ * <p>
+ * 从JDK 5版本开始,这个类已经补充了一个设计用于单个线程{@link StringBuilder}的等效类。
+ *  {@code StringBuilder}类通常优先于这个类,因为它支持所有相同的操作,但它更快,因为它不执行同步。
+ * 
+ * 
  * @author      Arthur van Hoff
  * @see     java.lang.StringBuilder
  * @see     java.lang.String
@@ -102,6 +129,9 @@ import java.util.Arrays;
     /**
      * A cache of the last value returned by toString. Cleared
      * whenever the StringBuffer is modified.
+     * <p>
+     *  由toString返回的最后一个值的缓存。每当修改StringBuffer时清除。
+     * 
      */
     private transient char[] toStringCache;
 
@@ -111,6 +141,9 @@ import java.util.Arrays;
     /**
      * Constructs a string buffer with no characters in it and an
      * initial capacity of 16 characters.
+     * <p>
+     *  构造一个字符串缓冲区,其中没有字符,初始容量为16个字符。
+     * 
      */
     public StringBuffer() {
         super(16);
@@ -120,6 +153,10 @@ import java.util.Arrays;
      * Constructs a string buffer with no characters in it and
      * the specified initial capacity.
      *
+     * <p>
+     *  构造一个字符串缓冲区,其中没有字符和指定的初始容量。
+     * 
+     * 
      * @param      capacity  the initial capacity.
      * @exception  NegativeArraySizeException  if the {@code capacity}
      *               argument is less than {@code 0}.
@@ -133,6 +170,10 @@ import java.util.Arrays;
      * specified string. The initial capacity of the string buffer is
      * {@code 16} plus the length of the string argument.
      *
+     * <p>
+     *  构造一个字符串缓冲区,初始化为指定字符串的内容。字符串缓冲区的初始容量为{@code 16}加上字符串参数的长度。
+     * 
+     * 
      * @param   str   the initial contents of the buffer.
      */
     public StringBuffer(String str) {
@@ -150,6 +191,12 @@ import java.util.Arrays;
      * less than or equal to zero, then an empty buffer of capacity
      * {@code 16} is returned.
      *
+     * <p>
+     *  构造包含与指定的{@code CharSequence}相同的字符的字符串缓冲区。字符串缓冲区的初始容量为{@code 16}加上{@code CharSequence}参数的长度。
+     * <p>
+     *  如果指定的{@code CharSequence}的长度小于或等于零,则返回容量为{@code 16}的空缓冲区。
+     * 
+     * 
      * @param      seq   the sequence to copy.
      * @since 1.5
      */
@@ -177,6 +224,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since      1.5
      */
     @Override
@@ -185,6 +234,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @see        #length()
      */
@@ -195,6 +246,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @see        #length()
      */
@@ -206,6 +259,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since      1.5
      */
     @Override
@@ -214,6 +269,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since     1.5
      */
     @Override
@@ -222,6 +279,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since     1.5
      */
     @Override
@@ -230,6 +289,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since     1.5
      */
     @Override
@@ -238,6 +299,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -248,6 +311,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @see        #length()
      */
@@ -293,6 +358,18 @@ import java.util.Arrays;
      * This method synchronizes on {@code this}, the destination
      * object, but does not synchronize on the source ({@code sb}).
      *
+     * <p>
+     *  将指定的{@code StringBuffer}附加到此序列。
+     * <p>
+     * {@code StringBuffer}参数的字符按顺序附加到此{@code StringBuffer}的内容,将此{@code StringBuffer}的长度增加参数的长度。
+     * 如果{@code sb}是{@code null},那么这四个字符{@code"null"}将附加到此{@code StringBuffer}。
+     * <p>
+     *  让<i> n </i>是旧字符序列的长度,即在{@code append}方法执行之前包含在{@code StringBuffer}中的长度。
+     * 然后,新字符序列中索引<k>的字符等于旧字符序列中索引k的字符,如果<k> k <比<i> </i>否则,它等于参数{@code sb}中索引<k>的字符<i> k-n </i>。
+     * <p>
+     *  此方法在{@code this}(目标对象)上同步,但在源({@code sb})上不同步。
+     * 
+     * 
      * @param   sb   the {@code StringBuffer} to append.
      * @return  a reference to this object.
      * @since 1.4
@@ -304,6 +381,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.8
      */
     @Override
@@ -330,6 +409,18 @@ import java.util.Arrays;
      * <p>If {@code s} is {@code null}, then the four characters
      * {@code "null"} are appended.
      *
+     * <p>
+     *  将指定的{@code CharSequence}附加到此序列。
+     * <p>
+     *  {@code CharSequence}参数的字符按顺序附加,将此序列的长度增加参数的长度。
+     * 
+     *  <p>此方法的结果与调用this.append(s,0,s.length())完全相同;
+     * 
+     *  <p>此方法在{@code this}(目标对象)上同步,但不在源({@code s})上同步。
+     * 
+     *  <p>如果{@code s}是{@code null},则会附加四个字符{@code"null"}。
+     * 
+     * 
      * @param   s the {@code CharSequence} to append.
      * @return  a reference to this object.
      * @since 1.5
@@ -342,6 +433,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since      1.5
      */
@@ -361,6 +454,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -392,6 +487,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.5
      */
     @Override
@@ -423,6 +520,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      * @since      1.2
      */
@@ -434,6 +533,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      * @since      1.2
      */
@@ -445,6 +546,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      * @since      1.2
      */
@@ -456,6 +559,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      * @since      1.2
      */
@@ -465,6 +570,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since      1.4
      */
@@ -474,6 +581,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      * @since      1.2
      */
@@ -483,6 +592,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      * @since      1.2
      */
@@ -496,6 +607,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -506,6 +619,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -516,6 +631,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -526,6 +643,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since      1.5
      */
@@ -539,6 +658,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since      1.5
      */
@@ -552,6 +673,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -564,6 +687,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -574,6 +699,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -586,6 +713,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -598,6 +727,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -610,6 +741,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
     @Override
@@ -622,6 +755,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since      1.4
      */
     @Override
@@ -631,6 +766,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since      1.4
      */
     @Override
@@ -639,6 +776,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since      1.4
      */
     @Override
@@ -648,6 +787,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since      1.4
      */
     @Override
@@ -656,6 +797,8 @@ import java.util.Arrays;
     }
 
     /**
+    /* <p>
+    /* 
      * @since   JDK1.0.2
      */
     @Override
@@ -676,6 +819,10 @@ import java.util.Arrays;
     /**
      * Serializable fields for StringBuffer.
      *
+     * <p>
+     *  StringBuffer的可序列化字段。
+     * 
+     * 
      * @serialField value  char[]
      *              The backing character array of this StringBuffer.
      * @serialField count int
@@ -694,6 +841,9 @@ import java.util.Arrays;
     /**
      * readObject is called to restore the state of the StringBuffer from
      * a stream.
+     * <p>
+     * readObject被调用以从流中恢复StringBuffer的状态。
+     * 
      */
     private synchronized void writeObject(java.io.ObjectOutputStream s)
         throws java.io.IOException {
@@ -707,6 +857,8 @@ import java.util.Arrays;
     /**
      * readObject is called to restore the state of the StringBuffer from
      * a stream.
+     * <p>
+     *  readObject被调用以从流中恢复StringBuffer的状态。
      */
     private void readObject(java.io.ObjectInputStream s)
         throws java.io.IOException, ClassNotFoundException {

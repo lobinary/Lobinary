@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import com.sun.corba.se.pept.protocol.MessageMediator;
  * <code>ProtocolHandler</code> is used to determine the
  * type of an incoming message.
  *
+ * <p>
+ *  <code> ProtocolHandler </code>用于确定传入消息的类型。
+ * 
+ * 
  * @author Harold Carr
  */
 public interface ProtocolHandler
@@ -45,6 +50,11 @@ public interface ProtocolHandler
      * ServerRequestDispatcher} to handle the request.  On the client-side
      * it may signal a waiting thread to handle a reply.
      *
+     * <p>
+     *  此方法确定传入消息的类型并适当地调度它。
+     * 
+     *  例如,在服务器端,它可能会找到一个{@link com.sun.corba.se.pept.protocol.ServerRequestDispatcher ServerRequestDispatcher}
+     * 
      * @return deprecated
      */
     public boolean handleRequest(MessageMediator messageMediator);

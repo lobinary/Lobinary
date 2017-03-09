@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import java.util.*;
  * API.
  *
  * Security related methods that only work on J2SE 1.2 and newer.
+ * <p>
+ *  这个类被复制到每个JAXP子包,所以保持同步。它是包私有的,因此不作为JAXP API的一部分公开。
+ * 
  */
 class SecuritySupport  {
 

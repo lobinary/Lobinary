@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: TreeWalker.java,v 1.2.4.1 2005/09/15 08:15:59 suresh_emailid Exp $
+ * <p>
+ *  $ Id：TreeWalker.java,v 1.2.4.1 2005/09/15 08:15:59 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -42,6 +55,9 @@ import org.xml.sax.helpers.LocatorImpl;
  * This class does a pre-order walk of the DOM tree, calling a ContentHandler
  * interface as it goes.
  * @xsl.usage advanced
+ * <p>
+ *  这个类执行DOM树的预订步骤,调用ContentHandler接口。 @ xsl.usage advanced
+ * 
  */
 
 public class TreeWalker
@@ -62,6 +78,10 @@ public class TreeWalker
   /**
    * Get the ContentHandler used for the tree walk.
    *
+   * <p>
+   *  获取用于树行走的ContentHandler。
+   * 
+   * 
    * @return the ContentHandler used for the tree walk
    */
   public ContentHandler getContentHandler()
@@ -72,6 +92,10 @@ public class TreeWalker
   /**
    * Get the ContentHandler used for the tree walk.
    *
+   * <p>
+   *  获取用于树行走的ContentHandler。
+   * 
+   * 
    * @return the ContentHandler used for the tree walk
    */
   public void setContentHandler(ContentHandler ch)
@@ -81,6 +105,10 @@ public class TreeWalker
 
         /**
    * Constructor.
+   * <p>
+   *  构造函数。
+   * 
+   * 
    * @param   contentHandler The implemention of the
    * @param   systemId System identifier for the document.
    * contentHandler operation (toXMLString, digest, ...)
@@ -104,6 +132,10 @@ public class TreeWalker
 
   /**
    * Constructor.
+   * <p>
+   *  构造函数。
+   * 
+   * 
    * @param   contentHandler The implemention of the
    * contentHandler operation (toXMLString, digest, ...)
    */
@@ -122,6 +154,10 @@ public class TreeWalker
 
   /**
    * Constructor.
+   * <p>
+   *  构造函数。
+   * 
+   * 
    * @param   contentHandler The implemention of the
    * contentHandler operation (toXMLString, digest, ...)
    */
@@ -148,6 +184,12 @@ public class TreeWalker
    * traversal, startDocument and endDocument will always be issued to the
    * SAX listener.
    *
+   * <p>
+   *  执行预订遍历非递归样式。
+   * 
+   *  注意,TreeWalker假设子树用于表示一个完整的(虽然不一定是格式良好的)文档,在遍历期间,startDocument和endDocument将始终发送到SAX侦听器。
+   * 
+   * 
    * @param pos Node in the tree where to start traversal
    *
    * @throws TransformerException
@@ -167,6 +209,12 @@ public class TreeWalker
    * In contrast to the traverse() method this method will not issue
    * startDocument() and endDocument() events to the SAX listener.
    *
+   * <p>
+   *  执行预订遍历非递归样式。
+   * 
+   * 与traverse()方法相反,此方法不会向SAX侦听器发出startDocument()和endDocument()事件。
+   * 
+   * 
    * @param pos Node in the tree where to start traversal
    *
    * @throws TransformerException
@@ -218,6 +266,12 @@ public class TreeWalker
    * traversal, startDocument and endDocument will always be issued to the
    * SAX listener.
    *
+   * <p>
+   *  执行预订遍历非递归样式。
+   * 
+   *  注意,TreeWalker假设子树用于表示一个完整的(虽然不一定是格式良好的)文档,在遍历期间,startDocument和endDocument将始终发送到SAX侦听器。
+   * 
+   * 
    * @param pos Node in the tree where to start traversal
    * @param top Node in the tree where to end traversal
    *
@@ -266,6 +320,9 @@ public class TreeWalker
 
   /**
    * Optimized dispatch of characters.
+   * <p>
+   *  优化的字符分派。
+   * 
    */
   private final void dispatachChars(Node node)
      throws org.xml.sax.SAXException
@@ -285,6 +342,10 @@ public class TreeWalker
    * Start processing given node
    *
    *
+   * <p>
+   *  开始处理给定节点
+   * 
+   * 
    * @param node Node to process
    *
    * @throws org.xml.sax.SAXException
@@ -449,6 +510,9 @@ public class TreeWalker
    * End processing of given node
    *
    *
+   * <p>
+   *  结束对给定节点的处理
+   * 
    * @param node Node we just finished processing
    *
    * @throws org.xml.sax.SAXException

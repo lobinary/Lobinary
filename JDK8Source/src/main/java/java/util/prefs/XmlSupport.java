@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import org.w3c.dom.*;
  * XML Support for java.util.prefs. Methods to import and export preference
  * nodes and subtrees.
  *
+ * <p>
+ *  XML对java.util.prefs的支持。导入和导出首选节点和子树的方法。
+ * 
+ * 
  * @author  Josh Bloch and Mark Reinhold
  * @see     Preferences
  * @since   1.4
@@ -74,11 +79,17 @@ class XmlSupport {
         "          value CDATA #REQUIRED >"          ;
     /**
      * Version number for the format exported preferences files.
+     * <p>
+     *  导出的首选项文件的版本号。
+     * 
      */
     private static final String EXTERNAL_XML_VERSION = "1.0";
 
     /*
      * Version number for the internal map files.
+     * <p>
+     *  内部映射文件的版本号。
+     * 
      */
     private static final String MAP_XML_VERSION = "1.0";
 
@@ -87,6 +98,10 @@ class XmlSupport {
      * subnodes, to the specified output stream.  Preferences are exported as
      * an XML document conforming to the definition in the Preferences spec.
      *
+     * <p>
+     *  将指定的首选项节点和(如果subTree为true)所有子节点导出到指定的输出流。首选项导出为符合首选项规范中定义的XML文档。
+     * 
+     * 
      * @throws IOException if writing to the specified output stream
      *         results in an <tt>IOException</tt>.
      * @throws BackingStoreException if preference data cannot be read from
@@ -131,6 +146,11 @@ class XmlSupport {
      * XML node conforming to all of the children of the specified
      * Preferences node and recurse.
      *
+     * <p>
+     *  将指定首选项节点中的首选项放置到指定的XML元素中,该元素假定表示指定XML文档中的节点,该文档假定符合PREFS_DTD。
+     * 如果subTree为true,则创建符合指定首选项节点和递归的所有子节点的指定XML节点的子节点。
+     * 
+     * 
      * @throws BackingStoreException if it is not possible to read
      *         the preferences or children out of the specified
      *         preferences node.
@@ -187,6 +207,10 @@ class XmlSupport {
      * to contain an XML document in the format described in the Preferences
      * spec.
      *
+     * <p>
+     *  从指定的输入流导入首选项,假定其包含"首选项"规范中描述的格式的XML文档。
+     * 
+     * 
      * @throws IOException if reading from the specified output stream
      *         results in an <tt>IOException</tt>.
      * @throws InvalidPreferencesFormatException Data on input stream does not
@@ -219,6 +243,9 @@ class XmlSupport {
 
     /**
      * Create a new prefs XML document.
+     * <p>
+     *  创建一个新的prefs XML文档。
+     * 
      */
     private static Document createPrefsDoc( String qname ) {
         try {
@@ -234,6 +261,9 @@ class XmlSupport {
     /**
      * Load an XML document from specified input stream, which must
      * have the requisite DTD URI.
+     * <p>
+     *  从指定的输入流加载XML文档,该输入流必须具有必需的DTD URI。
+     * 
      */
     private static Document loadPrefsDoc(InputStream in)
         throws SAXException, IOException
@@ -255,6 +285,9 @@ class XmlSupport {
 
     /**
      * Write XML document to the specified output stream.
+     * <p>
+     *  将XML文档写入指定的输出流。
+     * 
      */
     private static final void writeDoc(Document doc, OutputStream out)
         throws IOException
@@ -284,6 +317,9 @@ class XmlSupport {
      * Recursively traverse the specified preferences node and store
      * the described preferences into the system or current user
      * preferences tree, as appropriate.
+     * <p>
+     *  递归地遍历指定的偏好节点并且将所描述的偏好存储在系统或当前用户偏好树中,如果合适的话。
+     * 
      */
     private static void ImportSubtree(Preferences prefsNode, Element xmlNode) {
         NodeList xmlKids = xmlNode.getChildNodes();
@@ -293,6 +329,9 @@ class XmlSupport {
          * child nodes. Then we unlock the node and go to children
          * Since some of the children might have been concurrently
          * deleted we check for this.
+         * <p>
+         * 我们首先锁定节点,导入其内容并获取子节点。然后我们解锁节点并去孩子由于一些孩子可能已被同时删除,我们检查这一点。
+         * 
          */
         Preferences[] prefsKids;
         /* Lock the node */
@@ -321,6 +360,9 @@ class XmlSupport {
      * Import the preferences described by the specified XML element
      * (a map from a preferences document) into the specified
      * preferences node.
+     * <p>
+     *  将指定XML元素(来自首选项文档的映射)描述的首选项导入指定的首选项节点。
+     * 
      */
     private static void ImportPrefs(Preferences prefsNode, Element map) {
         NodeList entries = map.getChildNodes();
@@ -336,6 +378,10 @@ class XmlSupport {
      * the specified OutputStream as per the prefs DTD.  This is used
      * as the internal (undocumented) format for FileSystemPrefs.
      *
+     * <p>
+     *  根据prefs DTD将指定的Map <String,String>导出到指定的OutputStream上的地图文档。这用作FileSystemPrefs的内部(未记录)格式。
+     * 
+     * 
      * @throws IOException if writing to the specified output stream
      *         results in an <tt>IOException</tt>.
      */
@@ -363,6 +409,10 @@ class XmlSupport {
      * the specified Map.  (If this Map is empty, it will contain exactly
      * the key-value pairs int the XML-document when this method returns.)
      *
+     * <p>
+     *  从指定的输入流导入映射,根据prefs DTD假定其包含映射文档。这用作FileSystemPrefs的内部(未记录)格式。在XML文档中指定的键值对将被放入指定的Map中。
+     *  (如果此映射为空,则在此方法返回时,它将完全包含XML文档中的键值对int。)。
+     * 
      * @throws IOException if reading from the specified output stream
      *         results in an <tt>IOException</tt>.
      * @throws InvalidPreferencesFormatException Data on input stream does not

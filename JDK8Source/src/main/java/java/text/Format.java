@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996,1997  - 保留所有权利(C)版权所有IBM Corp. 1996  -  1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.text;
@@ -123,6 +130,66 @@ import java.io.Serializable;
  * If multiple threads access a format concurrently, it must be synchronized
  * externally.
  *
+ * <p>
+ *  <code>格式</code>是用于格式化区域设置敏感信息(例如日期,消息和数字)的抽象基类。
+ * 
+ * <p>
+ *  <code> Format </code>定义了用于将区域敏感对象格式化为<code> String </code> s(<code> format </code>方法)和解析<code> Strin
+ * g </code >回到对象(<code> parseObject </code>方法)。
+ * 
+ * <p>
+ *  通常,格式的<code> parseObject </code>方法必须能够解析通过其<code> format </code>方法格式化的任何字符串。但是,可能有特殊情况,这是不可能的。
+ * 例如,<code> format </code>方法可能创建两个相邻的整数,两者之间没有分隔符,在这种情况下,<code> parseObject </code>无法分辨哪些数字属于哪个数字。
+ * 
+ *  <h3>子类</h3>
+ * 
+ * <p>
+ * Java平台为格式化日期提供了<code> Format </code>  -  <code> DateFormat </code>,<code> MessageFormat </code>和<code>
+ *  NumberFormat </code> ,消息和数字。
+ * <p>
+ *  具体子类必须实现三种方法：
+ * <ol>
+ *  <li> <code> parseObject(String source,ParsePosition pos)</b> </b> </b> </b> </code>
+ * </ol>
+ *  这些通用方法允许对象的多态性解析和格式化,并且例如由<code> MessageFormat </code>使用。
+ * 子类通常还为特定输入类型以及针对特定结果类型的<code> parse </code>方法提供额外的<code> format </code>方法。
+ * 当在输入文本的开头没有所需格式的文本时,任何不带有<code> ParsePosition </code>参数的<code> parse </code>方法都应该抛出<code> ParseExcept
+ * ion </code>。
+ * 子类通常还为特定输入类型以及针对特定结果类型的<code> parse </code>方法提供额外的<code> format </code>方法。
+ * 
+ * <p>
+ *  大多数子类也将实现以下工厂方法：
+ * <ol>
+ * <li>
+ *  <code> getInstance </code>用于获取适合当前语言环境的有用的格式对象
+ * <li>
+ *  <code> getInstance(Locale)</code>用于获取适合指定区域设置的有用的格式对象
+ * </ol>
+ * 另外,一些子类也可以实现其他<code> getXxxxInstance </code>方法用于更专门的控制。
+ * 例如,<code> NumberFormat </code>类提供<code> getPercentInstance </code>和<code> getCurrencyInstance </code>
+ * 方法来获取特定的数字格式化程序。
+ * 另外,一些子类也可以实现其他<code> getXxxxInstance </code>方法用于更专门的控制。
+ * 
+ * <p>
+ *  允许程序员为区域设置创建对象的<code> Format </code>子类(例如使用<code> getInstance(Locale)</code>)还必须实现以下类方法：
+ * <blockquote>
+ * <pre>
+ *  public static Locale [] getAvailableLocales()
+ * </pre>
+ * </blockquote>
+ * 
+ * <p>
+ *  最后子类可以定义一组常量来标识格式化输出中的各个字段。这些常量用于创建FieldPosition对象,该对象标识字段中包含的信息及其在格式化结果中的位置。
+ * 这些常数应命名为<code> <em> item </em> _FIELD </code>,其中<code> <em> item </em> </code>有关这些常量的示例,请参阅<code> ERA
+ * _FIELD </code>及其在{@link DateFormat}中的朋友。
+ *  最后子类可以定义一组常量来标识格式化输出中的各个字段。这些常量用于创建FieldPosition对象,该对象标识字段中包含的信息及其在格式化结果中的位置。
+ * 
+ *  <h4> <a name="synchronization">同步</a> </h4>
+ * 
+ * <p>
+ *  格式通常不同步。建议为每个线程创建单独的格式实例。如果多个线程并发访问格式,则必须在外部同步。
+ * 
+ * 
  * @see          java.text.ParsePosition
  * @see          java.text.FieldPosition
  * @see          java.text.NumberFormat
@@ -137,6 +204,9 @@ public abstract class Format implements Serializable, Cloneable {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
      */
     protected Format() {
     }
@@ -148,6 +218,15 @@ public abstract class Format implements Serializable, Cloneable {
      *         new StringBuffer(), new FieldPosition(0)).toString();</code>
      * </blockquote>
      *
+     * <p>
+     *  格式化对象以生成字符串。这相当于
+     * <blockquote>
+     * {@link #format(Object,StringBuffer,FieldPosition)format} <code>(obj,new StringBuffer(),new FieldPosit
+     * ion(0))。
+     * toString(); </code>。
+     * </blockquote>
+     * 
+     * 
      * @param obj    The object to format
      * @return       Formatted string.
      * @exception IllegalArgumentException if the Format cannot format the given
@@ -164,6 +243,10 @@ public abstract class Format implements Serializable, Cloneable {
      * then its indices are set to the beginning and end of the first such
      * field encountered.
      *
+     * <p>
+     *  格式化对象,并将生成的文本附加到给定的字符串缓冲区。如果<code> pos </code>参数标识格式使用的字段,那么其索引将设置为遇到的第一个此类字段的开始和结束。
+     * 
+     * 
      * @param obj    The object to format
      * @param toAppendTo    where the text is to be appended
      * @param pos    A <code>FieldPosition</code> identifying a field
@@ -195,6 +278,16 @@ public abstract class Format implements Serializable, Cloneable {
      * that support fields should override this and create an
      * <code>AttributedCharacterIterator</code> with meaningful attributes.
      *
+     * <p>
+     *  格式化产生<code> AttributedCharacterIterator </code>的对象。
+     * 您可以使用返回的<code> AttributedCharacterIterator </code>来构建生成的String,以及确定有关生成的String的信息。
+     * <p>
+     *  AttributedCharacterIterator的每个属性键的类型为<code> Field </code>。
+     * 每个<code> Format </code>实现定义了<code> AttributedCharacterIterator </code>中每个属性的合法值,但通常属性键也用作属性值。
+     *  <p>默认实现创建一个没有属性的<code> AttributedCharacterIterator </code>。
+     * 支持字段的子类应该覆盖此并创建具有有意义属性的<code> AttributedCharacterIterator </code>。
+     * 
+     * 
      * @exception NullPointerException if obj is null.
      * @exception IllegalArgumentException when the Format cannot format the
      *            given object.
@@ -220,6 +313,15 @@ public abstract class Format implements Serializable, Cloneable {
      * changed, the error index of <code>pos</code> is set to the index of
      * the character where the error occurred, and null is returned.
      *
+     * <p>
+     *  从字符串解析文本以生成对象。
+     * <p>
+     * 该方法尝试解析从<code> pos </code>给出的索引开始的文本。
+     * 如果解析成功,则将<code> pos </code>的索引更新为使用最后一个字符后的索引(解析不一定使用直到字符串结尾的所有字符),并返回已解析的对象。
+     * 更新的<code> pos </code>可用于指示下一次调用此方法的起点。
+     * 如果发生错误,则<code> pos </code>的索引不改变,<code> pos </code>的错误索引设置为发生错误的字符的索引,返回null 。
+     * 
+     * 
      * @param source A <code>String</code>, part of which should be parsed.
      * @param pos A <code>ParsePosition</code> object with index and error
      *            index information as described above.
@@ -233,6 +335,10 @@ public abstract class Format implements Serializable, Cloneable {
      * Parses text from the beginning of the given string to produce an object.
      * The method may not use the entire text of the given string.
      *
+     * <p>
+     *  从给定字符串的开头解析文本以产生对象。该方法可能不使用给定字符串的整个文本。
+     * 
+     * 
      * @param source A <code>String</code> whose beginning should be parsed.
      * @return An <code>Object</code> parsed from the string.
      * @exception ParseException if the beginning of the specified string
@@ -251,6 +357,10 @@ public abstract class Format implements Serializable, Cloneable {
     /**
      * Creates and returns a copy of this object.
      *
+     * <p>
+     *  创建并返回此对象的副本。
+     * 
+     * 
      * @return a clone of this instance.
      */
     public Object clone() {
@@ -271,6 +381,10 @@ public abstract class Format implements Serializable, Cloneable {
      * Creates an <code>AttributedCharacterIterator</code> for the String
      * <code>s</code>.
      *
+     * <p>
+     *  为字符串<code> s </code>创建<code> AttributedCharacterIterator </code>。
+     * 
+     * 
      * @param s String to create AttributedCharacterIterator from
      * @return AttributedCharacterIterator wrapping s
      */
@@ -285,6 +399,10 @@ public abstract class Format implements Serializable, Cloneable {
      * concatenated contents of the passed in
      * <code>AttributedCharacterIterator</code>s.
      *
+     * <p>
+     *  创建一个包含<code> AttributedCharacterIterator </code>中传递的连接内容的<code> AttributedCharacterIterator </code>。
+     * 
+     * 
      * @param iterators AttributedCharacterIterators used to create resulting
      *                  AttributedCharacterIterators
      * @return AttributedCharacterIterator wrapping passed in
@@ -302,6 +420,11 @@ public abstract class Format implements Serializable, Cloneable {
      * <code>string</code> and additional key/value pair <code>key</code>,
      * <code>value</code>.
      *
+     * <p>
+     *  使用String <code> string </code>和附加键/值对<code>键</code>,<code> value </code>返回AttributedCharacterIterato
+     * r。
+     * 
+     * 
      * @param string String to create AttributedCharacterIterator from
      * @param key Key for AttributedCharacterIterator
      * @param value Value associated with key in AttributedCharacterIterator
@@ -321,6 +444,10 @@ public abstract class Format implements Serializable, Cloneable {
      * <code>iterator</code> and the additional attribute <code>key</code>
      * <code>value</code>.
      *
+     * <p>
+     *  使用<code> iterator </code>和附加属性<code>键</code> <code> value </code>的内容创建AttributedCharacterIterator。
+     * 
+     * 
      * @param iterator Initial AttributedCharacterIterator to add arg to
      * @param key Key for AttributedCharacterIterator
      * @param value Value associated with key in AttributedCharacterIterator
@@ -342,6 +469,11 @@ public abstract class Format implements Serializable, Cloneable {
      * from <code>Format.formatToCharacterIterator</code> and as
      * field identifiers in <code>FieldPosition</code>.
      *
+     * <p>
+     * 定义在<code> Format.formatToCharacterIterator </code>中返回的<code> AttributedCharacterIterator </code>中作为属性
+     * 键使用的常量,以及<code> FieldPosition </code>中的字段标识。
+     * 
+     * 
      * @since 1.4
      */
     public static class Field extends AttributedCharacterIterator.Attribute {
@@ -352,6 +484,10 @@ public abstract class Format implements Serializable, Cloneable {
         /**
          * Creates a Field with the specified name.
          *
+         * <p>
+         *  创建具有指定名称的字段。
+         * 
+         * 
          * @param name Name of the attribute
          */
         protected Field(String name) {
@@ -370,6 +506,13 @@ public abstract class Format implements Serializable, Cloneable {
      * Delegates should NOT assume that the <code>Format</code> will notify
      * the delegate of fields in any particular order.
      *
+     * <p>
+     *  FieldDelegate通过各种<code> Format </code>实现来通知,因为它们正在格式化对象。
+     * 这允许存储格式化的字符串的各个部分以供稍后使用,例如在<code> FieldPosition </code>或<code> AttributedCharacterIterator </code>中。
+     * <p>
+     *  代理不应假设<code> Format </code>将以任何特定顺序通知委托人字段。
+     * 
+     * 
      * @see FieldPosition#getFieldDelegate
      * @see CharacterIteratorFieldDelegate
      */
@@ -379,6 +522,10 @@ public abstract class Format implements Serializable, Cloneable {
          * method will be invoked if there is no corresponding integer field id
          * matching <code>attr</code>.
          *
+         * <p>
+         *  当字符串的特定区域被格式化时通知。如果没有相应的整数字段id匹配<code> attr </code>,则将调用此方法。
+         * 
+         * 
          * @param attr Identifies the field matched
          * @param value Value associated with the field
          * @param start Beginning location of the field, will be >= 0
@@ -392,6 +539,9 @@ public abstract class Format implements Serializable, Cloneable {
         /**
          * Notified when a particular region of the String is formatted.
          *
+         * <p>
+         *  当字符串的特定区域被格式化时通知。
+         * 
          * @param fieldID Identifies the field by integer
          * @param attr Identifies the field matched
          * @param value Value associated with the field

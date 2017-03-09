@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,9 @@ import com.sun.imageio.plugins.common.ReaderUtil;
  *  It may subsample the image, clip the image,
  *  and shift the decoded image origin if the proper decoding parameter
  *  are set in the provided <code>WBMPImageReadParam</code>.
+ * <p>
+ *  如果在所提供的<code> WBMPImageReadParam </code>中设置了正确的解码参数,它可以对图像进行二次采样,剪切图像并移位解码的图像原点。
+ * 
  */
 public class WBMPImageReader extends ImageReader {
     /** The input stream where reads from */
@@ -71,6 +75,9 @@ public class WBMPImageReader extends ImageReader {
 
     /** Constructs <code>WBMPImageReader</code> from the provided
      *  <code>ImageReaderSpi</code>.
+     * <p>
+     *  <code> ImageReaderSpi </code>。
+     * 
      */
     public WBMPImageReader(ImageReaderSpi originator) {
         super(originator);
@@ -315,6 +322,8 @@ public class WBMPImageReader extends ImageReader {
     /*
      * This method verifies that given byte is valid wbmp type marker.
      * At the moment only 0x0 marker is described by wbmp spec.
+     * <p>
+     *  此方法验证给定字节是有效的wbmp类型标记。目前只有0x0标记由wbmp spec描述。
      */
     boolean isValidWbmpType(int type) {
         return type == 0;

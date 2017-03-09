@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -84,6 +85,38 @@ import sun.security.util.Debug;
  * for example, if they need to read from /dev/random on various Unix-like
  * operating systems.
  *
+ * <p>
+ *  这个类提供了一个密码强的随机数生成器(RNG)。
+ * 
+ *  <p>密码强的随机数最低限度符合<a href="http://csrc.nist.gov/cryptval/140-2.htm"> FIPS 140-2中指定的统计随机数生成器测试,加密模块的安全要
+ * 求</i> </a>,第4.9.1节。
+ * 此外,SecureRandom必须产生非确定性输出。因此,传递给SecureRandom对象的任何种子资料必须是不可预测的,并且所有SecureRandom输出序列必须具有加密强度,如。
+ * <a href="http://www.ietf.org/rfc/rfc1750.txt">
+ *  <i> RFC 1750：Randomness Recommendations for Security </i> </a>。
+ * 
+ *  <p>调用者通过无参构造函数或{@code getInstance}方法之一获取SecureRandom实例：
+ * 
+ * <pre>
+ *  SecureRandom random = new SecureRandom();
+ * </pre>
+ * 
+ *  许多SecureRandom实现是以伪随机数生成器(PRNG)的形式,这意味着它们使用确定性算法从真随机种子产生伪随机序列。其他实现可以产生真随机数,并且其他实现可以使用两种技术的组合。
+ * 
+ *  <p> SecureRandom的典型调用者调用以下方法来检索随机字节：
+ * 
+ * <pre>
+ *  SecureRandom random = new SecureRandom(); byte byte [] = new byte [20]; random.nextBytes(bytes);
+ * </pre>
+ * 
+ * <p>调用者还可以调用{@code generateSeed}方法来生成给定数量的种子字节(例如,为其他随机数生成器生成种子)：
+ * <pre>
+ *  byte seed [] = random.generateSeed(20);
+ * </pre>
+ * 
+ *  注意：根据实现,{@code generateSeed}和{@code nextBytes}方法可能会在熵被收集时阻塞,例如,如果他们需要在各种类Unix操作系统上从/ dev / random读取数
+ * 据。
+ * 
+ * 
  * @see java.security.SecureRandomSpi
  * @see java.util.Random
  *
@@ -101,6 +134,10 @@ public class SecureRandom extends java.util.Random {
     /**
      * The provider.
      *
+     * <p>
+     *  提供者。
+     * 
+     * 
      * @serial
      * @since 1.2
      */
@@ -109,6 +146,10 @@ public class SecureRandom extends java.util.Random {
     /**
      * The provider implementation.
      *
+     * <p>
+     *  提供程序实现。
+     * 
+     * 
      * @serial
      * @since 1.2
      */
@@ -117,6 +158,10 @@ public class SecureRandom extends java.util.Random {
     /*
      * The algorithm name of null if unknown.
      *
+     * <p>
+     *  如果未知,则为null的算法名称。
+     * 
+     * 
      * @serial
      * @since 1.5
      */
@@ -151,12 +196,32 @@ public class SecureRandom extends java.util.Random {
      * {@code nextBytes} will force the SecureRandom object to seed itself.
      * This self-seeding will not occur if {@code setSeed} was
      * previously called.
+     * <p>
+     *  构造实现默认随机数算法的安全随机数生成器(RNG)。
+     * 
+     *  <p>此构造函数遍历注册的安全提供程序列表,从最常用的提供程序开始。
+     * 将返回一个新的SecureRandom对象,该对象封装来自支持SecureRandom(RNG)算法的第一个Provider的SecureRandomSpi实现。
+     * 如果没有提供商支持RNG算法,则返回实现特定的默认值。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     *  <p>请参阅<a href =中的SecureRandom部分
+     * "{@docRoot}/../technotes/guides/security/StandardNames.html#SecureRandom">
+     *  Java加密架构标准算法名称文档</a>,以获取有关标准RNG算法名称的信息。
+     * 
+     * <p>返回的SecureRandom对象尚未设为种子。要播种返回的对象,请调用{@code setSeed}方法。
+     * 如果没有调用{@code setSeed},第一次调用{@code nextBytes}将强制SecureRandom对象进行种子本身。
+     * 如果之前调用了{@code setSeed},则不会发生这种自我种子。
+     * 
      */
     public SecureRandom() {
         /*
          * This call to our superclass constructor will result in a call
          * to our own {@code setSeed} method, which will return
          * immediately when it is passed zero.
+         * <p>
+         *  对我们的超类构造函数的这个调用将导致对我们自己的{@code setSeed}方法的调用,当它传递为零时,它立即返回。
+         * 
          */
         super(0);
         getDefaultPRNG(false, null);
@@ -183,6 +248,20 @@ public class SecureRandom extends java.util.Random {
      * Java Cryptography Architecture Standard Algorithm Name Documentation</a>
      * for information about standard RNG algorithm names.
      *
+     * <p>
+     *  构造实现默认随机数算法的安全随机数生成器(RNG)。 SecureRandom实例使用指定的种子字节进行种子化。
+     * 
+     *  <p>此构造函数遍历注册的安全提供程序列表,从最常用的提供程序开始。
+     * 将返回一个新的SecureRandom对象,该对象封装来自支持SecureRandom(RNG)算法的第一个Provider的SecureRandomSpi实现。
+     * 如果没有提供商支持RNG算法,则返回实现特定的默认值。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     *  <p>请参阅<a href =中的SecureRandom部分
+     * "{@docRoot}/../technotes/guides/security/StandardNames.html#SecureRandom">
+     *  Java加密架构标准算法名称文档</a>,以获取有关标准RNG算法名称的信息。
+     * 
+     * 
      * @param seed the seed.
      */
     public SecureRandom(byte seed[]) {
@@ -226,6 +305,10 @@ public class SecureRandom extends java.util.Random {
     /**
      * Creates a SecureRandom object.
      *
+     * <p>
+     *  创建SecureRandom对象。
+     * 
+     * 
      * @param secureRandomSpi the SecureRandom implementation.
      * @param provider the provider.
      */
@@ -267,6 +350,18 @@ public class SecureRandom extends java.util.Random {
      * This self-seeding will not occur if {@code setSeed} was
      * previously called.
      *
+     * <p>
+     *  返回实现指定的随机数生成器(RNG)算法的SecureRandom对象。
+     * 
+     * <p>此方法遍历注册的安全提供程序列表,从最常用的提供程序开始。将返回一个新的SecureRandom对象,该对象封装来自支持指定算法的第一个Provider的SecureRandomSpi实现。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     *  <p>返回的SecureRandom对象尚未设为种子。要播种返回的对象,请调用{@code setSeed}方法。
+     * 如果没有调用{@code setSeed},第一次调用{@code nextBytes}将强制SecureRandom对象进行种子本身。
+     * 如果之前调用了{@code setSeed},则不会发生这种自我种子。
+     * 
+     * 
      * @param algorithm the name of the RNG algorithm.
      * See the SecureRandom section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#SecureRandom">
@@ -310,6 +405,18 @@ public class SecureRandom extends java.util.Random {
      * This self-seeding will not occur if {@code setSeed} was
      * previously called.
      *
+     * <p>
+     *  返回实现指定的随机数生成器(RNG)算法的SecureRandom对象。
+     * 
+     *  <p>返回一个新的SecureRandom对象,用于封装来自指定提供者的SecureRandomSpi实现。指定的提供程序必须在安全提供程序列表中注册。
+     * 
+     *  <p>请注意,可以通过{@link Security#getProviders()Security.getProviders()}方法检索注册提供商的列表。
+     * 
+     *  <p>返回的SecureRandom对象尚未设为种子。要播种返回的对象,请调用{@code setSeed}方法。
+     * 如果没有调用{@code setSeed},第一次调用{@code nextBytes}将强制SecureRandom对象进行种子本身。
+     * 如果之前调用了{@code setSeed},则不会发生这种自我种子。
+     * 
+     * 
      * @param algorithm the name of the RNG algorithm.
      * See the SecureRandom section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#SecureRandom">
@@ -358,6 +465,16 @@ public class SecureRandom extends java.util.Random {
      * This self-seeding will not occur if {@code setSeed} was
      * previously called.
      *
+     * <p>
+     * 返回实现指定的随机数生成器(RNG)算法的SecureRandom对象。
+     * 
+     *  <p>返回一个新的SecureRandom对象,该对象封装来自指定的Provider对象的SecureRandomSpi实现。请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     *  <p>返回的SecureRandom对象尚未设为种子。要播种返回的对象,请调用{@code setSeed}方法。
+     * 如果没有调用{@code setSeed},第一次调用{@code nextBytes}将强制SecureRandom对象进行种子本身。
+     * 如果之前调用了{@code setSeed},则不会发生这种自我种子。
+     * 
+     * 
      * @param algorithm the name of the RNG algorithm.
      * See the SecureRandom section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#SecureRandom">
@@ -388,6 +505,9 @@ public class SecureRandom extends java.util.Random {
 
     /**
      * Returns the SecureRandomSpi of this SecureRandom object.
+     * <p>
+     *  返回此SecureRandom对象的SecureRandomSpi。
+     * 
      */
     SecureRandomSpi getSecureRandomSpi() {
         return secureRandomSpi;
@@ -396,6 +516,10 @@ public class SecureRandom extends java.util.Random {
     /**
      * Returns the provider of this SecureRandom object.
      *
+     * <p>
+     *  返回此SecureRandom对象的提供程序。
+     * 
+     * 
      * @return the provider of this SecureRandom object.
      */
     public final Provider getProvider() {
@@ -406,6 +530,10 @@ public class SecureRandom extends java.util.Random {
      * Returns the name of the algorithm implemented by this SecureRandom
      * object.
      *
+     * <p>
+     *  返回此SecureRandom对象实现的算法的名称。
+     * 
+     * 
      * @return the name of the algorithm or {@code unknown}
      *          if the algorithm name cannot be determined.
      * @since 1.5
@@ -419,6 +547,10 @@ public class SecureRandom extends java.util.Random {
      * replaces, the existing seed. Thus, repeated calls are guaranteed
      * never to reduce randomness.
      *
+     * <p>
+     *  重新采样此随机对象。给定的种子补充,而不是取代现有的种子。因此,重复的调用保证从不减少随机性。
+     * 
+     * 
      * @param seed the seed.
      *
      * @see #getSeed
@@ -436,6 +568,12 @@ public class SecureRandom extends java.util.Random {
      * <p>This method is defined for compatibility with
      * {@code java.util.Random}.
      *
+     * <p>
+     *  使用给定的{@code long seed}中包含的8个字节重新设定这个随机对象。给定的种子补充,而不是取代现有的种子。因此,重复的调用保证从不减少随机性。
+     * 
+     *  <p>此方法的定义与{@code java.util.Random}的兼容性。
+     * 
+     * 
      * @param seed the seed.
      *
      * @see #getSeed
@@ -447,6 +585,9 @@ public class SecureRandom extends java.util.Random {
          * unfortunate enough to be passing 0).  It's critical that we
          * ignore call from superclass constructor, as digest has not
          * yet been initialized at that point.
+         * <p>
+         * 忽略从超级构造函数调用(以及任何其他调用不幸足够传递0)。至关重要的是,我们忽略来自超类构造函数的调用,因为摘要尚未在该点初始化。
+         * 
          */
         if (seed != 0) {
             secureRandomSpi.engineSetSeed(longToByteArray(seed));
@@ -461,6 +602,13 @@ public class SecureRandom extends java.util.Random {
      * to seed itself.  This self-seeding will not occur if
      * {@code setSeed} was previously called.
      *
+     * <p>
+     *  生成用户指定数量的随机字节。
+     * 
+     *  <p>如果之前没有发生对{@code setSeed}的调用,则对该方法的第一次调用将强制此SecureRandom对象进行种子本身。
+     * 如果之前调用了{@code setSeed},则不会发生这种自我种子。
+     * 
+     * 
      * @param bytes the array to be filled in with random bytes.
      */
     @Override
@@ -476,6 +624,13 @@ public class SecureRandom extends java.util.Random {
      * from that class (for example, {@code nextInt},
      * {@code nextLong}, and {@code nextFloat}).
      *
+     * <p>
+     *  生成包含用户指定数量的伪随机位的整数(右对齐,带前导零)。
+     * 此方法覆盖{@code java.util.Random}方法,并用于为从该类继承的所有方法(例如,{@code nextInt},{@code nextLong})提供随机位元来源, {@code nextFloat}
+     * )。
+     *  生成包含用户指定数量的伪随机位的整数(右对齐,带前导零)。
+     * 
+     * 
      * @param numBits number of pseudo-random bits to be generated, where
      * {@code 0 <= numBits <= 32}.
      *
@@ -507,6 +662,13 @@ public class SecureRandom extends java.util.Random {
      * then call the {@code generateSeed} method to obtain seed bytes
      * from that object.
      *
+     * <p>
+     *  返回给定数量的种子字节,使用种子生成算法计算,该类用于对种子本身进行种子。此调用可用于种子其他随机数生成器。
+     * 
+     *  <p>此方法仅用于向后兼容性。
+     * 鼓励调用者使用一个替代的{@code getInstance}方法来获取SecureRandom对象,然后调用{@code generateSeed}方法从该对象获取种子字节。
+     * 
+     * 
      * @param numBytes the number of seed bytes to generate.
      *
      * @return the seed bytes.
@@ -525,6 +687,10 @@ public class SecureRandom extends java.util.Random {
      * generation algorithm that this class uses to seed itself.  This
      * call may be used to seed other random number generators.
      *
+     * <p>
+     *  返回给定数量的种子字节,使用种子生成算法计算,该类用于对种子本身进行种子。此调用可用于种子其他随机数生成器。
+     * 
+     * 
      * @param numBytes the number of seed bytes to generate.
      *
      * @return the seed bytes.
@@ -536,6 +702,9 @@ public class SecureRandom extends java.util.Random {
     /**
      * Helper function to convert a long into a byte array (least significant
      * byte first).
+     * <p>
+     * 辅助函数将long转换为字节数组(最低有效字节优先)。
+     * 
      */
     private static byte[] longToByteArray(long l) {
         byte[] retVal = new byte[8];
@@ -553,6 +722,10 @@ public class SecureRandom extends java.util.Random {
      * providers. Returns the first PRNG algorithm of the first provider that
      * has registered a SecureRandom implementation, or null if none of the
      * registered providers supplies a SecureRandom implementation.
+     * <p>
+     *  通过查看所有注册的提供程序,获取默认的PRNG算法。
+     * 返回已注册SecureRandom实现的第一个提供程序的第一个PRNG算法,如果没有注册的提供程序提供SecureRandom实现,则返回null。
+     * 
      */
     private static String getPrngAlgorithm() {
         for (Provider p : Providers.getProviderList().providers()) {
@@ -568,6 +741,9 @@ public class SecureRandom extends java.util.Random {
     /*
      * Lazily initialize since Pattern.compile() is heavy.
      * Effective Java (2nd Edition), Item 71.
+     * <p>
+     *  由于Pattern.compile()很重,因此需要初始化。 Effective Java(2nd Edition),Item 71。
+     * 
      */
     private static final class StrongPatternHolder {
         /*
@@ -580,6 +756,11 @@ public class SecureRandom extends java.util.Random {
          *     3 - prov (optional)
          *     4 - ,nextEntry (optional)
          *     5 - nextEntry (optional)
+         * <p>
+         *  条目是alg：prov由,允许在条目之间添加前缀/附加的空格。
+         * 
+         *  捕获组：1  -  alg 2  - ：prov(可选)3  -  prov(可选)4  - ,nextEntry(可选)5  -  nextEntry
+         * 
          */
         private static Pattern pattern =
             Pattern.compile(
@@ -602,6 +783,15 @@ public class SecureRandom extends java.util.Random {
      * Every implementation of the Java platform is required to
      * support at least one strong {@code SecureRandom} implementation.
      *
+     * <p>
+     *  返回通过使用{@code securerandom.strongAlgorithms} {@link Security}属性中指定的算法/提供程序选择的{@code SecureRandom}对象。
+     * <p>
+     *  某些情况需要强随机值,例如在创建高价值/长寿命秘密(如RSA公共/私有密钥)时。
+     * 为了帮助指导应用程序选择合适的强{@code SecureRandom}实现,Java发行版包括{@code securerandom.strongAlgorithms}安全属性中已知的强{@code SecureRandom}
+     * 实现的列表。
+     *  某些情况需要强随机值,例如在创建高价值/长寿命秘密(如RSA公共/私有密钥)时。
+     * <p>
+     * 
      * @return a strong {@code SecureRandom} implementation as indicated
      * by the {@code securerandom.strongAlgorithms} Security property
      *
@@ -661,14 +851,22 @@ public class SecureRandom extends java.util.Random {
 
     // Retain unused values serialized from JDK1.1
     /**
+    /* <p>
+    /*  每个Java平台的实现都需要至少支持一个强大的{@code SecureRandom}实现。
+    /* 
+    /* 
      * @serial
      */
     private byte[] state;
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private MessageDigest digest = null;
     /**
+    /* <p>
+    /* 
      * @serial
      *
      * We know that the MessageDigest class does not implement
@@ -678,10 +876,14 @@ public class SecureRandom extends java.util.Random {
      */
     private byte[] randomBytes;
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private int randomBytesUsed;
     /**
+    /* <p>
+    /* 
      * @serial
      */
     private long counter;

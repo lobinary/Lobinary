@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package javax.xml.ws;
 /** The <code>Binding</code> interface is the base interface
  *  for JAX-WS protocol bindings.
  *
+ * <p>
+ *  用于JAX-WS协议绑定。
+ * 
+ * 
  *  @since JAX-WS 2.0
 **/
 public interface Binding {
@@ -38,6 +43,10 @@ public interface Binding {
     * If the returned chain is modified a call to <code>setHandlerChain</code>
     * is required to configure the binding instance with the new chain.
     *
+    * <p>
+    *  获取协议绑定实例的处理程序链的副本。如果返回的链被修改,则需要调用<code> setHandlerChain </code>以使用新链配置绑定实例。
+    * 
+    * 
     *  @return java.util.List&lt;Handler> Handler chain
     */
     public java.util.List<javax.xml.ws.handler.Handler> getHandlerChain();
@@ -45,6 +54,10 @@ public interface Binding {
    /**
     * Sets the handler chain for the protocol binding instance.
     *
+    * <p>
+    *  设置协议绑定实例的处理程序链。
+    * 
+    * 
     *  @param chain    A List of handler configuration entries
     *  @throws WebServiceException On an error in the configuration of
     *                  the handler chain
@@ -58,6 +71,9 @@ public interface Binding {
     /**
      * Get the URI for this binding instance.
      *
+     * <p>
+     *  获取此绑定实例的URI。
+     * 
      * @return String The binding identifier for the port.
      *    Never returns <code>null</code>
      *

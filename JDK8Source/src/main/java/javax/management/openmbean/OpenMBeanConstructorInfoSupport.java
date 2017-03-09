@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import javax.management.MBeanParameterInfo;
  * Describes a constructor of an Open MBean.
  *
  *
+ * <p>
+ *  描述Open MBean的构造函数。
+ * 
+ * 
  * @since 1.5
  */
 public class OpenMBeanConstructorInfoSupport
@@ -65,6 +70,14 @@ public class OpenMBeanConstructorInfoSupport
      * so that subsequent changes to the array referenced by {@code
      * signature} have no effect on this instance.</p>
      *
+     * <p>
+     *  <p>构造一个{@code OpenMBeanConstructorInfoSupport}实例,它描述了具有指定的{@code name},{@code description}和{@code signature}
+     * 的开放MBean类的构造函数。
+     * </p>。
+     * 
+     *  <p> {@code signature}数组参数在内部被复制,因此对{@code signature}引用的数组的后续更改对此实例没有影响。</p>
+     * 
+     * 
      * @param name cannot be a null or empty string.
      *
      * @param description cannot be a null or empty string.
@@ -94,6 +107,14 @@ public class OpenMBeanConstructorInfoSupport
      * so that subsequent changes to the array referenced by {@code
      * signature} have no effect on this instance.</p>
      *
+     * <p>
+     *  <p>构造一个{@code OpenMBeanConstructorInfoSupport}实例,它描述了具有指定的{@code name},{@code description},{@code signature}
+     * 和{@code descriptor}的开放MBean类的构造函数。
+     *  </p>。
+     * 
+     *  <p> {@code signature}数组参数在内部被复制,因此对{@code signature}引用的数组的后续更改对此实例没有影响。</p>
+     * 
+     * 
      * @param name cannot be a null or empty string.
      *
      * @param description cannot be a null or empty string.
@@ -170,6 +191,20 @@ public class OpenMBeanConstructorInfoSupport
      * {@code obj} parameters which are different implementations of
      * the {@code OpenMBeanConstructorInfo} interface.
      *
+     * <p>
+     *  <p>将指定的{@code obj}参数与此{@code OpenMBeanConstructorInfoSupport}实例相比较。</p>
+     * 
+     *  <p>当且仅当所有以下语句都为真时返回{@code true}：
+     * 
+     * <ul>
+     *  <li> {@ code obj}非零,</li> <li> {@ code obj}也实现了{@code OpenMBeanConstructorInfo}接口,</li> <li> li>他们的签
+     * 名相等。
+     * </li>。
+     * </ul>
+     * 
+     * 这可以确保{@code equals}方法对{@code obj}参数正常工作,这些参数是{@code OpenMBeanConstructorInfo}接口的不同实现。
+     * 
+     * 
      * @param obj the object to be compared for equality with this
      * {@code OpenMBeanConstructorInfoSupport} instance;
      *
@@ -240,6 +275,23 @@ public class OpenMBeanConstructorInfoSupport
      * on the first call to {@code hashCode}, and then the same value
      * is returned for subsequent calls.</p>
      *
+     * <p>
+     *  <p>返回此{@code OpenMBeanConstructorInfoSupport}实例的哈希码值。</p>
+     * 
+     *  <p> {@code OpenMBeanConstructorInfoSupport}实例的哈希码是在{@code equals}比较中使用的所有信息元素的哈希码的总和(即：其名称和签名,其中签名ha
+     * shCode由调用{@code java.util.Arrays.asList(this.getSignature).hashCode()})。
+     * </p>。
+     * 
+     *  <p>这确保{@code t1.equals(t2)}意味着任何两个{@code OpenMBeanConstructorInfoSupport}实例{@code t1}的{@code t1.hashCode()== t2.hashCode() @ code t2}
+     * ,根据方法{@link Object#hashCode()Object.hashCode()}的一般合同的要求。
+     * </p>。
+     * 
+     *  <p>但是,请注意,实现{@code OpenMBeanConstructorInfo}接口的类的另一个实例可能等于{@link OpenString(java.lang.Object)}定义的{@code OpenMBeanConstructorInfoSupport}
+     * 实例,如果计算方式不同,则使用不同的哈希码。
+     * </p>。
+     * 
+     *  <p>由于{@code OpenMBeanConstructorInfoSupport}实例是不可变的,因此首次调用{@code hashCode}时,会计算一次此实例的哈希码,然后返回相同的值用于后
+     * 
      * @return the hash code value for this {@code
      * OpenMBeanConstructorInfoSupport} instance
      */
@@ -275,6 +327,11 @@ public class OpenMBeanConstructorInfoSupport
      * calculated once, on the first call to {@code toString}, and
      * then the same value is returned for subsequent calls.</p>
      *
+     * <p>
+     * 续调用。
+     * </p>。
+     * 
+     * 
      * @return a string representation of this {@code
      * OpenMBeanConstructorInfoSupport} instance
      */

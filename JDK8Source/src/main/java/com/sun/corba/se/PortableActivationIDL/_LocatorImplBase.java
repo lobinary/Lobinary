@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -41,6 +42,9 @@ public abstract class _LocatorImplBase extends org.omg.CORBA.portable.ObjectImpl
   /** locate server - returns the port with a specific type for all registered
 	* ORBs of an active server.
 	* Starts the server if it is not already running.
+	* <p>
+	*  活动服务器的ORB。启动服务器(如果服务器尚未运行)。
+	* 
 	*/
        case 0:  // PortableActivationIDL/Locator/locateServer
        {
@@ -68,6 +72,9 @@ public abstract class _LocatorImplBase extends org.omg.CORBA.portable.ObjectImpl
   /** locate server - returns all ports registered with a specified ORB for
 	* an active server
 	* Starts the server if it is not already running.
+	* <p>
+	*  活动服务器如果服务器尚未运行,则启动该服务器。
+	* 
 	*/
        case 1:  // PortableActivationIDL/Locator/locateServerForORB
        {
@@ -93,6 +100,7 @@ public abstract class _LocatorImplBase extends org.omg.CORBA.portable.ObjectImpl
 
 
   /** get the port for the endpoint of the locator
+  /* <p>
 	*/
        case 2:  // PortableActivationIDL/Locator/getEndpoint
        {
@@ -112,6 +120,8 @@ public abstract class _LocatorImplBase extends org.omg.CORBA.portable.ObjectImpl
 
   /** Useful from external BadServerIdHandlers which need
 	* to pick a particular port type.
+	* <p>
+	*  选择特定的端口类型。
 	*/
        case 3:  // PortableActivationIDL/Locator/getServerPortForType
        {

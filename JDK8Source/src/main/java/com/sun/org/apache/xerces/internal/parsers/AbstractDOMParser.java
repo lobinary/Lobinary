@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -81,6 +91,10 @@ import org.xml.sax.SAXException;
  * <code>getDocument</code> method. The actual pipeline is defined in
  * parser configuration.
  *
+ * <p>
+ *  这是所有DOM解析器的基类。它实现XNI回调方法来创建DOM树。成功解析XML文档后,可以使用<code> getDocument </code>方法查询DOM文档对象。实际管道在解析器配置中定义。
+ * 
+ * 
  * @author Arnaud Le Hors, IBM
  * @author Andy Clark, IBM
  * @author Elena Litani, IBM
@@ -162,6 +176,9 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
 
     /**
      * If the user stops the process, this exception will be thrown.
+     * <p>
+     *  如果用户停止进程,将抛出此异常。
+     * 
      */
     static final class Abort extends RuntimeException {
         private static final long serialVersionUID = 1687848994976808490L;
@@ -258,6 +275,8 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
 
 
     /** LSParserFilter: specifies that element with given QNAME and all its children
+    /* <p>
+    /* 
      * must be rejected */
     protected boolean fFilterReject = false;
 
@@ -316,6 +335,9 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
 
     /**
      * This method retrieves the name of current document class.
+     * <p>
+     *  此方法检索当前文档类的名称。
+     * 
      */
     protected String getDocumentClassName () {
         return fDocumentClassName;
@@ -328,6 +350,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * a document class other than the default will lose the ability
      * to defer node expansion on the DOM tree produced.
      *
+     * <p>
+     *  这种方法允许程序员在构造DOM树时决定使用哪个文档工厂。但是,这样做将失去默认工厂的功能。此外,除了默认值之外的文档类将失去在所生成的DOM树上推迟节点扩展的能力。
+     * 
+     * 
      * @param documentClassName The fully qualified class name of the
      *                      document factory to use when constructing
      *                      the DOM tree.
@@ -382,6 +408,9 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
 
     /**
      * Drops all references to the last DOM which was built by this parser.
+     * <p>
+     *  删除对由此解析器构建的最后一个DOM的所有引用。
+     * 
      */
     public final void dropDocumentReferences() {
         fDocument = null;
@@ -401,6 +430,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * Resets the parser state.
      *
+     * <p>
+     * 重置解析器状态。
+     * 
+     * 
      * @throws SAXException Thrown on initialization error.
      */
     public void reset () throws XNIException {
@@ -456,6 +489,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      */
@@ -474,6 +511,12 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知一般实体的开始。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name     The name of the general entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -569,6 +612,14 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  通知实体中存在TextDecl行。如果存在,此方法将在startEntity调用之后立即调用。
+     * <p>
+     *  <strong>注意：</strong>此方法将永远不会为文档实体调用;它只被要求在文档内容中引用的外部通用实体。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param version  The XML version, or null if not specified.
      * @param encoding The IANA encoding name of the entity.
      * @param augs       Additional information that may include infoset augmentations
@@ -596,6 +647,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text The text in the comment.
      * @param augs       Additional information that may include infoset augmentations
      *
@@ -668,6 +723,12 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     *  一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augs       Additional information that may include infoset augmentations
@@ -736,6 +797,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The start of the document.
      *
+     * <p>
+     *  文档的开始。
+     * 
+     * 
      * @param locator The system identifier of the entity if the entity
      *                 is external, null otherwise.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -850,6 +915,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * present, this method will be called immediately following the
      * startDocument call.
      *
+     * <p>
+     *  通知文档中存在XMLDecl行。如果存在,此方法将在startDocument调用后立即调用。
+     * 
+     * 
      * @param version    The XML version.
      * @param encoding   The IANA encoding name of the document, or null if
      *                   not specified.
@@ -882,6 +951,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * Notifies of the presence of the DOCTYPE line in the document.
      *
+     * <p>
+     *  通知文档中DOCTYPE行的存在。
+     * 
+     * 
      * @param rootElement The name of the root element.
      * @param publicId    The public identifier if an external DTD or null
      *                    if the external DTD is specified using SYSTEM.
@@ -915,6 +988,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * by using an empty tag, then the startElement method will immediately
      * be followed by the endElement method, with no intervening methods.
      *
+     * <p>
+     * 元素的开始。如果文档通过使用空标签指定start元素,那么startElement方法将立即跟随endElement方法,没有中间方法。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs     Additional information that may include infoset augmentations
@@ -1126,6 +1203,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * An empty element.
      *
+     * <p>
+     *  空元素。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs   Additional information that may include infoset augmentations
@@ -1143,6 +1224,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * Character content.
      *
+     * <p>
+     *  字符内容。
+     * 
+     * 
      * @param text The content.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -1242,6 +1327,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * characters in the document are ignorable based on the element
      * content model.
      *
+     * <p>
+     *  可怕的空格。对于要调用的此方法,文档源必须具有某种方式确定仅包含空格字符的文本应该被视为可忽略。例如,验证器可以基于元素内容模型来确定文档中的空白字符的长度是否可忽略。
+     * 
+     * 
      * @param text The ignorable whitespace.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -1280,6 +1369,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The end of an element.
      *
+     * <p>
+     *  元素的结尾。
+     * 
+     * 
      * @param element The name of the element.
      * @param augs     Additional information that may include infoset augmentations
      *
@@ -1394,6 +1487,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
 
     /**
      * The start of a CDATA section.
+     * <p>
+     *  CDATA节的开始。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -1413,6 +1510,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
 
     /**
      * The end of a CDATA section.
+     * <p>
+     *  CDATA段的结尾。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -1467,6 +1568,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
 
     /**
      * The end of the document.
+     * <p>
+     *  文档的结尾。
+     * 
+     * 
      * @param augs     Additional information that may include infoset augmentations
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -1503,6 +1608,12 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * <strong>Note:</strong> This method is not called for entity references
      * appearing as part of attribute values.
      *
+     * <p>
+     *  此方法通知一般实体的结束。
+     * <p>
+     *  <strong>注意</strong>：对于作为属性值一部分显示的实体引用,不调用此方法。
+     * 
+     * 
      * @param name   The name of the entity.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -1685,6 +1796,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * or for the ProcessingInstruction (by setting a baseURI field)
      * Non deferred DOM.
      *
+     * <p>
+     *  记录Element的baseURI信息(通过添加xml：base属性)或ProcessingInstruction(通过设置baseURI字段)非延迟DOM。
+     * 
+     * 
      * @param node
      */
     protected final void handleBaseURI (Node node){
@@ -1735,6 +1850,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * or for the ProcessingInstruction (by setting a baseURI field)
      * Deferred DOM.
      *
+     * <p>
+     *  记录Element的baseURI信息(通过添加xml：base属性)或ProcessingInstruction(通过设置baseURI字段)Deferred DOM。
+     * 
+     * 
      * @param node
      */
     protected final void handleBaseURI (int node){
@@ -1782,6 +1901,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The start of the DTD.
      *
+     * <p>
+     *  DTD的开始。
+     * 
+     * 
      * @param locator  The document locator, or null if the document
      *                 location cannot be reported during the parsing of
      *                 the document DTD. However, it is <em>strongly</em>
@@ -1815,6 +1938,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The end of the DTD.
      *
+     * <p>
+     *  DTD的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1845,6 +1972,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The start of a conditional section.
      *
+     * <p>
+     *  条件段的开始。
+     * 
+     * 
      * @param type The type of the conditional section. This value will
      *             either be CONDITIONAL_INCLUDE or CONDITIONAL_IGNORE.
      * @param augs Additional information that may include infoset
@@ -1861,6 +1992,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The end of a conditional section.
      *
+     * <p>
+     *  条件段的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1873,6 +2008,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The start of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的开始。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1894,6 +2033,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The end of the DTD external subset.
      *
+     * <p>
+     *  DTD外部子集的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -1907,6 +2050,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * An internal entity declaration.
      *
+     * <p>
+     *  内部实体声明。
+     * 
+     * 
      * @param name The name of the entity. Parameter entity names start with
      *             '%', whereas the name of a general entity is just the
      *             entity name.
@@ -1994,6 +2141,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * An external entity declaration.
      *
+     * <p>
+     *  外部实体声明。
+     * 
+     * 
      * @param name     The name of the entity. Parameter entity names start
      *                 with '%', whereas the name of a general entity is just
      *                 the entity name.
@@ -2089,6 +2240,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * This method notifies of the start of a parameter entity. The parameter
      * entity name start with a '%' character.
      *
+     * <p>
+     * 该方法通知参数实体的开始。参数实体名称以"％"字符开头。
+     * 
+     * 
      * @param name     The name of the parameter entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -2124,6 +2279,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * This method notifies the end of a parameter entity. Parameter entity
      * names begin with a '%' character.
      *
+     * <p>
+     *  此方法通知参数实体的结束。参数实体名称以"％"字符开头。
+     * 
+     * 
      * @param name The name of the parameter entity.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -2141,6 +2300,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * An unparsed entity declaration.
      *
+     * <p>
+     *  未解析的实体声明。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier    An object containing all location information
      *                      pertinent to this entity.
@@ -2230,6 +2393,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * A notation declaration
      *
+     * <p>
+     *  符号声明
+     * 
+     * 
      * @param name     The name of the notation.
      * @param identifier    An object containing all location information
      *                      pertinent to this notation.
@@ -2305,6 +2472,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * Characters within an IGNORE conditional section.
      *
+     * <p>
+     *  IGNORE条件部分中的字符。
+     * 
+     * 
      * @param text The ignored text.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -2318,6 +2489,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * An element declaration.
      *
+     * <p>
+     *  元素声明。
+     * 
+     * 
      * @param name         The name of the element.
      * @param contentModel The element content model.
      * @param augs Additional information that may include infoset
@@ -2342,6 +2517,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * An attribute declaration.
      *
+     * <p>
+     *  属性声明。
+     * 
+     * 
      * @param elementName   The name of the element that this attribute
      *                      is associated with.
      * @param attributeName The name of the attribute.
@@ -2511,6 +2690,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The start of an attribute list.
      *
+     * <p>
+     *  属性列表的开始。
+     * 
+     * 
      * @param elementName The name of the element that this attribute
      *                    list is associated with.
      * @param augs Additional information that may include infoset
@@ -2525,6 +2708,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
     /**
      * The end of an attribute list.
      *
+     * <p>
+     *  属性列表的结尾。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -2594,6 +2781,11 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
      * Note: if DOMFilter is set, you must make sure that if Node is skipped,
      * or removed fFistChunk must be set to true, otherwise some data can be lost.
      *
+     * <p>
+     *  当接收到第一个characters()调用时,数据存储在一个新的Text节点中。
+     * 如果紧接在第一个字符()之后,我们接收到另一个数据块,则来自Text节点的数据在新字符之后被附加到fStringBuffer,并且文本节点数据设置为空。
+     * 
+     *  当状态更改并且数据必须附加到当前节点时,将调用此函数。
      */
     protected void  setCharacterData (boolean sawChars){
 
@@ -2647,6 +2839,10 @@ public class AbstractDOMParser extends AbstractXMLDocumentParser {
 
 
     /**
+    /* <p>
+    /* 
+    /*  注意：如果设置了DOMFilter,则必须确保如果跳过节点,或者删除fFistChunk必须设置为true,否则某些数据可能会丢失。
+    /* 
      * @see org.w3c.dom.ls.LSParser#abort()
      */
     public void abort () {

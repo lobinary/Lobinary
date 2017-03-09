@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码。
+ * 版权所有。
+ *  **************************************************** ************** ********************************
+ * **** ****************************。
+ * 版权所有。
+ * 
+ * 
  ******************************************************************/
 
 package java.awt.image;
@@ -61,6 +72,17 @@ import java.util.Arrays;
  *      int sample = data.getElem(y * scanlineStride + x);
  *      sample = (sample & bitMasks[b]) >>> bitOffsets[b];
  * }</pre>
+ * <p>
+ *  该类表示被压缩的像素数据,使得构成单个像素的N个样本被存储在单个数据阵列元素中,并且每个数据数据阵列元素仅保存针对一个像素的样本。
+ * 此类支持{@link DataBuffer#TYPE_BYTE TYPE_BYTE},{@link DataBuffer#TYPE_USHORT TYPE_USHORT},{@link DataBuffer#TYPE_INT TYPE_INT}
+ * 数据类型。
+ *  该类表示被压缩的像素数据,使得构成单个像素的N个样本被存储在单个数据阵列元素中,并且每个数据数据阵列元素仅保存针对一个像素的样本。所有数据数组元素驻留在DataBuffer的第一个bank中。
+ * 提供访问器方法,使得可以直接操纵图像数据。扫描线跨距是给定样本和下一扫描线的同一列中的相应样本之间的数据阵列元素的数量。位掩码是提取表示像素的带的样本所需的掩码。
+ * 位偏移是表示像素的带的样本的数据阵列元素中的位的偏移。
+ * <p>
+ * 下面的代码示出从DataBuffer <code> data </code>中提取像素<code> x,y </code>的代表带<code> b </code>的样本的位：<pre> {@ code int sample = data.getElem(y * scanlineStride + x); sample =(sample&bitMasks [b])>>> bitOffsets [b]; }
+ *  </pre>。
+ * 
  */
 
 public class SinglePixelPackedSampleModel extends SampleModel
@@ -79,6 +101,9 @@ public class SinglePixelPackedSampleModel extends SampleModel
 
     /** Line stride of the region of image data described by this
      *  SinglePixelPackedSampleModel.
+     * <p>
+     *  SinglePixelPackedSampleModel。
+     * 
      */
     private int scanlineStride;
 
@@ -94,6 +119,11 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * its corresponding bit mask.  Each bit mask must be contiguous and
      * masks must not overlap. Bit masks exceeding data type capacity are
      * truncated.
+     * <p>
+     *  构造具有bitMasks.length带的SinglePixelPackedSampleModel。每个样本被存储在其对应位掩码的位置中的数据阵列元素中。每个位掩码必须是连续的,并且掩码不能重叠。
+     * 超过数据类型容量的位掩码被截断。
+     * 
+     * 
      * @param dataType  The data type for storing samples.
      * @param w         The width (in pixels) of the region of the
      *                  image data described.
@@ -123,6 +153,11 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * its corresponding bit mask.  Each bit mask must be contiguous and
      * masks must not overlap. Bit masks exceeding data type capacity are
      * truncated.
+     * <p>
+     *  构造具有bitMasks.length带和scanline步长等于scanlineStride数据数组元素的SinglePixelPackedSampleModel。
+     * 每个样本被存储在其对应位掩码的位置中的数据阵列元素中。每个位掩码必须是连续的,并且掩码不能重叠。超过数据类型容量的位掩码被截断。
+     * 
+     * 
      * @param dataType  The data type for storing samples.
      * @param w         The width (in pixels) of the region of
      *                  image data described.
@@ -188,6 +223,9 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * Returns the number of data elements needed to transfer one pixel
      * via the getDataElements and setDataElements methods.
      * For a SinglePixelPackedSampleModel, this is one.
+     * <p>
+     *  返回通过getDataElements和setDataElements方法传输一个像素所需的数据元素数。对于SinglePixelPackedSampleModel,这是一个。
+     * 
      */
     public int getNumDataElements() {
         return 1;
@@ -197,6 +235,9 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * Returns the size of the buffer (in data array elements)
      * needed for a data buffer that matches this
      * SinglePixelPackedSampleModel.
+     * <p>
+     *  返回与此SinglePixelPackedSampleModel匹配的数据缓冲区所需的缓冲区大小(在数据数组元素中)。
+     * 
      */
     private long getBufferSize() {
       long size = scanlineStride * (height-1) + width;
@@ -208,6 +249,11 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * width and height.  The new SinglePixelPackedSampleModel will have the
      * same storage data type and bit masks as this
      * SinglePixelPackedSampleModel.
+     * <p>
+     *  创建具有指定宽度和高度的新SinglePixelPackedSampleModel。
+     * 新的SinglePixelPackedSampleModel将具有与此SinglePixelPackedSampleModel相同的存储数据类型和位掩码。
+     * 
+     * 
      * @param w the width of the resulting <code>SampleModel</code>
      * @param h the height of the resulting <code>SampleModel</code>
      * @return a <code>SinglePixelPackedSampleModel</code> with the
@@ -226,6 +272,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * SinglePixelPackedSampleModel.  The DataBuffer's data type and size
      * will be consistent with this SinglePixelPackedSampleModel.  The
      * DataBuffer will have a single bank.
+     * <p>
+     * 创建与此SinglePixelPackedSampleModel对应的DataBuffer。 DataBuffer的数据类型和大小将与此SinglePixelPackedSampleModel一致。
+     *  DataBuffer将有一个单一的bank。
+     * 
      */
     public DataBuffer createDataBuffer() {
         DataBuffer dataBuffer = null;
@@ -262,6 +312,13 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * <pre>
      *        data.getElem(sppsm.getOffset(x, y));
      * </pre>
+     * <p>
+     *  包含像素<code> x,y </code>的数据元素可以从具有SinglePixelPackedSampleModel <code> sppsm </code>的DataBuffer <code> 
+     * data </code>中检索为：。
+     * <pre>
+     *  data.getElem(sppsm.getOffset(x,y));
+     * </pre>
+     * 
      * @param x the X coordinate of the specified pixel
      * @param y the Y coordinate of the specified pixel
      * @return the offset of the specified pixel.
@@ -273,6 +330,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
 
     /** Returns the bit offsets into the data array element representing
      *  a pixel for all bands.
+     * <p>
+     *  所有频带的像素。
+     * 
+     * 
      *  @return the bit offsets representing a pixel for all bands.
      */
     public int [] getBitOffsets() {
@@ -280,6 +341,8 @@ public class SinglePixelPackedSampleModel extends SampleModel
     }
 
     /** Returns the bit masks for all bands.
+    /* <p>
+    /* 
      *  @return the bit masks for all bands.
      */
     public int [] getBitMasks() {
@@ -287,6 +350,8 @@ public class SinglePixelPackedSampleModel extends SampleModel
     }
 
     /** Returns the scanline stride of this SinglePixelPackedSampleModel.
+    /* <p>
+    /* 
      *  @return the scanline stride of this
      *          <code>SinglePixelPackedSampleModel</code>.
      */
@@ -302,6 +367,14 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * SinglePixelPackedSampleModel/DataBuffer combination will represent
      * an image with a subset of the bands of the original
      * SinglePixelPackedSampleModel/DataBuffer combination.
+     * <p>
+     *  这将创建一个新的SinglePixelPackedSampleModel,其中包含此SinglePixelPackedSampleModel的一部分波段。
+     * 新的SinglePixelPackedSampleModel可以与现有的SinglePixelPackedSampleModel一起使用的任何DataBuffer一起使用。
+     * 新的SinglePixelPackedSampleModel / DataBuffer组合将表示具有原始SinglePixelPackedSampleModel / DataBuffer组合的频带的子集
+     * 的图像。
+     * 新的SinglePixelPackedSampleModel可以与现有的SinglePixelPackedSampleModel一起使用的任何DataBuffer一起使用。
+     * 
+     * 
      * @exception RasterFormatException if the length of the bands argument is
      *                                  greater than the number of bands in
      *                                  the sample model.
@@ -350,6 +423,24 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds, or if obj is non-null and is not large enough to hold
      * the pixel data.
+     * <p>
+     *  返回类型TransferType的基本数组中单个像素的数据。对于SinglePixelPackedSampleModel,该数组将有一个元素,类型将与存储数据类型相同。
+     * 通常,obj应该作为null传递,以便对象将被自动创建并且将是正确的基本数据类型。
+     * <p>
+     * 以下代码示出将来自DataBuffer <code> db1 </code>的一个像素的数据传输到DataBuffer <code> db2 </code>,其存储布局由SinglePixelPacke
+     * dSampleModel <code> sppsm1 </code>描述,由SinglePixelPackedSampleModel <code> sppsm2 </code>描述。
+     * 传输通常比使用getPixel / setPixel更有效。
+     * <pre>
+     *  SinglePixelPackedSampleModel sppsm1,sppsm2; DataBufferInt db1,db2; sppsm2.setDataElements(x,y,sppsm1
+     * .getDataElements(x,y,null,db1),db2);。
+     * </pre>
+     *  如果SampleModel具有相同数量的波段,对应的波段具有每个样本相同的位数,并且TransferTypes相同,则使用getDataElements / setDataElements在两个Dat
+     * aBuffer / SampleModel对之间进行传输是合法的。
+     * <p>
+     *  如果obj是非空的,它应该是TransferType类型的原始数组。否则,抛出ClassCastException。
+     * 如果坐标不在边界中,或者如果obj非空并且不足以容纳像素数据,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param obj       If non-null, a primitive array in which to return
@@ -419,6 +510,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * Returns all samples in for the specified pixel in an int array.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回int数组中指定像素的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param iArray    If non-null, returns the samples in this array
@@ -450,6 +545,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * an int array, one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回int数组中指定的像素矩形的所有样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -497,6 +596,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * located at (x,y).
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     * 对于位于(x,y)的像素,返回指定带中的样本的int。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param b         The band to return.
@@ -520,6 +623,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * of pixels in an int array, one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回int阵列中指定像素矩形的指定带的样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -587,6 +694,22 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * a ClassCastException is thrown.  An
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds, or if obj is not large enough to hold the pixel data.
+     * <p>
+     *  从TransferType类型的基本数组设置指定DataBuffer中单个像素的数据。
+     * 对于SinglePixelPackedSampleModel,只有数组的第一个元素将保存有效数据,并且数组的类型必须与SinglePixelPackedSampleModel的存储数据类型相同。
+     * <p>
+     *  以下代码示出将来自DataBuffer <code> db1 </code>的一个像素的数据传输到DataBuffer <code> db2 </code>,其存储布局由SinglePixelPack
+     * edSampleModel <code> sppsm1 </code>描述,由SinglePixelPackedSampleModel <code> sppsm2 </code>描述。
+     * 传输通常比使用getPixel / setPixel更有效。
+     * <pre>
+     *  SinglePixelPackedSampleModel sppsm1,sppsm2; DataBufferInt db1,db2; sppsm2.setDataElements(x,y,sppsm1
+     * .getDataElements(x,y,null,db1),db2);。
+     * </pre>
+     *  如果SampleModel具有相同数量的波段,对应的波段具有每个样本相同的位数,并且TransferTypes相同,则使用getDataElements / setDataElements在两个Dat
+     * aBuffer / SampleModel对之间进行传输是合法的。
+     * <p>
+     * obj必须是TransferType类型的原始数组。否则,抛出ClassCastException。
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param obj       A primitive array containing pixel data.
@@ -627,6 +750,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * Sets a pixel in the DataBuffer using an int array of samples for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     * 如果坐标不在边界中,或者如果obj不足够大以容纳像素数据,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param iArray    The input samples in an int array.
@@ -654,6 +781,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  设置DataBuffer中的一个像素,使用int数组样本进行输入。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -697,6 +828,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * in the DataBuffer using an int for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  为包含每个数组元素一个样本的int数组设置像素矩形的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param b         The band to set.
@@ -722,6 +857,10 @@ public class SinglePixelPackedSampleModel extends SampleModel
      * of pixels from an int array containing one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  使用int作为输入,为DataBuffer中位于(x,y)的像素设置指定频带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.

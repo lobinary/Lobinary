@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import java.awt.image.*;
  * in the image. Used by buttons to create an image for
  * a disabled button.
  *
+ * <p>
+ *  通过将图像转换为灰度图像并使图像中的像素变亮来"禁用"图像的图像滤波器。用于按钮为禁用的按钮创建图像。
+ * 
+ * 
  * @author      Jeff Dinkins
  * @author      Tom Ball
  * @author      Jim Graham
@@ -43,6 +48,9 @@ public class GrayFilter extends RGBImageFilter {
 
     /**
      * Creates a disabled image
+     * <p>
+     *  创建已禁用的图像
+     * 
      */
     public static Image createDisabledImage (Image i) {
         GrayFilter filter = new GrayFilter(true, 50);
@@ -56,6 +64,10 @@ public class GrayFilter extends RGBImageFilter {
      * grayscale image. Used by buttons to create disabled ("grayed out")
      * button images.
      *
+     * <p>
+     *  构造一个将彩色图像过滤为灰度图像的GrayFilter对象。用于按钮创建禁用("灰显")按钮图像。
+     * 
+     * 
      * @param b  a boolean -- true if the pixels should be brightened
      * @param p  an int in the range 0..100 that determines the percentage
      *           of gray, where 100 is the darkest gray, and 0 is the lightest
@@ -73,6 +85,8 @@ public class GrayFilter extends RGBImageFilter {
 
     /**
      * Overrides <code>RGBImageFilter.filterRGB</code>.
+     * <p>
+     *  覆盖<code> RGBImageFilter.filterRGB </code>。
      */
     public int filterRGB(int x, int y, int rgb) {
         // Use NTSC conversion formula.

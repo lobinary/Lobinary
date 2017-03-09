@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,17 @@ import sun.nio.ch.FileChannelImpl;
  * than {@code EOFException} is thrown. In particular, an
  * {@code IOException} may be thrown if the stream has been closed.
  *
+ * <p>
+ *  此类的实例支持读取和写入随机访问文件。随机访问文件的行为类似于存储在文件系统中的大字节数组。
+ * 有一种游标,或索引到隐含数组,称为<em>文件指针</em>;输入操作从文件指针开始读取字节,并使文件指针超过读取的字节。
+ * 如果随机存取文件在读/写模式下创建,则输出操作也可用;输出操作从文件指针开始写入字节,并使文件指针超过写入的字节。写入超过隐含数组的当前结尾的输出操作导致数组被扩展。
+ * 文件指针可以通过{@code getFilePointer}方法读取,并由{@code seek}方法设置。
+ * <p>
+ *  在这个类中的所有读取例程通常都是这样的,如果在读取所需字节数之前达到文件结尾,则{@code EOFException}(这是一种{@code IOException})是抛出。
+ * 如果由于文件结尾之外的任何原因而无法读取任何字节,则会抛出除{@code EOFException}之外的{@code IOException}。
+ * 特别是,如果流已经关闭,可能会抛出{@code IOException}。
+ * 
+ * 
  * @author  unascribed
  * @since   JDK1.0
  */
@@ -65,6 +77,9 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
     /**
      * The path of the referenced file
      * (null if the stream is created with a file descriptor)
+     * <p>
+     *  引用文件的路径(如果使用文件描述符创建流,则为null)
+     * 
      */
     private final String path;
 
@@ -96,6 +111,17 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * is also called with the {@code name} argument
      * as its argument to see if write access to the file is allowed.
      *
+     * <p>
+     * 创建随机访问文件流以从指定名称读取并可选地写入文件。将创建一个新的{@link FileDescriptor}对象以表示与文件的连接。
+     * 
+     *  <p> <tt> mode </tt>参数指定要打开文件的访问模式。
+     * 允许的值及其含义是为<a href="#mode"> <tt> RandomAccessFile(File,String)</tt> </a>构造函数指定的值。
+     * 
+     * <p>
+     *  如果有安全管理器,则会调用其{@code checkRead}方法,并使用{@code name}参数作为其参数,以查看是否允许对文件的读取访问。
+     * 如果模式允许写入,则还会调用安全管理器的{@code checkWrite}方法,并使用{@code name}参数作为其参数,以查看是否允许对文件的写访问。
+     * 
+     * 
      * @param      name   the system-dependent filename
      * @param      mode   the access <a href="#mode">mode</a>
      * @exception  IllegalArgumentException  if the mode argument is not equal
@@ -177,6 +203,30 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * also called with the path argument to see if write access to the file is
      * allowed.
      *
+     * <p>
+     *  创建一个随机访问文件流,以从{@link File}参数指定的文件读取并可选地写入文件。创建一个新的{@link FileDescriptor}对象以表示此文件连接。
+     * 
+     *  <p> <a name="mode"> <tt> mode </tt> </a>参数指定要打开文件的访问方式。允许的值及其含义是：
+     * 
+     * <table summary="Access mode permitted values and meanings">
+     * <tr> <th> <td valign ="top"> <tt>"r"</span> </span> </tt> </td> <td>仅供阅读打开。
+     * 调用生成对象的任何<tt> write </tt>方法将导致抛出{@link java.io.IOException}。
+     *  </td> </td> <td> </td> </td> </td>如果文件不存在,则将尝试创建它。
+     *  </td> </td> <td> <tt> <rt> <td> <td> <tt> </tt>,并且还要求对文件内容或元数据的每次更新都与底层存储设备同步写入。
+     *  </td> </tt> </td> </tt> </td> <tt> <tt> >"rw"</tt>,并且还要求对文件内容的每次更新都与底层存储设备同步写入。 </td> </tr>。
+     * </table>
+     * 
+     * <tt>"rws"</tt>和<tt>"rwd"</tt>模式与{@link java.nio.channels.FileChannel#force(boolean)force(boolean)}方法{@link java.nio.channels.FileChannel}
+     * 类,分别传递<tt> true </tt>和<tt> false </tt>的参数,除了它们始终适用于每个I / O操作,因此往往效率更高。
+     * 如果文件驻留在本地存储设备上,那么当调用此类的方法时,将保证该调用对文件所做的所有更改都已写入该设备。这有助于确保关键信息在系统崩溃的情况下不会丢失。如果文件不驻留在本地设备上,则不进行此类保证。
+     * 
+     *  <p> <tt>"rwd"</tt>模式可用于减少执行的I / O操作数。
+     * 使用<tt>"rwd"</tt>只需要更新文件内容以写入存储;使用<tt>"rws"</tt>需要更新文件的内容及其要写入的元数据,这通常需要至少一个低级I / O操作。
+     * 
+     *  <p>如果有安全管理器,则会调用其{@code checkRead}方法,并使用{@code file}参数的路径名作为其参数,以查看是否允许对文件的读取访问。
+     * 如果模式允许写入,则还会使用path参数调用安全管理器的{@code checkWrite}方法,以查看是否允许对文件的写访问。
+     * 
+     * 
      * @param      file   the file object
      * @param      mode   the access mode, as described
      *                    <a href="#mode">above</a>
@@ -247,6 +297,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * Returns the opaque file descriptor object associated with this
      * stream.
      *
+     * <p>
+     * 返回与此流相关联的不透明文件描述符对象。
+     * 
+     * 
      * @return     the file descriptor object associated with this stream.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FileDescriptor
@@ -271,6 +325,14 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * file's length via this object will change the length seen via the file
      * channel, and vice versa.
      *
+     * <p>
+     *  返回与此文件关联的唯一{@link java.nio.channels.FileChannel FileChannel}对象。
+     * 
+     *  <p>返回的通道的{@link java.nio.channels.FileChannel#position()position}将始终等于此对象的{@link #getFilePointer getFilePointer}
+     * 方法返回的文件指针偏移量。
+     * 更改此对象的文件指针偏移量,无论是明确地还是通过读取或写入字节,都将更改通道的位置,反之亦然。通过此对象更改文件的长度将更改通过文件通道看到的长度,反之亦然。
+     * 
+     * 
      * @return  the file channel associated with this file
      *
      * @since 1.4
@@ -292,6 +354,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * If the {@code name} refers to a directory, an IOException
      * is thrown.
      *
+     * <p>
+     *  打开文件并返回文件描述符。如果{@code mode}中的O_RDWR位为真,则该文件以读写模式打开,否则文件以只读方式打开。如果{@code name}引用一个目录,则抛出IOException。
+     * 
+     * 
      * @param name the name of the file
      * @param mode the mode flags, a combination of the O_ constants
      *             defined above
@@ -307,6 +373,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * If the {@code name} refers to a directory, an IOException
      * is thrown.
      *
+     * <p>
+     *  打开文件并返回文件描述符。如果{@code mode}中的O_RDWR位为真,则该文件以读写模式打开,否则文件以只读方式打开。如果{@code name}引用一个目录,则抛出IOException。
+     * 
+     * 
      * @param name the name of the file
      * @param mode the mode flags, a combination of the O_ constants
      *             defined above
@@ -328,6 +398,13 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * way as the {@link InputStream#read()} method of
      * {@code InputStream}.
      *
+     * <p>
+     *  从此文件读取一个字节的数据。该字节以0到255范围内的整数返回({@code 0x00-0x0ff})。如果没有输入可用,此方法将阻止。
+     * <p>
+     *  虽然{@code RandomAccessFile}不是{@code InputStream}的子类,但此方法的行为方式与{@code InputStream}的{@link InputStream#read()}
+     * 方法完全相同。
+     * 
+     * 
      * @return     the next byte of data, or {@code -1} if the end of the
      *             file has been reached.
      * @exception  IOException  if an I/O error occurs. Not thrown if
@@ -341,6 +418,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
 
     /**
      * Reads a sub array as a sequence of bytes.
+     * <p>
+     * 作为字节序列读取子数组。
+     * 
+     * 
      * @param b the buffer into which the data is read.
      * @param off the start offset of the data.
      * @param len the number of bytes to read.
@@ -358,6 +439,12 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * same way as the {@link InputStream#read(byte[], int, int)} method of
      * {@code InputStream}.
      *
+     * <p>
+     *  从此文件中读取最多{@code len}字节的数据为字节数组。此方法阻塞,直到输入的至少一个字节可用。
+     * <p>
+     *  虽然{@code RandomAccessFile}不是{@code InputStream}的子类,但该方法的行为方式与{@code InputStream}的{@link InputStream#read(byte [],int,int) 。
+     * 
+     * 
      * @param      b     the buffer into which the data is read.
      * @param      off   the start offset in array {@code b}
      *                   at which the data is written.
@@ -387,6 +474,13 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * same way as the {@link InputStream#read(byte[])} method of
      * {@code InputStream}.
      *
+     * <p>
+     *  从此文件中读取到{@code b.length}字节的数据为字节数组。此方法阻塞,直到输入的至少一个字节可用。
+     * <p>
+     *  虽然{@code RandomAccessFile}不是{@code InputStream}的子类,但此方法的行为与{@code InputStream}的{@link InputStream#read(byte [])}
+     * 方法完全相同。
+     * 
+     * 
      * @param      b   the buffer into which the data is read.
      * @return     the total number of bytes read into the buffer, or
      *             {@code -1} if there is no more data because the end of
@@ -407,6 +501,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * read. This method blocks until the requested number of bytes are
      * read, the end of the stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取{@code b.length}字节为字节数组,从当前文件指针开始。此方法从文件中重复读取,直到读取所请求的字节数。此方法阻塞直到读取所请求的字节数,检测到流的结尾或抛出异常。
+     * 
+     * 
      * @param      b   the buffer into which the data is read.
      * @exception  EOFException  if this file reaches the end before reading
      *               all the bytes.
@@ -423,6 +521,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * read. This method blocks until the requested number of bytes are
      * read, the end of the stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件中将{@code len}字节精确地读入字节数组,从当前文件指针开始。此方法从文件中重复读取,直到读取所请求的字节数。此方法阻塞直到读取所请求的字节数,检测到流的结尾或抛出异常。
+     * 
+     * 
      * @param      b     the buffer into which the data is read.
      * @param      off   the start offset of the data.
      * @param      len   the number of bytes to read.
@@ -452,6 +554,14 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * The actual number of bytes skipped is returned.  If {@code n}
      * is negative, no bytes are skipped.
      *
+     * <p>
+     *  尝试跳过{@code n}个字节的输入,丢弃跳过的字节。
+     * <p>
+     * 
+     * 该方法可以跳过一些较小数量的字节,可能为零。这可能是由许多条件中的任何一个引起的;在{@code n}字节被跳过之前到达文件结束只有一种可能性。
+     * 这个方法不会抛出{@code EOFException}。将返回实际跳过的字节数。如果{@code n}为负,则不跳过任何字节。
+     * 
+     * 
      * @param      n   the number of bytes to be skipped.
      * @return     the actual number of bytes skipped.
      * @exception  IOException  if an I/O error occurs.
@@ -482,6 +592,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * Writes the specified byte to this file. The write starts at
      * the current file pointer.
      *
+     * <p>
+     *  将指定的字节写入此文件。写入从当前文件指针开始。
+     * 
+     * 
      * @param      b   the {@code byte} to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -493,6 +607,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
 
     /**
      * Writes a sub array as a sequence of bytes.
+     * <p>
+     *  将子数组写为字节序列。
+     * 
+     * 
      * @param b the data to be written
 
      * @param off the start offset in the data
@@ -505,6 +623,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * Writes {@code b.length} bytes from the specified byte array
      * to this file, starting at the current file pointer.
      *
+     * <p>
+     *  从指定的字节数组写入{@code b.length}字节到此文件,从当前文件指针开始。
+     * 
+     * 
      * @param      b   the data.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -516,6 +638,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * Writes {@code len} bytes from the specified byte array
      * starting at offset {@code off} to this file.
      *
+     * <p>
+     *  从指定的字节数组开始,从offset {@code off}开始,将{@code len}字节写入此文件。
+     * 
+     * 
      * @param      b     the data.
      * @param      off   the start offset in the data.
      * @param      len   the number of bytes to write.
@@ -530,6 +656,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
     /**
      * Returns the current offset in this file.
      *
+     * <p>
+     *  返回此文件中的当前偏移量。
+     * 
+     * 
      * @return     the offset from the beginning of the file, in bytes,
      *             at which the next read or write occurs.
      * @exception  IOException  if an I/O error occurs.
@@ -544,6 +674,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * change only by writing after the offset has been set beyond the end
      * of the file.
      *
+     * <p>
+     *  设置从文件开头测量的文件指针偏移量,在此处进行下一个读或写操作。偏移量可以设置超出文件的末尾。将偏移设置为超出文件末尾不会更改文件长度。在偏移量设置超出文件末尾后,文件长度将仅通过写入更改。
+     * 
+     * 
      * @param      pos   the offset position, measured in bytes from the
      *                   beginning of the file, at which to set the file
      *                   pointer.
@@ -563,6 +697,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
     /**
      * Returns the length of this file.
      *
+     * <p>
+     *  返回此文件的长度。
+     * 
+     * 
      * @return     the length of this file, measured in bytes.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -583,6 +721,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * argument then the file will be extended.  In this case, the contents of
      * the extended portion of the file are not defined.
      *
+     * <p>
+     *  设置此文件的长度。
+     * 
+     * <p>如果{@code length}方法返回的文件的当前长度大于{@code newLength}参数,那么该文件将被截断。
+     * 在这种情况下,如果{@code getFilePointer}方法返回的文件偏移量大于{@code newLength},那么在此方法返回之后,偏移量将等于{@code newLength}。
+     * 
+     *  <p>如果{@code length}方法返回的文件的当前长度小于{@code newLength}参数,则文件将被扩展。在这种情况下,未定义文件的扩展部分的内容。
+     * 
+     * 
      * @param      newLength    The desired length of the file
      * @exception  IOException  If an I/O error occurs
      * @since      1.2
@@ -598,6 +745,12 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * <p> If this file has an associated channel then the channel is closed
      * as well.
      *
+     * <p>
+     *  关闭此随机访问文件流,并释放与流相关联的任何系统资源。封闭随机存取文件无法执行输入或输出操作,无法重新打开。
+     * 
+     *  <p>如果此文件具有关联的频道,则该频道也会关闭。
+     * 
+     * 
      * @exception  IOException  if an I/O error occurs.
      *
      * @revised 1.4
@@ -634,6 +787,11 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the byte is read, the end of the stream
      * is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取{@code boolean}。此方法从文件读取单个字节,从当前文件指针开始。值为{@code 0}表示{@code false}。任何其他值表示{@code true}。
+     * 此方法阻塞直到读取字节,检测到流的结束,或抛出异常。
+     * 
+     * 
      * @return     the {@code boolean} value read.
      * @exception  EOFException  if this file has reached the end.
      * @exception  IOException   if an I/O error occurs.
@@ -658,6 +816,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the byte is read, the end of the stream
      * is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取带符号的8位值。此方法从当前文件指针开始从文件读取一个字节。
+     * 如果读取的字节是{@code b},其中<code> 0&nbsp;&lt; =&nbsp; b&nbsp;&lt; =&nbsp; 255 </code>,则结果是：<blockquote> <pre>
+     *  b)</pre> </blockquote>。
+     *  从此文件读取带符号的8位值。此方法从当前文件指针开始从文件读取一个字节。
+     * <p>
+     * 此方法阻塞直到读取字节,检测到流的结束,或抛出异常。
+     * 
+     * 
      * @return     the next byte of this file as a signed eight-bit
      *             {@code byte}.
      * @exception  EOFException  if this file has reached the end.
@@ -678,6 +845,12 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the byte is read, the end of the stream
      * is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取一个无符号的8位数。此方法从此文件读取一个字节,从当前文件指针开始,并返回该字节。
+     * <p>
+     *  此方法阻塞直到读取字节,检测到流的结束,或抛出异常。
+     * 
+     * 
      * @return     the next byte of this file, interpreted as an unsigned
      *             eight-bit number.
      * @exception  EOFException  if this file has reached the end.
@@ -704,6 +877,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the two bytes are read, the end of the
      * stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取带符号的16位数字。该方法从该文件读取两个字节,从当前文件指针开始。
+     * 如果按顺序读取的两个字节是{@code b1}和{@code b2},其中两个值中的每一个都在{@code 0}和{@code 255}之间(含),那么结果等于：<blockquote> <pre>(s
+     * hort)((b1 <8)| b2)</pre> </blockquote>。
+     *  从此文件读取带符号的16位数字。该方法从该文件读取两个字节,从当前文件指针开始。
+     * <p>
+     *  此方法阻塞直到读取两个字节,检测到流的结尾,或抛出异常。
+     * 
+     * 
      * @return     the next two bytes of this file, interpreted as a signed
      *             16-bit number.
      * @exception  EOFException  if this file reaches the end before reading
@@ -732,6 +914,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the two bytes are read, the end of the
      * stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取一个无符号的16位数字。此方法从文件读取两个字节,从当前文件指针开始。
+     * 如果按顺序读取的字节是{@code b1}和{@code b2},其中<code> 0&nbsp; <=&nbsp; b1,b2&nbsp;&lt; =&nbsp; 255 </code>等于：<blockquote>
+     *  <pre>(b1 <8)| b2 </pre> </blockquote>。
+     *  从此文件读取一个无符号的16位数字。此方法从文件读取两个字节,从当前文件指针开始。
+     * <p>
+     *  此方法阻塞直到读取两个字节,检测到流的结尾,或抛出异常。
+     * 
+     * 
      * @return     the next two bytes of this file, interpreted as an unsigned
      *             16-bit integer.
      * @exception  EOFException  if this file reaches the end before reading
@@ -760,6 +951,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the two bytes are read, the end of the
      * stream is detected, or an exception is thrown.
      *
+     * <p>
+     * 从此文件读取字符。此方法从文件读取两个字节,从当前文件指针开始。
+     * 如果按顺序读取的字节是{@code b1}和{@code b2},其中<code> 0&nbsp;&lt; = b1,&nbsp; b2&nbsp;&lt; =&nbsp; 255 </code>结果等
+     * 于：<blockquote> <pre>(char)((b1 <8)| b2)</pre> </blockquote>。
+     * 从此文件读取字符。此方法从文件读取两个字节,从当前文件指针开始。
+     * <p>
+     *  此方法阻塞直到读取两个字节,检测到流的结尾,或抛出异常。
+     * 
+     * 
      * @return     the next two bytes of this file, interpreted as a
      *                  {@code char}.
      * @exception  EOFException  if this file reaches the end before reading
@@ -788,6 +988,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the four bytes are read, the end of the
      * stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取带符号的32位整数。此方法从文件读取4个字节,从当前文件指针开始。
+     * 如果按顺序读取的字节是{@code b1},{@code b2},{@code b3}和{@code b4},其中<code> 0&nbsp;&lt; = b1,b2,b3 ,b4&lt; =&nbsp
+     * ; 255 </code>,则结果等于：<blockquote> <pre>(b1 <24)| (b2 <16)+(b3 <8)+ b4 </pre> </blockquote>。
+     *  从此文件读取带符号的32位整数。此方法从文件读取4个字节,从当前文件指针开始。
+     * <p>
+     *  此方法阻塞直到读取四个字节,检测到流的结束,或抛出异常。
+     * 
+     * 
      * @return     the next four bytes of this file, interpreted as an
      *             {@code int}.
      * @exception  EOFException  if this file reaches the end before reading
@@ -826,6 +1035,18 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the eight bytes are read, the end of the
      * stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取带符号的64位整数。此方法从文件读取八个字节,从当前文件指针开始。
+     * 如果按顺序读取的字节为{@code b1},{@code b2},{@code b3},{@code b4},{@code b5},{@code b6},{@code b7}和{@code b8,}其中
+     * ：<blockquote> <pre> 0 <= b1,b2,b3,b4,b5,b6,b7,b8 <= 255,</。
+     *  从此文件读取带符号的64位整数。此方法从文件读取八个字节,从当前文件指针开始。
+     * <p>
+     * 那么结果等于：<BLOCKQUOTE> <前>((长)B1&LT;&LT; 56)+((长)B2&LT;&LT; 48)+((长)B3&LT;&LT; 40)+( (长)B4&LT;&LT; 32)+(
+     * (长)B5&LT;&LT; 24)+((长)B6&LT;&LT; 16)+((长)B7&LT;&LT; 8)+ B8 </预> </块引用>。
+     * <p>
+     *  此方法一直阻塞八个读取字节,检测到流的末尾或者抛出异常。
+     * 
+     * 
      * @return     the next eight bytes of this file, interpreted as a
      *             {@code long}.
      * @exception  EOFException  if this file reaches the end before reading
@@ -847,6 +1068,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the four bytes are read, the end of the
      * stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取一个{@code浮}。
+     * 此方法读取一个@code {} INT价值,并从当前文件指针,仿佛被@code {}的readInt方法,然后转换那个@code {} INT到{@code浮}使用{@code intBitsToFloat }
+     * 类{@code浮法}。
+     *  从此文件读取一个{@code浮}。
+     * <p>
+     *  此方法一直阻塞四个读取字节,检测到流的末尾或者抛出异常。
+     * 
+     * 
      * @return     the next four bytes of this file, interpreted as a
      *             {@code float}.
      * @exception  EOFException  if this file reaches the end before reading
@@ -870,6 +1100,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until the eight bytes are read, the end of the
      * stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取一个{@code双}。
+     * 这种方法可以读取{@code长}值,并从当前文件指针,仿佛被{@code readLong}方法,然后,使用将转换{@code长}到{@code双} {在@code longBitsToDouble }
+     * 方法类{@code双}。
+     *  从此文件读取一个{@code双}。
+     * <p>
+     *  此方法一直阻塞八个读取字节,检测到流的末尾或者抛出异常。
+     * 
+     * 
      * @return     the next eight bytes of this file, interpreted as a
      *             {@code double}.
      * @exception  EOFException  if this file reaches the end before reading
@@ -901,6 +1140,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * return and the byte following it are read (to see if it is a newline),
      * the end of the file is reached, or an exception is thrown.
      *
+     * <p>
+     * 从此文件读取下一行文本。此方法从文件中连续读取字节,从当前文件指针开始,直到到达行终止符或文件结尾。每个字节通过获取字符的低8位的字节值并将字符的高8位设置为零来转换为字符。
+     * 因此,此方法不支持完整的Unicode字符集。
+     * 
+     *  <p>文本行由回车字符({@code'\ u005Cr'}),换行符({@code'\ u005Cn'}),回车符后紧跟换行符字符或文件的结尾。行终止字符被丢弃,不作为返回的字符串的一部分包含。
+     * 
+     *  <p>此方法阻塞,直到读取换行符,回车并读取其后的字节(以查看它是否为换行符),到达文件结尾或抛出异常。
+     * 
+     * 
      * @return     the next line of text from this file, or null if end
      *             of file is encountered before even one byte is read.
      * @exception  IOException  if an I/O error occurs.
@@ -953,6 +1201,15 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * This method blocks until all the bytes are read, the end of the
      * stream is detected, or an exception is thrown.
      *
+     * <p>
+     *  从此文件读取字符串。该字符串已使用<a href="DataInput.html#modified-utf-8">修改的UTF-8 </a>格式进行编码。
+     * <p>
+     *  前两个字节从当前文件指针开始读取,如同通过{@code readUnsignedShort}。此值给出了编码字符串中后面的字节数,而不是结果字符串的长度。
+     * 随后的字节将被解释为以修改的UTF-8格式编码字符的字节,并转换为字符。
+     * <p>
+     * 此方法阻塞直到读取所有字节,检测到流的结束,或抛出异常。
+     * 
+     * 
      * @return     a Unicode string.
      * @exception  EOFException            if this file reaches the end before
      *               reading all the bytes.
@@ -972,6 +1229,11 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * as the value {@code (byte)0}. The write starts at
      * the current position of the file pointer.
      *
+     * <p>
+     *  将{@code boolean}作为一个字节的值写入文件。值{@code true}被写为值{@code(byte)1};值{@code false}被写为值{@code(byte)0}。
+     * 写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      v   a {@code boolean} value to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -984,6 +1246,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * Writes a {@code byte} to the file as a one-byte value. The
      * write starts at the current position of the file pointer.
      *
+     * <p>
+     *  将{@code byte}作为一个字节的值写入文件。写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      v   a {@code byte} value to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -996,6 +1262,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * Writes a {@code short} to the file as two bytes, high byte first.
      * The write starts at the current position of the file pointer.
      *
+     * <p>
+     *  将{@code short}写入文件为两个字节,高字节优先。写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      v   a {@code short} to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -1010,6 +1280,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * byte first. The write starts at the current position of the
      * file pointer.
      *
+     * <p>
+     *  将{@code char}以两个字节的值(高字节优先)写入文件。写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      v   a {@code char} value to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -1023,6 +1297,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * Writes an {@code int} to the file as four bytes, high byte first.
      * The write starts at the current position of the file pointer.
      *
+     * <p>
+     *  将{@code int}作为四个字节写入文件,高字节在前。写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      v   an {@code int} to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -1038,6 +1316,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * Writes a {@code long} to the file as eight bytes, high byte first.
      * The write starts at the current position of the file pointer.
      *
+     * <p>
+     *  将一个{@code long}写入文件作为八个字节,高字节在前。写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      v   a {@code long} to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -1060,6 +1342,11 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * four-byte quantity, high byte first. The write starts at the
      * current position of the file pointer.
      *
+     * <p>
+     *  使用{@code Float}类中的{@code floatToIntBits}方法将float参数转换为{@code int},然后将该{@code int}值作为四字节数量,高字节先写入文件。
+     * 写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      v   a {@code float} value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.lang.Float#floatToIntBits(float)
@@ -1075,6 +1362,12 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * eight-byte quantity, high byte first. The write starts at the current
      * position of the file pointer.
      *
+     * <p>
+     * 使用类{@code Double}中的{@code doubleToLongBits}方法将double参数转换为{@code long},然后将该{@code long}值作为8字节数量,高字节先写入
+     * 文件。
+     * 写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      v   a {@code double} value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.lang.Double#doubleToLongBits(double)
@@ -1089,6 +1382,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * its high eight bits. The write starts at the current position of
      * the file pointer.
      *
+     * <p>
+     *  将字符串作为字节序列写入文件。字符串中的每个字符按顺序通过丢弃其高8位而被写出。写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      s   a string of bytes to be written.
      * @exception  IOException  if an I/O error occurs.
      */
@@ -1106,6 +1403,10 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * {@code writeChar} method. The write starts at the current
      * position of the file pointer.
      *
+     * <p>
+     *  将字符串作为字符序列写入文件。每个字符都被写入数据输出流,就像使用{@code writeChar}方法。写入从文件指针的当前位置开始。
+     * 
+     * 
      * @param      s   a {@code String} value to be written.
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.RandomAccessFile#writeChar(int)
@@ -1136,6 +1437,11 @@ public class RandomAccessFile implements DataOutput, DataInput, Closeable {
      * of the string is output, in sequence, using the modified UTF-8 encoding
      * for each character.
      *
+     * <p>
+     *  使用<a href="DataInput.html#modified-utf-8">修改的UTF-8 </a>编码以机器无关的方式将字符串写入文件。
+     * <p>
+     *  首先,从当前文件指针开始,将两个字节写入文件,就像通过{@code writeShort}方法给出跟随的字节数。这个值是实际写出的字节数,而不是字符串的长度。
+     * 
      * @param      str   a string to be written.
      * @exception  IOException  if an I/O error occurs.
      */

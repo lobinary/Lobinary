@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,9 @@ package java.util;
 class LocaleISOData {
     /**
      * The 2- and 3-letter ISO 639 language codes.
+     * <p>
+     *  2和3个字母的ISO 639语言代码。
+     * 
      */
     static final String isoLanguageTable =
           "aa" + "aar"  // Afar
@@ -222,6 +226,8 @@ class LocaleISOData {
 
     /**
      * The 2- and 3-letter ISO 3166 country codes.
+     * <p>
+     *  2和3个字母的ISO 3166国家/地区代码。
      */
     static final String isoCountryTable =
           "AD" + "AND"  // Andorra, Principality of

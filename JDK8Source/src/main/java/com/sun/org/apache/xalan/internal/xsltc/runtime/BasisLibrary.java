@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: BasisLibrary.java,v 1.6 2006/06/20 21:51:58 spericas Exp $
+ * <p>
+ *  $ Id：BasisLibrary.java,v 1.6 2006/06/20 21:51:58 spericas Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.runtime;
@@ -61,6 +74,9 @@ import com.sun.org.apache.xml.internal.utils.XML11Char;
 /**
  * Standard XSLT functions. All standard functions expect the current node
  * and the DOM as their last two arguments.
+ * <p>
+ *  标准XSLT函数。所有标准函数都将当前节点和DOM作为它们的最后两个参数。
+ * 
  */
 public final class BasisLibrary {
 
@@ -69,6 +85,9 @@ public final class BasisLibrary {
     /**
      * Re-use a single instance of StringBuffer (per thread) in the basis library.
      * StringBuilder is better, however, DecimalFormat only accept StringBuffer
+     * <p>
+     *  在基础库中重用单个StringBuffer实例(每个线程)。 StringBuilder是更好的,但是,DecimalFormat只接受StringBuffer
+     * 
      */
     private static final ThreadLocal<StringBuilder> threadLocalStringBuilder =
         new ThreadLocal<StringBuilder> () {
@@ -79,6 +98,9 @@ public final class BasisLibrary {
 
     /**
      * ThreadLocal for StringBuffer used
+     * <p>
+     *  ThreadLocal为StringBuffer使用
+     * 
      */
     private static final ThreadLocal<StringBuffer> threadLocalStringBuffer =
         new ThreadLocal<StringBuffer> () {
@@ -89,6 +111,9 @@ public final class BasisLibrary {
 
     /**
      * Standard function count(node-set)
+     * <p>
+     *  标准功能计数(节点集)
+     * 
      */
     public static int countF(DTMAxisIterator iterator) {
         return(iterator.getLast());
@@ -96,6 +121,10 @@ public final class BasisLibrary {
 
     /**
      * Standard function position()
+     * <p>
+     *  标准功能位置()
+     * 
+     * 
      * @deprecated This method exists only for backwards compatibility with old
      *             translets.  New code should not reference it.
      */
@@ -108,6 +137,9 @@ public final class BasisLibrary {
     /**
      * XSLT Standard function sum(node-set).
      * stringToDouble is inlined
+     * <p>
+     *  XSLT标准函数sum(node-set)。 stringToDouble是内联的
+     * 
      */
     public static double sumF(DTMAxisIterator iterator, DOM dom) {
         try {
@@ -125,6 +157,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function string()
+     * <p>
+     *  XSLT标准函数字符串()
+     * 
      */
     public static String stringF(int node, DOM dom) {
         return dom.getStringValueX(node);
@@ -132,6 +167,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function string(value)
+     * <p>
+     *  XSLT标准函数字符串(值)
+     * 
      */
     public static String stringF(Object obj, DOM dom) {
         if (obj instanceof DTMAxisIterator) {
@@ -150,6 +188,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function string(value)
+     * <p>
+     *  XSLT标准函数字符串(值)
+     * 
      */
     public static String stringF(Object obj, int node, DOM dom) {
         if (obj instanceof DTMAxisIterator) {
@@ -181,6 +222,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function number()
+     * <p>
+     *  XSLT标准功能编号()
+     * 
      */
     public static double numberF(int node, DOM dom) {
         return stringToReal(dom.getStringValueX(node));
@@ -188,6 +232,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function number(value)
+     * <p>
+     *  XSLT标准功能编号(值)
+     * 
      */
     public static double numberF(Object obj, DOM dom) {
         if (obj instanceof Double) {
@@ -221,6 +268,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function round()
+     * <p>
+     *  XSLT标准函数round()
+     * 
      */
     public static double roundF(double d) {
             return (d<-0.5 || d>0.0)?Math.floor(d+0.5):((d==0.0)?
@@ -229,6 +279,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function boolean()
+     * <p>
+     *  XSLT标准函数boolean()
+     * 
      */
     public static boolean booleanF(Object obj) {
         if (obj instanceof Double) {
@@ -265,6 +318,9 @@ public final class BasisLibrary {
     /**
      * XSLT Standard function substring(). Must take a double because of
      * conversions resulting into NaNs and rounding.
+     * <p>
+     * XSLT标准函数substring()。必须加倍,因为转换导致NaNs和舍入。
+     * 
      */
     public static String substringF(String value, double start) {
         if (Double.isNaN(start))
@@ -288,6 +344,9 @@ public final class BasisLibrary {
     /**
      * XSLT Standard function substring(). Must take a double because of
      * conversions resulting into NaNs and rounding.
+     * <p>
+     *  XSLT标准函数substring()。必须加倍,因为转换导致NaNs和舍入。
+     * 
      */
     public static String substringF(String value, double start, double length) {
         if (Double.isInfinite(start) ||
@@ -323,6 +382,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function substring-after().
+     * <p>
+     *  XSLT标准函数substring-after()。
+     * 
      */
     public static String substring_afterF(String value, String substring) {
         final int index = value.indexOf(substring);
@@ -334,6 +396,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function substring-before().
+     * <p>
+     *  XSLT标准函数substring-before()。
+     * 
      */
     public static String substring_beforeF(String value, String substring) {
         final int index = value.indexOf(substring);
@@ -345,6 +410,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function translate().
+     * <p>
+     *  XSLT标准函数translate()。
+     * 
      */
     public static String translateF(String value, String from, String to) {
         final int tol = to.length();
@@ -370,6 +438,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function normalize-space().
+     * <p>
+     *  XSLT标准函数normalize-space()。
+     * 
      */
     public static String normalize_spaceF(int node, DOM dom) {
         return normalize_spaceF(dom.getStringValueX(node));
@@ -377,6 +448,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function normalize-space(string).
+     * <p>
+     *  XSLT标准函数normalize-space(字符串)。
+     * 
      */
     public static String normalize_spaceF(String value) {
         int i = 0, n = value.length();
@@ -403,6 +477,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function generate-id().
+     * <p>
+     *  XSLT标准函数generate-id()。
+     * 
      */
     public static String generate_idF(int node) {
         if (node > 0)
@@ -415,6 +492,9 @@ public final class BasisLibrary {
 
     /**
      * utility function for calls to local-name().
+     * <p>
+     *  效用函数调用local-name()。
+     * 
      */
     public static String getLocalName(String value) {
         int idx = value.lastIndexOf(':');
@@ -432,6 +512,10 @@ public final class BasisLibrary {
      * But simple stylesheets may result in a call to this method.
      * The compiler should generate a warning if it encounters a call to
      * an unresolved external function.
+     * <p>
+     *  无法解析的外部函数将替换为对此方法的调用。此方法将生成运行时错误。一个好的样式表使用条件构造来检查函数是否存在,如果它不存在,从来没有真正尝试调用它。但简单的样式表可能会导致调用此方法。
+     * 如果编译器遇到对未解决的外部函数的调用,则应生成警告。
+     * 
      */
     public static void unresolved_externalF(String name) {
         runTimeError(EXTERNAL_FUNC_ERR, name);
@@ -440,6 +524,9 @@ public final class BasisLibrary {
     /**
      * Utility function to throw a runtime error on the use of an extension
      * function when the secure processing feature is set to true.
+     * <p>
+     *  实用程序函数用于在安全处理功能设置为true时,对扩展函数的使用抛出运行时错误。
+     * 
      */
     public static void unallowed_extension_functionF(String name) {
         runTimeError(UNALLOWED_EXTENSION_FUNCTION_ERR, name);
@@ -448,6 +535,9 @@ public final class BasisLibrary {
     /**
      * Utility function to throw a runtime error on the use of an extension
      * element when the secure processing feature is set to true.
+     * <p>
+     *  实用程序函数用于在安全处理功能设置为true时,对扩展元素的使用抛出运行时错误。
+     * 
      */
     public static void unallowed_extension_elementF(String name) {
         runTimeError(UNALLOWED_EXTENSION_ELEMENT_ERR, name);
@@ -459,6 +549,11 @@ public final class BasisLibrary {
      * This is only used in forward-compatibility mode, when the control flow
      * cannot be determined. In 1.0 mode, the error message is emitted at
      * compile time.
+     * <p>
+     *  实用程序函数为不受支持的元素抛出运行时错误。
+     * 
+     *  这仅在前向兼容性模式下使用,当控制流无法确定时。在1.0模式下,错误消息在编译时发出。
+     * 
      */
     public static void unsupported_ElementF(String qname, boolean isExtension) {
         if (isExtension)
@@ -469,6 +564,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function namespace-uri(node-set).
+     * <p>
+     *  XSLT标准函数namespace-uri(node-set)。
+     * 
      */
     public static String namespace_uriF(DTMAxisIterator iter, DOM dom) {
         return namespace_uriF(iter.next(), dom);
@@ -476,6 +574,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function system-property(name)
+     * <p>
+     * XSLT标准函数系统属性(名称)
+     * 
      */
     public static String system_propertyF(String name) {
         if (name.equals("xsl:version"))
@@ -491,6 +592,9 @@ public final class BasisLibrary {
 
     /**
      * XSLT Standard function namespace-uri().
+     * <p>
+     *  XSLT标准函数namespace-uri()。
+     * 
      */
     public static String namespace_uriF(int node, DOM dom) {
         final String value = dom.getNodeName(node);
@@ -504,6 +608,10 @@ public final class BasisLibrary {
     /**
      * Implements the object-type() extension function.
      *
+     * <p>
+     *  实现object-type()扩展函数。
+     * 
+     * 
      * @see <a href="http://www.exslt.org/">EXSLT</a>
      */
     public static String objectTypeF(Object obj)
@@ -524,6 +632,9 @@ public final class BasisLibrary {
 
     /**
      * Implements the nodeset() extension function.
+     * <p>
+     *  实现nodeset()扩展函数。
+     * 
      */
     public static DTMAxisIterator nodesetF(Object obj) {
         if (obj instanceof DOM) {
@@ -576,6 +687,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: node-set/node-set compare.
+     * <p>
+     *  效用函数：节点集/节点集比较。
+     * 
      */
     public static boolean compare(DTMAxisIterator left, DTMAxisIterator right,
                                   int op, DOM dom) {
@@ -655,6 +769,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: node-set/number compare.
+     * <p>
+     *  效用函数：节点集/数值比较。
+     * 
      */
     public static boolean compare(DTMAxisIterator left, final double rnumber,
                                   final int op, DOM dom) {
@@ -713,6 +830,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: node-set/string comparison.
+     * <p>
+     *  效用函数：节点集/字符串比较。
+     * 
      */
     public static boolean compare(DTMAxisIterator left, final String rstring,
                                   int op, DOM dom) {
@@ -858,6 +978,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used to test context node's language
+     * <p>
+     *  效用函数：用于测试上下文节点的语言
+     * 
      */
     public static boolean testLanguage(String testLang, DOM dom, int node) {
         // language for context node (if any)
@@ -885,6 +1008,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used in StringType to convert a string to a real.
+     * <p>
+     *  效用函数：用于StringType将字符串转换为实数。
+     * 
      */
     public static double stringToReal(String s) {
         try {
@@ -897,6 +1023,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used in StringType to convert a string to an int.
+     * <p>
+     *  效用函数：用于StringType将字符串转换为int。
+     * 
      */
     public static int stringToInt(String s) {
         try {
@@ -939,6 +1068,9 @@ public final class BasisLibrary {
      * Removes the decimal if null. Uses a specialized formatter object
      * for very large and very small numbers that ignores locales, thus
      * using always using "." as a decimal separator.
+     * <p>
+     *  效用函数：用于RealType将实数转换为字符串。如果为null,则删除decimal。对于非常大和非常小的数字使用专用的格式化程序对象,忽略语言环境,因此总是使用"。"。作为小数分隔符。
+     * 
      */
     public static String realToString(double d) {
         final double m = Math.abs(d);
@@ -969,6 +1101,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used in RealType to convert a real to an integer
+     * <p>
+     *  效用函数：用于RealType将实数转换为整数
+     * 
      */
     public static int realToInt(double d) {
         return (int)d;
@@ -978,6 +1113,9 @@ public final class BasisLibrary {
      * Utility function: used to format/adjust  a double to a string. The
      * DecimalFormat object comes from the 'formatSymbols' hashtable in
      * AbstractTranslet.
+     * <p>
+     *  效用函数：用于格式化/将双精度调整为字符串。 DecimalFormat对象来自AbstractTranslet中的'formatSymbols'hashtable。
+     * 
      */
     private static FieldPosition _fieldPosition = new FieldPosition(0);
 
@@ -1005,6 +1143,9 @@ public final class BasisLibrary {
     /**
      * Utility function: used to convert references to node-sets. If the
      * obj is an instanceof Node then create a singleton iterator.
+     * <p>
+     *  效用函数：用于将引用转换为节点集。如果obj是Node的一个实例,那么创建一个单例迭代器。
+     * 
      */
     public static DTMAxisIterator referenceToNodeSet(Object obj) {
         // Convert var/param -> node
@@ -1024,6 +1165,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used to convert reference to org.w3c.dom.NodeList.
+     * <p>
+     *  效用函数：用于将引用转换为org.w3c.dom.NodeList。
+     * 
      */
     public static NodeList referenceToNodeList(Object obj, DOM dom) {
         if (obj instanceof Node || obj instanceof DTMAxisIterator) {
@@ -1044,6 +1188,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used to convert reference to org.w3c.dom.Node.
+     * <p>
+     *  效用函数：用于将引用转换为org.w3c.dom.Node。
+     * 
      */
     public static org.w3c.dom.Node referenceToNode(Object obj, DOM dom) {
         if (obj instanceof Node || obj instanceof DTMAxisIterator) {
@@ -1064,6 +1211,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used to convert reference to long.
+     * <p>
+     *  效用函数：用于将引用转换为long。
+     * 
      */
     public static long referenceToLong(Object obj) {
         if (obj instanceof Number) {
@@ -1078,6 +1228,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used to convert reference to double.
+     * <p>
+     *  效用函数：用于将引用转换为双精度。
+     * 
      */
     public static double referenceToDouble(Object obj) {
         if (obj instanceof Number) {
@@ -1092,6 +1245,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used to convert reference to boolean.
+     * <p>
+     *  效用函数：用于将引用转换为布尔值。
+     * 
      */
     public static boolean referenceToBoolean(Object obj) {
         if (obj instanceof Boolean) {
@@ -1106,6 +1262,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used to convert reference to String.
+     * <p>
+     *  效用函数：用于将引用转换为字符串。
+     * 
      */
     public static String referenceToString(Object obj, DOM dom) {
         if (obj instanceof String) {
@@ -1129,6 +1288,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function used to convert a w3c Node into an internal DOM iterator.
+     * <p>
+     * 用于将w3c节点转换为内部DOM迭代器的实用程序函数。
+     * 
      */
     public static DTMAxisIterator node2Iterator(org.w3c.dom.Node node,
         Translet translet, DOM dom)
@@ -1159,6 +1321,11 @@ public final class BasisLibrary {
      * not an instance of DOM2DTM. So we use the more lengthy
      * implementation below until this issue has been addressed.
      *
+     * <p>
+     *  在一个完美的世界中,这将是nodeList2Iterator的实现。
+     * 实际上,这会导致getDTMHandleFromNode中的ClassCastException,因为SAXImpl不是DOM2DTM的实例。因此,我们使用下面更长的实现,直到这个问题得到解决。
+     * 
+     * 
      * @see org.apache.xml.dtm.ref.DTMManagerDefault#getDTMHandleFromNode
      */
     private static DTMAxisIterator nodeList2IteratorUsingHandleFromNode(
@@ -1194,6 +1361,9 @@ public final class BasisLibrary {
     /**
      * Utility function used to convert a w3c NodeList into a internal
      * DOM iterator.
+     * <p>
+     *  效用函数,用于将w3c NodeList转换为内部DOM迭代器。
+     * 
      */
     public static DTMAxisIterator nodeList2Iterator(
                                         org.w3c.dom.NodeList nodeList,
@@ -1353,6 +1523,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function used to convert references to DOMs.
+     * <p>
+     *  用于将引用转换为DOM的实用程序函数。
+     * 
      */
     public static DOM referenceToResultTree(Object obj) {
         try {
@@ -1368,6 +1541,9 @@ public final class BasisLibrary {
     /**
      * Utility function: used with nth position filters to convert a sequence
      * of nodes to just one single node (the one at position n).
+     * <p>
+     *  效用函数：与第n个位置过滤器一起使用,将节点序列转换为仅一个单个节点(位置n处的节点)。
+     * 
      */
     public static DTMAxisIterator getSingleNode(DTMAxisIterator iterator) {
         int node = iterator.next();
@@ -1376,6 +1552,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function: used in xsl:copy.
+     * <p>
+     *  效用函数：用于xsl：copy。
+     * 
      */
     private static char[] _characterArray = new char[32];
 
@@ -1414,6 +1593,9 @@ public final class BasisLibrary {
     /**
      * Utility function to check if xsl:attribute has a valid qname
      * This method should only be invoked if the name attribute is an AVT
+     * <p>
+     *  用于检查xsl：attribute是否具有有效qname的实用程序函数仅当name属性是AVT时才应调用此方法
+     * 
      */
     public static void checkAttribQName(String name) {
         final int firstOccur = name.indexOf(":");
@@ -1446,6 +1628,9 @@ public final class BasisLibrary {
     /**
      * Utility function to check if a name is a valid ncname
      * This method should only be invoked if the attribute value is an AVT
+     * <p>
+     *  用于检查名称是否为有效ncname的实用程序函数仅当属性值为AVT时,才应调用此方法
+     * 
      */
     public static void checkNCName(String name) {
         if (!XML11Char.isXML11ValidNCName(name)) {
@@ -1456,6 +1641,9 @@ public final class BasisLibrary {
     /**
      * Utility function to check if a name is a valid qname
      * This method should only be invoked if the attribute value is an AVT
+     * <p>
+     *  用于检查名称是否为有效qname的实用程序函数仅当属性值为AVT时,才应调用此方法
+     * 
      */
     public static void checkQName(String name) {
         if (!XML11Char.isXML11ValidQName(name)) {
@@ -1465,6 +1653,9 @@ public final class BasisLibrary {
 
     /**
      * Utility function for the implementation of xsl:element.
+     * <p>
+     *  实用函数用于实现xsl：element。
+     * 
      */
     public static String startXslElement(String qname, String namespace,
         SerializationHandler handler, DOM dom, int node)
@@ -1519,6 +1710,9 @@ public final class BasisLibrary {
 
     /**
      * This function is used in the execution of xsl:element
+     * <p>
+     *  此函数用于执行xsl：element
+     * 
      */
     public static String getPrefix(String qname) {
         final int index = qname.indexOf(':');
@@ -1527,6 +1721,9 @@ public final class BasisLibrary {
 
     /**
      * This function is used in the execution of xsl:element
+     * <p>
+     *  此函数用于执行xsl：element
+     * 
      */
     private static int prefixIndex = 0;
 
@@ -1593,6 +1790,9 @@ public final class BasisLibrary {
 
     /**
      * Print a run-time error message.
+     * <p>
+     *  打印运行时错误消息。
+     * 
      */
     public static void runTimeError(String code) {
         throw new RuntimeException(m_bundle.getString(code));
@@ -1618,6 +1818,9 @@ public final class BasisLibrary {
 
     /**
      * Replace a certain character in a string with a new substring.
+     * <p>
+     *  用新的子字符串替换字符串中的某个字符。
+     * 
      */
     public static String replace(String base, char ch, String str) {
         return (base.indexOf(ch) < 0) ? base :
@@ -1652,6 +1855,10 @@ public final class BasisLibrary {
      * will be replaced with the corresponding values
      * by the BasisLibrary's utility method mapQNametoJavaName
      * and thus get mapped to legal java variable names
+     * <p>
+     * 实用程序方法允许设置形式{namespaceuri} localName的参数,它被映射到类中的一个实例变量。
+     * 因此,形式为"{http://foo.bar} xyz"的参数将被相应的值替换为BasisLibrary的实用程序方法mapQNametoJavaName,从而映射到合法的java变量名称。
+     * 
      */
     public static String mapQNameToJavaName (String base ) {
        return replace(base, ".-:/{}?#%*",
@@ -1665,6 +1872,7 @@ public final class BasisLibrary {
      *  Utility method to calculate string-length as a number of code points,
      *  to avoid possible errors with string that contains
      *  complementary characters
+     * <p>
      */
     public static int getStringLength(String str) {
         return str.codePointCount(0,str.length());

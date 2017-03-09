@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -84,6 +85,7 @@ public class POAFactory implements ObjectAdapterFactory
     }
 
     /** All object adapter factories must have a no-arg constructor.
+    /* <p>
     */
     public POAFactory()
     {

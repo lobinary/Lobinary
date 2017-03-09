@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,19 @@ import java.security.PrivilegedExceptionAction;
  * Both cases will create a DatagramSocket able to receive broadcasts on
  * UDP port 8888.
  *
+ * <p>
+ *  此类表示用于发送和接收数据报数据包的套接字。
+ * 
+ *  <p>数据报套接字是数据包传送服务的发送或接收点。在数据报插座上发送或接收的每个分组被单独寻址和路由。从一个机器发送到另一个机器的多个分组可以被不同地路由,并且可以以任何顺序到达。
+ * 
+ *  <p>在可能的情况下,新构造的{@code DatagramSocket}已启用{@link SocketOptions#SO_BROADCAST SO_BROADCAST}套接字选项,以便允许广播数
+ * 据报的传输。
+ * 为了接收广播数据包,DatagramSocket应该绑定到通配符地址。在一些实现中,当DatagramSocket绑定到更具体的地址时,也可以接收广播分组。
+ * <p>
+ *  示例：{@code DatagramSocket s = new DatagramSocket(null); s.bind(new InetSocketAddress(8888)); }其中相当于：{@code DatagramSocket s = new DatagramSocket(8888); }
+ * 两种情况都将创建一个DatagramSocket能够在UDP端口8888上接收广播。
+ * 
+ * 
  * @author  Pavani Diwanji
  * @see     java.net.DatagramPacket
  * @see     java.nio.channels.DatagramChannel
@@ -67,6 +81,9 @@ public
 class DatagramSocket implements java.io.Closeable {
     /**
      * Various states of this socket.
+     * <p>
+     *  此插座的各种状态。
+     * 
      */
     private boolean created = false;
     private boolean bound = false;
@@ -75,11 +92,17 @@ class DatagramSocket implements java.io.Closeable {
 
     /*
      * The implementation of this DatagramSocket.
+     * <p>
+     *  这个DatagramSocket的实现。
+     * 
      */
     DatagramSocketImpl impl;
 
     /**
      * Are we using an older DatagramSocketImpl?
+     * <p>
+     *  我们使用较老的DatagramSocketImpl吗?
+     * 
      */
     boolean oldImpl = false;
 
@@ -91,6 +114,10 @@ class DatagramSocket implements java.io.Closeable {
      * address of all packets received to be sure they are from
      * the connected destination. Other packets are read but
      * silently dropped.
+     * <p>
+     * 当套接字为ST_CONNECTED时设置,直到我们确定在调用connect()之前可能已经接收到但没有被应用程序读取的任何数据包已被读取。
+     * 在此期间,我们检查接收的所有数据包的源地址,以确保它们来自连接的目标。其他数据包被读取,但是静默丢弃。
+     * 
      */
     private boolean explicitFilter = false;
     private int bytesLeftToFilter;
@@ -99,6 +126,9 @@ class DatagramSocket implements java.io.Closeable {
      * ST_NOT_CONNECTED = socket not connected
      * ST_CONNECTED = socket connected
      * ST_CONNECTED_NO_IMPL = socket connected but not at impl level
+     * <p>
+     *  连接状态：ST_NOT_CONNECTED =未连接套接字ST_CONNECTED =已连接套接字ST_CONNECTED_NO_IMPL =已连接套接字,但未连接套接字层
+     * 
      */
     static final int ST_NOT_CONNECTED = 0;
     static final int ST_CONNECTED = 1;
@@ -108,6 +138,9 @@ class DatagramSocket implements java.io.Closeable {
 
     /*
      * Connected address & port
+     * <p>
+     *  已连接的地址和端口
+     * 
      */
     InetAddress connectedAddress = null;
     int connectedPort = -1;
@@ -116,6 +149,10 @@ class DatagramSocket implements java.io.Closeable {
      * Connects this socket to a remote socket address (IP address + port number).
      * Binds socket if not already bound.
      * <p>
+     * <p>
+     *  将此套接字连接到远程套接字地址(IP地址+端口号)。绑定套接字(如果尚未绑定)。
+     * <p>
+     * 
      * @param   address The remote address.
      * @param   port    The remote port
      * @throws  SocketException if binding the socket fails.
@@ -185,6 +222,12 @@ class DatagramSocket implements java.io.Closeable {
      * with 0 as its argument to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  构造数据报套接字并将其绑定到本地主机上的任何可用端口。套接字将绑定到{@link InetAddress#isAnyLocalAddress通配符}地址,这是内核选择的IP地址。
+     * 
+     *  <p>如果有安全管理器,则首先调用其{@code checkListen}方法,其中的参数为0,以确保允许操作。这可能导致SecurityException。
+     * 
+     * 
      * @exception  SocketException  if the socket could not be opened,
      *               or the socket could not bind to the specified local port.
      * @exception  SecurityException  if a security manager exists and its
@@ -200,6 +243,10 @@ class DatagramSocket implements java.io.Closeable {
      * Creates an unbound datagram socket with the specified
      * DatagramSocketImpl.
      *
+     * <p>
+     *  使用指定的DatagramSocketImpl创建未绑定的数据报套接字。
+     * 
+     * 
      * @param impl an instance of a <B>DatagramSocketImpl</B>
      *        the subclass wishes to use on the DatagramSocket.
      * @since   1.4
@@ -223,6 +270,14 @@ class DatagramSocket implements java.io.Closeable {
      * as its argument to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  创建一个数据报套接字,绑定到指定的本地套接字地址。
+     * <p>
+     *  如果地址是{@code null},则创建一个未绑定的套接字。
+     * 
+     *  <p>如果有安全管理器,其{@code checkListen}方法首先使用套接字地址的端口作为其参数,以确保允许操作。这可能导致SecurityException。
+     * 
+     * 
      * @param bindaddr local socket address to bind, or {@code null}
      *                 for an unbound socket.
      *
@@ -259,6 +314,12 @@ class DatagramSocket implements java.io.Closeable {
      * as its argument to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     * 构造数据报套接字并将其绑定到本地主机上的指定端口。套接字将绑定到{@link InetAddress#isAnyLocalAddress通配符}地址,这是内核选择的IP地址。
+     * 
+     *  <p>如果有安全管理器,则会先使用{@code portList}参数作为其参数来调用其{@code checkListen}方法,以确保允许操作。这可能导致SecurityException。
+     * 
+     * 
      * @param      port port to use.
      * @exception  SocketException  if the socket could not be opened,
      *               or the socket could not bind to the specified local port.
@@ -284,6 +345,13 @@ class DatagramSocket implements java.io.Closeable {
      * as its argument to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  创建一个数据报套接字,绑定到指定的本地地址。本地端口必须介于0和65535之间(包括0和65535)。
+     * 如果IP地址是0.0.0.0,套接字将绑定到{@link InetAddress#isAnyLocalAddress通配符}地址,一个由内核选择的IP地址。
+     * 
+     *  <p>如果有安全管理器,则会先使用{@code portList}参数作为其参数来调用其{@code checkListen}方法,以确保允许操作。这可能导致SecurityException。
+     * 
+     * 
      * @param port local port to use
      * @param laddr local address to bind
      *
@@ -343,6 +411,10 @@ class DatagramSocket implements java.io.Closeable {
      * Get the {@code DatagramSocketImpl} attached to this socket,
      * creating it if necessary.
      *
+     * <p>
+     *  获取附加到此套接字的{@code DatagramSocketImpl},如果必要,创建它。
+     * 
+     * 
      * @return  the {@code DatagramSocketImpl} attached to that
      *          DatagramSocket
      * @throws SocketException if creation fails.
@@ -360,6 +432,12 @@ class DatagramSocket implements java.io.Closeable {
      * If the address is {@code null}, then the system will pick up
      * an ephemeral port and a valid local address to bind the socket.
      *<p>
+     * <p>
+     *  将此DatagramSocket绑定到特定的地址和端口。
+     * <p>
+     *  如果地址是{@code null},那么系统将拾取一个临时端口和一个有效的本地地址来绑定套接字。
+     * p>
+     * 
      * @param   addr The address and port to bind to.
      * @throws  SocketException if any error happens during the bind, or if the
      *          socket is already bound.
@@ -440,6 +518,25 @@ class DatagramSocket implements java.io.Closeable {
      * thrown. A socket connected to a multicast address may only be used
      * to send packets.
      *
+     * <p>
+     *  将套接字连接到此套接字的远程地址。当套接字连接到远程地址时,数据包只能发送到该地址或从该地址接收。默认情况下不连接数据报套接字。
+     * 
+     * <p>如果套接字连接到的远程目标不存在,或者以其他方式不可访问,并且如果已经为该地址接收到ICMP目的地不可达报文,则后续的发送或接收调用可能会抛出PortUnreachableException。
+     * 注意,不能保证将抛出异常。
+     * 
+     *  <p>如果安装了安全管理器,则会调用它来检查对远程地址的访问。
+     * 具体来说,如果给定的{@code address}是一个{@link InetAddress#isMulticastAddress多播地址},安全管理器的{@link java.lang.SecurityManager#checkMulticast(InetAddress)checkMulticast}
+     *  }。
+     *  <p>如果安装了安全管理器,则会调用它来检查对远程地址的访问。
+     * 否则,调用安全管理器的{@link java.lang.SecurityManager#checkConnect(String,int)checkConnect}和{@link java.lang.SecurityManager#checkAccept checkAccept}
+     * 方法,使用给定的{@code address}和{@代码端口},以验证允许分别发送和接收数据报。
+     *  <p>如果安装了安全管理器,则会调用它来检查对远程地址的访问。
+     * 
+     *  <p>当连接套接字时,{@ link #receive receive}和{@link #send send} <b>不会对传入和传出的数据包执行任何安全检查</b>,除了匹配数据包和套接字的地址和端
+     * 口。
+     * 在发送操作中,如果设置了数据包的地址,并且数据包的地址和套接字的地址不匹配,则会抛出{@code IllegalArgumentException}。连接到多播地址的套接字只能用于发送数据包。
+     * 
+     * 
      * @param address the remote address for the socket
      *
      * @param port the remote port for the socket.
@@ -468,6 +565,13 @@ class DatagramSocket implements java.io.Closeable {
      * behaves as if invoking {@link #connect(InetAddress,int) connect(InetAddress,int)}
      * with the the given socket addresses IP address and port number.
      *
+     * <p>
+     * 将此套接字连接到远程套接字地址(IP地址+端口号)。
+     * 
+     *  <p>如果给定一个{@link InetSocketAddress InetSocketAddress},此方法的行为就像调用{@link #connect(InetAddress,int)connect(InetAddress,int)}
+     * 给定的套接字地址IP地址和端口号。
+     * 
+     * 
      * @param   addr    The remote address.
      *
      * @throws  SocketException
@@ -498,6 +602,10 @@ class DatagramSocket implements java.io.Closeable {
      * Disconnects the socket. If the socket is closed or not connected,
      * then this method has no effect.
      *
+     * <p>
+     *  断开插座。如果套接字已关闭或未连接,则此方法无效。
+     * 
+     * 
      * @see #connect
      */
     public void disconnect() {
@@ -521,6 +629,12 @@ class DatagramSocket implements java.io.Closeable {
      * then this method will continue to return {@code true}
      * after the socket is closed.
      *
+     * <p>
+     *  返回套接字的绑定状态。
+     * <p>
+     *  如果套接字在{@link #close closed}之前绑定,那么在套接字关闭后,这个方法将继续返回{@code true}。
+     * 
+     * 
      * @return true if the socket successfully bound to an address
      * @since 1.4
      */
@@ -535,6 +649,12 @@ class DatagramSocket implements java.io.Closeable {
      * then this method will continue to return {@code true}
      * after the socket is closed.
      *
+     * <p>
+     *  返回套接字的连接状态。
+     * <p>
+     *  如果套接字在{@link #close closed}之前连接,那么在套接字关闭之后,这个方法将继续返回{@code true}。
+     * 
+     * 
      * @return true if the socket successfully connected to a server
      * @since 1.4
      */
@@ -550,6 +670,12 @@ class DatagramSocket implements java.io.Closeable {
      * then this method will continue to return the connected address
      * after the socket is closed.
      *
+     * <p>
+     *  返回此套接字所连接的地址。如果套接字未连接,则返回{@code null}。
+     * <p>
+     *  如果套接字在{@link #close closed}之前连接,则该方法将在套接字关闭后继续返回连接的地址。
+     * 
+     * 
      * @return the address to which this socket is connected.
      */
     public InetAddress getInetAddress() {
@@ -564,6 +690,12 @@ class DatagramSocket implements java.io.Closeable {
      * then this method will continue to return the connected port number
      * after the socket is closed.
      *
+     * <p>
+     *  返回此套接字连接到的端口号。如果套接字未连接,则返回{@code -1}。
+     * <p>
+     *  如果在{@link #close closed}之前连接了套接字,则该方法将在套接字关闭后继续返回连接的端口号。
+     * 
+     * 
      * @return the port number to which this socket is connected.
      */
     public int getPort() {
@@ -578,6 +710,12 @@ class DatagramSocket implements java.io.Closeable {
      * then this method will continue to return the connected address
      * after the socket is closed.
      *
+     * <p>
+     *  返回此套接字连接到的端点的地址,如果未连接,则返回{@code null}。
+     * <p>
+     * 如果套接字在{@link #close closed}之前连接,则该方法将在套接字关闭后继续返回连接的地址。
+     * 
+     * 
      * @return a {@code SocketAddress} representing the remote
      *         endpoint of this socket, or {@code null} if it is
      *         not connected yet.
@@ -595,6 +733,10 @@ class DatagramSocket implements java.io.Closeable {
     /**
      * Returns the address of the endpoint this socket is bound to.
      *
+     * <p>
+     *  返回此套接字绑定到的端点的地址。
+     * 
+     * 
      * @return a {@code SocketAddress} representing the local endpoint of this
      *         socket, or {@code null} if it is closed or not bound yet.
      * @see #getLocalAddress()
@@ -630,6 +772,16 @@ class DatagramSocket implements java.io.Closeable {
      * {@code p.getPort()}. Each call to a security manager method
      * could result in a SecurityException if the operation is not allowed.
      *
+     * <p>
+     *  从此套接字发送数据包。 {@code DatagramPacket}包括指示要发送的数据,其长度,远程主机的IP地址和远程主机上的端口号的信息。
+     * 
+     *  <p>如果有安全管理器,并且套接字当前未连接到远程地址,则此方法首先执行一些安全检查。首先,如果{@code p.getAddress()。
+     * isMulticastAddress()}为true,则此方法调用安全管理器的{@code checkMulticast}方法,并使用{@code p.getAddress()}作为其参数。
+     * 如果该表达式的计算结果为假,则此方法将调用带有参数{@code p.getAddress()。
+     * getHostAddress()}和{@code p.getPort()}的安全管理器的{@code checkConnect}方法。
+     * 如果不允许操作,则对安全管理器方法的每次调用都可能导致SecurityException。
+     * 
+     * 
      * @param      p   the {@code DatagramPacket} to be sent.
      *
      * @exception  IOException  if an I/O error occurs.
@@ -709,6 +861,14 @@ class DatagramSocket implements java.io.Closeable {
      * security manager's {@code checkAccept} method
      * does not allow it.
      *
+     * <p>
+     *  从此套接字接收数据包。当这个方法返回时,{@code DatagramPacket}的缓冲区被接收的数据填充。数据包还包含发件人的IP地址和发件人计算机上的端口号。
+     * <p>
+     * 此方法阻塞,直到接收到数据报。数据包分组对象的{@code length}字段包含接收到的消息的长度。如果消息长度大于包的长度,则消息将被截断。
+     * <p>
+     *  如果有安全管理器,如果安全管理器的{@code checkAccept}方法不允许,则无法接收数据包。
+     * 
+     * 
      * @param      p   the {@code DatagramPacket} into which to place
      *                 the incoming data.
      * @exception  IOException  if an I/O error occurs.
@@ -834,6 +994,12 @@ class DatagramSocket implements java.io.Closeable {
      * with the host address and {@code -1}
      * as its arguments to see if the operation is allowed.
      *
+     * <p>
+     *  获取套接字绑定到的本地地址。
+     * 
+     *  <p>如果有安全管理器,则首先使用主机地址和{@code -1}作为其参数调用其{@code checkConnect}方法,以查看是否允许操作。
+     * 
+     * 
      * @see SecurityManager#checkConnect
      * @return  the local address to which the socket is bound,
      *          {@code null} if the socket is closed, or
@@ -867,6 +1033,10 @@ class DatagramSocket implements java.io.Closeable {
      * Returns the port number on the local host to which this socket
      * is bound.
      *
+     * <p>
+     *  返回此套接字绑定到的本地主机上的端口号。
+     * 
+     * 
      * @return  the port number on the local host to which this socket is bound,
                 {@code -1} if the socket is closed, or
                 {@code 0} if it is not bound yet.
@@ -891,6 +1061,12 @@ class DatagramSocket implements java.io.Closeable {
      *  timeout must be {@code > 0}.
      *  A timeout of zero is interpreted as an infinite timeout.
      *
+     * <p>
+     *  毫秒。使用此选项设置为非零超时,对此DatagramSocket的receive()的调用将仅阻塞此时间量。
+     * 如果超时到期,则会引发一个<B> java.net.SocketTimeoutException </B>,但DatagramSocket仍然有效。
+     * 必须先启用选项<B> </B>,然后才能进入阻止操作才能生效。超时必须为{@code> 0}。超时为零被解释为无限超时。
+     * 
+     * 
      * @param timeout the specified timeout in milliseconds.
      * @throws SocketException if there is an error in the underlying protocol, such as an UDP error.
      * @since   JDK1.1
@@ -906,6 +1082,10 @@ class DatagramSocket implements java.io.Closeable {
      * Retrieve setting for SO_TIMEOUT.  0 returns implies that the
      * option is disabled (i.e., timeout of infinity).
      *
+     * <p>
+     *  检索SO_TIMEOUT的设置。 0返回意味着该选项被禁用(即,无限超时)。
+     * 
+     * 
      * @return the setting for SO_TIMEOUT
      * @throws SocketException if there is an error in the underlying protocol, such as an UDP error.
      * @since   JDK1.1
@@ -945,6 +1125,17 @@ class DatagramSocket implements java.io.Closeable {
      * of SO_SNDBUF then it is implementation specific if the
      * packet is sent or discarded.
      *
+     * <p>
+     * 将SO_SNDBUF选项设置为此{@code DatagramSocket}的指定值。网络实现使用SO_SNDBUF选项作为底层网络I / O缓冲区大小的提示。
+     *  SO_SNDBUF设置也可以由网络实现使用以确定可以在该套接字上发送的分组的最大大小。
+     * <p>
+     *  由于SO_SNDBUF是一个提示,要验证缓冲区大小的应用程序应调用{@link #getSendBufferSize()}。
+     * <p>
+     *  当发送速率高时,增加缓冲器大小可以允许网络实现对多个输出分组进行排队。
+     * <p>
+     *  注意：如果{@link #send(DatagramPacket)}用于发送大于SO_SNDBUF设置的{@code DatagramPacket},那么如果发送或丢弃该数据包,则它是实现特定的。
+     * 
+     * 
      * @param size the size to which to set the send buffer
      * size. This value must be greater than 0.
      *
@@ -968,6 +1159,10 @@ class DatagramSocket implements java.io.Closeable {
      * Get value of the SO_SNDBUF option for this {@code DatagramSocket}, that is the
      * buffer size used by the platform for output on this {@code DatagramSocket}.
      *
+     * <p>
+     *  为此{@code DatagramSocket}获取SO_SNDBUF选项的值,这是平台用于在此{@code DatagramSocket}上输出的缓冲区大小。
+     * 
+     * 
      * @return the value of the SO_SNDBUF option for this {@code DatagramSocket}
      * @exception SocketException if there is an error in
      * the underlying protocol, such as an UDP error.
@@ -1003,6 +1198,17 @@ class DatagramSocket implements java.io.Closeable {
      * Note: It is implementation specific if a packet larger
      * than SO_RCVBUF can be received.
      *
+     * <p>
+     *  将SO_RCVBUF选项设置为此{@code DatagramSocket}的指定值。网络实现使用SO_RCVBUF选项作为底层网络I / O缓冲区大小的提示。
+     *  SO_RCVBUF设置也可以由网络实现使用以确定可以在该套接字上接收的分组的最大大小。
+     * <p>
+     *  因为SO_RCVBUF是一个提示,所以要验证缓冲区大小设置的应用程序应调用{@link #getReceiveBufferSize()}。
+     * <p>
+     * 增加SO_RCVBUF可以允许网络实现在分组到达比使用{@link #receive(DatagramPacket)}接收时更快地缓冲多个分组。
+     * <p>
+     *  注意：如果可以接收到大于SO_RCVBUF的数据包,则它是实现特定的。
+     * 
+     * 
      * @param size the size to which to set the receive buffer
      * size. This value must be greater than 0.
      *
@@ -1026,6 +1232,10 @@ class DatagramSocket implements java.io.Closeable {
      * Get value of the SO_RCVBUF option for this {@code DatagramSocket}, that is the
      * buffer size used by the platform for input on this {@code DatagramSocket}.
      *
+     * <p>
+     *  获取此{@code DatagramSocket}的SO_RCVBUF选项的值,这是平台用于在此{@code DatagramSocket}上输入的缓冲区大小。
+     * 
+     * 
      * @return the value of the SO_RCVBUF option for this {@code DatagramSocket}
      * @exception SocketException if there is an error in the underlying protocol, such as an UDP error.
      * @see #setReceiveBufferSize(int)
@@ -1066,6 +1276,21 @@ class DatagramSocket implements java.io.Closeable {
      * disabled after a socket is bound (See {@link #isBound()})
      * is not defined.
      *
+     * <p>
+     *  启用/禁用SO_REUSEADDR套接字选项。
+     * <p>
+     *  对于UDP套接字,可能需要将多个套接字绑定到同一个套接字地址。这通常用于接收多播数据包的目的(参见{@link java.net.MulticastSocket})。
+     * 如果{@code SO_REUSEADDR}套接字选项在使用{@link #bind(SocketAddress)}绑定套接字之前启用,{@code SO_REUSEADDR}套接字选项允许多个套接字绑
+     * 定到同一套接字地址。
+     *  对于UDP套接字,可能需要将多个套接字绑定到同一个套接字地址。这通常用于接收多播数据包的目的(参见{@link java.net.MulticastSocket})。
+     * <p>
+     *  注意：所有现有平台都不支持此功能,因此,此选项是否将被忽略是实现特定的。但是,如果不支持,{@link #getReuseAddress()}将总是返回{@code false}。
+     * <p>
+     *  当创建{@code DatagramSocket}时,将禁用{@code SO_REUSEADDR}的初始设置。
+     * <p>
+     *  在绑定套接字后启用或禁用{@code SO_REUSEADDR}时的行为(请参阅{@link #isBound()})未定义。
+     * 
+     * 
      * @param on  whether to enable or disable the
      * @exception SocketException if an error occurs enabling or
      *            disabling the {@code SO_RESUEADDR} socket option,
@@ -1089,6 +1314,10 @@ class DatagramSocket implements java.io.Closeable {
     /**
      * Tests if SO_REUSEADDR is enabled.
      *
+     * <p>
+     *  测试是否启用SO_REUSEADDR。
+     * 
+     * 
      * @return a {@code boolean} indicating whether or not SO_REUSEADDR is enabled.
      * @exception SocketException if there is an error
      * in the underlying protocol, such as an UDP error.
@@ -1109,6 +1338,12 @@ class DatagramSocket implements java.io.Closeable {
      * started with implementation specific privileges to enable this option or
      * send broadcast datagrams.
      *
+     * <p>
+     *  启用/停用SO_BROADCAST。
+     * 
+     * <p>某些操作系统可能需要使用实施特定的权限启动Java虚拟机才能启用此选项或发送广播数据报。
+     * 
+     * 
      * @param  on
      *         whether or not to have broadcast turned on.
      *
@@ -1127,6 +1362,10 @@ class DatagramSocket implements java.io.Closeable {
 
     /**
      * Tests if SO_BROADCAST is enabled.
+     * <p>
+     *  测试是否启用SO_BROADCAST。
+     * 
+     * 
      * @return a {@code boolean} indicating whether or not SO_BROADCAST is enabled.
      * @exception SocketException if there is an error
      * in the underlying protocol, such as an UDP error.
@@ -1170,6 +1409,23 @@ class DatagramSocket implements java.io.Closeable {
      * for Internet Protocol v6 {@code tc} is the value that
      * would be placed into the sin6_flowinfo field of the IP header.
      *
+     * <p>
+     *  在从此DatagramSocket发送的数据报的IP数据报头中设置流量类或服务类型八位字节。由于底层网络实现可能忽略这个值,应用程序应该考虑一个提示。
+     * 
+     *  <p> tc <B>必须</b>在{@code 0 <= tc <= 255}的范围内,否则将抛出IllegalArgumentException。
+     *  <p>注意：<p>对于因特网协议v4,值由{@code integer}组成,其最低有效位表示套接字发送的IP包中TOS八位位组的值。 RFC 1349定义TOS值如下：。
+     * 
+     * <UL>
+     *  <LI> <CODE> IPTOS_LOWCOST(0x02)</CODE> </LI> <LI> <CODE> IPTOS_RELIABILITY(0x04)</CODE> </LI> <LI> <CODE>
+     *  IPTOS_THROUGHPUT </LI> <LI> <CODE> IPTOS_LOWDELAY(0x10)</CODE> </LI>。
+     * </UL>
+     *  最后的低阶位总是被忽略,因为这对应于MBZ(必须为零)位。
+     * <p>
+     *  设置优先级字段中的位可能导致SocketException,表示不允许操作。
+     * <p>
+     *  for Internet Protocol v6 {@code tc}是要放入IP头的sin6_flowinfo字段的值。
+     * 
+     * 
      * @param tc        an {@code int} value for the bitset.
      * @throws SocketException if there is an error setting the
      * traffic class or type-of-service
@@ -1195,6 +1451,13 @@ class DatagramSocket implements java.io.Closeable {
      * set using the {@link #setTrafficClass(int)} method on this
      * DatagramSocket.
      *
+     * <p>
+     *  在从此DatagramSocket发送的数据包的IP数据报头中获取流量类或服务类型。
+     * <p>
+     * 由于底层网络实现可以使用{@link #setTrafficClass(int)}忽略流量类或服务类型集合,该方法可能返回不同于使用{@link #setTrafficClass(int)}方法设置的值
+     * 在这个DatagramSocket。
+     * 
+     * 
      * @return the traffic class or type-of-service already set
      * @throws SocketException if there is an error obtaining the
      * traffic class or type-of-service value.
@@ -1218,6 +1481,15 @@ class DatagramSocket implements java.io.Closeable {
      *
      * @revised 1.4
      * @spec JSR-51
+     * <p>
+     *  关闭此数据报套接字。
+     * <p>
+     *  目前在{@link #receive}中封锁此套接字的任何主题都会抛出{@link SocketException}。
+     * 
+     *  <p>如果此套接字具有相关联的频道,则频道也会关闭。
+     * 
+     *  @revised 1.4 @spec JSR-51
+     * 
      */
     public void close() {
         synchronized(closeLock) {
@@ -1231,6 +1503,10 @@ class DatagramSocket implements java.io.Closeable {
     /**
      * Returns whether the socket is closed or not.
      *
+     * <p>
+     *  返回套接字是否关闭。
+     * 
+     * 
      * @return true if the socket has been closed
      * @since 1.4
      */
@@ -1248,6 +1524,13 @@ class DatagramSocket implements java.io.Closeable {
      * itself was created via the {@link java.nio.channels.DatagramChannel#open
      * DatagramChannel.open} method.
      *
+     * <p>
+     *  返回与此数据报套接字相关联的唯一{@link java.nio.channels.DatagramChannel}对象(如果有)。
+     * 
+     *  <p>如果且仅当通道本身是通过{@link java.nio.channels.DatagramChannel#open DatagramChannel.open}方法创建的,数据报套接字将具有一个通
+     * 道。
+     * 
+     * 
      * @return  the datagram channel associated with this datagram socket,
      *          or {@code null} if this socket was not created for a channel
      *
@@ -1260,6 +1543,9 @@ class DatagramSocket implements java.io.Closeable {
 
     /**
      * User defined factory for all datagram sockets.
+     * <p>
+     *  用户为所有数据报套接字定义工厂。
+     * 
      */
     static DatagramSocketImplFactory factory;
 
@@ -1279,6 +1565,12 @@ class DatagramSocket implements java.io.Closeable {
      * to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  设置应用程序的数据报套接字实现工厂。工厂只能指定一次。
+     * <p>
+     *  当应用程序创建一个新的数据报套接字时,将调用套接字实现工厂的{@code createDatagramSocketImpl}方法来创建实际的数据报套接字实现。
+     * <p>
+     * 
      * @param      fac   the desired factory.
      * @exception  IOException  if an I/O error occurs when setting the
      *              datagram socket factory.

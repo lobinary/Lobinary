@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,10 @@
  * Written by Doug Lea and Martin Buchholz with assistance from members of
  * JCP JSR-166 Expert Group and released to the public domain, as explained
  * at http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea和Martin Buchholz在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/z
+ * ero/1.0/。
+ * 
  */
 
 package java.util.concurrent;
@@ -84,6 +89,28 @@ import java.util.function.Consumer;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  基于链接节点的无限并发{@linkplain Deque deque}。并发插入,删除和访问操作在多个线程间安全执行。
+ * 当许多线程共享对公共集合的访问时,{@code ConcurrentLinkedDeque}是一个适当的选择。像大多数其他并发集合实现一样,此类不允许使用{@code null}元素。
+ * 
+ *  <p>迭代器和分割器为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+ * 
+ *  <p>请注意,与大多数集合不同,{@code size}方法是<em>不是</em>恒定时间操作。
+ * 由于这些deques的异步性质,确定元素的当前数量需要遍历元素,因此如果在遍历期间修改该集合,则可以报告不准确的结果。
+ * 此外,批量操作{@code addAll},{@code removeAll},{@code retainAll},{@code containsAll},{@code equals}和{@code toArray}
+ * 不是<em> </em>保证以原子方式执行。
+ * 由于这些deques的异步性质,确定元素的当前数量需要遍历元素,因此如果在遍历期间修改该集合,则可以报告不准确的结果。例如,与{@code addAll}操作同时运行的迭代器可能只查看一些添加的元素。
+ * 
+ * <p>此类及其迭代器实现{@link Deque}和{@link Iterator}接口的所有<em>可选</em>方法。
+ * 
+ *  <p>内存一致性效果：与其他并发集合一样,在将对象置于{@code ConcurrentLinkedDeque} <a href="package-summary.html#MemoryVisibility">
+ *  <i>发生之前< / i> </a>从另一个线程中的{@code ConcurrentLinkedDeque}中访问或删除该元素后的操作。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @since 1.7
  * @author Doug Lea
  * @author Martin Buchholz
@@ -242,6 +269,74 @@ public class ConcurrentLinkedDeque<E>
      * Empirically, microbenchmarks suggest that this class adds about
      * 40% overhead relative to ConcurrentLinkedQueue, which feels as
      * good as we can hope for.
+     * <p>
+     *  这是一个并发的无锁定deque支持内部的实现删除但不是内部插入,如支持整个Deque接口所需。
+     * 
+     *  我们扩展为ConcurrentLinkedQueue和LinkedTransferQueue开发的技术(参见这些类的内部文档)。
+     * 理解ConcurrentLinkedQueue实现是理解此类的实现的先决条件。
+     * 
+     *  数据结构是对称的双重链接的"GC鲁棒"节点链表。我们使用两种技术最小化易失性写入的数量：使用单个CAS提前多个跳跃,并混合相同存储器位置的易失性和非易失性写入。
+     * 
+     *  节点包含期望的E("项")和到前趋节点("prev")和后继节点("下一个")的链接：
+     * 
+     *  class Node <E> {volatile Node <E> prev,next;挥发性E项; }}
+     * 
+     * 如果节点p包含非空项(p.item！= null),则节点p被认为是"活的"。当项目CASed为null时,该项目从逻辑上从集合中删除。
+     * 
+     *  在任何时候,正好有一个"第一"节点具有空前一引用,其终止从现场节点开始的任何prev引用链。类似地,恰好有一个"最后"节点终止从活动节点开始的任何下一引用链。
+     *  "第一"和"最后"节点可以是或可以不是活的。 "第一"和"最后"节点总是相互可达的。
+     * 
+     *  通过将第一个或最后一个节点中的null prev或next reference引用到包含该元素的新节点,以原子方式添加一个新元素。元素的节点在该点处原子地变为"活"。
+     * 
+     *  如果节点是活动节点或第一个或最后一个节点,则认为该节点是"活动的"。活动节点无法取消链接。
+     * 
+     *  "自链接"是下一个或上一个引用,它是同一个节点：p.prev == p或p.next == p自链接在节点取消链接过程中使用。活动节点从不具有自链接。
+     * 
+     *  当且仅当以下情况下,节点p才是活动的：
+     * 
+     *  p.item！= null || (p.prev == null && p.next！= p)|| (p.next == null && p.prev！= p)
+     * 
+     * deque对象有两个节点引用,"head"和"tail"。头部和尾部仅是对数据流的第一个和最后一个节点的近似。第一个节点总是可以通过从头开始的prev指针找到;同样为尾。
+     * 然而,允许头部和尾部指代已经被解除链接的被删除的节点,因此可能不能从任何活动节点到达。
+     * 
+     *  有3个阶段的节点删除; "逻辑删除","解除链接"和"gc解除链接"。
+     * 
+     *  1.通过CASing项到null的"逻辑删除"原子地从集合中移除该元素,并且使得包含节点有资格解除链接。
+     * 
+     *  2."取消链接"使得已删除的节点不能从活动节点访问,因此最终可由GC回收。未链接的节点可以无限期地从迭代器可达。
+     * 
+     *  物理节点解链仅仅是优化(虽然是关键的),并且因此可以在我们的方便时执行。
+     * 在任何时候,由prev和下一个链路维护的活节点集合是相同的,即,通过来自第一节点的下一链路找到的活节点等于通过来自最后节点的prev链路找到的元素。
+     * 然而,对于已经被逻辑删除的节点,这不是真的 - 这样的节点只能在一个方向上可达。
+     * 
+     * 3."gc-unlinking"通过使活动节点不能从被删除的节点访问而进一步取消链接,使得GC更容易回收未来被删除的节点。
+     * 这个步骤使得数据结构"gc-robust",如Boehm首先详细描述的(http://portal.acm.org/citation.cfm?doid=503272.503282)。
+     * 
+     *  GC-非链接节点可以保持从迭代器无限地可达,但是与未链接的节点不同,从头或尾不可到达。
+     * 
+     *  使数据结构GC-稳健将消除使用保守GC的无限内存保留的风险,并且可能提高代数GC的性能。
+     * 
+     * 当节点在任一端出队时,例如。通过poll(),我们想打破从节点到活动节点的任何引用。我们进一步开发在其他并发集合类中非常有效的自链接的使用。
+     * 这个想法是用特殊值替换prev和next指针,这些值被解释为意味着一个列表在一端。这些是近似值,但足够好保留我们想要的在我们的遍历,例如。
+     * 我们保证遍历不会访问同一个元素两次,但是我们不保证在元素排队之后,遍历元素能否看到更多的元素。安全地执行gc-unlinking是特别棘手的,因为任何节点都可以无限期地使用(例如通过迭代器)。
+     * 我们必须确保由head / tail指向的节点不会得到gc-unlinked,因为head / tail需要被gc-unlinked的其他节点"回到轨道上"。
+     *  gc-unlinking解释了大部分的实现复杂性。
+     * 
+     *  由于为了正确性不需要解链和gc解链,所以关于这些操作的频率(渴望)有许多实现选择。由于易失性读取可能比CASes便宜得多,通过一次解开多个相邻节点来保存CASes可能是一个胜利。
+     *  gc解链接可以很少执行并且仍然有效,因为最重要的是删除节点的长链偶尔被破坏。
+     * 
+     * 我们使用的实际表示是p.next == p意味着转到第一个节点(依次是通过从头开始的prev指针到达)和p.next == null && p.prev == p意味着迭代结束,并且p是(静态最终)虚节
+     * 点NEXT_TERMINATOR,而不是最后一个活动节点。
+     * 完成迭代时遇到这样的TERMINATOR对于只读遍历是足够好的,所以这样的遍历可以使用p.next == null作为终止条件。
+     * 当我们需要找到最后一个(活动)节点时,为了使一个新节点排队,我们需要检查我们是否已经到达一个TERMINATOR节点;如果是,从尾部重新启动遍历。
+     * 
+     *  该实现是完全方向对称的,除了大多数公共方法迭代通过列表遵循下一个指针("前进"方向)。
+     * 
+     *  我们相信(没有充分证明)所有单元素deque操作(例如addFirst,peekLast,pollLast)都是线性的(见Herlihy和Shavit的书)。然而,已知一些操作的组合不是线性化的。
+     * 特别地,当addFirst(A)与pollFirst()竞争去除B时,观察者迭代元素观察A B C并随后观察A C是可能的,即使没有执行内部去除。然而,迭代器行为合理,提供"弱一致"保证。
+     * 
+     * 经验上,微基准表明,这个类增加了大约40％的开销相对于ConcurrentLinkedQueue,这感觉好,我们可以希望。
+     * 
      */
 
     private static final long serialVersionUID = 876323262645176354L;
@@ -258,6 +353,12 @@ public class ConcurrentLinkedDeque<E>
      * Non-invariants:
      * - head.item may or may not be null
      * - head may not be reachable from the first or last node, or from tail
+     * <p>
+     *  在O(1)时间中可以到达从其列出第一节点(即,具有p.prev == null && p.next！= p的唯一节点p)的节点。
+     * 不变量： - 第一个节点总是O(1)从头通过prev链路到达 - 所有活节点通过succ() -  head！= null  - (tmp = head).next！= tmp | tmp！= head
+     * -head永远不会gc-unlinked(但是可能是未链接的)non-invariants： -  head.item可能或可能不为null  - 头可能无法从第一个或最后一个节点或从tail。
+     *  在O(1)时间中可以到达从其列出第一节点(即,具有p.prev == null && p.next！= p的唯一节点p)的节点。
+     * 
      */
     private transient volatile Node<E> head;
 
@@ -272,6 +373,12 @@ public class ConcurrentLinkedDeque<E>
      * Non-invariants:
      * - tail.item may or may not be null
      * - tail may not be reachable from the first or last node, or from head
+     * <p>
+     *  在O(1)时间中可以到达从其上的最后一个节点(即,具有p.next == null && p.prev！= p的唯一节点p)的节点。
+     * 不变量： - 最后一个节点总是O(1)从尾部到达通过下一个链接 - 所有活节点通过pred()从最后一个节点可达 -  tail！= null  -  tail永远不会gc-unlinked非不变性： 
+     * -  tail.item可以是也可以不是null  - 尾可能不能从第一个或最后一个节点或从头部。
+     *  在O(1)时间中可以到达从其上的最后一个节点(即,具有p.next == null && p.prev！= p的唯一节点p)的节点。
+     * 
      */
     private transient volatile Node<E> tail;
 
@@ -298,6 +405,9 @@ public class ConcurrentLinkedDeque<E>
         /**
          * Constructs a new node.  Uses relaxed write because item can
          * only be seen after publication via casNext or casPrev.
+         * <p>
+         *  构造一个新节点。使用轻松写,因为项目只能通过casNext或casPrev发布后才能看到。
+         * 
          */
         Node(E item) {
             UNSAFE.putObject(this, itemOffset, item);
@@ -348,6 +458,9 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Links e as first element.
+     * <p>
+     *  链接e作为第一个元素。
+     * 
      */
     private void linkFirst(E e) {
         checkNotNull(e);
@@ -381,6 +494,9 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Links e as last element.
+     * <p>
+     *  链接e作为最后一个元素。
+     * 
      */
     private void linkLast(E e) {
         checkNotNull(e);
@@ -416,6 +532,9 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Unlinks non-null node x.
+     * <p>
+     *  取消链接非空节点x。
+     * 
      */
     void unlink(Node<E> x) {
         // assert x != null;
@@ -527,6 +646,9 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Unlinks non-null first node.
+     * <p>
+     *  取消链接非空的第一个节点。
+     * 
      */
     private void unlinkFirst(Node<E> first, Node<E> next) {
         // assert first != null;
@@ -561,6 +683,9 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Unlinks non-null last node.
+     * <p>
+     *  取消链接非空的最后一个节点。
+     * 
      */
     private void unlinkLast(Node<E> last, Node<E> prev) {
         // assert last != null;
@@ -598,6 +723,9 @@ public class ConcurrentLinkedDeque<E>
      * this method will be unreachable from head after it returns.
      * Does not guarantee to eliminate slack, only that head will
      * point to a node that was active while this method was running.
+     * <p>
+     * 保证在调用此方法之前取消链接的任何节点在返回后将无法从头部访问。不保证消除松弛,只有那个头部将指向在此方法运行时处于活动状态的节点。
+     * 
      */
     private final void updateHead() {
         // Either head already points to an active node, or we keep
@@ -628,6 +756,9 @@ public class ConcurrentLinkedDeque<E>
      * this method will be unreachable from tail after it returns.
      * Does not guarantee to eliminate slack, only that tail will
      * point to a node that was active while this method was running.
+     * <p>
+     *  保证在调用此方法之前取消链接的任何节点在返回后将无法从尾部访问。不保证消除松弛,只有那个尾部将指向在此方法运行时处于活动状态的节点。
+     * 
      */
     private final void updateTail() {
         // Either tail already points to an active node, or we keep
@@ -719,6 +850,9 @@ public class ConcurrentLinkedDeque<E>
      * Returns the successor of p, or the first node if p.next has been
      * linked to self, which will only be true if traversing with a
      * stale pointer that is now off the list.
+     * <p>
+     *  返回p的后继者,或者如果p.next已经链接到self,那么只有当使用现在处于列表中的陈旧指针进行遍历时,才会返回第一个节点。
+     * 
      */
     final Node<E> succ(Node<E> p) {
         // TODO: should we skip deleted nodes here?
@@ -730,6 +864,9 @@ public class ConcurrentLinkedDeque<E>
      * Returns the predecessor of p, or the last node if p.prev has been
      * linked to self, which will only be true if traversing with a
      * stale pointer that is now off the list.
+     * <p>
+     *  返回p的前导,或者p.prev已经链接到self的最后一个节点,如果使用现在离开列表的过时指针进行遍历,则返回true。
+     * 
      */
     final Node<E> pred(Node<E> p) {
         Node<E> q = p.prev;
@@ -741,6 +878,9 @@ public class ConcurrentLinkedDeque<E>
      *     p.prev == null && p.next != p
      * The returned node may or may not be logically deleted.
      * Guarantees that head is set to the returned node.
+     * <p>
+     *  返回第一个节点,唯一节点p,为此：p.prev == null && p.next！= p返回的节点可能会也可能不会被逻辑删除。保证head设置为返回的节点。
+     * 
      */
     Node<E> first() {
         restartFromHead:
@@ -766,6 +906,9 @@ public class ConcurrentLinkedDeque<E>
      *     p.next == null && p.prev != p
      * The returned node may or may not be logically deleted.
      * Guarantees that tail is set to the returned node.
+     * <p>
+     *  返回最后一个节点,唯一节点p,对于这个节点p：p.next == null && p.prev！= p返回的节点可能会也可能不会被逻辑删除。保证tail设置为返回的节点。
+     * 
      */
     Node<E> last() {
         restartFromTail:
@@ -791,6 +934,10 @@ public class ConcurrentLinkedDeque<E>
     /**
      * Throws NullPointerException if argument is null.
      *
+     * <p>
+     *  如果参数为null,则抛出NullPointerException。
+     * 
+     * 
      * @param v the element
      */
     private static void checkNotNull(Object v) {
@@ -802,6 +949,10 @@ public class ConcurrentLinkedDeque<E>
      * Returns element unless it is null, in which case throws
      * NoSuchElementException.
      *
+     * <p>
+     *  返回元素,除非它是null,在这种情况下抛出NoSuchElementException。
+     * 
+     * 
      * @param v the element
      * @return the element
      */
@@ -815,6 +966,10 @@ public class ConcurrentLinkedDeque<E>
      * Creates an array list and fills it with elements of this list.
      * Used by toArray.
      *
+     * <p>
+     *  创建一个数组列表,并用该列表的元素填充它。用于toArray。
+     * 
+     * 
      * @return the array list
      */
     private ArrayList<E> toArrayList() {
@@ -829,6 +984,9 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Constructs an empty deque.
+     * <p>
+     *  构造一个空的deque。
+     * 
      */
     public ConcurrentLinkedDeque() {
         head = tail = new Node<E>(null);
@@ -839,6 +997,10 @@ public class ConcurrentLinkedDeque<E>
      * the given collection, added in traversal order of the
      * collection's iterator.
      *
+     * <p>
+     * 构造一个最初包含给定集合的元素的deque,以集合的迭代器的遍历顺序添加。
+     * 
+     * 
      * @param c the collection of elements to initially contain
      * @throws NullPointerException if the specified collection or any
      *         of its elements are null
@@ -862,6 +1024,9 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Initializes head and tail, ensuring invariants hold.
+     * <p>
+     *  初始化头和尾,确保不变量保持。
+     * 
      */
     private void initHeadTail(Node<E> h, Node<E> t) {
         if (h == t) {
@@ -884,6 +1049,10 @@ public class ConcurrentLinkedDeque<E>
      * As the deque is unbounded, this method will never throw
      * {@link IllegalStateException}.
      *
+     * <p>
+     *  在此deque的前面插入指定的元素。由于deque是无界的,这个方法不会抛出{@link IllegalStateException}。
+     * 
+     * 
      * @throws NullPointerException if the specified element is null
      */
     public void addFirst(E e) {
@@ -897,6 +1066,12 @@ public class ConcurrentLinkedDeque<E>
      *
      * <p>This method is equivalent to {@link #add}.
      *
+     * <p>
+     *  在此deque的结尾插入指定的元素。由于deque是无界的,这个方法不会抛出{@link IllegalStateException}。
+     * 
+     *  <p>此方法等效于{@link #add}。
+     * 
+     * 
      * @throws NullPointerException if the specified element is null
      */
     public void addLast(E e) {
@@ -907,6 +1082,10 @@ public class ConcurrentLinkedDeque<E>
      * Inserts the specified element at the front of this deque.
      * As the deque is unbounded, this method will never return {@code false}.
      *
+     * <p>
+     *  在此deque的前面插入指定的元素。由于deque是无界的,这个方法永远不会返回{@code false}。
+     * 
+     * 
      * @return {@code true} (as specified by {@link Deque#offerFirst})
      * @throws NullPointerException if the specified element is null
      */
@@ -921,6 +1100,12 @@ public class ConcurrentLinkedDeque<E>
      *
      * <p>This method is equivalent to {@link #add}.
      *
+     * <p>
+     *  在此deque的结尾插入指定的元素。由于deque是无界的,这个方法永远不会返回{@code false}。
+     * 
+     *  <p>此方法等效于{@link #add}。
+     * 
+     * 
      * @return {@code true} (as specified by {@link Deque#offerLast})
      * @throws NullPointerException if the specified element is null
      */
@@ -948,6 +1133,8 @@ public class ConcurrentLinkedDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E getFirst() {
@@ -955,6 +1142,8 @@ public class ConcurrentLinkedDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E getLast() {
@@ -984,6 +1173,8 @@ public class ConcurrentLinkedDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E removeFirst() {
@@ -991,6 +1182,8 @@ public class ConcurrentLinkedDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E removeLast() {
@@ -1003,6 +1196,10 @@ public class ConcurrentLinkedDeque<E>
      * Inserts the specified element at the tail of this deque.
      * As the deque is unbounded, this method will never return {@code false}.
      *
+     * <p>
+     *  在此deque的尾部插入指定的元素。由于deque是无界的,这个方法永远不会返回{@code false}。
+     * 
+     * 
      * @return {@code true} (as specified by {@link Queue#offer})
      * @throws NullPointerException if the specified element is null
      */
@@ -1015,6 +1212,10 @@ public class ConcurrentLinkedDeque<E>
      * As the deque is unbounded, this method will never throw
      * {@link IllegalStateException} or return {@code false}.
      *
+     * <p>
+     *  在此deque的尾部插入指定的元素。由于deque是无界的,这个方法不会抛出{@link IllegalStateException}或返回{@code false}。
+     * 
+     * 
      * @return {@code true} (as specified by {@link Collection#add})
      * @throws NullPointerException if the specified element is null
      */
@@ -1026,21 +1227,29 @@ public class ConcurrentLinkedDeque<E>
     public E peek()           { return peekFirst(); }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E remove()         { return removeFirst(); }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E pop()            { return removeFirst(); }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E element()        { return getFirst(); }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      */
     public void push(E e)     { addFirst(e); }
@@ -1050,6 +1259,10 @@ public class ConcurrentLinkedDeque<E>
      * {@code o.equals(e)}, if such an element exists in this deque.
      * If the deque does not contain the element, it is unchanged.
      *
+     * <p>
+     *  删除第一个元素{@code e},使得{@code o.equals(e)},如果这样的元素存在于此deque中。如果deque不包含元素,它不会改变。
+     * 
+     * 
      * @param o element to be removed from this deque, if present
      * @return {@code true} if the deque contained the specified element
      * @throws NullPointerException if the specified element is null
@@ -1071,6 +1284,10 @@ public class ConcurrentLinkedDeque<E>
      * {@code o.equals(e)}, if such an element exists in this deque.
      * If the deque does not contain the element, it is unchanged.
      *
+     * <p>
+     *  删除最后一个元素{@code e},使得{@code o.equals(e)},如果这样的元素存在于此deque中。如果deque不包含元素,它不会改变。
+     * 
+     * 
      * @param o element to be removed from this deque, if present
      * @return {@code true} if the deque contained the specified element
      * @throws NullPointerException if the specified element is null
@@ -1091,6 +1308,10 @@ public class ConcurrentLinkedDeque<E>
      * Returns {@code true} if this deque contains at least one
      * element {@code e} such that {@code o.equals(e)}.
      *
+     * <p>
+     * 如果此deque包含至少一个{@code e}元素{@code o.equals(e)},则返回{@code true}。
+     * 
+     * 
      * @param o element whose presence in this deque is to be tested
      * @return {@code true} if this deque contains the specified element
      */
@@ -1107,6 +1328,10 @@ public class ConcurrentLinkedDeque<E>
     /**
      * Returns {@code true} if this collection contains no elements.
      *
+     * <p>
+     *  如果此集合不包含元素,则返回{@code true}。
+     * 
+     * 
      * @return {@code true} if this collection contains no elements
      */
     public boolean isEmpty() {
@@ -1127,6 +1352,13 @@ public class ConcurrentLinkedDeque<E>
      * will be inaccurate. Thus, this method is typically not very
      * useful in concurrent applications.
      *
+     * <p>
+     *  返回此deque中的元素数。如果此deque包含的元素超过{@code Integer.MAX_VALUE}个元素,则会返回{@code Integer.MAX_VALUE}。
+     * 
+     *  <p>请注意,与大多数集合不同,此方法是<em>不是</em>恒定时操作。由于这些deques的异步性质,确定当前元素数量需要遍历它们以对它们进行计数。
+     * 此外,在执行此方法期间大小可能会更改,在这种情况下返回的结果将不准确。因此,此方法通常在并发应用程序中不是非常有用。
+     * 
+     * 
      * @return the number of elements in this deque
      */
     public int size() {
@@ -1144,6 +1376,10 @@ public class ConcurrentLinkedDeque<E>
      * {@code o.equals(e)}, if such an element exists in this deque.
      * If the deque does not contain the element, it is unchanged.
      *
+     * <p>
+     *  删除第一个元素{@code e},使得{@code o.equals(e)},如果这样的元素存在于此deque中。如果deque不包含元素,它不会改变。
+     * 
+     * 
      * @param o element to be removed from this deque, if present
      * @return {@code true} if the deque contained the specified element
      * @throws NullPointerException if the specified element is null
@@ -1158,6 +1394,11 @@ public class ConcurrentLinkedDeque<E>
      * collection's iterator.  Attempts to {@code addAll} of a deque to
      * itself result in {@code IllegalArgumentException}.
      *
+     * <p>
+     *  将指定集合中的所有元素以指定集合的​​迭代器返回的顺序追加到此deque的结尾。
+     * 尝试{@code addAll}的deque本身会导致{@code IllegalArgumentException}。
+     * 
+     * 
      * @param c the elements to be inserted into this deque
      * @return {@code true} if this deque changed as a result of the call
      * @throws NullPointerException if the specified collection or any
@@ -1218,6 +1459,9 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Removes all of the elements from this deque.
+     * <p>
+     *  从此deque中删除所有元素。
+     * 
      */
     public void clear() {
         while (pollFirst() != null)
@@ -1235,6 +1479,14 @@ public class ConcurrentLinkedDeque<E>
      * <p>This method acts as bridge between array-based and collection-based
      * APIs.
      *
+     * <p>
+     *  以适当的顺序(从第一个元素到最后一个元素)返回包含此deque中所有元素的数组。
+     * 
+     * <p>返回的数组将是"安全的",因为没有对它的引用由此deque保持。 (换句话说,这个方法必须分配一个新的数组)。因此调用者可以自由地修改返回的数组。
+     * 
+     *  <p>此方法充当基于阵列和基于集合的API之间的桥梁。
+     * 
+     * 
      * @return an array containing all of the elements in this deque
      */
     public Object[] toArray() {
@@ -1269,6 +1521,21 @@ public class ConcurrentLinkedDeque<E>
      * Note that {@code toArray(new Object[0])} is identical in function to
      * {@code toArray()}.
      *
+     * <p>
+     *  返回一个包含此deque中所有元素的数组,按正确顺序(从第一个元素到最后一个元素);返回的数组的运行时类型是指定数组的运行时类型。如果deque符合指定的数组,则返回其中。
+     * 否则,将使用指定数组的运行时类型和此deque的大小分配新数组。
+     * 
+     *  <p>如果此deque适合指定的阵列,并且有空余余地(即,数组具有的元素多于此deque),那么在deque结束之后的数组中的元素将设置为{@code null}。
+     * 
+     *  <p>与{@link #toArray()}方法类似,此方法充当基于数组和基于集合的API之间的桥梁。此外,该方法允许对输出阵列的运行时类型的精确控制,并且在某些情况下可以用于节省分配成本。
+     * 
+     *  <p>假设{@code x}是一个已知只包含字符串的deque。以下代码可用于将deque转储到新分配的{@code String}数组中：
+     * 
+     *  <pre> {@code String [] y = x.toArray(new String [0]);} </pre>
+     * 
+     *  注意,{@code toArray(new Object [0])}在功能上与{@code toArray()}是相同的。
+     * 
+     * 
      * @param a the array into which the elements of the deque are to
      *          be stored, if it is big enough; otherwise, a new array of the
      *          same runtime type is allocated for this purpose
@@ -1289,6 +1556,12 @@ public class ConcurrentLinkedDeque<E>
      * <p>The returned iterator is
      * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
      *
+     * <p>
+     * 以正确的顺序返回此deque中的元素的迭代器。元素将按从头(头)到尾(尾)的顺序返回。
+     * 
+     *  <p>返回的迭代器为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     * 
      * @return an iterator over the elements in this deque in proper sequence
      */
     public Iterator<E> iterator() {
@@ -1303,6 +1576,12 @@ public class ConcurrentLinkedDeque<E>
      * <p>The returned iterator is
      * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
      *
+     * <p>
+     *  以相反的顺序在此deque中的元素上返回一个迭代器。元素将按从最后(尾)到第一(头)的顺序返回。
+     * 
+     *  <p>返回的迭代器为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     * 
      * @return an iterator over the elements in this deque in reverse order
      */
     public Iterator<E> descendingIterator() {
@@ -1312,6 +1591,9 @@ public class ConcurrentLinkedDeque<E>
     private abstract class AbstractItr implements Iterator<E> {
         /**
          * Next node to return item for.
+         * <p>
+         *  要返回项的下一个节点。
+         * 
          */
         private Node<E> nextNode;
 
@@ -1320,12 +1602,18 @@ public class ConcurrentLinkedDeque<E>
          * that an element exists in hasNext(), we must return it in
          * the following next() call even if it was in the process of
          * being removed when hasNext() was called.
+         * <p>
+         *  nextItem保持项目字段,因为一旦我们声明hasNext()中存在一个元素,我们必须在下面的next()调用中返回它,即使它在调用hasNext()时被删除的过程中。
+         * 
          */
         private E nextItem;
 
         /**
          * Node returned by most recent call to next. Needed by remove.
          * Reset to null if this element is deleted by a call to remove.
+         * <p>
+         *  由最近一次调用返回的节点。需要删除。如果调用remove删除此元素,则重置为null。
+         * 
          */
         private Node<E> lastRet;
 
@@ -1339,6 +1627,9 @@ public class ConcurrentLinkedDeque<E>
         /**
          * Sets nextNode and nextItem to next valid node, or to null
          * if no such.
+         * <p>
+         *  将nextNode和nextItem设置为下一个有效节点,如果没有则为null。
+         * 
          */
         private void advance() {
             lastRet = nextNode;
@@ -1494,6 +1785,16 @@ public class ConcurrentLinkedDeque<E>
      * The {@code Spliterator} implements {@code trySplit} to permit limited
      * parallelism.
      *
+     * <p>
+     *  在此deque中的元素上返回一个{@link Spliterator}。
+     * 
+     *  <p>返回的分隔符为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     *  <p> {@code Spliterator}报告{@link Spliterator#CONCURRENT},{@link Spliterator#ORDERED}和{@link Spliterator#NONNULL}
+     * 。
+     * 
+     *  @implNote {@code Spliterator}实现{@code trySplit}以允许有限的并行性。
+     * 
      * @return a {@code Spliterator} over the elements in this deque
      * @since 1.8
      */
@@ -1504,6 +1805,9 @@ public class ConcurrentLinkedDeque<E>
     /**
      * Saves this deque to a stream (that is, serializes it).
      *
+     * <p>
+     * 
+     * 
      * @param s the stream
      * @throws java.io.IOException if an I/O error occurs
      * @serialData All of the elements (each an {@code E}) in
@@ -1528,6 +1832,10 @@ public class ConcurrentLinkedDeque<E>
 
     /**
      * Reconstitutes this deque from a stream (that is, deserializes it).
+     * <p>
+     *  将此deque保存到流(即,序列化它)。
+     * 
+     * 
      * @param s the stream
      * @throws ClassNotFoundException if the class of a serialized object
      *         could not be found

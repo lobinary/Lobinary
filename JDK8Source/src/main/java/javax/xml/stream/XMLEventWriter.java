@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -24,6 +25,9 @@
 
 /*
  * Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
+ * <p>
+ *  Oracle Corporation的版权所有(c)2009。版权所有。
+ * 
  */
 
 package javax.xml.stream;
@@ -39,6 +43,12 @@ import javax.xml.namespace.NamespaceContext;
  * Instances of this interface are not required to validate the
  * form of the XML.
  *
+ * <p>
+ *  这是用于编写XML文档的顶级接口。
+ * 
+ *  不需要此接口的实例来验证XML的形式。
+ * 
+ * 
  * @version 1.0
  * @author Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
  * @see XMLEventReader
@@ -53,12 +63,20 @@ public interface XMLEventWriter extends XMLEventConsumer {
 
   /**
    * Writes any cached events to the underlying output mechanism
+   * <p>
+   *  将任何缓存的事件写入底层输出机制
+   * 
+   * 
    * @throws XMLStreamException
    */
   public void flush() throws XMLStreamException;
 
   /**
    * Frees any resources associated with this stream
+   * <p>
+   *  释放与此流关联的任何资源
+   * 
+   * 
    * @throws XMLStreamException
    */
   public void close() throws XMLStreamException;
@@ -186,6 +204,49 @@ public interface XMLEventWriter extends XMLEventConsumer {
    *     </tr>
    *   </tbody>
    * </table>
+   * <p>
+   *  向输出流添加事件添加一个START_ELEMENT将打开一个新的命名空间范围,将在写入相应的END_ELEMENT时关闭。
+   * <table border="2" rules="all" cellpadding="4">
+   * <thead>
+   * <tr>
+   * <th align="center" colspan="2">
+   *  添加到编写器的事件的必填和可选字段
+   * </th>
+   * </tr>
+   * </thead>
+   * <tbody>
+   * <tr>
+   *  <th>事件类型</th> <th>必填字段</th> <th>可选字段</th> <th>必需的行为</th>
+   * </tr>
+   * <tr>
+   *  <td> START_ELEMENT </td> <td> QName名称</td> <td>命名空间,属性</td> <td> START_ELEMENT将写入XML 1.0中事件的名称,名称空间和
+   * 属性START_ELEMENT的有效语法。
+   * 该名称是通过查找命名空间uri的前缀来编写的。可以将写入程序配置为遵循QNames的前缀。如果作者尊重前缀,它必须使用QName上设置的前缀。
+   * 默认行为是在EventWriter的内部命名空间上下文中查找前缀的值。每个属性(如果有)都使用此表的属性部分中指定的行为写入。每个命名空间(如果有)都是使用此表的命名空间部分中指定的行为编写的。
+   * </td>
+   * </tr>
+   * <tr>
+   * <td> END_ELEMENT </td> <td> Qname name </td> <td>无</td> <td>写入格式良好的END_ELEMENT标记。
+   * 该名称是通过查找命名空间uri的前缀来编写的。可以将写入程序配置为遵循QNames的前缀。如果作者尊重前缀,它必须使用QName上设置的前缀。
+   * 默认行为是在EventWriter的内部命名空间上下文中查找前缀的值。如果END_ELEMENT名称与START_ELEMENT名称不匹配,则抛出XMLStreamException。
+   * </td>
+   * </tr>
+   * <tr>
+   *  <td> ATTRIBUTE </td> <td> QName名称,字符串值</td> <td> QName类型</td> <td>使用相同的算法编写属性以查找START_ELEMENT中使用的词法形
+   * 式。
+   * 默认值是使用双引号来包装属性值,并转义在值中找到的任何双引号。将忽略类型值。
+   * </td>
+   * </tr>
+   * <tr>
+   *  <td> NAMESPACE </td> <td>字符串前缀,String namespaceURI,boolean isDefaultNamespaceDeclaration
+   * </td>
+   *  <td>无</td> <td>写入命名空间声明。如果命名空间是默认命名空间声明(isDefault为true),那么将写入xmlns ="$ namespaceURI",前缀是可选的。
+   * 如果isDefault为false,则必须声明前缀,并且写入程序必须在前缀前面添加xmlns并写出标准前缀声明。
+   * </td>
+   * </tr>
+   * <tr>
+   * <td> PROCESSING_INSTRUCTION </td> <td>无</td> <td>字符串目标,字符串数据</td> <td>数据不需要存在,可以为空。目标是必需的,并且许多不能为空。
+   * 
    * @param event the event to be added
    * @throws XMLStreamException
    */
@@ -198,6 +259,29 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * perform the following loop over all the events in an
    * event reader and call add on each event.
    *
+   * <p>
+   * 写入器将直接在目标之后写入数据段,并包含在适当的XML 1.0语法中。
+   * </td>
+   * </tr>
+   * <tr>
+   *  <td> COMMENT </td> <td>无</td> <td>字符串注释</td> <td>如果注释存在(非空),则写入,否则写入空注释
+   * </td>
+   * </tr>
+   * <tr>
+   *  <td> START_DOCUMENT </td> <td>无</td> <td>字符串编码,boolean standalone,String version </td> <td> START_DO
+   * CUMENT事件不需要写入流。
+   * 如果存在,属性写在适当的XML声明语法内。
+   * </td>
+   * </tr>
+   * <tr>
+   *  <td> END_DOCUMENT </td> <td>无</td> <td>无</td> <td>没有任何内容写入输出</td>
+   * </tr>
+   * <tr>
+   *  <td> DTD </td> <td> String DocumentTypeDefinition </td> <td>无</td> <td> DocumentTypeDefinition写入输出</td>
+   * 。
+   * </tr>
+   * </tbody>
+   * 
    * @param reader the event stream to add to the output
    * @throws XMLStreamException
    */
@@ -206,6 +290,9 @@ public interface XMLEventWriter extends XMLEventConsumer {
 
   /**
    * Gets the prefix the uri is bound to
+   * <p>
+   * </table>
+   * 
    * @param uri the uri to look up
    * @throws XMLStreamException
    */
@@ -216,6 +303,10 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * in the scope of the current START_ELEMENT / END_ELEMENT pair.
    * If this method is called before a START_ELEMENT has been written
    * the prefix is bound in the root scope.
+   * <p>
+   *  将整个流添加到输出流,对输入流参数调用next(),直到hasNext()返回false这应该被视为方便的方法,将对事件读取器中的所有事件执行以下循环,并调用add事件。
+   * 
+   * 
    * @param prefix the prefix to bind to the uri
    * @param uri the uri to bind to the prefix
    * @throws XMLStreamException
@@ -228,6 +319,10 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * in the scope of the current START_ELEMENT / END_ELEMENT pair.
    * If this method is called before a START_ELEMENT has been written
    * the uri is bound in the root scope.
+   * <p>
+   *  获取uri绑定的前缀
+   * 
+   * 
    * @param uri the uri to bind to the default namespace
    * @throws XMLStreamException
    */
@@ -240,6 +335,10 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * to setPrefix and setDefaultNamespace will bind namespaces using
    * the context passed to the method as the root context for resolving
    * namespaces.
+   * <p>
+   *  设置uri绑定的前缀。此前缀绑定在当前START_ELEMENT / END_ELEMENT对的范围内。如果在写入START_ELEMENT之前调用此方法,则前缀在根范围内绑定。
+   * 
+   * 
    * @param context the namespace context to use for this writer
    * @throws XMLStreamException
    */
@@ -248,6 +347,10 @@ public interface XMLEventWriter extends XMLEventConsumer {
 
   /**
    * Returns the current namespace context.
+   * <p>
+   * 将URI绑定到默认名称空间此URI绑定在当前START_ELEMENT / END_ELEMENT对的范围内。如果在写入START_ELEMENT之前调用此方法,则uri将绑定到根范围。
+   * 
+   * 
    * @return the current namespace context
    */
   public NamespaceContext getNamespaceContext();

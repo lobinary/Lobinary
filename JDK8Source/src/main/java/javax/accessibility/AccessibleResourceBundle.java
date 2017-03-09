@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.util.ListResourceBundle;
  * package.  This is meant only for internal use by Java Accessibility and
  * is not meant to be used by assistive technologies or applications.
  *
+ * <p>
+ *  包含辅助功能包中本地化字符串的资源束。这仅适用于Java辅助功能的内部使用,而不是由辅助技术或应用程序使用。
+ * 
+ * 
  * @author      Willie Walker
  * @deprecated This class is deprecated as of version 1.3 of the
  *             Java Platform.
@@ -42,6 +47,8 @@ public class AccessibleResourceBundle extends ListResourceBundle {
     /**
      * Returns the mapping between the programmatic keys and the
      * localized display strings.
+     * <p>
+     *  返回程序键和本地化显示字符串之间的映射。
      */
     public Object[][] getContents() {
         // The table holding the mapping between the programmatic keys

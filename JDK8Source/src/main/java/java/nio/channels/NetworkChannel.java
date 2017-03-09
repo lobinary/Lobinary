@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,19 @@ import java.io.IOException;
  * chained. Implementations of this interface should specialize the return type
  * so that method invocations on the implementation class can be chained.
  *
+ * <p>
+ *  通道到网络套接字。
+ * 
+ *  <p>实现此接口的通道是网络套接字的通道。
+ *  {@link #bind(SocketAddress)bind}方法用于将套接字绑定到本地{@link SocketAddress地址},{@link #getLocalAddress()getLocalAddress}
+ * 方法返回套接字绑定的地址, {@link #setOption(SocketOption,Object)setOption}和{@link #getOption(SocketOption)getOption}
+ * 方法用于设置和查询套接字选项。
+ *  <p>实现此接口的通道是网络套接字的通道。这个接口的实现应该指定它支持的套接字选项。
+ * 
+ *  <p>指定了没有返回值的{@link #bind bind}和{@link #setOption setOption}方法返回调用它们的网络通道。这允许方法调用链接。
+ * 此接口的实现应专门化返回类型,以便可以链接对实现类的方法调用。
+ * 
+ * 
  * @since 1.7
  */
 
@@ -63,6 +77,13 @@ public interface NetworkChannel
      * value {@code null} then the socket will be bound to an address that is
      * assigned automatically.
      *
+     * <p>
+     *  将通道的套接字绑定到本地地址。
+     * 
+     *  <p>此方法用于在套接字和本地地址之间建立关联。一旦建立了关联,则套接字保持绑定,直到信道被关闭。
+     * 如果{@code local}参数的值为{@code null},那么套接字将绑定到一个自动分配的地址。
+     * 
+     * 
      * @param   local
      *          The address to bind the socket, or {@code null} to bind the socket
      *          to an automatically assigned socket address
@@ -93,6 +114,12 @@ public interface NetworkChannel
      * socket address then the return value from this method is of type {@link
      * java.net.InetSocketAddress}.
      *
+     * <p>
+     * 返回此通道的套接字绑定到的套接字地址。
+     * 
+     *  <p>当频道是{@link #bind bound}到Internet协议套接字地址时,此方法的返回值的类型为{@link java.net.InetSocketAddress}。
+     * 
+     * 
      * @return  The socket address that the socket is bound to, or {@code null}
      *          if the channel's socket is not bound
      *
@@ -106,6 +133,10 @@ public interface NetworkChannel
     /**
      * Sets the value of a socket option.
      *
+     * <p>
+     *  设置套接字选项的值。
+     * 
+     * 
      * @param   <T>
      *          The type of the socket option value
      * @param   name
@@ -132,6 +163,10 @@ public interface NetworkChannel
     /**
      * Returns the value of a socket option.
      *
+     * <p>
+     *  返回套接字选项的值。
+     * 
+     * 
      * @param   <T>
      *          The type of the socket option value
      * @param   name
@@ -157,6 +192,10 @@ public interface NetworkChannel
      * <p> This method will continue to return the set of options even after the
      * channel has been closed.
      *
+     * <p>
+     *  返回此通道支持的一组套接字选项。
+     * 
+     * 
      * @return  A set of the socket options supported by this channel
      */
     Set<SocketOption<?>> supportedOptions();

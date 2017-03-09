@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -254,6 +255,49 @@ import java.util.stream.IntStream;
 
  *
  *
+ * <p>
+ *  字符缓冲区。
+ * 
+ *  <p>此类在char缓冲区上定义了四种操作类别：
+ * 
+ * <ul>
+ * 
+ *  <li> <p>读取和写入单个字符的绝对和相对{@link #get()<i> get </i>}和{@link #put(char)<i> put </i>}方法; </p> </li>
+ * 
+ *  <li> <p>相对{@link #get(char [])<i>批量获取</i>}方法将来自此缓冲区的连续字符序列传送到数组中;和</p> </li>
+ * 
+ *  <li> <p>相对{@link #put(char [])<i>批量放置</i>}方法,将char数组,字符串或其他char缓冲区的连续序列传输到此缓冲区;和</p> </li>
+ * 
+ *  <li> <p> {@link #compact compacting},{@link #duplicate duplicating}和{@link #slice slicing}字符缓冲区的方法。
+ *  </p> </li>。
+ * 
+ * </ul>
+ * 
+ *  <p>字符缓冲区可以通过{@link #allocate <i> allocation </i>}创建,它为缓冲区分配空间
+ * 
+ *  内容,通过{@link #wrap(char [])<i>包装</i>}将现有的字符数组或字符串插入缓冲区,或者创建<a href="ByteBuffer.html#views"> <i >查看</i>
+ *  </a>。
+ * 
+ * <p>与字节缓冲区类似,char缓冲区可以是<a href="ByteBuffer.html#direct"> <i>直接</i>或<i>非直接</i> </a>。
+ * 通过此类的<tt> wrap </tt>方法创建的char缓冲区将是非直接的。作为字节缓冲区视图创建的字符缓冲区将是直接的,如果且仅当字节缓冲区本身是直接的。
+ * 可以通过调用{@link #isDirect isDirect}方法来确定char缓冲区是否是直接的。 </p>。
+ * 
+ *  <p>此类实现{@link CharSequence}接口,以便可以在字符序列被接受的任何地方使用字符缓冲区,例如在正则表达式包<tt> {@ link java.util.regex} </tt> 
+ * 。
+ * </p>
+ * 
+ *  <p>此类中没有返回值的方法被指定为返回调用它们的缓冲区。这允许方法调用链接。
+ * 
+ *  语句的顺序
+ * 
+ *  <blockquote> <pre> cb.put("text /"); cb.put(subtype); cb.put("; charset ="); cb.put(enc); </pre> </blockquote>
+ * 。
+ * 
+ *  可以例如被单个语句替换
+ * 
+ *  <blockquote> <pre> cb.put("text /")。put(subtype).put("; charset =")。put(enc); </pre> </blockquote>
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -321,6 +365,13 @@ public abstract class CharBuffer
      * initialized to zero.  It will have a {@link #array backing array},
      * and its {@link #arrayOffset array offset} will be zero.
      *
+     * <p>
+     *  分配新的char缓冲区。
+     * 
+     *  <p>新缓冲区的位置将为零,其限制将是其容量,其标记将是未定义的,并且其每个元素将初始化为零。
+     * 它将有一个{@link #array返回数组},其{@link #arrayOffset数组偏移量}将为零。
+     * 
+     * 
      * @param  capacity
      *         The new buffer's capacity, in chars
      *
@@ -346,6 +397,14 @@ public abstract class CharBuffer
      * {@link #array backing array} will be the given array, and
      * its {@link #arrayOffset array offset} will be zero.  </p>
      *
+     * <p>
+     *  将char数组包装到缓冲区中。
+     * 
+     * <p>新缓冲区将由给定的char数组支持;也就是说,对缓冲区的修改将导致数组被修改,反之亦然。
+     * 新缓冲区的容量将为<tt> array.length </tt>,其位置将为<tt> offset </tt>,其限制将为<tt> offset + length </tt>,其标记将为未定义。
+     * 它的{@link #array backing array}将是给定的数组,其{@link #arrayOffset数组偏移量}将为零。 </p>。
+     * 
+     * 
      * @param  array
      *         The array that will back the new buffer
      *
@@ -387,6 +446,13 @@ public abstract class CharBuffer
      * given array, and its {@link #arrayOffset array offset>} will
      * be zero.  </p>
      *
+     * <p>
+     *  将char数组包装到缓冲区中。
+     * 
+     *  <p>新缓冲区将由给定的char数组支持;也就是说,对缓冲区的修改将导致数组被修改,反之亦然。新缓冲区的容量和限制将为<tt> array.length </tt>,其位置将为零,其标记将为未定义。
+     * 它的{@link #array backing array}将是给定的数组,其{@link #arrayOffset数组偏移量}将为零。 </p>。
+     * 
+     * 
      * @param  array
      *         The array that will back this buffer
      *
@@ -404,6 +470,10 @@ public abstract class CharBuffer
      * changes made are the results of a put operation. No flipping or
      * rewinding of the buffer is performed.
      *
+     * <p>
+     *  尝试将字符读入指定的字符缓冲区。缓冲区用作字符存储库,因为：只有更改是put操作的结果。不执行缓冲器的翻转或倒回。
+     * 
+     * 
      * @param target the buffer to read characters into
      * @return The number of characters added to the buffer, or
      *         -1 if this source of characters is at its end
@@ -440,6 +510,13 @@ public abstract class CharBuffer
      * <tt>csq.length()</tt>, its position will be <tt>start</tt>, its limit
      * will be <tt>end</tt>, and its mark will be undefined.  </p>
      *
+     * <p>
+     *  将字符序列包装到缓冲区中。
+     * 
+     *  <p>新的只读缓冲区的内容将是给定字符序列的内容。
+     * 缓冲区的容量为<tt> csq.length()</tt>,其位置为<tt> start </tt>,其限制为<tt> end </tt>,其标记将为undefined 。 </p>。
+     * 
+     * 
      * @param  csq
      *         The character sequence from which the new character buffer is to
      *         be created
@@ -477,6 +554,12 @@ public abstract class CharBuffer
      * <tt>csq.length()</tt>, its position will be zero, and its mark will be
      * undefined.  </p>
      *
+     * <p>
+     *  将字符序列包装到缓冲区中。
+     * 
+     * <p>新的只读缓冲区的内容将是给定字符序列的内容。新缓冲区的容量和限制将为<tt> csq.length()</tt>,其位置将为零,其标记将为未定义。 </p>
+     * 
+     * 
      * @param  csq
      *         The character sequence from which the new character buffer is to
      *         be created
@@ -504,6 +587,14 @@ public abstract class CharBuffer
      * buffer is direct, and it will be read-only if, and only if, this buffer
      * is read-only.  </p>
      *
+     * <p>
+     *  创建一个新的char缓冲区,其内容是此缓冲区内容的共享子序列。
+     * 
+     *  <p>新缓冲区的内容将从此缓冲区的当前位置开始。对此缓冲区内容的更改将在新缓冲区中可见,反之亦然;两个缓冲器的位置,限制和标记值将是独立的。
+     * 
+     *  <p>新缓冲区的位置将为零,其容量和限制将是此缓冲区中剩余的字符数,其标记将未定义。新缓冲区将是直接的,如果且仅当这个缓冲区是直接的,并且只有当且仅当这个缓冲区是只读时,它才是只读的。 </p>
+     * 
+     * 
      * @return  The new char buffer
      */
     public abstract CharBuffer slice();
@@ -521,6 +612,14 @@ public abstract class CharBuffer
      * and only if, this buffer is direct, and it will be read-only if, and
      * only if, this buffer is read-only.  </p>
      *
+     * <p>
+     *  创建共享此缓冲区内容的新字符缓冲区。
+     * 
+     *  <p>新缓冲区的内容将是此缓冲区的内容。对此缓冲区内容的更改将在新缓冲区中可见,反之亦然;两个缓冲器的位置,限制和标记值将是独立的。
+     * 
+     *  <p>新缓冲区的容量,限制,位置和标记值将与此缓冲区的容量,限制,位置和标记值相同。新缓冲区将是直接的,如果且仅当这个缓冲区是直接的,并且只有当且仅当这个缓冲区是只读时,它才是只读的。 </p>
+     * 
+     * 
      * @return  The new char buffer
      */
     public abstract CharBuffer duplicate();
@@ -541,6 +640,16 @@ public abstract class CharBuffer
      * <p> If this buffer is itself read-only then this method behaves in
      * exactly the same way as the {@link #duplicate duplicate} method.  </p>
      *
+     * <p>
+     *  创建一个新的,只读的共享此缓冲区内容的char缓冲区。
+     * 
+     * <p>新缓冲区的内容将是此缓冲区的内容。对此缓冲区内容的更改将在新缓冲区中可见;但是,新的缓冲区本身将是只读的,不允许修改共享内容。两个缓冲区的位置,极限和标记值将是独立的。
+     * 
+     *  <p>新缓冲区的容量,限制,位置和标记值将与此缓冲区的容量,限制,位置和标记值相同。
+     * 
+     *  <p>如果此缓冲区本身是只读的,那么此方法的行为方式与{@link #duplicate duplicate}方法完全相同。 </p>
+     * 
+     * 
      * @return  The new, read-only char buffer
      */
     public abstract CharBuffer asReadOnlyBuffer();
@@ -552,6 +661,10 @@ public abstract class CharBuffer
      * Relative <i>get</i> method.  Reads the char at this buffer's
      * current position, and then increments the position.
      *
+     * <p>
+     *  相对<i> get </i>方法。读取此缓冲区当前位置的字符,然后递增位置。
+     * 
+     * 
      * @return  The char at the buffer's current position
      *
      * @throws  BufferUnderflowException
@@ -565,6 +678,12 @@ public abstract class CharBuffer
      * <p> Writes the given char into this buffer at the current
      * position, and then increments the position. </p>
      *
+     * <p>
+     *  相对<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>将当前位置的给定字符写入此缓冲区,然后增加位置。 </p>
+     * 
+     * 
      * @param  c
      *         The char to be written
      *
@@ -582,6 +701,10 @@ public abstract class CharBuffer
      * Absolute <i>get</i> method.  Reads the char at the given
      * index.
      *
+     * <p>
+     *  绝对<i> get </i>方法。读取给定索引处的字符。
+     * 
+     * 
      * @param  index
      *         The index from which the char will be read
      *
@@ -598,6 +721,10 @@ public abstract class CharBuffer
      * Absolute <i>get</i> method.  Reads the char at the given
      * index without any validation of the index.
      *
+     * <p>
+     *  绝对<i> get </i>方法。读取给定索引处的字符,而不对索引进行任何验证。
+     * 
+     * 
      * @param  index
      *         The index from which the char will be read
      *
@@ -612,6 +739,12 @@ public abstract class CharBuffer
      * <p> Writes the given char into this buffer at the given
      * index. </p>
      *
+     * <p>
+     *  绝对<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>在给定索引处将给定字符写入此缓冲区。 </p>
+     * 
+     * 
      * @param  index
      *         The index at which the char will be written
      *
@@ -659,6 +792,23 @@ public abstract class CharBuffer
      * except that it first checks that there are sufficient chars in
      * this buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> get </i>方法。
+     * 
+     * <p>此方法将字符从此缓冲区传输到给定的目标数组。
+     * 如果缓冲区中剩余的字符少于满足请求所需的字符,即如果<tt> length </tt> <tt>&gt; </tt>&lt; tt> remaining() tt>,则不传输任何字符,并抛出{@link BufferUnderflowException}
+     * 。
+     * <p>此方法将字符从此缓冲区传输到给定的目标数组。
+     * 
+     *  <p>否则,此方法会将此缓冲区中的<tt>长度</tt>字符复制到给定数组中,从此缓冲区的当前位置开始,并在数组中的给定偏移处开始。然后,该缓冲区的位置增加<tt> length </tt>。
+     * 
+     *  <p>换句话说,对形式为<tt> src.get(dst,&nbsp; off,&nbsp; len)</tt>的此方法的调用与循环具有完全相同的效果
+     * 
+     *  <pre> {@ code for(int i = off; i <off + len; i ++)dst [i] = src.get()：} </pre>
+     * 
+     *  除了它首先检查在该缓冲器中有足够的字符,并且它可能更有效。
+     * 
+     * 
      * @param  dst
      *         The array into which chars are to be written
      *
@@ -702,6 +852,15 @@ public abstract class CharBuffer
      * <pre>
      *     src.get(a, 0, a.length) </pre>
      *
+     * <p>
+     *  相对批量<i> get </i>方法。
+     * 
+     *  <p>此方法将字符从此缓冲区传输到给定的目标数组。调用此方法的形式<tt> src.get(a)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  src.get(a,0,a.length)</pre>
+     * 
+     * 
      * @param   dst
      *          The destination array
      *
@@ -743,6 +902,25 @@ public abstract class CharBuffer
      * except that it first checks that there is sufficient space in this
      * buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     * <p>此方法将保留在给定源缓冲区中的字符传送到此缓冲区。
+     * 如果源缓冲区中剩余的字符数大于此缓冲区中剩余的字符数,也就是说,如果<tt> src.remaining()</tt>&nbsp; <tt>&gt; </tt> </tt>,则不会传输任何字符,并且会抛
+     * 出{@link BufferOverflowException}。
+     * <p>此方法将保留在给定源缓冲区中的字符传送到此缓冲区。
+     * 
+     *  <p>否则,此方法会从每个缓冲区的当前位置开始,将给定缓冲区中的<i> n </i>&nbsp; =&nbsp; <tt> src.remaining()</tt>字符复制到此缓冲区中。
+     * 然后,两个缓冲器的位置增加n n。
+     * 
+     *  <p>换句话说,对形式<tt> dst.put(src)</tt>的此方法的调用具有与循环完全相同的效果
+     * 
+     * <pre>
+     *  while(src.hasRemaining())dst.put(src.get()); </pre>
+     * 
+     *  除了它首先检查在这个缓冲器中有足够的空间并且它可能更有效率。
+     * 
+     * 
      * @param  src
      *         The source buffer from which chars are to be read;
      *         must not be this buffer
@@ -799,6 +977,23 @@ public abstract class CharBuffer
      * except that it first checks that there is sufficient space in this
      * buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法将字符从给定的源数组传输到此缓冲区。
+     * 如果有更多字符要从数组复制而不是保留在此缓冲区中,也就是说,如果<tt> length </tt> <tt>&gt; </tt>&nbsp; <tt> remaining tt>,则不传输任何字符,并抛
+     * 出{@link BufferOverflowException}。
+     *  <p>此方法将字符从给定的源数组传输到此缓冲区。
+     * 
+     *  <p>否则,此方法会从给定数组中的<tt>长度</tt>字符复制到此缓冲区中,从数组中给定的偏移量和此缓冲区的当前位置开始。然后,该缓冲区的位置增加<tt> length </tt>。
+     * 
+     * <p>换句话说,对形式为<tt> dst.put(src,&nbsp; off,&nbsp; len)</tt>的此方法的调用与循环具有完全相同的效果
+     * 
+     *  <pre> {@ code for(int i = off; i <off + len; i ++)dst.put(a [i]); } </pre>
+     * 
+     *  除了它首先检查在这个缓冲器中有足够的空间并且它可能更有效率。
+     * 
+     * 
      * @param  src
      *         The array from which chars are to be read
      *
@@ -844,6 +1039,15 @@ public abstract class CharBuffer
      * <pre>
      *     dst.put(a, 0, a.length) </pre>
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法将给定源字符数组的整个内容传输到此缓冲区。调用此方法的形式<tt> dst.put(a)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  dst.put(a,0,a.length)</pre>
+     * 
+     * 
      * @param   src
      *          The source array
      *
@@ -889,6 +1093,25 @@ public abstract class CharBuffer
      * except that it first checks that there is sufficient space in this
      * buffer and it is potentially much more efficient.
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法将字符从给定字符串传输到此缓冲区。
+     * 如果有更多字符要从字符串复制而不是保留在此缓冲区中,也就是说,如果<tt> end&nbsp;  - &nbsp; start </tt>&nbsp; <tt>&gt; </tt>&nbsp; rema
+     * ining()</tt>,则不传输任何字符,并抛出{@link BufferOverflowException}。
+     *  <p>此方法将字符从给定字符串传输到此缓冲区。
+     * 
+     *  <p>否则,此方法会将指定字符串中的<i> n </i>&nbsp; =&nbsp; <tt>结束</tt>&nbsp;  - &nbsp; <tt>开始</tt> ,从给定的<tt> start </tt>
+     * 索引和该缓冲区的当前位置开始。
+     * 然后,该缓冲器的位置增加n n。
+     * 
+     *  <p>换句话说,对形式为<tt> dst.put(src,&nbsp; start,&nbsp; end)</tt>的此方法的调用与循环具有完全相同的效果
+     * 
+     * <pre> {@ code for(int i = start; i <end; i ++)dst.put(src.charAt(i)); } </pre>
+     * 
+     *  除了它首先检查在这个缓冲器中有足够的空间并且它可能更有效率。
+     * 
+     * 
      * @param  src
      *         The string from which chars are to be read
      *
@@ -935,6 +1158,15 @@ public abstract class CharBuffer
      * <pre>
      *     dst.put(s, 0, s.length()) </pre>
      *
+     * <p>
+     *  相对批量<i> put </i>方法&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>此方法将给定源字符串的整个内容传输到此缓冲区。调用此方法的形式<tt> dst.put(s)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  dst.put(s,0,s.length())</pre>
+     * 
+     * 
      * @param   src
      *          The source string
      *
@@ -963,6 +1195,13 @@ public abstract class CharBuffer
      * and {@link #arrayOffset() arrayOffset} methods may safely be invoked.
      * </p>
      *
+     * <p>
+     *  指示此缓冲区是否由可访问的char数组支持。
+     * 
+     *  <p>如果此方法返回<tt> true </tt>,则可以安全地调用{@link #array()数组}和{@link #arrayOffset()arrayOffset}方法。
+     * </p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer
      *          is backed by an array and is not read-only
      */
@@ -981,6 +1220,14 @@ public abstract class CharBuffer
      * method in order to ensure that this buffer has an accessible backing
      * array.  </p>
      *
+     * <p>
+     *  返回支持此缓冲区的字符数组&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>修改此缓冲区的内容将导致返回的数组的内容被修改,反之亦然。
+     * 
+     *  <p>在调用此方法之前调用{@link #hasArray hasArray}方法,以确保此缓冲区具有可访问的后备数组。 </p>
+     * 
+     * 
      * @return  The array that backs this buffer
      *
      * @throws  ReadOnlyBufferException
@@ -1008,6 +1255,14 @@ public abstract class CharBuffer
      * method in order to ensure that this buffer has an accessible backing
      * array.  </p>
      *
+     * <p>
+     *  返回缓冲区的第一个元素(可选操作)</i>在此缓冲区的后备数组中的偏移量。
+     * 
+     *  <p>如果此缓冲区由数组支持,则缓冲区位置<i> p </i>对应于数组索引<i> p </i>&nbsp; <tt> arrayOffset()</tt>。
+     * 
+     * <p>在调用此方法之前调用{@link #hasArray hasArray}方法,以确保此缓冲区具有可访问的后备数组。 </p>
+     * 
+     * 
      * @return  The offset within this buffer's array
      *          of the first element of the buffer
      *
@@ -1060,6 +1315,18 @@ public abstract class CharBuffer
 
 
      *
+     * <p>
+     *  压缩此缓冲区&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>缓冲区的当前位置和其限制之间的字符(如果有)被复制到缓冲区的开头。
+     * 也就是说,将索引<i> p </i>&nbsp; =&nbsp; <tt> position()</tt>处的字符复制到索引0,索引<i> p </i> +&nbsp; 1复制到索引1,依此类推,直到索
+     * 引<tt> limit()</tt>&nbsp;  - &nbsp; 1的字符复制到索引<i> n </i>&nbsp; =&nbsp; ; <tt> limit()</tt>&nbsp;  - &nb
+     * sp; <tt> 1 </tt>&nbsp;  - &nbsp; <i> p </i>。
+     *  <p>缓冲区的当前位置和其限制之间的字符(如果有)被复制到缓冲区的开头。然后将缓冲器的位置设置为<n> n + 1,并将其限制设置为其容量。如果定义,标记将被丢弃。
+     * 
+     *  <p>缓冲区的位置设置为所复制的字符数,而不是零,因此可以立即调用另一个相对</i>方法来调用此方法。 </p>
+     * 
+     * 
      * @return  This buffer
      *
      * @throws  ReadOnlyBufferException
@@ -1070,6 +1337,10 @@ public abstract class CharBuffer
     /**
      * Tells whether or not this char buffer is direct.
      *
+     * <p>
+     *  告诉这个char缓冲区是否是直接的。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this buffer is direct
      */
     public abstract boolean isDirect();
@@ -1110,6 +1381,14 @@ public abstract class CharBuffer
      * to use buffers as keys in hash maps or similar data structures unless it
      * is known that their contents will not change.  </p>
      *
+     * <p>
+     *  返回此缓冲区的当前散列码。
+     * 
+     *  <p>字符缓冲区的散列码仅取决于其剩余元素;即从<tt> position()</tt>到<tt> limit()</tt>&nbsp; <tt> 1 </tt>的元素,并包含该元素。
+     * 
+     *  <p>因为缓冲区哈希码是内容相关的,所以不宜使用缓冲区作为哈希映射或类似数据结构中的键,除非知道它们的内容不会改变。 </p>
+     * 
+     * 
      * @return  The current hash code of this buffer
      */
     public int hashCode() {
@@ -1151,6 +1430,26 @@ public abstract class CharBuffer
      *
      * <p> A char buffer is not equal to any other type of object.  </p>
      *
+     * <p>
+     * 告诉这个缓冲区是否等于另一个对象。
+     * 
+     *  <p>两个char缓冲区是相等的,如果,只有,
+     * 
+     * <ol>
+     * 
+     *  <li> <p>它们具有相同的元素类型,</p> </li>
+     * 
+     *  <li> <p>它们具有相同数量的剩余元素,</p> </li>
+     * 
+     *  <li> <p>剩余元素的两个序列,独立于其起始位置考虑,是逐点相等的。
+     * 
+     *  </p> </li>
+     * 
+     * </ol>
+     * 
+     *  <p>字符缓冲区不等于任何其他类型的对象。 </p>
+     * 
+     * 
      * @param  ob  The object to which this buffer is to be compared
      *
      * @return  <tt>true</tt> if, and only if, this buffer is equal to the
@@ -1199,6 +1498,16 @@ public abstract class CharBuffer
      *
      * <p> A char buffer is not comparable to any other type of object.
      *
+     * <p>
+     *  将此缓冲区与另一个进行比较。
+     * 
+     *  <p>通过以字典顺序比较剩余元素的序列来比较两个字符缓冲器,而不考虑每个序列在其相应缓冲器内的起始位置。
+     * 
+     *  比较{@code char}元素对,好像是通过调用{@link Character#compare(char,char)}。
+     * 
+     *  <p> char缓冲区与任何其他类型的对象不可比。
+     * 
+     * 
      * @return  A negative integer, zero, or a positive integer as this buffer
      *          is less than, equal to, or greater than the given buffer
      */
@@ -1235,6 +1544,12 @@ public abstract class CharBuffer
      * at index <tt>limit()</tt>&nbsp;-&nbsp;1.  Invoking this method does not
      * change the buffer's position. </p>
      *
+     * <p>
+     *  返回包含此缓冲区中的字符的字符串。
+     * 
+     *  <p>结果字符串的第一个字符将是此缓冲区位置处的字符,而最后一个字符将是索引<tt> limit()</tt>&nbsp;  -  1的字符。调用此方法不会更改缓冲区的位置。 </p>
+     * 
+     * 
      * @return  The specified string
      */
     public String toString() {
@@ -1254,6 +1569,12 @@ public abstract class CharBuffer
      * (inclusive) and the limit (exclusive); that is, it is equivalent to
      * <tt>remaining()</tt>. </p>
      *
+     * <p>
+     *  返回此字符缓冲区的长度。
+     * 
+     *  <p>当作为字符序列查看时,字符缓冲区的长度只是位置(包括)和限制(不包括)之间的字符数;也就是说,它等效于<tt> remaining()</tt>。 </p>
+     * 
+     * 
      * @return  The length of this character buffer
      */
     public final int length() {
@@ -1264,6 +1585,10 @@ public abstract class CharBuffer
      * Reads the character at the given index relative to the current
      * position.
      *
+     * <p>
+     *  读取相对于当前位置的给定索引处的字符。
+     * 
+     * 
      * @param  index
      *         The index of the character to be read, relative to the position;
      *         must be non-negative and smaller than <tt>remaining()</tt>
@@ -1291,6 +1616,16 @@ public abstract class CharBuffer
      * direct if, and only if, this buffer is direct, and it will be read-only
      * if, and only if, this buffer is read-only.  </p>
      *
+     * <p>
+     * 创建一个新的字符缓冲区,表示相对于当前位置的此缓冲区的指定子序列。
+     * 
+     *  <p>新缓冲区将共享此缓冲区的内容;也就是说,如果这个缓冲区的内容是可变的,那么对一个缓冲区的修改将导致另一个缓冲区被修改。
+     * 新缓冲区的容量将是此缓冲区的容量,其位置将为<tt> position()</tt>&nbsp; + <span> start </tt>,其限制为<tt> position </tt>&nbsp; +
+     * &nbsp; <tt> end </tt>。
+     *  <p>新缓冲区将共享此缓冲区的内容;也就是说,如果这个缓冲区的内容是可变的,那么对一个缓冲区的修改将导致另一个缓冲区被修改。
+     * 新缓冲区将是直接的,如果且仅当这个缓冲区是直接的,并且只有当且仅当这个缓冲区是只读时,它才是只读的。 </p>。
+     * 
+     * 
      * @param  start
      *         The index, relative to the current position, of the first
      *         character in the subsequence; must be non-negative and no larger
@@ -1329,6 +1664,18 @@ public abstract class CharBuffer
      * toString} method of a character buffer will return a subsequence whose
      * content depends upon the buffer's position and limit.
      *
+     * <p>
+     *  将指定的字符序列附加到此缓冲区&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>调用此方法的形式<tt> dst.append(csq)</tt>的行为与调用的方式完全相同
+     * 
+     * <pre>
+     *  dst.put(csq.toString())</pre>
+     * 
+     *  <p>根据<tt> toString </tt>对字符序列<tt> csq </tt>的规定,整个序列可能不会附加。
+     * 例如,调用字符缓冲区的{@link CharBuffer#toString()toString}方法将返回一个子序列,其内容取决于缓冲区的位置和限制。
+     * 
+     * 
      * @param  csq
      *         The character sequence to append.  If <tt>csq</tt> is
      *         <tt>null</tt>, then the four characters <tt>"null"</tt> are
@@ -1362,6 +1709,15 @@ public abstract class CharBuffer
      * <pre>
      *     dst.put(csq.subSequence(start, end).toString()) </pre>
      *
+     * <p>
+     *  将指定字符序列的子序列附加到此缓冲区&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>当<tt> csq </tt>不是<tt> null </tt>时,对<tt> dst.append(csq,start,end)</tt>形式的此方法的调用完全与调用相同的方式
+     * 
+     * <pre>
+     * dst.put(csq.subSequence(start,end).toString())</pre>
+     * 
+     * 
      * @param  csq
      *         The character sequence from which a subsequence will be
      *         appended.  If <tt>csq</tt> is <tt>null</tt>, then characters
@@ -1398,6 +1754,15 @@ public abstract class CharBuffer
      * <pre>
      *     dst.put(c) </pre>
      *
+     * <p>
+     *  将指定的字符附加到此缓冲区&nbsp;&nbsp; <i>(可选操作)</i>。
+     * 
+     *  <p>对形式<tt> dst.append(c)</tt>的此方法的调用与调用的方式完全相同
+     * 
+     * <pre>
+     *  dst.put(c)</pre>
+     * 
+     * 
      * @param  c
      *         The 16-bit char to append
      *
@@ -1432,6 +1797,8 @@ public abstract class CharBuffer
      * href="ByteBuffer.html#views">view</a> of a byte buffer is that of the
      * byte buffer at the moment that the view is created.  </p>
      *
+     * <p>
+     * 
      * @return  This buffer's byte order
      */
     public abstract ByteOrder order();

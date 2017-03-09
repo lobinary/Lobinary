@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,9 @@ import javax.swing.plaf.basic.BasicDesktopIconUI;
 /**
  * Metal desktop icon.
  *
+ * <p>
+ *  金属桌面图标。
+ * 
  * @author Steve Wilson
  */
 public class MetalDesktopIconUI extends BasicDesktopIconUI

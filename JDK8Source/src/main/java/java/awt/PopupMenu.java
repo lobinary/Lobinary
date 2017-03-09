@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,15 @@ import sun.awt.AWTAccessor;
  * (e.g., you add it to a <code>MenuBar</code>), then you <b>cannot</b>
  * call <code>show</code> on that <code>PopupMenu</code>.
  *
+ * <p>
+ *  实现可以在组件中的指定位置动态弹出的菜单的类。
+ * <p>
+ *  正如继承层次结构所暗示的,可以在可以使用<code> Menu </code>的任何地方使用<code> PopupMenu </code>。
+ * 但是,如果您像<code> Menu </code>(例如,将其添加到<code> MenuBar </code>)中使用<code> PopupMenu </code>,则您<b> b>在<code>
+ *  PopupMenu </code>上调用<code> show </code>。
+ *  正如继承层次结构所暗示的,可以在可以使用<code> Menu </code>的任何地方使用<code> PopupMenu </code>。
+ * 
+ * 
  * @author      Amy Fowler
  */
 public class PopupMenu extends Menu {
@@ -61,11 +71,18 @@ public class PopupMenu extends Menu {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -4620452533522760060L;
 
     /**
      * Creates a new popup menu with an empty name.
+     * <p>
+     *  创建一个带有空名称的新弹出菜单。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true.
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -77,6 +94,10 @@ public class PopupMenu extends Menu {
     /**
      * Creates a new popup menu with the specified name.
      *
+     * <p>
+     *  创建具有指定名称的新弹出菜单。
+     * 
+     * 
      * @param label a non-<code>null</code> string specifying
      *                the popup menu's label
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
@@ -89,6 +110,9 @@ public class PopupMenu extends Menu {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public MenuContainer getParent() {
         if (isTrayIconPopup) {
@@ -100,6 +124,9 @@ public class PopupMenu extends Menu {
     /**
      * Constructs a name for this <code>MenuComponent</code>.
      * Called by <code>getName</code> when the name is <code>null</code>.
+     * <p>
+     *  为此<code> MenuComponent </code>构造一个名称。当名称为<code> null </code>时,由<code> getName </code>调用。
+     * 
      */
     String constructComponentName() {
         synchronized (PopupMenu.class) {
@@ -111,6 +138,9 @@ public class PopupMenu extends Menu {
      * Creates the popup menu's peer.
      * The peer allows us to change the appearance of the popup menu without
      * changing any of the popup menu's functionality.
+     * <p>
+     *  创建弹出菜单的对等项。对等体允许我们改变弹出菜单的外观,而不改变任何弹出菜单的功能。
+     * 
      */
     public void addNotify() {
         synchronized (getTreeLock()) {
@@ -143,6 +173,13 @@ public class PopupMenu extends Menu {
      * (i.e., it has a non-<code>Component</code> parent),
      * then you cannot call this method on the <code>PopupMenu</code>.
      *
+     * <p>
+     *  在相对于原点组件的x,y位置显示弹出菜单。原始组件必须包含在弹出菜单的父组件的组件层次结构中。原点和父代必须在屏幕上显示,以使此方法有效。
+     * <p>
+     *  如果这个<code> PopupMenu </code>被用作<code> Menu </code>(即它有一个非<code> Component </code> parent),那么你不能在<code>
+     *  PopupMenu </code>。
+     * 
+     * 
      * @param origin the component which defines the coordinate space
      * @param x the x coordinate position to popup the menu
      * @param y the y coordinate position to popup the menu
@@ -199,6 +236,10 @@ public class PopupMenu extends Menu {
      * Gets the <code>AccessibleContext</code> associated with this
      * <code>PopupMenu</code>.
      *
+     * <p>
+     * 获取与此<code> PopupMenu </code>关联的<code> AccessibleContext </code>。
+     * 
+     * 
      * @return the <code>AccessibleContext</code> of this
      *                <code>PopupMenu</code>
      * @since 1.3
@@ -217,18 +258,30 @@ public class PopupMenu extends Menu {
      * subclassed by menu component developers.
      * <p>
      * The class used to obtain the accessible role for this object.
+     * <p>
+     *  PopupMenu的内部类用于提供对辅助功能的默认支持。这个类不是直接由应用程序开发人员使用,而是意味着只能由菜单组件开发人员进行子类化。
+     * <p>
+     *  用于获取此对象的可访问角色的类。
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTPopupMenu extends AccessibleAWTMenu
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 1.3 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -4282044795947239955L;
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          */

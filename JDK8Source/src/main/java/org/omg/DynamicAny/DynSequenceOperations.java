@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -11,12 +12,18 @@ package org.omg.DynamicAny;
 
 /**
     * DynSequence objects support the manipulation of IDL sequences.
+    * <p>
+    *  DynSequence对象支持对IDL序列的操作。
+    * 
     */
 public interface DynSequenceOperations  extends org.omg.DynamicAny.DynAnyOperations
 {
 
   /**
         * Returns the current length of the sequence.
+        * <p>
+        *  返回序列的当前长度。
+        * 
         */
   int get_length ();
 
@@ -39,12 +46,24 @@ public interface DynSequenceOperations  extends org.omg.DynamicAny.DynAnyOperati
         *     the current position is set to -1.
         * </UL>
         *
+        * <p>
+        *  设置序列的长度。增加序列的长度在尾部添加新元素而不影响已经存在的元素的值。新添加的元素是默认初始化的。如果前一当前位置为-1,则增加序列长度可将当前位置设置为第一个新添加的元素。
+        * 否则,如果前一当前位置不是-1,则当前位置不受影响。减少序列长度会从尾部删除元素,而不会影响剩余元素的值。在减小序列的长度之后的新的当前位置确定如下：。
+        * <UL>
+        *  <LI>如果序列的长度设置为零,则当前位置设置为-1。 <LI>如果在减小长度之前当前位置为-1,它保持为-1。
+        *  <LI>如果当前位置指示有效元素,并且当长度减小时不会删除该元素,则当前位置保持不受影响。 <LI>如果当前位置指示有效元素,并且该元素被删除,则当前位置设置为-1。
+        * </UL>
+        * 
+        * 
         * @exception InvalidValue if this is a bounded sequence and len is larger than the bound
         */
   void set_length (int len) throws org.omg.DynamicAny.DynAnyPackage.InvalidValue;
 
   /**
         * Returns the elements of the sequence.
+        * <p>
+        * 返回序列的元素。
+        * 
         */
   org.omg.CORBA.Any[] get_elements ();
 
@@ -53,6 +72,10 @@ public interface DynSequenceOperations  extends org.omg.DynamicAny.DynAnyOperati
         * The length of the DynSequence is set to the length of value. The current position is set to zero
         * if value has non-zero length and to -1 if value is a zero-length sequence.
         *
+        * <p>
+        *  设置序列的元素。 DynSequence的长度设置为值的长度。如果值具有非零长度,则将当前位置设置为零,如果值为零长度序列,则将当前位置设置为-1。
+        * 
+        * 
         * @exception TypeMismatch if value contains one or more elements whose TypeCode is not equivalent
         *            to the element TypeCode of the DynSequence
         * @exception InvalidValue if the length of value exceeds the bound of a bounded sequence
@@ -61,6 +84,9 @@ public interface DynSequenceOperations  extends org.omg.DynamicAny.DynAnyOperati
 
   /**
         * Returns the DynAnys representing the elements of the sequence.
+        * <p>
+        *  返回表示序列元素的DynAnys。
+        * 
         */
   org.omg.DynamicAny.DynAny[] get_elements_as_dyn_any ();
 
@@ -69,6 +95,9 @@ public interface DynSequenceOperations  extends org.omg.DynamicAny.DynAnyOperati
         * The length of the DynSequence is set to the length of value. The current position is set to zero
         * if value has non-zero length and to -1 if value is a zero-length sequence.
         *
+        * <p>
+        *  使用DynAnys设置序列的元素。 DynSequence的长度设置为值的长度。如果值具有非零长度,则将当前位置设置为零,如果值为零长度序列,则将当前位置设置为-1。
+        * 
         * @exception TypeMismatch if value contains one or more elements whose TypeCode is not equivalent
         *            to the element TypeCode of the DynSequence
         * @exception InvalidValue if the length of value exceeds the bound of a bounded sequence

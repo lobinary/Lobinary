@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,8 @@ import sun.util.logging.LoggingProxy;
 
 /**
  * Implementation of LoggingProxy when java.util.logging classes exist.
+ * <p>
+ *  当java.util.logging类存在时,LoggingProxy的实现。
  */
 class LoggingProxyImpl implements LoggingProxy {
     static final LoggingProxy INSTANCE = new LoggingProxyImpl();

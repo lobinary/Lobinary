@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,18 @@ import java.security.PrivilegedAction;
  * if a focus traversal policy provider is encountered, its focus traversal
  * policy is used to perform the search operation.
  *
+ * <p>
+ *  FocusTraversalPolicy,通过基于给定的比较器对焦点遍历周期的组件进行排序来确定遍历顺序。不包括组件层次结构中不可见和可显示的部分。
+ * <p>
+ *  默认情况下,SortingFocusTraversalPolicy隐式传输焦点下降周期。也就是说,在正常聚焦遍历期间,在焦点循环根之后遍历的组件将是焦点循环根的要聚焦的默认组件。
+ * 可以使用<code> setImplicitDownCycleTraversal </code>方法禁用此行为。
+ * <p>
+ *  默认情况下,此类的方法只有在可见,可显示,启用和可聚焦时才返回组件。子类可以通过覆盖<code> accept </code>方法来修改此行为。
+ * <p>
+ *  此政策会考虑<a href="../../java/awt/doc-files/FocusSpec.html#FocusTraversalPolicyProviders">重点遍历策略提供商</a>。
+ * 当搜索第一/最后/下一个/上一个组件时,如果遇到焦点遍历策略提供器,则其焦点遍历策略用于执行搜索操作。
+ * 
+ * 
  * @author David Mendenhall
  *
  * @see java.util.Comparator
@@ -82,6 +95,14 @@ public class SortingFocusTraversalPolicy
      * getComponentBefore have already built the sorted list before determining
      * that they need to invoke getFirstComponent or getLastComponent, the
      * sorted list should be reused if possible.
+     * <p>
+     * 由getComponentAfter和getComponentBefore使用以提高效率。
+     * 为了保持符合FocusTraversalPolicy的规范,如果遍历包装,我们应该调用getFirstComponent或getLastComponent。
+     * 这些方法可以在子类中被覆盖,以非通用的方式表现。然而,在通用情况下,这些方法将简单地分别返回排序列表的第一个或最后一个组件。
+     * 由于getComponentAfter和getComponentBefore在确定它们需要调用getFirstComponent或getLastComponent之前已经构建了排序列表,所以如果可能,应
+     * 该重新使用排序的列表。
+     * 这些方法可以在子类中被覆盖,以非通用的方式表现。然而,在通用情况下,这些方法将简单地分别返回排序列表的第一个或最后一个组件。
+     * 
      */
     transient private Container cachedRoot;
     transient private List<Component> cachedCycle;
@@ -98,6 +119,9 @@ public class SortingFocusTraversalPolicy
      * When true (by default), the legacy merge-sort algo is used to sort an FTP cycle.
      * When false, the default (tim-sort) algo is used, which may lead to an exception.
      * See: JDK-8048887
+     * <p>
+     *  如果为true(默认值),则使用旧版合并排序算法对FTP周期进行排序。当为false时,使用默认(tim-sort)算法,这可能导致异常。参见：JDK-8048887
+     * 
      */
     private static final boolean legacySortingFTPEnabled;
     private static final Method legacyMergeSortMethod;
@@ -127,12 +151,20 @@ public class SortingFocusTraversalPolicy
      * Subclasses must set the Comparator using <code>setComparator</code>
      * before installing this FocusTraversalPolicy on a focus cycle root or
      * KeyboardFocusManager.
+     * <p>
+     *  构造不带比较器的SortingFocusTraversalPolicy。
+     * 子类必须在将焦点循环根或KeyboardFocusManager上安装此FocusTraversalPolicy之前使用<code> setComparator </code>设置Comparator。
+     *  构造不带比较器的SortingFocusTraversalPolicy。
+     * 
      */
     protected SortingFocusTraversalPolicy() {
     }
 
     /**
      * Constructs a SortingFocusTraversalPolicy with the specified Comparator.
+     * <p>
+     *  使用指定的Comparator构造SortingFocusTraversalPolicy。
+     * 
      */
     public SortingFocusTraversalPolicy(Comparator<? super Component> comparator) {
         this.comparator = comparator;
@@ -233,6 +265,10 @@ public class SortingFocusTraversalPolicy
 
     /*
      * Checks if a new focus cycle takes place and returns a Component to traverse focus to.
+     * <p>
+     *  检查是否发生新的焦点循环,并返回要遍历焦点的组件。
+     * 
+     * 
      * @param comp a possible focus cycle root or policy provider
      * @param traversalDirection the direction of the traversal
      * @return a Component to traverse focus to if {@code comp} is a root or provider
@@ -281,6 +317,16 @@ public class SortingFocusTraversalPolicy
      * If aContainer is <a href="../../java/awt/doc-files/FocusSpec.html#FocusTraversalPolicyProviders">focus
      * traversal policy provider</a>, the focus is always transferred down-cycle.
      *
+     * <p>
+     *  返回在aComponent之后应该接收焦点的组件。 aContainer必须是aComponent或焦点遍历策略提供程序的焦点循环根。
+     * <p>
+     * 默认情况下,SortingFocusTraversalPolicy隐式传输焦点下降周期。也就是说,在正常聚焦遍历期间,在焦点循环根之后遍历的组件将是焦点循环根的要聚焦的默认组件。
+     * 可以使用<code> setImplicitDownCycleTraversal </code>方法禁用此行为。
+     * <p>
+     *  如果aContainer是<a href="../../java/awt/doc-files/FocusSpec.html#FocusTraversalPolicyProviders">焦点遍历策略提
+     * 供程序</a>,则焦点总是向下传递。
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider
      * @param aComponent a (possibly indirect) child of aContainer, or
      *        aContainer itself
@@ -385,6 +431,16 @@ public class SortingFocusTraversalPolicy
      * If aContainer is <a href="../../java/awt/doc-files/FocusSpec.html#FocusTraversalPolicyProviders">focus
      * traversal policy provider</a>, the focus is always transferred down-cycle.
      *
+     * <p>
+     *  返回应在aComponent之前接收焦点的组件。 aContainer必须是aComponent或焦点遍历策略提供程序的焦点循环根。
+     * <p>
+     *  默认情况下,SortingFocusTraversalPolicy隐式传输焦点下降周期。也就是说,在正常聚焦遍历期间,在焦点循环根之后遍历的组件将是焦点循环根的要聚焦的默认组件。
+     * 可以使用<code> setImplicitDownCycleTraversal </code>方法禁用此行为。
+     * <p>
+     *  如果aContainer是<a href="../../java/awt/doc-files/FocusSpec.html#FocusTraversalPolicyProviders">焦点遍历策略提
+     * 供程序</a>,则焦点总是向下传递。
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider
      * @param aComponent a (possibly indirect) child of aContainer, or
      *        aContainer itself
@@ -478,6 +534,10 @@ public class SortingFocusTraversalPolicy
      * to determine the next Component to focus when traversal wraps in the
      * forward direction.
      *
+     * <p>
+     *  返回遍历循环中的第一个组件。此方法用于确定在向前方向上遍历卷绕时要聚焦的下一个组件。
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider whose
      *        first Component is to be returned
      * @return the first Component in the traversal cycle of aContainer,
@@ -527,6 +587,10 @@ public class SortingFocusTraversalPolicy
      * to determine the next Component to focus when traversal wraps in the
      * reverse direction.
      *
+     * <p>
+     *  返回遍历循环中的最后一个组件。此方法用于确定下一个要在相反方向上遍历卷绕时要聚焦的组件。
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider whose
      *        last Component is to be returned
      * @return the last Component in the traversal cycle of aContainer,
@@ -579,6 +643,10 @@ public class SortingFocusTraversalPolicy
      * rooted at aContainer. The default implementation of this method
      * returns the same Component as <code>getFirstComponent</code>.
      *
+     * <p>
+     * 返回要聚焦的默认组件。这个组件将是第一个接收焦点,当向下移动到一个新的焦点遍历循环根源于一个容器。此方法的默认实现返回与<code> getFirstComponent </code>相同的组件。
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider whose
      *        default Component is to be returned
      * @return the default Component in the traversal cycle of aContainer,
@@ -599,6 +667,12 @@ public class SortingFocusTraversalPolicy
      * focus cycle root will be traversed instead. The default value for this
      * property is <code>true</code>.
      *
+     * <p>
+     *  设置此SortingFocusTraversalPolicy是否隐含地传输焦点下降周期。
+     * 如果<code> true </code>,在正常聚焦遍历期间,在焦点循环根之后遍历的组件将是焦点循环根的要聚焦的默认组件。
+     * 如果<code> false </code>,则将遍历遍历指定焦点循环根的焦点遍历循环中的下一个组件。此属性的默认值为<code> true </code>。
+     * 
+     * 
      * @param implicitDownCycleTraversal whether this
      *        SortingFocusTraversalPolicy transfers focus down-cycle implicitly
      * @see #getImplicitDownCycleTraversal
@@ -616,6 +690,12 @@ public class SortingFocusTraversalPolicy
      * the next Component in the focus traversal cycle rooted at the specified
      * focus cycle root will be traversed instead.
      *
+     * <p>
+     *  返回此SortingFocusTraversalPolicy是否隐含地传输焦点下降周期。
+     * 如果<code> true </code>,在正常聚焦遍历期间,在焦点循环根之后遍历的组件将是焦点循环根的要聚焦的默认组件。
+     * 如果<code> false </code>,则将遍历遍历指定焦点循环根的焦点遍历循环中的下一个组件。
+     * 
+     * 
      * @return whether this SortingFocusTraversalPolicy transfers focus down-
      *         cycle implicitly
      * @see #setImplicitDownCycleTraversal
@@ -629,6 +709,10 @@ public class SortingFocusTraversalPolicy
      * Sets the Comparator which will be used to sort the Components in a
      * focus traversal cycle.
      *
+     * <p>
+     *  设置将用于在焦点遍历周期中对组件进行排序的比较器。
+     * 
+     * 
      * @param comparator the Comparator which will be used for sorting
      */
     protected void setComparator(Comparator<? super Component> comparator) {
@@ -639,6 +723,10 @@ public class SortingFocusTraversalPolicy
      * Returns the Comparator which will be used to sort the Components in a
      * focus traversal cycle.
      *
+     * <p>
+     *  返回将用于在焦点遍历周期中对组件进行排序的比较器。
+     * 
+     * 
      * @return the Comparator which will be used for sorting
      */
     protected Comparator<? super Component> getComparator() {
@@ -650,6 +738,9 @@ public class SortingFocusTraversalPolicy
      * focus owner. By default, this method will accept a Component if and
      * only if it is visible, displayable, enabled, and focusable.
      *
+     * <p>
+     *  确定组件是否是新焦点所有者可接受的选项。默认情况下,当且仅当组件可见,可显示,启用和可聚焦时,此方法将接受组件。
+     * 
      * @param aComponent the Component whose fitness as a focus owner is to
      *        be tested
      * @return <code>true</code> if aComponent is visible, displayable,

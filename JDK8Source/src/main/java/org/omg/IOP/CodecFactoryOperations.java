@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -13,6 +14,10 @@ package org.omg.IOP;
    * <code>Codecs</code> are obtained from the <code>CodecFactory</code>. 
    * The <code>CodecFactory</code> is obtained through a call to 
    * <code>ORB.resolve_initial_references( "CodecFactory" )</code>.
+   * <p>
+   *  <code>编解码器</code>从<code> CodecFactory </code>获得。
+   * 通过调用<code> ORB.resolve_initial_references("CodecFactory")</code>获得<code> CodecFactory </code>。
+   * 
    */
 public interface CodecFactoryOperations 
 {
@@ -20,6 +25,8 @@ public interface CodecFactoryOperations
   /**
      * Create a <code>Codec</code> of the given encoding.
      * <p>
+     * <p>
+     * 
      * @param enc The encoding for which to create a <code>Codec</code>.
      * @return A <code>Codec</code> obtained with the given encoding.
      * @exception UnknownEncoding thrown if this factory cannot create a 

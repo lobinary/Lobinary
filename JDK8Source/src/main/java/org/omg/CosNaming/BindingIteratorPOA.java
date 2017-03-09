@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 
@@ -15,6 +16,12 @@ package org.omg.CosNaming;
    * 
    * The bindings iterator is obtained by using the <tt>list</tt>
    * method on the <tt>NamingContext</tt>. 
+   * <p>
+   *  BindingIterator接口允许客户端使用next_one或next_n操作来遍历绑定。
+   * 
+   *  通过使用<tt> NamingContext </tt>上的<tt> list </tt>方法获取绑定迭代器。
+   * 
+   * 
    * @see org.omg.CosNaming.NamingContext#list
    */
 public abstract class BindingIteratorPOA extends org.omg.PortableServer.Servant
@@ -47,6 +54,10 @@ public abstract class BindingIteratorPOA extends org.omg.PortableServer.Servant
      * This operation returns the next binding. If there are no more
      * bindings, false is returned.
      * 
+     * <p>
+     *  此操作返回下一个绑定。如果没有更多绑定,则返回false。
+     * 
+     * 
      * @param b the returned binding
      */
        case 0:  // CosNaming/BindingIterator/next_one
@@ -63,6 +74,10 @@ public abstract class BindingIteratorPOA extends org.omg.PortableServer.Servant
 
   /**
      * This operation returns at most the requested number of bindings.
+     * 
+     * <p>
+     *  此操作最多返回所请求的绑定数。
+     * 
      * 
      * @param how_many the maximum number of bindings tro return <p>
      * 
@@ -83,6 +98,8 @@ public abstract class BindingIteratorPOA extends org.omg.PortableServer.Servant
 
   /**
      * This operation destroys the iterator.
+     * <p>
+     *  此操作会破坏迭代器。
      */
        case 2:  // CosNaming/BindingIterator/destroy
        {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,9 @@ import org.omg.CosNaming.NamingContext;
  * Service specifications. This class is added for doing more
  * of Parsing and Building of Stringified names according to INS
  * Spec.
+ * <p>
+ *  InteroperableNamingImpl类实现为NamingContextExt定义的方法,它是可互操作命名服务规范的一部分。添加此类以根据INS Spec进行更多的解析和构建字符串名称。
+ * 
  */
 public class InterOperableNamingImpl
 {
@@ -50,6 +54,10 @@ public class InterOperableNamingImpl
      * Method which stringifies the Name Components given as the input
      * parameter.
      *
+     * <p>
+     *  将作为输入参数给定的名称组件进行字符串化的方法。
+     * 
+     * 
      * @param n Array of Name Components (Simple or Compound Names)
      * @return string which is the stringified reference.
      */
@@ -72,6 +80,9 @@ public class InterOperableNamingImpl
 
    /** This method converts a single Namecomponent to String, By adding Escapes
     *  If neccessary.
+    * <p>
+    *  如有必要。
+    * 
     */
     private String convertNameComponentToString(
         org.omg.CosNaming.NameComponent theNameComponent )
@@ -104,6 +115,7 @@ public class InterOperableNamingImpl
 
 
    /** This method adds escape '\' for the Namecomponent if neccessary
+   /* <p>
     */
    private String addEscape( String value )
    {
@@ -135,6 +147,10 @@ public class InterOperableNamingImpl
    /**
      * Method which converts the Stringified name into Array of Name Components.
      *
+     * <p>
+     *  将字符串化名称转换为名称组件数组的方法。
+     * 
+     * 
      * @param string which is the stringified name.
      * @return  Array of Name Components (Simple or Compound Names)
      */
@@ -160,6 +176,9 @@ public class InterOperableNamingImpl
 
    /** Step1 in converting Stringified name into  array of Name Component
      * is breaking the String into multiple name components
+     * <p>
+     *  将String分成多个名称组件
+     * 
      */
    private String[] breakStringToNameComponents( String theStringifiedName ) {
        int[] theIndices = new int[100];
@@ -205,6 +224,9 @@ public class InterOperableNamingImpl
 
    /** This method breaks one big String into multiple substrings based
      * on the array of index passed in.
+     * <p>
+     *  对传入的索引数组。
+     * 
      */
    private String[] StringComponentsFromIndices( int[] theIndices,
           int indicesCount, String theStringifiedName )
@@ -245,6 +267,9 @@ public class InterOperableNamingImpl
    /** Step 2: After Breaking the Stringified name into set of NameComponent
      * Strings, The next step is to create Namecomponents from the substring
      * by removing the escapes if there are any.
+     * <p>
+     *  字符串,下一步是通过删除转义(如果有的话)从子字符串创建Namecomponents。
+     * 
      */
    private NameComponent createNameComponentFromString(
         String theStringifiedNameComponent )
@@ -323,6 +348,9 @@ public class InterOperableNamingImpl
 
    /** This method cleans the escapes in the Stringified name and returns the
      * correct String
+     * <p>
+     *  正确的字符串
+     * 
      */
    private String cleanEscapeCharacter( String theString )
    {
@@ -361,6 +389,10 @@ public class InterOperableNamingImpl
      * Method which converts the Stringified name  and Host Name Address into
      * a URL based Name
      *
+     * <p>
+     *  将字符串化的名称和主机名地址转换为基于URL的名称的方法
+     * 
+     * 
      * @param address which is ip based host name
      * @param name which is the stringified name.
      * @return  url based Name.
@@ -380,6 +412,7 @@ public class InterOperableNamingImpl
     }
 
     /** Encodes the string according to RFC 2396 IETF spec required by INS.
+    /* <p>
      */
     private String encode( String stringToEncode ) {
         StringWriter theStringAfterEscape = new StringWriter();

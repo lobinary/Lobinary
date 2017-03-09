@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import java.awt.Graphics;
 
 /**
  * Factory object that can vend Borders appropriate for the basic L &amp; F.
+ * <p>
+ *  工厂对象可以出售适合基本L&amp; F。
+ * 
+ * 
  * @author Georges Saab
  * @author Amy Fowler
  */
@@ -100,6 +105,10 @@ public class BasicBorders {
 
     /**
      * Returns a border instance for a JSplitPane divider
+     * <p>
+     *  返回JSplitPane分隔符的边框实例
+     * 
+     * 
      * @since 1.3
      */
     public static Border getSplitPaneDividerBorder() {
@@ -142,6 +151,10 @@ public class BasicBorders {
 
     /**
      * Special thin border for rollover toolbar buttons.
+     * <p>
+     *  翻转工具栏按钮的特殊薄边框。
+     * 
+     * 
      * @since 1.4
      */
     public static class RolloverButtonBorder extends ButtonBorder {
@@ -195,6 +208,11 @@ public class BasicBorders {
      *
      * Note: This is identical to the package private class
      * MetalBorders.RolloverMarginBorder and should probably be consolidated.
+     * <p>
+     *  边界像边缘边界,但如果边距已由开发人员明确设置,则它将仅满足边际。
+     * 
+     *  注意：这与包专用类MetalBorders.RolloverMarginBorder相同,应该合并。
+     * 
      */
     static class RolloverMarginBorder extends EmptyBorder {
 
@@ -417,6 +435,9 @@ public class BasicBorders {
      * Draws the border around the divider in a splitpane
      * (when BasicSplitPaneUI is used). To get the appropriate effect, this
      * needs to be used with a SplitPaneBorder.
+     * <p>
+     *  在分割窗格中绘制分隔线周围的边框(当使用BasicSplitPaneUI时)。要获得适当的效果,这需要与SplitPaneBorder一起使用。
+     * 
      */
     static class SplitPaneDividerBorder implements Border, UIResource {
         Color highlight;
@@ -499,6 +520,8 @@ public class BasicBorders {
     /**
      * Draws the border around the splitpane. To work correctly you should
      * also install a border on the divider (property SplitPaneDivider.border).
+     * <p>
+     *  在分割窗格周围绘制边框。要正确工作,您还应该在分隔线上安装边框(属性SplitPaneDivider.border)。
      */
     public static class SplitPaneBorder implements Border, UIResource {
         protected Color highlight;

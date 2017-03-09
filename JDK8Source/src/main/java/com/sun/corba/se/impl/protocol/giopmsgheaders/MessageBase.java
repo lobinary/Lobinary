@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,10 @@ import sun.corba.SharedSecrets;
  * also serves as a factory to create various message types. We currently
  * support GIOP 1.0, 1.1 and 1.2 message types.
  *
+ * <p>
+ *  这个类充当各种GIOP消息类型的基类。这也用作工厂来创建各种消息类型。我们目前支持GIOP 1.0,1.1和1.2消息类型。
+ * 
+ * 
  * @author Ram Jeyaraman 05/14/2000
  */
 
@@ -158,6 +163,10 @@ public abstract class MessageBase implements Message{
             . 1.1 only {Request, Reply} msgs maybe fragmented.
             . 1.2 only {Request, Reply, LocateRequest, LocateReply} msgs
               maybe fragmented.
+         * <p>
+         *  检查魔法损坏检查版本不兼容性检查是否允许基于mesg类型的碎片。 。 1.0断裂不允许; FragmentMessage不存在。 。
+         *  1.1 only {Request,Reply} msgs可能会碎片化。 。 1.2只有{Request,Reply,LocateRequest,LocateReply} msgs可能是分段的。
+         * 
         */
 
         int b1, b2, b3, b4;
@@ -486,6 +495,16 @@ public abstract class MessageBase implements Message{
                 // oneway, no response required
                 response_flags = 0x00;
             }
+            /* <p>
+            /*  // REVISIT下面是正确的做法。这给了更多的灵活性。
+            /*  if((DII :: INV_NO_RESPONSE == false)&& response_expected){response_flags = 0x03; //正则双向} else if((DI
+            /* I :: INV_NO_RESPONSE == false)&&！response_expected){//这种情况不可能} else if((DII :: INV_NO_RESPONSE == tru
+            /* e)&& response_expected){// oneway,但我们需要响应LocationForwards或// SystemExceptions。
+            /*  // REVISIT下面是正确的做法。这给了更多的灵活性。
+            /*  response_flags = 0x01; } else if((DII :: INV_NO_RESPONSE == true)&&！response_expected){// oneway,no response required response_flags = 0x00; }
+            /* }。
+            /*  // REVISIT下面是正确的做法。这给了更多的灵活性。
+            /* 
             */
             TargetAddress target = new TargetAddress();
             target.object_key(object_key);
@@ -731,6 +750,9 @@ public abstract class MessageBase implements Message{
 
     /**
      * Set a flag in the given buffer (fragment bit, byte order bit, etc)
+     * <p>
+     *  在给定缓冲区中设置标志(片段位,字节顺序位等)
+     * 
      */
     public static void setFlag(ByteBuffer byteBuffer, int flag) {
         byte b = byteBuffer.get(6);
@@ -740,6 +762,9 @@ public abstract class MessageBase implements Message{
 
     /**
      * Clears a flag in the given buffer
+     * <p>
+     *  清除给定缓冲区中的标志
+     * 
      */
     public static void clearFlag(byte[] buf, int flag) {
         buf[6] &= (0xFF ^ flag);
@@ -776,6 +801,10 @@ public abstract class MessageBase implements Message{
     /**
      * Construct an ObjectKey from a byte[].
      *
+     * <p>
+     *  从字节[]构造ObjectKey。
+     * 
+     * 
      * @return ObjectKey the object key.
      */
     static ObjectKey extractObjectKey(byte[] objKey, ORB orb) {
@@ -800,6 +829,9 @@ public abstract class MessageBase implements Message{
     /**
      * Extract the object key from TargetAddress.
      *
+     * <p>
+     *  从TargetAddress提取对象键。
+     * 
      * @return ObjectKey the object key.
      */
     static ObjectKey extractObjectKey(TargetAddress target, ORB orb) {

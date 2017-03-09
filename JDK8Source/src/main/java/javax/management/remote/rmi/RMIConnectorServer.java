@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,12 @@ import javax.naming.NamingException;
  * use this class directly, for example with an {@link RMIServerImpl}
  * object.</p>
  *
+ * <p>
+ *  <p>一个JMX API连接器服务器,用于从远程客户端创建基于RMI的连接。
+ * 通常,这种连接器服务器使用{@link javax.management.remote.JMXConnectorServerFactory JMXConnectorServerFactory}。
+ * 但是,专门的应用程序可以直接使用这个类,例如使用{@link RMIServerImpl}对象。</p>。
+ * 
+ * 
  * @since 1.5
  */
 public class RMIConnectorServer extends JMXConnectorServer {
@@ -74,6 +81,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * associated with this attribute, if any, should be a string that
      * is equal, ignoring case, to <code>"true"</code> or
      * <code>"false"</code>.  The default value is false.</p>
+     * <p>
+     *  <p>指定表示RMI连接器服务器的{@link RMIServer}存根应覆盖同一地址的现有存根的属性名称。
+     * 与此属性相关联的值(如果有)应为等于<code>"true"</code>或<code>"false"</code>的字符串。默认值为false。</p>。
+     * 
      */
     public static final String JNDI_REBIND_ATTRIBUTE =
         "jmx.remote.jndi.rebind";
@@ -85,6 +96,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * attribute must be of type <code>RMIClientSocketFactory</code> and can
      * only be specified in the <code>Map</code> argument supplied when
      * creating a connector server.</p>
+     * <p>
+     *  <p>指定与此连接器一起创建的RMI对象的{@link RMIClientSocketFactory}的属性的名称。
+     * 与此属性关联的值必须是<code> RMIClientSocketFactory </code>类型,并且只能在创建连接器服务器时提供的<code> Map </code>参数中指定。</p>。
+     * 
      */
     public static final String RMI_CLIENT_SOCKET_FACTORY_ATTRIBUTE =
         "jmx.remote.rmi.client.socket.factory";
@@ -96,6 +111,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * attribute must be of type <code>RMIServerSocketFactory</code> and can
      * only be specified in the <code>Map</code> argument supplied when
      * creating a connector server.</p>
+     * <p>
+     * <p>指定与此连接器一起创建的RMI对象的{@link RMIServerSocketFactory}的属性的名称。
+     * 与此属性关联的值必须是<code> RMIServerSocketFactory </code>类型,并且只能在创建连接器服务器时提供的<code> Map </code>参数中指定。</p>。
+     * 
      */
     public static final String RMI_SERVER_SOCKET_FACTORY_ATTRIBUTE =
         "jmx.remote.rmi.server.socket.factory";
@@ -106,6 +125,13 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * JMXServiceURL,Map,RMIServerImpl,MBeanServer)
      * RMIConnectorServer(directoryURL,environment,null,null)}</p>
      *
+     * <p>
+     *  <p>建立<code> RMIConnectorServer </code>。
+     * 这相当于调用{@link #RMIConnectorServer(JMXServiceURL,Map,RMIServerImpl,MBeanServer)RMIConnectorServer(directoryURL,environment,null,null)}
+     *  </p>。
+     *  <p>建立<code> RMIConnectorServer </code>。
+     * 
+     * 
      * @param url the URL defining how to create the connector server.
      * Cannot be null.
      *
@@ -136,6 +162,13 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * JMXServiceURL,Map,RMIServerImpl,MBeanServer)
      * RMIConnectorServer(directoryURL,environment,null,mbeanServer)}</p>
      *
+     * <p>
+     *  <p>为给定的MBean服务器创建<code> RMIConnectorServer </code>。
+     * 这等效于调用{@link #RMIConnectorServer(JMXServiceURL,Map,RMIServerImpl,MBeanServer)RMIConnectorServer(directoryURL,environment,null,mbeanServer)}
+     *  </p>。
+     *  <p>为给定的MBean服务器创建<code> RMIConnectorServer </code>。
+     * 
+     * 
      * @param url the URL defining how to create the connector server.
      * Cannot be null.
      *
@@ -168,6 +201,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * <p>Makes an <code>RMIConnectorServer</code> for the given MBean
      * server.</p>
      *
+     * <p>
+     *  <p>为给定的MBean服务器创建<code> RMIConnectorServer </code>。</p>
+     * 
+     * 
      * @param url the URL defining how to create the connector server.
      * Cannot be null.
      *
@@ -239,6 +276,11 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * JMXConnector#connect(Map) connect} method can be used to make
      * one new connection to this connector server.</p>
      *
+     * <p>
+     *  <p>返回此连接器服务器的客户端存根。客户端存根是可序列化的对象,其{@link JMXConnector#connect(Map)connect}方法可用于与此连接器服务器建立一个新连接。
+     * </p>。
+     * 
+     * 
      * @param env client connection parameters of the same sort that
      * could be provided to {@link JMXConnector#connect(Map)
      * JMXConnector.connect(Map)}.  Can be null, which is equivalent
@@ -334,6 +376,40 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * include throwing {@link MalformedURLException} when the
      * connector server is created or when it is started.</p>
      *
+     * <p>
+     *  <p>激活连接器服务器,即开始侦听客户端连接。在连接器服务器已处于活动状态时调用此方法不起作用。在连接器服务器已停止时调用此方法将生成<code> IOException </code>。</p>
+     * 
+     * <p>第一次调用此方法时的行为取决于构建时提供的参数,如下所述。</p>
+     * 
+     *  <p>首先,需要{@link RMIServerImpl}的子类的对象,才能通过RMI导出连接器服务器：</p>
+     * 
+     * <ul>
+     * 
+     *  <li>如果向构造函数提供了<code> RMIServerImpl </code>,则会使用它。
+     * 
+     *  <li>否则,如果提供给构造函数的<code> JMXServiceURL </code>的协议部分是<code> iiop </code>,那么会创建一个{@link RMIIIOPServerImpl}
+     * 类型的对象。
+     * 
+     *  <li>否则,如果<code> JMXServiceURL </code>为null,或其协议部分为<code> rmi </code>,则会创建类型为{@link RMIJRMPServerImpl}
+     * 的对象。
+     * 
+     *  <li>否则,该实现可以创建特定于实现的{@link RMIServerImpl},也可以抛出{@link MalformedURLException}。
+     * 
+     * </ul>
+     * 
+     *  <p>如果给定地址包含{@link javax.management.remote.rmi}的包文档中指定的JNDI目录URL,则此<code> RMIConnectorServer </code>将
+     * 通过绑定<code> RMIServerImpl </code>到指定的地址。
+     * </p>。
+     * 
+     * <p>如果<code> JMXServiceURL </code>的URL路径部分为空或单个斜杠(<code> / </code>),则RMI对象不会绑定到目录。
+     * 相反,对其的引用将编码在RMIConnectorServer地址(由{@link #getAddress()}返回)的URL路径中。
+     *  {@link javax.management.remote.rmi}的软件包文档中描述了<code> rmi </code>和<code> iiop </code>的编码。</p>。
+     * 
+     *  <p>当URL路径既不为空也不是JNDI目录URL时,或协议既不是<code> rmi </code>也不是<code> iiop </code>时的行为是实现定义的, {@link MalformedURLException}
+     * 当连接器服务器创建或启动时。
+     * </p>。
+     * 
+     * 
      * @exception IllegalStateException if the connector server has
      * not been attached to an MBean server.
      * @exception IOException if the connector server cannot be
@@ -505,6 +581,22 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * directory by the {@link #start() start} method, it is unbound
      * from the directory by this method.</p>
      *
+     * <p>
+     *  <p>停用连接器服务器,即停止侦听客户端连接。调用此方法还将关闭此服务器所创建的所有客户端连接。此方法返回后,无论是正常还是异常,连接器服务器都不会创建任何新的客户端连接。</p>
+     * 
+     *  <p>连接器服务器停止后,无法再次启动。</p>
+     * 
+     *  <p>在连接器服务器已停止时调用此方法无效。当连接器服务器尚未启动时调用此方法将永久禁用连接器服务器对象。</p>
+     * 
+     * <p>如果关闭客户端连接产生异常,则不会从此方法抛出该异常。从此MBean发出{@link JMXConnectionNotification},其中包含无法关闭的连接的连接ID。</p>
+     * 
+     *  <p>关闭连接器服务器是一个潜在的缓慢操作。例如,如果具有打开的连接的客户端计算机崩溃,则关闭操作可能必须等待网络协议超时。不想在关闭操作中阻止的调用方应在单独的线程中执行。</p>
+     * 
+     *  <p>此方法在连接器服务器的<code> RMIServerImpl </code>对象上调用方法{@link RMIServerImpl#close()close}。</p>
+     * 
+     *  <p>如果<code> RMIServerImpl </code>通过{@link #start()start}方法绑定到JNDI目录,则通过此方法从目录解除绑定。</p>
+     * 
+     * 
      * @exception IOException if the server cannot be closed cleanly,
      * or if the <code>RMIServerImpl</code> cannot be unbound from the
      * directory.  When this exception is thrown, the server has
@@ -601,6 +693,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
 
     /* We repeat the definitions of connection{Opened,Closed,Failed}
        here so that they are accessible to other classes in this package
+    /* <p>
+    /*  这里,以便它们可以访问这个包中的其他类
+    /* 
+    /* 
        even though they have protected access.  */
 
     @Override
@@ -623,6 +719,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
 
     /**
      * Bind a stub to a registry.
+     * <p>
+     *  将存根绑定到注册表。
+     * 
+     * 
      * @param jndiUrl URL of the stub in the registry, extracted
      *        from the <code>JMXServiceURL</code>.
      * @param attributes A Hashtable containing environment parameters,
@@ -647,6 +747,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
 
     /**
      * Creates a new RMIServerImpl.
+     * <p>
+     *  创建新的RMIServerImpl。
+     * 
+     * 
      **/
     RMIServerImpl newServer() throws IOException {
         final boolean iiop = isIiopURL(address,true);
@@ -663,6 +767,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
 
     /**
      * Encode a stub into the JMXServiceURL.
+     * <p>
+     *  将存根编码到JMXServiceURL中。
+     * 
+     * 
      * @param rmiServer The stub object to encode in the URL
      * @param attributes A Map containing environment parameters,
      *        built from the Map specified at this object creation.
@@ -710,6 +818,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
 
     /**
      * Returns the IOR of the given rmiServer.
+     * <p>
+     *  返回给定rmiServer的IOR。
+     * 
+     * 
      **/
     static String encodeStub(
             RMIServer rmiServer, Map<String, ?> env) throws IOException {
@@ -744,6 +856,10 @@ public class RMIConnectorServer extends JMXConnectorServer {
     /**
      * Object that we will bind to the registry.
      * This object is a stub connected to our RMIServerImpl.
+     * <p>
+     *  我们将绑定到注册表的对象。此对象是连接到我们的RMIServerImpl的存根。
+     * 
+     * 
      **/
     private static RMIServer objectToBind(
             RMIServerImpl rmiServer, Map<String, ?> env)
@@ -809,6 +925,9 @@ public class RMIConnectorServer extends JMXConnectorServer {
      * This array is a lookup table that translates 6-bit positive integer
      * index values into their "Base64 Alphabet" equivalents as specified
      * in Table 1 of RFC 2045.
+     * <p>
+     *  此数组是一个查找表,它将6位正整数索引值转换为RFC 2045表1中规定的"Base64 Alphabet"等效项。
+     * 
      */
     private static final char intToAlpha[] = {
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -821,6 +940,8 @@ public class RMIConnectorServer extends JMXConnectorServer {
     /**
      * Construct a new IOException with a nested exception.
      * The nested exception is set only if JDK {@literal >= 1.4}
+     * <p>
+     *  使用嵌套异常构造新的IOException。嵌套异常仅在JDK {@literal> = 1.4}
      */
     private static IOException newIOException(String message,
                                               Throwable cause) {

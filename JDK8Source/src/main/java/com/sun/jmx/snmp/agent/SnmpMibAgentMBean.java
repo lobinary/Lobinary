@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,11 @@ import com.sun.jmx.snmp.SnmpStatusException;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  公开<CODE> SnmpMibAgent </CODE> MBean的远程管理界面。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public interface SnmpMibAgentMBean {
@@ -58,6 +64,10 @@ public interface SnmpMibAgentMBean {
      * Processes a <CODE>get</CODE> operation.
      * This method must not be called from remote.
      *
+     * <p>
+     *  处理<CODE> get </CODE>操作。不能从远程调用此方法。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variables to
      *            be retrieved. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -71,6 +81,10 @@ public interface SnmpMibAgentMBean {
      * Processes a <CODE>getNext</CODE> operation.
      * This method must not be called from remote.
      *
+     * <p>
+     *  处理<CODE> getNext </CODE>操作。不能从远程调用此方法。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variables to
      *            be retrieved. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -84,6 +98,10 @@ public interface SnmpMibAgentMBean {
      * Processes a <CODE>getBulk</CODE> operation.
      * This method must not be called from remote.
      *
+     * <p>
+     *  处理<CODE> getBulk </CODE>操作。不能从远程调用此方法。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variables to
      *            be retrieved. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -107,6 +125,10 @@ public interface SnmpMibAgentMBean {
      * Processes a <CODE>set</CODE> operation.
      * This method must not be called from remote.
      *
+     * <p>
+     *  处理<CODE>设置</CODE>操作。不能从远程调用此方法。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variables to
      *            be set. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -121,6 +143,10 @@ public interface SnmpMibAgentMBean {
      * If the operation cannot be performed, the method should emit a
      * <CODE>SnmpStatusException</CODE>.
      *
+     * <p>
+     *  检查是否可以执行<CODE>设置</CODE>操作。如果无法执行该操作,则该方法应该发出<CODE> SnmpStatusException </CODE>。
+     * 
+     * 
      * @param req The SnmpMibRequest object holding the list of variables to
      *            be set. This list is composed of
      *            <CODE>SnmpVarBind</CODE> objects.
@@ -138,6 +164,10 @@ public interface SnmpMibAgentMBean {
      * Gets the reference to the MBean server in which the SNMP MIB is
      * registered.
      *
+     * <p>
+     *  获取对注册了SNMP MIB的MBean服务器的引用。
+     * 
+     * 
      * @return The MBean server or null if the MIB is not registered in any
      *         MBean server.
      */
@@ -149,6 +179,10 @@ public interface SnmpMibAgentMBean {
      * <BR>This method is used for accessing the SNMP MIB handler property
      * of the SNMP MIB agent in case of a standalone agent.
      *
+     * <p>
+     *  获取对MIB绑定的SNMP协议适配器的引用。 <BR>此方法用于访问SNMP MIB代理的SNMP MIB处理程序属性(如果是独立代理)。
+     * 
+     * 
      * @return The SNMP MIB handler.
      */
     public SnmpMibHandler getSnmpAdaptor();
@@ -160,6 +194,11 @@ public interface SnmpMibAgentMBean {
      * <BR>This method is used for setting the SNMP MIB handler property of
      * the SNMP MIB agent in case of a standalone agent.
      *
+     * <p>
+     *  设置SNMP协议适配器的引用,通过该协议适配器可以访问MIB,并将该新MIB添加到SNMP MIB处理程序中。
+     *  <BR>此方法用于在独立代理的情况下设置SNMP MIB代理的SNMP MIB处理程序属性。
+     * 
+     * 
      * @param stack The SNMP MIB handler.
      */
     public void setSnmpAdaptor(SnmpMibHandler stack);
@@ -171,6 +210,11 @@ public interface SnmpMibAgentMBean {
      * This can be useful when dealing with MIB overlapping.
      * Some OID can be implemented in more than one MIB. In this case, the
      * OID nearer agent will be used on SNMP operations.
+     * <p>
+     * 设置SNMP协议适配器的引用,通过该协议适配器可以访问MIB,并将该新MIB添加到SNMP MIB处理程序中。调用此方法以将特定代理设置为特定OID。这在处理MIB重叠时很有用。
+     * 一些OID可以在多个MIB中实现。在这种情况下,OID近端代理将用于SNMP操作。
+     * 
+     * 
      * @param stack The SNMP MIB handler.
      * @param oids The set of OIDs this agent implements.
      *
@@ -183,6 +227,10 @@ public interface SnmpMibAgentMBean {
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler.
      * Adds a new contextualized MIB in the SNMP MIB handler.
      *
+     * <p>
+     *  设置SNMP协议适配器的引用,通过该协议适配器可以访问MIB,并将该新MIB添加到SNMP MIB处理程序中。在SNMP MIB处理程序中添加新的上下文化MIB。
+     * 
+     * 
      * @param stack The SNMP MIB handler.
      * @param contextName The MIB context name. If null is passed, will be
      *        registered in the default context.
@@ -198,6 +246,10 @@ public interface SnmpMibAgentMBean {
      * will be SNMP accessible and adds this new MIB in the SNMP MIB handler.
      * Adds a new contextualized MIB in the SNMP MIB handler.
      *
+     * <p>
+     *  设置SNMP协议适配器的引用,通过该协议适配器将SNMP可访问SNMP,并将此新MIB添加到SNMP MIB处理程序中。在SNMP MIB处理程序中添加新的上下文化MIB。
+     * 
+     * 
      * @param stack The SNMP MIB handler.
      * @param contextName The MIB context name. If null is passed, will be
      *        registered in the default context.
@@ -214,6 +266,10 @@ public interface SnmpMibAgentMBean {
      * Gets the object name of the SNMP protocol adaptor to which the MIB is
      * bound.
      *
+     * <p>
+     *  获取MIB绑定的SNMP协议适配器的对象名称。
+     * 
+     * 
      * @return The name of the SNMP protocol adaptor.
      */
     public ObjectName getSnmpAdaptorName();
@@ -223,6 +279,10 @@ public interface SnmpMibAgentMBean {
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler
      * associated to the specified <CODE>name</CODE>.
      *
+     * <p>
+     *  设置对MIB进行SNMP访问的SNMP协议适配器的引用,并将该新MIB添加到与指定的<CODE>名称</CODE>相关联的SNMP MIB处理程序中。
+     * 
+     * 
      * @param name The object name of the SNMP MIB handler.
      *
      * @exception InstanceNotFoundException The MBean does not exist in the
@@ -242,6 +302,11 @@ public interface SnmpMibAgentMBean {
      * This can be useful when dealing with MIB overlapping.
      * Some OID can be implemented in more than one MIB. In this case, the
      * OID nearer agent will be used on SNMP operations.
+     * <p>
+     *  设置对MIB进行SNMP访问的SNMP协议适配器的引用,并将该新MIB添加到与指定的<CODE>名称</CODE>相关联的SNMP MIB处理程序中。调用此方法以将特定代理设置为特定OID。
+     * 这在处理MIB重叠时很有用。一些OID可以在多个MIB中实现。在这种情况下,OID近端代理将用于SNMP操作。
+     * 
+     * 
      * @param name The name of the SNMP protocol adaptor.
      * @param oids The set of OIDs this agent implements.
      * @exception InstanceNotFoundException The SNMP protocol adaptor does
@@ -260,6 +325,10 @@ public interface SnmpMibAgentMBean {
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler
      * associated to the specified <CODE>name</CODE>.
      *
+     * <p>
+     * 设置对MIB进行SNMP访问的SNMP协议适配器的引用,并将该新MIB添加到与指定的<CODE>名称</CODE>相关联的SNMP MIB处理程序中。
+     * 
+     * 
      * @param name The name of the SNMP protocol adaptor.
      * @param contextName The MIB context name. If null is passed, will be
      *     registered in the default context.
@@ -279,6 +348,10 @@ public interface SnmpMibAgentMBean {
      * will be SNMP accessible and add this new MIB in the SNMP MIB handler
      * associated to the specified <CODE>name</CODE>.
      *
+     * <p>
+     *  设置对MIB进行SNMP访问的SNMP协议适配器的引用,并将该新MIB添加到与指定的<CODE>名称</CODE>相关联的SNMP MIB处理程序中。
+     * 
+     * 
      * @param name The name of the SNMP protocol adaptor.
      * @param contextName The MIB context name. If null is passed, will be
      *        registered in the default context.
@@ -302,6 +375,10 @@ public interface SnmpMibAgentMBean {
      * As a reminder, only bound MIBs can be accessed through SNMP protocol
      * adaptor.
      *
+     * <p>
+     *  指示MIB模块是否绑定到SNMP协议适配器。作为提醒,只有绑定的MIB可以通过SNMP协议适配器访问。
+     * 
+     * 
      * @return <CODE>true</CODE> if the MIB module is bound,
      *         <CODE>false</CODE> otherwise.
      */
@@ -310,6 +387,9 @@ public interface SnmpMibAgentMBean {
     /**
      * Gets the MIB name.
      *
+     * <p>
+     *  获取MIB名称。
+     * 
      * @return The MIB name.
      */
     public String getMibName();

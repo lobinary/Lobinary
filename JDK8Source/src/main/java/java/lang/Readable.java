@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.io.IOException;
  * a <tt>Readable</tt> are made available to callers of the read
  * method via a {@link java.nio.CharBuffer CharBuffer}.
  *
+ * <p>
+ *  <tt>可读</tt>是字符的来源。来自<tt>可读</tt>的字符通过{@link java.nio.CharBuffer CharBuffer}提供给读取方法的调用者。
+ * 
+ * 
  * @since 1.5
  */
 public interface Readable {
@@ -42,6 +47,9 @@ public interface Readable {
      * changes made are the results of a put operation. No flipping or
      * rewinding of the buffer is performed.
      *
+     * <p>
+     *  尝试将字符读入指定的字符缓冲区。缓冲区用作字符存储库,因为：只有更改是put操作的结果。不执行缓冲器的翻转或倒回。
+     * 
      * @param cb the buffer to read characters into
      * @return The number of {@code char} values added to the buffer,
      *                 or -1 if this source of characters is at its end

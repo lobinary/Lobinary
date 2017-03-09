@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@
  * From: ./ir.idl
  * Date: Fri Aug 28 16:03:31 1998
  *   By: idltojava Java IDL 1.2 Aug 11 1998 02:00:18
+ * <p>
+ *  文件：./org/omg/CORBA/DefinitionKind.java从：./ir.idl日期：Fri Aug 28 16:03:31由By：idltojava Java IDL 1.2 Aug
+ *  11 1998 02:00:18。
+ * 
  */
 
 package org.omg.CORBA;
@@ -43,6 +48,13 @@ package org.omg.CORBA;
 * <code>value</code>, which returns the <code>int</code> constant that
 * is the value for a <code>DefinitionKind</code> instance.
 *
+* <p>
+*  提供用于标识Interface Repository对象类型的常量的类。
+* 这个类包含两种常量,即<code> int </code>和那些<code> DefinitionKind </code>类的实例。
+* 这个类提供了方法<code> from_int </code>,它给出了<code> int </code>常量之一,创建了相应的<code> DefinitionKind </code>实例。
+* 它还提供方法<code> value </code>,它返回<code> int </code>常量,它是<code> DefinitionKind </code>实例的值。
+* 
+* 
 * @see IRObject
 */
 
@@ -51,30 +63,45 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object
  * does not have a definition kind.
+ * <p>
+ *  指示Interface Repository对象没有定义种类的常量。
+ * 
  */
         public static final int _dk_none = 0,
 
 /**
  * The constant that indicates that the type of an Interface Repository object
  * may be any type.
+ * <p>
+ *  指示Interface Repository对象的类型可以是任何类型的常量。
+ * 
  */
         _dk_all = 1,
 
 /**
  * The constant that indicates that an Interface Repository object is an
  * attribute.
+ * <p>
+ *  指示Interface Repository对象是属性的常量。
+ * 
  */
         _dk_Attribute = 2,
 
 /**
  * The constant that indicates that an Interface Repository object is a
  * constant.
+ * <p>
+ *  指示Interface Repository对象是常量的常量。
+ * 
  */
         _dk_Constant = 3,
 
 /**
  * The constant that indicates that an Interface Repository object is an
  * exception.
+ * <p>
+ *  指示Interface Repository对象是异常的常量。
+ * 
  */
 
         _dk_Exception = 4,
@@ -82,6 +109,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is an
  * interface.
+ * <p>
+ *  指示Interface Repository对象是接口的常量。
+ * 
  */
 
         _dk_Interface = 5,
@@ -89,6 +119,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * module.
+ * <p>
+ *  指示Interface Repository对象是模块的常量。
+ * 
  */
 
         _dk_Module = 6,
@@ -96,6 +129,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is an
  * operation.
+ * <p>
+ * 指示Interface Repository对象是操作的常量。
+ * 
  */
 
         _dk_Operation = 7,
@@ -103,6 +139,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * Typedef.
+ * <p>
+ *  指示Interface Repository对象是Typedef的常量。
+ * 
  */
 
         _dk_Typedef = 8,
@@ -110,6 +149,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is an
  * Alias.
+ * <p>
+ *  指示Interface Repository对象是别名的常量。
+ * 
  */
 
         _dk_Alias = 9,
@@ -117,6 +159,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * Struct.
+ * <p>
+ *  指示Interface Repository对象是Struct的常量。
+ * 
  */
 
         _dk_Struct = 10,
@@ -124,6 +169,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * Union.
+ * <p>
+ *  指示Interface Repository对象是联合的常量。
+ * 
  */
 
         _dk_Union = 11,
@@ -131,6 +179,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is an
  * Enum.
+ * <p>
+ *  指示Interface Repository对象是枚举的常量。
+ * 
  */
 
         _dk_Enum = 12,
@@ -138,6 +189,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * Primitive.
+ * <p>
+ *  指示Interface Repository对象是基元的常量。
+ * 
  */
 
         _dk_Primitive = 13,
@@ -145,6 +199,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * String.
+ * <p>
+ *  指示Interface Repository对象是String的常量。
+ * 
  */
 
         _dk_String = 14,
@@ -152,6 +209,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * Sequence.
+ * <p>
+ *  指示Interface Repository对象是序列的常量。
+ * 
  */
 
         _dk_Sequence = 15,
@@ -159,6 +219,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is an
  * Array.
+ * <p>
+ *  指示Interface Repository对象是数组的常量。
+ * 
  */
 
         _dk_Array = 16,
@@ -166,6 +229,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * Repository.
+ * <p>
+ *  指示Interface Repository对象是存储库的常量。
+ * 
  */
 
         _dk_Repository = 17,
@@ -173,6 +239,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * Wstring.
+ * <p>
+ *  指示Interface Repository对象是Wstring的常量。
+ * 
  */
 
         _dk_Wstring = 18,
@@ -180,6 +249,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is of type
  * Fixed.
+ * <p>
+ *  指示Interface Repository对象类型为Fixed的常量。
+ * 
  */
 
         _dk_Fixed = 19,
@@ -187,6 +259,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * Value.
+ * <p>
+ *  指示Interface Repository对象是值的常量。
+ * 
  */
 
         _dk_Value = 20,
@@ -194,6 +269,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * ValueBox.
+ * <p>
+ *  指示Interface Repository对象是ValueBox的常量。
+ * 
  */
 
         _dk_ValueBox = 21,
@@ -201,6 +279,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is a
  * ValueMember.
+ * <p>
+ *  指示Interface Repository对象是ValueMember的常量。
+ * 
  */
 
         _dk_ValueMember = 22,
@@ -208,6 +289,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object is of type
  * Native.
+ * <p>
+ *  指示Interface Repository对象的类型为Native的常量。
+ * 
  */
 
         _dk_Native = 23,
@@ -215,12 +299,18 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The constant that indicates that an Interface Repository object
  * is representing an abstract interface.
+ * <p>
+ *  指示Interface Repository对象表示抽象接口的常量。
+ * 
  */
         _dk_AbstractInterface = 24;
 
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object has no definition kind.
+ * <p>
+ * <code> DefinitionKind </code>的静态实例表示Interface Repository对象没有定义种类。
+ * 
  */
 
     public static final DefinitionKind dk_none = new DefinitionKind(_dk_none);
@@ -231,6 +321,10 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
      * <code>DefinitionKind</code> is appropriate. The Container's
          * <code>contents</code> method
      * makes use of this constant to return all contained definitions of any kind.
+     * <p>
+     *  通配符<code> DefinitionKind </code>常量,在任何<code> DefinitionKind </code>适用的所有场合都有用。
+     * 容器的<code> contents </code>方法利用这个常量返回所有包含的任何类型的定义。
+     * 
          */
 
     public static final DefinitionKind dk_all = new DefinitionKind(_dk_all);
@@ -238,6 +332,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is an Attribute.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例指示Interface Repository对象是属性。
+ * 
  */
 
     public static final DefinitionKind dk_Attribute = new DefinitionKind(_dk_Attribute);
@@ -245,6 +342,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a constant.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例指示Interface Repository对象是常量。
+ * 
  */
 
     public static final DefinitionKind dk_Constant = new DefinitionKind(_dk_Constant);
@@ -253,6 +353,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is an Exception.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是一个异常。
+ * 
  */
 
     public static final DefinitionKind dk_Exception = new DefinitionKind(_dk_Exception);
@@ -260,6 +363,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is an Interface.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是一个接口。
+ * 
  */
 
     public static final DefinitionKind dk_Interface = new DefinitionKind(_dk_Interface);
@@ -267,6 +373,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Module.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例指示Interface Repository对象是一个模块。
+ * 
  */
 
     public static final DefinitionKind dk_Module = new DefinitionKind(_dk_Module);
@@ -274,6 +383,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is an Operation.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是一个操作。
+ * 
  */
 
     public static final DefinitionKind dk_Operation = new DefinitionKind(_dk_Operation);
@@ -281,6 +393,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Typedef.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是Typedef。
+ * 
  */
 
     public static final DefinitionKind dk_Typedef = new DefinitionKind(_dk_Typedef);
@@ -288,6 +403,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is an Alias.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是别名。
+ * 
  */
 
     public static final DefinitionKind dk_Alias = new DefinitionKind(_dk_Alias);
@@ -295,6 +413,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Struct.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例,表示Interface Repository对象是一个Struct。
+ * 
  */
 
     public static final DefinitionKind dk_Struct = new DefinitionKind(_dk_Struct);
@@ -302,6 +423,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Union.
+ * <p>
+ * <code> DefinitionKind </code>的静态实例,表示Interface Repository对象是联盟。
+ * 
  */
 
     public static final DefinitionKind dk_Union = new DefinitionKind(_dk_Union);
@@ -309,6 +433,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is an Enum.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例指示Interface Repository对象是枚举。
+ * 
  */
 
     public static final DefinitionKind dk_Enum = new DefinitionKind(_dk_Enum);
@@ -316,6 +443,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Primitive.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例指示Interface Repository对象是基元。
+ * 
  */
 
     public static final DefinitionKind dk_Primitive = new DefinitionKind(_dk_Primitive);
@@ -323,6 +453,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a String.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例指示Interface Repository对象是String。
+ * 
  */
 
     public static final DefinitionKind dk_String = new DefinitionKind(_dk_String);
@@ -330,6 +463,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Sequence.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是一个序列。
+ * 
  */
 
     public static final DefinitionKind dk_Sequence = new DefinitionKind(_dk_Sequence);
@@ -337,6 +473,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is an Array.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是一个数组。
+ * 
  */
 
     public static final DefinitionKind dk_Array = new DefinitionKind(_dk_Array);
@@ -345,6 +484,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Repository.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例指示Interface Repository对象是存储库。
+ * 
  */
 
     public static final DefinitionKind dk_Repository = new DefinitionKind(_dk_Repository);
@@ -353,6 +495,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Wstring.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是Wstring。
+ * 
  */
 
     public static final DefinitionKind dk_Wstring = new DefinitionKind(_dk_Wstring);
@@ -360,6 +505,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Fixed value.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是一个Fixed值。
+ * 
  */
 
     public static final DefinitionKind dk_Fixed = new DefinitionKind(_dk_Fixed);
@@ -367,6 +515,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Value.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是一个值。
+ * 
  */
 
     public static final DefinitionKind dk_Value = new DefinitionKind(_dk_Value);
@@ -374,6 +525,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a ValueBox.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是ValueBox。
+ * 
  */
 
     public static final DefinitionKind dk_ValueBox = new DefinitionKind(_dk_ValueBox);
@@ -381,6 +535,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a ValueMember.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是ValueMember。
+ * 
  */
 
     public static final DefinitionKind dk_ValueMember = new DefinitionKind(_dk_ValueMember);
@@ -389,6 +546,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
  * The static instance of <code>DefinitionKind</code> indicating that an
  * Interface Repository object is a Native value.
+ * <p>
+ *  <code> DefinitionKind </code>的静态实例表示Interface Repository对象是Native值。
+ * 
  */
 
     public static final DefinitionKind dk_Native = new DefinitionKind(_dk_Native);
@@ -397,12 +557,19 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 /**
 * The static instance of <code>DefinitionKind</code> indicating that an
 * Interface Repository object represents an abstract interface.
+* <p>
+* <code> DefinitionKind </code>的静态实例表示Interface Repository对象表示抽象接口。
+* 
 */
     public static final DefinitionKind dk_AbstractInterface = new DefinitionKind(_dk_AbstractInterface);
 
 
      /**
      * Returns the <code>int</code> constant identifying the type of an IR object.
+     * <p>
+     *  返回标识IR对象类型的<code> int </code>常量。
+     * 
+     * 
      * @return the <code>int</code> constant from the class
          * <code>DefinitionKind</code> that is the value of this
          * <code>DefinitionKind</code> instance
@@ -416,6 +583,10 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
      /**
      * Creates a <code>DefinitionKind</code> instance corresponding to the given code
 .
+     * <p>
+     *  创建与给定代码对应的<code> DefinitionKind </code>实例。
+     * 
+     * 
      * @param i one of the <code>int</code> constants from the class
          * <code>DefinitionKind</code>
          * @return the <code>DefinitionKind</code> instance corresponding
@@ -484,6 +655,10 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
    /**
     * Constructs a <code>DefinitionKind</code> object with its <code>_value</code>
     * field initialized with the given value.
+    * <p>
+    *  构造一个<code> DefinitionKind </code>对象,其<code> _value </code>字段使用给定值初始化。
+    * 
+    * 
     * @param _value one of the <code>int</code> constants defined in the
     *                   class <code>DefinitionKind</code>
     */
@@ -494,6 +669,9 @@ public class DefinitionKind implements org.omg.CORBA.portable.IDLEntity {
 
      /**
       * The field that holds a value for a <code>DefinitionKind</code> object.
+      * <p>
+      *  保存<code> DefinitionKind </code>对象的值的字段。
+      * 
       * @serial
       */
 

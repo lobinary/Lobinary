@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -11,6 +12,8 @@ package org.omg.PortableInterceptor;
 
 /** Type of an object id. This provides the identity of a particular
    * object that was created by an object adapter.
+   * <p>
+   * 
    */
 abstract public class ObjectIdHelper
 {

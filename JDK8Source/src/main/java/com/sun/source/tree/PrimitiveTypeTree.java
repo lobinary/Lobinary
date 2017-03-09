@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ import javax.lang.model.type.TypeKind;
  *
  * @jls section 4.2
  *
+ * <p>
+ *  基本类型的树节点。
+ * 
+ *  例如：
+ * <pre>
+ *  <em> primitiveTypeKind </em>
+ * 
  * @author Peter von der Ah&eacute;
  * @author Jonathan Gibbons
  * @since 1.6

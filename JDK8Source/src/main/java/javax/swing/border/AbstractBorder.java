@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,13 @@ import java.io.Serializable;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  一个实现没有大小的空边框的类。这提供了一个方便的基类,可以从其中轻松导出其他边界类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  */
 @SuppressWarnings("serial")
@@ -51,6 +59,10 @@ public abstract class AbstractBorder implements Border, Serializable
 {
     /**
      * This default implementation does no painting.
+     * <p>
+     *  此默认实现不绘画。
+     * 
+     * 
      * @param c the component for which this border is being painted
      * @param g the paint graphics
      * @param x the x position of the painted border
@@ -68,6 +80,11 @@ public abstract class AbstractBorder implements Border, Serializable
      * By default the {@code top}, {@code left}, {@code bottom},
      * and {@code right} fields are set to {@code 0}.
      *
+     * <p>
+     *  此默认实现返回由{@link #getBorderInsets(Component,Insets)}方法初始化的新{@link Insets}对象。
+     * 默认情况下,{@code top},{@code left},{@code bottom}和{@code right}字段设置为{@code 0}。
+     * 
+     * 
      * @param c  the component for which this border insets value applies
      * @return a new {@link Insets} object
      */
@@ -77,6 +94,10 @@ public abstract class AbstractBorder implements Border, Serializable
 
     /**
      * Reinitializes the insets parameter with this Border's current Insets.
+     * <p>
+     *  使用此Border的当前Insets重新初始化insets参数。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
      * @return the <code>insets</code> object
@@ -88,12 +109,20 @@ public abstract class AbstractBorder implements Border, Serializable
 
     /**
      * This default implementation returns false.
+     * <p>
+     *  此默认实现返回false。
+     * 
+     * 
      * @return false
      */
     public boolean isBorderOpaque() { return false; }
 
     /**
      * This convenience method calls the static method.
+     * <p>
+     *  这个方便的方法调用静态方法。
+     * 
+     * 
      * @param c the component for which this border is being computed
      * @param x the x position of the border
      * @param y the y position of the border
@@ -109,6 +138,10 @@ public abstract class AbstractBorder implements Border, Serializable
      * Returns a rectangle using the arguments minus the
      * insets of the border. This is useful for determining the area
      * that components should draw in that will not intersect the border.
+     * <p>
+     *  使用参数减去边框的插入来返回一个矩形。这对于确定组件应该绘制的区域(不会与边框相交)很有用。
+     * 
+     * 
      * @param c the component for which this border is being computed
      * @param b the <code>Border</code> object
      * @param x the x position of the border
@@ -139,6 +172,13 @@ public abstract class AbstractBorder implements Border, Serializable
      * size &gt;= the minimum size and <code>getBaselineResizeBehavior</code>
      * can be used to determine how the baseline changes with size.
      *
+     * <p>
+     *  返回基线。返回值小于0表示边界没有合理的基线。
+     * <p>
+     * 默认实现返回-1。支持基线的子类应适当覆盖。
+     * 如果返回值> = 0,则组件对于任何大小&gt; =最小大小具有有效基线,并且<code> getBaselineResizeBehavior </code>可以用于确定基线如何随大小改变。
+     * 
+     * 
      * @param c <code>Component</code> baseline is being requested for
      * @param width the width to get the baseline for
      * @param height the height to get the baseline for
@@ -173,6 +213,13 @@ public abstract class AbstractBorder implements Border, Serializable
      * value other than <code>BaselineResizeBehavior.OTHER</code> even if
      * <code>getBaseline</code> returns a value less than 0.
      *
+     * <p>
+     *  返回指示组件基线随着大小变化而变化的枚举。此方法主要用于布局管理器和GUI构建器。
+     * <p>
+     *  默认实现返回<code> BaselineResizeBehavior.OTHER </code>,支持基线的子类应该适当覆盖。
+     * 子类不应返回<code> null </code>;如果基线不能计算返回<code> BaselineResizeBehavior.OTHER </code>。
+     * 调用者应首先使用<code> getBaseline </code>请求基线,如果返回值>&gt; = 0,则使用此方法。
+     * 
      * @param c <code>Component</code> to return baseline resize behavior for
      * @return an enum indicating how the baseline changes as the border is
      *         resized
@@ -191,6 +238,9 @@ public abstract class AbstractBorder implements Border, Serializable
     /*
      * Convenience function for determining ComponentOrientation.
      * Helps us avoid having Munge directives throughout the code.
+     * <p>
+     * 此方法可以接受<code> BaselineResizeBehavior.OTHER </code>以外的值,即使<code> getBaseline </code>返回的值小于0也是如此。
+     * 
      */
     static boolean isLeftToRight( Component c ) {
         return c.getComponentOrientation().isLeftToRight();

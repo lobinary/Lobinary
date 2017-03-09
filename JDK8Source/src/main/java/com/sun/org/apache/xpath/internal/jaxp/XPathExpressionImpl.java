@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 // $Id: XPathExpressionImpl.java,v 1.3 2005/09/27 09:40:43 sunithareddy Exp $
 
@@ -52,6 +62,10 @@ import org.xml.sax.InputSource;
 /**
  * The XPathExpression interface encapsulates a (compiled) XPath expression.
  *
+ * <p>
+ *  XPathExpression接口封装(编译的)XPath表达式。
+ * 
+ * 
  * @version $Revision: 1.10 $
  * @author  Ramesh Mandava
  */
@@ -73,6 +87,9 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
 
     /** Protected constructor to prevent direct instantiation; use compile()
      * from the context.
+     * <p>
+     *  从上下文。
+     * 
      */
     protected XPathExpressionImpl() {
         this(null, null, null, null,
@@ -156,6 +173,19 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
      * If <code>returnType</code> is <code>null</code>, then a
      * <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>在指定的上下文中评估编译的XPath表达式,并返回指定类型的结果。</p>
+     * 
+     *  <p>有关上下文项评估,变量,函数和QName解析以及返回类型转换的JAXP 1.3规范的"XPath表达式评估"部分。</p>
+     * 
+     *  <p>如果<code> returnType </code>不是{@link XPathConstants}中定义的类型之一,则会抛出<code> IllegalArgumentException </code>
+     * 。
+     * </p>。
+     * 
+     *  <p>如果为<code> item </code>提供了<code> null </code>值,那么空文档将用于上下文。
+     * 如果<code> returnType </code>是<code> null </code>,那么会抛出<code> NullPointerException </code>。</p>。
+     * 
+     * 
      * @param item The starting context (node or node list, for example).
      * @param returnType The desired return type.
      *
@@ -223,6 +253,18 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
      * <code>item</code>, an empty document will be used for the
      * context.
      *
+     * <p>
+     * <p>在指定的上下文中评估编译的XPath表达式,并将结果返回为<code> String </code>。</p>
+     * 
+     *  <p>此方法使用{@link XPathConstants#STRING}的<code> returnType </code>调用{@link #evaluate(Object item,QName returnType)}
+     * 。
+     * </p>。
+     * 
+     *  <p>有关上下文项评估,变量,函数和QName解析以及返回类型转换的JAXP 1.3规范的"XPath表达式评估"部分。</p>
+     * 
+     *  <p>如果为<code> item </code>提供了<code> null </code>值,那么空文档将用于上下文。
+     * 
+     * 
      * @param item The starting context (node or node list, for example).
      *
      * @return The <code>String</code> that is the result of evaluating the
@@ -262,6 +304,21 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
      *<p>If <code>source</code> or <code>returnType</code> is <code>null</code>,
      * then a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     *  <p>在指定的<code> InputSource </code>上下文中评估编译的XPath表达式,并返回指定类型的结果。</p>
+     * 
+     *  <p>此方法在结果文档对象上构建{@link InputSource}的数据模型并调用{@link #evaluate(Object item,QName returnType)}。</p>
+     * 
+     *  <p>有关上下文项评估,变量,函数和QName解析以及返回类型转换的JAXP 1.3规范的"XPath表达式评估"部分。</p>
+     * 
+     *  <p>如果<code> returnType </code>不是{@link XPathConstants}中定义的类型之一,则会抛出<code> IllegalArgumentException </code>
+     * 。
+     * </p>。
+     * 
+     *  p>如果<code> source </code>或<code> returnType </code>是<code> null </code>,那么会抛出<code> NullPointerExcep
+     * tion </code>。
+     * </p>。
+     * 
      * @param source The <code>InputSource</code> of the document to evaluate
      * over.
      * @param returnType The desired return type.
@@ -319,6 +376,9 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
      *
      * <p>If <code>source</code> is <code>null</code>, then a <code>NullPointerException</code> is thrown.</p>
      *
+     * <p>
+     * 
+     * 
      * @param source The <code>InputSource</code> of the document to evaluate over.
      *
      * @return The <code>String</code> that is the result of evaluating the expression and converting the result to a

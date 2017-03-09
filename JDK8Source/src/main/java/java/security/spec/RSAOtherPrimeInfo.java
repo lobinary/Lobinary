@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,15 @@ import java.math.BigInteger;
  *
  * </pre>
  *
+ * <p>
+ *  此类表示RSA的OtherPrimeInfo结构内部的三元组(素数,指数和系数),如PKCS#1 v2.1中定义。 RSA的OtherPrimeInfo的ASN.1语法如下：
+ * 
+ * <pre>
+ *  OtherPrimeInfo :: = SEQUENCE {prime INTEGER,exponent INTEGER,coefficient INTEGER}
+ * 
+ * </pre>
+ * 
+ * 
  * @author Valerie Peng
  *
  *
@@ -62,6 +72,10 @@ public class RSAOtherPrimeInfo {
     * given the prime, primeExponent, and
     * crtCoefficient as defined in PKCS#1.
     *
+    * <p>
+    *  给定PKCS#1中定义的prime,primeExponent和crtCoefficient,创建一个新的{@code RSAOtherPrimeInfo}。
+    * 
+    * 
     * @param prime the prime factor of n.
     * @param primeExponent the exponent.
     * @param crtCoefficient the Chinese Remainder Theorem
@@ -94,6 +108,10 @@ public class RSAOtherPrimeInfo {
     /**
      * Returns the prime.
      *
+     * <p>
+     *  返回素数。
+     * 
+     * 
      * @return the prime.
      */
     public final BigInteger getPrime() {
@@ -103,6 +121,10 @@ public class RSAOtherPrimeInfo {
     /**
      * Returns the prime's exponent.
      *
+     * <p>
+     *  返回素数的指数。
+     * 
+     * 
      * @return the primeExponent.
      */
     public final BigInteger getExponent() {
@@ -112,6 +134,9 @@ public class RSAOtherPrimeInfo {
     /**
      * Returns the prime's crtCoefficient.
      *
+     * <p>
+     *  返回素数的crtCoefficient。
+     * 
      * @return the crtCoefficient.
      */
     public final BigInteger getCrtCoefficient() {

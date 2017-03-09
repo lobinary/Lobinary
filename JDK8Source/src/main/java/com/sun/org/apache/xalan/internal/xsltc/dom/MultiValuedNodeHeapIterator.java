@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2006 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: UnionIterator.java 337874 2004-02-16 23:06:53Z minchau $
+ * <p>
+ *  $ Id：UnionIterator.java 337874 2004-02-16 23：06：53Z minchau $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -42,17 +55,30 @@ import com.sun.org.apache.xml.internal.dtm.ref.DTMAxisIteratorBase;
  * available, and the heap nature of the heap is restored to ensure the next
  * DTM node handle pulled is next in document order overall.
  *
+ * <p>
+ * <p> <code> MultiValuedNodeHeapIterator </code>采用一组多值堆节点,并按文档顺序生成合并的节点集,其中重复项已删除。
+ * </p> <p>每个多值堆节点{@link org.apache.xml.dtm.DTMAxisIterator},但这不是必需的)按文档顺序生成DTM节点句柄。
+ * 该类在堆中维护多值堆节点,毫不奇怪,按照从堆节点可用的下一个DTM节点句柄进行排序。
+ * </p> <p>在从节点顶部的堆节点,堆节点被提前到下一个可用的DTM节点句柄,并且堆的堆本质被恢复,以确保下一个DTM节点句柄被拉到下一个文档顺序。
+ * 
+ * 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
 public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
     /** wrapper for NodeIterators to support iterator
         comparison on the value of their next() method
+    /* <p>
+    /*  比较他们的next()方法的值
+    /* 
     */
 
     /**
      * An abstract representation of a set of nodes that will be retrieved in
      * document order.
+     * <p>
+     *  将按文档顺序检索的一组节点的抽象表示。
+     * 
      */
     public abstract class HeapNode implements Cloneable {
         protected int _node, _markedNode;
@@ -61,6 +87,10 @@ public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
         /**
          * Advance to the next node represented by this {@link HeapNode}
          *
+         * <p>
+         *  前进到由此{@link HeapNode}表示的下一个节点
+         * 
+         * 
          * @return the next DTM node.
          */
         public abstract int step();
@@ -70,6 +100,10 @@ public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
          * Creates a deep copy of this {@link HeapNode}.  The clone is not
          * reset from the current position of the original.
          *
+         * <p>
+         *  创建此{@link HeapNode}的深层副本。克隆不从原始的当前位置重置。
+         * 
+         * 
          * @return the cloned heap node
          */
         public HeapNode cloneHeapNode() {
@@ -91,6 +125,9 @@ public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
 
         /**
          * Remembers the current node for the next call to {@link #gotoMark()}.
+         * <p>
+         *  记住下一次调用{@link #gotoMark()}的当前节点。
+         * 
          */
         public void setMark() {
             _markedNode = _node;
@@ -98,6 +135,9 @@ public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
 
         /**
          * Restores the current node remembered by {@link #setMark()}.
+         * <p>
+         *  恢复{@link #setMark()}记住的当前节点。
+         * 
          */
         public void gotoMark() {
             _node = _markedNode;
@@ -106,6 +146,10 @@ public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
         /**
          * Performs a comparison of the two heap nodes
          *
+         * <p>
+         *  执行两个堆节点的比较
+         * 
+         * 
          * @param heapNode the heap node against which to compare
          * @return <code>true</code> if and only if the current node for this
          *         heap node is before the current node of the argument heap
@@ -116,6 +160,10 @@ public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
         /**
          * Sets context with respect to which this heap node is evaluated.
          *
+         * <p>
+         *  设置对此堆节点进行求值的上下文。
+         * 
+         * 
          * @param node The new context node
          * @return a {@link HeapNode} which may or may not be the same as
          *         this <code>HeapNode</code>.
@@ -125,6 +173,10 @@ public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
         /**
          * Reset the heap node back to its beginning.
          *
+         * <p>
+         *  将堆节点重置回其开始。
+         * 
+         * 
          * @return a {@link HeapNode} which may or may not be the same as
          *         this <code>HeapNode</code>.
          */
@@ -239,6 +291,8 @@ public abstract class MultiValuedNodeHeapIterator extends DTMAxisIteratorBase {
 
     /* Build a heap in document order. put the smallest node on the top.
      * "smallest node" means the node before other nodes in document order
+     * <p>
+     *  "最小节点"是指文档顺序中其他节点之前的节点
      */
     private void heapify(int i) {
         for (int r, l, smallest;;) {

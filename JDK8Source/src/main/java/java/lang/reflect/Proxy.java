@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -221,6 +222,110 @@ import sun.security.util.SecurityConstants;
  * passed to the {@code invoke} method can necessarily be thrown
  * successfully by the {@code invoke} method.
  *
+ * <p>
+ *  {@code Proxy}提供了用于创建动态代理类和实例的静态方法,它也是由这些方法创建的所有动态代理类的超类。
+ * 
+ *  <p>为某个界面创建代理{@code Foo}：
+ * <pre>
+ *  InvocationHandler handler = new MyInvocationHandler(...);类&lt;?&gt; proxyClass = Proxy.getProxyClass
+ * (Foo.class.getClassLoader(),Foo.class); Foo f =(Foo)proxyClass.getConstructor(InvocationHandler.class
+ * )。
+ *  newInstance(handler);。
+ * </pre>
+ *  或更简单地：
+ * <pre>
+ *  Foo f =(Foo)Proxy.newProxyInstance(Foo.class.getClassLoader(),new Class&lt;?&gt; [] {Foo.class},hand
+ * ler);。
+ * </pre>
+ * 
+ *  <p>动态代理类</i>(以下简称为<i>代理类</i>)是实现在创建类时在运行时指定的接口列表的类,行为如下所述。
+ * 
+ *  </i>代理接口是通过代理类实现的接口。
+ * 
+ *  </i>代理实例</i>是代理类的实例。
+ * 
+ * 每个代理实例都有一个相关的<i>调用处理程序</i>对象,它实现了接口{@link InvocationHandler}。
+ * 通过其代理接口之一在代理实例上的方法调用将被分派到实例的调用处理程序的{@link InvocationHandler#invoke invoke}方法,传递代理实例{@code java.lang.reflect.Method}
+ * 对象标识被调用的方法,以及一个包含参数的类型为{@code Object}的数组。
+ * 每个代理实例都有一个相关的<i>调用处理程序</i>对象,它实现了接口{@link InvocationHandler}。
+ * 调用处理程序适当地处理编码的方法调用,并且返回的结果将作为对代理实例的方法调用的结果而返回。
+ * 
+ *  <p>代理类具有以下属性：
+ * 
+ * <ul>
+ *  <li>如果所有代理接口都是公共的,代理类是<em> public,final和不抽象</em>。</li>
+ * 
+ *  <li>如果任何代理接口是非公开的,代理类是非公开的,最终的,而不是抽象的</em>。</li>
+ * 
+ *  <li>未指定代理类的无限定名称。但是,以字符串{@code"$ Proxy"}开头的类名的空格应该保留给代理类。
+ * 
+ *  <li>代理类扩展{@code java.lang.reflect.Proxy}。
+ * 
+ *  <li>代理类在创建时完全按照相同的顺序实现指定的接口。
+ * 
+ * <li>如果代理类实现了非公共接口,那么它将在与该接口相同的包中定义。否则,代理类的包也是未指定的。
+ * 注意,包密封不会阻止在运行时在特定包中成功定义代理类,也不会阻止由同一类装载器定义的类以及具有特定签名者的同一包。
+ * 
+ *  <li>由于代理类实现了在其创建时指定的所有接口,在其{@code Class}对象上调用{@code getInterfaces}将返回一个包含相同的接口列表的数组(按照创建时指定的顺序) ,在其{@code Class}
+ * 对象上调用{@code getMethods}将返回一个包含这些接口中所有方法的{@code Method}对象数组,调用{@code getMethod}会在代理接口中找到方法如预期。
+ * 
+ *  <li>如果{@link Proxy#isProxyClass Proxy.isProxyClass}方法传递的是代理类(由{@code Proxy.getProxyClass}返回的类或由{@code Proxy)返回的对象的类.newProxyInstance}
+ *   - 否则为false。
+ * 
+ * <li>代理类的{@code java.security.ProtectionDomain}与引导类加载器所加载的系统类相同,例如{@code java.lang.Object},因为代理的代码类由可信
+ * 系统代码生成。
+ * 此保护域通常将被授予{@code java.security.AllPermission}。
+ * 
+ *  <li>每个代理类都有一个公共构造函数,它接受一个参数,即{@link InvocationHandler}接口的实现,以设置代理实例的调用处理程序。
+ * 而不是必须使用反射API访问公共构造函数,还可以通过调用{@link Proxy#newProxyInstance Proxy.newProxyInstance}方法创建代理实例,该方法将调用{@link Proxy#getProxyClass Proxy .getProxyClass}
+ * 使用调用处理程序调用构造函数。
+ *  <li>每个代理类都有一个公共构造函数,它接受一个参数,即{@link InvocationHandler}接口的实现,以设置代理实例的调用处理程序。
+ * </ul>
+ * 
+ *  <p>代理实例具有以下属性：
+ * 
+ * <ul>
+ *  <li>假设代理实例{@code proxy}和其代理类{@code Foo}实现的其中一个接口,以下表达式将返回true：
+ * <pre>
+ *  {@code proxy instanceof Foo}
+ * </pre>
+ *  并且以下强制转换操作将成功(而不是抛出{@code ClassCastException})：
+ * <pre>
+ *  {@code(Foo)proxy}
+ * </pre>
+ * 
+ * <li>每个代理实例都有一个关联的调用处理程序,即传递给其构造函数的调用处理程序。
+ * 静态{@link Proxy#getInvocationHandler Proxy.getInvocationHandler}方法将返回与作为其参数传递的代理实例相关联的调用处理程序。
+ * 
+ *  <li>代理实例上的接口方法调用将被编码并调度到调用处理程序的{@link InvocationHandler#invoke invoke}方法,如该方法的文档中所述。
+ * 
+ *  <li>对代理实例上{@code java.lang.Object}中声明的{@code hashCode},{@code equals}或{@code toString}方法的调用将被编码并分派给调
+ * 用处理程序{@code invoke}方法的方式与接口方法调用的编码和调度方式相同,如上所述。
+ * 传递给{@code invoke}的{@code Method}对象的声明类将是{@code java.lang.Object}。
+ * 从{@code java.lang.Object}继承的代理实例的其他公共方法不会被代理类覆盖,因此调用这些方法的行为就像对{@code java.lang.Object}的实例。
+ * </ul>
+ * 
+ *  <h3>多重代理接口中重复的方法</h3>
+ * 
+ * <p>当代理类的两个或多个接口包含具有相同名称和参数签名的方法时,代理类接口的顺序变得重要。
+ * 当在代理实例上调用这样的<i>重复方法</i>时,传递给调用处理程序的{@code Method}对象不一定是其声明类可从接口的引用类型通过调用代理的方法。
+ * 存在此限制,因为生成的代理类中的相应方法实现无法确定通过哪个接口调用它。
+ * 因此,当在代理实例上调用重复方法时,在代理类的接口列表中包含方法(直接或通过超级接口继承)的最前面接口中的方法的{@code Method}对象将传递给调用处理程序的{@code invoke}方法,而
+ * 不管方法调用发生的引用类型。
+ * 存在此限制,因为生成的代理类中的相应方法实现无法确定通过哪个接口调用它。
+ * 
+ * <p>如果代理接口包含与{@code java.lang.Object}的{@code hashCode},{@code equals}或{@code toString}方法具有相同名称和参数签名的方法
+ * ,这样的方法在代理实例上调用,传递给调用处理程序的{@code Method}对象将具有{@code java.lang.Object}作为其声明类。
+ * 换句话说,{@code java.lang.Object}的公共非最终方法在所有代理接口之前逻辑地先于确定哪个{@code Method}对象传递给调用处理程序。
+ * 
+ *  <p>请注意,当重复方法分派到调用处理程序时,{@code invoke}方法只能引用可分配给方法的{@code throws}子句中的某个异常类型的检查异常类型在<i>所有</i>代理接口中,它可以
+ * 通过它调用。
+ * 如果{@code invoke}方法抛出一个无法分配给该方法在其中一个代理接口中声明的任何异常类型的已检查异常,那么将抛出未经检查的{@code UndeclaredThrowableException}
+ * 通过对代理实例的调用。
+ * 这种限制意味着,并非所有通过在传递给{@code invoke}方法的{@code Method}对象上调用{@code getExceptionTypes}返回的异常类型都可以被{@code invoke}
+ * 方法成功抛出。
+ * 
+ * 
  * @author      Peter Jones
  * @see         InvocationHandler
  * @since       1.3
@@ -235,18 +340,28 @@ public class Proxy implements java.io.Serializable {
 
     /**
      * a cache of proxy classes
+     * <p>
+     *  代理类的缓存
+     * 
      */
     private static final WeakCache<ClassLoader, Class<?>[], Class<?>>
         proxyClassCache = new WeakCache<>(new KeyFactory(), new ProxyClassFactory());
 
     /**
      * the invocation handler for this proxy instance.
+     * <p>
+     *  此代理实例的调用处理程序。
+     * 
+     * 
      * @serial
      */
     protected InvocationHandler h;
 
     /**
      * Prohibits instantiation.
+     * <p>
+     * 禁止实例化。
+     * 
      */
     private Proxy() {
     }
@@ -256,6 +371,10 @@ public class Proxy implements java.io.Serializable {
      * (typically, a dynamic proxy class) with the specified value
      * for its invocation handler.
      *
+     * <p>
+     *  从子类(通常是动态代理类)构造一个新的{@code Proxy}实例,并为其调用处理程序指定值。
+     * 
+     * 
      * @param  h the invocation handler for this proxy instance
      *
      * @throws NullPointerException if the given invocation handler, {@code h},
@@ -330,6 +449,38 @@ public class Proxy implements java.io.Serializable {
      * of interfaces but in a different order will result in two distinct
      * proxy classes.
      *
+     * <p>
+     *  返回给定类加载器和接口数组的代理类的{@code java.lang.Class}对象。代理类将由指定的类加载器定义,并将实现所有提供的接口。如果任何给定的接口是非公共的,代理类将是非公共的。
+     * 如果接口的相同排列的代理类已经由类加载器定义,则将返回现有的代理类;否则,这些接口的代理类将动态生成并由类加载器定义。
+     * 
+     *  <p>对可传递到{@code Proxy.getProxyClass}的参数有几个限制：
+     * 
+     * <ul>
+     *  <li> {@code interfaces}数组中的所有{@code Class}对象都必须表示接口,而不是类或原始类型。
+     * 
+     *  <li> {@code interfaces}数组中没有两个元素可能引用相同的{@code Class}对象。
+     * 
+     *  <li>所有接口类型必须通过指定的类加载器通过名称可见。换句话说,对于类加载器{@code cl}和每个接口{@code i},以下表达式必须为真：
+     * <pre>
+     *  Class.forName(i.getName(),false,cl)== i
+     * </pre>
+     * 
+     * <li>所有非公共接口必须在同一个包中;否则,代理类不可能实现所有的接口,而不管它定义在什么包中。
+     * 
+     *  <li>对于具有相同签名的指定接口的任何一组成员方法：
+     * <ul>
+     *  <li>如果任何方法的返回类型是基本类型或void,那么所有方法必须具有相同的返回类型。 <li>否则,其中一个方法必须具有可分配给其余方法的所有返回类型的返回类型。
+     * </ul>
+     * 
+     *  <li>生成的代理类不得超过虚拟机对类强加的任何限制。例如,VM可以将类可以实现的接口的数量限制为65535;在这种情况下,{@code interfaces}数组的大小不能超过65535。
+     * </ul>
+     * 
+     *  <p>如果违反任何这些限制,{@code Proxy.getProxyClass}会抛出{@code IllegalArgumentException}。
+     * 如果{@code interfaces}数组参数或其任何元素是{@code null},将抛出{@code NullPointerException}。
+     * 
+     *  <p>请注意,指定的代理接口的顺序很重要：对于具有相同接口组合但是顺序不同的代理类的两个请求将导致两个不同的代理类。
+     * 
+     * 
      * @param   loader the class loader to define the proxy class
      * @param   interfaces the list of interfaces for the proxy class
      *          to implement
@@ -388,6 +539,17 @@ public class Proxy implements java.io.Serializable {
      * is not the same as the defining loader of the interface, the VM
      * will throw IllegalAccessError when the generated proxy class is
      * being defined via the defineClass0 method.
+     * <p>
+     *  检查创建Proxy类所需的权限。
+     * 
+     * 要定义一个代理类,它执行访问检查,如Class.forName(VM将调用ClassLoader.checkPackageAccess)：1."getClassLoader"权限检查loader == 
+     * null 2. checkPackageAccess在其实现的接口。
+     * 
+     *  为了获得一个代理类的构造函数和新实例,它在它实现的接口上对Class.getConstructor执行包访问检查。
+     * 
+     *  如果接口是非公共的,代理类必须由接口的定义加载器定义。
+     * 如果调用者的类加载器与接口的定义加载器不同,当通过defineClass0方法定义生成的代理类时,VM将抛出IllegalAccessError。
+     * 
      */
     private static void checkProxyAccess(Class<?> caller,
                                          ClassLoader loader,
@@ -406,6 +568,9 @@ public class Proxy implements java.io.Serializable {
     /**
      * Generate a proxy class.  Must call the checkProxyAccess method
      * to perform permission checks before calling this.
+     * <p>
+     *  生成代理类。在调用此方法之前,必须调用checkProxyAccess方法执行权限检查。
+     * 
      */
     private static Class<?> getProxyClass0(ClassLoader loader,
                                            Class<?>... interfaces) {
@@ -421,16 +586,25 @@ public class Proxy implements java.io.Serializable {
 
     /*
      * a key used for proxy class with 0 implemented interfaces
+     * <p>
+     *  用于具有0个实现的接口的代理类的密钥
+     * 
      */
     private static final Object key0 = new Object();
 
     /*
      * Key1 and Key2 are optimized for the common use of dynamic proxies
      * that implement 1 or 2 interfaces.
+     * <p>
+     *  Key1和Key2针对实现1或2个接口的动态代理的共同使用进行了优化。
+     * 
      */
 
     /*
      * a key used for proxy class with 1 implemented interface
+     * <p>
+     *  用于具有1个实现的接口的代理类的密钥
+     * 
      */
     private static final class Key1 extends WeakReference<Class<?>> {
         private final int hash;
@@ -458,6 +632,9 @@ public class Proxy implements java.io.Serializable {
 
     /*
      * a key used for proxy class with 2 implemented interfaces
+     * <p>
+     *  用于具有2个实现的接口的代理类的密钥
+     * 
      */
     private static final class Key2 extends WeakReference<Class<?>> {
         private final int hash;
@@ -490,6 +667,9 @@ public class Proxy implements java.io.Serializable {
     /*
      * a key used for proxy class with any number of implemented interfaces
      * (used here for 3 or more only)
+     * <p>
+     *  用于具有任何数量的实现的接口的代理类的密钥(这里仅用于3个或更多)
+     * 
      */
     private static final class KeyX {
         private final int hash;
@@ -535,6 +715,9 @@ public class Proxy implements java.io.Serializable {
     /**
      * A function that maps an array of interfaces to an optimal key where
      * Class objects representing interfaces are weakly referenced.
+     * <p>
+     *  将接口数组映射到最佳键的函数,其中表示接口的类对象被弱引用。
+     * 
      */
     private static final class KeyFactory
         implements BiFunction<ClassLoader, Class<?>[], Object>
@@ -553,6 +736,9 @@ public class Proxy implements java.io.Serializable {
     /**
      * A factory function that generates, defines and returns the proxy class given
      * the ClassLoader and array of interfaces.
+     * <p>
+     *  一个工厂函数,它根据ClassLoader和接口数组生成,定义和返回代理类。
+     * 
      */
     private static final class ProxyClassFactory
         implements BiFunction<ClassLoader, Class<?>[], Class<?>>
@@ -571,6 +757,9 @@ public class Proxy implements java.io.Serializable {
                 /*
                  * Verify that the class loader resolves the name of this
                  * interface to the same Class object.
+                 * <p>
+                 * 验证类加载器将此接口的名称解析为同一个Class对象。
+                 * 
                  */
                 Class<?> interfaceClass = null;
                 try {
@@ -584,6 +773,9 @@ public class Proxy implements java.io.Serializable {
                 /*
                  * Verify that the Class object actually represents an
                  * interface.
+                 * <p>
+                 *  验证Class对象实际上代表一个接口。
+                 * 
                  */
                 if (!interfaceClass.isInterface()) {
                     throw new IllegalArgumentException(
@@ -591,6 +783,9 @@ public class Proxy implements java.io.Serializable {
                 }
                 /*
                  * Verify that this interface is not a duplicate.
+                 * <p>
+                 *  验证此接口不是重复的。
+                 * 
                  */
                 if (interfaceSet.put(interfaceClass, Boolean.TRUE) != null) {
                     throw new IllegalArgumentException(
@@ -605,6 +800,9 @@ public class Proxy implements java.io.Serializable {
              * Record the package of a non-public proxy interface so that the
              * proxy class will be defined in the same package.  Verify that
              * all non-public proxy interfaces are in the same package.
+             * <p>
+             *  记录非公共代理接口的包,以便代理类将在同一个包中定义。验证所有非公共代理接口是否在同一个包中。
+             * 
              */
             for (Class<?> intf : interfaces) {
                 int flags = intf.getModifiers();
@@ -629,12 +827,18 @@ public class Proxy implements java.io.Serializable {
 
             /*
              * Choose a name for the proxy class to generate.
+             * <p>
+             *  选择要生成的代理类的名称。
+             * 
              */
             long num = nextUniqueNumber.getAndIncrement();
             String proxyName = proxyPkg + proxyClassNamePrefix + num;
 
             /*
              * Generate the specified proxy class.
+             * <p>
+             *  生成指定的代理类。
+             * 
              */
             byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
                 proxyName, interfaces, accessFlags);
@@ -648,6 +852,9 @@ public class Proxy implements java.io.Serializable {
                  * invalid aspect of the arguments supplied to the proxy
                  * class creation (such as virtual machine limitations
                  * exceeded).
+                 * <p>
+                 *  ClassFormatError在这里意味着(禁止代理类生成代码中的错误)有一些其他无效的提供给代理类创建的参数的方面(例如超出虚拟机限制)。
+                 * 
                  */
                 throw new IllegalArgumentException(e.toString());
             }
@@ -663,6 +870,13 @@ public class Proxy implements java.io.Serializable {
      * {@code IllegalArgumentException} for the same reasons that
      * {@code Proxy.getProxyClass} does.
      *
+     * <p>
+     *  返回向指定的调用处理程序分派方法调用的指定接口的代理类的实例。
+     * 
+     *  <p> {@ code Proxy.newProxyInstance}因与{@code Proxy.getProxyClass}相同的原因而抛出{@code IllegalArgumentException}
+     * 。
+     * 
+     * 
      * @param   loader the class loader to define the proxy class
      * @param   interfaces the list of interfaces for the proxy class
      *          to implement
@@ -715,11 +929,17 @@ public class Proxy implements java.io.Serializable {
 
         /*
          * Look up or generate the designated proxy class.
+         * <p>
+         *  查找或生成指定的代理类。
+         * 
          */
         Class<?> cl = getProxyClass0(loader, intfs);
 
         /*
          * Invoke its constructor with the designated invocation handler.
+         * <p>
+         *  使用指定的调用处理程序调用其构造函数。
+         * 
          */
         try {
             if (sm != null) {
@@ -782,6 +1002,12 @@ public class Proxy implements java.io.Serializable {
      * to use it to make security decisions, so its implementation should
      * not just test if the class in question extends {@code Proxy}.
      *
+     * <p>
+     *  当且仅当使用{@code getProxyClass}方法或{@code newProxyInstance}方法将指定的类动态生成为代理类时,返回true。
+     * 
+     *  <p>这种方法的可靠性对于使用它来做出安全决策的能力很重要,所以它的实现不应该仅仅测试所讨论的类是否扩展{@code Proxy}。
+     * 
+     * 
      * @param   cl the class to test
      * @return  {@code true} if the class is a proxy class and
      *          {@code false} otherwise
@@ -794,6 +1020,10 @@ public class Proxy implements java.io.Serializable {
     /**
      * Returns the invocation handler for the specified proxy instance.
      *
+     * <p>
+     * 返回指定代理实例的调用处理程序。
+     * 
+     * 
      * @param   proxy the proxy instance to return the invocation handler for
      * @return  the invocation handler for the proxy instance
      * @throws  IllegalArgumentException if the argument is not a
@@ -811,6 +1041,8 @@ public class Proxy implements java.io.Serializable {
     {
         /*
          * Verify that the object is actually a proxy instance.
+         * <p>
+         *  验证对象实际上是代理实例。
          */
         if (!isProxyClass(proxy.getClass())) {
             throw new IllegalArgumentException("not a proxy instance");

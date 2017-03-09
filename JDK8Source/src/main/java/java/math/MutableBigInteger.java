@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,12 @@ package java.math;
  * a new number for every step of the calculation as occurs with
  * BigIntegers.
  *
+ * <p>
+ *  用于表示多精度整数的类,通过允许数字只占用数组的一部分来有效利用分配的空间,使得数组不必频繁重新分配。
+ * 当使用多次迭代执行操作时,用于保存数字的数组只在需要时重新分配,并且不必与其表示的数字具有相同的大小。
+ * 可变数字允许计算发生在相同的数字上,而不必像BigIntegers中那样为计算的每个步骤创建一个新数字。
+ * 
+ * 
  * @see     BigInteger
  * @author  Michael McCloskey
  * @author  Timothy Buktu
@@ -51,6 +58,9 @@ class MutableBigInteger {
      * Holds the magnitude of this MutableBigInteger in big endian order.
      * The magnitude may start at an offset into the value array, and it may
      * end before the length of the value array.
+     * <p>
+     *  以大端顺序保存此MutableBigInteger的大小。幅度可以在到值阵列的偏移处开始,并且它可以在值阵列的长度之前结束。
+     * 
      */
     int[] value;
 
@@ -58,12 +68,18 @@ class MutableBigInteger {
      * The number of ints of the value array that are currently used
      * to hold the magnitude of this MutableBigInteger. The magnitude starts
      * at an offset and offset + intLen may be less than value.length.
+     * <p>
+     *  当前用于保存此MutableBigInteger的大小的值数组的int数。幅度从偏移开始,偏移+ intLen可以小于值。
+     * 
      */
     int intLen;
 
     /**
      * The offset into the value array where the magnitude of this
      * MutableBigInteger begins.
+     * <p>
+     *  到值数组的偏移量,这个MutableBigInteger的大小开始。
+     * 
      */
     int offset = 0;
 
@@ -72,6 +88,9 @@ class MutableBigInteger {
      * MutableBigInteger with one element value array with the value 1. Used by
      * BigDecimal divideAndRound to increment the quotient. Use this constant
      * only when the method is not going to modify this object.
+     * <p>
+     *  MutableBigInteger,带有值为1的一个元素值数组。由BigDecimal divideAndRound使用以增加商。仅当方法不修改此对象时,才使用此常量。
+     * 
      */
     static final MutableBigInteger ONE = new MutableBigInteger(1);
 
@@ -81,6 +100,9 @@ class MutableBigInteger {
      * If the number of ints is less than this threshold,
      * {@code divideKnuth} does not eliminate common powers of two from
      * the dividend and divisor.
+     * <p>
+     * 用于在分割之前取消两次幂的最小{@code intLen}。如果int的个数小于这个阈值,{@code divideKnuth}不会从被除数和除数中消除两个的共同的权力。
+     * 
      */
     static final int KNUTH_POW2_THRESH_LEN = 6;
 
@@ -90,6 +112,9 @@ class MutableBigInteger {
      * If the dividend and divisor don't share at least this many zero ints
      * at the end, {@code divideKnuth} does not eliminate common powers
      * of two from the dividend and divisor.
+     * <p>
+     *  用于在分割之前消除二的幂的最小零尾数int。如果被除数和除数在最后并不共享至少这个零个整数,{@code divideKnuth}不会从被除数和除数中消除两个的共同的权力。
+     * 
      */
     static final int KNUTH_POW2_THRESH_ZEROS = 3;
 
@@ -98,6 +123,9 @@ class MutableBigInteger {
     /**
      * The default constructor. An empty MutableBigInteger is created with
      * a one word capacity.
+     * <p>
+     *  默认构造函数。创建一个具有一个字容量的空MutableBigInteger。
+     * 
      */
     MutableBigInteger() {
         value = new int[1];
@@ -107,6 +135,9 @@ class MutableBigInteger {
     /**
      * Construct a new MutableBigInteger with a magnitude specified by
      * the int val.
+     * <p>
+     *  构造一个新的MutableBigInteger,其大小由int val指定。
+     * 
      */
     MutableBigInteger(int val) {
         value = new int[1];
@@ -117,6 +148,9 @@ class MutableBigInteger {
     /**
      * Construct a new MutableBigInteger with the specified value array
      * up to the length of the array supplied.
+     * <p>
+     *  使用指定的值数组构造一个新的MutableBigInteger,直到提供的数组的长度。
+     * 
      */
     MutableBigInteger(int[] val) {
         value = val;
@@ -126,6 +160,9 @@ class MutableBigInteger {
     /**
      * Construct a new MutableBigInteger with a magnitude equal to the
      * specified BigInteger.
+     * <p>
+     *  构造一个新的MutableBigInteger,其大小等于指定的BigInteger。
+     * 
      */
     MutableBigInteger(BigInteger b) {
         intLen = b.mag.length;
@@ -135,6 +172,9 @@ class MutableBigInteger {
     /**
      * Construct a new MutableBigInteger with a magnitude equal to the
      * specified MutableBigInteger.
+     * <p>
+     *  构造一个新的MutableBigInteger,其大小等于指定的MutableBigInteger。
+     * 
      */
     MutableBigInteger(MutableBigInteger val) {
         intLen = val.intLen;
@@ -144,6 +184,10 @@ class MutableBigInteger {
     /**
      * Makes this number an {@code n}-int number all of whose bits are ones.
      * Used by Burnikel-Ziegler division.
+     * <p>
+     *  使此数字为{@code n} -int数字,其所有位为1。由Burnikel-Ziegler部门使用。
+     * 
+     * 
      * @param n number of ints in the {@code value} array
      * @return a number equal to {@code ((1<<(32*n)))-1}
      */
@@ -158,6 +202,9 @@ class MutableBigInteger {
     /**
      * Internal helper method to return the magnitude array. The caller is not
      * supposed to modify the returned array.
+     * <p>
+     *  内部辅助方法返回幅度数组。调用者不应该修改返回的数组。
+     * 
      */
     private int[] getMagnitudeArray() {
         if (offset > 0 || value.length != intLen)
@@ -168,6 +215,9 @@ class MutableBigInteger {
     /**
      * Convert this MutableBigInteger to a long value. The caller has to make
      * sure this MutableBigInteger can be fit into long.
+     * <p>
+     *  将此MutableBigInteger转换为长整型值。调用者必须确保这个MutableBigInteger可以适合long。
+     * 
      */
     private long toLong() {
         assert (intLen <= 2) : "this MutableBigInteger exceeds the range of long";
@@ -179,6 +229,9 @@ class MutableBigInteger {
 
     /**
      * Convert this MutableBigInteger to a BigInteger object.
+     * <p>
+     *  将此MutableBigInteger转换为BigInteger对象。
+     * 
      */
     BigInteger toBigInteger(int sign) {
         if (intLen == 0 || sign == 0)
@@ -188,6 +241,9 @@ class MutableBigInteger {
 
     /**
      * Converts this number to a nonnegative {@code BigInteger}.
+     * <p>
+     *  将此数字转换为非负的{@code BigInteger}。
+     * 
      */
     BigInteger toBigInteger() {
         normalize();
@@ -197,6 +253,9 @@ class MutableBigInteger {
     /**
      * Convert this MutableBigInteger to BigDecimal object with the specified sign
      * and scale.
+     * <p>
+     *  将此MutableBigInteger转换为具有指定符号和比例的BigDecimal对象。
+     * 
      */
     BigDecimal toBigDecimal(int sign, int scale) {
         if (intLen == 0 || sign == 0)
@@ -218,6 +277,9 @@ class MutableBigInteger {
      * This is for internal use in converting from a MutableBigInteger
      * object into a long value given a specified sign.
      * returns INFLATED if value is not fit into long
+     * <p>
+     * 这是内部用于从MutableBigInteger对象转换为给定指定符号的长值。如果值不适合长整型,则返回INFLATED
+     * 
      */
     long toCompactValue(int sign) {
         if (intLen == 0 || sign == 0)
@@ -237,6 +299,9 @@ class MutableBigInteger {
 
     /**
      * Clear out a MutableBigInteger for reuse.
+     * <p>
+     *  清除MutableBigInteger以便重用。
+     * 
      */
     void clear() {
         offset = intLen = 0;
@@ -246,6 +311,9 @@ class MutableBigInteger {
 
     /**
      * Set a MutableBigInteger to zero, removing its offset.
+     * <p>
+     *  将MutableBigInteger设置为零,删除其偏移量。
+     * 
      */
     void reset() {
         offset = intLen = 0;
@@ -255,6 +323,9 @@ class MutableBigInteger {
      * Compare the magnitude of two MutableBigIntegers. Returns -1, 0 or 1
      * as this MutableBigInteger is numerically less than, equal to, or
      * greater than <tt>b</tt>.
+     * <p>
+     *  比较两个MutableBigIntegers的大小。返回-1,0或1,因为此MutableBigInteger在数值上小于,等于或大于<tt> b </tt>。
+     * 
      */
     final int compare(MutableBigInteger b) {
         int blen = b.intLen;
@@ -280,6 +351,9 @@ class MutableBigInteger {
     /**
      * Returns a value equal to what {@code b.leftShift(32*ints); return compare(b);}
      * would return, but doesn't change the value of {@code b}.
+     * <p>
+     *  返回一个等于{@code b.leftShift(32 * ints); return compare(b);}将返回,但不改变{@code b}的值。
+     * 
      */
     private int compareShifted(MutableBigInteger b, int ints) {
         int blen = b.intLen;
@@ -308,6 +382,9 @@ class MutableBigInteger {
      * remainder tests).
      * Assumes no leading unnecessary zeros, which holds for results
      * from divide().
+     * <p>
+     *  将此与MutableBigInteger对象的一半(对于其余测试需要)进行比较。假设没有前导不必要的零,它保存为来自divide()的结果。
+     * 
      */
     final int compareHalf(MutableBigInteger b) {
         int blen = b.intLen;
@@ -346,6 +423,9 @@ class MutableBigInteger {
     /**
      * Return the index of the lowest set bit in this MutableBigInteger. If the
      * magnitude of this MutableBigInteger is zero, -1 is returned.
+     * <p>
+     *  返回此MutableBigInteger中最低设置位的索引。如果此MutableBigInteger的大小为零,则返回-1。
+     * 
      */
     private final int getLowestSetBit() {
         if (intLen == 0)
@@ -363,6 +443,9 @@ class MutableBigInteger {
      * Return the int in use in this MutableBigInteger at the specified
      * index. This method is not used because it is not inlined on all
      * platforms.
+     * <p>
+     *  在指定的索引处返回此MutableBigInteger中使用的int。不使用此方法,因为它未在所有平台上内联。
+     * 
      */
     private final int getInt(int index) {
         return value[offset+index];
@@ -372,6 +455,9 @@ class MutableBigInteger {
      * Return a long which is equal to the unsigned value of the int in
      * use in this MutableBigInteger at the specified index. This method is
      * not used because it is not inlined on all platforms.
+     * <p>
+     *  返回一个long,等于在指定索引的此MutableBigInteger中使用的int的无符号值。不使用此方法,因为它未在所有平台上内联。
+     * 
      */
     private final long getLong(int index) {
         return value[offset+index] & LONG_MASK;
@@ -381,6 +467,9 @@ class MutableBigInteger {
      * Ensure that the MutableBigInteger is in normal form, specifically
      * making sure that there are no leading zeros, and that if the
      * magnitude is zero, then intLen is zero.
+     * <p>
+     *  确保MutableBigInteger是正常形式,特别是确保没有前导零,并且如果幅度为零,则intLen为零。
+     * 
      */
     final void normalize() {
         if (intLen == 0) {
@@ -405,6 +494,9 @@ class MutableBigInteger {
     /**
      * If this MutableBigInteger cannot hold len words, increase the size
      * of the value array to len words.
+     * <p>
+     *  如果此MutableBigInteger不能容纳len字,请增加值数组的大小为len字。
+     * 
      */
     private final void ensureCapacity(int len) {
         if (value.length < len) {
@@ -417,6 +509,9 @@ class MutableBigInteger {
     /**
      * Convert this MutableBigInteger into an int array with no leading
      * zeros, of a length that is equal to this MutableBigInteger's intLen.
+     * <p>
+     * 将此MutableBigInteger转换为一个int数组,没有前导零,长度等于这个MutableBigInteger的intLen。
+     * 
      */
     int[] toIntArray() {
         int[] result = new int[intLen];
@@ -429,6 +524,9 @@ class MutableBigInteger {
      * Sets the int at index+offset in this MutableBigInteger to val.
      * This does not get inlined on all platforms so it is not used
      * as often as originally intended.
+     * <p>
+     *  将此MutableBigInteger中的索引+偏移量的int设置为val。这不会在所有平台上内联,所以它不会像原来那样经常使用。
+     * 
      */
     void setInt(int index, int val) {
         value[offset + index] = val;
@@ -437,6 +535,9 @@ class MutableBigInteger {
     /**
      * Sets this MutableBigInteger's value array to the specified array.
      * The intLen is set to the specified length.
+     * <p>
+     *  将此MutableBigInteger的值数组设置为指定的数组。 intLen设置为指定的长度。
+     * 
      */
     void setValue(int[] val, int length) {
         value = val;
@@ -447,6 +548,9 @@ class MutableBigInteger {
     /**
      * Sets this MutableBigInteger's value array to a copy of the specified
      * array. The intLen is set to the length of the new array.
+     * <p>
+     *  将此MutableBigInteger的值数组设置为指定数组的副本。 intLen设置为新数组的长度。
+     * 
      */
     void copyValue(MutableBigInteger src) {
         int len = src.intLen;
@@ -460,6 +564,9 @@ class MutableBigInteger {
     /**
      * Sets this MutableBigInteger's value array to a copy of the specified
      * array. The intLen is set to the length of the specified array.
+     * <p>
+     *  将此MutableBigInteger的值数组设置为指定数组的副本。 intLen设置为指定数组的长度。
+     * 
      */
     void copyValue(int[] val) {
         int len = val.length;
@@ -472,6 +579,9 @@ class MutableBigInteger {
 
     /**
      * Returns true iff this MutableBigInteger has a value of one.
+     * <p>
+     *  如果此MutableBigInteger的值为1,则返回true。
+     * 
      */
     boolean isOne() {
         return (intLen == 1) && (value[offset] == 1);
@@ -479,6 +589,9 @@ class MutableBigInteger {
 
     /**
      * Returns true iff this MutableBigInteger has a value of zero.
+     * <p>
+     *  如果此MutableBigInteger的值为零,则返回true。
+     * 
      */
     boolean isZero() {
         return (intLen == 0);
@@ -486,6 +599,9 @@ class MutableBigInteger {
 
     /**
      * Returns true iff this MutableBigInteger is even.
+     * <p>
+     *  如果此MutableBigInteger为偶数,则返回true。
+     * 
      */
     boolean isEven() {
         return (intLen == 0) || ((value[offset + intLen - 1] & 1) == 0);
@@ -493,6 +609,9 @@ class MutableBigInteger {
 
     /**
      * Returns true iff this MutableBigInteger is odd.
+     * <p>
+     *  如果此MutableBigInteger为奇数,则返回true。
+     * 
      */
     boolean isOdd() {
         return isZero() ? false : ((value[offset + intLen - 1] & 1) == 1);
@@ -502,6 +621,10 @@ class MutableBigInteger {
      * Returns true iff this MutableBigInteger is in normal form. A
      * MutableBigInteger is in normal form if it has no leading zeros
      * after the offset, and intLen + offset <= value.length.
+     * <p>
+     *  如果此MutableBigInteger是正常形式,则返回true。
+     * 如果MutableBigInteger在偏移之后没有前导零,则为正常形式,并且intLen + offset <= value.length。
+     * 
      */
     boolean isNormal() {
         if (intLen + offset > value.length)
@@ -513,6 +636,9 @@ class MutableBigInteger {
 
     /**
      * Returns a String representation of this MutableBigInteger in radix 10.
+     * <p>
+     *  在基数10中返回此MutableBigInteger的字符串表示形式。
+     * 
      */
     public String toString() {
         BigInteger b = toBigInteger(1);
@@ -521,6 +647,9 @@ class MutableBigInteger {
 
     /**
      * Like {@link #rightShift(int)} but {@code n} can be greater than the length of the number.
+     * <p>
+     *  像{@link #rightShift(int)},但{@code n}可以大于数字的长度。
+     * 
      */
     void safeRightShift(int n) {
         if (n/32 >= intLen) {
@@ -533,6 +662,9 @@ class MutableBigInteger {
     /**
      * Right shift this MutableBigInteger n bits. The MutableBigInteger is left
      * in normal form.
+     * <p>
+     *  右移这个MutableBigInteger n位。 MutableBigInteger以正常形式保留。
+     * 
      */
     void rightShift(int n) {
         if (intLen == 0)
@@ -553,6 +685,9 @@ class MutableBigInteger {
 
     /**
      * Like {@link #leftShift(int)} but {@code n} can be zero.
+     * <p>
+     *  像{@link #leftShift(int)},但{@code n}可以为零。
+     * 
      */
     void safeLeftShift(int n) {
         if (n > 0) {
@@ -562,6 +697,9 @@ class MutableBigInteger {
 
     /**
      * Left shift this MutableBigInteger n bits.
+     * <p>
+     *  左移这个MutableBigInteger n位。
+     * 
      */
     void leftShift(int n) {
         /*
@@ -569,6 +707,9 @@ class MutableBigInteger {
          * the available space will be used. Space to the right of the used
          * ints in the value array is faster to utilize, so the extra space
          * will be taken from the right if possible.
+         * <p>
+         * 如果此MutableBigInteger中已有足够的存储空间,则将使用可用空间。在数值数组中使用的int的右边的空间更快地被利用,所以如果可能的话,额外的空间将从右边取。
+         * 
          */
         if (intLen == 0)
            return;
@@ -616,6 +757,9 @@ class MutableBigInteger {
      * A primitive used for division. This method adds in one multiple of the
      * divisor a back to the dividend result at a specified offset. It is used
      * when qhat was estimated too large, and must be adjusted.
+     * <p>
+     *  用于划分的原语。该方法将除数a的一个倍数加回指定偏移处的被除数结果。它被用于当qhat估计太大,必须调整。
+     * 
      */
     private int divadd(int[] a, int[] result, int offset) {
         long carry = 0;
@@ -633,6 +777,9 @@ class MutableBigInteger {
      * This method is used for division. It multiplies an n word input a by one
      * word input x, and subtracts the n word product from q. This is needed
      * when subtracting qhat*divisor from dividend.
+     * <p>
+     *  此方法用于除法。它将n个字输入a乘以一个字输入x,并从q中减去n个字乘积。当从被除数中减去qhat * divisor时需要这个。
+     * 
      */
     private int mulsub(int[] q, int[] a, int x, int len, int offset) {
         long xLong = x & LONG_MASK;
@@ -653,6 +800,9 @@ class MutableBigInteger {
     /**
      * The method is the same as mulsun, except the fact that q array is not
      * updated, the only result of the method is borrow flag.
+     * <p>
+     *  该方法与mulsun相同,除了q数组未更新的事实,该方法的唯一结果是borrow标志。
+     * 
      */
     private int mulsubBorrow(int[] q, int[] a, int x, int len, int offset) {
         long xLong = x & LONG_MASK;
@@ -672,6 +822,9 @@ class MutableBigInteger {
      * Right shift this MutableBigInteger n bits, where n is
      * less than 32.
      * Assumes that intLen > 0, n > 0 for speed
+     * <p>
+     *  右移这个MutableBigInteger n位,其中n小于32.假设intLen> 0,n> 0为速度
+     * 
      */
     private final void primitiveRightShift(int n) {
         int[] val = value;
@@ -688,6 +841,9 @@ class MutableBigInteger {
      * Left shift this MutableBigInteger n bits, where n is
      * less than 32.
      * Assumes that intLen > 0, n > 0 for speed
+     * <p>
+     *  左移这个MutableBigInteger n位,其中n小于32.假设intLen> 0,n> 0为速度
+     * 
      */
     private final void primitiveLeftShift(int n) {
         int[] val = value;
@@ -703,6 +859,9 @@ class MutableBigInteger {
     /**
      * Returns a {@code BigInteger} equal to the {@code n}
      * low ints of this number.
+     * <p>
+     *  返回等于该数字的{@code n}低整数的{@code BigInteger}。
+     * 
      */
     private BigInteger getLower(int n) {
         if (isZero()) {
@@ -721,6 +880,9 @@ class MutableBigInteger {
 
     /**
      * Discards all ints whose index is greater than {@code n}.
+     * <p>
+     *  舍弃索引大于{@code n}的所有int。
+     * 
      */
     private void keepLower(int n) {
         if (intLen >= n) {
@@ -733,6 +895,9 @@ class MutableBigInteger {
      * Adds the contents of two MutableBigInteger objects.The result
      * is placed within this MutableBigInteger.
      * The contents of the addend are not changed.
+     * <p>
+     *  添加两个MutableBigInteger对象的内容。结果放在此MutableBigInteger中。加数的内容不更改。
+     * 
      */
     void add(MutableBigInteger addend) {
         int x = intLen;
@@ -792,6 +957,10 @@ class MutableBigInteger {
      * Adds the value of {@code addend} shifted {@code n} ints to the left.
      * Has the same effect as {@code addend.leftShift(32*ints); add(addend);}
      * but doesn't change the value of {@code addend}.
+     * <p>
+     *  添加{@code addend}的值将{@code n} ints移到左侧。
+     * 具有与{@code addend.leftShift(32 * ints); add(addend);}但不改变{@code addend}的值。
+     * 
      */
     void addShifted(MutableBigInteger addend, int n) {
         if (addend.isZero()) {
@@ -858,6 +1027,10 @@ class MutableBigInteger {
      * Like {@link #addShifted(MutableBigInteger, int)} but {@code this.intLen} must
      * not be greater than {@code n}. In other words, concatenates {@code this}
      * and {@code addend}.
+     * <p>
+     * 像{@link #addShifted(MutableBigInteger,int)},但{@code this.intLen}不能大于{@code n}。
+     * 换句话说,连接{@code this}和{@code addend}。
+     * 
      */
     void addDisjoint(MutableBigInteger addend, int n) {
         if (addend.isZero())
@@ -895,6 +1068,9 @@ class MutableBigInteger {
 
     /**
      * Adds the low {@code n} ints of {@code addend}.
+     * <p>
+     *  添加{@code addend}的低{@code n}整数。
+     * 
      */
     void addLower(MutableBigInteger addend, int n) {
         MutableBigInteger a = new MutableBigInteger(addend);
@@ -909,6 +1085,9 @@ class MutableBigInteger {
     /**
      * Subtracts the smaller of this and b from the larger and places the
      * result into this MutableBigInteger.
+     * <p>
+     *  从较大的中减去this和b中的较小者,并将结果放入此MutableBigInteger中。
+     * 
      */
     int subtract(MutableBigInteger b) {
         MutableBigInteger a = this;
@@ -961,6 +1140,9 @@ class MutableBigInteger {
      * Subtracts the smaller of a and b from the larger and places the result
      * into the larger. Returns 1 if the answer is in a, -1 if in b, 0 if no
      * operation was performed.
+     * <p>
+     *  从较大值中减去a和b中较小的值,并将结果放入较大值中。如果答案在a中则返回1,如果在b中则返回-1,如果未执行任何操作则返回0。
+     * 
      */
     private int difference(MutableBigInteger b) {
         MutableBigInteger a = this;
@@ -998,6 +1180,9 @@ class MutableBigInteger {
     /**
      * Multiply the contents of two MutableBigInteger objects. The result is
      * placed into MutableBigInteger z. The contents of y are not changed.
+     * <p>
+     *  将两个MutableBigInteger对象的内容相乘。结果放在MutableBigInteger z中。 y的内容不更改。
+     * 
      */
     void multiply(MutableBigInteger y, MutableBigInteger z) {
         int xLen = intLen;
@@ -1040,6 +1225,9 @@ class MutableBigInteger {
     /**
      * Multiply the contents of this MutableBigInteger by the word y. The
      * result is placed into z.
+     * <p>
+     *  将该MutableBigInteger的内容乘以y。结果放入z。
+     * 
      */
     void mul(int y, MutableBigInteger z) {
         if (y == 1) {
@@ -1079,6 +1267,10 @@ class MutableBigInteger {
      * divisor. The quotient is placed into quotient. The one word divisor is
      * specified by divisor.
      *
+     * <p>
+     *  该方法用于将n个字除数除以一个字除数。商被放入商。一个字除数由除数指定。
+     * 
+     * 
      * @return the remainder of the division is returned.
      *
      */
@@ -1142,6 +1334,9 @@ class MutableBigInteger {
      * Calculates the quotient of this div b and places the quotient in the
      * provided MutableBigInteger objects and the remainder object is returned.
      *
+     * <p>
+     *  计算此div的商,并将商置于提供的MutableBigInteger对象中,并返回余数对象。
+     * 
      */
     MutableBigInteger divide(MutableBigInteger b, MutableBigInteger quotient) {
         return divide(b,quotient,true);
@@ -1157,6 +1352,8 @@ class MutableBigInteger {
     }
 
     /**
+    /* <p>
+    /* 
      * @see #divideKnuth(MutableBigInteger, MutableBigInteger, boolean)
      */
     MutableBigInteger divideKnuth(MutableBigInteger b, MutableBigInteger quotient) {
@@ -1173,6 +1370,11 @@ class MutableBigInteger {
      * It special cases one word divisors for speed. The content of b is not
      * changed.
      *
+     * <p>
+     *  计算此div的商,并将商置于提供的MutableBigInteger对象中,并返回余数对象。
+     * 
+     *  在Knuth第4.3.1节中使用算法D.对该算法的许多优化已经从Colin Plumb C库改编而来。它的特殊情况下,一个字的除数为速度。 b的内容不变。
+     * 
      */
     MutableBigInteger divideKnuth(MutableBigInteger b, MutableBigInteger quotient, boolean needRemainder) {
         if (b.intLen == 0)
@@ -1234,6 +1436,13 @@ class MutableBigInteger {
      * The parameter beta was chosen to b 2<sup>32</sup> so almost all shifts are
      * multiples of 32 bits.<br/>
      * {@code this} and {@code b} must be nonnegative.
+     * <p>
+     * 使用<a href="http://cr.yp.to/bib/199​​8/burnikel.ps"> Burnikel-Ziegler算法</a>计算{@code this / b}和{@code this％b}
+     *  。
+     * 这个方法从pg实现算法3。 9的Burnikel-Ziegler纸。
+     * 参数β被选择为b 2 <sup> 32 </sup>,因此几乎所有的位移都是32位的倍数., {@code this}和{@code b}必须是非负的。
+     * 
+     * 
      * @param b the divisor
      * @param quotient output parameter for {@code this/b}
      * @return the remainder
@@ -1304,6 +1513,12 @@ class MutableBigInteger {
      * The parameter beta is 2<sup>32</sup> so all shifts are multiples of 32 bits.
      * <br/>
      * {@code this} must be a nonnegative number such that {@code this.bitLength() <= 2*b.bitLength()}
+     * <p>
+     *  该方法实现了算法1。 4的Burnikel-Ziegler纸。它将2n位数字除以n位数。<br/>参数beta是2 <sup> 32 </sup>,所有移位都是32位的倍数。
+     * <br/>
+     *  {@code this}必须是非负数,因此{@code this.bitLength()<= 2 * b.bitLength()}
+     * 
+     * 
      * @param b a positive number such that {@code b.bitLength()} is even
      * @param quotient output parameter for {@code this/b}
      * @return {@code this%b}
@@ -1340,6 +1555,12 @@ class MutableBigInteger {
      * The parameter beta is 2<sup>32</sup> so all shifts are multiples of 32 bits.<br/>
      * <br/>
      * {@code this} must be a nonnegative number such that {@code 2*this.bitLength() <= 3*b.bitLength()}
+     * <p>
+     *  这个方法从pg实现算法2。 5的Burnikel-Ziegler纸。它将3n位数字除以2n位数数字。<br/>参数beta是2 <sup> 32 </sup>,因此所有位移都是32位的倍数。
+     * <br/>
+     *  {@code this}必须是非负数,因此{@code 2 * this.bitLength()<= 3 * b.bitLength()}
+     * 
+     * 
      * @param quotient output parameter for {@code this/b}
      * @return {@code this%b}
      */
@@ -1396,6 +1617,11 @@ class MutableBigInteger {
      * Returns a {@code MutableBigInteger} containing {@code blockLength} ints from
      * {@code this} number, starting at {@code index*blockLength}.<br/>
      * Used by Burnikel-Ziegler division.
+     * <p>
+     *  从{@code index * blockLength}开始返回包含{@code blockLength}个int的{@code MutableBigInteger}个整数,由Burnikel-Zie
+     * gler部门使用。
+     * 
+     * 
      * @param index the block index
      * @param numBlocks the total number of blocks in {@code this} number
      * @param blockLength length of one block in units of 32 bits
@@ -1433,6 +1659,10 @@ class MutableBigInteger {
      * quotient in the provided MutableBigInteger object and the remainder is
      * returned.
      *
+     * <p>
+     *  在内部用于计算该div v的商,并将商置于提供的MutableBigInteger对象中,并返回余数。
+     * 
+     * 
      * @return the remainder of the division will be returned.
      */
     long divide(long v, MutableBigInteger quotient) {
@@ -1472,6 +1702,9 @@ class MutableBigInteger {
      * Divide this MutableBigInteger by the divisor.
      * The quotient will be placed into the provided quotient object &
      * the remainder object is returned.
+     * <p>
+     *  用除数除该MutableBigInteger。商将被放置到提供的商对象中,返回其余对象。
+     * 
      */
     private MutableBigInteger divideMagnitude(MutableBigInteger div,
                                               MutableBigInteger quotient,
@@ -1677,6 +1910,9 @@ class MutableBigInteger {
      * Divide this MutableBigInteger by the divisor represented by positive long
      * value. The quotient will be placed into the provided quotient object &
      * the remainder object is returned.
+     * <p>
+     * 将此MutableBigInteger除以由正long value表示的除数。商将被放置到提供的商对象中,返回其余对象。
+     * 
      */
     private MutableBigInteger divideLongMagnitude(long ldivisor, MutableBigInteger quotient) {
         // Remainder starts as dividend with space for a leading zero
@@ -1788,6 +2024,9 @@ class MutableBigInteger {
      * A primitive used for division by long.
      * Specialized version of the method divadd.
      * dh is a high part of the divisor, dl is a low part
+     * <p>
+     *  用于长划分的原语。方法divadd的特殊版本。 dh是除数的高部分,d1是低部分
+     * 
      */
     private int divaddLong(int dh, int dl, int[] result, int offset) {
         long carry = 0;
@@ -1805,6 +2044,9 @@ class MutableBigInteger {
      * This method is used for division by long.
      * Specialized version of the method sulsub.
      * dh is a high part of the divisor, dl is a low part
+     * <p>
+     *  这种方法用于长除法。专门版本的方法sulsub。 dh是除数的高部分,d1是低部分
+     * 
      */
     private int mulsubLong(int[] q, int dh, int dl, int x, int offset) {
         long xLong = x & LONG_MASK;
@@ -1827,6 +2069,9 @@ class MutableBigInteger {
     /**
      * Compare two longs as if they were unsigned.
      * Returns true iff one is bigger than two.
+     * <p>
+     *  比较两个long,就好像它们是无符号的。如果一个大于二,返回true。
+     * 
      */
     private boolean unsignedLongCompare(long one, long two) {
         return (one+Long.MIN_VALUE) > (two+Long.MIN_VALUE);
@@ -1838,6 +2083,9 @@ class MutableBigInteger {
      * the signed value of n is less than zero.
      * Returns long value where high 32 bits contain remainder value and
      * low 32 bits contain quotient value.
+     * <p>
+     *  该方法将长数除以int以估计两个多精度数的qhat。当n的有符号值小于零时使用。返回long值,其中高32位包含余数值,低32位包含商值。
+     * 
      */
     static long divWord(long n, int d) {
         long dLong = d & LONG_MASK;
@@ -1868,6 +2116,9 @@ class MutableBigInteger {
 
     /**
      * Calculate GCD of this and b. This and b are changed by the computation.
+     * <p>
+     *  计算这个和b的GCD。这和b由计算改变。
+     * 
      */
     MutableBigInteger hybridGCD(MutableBigInteger b) {
         // Use Euclid's algorithm until the numbers are approximately the
@@ -1889,6 +2140,9 @@ class MutableBigInteger {
     /**
      * Calculate GCD of this and v.
      * Assumes that this and v are not zero.
+     * <p>
+     *  计算这个和v的GCD。假设this和v不为零。
+     * 
      */
     private MutableBigInteger binaryGCD(MutableBigInteger v) {
         // Algorithm B from Knuth section 4.5.2
@@ -1945,6 +2199,9 @@ class MutableBigInteger {
 
     /**
      * Calculate GCD of a and b interpreted as unsigned integers.
+     * <p>
+     *  计算a和b的GCD,解释为无符号整数。
+     * 
      */
     static int binaryGcd(int a, int b) {
         if (b == 0)
@@ -1975,6 +2232,9 @@ class MutableBigInteger {
     /**
      * Returns the modInverse of this mod p. This and p are not affected by
      * the operation.
+     * <p>
+     *  返回此mod p的modInverse。此和p不受操作影响。
+     * 
      */
     MutableBigInteger mutableModInverse(MutableBigInteger p) {
         // Modulus is odd, use Schroeppel's algorithm
@@ -2021,6 +2281,9 @@ class MutableBigInteger {
 
     /*
      * Calculate the multiplicative inverse of this mod 2^k.
+     * <p>
+     *  计算此mod 2 ^ k的乘法逆。
+     * 
      */
     MutableBigInteger modInverseMP2(int k) {
         if (isEven())
@@ -2053,6 +2316,9 @@ class MutableBigInteger {
 
     /**
      * Returns the multiplicative inverse of val mod 2^32.  Assumes val is odd.
+     * <p>
+     *  返回val mod 2 ^ 32的乘法逆。假设val是奇数。
+     * 
      */
     static int inverseMod32(int val) {
         // Newton's iteration!
@@ -2066,6 +2332,9 @@ class MutableBigInteger {
 
     /**
      * Calculate the multiplicative inverse of 2^k mod mod, where mod is odd.
+     * <p>
+     *  计算2 ^ k mod mod的乘法逆,其中mod是奇数。
+     * 
      */
     static MutableBigInteger modInverseBP2(MutableBigInteger mod, int k) {
         // Copy the mod to protect original
@@ -2080,6 +2349,12 @@ class MutableBigInteger {
      * the same intermediate representation as Montgomery Reduction
      * ("Montgomery Form").  The algorithm is described in an unpublished
      * manuscript entitled "Fast Modular Reciprocals."
+     * <p>
+     *  计算该mod mod的乘法逆,其中mod是奇数。这和mod不会被计算改变。
+     * 
+     * 这个方法实现了一个算法,由于Richard Schroeppel,它使用与Montgomery Reduction("Montgomery Form")相同的中间表示。
+     * 该算法在未发表的题为"Fast Modular Reciprocals"的手稿中描述。
+     * 
      */
     private MutableBigInteger modInverse(MutableBigInteger mod) {
         MutableBigInteger p = new MutableBigInteger(mod);
@@ -2138,6 +2413,9 @@ class MutableBigInteger {
      * The Fixup Algorithm
      * Calculates X such that X = C * 2^(-k) (mod P)
      * Assumes C<P and P is odd.
+     * <p>
+     *  修正算法计算X使得X = C * 2 ^( -  k)(mod P)假设C <P并且P是奇数。
+     * 
      */
     static MutableBigInteger fixup(MutableBigInteger c, MutableBigInteger p,
                                                                       int k) {
@@ -2176,6 +2454,8 @@ class MutableBigInteger {
     /**
      * Uses the extended Euclidean algorithm to compute the modInverse of base
      * mod a modulus that is a power of 2. The modulus is 2^k.
+     * <p>
+     *  使用扩展欧几里德算法来计算作为2的幂的基模mod的模逆。模数是2 ^ k。
      */
     MutableBigInteger euclidModInverse(int k) {
         MutableBigInteger b = new MutableBigInteger(1);

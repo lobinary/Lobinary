@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import sun.reflect.misc.ReflectUtil;
 /**
  * This class deserializes an object in the context of a specific class loader.
  *
+ * <p>
+ *  此类反序列化在特定类加载器的上下文中的对象。
+ * 
+ * 
  * @since 1.5
  */
 class ObjectInputStreamWithLoader extends ObjectInputStream {
@@ -44,6 +49,8 @@ class ObjectInputStreamWithLoader extends ObjectInputStream {
 
 
     /**
+    /* <p>
+    /* 
      * @exception IOException Signals that an I/O exception of some
      * sort has occurred.
      * @exception StreamCorruptedException The object stream is corrupt.

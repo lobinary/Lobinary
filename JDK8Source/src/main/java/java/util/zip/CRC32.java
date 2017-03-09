@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@ import sun.nio.ch.DirectBuffer;
  * <p> Passing a {@code null} argument to a method in this class will cause
  * a {@link NullPointerException} to be thrown.
  *
+ * <p>
+ *  可用于计算数据流的CRC-32的类。
+ * 
+ *  <p>将{@code null}参数传递给此类中的方法将导致抛出{@link NullPointerException}。
+ * 
+ * 
  * @see         Checksum
  * @author      David Connelly
  */
@@ -43,6 +50,9 @@ class CRC32 implements Checksum {
 
     /**
      * Creates a new CRC32 object.
+     * <p>
+     *  创建一个新的CRC32对象。
+     * 
      */
     public CRC32() {
     }
@@ -52,6 +62,10 @@ class CRC32 implements Checksum {
      * Updates the CRC-32 checksum with the specified byte (the low
      * eight bits of the argument b).
      *
+     * <p>
+     *  使用指定的字节(参数b的低8位)更新CRC-32校验和。
+     * 
+     * 
      * @param b the byte to update the checksum with
      */
     public void update(int b) {
@@ -61,6 +75,10 @@ class CRC32 implements Checksum {
     /**
      * Updates the CRC-32 checksum with the specified array of bytes.
      *
+     * <p>
+     *  使用指定的字节数更新CRC-32校验和。
+     * 
+     * 
      * @throws  ArrayIndexOutOfBoundsException
      *          if {@code off} is negative, or {@code len} is negative,
      *          or {@code off+len} is greater than the length of the
@@ -79,6 +97,10 @@ class CRC32 implements Checksum {
     /**
      * Updates the CRC-32 checksum with the specified array of bytes.
      *
+     * <p>
+     *  使用指定的字节数更新CRC-32校验和。
+     * 
+     * 
      * @param b the array of bytes to update the checksum with
      */
     public void update(byte[] b) {
@@ -95,6 +117,15 @@ class CRC32 implements Checksum {
      * Upon return, the buffer's position will
      * be updated to its limit; its limit will not have been changed.
      *
+     * <p>
+     *  使用指定缓冲区的字节更新校验和。
+     * 
+     *  使用缓冲区更新校验和。
+     * {@link java.nio.Buffer#remaining()remaining()} bytes from buffer.{@link java.nio.Buffer#position()position()}
+     * 返回后,缓冲区的位置将更新到其限制;其极限不会改变。
+     *  使用缓冲区更新校验和。
+     * 
+     * 
      * @param buffer the ByteBuffer to update the checksum with
      * @since 1.8
      */
@@ -119,6 +150,7 @@ class CRC32 implements Checksum {
 
     /**
      * Resets CRC-32 to initial value.
+     * <p>
      */
     public void reset() {
         crc = 0;
@@ -126,6 +158,9 @@ class CRC32 implements Checksum {
 
     /**
      * Returns CRC-32 value.
+     * <p>
+     *  将CRC-32重置为初始值。
+     * 
      */
     public long getValue() {
         return (long)crc & 0xffffffffL;

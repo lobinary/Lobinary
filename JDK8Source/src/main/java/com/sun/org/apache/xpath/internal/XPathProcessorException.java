@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XPathProcessorException.java,v 1.2.4.1 2005/09/15 01:42:45 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XPathProcessorException.java,v 1.2.4.1 2005/09/15 01:42:45 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal;
 
@@ -26,6 +39,9 @@ package com.sun.org.apache.xpath.internal;
  * Derived from XPathException in order that XPath processor
  * exceptions may be specifically caught.
  * @xsl.usage general
+ * <p>
+ *  派生自XPathException为了XPath处理器异常可能被特别捕获。 @ xsl.usage general
+ * 
  */
 public class XPathProcessorException extends XPathException
 {
@@ -34,6 +50,10 @@ public class XPathProcessorException extends XPathException
   /**
    * Create an XPathProcessorException object that holds
    * an error message.
+   * <p>
+   *  创建一个包含错误消息的XPathProcessorException对象。
+   * 
+   * 
    * @param message The error message.
    */
   public XPathProcessorException(String message)
@@ -46,6 +66,9 @@ public class XPathProcessorException extends XPathException
    * Create an XPathProcessorException object that holds
    * an error message, and another exception
    * that caused this exception.
+   * <p>
+   *  创建一个包含错误消息的XPathProcessorException对象,以及导致此异常的另一个异常。
+   * 
    * @param message The error message.
    * @param e The exception that caused this exception.
    */

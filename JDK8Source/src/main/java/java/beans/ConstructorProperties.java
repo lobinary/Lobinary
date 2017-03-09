@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -63,12 +64,32 @@ import static java.lang.annotation.RetentionPolicy.*;
    no way to know whether the parameters correspond to {@code getX()}
    and {@code getY()} or the other way around.
 
+/* <p>
+/*  <p>构造函数上的注释,显示该构造函数的参数如何对应于构造的对象的getter方法。例如：
+/* 
+/* <blockquote>
+/* <pre>
+/*  public class Point {@ConstructorProperties({"x","y"})public Point(int x,int y){this.x = x; this.y = y; }
+/* }。
+/* 
+/*  public int getX(){return x; }}
+/* 
+/*  public int getY(){return y; }}
+/* 
+/* 
    @since 1.6
 */
 @Documented @Target(CONSTRUCTOR) @Retention(RUNTIME)
 public @interface ConstructorProperties {
     /**
        <p>The getter names.</p>
+    /* <p>
+    /*  private final int x,y; }}
+    /* </pre>
+    /* </blockquote>
+    /* 
+    /*  注释显示构造函数的第一个参数可以用{@code getX()}方法检索,第二个参数用{@code getY()}方法检索。
+    /* 
        @return the getter names corresponding to the parameters in the
        annotated constructor.
     */

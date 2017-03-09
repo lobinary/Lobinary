@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,17 +92,55 @@ import java.net.URLConnection;
  * The <tt>unmarshal</tt> methods either fail with an exception or return
  * a non-null value.
  *
+ * <p>
+ *  类定义了方便的常用方法,简单使用JAXB。
+ * 
+ * <p>
+ *  在这个类中定义的方法是方便的方法,它结合了{@link JAXBContext},{@link Unmarshaller}和{@link Marshaller}中的几个基本操作。
+ * 
+ *  它们被设计为对于JAXB新手的开发者的首选方法。它们具有以下特性：
+ * 
+ * <ol>
+ *  <li>一般来说,效能并不一定是最佳的。预计需要编写性能关键代码的人员将直接使用JAXB API的其余部分。
+ *  <li>在处理过程中发生的错误会包装到{@link DataBindingException}中(其{@link JAXBException}为其{@link Throwable#getCause()原因}
+ * )。
+ *  <li>一般来说,效能并不一定是最佳的。预计需要编写性能关键代码的人员将直接使用JAXB API的其余部分。希望喜欢已检查异常的人直接使用JAXB API的其余部分。
+ * </ol>
+ * 
+ * <p>
+ *  此外,<tt> unmarshal </tt>方法具有以下特性：
+ * 
+ * <ol>
+ *  <li>不对输入XML执行模式验证。即使XML中存在错误,处理也会尽可能地继续进行。只有作为最后的手段,此方法失败与{@link DataBindingException}。
+ * </ol>
+ * 
+ * <p>
+ *  类似地,<tt> marshal </tt>方法具有以下特性：
+ * <ol>
+ * <li>即使Java对象树不满足有效性要求,处理也将尝试继续。只有作为最后的手段,此方法失败与{@link DataBindingException}。
+ * </ol>
+ * 
+ * <p>
+ *  此类的所有方法都需要所有参数的非空参数。 <tt>取消组件</tt>方法会失败,并返回非空值。
+ * 
+ * 
  * @author Kohsuke Kawaguchi
  * @since 2.1
  */
 public final class JAXB {
     /**
      * No instanciation is allowed.
+     * <p>
+     *  不允许使用instanciation。
+     * 
      */
     private JAXB() {}
 
     /**
      * To improve the performance, we'll cache the last {@link JAXBContext} used.
+     * <p>
+     *  为了提高性能,我们将缓存最后使用的{@link JAXBContext}。
+     * 
      */
     private static final class Cache {
         final Class type;
@@ -116,6 +155,9 @@ public final class JAXB {
     /**
      * Cache. We don't want to prevent the {@link Cache#type} from GC-ed,
      * hence {@link WeakReference}.
+     * <p>
+     *  缓存。我们不想阻止来自GC-ed的{@link Cache#type},因此{@link WeakReference}。
+     * 
      */
     private static volatile WeakReference<Cache> cache;
 
@@ -126,6 +168,12 @@ public final class JAXB {
      * <p>
      * We don't use locks to control access to {@link #cache}, but this code
      * should be thread-safe thanks to the immutable {@link Cache} and {@code volatile}.
+     * <p>
+     *  从给定类型获取{@link JAXBContext},如果可能,使用缓存。
+     * 
+     * <p>
+     *  我们不使用锁来控制对{@link #cache}的访问,但是由于不可变的{@link Cache}和{@code volatile},这个代码应该是线程安全的。
+     * 
      */
     private static <T> JAXBContext getContext(Class<T> type) throws JAXBException {
         WeakReference<Cache> c = cache;
@@ -145,6 +193,10 @@ public final class JAXB {
     /**
      * Reads in a Java object tree from the given XML input.
      *
+     * <p>
+     *  从给定的XML输入在Java对象树中读取。
+     * 
+     * 
      * @param xml
      *      Reads the entire file as XML.
      */
@@ -160,6 +212,10 @@ public final class JAXB {
     /**
      * Reads in a Java object tree from the given XML input.
      *
+     * <p>
+     *  从给定的XML输入在Java对象树中读取。
+     * 
+     * 
      * @param xml
      *      The resource pointed by the URL is read in its entirety.
      */
@@ -177,6 +233,10 @@ public final class JAXB {
     /**
      * Reads in a Java object tree from the given XML input.
      *
+     * <p>
+     *  从给定的XML输入在Java对象树中读取。
+     * 
+     * 
      * @param xml
      *      The URI is {@link URI#toURL() turned into URL} and then
      *      follows the handling of <tt>URL</tt>.
@@ -195,6 +255,10 @@ public final class JAXB {
     /**
      * Reads in a Java object tree from the given XML input.
      *
+     * <p>
+     *  从给定的XML输入在Java对象树中读取。
+     * 
+     * 
      * @param xml
      *      The string is first interpreted as an absolute <tt>URI</tt>.
      *      If it's not {@link URI#isAbsolute() a valid absolute URI},
@@ -214,6 +278,10 @@ public final class JAXB {
     /**
      * Reads in a Java object tree from the given XML input.
      *
+     * <p>
+     *  从给定的XML输入在Java对象树中读取。
+     * 
+     * 
      * @param xml
      *      The entire stream is read as an XML infoset.
      *      Upon a successful completion, the stream will be closed by this method.
@@ -232,6 +300,10 @@ public final class JAXB {
     /**
      * Reads in a Java object tree from the given XML input.
      *
+     * <p>
+     *  从给定的XML输入在Java对象树中读取。
+     * 
+     * 
      * @param xml
      *      The character stream is read as an XML infoset.
      *      The encoding declaration in the XML will be ignored.
@@ -251,6 +323,10 @@ public final class JAXB {
     /**
      * Reads in a Java object tree from the given XML input.
      *
+     * <p>
+     *  从给定的XML输入在Java对象树中读取。
+     * 
+     * 
      * @param xml
      *      The XML infoset that the {@link Source} represents is read.
      */
@@ -270,6 +346,9 @@ public final class JAXB {
     /**
      * Creates {@link Source} from various XML representation.
      * See {@link #unmarshal} for the conversion rules.
+     * <p>
+     *  从各种XML表示创建{@link Source}。有关转化规则,请参见{@link #unmarshal}。
+     * 
      */
     private static Source toSource(Object xml) throws IOException {
         if(xml==null)
@@ -311,6 +390,10 @@ public final class JAXB {
     /**
      * Writes a Java object tree to XML and store it to the specified location.
      *
+     * <p>
+     *  将Java对象树写入XML并将其存储到指定位置。
+     * 
+     * 
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
      *      a {@link JAXBElement}, it will provide the root tag name and
@@ -335,6 +418,10 @@ public final class JAXB {
     /**
      * Writes a Java object tree to XML and store it to the specified location.
      *
+     * <p>
+     *  将Java对象树写入XML并将其存储到指定位置。
+     * 
+     * 
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
      *      a {@link JAXBElement}, it will provide the root tag name and
@@ -362,6 +449,10 @@ public final class JAXB {
     /**
      * Writes a Java object tree to XML and store it to the specified location.
      *
+     * <p>
+     * 将Java对象树写入XML并将其存储到指定位置。
+     * 
+     * 
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
      *      a {@link JAXBElement}, it will provide the root tag name and
@@ -386,6 +477,10 @@ public final class JAXB {
     /**
      * Writes a Java object tree to XML and store it to the specified location.
      *
+     * <p>
+     *  将Java对象树写入XML并将其存储到指定位置。
+     * 
+     * 
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
      *      a {@link JAXBElement}, it will provide the root tag name and
@@ -411,6 +506,10 @@ public final class JAXB {
     /**
      * Writes a Java object tree to XML and store it to the specified location.
      *
+     * <p>
+     *  将Java对象树写入XML并将其存储到指定位置。
+     * 
+     * 
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
      *      a {@link JAXBElement}, it will provide the root tag name and
@@ -435,6 +534,10 @@ public final class JAXB {
     /**
      * Writes a Java object tree to XML and store it to the specified location.
      *
+     * <p>
+     *  将Java对象树写入XML并将其存储到指定位置。
+     * 
+     * 
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
      *      a {@link JAXBElement}, it will provide the root tag name and
@@ -459,6 +562,10 @@ public final class JAXB {
     /**
      * Writes a Java object tree to XML and store it to the specified location.
      *
+     * <p>
+     *  将Java对象树写入XML并将其存储到指定位置。
+     * 
+     * 
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
      *      a {@link JAXBElement}, it will provide the root tag name and
@@ -499,6 +606,16 @@ public final class JAXB {
      *      the rest of the JAXB API directly.
      * </ol>
      *
+     * <p>
+     *  将Java对象树写入XML并将其存储到指定位置。
+     * 
+     * <p>
+     *  这个方法是一个方便的方法,它结合了{@link JAXBContext}和{@link Marshaller}中的几个基本操作。这种方法被设计为对JAXB新手的开发者的首选方法。
+     * 此方法具有以下特性：。
+     * 
+     * <ol>
+     *  <li>一般来说,效能并不一定是最佳的。期望那些需要编写性能关键代码的人员将直接使用JAXB API的其余部分。
+     * 
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
      *      a {@link JAXBElement}, it will provide the root tag name and
@@ -584,6 +701,11 @@ public final class JAXB {
     /**
      * Creates {@link Result} from various XML representation.
      * See {@link #_marshal(Object,Object)} for the conversion rules.
+     * <p>
+     *  <li>在处理过程中发生的错误会包装到{@link DataBindingException}中(其{@link JAXBException}是其{@link Throwable#getCause()原因}
+     * )。
+     *  <li>一般来说,效能并不一定是最佳的。期望那些需要编写性能关键代码的人员将直接使用JAXB API的其余部分。希望那些喜欢检查异常的人将直接使用JAXB API的其余部分。
+     * </ol>
      */
     private static Result toResult(Object xml) throws IOException {
         if(xml==null)

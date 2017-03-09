@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.identity;
@@ -36,6 +46,12 @@ import org.xml.sax.SAXException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  XPath匹配器。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Andy Clark, IBM
  *
  */
@@ -105,6 +121,9 @@ public class XPathMatcher {
     /**
      * No match depth. The value of this field will be zero while
      * matching is successful for the given xpath expression.
+     * <p>
+     *  无匹配深度。对于给定的xpath表达式,匹配成功时,此字段的值将为零。
+     * 
      */
     private int [] fNoMatchDepth;
 
@@ -119,6 +138,10 @@ public class XPathMatcher {
      * Constructs an XPath matcher that implements a document fragment
      * handler.
      *
+     * <p>
+     *  构造实现文档片段处理程序的XPath匹配器。
+     * 
+     * 
      * @param xpath   The xpath.
      */
     public XPathMatcher(XPath xpath) {
@@ -137,6 +160,9 @@ public class XPathMatcher {
     /**
      * Returns value of first member of fMatched that
      * is nonzero.
+     * <p>
+     *  返回非零的fMatched的第一个成员的值。
+     * 
      */
     public boolean isMatched() {
         // xpath has been matched if any one of the members of the union have matched.
@@ -163,6 +189,9 @@ public class XPathMatcher {
      * This method is called when the XPath handler matches the
      * XPath expression. Subclasses can override this method to
      * provide default handling upon a match.
+     * <p>
+     *  当XPath处理程序匹配XPath表达式时调用此方法。子类可以覆盖此方法以在匹配时提供默认处理。
+     * 
      */
     protected void matched(Object actualValue, short valueType, ShortList itemValueType, boolean isNil) {
         if (DEBUG_METHODS3) {
@@ -176,6 +205,9 @@ public class XPathMatcher {
 
     /**
      * The start of the document fragment.
+     * <p>
+     *  文档片段的开始。
+     * 
      */
     public void startDocumentFragment(){
         if (DEBUG_METHODS) {
@@ -200,6 +232,10 @@ public class XPathMatcher {
      * by using an empty tag, then the startElement method will immediately
      * be followed by the endElement method, with no intervening methods.
      *
+     * <p>
+     *  元素的开始。如果文档通过使用空标签指定start元素,那么startElement方法将立即跟随endElement方法,没有中间方法。
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      *
@@ -359,6 +395,8 @@ public class XPathMatcher {
     // startElement(QName,XMLAttrList,int)
 
     /**
+    /* <p>
+    /* 
        * @param element
        *        name of the element.
        * @param type
@@ -418,6 +456,10 @@ public class XPathMatcher {
     public String toString() {
         /***
         return fLocationPath.toString();
+        /* <p>
+        /*  return fLocationPath.toString();
+        /* 
+        /* 
         /***/
         StringBuffer str = new StringBuffer();
         String s = super.toString();
@@ -517,6 +559,12 @@ public class XPathMatcher {
         }
 
     } // main(String[])
+    /* <p>
+    /* public static void main(String [] argv)throws XNIException {
+    /* 
+    /*  if(DEBUG_ANY){for(int i = 0; i <argv.length; i ++){final String expr = argv [i] final XPath xpath = new XPath(expr,symbols,null); final XPathMatcher matcher = new XPathMatcher(xpath,true); com.sun.org.apache.xerces.internal.parsers.SAXParser parser = new com.sun.org.apache.xerces.internal.parsers.SAXParser(symbols){public void startDocument()throws XNIException {matcher.startDocumentFragment(symbols , 空值); } public void startElement(QName element,XMLAttrList attributes,int handle)throws XNIException {matcher.startElement(element,attributes,handle); } public void characters(char [] ch,int offset,int length)throws XNIException {matcher.characters(ch,offset,length); } public void endElement(QName element)throws XNIException {matcher.endElement(element); } public void endDocument()throws XNIException {matcher.endDocumentFragment(); }}; System.out.println("#### argv ["+ i +"]：\""+ expr +"\" - >
+    /*  \""+ xpath.toString()+'"'); final String uri = argv [++ i]; System.out.println("#### argv ["+ i +"]：
+    /* 
     /***/
 
 } // class XPathMatcher

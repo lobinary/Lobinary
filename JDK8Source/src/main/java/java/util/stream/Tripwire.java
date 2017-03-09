@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,14 @@ import sun.util.logging.PlatformLogger;
  *         Tripwire.trip(getClass(), "{0} calling Sink.OfInt.accept(Integer)");
  * }</pre>
  *
+ * <p>
+ *  用于检测{@code java.util.stream}类中无意使用拳击的实用程序类。
+ * 根据{@link Boolean#getBoolean(String)},系统属性{@code org.openjdk.java.util.stream.tripwire}是否被视为{@code true}
+ * ,系统会打开或关闭检测。
+ *  用于检测{@code java.util.stream}类中无意使用拳击的实用程序类。这通常应在生产使用时关闭。
+ * 
+ *  @apiNote典型的用法是对拳击代码做：<pre> {@ code if(Tripwire.ENABLED)Tripwire.trip(getClass(),"{0} call Sink.OfInt
+ * 
  * @since 1.8
  */
 final class Tripwire {
@@ -59,6 +68,10 @@ final class Tripwire {
      * using the supplied message.  The class name of {@code trippingClass} will
      * be used as the first parameter to the message.
      *
+     * <p>
+     * .accept(Integer)"); } </pre>。
+     * 
+     * 
      * @param trippingClass Name of the class generating the message
      * @param msg A message format string of the type expected by
      * {@link PlatformLogger}

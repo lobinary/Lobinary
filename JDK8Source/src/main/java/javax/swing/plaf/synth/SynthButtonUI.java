@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import javax.swing.text.View;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JButton}.
  *
+ * <p>
+ *  为{@link javax.swing.JButton}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.7
  */
@@ -47,6 +52,10 @@ public class SynthButtonUI extends BasicButtonUI implements
     /**
      * Creates a new UI object for the given component.
      *
+     * <p>
+     *  为给定组件创建一个新的UI对象。
+     * 
+     * 
      * @param c component to create UI object for
      * @return the UI object
      */
@@ -56,6 +65,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installDefaults(AbstractButton b) {
@@ -66,6 +78,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installListeners(AbstractButton b) {
@@ -110,6 +125,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallListeners(AbstractButton b) {
@@ -119,6 +137,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallDefaults(AbstractButton b) {
@@ -131,6 +152,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -143,6 +167,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * Returns the current state of the passed in <code>AbstractButton</code>.
+     * <p>
+     *  返回在<code> AbstractButton </code>中传递的当前状态。
+     * 
      */
     private int getComponentState(JComponent c) {
         int state = ENABLED;
@@ -181,6 +208,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public int getBaseline(JComponent c, int width, int height) {
@@ -242,6 +272,12 @@ public class SynthButtonUI extends BasicButtonUI implements
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -261,6 +297,10 @@ public class SynthButtonUI extends BasicButtonUI implements
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -276,6 +316,10 @@ public class SynthButtonUI extends BasicButtonUI implements
     /**
      * Paints the specified component.
      *
+     * <p>
+     *  绘制指定的组件。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -304,6 +348,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -315,6 +362,10 @@ public class SynthButtonUI extends BasicButtonUI implements
      * Returns the default icon. This should not callback
      * to the JComponent.
      *
+     * <p>
+     *  返回默认图标。这不应该回调JComponent。
+     * 
+     * 
      * @param b button the icon is associated with
      * @return default icon
      */
@@ -329,6 +380,10 @@ public class SynthButtonUI extends BasicButtonUI implements
      * Returns the Icon to use for painting the button. The icon is chosen with
      * respect to the current state of the button.
      *
+     * <p>
+     *  返回用于绘制按钮的图标。相对于按钮的当前状态选择图标。
+     * 
+     * 
      * @param b button the icon is associated with
      * @return an icon
      */
@@ -359,6 +414,10 @@ public class SynthButtonUI extends BasicButtonUI implements
      * icon has not been defined for the button state and the backup icon is a
      * UIResource (we set it, not the developer).
      *
+     * <p>
+     *  此方法将返回应用于按钮的图标。如果没有为按钮状态定义特定图标,并且备份图标是UIResource(我们设置它,而不是开发人员),我们只想使用由样式定义的synth图标。
+     * 
+     * 
      * @param b button
      * @param specificIcon icon returned from the button for the specific state
      * @param defaultIcon fallback icon
@@ -429,6 +488,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * Returns the amount to shift the text/icon when painting.
+     * <p>
+     *  返回在绘制时移动文本/图标的量。
+     * 
      */
     private int getTextShiftOffset(SynthContext state) {
         AbstractButton button = (AbstractButton)state.getComponent();
@@ -448,6 +510,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     * {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getMinimumSize(JComponent c) {
@@ -469,6 +534,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getPreferredSize(JComponent c) {
@@ -490,6 +558,9 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public Dimension getMaximumSize(JComponent c) {
@@ -513,6 +584,9 @@ public class SynthButtonUI extends BasicButtonUI implements
     /**
      * Returns the Icon used in calculating the
      * preferred/minimum/maximum size.
+     * <p>
+     *  返回用于计算首选/最小/最大大小的图标。
+     * 
      */
     protected Icon getSizingIcon(AbstractButton b) {
         Icon icon = getEnabledIcon(b, b.getIcon());
@@ -524,6 +598,8 @@ public class SynthButtonUI extends BasicButtonUI implements
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     public void propertyChange(PropertyChangeEvent e) {

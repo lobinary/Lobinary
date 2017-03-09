@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码。
+ * 版权所有。
+ *  **************************************************** ************** ********************************
+ * **** ****************************。
+ * 版权所有。
+ * 
+ * 
  ******************************************************************/
 
 package java.awt.image;
@@ -45,6 +56,11 @@ import java.awt.Point;
  * <p> The constructors of this class are protected.  To instantiate
  * a WritableRaster, use one of the createWritableRaster factory methods
  * in the Raster class.
+ * <p>
+ *  这个类扩展了Raster以提供像素写入功能。有关栅格存储像素的说明,请参阅Raster的类注释。
+ * 
+ *  <p>此类的构造函数受保护。要实例化WritableRaster,请使用Raster类中的一个createWritableRaster工厂方法。
+ * 
  */
 public class WritableRaster extends Raster {
 
@@ -53,6 +69,11 @@ public class WritableRaster extends Raster {
      *  WritableRaster's upper left corner is origin and it is the
      *  same size as the  SampleModel.  A DataBuffer large enough to
      *  describe the WritableRaster is automatically created.
+     * <p>
+     *  使用给定的SampleModel构造WritableRaster。 WritableRaster的左上角是原点,它与SampleModel的大小相同。
+     * 自动创建大到足以描述WritableRaster的DataBuffer。
+     * 
+     * 
      *  @param sampleModel     The SampleModel that specifies the layout.
      *  @param origin          The Point that specifies the origin.
      *  @throws RasterFormatException if computing either
@@ -77,6 +98,11 @@ public class WritableRaster extends Raster {
      *  The WritableRaster's upper left corner is origin and it is the same
      *  size as the SampleModel.  The DataBuffer is not initialized and must
      *  be compatible with SampleModel.
+     * <p>
+     *  使用给定的SampleModel和DataBuffer构造WritableRaster。 WritableRaster的左上角是原点,它与SampleModel的大小相同。
+     *  DataBuffer未初始化,必须与SampleModel兼容。
+     * 
+     * 
      *  @param sampleModel     The SampleModel that specifies the layout.
      *  @param dataBuffer      The DataBuffer that contains the image data.
      *  @param origin          The Point that specifies the origin.
@@ -109,6 +135,13 @@ public class WritableRaster extends Raster {
      *
      * Note that this constructor should generally be called by other
      * constructors or create methods, it should not be used directly.
+     * <p>
+     * 构造具有给定SampleModel,DataBuffer和父的WritableRaster。 aRegion指定新栅格的边界矩形。当转换为基本光栅的坐标系时,基本光栅必须包含一个区域。
+     *  (基本栅格是栅格的祖先,没有父元素。)sampleModelTranslate指定新栅格的sampleModelTranslateX和sampleModelTranslateY值。
+     * 
+     *  注意,这个构造函数通常应该由其他构造函数或create方法调用,不应该直接使用。
+     * 
+     * 
      * @param sampleModel     The SampleModel that specifies the layout.
      * @param dataBuffer      The DataBuffer that contains the image data.
      * @param aRegion         The Rectangle that specifies the image area.
@@ -131,6 +164,10 @@ public class WritableRaster extends Raster {
 
     /** Returns the parent WritableRaster (if any) of this WritableRaster,
      *  or else null.
+     * <p>
+     *  否则为null。
+     * 
+     * 
      *  @return the parent of this <code>WritableRaster</code>, or
      *          <code>null</code>.
      */
@@ -144,6 +181,11 @@ public class WritableRaster extends Raster {
      * will possess a reference to the current WritableRaster, accessible
      * through its getParent() and getWritableParent() methods.
      *
+     * <p>
+     *  创建一个与此大小相同的WritableRaster,SampleModel和DataBuffer,但使用不同的位置。
+     * 新的WritableRaster将拥有对当前WritableRaster的引用,可通过其getParent()和getWritableParent()方法访问。
+     * 
+     * 
      * @param childMinX X coord of the upper left corner of the new Raster.
      * @param childMinY Y coord of the upper left corner of the new Raster.
      * @return a <code>WritableRaster</code> the same as this one except
@@ -191,6 +233,25 @@ public class WritableRaster extends Raster {
      * parentX, childMinY equal to parentY, and bandList equal to
      * null.
      *
+     * <p>
+     *  返回一个新的WritableRaster,它共享此WritableRaster的DataBuffer的全部或部分。
+     * 新的WritableRaster将拥有对当前WritableRaster的引用,可通过其getParent()和getWritableParent()方法访问。
+     * 
+     *  <p> parentX,parentY,width和height参数在WritableRaster的坐标空间中形成一个Rectangle,表示要共享的像素区域。
+     * 如果此Rectangle不包含在当前WritableRaster的边界中,则会抛出错误。
+     * 
+     * <p>新的WritableRaster可以另外转换为与当前WritableRaster所使用的平面不同的坐标系。
+     *  childMinX和childMinY参数给出了返回的WritableRaster的左上角像素的新(x,y)坐标;新WritableRaster中的坐标(childMinX,childMinY)将映射
+     * 到与当前WritableRaster中的坐标(parentX,parentY)相同的像素。
+     * <p>新的WritableRaster可以另外转换为与当前WritableRaster所使用的平面不同的坐标系。
+     * 
+     *  新的WritableRaster可以被定义为仅包含当前WritableRaster的频带的子集,可能通过bandList参数重新排序。
+     * 如果bandList为null,则它包括当前WritableRaster的当前顺序中的所有频带。
+     * 
+     *  <p>要创建一个包含当前WritableRaster的子区域但是共享其坐标系和带的新WritableRaster,应该使用childMinX等于parentX,childMinY等于parentY,并
+     * 且bandList等于null来调用此方法。
+     * 
+     * 
      * @param parentX    X coordinate of the upper left corner in this
      *                   WritableRaster's coordinates.
      * @param parentY    Y coordinate of the upper left corner in this
@@ -269,6 +330,15 @@ public class WritableRaster extends Raster {
      * However, explicit bounds checking is not guaranteed.
      * A ClassCastException will be thrown if the input object is not null
      * and references anything other than an array of TransferType.
+     * <p>
+     * 从TransferType类型的基本数组设置单个像素的数据。
+     * 对于Java 2D(tm)API支持的图像数据,这将是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT,DataBuffer.TYPE_INT,DataBuffer
+     * .TYPE_SHORT,DataBuffer.TYPE_FLOAT或DataBuffer.TYPE_DOUBLE之一。
+     * 从TransferType类型的基本数组设置单个像素的数据。阵列中的数据可以是打包格式,因此提高了数据传输的效率。
+     * 如果坐标不在边界中,或者如果inData不足以容纳像素数据,则可能会抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 如果输入对象不为null并且引用TransferType数组以外的任何对象,则将抛出ClassCastException。
+     * 
+     * 
      * @see java.awt.image.SampleModel#setDataElements(int, int, Object, DataBuffer)
      * @param x        The X coordinate of the pixel location.
      * @param y        The Y coordinate of the pixel location.
@@ -295,6 +365,13 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  设置来自输入栅格的像素矩形的数据。
+     * 输入栅格必须与此WritableRaster兼容,因为它们必须具有相同数量的波段,相应的波段必须具有每个样本相同的位数,TransferTypes和NumDataElements必须相同,并且getDa
+     * taElements / setDataElements使用的打包必须相同。
+     *  设置来自输入栅格的像素矩形的数据。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the pixel location.
      * @param y        The Y coordinate of the pixel location.
      * @param inRaster Raster containing data to place at x,y.
@@ -340,6 +417,15 @@ public class WritableRaster extends Raster {
      * However, explicit bounds checking is not guaranteed.
      * A ClassCastException will be thrown if the input object is not null
      * and references anything other than an array of TransferType.
+     * <p>
+     * 从TransferType类型的基本数组设置像素矩形的数据。
+     * 对于Java 2D API支持的图像数据,这将是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT,DataBuffer.TYPE_INT,DataBuffer.TY
+     * PE_SHORT,DataBuffer.TYPE_FLOAT或DataBuffer.TYPE_DOUBLE之一。
+     * 从TransferType类型的基本数组设置像素矩形的数据。阵列中的数据可以是打包格式,因此提高了数据传输的效率。
+     * 如果坐标不在边界中,或者如果inData不足以容纳像素数据,则可能会抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 如果输入对象不为null并且引用TransferType数组以外的任何对象,则将抛出ClassCastException。
+     * 
+     * 
      * @see java.awt.image.SampleModel#setDataElements(int, int, int, int, Object, DataBuffer)
      * @param x        The X coordinate of the upper left pixel location.
      * @param y        The Y coordinate of the upper left pixel location.
@@ -395,6 +481,20 @@ public class WritableRaster extends Raster {
      * rules for integral types, and then the int is cast to float or
      * double.
      * <p>
+     * <p>
+     *  将像素从Raster srcRaster复制到此WritableRaster。 srcRaster中的每个像素都复制到此栅格中的同一x,y地址,除非地址超出此栅格的边界。
+     *  srcRaster必须具有与此WritableRaster相同的波段数。副本是源样本到相应目的地样本的简单副本。
+     * <p>
+     * 如果源和目标光栅的所有样本都是整数类型且小于或等于32位大小,则调用此方法等同于对所有<code> x,y </code>地址有效的所有<code> x,y </code>两个栅格。
+     *  <pre> {@ code Raster srcRaster; WritableRaster dstRaster; for(int b = 0; b <srcRaster.getNumBands(); b ++){dstRaster.setSample(x,y,b,srcRaster.getSample(x,y,b)); }} </pre>
+     * 因此,当将整数类型源复制到整数类型目的地时,如果源样本大小大于特定频带的目标样本大小,则源样本的高阶位将被截断。
+     * 如果源和目标光栅的所有样本都是整数类型且小于或等于32位大小,则调用此方法等同于对所有<code> x,y </code>地址有效的所有<code> x,y </code>两个栅格。
+     * 如果源样本大小小于特定频带的目标大小,则根据srcRaster的SampleModel将样本视为有符号数还是无符号数,目标的高阶位为零扩展或符号扩展。
+     * <p>
+     *  将浮点或双源复制到整数类型目标时,每个源样本都将转换为目标类型。
+     * 当将整数类型源复制到浮点或双目的地时,首先使用上述整数类型规则将源转换为32位int(如果需要),然后将int转换为float或double。
+     * <p>
+     * 
      * @param srcRaster  The  Raster from which to copy pixels.
      *
      * @throws NullPointerException if srcRaster is null.
@@ -413,6 +513,13 @@ public class WritableRaster extends Raster {
      * destination samples.  For details, see
      * {@link WritableRaster#setRect(Raster)}.
      *
+     * <p>
+     * 将像素从Raster srcRaster复制到此WritableRaster。
+     * 对于srcRaster中的每个(x,y)地址,相应的像素被复制到此WritableRaster中的地址(x + dx,y + dy),除非(x + dx,y + dy)落在该栅格的边界之外。
+     *  srcRaster必须具有与此WritableRaster相同的波段数。副本是源样本到相应目的地样本的简单副本。
+     * 有关详细信息,请参阅{@link WritableRaster#setRect(Raster)}。
+     * 
+     * 
      * @param dx        The X translation factor from src space to dst space
      *                  of the copy.
      * @param dy        The Y translation factor from src space to dst space
@@ -496,6 +603,10 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  设置DataBuffer中的一个像素,使用int数组样本进行输入。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x      The X coordinate of the pixel location.
      * @param y      The Y coordinate of the pixel location.
      * @param iArray The input samples in a int array.
@@ -514,6 +625,10 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  在DataBuffer中使用浮点数组来设置输入的像素。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x      The X coordinate of the pixel location.
      * @param y      The Y coordinate of the pixel location.
      * @param fArray The input samples in a float array.
@@ -532,6 +647,10 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  使用双数组样本在DataBuffer中设置像素以进行输入。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x      The X coordinate of the pixel location.
      * @param y      The Y coordinate of the pixel location.
      * @param dArray The input samples in a double array.
@@ -551,6 +670,10 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  为包含每个数组元素一个样本的int数组设置像素矩形的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the upper left pixel location.
      * @param y        The Y coordinate of the upper left pixel location.
      * @param w        Width of the pixel rectangle.
@@ -572,6 +695,10 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     * 为包含每个数组元素一个样本的float数组设置像素矩形的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the upper left pixel location.
      * @param y        The Y coordinate of the upper left pixel location.
      * @param w        Width of the pixel rectangle.
@@ -593,6 +720,10 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  为包含每个数组元素一个样本的双阵列设置像素矩形的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the upper left pixel location.
      * @param y        The Y coordinate of the upper left pixel location.
      * @param w        Width of the pixel rectangle.
@@ -614,6 +745,11 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  使用int作为输入,为DataBuffer中位于(x,y)的像素设置指定频带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the pixel location.
      * @param y        The Y coordinate of the pixel location.
      * @param b        The band to set.
@@ -634,6 +770,11 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  使用float作为输入,为DataBuffer中位于(x,y)的像素设置指定频带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the pixel location.
      * @param y        The Y coordinate of the pixel location.
      * @param b        The band to set.
@@ -653,6 +794,11 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  在指定的频带中为位于(x,y)的像素在DataBuffer中使用双精度输入设置样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the pixel location.
      * @param y        The Y coordinate of the pixel location.
      * @param b        The band to set.
@@ -672,6 +818,10 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     * 对于指定的像素矩形,从包含每个数组元素一个样本的int数组中设置指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the upper left pixel location.
      * @param y        The Y coordinate of the upper left pixel location.
      * @param w        Width of the pixel rectangle.
@@ -696,6 +846,11 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     *  在包含每个数组元素一个样本的float数组中,为指定的像素矩形设置指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the upper left pixel location.
      * @param y        The Y coordinate of the upper left pixel location.
      * @param w        Width of the pixel rectangle.
@@ -720,6 +875,8 @@ public class WritableRaster extends Raster {
      * An ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
      * However, explicit bounds checking is not guaranteed.
+     * <p>
+     * 
      * @param x        The X coordinate of the upper left pixel location.
      * @param y        The Y coordinate of the upper left pixel location.
      * @param w        Width of the pixel rectangle.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013 Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -31,6 +32,9 @@ import com.sun.org.apache.xerces.internal.util.SecurityManager;
 /**
  * This class manages standard and implementation-specific limitations.
  *
+ * <p>
+ *  此类管理标准和实现特定的限制。
+ * 
  */
 public final class XMLSecurityManager {
 
@@ -38,6 +42,9 @@ public final class XMLSecurityManager {
      * States of the settings of a property, in the order: default value, value
      * set by FEATURE_SECURE_PROCESSING, jaxp.properties file, jaxp system
      * properties, and jaxp api properties
+     * <p>
+     *  状态设置的属性,按顺序：默认值,由FEATURE_SECURE_PROCESSING设置的值,jaxp.properties文件,jaxp系统属性和jaxp api属性
+     * 
      */
     public static enum State {
         //this order reflects the overriding order
@@ -58,6 +65,9 @@ public final class XMLSecurityManager {
 
     /**
      * Limits managed by the security manager
+     * <p>
+     *  由安全管理器管理的限制
+     * 
      */
     public static enum Limit {
 
@@ -108,6 +118,9 @@ public final class XMLSecurityManager {
 
     /**
      * Map old property names with the new ones
+     * <p>
+     *  使用新的属性名称映射旧的属性名称
+     * 
      */
     public static enum NameMap {
 
@@ -132,25 +145,40 @@ public final class XMLSecurityManager {
     private static final int NO_LIMIT = 0;
     /**
      * Values of the properties
+     * <p>
+     *  属性的值
+     * 
      */
     private final int[] values;
     /**
      * States of the settings for each property
+     * <p>
+     * 每个属性的设置状态
+     * 
      */
     private State[] states;
     /**
      * Flag indicating if secure processing is set
+     * <p>
+     *  指示是否设置安全处理的标志
+     * 
      */
     boolean secureProcessing;
 
     /**
      * States that determine if properties are set explicitly
+     * <p>
+     *  确定属性是否明确设置的状态
+     * 
      */
     private boolean[] isSet;
 
 
     /**
      * Index of the special entityCountInfo property
+     * <p>
+     *  特殊entityCountInfo属性的索引
+     * 
      */
     private int indexEntityCountInfo = 10000;
     private String printEntityCountInfo = "";
@@ -158,6 +186,9 @@ public final class XMLSecurityManager {
     /**
      * Default constructor. Establishes default values for known security
      * vulnerabilities.
+     * <p>
+     *  默认构造函数。建立已知安全漏洞的默认值。
+     * 
      */
     public XMLSecurityManager() {
         this(false);
@@ -166,6 +197,10 @@ public final class XMLSecurityManager {
     /**
      * Instantiate Security Manager in accordance with the status of
      * secure processing
+     * <p>
+     *  根据安全处理的状态实例化安全管理器
+     * 
+     * 
      * @param secureProcessing
      */
     public XMLSecurityManager(boolean secureProcessing) {
@@ -188,6 +223,9 @@ public final class XMLSecurityManager {
 
     /**
      * Setting FEATURE_SECURE_PROCESSING explicitly
+     * <p>
+     *  明确设置FEATURE_SECURE_PROCESSING
+     * 
      */
     public void setSecureProcessing(boolean secure) {
         secureProcessing = secure;
@@ -202,6 +240,10 @@ public final class XMLSecurityManager {
 
     /**
      * Return the state of secure processing
+     * <p>
+     *  返回安全处理的状态
+     * 
+     * 
      * @return the state of secure processing
      */
     public boolean isSecureProcessing() {
@@ -211,6 +253,10 @@ public final class XMLSecurityManager {
 
     /**
      * Set limit by property name and state
+     * <p>
+     *  按属性名称和状态设置限制
+     * 
+     * 
      * @param propertyName property name
      * @param state the state of the property
      * @param value the value of the property
@@ -229,6 +275,10 @@ public final class XMLSecurityManager {
     /**
      * Set the value for a specific limit.
      *
+     * <p>
+     *  设置特定限制的值。
+     * 
+     * 
      * @param limit the limit
      * @param state the state of the property
      * @param value the value of the property
@@ -240,6 +290,10 @@ public final class XMLSecurityManager {
     /**
      * Set the value of a property by its index
      *
+     * <p>
+     *  通过其索引设置属性的值
+     * 
+     * 
      * @param index the index of the property
      * @param state the state of the property
      * @param value the value of the property
@@ -264,6 +318,10 @@ public final class XMLSecurityManager {
     /**
      * Set the value of a property by its index
      *
+     * <p>
+     *  通过其索引设置属性的值
+     * 
+     * 
      * @param index the index of the property
      * @param state the state of the property
      * @param value the value of the property
@@ -285,6 +343,10 @@ public final class XMLSecurityManager {
     /**
      * Return the value of the specified property
      *
+     * <p>
+     *  返回指定属性的值
+     * 
+     * 
      * @param propertyName the property name
      * @return the value of the property as a string. If a property is managed
      * by this manager, its value shall not be null.
@@ -300,6 +362,10 @@ public final class XMLSecurityManager {
     /**
      * Return the value of the specified property
      *
+     * <p>
+     *  返回指定属性的值
+     * 
+     * 
      * @param limit the property
      * @return the value of the property
      */
@@ -310,6 +376,10 @@ public final class XMLSecurityManager {
     /**
      * Return the value of a property by its ordinal
      *
+     * <p>
+     *  通过其序数返回属性的值
+     * 
+     * 
      * @param limit the property
      * @return value of a property
      */
@@ -320,6 +390,10 @@ public final class XMLSecurityManager {
     /**
      * Return the value of a property by its ordinal
      *
+     * <p>
+     *  通过其序数返回属性的值
+     * 
+     * 
      * @param index the index of a property
      * @return limit of a property as a string
      */
@@ -334,6 +408,10 @@ public final class XMLSecurityManager {
     /**
      * Return the state of the limit property
      *
+     * <p>
+     *  返回limit属性的状态
+     * 
+     * 
      * @param limit the limit
      * @return the state of the limit property
      */
@@ -344,6 +422,10 @@ public final class XMLSecurityManager {
     /**
      * Return the state of the limit property
      *
+     * <p>
+     *  返回limit属性的状态
+     * 
+     * 
      * @param limit the limit
      * @return the state of the limit property
      */
@@ -354,6 +436,10 @@ public final class XMLSecurityManager {
     /**
      * Get the index by property name
      *
+     * <p>
+     *  按属性名称获取索引
+     * 
+     * 
      * @param propertyName property name
      * @return the index of the property if found; return -1 if not
      */
@@ -373,6 +459,10 @@ public final class XMLSecurityManager {
 
     /**
      * Check if there's no limit defined by the Security Manager
+     * <p>
+     *  检查是否没有安全管理器定义的限制
+     * 
+     * 
      * @param limit
      * @return
      */
@@ -383,6 +473,10 @@ public final class XMLSecurityManager {
      * Check if the size (length or count) of the specified limit property is
      * over the limit
      *
+     * <p>
+     *  检查指定的limit属性的大小(长度或计数)是否超过限制
+     * 
+     * 
      * @param limit the type of the limit property
      * @param entityName the name of the entity
      * @param size the size (count or length) of the entity
@@ -397,6 +491,10 @@ public final class XMLSecurityManager {
      * Check if the value (length or count) of the specified limit property is
      * over the limit
      *
+     * <p>
+     *  检查指定的limit属性的值(长度或计数)是否超过限制
+     * 
+     * 
      * @param index the index of the limit property
      * @param entityName the name of the entity
      * @param size the size (count or length) of the entity
@@ -417,6 +515,10 @@ public final class XMLSecurityManager {
     /**
      * Check against cumulated value
      *
+     * <p>
+     *  检查累积值
+     * 
+     * 
      * @param limit the type of the limit property
      * @param size the size (count or length) of the entity
      * @return true if the size is over the limit, false otherwise
@@ -449,6 +551,10 @@ public final class XMLSecurityManager {
 
     /**
      * Indicate if a property is set explicitly
+     * <p>
+     *  指示是否显式设置属性
+     * 
+     * 
      * @param index
      * @return
      */
@@ -462,6 +568,9 @@ public final class XMLSecurityManager {
 
     /**
      * Read from system properties, or those in jaxp.properties
+     * <p>
+     *  从系统属性或jaxp.properties中读取
+     * 
      */
     private void readSystemProperties() {
 
@@ -482,6 +591,10 @@ public final class XMLSecurityManager {
     /**
      * Read from system properties, or those in jaxp.properties
      *
+     * <p>
+     *  从系统属性或jaxp.properties中读取
+     * 
+     * 
      * @param property the type of the property
      * @param sysPropertyName the name of system property
      */
@@ -513,6 +626,10 @@ public final class XMLSecurityManager {
      * If the value is an instance of XMLSecurityManager, use it to override the default;
      * If the value is an old SecurityManager, convert to the new XMLSecurityManager.
      *
+     * <p>
+     * 将通过setProperty设置的值转换为XMLSecurityManager。
+     * 如果值是XMLSecurityManager的实例,则使用它覆盖默认值;如果值是旧的SecurityManager,请转换为新的XMLSecurityManager。
+     * 
      * @param value user specified security manager
      * @param securityManager an instance of XMLSecurityManager
      * @return an instance of the new security manager XMLSecurityManager

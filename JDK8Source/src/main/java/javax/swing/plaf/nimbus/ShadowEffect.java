@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ import java.awt.Color;
 /**
  * ShadowEffect - base class with all the standard properties for shadow effects
  *
+ * <p>
+ *  ShadowEffect  - 具有阴影效果的所有标准属性的基类
+ * 
  * @author Created by Jasper Potts (Jun 18, 2007)
  */
 abstract class ShadowEffect extends Effect {

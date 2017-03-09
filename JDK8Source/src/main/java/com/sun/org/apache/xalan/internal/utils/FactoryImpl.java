@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 /**
  *
+ * <p>
+ * 
  * @author huizhe wang
  */
 public class FactoryImpl {

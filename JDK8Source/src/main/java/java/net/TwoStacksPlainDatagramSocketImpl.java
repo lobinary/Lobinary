@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,12 @@ import sun.net.ResourceManager;
  * support also use this implementation, and fd1 gets set to null
  * during socket creation.
  *
+ * <p>
+ *  此类定义了用于所有低于Vista的Windows版本的普通DatagramSocketImpl。它在可用的这些平台上添加对IPv6的支持。
+ * 
+ *  对于向后兼容性,没有IPv6支持的Windows平台也使用此实现,并且在套接字创建期间fd1设置为null。
+ * 
+ * 
  * @author Chris Hegarty
  */
 
@@ -51,6 +58,10 @@ class TwoStacksPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
      * asks for it. In this case, both sockets are used, but we
      * don't know whether the caller requested ::0 or 0.0.0.0
      * and need to remember it here.
+     * <p>
+     *  需要ipv6在windows上,因为我们需要知道套接字绑定到:: 0或0.0.0.0,当一个调用者要求它。
+     * 在这种情况下,使用两个套接字,但是我们不知道调用者是否请求:: 0或0.0.0.0,需要在这里记住它。
+     * 
      */
     private InetAddress anyLocalBoundAddr=null;
 
@@ -59,6 +70,9 @@ class TwoStacksPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
     /* saved between successive calls to receive, if data is detected
      * on both sockets at same time. To ensure that one socket is not
      * starved, they rotate using this field
+     * <p>
+     *  在两个插座上同时。为了确保一个套接字不饿,它们使用此字段旋转
+     * 
      */
     private int lastfd=-1;
 
@@ -72,6 +86,9 @@ class TwoStacksPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
     /*
      * Set to true if SO_REUSEADDR is set after the socket is bound to
      * indicate SO_REUSEADDR is being emulated
+     * <p>
+     *  如果在绑定套接字以指示正在模拟SO_REUSEADDR之后设置SO_REUSEADDR,则设置为true
+     * 
      */
     private boolean reuseAddressEmulated;
 
@@ -209,6 +226,8 @@ class TwoStacksPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
 
     /**
      * Perform class load-time initializations.
+     * <p>
+     *  执行类装入时初始化。
      */
     private native static void init();
 }

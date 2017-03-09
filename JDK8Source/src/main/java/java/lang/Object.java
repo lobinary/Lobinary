@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ package java.lang;
  * Every class has {@code Object} as a superclass. All objects,
  * including arrays, implement the methods of this class.
  *
+ * <p>
+ *  类{@code Object}是类层次结构的根。每个类都有{@code Object}作为超类。所有对象,包括数组,实现这个类的方法。
+ * 
+ * 
  * @author  unascribed
  * @see     java.lang.Class
  * @since   JDK1.0
@@ -56,6 +61,17 @@ public class Object {
      * {@code Class<? extends Number> c = n.getClass(); }
      * </p>
      *
+     * <p>
+     *  返回此{@code Object}的运行时类。返回的{@code Class}对象是被表示类的{@code static synchronized}方法锁定的对象。
+     * 
+     *  <p> <b>实际的结果类型是{@code Class <? extends | X |>}其中{@code | X |}是调用{@code getClass}的表达式的静态类型的擦除。
+     * </b>例如,在此代码片段中不需要转换： </p>。
+     * 
+     * <p>
+     *  {@code Number n = 0; } <br> {@code Class <? extends Number> c = n.getClass(); }}
+     * </p>
+     * 
+     * 
      * @return The {@code Class} object that represents the runtime
      *         class of this object.
      * @jls 15.8.2 Class Literals
@@ -93,6 +109,24 @@ public class Object {
      * technique is not required by the
      * Java&trade; programming language.)
      *
+     * <p>
+     *  返回对象的哈希码值。这种方法支持散列表的好处,例如由{@link java.util.HashMap}提供的。
+     * <p>
+     *  {@code hashCode}的一般合同是：
+     * <ul>
+     * <li>无论何时在Java应用程序执行期间在同一对象上多次调用同一对象,{@code hashCode}方法必须始终返回相同的整数,前提是在对象的{@code equals}比较中未使用信息被修改。
+     * 从应用程序的一个执行到相同应用程序的另一个执行,此整数不需要保持一致。
+     *  <li>如果根据{@code equals(Object)}方法,两个对象相等,则对这两个对象中的每一个调用{@code hashCode}方法必须产生相同的整数结果。
+     *  <li>这不是</em>要求如果两个对象根据{@link java.lang.Object#equals(java.lang.Object)}方法不相等,则调用{@code hashCode }方法对
+     * 两个对象中的每一个必须产生不同的整数结果。
+     *  <li>如果根据{@code equals(Object)}方法,两个对象相等,则对这两个对象中的每一个调用{@code hashCode}方法必须产生相同的整数结果。
+     * 然而,程序员应该意识到,为不等对象产生不同的整数结果可以提高散列表的性能。
+     * </ul>
+     * <p>
+     *  尽管合理实用,但由类{@code Object}定义的hashCode方法对不同对象返回不同的整数。 (这通常通过将对象的内部地址转换为整数来实现,但是Java和贸易;编程语言不需要这种实现技术。
+     * )。
+     * 
+     * 
      * @return  a hash code value for this object.
      * @see     java.lang.Object#equals(java.lang.Object)
      * @see     java.lang.System#identityHashCode
@@ -139,6 +173,30 @@ public class Object {
      * general contract for the {@code hashCode} method, which states
      * that equal objects must have equal hash codes.
      *
+     * <p>
+     *  指示一些其他对象是否"等于"这一个。
+     * <p>
+     *  {@code equals}方法对非空对象引用实现等价关系：
+     * <ul>
+     * <li> <i> reflexive </i>：对于任何非空引用值{@code x},{@code x.equals(x)}应返回{@code true}。
+     *  <li>这是<i>对称</i>：对于任何非空参考值{@code x}和{@code y},{@code x.equals(y)}应返回{@code true}当且仅当{@code y.equals(x)}
+     * 返回{@code true}。
+     * <li> <i> reflexive </i>：对于任何非空引用值{@code x},{@code x.equals(x)}应返回{@code true}。
+     *  <li>这是<trans> </i>：对于任何非空参考值{@code x},{@code y}和{@code z},如果{@code x.equals }返回{@code true}和{@code y.equals(z)}
+     * 返回{@code true},那么{@code x.equals(z)}应该返回{@code true}。
+     * <li> <i> reflexive </i>：对于任何非空引用值{@code x},{@code x.equals(x)}应返回{@code true}。
+     *  <li>这是<i>一致</i>：对于任何非空引用值{@code x}和{@code y},{@code x.equals(y)}的多次调用始终返回{@ code true}或始终返回{@code false}
+     * ,前提是没有在对象的{@code equals}比较中使用的信息被修改。
+     * <li> <i> reflexive </i>：对于任何非空引用值{@code x},{@code x.equals(x)}应返回{@code true}。
+     *  <li>对于任何非空引用值{@code x},{@code x.equals(null)}应返回{@code false}。
+     * </ul>
+     * <p>
+     *  类{@code Object}的{@code equals}方法实现对象上最有区别的可能的等价关系;也就是说,对于任何非空引用值{@code x}和{@code y},当且仅当{@code x}和{@code y}
+     * 引用同一对象时,此方法返回{@code true} ({@code x == y}的值为{@code true})。
+     * <p>
+     * 注意,每当这个方法被覆盖时,通常需要重写{@code hashCode}方法,以便维护{@code hashCode}方法的一般约定,其中规定相等的对象必须具有相等的哈希码。
+     * 
+     * 
      * @param   obj   the reference object with which to compare.
      * @return  {@code true} if this object is the same as the obj
      *          argument; {@code false} otherwise.
@@ -201,6 +259,35 @@ public class Object {
      * whose class is {@code Object} will result in throwing an
      * exception at run time.
      *
+     * <p>
+     *  创建并返回此对象的副本。 "复制"的精确含义可能取决于对象的类。一般的意图是,对于任何对象{@code x},表达式：
+     * <blockquote>
+     * <pre>
+     *  x.clone()！= x </pre> </blockquote>将为true,表达式为：
+     * <blockquote>
+     * <pre>
+     *  x.clone()。getClass()== x.getClass()</pre> </blockquote>将是{@code true},但这些不是绝对的要求。虽然通常的情况是：
+     * <blockquote>
+     * <pre>
+     *  x.clone()。equals(x)</pre> </blockquote>将是{@code true},这不是绝对的要求。
+     * <p>
+     *  按照惯例,返回的对象应该通过调用{@code super.clone}获得。如果一个类及其所有的超类(除了{@code Object})遵循这个约定,将会是{@code x.clone()。
+     * getClass()== x.getClass()}的情况。
+     * <p>
+     * 按照惯例,由此方法返回的对象应该独立于此对象(正在被克隆)。为了实现这种独立性,可能需要在返回之前修改由{@code super.clone}返回的对象的一个​​或多个字段。
+     * 通常,这意味着复制包含正在克隆的对象的内部"深层结构"的任何可变对象,并使用对副本的引用替换对这些对象的引用。
+     * 如果类只包含原始字段或对不可变对象的引用,那么通常情况下,不需要修改{@code super.clone}返回的对象中的字段。
+     * <p>
+     *  类{@code Object}的方法{@code clone}执行特定的克隆操作。
+     * 首先,如果这个对象的类没有实现接口{@code Cloneable},那么会抛出{@code CloneNotSupportedException}。
+     * 请注意,所有数组都被认为实现了接口{@code Cloneable},并且数组类型{@code T []}的{@code clone}方法的返回类型是{@code T []},其中T是任何引用或原语类型
+     * 。
+     * 首先,如果这个对象的类没有实现接口{@code Cloneable},那么会抛出{@code CloneNotSupportedException}。
+     * 否则,此方法将创建此对象的类的一个新实例,并使用此对象的相应字段的内容(如通过赋值)完全初始化其所有字段;字段的内容本身不被克隆。因此,该方法执行该对象的"浅拷贝",而不是"深拷贝"操作。
+     * <p>
+     * 类{@code Object}本身并不实现{@code Cloneable}接口,因此在类为{@code Object}的对象上调用{@code clone}方法将导致在运行时抛出异常。
+     * 
+     * 
      * @return     a clone of this instance.
      * @throws  CloneNotSupportedException  if the object's class does not
      *               support the {@code Cloneable} interface. Subclasses
@@ -230,6 +317,16 @@ public class Object {
      * getClass().getName() + '@' + Integer.toHexString(hashCode())
      * </pre></blockquote>
      *
+     * <p>
+     *  返回对象的字符串表示形式。一般来说,{@code toString}方法返回一个"文本表示"此对象的字符串。结果应该是一个简单但翔实的表示,是一个人容易阅读。建议所有子类覆盖此方法。
+     * <p>
+     *  类{@code Object}的{@code toString}方法返回一个字符串,其中包含对象是实例的类的名称,符号字符"{@code @}"和无符号十六进制表示的对象的哈希码。
+     * 换句话说,此方法返回一个等于以下值的字符串：。
+     * <blockquote>
+     * <pre>
+     *  getClass()。getName()+'@'+ Integer.toHexString(hashCode())</pre> </blockquote>
+     * 
+     * 
      * @return  a string representation of the object.
      */
     public String toString() {
@@ -263,6 +360,20 @@ public class Object {
      * <p>
      * Only one thread at a time can own an object's monitor.
      *
+     * <p>
+     *  唤醒正在等待此对象的监视器的单个线程。如果任何线程正在等待这个对象,其中一个被选择被唤醒。选择是任意的,并且发生在实施的判断。线程通过调用{@code wait}方法之一等待对象的监视器。
+     * <p>
+     * 唤醒的线程将不能继续,直到当前线程放弃对此对象的锁定。唤醒的线程将以通常的方式与可能主动竞争以在该对象上同步的任何其他线程竞争;例如,被唤醒的线程在下一个线程锁定此对象时没有可靠的特权或缺点。
+     * <p>
+     *  此方法只应由作为此对象的监视器所有者的线程调用。线程通过以下三种方式之一成为对象的监视器的所有者：
+     * <ul>
+     *  <li>通过执行该对象的同步实例方法。 <li>通过执行在对象上同步的{@code synchronized}语句的正文。
+     *  <li>对于类型为{@code Class,}的对象,通过执行该类的同步静态方法。
+     * </ul>
+     * <p>
+     *  一次只有一个线程可以拥有对象的监视器。
+     * 
+     * 
      * @throws  IllegalMonitorStateException  if the current thread is not
      *               the owner of this object's monitor.
      * @see        java.lang.Object#notifyAll()
@@ -287,6 +398,14 @@ public class Object {
      * description of the ways in which a thread can become the owner of
      * a monitor.
      *
+     * <p>
+     *  唤醒在此对象的监视器上等待的所有线程。线程通过调用{@code wait}方法之一等待对象的监视器。
+     * <p>
+     *  唤醒的线程将无法继续,直到当前线程放弃对此对象的锁定。唤醒的线程将以通常的方式与任何其他可能主动竞争以在该对象上同步的线程竞争;例如,被唤醒的线程在下一个线程中没有可靠的特权或缺点来锁定该对象。
+     * <p>
+     * 此方法只应由作为此对象的监视器所有者的线程调用。有关线程成为监视器所有者的方式的说明,请参阅{@code notify}方法。
+     * 
+     * 
      * @throws  IllegalMonitorStateException  if the current thread is not
      *               the owner of this object's monitor.
      * @see        java.lang.Object#notify()
@@ -366,6 +485,42 @@ public class Object {
      * description of the ways in which a thread can become the owner of
      * a monitor.
      *
+     * <p>
+     *  使当前线程等待,直到另一个线程为此对象调用{@link java.lang.Object#notify()}方法或{@link java.lang.Object#notifyAll()}方法,或指定的
+     * 数量的时间。
+     * <p>
+     *  当前线程必须拥有此对象的监视器。
+     * <p>
+     *  此方法使当前线程(称为<var> T </var>)将自身置于此对象的等待集中,然后放弃对此对象的任何和所有同步声明。
+     * 线程<var> T </var>被禁用用于线程调度目的,并处于休眠状态,直到发生以下四种情况之一：。
+     * <ul>
+     *  <li>一些其他线程调用此对象的{@code notify}方法,线程<var> T </var>恰好被任意选择为要唤醒的线程。
+     *  <li>某些其他线程调用此对象的{@code notifyAll}方法。 <li>一些其他线程{@linkplain线程#interrupt()中断}线程<var> T </var>。
+     *  <li>指定的实时时间已过,或多或少。如果{@code timeout}为零,然而,实时没有被考虑,线程只是等待直到通知。
+     * </ul>
+     * 线程<var> T </var>然后从此对象的等待集中删除,并重新启用线程调度。
+     * 然后它以通常的方式与其他线程竞争对象上的同步权;一旦它获得对对象的控制权,对象上的所有同步声明就恢复到状态,即到{@code wait}方法被调用时的情况。
+     * 线程<var> T </var>然后从调用{@code wait}方法返回。
+     * 因此,从{@code wait}方法返回时,对象和线程{@code T}的同步状态与调用{@code wait}方法时的情况完全相同。
+     * <p>
+     *  线程也可以在没有被通知,中断或超时的情况下唤醒,即所谓的"虚假唤醒"。虽然这在实践中很少发生,但应用程序必须通过测试应该已经导致线程被唤醒的条件来防止它,并且如果条件不满足,则继续等待。
+     * 换句话说,等待应该总是发生在循环中,像这样：。
+     * <pre>
+     *  synchronized(obj){while(&lt;条件不成立&gt;)obj.wait(timeout); ... //执行适合条件的动作}
+     * </pre>
+     *  (有关此主题的更多信息,请参阅Doug Lea的"Concurrent Programming in Java(第二版)"(Addison-Wesley,2000)中的第3.2.3节或Joshua B
+     * loch的"Effective Java Programming Language Guide"(Addison- Wesley,2001)。
+     * 
+     * <p>如果当前线程是{@linkplain java.lang.Thread#interrupt()中断}由任何线程之前或当它在等待,然后一个{@code InterruptedException}被抛
+     * 出。
+     * 在此对象的锁定状态已恢复之前,不会抛出此异常,如上所述。
+     * 
+     * <p>
+     *  请注意,{@code wait}方法将当前线程放入此对象的等待集中,只解锁此对象;当前线程可以同步的任何其他对象在线程等待时保持锁定。
+     * <p>
+     *  此方法只应由作为此对象的监视器所有者的线程调用。有关线程成为监视器所有者的方式的说明,请参阅{@code notify}方法。
+     * 
+     * 
      * @param      timeout   the maximum time to wait in milliseconds.
      * @throws  IllegalArgumentException      if the value of timeout is
      *               negative.
@@ -429,6 +584,32 @@ public class Object {
      * description of the ways in which a thread can become the owner of
      * a monitor.
      *
+     * <p>
+     *  使当前线程等待,直到另一个线程调用此对象的{@link java.lang.Object#notify()}方法或{@link java.lang.Object#notifyAll()}方法,或其他线
+     * 程中断当前线程或一定量的实时时间已经过去。
+     * <p>
+     *  此方法类似于一个参数的{@code wait}方法,但它允许更精细地控制在放弃之前等待通知的时间量。实时时间的量,以纳秒为单位,由下式给出：
+     * <blockquote>
+     * <pre>
+     *  1000000 * timeout + nanos </pre> </blockquote>
+     * <p>
+     *  在所有其他方面,此方法与一个参数的方法{@link #wait(long)}相同。特别是,{@code wait(0,0)}的含义与{@code wait(0)}相同。
+     * <p>
+     * 当前线程必须拥有此对象的监视器。线程释放此监视器的所有权,并等待,直到发生以下两个条件之一：
+     * <ul>
+     *  <li>另一个线程通过调用{@code notify}方法或{@code notifyAll}方法来通知等待此对象的监视器的线程以进行唤醒。
+     *  <li>由{@code timeout}毫秒加上{@code nanos}纳秒参数指定的超时期已过。
+     * </ul>
+     * <p>
+     *  线程然后等待,直到它可以重新获得监视器的所有权并恢复执行。
+     * <p>
+     *  在一个参数版本中,中断和伪唤醒是可能的,并且这种方法应该总是在循环中使用：
+     * <pre>
+     *  synchronized(obj){while(&lt; condition does not hold&gt;)obj.wait(timeout,nanos); ... //执行适合条件的动作}
+     * </pre>
+     *  此方法只应由作为此对象的监视器所有者的线程调用。有关线程成为监视器所有者的方式的说明,请参阅{@code notify}方法。
+     * 
+     * 
      * @param      timeout   the maximum time to wait in milliseconds.
      * @param      nanos      additional time, in nanoseconds range
      *                       0-999999.
@@ -488,6 +669,20 @@ public class Object {
      * description of the ways in which a thread can become the owner of
      * a monitor.
      *
+     * <p>
+     *  使当前线程等待,直到另一个线程调用此对象的{@link java.lang.Object#notify()}方法或{@link java.lang.Object#notifyAll()}方法。
+     * 换句话说,这个方法的行为就好像它只是执行调用{@code wait(0)}。
+     * <p>
+     * 当前线程必须拥有此对象的监视器。线程释放此监视器的所有权,并等待另一个线程通知等待此对象的监视器的线程通过调用{@code notify}方法或{@code notifyAll}方法唤醒。
+     * 线程然后等待,直到它可以重新获得监视器的所有权并恢复执行。
+     * <p>
+     *  在一个参数版本中,中断和伪唤醒是可能的,并且这种方法应该总是在循环中使用：
+     * <pre>
+     *  synchronized(obj){while(&lt; condition not hold&gt;)obj.wait(); ... //执行适合条件的动作}
+     * </pre>
+     *  此方法只应由作为此对象的监视器所有者的线程调用。有关线程成为监视器所有者的方式的说明,请参阅{@code notify}方法。
+     * 
+     * 
      * @throws  IllegalMonitorStateException  if the current thread is not
      *               the owner of the object's monitor.
      * @throws  InterruptedException if any thread interrupted the
@@ -547,6 +742,18 @@ public class Object {
      * the finalization of this object to be halted, but is otherwise
      * ignored.
      *
+     * <p>
+     *  当垃圾收集器确定没有对该对象的更多引用时,由垃圾收集器在对象上调用。子类覆盖{@code finalize}方法以处理系统资源或执行其他清理。
+     * <p>
+     * {@code finalize}的一般合同是,如果和时间Java和贸易;虚拟机已经确定不再有任何装置,通过该装置,通过尚未死亡的任何线程可以访问该对象,除非由于准备好最终确定的一些其他对象或类的完成所采
+     * 取的动作的结果。
+     *  {@code finalize}方法可以采取任何操作,包括使此对象再次可用于其他线程;然而,{@code finalize}的通常目的是在对象被不可撤销地丢弃之前执行清除动作。
+     * 例如,表示输入/输出连接的对象的finalize方法可能执行显式I / O事务以在永久丢弃对象之前中断连接。
+     * <p>
+     *  类{@code Object}的{@code finalize}方法不执行任何特殊操作;它只是简单地返回正常。 {@code Object}的子类可以覆盖此定义。
+     * <p>
+     *  Java编程语言不保证哪个线程将为任何给定的对象调用{@code finalize}方法。但是,确保调用finalize的线程在调用finalize时不会持有任何用户可见的同步锁。
+     * 
      * @throws Throwable the {@code Exception} raised by this method
      * @see java.lang.ref.WeakReference
      * @see java.lang.ref.PhantomReference

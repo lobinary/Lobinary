@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -12,6 +13,9 @@ package com.sun.corba.se.PortableActivationIDL;
 /** Interface used to combine the Activator and Locator when both are
     * implemented together in the same process, as is currently the case
     * for our implementation.
+    * <p>
+    *  在同一过程中一起实施,就像我们实施的情况一样。
+    * 
     */
 public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.ObjectImpl
                 implements com.sun.corba.se.PortableActivationIDL.ServerManager, org.omg.CORBA.portable.InvokeHandler
@@ -56,6 +60,7 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
     {
 
   /** A new ORB started server registers itself with the Activator
+  /* <p>
 	*/
        case 0:  // PortableActivationIDL/Activator/registerServer
        {
@@ -75,6 +80,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
   /** A server is shutting down that was started by this activator.
 	* Complete termination of the server is detected by the death of the
 	* process implementing the server.
+	* <p>
+	*  实现服务器的进程的死亡检测到服务器的完全终止。
+	* 
 	*/
        case 1:  // PortableActivationIDL/Activator/serverGoingDown
        {
@@ -89,6 +97,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 	* the transport endpoints and the ORB proxy callback object.
 	* Note that we cannot detect when an ORB shuts down, although
 	* all of the POA shutdowns should still be reported.
+	* <p>
+	*  传输端点和ORB代理回调对象。请注意,我们无法检测到ORB何时关闭,虽然所有POA关机仍应报告。
+	* 
 	*/
        case 2:  // PortableActivationIDL/Activator/registerORB
        {
@@ -116,6 +127,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
   /** Construct or find an ORBD object template corresponding to the 
 	* server's object template and return it.  Called whenever a 
 	* persistent POA is created.
+	* <p>
+	*  服务器的对象模板并返回它。每当创建持久POA时调用。
+	* 
 	*/
        case 3:  // PortableActivationIDL/Activator/registerPOA
        {
@@ -131,6 +145,7 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
 
   /** Called whenever a POA is destroyed.
+  /* <p>
 	*/
        case 4:  // PortableActivationIDL/Activator/poaDestroyed
        {
@@ -145,6 +160,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
   /** If the server is not running, start it up.  This is allowed
 	* whether or not the server has been installed.
+	* <p>
+	*  无论服务器是否已安装。
+	* 
 	*/
        case 5:  // PortableActivationIDL/Activator/activate
        {
@@ -167,6 +185,7 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
 
   /** If the server is running, shut it down
+  /* <p>
 	*/
        case 6:  // PortableActivationIDL/Activator/shutdown
        {
@@ -187,6 +206,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
   /** Invoke the server install hook.  If the server is not 
 	* currently running, this method will activate it.
+	* <p>
+	*  当前运行,这个方法会激活它。
+	* 
 	*/
        case 7:  // PortableActivationIDL/Activator/install
        {
@@ -211,6 +233,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
   /** Invoke the server uninstall hook.  If the server is not
 	* currently running, this method will activate it.
 	* After this hook completes, the server may still be running.
+	* <p>
+	*  当前运行,这个方法会激活它。此挂接完成后,服务器可能仍在运行。
+	* 
 	*/
        case 8:  // PortableActivationIDL/Activator/uninstall
        {
@@ -233,6 +258,7 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
 
   /** list active servers
+  /* <p>
 	*/
        case 9:  // PortableActivationIDL/Activator/getActiveServers
        {
@@ -245,6 +271,7 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
 
   /** list all registered ORBs for a server
+  /* <p>
 	*/
        case 10:  // PortableActivationIDL/Activator/getORBNames
        {
@@ -264,6 +291,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
   /** Find the server template that corresponds to the ORBD's
 	* adapter id.
+	* <p>
+	*  适配器标识。
+	* 
 	*/
        case 11:  // PortableActivationIDL/Activator/lookupPOATemplate
        {
@@ -281,6 +311,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
   /** locate server - returns the port with a specific type for all registered
 	* ORBs of an active server.
 	* Starts the server if it is not already running.
+	* <p>
+	*  活动服务器的ORB。启动服务器(如果尚未运行)。
+	* 
 	*/
        case 12:  // PortableActivationIDL/Locator/locateServer
        {
@@ -308,6 +341,9 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
   /** locate server - returns all ports registered with a specified ORB for
 	* an active server
 	* Starts the server if it is not already running.
+	* <p>
+	*  活动服务器如果服务器尚未运行,则启动该服务器。
+	* 
 	*/
        case 13:  // PortableActivationIDL/Locator/locateServerForORB
        {
@@ -333,6 +369,7 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
 
   /** get the port for the endpoint of the locator
+  /* <p>
 	*/
        case 14:  // PortableActivationIDL/Locator/getEndpoint
        {
@@ -352,6 +389,8 @@ public abstract class _ServerManagerImplBase extends org.omg.CORBA.portable.Obje
 
   /** Useful from external BadServerIdHandlers which need
 	* to pick a particular port type.
+	* <p>
+	*  选择特定的端口类型。
 	*/
        case 15:  // PortableActivationIDL/Locator/getServerPortForType
        {

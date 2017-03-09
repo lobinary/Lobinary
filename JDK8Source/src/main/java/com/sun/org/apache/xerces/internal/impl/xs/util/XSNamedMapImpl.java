@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.util;
@@ -39,6 +49,12 @@ import com.sun.org.apache.xerces.internal.xs.XSObject;
  *
  * @xerces.internal
  *
+ * <p>
+ *  约束qnames和XSObject之间的映射。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  *
  * @version $Id: XSNamedMapImpl.java,v 1.7 2010-11-01 04:40:06 joehw Exp $
@@ -47,6 +63,9 @@ public class XSNamedMapImpl extends AbstractMap implements XSNamedMap {
 
     /**
      * An immutable empty map.
+     * <p>
+     *  一个不变的空地图。
+     * 
      */
     public static final XSNamedMapImpl EMPTY_MAP = new XSNamedMapImpl(new XSObject[0], 0);
 
@@ -68,6 +87,10 @@ public class XSNamedMapImpl extends AbstractMap implements XSNamedMap {
     /**
      * Construct an XSNamedMap implementation for one namespace
      *
+     * <p>
+     *  为一个命名空间构造XSNamedMap实现
+     * 
+     * 
      * @param namespace the namespace to which the components belong
      * @param map       the map from local names to components
      */
@@ -80,6 +103,10 @@ public class XSNamedMapImpl extends AbstractMap implements XSNamedMap {
     /**
      * Construct an XSNamedMap implementation for a list of namespaces
      *
+     * <p>
+     *  为命名空间列表构造XSNamedMap实现
+     * 
+     * 
      * @param namespaces the namespaces to which the components belong
      * @param maps       the maps from local names to components
      * @param num        the number of namespaces
@@ -93,6 +120,10 @@ public class XSNamedMapImpl extends AbstractMap implements XSNamedMap {
     /**
      * Construct an XSNamedMap implementation one namespace from an array
      *
+     * <p>
+     *  从数组构造一个XSNamedMap实现一个命名空间
+     * 
+     * 
      * @param array     containing all components
      * @param length    number of components
      */
@@ -119,6 +150,9 @@ public class XSNamedMapImpl extends AbstractMap implements XSNamedMap {
      * The number of <code>XSObjects</code> in the <code>XSObjectList</code>.
      * The range of valid child object indices is 0 to <code>length-1</code>
      * inclusive.
+     * <p>
+     *  <code> XSObjectList </code>中的<code> XSObjects </code>的数量。有效子对象索引的范围是0到<code> length-1 </code>(包括)。
+     * 
      */
     public synchronized int getLength() {
         if (fLength == -1) {
@@ -136,6 +170,11 @@ public class XSNamedMapImpl extends AbstractMap implements XSNamedMap {
      * <br>Per XML Namespaces, applications must use the value <code>null</code> as the
      * <code>namespace</code> parameter for methods if they wish to specify
      * no namespace.
+     * <p>
+     *  检索由本地名称和命名空间URI指定的<code> XSObject </code>。
+     *  <br>对于每个XML命名空间,如果方法希望指定无命名空间,应用程序必须使用<code> null </code>作为<code> namespace </code>参数。
+     * 
+     * 
      * @param namespace The namespace URI of the <code>XSObject</code> to
      *   retrieve, or <code>null</code> if the <code>XSObject</code> has no
      *   namespace.
@@ -172,6 +211,10 @@ public class XSNamedMapImpl extends AbstractMap implements XSNamedMap {
      * Returns the <code>index</code>th item in the collection or
      * <code>null</code> if <code>index</code> is greater than or equal to
      * the number of objects in the list. The index starts at 0.
+     * <p>
+     * 如果<code> index </code>大于或等于列表中的对象数,则返回集合中的<code> index </code>项或<code> null </code>。索引从0开始。
+     * 
+     * 
      * @param index  index into the collection.
      * @return  The <code>XSObject</code> at the <code>index</code>th
      *   position in the <code>XSObjectList</code>, or <code>null</code> if
@@ -200,6 +243,8 @@ public class XSNamedMapImpl extends AbstractMap implements XSNamedMap {
 
     /*
      * java.util.Map methods
+     * <p>
+     *  java.util.Map方法
      */
 
     public boolean containsKey(Object key) {

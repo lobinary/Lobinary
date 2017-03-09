@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,14 @@ import java.io.IOException;
  * method can be used to associate a string identifier with a given card
  * for fast random access.
  *
+ * <p>
+ *  <code> CardLayout </code>对象是容器的布局管理器。它将容器中的每个组件视为卡片。一次只能看到一个卡,并且容器用作一叠卡。
+ * 添加到<code> CardLayout </code>对象的第一个组件是容器首次显示时的可见组件。
+ * <p>
+ *  卡的排序由容器自己的组件对象的内部排序确定。 <code> CardLayout </code>定义了一组方法,允许应用程序顺序翻转这些卡,或显示指定的卡。
+ *  {@link CardLayout#addLayoutComponent}方法可用于将字符串标识符与给定卡关联以用于快速随机访问。
+ * 
+ * 
  * @author      Arthur van Hoff
  * @see         java.awt.Container
  * @since       JDK1.0
@@ -64,12 +73,19 @@ public class CardLayout implements LayoutManager2,
     /*
      * This creates a Vector to store associated
      * pairs of components and their names.
+     * <p>
+     *  这将创建一个向量来存储相关的组件对及其名称。
+     * 
+     * 
      * @see java.util.Vector
      */
     Vector<Card> vector = new Vector<>();
 
     /*
      * A pair of Component and String that represents its name.
+     * <p>
+     *  代表其名称的一对Component和String。
+     * 
      */
     class Card implements Serializable {
         static final long serialVersionUID = 6640330810709497518L;
@@ -83,6 +99,9 @@ public class CardLayout implements LayoutManager2,
 
     /*
      * Index of Component currently displayed by CardLayout.
+     * <p>
+     *  CardLayout当前显示的组件索引。
+     * 
      */
     int currentCard = 0;
 
@@ -92,6 +111,10 @@ public class CardLayout implements LayoutManager2,
     * the space between the left and right edges of a
     * container and the current component.
     * This should be a non negative Integer.
+    * <p>
+    *  A水平布局缺口(插图)。它指定容器的左边缘和右边缘之间的空间和当前组件。这应该是非负整数。
+    * 
+    * 
     * @see getHgap()
     * @see setHgap()
     */
@@ -102,12 +125,18 @@ public class CardLayout implements LayoutManager2,
     * the space between the top and bottom edges of a
     * container and the current component.
     * This should be a non negative Integer.
+    * <p>
+    *  A卡垂直布局空白(插图)。它指定容器的顶部和底部边缘之间的空间和当前组件。这应该是非负整数。
+    * 
+    * 
     * @see getVgap()
     * @see setVgap()
     */
     int vgap;
 
     /**
+    /* <p>
+    /* 
      * @serialField tab         Hashtable
      *      deprectated, for forward compatibility only
      * @serialField hgap        int
@@ -125,6 +154,9 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Creates a new card layout with gaps of size zero.
+     * <p>
+     *  创建一个新的卡片布局,其大小为零。
+     * 
      */
     public CardLayout() {
         this(0, 0);
@@ -135,6 +167,10 @@ public class CardLayout implements LayoutManager2,
      * vertical gaps. The horizontal gaps are placed at the left and
      * right edges. The vertical gaps are placed at the top and bottom
      * edges.
+     * <p>
+     * 创建具有指定水平和垂直间隙的新卡布局。水平间隙位于左边缘和右边缘。垂直间隙位于顶部和底部边缘。
+     * 
+     * 
      * @param     hgap   the horizontal gap.
      * @param     vgap   the vertical gap.
      */
@@ -145,6 +181,10 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Gets the horizontal gap between components.
+     * <p>
+     *  获取组件之间的水平间隙。
+     * 
+     * 
      * @return    the horizontal gap between components.
      * @see       java.awt.CardLayout#setHgap(int)
      * @see       java.awt.CardLayout#getVgap()
@@ -156,6 +196,10 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Sets the horizontal gap between components.
+     * <p>
+     *  设置组件之间的水平间距。
+     * 
+     * 
      * @param hgap the horizontal gap between components.
      * @see       java.awt.CardLayout#getHgap()
      * @see       java.awt.CardLayout#setVgap(int)
@@ -167,6 +211,10 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Gets the vertical gap between components.
+     * <p>
+     *  获取组件之间的垂直间隙。
+     * 
+     * 
      * @return the vertical gap between components.
      * @see       java.awt.CardLayout#setVgap(int)
      * @see       java.awt.CardLayout#getHgap()
@@ -177,6 +225,10 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Sets the vertical gap between components.
+     * <p>
+     *  设置组件之间的垂直间距。
+     * 
+     * 
      * @param     vgap the vertical gap between components.
      * @see       java.awt.CardLayout#getVgap()
      * @see       java.awt.CardLayout#setHgap(int)
@@ -193,6 +245,11 @@ public class CardLayout implements LayoutManager2,
      * pair that can be used for random access to a particular card.
      * By calling the <code>show</code> method, an application can
      * display the component with the specified name.
+     * <p>
+     *  将指定的组件添加到此卡布局的内部名称表。 <code> constraints </code>指定的对象必须是字符串。卡布局将此字符串存储为键值对,可用于对特定卡的随机访问。
+     * 通过调用<code> show </code>方法,应用程序可以显示具有指定名称的组件。
+     * 
+     * 
      * @param     comp          the component to be added.
      * @param     constraints   a tag that identifies a particular
      *                                        card in the layout.
@@ -213,6 +270,8 @@ public class CardLayout implements LayoutManager2,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated   replaced by
      *      <code>addLayoutComponent(Component, Object)</code>.
      */
@@ -235,6 +294,10 @@ public class CardLayout implements LayoutManager2,
     /**
      * Removes the specified component from the layout.
      * If the card was visible on top, the next card underneath it is shown.
+     * <p>
+     *  从布局中删除指定的组件。如果卡在顶部可见,则显示下面的卡。
+     * 
+     * 
      * @param   comp   the component to be removed.
      * @see     java.awt.Container#remove(java.awt.Component)
      * @see     java.awt.Container#removeAll()
@@ -263,6 +326,10 @@ public class CardLayout implements LayoutManager2,
     /**
      * Determines the preferred size of the container argument using
      * this card layout.
+     * <p>
+     *  使用此卡布局确定容器参数的首选大小。
+     * 
+     * 
      * @param   parent the parent container in which to do the layout
      * @return  the preferred dimensions to lay out the subcomponents
      *                of the specified container
@@ -293,6 +360,10 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Calculates the minimum size for the specified panel.
+     * <p>
+     *  计算指定面板的最小大小。
+     * 
+     * 
      * @param     parent the parent container in which to do the layout
      * @return    the minimum dimensions required to lay out the
      *                subcomponents of the specified container
@@ -324,6 +395,10 @@ public class CardLayout implements LayoutManager2,
     /**
      * Returns the maximum dimensions for this layout given the components
      * in the specified target container.
+     * <p>
+     *  返回给定指定目标容器中的组件的此布局的最大尺寸。
+     * 
+     * 
      * @param target the component which needs to be laid out
      * @see Container
      * @see #minimumLayoutSize
@@ -339,6 +414,9 @@ public class CardLayout implements LayoutManager2,
      * components.  The value should be a number between 0 and 1
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
+     * <p>
+     *  返回沿x轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
      */
     public float getLayoutAlignmentX(Container parent) {
         return 0.5f;
@@ -350,6 +428,9 @@ public class CardLayout implements LayoutManager2,
      * components.  The value should be a number between 0 and 1
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
+     * <p>
+     * 返回沿y轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
      */
     public float getLayoutAlignmentY(Container parent) {
         return 0.5f;
@@ -358,6 +439,9 @@ public class CardLayout implements LayoutManager2,
     /**
      * Invalidates the layout, indicating that if the layout manager
      * has cached information it should be discarded.
+     * <p>
+     *  使布局无效,指示如果布局管理器具有缓存的信息,它应该被丢弃。
+     * 
      */
     public void invalidateLayout(Container target) {
     }
@@ -369,6 +453,12 @@ public class CardLayout implements LayoutManager2,
      * to be the size of the container, minus space for surrounding
      * insets, horizontal gaps, and vertical gaps.
      *
+     * <p>
+     *  使用此卡布局放出指定的容器。
+     * <p>
+     *  <code> parent </code>容器中的每个组件被重新塑造为容器的大小,减去周围插入的空间,水平间隙和垂直间隙。
+     * 
+     * 
      * @param     parent the parent container in which to do the layout
      * @see       java.awt.Container#doLayout
      */
@@ -398,6 +488,9 @@ public class CardLayout implements LayoutManager2,
     /**
      * Make sure that the Container really has a CardLayout installed.
      * Otherwise havoc can ensue!
+     * <p>
+     *  确保Container实际上已经安装了CardLayout。否则可能会造成严重破坏！
+     * 
      */
     void checkLayout(Container parent) {
         if (parent.getLayout() != this) {
@@ -407,6 +500,10 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Flips to the first card of the container.
+     * <p>
+     *  翻转到容器的第一张卡。
+     * 
+     * 
      * @param     parent   the parent container in which to do the layout
      * @see       java.awt.CardLayout#last
      */
@@ -433,6 +530,10 @@ public class CardLayout implements LayoutManager2,
      * Flips to the next card of the specified container. If the
      * currently visible card is the last one, this method flips to the
      * first card in the layout.
+     * <p>
+     *  翻转到指定容器的下一张卡片。如果当前可见的卡是最后一个卡,则此方法将翻到布局中的第一个卡。
+     * 
+     * 
      * @param     parent   the parent container in which to do the layout
      * @see       java.awt.CardLayout#previous
      */
@@ -459,6 +560,10 @@ public class CardLayout implements LayoutManager2,
      * Flips to the previous card of the specified container. If the
      * currently visible card is the first one, this method flips to the
      * last card in the layout.
+     * <p>
+     *  翻转到指定容器的上一张卡片。如果当前可见的卡是第一个,则此方法将翻到布局中的最后一个卡。
+     * 
+     * 
      * @param     parent   the parent container in which to do the layout
      * @see       java.awt.CardLayout#next
      */
@@ -491,6 +596,10 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Flips to the last card of the container.
+     * <p>
+     *  翻转到容器的最后一张卡片。
+     * 
+     * 
      * @param     parent   the parent container in which to do the layout
      * @see       java.awt.CardLayout#first
      */
@@ -517,6 +626,10 @@ public class CardLayout implements LayoutManager2,
      * Flips to the component that was added to this layout with the
      * specified <code>name</code>, using <code>addLayoutComponent</code>.
      * If no such component exists, then nothing happens.
+     * <p>
+     *  使用<code> addLayoutComponent </code>,翻转到使用指定的<code> name </code>添加到此布局的组件。如果没有这样的组件存在,则什么也不发生。
+     * 
+     * 
      * @param     parent   the parent container in which to do the layout
      * @param     name     the component name
      * @see       java.awt.CardLayout#addLayoutComponent(java.awt.Component, java.lang.Object)
@@ -551,6 +664,10 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Returns a string representation of the state of this card layout.
+     * <p>
+     *  返回此卡布局的状态的字符串表示。
+     * 
+     * 
      * @return    a string representation of this card layout.
      */
     public String toString() {
@@ -559,6 +676,9 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Reads serializable fields from stream.
+     * <p>
+     *  从流中读取可序列化字段。
+     * 
      */
     private void readObject(ObjectInputStream s)
         throws ClassNotFoundException, IOException
@@ -590,6 +710,8 @@ public class CardLayout implements LayoutManager2,
 
     /**
      * Writes serializable fields to stream.
+     * <p>
+     *  将可序列化字段写入流。
      */
     private void writeObject(ObjectOutputStream s)
         throws IOException

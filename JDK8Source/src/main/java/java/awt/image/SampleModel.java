@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码。
+ * 版权所有。
+ *  **************************************************** ************** ********************************
+ * **** ****************************。
+ * 版权所有。
+ * 
+ * 
  ******************************************************************/
 
 package java.awt.image;
@@ -69,6 +80,20 @@ package java.awt.image;
  *  appropriate subclass and extract the information needed to directly
  *  manipulate pixels in the DataBuffer.
  *
+ * <p>
+ *  该抽象类定义了用于提取图像中的像素样本的接口。所有图像数据被表示为像素的集合。每个像素由多个样本组成。样本是图像的一个带的数据,并且带由图像中的特定类型的所有样本组成。
+ * 例如,像素可以包含表示其红色,绿色和蓝色分量的三个样本。在包含该像素的图像中有三个带。一个频带由来自图像中所有像素的所有红色样本组成。第二频带由所有绿色样本组成,剩余频带由所有蓝色样本组成。
+ * 像素可以以各种格式存储。例如,来自特定频带的所有样本可以连续存储,或者来自单个像素的所有样本可以连续存储。
+ * <p>
+ * SampleModel的子类指定它们可以表示的样本类型(例如,无符号8位字节,有符号16位短整型等),并且可以指定样本在存储器中的组织方式。
+ * 在Java 2D(tm)API中,内置图像处理操作符可能不会对所有可能的采样类型进行操作,但通常会用于16位或更少的无符号整数采样。一些操作员支持更多种类的样品。
+ * <p>
+ *  像素集合表示为一个光栅,它由DataBuffer和SampleModel组成。
+ *  SampleModel允许访问DataBuffer中的样本,并且可以提供低级信息,程序员可以使用它直接操作DataBuffer中的样本和像素。
+ * <p>
+ *  这个类通常是处理图像的后退方法。更高效的代码会将SampleModel转换为适当的子类,并提取直接操作DataBuffer中的像素所需的信息。
+ * 
+ * 
  *  @see java.awt.image.DataBuffer
  *  @see java.awt.image.Raster
  *  @see java.awt.image.ComponentSampleModel
@@ -83,11 +108,17 @@ public abstract class SampleModel
 
     /** Width in pixels of the region of image data that this SampleModel
      *  describes.
+     * <p>
+     *  描述。
+     * 
      */
     protected int width;
 
     /** Height in pixels of the region of image data that this SampleModel
      *  describes.
+     * <p>
+     *  描述。
+     * 
      */
     protected int height;
 
@@ -95,6 +126,8 @@ public abstract class SampleModel
     protected int numBands;
 
     /** Data type of the DataBuffer storing the pixel data.
+    /* <p>
+    /* 
      *  @see java.awt.image.DataBuffer
      */
     protected int dataType;
@@ -107,6 +140,10 @@ public abstract class SampleModel
 
     /**
      * Constructs a SampleModel with the specified parameters.
+     * <p>
+     *  构造具有指定参数的SampleModel。
+     * 
+     * 
      * @param dataType  The data type of the DataBuffer storing the pixel data.
      * @param w         The width (in pixels) of the region of image data.
      * @param h         The height (in pixels) of the region of image data.
@@ -150,6 +187,8 @@ public abstract class SampleModel
     }
 
     /** Returns the width in pixels.
+    /* <p>
+    /* 
      *  @return the width in pixels of the region of image data
      *          that this <code>SampleModel</code> describes.
      */
@@ -158,6 +197,8 @@ public abstract class SampleModel
     }
 
     /** Returns the height in pixels.
+    /* <p>
+    /* 
      *  @return the height in pixels of the region of image data
      *          that this <code>SampleModel</code> describes.
      */
@@ -166,6 +207,8 @@ public abstract class SampleModel
     }
 
     /** Returns the total number of bands of image data.
+    /* <p>
+    /* 
      *  @return the number of bands of image data that this
      *          <code>SampleModel</code> describes.
      */
@@ -181,6 +224,11 @@ public abstract class SampleModel
      *  array of getNumDataElements() elements of a primitive type given
      *  by getTransferType().  The TransferType may or may not be the same
      *  as the storage DataType.
+     * <p>
+     *  通过getDataElements和setDataElements方法。当通过这些方法传送像素时,它们可以以打包或未打包格式传送,这取决于SampleModel的实现。
+     * 使用这些方法,像素作为由getTransferType()给出的基元类型的getNumDataElements()元素的数组传输。 TransferType可以与存储DataType相同或不同。
+     * 
+     * 
      *  @return the number of data elements.
      *  @see #getDataElements(int, int, Object, DataBuffer)
      *  @see #getDataElements(int, int, int, int, Object, DataBuffer)
@@ -191,6 +239,8 @@ public abstract class SampleModel
     public abstract int getNumDataElements();
 
     /** Returns the data type of the DataBuffer storing the pixel data.
+    /* <p>
+    /* 
      *  @return the data type.
      */
     final public int getDataType() {
@@ -206,6 +256,12 @@ public abstract class SampleModel
      *  by getTransferType().  The TransferType may or may not be the same
      *  as the storage DataType.  The TransferType will be one of the types
      *  defined in DataBuffer.
+     * <p>
+     * getDataElements和setDataElements方法。当通过这些方法传送像素时,它们可以以打包或未打包格式传送,这取决于SampleModel的实现。
+     * 使用这些方法,像素作为由getTransferType()给出的基元类型的getNumDataElements()元素的数组传输。 TransferType可以与存储DataType相同或不同。
+     *  TransferType将是DataBuffer中定义的类型之一。
+     * 
+     * 
      *  @return the transfer type.
      *  @see #getDataElements(int, int, Object, DataBuffer)
      *  @see #getDataElements(int, int, int, int, Object, DataBuffer)
@@ -223,6 +279,10 @@ public abstract class SampleModel
      * one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回int数组中指定像素的样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param iArray    If non-null, returns the samples in this array
@@ -281,6 +341,26 @@ public abstract class SampleModel
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds, or if obj is non-null and is not large enough to hold
      * the pixel data.
+     * <p>
+     *  返回类型TransferType的基本数组中单个像素的数据。
+     * 对于Java 2D API支持的图像数据,这将是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT,DataBuffer.TYPE_INT,DataBuffer.TY
+     * PE_SHORT,DataBuffer.TYPE_FLOAT或DataBuffer.TYPE_DOUBLE之一。
+     *  返回类型TransferType的基本数组中单个像素的数据。可以以打包格式返回数据,从而提高数据传输的效率。通常,obj应该作为null传递,以便对象将被自动创建并且将是正确的基本数据类型。
+     * <p>
+     *  以下代码示出将来自DataBuffer <code> db1 </code>的一个像素的数据传送到DataBuffer <code> db2 </code>,其存储布局由SampleModel <code>
+     *  sm1 </code>描述,由SampleModel <code> sm2 </code>描述。
+     * 传输通常比使用getPixel / setPixel更有效。
+     * <pre>
+     * SampleModel sm1,sm2; DataBuffer db1,db2; sm2.setDataElements(x,y,sm1.getDataElements(x,y,null,db1),db
+     * 2);。
+     * </pre>
+     *  如果SampleModel具有相同数量的波段,对应的波段具有每个样本相同的位数,并且TransferTypes相同,则使用getDataElements / setDataElements在两个Dat
+     * aBuffer / SampleModel对之间进行传输是合法的。
+     * <p>
+     *  如果obj是非空的,它应该是TransferType类型的原始数组。否则,抛出ClassCastException。
+     * 如果坐标不在边界中,或者如果obj非空并且不足以容纳像素数据,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param obj       If non-null, a primitive array in which to return
@@ -333,6 +413,27 @@ public abstract class SampleModel
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds, or if obj is non-null and is not large enough to hold
      * the pixel data.
+     * <p>
+     *  返回类型TransferType的基本数组中指定的像素矩形的像素数据。
+     * 对于Java 2D API支持的图像数据,这将是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT,DataBuffer.TYPE_INT,DataBuffer.TY
+     * PE_SHORT,DataBuffer.TYPE_FLOAT或DataBuffer.TYPE_DOUBLE之一。
+     *  返回类型TransferType的基本数组中指定的像素矩形的像素数据。可以以打包格式返回数据,从而提高数据传输的效率。
+     * 通常,obj应该作为null传递,以便对象将被自动创建并且将是正确的基本数据类型。
+     * <p>
+     * 以下代码说明将一个矩形像素区域的数据从DataBuffer <code> db1 </code>传输到DataBuffer <code> db2 </code>,其存储布局由SampleModel <code>
+     *  sm1 </code>其存储布局由SampleModel <code> sm2 </code>描述。
+     * 传输通常比使用getPixels / setPixels更有效。
+     * <pre>
+     *  SampleModel sm1,sm2; DataBuffer db1,db2; sm2.setDataElements(x,y,w,h,sm1.getDataElements(x,y,w,h,nul
+     * l,db1),db2);。
+     * </pre>
+     *  如果SampleModel具有相同数量的波段,对应的波段具有每个样本相同的位数,并且TransferTypes相同,则使用getDataElements / setDataElements在两个Dat
+     * aBuffer / SampleModel对之间进行传输是合法的。
+     * <p>
+     *  如果obj是非空的,它应该是TransferType类型的原始数组。否则,抛出ClassCastException。
+     * 如果坐标不在边界中,或者如果obj非空并且不足以容纳像素数据,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The minimum X coordinate of the pixel rectangle.
      * @param y         The minimum Y coordinate of the pixel rectangle.
      * @param w         The width of the pixel rectangle.
@@ -518,6 +619,26 @@ public abstract class SampleModel
      * a ClassCastException is thrown.  An
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds, or if obj is not large enough to hold the pixel data.
+     * <p>
+     *  从TransferType类型的基本数组设置指定DataBuffer中单个像素的数据。
+     * 对于Java 2D API支持的图像数据,这将是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT,DataBuffer.TYPE_INT,DataBuffer.TY
+     * PE_SHORT,DataBuffer.TYPE_FLOAT或DataBuffer.TYPE_DOUBLE之一。
+     *  从TransferType类型的基本数组设置指定DataBuffer中单个像素的数据。阵列中的数据可以是打包格式,因此提高了数据传输的效率。
+     * <p>
+     * 以下代码示出将来自DataBuffer <code> db1 </code>的一个像素的数据传送到DataBuffer <code> db2 </code>,其存储布局由SampleModel <code>
+     *  sm1 </code>描述,由SampleModel <code> sm2 </code>描述。
+     * 传输通常比使用getPixel / setPixel更有效。
+     * <pre>
+     *  SampleModel sm1,sm2; DataBuffer db1,db2; sm2.setDataElements(x,y,sm1.getDataElements(x,y,null,db1),d
+     * b2);。
+     * </pre>
+     *  如果SampleModel具有相同数量的波段,对应的波段具有每个样本相同的位数,并且TransferTypes相同,则使用getDataElements / setDataElements在两个Dat
+     * aBuffer / SampleModel对之间进行传输是合法的。
+     * <p>
+     *  obj必须是TransferType类型的原始数组。否则,抛出ClassCastException。
+     * 如果坐标不在边界中,或者如果obj不足够大以容纳像素数据,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param obj       A primitive array containing pixel data.
@@ -565,6 +686,26 @@ public abstract class SampleModel
      * a ClassCastException is thrown.  An
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds, or if obj is not large enough to hold the pixel data.
+     * <p>
+     *  从TransferType类型的基本数组中设置指定DataBuffer中一个像素矩形的数据。
+     * 对于Java 2D API支持的图像数据,这将是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT,DataBuffer.TYPE_INT,DataBuffer.TY
+     * PE_SHORT,DataBuffer.TYPE_FLOAT或DataBuffer.TYPE_DOUBLE之一。
+     *  从TransferType类型的基本数组中设置指定DataBuffer中一个像素矩形的数据。阵列中的数据可以是打包格式,因此提高了数据传输的效率。
+     * <p>
+     * 以下代码说明将一个矩形像素区域的数据从DataBuffer <code> db1 </code>传输到DataBuffer <code> db2 </code>,其存储布局由SampleModel <code>
+     *  sm1 </code>其存储布局由SampleModel <code> sm2 </code>描述。
+     * 传输通常比使用getPixels / setPixels更有效。
+     * <pre>
+     *  SampleModel sm1,sm2; DataBuffer db1,db2; sm2.setDataElements(x,y,w,h,sm1.getDataElements(x,y,w,h,nul
+     * l,db1),db2);。
+     * </pre>
+     *  如果SampleModel具有相同数量的波段,对应的波段具有每个样本相同的位数,并且TransferTypes相同,则使用getDataElements / setDataElements在两个Dat
+     * aBuffer / SampleModel对之间进行传输是合法的。
+     * <p>
+     *  obj必须是TransferType类型的原始数组。否则,抛出ClassCastException。
+     * 如果坐标不在边界中,或者如果obj不足够大以容纳像素数据,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The minimum X coordinate of the pixel rectangle.
      * @param y         The minimum Y coordinate of the pixel rectangle.
      * @param w         The width of the pixel rectangle.
@@ -687,6 +828,10 @@ public abstract class SampleModel
      * Returns the samples for the specified pixel in an array of float.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回float数组中指定像素的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param fArray    If non-null, returns the samples in this array.
@@ -718,6 +863,10 @@ public abstract class SampleModel
      * Returns the samples for the specified pixel in an array of double.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回double数组中指定像素的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param dArray    If non-null, returns the samples in this array.
@@ -750,6 +899,10 @@ public abstract class SampleModel
      * int array, one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回int数组中一个像素矩形的所有样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -798,6 +951,10 @@ public abstract class SampleModel
      * array, one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     * 返回float数组中一个像素矩形的所有样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -846,6 +1003,10 @@ public abstract class SampleModel
      * array, one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回双阵列中的一个像素矩形的所有样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -895,6 +1056,10 @@ public abstract class SampleModel
      * at (x,y) as an int.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  以位于(x,y)的像素作为int返回指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param b         The band to return.
@@ -914,6 +1079,10 @@ public abstract class SampleModel
      * for the pixel located at (x,y) as a float.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  以位于(x,y)的像素作为浮点返回指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param b         The band to return.
@@ -936,6 +1105,10 @@ public abstract class SampleModel
      * for a pixel located at (x,y) as a double.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  将位于(x,y)的像素的指定频带中的样本返回为double。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param b         The band to return.
@@ -959,6 +1132,10 @@ public abstract class SampleModel
      * of pixels in an int array, one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回int阵列中指定像素矩形的指定带的样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1007,6 +1184,10 @@ public abstract class SampleModel
      * of pixels in a float array, one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回float数组中指定像素矩形的指定带的样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1056,6 +1237,10 @@ public abstract class SampleModel
      * of pixels in a double array, one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回双阵列中指定像素矩形的指定带的样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1104,6 +1289,10 @@ public abstract class SampleModel
      * Sets a pixel in  the DataBuffer using an int array of samples for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     * 设置DataBuffer中的一个像素,使用int数组样本进行输入。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param iArray    The input samples in an int array.
@@ -1124,6 +1313,10 @@ public abstract class SampleModel
      * Sets a pixel in the DataBuffer using a float array of samples for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  在DataBuffer中使用浮点数组来设置输入的像素。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param fArray    The input samples in a float array.
@@ -1143,6 +1336,10 @@ public abstract class SampleModel
     /**
      * Sets a pixel in the DataBuffer using a double array of samples
      * for input.
+     * <p>
+     *  使用双数组样本在DataBuffer中设置像素以进行输入。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param dArray    The input samples in a double array.
@@ -1164,6 +1361,10 @@ public abstract class SampleModel
      * one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  为包含每个数组元素一个样本的int数组设置像素矩形的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1202,6 +1403,10 @@ public abstract class SampleModel
      * one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  为包含每个数组元素一个样本的float数组设置像素矩形的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1240,6 +1445,10 @@ public abstract class SampleModel
      * containing one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  为包含每个数组元素一个样本的双阵列设置像素矩形的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1278,6 +1487,10 @@ public abstract class SampleModel
      * in the DataBuffer using an int for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  使用int作为输入,为DataBuffer中位于(x,y)的像素设置指定频带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param b         The band to set.
@@ -1302,6 +1515,12 @@ public abstract class SampleModel
      * that int value.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     * 使用float作为输入,为DataBuffer中位于(x,y)的像素设置指定频带中的样本。
+     * 该方法的默认实现将输入float sample转换为int,然后使用该int值调用<code> setSample(int,int,int,DataBuffer)</code>方法。
+     * 如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param b         The band to set.
@@ -1330,6 +1549,12 @@ public abstract class SampleModel
      * that int value.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  在指定的频带中为位于(x,y)的像素在DataBuffer中使用双精度输入设置样本。
+     * 该方法的默认实现将输入double样本转换为int,然后使用该int值调用<code> setSample(int,int,int,DataBuffer)</code>方法。
+     * 如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location.
      * @param y         The Y coordinate of the pixel location.
      * @param b         The band to set.
@@ -1354,6 +1579,10 @@ public abstract class SampleModel
      * of pixels from an int array containing one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  对于指定的像素矩形,从包含每个数组元素一个样本的int数组中设置指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1392,6 +1621,10 @@ public abstract class SampleModel
      * of pixels from a float array containing one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  在包含每个数组元素一个样本的float数组中,为指定的像素矩形设置指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1430,6 +1663,10 @@ public abstract class SampleModel
      * of pixels from a double array containing one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  对于指定的像素矩形,从包含每个数组元素一个样本的双阵列中设置指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location.
      * @param y         The Y coordinate of the upper left pixel location.
      * @param w         The width of the pixel rectangle.
@@ -1467,6 +1704,10 @@ public abstract class SampleModel
     /**
      *  Creates a SampleModel which describes data in this SampleModel's
      *  format, but with a different width and height.
+     * <p>
+     * 创建一个SampleModel,它以此SampleModel的格式描述数据,但宽度和高度不同。
+     * 
+     * 
      *  @param w the width of the image data
      *  @param h the height of the image data
      *  @return a <code>SampleModel</code> describing the same image
@@ -1479,6 +1720,10 @@ public abstract class SampleModel
      * Creates a new SampleModel
      * with a subset of the bands of this
      * SampleModel.
+     * <p>
+     *  使用此SampleModel的波段子集创建一个新的SampleModel。
+     * 
+     * 
      * @param bands the subset of bands of this <code>SampleModel</code>
      * @return a <code>SampleModel</code> with a subset of bands of this
      *         <code>SampleModel</code>.
@@ -1488,17 +1733,25 @@ public abstract class SampleModel
     /**
      * Creates a DataBuffer that corresponds to this SampleModel.
      * The DataBuffer's width and height will match this SampleModel's.
+     * <p>
+     *  创建与此SampleModel对应的DataBuffer。 DataBuffer的宽度和高度将匹配此SampleModel的。
+     * 
+     * 
      * @return a <code>DataBuffer</code> corresponding to this
      *         <code>SampleModel</code>.
      */
     public abstract DataBuffer createDataBuffer();
 
     /** Returns the size in bits of samples for all bands.
+    /* <p>
+    /* 
      *  @return the size of samples for all bands.
      */
     public abstract int[] getSampleSize();
 
     /** Returns the size in bits of samples for the specified band.
+    /* <p>
+    /* 
      *  @param band the specified band
      *  @return the size of the samples of the specified band.
      */

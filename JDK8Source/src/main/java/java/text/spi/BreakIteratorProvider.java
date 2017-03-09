@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import java.util.spi.LocaleServiceProvider;
  * provide concrete implementations of the
  * {@link java.text.BreakIterator BreakIterator} class.
  *
+ * <p>
+ *  服务提供者的抽象类,提供{@link java.text.BreakIterator BreakIterator}类的具体实现。
+ * 
+ * 
  * @since        1.6
  */
 public abstract class BreakIteratorProvider extends LocaleServiceProvider {
@@ -41,6 +46,9 @@ public abstract class BreakIteratorProvider extends LocaleServiceProvider {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
      */
     protected BreakIteratorProvider() {
     }
@@ -49,6 +57,10 @@ public abstract class BreakIteratorProvider extends LocaleServiceProvider {
      * Returns a new <code>BreakIterator</code> instance
      * for <a href="../BreakIterator.html#word">word breaks</a>
      * for the given locale.
+     * <p>
+     *  返回给定区域设置的<a href="../BreakIterator.html#word">分句符号</a>的新<代码> BreakIterator </code>实例。
+     * 
+     * 
      * @param locale the desired locale
      * @return A break iterator for word breaks
      * @exception NullPointerException if <code>locale</code> is null
@@ -64,6 +76,10 @@ public abstract class BreakIteratorProvider extends LocaleServiceProvider {
      * Returns a new <code>BreakIterator</code> instance
      * for <a href="../BreakIterator.html#line">line breaks</a>
      * for the given locale.
+     * <p>
+     *  为给定区域设置的<a href="../BreakIterator.html#line">换行符</a>返回新的<code> BreakIterator </code>实例。
+     * 
+     * 
      * @param locale the desired locale
      * @return A break iterator for line breaks
      * @exception NullPointerException if <code>locale</code> is null
@@ -79,6 +95,10 @@ public abstract class BreakIteratorProvider extends LocaleServiceProvider {
      * Returns a new <code>BreakIterator</code> instance
      * for <a href="../BreakIterator.html#character">character breaks</a>
      * for the given locale.
+     * <p>
+     *  返回给定区域设置的<a href="../BreakIterator.html#character">字符分隔符</a>的新<代码> BreakIterator </code>实例。
+     * 
+     * 
      * @param locale the desired locale
      * @return A break iterator for character breaks
      * @exception NullPointerException if <code>locale</code> is null
@@ -94,6 +114,9 @@ public abstract class BreakIteratorProvider extends LocaleServiceProvider {
      * Returns a new <code>BreakIterator</code> instance
      * for <a href="../BreakIterator.html#sentence">sentence breaks</a>
      * for the given locale.
+     * <p>
+     *  为给定语言环境的<a href="../BreakIterator.html#sentence">句子句子</a>返回新的<code> BreakIterator </code>实例。
+     * 
      * @param locale the desired locale
      * @return A break iterator for sentence breaks
      * @exception NullPointerException if <code>locale</code> is null

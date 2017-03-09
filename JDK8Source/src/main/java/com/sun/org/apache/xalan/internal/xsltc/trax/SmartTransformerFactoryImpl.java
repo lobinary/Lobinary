@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SmartTransformerFactoryImpl.java,v 1.2.4.1 2005/09/14 09:57:13 pvedula Exp $
+ * <p>
+ *  $ Id：SmartTransformerFactoryImpl.java,v 1.2.4.1 2005/09/14 09:57:13 pvedula Exp $
+ * 
  */
 
 
@@ -51,12 +64,19 @@ import org.xml.sax.XMLFilter;
  * transformer factory for the creation of Templates objects
  * and uses the Xalan processor transformer factory for the
  * creation of Transformer objects.
+ * <p>
+ *  实现使用XSLTC变压器工厂创建Templates对象的变压器工厂,并使用Xalan处理器变压器工厂创建Transformer对象。
+ * 
+ * 
  * @author G. Todd Miller
  */
 public class SmartTransformerFactoryImpl extends SAXTransformerFactory
 {
     /**
      * <p>Name of class as a constant to use for debugging.</p>
+     * <p>
+     *  <p>类名称为用于调试的常量</p>
+     * 
      */
     private static final String CLASS_NAME = "SmartTransformerFactoryImpl";
 
@@ -68,6 +88,9 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
 
     /**
      * <p>State of secure processing feature.</p>
+     * <p>
+     *  <p>安全处理功能的状态。</p>
+     * 
      */
     private boolean featureSecureProcessing = false;
 
@@ -77,6 +100,12 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      * to return Templates objects; and uses
      * com.sun.org.apache.xalan.internal.processor.TransformerFactory
      * to return Transformer objects.
+     * <p>
+     *  实现SmartTransformerFactory。
+     * 此工厂使用com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory返回Templates对象;并使用com.sun.org.apac
+     * he.xalan.internal.processor.TransformerFactory返回Transformer对象。
+     *  实现SmartTransformerFactory。
+     * 
      */
     public SmartTransformerFactoryImpl() { }
 
@@ -169,6 +198,21 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      *
      * <p>See {@link javax.xml.transform.TransformerFactory} for full documentation of specific features.</p>
      *
+     * <p>
+     * <p>为此工厂创建的<code> SmartTransformerFactory </code>和<code> Transformer </code> s或<code>模板</code>设置功能。
+     * <​​/ p>。
+     * 
+     * <p>
+     *  功能名称是完全限定的{@link java.net.URI}。实现可以定义它们自己的特征。
+     * 如果此创建的<code> TransformerFactory </code>或<code> Transformer </code>或<code> Template </code>无法支持该功能,则会抛
+     * 出{@link TransformerConfigurationException}。
+     *  功能名称是完全限定的{@link java.net.URI}。实现可以定义它们自己的特征。
+     * 一个<code> TransformerFactory </code>可以暴露一个特征值,但是不能改变它的状态。
+     * </p>
+     * 
+     *  <p>有关特定功能的完整文档,请参阅{@link javax.xml.transform.TransformerFactory}。</p>
+     * 
+     * 
      * @param name Feature name.
      * @param value Is feature state <code>true</code> or <code>false</code>.
      *
@@ -203,6 +247,10 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      * This method must be updated as the various methods and features of this
      * class are implemented.
      *
+     * <p>
+     *  javax.xml.transform.sax.TransformerFactory实现。查找要素的值(以查看是否支持)。此方法必须随着此类的各种方法和功能的实现而更新。
+     * 
+     * 
      * @param name The feature name
      * @return 'true' if feature is supported, 'false' if not
      */
@@ -260,6 +308,10 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
     /**
      * Create a Transformer object that copies the input document to the
      * result. Uses the com.sun.org.apache.xalan.internal.processor.TransformerFactory.
+     * <p>
+     *  创建将输入文档复制到结果的Transformer对象。使用com.sun.org.apache.xalan.internal.processor.TransformerFactory。
+     * 
+     * 
      * @return A Transformer object.
      */
     public Transformer newTransformer()
@@ -281,6 +333,10 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
     /**
      * Create a Transformer object that from the input stylesheet
      * Uses the com.sun.org.apache.xalan.internal.processor.TransformerFactory.
+     * <p>
+     *  从输入样式表创建Transformer对象使用com.sun.org.apache.xalan.internal.processor.TransformerFactory。
+     * 
+     * 
      * @param source the stylesheet.
      * @return A Transformer object.
      */
@@ -303,6 +359,10 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
     /**
      * Create a Templates object that from the input stylesheet
      * Uses the com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory.
+     * <p>
+     *  从输入样式表创建模板对象使用com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory。
+     * 
+     * 
      * @param source the stylesheet.
      * @return A Templates object.
      */
@@ -326,6 +386,10 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      * Get a TemplatesHandler object that can process SAX ContentHandler
      * events into a Templates object. Uses the
      * com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory.
+     * <p>
+     *  获取可以将SAX ContentHandler事件处理到Templates对象中的TemplatesHandler对象。
+     * 使用com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory。
+     * 
      */
     public TemplatesHandler newTemplatesHandler()
         throws TransformerConfigurationException
@@ -346,6 +410,10 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      * Get a TransformerHandler object that can process SAX ContentHandler
      * events based on a copy transformer.
      * Uses com.sun.org.apache.xalan.internal.processor.TransformerFactory.
+     * <p>
+     * 获取可以基于复制变换器处理SAX ContentHandler事件的TransformerHandler对象。
+     * 使用com.sun.org.apache.xalan.internal.processor.TransformerFactory。
+     * 
      */
     public TransformerHandler newTransformerHandler()
         throws TransformerConfigurationException
@@ -366,6 +434,10 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      * Get a TransformerHandler object that can process SAX ContentHandler
      * events based on a transformer specified by the stylesheet Source.
      * Uses com.sun.org.apache.xalan.internal.processor.TransformerFactory.
+     * <p>
+     *  获取TransformerHandler对象,该对象可以基于样式表Source指定的变换器处理SAX ContentHandler事件。
+     * 使用com.sun.org.apache.xalan.internal.processor.TransformerFactory。
+     * 
      */
     public TransformerHandler newTransformerHandler(Source src)
         throws TransformerConfigurationException
@@ -387,6 +459,10 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      * Get a TransformerHandler object that can process SAX ContentHandler
      * events based on a transformer specified by the stylesheet Source.
      * Uses com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory.
+     * <p>
+     *  获取TransformerHandler对象,该对象可以基于样式表Source指定的变换器处理SAX ContentHandler事件。
+     * 使用com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory。
+     * 
      */
     public TransformerHandler newTransformerHandler(Templates templates)
         throws TransformerConfigurationException
@@ -408,6 +484,9 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      * Create an XMLFilter that uses the given source as the
      * transformation instructions. Uses
      * com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory.
+     * <p>
+     *  创建一个使用给定源作为转换指令的XMLFilter。使用com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory。
+     * 
      */
     public XMLFilter newXMLFilter(Source src)
         throws TransformerConfigurationException {
@@ -429,6 +508,8 @@ public class SmartTransformerFactoryImpl extends SAXTransformerFactory
      * Create an XMLFilter that uses the given source as the
      * transformation instructions. Uses
      * com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory.
+     * <p>
+     *  创建一个使用给定源作为转换指令的XMLFilter。使用com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactory。
      */
     public XMLFilter newXMLFilter(Templates templates)
         throws TransformerConfigurationException {

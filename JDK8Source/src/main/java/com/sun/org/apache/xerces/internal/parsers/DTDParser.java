@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -33,6 +43,7 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLDTDScanner;
 import com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier;
 
 /**
+/* <p>
  */
 public abstract class DTDParser
     extends XMLGrammarParser
@@ -52,6 +63,8 @@ public abstract class DTDParser
     /**
      *
      *
+     * <p>
+     * 
      * @param symbolTable
      */
     public DTDParser(SymbolTable symbolTable) {
@@ -65,6 +78,10 @@ public abstract class DTDParser
     /**
      * getDTDGrammar
      *
+     * <p>
+     *  getDTDGrammar
+     * 
+     * 
      * @return the grammar created by this parser
      */
     public DTDGrammar getDTDGrammar() {
@@ -84,6 +101,13 @@ public abstract class DTDParser
      * startEntity method with the entity name "[dtd]" <em>before</em> calling
      * the startDTD method.
      *
+     * <p>
+     *  此方法通知实体的开始。 DTD具有伪名称"[dtd]",参数实体名称以"％"开头。
+     * <p>
+     *  <strong>注意：</strong>由于DTD是一个实体,通过在</em>之前调用具有实体名称"[dtd]"<em>的startEntity方法,将通知处理程序启动DTD实体。
+     * 调用startDTD方法。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param publicId The public identifier of the entity if the entity
      *                 is external, null otherwise.
@@ -107,6 +131,12 @@ public abstract class DTDParser
      * <strong>Note:</strong> This method is only called for external
      * parameter entities referenced in the DTD.
      *
+     * <p>
+     *  通知实体中存在TextDecl行。如果存在,此方法将在startEntity调用之后立即调用。
+     * <p>
+     *  <strong>注意</strong>：仅在DTD中引用的外部参数实体才调用此方法。
+     * 
+     * 
      * @param version  The XML version, or null if not specified.
      * @param encoding The IANA encoding name of the entity.
      *
@@ -118,6 +148,10 @@ public abstract class DTDParser
     /**
      * The start of the DTD.
      *
+     * <p>
+     *  DTD的开始。
+     * 
+     * 
      * @throws XNIException Thrown by handler to signal an error.
      */
     public void startDTD(XMLLocator locator, Augmentations augmentations)
@@ -127,6 +161,10 @@ public abstract class DTDParser
     /**
      * A comment.
      *
+     * <p>
+     *  评论。
+     * 
+     * 
      * @param text The text in the comment.
      *
      * @throws XNIException Thrown by application to signal an error.
@@ -145,6 +183,12 @@ public abstract class DTDParser
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     * 一个处理指令。处理指令由目标名称和可选的文本数据组成。数据只对应用程序有意义。
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性。这些伪属性遵循元素属性的形式,但<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序。应用程序负责解析数据。
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      *
@@ -158,6 +202,10 @@ public abstract class DTDParser
     /**
      * The start of the external subset.
      *
+     * <p>
+     *  外部子集的开始。
+     * 
+     * 
      * @throws XNIException Thrown by handler to signal an error.
      */
     public void startExternalSubset(XMLResourceIdentifier identifier,
@@ -167,6 +215,10 @@ public abstract class DTDParser
     /**
      * The end of the external subset.
      *
+     * <p>
+     *  外部子集的结束。
+     * 
+     * 
      * @throws XNIException Thrown by handler to signal an error.
      */
     public void endExternalSubset(Augmentations augmentations) throws XNIException {
@@ -175,6 +227,10 @@ public abstract class DTDParser
     /**
      * An element declaration.
      *
+     * <p>
+     *  元素声明。
+     * 
+     * 
      * @param name         The name of the element.
      * @param contentModel The element content model.
      *
@@ -188,6 +244,10 @@ public abstract class DTDParser
     /**
      * The start of an attribute list.
      *
+     * <p>
+     *  属性列表的开始。
+     * 
+     * 
      * @param elementName The name of the element that this attribute
      *                    list is associated with.
      *
@@ -200,6 +260,10 @@ public abstract class DTDParser
     /**
      * An attribute declaration.
      *
+     * <p>
+     *  属性声明。
+     * 
+     * 
      * @param elementName   The name of the element that this attribute
      *                      is associated with.
      * @param attributeName The name of the attribute.
@@ -228,6 +292,10 @@ public abstract class DTDParser
     /**
      * The end of an attribute list.
      *
+     * <p>
+     *  属性列表的结尾。
+     * 
+     * 
      * @throws XNIException Thrown by handler to signal an error.
      */
     public void endAttlist(Augmentations augmentations) throws XNIException {
@@ -236,6 +304,10 @@ public abstract class DTDParser
     /**
      * An internal entity declaration.
      *
+     * <p>
+     *  内部实体声明。
+     * 
+     * 
      * @param name The name of the entity. Parameter entity names start with
      *             '%', whereas the name of a general entity is just the
      *             entity name.
@@ -256,6 +328,10 @@ public abstract class DTDParser
     /**
      * An external entity declaration.
      *
+     * <p>
+     *  外部实体声明。
+     * 
+     * 
      * @param name     The name of the entity. Parameter entity names start
      *                 with '%', whereas the name of a general entity is just
      *                 the entity name.
@@ -275,6 +351,10 @@ public abstract class DTDParser
     /**
      * An unparsed entity declaration.
      *
+     * <p>
+     *  未解析的实体声明。
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier    An object containing all location information
      *                      pertinent to this entity.
@@ -294,6 +374,10 @@ public abstract class DTDParser
     /**
      * A notation declaration
      *
+     * <p>
+     *  符号声明
+     * 
+     * 
      * @param name     The name of the notation.
      * @param identifier    An object containing all location information
      *                      pertinent to this notation.
@@ -310,6 +394,10 @@ public abstract class DTDParser
     /**
      * The start of a conditional section.
      *
+     * <p>
+     *  条件段的开始。
+     * 
+     * 
      * @param type The type of the conditional section. This value will
      *             either be CONDITIONAL_INCLUDE or CONDITIONAL_IGNORE.
      *
@@ -324,6 +412,10 @@ public abstract class DTDParser
     /**
      * The end of a conditional section.
      *
+     * <p>
+     *  条件段的结束。
+     * 
+     * 
      * @throws XNIException Thrown by handler to signal an error.
      */
     public void endConditional(Augmentations augmentations) throws XNIException {
@@ -332,6 +424,10 @@ public abstract class DTDParser
     /**
      * The end of the DTD.
      *
+     * <p>
+     *  DTD的结束。
+     * 
+     * 
      * @throws XNIException Thrown by handler to signal an error.
      */
     public void endDTD(Augmentations augmentations) throws XNIException {
@@ -346,6 +442,12 @@ public abstract class DTDParser
      * endEntity method with the entity name "[dtd]" <em>after</em> calling
      * the endDTD method.
      *
+     * <p>
+     *  此方法通知实体的结束。 DTD具有伪名称"[dtd]",参数实体名称以"％"开头。
+     * <p>
+     *  <strong>注意：</strong>由于DTD是一个实体,通过在</em>之后调用具有实体名称"[dtd]"<em>的endEntity方法,将通知处理程序结束DTD实体调用endDTD方法。
+     * 
+     * 
      * @param name The name of the entity.
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -362,6 +464,10 @@ public abstract class DTDParser
      * model, specific methods may be called between the call to the
      * startContentModel method and the call to the endContentModel method.
      *
+     * <p>
+     *  内容模型的开始。根据内容模型的类型,可以在调用startContentModel方法和调用endContentModel方法之间调用特定方法。
+     * 
+     * 
      * @param elementName The name of the element.
      * @param type        The content model type.
      *
@@ -385,6 +491,12 @@ public abstract class DTDParser
      * <strong>Note:</strong> This method is only called after a call to
      * the startContentModel method where the type is TYPE_MIXED.
      *
+     * <p>
+     * 混合内容模型中引用的元素。如果混合内容模型只允许文本内容,则不会为该模型调用此方法。但是,如果为混合内容模型调用此方法,则隐含零个或多个出现计数。
+     * <p>
+     *  <strong>注意</strong>：此方法仅在调用startContentModel方法(其类型为TYPE_MIXED)后调用。
+     * 
+     * 
      * @param elementName The name of the referenced element.
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -403,6 +515,14 @@ public abstract class DTDParser
      * <strong>Note:</strong> Children groups can be nested and have
      * associated occurrence counts.
      *
+     * <p>
+     *  子组的开始。
+     * <p>
+     *  <strong>注意：</strong>此方法仅在调用startContentModel方法(其类型为TYPE_CHILDREN)后调用。
+     * <p>
+     *  <strong>注意</strong>：子组可以嵌套,并具有关联的事件计数。
+     * 
+     * 
      * @throws XNIException Thrown by handler to signal an error.
      *
      * @see com.sun.org.apache.xerces.internal.impl.dtd.XMLElementDecl#TYPE_CHILDREN
@@ -413,6 +533,10 @@ public abstract class DTDParser
     /**
      * A referenced element in a children content model.
      *
+     * <p>
+     *  儿童内容模型中引用的元素。
+     * 
+     * 
      * @param elementName The name of the referenced element.
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -429,6 +553,12 @@ public abstract class DTDParser
      * <strong>Note:</strong> This method is only called after a call to
      * the startContentModel method where the type is TYPE_CHILDREN.
      *
+     * <p>
+     *  子内容模型的选择或序列之间的分隔符。
+     * <p>
+     *  <strong>注意：</strong>此方法仅在调用startContentModel方法(其类型为TYPE_CHILDREN)后调用。
+     * 
+     * 
      * @param separator The type of children separator.
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -446,6 +576,12 @@ public abstract class DTDParser
      * <strong>Note:</strong> This method is only called after a call to
      * the startContentModel method where the type is TYPE_CHILDREN.
      *
+     * <p>
+     *  子级内容模型中子级的发生计数。
+     * <p>
+     *  <strong>注意：</strong>此方法仅在调用startContentModel方法(其类型为TYPE_CHILDREN)后调用。
+     * 
+     * 
      * @param occurrence The occurrence count for the last children element
      *                   or children group.
      *
@@ -465,6 +601,12 @@ public abstract class DTDParser
      * <strong>Note:</strong> This method is only called after a call to
      * the startContentModel method where the type is TYPE_CHILDREN.
      *
+     * <p>
+     *  一个子组的结束。
+     * <p>
+     *  <strong>注意：</strong>此方法仅在调用startContentModel方法(其类型为TYPE_CHILDREN)后调用。
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.impl.dtd.XMLElementDecl#TYPE_CHILDREN
      */
     public void childrenEndGroup() throws XNIException {
@@ -473,6 +615,8 @@ public abstract class DTDParser
     /**
      * The end of a content model.
      *
+     * <p>
+     * 
      * @throws XNIException Thrown by handler to signal an error.
      */
     public void endContentModel() throws XNIException {

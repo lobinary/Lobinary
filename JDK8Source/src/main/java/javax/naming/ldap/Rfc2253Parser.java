@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import javax.naming.InvalidNameException;
 
 /*
  * RFC2253Parser implements a recursive descent parser for a single DN.
+ * <p>
+ *  RFC2253Parser为单个DN实现递归下降解析器。
+ * 
  */
 final class Rfc2253Parser {
 
@@ -42,6 +46,9 @@ final class Rfc2253Parser {
 
         /*
          * Given an LDAP DN in string form, returns a parser for it.
+         * <p>
+         *  给定一个LDAP DN字符串形式,返回一个解析器。
+         * 
          */
         Rfc2253Parser(String name) {
             this.name = name;
@@ -51,6 +58,9 @@ final class Rfc2253Parser {
 
         /*
          * Parses the DN, returning a List of its RDNs.
+         * <p>
+         *  解析DN,返回其RDN的列表。
+         * 
          */
         // public List<Rdn> getDN() throws InvalidNameException {
 
@@ -81,6 +91,9 @@ final class Rfc2253Parser {
 
         /*
          * Parses the DN, if it is known to contain a single RDN.
+         * <p>
+         *  如果已知包含单个RDN,则解析DN。
+         * 
          */
         Rdn parseRdn() throws InvalidNameException {
             return parseRdn(new Rdn());
@@ -88,6 +101,9 @@ final class Rfc2253Parser {
 
         /*
          * Parses the DN, if it is known to contain a single RDN.
+         * <p>
+         *  如果已知包含单个RDN,则解析DN。
+         * 
          */
         Rdn parseRdn(Rdn rdn) throws InvalidNameException {
             rdn = doParse(rdn);
@@ -100,6 +116,9 @@ final class Rfc2253Parser {
         /*
          * Parses the next RDN and returns it.  Throws an exception if
          * none is found.  Leading and trailing whitespace is consumed.
+         * <p>
+         *  解析下一个RDN并返回它。如果找不到则抛出异常。前导和尾随空格被消耗。
+         * 
          */
          private Rdn doParse(Rdn rdn) throws InvalidNameException {
 
@@ -131,6 +150,9 @@ final class Rfc2253Parser {
          * This routine is more generous than RFC 2253.  It accepts
          * attribute types composed of any nonempty combination of Unicode
          * letters, Unicode digits, '.', '-', and internal space characters.
+         * <p>
+         *  返回从下一个未使用字符开始的属性类型。不需要前导空格。这个例程比RFC 2253更慷慨。它接受由Unicode字母,Unicode数字,'。',' - '和内部空格字符的任何非空组合组成的属性类型。
+         * 
          */
         private String parseAttrType() throws InvalidNameException {
 
@@ -160,6 +182,9 @@ final class Rfc2253Parser {
         /*
          * Returns the attribute value that begins at the next unconsumed
          * char.  No leading whitespace is expected.
+         * <p>
+         *  返回从下一个未使用字符开始的属性值。不需要前导空格。
+         * 
          */
         private String parseAttrValue() throws InvalidNameException {
 
@@ -236,6 +261,9 @@ final class Rfc2253Parser {
         /*
          * Returns true if next unconsumed character is one that terminates
          * a string attribute value.
+         * <p>
+         *  如果下一个未使用字符是终止字符串属性值的字符,则返回true。
+         * 
          */
         private boolean atTerminator() {
             return (cur < len &&
@@ -246,6 +274,8 @@ final class Rfc2253Parser {
 
         /*
          * Best guess as to what RFC 2253 means by "whitespace".
+         * <p>
+         *  最好猜测什么RFC 2253意味着"空白"。
          */
         private static boolean isWhitespace(char c) {
             return (c == ' ' || c == '\r');

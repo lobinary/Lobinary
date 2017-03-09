@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,19 @@ package javax.xml.soap;
  * directly to a URL following the request/response paradigm.  That is,
  * messages are sent using the method <code>call</code>, which sends the
  * message and then waits until it gets a reply.
+ * <p>
+ *  客户端可用于将消息直接发送到远程方(例如,由URL表示)的点对点连接。
+ * <p>
+ *  SOAPConnection类是可选的。
+ * 一些实现可能不实现此接口,在这种情况下,调用<code> SOAPConnectionFactory.newInstance()</code>(见下文)将抛出一个<code> UnsupportedOp
+ * erationException </code>。
+ *  SOAPConnection类是可选的。
+ * <p>
+ *  客户端可以使用{@link SOAPConnectionFactory}对象获取<code> SOAPConnection </code>对象,如以下示例所示：
+ * <PRE>
+ *  SOAPConnectionFactory factory = SOAPConnectionFactory.newInstance(); SOAPConnection con = factory.cr
+ * eateConnection();。
+ * </PRE>
  */
 public abstract class SOAPConnection {
 
@@ -52,6 +66,11 @@ public abstract class SOAPConnection {
      * Sends the given message to the specified endpoint and blocks until
      * it has returned the response.
      *
+     * <p>
+     *  可以使用<code> SOAPConnection </code>对象在请求/响应范例之后将消息直接发送到URL。
+     * 也就是说,消息使用方法<code> call </code>发送,它发送消息,然后等待,直到它得到答复。
+     * 
+     * 
      * @param request the <code>SOAPMessage</code> object to be sent
      * @param to an <code>Object</code> that identifies
      *         where the message should be sent. It is required to
@@ -70,6 +89,10 @@ public abstract class SOAPConnection {
     /**
      * Gets a message from a specific endpoint and blocks until it receives,
      *
+     * <p>
+     *  将给定消息发送到指定的端点并阻塞,直到它返回响应。
+     * 
+     * 
      * @param to an <code>Object</code> that identifies where
      *                  the request should be sent. Objects of type
      *                 <code>java.lang.String</code> and
@@ -88,6 +111,10 @@ public abstract class SOAPConnection {
     /**
      * Closes this <code>SOAPConnection</code> object.
      *
+     * <p>
+     *  从特定端点获取消息并阻塞,直到接收到消息,
+     * 
+     * 
      * @throws SOAPException if there is a SOAP error
      */
     public abstract void close()

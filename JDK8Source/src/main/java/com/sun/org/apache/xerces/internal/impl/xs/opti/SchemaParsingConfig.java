@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.opti;
@@ -55,6 +65,10 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLPullParserConfiguration;
 /**
  * @xerces.internal
  *
+ * <p>
+ *  @ xerces.internal
+ * 
+ * 
  * @author Rahul Srivastava, Sun Microsystems Inc.
  *
  * @version $Id: SchemaParsingConfig.java,v 1.8 2010-11-01 04:40:01 joehw Exp $
@@ -234,12 +248,18 @@ public class SchemaParsingConfig extends BasicParserConfiguration
      * True if a parse is in progress. This state is needed because
      * some features/properties cannot be set while parsing (e.g.
      * validation and namespaces).
+     * <p>
+     *  如果解析正在进行,则为true。需要此状态,因为在解析(例如验证和命名空间)时无法设置某些功能/属性。
+     * 
      */
     protected boolean fParseInProgress = false;
 
     /**
      * fConfigUpdated is set to true if there has been any change to the configuration settings,
      * i.e a feature or a property was changed.
+     * <p>
+     *  如果配置设置有任何更改(即某个功能或属性已更改),则fConfigUpdated设置为true。
+     * 
      */
     protected boolean fConfigUpdated = false;
 
@@ -258,6 +278,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * Constructs a parser configuration using the specified symbol table.
      *
+     * <p>
+     *  使用指定的符号表构造解析器配置。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      */
     public SchemaParsingConfig(SymbolTable symbolTable) {
@@ -272,6 +296,12 @@ public class SchemaParsingConfig extends BasicParserConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表和语法池构造解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      * @param grammarPool The grammar pool to use.
      */
@@ -288,6 +318,12 @@ public class SchemaParsingConfig extends BasicParserConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表,语法池和父设置构造一个解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable    The symbol table to use.
      * @param grammarPool    The grammar pool to use.
      * @param parentSettings The parent settings.
@@ -394,6 +430,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * Returns the state of a feature.
      *
+     * <p>
+     * 返回要素的状态。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @return true if the feature is supported
      *
@@ -420,6 +460,12 @@ public class SchemaParsingConfig extends BasicParserConfiguration
      * might not recognize the feature, and if it does recognize
      * it, it might not be able to fulfill the request.
      *
+     * <p>
+     *  设置要素的状态。
+     * 
+     *  设置SAX2解析器中任何功能的状态。解析器可能无法识别该功能,如果它识别它,它可能无法满足该请求。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      * @param state The requested state of the feature (true or false).
      *
@@ -457,6 +503,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * Returns the value of a property.
      *
+     * <p>
+     *  返回属性的值。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @return the value of the property
      *
@@ -477,6 +527,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * setProperty
      *
+     * <p>
+     *  setProperty
+     * 
+     * 
      * @param propertyId
      * @param value
      */
@@ -514,6 +568,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception XNIException Thrown if the parser does not support the
@@ -533,6 +591,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * Sets the input source for the document to parse.
      *
+     * <p>
+     *  设置文档解析的输入源。
+     * 
+     * 
      * @param inputSource The document's input source.
      *
      * @exception XMLConfigurationException Thrown if there is a
@@ -557,6 +619,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * Parses the document in a pull parsing fashion.
      *
+     * <p>
+     *  以拉解析方式解析文档。
+     * 
+     * 
      * @param complete True if the pull parser should parse the
      *                 remaining document completely.
      *
@@ -655,6 +721,9 @@ public class SchemaParsingConfig extends BasicParserConfiguration
      * If the application decides to terminate parsing before the xml document
      * is fully parsed, the application should call this method to free any
      * resource allocated during parsing. For example, close all opened streams.
+     * <p>
+     *  如果应用程序决定在xml文档完全解析之前终止解析,则应用程序应调用此方法以释放在解析期间分配的任何资源。例如,关闭所有打开的流。
+     * 
      */
     public void cleanup() {
         fEntityManager.closeReaders();
@@ -667,6 +736,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * Parses the specified input source.
      *
+     * <p>
+     *  解析指定的输入源。
+     * 
+     * 
      * @param source The input source.
      *
      * @exception XNIException Throws exception on XNI error.
@@ -719,6 +792,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
     /**
      * Reset all components before parsing.
      *
+     * <p>
+     *  在解析之前重置所有组件。
+     * 
+     * 
      * @throws XNIException Thrown if an error occurs during initialization.
      */
     public void reset() throws XNIException {
@@ -806,6 +883,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
      * Check a feature. If feature is know and supported, this method simply
      * returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查功能。如果特性是知道和支持的,这个方法简单地返回。否则,抛出适当的异常。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      *
      * @throws XMLConfigurationException Thrown for configuration error.
@@ -886,6 +967,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
      * Check a property. If the property is know and supported, this method
      * simply returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查属性。如果属性是知道和支持,这个方法简单地返回。否则,抛出适当的异常。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      *
@@ -934,6 +1019,10 @@ public class SchemaParsingConfig extends BasicParserConfiguration
      * sets default values on the configuration for features and
      * properties which were previously absent from the configuration.
      *
+     * <p>
+     *  将所有组件的已识别要素和属性添加到默认已识别要素和属性的列表中,并在配置上设置先前在配置中不存在的要素和属性的默认值。
+     * 
+     * 
      * @param component The component whose recognized features
      * and properties will be added to the configuration
      */
@@ -986,6 +1075,9 @@ public class SchemaParsingConfig extends BasicParserConfiguration
 
     /**
      * Reset all XML 1.0 components before parsing
+     * <p>
+     *  在解析之前重置所有XML 1.0组件
+     * 
      */
     protected final void resetXML10() throws XNIException {
         // Reset XML 1.0 components
@@ -995,6 +1087,8 @@ public class SchemaParsingConfig extends BasicParserConfiguration
 
     /**
      * Reset all XML 1.1 components before parsing
+     * <p>
+     *  在解析之前重置所有XML 1.1组件
      */
     protected final void resetXML11() throws XNIException {
         // Reset XML 1.1 components

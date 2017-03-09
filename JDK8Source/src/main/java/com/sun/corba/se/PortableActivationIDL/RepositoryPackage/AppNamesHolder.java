@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL.RepositoryPackage;
 
 
@@ -10,6 +11,9 @@ package com.sun.corba.se.PortableActivationIDL.RepositoryPackage;
 
 
 /** Type used for a list of application names
+/* <p>
+/* com / sun / corba / se / PortableActivationIDL / RepositoryPackage / AppNamesHolder.java。
+/* 
 	*/
 public final class AppNamesHolder implements org.omg.CORBA.portable.Streamable
 {

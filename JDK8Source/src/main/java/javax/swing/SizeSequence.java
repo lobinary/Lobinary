@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -108,6 +109,47 @@ package javax.swing;
  * a set of integer sizes, copying it into the new array, and then
  * reforming the hybrid representation in place.
  *
+ * <p>
+ *  <code> SizeSequence </code>对象有效地维护大小和对应位置的有序列表。
+ * 对于<code> SizeSequence </code>可能适合的一种情况是在显示多行不等大小的组件中。
+ * 在这种情况下,可以使用单个<code> SizeSequence </code>对象来跟踪所有行的高度和Y位置。
+ * <p>
+ *  另一个示例是多列组件,例如<code> JTable </code>,其中列大小不是全部相等。
+ *  <code> JTable </code>可能使用单个<code> SizeSequence </code>对象来存储所有列的宽度和X位置。
+ * 然后,<code> JTable </code>可以使用<code> SizeSequence </code>对象来查找与某个位置对应的列。
+ * 每当一个或多个列大小更改时,<code> JTable </code>可以更新<code> SizeSequence </code>对象。
+ * 
+ * <p>
+ *  下图显示了多列组件的大小和位置数据之间的关系。
+ * 
+ * <center>
+ *  <img src ="doc-files / SizeSequence-1.gif"width = 384 height = 100 alt ="第一个项目从位置0开始,第二个在位置相等
+ * to the size of the previous item, and so on.">
+ * </center>
+ * <p>
+ * 在该图中,第一索引(0)对应于第一列,第二索引(1)对应于第二列,等等。
+ * 第一列的位置从0开始,该列占据<em> size <sub> 0 </sub> </em>像素,其中<em> size <sub> 0 </sub> </em>由<code> getSize(0)</code>
+ * 返回。
+ * 在该图中,第一索引(0)对应于第一列,第二索引(1)对应于第二列,等等。因此,第一列以<em> size <sub> 0 </sub> </em>  -  1结束。
+ * 然后第二列从<em> size <sub> 0 </sub>并占用<em> size <sub> 1 </sub> </em>(<code> getSize(1)</code>)像素。
+ * <p>
+ *  注意,一个<code> SizeSequence </code>对象只是表示沿着一个轴的间隔。在我们的示例中,间隔表示高度或宽度(以像素为单位)。
+ * 但是,任何其他计量单位(例如,以天为单位的时间)可能同样有效。
+ * 
+ *  <h3>实施注意事项</h3>
+ * 
+ *  通常在存储条目的大小和位置时,可以在存储大小或存储其位置之间进行选择。
+ * 渲染期间需要的两个常见操作是：<code> getIndex(position)</code>和<code> setSize(index,size)</code>。
+ * 无论选择哪种内部格式,当条目数变大时,这些操作中的一个操作是昂贵的。如果存储了大小,则找到包围特定位置的条目的索引在条目的数量中是线性的。
+ * 如果替换地存储位置,则在特定索引处设置条目的大小需要更新受影响条目的位置,这也是线性计算。
+ * <p>
+ * 像上面的技术一样,这个类在内部拥有一个N个整数的数组,但是使用一个混合编码,这是基于大小和基于位置的方法之间的一半。
+ * 结果是采用相同的空间来存储信息,但是可以在Log(N)时间而不是O(N)中执行大多数操作的数据结构,其中N是列表中的条目的数量。
+ * <p>
+ *  在条目数中保留O(N)的两个操作是<code> insertEntries </code>和<code> removeEntries </code>方法,两者都通过将内部数组转换为一组整数大小,将其复
+ * 制到新数组中,然后重新构造混合表示。
+ * 
+ * 
  * @author Philip Milne
  * @since 1.3
  */
@@ -118,6 +160,9 @@ package javax.swing;
  *   upon. All the algorithms work by dividing this range
  *   into two smaller ranges and recursing. The recursion
  *   is terminated when the upper and lower bounds are equal.
+ * <p>
+ *  每个方法通过取需要操作的整数的范围的最小值和最大值来实现。所有算法通过将该范围划分为两个较小的范围和递归来工作。当上限和下限相等时,递归终止。
+ * 
  */
 
 public class SizeSequence {
@@ -130,6 +175,11 @@ public class SizeSequence {
      * that contains no entries.  To add entries, you
      * can use <code>insertEntries</code> or <code>setSizes</code>.
      *
+     * <p>
+     *  创建一个不包含任何条目的新<对象> SizeSequence </code>对象。
+     * 要添加条目,可以使用<code> insertEntries </code>或<code> setSizes </code>。
+     * 
+     * 
      * @see #insertEntries
      * @see #setSizes(int[])
      */
@@ -142,6 +192,10 @@ public class SizeSequence {
      * that contains the specified number of entries,
      * all initialized to have size 0.
      *
+     * <p>
+     *  创建一个新的<code> SizeSequence </code>对象,该对象包含指定数量的条目,所有条目都初始化为大小为0。
+     * 
+     * 
      * @param numEntries  the number of sizes to track
      * @exception NegativeArraySizeException if
      *    <code>numEntries &lt; 0</code>
@@ -155,6 +209,10 @@ public class SizeSequence {
      * that contains the specified number of entries,
      * all initialized to have size <code>value</code>.
      *
+     * <p>
+     *  创建一个新的<code> SizeSequence </code>对象,该对象包含指定数量的条目,所有条目都初始化为大小<code> value </code>。
+     * 
+     * 
      * @param numEntries  the number of sizes to track
      * @param value       the initial value of each size
      */
@@ -167,6 +225,10 @@ public class SizeSequence {
      * Creates a new <code>SizeSequence</code> object
      * that contains the specified sizes.
      *
+     * <p>
+     *  创建一个包含指定大小的新<对象> SizeSequence </code>对象。
+     * 
+     * 
      * @param sizes  the array of sizes to be contained in
      *               the <code>SizeSequence</code>
      */
@@ -178,6 +240,9 @@ public class SizeSequence {
     /**
      * Resets the size sequence to contain <code>length</code> items
      * all with a size of <code>size</code>.
+     * <p>
+     * 重置大小序列以包含所有大小为<code> size </code>的<code> length </code>项。
+     * 
      */
     void setSizes(int length, int size) {
         if (a.length != length) {
@@ -203,6 +268,11 @@ public class SizeSequence {
      * Each entry's size is initialized to the value of the
      * corresponding item in <code>sizes</code>.
      *
+     * <p>
+     *  使用<code> sizes </code>参数中的数据重置此<code> SizeSequence </code>对象。
+     * 此方法重新初始化此对象,使其包含与<code> sizes </code>数组一样多的条目。每个条目的大小初始化为<code> sizes </code>中对应项的值。
+     * 
+     * 
      * @param sizes  the array of sizes to be contained in
      *               this <code>SizeSequence</code>
      */
@@ -225,6 +295,10 @@ public class SizeSequence {
     /**
      * Returns the size of all entries.
      *
+     * <p>
+     *  返回所有条目的大小。
+     * 
+     * 
      * @return  a new array containing the sizes in this object
      */
     public int[] getSizes() {
@@ -255,6 +329,13 @@ public class SizeSequence {
      * <code>length</code> the value returned may
      * be meaningless.
      *
+     * <p>
+     *  返回指定条目的开始位置。
+     * 例如,<code> getPosition(0)</code>返回0,<code> getPosition(1)</code>等于<code> getSize(0)</code>,<code> getP
+     * osition </code>等于<code> getSize(0)</code> + <code> getSize(1)</code>,等等。
+     *  返回指定条目的开始位置。 <p>请注意,如果<code> index </code>大于<code> length </code>,则返回的值可能无意义。
+     * 
+     * 
      * @param index  the index of the entry whose position is desired
      * @return       the starting position of the specified entry
      */
@@ -281,6 +362,10 @@ public class SizeSequence {
      * For example, <code>getIndex(0)</code> is 0,
      * since the first entry always starts at position 0.
      *
+     * <p>
+     *  返回与指定位置对应的条目的索引。例如,<code> getIndex(0)</code>为0,因为第一个条目总是从位置0开始。
+     * 
+     * 
      * @param position  the position of the entry
      * @return  the index of the entry that occupies the specified position
      */
@@ -308,6 +393,10 @@ public class SizeSequence {
      * <code>(0 &lt;= index &lt; getSizes().length)</code>
      * the behavior is unspecified.
      *
+     * <p>
+     *  返回指定条目的大小。如果<code> index </code>超出范围<code>(0&lt; = index&lt; getSizes()。length)</code>,则未指定行为。
+     * 
+     * 
      * @param index  the index corresponding to the entry
      * @return  the size of the entry
      */
@@ -322,6 +411,10 @@ public class SizeSequence {
      * <code>(0 &lt;= index &lt; getSizes().length)</code>
      * the behavior is unspecified.
      *
+     * <p>
+     *  设置指定条目的大小。注意,如果<code> index </code>的值不在范围内：<code>(0 <= index <getSizes()。length)</code>,行为未指定。
+     * 
+     * 
      * @param index  the index corresponding to the entry
      * @param size   the size of the entry
      */
@@ -352,6 +445,12 @@ public class SizeSequence {
      * not met, the behavior is unspecified and an exception
      * may be thrown.
      *
+     * <p>
+     * 向此<code> SizeSequence </code>中添加一组连续的条目。
+     * 注意,<code> start </code>和<code> length </code>的值必须满足以下条件：<code>(0 <= start&lt; getSizes()。
+     * length)AND(length& = 0)</code>。如果不满足这些条件,那么行为是未指定的,并且可能抛出异常。
+     * 
+     * 
      * @param start   the index to be assigned to the first entry
      *                in the group
      * @param length  the number of entries in the group
@@ -387,6 +486,10 @@ public class SizeSequence {
      * not met, the behavior is unspecified and an exception
      * may be thrown.
      *
+     * <p>
+     *  从此<code> SizeSequence </code>中删除一组连续的条目。
+     * 注意,<code> start </code>和<code> length </code>的值必须满足以下条件：<code>(0 <= start&lt; getSizes()。
+     * 
      * @param start   the index of the first entry to be removed
      * @param length  the number of entries to be removed
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.math.BigInteger;
 /**
  * This class specifies the set of parameters used with the DSA algorithm.
  *
+ * <p>
+ *  此类指定与DSA算法一起使用的参数集。
+ * 
+ * 
  * @author Jan Luehe
  *
  *
@@ -48,6 +53,10 @@ java.security.interfaces.DSAParams {
     /**
      * Creates a new DSAParameterSpec with the specified parameter values.
      *
+     * <p>
+     *  使用指定的参数值创建新的DSAParameterSpec。
+     * 
+     * 
      * @param p the prime.
      *
      * @param q the sub-prime.
@@ -63,6 +72,10 @@ java.security.interfaces.DSAParams {
     /**
      * Returns the prime {@code p}.
      *
+     * <p>
+     *  返回素数{@code p}。
+     * 
+     * 
      * @return the prime {@code p}.
      */
     public BigInteger getP() {
@@ -72,6 +85,10 @@ java.security.interfaces.DSAParams {
     /**
      * Returns the sub-prime {@code q}.
      *
+     * <p>
+     *  返回子素数{@code q}。
+     * 
+     * 
      * @return the sub-prime {@code q}.
      */
     public BigInteger getQ() {
@@ -81,6 +98,9 @@ java.security.interfaces.DSAParams {
     /**
      * Returns the base {@code g}.
      *
+     * <p>
+     *  返回基数{@code g}。
+     * 
      * @return the base {@code g}.
      */
     public BigInteger getG() {

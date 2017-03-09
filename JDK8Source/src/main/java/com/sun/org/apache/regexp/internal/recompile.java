@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.regexp.internal;
@@ -54,6 +64,19 @@ import com.sun.org.apache.regexp.internal.RESyntaxException;
  *
  * </pre>
  *
+ * <p>
+ *  'recompile'是预编译一个或多个正则表达式以与正则表达式匹配器类'RE'一起使用的命令行工具。例如,命令"java recompile a * b"生成如下所示的输出：
+ * 
+ * <pre>
+ * 
+ *  //预编译的正则表达式"a * b"char [] re1Instructions = {0x007c,0x0000,0x001a,0x007c,0x0000,0x000d,0x0041,0x0001,0x0004,0x0061,0x007c,0x0000,0x0003,0x0047,0x0000,0xfff6, 0x007c,0x0000,0x0003,0x004e,0x0000,0x0003,0x0041,0x0001,0x0004,0x0062,0x0045,0x0000,0x0000,}
+ * ;。
+ * 
+ *  REProgram re1 = new REProgram(re1Instructions);
+ * 
+ * </pre>
+ * 
+ * 
  * @see RE
  * @see RECompiler
  *
@@ -63,6 +86,14 @@ public class recompile
 {
     /**
      * Main application entrypoint.
+     * <p>
+     * 通过将此输出粘贴到代码中,您可以直接从预编译数据(字符数组re1)构建正则表达式匹配器(RE)对象,从而避免在运行时编译表达式的开销。例如：
+     * 
+     * <pre>
+     * 
+     *  RE r = new RE(re1);
+     * 
+     * 
      * @param arg Command line arguments
      */
     static public void main(String[] arg)

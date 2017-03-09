@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ExpandedNameTable.java,v 1.2.4.1 2005/09/15 08:15:06 suresh_emailid Exp $
+ * <p>
+ *  $ Id：ExpandedNameTable.java,v 1.2.4.1 2005/09/15 08:15:06 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref;
 
@@ -35,6 +48,13 @@ import com.sun.org.apache.xml.internal.dtm.DTM;
  * are combined in getExpandedTypeID() method to share the same hash calculation
  * code. We only need to implement the rehash() interface which is used to
  * expand the hash table.
+ * <p>
+ *  这是管理从扩展名称到expandedNameID的映射的表的默认实现。
+ * 
+ *  ％OPT％getExpandedTypeID()方法的性能对DTM构建非常重要。
+ * 为了获得这个类的最佳性能,我们直接在这个类中实现一个简单的哈希算法,而不是使用低效的java.util.Hashtable。
+ *  get和put操作的代码在getExpandedTypeID()方法中组合以共享相同的散列计算代码。我们只需要实现rehash()接口,用于扩展哈希表。
+ * 
  */
 public class ExpandedNameTable
 {
@@ -66,6 +86,8 @@ public class ExpandedNameTable
   public static final int NAMESPACE = ((int)DTM.NAMESPACE_NODE) ;
 
   /** Workspace for lookup. NOT THREAD SAFE!
+  /* <p>
+  /* 
    * */
   ExtendedType hashET = new ExtendedType(-1, "", "");
 
@@ -75,18 +97,27 @@ public class ExpandedNameTable
   /**
    * The default load factor of the Hashtable.
    * This is used to calcualte the threshold.
+   * <p>
+   *  Hashtable的默认负载因子。这用于计算阈值。
+   * 
    */
   private static float m_loadFactor = 0.75f;
 
   /**
    * The initial capacity of the hash table. Use a bigger number
    * to avoid the cost of expanding the table.
+   * <p>
+   * 散列表的初始容量。使用更大的数字可以避免展开表格的成本。
+   * 
    */
   private static int m_initialCapacity = 203;
 
   /**
    * The capacity of the hash table, i.e. the size of the
    * internal HashEntry array.
+   * <p>
+   *  散列表的容量,即内部HashEntry数组的大小。
+   * 
    */
   private int m_capacity;
 
@@ -94,17 +125,26 @@ public class ExpandedNameTable
    * The threshold of the hash table, which is equal to capacity * loadFactor.
    * If the number of entries in the hash table is bigger than the threshold,
    * the hash table needs to be expanded.
+   * <p>
+   *  散列表的阈值,等于capacity * loadFactor。如果哈希表中的条目数大于阈值,则需要扩展哈希表。
+   * 
    */
   private int m_threshold;
 
   /**
    * The internal array to store the hash entries.
    * Each array member is a slot for a hash bucket.
+   * <p>
+   *  用于存储哈希条目的内部数组。每个阵列成员是用于哈希桶的槽。
+   * 
    */
   private HashEntry[] m_table;
 
   /**
    * Init default values
+   * <p>
+   *  Init默认值
+   * 
    */
   static {
     m_defaultExtendedTypes = new ExtendedType[DTM.NTYPES];
@@ -117,6 +157,9 @@ public class ExpandedNameTable
 
   /**
    * Create an expanded name table.
+   * <p>
+   *  创建扩展名称表。
+   * 
    */
   public ExpandedNameTable()
   {
@@ -131,6 +174,9 @@ public class ExpandedNameTable
   /**
    *  Initialize the vector of extended types with the
    *  basic DOM node types.
+   * <p>
+   *  使用基本DOM节点类型初始化扩展类型的向量。
+   * 
    */
   private void initExtendedTypes()
   {
@@ -149,6 +195,10 @@ public class ExpandedNameTable
    * the entry will be created, and the ID will be returned.  Any additional
    * nodes that are created that have this expanded name will use this ID.
    *
+   * <p>
+   *  给定由命名空间,本地名称和节点类型表示的扩展名称,返回一个ID。如果扩展名不存在于内部表中,则将创建该条目,并返回ID。创建的具有此扩展名称的任何其他节点将使用此标识。
+   * 
+   * 
    * @param namespace The namespace
    * @param localName The local name
    * @param type The node type
@@ -170,6 +220,12 @@ public class ExpandedNameTable
    * table, otherwise the name is added to the table and the expanded name id
    * of the new entry is returned.
    *
+   * <p>
+   *  给定由命名空间,本地名称和节点类型表示的扩展名称,返回一个ID。如果扩展名不存在于内部表中,则将创建该条目,并返回ID。创建的具有此扩展名称的任何其他节点将使用此标识。
+   * <p>
+   *  如果searchOnly为true,如果在表中找不到名称,我们将返回-1,否则会将名称添加到表中,并返回新条目的扩展名称id。
+   * 
+   * 
    * @param namespace The namespace
    * @param localName The local name
    * @param type The node type
@@ -243,6 +299,9 @@ public class ExpandedNameTable
    * in order to accommodate and access its entries more efficiently.
    * This method is called when the number of keys in the hashtable exceeds
    * this hashtable's capacity and load factor.
+   * <p>
+   * 增加散列表的容量,并在内部重新组织散列表,以便更有效地容纳和访问其条目。当哈希表中的键数超过此哈希表的容量和负载系数时,将调用此方法。
+   * 
    */
   private void rehash()
   {
@@ -275,6 +334,10 @@ public class ExpandedNameTable
    * Given a type, return an expanded name ID.Any additional nodes that are
    * created that have this expanded name will use this ID.
    *
+   * <p>
+   *  给定一个类型,返回扩展名称ID。创建的具有此扩展名称的任何其他节点将使用此ID。
+   * 
+   * 
    * @return the expanded-name id of the node.
    */
   public int getExpandedTypeID(int type)
@@ -285,6 +348,10 @@ public class ExpandedNameTable
   /**
    * Given an expanded-name ID, return the local name part.
    *
+   * <p>
+   *  给定扩展名称ID,返回本地名称部分。
+   * 
+   * 
    * @param ExpandedNameID an ID that represents an expanded-name.
    * @return String Local name of this node, or null if the node has no name.
    */
@@ -296,6 +363,10 @@ public class ExpandedNameTable
   /**
    * Given an expanded-name ID, return the local name ID.
    *
+   * <p>
+   *  给定扩展名称ID,返回本地名称ID。
+   * 
+   * 
    * @param ExpandedNameID an ID that represents an expanded-name.
    * @return The id of this local name.
    */
@@ -312,6 +383,10 @@ public class ExpandedNameTable
   /**
    * Given an expanded-name ID, return the namespace URI part.
    *
+   * <p>
+   *  给定扩展名称ID,返回名称空间URI部分。
+   * 
+   * 
    * @param ExpandedNameID an ID that represents an expanded-name.
    * @return String URI value of this node's namespace, or null if no
    * namespace was resolved.
@@ -325,6 +400,10 @@ public class ExpandedNameTable
   /**
    * Given an expanded-name ID, return the namespace URI ID.
    *
+   * <p>
+   *  给定扩展名称ID,返回名称空间URI ID。
+   * 
+   * 
    * @param ExpandedNameID an ID that represents an expanded-name.
    * @return The id of this namespace.
    */
@@ -340,6 +419,10 @@ public class ExpandedNameTable
   /**
    * Given an expanded-name ID, return the local name ID.
    *
+   * <p>
+   *  给定扩展名称ID,返回本地名称ID。
+   * 
+   * 
    * @param ExpandedNameID an ID that represents an expanded-name.
    * @return The id of this local name.
    */
@@ -352,6 +435,10 @@ public class ExpandedNameTable
   /**
    * Return the size of the ExpandedNameTable
    *
+   * <p>
+   *  返回ExpandedNameTable的大小
+   * 
+   * 
    * @return The size of the ExpandedNameTable
    */
   public int getSize()
@@ -362,6 +449,10 @@ public class ExpandedNameTable
   /**
    * Return the array of extended types
    *
+   * <p>
+   *  返回扩展类型数组
+   * 
+   * 
    * @return The array of extended types
    */
   public ExtendedType[] getExtendedTypes()
@@ -373,6 +464,8 @@ public class ExpandedNameTable
    * Inner class which represents a hash table entry.
    * The field next points to the next entry which is hashed into
    * the same bucket in the case of "hash collision".
+   * <p>
+   *  表示哈希表条目的内部类。该字段接下来指向在"哈希冲突"的情况下被哈希到相同存储桶中的下一个条目。
    */
   private static final class HashEntry
   {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package org.omg.CORBA;
@@ -51,6 +55,15 @@ package org.omg.CORBA;
 *       <a href="http://cgi.omg.org/cgi-bin/doc?ptc/00-01-08">ptc/00-01-08</a>
 *       </li>
 *   </ul>
+* <p>
+*  <tt> StringValue </tt>的帮助器。
+* 有关帮助文件的详细信息,请参见<a href="doc-files/generatedfiles.html#helper">"生成的文件：帮助程序文件"</a>。
+* <P> org / omg / CORBA / StringValueHelper.java生成者IDL到Java编译器(portable),版本"3.0"from orb.idl 1999年5月31日
+* 22:27:30 GMT + 00：00。
+* 有关帮助文件的详细信息,请参见<a href="doc-files/generatedfiles.html#helper">"生成的文件：帮助程序文件"</a>。
+* 
+*  类定义已修改为符合以下OMG规范：
+* <ul>
 */
 
 public class StringValueHelper implements org.omg.CORBA.portable.BoxedValueHelper

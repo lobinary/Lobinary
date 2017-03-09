@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -127,6 +128,61 @@ import java.sql.SQLException;
  * This assertion applies in exactly the same manner when column names are used
  * rather than column indexes to indicate match columns.
  *
+ * <p>
+ *  <h3> 1.0背景</h3> <code> Joinable </code>接口提供了获取和设置匹配列的方法,这是形成SQL <code> JOIN </code>的基础,代码> RowSet </code>
+ * 对象转换为<code> JoinRowSet </code>对象。
+ * <P>
+ *  任何标准<code> RowSet </code>实现<b>可</b>实现<code> Joinable </code>接口,以便添加到<code> JoinRowSet </code>对象。
+ * 实现此接口赋予<code> RowSet </code>对象使用<code> Joinable </code>方法的能力,该方法设置,检索和获取有关匹配列的信息。
+ * 应用程序可以向<code> JoinRowSet </code>对象添加未实现<code> Joinable </code>对象的<code> RowSet </code>对象,但为此必须使用<code>
+ *  JoinRowSet.addRowSet </code>方法,同时接受<code> RowSet </code>对象和匹配列或<code> RowSet </code>对象和匹配列数组。
+ * 实现此接口赋予<code> RowSet </code>对象使用<code> Joinable </code>方法的能力,该方法设置,检索和获取有关匹配列的信息。
+ * <P>
+ *  为了访问<code> Joinable </code>接口中的方法,<code> RowSet </code>对象实现五个标准<code> RowSet </code>接口中的至少一个,代码>可加入</code>
+ * 接口。
+ * 此外,大多数<code> RowSet </code>对象扩展了<code> BaseRowSet </code>类。例如：。
+ * <pre>
+ * class MyRowSetImpl extends BaseRowSet implements CachedRowSet,Joinable {：：}
+ * </pre>
+ * 
+ *  <h3> 2.0使用指南</h3>
+ * <P>
+ *  <code> Joinable </code>接口中的方法允许<code> RowSet </code>对象设置匹配列,检索匹配列或取消设置匹配列,该列是SQL <代码> JOIN </code>可以
+ * 基于。
+ * 可以将实现这些方法的类的实例添加到<code> JoinRowSet </code>对象中,以允许建立SQL <code> JOIN </code>关系。
+ * 
+ * <pre>
+ *  CachedRowSet crs = new MyRowSetImpl(); crs.populate((ResultSet)rs); (Joinable)crs.setMatchColumnInde
+ * x(1);。
+ * 
+ *  JoinRowSet jrs = new JoinRowSetImpl(); jrs.addRowSet(crs);
+ * </pre>
+ *  在前面的示例中,<i> crs </i>是实现了<code> Joinable </code>接口的<code> CachedRowSet </code>对象。
+ * 在下面的示例中,<i> crs2 </i>没有,因此必须提供匹配列作为<code> addRowSet </code>方法的参数。此示例假设第1列是匹配列。
+ * <PRE>
+ *  CachedRowSet crs2 = new MyRowSetImpl(); crs2.populate((ResultSet)rs);
+ * 
+ *  JoinRowSet jrs2 = new JoinRowSetImpl(); jrs2.addRowSet(crs2,1);
+ * </PRE>
+ * <p>
+ * <code> JoinRowSet </code>接口可以从一个或多个合并到一个表中的<Code> RowSet </code>对象中获取数据,而不必承担创建与数据库的连接的费用。
+ * 因此,它非常适合于由断开的<code> RowSet </code>对象使用。然而,任何<code> RowSet </code>对象<b>可以</b>实现这个接口,而不管它是连接还是断开连接。
+ * 注意,始终连接到其数据源的<code> JdbcRowSet </code>对象可以直接成为SQL <code> JOIN </code>的一部分,而不必成为<code> JoinRowSet </code >
+ * 对象。
+ * 因此,它非常适合于由断开的<code> RowSet </code>对象使用。然而,任何<code> RowSet </code>对象<b>可以</b>实现这个接口,而不管它是连接还是断开连接。
+ * 
+ *  <h3> 3.0管理多个匹配列</h3>传递到<code> setMatchColumn </code>方法中的索引数组表示除了要使用哪些列之外,还要设置多少匹配列(数组的长度)为比赛。例如：
+ * <pre>
+ *  int [] i = {1,2,4,7}; //表示四个匹配列,索引1,2,4,7参与了JOIN。 Joinable.setMatchColumn(i);
+ * </pre>
+ *  后续匹配列可以如下添加到不同的<code> Joinable </code>对象(实现<code> Joinable </code>接口的<code> RowSet </code>对象)。
+ * <pre>
+ *  int [] w = {3,2,5,3}; Joinable2.setMatchColumn(w);
+ * </pre>
+ * 当应用程序向<code> JoinRowSet </code>对象添加两个或多个<code> RowSet </code>对象时,数组中索引的顺序尤为重要。
+ * 数组的每个索引直接映射到先前添加的<code> RowSet </code>对象的相应索引。
+ * 如果发生重叠或重叠,则在添加额外的<code>可加入</code>行集合并且需要与匹配列数据相关的情况下维持匹配列数据。
+ * 
  * @see JoinRowSet
  * @author  Jonathan Bruce
  */
@@ -144,6 +200,12 @@ public interface Joinable {
      * should ensure that the constraints on the key columns are maintained when
      * a <code>CachedRowSet</code> object sets a primary key column as a match column.
      *
+     * <p>
+     * 因此,应用程序可以按任何顺序设置多个匹配列,但此顺序对<code> SQL </code> JOIN的结果有直接影响。
+     * <p>
+     *  当使用列名而不是列索引来指示匹配列时,此断言以完全相同的方式应用。
+     * 
+     * 
      * @param columnIdx an <code>int</code> identifying the index of the column to be
      *        set as the match column
      * @throws SQLException if an invalid column index is set
@@ -158,6 +220,16 @@ public interface Joinable {
      * object. A <code>JoinRowSet</code> object can now add this <code>RowSet</code>
      * object based on the match column.
      *
+     * <p>
+     *  将指定的列设置为<code> RowSet </code>对象的匹配列。
+     *  <code> JoinRowSet </code>对象现在可以基于匹配列添加此<code> RowSet </code>对象。
+     * <p>
+     *  子接口,如<code> CachedRowSet </code>&trade; interface定义方法<code> CachedRowSet.setKeyColumns </code>,它允许在特
+     * 定列上强制实施主键语义。
+     *  <code> setMatchColumn(int columnIdx)</code>方法的实现应确保在<code> CachedRowSet </code>对象将主键列设置为匹配列时,维护键列的约束
+     * 。
+     * 
+     * 
      * @param columnIdxes an array of <code>int</code> identifying the indexes of the
      *      columns to be set as the match columns
      * @throws SQLException if an invalid column index is set
@@ -178,6 +250,10 @@ public interface Joinable {
      * should ensure that the constraints on the key columns are maintained when
      * a <code>CachedRowSet</code> object sets a primary key column as a match column.
      *
+     * <p>
+     * 将指定的列设置为<code> RowSet </code>对象的匹配列。 <code> JoinRowSet </code>对象现在可以基于匹配列添加此<code> RowSet </code>对象。
+     * 
+     * 
      * @param columnName a <code>String</code> object giving the name of the column
      *      to be set as the match column
      * @throws SQLException if an invalid column name is set, the column name
@@ -192,6 +268,16 @@ public interface Joinable {
      * object. A <code>JoinRowSet</code> object can now add this <code>RowSet</code>
      * object based on the match column.
      *
+     * <p>
+     *  将指定的列设置为<code> RowSet </code>对象的匹配列。
+     *  <code> JoinRowSet </code>对象现在可以基于匹配列添加此<code> RowSet </code>对象。
+     * <p>
+     *  诸如<code> CachedRowSet </code>接口的子接口定义方法<code> CachedRowSet.setKeyColumns </code>,允许在特定列上强制实施主键语义。
+     *  <code> setMatchColumn(String columnIdx)</code>方法的实现应确保在<code> CachedRowSet </code>对象将主键列设置为匹配列时,维护键列
+     * 上的约束。
+     *  诸如<code> CachedRowSet </code>接口的子接口定义方法<code> CachedRowSet.setKeyColumns </code>,允许在特定列上强制实施主键语义。
+     * 
+     * 
      * @param columnNames an array of <code>String</code> objects giving the names
      *     of the column to be set as the match columns
      * @throws SQLException if an invalid column name is set, the column name
@@ -206,6 +292,11 @@ public interface Joinable {
      * <code>RowSet</code> object with the method
      * <code>setMatchColumn(int[] columnIdxes)</code>.
      *
+     * <p>
+     *  将指定的列设置为<code> RowSet </code>对象的匹配列。
+     *  <code> JoinRowSet </code>对象现在可以基于匹配列添加此<code> RowSet </code>对象。
+     * 
+     * 
      * @return an <code>int</code> array identifying the indexes of the columns
      *         that were set as the match columns for this <code>RowSet</code> object
      * @throws SQLException if no match column has been set
@@ -219,6 +310,10 @@ public interface Joinable {
      * <code>RowSet</code> object with the method
      * <code>setMatchColumn(String [] columnNames)</code>.
      *
+     * <p>
+     *  使用方法<code> setMatchColumn(int [] columnIdxes)</code>检索为此<code> RowSet </code>对象设置的匹配列的索引。
+     * 
+     * 
      * @return an array of <code>String</code> objects giving the names of the columns
      *         set as the match columns for this <code>RowSet</code> object
      * @throws SQLException if no match column has been set
@@ -237,6 +332,10 @@ public interface Joinable {
      * method <code>CachedRowSet.unsetKeyColumns</code> has been called on the
      * designated column.
      *
+     * <p>
+     *  使用方法<code> setMatchColumn(String [] columnNames)</code>检索为此<code> RowSet </code>对象设置的匹配列的名称。
+     * 
+     * 
      * @param columnIdx an <code>int</code> that identifies the index of the column
      *          that is to be unset as a match column
      * @throws SQLException if an invalid column index is designated or if
@@ -250,6 +349,13 @@ public interface Joinable {
      * Unsets the designated columns as the match column for this <code>RowSet</code>
      * object.
      *
+     * <p>
+     *  将指定的列取消设置为<code> RowSet </code>对象的匹配列。
+     * <P>
+     * 实现<code> Joinable </code>接口的<code> RowSet </code>对象必须确保一个类似键的约束继续执行,直到方法<code> CachedRowSet.unsetKeyC
+     * olumns </code>指定列。
+     * 
+     * 
      * @param columnIdxes an array of <code>int</code> that identifies the indexes
      *     of the columns that are to be unset as match columns
      * @throws SQLException if an invalid column index is designated or if
@@ -268,6 +374,10 @@ public interface Joinable {
      * method <code>CachedRowSet.unsetKeyColumns</code> has been called on the
      * designated column.
      *
+     * <p>
+     *  将指定的列取消设置为<code> RowSet </code>对象的匹配列。
+     * 
+     * 
      * @param columnName a <code>String</code> object giving the name of the column
      *          that is to be unset as a match column
      * @throws SQLException if an invalid column name is designated or
@@ -281,6 +391,12 @@ public interface Joinable {
      * Unsets the designated columns as the match columns for this <code>RowSet</code>
      * object.
      *
+     * <p>
+     *  将指定的列取消设置为<code> RowSet </code>对象的匹配列。
+     * <P>
+     *  实现<code> Joinable </code>接口的<code> RowSet </code>对象必须确保一个类似键的约束继续执行,直到方法<code> CachedRowSet.unsetKey
+     * Columns </code>指定列。
+     * 
      * @param columnName an array of <code>String</code> objects giving the names of
      *     the columns that are to be unset as the match columns
      * @throws SQLException if an invalid column name is designated or the

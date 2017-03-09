@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -128,6 +129,56 @@ import java.io.PrintStream;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  布局管理器允许垂直或水平布置多个组件。组件不会缠绕,例如,当框架调整大小时,组件的垂直布置将保持垂直布置。
+ * <TABLE STYLE="FLOAT:RIGHT" BORDER="0" SUMMARY="layout">
+ * <TR>
+ * <TD ALIGN="CENTER">
+ *  <P STYLE ="TEXT-ALIGN：CENTER"> <IMG SRC ="doc-files / BoxLayout-1.gif"alt ="以下文本描述此图形。
+ * WIDTH="191" HEIGHT="201" STYLE="FLOAT:BOTTOM; BORDER:0">
+ * </TD>
+ * </TR>
+ * </TABLE>
+ * <p>
+ *  使用水平和垂直的不同组合嵌套多个面板会产生类似于GridBagLayout的效果,没有复杂性。该图示出了水平布置的两个面板,每个面板包含垂直布置的3个部件。
+ * 
+ *  <p> BoxLayout管理器由一个轴参数构成,该参数指定将要执行的布局类型。有四个选择：
+ * 
+ *  <blockquote> <b> <tt> X_AXIS </tt> </b>  - 组件从左到右水平布局。</blockquote>
+ * 
+ *  <blockquote> <b> <tt> Y_AXIS </tt> </b>  - 组件从顶部到底部垂直布局。</blockquote>
+ * 
+ * <blockquote> <b> <tt> LINE_AXIS </tt> </b>  - 组件是根据容器的<tt> ComponentOrientation </tt>属性,将单词排列成一行的。
+ * 如果容器的<tt> ComponentOrientation </tt>是水平的,那么组件是水平布局的,否则它们是垂直布局的。
+ * 对于水平方向,如果容器的<tt> ComponentOrientation </tt>是从左到右,则组件从左到右排列,否则它们从右到左排列。对于垂直方向,组件始终从上到下排列。
+ * </blockquote>。
+ * 
+ *  <blockquote> <b> <tt> PAGE_AXIS </tt> </b>  - 组件是根据容器的<tt> ComponentOrientation </tt>属性以文本行布局在页面上的方式
+ * 布局的。
+ * 如果容器的<tt> ComponentOrientation </tt>是水平的,那么组件是垂直布局的,否则它们是水平布局的。
+ * 对于水平方向,如果容器的<tt> ComponentOrientation </tt>是从左到右,则组件从左到右排列,否则它们从右到左排列。对于垂直方向,组件始终从上到下排列。
+ * </blockquote>。
+ * <p>
+ *  对于所有方向,组件以与添加到容器中的顺序相同的顺序排列。
+ * <p>
+ * BoxLayout尝试按其首选宽度(对于水平布局)或高度(对于垂直布局)排列组件。对于水平布局,如果并非所有组件都具有相同的高度,BoxLayout会尝试使所有组件与最高组件一样高。
+ * 如果对于特定组件不可能,BoxLayout将根据组件的Y对齐将组件垂直对齐。默认情况下,组件的Y对齐为0.5,这意味着组件的垂直中心应具有与其他具有0.5 Y对齐的组件的垂直中心相同的Y坐标。
+ * <p>
+ *  类似地,对于垂直布局,BoxLayout会尝试使列中的所有组件与最宽组件一样宽。如果失败,它们将根据它们的X对齐水平对齐它们。
+ * 对于<code> PAGE_AXIS </code>布局,水平对齐是基于组件的前沿完成的。
+ * 换句话说,如果容器的<code> ComponentOrientation </code>从左到右,则X对齐值0.0表示组件的左边缘,否则表示组件的右边缘。
+ * <p>
+ *  而不是直接使用BoxLayout,许多程序使用Box类。 Box类是一个使用BoxLayout的轻量级容器。它还提供了方便的方法,以帮助您使用BoxLayout很好。
+ * 将组件添加到多个嵌套的框是一个强大的方式来获得你想要的安排。
+ * <p>
+ * 有关详细信息和示例,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/box.html">如何使用BoxLayout 
+ * </a>,<em>中的一节。
+ *  Java Tutorial。</em>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see Box
  * @see java.awt.ComponentOrientation
  * @see JComponent#getAlignmentX
@@ -140,11 +191,17 @@ public class BoxLayout implements LayoutManager2, Serializable {
 
     /**
      * Specifies that components should be laid out left to right.
+     * <p>
+     *  指定组件应从左到右布局。
+     * 
      */
     public static final int X_AXIS = 0;
 
     /**
      * Specifies that components should be laid out top to bottom.
+     * <p>
+     *  指定组件应从上到下排列。
+     * 
      */
     public static final int Y_AXIS = 1;
 
@@ -152,6 +209,9 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * Specifies that components should be laid out in the direction of
      * a line of text as determined by the target container's
      * <code>ComponentOrientation</code> property.
+     * <p>
+     *  指定组件应按照目标容器的<code> ComponentOrientation </code>属性确定的文本行的方向布局。
+     * 
      */
     public static final int LINE_AXIS = 2;
 
@@ -159,6 +219,9 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * Specifies that components should be laid out in the direction that
      * lines flow across a page as determined by the target container's
      * <code>ComponentOrientation</code> property.
+     * <p>
+     *  指定组件应该按照目标容器的<code> ComponentOrientation </code>属性确定的在页面上流动的方向布局。
+     * 
      */
     public static final int PAGE_AXIS = 3;
 
@@ -166,6 +229,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * Creates a layout manager that will lay out components along the
      * given axis.
      *
+     * <p>
+     *  创建将沿给定轴布置组件的布局管理器。
+     * 
+     * 
      * @param target  the container that needs to be laid out
      * @param axis  the axis to lay out components along. Can be one of:
      *              <code>BoxLayout.X_AXIS</code>,
@@ -189,6 +256,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * Constructs a BoxLayout that
      * produces debugging messages.
      *
+     * <p>
+     *  构造一个生成调试消息的BoxLayout。
+     * 
+     * 
      * @param target  the container that needs to be laid out
      * @param axis  the axis to lay out components along. Can be one of:
      *              <code>BoxLayout.X_AXIS</code>,
@@ -207,6 +278,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
     /**
      * Returns the container that uses this layout manager.
      *
+     * <p>
+     *  返回使用此布局管理器的容器。
+     * 
+     * 
      * @return the container that uses this layout manager
      *
      * @since 1.6
@@ -223,6 +298,13 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * <code>BoxLayout.LINE_AXIS</code> or
      * <code>BoxLayout.PAGE_AXIS</code>
      *
+     * <p>
+     *  返回用于布置组件的轴。
+     * 返回下列之一：<code> BoxLayout.X_AXIS </code>,<code> BoxLayout.Y_AXIS </code>,<code> BoxLayout.LINE_AXIS </code>
+     * 或<code> BoxLayout.PAGE_AXIS </code>。
+     *  返回用于布置组件的轴。
+     * 
+     * 
      * @return the axis that was used to lay out components
      *
      * @since 1.6
@@ -240,6 +322,12 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * asynchronously to the event thread, this method may be called
      * asynchronously.
      *
+     * <p>
+     * 表示子项已更改其布局相关信息,因此应刷新任何缓存的计算。
+     * <p>
+     *  当在Container上调用invalidate方法时,此方法由AWT调用。由于invalidate方法可以异步地调用到事件线程,因此可以异步调用此方法。
+     * 
+     * 
      * @param target  the affected container
      *
      * @exception AWTError  if the target isn't the container specified to the
@@ -256,6 +344,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
     /**
      * Not used by this class.
      *
+     * <p>
+     *  不被这个类使用。
+     * 
+     * 
      * @param name the name of the component
      * @param comp the component
      */
@@ -266,6 +358,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
     /**
      * Not used by this class.
      *
+     * <p>
+     *  不被这个类使用。
+     * 
+     * 
      * @param comp the component
      */
     public void removeLayoutComponent(Component comp) {
@@ -275,6 +371,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
     /**
      * Not used by this class.
      *
+     * <p>
+     *  不被这个类使用。
+     * 
+     * 
      * @param comp the component
      * @param constraints constraints
      */
@@ -286,6 +386,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * Returns the preferred dimensions for this layout, given the components
      * in the specified target container.
      *
+     * <p>
+     *  返回此布局的首选维度,给定指定目标容器中的组件。
+     * 
+     * 
      * @param target  the container that needs to be laid out
      * @return the dimensions &gt;= 0 &amp;&amp; &lt;= Integer.MAX_VALUE
      * @exception AWTError  if the target isn't the container specified to the
@@ -312,6 +416,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * Returns the minimum dimensions needed to lay out the components
      * contained in the specified target container.
      *
+     * <p>
+     *  返回布局包含在指定目标容器中的组件所需的最小维度。
+     * 
+     * 
      * @param target  the container that needs to be laid out
      * @return the dimensions &gt;= 0 &amp;&amp; &lt;= Integer.MAX_VALUE
      * @exception AWTError  if the target isn't the container specified to the
@@ -337,6 +445,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * Returns the maximum dimensions the target container can use
      * to lay out the components it contains.
      *
+     * <p>
+     *  返回目标容器可用于布局其包含的组件的最大尺寸。
+     * 
+     * 
      * @param target  the container that needs to be laid out
      * @return the dimensions &gt;= 0 &amp;&amp; &lt;= Integer.MAX_VALUE
      * @exception AWTError  if the target isn't the container specified to the
@@ -364,6 +476,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * alignment will be returned. Otherwise, the alignment needed
      * to place the children along the X axis will be returned.
      *
+     * <p>
+     *  返回容器沿X轴的对齐方式。如果框是水平的,将返回默认对齐方式。否则,将返回沿X轴放置孩子所需的对齐。
+     * 
+     * 
      * @param target  the container
      * @return the alignment &gt;= 0.0f &amp;&amp; &lt;= 1.0f
      * @exception AWTError  if the target isn't the container specified to the
@@ -381,6 +497,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * alignment will be returned. Otherwise, the alignment needed
      * to place the children along the Y axis will be returned.
      *
+     * <p>
+     *  返回容器沿Y轴的对齐方式。如果框是垂直的,将返回默认对齐方式。否则,将返回沿Y轴放置孩子所需的对齐。
+     * 
+     * 
      * @param target  the container
      * @return the alignment &gt;= 0.0f &amp;&amp; &lt;= 1.0f
      * @exception AWTError  if the target isn't the container specified to the
@@ -396,6 +516,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * Called by the AWT <!-- XXX CHECK! --> when the specified container
      * needs to be laid out.
      *
+     * <p>
+     *  由AWT召唤<！ -  XXX CHECK！ - >当指定的容器需要布局时。
+     * 
+     * 
      * @param target  the container to lay out
      *
      * @exception AWTError  if the target isn't the container specified to the
@@ -510,6 +634,10 @@ public class BoxLayout implements LayoutManager2, Serializable {
      * to their absolute couterpart given the target's ComponentOrientation
      * value.  The absolute axes, X_AXIS and Y_AXIS are returned unmodified.
      *
+     * <p>
+     * 给定4个轴值中的一个,将其解析为绝对轴。相对轴值PAGE_AXIS和LINE_AXIS被转换为给定目标的ComponentOrientation值的绝对couterpart。
+     * 绝对轴X_AXIS和Y_AXIS未修改地返回。
+     * 
      * @param axis the axis to resolve
      * @param o the ComponentOrientation to resolve against
      * @return the resolved axis

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,11 +34,16 @@ import org.w3c.dom.Node;
 /**
  * Class which adds utility DOM element attribute access methods to
  * <code>IIOMetadata</code> for subclass use.
+ * <p>
+ *  为子类使用向<code> IIOMetadata </code>添加实用程序DOM元素属性访问方法的类。
+ * 
  */
 abstract class GIFMetadata extends IIOMetadata {
 
     /**
      * Represents an undefined value of integer attributes.
+     * <p>
+     *  表示整数属性的未定义值。
      */
     static final int UNDEFINED_INTEGER_VALUE = -1;
 

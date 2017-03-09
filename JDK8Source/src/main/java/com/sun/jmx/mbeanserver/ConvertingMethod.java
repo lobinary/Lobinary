@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,9 @@ final class ConvertingMethod {
      * Java types, so they must be "reconstructible".  The return
      * value will be converted to an Open Type, so if it is convertible
      * at all there is no further check needed.
+     * <p>
+     *  打开类型到Java类型,例如当我们从MXBean包装器到底层资源时。参数将被转换为Java类型,因此它们必须是"可重构的"。返回值将被转换为打开类型,因此如果它是可转换的,则不需要进一步检查。
+     * 
      */
     void checkCallFromOpen() {
         try {
@@ -102,6 +106,9 @@ final class ConvertingMethod {
      * must be "reconstructible".  The parameters will be converted to
      * open types, so if it is convertible at all there is no further
      * check needed.
+     * <p>
+     *  Java类型来打开类型,例如当我们从MXBean代理转到要映射到的打开类型时。返回类型将被转换回Java类型,因此它必须是"可重构的"。
+     * 参数将被转换为打开类型,因此如果它是可转换的,则不需要进一步检查。
      */
     void checkCallToOpen() {
         try {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,13 @@ import javax.accessibility.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  标准颜色样本选择器。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Steve Wilson
  */
 class DefaultSwatchChooserPanel extends AbstractColorChooserPanel {
@@ -83,6 +91,15 @@ class DefaultSwatchChooserPanel extends AbstractColorChooserPanel {
      * The lookup for the default is done through the <code>UIManager</code>:
      * <code>UIManager.get("ColorChooser.swatchesMnemonic");</code>.
      *
+     * <p>
+     *  提供了对可以用作访问面板的助记符的<code> KeyEvent.VK </code>常量的外观和感觉的提示。返回值<= 0表示没有助记符。
+     * <p>
+     *  这里的返回值是一个提示,它最终取决于外观和感觉,以一些有意义的方式来兑现返回值。
+     * <p>
+     *  这个实现从默认的<code> ColorChooser.swatchesMememonic </code>查找值,或者如果它不可用(或不是<code> Integer </code>)返回-1。
+     * 通过<code> UIManager </code>：<code> UIManager.get("ColorChooser.swatchesMememon"); </code>可以查找默认值。
+     * 
+     * 
      * @return KeyEvent.VK constant identifying the mnemonic; <= 0 for no
      *         mnemonic
      * @see #getDisplayedMnemonicIndex
@@ -111,6 +128,16 @@ class DefaultSwatchChooserPanel extends AbstractColorChooserPanel {
      * The lookup for the default is done through the <code>UIManager</code>:
      * <code>UIManager.get("ColorChooser.swatchesDisplayedMnemonicIndex");</code>.
      *
+     * <p>
+     *  提供对<code> getDisplayName </code>中应该被视觉识别为助记符的字符的索引的外观和感觉的提示。
+     * 只有在<code> getMnemonic </code>返回值> 0时,外观和感觉才能使用。
+     * <p>
+     * 这里的返回值是一个提示,它最终取决于外观和感觉,以一些有意义的方式来兑现返回值。
+     * 例如,外观可能希望在<code> JTabbedPane </code>中呈现每个<code> AbstractColorChooserPanel </code>,并进一步使用此返回值来强调<code>
+     *  getDisplayName </code >。
+     * 这里的返回值是一个提示,它最终取决于外观和感觉,以一些有意义的方式来兑现返回值。
+     * <p>
+     * 
      * @return Character index to render mnemonic for; -1 to provide no
      *                   visual identifier for this panel.
      * @see #getMnemonic
@@ -131,6 +158,11 @@ class DefaultSwatchChooserPanel extends AbstractColorChooserPanel {
     /**
      * The background color, foreground color, and font are already set to the
      * defaults from the defaults table before this method is called.
+     * <p>
+     *  此实现查找默认<code> ColorChooser.rgbDisplayedMnemonicIndex </code>中的值,或者如果它不可用(或不是<code> Integer </code>),
+     * 则返回-1。
+     * 查找默认值是通过<code> UIManager </code>：<code> UIManager.get("ColorChooser.swatchesDisplayedMnemonicIndex");
+     *  </code>。
      */
     public void installChooserPanel(JColorChooser enclosingChooser) {
         super.installChooserPanel(enclosingChooser);

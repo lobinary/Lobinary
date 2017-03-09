@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,20 @@ import java.security.BasicPermission;
  * </tr>
  * </table>
  *
+ * <p>
+ *  用于链接创建操作的{@code Permission}类。
+ * 
+ *  <p>下表提供了权限允许的摘要说明,并讨论了授予代码权限的风险。
+ * 
+ *  <table border = 1 cellpadding = 5
+ * summary="Table shows permission target name, what the permission allows, and associated risks">
+ * <tr>
+ *  <th>权限目标名称</th> <th>权限允许</th> <th>允许此权限的风险</th>
+ * </tr>
+ * <tr>
+ *  <td> hard </td> <td>可以将现有文件添加到目录。这有时被称为创建链接或硬链接。 </td> <td>在授予此权限时应格外小心。
+ * 它允许链接到文件系统中的任何文件或目录,从而允许攻击者访问所有文件。 </td>。
+ * 
  * @since 1.7
  *
  * @see Files#createLink
@@ -74,6 +89,14 @@ public final class LinkPermission extends BasicPermission {
     /**
      * Constructs a {@code LinkPermission} with the specified name.
      *
+     * <p>
+     * </tr>
+     * <tr>
+     *  <td>符号</td> <td>能够创建符号链接。 </td> <td>在授予此权限时应格外小心。它允许链接到文件系统中的任何文件或目录,从而允许攻击者访问所有文件。 </td>
+     * </tr>
+     * </table>
+     * 
+     * 
      * @param   name
      *          the name of the permission. It must be "hard" or "symbolic".
      *
@@ -88,6 +111,8 @@ public final class LinkPermission extends BasicPermission {
     /**
      * Constructs a {@code LinkPermission} with the specified name.
      *
+     * <p>
+     * 
      * @param   name
      *          the name of the permission; must be "hard" or "symbolic".
      * @param   actions

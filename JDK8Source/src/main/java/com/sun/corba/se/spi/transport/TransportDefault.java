@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,8 @@ import com.sun.corba.se.impl.transport.ReadTCPTimeoutsImpl;
 
 /** This class provices standard building blocks for the ORB, as do all Default classes
  * in the various packages.
+ * <p>
+ *  在各种包装。
  */
 public abstract class TransportDefault {
     private TransportDefault() {}

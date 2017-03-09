@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,9 @@ import com.sun.corba.se.pept.encoding.OutputObject;
 
 /**
  * Collect buffer manager.
+ * <p>
+ *  收集缓冲区管理器。
+ * 
  */
 public class BufferManagerWriteCollect extends BufferManagerWrite
 {
@@ -68,6 +72,9 @@ public class BufferManagerWriteCollect extends BufferManagerWrite
     /**
      * Returns the correct buffer size for this type of
      * buffer manager as set in the ORB.
+     * <p>
+     *  返回在ORB中设置的此类型缓冲区管理器的正确缓冲区大小。
+     * 
      */
     public int getBufferSize() {
         return orb.getORBData().getGIOPFragmentSize();
@@ -168,6 +175,9 @@ public class BufferManagerWriteCollect extends BufferManagerWrite
      *
      * For a BufferManagerWriteGrow any queued ByteBufferWithInfo must
      * have its ByteBuffer released to the ByteBufferPool.
+     * <p>
+     *  关闭BufferManagerWrite  - 做任何未完成的清理。
+     * 
      */
     public void close()
     {

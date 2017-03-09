@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ToTextStream.java,v 1.2.4.1 2005/09/21 10:35:34 pvedula Exp $
+ * <p>
+ *  $ Id：ToTextStream.java,v 1.2.4.1 2005/09/21 10:35:34 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -35,6 +48,9 @@ import org.xml.sax.SAXException;
  * This class converts SAX or SAX-like calls to a
  * serialized document for xsl:output method of "text".
  * @xsl.usage internal
+ * <p>
+ *  此类不是公共API。它只是公共的,因为它用于其他包。此类将SAX或类SAX调用转换为"text"的xsl：output方法的序列化文档。 @ xsl.usage internal
+ * 
  */
 public final class ToTextStream extends ToStream
 {
@@ -42,6 +58,9 @@ public final class ToTextStream extends ToStream
 
   /**
    * Default constructor.
+   * <p>
+   *  默认构造函数。
+   * 
    */
   public ToTextStream()
   {
@@ -57,6 +76,12 @@ public final class ToTextStream extends ToStream
    * other methods in this interface or in DTDHandler (except for
    * setDocumentLocator).</p>
    *
+   * <p>
+   *  接收文档开头的通知。
+   * 
+   *  <p> SAX解析器只会在此接口或DTDHandler中的任何其他方法(setDocumentLocator除外)之前调用此方法一次。</p>
+   * 
+   * 
    * @throws org.xml.sax.SAXException Any SAX exception, possibly
    *            wrapping another exception.
    *
@@ -80,6 +105,12 @@ public final class ToTextStream extends ToStream
    * (because of an unrecoverable error) or reached the end of
    * input.</p>
    *
+   * <p>
+   *  接收文档结束的通知。
+   * 
+   * <p> SAX解析器将仅调用此方法一次,它将是解析期间调用的最后一个方法。解析器不应该调用此方法,直到它放弃了解析(因为一个不可恢复的错误)或到达输入的结束。</p>
+   * 
+   * 
    * @throws org.xml.sax.SAXException Any SAX exception, possibly
    *            wrapping another exception.
    *
@@ -109,6 +140,15 @@ public final class ToTextStream extends ToStream
    * defaulted): #IMPLIED attributes will be omitted.</p>
    *
    *
+   * <p>
+   *  接收元素开头的通知。
+   * 
+   *  <p>解析器将在XML文档中的每个元素的开头调用此方法;每个startElement()事件都会有一个相应的endElement()事件(即使元素为空)。
+   * 将在相应的endElement()事件之前按顺序报告所有元素的内容。</p>。
+   * 
+   *  <p>如果元素名称有命名空间前缀,则前缀仍将被附加。请注意,提供的属性列表将仅包含具有显式值(指定或默认值)的属性：#IMPLIED属性将被省略。</p>
+   * 
+   * 
    * @param namespaceURI The Namespace URI, or the empty string if the
    *        element has no Namespace URI or if Namespace
    *        processing is not being performed.
@@ -149,6 +189,14 @@ public final class ToTextStream extends ToStream
    * still be attached to the name.</p>
    *
    *
+   * <p>
+   *  接收元素结束的通知。
+   * 
+   *  <p> SAX解析器将在XML文档中每个元素的末尾调用此方法;每个endElement()事件都会有一个相应的startElement()事件(即使元素为空)。</p>
+   * 
+   *  <p>如果元素名称有名称空间前缀,则前缀仍会附加到名称。</p>
+   * 
+   * 
    * @param namespaceURI The Namespace URI, or the empty string if the
    *        element has no Namespace URI or if Namespace
    *        processing is not being performed.
@@ -186,6 +234,17 @@ public final class ToTextStream extends ToStream
    * ignorableWhitespace() method rather than this one (validating
    * parsers must do so).</p>
    *
+   * <p>
+   *  接收字符数据的通知。
+   * 
+   * <p>解析器将调用此方法来报告每个字符数据块。
+   *  SAX解析器可以返回单个块中的所有连续字符数据,或者它们可以将其拆分成几个块;然而,任何单个事件中的所有字符必须来自同一外部实体,以便定位器提供有用的信息。</p>。
+   * 
+   *  <p>应用程序不得尝试从指定范围之外的数组读取。</p>
+   * 
+   *  <p>请注意,一些解析器将使用ignorableWhitespace()方法而不是这一个(验证解析器必须这样做)报告空格。</p>
+   * 
+   * 
    * @param ch The characters from the XML document.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -213,6 +272,11 @@ public final class ToTextStream extends ToStream
              * evaluate attribute value templates (for example),
              * and the result of evaluating such a thing
              * is fed into a final serializer later on.
+             * <p>
+             *  创建临时输出,此序列化器生成的输出将稍后输入到最终的串行器,并且它将在最终输出状态(不是临时输出状态)中进行处理。
+             * 
+             *  "临时"ToTextStream序列化程序用于评估属性值模板(例如),并且评估这样的事情的结果随后被馈送到最终的串行器。
+             * 
              */
             m_writer.write(ch, start, length);
         }
@@ -234,6 +298,10 @@ public final class ToTextStream extends ToStream
    * If available, when the disable-output-escaping attribute is used,
    * output raw text without escaping.
    *
+   * <p>
+   *  如果可用,当使用disable-output-escaping属性时,输出原始文本而不转义。
+   * 
+   * 
    * @param ch The characters from the XML document.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -260,6 +328,10 @@ public final class ToTextStream extends ToStream
      * SerializerToXML#writeNormalizedChars because it does not attempt to do
      * XML escaping at all.
      *
+     * <p>
+     *  规范化字符,但不逃逸。与SerializerToXML#writeNormalizedChars不同,因为它根本不尝试执行XML转义。
+     * 
+     * 
      * @param ch The characters from the XML document.
      * @param start The start position in the array.
      * @param length The number of characters to read from the array.
@@ -320,6 +392,9 @@ public final class ToTextStream extends ToStream
                 if (encoding != null) {
                     /* The output encoding is known,
                      * so somthing is wrong.
+                     * <p>
+                     *  所以一切都是错误的。
+                     * 
                      */
 
                     // not in the encoding, so write out a character reference
@@ -342,6 +417,9 @@ public final class ToTextStream extends ToStream
                 } else {
                     /* The output encoding is not known,
                      * so just write it out as-is.
+                     * <p>
+                     *  所以只是写出来。
+                     * 
                      */
                     writer.write(c);
                 }
@@ -368,6 +446,17 @@ public final class ToTextStream extends ToStream
    * ignorableWhitespace() method rather than this one (validating
    * parsers must do so).</p>
    *
+   * <p>
+   *  接收cdata的通知。
+   * 
+   * <p>解析器将调用此方法来报告每个字符数据块。
+   *  SAX解析器可以返回单个块中的所有连续字符数据,或者它们可以将其拆分成几个块;然而,任何单个事件中的所有字符必须来自同一外部实体,以便定位器提供有用的信息。</p>。
+   * 
+   *  <p>应用程序不得尝试从指定范围之外的数组读取。</p>
+   * 
+   *  <p>请注意,一些解析器将使用ignorableWhitespace()方法而不是这一个(验证解析器必须这样做)报告空格。</p>
+   * 
+   * 
    * @param ch The characters from the XML document.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -408,6 +497,16 @@ public final class ToTextStream extends ToStream
    * <p>The application must not attempt to read from the array
    * outside of the specified range.</p>
    *
+   * <p>
+   *  在元素内容中接收可忽略的空格的通知。
+   * 
+   *  <p>验证Parsers必须使用此方法来报告每个可忽略的空格(请参阅W3C XML 1.0建议,第2.10节)：如果非验证解析器能够解析和使用内容模型,那么它们也可以使用此方法。 p>
+   * 
+   *  <p> SAX解析器可以返回单个块中的所有连续空格,或者它们可以将其拆分成几个块;然而,任何单个事件中的所有字符必须来自同一外部实体,以便定位器提供有用的信息。</p>
+   * 
+   *  <p>应用程序不得尝试从指定范围之外的数组读取。</p>
+   * 
+   * 
    * @param ch The characters from the XML document.
    * @param start The start position in the array.
    * @param length The number of characters to read from the array.
@@ -442,6 +541,14 @@ public final class ToTextStream extends ToStream
    * section 2.8) or a text declaration (XML 1.0, section 4.3.1)
    * using this method.</p>
    *
+   * <p>
+   *  接收处理指令的通知。
+   * 
+   *  <p>对于找到的每个处理指令,解析器将调用此方法一次：请注意,处理指令可能发生在主文档元素之前或之后。</p>
+   * 
+   * <p> SAX解析器不应使用此方法报告XML声明(XML 1.0,第2.8节)或文本声明(XML 1.0,第4.3.1节)。</p>
+   * 
+   * 
    * @param target The processing instruction target.
    * @param data The processing instruction data, or null if
    *        none was supplied.
@@ -465,6 +572,10 @@ public final class ToTextStream extends ToStream
    * Note that Xalan will normally invoke the other version of this method.
    * %REVIEW% In fact, is this one ever needed, or was it a mistake?
    *
+   * <p>
+   *  在构建评论时调用。请注意,Xalan通常会调用此方法的其他版本。 ％REVIEW％事实上,这是一个需要,还是它是一个错误?
+   * 
+   * 
    * @param   data  The comment data.
    * @throws org.xml.sax.SAXException Any SAX exception, possibly
    *            wrapping another exception.
@@ -487,6 +598,12 @@ public final class ToTextStream extends ToStream
    * document element, including comments in the external DTD
    * subset (if read).
    *
+   * <p>
+   *  在文档中的任何位置报告XML注释。
+   * 
+   *  此回调将用于文档元素内部或外部的注释,包括外部DTD子集中的注释(如果已读取)。
+   * 
+   * 
    * @param ch An array holding the characters in the comment.
    * @param start The starting position in the array.
    * @param length The number of characters to use from the array.
@@ -504,6 +621,10 @@ public final class ToTextStream extends ToStream
   /**
    * Receive notivication of a entityReference.
    *
+   * <p>
+   *  接收entityReference的通知。
+   * 
+   * 
    * @param name non-null reference to the name of the entity.
    *
    * @throws org.xml.sax.SAXException
@@ -515,6 +636,8 @@ public final class ToTextStream extends ToStream
   }
 
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#addAttribute(String, String, String, String, String)
      */
     public void addAttribute(
@@ -529,6 +652,8 @@ public final class ToTextStream extends ToStream
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.xml.sax.ext.LexicalHandler#endCDATA()
      */
     public void endCDATA() throws SAXException
@@ -537,6 +662,8 @@ public final class ToTextStream extends ToStream
     }
 
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#endElement(String)
      */
     public void endElement(String elemName) throws SAXException
@@ -547,6 +674,9 @@ public final class ToTextStream extends ToStream
 
     /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
+     * 
      */
     public void startElement(
     String elementNamespaceURI,
@@ -568,6 +698,9 @@ public final class ToTextStream extends ToStream
 
     /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
+     * 
      */
     public void characters(String characters)
     throws SAXException
@@ -584,6 +717,9 @@ public final class ToTextStream extends ToStream
 
     /**
      * From XSLTC
+     * <p>
+     *  来自XSLTC
+     * 
      */
     public void addAttribute(String name, String value)
     {
@@ -592,6 +728,8 @@ public final class ToTextStream extends ToStream
 
     /**
      * Add a unique attribute
+     * <p>
+     *  添加唯一属性
      */
     public void addUniqueAttribute(String qName, String value, int flags)
         throws SAXException

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,8 @@ import com.sun.corba.se.impl.transport.SocketOrChannelContactInfoImpl;
 import com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class SocketFactoryConnectionImpl

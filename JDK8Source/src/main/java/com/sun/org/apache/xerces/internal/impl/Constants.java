@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  */
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -29,6 +39,12 @@ import java.util.NoSuchElementException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  常用的常量。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Andy Clark, IBM
  *
  * @version $Id: Constants.java,v 1.14 2010-11-01 04:39:40 joehw Exp $
@@ -65,6 +81,9 @@ public final class Constants {
      * If true, ignore DOCTYPE declaration as if it wasn't present at all.
      * Note that this is a violation of the XML recommendation.
      * The full property name is prefixed by {@link #ZEPHYR_PROPERTY_PREFIX}.
+     * <p>
+     *  如果为true,则忽略DOCTYPE声明,如果它根本不存在。请注意,这是违反XML建议。完整的属性名称前加上{@link #ZEPHYR_PROPERTY_PREFIX}。
+     * 
      */
     public static final String IGNORE_EXTERNAL_DTD = "ignore-external-dtd";
 
@@ -153,6 +172,17 @@ public final class Constants {
      * use the default implementation for that service.
      *   </li>
      * </ul>
+     * <p>
+     *  <p>使用服务机制</p>
+     * 
+     * <ul>
+     * <li>
+     *  {@code true}指示对象使用服务机制来查找服务实现。这是默认行为。
+     * </li>
+     * <li>
+     *  {@code false}指示对象跳过服务机制并使用该服务的默认实现。
+     * </li>
+     * </ul>
      */
     public static final String ORACLE_FEATURE_SERVICE_MECHANISM = "http://www.oracle.com/feature/use-service-mechanism";
 
@@ -193,16 +223,25 @@ public final class Constants {
 
     /**
      * Default value when FEATURE_SECURE_PROCESSING (FSP) is set to true
+     * <p>
+     *  当FEATURE_SECURE_PROCESSING(FSP)设置为true时的默认值
+     * 
      */
     public static final String EXTERNAL_ACCESS_DEFAULT_FSP = "";
 
     /**
      * FEATURE_SECURE_PROCESSING (FSP) is true by default
+     * <p>
+     *  默认情况下,FEATURE_SECURE_PROCESSING(FSP)为true
+     * 
      */
     public static final String EXTERNAL_ACCESS_DEFAULT = ACCESS_EXTERNAL_ALL;
 
     /**
      * Check if we're in jdk8 or above
+     * <p>
+     *  检查我们是否在jdk8或以上
+     * 
      */
     public static final boolean IS_JDK8_OR_ABOVE = isJavaVersionAtLeast(8);
 
@@ -213,6 +252,9 @@ public final class Constants {
     /**
      * JDK entity expansion limit; Note that the existing system property
      * "entityExpansionLimit" with no prefix is still observed
+     * <p>
+     *  JDK实体扩展限制;注意,仍然观察到没有前缀的现有系统属性"entityExpansionLimit"
+     * 
      */
     public static final String JDK_ENTITY_EXPANSION_LIMIT =
             ORACLE_JAXP_PROPERTY_PREFIX + "entityExpansionLimit";
@@ -220,6 +262,9 @@ public final class Constants {
     /**
      * JDK element attribute limit; Note that the existing system property
      * "elementAttributeLimit" with no prefix is still observed
+     * <p>
+     * JDK元素属性限制;注意,仍然观察到没有前缀的现有系统属性"elementAttributeLimit"
+     * 
      */
     public static final String JDK_ELEMENT_ATTRIBUTE_LIMIT =
             ORACLE_JAXP_PROPERTY_PREFIX + "elementAttributeLimit";
@@ -227,40 +272,61 @@ public final class Constants {
     /**
      * JDK maxOccur limit; Note that the existing system property
      * "maxOccurLimit" with no prefix is still observed
+     * <p>
+     *  JDK maxOccur限制;注意,仍然观察到没有前缀的现有系统属性"maxOccurLimit"
+     * 
      */
     public static final String JDK_MAX_OCCUR_LIMIT =
             ORACLE_JAXP_PROPERTY_PREFIX + "maxOccurLimit";
 
     /**
      * JDK total entity size limit
+     * <p>
+     *  JDK总实体大小限制
+     * 
      */
     public static final String JDK_TOTAL_ENTITY_SIZE_LIMIT =
             ORACLE_JAXP_PROPERTY_PREFIX + "totalEntitySizeLimit";
 
     /**
      * JDK maximum general entity size limit
+     * <p>
+     *  JDK最大一般实体大小限制
+     * 
      */
     public static final String JDK_GENERAL_ENTITY_SIZE_LIMIT =
             ORACLE_JAXP_PROPERTY_PREFIX + "maxGeneralEntitySizeLimit";
     /**
      * JDK maximum parameter entity size limit
+     * <p>
+     *  JDK最大参数实体大小限制
+     * 
      */
     public static final String JDK_PARAMETER_ENTITY_SIZE_LIMIT =
             ORACLE_JAXP_PROPERTY_PREFIX + "maxParameterEntitySizeLimit";
     /**
      * JDK maximum XML name limit
+     * <p>
+     *  JDK最大XML名称限制
+     * 
      */
     public static final String JDK_XML_NAME_LIMIT =
             ORACLE_JAXP_PROPERTY_PREFIX + "maxXMLNameLimit";
 
     /**
      * JDK maxElementDepth limit
+     * <p>
+     *  JDK maxElementDepth限制
+     * 
      */
     public static final String JDK_MAX_ELEMENT_DEPTH =
             ORACLE_JAXP_PROPERTY_PREFIX + "maxElementDepth";
 
     /**
      * JDK property to allow printing out information from the limit analyzer
+     * <p>
+     *  JDK属性允许从极限分析器打印出信息
+     * 
      */
     public static final String JDK_ENTITY_COUNT_INFO =
             ORACLE_JAXP_PROPERTY_PREFIX + "getEntityCountInfo";
@@ -271,41 +337,65 @@ public final class Constants {
     /**
      * JDK entity expansion limit; Note that the existing system property
      * "entityExpansionLimit" with no prefix is still observed
+     * <p>
+     *  JDK实体扩展限制;注意,仍然观察到没有前缀的现有系统属性"entityExpansionLimit"
+     * 
      */
     public static final String SP_ENTITY_EXPANSION_LIMIT = "jdk.xml.entityExpansionLimit";
 
     /**
      * JDK element attribute limit; Note that the existing system property
      * "elementAttributeLimit" with no prefix is still observed
+     * <p>
+     *  JDK元素属性限制;注意,仍然观察到没有前缀的现有系统属性"elementAttributeLimit"
+     * 
      */
     public static final String SP_ELEMENT_ATTRIBUTE_LIMIT =  "jdk.xml.elementAttributeLimit";
 
     /**
      * JDK maxOccur limit; Note that the existing system property
      * "maxOccurLimit" with no prefix is still observed
+     * <p>
+     *  JDK maxOccur限制;注意,仍然观察到没有前缀的现有系统属性"maxOccurLimit"
+     * 
      */
     public static final String SP_MAX_OCCUR_LIMIT = "jdk.xml.maxOccurLimit";
 
     /**
      * JDK total entity size limit
+     * <p>
+     *  JDK总实体大小限制
+     * 
      */
     public static final String SP_TOTAL_ENTITY_SIZE_LIMIT = "jdk.xml.totalEntitySizeLimit";
 
     /**
      * JDK maximum general entity size limit
+     * <p>
+     *  JDK最大一般实体大小限制
+     * 
      */
     public static final String SP_GENERAL_ENTITY_SIZE_LIMIT = "jdk.xml.maxGeneralEntitySizeLimit";
     /**
      * JDK maximum parameter entity size limit
+     * <p>
+     *  JDK最大参数实体大小限制
+     * 
      */
     public static final String SP_PARAMETER_ENTITY_SIZE_LIMIT = "jdk.xml.maxParameterEntitySizeLimit";
     /**
      * JDK maximum XML name limit
+     * <p>
+     *  JDK最大XML名称限制
+     * 
      */
     public static final String SP_XML_NAME_LIMIT = "jdk.xml.maxXMLNameLimit";
 
     /**
      * JDK maxElementDepth limit
+     * <p>
+     *  JDK maxElementDepth限制
+     * 
      */
     public static final String SP_MAX_ELEMENT_DEPTH = "jdk.xml.maxElementDepth";
 
@@ -316,6 +406,9 @@ public final class Constants {
 
     /**
      * A string "yes" that can be used for properties such as getEntityCountInfo
+     * <p>
+     *  可用于诸如getEntityCountInfo之类的属性的字符串"yes"
+     * 
      */
     public static final String JDK_YES = "yes";
 
@@ -491,6 +584,9 @@ public final class Constants {
     /**
      * Internal feature. When set to true the schema validator will only use
      * schema components from the grammar pool provided.
+     * <p>
+     *  内部功能。当设置为true时,模式验证器将仅使用所提供的语法池中的模式组件。
+     * 
      */
     public static final String USE_GRAMMAR_POOL_ONLY_FEATURE = "internal/validation/schema/use-grammar-pool-only";
 
@@ -498,6 +594,9 @@ public final class Constants {
      * false - the parser settings (features/properties) have not changed between 2 parses
      * true - the parser settings have changed between 2 parses
      * NOTE: this feature should only be set by the parser configuration.
+     * <p>
+     *  false  - 解析器设置(功能/属性)在2个解析之间没有更改true  - 解析器设置在2个解析之间更改注意：此功能只应由解析器配置设置。
+     * 
      */
     public static final String PARSER_SETTINGS = "internal/parser-settings";
 
@@ -512,6 +611,9 @@ public final class Constants {
      * When true, the schema processor will change characters events
      * to ignorableWhitespaces events, when characters are expected to
      * only contain ignorable whitespaces.
+     * <p>
+     * 如果为true,则当字符只包含可忽略的空格时,模式处理器会将字符事件更改为ignorableWhitespaces事件。
+     * 
      */
     public static final String CHANGE_IGNORABLE_CHARACTERS_INTO_IGNORABLE_WHITESPACES =
         "validation/change-ignorable-characters-into-ignorable-whitespaces";
@@ -619,6 +721,9 @@ public final class Constants {
      * Boolean indicating whether an attribute is declared in the DTD is stored
      * in augmentations using the string "ATTRIBUTE_DECLARED". The absence of this
      * augmentation indicates that the attribute was not declared in the DTD.
+     * <p>
+     *  指示是否在DTD中声明属性的布尔值使用字符串"ATTRIBUTE_DECLARED"存储在扩展中。缺少此扩充表示属性未在DTD中声明。
+     * 
      */
     public final static String ATTRIBUTE_DECLARED = "ATTRIBUTE_DECLARED";
 
@@ -631,6 +736,12 @@ public final class Constants {
      * regarding what object the DOM will return from
      * {@link org.w3c.dom.Attr#getSchemaTypeInfo()} and
      * {@link org.w3c.dom.Element#getSchemaTypeInfo()} and
+     * <p>
+     *  与当前元素/属性关联的{@link org.w3c.dom.TypeInfo}存储在使用此字符串作为键的扩充中。
+     * 
+     *  这将最终控制{@link com.sun.org.apache.xerces.internal.parsers.AbstractDOMParser}关于DOM将从{@link org.w3c.dom.Attr#getSchemaTypeInfo()}
+     * 返回的对象和{@link org.w3c.dom.Element#getSchemaTypeInfo()}和。
+     * 
      */
     public final static String TYPEINFO = "org.w3c.dom.TypeInfo";
 
@@ -641,6 +752,11 @@ public final class Constants {
      *
      * This will ultimately controls {@link com.sun.org.apache.xerces.internal.parsers.AbstractDOMParser}
      * about whether it will mark an attribute as ID or not.
+     * <p>
+     *  属性是否为id存储在使用此字符串作为键的扩充中。值为{@link Boolean#TRUE}或{@link Boolean#FALSE}。
+     * 
+     *  这将最终控制{@link com.sun.org.apache.xerces.internal.parsers.AbstractDOMParser}关于它是否会将属性标记为ID。
+     * 
      */
     public final static String ID_ATTRIBUTE = "ID_ATTRIBUTE";
 
@@ -651,6 +767,9 @@ public final class Constants {
      * not been read is stored in augmentations using the string "ENTITY_SKIPPED".
      * The absence of this augmentation indicates that the entity had a
      * declaration and was expanded.
+     * <p>
+     *  指示是否尚未读取文档中引用的实体的布尔值使用字符串"ENTITY_SKIPPED"存储在扩充中。没有这种增加表示实体有一个声明并被扩展。
+     * 
      */
     public final static String ENTITY_SKIPPED = "ENTITY_SKIPPED";
 
@@ -660,11 +779,17 @@ public final class Constants {
      * reference is stored in augmentations using the string "CHAR_REF_PROBABLE_WS".
      * The absence of this augmentation indicates that the character is not
      * probable white space and/or was not included from a character reference.
+     * <p>
+     * 指示字符是否是作为字符引用的替换文本的可能的空白字符(ch <= 0x20)的布尔值使用字符串"CHAR_REF_PROBABLE_WS"存储在扩充中。
+     * 不存在这种增强指示该字符不是可能的空白空间和/或不是从字符引用中包括的。
+     * 
      */
     public final static String CHAR_REF_PROBABLE_WS = "CHAR_REF_PROBABLE_WS";
 
     /** Boolean indicating if this entity is the last opened entity.
      *
+     * <p>
+     * 
      *@see com.sun.org.apache.xerces.internal.impl.XMLEntityManager#endEntity()
      *@see com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl#endEntity()
      *@see com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl#endEntity()
@@ -817,6 +942,12 @@ public final class Constants {
      * MAJOR.MINOR.FU.CPU.PSU-BUILDNUMBER_BUGIDNUMBER_OPTIONAL
      * This method would work with both the current format and that proposed
      *
+     * <p>
+     *  根据参数中指定的版本检查当前JDK的版本
+     * 
+     *  有一个建议将java版本字符串更改为：MAJOR.MINOR.FU.CPU.PSU-BUILDNUMBER_BUGIDNUMBER_OPTIONAL此方法将与当前格式和提议的
+     * 
+     * 
      * @param compareTo a JDK version to be compared to
      * @return true if the current version is the same or above that represented
      * by the parameter
@@ -838,6 +969,10 @@ public final class Constants {
     /**
      * An array enumeration.
      *
+     * <p>
+     *  数组枚举。
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     static class ArrayEnumeration
@@ -869,6 +1004,10 @@ public final class Constants {
         /**
          * Tests if this enumeration contains more elements.
          *
+         * <p>
+         *  测试此枚举是否包含更多元素。
+         * 
+         * 
          * @return  <code>true</code> if this enumeration contains more elements;
          *          <code>false</code> otherwise.
          * @since   JDK1.0
@@ -880,6 +1019,9 @@ public final class Constants {
         /**
          * Returns the next element of this enumeration.
          *
+         * <p>
+         *  返回此枚举的下一个元素。
+         * 
          * @return     the next element of this enumeration.
          * @exception  NoSuchElementException  if no more elements exist.
          * @since      JDK1.0

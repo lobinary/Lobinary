@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,13 @@ import javax.activation.DataHandler;
  * {@link AttachmentMarshaller#addMtomAttachment(byte[], int, int, String, String, String)} is
  * ever called for the property. The binary data will always be inlined.
  *
+ * <p>
+ *  禁止考虑以XML格式绑定到base64编码的二进制数据的数据类型的XOP编码。
+ * 
+ * <p>
+ *  当按照{@link AttachmentMarshaller#isXOPPackage()}中所述启用XOP编码时,此注释禁用数据类型,例如{@link java.awt.Image}或{@link Source}
+ * 或<tt> byte [] </tt>它们被绑定到base64编码的二进制被考虑用于XOP编码。
+ * 
  * @author Joseph Fialli
  * @since JAXB2.0
  */

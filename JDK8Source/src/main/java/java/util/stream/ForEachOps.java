@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,15 @@ import java.util.function.LongConsumer;
  * {@code Consumer} will be relayed to the caller and traversal will be
  * prematurely terminated.
  *
+ * <p>
+ *  工厂用于创建{@code TerminalOp}的实例,对流的每个元素执行操作。
+ * 支持的变体包括无序遍历(元素在可用时立即提供给{@code Consumer})和有序遍历(元素按遇到顺序提供给{@code Consumer})。
+ * 
+ *  <p>元素提供给{@code Consumer}在任何线程和它们可用的任何顺序。对于有序遍历,保证在处理遇到顺序中的后续元素之前处理元素<em>发生。
+ * 
+ *  <p>由于向{@code Consumer}发送元素而发生的异常将被中继到调用者,并且遍历将提前终止。
+ * 
+ * 
  * @since 1.8
  */
 final class ForEachOps {
@@ -61,6 +71,10 @@ final class ForEachOps {
      * Constructs a {@code TerminalOp} that perform an action for every element
      * of a stream.
      *
+     * <p>
+     *  构造一个{@code TerminalOp},对流的每个元素执行操作。
+     * 
+     * 
      * @param action the {@code Consumer} that receives all elements of a
      *        stream
      * @param ordered whether an ordered traversal is requested
@@ -77,6 +91,10 @@ final class ForEachOps {
      * Constructs a {@code TerminalOp} that perform an action for every element
      * of an {@code IntStream}.
      *
+     * <p>
+     *  构造{@code TerminalOp},对{@code IntStream}的每个元素执行操作。
+     * 
+     * 
      * @param action the {@code IntConsumer} that receives all elements of a
      *        stream
      * @param ordered whether an ordered traversal is requested
@@ -92,6 +110,10 @@ final class ForEachOps {
      * Constructs a {@code TerminalOp} that perform an action for every element
      * of a {@code LongStream}.
      *
+     * <p>
+     *  构造{@code TerminalOp},对{@code LongStream}的每个元素执行操作。
+     * 
+     * 
      * @param action the {@code LongConsumer} that receives all elements of a
      *        stream
      * @param ordered whether an ordered traversal is requested
@@ -107,6 +129,10 @@ final class ForEachOps {
      * Constructs a {@code TerminalOp} that perform an action for every element
      * of a {@code DoubleStream}.
      *
+     * <p>
+     *  构造{@code TerminalOp},为{@code DoubleStream}的每个元素执行操作。
+     * 
+     * 
      * @param action the {@code DoubleConsumer} that receives all elements of
      *        a stream
      * @param ordered whether an ordered traversal is requested
@@ -128,6 +154,12 @@ final class ForEachOps {
      * leaf instance of a {@code ForEachTask} will send elements to the same
      * {@code TerminalSink} reference that is an instance of this class.
      *
+     * <p>
+     * {@code TerminalOp},用于评估流管道,并将输出作为{@code TerminalSink}发送到自身。元素将以它们可用的任何线程发送。如果遍历是无序的,则它们将独立于流的遭遇顺序发送。
+     * 
+     *  <p>此终端操作是无状态的。对于并行评估,{@code ForEachTask}的每个叶实例将发送元素到同一个{@code TerminalSink}引用,该引用是此类的一个实例。
+     * 
+     * 
      * @param <T> the output type of the stream pipeline
      */
     static abstract class ForEachOp<T>
@@ -315,6 +347,9 @@ final class ForEachOps {
     /**
      * A {@code ForkJoinTask} for performing a parallel for-each operation
      * which visits the elements in encounter order
+     * <p>
+     *  一个{@code ForkJoinTask},用于执行并行for-each操作,访问遇到顺序中的元素
+     * 
      */
     @SuppressWarnings("serial")
     static final class ForEachOrderedTask<S, T> extends CountedCompleter<Void> {
@@ -360,6 +395,21 @@ final class ForEachOps {
          * Thus overall the "happens-before" relationship holds for the
          * reporting of elements, covered by tasks d, e, f and g, as specified
          * by the forEachOrdered operation.
+         * <p>
+         *  我们的目标是确保根据计算树的有序遍历来处理与任务相关联的元素。我们使用完成计数来表示这些依赖关系,以便任务在此顺序中的所有任务完成之前不会完成。
+         * 我们使用"完成映射"来为任何左孩子关联这个顺序中的下一个任务。我们将这种映射右侧的任何节点的挂起计数增加1,以指示其依赖性,并且当这种映射的左侧上的节点完成时,它递减其相应右侧的挂起计数。
+         * 当计算树通过分裂扩展时,我们必须原子地更新映射以保持完整映射将左子节点映射到有序遍历中的下一个节点的不变量。
+         * 
+         *  以下面的计算树为例：
+         * 
+         * a / \ b c / \ / \ d e
+         * 
+         *  完整的地图将包含(不一定都在同一时间)以下关联：
+         * 
+         *  d  - > e b  - > f f  - > g
+         * 
+         *  任务e,f,g的待处理计数将增加1。
+         * 
          */
 
         private final PipelineHelper<T> helper;
@@ -430,6 +480,13 @@ final class ForEachOps {
                      * it is associated in the completion map, otherwise the
                      * left child can complete prematurely and violate the
                      * "happens-before" constraint.
+                     * <p>
+                     *  以下关系成立：
+                     * 
+                     *   - 完成d"发生在之前"e; - 完成d和e"发生在b之前 - 完成b"发生在"之前f;以及 - 完成f"发生在之前"g
+                     * 
+                     *  因此,总体上,对于如由forEachOrdered操作所指定的任务d,e,f和g所覆盖的元素的报告,"发生先前"关系成立。
+                     * 
                      */
                     leftChild.addToPendingCount(1);
                     // Update association of left-predecessor to left-most
@@ -468,6 +525,9 @@ final class ForEachOps {
              * triggered by the completion of task's left-predecessor in
              * onCompletion.  Therefore there is no data race within the if
              * block.
+             * <p>
+             *  完成左前叶或左子树"右前叶"最左叶叶节点的"发生"。左子节点的挂起计数需要在完成映射关联之前进行更新,否则左子节点可能过早完成并违反"发生先于"约束。
+             * 
              */
             if (task.getPendingCount() > 0) {
                 // Cannot complete just yet so buffer elements into a Node

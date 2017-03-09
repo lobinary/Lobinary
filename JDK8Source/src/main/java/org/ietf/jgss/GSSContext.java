@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -168,6 +169,84 @@ import java.io.OutputStream;
  *
  * </pre>
  *
+ * <p>
+ *  此接口封装GSS-API安全上下文,并提供在上下文中可用的安全服务。使用本地获取的凭证在对等体之间建立安全上下文。多个上下文可以使用相同或不同的凭证集在一对对等体之间同时存在。
+ *  GSS-API函数以独立于底层传输协议的方式,并且依赖于其调用应用来传输由对等体之间的安全上下文生成的令牌。
+ * 
+ *  如果调用者使用默认的<code> GSSManager </code>实例化上下文,则保证Kerberos v5 GSS-API机制可用于上下文建立。
+ * 该机制由Oid"1.2.840.113554.1.2.2"标识,并且在RFC 1964中定义。<p>。
+ * 
+ * 在上下文建立阶段被发起之前,上下文发起者可以请求所建立的上下文期望的特定特性。并非所有底层机制都支持调用者可能需要的所有特性。
+ * 在上下文建立之后,调用者可以通过各种查询方法检查由该上下文提供的实际特性和服务。
+ * 当使用默认的<code> GSSManager </code>实例提供的Kerberos v5 GSS-API机制时,所有可选服务将在本地可用。
+ * 它们是相互认证,凭证委托,机密性和完整性保护,以及每个消息重放检测和排序。请注意,在GSS-API中,邮件完整性是邮件机密性的先决条件。<p>。
+ * 
+ *  上下文建立发生在发起者调用{@link #initSecContext(byte [],int,int)initSecContext}和接受者调用{@link #acceptSecContext(byte [],int,int)acceptSecContext}
+ * 成立。
+ * 在这个循环中,<code> initSecContext </code>和<code> acceptSecContext </code>方法产生应用程序发送到对等体的令牌。
+ * 对等体将任何这样的令牌作为输入传递到其<code> acceptSecContext </code>或<code> initSecContext </code>(视情况而定)。<p>。
+ * 
+ * 在上下文建立阶段,可以调用{@link #isProtReady()isProtReady}方法来确定上下文是否可以用于{@link #wrap(byte [],int,int,MessageProp )wrap}
+ * 和{@link #getMIC(byte [],int,int,MessageProp)getMIC}。
+ * 这允许应用程序对尚未完全建立的上下文使用每消息操作。<p>。
+ * 
+ *  在上下文建立或<code> isProtReady </code>方法返回<code> true </code>之后,可以调用查询例程来确定所建立的上下文的实际特性和服务。
+ * 应用程序还可以开始使用{@link #wrap(byte [],int,int,MessageProp)wrap}和{@link #getMIC(byte [],int,int,MessageProp)getMIC}
+ * 的每个消息方法获取应用程序提供的数据的加密操作。
+ *  在上下文建立或<code> isProtReady </code>方法返回<code> true </code>之后,可以调用查询例程来确定所建立的上下文的实际特性和服务。
+ * 
+ *  当不再需要上下文时,应用程序应调用{@link #dispose()dispose}以释放上下文可能正在使用的任何系统资源。<p>
+ * 
+ *  安全上下文通常保持关于它处理的令牌的排序和重放检测信息。因此,将任何令牌呈现给该上下文用于处理的序列可能是重要的。另请注意,此接口中的所有方法都不同步。
+ * 因此,不建议在多个线程之间共享一个<code> GSSContext </code>,除非某些应用程序级同步到位。<p>。
+ * 
+ * 最后,不同的机制提供者可能对使用GSS-API上下文施加不同的安全限制。这些将由机制提供者记录。如果在机制层中进行此类检查,应用程序将需要确保它具有适当的权限。<p>
+ * 
+ *  下面给出的示例代码演示了用于发起对等体的<code> GSSContext </code>接口的用法。
+ * 提供了对<code> GSSContext </code>对象的不同操作,包括：对象实例化,所需标​​志的设置,上下文建立,实际上下文标志的查询,对应用数据的每消息操作以及最后的上下文删除。 >。
+ * 
+ * <pre>
+ *  //使用默认凭证创建上下文//和实现特定的默认机制GSSManager manager ... GSSName targetName ... GSSContext context = manager.
+ * createContext(targetName,null,null,GSSContext.INDEFINITE_LIFETIME);。
+ * 
+ *  //在上下文建立之前设置所需的上下文选项context.requestConf(true); context.requestMutualAuth(true); context.requestRepla
+ * yDet(true); context.requestSequenceDet(true);。
+ * 
+ *  //在对等体之间建立上下文
+ * 
+ *  byte [] inToken = new byte [0];
+ * 
+ *  //循环,同时仍有一个令牌要处理
+ * 
+ *  while(！context.isEstablished()){
+ * 
+ *  byte [] outToken = context.initSecContext(inToken,0,inToken.length);
+ * 
+ *  //发送输出令牌if(outToken！= null)sendToken(outToken);
+ * 
+ *  if(！context.isEstablished()){inToken = readToken(); }}
+ * 
+ * //显示上下文信息System.out.println("Remaining lifetime in seconds ="+ context.getLifetime()); System.out.pri
+ * ntln("Context mechanism ="+ context.getMech()); System.out.println("Initiator ="+ context.getSrcName(
+ * )); System.out.println("Acceptor ="+ context.getTargName());。
+ * 
+ *  if(context.getConfState())System.out.println("Confidentiality(即privacy)is available");
+ * 
+ *  if(context.getIntegState())System.out.println("Integrity is available");
+ * 
+ *  //对应用程序提供的消息执行wrap,appMsg,//使用QOP = 0,并请求隐私服务byte [] appMsg ...
+ * 
+ *  MessageProp mProp = new MessageProp(0,true);
+ * 
+ *  byte [] tok = context.wrap(appMsg,0,appMsg.length,mProp);
+ * 
+ *  sendToken(tok);
+ * 
+ *  //释放上下文的本地上下文context.dispose();
+ * 
+ * </pre>
+ * 
+ * 
  * @author Mayank Upadhyay
  * @since 1.4
  */
@@ -176,6 +255,9 @@ public interface GSSContext {
     /**
      * A lifetime constant representing the default context lifetime.  This
      * value is set to 0.
+     * <p>
+     *  表示默认上下文生存期的生存期常量。此值设置为0。
+     * 
      */
     public static final int DEFAULT_LIFETIME = 0;
 
@@ -183,6 +265,9 @@ public interface GSSContext {
      * A lifetime constant representing indefinite context lifetime.
      * This value must is set to the maximum integer value in Java -
      * {@link java.lang.Integer#MAX_VALUE Integer.MAX_VALUE}.
+     * <p>
+     *  寿命常数,代表不确定的上下文寿命。此值必须设置为Java中的最大整数值 -  {@link java.lang.Integer#MAX_VALUE Integer.MAX_VALUE}。
+     * 
      */
     public static final int INDEFINITE_LIFETIME = Integer.MAX_VALUE;
 
@@ -212,6 +297,20 @@ public interface GSSContext {
      * might cause a {@link java.lang.SecurityException SecurityException}
      * to be thrown from this method.<p>
      *
+     * <p>
+     * 由上下文启动器调用以启动上下文创建阶段,并处理由对等体的<code> acceptSecContext </code>方法生成的任何令牌。
+     * 该方法可以返回应用程序将需要发送到对等体以通过其<code> acceptSecContext </code>方法进行处理的输出令牌。
+     * 应用程序可以调用{@link #isEstablished()isEstablished},以确定上下文建立阶段是否在上下文的这一侧完成。
+     * 来自<code> isEstablished </code>的<code> false </code>的返回值表示希望向<code> initSecContext </code>提供更多的令牌。
+     * 在完成上下文建立时,可以通过get方法来查询可用的上下文选项。
+     * 
+     *  注意,<code> initSecContext </code>方法可能为对等体返回一个令牌,并且<code> isEstablished </code> return <code> true </code>
+     * 这表示令牌需要发送到对等体,但是上下文的本地端现在完全建立。
+     * 
+     *  一些机制提供程序可能需要授予调用者启动安全上下文的权限。权限检查失败可能会导致从此方法抛出{@link java.lang.SecurityException SecurityException}。
+     * <p>。
+     * 
+     * 
      * @return a byte[] containing the token to be sent to the
      * peer. <code>null</code> indicates that no token is generated.
      * @param inputBuf token generated by the peer. This parameter is ignored
@@ -295,6 +394,40 @@ public interface GSSContext {
      * </pre>
      *
      *
+     * <p>
+     * 由上下文启动器调用以启动上下文创建阶段,并处理由对等体的<code> acceptSecContext </code>方法使用流生成的任何令牌。
+     * 该方法可以将输出令牌写入<code> OutpuStream </code>,应用程序将需要发送到对等体以通过其<code> acceptSecContext </code>调用进行处理。
+     * 通常,应用程序将通过调用封装了两个对等体之间的连接的<code> OutputStream </code>上的{@link java.io.OutputStream#flush()flush}方法来确保
+     * 这一点。
+     * 该方法可以将输出令牌写入<code> OutpuStream </code>,应用程序将需要发送到对等体以通过其<code> acceptSecContext </code>调用进行处理。
+     * 应用程序可以确定是否从此方法的返回值将令牌写入OutputStream。返回值<code> 0 </code>表示没有写入令牌。
+     * 应用程序可以调用{@link #isEstablished()isEstablished},以确定上下文建立阶段是否在上下文的这一侧完成。
+     * 来自<code> isEstablished </code>的<code> false </code>的返回值表示希望向<code> initSecContext </code>提供更多的令牌。
+     * 在完成上下文建立时,可以通过get方法来查询可用的上下文选项。
+     * 
+     *  注意,<code> initSecContext </code>方法可能为对等体返回一个令牌,并且<code> isEstablished </code> return <code> true </code>
+     * 这表示令牌需要发送到对等体,但是上下文的本地端现在完全建立。
+     * 
+     * GSS-API认证令牌包含明确的开始和结束。该方法将尝试在每次调用时读取这些令牌中的一个,并且如果仅令牌的一部分可用,则可以在流上阻塞。
+     * 在所有其他方面,此方法等效于基于字节数组的{@link #initSecContext(byte [],int,int)initSecContext}。<p>。
+     * 
+     *  一些机制提供程序可能需要授予调用者启动安全上下文的权限。权限检查失败可能会导致从此方法抛出{@link java.lang.SecurityException SecurityException}。
+     * <p>。
+     * 
+     *  以下示例代码演示了如何使用此方法：<p>
+     * <pre>
+     *  InputStream是... OutputStream os ... GSSContext context ...
+     * 
+     *  //循环,同时还有一个令牌要处理
+     * 
+     *  while(！context.isEstablished()){
+     * 
+     *  context.initSecContext(is,os);
+     * 
+     *  //发送输出令牌if os.flush(); }}
+     * </pre>
+     * 
+     * 
      * @return the number of bytes written to the OutputStream as part of the
      * token to be sent to the peer. A value of 0 indicates that no token
      * needs to be sent.
@@ -366,6 +499,31 @@ public interface GSSContext {
      * </pre>
      *
      *
+     * <p>
+     *  在从对等体接收到令牌时由上下文接受器调用。此方法可能返回一个输出令牌,应用程序需要发送到对等体,以便通过其<code> initSecContext </code>调用进行进一步处理。
+     * 
+     * 应用程序可以调用{@link #isEstablished()isEstablished}以确定此对等体的上下文建立阶段是否完成。
+     *  <code> isEstablished </code>中的<code> false </code>返回值表示希望向此方法提供更多的令牌。
+     * 在完成上下文建立时,可以通过get方法来查询可用的上下文选项。
+     * 
+     *  注意,有可能<code> acceptSecContext </code>返回对等体的令牌,<code> isEstablished </code> return <code> true </code>
+     * 。
+     * 这表示令牌需要发送到对等体,但是上下文的本地端现在完全建立。
+     * 
+     *  一些机制提供程序可能需要授予调用者接受安全上下文的权限。权限检查失败可能会导致从此方法抛出{@link java.lang.SecurityException SecurityException}。
+     * <p>。
+     * 
+     *  以下示例代码演示了如何使用此方法：<p>
+     * <pre>
+     *  byte [] inToken; byte [] outToken; GSSContext上下文...
+     * 
+     *  //循环,同时还有一个令牌要处理
+     * 
+     *  while(！context.isEstablished()){inToken = readToken(); outToken = context.acceptSecContext(inToken,0,inToken.length); //发送输出令牌if(outToken！= null)sendToken(outToken); }
+     * }。
+     * </pre>
+     * 
+     * 
      * @return a byte[] containing the token to be sent to the
      * peer. <code>null</code> indicates that no token is generated.
      * @param inToken token generated by the peer.
@@ -442,6 +600,40 @@ public interface GSSContext {
      * </pre>
      *
      *
+     * <p>
+     * 由上下文接受器调用以使用流处理来自对等体的令牌。
+     * 它可以将输出令牌写入<code> OutputStream </code>,应用程序需要发送到对等体以通过其<code> initSecContext </code>方法进行处理。
+     * 通常,应用程序将通过调用封装了两个对等体之间的连接的<code> OutputStream </code>上的{@link java.io.OutputStream#flush()flush}方法来确保
+     * 这一点。
+     * 它可以将输出令牌写入<code> OutputStream </code>,应用程序需要发送到对等体以通过其<code> initSecContext </code>方法进行处理。
+     * 应用程序可以调用{@link #isEstablished()isEstablished},以确定上下文建立阶段是否在上下文的这一侧完成。
+     * 来自<code> isEstablished </code>的<code> false </code>的返回值表示希望向<code> acceptSecContext </code>提供更多的令牌。
+     * 在完成上下文建立时,可以通过get方法来查询可用的上下文选项。
+     * 
+     *  注意,有可能<code> acceptSecContext </code>返回对等体的令牌,<code> isEstablished </code> return <code> true </code>
+     * 。
+     * 这表示令牌需要发送到对等体,但是上下文的本地端现在完全建立。
+     * 
+     * GSS-API认证令牌包含明确的开始和结束。该方法将尝试在每次调用时读取这些令牌中的一个,并且如果仅令牌的一部分可用,则可以在流上阻塞。
+     * 在所有其他方面,此方法等效于基于字节数组的{@link #acceptSecContext(byte [],int,int)acceptSecContext}。<p>。
+     * 
+     *  一些机制提供程序可能需要授予调用者接受安全上下文的权限。权限检查失败可能会导致从此方法抛出{@link java.lang.SecurityException SecurityException}。
+     * <p>。
+     * 
+     *  以下示例代码演示了如何使用此方法：<p>
+     * <pre>
+     *  InputStream是... OutputStream os ... GSSContext context ...
+     * 
+     *  //循环,同时还有一个令牌要处理
+     * 
+     *  while(！context.isEstablished()){
+     * 
+     *  context.acceptSecContext(is,os);
+     * 
+     *  //发送输出令牌if os.flush(); }}
+     * </pre>
+     * 
+     * 
      * @param inStream an InputStream that contains the token generated by
      * the peer.
      * @param outStream an OutputStream where the output token will be
@@ -468,6 +660,12 @@ public interface GSSContext {
      * OutputStream from the return value of this method. A return value of
      * <code>0</code> indicates that no token was written.
      *
+     * <p>
+     *  -------------------------------------------------- ---------
+     * 
+     *  应用程序可以确定是否从此方法的返回值将令牌写入OutputStream。返回值<code> 0 </code>表示没有写入令牌。
+     * 
+     * 
      * @return <strong>the number of bytes written to the
      * OutputStream as part of the token to be sent to the peer. A value of
      * 0 indicates that no token  needs to be
@@ -480,6 +678,10 @@ public interface GSSContext {
      * Used during context establishment to determine the state of the
      * context.
      *
+     * <p>
+     *  在上下文建立期间使用以确定上下文的状态。
+     * 
+     * 
      * @return <code>true</code> if this is a fully established context on
      * the caller's side and no more tokens are needed from the peer.
      */
@@ -490,6 +692,10 @@ public interface GSSContext {
      * the context object and invalidates the context.
      *
      *
+     * <p>
+     *  释放存储在上下文对象中的任何系统资源和加密信息,并使上下文无效。
+     * 
+     * 
      * @throws GSSException containing the following
      * major error codes:
      *   {@link GSSException#FAILURE GSSException.FAILURE}
@@ -513,6 +719,17 @@ public interface GSSContext {
      * This routine guarantees only a maximum message size, not the
      * availability of specific QOP values for message protection.<p>
      *
+     * <p>
+     * 用于确定可传递到<code> wrap </code>的消息大小的限制。
+     * 返回如果使用相同的<code> confReq </code>和<code> qop </code>参数呈现给<code> wrap </code>方法的最大邮件大小,超过<code> maxToken
+     * Size </code>字节。
+     * 用于确定可传递到<code> wrap </code>的消息大小的限制。<p>。
+     * 
+     *  此调用旨在由通过施加最大消息大小的协议进行通信的应用程序使用。它使应用程序能够在应用保护之前对消息进行分段。<p>
+     * 
+     *  推荐使用GSS-API实现,但在调用<code> getWrapSizeLimit </code>时,不需要检测无效的QOP值。该例程仅保证最大消息大小,而不是用于消息保护的特定QOP值的可用性
+     * 
+     * 
      * @param qop the level of protection wrap will be asked to provide.
      * @param confReq <code>true</code> if wrap will be asked to provide
      * privacy, <code>false</code>  otherwise.
@@ -553,6 +770,17 @@ public interface GSSContext {
      * The application will be responsible for sending the token to the
      * peer.
      *
+     * <p>
+     *  通过已建立的安全上下文应用每个消息的安全服务。该方法将返回带有应用程序提供的数据和加密MIC的令牌。如果要求机密性(隐私权),则可以对数据进行加密。<p>
+     * 
+     * MessageProp对象由应用程序实例化并用于指定选择加密算法的QOP值以及隐私服务以可选地加密消息。在呼叫中使用的底层机制可能无法提供隐私服务。
+     * 它设置它在此MessageProp对象中提供的实际隐私服务,调用者在返回时应查询。如果机制不能提供所请求的QOP,它将抛出带有BAD_QOP代码的GSSException。<p>。
+     * 
+     *  由于一些应用级协议可能希望使用由wrap发出的令牌来提供"安全成帧",所以实现应当支持零长度消息的包装。
+     * 
+     *  应用程序将负责将令牌发送到对等体。
+     * 
+     * 
      * @param inBuf application data to be protected.
      * @param offset the offset within the inBuf where the data begins.
      * @param len the length of the data
@@ -598,6 +826,21 @@ public interface GSSContext {
      * emitted by wrap to provide "secure framing", implementations should
      * support the wrapping of zero-length messages.<p>
      *
+     * <p>
+     *  使用流在已建立的安全上下文上应用每个消息的安全服务。该方法将返回带有应用程序提供的数据和加密MIC的令牌。如果请求保密性(隐私),则可以对数据进行加密。
+     * 这个方法相当于基于字节数组的{@link #wrap(byte [],int,int,MessageProp)wrap}方法。<p>。
+     * 
+     *  应用程序将负责将令牌发送到对等体。
+     * 通常,应用程序将通过调用封装两个对等体之间的连接的<code> OutputStream </code>上的{@link java.io.OutputStream#flush()flush}方法来确保这
+     * 一点。
+     *  应用程序将负责将令牌发送到对等体。
+     * 
+     * MessageProp对象由应用程序实例化并用于指定选择加密算法的QOP值以及隐私服务以可选地加密消息。在呼叫中使用的底层机制可能无法提供隐私服务。
+     * 它设置它在此MessageProp对象中提供的实际隐私服务,调用者在返回时应查询。如果机制不能提供所请求的QOP,它将抛出带有BAD_QOP代码的GSSException。<p>。
+     * 
+     *  由于一些应用级协议可能希望使用由wrap发出的令牌来提供"安全成帧",所以实现应当支持零长度消息的包装。
+     * 
+     * 
      * @param inStream an InputStream containing the application data to be
      * protected. All of the data that is available in
      * inStream is used.
@@ -633,6 +876,14 @@ public interface GSSContext {
      * emitted by wrap to provide "secure framing", implementations should
      * support the wrapping and unwrapping of zero-length messages.<p>
      *
+     * <p>
+     *  用于处理由上下文另一端的<code> wrap </code>方法生成的令牌。该方法将返回对等应用程序提供给其包装调用的消息,同时验证该消息的嵌入MIC。<p>
+     * 
+     *  MessageProp对象由应用程序实例化,并由底层机制用于向调用者返回信息,例如QOP,是否对该消息应用机密性以及其他补充消息状态信息。<p>
+     * 
+     *  由于一些应用层协议可能希望使用由wrap发出的令牌来提供"安全成帧",因此实现应该支持零长度消息的包装和解包。
+     * 
+     * 
      * @param inBuf a byte array containing the wrap token received from
      * peer.
      * @param offset the offset where the token begins.
@@ -682,6 +933,20 @@ public interface GSSContext {
      * method is equivalent to the byte array based {@link #unwrap(byte[],
      * int, int, MessageProp) unwrap} method.<p>
      *
+     * <p>
+     * 使用流处理上下文另一端的<code> wrap </code>方法生成的令牌。该方法将返回对等应用程序提供给其包装调用的消息,同时验证该消息的嵌入MIC。<p>
+     * 
+     *  MessageProp对象由应用程序实例化,并由底层机制用于向调用者返回信息,例如QOP,是否对该消息应用机密性以及其他补充消息状态信息。<p>
+     * 
+     *  由于一些应用层协议可能希望使用由wrap发出的令牌来提供"安全成帧",因此实现应该支持零长度消息的包装和解包。
+     * 
+     *  此方法读取的输入令牌的格式在规范中定义,用于将使用的底层机制。此方法将尝试在每次调用时读取其中一个令牌。
+     * 如果机制令牌包含确定的开始和结束,则该方法可以在<code> InputStream </code>上阻塞,如果只有部分令牌可用。
+     * 如果令牌的开始和结束不是确定的,那么该方法将尝试将所有可用字节作为令牌的一部分。<p>。
+     * 
+     *  除了上面描述的可能的阻塞行为,这个方法相当于基于字节数组的{@link #unwrap(byte [],int,int,MessageProp)unwrap}方法。
+     * 
+     * 
      * @param inStream an InputStream that contains the wrap token generated
      * by the peer.
      * @param outStream an OutputStream to write the application message
@@ -714,6 +979,14 @@ public interface GSSContext {
      * by getMIC to provide "secure framing", implementations should support
      * derivation of MICs from zero-length messages.
      *
+     * <p>
+     * 返回包含所提供消息的加密消息完整性代码(MIC)的令牌,以便传输到对等应用程序。与wrap(将用户消息封装在返回的令牌中)不同,只有消息MIC在输出令牌中返回。<p>
+     * 
+     *  请注意,隐私权只能通过自动换行来应用。<p>
+     * 
+     *  由于一些应用级协议可能希望使用由getMIC发出的令牌来提供"安全成帧",因此实现应该支持从零长度消息导出MIC。
+     * 
+     * 
      * @param inMsg the message to generate the MIC over.
      * @param offset offset within the inMsg where the message begins.
      * @param len the length of the message
@@ -747,6 +1020,15 @@ public interface GSSContext {
      * by getMIC to provide "secure framing", implementations should support
      * derivation of MICs from zero-length messages.
      *
+     * <p>
+     *  使用流生成包含所提供消息的加密MIC的令牌,以便传输到对等应用程序。与wrap(将用户消息封装在返回的令牌中)不同,只有消息MIC在输出令牌中生成。
+     * 这个方法相当于基于字节数组的{@link #getMIC(byte [],int,int,MessageProp)getMIC}方法。
+     * 
+     *  请注意,隐私权只能通过自动换行来应用。<p>
+     * 
+     *  由于一些应用级协议可能希望使用由getMIC发出的令牌来提供"安全成帧",因此实现应该支持从零长度消息导出MIC。
+     * 
+     * 
      * @param inStream an InputStream containing the message to generate the
      * MIC over. All of the data that is available in
      * inStream is used.
@@ -779,6 +1061,14 @@ public interface GSSContext {
      * by getMIC to provide "secure framing", implementations should support
      * the calculation and verification of MICs over zero-length messages.
      *
+     * <p>
+     *  通过提供的消息验证令牌参数中包含的加密MIC。<p>
+     * 
+     * MessageProp对象由应用程序实例化,并由底层机制用来向调用者返回信息,例如QOP,指示应用于消息和其他补充消息状态信息的保护强度。
+     * 
+     *  由于一些应用级协议可能希望使用由getMIC发出的令牌来提供"安全成帧",因此实现应该支持在零长度消息上的MIC的计算和验证。
+     * 
+     * 
      * @param inToken the token generated by peer's getMIC method.
      * @param tokOffset the offset within the inToken where the token
      * begins.
@@ -830,6 +1120,21 @@ public interface GSSContext {
      * method is equivalent to the byte array based {@link #verifyMIC(byte[],
      * int, int, byte[], int, int, MessageProp) verifyMIC} method.<p>
      *
+     * <p>
+     *  使用流通过提供的消息验证令牌参数中包含的加密MIC。
+     * 这个方法相当于基于字节数组的{@link #verifyMIC(byte [],int,int,byte [],int,int,MessageProp)verifyMIC}方法。
+     * 
+     *  MessageProp对象由应用程序实例化,并由底层机制用来向调用者返回信息,例如QOP,指示应用于消息和其他补充消息状态信息的保护强度。
+     * 
+     *  由于一些应用级协议可能希望使用由getMIC发出的令牌来提供"安全成帧",因此实现应该支持在零长度消息上的MIC的计算和验证。
+     * 
+     * 此方法读取的输入令牌的格式在规范中定义,用于将使用的底层机制。此方法将尝试在每次调用时读取其中一个令牌。
+     * 如果机制令牌包含确定的开始和结束,则该方法可以在<code> InputStream </code>上阻塞,如果只有部分令牌可用。
+     * 如果令牌的开始和结束不是确定的,那么该方法将尝试将所有可用字节作为令牌的一部分。<p>。
+     * 
+     *  除了上述可能的阻塞行为之外,该方法等同于基于字节数组的{@link #verifyMIC(byte [],int,int,byte [],int,int,MessageProp)verifyMIC}。
+     * 
+     * 
      * @param tokStream an InputStream containing the token generated by the
      * peer's getMIC method.
      * @param msgStream an InputStream containing the application message to
@@ -892,6 +1197,24 @@ public interface GSSContext {
      * the error code {@link GSSException#UNAVAILABLE
      * GSSException.UNAVAILABLE}.
      *
+     * <p>
+     *  导出此上下文,以便另一个进程可以导入它..提供支持多个进程之间的工作共享。
+     * 该例程通常将由上下文接受器在其中单个进程接收传入连接请求并且在其上接受安全上下文的应用中使用,然后将所建立的上下文传递到一个或多个其他进程以进行消息交换。
+     * 
+     * 此方法取消激活安全上下文并创建进程间令牌,当在另一个进程中传递到{@link GSSManager#createContext(byte [])GSSManager.createContext}时,将重
+     * 新激活第二个进程中的上下文。
+     * 只有给定上下文的单个实例化可以在任何一个时间是活动的;则上下文导出器随后尝试访问导出的安全上下文将失败。
+     * 
+     *  实现可以约束进程间令牌可以作为本地安全策略的函数或者作为实现决策的结果而被导入的进程集合。例如,一些实现可以约束上下文仅在在相同帐户下运行的进程之间传递,或者是同一进程组的一部分。
+     * 
+     *  进程间令牌可以包含安全敏感信息(例如加密密钥)。虽然鼓励机制避免在进程间令牌中放置这样的敏感信息,或者在将令牌返回到应用程序之前加密令牌,在典型的GSS-API实现中,这可能是不可能的。
+     * 因此,应用程序必须注意保护进程间令牌,并确保令牌被传送到的任何进程是可信赖的。 <p>。
+     * 
+     *  不需要实现来支持安全上下文的进程间传输。调用{@link #isTransferable()isTransferable}方法将指示上下文对象是否可传输。<p>
+     * 
+     * 在不可导出的上下文上调用此方法将导致抛出此异常,并显示错误代码{@link GSSException#UNAVAILABLE GSSException.UNAVAILABLE}。
+     * 
+     * 
      * @return a byte[] containing the exported context
      * @see GSSManager#createContext(byte[])
      *
@@ -916,6 +1239,13 @@ public interface GSSContext {
      * request was honored with the {@link #getMutualAuthState()
      * getMutualAuthState} method.<p>
      *
+     * <p>
+     *  请求在上下文建立期间进行相互认证。这个请求只能在上下文发起方上进行,并且必须在第一次调用<code> initSecContext </code>之前完成。<p>
+     * 
+     *  并非所有机制都支持相互认证,并且一些机制可能需要相互认证,即使应用程序不认证。
+     * 因此,应用程序应检查该请求是否符合{@link #getMutualAuthState()getMutualAuthState}方法。<p>。
+     * 
+     * 
      * @param state a boolean value indicating whether mutual
      * authentication should be used or not.
      * @see #getMutualAuthState()
@@ -946,6 +1276,17 @@ public interface GSSContext {
      * in to the <code>unwrap</code> method or the <code>verifyMIC</code>
      * method.<p>
      *
+     * <p>
+     *  在上下文建立后,为每个消息安全服务启用重播检测的请求。这个请求只能在上下文发起方上进行,并且必须在第一次调用<code> initSecContext </code>之前完成。
+     * 在上下文建立期间,重放检测不是一个选项,并且是底层机制的能力的函数。
+     * 
+     * 并非所有机制都支持重播检测,并且一些机制可能需要重播检测,即使应用程序不检测。
+     * 因此,应用程序应检查该请求是否符合{@link #getReplayDetState()getReplayDetState}方法。
+     * 如果启用重播检测,则{@link MessageProp#isDuplicateToken()MessageProp.isDuplicateToken}和{@link MessageProp#isOldToken()MessageProp.isOldToken}
+     * 方法将为<code> MessageProp </code>对象返回有效的结果,传递到<code> unwrap </code>方法或<code> verifyMIC </code>方法。
+     * 因此,应用程序应检查该请求是否符合{@link #getReplayDetState()getReplayDetState}方法。<p>。
+     * 
+     * 
      * @param state a boolean value indicating whether replay detection
      * should be enabled over the established context or not.
      * @see #getReplayDetState()
@@ -978,6 +1319,18 @@ public interface GSSContext {
      * in to the <code>unwrap</code> method or the <code>verifyMIC</code>
      * method.<p>
      *
+     * <p>
+     *  请求在上下文建立后为每个消息安全服务启用序列检查。这个请求只能在上下文发起方上进行,并且必须在第一次调用<code> initSecContext </code>之前完成。
+     * 在上下文建立期间,序列检查不是一个选项,并且是底层机制的能力的函数。
+     * 
+     * 并非所有机制都支持序列检查,并且一些机制可能需要序列检查,即使应用程序没有。
+     * 因此,应用程序应检查该请求是否符合{@link #getSequenceDetState()getSequenceDetState}方法。
+     * 如果启用了序列检查,则{@link MessageProp#isDuplicateToken()MessageProp.isDuplicateToken},{@link MessageProp#isOldToken()MessageProp.isOldToken}
+     * ,{@link MessageProp#isUnseqToken()MessageProp.isUnseqToken}和{@link MessageProp#isGapToken()MessageProp.isGapToken}
+     * 方法将返回传递到<code> unwrap </code>方法或<code> verifyMIC </code>方法的<code> MessageProp </code>方法。
+     * 因此,应用程序应检查该请求是否符合{@link #getSequenceDetState()getSequenceDetState}方法。<p>。
+     * 
+     * 
      * @param state a boolean value indicating whether sequence checking
      * should be enabled over the established context or not.
      * @see #getSequenceDetState()
@@ -1004,6 +1357,13 @@ public interface GSSContext {
      * to the general rule that a mechanism may enable a service even if it
      * is not requested.<p>
      *
+     * <p>
+     *  请求在上下文建立期间将启动程序的凭据委派给接受方。这个请求只能在上下文发起方上进行,并且必须在第一次调用<code> initSecContext </code>之前完成。
+     * 
+     *  并非所有机制都支持凭证委派。因此,希望委派的应用程序应检查该请求是否符合{@link #getCredDelegState()getCredDelegState}方法。
+     * 如果应用程序指示不必使用委派,则该机制将遵守请求并且不会发生委派。这是一个常规规则的例外,即一个机制可以启用一个服务,即使它没有被请求。<p>。
+     * 
+     * 
      * @param state a boolean value indicating whether the credentials
      * should be delegated or not.
      * @see #getCredDelegState()
@@ -1024,6 +1384,12 @@ public interface GSSContext {
      * application should check to see if the request was honored with the
      * {@link #getAnonymityState() getAnonymityState} method.<p>
      *
+     * <p>
+     * 请求发起者的身份不向接受者披露。这个请求只能在上下文发起方上进行,并且必须在第一次调用<code> initSecContext </code>之前完成。
+     * 
+     *  并非所有机制都支持发起者的匿名。因此,应用程序应检查该请求是否符合{@link #getAnonymityState()getAnonymityState}方法。<p>
+     * 
+     * 
      * @param state a boolean value indicating if the initiator should
      * be authenticated to the acceptor as an anonymous principal.
      * @see #getAnonymityState
@@ -1051,6 +1417,17 @@ public interface GSSContext {
      * Enabling confidentiality will also automatically enable
      * integrity.<p>
      *
+     * <p>
+     *  请求为<code> wrap </code>方法启用数据机密性。这个请求只能在上下文发起方上进行,并且必须在第一次调用<code> initSecContext </code>之前完成。
+     * 
+     *  并非所有机制都支持机密性,而且即使应用程序不请求其他机制也可能启用机制。应用程序可以检查该请求是否符合{@link #getConfState()getConfState}方法。
+     * 如果启用机密性,则机制才会在传递到<code> wrap </code>方法的{@link MessageProp#MessageProp(int,boolean)MessageProp}对象中满足隐私
+     * 请求。
+     *  并非所有机制都支持机密性,而且即使应用程序不请求其他机制也可能启用机制。应用程序可以检查该请求是否符合{@link #getConfState()getConfState}方法。
+     * 
+     *  启用机密性也会自动启用完整性。<p>
+     * 
+     * 
      * @param state a boolean value indicating whether confidentiality
      * should be enabled or not.
      * @see #getConfState()
@@ -1078,6 +1455,15 @@ public interface GSSContext {
      * Disabling integrity will also automatically disable
      * confidentiality.<p>
      *
+     * <p>
+     *  请求为<code> wrap </code>和<code> getMIC </code>方法启用数据完整性。
+     * 这个请求只能在上下文发起方上进行,并且必须在第一次调用<code> initSecContext </code>之前完成。
+     * 
+     * 并非所有机制都支持完整性,而且即使应用程序不请求它,其他机制也可能启用它。应用程序可以检查该请求是否符合{@link #getIntegState()getIntegState}方法。<p>
+     * 
+     *  禁用完整性也会自动禁用机密性。<p>
+     * 
+     * 
      * @param state a boolean value indicating whether integrity
      * should be enabled or not.
      * @see #getIntegState()
@@ -1098,6 +1484,12 @@ public interface GSSContext {
      * the underlying mechanism and the application should call the {@link
      * #getLifetime() getLifetime} method to determine this.<p>
      *
+     * <p>
+     *  请求上下文的生命周期(以秒为单位)。此方法只能在上下文启动器端调用,并且必须在第一次调用<code> initSecContext </code>之前完成。<p>
+     * 
+     *  上下文的实际生存期将取决于底层机制的能力,应用程序应调用{@link #getLifetime()getLifetime}方法来确定这一点。<p>
+     * 
+     * 
      * @param lifetime the desired context lifetime in seconds. Use
      * <code>INDEFINITE_LIFETIME</code> to request an indefinite lifetime
      * and <code>DEFAULT_LIFETIME</code> to request a default lifetime.
@@ -1118,6 +1510,11 @@ public interface GSSContext {
      * <code>initSecContext</code> and the acceptor must call it before the
      * first call to <code>acceptSecContext</code>.
      *
+     * <p>
+     *  设置在上下文建立期间使用的通道绑定。该方法可以在上下文发起方和上下文接受方两方面被调用,但必须在上下文建立开始之前被调用。
+     * 这意味着发起者必须在第一次调用<code> initSecContext </code>之前调用它,并且接受者必须在第一次调用<code> acceptSecContext </code>之前调用它。
+     * 
+     * 
      * @param cb the channel bindings to use.
      *
      * @throws GSSException containing the following
@@ -1136,6 +1533,13 @@ public interface GSSContext {
      * request and this method will return <code>false</code> on the
      * initiator's side from that point onwards. <p>
      *
+     * <p>
+     * 确定是否在此上下文上启用凭据委派。它可以由上下文启动器和上下文接受器调用。对于确定的答案,这个方法必须在上下文建立完成后才被调用。
+     * 请注意,如果启动器请求不允许委派,{@link #requestCredDeleg(boolean)requestCredDeleg}方法将遵守该请求,并且此方法将从该点开始在启动器方返回<code> 
+     * false </code>。
+     * 确定是否在此上下文上启用凭据委派。它可以由上下文启动器和上下文接受器调用。对于确定的答案,这个方法必须在上下文建立完成后才被调用。 <p>。
+     * 
+     * 
      * @return true if delegation is enabled, false otherwise.
      * @see #requestCredDeleg(boolean)
      */
@@ -1150,6 +1554,11 @@ public interface GSSContext {
      * context completion and dispose the context if its request was not
      * honored.<p>
      *
+     * <p>
+     *  确定是否在此上下文上启用相互验证。它可以由上下文启动器和上下文接受器调用。对于确定的答案,这个方法必须在上下文建立完成后才被调用。
+     * 请求相互身份验证的发起者可以在上下文完成后调用此方法,并在其请求未获得满足时处理上下文。<p>。
+     * 
+     * 
      * @return true if mutual authentication is enabled, false otherwise.
      * @see #requestMutualAuth(boolean)
      */
@@ -1164,6 +1573,11 @@ public interface GSSContext {
      * detection can call this method after context completion and
      * dispose the context if its request was not honored.<p>
      *
+     * <p>
+     *  确定是否为来自此上下文的每消息安全服务启用重播检测。它可以由上下文启动器和上下文接受器调用。对于确定的答案,这个方法必须在上下文建立完成后才被调用。
+     * 请求重放检测的启动器可以在上下文完成后调用此方法,并在其请求未被满足时处理上下文。<p>。
+     * 
+     * 
      * @return true if replay detection is enabled, false otherwise.
      * @see #requestReplayDet(boolean)
      */
@@ -1178,6 +1592,11 @@ public interface GSSContext {
      * checking can call this method after context completion and
      * dispose the context if its request was not honored.<p>
      *
+     * <p>
+     * 确定是否为来自此上下文的每消息安全服务启用序列检查。它可以由上下文启动器和上下文接受器调用。对于确定的答案,这个方法必须在上下文建立完成后才被调用。
+     * 请求序列检查的启动器可以在上下文完成后调用此方法,如果其请求未得到满足,则处理上下文。<p>。
+     * 
+     * 
      * @return true if sequence checking is enabled, false otherwise.
      * @see #requestSequenceDet(boolean)
      */
@@ -1198,6 +1617,13 @@ public interface GSSContext {
      * processed by <code>acceptSecContext</code> thus far have divulged
      * the identity of the initiator.<p>
      *
+     * <p>
+     *  确定上下文发起方是否对上下文接受方匿名认证。它可以由上下文启动器和上下文接受器以及在任何时间调用。
+     *  <strong>在启动器端,对此方法的调用确定是否已通过<code> initSecContext </code>到目前为止生成的任何上下文建立令牌中公开了启动器的标识。
+     * 绝对必须匿名认证的启动器应在每次调用<code> initSecContext </code>后调用此方法,以确定是否应将所生成的令牌发送到对等体或上下文中止。
+     * </strong>在接收器端,对此方法的调用确定由<code> acceptSecContext </code>处理的任何令牌是否泄漏了发起者的身份。<p>。
+     * 
+     * 
      * @return true if the context initiator is still anonymous, false
      * otherwise.
      * @see #requestAnonymity(boolean)
@@ -1209,6 +1635,10 @@ public interface GSSContext {
      * through the use of the {@link #export() export} method.  This call
      * is only valid on fully established contexts.
      *
+     * <p>
+     *  通过使用{@link #export()export}方法确定上下文是否可转移到其他进程。此调用仅对完全建立的上下文有效。
+     * 
+     * 
      * @return true if this context can be exported, false otherwise.
      *
      * @throws GSSException containing the following
@@ -1222,6 +1652,10 @@ public interface GSSContext {
      * used over it.  Some mechanisms may allow the usage of the
      * per-message operations before the context is fully established.
      *
+     * <p>
+     * 确定上下文是否准备好要在其上使用的每个消息操作。一些机制可以允许在上下文完全建立之前使用每消息操作。
+     * 
+     * 
      * @return true if methods like <code>wrap</code>, <code>unwrap</code>,
      * <code>getMIC</code>, and <code>verifyMIC</code> can be used with
      * this context at the current stage of context establishment, false
@@ -1238,6 +1672,13 @@ public interface GSSContext {
      * <code>true</code>, so will {@link #getIntegState()
      * getIntegState}<p>
      *
+     * <p>
+     *  确定数据机密性在上下文中是否可用。
+     * 此方法可以由上下文启动器和上下文接受器调用,但只能在{@link #isProtReady()isProtReady}或{@link #isEstablished()isEstablished}返回<code>
+     *  true </code>之一后调用。
+     *  确定数据机密性在上下文中是否可用。如果此方法返回<code> true </code>,{@link #getIntegState()getIntegState} <p>。
+     * 
+     * 
      * @return true if confidentiality services are available, false
      * otherwise.
      * @see #requestConf(boolean)
@@ -1253,6 +1694,13 @@ public interface GSSContext {
      * return <code>true</code> if {@link #getConfState() getConfState}
      * returns true.<p>
      *
+     * <p>
+     *  确定在上下文中数据完整性是否可用。
+     * 此方法可以由上下文启动器和上下文接受器调用,但只能在{@link #isProtReady()isProtReady}或{@link #isEstablished()isEstablished}返回<code>
+     *  true </code>之一后调用。
+     *  确定在上下文中数据完整性是否可用。如果{@link #getConfState()getConfState}返回true,此方法将始终返回<code> true </code>。<p>。
+     * 
+     * 
      * @return true if integrity services are available, false otherwise.
      * @see #requestInteg(boolean)
      */
@@ -1265,6 +1713,11 @@ public interface GSSContext {
      * only after {@link #isEstablished() isEstablished} returns
      * true.<p>
      *
+     * <p>
+     *  确定此上下文的剩余生存期。它可以被上下文启动器和上下文接受器调用,但是对于一个确定的答案,只有在{@link #isEstablished()isEstablished}返回true之后才会被调用。
+     * <p>。
+     * 
+     * 
      * @return the remaining lifetime in seconds
      * @see #requestLifetime(int)
      */
@@ -1275,6 +1728,13 @@ public interface GSSContext {
      * after one of {@link #isProtReady() isProtReady} or {@link
      * #isEstablished() isEstablished} return <code>true</code>.
      *
+     * <p>
+     *  返回上下文发起程序的名称。
+     * 此调用仅在{@link #isProtReady()isProtReady}或{@link #isEstablished()isEstablished} return <code> true </code>
+     * 之一后才有效。
+     *  返回上下文发起程序的名称。
+     * 
+     * 
      * @return a GSSName that is an MN containing the name of the context
      * initiator.
      * @see GSSName
@@ -1290,6 +1750,13 @@ public interface GSSContext {
      * after one of {@link #isProtReady() isProtReady} or {@link
      * #isEstablished() isEstablished} return <code>true</code>.
      *
+     * <p>
+     * 返回上下文接受器的名称。
+     * 此调用仅在{@link #isProtReady()isProtReady}或{@link #isEstablished()isEstablished} return <code> true </code>
+     * 之一后才有效。
+     * 返回上下文接受器的名称。
+     * 
+     * 
      * @return a GSSName that is an MN containing the name of the context
      * acceptor.
      *
@@ -1305,6 +1772,10 @@ public interface GSSContext {
      * established, but the mechanism returned may change on successive
      * calls in the negotiated mechanism case.
      *
+     * <p>
+     *  确定用于此上下文的什么机制。该方法可以在上下文完全建立之前被调用,但是返回的机制可以在协商机制的情况下在连续调用上改变。
+     * 
+     * 
      * @return the Oid of the mechanism being used
      *
      * @throws GSSException containing the following
@@ -1321,6 +1792,11 @@ public interface GSSContext {
      * #getCredDelegState() getCredDelegState} to determine if there are
      * any delegated credentials.
      *
+     * <p>
+     *  获取由上下文启动器委派给上下文接受器的凭据。它应该仅在上下文接受器方调用,并且一旦上下文完全建立。
+     * 调用者可以使用{@link #getCredDelegState()getCredDelegState}方法来确定是否有任何委派的凭证。
+     * 
+     * 
      * @return a GSSCredential containing the initiator's delegated
      * credentials, or <code>null</code> is no credentials
      * were delegated.
@@ -1336,6 +1812,8 @@ public interface GSSContext {
      * can be called on both the context initiator's and context acceptor's
      * side.
      *
+     * <p>
+     * 
      * @return true if this is the context initiator, false if it is the
      * context acceptor.
      *

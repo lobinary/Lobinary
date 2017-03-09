@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,12 @@ import com.sun.java.swing.plaf.windows.XPStyle.*;
  * for short term storage or RMI between applications running the same
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
+ * <p>
+ *  Windows组件的翻译。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
  */
 public class WindowsMenuBarUI extends BasicMenuBarUI
 {
@@ -133,6 +140,9 @@ public class WindowsMenuBarUI extends BasicMenuBarUI
     /**
      * Action that activates the menu (e.g. when F10 is pressed).
      * Unlike BasicMenuBarUI.TakeFocus, this Action will not show menu popup.
+     * <p>
+     *  激活菜单的操作(例如,按F10时)。与BasicMenuBarUI.TakeFocus不同,此操​​作不会显示菜单弹出窗口。
+     * 
      */
     private static class TakeFocus extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -170,6 +180,9 @@ public class WindowsMenuBarUI extends BasicMenuBarUI
 
     /**
      * Checks if component belongs to an active window.
+     * <p>
+     *  检查组件是否属于活动窗口。
+     * 
      * @param c component to check
      * @return true if component belongs to an active window
      */

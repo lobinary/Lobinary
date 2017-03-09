@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.transforms.params;
 
@@ -36,6 +45,10 @@ import org.w3c.dom.NodeList;
  * Implements the parameters for the <A
  * HREF="http://www.w3.org/TR/xmldsig-filter2/">XPath Filter v2.0</A>.
  *
+ * <p>
+ *  实施<A HREF="http://www.w3.org/TR/xmldsig-filter2/"> XPath过滤器v2.0 </A>的参数。
+ * 
+ * 
  * @author $Author: coheigea $
  * @see <A HREF="http://www.w3.org/TR/xmldsig-filter2/">XPath Filter v2.0 (TR)</A>
  */
@@ -75,6 +88,9 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Constructor XPath2FilterContainer
      *
+     * <p>
+     *  构造函数XPath2FilterContainer
+     * 
      */
     private XPath2FilterContainer() {
         // no instantiation
@@ -83,6 +99,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Constructor XPath2FilterContainer
      *
+     * <p>
+     *  构造函数XPath2FilterContainer
+     * 
+     * 
      * @param doc
      * @param xpath2filter
      * @param filterType
@@ -98,6 +118,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Constructor XPath2FilterContainer
      *
+     * <p>
+     *  构造函数XPath2FilterContainer
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @throws XMLSecurityException
@@ -126,6 +150,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Creates a new XPath2FilterContainer with the filter type "intersect".
      *
+     * <p>
+     *  使用过滤器类型"intersect"创建新的XPath2FilterContainer。
+     * 
+     * 
      * @param doc
      * @param xpath2filter
      * @return the filter.
@@ -140,6 +168,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Creates a new XPath2FilterContainer with the filter type "subtract".
      *
+     * <p>
+     *  创建一个新的XPath2FilterContainer,过滤器类型为"subtract"。
+     * 
+     * 
      * @param doc
      * @param xpath2filter
      * @return the filter.
@@ -152,6 +184,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Creates a new XPath2FilterContainer with the filter type "union".
      *
+     * <p>
+     *  使用过滤器类型"union"创建新的XPath2FilterContainer。
+     * 
+     * 
      * @param doc
      * @param xpath2filter
      * @return the filter
@@ -164,6 +200,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Method newInstances
      *
+     * <p>
+     *  方法newInstances
+     * 
+     * 
      * @param doc
      * @param params
      * @return the nodelist with the data
@@ -196,6 +236,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Creates a XPath2FilterContainer from an existing Element; needed for verification.
      *
+     * <p>
+     *  从现有元素创建XPath2FilterContainer;需要验证。
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @return the filter
@@ -211,6 +255,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Returns <code>true</code> if the <code>Filter</code> attribute has value "intersect".
      *
+     * <p>
+     * 如果<code> Filter </code>属性的值为"intersect",则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the <code>Filter</code> attribute has value "intersect".
      */
     public boolean isIntersect() {
@@ -222,6 +270,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Returns <code>true</code> if the <code>Filter</code> attribute has value "subtract".
      *
+     * <p>
+     *  如果<code> Filter </code>属性的值为"subtract",则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the <code>Filter</code> attribute has value "subtract".
      */
     public boolean isSubtract() {
@@ -233,6 +285,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Returns <code>true</code> if the <code>Filter</code> attribute has value "union".
      *
+     * <p>
+     *  如果<code> Filter </code>属性的值为"union",则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the <code>Filter</code> attribute has value "union".
      */
     public boolean isUnion() {
@@ -244,6 +300,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Returns the XPath 2 Filter String
      *
+     * <p>
+     *  返回XPath 2过滤器字符串
+     * 
+     * 
      * @return the XPath 2 Filter String
      */
     public String getXPathFilterStr() {
@@ -256,6 +316,12 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
      * to work.
      *
      * $todo$ I dunno whether this crashes: <XPath> here()<!-- comment -->/ds:Signature[1]</XPath>
+     * <p>
+     *  返回包含来自XPath 2过滤器字符串信息的第一个Text节点。我们必须使用这个愚蠢的钩子来启用here()函数。
+     * 
+     *  $ todo $ I dunno是否崩溃：<XPath> here()<！ -  comment  - > / ds：Signature [1] </XPath>
+     * 
+     * 
      * @return the first Text node which contains information from the XPath 2 Filter String
      */
     public Node getXPathFilterTextNode() {
@@ -275,6 +341,10 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Method getBaseLocalName
      *
+     * <p>
+     *  方法getBaseLocalName
+     * 
+     * 
      * @return the XPATH2 tag
      */
     public final String getBaseLocalName() {
@@ -284,6 +354,9 @@ public class XPath2FilterContainer extends ElementProxy implements TransformPara
     /**
      * Method getBaseNamespace
      *
+     * <p>
+     *  方法getBaseNamespace
+     * 
      * @return XPATH2 tag namespace
      */
     public final String getBaseNamespace() {

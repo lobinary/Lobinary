@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.encoding;
@@ -240,6 +244,9 @@ public class CDRInputStream_1_0 extends CDRInputStreamBase
 
     /**
      * NOTE:  size passed to init means buffer size
+     * <p>
+     *  注意：传递给init的大小意味着缓冲区大小
+     * 
      */
     public void init(org.omg.CORBA.ORB orb,
                      ByteBuffer byteBuffer,
@@ -773,6 +780,9 @@ public class CDRInputStream_1_0 extends CDRInputStreamBase
      * This is used as a general utility (e.g., the PortableInterceptor
      * implementation uses it.   If stubFactory is null, the ior's
      * IIOPProfile must support getServant.
+     * <p>
+     *  这用作一个通用实用程序(例如,PortableInterceptor实现使用它。如果stubFactory为null,ior的IIOPProfile必须支持getServant。
+     * 
      */
     public static org.omg.CORBA.Object internalIORToObject(
         IOR ior, PresentationManager.StubFactory stubFactory, ORB orb)
@@ -874,6 +884,11 @@ public class CDRInputStream_1_0 extends CDRInputStreamBase
      * is known, it will return one of those (favoring the
      * expectedType's repId). Failing that, it uses the supplied
      * BoxedValueHelper to obtain the repository ID, as a last resort.
+     * <p>
+     *  检查值集,以查看有多少(如果有)存储库ID存在于电线上。
+     * 如果没有存储库ID信息在线上,但expectedType或expectedTypeRepId是已知的,它将返回其中之一(支持expectedType的repId)。
+     * 如果没有,它使用提供的BoxedValueHelper获取存储库ID,作为最后的手段。
+     * 
      */
     private String readRepositoryIds(int valueTag,
                                      Class expectedType,
@@ -1403,6 +1418,13 @@ public class CDRInputStream_1_0 extends CDRInputStreamBase
      * enclosing chunked types.
      *
      * ORB versioning and end tag compaction are handled here.
+     * <p>
+     *  结束标记仅为分块的值类型写入。
+     * 
+     *  在Merlin之前,我们的ORB写了结束标签,它考虑了所有封闭的值类型。这通过互操作分辨率(请参阅chunkedValueNestingLevel的详细信息)更改为仅包含封闭的分块类型。
+     * 
+     *  在此处理ORB版本控制和结束标记压缩。
+     * 
      */
     private void readEndTag() {
         if (isChunked) {
@@ -1665,6 +1687,9 @@ public class CDRInputStream_1_0 extends CDRInputStreamBase
 
     /**
      * Are we at the end of the input stream?
+     * <p>
+     *  我们在输入流的结尾吗?
+     * 
      */
 //     public final boolean isAtEnd() {
 //      return bbwi.position() == bbwi.buflen;
@@ -2092,6 +2117,9 @@ public class CDRInputStream_1_0 extends CDRInputStreamBase
      * attempt is to find the class locally, falling back
      * on the URL that came with the value.  The second
      * attempt is to use a URL from the remote CodeBase.
+     * <p>
+     *  尝试查找由给定的存储库ID字符串和期望类型描述的类。第一个尝试是在本地查找类,回退到与值一起的URL。第二个尝试是使用来自远程C​​odeBase的URL。
+     * 
      */
     private Class getClassFromString(String repositoryIDString,
                                      String codebaseURL,
@@ -2142,6 +2170,9 @@ public class CDRInputStream_1_0 extends CDRInputStreamBase
      * repository ID string.  At most, three attempts are made:
      * Try to find it locally, through the provided URL, and
      * finally, via a URL from the remote CodeBase.
+     * <p>
+     * 尝试查找由给定存储库ID字符串描述的类。最多尝试三次：尝试通过提供的URL在本地查找,最后通过远程CodeBase的URL查找。
+     * 
      */
     private Class getClassFromString(String repositoryIDString,
                                      String codebaseURL)
@@ -2264,6 +2295,8 @@ public class CDRInputStream_1_0 extends CDRInputStreamBase
      * if there are enough bytes available to do so.  Otherwise,
      * it just returns.  This is used for some (but not all)
      * GIOP 1.2 message headers.
+     * <p>
+     *  如果有足够的字节可以这样做,则对齐给定八位字节边界上的当前位置。否则,它只是返回。这用于一些(但不是全部)GIOP 1.2消息头。
      */
 
     void alignOnBoundary(int octetBoundary) {

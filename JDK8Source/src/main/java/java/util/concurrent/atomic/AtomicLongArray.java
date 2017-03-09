@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.atomic;
@@ -42,6 +46,10 @@ import sun.misc.Unsafe;
  * A {@code long} array in which elements may be updated atomically.
  * See the {@link java.util.concurrent.atomic} package specification
  * for description of the properties of atomic variables.
+ * <p>
+ *  一个{@code long}数组,其中元素可以被原子地更新。有关原子变量属性的描述,请参阅{@link java.util.concurrent.atomic}包规范。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -75,6 +83,10 @@ public class AtomicLongArray implements java.io.Serializable {
      * Creates a new AtomicLongArray of the given length, with all
      * elements initially zero.
      *
+     * <p>
+     *  创建给定长度的新AtomicLongArray,所有元素最初为零。
+     * 
+     * 
      * @param length the length of the array
      */
     public AtomicLongArray(int length) {
@@ -85,6 +97,10 @@ public class AtomicLongArray implements java.io.Serializable {
      * Creates a new AtomicLongArray with the same length as, and
      * all elements copied from, the given array.
      *
+     * <p>
+     *  创建一个新的AtomicLongArray,它的长度和给定数组中的所有元素都复制。
+     * 
+     * 
      * @param array the array to copy elements from
      * @throws NullPointerException if array is null
      */
@@ -96,6 +112,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Returns the length of the array.
      *
+     * <p>
+     *  返回数组的长度。
+     * 
+     * 
      * @return the length of the array
      */
     public final int length() {
@@ -105,6 +125,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Gets the current value at position {@code i}.
      *
+     * <p>
+     *  获取位置{@code i}处的当前值。
+     * 
+     * 
      * @param i the index
      * @return the current value
      */
@@ -119,6 +143,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Sets the element at position {@code i} to the given value.
      *
+     * <p>
+     *  将位置{@code i}处的元素设置为给定值。
+     * 
+     * 
      * @param i the index
      * @param newValue the new value
      */
@@ -129,6 +157,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Eventually sets the element at position {@code i} to the given value.
      *
+     * <p>
+     *  最终将位置{@code i}处的元素设置为给定值。
+     * 
+     * 
      * @param i the index
      * @param newValue the new value
      * @since 1.6
@@ -141,6 +173,10 @@ public class AtomicLongArray implements java.io.Serializable {
      * Atomically sets the element at position {@code i} to the given value
      * and returns the old value.
      *
+     * <p>
+     *  以原子方式将位置{@code i}处的元素设置为给定值,并返回旧值。
+     * 
+     * 
      * @param i the index
      * @param newValue the new value
      * @return the previous value
@@ -153,6 +189,10 @@ public class AtomicLongArray implements java.io.Serializable {
      * Atomically sets the element at position {@code i} to the given
      * updated value if the current value {@code ==} the expected value.
      *
+     * <p>
+     *  如果当前值{@code ==}为期望值,则将位置{@code i}处的元素原子地设置为给定的更新值。
+     * 
+     * 
      * @param i the index
      * @param expect the expected value
      * @param update the new value
@@ -175,6 +215,13 @@ public class AtomicLongArray implements java.io.Serializable {
      * spuriously and does not provide ordering guarantees</a>, so is
      * only rarely an appropriate alternative to {@code compareAndSet}.
      *
+     * <p>
+     *  如果当前值{@code ==}为期望值,则将位置{@code i}处的元素原子地设置为给定的更新值。
+     * 
+     *  <p> <a href="package-summary.html#weakCompareAndSet">可能会失败,并且不提供排序保证</a>,因此很少是{@code compareAndSet}的
+     * 适当替代品。
+     * 
+     * 
      * @param i the index
      * @param expect the expected value
      * @param update the new value
@@ -187,6 +234,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Atomically increments by one the element at index {@code i}.
      *
+     * <p>
+     *  在索引{@code i}处以元素为单位递增一个元素。
+     * 
+     * 
      * @param i the index
      * @return the previous value
      */
@@ -197,6 +248,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Atomically decrements by one the element at index {@code i}.
      *
+     * <p>
+     * 在索引{@code i}处的元素以原子方式递减1。
+     * 
+     * 
      * @param i the index
      * @return the previous value
      */
@@ -207,6 +262,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Atomically adds the given value to the element at index {@code i}.
      *
+     * <p>
+     *  将给定值以原子方式添加到索引{@code i}处的元素。
+     * 
+     * 
      * @param i the index
      * @param delta the value to add
      * @return the previous value
@@ -218,6 +277,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Atomically increments by one the element at index {@code i}.
      *
+     * <p>
+     *  在索引{@code i}处以元素为单位递增一个元素。
+     * 
+     * 
      * @param i the index
      * @return the updated value
      */
@@ -228,6 +291,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Atomically decrements by one the element at index {@code i}.
      *
+     * <p>
+     *  在索引{@code i}处的元素以原子方式递减1。
+     * 
+     * 
      * @param i the index
      * @return the updated value
      */
@@ -238,6 +305,10 @@ public class AtomicLongArray implements java.io.Serializable {
     /**
      * Atomically adds the given value to the element at index {@code i}.
      *
+     * <p>
+     *  将给定值以原子方式添加到索引{@code i}处的元素。
+     * 
+     * 
      * @param i the index
      * @param delta the value to add
      * @return the updated value
@@ -252,6 +323,10 @@ public class AtomicLongArray implements java.io.Serializable {
      * function should be side-effect-free, since it may be re-applied
      * when attempted updates fail due to contention among threads.
      *
+     * <p>
+     *  使用应用给定函数的结果以原子方式更新索引{@code i}处的元素,返回上一个值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 
+     * 
      * @param i the index
      * @param updateFunction a side-effect-free function
      * @return the previous value
@@ -273,6 +348,10 @@ public class AtomicLongArray implements java.io.Serializable {
      * function should be side-effect-free, since it may be re-applied
      * when attempted updates fail due to contention among threads.
      *
+     * <p>
+     *  使用应用给定函数的结果以原子方式更新索引{@code i}处的元素,返回更新后的值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 
+     * 
      * @param i the index
      * @param updateFunction a side-effect-free function
      * @return the updated value
@@ -297,6 +376,11 @@ public class AtomicLongArray implements java.io.Serializable {
      * applied with the current value at index {@code i} as its first
      * argument, and the given update as the second argument.
      *
+     * <p>
+     *  使用将给定函数应用于当前值和给定值的结果,以原子方式更新索引{@code i}处的元素,返回上一个值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 该函数应用索引{@code i}的当前值作为其第一个参数,并将给定的更新作为第二个参数。
+     * 
+     * 
      * @param i the index
      * @param x the update value
      * @param accumulatorFunction a side-effect-free function of two arguments
@@ -323,6 +407,11 @@ public class AtomicLongArray implements java.io.Serializable {
      * applied with the current value at index {@code i} as its first
      * argument, and the given update as the second argument.
      *
+     * <p>
+     * 使用将给定函数应用于当前值和给定值的结果对索引{@code i}处的元素进行原子更新,并返回更新后的值。该函数应该是无副作用的,因为当尝试的更新由于线程之间的争用而失败时,它可以被重新应用。
+     * 函数应用索引{@code i}的当前值作为其第一个参数,并将给定的更新作为第二个参数。
+     * 
+     * 
      * @param i the index
      * @param x the update value
      * @param accumulatorFunction a side-effect-free function of two arguments
@@ -342,6 +431,8 @@ public class AtomicLongArray implements java.io.Serializable {
 
     /**
      * Returns the String representation of the current values of array.
+     * <p>
+     * 
      * @return the String representation of the current values of array
      */
     public String toString() {

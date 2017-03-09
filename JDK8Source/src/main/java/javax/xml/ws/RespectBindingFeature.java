@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,28 @@ import javax.xml.ws.soap.AddressingFeature;
  *  parameter/return type bindings.
  * </ul>
  *
+ * <p>
+ *  此功能阐明了在JAX-WS运行时中使用<code> wsdl：binding </code>。
+ * 
+ *  此功能可在创建SEI代理时使用,在客户端使用{@link Dispatch}实例,并在服务器端使用{@link Endpoint}实例。
+ * 此功能不能用于在客户端上创建{@link Service}实例。
+ * <p>
+ *  此功能仅对具有关联的WSDL的Web服务有用。
+ * 启用此功能需要JAX-WS实现在运行时检查端点的<code> wsdl：binding </code>,以确保所有<code> wsdl：extensions </code> / code>属性设置为<code>
+ *  true </code>被理解和正在使用。
+ *  此功能仅对具有关联的WSDL的Web服务有用。
+ * <p>
+ *  下面介绍此功能对启用或禁用的影响：
+ * <ul>
+ * <li> ENABLED：在此模式下,JAX-WS运行时务必确保所有必需的<code> wsdl：binding </code>扩展(包括策略)都被运行时理解和使用,应用。
+ * 如果有相应的{@link WebServiceFeature}或注释,Web服务可以禁用特定扩展。
+ * 类似地,Web服务客户端可以在创建代理或Dispatch实例时使用相应的<code> WebServiceFeature </code>禁用特定的扩展。
+ * 运行时还必须确保SEI参数/返回值的绑定遵守<code> wsdl：binding </code>。
+ * 启用此功能后,如果必需的(<code> wsdl：required ="true"</code>)<code> wsdl：binding </code>扩展位于WSDL中,并且JAX-WS运行时并且它没
+ * 有被Web服务开发人员显式地关闭,那么JAX-WS运行时必须基于它是在客户端还是服务器上适当地表现：。
+ * 运行时还必须确保SEI参数/返回值的绑定遵守<code> wsdl：binding </code>。
+ * <UL>
+ * 
  * @see AddressingFeature
  *
  * @since JAX-WS 2.1
@@ -86,6 +109,15 @@ public final class RespectBindingFeature extends WebServiceFeature {
     /**
      *
      * Constant value identifying the RespectBindingFeature
+     * <p>
+     *  <li>客户端：运行时必须在调用上述方法之一时不要发出{@link WebServiceException},但不得晚于第一次调用端点操作。
+     *  <li>服务器：抛出{@link WebServiceException},并且端点必须部署失败。
+     * </ul>
+     * 
+     * <li> DISABLED：在这种模式下,实现可以选择是否检查<code> wsdl：binding </code>,以及检查<code> wsdl：binding </code>的程度。
+     * 例如,一个实现可以选择表现为如果该特征被启用,另一个实现可以仅选择验证SEI的参数/返回类型绑定。
+     * </ul>
+     * 
      */
     public static final String ID = "javax.xml.ws.RespectBindingFeature";
 
@@ -93,6 +125,9 @@ public final class RespectBindingFeature extends WebServiceFeature {
     /**
      * Creates an <code>RespectBindingFeature</code>.
      * The instance created will be enabled.
+     * <p>
+     *  用于标识RespectBindingFeature的常量值
+     * 
      */
     public RespectBindingFeature() {
         this.enabled = true;
@@ -101,6 +136,10 @@ public final class RespectBindingFeature extends WebServiceFeature {
     /**
      * Creates an RespectBindingFeature
      *
+     * <p>
+     *  创建<code> RespectBindingFeature </code>。将创建已创建的实例。
+     * 
+     * 
      * @param enabled specifies whether this feature should
      * be enabled or not.
      */
@@ -110,6 +149,9 @@ public final class RespectBindingFeature extends WebServiceFeature {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  创建一个RespectBindingFeature
+     * 
      */
     public String getID() {
         return ID;

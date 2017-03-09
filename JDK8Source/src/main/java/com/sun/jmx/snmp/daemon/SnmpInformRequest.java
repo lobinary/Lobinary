@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -67,6 +68,31 @@ import com.sun.jmx.snmp.SnmpPduRequestType;
  * <BR>The <CODE>SnmpInformRequest</CODE> class is used to fullfill this latter case.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  {@link com.sun.jmx.snmp.daemon.SnmpAdaptorServer SNMP适配器服务器}使用此类向SNMP管理器发送通知请求并接收通知响应。
+ * <P>
+ *  此类提供了基本功能,使您能够触发通知请求,处理重试,超时和处理来自管理器的响应。
+ * <BR>
+ *  SNMP适配器服务器指定通知请求的目的地,并控制单个通知请求/响应的大小以适应其<CODE> bufferSize </CODE>。它指定尝试的最大次数和用于通知请求的超时。
+ * 它还提供资源,例如认证机制(使用其PDU工厂),控制由其创建的所有通知请求,以及最后向用户通知响应。
+ * <P>
+ *  每个通知请求在准备好被发送时被分配唯一标识符,该唯一标识符帮助识别具有与透明地位于其下的协议引擎的匹配通知响应的通知请求。
+ * 当计时器到期时,引擎执行重试通知请求的作业,并在耗尽最大尝试次数后发生超时时调用SNMP适配器服务器。
+ * <P>
+ * 通知请求对象提供方法{@link #waitForCompletion waitForCompletion(long time)},它使用户能够在具有通知请求的同步模式下操作。
+ * 这是通过阻塞用户线程达到所需的时间间隔来完成的。每当请求到达完成时,用户线程都会得到通知,而与响应的状态无关。
+ * <P>
+ *  如果在发送通知请求时提供了{@link com.sun.jmx.snmp.daemon.SnmpInformHandler notification callback},则用户以通知请求的异步模式运行
+ * 。
+ * 用户线程未被阻塞,并且在接收到通知响应时调用由用户提供的特定通知回调实现。
+ * 
+ * <P>
+ *  <B>注意：</B> <BR>从RFC 1905,SNMP通知请求被定义为由以管理员角色扮演的SNMPv2实体生成和发送的请求,同样扮演经理角色的另一个SNMPv2实体。
+ * 实现此行为的机制在SNMP管理器API中定义。
+ * <BR>
+ *  然而,此功能已经派生,在一些文档中,通知请求看起来像一个SNMPv2陷阱,得到响应。 <BR> <CODE> SnmpInformRequest </CODE>类用于完全填充后一种情况。
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
  */
 
 public class SnmpInformRequest implements SnmpDefinitions {
@@ -76,21 +102,33 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * This object maintains a global counter for the inform request ID.
+     * <p>
+     *  此对象维护通知请求ID的全局计数器。
+     * 
      */
     private static SnmpRequestCounter requestCounter = new SnmpRequestCounter();
 
     /**
      * This contains a list of <CODE>SnmpVarBind</CODE> objects for making the SNMP inform requests.
+     * <p>
+     *  它包含用于进行SNMP通知请求的<CODE> SnmpVarBind </CODE>对象的列表。
+     * 
      */
     private SnmpVarBindList varBindList = null;
 
     /**
      * The error status associated with the inform response packet.
+     * <p>
+     * 与通知响应数据包相关联的错误状态。
+     * 
      */
     int errorStatus = 0;
 
     /**
      * The index in <CODE>SnmpVarBindList</CODE> that caused the exception.
+     * <p>
+     *  导致异常的<CODE> SnmpVarBindList </CODE>中的索引。
+     * 
      */
     int errorIndex = 0;
 
@@ -102,93 +140,145 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * The SNMP adaptor associated with this inform request.
+     * <p>
+     *  与此通知请求关联的SNMP适配器。
+     * 
      */
     private transient SnmpAdaptorServer adaptor;
 
     /**
      * The session object associated with this inform request.
+     * <p>
+     *  与此通知请求相关联的会话对象。
+     * 
      */
     private transient SnmpSession informSession;
 
     /**
      * The user implementation of the callback interface for this request.
+     * <p>
+     *  该请求的回调接口的用户实现。
+     * 
      */
     private SnmpInformHandler callback = null;
 
     /**
      * The inform request PDU.
+     * <p>
+     *  通知请求PDU。
+     * 
      */
     //private SnmpPduPacket requestPdu;
     SnmpPdu requestPdu;
 
     /**
      * The inform response PDU.
+     * <p>
+     *  通知响应PDU。
+     * 
      */
     //private SnmpPduRequest responsePdu;
     SnmpPduRequestType responsePdu;
 
     /**
      * Base status of an inform request.
+     * <p>
+     *  通知请求的基本状态。
+     * 
      */
     final static private int stBase             = 1;
 
     /**
      * Status of an inform request: in progress.
+     * <p>
+     *  通知请求的状态：正在进行。
+     * 
      */
     final static public int stInProgress                = stBase;
 
     /**
      * Status of an inform request: waiting to be sent.
+     * <p>
+     *  通知请求的状态：正在等待发送。
+     * 
      */
     final static public int stWaitingToSend     = (stBase << 1) | stInProgress;
 
     /**
      * Status of an inform request: waiting for reply.
+     * <p>
+     *  通知请求的状态：正在等待回复。
+     * 
      */
     final static public int stWaitingForReply   = (stBase << 2) | stInProgress;
 
     /**
      * Status of an inform request: reply received.
+     * <p>
+     *  通知请求的状态：已收到回复。
+     * 
      */
     final static public int stReceivedReply     = (stBase << 3) | stInProgress;
 
     /**
      * Status of an inform request: request aborted.
+     * <p>
+     *  通知请求的状态：请求已中止。
+     * 
      */
     final static public int stAborted                   = (stBase << 4);
 
     /**
      * Status of an inform request: timeout.
+     * <p>
+     *  通知请求的状态：超时。
+     * 
      */
     final static public int stTimeout                   = (stBase << 5);
 
     /**
      * Status of an inform request: internal error occured.
+     * <p>
+     *  通知请求的状态：发生内部错误。
+     * 
      */
     final static public int stInternalError     = (stBase << 6);
 
     /**
      * Status of an inform request: result available for the request.
+     * <p>
+     *  通知请求的状态：请求的结果。
+     * 
      */
     final static public int stResultsAvailable  = (stBase << 7);
 
     /**
      * Status of an inform request: request never used.
+     * <p>
+     *  通知请求的状态：请求从未使用。
+     * 
      */
     final static public int stNeverUsed                 = (stBase << 8);
 
     /**
      * Number of tries performed for the current polling operation.
+     * <p>
+     *  对当前轮询操作执行的尝试次数。
+     * 
      */
     private int numTries = 0;
 
     /**
      * Timeout.
      * The default amount of time is 3000 millisec.
+     * <p>
+     *  时间到。默认时间为3000毫秒。
+     * 
      */
     private int timeout = 3 * 1000; // 3 seconds.
 
     /**
+    /* <p>
      */
     private int reqState = stNeverUsed;
 
@@ -200,6 +290,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * The request ID for an active inform request.
+     * <p>
+     *  活动通知请求的请求ID。
+     * 
      */
     private int requestId = 0;
 
@@ -214,6 +307,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
     /**
      * For SNMP Runtime internal use only.
      * Constructor for creating new inform request. This object can be created only by an SNMP adaptor object.
+     * <p>
+     *  仅供SNMP Runtime内部使用。用于创建新通知请求的构造函数。此对象只能由SNMP适配器对象创建。
+     * 
+     * 
      * @param session <CODE>SnmpSession</CODE> object for this inform request.
      * @param adp <CODE>SnmpAdaptorServer</CODE> object for this inform request.
      * @param addr The <CODE>InetAddress</CODE> destination for this inform request.
@@ -244,6 +341,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Gets the request id (invoke identifier) of the current inform request.
+     * <p>
+     *  获取当前通知请求的请求id(调用标识符)。
+     * 
+     * 
      * @return The request id.
      */
     final public synchronized int getRequestId () {
@@ -252,6 +353,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Gets the destination address of the current inform request.
+     * <p>
+     *  获取当前通知请求的目标地址。
+     * 
+     * 
      * @return The destination address.
      */
     synchronized InetAddress getAddress() {
@@ -260,6 +365,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Gets the current status of the inform request.
+     * <p>
+     *  获取通知请求的当前状态。
+     * 
+     * 
      * @return The current status of the inform request.
      */
     final public synchronized int getRequestStatus() {
@@ -268,6 +377,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Indicates whether or not the inform request was aborted.
+     * <p>
+     *  指示通知请求是否已中止。
+     * 
+     * 
      * @return <CODE>true</CODE> if the inform request was aborted, <CODE>false</CODE> otherwise.
      */
     final public synchronized boolean isAborted() {
@@ -276,6 +389,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Indicates whether or not the inform request is in progress.
+     * <p>
+     *  指示通知请求是否正在进行。
+     * 
+     * 
      * @return <CODE>true</CODE> if the inform request is in progress, <CODE>false</CODE> otherwise.
      */
     final public synchronized boolean inProgress() {
@@ -284,6 +401,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Indicates whether or not the inform request result is available.
+     * <p>
+     * 指示通知请求结果是否可用。
+     * 
+     * 
      * @return <CODE>true</CODE> if the inform request result is available, <CODE>false</CODE> otherwise.
      */
     final public synchronized boolean isResultAvailable() {
@@ -292,6 +413,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Gets the status associated with the <CODE>SnmpVarBindList</CODE>.
+     * <p>
+     *  获取与<CODE> SnmpVarBindList </CODE>相关联的状态。
+     * 
+     * 
      * @return The error status.
      */
     final public synchronized int getErrorStatus() {
@@ -301,6 +426,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
     /**
      * Gets the index.
      * <P>NOTE: this value is equal to the <CODE>errorIndex</CODE> field minus 1.
+     * <p>
+     *  获取索引。 <P>注意：此值等于<CODE> errorIndex </CODE>字段减1。
+     * 
+     * 
      * @return The error index.
      */
     final public synchronized int getErrorIndex() {
@@ -309,6 +438,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Gets the maximum number of tries before declaring that the manager is not responding.
+     * <p>
+     *  在声明管理器没有响应之前获取最大尝试次数。
+     * 
+     * 
      * @return The maximum number of times an inform request should be tried.
      */
     final public int getMaxTries() {
@@ -317,6 +450,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Gets the number of tries performed for the current inform request.
+     * <p>
+     *  获取针对当前通知请求执行的尝试次数。
+     * 
+     * 
      * @return The number of tries performed.
      */
     final public synchronized int getNumTries() {
@@ -325,6 +462,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     final synchronized void setTimeout(int value) {
         timeout = value ;
@@ -333,6 +473,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
     /**
      * Gets absolute time in milliseconds (based on epoch time) when the next
      * polling activity will begin.
+     * <p>
+     *  获取下一个轮询活动开始时的毫秒(基于时期)的绝对时间。
+     * 
+     * 
      * @return The absolute time when polling will begin.
      */
     final public synchronized long getAbsNextPollTime () {
@@ -342,6 +486,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
     /**
      * Gets absolute time in milliseconds (based on epoch time) before which an inform
      * response is expected from a manager.
+     * <p>
+     *  以毫秒为单位(基于历元时间)获取绝对时间,在此之前,将需要来自管理器的通知响应。
+     * 
+     * 
      * @return The absolute time within which an inform response is expected.
      */
     final public synchronized long getAbsMaxTimeToWait() {
@@ -358,6 +506,11 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * This ensures accidental manipulation does not occur when a request is in progress.
      * In case of an error, <CODE>SnmpVarBindList</CODE> is the copy
      * of the original <CODE>SnmpVarBindList</CODE> at the time of making the inform request.
+     * <p>
+     *  获取通知响应的<CODE> SnmpVarBindList </CODE>。如果通知请求正在进行,它返回一个空值。这确保在请求正在进行时不会发生意外操作。
+     * 如果发生错误,<CODE> SnmpVarBindList </CODE>是发出通知请求时原始<CODE> SnmpVarBindList </CODE>的副本。
+     * 
+     * 
      * @return The list of <CODE>SnmpVarBind</CODE> objects returned by the manager or the null value if the request
      * is in progress.
      */
@@ -376,6 +529,11 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * The user must get the error status of the inform request to determine the
      * exact status of the request.
      *
+     * <p>
+     *  仅用于同步模式。提供一个挂钩,用于对先前发送的通知请求启用同步操作。在给定的线程上,只有一个通知请求可以处于同步模式。当通知请求状态达到完成时,通知阻塞的线程。如果通知请求未激活,则该方法立即返回。
+     * 用户必须获取通知请求的错误状态,以确定请求的确切状态。
+     * 
+     * 
      * @param time The amount of time to wait. Zero means block until complete.
      * @return <CODE>true</CODE> if the inform request has completed, <CODE>false</CODE> if it is still active.
      */
@@ -410,6 +568,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Cancels the active inform request and removes itself from the polling list.
+     * <p>
+     * 取消激活的通知请求,并将其自身从轮询列表中删除。
+     * 
      */
     final public void cancelRequest() {
         errorStatus = snmpReqAborted;
@@ -420,6 +581,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Notifies the registered client about the completion of an operation.
+     * <p>
+     *  通知注册客户关于操作完成。
+     * 
      */
     final public synchronized void notifyClient() {
         this.notifyAll();
@@ -430,6 +594,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * This method is called by the garbage collector on an object
      * when garbage collection determines that there are no more references to the object.
      * <P>Sets all the references to this SNMP inform request object to <CODE>null</CODE>.
+     * <p>
+     *  <CODE> SnmpInformRequest </CODE>对象的终结器。当垃圾回收确定没有对对象的更多引用时,垃圾收集器在对象上调用此方法。
+     *  <P>将对此SNMP通知请求对象的所有引用设置为<CODE> null </CODE>。
+     * 
      */
     @Override
     protected void finalize() {
@@ -444,6 +612,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Returns the <CODE>String</CODE> representation of an error code.
+     * <p>
+     *  返回错误代码的<CODE> String </CODE>表示形式。
+     * 
+     * 
      * @param errcode The error code as an integer.
      * @return The error code as a <CODE>String</CODE>.
      */
@@ -536,6 +708,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * For SNMP Runtime internal use only.
      * Starts an inform request in asynchronous mode. The callback interface
      * is used to notify the user upon request completion.
+     * <p>
+     *  仅供SNMP Runtime内部使用。在异步模式下启动通知请求。回调接口用于在请求完成时通知用户。
+     * 
+     * 
      * @param vblst The list of <CODE>SnmpVarBind</CODE> to be used.
      * @exception SnmpStatusException This inform request is already in progress.
      */
@@ -558,6 +734,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * This method submits the inform request for polling and marks the request
      * active. It does nothing if the request is already active.
      * The poll will be scheduled to happen immediately.
+     * <p>
+     *  此方法提交轮询通知请求并将请求标记为活动。如果请求已经处于活动状态,则它不会执投票将立即计划发生。
+     * 
+     * 
      * @param starttime The start time for polling.
      */
     private synchronized void startRequest(long starttime) {
@@ -568,6 +748,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * This method creates a new request ID. The ID is submitted to the poll server for scheduling.
+     * <p>
+     *  此方法创建一个新的请求ID。 ID将提交到轮询服务器进行调度。
+     * 
      */
     private void schedulePoll() {
         numTries = 0;
@@ -580,6 +763,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * This method determines whether the inform request is to be retried. This is used if the
      * peer did not respond to a previous request. If the request exceeds
      * the maxTries limit, a timeout is signaled.
+     * <p>
+     *  此方法确定是否要重试通知请求。如果对等体没有响应以前的请求,则使用此选项。如果请求超过maxTries限制,则会发出超时。
+     * 
      */
     void action() {
         if (inProgress() == false)
@@ -632,6 +818,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Constructs an inform request PDU.
+     * <p>
+     *  构造通知请求PDU。
+     * 
      */
     synchronized SnmpPdu constructPduPacket() {
         SnmpPduPacket reqpdu = null;
@@ -727,6 +916,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * to expect a response. It acquires a lock on the socket to prevent a case
      * where a response arrives before this thread could insert the
      * request into the wait queue.
+     * <p>
+     *  将准备的PDU分组发送到管理器并更新数据结构以期望响应。它获取套接字上的锁,以防止在该线程可以将请求插入等待队列之前响应到达的情况。
+     * 
+     * 
      * @exception IOException Signals that an I/O exception of some sort has occurred.
      */
     final void sendPduPacket(byte[] buffer, int length) throws java.io.IOException {
@@ -746,6 +939,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     final void processResponse() {
 
@@ -804,6 +1000,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
     /**
      * Parses the inform response packet. If the agent responds with error set,
      * it does not parse any further.
+     * <p>
+     * 解析通知响应包。如果代理程序响应错误设置,它不会进一步解析任何。
+     * 
      */
     synchronized void parsePduPacket(SnmpPduRequestType rpdu) {
 
@@ -830,6 +1029,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Calls the user implementation of the <CODE>SnmpInformHandler</CODE> interface.
+     * <p>
+     *  调用用户实现<CODE> SnmpInformHandler </CODE>接口。
+     * 
      */
     private void handleSuccess() {
 
@@ -866,6 +1068,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Calls the user implementation of the <CODE>SnmpInformHandler</CODE> interface.
+     * <p>
+     *  调用用户实现<CODE> SnmpInformHandler </CODE>接口。
+     * 
      */
     private void handleTimeout() {
 
@@ -902,6 +1107,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Calls the user implementation of the <CODE>SnmpInformHandler</CODE> interface.
+     * <p>
+     *  调用用户实现<CODE> SnmpInformHandler </CODE>接口。
+     * 
      */
     private void handleError(String msg) {
 
@@ -938,6 +1146,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Calls the user implementation of the <CODE>SnmpInformHandler</CODE> interface.
+     * <p>
+     *  调用用户实现<CODE> SnmpInformHandler </CODE>接口。
+     * 
      */
     private void handleInternalError(String msg) {
 
@@ -996,6 +1207,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     final void invokeOnResponse(Object resp) {
         if (resp != null) {
@@ -1010,6 +1224,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * This method cancels an active inform request and removes it from the polling list.
+     * <p>
+     *  此方法取消活动通知请求,并将其从轮询列表中删除。
+     * 
      */
     private void stopRequest() {
 
@@ -1035,6 +1252,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * For SNMP Runtime internal use only.
      * Gets the active <CODE>SnmpVarBindList</CODE>. The contents of it
      * are not guaranteed to be consistent when the inform request is active.
+     * <p>
+     *  仅供SNMP Runtime内部使用。获取活动<CODE> SnmpVarBindList </CODE>。当通知请求处于活动状态时,它的内容不能保证一致。
+     * 
+     * 
      * @return The list of <CODE>SnmpVarBind</CODE> objects.
      */
     final synchronized SnmpVarBindList getVarBindList() {
@@ -1045,6 +1266,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
      * For SNMP Runtime internal use only.
      * You should specify the <CODE>SnmpVarBindList</CODE> at SnmpInformRequest creation time.
      * You cannot modify it during the life-time of the object.
+     * <p>
+     *  仅供SNMP Runtime内部使用。您应该在SnmpInformRequest创建时指定<CODE> SnmpVarBindList </CODE>。您不能在对象的生命期内修改它。
+     * 
      */
     final synchronized void setVarBindList(SnmpVarBindList newvblst) {
         varBindList = newvblst;
@@ -1056,6 +1280,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     final synchronized void setErrorStatusAndIndex(int stat, int idx) {
         errorStatus = stat;
@@ -1064,6 +1291,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     final synchronized void setPrevPollTime(long prev) {
         prevPollTime = prev;
@@ -1071,6 +1301,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     final  void setRequestSentTime(long sendtime) {
         numTries++;
@@ -1088,6 +1321,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Initializes the request id from the request counter.
+     * <p>
+     *  从请求计数器初始化请求ID。
+     * 
      */
     final synchronized void initNewRequest() {
         requestId = requestCounter.getNewId();
@@ -1095,6 +1331,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     long timeRemainingForAction(long currtime) {
         switch (reqState) {
@@ -1109,6 +1348,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Returns the string state corresponding to the specified integer state.
+     * <p>
+     *  返回与指定的整数状态对应的字符串状态。
+     * 
+     * 
      * @param state The integer state.
      * @return The string state.
      */
@@ -1136,6 +1379,10 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Sets the request status to the specified value.
+     * <p>
+     *  将请求状态设置为指定的值。
+     * 
+     * 
      * @param reqst The new status request.
      */
     final synchronized void setRequestStatus(int reqst) {
@@ -1144,6 +1391,9 @@ public class SnmpInformRequest implements SnmpDefinitions {
 
     /**
      * Gives a status report of the request.
+     * <p>
+     *  提供请求的状态报告。
+     * 
      * @return The status report of the request.
      */
     @Override

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,11 @@ package javax.xml.bind;
  * this is an unchecked exception, while <tt>JAXBException</tt>
  * is a checked exception.
  *
+ * <p>
+ *  表示JAXB操作失败的异常。
+ * 
+ * <p>
+ * 
  * @see JAXB
  * @since JAXB2.1
  */

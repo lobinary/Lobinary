@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002,2003-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.util;
@@ -34,6 +44,12 @@ import com.sun.org.apache.xerces.internal.xs.XSObjectList;
  *
  * @xerces.internal
  *
+ * <p>
+ *  包含XSObject的列表。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  *
  * @version $Id: XSObjectListImpl.java,v 1.7 2010-11-01 04:40:06 joehw Exp $
@@ -42,6 +58,9 @@ public class XSObjectListImpl extends AbstractList implements XSObjectList {
 
     /**
      * An immutable empty list.
+     * <p>
+     *  一个不可变的空列表。
+     * 
      */
     public static final XSObjectListImpl EMPTY_LIST = new XSObjectListImpl(new XSObject[0], 0);
     private static final ListIterator EMPTY_ITERATOR = new ListIterator() {
@@ -89,6 +108,10 @@ public class XSObjectListImpl extends AbstractList implements XSObjectList {
     /**
      * Construct an XSObjectList implementation
      *
+     * <p>
+     *  构造一个XSObjectList实现
+     * 
+     * 
      * @param array     the data array
      * @param length    the number of elements
      */
@@ -100,6 +123,9 @@ public class XSObjectListImpl extends AbstractList implements XSObjectList {
     /**
      * The number of <code>XSObjects</code> in the list. The range of valid
      * child node indices is 0 to <code>length-1</code> inclusive.
+     * <p>
+     *  列表中<code> XSObjects </code>的数量。有效子节点索引的范围是0到<code> length-1 </code>。
+     * 
      */
     public int getLength() {
         return fLength;
@@ -109,6 +135,10 @@ public class XSObjectListImpl extends AbstractList implements XSObjectList {
      * Returns the <code>index</code>th item in the collection. The index
      * starts at 0. If <code>index</code> is greater than or equal to the
      * number of nodes in the list, this returns <code>null</code>.
+     * <p>
+     *  返回集合中的<code> index </code>项。索引从0开始。如果<code> index </code>大于或等于列表中的节点数,则返回<code> null </code>。
+     * 
+     * 
      * @param index index into the collection.
      * @return The XSObject at the <code>index</code>th position in the
      *   <code>XSObjectList</code>, or <code>null</code> if that is not a
@@ -145,6 +175,8 @@ public class XSObjectListImpl extends AbstractList implements XSObjectList {
 
     /*
      * List methods
+     * <p>
+     *  列表方法
      */
 
     public boolean contains(Object value) {

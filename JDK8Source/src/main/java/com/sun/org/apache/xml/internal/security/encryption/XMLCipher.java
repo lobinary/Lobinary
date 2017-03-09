@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.encryption;
 
@@ -79,6 +88,12 @@ import org.w3c.dom.NodeList;
  * contents. It was designed to resemble <code>javax.crypto.Cipher</code> in
  * order to facilitate understanding of its functioning.
  *
+ * <p>
+ *  <code> XMLCipher </code>加密和解密<code> Document </code>,<code> Element </code>和<code> Element </code>内容
+ * 的内容。
+ * 它被设计为类似<code> javax.crypto.Cipher </code>,以便于理解其功能。
+ * 
+ * 
  * @author Axl Mattheus (Sun Microsystems)
  * @author Christian Geuer-Pollmann
  */
@@ -237,6 +252,8 @@ public class XMLCipher {
     private Key key;
 
     /** Local copy of the kek (used to decrypt EncryptedKeys during a
+    /* <p>
+    /* 
      *  DECRYPT_MODE operation */
     private Key kek;
 
@@ -259,6 +276,9 @@ public class XMLCipher {
 
     /**
      * Set the Serializer algorithm to use
+     * <p>
+     *  设置要使用的Serializer算法
+     * 
      */
     public void setSerializer(Serializer serializer) {
         this.serializer = serializer;
@@ -267,6 +287,9 @@ public class XMLCipher {
 
     /**
      * Get the Serializer algorithm to use
+     * <p>
+     *  获取要使用的Serializer算法
+     * 
      */
     public Serializer getSerializer() {
         return serializer;
@@ -275,6 +298,10 @@ public class XMLCipher {
     /**
      * Creates a new <code>XMLCipher</code>.
      *
+     * <p>
+     *  创建新的<code> XMLCipher </code>。
+     * 
+     * 
      * @param transformation    the name of the transformation, e.g.,
      *                          <code>XMLCipher.TRIPLEDES</code>. If null the XMLCipher can only
      *                          be used for decrypt or unwrap operations where the encryption method
@@ -328,6 +355,10 @@ public class XMLCipher {
     /**
      * Checks to ensure that the supplied algorithm is valid.
      *
+     * <p>
+     *  检查以确保提供的算法有效。
+     * 
+     * 
      * @param algorithm the algorithm to check.
      * @return true if the algorithm is valid, otherwise false.
      * @since 1.0.
@@ -354,6 +385,10 @@ public class XMLCipher {
     /**
      * Validate the transformation argument of getInstance or getProviderInstance
      *
+     * <p>
+     *  验证getInstance或getProviderInstance的变换参数
+     * 
+     * 
      * @param transformation the name of the transformation, e.g.,
      *   <code>XMLCipher.TRIPLEDES</code> which is shorthand for
      *   &quot;http://www.w3.org/2001/04/xmlenc#tripledes-cbc&quot;
@@ -388,6 +423,18 @@ public class XMLCipher {
      * <code>XMLEncryptionException</code> which wraps an underlying exception.
      * The stack trace from the exception should be self explanatory.
      *
+     * <p>
+     * 返回实现指定的转换并对指定的上下文文档执行操作的<code> XMLCipher </code>。
+     * <p>
+     *  如果默认提供程序包提供所请求的转换的实现,则返回包含该实现的Cipher的实例。如果转换在默认提供程序包中不可用,则搜索其他提供程序包。
+     * <p>
+     *  <b>注意<sub> 1 </sub>：</b>转换名称不遵循"Java密码术扩展参考指南"中概述的模式,而是XML加密语法和处理文档指定的模式。
+     * 这背后的理由是为了让新手更容易编写Java加密软件来使用库。
+     * <p>
+     *  <b>注意<sub> 2 </sub>：</b> <code> getInstance()</code>不遵循与<code> javax.crypto.Cipher </code>代码>。
+     * 相反,它只会抛出一个包含底层异常的<code> XMLEncryptionException </code>。来自异常的堆栈跟踪应该是自解释的。
+     * 
+     * 
      * @param transformation the name of the transformation, e.g.,
      *   <code>XMLCipher.TRIPLEDES</code> which is shorthand for
      *   &quot;http://www.w3.org/2001/04/xmlenc#tripledes-cbc&quot;
@@ -410,6 +457,11 @@ public class XMLCipher {
      * encrypts the document.
      * <p>
      *
+     * <p>
+     *  返回实现指定转换的<code> XMLCipher </code>,对指定的上下文文档进行操作,并在加密文档之前使用指定的规范化算法对文档进行序列化。
+     * <p>
+     * 
+     * 
      * @param transformation    the name of the transformation
      * @param canon             the name of the c14n algorithm, if <code>null</code> use
      *                          standard serializer
@@ -432,6 +484,11 @@ public class XMLCipher {
      * encrypts the document.
      * <p>
      *
+     * <p>
+     * 返回实现指定转换的<code> XMLCipher </code>,对指定的上下文文档进行操作,并在加密文档之前使用指定的规范化算法对文档进行序列化。
+     * <p>
+     * 
+     * 
      * @param transformation    the name of the transformation
      * @param canon             the name of the c14n algorithm, if <code>null</code> use
      *                          standard serializer
@@ -452,6 +509,10 @@ public class XMLCipher {
      * Returns an <code>XMLCipher</code> that implements the specified
      * transformation and operates on the specified context document.
      *
+     * <p>
+     *  返回实现指定的转换并对指定的上下文文档执行操作的<code> XMLCipher </code>。
+     * 
+     * 
      * @param transformation    the name of the transformation
      * @param provider          the JCE provider that supplies the transformation
      * @return the XMLCipher
@@ -476,6 +537,11 @@ public class XMLCipher {
      * encrypts the document.
      * <p>
      *
+     * <p>
+     *  返回实现指定转换的<code> XMLCipher </code>,对指定的上下文文档进行操作,并在加密文档之前使用指定的规范化算法对文档进行序列化。
+     * <p>
+     * 
+     * 
      * @param transformation    the name of the transformation
      * @param provider          the JCE provider that supplies the transformation
      * @param canon             the name of the c14n algorithm, if <code>null</code> use standard
@@ -503,6 +569,11 @@ public class XMLCipher {
      * encrypts the document.
      * <p>
      *
+     * <p>
+     *  返回实现指定转换的<code> XMLCipher </code>,对指定的上下文文档进行操作,并在加密文档之前使用指定的规范化算法对文档进行序列化。
+     * <p>
+     * 
+     * 
      * @param transformation    the name of the transformation
      * @param provider          the JCE provider that supplies the transformation
      * @param canon             the name of the c14n algorithm, if <code>null</code> use standard
@@ -530,6 +601,10 @@ public class XMLCipher {
      * unwrap operations where the encryption method is defined in the
      * <code>EncryptionMethod</code> element.
      *
+     * <p>
+     *  返回实现无特定转换的<code> XMLCipher </code>,因此只能用于解密或解包操作,其中加密方法在<code> EncryptionMethod </code>元素中定义。
+     * 
+     * 
      * @return The XMLCipher
      * @throws XMLEncryptionException
      */
@@ -549,6 +624,12 @@ public class XMLCipher {
      * Allows the caller to specify a provider that will be used for
      * cryptographic operations.
      *
+     * <p>
+     *  返回实现无特定转换的<code> XMLCipher </code>,因此只能用于解密或解包操作,其中加密方法在<code> EncryptionMethod </code>元素中定义。
+     * 
+     *  允许调用者指定将用于加密操作的提供程序。
+     * 
+     * 
      * @param provider          the JCE provider that supplies the transformation
      * @return the XMLCipher
      * @throws XMLEncryptionException
@@ -574,6 +655,15 @@ public class XMLCipher {
      * finalising the encryption) by calling
      * {@link #getEncryptedData} or {@link #getEncryptedKey}.
      *
+     * <p>
+     *  用密钥初始化此密码。
+     * <p>
+     * 密码根据opmode的值初始化为以下四种操作之一：加密,解密,密钥包装或密钥解包。
+     * 
+     *  对于WRAP和ENCRYPT模式,这也初始化将在随后的操作期间使用的内部EncryptedKey或EncryptedData(具有CipherValue)结构。
+     * 这可以通过调用{@link #getEncryptedData}或{@link #getEncryptedKey}获得(以便在最终确定加密之前修改KeyInfo元素等)。
+     * 
+     * 
      * @param opmode the operation mode of this cipher (this is one of the
      *   following: ENCRYPT_MODE, DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE)
      * @param key
@@ -624,6 +714,9 @@ public class XMLCipher {
 
     /**
      * Set whether secure validation is enabled or not. The default is false.
+     * <p>
+     *  设置是否启用安全验证。默认值为false。
+     * 
      */
     public void setSecureValidation(boolean secureValidation) {
         this.secureValidation = secureValidation;
@@ -634,6 +727,10 @@ public class XMLCipher {
      * These KeyResolvers are used in KeyInfo objects in DECRYPT and
      * UNWRAP modes.
      *
+     * <p>
+     *  此方法用于向XMLCipher添加自定义{@link KeyResolverSpi}。这些KeyResolver在DECRYPT和UNWRAP模式的KeyInfo对象中使用。
+     * 
+     * 
      * @param keyResolver
      */
     public void registerInternalKeyResolver(KeyResolverSpi keyResolver) {
@@ -650,6 +747,12 @@ public class XMLCipher {
      * This can then be used by applications to add KeyInfo elements and
      * set other parameters.
      *
+     * <p>
+     *  获取正在构建的EncryptedData
+     * <p>
+     *  返回在ENCRYPT操作期间构建的EncryptedData。然后可以由应用程序使用它来添加KeyInfo元素并设置其他参数。
+     * 
+     * 
      * @return The EncryptedData being built
      */
     public EncryptedData getEncryptedData() {
@@ -667,6 +770,12 @@ public class XMLCipher {
      * This can then be used by applications to add KeyInfo elements and
      * set other parameters.
      *
+     * <p>
+     *  获取正在构建的EncryptedData
+     * 
+     *  返回在ENCRYPT操作期间构建的EncryptedData。然后可以由应用程序使用它来添加KeyInfo元素并设置其他参数。
+     * 
+     * 
      * @return The EncryptedData being built
      */
     public EncryptedKey getEncryptedKey() {
@@ -685,6 +794,12 @@ public class XMLCipher {
      * class can know whether a key applies to the data part or wrapped key
      * part of an encrypted object.
      *
+     * <p>
+     *  设置密钥加密密钥。
+     * <p>
+     *  密钥加密密钥(KEK)用于加密/解密加密密钥元素。通过单独设置,XMLCipher类可以知道密钥是否适用于加密对象的数据部分或包装密钥部分。
+     * 
+     * 
      * @param kek The key to use for de/encrypting key data
      */
 
@@ -701,6 +816,14 @@ public class XMLCipher {
      * <b>Note:</b> This should only be used in cases where the context
      * document has been passed in via a call to doFinal.
      *
+     * <p>
+     *  Martial加密数据
+     * 
+     * 获取EncryptedData对象并返回表示适当<code> EncryptedData </code>的DOM元素
+     * <p>
+     *  <b>注意：</b>这只应用于上下文文档已通过调用doFinal传入的情况。
+     * 
+     * 
      * @param encryptedData EncryptedData object to martial
      * @return the DOM <code>Element</code> representing the passed in
      * object
@@ -715,6 +838,12 @@ public class XMLCipher {
      * Takes an EncryptedData object and returns a DOM Element that
      * represents the appropriate <code>EncryptedData</code>
      *
+     * <p>
+     *  Martial加密数据
+     * 
+     *  获取EncryptedData对象并返回表示适当<code> EncryptedData </code>的DOM元素
+     * 
+     * 
      * @param context The document that will own the returned nodes
      * @param encryptedData EncryptedData object to martial
      * @return the DOM <code>Element</code> representing the passed in
@@ -735,6 +864,15 @@ public class XMLCipher {
      * <b>Note:</b> This should only be used in cases where the context
      * document has been passed in via a call to doFinal.
      *
+     * <p>
+     *  Martial加密密钥
+     * 
+     *  使用EncryptedKey对象并返回一个DOM元素,该元素表示适当的<code> EncryptedKey </code>
+     * 
+     * <p>
+     *  <b>注意：</b>这只应用于上下文文档已通过调用doFinal传入的情况。
+     * 
+     * 
      * @param encryptedKey EncryptedKey object to martial
      * @return the DOM <code>Element</code> representing the passed in
      * object
@@ -749,6 +887,12 @@ public class XMLCipher {
      * Takes an EncryptedKey object and returns a DOM Element that
      * represents the appropriate <code>EncryptedKey</code>
      *
+     * <p>
+     *  Martial加密密钥
+     * 
+     *  使用EncryptedKey对象并返回一个DOM元素,该元素表示适当的<code> EncryptedKey </code>
+     * 
+     * 
      * @param context The document that will own the created nodes
      * @param encryptedKey EncryptedKey object to martial
      * @return the DOM <code>Element</code> representing the passed in
@@ -769,6 +913,15 @@ public class XMLCipher {
      * <b>Note:</b> This should only be used in cases where the context
      * document has been passed in via a call to doFinal.
      *
+     * <p>
+     *  Martial a ReferenceList
+     * 
+     *  创建一个ReferenceList对象,并返回一个表示适当的<code> ReferenceList </code>的DOM元素
+     * 
+     * <p>
+     *  <b>注意：</b>这只应用于上下文文档已通过调用doFinal传入的情况。
+     * 
+     * 
      * @param referenceList ReferenceList object to martial
      * @return the DOM <code>Element</code> representing the passed in
      * object
@@ -783,6 +936,12 @@ public class XMLCipher {
      * Takes a ReferenceList object and returns a DOM Element that
      * represents the appropriate <code>ReferenceList</code>
      *
+     * <p>
+     *  Martial a ReferenceList
+     * 
+     *  创建一个ReferenceList对象,并返回一个表示适当的<code> ReferenceList </code>的DOM元素
+     * 
+     * 
      * @param context The document that will own the created nodes
      * @param referenceList ReferenceList object to martial
      * @return the DOM <code>Element</code> representing the passed in
@@ -799,6 +958,11 @@ public class XMLCipher {
      * <code>Document</code> specified when one calls
      * {@link #getInstance(String) getInstance}.
      *
+     * <p>
+     *  加密<code> Element </code>并将其替换为上下文<code> Document </code>中的加密副本,即<code> Document </code>,当调用{@link #getInstance (String)getInstance}
+     * 。
+     * 
+     * 
      * @param element the <code>Element</code> to encrypt.
      * @return the context <code>Document</code> with the encrypted
      *   <code>Element</code> having replaced the source <code>Element</code>.
@@ -836,6 +1000,12 @@ public class XMLCipher {
      * specified when one calls
      * {@link #getInstance(String) getInstance}.
      *
+     * <p>
+     * 加密<code> NodeList </code>(<code> Element </code>)的内容,并将其父<code> Element </code>的内容替换为<code> Encrypted
+     * Type </code >在上下文<code> Document </code>中,即在调用{@link #getInstance(String)getInstance}时指定的<code> Docum
+     * ent </code>。
+     * 
+     * 
      * @param element the <code>NodeList</code> to encrypt.
      * @return the context <code>Document</code> with the encrypted
      *   <code>NodeList</code> having replaced the content of the source
@@ -870,6 +1040,24 @@ public class XMLCipher {
      * Process a DOM <code>Document</code> node. The processing depends on the
      * initialization parameters of {@link #init(int, Key) init()}.
      *
+     * <p>
+     *  if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Encrypting element content ..."); }
+     *  if(null == element){log.log(java.util.logging.Level.SEVERE,"Element unexpectedly null ..."); }; if(c
+     * ipherMode！= ENCRYPT_MODE && log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"XMLCipher unexpected in not ENCRYPT_MODE ..."); }
+     * }。
+     * 
+     *  if(algorithm == null){throw new XMLEncryptionException("XMLCipher instance without transformation specified"); }
+     *  encryptData(contextDocument,element,true);。
+     * 
+     *  Element encryptedElement = factory.toElement(ed);
+     * 
+     *  removeContent(element); element.appendChild(encryptedElement);
+     * 
+     *  return contextDocument; }}
+     * 
+     *  / **处理DOM <code> Document </code>节点。该处理取决于{@link #init(int,Key)init()}的初始化参数。
+     * 
+     * 
      * @param context the context <code>Document</code>.
      * @param source the <code>Document</code> to be encrypted or decrypted.
      * @return the processed <code>Document</code>.
@@ -911,6 +1099,23 @@ public class XMLCipher {
      * Process a DOM <code>Element</code> node. The processing depends on the
      * initialization parameters of {@link #init(int, Key) init()}.
      *
+     * <p>
+     * if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Processing source document ..."); }
+     *  if(null == context){log.log(java.util.logging.Level.SEVERE,"Context document unexpectedly null ..."); }
+     *  if(null == source){log.log(java.util.logging.Level.SEVERE,"源文档意外的null ..."); }}。
+     * 
+     *  contextDocument = context;
+     * 
+     *  文档结果= null;
+     * 
+     *  switch(cipherMode){case DECRYPT_MODE：result = decryptElement(source.getDocumentElement());打破; case ENCRYPT_MODE：result = encryptElement(source.getDocumentElement());打破; case UNWRAP_MODE：case WRAP_MODE：break; default：throw new XMLEncryptionException("empty",new IllegalStateException()); }
+     * }。
+     * 
+     *  返回结果; }}
+     * 
+     *  / **处理DOM <code>元素</code>节点。该处理取决于{@link #init(int,Key)init()}的初始化参数。
+     * 
+     * 
      * @param context the context <code>Document</code>.
      * @param element the <code>Element</code> to be encrypted.
      * @return the processed <code>Document</code>.
@@ -953,6 +1158,23 @@ public class XMLCipher {
      * depends on the initialization parameters of
      * {@link #init(int, Key) init()}.
      *
+     * <p>
+     *  if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Processing source element ..."); }
+     *  if(null == context){log.log(java.util.logging.Level.SEVERE,"Context document unexpectedly null ..."); }
+     *  if(null == element){log.log(java.util.logging.Level.SEVERE,"源元素意外null ..."); }}。
+     * 
+     *  contextDocument = context;
+     * 
+     *  文档结果= null;
+     * 
+     * switch(cipherMode){case DECRYPT_MODE：result = decryptElement(element);打破; case ENCRYPT_MODE：result = encryptElement(element);打破; case UNWRAP_MODE：case WRAP_MODE：break; default：throw new XMLEncryptionException("empty",new IllegalStateException()); }
+     * }。
+     * 
+     *  返回结果; }}
+     * 
+     *  / **处理DOM <code> Element </code>节点的内容。该处理取决于{@link #init(int,Key)init()}的初始化参数。
+     * 
+     * 
      * @param context the context <code>Document</code>.
      * @param element the <code>Element</code> which contents is to be
      *   encrypted.
@@ -1008,6 +1230,27 @@ public class XMLCipher {
      *
      * This does not change the source document in any way.
      *
+     * <p>
+     *  if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Processing source element ..."); }
+     *  if(null == context){log.log(java.util.logging.Level.SEVERE,"Context document unexpectedly null ..."); }
+     *  if(null == element){log.log(java.util.logging.Level.SEVERE,"源元素意外null ..."); }}。
+     * 
+     *  contextDocument = context;
+     * 
+     *  文档结果= null;
+     * 
+     *  switch(cipherMode){case DECRYPT_MODE：if(content){result = decryptElementContent(element); } else {result = decryptElement(element); }
+     *  break; case ENCRYPT_MODE：if(content){result = encryptElementContent(element); } else {result = encryptElement(element); }
+     *  break; case UNWRAP_MODE：case WRAP_MODE：break; default：throw new XMLEncryptionException("empty",new I
+     * llegalStateException()); }}。
+     * 
+     *  返回结果; }}
+     * 
+     *  / **返回<code> EncryptedData </code>接口。如果您想完全控制<code> EncryptedData </code>结构的内容,请使用此操作。
+     * 
+     *  这不会以任何方式更改源文档。
+     * 
+     * 
      * @param context the context <code>Document</code>.
      * @param element the <code>Element</code> that will be encrypted.
      * @return the <code>EncryptedData</code>
@@ -1025,6 +1268,14 @@ public class XMLCipher {
      *
      * This does not change the source document in any way.
      *
+     * <p>
+     * return encryptData(context,element,false); }}
+     * 
+     *  / **返回<code> EncryptedData </code>接口。如果要完全控制元素或元素内容的序列化,请使用此操作。
+     * 
+     *  这不会以任何方式更改源文档。
+     * 
+     * 
      * @param context the context <code>Document</code>.
      * @param type a URI identifying type information about the plaintext form
      *    of the encrypted content (may be <code>null</code>)
@@ -1058,6 +1309,12 @@ public class XMLCipher {
      *
      * This does not change the source document in any way.
      *
+     * <p>
+     *  返回<code> EncryptedData </code>界面。如果您想完全控制<code> EncryptedData </code>结构的内容,请使用此操作。
+     * 
+     *  这不会以任何方式更改源文档。
+     * 
+     * 
      * @param context the context <code>Document</code>.
      * @param element the <code>Element</code> that will be encrypted.
      * @param contentMode <code>true</code> to encrypt element's content only,
@@ -1090,6 +1347,20 @@ public class XMLCipher {
 
     private EncryptedData encryptData(
         Document context, Element element, String type, InputStream serializedData
+    ) throws /* <p>
+    ) throws /*  if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Encrypting element ..."); }
+    ) throws /*  if(null == context){log.log(java.util.logging.Level.SEVERE,"Context document unexpectedly null ..."); }
+    ) throws /*  if(null == element){log.log(java.util.logging.Level.SEVERE,"Element unexpectedly null ..."); }; if(c
+    ) throws /* ipherMode！= ENCRYPT_MODE && log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"XMLCipher unexpected in not ENCRYPT_MODE ..."); }
+    ) throws /* }。
+    ) throws /* 
+    ) throws /*  if(contentMode){return encryptData(context,element,EncryptionConstants.TYPE_CONTENT,null); } else {return encryptData(context,element,EncryptionConstants.TYPE_ELEMENT,null); }
+    ) throws /* }。
+    ) throws /* 
+    ) throws /*  private EncryptedData encryptData(Document context,Element element,String type,InputStream serialize
+    ) throws /* dData。
+    ) throws /* 
+    ) throws /* 
     ) throws /* XMLEncryption */ Exception {
         contextDocument = context;
 
@@ -1215,6 +1486,54 @@ public class XMLCipher {
      * you want to load an <code>EncryptedData</code> structure from a DOM
      * structure and manipulate the contents.
      *
+     * <p>
+     *  contextDocument = context;
+     * 
+     *  if(algorithm == null){throw new XMLEncryptionException("XMLCipher instance without transformation specified"); }
+     * }。
+     * 
+     * byte [] serializedOctets = null; if(serializedData == null){if(type.equals(EncryptionConstants.TYPE_CONTENT)){NodeList children = element.getChildNodes(); if(null！= children){serializedOctets = serializer.serializeToByteArray(children); }
+     *  else {Object exArgs [] = {"Element没有内容。
+     *  }; throw new XMLEncryptionException("empty",exArgs); }} else {serializedOctets = serializer.serializeToByteArray(element); }
+     * }}}}}}}}}}}}}}}}}}}}}}}}}(){if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Serialized octets：\ n"+ new String(serializedOctets,"UTF-8 ")); }
+     * }。
+     * 
+     *  byte [] encryptedBytes = null;
+     * 
+     *  //现在创建工作密码,如果没有创建已经Cipher c; if(contextCipher == null){c = constructCipher(algorithm,null); } else {c = contextCipher; }
+     *  //现在执行加密。
+     * 
+     *  try {//如果(AES_128_GCM.equals(algorithm)|| AES_192_GCM.equals(algorithm)|| AES_256_GCM.equals(algorithm)){if(random == null){random = SecureRandom.getInstance("SHA1PRNG"); }
+     *  byte [] temp = new byte [12]; random.nextBytes(temp); IvParameterSpec paramSpec = new IvParameterSpe
+     * c(temp); c.init(cipherMode,key,paramSpec); } else {c.init(cipherMode,key); }} catch(InvalidKeyExcepti
+     * on ike){throw new XMLEncryptionException("empty",ike); } catch(NoSuchAlgorithmException ex){throw new XMLEncryptionException("empty",ex); }
+     * }。
+     * 
+     * 尝试{if(serializedData！= null){int numBytes; byte [] buf = new byte [8192]; ByteArrayOutputStream baos = new ByteArrayOutputStream(); while((numBytes = serializedData.read(buf))！= -1){byte [] data = c.update(buf,0,numBytes); baos.write(data); }
+     *  baos.write(c.doFinal()); encryptedBytes = baos.toByteArray(); } else {encryptedBytes = c.doFinal(serializedOctets); if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Expected cipher.outputSize ="+ Integer.toString(c.getOutputSize(serializedOctets。
+     * 长度))); }} if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Actual cipher.outputSize ="+ Integer.toString(encryptedBytes.length) ); }
+     * } catch(IllegalStateException ise){throw new XMLEncryptionException("empty",ise); } catch(IllegalBloc
+     * kSizeException ibse){throw new XMLEncryptionException("empty",ibse); } catch(BadPaddingException bpe)
+     * {throw new XMLEncryptionException("empty",bpe); } catch(UnsupportedEncodingException uee){throw new XMLEncryptionException("empty",uee); }
+     * }。
+     * 
+     *  //现在构建一个正确的XML加密编码的八位字节流// IvParameterSpec iv; byte [] iv = c.getIV(); byte [] finalEncryptedBytes =
+     *  new byte [iv.length + encryptedBytes.length]; System.arraycopy(iv,0,finalEncryptedBytes,0,iv.length)
+     * ; System.arraycopy(encryptedBytes,0,finalEncryptedBytes,iv.length,encryptedBytes.length); String base
+     * 64EncodedEncryptedOctets = Base64.encode(finalEncryptedBytes);。
+     * 
+     * if(log.isLoggable(java.util.logging.Level.FINE)){log.log(java.util.logging.Level.FINE,"Encrypted octets：\ n"+ base64EncodedEncryptedOctets); log.log(java.util.logging.Level.FINE,"Encrypted octets length ="+ base64EncodedEncryptedOctets.length()); }
+     * }。
+     * 
+     *  try {CipherData cd = ed.getCipherData(); CipherValue cv = cd.getCipherValue(); // cv.setValue(base64EncodedEncryptedOctets.getBytes()); cv.setValue(base64EncodedEncryptedOctets);。
+     * 
+     *  if(type！= null){ed.setType(new URI(type).toString()); } EncryptionMethod method = factory.newEncrypt
+     * ionMethod(new URI(algorithm).toString()); method.setDigestAlgorithm(digestAlg); ed.setEncryptionMetho
+     * d(method); } catch(URISyntaxException ex){throw new XMLEncryptionException("empty",ex); } 回; }}。
+     * 
+     *  / **返回<code> EncryptedData </code>接口。如果要从DOM结构加载<code> EncryptedData </code>结构并操作内容,请使用此操作。
+     * 
+     * 
      * @param context the context <code>Document</code>.
      * @param element the <code>Element</code> that will be loaded
      * @throws XMLEncryptionException
@@ -1246,6 +1565,10 @@ public class XMLCipher {
      * you want to load an <code>EncryptedKey</code> structure from a DOM
      * structure and manipulate the contents.
      *
+     * <p>
+     *  返回<code> EncryptedKey </code>界面。如果要从DOM结构加载<code> EncryptedKey </code>结构并操作内容,请使用此操作。
+     * 
+     * 
      * @param context the context <code>Document</code>.
      * @param element the <code>Element</code> that will be loaded
      * @return the <code>EncryptedKey</code>
@@ -1280,6 +1603,12 @@ public class XMLCipher {
      *
      * Assumes that the context document is the document that owns the element
      *
+     * <p>
+     *  返回<code> EncryptedKey </code>界面。如果要从DOM结构加载<code> EncryptedKey </code>结构并操作内容,请使用此操作。
+     * 
+     *  假设上下文文档是拥有元素的文档
+     * 
+     * 
      * @param element the <code>Element</code> that will be loaded
      * @return the <code>EncryptedKey</code>
      * @throws XMLEncryptionException
@@ -1291,6 +1620,10 @@ public class XMLCipher {
     /**
      * Encrypts a key to an EncryptedKey structure
      *
+     * <p>
+     *  将密钥加密到EncryptedKey结构
+     * 
+     * 
      * @param doc the Context document that will be used to general DOM
      * @param key Key to encrypt (will use previously set KEK to
      * perform encryption
@@ -1304,6 +1637,10 @@ public class XMLCipher {
     /**
      * Encrypts a key to an EncryptedKey structure
      *
+     * <p>
+     *  将密钥加密到EncryptedKey结构
+     * 
+     * 
      * @param doc the Context document that will be used to general DOM
      * @param key Key to encrypt (will use previously set KEK to
      * perform encryption
@@ -1390,6 +1727,10 @@ public class XMLCipher {
     /**
      * Decrypt a key from a passed in EncryptedKey structure
      *
+     * <p>
+     * 从传入的EncryptedKey结构中解密密钥
+     * 
+     * 
      * @param encryptedKey Previously loaded EncryptedKey that needs
      * to be decrypted.
      * @param algorithm Algorithm for the decryption
@@ -1492,6 +1833,9 @@ public class XMLCipher {
 
     /**
      * Construct an OAEPParameterSpec object from the given parameters
+     * <p>
+     *  从给定的参数构造OAEPParameterSpec对象
+     * 
      */
     private OAEPParameterSpec constructOAEPParameters(
         String encryptionAlgorithm,
@@ -1530,6 +1874,9 @@ public class XMLCipher {
 
     /**
      * Construct a Cipher object
+     * <p>
+     *  构造一个Cipher对象
+     * 
      */
     private Cipher constructCipher(String algorithm, String digestAlgorithm) throws XMLEncryptionException {
         String jceAlgorithm = JCEMapper.translateURItoJCEID(algorithm);
@@ -1577,6 +1924,10 @@ public class XMLCipher {
      * EncryptedData loaded.  The algorithm URI will be read from the
      * EncryptedData
      *
+     * <p>
+     *  从传入的EncryptedKey结构中解密密钥。当cipher已经加载了EncryptedData时,此版本主要在内部使用。算法URI将从EncryptedData读取
+     * 
+     * 
      * @param encryptedKey Previously loaded EncryptedKey that needs
      * to be decrypted.
      * @return a key corresponding to the given type
@@ -1589,6 +1940,10 @@ public class XMLCipher {
     /**
      * Removes the contents of a <code>Node</code>.
      *
+     * <p>
+     *  删除<code> Node </code>的内容。
+     * 
+     * 
      * @param node the <code>Node</code> to clear.
      */
     private static void removeContent(Node node) {
@@ -1600,6 +1955,10 @@ public class XMLCipher {
     /**
      * Decrypts <code>EncryptedData</code> in a single-part operation.
      *
+     * <p>
+     *  在单一部分操作中解密<code> EncryptedData </code>。
+     * 
+     * 
      * @param element the <code>EncryptedData</code> to decrypt.
      * @return the <code>Node</code> as a result of the decrypt operation.
      * @throws XMLEncryptionException
@@ -1636,6 +1995,8 @@ public class XMLCipher {
 
     /**
      *
+     * <p>
+     * 
      * @param element
      * @return the <code>Node</code> as a result of the decrypt operation.
      * @throws XMLEncryptionException
@@ -1661,6 +2022,14 @@ public class XMLCipher {
      * as a byte array.
      *
      * Does not modify the source document.
+     * <p>
+     *  将加密数据元素解密为字节数组。
+     * 
+     *  当在EncryptedData节点中传递时,以字节数组返回解密。
+     * 
+     *  不修改源文档。
+     * 
+     * 
      * @param element
      * @return the bytes resulting from the decryption
      * @throws XMLEncryptionException
@@ -1773,6 +2142,9 @@ public class XMLCipher {
 
     /*
      * Expose the interface for creating XML Encryption objects
+     * <p>
+     *  公开用于创建XML加密对象的界面
+     * 
      */
 
     /**
@@ -1784,6 +2156,14 @@ public class XMLCipher {
      *<p>
      * An EncryptionMethod will still need to be added however
      *
+     * <p>
+     *  创建<code>加密数据</code> <code>元素</code>。
+     * 
+     *  newEncryptedData和newEncryptedKey方法创建可以立即使用的相当完整的元素。所有其他create *方法返回仍然需要构建的裸元素。
+     * p>
+     *  然而,仍然需要添加加密方法
+     * 
+     * 
      * @param type Either REFERENCE_TYPE or VALUE_TYPE - defines what kind of
      * CipherData this EncryptedData will contain.
      * @param value the Base 64 encoded, encrypted text to wrap in the
@@ -1839,6 +2219,14 @@ public class XMLCipher {
      *<p>
      * An EncryptionMethod will still need to be added however
      *
+     * <p>
+     *  创建<code>加密密钥</code> <code>元素</code>。
+     * 
+     *  newEncryptedData和newEncryptedKey方法创建可以立即使用的相当完整的元素。所有其他create *方法返回仍然需要构建的裸元素。
+     * p>
+     *  然而,仍然需要添加加密方法
+     * 
+     * 
      * @param type Either REFERENCE_TYPE or VALUE_TYPE - defines what kind of
      * CipherData this EncryptedData will contain.
      * @param value the Base 64 encoded, encrypted text to wrap in the
@@ -1888,6 +2276,10 @@ public class XMLCipher {
     /**
      * Create an AgreementMethod object
      *
+     * <p>
+     *  创建AgreementMethod对象
+     * 
+     * 
      * @param algorithm Algorithm of the agreement method
      * @return a new <code>AgreementMethod</code>
      */
@@ -1898,6 +2290,10 @@ public class XMLCipher {
     /**
      * Create a CipherData object
      *
+     * <p>
+     *  创建CipherData对象
+     * 
+     * 
      * @param type Type of this CipherData (either VALUE_TUPE or
      * REFERENCE_TYPE)
      * @return a new <code>CipherData</code>
@@ -1909,6 +2305,10 @@ public class XMLCipher {
     /**
      * Create a CipherReference object
      *
+     * <p>
+     *  创建CipherReference对象
+     * 
+     * 
      * @param uri The URI that the reference will refer
      * @return a new <code>CipherReference</code>
      */
@@ -1919,6 +2319,10 @@ public class XMLCipher {
     /**
      * Create a CipherValue element
      *
+     * <p>
+     *  创建CipherValue元素
+     * 
+     * 
      * @param value The value to set the ciphertext to
      * @return a new <code>CipherValue</code>
      */
@@ -1929,6 +2333,10 @@ public class XMLCipher {
     /**
      * Create an EncryptionMethod object
      *
+     * <p>
+     *  创建EncryptionMethod对象
+     * 
+     * 
      * @param algorithm Algorithm for the encryption
      * @return a new <code>EncryptionMethod</code>
      */
@@ -1938,6 +2346,10 @@ public class XMLCipher {
 
     /**
      * Create an EncryptionProperties element
+     * <p>
+     * 创建EncryptionProperties元素
+     * 
+     * 
      * @return a new <code>EncryptionProperties</code>
      */
     public EncryptionProperties createEncryptionProperties() {
@@ -1946,6 +2358,10 @@ public class XMLCipher {
 
     /**
      * Create a new EncryptionProperty element
+     * <p>
+     *  创建一个新的EncryptionProperty元素
+     * 
+     * 
      * @return a new <code>EncryptionProperty</code>
      */
     public EncryptionProperty createEncryptionProperty() {
@@ -1954,6 +2370,10 @@ public class XMLCipher {
 
     /**
      * Create a new ReferenceList object
+     * <p>
+     *  创建一个新的ReferenceList对象
+     * 
+     * 
      * @param type ReferenceList.DATA_REFERENCE or ReferenceList.KEY_REFERENCE
      * @return a new <code>ReferenceList</code>
      */
@@ -1967,6 +2387,12 @@ public class XMLCipher {
      * <b>Note</b>: A context document <i>must</i> have been set
      * elsewhere (possibly via a call to doFinal).  If not, use the
      * createTransforms(Document) method.
+     * <p>
+     *  创建一个新的Transforms对象
+     * <p>
+     *  <b>注意</b>：必须在其他位置(可能通过调用doFinal)设置上下文文档<i> </i>。如果没有,请使用createTransforms(Document)方法。
+     * 
+     * 
      * @return a new <code>Transforms</code>
      */
     public Transforms createTransforms() {
@@ -1980,6 +2406,12 @@ public class XMLCipher {
      * code, the creation of a Transforms object <b>requires</b> a
      * context document.
      *
+     * <p>
+     *  创建一个新的Transforms对象
+     * 
+     *  因为转换的处理目前是在签名代码中完成的,所以创建Transforms对象<b>需要</b>一个上下文文档。
+     * 
+     * 
      * @param doc Document that will own the created Transforms node
      * @return a new <code>Transforms</code>
      */
@@ -1989,10 +2421,14 @@ public class XMLCipher {
 
     /**
      *
+     * <p>
+     * 
      * @author Axl Mattheus
      */
     private class Factory {
         /**
+        /* <p>
+        /* 
          * @param algorithm
          * @return a new AgreementMethod
          */
@@ -2001,6 +2437,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param type
          * @return a new CipherData
          *
@@ -2010,6 +2448,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param uri
          * @return a new CipherReference
          */
@@ -2018,6 +2458,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param value
          * @return a new CipherValue
          */
@@ -2029,9 +2471,14 @@ public class XMLCipher {
         CipherValue newCipherValue(byte[] value) {
             return new CipherValueImpl(value);
         }
+        /* <p>
+        /*  CipherValue newCipherValue(byte [] value){return new CipherValueImpl(value); }}
+        /* 
          */
 
         /**
+        /* <p>
+        /* 
          * @param data
          * @return a new EncryptedData
          */
@@ -2040,6 +2487,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param data
          * @return a new EncryptedKey
          */
@@ -2048,6 +2497,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param algorithm
          * @return a new EncryptionMethod
          */
@@ -2056,6 +2507,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @return a new EncryptionProperties
          */
         EncryptionProperties newEncryptionProperties() {
@@ -2063,6 +2516,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @return a new EncryptionProperty
          */
         EncryptionProperty newEncryptionProperty() {
@@ -2070,6 +2525,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param type ReferenceList.DATA_REFERENCE or ReferenceList.KEY_REFERENCE
          * @return a new ReferenceList
          */
@@ -2078,6 +2535,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @return a new Transforms
          */
         Transforms newTransforms() {
@@ -2085,6 +2544,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param doc
          * @return a new Transforms
          */
@@ -2093,6 +2554,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new CipherData
          * @throws XMLEncryptionException
@@ -2132,6 +2595,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new CipherReference
          * @throws XMLEncryptionException
@@ -2168,6 +2633,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new CipherValue
          */
@@ -2178,6 +2645,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new EncryptedData
          * @throws XMLEncryptionException
@@ -2239,6 +2708,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new EncryptedKey
          * @throws XMLEncryptionException
@@ -2307,6 +2778,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new KeyInfo
          * @throws XMLEncryptionException
@@ -2328,6 +2801,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new EncryptionMethod
          */
@@ -2383,6 +2858,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new EncryptionProperties
          */
@@ -2406,6 +2883,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new EncryptionProperty
          */
@@ -2424,6 +2903,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param element
          * @return a new ReferenceList
          */
@@ -2467,6 +2948,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param encryptedData
          * @return the XML Element form of that EncryptedData
          */
@@ -2475,6 +2958,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param encryptedKey
          * @return the XML Element form of that EncryptedKey
          */
@@ -2483,6 +2968,8 @@ public class XMLCipher {
         }
 
         /**
+        /* <p>
+        /* 
          * @param referenceList
          * @return the XML Element form of that ReferenceList
          */
@@ -2498,6 +2985,8 @@ public class XMLCipher {
             private String algorithmURI = null;
 
             /**
+            /* <p>
+            /* 
              * @param algorithm
              */
             public AgreementMethodImpl(String algorithm) {
@@ -2573,6 +3062,8 @@ public class XMLCipher {
             private int cipherType = Integer.MIN_VALUE;
 
             /**
+            /* <p>
+            /* 
              * @param type
              */
             public CipherDataImpl(int type) {
@@ -2639,6 +3130,8 @@ public class XMLCipher {
             private Attr referenceNode = null;
 
             /**
+            /* <p>
+            /* 
              * @param uri
              */
             public CipherReferenceImpl(String uri) {
@@ -2648,6 +3141,8 @@ public class XMLCipher {
             }
 
             /**
+            /* <p>
+            /* 
              * @param uri
              */
             public CipherReferenceImpl(Attr uri) {
@@ -2693,6 +3188,8 @@ public class XMLCipher {
             private String cipherValue = null;
 
             /**
+            /* <p>
+            /* 
              * @param value
              */
             public CipherValueImpl(String value) {
@@ -2723,6 +3220,8 @@ public class XMLCipher {
         private class EncryptedDataImpl extends EncryptedTypeImpl implements EncryptedData {
 
             /**
+            /* <p>
+            /* 
              * @param data
              */
             public EncryptedDataImpl(CipherData data) {
@@ -2777,6 +3276,8 @@ public class XMLCipher {
             private String carriedName = null;
 
             /**
+            /* <p>
+            /* 
              * @param data
              */
             public EncryptedKeyImpl(CipherData data) {
@@ -2882,6 +3383,10 @@ public class XMLCipher {
 
             /**
              * Constructor.
+             * <p>
+             *  构造函数。
+             * 
+             * 
              * @param data
              */
             protected EncryptedTypeImpl(CipherData data) {
@@ -2890,6 +3395,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the Id
              */
             public String getId() {
@@ -2898,6 +3405,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @param id
              */
             public void setId(String id) {
@@ -2906,6 +3415,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the type
              */
             public String getType() {
@@ -2914,6 +3425,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @param type
              */
             public void setType(String type) {
@@ -2933,6 +3446,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the MimeType
              */
             public String getMimeType() {
@@ -2940,6 +3455,8 @@ public class XMLCipher {
             }
             /**
              *
+             * <p>
+             * 
              * @param type
              */
             public void setMimeType(String type) {
@@ -2948,6 +3465,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the encoding
              */
             public String getEncoding() {
@@ -2956,6 +3475,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @param encoding
              */
             public void setEncoding(String encoding) {
@@ -2975,6 +3496,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the EncryptionMethod
              */
             public EncryptionMethod getEncryptionMethod() {
@@ -2983,6 +3506,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @param method
              */
             public void setEncryptionMethod(EncryptionMethod method) {
@@ -2991,6 +3516,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the KeyInfo
              */
             public KeyInfo getKeyInfo() {
@@ -2999,6 +3526,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @param info
              */
             public void setKeyInfo(KeyInfo info) {
@@ -3007,6 +3536,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the CipherData
              */
             public CipherData getCipherData() {
@@ -3015,6 +3546,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the EncryptionProperties
              */
             public EncryptionProperties getEncryptionProperties() {
@@ -3023,6 +3556,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @param properties
              */
             public void setEncryptionProperties(EncryptionProperties properties) {
@@ -3040,6 +3575,10 @@ public class XMLCipher {
 
             /**
              * Constructor.
+             * <p>
+             *  构造函数。
+             * 
+             * 
              * @param algorithm
              */
             public EncryptionMethodImpl(String algorithm) {
@@ -3168,6 +3707,9 @@ public class XMLCipher {
 
             /**
              * Constructor.
+             * <p>
+             *  构造函数。
+             * 
              */
             public EncryptionPropertiesImpl() {
                 encryptionProperties = new LinkedList<EncryptionProperty>();
@@ -3223,6 +3765,9 @@ public class XMLCipher {
 
             /**
              * Constructor.
+             * <p>
+             *  构造函数。
+             * 
              */
             public EncryptionPropertyImpl() {
                 encryptionInformation = new LinkedList<Element>();
@@ -3241,6 +3786,9 @@ public class XMLCipher {
                     /*
                      * This is a same document URI reference. Do not parse,
                      * because it has no scheme.
+                     * <p>
+                     *  这是一个相同的文档URI引用。不解析,因为它没有方案。
+                     * 
                      */
                     this.target = target;
                 } else {
@@ -3313,6 +3861,9 @@ public class XMLCipher {
 
             /**
              * Construct Transforms
+             * <p>
+             *  构造变换
+             * 
              */
             public TransformsImpl() {
                 super(contextDocument);
@@ -3320,6 +3871,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @param doc
              */
             public TransformsImpl(Document doc) {
@@ -3336,6 +3889,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @param element
              * @throws XMLSignatureException
              * @throws InvalidTransformException
@@ -3350,6 +3905,8 @@ public class XMLCipher {
 
             /**
              *
+             * <p>
+             * 
              * @return the XML Element form of that Transforms
              */
             public Element toElement() {
@@ -3378,6 +3935,10 @@ public class XMLCipher {
 
             /**
              * Constructor.
+             * <p>
+             *  构造函数。
+             * 
+             * 
              * @param type
              */
             public ReferenceListImpl(int type) {
@@ -3451,6 +4012,10 @@ public class XMLCipher {
              * <code>ReferenceImpl</code> is an implementation of
              * <code>Reference</code>.
              *
+             * <p>
+             *  <code> ReferenceImpl </code>是<code>引用</code>的实现。
+             * 
+             * 
              * @see Reference
              */
             private abstract class ReferenceImpl implements Reference {
@@ -3491,6 +4056,8 @@ public class XMLCipher {
                 }
 
                 /**
+                /* <p>
+                /* 
                  * @return the XML Element form of that Reference
                  */
                 public Element toElement() {

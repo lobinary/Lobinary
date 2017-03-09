@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import static sun.swing.SwingUtilities2.drawVLine;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  Motif滑块
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class MotifSliderUI extends BasicSliderUI {
@@ -59,6 +67,9 @@ public class MotifSliderUI extends BasicSliderUI {
 
     /**
      * MotifSliderUI Constructor
+     * <p>
+     *  MotifSliderUI构造函数
+     * 
      */
     public MotifSliderUI(JSlider b)   {
         super(b);
@@ -66,6 +77,8 @@ public class MotifSliderUI extends BasicSliderUI {
 
     /**
      * create a MotifSliderUI object
+     * <p>
+     *  创建MotifSliderUI对象
      */
     public static ComponentUI createUI(JComponent b)    {
         return new MotifSliderUI((JSlider)b);

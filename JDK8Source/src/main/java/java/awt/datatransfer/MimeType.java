@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,11 +41,19 @@ import java.util.Locale;
  * THIS IS *NOT* - REPEAT *NOT* - A PUBLIC CLASS! DataFlavor IS
  * THE PUBLIC INTERFACE, AND THIS IS PROVIDED AS A ***PRIVATE***
  * (THAT IS AS IN *NOT* PUBLIC) HELPER CLASS!
+ * <p>
+ *  多用途Internet邮件扩展(MIME)类型,如RFC 2045和2046中定义。
+ * 
+ *  这是*不*  - 重复*不*  - 公共类！ DataFlavor是公共接口,并且这是作为***私人***(这是在*非*公共)的帮助类提供！
+ * 
  */
 class MimeType implements Externalizable, Cloneable {
 
     /*
      * serialization support
+     * <p>
+     *  序列化支持
+     * 
      */
 
     static final long serialVersionUID = -6568722458793895906L;
@@ -53,6 +62,9 @@ class MimeType implements Externalizable, Cloneable {
      * Constructor for externalization; this constructor should not be
      * called directly by an application, since the result will be an
      * uninitialized, immutable <code>MimeType</code> object.
+     * <p>
+     *  外部化构造器;这个构造函数不应该由应用程序直接调用,因为结果将是一个未初始化的,不可变的<code> MimeType </code>对象。
+     * 
      */
     public MimeType() {
     }
@@ -60,6 +72,10 @@ class MimeType implements Externalizable, Cloneable {
     /**
      * Builds a <code>MimeType</code> from a <code>String</code>.
      *
+     * <p>
+     *  从<code> String </code>构建<code> MimeType </code>。
+     * 
+     * 
      * @param rawdata text used to initialize the <code>MimeType</code>
      * @throws NullPointerException if <code>rawdata</code> is null
      */
@@ -71,6 +87,10 @@ class MimeType implements Externalizable, Cloneable {
      * Builds a <code>MimeType</code> with the given primary and sub
      * type but has an empty parameter list.
      *
+     * <p>
+     *  用给定的主类型和子类型构建一个<code> MimeType </code>,但是有一个空的参数列表。
+     * 
+     * 
      * @param primary the primary type of this <code>MimeType</code>
      * @param sub the subtype of this <code>MimeType</code>
      * @throws NullPointerException if either <code>primary</code> or
@@ -84,6 +104,10 @@ class MimeType implements Externalizable, Cloneable {
      * Builds a <code>MimeType</code> with a pre-defined
      * and valid (or empty) parameter list.
      *
+     * <p>
+     *  使用预定义和有效(或空)参数列表构建<code> MimeType </code>。
+     * 
+     * 
      * @param primary the primary type of this <code>MimeType</code>
      * @param sub the subtype of this <code>MimeType</code>
      * @param mtpl the requested parameter list
@@ -124,6 +148,10 @@ MimeTypeParseException {
      * <code>MimeType</code>s are equal if their primary types,
      * subtypes, and  parameters are all equal. No default values
      * are taken into account.
+     * <p>
+     *  <code> MimeType </code>如果它们的主类型,子类型和参数都相等,则它们是相等的。不考虑默认值。
+     * 
+     * 
      * @param thatObject the object to be evaluated as a
      *    <code>MimeType</code>
      * @return <code>true</code> if <code>thatObject</code> is
@@ -144,6 +172,10 @@ MimeTypeParseException {
     /**
      * A routine for parsing the MIME type out of a String.
      *
+     * <p>
+     *  用于从String中解析MIME类型的例程。
+     * 
+     * 
      * @throws NullPointerException if <code>rawdata</code> is null
      */
     private void parse(String rawdata) throws MimeTypeParseException {
@@ -193,6 +225,9 @@ MimeTypeParameterList(rawdata.substring(semIndex));
 
     /**
      * Retrieve the primary type of this object.
+     * <p>
+     *  检索此对象的主类型。
+     * 
      */
     public String getPrimaryType() {
         return primaryType;
@@ -200,6 +235,9 @@ MimeTypeParameterList(rawdata.substring(semIndex));
 
     /**
      * Retrieve the sub type of this object.
+     * <p>
+     *  检索此对象的子类型。
+     * 
      */
     public String getSubType() {
         return subType;
@@ -207,6 +245,9 @@ MimeTypeParameterList(rawdata.substring(semIndex));
 
     /**
      * Retrieve a copy of this object's parameter list.
+     * <p>
+     *  检索此对象的参数列表的副本。
+     * 
      */
     public MimeTypeParameterList getParameters() {
         return (MimeTypeParameterList)parameters.clone();
@@ -215,6 +256,9 @@ MimeTypeParameterList(rawdata.substring(semIndex));
     /**
      * Retrieve the value associated with the given name, or null if there
      * is no current association.
+     * <p>
+     *  检索与给定名称关联的值,如果没有当前关联,则返回null。
+     * 
      */
     public String getParameter(String name) {
         return parameters.get(name);
@@ -225,6 +269,11 @@ MimeTypeParameterList(rawdata.substring(semIndex));
      * any previous association.
      *
      * @throw IllegalArgumentException if parameter or value is illegal
+     * <p>
+     *  设置要与给定名称关联的值,替换任何先前的关联。
+     * 
+     *  @throw IllegalArgumentException如果参数或值是非法的
+     * 
      */
     public void setParameter(String name, String value) {
         parameters.set(name, value);
@@ -234,6 +283,11 @@ MimeTypeParameterList(rawdata.substring(semIndex));
      * Remove any value associated with the given name.
      *
      * @throw IllegalArgumentExcpetion if parameter may not be deleted
+     * <p>
+     *  删除与给定名称关联的任何值。
+     * 
+     * @throw IllegalArgumentExcpetion如果参数可能不被删除
+     * 
      */
     public void removeParameter(String name) {
         parameters.remove(name);
@@ -241,6 +295,9 @@ MimeTypeParameterList(rawdata.substring(semIndex));
 
     /**
      * Return the String representation of this object.
+     * <p>
+     *  返回此对象的String表示形式。
+     * 
      */
     public String toString() {
         return getBaseType() + parameters.toString();
@@ -249,6 +306,9 @@ MimeTypeParameterList(rawdata.substring(semIndex));
     /**
      * Return a String representation of this object
      * without the parameter list.
+     * <p>
+     *  返回此对象的String表示形式,不带参数列表。
+     * 
      */
     public String getBaseType() {
         return primaryType + "/" + subType;
@@ -259,6 +319,10 @@ MimeTypeParameterList(rawdata.substring(semIndex));
      * subtype of this object are the same as the specified
      * <code>type</code>; otherwise returns <code>false</code>.
      *
+     * <p>
+     *  如果此对象的主类型和子类型与指定的<code> type </code>相同,则返回<code> true </code>;否则返回<code> false </code>。
+     * 
+     * 
      * @param type the type to compare to <code>this</code>'s type
      * @return <code>true</code> if the primary type and the
      *    subtype of this object are the same as the
@@ -280,6 +344,10 @@ MimeTypeParameterList(rawdata.substring(semIndex));
      * described in <code>rawdata</code>; otherwise returns
      * <code>false</code>.
      *
+     * <p>
+     *  如果此对象的主类型和子类型与<code> rawdata </code>中描述的内容类型相同,则返回<code> true </code>;否则返回<code> false </code>。
+     * 
+     * 
      * @param rawdata the raw data to be examined
      * @return <code>true</code> if the primary type and the
      *    subtype of this object are the same as the content type
@@ -298,6 +366,10 @@ MimeTypeParameterList(rawdata.substring(semIndex));
      * by calling the methods of DataOutput for its primitive values or
      * calling the writeObject method of ObjectOutput for objects, strings
      * and arrays.
+     * <p>
+     *  对象实现writeExternal方法,通过调用DataOutput的原始值方法或调用ObjectOutput的writeObject方法来保存对象,字符串和数组的内容。
+     * 
+     * 
      * @exception IOException Includes any I/O exceptions that may occur
      */
     public void writeExternal(ObjectOutput out) throws IOException {
@@ -319,6 +391,11 @@ MimeTypeParameterList(rawdata.substring(semIndex));
      * types and readObject for objects, strings and arrays.  The
      * readExternal method must read the values in the same sequence
      * and with the same types as were written by writeExternal.
+     * <p>
+     *  对象实现readExternal方法以通过调用DataInput的原始类型和readObject对象,字符串和数组的方法来恢复其内容。
+     *  readExternal方法必须读取与writeExternal所写的相同序列和相同类型的值。
+     * 
+     * 
      * @exception ClassNotFoundException If the class for an object being
      *              restored cannot be found.
      */
@@ -339,6 +416,10 @@ ClassNotFoundException {
 
     /**
      * Returns a clone of this object.
+     * <p>
+     *  返回此对象的克隆。
+     * 
+     * 
      * @return a clone of this object
      */
 
@@ -360,6 +441,9 @@ ClassNotFoundException {
 
     /**
      * Determines whether or not a given character belongs to a legal token.
+     * <p>
+     *  确定给定字符是否属于合法令牌。
+     * 
      */
     private static boolean isTokenChar(char c) {
         return ((c > 040) && (c < 0177)) && (TSPECIALS.indexOf(c) < 0);
@@ -368,6 +452,10 @@ ClassNotFoundException {
     /**
      * Determines whether or not a given string is a legal token.
      *
+     * <p>
+     *  确定给定字符串是否是合法令牌。
+     * 
+     * 
      * @throws NullPointerException if <code>s</code> is null
      */
     private boolean isValidToken(String s) {
@@ -387,6 +475,8 @@ ClassNotFoundException {
 
     /**
      * A string that holds all the special chars.
+     * <p>
+     *  一个包含所有特殊字符的字符串。
      */
 
     private static final String TSPECIALS = "()<>@,;:\\\"/[]?=";

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -63,6 +64,9 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage;
  * to initialize a piHandler before the Persistent Server Activation. This
  * PIHandler implementation will be replaced by the real PIHandler in
  * ORB.postInit( ) call.
+ * <p>
+ *  这是PIHandler的无操作实现。它在ORBConfigurator中用于在永久服务器激活之前初始化piHandler。
+ * 此PIHandler实现将由ORB.postInit()调用中的真正PIHandler替换。
  */
 public class PINoOpHandlerImpl implements PIHandler
 {

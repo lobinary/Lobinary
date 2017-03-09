@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.javax.rmi.CORBA; // Util (sed marker, don't remove!)
@@ -116,6 +120,9 @@ import sun.corba.SharedSecrets;
 /**
  * Provides utility methods that can be used by stubs and ties to
  * perform common operations.
+ * <p>
+ *  提供可由存根和连接用于执行常见操作的实用程序方法。
+ * 
  */
 public class Util implements javax.rmi.CORBA.UtilDelegate
 {
@@ -178,6 +185,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
 
    /**
      * Maps a SystemException to a RemoteException.
+     * <p>
+     *  将SystemException映射到RemoteException。
+     * 
+     * 
      * @param ex the SystemException to map.
      * @return the mapped exception.
      */
@@ -314,6 +325,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
 
     /**
      * Writes any java.lang.Object as a CORBA any.
+     * <p>
+     *  将任何java.lang.Object写为CORBA any。
+     * 
+     * 
      * @param out the stream in which to write the any.
      * @param obj the object to write as an any.
      */
@@ -369,6 +384,16 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
      * it wasn't our ORB or Any implementation).
      *
      * This does not handle null objs.
+     * <p>
+     *  当使用我们自己的ORB和任何实现时,我们需要获得ORB版本并适当地创建类型代码。
+     * 这是为了克服一个错误,其中JDK 1.3.x ORBs使用tk_char而不是tk_wchar来描述Java char字段。
+     * 
+     *  这只适用于RMI-IIOP with Util.writeAny,因为我们实际上知道当我们插入值时,我们正在写什么ORB和流。
+     * 
+     *  如果不可能创建TypeCode,则返回null(意味着它不是我们的ORB或任何实现)。
+     * 
+     *  这不处理null obj。
+     * 
      */
     private TypeCode createTypeCode(Serializable obj,
                                     org.omg.CORBA.Any any,
@@ -394,6 +419,11 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
      * It also handles backwards compatibility with JDK 1.3.x.
      *
      * This method will not return null.
+     * <p>
+     *  这用于为空引用创建TypeCode。它还处理与JDK 1.3.x的向后兼容性。
+     * 
+     *  此方法不会返回null。
+     * 
      */
     private TypeCode createTypeCodeForNull(org.omg.CORBA.ORB orb)
     {
@@ -423,6 +453,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
 
     /**
      * Reads a java.lang.Object as a CORBA any.
+     * <p>
+     *  将java.lang.Object读为CORBA any。
+     * 
+     * 
      * @param in the stream from which to read the any.
      * @return the object read from the stream.
      */
@@ -441,6 +475,14 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
      * and wired to <code>obj</code>, then written to <code>out.write_Object(org.omg.CORBA.Object)</code>.
      * If <code>obj</code> is a CORBA Object, it is written to
      * <code>out.write_Object(org.omg.CORBA.Object)</code>.
+     * <p>
+     *  将java.lang.Object写为CORBA对象。
+     * 如果<code> obj </code>是导出的RMI-IIOP服务器对象,则找到连接并连接到<code> obj </code>,然后写入<code> out.write_Object(org.omg
+     * .CORBA。
+     *  将java.lang.Object写为CORBA对象。对象)</code>。
+     * 如果<code> obj </code>是一个CORBA对象,它被写入<code> out.write_Object(org.omg.CORBA.Object)</code>。
+     * 
+     * 
      * @param out the stream in which to write the object.
      * @param obj the object to write.
      */
@@ -459,6 +501,14 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
      * <code>out.write_abstract_interface(java.lang.Object)</code>. If <code>obj</code> is an exported
      * RMI-IIOP server object, the tie is found and wired to <code>obj</code>,
      * then written to <code>out.write_abstract_interface(java.lang.Object)</code>.
+     * <p>
+     * 将java.lang.Object写为值或CORBA对象。
+     * 如果<code> obj </code>是一个值对象或存根对象,它被写入<code> out.write_abstract_interface(java.lang.Object)</code>。
+     * 如果<code> obj </code>是导出的RMI-IIOP服务器对象,则找到并连接到<code> obj </code>,然后写入<code> out.write_abstract_interfa
+     * ce(java.lang.Object) </code>。
+     * 如果<code> obj </code>是一个值对象或存根对象,它被写入<code> out.write_abstract_interface(java.lang.Object)</code>。
+     * 
+     * 
      * @param out the stream in which to write the object.
      * @param obj the object to write.
      */
@@ -474,6 +524,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
     /**
      * Registers a target for a tie. Adds the tie to an internal table and calls
      * {@link Tie#setTarget} on the tie object.
+     * <p>
+     *  注册领带的目标。将tie绑定到内部表,并在tie对象上调用{@link Tie#setTarget}。
+     * 
+     * 
      * @param tie the tie to register.
      * @param target the target for the tie.
      */
@@ -504,6 +558,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
     /**
      * Removes the associated tie from an internal table and calls {@link Tie#deactivate}
      * to deactivate the object.
+     * <p>
+     *  从内部表中删除关联的绑定,并调用{@link Tie#deactivate}以停用对象。
+     * 
+     * 
      * @param target the object to unexport.
      */
     public void unexportObject(java.rmi.Remote target)
@@ -544,6 +602,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
 
     /**
      * Returns the tie (if any) for a given target object.
+     * <p>
+     *  返回给定目标对象的tie(如果有)。
+     * 
+     * 
      * @return the tie or null if no tie is registered for the given target.
      */
     public Tie getTie (Remote target)
@@ -555,6 +617,9 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
 
     /**
      * An unsynchronized version of getTie() for internal use.
+     * <p>
+     *  内部使用的getTie()的非同步版本。
+     * 
      */
     private static Tie lookupTie (Remote target)
     {
@@ -570,6 +635,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
     /**
      * Returns a singleton instance of a class that implements the
      * {@link ValueHandler} interface.
+     * <p>
+     *  返回实现{@link ValueHandler}接口的类的单例实例。
+     * 
+     * 
      * @return a class which implements the ValueHandler interface.
      */
     public ValueHandler createValueHandler()
@@ -579,6 +648,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
 
     /**
      * Returns the codebase, if any, for the given class.
+     * <p>
+     *  返回给定类的代码库(如果有)。
+     * 
+     * 
      * @param clz the class to get a codebase for.
      * @return a space-separated list of URLs, or null.
      */
@@ -588,6 +661,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
 
     /**
      * Returns a class instance for the specified class.
+     * <p>
+     *  返回指定类的类实例。
+     * 
+     * 
      * @param className the name of the class.
      * @param remoteCodebase a space-separated list of URLs at which
      * the class might be found. May be null.
@@ -611,6 +688,12 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
      * if a particular object is implemented by a local servant and hence local
      * invocation APIs may be used.
      *
+     * <p>
+     *  <tt> isLocal </tt>方法与ObjectImpl._is_local方法具有相同的语义,除了它可以抛出一个RemoteException。 (没有它不是,但规格说,它应该。)
+     * 
+     *  提供了<tt> _is_local()</tt>方法,以便存根可以确定特定对象是否由本地服务方实现,因此可以使用本地调用API。
+     * 
+     * 
      * @param stub the stub to test.
      *
      * @return The <tt>_is_local()</tt> method returns true if
@@ -651,6 +734,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
     /**
      * Wraps an exception thrown by an implementation
      * method.  It returns the corresponding client-side exception.
+     * <p>
+     *  封装实现方法抛出的异常。它返回相应的客户端异常。
+     * 
+     * 
      * @param orig the exception to wrap.
      * @return the wrapped exception.
      */
@@ -679,6 +766,10 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
      * Copies or connects an array of objects. Used by local stubs
      * to copy any number of actual parameters, preserving sharing
      * across parameters as necessary to support RMI semantics.
+     * <p>
+     * 复制或连接对象数组。由本地存根使用以复制任何数量的实际参数,根据需要保留跨参数的共享以支持RMI语义。
+     * 
+     * 
      * @param obj the objects to copy or connect.
      * @param orb the ORB.
      * @return the copied or connected objects.
@@ -709,6 +800,9 @@ public class Util implements javax.rmi.CORBA.UtilDelegate
     /**
      * Copies or connects an object. Used by local stubs to copy
      * an actual parameter, result object, or exception.
+     * <p>
+     *  复制或连接对象。由本地存根使用以复制实际参数,结果对象或异常。
+     * 
      * @param obj the object to copy.
      * @param orb the ORB.
      * @return the copy or connected object.

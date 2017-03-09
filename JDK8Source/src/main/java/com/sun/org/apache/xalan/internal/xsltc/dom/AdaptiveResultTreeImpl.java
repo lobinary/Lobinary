@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: AdaptiveResultTreeImpl.java,v 1.2.4.1 2005/09/06 05:52:18 pvedula Exp $
+ * <p>
+ *  $ Id：AdaptiveResultTreeImpl.java,v 1.2.4.1 2005/09/06 05:52:18 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.xsltc.dom;
 
@@ -72,6 +85,22 @@ import org.xml.sax.helpers.AttributesImpl;
  * %REVISIT% Can we combine this class with SimpleResultTreeImpl? I think it is possible, but
  * it will make SimpleResultTreeImpl more expensive. I will use two separate classes at
  * this time.
+ * <p>
+ *  AdaptiveResultTreeImpl是用于结果树片段(RTF)的自适应DOM模型。它用于RTF可能是纯文本但仍然可以是DOM树的情况。
+ * 它设计用于具有&lt; xsl：call-template&gt;或&lt; xsl：apply-templates&gt;在内容中。例：。
+ * <pre>
+ *  &lt; xsl：variable name ="x"&gt; &lt; xsl：call-template name ="test"&gt; &lt; xsl：with-param name ="a
+ * "select ="。
+ * "/&gt; &lt; / xsl：call-template&gt;。
+ * &lt;/xsl:variable>
+ * </pre>
+ *  <p>在此示例中,<xsl：call-template>生成的结果可能是单个Text节点。但它也可以是一个DOM树。这种RTF不能由SimpleResultTreeImpl建模。
+ * <p>
+ * AdaptiveResultTreeImpl可以被认为是SimpleResultTreeImpl和SAXImpl之间的智能切换器。
+ * 它将RTF视为简单文本,并在开始时使用SimpleResultTreeImpl模型。
+ * 然而,如果它接收到一个调用,它表明这是一个DOM树(例如startElement),它会自动转换成一个包装器SAXImpl。
+ * 这样,当结果只包含简单文本时,我们可以有一个轻量级模型,同时当RTF是一个DOM树时它仍然有效。
+ * <p>
  */
 public class AdaptiveResultTreeImpl extends SimpleResultTreeImpl
 {
@@ -362,6 +391,11 @@ public class AdaptiveResultTreeImpl extends SimpleResultTreeImpl
      *
      * The escape setting should be taken care of when outputting to
      * a handler.
+     * <p>
+     *  如果没有封装的SAXImpl,则该类中的所有方法都被重写以将动作委托给包装的SAXImpl对象,如果它是非空的,或者将动作委托给SimpleResultTreeImpl。
+     * <p>
+     *  ％REVISIT％我们可以将此类与SimpleResultTreeImpl组合吗?我认为这是可能的,但它会使SimpleResultTreeImpl更昂贵。我将在这个时候使用两个单独的类。
+     * 
      */
     public void characters(final int node, SerializationHandler handler)
         throws TransletException
@@ -497,6 +531,11 @@ public class AdaptiveResultTreeImpl extends SimpleResultTreeImpl
 
     /**
      * Return the node identity from a node handle.
+     * <p>
+     *  将节点的字符内容分配给输出处理程序。
+     * 
+     *  在输出到处理程序时,应该注意转义设置。
+     * 
      */
     public final int getNodeIdent(final int nodehandle)
     {
@@ -510,6 +549,9 @@ public class AdaptiveResultTreeImpl extends SimpleResultTreeImpl
 
     /**
      * Return the node handle from a node identity.
+     * <p>
+     *  从节点句柄返回节点标识。
+     * 
      */
     public final int getNodeHandle(final int nodeId)
     {

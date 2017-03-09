@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,16 @@ import sun.security.util.SecurityConstants;
  * href="http://www.ietf.org/rfc/rfc2965.txt"><i>RFC&nbsp;2965: HTTP
  * State Management Mechanism</i></a>
  *
+ * <p>
+ *  CookieHandler对象提供了一种回调机制,用于将HTTP状态管理策略实现链接到HTTP协议处理程序中。 HTTP状态管理机制指定一种方法来创建与HTTP请求和响应的有状态会话。
+ * 
+ *  <p>可以通过执行CookieHandler.setDefault(CookieHandler)来注册由HTTP协议处理程序使用的系统范围的CookieHandler。
+ * 当前注册的CookieHandler可以通过调用CookieHandler.getDefault()来检索。
+ * 
+ *  有关HTTP状态管理的详细信息,请参见<a href="http://www.ietf.org/rfc/rfc2965.txt"> <i> RFC&nbsp; 2965：HTTP状态管理机制</i> 
+ * </a>。
+ * 
+ * 
  * @author Yingxian Wang
  * @since 1.5
  */
@@ -54,6 +65,10 @@ public abstract class CookieHandler {
      * The system-wide cookie handler that will apply cookies to the
      * request headers and manage cookies from the response headers.
      *
+     * <p>
+     *  系统范围的Cookie处理程序,它将Cookie应用于请求标头,并从响应标头管理Cookie。
+     * 
+     * 
      * @see setDefault(CookieHandler)
      * @see getDefault()
      */
@@ -62,6 +77,10 @@ public abstract class CookieHandler {
     /**
      * Gets the system-wide cookie handler.
      *
+     * <p>
+     *  获取系统范围的Cookie处理程序。
+     * 
+     * 
      * @return the system-wide cookie handler; A null return means
      *        there is no system-wide cookie handler currently set.
      * @throws SecurityException
@@ -82,6 +101,12 @@ public abstract class CookieHandler {
      *
      * Note: non-standard http protocol handlers may ignore this setting.
      *
+     * <p>
+     *  设置(或取消设置)系统范围的cookie处理程序。
+     * 
+     *  注意：非标准http协议处理程序可能会忽略此设置。
+     * 
+     * 
      * @param cHandler The HTTP cookie handler, or
      *       {@code null} to unset.
      * @throws SecurityException
@@ -114,6 +139,13 @@ public abstract class CookieHandler {
      * called after all request headers related to choosing cookies
      * are added, and before the request is sent.</P>
      *
+     * <p>
+     *  从请求标头中指定的URI的Cookie缓存获取所有适用的Cookie。
+     * 
+     * <P>作为参数传递的{@code URI}指定了Cookie的预期用途。特别是该方案应该反映cookie是否将通过http,https发送或在另一个上下文(如javascript)中使用。
+     * 主机部分应反映Cookie的目的地或JavaScript的情况下它们的来源。</P> <P>由实施考虑{@code URI}和Cookie属性和安全设置以确定应返回哪些。</P>。
+     * 
+     * 
      * @param uri a {@code URI} representing the intended use for the
      *            cookies
      * @param requestHeaders - a Map from request header
@@ -136,6 +168,10 @@ public abstract class CookieHandler {
      * fields that are named Set-Cookie2, present in the response
      * headers into a cookie cache.
      *
+     * <p>
+     *  <P> HTTP协议实现者应确保在添加与选择Cookie相关的所有请求标头之后,以及在发送请求之前调用此方法。</P>
+     * 
+     * 
      * @param uri a {@code URI} where the cookies come from
      * @param responseHeaders an immutable map from field names to
      *            lists of field values representing the response

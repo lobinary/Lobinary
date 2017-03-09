@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,18 @@ import javax.xml.ws.soap.MTOM;
  * recognize/support an error MUST be given.
  * <p>
  *
+ * <p>
+ *  用于将其他注释标识为<code> WebServiceFeature </code>的注释。
+ * <p>
+ *  使用此注释批注的每个<code> WebServiceFeature </code>注释必须包含默认值为<code> true </code>的<code> boolean </code>类型的<code>
+ *  enabled </code>属性。
+ * <p>
+ *  JAX-WS定义了以下<code> WebServiceFeature </code>注释(<code> Addressing </code>,<code> MTOM </code>,<code> R
+ * espectBinding </code>),供应商特定注释其他功能。
+ * <p>
+ *  使用<code> WebServiceFeatureAnnotation </code>注释的注释必须具有{@link WebServiceRef}注释的@Target,以便生成的特征注释可以与{@link WebServiceRef}
+ * 注释结合使用(如有必要)。
+ * 
  * @see Addressing
  * @see MTOM
  * @see RespectBinding
@@ -75,12 +88,20 @@ public @interface WebServiceFeatureAnnotation {
      * Unique identifier for the WebServiceFeature.  This
      * identifier MUST be unique across all implementations
      * of JAX-WS.
+     * <p>
+     * <p>
+     *  如果JAX-WS实现遇到用<code> WebServiceFeatureAnnotation </code>注释的注释,它不能识别/支持错误。
+     * <p>
+     * 
      */
     String id();
 
     /**
      * The <code>WebServiceFeature</code> bean that is associated
      * with the <code>WebServiceFeature</code> annotation
+     * <p>
+     *  WebServiceFeature的唯一标识符。该标识符在JAX-WS的所有实现中必须是唯一的。
+     * 
      */
     Class<? extends WebServiceFeature> bean();
 }

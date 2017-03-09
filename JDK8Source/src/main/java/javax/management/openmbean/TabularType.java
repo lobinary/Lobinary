@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,10 @@ import java.util.List;
  * The <code>TabularType</code> class is the <i> open type</i> class
  * whose instances describe the types of {@link TabularData TabularData} values.
  *
+ * <p>
+ *  <code> TabularType </code>类是<i> open type </i>类,其实例描述{@link TabularData TabularData}值的类型。
+ * 
+ * 
  * @since 1.5
  */
 public class TabularType extends OpenType<TabularData> {
@@ -51,11 +56,15 @@ public class TabularType extends OpenType<TabularData> {
 
 
     /**
+    /* <p>
+    /* 
      * @serial The composite type of rows
      */
     private CompositeType  rowType;
 
     /**
+    /* <p>
+    /* 
      * @serial The items used to index each row element, kept in the order the user gave
      *         This is an unmodifiable {@link ArrayList}
      */
@@ -76,6 +85,13 @@ public class TabularType extends OpenType<TabularData> {
      * (ie the class name returned by the {@link OpenType#getClassName() getClassName} method)
      * is set to the string value returned by <code>TabularData.class.getName()</code>.
      * <p>
+     * <p>
+     *  构造一个<code> TabularType </code>实例,检查给定参数的有效性。下面针对每个参数描述有效性约束。
+     * <p>
+     *  此表格类型表示的表格数据值的Ja​​va类名称(即{@link OpenType#getClassName()getClassName}方法返回的类名称)设置为<code> TabularData.c
+     * lass.getName()返回的字符串值, </code>。
+     * <p>
+     * 
      * @param  typeName  The name given to the tabular type this instance represents; cannot be a null or empty string.
      * <br>&nbsp;
      * @param  description  The human readable description of the tabular type this instance represents;
@@ -148,6 +164,9 @@ public class TabularType extends OpenType<TabularData> {
     /**
      * Checks that Object[] arg is neither null nor empty (ie length==0)
      * and that it does not contain any null element.
+     * <p>
+     *  检查Object [] arg既不为null也不为空(即length == 0),并且它不包含任何空元素。
+     * 
      */
     private static void checkForNullElement(Object[] arg, String argName) {
         if ( (arg == null) || (arg.length == 0) ) {
@@ -162,6 +181,9 @@ public class TabularType extends OpenType<TabularData> {
 
     /**
      * Checks that String[] does not contain any empty (or blank characters only) string.
+     * <p>
+     *  检查String []不包含任何空(仅限空白字符)字符串。
+     * 
      */
     private static void checkForEmptyString(String[] arg, String argName) {
         for (int i=0; i<arg.length; i++) {
@@ -178,6 +200,10 @@ public class TabularType extends OpenType<TabularData> {
      * Returns the type of the row elements of tabular data values
      * described by this <code>TabularType</code> instance.
      *
+     * <p>
+     *  返回由此<code> TabularType </code>实例描述的表格数据值的行元素的类型。
+     * 
+     * 
      * @return the type of each row.
      */
     public CompositeType getRowType() {
@@ -192,6 +218,10 @@ public class TabularType extends OpenType<TabularData> {
      * tabular data values described by this <code>TabularType</code>
      * instance.</p>
      *
+     * <p>
+     *  <p>以与给予此实例的构造函数相同的顺序返回项目名称的不可修改列表,其值用于唯一地索引由此<code> TabularType <>描述的表格数据值的每个行元素。 / code>实例。</p>
+     * 
+     * 
      * @return a List of String representing the names of the index
      * items.
      *
@@ -216,6 +246,18 @@ public class TabularType extends OpenType<TabularData> {
      * td.getTabularType()}, as defined in {@link
      * CompositeType#isValue CompositeType.isValue}.</p>
      *
+     * <p>
+     *  测试<var> obj </var>是否是可以由此<code> TabularType </code>实例描述的值。
+     * 
+     * <p>如果<var> obj </var>为null或不是<code> javax.management.openmbean.TabularData </code>的实例,<code> isValue 
+     * </code>返回<code> false <代码>。
+     * </p>。
+     * 
+     *  <p>如果<var> obj </var>是<code> javax.management.openmbean.TabularData </code>的实例,请说{@code td},如果此{@code TabularType}
+     * 可以从{@link CompositeType#isValue CompositeType.isValue}中定义的</em> {@link TabularData#getTabularType()td.getTabularType()}
+     * 分配</p>。
+     * 
+     * 
      * @param obj the value whose open type is to be tested for
      * compatibility with this <code>TabularType</code> instance.
      *
@@ -260,6 +302,16 @@ public class TabularType extends OpenType<TabularData> {
      * <li>they use the same index names, in the same order</li>
      * </ul>
      * <br>&nbsp;
+     * <p>
+     *  将指定的<code> obj </code>参数与此<code> TabularType </code>实例相比较。
+     * <p>
+     *  当且仅当所有以下语句都为真时,两个<code> TabularType </code>实例才相等：
+     * <ul>
+     *  <li>他们的类型名称相等</li> <li>他们的行类型相同</li> <li>他们使用相同的索引名称</li>
+     * </ul>
+     *  <br>&nbsp;
+     * 
+     * 
      * @param  obj  the object to be compared for equality with this <code>TabularType</code> instance;
      *              if <var>obj</var> is <code>null</code>, <code>equals</code> returns <code>false</code>.
      *
@@ -319,6 +371,17 @@ public class TabularType extends OpenType<TabularData> {
      * As <code>TabularType</code> instances are immutable, the hash code for this instance is calculated once,
      * on the first call to <code>hashCode</code>, and then the same value is returned for subsequent calls.
      *
+     * <p>
+     *  返回此<<div> TabularType </code>实例的哈希码值。
+     * <p>
+     *  <code> TabularType </code>实例的哈希码是在<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即：名称,行类型,索引名称)。
+     * 这确保<code> t1.equals(t2)</code>意味着任何两个<code> TabularType </code>实例的<code> t1.hashCode()== t2.hashCode(
+     * )</代码> t1 </code>和<code> t2 </code>,这是方法{@link Object#hashCode()Object.hashCode()}的一般合同的要求。
+     *  <code> TabularType </code>实例的哈希码是在<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即：名称,行类型,索引名称)。
+     * <p>
+     * 由于<code> TabularType </code>实例是不可变的,所以在第一次调用<code> hashCode </code>时计算一次该实例的哈希码,然后为后续调用返回相同的值。
+     * 
+     * 
      * @return  the hash code value for this <code>TabularType</code> instance
      */
     public int hashCode() {
@@ -349,6 +412,8 @@ public class TabularType extends OpenType<TabularData> {
      * As <code>TabularType</code> instances are immutable, the string representation for this instance is calculated once,
      * on the first call to <code>toString</code>, and then the same value is returned for subsequent calls.
      *
+     * <p>
+     * 
      * @return  a string representation of this <code>TabularType</code> instance
      */
     public String toString() {

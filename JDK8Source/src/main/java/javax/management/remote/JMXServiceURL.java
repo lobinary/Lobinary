@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -109,6 +110,51 @@ import java.util.StringTokenizer;
  * part of the address.  Depending on the protocol, case can be
  * significant in the <code><em>url-path</em></code>.</p>
  *
+ * <p>
+ *  <p> JMX API连接器服务器的地址。这个类的实例是不可变的。</p>
+ * 
+ *  <p>地址是SLP的<em>抽象服务URL </em>,如RFC 2609中定义,并由RFC 3111修改。它必须如下所示：</p>
+ * 
+ * <blockquote>
+ * 
+ *  <code> service：jmx：<em> protocol </em>：<em> sap </em> </code>
+ * 
+ * </blockquote>
+ * 
+ *  <p>在此,<code> <em> protocol </em> </code>是用于连接到连接器服务器的传输协议。
+ * 它是一个或多个ASCII字符的字符串,每个字符都是字母,数字或字符<code> + </code>或<code>  -  </code>之一。第一个字符必须是字母。大写字母会转换为小写字母。</p>。
+ * 
+ *  <p> <code> <em> sap </em> </code>是找到连接器服务器的地址。此地址使用RFC 2609定义的基于IP协议的语法子集。
+ * 它是一个子集,因为不支持<code> user @ host </code>语法。</p>。
+ * 
+ *  <p>此类别目前不支持RFC 2609定义的其他语法。</p>
+ * 
+ *  <p>支持的语法为：</p>
+ * 
+ * <blockquote>
+ * 
+ *  <code> // <em> [host [</em>：<em> port]] [url-path] </
+ * 
+ * </blockquote>
+ * 
+ *  <p>方括号<code> [] </code>表示地址的可选部分。并非所有协议都会识别所有可选部分。</p>
+ * 
+ *  <p> <code> <em> host </em> </code>是以方括号括起来的主机名称,IPv4数字主机地址或IPv6数字地址。</p>
+ * 
+ * <p> <code> <em> port </em> </code>是一个十进制端口号。 0表示默认或匿名端口,具体取决于协议。</p>
+ * 
+ *  <p> <code> <em> host </em> </code>和<code> <em> port </em> </code>可以省略。
+ * 如果没有<code> <em>主机</em> </code>,则无法提供<code> <em> port </em> </。
+ * 
+ *  <p> <code> <em> url-path </em> </code>(如果有)以斜杠(<code> / </code>)或分号(<code>; </code >)并继续到地址的结尾。
+ * 它可以包含使用RFC 2609中指定的分号语法的属性。这些属性不会被此类解析,并且不会检测到错误的属性语法。</p>。
+ * 
+ *  <p>虽然根据RFC 2609,有一个以分号开头的<code> <em> url-path </em> </code>是合法的,但并非所有SLP的实现都允许它,因此建议避免使用该语法。</p>
+ * 
+ *  <p>在初始<code>服务：jmx：<em> protocol </em> </code>字符串或地址的主机部分中,情况并不重要。
+ * 根据协议,在<code> <em> url-path </em> </code>中,情况可能很重要。</p>。
+ * 
+ * 
  * @see <a
  * href="http://www.ietf.org/rfc/rfc2609.txt">RFC 2609,
  * "Service Templates and <code>Service:</code> Schemes"</a>
@@ -126,6 +172,10 @@ public class JMXServiceURL implements Serializable {
      * <p>Constructs a <code>JMXServiceURL</code> by parsing a Service URL
      * string.</p>
      *
+     * <p>
+     *  <p>通过解析服务网址字符串构造<code> JMXServiceURL </code>。</p>
+     * 
+     * 
      * @param serviceURL the URL string to be parsed.
      *
      * @exception NullPointerException if <code>serviceURL</code> is
@@ -142,6 +192,8 @@ public class JMXServiceURL implements Serializable {
         final int serviceURLLength = serviceURL.length();
 
         /* Check that there are no non-ASCII characters in the URL,
+        /* <p>
+        /* 
            following RFC 2609.  */
         for (int i = 0; i < serviceURLLength; i++) {
             char c = serviceURL.charAt(i);
@@ -232,6 +284,12 @@ public class JMXServiceURL implements Serializable {
      * {@link #JMXServiceURL(String, String, int, String)
      * JMXServiceURL(protocol, host, port, null)}.</p>
      *
+     * <p>
+     *  <p>使用给定的协议,主机和端口构造一个<code> JMXServiceURL </code>。
+     * 这个构造函数相当于{@link #JMXServiceURL(String,String,int,String)JMXServiceURL(protocol,host,port,null)}。
+     * </p>。
+     * 
+     * 
      * @param protocol the protocol part of the URL.  If null, defaults
      * to <code>jmxmp</code>.
      *
@@ -256,6 +314,10 @@ public class JMXServiceURL implements Serializable {
     /**
      * <p>Constructs a <code>JMXServiceURL</code> with the given parts.
      *
+     * <p>
+     *  <p>使用给定的部分构造一个<code> JMXServiceURL </code>。
+     * 
+     * 
      * @param protocol the protocol part of the URL.  If null, defaults
      * to <code>jmxmp</code>.
      *
@@ -298,6 +360,11 @@ public class JMXServiceURL implements Serializable {
                user-hostile.  Instead we use its numerical IP address.
                We can only reasonably do this for the host==null case.
                If we're given an explicit host name that is illegal we
+            /* <p>
+            /* 规则,例如包含一个`_'。虽然我们可以是严格的,并抛出异常,这是相当用户敌对。相反,我们使用其数字IP地址。我们只能合理地为host == null的情况做这个。
+            /* 如果我们给一个明确的主机名是非法的,我们。
+            /* 
+            /* 
                have to reject it.  (Bug 5057532.)  */
             try {
                 validateHost(host, port);
@@ -310,6 +377,8 @@ public class JMXServiceURL implements Serializable {
                 }
                 host = local.getHostAddress();
                 /* Use the numeric address, which could be either IPv4
+                /* <p>
+                /* 
                    or IPv6.  validateHost will accept either.  */
             }
         }
@@ -428,6 +497,10 @@ public class JMXServiceURL implements Serializable {
                InetAddress.getByName without checking for a
                numeric IPv6 address, because we mustn't try to do
                a DNS lookup in case the address is not actually
+            /* <p>
+            /*  请使用地址。我们不能在不检查数字IPv6地址的情况下调用InetAddress.getByName,因为我们不能尝试进行DNS查找,以防地址不实际
+            /* 
+            /* 
                numeric.  */
             try {
                 InetAddress.getByName(h);
@@ -435,6 +508,10 @@ public class JMXServiceURL implements Serializable {
                 /* We should really catch UnknownHostException
                    here, but a bug in JDK 1.4 causes it to throw
                    ArrayIndexOutOfBoundsException, e.g. if the
+                /* <p>
+                /*  这里,但JDK 1.4中的错误导致它抛出ArrayIndexOutOfBoundsException,例如。如果
+                /* 
+                /* 
                    string is ":".  */
                 MalformedURLException bad =
                     new MalformedURLException("Bad IPv6 address: " + h);
@@ -461,6 +538,15 @@ public class JMXServiceURL implements Serializable {
                the hostname begins with a letter.  Respecting the
                intent of the RFC, we only do this if there is more
                than one component.  If your local hostname begins
+            /* <p>
+            /*  检查RFC 1034(DNS)(第11页)中的主机名语法。主机名是一个或多个标签的点分隔列表,其中每个标签由字母,数字或连字符组成。标签不能以连字符开头或结尾。不允许使用空主机名。
+            /* 请注意,数字IPv4地址是此语法的特殊情况。
+            /* 
+            /*  状态完全被看到的最后一个字符捕获,有一个虚拟的。前面的名称。我们用`a'表示任何字母数字字符。
+            /* 
+            /*  我们需要一个特殊的黑客来检查,如RFC 2609(SLP)语法所要求的,主机名的最后一个组件以字母开头。尊重RFC的意图,我们只有在有多个组件的情况下才这样做。如果您的本地主机名开始
+            /* 
+            /* 
                with a digit, we don't reject it.  */
             final int hostLen = h.length();
             char lastc = '.';
@@ -500,6 +586,11 @@ public class JMXServiceURL implements Serializable {
                        tok.nextToken and NumberFormatException from
                        the call to Integer.parseInt.  Using exceptions
                        for control flow this way is a bit evil but it
+                    /* <p>
+                    /* 显式抛出的异常,我们可以从调用tok.nextToken和NumberFormatException从调用Integer.parseInt获得NoSuchElementException。
+                    /* 使用控制流的异常这种方式有点邪恶,但它。
+                    /* 
+                    /* 
                        does simplify things enormously.  */
                     StringTokenizer tok = new StringTokenizer(h, ".", true);
                     for (int i = 0; i < 4; i++) {
@@ -525,6 +616,10 @@ public class JMXServiceURL implements Serializable {
     /**
      * <p>The protocol part of the Service URL.
      *
+     * <p>
+     *  <p>服务网址的协议部分。
+     * 
+     * 
      * @return the protocol part of the Service URL.  This is never null.
      */
     public String getProtocol() {
@@ -545,6 +640,14 @@ public class JMXServiceURL implements Serializable {
      * <code>[...]</code> syntax for numeric IPv6 addresses, the
      * square brackets are not included in the return value here.</p>
      *
+     * <p>
+     *  <p>服务网址的主机部分。如果服务URL是使用带有URL字符串参数的构造函数构造的,则结果是指定该URL中的主机的子字符串。
+     * 如果服务URL是使用带有单独的主机参数的构造函数构造的,则结果是指定的字符串。如果该字符串为null,结果是<code> InetAddress.getLocalHost()。
+     * getHostName()</code>。</p>。
+     * 
+     *  <p>在任何一种情况下,如果使用<code> [...] </code>语法为数字IPv6地址指定了主机,则方括号不包括在此处的返回值中。</p>
+     * 
+     * 
      * @return the host part of the Service URL.  This is never null.
      */
     public String getHost() {
@@ -555,6 +658,10 @@ public class JMXServiceURL implements Serializable {
      * <p>The port of the Service URL.  If no port was
      * specified, the returned value is 0.</p>
      *
+     * <p>
+     *  <p>服务网址的端口。如果未指定端口,则返回的值为0。</p>
+     * 
+     * 
      * @return the port of the Service URL, or 0 if none.
      */
     public int getPort() {
@@ -566,6 +673,10 @@ public class JMXServiceURL implements Serializable {
      * string, or a string beginning with a slash (<code>/</code>), or
      * a string beginning with a semicolon (<code>;</code>).
      *
+     * <p>
+     *  <p>服务网址的网址路径部分。这是一个空字符串,或以斜杠(<code> / </code>)开头的字符串或以分号(<code>; </code>)开头的字符串。
+     * 
+     * 
      * @return the URL Path part of the Service URL.  This is never
      * null.
      */
@@ -588,10 +699,21 @@ public class JMXServiceURL implements Serializable {
      * is the value returned by {@link #getPort()} in its shortest
      * decimal form.  If the value is zero, it is omitted.</p>
      *
+     * <p>
+     *  <p>此服务网址的字符串表示形式。如果此方法返回的值提供给<code> JMXServiceURL </code>构造函数,则生成的对象等于此对象。</p>
+     * 
+     * <p>返回的字符串的<code> <em> host </em> </code>部分是{@link #getHost()}返回的值。
+     * 如果该值指定一个数字IPv6地址,它将被方括号<code> [] </code>包围。</p>。
+     * 
+     *  <p>返回的字符串的<code> <em> port </em> </code>部分是{@link #getPort()}返回的最小十进制形式的值。如果值为零,则省略。</p>
+     * 
+     * 
      * @return the string representation of this Service URL.
      */
     public String toString() {
         /* We don't bother synchronizing the access to toString.  At worst,
+        /* <p>
+        /* 
            n threads will independently compute and store the same value.  */
         if (toString != null)
             return toString;
@@ -619,6 +741,13 @@ public class JMXServiceURL implements Serializable {
      * this object.  The values for {@link #getProtocol()} and {@link
      * #getHost()} can differ in case without affecting equality.
      *
+     * <p>
+     *  <p>指示一些其他对象是否等于此对象。
+     * 当且仅当<code> obj </code>是{@link #getProtocol()},{@link #getHost()},{@link #getPort()}和{@link #getURLPath()}
+     * 方法返回与此对象相同的值。
+     *  <p>指示一些其他对象是否等于此对象。 {@link #getProtocol()}和{@link #getHost()}的值在不影响平等的情况下可能不同。
+     * 
+     * 
      * @param obj the reference object with which to compare.
      *
      * @return <code>true</code> if this object is the same as the
@@ -641,6 +770,9 @@ public class JMXServiceURL implements Serializable {
 
     /* True if this string, assumed to be a valid argument to
      * InetAddress.getByName, is a numeric IPv6 address.
+     * <p>
+     *  InetAddress.getByName,是一个数字IPv6地址。
+     * 
      */
     private static boolean isNumericIPv6Address(String s) {
         // address contains colon if and only if it's a numeric IPv6 address
@@ -681,6 +813,10 @@ public class JMXServiceURL implements Serializable {
     static {
         /* J2SE 1.4 adds lots of handy methods to BitSet that would
            allow us to simplify here, e.g. by not writing loops, but
+        /* <p>
+        /*  让我们在这里简化,例如通过不写循环,但
+        /* 
+        /* 
            we want to work on J2SE 1.3 too.  */
 
         for (char c = '0'; c <= '9'; c++)
@@ -705,26 +841,40 @@ public class JMXServiceURL implements Serializable {
 
     /**
      * The value returned by {@link #getProtocol()}.
+     * <p>
+     *  由{@link #getProtocol()}返回的值。
+     * 
      */
     private String protocol;
 
     /**
      * The value returned by {@link #getHost()}.
+     * <p>
+     *  由{@link #getHost()}返回的值。
+     * 
      */
     private String host;
 
     /**
      * The value returned by {@link #getPort()}.
+     * <p>
+     *  由{@link #getPort()}返回的值。
+     * 
      */
     private int port;
 
     /**
      * The value returned by {@link #getURLPath()}.
+     * <p>
+     *  由{@link #getURLPath()}返回的值。
+     * 
      */
     private String urlPath;
 
     /**
      * Cached result of {@link #toString()}.
+     * <p>
+     *  {@link #toString()}的缓存结果。
      */
     private transient String toString;
 

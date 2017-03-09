@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import sun.util.logging.PlatformLogger;
  * A PaintManager implementation that uses a BufferStrategy for
  * rendering.
  *
+ * <p>
+ *  一个使用BufferStrategy进行渲染的PaintManager实现。
+ * 
+ * 
  * @author Scott Violet
  */
 class BufferStrategyPaintManager extends RepaintManager.PaintManager {
@@ -82,17 +87,26 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
      * List of BufferInfos.  We don't use a Map primarily because
      * there are typically only a handful of top level components making
      * a Map overkill.
+     * <p>
+     *  BufferInfos列表。我们不使用地图主要是因为通常只有一小部分顶级组件使地图过分。
+     * 
      */
     private ArrayList<BufferInfo> bufferInfos;
 
     /**
      * Indicates <code>beginPaint</code> has been invoked.  This is
      * set to true for the life of beginPaint/endPaint pair.
+     * <p>
+     *  表示<code> beginPaint </code>已被调用。这在beginPaint / endPaint对的生命周期中设置为true。
+     * 
      */
     private boolean painting;
     /**
      * Indicates we're in the process of showing.  All painting, on the EDT,
      * is blocked while this is true.
+     * <p>
+     *  表示我们正在显示。所有的画,在EDT,被封锁,而这是真的。
+     * 
      */
     private boolean showing;
 
@@ -114,32 +128,53 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
 
     /**
      * Farthest JComponent ancestor for the current paint/copyArea.
+     * <p>
+     *  当前paint / copyArea的最远JComponent祖先。
+     * 
      */
     private JComponent rootJ;
     /**
      * Location of component being painted relative to root.
+     * <p>
+     *  被绘相对于根的组件的位置。
+     * 
      */
     private int xOffset;
     /**
      * Location of component being painted relative to root.
+     * <p>
+     *  被绘相对于根的组件的位置。
+     * 
      */
     private int yOffset;
     /**
      * Graphics from the BufferStrategy.
+     * <p>
+     *  来自BufferStrategy的图形。
+     * 
      */
     private Graphics bsg;
     /**
      * BufferStrategy currently being used.
+     * <p>
+     *  正在使用的BufferStrategy。
+     * 
      */
     private BufferStrategy bufferStrategy;
     /**
      * BufferInfo corresponding to root.
+     * <p>
+     *  BufferInfo对应根。
+     * 
      */
     private BufferInfo bufferInfo;
 
     /**
      * Set to true if the bufferInfo needs to be disposed when current
      * paint loop is done.
+     * <p>
+     *  如果在当前画图循环完成时需要处理bufferInfo,则设置为true。
+     * 
      */
     private boolean disposeBufferOnEnd;
 
@@ -191,6 +226,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
 
     /**
      * Cleans up any created BufferStrategies.
+     * <p>
+     *  清理任何创建的BufferStrategies。
+     * 
      */
     protected void dispose() {
         // dipose can be invoked at any random time. To avoid
@@ -230,6 +268,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
      * Shows the specified region of the back buffer.  This will return
      * true if successful, false otherwise.  This is invoked on the
      * toolkit thread in response to an expose event.
+     * <p>
+     *  显示后台缓冲区的指定区域。如果成功,则返回true,否则返回false。这是在工具包线程上响应公开事件而调用的。
+     * 
      */
     public boolean show(Container c, int x, int y, int w, int h) {
         synchronized(this) {
@@ -404,6 +445,10 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
     /**
      * Renders the BufferStrategy to the screen.
      *
+     * <p>
+     *  将BufferStrategy渲染到屏幕。
+     * 
+     * 
      * @return true if successful, false otherwise.
      */
     private boolean flushAccumulatedRegion() {
@@ -441,6 +486,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
      * changes for a JRootPane.  If the rootpane is not double
      * buffered, or true double buffering changes we throw out any
      * cache we may have.
+     * <p>
+     *  当双缓冲或useTrueDoubleBuffering为JRootPane更改时调用。如果rootpane不是双缓冲,或者真双缓冲改变,我们会抛出任何缓存。
+     * 
      */
     public void doubleBufferingChanged(final JRootPane rootPane) {
         if ((!rootPane.isDoubleBuffered() ||
@@ -462,6 +510,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
 
     /**
      * Does the work for doubleBufferingChanged.
+     * <p>
+     *  做的工作是doubleBufferingChanged。
+     * 
      */
     private void doubleBufferingChanged0(JRootPane rootPane) {
         // This will only happen on the EDT.
@@ -495,6 +546,10 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
     /**
      * Calculates information common to paint/copyArea.
      *
+     * <p>
+     *  计算paint / copyArea的公共信息。
+     * 
+     * 
      * @return true if should use buffering per window in painting.
      */
     private boolean prepare(JComponent c, Container root, boolean isPaint, int x, int y,
@@ -618,6 +673,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
 
     /**
      * Turns off double buffering per window.
+     * <p>
+     * 关闭每个窗口的双缓冲。
+     * 
      */
     private void resetDoubleBufferPerWindow() {
         if (bufferInfos != null) {
@@ -630,6 +688,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
     /**
      * Returns the BufferInfo for the specified root or null if one
      * hasn't been created yet.
+     * <p>
+     *  返回指定根的BufferInfo或null(如果尚未创建)。
+     * 
      */
     private BufferInfo getBufferInfo(Container root) {
         for (int counter = bufferInfos.size() - 1; counter >= 0; counter--) {
@@ -664,6 +725,10 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
      * it will install a WindowListener and ComponentListener.  When the
      * component is hidden/iconified the buffer is marked as needing to be
      * completely repainted.
+     * <p>
+     *  BufferInfo用于跟踪用于特定组件的BufferStrategy。除了跟踪BufferStrategy之外,它还将安装一个WindowListener和ComponentListener。
+     * 当组件被隐藏/图标化时,缓冲区被标记为需要被完全重绘。
+     * 
      */
     private class BufferInfo extends ComponentAdapter implements
                                WindowListener {
@@ -716,6 +781,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
          * Whether or not the contents of the buffer strategy
          * is in sync with the window.  This is set to true when the root
          * pane paints all, and false when contents are lost/restored.
+         * <p>
+         *  缓冲区策略的内容是否与窗口同步。当根窗格全部绘制时,此属性设置为true,在内容丢失/恢复时设置为false。
+         * 
          */
         public boolean isInSync() {
             return inSync;
@@ -723,6 +791,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
 
         /**
          * Returns the Root (Window or Applet) that this BufferInfo references.
+         * <p>
+         *  返回此BufferInfo引用的根(Window或Applet)。
+         * 
          */
         public Container getRoot() {
             return (root == null) ? null : root.get();
@@ -734,6 +805,11 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
          * false, or if there is a problem in creating the
          * <code>BufferStartegy</code>.
          *
+         * <p>
+         *  返回BufferStartegy。
+         * 如果BufferStartegy尚未创建并且<code> create </code>为false,或者在创建<code> BufferStartegy </code>时有问题,则返回null。
+         * 
+         * 
          * @param create If true, and the BufferStartegy is currently null,
          *               one will be created.
          */
@@ -754,6 +830,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
         /**
          * Returns true if the buffer strategy of the component differs
          * from current buffer strategy.
+         * <p>
+         *  如果组件的缓冲区策略与当前缓冲区策略不同,则返回true。
+         * 
          */
         public boolean hasBufferStrategyChanged() {
             Container root = getRoot();
@@ -793,6 +872,9 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
          * Creates the BufferStrategy.  If the appropriate system property
          * has been set we'll try for flip first and then we'll try for
          * blit.
+         * <p>
+         *  创建BufferStrategy。如果适当的系统属性已经设置,我们将首先尝试翻转,然后我们将尝试blit。
+         * 
          */
         private BufferStrategy createBufferStrategy() {
             Container root = getRoot();
@@ -871,6 +953,8 @@ class BufferStrategyPaintManager extends RepaintManager.PaintManager {
 
         /**
          * Cleans up and removes any references.
+         * <p>
+         *  清理并删除任何引用。
          */
         public void dispose() {
             Container root = getRoot();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -33,6 +43,12 @@ import java.util.Vector;
  *
  * @xerces.internal
  *
+ * <p>
+ *  存储和验证substitutionGroup的信息
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  *
  * @version $Id: SubstitutionGroupHandler.java,v 1.6 2010-11-01 04:39:55 joehw Exp $
@@ -46,6 +62,9 @@ public class SubstitutionGroupHandler {
 
     /**
      * Default constructor
+     * <p>
+     *  默认构造函数
+     * 
      */
     public SubstitutionGroupHandler(XSGrammarBucket grammarBucket) {
         fGrammarBucket = grammarBucket;
@@ -183,6 +202,9 @@ public class SubstitutionGroupHandler {
 
     /**
      * clear the internal registry of substitutionGroup information
+     * <p>
+     *  清除内部registry的substitutionGroup信息
+     * 
      */
     public void reset() {
         fSubGroupsB.clear();
@@ -191,6 +213,9 @@ public class SubstitutionGroupHandler {
 
     /**
      * add a list of substitution group information.
+     * <p>
+     *  添加替换组信息的列表。
+     * 
      */
     public void addSubstitutionGroup(XSElementDecl[] elements) {
         XSElementDecl subHead, element;
@@ -218,6 +243,9 @@ public class SubstitutionGroupHandler {
      * from the spec, substitution group of a given element decl also contains
      * the element itself. but the array returned from this method doesn't
      * containt this element.
+     * <p>
+     *  获取所有可以替换给定元素的元素,根据规范,我们不应该考虑{block}约束。
+     * 
      */
     public XSElementDecl[] getSubstitutionGroup(XSElementDecl element) {
         // If we already have sub group for this element, just return it.

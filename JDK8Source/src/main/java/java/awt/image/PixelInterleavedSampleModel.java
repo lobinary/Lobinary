@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,17 @@ package java.awt.image;
  *  {@link DataBuffer#TYPE_INT TYPE_INT},
  *  {@link DataBuffer#TYPE_FLOAT TYPE_FLOAT} and
  *  {@link DataBuffer#TYPE_DOUBLE TYPE_DOUBLE} datatypes.
+ * <p>
+ *  该类表示以像素交错方式存储的图像数据,并且像素的每个样本占据DataBuffer的一个数据元素。
+ * 它子类化ComponentSampleModel,但提供了一个比ComponentSampleModel提供的更高效的访问像素交错图像数据的实现。
+ * 这个类存储DataBuffer的单个区域中的所有频带的样本数据。提供访问器方法,使得可以直接操纵图像数据。像素跨距是在相同扫描线上的相同带的两个样本之间的数据阵列元素的数量。
+ * 扫描线跨距是给定样本和下一扫描线的同一列中的相应样本之间的数据阵列元素的数量。带偏移表示从保持每个频带的DataBuffer的组的第一数据阵列元素到频带的第一样本的数据阵列元素的数目。
+ * 频带从0到N-1编号。存储体索引表示数据缓冲器的存储体和图像数据的带之间的对应关系。
+ * 此类支持{@link DataBuffer#TYPE_BYTE TYPE_BYTE},{@link DataBuffer#TYPE_USHORT TYPE_USHORT},{@link DataBuffer#TYPE_SHORT TYPE_SHORT}
+ * ,{@link DataBuffer#TYPE_INT TYPE_INT},{@link DataBuffer#TYPE_FLOAT TYPE_FLOAT}和{@链接DataBuffer#TYPE_DOUBLE TYPE_DOUBLE}
+ * 数据类型。
+ * 频带从0到N-1编号。存储体索引表示数据缓冲器的存储体和图像数据的带之间的对应关系。
+ * 
  */
 
 public class PixelInterleavedSampleModel extends ComponentSampleModel
@@ -59,6 +71,10 @@ public class PixelInterleavedSampleModel extends ComponentSampleModel
      * Constructs a PixelInterleavedSampleModel with the specified parameters.
      * The number of bands will be given by the length of the bandOffsets
      * array.
+     * <p>
+     * 构造具有指定参数的PixelInterleavedSampleModel。带的数量将由bandOffsets数组的长度给出。
+     * 
+     * 
      * @param dataType  The data type for storing samples.
      * @param w         The width (in pixels) of the region of
      *                  image data described.
@@ -116,6 +132,12 @@ public class PixelInterleavedSampleModel extends ComponentSampleModel
      * same number of bands, storage data type, and pixel stride
      * as this PixelInterleavedSampleModel.  The band offsets may be
      * compressed such that the minimum of all of the band offsets is zero.
+     * <p>
+     *  创建具有指定宽度和高度的新PixelInterleavedSampleModel。
+     * 新的PixelInterleavedSampleModel将具有与此PixelInterleavedSampleModel相同的波段数,存储数据类型和像素跨度。
+     * 可以压缩频带偏移,使得所有频带偏移的最小值为零。
+     * 
+     * 
      * @param w the width of the resulting <code>SampleModel</code>
      * @param h the height of the resulting <code>SampleModel</code>
      * @return a new <code>SampleModel</code> with the specified width
@@ -153,6 +175,10 @@ public class PixelInterleavedSampleModel extends ComponentSampleModel
      * PixelInterleavedSampleModel/DataBuffer combination will represent
      * an image with a subset of the bands of the original
      * PixelInterleavedSampleModel/DataBuffer combination.
+     * <p>
+     *  使用此PixelInterleavedSampleModel的波段子集创建一个新的PixelInterleavedSampleModel。
+     * 新的PixelInterleavedSampleModel可以与现有PixelInterleavedSampleModel一起使用的任何DataBuffer一起使用。
+     * 新的PixelInterleavedSampleModel / DataBuffer组合将表示具有原始PixelInterleavedSampleModel / DataBuffer组合的带的子集的图像
      */
     public SampleModel createSubsetSampleModel(int bands[]) {
         int newBandOffsets[] = new int[bands.length];

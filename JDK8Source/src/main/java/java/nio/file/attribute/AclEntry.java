@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,29 @@ import java.util.*;
  * <p> ACL entries are immutable and are safe for use by multiple concurrent
  * threads.
  *
+ * <p>
+ *  访问控制列表(ACL)中的条目。
+ * 
+ *  <p>此类别所代表的ACL条目基于<a href="http://www.ietf.org/rfc/rfc3530.txt"> <i> RFC&nbsp; 3530：网络文件系统中指定的ACL模型(N
+ * FS)版本4协议</i> </a>。
+ * 每个条目有四个组件,如下所示：。
+ * 
+ * <ol>
+ *  <li> <p> {@link #type()type}组件确定条目是否授予或拒绝访问。 </p> </li>
+ * 
+ *  <li> <p> {@link #principal()principal}组件(有时称为"who"组件)是对应于条目授予或拒绝访问的身份的{@link UserPrincipal}。
+ * </p> li>。
+ * 
+ *  <li> <p> {@link #permissions permissions}组件是一组{@link AclEntryPermission权限} </p> </li>
+ * 
+ *  <li> <p> {@link #flags flags}组件是一组{@link AclEntryFlag flags},用于指示如何继承和传播条目</p> </li>
+ * </ol>
+ * 
+ *  <p>使用关联的{@link Builder}对象通过调用其{@link Builder#build build}方法创建ACL条目。
+ * 
+ *  <p> ACL条目是不可变的,可安全地用于多个并发线程。
+ * 
+ * 
  * @since 1.7
  */
 
@@ -93,6 +117,14 @@ public final class AclEntry {
      * <p> Builder objects are mutable and are not safe for use by multiple
      * concurrent threads without appropriate synchronization.
      *
+     * <p>
+     *  {@link AclEntry}对象的构建器。
+     * 
+     *  <p> {@code Builder}对象是通过调用{@code AclEntry}类定义的{@link AclEntry#newBuilder newBuilder}方法之一获得的。
+     * 
+     * <p> Builder对象是可变的,并且不适合在没有适当同步的情况下由多个并发线程使用。
+     * 
+     * 
      * @since 1.7
      */
     public static final class Builder {
@@ -118,6 +150,10 @@ public final class AclEntry {
          * The type and who components are required to have been set in order
          * to construct an {@code AclEntry}.
          *
+         * <p>
+         *  从此构建器的组件构造{@link AclEntry}。为了构造一个{@code AclEntry},需要设置类型和组件。
+         * 
+         * 
          * @return  a new ACL entry
          *
          * @throws  IllegalStateException
@@ -134,6 +170,10 @@ public final class AclEntry {
         /**
          * Sets the type component of this builder.
          *
+         * <p>
+         *  设置此构建器的类型组件。
+         * 
+         * 
          * @param   type  the component type
          * @return  this builder
          */
@@ -147,6 +187,10 @@ public final class AclEntry {
         /**
          * Sets the principal component of this builder.
          *
+         * <p>
+         *  设置此构建器的主要组件。
+         * 
+         * 
          * @param   who  the principal component
          * @return  this builder
          */
@@ -170,6 +214,10 @@ public final class AclEntry {
          * Sets the permissions component of this builder. On return, the
          * permissions component of this builder is a copy of the given set.
          *
+         * <p>
+         *  设置此构建器的权限组件。返回时,此构建器的权限组件是给定集的副本。
+         * 
+         * 
          * @param   perms  the permissions component
          * @return  this builder
          *
@@ -196,6 +244,10 @@ public final class AclEntry {
          * permissions component of this builder is a copy of the permissions in
          * the given array.
          *
+         * <p>
+         *  设置此构建器的权限组件。返回时,此构建器的权限组件是给定数组中的权限的副本。
+         * 
+         * 
          * @param   perms  the permissions component
          * @return  this builder
          */
@@ -215,6 +267,10 @@ public final class AclEntry {
          * Sets the flags component of this builder. On return, the flags
          * component of this builder is a copy of the given set.
          *
+         * <p>
+         *  设置此构建器的标志组件。返回时,此构建器的flags组件是给定集合的副本。
+         * 
+         * 
          * @param   flags  the flags component
          * @return  this builder
          *
@@ -241,6 +297,10 @@ public final class AclEntry {
          * component of this builder is a copy of the flags in the given
          * array.
          *
+         * <p>
+         *  设置此构建器的标志组件。返回时,此构建器的flags组件是给定数组中的flags的副本。
+         * 
+         * 
          * @param   flags  the flags component
          * @return  this builder
          */
@@ -262,6 +322,10 @@ public final class AclEntry {
      * components is {@code null}. The initial value of the permissions and
      * flags components is the empty set.
      *
+     * <p>
+     *  构造新构建器。类型和who组件的初始值为{@code null}。权限和标志组件的初始值是空集。
+     * 
+     * 
      * @return  a new builder
      */
     public static Builder newBuilder() {
@@ -273,6 +337,10 @@ public final class AclEntry {
     /**
      * Constructs a new builder with the components of an existing ACL entry.
      *
+     * <p>
+     *  使用现有ACL条目的组件构造新构建器。
+     * 
+     * 
      * @param   entry  an ACL entry
      * @return  a new builder
      */
@@ -283,6 +351,10 @@ public final class AclEntry {
     /**
      * Returns the ACL entry type.
      *
+     * <p>
+     *  返回ACL条目类型。
+     * 
+     * 
      * @return the ACL entry type
      */
     public AclEntryType type() {
@@ -292,6 +364,10 @@ public final class AclEntry {
     /**
      * Returns the principal component.
      *
+     * <p>
+     *  返回主成分。
+     * 
+     * 
      * @return the principal component
      */
     public UserPrincipal principal() {
@@ -303,6 +379,12 @@ public final class AclEntry {
      *
      * <p> The returned set is a modifiable copy of the permissions.
      *
+     * <p>
+     *  返回权限组件的副本。
+     * 
+     *  <p>返回的集合是权限的可修改副本。
+     * 
+     * 
      * @return the permissions component
      */
     public Set<AclEntryPermission> permissions() {
@@ -314,6 +396,12 @@ public final class AclEntry {
      *
      * <p> The returned set is a modifiable copy of the flags.
      *
+     * <p>
+     *  返回flags组件的副本。
+     * 
+     *  <p>返回的集合是标记的可修改副本。
+     * 
+     * 
      * @return the flags component
      */
     public Set<AclEntryFlag> flags() {
@@ -333,6 +421,16 @@ public final class AclEntry {
      * <p> This method satisfies the general contract of the {@link
      * java.lang.Object#equals(Object) Object.equals} method. </p>
      *
+     * <p>
+     *  将指定的对象与此ACL条目进行比较以确保相等。
+     * 
+     * <p>如果给定的对象不是{@code AclEntry},则此方法立即返回{@code false}。
+     * 
+     *  <p>对于要考虑的两个ACL条目,等于要求它们都是相同类型,它们的组件相等,它们的权限组件相等,并且它们的标志组件相等。
+     * 
+     *  <p>此方法满足{@link java.lang.Object#equals(Object)Object.equals}方法的一般合同。 </p>
+     * 
+     * 
      * @param   ob   the object to which this object is to be compared
      *
      * @return  {@code true} if, and only if, the given object is an AclEntry that
@@ -365,6 +463,7 @@ public final class AclEntry {
      *
      * <p> This method satisfies the general contract of the {@link
      * Object#hashCode} method.
+     * <p>
      */
     @Override
     public int hashCode() {
@@ -382,6 +481,12 @@ public final class AclEntry {
     /**
      * Returns the string representation of this ACL entry.
      *
+     * <p>
+     *  返回此ACL条目的哈希码值。
+     * 
+     *  <p>此方法满足{@link Object#hashCode}方法的一般合同。
+     * 
+     * 
      * @return  the string representation of this entry
      */
     @Override

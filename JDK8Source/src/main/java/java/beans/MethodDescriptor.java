@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,9 @@ import java.util.ArrayList;
 /**
  * A MethodDescriptor describes a particular method that a Java Bean
  * supports for external access from other components.
+ * <p>
+ *  MethodDescriptor描述了Java Bean支持从其他组件进行外部访问的特定方法。
+ * 
  */
 
 public class MethodDescriptor extends FeatureDescriptor {
@@ -50,6 +54,10 @@ public class MethodDescriptor extends FeatureDescriptor {
      * Constructs a <code>MethodDescriptor</code> from a
      * <code>Method</code>.
      *
+     * <p>
+     *  从<code>方法</code>构造<code> MethodDescriptor </code>。
+     * 
+     * 
      * @param method    The low-level method information.
      */
     public MethodDescriptor(Method method) {
@@ -62,6 +70,10 @@ public class MethodDescriptor extends FeatureDescriptor {
      * <code>Method</code> providing descriptive information for each
      * of the method's parameters.
      *
+     * <p>
+     *  从<code> Method </code>构造<code> MethodDescriptor </code>,为每个方法的参数提供描述性信息。
+     * 
+     * 
      * @param method    The low-level method information.
      * @param parameterDescriptors  Descriptive information for each of the
      *                          method's parameters.
@@ -78,6 +90,10 @@ public class MethodDescriptor extends FeatureDescriptor {
     /**
      * Gets the method that this MethodDescriptor encapsulates.
      *
+     * <p>
+     *  获取此MethodDescriptor封装的方法。
+     * 
+     * 
      * @return The low-level description of the method
      */
     public synchronized Method getMethod() {
@@ -153,6 +169,10 @@ public class MethodDescriptor extends FeatureDescriptor {
      * Gets the ParameterDescriptor for each of this MethodDescriptor's
      * method's parameters.
      *
+     * <p>
+     *  获取每个MethodDescriptor的方法的参数的ParameterDescriptor。
+     * 
+     * 
      * @return The locale-independent names of the parameters.  May return
      *          a null array if the parameter names aren't known.
      */
@@ -176,6 +196,10 @@ public class MethodDescriptor extends FeatureDescriptor {
      * Package-private constructor
      * Merge two method descriptors.  Where they conflict, give the
      * second argument (y) priority over the first argument (x).
+     * <p>
+     *  Package-private构造函数合并两个方法描述符。在它们冲突的地方,给第二个参数(y)优先于第一个参数(x)。
+     * 
+     * 
      * @param x  The first (lower priority) MethodDescriptor
      * @param y  The second (higher priority) MethodDescriptor
      */
@@ -202,6 +226,8 @@ public class MethodDescriptor extends FeatureDescriptor {
     /*
      * Package-private dup constructor
      * This must isolate the new object from any changes to the old object.
+     * <p>
+     *  Package-private dup constructor这必须将新对象与对旧对象的任何更改隔离开来。
      */
     MethodDescriptor(MethodDescriptor old) {
         super(old);

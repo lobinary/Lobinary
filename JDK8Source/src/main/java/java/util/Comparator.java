@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -97,6 +98,50 @@ import java.util.Comparators;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  比较函数,其对一些对象集合施加<i>总排序</i>。
+ * 比较器可以传递给排序方法(例如{@link Collections#sort(List,Comparator)Collections.sort}或{@link Arrays#sort(Object [],Comparator)Arrays.sort}
+ * 排序顺序。
+ *  比较函数,其对一些对象集合施加<i>总排序</i>。
+ * 比较器还可以用于控制某些数据结构(例如{@link SortedSet sorted sets}或{@link SortedMap sorted maps})的顺序,或者为没有{@link SortedSet排序集}
+ * 链接比较自然排序}。
+ *  比较函数,其对一些对象集合施加<i>总排序</i>。<p>。
+ * 
+ *  当且仅当<tt> c时,由比较器<tt> c </tt>对一组元素<tt> S </tt>施加的排序被认为与</i>一致。
+ * 对于每个<tt> e1 </tt>和<tt> e2 </tt,比较(e1,e2)== 0 </tt>具有与<tt> e1.equals(e2)</tt>相同的布尔值>在<tt> S </tt>。
+ * <p>。
+ * 
+ * 当使用比较器能够强制执行与equals不一致的排序以排序排序集合(或排序映射)时,应当小心。
+ * 假设具有显式比较器<tt> c </tt>的排序集合(或排序映射)与从集合<tt> S </tt>中绘制的元素(或键)一起使用。
+ * 如果<tt> c </tt>对<tt> S </tt>施加的排序与equals不一致,则排序集合(或排序映射)将表现为"奇怪"。
+ * 特别地,排序的集合(或排序的映射)将违反集合(或映射)的一般契约,其按照<tt>等于</tt>定义。<p>。
+ * 
+ *  例如,假设添加了两个元素{@code a}和{@code b},使得{@code(a.equals(b)&& c.compare(a,b)！= 0)代码TreeSet}与比较器{@code c}。
+ * 第二个{@code add}操作将返回true(并且树集合的大小将增加),因为{@code a}和{@code b}从树集合的角度来看是不等效的,即使这与规范{@link Set#add Set.add}
+ * 方法。
+ *  例如,假设添加了两个元素{@code a}和{@code b},使得{@code(a.equals(b)&& c.compare(a,b)！= 0)代码TreeSet}与比较器{@code c}。
+ * <p>。
+ * 
+ *  注意：对于比较器也可以实现<tt> java.io.Serializable </tt>,这是一个好主意,因为它们可以用作可序列化数据结构中的排序方法(如{@link TreeSet},{@link TreeMap }
+ * )。
+ * 为了使数据结构成功序列化,比较器(如果提供)必须实现<tt> Serializable </tt>。<p>。
+ * 
+ * 对于数学倾斜,定义给定比较器对给定的一组对象施加的<i>施加的排序</i>的<i>关系</i> / tt>是：<pre> {(x,y),使得c.compare(x,y)<= 0}。
+ *  </pre> </pre> </i>：<pre> {(x,y),c.compare(x,y)== 0}。
+ * </pre>
+ * 
+ *  它紧接着从<tt>比较</t>的合同开始,商是<tt> S </tt>上的等价关系</i>,并且所强加的排序是<i> order </i> on <tt> S </tt>。
+ * 当我们说<tt> c </tt>对<tt> S </tt>施加的排序与</i>一致时,意味着排序的商是等价关系定义通过对象的{@link Object#equals(Object)equals(Object)}
+ * 方法：<pre> {(x,y),使得x.equals(y)}。
+ *  它紧接着从<tt>比较</t>的合同开始,商是<tt> S </tt>上的等价关系</i>,并且所强加的排序是<i> order </i> on <tt> S </tt>。 </pre>。
+ * 
+ *  <p>与{@code Comparable}不同,比较器可以可选地允许比较空参数,同时保持对等价关系的要求。
+ * 
+ *  <p>此接口是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @param <T> the type of objects that may be compared by this comparator
  *
  * @author  Josh Bloch
@@ -137,6 +182,26 @@ public interface Comparator<T> {
      * this fact.  The recommended language is "Note: this comparator
      * imposes orderings that are inconsistent with equals."
      *
+     * <p>
+     *  比较其两个参数的顺序。返回负整数,零或正整数,因为第一个参数小于,等于或大于第二个。<p>
+     * 
+     * 在前面的描述中,符号<tt> sgn(</tt> <i> expression </i> <tt>)</tt>指定数学<i>符号</i>函数,根据表达式<i>的值是否为负,零或正的<tt> -1 </tt>
+     * ,<tt> 0 </tt>或<tt> 1 </tt> 。
+     * <p>。
+     * 
+     *  实现者必须确保所有<tt> x </tt>和<tt> y </tt>的<tt> sgn(compare(x,y))== -sgn(compare(y,x))</tt> tt>。
+     *  (这意味着<tt> compare(x,y)</tt>必须在<tt> compare(y,x)</tt>抛出异常时抛出异常。)<p>。
+     * 
+     *  实现者还必须确保关系是传递的：<tt>((compare(x,y)> 0)&amp;&amp;(compare(y,z)> 0))</tt> compare(x,z)> 0 </tt>。<p>
+     * 
+     *  最后,实现者必须确保<tt> compare(x,y)== 0 </tt>意味着<tt> sgn(compare(x,z))== sgn(compare(y,z))< tt> for all <tt>
+     *  z </tt>。
+     * <p>。
+     * 
+     *  通常是这种情况,但<i>不是</t>严格要求<tt>(compare(x,y)== 0)==(x.equals(y))</tt>。一般来说,违反这个条件的任何比较器应该清楚地表明这一事实。
+     * 推荐的语言是"注意：此比较器强制执行与equals不一致的顺序"。
+     * 
+     * 
      * @param o1 the first object to be compared.
      * @param o2 the second object to be compared.
      * @return a negative integer, zero, or a positive integer as the
@@ -164,6 +229,17 @@ public interface Comparator<T> {
      * in some cases, improve performance by allowing programs to determine
      * that two distinct comparators impose the same order.
      *
+     * <p>
+     * 指示一些其他对象是否"等于"这个比较器。此方法必须遵守{@link Object#equals(Object)}的一般合同。
+     * 此外,如果指定的对象也是比较器,并且它施加与此比较器相同的顺序,则此方法可以返回<tt> true </tt> <i>。
+     * 因此,<code> comp1.equals(comp2)</code>意味着<tt> sgn(comp1.compare(o1,o2))== sgn(comp2.compare(o1,o2))</tt>
+     * 对象引用<tt> o1 </tt>和<tt> o2 </tt>。
+     * 此外,如果指定的对象也是比较器,并且它施加与此比较器相同的顺序,则此方法可以返回<tt> true </tt> <i>。<p>。
+     * 
+     *  请注意,始终</i>安全<i>不</i>覆盖<tt> Object.equals(Object)</tt>。
+     * 然而,在一些情况下,重写该方法可以通过允许程序确定两个不同的比较器强加相同的顺序来提高性能。
+     * 
+     * 
      * @param   obj   the reference object with which to compare.
      * @return  <code>true</code> only if the specified object is also
      *          a comparator and it imposes the same ordering as this
@@ -177,6 +253,10 @@ public interface Comparator<T> {
      * Returns a comparator that imposes the reverse ordering of this
      * comparator.
      *
+     * <p>
+     *  返回施加此比较器的相反顺序的比较器。
+     * 
+     * 
      * @return a comparator that imposes the reverse ordering of this
      *         comparator.
      * @since 1.8
@@ -203,6 +283,17 @@ public interface Comparator<T> {
      *             .thenComparing(String.CASE_INSENSITIVE_ORDER);
      * }</pre>
      *
+     * <p>
+     *  返回与另一个比较器的词典顺序比较器。如果{@code Comparator}认为两个元素相等,即{@code compare(a,b)== 0},则使用{@code other}来确定顺序。
+     * 
+     *  <p>如果指定的比较器也是可串行化的,返回的比较器是可序列化的。
+     * 
+     *  @apiNote例如,要根据长度和不区分大小写的自然排序对{@code String}的集合进行排序,可以使用以下代码组成比较器,
+     * 
+     *  <pre> {@ code Comparator <String> cmp = Comparator.comparingInt(String :: length).thenComparing(String.CASE_INSENSITIVE_ORDER); }
+     *  </pre>。
+     * 
+     * 
      * @param  other the other comparator to be used when this comparator
      *         compares two objects that are equal.
      * @return a lexicographic-order comparator composed of this and then the
@@ -225,6 +316,12 @@ public interface Comparator<T> {
      * @implSpec This default implementation behaves as if {@code
      *           thenComparing(comparing(keyExtractor, cmp))}.
      *
+     * <p>
+     * 返回一个词典顺序比较器,它具有提取要与给定{@code Comparator}进行比较的键的函数。
+     * 
+     *  @implSpec这个默认实现就像{@code thenComparing(comparison(keyExtractor,cmp))}。
+     * 
+     * 
      * @param  <U>  the type of the sort key
      * @param  keyExtractor the function used to extract the sort key
      * @param  keyComparator the {@code Comparator} used to compare the sort key
@@ -249,6 +346,12 @@ public interface Comparator<T> {
      * @implSpec This default implementation behaves as if {@code
      *           thenComparing(comparing(keyExtractor))}.
      *
+     * <p>
+     *  返回具有提取{@code Comparable}排序键的函数的词典顺序比较器。
+     * 
+     *  @implSpec这个默认实现的行为就像{@code thenComparing(comparison(keyExtractor))}。
+     * 
+     * 
      * @param  <U>  the type of the {@link Comparable} sort key
      * @param  keyExtractor the function used to extract the {@link
      *         Comparable} sort key
@@ -272,6 +375,12 @@ public interface Comparator<T> {
      * @implSpec This default implementation behaves as if {@code
      *           thenComparing(comparingInt(keyExtractor))}.
      *
+     * <p>
+     *  返回具有提取{@code int}排序键的函数的词典顺序比较器。
+     * 
+     *  @implSpec这个默认实现的行为就像{@code thenComparing(comparingInt(keyExtractor))}。
+     * 
+     * 
      * @param  keyExtractor the function used to extract the integer sort key
      * @return a lexicographic-order comparator composed of this and then the
      *         {@code int} sort key
@@ -291,6 +400,12 @@ public interface Comparator<T> {
      * @implSpec This default implementation behaves as if {@code
      *           thenComparing(comparingLong(keyExtractor))}.
      *
+     * <p>
+     *  返回具有提取{@code long}排序键的函数的词典顺序比较器。
+     * 
+     *  @implSpec这个默认实现就像{@code thenComparing(comparingLong(keyExtractor))}。
+     * 
+     * 
      * @param  keyExtractor the function used to extract the long sort key
      * @return a lexicographic-order comparator composed of this and then the
      *         {@code long} sort key
@@ -310,6 +425,12 @@ public interface Comparator<T> {
      * @implSpec This default implementation behaves as if {@code
      *           thenComparing(comparingDouble(keyExtractor))}.
      *
+     * <p>
+     *  返回具有提取{@code double}排序键的函数的词典顺序比较器。
+     * 
+     *  @implSpec这个默认实现的行为像{@code thenComparing(comparingDouble(keyExtractor))}。
+     * 
+     * 
      * @param  keyExtractor the function used to extract the double sort key
      * @return a lexicographic-order comparator composed of this and then the
      *         {@code double} sort key
@@ -329,6 +450,12 @@ public interface Comparator<T> {
      * <p>The returned comparator is serializable and throws {@link
      * NullPointerException} when comparing {@code null}.
      *
+     * <p>
+     *  返回一个比较器,它强加了<em>自然排序</em>的反向。
+     * 
+     *  <p>返回的比较器是可序列化的,并且在比较{@code null}时抛出{@link NullPointerException}。
+     * 
+     * 
      * @param  <T> the {@link Comparable} type of element to be compared
      * @return a comparator that imposes the reverse of the <i>natural
      *         ordering</i> on {@code Comparable} objects.
@@ -346,6 +473,12 @@ public interface Comparator<T> {
      * <p>The returned comparator is serializable and throws {@link
      * NullPointerException} when comparing {@code null}.
      *
+     * <p>
+     *  返回一个以自然顺序比较{@link Comparable}对象的比较器。
+     * 
+     *  <p>返回的比较器是可序列化的,并且在比较{@code null}时抛出{@link NullPointerException}。
+     * 
+     * 
      * @param  <T> the {@link Comparable} type of element to be compared
      * @return a comparator that imposes the <i>natural ordering</i> on {@code
      *         Comparable} objects.
@@ -367,6 +500,13 @@ public interface Comparator<T> {
      * <p>The returned comparator is serializable if the specified comparator
      * is serializable.
      *
+     * <p>
+     * 返回一个对null友好的比较器,认为{@code null}小于非null。当两者都是{@code null}时,它们被认为是相等的。
+     * 如果两者都是非空的,则使用指定的{@code Comparator}来确定顺序。如果指定的比较器是{@code null},则返回的比较器认为所有非空值都相等。
+     * 
+     *  <p>如果指定的比较器是可序列化的,返回的比较器是可序列化的。
+     * 
+     * 
      * @param  <T> the type of the elements to be compared
      * @param  comparator a {@code Comparator} for comparing non-null values
      * @return a comparator that considers {@code null} to be less than
@@ -388,6 +528,13 @@ public interface Comparator<T> {
      * <p>The returned comparator is serializable if the specified comparator
      * is serializable.
      *
+     * <p>
+     *  返回一个对null友好的比较器,认为{@code null}大于非null。当两者都是{@code null}时,它们被认为是相等的。
+     * 如果两者都是非空的,则使用指定的{@code Comparator}来确定顺序。如果指定的比较器是{@code null},则返回的比较器认为所有非空值都相等。
+     * 
+     *  <p>如果指定的比较器是可序列化的,返回的比较器是可序列化的。
+     * 
+     * 
      * @param  <T> the type of the elements to be compared
      * @param  comparator a {@code Comparator} for comparing non-null values
      * @return a comparator that considers {@code null} to be greater than
@@ -417,6 +564,17 @@ public interface Comparator<T> {
      *             String.CASE_INSENSITIVE_ORDER);
      * }</pre>
      *
+     * <p>
+     *  接受从类型{@code T}中提取排序键的函数,并返回一个{@code Comparator <T>},使用指定的{@link比较器}比较该排序键。
+     * 
+     *  <p>如果指定的函数和比较器都是可序列化的,返回的比较器是可序列化的。
+     * 
+     *  @apiNote例如,要获取{@code Comparator},它将{@code Person}对象与其姓氏进行比较,忽略大小写差异,
+     * 
+     *  <pre> {@ code Comparator <Person> cmp = Comparator.comparing(Person :: getLastName,String.CASE_INSENSITIVE_ORDER); }
+     *  </pre>。
+     * 
+     * 
      * @param  <T> the type of element to be compared
      * @param  <U> the type of the sort key
      * @param  keyExtractor the function used to extract the sort key
@@ -453,6 +611,17 @@ public interface Comparator<T> {
      *     Comparator<Person> byLastName = Comparator.comparing(Person::getLastName);
      * }</pre>
      *
+     * <p>
+     * 接受从类型{@code T}中提取{@link java.lang.Comparable Comparable}排序键的函数,并返回一个按该排序键进行比较的{@code Comparator <T>}。
+     * 
+     *  <p>如果指定的函数也是可序列化的,返回的比较器是可序列化的。
+     * 
+     *  @apiNote例如,要获得{@code Person}对象按其姓氏比较的{@code Comparator}
+     * 
+     *  <pre> {@ code Comparator <Person> byLastName = Comparator.comparing(Person :: getLastName); } </pre>
+     * 。
+     * 
+     * 
      * @param  <T> the type of element to be compared
      * @param  <U> the type of the {@code Comparable} sort key
      * @param  keyExtractor the function used to extract the {@link
@@ -477,6 +646,12 @@ public interface Comparator<T> {
      * <p>The returned comparator is serializable if the specified function
      * is also serializable.
      *
+     * <p>
+     *  接受从类型{@code T}中提取{@code int}排序键的函数,并返回一个按该排序键进行比较的{@code Comparator <T>}。
+     * 
+     *  <p>如果指定的函数也是可序列化的,返回的比较器是可序列化的。
+     * 
+     * 
      * @param  <T> the type of element to be compared
      * @param  keyExtractor the function used to extract the integer sort key
      * @return a comparator that compares by an extracted key
@@ -498,6 +673,12 @@ public interface Comparator<T> {
      * <p>The returned comparator is serializable if the specified function is
      * also serializable.
      *
+     * <p>
+     *  接受从类型{@code T}中提取{@code long}排序键的函数,并返回一个按该排序键进行比较的{@code Comparator <T>}。
+     * 
+     *  <p>如果指定的函数也是可序列化的,返回的比较器是可序列化的。
+     * 
+     * 
      * @param  <T> the type of element to be compared
      * @param  keyExtractor the function used to extract the long sort key
      * @return a comparator that compares by an extracted key
@@ -519,6 +700,10 @@ public interface Comparator<T> {
      * <p>The returned comparator is serializable if the specified function
      * is also serializable.
      *
+     * <p>
+     *  接受从类型{@code T}中提取{@code double}排序键的函数,并返回通过该排序键进行比较的{@code Comparator <T>}。
+     * 
+     * 
      * @param  <T> the type of element to be compared
      * @param  keyExtractor the function used to extract the double sort key
      * @return a comparator that compares by an extracted key

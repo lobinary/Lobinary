@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DOMHelper.java,v 1.2.4.1 2005/09/15 08:15:40 suresh_emailid Exp $
+ * <p>
+ *  $ Id：DOMHelper.java,v 1.2.4.1 2005/09/15 08:15:40 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -45,6 +58,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
 /**
+/* <p>
+/* 
  * @deprecated Since the introduction of the DTM, this class will be removed.
  * This class provides a front-end to DOM implementations, providing
  * a number of utility functions that either aren't yet standardized
@@ -71,6 +86,14 @@ public class DOMHelper
    * element might let the DOM automatically switch to a specialized
    * subclass for particular kinds of documents.)
    *
+   * <p>
+   *  DOM Level 1没有用于创建新Document对象的标准机制。这个函数为那个概念提供了一个DOM实现无关的抽象。它通常在作为操作的结果输出新的DOM时使用。
+   * <p>
+   * TODO：这不直接与DOM Level 2兼容。Level 2 createDocument调用也创建根元素,因此要求您在创建文档之前知道该元素将是什么。
+   * 我们应该考虑我们是否要改变这个代码和调用者,这样我们可以使用DOM自己的方法。
+   *  (也有可能DOM Level 3可以放松这个序列,但是你可以通过这样做放弃DOM中的一些智能;意图是知道文档类型和根元素可能会让DOM自动切换到特定的子类种类的文件。)。
+   * 
+   * 
    * @param isSecureProcessing state of the secure processing feature.
    * @return The newly created DOM Document object, with no children, or
    * null if we can't find a DOM implementation that permits creating
@@ -119,6 +142,10 @@ public class DOMHelper
    * abstraction for that for that concept. It's typically used when
    * outputting a new DOM as the result of an operation.
    *
+   * <p>
+   *  DOM Level 1没有用于创建新Document对象的标准机制。这个函数为那个概念提供了一个DOM实现无关的抽象。它通常在作为操作的结果输出新的DOM时使用。
+   * 
+   * 
    * @return The newly created DOM Document object, with no children, or
    * null if we can't find a DOM implementation that permits creating
    * new empty Documents.
@@ -134,6 +161,12 @@ public class DOMHelper
    * xml:space attribute, whether or not extra whitespace should be stripped
    * from the node.  Literal elements from template elements should
    * <em>not</em> be tested with this function.
+   * <p>
+   *  通过xsl：stylesheet,xsl：strip-space,xsl：preserve-space和xml：space属性上的default-space属性的组合,告知是否应该从节点剥离多余的空格
+   * 。
+   * 来自模板元素的文字元素应<em>不</em>使用此函数进行测试。
+   * 
+   * 
    * @param textNode A text node from the source tree.
    * @return true if the text node should be stripped of extra whitespace.
    *
@@ -169,6 +202,19 @@ public class DOMHelper
    * (DOM Level 3 is investigating providing a unique node "key", but
    * that won't help Level 1 and Level 2 implementations.)
    *
+   * <p>
+   *  通过返回任何给定DOM节点的唯一标识符字符串来支持XPath函数GenerateID。
+   * <p>
+   * 警告：基本实现使用Node对象的hashCode(),它不能保证是唯一的。
+   * 如果这个方法没有被覆盖在这个DOM的ipmlementation,大多数Java实现将派生自对象的地址,应该是OK ...但如果你的DOM使用不同的hashCode的定义(例如散列子树的内容)或者如果您
+   * 的DOM可能有多个对象表示数据结构中的单个节点(例如通过代理),您可能需要找到另一种方式来分配唯一标识符。
+   * 警告：基本实现使用Node对象的hashCode(),它不能保证是唯一的。
+   * <p>
+   *  此外,请注意,如果节点被销毁和重新创建,有一个开放的问题,关于ID是否可以重复使用。目前,我们假设输入文档在XPath / XSLT操作期间是稳定的,因此在此上下文中不应出现。
+   * <p>
+   *  (DOM Level 3正在研究提供一个唯一的节点"key",但这不会帮助Level 1和Level 2的实现。)
+   * 
+   * 
    * @param node whose identifier you want to obtain
    *
    * @return a string which should be different for every Node object.
@@ -189,6 +235,14 @@ public class DOMHelper
    *
    * TODO: Make sure this does the right thing with attribute nodes!!!
    *
+   * <p>
+   *  确定在XPath模型中定义的文档顺序中node2是否应该被认为是文档的后面,而不是node1。这可能与其他XML应用程序定义的顺序不一致。
+   * <p>
+   *  有些情况下,没有定义顺序,并且这个函数的结果也没有定义,尽管我们通常返回true。
+   * 
+   *  TODO：确保这做正确的事情与属性节点！
+   * 
+   * 
    * @param node1 DOM Node to perform position comparison on.
    * @param node2 DOM Node to perform position comparison on .
    *
@@ -320,6 +374,11 @@ public class DOMHelper
     System.out.println("node1 = "+node1.getNodeName()+"("+node1.getNodeType()+")"+
     ", node2 = "+node2.getNodeName()
     +"("+node2.getNodeType()+")"+
+    /* <p>
+    /*  System.out.println("node1 ="+ node1.getNodeName()+"("+ node1.getNodeType()+")"+",node2 ="+ node2.get
+    /* NodeName()+"("+ node2.getNodeType ()+")"+。
+    /* 
+    /* 
     ", isNodeAfter = "+isNodeAfter); */
     return isNodeAfter;
   }  // end isNodeAfter(Node node1, Node node2)
@@ -327,6 +386,10 @@ public class DOMHelper
   /**
    * Use DTMNodeProxy to determine whether two nodes are the same.
    *
+   * <p>
+   * 使用DTMNodeProxy确定两个节点是否相同。
+   * 
+   * 
    * @param node1 The first DOM node to compare.
    * @param node2 The second DOM node to compare.
    * @return true if the two nodes are the same.
@@ -348,6 +411,12 @@ public class DOMHelper
    * be consistant for a given invocation but may not
    * match that of either the source file or the serialized output.
    *
+   * <p>
+   *  确定child2是否在文档顺序中的child1之后。
+   * <p>
+   *  警告："文档顺序"的某些方面没有明确定义。例如,在XML中属性的顺序被认为是无意义的,并且我们的模型报告的顺序对于给定的调用将是一致的,但可能不匹配源文件或串行化输出的顺序。
+   * 
+   * 
    * @param parent Must be the parent of both child1 and child2.
    * @param child1 Must be the child of parent and not equal to child2.
    * @param child2 Must be the child of parent and not equal to child1.
@@ -468,6 +537,10 @@ public class DOMHelper
    * Get the depth level of this node in the tree (equals 1 for
    * a parentless node).
    *
+   * <p>
+   *  获取树中此节点的深度级别(对于无父节点,等于1)。
+   * 
+   * 
    * @param n Node to be examined.
    * @return the number of ancestors, plus one
    * @xsl.usage internal
@@ -493,6 +566,12 @@ public class DOMHelper
    *
    * Default handling:
    *
+   * <p>
+   *  给定一个XML命名空间前缀和要评估前缀的上下文,返回此前缀绑定到的命名空间名称。注意,DOM Level 3应该提供一个处理DOM的"早期绑定"行为的版本。
+   * 
+   *  默认处理：
+   * 
+   * 
    * @param prefix String containing namespace prefix to be resolved,
    * without the ':' which separates it from the localname when used
    * in a Node Name. The empty sting signifies the default namespace
@@ -564,40 +643,57 @@ public class DOMHelper
 
   /**
    * An experiment for the moment.
+   * <p>
+   *  一个实验的时刻。
+   * 
    */
   Hashtable m_NSInfos = new Hashtable();
 
   /** Object to put into the m_NSInfos table that tells that a node has not been
+  /* <p>
+  /* 
    *  processed, but has xmlns namespace decls.  */
   protected static final NSInfo m_NSInfoUnProcWithXMLNS = new NSInfo(false,
                                                             true);
 
   /** Object to put into the m_NSInfos table that tells that a node has not been
+  /* <p>
+  /* 
    *  processed, but has no xmlns namespace decls.  */
   protected static final NSInfo m_NSInfoUnProcWithoutXMLNS = new NSInfo(false,
                                                                false);
 
   /** Object to put into the m_NSInfos table that tells that a node has not been
+  /* <p>
+  /* 
    *  processed, and has no xmlns namespace decls, and has no ancestor decls.  */
   protected static final NSInfo m_NSInfoUnProcNoAncestorXMLNS =
     new NSInfo(false, false, NSInfo.ANCESTORNOXMLNS);
 
   /** Object to put into the m_NSInfos table that tells that a node has been
+  /* <p>
+  /* 
    *  processed, and has xmlns namespace decls.  */
   protected static final NSInfo m_NSInfoNullWithXMLNS = new NSInfo(true,
                                                           true);
 
   /** Object to put into the m_NSInfos table that tells that a node has been
+  /* <p>
+  /* 
    *  processed, and has no xmlns namespace decls.  */
   protected static final NSInfo m_NSInfoNullWithoutXMLNS = new NSInfo(true,
                                                              false);
 
   /** Object to put into the m_NSInfos table that tells that a node has been
+  /* <p>
+  /* 
    *  processed, and has no xmlns namespace decls. and has no ancestor decls.  */
   protected static final NSInfo m_NSInfoNullNoAncestorXMLNS =
     new NSInfo(true, false, NSInfo.ANCESTORNOXMLNS);
 
   /** Vector of node (odd indexes) and NSInfos (even indexes) that tell if
+  /* <p>
+  /* 
    *  the given node is a candidate for ancestor namespace processing.  */
   protected Vector m_candidateNoAncestorXMLNS = new Vector();
 
@@ -607,6 +703,11 @@ public class DOMHelper
    * to cache some of the data in NSINFO objects, to avoid repeated lookup.
    * TODO: Should we consider moving that logic into getNamespaceForPrefix?
    *
+   * <p>
+   *  返回给定节点的命名空间。不同于简单地获取节点的前缀和使用getNamespaceForPrefix,它试图缓存NSINFO对象中的一些数据,以避免重复查找。
+   *  TODO：我们应该考虑将这个逻辑转换为getNamespaceForPrefix吗?。
+   * 
+   * 
    * @param n Node to be examined.
    *
    * @return String containing the Namespace Name (uri) for this node.
@@ -816,6 +917,10 @@ public class DOMHelper
    * with a namespace prefix, this is the part after the colon; otherwise
    * it's the full node name.
    *
+   * <p>
+   *  返回给定节点的本地名称。如果节点的名称以命名空间前缀开头,则这是冒号之后的部分;否则它是完整的节点名称。
+   * 
+   * 
    * @param n the node to be examined.
    *
    * @return String containing the Local Name
@@ -835,6 +940,10 @@ public class DOMHelper
    * representation of a node name, but it allows convenient
    * single-string comparison of the "universal" names of two nodes.
    *
+   * <p>
+   *  返回具有命名空间前缀(如果有)的元素名称,该名称由绑定到的命名空间URI替换。这不是节点名称的标准表示,但它允许方便的单字符串比较两个节点的"通用"名称。
+   * 
+   * 
    * @param elem Element to be examined.
    *
    * @return String in the form "namespaceURI:localname" if the node
@@ -857,6 +966,10 @@ public class DOMHelper
    * representation of a node name, but it allows convenient
    * single-string comparison of the "universal" names of two nodes.
    *
+   * <p>
+   * 返回带有命名空间前缀(如果有)的属性名称,该名称空间前缀由其绑定的命名空间URI替换。这不是节点名称的标准表示,但它允许方便的单字符串比较两个节点的"通用"名称。
+   * 
+   * 
    * @param attr Attr to be examined
    *
    * @return String in the form "namespaceURI:localname" if the node
@@ -882,6 +995,10 @@ public class DOMHelper
    * be determined only in the context of a DTD or other Schema,
    * and that DOM Level 2 has nostandardized DOM API which can
    * return that information.
+   * <p>
+   *  告诉节点是否是可忽略的空格。注意,这只能在DTD或其他模式的上下文中确定,并且DOM级别2没有可以返回该信息的标准化DOM API。
+   * 
+   * 
    * @deprecated
    *
    * @param node Node to be examined
@@ -908,6 +1025,10 @@ public class DOMHelper
 
   /**
    * Get the first unparented node in the ancestor chain.
+   * <p>
+   *  获取祖先链中的第一个非父对象节点。
+   * 
+   * 
    * @deprecated
    *
    * @param node Starting node, to specify which chain to chase
@@ -939,6 +1060,13 @@ public class DOMHelper
    * or change the code to walk up the ancestor chain.
 
    *
+   * <p>
+   *  获取文档树的根节点,而不管传入的节点是否是文档节点。
+   * <p>
+   *  TODO：这不处理DocumentFragments或"孤立"子树 - 它目前返回ownerDocument,即使树实际上不是主要的Document树的一部分。
+   * 我们应该重写描述以说明它找到Document节点,或者更改代码以遍历祖先链。
+   * 
+   * 
    * @param n Node to be examined
    *
    * @return the Document node. Note that this is not the correct answer
@@ -958,6 +1086,10 @@ public class DOMHelper
    * this can be done in a namespace-aware manner, but in Level 1 DOMs
    * it has to be done by testing the node name.
    *
+   * <p>
+   *  测试给定的节点是否是命名空间decl节点。在DOM Level 2中,这可以以命名空间感知的方式完成,但在Level 1 DOM中,必须通过测试节点名称来完成。
+   * 
+   * 
    * @param n Node to be examined.
    *
    * @return boolean -- true iff the node is an Attr whose name is
@@ -992,6 +1124,16 @@ public class DOMHelper
    * still wouldn't help the users of Level 1 or Level 2 DOMs)
    * <p>
    *
+   * <p>
+   *  获取DOM节点的XPath模型父对象 -  Attrs的ownerElement,其他节点的父对象。
+   * <p>
+   * 背景：DOM认为你必须是你的父母的孩子,因此Attrs没有父母。 XPath说Attrs确实有他们自己的Element作为他们的父。
+   * 此函数通过使用DOM Level 2 ownerElement函数或在第1级DOM中使用"愚蠢和昂贵的函数"来桥接差异。
+   * <p>
+   *  (有一些关于未来DOM的讨论,将ownerElement泛化成ownerNode并使其在所有类型的节点上工作,这仍然不能帮助1级或2级DOM的用户)
+   * <p>
+   * 
+   * 
    * @param node Node whose XPath parent we want to obtain
    *
    * @return the parent of the node, or the ownerElement if it's an
@@ -1016,6 +1158,10 @@ public class DOMHelper
       {
         throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_CHILD_HAS_NO_OWNER_DOCUMENT, null));//"Attribute child does not have an owner document!");
       }
+          /* <p>
+          /*  TBD：if(null == doc){throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_CHILD_HAS_NO_OWNER_DOCUMENT,null)); //"属性子项没有所有者文档！ }
+          /* }。
+          /* 
       */
 
           // Given how expensive the tree walk may be, we should first ask
@@ -1074,6 +1220,14 @@ public class DOMHelper
    * <p>
    * TODO: getElementByID is currently unimplemented. Support DOM Level 2?
    *
+   * <p>
+   *  给定一个ID,返回该元素。这只有在文档在DTD或Schema的上下文中解释时才能工作,否则我们不知道哪些属性是ID或不是ID。
+   * <p>
+   *  请注意,DOM级别1无法检索此信息。 DOM级别2介绍了它,但不承诺它将在所有DOM支持;那些不能支持它的将总是返回null。
+   * <p>
+   *  TODO：getElementByID当前未实现。支持DOM 2级?
+   * 
+   * 
    * @param id The unique identifier to be searched for.
    * @param doc The document to search within.
    * @return CURRENTLY HARDCODED TO NULL, but it should be:
@@ -1113,6 +1267,18 @@ public class DOMHelper
    * to the DOM" refers only to parsed entities, not unparsed, and hence
    * doesn't affect this function.)
    *
+   * <p>
+   *  getUnparsedEntityURI函数返回在与上下文节点相同的文档中具有指定名称的未解析实体的URI(参见[3.3 Unparsed Entities])。如果没有这样的实体,它返回空字符串。
+   * <p>
+   * XML处理器可以选择使用系统标识符(如果提供了一个)来解析实体,而不是公共标识符中的URI。细节取决于处理器,我们将不得不支持某种形式的插件解析器来正确处理这些。
+   * 目前,我们只返回系统标识符(如果存在),并希望它是一个可用的URI,或者我们的调用者可以将它映射到一个。 TODO：Resolve Public Identifiers ...或考虑更改函数名称。
+   * <p>
+   *  如果我们找到一个相对URI引用,XML期望它根据文档的基本URI解析。 DOM不为我们这样做,并不完全清楚是否应该在这里做;目前已经推高了我们的应用程序。
+   *  (请注意,DOM级别1不存储文档的基本URI。)TODO：考虑解析相对URI。
+   * <p>
+   *  (DOM的声明"一个XML处理器可能选择在结构模型被传递给DOM之前完全展开实体"仅指解析的实体,而不是解析的,因此不影响这个函数)。
+   * 
+   * 
    * @param name A string containing the Entity Name of the unparsed
    * entity.
    * @param doc Document node for the document to be searched.
@@ -1178,6 +1344,13 @@ public class DOMHelper
    * getOwnerElement() method fixes that, but only for Level 2 and
    * later DOMs.
    *
+   * <p>
+   *  支持getParentOfNode;遍历DOM树,直到找到拥有Attr的Element。这是非常昂贵的,如果可能的话,你应该使用DOM Level 2 Attr.ownerElement()方法。
+   * <p>
+   * DOM 1级开发人员希望人们记住他们看到的最后一个元素,并且可以从该源中恢复信息。显然,如果你提供的唯一信息是Attr不工作的很好。
+   *  DOM Level 2的getOwnerElement()方法修复了这一问题,但仅适用于2级和更高版本的DOM。
+   * 
+   * 
    * @param elem Element whose subtree is to be searched for this Attr
    * @param attr Attr whose owner is to be located.
    *
@@ -1221,6 +1394,9 @@ public class DOMHelper
   /**
    * The factory object used for creating nodes
    * in the result tree.
+   * <p>
+   *  用于在结果树中创建节点的工厂对象。
+   * 
    */
   protected Document m_DOMFactory = null;
 
@@ -1229,6 +1405,10 @@ public class DOMHelper
    * in the result tree. In fact, that's just the result tree's
    * Document node...
    *
+   * <p>
+   *  存储在结果树中创建DOM节点所需的工厂对象。事实上,这只是结果树的Document节点...
+   * 
+   * 
    * @param domFactory The DOM Document Node within whose context
    * the result tree will be built.
    */
@@ -1241,6 +1421,10 @@ public class DOMHelper
    * Retrieve the factory object required to create DOM nodes
    * in the result tree.
    *
+   * <p>
+   *  检索在结果树中创建DOM节点所需的工厂对象。
+   * 
+   * 
    * @return The result tree's DOM Document Node.
    */
   public Document getDOMFactory()
@@ -1259,6 +1443,10 @@ public class DOMHelper
    * getNodeData(Node,FastStringBuffer) for discussion of how
    * whitespace nodes are handled.
    *
+   * <p>
+   *  获取节点的文本内容。有关如何处理空白节点的讨论,请参阅getNodeData(Node,FastStringBuffer)。
+   * 
+   * 
    * @param node DOM Node to be examined
    * @return String containing a concatenation of all the
    * textual content within that node.
@@ -1297,6 +1485,11 @@ public class DOMHelper
    * should probably also consider xml:space if/when we address this.
    * DOM Level 3 may solve the problem for us.
    *
+   * <p>
+   *  检索DOM子树的文本内容,将其附加到用户提供的FastStringBuffer对象中。请注意,属性不被视为元素内容的一部分。
+   * <p>
+   *  有关于空白剥离的开放性问题。目前,我们在这方面没有做特别的努力,因为标准DOM还没有提供基于DTD的信息来区分元素上下文和真正的#PCDATA。
+   * 
    * @param node Node whose subtree is to be walked, gathering the
    * contents of all Text or CDATASection nodes.
    * @param buf FastStringBuffer into which the contents of the text

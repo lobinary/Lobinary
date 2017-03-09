@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import com.sun.corba.se.pept.transport.ContactInfo;
  * <code>ClientRequestDispatcher</code> coordinates the request (and possible
  * response) processing for a specific <em>protocol</em>.
  *
+ * <p>
+ *  <code> ClientRequestDispatcher </code>协调特定<em>协议的请求(以及可能的响应)处理</em>。
+ * 
+ * 
  * @author Harold Carr
  */
 public interface ClientRequestDispatcher
@@ -44,6 +49,10 @@ public interface ClientRequestDispatcher
      * {@link com.sun.corba.se.pept.encoding.OutputObject OutputObject}
      * to set data to be sent on a message.
      *
+     * <p>
+     *  在请求开始时,表示块使用它来获得{@link com.sun.corba.se.pept.encoding.OutputObject OutputObject}以设置要在消息上发送的数据。
+     * 
+     * 
      * @param self -
      * @param methodName - the remote method name
      * @param isOneWay - <code>true</code> if the message is asynchronous
@@ -65,6 +74,10 @@ public interface ClientRequestDispatcher
      * it signals the PEPt runtime to send the encoded data by calling this
      * method.
      *
+     * <p>
+     *  表示块在{@link com.sun.corba.se.pept.encoding.OutputObject OutputObject}上设置数据后,它通过调用此方法向PEPt运行时发送编码数据。
+     * 
+     * 
      * @param self -
      * @param outputObject
      *
@@ -94,6 +107,10 @@ public interface ClientRequestDispatcher
      * This method may release resources.  In some cases it may cause
      * control or error messages to be sent.
      *
+     * <p>
+     *  在呈现块完成请求之后,它通过调用此方法向PEPt运行时发出信号。
+     * 
+     * 
      * @param broker -
      * @param inputObject -
      */

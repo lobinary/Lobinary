@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -58,6 +68,13 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLPullParserConfiguration;
  * to process "all the declarations they read in the internal DTD subset ... must use the information in those declarations to normalize attribute values,
  * include the replacement text of internal entities, and supply default attribute values".
  *
+ * <p>
+ *  这是非验证解析器配置。它使用以下解析器组件扩展了基本配置：文档扫描器,DTD扫描器,命名空间绑定器,文档处理程序。
+ * <p>
+ *  使用此配置的Xerces解析器</strong>不是</strong> <a href="http://www.w3.org/TR/REC-xml#sec-conformance">符合</a>的非验
+ * 证XML处理器,因为需要一致的非验证处理器来处理它们在内部DTD子集中读取的所有声明...必须使用那些声明中的信息来归一化属性值,包括内部实体的替换文本,并且提供默认属性值"。
+ * 
+ * 
  * @author Elena Litani, IBM
  * @version $Id: NonValidatingConfiguration.java,v 1.7 2010-11-01 04:40:09 joehw Exp $
  */
@@ -213,6 +230,9 @@ public class NonValidatingConfiguration
 
         /** fConfigUpdated is set to true if there has been any change to the configuration settings,
          * i.e a feature or a property was changed.
+         * <p>
+         *  即特征或性质被改变。
+         * 
          */
         protected boolean fConfigUpdated = false;
 
@@ -226,6 +246,9 @@ public class NonValidatingConfiguration
      * True if a parse is in progress. This state is needed because
      * some features/properties cannot be set while parsing (e.g.
      * validation and namespaces).
+     * <p>
+     * 如果解析正在进行,则为true。需要此状态,因为在解析(例如验证和命名空间)时无法设置某些功能/属性。
+     * 
      */
     protected boolean fParseInProgress = false;
 
@@ -241,6 +264,10 @@ public class NonValidatingConfiguration
     /**
      * Constructs a parser configuration using the specified symbol table.
      *
+     * <p>
+     *  使用指定的符号表构造解析器配置。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      */
     public NonValidatingConfiguration(SymbolTable symbolTable) {
@@ -255,6 +282,12 @@ public class NonValidatingConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表和语法池构造解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      * @param grammarPool The grammar pool to use.
      */
@@ -271,6 +304,12 @@ public class NonValidatingConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表,语法池和父设置构造一个解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable    The symbol table to use.
      * @param grammarPool    The grammar pool to use.
      * @param parentSettings The parent settings.
@@ -409,6 +448,10 @@ public class NonValidatingConfiguration
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception XNIException Thrown if the parser does not support the
@@ -437,6 +480,10 @@ public class NonValidatingConfiguration
     /**
      * Sets the input source for the document to parse.
      *
+     * <p>
+     *  设置文档解析的输入源。
+     * 
+     * 
      * @param inputSource The document's input source.
      *
      * @exception XMLConfigurationException Thrown if there is a
@@ -461,6 +508,10 @@ public class NonValidatingConfiguration
     /**
      * Parses the document in a pull parsing fashion.
      *
+     * <p>
+     *  以拉解析方式解析文档。
+     * 
+     * 
      * @param complete True if the pull parser should parse the
      *                 remaining document completely.
      *
@@ -536,6 +587,9 @@ public class NonValidatingConfiguration
      * If the application decides to terminate parsing before the xml document
      * is fully parsed, the application should call this method to free any
      * resource allocated during parsing. For example, close all opened streams.
+     * <p>
+     *  如果应用程序决定在xml文档完全解析之前终止解析,则应用程序应调用此方法以释放在解析期间分配的任何资源。例如,关闭所有打开的流。
+     * 
      */
     public void cleanup() {
         fEntityManager.closeReaders();
@@ -548,6 +602,10 @@ public class NonValidatingConfiguration
     /**
      * Parses the specified input source.
      *
+     * <p>
+     *  解析指定的输入源。
+     * 
+     * 
      * @param source The input source.
      *
      * @exception XNIException Throws exception on XNI error.
@@ -600,6 +658,10 @@ public class NonValidatingConfiguration
     /**
      * Reset all components before parsing.
      *
+     * <p>
+     *  在解析之前重置所有组件。
+     * 
+     * 
      * @throws XNIException Thrown if an error occurs during initialization.
      */
     protected void reset() throws XNIException {
@@ -651,6 +713,10 @@ public class NonValidatingConfiguration
      * Check a feature. If feature is know and supported, this method simply
      * returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查功能。如果特性是知道和支持的,这个方法简单地返回。否则,抛出适当的异常。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      *
      * @throws XMLConfigurationException Thrown for configuration error.
@@ -731,6 +797,9 @@ public class NonValidatingConfiguration
      * Check a property. If the property is know and supported, this method
      * simply returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查属性。如果属性是知道和支持,这个方法简单地返回。否则,抛出适当的异常。
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      *

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -114,6 +115,63 @@ import javax.activation.DataHandler;
  * <PRE>
  *     ap1.clearContent();
  * </PRE>
+ * <p>
+ *  对<code> SOAPMessage </code>对象的单个附件。
+ *  <code> SOAPMessage </code>对象可以包含零个,一个或多个<code> AttachmentPart </code>对象。
+ * 每个<code> AttachmentPart </code>对象由两部分组成,应用程序特定的内容和相关的MIME头。 MIME标头包含可用于标识和描述内容的名称/值对。
+ * <p>
+ *  <code> AttachmentPart </code>对象必须符合某些标准。
+ * <OL>
+ *  <LI>它必须符合<a href="http://www.ietf.org/rfc/rfc2045.txt"> MIME [RFC2045]标准</a> <LI>它必须包含内容<LI>标题部分必须包括
+ * 以下标题：。
+ * <UL>
+ *  <LI> <code> Content-Type </code> <br>此标头标识<code> AttachmentPart </code>对象的内容中的数据类型,并且必须符合[RFC2045]。
+ * 以下是Content-Type头的示例：。
+ * <PRE>
+ *  Content-Type：application / xml
+ * </PRE>
+ *  下面的代码行,其中<code> ap </code>是一个<code> AttachmentPart </code>对象,设置上一个示例中显示的标题。
+ * <PRE>
+ *  ap.setMimeHeader("Content-Type","application / xml");
+ * </PRE>
+ * <p>
+ * </UL>
+ * </OL>
+ * <p>
+ *  对<code> AttachmentPart </code>对象的内容部分没有限制。内容可以是从简单纯文本对象到复杂XML文档或图像文件的任何内容。
+ * 
+ * <p>
+ * 使用方法<code> SOAPMessage.createAttachmentPart </code>创建<code> AttachmentPart </code>对象。
+ * 设置其MIME头后,将<code> AttachmentPart </code>对象添加到使用方法<code> SOAPMessage.addAttachmentPart </code>创建它的消息。
+ * 
+ * <p>
+ *  以下代码片段中<code> m </code>是<code> SOAPMessage </code>对象,<code> contentStringl </code>是<code> String </code>
+ *  <code> AttachmentPart </code>,设置具有一些内容和头信息的<code> AttachmentPart </code>对象,并将<code> AttachmentPart </code>
+ * 对象添加到<code> SOAPMessage </code>对象。
+ * <PRE>
+ *  AttachmentPart ap1 = m.createAttachmentPart(); ap1.setContent(contentString1,"text / plain"); m.addA
+ * ttachmentPart(ap1);。
+ * </PRE>
+ * 
+ * <p>
+ *  以下代码片段创建并向同一消息添加第二个<code> AttachmentPart </code>实例。 <code> jpegData </code>是一个二进制字节缓冲区,表示jpeg文件。
+ * <PRE>
+ *  AttachmentPart ap2 = m.createAttachmentPart(); byte [] jpegData = ...; ap2.setContent(new ByteArrayI
+ * nputStream(jpegData),"image / jpeg"); m.addAttachmentPart(ap2);。
+ * </PRE>
+ * <p>
+ *  <code> getContent </code>方法从<code> AttachmentPart </code>对象中检索内容和头。
+ * 根据存在的<code> DataContentHandler </code>对象,返回的<code> Object </code>可以是与MIME类型相对应的类型化的Java对象,也可以是一个<code>
+ *  InputStream </code>内容为字节。
+ *  <code> getContent </code>方法从<code> AttachmentPart </code>对象中检索内容和头。
+ * <PRE>
+ * String content1 = ap1.getContent(); java.io.InputStream content2 = ap2.getContent();
+ * </PRE>
+ * 
+ *  方法<code> clearContent </code>从<code> AttachmentPart </code>对象中删除所有内容,但不影响其头信息。
+ * <PRE>
+ *  ap1.clearContent();
+ * </PRE>
  */
 
 public abstract class AttachmentPart {
@@ -121,6 +179,10 @@ public abstract class AttachmentPart {
      * Returns the number of bytes in this <code>AttachmentPart</code>
      * object.
      *
+     * <p>
+     *  返回此<code> AttachmentPart </code>对象中的字节数。
+     * 
+     * 
      * @return the size of this <code>AttachmentPart</code> object in bytes
      *         or -1 if the size cannot be determined
      * @exception SOAPException if the content of this attachment is
@@ -132,6 +194,9 @@ public abstract class AttachmentPart {
     /**
      * Clears out the content of this <code>AttachmentPart</code> object.
      * The MIME header portion is left untouched.
+     * <p>
+     *  清除此<code> AttachmentPart </code>对象的内容。 MIME头部分保持不变。
+     * 
      */
     public abstract void clearContent();
 
@@ -162,6 +227,21 @@ public abstract class AttachmentPart {
      * <code>DataContentHandler</code> object is required to return a
      * <code>java.io.InputStream</code> object with the raw bytes.
      *
+     * <p>
+     *  将此<code> AttachmentPart </code>对象的内容作为Java对象。
+     * 返回的Java对象的类型取决于(1)用于解释字节的<code> DataContentHandler </code>对象和(2)头中给定的<code> Content-Type </code>。
+     * <p>
+     *  对于MIME内容类型"text / plain","text / html"和"text / xml",<code> DataContentHandler </code>对象执行与MIME类型对应的J
+     * ava类型的转换。
+     * 对于其他MIME类型,<code> DataContentHandler </code>对象可以返回一个包含内容数据作为原始字节的<code> InputStream </code>对象。
+     * <p>
+     * 符合SAAJ的实现必须至少返回对应于具有<code> Content-Type </code>值<code>的任何内容流的<code> java.lang.String </code>对应于具有<code>
+     *  Content-Type </code>值为<code> text / xml </code>的内容流的</code> / code>,与<code> Content-Type </code>值为<code>
+     *  image / gif </code>或<code>的内容流相对应的<code> java.awt.Image </code> > image / jpeg </code>。
+     * 对于安装的<code> DataContentHandler </code>对象不理解的那些内容类型,需要<code> DataContentHandler </code>对象返回一个<code> ja
+     * va.io.InputStream </code>原始字节。
+     * 
+     * 
      * @return a Java object with the content of this <code>AttachmentPart</code>
      *         object
      *
@@ -183,6 +263,15 @@ public abstract class AttachmentPart {
      * of the raw attachment content is required then the {@link #getRawContentBytes} API
      * should be used instead.
      *
+     * <p>
+     *  将此<code> AttachmentPart </code>对象的内容视为InputStream,就好像已对<code> getContent </code>进行调用,并且未向<code> Data
+     * ContentHandler </code>注册<code > content-type </code>。
+     * <code> AttachmentPart </code>。
+     * p>
+     *  注意,从返回的InputStream读取将导致消耗流中的数据。在调用后续API之前,调用者应负责重置InputStream。
+     * 如果需要原始附件内容的副本,则应使用{@link #getRawContentBytes} API。
+     * 
+     * 
      * @return an <code>InputStream</code> from which the raw data contained by
      *      the <code>AttachmentPart</code> can be accessed.
      *
@@ -201,6 +290,11 @@ public abstract class AttachmentPart {
      * <code>DataContentHandler</code> had been registered for the
      * <code>content-type</code> of this <code>AttachmentPart</code>.
      *
+     * <p>
+     * 将此<code> AttachmentPart </code>对象的内容作为byte []数组,如同对<code> getContent </code>进行调用并且未注册<code> DataConte
+     * ntHandler </code>此<code> AttachmentPart </code>的<code> content-type </code>。
+     * 
+     * 
      * @return a <code>byte[]</code> array containing the raw data of the
      *      <code>AttachmentPart</code>.
      *
@@ -218,6 +312,11 @@ public abstract class AttachmentPart {
      * character data, this method would base64 encode the raw bytes
      * of the attachment and return.
      *
+     * <p>
+     *  返回一个<code> InputStream </code>,可用于获取<code> AttachmentPart </code>作为Base64编码字符数据的内容,此方法将base64编码附件的原始
+     * 字节并返回。
+     * 
+     * 
      * @return an <code>InputStream</code> from which the Base64 encoded
      *       <code>AttachmentPart</code> can be read.
      *
@@ -238,6 +337,12 @@ public abstract class AttachmentPart {
      * set of <code>DataContentHandler</code> objects in use.
      *
      *
+     * <p>
+     *  将此附件部分的内容设置为给定<code> Object </code>的内容,并将<code> Content-Type </code>头的值设置为给定类型。
+     *  <code> Object </code>的类型应该对应于<code> Content-Type </code>给定的值。
+     * 这取决于正在使用的<code> DataContentHandler </code>对象的特定集合。
+     * 
+     * 
      * @param object the Java object that makes up the content for
      *               this attachment part
      * @param contentType the MIME string that specifies the type of
@@ -261,6 +366,13 @@ public abstract class AttachmentPart {
      *  A subsequent call to getSize() may not be an exact measure
      *  of the content size.
      *
+     * <p>
+     *  将此附件部分的内容设置为<code> InputStream </code> <code> content </code>中包含的内容,并将<code> Content-Type </code> <code>
+     *  contentType </code>。
+     * <P>
+     *  对getSize()的后续调用可能不是内容大小的精确度量。
+     * 
+     * 
      * @param content the raw data to add to the attachment part
      * @param contentType the value to set into the <code>Content-Type</code>
      * header
@@ -277,6 +389,11 @@ public abstract class AttachmentPart {
      * <code>Content-Type</code> header to the value contained in
      * <code>contentType</code>.
      *
+     * <p>
+     *  将此附件部分的内容设置为<code> byte [] </code> array <code> content </code>包含的内容,并将<code> Content-Type </code>值包
+     * 含在<code> contentType </code>中。
+     * 
+     * 
      * @param content the raw data to add to the attachment part
      * @param contentType the value to set into the <code>Content-Type</code>
      * header
@@ -302,6 +419,13 @@ public abstract class AttachmentPart {
      *  A subsequent call to getSize() may not be an exact measure
      *  of the content size.
      *
+     * <p>
+     * 从Base64源<code> InputStream </code>设置此附件部分的内容,并将<code> Content-Type </code>头的值设置为<code> contentType </code>
+     * 中包含的值,这个方法首先解码base64输入,然后将生成的原始字节写入附件。
+     * <P>
+     *  对getSize()的后续调用可能不是内容大小的精确度量。
+     * 
+     * 
      * @param content the base64 encoded data to add to the attachment part
      * @param contentType the value to set into the <code>Content-Type</code>
      * header
@@ -319,6 +443,10 @@ public abstract class AttachmentPart {
      * Gets the <code>DataHandler</code> object for this <code>AttachmentPart</code>
      * object.
      *
+     * <p>
+     *  获取此<code> AttachmentPart </code>对象的<code> DataHandler </code>对象。
+     * 
+     * 
      * @return the <code>DataHandler</code> object associated with this
      *         <code>AttachmentPart</code> object
      *
@@ -336,6 +464,11 @@ public abstract class AttachmentPart {
      * <code>setDataHandler</code> method can be used to get data from
      * various data sources into the message.
      *
+     * <p>
+     *  将给定的<code> DataHandler </code>对象设置为此<code> AttachmentPart </code>对象的数据处理程序。通常,在传入消息上,数据处理程序将自动设置。
+     * 当正在创建消息并使用内容填充时,可以使用<code> setDataHandler </code>方法从各种数据源获取数据到消息中。
+     * 
+     * 
      * @param dataHandler the <code>DataHandler</code> object to be set
      *
      * @exception IllegalArgumentException if there was a problem with
@@ -347,6 +480,10 @@ public abstract class AttachmentPart {
     /**
      * Gets the value of the MIME header whose name is "Content-ID".
      *
+     * <p>
+     *  获取名称为"Content-ID"的MIME标题的值。
+     * 
+     * 
      * @return a <code>String</code> giving the value of the
      *          "Content-ID" header or <code>null</code> if there
      *          is none
@@ -362,6 +499,10 @@ public abstract class AttachmentPart {
     /**
      * Gets the value of the MIME header whose name is "Content-Location".
      *
+     * <p>
+     *  获取名称为"Content-Location"的MIME标题的值。
+     * 
+     * 
      * @return a <code>String</code> giving the value of the
      *          "Content-Location" header or <code>null</code> if there
      *          is none
@@ -376,6 +517,10 @@ public abstract class AttachmentPart {
     /**
      * Gets the value of the MIME header whose name is "Content-Type".
      *
+     * <p>
+     *  获取名称为"Content-Type"的MIME标题的值。
+     * 
+     * 
      * @return a <code>String</code> giving the value of the
      *          "Content-Type" header or <code>null</code> if there
      *          is none
@@ -390,6 +535,10 @@ public abstract class AttachmentPart {
     /**
      * Sets the MIME header whose name is "Content-ID" with the given value.
      *
+     * <p>
+     *  设置名称为"Content-ID"且具有给定值的MIME标题。
+     * 
+     * 
      * @param contentId a <code>String</code> giving the value of the
      *          "Content-ID" header
      *
@@ -407,6 +556,10 @@ public abstract class AttachmentPart {
      * Sets the MIME header whose name is "Content-Location" with the given value.
      *
      *
+     * <p>
+     *  设置名称为"Content-Location"且具有给定值的MIME标题。
+     * 
+     * 
      * @param contentLocation a <code>String</code> giving the value of the
      *          "Content-Location" header
      * @exception IllegalArgumentException if there was a problem with
@@ -420,6 +573,10 @@ public abstract class AttachmentPart {
     /**
      * Sets the MIME header whose name is "Content-Type" with the given value.
      *
+     * <p>
+     *  使用给定值设置名称为"Content-Type"的MIME标题。
+     * 
+     * 
      * @param contentType a <code>String</code> giving the value of the
      *          "Content-Type" header
      *
@@ -434,6 +591,10 @@ public abstract class AttachmentPart {
     /**
      * Removes all MIME headers that match the given name.
      *
+     * <p>
+     *  删除与给定名称匹配的所有MIME标题。
+     * 
+     * 
      * @param header the string name of the MIME header/s to
      *               be removed
      */
@@ -441,6 +602,9 @@ public abstract class AttachmentPart {
 
     /**
      * Removes all the MIME header entries.
+     * <p>
+     *  删除所有MIME标头条目。
+     * 
      */
     public abstract void removeAllMimeHeaders();
 
@@ -449,6 +613,10 @@ public abstract class AttachmentPart {
      * Gets all the values of the header identified by the given
      * <code>String</code>.
      *
+     * <p>
+     *  获取由给定的<code> String </code>标识的头的所有值。
+     * 
+     * 
      * @param name the name of the header; example: "Content-Type"
      * @return a <code>String</code> array giving the value for the
      *         specified header
@@ -464,6 +632,12 @@ public abstract class AttachmentPart {
      *
      * Note that RFC822 headers can only contain US-ASCII characters.
      *
+     * <p>
+     * 将与给定名称匹配的第一个报头条目更改为给定值,如果没有现有报头匹配,则添加新报头。此方法也删除所有匹配的标头,但第一个。 <p>
+     * 
+     *  请注意,RFC822标头只能包含US-ASCII字符。
+     * 
+     * 
      * @param   name    a <code>String</code> giving the name of the header
      *                  for which to search
      * @param   value   a <code>String</code> giving the value to be set for
@@ -481,6 +655,12 @@ public abstract class AttachmentPart {
      * <p>
      * Note that RFC822 headers can contain only US-ASCII characters.
      *
+     * <p>
+     *  将具有指定名称和值的MIME标头添加到此<code> AttachmentPart </code>对象。
+     * <p>
+     *  请注意,RFC822标头只能包含US-ASCII字符。
+     * 
+     * 
      * @param   name    a <code>String</code> giving the name of the header
      *                  to be added
      * @param   value   a <code>String</code> giving the value of the header
@@ -495,6 +675,10 @@ public abstract class AttachmentPart {
      * Retrieves all the headers for this <code>AttachmentPart</code> object
      * as an iterator over the <code>MimeHeader</code> objects.
      *
+     * <p>
+     *  将<code> AttachmentPart </code>对象的所有头作为迭代器检索到<code> MimeHeader </code>对象。
+     * 
+     * 
      * @return  an <code>Iterator</code> object with all of the Mime
      *          headers for this <code>AttachmentPart</code> object
      */
@@ -504,6 +688,10 @@ public abstract class AttachmentPart {
      * Retrieves all <code>MimeHeader</code> objects that match a name in
      * the given array.
      *
+     * <p>
+     *  检索与给定数组中的名称匹配的所有<code> MimeHeader </code>对象。
+     * 
+     * 
      * @param names a <code>String</code> array with the name(s) of the
      *        MIME headers to be returned
      * @return  all of the MIME headers that match one of the names in the
@@ -515,6 +703,9 @@ public abstract class AttachmentPart {
      * Retrieves all <code>MimeHeader</code> objects whose name does
      * not match a name in the given array.
      *
+     * <p>
+     *  检索其名称与给定数组中的名称不匹配的所有<code> MimeHeader </code>对象。
+     * 
      * @param names a <code>String</code> array with the name(s) of the
      *        MIME headers not to be returned
      * @return  all of the MIME headers in this <code>AttachmentPart</code> object

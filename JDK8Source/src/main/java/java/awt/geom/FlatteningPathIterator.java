@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,11 @@ import java.util.*;
  * classes can use this class to provide flattening behavior for their paths
  * without having to perform the interpolation calculations themselves.
  *
+ * <p>
+ *  <code> FlatteningPathIterator </code>类返回另一个{@link PathIterator}对象的展开视图。
+ * 其他{@link java.awt.Shape Shape}类可以使用此类为其路径提供平展行为,而不必自己执行插值计算。
+ * 
+ * 
  * @author Jim Graham
  */
 public class FlatteningPathIterator implements PathIterator {
@@ -87,6 +93,11 @@ public class FlatteningPathIterator implements PathIterator {
      * subdivide any curve read from the source iterator to more than
      * 10 levels of subdivision which yields a maximum of 1024 line
      * segments per curve.
+     * <p>
+     *  构造一个新的<code> FlatteningPathIterator </code>对象,用于在路径迭代时平铺路径。
+     * 迭代器不将从源迭代器读取的任何曲线细分为超过10个细分级别,每个曲线产生最多1024个线段。
+     * 
+     * 
      * @param src the original unflattened path being iterated over
      * @param flatness the maximum allowable distance between the
      * control points and the flattened curve
@@ -104,6 +115,12 @@ public class FlatteningPathIterator implements PathIterator {
      * without measuring against the <code>flatness</code> parameter.
      * The flattened iteration therefore never generates more than
      * a maximum of <code>(2^limit)</code> line segments per curve.
+     * <p>
+     *  构造一个新的<code> FlatteningPathIterator </code>对象,用于在路径迭代时平铺路径。
+     *  <code> limit </code>参数允许您控制迭代器在假设曲线足够平坦而不针对<code> flatness </code>参数进行测量之前可以进行的递归细分的最大数量。
+     * 因此,平展迭代从来不会为每个曲线产生多于<code>(2 ^ limit)</code>个线段的最大值。
+     * 
+     * 
      * @param src the original unflattened path being iterated over
      * @param flatness the maximum allowable distance between the
      * control points and the flattened curve
@@ -131,6 +148,10 @@ public class FlatteningPathIterator implements PathIterator {
 
     /**
      * Returns the flatness of this iterator.
+     * <p>
+     *  返回此迭代器的平坦度。
+     * 
+     * 
      * @return the flatness of this <code>FlatteningPathIterator</code>.
      */
     public double getFlatness() {
@@ -139,6 +160,10 @@ public class FlatteningPathIterator implements PathIterator {
 
     /**
      * Returns the recursion limit of this iterator.
+     * <p>
+     *  返回此迭代器的递归极限。
+     * 
+     * 
      * @return the recursion limit of this
      * <code>FlatteningPathIterator</code>.
      */
@@ -149,6 +174,10 @@ public class FlatteningPathIterator implements PathIterator {
     /**
      * Returns the winding rule for determining the interior of the
      * path.
+     * <p>
+     *  返回确定路径内部的绕组规则。
+     * 
+     * 
      * @return the winding rule of the original unflattened path being
      * iterated over.
      * @see PathIterator#WIND_EVEN_ODD
@@ -160,6 +189,10 @@ public class FlatteningPathIterator implements PathIterator {
 
     /**
      * Tests if the iteration is complete.
+     * <p>
+     *  测试迭代是否完成。
+     * 
+     * 
      * @return <code>true</code> if all the segments have
      * been read; <code>false</code> otherwise.
      */
@@ -170,6 +203,9 @@ public class FlatteningPathIterator implements PathIterator {
     /*
      * Ensures that the hold array can hold up to (want) more values.
      * It is currently holding (hold.length - holdIndex) values.
+     * <p>
+     *  确保保持数组可以容纳(想要)更多的值。它当前持有(hold.length  -  holdIndex)值。
+     * 
      */
     void ensureHoldCapacity(int want) {
         if (holdIndex - want < 0) {
@@ -189,6 +225,9 @@ public class FlatteningPathIterator implements PathIterator {
      * Moves the iterator to the next segment of the path forwards
      * along the primary direction of traversal as long as there are
      * more points in that direction.
+     * <p>
+     * 只要在该方向上有更多的点,将迭代器沿着遍历的主要方向向前移动到路径的下一段。
+     * 
      */
     public void next() {
         next(true);
@@ -333,6 +372,11 @@ public class FlatteningPathIterator implements PathIterator {
      * Each point is stored as a pair of float x,y coordinates.
      * SEG_MOVETO and SEG_LINETO types return one point,
      * and SEG_CLOSE does not return any points.
+     * <p>
+     *  返回迭代中当前路径段的坐标和类型。返回值是路径段类型：SEG_MOVETO,SEG_LINETO或SEG_CLOSE。必须传入长度为6的float数组,并可用于存储点的坐标。
+     * 每个点都存储为一对float x,y坐标。 SEG_MOVETO和SEG_LINETO类型返回一个点,SEG_CLOSE不返回任何点。
+     * 
+     * 
      * @param coords an array that holds the data returned from
      * this method
      * @return the path segment type of the current path segment.
@@ -368,6 +412,10 @@ public class FlatteningPathIterator implements PathIterator {
      * Each point is stored as a pair of double x,y coordinates.
      * SEG_MOVETO and SEG_LINETO types return one point,
      * and SEG_CLOSE does not return any points.
+     * <p>
+     *  返回迭代中当前路径段的坐标和类型。返回值是路径段类型：SEG_MOVETO,SEG_LINETO或SEG_CLOSE。必须传入长度为6的双数组,并可用于存储点的坐标。每个点被存储为一对双x,y坐标。
+     *  SEG_MOVETO和SEG_LINETO类型返回一个点,SEG_CLOSE不返回任何点。
+     * 
      * @param coords an array that holds the data returned from
      * this method
      * @return the path segment type of the current path segment.

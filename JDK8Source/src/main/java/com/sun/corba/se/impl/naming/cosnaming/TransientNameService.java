@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,13 @@ import com.sun.corba.se.impl.logging.NamingSystemException;
  * interfaces specfied by the OMG Common Object Services Specification.
  * <p>
  * The TransientNameService creates the initial NamingContext object.
+ * <p>
+ *  TransientNameService类使用TransientNamingContexts和TransientBindingIterators实现临时名称服务,该实现由OMG通用对象服务规范指定的o
+ * rg.omg.CosNaming :: NamingContext和org.omg.CosNaming :: BindingIterator接口。
+ * <p>
+ *  TransientNameService创建初始​​的NamingContext对象。
+ * 
+ * 
  * @see NamingContextImpl
  * @see BindingIteratorImpl
  * @see TransientNamingContext
@@ -67,6 +75,10 @@ public class TransientNameService
      * Constructs a new TransientNameService, and creates an initial
      * NamingContext, whose object
      * reference can be obtained by the initialNamingContext method.
+     * <p>
+     *  构造一个新的TransientNameService,并创建一个初始的NamingContext,其对象引用可以通过initialNamingContext方法获得。
+     * 
+     * 
      * @param orb The ORB object
      * @exception org.omg.CORBA.INITIALIZE Thrown if
      * the TransientNameService cannot initialize.
@@ -84,6 +96,10 @@ public class TransientNameService
      * Constructs a new TransientNameService, and creates an initial
      * NamingContext, whose object
      * reference can be obtained by the initialNamingContext method.
+     * <p>
+     *  构造一个新的TransientNameService,并创建一个初始的NamingContext,其对象引用可以通过initialNamingContext方法获得。
+     * 
+     * 
      * @param orb The ORB object
      * @param nameserviceName Stringified key used for INS Service registry
      * @exception org.omg.CORBA.INITIALIZE Thrown if
@@ -101,6 +117,9 @@ public class TransientNameService
     /**
      * This method initializes Transient Name Service by associating Root
      * context with POA and registering the root context with INS Object Keymap.
+     * <p>
+     *  此方法通过将根上下文与POA相关联并使用INS对象键映射注册根上下文来初始化瞬时名称服务。
+     * 
      */
     private void initialize( com.sun.corba.se.spi.orb.ORB orb,
         String nameServiceName )
@@ -145,6 +164,9 @@ public class TransientNameService
 
     /**
      * Return the initial NamingContext.
+     * <p>
+     *  返回初始的NamingContext。
+     * 
      * @return the object reference for the initial NamingContext.
      */
     public org.omg.CORBA.Object initialNamingContext()

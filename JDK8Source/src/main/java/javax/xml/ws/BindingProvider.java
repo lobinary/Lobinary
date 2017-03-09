@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import javax.xml.ws.wsaddressing.W3CEndpointReference;
  * protocol binding and associated context objects for request and
  * response message processing.
  *
+ * <p>
+ *  <code> BindingProvider </code>接口提供对协议绑定和相关联的上下文对象的访问,用于请求和响应消息处理。
+ * 
+ * 
  * @since JAX-WS 2.0
  *
  * @see javax.xml.ws.Binding
@@ -41,6 +46,10 @@ public interface BindingProvider {
     /**
      * Standard property: User name for authentication.
      * <p>Type: <code>java.lang.String</code>
+     * <p>
+     *  标准属性：用于验证的用户名。 <p>类型：<code> java.lang.String </code>
+     * 
+     * 
      **/
     public static final String USERNAME_PROPERTY =
             "javax.xml.ws.security.auth.username";
@@ -48,6 +57,10 @@ public interface BindingProvider {
     /**
      * Standard property: Password for authentication.
      * <p>Type: <code>java.lang.String</code>
+     * <p>
+     *  标准属性：验证密码。 <p>类型：<code> java.lang.String </code>
+     * 
+     * 
      **/
     public static final String PASSWORD_PROPERTY =
             "javax.xml.ws.security.auth.password";
@@ -58,6 +71,10 @@ public interface BindingProvider {
      * correspond to the protocol/transport binding for the
      * binding in use.
      * <p>Type: <code>java.lang.String</code>
+     * <p>
+     *  标准属性：目标服务端点地址。端点地址规范的URI方案必须对应于正在使用的绑定的协议/传输绑定。 <p>类型：<code> java.lang.String </code>
+     * 
+     * 
      **/
     public static final String ENDPOINT_ADDRESS_PROPERTY =
             "javax.xml.ws.service.endpoint.address";
@@ -70,6 +87,12 @@ public interface BindingProvider {
      * to be maintained. If set to <code>false</code>, the session is not maintained.
      * The default value for this property is <code>false</code>.
      * <p>Type: <code>java.lang.Boolean</code>
+     * <p>
+     *  标准属性：此布尔属性由服务客户端用于指示是否要参与与服务端点的会话。如果此属性设置为<code> true </code>,则服务客户端指示它希望维护会话。
+     * 如果设置为<code> false </code>,则不会维护会话。此属性的默认值为<code> false </code>。
+     *  <p>类型：<code> java.lang.Boolean </code>。
+     * 
+     * 
      **/
     public static final String SESSION_MAINTAIN_PROPERTY =
             "javax.xml.ws.session.maintain";
@@ -87,6 +110,15 @@ public interface BindingProvider {
      * <code>true</code>.
      *
      * <p>Type: <code>java.lang.Boolean</code>
+     * <p>
+     * SOAPAction的标准属性。此布尔属性指示是否将<code> javax.xml.ws.soap.http.soapaction.uri </code>属性的值用于SOAPAction的值。
+     * 此属性的默认值为<code> false </code>,表示<code> javax.xml.ws.soap.http.soapaction.uri </code>属性未用于SOAPAction的值,
+     * 但是,如果启用了WS-Addressing,则默认值为<code> true </code>。
+     * SOAPAction的标准属性。此布尔属性指示是否将<code> javax.xml.ws.soap.http.soapaction.uri </code>属性的值用于SOAPAction的值。
+     * 
+     *  <p>类型：<code> java.lang.Boolean </code>
+     * 
+     * 
      **/
     public static final String SOAPACTION_USE_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.use";
@@ -100,6 +132,14 @@ public interface BindingProvider {
      * the default SOAPAction and WS-Addressing Action will be sent.
      *
      * <p>Type: <code>java.lang.String</code>
+     * <p>
+     *  SOAPAction的标准属性。
+     * 如果<code> javax.xml.ws.soap.http.soapaction.use </code>属性设置为<code> true </code>,则表示SOAPAction URI。
+     * 如果启用了WS-Addressing,该值也将用于WS-Addressing Action头的值。如果未设置此属性,将发送缺省SOAPAction和WS-Addressing Action。
+     * 
+     *  <p>类型：<code> java.lang.String </code>
+     * 
+     * 
      **/
     public static final String SOAPACTION_URI_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.uri";
@@ -112,6 +152,12 @@ public interface BindingProvider {
      * either synchronous or asynchronous operations that have already been
      * started.
      *
+     * <p>
+     *  获取用于初始化请求消息的消息上下文的上下文。
+     * 
+     *  对请求上下文的修改不影响已启动的同步或异步操作的消息上下文。
+     * 
+     * 
      * @return The context that is used in processing request messages.
      **/
     Map<String, Object> getRequestContext();
@@ -124,6 +170,12 @@ public interface BindingProvider {
      * response context. Asynchronous operations return their response context
      * via the Response interface.
      *
+     * <p>
+     *  获取处理响应消息产生的上下文。
+     * 
+     *  返回的上下文用于最近完成的同步操作。后续的同步操作调用将覆盖响应上下文。异步操作通过Response接口返回其响应上下文。
+     * 
+     * 
      * @return The context that resulted from processing the latest
      * response messages.
      **/
@@ -132,6 +184,10 @@ public interface BindingProvider {
     /**
      * Get the Binding for this binding provider.
      *
+     * <p>
+     *  获取此绑定提供程序的绑定。
+     * 
+     * 
      * @return The Binding for this binding provider.
      **/
     Binding getBinding();
@@ -146,6 +202,13 @@ public interface BindingProvider {
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
      *
+     * <p>
+     * 返回与此<code> BindingProvider </code>实例关联的<code> EndpointReference </code>。
+     * <p>
+     *  如果这个<code> bindingProvider </code>的绑定是SOAP1.1 / HTTP或SOAP1.2 / HTTP,那么必须返回一个<code> W3CEndpointRefere
+     * nce </code>。
+     * 
+     * 
      * @return EndpointReference of the target endpoint associated with this
      * <code>BindingProvider</code> instance.
      *
@@ -164,6 +227,8 @@ public interface BindingProvider {
      * this <code>BindingProvider</code> instance.  The instance
      * returned will be of type <code>clazz</code>.
      *
+     * <p>
+     * 
      * @param clazz Specifies the type of <code>EndpointReference</code>
      * that MUST be returned.
 

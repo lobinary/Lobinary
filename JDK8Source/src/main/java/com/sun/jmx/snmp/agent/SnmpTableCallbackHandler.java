@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,14 @@ import com.sun.jmx.snmp.agent.SnmpMibTable;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此接口确保元数据表对象和类bean表对象之间的同步。
+ * 
+ *  它用于mibgen生成的表元和表类之间。 <p> <b> <i>您应该永远不需要直接使用此界面。 </p> </b> </i>
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  **/
 public interface SnmpTableCallbackHandler {
     /**
@@ -54,6 +63,14 @@ public interface SnmpTableCallbackHandler {
      * You should never need to use this method directly.
      * </p></b></i>
      *
+     * <p>
+     *  在将新条目添加到表之后,SNMP运行时调用此方法。
+     * 
+     *  如果引发SnmpStatusException,那么该条目将被删除,操作将被中止。在这种情况下,不会调用removeEntryCb()回调。
+     * 
+     *  <p> <b> <i>您不应该直接使用此方法。 </p> </b> </i>
+     * 
+     * 
      **/
     public void addEntryCb(int pos, SnmpOid row, ObjectName name,
                            Object entry, SnmpMibTable meta)
@@ -69,6 +86,11 @@ public interface SnmpTableCallbackHandler {
      * You should never need to use this method directly.
      * </p></b></i>
      *
+     * <p>
+     *  在从表中删除新条目之后,SNMP运行时调用此方法。
+     * 
+     *  如果引发,SnmpStatusException将被忽略。
+     * 
      **/
     public void removeEntryCb(int pos, SnmpOid row, ObjectName name,
                               Object entry, SnmpMibTable meta)

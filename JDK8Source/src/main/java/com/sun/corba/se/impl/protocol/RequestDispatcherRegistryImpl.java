@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,10 @@ import com.sun.corba.se.impl.orbutil.DenseIntMapImpl ;
  * This is a registry of all subcontract ID dependent objects.  This includes:
  * LocalClientRequestDispatcherFactory, ClientRequestDispatcher, ServerSubcontract, and
  * ObjectAdapterFactory.
+ * <p>
+ *  这是所有外包ID依赖对象的注册表。
+ * 这包括：LocalClientRequestDispatcherFactory,ClientRequestDispatcher,ServerSubcontract和ObjectAdapterFactor
+ * y。
  */
 public class RequestDispatcherRegistryImpl implements RequestDispatcherRegistry {
     private ORB orb;

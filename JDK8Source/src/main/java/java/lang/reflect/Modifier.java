@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,11 @@ import sun.reflect.ReflectionFactory;
  * representing the modifiers are taken from the tables in sections 4.1, 4.4, 4.5, and 4.7 of
  * <cite>The Java&trade; Virtual Machine Specification</cite>.
  *
+ * <p>
+ *  Modifier类提供{@code static}方法和常量来解码类和成员访问修饰符。修改器集合被表示为具有表示不同修改符的不同位位置的整数。
+ * 表示修饰符的常数的值取自<cite> Java&trade;的第4.1,4.4,4.5和4.7节中的表。虚拟机规范</cite>。
+ * 
+ * 
  * @see Class#getModifiers()
  * @see Member#getModifiers()
  *
@@ -48,6 +54,9 @@ public class Modifier {
     /*
      * Bootstrapping protocol between java.lang and java.lang.reflect
      *  packages
+     * <p>
+     *  java.lang和java.lang.reflect包之间的引导协议
+     * 
      */
     static {
         sun.reflect.ReflectionFactory factory =
@@ -60,6 +69,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code public} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果integer参数包含{@code public}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code public} modifier; {@code false} otherwise.
@@ -72,6 +85,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code private} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code private}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code private} modifier; {@code false} otherwise.
@@ -84,6 +101,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code protected} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code protected}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code protected} modifier; {@code false} otherwise.
@@ -96,6 +117,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code static} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code static}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code static} modifier; {@code false} otherwise.
@@ -108,6 +133,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code final} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code final}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code final} modifier; {@code false} otherwise.
@@ -120,6 +149,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code synchronized} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code synchronized}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code synchronized} modifier; {@code false} otherwise.
@@ -132,6 +165,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code volatile} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code volatile}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code volatile} modifier; {@code false} otherwise.
@@ -144,6 +181,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code transient} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code transient}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code transient} modifier; {@code false} otherwise.
@@ -156,6 +197,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code native} modifier, {@code false} otherwise.
      *
+     * <p>
+     * 如果整数参数包含{@code native}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code native} modifier; {@code false} otherwise.
@@ -168,6 +213,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code interface} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code interface}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code interface} modifier; {@code false} otherwise.
@@ -180,6 +229,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code abstract} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code abstract}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code abstract} modifier; {@code false} otherwise.
@@ -192,6 +245,10 @@ public class Modifier {
      * Return {@code true} if the integer argument includes the
      * {@code strictfp} modifier, {@code false} otherwise.
      *
+     * <p>
+     *  如果整数参数包含{@code strictfp}修饰符,则返回{@code true},否则返回{@code false}。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return {@code true} if {@code mod} includes the
      * {@code strictfp} modifier; {@code false} otherwise.
@@ -227,6 +284,19 @@ public class Modifier {
      * {@code toString} with the appropriate mask from a method like
      * {@link #constructorModifiers} or {@link #methodModifiers}.
      *
+     * <p>
+     *  返回描述指定修饰符中的访问修饰符标志的字符串。
+     * 例如：<blockquote> <pre> public final synchronized strictfp </pre> </blockquote>修饰符名称以与第8.1.1,8.3.1,8.4.
+     * 3节中给出的建议修饰符顺序一致的顺序返回, Java&trade;&lt; cite&gt;的8.8.3和9.1.1。
+     *  返回描述指定修饰符中的访问修饰符标志的字符串。语言规范</cite>。
+     * 此方法使用的完整修饰符排序为：<blockquote> {@code public protected private abstract static final transient volatile synchronized native strictfp interface}
+     *  </blockquote>此类中讨论的{@code interface}修饰符不是真正的修饰符Java语言,它显示在此方法列出的所有其他修饰符之后。
+     *  返回描述指定修饰符中的访问修饰符标志的字符串。语言规范</cite>。此方法可能返回不是Java实体的有效修饰符的修饰符字符串;换句话说,不对由输入表示的修改器的组合的可能的有效性进行检查。
+     * 
+     * 请注意,要对已知类型的实体(例如构造函数或方法)执行此类检查,请首先使用{@link #constructorModifiers}或{@link #methodModifiers}等方法将{@code toString}
+     * 的参数与适当的掩码进行AND }。
+     * 
+     * 
      * @param   mod a set of modifiers
      * @return  a string representation of the set of modifiers
      * represented by {@code mod}
@@ -258,77 +328,116 @@ public class Modifier {
     /*
      * Access modifier flag constants from tables 4.1, 4.4, 4.5, and 4.7 of
      * <cite>The Java&trade; Virtual Machine Specification</cite>
+     * <p>
+     *  访问来自<cite> Java&trade;的表4.1,4.4,4.5和4.7的修饰符标记常量。虚拟机规范</cite>
+     * 
      */
 
     /**
      * The {@code int} value representing the {@code public}
      * modifier.
+     * <p>
+     *  代表{@code public}修饰符的{@code int}值。
+     * 
      */
     public static final int PUBLIC           = 0x00000001;
 
     /**
      * The {@code int} value representing the {@code private}
      * modifier.
+     * <p>
+     *  表示{@code private}修饰符的{@code int}值。
+     * 
      */
     public static final int PRIVATE          = 0x00000002;
 
     /**
      * The {@code int} value representing the {@code protected}
      * modifier.
+     * <p>
+     *  表示{@code protected}修饰符的{@code int}值。
+     * 
      */
     public static final int PROTECTED        = 0x00000004;
 
     /**
      * The {@code int} value representing the {@code static}
      * modifier.
+     * <p>
+     *  表示{@code static}修饰符的{@code int}值。
+     * 
      */
     public static final int STATIC           = 0x00000008;
 
     /**
      * The {@code int} value representing the {@code final}
      * modifier.
+     * <p>
+     *  表示{@code final}修饰符的{@code int}值。
+     * 
      */
     public static final int FINAL            = 0x00000010;
 
     /**
      * The {@code int} value representing the {@code synchronized}
      * modifier.
+     * <p>
+     *  表示{@code synchronized}修饰符的{@code int}值。
+     * 
      */
     public static final int SYNCHRONIZED     = 0x00000020;
 
     /**
      * The {@code int} value representing the {@code volatile}
      * modifier.
+     * <p>
+     *  表示{@code volatile}修饰符的{@code int}值。
+     * 
      */
     public static final int VOLATILE         = 0x00000040;
 
     /**
      * The {@code int} value representing the {@code transient}
      * modifier.
+     * <p>
+     *  表示{@code transient}修饰符的{@code int}值。
+     * 
      */
     public static final int TRANSIENT        = 0x00000080;
 
     /**
      * The {@code int} value representing the {@code native}
      * modifier.
+     * <p>
+     *  表示{@code native}修饰符的{@code int}值。
+     * 
      */
     public static final int NATIVE           = 0x00000100;
 
     /**
      * The {@code int} value representing the {@code interface}
      * modifier.
+     * <p>
+     *  表示{@code interface}修饰符的{@code int}值。
+     * 
      */
     public static final int INTERFACE        = 0x00000200;
 
     /**
      * The {@code int} value representing the {@code abstract}
      * modifier.
+     * <p>
+     *  表示{@code abstract}修饰符的{@code int}值。
+     * 
      */
     public static final int ABSTRACT         = 0x00000400;
 
     /**
      * The {@code int} value representing the {@code strictfp}
      * modifier.
+     * <p>
+     *  表示{@code strictfp}修饰符的{@code int}值。
+     * 
      */
     public static final int STRICT           = 0x00000800;
 
@@ -363,6 +472,9 @@ public class Modifier {
     /**
      * The Java source modifiers that can be applied to a class.
      * @jls 8.1.1 Class Modifiers
+     * <p>
+     *  可以应用于类的Java源修饰符。 @jls 8.1.1类修饰符
+     * 
      */
     private static final int CLASS_MODIFIERS =
         Modifier.PUBLIC         | Modifier.PROTECTED    | Modifier.PRIVATE |
@@ -372,6 +484,9 @@ public class Modifier {
     /**
      * The Java source modifiers that can be applied to an interface.
      * @jls 9.1.1 Interface Modifiers
+     * <p>
+     *  可应用于接口的Java源代码修改器。 @jls 9.1.1接口修饰符
+     * 
      */
     private static final int INTERFACE_MODIFIERS =
         Modifier.PUBLIC         | Modifier.PROTECTED    | Modifier.PRIVATE |
@@ -381,6 +496,9 @@ public class Modifier {
     /**
      * The Java source modifiers that can be applied to a constructor.
      * @jls 8.8.3 Constructor Modifiers
+     * <p>
+     *  可以应用于构造函数的Java源代码修改器。 @jls 8.8.3构造函数修饰符
+     * 
      */
     private static final int CONSTRUCTOR_MODIFIERS =
         Modifier.PUBLIC         | Modifier.PROTECTED    | Modifier.PRIVATE;
@@ -388,6 +506,9 @@ public class Modifier {
     /**
      * The Java source modifiers that can be applied to a method.
      * @jls8.4.3  Method Modifiers
+     * <p>
+     * 可以应用于方法的Java源代码修改器。 @ jls8.4.3方法修饰符
+     * 
      */
     private static final int METHOD_MODIFIERS =
         Modifier.PUBLIC         | Modifier.PROTECTED    | Modifier.PRIVATE |
@@ -397,6 +518,9 @@ public class Modifier {
     /**
      * The Java source modifiers that can be applied to a field.
      * @jls 8.3.1  Field Modifiers
+     * <p>
+     *  可应用于字段的Java源修饰符。 @jls 8.3.1字段修饰符
+     * 
      */
     private static final int FIELD_MODIFIERS =
         Modifier.PUBLIC         | Modifier.PROTECTED    | Modifier.PRIVATE |
@@ -406,12 +530,16 @@ public class Modifier {
     /**
      * The Java source modifiers that can be applied to a method or constructor parameter.
      * @jls 8.4.1 Formal Parameters
+     * <p>
+     *  可应用于方法或构造函数参数的Java源代码修改器。 @jls 8.4.1形式参数
+     * 
      */
     private static final int PARAMETER_MODIFIERS =
         Modifier.FINAL;
 
     /**
      *
+     * <p>
      */
     static final int ACCESS_MODIFIERS =
         Modifier.PUBLIC | Modifier.PROTECTED | Modifier.PRIVATE;
@@ -419,6 +547,10 @@ public class Modifier {
     /**
      * Return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a class.
+     * <p>
+     *  返回一个{@code int}值OR在一起可以应用于类的源语言修饰符。
+     * 
+     * 
      * @return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a class.
      *
@@ -432,6 +564,10 @@ public class Modifier {
     /**
      * Return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to an interface.
+     * <p>
+     *  返回一个{@code int}值OR在一起可以应用于接口的源语言修饰符。
+     * 
+     * 
      * @return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to an interface.
      *
@@ -445,6 +581,10 @@ public class Modifier {
     /**
      * Return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a constructor.
+     * <p>
+     *  返回一个{@code int}值OR或者将可应用于构造函数的源语言修饰符。
+     * 
+     * 
      * @return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a constructor.
      *
@@ -458,6 +598,10 @@ public class Modifier {
     /**
      * Return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a method.
+     * <p>
+     *  返回一个{@code int}值OR在一起可以应用于一个方法的源语言修饰符。
+     * 
+     * 
      * @return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a method.
      *
@@ -471,6 +615,10 @@ public class Modifier {
     /**
      * Return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a field.
+     * <p>
+     *  返回一个{@code int}值OR在一起可以应用于字段的源语言修饰符。
+     * 
+     * 
      * @return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a field.
      *
@@ -484,6 +632,9 @@ public class Modifier {
     /**
      * Return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a parameter.
+     * <p>
+     *  返回一个{@code int}值OR在一起可以应用于参数的源语言修饰符。
+     * 
      * @return an {@code int} value OR-ing together the source language
      * modifiers that can be applied to a parameter.
      *

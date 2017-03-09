@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -96,6 +97,30 @@ import java.sql.*;
  * and integer index based constructors to provide for JDBC RowSet Implementation
  * applications that use both column identification conventions.
  *
+ * <p>
+ *  为所有<code> FilteredRowSet </code>对象提供框架以描述其过滤器的标准接口。
+ * 
+ *  <h3> 1.0背景</h3> <code> Predicate </code>接口是一个标准接口,应用程序可以实现定义他们希望应用于<code> FilteredRowSet </code>对象的过
+ * 滤器。
+ *  <code> FilteredRowSet </code>对象消耗此接口的实现,并强制执行方法<code> evaluate </code>的实现中定义的约束。
+ *  <code> FilteredRowSet </code>对象以双向方式强制实施过滤器约束：它只输出在过滤器约束内的行;并且相反地,它仅插入,修改或更新在过滤器的约束内的行。
+ * 
+ *  <h3> 2.0实施指南</h3>为了提供<code> FilteredRowSet </code>的谓词。这个接口必须实现。
+ * 此时,JDBC RowSet实现(JSR-114)不指定任何标准过滤器定义。
+ * 通过为使用<code> FilteredRowSet </code>接口的引用和供应商实现定义和部署的一系列过滤器指定标准手段和机制,这允许灵活且应用激励的<code>谓词</code>出现。
+ * <p>
+ * 一个示例实现看起来像这样：<pre> {@ code public class Range implements Predicate {
+ * 
+ *  private int [] lo; private int [] hi; private int [] idx;
+ * 
+ *  public Range(int [] lo,int [] hi,int [] idx){this.lo = lo; this.hi = hi; this.idx = idx; }}
+ * 
+ *  public boolean evaluate(RowSet rs){
+ * 
+ *  //检查当前行,确定它是否在过滤标准内。
+ * 
+ *  for(int i = 0; i <idx.length; i ++){int value; try {value =(Integer)rs.getObject(idx [i]); } catch(SQLException ex){Logger.getLogger(Range.class.getName())。
+ * 
  * @author Jonathan Bruce, Amit Handa
  *
  */
@@ -110,6 +135,15 @@ public interface Predicate {
      * cursor moving  from row to the next. In addition, if this internal method
      * moves the cursor onto a row that has been deleted, the internal method will
      * continue to ove the cursor until a valid row is found.
+     * <p>
+     * log(Level.SEVERE,null,ex); return false; }}。
+     * 
+     *  if(value <lo [i] && value> hi [i]){//过滤器约束外返回false; }} //在过滤器约束内返回true; }}} </pre>
+     * <P>
+     *  上面的例子实现了一个简单的范围谓词。
+     * 注意,实现应该但不需要提供<code> String </code>和基于整数索引的构造函数,以提供使用列标识惯例的JDBC RowSet Implementation应用程序。
+     * 
+     * 
      * @param rs The {@code RowSet} to be evaluated
      * @return <code>true</code> if there are more rows in the filter;
      *     <code>false</code> otherwise
@@ -125,6 +159,11 @@ public interface Predicate {
      * The <code>FilteredRowSet</code> object will use this method internally
      * while inserting new rows to a <code>FilteredRowSet</code> instance.
      *
+     * <p>
+     *  此方法通常称为<code> FilteredRowSet </code>对象内部方法(不是公共的),它控制<code> RowSet </code>对象的光标从行移动到下一个。
+     * 此外,如果此内部方法将光标移动到已删除的行上,内部方法将继续移动光标,直到找到有效行。
+     * 
+     * 
      * @param value An <code>Object</code> value which needs to be checked,
      *        whether it can be part of this <code>FilterRowSet</code> object.
      * @param column a <code>int</code> object that must match the
@@ -145,6 +184,12 @@ public interface Predicate {
      * The <code>FilteredRowSet</code> object will use this method internally
      * while inserting new rows to a <code>FilteredRowSet</code> instance.
      *
+     * <p>
+     * 此方法由<code> FilteredRowSet </code>对象调用,以检查值是否位于使用<code> setFilter()</code>方法设置的过滤标准(或如果存在多个约束的条件)之间。
+     * <P>
+     *  <code> FilteredRowSet </code>对象在将新行插入到<code> FilteredRowSet </code>实例时会在内部使用此方法。
+     * 
+     * 
      * @param value An <code>Object</code> value which needs to be checked,
      * whether it can be part of this <code>FilterRowSet</code>.
      *

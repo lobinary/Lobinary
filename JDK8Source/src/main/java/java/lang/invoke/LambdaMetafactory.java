@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -211,10 +212,111 @@ import java.util.Arrays;
  * theory, any method handle could be used. Currently supported are direct method
  * handles representing invocation of virtual, interface, constructor and static
  * methods.
+ * <p>
+ *  <p>可能在类型适配和参数的部分评估之后,通过委派给所提供的{@link MethodHandle}来实现一个或多个接口的简单"函数对象"的创建的方法。
+ * 这些方法通常用作{@code invokedynamic}调用网站的<em> bootstrap方法</em>,以支持<em>方法引用表达式</em>的<em> Java编程语言。
+ * 
+ *  <p>对提供的{@code MethodHandle}指定的行为的间接访问按顺序进行三个阶段：
+ * <ul>
+ *  <li>当调用此类中的方法时,会发生链接</em>。
+ * 它们将要实现的接口(通常是功能接口,一个具有单个抽象方法),来自要实现的接口的方法的名称和签名,描述期望的接口的方法句柄该方法的实现行为,以及可能的其他附加元数据,并产生{@link CallSite}
+ * ,其目标可以用于创建合适的函数对象。
+ *  <li>当调用此类中的方法时,会发生链接</em>。链接可以涉及动态加载实现目标接口的新类。 {@code CallSite}可以被认为是函数对象的"工厂",因此这些链接方法被称为"元产品"。
+ * </li>。
+ * 
+ * 当调用{@code CallSite}的目标(通常是通过{@code invokedynamic})调用网站生成函数对象时,会发生<li>捕获</em>。
+ * 对于单个工厂{@code CallSite},这可能会出现很多次。捕获可以涉及新功能对象的分配,或者可以返回现有功能对象。
+ * 行为{@code MethodHandle}可能具有超出指定接口方法的参数的附加参数;这些被称为<em>捕获的参数</em>,它必须作为{@code CallSite}目标的参数提供,并且可能早于行为{@code MethodHandle}
+ * 。
+ * 对于单个工厂{@code CallSite},这可能会出现很多次。捕获可以涉及新功能对象的分配,或者可以返回现有功能对象。在链接期间确定捕获的参数的数量及其类型。</li>。
+ * 
+ *  <li>当在函数对象上调用实现的接口方法时,会发生调用</em>。对于单个函数对象,这可能发生多次。
+ * 由行为{@code MethodHandle}引用的方法将使用捕获的参数和调用时提供的任何其他参数(如通过{@link MethodHandle#invoke(Object ...)})调用。
+ * </li>。
+ * </ul>
+ * 
+ * <p>有时,限制调用时允许的输入或结果集是有用的。
+ * 例如,当通用接口{@code Predicate <T>}被参数化为{@code Predicate <String>}时,输入必须是{@code String},即使实现的方法允许任何{@code Object }
+ * 。
+ * <p>有时,限制调用时允许的输入或结果集是有用的。
+ * 在链接时,额外的{@link MethodType}参数描述"实例化"方法类型;在调用时,根据此{@code MethodType}检查参数和最终结果。
+ * 
+ *  <p>此类提供两种形式的链接方法：标准版本({@link #metafactory(MethodHandles.Lookup,String,MethodType,MethodType,MethodHandle,MethodType)}
+ * )使用优化的协议, #altMetafactory(MethodHandles.Lookup,String,MethodType,Object ...)})。
+ * 备用版本是标准版本的泛化,通过标志和附加参数提供对生成的函数对象的行为的附加控制。备用版本增加了管理函数对象的以下属性的能力：。
+ * 
+ * <ul>
+ * <li> </em>实施方法签名的多个变体有时很有用,涉及参数或返回类型自适应。这发生在方法的多个不同的VM签名在逻辑上被语言视为同一方法时。
+ * 标志{@code FLAG_BRIDGES}表示将提供额外的{@code MethodType}列表,每个将由生成的函数对象实现。这些方法将共享相同的名称和实例化的类型。</li>。
+ * 
+ *  <li> <em>多个接口。</em>如果需要,可以通过函数对象实现多个接口。 (这些附加接口通常是没有方法的标记接口。
+ * )标志{@code FLAG_MARKERS}表示将提供一个附加接口列表,每个接口都应该由结果函数对象实现。</li>。
+ * 
+ *  <li> <em>可串行化。</em>生成的函数对象通常不支持序列化。如果需要,可以使用{@code FLAG_SERIALIZABLE}来表示函数对象应该是可序列化的。
+ * 可串行化函数对象将使用类{@code SerializedLambda}的实例作为它们的序列化形式,这需要捕获类(由{@link MethodHandles.Lookup}参数{@code caller}
+ * 描述的类)的额外帮助;有关详情,请参阅{@link SerializedLambda}。
+ *  <li> <em>可串行化。</em>生成的函数对象通常不支持序列化。如果需要,可以使用{@code FLAG_SERIALIZABLE}来表示函数对象应该是可序列化的。</li>。
+ * </ul>
+ * 
+ *  <p>假设连接参数如下：
+ * <ul>
+ * <li> {@ code invokedType}(描述{@code CallSite}签名)有K个参数类型(D1..Dk)和返回类型Rd; </li> <li> {@ code samMethodType}
+ * 方法类型)具有N个参数,类型(U1..Un)和返回类型Ru; </li> <li> {@ code implMethod}({@code MethodHandle} ..Am)和返回类型Ra(如果方法描
+ * 述了一个实例方法,这个方法的方法类型已经包括了对应接收者的额外的第一个参数); </li> <li> {@ code instantiatedMethodType}对调用的限制)具有N个参数,类型(T1
+ * ..Tn)和返回类型Rt。
+ * </li>。
+ * </ul>
+ * 
+ *  <p>那么以下链接不变量必须保持：
+ * <ul>
+ *  <li> Rd是一个接口</li> <li> {@ code implMethod}是一个<em>直接方法句柄</em> </li> <li> {@ code samMethodType}和{@code instantiatedMethodType}
+ * 对于i = 1..N,Ti和Ui是相同的类型,或者Ti和Ui都是参考类型,Ti是Ui的子类型</li> <li> Rt和Ru是相同类型或两者是参考类型,并且Rt是Ru的子类型</li> <li> K +
+ *  N = M </li> <li>对于i = 1..K,Di = Ai </li>对于i = 1..N,Ti适用于Aj,其中j = i + k </li> <li>返回类型Rt是void或者返回类型Ra
+ * 不是void并且适用于Rt < / li>。
+ * </ul>
+ * 
+ * <p>此外,在捕获时,如果{@code implMethod}对应于实例方法,并且有任何捕获参数({@code K> 0}),则第一个捕获参数(对应于接收者)必须非空。
+ * 
+ *  <p>类型Q被认为适用于S如下：
+ * <table summary="adaptable types">
+ *  <tr> <th> <th> </th> </th> </p> </p> </p>
+ * <tr>
+ *  <td>原始</td> <td>原始</td> <td> Q可以通过原始扩展转换转换为S </td> <td>无</td>
+ * </tr>
+ * <tr>
+ *  <td>参考</td> <td> S是封装(Q)</td> <td>从封装(Q)转换为S </td>的超类型
+ * </tr>
+ * <tr>
+ *  <td>参考</td> <td>原语</td> <td>对于参数类型：Q是原语包装器,原语(Q)可以扩展为S <br>用于返回类型：如果Q是原语包装器,检查原语(Q)可以加宽到S </td> <td>
+ * 如果Q不是原始包装器,则将Q转换到基本包装器(S);例如数字类型的数字</td>。
+ * </tr>
+ * <tr>
+ *  <td>参考</td> <td>参数</td> <td>参数类型：S是返回类型的Q <br>的超类型：none </td> <td> / td>
+ * </tr>
+ * </table>
+ * 
+ * @apiNote这些链接方法旨在支持在Java语言中评估<em> lambda表达式</em>和<em>方法引用</em>。
+ * 对于源代码中的每个lambda表达式或方法引用,都有一个目标类型,它是一个功能接口。评估lambda表达式会生成其目标类型的对象。
  */
 public class LambdaMetafactory {
 
     /** Flag for alternate metafactories indicating the lambda object
+    /* <p>
+    /* 推荐用于评估lambda表达式的机制是将lambda主体解析为方法,调用调用的动态调用站点,其静态参数列表描述函数接口的唯一方法和desugared实现方法,并返回一个对象(lambda对象)实现目标类
+    /* 型。
+    /* 对于源代码中的每个lambda表达式或方法引用,都有一个目标类型,它是一个功能接口。评估lambda表达式会生成其目标类型的对象。 (对于方法引用,实现方法只是引用的方法;不需要desugaring。
+    /* )。
+    /* 
+    /*  <p>实现方法的参数列表和接口方法的参数列表可以在几种方式上不同。
+    /* 实现方法可以具有附加的参数以适应由lambda表达式捕获的参数;也可能存在由于参数的允许适配引起的差异,例如投射,装箱,拆箱和原始扩宽。
+    /*  (Varargs修改不由元处理器处理;这些修改预期由调用者处理。)。
+    /* 
+    /* <p> Invokedynamic调用网站有两个参数列表：静态参数列表和动态参数列表。静态参数列表存储在常量池中;动态参数在捕获时被推送到操作数栈上。
+    /* 引导方法可以访问整个静态参数列表(在这种情况下,包括描述实现方法,目标接口和目标接口方法的信息),以及描述数量和静态类型的方法签名(但不是值)的动态参数和调用动态站点的静态返回类型。
+    /* 
+    /*  @implNote使用方法句柄描述实现方法。理论上,可以使用任何方法句柄。当前支持的是表示调用虚拟,接口,构造函数和静态方法的直接方法句柄。
+    /* 
+    /* 
      * must be serializable */
     public static final int FLAG_SERIALIZABLE = 1 << 0;
 
@@ -222,12 +324,16 @@ public class LambdaMetafactory {
      * Flag for alternate metafactories indicating the lambda object implements
      * other marker interfaces
      * besides Serializable
+     * <p>
      */
     public static final int FLAG_MARKERS = 1 << 1;
 
     /**
      * Flag for alternate metafactories indicating the lambda object requires
      * additional bridge methods
+     * <p>
+     *  用于指示lambda对象的备用元攻击的标志实现除了Serializable之外的其他标记接口
+     * 
      */
     public static final int FLAG_BRIDGES = 1 << 2;
 
@@ -254,6 +360,10 @@ public class LambdaMetafactory {
      * signature given by {@code samMethodType}.  It may also override additional
      * methods from {@code Object}.
      *
+     * <p>
+     *  用于指示lambda对象的替代元攻击的标志需要额外的桥接方法
+     * 
+     * 
      * @param caller Represents a lookup context with the accessibility
      *               privileges of the caller.  When used with {@code invokedynamic},
      *               this is stacked automatically by the VM.
@@ -395,6 +505,18 @@ public class LambdaMetafactory {
      *     implement methods related to serialization.</li>
      * </ul>
      *
+     * <p>
+     *  通过委派到提供的{@link MethodHandle},在适当的类型适配和参数的部分评估之后,便于创建实现一个或多个接口的简单"函数对象"。
+     * 通常用作{@code invokedynamic}调用网站的<em> bootstrap方法</em>,以支持Java编程的<em> lambda表达式和<em>方法引用表达式</em>语言。
+     * 
+     * <p>这是标准的,流线型的诠释;额外的灵活性由{@link #altMetafactory(MethodHandles.Lookup,String,MethodType,Object ...)}提供。
+     * 提供此方法的行为的一般描述{@link LambdaMetafactory above}。
+     * 
+     *  <p>当调用从此方法返回的{@code CallSite}的目标时,生成的函数对象是实现由{@code invokedType}的返回类型命名的接口的类的实例,声明一个方法名称由{@code invokedName}
+     * 给出,而签名由{@code samMethodType}给出。
+     * 它还可以覆盖{@code Object}中的其他方法。
+     * 
+     * 
      * @param caller Represents a lookup context with the accessibility
      *               privileges of the caller.  When used with {@code invokedynamic},
      *               this is stacked automatically by the VM.

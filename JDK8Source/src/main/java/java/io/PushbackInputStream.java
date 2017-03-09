@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,12 @@ package java.io;
  * can read until it  sees the operator and
  * then push the operator back to be re-read.
  *
+ * <p>
+ *  <code> PushbackInputStream </code>向另一个输入流添加功能,即"推回"或"未读"一个字节的能力。
+ * 这在方便代码片段读取由特定字节值分隔的不定数量的数据字节的情况下是有用的;在读取终止字节之后,代码片段可以"未读"它,使得输入流上的下一个读取操作将重新读取被推回的字节。
+ * 例如,表示构成标识符的字符的字节可以由表示操作符的字节终止;一种其工作是只读取标识符的方法可以读取,直到它看到操作者,然后推回操作员重新读取。
+ * 
+ * 
  * @author  David Connelly
  * @author  Jonathan Payne
  * @since   JDK1.0
@@ -52,6 +59,10 @@ public
 class PushbackInputStream extends FilterInputStream {
     /**
      * The pushback buffer.
+     * <p>
+     *  推回缓冲区。
+     * 
+     * 
      * @since   JDK1.1
      */
     protected byte[] buf;
@@ -62,12 +73,20 @@ class PushbackInputStream extends FilterInputStream {
      * <code>buf.length</code>; when the buffer is full, <code>pos</code> is
      * equal to zero.
      *
+     * <p>
+     *  回读缓冲器内的下一个字节将被读取的位置。
+     * 当缓冲区为空时,<code> pos </code>等于<code> buf.length </code>;当缓冲区已满时,<code> pos </code>等于零。
+     * 
+     * 
      * @since   JDK1.1
      */
     protected int pos;
 
     /**
      * Check to make sure that this stream has not been closed
+     * <p>
+     *  请检查以确保此流未关闭
+     * 
      */
     private void ensureOpen() throws IOException {
         if (in == null)
@@ -83,6 +102,11 @@ class PushbackInputStream extends FilterInputStream {
      * <code>pushBack</code> is initialized to
      * <code>-1</code>).
      *
+     * <p>
+     *  使用指定<code> size </code>的推回缓冲区创建<code> PushbackInputStream </code>,并将输入流<code>保存在</code>中以供日后使用。
+     * 最初,没有推回字节(字段<code> pushBack </code>被初始化为<code> -1 </code>)。
+     * 
+     * 
      * @param  in    the input stream from which bytes will be read.
      * @param  size  the size of the pushback buffer.
      * @exception IllegalArgumentException if {@code size <= 0}
@@ -105,6 +129,11 @@ class PushbackInputStream extends FilterInputStream {
      * <code>pushBack</code> is initialized to
      * <code>-1</code>).
      *
+     * <p>
+     * 创建<code> PushbackInputStream </code>并保存其参数,输入流<code>在</code>中,供以后使用。
+     * 最初,没有推回字节(字段<code> pushBack </code>被初始化为<code> -1 </code>)。
+     * 
+     * 
      * @param   in   the input stream from which bytes will be read.
      */
     public PushbackInputStream(InputStream in) {
@@ -124,6 +153,13 @@ class PushbackInputStream extends FilterInputStream {
      * one, and otherwise calls the <code>read</code> method of its underlying
      * input stream and returns whatever value that method returns.
      *
+     * <p>
+     *  从此输入流读取数据的下一个字节。值字节作为<code> 0 </code>到<code> 255 </code>范围内的<code> int </code>返回。
+     * 如果没有字节可用,因为已经到达流的结尾,则返回值<code> -1 </code>。此方法阻塞,直到输入数据可用,检测到流的结尾,或抛出异常。
+     * 
+     *  <p>此方法返回最近推回的字节(如果有的话),否则调用其底层输入流的<code> read </code>方法,并返回该方法返回的任何值。
+     * 
+     * 
      * @return     the next byte of data, or <code>-1</code> if the end of the
      *             stream has been reached.
      * @exception  IOException  if this input stream has been closed by
@@ -147,6 +183,11 @@ class PushbackInputStream extends FilterInputStream {
      * blocks until at least 1 byte of input is available; otherwise, no
      * bytes are read and <code>0</code> is returned.
      *
+     * <p>
+     *  从此输入流中读取最多<code> len </code>字节的数据为字节数组。此方法首先读取任何推回的字节;之后,如果少于<code> len </code>个字节被读取,则它从底层输入流读取。
+     * 如果<code> len </code>不为零,则该方法阻塞,直到至少1个字节的输入可用;否则,不读取任何字节,并返回<code> 0 </code>。
+     * 
+     * 
      * @param      b     the buffer into which the data is read.
      * @param      off   the start offset in the destination array <code>b</code>
      * @param      len   the maximum number of bytes read.
@@ -197,6 +238,10 @@ class PushbackInputStream extends FilterInputStream {
      * After this method returns, the next byte to be read will have the value
      * <code>(byte)b</code>.
      *
+     * <p>
+     *  通过将一个字节复制到回推缓冲区的前面来推回一个字节。此方法返回后,要读取的下一个字节将具有值<code>(byte)b </code>。
+     * 
+     * 
      * @param      b   the <code>int</code> value whose low-order
      *                  byte is to be pushed back.
      * @exception IOException If there is not enough room in the pushback
@@ -217,6 +262,11 @@ class PushbackInputStream extends FilterInputStream {
      * read will have the value <code>b[off]</code>, the byte after that will
      * have the value <code>b[off+1]</code>, and so forth.
      *
+     * <p>
+     * 通过将字节数组的一部分复制到推回缓冲区的前面来将其推回。
+     * 该方法返回后,要读取的下一个字节将具有值<code> b [off] </code>,其后的字节将具有值<code> b [off + 1] </code>等等。
+     * 
+     * 
      * @param b the byte array to push back.
      * @param off the start offset of the data.
      * @param len the number of bytes to push back.
@@ -241,6 +291,11 @@ class PushbackInputStream extends FilterInputStream {
      * will have the value <code>b[0]</code>, the byte after that will have the
      * value <code>b[1]</code>, and so forth.
      *
+     * <p>
+     *  通过将字节数组复制到推回缓冲区的前面来推回字节数组。
+     * 在该方法返回之后,要读取的下一个字节将具有值<code> b [0] </code>,其后的字节将具有值<code> b [1] </code> 。
+     * 
+     * 
      * @param b the byte array to push back
      * @exception IOException If there is not enough room in the pushback
      *            buffer for the specified number of bytes,
@@ -263,6 +318,12 @@ class PushbackInputStream extends FilterInputStream {
      * pushed back and the value returned by {@link
      * java.io.FilterInputStream#available available}.
      *
+     * <p>
+     *  返回此输入流中可以读取(或跳过)的字节数的估计值,而不会通过下一次调用此输入流的方法进行阻止。下一次调用可能是同一个线程或另一个线程。单个读取或跳过这么多字节不会阻塞,但可以读取或跳过更少的字节。
+     * 
+     *  <p>该方法返回已压回的字节数与{@link java.io.FilterInputStream#available available}返回的值之和。
+     * 
+     * 
      * @return     the number of bytes that can be read (or skipped over) from
      *             the input stream without blocking.
      * @exception  IOException  if this input stream has been closed by
@@ -292,6 +353,14 @@ class PushbackInputStream extends FilterInputStream {
      * more bytes need to be skipped.  The actual number of bytes skipped
      * is returned.
      *
+     * <p>
+     *  跳过并丢弃来自此输入流的<code> n </code>个字节的数据。由于各种原因,<code> skip </code>方法可能跳过一些较小数量的字节,可能为零。
+     * 如果<code> n </code>为负,则不跳过任何字节。
+     * 
+     * <p> <code> PushbackInputStream </code>的<code> skip </code>方法会跳过回推缓冲区中的字节(如果有的话)。
+     * 如果需要跳过更多的字节,它然后调用底层输入流的<code> skip </code>方法。将返回实际跳过的字节数。
+     * 
+     * 
      * @param      n  {@inheritDoc}
      * @return     {@inheritDoc}
      * @exception  IOException  if the stream does not support seek,
@@ -326,6 +395,10 @@ class PushbackInputStream extends FilterInputStream {
      * Tests if this input stream supports the <code>mark</code> and
      * <code>reset</code> methods, which it does not.
      *
+     * <p>
+     *  测试此输入流是否支持<code>标记</code>和<code>重置</code>方法,而不是。
+     * 
+     * 
      * @return   <code>false</code>, since this class does not support the
      *           <code>mark</code> and <code>reset</code> methods.
      * @see     java.io.InputStream#mark(int)
@@ -341,6 +414,12 @@ class PushbackInputStream extends FilterInputStream {
      * <p> The <code>mark</code> method of <code>PushbackInputStream</code>
      * does nothing.
      *
+     * <p>
+     *  标记此输入流中的当前位置。
+     * 
+     *  <p> <code> PushbackInputStream </code>的<code>标记</code>方法什么也不做。
+     * 
+     * 
      * @param   readlimit   the maximum limit of bytes that can be read before
      *                      the mark position becomes invalid.
      * @see     java.io.InputStream#reset()
@@ -356,6 +435,12 @@ class PushbackInputStream extends FilterInputStream {
      * <code>PushbackInputStream</code> does nothing except throw an
      * <code>IOException</code>.
      *
+     * <p>
+     *  将此流重新定位到在此输入流上最后调用<code>标记</code>方法时的位置。
+     * 
+     *  <p>类<code> PushbackInputStream </code>中<code> reset </code>的方法除了抛出一个<code> IOException </code>
+     * 
+     * 
      * @exception  IOException  if this method is invoked.
      * @see     java.io.InputStream#mark(int)
      * @see     java.io.IOException
@@ -371,6 +456,8 @@ class PushbackInputStream extends FilterInputStream {
      * available(), reset(), or skip() invocations will throw an IOException.
      * Closing a previously closed stream has no effect.
      *
+     * <p>
+     * 
      * @exception  IOException  if an I/O error occurs.
      */
     public synchronized void close() throws IOException {

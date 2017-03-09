@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: CurrentNodeListIterator.java,v 1.2.4.1 2005/09/06 06:04:45 pvedula Exp $
+ * <p>
+ *  $ Id：CurrentNodeListIterator.java,v 1.2.4.1 2005/09/06 06:04:45 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -38,6 +51,13 @@ import com.sun.org.apache.xml.internal.dtm.ref.DTMAxisIteratorBase;
  * (this is needed to determine the value of last, a parameter to
  * CurrentNodeListFilter.test()). The method getLast() returns the last element
  * after applying the filter.
+ * <p>
+ *  这种类型的迭代器使用CurrentNodeListFilter来过滤来自源迭代器的节点子集。对于源中的每个节点,调用布尔方法CurrentNodeListFilter.test()。
+ * 
+ *  来自源的所有节点在调用setStartNode()时读取到数组中(这需要确定last的值,即CurrentNodeListFilter.test()的参数)。
+ * 方法getLast()在应用过滤器后返回最后一个元素。
+ * 
+ * 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -46,36 +66,56 @@ import com.sun.org.apache.xml.internal.dtm.ref.DTMAxisIteratorBase;
 public final class CurrentNodeListIterator extends DTMAxisIteratorBase {
     /**
      * A flag indicating if nodes are returned in document order.
+     * <p>
+     *  指示节点是否按文档顺序返回的标志。
+     * 
      */
     private boolean _docOrder;
 
     /**
      * The source for this iterator.
+     * <p>
+     *  此迭代器的源。
+     * 
      */
     private DTMAxisIterator _source;
 
     /**
      * A reference to a filter object.
+     * <p>
+     *  对过滤器对象的引用。
+     * 
      */
     private final CurrentNodeListFilter _filter;
 
     /**
      * An integer array to store nodes from source iterator.
+     * <p>
+     *  用于存储源迭代器的节点的整数数组。
+     * 
      */
     private IntegerArray _nodes = new IntegerArray();
 
     /**
      * Index in _nodes of the next node to filter.
+     * <p>
+     *  要过滤的下一个节点的_node中的索引。
+     * 
      */
     private int _currentIndex;
 
     /**
      * The current node in the stylesheet at the time of evaluation.
+     * <p>
+     * 评估时样式表中的当前节点。
+     * 
      */
     private final int _currentNode;
 
     /**
      * A reference to the translet.
+     * <p>
+     *  参考translet。
      */
     private AbstractTranslet _translet;
 

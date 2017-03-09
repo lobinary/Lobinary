@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.beans.PropertyChangeEvent;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JEditorPane}.
  *
+ * <p>
+ *  为{@link javax.swing.JEditorPane}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author  Shannon Hickey
  * @since 1.7
  */
@@ -44,12 +49,19 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
     /*
      * I would prefer to use UIResource instad of this.
      * Unfortunately Boolean is a final class
+     * <p>
+     *  我更喜欢使用UIResource instad这个。不幸的是,Boolean是一个final类
+     * 
      */
     private Boolean localTrue = Boolean.TRUE;
 
     /**
      * Creates a new UI object for the given component.
      *
+     * <p>
+     *  为给定组件创建一个新的UI对象。
+     * 
+     * 
      * @param c component to create UI object for
      * @return the UI object
      */
@@ -59,6 +71,9 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installDefaults() {
@@ -75,6 +90,9 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallDefaults() {
@@ -103,6 +121,11 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
      * This is implemented to rebuild the ActionMap based upon an
      * EditorKit change.
      *
+     * <p>
+     *  当在相关联的JTextComponent上更改绑定属性时,将调用此方法。这是一个钩子,UI实现可以改变以反映UI如何显示JTextComponent子类的绑定属性。
+     * 这是为了基于EditorKit更改重建ActionMap。
+     * 
+     * 
      * @param evt the property change event
      */
     @Override
@@ -132,6 +155,9 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -154,6 +180,12 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -171,6 +203,10 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
     /**
      * Paints the specified component.
      *
+     * <p>
+     *  绘制指定的组件。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -181,6 +217,9 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void paintBackground(Graphics g) {
@@ -194,6 +233,8 @@ public class SynthEditorPaneUI extends BasicEditorPaneUI implements SynthUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,

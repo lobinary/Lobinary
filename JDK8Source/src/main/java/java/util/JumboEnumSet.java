@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package java.util;
  * Private implementation class for EnumSet, for "jumbo" enum types
  * (i.e., those with more than 64 elements).
  *
+ * <p>
+ *  EnumSet的私有实现类,用于"jumbo"枚举类型(即,具有超过64个元素的类)。
+ * 
+ * 
  * @author Josh Bloch
  * @since 1.5
  * @serial exclude
@@ -40,6 +45,9 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
      * Bit vector representation of this set.  The ith bit of the jth
      * element of this array represents the  presence of universe[64*j +i]
      * in this set.
+     * <p>
+     *  此集合的位向量表示。该数组的第j个元素的第i位表示该集合中存在宇宙[64 * j + i]。
+     * 
      */
     private long elements[];
 
@@ -88,6 +96,11 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
      * Iterator is a "weakly consistent" iterator that will never throw {@link
      * ConcurrentModificationException}.
      *
+     * <p>
+     *  在此集合中包含的元素上返回一个迭代器。迭代器以它们的<i>自然顺序</i>(这是枚举常量的声明顺序)遍历元素。
+     * 返回的Iterator是一个"弱一致"的迭代器,永远不会抛出{@link ConcurrentModificationException}。
+     * 
+     * 
      * @return an iterator over the elements contained in this set
      */
     public Iterator<E> iterator() {
@@ -98,22 +111,34 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
         /**
          * A bit vector representing the elements in the current "word"
          * of the set not yet returned by this iterator.
+         * <p>
+         *  表示当前"字"中的元素尚未由此迭代器返回的位向量。
+         * 
          */
         long unseen;
 
         /**
          * The index corresponding to unseen in the elements array.
+         * <p>
+         *  索引对应于elements数组中的notseen。
+         * 
          */
         int unseenIndex = 0;
 
         /**
          * The bit representing the last element returned by this iterator
          * but not removed, or zero if no such element exists.
+         * <p>
+         *  表示此迭代器返回但未删除的最后一个元素的位,如果不存在此元素,则为零。
+         * 
          */
         long lastReturned = 0;
 
         /**
          * The index corresponding to lastReturned in the elements array.
+         * <p>
+         *  在元素数组中对应于lastReturned的索引。
+         * 
          */
         int lastReturnedIndex = 0;
 
@@ -156,6 +181,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
     /**
      * Returns the number of elements in this set.
      *
+     * <p>
+     *  返回此集合中的元素数。
+     * 
+     * 
      * @return the number of elements in this set
      */
     public int size() {
@@ -165,6 +194,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
     /**
      * Returns <tt>true</tt> if this set contains no elements.
      *
+     * <p>
+     *  如果此集合不包含元素,则返回<tt> true </tt>。
+     * 
+     * 
      * @return <tt>true</tt> if this set contains no elements
      */
     public boolean isEmpty() {
@@ -174,6 +207,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
     /**
      * Returns <tt>true</tt> if this set contains the specified element.
      *
+     * <p>
+     *  如果此集合包含指定的元素,则返回<tt> true </tt>。
+     * 
+     * 
      * @param e element to be checked for containment in this collection
      * @return <tt>true</tt> if this set contains the specified element
      */
@@ -193,6 +230,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
     /**
      * Adds the specified element to this set if it is not already present.
      *
+     * <p>
+     *  如果指定的元素不存在,则将其添加到此集合。
+     * 
+     * 
      * @param e element to be added to this set
      * @return <tt>true</tt> if the set changed as a result of the call
      *
@@ -215,6 +256,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
     /**
      * Removes the specified element from this set if it is present.
      *
+     * <p>
+     *  从此集合中删除指定的元素(如果存在)。
+     * 
+     * 
      * @param e element to be removed from this set, if present
      * @return <tt>true</tt> if the set contained the specified element
      */
@@ -241,6 +286,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
      * Returns <tt>true</tt> if this set contains all of the elements
      * in the specified collection.
      *
+     * <p>
+     *  如果此集合包含指定集合中的所有元素,则返回<tt> true </tt>。
+     * 
+     * 
      * @param c collection to be checked for containment in this set
      * @return <tt>true</tt> if this set contains all of the elements
      *        in the specified collection
@@ -263,6 +312,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
     /**
      * Adds all of the elements in the specified collection to this set.
      *
+     * <p>
+     * 将指定集合中的所有元素添加到此集合。
+     * 
+     * 
      * @param c collection whose elements are to be added to this set
      * @return <tt>true</tt> if this set changed as a result of the call
      * @throws NullPointerException if the specified collection or any of
@@ -290,6 +343,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
      * Removes from this set all of its elements that are contained in
      * the specified collection.
      *
+     * <p>
+     *  从此集合中删除包含在指定集合中的所有元素。
+     * 
+     * 
      * @param c elements to be removed from this set
      * @return <tt>true</tt> if this set changed as a result of the call
      * @throws NullPointerException if the specified collection is null
@@ -311,6 +368,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
      * Retains only the elements in this set that are contained in the
      * specified collection.
      *
+     * <p>
+     *  仅保留此集合中包含在指定集合中的元素。
+     * 
+     * 
      * @param c elements to be retained in this set
      * @return <tt>true</tt> if this set changed as a result of the call
      * @throws NullPointerException if the specified collection is null
@@ -333,6 +394,9 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
 
     /**
      * Removes all of the elements from this set.
+     * <p>
+     *  删除此集合中的所有元素。
+     * 
      */
     public void clear() {
         Arrays.fill(elements, 0);
@@ -345,6 +409,10 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
      * the same size, and every member of the given set is contained in
      * this set.
      *
+     * <p>
+     *  将指定的对象与此设置相比较以确保相等。返回<tt> true </tt>如果给定对象也是一个集合,则两个集合具有相同的大小,并且给定集合的每个成员都包含在此集合中。
+     * 
+     * 
      * @param o object to be compared for equality with this set
      * @return <tt>true</tt> if the specified object is equal to this set
      */
@@ -361,6 +429,8 @@ class JumboEnumSet<E extends Enum<E>> extends EnumSet<E> {
 
     /**
      * Recalculates the size of the set.  Returns true if it's changed.
+     * <p>
+     *  重新计算集合的大小。如果更改,则返回true。
      */
     private boolean recalculateSize() {
         int oldSize = size;

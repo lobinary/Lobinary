@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import java.awt.geom.Rectangle2D;
  * java.awt.font.TextLayout class to do i18n capable
  * rendering.
  *
+ * <p>
+ *  一个类来执行字形的渲染。这可以被实现为无状态的,或者保持一些信息作为高速缓存以促进更快的呈现和模型/视图转换。
+ * 至少,GlyphPainter允许View实现独立于JVM的特定版本并且选择能力(即,针对i18n的整形等)来执行其职责。
+ * <p>
+ *  此实现旨在在JDK下操作。它使用java.awt.font.TextLayout类来进行i18n能力渲染。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see GlyphView
  */
@@ -56,6 +64,9 @@ class GlyphPainter2 extends GlyphView.GlyphPainter {
 
     /**
      * Create a painter to use for the given GlyphView.
+     * <p>
+     *  创建一个画家用于给定的GlyphView。
+     * 
      */
     public GlyphView.GlyphPainter getPainter(GlyphView v, int p0, int p1) {
         return null;
@@ -66,6 +77,9 @@ class GlyphPainter2 extends GlyphView.GlyphPainter {
      * (for tab expansion).  This implementation assumes it
      * has no tabs (i.e. TextLayout doesn't deal with tab
      * expansion).
+     * <p>
+     *  确定给定开始位置的字形的跨度(用于制表符展开)。此实现假设它没有选项卡(即TextLayout不处理选项卡扩展)。
+     * 
      */
     public float getSpan(GlyphView v, int p0, int p1,
                          TabExpander e, float x) {
@@ -93,6 +107,9 @@ class GlyphPainter2 extends GlyphView.GlyphPainter {
     /**
      * Fetch the ascent above the baseline for the glyphs
      * corresponding to the given range in the model.
+     * <p>
+     *  获取对应于模型中给定范围的字形的高于基线的上升。
+     * 
      */
     public float getAscent(GlyphView v) {
         return layout.getAscent();
@@ -101,6 +118,9 @@ class GlyphPainter2 extends GlyphView.GlyphPainter {
     /**
      * Fetch the descent below the baseline for the glyphs
      * corresponding to the given range in the model.
+     * <p>
+     *  获取对应于模型中给定范围的字形的基线下方的下降。
+     * 
      */
     public float getDescent(GlyphView v) {
         return layout.getDescent();
@@ -111,6 +131,9 @@ class GlyphPainter2 extends GlyphView.GlyphPainter {
      * to only render if the Graphics is of type Graphics2D which
      * is required by TextLayout (and this should be the case if
      * running on the JDK).
+     * <p>
+     *  为给定视图绘制字形。这被实现为仅当Graphics是Graphics2D类型时才渲染,这是TextLayout所需要的(如果在JDK上运行,则应该是这种情况)。
+     * 
      */
     public void paint(GlyphView v, Graphics g, Shape a, int p0, int p1) {
         if (g instanceof Graphics2D) {
@@ -153,6 +176,10 @@ class GlyphPainter2 extends GlyphView.GlyphPainter {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param v the view containing the view coordinates
      * @param x the X coordinate
      * @param y the Y coordinate
@@ -189,6 +216,10 @@ class GlyphPainter2 extends GlyphView.GlyphPainter {
      * differs from viewToModel which returns the closest
      * position which might be proud of the maximum advance.
      *
+     * <p>
+     * 确定表示适合给定范围内的最大提前的模型位置。这可以用来打破给定的视图。结果应该是一个位置只是害羞的给定的提前。这不同于viewToModel,它返回可能引起最大提前量的最接近的位置。
+     * 
+     * 
      * @param v the view to find the model location to break at.
      * @param p0 the location in the model where the
      *  fragment should start it's representation >= 0.
@@ -221,6 +252,9 @@ class GlyphPainter2 extends GlyphView.GlyphPainter {
          * they just might not allow access to some of the locations in the
          * model.
          *
+         * <p>
+         *  提供一种方法来确定下一个可视地表示的模型位置,人们可以放置插入符号。某些视图可能不可见,它们可能不是在模型中找到的相同顺序,或者它们可能不允许访问模型中的一些位置。
+         * 
          * @param v the view to use
          * @param pos the position to convert >= 0
          * @param a the allocated region to render into

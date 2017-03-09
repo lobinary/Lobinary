@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,11 @@ import java.nio.file.FileTreeWalker.Event;
  *         }
  *     }
  * }</pre>
+ * <p>
+ *  一个{@code迭代器迭代文件树的节点。
+ * 
+ *  <before> {@ code try(FileTreeIterator iterator = new FileTreeIterator(start,maxDepth,options)){while(iterator.hasNext()){Event ev = iterator.next路径path = ev.file(); BasicFileAttributes attrs = ev.attributes(); }
+ * }} </pre>。
  */
 
 class FileTreeIterator implements Iterator<Event>, Closeable {
@@ -55,6 +61,9 @@ class FileTreeIterator implements Iterator<Event>, Closeable {
     /**
      * Creates a new iterator to walk the file tree starting at the given file.
      *
+     * <p>
+     * 
+     * 
      * @throws  IllegalArgumentException
      *          if {@code maxDepth} is negative
      * @throws  IOException

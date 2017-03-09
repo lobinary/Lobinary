@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -92,6 +93,35 @@ import sun.util.logging.PlatformLogger;
  * country code entries exist, the behavior of the Currency information for that
  * {@code Currency} is undefined and the remainder of entries in file are processed.
  *
+ * <p>
+ *  表示货币。货币由其ISO 4217货币代码标识。
+ * 有关详细信息,请访问<a href="http://www.iso.org/iso/home/standards/currency_codes.htm"> ISO网站</a>。
+ * <p>
+ *  该类被设计为对于任何给定的货币,不会有多于一个<code> Currency </code>实例。因此,没有公共构造函数。
+ * 您可以使用<code> getInstance </code>方法获取<code> Currency </code>实例。
+ * <p>
+ * 用户可以通过系统属性{@code java.util.currency.data}取代Java运行时货币数据。
+ * 如果定义此系统属性,则其值是属性文件的位置,属性文件的内容分别是ISO 3166国家代码和ISO 4217货币数据的键/值对。值部分由货币的三个ISO 4217值组成,即字母代码,数字代码和次要单位。
+ * 这三个ISO 4217值由逗号分隔。以"#"开头的行被视为注释行。如果用户需要指定表示新数据何时生效的切换日期,则可以为每个货币条目指定可选的UTC时间戳。
+ * 时间戳附加到货币属性的结尾,并使用逗号作为分隔符。如果UTC日期戳存在且有效,则JRE将只使用新的货币属性,如果当前UTC日期晚于在类加载时指定的日期。
+ * 时间戳的格式必须是ISO 8601格式：{@code'yyyy-MM-dd'T'HH：mm：ss'}。例如,。
+ * <p>
+ * <code>
+ *  #Sample currency properties <br> JP = JPZ,999,0
+ * </code>
+ * <p>
+ *  将取代日本的货币数据。
+ * 
+ * <p>
+ * <code>
+ *  #示例货币属性,具有转换日期<br> JP = JPZ,999,0,2014-01-01T00：00：00
+ * </code>
+ * <p>
+ *  将取代日本的货币数据,如果{@code Currency}类在2014年1月1日00:00:00 GMT后加载。
+ * <p>
+ * 遇到语法格式错误的条目时,将忽略该条目,并处理文件中的其余条目。对于存在重复的国家/地区代码条目的情况,未定义该{@code Currency}的货币信息的行为,并处理文件中的其余条目。
+ * 
+ * 
  * @since 1.4
  */
 public final class Currency implements Serializable {
@@ -101,6 +131,10 @@ public final class Currency implements Serializable {
     /**
      * ISO 4217 currency code for this currency.
      *
+     * <p>
+     *  此货币的ISO 4217货币代码。
+     * 
+     * 
      * @serial
      */
     private final String currencyCode;
@@ -108,12 +142,18 @@ public final class Currency implements Serializable {
     /**
      * Default fraction digits for this currency.
      * Set from currency data tables.
+     * <p>
+     *  此货币的默认分数位数。从货币数据表设置。
+     * 
      */
     transient private final int defaultFractionDigits;
 
     /**
      * ISO 4217 numeric code for this currency.
      * Set from currency data tables.
+     * <p>
+     *  此货币的ISO 4217数字代码。从货币数据表设置。
+     * 
      */
     transient private final int numericCode;
 
@@ -279,6 +319,9 @@ public final class Currency implements Serializable {
 
     /**
      * Constants for retrieving localized names from the name providers.
+     * <p>
+     *  从名称提供程序检索本地化名称的常量。
+     * 
      */
     private static final int SYMBOL = 0;
     private static final int DISPLAYNAME = 1;
@@ -288,6 +331,9 @@ public final class Currency implements Serializable {
      * Constructs a <code>Currency</code> instance. The constructor is private
      * so that we can insure that there's never more than one instance for a
      * given currency.
+     * <p>
+     *  构造一个<code> Currency </code>实例。构造函数是私有的,因此我们可以确保给定货币不会有多个实例。
+     * 
      */
     private Currency(String currencyCode, int defaultFractionDigits, int numericCode) {
         this.currencyCode = currencyCode;
@@ -298,6 +344,10 @@ public final class Currency implements Serializable {
     /**
      * Returns the <code>Currency</code> instance for the given currency code.
      *
+     * <p>
+     *  返回给定货币代码的<code> Currency </code>实例。
+     * 
+     * 
      * @param currencyCode the ISO 4217 code of the currency
      * @return the <code>Currency</code> instance for the given currency code
      * @exception NullPointerException if <code>currencyCode</code> is null
@@ -365,6 +415,13 @@ public final class Currency implements Serializable {
      * The method returns <code>null</code> for territories that don't
      * have a currency, such as Antarctica.
      *
+     * <p>
+     *  返回给定语言环境的国家/地区的<code> Currency </code>实例。语言环境的语言和变体组件被忽略。随着国家更改其货币,结果可能会随时间而变化。
+     * 例如,对于欧洲货币联盟的原始成员国,该方法将旧的国家货币返还到2001年12月31日,欧元从2002年1月1日,各国的当地时间。
+     * <p>
+     *  该方法对于没有货币的地区(如南极洲)返回<code> null </code>。
+     * 
+     * 
      * @param locale the locale for whose country a <code>Currency</code>
      * instance is needed
      * @return the <code>Currency</code> instance for the country of the given
@@ -421,6 +478,10 @@ public final class Currency implements Serializable {
      * that represent obsolete ISO 4217 codes.  The set can be modified
      * without affecting the available currencies in the runtime.
      *
+     * <p>
+     * 获取可用货币集。返回的货币组包含所有可用的货币,可能包括代表过时的ISO 4217代码的货币。可以修改集合,而不会影响运行时中的可用货币。
+     * 
+     * 
      * @return the set of available currencies.  If there is no currency
      *    available in the runtime, the returned set is empty.
      * @since 1.7
@@ -464,6 +525,10 @@ public final class Currency implements Serializable {
     /**
      * Gets the ISO 4217 currency code of this currency.
      *
+     * <p>
+     *  获取此货币的ISO 4217货币代码。
+     * 
+     * 
      * @return the ISO 4217 currency code of this currency.
      */
     public String getCurrencyCode() {
@@ -481,6 +546,13 @@ public final class Currency implements Serializable {
      * {@link #getSymbol(Locale)
      *     getSymbol(Locale.getDefault(Locale.Category.DISPLAY))}.
      *
+     * <p>
+     *  获取默认{@link Locale.Category#DISPLAY DISPLAY}区域设置的此货币符号。
+     * 例如,对于美元,如果默认语言环境是美国,则符号是"$",而对于其他语言环境它可以是"US $"。如果无法确定符号,则返回ISO 4217货币代码。
+     * <p>
+     *  这相当于调用{@link #getSymbol(Locale)getSymbol(Locale.getDefault(Locale.Category.DISPLAY))}。
+     * 
+     * 
      * @return the symbol of this currency for the default
      *     {@link Locale.Category#DISPLAY DISPLAY} locale
      */
@@ -494,6 +566,10 @@ public final class Currency implements Serializable {
      * locale is the US, while for other locales it may be "US$". If no
      * symbol can be determined, the ISO 4217 currency code is returned.
      *
+     * <p>
+     *  获取指定语言环境的此货币的符号。例如,对于美元,如果指定的区域设置是美国,则符号为"$",而对于其他区域设置则为"US $"。如果无法确定符号,则返回ISO 4217货币代码。
+     * 
+     * 
      * @param locale the locale for which a display name for this currency is
      * needed
      * @return the symbol of this currency for the specified locale
@@ -520,6 +596,10 @@ public final class Currency implements Serializable {
      * In the case of pseudo-currencies, such as IMF Special Drawing Rights,
      * -1 is returned.
      *
+     * <p>
+     *  获取与此货币一起使用的默认小数位数。例如,欧元的默认小数位数为2,而日元为0。在伪货币(例如IMF特别提款权)的情况下,返回-1。
+     * 
+     * 
      * @return the default number of fraction digits used with this currency
      */
     public int getDefaultFractionDigits() {
@@ -529,6 +609,10 @@ public final class Currency implements Serializable {
     /**
      * Returns the ISO 4217 numeric code of this currency.
      *
+     * <p>
+     *  返回此货币的ISO 4217数字代码。
+     * 
+     * 
      * @return the ISO 4217 numeric code of this currency
      * @since 1.7
      */
@@ -546,6 +630,12 @@ public final class Currency implements Serializable {
      * {@link #getDisplayName(Locale)
      *     getDisplayName(Locale.getDefault(Locale.Category.DISPLAY))}.
      *
+     * <p>
+     * 获取适用于默认{@link Locale.Category#DISPLAY DISPLAY}区域设置的此货币的名称。如果找不到默认语言环境的适当显示名称,则返回ISO 4217货币代码。
+     * <p>
+     *  这相当于调用{@link #getDisplayName(Locale)getDisplayName(Locale.getDefault(Locale.Category.DISPLAY))}。
+     * 
+     * 
      * @return the display name of this currency for the default
      *     {@link Locale.Category#DISPLAY DISPLAY} locale
      * @since 1.7
@@ -559,6 +649,10 @@ public final class Currency implements Serializable {
      * the specified locale.  If there is no suitable display name found
      * for the specified locale, the ISO 4217 currency code is returned.
      *
+     * <p>
+     *  获取适合显示指定区域设置的此货币的名称。如果没有为指定的区域设置找到合适的显示名称,则返回ISO 4217货币代码。
+     * 
+     * 
      * @param locale the locale for which a display name for this currency is
      * needed
      * @return the display name of this currency for the specified locale
@@ -582,6 +676,10 @@ public final class Currency implements Serializable {
     /**
      * Returns the ISO 4217 currency code of this currency.
      *
+     * <p>
+     *  返回此货币的ISO 4217货币代码。
+     * 
+     * 
      * @return the ISO 4217 currency code of this currency
      */
     @Override
@@ -591,6 +689,9 @@ public final class Currency implements Serializable {
 
     /**
      * Resolves instances being deserialized to a single instance per currency.
+     * <p>
+     *  解析每个货币反序列化为单个实例的实例。
+     * 
      */
     private Object readResolve() {
         return getInstance(currencyCode);
@@ -599,6 +700,9 @@ public final class Currency implements Serializable {
     /**
      * Gets the main table entry for the country whose country code consists
      * of char1 and char2.
+     * <p>
+     *  获取其国家代码由char1和char2组成的国家/地区的主表条目。
+     * 
      */
     private static int getMainTableEntry(char char1, char char2) {
         if (char1 < 'A' || char1 > 'Z' || char2 < 'A' || char2 > 'Z') {
@@ -610,6 +714,9 @@ public final class Currency implements Serializable {
     /**
      * Sets the main table entry for the country whose country code consists
      * of char1 and char2.
+     * <p>
+     *  设置其国家代码由char1和char2组成的国家/地区的主表条目。
+     * 
      */
     private static void setMainTableEntry(char char1, char char2, int entry) {
         if (char1 < 'A' || char1 > 'Z' || char2 < 'A' || char2 > 'Z') {
@@ -621,6 +728,9 @@ public final class Currency implements Serializable {
     /**
      * Obtains a localized currency names from a CurrencyNameProvider
      * implementation.
+     * <p>
+     *  从CurrencyNameProvider实现获取本地化货币名称。
+     * 
      */
     private static class CurrencyNameGetter
         implements LocaleServiceProviderPool.LocalizedObjectGetter<CurrencyNameProvider,
@@ -678,6 +788,9 @@ public final class Currency implements Serializable {
     /**
      * Replaces currency data found in the currencydata.properties file
      *
+     * <p>
+     *  替换currencydata.properties文件中找到的货币数据
+     * 
      * @param pattern regex pattern for the properties
      * @param ctry country code
      * @param curdata currency data.  This is a comma separated string that

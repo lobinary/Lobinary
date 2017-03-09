@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,35 @@ import java.util.Iterator;
  * <p>A prefix can only be bound to a <strong>single</strong>
  * Namespace URI in the current scope.</p>
  *
+ * <p>
+ *  <p>只读XML命名空间上下文处理的接口。</p>
+ * 
+ *  <p> XML命名空间具有以下属性：</p>
+ * <ul>
+ *  <li>名称空间URI：表示为前缀绑定到的URI的名称空间名称</li> <li> prefix：语法上,这是属性名称的一部分,位于<code> XMLConstants.XMLNS_ATTRIBUT
+ * E </code> "xmlns")在命名空间声明</li>中。
+ * </ul>
+ *  <p> example：<code>&lt; element xmlns：prefix ="http：// Namespace-name-URI"&gt; </code> </p>
+ * 
+ *  <p>所有<code> get *(*)</code>方法在当前作用域中操作,用于命名空间URI和前缀解析。</p>
+ * 
+ *  <p>请注意,命名空间URI可以绑定到当前范围中的<strong>多个</strong>前缀。
+ * 当多个<code> XMLConstants.XMLNS_ATTRIBUTE </code>("xmlns")命名空间声明出现在同一个Start-Tag并引用同一个命名空间URI时,就会发生这种情况。
+ * 例如<br />。
+ * <pre>
+ *  &lt; element xmlns：prefix1 ="http：// Namespace-name-URI"xmlns：prefix2 ="http：// Namespace-name-URI"&
+ * gt;。
+ * </pre>
+ *  当在逻辑父元素层次结构中的多个<code> XMLConstants.XMLNS_ATTRIBUTE </code>("xmlns")命名空间声明中使用相同的命名空间URI时,也会发生这种情况。
+ * 例如<br />。
+ * <pre>
+ * &lt;parent xmlns:prefix1="http://Namespace-name-URI">
+ *  &lt; child xmlns：prefix2 ="http：// Namespace-name-URI"&gt; ...&lt; / child&gt; &lt; / parent&gt; </pre>
+ *  </p>。
+ * 
+ *  <p>前缀只能绑定到当前作用域中的<strong>单个</strong>命名空间URI。</p>
+ * 
+ * 
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  * @see javax.xml.XMLConstants
  *   javax.xml.XMLConstants for declarations of common XML values
@@ -139,6 +169,54 @@ public interface NamespaceContext {
      *    </tbody>
      * </table>
      *
+     * <p>
+     * <p>获取绑定到当前作用域中的前缀的命名空间URI。</p>
+     * 
+     *  <p>当按前缀请求命名空间URI时,下表描述了所有可能的前缀值的返回的命名空间URI值：</p>
+     * 
+     * <table border="2" rules="all" cellpadding="4">
+     * <thead>
+     * <tr>
+     * <td align="center" colspan="2">
+     *  <code> getNamespaceURI(prefix)</code>返回指定前缀的值
+     * </td>
+     * </tr>
+     * <tr>
+     *  <td> prefix参数</td> <td>命名空间URI返回值</td>
+     * </tr>
+     * </thead>
+     * <tbody>
+     * <tr>
+     *  <td> <code> DEFAULT_NS_PREFIX </code>("")</td> <td>当前作用域中的默认命名空间URI或<code> {@ link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI(" }
+     * }。
+     * </code>
+     *  当当前范围中没有默认命名空间URI时</td>
+     * </tr>
+     * <tr>
+     *  <td>绑定前缀</td> <td>绑定到当前作用域中的前缀的命名空间URI </td>
+     * </tr>
+     * <tr>
+     *  <td>未绑定前缀</td>
+     * <td>
+     *  <code> {@ link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI("")}
+     * </code>
+     * </td>
+     * </tr>
+     * <tr>
+     *  <td> <code> XMLConstants.XML_NS_PREFIX </code>("xml")</td> <td> <code> XMLConstants.XML_NS_URI </code>
+     * ("http://www.w3.org/XML/1998 / namespace")</td>。
+     * </tr>
+     * <tr>
+     *  <td> <code> XMLConstants.XMLNS_ATTRIBUTE </code>("xmlns")</td> <td> <code> XMLConstants.XMLNS_ATTRIB
+     * UTE_NS_URI </code>("http://www.w3.org/2000/xmlns /")</td>。
+     * </tr>
+     * <tr>
+     *  <td> <code> null </code> </td> <td> <code>抛出IllegalArgumentException </code> </td>
+     * </tr>
+     * </tbody>
+     * </table>
+     * 
+     * 
      * @param prefix prefix to look up
      *
      * @return Namespace URI bound to prefix in the current scope
@@ -205,6 +283,50 @@ public interface NamespaceContext {
      *   </tbody>
      * </table>
      *
+     * <p>
+     *  <p>获取绑定到当前作用域中的Namespace URI的前缀。</p>
+     * 
+     *  <p>要获取绑定到当前作用域中的命名空间URI的所有前缀,请使用{@link #getPrefixes(String namespaceURI)}。</p>
+     * 
+     *  <p>当通过命名空间URI请求前缀时,下表描述了所有Namespace URI值的返回前缀值：</p>
+     * 
+     * <table border="2" rules="all" cellpadding="4">
+     * <thead>
+     * <tr>
+     * <th align="center" colspan="2">
+     * <code> getPrefix(namespaceURI)</code>返回指定名称空间URI的值
+     * </th>
+     * </tr>
+     * <tr>
+     *  <th>命名空间URI参数</th> <th>返回的前缀值</th>
+     * </tr>
+     * </thead>
+     * <tbody>
+     * <tr>
+     *  <td>&lt; default Namespace URI&gt; </td> <td> <code> XMLConstants.DEFAULT_NS_PREFIX </code>("")
+     * </td>
+     * </tr>
+     * <tr>
+     *  <td>绑定到当前作用域中的Namespace URI的命名空间URI </td> <td>前缀,如果多个前缀绑定到当前作用域中的命名空间URI,则返回一个任意前缀(其选择取决于实现) </td>
+     * </tr>
+     * <tr>
+     *  <td>未绑定的命名空间URI </td> <td> <code> null </code> </td>
+     * </tr>
+     * <tr>
+     *  <td> <code> XMLConstants.XML_NS_URI </code>("http://www.w3.org/XML/1998/namespace")</td> <td> <code>
+     *  XMLConstants.XML_NS_PREFIX </code> "xml")</td>。
+     * </tr>
+     * <tr>
+     *  <td> <code> XMLConstants.XMLNS_ATTRIBUTE_NS_URI </code>("http://www.w3.org/2000/xmlns/")</td> <td> <code>
+     *  XMLConstants.XMLNS_ATTRIBUTE </code> xmlns")</td>。
+     * </tr>
+     * <tr>
+     *  <td> <code> null </code> </td> <td> <code>抛出IllegalArgumentException </code> </td>
+     * </tr>
+     * </tbody>
+     * </table>
+     * 
+     * 
      * @param namespaceURI URI of Namespace to lookup
      *
      * @return prefix bound to Namespace URI in current context
@@ -276,6 +398,29 @@ public interface NamespaceContext {
      *   </tbody>
      * </table>
      *
+     * <p>
+     *  <p>获取绑定到当前作用域中的命名空间URI的所有前缀。</p>
+     * 
+     *  <p>字符串元素的迭代器按任意<strong>实现相关</strong>顺序返回。</p>
+     * 
+     *  <p> <strong> <code>迭代器</code> <em>不是</em>可修改。
+     * 例如<code> remove()</code>方法会引发<code> UnsupportedOperationException </code>。</strong> </p>。
+     * 
+     *  <p>当通过命名空间URI请求前缀时,下表描述了所有Namespace URI值的返回前缀值：</p>
+     * 
+     * <table border="2" rules="all" cellpadding="4">
+     * <thead>
+     * <tr>
+     * <th align ="center"colspan ="2"> <code> getPrefixes(namespaceURI)</code>为指定的命名空间URI返回值</th>
+     * </tr>
+     * <tr>
+     *  <th>命名空间URI参数</th> <th>返回的前缀值</th>
+     * </tr>
+     * </thead>
+     * <tbody>
+     * <tr>
+     *  <td>绑定的命名空间URI,包括&lt;默认命名空间URI&gt; </td>
+     * 
      * @param namespaceURI URI of Namespace to lookup
      *
      * @return <code>Iterator</code> for all prefixes bound to the

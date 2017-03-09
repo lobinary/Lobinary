@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,10 @@ import static com.sun.jmx.defaults.JmxProperties.MBEANSERVER_LOGGER;
 /**
  * This class is the MBean implementation of the MBeanServerDelegate.
  *
+ * <p>
+ *  此类是MBeanServerDelegate的MBean实现。
+ * 
+ * 
  * @since 1.5
  */
 final class MBeanServerDelegateImpl
@@ -127,6 +132,10 @@ final class MBeanServerDelegateImpl
     /**
      * Obtains the value of a specific attribute of the MBeanServerDelegate.
      *
+     * <p>
+     *  获取MBeanServerDelegate的特定属性的值。
+     * 
+     * 
      * @param attribute The name of the attribute to be retrieved
      *
      * @return  The value of the attribute retrieved.
@@ -182,6 +191,10 @@ final class MBeanServerDelegateImpl
      * This method always fail since all MBeanServerDelegateMBean attributes
      * are read-only.
      *
+     * <p>
+     *  此方法总是失败,因为所有MBeanServerDelegateMBean属性都是只读的。
+     * 
+     * 
      * @param attribute The identification of the attribute to
      * be set and  the value it is to be set to.
      *
@@ -219,6 +232,10 @@ final class MBeanServerDelegateImpl
      * Makes it possible to get the values of several attributes of
      * the MBeanServerDelegate.
      *
+     * <p>
+     *  使得可以获取MBeanServerDelegate的几个属性的值。
+     * 
+     * 
      * @param attributes A list of the attributes to be retrieved.
      *
      * @return  The list of attributes retrieved.
@@ -262,6 +279,10 @@ final class MBeanServerDelegateImpl
      * This method always return an empty list since all
      * MBeanServerDelegateMBean attributes are read-only.
      *
+     * <p>
+     *  此方法总是返回一个空列表,因为所有MBeanServerDelegateMBean属性都是只读的。
+     * 
+     * 
      * @param attributes A list of attributes: The identification of the
      * attributes to be set and  the values they are to be set to.
      *
@@ -276,6 +297,10 @@ final class MBeanServerDelegateImpl
     /**
      * Always fails since the MBeanServerDelegate MBean has no operation.
      *
+     * <p>
+     *  始终失败,因为MBeanServerDelegate MBean没有操作。
+     * 
+     * 
      * @param actionName The name of the action to be invoked.
      * @param params An array containing the parameters to be set when the
      *        action is invoked.
@@ -311,6 +336,9 @@ final class MBeanServerDelegateImpl
     /**
      * Provides the MBeanInfo describing the MBeanServerDelegate.
      *
+     * <p>
+     *  提供描述MBeanServerDelegate的MBeanInfo。
+     * 
      * @return  The MBeanInfo describing the MBeanServerDelegate.
      *
      */

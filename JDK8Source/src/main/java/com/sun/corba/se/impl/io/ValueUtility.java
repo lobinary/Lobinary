@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.io;
@@ -51,6 +55,9 @@ import javax.rmi.CORBA.ValueHandler;
 /**
  * Holds utility methods for converting from ObjectStreamClass to
  * FullValueDescription and generating typecodes from ObjectStreamClass.
+ * <p>
+ *  保存用于从ObjectStreamClass转换为FullValueDescription并从ObjectStreamClass生成类型代码的实用程序方法。
+ * 
  **/
 public class ValueUtility {
 

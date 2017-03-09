@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package javax.script;
  * The optional interface implemented by ScriptEngines whose methods allow the invocation of
  * procedures in scripts that have previously been executed.
  *
+ * <p>
+ *  由ScriptEngines实现的可选接口,其方法允许在先前已执行的脚本中调用过程。
+ * 
+ * 
  * @author  Mike Grogan
  * @author  A. Sundararajan
  * @since 1.6
@@ -38,6 +43,10 @@ public interface Invocable  {
      * Calls a method on a script object compiled during a previous script execution,
      * which is retained in the state of the <code>ScriptEngine</code>.
      *
+     * <p>
+     *  调用在上一个脚本执行期间编译的脚本对象上的方法,该方法保留在<code> ScriptEngine </code>的状态。
+     * 
+     * 
      * @param name The name of the procedure to be called.
      *
      * @param thiz If the procedure is a member  of a class
@@ -63,6 +72,10 @@ public interface Invocable  {
     /**
      * Used to call top-level procedures and functions defined in scripts.
      *
+     * <p>
+     *  用于调用在脚本中定义的顶级过程和函数。
+     * 
+     * 
      * @param name of the procedure or function to call
      * @param args Arguments to pass to the procedure or function
      * @return The value returned by the procedure or function
@@ -80,6 +93,10 @@ public interface Invocable  {
      * the interpreter. The methods of the interface
      * may be implemented using the <code>invokeFunction</code> method.
      *
+     * <p>
+     *  使用解释器中编译的函数返回接口的实现。可以使用<code> invokeFunction </code>方法来实现接口的方法。
+     * 
+     * 
      * @param <T> the type of the interface to return
      * @param clasz The <code>Class</code> object of the interface to return.
      *
@@ -97,6 +114,9 @@ public interface Invocable  {
      * a scripting object compiled in the interpreter. The methods of the
      * interface may be implemented using the <code>invokeMethod</code> method.
      *
+     * <p>
+     *  返回接口的实现,使用在解释器中编译的脚本对象的成员函数。接口的方法可以使用<code> invokeMethod </code>方法来实现。
+     * 
      * @param <T> the type of the interface to return
      * @param thiz The scripting object whose member functions are used to implement the methods of the interface.
      * @param clasz The <code>Class</code> object of the interface to return.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -24,6 +25,7 @@
  */
 
 /*
+/* <p>
  */
 
 package java.nio.channels.spi;
@@ -79,6 +81,27 @@ import sun.nio.ch.Interruptible;
  * other threads that might be attempting to close the channel.  </p>
  *
  *
+ * <p>
+ *  可中断通道的基本实现类。
+ * 
+ *  <p>此类封装了实现异步关闭和中断通道所需的低级机制。
+ * 具体的通道类必须分别调用{@ link #begin begin}和{@link #end end}方法之前和之后调用可能无限阻塞的I / O操作。
+ * 为了确保始终调用{@link #end end}方法,应在<tt> try </tt>&nbsp; ...&nbsp; <tt> finally </tt>块中使用这些方法：。
+ * 
+ *  <blockquote> <pre> boolean completed = false; try {begin(); completed = ...; //执行阻塞I / O操作return ...; // Return result}
+ *  finally {end(completed); } </pre> </blockquote>。
+ * 
+ *  <p> {@link #end end}方法的<tt>完成</tt>参数指示I / O操作是否实际完成,即是否具有调用程序可见的任何效果。
+ * 例如,在读取字节的操作的情况下,此参数应为<tt> true </tt> if,且仅当某些字节实际上传输到调用器的目标缓冲区中时。
+ * 
+ * <p>具体的通道类必须以这样一种方式实现{@link #implCloseChannel implCloseChannel}方法,即如果在通道上的另一个线程在本地I / O操作中被阻塞时被调用,那么该操
+ * 作将立即返回,通过抛出异常或正常返回。
+ * 如果一个线程被中断或被阻塞的通道被异步关闭,那么通道的{@link #end end}方法将抛出相应的异常。
+ * 
+ *  <p>此类执行实现{@link java.nio.channels.Channel}规范所需的同步。
+ *  {@link #implCloseChannel implCloseChannel}方法的实施不需要与可能尝试关闭频道的其他线程同步。 </p>。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -93,6 +116,9 @@ public abstract class AbstractInterruptibleChannel
 
     /**
      * Initializes a new instance of this class.
+     * <p>
+     *  初始化此类的新实例。
+     * 
      */
     protected AbstractInterruptibleChannel() { }
 
@@ -104,6 +130,12 @@ public abstract class AbstractInterruptibleChannel
      * the {@link #implCloseChannel implCloseChannel} method in order to
      * complete the close operation.  </p>
      *
+     * <p>
+     *  关闭此频道。
+     * 
+     *  <p>如果频道已关闭,则此方法会立即返回。否则,它将该通道标记为已关闭,然后调用{@link #implCloseChannel implCloseChannel}方法以完成关闭操作。 </p>
+     * 
+     * 
      * @throws  IOException
      *          If an I/O error occurs
      */
@@ -129,6 +161,15 @@ public abstract class AbstractInterruptibleChannel
      * immediately, either by throwing an exception or by returning normally.
      * </p>
      *
+     * <p>
+     *  关闭此频道。
+     * 
+     *  <p>此方法由{@link #close close}方法调用,以便执行关闭渠道的实际工作。仅当通道尚未关闭时才调用此方法,并且它不会被多次调用。
+     * 
+     * <p>此方法的实现必须安排在此通道上的I / O操作中阻塞的任何其他线程通过抛出异常或正常返回立即返回。
+     * </p>
+     * 
+     * 
      * @throws  IOException
      *          If an I/O error occurs while closing the channel
      */
@@ -151,6 +192,13 @@ public abstract class AbstractInterruptibleChannel
      * method, using a <tt>try</tt>&nbsp;...&nbsp;<tt>finally</tt> block as
      * shown <a href="#be">above</a>, in order to implement asynchronous
      * closing and interruption for this channel.  </p>
+     * <p>
+     *  标记可能无限阻止的I / O操作的开始。
+     * 
+     *  <p>此方法应与{@link #end end}方法一起调用,使用<tt> try </tt>&nbsp; ...&nbsp; <tt> finally </tt> a href ="#be"> </a>
+     * ,以便为此频道实现异步关闭和中断。
+     *  </p>。
+     * 
      */
     protected final void begin() {
         if (interruptor == null) {
@@ -181,6 +229,11 @@ public abstract class AbstractInterruptibleChannel
      * as shown <a href="#be">above</a>, in order to implement asynchronous
      * closing and interruption for this channel.  </p>
      *
+     * <p>
+     *  标记可能无限阻止的I / O操作的结束。
+     * 
+     *  <p>此方法应与{@link #begin begin}方法一起调用,使用<tt> try </tt>&nbsp; ...&nbsp; <tt> finally </tt> a href ="#be"
+     * 
      * @param  completed
      *         <tt>true</tt> if, and only if, the I/O operation completed
      *         successfully, that is, had some effect that would be visible to

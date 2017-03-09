@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import java.util.Iterator;
  * Section 1.2 of The Java Language to IDL Mapping.  Note that
  * these are static checks only.  Runtime checks, such as those
  * described in Section 1.2.3, #3, are not covered.
+ * <p>
+ *  用于测试RMI / IDL类型的实用程序类,如Java语言到IDL映射的第1.2节中所定义。请注意,这些仅是静态检查。运行时检查,如第1.2.3节,#3中所述,不包括。
+ * 
  */
 public final class IDLTypesUtil {
 
@@ -52,6 +56,9 @@ public final class IDLTypesUtil {
      * is<NAME> is the property and get<NAME> is left alone,
      * but rmic does the opposite.  We will follow rmic in this,
      * but it's easy to change.
+     * <p>
+     *  about是<NAME> / get <NAME>冲突。规范说,是<NAME>是属性,并获得<NAME>独自一人,但rmic正好相反。我们将在这里跟随rmic,但它很容易改变。
+     * 
      */
     public static final boolean FOLLOW_RMIC = true ;
 
@@ -59,6 +66,10 @@ public final class IDLTypesUtil {
      * Validate a class to ensure it conforms to the rules for a
      * Java RMI/IIOP interface.
      *
+     * <p>
+     *  验证类以确保它符合Java RMI / IIOP接口的规则。
+     * 
+     * 
      * @throws IDLTypeException if not a valid RMI/IIOP interface.
      */
     public void validateRemoteInterface(Class c) throws IDLTypeException
@@ -107,6 +118,9 @@ public final class IDLTypesUtil {
 
     /**
      * Section 1.2.2 Primitive Types
+     * <p>
+     *  第1.2.2节基本类型
+     * 
      */
     public boolean isPrimitive(Class c)
     {
@@ -119,6 +133,9 @@ public final class IDLTypesUtil {
 
     /**
      * Section 1.2.4
+     * <p>
+     *  第1.2.4节
+     * 
      */
     public boolean isValue(Class c)
     {
@@ -134,6 +151,9 @@ public final class IDLTypesUtil {
 
     /**
      * Section 1.2.5
+     * <p>
+     *  第1.2.5节
+     * 
      */
     public boolean isArray(Class c)
     {
@@ -156,6 +176,9 @@ public final class IDLTypesUtil {
 
     /**
      * Section 1.2.6
+     * <p>
+     *  第1.2.6节
+     * 
      */
     public boolean isException(Class c)
     {
@@ -190,6 +213,9 @@ public final class IDLTypesUtil {
 
     /**
      * Section 1.2.7
+     * <p>
+     *  第1.2.7节
+     * 
      */
     public boolean isObjectReference(Class c)
     {
@@ -203,6 +229,9 @@ public final class IDLTypesUtil {
 
     /**
      * Section 1.2.8
+     * <p>
+     *  第1.2.8节
+     * 
      */
     public boolean isEntity(Class c)
     {
@@ -219,6 +248,9 @@ public final class IDLTypesUtil {
     /**
      * Return true if given method is legal property accessor as defined in
      * Section 1.3.4.3 of Java2IDL spec.
+     * <p>
+     *  如果给定方法是Java2IDL规范的第1.3.4.3节中定义的合法属性访问器,则返回true。
+     * 
      */
     public boolean isPropertyAccessorMethod(Method m, Class c) {
 
@@ -369,6 +401,9 @@ public final class IDLTypesUtil {
     /**
      * Return IDL Type name for primitive types as defined in
      * Section 1.3.3 of Java2IDL spec or null if not a primitive type.
+     * <p>
+     *  返回IDL Java2IDL规范第1.3.3节中定义的基本类型的类型名称,如果不是基本类型,则为null。
+     * 
      */
     public IDLType getPrimitiveIDLTypeMapping(Class c) {
 
@@ -405,6 +440,9 @@ public final class IDLTypesUtil {
      * Return IDL Type name for special case type mappings as defined in
      * Table 1-1 of Java2IDL spec or null if given class is not a special
      * type.
+     * <p>
+     *  返回IDL Java2IDL规范的表1-1中定义的特殊情况类型映射的类型名称,如果给定类不是特殊类型,则返回null。
+     * 
      */
     public IDLType getSpecialCaseIDLTypeMapping(Class c) {
 
@@ -439,6 +477,9 @@ public final class IDLTypesUtil {
 
     /**
      * Implements 1.2.3 #2 and #4
+     * <p>
+     *  实现1.2.3#2和#4
+     * 
      */
     private void validateExceptions(Method method) throws IDLTypeException {
 
@@ -486,6 +527,10 @@ public final class IDLTypesUtil {
      * restrictions for properties as defined in Section 1.3.4.3 of
      * Java2IDL spec.  This means that for all exceptions E declared on the
      * method, E isChecked => RemoteException.isAssignableFrom( E ).
+     * <p>
+     *  如果方法的throw子句符合Java2IDL规范的第1.3.4.3节中定义的属性的异常限制,则返回true。
+     * 这意味着对于在方法上声明的所有异常E,E isChecked => RemoteException.isAssignableFrom(E)。
+     * 
      */
     private boolean validPropertyExceptions(Method method)
     {
@@ -503,6 +548,9 @@ public final class IDLTypesUtil {
 
     /**
      * Implements Section 1.2.3, #2.
+     * <p>
+     *  实施第1.2.3节,#2。
+     * 
      */
     private boolean isRemoteExceptionOrSuperClass(Class c) {
         return
@@ -514,6 +562,9 @@ public final class IDLTypesUtil {
 
     /**
      * Implements Section 1.2.3, #5.
+     * <p>
+     *  实施第1.2.3节,#5。
+     * 
      */
     private void validateDirectInterfaces(Class c) throws IDLTypeException {
 
@@ -557,6 +608,8 @@ public final class IDLTypesUtil {
 
     /**
      * Implements 1.2.3 #6
+     * <p>
+     *  实现1.2.3#6
      */
     private void validateConstants(final Class c)
         throws IDLTypeException {

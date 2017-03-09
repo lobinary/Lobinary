@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -26,6 +27,10 @@ package org.omg.PortableServer;
 	 * context of a method dispatched by the POA to obtain 
 	 * the POA and ObjectId that identify the object on 
 	 * which that operation was invoked.
+	 * <p>
+	 *  PortableServer :: Current接口派生自CORBA :: Current,提供了访问方法被调用的对象的标识的方法实现。
+	 *  Current接口用于支持实现多个对象的服务,但可以在任何服务方上调用POA方法调用的上下文中使用。为了提供位置透明度,需要ORB在本地和远程调用操作的上下文中支持使用Current。
+	 * 通过发出CORBA :: ORB :: resolve_initial_references("POACurrent")操作,应用程序可以获取Current的实例。
 	 */
 public interface Current extends CurrentOperations, org.omg.CORBA.Current, org.omg.CORBA.portable.IDLEntity 
 {

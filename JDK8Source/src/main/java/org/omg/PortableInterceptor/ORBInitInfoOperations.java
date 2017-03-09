@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -20,6 +21,15 @@ package org.omg.PortableInterceptor;
    * <code>ORB.init</code> returns, the object no longer exists and an 
    * <code>OBJECT_NOT_EXIST</code> exception shall be thrown.
    *
+   * <p>
+   *  传递到每个<code> ORBInitializer </code>,允许它在ORB初始化时注册拦截器并执行其他职责。
+   * <p>
+   *  <code> ORBInitInfo </code>对象仅在<code> ORB.init </code>中有效。
+   * 如果服务保持对其<code> ORBInitInfo </code>对象的引用,并尝试在<code> ORB.init </code>返回后使用它,该对象不再存在,并且<code> OBJECT_NOT
+   * _EXIST </code>异常应抛出。
+   *  <code> ORBInitInfo </code>对象仅在<code> ORB.init </code>中有效。
+   * 
+   * 
    * @see ORBInitializer
    */
 public interface ORBInitInfoOperations 
@@ -28,11 +38,17 @@ public interface ORBInitInfoOperations
   /** 
      * Returns the arguments passed to <code>ORB.init</code>.  They may or
      * may not contain the ORB's arguments.
+     * <p>
+     *  返回传递给<code> ORB.init </code>的参数。它们可能包含或不包含ORB的参数。
+     * 
      */
   String[] arguments ();
 
   /** 
      * Returns the ID of the ORB being initialized.
+     * <p>
+     *  返回要初始化的ORB的ID。
+     * 
      */
   String orb_id ();
 
@@ -44,6 +60,12 @@ public interface ORBInitInfoOperations
      * processing service contexts, will require a <code>Codec</code>, a 
      * means of obtaining a <code>Codec</code> is necessary during ORB 
      * initialization.
+     * <p>
+     *  返回<code> IOP.CodecFactory </code>。
+     * 通常通过调用<code> ORB.resolve_initial_references("CodecFactory")</code>获得<code> CodecFactory </code>,但由于OR
+     * B尚不可用,并且拦截器,特别是在处理服务上下文时需要<code> Codec </code>,在ORB初始化期间需要获取<code> Codec </code>的方法。
+     *  返回<code> IOP.CodecFactory </code>。
+     * 
      */
   org.omg.IOP.CodecFactory codec_factory ();
 
@@ -57,6 +79,13 @@ public interface ORBInitInfoOperations
      * (<code>CORBA.ORB.InvalidName</code>) whereas the version in this 
      * interface uses IDL defined in this interface; the semantics are 
      * identical.
+     * <p>
+     * 与<code> ORB.register_initial_reference </code>相同。
+     * 此处存在相同的功能,因为尚未完全初始化的ORB尚不可用,但初始引用可能需要作为Interceptor注册的一部分注册。
+     * 唯一的区别是ORB上此操作的版本使用PIDL(<code> CORBA.ORB.ObjectId </code>)和(<code> CORBA.ORB.InvalidName </code>),而此接口
+     * 中的版本使用此接口中定义的IDL;语义是相同的。
+     * 此处存在相同的功能,因为尚未完全初始化的ORB尚不可用,但初始引用可能需要作为Interceptor注册的一部分注册。
+     * 
      */
   void register_initial_reference (String id, org.omg.CORBA.Object obj) throws org.omg.PortableInterceptor.ORBInitInfoPackage.InvalidName;
 
@@ -72,6 +101,15 @@ public interface ORBInitInfoOperations
      * are identical.
      * <p>
      * This operation is only valid during post_init.
+     * <p>
+     *  与<code> ORB.resolve_initial_references </code>相同。
+     * 此处存在相同的功能,因为尚未完全初始化的ORB尚不可用,但是作为Interceptor注册的一部分,可能需要从ORB初始引用。
+     * 唯一的区别是ORB上的这个操作的版本使用PIDL(<code> CORBA :: ORB :: ObjectId </code>和<code> CORBA :: ORB :: InvalidName </code>
+     * ),此接口使用此接口中定义的IDL;语义是相同的。
+     * 此处存在相同的功能,因为尚未完全初始化的ORB尚不可用,但是作为Interceptor注册的一部分,可能需要从ORB初始引用。
+     * <p>
+     *  此操作仅在post_init中有效。
+     * 
      */
   org.omg.CORBA.Object resolve_initial_references (String id) throws org.omg.PortableInterceptor.ORBInitInfoPackage.InvalidName;
 
@@ -79,6 +117,10 @@ public interface ORBInitInfoOperations
      * Used to add a client-side request Interceptor to the list of 
      * client-side request Interceptors.  
      *
+     * <p>
+     *  用于向客户端请求拦截器列表添加客户端请求拦截器。
+     * 
+     * 
      * @param interceptor The <code>ClientRequestInterceptor</code> to be 
      *     added.
      * @exception DuplicateName thrown if a client-side request Interceptor 
@@ -90,6 +132,10 @@ public interface ORBInitInfoOperations
      * Used to add a server-side request Interceptor to the list of 
      * server-side request Interceptors.
      *
+     * <p>
+     *  用于向服务器端请求拦截器列表添加服务器端请求拦截器。
+     * 
+     * 
      * @param interceptor The ServerRequestInterceptor to be added.
      * @exception DuplicateName thrown if a server-side request Interceptor 
      *     has already been registered with this Interceptor's name
@@ -99,6 +145,10 @@ public interface ORBInitInfoOperations
   /**
      * Used to add an IOR Interceptor to the list of IOR Interceptors. 
      *
+     * <p>
+     *  用于向IOR拦截器列表中添加IOR拦截器。
+     * 
+     * 
      * @param interceptor The IORInterceptor to be added.
      * @exception DuplicateName thrown if an IOR Interceptor has already 
      *     been registered with this Interceptor's name. 
@@ -111,6 +161,12 @@ public interface ORBInitInfoOperations
      * Note that while slot id's can be allocated within an ORB initializer, 
      * the slots themselves cannot be initialized. 
      *
+     * <p>
+     *  调用在<code> PortableInterceptor.Current </code>上分配一个插槽。
+     * <p>
+     * 注意,虽然可以在ORB初始化器中分配槽id,但是槽本身不能被初始化。
+     * 
+     * 
      * @return The index to the slot which has been allocated.
      * @exception BAD_INV_ORDER thrown, with a standard minor code of 14, if 
      *     <code>set_slot</code> or <code>get_slot</code> is called on the 
@@ -122,6 +178,8 @@ public interface ORBInitInfoOperations
   /**
      * Registers a <code>PolicyFactory</code> for the given 
      * <code>PolicyType</code>. 
+     * 
+     * <p>
      * 
      * @param type The policy type that the given <code>PolicyFactory</code> 
      *     serves. 

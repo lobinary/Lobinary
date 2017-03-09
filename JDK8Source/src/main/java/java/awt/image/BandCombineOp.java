@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,19 @@ import java.util.Arrays;
  *
  * <p>
  * Note that the source and destination can be the same object.
+ * <p>
+ *  该类使用指定的矩阵在<CODE> Raster </CODE>中执行带的任意线性组合。
+ * <p>
+ *  矩阵的宽度必须等于源<CODE> Raster </CODE>中的波段数,可选加1。如果在矩阵中比带的数目多一个列,则在表示像素的带样本的向量的端部处存在1。矩阵的高度必须等于目标中的带数。
+ * <p>
+ *  例如,3带的<CODE>光栅</CODE>可能具有应用于每个像素的以下变换,以便反转<CODE>光栅</CODE>的第二频带。
+ * <pre>
+ *  [1.0 0.0 0.0 0.0] [b1] [0.0 -1.0 0.0 255.0] x [b2] [0.0 0.0 1.0 0.0] [b3] [1]
+ * </pre>
+ * 
+ * <p>
+ *  注意,源和目标可以是同一个对象。
+ * 
  */
 public class BandCombineOp implements  RasterOp {
     float[][] matrix;
@@ -77,6 +91,13 @@ public class BandCombineOp implements  RasterOp {
      * defined rendering hints; the <CODE>RenderingHints</CODE> argument can be
      * null.
      *
+     * <p>
+     *  用指定的矩阵构造一个<CODE> BandCombineOp </CODE>。矩阵的宽度必须等于源<CODE> Raster </CODE>中的波段数,可选加1。
+     * 如果在矩阵中比带的数目多一个列,则在表示像素的带样本的向量的端部处存在1。矩阵的高度必须等于目标中的带数。
+     * <p>
+     * 第一个下标是行索引,第二个是列索引。此操作不使用当前定义的呈现提示; <CODE> RenderingHints </CODE>参数可以为null。
+     * 
+     * 
      * @param matrix The matrix to use for the band combine operation.
      * @param hints The <CODE>RenderingHints</CODE> object for this operation.
      * Not currently used so it can be null.
@@ -90,6 +111,9 @@ public class BandCombineOp implements  RasterOp {
              * too short, but it is also faster than other cloning
              * methods, so we provide our own protection for short
              * matrix rows.
+             * <p>
+             *  太短,但它也比其他克隆方法更快,因此我们为短矩阵行提供自己的保护。
+             * 
              */
             if (ncols > matrix[i].length) {
                 throw new IndexOutOfBoundsException("row "+i+" too short");
@@ -102,6 +126,10 @@ public class BandCombineOp implements  RasterOp {
     /**
      * Returns a copy of the linear combination matrix.
      *
+     * <p>
+     *  返回线性组合矩阵的副本。
+     * 
+     * 
      * @return The matrix associated with this band combine operation.
      */
     public final float[][] getMatrix() {
@@ -122,6 +150,13 @@ public class BandCombineOp implements  RasterOp {
      * equalling the number of rows in the matrix. No exception is thrown
      * if the operation causes a data overflow.
      *
+     * <p>
+     *  使用构造函数中指定的矩阵转换<CODE> Raster </CODE>。如果源或目标中的带数与矩阵不兼容,则可能会抛出<CODE> IllegalArgumentException </CODE>。
+     * 有关更多详细信息,请参阅课堂评论。
+     * <p>
+     *  如果目的地为空,则将创建具有等于矩阵中的行数的多个频带。如果操作导致数据溢出,则不抛出异常。
+     * 
+     * 
      * @param src The <CODE>Raster</CODE> to be filtered.
      * @param dst The <CODE>Raster</CODE> in which to store the results
      * of the filter operation.
@@ -211,6 +246,11 @@ public class BandCombineOp implements  RasterOp {
      * bands in the source is incompatible with the matrix.  See
      * the class comments for more details.
      *
+     * <p>
+     *  返回已转换目标的边界框。由于这不是几何操作,所以边界框对于源和目标是相同的。如果源中的波段数与矩阵不兼容,则可能会抛出<CODE> IllegalArgumentException </CODE>。
+     * 有关更多详细信息,请参阅课堂评论。
+     * 
+     * 
      * @param src The <CODE>Raster</CODE> to be filtered.
      *
      * @return The <CODE>Rectangle2D</CODE> representing the destination
@@ -231,6 +271,11 @@ public class BandCombineOp implements  RasterOp {
      * bands in the source is incompatible with the matrix.  See
      * the class comments for more details.
      *
+     * <p>
+     *  使用正确的大小和带数创建一个归零目的地<CODE> Raster </CODE>。
+     * 如果源中的波段数与矩阵不兼容,则可能会抛出<CODE> IllegalArgumentException </CODE>。有关更多详细信息,请参阅课堂评论。
+     * 
+     * 
      * @param src The <CODE>Raster</CODE> to be filtered.
      *
      * @return The zeroed destination <CODE>Raster</CODE>.
@@ -261,6 +306,11 @@ public class BandCombineOp implements  RasterOp {
      * Since this is not a geometric operation, the point returned
      * is the same as the specified <CODE>srcPt</CODE>.
      *
+     * <p>
+     * 返回给定源中<CODE>栅格</CODE>中的点的相应目标点的位置。如果指定<CODE> dstPt </CODE>,它将用于保存返回值。
+     * 由于这不是几何操作,返回的点与指定的<CODE> srcPt </CODE>相同。
+     * 
+     * 
      * @param srcPt The <code>Point2D</code> that represents the point in
      *              the source <code>Raster</code>
      * @param dstPt The <CODE>Point2D</CODE> in which to store the result.
@@ -280,6 +330,8 @@ public class BandCombineOp implements  RasterOp {
     /**
      * Returns the rendering hints for this operation.
      *
+     * <p>
+     * 
      * @return The <CODE>RenderingHints</CODE> object associated with this
      * operation.  Returns null if no hints have been set.
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,21 +54,37 @@ import javax.swing.RepaintManager;
  * This is a second part of sun.swing.SwingUtilities2. It is required
  * to provide services for JavaFX applets.
  *
+ * <p>
+ *  Swing的实用程序方法的集合。
+ * <p>
+ *  <b>警告：</b>虽然此类是公开的,但不应被视为公共API,并且其API可能在点dot发行版甚至是补丁发行版之间以不可兼容的方式发生变化。你不应该依赖这个类甚至存在。
+ * 
+ *  这是sun.swing.SwingUtilities2的第二部分。它需要为JavaFX applet提供服务。
+ * 
  */
 public class SwingUtilities3 {
     /**
      * The {@code clientProperty} key for delegate {@code RepaintManager}
+     * <p>
+     *  委托的{@code clientProperty}键{@code RepaintManager}
+     * 
      */
     private static final Object DELEGATE_REPAINT_MANAGER_KEY =
         new StringBuilder("DelegateRepaintManagerKey");
 
     /**
       * Registers delegate RepaintManager for {@code JComponent}.
+      * <p>
+      *  注册委派RepaintManager为{@code JComponent}。
+      * 
       */
     public static void setDelegateRepaintManager(JComponent component,
                                                 RepaintManager repaintManager) {
         /* setting up flag in AppContext to speed up lookups in case
          * there are no delegate RepaintManagers used.
+         * <p>
+         *  没有委托RepaintManagers使用。
+         * 
          */
         AppContext.getAppContext().put(DELEGATE_REPAINT_MANAGER_KEY,
                                        Boolean.TRUE);
@@ -88,6 +105,13 @@ public class SwingUtilities3 {
      * depends on current RepaintManager's RepaintManager.PaintManager
      * and on the capabilities of the graphics hardware/software and what not.
      *
+     * <p>
+     *  为{@code rootContainer}设置vsyncRequested状态。
+     * 如果{@code isRequested}为{@code true},则会为此{@code rootContainer}启用vsynced {@code BufferStrategy}。
+     * 
+     *  注意：请求vsynced绘画不保证一个。结果取决于当前的RepaintManager的RepaintManager.PaintManager和图形硬件/软件的功能,什么不。
+     * 
+     * 
      * @param rootContainer topmost container. Should be either {@code Window}
      *  or {@code Applet}
      * @param isRequested the value to set vsyncRequested state to
@@ -105,6 +129,10 @@ public class SwingUtilities3 {
     /**
      * Checks if vsync painting is requested for {@code rootContainer}
      *
+     * <p>
+     *  检查是否为{@code rootContainer}请求VSync绘图
+     * 
+     * 
      * @param rootContainer topmost container. Should be either Window or Applet
      * @return {@code true} if vsync painting is requested for {@code rootContainer}
      */
@@ -115,6 +143,9 @@ public class SwingUtilities3 {
 
     /**
      * Returns delegate {@code RepaintManager} for {@code component} hierarchy.
+     * <p>
+     *  为{@code component}层次结构返回委托{@code RepaintManager}。
+     * 
      */
     public static RepaintManager getDelegateRepaintManager(Component
                                                             component) {
@@ -141,6 +172,8 @@ public class SwingUtilities3 {
     /*
      * We use maps to avoid reflection. Hopefully it should perform better
      * this way.
+     * <p>
+     *  我们使用地图避免反射。希望它应该这样做更好。
      */
     public static void setEventQueueDelegate(
             Map<String, Map<String, Object>> map) {

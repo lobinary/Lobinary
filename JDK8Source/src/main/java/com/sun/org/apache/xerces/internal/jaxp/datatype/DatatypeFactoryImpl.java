@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp.datatype;
@@ -56,6 +66,33 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *    </li>
  * </ol>
  *
+ * <p>
+ *  <p>工厂创建新的<code> javax.xml.datatype </code> <code>对象</code>,将XML映射到/从Java <code> Object </code>
+ * 
+ *  <p id ="DatatypeFactory.newInstance"> {@ link #newInstance()}用于创建新的<code> DatatypeFactory </code>。
+ * 以下执行解决机制按以下顺序使用：</p>。
+ * <ol>
+ * <li>
+ *  如果存在由{@link #DATATYPEFACTORY_PROPERTY},"<code> javax.xml.datatype.DatatypeFactory </code>"指定的系统属性,则实
+ * 例化具有属性值的名称的类。
+ * 在实例化过程中抛出的任何异常都将作为{@link DatatypeConfigurationException}打包。
+ * </li>
+ * <li>
+ * 如果文件$ {JAVA_HOME} /lib/jaxp.properties存在,则将其加载到{@link java.util.Properties} <code> Object </code>中。
+ * 然后查询<code> Properties </code> <code> Object </code>中的属性,如上一步骤中所述,并按照上一步骤中所述进行处理。
+ * </li>
+ * <li>
+ *  使用服务解析机制,例如。 <code> META-INF / services / java.xml.datatype.DatatypeFactory </code>。
+ * 在实例化过程中抛出的任何异常都将作为{@link DatatypeConfigurationException}打包。
+ * </li>
+ * <li>
+ *  最终机制是尝试实例化由{@link #DATATYPEFACTORY_IMPLEMENTATION_CLASS},"<code> javax.xml.datatype.DatatypeFactoryI
+ * mpl </code>"指定的<code> Class </code>。
+ * 在实例化过程中抛出的任何异常都将作为{@link DatatypeConfigurationException}打包。
+ * </li>
+ * </ol>
+ * 
+ * 
  * @author <a href="mailto:Joseph.Fialli@Sun.COM">Joseph Fialli</a>
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  * @version $Id: DatatypeFactoryImpl.java,v 1.6 2010/05/19 05:02:55 joehw Exp $
@@ -67,6 +104,11 @@ public class DatatypeFactoryImpl
          * <p>Public constructor is empty..</p>
          *
          * <p>Use {@link DatatypeFactory#newInstance()} to create a <code>DatatypeFactory</code>.</p>
+         * <p>
+         *  <p>公共构造函数为空。</p>
+         * 
+         *  <p>使用{@link DatatypeFactory#newInstance()}创建<code> DatatypeFactory </code>。</p>
+         * 
          */
         public DatatypeFactoryImpl() {
         }
@@ -91,6 +133,22 @@ public class DatatypeFactoryImpl
      * An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
      * if implementation capacities are exceeded.</p>
      *
+     * <p>
+     *  <p>获取<code> Duration </code>的一个新实例,指定<code> Duration </code>作为其字符串表示形式"PnYnMnDTnHnMnS",如XML Schema 1
+     * .0第3.2.6.1节中所定义。
+     * </p >。
+     * 
+     *  <p> XML模式第2部分：数据类型,3.2.6 duration,将<code> duration </code>定义为</p>
+     * <blockquote>
+     * 持续时间表示持续时间。持续时间的值空间是一个六维空间,其中坐标分别指定[ISO 8601]第5.5.3.2节中定义的格里高利年,月,日,小时,分和秒成分。
+     * 这些组分按它们的重要性按它们的出现顺序排序,即作为年,月,日,小时,分钟和秒。
+     * </blockquote>
+     *  <p>所有六个值均已设置,并可从创建的{@link Duration} </p>中获得
+     * 
+     *  <p> XML模式规范说明值可以是任意大小。实现可以选择不支持或不能支持任意大和/或小的值。
+     * 如果超出实施容量,将抛出{@link UnsupportedOperationException}并显示实施限制的信息。</p>。
+     * 
+     * 
          * @param lexicalRepresentation <code>String</code> representation of a <code>Duration</code>.
          *
          * @return New <code>Duration</code> created from parsing the <code>lexicalRepresentation</code>.
@@ -135,6 +193,29 @@ public class DatatypeFactoryImpl
          * e.g. leap years have different days in the month = {@link java.util.Calendar#FEBRUARY}
          * so the result of {@link Duration#getMonths()} and {@link Duration#getDays()} can be influenced.</p>
          *
+         * <p>
+         *  <p>获取<code> Duration </code>的新实例,指定<code> Duration </code>为毫秒。</p>
+         * 
+         *  <p> XML模式第2部分：数据类型,3.2.6 duration,将<code> duration </code>定义为</p>
+         * <blockquote>
+         *  持续时间表示持续时间。持续时间的值空间是一个六维空间,其中坐标分别指定[ISO 8601]第5.5.3.2节中定义的格里高利年,月,日,小时,分和秒成分。
+         * 这些组分按它们的重要性按它们的出现顺序排序,即作为年,月,日,小时,分钟和秒。
+         * </blockquote>
+         * <p>所有六个值都是通过从指定的毫秒计算它们的值来设置的,并且可以使用所创建的{@link Duration}的<code> get </code>方法。值符合并由以下定义：</p>
+         * <ul>
+         *  <li> ISO 8601：2000(E)第5.5.3.2节替代格式</li> <li> <a href="http://www.w3.org/TR/xmlschema-2/#isoformats">
+         *  W3C XML Schema 1.0第2部分,附录D,ISO 8601日期和时间格式</a>。
+         * </li>
+         *  <li> {@ link XMLGregorianCalendar}日期/时间XML模式1.0与Java表示之间的数据类型字段映射</li>
+         * </ul>
+         * 
+         *  <p>默认的开始实例由{@link GregorianCalendar}使用时代的开始来定义：例如{@link java.util.Calendar#YEAR} = 1970,{@link java.util.Calendar# MONTH}
+         *  = {@link java.util.Calendar#JANUARY},{@link java.util.Calendar#DATE} = 1等。
+         * 这很重要,因为公历日历中有变化,例如闰年在当月有不同的日期= {@link java.util.Calendar#FEBRUARY},因此{@link Duration#getMonths()}和{@link Duration#getDays()}
+         * 的结果可能会受到影响。
+         * </p >。
+         * 
+         * 
          * @param durationInMilliseconds Duration in milliseconds to create.
          *
          * @return New <code>Duration</code> representing <code>durationInMilliseconds</code>.
@@ -153,6 +234,13 @@ public class DatatypeFactoryImpl
      * An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
      * if implementation capacities are exceeded.</p>
      *
+     * <p>
+     *  <p>获取<code> Duration </code>的一个新实例,将<code> Duration </code>指定为isPositive,年,月,日,小时,分钟,秒。
+     * 
+     * <p> XML模式规范说明值可以是任意大小。实现可以选择不支持或不能支持任意大和/或小的值。
+     * 如果超出实施容量,将抛出{@link UnsupportedOperationException}并显示实施限制的消息。</p>。
+     * 
+     * 
          * @param isPositive Set to <code>false</code> to create a negative duration. When the length
          *   of the duration is zero, this parameter will be ignored.
          * @param years of this <code>Duration</code>
@@ -203,6 +291,18 @@ public class DatatypeFactoryImpl
      *
      * <p>A <code>null</code> value indicates that field is not set.</p>
      *
+     * <p>
+     *  <p>使用<code>年</code>和<code>月</code>定义的<code> xdt：yearMonthDuration </code>类型创建<code> Duration </code>
+     * 。
+     * <a href="http://www.w3.org/TR/xpath-datamodel#yearMonthDuration">
+     *  XQuery 1.0和XPath 2.0数据模型,xdt：yearMonthDuration </a>。</p>
+     * 
+     *  <p> XML模式规范说明值可以是任意大小。实现可以选择不支持或不能支持任意大和/或小的值。
+     * 如果超出实施容量,将抛出{@link UnsupportedOperationException}并显示实施限制的消息。</p>。
+     * 
+     *  <p> <code> null </code>值表示未设置字段。</p>
+     * 
+     * 
      * @param isPositive Set to <code>false</code> to create a negative duration. When the length
      *   of the duration is zero, this parameter will be ignored.
          * @param year Year of <code>Duration</code>.
@@ -235,6 +335,15 @@ public class DatatypeFactoryImpl
          *
      * <p>A {@link DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.</p>
      *
+     * <p>
+     *  <p>使用<code>年</code>和<code>月</code>定义的<code> xdt：yearMonthDuration </code>类型创建<code> Duration </code>
+     * 。
+     * <a href="http://www.w3.org/TR/xpath-datamodel#yearMonthDuration">
+     *  XQuery 1.0和XPath 2.0数据模型,xdt：yearMonthDuration </a>。</p>
+     * 
+     *  <p> {@link DatatypeConstants#FIELD_UNDEFINED}值表示未设置字段。</p>
+     * 
+     * 
      * @param isPositive Set to <code>false</code> to create a negative duration. When the length
      *   of the duration is zero, this parameter will be ignored.
          * @param year Year of <code>Duration</code>.
@@ -273,6 +382,21 @@ public class DatatypeFactoryImpl
      * An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
      * if implementation capacities are exceeded.</p>
      *
+     * <p>
+     * <p>通过解析<code> String </code>表示形式,"<em> PnYnM </em>",创建<code> xdt：yearMonthDuration </code>类型的<code> D
+     * uration </code> a href ="http://www.w3.org/TR/xpath-datamodel#yearMonthDuration"> XQuery 1.0和XPath 2.
+     * 0数据模型,xdt：yearMonthDuration </a>。
+     * </p>。
+     * 
+     *  <p>数据类型<code> xdt：yearMonthDuration </code>是<code> xs：duration </code>的子类型,其词法表示仅包含年份和月份组件。
+     * 此数据类型位于命名空间{@link javax.xml.XMLConstants#W3C_XPATH_DATATYPE_NS_URI}中。</p>。
+     * 
+     *  <p>这两个值都已设置,并可从创建的{@link Duration} </p>获取
+     * 
+     *  <p> XML模式规范说明值可以是任意大小。实现可以选择不支持或不能支持任意大和/或小的值。
+     * 如果超出实施容量,将抛出{@link UnsupportedOperationException}并显示实施限制的消息。</p>。
+     * 
+     * 
          * @param lexicalRepresentation Lexical representation of a duration.
          *
          * @return New <code>Duration</code> created using the specified <code>lexicalRepresentation</code>.
@@ -317,6 +441,31 @@ public class DatatypeFactoryImpl
          *
      * <p>Any remaining milliseconds after determining the year and month are discarded.</p>
          *
+         * <p>
+         *  <p>使用<code> xdt：yearMonthDuration </code>类型创建<code> Duration </code>
+         * <a href="http://www.w3.org/TR/xpath-datamodel#yearMonthDuration">
+         *  XQuery 1.0和XPath 2.0数据模型,xdt：yearMonthDuration </a>。</p>
+         * 
+         *  <p>数据类型<code> xdt：yearMonthDuration </code>是<code> xs：duration </code>的子类型,其词法表示仅包含年份和月份组件。
+         * 此数据类型位于命名空间{@link javax.xml.XMLConstants#W3C_XPATH_DATATYPE_NS_URI}中。</p>。
+         * 
+         * <p>这两个值都是通过从指定的毫秒计算它们的值来设置的,并且可以使用所创建的{@link Duration}的<code> get </code>方法。值符合并由以下定义：</p>
+         * <ul>
+         *  <li> ISO 8601：2000(E)第5.5.3.2节替代格式</li> <li> <a href="http://www.w3.org/TR/xmlschema-2/#isoformats">
+         *  W3C XML Schema 1.0第2部分,附录D,ISO 8601日期和时间格式</a>。
+         * </li>
+         *  <li> {@ link XMLGregorianCalendar}日期/时间XML模式1.0与Java表示之间的数据类型字段映射</li>
+         * </ul>
+         * 
+         *  <p>默认的开始实例由{@link GregorianCalendar}使用时代的开始来定义：例如{@link java.util.Calendar#YEAR} = 1970,{@link java.util.Calendar# MONTH}
+         *  = {@link java.util.Calendar#JANUARY},{@link java.util.Calendar#DATE} = 1等。
+         * 这很重要,因为公历日历中有变化,例如闰年在不同的日期= {@link java.util.Calendar#FEBRUARY},因此{@link Duration#getMonths()}的结果可能会受
+         * 到影响。
+         * </p>。
+         * 
+         *  <p>确定年份和月份后的任何剩余毫秒将被舍弃。</p>
+         * 
+         * 
          * @param durationInMilliseconds Milliseconds of <code>Duration</code> to create.
          *
          * @return New <code>Duration</code> created using the specified <code>durationInMilliseconds</code>.
@@ -343,6 +492,21 @@ public class DatatypeFactoryImpl
      * An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
      * if implementation capacities are exceeded.</p>
      *
+     * <p>
+     *  <p>通过解析其<code> String </code>表示形式,"<em> PnDTnHnMnS </em>",创建<code> xdt：dayTimeDuration </code>类型的<code>
+     *  Duration </code> a href ="http://www.w3.org/TR/xpath-datamodel#dayTimeDuration"> XQuery 1.0和XPath 2.
+     * 0数据模型,xdt：dayTimeDuration </a>。
+     * </p>。
+     * 
+     * <P>数据类型<代码> XDT：dayTimeDuration </代码>是<代码> XS的子类型：持续时间</代码>的词汇表示只包含日,小时,分钟和秒组成。
+     * 此数据类型位于命名空间<code> http://www.w3.org/2003/11/xpath-datatypes </code>中。</p>。
+     * 
+     *  <p>所有四个值都已设置,并可从创建的{@link Duration} </p>中获得
+     * 
+     *  <p> XML模式规范说明值可以是任意大小。实现可以选择不支持或不能支持任意大和/或小的值。
+     * 如果超出实施容量,将抛出{@link UnsupportedOperationException}并显示实施限制的消息。</p>。
+     * 
+     * 
          * @param lexicalRepresentation Lexical representation of a duration.
          *
          * @return New <code>Duration</code> created using the specified <code>lexicalRepresentation</code>.
@@ -392,6 +556,31 @@ public class DatatypeFactoryImpl
          *
      * <p>Any remaining milliseconds after determining the day, hour, minute and second are discarded.</p>
      *
+     * <p>
+     *  <p>使用指定的毫秒数创建<code> xdt：dayTimeDuration </code>类型的<code> Duration </code>
+     * <a href="http://www.w3.org/TR/xpath-datamodel#dayTimeDuration">
+     *  XQuery 1.0和XPath 2.0数据模型,xdt：dayTimeDuration </a>。</p>
+     * 
+     *  <P>数据类型<代码> XDT：dayTimeDuration </代码>是<代码> XS的子类型：持续时间</代码>的词汇表示只包含日,小时,分钟和秒组成。
+     * 此数据类型位于命名空间<code> http://www.w3.org/2003/11/xpath-datatypes </code>中。</p>。
+     * 
+     *  <p>通过从指定的毫秒计算它们的值来设置所有四个值,并且可以使用所创建的{@link Duration}的<code> get </code>方法。值符合并由以下定义：</p>
+     * <ul>
+     * <li> ISO 8601：2000(E)第5.5.3.2节替代格式</li> <li> <a href="http://www.w3.org/TR/xmlschema-2/#isoformats"> 
+     * W3C XML Schema 1.0第2部分,附录D,ISO 8601日期和时间格式</a>。
+     * </li>
+     *  <li> {@ link XMLGregorianCalendar}日期/时间XML模式1.0与Java表示之间的数据类型字段映射</li>
+     * </ul>
+     * 
+     *  <p>默认的开始实例由{@link GregorianCalendar}使用时代的开始来定义：例如{@link java.util.Calendar#YEAR} = 1970,{@link java.util.Calendar# MONTH}
+     *  = {@link java.util.Calendar#JANUARY},{@link java.util.Calendar#DATE} = 1等。
+     * 这很重要,因为公历日历中有变化,例如闰年在月份中有不同的日期= {@link java.util.Calendar#FEBRUARY},因此{@link Duration#getDays()}的结果可能
+     * 会受到影响。
+     * </p>。
+     * 
+     *  <p>确定日,小时,分和秒后的任何剩余毫秒将被舍弃。</p>
+     * 
+     * 
          * @param durationInMilliseconds Milliseconds of <code>Duration</code> to create.
          *
          * @return New <code>Duration</code> created with the specified <code>durationInMilliseconds</code>.
@@ -421,6 +610,21 @@ public class DatatypeFactoryImpl
      *
      * <p>A <code>null</code> value indicates that field is not set.</p>
      *
+     * <p>
+     *  <p>使用指定的<code> day </code>,<code>小时</code>,<code>分钟创建<code> xdt：dayTimeDuration </code>类型的<code> Dur
+     * ation </code> </code>和<code> second </code>中定义。
+     * <a href="http://www.w3.org/TR/xpath-datamodel#dayTimeDuration">
+     *  XQuery 1.0和XPath 2.0数据模型,xdt：dayTimeDuration </a>。</p>
+     * 
+     *  <P>数据类型<代码> XDT：dayTimeDuration </代码>是<代码> XS的子类型：持续时间</代码>的词汇表示只包含日,小时,分钟和秒组成。
+     * 此数据类型位于命名空间<code> http://www.w3.org/2003/11/xpath-datatypes </code>中。</p>。
+     * 
+     * <p> XML模式规范说明值可以是任意大小。实现可以选择不支持或不能支持任意大和/或小的值。
+     * 如果超出实施容量,将抛出{@link UnsupportedOperationException}并显示实施限制的消息。</p>。
+     * 
+     *  <p> <code> null </code>值表示未设置字段。</p>
+     * 
+     * 
      * @param isPositive Set to <code>false</code> to create a negative duration. When the length
      *   of the duration is zero, this parameter will be ignored.
          * @param day Day of <code>Duration</code>.
@@ -464,6 +668,18 @@ public class DatatypeFactoryImpl
          *
      * <p>A {@link DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.</p>
      *
+     * <p>
+     *  <p>使用指定的<code> day </code>,<code>小时</code>,<code>分钟创建<code> xdt：dayTimeDuration </code>类型的<code> Dur
+     * ation </code> </code>和<code> second </code>中定义。
+     * <a href="http://www.w3.org/TR/xpath-datamodel#dayTimeDuration">
+     *  XQuery 1.0和XPath 2.0数据模型,xdt：dayTimeDuration </a>。</p>
+     * 
+     *  <P>数据类型<代码> XDT：dayTimeDuration </代码>是<代码> XS的子类型：持续时间</代码>的词汇表示只包含日,小时,分钟和秒组成。
+     * 此数据类型位于命名空间<code> http://www.w3.org/2003/11/xpath-datatypes </code>中。</p>。
+     * 
+     *  <p> {@link DatatypeConstants#FIELD_UNDEFINED}值表示未设置字段。</p>
+     * 
+     * 
      * @param isPositive Set to <code>false</code> to create a negative duration. When the length
      *   of the duration is zero, this parameter will be ignored.
          * @param day Day of <code>Duration</code>.
@@ -498,6 +714,12 @@ public class DatatypeFactoryImpl
          *
      * <p>All date/time datatype fields set to {@link DatatypeConstants#FIELD_UNDEFINED} or null.</p>
      *
+     * <p>
+     *  <p>创建<code> XMLGregorianCalendar </code>的新实例。</p>
+     * 
+     *  <p>所有日期/时间数据类型字段设置为{@link DatatypeConstants#FIELD_UNDEFINED}或null。</p>
+     * 
+     * 
      * @return New <code>XMLGregorianCalendar</code> with all date/time datatype fields set to
      *   {@link DatatypeConstants#FIELD_UNDEFINED} or null.
          */
@@ -524,6 +746,23 @@ public class DatatypeFactoryImpl
      * listed in <a href="http://www.w3.org/2001/05/xmlschema-errata#e2-45">
      * XML Schema 1.0 errata, Section 3.2.7.2</a>.</p>
          *
+         * <p>
+         *  <p>通过将String解析为词法表示来创建新的XMLGregorianCalendar。</p>
+         * 
+         *  <p>解析词法字符串表示形式的定义在<a href="http://www.w3.org/TR/xmlschema-2/#dateTime-order"> XML模式1.0第2部分,第3.2节。
+         * [7- 。
+         * 
+         * <p>字符串表示可能没有任何前导和尾随空格。</p>
+         * 
+         *  <p>解析是逐字段完成的,因此对于任何词法正确的字符串x：</p>都适用
+         * <pre>
+         *  newXMLGregorianCalendar(x).toXMLFormat()。equals(x)
+         * </pre>
+         *  <p>除了<a href="http://www.w3.org/2001/05/xmlschema-errata#e2-45"> XML Schema 1.0勘误表,第3.2节中列出的注意到的词汇/规
+         * 范表示不匹配。
+         *  7.2 </a>。</p>。
+         * 
+         * 
          * @param lexicalRepresentation Lexical representation of one the eight XML Schema date/time datatypes.
          *
          * @return <code>XMLGregorianCalendar</code> created from the <code>lexicalRepresentation</code>.
@@ -592,6 +831,34 @@ public class DatatypeFactoryImpl
          * for the host is defined as specified by
          * <code>java.util.TimeZone.getDefault()</code>.</li></p>
          *
+         * <p>
+         *  <p>从{@link GregorianCalendar}创建<code> XMLGregorianCalendar </code>。</p>
+         * 
+         * <table border="2" rules="all" cellpadding="2">
+         * <thead>
+         * <tr>
+         * <th align="center" colspan="2">
+         *  字段从{@link GregorianCalendar}转换为{@link XMLGregorianCalendar}
+         * </th>
+         * </tr>
+         * <tr>
+         *  <th> <code> java.util.GregorianCalendar </code>字段</th> <th> <code> javax.xml.datatype.XMLGregorianCa
+         * lendar </code>。
+         * </tr>
+         * </thead>
+         * <tbody>
+         * <tr>
+         *  <td> <code> ERA == GregorianCalendar.BC? -YEAR：YEAR </code> </td> <td> {@ link XMLGregorianCalendar#setYear(int year)}
+         *  </td>。
+         * </tr>
+         * <tr>
+         *  <td> <code> MONTH + 1 </code> </td> <td> {@ link XMLGregorianCalendar#setMonth(int month)} </td>
+         * </tr>
+         * <tr>
+         *  <td> <code> DAY_OF_MONTH </code> </td> <td> {@ link XMLGregorianCalendar#setDay(int day)} </td>
+         * </tr>
+         * <tr>
+         * 
          * @param cal <code>java.util.GregorianCalendar</code> used to create <code>XMLGregorianCalendar</code>
          *
          * @return <code>XMLGregorianCalendar</code> created from <code>java.util.GregorianCalendar</code>
@@ -610,6 +877,21 @@ public class DatatypeFactoryImpl
          * arbitrarily large numbers and fractionalSecond has infinite
          * precision.</p>
          *
+         * <p>
+         *  <td> <code> HOUR_OF_DAY,MINUTE,SECOND,MILLISECOND </code> </td> <td> {@ link XMLGregorianCalendar#setTime(int hour,int minute,int second,BigDecimal fractional)}
+         *  </td>。
+         * </tr>
+         * <tr>
+         * <td>
+         *  <code>(ZONE_OFFSET + DST_OFFSET)/(60 * 1000)</code> <br/> <em>(以分钟为单位)</em>
+         * </td>
+         *  <td> {@ link XMLGregorianCalendar#setTimezone(int offset)} <sup> <em> * </em> </sup>
+         * </td>
+         * </tr>
+         * </tbody>
+         * </table>
+         * <p> <em> * </em>信息的转化丢失。
+         * 
          * @param year of <code>XMLGregorianCalendar</code> to be created.
          * @param month of <code>XMLGregorianCalendar</code> to be created.
          * @param day of <code>XMLGregorianCalendar</code> to be created.

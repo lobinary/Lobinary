@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,13 @@ import javax.swing.plaf.*;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  提供在Motif / CDE文本LAF实现中常见的外观和感觉功能。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class MotifTextUI {
@@ -50,6 +58,10 @@ public class MotifTextUI {
      * Creates the object to use for a caret for all of the Motif
      * text components.  The caret is rendered as an I-beam on Motif.
      *
+     * <p>
+     *  创建用于所有Motif文本组件的插入符的对象。插入符号在Motif上显示为工字形。
+     * 
+     * 
      * @return the caret object
      */
     public static Caret createCaret() {
@@ -65,6 +77,12 @@ public class MotifTextUI {
      * for short term storage or RMI between applications running the same
      * version of Swing.  A future release of Swing will provide support for
      * long term persistence.
+     * <p>
+     *  主题插入符号被渲染为I梁。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     * 未来的Swing版本将为长期持久性提供支持。
+     * 
      */
     public static class MotifCaret extends DefaultCaret implements UIResource {
 
@@ -74,6 +92,10 @@ public class MotifTextUI {
          * so the focus rectangle will be re-rendered, as well
          * as providing the superclass behavior.
          *
+         * <p>
+         *  当包含插入符号的组件获得焦点时调用。这是实现重绘的组件,所以焦点矩形将重新渲染,以及提供超类的行为。
+         * 
+         * 
          * @param e the focus event
          * @see FocusListener#focusGained
          */
@@ -87,6 +109,10 @@ public class MotifTextUI {
          * focus.  This is implemented to set the caret to visibility
          * to false.
          *
+         * <p>
+         *  当包含插入符号的组件失去焦点时调用。这被实现来设置插入符的可见性为false。
+         * 
+         * 
          * @param e the focus event
          * @see FocusListener#focusLost
          */
@@ -100,6 +126,10 @@ public class MotifTextUI {
          * it to be repainted.  If paint() is reimplemented,
          * this method should also be reimplemented.
          *
+         * <p>
+         * 损坏插入点周围的区域,使其重新绘制。如果paint()被重新实现,这个方法也应该重新实现。
+         * 
+         * 
          * @param r  the current location of the caret, does nothing if null
          * @see #paint
          */
@@ -120,6 +150,11 @@ public class MotifTextUI {
          * is false.  The caret color is derived from getCaretColor() if
          * the component has focus, else from getDisabledTextColor().
          *
+         * <p>
+         *  将插入符号呈现为垂直线。如果重新实现,损坏方法也应重新实现,因为它假定插入符的形状是垂直线。如果isVisible()为false,则不执行任何操作。
+         * 如果组件具有焦点,则从getCaretColor()派生脱字符号,否则从getDisabledTextColor()派生。
+         * 
+         * 
          * @param g the graphics context
          * @see #damage
          */
@@ -152,6 +187,7 @@ public class MotifTextUI {
 
     /**
      * Default bindings all keymaps implementing the Motif feel.
+     * <p>
      */
     static final JTextComponent.KeyBinding[] defaultBindings = {
         new JTextComponent.KeyBinding(KeyStroke.getKeyStroke(KeyEvent.VK_INSERT,

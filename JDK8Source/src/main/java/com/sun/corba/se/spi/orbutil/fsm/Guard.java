@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,8 @@ package com.sun.corba.se.spi.orbutil.fsm;
 
 /**
  *
+ * <p>
+ * 
  * @author Ken Cavanaugh
  */
 public interface Guard
@@ -93,6 +96,11 @@ public interface Guard
     * input is retried when the thread runs again.
     * </ul>
     *
+    * <p>
+    *  转换启用,禁用或禁用。结果解释如下：
+    * <ul>
+    *  <li>如果转换已准备好可以继续,则为ENABLED <li>如果转换尚未准备好继续,则为DISABLED <li>如果与转换相关联的操作将被延迟,则为DEFERED。
+    * 
     * @param FSM fsm is the state machine causing this action.
     * @param Input in is the input that caused the transition.
     */

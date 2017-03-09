@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,12 @@ import javax.security.auth.callback.CallbackHandler;
  * instead. However, a particular environment may provide and install a
  * new or different {@code SaslClientFactory}.
  *
+ * <p>
+ *  用于创建{@code SaslClient}实例的接口。实现此接口的类必须是线程安全的,并且处理多个并发请求。它还必须有一个不接受参数的公共构造函数。
+ * p>
+ *  此接口通常不由客户端直接访问,这将使用{@code Sasl}静态方法。然而,特定环境可以提供和安装新的或不同的{@code SaslClientFactory}。
+ * 
+ * 
  * @since 1.5
  *
  * @see SaslClient
@@ -52,6 +59,10 @@ public abstract interface SaslClientFactory {
     /**
      * Creates a SaslClient using the parameters supplied.
      *
+     * <p>
+     *  使用提供的参数创建SaslClient。
+     * 
+     * 
      * @param mechanisms The non-null list of mechanism names to try. Each is the
      * IANA-registered name of a SASL mechanism. (e.g. "GSSAPI", "CRAM-MD5").
      * @param authorizationId The possibly null protocol-dependent
@@ -98,6 +109,9 @@ public abstract interface SaslClientFactory {
     /**
      * Returns an array of names of mechanisms that match the specified
      * mechanism selection policies.
+     * <p>
+     *  返回与指定机制选择策略匹配的机制名称的数组。
+     * 
      * @param props The possibly null set of properties used to specify the
      * security policy of the SASL mechanisms. For example, if {@code props}
      * contains the {@code Sasl.POLICY_NOPLAINTEXT} property with the value

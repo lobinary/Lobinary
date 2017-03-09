@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -15,6 +16,7 @@ package org.omg.PortableServer;
 	 * exactly one Object Id.  MULTIPLE_ID - a servant 
 	 * activated with that POA may support one or more 
 	 * Object Ids.
+	 * <p>
 	 */
 public class IdUniquenessPolicyValue implements org.omg.CORBA.portable.IDLEntity
 {

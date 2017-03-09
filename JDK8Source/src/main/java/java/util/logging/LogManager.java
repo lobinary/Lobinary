@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -139,6 +140,60 @@ import sun.misc.SharedSecrets;
  * <p>
  * All methods on the LogManager object are multi-thread safe.
  *
+ * <p>
+ *  有一个单一的全局LogManager对象,用于维护一组关于记录器和日志服务的共享状态。
+ * <p>
+ *  这个LogManager对象：
+ * <ul>
+ *  <li>管理Logger对象的分层命名空间。所有命名的日志记录都存储在此命名空间中。 <li>管理一组日志记录控制属性。这些是简单的键值对,可以由Handlers和其他日志对象使用来配置自身。
+ * </ul>
+ * <p>
+ *  可以使用LogManager.getLogManager()检索全局LogManager对象。 LogManager对象在类初始化期间创建,随后不能更改。
+ * <p>
+ *  在启动时,LogManager类使用java.util.logging.manager系统属性进行定位。
+ * <p>
+ *  LogManager定义了两个可选的系统属性,允许控制初始配置：
+ * <ul>
+ *  <li>"java.util.logging.config.class"<li>"java.util.logging.config.file"
+ * </ul>
+ *  这两个属性可以在命令行上指定为"java"命令,或者作为系统属性定义传递给JNI_CreateJavaVM。
+ * <p>
+ * 如果设置了"java.util.logging.config.class"属性,那么属性值将被视为类名。给定的类将被加载,一个对象将被实例化,并且该对象的构造函数负责读取初始配置。
+ *  (该对象可以使用其他系统属性来控制其配置。)备用配置类可以使用<tt> readConfiguration(InputStream)</tt>在LogManager中定义属性。
+ * <p>
+ *  如果"java.util.logging.config.class"属性设置为<b>不</b>,那么可以使用"java.util.logging.config.file"系统属性来指定属性文件.uti
+ * l.Properties格式)。
+ * 将从此文件读取初始日志记录配置。
+ * <p>
+ *  如果这些属性都未定义,则LogManager使用其默认配置。默认配置通常从Java安装目录中的属性文件"{@code lib / logging.properties}"中加载。
+ * <p>
+ *  记录器和处理程序的属性将以处理程序或记录器的点分隔名称开头。
+ * <p>
+ *  全局日志记录属性可以包括：
+ * <ul>
+ *  <li>属性"处理程序"。这定义了处理程序类的空格或逗号分隔的类名称列表,以加载和注册为根记录器(Logger命名为"")上的处理程序。每个类名都必须是具有默认构造函数的Handler类。
+ * 请注意,这些处理程序可能会在首次使用时懒散地创建。
+ * 
+ * <li>属性"&lt; logger&gt; .handlers"。这定义了一个空格或逗号分隔的类名称列表,用于处理程序类加载和注册为指定的记录器的处理程序。
+ * 每个类名都必须是具有默认构造函数的Handler类。请注意,这些处理程序可能会在首次使用时懒散地创建。
+ * 
+ *  <li>属性"&lt; logger&gt; .useParentHandlers"。这定义了一个布尔值。
+ * 默认情况下,每个记录器除了处理日志消息本身之外还调用它的父节点,这通常导致消息被根记录器处理。将此属性设置为false时,需要为此记录器配置处理程序,否则不会传递日志记录消息。
+ * 
+ *  <li>属性"config"。此属性旨在允许运行任意配置代码。该属性定义了一个空格或逗号分隔的类名称列表。将为每个命名类创建一个新实例。
+ * 每个类的默认构造函数可以执行任意代码来更新日志记录配置,例如设置记录器级别,添加处理程序,添加过滤器等。
+ * </ul>
+ * <p>
+ *  请注意,在LogManager配置期间加载的所有类首先在任何用户类路径之前的系统类路径上搜索。这包括LogManager类,任何配置类和任何处理程序类。
+ * <p>
+ *  记录器被组织成基于它们的点分隔名称的命名层次结构。因此,"a.b.c"是"a.b"的子代,但"a.b1"和a.b2"是同位体。
+ * <p>
+ * 假设名称以".level"结尾的所有属性都定义记录器的日志级别。因此,"foo.level"为称为"foo"的日志记录定义日志级别,并为其命名层次结构中的任何子级定义(递归)。
+ * 日志级别按照在属性文件中定义的顺序应用。因此,树中子节点的级别设置应该在其父级的设置之后。属性名称".level"可用于设置树根的级别。
+ * <p>
+ *  LogManager对象上的所有方法都是多线程安全的。
+ * 
+ * 
  * @since 1.4
 */
 
@@ -217,6 +272,9 @@ public class LogManager {
         private Cleaner() {
             /* Set context class loader to null in order to avoid
              * keeping a strong reference to an application classloader.
+             * <p>
+             *  保持对应用程序类加载器的强引用。
+             * 
              */
             this.setContextClassLoader(null);
         }
@@ -246,6 +304,10 @@ public class LogManager {
      * (such as J2EE containers) can subclass the object.  It is non-public as
      * it is intended that there only be one LogManager object, whose value is
      * retrieved by calling LogManager.getLogManager.
+     * <p>
+     *  受保护的构造函数。这是受保护的,以便容器应用程序(如J2EE容器)可以子类化对象。
+     * 它是非公开的,因为它只打算有一个LogManager对象,其值通过调用LogManager.getLogManager检索。
+     * 
      */
     protected LogManager() {
         this(checkSubclassPermissions());
@@ -291,6 +353,15 @@ public class LogManager {
      * This is why ensureLogManagerInitialized() needs to be called before
      * any logger is added to any logger context.
      *
+     * <p>
+     *  延迟初始化：如果这个管理器实例是全局管理器,那么这个方法将读取初始配置,并通过调用addLogger()添加根记录器和全局记录器。
+     * 
+     *  注意,它与我们在LoggerContext中做的非常不同。在LoggerContext中,我们修补记录器上下文树以便将根和全局记录器*添加到上下文树*。
+     * 
+     *  为了这个工作,addLogger()必须已经在LogManager实例上被调用一次,以添加默认的记录器。
+     * 
+     *  这就是为什么在将任何记录器添加到任何记录器上下文之前,需要调用ensureLogManagerInitialized()。
+     * 
      */
     private boolean initializedCalled = false;
     private volatile boolean initializationDone = false;
@@ -371,6 +442,10 @@ public class LogManager {
 
     /**
      * Returns the global LogManager object.
+     * <p>
+     * 返回全局LogManager对象。
+     * 
+     * 
      * @return the global LogManager object
      */
     public static LogManager getLogManager() {
@@ -421,6 +496,13 @@ public class LogManager {
      * Profiles of Java SE that do not include the {@code java.beans} package.
      * </p>
      *
+     * <p>
+     *  添加在重新读取日志记录属性时要调用的事件侦听器。添加同一事件的多个实例侦听器会在属性事件侦听器表中产生多个条目。
+     * 
+     *  <p> <b>警告：</b>此方法在Java SE的所有子集配置文件中不包含{@code java.beans}包的此类中省略。
+     * </p>
+     * 
+     * 
      * @param l  event listener
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have LoggingPermission("control").
@@ -458,6 +540,18 @@ public class LogManager {
      * Profiles of Java SE that do not include the {@code java.beans} package.
      * </p>
      *
+     * <p>
+     *  删除属性更改事件的事件侦听器。
+     * 如果通过多次调用<CODE> addPropertyChangeListener </CODE>将相同的侦听器实例添加到侦听器实例中,则需要等效数量的<CODE> removePropertyChang
+     * eListener </CODE>调用来从该侦听器中删除所有实例监听器表。
+     *  删除属性更改事件的事件侦听器。
+     * <P>
+     *  如果找不到给定的侦听器,则以静默方式返回。
+     * 
+     *  <p> <b>警告：</b>此方法在Java SE的所有子集配置文件中不包含{@code java.beans}包的此类中省略。
+     * </p>
+     * 
+     * 
      * @param l  event listener (can be null)
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have LoggingPermission("control").
@@ -1147,6 +1241,14 @@ public class LogManager {
      * object to avoid it being garbage collected.  The LogManager
      * may only retain a weak reference.
      *
+     * <p>
+     *  添加命名的记录器。如果已注册具有相同名称的记录器,则此操作不执行任何操作,并返回false。
+     * <p>
+     *  Logger工厂方法调用此方法来注册每个新创建的Logger。
+     * <p>
+     *  应用程序应保留自己对Logger对象的引用,以避免其被垃圾回收。 LogManager只能保留弱引用。
+     * 
+     * 
      * @param   logger the new logger.
      * @return  true if the argument logger was registered successfully,
      *          false if a logger of that name already exists.
@@ -1219,6 +1321,13 @@ public class LogManager {
      * must check the return value for null in order to properly handle
      * the case where the Logger has been garbage collected.
      * <p>
+     * <p>
+     *  找到命名记录器的方法。
+     * <p>
+     * 请注意,由于不受信任的代码可能创建具有任意名称的记录器,因此不应依赖此方法来查找用于安全敏感日志记录的记录器。
+     * 还需要注意的是,与字符串{@code name}相关联的记录器可以在任何时候被垃圾收集,如果没有对记录器的强引用。该方法的调用者必须检查null的返回值,以便正确处理Logger已被垃圾回收的情况。
+     * <p>
+     * 
      * @param name name of the logger
      * @return  matching logger or null if none is found
      */
@@ -1240,6 +1349,16 @@ public class LogManager {
      * handle the case where the Logger has been garbage collected in the
      * time since its name was returned by this method.
      * <p>
+     * <p>
+     *  获取已知记录器名称的枚举。
+     * <p>
+     *  注意：记录器可以在加载新类时动态添加。此方法仅报告当前注册的记录器。还需要注意的是,这个方法只返回一个Logger的名字,而不是对Logger本身的强引用。
+     * 返回的String不会阻止Logger被垃圾回收。
+     * 特别是,如果返回的名称被传递给{@code LogManager.getLogger()},那么调用者必须检查来自{@code LogManager.getLogger()}的返回值为null,以正确处
+     * 理Logger已经在自此名称返回之后的时间内收集的垃圾。
+     * 返回的String不会阻止Logger被垃圾回收。
+     * <p>
+     * 
      * @return  enumeration of logger name strings
      */
     public Enumeration<String> getLoggerNames() {
@@ -1258,6 +1377,16 @@ public class LogManager {
      * <p>
      * A PropertyChangeEvent will be fired after the properties are read.
      *
+     * <p>
+     *  重新初始化日志记录属性并重新读取日志记录配置。
+     * <p>
+     *  相同的规则用于定位启动时使用的配置属性。因此通常,日志属性将从启动时使用的同一个文件中重新读取。
+     * <P>
+     * 如果目标Logger存在,将使用Logger.setLevel()应用新配置文件中的任何日志级定义。
+     * <p>
+     *  PropertyChangeEvent将在读取属性后触发。
+     * 
+     * 
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have LoggingPermission("control").
      * @exception  IOException if there are IO problems reading the configuration.
@@ -1311,6 +1440,12 @@ public class LogManager {
      * all Handlers and (except for the root logger) sets the level
      * to null.  The root logger's level is set to Level.INFO.
      *
+     * <p>
+     *  重置日志记录配置。
+     * <p>
+     *  对于所有命名的日志记录器,复位操作将删除并关闭所有处理程序,并且(根记录器除外)将级别设置为null。根记录器的级别设置为Level.INFO。
+     * 
+     * 
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have LoggingPermission("control").
      */
@@ -1396,6 +1531,12 @@ public class LogManager {
      * Any log level definitions in the new configuration file will be
      * applied using Logger.setLevel(), if the target Logger exists.
      *
+     * <p>
+     *  重新初始化日志记录属性并从给定流重新读取日志记录配置,它应该是java.util.Properties格式。 PropertyChangeEvent将在读取属性后触发。
+     * <p>
+     *  如果目标Logger存在,将使用Logger.setLevel()应用新配置文件中的任何日志级定义。
+     * 
+     * 
      * @param ins       stream to read properties from
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have LoggingPermission("control").
@@ -1456,6 +1597,10 @@ public class LogManager {
     /**
      * Get the value of a logging property.
      * The method returns null if the property is not found.
+     * <p>
+     *  获取logging属性的值。如果未找到该属性,该方法将返回null。
+     * 
+     * 
      * @param name      property name
      * @return          property value
      */
@@ -1593,6 +1738,12 @@ public class LogManager {
      * If the check fails we throw a SecurityException, otherwise
      * we return normally.
      *
+     * <p>
+     *  检查当前上下文是否受信任以修改日志记录配置。这需要LoggingPermission("control")。
+     * <p>
+     *  如果检查失败,我们抛出一个SecurityException异常,否则我们正常返回。
+     * 
+     * 
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have LoggingPermission("control").
      */
@@ -1704,6 +1855,10 @@ public class LogManager {
      * {@link javax.management.ObjectName} for the management interface
      * for the logging facility.
      *
+     * <p>
+     *  日志工具管理接口的{@link javax.management.ObjectName}的字符串表示形式。
+     * 
+     * 
      * @see java.lang.management.PlatformLoggingMXBean
      * @see java.util.logging.LoggingMXBean
      *
@@ -1722,6 +1877,15 @@ public class LogManager {
      *         ManagementFactory.getPlatformMXBean}(PlatformLoggingMXBean.class);
      * </pre>
      *
+     * <p>
+     *  返回<tt> LoggingMXBean </tt>用于管理记录器。
+     * 管理记录器的另一种方法是通过{@link java.lang.management.PlatformLoggingMXBean}接口,可以通过调用：。
+     * <pre>
+     * PlatformLoggingMXBean logging = {@link java.lang.management.ManagementFactory#getPlatformMXBean(Class)ManagementFactory.getPlatformMXBean}
+     * (PlatformLoggingMXBean.class);。
+     * </pre>
+     * 
+     * 
      * @return a {@link LoggingMXBean} object.
      *
      * @see java.lang.management.PlatformLoggingMXBean
@@ -1739,6 +1903,10 @@ public class LogManager {
      * and java.beans.PropertyChangeEvent without creating a static dependency
      * on java.beans. This class can be removed once the addPropertyChangeListener
      * and removePropertyChangeListener methods are removed.
+     * <p>
+     *  一个类,提供对java.beans.PropertyChangeListener和java.beans.PropertyChangeEvent的访问,而不对java.beans创建静态依赖关系。
+     * 除去addPropertyChangeListener和removePropertyChangeListener方法后,可以删除此类。
+     * 
      */
     private static class Beans {
         private static final Class<?> propertyChangeListenerClass =
@@ -1784,6 +1952,9 @@ public class LogManager {
 
         /**
          * Returns {@code true} if java.beans is present.
+         * <p>
+         *  如果java.beans存在,返回{@code true}。
+         * 
          */
         static boolean isBeansPresent() {
             return propertyChangeListenerClass != null &&
@@ -1793,6 +1964,9 @@ public class LogManager {
         /**
          * Returns a new PropertyChangeEvent with the given source, property
          * name, old and new values.
+         * <p>
+         *  返回一个新的PropertyChangeEvent与给定的源,属性名称,旧的和新的值。
+         * 
          */
         static Object newPropertyChangeEvent(Object source, String prop,
                                              Object oldValue, Object newValue)
@@ -1814,6 +1988,8 @@ public class LogManager {
         /**
          * Invokes the given PropertyChangeListener's propertyChange method
          * with the given event.
+         * <p>
+         *  使用给定的事件调用给定的PropertyChangeListener的propertyChange方法。
          */
         static void invokePropertyChange(Object listener, Object ev) {
             try {

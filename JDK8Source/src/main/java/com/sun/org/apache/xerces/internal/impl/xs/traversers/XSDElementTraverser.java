@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.traversers;
@@ -67,6 +77,17 @@ import org.w3c.dom.Element;
  *
  * @xerces.internal
  *
+ * <p>
+ *  元素声明模式组件遍历器。
+ *  <element abstract = boolean：false block =(#all | List of(extension | restriction | substitution))default = string final =(#all | List of(extension | restriction))fixed = string form =(qualified | unqualified) id = ID maxOccurs =(nonNegativeInteger | unbounded)：1 minOccurs = nonNegativeInteger：1 name = NCName nillable = boolean：false ref = QName substitutionGroup = QName type = QName。
+ *  元素声明模式组件遍历器。
+ * {any attributes with non-schema namespace . . .}>
+ *  内容：(annotation?,((simpleType | complexType)?,(unique | key | keyref)*))
+ * </element>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  *
  * @version $Id: XSDElementTraverser.java,v 1.9 2010-11-01 04:40:02 joehw Exp $
@@ -92,6 +113,12 @@ class XSDElementTraverser extends XSDAbstractTraverser {
      * later after we've done with all the global declarations.
      * This method causes a number of data structures in the schema handler to be filled in.
      *
+     * <p>
+     *  遍历本地声明的元素(或元素引用)。
+     * 
+     * 为了有效地处理递归情况,我们延迟遍历并返回一个空粒子节点。在我们完成所有的全局声明之后,我们将在稍后填充这个粒子节点。此方法会导致模式处理程序中的多个数据结构被填充。
+     * 
+     * 
      * @param  elmDecl
      * @param  schemaDoc
      * @param  grammar
@@ -142,6 +169,12 @@ class XSDElementTraverser extends XSDAbstractTraverser {
      * This is the real traversal method. It's called after we've done with
      * all the global declarations.
      *
+     * <p>
+     *  遍历本地声明的元素(或元素引用)。
+     * 
+     *  这是真正的遍历方法。在我们完成所有的全局声明后,它被调用。
+     * 
+     * 
      * @param  index
      */
     protected void traverseLocal(XSParticleDecl particle,
@@ -227,6 +260,10 @@ class XSDElementTraverser extends XSDAbstractTraverser {
     /**
      * Traverse a globally declared element.
      *
+     * <p>
+     *  遍历一个全局声明的元素。
+     * 
+     * 
      * @param  elmDecl
      * @param  schemaDoc
      * @param  grammar
@@ -248,6 +285,9 @@ class XSDElementTraverser extends XSDAbstractTraverser {
     /**
      * Traverse a globally declared element.
      *
+     * <p>
+     *  遍历一个全局声明的元素。
+     * 
      * @param  elmDecl
      * @param  attrValues
      * @param  schemaDoc

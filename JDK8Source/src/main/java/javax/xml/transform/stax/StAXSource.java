@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,15 @@ import javax.xml.transform.Source;
  * <p><code>StAXSource</code>s are consumed during processing
  * and are not reusable.</p>
  *
+ * <p>
+ *  <p>以StAX阅读器的形式作为XML {@link Source}的持有者,即。 {@link XMLStreamReader}或{@link XMLEventReader}。
+ *  <code> StAXSource </code>可用于所有接受<code> Source </code>的情况,例如{@link javax.xml.transform.Transformer},{@link javax.xml.validation.Validator}
+ * 接受<code> Source </code>作为输入。
+ *  <p>以StAX阅读器的形式作为XML {@link Source}的持有者,即。 {@link XMLStreamReader}或{@link XMLEventReader}。
+ * 
+ *  <p> <code> StAXSource </code>在处理期间消耗,不可重复使用。</p>
+ * 
+ * 
  * @author <a href="mailto:Neeraj.Bajaj@Sun.com">Neeraj Bajaj</a>
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  *
@@ -59,6 +69,9 @@ public class StAXSource implements Source {
     /** If {@link javax.xml.transform.TransformerFactory#getFeature(String name)}
      * returns true when passed this value as an argument,
      * the Transformer supports Source input of this type.
+     * <p>
+     *  当传递此值作为参数时返回true,Transformer支持此类型的Source输入。
+     * 
      */
     public static final String FEATURE =
         "http://javax.xml.transform.stax.StAXSource/feature";
@@ -83,6 +96,16 @@ public class StAXSource implements Source {
      * {@link XMLStreamConstants#START_DOCUMENT} or
      * {@link XMLStreamConstants#START_ELEMENT} state.</p>
      *
+     * <p>
+     *  <p>通过提供{@link XMLEventReader}来创建<code> StAXSource </code>的新实例。</p>
+     * 
+     *  <p> <code> XMLEventReader </code>必须是非<code> null </code>参考。</p>
+     * 
+     *  <p> <code> XMLEventReader </code>必须位于{@link XMLStreamConstants#START_DOCUMENT}或{@link XMLStreamConstants#START_ELEMENT}
+     * 状态。
+     * </p>。
+     * 
+     * 
      * @param xmlEventReader <code>XMLEventReader</code> used to create
      *   this <code>StAXSource</code>.
      *
@@ -133,6 +156,16 @@ public class StAXSource implements Source {
      * {@link XMLStreamConstants#START_DOCUMENT} or
      * {@link XMLStreamConstants#START_ELEMENT} state.</p>
      *
+     * <p>
+     *  <p>通过提供{@link XMLStreamReader},创建<code> StAXSource </code>的新实例。</p>
+     * 
+     *  <p> <code> XMLStreamReader </code>必须是非<code> null </code>参考。</p>
+     * 
+     *  <p> <code> XMLStreamReader </code>必须位于{@link XMLStreamConstants#START_DOCUMENT}或{@link XMLStreamConstants#START_ELEMENT}
+     * 状态。
+     * </p>。
+     * 
+     * 
      * @param xmlStreamReader <code>XMLStreamReader</code> used to create
      *   this <code>StAXSource</code>.
      *
@@ -170,6 +203,13 @@ public class StAXSource implements Source {
      * if this <code>StAXSource</code> was created with a
      * <code>XMLStreamReader</code>.</p>
      *
+     * <p>
+     *  <p>获取此<code> StAXSource </code>使用的<code> XMLEventReader </code>。</p>
+     * 
+     * <p> <code> XMLEventReader </code>将会是<code> null </code>。
+     * 如果这个<code> StAXSource </code>是用<code> XMLStreamReader </code>创建的。</p>。
+     * 
+     * 
      * @return <code>XMLEventReader</code> used by this
      *   <code>StAXSource</code>.
      */
@@ -186,6 +226,13 @@ public class StAXSource implements Source {
      * if this <code>StAXSource</code> was created with a
      * <code>XMLEventReader</code>.</p>
      *
+     * <p>
+     *  <p>获取此<st> <st> </code> </p>使用的<code> XMLStreamReader </code>
+     * 
+     *  如果使用<code> XMLEventReader </code>创建了<code> StAXSource </code>,<p> <code> XMLStreamReader </code>将会是<code>
+     *  null </code>。
+     * 
+     * 
      * @return <code>XMLStreamReader</code> used by this
      *   <code>StAXSource</code>.
      */
@@ -204,6 +251,15 @@ public class StAXSource implements Source {
      * <p>An {@link UnsupportedOperationException} is <strong>always</strong>
      * thrown by this method.</p>
      *
+     * <p>
+     *  <p>在<code> StAXSource </code>的上下文中,不适合显式设置系统标识符。
+     * 用于构造此<code> StAXSource </code>的<code> XMLStreamReader </code>或<code> XMLEventReader </code>确定XML源的系统标
+     * 识符。
+     *  <p>在<code> StAXSource </code>的上下文中,不适合显式设置系统标识符。</p>。
+     * 
+     *  <p>此方法会导致{@link UnsupportedOperationException} <strong>始终</strong>。</p>
+     * 
+     * 
      * @param systemId Ignored.
      *
      * @throws UnsupportedOperationException Is <strong>always</strong>
@@ -227,6 +283,12 @@ public class StAXSource implements Source {
      * <p>The system identifier may be <code>null</code> or
      * an empty <code>""</code> <code>String</code>.</p>
      *
+     * <p>
+     *  <p>获取此<code> StAXSource </code>使用的系统标识符。</p>
+     * 
+     *  <p>查询用于构造此<code> StAXSource </code>的<code> XMLStreamReader </code>或<code> XMLEventReader </code>,以确定
+     * XML源的系统标识符。
+     * 
      * @return System identifier used by this <code>StAXSource</code>.
      */
     public String getSystemId() {

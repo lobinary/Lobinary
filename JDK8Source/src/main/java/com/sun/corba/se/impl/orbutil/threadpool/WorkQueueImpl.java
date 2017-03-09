@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -173,6 +174,9 @@ public class WorkQueueImpl implements WorkQueue
      * Returns the total number of Work items added to the Queue.
      * This method is unsynchronized and only gives a snapshot of the
      * state when it is called
+     * <p>
+     *  返回添加到队列中的工作项的总数。此方法是不同步的,并且仅在调用时提供状态的快照
+     * 
      */
     public long totalWorkItemsAdded() {
         return workItemsAdded;
@@ -182,6 +186,8 @@ public class WorkQueueImpl implements WorkQueue
      * Returns the total number of Work items in the Queue to be processed
      * This method is unsynchronized and only gives a snapshot of the
      * state when it is called
+     * <p>
+     *  返回要处理的队列中的工作项的总数此方法未同步,并且仅提供调用时的状态快照
      */
     public int workItemsInQueue() {
         return theWorkQueue.size();

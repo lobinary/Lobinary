@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -34,6 +44,12 @@ import org.w3c.dom.TypeInfo;
  *
  * @xerces.internal
  *
+ * <p>
+ *  complexType模式组件的XML表示形式是一个<complexType>元素信息项
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Elena Litani, IBM
  * @author Sandy Gao, IBM
  * @version $Id: XSComplexTypeDecl.java,v 1.8 2010-11-01 04:39:55 joehw Exp $
@@ -256,6 +272,11 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * and derivation method. See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     *  检查类型是否派生自给定的名称,命名空间和派生方法。
+     * 参见：http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -339,6 +360,11 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * restriction, list ir union. See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     *  通过限制,列表ir union的任意组合检查类型是否派生自另一个类型。
+     * 参见：http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -385,6 +411,11 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * Checks if a type is derived from another by restriction. See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     *  检查类型是否通过限制从另一个派生。
+     * 参见：http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -447,6 +478,11 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * Checks if a type is derived from another by extension. See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     * 检查类型是否通过扩展名从另一个派生。
+     * 参见：http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -545,6 +581,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
 
     /**
      * Get the type of the object, i.e ELEMENT_DECLARATION.
+     * <p>
+     *  获取对象的类型,即ELEMENT_DECLARATION。
+     * 
      */
     public short getType() {
         return XSConstants.TYPE_DEFINITION;
@@ -553,6 +592,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
     /**
      * The <code>name</code> of this <code>XSObject</code> depending on the
      * <code>XSObject</code> type.
+     * <p>
+     *  取决于<code> XSObject </code>类型的<code> XSObject </code>的<code> name </code>
+     * 
      */
     public String getName() {
         return getAnonymous() ? null : fName;
@@ -562,6 +604,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * A boolean that specifies if the type definition is anonymous.
      * Convenience attribute. This is a field is not part of
      * XML Schema component model.
+     * <p>
+     *  指定类型定义是否为匿名的布尔值。便利属性。这是一个字段不是XML Schema组件模型的一部分。
+     * 
      */
     public boolean getAnonymous() {
         return((fMiscFlags & CT_IS_ANONYMOUS) != 0);
@@ -571,6 +616,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * The namespace URI of this node, or <code>null</code> if it is
      * unspecified.  defines how a namespace URI is attached to schema
      * components.
+     * <p>
+     *  此节点的名称空间URI,或<code> null </code>(如果未指定)。定义命名空间URI如何附加到模式组件。
+     * 
      */
     public String getNamespace() {
         return fTargetNamespace;
@@ -579,6 +627,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
     /**
      * {base type definition} Either a simple type definition or a complex
      * type definition.
+     * <p>
+     *  {base type definition}简单类型定义或复杂类型定义。
+     * 
      */
     public XSTypeDefinition getBaseType() {
         return fBaseType;
@@ -587,6 +638,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
     /**
      * {derivation method} Either extension or restriction. The valid constant
      * value for this <code>XSConstants</code> EXTENTION, RESTRICTION.
+     * <p>
+     *  {衍生法}扩展或限制。这个<code> XSConstants </code> EXTENTION,RESTRICTION的有效常量值。
+     * 
      */
     public short getDerivationMethod() {
         return fDerivedBy;
@@ -596,6 +650,10 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * {final} For complex type definition it is a subset of {extension,
      * restriction}. For simple type definition it is a subset of
      * {extension, list, restriction, union}.
+     * <p>
+     *  {final}对于复杂类型定义,它是{extension,restriction}的子集。对于简单的类型定义,它是{extension,list,restriction,union}的子集。
+     * 
+     * 
      * @param derivation  Extension, restriction, list, union constants
      *   (defined in <code>XSConstants</code>).
      * @return True if derivation is in the final set, otherwise false.
@@ -607,6 +665,10 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
     /**
      * {final} For complex type definition it is a subset of {extension, restriction}.
      *
+     * <p>
+     *  {final}对于复杂类型定义,它是{extension,restriction}的子集。
+     * 
+     * 
      * @return A bit flag that represents:
      *         {extension, restriction) or none for complexTypes;
      *         {extension, list, restriction, union} or none for simpleTypes;
@@ -619,6 +681,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * {abstract} A boolean. Complex types for which {abstract} is true must
      * not be used as the {type definition} for the validation of element
      * information items.
+     * <p>
+     *  {abstract}布尔值。不能将{abstract}为真的复杂类型用作元素信息项验证的{type definition}。
+     * 
      */
     public boolean getAbstract() {
         return((fMiscFlags & CT_IS_ABSTRACT) != 0);
@@ -626,6 +691,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
 
     /**
      *  {attribute uses} A set of attribute uses.
+     * <p>
+     *  {attribute uses}一组属性使用。
+     * 
      */
     public XSObjectList getAttributeUses() {
         return fAttrGrp.getAttributeUses();
@@ -633,6 +701,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
 
     /**
      * {attribute wildcard} Optional. A wildcard.
+     * <p>
+     *  {attribute wildcard}可选。通配符。
+     * 
      */
     public XSWildcard getAttributeWildcard() {
         return fAttrGrp.getAttributeWildcard();
@@ -642,6 +713,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
      * {content type} One of empty, a simple type definition (see
      * <code>simpleType</code>, or mixed, element-only (see
      * <code>cmParticle</code>).
+     * <p>
+     *  {content type}一个空,一个简单的类型定义(参见<code> simpleType </code>或混合,仅元素(参见<code> cmParticle </code>)。
+     * 
      */
     public short getContentType() {
         return fContentType;
@@ -650,6 +724,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
     /**
      * A simple type definition corresponding to simple content model,
      * otherwise <code>null</code>
+     * <p>
+     * 一个简单的类型定义对应于简单的内容模型,否则<code> null </code>
+     * 
      */
     public XSSimpleTypeDefinition getSimpleType() {
         return fXSSimpleType;
@@ -658,6 +735,9 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
     /**
      * A particle for mixed or element-only content model, otherwise
      * <code>null</code>
+     * <p>
+     *  用于混合或仅元素内容模型的粒子,否则<code> null </code>
+     * 
      */
     public XSParticle getParticle() {
         return fParticle;
@@ -665,6 +745,10 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
 
     /**
      * {prohibited substitutions} A subset of {extension, restriction}.
+     * <p>
+     *  {prohibited substitut} {extension,restriction}的子集。
+     * 
+     * 
      * @param prohibited  extention or restriction constants (defined in
      *   <code>XSConstants</code>).
      * @return True if prohibited is a prohibited substitution, otherwise
@@ -677,6 +761,10 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
     /**
      * {prohibited substitutions}
      *
+     * <p>
+     *  {禁止取代}
+     * 
+     * 
      * @return A bit flag corresponding to prohibited substitutions
      */
     public short getProhibitedSubstitutions() {
@@ -685,12 +773,17 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
 
     /**
      * Optional. Annotation.
+     * <p>
+     *  可选的。注解。
+     * 
      */
     public XSObjectList getAnnotations() {
         return (fAnnotations != null) ? fAnnotations : XSObjectListImpl.EMPTY_LIST;
     }
 
     /**
+    /* <p>
+    /* 
      * @see org.apache.xerces.xs.XSObject#getNamespaceItem()
      */
     public XSNamespaceItem getNamespaceItem() {
@@ -702,6 +795,8 @@ public class XSComplexTypeDecl implements XSComplexTypeDefinition, TypeInfo {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see org.apache.xerces.xs.XSComplexTypeDefinition#getAttributeUse(java.lang.String, java.lang.String)
      */
     public XSAttributeUse getAttributeUse(String namespace, String name) {

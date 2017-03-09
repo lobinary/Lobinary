@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,13 @@ package java.io;
  * <LI> The class does not have an accessible no-arg constructor
  * </UL>
  *
+ * <p>
+ *  当串行化运行时检测到类中存在以下问题之一时抛出。
+ * <UL>
+ *  <LI>该类的串行版本与从流中读取的类描述符不匹配<LI>该类包含未知数据类型<LI>该类没有可访问的无参数构造函数
+ * </UL>
+ * 
+ * 
  * @author  unascribed
  * @since   JDK1.1
  */
@@ -45,6 +53,10 @@ public class InvalidClassException extends ObjectStreamException {
     /**
      * Name of the invalid class.
      *
+     * <p>
+     *  无效类的名称。
+     * 
+     * 
      * @serial Name of the invalid class.
      */
     public String classname;
@@ -52,6 +64,10 @@ public class InvalidClassException extends ObjectStreamException {
     /**
      * Report an InvalidClassException for the reason specified.
      *
+     * <p>
+     *  由于指定的原因报告InvalidClassException。
+     * 
+     * 
      * @param reason  String describing the reason for the exception.
      */
     public InvalidClassException(String reason) {
@@ -61,6 +77,10 @@ public class InvalidClassException extends ObjectStreamException {
     /**
      * Constructs an InvalidClassException object.
      *
+     * <p>
+     *  构造一个InvalidClassException对象。
+     * 
+     * 
      * @param cname   a String naming the invalid class.
      * @param reason  a String describing the reason for the exception.
      */
@@ -71,6 +91,8 @@ public class InvalidClassException extends ObjectStreamException {
 
     /**
      * Produce the message and include the classname, if present.
+     * <p>
+     *  生成消息并包含类名(如果存在)。
      */
     public String getMessage() {
         if (classname == null)

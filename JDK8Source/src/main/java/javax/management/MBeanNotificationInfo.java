@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,20 @@ import java.util.Objects;
  * are returned in the string array result of the
  * <CODE>getNotifTypes</CODE> method.
  *
+ * <p>
+ *  <p> <CODE> MBeanNotificationInfo </CODE>类用于描述对于给定的Java类通知,MBean发出的不同通知实例的特征。
+ * 如果MBean发出可以是不同Java类的实例的通知,那么该MBean的元数据应为每个这些通知Java类提供一个<CODE> MBeanNotificationInfo </CODE>对象。</p>。
+ * 
+ *  <p>此类的实例是不可变的。子类可以是可变的,但不推荐这样做。</p>
+ * 
+ *  <p>此类扩展了<CODE> javax.management.MBeanFeatureInfo </CODE>,因此提供了<CODE>名称</CODE>和<CODE>描述</CODE>字段。
+ *  <CODE> name </CODE>字段应该是此类描述的通知对象的完全限定的Java类名。</p>。
+ * 
+ *  <p> <CODE> getNotifTypes </CODE>方法返回一个包含MBean可能发出的通知类型的字符串数组。
+ * 通知类型是一个点表示字符串,它描述了发出的通知的内容,而不是通知的Java类。单个通用通知类可用于发送多种类型的通知。
+ * 所有这些类型都返回到<CODE> getNotifTypes </CODE>方法的字符串数组结果中。
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanNotificationInfo extends MBeanFeatureInfo implements Cloneable {
@@ -69,6 +84,8 @@ public class MBeanNotificationInfo extends MBeanFeatureInfo implements Cloneable
         new MBeanNotificationInfo[0];
 
     /**
+    /* <p>
+    /* 
      * @serial The different types of the notification.
      */
     private String[] types;
@@ -79,6 +96,10 @@ public class MBeanNotificationInfo extends MBeanFeatureInfo implements Cloneable
     /**
      * Constructs an <CODE>MBeanNotificationInfo</CODE> object.
      *
+     * <p>
+     *  构造一个<CODE> MBeanNotificationInfo </CODE>对象。
+     * 
+     * 
      * @param notifTypes The array of strings (in dot notation)
      * containing the notification types that the MBean may emit.
      * This may be null with the same effect as a zero-length array.
@@ -95,6 +116,10 @@ public class MBeanNotificationInfo extends MBeanFeatureInfo implements Cloneable
     /**
      * Constructs an <CODE>MBeanNotificationInfo</CODE> object.
      *
+     * <p>
+     * 构造一个<CODE> MBeanNotificationInfo </CODE>对象。
+     * 
+     * 
      * @param notifTypes The array of strings (in dot notation)
      * containing the notification types that the MBean may emit.
      * This may be null with the same effect as a zero-length array.
@@ -116,6 +141,10 @@ public class MBeanNotificationInfo extends MBeanFeatureInfo implements Cloneable
            they are dot-separated, not that they must look like Java
            classes.  E.g. the spec doesn't forbid "sun.prob.25" as a
            notifType, though it doesn't explicitly allow it
+        /* <p>
+        /*  它们是点分隔的,而不是它们必须看起来像Java类。例如。规范不禁止"sun.prob.25"作为notifType,虽然它没有明确允许它
+        /* 
+        /* 
            either.  */
 
         this.types = (notifTypes != null && notifTypes.length > 0) ?
@@ -132,6 +161,10 @@ public class MBeanNotificationInfo extends MBeanFeatureInfo implements Cloneable
      * thus calling the default native shallow cloning mechanism
      * implemented by <tt>Object.clone()</tt>.
      * No deeper cloning of any internal field is made.
+     * <p>
+     *  返回此实例的浅克隆。通过简单调用<tt> super.clone()</tt>获得克隆,从而调用由<tt> Object.clone()</tt>实现的默认本机浅克隆机制。
+     * 不进行任何内部字段的更深层克隆。
+     * 
      */
      public Object clone () {
          try {
@@ -147,6 +180,10 @@ public class MBeanNotificationInfo extends MBeanFeatureInfo implements Cloneable
      * Returns the array of strings (in dot notation) containing the
      * notification types that the MBean may emit.
      *
+     * <p>
+     *  返回包含MBean可能发出的通知类型的字符串数组(以点表示法)。
+     * 
+     * 
      * @return the array of strings.  Changing the returned array has no
      * effect on this MBeanNotificationInfo.
      */
@@ -177,6 +214,9 @@ public class MBeanNotificationInfo extends MBeanFeatureInfo implements Cloneable
     /**
      * Compare this MBeanNotificationInfo to another.
      *
+     * <p>
+     *  将此MBeanNotificationInfo与另一个比较。
+     * 
      * @param o the object to compare to.
      *
      * @return true if and only if <code>o</code> is an MBeanNotificationInfo

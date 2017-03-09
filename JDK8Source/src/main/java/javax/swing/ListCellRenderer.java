@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -79,6 +80,23 @@ import java.awt.Component;
  * }
  * </pre>
  *
+ * <p>
+ *  标识可用作"橡皮图章"的组件,以在JList中绘制单元格。例如,要使用JLabel作为ListCellRenderer,您可以这样写：
+ * <pre>
+ *  {@code class MyCellRenderer extends JLabel implements ListCellRenderer <Object> {public MyCellRenderer(){setOpaque(true); }
+ * }。
+ * 
+ *  public Component getListCellRendererComponent(JList <list> List,Object value,int index,boolean isSel
+ * ected,boolean cellHasFocus){。
+ * 
+ *  setText(value.toString());
+ * 
+ *  颜色背景;颜色前景;
+ * 
+ *  //检查这个单元格是否代表当前的DnD删除位置JList.DropLocation dropLocation = list.getDropLocation(); if(dropLocation！= n
+ * ull &&！dropLocation.isInsert()&& dropLocation.getIndex()== index){。
+ * 
+ * 
  * @param <E> the type of values this renderer can be used for
  *
  * @see JList
@@ -96,6 +114,16 @@ public interface ListCellRenderer<E>
      * is called to generate a component on which <code>getPreferredSize</code>
      * can be invoked.
      *
+     * <p>
+     *  background = Color.BLUE; foreground = Color.WHITE;
+     * 
+     *  //检查这个单元格是否被选中} else if(isSelected){background = Color.RED; foreground = Color.WHITE;
+     * 
+     *  //未选中,而不是DnD删除位置} else {background = Color.WHITE; foreground = Color.BLACK; };
+     * 
+     *  setBackground(background); setForeground(foreground);
+     * 
+     * 
      * @param list The JList we're painting.
      * @param value The value returned by list.getModel().getElementAt(index).
      * @param index The cells index.

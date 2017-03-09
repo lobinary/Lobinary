@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -76,6 +77,29 @@ import java.util.Enumeration;
  * <P>
  * Currently applets are not allowed to use multicast sockets.
  *
+ * <p>
+ *  组播数据报套接字类对于发送和接收IP组播数据包很有用。 MulticastSocket是(UDP)DatagramSocket,具有用于加入互联网上其他多播主机的"组"的附加功能。
+ * <P>
+ *  组播组由D类IP地址和标准UDP端口号指定。 D类IP地址的范围为<CODE> 224.0.0.0 </CODE>至<CODE> 239.255.255.255 </CODE>(含)。
+ * 地址224.0.0.0保留,不应使用。
+ * <P>
+ *  通过首先创建具有所需端口的MulticastSocket,然后调用<CODE> joinGroup(InetAddress groupAddr)</CODE>方法,将加入多播组：
+ * <PRE>
+ *  // join a Multicast group and send the group salutations ... String msg ="Hello"; InetAddress group 
+ * = InetAddress.getByName("228.5.6.7"); MulticastSocket s = new MulticastSocket(6789); s.joinGroup(grou
+ * p); DatagramPacket hi = new DatagramPacket(msg.getBytes(),msg.length(),group,6789); send(hi); //得到他们的
+ * 反应！ byte [] buf = new byte [1000]; DatagramPacket recv = new DatagramPacket(buf,buf.length);接收(recv);
+ *  ... //好的,我说话了 - 离开组... s.leaveGroup(group);。
+ * </PRE>
+ * 
+ * 当向多播组发送消息时,<B>所有</B>订阅接收者到该主机和端口接收该消息(在分组的生存时间范围内,参见下文)。套接字不需要是多播组的成员向其发送消息。
+ * <P>
+ *  当套接字订阅多播组/端口时,它接收由其他主机发送到组/端口的数据报,组和端口的所有其他成员也是如此。套接字通过leaveGroup(InetAddress addr)方法释放组中的成员资格。
+ *  <B>多个多播套接字</B>可以同时订阅多播组和端口,并且它们将全部接收组数据报。
+ * <P>
+ *  目前applet不允许使用多播套接字。
+ * 
+ * 
  * @author Pavani Diwanji
  * @since  JDK1.1
  */
@@ -85,6 +109,9 @@ class MulticastSocket extends DatagramSocket {
     /**
      * Used on some platforms to record if an outgoing interface
      * has been set for this socket.
+     * <p>
+     *  在某些平台上使用,以记录是否为此套接字设置了传出接口。
+     * 
      */
     private boolean interfaceSet;
 
@@ -100,6 +127,14 @@ class MulticastSocket extends DatagramSocket {
      * {@link DatagramSocket#setReuseAddress(boolean)} method is
      * called to enable the SO_REUSEADDR socket option.
      *
+     * <p>
+     *  创建组播套接字。
+     * 
+     *  <p>如果有安全管理器,则首先调用其{@code checkListen}方法,其中的参数为0,以确保允许操作。这可能导致SecurityException。
+     * <p>
+     *  当创建套接字时,调用{@link DatagramSocket#setReuseAddress(boolean)}方法来启用SO_REUSEADDR套接字选项。
+     * 
+     * 
      * @exception IOException if an I/O exception occurs
      * while creating the MulticastSocket
      * @exception  SecurityException  if a security manager exists and its
@@ -124,6 +159,14 @@ class MulticastSocket extends DatagramSocket {
      * {@link DatagramSocket#setReuseAddress(boolean)} method is
      * called to enable the SO_REUSEADDR socket option.
      *
+     * <p>
+     *  创建组播套接字并绑定到特定端口。
+     * 
+     *  <p>如果有安全管理器,则会先使用{@code portList}参数作为其参数来调用其{@code checkListen}方法,以确保允许操作。这可能导致SecurityException。
+     * <p>
+     * 当创建套接字时,调用{@link DatagramSocket#setReuseAddress(boolean)}方法来启用SO_REUSEADDR套接字选项。
+     * 
+     * 
      * @param port port to use
      * @exception IOException if an I/O exception occurs
      * while creating the MulticastSocket
@@ -150,6 +193,16 @@ class MulticastSocket extends DatagramSocket {
      * {@link DatagramSocket#setReuseAddress(boolean)} method is
      * called to enable the SO_REUSEADDR socket option.
      *
+     * <p>
+     *  创建一个绑定到指定套接字地址的MulticastSocket。
+     * <p>
+     *  或者,如果地址是{@code null},请创建一个未绑定的套接字。
+     * 
+     *  <p>如果有安全管理器,则首先使用SocketAddress端口作为其参数来调用其{@code checkListen}方法,以确保允许操作。这可能导致SecurityException。
+     * <p>
+     *  当创建套接字时,调用{@link DatagramSocket#setReuseAddress(boolean)}方法来启用SO_REUSEADDR套接字选项。
+     * 
+     * 
      * @param bindaddr Socket address to bind to, or {@code null} for
      *                 an unbound socket.
      * @exception IOException if an I/O exception occurs
@@ -180,17 +233,26 @@ class MulticastSocket extends DatagramSocket {
     /**
      * The lock on the socket's TTL. This is for set/getTTL and
      * send(packet,ttl).
+     * <p>
+     *  锁定套接字的TTL。这是为set / getTTL和send(packet,ttl)。
+     * 
      */
     private Object ttlLock = new Object();
 
     /**
      * The lock on the socket's interface - used by setInterface
      * and getInterface
+     * <p>
+     *  套接字接口上的锁 - 由setInterface和getInterface使用
+     * 
      */
     private Object infLock = new Object();
 
     /**
      * The "last" interface set by setInterface on this MulticastSocket
+     * <p>
+     *  在此MulticastSocket上的setInterface设置的"last"接口
+     * 
      */
     private InetAddress infAddress = null;
 
@@ -203,6 +265,12 @@ class MulticastSocket extends DatagramSocket {
      * <p>The ttl is an <b>unsigned</b> 8-bit quantity, and so <B>must</B> be
      * in the range {@code 0 <= ttl <= 0xFF }.
      *
+     * <p>
+     *  设置此{@code MulticastSocket}上发送的组播数据包的默认生存时间,以控制组播范围。
+     * 
+     *  <p> ttl是<b>无符号</b> 8位数,因此<B>必须在{@code 0 <= ttl <= 0xFF}的范围内。
+     * 
+     * 
      * @param ttl the time-to-live
      * @exception IOException if an I/O exception occurs
      * while setting the default time-to-live value
@@ -227,6 +295,13 @@ class MulticastSocket extends DatagramSocket {
      * Multicast packets sent with a TTL of {@code 0} are not transmitted
      * on the network but may be delivered locally.
      *
+     * <p>
+     *  设置此{@code MulticastSocket}上发送的组播数据包的默认生存时间,以控制组播范围。
+     * 
+     *  <p> ttl <B>必须</b>在{@code 0 <= ttl <= 255}的范围内,否则将抛出{@code IllegalArgumentException}。
+     * 使用TTL {@code 0}发送的组播数据包不在网络上传输,但可以本地传递。
+     * 
+     * 
      * @param  ttl
      *         the time-to-live
      *
@@ -249,6 +324,10 @@ class MulticastSocket extends DatagramSocket {
      * Get the default time-to-live for multicast packets sent out on
      * the socket.
      *
+     * <p>
+     * 获取套接字上发送的组播数据包的默认生存时间。
+     * 
+     * 
      * @exception IOException if an I/O exception occurs
      * while getting the default time-to-live value
      * @return the default time-to-live value
@@ -266,6 +345,10 @@ class MulticastSocket extends DatagramSocket {
     /**
      * Get the default time-to-live for multicast packets sent out on
      * the socket.
+     * <p>
+     *  获取套接字上发送的组播数据包的默认生存时间。
+     * 
+     * 
      * @exception IOException if an I/O exception occurs while
      * getting the default time-to-live value
      * @return the default time-to-live value
@@ -286,6 +369,12 @@ class MulticastSocket extends DatagramSocket {
      * with the {@code mcastaddr} argument
      * as its argument.
      *
+     * <p>
+     *  加入组播组。它的行为可能受到{@code setInterface}或{@code setNetworkInterface}的影响。
+     * 
+     *  <p>如果有安全管理员,此方法首先使用{@code mcastaddr}参数作为其参数调用其{@code checkMulticast}方法。
+     * 
+     * 
      * @param mcastaddr is the multicast address to join
      *
      * @exception IOException if there is an error joining
@@ -313,6 +402,9 @@ class MulticastSocket extends DatagramSocket {
         /**
          * required for some platforms where it's not possible to join
          * a group without setting the interface first.
+         * <p>
+         *  对于某些平台,如果无法首先设置接口而无法加入群组,则需要。
+         * 
          */
         NetworkInterface defaultInterface = NetworkInterface.getDefault();
 
@@ -332,6 +424,12 @@ class MulticastSocket extends DatagramSocket {
      * with the {@code mcastaddr} argument
      * as its argument.
      *
+     * <p>
+     *  离开组播组。它的行为可能受到{@code setInterface}或{@code setNetworkInterface}的影响。
+     * 
+     *  <p>如果有安全管理员,此方法首先使用{@code mcastaddr}参数作为其参数调用其{@code checkMulticast}方法。
+     * 
+     * 
      * @param mcastaddr is the multicast address to leave
      * @exception IOException if there is an error leaving
      * or when the address is not a multicast address.
@@ -366,6 +464,12 @@ class MulticastSocket extends DatagramSocket {
      * with the {@code mcastaddr} argument
      * as its argument.
      *
+     * <p>
+     *  在指定的接口加入指定的组播组。
+     * 
+     *  <p>如果有安全管理员,此方法首先使用{@code mcastaddr}参数作为其参数调用其{@code checkMulticast}方法。
+     * 
+     * 
      * @param mcastaddr is the multicast address to join
      * @param netIf specifies the local interface to receive multicast
      *        datagram packets, or <i>null</i> to defer to the interface set by
@@ -414,6 +518,12 @@ class MulticastSocket extends DatagramSocket {
      * with the {@code mcastaddr} argument
      * as its argument.
      *
+     * <p>
+     *  在指定的本地接口上离开组播组。
+     * 
+     *  <p>如果有安全管理员,此方法首先使用{@code mcastaddr}参数作为其参数调用其{@code checkMulticast}方法。
+     * 
+     * 
      * @param mcastaddr is the multicast address to leave
      * @param netIf specifies the local interface or <i>null</i> to defer
      *             to the interface set by
@@ -457,6 +567,10 @@ class MulticastSocket extends DatagramSocket {
      * Set the multicast network interface used by methods
      * whose behavior would be affected by the value of the
      * network interface. Useful for multihomed hosts.
+     * <p>
+     *  设置行为受网络接口值影响的方法使用的组播网络接口。适用于多宿主主机。
+     * 
+     * 
      * @param inf the InetAddress
      * @exception SocketException if there is an error in
      * the underlying protocol, such as a TCP error.
@@ -478,6 +592,10 @@ class MulticastSocket extends DatagramSocket {
      * Retrieve the address of the network interface used for
      * multicast packets.
      *
+     * <p>
+     *  检索用于组播数据包的网络接口的地址。
+     * 
+     * 
      * @return An {@code InetAddress} representing
      *  the address of the network interface used for
      *  multicast packets.
@@ -498,6 +616,9 @@ class MulticastSocket extends DatagramSocket {
             /**
              * No previous setInterface or interface can be
              * set using setNetworkInterface
+             * <p>
+             *  没有以前的setInterface或接口可以使用setNetworkInterface设置
+             * 
              */
             if (infAddress == null) {
                 return ia;
@@ -505,6 +626,9 @@ class MulticastSocket extends DatagramSocket {
 
             /**
              * Same interface set with setInterface?
+             * <p>
+             * 使用setInterface设置相同的接口?
+             * 
              */
             if (ia.equals(infAddress)) {
                 return ia;
@@ -514,6 +638,9 @@ class MulticastSocket extends DatagramSocket {
              * Different InetAddress from what we set with setInterface
              * so enumerate the current interface to see if the
              * address set by setInterface is bound to this interface.
+             * <p>
+             *  不同的InetAddress从我们用setInterface设置,所以枚举当前接口看看setInterface设置的地址是否绑定到此接口。
+             * 
              */
             try {
                 NetworkInterface ni = NetworkInterface.getByInetAddress(ia);
@@ -528,6 +655,9 @@ class MulticastSocket extends DatagramSocket {
                 /**
                  * No match so reset infAddress to indicate that the
                  * interface has changed via means
+                 * <p>
+                 *  没有匹配,因此复位infAddress以指示接口已经通过手段更改
+                 * 
                  */
                 infAddress = null;
                 return ia;
@@ -541,6 +671,10 @@ class MulticastSocket extends DatagramSocket {
      * Specify the network interface for outgoing multicast datagrams
      * sent on this socket.
      *
+     * <p>
+     *  指定在此套接字上发送的出站组播数据报的网络接口。
+     * 
+     * 
      * @param netIf the interface
      * @exception SocketException if there is an error in
      * the underlying protocol, such as a TCP error.
@@ -560,6 +694,10 @@ class MulticastSocket extends DatagramSocket {
     /**
      * Get the multicast network interface set.
      *
+     * <p>
+     *  获取组播网络接口集。
+     * 
+     * 
      * @exception SocketException if there is an error in
      * the underlying protocol, such as a TCP error.
      * @return the multicast {@code NetworkInterface} currently set
@@ -587,6 +725,12 @@ class MulticastSocket extends DatagramSocket {
      * <p>Because this option is a hint, applications that want to
      * verify what loopback mode is set to should call
      * {@link #getLoopbackMode()}
+     * <p>
+     *  禁用/启用组播数据报的本地环回此选项由平台的网络代码用作设置是否将组播数据循环回本地套接字的提示。
+     * 
+     *  <p>因为这个选项是一个提示,应用程序想要验证什么回送模式设置应该调用{@link #getLoopbackMode()}
+     * 
+     * 
      * @param disable {@code true} to disable the LoopbackMode
      * @throws SocketException if an error occurs while setting the value
      * @since 1.4
@@ -599,6 +743,10 @@ class MulticastSocket extends DatagramSocket {
     /**
      * Get the setting for local loopback of multicast datagrams.
      *
+     * <p>
+     *  获取组播数据报文的本地环回设置。
+     * 
+     * 
      * @throws SocketException  if an error occurs while getting the value
      * @return true if the LoopbackMode has been disabled
      * @since 1.4
@@ -629,6 +777,13 @@ class MulticastSocket extends DatagramSocket {
      * {@code p.getPort()}. Each call to a security manager method
      * could result in a SecurityException if the operation is not allowed.
      *
+     * <p>
+     *  使用除套接字的默认值之外的TTL(存活时间)将数据报数据包发送到目标。该方法仅需要在需要特定TTL的情况下使用;否则最好在套接字上设置一次TTL,并对所有数据包使用默认TTL。
+     * 此方法</b>不会</b>更改套接字的默认TTL。它的行为可能会受到{@code setInterface}的影响。
+     * 
+     * <p>如果有安全管理员,此方法首先执行一些安全检查。首先,如果{@code p.getAddress()。
+     * isMulticastAddress()}为true,此方法调用安全管理器的{@code checkMulticast}方法{@code p.getAddress()}和{@code ttl}作为其参数
+     * 
      * @param p is the packet to be sent. The packet should contain
      * the destination multicast ip address and the data to be sent.
      * One does not need to be the member of the group to send

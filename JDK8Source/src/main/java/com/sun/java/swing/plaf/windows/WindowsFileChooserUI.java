@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,10 @@ import javax.accessibility.*;
 /**
  * Windows L&F implementation of a FileChooser.
  *
+ * <p>
+ *  Windows L&F实现的FileChooser。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class WindowsFileChooserUI extends BasicFileChooserUI {
@@ -581,6 +586,10 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
     /**
      * Creates a selection listener for the list of files and directories.
      *
+     * <p>
+     *  为文件和目录列表创建选择侦听器。
+     * 
+     * 
      * @param fc a <code>JFileChooser</code>
      * @return a <code>ListSelectionListener</code>
      */
@@ -627,6 +636,10 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
      * as the preferred size recommended
      * by the file chooser's layout manager.
      *
+     * <p>
+     *  返回指定的<code> JFileChooser </code>的首选大小。优选的大小至少在高度和宽度上与文件选择器的布局管理器推荐的优选大小一样大。
+     * 
+     * 
      * @param c  a <code>JFileChooser</code>
      * @return   a <code>Dimension</code> specifying the preferred
      *           width and height of the file chooser
@@ -645,6 +658,10 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
     /**
      * Returns the minimum size of the <code>JFileChooser</code>.
      *
+     * <p>
+     *  返回<code> JFileChooser </code>的最小大小。
+     * 
+     * 
      * @param c  a <code>JFileChooser</code>
      * @return   a <code>Dimension</code> specifying the minimum
      *           width and height of the file chooser
@@ -656,6 +673,10 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
     /**
      * Returns the maximum size of the <code>JFileChooser</code>.
      *
+     * <p>
+     *  返回<code> JFileChooser </code>的最大大小。
+     * 
+     * 
      * @param c  a <code>JFileChooser</code>
      * @return   a <code>Dimension</code> specifying the maximum
      *           width and height of the file chooser
@@ -806,6 +827,9 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
     /*
      * Listen for filechooser property changes, such as
      * the selected file changing, or the type of the dialog changing.
+     * <p>
+     *  监听filechooser属性更改,例如所选文件更改,或更改对话框的类型。
+     * 
      */
     public PropertyChangeListener createPropertyChangeListener(JFileChooser fc) {
         return new PropertyChangeListener() {
@@ -887,6 +911,10 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
      * Property to remember whether a directory is currently selected in the UI.
      * This is normally called by the UI on a selection event.
      *
+     * <p>
+     *  记住当前是否在UI中选择目录的属性。这通常由UI在选择事件上调用。
+     * 
+     * 
      * @param directorySelected if a directory is currently selected.
      * @since 1.4
      */
@@ -1035,6 +1063,9 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
 
     /**
      * Data model for a type-face selection combo-box.
+     * <p>
+     *  面型选择组合框的数据模型。
+     * 
      */
     protected class DirectoryComboBoxModel extends AbstractListModel<File> implements ComboBoxModel<File> {
         Vector<File> directories = new Vector<File>();
@@ -1056,6 +1087,9 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
          * Adds the directory to the model and sets it to be selected,
          * additionally clears out the previous selected directory and
          * the paths leading up to it, if any.
+         * <p>
+         *  将目录添加到模型并将其设置为选择,另外清除先前选择的目录及其前面的路径(如果有)。
+         * 
          */
         private void addItem(File directory) {
 
@@ -1160,6 +1194,9 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
 
     /**
      * Render different type sizes and styles.
+     * <p>
+     *  呈现不同的字体大小和样式。
+     * 
      */
     public class FilterComboBoxRenderer extends DefaultListCellRenderer {
         public Component getListCellRendererComponent(JList list,
@@ -1185,6 +1222,9 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
 
     /**
      * Data model for a type-face selection combo-box.
+     * <p>
+     *  面型选择组合框的数据模型。
+     * 
      */
     protected class FilterComboBoxModel extends AbstractListModel<FileFilter> implements ComboBoxModel<FileFilter>,
             PropertyChangeListener {
@@ -1263,6 +1303,8 @@ public class WindowsFileChooserUI extends BasicFileChooserUI {
 
     /**
      * Acts when DirectoryComboBox has changed the selected item.
+     * <p>
+     *  当DirectoryComboBox更改所选项目时执行操作。
      */
     protected class DirectoryComboBoxAction implements ActionListener {
 

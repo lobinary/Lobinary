@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -175,6 +176,80 @@ import javax.swing.text.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> JFormattedTextField </code> extends <code> JTextField </code>添加对格式化任意值的支持,以及在用户编辑文本后检索特定对象。
+ * 下面说明如何配置<code> JFormattedTextField </code>来编辑日期：。
+ * <pre>
+ *  JFormattedTextField ftf = new JFormattedTextField(); ftf.setValue(new Date());
+ * </pre>
+ * <p>
+ *  一旦创建了一个<code> JFormattedTextField </code>,您可以通过添加一个<code> PropertyChangeListener </code>来监听编辑更改,并监听<code>
+ *  PropertyChangeEvent </code> code> value </code>。
+ * <p>
+ *  <code> JFormattedTextField </code>允许配置当焦点丢失时应该采取什么操作。可能的配置有：
+ * <table summary="Possible JFormattedTextField configurations and their descriptions">
+ * <tr> <th> <p style ="text-align：left">值</p> </th> <th> <p style ="text-align：left">说明</p> </th > </tr>
+ *  <tr> <td> JFormattedTextField.REVERT <td>还原显示以匹配<code> getValue </code>,可能会丢失当前编辑。
+ *  <tr> <td> JFormattedTextField.COMMIT <td>提交当前值。
+ * 如果被编辑的值不被<code> AbstractFormatter </code>视为合法值,那么会抛出一个<code> ParseException </code>,那么该值不会改变, 。
+ *  <tr> <td> JFormattedTextField.COMMIT_OR_REVERT <td>类似于<code> COMMIT </code>,但如果值不合法,则表现为<code> REVER
+ * T </code>。
+ * 如果被编辑的值不被<code> AbstractFormatter </code>视为合法值,那么会抛出一个<code> ParseException </code>,那么该值不会改变, 。
+ *  <tr> <td> JFormattedTextField.PERSIST <td>不执行任何操作,不获取新的<code> AbstractFormatter </code>,并且不更新值。
+ * </table>
+ *  默认是<code> JFormattedTextField.COMMIT_OR_REVERT </code>,有关更多信息,请参阅{@link #setFocusLostBehavior}。
+ * <p>
+ *  <code> JFormattedTextField </code>允许焦点离开,即使当前编辑的值无效。
+ * 要在<code> JFormattedTextField </code>是无效的编辑状态时锁定焦点,您可以附加一个<code> InputVerifier </code>。
+ * 以下代码片段显示了这种<code> InputVerifier </code>的潜在实现：。
+ * <pre>
+ * public class FormattedTextFieldVerifier extends InputVerifier {public boolean verify(JComponent input){if(input instanceof JFormattedTextField){JFormattedTextField ftf =(JFormattedTextField)input; AbstractFormatter formatter = ftf.getFormatter(); if(formatter！= null){String text = ftf.getText(); try {formatter.stringToValue(text); return true; }
+ *  catch(ParseException pe){return false; }}} return true; } public boolean shouldYieldFocus(JComponent
+ *  input){return verify(input); }}。
+ * </pre>
+ * <p>
+ *  或者,您可以调用<code> commitEdit </code>,这也将提交该值。
+ * <p>
+ *  <code> JFormattedTextField </code>不会自己进行格式化,而是通过<code> JFormattedTextField.AbstractFormatter </code>
+ * 实例进行格式化,该实例是从<code> JFormattedTextField.AbstractFormatterFactory </code >。
+ * 通过<code> install </code>方法,当<code> JFormattedTextField.AbstractFormatter </code>变为活动时,会通知<code> JForm
+ * attedTextField.AbstractFormatter </code>的实例,需要,通常是一个<code> DocumentFilter </code>。
+ * 类似地,当<code> JFormattedTextField </code>不再需要<code> AbstractFormatter </code>时,它将调用<code> uninstall </code>
+ * 。
+ * <p>
+ * <code> JFormattedTextField </code>通常在获取或失去焦点时查询<code> AbstractFormatterFactory </code>中的<code> Abstra
+ * ctFormat </code>。
+ * 虽然这可以根据焦点丢失的政策而改变。
+ * 如果焦点丢失策略是<code> JFormattedTextField.PERSIST </code>并且已编辑<code> JFormattedTextField </code>,则在提交值之前不会查
+ * 询<code> AbstractFormatterFactory </code>。
+ * 虽然这可以根据焦点丢失的政策而改变。
+ * 类似地,如果焦点丢失策略是<code> JFormattedTextField.COMMIT </code>并且从<code> stringToValue </code>抛出异常,则当焦点丢失时不会查询
+ * <code> AbstractFormatterFactory </code>获得。
+ * 虽然这可以根据焦点丢失的政策而改变。
+ * <p>
+ *  <code> JFormattedTextField.AbstractFormatter </code>还负责确定何时将值提交到<code> JFormattedTextField </code>。
+ * 一些<code> JFormattedTextField.AbstractFormatter </code>会在每次编辑时提供新的值,其他人不会提交该值。
+ * 您可以通过调用<code> commitEdit </code>强制从当前<code> JFormattedTextField.AbstractFormatter </code>获取当前值。
+ *  <code> commitEdit </code>将在<code> JFormattedTextField </code>中按下时被调用。
+ * <p>
+ * 如果没有显式地设置<code> AbstractFormatterFactory </code>,则将在调用<code> setValue </code>之后基于值类型的<code> Class </code>
+ * 是非空)。
+ * 例如,在下面的代码中,将创建一个适当的<code> AbstractFormatterFactory </code>和<code> AbstractFormatter </code>来处理数字的格式化：
+ * 。
+ * <pre>
+ *  JFormattedTextField tf = new JFormattedTextField(); tf.setValue(new Number(100));
+ * </pre>
+ * <p>
+ *  <strong>警告：</strong>由于<code> AbstractFormatter </code>通常会在<code>文档</code>上安装<code> DocumentFilter </code>
+ * ,并且<code> NavigationFilter <代码>在<code> JFormattedTextField </code>,你不应该安装自己的。
+ * 如果你这样做,你可能会看到奇怪的行为,因为<code> AbstractFormatter </code>的编辑策略将不会被强制。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @since 1.4
  */
 public class JFormattedTextField extends JTextField {
@@ -188,6 +263,10 @@ public class JFormattedTextField extends JTextField {
      * new value a <code>ParseException</code> is thrown, the invalid
      * value will remain.
      *
+     * <p>
+     * 常量识别当焦点丢失时,应调用<code> commitEdit </code>。如果在提交新值时抛出一个<code> ParseException </code>,则无效值将保留。
+     * 
+     * 
      * @see #setFocusLostBehavior
      */
     public static final int COMMIT = 0;
@@ -198,6 +277,10 @@ public class JFormattedTextField extends JTextField {
      * value a <code>ParseException</code> is thrown, the value will be
      * reverted.
      *
+     * <p>
+     *  常量识别当焦点丢失时,应调用<code> commitEdit </code>。如果在提交新值时抛出一个<code> ParseException </code>,该值将被还原。
+     * 
+     * 
      * @see #setFocusLostBehavior
      */
     public static final int COMMIT_OR_REVERT = 1;
@@ -207,6 +290,10 @@ public class JFormattedTextField extends JTextField {
      * be reverted to current value set on the
      * <code>JFormattedTextField</code>.
      *
+     * <p>
+     *  常量识别当焦点丢失时,编辑值应该还原为在<code> JFormattedTextField </code>上设置的当前值。
+     * 
+     * 
      * @see #setFocusLostBehavior
      */
     public static final int REVERT = 2;
@@ -215,6 +302,10 @@ public class JFormattedTextField extends JTextField {
      * Constant identifying that when focus is lost, the edited value
      * should be left.
      *
+     * <p>
+     *  常数识别当焦点丢失时,编辑的值应该保留。
+     * 
+     * 
      * @see #setFocusLostBehavior
      */
     public static final int PERSIST = 3;
@@ -222,46 +313,79 @@ public class JFormattedTextField extends JTextField {
 
     /**
      * Factory used to obtain an instance of AbstractFormatter.
+     * <p>
+     *  工厂用于获取AbstractFormatter的一个实例。
+     * 
      */
     private AbstractFormatterFactory factory;
     /**
      * Object responsible for formatting the current value.
+     * <p>
+     *  负责格式化当前值的对象。
+     * 
      */
     private AbstractFormatter format;
     /**
      * Last valid value.
+     * <p>
+     *  最后一个有效值。
+     * 
      */
     private Object value;
     /**
      * True while the value being edited is valid.
+     * <p>
+     *  正在编辑的值有效时为True。
+     * 
      */
     private boolean editValid;
     /**
      * Behavior when focus is lost.
+     * <p>
+     *  焦点丢失时的行为。
+     * 
      */
     private int focusLostBehavior;
     /**
      * Indicates the current value has been edited.
+     * <p>
+     *  表示当前值已编辑。
+     * 
      */
     private boolean edited;
     /**
      * Used to set the dirty state.
+     * <p>
+     *  用于设置脏状态。
+     * 
      */
     private DocumentListener documentListener;
     /**
      * Masked used to set the AbstractFormatterFactory.
+     * <p>
+     *  Masked用于设置AbstractFormatterFactory。
+     * 
      */
     private Object mask;
     /**
      * ActionMap that the TextFormatter Actions are added to.
+     * <p>
+     *  添加了TextFormatter操作的ActionMap。
+     * 
      */
     private ActionMap textFormatterActionMap;
     /**
      * Indicates the input method composed text is in the document
+     * <p>
+     *  表示组成文本的输入法在文档中
+     * 
      */
     private boolean composedTextExists = false;
     /**
      * A handler for FOCUS_LOST event
+     * <p>
+     *  FOCUS_LOST事件的处理程序
+     * 
      */
     private FocusLostHandler focusLostHandler;
 
@@ -272,6 +396,12 @@ public class JFormattedTextField extends JTextField {
      * <code>setFormatterFactory</code> to configure the
      * <code>JFormattedTextField</code> to edit a particular type of
      * value.
+     * <p>
+     *  创建一个没有<code> AbstractFormatterFactory </code>的<code> JFormattedTextField </code>。
+     * 使用<code> setMask </code>或<code> setFormatterFactory </code>配置<code> JFormattedTextField </code>以编辑特定类
+     * 型的值。
+     *  创建一个没有<code> AbstractFormatterFactory </code>的<code> JFormattedTextField </code>。
+     * 
      */
     public JFormattedTextField() {
         super();
@@ -284,6 +414,10 @@ public class JFormattedTextField extends JTextField {
      * create an <code>AbstractFormatterFactory</code> based on the
      * type of <code>value</code>.
      *
+     * <p>
+     *  创建具有指定值的JFormattedTextField。这将基于<code> value </code>的类型创建一个<code> AbstractFormatterFactory </code>。
+     * 
+     * 
      * @param value Initial value for the JFormattedTextField
      */
     public JFormattedTextField(Object value) {
@@ -296,6 +430,13 @@ public class JFormattedTextField extends JTextField {
      * wrapped in an appropriate <code>AbstractFormatter</code> which is
      * then wrapped in an <code>AbstractFormatterFactory</code>.
      *
+     * <p>
+     * 创建<code> JFormattedTextField </code>。
+     *  <code> format </code>包装在一个适当的<code> AbstractFormatter </code>中,然后包装在一个<code> AbstractFormatterFactor
+     * y </code>中。
+     * 创建<code> JFormattedTextField </code>。
+     * 
+     * 
      * @param format Format used to look up an AbstractFormatter
      */
     public JFormattedTextField(java.text.Format format) {
@@ -308,6 +449,11 @@ public class JFormattedTextField extends JTextField {
      * <code>AbstractFormatter</code>. The <code>AbstractFormatter</code>
      * is placed in an <code>AbstractFormatterFactory</code>.
      *
+     * <p>
+     *  使用指定的<code> AbstractFormatter </code>创建<code> JFormattedTextField </code>。
+     *  <code> AbstractFormatter </code>放置在<code> AbstractFormatterFactory </code>中。
+     * 
+     * 
      * @param formatter AbstractFormatter to use for formatting.
      */
     public JFormattedTextField(AbstractFormatter formatter) {
@@ -318,6 +464,10 @@ public class JFormattedTextField extends JTextField {
      * Creates a <code>JFormattedTextField</code> with the specified
      * <code>AbstractFormatterFactory</code>.
      *
+     * <p>
+     *  用指定的<code> AbstractFormatterFactory </code>创建<code> JFormattedTextField </code>。
+     * 
+     * 
      * @param factory AbstractFormatterFactory used for formatting.
      */
     public JFormattedTextField(AbstractFormatterFactory factory) {
@@ -329,6 +479,10 @@ public class JFormattedTextField extends JTextField {
      * Creates a <code>JFormattedTextField</code> with the specified
      * <code>AbstractFormatterFactory</code> and initial value.
      *
+     * <p>
+     *  使用指定的<code> AbstractFormatterFactory </code>和初始值创建<code> JFormattedTextField </code>。
+     * 
+     * 
      * @param factory <code>AbstractFormatterFactory</code> used for
      *        formatting.
      * @param currentValue Initial value to use
@@ -354,6 +508,18 @@ public class JFormattedTextField extends JTextField {
      * The default value of this property is
      * <code>JFormattedTextField.COMMIT_OR_REVERT</code>.
      *
+     * <p>
+     *  设置丢失焦点时的行为。
+     * 这将是<code> JFormattedTextField.COMMIT_OR_REVERT </code>,<code> JFormattedTextField.REVERT </code>,<code>
+     *  JFormattedTextField.COMMIT </code>或<code> JFormattedTextField.PERSIST </code>一些<code> AbstractFormat
+     * ter </code>可能会在更改发生时推送更改,以使该值不起作用。
+     *  设置丢失焦点时的行为。
+     * <p>
+     *  如果传入的对象不是上述值之一,这将抛出一个<code> IllegalArgumentException </code>。
+     * <p>
+     *  此属性的默认值为<code> JFormattedTextField.COMMIT_OR_REVERT </code>。
+     * 
+     * 
      * @param behavior Identifies behavior when focus is lost
      * @throws IllegalArgumentException if behavior is not one of the known
      *         values
@@ -381,6 +547,13 @@ public class JFormattedTextField extends JTextField {
      * Note that some <code>AbstractFormatter</code>s may push changes as
      * they occur, so that the value of this will have no effect.
      *
+     * <p>
+     *  返回焦点丢失时的行为。
+     * 这将是<code> COMMIT_OR_REVERT </code>,<code> COMMIT </code>,<code> REVERT </code>或<code> PERSIST </code>
+     * 之一。
+     *  返回焦点丢失时的行为。注意一些<code> AbstractFormatter </code > s可能会在更改发生时进行推送,以使此值不起作用。
+     * 
+     * 
      * @return returns behavior when focus is lost
      */
     public int getFocusLostBehavior() {
@@ -405,6 +578,18 @@ public class JFormattedTextField extends JTextField {
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     * 设置<code> AbstractFormatterFactory </code>。
+     *  <code> AbstractFormatterFactory </code>能够返回用于格式化显示值的<code> AbstractFormatter </code>实例,以及强制执行编辑策略。
+     * <p>
+     *  如果没有通过此方法(或构造函数)显式设置<code> AbstractFormatterFactory </code>,则将使用<code> AbstractFormatterFactory </code>
+     * ,因此将基于<code> AbstractFormatter </code>值的<code> Class </code>。
+     *  <code> NumberFormatter </code>将用于<code> Number </code>,<code> DateFormatter </code>将用于<code> Dates </code>
+     * ,否则<code> DefaultFormatter <代码>将被使用。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param tf <code>AbstractFormatterFactory</code> used to lookup
      *          instances of <code>AbstractFormatter</code>
      * @beaninfo
@@ -424,6 +609,10 @@ public class JFormattedTextField extends JTextField {
     /**
      * Returns the current <code>AbstractFormatterFactory</code>.
      *
+     * <p>
+     *  返回当前<code> AbstractFormatterFactory </code>。
+     * 
+     * 
      * @see #setFormatterFactory
      * @return <code>AbstractFormatterFactory</code> used to determine
      *         <code>AbstractFormatter</code>s
@@ -446,6 +635,18 @@ public class JFormattedTextField extends JTextField {
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     *  设置当前的<code> AbstractFormatter </code>。
+     * <p>
+     *  您通常不应调用此方法,而应设置<code> AbstractFormatterFactory </code>或设置值。
+     *  <code> JFormattedTextField </code>会调用此方法作为<code> JFormattedTextField </code>更改的状态,并要求重置该值。
+     *  <code> JFormattedTextField </code>传递从<code> AbstractFormatterFactory </code>获取的<code> AbstractFormat
+     * ter </code>。
+     *  <code> JFormattedTextField </code>会调用此方法作为<code> JFormattedTextField </code>更改的状态,并要求重置该值。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @see #setFormatterFactory
      * @param format AbstractFormatter to use for formatting
      * @beaninfo
@@ -472,6 +673,10 @@ public class JFormattedTextField extends JTextField {
      * Returns the <code>AbstractFormatter</code> that is used to format and
      * parse the current value.
      *
+     * <p>
+     *  返回用于格式化和解析当前值的<code> AbstractFormatter </code>。
+     * 
+     * 
      * @return AbstractFormatter used for formatting
      */
     public AbstractFormatter getFormatter() {
@@ -489,6 +694,15 @@ public class JFormattedTextField extends JTextField {
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     * 设置将从当前<code> AbstractFormatterFactory </code>获取的<code> AbstractFormatter </code>格式化的值。
+     * 如果没有指定<code> AbstractFormatterFactory </code>,这将尝试基于<code> value </code>的类型创建一个。
+     * <p>
+     *  此属性的缺省值为null。
+     * <p>
+     *  这是一个JavaBeans绑定属性。
+     * 
+     * 
      * @param value Current value to display
      * @beaninfo
      *       bound: true
@@ -508,6 +722,11 @@ public class JFormattedTextField extends JTextField {
      * value. The currently edited value can be obtained by invoking
      * <code>commitEdit</code> followed by <code>getValue</code>.
      *
+     * <p>
+     *  返回最后一个有效值。基于<code> AbstractFormatter </code>的编辑策略,这可能不返回当前值。
+     * 可以通过调用<code> commitEdit </code>后跟<code> getValue </code>来获取当前编辑的值。
+     * 
+     * 
      * @return Last valid value
      */
     public Object getValue() {
@@ -520,6 +739,11 @@ public class JFormattedTextField extends JTextField {
      * This has no effect if there is no current
      * <code>AbstractFormatter</code> installed.
      *
+     * <p>
+     *  强制从<code> AbstractFormatter </code>中获取当前值,并将其设置为当前值。
+     * 如果没有当前的<code> AbstractFormatter </code>安装,这没有任何效果。
+     * 
+     * 
      * @throws ParseException if the <code>AbstractFormatter</code> is not able
      *         to format the current value
      */
@@ -542,6 +766,14 @@ public class JFormattedTextField extends JTextField {
      * Based on the look and feel this may visually change the state of
      * the receiver.
      *
+     * <p>
+     *  设置接收器上编辑的有效性。你通常不应该调用这个。这将由用户编辑值时由<code> AbstractFormatter </code>调用。
+     * <p>
+     *  并非所有格式化程序都允许组件进入无效状态,因此可能永远不会被调用。
+     * <p>
+     *  基于外观和感觉,这可以在视觉上改变接收器的状态。
+     * 
+     * 
      * @param isValid boolean indicating if the currently edited value is
      *        valid.
      * @beaninfo
@@ -562,6 +794,10 @@ public class JFormattedTextField extends JTextField {
      * this is managed by the current <code>AbstractFormatter</code>, as such
      * there is no public setter for it.
      *
+     * <p>
+     *  如果正在编辑的当前值有效,则返回true。它的值由当前的<code> AbstractFormatter </code>管理,因为它没有公共设置器。
+     * 
+     * 
      * @return true if the current value being edited is valid.
      */
     public boolean isEditValid() {
@@ -572,6 +808,9 @@ public class JFormattedTextField extends JTextField {
      * Invoked when the user inputs an invalid value. This gives the
      * component a chance to provide feedback. The default
      * implementation beeps.
+     * <p>
+     *  当用户输入无效值时调用。这为组件提供了提供反馈的机会。默认实现蜂鸣声。
+     * 
      */
     protected void invalidEdit() {
         UIManager.getLookAndFeel().provideErrorFeedback(JFormattedTextField.this);
@@ -582,6 +821,11 @@ public class JFormattedTextField extends JTextField {
      * <code>InputMethodEvent.INPUT_METHOD_TEXT_CHANGED</code> or
      * <code>InputMethodEvent.CARET_POSITION_CHANGED</code>.
      *
+     * <p>
+     * 处理任何输入方法事件,例如<code> InputMethodEvent.INPUT_METHOD_TEXT_CHANGED </code>或<code> InputMethodEvent.CARET_
+     * POSITION_CHANGED </code>。
+     * 
+     * 
      * @param e the <code>InputMethodEvent</code>
      * @see InputMethodEvent
      */
@@ -606,6 +850,10 @@ public class JFormattedTextField extends JTextField {
      * <code>FocusEvent.FOCUS_GAINED</code> or
      * <code>FocusEvent.FOCUS_LOST</code>.
      *
+     * <p>
+     *  处理任何焦点事件,例如<code> FocusEvent.FOCUS_GAINED </code>或<code> FocusEvent.FOCUS_LOST </code>。
+     * 
+     * 
      * @param e the <code>FocusEvent</code>
      * @see FocusEvent
      */
@@ -639,6 +887,9 @@ public class JFormattedTextField extends JTextField {
 
     /**
      * FOCUS_LOST behavior implementation
+     * <p>
+     *  FOCUS_LOST行为实现
+     * 
      */
     private class FocusLostHandler implements Runnable, Serializable {
         public void run() {
@@ -671,6 +922,10 @@ public class JFormattedTextField extends JTextField {
      * editor itself supports.  These are useful for binding
      * to events, such as in a keymap.
      *
+     * <p>
+     *  获取编辑器的命令列表。这是插件UI支持的命令列表,由编辑器本身支持的命令集合增强。这些对于绑定到事件是有用的,例如在键映射中。
+     * 
+     * 
      * @return the command list
      */
     public Action[] getActions() {
@@ -680,6 +935,10 @@ public class JFormattedTextField extends JTextField {
     /**
      * Gets the class ID for a UI.
      *
+     * <p>
+     *  获取UI的类ID。
+     * 
+     * 
      * @return the string "FormattedTextFieldUI"
      * @see JComponent#getUIClassID
      */
@@ -693,6 +952,10 @@ public class JFormattedTextField extends JTextField {
      * the document, which gets displayed by the editor after revalidation.
      * A PropertyChange event ("document") is propagated to each listener.
      *
+     * <p>
+     *  将编辑器与文本文档相关联。当前注册的工厂用于构建文档的视图,在重新验证后由编辑器显示。 PropertyChange事件("文档")传播到每个侦听器。
+     * 
+     * 
      * @param doc  the document to display/edit
      * @see #getDocument
      * @beaninfo
@@ -715,6 +978,10 @@ public class JFormattedTextField extends JTextField {
      * See readObject and writeObject in JComponent for more
      * information about serialization in Swing.
      *
+     * <p>
+     *  有关Swing中序列化的更多信息,请参阅JComponent中的readObject和writeObject。
+     * 
+     * 
      * @param s Stream to write to
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
@@ -731,6 +998,9 @@ public class JFormattedTextField extends JTextField {
     /**
      * Resets the Actions that come from the TextFormatter to
      * <code>actions</code>.
+     * <p>
+     *  将来自TextFormatter的操作重置为<code> actions </code>。
+     * 
      */
     private void setFormatterActions(Action[] actions) {
         if (actions == null) {
@@ -770,6 +1040,10 @@ public class JFormattedTextField extends JTextField {
      * this will also obtain a new <code>AbstractFormatter</code> from the
      * current factory. The property change event will be fired if
      * <code>firePC</code> is true.
+     * <p>
+     *  是否设置值。如果<code> createFormat </code>为true,这也将从当前工厂获取一个新的<code> AbstractFormatter </code>。
+     * 如果<code> firePC </code>为true,则属性更改事件将触发。
+     * 
      */
     private void setValue(Object value, boolean createFormat, boolean firePC) {
         Object oldValue = this.value;
@@ -802,6 +1076,9 @@ public class JFormattedTextField extends JTextField {
 
     /**
      * Sets the edited state of the receiver.
+     * <p>
+     *  设置接收机的编辑状态。
+     * 
      */
     private void setEdited(boolean edited) {
         this.edited = edited;
@@ -809,6 +1086,9 @@ public class JFormattedTextField extends JTextField {
 
     /**
      * Returns true if the receiver has been edited.
+     * <p>
+     *  如果接收器已编辑,则返回true。
+     * 
      */
     private boolean isEdited() {
         return edited;
@@ -817,6 +1097,9 @@ public class JFormattedTextField extends JTextField {
     /**
      * Returns an AbstractFormatterFactory suitable for the passed in
      * Object type.
+     * <p>
+     *  返回适用于在对象类型中传递的AbstractFormatterFactory。
+     * 
      */
     private AbstractFormatterFactory getDefaultFormatterFactory(Object type) {
         if (type instanceof DateFormat) {
@@ -858,6 +1141,13 @@ public class JFormattedTextField extends JTextField {
      * <code>AbstractFormatter</code>s when the
      * <code>JFormattedTextField</code> has focus vs when it
      * doesn't have focus.
+     * <p>
+     * <code> JFormattedTextField </code>使用<code> AbstractFormatterFactory </code>实例来获取<code> AbstractFormat
+     * ter </code>的实例,这些实例又用于格式化值。
+     *  <code> AbstractFormatterFactory </code>可以基于<code> JFormattedTextField </code>的状态返回不同的<code> Abstract
+     * Formatter </code>,也许返回不同的<code> AbstractFormatter </code>代码> JFormattedTextField </code>有焦点vs,当它没有焦点。
+     * 
+     * 
      * @since 1.4
      */
     public static abstract class AbstractFormatterFactory {
@@ -865,6 +1155,10 @@ public class JFormattedTextField extends JTextField {
          * Returns an <code>AbstractFormatter</code> that can handle formatting
          * of the passed in <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  返回一个<code> AbstractFormatter </code>,它可以处理在<code> JFormattedTextField </code>中传递的格式。
+         * 
+         * 
          * @param tf JFormattedTextField requesting AbstractFormatter
          * @return AbstractFormatter to handle formatting duties, a null
          *         return value implies the JFormattedTextField should behave
@@ -901,6 +1195,23 @@ public class JFormattedTextField extends JTextField {
      * Subclasses that allow the <code>JFormattedTextField</code> to be in
      * a temporarily invalid state should invoke <code>setEditValid</code>
      * at the appropriate times.
+     * <p>
+     *  <code> AbstractFormatter </code>的实例由<code> JFormattedTextField </code>用于处理从对象到字符串的转换,以及从字符串回到对象的转换。
+     *  <code> AbstractFormatter </code>还可以强制编辑策略或导航策略,或以任何其认为适合强制实施所需策略的方式处理<code> JFormattedTextField </code>
+     * 。
+     * <p>
+     *  <code> AbstractFormatter </code>只能在一个<code> JFormattedTextField </code>中激活。
+     *  <code> JFormattedTextField </code>调用<code> install </code>当它准备好使用它,随后<code>卸载</code>完成后。
+     * 希望安装附加状态的子类应该覆盖<code> install </code>和消息super。
+     * <p>
+     * 子类必须覆盖转换方法<code> stringToValue </code>和<code> valueToString </code>。
+     * 可选地,他们可以覆盖<code> getActions </code>,<code> getNavigationFilter </code>和<code> getDocumentFilter </code>
+     * 以特定方式限制<code> JFormattedTextField </code>。
+     * 子类必须覆盖转换方法<code> stringToValue </code>和<code> valueToString </code>。
+     * <p>
+     *  允许<code> JFormattedTextField </code>处于临时无效状态的子类应在适当的时候调用<code> setEditValid </code>。
+     * 
+     * 
      * @since 1.4
      */
     public static abstract class AbstractFormatter implements Serializable {
@@ -936,6 +1247,26 @@ public class JFormattedTextField extends JTextField {
          * installing/uninstalling <code>AbstractFormatter</code> at a
          * different time than <code>JFormattedTextField</code> does.
          *
+         * <p>
+         *  将<code> AbstractFormatter </code>安装到特定的<code> JFormattedTextField </code>。
+         * 这将调用<code> valueToString </code>将当前值从<code> JFormattedTextField </code>转换为字符串。
+         * 这将安装<code> Action </code>从<code> getActions </code>,<code> DocumentFilter </code>从<code> getDocumentF
+         * ilter </code>返回,<code> NavigationFilter < / code>从<code> getNavigationFilter </code>返回到<code> JFormat
+         * tedTextField </code>。
+         * 这将调用<code> valueToString </code>将当前值从<code> JFormattedTextField </code>转换为字符串。
+         * <p>
+         *  如果子类想要在<code> JFormattedTextField </code>上安装附加的监听器,通常只需要覆盖这个。
+         * <p>
+         *  如果在将当前值转换为字符串时存在<code> ParseException </code>,则会将文本设置为空字符串,并将<code> JFormattedTextField </code>标记为无效
+         * 状态。
+         * <p>
+         * 虽然这是一个公共方法,但这通常只对<code> JFormattedTextField </code>的子类有用。
+         *  <code> JFormattedTextField </code>将在值更改或其内部状态更改的适当时间调用此方法。
+         * 如果你在<code> JFormattedTextField </code>之外的其他时间子类化<code> JFormattedTextField </code>并安装/卸载<code> Abstra
+         * ctFormatter </code>,你只需要自己调用它。
+         *  <code> JFormattedTextField </code>将在值更改或其内部状态更改的适当时间调用此方法。
+         * 
+         * 
          * @param ftf JFormattedTextField to format for, may be null indicating
          *            uninstall from current JFormattedTextField.
          */
@@ -963,6 +1294,12 @@ public class JFormattedTextField extends JTextField {
          * <code>DocumentFilter</code>, <code>NavigationFilter</code>
          * and additional <code>Action</code>s installed on the
          * <code>JFormattedTextField</code>.
+         * <p>
+         *  卸载<code> AbstractFormatter </code>可能已安装在<code> JFormattedTextField </code>上的任何状态。
+         * 这将重置<code> DocumentFilter </code>,<code> NavigationFilter </code>和安装在<code> JFormattedTextField </code>
+         * 上的附加<code> Action </code>。
+         *  卸载<code> AbstractFormatter </code>可能已安装在<code> JFormattedTextField </code>上的任何状态。
+         * 
          */
         public void uninstall() {
             if (this.ftf != null) {
@@ -976,6 +1313,10 @@ public class JFormattedTextField extends JTextField {
          * Parses <code>text</code> returning an arbitrary Object. Some
          * formatters may return null.
          *
+         * <p>
+         *  Parses <code> text </code>返回任意对象。一些格式化程序可能返回null。
+         * 
+         * 
          * @throws ParseException if there is an error in the conversion
          * @param text String to convert
          * @return Object representation of text
@@ -986,6 +1327,10 @@ public class JFormattedTextField extends JTextField {
         /**
          * Returns the string value to display for <code>value</code>.
          *
+         * <p>
+         *  返回要显示<code> value </code>的字符串值。
+         * 
+         * 
          * @throws ParseException if there is an error in the conversion
          * @param value Value to convert
          * @return String representation of value
@@ -997,6 +1342,10 @@ public class JFormattedTextField extends JTextField {
          * Returns the current <code>JFormattedTextField</code> the
          * <code>AbstractFormatter</code> is installed on.
          *
+         * <p>
+         *  返回当前安装了<code> AbstractFormatter </code>的<code> JFormattedTextField </code>。
+         * 
+         * 
          * @return JFormattedTextField formatting for.
          */
         protected JFormattedTextField getFormattedTextField() {
@@ -1006,6 +1355,9 @@ public class JFormattedTextField extends JTextField {
         /**
          * This should be invoked when the user types an invalid character.
          * This forwards the call to the current JFormattedTextField.
+         * <p>
+         *  当用户键入无效字符时,应调用此方法。这会将调用转发到当前的JFormattedTextField。
+         * 
          */
         protected void invalidEdit() {
             JFormattedTextField ftf = getFormattedTextField();
@@ -1021,6 +1373,11 @@ public class JFormattedTextField extends JTextField {
          * such that the <code>JFormattedTextField</code> is always in a
          * valid state, you will never need to invoke this.
          *
+         * <p>
+         *  调用此方法以更新<code> JFormattedTextField </code>的<code> editValid </code>属性。
+         * 如果你执行一个策略,使<code> JFormattedTextField </code>始终处于有效状态,你永远不需要调用这个。
+         * 
+         * 
          * @param valid Valid state of the JFormattedTextField
          */
         protected void setEditValid(boolean valid) {
@@ -1036,6 +1393,11 @@ public class JFormattedTextField extends JTextField {
          * <code>Action</code>s. <code>install</code> will install these
          * on the <code>JFormattedTextField</code>'s <code>ActionMap</code>.
          *
+         * <p>
+         * 子类和覆盖,如果你想提供一个自定义的<code> Action </code>集。
+         *  <code> install </code>会将这些安装在<code> JFormattedTextField </code>的<code> ActionMap </code>中。
+         * 
+         * 
          * @return Array of Actions to install on JFormattedTextField
          */
         protected Action[] getActions() {
@@ -1048,6 +1410,11 @@ public class JFormattedTextField extends JTextField {
          * <code>install</code> will install the returned value onto
          * the <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  子类和覆盖如果你想提供一个<code> DocumentFilter </code>来限制可以输入什么。
+         *  <code> install </code>会将返回的值安装到<code> JFormattedTextField </code>。
+         * 
+         * 
          * @return DocumentFilter to restrict edits
          */
         protected DocumentFilter getDocumentFilter() {
@@ -1060,6 +1427,10 @@ public class JFormattedTextField extends JTextField {
          * <code>install</code> will install the returned value onto
          * the <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  子类和覆盖,如果您想提供一个过滤器来限制用户可以导航到哪里。 <code> install </code>会将返回的值安装到<code> JFormattedTextField </code>。
+         * 
+         * 
          * @return NavigationFilter to restrict navigation
          */
         protected NavigationFilter getNavigationFilter() {
@@ -1070,6 +1441,10 @@ public class JFormattedTextField extends JTextField {
          * Clones the <code>AbstractFormatter</code>. The returned instance
          * is not associated with a <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  克隆<code> AbstractFormatter </code>。返回的实例不与<code> JFormattedTextField </code>相关联。
+         * 
+         * 
          * @return Copy of the AbstractFormatter
          */
         protected Object clone() throws CloneNotSupportedException {
@@ -1083,6 +1458,10 @@ public class JFormattedTextField extends JTextField {
          * Installs the <code>DocumentFilter</code> <code>filter</code>
          * onto the current <code>JFormattedTextField</code>.
          *
+         * <p>
+         *  将<code> DocumentFilter </code> <code>过滤器</code>安装到当前<code> JFormattedTextField </code>。
+         * 
+         * 
          * @param filter DocumentFilter to install on the Document.
          */
         private void installDocumentFilter(DocumentFilter filter) {
@@ -1105,6 +1484,12 @@ public class JFormattedTextField extends JTextField {
      * so that <code>isEnabled</code> is true while a JFormattedTextField
      * has focus, and extends <code>actionPerformed</code> to invoke
      * commitEdit.
+     * <p>
+     *  用于提交编辑。
+     * 这扩展了JTextField.NotifyAction,使得<code> isEnabled </code>为true,而JFormattedTextField具有焦点,并扩展<code> action
+     * Performed </code>以调用commitEdit。
+     *  用于提交编辑。
+     * 
      */
     static class CommitAction extends JTextField.NotifyAction {
         public void actionPerformed(ActionEvent e) {
@@ -1143,6 +1528,10 @@ public class JFormattedTextField extends JTextField {
      * <code>actionPerformed</code> is invoked. It will only be
      * enabled if the focused component is an instance of
      * JFormattedTextField.
+     * <p>
+     *  当调用<code> actionPerformed </code>时,CancelAction将重置JFormattedTextField中的值。
+     * 仅当聚焦的组件是JFormattedTextField的实例时,它才会启用。
+     * 
      */
     private static class CancelAction extends TextAction {
         public CancelAction() {
@@ -1174,6 +1563,7 @@ public class JFormattedTextField extends JTextField {
 
     /**
      * Sets the dirty state as the document changes.
+     * <p>
      */
     private class DocumentHandler implements DocumentListener, Serializable {
         public void insertUpdate(DocumentEvent e) {

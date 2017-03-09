@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -13,6 +14,8 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_ADAPTOR_LOGGER;
 
 /**
  * This class retries any timed out inform requests. This class is for internal use.
+ * <p>
+ *  这个类重试任何超时的通知请求。此类用于内部使用。
  */
 
 final class SnmpTimerServer extends Thread {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,13 @@ import java.nio.ByteBuffer;
  * ScatteringByteChannel} interface.  </p>
  *
  *
+ * <p>
+ *  可以从缓冲区序列写入字节的通道。
+ * 
+ *  聚集写操作在单次调用中写入来自给定缓冲器序列中的一个或多个的字节序列。收集写入在实现网络协议或文件格式时通常是有用的,例如,将数据分组成由一个或多个固定长度的报头和可变长度主体组成的段。
+ * 类似的<i>散射</i>读操作在{@link ScatteringByteChannel}接口中定义。 </p>。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -86,6 +94,21 @@ public interface GatheringByteChannel
      * invocation of this method will block until the first operation is
      * complete. </p>
      *
+     * <p>
+     *  从给定缓冲区的子序列向该通道写入一个字节序列。
+     * 
+     *  尝试向该通道写入最多r个字节,其中<r </i>是给定缓冲器阵列的指定子序列中剩余的字节总数,那是,
+     * 
+     *  <blockquote> <pre> srcs [offset] .remaining()+ srcs [offset + 1] .remaining()+ ... + srcs [offset + 
+     * length-1] .remaining()</。
+     * 
+     *  在调用此方法的时刻。
+     * 
+     * <p>假设写入长度为n的字节序列,其中<tt> 0 </tt> <tt> <= </tt>&lt; i>&nbsp; <tt>&lt; = </tt>&nbsp; <i> r </i>。
+     * 直到该序列的第一个<tt> srcs [offset] .remaining()</tt>字节从缓冲区<tt> srcs [offset] </tt>写入,直到下一个<tt> srcs [ 从每个缓冲器
+     * 写入尽可能多的字节,因此除了最后更新的缓冲器之外,每个更新的缓冲器的最终位置被保证等于该缓冲器的极限。
+     * <p>假设写入长度为n的字节序列,其中<tt> 0 </tt> <tt> <= </tt>&lt; i>&nbsp; <tt>&lt; = </tt>&nbsp; <i> r </i>。
+     * 
      * @param  srcs
      *         The buffers from which bytes are to be retrieved
      *
@@ -137,6 +160,14 @@ public interface GatheringByteChannel
      * <blockquote><pre>
      * c.write(srcs, 0, srcs.length);</pre></blockquote>
      *
+     * <p>
+     * 
+     *  <p>除非另有说明,否则只有在写入所有<i> r </i>个请求字节后,写操作才会返回。某些类型的通道,根据它们的状态,可以只写一些字节,或者可能根本不写。
+     * 例如,非阻塞模式下的套接字通道不能再写入比套接字输出缓冲区中空闲的字节多的字节。
+     * 
+     *  <p>此方法可能随时被调用。如果另一个线程已经在该通道上启动了写操作,则该方法的调用将被阻塞,直到第一操作完成。 </p>
+     * 
+     * 
      * @param  srcs
      *         The buffers from which bytes are to be retrieved
      *

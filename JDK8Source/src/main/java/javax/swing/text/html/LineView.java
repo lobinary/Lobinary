@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import javax.swing.text.*;
  * This subclasses ParagraphView, but this really only contains one
  * Row of text.
  *
+ * <p>
+ *  一个视图实现,显示一个解包的预格式化行。<p>这是ParagraphView的子类,但这只是一行文本。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 class LineView extends ParagraphView {
@@ -46,6 +51,10 @@ class LineView extends ParagraphView {
     /**
      * Creates a LineView object.
      *
+     * <p>
+     *  创建LineView对象。
+     * 
+     * 
      * @param elem the element to wrap in a view
      */
     public LineView(Element elem) {
@@ -55,6 +64,9 @@ class LineView extends ParagraphView {
     /**
      * Preformatted lines are not suppressed if they
      * have only whitespace, so they are always visible.
+     * <p>
+     *  如果预格式化行只有空格,它们不会被抑制,因此它们总是可见的。
+     * 
      */
     public boolean isVisible() {
         return true;
@@ -65,6 +77,10 @@ class LineView extends ParagraphView {
      * axis.  The preformatted line should refuse to be
      * sized less than the preferred size.
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。预格式化线应当拒绝尺寸小于优选尺寸。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *  <code>View.Y_AXIS</code>
      * @return  the minimum span the view can be rendered into
@@ -77,6 +93,10 @@ class LineView extends ParagraphView {
     /**
      * Gets the resize weight for the specified axis.
      *
+     * <p>
+     *  获取指定轴的调整大小权重。
+     * 
+     * 
      * @param axis may be either X_AXIS or Y_AXIS
      * @return the weight
      */
@@ -94,6 +114,10 @@ class LineView extends ParagraphView {
     /**
      * Gets the alignment for an axis.
      *
+     * <p>
+     *  获取轴的对齐方式。
+     * 
+     * 
      * @param axis may be either X_AXIS or Y_AXIS
      * @return the alignment
      */
@@ -113,6 +137,11 @@ class LineView extends ParagraphView {
      * on the parent since the vertical preference is
      * rigid.
      *
+     * <p>
+     *  放下孩子。如果布局跨度已更改,则将重新构建行。在检查并可能重建行之后调用超类功能。
+     * 如果高度已更改,则父级调用<code> preferenceChanged </code>方法,因为垂直首选项是刚性的。
+     * 
+     * 
      * @param width  the width to lay out against >= 0.  This is
      *   the width inside of the inset area.
      * @param height the height to lay out against >= 0 (not used
@@ -140,6 +169,13 @@ class LineView extends ParagraphView {
      * is the left inset from the paragraphs most recent allocation
      * (which is what the layout of the children is based upon).
      *
+     * <p>
+     *  返回给定参考位置的下一个制表位停止位置。此视图实现了选项卡坐标系统,并在布局过程中对逻辑子项调用<code> getTabbedSpan </code>,以确定子项的期望跨度。
+     * 逻辑子代可以将其标签扩展向上委托给知道如何展开标签的段落。 <code> LabelView </code>是一个视图的示例,它将其选项卡扩展需求向上委托给段落。
+     * <p>
+     * 这被实现来尝试并且在段落元素的属性集中定位<code> TabSet </code>。如果可以找到,将使用其设置,否则将提供默认扩展。
+     * 用于选项卡扩展的基本位置是段落最近分配(这是子项的布局基于)的左插入。
+     * 
      * @param x the X reference position
      * @param tabOffset the position within the text stream
      *   that the tab occurred at >= 0.
@@ -160,6 +196,8 @@ class LineView extends ParagraphView {
 
     /**
      * Returns the location for the tab.
+     * <p>
+     * 
      */
     protected float getPreTab(float x, int tabOffset) {
         Document d = getDocument();
@@ -178,6 +216,10 @@ class LineView extends ParagraphView {
     }
 
     /**
+    /* <p>
+    /*  返回选项卡的位置。
+    /* 
+    /* 
      * @return number of characters per tab, 8.
      */
     protected int getCharactersPerTab() {

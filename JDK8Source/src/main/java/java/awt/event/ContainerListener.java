@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,14 @@ import java.util.EventListener;
  * internally so the program works properly regardless of
  * whether the program registers a {@code ContainerListener} or not.
  *
+ * <p>
+ *  用于接收容器事件的侦听器接口。对处理容器事件感兴趣的类实现这个接口(和它包含的所有方法)或扩展抽象<code> ContainerAdapter </code>类(只覆盖感兴趣的方法)。
+ * 然后使用组件的<code> addContainerListener </code>方法向该组件注册从该类创建的侦听器对象。
+ * 当容器的内容更改,因为已经添加或删除了组件时,将调用侦听器对象中的相关方法,并将<code> ContainerEvent </code>传递给它。
+ * <P>
+ *  集装箱事件仅用于通知目的; AWT将在内部自动处理添加和删除操作,所以程序无论程序是否注册{@code ContainerListener}都能正常工作。
+ * 
+ * 
  * @see ContainerAdapter
  * @see ContainerEvent
  * @see <a href="https://docs.oracle.com/javase/tutorial/uiswing/events/containerlistener.html">Tutorial: Writing a Container Listener</a>
@@ -55,11 +64,15 @@ import java.util.EventListener;
 public interface ContainerListener extends EventListener {
     /**
      * Invoked when a component has been added to the container.
+     * <p>
      */
     public void componentAdded(ContainerEvent e);
 
     /**
      * Invoked when a component has been removed from the container.
+     * <p>
+     *  当组件已添加到容器时调用。
+     * 
      */
     public void componentRemoved(ContainerEvent e);
 

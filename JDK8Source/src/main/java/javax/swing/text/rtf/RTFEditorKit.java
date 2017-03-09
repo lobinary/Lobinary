@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,12 +39,19 @@ import javax.swing.*;
  * Swing team.  In the future we hope to improve the support
  * provided.
  *
+ * <p>
+ *  这是RTF编辑功能的默认实现。 RTF支持不是由Swing团队编写的。在未来,我们希望改善所提供的支持。
+ * 
+ * 
  * @author  Timothy Prinzing (of this class, not the package!)
  */
 public class RTFEditorKit extends StyledEditorKit {
 
     /**
      * Constructs an RTFEditorKit.
+     * <p>
+     *  构造一个RTFEditorKit。
+     * 
      */
     public RTFEditorKit() {
         super();
@@ -54,6 +62,10 @@ public class RTFEditorKit extends StyledEditorKit {
      * kit represents support for.  This kit supports
      * the type <code>text/rtf</code>.
      *
+     * <p>
+     *  获取此套件表示支持的数据的MIME类型。此工具包支持<code> text / rtf </code>类型。
+     * 
+     * 
      * @return the type
      */
     public String getContentType() {
@@ -65,6 +77,10 @@ public class RTFEditorKit extends StyledEditorKit {
      * to be in a format appropriate for this kind of content
      * handler.
      *
+     * <p>
+     *  从给定流中插入内容,期望该内容采用适合此类内容处理程序的格式。
+     * 
+     * 
      * @param in  The stream to read from
      * @param doc The destination for the insertion.
      * @param pos The location in the document to place the
@@ -91,6 +107,10 @@ public class RTFEditorKit extends StyledEditorKit {
      * Write content from a document to the given stream
      * in a format appropriate for this kind of content handler.
      *
+     * <p>
+     *  以适合此类内容处理程序的格式将内容从文档写入给定流。
+     * 
+     * 
      * @param out  The stream to write to
      * @param doc The source for the write.
      * @param pos The location in the document to fetch the
@@ -112,6 +132,10 @@ public class RTFEditorKit extends StyledEditorKit {
      * Insert content from the given stream, which will be
      * treated as plain text.
      *
+     * <p>
+     *  从给定流中插入内容,这将被视为纯文本。
+     * 
+     * 
      * @param in  The stream to read from
      * @param doc The destination for the insertion.
      * @param pos The location in the document to place the
@@ -137,6 +161,9 @@ public class RTFEditorKit extends StyledEditorKit {
      * Write content from a document to the given stream
      * as plain text.
      *
+     * <p>
+     *  将文档中的内容以纯文本形式写入给定流。
+     * 
      * @param out  The stream to write to
      * @param doc The source for the write.
      * @param pos The location in the document to fetch the

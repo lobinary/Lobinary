@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,9 @@ import org.omg.CosNaming.NameComponent;
  * equals() method and the hashCode() method for use in a hash table.
  * It computes the hashCode once and stores it, and also precomputes
  * the lengths of the id and kind strings for faster comparison.
+ * <p>
+ *  类InternalBindingKey在org.omg.CosNaming :: NameComponent类周围实现必要的包装器代码,以实现适当的equals()方法和在散列表中使用的hashCod
+ * e()方法。
  */
 public class InternalBindingKey
 {

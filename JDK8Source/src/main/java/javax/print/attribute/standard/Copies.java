@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -66,6 +67,32 @@ import javax.print.attribute.PrintJobAttribute;
  * name.
  * <P>
  *
+ * <p>
+ *  类Copies是一个整数值打印属性类,用于指定要打印的副本数。
+ * <P>
+ *  在许多设备上,所支持的整理副本的数量将受到设备上的物理输出存储箱的数量的限制,并且可能不同于可支持的未复制副本的数量。
+ * <P>
+ *  在多点打印作业(具有多个文档的作业)上的Copies属性值为<I> n </I>的效果取决于{@link MultipleDocumentHandling MultipleDocumentHandling}
+ * 属性的(可能是默认值)值：。
+ * <UL>
+ * <LI>
+ *  SINGLE_DOCUMENT  - 结果将是包含所有输入文档的单个输出文档的<I> n </I>个副本。
+ * <P>
+ * <LI>
+ *  SINGLE_DOCUMENT_NEW_SHEET  - 结果将是包含所有输入文档的单个输出文档的<I> n </I>个副本,每个输入文档的第一印象将始终从新的媒体工作表开始。
+ * <P>
+ * <LI>
+ *  SEPARATE_DOCUMENTS_UNCOLLATED_COPIES  - 结果将是第一个输入文档的<I> n </I>个副本,后面是第二个输入文档的<I> n </I>个副本。 。 。
+ * 随后是最后一个输入文档的<I> n个副本。
+ * <P>
+ * <LI>
+ *  SEPARATE_DOCUMENTS_COLLATED_COPIES  - 结果将是第一个输入文档,第二个输入文档。 。 。最后输入文档,该组文档被重复<I> n次。
+ * </UL>
+ * <P>
+ * <B> IPP兼容性：</B>整数值给出IPP整数值。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  David Mendenhall
  * @author  Alan Kamihensky
  */
@@ -77,6 +104,8 @@ public final class Copies extends IntegerSyntax
     /**
      * Construct a new copies attribute with the given integer value.
      *
+     * <p>
+     * 
      * @param  value  Integer value.
      *
      * @exception  IllegalArgumentException
@@ -99,6 +128,10 @@ public final class Copies extends IntegerSyntax
      * equal.
      * </OL>
      *
+     * <p>
+     *  使用给定的整数值构造新的副本属性。
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this copies
@@ -114,6 +147,18 @@ public final class Copies extends IntegerSyntax
      * <P>
      * For class Copies, the category is class Copies itself.
      *
+     * <p>
+     *  返回此副本属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是类Copies的实例。
+     * <LI>
+     *  这个副本属性的值和<CODE>对象</CODE>的值相等。
+     * </OL>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -127,6 +172,8 @@ public final class Copies extends IntegerSyntax
      * <P>
      * For class Copies, the category name is <CODE>"copies"</CODE>.
      *
+     * <p>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

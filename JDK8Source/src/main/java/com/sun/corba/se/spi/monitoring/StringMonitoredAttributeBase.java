@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ import java.util.*;
 /**
  * <p>
  *
+ * <p>
+ * <p>
+ * 
+ * 
  * @author Hemanth Puttaswamy
  * </p>
  * <p>
@@ -51,6 +56,11 @@ public abstract class StringMonitoredAttributeBase
  * </p>
  * <p>
  *
+ * <p>
+ * <p>
+ *  构造具有使用类类型String构建的MonitoredAttributeInfo的StringMonitoredAttribute。
+ * </p>
+ * 
  * @param name of this attribute
  * </p>
  * <p>

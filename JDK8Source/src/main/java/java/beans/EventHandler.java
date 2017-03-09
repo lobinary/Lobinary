@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -266,6 +267,135 @@ import sun.reflect.misc.ReflectUtil;
  * undefined.  For that reason we recommend against targeting overloaded
  * methods.
  *
+ * <p>
+ *  <code> EventHandler </code>类提供了对动态生成事件监听器的支持,这些事件监听器的方法执行一个涉及传入事件对象和目标对象的简单语句。
+ * <p>
+ *  <code> EventHandler </code>类旨在由交互式工具(如应用程序构建器)使用,允许开发人员在bean之间建立连接。
+ * 通常,从用户界面bean(事件<em>源</em>)到应用程序逻辑bean(<em> target </em>)进行连接。这种最有效的连接将应用逻辑与用户界面隔离。
+ * 例如,从<code> JCheckBox </code>到接受布尔值的方法的连接的<code> EventHandler </code>可以处理提取复选框的状态并将其直接传递给方法使得该方法与用户界面层
+ * 隔离。
+ * 通常,从用户界面bean(事件<em>源</em>)到应用程序逻辑bean(<em> target </em>)进行连接。这种最有效的连接将应用逻辑与用户界面隔离。
+ * <p>
+ *  内部类是另一种更通用的方法来处理来自用户界面的事件。 <code> EventHandler </code>类只处理可能使用内部类的一个子集。
+ * 然而,<code> EventHandler </code>对于长期持久化方案比内部类更好。
+ * 此外,在同一接口被实施多次的大型应用程序中使用<code> EventHandler </code>可以减少应用程序的磁盘和内存占用。
+ * <p>
+ * 使用<code> EventHandler </code>创建的监听器具有这么小的占用空间的原因是<code> Proxy </code>类</code>在<code> EventHandler </code>
+ *  。
+ * 例如,如果您使用<code> EventHandler </code> <code> create </code>方法在应用程序中创建所有<code> ActionListener </code>,所有
+ * 操作侦听器都将是单个类(由<code> Proxy </code>类创建的类)。
+ * 一般来说,基于<code> Proxy </code>类的侦听器需要为每个侦听器类型</em>(接口)创建一个侦听器类,而内部类方法需要根据< em> listener </em>(实现接口的对象)。
+ * 
+ * <p>
+ *  您通常不直接处理<code> EventHandler </code>实例。
+ * 相反,您使用<code> EventHandler </code> <code> create </code>方法之一来创建实现给定侦听器接口的对象。
+ * 这个监听器对象在后台使用一个<code> EventHandler </code>对象来封装有关事件的信息,当事件发生时要发送的对象,要发送的消息(方法)和任何参数方法。
+ * 以下部分提供了如何使用<code> create </code>方法创建侦听器对象的示例。
+ * 
+ *  <h2>使用EventHandler </h2>的示例
+ * 
+ * <code> EventHandler </code>的最简单的用法是安装一个监听器,该监听器在没有参数的目标对象上调用一个方法。
+ * 在下面的示例中,我们创建了一个<code> ActionListener </code>,调用<code> javax.swing.JFrame </code>实例上的<code> toFront </code>
+ * 方法。
+ * <code> EventHandler </code>的最简单的用法是安装一个监听器,该监听器在没有参数的目标对象上调用一个方法。
+ * 
+ * <blockquote>
+ * pre>
+ *  yButton.addActionListener((ActionListener)EventHandler.create(ActionListener.class,frame,"toFront"))
+ * ;。
+ * /pre>
+ * </blockquote>
+ * 
+ *  当按下<code> myButton </code>时,语句<code> frame.toFront()</code>将被执行。
+ * 通过定义<code> ActionListener </code>接口的新实现并将其实例添加到按钮中,可以获得相同的效果,具有一些额外的编译时类型安全性：。
+ * 
+ * <blockquote>
+ * pre>
+ *  //使用内部类而不是EventHandler的等效代码。
+ *  yButton.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){frame.toFront();}
+ * );。
+ *  //使用内部类而不是EventHandler的等效代码。
+ * /pre>
+ * </blockquote>
+ * 
+ *  下一个最简单的使用<code> EventHandler </code>是从侦听器接口(通常是事件对象)中的方法的第一个参数中提取属性值,并使用它来设置目标对象中的属性的值。
+ * 在下面的示例中,我们创建一个<code> ActionListener </code>,将目标(myButton)对象的<code> nextFocusableComponent </code>属性设置
+ * 为事件的"source"属性的值。
+ *  下一个最简单的使用<code> EventHandler </code>是从侦听器接口(通常是事件对象)中的方法的第一个参数中提取属性值,并使用它来设置目标对象中的属性的值。
+ * 
+ * <blockquote>
+ * pre>
+ *  ventHandler.create(ActionListener.class,myButton,"nextFocusableComponent","source")
+ * /pre>
+ * </blockquote>
+ * 
+ *  这将对应于以下内部类实现：
+ * 
+ * <blockquote>
+ * pre>
+ * //使用内部类而不是EventHandler的等效代码。
+ *  ew ActionListener(){public void actionPerformed(ActionEvent e){myButton.setNextFocusableComponent((Component)e.getSource()); }
+ * }。
+ * //使用内部类而不是EventHandler的等效代码。
+ * 
+ * /pre>
+ * </blockquote>
+ * 
+ *  还可以创建一个<code> EventHandler </code>,它只是将传入的事件对象传递给目标的操作。
+ * 如果第四个<code> EventHandler.create </code>参数是一个空字符串,那么事件只是沿着传递：。
+ * 
+ * <blockquote>
+ * pre>
+ *  ventHandler.create(ActionListener.class,target,"doActionEvent","")
+ * /pre>
+ * </blockquote>
+ * 
+ *  这将对应于以下内部类实现：
+ * 
+ * <blockquote>
+ * pre>
+ *  //使用内部类而不是EventHandler的等效代码。
+ *  ew ActionListener(){public void actionPerformed(ActionEvent e){target.doActionEvent(e); }}。
+ * 
+ * /pre>
+ * </blockquote>
+ * 
+ *  可能最常见的使用<code> EventHandler </code>是从事件对象的<em> source </em>中提取属性值,并将此值设置为目标对象的属性值。
+ * 在下面的示例中,我们创建一个<code> ActionListener </code>,将目标对象的"label"属性设置为源的"text"属性的值("source"属性的值)事件。
+ * 
+ * <blockquote>
+ * pre>
+ *  ventHandler.create(ActionListener.class,myButton,"label","source.text")
+ * /pre>
+ * </blockquote>
+ * 
+ *  这将对应于以下内部类实现：
+ * 
+ * <blockquote>
+ * pre>
+ *  //使用内部类而不是EventHandler的等效代码。
+ *  ew ActionListener {public void actionPerformed(ActionEvent e){myButton.setLabel((JTextField)e.getSource())。
+ *  //使用内部类而不是EventHandler的等效代码。getText()); }}。
+ * 
+ * /pre>
+ * </blockquote>
+ * 
+ * 事件属性可以是"限定的"具有用"。"分隔的任意数量的属性前缀。字符。出现在"。"之前的"限定"名称。字符被视为应该应用于(最左边第一个)事件对象的属性的名称。
+ * <p>
+ *  例如,以下动作侦听器
+ * 
+ * <blockquote>
+ * pre>
+ *  ventHandler.create(ActionListener.class,target,"a","b.c.d")
+ * /pre>
+ * </blockquote>
+ * 
+ *  可能被写为以下内部类(假设所有属性都有规范的getter方法并返回适当的类型)：
+ * 
+ * <blockquote>
+ * pre>
+ *  //使用内部类而不是EventHandler的等效代码。
+ * 
  * @see java.lang.reflect.Proxy
  * @see java.util.EventObject
  *
@@ -292,6 +422,33 @@ public class EventHandler implements InvocationHandler {
      * the <code>eventPropertyName</code> and <code>listenerMethodName</code>
      * parameter.
      *
+     * <p>
+     *  ew ActionListener {public void actionPerformed(ActionEvent e){target.setA(e.getB()。getC()。
+     * isD()); }}。
+     * 
+     * /pre>
+     * </blockquote>
+     *  目标属性也可以被"限定"为具有由""限定的任意数量的属性前缀。字符。例如,以下动作侦听器：
+     * <pre>
+     *  EventHandler.create(ActionListener.class,target,"a.b","c.d")
+     * </pre>
+     *  可能被写为以下内部类(假设所有属性都有规范的getter方法并返回适当的类型)：
+     * <pre>
+     *  //使用内部类而不是EventHandler的等效代码。
+     *  new ActionListener {public void actionPerformed(ActionEvent e){target.getA()。setB(e.getC()。
+     * isD()); }}。
+     * 
+     * /pre>
+     * <p>
+     *  由于<code> EventHandler </code>最终依靠反射来调用一个方法,我们建议不要针对一个重载的方法。
+     * 例如,如果目标是类<code> MyTarget </code>的实例,其定义为：。
+     * <pre>
+     * public class MyTarget {public void doIt(String); public void doIt(Object); }}
+     * </pre>
+     *  然后方法<code> doIt </code>被重载。 EventHandler将根据源调用适当的方法。如果源为null,那么任一方法都是适当的,并且被调用的方法是未定义的。
+     * 因此,我们建议不要定位重载方法。
+     * 
+     * 
      * @param target the object that will perform the action
      * @param action the name of a (possibly qualified) property or method on
      *        the target
@@ -325,6 +482,12 @@ public class EventHandler implements InvocationHandler {
     /**
      * Returns the object to which this event handler will send a message.
      *
+     * <p>
+     *  创建一个新的<code> EventHandler </code>对象;您通常使用<code> create </code>方法之一,而不是直接调用此构造函数。
+     * 有关<code> eventPropertyName </code>和<code> listenerMethodName </code>的完整说明,请参阅{@link java.beans.EventHandler#create(Class,Object,String,String)参数。
+     *  创建一个新的<code> EventHandler </code>对象;您通常使用<code> create </code>方法之一,而不是直接调用此构造函数。
+     * 
+     * 
      * @return the target of this event handler
      * @see #EventHandler(Object, String, String, String)
      */
@@ -338,6 +501,10 @@ public class EventHandler implements InvocationHandler {
      * or the name of the method that this event handler
      * will invoke on the target.
      *
+     * <p>
+     *  返回此事件处理程序将向其发送消息的对象。
+     * 
+     * 
      * @return the action of this event handler
      * @see #EventHandler(Object, String, String, String)
      */
@@ -349,6 +516,10 @@ public class EventHandler implements InvocationHandler {
      * Returns the property of the event that should be
      * used in the action applied to the target.
      *
+     * <p>
+     *  返回此事件处理程序将设置的目标的writable属性的名称,或此事件处理程序将在目标上调用的方法的名称。
+     * 
+     * 
      * @return the property of the event
      *
      * @see #EventHandler(Object, String, String, String)
@@ -362,6 +533,10 @@ public class EventHandler implements InvocationHandler {
      * A return value of <code>null</code> signifies that all methods in the
      * listener interface trigger the action.
      *
+     * <p>
+     *  返回应用于应用于目标的操作中应使用的事件的属性。
+     * 
+     * 
      * @return the name of the method that will trigger the action
      *
      * @see #EventHandler(Object, String, String, String)
@@ -414,6 +589,10 @@ public class EventHandler implements InvocationHandler {
      * pass it to the action associated with
      * this <code>EventHandler</code>.
      *
+     * <p>
+     *  返回将触发操作的方法的名称。返回值<code> null </code>表示侦听器接口中的所有方法都触发操作。
+     * 
+     * 
      * @param proxy the proxy object
      * @param method the method in the listener interface
      * @return the result of applying the action to the target
@@ -516,6 +695,10 @@ public class EventHandler implements InvocationHandler {
      *</pre>
      *</blockquote>
      *
+     * <p>
+     *  从事件中提取适当的属性值,并将其传递给与此<code> EventHandler </code>关联的操作。
+     * 
+     * 
      * @param <T> the type to create
      * @param listenerInterface the listener interface to create a proxy for
      * @param target the object that will perform the action
@@ -572,6 +755,23 @@ public class EventHandler implements InvocationHandler {
      *</pre>
      *</blockquote>
      *
+     * <p>
+     * 创建<code> listenerInterface </code>的实现,其中侦听器接口中的所有</em>方法将处理程序的<code> action </code>应用于<code> target </code>
+     *  。
+     * 该方法通过调用<code> create </code>方法的另一个更一般的实现来实现,其中<code> eventPropertyName </code>和<code> listenerMethodN
+     * ame </code> > null </code>。
+     * 有关<code> action </code>参数的完整说明,请参阅{@link java.beans.EventHandler#create(Class,Object,String,String)通用版本的create}
+     * 。
+     * <p>
+     *  要创建一个与<code> dialog.show()</code>一起显示<code> JDialog </code>的<code> ActionListener </code>,可以这样写：
+     * 
+     * blockquote>
+     * pre>
+     *  ventHandler.create(ActionListener.class,dialog,"show")
+     * /pre>
+     * /blockquote>
+     * 
+     * 
      * @param <T> the type to create
      * @param listenerInterface the listener interface to create a proxy for
      * @param target the object that will perform the action
@@ -662,6 +862,32 @@ public class EventHandler implements InvocationHandler {
      * </pre>
      *</blockquote>
      *
+     * <p>
+     *  / **创建<code> listenerInterface </code>的实现,其中<em>所有</em>方法将事件表达式<code> eventPropertyName </code>的值传递给
+     * 最终方法应用于<code>目标</code>的语句<code> action </code>。
+     * 该方法通过使用<code> listenerMethodName </code>取值<code> null </code>的<code> create </code>方法的更一般的实现方式来实现。
+     * 有关<code> action </code>和<code> eventPropertyName </code>的完整说明,请参阅{@link java.beans.EventHandler#create(Class,Object,String,String)参数。
+     * 该方法通过使用<code> listenerMethodName </code>取值<code> null </code>的<code> create </code>方法的更一般的实现方式来实现。
+     * <p>
+     * 要创建将<code> JLabel </code>的文本设置为传入事件的<code> JTextField </code>源的文本值的<code> ActionListener </code>,您可以使
+     * 用下面的代码：。
+     * 
+     * blockquote>
+     * pre>
+     *  ventHandler.create(ActionListener.class,label,"text","source.text");
+     * /pre>
+     * /blockquote>
+     * 
+     *  这相当于下面的代码：
+     * blockquote>
+     * pre>
+     *  //使用内部类而不是EventHandler的等效代码。
+     *  ew ActionListener(){public void actionPerformed(ActionEvent event){label.setText((JTextField)(event.getSource()))。
+     *  //使用内部类而不是EventHandler的等效代码。getText()); };。
+     * /pre>
+     * /blockquote>
+     * 
+     * 
      * @param <T> the type to create
      * @param listenerInterface the listener interface to create a proxy for
      * @param target the object that will perform the action

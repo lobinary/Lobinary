@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码。
+ * 版权所有。
+ *  **************************************************** ************** ********************************
+ * **** ****************************。
+ * 版权所有。
+ * 
+ * 
  ******************************************************************/
 
 package java.awt.image;
@@ -56,6 +67,13 @@ import static sun.java2d.StateTrackable.State.*;
  * underlying storage as a Java array as noted below in the
  * documentation for those methods.
  * </a>
+ * <p>
+ *  该类扩展了<CODE> DataBuffer </CODE>,并将数据内部存储为空格。存储在<CODE> DataBuffer </CODE>的短数组中的值被视为无符号值。
+ * <p>
+ * <a name="optimizations">
+ *  注意,如果一些实现可以保持对如何存储图像的数据的控制,则它们可以更有效地工作。例如,诸如在视频存储器中高速缓存图像的优化需要实现跟踪对该数据的所有修改。
+ * 如果其他实现可以将数据存储在除Java数组之外的位置中,则可以更好地操作。为了保持与各种优化的最佳兼容性,最好避免将底层存储暴露为Java数组的构造函数和方法,如下面在这些方法的文档中所述。
+ * </a>
  */
 public final class DataBufferUShort extends DataBuffer
 {
@@ -69,6 +87,10 @@ public final class DataBufferUShort extends DataBuffer
      * Constructs an unsigned-short based <CODE>DataBuffer</CODE> with a single bank and the
      * specified size.
      *
+     * <p>
+     *  使用单个库和指定的大小构造一个无符号短整型的<CODE> DataBuffer </CODE>。
+     * 
+     * 
      * @param size The size of the <CODE>DataBuffer</CODE>.
      */
     public DataBufferUShort(int size) {
@@ -82,6 +104,10 @@ public final class DataBufferUShort extends DataBuffer
      * Constructs an unsigned-short based <CODE>DataBuffer</CODE> with the specified number of
      * banks, all of which are the specified size.
      *
+     * <p>
+     * 构造具有指定数量的库的无符号短型基于<CODE> DataBuffer </CODE>,所有这些都是指定的大小。
+     * 
+     * 
      * @param size The size of the banks in the <CODE>DataBuffer</CODE>.
      * @param numBanks The number of banks in the a<CODE>DataBuffer</CODE>.
     */
@@ -106,6 +132,14 @@ public final class DataBufferUShort extends DataBuffer
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  使用指定的数组为单个库构造一个无符号短整型的<CODE> DataBuffer </CODE>。
+     * 对于此<CODE> DataBuffer </CODE>的访问者,只能使用第一个<CODE> size </CODE>元素。
+     *  <CODE> dataArray </CODE>必须足够大以容纳<CODE> size </CODE>元素。
+     * <p>
+     *  请注意,由此构造函数创建的{@code DataBuffer}对象可能与某些实施所使用的<a href="#optimizations">性能优化</a>不兼容(例如缓存视频内存中的关联图像)。
+     * 
+     * 
      * @param dataArray The unsigned-short array for the <CODE>DataBuffer</CODE>.
      * @param size The size of the <CODE>DataBuffer</CODE> bank.
      */
@@ -131,6 +165,14 @@ public final class DataBufferUShort extends DataBuffer
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  使用指定的数组,大小和偏移量构造一个不带正负号的<CODE> DataBuffer </CODE>。
+     *  <CODE> dataArray </CODE>必须至少有<CODE> offset </CODE> + <CODE> size </CODE>元素。
+     * 该<CODE> DataBuffer </CODE>的访问器应该使用<CODE>偏移</CODE>元素<CODE>偏移</CODE> + <CODE> size </CODE>。
+     * <p>
+     *  请注意,由此构造函数创建的{@code DataBuffer}对象可能与某些实施所使用的<a href="#optimizations">性能优化</a>不兼容(例如缓存视频内存中的关联图像)。
+     * 
+     * 
      * @param dataArray The unsigned-short array for the <CODE>DataBuffer</CODE>.
      * @param size The size of the <CODE>DataBuffer</CODE> bank.
      * @param offset The offset into the <CODE>dataArray</CODE>.
@@ -160,6 +202,13 @@ public final class DataBufferUShort extends DataBuffer
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     * 使用指定的数组构造一个无符号短整型的<CODE> DataBuffer </CODE>。存储区数将等于<CODE> dataArray.length </CODE>。
+     * 每个数组的第一个<CODE> size </CODE>元素应该被此<CODE> DataBuffer </CODE>的访问器使用。
+     * <p>
+     *  请注意,由此构造函数创建的{@code DataBuffer}对象可能与某些实施所使用的<a href="#optimizations">性能优化</a>不兼容(例如缓存视频内存中的关联图像)。
+     * 
+     * 
      * @param dataArray The unsigned-short arrays for the <CODE>DataBuffer</CODE>.
      * @param size The size of the banks in the <CODE>DataBuffer</CODE>.
      */
@@ -193,6 +242,16 @@ public final class DataBufferUShort extends DataBuffer
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  构造具有指定数组,大小和偏移量的基于无符号短整型的<CODE> DataBuffer </CODE>。存储区数等于<CODE> dataArray.length </CODE>。
+     * 每个数组必须至少与<CODE> size </CODE> +相应的偏移量一样大。每个<CODE> dataArray </CODE>条目的偏移数组中必须有一个条目。
+     * 对于每个库,只有<CODE>偏移量</CODE>通过<CODE>偏移量</CODE> + <CODE> size </CODE>  -  1的元素才能被此<CODE> DataBuffer </CODE>
+     * 的访问者使用。
+     * 每个数组必须至少与<CODE> size </CODE> +相应的偏移量一样大。每个<CODE> dataArray </CODE>条目的偏移数组中必须有一个条目。
+     * <p>
+     *  请注意,由此构造函数创建的{@code DataBuffer}对象可能与某些实施所使用的<a href="#optimizations">性能优化</a>不兼容(例如缓存视频内存中的关联图像)。
+     * 
+     * 
      * @param dataArray The unsigned-short arrays for the <CODE>DataBuffer</CODE>.
      * @param size The size of the banks in the <CODE>DataBuffer</CODE>.
      * @param offsets The offsets into each array.
@@ -225,6 +284,12 @@ public final class DataBufferUShort extends DataBuffer
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  返回默认(第一个)无符号短数据数组。
+     * <p>
+     * 请注意,调用此方法可能会导致{@code DataBuffer}对象与某些实施(例如缓存视频内存中的关联图像)所使用的<a href="#optimizations">性能优化</a>不兼容。
+     * 
+     * 
      * @return The first unsigned-short data array.
      */
     public short[] getData() {
@@ -240,6 +305,12 @@ public final class DataBufferUShort extends DataBuffer
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  返回指定库的数据数组。
+     * <p>
+     *  请注意,调用此方法可能会导致{@code DataBuffer}对象与某些实施(例如缓存视频内存中的关联图像)所使用的<a href="#optimizations">性能优化</a>不兼容。
+     * 
+     * 
      * @param bank The bank whose data array you want to get.
      * @return The data array for the specified bank.
      */
@@ -256,6 +327,12 @@ public final class DataBufferUShort extends DataBuffer
      * optimizations</a> used by some implementations (such as caching
      * an associated image in video memory).
      *
+     * <p>
+     *  返回所有库的数据数组。
+     * <p>
+     *  请注意,调用此方法可能会导致{@code DataBuffer}对象与某些实施(例如缓存视频内存中的关联图像)所使用的<a href="#optimizations">性能优化</a>不兼容。
+     * 
+     * 
      * @return All of the data arrays.
      */
     public short[][] getBankData() {
@@ -266,6 +343,10 @@ public final class DataBufferUShort extends DataBuffer
     /**
      * Returns the requested data array element from the first (default) bank.
      *
+     * <p>
+     *  从第一个(默认)库返回请求的数据数组元素。
+     * 
+     * 
      * @param i The data array element you want to get.
      * @return The requested data array element as an integer.
      * @see #setElem(int, int)
@@ -278,6 +359,10 @@ public final class DataBufferUShort extends DataBuffer
     /**
      * Returns the requested data array element from the specified bank.
      *
+     * <p>
+     *  从指定的bank返回请求的数据数组元素。
+     * 
+     * 
      * @param bank The bank from which you want to get a data array element.
      * @param i The data array element you want to get.
      * @return The requested data array element as an integer.
@@ -292,6 +377,10 @@ public final class DataBufferUShort extends DataBuffer
      * Sets the requested data array element in the first (default) bank
      * to the specified value.
      *
+     * <p>
+     *  将第一个(默认)库中请求的数据数组元素设置为指定的值。
+     * 
+     * 
      * @param i The data array element you want to set.
      * @param val The integer value to which you want to set the data array element.
      * @see #getElem(int)
@@ -305,6 +394,9 @@ public final class DataBufferUShort extends DataBuffer
     /**
      * Sets the requested data array element in the specified bank
      * from the given integer.
+     * <p>
+     *  从给定的整数设置指定库中请求的数据数组元素。
+     * 
      * @param bank The bank in which you want to set the data array element.
      * @param i The data array element you want to set.
      * @param val The integer value to which you want to set the specified data array element.

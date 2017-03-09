@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,11 @@ import java.lang.reflect.Modifier;
  * The given group of events are all delivered as method calls on a single
  * event listener interface, and an event listener object can be registered
  * via a call on a registration method supplied by the event source.
+ * <p>
+ *  EventSetDescriptor描述给定Java bean触发的一组事件。
+ * <P>
+ *  给定的事件组都作为单个事件监听器接口上的方法调用来传递,并且可以通过对由事件源提供的注册方法的调用来注册事件监听器对象。
+ * 
  */
 public class EventSetDescriptor extends FeatureDescriptor {
 
@@ -59,6 +65,11 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * addFredListener method of the source component and removed with a
      * call on a removeFredListener method.
      *
+     * <p>
+     *  创建一个<TT> EventSetDescriptor </TT>,假设您遵循最简单的标准设计模式,其中命名事件"fred"是(1)作为对接口FredListener的单个方法的调用而传递的,(2)具
+     * 有类型FredEvent的单个参数,并且(3)其中FredListener可以对对源组件的addFredListener方法的调用进行注册,与对removeFredListener方法的调用。
+     * 
+     * 
      * @param sourceClass  The class firing the event.
      * @param eventSetName  The programmatic name of the event.  E.g. &quot;fred&quot;.
      *          Note that this should normally start with a lower-case character.
@@ -100,6 +111,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * Creates an <TT>EventSetDescriptor</TT> from scratch using
      * string names.
      *
+     * <p>
+     *  使用字符串名称从头开始创建<TT> EventSetDescriptor </TT>。
+     * 
+     * 
      * @param sourceClass  The class firing the event.
      * @param eventSetName The programmatic name of the event set.
      *          Note that this should normally start with a lower-case character.
@@ -130,6 +145,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * This constructor creates an EventSetDescriptor from scratch using
      * string names.
      *
+     * <p>
+     *  此构造函数使用字符串名称从头开始创建一个EventSetDescriptor。
+     * 
+     * 
      * @param sourceClass  The class firing the event.
      * @param eventSetName The programmatic name of the event set.
      *          Note that this should normally start with a lower-case character.
@@ -199,6 +218,11 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * Creates an <TT>EventSetDescriptor</TT> from scratch using
      * <TT>java.lang.reflect.Method</TT> and <TT>java.lang.Class</TT> objects.
      *
+     * <p>
+     *  使用<TT> java.lang.reflect.Method </TT>和<TT> java.lang.Class </TT>对象从头开始创建<TT> EventSetDescriptor </TT>
+     * 。
+     * 
+     * 
      * @param eventSetName The programmatic name of the event set.
      * @param listenerType The Class for the listener interface.
      * @param listenerMethods  An array of Method objects describing each
@@ -224,6 +248,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * This constructor creates an EventSetDescriptor from scratch using
      * java.lang.reflect.Method and java.lang.Class objects.
      *
+     * <p>
+     *  此构造函数使用java.lang.reflect.Method和java.lang.Class对象从头开始创建一个EventSetDescriptor。
+     * 
+     * 
      * @param eventSetName The programmatic name of the event set.
      * @param listenerType The Class for the listener interface.
      * @param listenerMethods  An array of Method objects describing each
@@ -258,6 +286,11 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * <TT>java.lang.reflect.MethodDescriptor</TT> and <TT>java.lang.Class</TT>
      *  objects.
      *
+     * <p>
+     *  使用<TT> java.lang.reflect.MethodDescriptor </TT>和<TT> java.lang.Class </TT>对象从头开始创建<TT> EventSetDescr
+     * iptor </TT>。
+     * 
+     * 
      * @param eventSetName The programmatic name of the event set.
      * @param listenerType The Class for the listener interface.
      * @param listenerMethodDescriptors  An array of MethodDescriptor objects
@@ -288,6 +321,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /**
      * Gets the <TT>Class</TT> object for the target interface.
      *
+     * <p>
+     *  获取目标接口的<TT>类</TT>对象。
+     * 
+     * 
      * @return The Class object for the target interface that will
      * get invoked when the event is fired.
      */
@@ -304,6 +341,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /**
      * Gets the methods of the target listener interface.
      *
+     * <p>
+     * 获取目标侦听器接口的方法。
+     * 
+     * 
      * @return An array of <TT>Method</TT> objects for the target methods
      * within the target listener interface that will get called when
      * events are fired.
@@ -344,6 +385,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /**
      * Gets the <code>MethodDescriptor</code>s of the target listener interface.
      *
+     * <p>
+     *  获取目标侦听器接口的<code> MethodDescriptor </code>。
+     * 
+     * 
      * @return An array of <code>MethodDescriptor</code> objects for the target methods
      * within the target listener interface that will get called when
      * events are fired.
@@ -357,6 +402,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /**
      * Gets the method used to add event listeners.
      *
+     * <p>
+     *  获取用于添加事件侦听器的方法。
+     * 
+     * 
      * @return The method used to register a listener at the event source.
      */
     public synchronized Method getAddListenerMethod() {
@@ -377,6 +426,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /**
      * Gets the method used to remove event listeners.
      *
+     * <p>
+     *  获取用于删除事件侦听器的方法。
+     * 
+     * 
      * @return The method used to remove a listener at the event source.
      */
     public synchronized Method getRemoveListenerMethod() {
@@ -397,6 +450,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /**
      * Gets the method used to access the registered event listeners.
      *
+     * <p>
+     *  获取用于访问已注册事件侦听器的方法。
+     * 
+     * 
      * @return The method used to access the array of listeners at the event
      *         source or null if it doesn't exist.
      * @since 1.4
@@ -419,6 +476,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /**
      * Mark an event set as unicast (or not).
      *
+     * <p>
+     *  将事件设置为单播(或不是)。
+     * 
+     * 
      * @param unicast  True if the event set is unicast.
      */
     public void setUnicast(boolean unicast) {
@@ -429,6 +490,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * Normally event sources are multicast.  However there are some
      * exceptions that are strictly unicast.
      *
+     * <p>
+     *  通常事件源是多播。然而,有一些严格单播的例外。
+     * 
+     * 
      * @return  <TT>true</TT> if the event set is unicast.
      *          Defaults to <TT>false</TT>.
      */
@@ -440,6 +505,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * Marks an event set as being in the &quot;default&quot; set (or not).
      * By default this is <TT>true</TT>.
      *
+     * <p>
+     *  将事件集标记为处于"默认"设置(或不)。默认情况下,这是<TT> true </TT>。
+     * 
+     * 
      * @param inDefaultEventSet <code>true</code> if the event set is in
      *                          the &quot;default&quot; set,
      *                          <code>false</code> if not
@@ -451,6 +520,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /**
      * Reports if an event set is in the &quot;default&quot; set.
      *
+     * <p>
+     *  报告事件集是否处于"默认"组。
+     * 
+     * 
      * @return  <TT>true</TT> if the event set is in
      *          the &quot;default&quot; set.  Defaults to <TT>true</TT>.
      */
@@ -463,6 +536,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
      * Merge two event set descriptors.  Where they conflict, give the
      * second argument (y) priority over the first argument (x).
      *
+     * <p>
+     *  Package-private构造函数合并两个事件集描述符。在它们冲突的地方,给第二个参数(y)优先于第一个参数(x)。
+     * 
+     * 
      * @param x  The first (lower priority) EventSetDescriptor
      * @param y  The second (higher priority) EventSetDescriptor
      */
@@ -502,6 +579,8 @@ public class EventSetDescriptor extends FeatureDescriptor {
     /*
      * Package-private dup constructor
      * This must isolate the new object from any changes to the old object.
+     * <p>
+     *  Package-private dup constructor这必须将新对象与对旧对象的任何更改隔离开来。
      */
     EventSetDescriptor(EventSetDescriptor old) {
         super(old);

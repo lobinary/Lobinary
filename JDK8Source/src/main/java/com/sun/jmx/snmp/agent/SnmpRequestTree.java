@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,11 @@ import com.sun.jmx.snmp.SnmpEngine;
  * directly stored in the Handler node.
  * When the involved SnmpMibNode is a table, the sublist is stored in a
  * sorted array indexed by the OID of the entry involved.
+ * <p>
+ *  此类用于从SNMP varbind列表注册varbinds,SnmpMibNode负责处理与该varbind相关的请求。
+ * 这个类保存了一个hashtable的Handler节点,以涉及的SnmpMibNode为关键。当涉及的SnmpMibNode是一个组时,varbind的子列表直接存储在Handler节点中。
+ * 当涉及的SnmpMibNode是表时,子列表存储在由所涉及条目的OID索引的排序数组中。
+ * 
  */
 final class SnmpRequestTree {
 
@@ -504,6 +510,9 @@ final class SnmpRequestTree {
 
         /**
          * Adds a varbind in this node sublist.
+         * <p>
+         *  在此节点子列表中添加varbind。
+         * 
          */
         public void addVarbind(SnmpVarBind varbind) {
             if (sublist == null) sublist = new Vector<>();
@@ -513,6 +522,8 @@ final class SnmpRequestTree {
         /**
          * register an entry for the given oid at the given position with
          * the given sublist.
+         * <p>
+         *  在给定的子列表的给定位置注册给定oid的条目。
          */
         @SuppressWarnings("unchecked")
         // We need this because of new Vector[n] instead of

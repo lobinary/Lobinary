@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 /**
@@ -14,6 +15,8 @@ package org.omg.CosNaming;
    * 
    * The bindings iterator is obtained by using the <tt>list</tt>
    * method on the <tt>NamingContext</tt>. 
+   * <p>
+   * 
    * @see org.omg.CosNaming.NamingContext#list
    */
 public final class BindingIteratorHolder implements org.omg.CORBA.portable.Streamable

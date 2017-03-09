@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,21 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    , {@link XmlJavaTypeAdapter}. It can also be used with the
  *    following annotations at the package level: {@link XmlJavaTypeAdapter}.
  *
+ * <p>
+ *  <p>控制类中字段和属性的顺序。 </p>
+ * 
+ *  <h3>用法</h3>
+ * 
+ *  <p> <tt> @XmlAccessorOrder </tt>注释可用于以下程序元素：</p>
+ * 
+ * <ul>
+ *  <li>包装</li> <li>顶级类</li>
+ * </ul>
+ * 
+ *  <p>有关其他常见信息,请参见<tt> javax.xml.bind </tt>包javadoc中的"包规范"。</p>
+ * 
+ *  <p>类的有效{@link XmlAccessOrder}确定如下：
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since JAXB2.0
  * @see XmlAccessOrder

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,8 @@ import static java.lang.invoke.MethodHandleStatics.*;
 
 /*
  * Auxiliary to MethodHandleInfo, wants to nest in MethodHandleInfo but must be non-public.
+ * <p>
+ *  辅助到MethodHandleInfo,希望嵌套在MethodHandleInfo中,但必须是非公开的。
  */
 /*non-public*/
 final

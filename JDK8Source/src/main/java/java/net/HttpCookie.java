@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,19 @@ import java.util.Objects;
  *
  * <p> HttpCookie class can accept all these 3 forms of syntax.
  *
+ * <p>
+ *  HttpCookie对象表示HTTP cookie,它在服务器和用户代理之间传送状态信息。 Cookie被广泛应用于创建有状态会话。
+ * 
+ *  <p>有3个HTTP Cookie规范：
+ * <blockquote>
+ *  Netscape草稿<br> RFC 2109  -  <a href="http://www.ietf.org/rfc/rfc2109.txt"> <i> http://www.ietf.org/r
+ * fc/rfc2109.txt </span> i> </a> <br> RFC 2965  -  <a href="http://www.ietf.org/rfc/rfc2965.txt"> <i> h
+ * ttp://www.ietf.org/rfc/rfc2965 .txt </i> </a>。
+ * </blockquote>
+ * 
+ *  <p> HttpCookie类可以接受所有这三种形式的语法。
+ * 
+ * 
  * @author Edward Wang
  * @since 1.6
  */
@@ -121,6 +135,16 @@ public final class HttpCookie implements Cloneable {
      * {@code setVersion} method.
      *
      *
+     * <p>
+     *  构造具有指定名称和值的cookie。
+     * 
+     *  <p>名称必须符合RFC 2965.这意味着它只能包含ASCII字母数字字符,并且不能包含逗号,分号或空格或以$字符开头。 Cookie的名称在创建后无法更改。
+     * 
+     *  <p>值可以是服务器选择发送的任何值。它的值可能只对服务器感兴趣。 Cookie的值可以在使用{@code setValue}方法创建后更改。
+     * 
+     *  <p>默认情况下,Cookie是根据RFC 2965 cookie规范创建的。版本可以使用{@code setVersion}方法更改。
+     * 
+     * 
      * @param  name
      *         a {@code String} specifying the name of the cookie
      *
@@ -161,6 +185,20 @@ public final class HttpCookie implements Cloneable {
      * may contain more than one cookie definitions, so this is a static
      * utility method instead of another constructor.
      *
+     * <p>
+     *  }}
+     * 
+     * private HttpCookie(String name,String value,String header){name = name.trim(); if(name.length()== 0 ||！isToken(name)|| name.charAt(0)=='$'){throw new IllegalArgumentException("Illegal cookie name"); }
+     * }。
+     * 
+     *  this.name = name; this.value = value; toDiscard = false; secure = false;
+     * 
+     *  whenCreated = System.currentTimeMillis(); portlist = null; this.header = header; }}
+     * 
+     *  / **构造来自set-cookie或set-cookie2头字符串的cookie。
+     *  RFC 2965第3.2.2节set-cookie2语法表示一个标题行可能包含多个cookie定义,因此这是一个静态实用程序方法,而不是另一个构造函数。
+     * 
+     * 
      * @param  header
      *         a {@code String} specifying the set-cookie header. The header
      *         should start with "set-cookie", or "set-cookie2" token; or it
@@ -222,6 +260,10 @@ public final class HttpCookie implements Cloneable {
     /**
      * Reports whether this HTTP cookie has expired or not.
      *
+     * <p>
+     *  报告此HTTP Cookie是否已过期。
+     * 
+     * 
      * @return  {@code true} to indicate this HTTP cookie has expired;
      *          otherwise, {@code false}
      */
@@ -245,6 +287,10 @@ public final class HttpCookie implements Cloneable {
      * The comment is useful if the browser presents the cookie
      * to the user. Comments are not supported by Netscape Version 0 cookies.
      *
+     * <p>
+     *  指定描述Cookie的用途的注释。如果浏览器向用户呈现Cookie,则注释很有用。 Netscape版本0 Cookie不支持注释。
+     * 
+     * 
      * @param  purpose
      *         a {@code String} specifying the comment to display to the user
      *
@@ -258,6 +304,10 @@ public final class HttpCookie implements Cloneable {
      * Returns the comment describing the purpose of this cookie, or
      * {@code null} if the cookie has no comment.
      *
+     * <p>
+     *  返回描述此Cookie的用途的注释,如果Cookie没有注释,则返回{@code null}。
+     * 
+     * 
      * @return  a {@code String} containing the comment, or {@code null} if none
      *
      * @see  #setComment
@@ -271,6 +321,10 @@ public final class HttpCookie implements Cloneable {
      * The comment URL is useful if the browser presents the cookie
      * to the user. Comment URL is RFC 2965 only.
      *
+     * <p>
+     *  指定描述Cookie的用途的注释URL。如果浏览器向用户提供Cookie,则注释URL很有用。注释URL仅限RFC 2965。
+     * 
+     * 
      * @param  purpose
      *         a {@code String} specifying the comment URL to display to the user
      *
@@ -284,6 +338,10 @@ public final class HttpCookie implements Cloneable {
      * Returns the comment URL describing the purpose of this cookie, or
      * {@code null} if the cookie has no comment URL.
      *
+     * <p>
+     *  返回描述此Cookie的用途的注释网址,如果Cookie没有注释网址,则返回{@code null}。
+     * 
+     * 
      * @return  a {@code String} containing the comment URL, or {@code null}
      *          if none
      *
@@ -297,6 +355,10 @@ public final class HttpCookie implements Cloneable {
      * Specify whether user agent should discard the cookie unconditionally.
      * This is RFC 2965 only attribute.
      *
+     * <p>
+     *  指定用户代理是否应无条件地丢弃Cookie。这是仅RFC 2965属性。
+     * 
+     * 
      * @param  discard
      *         {@code true} indicates to discard cookie unconditionally
      *
@@ -309,6 +371,10 @@ public final class HttpCookie implements Cloneable {
     /**
      * Returns the discard attribute of the cookie
      *
+     * <p>
+     *  返回cookie的discard属性
+     * 
+     * 
      * @return  a {@code boolean} to represent this cookie's discard attribute
      *
      * @see  #setDiscard
@@ -321,6 +387,10 @@ public final class HttpCookie implements Cloneable {
      * Specify the portlist of the cookie, which restricts the port(s)
      * to which a cookie may be sent back in a Cookie header.
      *
+     * <p>
+     * 指定cookie的端口列表,该端口列表限制Cookie在Cookie头中发送回的端口。
+     * 
+     * 
      * @param  ports
      *         a {@code String} specify the port list, which is comma separated
      *         series of digits
@@ -334,6 +404,10 @@ public final class HttpCookie implements Cloneable {
     /**
      * Returns the port list attribute of the cookie
      *
+     * <p>
+     *  返回cookie的端口列表属性
+     * 
+     * 
      * @return  a {@code String} contains the port list or {@code null} if none
      *
      * @see  #setPortlist
@@ -352,6 +426,13 @@ public final class HttpCookie implements Cloneable {
      * {@code a.b.foo.com}). By default, cookies are only returned
      * to the server that sent them.
      *
+     * <p>
+     *  指定应在其中显示此Cookie的域。
+     * 
+     *  <p>域名的格式由RFC 2965指定。域名以点({@code .foo.com})开头,表示Cookie对指定的域名系统(DNS)中的服务器可见。
+     * 区域(例如{@code www.foo.com},但不是{@code abfoo.com})。默认情况下,Cookie只会返回给发送它们的服务器。
+     * 
+     * 
      * @param  pattern
      *         a {@code String} containing the domain name within which this
      *         cookie is visible; form is according to RFC 2965
@@ -369,6 +450,10 @@ public final class HttpCookie implements Cloneable {
      * Returns the domain name set for this cookie. The form of the domain name
      * is set by RFC 2965.
      *
+     * <p>
+     *  返回为此Cookie设置的域名。域名的格式由RFC 2965设置。
+     * 
+     * 
      * @return  a {@code String} containing the domain name
      *
      * @see  #setDomain
@@ -389,6 +474,14 @@ public final class HttpCookie implements Cloneable {
      * and will be deleted when the Web browser exits. A zero value causes the
      * cookie to be deleted.
      *
+     * <p>
+     *  设置Cookie的最长使用时间(以秒为单位)。
+     * 
+     *  <p>正值表示Cookie将在过去许多秒后到期。请注意,该值是Cookie到期时的<i>最大</i>年龄,而不是Cookie的当前年龄。
+     * 
+     *  <p>负值表示Cookie不会持久存储,并且会在Web浏览器退出时被删除。零值导致cookie被删除。
+     * 
+     * 
      * @param  expiry
      *         an integer specifying the maximum age of the cookie in seconds;
      *         if zero, the cookie should be discarded immediately; otherwise,
@@ -404,6 +497,10 @@ public final class HttpCookie implements Cloneable {
      * Returns the maximum age of the cookie, specified in seconds. By default,
      * {@code -1} indicating the cookie will persist until browser shutdown.
      *
+     * <p>
+     *  返回Cookie的最大期限,以秒为单位。默认情况下,指示Cookie的{@code -1}将持续到浏览器关闭。
+     * 
+     * 
      * @return  an integer specifying the maximum age of the cookie in seconds
      *
      * @see  #setMaxAge
@@ -425,6 +522,15 @@ public final class HttpCookie implements Cloneable {
      * <p> Consult RFC 2965 (available on the Internet) for more
      * information on setting path names for cookies.
      *
+     * <p>
+     *  指定客户端应向其返回Cookie的Cookie的路径。
+     * 
+     * <p>该Cookie对您指定的目录中的所有页面以及该目录的子目录中的所有页面都可见。
+     *  Cookie的路径必须包含设置Cookie的servlet,例如<i> / catalog </i>,这使cookie可以通过<i> / catalog </i>下的服务器上的所有目录查看。
+     * 
+     *  <p>有关设置Cookie的路径名的详细信息,请参阅RFC 2965(可从Internet获得)。
+     * 
+     * 
      * @param  uri
      *         a {@code String} specifying a path
      *
@@ -438,6 +544,10 @@ public final class HttpCookie implements Cloneable {
      * Returns the path on the server to which the browser returns this cookie.
      * The cookie is visible to all subpaths on the server.
      *
+     * <p>
+     *  返回浏览器返回此Cookie的服务器上的路径。该cookie对服务器上的所有子路径都可见。
+     * 
+     * 
      * @return  a {@code String} specifying a path that contains a servlet name,
      *          for example, <i>/catalog</i>
      *
@@ -453,6 +563,12 @@ public final class HttpCookie implements Cloneable {
      *
      * <p> The default value is {@code false}.
      *
+     * <p>
+     *  指示是否只应使用安全协议(例如HTTPS或SSL)发送Cookie。
+     * 
+     *  <p>默认值为{@code false}。
+     * 
+     * 
      * @param  flag
      *         If {@code true}, the cookie can only be sent over a secure
      *         protocol like HTTPS. If {@code false}, it can be sent over
@@ -469,6 +585,10 @@ public final class HttpCookie implements Cloneable {
      * secure protocol, or {@code false} if the it can be sent using any
      * protocol.
      *
+     * <p>
+     *  如果发送此Cookie应限制为安全协议,则返回{@code true};如果可以使用任何协议发送,则返回{@code false}。
+     * 
+     * 
      * @return  {@code false} if the cookie can be sent over any standard
      *          protocol; otherwise, {@code true}
      *
@@ -482,6 +602,10 @@ public final class HttpCookie implements Cloneable {
      * Returns the name of the cookie. The name cannot be changed after
      * creation.
      *
+     * <p>
+     *  返回Cookie的名称。创建后不能更改名称。
+     * 
+     * 
      * @return  a {@code String} specifying the cookie's name
      */
     public String getName() {
@@ -497,6 +621,12 @@ public final class HttpCookie implements Cloneable {
      * question marks, at signs, colons, and semicolons. Empty values may not
      * behave the same way on all browsers.
      *
+     * <p>
+     *  创建cookie后,为cookie分配一个新值。如果使用二进制值,则可能需要使用BASE64编码。
+     * 
+     *  <p>对于版本0 Cookie,值不应包含空格,括号,括号,等号,逗号,双引号,斜杠,问号,符号,冒号和分号。空值在所有浏览器上的行为可能不同。
+     * 
+     * 
      * @param  newValue
      *         a {@code String} specifying the new value
      *
@@ -509,6 +639,10 @@ public final class HttpCookie implements Cloneable {
     /**
      * Returns the value of the cookie.
      *
+     * <p>
+     *  返回Cookie的值。
+     * 
+     * 
      * @return  a {@code String} containing the cookie's present value
      *
      * @see  #setValue
@@ -523,6 +657,10 @@ public final class HttpCookie implements Cloneable {
      * cookie specification drafted by Netscape. Cookies provided by a browser
      * use and identify the browser's cookie version.
      *
+     * <p>
+     * 返回此Cookie符合的协议版本。版本1符合RFC 2965/2109,版本0符合Netscape起草的原始cookie规范。浏览器提供的Cookie使用并标识浏览器的Cookie版本。
+     * 
+     * 
      * @return  0 if the cookie complies with the original Netscape
      *          specification; 1 if the cookie complies with RFC 2965/2109
      *
@@ -537,6 +675,10 @@ public final class HttpCookie implements Cloneable {
      * with. Version 0 complies with the original Netscape cookie
      * specification. Version 1 complies with RFC 2965/2109.
      *
+     * <p>
+     *  设置此cookie符合的cookie协议的版本。版本0符合原始的Netscape cookie规范。版本1符合RFC 2965/2109。
+     * 
+     * 
      * @param  v
      *         0 if the cookie should comply with the original Netscape
      *         specification; 1 if the cookie should comply with RFC 2965/2109
@@ -559,6 +701,10 @@ public final class HttpCookie implements Cloneable {
      * attribute. This means that the cookie should not be accessible to
      * scripting engines, like javascript.
      *
+     * <p>
+     *  如果此Cookie包含<i> HttpOnly </i>属性,则返回{@code true}。这意味着cookie不应该被脚本引擎访问,比如javascript。
+     * 
+     * 
      * @return  {@code true} if this cookie should be considered HTTPOnly
      *
      * @see  #setHttpOnly(boolean)
@@ -572,6 +718,10 @@ public final class HttpCookie implements Cloneable {
      * {@code true} it means the cookie should not be accessible to scripting
      * engines like javascript.
      *
+     * <p>
+     *  指示Cookie是否应被视为仅HTTP。如果设置为{@code true},这意味着cookie不应该像javascript这样的脚本引擎可以访问。
+     * 
+     * 
      * @param  httpOnly
      *         if {@code true} make the cookie HTTP only, i.e. only visible as
      *         part of an HTTP request.
@@ -624,6 +774,30 @@ public final class HttpCookie implements Cloneable {
      *   host is example.local, and example.local domain-matches .local.</li>
      * </ul></blockquote>
      *
+     * <p>
+     *  用于检查主机名是否位于域中的实用程序方法。
+     * 
+     *  <p>这个概念在cookie规范中描述。为了理解这个概念,需要首先定义一些术语：
+     * <blockquote>
+     *  有效主机名=主机名(如果主机名包含点)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+     * ;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or = hostname.local如果没有。
+     * </blockquote>
+     *  <p>主机A的名称与主机B的域匹配,如果：<blockquote> <ul> <li>主机名字符串string-compare equal;或</li> <li> A是一个HDN字符串,其格式为NB,
+     * 其中N是非空的名称字符串,B的格式为.B',B'是HDN字符串。
+     *  (所以,x.y.com域名匹配.Y.com但不是Y.com。)</li> </ul> </blockquote>。
+     * 
+     * <p>主机不在域中(RFC 2965 sec。3.3.2)if：<blockquote> <ul> <li> Domain属性的值不包含嵌入的点,值不是.local。
+     *  </li> <li>从请求主机派生的有效主机名不与域属性进行域匹配。</li> <li>请求主机是HDN(不是IP地址) HD,其中D是Domain属性的值,H是包含一个或多个点的字符串。
+     * </li> </ul> </blockquote>。
+     * 
+     *  <p>示例：<blockquote> <ul> <li>对于Domain = .foo.com,来自请求主机yxfoo.com的Set-Cookie2将被拒绝,因为H是yx且包含点。
+     * </li> <li>接受来自请求 - 主机x.foo.com的Domain = .foo.com的Set-Cookie2。
+     * </li> <li>设置为Cookie = .com或Domain = .com的Set-Cookie2, </li> <li>将接受来自Domain = .local的请求主机示例的Set-Cooki
+     * e2,因为请求主机的有效主机名是示例。
+     * </li> <li>接受来自请求 - 主机x.foo.com的Domain = .foo.com的Set-Cookie2。
+     *  local,and example.local domain-matches .local。</li> </ul> </blockquote>。
+     * 
+     * 
      * @param  domain
      *         the domain name to check host name with
      *
@@ -682,6 +856,10 @@ public final class HttpCookie implements Cloneable {
      * which is in the format defined by corresponding cookie specification,
      * but without the leading "Cookie:" token.
      *
+     * <p>
+     *  构造此Cookie的Cookie标头字符串表示形式,其格式由相应的Cookie规范定义,但没有前导的"Cookie："标记。
+     * 
+     * 
      * @return  a string form of the cookie. The string has the defined format
      */
     @Override
@@ -700,6 +878,12 @@ public final class HttpCookie implements Cloneable {
      * (case-insensitive), have same name (case-insensitive), and have same path
      * (case-sensitive).
      *
+     * <p>
+     *  测试两个HTTP Cookie的相等性。
+     * 
+     *  <p>结果是{@code true}仅当两个Cookie来自同一域(不区分大小写),具有相同的名称(不区分大小写),并且具有相同的路径(区分大小写)。
+     * 
+     * 
      * @return  {@code true} if two HTTP cookies equal to each other;
      *          otherwise, {@code false}
      */
@@ -730,6 +914,14 @@ public final class HttpCookie implements Cloneable {
      * + getPath().hashCode()
      * </blockquote>
      *
+     * <p>
+     * 返回此HTTP Cookie的哈希码。结果是此cookie的三个重要组件的散列码值的总和：名称,域和路径。也就是说,哈希码是表达式的值：
+     * <blockquote>
+     *  getName()。toLowerCase()。hashCode()<br> + getDomain()。toLowerCase()。hashCode()<br> + getPath()。
+     * hashCode。
+     * </blockquote>
+     * 
+     * 
      * @return  this HTTP cookie's hash code
      */
     @Override
@@ -744,6 +936,10 @@ public final class HttpCookie implements Cloneable {
     /**
      * Create and return a copy of this object.
      *
+     * <p>
+     *  创建并返回此对象的副本。
+     * 
+     * 
      * @return  a clone of this HTTP cookie
      */
     @Override
@@ -766,6 +962,10 @@ public final class HttpCookie implements Cloneable {
     /*
      * Tests a string and returns true if the string counts as a token.
      *
+     * <p>
+     *  测试字符串,如果字符串计数为令牌,则返回true。
+     * 
+     * 
      * @param  value
      *         the {@code String} to be tested
      *
@@ -787,6 +987,10 @@ public final class HttpCookie implements Cloneable {
     /*
      * Parse header string to cookie object.
      *
+     * <p>
+     *  将头字符串解析为cookie对象。
+     * 
+     * 
      * @param  header
      *         header string; should contain only one NAME=VALUE pair
      *
@@ -849,6 +1053,9 @@ public final class HttpCookie implements Cloneable {
     /*
      * assign cookie attribute value to attribute name;
      * use a map to simulate method dispatch
+     * <p>
+     *  将cookie属性值分配给属性名称;使用地图来模拟方法分派
+     * 
      */
     static interface CookieAttributeAssignor {
             public void assign(HttpCookie cookie,
@@ -987,6 +1194,9 @@ public final class HttpCookie implements Cloneable {
     /*
      * Returns the original header this cookie was consructed from, if it was
      * constructed by parsing a header, otherwise null.
+     * <p>
+     *  如果是通过解析头构造的,则返回这个cookie所绑定的原始头,否则返回null。
+     * 
      */
     private String header() {
         return header;
@@ -995,6 +1205,9 @@ public final class HttpCookie implements Cloneable {
     /*
      * Constructs a string representation of this cookie. The string format is
      * as Netscape spec, but without leading "Cookie:" token.
+     * <p>
+     *  构造此cookie的字符串表示形式。字符串格式是Netscape规范,但没有前导"Cookie："令牌。
+     * 
      */
     private String toNetscapeHeaderString() {
         return getName() + "=" + getValue();
@@ -1003,6 +1216,9 @@ public final class HttpCookie implements Cloneable {
     /*
      * Constructs a string representation of this cookie. The string format is
      * as RFC 2965/2109, but without leading "Cookie:" token.
+     * <p>
+     *  构造此cookie的字符串表示形式。字符串格式为RFC 2965/2109,但没有前导"Cookie："令牌。
+     * 
      */
     private String toRFC2965HeaderString() {
         StringBuilder sb = new StringBuilder();
@@ -1021,6 +1237,8 @@ public final class HttpCookie implements Cloneable {
     static final TimeZone GMT = TimeZone.getTimeZone("GMT");
 
     /*
+    /* <p>
+    /* 
      * @param  dateString
      *         a date string in one of the formats defined in Netscape cookie spec
      *
@@ -1060,6 +1278,9 @@ public final class HttpCookie implements Cloneable {
 
     /*
      * try to guess the cookie version through set-cookie header string
+     * <p>
+     *  尝试通过set-cookie头字符串猜测cookie版本
+     * 
      */
     private static int guessCookieVersion(String header) {
         int version = 0;
@@ -1119,6 +1340,9 @@ public final class HttpCookie implements Cloneable {
      *   2) but not the comma surrounding by double-quotes, which is the comma
      *      inside port list or embeded URIs.
      *
+     * <p>
+     *  根据rfc 2965拆分cookie头字符串：1)split它是逗号; 2),而不是用双引号括起来的逗号,这是端口列表或嵌入的URI中的逗号。
+     * 
      * @param  header
      *         the cookie header string to split
      *

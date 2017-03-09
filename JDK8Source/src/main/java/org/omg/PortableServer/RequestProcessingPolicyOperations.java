@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -13,12 +14,17 @@ package org.omg.PortableServer;
 	 * This policy specifies how requests are processed by 
 	 * the created POA.  The default is 
 	 * USE_ACTIVE_OBJECT_MAP_ONLY.
+	 * <p>
+	 *  此策略指定如何由创建的POA处理请求。默认值为USE_ACTIVE_OBJECT_MAP_ONLY。
+	 * 
 	 */
 public interface RequestProcessingPolicyOperations  extends org.omg.CORBA.PolicyOperations
 {
 
   /**
 	 * specifies the policy value
+	 * <p>
+	 *  指定策略值
 	 */
   org.omg.PortableServer.RequestProcessingPolicyValue value ();
 } // interface RequestProcessingPolicyOperations

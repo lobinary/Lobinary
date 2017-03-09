@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,33 @@
  * Business Machines, Inc., http://www.apache.org.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)1999-2003 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得将"Xerces"和"Apache Software Foundation"名称用于支持或推广从本软件衍生的产品。如需书面许可,请联系apache@apache.org。
+ * 
+ *  未经Apache软件基金会事先书面许可,从本软件派生的产品可能不会被称为"Apache",也不可能出现在他们的名字中。
+ * 
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件由许多个人代表Apache软件基金会做出的自愿捐款组成,最初基于软件版权(c)2002,国际商业机器公司,http://www.apache.org。
+ * 有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -105,6 +133,29 @@ import javax.xml.stream.events.XMLEvent;
  *
  * @xerces.internal
  *
+ * <p>
+ *  扫描器用作传送到文档处理器的文档信息的源。
+ * 
+ *  此类扫描XML文档,检查文档是否具有DTD,如果未找到DTD,则扫描程序将从管道中删除DTD验证程序并执行命名空间绑定。
+ * 
+ *  注意：此扫描程序应该只在命名空间处理打开时使用！
+ * 
+ * <p>
+ * 此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ *  <li> http://xml.org/sax/features/namespaces {true}  - 如果此地图项的值设置为false,则不得使用此扫描程序。
+ * </li> <li> http：// xml .org / sax / features / validation </li> <li> http://apache.org/xml/features/n
+ * onvalidating/load-external-dtd </li> <li> http://apache.org/xml / features / scanner / notify-char-re
+ * fs </li> <li> http://apache.org/xml/features/scanner/notify-builtin-refs </li> <li> http://apache.org
+ *  / xml / properties / internal / symbol-table </li> <li> http://apache.org/xml/properties/internal/er
+ * ror-reporter </li> <li> http://apache.org/xml / properties / internal / entity-manager </li> <li> htt
+ * p://apache.org/xml/properties/internal/dtd-scanner </li>。
+ *  <li> http://xml.org/sax/features/namespaces {true}  - 如果此地图项的值设置为false,则不得使用此扫描程序。
+ * </ul>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Elena Litani, IBM
  * @author Michael Glavassevich, IBM
  * @author Sunitha Reddy, Sun Microsystems
@@ -115,12 +166,18 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
     /**
      * If is true, the dtd validator is no longer in the pipeline
      * and the scanner should bind namespaces
+     * <p>
+     *  如果为true,dtd验证器不再在管道中,并且扫描程序应该绑定命名空间
+     * 
      */
     protected boolean fBindNamespaces;
 
     /**
      * If validating parser, make sure we report an error in the
      *  scanner if DTD grammar is missing.
+     * <p>
+     *  如果验证解析器,确保我们报告错误在扫描仪如果DTD语法缺失。
+     * 
      */
     protected boolean fPerformValidation;
 
@@ -136,6 +193,11 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
      * This is reserved for the case where scanning of a start element spans
      * several methods, as is the case when scanning the start of a root element
      * where a DTD external subset may be read after scanning the element name.
+     * <p>
+     *  在元素名称之后或属性之间锯开空格。
+     * 
+     *  这保留用于开始元素的扫描跨越若干方法的情况,如扫描根元素的开始的情况,其中可以在扫描元素名称之后读取DTD外部子集。
+     * 
      */
     private boolean fSawSpace;
 
@@ -144,6 +206,10 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
      * The scanner is responsible for removing DTD validator
      * from the pipeline if it is not needed.
      *
+     * <p>
+     *  如果不需要,扫描器负责从流水线中删除DTD验证器。
+     * 
+     * 
      * @param validator the DTD validator from the pipeline
      */
     public void setDTDValidator(XMLDTDValidatorFilter validator) {
@@ -168,6 +234,18 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
      * destroyed. The caller should copy important information out of
      * these variables before calling this method.
      *
+     * <p>
+     *  扫描start元素。此方法将处理命名空间信息的绑定,并通知处理程序元素的开始。
+     * <p>
+     * <pre>
+     * [44] EmptyElemTag :: ='&lt;'名称(S属性)* S? '/>'[40] STag :: ='&lt;'名称(S属性)* S? '>'
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>此方法假定前导'&lt;'字符已被消耗。
+     * <p>
+     *  <strong>注意：</strong>此方法使用fElementQName和fAttributes变量。这些变量的内容将被销毁。在调用此方法之前,调用者应该从这些变量中复制重要信息。
+     * 
+     * 
      * @return True if element is empty. (i.e. It matches
      *          production [44].
      */
@@ -357,6 +435,10 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
 
                 /*if (fBindNamespaces) {
                     fNamespaceContext.popContext();
+                /* <p>
+                /*  fNamespaceContext.popContext();
+                /* 
+                /* 
                 }*/
                 fScanEndElement = true;
 
@@ -380,6 +462,10 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
     /**
      * Scans the name of an element in a start or empty tag.
      *
+     * <p>
+     *  扫描开始或空标记中元素的名称。
+     * 
+     * 
      * @see #scanStartElement()
      */
     protected void scanStartElementName ()
@@ -394,6 +480,10 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
     /**
      * Scans the remainder of a start or empty tag after the element name.
      *
+     * <p>
+     *  扫描元素名称后面的开始或空标记的其余部分。
+     * 
+     * 
      * @see #scanStartElement
      * @return True if element is empty.
      */
@@ -603,6 +693,18 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
      * fQName variables. The contents of these variables will be
      * destroyed.
      *
+     * <p>
+     *  扫描属性。
+     * <p>
+     * <pre>
+     *  Attribute :: =命名Eq AttValue
+     * </pre>
+     * <p>
+     *  <strong>注意</strong>：此方法假定流上的下一个字符是属性名称的第一个字符。
+     * <p>
+     *  <strong>注意：</strong>此方法使用fAttributeQName和fQName变量。这些变量的内容将被销毁。
+     * 
+     * 
      * @param attributes The attributes list for the scanned attribute.
      */
     protected void scanAttribute(XMLAttributesImpl attributes)
@@ -765,6 +867,16 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
      * copy the needed information out of this variable before calling
      * this method.
      *
+     * <p>
+     *  扫描结束元素。
+     * <p>
+     * <pre>
+     *  [42] ETag :: ='&lt; /'名称S? '>'
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>此方法使用fElementQName变量。此变量的内容将被销毁。在调用此方法之前,调用者应该从这个变量中复制所需的信息。
+     * 
+     * 
      * @return The element depth.
      */
     protected int scanEndElement() throws IOException, XNIException {
@@ -815,6 +927,10 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
 
             /*if (fBindNamespaces) {
                 fNamespaceContext.popContext();
+            /* <p>
+            /*  fNamespaceContext.popContext();
+            /* 
+            /* 
             }*/
 
         }
@@ -842,6 +958,8 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
 
     /** return the next state on the input
      *
+     * <p>
+     * 
      * @return int
      */
 
@@ -860,6 +978,9 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
 
     /**
      * Driver to handle content scanning.
+     * <p>
+     *  驱动程序处理内容扫描。
+     * 
      */
     protected final class NS11ContentDriver extends ContentDriver {
         /**
@@ -870,6 +991,10 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
          * is no longer in the pipeline bind namespaces in the scanner.
          *
          *
+         * <p>
+         * 扫描根元素钩子。此方法是一个钩子,用于子类添加代码来处理根元素的扫描。如果没有DTD语法,此方法还将尝试从管道中删除DTD验证器。如果DTD验证器不再在管道中绑定命名空间在扫描器中。
+         * 
+         * 
          * @return True if the caller should stop and return true which
          *          allows the scanner to switch to a new scanning
          *          Driver. A return value of false indicates that
@@ -906,6 +1031,8 @@ public class XML11NSDocumentScannerImpl extends XML11DocumentScannerImpl {
          * if no DTD grammar exists. If no validator exists in the
          * pipeline or there is no DTD grammar, namespace binding
          * is performed by the scanner in the enclosing class.
+         * <p>
+         *  如果没有DTD语法存在,请通过删除DTD验证器来重新配置管道。如果管道中没有验证器,或没有DTD语法,则命名空间绑定由扫描器在封闭类中执行。
          */
         private void reconfigurePipeline() {
             if (fDTDValidator == null) {

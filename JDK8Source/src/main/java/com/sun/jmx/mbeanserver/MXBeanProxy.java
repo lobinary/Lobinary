@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,10 @@ import javax.management.ObjectName;
    arbitrary Java types in the interface and the Open Types used
    by the MXBean.</p>
 
+/* <p>
+/*  <p> {@link InvocationHandler}的辅助类,它将方法从MXBean接口转移到MBean Server中的已命名MXBean,并处理接口中任意Java类型与MXBean使用的开放
+/* 类型之间的转换。
+/* 
    @since 1.6
 */
 public class MXBeanProxy {

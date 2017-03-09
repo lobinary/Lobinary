@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,15 +57,47 @@ package com.sun.org.apache.bcel.internal;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)2001 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得使用名称"Apache"和"Apache Software Foundation"和"Apache BCEL"来认可或推广从本软件衍生的产品。
+ * 如需书面许可,请联系apache@apache.org。
+ * 
+ * 未经Apache软件基金会事先书面许可,从本软件衍生的产品可能不会被称为"Apache","Apache BCEL",也不可能出现在他们的名字中。
+ * 
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款。有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 /**
  * Constants for the project, mostly defined in the JVM specification.
  *
+ * <p>
+ *  该项目的常量,大多在JVM规范中定义。
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public interface Constants {
   /** Major and minor version of the code.
+  /* <p>
    */
   public final static short MAJOR_1_1 = 45;
   public final static short MINOR_1_1 = 3;
@@ -76,14 +109,17 @@ public interface Constants {
   public final static short MINOR     = MINOR_1_1;
 
   /** Maximum value for an unsigned short.
+  /* <p>
    */
   public final static int MAX_SHORT = 65535; // 2^16 - 1
 
   /** Maximum value for an unsigned byte.
+  /* <p>
    */
   public final static int MAX_BYTE  = 255; // 2^8 - 1
 
   /** Access flags for classes, fields and methods.
+  /* <p>
    */
   public final static short ACC_PUBLIC       = 0x0001;
   public final static short ACC_PRIVATE      = 0x0002;
@@ -111,6 +147,7 @@ public interface Constants {
   };
 
   /** Tags in constant pool to denote type of constant.
+  /* <p>
    */
   public final static byte CONSTANT_Utf8               = 1;
   public final static byte CONSTANT_Integer            = 3;
@@ -134,11 +171,17 @@ public interface Constants {
   /** The name of the static initializer, also called &quot;class
    *  initialization method&quot; or &quot;interface initialization
    *   method&quot;. This is &quot;&lt;clinit&gt;&quot;.
+   * <p>
+   *  初始化方法"或"接口初始化方法"。这是"&lt; clinit&gt;"。
+   * 
    */
   public final static String STATIC_INITIALIZER_NAME = "<clinit>";
 
   /** The name of every constructor method in a class, also called
    * &quot;instance initialization method&quot;. This is &quot;&lt;init&gt;&quot;.
+   * <p>
+   *  "实例初始化方法"。这是"&lt; init&gt;"。
+   * 
    */
   public final static String CONSTRUCTOR_NAME = "<init>";
 
@@ -148,11 +191,15 @@ public interface Constants {
   /**
    * Limitations of the Java Virtual Machine.
    * See The Java Virtual Machine Specification, Second Edition, page 152, chapter 4.10.
+   * <p>
+   * Java虚拟机的限制。请参见Java虚拟机规范,第二版,第152页,第4.10章。
+   * 
    */
   public static final int MAX_CP_ENTRIES     = 65535;
   public static final int MAX_CODE_SIZE      = 65536; //bytes
 
   /** Java VM opcodes.
+  /* <p>
    */
   public static final short NOP              = 0;
   public static final short ACONST_NULL      = 1;
@@ -362,6 +409,9 @@ public interface Constants {
 
   /**
    * Non-legal opcodes, may be used by JVM internally.
+   * <p>
+   *  非法操作码,可以由JVM内部使用。
+   * 
    */
   public static final short BREAKPOINT                = 202;
   public static final short LDC_QUICK                 = 203;
@@ -394,12 +444,18 @@ public interface Constants {
 
   /**
    * For internal purposes only.
+   * <p>
+   *  仅供内部使用。
+   * 
    */
   public static final short PUSH             = 4711;
   public static final short SWITCH           = 4712;
 
   /**
    * Illegal codes
+   * <p>
+   *  非法代码
+   * 
    */
   public static final short  UNDEFINED      = -1;
   public static final short  UNPREDICTABLE  = -2;
@@ -425,6 +481,9 @@ public interface Constants {
 
   /** The primitive type names corresponding to the T_XX constants,
    * e.g., TYPE_NAMES[T_INT] = "int"
+   * <p>
+   *  例如TYPE_NAMES [T_INT] ="int"
+   * 
    */
   public static final String[] TYPE_NAMES = {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
@@ -434,6 +493,9 @@ public interface Constants {
 
   /** The primitive class names corresponding to the T_XX constants,
    * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
+   * <p>
+   *  例如CLASS_TYPE_NAMES [T_INT] ="java.lang.Integer"
+   * 
    */
   public static final String[] CLASS_TYPE_NAMES = {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
@@ -445,6 +507,9 @@ public interface Constants {
 
   /** The signature characters corresponding to primitive types,
    * e.g., SHORT_TYPE_NAMES[T_INT] = "I"
+   * <p>
+   *  例如SHORT_TYPE_NAMES [T_INT] ="I"
+   * 
    */
   public static final String[] SHORT_TYPE_NAMES = {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
@@ -455,56 +520,155 @@ public interface Constants {
   /**
    * Number of byte code operands, i.e., number of bytes after the tag byte
    * itself.
+   * <p>
+   *  字节代码操作数的数目,即标记字节本身之后的字节数。
+   * 
    */
   public static final short[] NO_OF_OPERANDS = {
     0/*nop*/, 0/*aconst_null*/, 0/*iconst_m1*/, 0/*iconst_0*/,
+    0/* <p>
+    0/* 
     0/*iconst_1*/, 0/*iconst_2*/, 0/*iconst_3*/, 0/*iconst_4*/,
+    0/* <p>
+    0/* 
     0/*iconst_5*/, 0/*lconst_0*/, 0/*lconst_1*/, 0/*fconst_0*/,
+    0/* <p>
+    0/* 
     0/*fconst_1*/, 0/*fconst_2*/, 0/*dconst_0*/, 0/*dconst_1*/,
+    0/* <p>
+    0/* 
     1/*bipush*/, 2/*sipush*/, 1/*ldc*/, 2/*ldc_w*/, 2/*ldc2_w*/,
+    1/* <p>
+    1/* 
     1/*iload*/, 1/*lload*/, 1/*fload*/, 1/*dload*/, 1/*aload*/,
+    1/* <p>
+    1/* 
     0/*iload_0*/, 0/*iload_1*/, 0/*iload_2*/, 0/*iload_3*/,
+    0/* <p>
+    0/* 
     0/*lload_0*/, 0/*lload_1*/, 0/*lload_2*/, 0/*lload_3*/,
+    0/* <p>
+    0/* 
     0/*fload_0*/, 0/*fload_1*/, 0/*fload_2*/, 0/*fload_3*/,
+    0/* <p>
+    0/* 
     0/*dload_0*/, 0/*dload_1*/, 0/*dload_2*/, 0/*dload_3*/,
+    0/* <p>
+    0/* 
     0/*aload_0*/, 0/*aload_1*/, 0/*aload_2*/, 0/*aload_3*/,
+    0/* <p>
+    0/* 
     0/*iaload*/, 0/*laload*/, 0/*faload*/, 0/*daload*/,
+    0/* <p>
+    0/* 
     0/*aaload*/, 0/*baload*/, 0/*caload*/, 0/*saload*/,
+    0/* <p>
+    0/* 
     1/*istore*/, 1/*lstore*/, 1/*fstore*/, 1/*dstore*/,
+    1/* <p>
+    1/* 
     1/*astore*/, 0/*istore_0*/, 0/*istore_1*/, 0/*istore_2*/,
+    1/* <p>
+    1/* 
     0/*istore_3*/, 0/*lstore_0*/, 0/*lstore_1*/, 0/*lstore_2*/,
+    0/* <p>
+    0/* 
     0/*lstore_3*/, 0/*fstore_0*/, 0/*fstore_1*/, 0/*fstore_2*/,
+    0/* <p>
+    0/* 
     0/*fstore_3*/, 0/*dstore_0*/, 0/*dstore_1*/, 0/*dstore_2*/,
+    0/* <p>
+    0/* 
     0/*dstore_3*/, 0/*astore_0*/, 0/*astore_1*/, 0/*astore_2*/,
+    0/* <p>
+    0/* 
     0/*astore_3*/, 0/*iastore*/, 0/*lastore*/, 0/*fastore*/,
+    0/* <p>
+    0/* 
     0/*dastore*/, 0/*aastore*/, 0/*bastore*/, 0/*castore*/,
+    0/* <p>
+    0/* 
     0/*sastore*/, 0/*pop*/, 0/*pop2*/, 0/*dup*/, 0/*dup_x1*/,
+    0/* <p>
+    0/* 
     0/*dup_x2*/, 0/*dup2*/, 0/*dup2_x1*/, 0/*dup2_x2*/, 0/*swap*/,
+    0/* <p>
+    0/* 
     0/*iadd*/, 0/*ladd*/, 0/*fadd*/, 0/*dadd*/, 0/*isub*/,
+    0/* <p>
+    0/* 
     0/*lsub*/, 0/*fsub*/, 0/*dsub*/, 0/*imul*/, 0/*lmul*/,
+    0/* <p>
+    0/* 
     0/*fmul*/, 0/*dmul*/, 0/*idiv*/, 0/*ldiv*/, 0/*fdiv*/,
+    0/* <p>
+    0/* 
     0/*ddiv*/, 0/*irem*/, 0/*lrem*/, 0/*frem*/, 0/*drem*/,
+    0/* <p>
+    0/* 
     0/*ineg*/, 0/*lneg*/, 0/*fneg*/, 0/*dneg*/, 0/*ishl*/,
+    0/* <p>
+    0/* 
     0/*lshl*/, 0/*ishr*/, 0/*lshr*/, 0/*iushr*/, 0/*lushr*/,
+    0/* <p>
+    0/* 
     0/*iand*/, 0/*land*/, 0/*ior*/, 0/*lor*/, 0/*ixor*/, 0/*lxor*/,
+    0/* <p>
+    0/* 
     2/*iinc*/, 0/*i2l*/, 0/*i2f*/, 0/*i2d*/, 0/*l2i*/, 0/*l2f*/,
+    2/* <p>
+    2/* 
     0/*l2d*/, 0/*f2i*/, 0/*f2l*/, 0/*f2d*/, 0/*d2i*/, 0/*d2l*/,
+    0/* <p>
+    0/* 
     0/*d2f*/, 0/*i2b*/, 0/*i2c*/, 0/*i2s*/, 0/*lcmp*/, 0/*fcmpl*/,
+    0/* <p>
+    0/* 
     0/*fcmpg*/, 0/*dcmpl*/, 0/*dcmpg*/, 2/*ifeq*/, 2/*ifne*/,
+    0/* <p>
+    0/* 
     2/*iflt*/, 2/*ifge*/, 2/*ifgt*/, 2/*ifle*/, 2/*if_icmpeq*/,
+    2/* <p>
+    2/* 
     2/*if_icmpne*/, 2/*if_icmplt*/, 2/*if_icmpge*/, 2/*if_icmpgt*/,
+    2/* <p>
+    2/* 
     2/*if_icmple*/, 2/*if_acmpeq*/, 2/*if_acmpne*/, 2/*goto*/,
+    2/* <p>
+    2/* 
     2/*jsr*/, 1/*ret*/, UNPREDICTABLE/*tableswitch*/, UNPREDICTABLE/*lookupswitch*/,
+    2/* <p>
+    2/* 
     0/*ireturn*/, 0/*lreturn*/, 0/*freturn*/,
+    0/* <p>
+    0/* 
     0/*dreturn*/, 0/*areturn*/, 0/*return*/,
+    0/* <p>
+    0/* 
     2/*getstatic*/, 2/*putstatic*/, 2/*getfield*/,
+    2/* <p>
+    2/* 
     2/*putfield*/, 2/*invokevirtual*/, 2/*invokespecial*/, 2/*invokestatic*/,
+    2/* <p>
+    2/* 
     4/*invokeinterface*/, UNDEFINED, 2/*new*/,
+    4/* <p>
+    4/* 
     1/*newarray*/, 2/*anewarray*/,
+    1/* <p>
+    1/* 
     0/*arraylength*/, 0/*athrow*/, 2/*checkcast*/,
+    0/* <p>
+    0/* 
     2/*instanceof*/, 0/*monitorenter*/,
+    2/* <p>
+    2/* 
     0/*monitorexit*/, UNPREDICTABLE/*wide*/, 3/*multianewarray*/,
+    0/* <p>
+    0/* 
     2/*ifnull*/, 2/*ifnonnull*/, 4/*goto_w*/,
+    2/* <p>
+    2/* 
     4/*jsr_w*/, 0/*breakpoint*/, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
@@ -514,78 +678,206 @@ public interface Constants {
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
+    4/* <p>
+    4/*  未定义,未定义,未定义,未定义,未定义,未定义,未定义,非定义,非定义,非定义,非定义,非定义,非定义,非定义,未定义,未定义,未定义,未定义,未定义,未定义,未定义,未定义,非定义,非定义,非定义,
+    4/* 非定义,非定义,非定义,非定义,。
+    4/* 
+    4/* 
     UNDEFINED, UNDEFINED, RESERVED/*impdep1*/, RESERVED/*impdep2*/
   };
 
   /**
    * How the byte code operands are to be interpreted.
+   * <p>
+   *  如何解释字节码操作数。
+   * 
    */
   public static final short[][] TYPE_OF_OPERANDS = {
     {}/*nop*/, {}/*aconst_null*/, {}/*iconst_m1*/, {}/*iconst_0*/,
+    {}/* <p>
+    {}/* 
     {}/*iconst_1*/, {}/*iconst_2*/, {}/*iconst_3*/, {}/*iconst_4*/,
+    {}/* <p>
+    {}/* 
     {}/*iconst_5*/, {}/*lconst_0*/, {}/*lconst_1*/, {}/*fconst_0*/,
+    {}/* <p>
+    {}/* 
     {}/*fconst_1*/, {}/*fconst_2*/, {}/*dconst_0*/, {}/*dconst_1*/,
+    {}/* <p>
+    {}/* 
     {T_BYTE}/*bipush*/, {T_SHORT}/*sipush*/, {T_BYTE}/*ldc*/,
+    {T_BYTE}/* <p>
+    {T_BYTE}/* 
     {T_SHORT}/*ldc_w*/, {T_SHORT}/*ldc2_w*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_BYTE}/*iload*/, {T_BYTE}/*lload*/, {T_BYTE}/*fload*/,
+    {T_BYTE}/* <p>
+    {T_BYTE}/* 
     {T_BYTE}/*dload*/, {T_BYTE}/*aload*/, {}/*iload_0*/,
+    {T_BYTE}/* <p>
+    {T_BYTE}/* 
     {}/*iload_1*/, {}/*iload_2*/, {}/*iload_3*/, {}/*lload_0*/,
+    {}/* <p>
+    {}/* 
     {}/*lload_1*/, {}/*lload_2*/, {}/*lload_3*/, {}/*fload_0*/,
+    {}/* <p>
+    {}/* 
     {}/*fload_1*/, {}/*fload_2*/, {}/*fload_3*/, {}/*dload_0*/,
+    {}/* <p>
+    {}/* 
     {}/*dload_1*/, {}/*dload_2*/, {}/*dload_3*/, {}/*aload_0*/,
+    {}/* <p>
+    {}/* 
     {}/*aload_1*/, {}/*aload_2*/, {}/*aload_3*/, {}/*iaload*/,
+    {}/* <p>
+    {}/* 
     {}/*laload*/, {}/*faload*/, {}/*daload*/, {}/*aaload*/,
+    {}/* <p>
+    {}/* 
     {}/*baload*/, {}/*caload*/, {}/*saload*/, {T_BYTE}/*istore*/,
+    {}/* <p>
+    {}/* 
     {T_BYTE}/*lstore*/, {T_BYTE}/*fstore*/, {T_BYTE}/*dstore*/,
+    {T_BYTE}/* <p>
+    {T_BYTE}/* 
     {T_BYTE}/*astore*/, {}/*istore_0*/, {}/*istore_1*/,
+    {T_BYTE}/* <p>
+    {T_BYTE}/* 
     {}/*istore_2*/, {}/*istore_3*/, {}/*lstore_0*/, {}/*lstore_1*/,
+    {}/* <p>
+    {}/* 
     {}/*lstore_2*/, {}/*lstore_3*/, {}/*fstore_0*/, {}/*fstore_1*/,
+    {}/* <p>
+    {}/* 
     {}/*fstore_2*/, {}/*fstore_3*/, {}/*dstore_0*/, {}/*dstore_1*/,
+    {}/* <p>
+    {}/* 
     {}/*dstore_2*/, {}/*dstore_3*/, {}/*astore_0*/, {}/*astore_1*/,
+    {}/* <p>
+    {}/* 
     {}/*astore_2*/, {}/*astore_3*/, {}/*iastore*/, {}/*lastore*/,
+    {}/* <p>
+    {}/* 
     {}/*fastore*/, {}/*dastore*/, {}/*aastore*/, {}/*bastore*/,
+    {}/* <p>
+    {}/* 
     {}/*castore*/, {}/*sastore*/, {}/*pop*/, {}/*pop2*/, {}/*dup*/,
+    {}/* <p>
+    {}/* 
     {}/*dup_x1*/, {}/*dup_x2*/, {}/*dup2*/, {}/*dup2_x1*/,
+    {}/* <p>
+    {}/* 
     {}/*dup2_x2*/, {}/*swap*/, {}/*iadd*/, {}/*ladd*/, {}/*fadd*/,
+    {}/* <p>
+    {}/* 
     {}/*dadd*/, {}/*isub*/, {}/*lsub*/, {}/*fsub*/, {}/*dsub*/,
+    {}/* <p>
+    {}/* 
     {}/*imul*/, {}/*lmul*/, {}/*fmul*/, {}/*dmul*/, {}/*idiv*/,
+    {}/* <p>
+    {}/* 
     {}/*ldiv*/, {}/*fdiv*/, {}/*ddiv*/, {}/*irem*/, {}/*lrem*/,
+    {}/* <p>
+    {}/* 
     {}/*frem*/, {}/*drem*/, {}/*ineg*/, {}/*lneg*/, {}/*fneg*/,
+    {}/* <p>
+    {}/* 
     {}/*dneg*/, {}/*ishl*/, {}/*lshl*/, {}/*ishr*/, {}/*lshr*/,
+    {}/* <p>
+    {}/* 
     {}/*iushr*/, {}/*lushr*/, {}/*iand*/, {}/*land*/, {}/*ior*/,
+    {}/* <p>
+    {}/* 
     {}/*lor*/, {}/*ixor*/, {}/*lxor*/, {T_BYTE, T_BYTE}/*iinc*/,
+    {}/* <p>
+    {}/* 
     {}/*i2l*/, {}/*i2f*/, {}/*i2d*/, {}/*l2i*/, {}/*l2f*/, {}/*l2d*/,
+    {}/* <p>
+    {}/* 
     {}/*f2i*/, {}/*f2l*/, {}/*f2d*/, {}/*d2i*/, {}/*d2l*/, {}/*d2f*/,
+    {}/* <p>
+    {}/* 
     {}/*i2b*/, {}/*i2c*/,{}/*i2s*/, {}/*lcmp*/, {}/*fcmpl*/,
+    {}/* <p>
+    {}/* 
     {}/*fcmpg*/, {}/*dcmpl*/, {}/*dcmpg*/, {T_SHORT}/*ifeq*/,
+    {}/* <p>
+    {}/* 
     {T_SHORT}/*ifne*/, {T_SHORT}/*iflt*/, {T_SHORT}/*ifge*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*ifgt*/, {T_SHORT}/*ifle*/, {T_SHORT}/*if_icmpeq*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*if_icmpne*/, {T_SHORT}/*if_icmplt*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*if_icmpge*/, {T_SHORT}/*if_icmpgt*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*if_icmple*/, {T_SHORT}/*if_acmpeq*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*if_acmpne*/, {T_SHORT}/*goto*/, {T_SHORT}/*jsr*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_BYTE}/*ret*/, {}/*tableswitch*/, {}/*lookupswitch*/,
+    {T_BYTE}/* <p>
+    {T_BYTE}/* 
     {}/*ireturn*/, {}/*lreturn*/, {}/*freturn*/, {}/*dreturn*/,
+    {}/* <p>
+    {}/* 
     {}/*areturn*/, {}/*return*/, {T_SHORT}/*getstatic*/,
+    {}/* <p>
+    {}/* 
     {T_SHORT}/*putstatic*/, {T_SHORT}/*getfield*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*putfield*/, {T_SHORT}/*invokevirtual*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*invokespecial*/, {T_SHORT}/*invokestatic*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT, T_BYTE, T_BYTE}/*invokeinterface*/, {},
+    {T_SHORT, T_BYTE, T_BYTE}/* <p>
+    {T_SHORT, T_BYTE, T_BYTE}/* 
     {T_SHORT}/*new*/, {T_BYTE}/*newarray*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*anewarray*/, {}/*arraylength*/, {}/*athrow*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {T_SHORT}/*checkcast*/, {T_SHORT}/*instanceof*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {}/*monitorenter*/, {}/*monitorexit*/, {T_BYTE}/*wide*/,
+    {}/* <p>
+    {}/* 
     {T_SHORT, T_BYTE}/*multianewarray*/, {T_SHORT}/*ifnull*/,
+    {T_SHORT, T_BYTE}/* <p>
+    {T_SHORT, T_BYTE}/* 
     {T_SHORT}/*ifnonnull*/, {T_INT}/*goto_w*/, {T_INT}/*jsr_w*/,
+    {T_SHORT}/* <p>
+    {T_SHORT}/* 
     {}/*breakpoint*/, {}, {}, {}, {}, {}, {}, {},
     {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
     {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
     {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
+    {}/* <p>
+    {}/*  {},{},{},{},{},{},{},{},{},{},{},{},{} {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{} },{},{},{},{}
+    {}/* ,{},{},{},{},{},{},。
+    {}/* 
+    {}/* 
     {}/*impdep1*/, {}/*impdep2*/
   };
 
   /**
    * Names of opcodes.
+   * <p>
+   *  操作码的名称。
+   * 
    */
   public static final String[] OPCODE_NAMES = {
     "nop", "aconst_null", "iconst_m1", "iconst_0", "iconst_1",
@@ -638,42 +930,113 @@ public interface Constants {
 
   /**
    * Number of words consumed on operand stack by instructions.
+   * <p>
+   *  按指令在操作数堆栈上消耗的字数。
+   * 
    */
   public static final int[] CONSUME_STACK = {
     0/*nop*/, 0/*aconst_null*/, 0/*iconst_m1*/, 0/*iconst_0*/, 0/*iconst_1*/,
+    0/* <p>
+    0/* 
     0/*iconst_2*/, 0/*iconst_3*/, 0/*iconst_4*/, 0/*iconst_5*/, 0/*lconst_0*/,
+    0/* <p>
+    0/* 
     0/*lconst_1*/, 0/*fconst_0*/, 0/*fconst_1*/, 0/*fconst_2*/, 0/*dconst_0*/,
+    0/* <p>
+    0/* 
     0/*dconst_1*/, 0/*bipush*/, 0/*sipush*/, 0/*ldc*/, 0/*ldc_w*/, 0/*ldc2_w*/, 0/*iload*/,
+    0/* <p>
+    0/* 
     0/*lload*/, 0/*fload*/, 0/*dload*/, 0/*aload*/, 0/*iload_0*/, 0/*iload_1*/, 0/*iload_2*/,
+    0/* <p>
+    0/* 
     0/*iload_3*/, 0/*lload_0*/, 0/*lload_1*/, 0/*lload_2*/, 0/*lload_3*/, 0/*fload_0*/,
+    0/* <p>
+    0/* 
     0/*fload_1*/, 0/*fload_2*/, 0/*fload_3*/, 0/*dload_0*/, 0/*dload_1*/, 0/*dload_2*/,
+    0/* <p>
+    0/* 
     0/*dload_3*/, 0/*aload_0*/, 0/*aload_1*/, 0/*aload_2*/, 0/*aload_3*/, 2/*iaload*/,
+    0/* <p>
+    0/* 
     2/*laload*/, 2/*faload*/, 2/*daload*/, 2/*aaload*/, 2/*baload*/, 2/*caload*/, 2/*saload*/,
+    2/* <p>
+    2/* 
     1/*istore*/, 2/*lstore*/, 1/*fstore*/, 2/*dstore*/, 1/*astore*/, 1/*istore_0*/,
+    1/* <p>
+    1/* 
     1/*istore_1*/, 1/*istore_2*/, 1/*istore_3*/, 2/*lstore_0*/, 2/*lstore_1*/,
+    1/* <p>
+    1/* 
     2/*lstore_2*/, 2/*lstore_3*/, 1/*fstore_0*/, 1/*fstore_1*/, 1/*fstore_2*/,
+    2/* <p>
+    2/* 
     1/*fstore_3*/, 2/*dstore_0*/, 2/*dstore_1*/, 2/*dstore_2*/, 2/*dstore_3*/,
+    1/* <p>
+    1/* 
     1/*astore_0*/, 1/*astore_1*/, 1/*astore_2*/, 1/*astore_3*/, 3/*iastore*/, 4/*lastore*/,
+    1/* <p>
+    1/* 
     3/*fastore*/, 4/*dastore*/, 3/*aastore*/, 3/*bastore*/, 3/*castore*/, 3/*sastore*/,
+    3/* <p>
+    3/* 
     1/*pop*/, 2/*pop2*/, 1/*dup*/, 2/*dup_x1*/, 3/*dup_x2*/, 2/*dup2*/, 3/*dup2_x1*/,
+    1/* <p>
+    1/* 
     4/*dup2_x2*/, 2/*swap*/, 2/*iadd*/, 4/*ladd*/, 2/*fadd*/, 4/*dadd*/, 2/*isub*/, 4/*lsub*/,
+    4/* <p>
+    4/* 
     2/*fsub*/, 4/*dsub*/, 2/*imul*/, 4/*lmul*/, 2/*fmul*/, 4/*dmul*/, 2/*idiv*/, 4/*ldiv*/,
+    2/* <p>
+    2/* 
     2/*fdiv*/, 4/*ddiv*/, 2/*irem*/, 4/*lrem*/, 2/*frem*/, 4/*drem*/, 1/*ineg*/, 2/*lneg*/,
+    2/* <p>
+    2/* 
     1/*fneg*/, 2/*dneg*/, 2/*ishl*/, 3/*lshl*/, 2/*ishr*/, 3/*lshr*/, 2/*iushr*/, 3/*lushr*/,
+    1/* <p>
+    1/* 
     2/*iand*/, 4/*land*/, 2/*ior*/, 4/*lor*/, 2/*ixor*/, 4/*lxor*/, 0/*iinc*/,
+    2/* <p>
+    2/* 
     1/*i2l*/, 1/*i2f*/, 1/*i2d*/, 2/*l2i*/, 2/*l2f*/, 2/*l2d*/, 1/*f2i*/, 1/*f2l*/,
+    1/* <p>
+    1/* 
     1/*f2d*/, 2/*d2i*/, 2/*d2l*/, 2/*d2f*/, 1/*i2b*/, 1/*i2c*/, 1/*i2s*/,
+    1/* <p>
+    1/* 
     4/*lcmp*/, 2/*fcmpl*/, 2/*fcmpg*/, 4/*dcmpl*/, 4/*dcmpg*/, 1/*ifeq*/, 1/*ifne*/,
+    4/* <p>
+    4/* 
     1/*iflt*/, 1/*ifge*/, 1/*ifgt*/, 1/*ifle*/, 2/*if_icmpeq*/, 2/*if_icmpne*/, 2/*if_icmplt*/,
+    1/* <p>
+    1/* 
     2 /*if_icmpge*/, 2/*if_icmpgt*/, 2/*if_icmple*/, 2/*if_acmpeq*/, 2/*if_acmpne*/,
+    2 /* <p>
+    2 /* 
     0/*goto*/, 0/*jsr*/, 0/*ret*/, 1/*tableswitch*/, 1/*lookupswitch*/, 1/*ireturn*/,
+    0/* <p>
+    0/* 
     2/*lreturn*/, 1/*freturn*/, 2/*dreturn*/, 1/*areturn*/, 0/*return*/, 0/*getstatic*/,
+    2/* <p>
+    2/* 
     UNPREDICTABLE/*putstatic*/, 1/*getfield*/, UNPREDICTABLE/*putfield*/,
+    UNPREDICTABLE/* <p>
+    UNPREDICTABLE/* 
     UNPREDICTABLE/*invokevirtual*/, UNPREDICTABLE/*invokespecial*/,
+    UNPREDICTABLE/* <p>
+    UNPREDICTABLE/* 
     UNPREDICTABLE/*invokestatic*/,
+    UNPREDICTABLE/* <p>
+    UNPREDICTABLE/* 
     UNPREDICTABLE/*invokeinterface*/, UNDEFINED, 0/*new*/, 1/*newarray*/, 1/*anewarray*/,
+    UNPREDICTABLE/* <p>
+    UNPREDICTABLE/* 
     1/*arraylength*/, 1/*athrow*/, 1/*checkcast*/, 1/*instanceof*/, 1/*monitorenter*/,
+    1/* <p>
+    1/* 
     1/*monitorexit*/, 0/*wide*/, UNPREDICTABLE/*multianewarray*/, 1/*ifnull*/, 1/*ifnonnull*/,
+    1/* <p>
+    1/* 
     0/*goto_w*/, 0/*jsr_w*/, 0/*breakpoint*/, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
@@ -687,47 +1050,123 @@ public interface Constants {
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
+    0/* <p>
+    0/* 未定义,未定义,未定义,未定义,未定义,未定义,未定义,非定义,非定义,非定义,非定义,非定义,非定义,非定义,未定义,未定义,未定义,未定义,未定义,未定义,未定义,未定义,非定义,非定义,非定义,非
+    0/* 定义,非定义,非定义,非定义,。
+    0/* 
+    0/* 
     UNDEFINED, UNPREDICTABLE/*impdep1*/, UNPREDICTABLE/*impdep2*/
   };
 
   /**
    * Number of words produced onto operand stack by instructions.
+   * <p>
+   *  通过指令在操作数堆栈上产生的字数。
+   * 
    */
   public static final int[] PRODUCE_STACK = {
     0/*nop*/, 1/*aconst_null*/, 1/*iconst_m1*/, 1/*iconst_0*/, 1/*iconst_1*/,
+    0/* <p>
+    0/* 
     1/*iconst_2*/, 1/*iconst_3*/, 1/*iconst_4*/, 1/*iconst_5*/, 2/*lconst_0*/,
+    1/* <p>
+    1/* 
     2/*lconst_1*/, 1/*fconst_0*/, 1/*fconst_1*/, 1/*fconst_2*/, 2/*dconst_0*/,
+    2/* <p>
+    2/* 
     2/*dconst_1*/, 1/*bipush*/, 1/*sipush*/, 1/*ldc*/, 1/*ldc_w*/, 2/*ldc2_w*/, 1/*iload*/,
+    2/* <p>
+    2/* 
     2/*lload*/, 1/*fload*/, 2/*dload*/, 1/*aload*/, 1/*iload_0*/, 1/*iload_1*/, 1/*iload_2*/,
+    2/* <p>
+    2/* 
     1/*iload_3*/, 2/*lload_0*/, 2/*lload_1*/, 2/*lload_2*/, 2/*lload_3*/, 1/*fload_0*/,
+    1/* <p>
+    1/* 
     1/*fload_1*/, 1/*fload_2*/, 1/*fload_3*/, 2/*dload_0*/, 2/*dload_1*/, 2/*dload_2*/,
+    1/* <p>
+    1/* 
     2/*dload_3*/, 1/*aload_0*/, 1/*aload_1*/, 1/*aload_2*/, 1/*aload_3*/, 1/*iaload*/,
+    2/* <p>
+    2/* 
     2/*laload*/, 1/*faload*/, 2/*daload*/, 1/*aaload*/, 1/*baload*/, 1/*caload*/, 1/*saload*/,
+    2/* <p>
+    2/* 
     0/*istore*/, 0/*lstore*/, 0/*fstore*/, 0/*dstore*/, 0/*astore*/, 0/*istore_0*/,
+    0/* <p>
+    0/* 
     0/*istore_1*/, 0/*istore_2*/, 0/*istore_3*/, 0/*lstore_0*/, 0/*lstore_1*/,
+    0/* <p>
+    0/* 
     0/*lstore_2*/, 0/*lstore_3*/, 0/*fstore_0*/, 0/*fstore_1*/, 0/*fstore_2*/,
+    0/* <p>
+    0/* 
     0/*fstore_3*/, 0/*dstore_0*/, 0/*dstore_1*/, 0/*dstore_2*/, 0/*dstore_3*/,
+    0/* <p>
+    0/* 
     0/*astore_0*/, 0/*astore_1*/, 0/*astore_2*/, 0/*astore_3*/, 0/*iastore*/, 0/*lastore*/,
+    0/* <p>
+    0/* 
     0/*fastore*/, 0/*dastore*/, 0/*aastore*/, 0/*bastore*/, 0/*castore*/, 0/*sastore*/,
+    0/* <p>
+    0/* 
     0/*pop*/, 0/*pop2*/, 2/*dup*/, 3/*dup_x1*/, 4/*dup_x2*/, 4/*dup2*/, 5/*dup2_x1*/,
+    0/* <p>
+    0/* 
     6/*dup2_x2*/, 2/*swap*/, 1/*iadd*/, 2/*ladd*/, 1/*fadd*/, 2/*dadd*/, 1/*isub*/, 2/*lsub*/,
+    6/* <p>
+    6/* 
     1/*fsub*/, 2/*dsub*/, 1/*imul*/, 2/*lmul*/, 1/*fmul*/, 2/*dmul*/, 1/*idiv*/, 2/*ldiv*/,
+    1/* <p>
+    1/* 
     1/*fdiv*/, 2/*ddiv*/, 1/*irem*/, 2/*lrem*/, 1/*frem*/, 2/*drem*/, 1/*ineg*/, 2/*lneg*/,
+    1/* <p>
+    1/* 
     1/*fneg*/, 2/*dneg*/, 1/*ishl*/, 2/*lshl*/, 1/*ishr*/, 2/*lshr*/, 1/*iushr*/, 2/*lushr*/,
+    1/* <p>
+    1/* 
     1/*iand*/, 2/*land*/, 1/*ior*/, 2/*lor*/, 1/*ixor*/, 2/*lxor*/,
+    1/* <p>
+    1/* 
     0/*iinc*/, 2/*i2l*/, 1/*i2f*/, 2/*i2d*/, 1/*l2i*/, 1/*l2f*/, 2/*l2d*/, 1/*f2i*/,
+    0/* <p>
+    0/* 
     2/*f2l*/, 2/*f2d*/, 1/*d2i*/, 2/*d2l*/, 1/*d2f*/,
+    2/* <p>
+    2/* 
     1/*i2b*/, 1/*i2c*/, 1/*i2s*/, 1/*lcmp*/, 1/*fcmpl*/, 1/*fcmpg*/,
+    1/* <p>
+    1/* 
     1/*dcmpl*/, 1/*dcmpg*/, 0/*ifeq*/, 0/*ifne*/, 0/*iflt*/, 0/*ifge*/, 0/*ifgt*/, 0/*ifle*/,
+    1/* <p>
+    1/* 
     0/*if_icmpeq*/, 0/*if_icmpne*/, 0/*if_icmplt*/, 0/*if_icmpge*/, 0/*if_icmpgt*/,
+    0/* <p>
+    0/* 
     0/*if_icmple*/, 0/*if_acmpeq*/, 0/*if_acmpne*/, 0/*goto*/, 1/*jsr*/, 0/*ret*/,
+    0/* <p>
+    0/* 
     0/*tableswitch*/, 0/*lookupswitch*/, 0/*ireturn*/, 0/*lreturn*/, 0/*freturn*/,
+    0/* <p>
+    0/* 
     0/*dreturn*/, 0/*areturn*/, 0/*return*/, UNPREDICTABLE/*getstatic*/, 0/*putstatic*/,
+    0/* <p>
+    0/* 
     UNPREDICTABLE/*getfield*/, 0/*putfield*/, UNPREDICTABLE/*invokevirtual*/,
+    UNPREDICTABLE/* <p>
+    UNPREDICTABLE/* 
     UNPREDICTABLE/*invokespecial*/, UNPREDICTABLE/*invokestatic*/,
+    UNPREDICTABLE/* <p>
+    UNPREDICTABLE/* 
     UNPREDICTABLE/*invokeinterface*/, UNDEFINED, 1/*new*/, 1/*newarray*/, 1/*anewarray*/,
+    UNPREDICTABLE/* <p>
+    UNPREDICTABLE/* 
     1/*arraylength*/, 1/*athrow*/, 1/*checkcast*/, 1/*instanceof*/, 0/*monitorenter*/,
+    1/* <p>
+    1/* 
     0/*monitorexit*/, 0/*wide*/, 1/*multianewarray*/, 0/*ifnull*/, 0/*ifnonnull*/,
+    0/* <p>
+    0/* 
     0/*goto_w*/, 1/*jsr_w*/, 0/*breakpoint*/, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
@@ -741,10 +1180,16 @@ public interface Constants {
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
+    0/* <p>
+    0/*  未定义,未定义,未定义,未定义,未定义,未定义,未定义,非定义,非定义,非定义,非定义,非定义,非定义,非定义,未定义,未定义,未定义,未定义,未定义,未定义,未定义,未定义,非定义,非定义,非定义,
+    0/* 非定义,非定义,非定义,非定义,。
+    0/* 
+    0/* 
     UNDEFINED, UNPREDICTABLE/*impdep1*/, UNPREDICTABLE/*impdep2*/
   };
 
   /** Attributes and their corresponding names.
+  /* <p>
    */
   public static final byte ATTR_UNKNOWN                                 = -1;
   public static final byte ATTR_SOURCE_FILE                             = 0;
@@ -772,6 +1217,7 @@ public interface Constants {
   };
 
   /** Constants used in the StackMap attribute.
+  /* <p>
    */
   public static final byte ITEM_Bogus      = 0;
   public static final byte ITEM_Integer    = 1;

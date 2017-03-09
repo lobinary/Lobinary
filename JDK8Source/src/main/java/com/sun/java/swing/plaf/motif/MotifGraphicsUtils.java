@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,8 @@ import javax.swing.plaf.basic.*;
 import javax.swing.text.View;
 
 /*
+/* <p>
+/* 
  * @author Jeff Dinkins
  * @author Dave Kloba
  */
@@ -53,6 +56,9 @@ public class MotifGraphicsUtils implements SwingConstants
 
     /**
      * Draws the point (<b>x</b>, <b>y</b>) in the current color.
+     * <p>
+     *  在当前颜色中绘制点(<b> x </b>,<b> y </b>)。
+     * 
      */
     static void drawPoint(Graphics g, int x, int y) {
         g.drawLine(x, y, x, y);
@@ -61,6 +67,9 @@ public class MotifGraphicsUtils implements SwingConstants
     /*
      * Convenience method for drawing a grooved line
      *
+     * <p>
+     *  绘制凹槽线的方便方法
+     * 
      */
     public static void drawGroove(Graphics g, int x, int y, int w, int h,
                                   Color shadow, Color highlight)
@@ -89,6 +98,11 @@ public class MotifGraphicsUtils implements SwingConstants
       * <b>drawStringInRect()</b> does not clip to the rectangle, but instead
       * uses this rectangle and the desired justification to compute the point
       * at which to begin drawing the text.
+      * <p>
+      *  (<b> x </b>,<b> y </b>,<b>宽度</b>,<b>高度</b>)。 <b>调整</b>指定文本的对齐方式,LEFT,CENTER或RIGHT之一。
+      *  <b> drawStringInRect()</b>不会剪裁到矩形,而是使用此矩形和所需的对齐方式来计算开始绘制文本的点。
+      * 
+      * 
       * @see #drawString
       */
     public static void drawStringInRect(Graphics g, String aString, int x, int y,
@@ -142,6 +156,9 @@ public class MotifGraphicsUtils implements SwingConstants
    * This method is not being used to paint menu item since
    * 6.0 This code left for compatibility only. Do not use or
    * override it, this will not cause any visible effect.
+   * <p>
+   *  从6.0开始,此方法不用于绘制菜单项此代码仅用于兼容性。不要使用或覆盖它,这不会导致任何可见的效果。
+   * 
    */
   public static void paintMenuItem(Graphics g, JComponent c,
                                    Icon checkIcon, Icon arrowIcon,
@@ -334,6 +351,9 @@ public class MotifGraphicsUtils implements SwingConstants
      * location of origin of the text baseline, and a possibly clipped
      * version of the compound labels string.  Locations are computed
      * relative to the viewR rectangle.
+     * <p>
+     *  计算并返回图标原点的位置,文本基线的原点位置,以及复合标签字符串的可能剪切版本。相对于viewR矩形计算位置。
+     * 
      */
 
     private static String layoutMenuItem(
@@ -376,6 +396,9 @@ public class MotifGraphicsUtils implements SwingConstants
         /* Initialize the acceelratorText bounds rectangle textR.  If a null
          * or and empty String was specified we substitute "" here
          * and use 0,0,0,0 for acceleratorTextR.
+         * <p>
+         *  或者指定空字符串,我们用""替换,并为acceleratorTextR使用0,0,0,0。
+         * 
          */
         if( (acceleratorText == null) || acceleratorText.equals("") ) {
             acceleratorR.width = acceleratorR.height = 0;
@@ -388,6 +411,7 @@ public class MotifGraphicsUtils implements SwingConstants
         }
 
         /* Initialize the checkIcon bounds rectangle checkIconR.
+        /* <p>
          */
 
         if (checkIcon != null) {
@@ -399,6 +423,7 @@ public class MotifGraphicsUtils implements SwingConstants
         }
 
         /* Initialize the arrowIcon bounds rectangle arrowIconR.
+        /* <p>
          */
 
         if (arrowIcon != null) {
@@ -444,6 +469,10 @@ public class MotifGraphicsUtils implements SwingConstants
         /*
           System.out.println("Layout: v=" +viewR+"  c="+checkIconR+" i="+
           iconR+" t="+textR+" acc="+acceleratorR+" a="+arrowIconR);
+        /* <p>
+        /*  System.out.println("Layout：v ="+ viewR +"c ="+ checkIconR +"i ="+ iconR +"t ="+ textR +"acc ="+ acce
+        /* leratorR +"a ="+ arrowIconR);。
+        /* 
           */
         return text;
     }
@@ -469,6 +498,7 @@ public class MotifGraphicsUtils implements SwingConstants
     /*
      * Convenience function for determining ComponentOrientation.  Helps us
      * avoid having Munge directives throughout the code.
+     * <p>
      */
     static boolean isLeftToRight( Component c ) {
         return c.getComponentOrientation().isLeftToRight();

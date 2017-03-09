@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -71,6 +72,16 @@ import org.omg.CORBA.portable.IDLEntity;
  * reads only the requestID (4 bytes) directly, and uses the
  * ObjectInputStream for further unmarshaling.
  *
+ * <p>
+ *  对输入流使用Java序列化的实现类。这假设GIOP版本1.2消息格式。
+ * 
+ *  此类使用ByteArrayInputStream作为底层缓冲区。前16个字节直接从底层缓冲区读出。这允许[GIOPHeader(12字节)+ requestID(4字节)]被读取为字节。
+ * 对此输出流对象的后续写入操作使用ObjectInputStream类读入缓冲区。这允许使用ObjectInputStream实现来解组合复杂的类型和图形。
+ * 
+ *  注意,这个类假设一个GIOP 1.2样式的头。此外,在调用该流对象之前,直接从接收的消息中读取前12个字节,即GIOP头。
+ * 因此,此类有效地只读取requestID(4个字节),并使用ObjectInputStream进行进一步解组。
+ * 
+ * 
  * @author Ram Jeyaraman
  */
 public class IDLJavaSerializationInputStream extends CDRInputStreamBase {
@@ -134,6 +145,9 @@ public class IDLJavaSerializationInputStream extends CDRInputStreamBase {
 
         /**
          * Connect the Stub to the ORB.
+         * <p>
+         *  将Stub连接到ORB。
+         * 
          */
         protected final Object resolveObject(Object obj) throws IOException {
             try {
@@ -476,6 +490,10 @@ public class IDLJavaSerializationInputStream extends CDRInputStreamBase {
         } catch (Exception e) {
             throw wrapper.javaSerializationException(e, "read_octet_array");
         }
+        /* <p>
+        /*  try {while(length> 0){int n = is.read(value,offset,length); offset + = n;长度= n; }} catch(Exception e
+        /* ){throw wrapper.javaSerializationException(e,"read_octet_array"); }}。
+        /* 
         */
     }
 
@@ -850,6 +868,12 @@ public class IDLJavaSerializationInputStream extends CDRInputStreamBase {
             throw wrapper.javaSerializationException("mark");
         }
         is.mark(readLimit);
+        /* <p>
+        /*  //注意：只有ByteArrayInputStream支持标记/重置。
+        /*  if(is == null || is.markSupported()== false){throw wrapper.javaSerializationException("mark"); } is.
+        /* mark(readLimit);。
+        /*  //注意：只有ByteArrayInputStream支持标记/重置。
+        /* 
         */
     }
 
@@ -867,6 +891,10 @@ public class IDLJavaSerializationInputStream extends CDRInputStreamBase {
         } catch (Exception e) {
             throw wrapper.javaSerializationException(e, "reset");
         }
+        /* <p>
+        /* //注意：只有ByteArrayInputStream支持标记/重置。
+        /*  if(is == null || is.markSupported()== false){throw wrapper.javaSerializationException("mark"); } try
+        /*  {is.reset(); } catch(Exception e){throw wrapper.javaSerializationException(e,"reset"); }}。
         */
     }
 

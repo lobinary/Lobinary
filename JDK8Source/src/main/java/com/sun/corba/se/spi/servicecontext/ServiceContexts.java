@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -99,6 +100,11 @@ public class ServiceContexts {
      * bytes of the service contexts here.  That is
      * done when they are actually requested via
      * get(int).
+     * <p>
+     *  给定输入流,这填充了我们的服务上下文映射。有关详细信息,请参阅scMap的定义。创建HashMap。
+     * 
+     *  注意,我们实际上并没有解组这里的服务上下文的字节。这是当他们实际上通过get(int)请求。
+     * 
      */
     private void createMapFromInputStream(InputStream is)
     {
@@ -145,6 +151,9 @@ public class ServiceContexts {
 
     /**
      * Read the Service contexts from the input stream.
+     * <p>
+     *  从输入流读取服务上下文。
+     * 
      */
     public ServiceContexts(InputStream s)
     {
@@ -165,6 +174,9 @@ public class ServiceContexts {
     /**
      * Find the ServiceContextData for a given scId and unmarshal
      * the bytes.
+     * <p>
+     *  找到给定scId的ServiceContextData并解组字节。
+     * 
      */
     private ServiceContext unmarshal(Integer scId, byte[] data) {
 
@@ -235,6 +247,9 @@ public class ServiceContexts {
     /**
      * Hopefully unused scid:  This should be changed to a proper
      * VMCID aligned value.  REVISIT!
+     * <p>
+     *  希望未使用的scid：这应该更改为正确的VMCID对齐值。 REVISIT！
+     * 
      */
     private static final int JAVAIDL_ALIGN_SERVICE_ID = 0xbe1345cd ;
 
@@ -243,6 +258,11 @@ public class ServiceContexts {
      *
      * If they haven't been unmarshaled, we don't have to
      * unmarshal them.
+     * <p>
+     *  将服务上下文写入输出流。
+     * 
+     *  如果他们没有被解组,我们不必解组他们。
+     * 
      */
     public void write(OutputStream os, GIOPVersion gv)
     {
@@ -287,6 +307,9 @@ public class ServiceContexts {
      * Write the service contexts in scMap in a desired order.
      * Right now, the only special case we have is UnknownExceptionInfo,
      * so I'm merely writing it last if present.
+     * <p>
+     *  以所需的顺序在scMap中编写服务上下文。现在,我们唯一特殊的情况是UnknownExceptionInfo,所以我只是写的最后,如果存在。
+     * 
      */
     private void writeServiceContextsInOrder(OutputStream os, GIOPVersion gv) {
 
@@ -318,6 +341,9 @@ public class ServiceContexts {
      * Write the given entry from the scMap to the OutputStream.
      * See note on giopVersion.  The service context should
      * know the GIOP version it is meant for.
+     * <p>
+     *  将给定条目从scMap写入OutputStream。请参见giopVersion注释。服务上下文应该知道其意图的GIOP版本。
+     * 
      */
     private void writeMapEntry(OutputStream os, Integer id, Object scObj, GIOPVersion gv) {
 
@@ -346,6 +372,9 @@ public class ServiceContexts {
 
     /** Add a service context to the stream, if there is not already
      * a service context in this object with the same id as sc.
+     * <p>
+     *  此对象中的服务上下文与sc具有相同的标识。
+     * 
      */
     public void put( ServiceContext sc )
     {
@@ -400,12 +429,21 @@ public class ServiceContexts {
      * unmarshal them.  We need to do the UnknownExceptionInfo service
      * context after the SendingContextRunTime service context so that we can
      * get the CodeBase if necessary.
+     * <p>
+     *  此容器中所有ServiceContext对象的映射。
+     * 
+     *  键是服务上下文ID的java.lang.Integers。值是ServiceContext的实例或未分隔的字节数组(首次使用时未分割)。
+     * 
+     * 这提供了一个轻微的优化,如果我们不碰巧使用给定的服务上下文,但它的主要优点是它允许我们更改我们解散它们的顺序。
      */
     private Map scMap;
 
     /**
      * If true, write out a special alignment service context to force the
      * correct alignment on re-marshalling.
+     * <p>
+     * 我们需要在SendingContextRunTime服务上下文之后执行UnknownExceptionInfo服务上下文,以便我们可以在必要时获取CodeBase。
+     * 
      */
     private boolean addAlignmentOnWrite ;
 

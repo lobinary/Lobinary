@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Compiler.java,v 1.2.4.1 2005/09/14 19:47:10 jeffsuttor Exp $
+ * <p>
+ *  $ Id：Compiler.java,v 1.2.4.1 2005/09/14 19:47:10 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.compiler;
 
@@ -71,6 +84,9 @@ import com.sun.org.apache.xpath.internal.res.XPATHErrorResources;
  * of operation codes (op map) and then builds from that into an Expression
  * tree.
  * @xsl.usage advanced
+ * <p>
+ *  此类的实例将XPath字符串表达式编译为Expression对象。这个类将字符串编译成操作代码序列(op map),然后从那里构建到表达式树。 @ xsl.usage advanced
+ * 
  */
 public class Compiler extends OpMap
 {
@@ -79,6 +95,10 @@ public class Compiler extends OpMap
    * Construct a Compiler object with a specific ErrorListener and
    * SourceLocator where the expression is located.
    *
+   * <p>
+   *  构造具有表达式所在的特定ErrorListener和SourceLocator的编译器对象。
+   * 
+   * 
    * @param errorHandler Error listener where messages will be sent, or null
    *                     if messages should be sent to System err.
    * @param locator The location object where the expression lives, which
@@ -98,6 +118,9 @@ public class Compiler extends OpMap
   /**
    * Construct a Compiler instance that has a null error listener and a
    * null source locator.
+   * <p>
+   *  构造具有空错误侦听器和空源定位器的编译器实例。
+   * 
    */
   public Compiler()
   {
@@ -107,6 +130,10 @@ public class Compiler extends OpMap
 
   /**
    * Execute the XPath object from a given opcode position.
+   * <p>
+   *  从给定的操作码位置执行XPath对象。
+   * 
+   * 
    * @param opPos The current position in the xpath.m_opMap array.
    * @return The result of the XPath.
    *
@@ -201,6 +228,10 @@ public class Compiler extends OpMap
   /**
    * Bottle-neck compilation of an operation with left and right operands.
    *
+   * <p>
+   *  左右操作数的操作的瓶颈编译。
+   * 
+   * 
    * @param operation non-null reference to parent operation.
    * @param opPos The op map position of the parent operation.
    *
@@ -223,6 +254,10 @@ public class Compiler extends OpMap
   /**
    * Bottle-neck compilation of a unary operation.
    *
+   * <p>
+   *  瓶颈编译的一元操作。
+   * 
+   * 
    * @param unary The parent unary operation.
    * @param opPos The position in the op map of the parent operation.
    *
@@ -244,6 +279,10 @@ public class Compiler extends OpMap
   /**
    * Compile an 'or' operation.
    *
+   * <p>
+   *  编译"或"操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Or} instance.
@@ -258,6 +297,10 @@ public class Compiler extends OpMap
   /**
    * Compile an 'and' operation.
    *
+   * <p>
+   *  编译一个'和'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.And} instance.
@@ -272,6 +315,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '!=' operation.
    *
+   * <p>
+   *  编译一个'！='操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.NotEquals} instance.
@@ -286,6 +333,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '=' operation.
    *
+   * <p>
+   * 编译'='操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Equals} instance.
@@ -300,6 +351,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '<=' operation.
    *
+   * <p>
+   *  编译'<='操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Lte} instance.
@@ -314,6 +369,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '<' operation.
    *
+   * <p>
+   *  编译'<'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Lt} instance.
@@ -328,6 +387,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '>=' operation.
    *
+   * <p>
+   *  编译a'> ='操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Gte} instance.
@@ -342,6 +405,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '>' operation.
    *
+   * <p>
+   *  编译'>'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Gt} instance.
@@ -356,6 +423,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '+' operation.
    *
+   * <p>
+   *  编译'+'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Plus} instance.
@@ -370,6 +441,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '-' operation.
    *
+   * <p>
+   *  编译一个' - '操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Minus} instance.
@@ -384,6 +459,10 @@ public class Compiler extends OpMap
   /**
    * Compile a '*' operation.
    *
+   * <p>
+   *  编译'*'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Mult} instance.
@@ -398,6 +477,10 @@ public class Compiler extends OpMap
   /**
    * Compile a 'div' operation.
    *
+   * <p>
+   *  编译'div'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Div} instance.
@@ -412,6 +495,10 @@ public class Compiler extends OpMap
   /**
    * Compile a 'mod' operation.
    *
+   * <p>
+   *  编译一个'mod'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Mod} instance.
@@ -426,6 +513,10 @@ public class Compiler extends OpMap
   /*
    * Compile a 'quo' operation.
    *
+   * <p>
+   *  编译'quo'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Quo} instance.
@@ -440,6 +531,10 @@ public class Compiler extends OpMap
   /**
    * Compile a unary '-' operation.
    *
+   * <p>
+   *  编译一个" - "操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Neg} instance.
@@ -454,6 +549,10 @@ public class Compiler extends OpMap
   /**
    * Compile a 'string(...)' operation.
    *
+   * <p>
+   *  编译一个'string(...)'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.String} instance.
@@ -468,6 +567,10 @@ public class Compiler extends OpMap
   /**
    * Compile a 'boolean(...)' operation.
    *
+   * <p>
+   *  编译一个'boolean(...)'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Bool} instance.
@@ -482,6 +585,10 @@ public class Compiler extends OpMap
   /**
    * Compile a 'number(...)' operation.
    *
+   * <p>
+   *  编译一个'number(...)'操作。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Number} instance.
@@ -496,6 +603,10 @@ public class Compiler extends OpMap
   /**
    * Compile a literal string value.
    *
+   * <p>
+   *  编译文字字符串值。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.objects.XString} instance.
@@ -513,6 +624,10 @@ public class Compiler extends OpMap
   /**
    * Compile a literal number value.
    *
+   * <p>
+   *  编译文字数值。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.objects.XNumber} instance.
@@ -530,6 +645,10 @@ public class Compiler extends OpMap
   /**
    * Compile a variable reference.
    *
+   * <p>
+   *  编译变量引用。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.operations.Variable} instance.
@@ -559,6 +678,10 @@ public class Compiler extends OpMap
   /**
    * Compile an expression group.
    *
+   * <p>
+   *  编译表达式组。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to the contained expression.
@@ -575,6 +698,10 @@ public class Compiler extends OpMap
   /**
    * Compile a function argument.
    *
+   * <p>
+   *  编译函数参数。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to the argument expression.
@@ -592,6 +719,10 @@ public class Compiler extends OpMap
    * Compile a location path union. The UnionPathIterator itself may create
    * {@link com.sun.org.apache.xpath.internal.axes.LocPathIterator} children.
    *
+   * <p>
+   *  编译位置路径联合。 UnionPathIterator本身可以创建{@link com.sun.org.apache.xpath.internal.axes.LocPathIterator}个子。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.axes.LocPathIterator} instance.
@@ -615,6 +746,10 @@ public class Compiler extends OpMap
 
   /**
    * Get the level of the location path or union being constructed.
+   * <p>
+   *  获取正在构造的位置路径或联合的级别。
+   * 
+   * 
    * @return 0 if it is a top-level path.
    */
   public int getLocationPathDepth()
@@ -624,6 +759,9 @@ public class Compiler extends OpMap
 
   /**
    * Get the function table
+   * <p>
+   *  获取函数表
+   * 
    */
   FunctionTable getFunctionTable()
   {
@@ -634,6 +772,10 @@ public class Compiler extends OpMap
    * Compile a location path.  The LocPathIterator itself may create
    * {@link com.sun.org.apache.xpath.internal.axes.AxesWalker} children.
    *
+   * <p>
+   *  编译位置路径。 LocPathIterator本身可以创建{@link com.sun.org.apache.xpath.internal.axes.AxesWalker}子级。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.axes.LocPathIterator} instance.
@@ -657,6 +799,10 @@ public class Compiler extends OpMap
   /**
    * Compile a location step predicate expression.
    *
+   * <p>
+   *  编译位置步骤谓词表达式。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return the contained predicate expression.
@@ -671,6 +817,10 @@ public class Compiler extends OpMap
   /**
    * Compile an entire match pattern expression.
    *
+   * <p>
+   *  编译整个匹配模式表达式。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.patterns.UnionPattern} instance.
@@ -717,6 +867,10 @@ public class Compiler extends OpMap
   /**
    * Compile a location match pattern unit expression.
    *
+   * <p>
+   *  编译位置匹配模式单位表达式。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.patterns.StepPattern} instance.
@@ -736,6 +890,10 @@ public class Compiler extends OpMap
    * Get a {@link org.w3c.dom.traversal.NodeFilter} bit set that tells what
    * to show for a given node test.
    *
+   * <p>
+   *  获取{@link org.w3c.dom.traversal.NodeFilter}位集,它告诉给定节点测试要显示的内容。
+   * 
+   * 
    * @param opPos the op map position for the location step.
    *
    * @return {@link org.w3c.dom.traversal.NodeFilter} bit set that tells what
@@ -812,6 +970,10 @@ private static final boolean DEBUG = false;
    * Compile a step pattern unit expression, used for both location paths
    * and match patterns.
    *
+   * <p>
+   *  编译步骤模式单位表达式,用于位置路径和匹配模式。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    * @param stepCount The number of steps to expect.
    * @param ancestorPattern The owning StepPattern, which may be null.
@@ -923,6 +1085,10 @@ private static final boolean DEBUG = false;
         pattern.setRelativePathPattern(selfPattern);
         pattern.setStaticScore(score);
         selfPattern.setStaticScore(score);
+        /* <p>
+        /* {StepPattern selfPattern = new StepPattern(DTMFilter.SHOW_ALL,Axis.PARENT,Axis.CHILD); //我们需要保持新的nodetest不影响分数... XNumber score = pattern.getStaticScore(); pattern.setRelativePathPattern(selfPattern); pattern.setStaticScore(score); selfPattern.setStaticScore(score);。
+        /* 
+        /* 
         }*/
     }
     else
@@ -940,6 +1106,10 @@ private static final boolean DEBUG = false;
   /**
    * Compile a zero or more predicates for a given match pattern.
    *
+   * <p>
+   *  为给定的匹配模式编译零个或多个谓词。
+   * 
+   * 
    * @param opPos The position of the first predicate the m_opMap array.
    *
    * @return reference to array of {@link com.sun.org.apache.xpath.internal.Expression} instances.
@@ -967,6 +1137,10 @@ private static final boolean DEBUG = false;
   /**
    * Count the number of predicates in the step.
    *
+   * <p>
+   *  计算步骤中谓词的数量。
+   * 
+   * 
    * @param opPos The position of the first predicate the m_opMap array.
    *
    * @return The number of predicates for this step.
@@ -991,6 +1165,10 @@ private static final boolean DEBUG = false;
   /**
    * Compiles predicates in the step.
    *
+   * <p>
+   *  在步骤中编译谓词。
+   * 
+   * 
    * @param opPos The position of the first predicate the m_opMap array.
    * @param predicates An empty pre-determined array of
    *            {@link com.sun.org.apache.xpath.internal.Expression}s, that will be filled in.
@@ -1011,6 +1189,10 @@ private static final boolean DEBUG = false;
   /**
    * Compile a built-in XPath function.
    *
+   * <p>
+   *  编译内置的XPath函数。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.functions.Function} instance.
@@ -1035,6 +1217,9 @@ private static final boolean DEBUG = false;
       /**
        * It is a trick for function-available. Since the function table is an
        * instance field, insert this table at compilation time for later usage
+       * <p>
+       *  这是一个功能可用的伎俩。由于函数表是实例字段,因此在编译时插入此表以供将来使用
+       * 
        */
 
       if (func instanceof FuncExtFunctionAvailable)
@@ -1081,6 +1266,9 @@ private static final boolean DEBUG = false;
 
   /**
    * Get the next available method id
+   * <p>
+   *  获取下一个可用的方法ID
+   * 
    */
   synchronized private long getNextMethodId()
   {
@@ -1093,6 +1281,10 @@ private static final boolean DEBUG = false;
   /**
    * Compile an extension function.
    *
+   * <p>
+   *  编译扩展函数。
+   * 
+   * 
    * @param opPos The current position in the m_opMap array.
    *
    * @return reference to {@link com.sun.org.apache.xpath.internal.functions.FuncExtFunction} instance.
@@ -1148,6 +1340,10 @@ private static final boolean DEBUG = false;
   /**
    * Warn the user of an problem.
    *
+   * <p>
+   *  警告用户有问题。
+   * 
+   * 
    * @param msg An error msgkey that corresponds to one of the constants found
    *            in {@link com.sun.org.apache.xpath.internal.res.XPATHErrorResources}, which is
    *            a key for a format string.
@@ -1179,6 +1375,10 @@ private static final boolean DEBUG = false;
    * Tell the user of an assertion error, and probably throw an
    * exception.
    *
+   * <p>
+   *  告诉用户断言错误,并可能抛出异常。
+   * 
+   * 
    * @param b  If false, a runtime exception will be thrown.
    * @param msg The assertion message, which should be informative.
    *
@@ -1201,6 +1401,10 @@ private static final boolean DEBUG = false;
    * Tell the user of an error, and probably throw an
    * exception.
    *
+   * <p>
+   *  告诉用户一个错误,并可能抛出异常。
+   * 
+   * 
    * @param msg An error msgkey that corresponds to one of the constants found
    *            in {@link com.sun.org.apache.xpath.internal.res.XPATHErrorResources}, which is
    *            a key for a format string.
@@ -1233,12 +1437,19 @@ private static final boolean DEBUG = false;
 
   /**
    * The current prefixResolver for the execution context.
+   * <p>
+   *  执行上下文的当前prefixResolver。
+   * 
    */
   private PrefixResolver m_currentPrefixResolver = null;
 
   /**
    * Get the current namespace context for the xpath.
    *
+   * <p>
+   *  获取xpath的当前命名空间上下文。
+   * 
+   * 
    * @return The current prefix resolver, *may* be null, though hopefully not.
    */
   public PrefixResolver getNamespaceContext()
@@ -1249,6 +1460,10 @@ private static final boolean DEBUG = false;
   /**
    * Set the current namespace context for the xpath.
    *
+   * <p>
+   *  设置xpath的当前命名空间上下文。
+   * 
+   * 
    * @param pr The resolver for prefixes in the XPath expression.
    */
   public void setNamespaceContext(PrefixResolver pr)
@@ -1257,6 +1472,8 @@ private static final boolean DEBUG = false;
   }
 
   /** The error listener where errors will be sent.  If this is null, errors
+  /* <p>
+  /* 
    *  and warnings will be sent to System.err.  May be null.    */
   ErrorListener m_errorHandler;
 
@@ -1265,6 +1482,8 @@ private static final boolean DEBUG = false;
 
   /**
    * The FunctionTable for all xpath build-in functions
+   * <p>
+   *  所有xpath内置函数的FunctionTable
    */
   private FunctionTable m_functionTable;
 }

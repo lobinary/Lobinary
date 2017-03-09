@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -106,6 +107,40 @@ import javax.print.attribute.DocAttributeSet;
  * streams only in response to a request from the service.
  * <P>
  * <HR>
+ * <p>
+ *  接口文档指定为打印作业提供一个打印数据的对象的接口。 "Doc"是一个简短易读的术语,意思是"一条打印数据"。客户端将实现接口Doc的对象传递给打印作业,打印作业调用该对象上的方法以获取打印数据。
+ *  Doc接口允许打印作业：。
+ * <UL>
+ * <LI>
+ *  确定打印数据可用的格式或"doc flavor"({@ link DocFlavor DocFlavor}类)。 doc flavor指定打印数据格式(MIME类型)和打印数据来自的对象的表示类。
+ * <P>
+ * <LI>
+ *  获取打印数据表示对象,它是doc flavor的表示类的一个实例。打印作业然后可以从表示对象获得实际打印数据。
+ * <P>
+ * <LI>
+ *  获取指定文档的其他特性或指定要应用于文档的处理指令的打印属性。打印属性在包{@link javax.print.attribute javax.print.attribute}中定义。
+ * 文档返回其存储在{@link javax.print.attribute.DocAttributeSet javax.print.attribute.DocAttributeSet}中的打印属性。
+ * </UL>
+ * <P>
+ * 在接口Doc的实现中的每个方法允许总是在每次调用该方法时返回相同的对象。
+ * 这对打印作业或打印数据表示对象在消费者获得打印数据时打印数据表示对象"消费"打印数据的其他调用者有影响,例如作为流的打印数据表示对象。
+ * 一旦打印作业调用{@link #getPrintData()getPrintData()}并获得流,对{@link #getPrintData()getPrintData()}的任何进一步调用都将返回读
+ * 取时可能已经存在的相同流对象进度,<I>不是</I>一个新的流对象,将从头重新读取打印数据。
+ * 这对打印作业或打印数据表示对象在消费者获得打印数据时打印数据表示对象"消费"打印数据的其他调用者有影响,例如作为流的打印数据表示对象。
+ * 指定文档对象以这种方式来简化doc对象的实现,并且被证明是基于特定的文档旨在仅将打印数据传达给一个打印作业,而不是几个不同的打印作业。
+ *  (要将相同的打印数据传送到多个不同的打印作业,必须在同一打印数据源的顶部创建多个不同的doc对象。)。
+ * <P>
+ * 接口Doc提供了相当大的实现灵活性。构建doc对象时,打印数据可能已经存在。在这种情况下,由doc的方法返回的对象可以提供给doc的构造函数,提前存储在doc中,并且只需在调用时返回。
+ * 或者,在构建doc对象时,打印数据可能不存在。
+ * 在这种情况下,doc对象可以提供"惰性"实现,其仅在打印作业调用它时(当打印作业调用{@link #getPrintData())时生成打印数据表示对象(和/ getPrintData()}方法)。
+ * <P>
+ *  对可以同时访问同一个文档的客户端线程数没有限制。因此,接口Doc的所有实现必须设计为多线程安全。
+ * <p>
+ *  然而,从文档获得的打印数据只能有一个消费者。
+ * <p>
+ * 如果通过调用Doc的<code> getReaderForText()</code>或<code> getStreamForBytes()</code>方法,或者因为打印数据源已经是InputStrea
+ * m或Reader ,则打印服务应该在所有作业完成条件下始终关闭客户端的这些流。
+ * 有以下警告。如果打印数据本身是流,则服务将始终关闭它。如果打印数据是可以作为流请求的东西,则该服务将仅在流终止之前已经获得流时才关闭该流。
  */
 public interface Doc {
 
@@ -113,6 +148,11 @@ public interface Doc {
      * Determines the doc flavor in which this doc object will supply its
      * piece of print data.
      *
+     * <p>
+     * 也就是说,只是因为打印服务可能请求数据作为流并不意味着它将意味着,依赖于服务的Doc实现者关闭它们应当仅响应于来自服务的请求而创建这样的流。
+     * <P>
+     * <HR>
+     * 
      * @return  Doc flavor.
      */
     public DocFlavor getDocFlavor();
@@ -128,6 +168,10 @@ public interface Doc {
      * getRepresentationClassName()}</CODE>, and the return value can be cast
      * from class Object to that representation class.
      *
+     * <p>
+     *  确定此doc对象将提供其打印数据片段的文档风格。
+     * 
+     * 
      * @return  Print data representation object.
      *
      * @exception  IOException
@@ -148,6 +192,14 @@ public interface Doc {
      * implementation-dependent default value. The returned attribute set is
      * unmodifiable.
      *
+     * <p>
+     *  以支持的doc风格对应的格式获取包含此doc对象的打印数据的打印数据表示对象。
+     *  <CODE> getPrintData()</CODE>方法返回一个名称由<CODE> {@ link #getDocFlavor()getDocFlavor()}给出的表示类的实例。
+     * {@ link DocFlavor#getRepresentationClassName()getRepresentationClassName } </CODE>,并且返回值可以从类Object转换为
+     * 该表示类。
+     *  <CODE> getPrintData()</CODE>方法返回一个名称由<CODE> {@ link #getDocFlavor()getDocFlavor()}给出的表示类的实例。
+     * 
+     * 
      * @return  Unmodifiable set of printing attributes for this doc, or null
      *          to obtain all attribute values from the job's attribute
      *          set.
@@ -170,6 +222,12 @@ public interface Doc {
      * However, if the print data representation object is itself a Reader,
      * then the print data representation object is simply returned.
      * <P>
+     * <p>
+     * 获取此doc对象的打印属性集。如果返回的属性集包括特定属性<I> X的实例,则打印机必须使用该文档的该属性值,覆盖作业属性集中属性<I> X </I>的任何值。
+     * 如果返回的属性集不包括特定属性<I> X </I>的实例,或者如果返回了null,则打印机必须查阅作业的属性集以获得属性<I> X的值,</I >如果在那里没有找到,打印机必须使用一个实现相关的默认值。
+     * 获取此doc对象的打印属性集。如果返回的属性集包括特定属性<I> X的实例,则打印机必须使用该文档的该属性值,覆盖作业属性集中属性<I> X </I>的任何值。返回的属性集是不可修改的。
+     * 
+     * 
      * @return  Reader for reading the print data characters from this doc.
      *          If a reader cannot be provided because this doc does not meet
      *          the criteria stated above, null is returned.
@@ -194,6 +252,14 @@ public interface Doc {
      * print data representation object is itself an input stream, then the
      * print data representation object is simply returned.
      * <P>
+     * <p>
+     *  获取从此文档中提取字符打印数据的阅读器。如果DocFlavor具有以下打印数据表示类之一,则Doc实现需要支持此方法,否则返回null：
+     * <UL>
+     *  <LI> char [] <LI> java.lang.String <LI> java.io.Reader
+     * </UL>
+     *  文档的打印数据表示对象用于构造和返回读取器,用于从打印数据表示对象读取打印数据作为字符流。然而,如果打印数据表示对象本身是读取器,则简单地返回打印数据表示对象。
+     * <P>
+     * 
      * @return  Input stream for reading the print data bytes from this doc. If
      *          an input stream cannot be provided because this doc does not
      *          meet the criteria stated above, null is returned.

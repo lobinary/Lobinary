@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,11 +40,21 @@ import static java.util.GregorianCalendar.*;
  * timestamp for fields. {@code CalendarBuilder} uses a single
  * int array combining fields[] and stamp[] of {@code Calendar}.
  *
+ * <p>
+ *  {@code CalendarBuilder}保留用于设置给定{@code Calendar}的日历字段的字段值对。
+ * 它有一个{@link日历#FIELD_COUNT FIELD_COUNT}个字段用于周年度支持。
+ * 此外,{@code ISO_DAY_OF_WEEK}用于在ISO编号的日期中指定{@code DAY_OF_WEEK}。
+ * 
+ *  <p> {@ code CalendarBuilder}保留字段的伪时间戳的语义。
+ * 
  * @author Masayoshi Okutsu
  */
 class CalendarBuilder {
     /*
      * Pseudo time stamp constants used in java.util.Calendar
+     * <p>
+     *  {@code CalendarBuilder}使用组合{@code Calendar}的fields []和stamp []的单个int数组。
+     * 
      */
     private static final int UNSET = 0;
     private static final int COMPUTED = 1;

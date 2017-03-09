@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,13 @@
   History:
   Date       Who                What
   11Jun1998  dl               Create public version
+/* <p>
+/*  文件：Mutex.java
+/* 
+/*  最初由Doug Lea编写并发布到公共领域。这可能被用于任何目的,无论如何没有确认。感谢Sun Microsystems Labs的帮助和支持,并且每个人都贡献,测试和使用此代码。
+/* 
+/*  历史：日期谁谁11Jun1998 dl创建公共版本
+/* 
 */
 
 package com.sun.corba.se.impl.orbutil.concurrent;
@@ -134,6 +142,28 @@ import com.sun.corba.se.impl.orbutil.ORBUtility ;
  * This version is reentrant: the same thread may acquire a mutex multiple
  * times, in which case it must release the mutex the same number of times
  * as it was acquired before another thread can acquire the mutex.
+ * <p>
+ *  一个简单的可重入互斥锁。锁在施工时是免费的。每个获取获取锁,并且每个释放释放它。释放已经可用的锁没有任何效果。
+ * <p>
+ *  此实现不试图提供任何公平或排序保证。如果需要它们,请考虑使用一个Semaphore实现作为锁定机制。
+ * <p>
+ *  <b>示例用法</b> <br>
+ * <p>
+ *  互斥体可以在不能使用java同步块表达的构造中有用,因为获取/释放对不发生在相同的方法或代码块中。例如,您可以使用它们跨链接列表的节点进行手动锁定。
+ * 这允许极细粒度的锁定,因此增加潜在的并发性,代价是额外的复杂性和开销,通常只有在极端争用的情况下才有价值。
+ * <pre>
+ *  class Node {Object item;节点下一个; Mutex lock = new Mutex(); //每个节点都有自己的锁
+ * 
+ * Node(Object x,Node n){item = x; next = n; }}
+ * 
+ *  class List {protected Node head; //指向列表的第一个节点的指针
+ * 
+ *  //使用纯java同步来保护头字段。 //(我们可以在这里使用一个Mutex,但是没有//原因这样做。
+ * )protected synchronized Node getHead(){return head; }}。
+ * 
+ *  boolean search(Object x)throws InterruptedException {Node p = getHead(); if(p == null)return false;。
+ * 
+ * 
  * @see Semaphore
  * <p>[<a href="http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html"> Introduction to this package. </a>]
 **/

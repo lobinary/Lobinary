@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ import java.security.BasicPermission;
  * method.
  *
  * <p>The target name is the {@link InquireType} allowed.
+ * <p>
+ *  此类用于保护已建立的GSS安全上下文的各种属性,这些属性可以使用{@link com.sun.security.jgss.ExtendedGSSContext#inquireSecContext}方法
+ * 访问。
+ * 
+ *  <p>目标名称是允许的{@link InquireType}。
  */
 @jdk.Exported
 public final class InquireSecContextPermission extends BasicPermission {
@@ -44,6 +50,9 @@ public final class InquireSecContextPermission extends BasicPermission {
      * the specified name. The name is the symbolic name of the
      * {@link InquireType} allowed.
      *
+     * <p>
+     * 
+     * 
      * @param name the {@link InquireType} allowed by this
      * permission. "*" means all {@link InquireType}s are allowed.
      *

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -24,6 +25,9 @@
 
 /*
  * Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
+ * <p>
+ *  Oracle Corporation的版权所有(c)2009。版权所有。
+ * 
  */
 
 package javax.xml.stream;
@@ -33,6 +37,10 @@ import javax.xml.stream.events.XMLEvent;
 /**
  * This interface declares a simple filter interface that one can
  * create to filter XMLEventReaders
+ * <p>
+ *  此接口声明一个简单的过滤器接口,可以创建过滤器XMLEventReaders
+ * 
+ * 
  * @version 1.0
  * @author Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
  * @since 1.6
@@ -43,6 +51,9 @@ public interface EventFilter {
    * will return true if this filter accepts this event and false
    * otherwise.
    *
+   * <p>
+   *  测试此事件是否为此流的一部分。如果此过滤器接受此事件,此方法将返回true,否则返回false。
+   * 
    * @param event the event to test
    * @return true if this filter accepts this event, false otherwise
    */

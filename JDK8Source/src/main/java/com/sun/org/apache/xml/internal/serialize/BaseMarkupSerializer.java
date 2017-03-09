@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 
@@ -121,6 +131,26 @@ import org.xml.sax.ext.LexicalHandler;
  * another element.
  *
  *
+ * <p>
+ *  支持DOM和SAX的序列化的基类相当串行化XML / HTML / XHTML文档。派生类执行方法特定的序列化,此类提供常见的序列化机制。
+ * <p>
+ *  在通过调用{@link #setOutputCharStream}或{@link #setOutputByteStream}作为写入器和使用{@link #setOutputFormat}作为输出格式
+ * ,序列化器必须使用正确的写入器和输出格式进行初始化。
+ * <p>
+ *  序列化器可以被重用任何次数,但不能由两个线程并发使用。
+ * <p>
+ *  如果使用输出流,则从输出格式(默认为<tt> UTF-8 </tt>)获取编码。如果使用写入程序,请确保写入程序使用与输出格式中指定的相同的编码(如果适用)。
+ * <p>
+ * 序列化器支持DOM和SAX。 DOM序列化通过调用{@link #serialize(Document)}来完成,SAX序列化通过触发SAX事件并使用序列化器作为文档处理程序来完成。这也适用于派生类。
+ * <p>
+ *  如果在序列化时发生I / O异常,则序列化器不会直接抛出异常,而只是在序列化结束时抛出异常(DOM或SAX的{@link org.xml.sax.DocumentHandler#endDocument}
+ * 。
+ * <p>
+ *  对于未指定为空白保留的元素,序列化程序可能会在空格边界,缩进行和序列化元素在单独的行上断开长文本行。行终止符将被视为空格,行开始处的空格将被删除。
+ * <p>
+ *  当缩进时,序列化器能够检测看似元素的内容,并且将这些元素序列化在单独的行上。当元素是元素的第一个或最后一个子元素,或紧跟在另一个元素之后或之前时,元素被序列化缩进。
+ * 
+ * 
  * @author <a href="mailto:arkin@intalio.com">Assaf Arkin</a>
  * @author <a href="mailto:rahul.srivastava@sun.com">Rahul Srivastava</a>
  * @author Elena Litani, IBM
@@ -147,6 +177,9 @@ public abstract class BaseMarkupSerializer
      * The array is automatically resized. When leaving an element,
      * it's state is not removed but reused when later returning
      * to the same nesting level.
+     * <p>
+     *  保存已输入的所有元素状态的数组。将自动调整数组大小。当离开元素时,它的状态不会被删除,而是在以后返回到相同的嵌套级别时重用。
+     * 
      */
     private ElementState[]  _elementStates;
 
@@ -155,6 +188,9 @@ public abstract class BaseMarkupSerializer
      * The index of the next state to place in the array,
      * or one plus the index of the current state. When zero,
      * we are in no state.
+     * <p>
+     *  要放置在数组中的下一个状态的索引,或者一个加上当前状态的索引。当为零时,我们处于无状态。
+     * 
      */
     private int             _elementStateCount;
 
@@ -162,6 +198,9 @@ public abstract class BaseMarkupSerializer
     /**
      * Vector holding comments and PIs that come before the root
      * element (even after it), see {@link #serializePreRoot}.
+     * <p>
+     *  包含在根元素之前(甚至之后)的注释和PI的向量,请参阅{@link #serializePreRoot}。
+     * 
      */
     private Vector          _preRoot;
 
@@ -169,6 +208,9 @@ public abstract class BaseMarkupSerializer
     /**
      * If the document has been started (header serialized), this
      * flag is set to true so it's not started twice.
+     * <p>
+     * 如果文档已经启动(头序列化),则此标志设置为true,因此它不会启动两次。
+     * 
      */
     protected boolean       _started;
 
@@ -177,6 +219,9 @@ public abstract class BaseMarkupSerializer
      * True if the serializer has been prepared. This flag is set
      * to false when the serializer is reset prior to using it,
      * and to true after it has been prepared for usage.
+     * <p>
+     *  如果序列化器已准备就为true。当串行器在使用它之前被复位时,该标志被设置为假,而在使用它之后被设置为真。
+     * 
      */
     private boolean         _prepared;
 
@@ -185,18 +230,27 @@ public abstract class BaseMarkupSerializer
      * Association between namespace URIs (keys) and prefixes (values).
      * Accumulated here prior to starting an element and placing this
      * list in the element state.
+     * <p>
+     *  命名空间URI(键)和前缀(值)之间的关联。在启动元素之前在此处累积,并将此列表置于元素状态。
+     * 
      */
     protected Hashtable     _prefixes;
 
 
     /**
      * The system identifier of the document type, if known.
+     * <p>
+     *  文档类型的系统标识符(如果已知)。
+     * 
      */
     protected String        _docTypePublicId;
 
 
     /**
      * The system identifier of the document type, if known.
+     * <p>
+     *  文档类型的系统标识符(如果已知)。
+     * 
      */
     protected String        _docTypeSystemId;
 
@@ -206,18 +260,27 @@ public abstract class BaseMarkupSerializer
      * be a null reference. If no format was passed to the constructor,
      * the default one for this document type will be used. The format
      * object is never changed by the serializer.
+     * <p>
+     *  与此序列化关联的输出格式。这永远不会是一个null引用。如果没有格式传递给构造函数,则将使用此文档类型的默认格式。格式对象从不被串行器改变。
+     * 
      */
     protected OutputFormat   _format;
 
 
     /**
      * The printer used for printing text parts.
+     * <p>
+     *  打印机用于打印文本部件。
+     * 
      */
     protected Printer       _printer;
 
 
     /**
      * True if indenting printer.
+     * <p>
+     *  如果缩进打印机,则为True。
+     * 
      */
     protected boolean       _indenting;
 
@@ -226,12 +289,18 @@ public abstract class BaseMarkupSerializer
 
     /**
      * The underlying writer.
+     * <p>
+     *  底层作家。
+     * 
      */
     private Writer          _writer;
 
 
     /**
      * The output stream.
+     * <p>
+     *  输出流。
+     * 
      */
     private OutputStream    _output;
 
@@ -250,6 +319,10 @@ public abstract class BaseMarkupSerializer
      * Must initialize the serializer before serializing any document,
      * by calling {@link #setOutputCharStream} or {@link #setOutputByteStream}
                  * first
+                 * <p>
+                 *  受保护的构造函数只能由派生类使用。
+                 * 必须在序列化任何文档之前初始化序列化程序,方法是先调用{@link #setOutputCharStream}或{@link #setOutputByteStream}。
+                 * 
      */
     protected BaseMarkupSerializer( OutputFormat format )
     {
@@ -399,6 +472,10 @@ public abstract class BaseMarkupSerializer
      * writer and output format. Throws an exception only if
      * an I/O exception occured while serializing.
      *
+     * <p>
+     *  使用先前指定的writer和输出格式序列化DOM元素。仅当序列化时发生I / O异常时才抛出异常。
+     * 
+     * 
      * @param elem The element to serialize
      * @throws IOException An I/O exception occured while
      *   serializing
@@ -419,6 +496,10 @@ public abstract class BaseMarkupSerializer
      * writer and output format. Throws an exception only if
      * an I/O exception occured while serializing.
      *
+     * <p>
+     *  使用先前指定的写入器和输出格式对节点进行序列化。仅当序列化时发生I / O异常时才抛出异常。
+     * 
+     * 
      * @param node Node to serialize
      * @throws IOException An I/O exception occured while serializing
      */
@@ -438,6 +519,10 @@ public abstract class BaseMarkupSerializer
      * writer and output format. Throws an exception only if
      * an I/O exception occured while serializing.
      *
+     * <p>
+     * 使用先前指定的writer和输出格式序列化DOM文档Fragmnt。仅当序列化时发生I / O异常时才抛出异常。
+     * 
+     * 
      * @param elem The element to serialize
      * @throws IOException An I/O exception occured while
      *   serializing
@@ -459,6 +544,10 @@ public abstract class BaseMarkupSerializer
      * writer and output format. Throws an exception only if
      * an I/O exception occured while serializing.
      *
+     * <p>
+     *  使用先前指定的writer和输出格式序列化DOM文档。仅当序列化时发生I / O异常时才抛出异常。
+     * 
+     * 
      * @param doc The document to serialize
      * @throws IOException An I/O exception occured while
      *   serializing
@@ -761,6 +850,10 @@ public abstract class BaseMarkupSerializer
      * Will flush the output stream and throw an exception
      * if any I/O error occured while serializing.
      *
+     * <p>
+     *  在文档结尾处调用以将其包装起来。如果在序列化时发生任何I / O错误,将刷新输出流并抛出异常。
+     * 
+     * 
      * @throws SAXException An I/O exception occured during
      *  serializing
      */
@@ -1006,6 +1099,10 @@ public abstract class BaseMarkupSerializer
      * serializers and the differences are masked out in a separate {@link
      * #serializeElement}.
      *
+     * <p>
+     *  序列化DOM节点。此方法在XML,HTML和XHTML序列化程序之间共享,并且在单独的{@link #serializeElement}中屏蔽差异。
+     * 
+     * 
      * @param node The node to serialize
      * @see #serializeElement
      * @throws IOException An I/O exception occured while
@@ -1278,6 +1375,7 @@ public abstract class BaseMarkupSerializer
 
 
     /* Serializes XML Declaration, according to 'xml-declaration' property.
+    /* <p>
      */
     protected void serializeDocument()throws IOException {
         int    i;
@@ -1317,6 +1415,7 @@ public abstract class BaseMarkupSerializer
     }
 
     /* Serializes DTD, if present.
+    /* <p>
      */
     protected void serializeDTD(String name) throws IOException{
 
@@ -1371,6 +1470,11 @@ public abstract class BaseMarkupSerializer
      * will be matched to a closing tag. Returns the current element
      * state with <tt>empty</tt> and <tt>afterElement</tt> set to false.
      *
+     * <p>
+     *  必须由一个方法调用打印任何类型的内容。如果元素刚刚打开,则开始标记将关闭,并与结束标记相匹配。
+     * 返回当前元素的状态,其中<tt> empty </tt>和<tt> afterElement </tt>设置为false。
+     * 
+     * 
      * @return The current element state
      * @throws IOException An I/O exception occured while
      *   serializing
@@ -1414,6 +1518,10 @@ public abstract class BaseMarkupSerializer
      * current element state. In addition, the output format can dictate
      * whether the text is printed as CDATA or unescaped.
      *
+     * <p>
+     *  调用以当前元素格式打印文本内容。由于此方法能够将文本打印为CDATA,因此也用于此目的。空白处理由当前元素状态决定。此外,输出格式可以指示文本是作为CDATA打印还是未转义。
+     * 
+     * 
      * @param text The text to print
      * @param unescaped True is should print unescaped
      * @throws IOException An I/O exception occured while
@@ -1470,6 +1578,10 @@ public abstract class BaseMarkupSerializer
      * or null if no such entity exists. Calling this method with <tt>'&amp;'</tt>
      * will return <tt>"&amp;amp;"</tt>.
      *
+     * <p>
+     *  返回此字符值的合适的实体引用,如果不存在此类实体,则返回null。使用<tt>'&amp;'</tt>调用此方法将返回<tt>"&amp; amp;"</tt>。
+     * 
+     * 
      * @param ch Character value
      * @return Character entity name, or null
      */
@@ -1480,6 +1592,10 @@ public abstract class BaseMarkupSerializer
      * Called to serializee the DOM element. The element is serialized based on
      * the serializer's method (XML, HTML, XHTML).
      *
+     * <p>
+     *  被称为序列化DOM元素。基于序列化器的方法(XML,HTML,XHTML)对元素进行序列化。
+     * 
+     * 
      * @param elem The element to serialize
      * @throws IOException An I/O exception occured while
      *   serializing
@@ -1496,6 +1612,10 @@ public abstract class BaseMarkupSerializer
      * method. Will be called when the root element is serialized
      * and when the document finished serializing.
      *
+     * <p>
+     * 注释和PI不能在根元素之前序列化,因为根元素将序列化文档类型,这通常首先。相反,这样的PI和注释被累积在向量内并通过调用该方法被串行化。当根元素被序列化并且文档完成序列化时将被调用。
+     * 
+     * 
      * @throws IOException An I/O exception occured while
      *   serializing
      */
@@ -1633,6 +1753,12 @@ public abstract class BaseMarkupSerializer
      * Multiple spaces are printed as such, but spaces at beginning
      * of line are removed.
      *
+     * <p>
+     *  调用打印额外的文本与空白处理。
+     * 如果保留空格,则通过调用{@link #printText(String,boolean,boolean)}并对每个新行调用{@link Printer#breakLine}来打印文本。
+     * 如果未保留空格,则如果长度超过线宽,文本将在空格边界被破坏;将打印多个空格,但删除行开头的空格。
+     * 
+     * 
      * @param text The text to print
      * @param preserveSpace Space preserving flag
      * @param unescaped Print unescaped
@@ -1719,6 +1845,10 @@ public abstract class BaseMarkupSerializer
      * Encapsulates the URL in double quotes, escapes non-printing
      * characters and print it equivalent to {@link #printText}.
      *
+     * <p>
+     *  打印文档类型公共或系统标识符URL。将URL封装在双引号中,转义非打印字符并打印等效于{@link #printText}。
+     * 
+     * 
      * @param url The document type url to print
      */
     protected void printDoctypeURL( String url )
@@ -1768,6 +1898,9 @@ public abstract class BaseMarkupSerializer
 
         /**
          * Escapes chars
+         * <p>
+         *  转义字符
+         * 
          */
          final void printHex( int ch) throws IOException {
                  _printer.printText( "&#x" );
@@ -1783,6 +1916,10 @@ public abstract class BaseMarkupSerializer
      * Where the format specifies a deault entity reference, that reference
      * is used (e.g. <tt>&amp;lt;</tt>).
      *
+     * <p>
+     *  转义字符串,以便它可以作为文本内容或属性值打印。不可打印字符使用字符引用转义。如果格式指定了一个deault实体引用,则使用该引用(例如<tt>&amp; lt; </tt>)。
+     * 
+     * 
      * @param source The string to escape
      */
     protected void printEscaped( String source )
@@ -1810,6 +1947,10 @@ public abstract class BaseMarkupSerializer
     /**
      * Return the state of the current element.
      *
+     * <p>
+     *  返回当前元素的状态。
+     * 
+     * 
      * @return Current element state
      */
     protected ElementState getElementState()
@@ -1823,6 +1964,10 @@ public abstract class BaseMarkupSerializer
      * Tag name and space preserving is specified, element
      * state is initially empty.
      *
+     * <p>
+     *  为指定的元素输入新的元素状态。指定了标记名称和空间保留,元素状态最初为空。
+     * 
+     * 
      * @return Current element state, or null
      */
     protected ElementState enterElementState( String namespaceURI, String localName,
@@ -1866,6 +2011,10 @@ public abstract class BaseMarkupSerializer
      * state of the parent element. If this was the root
      * element, return to the state of the document.
      *
+     * <p>
+     * 保留当前元素的状态并返回到父元素的状态。如果这是根元素,则返回到文档的状态。
+     * 
+     * 
      * @return Previous element state
      */
     protected ElementState leaveElementState()
@@ -1888,6 +2037,10 @@ public abstract class BaseMarkupSerializer
      * Returns true before entering any element and after
      * leaving the root element.
      *
+     * <p>
+     *  如果在文档的状态,则返回true。在输入任何元素之前和离开根元素之后返回true。
+     * 
+     * 
      * @return True if in the state of the document
      */
     protected boolean isDocumentState()
@@ -1901,6 +2054,10 @@ public abstract class BaseMarkupSerializer
      * If the URI has been mapped to a prefix, returns the
      * prefix, otherwise returns null.
      *
+     * <p>
+     *  返回指定URI的命名空间前缀。如果URI已映射到前缀,则返回前缀,否则返回null。
+     * 
+     * 
      * @param namespaceURI The namespace URI
      * @return The namespace prefix if known, or null
      */
@@ -1930,6 +2087,10 @@ public abstract class BaseMarkupSerializer
     /**
      * The method modifies global DOM error object
      *
+     * <p>
+     *  该方法修改全局DOM错误对象
+     * 
+     * 
      * @param message
      * @param severity
      * @param type
@@ -1960,6 +2121,9 @@ public abstract class BaseMarkupSerializer
          * DOM level 3:
          * Check a node to determine if it contains unbound namespace prefixes.
          *
+         * <p>
+         *  DOM级别3：检查节点以确定其是否包含未绑定的命名空间前缀。
+         * 
          * @param node The node to check for unbound namespace prefices
          */
          protected void checkUnboundNamespacePrefixedNode (Node node) throws IOException{

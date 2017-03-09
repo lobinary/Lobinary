@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,18 @@ import java.lang.reflect.Field;
  * methods allows the <code>AWTKeyStroke</code> implementation
  * to cache and share instances efficiently.
  *
+ * <p>
+ *  <code> AWTKeyStroke </code>表示键盘或等效输入设备上的键操作。
+ *  <code> AWTKeyStroke </code>可以仅对应于特定键的按下或释放,正如<code> KEY_PRESSED </code>和<code> KEY_RELEASED </code> 
+ * <code> KeyEvent </code>做;或者,它们可以对应于键入特定的Java字符,正如<code> KEY_TYPED </code> <code> KeyEvent </code>。
+ *  <code> AWTKeyStroke </code>表示键盘或等效输入设备上的键操作。
+ * 在所有情况下,<code> AWTKeyStroke </code>可以指定在动作期间必须出现以用于精确匹配的修饰符(alt,shift,control,meta,altGraph或其组合)。
+ * <p>
+ *  <code> AWTKeyStrokes </code>是不可变的,并且旨在是唯一的。
+ * 客户端代码不应该自己创建<code> AWTKeyStroke </code>,而应该使用<code> getAWTKeyStroke </code>的变体。
+ * 客户端使用这些工厂方法允许<code> AWTKeyStroke </code>实现高效地缓存和共享实例。
+ * 
+ * 
  * @see #getAWTKeyStroke
  *
  * @author Arnaud Weber
@@ -72,6 +85,9 @@ public class AWTKeyStroke implements Serializable {
      * Associates VK_XXX (as a String) with code (as Integer). This is
      * done to avoid the overhead of the reflective call to find the
      * constant.
+     * <p>
+     *  将VK_XXX(作为字符串)与代码(作为Integer)关联。这是为了避免反射调用的开销来找到常量。
+     * 
      */
     private static VKCollection vks;
 
@@ -84,6 +100,9 @@ public class AWTKeyStroke implements Serializable {
      * Reads keystroke class from AppContext and if null, puts there the
      * AWTKeyStroke class.
      * Must be called under locked AWTKeyStro
+     * <p>
+     *  从AppContext中读取击键类,如果为null,则在那里放入AWTKeyStroke类。必须在锁定的AWTKeyStro下调用
+     * 
      */
     private static Class<AWTKeyStroke> getAWTKeyStrokeClass() {
         Class<AWTKeyStroke> clazz = (Class)AppContext.getAppContext().get(AWTKeyStroke.class);
@@ -131,6 +150,27 @@ public class AWTKeyStroke implements Serializable {
      * by client code. Use a variant of <code>getAWTKeyStroke</code>
      * instead.
      *
+     * <p>
+     *  使用默认值构造一个<code> AWTKeyStroke </code>。使用的默认值为：
+     * <table border="1" summary="AWTKeyStroke default values">
+     *  <tr> <th>属性</th> <th>默认值</th> </tr>
+     * <tr>
+     * <td>键字符</td> <td> <code> KeyEvent.CHAR_UNDEFINED </code> </td>
+     * </tr>
+     * <tr>
+     *  <td>键代码</td> <td> <code> KeyEvent.VK_UNDEFINED </code> </td>
+     * </tr>
+     * <tr>
+     *  <td>修饰符</td> <td>无</td>
+     * </tr>
+     * <tr>
+     *  <td>关键释放?</td> <td> <code> false </code> </td>
+     * </tr>
+     * </table>
+     * 
+     *  <code> AWTKeyStroke </code> s不应由客户端代码构造。请改用<code> getAWTKeyStroke </code>的变体。
+     * 
+     * 
      * @see #getAWTKeyStroke
      */
     protected AWTKeyStroke() {
@@ -142,6 +182,11 @@ public class AWTKeyStroke implements Serializable {
      * by client code. Use a variant of <code>getAWTKeyStroke</code>
      * instead.
      *
+     * <p>
+     *  用指定的值构造一个<code> AWTKeyStroke </code>。 <code> AWTKeyStroke </code> s不应由客户端代码构造。
+     * 请改用<code> getAWTKeyStroke </code>的变体。
+     * 
+     * 
      * @param keyChar the character value for a keyboard key
      * @param keyCode the key code for this <code>AWTKeyStroke</code>
      * @param modifiers a bitwise-ored combination of any modifiers
@@ -169,6 +214,13 @@ public class AWTKeyStroke implements Serializable {
      * including <code>private</code>. This operation
      * flushes the current <code>AWTKeyStroke</code> cache.
      *
+     * <p>
+     *  注册在<code> AWTKeyStroke </code>中的工厂方法在生成<code> AWTKeyStroke </code>的新实例时将使用的新类。
+     * 在调用此方法后,工厂方法将返回指定类的实例。
+     * 指定的类必须是<code> AWTKeyStroke </code>或派生自<code> AWTKeyStroke </code>,并且它必须有一个无参构造函数。
+     * 构造函数可以是任何可访问性,包括<code> private </code>。此操作刷新当前的<code> AWTKeyStroke </code>缓存。
+     * 
+     * 
      * @param subclass the new Class of which the factory methods should create
      *        instances
      * @throws IllegalArgumentException if subclass is <code>null</code>,
@@ -226,6 +278,9 @@ public class AWTKeyStroke implements Serializable {
     /* returns noarg Constructor for class with accessible flag. No security
        threat as accessible flag is set only for this Constructor object,
        not for Class constructor.
+    /* <p>
+    /*  威胁作为可访问标志仅设置为此构造函数对象,而不是类构造函数。
+    /* 
      */
     private static Constructor getCtor(final Class clazz)
     {
@@ -289,6 +344,10 @@ public class AWTKeyStroke implements Serializable {
      * that represents a <code>KEY_TYPED</code> event for the
      * specified character.
      *
+     * <p>
+     *  返回代表指定字符的<code> KEY_TYPED </code>事件的<code> AWTKeyStroke </code>的共享实例。
+     * 
+     * 
      * @param keyChar the character value for a keyboard key
      * @return an <code>AWTKeyStroke</code> object for that key
      */
@@ -325,6 +384,25 @@ public class AWTKeyStroke implements Serializable {
      * them is an integer in which each bit represents a different modifier
      * key. Use 0 to specify no modifiers.
      *
+     * <p>
+     * 返回{@code AWTKeyStroke}的共享实例,该实例表示指定Character对象和一组修饰符的{@code KEY_TYPED}事件。
+     * 注意,第一个参数是Character类型,而不是char。
+     * 这是为了避免无意中与调用<code> getAWTKeyStroke(int keyCode,int modifiers)</code>发生冲突。
+     * 
+     *  修饰符由以下内容的任意组合组成：<ul> <li> java.awt.event.InputEvent.SHIFT_DOWN_MASK <li> java.awt.event.InputEvent.C
+     * TRL_DOWN_MASK <li> java.awt.event.InputEvent.META_DOWN_MASK <li > java.awt.event.InputEvent.ALT_DOWN_
+     * MASK <li> java.awt.event.InputEvent.ALT_GRAPH_DOWN_MASK。
+     * </ul>
+     *  下面列出的旧修饰符也可以使用,但它们映射到_DOWN_修饰符。
+     *  <ul> <li> java.awt.event.InputEvent.SHIFT_MASK <li> java.awt.event.InputEvent.CTRL_MASK <li> java.aw
+     * t.event.InputEvent.META_MASK <li> java.awt.event.InputEvent。
+     *  下面列出的旧修饰符也可以使用,但它们映射到_DOWN_修饰符。 ALT_MASK <li> java.awt.event.InputEvent.ALT_GRAPH_MASK。
+     * </ul>
+     *  也可以使用,但是它们被映射到_DOWN_修饰符。
+     * 
+     *  由于这些数字都是2的不同次幂,它们的任何组合是一个整数,其中每个位表示不同的修饰键。使用0指定无修饰符。
+     * 
+     * 
      * @param keyChar the Character object for a keyboard character
      * @param modifiers a bitwise-ored combination of any modifiers
      * @return an <code>AWTKeyStroke</code> object for that key
@@ -377,6 +455,29 @@ public class AWTKeyStroke implements Serializable {
      * them is an integer in which each bit represents a different modifier
      * key. Use 0 to specify no modifiers.
      *
+     * <p>
+     *  返回一个<code> AWTKeyStroke </code>的共享实例,给定一个数字键代码和一组修饰符,指定在按下或释放时是否激活该键。
+     * <p>
+     * 在<code> java.awt.event.KeyEvent </code>中定义的"虚拟键"常量可用于指定键代码。
+     * 例如：<ul> <li> <code> java.awt.event.KeyEvent.VK_ENTER </code> <li> <code> java.awt.event.KeyEvent.VK_T
+     * AB </code> <li> <code> java.awt.event.KeyEvent.VK_SPACE </code>。
+     * 在<code> java.awt.event.KeyEvent </code>中定义的"虚拟键"常量可用于指定键代码。
+     * </ul>
+     *  或者,可以通过调用<code> java.awt.event.KeyEvent.getExtendedKeyCodeForChar </code>获得键代码。
+     * 
+     *  修饰符由以下各项的任意组合组成：<ul> <li> java.awt.event.InputEvent.SHIFT_DOWN_MASK <li> java.awt.event.InputEvent.C
+     * TRL_DOWN_MASK <li> java.awt.event.InputEvent.META_DOWN_MASK <li> java.awt.event.InputEvent.ALT_DOWN_M
+     * ASK <li> java.awt.event.InputEvent.ALT_GRAPH_DOWN_MASK。
+     * </ul>
+     *  旧的修饰符<ul> <li> java.awt.event.InputEvent.SHIFT_MASK <li> java.awt.event.InputEvent.CTRL_MASK <li> ja
+     * va.awt.event.InputEvent.META_MASK <li> java.awt.event .InputEvent.ALT_MASK <li> java.awt.event.InputE
+     * vent.ALT_GRAPH_MASK。
+     * </ul>
+     *  也可以使用,但是它们被映射到_DOWN_修饰符。
+     * 
+     *  由于这些数字都是2的不同次幂,它们的任何组合是一个整数,其中每个位表示不同的修饰键。使用0指定无修饰符。
+     * 
+     * 
      * @param keyCode an int specifying the numeric code for a keyboard key
      * @param modifiers a bitwise-ored combination of any modifiers
      * @param onKeyRelease <code>true</code> if the <code>AWTKeyStroke</code>
@@ -424,6 +525,27 @@ public class AWTKeyStroke implements Serializable {
      * them is an integer in which each bit represents a different modifier
      * key. Use 0 to specify no modifiers.
      *
+     * <p>
+     *  返回一个<code> AWTKeyStroke </code>的共享实例,给定一个数字键代码和一组修饰符。返回的<code> AWTKeyStroke </code>会对应一个按键。
+     * <p>
+     * 在<code> java.awt.event.KeyEvent </code>中定义的"虚拟键"常量可用于指定键代码。
+     * 例如：<ul> <li> <code> java.awt.event.KeyEvent.VK_ENTER </code> <li> <code> java.awt.event.KeyEvent.VK_T
+     * AB </code> <li> <code> java.awt.event.KeyEvent.VK_SPACE </code>。
+     * 在<code> java.awt.event.KeyEvent </code>中定义的"虚拟键"常量可用于指定键代码。
+     * </ul>
+     *  修饰符由以下各项的任意组合组成：<ul> <li> java.awt.event.InputEvent.SHIFT_DOWN_MASK <li> java.awt.event.InputEvent.C
+     * TRL_DOWN_MASK <li> java.awt.event.InputEvent.META_DOWN_MASK <li> java.awt.event.InputEvent.ALT_DOWN_M
+     * ASK <li> java.awt.event.InputEvent.ALT_GRAPH_DOWN_MASK。
+     * </ul>
+     *  旧的修饰符<ul> <li> java.awt.event.InputEvent.SHIFT_MASK <li> java.awt.event.InputEvent.CTRL_MASK <li> ja
+     * va.awt.event.InputEvent.META_MASK <li> java.awt.event .InputEvent.ALT_MASK <li> java.awt.event.InputE
+     * vent.ALT_GRAPH_MASK。
+     * </ul>
+     *  也可以使用,但是它们被映射到_DOWN_修饰符。
+     * 
+     *  由于这些数字都是2的不同次幂,它们的任何组合是一个整数,其中每个位表示不同的修饰键。使用0指定无修饰符。
+     * 
+     * 
      * @param keyCode an int specifying the numeric code for a keyboard key
      * @param modifiers a bitwise-ored combination of any modifiers
      * @return an <code>AWTKeyStroke</code> object for that key
@@ -445,6 +567,14 @@ public class AWTKeyStroke implements Serializable {
      * <code>KeyReleased</code> event. The <code>KeyEvent</code> modifiers are
      * obtained for all three types of <code>KeyEvent</code>.
      *
+     * <p>
+     *  返回<code> AWTKeyStroke </code>,它代表生成给定<code> KeyEvent </code>的笔触。
+     * <p>
+     *  此方法从<code> KeyTyped </code>事件获取keyChar,并从<code> KeyPressed </code>或<code> KeyReleased </code>事件获取key
+     * Code。
+     * 为所有三种类型的<code> KeyEvent </code>获得<code> KeyEvent </code>修饰符。
+     * 
+     * 
      * @param anEvent the <code>KeyEvent</code> from which to
      *      obtain the <code>AWTKeyStroke</code>
      * @throws NullPointerException if <code>anEvent</code> is null
@@ -492,6 +622,24 @@ public class AWTKeyStroke implements Serializable {
      *     "typed a" =&gt; getAWTKeyStroke('a');
      * </pre>
      *
+     * <p>
+     *  解析一个字符串并返回一个<code> AWTKeyStroke </code>。字符串必须具有以下语法：
+     * <pre>
+     * &lt; modifiers&gt; *(&lt; typedID&gt; |&lt; pressedReleasedID&gt;)
+     * 
+     *  修饰符：= shift |控制| ctrl |元| alt | altGraph typedID：= typed&lt; typedKey&gt; typedKey：=长度为1的字符串,给出Unico
+     * de字符。
+     *  pressReleasedID：=(按下|释放)键键：= KeyEvent键代码名称,即"VK_"后面的名称。
+     * </pre>
+     *  如果没有指定打字,按下或释放,则按下。这里有些例子：
+     * <pre>
+     *  "INSERT"=&gt; getAWTKeyStroke(KeyEvent.VK_INSERT,0); "control DELETE"=&gt; getAWTKeyStroke(KeyEvent.
+     * VK_DELETE,InputEvent.CTRL_MASK); "alt shift X"=&gt; getAWTKeyStroke(KeyEvent.VK_X,InputEvent.ALT_MASK
+     *  | InputEvent.SHIFT_MASK); "alt shift released X"=&gt; getAWTKeyStroke(KeyEvent.VK_X,InputEvent.ALT_M
+     * ASK | InputEvent.SHIFT_MASK,true); "typed a"=&gt; getAWTKeyStroke('a');。
+     * </pre>
+     * 
+     * 
      * @param s a String formatted as described above
      * @return an <code>AWTKeyStroke</code> object for that String
      * @throws IllegalArgumentException if <code>s</code> is <code>null</code>,
@@ -603,6 +751,10 @@ public class AWTKeyStroke implements Serializable {
      * <code>key</code>. This will throw an
      * <code>IllegalArgumentException</code> if <code>key</code> is
      * not a valid constant.
+     * <p>
+     *  返回名为<code> key </code>的KeyEvent.VK字段的整数常量。
+     * 如果<code>键</code>不是有效的常量,则会抛出<code> IllegalArgumentException </code>。
+     * 
      */
     private static int getVKValue(String key) {
         VKCollection vkCollect = getVKCollection();
@@ -629,6 +781,10 @@ public class AWTKeyStroke implements Serializable {
     /**
      * Returns the character for this <code>AWTKeyStroke</code>.
      *
+     * <p>
+     *  返回此<code> AWTKeyStroke </code>的字符。
+     * 
+     * 
      * @return a char value
      * @see #getAWTKeyStroke(char)
      * @see KeyEvent#getKeyChar
@@ -640,6 +796,10 @@ public class AWTKeyStroke implements Serializable {
     /**
      * Returns the numeric key code for this <code>AWTKeyStroke</code>.
      *
+     * <p>
+     *  返回此<code> AWTKeyStroke </code>的数字键代码。
+     * 
+     * 
      * @return an int containing the key code value
      * @see #getAWTKeyStroke(int,int)
      * @see KeyEvent#getKeyCode
@@ -651,6 +811,10 @@ public class AWTKeyStroke implements Serializable {
     /**
      * Returns the modifier keys for this <code>AWTKeyStroke</code>.
      *
+     * <p>
+     *  返回此<code> AWTKeyStroke </code>的修饰符键。
+     * 
+     * 
      * @return an int containing the modifiers
      * @see #getAWTKeyStroke(int,int)
      */
@@ -661,6 +825,10 @@ public class AWTKeyStroke implements Serializable {
     /**
      * Returns whether this <code>AWTKeyStroke</code> represents a key release.
      *
+     * <p>
+     *  返回此<代码> AWTKeyStroke </code>是否代表密钥版本。
+     * 
+     * 
      * @return <code>true</code> if this <code>AWTKeyStroke</code>
      *          represents a key release; <code>false</code> otherwise
      * @see #getAWTKeyStroke(int,int,boolean)
@@ -673,6 +841,10 @@ public class AWTKeyStroke implements Serializable {
      * Returns the type of <code>KeyEvent</code> which corresponds to
      * this <code>AWTKeyStroke</code>.
      *
+     * <p>
+     *  返回与此<code> AWTKeyStroke </code>对应的<code> KeyEvent </code>的类型。
+     * 
+     * 
      * @return <code>KeyEvent.KEY_PRESSED</code>,
      *         <code>KeyEvent.KEY_TYPED</code>,
      *         or <code>KeyEvent.KEY_RELEASED</code>
@@ -692,6 +864,10 @@ public class AWTKeyStroke implements Serializable {
      * Returns a numeric value for this object that is likely to be unique,
      * making it a good choice as the index value in a hash table.
      *
+     * <p>
+     *  返回可能是唯一的此对象的数值,使其成为散列表中的索引值的不错选择。
+     * 
+     * 
      * @return an int that represents this object
      */
     public int hashCode() {
@@ -702,6 +878,10 @@ public class AWTKeyStroke implements Serializable {
     /**
      * Returns true if this object is identical to the specified object.
      *
+     * <p>
+     * 如果此对象与指定对象相同,则返回true。
+     * 
+     * 
      * @param anObject the Object to compare this object to
      * @return true if the objects are identical
      */
@@ -721,6 +901,11 @@ public class AWTKeyStroke implements Serializable {
      * as a parameter to <code>getAWTKeyStroke(String)</code> to produce
      * a key stroke equal to this key stroke.
      *
+     * <p>
+     *  返回显示和标识此对象属性的字符串。
+     * 此方法返回的<code> String </code>可以作为参数传递给<code> getAWTKeyStroke(String)</code>,以产生一个等于此关键笔划的关键笔划。
+     * 
+     * 
      * @return a String representation of this object
      * @see #getAWTKeyStroke(String)
      */
@@ -798,6 +983,8 @@ public class AWTKeyStroke implements Serializable {
      * Returns a cached instance of <code>AWTKeyStroke</code> (or a subclass of
      * <code>AWTKeyStroke</code>) which is equal to this instance.
      *
+     * <p>
+     * 
      * @return a cached instance which is equal to this instance
      */
     protected Object readResolve() throws java.io.ObjectStreamException {

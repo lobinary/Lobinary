@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -72,6 +73,31 @@ import sun.misc.SharedSecrets;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  专用的{@link Set}实现,用于枚举类型。枚举集中的所有元素必须来自在创建集时显式或隐式指定的单个枚举类型。枚举集在内部表示为位向量。这种表示是非常紧凑和有效的。
+ * 这个类的空间和时间性能应该足够好,以允许它作为传统的基于<tt> int </tt>的"位标志"的高质量,类型安全的替代。
+ * 即使批量操作(例如<tt> containsAll </tt>和<tt> retainAll </tt>),如果它们的参数也是枚举集合,它们应该运行得非常快。
+ * 
+ *  <p> <tt> iterator </tt>方法返回的迭代器以它们的<i>自然顺序</i>(枚举常量的声明顺序)遍历元素。
+ * 返回的迭代器<i>弱一致</i>：它永远不会抛出{@link ConcurrentModificationException},它可能或可能不显示迭代正在进行时发生的任何对集合的修改的影响。
+ * 
+ *  <p>不允许使用零元素。尝试插入空元素将抛出{@link NullPointerException}。然而,尝试测试空元素的存在或删除一个将正常工作。
+ * 
+ * <P>与大多数集合实现一样,<tt> EnumSet </tt>不同步。如果多个线程并发访问枚举集,并且至少有一个线程修改了集合,那么它应该在外部同步。
+ * 这通常通过在自然地封装枚举集合的某个对象上同步来实现。如果不存在这样的对象,则应该使用{@link Collections#synchronizeSet}方法来"包装"该集合。
+ * 这最好在创建时完成,以防止意外的不同步访问：。
+ * 
+ * <pre>
+ *  设置&lt; MyEnum&gt; s = Collections.synchronizedSet(EnumSet.noneOf(MyEnum.class));
+ * </pre>
+ * 
+ *  <p>实现注释：所有基本操作在常量时间执行。他们很可能(虽然不能保证)比他们的{@link HashSet}同行。即使批量操作在常量时间执行,如果它们的参数也是枚举集合。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @author Josh Bloch
  * @since 1.5
  * @see EnumMap
@@ -82,11 +108,17 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
 {
     /**
      * The class of all the elements of this set.
+     * <p>
+     *  这个集合的所有元素的类。
+     * 
      */
     final Class<E> elementType;
 
     /**
      * All of the values comprising T.  (Cached for performance.)
+     * <p>
+     *  所有的值包括T.(Cached for performance。)
+     * 
      */
     final Enum<?>[] universe;
 
@@ -100,6 +132,10 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
     /**
      * Creates an empty enum set with the specified element type.
      *
+     * <p>
+     *  使用指定的元素类型创建空枚举集。
+     * 
+     * 
      * @param <E> The class of the elements in the set
      * @param elementType the class object of the element type for this enum
      *     set
@@ -121,6 +157,10 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * Creates an enum set containing all of the elements in the specified
      * element type.
      *
+     * <p>
+     *  创建包含指定元素类型中所有元素的枚举集。
+     * 
+     * 
      * @param <E> The class of the elements in the set
      * @param elementType the class object of the element type for this enum
      *     set
@@ -136,6 +176,9 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
     /**
      * Adds all of the elements from the appropriate enum type to this enum
      * set, which is empty prior to the call.
+     * <p>
+     *  将相应枚举类型的所有元素添加到此枚举集合,该枚举集合在调用之前为空。
+     * 
      */
     abstract void addAll();
 
@@ -143,6 +186,10 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * Creates an enum set with the same element type as the specified enum
      * set, initially containing the same elements (if any).
      *
+     * <p>
+     *  创建与指定的枚举集相同的元素类型的枚举集,最初包含相同的元素(如果有)。
+     * 
+     * 
      * @param <E> The class of the elements in the set
      * @param s the enum set from which to initialize this enum set
      * @return A copy of the specified enum set.
@@ -159,6 +206,11 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * Otherwise, the specified collection must contain at least one element
      * (in order to determine the new enum set's element type).
      *
+     * <p>
+     * 创建从指定集合初始化的枚举集。如果指定的集合是一个<tt> EnumSet </tt>实例,此静态工厂方法的行为与{@link #copyOf(EnumSet)}相同。
+     * 否则,指定的集合必须包含至少一个元素(以便确定新的枚举集的元素类型)。
+     * 
+     * 
      * @param <E> The class of the elements in the collection
      * @param c the collection from which to initialize this enum set
      * @return An enum set initialized from the given collection.
@@ -186,6 +238,10 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * set, initially containing all the elements of this type that are
      * <i>not</i> contained in the specified set.
      *
+     * <p>
+     *  创建与指定枚举集相同的元素类型的枚举集,最初包含指定集中<i>不</i>的所有此类型的元素。
+     * 
+     * 
      * @param <E> The class of the elements in the enum set
      * @param s the enum set from whose complement to initialize this enum set
      * @return The complement of the specified set in this set
@@ -206,6 +262,12 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * an enum set initially containing an arbitrary number of elements, but
      * is likely to run slower than the overloadings that do not use varargs.
      *
+     * <p>
+     *  创建最初包含指定元素的枚举集。
+     * 
+     *  此方法的重载存在以初始化具有一到五个元素的枚举集合。提供了使用varargs功能的第六个重载。此重载可用于创建最初包含任意数量的元素的枚举集合,但是可能比不使用varargs的重载运行得慢。
+     * 
+     * 
      * @param <E> The class of the specified element and of the set
      * @param e the element that this set is to contain initially
      * @throws NullPointerException if <tt>e</tt> is null
@@ -226,6 +288,12 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * an enum set initially containing an arbitrary number of elements, but
      * is likely to run slower than the overloadings that do not use varargs.
      *
+     * <p>
+     *  创建最初包含指定元素的枚举集。
+     * 
+     *  此方法的重载存在以初始化具有一到五个元素的枚举集合。提供了使用varargs功能的第六个重载。此重载可用于创建最初包含任意数量的元素的枚举集合,但是可能比不使用varargs的重载运行得慢。
+     * 
+     * 
      * @param <E> The class of the parameter elements and of the set
      * @param e1 an element that this set is to contain initially
      * @param e2 another element that this set is to contain initially
@@ -248,6 +316,12 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * an enum set initially containing an arbitrary number of elements, but
      * is likely to run slower than the overloadings that do not use varargs.
      *
+     * <p>
+     *  创建最初包含指定元素的枚举集。
+     * 
+     * 此方法的重载存在以初始化具有一到五个元素的枚举集合。提供了使用varargs功能的第六个重载。此重载可用于创建最初包含任意数量的元素的枚举集合,但是可能比不使用varargs的重载运行得慢。
+     * 
+     * 
      * @param <E> The class of the parameter elements and of the set
      * @param e1 an element that this set is to contain initially
      * @param e2 another element that this set is to contain initially
@@ -272,6 +346,12 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * an enum set initially containing an arbitrary number of elements, but
      * is likely to run slower than the overloadings that do not use varargs.
      *
+     * <p>
+     *  创建最初包含指定元素的枚举集。
+     * 
+     *  此方法的重载存在以初始化具有一到五个元素的枚举集合。提供了使用varargs功能的第六个重载。此重载可用于创建最初包含任意数量的元素的枚举集合,但是可能比不使用varargs的重载运行得慢。
+     * 
+     * 
      * @param <E> The class of the parameter elements and of the set
      * @param e1 an element that this set is to contain initially
      * @param e2 another element that this set is to contain initially
@@ -298,6 +378,12 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * an enum set initially containing an arbitrary number of elements, but
      * is likely to run slower than the overloadings that do not use varargs.
      *
+     * <p>
+     *  创建最初包含指定元素的枚举集。
+     * 
+     *  此方法的重载存在以初始化具有一到五个元素的枚举集合。提供了使用varargs功能的第六个重载。此重载可用于创建最初包含任意数量的元素的枚举集合,但是可能比不使用varargs的重载运行得慢。
+     * 
+     * 
      * @param <E> The class of the parameter elements and of the set
      * @param e1 an element that this set is to contain initially
      * @param e2 another element that this set is to contain initially
@@ -326,6 +412,10 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * number of elements, but it is likely to run slower than the overloadings
      * that do not use varargs.
      *
+     * <p>
+     *  创建最初包含指定元素的枚举集。此工厂的参数列表使用varargs功能,可用于创建最初包含任意数量元素的枚举集,但它可能比不使用varargs的重载运行得慢。
+     * 
+     * 
      * @param <E> The class of the parameter elements and of the set
      * @param first an element that the set is to contain initially
      * @param rest the remaining elements the set is to contain initially
@@ -348,6 +438,10 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * contain the endpoints themselves, which may be identical but must not
      * be out of order.
      *
+     * <p>
+     * 创建枚举集,最初包含由两个指定端点定义的范围内的所有元素。返回的集合将包含端点本身,它们可以是相同的,但不能是无序的。
+     * 
+     * 
      * @param <E> The class of the parameter elements and of the set
      * @param from the first element in the range
      * @param to the last element in the range
@@ -367,12 +461,19 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
     /**
      * Adds the specified range to this enum set, which is empty prior
      * to the call.
+     * <p>
+     *  将指定范围添加到此枚举集,在调用之前为空。
+     * 
      */
     abstract void addRange(E from, E to);
 
     /**
      * Returns a copy of this set.
      *
+     * <p>
+     *  返回此集合的副本。
+     * 
+     * 
      * @return a copy of this set
      */
     @SuppressWarnings("unchecked")
@@ -386,11 +487,17 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
 
     /**
      * Complements the contents of this enum set.
+     * <p>
+     *  补充此枚举集的内容。
+     * 
      */
     abstract void complement();
 
     /**
      * Throws an exception if e is not of the correct type for this enum set.
+     * <p>
+     *  如果e不是此枚举集合的正确类型,则抛出异常。
+     * 
      */
     final void typeCheck(E e) {
         Class<?> eClass = e.getClass();
@@ -401,6 +508,9 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
     /**
      * Returns all of the values comprising E.
      * The result is uncloned, cached, and shared by all callers.
+     * <p>
+     *  返回包含E的所有值。结果未克隆,缓存,并由所有调用者共享。
+     * 
      */
     private static <E extends Enum<E>> E[] getUniverse(Class<E> elementType) {
         return SharedSecrets.getJavaLangAccess()
@@ -414,6 +524,10 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
      * to ensure that the existence of a particular implementation type is
      * an implementation detail.
      *
+     * <p>
+     *  此类用于序列化所有EnumSet实例,而不考虑实现类型。它捕获他们的"逻辑内容",并使用公共静态工厂重构。这是必要的,以确保特定实现类型的存在是实现细节。
+     * 
+     * 
      * @serial include
      */
     private static class SerializationProxy <E extends Enum<E>>
@@ -422,6 +536,10 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
         /**
          * The element type of this enum set.
          *
+         * <p>
+         *  此枚举的元素类型集。
+         * 
+         * 
          * @serial
          */
         private final Class<E> elementType;
@@ -429,6 +547,9 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
         /**
          * The elements contained in this enum set.
          *
+         * <p>
+         *  此枚举中包含的元素。
+         * 
          * @serial
          */
         private final Enum<?>[] elements;

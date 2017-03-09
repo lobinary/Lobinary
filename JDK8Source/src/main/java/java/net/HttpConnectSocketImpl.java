@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import java.util.Set;
  * sockets impl is swapped out and replaced with the socket from the HTTP
  * handler after the tunnel is successfully setup.
  *
+ * <p>
+ *  基本SocketImpl,它依赖于内部HTTP协议处理程序实现来执行HTTP隧道和身份验证。在成功设置隧道之后,套接字impl将被交换出并替换为来自HTTP处理程序的套接字。
+ * 
+ * 
  * @since 1.8
  */
 
@@ -126,6 +131,28 @@ import java.util.Set;
             for(Map.Entry<Integer,Object> entry : options) {
                 psi.setOption(entry.getKey(), entry.getValue());
             }
+/* <p>
+/*  private static final String httpURLClazzStr ="sun.net.www.protocol.http.HttpURLConnection"; private 
+/* static final String netClientClazzStr ="sun.net.NetworkClient"; private static final String doTunneli
+/* ngStr ="doTunneling"; private static final Field httpField; private static final Field serverSocketFi
+/* eld; private static final方法doTunneling;。
+/* 
+/*  private final String server; private InetSocketAddress external_address; private HashMap <Integer,Object>
+/*  optionsMap = new HashMap <>();。
+/* 
+/*  static {try {Class <?> httpClazz = Class.forName(httpURLClazzStr,true,null); httpField = httpClazz.getDeclaredField("http"); doTunneling = httpClazz.getDeclaredMethod(doTunnelingStr);类<>> netClientClazz = Class.forName(netClientClazzStr,true,null); serverSocketField = netClientClazz.getDeclaredField("serverSocket");。
+/* 
+/* java.security.AccessController.doPrivileged(new java.security.PrivilegedAction <Void>(){public Void run(){httpField.setAccessible(true); serverSocketField.setAccessible(true); return null;}
+/* }); } catch(ReflectiveOperationException x){throw new InternalError("Should not reach here",x); }}。
+/* 
+/*  HttpConnectSocketImpl(String server,int port){this.server = server; this.port = port; }}
+/* 
+/*  HttpConnectSocketImpl(代理代理){SocketAddress a = proxy.address(); if(！(instanceof InetSocketAddress))throw new IllegalArgumentException("Unsupported address type");。
+/* 
+/*  InetSocketAddress ad =(InetSocketAddress)a; server = ad.getHostString(); port = ad.getPort(); }}
+/* 
+/*  @Override protected void connect(SocketAddress endpoint,int timeout)throws IOException {if(endpoint == null ||！(endpoint instanceof InetSocketAddress))throw new IllegalArgumentException("Unsupported address type"); final InetSocketAddress epoint =(InetSocketAddress)endpoint; final String destHost = epoint.isUnresolved()? epoint.getHostName()：epoint.getAddress()。
+/* 
         } catch (IOException x) {  /* gulp! */  }
     }
 

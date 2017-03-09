@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,13 @@ import sun.swing.SwingUtilities2;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> JTable </code>的标准列处理程序。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Alan Chung
  * @author Philip Milne
  * @see JTable
@@ -85,6 +93,9 @@ public class DefaultTableColumnModel implements TableColumnModel,
 //
     /**
      * Creates a default table column model.
+     * <p>
+     *  创建默认表列模型。
+     * 
      */
     public DefaultTableColumnModel() {
         super();
@@ -107,6 +118,11 @@ public class DefaultTableColumnModel implements TableColumnModel,
      *  This method also posts the <code>columnAdded</code>
      *  event to its listeners.
      *
+     * <p>
+     *  将<code> aColumn </code>附加到<code> tableColumns </code>数组的末尾。
+     * 此方法还会将<code> columnAdded </code>事件发布到其侦听器。
+     * 
+     * 
      * @param   aColumn         the <code>TableColumn</code> to be added
      * @exception IllegalArgumentException      if <code>aColumn</code> is
      *                          <code>null</code>
@@ -135,6 +151,11 @@ public class DefaultTableColumnModel implements TableColumnModel,
      *  This method also posts a <code>columnRemoved</code>
      *  event to its listeners.
      *
+     * <p>
+     *  从<code> tableColumns </code>数组中删除<code>列</code>。如果<code> column </code>不在表的列表中,此方法将不会执行任何操作。
+     * 调用<code> tile </code>来调整标头和表视图的大小。此方法还会向其侦听器发布<code> columnRemoved </code>事件。
+     * 
+     * 
      * @param   column          the <code>TableColumn</code> to be removed
      * @see     #addColumn
      */
@@ -167,6 +188,14 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * <code>columnIndex</code> equals <code>newIndex</code>.  This method
      * also posts a <code>columnMoved</code> event to its listeners.
      *
+     * <p>
+     * 将<code> columnIndex </code>中的列和标题移动到<code> newIndex </code>。
+     *  <code> columnIndex </code>上的旧列现在位于<code> newIndex </code>。
+     * 以前在<code> newIndex </code>的列向左或向右移动,以腾出空间。
+     * 如果<code> columnIndex </code>等于<code> newIndex </code>,则不会移动任何列。
+     * 此方法还会向其侦听器发布<code> columnMoved </code>事件。
+     * 
+     * 
      * @param   columnIndex                     the index of column to be moved
      * @param   newIndex                        new index to move the column
      * @exception IllegalArgumentException      if <code>column</code> or
@@ -214,6 +243,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * also posts a <code>columnMarginChanged</code> event to its
      * listeners.
      *
+     * <p>
+     *  将列边距设置为<code> newMargin </code>。此方法还会向其侦听器发布一个<code> columnMarginChanged </code>事件。
+     * 
+     * 
      * @param   newMargin               the new margin width, in pixels
      * @see     #getColumnMargin
      * @see     #getTotalColumnWidth
@@ -233,6 +266,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
     /**
      * Returns the number of columns in the <code>tableColumns</code> array.
      *
+     * <p>
+     *  返回<code> tableColumns </code>数组中的列数。
+     * 
+     * 
      * @return  the number of columns in the <code>tableColumns</code> array
      * @see     #getColumns
      */
@@ -242,6 +279,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
 
     /**
      * Returns an <code>Enumeration</code> of all the columns in the model.
+     * <p>
+     *  返回模型中所有列的<code>枚举</code>。
+     * 
+     * 
      * @return an <code>Enumeration</code> of the columns in the model
      */
     public Enumeration<TableColumn> getColumns() {
@@ -253,6 +294,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * array whose identifier is equal to <code>identifier</code>,
      * when compared using <code>equals</code>.
      *
+     * <p>
+     *  当使用<code> equals </code>进行比较时,返回标识符等于<code> identifier </code>的<code> tableColumns </code>数组中第一列的索引。
+     * 
+     * 
      * @param           identifier              the identifier object
      * @return          the index of the first column in the
      *                  <code>tableColumns</code> array whose identifier
@@ -286,6 +331,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * Returns the <code>TableColumn</code> object for the column
      * at <code>columnIndex</code>.
      *
+     * <p>
+     *  返回<code> columnIndex </code>中列的<code> TableColumn </code>对象。
+     * 
+     * 
      * @param   columnIndex     the index of the column desired
      * @return  the <code>TableColumn</code> object for the column
      *                          at <code>columnIndex</code>
@@ -298,6 +347,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * Returns the width margin for <code>TableColumn</code>.
      * The default <code>columnMargin</code> is 1.
      *
+     * <p>
+     *  返回<code> TableColumn </code>的宽度边距。默认的<code> columnMargin </code>为1。
+     * 
+     * 
      * @return  the maximum width for the <code>TableColumn</code>
      * @see     #setColumnMargin
      */
@@ -323,6 +376,15 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * model.  If the column index for a given X coordinate in 2D space is
      * required, <code>JTable.columnAtPoint</code> can be used instead.
      *
+     * <p>
+     *  返回位于<code> x </code>位置的列的索引,如果没有列覆盖此点,则返回-1。
+     * 
+     * 为了与Swing的可分离模型架构保持一致,TableColumnModel不知道表列实际上如何显示在屏幕上。列的可视化呈现是使用此模型(通常为JTable)的视图/控制器对象的责任。
+     * 视图/控制器不需要从左到右顺序地显示列。例如,可以从右到左显示列,以适应区域设置首选项,或者可以根据用户的请求隐藏某些列。
+     * 因为模型不知道列如何在屏幕上布局,给定的<code> xPosition </code>不应该被认为是2D图形空间中的坐标。相反,它应该被认为是从模型中第一列开始的宽度。
+     * 如果需要2D空间中给定X坐标的列索引,则可以使用<code> JTable.columnAtPoint </code>。
+     * 
+     * 
      * @param  x  the horizontal location of interest
      * @return  the index of the column or -1 if no column is found
      * @see javax.swing.JTable#columnAtPoint
@@ -343,6 +405,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
 
     /**
      * Returns the total combined width of all columns.
+     * <p>
+     *  返回所有列的总合并宽度。
+     * 
+     * 
      * @return the <code>totalColumnWidth</code> property
      */
     public int getTotalColumnWidth() {
@@ -363,6 +429,11 @@ public class DefaultTableColumnModel implements TableColumnModel,
      *  model.  If <code>newModel</code> is <code>null</code>,
      *  an exception is thrown.
      *
+     * <p>
+     *  将<code> TableColumnModel </code>的选择模型设置为<code> newModel </code>并注册来自新选择模型的侦听器通知。
+     * 如果<code> newModel </code>是<code> null </code>,则抛出异常。
+     * 
+     * 
      * @param   newModel        the new selection model
      * @exception IllegalArgumentException      if <code>newModel</code>
      *                                          is <code>null</code>
@@ -389,6 +460,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * Returns the <code>ListSelectionModel</code> that is used to
      * maintain column selection state.
      *
+     * <p>
+     *  返回用于维护列选择状态的<code> ListSelectionModel </code>。
+     * 
+     * 
      * @return  the object that provides column selection state.  Or
      *          <code>null</code> if row selection is not allowed.
      * @see     #setSelectionModel
@@ -400,6 +475,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
     // implements javax.swing.table.TableColumnModel
     /**
      * Sets whether column selection is allowed.  The default is false.
+     * <p>
+     *  设置是否允许列选择。默认值为false。
+     * 
+     * 
      * @param  flag true if column selection will be allowed, false otherwise
      */
     public void setColumnSelectionAllowed(boolean flag) {
@@ -410,6 +489,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
     /**
      * Returns true if column selection is allowed, otherwise false.
      * The default is false.
+     * <p>
+     *  如果允许列选择,则返回true,否则返回false。默认值为false。
+     * 
+     * 
      * @return the <code>columnSelectionAllowed</code> property
      */
     public boolean getColumnSelectionAllowed() {
@@ -420,6 +503,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
     /**
      * Returns an array of selected columns.  If <code>selectionModel</code>
      * is <code>null</code>, returns an empty array.
+     * <p>
+     * 返回所选列的数组。如果<code> selectionModel </code>是<code> null </code>,则返回一个空数组。
+     * 
+     * 
      * @return an array of selected columns or an empty array if nothing
      *                  is selected or the <code>selectionModel</code> is
      *                  <code>null</code>
@@ -450,6 +537,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
     // implements javax.swing.table.TableColumnModel
     /**
      * Returns the number of columns selected.
+     * <p>
+     *  返回所选的列数。
+     * 
+     * 
      * @return the number of columns selected
      */
     public int getSelectedColumnCount() {
@@ -475,6 +566,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
     // implements javax.swing.table.TableColumnModel
     /**
      * Adds a listener for table column model events.
+     * <p>
+     *  为表列模型事件添加侦听器。
+     * 
+     * 
      * @param x  a <code>TableColumnModelListener</code> object
      */
     public void addColumnModelListener(TableColumnModelListener x) {
@@ -484,6 +579,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
     // implements javax.swing.table.TableColumnModel
     /**
      * Removes a listener for table column model events.
+     * <p>
+     *  删除表列模型事件的侦听器。
+     * 
+     * 
      * @param x  a <code>TableColumnModelListener</code> object
      */
     public void removeColumnModelListener(TableColumnModelListener x) {
@@ -494,6 +593,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * Returns an array of all the column model listeners
      * registered on this model.
      *
+     * <p>
+     *  返回在此模型上注册的所有列模型侦听器的数组。
+     * 
+     * 
      * @return all of this default table column model's <code>ColumnModelListener</code>s
      *         or an empty
      *         array if no column model listeners are currently registered
@@ -516,6 +619,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * notification on this event type.  The event instance
      * is lazily created using the parameters passed into
      * the fire method.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @param e  the event received
      * @see EventListenerList
      */
@@ -540,6 +647,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * notification on this event type.  The event instance
      * is lazily created using the parameters passed into
      * the fire method.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @param  e  the event received
      * @see EventListenerList
      */
@@ -564,6 +675,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * notification on this event type.  The event instance
      * is lazily created using the parameters passed into
      * the fire method.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @param  e the event received
      * @see EventListenerList
      */
@@ -588,6 +703,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * notification on this event type.  The event instance
      * is lazily created using the parameters passed into
      * the fire method.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @param e the event received
      * @see EventListenerList
      */
@@ -612,6 +731,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * notification on this event type.  The event instance
      * is lazily created using the parameters passed into
      * the fire method.
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人。事件实例使用传递到fire方法的参数进行延迟创建。
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireColumnMarginChanged() {
@@ -651,6 +774,21 @@ public class DefaultTableColumnModel implements TableColumnModel,
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此模型上注册为<code> <em> Foo </em> Listener </code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * 
+     * <p>
+     * 
+     * 您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码为其列模型侦听器查询<code> DefaultTableColumnModel </code> <code> m </code>：。
+     * 
+     *  <pre> ColumnModelListener [] cmls =(ColumnModelListener [])(m.getListeners(ColumnModelListener.class
+     * )); </pre>。
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -679,6 +817,8 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * Property Change Listener change method.  Used to track changes
      * to the column width or preferred column width.
      *
+     * <p>
+     * 
      * @param  evt  <code>PropertyChangeEvent</code>
      */
     public void propertyChange(PropertyChangeEvent evt) {
@@ -703,6 +843,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
      * <code>ListSelectionEvents</code> when there is a column
      * selection change.
      *
+     * <p>
+     *  属性更改侦听器更改方法。用于跟踪列宽或首选列宽的更改。
+     * 
+     * 
      * @param e  the change event
      */
     public void valueChanged(ListSelectionEvent e) {
@@ -715,6 +859,9 @@ public class DefaultTableColumnModel implements TableColumnModel,
 
     /**
      * Creates a new default list selection model.
+     * <p>
+     *  当有列选择更改时,<code> ListSelectionListener </code>转发<code> ListSelectionEvents </code>。
+     * 
      */
     protected ListSelectionModel createSelectionModel() {
         return new DefaultListSelectionModel();
@@ -723,6 +870,9 @@ public class DefaultTableColumnModel implements TableColumnModel,
     /**
      * Recalculates the total combined width of all columns.  Updates the
      * <code>totalColumnWidth</code> property.
+     * <p>
+     *  创建新的默认列表选择模型。
+     * 
      */
     protected void recalcWidthCache() {
         Enumeration enumeration = getColumns();

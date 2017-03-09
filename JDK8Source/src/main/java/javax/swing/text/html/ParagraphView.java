@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import javax.swing.text.JTextComponent;
  * Displays the a paragraph, and uses css attributes for its
  * configuration.
  *
+ * <p>
+ *  显示一个段落,并使用css属性进行配置。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 
@@ -48,6 +53,10 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
     /**
      * Constructs a ParagraphView for the given element.
      *
+     * <p>
+     *  构造给定元素的ParagraphView。
+     * 
+     * 
      * @param elem the element that this view is responsible for
      */
     public ParagraphView(Element elem) {
@@ -67,6 +76,13 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * the ability to resolve upward through the parents
      * view attributes.
      *
+     * <p>
+     *  为此视图建立父视图。如果父视图正常工作,这保证在任何其他方法之前被调用。
+     * <p>
+     *  这被实现为转发到超类以及调用{@link #setPropertiesFromAttributes setPropertiesFromAttributes}方法从css属性设置段落属性。
+     * 此时进行调用以确保通过父视图属性向上分辨的能力。
+     * 
+     * 
      * @param parent the new parent, or null if the view is
      *  being removed from a parent it was previously added
      *  to
@@ -82,6 +98,9 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * Fetches the attributes to use when rendering.  This is
      * implemented to multiplex the attributes specified in the
      * model with a StyleSheet.
+     * <p>
+     *  获取渲染时要使用的属性。这被实现为将在模型中指定的属性与StyleSheet复用。
+     * 
      */
     public AttributeSet getAttributes() {
         if (attr == null) {
@@ -95,6 +114,9 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * Sets up the paragraph from css attributes instead of
      * the values found in StyleConstants (i.e. which are used
      * by the superclass).  Since
+     * <p>
+     *  从css属性设置段落,而不是在StyleConstants中找到的值(即超类使用的值)。以来
+     * 
      */
     protected void setPropertiesFromAttributes() {
         StyleSheet sheet = getStyleSheet();
@@ -147,6 +169,16 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * object is created, otherwise the supplied {@code SizeRequirements}
      * object is returned.</p>
      *
+     * <p>
+     *  计算沿着短轴的段落的需要。
+     * 
+     *  <p>如果为段落显式指定了大小要求,请使用该要求。否则,使用超类{@link javax.swing.text.ParagraphView}的要求。</p>
+     * 
+     * <p>如果{@code axis}参数既不是{@code View.X_AXIS}也不是{@code View.Y_AXIS},则会抛出{@link IllegalArgumentException}。
+     * 如果{@code r}​​参数是{@code null,},则会创建一个新的{@code SizeRequirements}对象,否则返回提供的{@code SizeRequirements}对象。
+     * </p>。
+     * 
+     * 
      * @param axis  the minor axis
      * @param r     the input {@code SizeRequirements} object
      * @return      the new or adjusted {@code SizeRequirements} object
@@ -177,6 +209,10 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * will not be considered visible.  Otherwise,
      * it will be considered visible and return true.
      *
+     * <p>
+     *  指示是否应显示此视图。如果没有一个孩子希望被显示,并且唯一可见的孩子是结束段落的中断,该段落将不被视为可见。否则,它将被视为可见并返回true。
+     * 
+     * 
      * @return true if the paragraph should be displayed
      */
     public boolean isVisible() {
@@ -214,6 +250,10 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * surface.  This is implemented to delegate to the superclass
      * after stashing the base coordinate for tab calculations.
      *
+     * <p>
+     *  使用给定的渲染表面和该表面上的区域渲染。这被实现为在为标签计算存储基本坐标之后委托给超类。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param a the allocated region to render into
      * @see View#paint
@@ -239,6 +279,10 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * superclass method to get the preferred span.
      * axis.
      *
+     * <p>
+     *  确定此视图的首选跨度。如果视图不可见,则返回0,否则调用超类方法以获取首选跨度。轴。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return   the span the view would like to be rendered into;
      *           typically the view is told to render into the span
@@ -258,6 +302,10 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * axis.  Returns 0 if the view is not visible, otherwise
      * it calls the superclass method to get the minimum span.
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。如果视图不可见,则返回0,否则调用超类方法以获取最小跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *  <code>View.Y_AXIS</code>
      * @return  the minimum span the view can be rendered into
@@ -275,6 +323,9 @@ public class ParagraphView extends javax.swing.text.ParagraphView {
      * axis.  Returns 0 if the view is not visible, otherwise
      * it calls the superclass method ot get the maximum span.
      *
+     * <p>
+     *  确定沿轴的此视图的最大跨度。如果视图不可见,则返回0,否则调用超类方法获取最大跨度。
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *  <code>View.Y_AXIS</code>
      * @return  the maximum span the view can be rendered into

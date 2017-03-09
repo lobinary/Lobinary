@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -32,6 +42,14 @@ import org.w3c.dom.ProcessingInstruction;
  *
  * @xerces.internal
  *
+ * <p>
+ *  处理指令(PI)允许文档携带处理器特定信息及其实际内容。 PI在XML中最常见,但它们也在HTML中受支持。
+ * 
+ *  此类继承CharacterDataImpl以重用其setNodeValue方法。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @since  PR-DOM-Level-1-19980818.
  */
 public class ProcessingInstructionImpl
@@ -69,6 +87,9 @@ public class ProcessingInstructionImpl
     /**
      * A short integer indicating what type of node this is. The named
      * constants for this value are defined in the org.w3c.dom.Node interface.
+     * <p>
+     *  指示这是什么类型的节点的短整数。此值的命名常量在org.w3c.dom.Node接口中定义。
+     * 
      */
     public short getNodeType() {
         return Node.PROCESSING_INSTRUCTION_NODE;
@@ -76,6 +97,9 @@ public class ProcessingInstructionImpl
 
     /**
      * Returns the target
+     * <p>
+     *  返回目标
+     * 
      */
     public String getNodeName() {
         if (needsSyncData()) {
@@ -98,6 +122,15 @@ public class ProcessingInstructionImpl
      * In HTML, target is always null.
      * <p>
      * Note that getNodeName is aliased to getTarget.
+     * <p>
+     *  PI的"目标"说明PI的数据应该被引导到哪个处理器通道。它在HTML和XML中的定义不同。
+     * <p>
+     *  在XML中,PI的"目标"是"<?"之后的第一个(以空格分隔的)令牌开始PI。
+     * <p>
+     *  在HTML中,target始终为null。
+     * <p>
+     *  注意getNodeName是别名为getTarget。
+     * 
      */
     public String getTarget() {
         if (needsSyncData()) {
@@ -112,6 +145,12 @@ public class ProcessingInstructionImpl
      * to do.  It is defined slightly differently in HTML and XML.
      * <p>
      * In XML, the data begins with the non-whitespace character
+     * <p>
+     * PI的数据内容告诉处理器我们实际上希望它做什么。它在HTML和XML中的定义略有不同。
+     * <p>
+     *  在XML中,数据以非空白字符开头
+     * 
+     * 
      * immediately after the target -- @see getTarget().
      * <p>
      * In HTML, the data begins with the character immediately after the
@@ -130,6 +169,10 @@ public class ProcessingInstructionImpl
     /**
      * Change the data content of this PI.
      * Note that setData is aliased to setNodeValue.
+     * <p>
+     *  更改此PI的数据内容。注意setData被别名为setNodeValue。
+     * 
+     * 
      * @see #getData().
      * @throws DOMException(NO_MODIFICATION_ALLOWED_ERR) if node is read-only.
      */
@@ -146,6 +189,9 @@ public class ProcessingInstructionImpl
      * wasn't able to obtain an absolute URI. Note: If the URI is malformed, a
      * null is returned.
      *
+     * <p>
+     *  返回此节点的绝对基本URI,如果实现无法获取绝对URI,则返回null。注意：如果URI格式不正确,则返回null。
+     * 
      * @return The absolute base URI of this node or null.
      * @since DOM Level 3
      */

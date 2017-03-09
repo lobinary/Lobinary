@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ package java.lang;
  * by the execution of the method or constructor and propagate outside
  * the method or constructor boundary.
  *
+ * <p>
+ *  类{@code Exception}及其子类是{@code Throwable}的一种形式,表示合理的应用程序可能需要捕获的条件。
+ * 
+ *  <p> {@code Exception}类和不是{@link RuntimeException}子类的任何子类都是<em>已检查异常</em>。
+ * 检查异常需要在方法或构造函数的{@code throws}子句中声明,如果它们可以通过执行方法或构造器抛出并传播到方法或构造器边界之外。
+ * 
+ * 
  * @author  Frank Yellin
  * @see     java.lang.Error
  * @jls 11.2 Compile-Time Checking of Exceptions
@@ -49,6 +57,9 @@ public class Exception extends Throwable {
      * Constructs a new exception with {@code null} as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a
      * call to {@link #initCause}.
+     * <p>
+     *  使用{@code null}作为其详细消息构造新的异常。原因未初始化,并可能随后通过调用{@link #initCause}初始化。
+     * 
      */
     public Exception() {
         super();
@@ -59,6 +70,10 @@ public class Exception extends Throwable {
      * cause is not initialized, and may subsequently be initialized by
      * a call to {@link #initCause}.
      *
+     * <p>
+     *  使用指定的详细消息构造新的异常。原因未初始化,并可能随后通过调用{@link #initCause}初始化。
+     * 
+     * 
      * @param   message   the detail message. The detail message is saved for
      *          later retrieval by the {@link #getMessage()} method.
      */
@@ -72,6 +87,10 @@ public class Exception extends Throwable {
      * {@code cause} is <i>not</i> automatically incorporated in
      * this exception's detail message.
      *
+     * <p>
+     *  构造具有指定的详细消息和原因的新异常。 <p>请注意,与{@code cause}相关联的详细信息</i>不会自动并入此例外的详细信息中。
+     * 
+     * 
      * @param  message the detail message (which is saved for later retrieval
      *         by the {@link #getMessage()} method).
      * @param  cause the cause (which is saved for later retrieval by the
@@ -92,6 +111,11 @@ public class Exception extends Throwable {
      * wrappers for other throwables (for example, {@link
      * java.security.PrivilegedActionException}).
      *
+     * <p>
+     * 构造具有指定原因和详细消息<tt>(cause == null?null：cause.toString())</tt>的新异常(通常包含<tt>的类和详细消息) tt>)。
+     * 这个构造函数对于其他throwables的封装器(例如,{@link java.security.PrivilegedActionException})的异常很有用。
+     * 
+     * 
      * @param  cause the cause (which is saved for later retrieval by the
      *         {@link #getCause()} method).  (A <tt>null</tt> value is
      *         permitted, and indicates that the cause is nonexistent or
@@ -107,6 +131,8 @@ public class Exception extends Throwable {
      * cause, suppression enabled or disabled, and writable stack
      * trace enabled or disabled.
      *
+     * <p>
+     * 
      * @param  message the detail message.
      * @param cause the cause.  (A {@code null} value is permitted,
      * and indicates that the cause is nonexistent or unknown.)

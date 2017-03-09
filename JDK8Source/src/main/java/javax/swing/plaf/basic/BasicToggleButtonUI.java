@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,11 @@ import javax.swing.text.View;
  * BasicToggleButton implementation
  * <p>
  *
+ * <p>
+ *  BasicToggleButton实现
+ * <p>
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class BasicToggleButtonUI extends BasicButtonUI {
@@ -167,6 +173,7 @@ public class BasicToggleButtonUI extends BasicButtonUI {
     /**
      * Overriden so that the text will not be rendered as shifted for
      * Toggle buttons and subclasses.
+     * <p>
      */
     protected int getTextShiftOffset() {
         return 0;

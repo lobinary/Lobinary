@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,20 @@ import sun.swing.DefaultLookup;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  呈现列表中的项目。
+ * <p>
+ *  <strong> <a name="override"> Implementation Note：</a> </strong>此类覆盖<code> invalidate </code>,<code> 
+ * validate </code>,<code> revalidate </code >,<code> repaint </code>,<code> isOpaque </code>和<code> fir
+ * ePropertyChange </code>如果不被覆盖,这些经常被调用的方法将执行默认列表单元格渲染器不需要的代码路径。
+ * 如果你编写自己的渲染器,注意权衡覆盖这些方法的好处和缺点。
+ * 
+ * <p>
+ * 
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Philip Milne
  * @author Hans Muller
  */
@@ -79,6 +94,10 @@ public class DefaultListCellRenderer extends JLabel
     * <code>Border</code> used by this renderer override the
     * <code>getListCellRendererComponent</code> method and set the border
     * of the returned component directly.
+    * <p>
+    *  一个空的<code> Border </code>。可能不使用此字段。
+    * 要更改此渲染器使用的<code> Border </code>,请覆盖<code> getListCellRendererComponent </code>方法,并直接设置返回组件的边框。
+    * 
     */
     private static final Border SAFE_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
     private static final Border DEFAULT_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
@@ -87,6 +106,9 @@ public class DefaultListCellRenderer extends JLabel
     /**
      * Constructs a default renderer object for an item
      * in a list.
+     * <p>
+     *  为列表中的项目构造默认渲染器对象。
+     * 
      */
     public DefaultListCellRenderer() {
         super();
@@ -175,6 +197,10 @@ public class DefaultListCellRenderer extends JLabel
      * See the <a href="#override">Implementation Note</a>
      * for more information.
      *
+     * <p>
+     *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+     * 
+     * 
      * @since 1.5
      * @return <code>true</code> if the background is completely opaque
      *         and differs from the JList's background;
@@ -198,6 +224,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    * 由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void validate() {}
@@ -207,6 +236,10 @@ public class DefaultListCellRenderer extends JLabel
     * See the <a href="#override">Implementation Note</a>
     * for more information.
     *
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
+    * 
     * @since 1.5
     */
     @Override
@@ -217,6 +250,10 @@ public class DefaultListCellRenderer extends JLabel
     * See the <a href="#override">Implementation Note</a>
     * for more information.
     *
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
+    * 
     * @since 1.5
     */
     @Override
@@ -226,6 +263,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void revalidate() {}
@@ -233,6 +273,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void repaint(long tm, int x, int y, int width, int height) {}
@@ -241,6 +284,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void repaint(Rectangle r) {}
@@ -249,6 +295,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
@@ -266,6 +315,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void firePropertyChange(String propertyName, byte oldValue, byte newValue) {}
@@ -274,6 +326,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void firePropertyChange(String propertyName, char oldValue, char newValue) {}
@@ -282,6 +337,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void firePropertyChange(String propertyName, short oldValue, short newValue) {}
@@ -290,6 +348,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void firePropertyChange(String propertyName, int oldValue, int newValue) {}
@@ -298,6 +359,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void firePropertyChange(String propertyName, long oldValue, long newValue) {}
@@ -306,6 +370,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void firePropertyChange(String propertyName, float oldValue, float newValue) {}
@@ -314,6 +381,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    * 由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void firePropertyChange(String propertyName, double oldValue, double newValue) {}
@@ -322,6 +392,9 @@ public class DefaultListCellRenderer extends JLabel
     * Overridden for performance reasons.
     * See the <a href="#override">Implementation Note</a>
     * for more information.
+    * <p>
+    *  由于性能原因被覆盖。有关详细信息,请参见<a href="#override">实现注意</a>。
+    * 
     */
     @Override
     public void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {}
@@ -340,6 +413,10 @@ public class DefaultListCellRenderer extends JLabel
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  实现UIResource的DefaultListCellRenderer的子类。
+     *  DefaultListCellRenderer不直接实现UIResource,因此应用程序可以安全地覆盖带有DefaultListCellRenderer子类的cellRenderer属性。
+     * <p>
      */
     public static class UIResource extends DefaultListCellRenderer
         implements javax.swing.plaf.UIResource

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,9 @@ import static java.lang.invoke.LambdaForm.BasicType.*;
 
 /** Working storage for an LF that is being transformed.
  *  Similarly to a StringBuffer, the editing can take place in multiple steps.
+ * <p>
+ *  类似于StringBuffer,编辑可以在多个步骤中进行。
+ * 
  */
 final class LambdaFormBuffer {
     private int arity, length;
@@ -181,6 +185,9 @@ final class LambdaFormBuffer {
 
     /** We have just overwritten the name at pos1 with the name at pos2.
      *  This means that there are two copies of the name, which we will have to fix later.
+     * <p>
+     *  这意味着有两个副本的名称,我们将以后解决。
+     * 
      */
     private void noteDuplicate(int pos1, int pos2) {
         Name n = names[pos1];
@@ -225,6 +232,9 @@ final class LambdaFormBuffer {
 
     /** Create a private, writable copy of names.
      *  Preserve the original copy, for reference.
+     * <p>
+     *  保留原始副本,以供参考。
+     * 
      */
     void startEdit() {
         assert(verifyArity());
@@ -325,6 +335,8 @@ final class LambdaFormBuffer {
     /** Replace any Name whose function is in oldFns with a copy
      *  whose function is in the corresponding position in newFns.
      *  Only do this if the arguments are exactly equal to the given.
+     * <p>
+     *  其功能在newFns中的相应位置。只有这样,如果参数完全相等的给定。
      */
     LambdaFormBuffer replaceFunctions(NamedFunction[] oldFns, NamedFunction[] newFns,
                                       Object... forArguments) {

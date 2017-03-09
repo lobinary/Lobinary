@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package javax.management;
 /**
  * This class is used by the query-building mechanism to represent binary
  * operations.
+ * <p>
+ *  此类由查询构建机制用于表示二进制操作。
+ * 
+ * 
  * @serial include
  *
  * @since 1.5
@@ -39,16 +44,22 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
     private static final long serialVersionUID = 1216286847881456786L;
 
     /**
+    /* <p>
+    /* 
      * @serial The operator
      */
     private int op;
 
     /**
+    /* <p>
+    /* 
      * @serial The first value
      */
     private ValueExp exp1;
 
     /**
+    /* <p>
+    /* 
      * @serial The second value
      */
     private ValueExp exp2;
@@ -56,6 +67,9 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
 
     /**
      * Basic Constructor.
+     * <p>
+     *  基本构造函数。
+     * 
      */
     public BinaryOpValueExp() {
     }
@@ -63,6 +77,9 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
     /**
      * Creates a new BinaryOpValueExp using operator o applied on v1 and
      * v2 values.
+     * <p>
+     *  使用对v1和v2值应用的运算符o创建新的BinaryOpValueExp。
+     * 
      */
     public BinaryOpValueExp(int o, ValueExp v1, ValueExp v2) {
         op   = o;
@@ -73,6 +90,9 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns the operator of the value expression.
+     * <p>
+     *  返回值表达式的运算符。
+     * 
      */
     public int getOperator()  {
         return op;
@@ -80,6 +100,9 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns the left value of the value expression.
+     * <p>
+     *  返回值表达式的左侧值。
+     * 
      */
     public ValueExp getLeftValue()  {
         return exp1;
@@ -87,6 +110,9 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns the right value of the value expression.
+     * <p>
+     *  返回值表达式的正确值。
+     * 
      */
     public ValueExp getRightValue()  {
         return exp2;
@@ -95,6 +121,10 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
     /**
      * Applies the BinaryOpValueExp on a MBean.
      *
+     * <p>
+     *  将BinaryOpValueExp应用于MBean。
+     * 
+     * 
      * @param name The name of the MBean on which the BinaryOpValueExp will be applied.
      *
      * @return  The ValueExp.
@@ -164,6 +194,9 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
 
     /**
      * Returns the string representing the object
+     * <p>
+     *  返回表示对象的字符串
+     * 
      */
     public String toString()  {
         try {
@@ -207,6 +240,15 @@ class BinaryOpValueExp extends QueryEval implements ValueExp {
      * A + (B * C)     A + B * C
      * A * (B + C)     A * (B + C)
      * A * (B * C)     A * (B * C)
+     * <p>
+     *  如果需要保留含义,请在给定的子表达式中添加括号。
+     * 假设此BinaryOpValueExp是Query.times(Query.plus(Query.attr("A"),Query.attr("B")),Query.attr("C"))。
+     * 然后原来的toString()逻辑将返回A + B * C.我们检查优先级为了返回(A + B)* C,这是ValueExp的含义。
+     * 
+     *  如果未加括号的表达式被解析为与原始值不同的ValueExp,我们需要添加括号。即使在数学上,结果是等效的,我们也不能省略括号,因为我们不知道数值是整数还是浮点数。
+     * 加法和乘法是整数的关联,但不总是浮点的。
+     * 
+     * 所以规则是,如果ValueExp是(A op1 B)op2 C并且op1的优先级大于或等于op2的优先级,我们将省略括号;或者ValueExp是A op1(B op2 C),并且op2的优先级大于op1
      */
     private String parens(ValueExp subexp, boolean left)
     throws BadBinaryOpValueExpException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dv.xs;
@@ -31,6 +41,12 @@ import com.sun.org.apache.xerces.internal.impl.dv.ValidationContext;
  *
  * @xerces.internal
  *
+ * <p>
+ *  &lt; gMonth&gt;的验证程式数据类型(W3C模式数据类型)
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Elena Litani
  * @author Gopal Sharma, SUN Microsystem Inc.
  *
@@ -42,6 +58,10 @@ public class MonthDV extends AbstractDateTimeDV {
     /**
      * Convert a string to a compiled form
      *
+     * <p>
+     *  将字符串转换为编译形式
+     * 
+     * 
      * @param  content The lexical representation of gMonth
      * @return a valid and normalized gMonth object
      */
@@ -56,6 +76,10 @@ public class MonthDV extends AbstractDateTimeDV {
     /**
      * Parses, validates and computes normalized version of gMonth object
      *
+     * <p>
+     *  解析,验证和计算gMonth对象的规范化版本
+     * 
+     * 
      * @param str    The lexical representation of gMonth object --MM
      *               with possible time zone Z or (-),(+)hh:mm
      * @return normalized date representation
@@ -110,6 +134,12 @@ public class MonthDV extends AbstractDateTimeDV {
      *          is not correctly implemented, and I did encounter errors when
      *          trying to add the extra parameter. I'm leaving it as is. -SG
      *
+     * <p>
+     *  覆盖比较算法以优化月份比较
+     * 
+     *  REVISIT：这个缺少第三个参数：boolean strict,所以它不覆盖基础中的方法。但也许这个方法没有正确实现,我没有遇到错误时,试图添加额外的参数。我要离开它。 -SG
+     * 
+     * 
      * @param date1
      * @param date2
      * @return less, greater, equal, indeterminate
@@ -142,11 +172,26 @@ public class MonthDV extends AbstractDateTimeDV {
             return 1;
         }
 
+    /* <p>
+    /*  if(date1.utc == date2.utc){return(short)((date1.month> = date2.month)?(date1.month> date2.month)?1：0：-1); }
+    /* }。
+    /* 
+    /*  if(date1.utc =='Z'|| date2.utc =='Z'){
+    /* 
+    /* if(date1.month == date2.month){//  -  05  -  Z和--05-- return INDETERMINATE; } if((date1.month + 1 == 
+    /* date2.month || date1.month-1 == date2.month)){//  -  05  -  Z和(--04--或--05-- )// REVISIT：这种情况应该小于还是等于? // maxExclusive应该失败,但是maxInclusive // return INDETERMINATE; }
+    /* 
     }*/
 
     /**
      * Converts month object representation to String
      *
+     * <p>
+     * }。
+     * 
+     *  if(date1.month <date2.month){return -1; } else {return 1; }}
+     * 
+     * 
      * @param date   month object
      * @return lexical representation of month: --MM with an optional time zone sign
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ package java.lang;
  * "normal occurrence", because many applications catch all
  * occurrences of {@code Exception} and then discard the exception.
  *
+ * <p>
+ *  当调用(不推荐使用){@link Thread#stop()}方法时,受害者线程中会抛出{@code ThreadDeath}的实例。
+ * 
+ *  <p>应用程序应该捕获此类的实例,只有当它异步终止后必须清理。如果{@code ThreadDeath}被一个方法捕获,重要的是它被重新抛出,以便线程实际上死了。
+ * 
+ *  <p>如果{@code ThreadDeath}从未被捕获,则{@linkplain ThreadGroup#uncaughtException顶级错误处理程序}不会输出消息。
+ * 
  * @since   JDK1.0
  */
 

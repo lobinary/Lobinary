@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -99,6 +100,12 @@ public abstract class LocalClientRequestDispatcherBase implements LocalClientReq
     *       (local invocation proceeds normally)
     *       servant_postinvoke is called
     *
+    * <p>
+    *  可能的路径通过useLocalInvocation / servant_preinvoke / servant_postinvoke：
+    * 
+    *  A：call useLocalInvocation如果useLocalInvocation返回false,则不调用servant_preinvoke。
+    * 如果useLocalInvocation返回true,调用servant_preinvoke如果servant_preinvoke返回null,goto A else(本地调用正常进行)servant_
+    * postinvoke被调用。
     */
     public boolean useLocalInvocation( org.omg.CORBA.Object self )
     {
@@ -113,6 +120,9 @@ public abstract class LocalClientRequestDispatcherBase implements LocalClientReq
     /** Check that the servant in info (which must not be null) is
     * an instance of the expectedType.  If not, set the thread local flag
     * and return false.
+    * <p>
+    *  A：call useLocalInvocation如果useLocalInvocation返回false,则不调用servant_preinvoke。
+    * 
     */
     protected boolean checkForCompatibleServant( ServantObject so,
         Class expectedType )

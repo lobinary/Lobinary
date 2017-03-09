@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -17,6 +18,7 @@ public interface RMICustomMaxStreamFormat
      * the client's maximum RMI-IIOP stream format version.
      *
      * See Java to IDL ptc/02-01-12 1.4.12.
+     * <p>
      */
   public static final int value = (int)(17L);
 }

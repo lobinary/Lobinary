@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,9 @@ import com.sun.corba.se.spi.orb.ORB ;
 
 /** Base class to use for implementing TaggedComponents.  It implements
  * the getIOPComponent method using the TaggedComponent.write() method.
+ * <p>
+ *  getIOPComponent方法使用TaggedComponent.write()方法。
+ * 
  * @author Ken Cavanaugh
  */
 public abstract class TaggedComponentBase extends IdentifiableBase

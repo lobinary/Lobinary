@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,10 @@ import sun.reflect.misc.ReflectUtil;
  * of information per instance so we can handle very large numbers of
  * MBeans comfortably.
  *
+ * <p>
+ *  MBeans的基类。每个标准MBean和每个MXBean都有一个此类的实例。我们尝试限制每个实例的信息量,以便我们可以舒适地处理非常大量的MBean。
+ * 
+ * 
  * @param <M> either Method or ConvertingMethod, for Standard MBeans
  * and MXBeans respectively.
  *
@@ -118,6 +123,25 @@ import sun.reflect.misc.ReflectUtil;
  * this problem because their getNotificationInfo() method is called
  * only once.
  *
+ * <p>
+ *  我们维护两个缓存以增加相同类型的不同MBean之间的共享,并且减少相同类型的第二个和后续实例的创建时间。
+ * 
+ *  第一个缓存从MBean接口映射到包含从接口中解析的信息的PerInterface对象。该接口是标准MBean接口或MXBean接口,每种情况都有一个缓存。
+ * 
+ *  PerInterface包括一个MBeanInfo。这包含从接口的方法中解析的属性和操作,以及包含至少interfaceClassName字段和从接口上的注释派生的任何字段的接口的基本描述符。
+ * 此MBeanInfo永远不能是任何实际MBean的MBeanInfo,因为MBeanInfo的getClassName()是一个具体类的名称,我们不知道该类将是什么。
+ * 此外,真实的MBeanInfo可能需要向MBeanInfo添加构造函数和/或通知。
+ * 
+ * PerInterface还包含一个MBeanDispatcher,它能够将getAttribute,setAttribute和invoke路由到接口的适当方法,包括为MXBeans执行任何必要的参数和返
+ * 回值的翻译。
+ * 
+ *  PerInterface还包含接口的原始类。
+ * 
+ *  我们需要小心引用。当没有具有给定接口的MBean时,不能有对接口类的任何强引用。否则它永远不会被垃圾收集,它的ClassLoader或任何其他类加载它的ClassLoader也不能。
+ * 因此,缓存必须在WeakReference中包装PerInterface。
+ *  MBeanSupport的每个实例都具有对其PerInterface的强引用,这可以防止PerInterface实例过早地被垃圾回收。
+ * 
+ *  第二个缓存从具体类和该类实现的MBean接口映射到该类和接口的MBeanInfo。
  */
 public abstract class MBeanSupport<M>
         implements DynamicMBean2, MBeanRegistration {
@@ -147,6 +171,16 @@ public abstract class MBeanSupport<M>
      * MBean method invocations where it can supply additional information
      * to the invocation.  For example, with MXBeans it can be used to
      * supply the MXBeanLookup context for resolving inter-MXBean references.
+     * <p>
+     *  (分别指定接口的能力来自StandardMBean类,直接在MBean Server中注册的MBean在这里总是有相同的接口。)。
+     * 
+     * 在第二个缓存中的MBeanInfo将是来自给定itnerface的PerInterface缓存的MBeanInfo,但是getClassName()具有具体类的名称,公共构造函数基于具体类的构造函数。
+     * 这个MBeanInfo可以在指定相同接口的具体类的所有实例之间共享,除了是NotificationBroadcasters的实例。
+     *  NotificationBroadcasters根据实例方法NotificationBroadcaster.getNotificationInfo()提供MBeanInfo中的MBeanNotific
+     * ationInfo [],因此相同具体类的两个实例不一定具有相同的MBeanNotificationInfo []。
+     * 这个MBeanInfo可以在指定相同接口的具体类的所有实例之间共享,除了是NotificationBroadcasters的实例。
+     * 目前,我们不试图检测它们什么时候,尽管这可能是值得的,因为它是一个很常见的情况。
+     * 
      */
     abstract Object getCookie();
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,11 @@ import javax.swing.SizeRequirements;
  * method is called to try and carve the view into pieces
  * that fit.
  *
+ * <p>
+ *  支持多种字体,颜色,组件,图标等的简单换行段落的视图。它基本上是一个带有边缘的垂直框。框的内容是一堆行,它们是特殊的水平框。此视图创建表示段元素的子元素的视图集合。
+ * 如果它们适合,这些视图中的每一个直接放置在一行中,否则调用<code> breakView </code>方法来尝试将视图切割成合适的片段。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @author  Scott Violet
  * @author  Igor Kushnirskiy
@@ -52,6 +58,10 @@ public class ParagraphView extends FlowView implements TabExpander {
     /**
      * Constructs a <code>ParagraphView</code> for the given element.
      *
+     * <p>
+     *  为给定元素构造一个<code> ParagraphView </code>。
+     * 
+     * 
      * @param elem the element that this view is responsible for
      */
     public ParagraphView(Element elem) {
@@ -85,6 +95,10 @@ public class ParagraphView extends FlowView implements TabExpander {
     /**
      * Sets the type of justification.
      *
+     * <p>
+     *  设置对齐的类型。
+     * 
+     * 
      * @param j one of the following values:
      * <ul>
      * <li><code>StyleConstants.ALIGN_LEFT</code>
@@ -99,6 +113,10 @@ public class ParagraphView extends FlowView implements TabExpander {
     /**
      * Sets the line spacing.
      *
+     * <p>
+     *  设置行间距。
+     * 
+     * 
      * @param ls the value is a factor of the line hight
      */
     protected void setLineSpacing(float ls) {
@@ -108,6 +126,10 @@ public class ParagraphView extends FlowView implements TabExpander {
     /**
      * Sets the indent on the first line.
      *
+     * <p>
+     *  设置第一行上的缩进。
+     * 
+     * 
      * @param fi the value in points
      */
     protected void setFirstLineIndent(float fi) {
@@ -116,6 +138,9 @@ public class ParagraphView extends FlowView implements TabExpander {
 
     /**
      * Set the cached properties from the attributes.
+     * <p>
+     *  从属性设置缓存的属性。
+     * 
      */
     protected void setPropertiesFromAttributes() {
         AttributeSet attr = getAttributes();
@@ -150,6 +175,10 @@ public class ParagraphView extends FlowView implements TabExpander {
      * and should be equivalent to the number of child elements
      * to the element this view is responsible for.
      *
+     * <p>
+     *  返回此视图负责的视图数。该段落的子视图是用于排列表示子元素的<code> View </code>部分的行。这是在二维中平铺的视图的数量,应该等于该视图负责的元素的子元素的数量。
+     * 
+     * 
      * @return the number of views that this <code>ParagraphView</code>
      *          is responsible for
      */
@@ -167,6 +196,11 @@ public class ParagraphView extends FlowView implements TabExpander {
      * produced from a factory (to represent the child
      * elements) and used for layout.
      *
+     * <p>
+     * 返回给定<code>索引</code>的视图。段落的子视图是用于排列代表子元素的<code> Views </code>部分的行。此方法返回负责子元素索引(在断开之前)的视图。
+     * 这些是从工厂(代表子元素)生成并用于布局的视图。
+     * 
+     * 
      * @param index the <code>index</code> of the desired view
      * @return the view at <code>index</code>
      */
@@ -178,6 +212,10 @@ public class ParagraphView extends FlowView implements TabExpander {
      * Returns the next visual position for the cursor, in
      * either the east or west direction.
      * Overridden from <code>CompositeView</code>.
+     * <p>
+     *  返回光标在东或西方向的下一个视觉位置。从<code> CompositeView </code>中覆盖。
+     * 
+     * 
      * @param pos position into the model
      * @param b either <code>Position.Bias.Forward</code> or
      *          <code>Position.Bias.Backward</code>
@@ -245,6 +283,10 @@ public class ParagraphView extends FlowView implements TabExpander {
      * Returns the closest model position to <code>x</code>.
      * <code>rowIndex</code> gives the index of the view that corresponds
      * that should be looked in.
+     * <p>
+     *  将最接近的模型位置返回到<code> x </code>。 <code> rowIndex </code>给出了应该查看的对应视图的索引。
+     * 
+     * 
      * @param pos  position into the model
      * @param a the allocated region to render into
      * @param direction one of the following values:
@@ -326,6 +368,18 @@ public class ParagraphView extends FlowView implements TabExpander {
      * This will return true if the text is layed out right
      * to left at position, otherwise false.
      *
+     * <p>
+     *  确定下一个视图放置的方向。考虑索引n处的<code> View </code>。
+     * 通常,从左到右布置<code> View </code>,以便到EAST的<code> View </code>将位于索引n + 1处,而<code> View </code >到WEST将在索引n-1
+     * 处。
+     *  确定下一个视图放置的方向。考虑索引n处的<code> View </code>。
+     * 在某些情况下,例如具有双向文本,可能的是,到EAST的<code> View </code>不在索引n + 1,而是在索引n -  1,或者指向WEST的<code> View </code>不在索引n
+     * -1,而是索引n + 1.在这种情况下,此方法将返回true,表示<code> View </code> s按降序排列。
+     *  确定下一个视图放置的方向。考虑索引n处的<code> View </code>。
+     * <p>
+     *  如果文本在位置右到左,则返回true,否则返回false。
+     * 
+     * 
      * @param position position into the model
      * @param bias either <code>Position.Bias.Forward</code> or
      *          <code>Position.Bias.Backward</code>
@@ -344,6 +398,10 @@ public class ParagraphView extends FlowView implements TabExpander {
     /**
      * Fetches the constraining span to flow against for
      * the given child index.
+     * <p>
+     *  获取针对给定子索引的约束跨度。
+     * 
+     * 
      * @param index the index of the view being queried
      * @return the constraining span for the given view at
      *  <code>index</code>
@@ -363,6 +421,10 @@ public class ParagraphView extends FlowView implements TabExpander {
     /**
      * Fetches the location along the flow axis that the
      * flow span will start at.
+     * <p>
+     * 获取沿流动轴线开始流动跨度的位置。
+     * 
+     * 
      * @param index the index of the view being queried
      * @return the location for the given view at
      *  <code>index</code>
@@ -381,6 +443,10 @@ public class ParagraphView extends FlowView implements TabExpander {
     /**
      * Create a <code>View</code> that should be used to hold a
      * a row's worth of children in a flow.
+     * <p>
+     *  创建一个<code> View </code>,用于在流中保存一行的孩子。
+     * 
+     * 
      * @return the new <code>View</code>
      * @since 1.3
      */
@@ -407,6 +473,14 @@ public class ParagraphView extends FlowView implements TabExpander {
      * is the left inset from the paragraphs most recent allocation
      * (which is what the layout of the children is based upon).
      *
+     * <p>
+     *  返回给定参考位置的下一个制表位停止位置。此视图实现了选项卡坐标系统,并在布局过程中对逻辑子项调用<code> getTabbedSpan </code>,以确定子项的期望跨度。
+     * 逻辑子代可以将其标签扩展向上委托给知道如何展开标签的段落。 <code> LabelView </code>是一个视图的示例,它将其选项卡扩展需求向上委托给段落。
+     * <p>
+     *  这被实现来尝试并且在段落元素的属性集中定位<code> TabSet </code>。如果可以找到,将使用其设置,否则将提供默认扩展。
+     * 用于选项卡扩展的基本位置是段落最近分配(这是子项的布局基于)的左插入。
+     * 
+     * 
      * @param x the X reference position
      * @param tabOffset the position within the text stream
      *   that the tab occurred at &gt;= 0
@@ -473,6 +547,10 @@ public class ParagraphView extends FlowView implements TabExpander {
     /**
      * Gets the <code>Tabset</code> to be used in calculating tabs.
      *
+     * <p>
+     *  获取要用于计算选项卡的<code> Tabset </code>。
+     * 
+     * 
      * @return the <code>TabSet</code>
      */
     protected TabSet getTabSet() {
@@ -489,6 +567,12 @@ public class ParagraphView extends FlowView implements TabExpander {
      * the <code>TabableView</code> interface,
      * the <code>preferredSpan</code> will be used.
      *
+     * <p>
+     *  返回<code> startOffset </code>和<code> endOffset </code>之间视图使用的大小。
+     * 如果子视图实现<code> TabableView </code>界面,则使用<code> getPartialView </code>来计算大小。
+     * 如果需要大小且<code> View </code>不实现<code> TabableView </code>界面,则将使用<code> preferredSpan </code>。
+     * 
+     * 
      * @param startOffset the starting document offset &gt;= 0
      * @param endOffset the ending document offset &gt;= startOffset
      * @return the size &gt;= 0
@@ -528,6 +612,10 @@ public class ParagraphView extends FlowView implements TabExpander {
      * <code>string</code>, starting at offset <code>start</code>. If
      * there are no characters found, -1 will be returned.
      *
+     * <p>
+     * 使用<code> string </code>中的字符,从偏移<code> start </code>开始查找文档中的下一个字符。如果没有找到字符,将返回-1。
+     * 
+     * 
      * @param string the string of characters
      * @param start where to start in the model &gt;= 0
      * @return the document offset, or -1 if no characters found
@@ -557,6 +645,10 @@ public class ParagraphView extends FlowView implements TabExpander {
 
     /**
      * Returns where the tabs are calculated from.
+     * <p>
+     *  返回从中计算选项卡的位置。
+     * 
+     * 
      * @return where tabs are calculated from
      */
     protected float getTabBase() {
@@ -570,6 +662,10 @@ public class ParagraphView extends FlowView implements TabExpander {
      * surface.  This is implemented to delegate to the superclass
      * after stashing the base coordinate for tab calculations.
      *
+     * <p>
+     *  使用给定的渲染表面和该表面上的区域渲染。这被实现为在为标签计算存储基本坐标之后委托给超类。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param a the allocated region to render into
      * @see View#paint
@@ -606,6 +702,10 @@ public class ParagraphView extends FlowView implements TabExpander {
      * center of the first row along the y axis, and the default
      * along the x axis.
      *
+     * <p>
+     *  确定沿着轴的该视图的期望对准。这被实现为给出沿着y轴的第一行的中心的对准,以及沿着x轴的默认。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *   <code>View.Y_AXIS</code>
      * @return the desired alignment.  This should be a value
@@ -639,6 +739,12 @@ public class ParagraphView extends FlowView implements TabExpander {
      * along the <code>Y_AXIS</code> only, and only if
      * <code>len</code> is after the first line.
      *
+     * <p>
+     *  在给定长度的给定轴上中断此视图。
+     * <p>
+     *  <code> ParagraphView </code>实例仅沿<code> Y_AXIS </code>可破解,只有<code> len </code>位于第一行之后。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *  or <code>View.Y_AXIS</code>
      * @param len specifies where a potential break is desired
@@ -673,6 +779,13 @@ public class ParagraphView extends FlowView implements TabExpander {
      * is less than one row, a value of <code>BadBreakWeight</code>
      * is returned.
      *
+     * <p>
+     *  获取给定位置的断裂权重。
+     * <p>
+     *  <code> ParagraphView </code>实例仅沿<code> Y_AXIS </code>可破解,只有<code> len </code>在第一行之后。
+     * 如果长度小于一行,则返回<code> BadBreakWeight </code>的值。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *  or <code>View.Y_AXIS</code>
      * @param len specifies where a potential break is desired &gt;= 0
@@ -706,6 +819,16 @@ public class ParagraphView extends FlowView implements TabExpander {
      * object is created, otherwise the supplied {@code SizeRequirements}
      * object is returned.</p>
      *
+     * <p>
+     *  计算沿着短轴的段落的需要。
+     * 
+     *  <p>这使用超类的大小要求,修改以考虑在相邻视图边缘的不可破坏区域。此类视图的最小大小要求应不小于所有相邻片段的总和。</p>
+     * 
+     * <p>如果{@code axis}参数既不是{@code View.X_AXIS}也不是{@code View.Y_AXIS},则会抛出{@link IllegalArgumentException}。
+     * 如果{@code r}​​参数是{@code null,},则会创建一个新的{@code SizeRequirements}对象,否则返回提供的{@code SizeRequirements}对象。
+     * </p>。
+     * 
+     * 
      * @param axis  the minor axis
      * @param r     the input {@code SizeRequirements} object
      * @return      the new or adjusted {@code SizeRequirements} object
@@ -746,6 +869,9 @@ public class ParagraphView extends FlowView implements TabExpander {
 
     /**
      * Binary search for the longest non-breakable fragment at the view edge.
+     * <p>
+     *  二进制搜索在视图边缘的最长不可断裂片段。
+     * 
      */
     private float findEdgeSpan(View v, int axis, int fp, int p0, int p1) {
         int len = p1 - p0;
@@ -773,6 +899,10 @@ public class ParagraphView extends FlowView implements TabExpander {
      * Gives notification from the document that attributes were changed
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。
+     * 
+     * 
      * @param changes the change information from the
      *  associated document
      * @param a the current allocation of the view
@@ -800,11 +930,17 @@ public class ParagraphView extends FlowView implements TabExpander {
      * Used by the TabExpander functionality to determine
      * where to base the tab calculations.  This is basically
      * the location of the left side of the paragraph.
+     * <p>
+     *  由TabExpander功能使用,以确定选项卡计算的基础。这基本上是段落左侧的位置。
+     * 
      */
     private int tabBase;
 
     /**
      * Used to create an i18n-based layout strategy
+     * <p>
+     *  用于创建基于i18n的布局策略
+     * 
      */
     static Class i18nStrategy;
 
@@ -825,6 +961,9 @@ public class ParagraphView extends FlowView implements TabExpander {
      * Internally created view that has the purpose of holding
      * the views that represent the children of the paragraph
      * that have been arranged in rows.
+     * <p>
+     *  内部创建的视图,目的是保持表示已经按行排列的段落的子代的视图。
+     * 
      */
     class Row extends BoxView {
 
@@ -836,6 +975,9 @@ public class ParagraphView extends FlowView implements TabExpander {
          * This is reimplemented to do nothing since the
          * paragraph fills in the row with its needed
          * children.
+         * <p>
+         *  这被重新实现以不做任何事情,因为段落用其需要的孩子填充行。
+         * 
          */
         protected void loadChildren(ViewFactory f) {
         }
@@ -844,6 +986,9 @@ public class ParagraphView extends FlowView implements TabExpander {
          * Fetches the attributes to use when rendering.  This view
          * isn't directly responsible for an element so it returns
          * the outer classes attributes.
+         * <p>
+         *  获取渲染时要使用的属性。此视图不直接负责元素,因此返回外部类属性。
+         * 
          */
         public AttributeSet getAttributes() {
             View p = getParent();
@@ -880,6 +1025,10 @@ public class ParagraphView extends FlowView implements TabExpander {
          * along the minor axis, so that even though the children
          * are different heights they all get the same caret height.
          *
+         * <p>
+         *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。这被实现为让超类找到沿着长轴的位置,并且该行的分配沿着短轴使用,使得即使孩子是不同的高度,他们都获得相同的插入符号高度。
+         * 
+         * 
          * @param pos the position to convert
          * @param a the allocated region to render into
          * @return the bounding box of the given position
@@ -907,6 +1056,10 @@ public class ParagraphView extends FlowView implements TabExpander {
         /**
          * Range represented by a row in the paragraph is only
          * a subset of the total range of the paragraph element.
+         * <p>
+         * 段落中的一行所表示的范围只是段落元素的总范围的一个子集。
+         * 
+         * 
          * @see View#getRange
          */
         public int getStartOffset() {
@@ -938,6 +1091,12 @@ public class ParagraphView extends FlowView implements TabExpander {
          * This is implemented to do a baseline layout of the children
          * by calling BoxView.baselineLayout.
          *
+         * <p>
+         *  执行箱子短轴(即与它代表的轴正交的轴)的布局。布局的结果应该放在给定的数组中,这些数组表示沿着短轴的子项分配。
+         * <p>
+         *  这是实现通过调用BoxView.baselineLayout做孩子的基线布局。
+         * 
+         * 
          * @param targetSpan the total span given to the view, which
          *  would be used to layout the children.
          * @param axis the axis being layed out.
@@ -988,6 +1147,10 @@ public class ParagraphView extends FlowView implements TabExpander {
          * At this time (jdk1.6) we support justification on for non
          * 18n text.
          *
+         * <p>
+         *  是否需要证明这个{@code Row}。在这个时候(jdk1.6),我们支持非18n文本的理由。
+         * 
+         * 
          * @return {@code true} if this {@code Row} should be justified.
          */
         private boolean isJustifyEnabled() {
@@ -1141,6 +1304,10 @@ public class ParagraphView extends FlowView implements TabExpander {
          * Fetches the child view index representing the given position in
          * the model.
          *
+         * <p>
+         *  获取表示模型中给定位置的子视图索引。
+         * 
+         * 
          * @param pos the position &gt;= 0
          * @return  index of the view representing the given position, or
          *   -1 if no view represents that position
@@ -1163,6 +1330,9 @@ public class ParagraphView extends FlowView implements TabExpander {
         /**
          * Gets the left inset.
          *
+         * <p>
+         *  获取左插图。
+         * 
          * @return the inset
          */
         protected short getLeftInset() {

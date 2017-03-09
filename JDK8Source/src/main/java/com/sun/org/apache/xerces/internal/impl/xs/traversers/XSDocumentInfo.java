@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.traversers;
@@ -42,6 +52,12 @@ import org.w3c.dom.NamedNodeMap;
  *
  * @xerces.internal
  *
+ * <p>
+ *  此类的对象包含特定于特定XML模式文档的所有信息。这是需要的,因为<schema />元素上的命名空间绑定和其他设置单独影响该模式文档的内容。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neil Graham, IBM
  * @version $Id: XSDocumentInfo.java,v 1.5 2007/10/15 22:27:48 spericas Exp $
  */
@@ -145,6 +161,10 @@ class XSDocumentInfo {
      * https://jaxp.dev.java.net/issues/show_bug.cgi?id=43
      *
      * Requires the DOM to be created with namespace support enabled.
+     * <p>
+     *  通过收集根的祖先中的所有命名空间声明来初始化命名空间支持。这是支持模式片段,即嵌入在其他文档中的模式所必需的。看到,
+     * 
+     *  https://jaxp.dev.java.net/issues/show_bug.cgi?id=43
      */
     private void initNamespaceSupport(Element schemaRoot) {
         fNamespaceSupport = new SchemaNamespaceSupport();

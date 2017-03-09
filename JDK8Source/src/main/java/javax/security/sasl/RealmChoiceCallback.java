@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import javax.security.auth.callback.ChoiceCallback;
   * This callback is used by {@code SaslClient} and {@code SaslServer}
   * to obtain a realm given a list of realm choices.
   *
+  * <p>
+  *  此回调由{@code SaslClient}和{@code SaslServer}使用,以获取一个领域列表的领域选择。
+  * 
+  * 
   * @since 1.5
   *
   * @author Rosanna Lee
@@ -42,6 +47,9 @@ public class RealmChoiceCallback extends ChoiceCallback {
      * Constructs a {@code RealmChoiceCallback} with a prompt, a list of
      * choices and a default choice.
      *
+     * <p>
+     *  构造一个{@code RealmChoiceCallback}提示,选择列表和默认选择。
+     * 
      * @param prompt the non-null prompt to use to request the realm.
      * @param choices the non-null list of realms to choose from.
      * @param defaultChoice the choice to be used as the default choice

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,8 @@ public interface TaggedComponentFactoryFinder extends IdentifiableFactoryFinder
 {
     /** Create a tagged component from a GIOP marshalled representation
      * of a tagged component.  This is needed for portable interceptors.
+     * <p>
+     *  的标记组件。这是便携式拦截器所需要的。
      */
     TaggedComponent create( org.omg.CORBA.ORB orb,
         org.omg.IOP.TaggedComponent comp ) ;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,12 @@ package java.lang.reflect;
  * operation, but throws an {@code IllegalArgumentException} if a narrowing
  * conversion would occur.
  *
+ * <p>
+ *  {@code Array}类提供了静态方法来动态创建和访问Java数组。
+ * 
+ *  <p> {@ code Array}允许在get或set操作期间扩展转换,但如果发生缩小转换,则会抛出{@code IllegalArgumentException}。
+ * 
+ * 
  * @author Nakul Saraiya
  */
 public final
@@ -40,6 +47,9 @@ class Array {
 
     /**
      * Constructor.  Class Array is not instantiable.
+     * <p>
+     *  构造函数。类数组不可实例化。
+     * 
      */
     private Array() {}
 
@@ -58,6 +68,17 @@ class Array {
      * <p>The number of dimensions of the new array must not
      * exceed 255.
      *
+     * <p>
+     *  创建具有指定的组件类型和长度的新数组。调用此方法等效于创建如下的数组：
+     * <blockquote>
+     * <pre>
+     *  int [] x = {length}; Array.newInstance(componentType,x);
+     * </pre>
+     * </blockquote>
+     * 
+     *  <p>新数组的维数不能超过255。
+     * 
+     * 
      * @param componentType the {@code Class} object representing the
      * component type of the new array
      * @param length the length of the new array
@@ -92,6 +113,15 @@ class Array {
      * <p>The number of dimensions of the new array must not
      * exceed 255.
      *
+     * <p>
+     *  创建具有指定组件类型和尺寸的新数组。
+     * 如果{@code componentType}表示非数组类或接口,则新数组具有{@code dimensions.length}维和{@code componentType}作为其组件类型。
+     * 如果{@code componentType}表示数组类,则新数组的维数等于{@code dimensions.length}和{@code componentType}的维数之和。
+     * 在这种情况下,新数组的组件类型是{@code componentType}的组件类型。
+     * 
+     *  <p>新数组的维数不能超过255。
+     * 
+     * 
      * @param componentType the {@code Class} object representing the component
      * type of the new array
      * @param dimensions an array of {@code int} representing the dimensions of
@@ -114,6 +144,10 @@ class Array {
     /**
      * Returns the length of the specified array object, as an {@code int}.
      *
+     * <p>
+     *  以{@code int}形式返回指定数组对象的长度。
+     * 
+     * 
      * @param array the array
      * @return the length of the array
      * @exception IllegalArgumentException if the object argument is not
@@ -127,6 +161,10 @@ class Array {
      * array object.  The value is automatically wrapped in an object
      * if it has a primitive type.
      *
+     * <p>
+     * 返回指定数组对象中索引组件的值。如果值具有原始类型,则该值会自动包装在对象中。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the (possibly wrapped) value of the indexed component in
@@ -145,6 +183,10 @@ class Array {
      * Returns the value of the indexed component in the specified
      * array object, as a {@code boolean}.
      *
+     * <p>
+     *  返回指定数组对象中的索引组件的值,为{@code boolean}。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the value of the indexed component in the specified array
@@ -164,6 +206,10 @@ class Array {
      * Returns the value of the indexed component in the specified
      * array object, as a {@code byte}.
      *
+     * <p>
+     *  将指定数组对象中的索引组件的值作为{@code byte}返回。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the value of the indexed component in the specified array
@@ -183,6 +229,10 @@ class Array {
      * Returns the value of the indexed component in the specified
      * array object, as a {@code char}.
      *
+     * <p>
+     *  将指定数组对象中的索引组件的值作为{@code char}返回。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the value of the indexed component in the specified array
@@ -202,6 +252,10 @@ class Array {
      * Returns the value of the indexed component in the specified
      * array object, as a {@code short}.
      *
+     * <p>
+     *  将指定数组对象中的索引组件的值作为{@code short}返回。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the value of the indexed component in the specified array
@@ -221,6 +275,10 @@ class Array {
      * Returns the value of the indexed component in the specified
      * array object, as an {@code int}.
      *
+     * <p>
+     *  返回指定数组对象中的索引组件的值,作为{@code int}。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the value of the indexed component in the specified array
@@ -240,6 +298,10 @@ class Array {
      * Returns the value of the indexed component in the specified
      * array object, as a {@code long}.
      *
+     * <p>
+     *  将指定数组对象中的索引组件的值作为{@code long}返回。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the value of the indexed component in the specified array
@@ -259,6 +321,10 @@ class Array {
      * Returns the value of the indexed component in the specified
      * array object, as a {@code float}.
      *
+     * <p>
+     *  将指定数组对象中的索引组件的值作为{@code float}返回。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the value of the indexed component in the specified array
@@ -278,6 +344,10 @@ class Array {
      * Returns the value of the indexed component in the specified
      * array object, as a {@code double}.
      *
+     * <p>
+     *  将指定数组对象中的索引组件的值作为{@code double}返回。
+     * 
+     * 
      * @param array the array
      * @param index the index
      * @return the value of the indexed component in the specified array
@@ -298,6 +368,10 @@ class Array {
      * object to the specified new value.  The new value is first
      * automatically unwrapped if the array has a primitive component
      * type.
+     * <p>
+     *  将指定数组对象的索引组件的值设置为指定的新值。如果数组具有基本组件类型,则首先自动解开新值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param value the new value of the indexed component
@@ -316,6 +390,10 @@ class Array {
     /**
      * Sets the value of the indexed component of the specified array
      * object to the specified {@code boolean} value.
+     * <p>
+     *  将指定数组对象的索引组件的值设置为指定的{@code boolean}值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param z the new value of the indexed component
@@ -336,6 +414,10 @@ class Array {
     /**
      * Sets the value of the indexed component of the specified array
      * object to the specified {@code byte} value.
+     * <p>
+     *  将指定数组对象的索引组件的值设置为指定的{@code byte}值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param b the new value of the indexed component
@@ -356,6 +438,10 @@ class Array {
     /**
      * Sets the value of the indexed component of the specified array
      * object to the specified {@code char} value.
+     * <p>
+     *  将指定数组对象的索引组件的值设置为指定的{@code char}值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param c the new value of the indexed component
@@ -376,6 +462,10 @@ class Array {
     /**
      * Sets the value of the indexed component of the specified array
      * object to the specified {@code short} value.
+     * <p>
+     * 将指定数组对象的索引组件的值设置为指定的{@code short}值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param s the new value of the indexed component
@@ -396,6 +486,10 @@ class Array {
     /**
      * Sets the value of the indexed component of the specified array
      * object to the specified {@code int} value.
+     * <p>
+     *  将指定数组对象的索引组件的值设置为指定的{@code int}值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param i the new value of the indexed component
@@ -416,6 +510,10 @@ class Array {
     /**
      * Sets the value of the indexed component of the specified array
      * object to the specified {@code long} value.
+     * <p>
+     *  将指定数组对象的索引组件的值设置为指定的{@code long}值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param l the new value of the indexed component
@@ -436,6 +534,10 @@ class Array {
     /**
      * Sets the value of the indexed component of the specified array
      * object to the specified {@code float} value.
+     * <p>
+     *  将指定数组对象的索引组件的值设置为指定的{@code float}值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param f the new value of the indexed component
@@ -456,6 +558,10 @@ class Array {
     /**
      * Sets the value of the indexed component of the specified array
      * object to the specified {@code double} value.
+     * <p>
+     *  将指定数组对象的索引组件的值设置为指定的{@code double}值。
+     * 
+     * 
      * @param array the array
      * @param index the index into the array
      * @param d the new value of the indexed component
@@ -475,6 +581,8 @@ class Array {
 
     /*
      * Private
+     * <p>
+     *  私人的
      */
 
     private static native Object newArray(Class<?> componentType, int length)

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,8 @@ import com.sun.java.swing.plaf.gtk.GTKEngine.WidgetType;
 
 /**
  *
+ * <p>
+ * 
  * @author Scott Violet
  */
 class GTKStyle extends SynthStyle implements GTKConstants {
@@ -68,18 +71,27 @@ class GTKStyle extends SynthStyle implements GTKConstants {
     /**
      * Maps from a key that is passed to Style.get to the equivalent class
      * specific key.
+     * <p>
+     *  从传递到Style.get的键映射到等效类特定键。
+     * 
      */
     private static final Map<String,String> CLASS_SPECIFIC_MAP;
 
     /**
      * Backing style properties that are used if the style does not
      * defined the property.
+     * <p>
+     *  如果样式未定义属性,则使用的背景样式属性。
+     * 
      */
     private static final Map<String,GTKStockIcon> ICONS_MAP;
 
     /**
      * The font used for this particular style, as determined at
      * construction time.
+     * <p>
+     *  用于这种特定风格的字体,在施工时确定。
+     * 
      */
     private final Font font;
 
@@ -131,6 +143,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * Returns a <code>SynthPainter</code> that will route the appropriate
      * calls to a <code>GTKEngine</code>.
      *
+     * <p>
+     *  返回一个<code> SynthPainter </code>,它会将适当的调用路由到<code> GTKEngine </code>。
+     * 
+     * 
      * @param state SynthContext identifying requestor
      * @return SynthPainter
      */
@@ -185,6 +201,9 @@ class GTKStyle extends SynthStyle implements GTKConstants {
     /**
      * Returns color specific to the current style. This method is
      * invoked when other variants don't fit.
+     * <p>
+     *  返回特定于当前样式的颜色。当其他变量不匹配时,将调用此方法。
+     * 
      */
     private Color getStyleSpecificColor(SynthContext context, int state,
                                         ColorType type)
@@ -204,6 +223,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
     /**
      * Returns the color for the specified state.
      *
+     * <p>
+     *  返回指定状态的颜色。
+     * 
+     * 
      * @param context SynthContext identifying requestor
      * @param state to get the color for
      * @param type of the color
@@ -285,6 +308,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
     /**
      * Returns the X thickness to use for this GTKStyle.
      *
+     * <p>
+     *  返回用于此GTKStyle的X厚度。
+     * 
+     * 
      * @return x thickness.
      */
     int getXThickness() {
@@ -294,6 +321,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
     /**
      * Returns the Y thickness to use for this GTKStyle.
      *
+     * <p>
+     *  返回此GTKStyle使用的Y厚度。
+     * 
+     * 
      * @return y thickness.
      */
     int getYThickness() {
@@ -305,6 +336,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * insets will be placed in it, otherwise a new Insets object will be
      * created and returned.
      *
+     * <p>
+     *  返回Insets。如果<code> insets </code>为非null,则将生成插入内容,否则将创建并返回一个新的Insets对象。
+     * 
+     * 
      * @param context SynthContext identifying requestor
      * @param insets Where to place Insets
      * @return Insets.
@@ -432,6 +467,9 @@ class GTKStyle extends SynthStyle implements GTKConstants {
 
     /*
      * This is used for both RADIO_BUTTON and CHECK_BOX.
+     * <p>
+     *  这用于RADIO_BUTTON和CHECK_BOX。
+     * 
      */
     private Insets getRadioInsets(SynthContext context, Insets insets) {
         // The following calculations are derived from gtkcheckbutton.c
@@ -594,6 +632,11 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * SCROLL_BAR, but certain values can only be extracted from a
      * SCROLL_PANE region).
      *
+     * <p>
+     *  返回特定WidgetType的特定于类的属性的值。
+     * 这种方法在需要为与当前使用的组件不相关联的Region获取值时很有用(例如,我们需要计算出SCROLL_BAR的插入值,但某些值只能从SCROLL_PANE中提取出来地区)。
+     * 
+     * 
      * @param wt WidgetType for which to fetch the value
      * @param key Key identifying class specific value
      * @return Value, or null if one has not been defined
@@ -608,6 +651,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * Convenience method to get a class specific integer value for
      * a particular WidgetType.
      *
+     * <p>
+     *  方便方法来获取特定WidgetType的类特定整数值。
+     * 
+     * 
      * @param wt WidgetType for which to fetch the value
      * @param key Key identifying class specific value
      * @param defaultValue Returned if there is no value for the specified
@@ -628,6 +675,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * Returns the value for a class specific property. A class specific value
      * is a value that will be picked up based on class hierarchy.
      *
+     * <p>
+     * 返回类特定属性的值。类特定值是将基于类层次结构拾取的值。
+     * 
+     * 
      * @param key Key identifying class specific value
      * @return Value, or null if one has not been defined.
      */
@@ -640,6 +691,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
     /**
      * Convenience method to get a class specific integer value.
      *
+     * <p>
+     *  方便得到类的特定整数值的方法。
+     * 
+     * 
      * @param context SynthContext identifying requestor
      * @param key Key identifying class specific value
      * @param defaultValue Returned if there is no value for the specified
@@ -660,6 +715,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
     /**
      * Convenience method to get a class specific Insets value.
      *
+     * <p>
+     *  方便的方法来获取一个特定类Insets值。
+     * 
+     * 
      * @param context SynthContext identifying requestor
      * @param key Key identifying class specific value
      * @param defaultValue Returned if there is no value for the specified
@@ -680,6 +739,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
     /**
      * Convenience method to get a class specific Boolean value.
      *
+     * <p>
+     *  方便得到特定类的布尔值的方法。
+     * 
+     * 
      * @param context SynthContext identifying requestor
      * @param key Key identifying class specific value
      * @param defaultValue Returned if there is no value for the specified
@@ -702,6 +765,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * to. A Style should NOT assume the opacity will remain this value, the
      * developer may reset it or override it.
      *
+     * <p>
+     *  返回用于初始化组件的opacity属性的值。样式不应该假定不透明度将保持此值,开发人员可以重置它或覆盖它。
+     * 
+     * 
      * @param context SynthContext identifying requestor
      * @return opaque Whether or not the JComponent is opaque.
      */
@@ -931,6 +998,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
         /**
          * Return the size of a particular icon type (logical size)
          *
+         * <p>
+         *  返回特定图标类型的大小(逻辑大小)
+         * 
+         * 
          * @param type icon type (GtkIconSize value)
          * @return a Dimension object, or null if lsize is invalid
          */
@@ -944,6 +1015,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
          * Change icon size in a type to size mapping. This is called by code
          * that parses the gtk-icon-sizes setting
          *
+         * <p>
+         *  将类型中的图标大小更改为大小映射。这由解析gtk-icon-sizes设置的代码调用
+         * 
+         * 
          * @param type icon type (GtkIconSize value)
          * @param w the new icon width
          * @param h the new icon height
@@ -959,6 +1034,10 @@ class GTKStyle extends SynthStyle implements GTKConstants {
          * Return icon type (GtkIconSize value) given a symbolic name which can
          * occur in a theme file.
          *
+         * <p>
+         *  返回可能出现在主题文件中的符号名称的返回图标类型(GtkIconSize值)。
+         * 
+         * 
          * @param size symbolic name, e.g. gtk-button
          * @return icon type. Valid types are 1 to 6
          */
@@ -987,6 +1066,9 @@ class GTKStyle extends SynthStyle implements GTKConstants {
 
     /**
      * An Icon that is fetched using getStockIcon.
+     * <p>
+     *  使用getStockIcon获取的图标。
+     * 
      */
     private static class GTKStockIcon extends SynthIcon {
         private String key;
@@ -1067,10 +1149,15 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * GTKLazyValue is a slimmed down version of <code>ProxyLaxyValue</code>.
      * The code is duplicate so that it can get at the package private
      * classes in gtk.
+     * <p>
+     *  GTKLazyValue是一个减少版本的<code> ProxyLaxyValue </code>。代码是重复的,以便它可以获得在gtk中的包私有类。
+     * 
      */
     static class GTKLazyValue implements UIDefaults.LazyValue {
         /**
          * Name of the class to create.
+         * <p>
+         *  要创建的类的名称。
          */
         private String className;
         private String methodName;

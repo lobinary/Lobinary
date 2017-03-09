@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.signature;
 
@@ -26,11 +35,18 @@ import org.w3c.dom.Node;
 
 /**
  * An interface to tell to the c14n if a node is included or not in the output
+ * <p>
+ *  一个接口,告诉c14n是否在输出中包含了一个节点
+ * 
  */
 public interface NodeFilter {
 
     /**
      * Tells if a node must be output in c14n.
+     * <p>
+     *  指示节点是否必须在c14n中输出。
+     * 
+     * 
      * @param n
      * @return 1 if the node should be output.
      *         0 if node must not be output,
@@ -44,6 +60,9 @@ public interface NodeFilter {
      * The caller must assured that this method is always call
      * in document order. The implementations can use this
      * restriction to optimize the transformation.
+     * <p>
+     *  指示节点是否必须在c14n中输出。调用者必须确保此方法总是以文档顺序调用。实现可以使用此限制来优化转换。
+     * 
      * @param n
      * @param level the relative level in the tree
      * @return 1 if the node should be output.

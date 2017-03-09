@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import javax.swing.JTree;
   * Adds to CellEditor the extensions necessary to configure an editor
   * in a tree.
   *
+  * <p>
+  *  向CellEditor添加在树中配置编辑器所需的扩展。
+  * 
+  * 
   * @see javax.swing.JTree
   *
   * @author Scott Violet
@@ -49,6 +54,10 @@ public interface TreeCellEditor extends CellEditor
      * Component hierarchy.  Once installed in the client's hierarchy
      * this component will then be able to draw and receive user input.
      *
+     * <p>
+     *  为编辑器设置初始<I>值</I>。这将导致编辑器停止编辑并丢失任何部分编辑的值,如果编辑器在调用此方法时进行编辑。 <p>
+     * 
+     * 
      * @param   tree            the JTree that is asking the editor to edit;
      *                          this parameter can be null
      * @param   value           the value of the cell to be edited

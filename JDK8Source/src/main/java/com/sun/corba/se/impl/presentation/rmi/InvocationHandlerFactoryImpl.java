@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -94,6 +95,9 @@ public class InvocationHandlerFactoryImpl implements InvocationHandlerFactory
          * DynamicStubImpl which will re-create the full invocation
          * handler on read, and return the invocation handler on the
          * readResolve method.
+         * <p>
+         *  它将被自定义编组,与实际写作在StubIORImpl。
+         *  DynamicStubImpl上有一个相应的readResolve方法,它将在读取时重新创建完整的调用处理程序,并在readResolve方法上返回调用处理程序。
          */
         public Object writeReplace() throws ObjectStreamException
         {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@ package org.omg.CORBA.portable;
 /**
 This interface provides a dispatching mechanism for an incoming call.
 It is invoked by the ORB to dispatch a request to a servant.
+/* <p>
+/*  此接口为来电提供调度机制。它由ORB调用以向服务方分派请求。
+/* 
 */
 
 public interface InvokeHandler {
@@ -57,6 +61,15 @@ public interface InvokeHandler {
      *    ResponseHandler.
      * <p>6. Return OutputStream to ORB.
      * <p>
+     * <p>
+     *  由ORB调用以向服务方分派请求。
+     * 
+     *  ORB传递方法名,包含编组参数的InputStream和服务方用来构造正确答复的ResponseHandler。
+     * 
+     *  此方法只能抛出CORBA SystemException。
+     * 
+     *  该方法必须返回一个由ResponseHandler创建的OutputStream,它包含编组的答复。
+     * 
      * @param method The method name.
      * @param input The <code>InputStream</code> containing the marshalled arguments.
      * @param handler The <code>ResponseHandler</code> which the servant uses

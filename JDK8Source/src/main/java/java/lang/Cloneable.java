@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ package java.lang;
  * fact that it implements this interface.  Even if the clone method is invoked
  * reflectively, there is no guarantee that it will succeed.
  *
+ * <p>
+ *  类实现了<code> Cloneable </code>接口,以向{@link java.lang.Object#clone()}方法指示该方法合法地创建一个实例的field-for-field副本那
+ * 个类。
+ * <p>
+ *  在不实现<code> Cloneable </code>接口的实例上调用Object的clone方法会导致抛出异常<code> CloneNotSupportedException </code>。
+ * <p>
+ * 
  * @author  unascribed
  * @see     java.lang.CloneNotSupportedException
  * @see     java.lang.Object#clone()

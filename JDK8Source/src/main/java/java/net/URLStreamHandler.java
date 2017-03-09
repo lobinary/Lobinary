@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,12 @@ import sun.net.www.ParseUtil;
  * {@code URL}, the appropriate stream protocol handler is
  * automatically loaded.
  *
+ * <p>
+ *  抽象类{@code URLStreamHandler}是所有流协议处理程序的常用超类。流协议处理程序知道如何为特定协议类型(如{@code http}或{@code https})建立连接。
+ * <p>
+ *  在大多数情况下,{@code URLStreamHandler}子类的实例不是由应用程序直接创建的。相反,当构建{@code URL}时第一次遇到协议名称时,将自动加载适当的流协议处理程序。
+ * 
+ * 
  * @author  James Gosling
  * @see     java.net.URL#URL(java.lang.String, java.lang.String, int, java.lang.String)
  * @since   JDK1.0
@@ -63,6 +70,14 @@ public abstract class URLStreamHandler {
      * HttpURLConnection will be returned, and for JAR a
      * JarURLConnection will be returned.
      *
+     * <p>
+     *  打开与{@code URL}参数引用的对象的连接。这个方法应该被子类覆盖。
+     * 
+     *  <p>如果对于处理程序的协议(例如HTTP或JAR),存在属于以下包之一或其子包之一的公共,专用URLConnection子类：java.lang,java.io,java.util,java .ne
+     * t,返回的连接将是那个子类。
+     * 例如,对于HTTP,将返回HttpURLConnection,对于JAR,将返回JarURLConnection。
+     * 
+     * 
      * @param      u   the URL that this connects to.
      * @return     a {@code URLConnection} object for the {@code URL}.
      * @exception  IOException  if an I/O error occurs while opening the
@@ -79,6 +94,12 @@ public abstract class URLStreamHandler {
      * Calling this method preempts the system's default ProxySelector
      * settings.
      *
+     * <p>
+     *  与openConnection(URL)相同,除了将通过指定的代理进行连接;不支持代理的协议处理程序将忽略代理参数并建立正常连接。
+     * 
+     *  调用此方法将抢占系统的默认ProxySelector设置。
+     * 
+     * 
      * @param      u   the URL that this connects to.
      * @param      p   the proxy through which the connection will be made.
      *                 If direct connection is desired, Proxy.NO_PROXY
@@ -109,6 +130,15 @@ public abstract class URLStreamHandler {
      * similar parsing. A stream protocol handler for a protocol that has
      * a different syntax must override this routine.
      *
+     * <p>
+     * 将{@code URL}的字符串表示解析为{@code URL}对象。
+     * <p>
+     *  如果有任何继承的上下文,那么它已经被复制到{@code URL}参数中。
+     * <p>
+     *  {@code URLStreamHandler}的{@code parseURL}方法解析字符串表示形式,就像它是一个{@code http}规范。大多数URL协议族都有类似的解析。
+     * 具有不同语法的协议的流协议处理程序必须覆盖此例程。
+     * 
+     * 
      * @param   u       the {@code URL} to receive the result of parsing
      *                  the spec.
      * @param   spec    the {@code String} representing the URL that
@@ -274,6 +304,9 @@ public abstract class URLStreamHandler {
                  * unless that segment is a "/../" itself
                  * i.e. "/a/b/../c" becomes "/a/c"
                  * but "/../../a" should stay unchanged
+                 * <p>
+                 *  除非该段是"/../"本身,即"/a/b/../c"变为"/ a / c"而是"/",否则"/../"将取消前一个段及其自身。 ./../a"应保持不变
+                 * 
                  */
                 if (i > 0 && (limit = path.lastIndexOf('/', i - 1)) >= 0 &&
                     (path.indexOf("/../", limit) != 0)) {
@@ -307,6 +340,10 @@ public abstract class URLStreamHandler {
     /**
      * Returns the default port for a URL parsed by this handler. This method
      * is meant to be overidden by handlers with default port numbers.
+     * <p>
+     *  返回此处理程序分析的网址的默认端口。此方法意味着由具有默认端口号的处理程序覆盖。
+     * 
+     * 
      * @return the default port for a {@code URL} parsed by this handler.
      * @since 1.3
      */
@@ -319,6 +356,10 @@ public abstract class URLStreamHandler {
      * for other protocols that have different requirements for equals().
      * This method requires that none of its arguments is null. This is
      * guaranteed by the fact that it is only called by java.net.URL class.
+     * <p>
+     *  提供默认等于计算。对于对equals()有不同要求的其他协议,可能被处理程序覆盖。此方法要求其参数都不为null。这是由它的事实,保证只由java.net.URL类调用。
+     * 
+     * 
      * @param u1 a URL object
      * @param u2 a URL object
      * @return {@code true} if the two urls are
@@ -337,6 +378,10 @@ public abstract class URLStreamHandler {
      * Provides the default hash calculation. May be overidden by handlers for
      * other protocols that have different requirements for hashCode
      * calculation.
+     * <p>
+     *  提供默认散列计算。对于对hashCode计算有不同要求的其他协议,可能被处理程序覆盖。
+     * 
+     * 
      * @param u a URL object
      * @return an {@code int} suitable for hash table indexing
      * @since 1.3
@@ -384,6 +429,10 @@ public abstract class URLStreamHandler {
      * This method requires that none of its arguments is null. This is
      * guaranteed by the fact that it is only called indirectly
      * by java.net.URL class.
+     * <p>
+     *  比较两个网址,看看它们是否指向相同的文件,即具有相同的协议,主机,端口和路径。此方法要求其参数都不为null。这是由它只由java.net.URL类间接调用的事实保证。
+     * 
+     * 
      * @param u1 a URL object
      * @param u2 a URL object
      * @return true if u1 and u2 refer to the same file
@@ -419,6 +468,10 @@ public abstract class URLStreamHandler {
      * Get the IP address of our host. An empty host field or a DNS failure
      * will result in a null return.
      *
+     * <p>
+     * 获取主机的IP地址。空主机字段或DNS故障将导致空返回。
+     * 
+     * 
      * @param u a URL object
      * @return an {@code InetAddress} representing the host
      * IP address.
@@ -445,6 +498,10 @@ public abstract class URLStreamHandler {
 
     /**
      * Compares the host components of two URLs.
+     * <p>
+     *  比较两个URL的主机组件。
+     * 
+     * 
      * @param u1 the URL of the first host to compare
      * @param u2 the URL of the second host to compare
      * @return  {@code true} if and only if they
@@ -468,6 +525,10 @@ public abstract class URLStreamHandler {
      * Converts a {@code URL} of a specific protocol to a
      * {@code String}.
      *
+     * <p>
+     *  将特定协议的{@code URL}转换为{@code String}。
+     * 
+     * 
      * @param   u   the URL.
      * @return  a string representation of the {@code URL} argument.
      */
@@ -512,6 +573,10 @@ public abstract class URLStreamHandler {
      * Only classes derived from URLStreamHandler are able
      * to use this method to set the values of the URL fields.
      *
+     * <p>
+     *  将{@code URL}参数的字段设置为指定的值。只有从URLStreamHandler派生的类能够使用此方法设置URL字段的值。
+     * 
+     * 
      * @param   u         the URL to modify.
      * @param   protocol  the protocol name.
      * @param   host      the remote host value for the URL.
@@ -542,6 +607,10 @@ public abstract class URLStreamHandler {
      * Only classes derived from URLStreamHandler are able
      * to use this method to set the values of the URL fields.
      *
+     * <p>
+     *  将{@code URL}参数的字段设置为指定的值。只有从URLStreamHandler派生的类能够使用此方法设置URL字段的值。
+     * 
+     * 
      * @param   u         the URL to modify.
      * @param   protocol  the protocol name. This value is ignored since 1.2.
      * @param   host      the remote host value for the URL.
@@ -559,6 +628,9 @@ public abstract class URLStreamHandler {
         /*
          * Only old URL handlers call this, so assume that the host
          * field might contain "user:passwd@host". Fix as necessary.
+         * <p>
+         *  只有旧的URL处理程序调用此方法,因此假设主机字段可能包含"user：passwd @ host"。必要时进行修复。
+         * 
          */
         String authority = null;
         String userInfo = null;
@@ -573,6 +645,8 @@ public abstract class URLStreamHandler {
 
         /*
          * Assume file might contain query part. Fix as necessary.
+         * <p>
+         *  假设文件可能包含查询部分。必要时进行修复。
          */
         String path = null;
         String query = null;

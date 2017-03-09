@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,33 @@ import sun.security.util.SecurityConstants;
  * directory it's in (or a subdirectory of that directory); it does not
  * need explicit permission to do so.
  *
+ * <p>
+ *  此类表示对文件或目录的访问。 FilePermission由一个路径名和一组对该路径名有效的操作组成。
+ * <P>
+ *  路径名是授予指定操作的文件或目录的路径名。以"/ *"结尾的路径名(其中"/"是文件分隔符,<code> File.separatorChar </code>)表示该目录中包含的所有文件和目录。
+ * 以"/  - "结尾的路径名表示(递归地)该目录中包含的所有文件和子目录。由特殊标记"&lt;&lt;&lt; ALL FILES&gt;&gt;"组成的路径名,匹配<b>任何</b>文件。
+ * <P>
+ *  注意：由单个"*"组成的路径名指示当前目录中的所有文件,而由单个" - "组成的路径名指示当前目录中的所有文件,以及(递归地)当前目录中包含的所有文件和子目录目录。
+ * <P>
+ *  要授予的操作将在包含一个或多个逗号分隔关键字列表的字符串中传递给构造函数。可能的关键字是"读取","写入","执行","删除"和"读取链接"。它们的含义定义如下：
+ * 
+ * <DL>
+ * <DT>读取<DD>读取权限<DT>写入<DD>写入权限<DT>执行<DD>执行权限。允许调用<code> Runtime.exec </code>。
+ * 对应于<code> SecurityManager.checkExec </code>。 <DT>删除<DD>删除权限。允许调用<code> File.delete </code>。
+ * 对应于<code> SecurityManager.checkDelete </code>。 <DT> readlink <DD>读取链接权限。
+ * 允许读取<a href="../nio/file/package-summary.html#links">符号链接</a>的目标,方法是调用{@link java.nio.file.Files#readSymbolicLink readSymbolicLink}
+ * 方法。
+ * 对应于<code> SecurityManager.checkDelete </code>。 <DT> readlink <DD>读取链接权限。
+ * </DL>
+ * <P>
+ *  在处理之前,操作字符串将转换为小写。
+ * <P>
+ *  授予FilePermissions时请小心。考虑授予读取,尤其是对各种文件和目录的写入访问的影响。 "&lt;&lt; ALL FILES&gt;&gt;"许可与写入操作是特别危险的。
+ * 这将授予写入整个文件系统的权限。有效地允许的一个事情是替换系统二进制,包括JVM运行时环境。
+ * 
+ *  <p>请注意：代码可以始终从它所在的同一目录(或该目录的子目录)中读取文件;它不需要显式权限这样做。
+ * 
+ * 
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.PermissionCollection
@@ -101,31 +129,52 @@ public final class FilePermission extends Permission implements Serializable {
 
     /**
      * Execute action.
+     * <p>
+     *  执行操作。
+     * 
      */
     private final static int EXECUTE = 0x1;
     /**
      * Write action.
+     * <p>
+     *  写操作。
+     * 
      */
     private final static int WRITE   = 0x2;
     /**
      * Read action.
+     * <p>
+     *  读取操作。
+     * 
      */
     private final static int READ    = 0x4;
     /**
      * Delete action.
+     * <p>
+     *  删除操作。
+     * 
      */
     private final static int DELETE  = 0x8;
     /**
      * Read link action.
+     * <p>
+     *  读取链接操作。
+     * 
      */
     private final static int READLINK    = 0x10;
 
     /**
      * All actions (read,write,execute,delete,readlink)
+     * <p>
+     *  所有操作(读,写,执行,删除,读取链接)
+     * 
      */
     private final static int ALL     = READ|WRITE|EXECUTE|DELETE|READLINK;
     /**
      * No actions.
+     * <p>
+     *  无操作。
+     * 
      */
     private final static int NONE    = 0x0;
 
@@ -141,6 +190,10 @@ public final class FilePermission extends Permission implements Serializable {
     /**
      * the actions string.
      *
+     * <p>
+     *  操作字符串。
+     * 
+     * 
      * @serial
      */
     private String actions; // Left null as long as possible, then
@@ -169,6 +222,17 @@ public final class FilePermission extends Permission implements Serializable {
         sb.append("***\n");
         return sb.toString();
     }
+        sb.append("* <p>
+        sb.append("*  //最后一个字符("*"或" - ")。
+        sb.append("* 
+        sb.append("*  private transient String cpath;
+        sb.append("* 
+        sb.append("* // static init(int mask)使用的字符串private static final char RECURSIVE_CHAR =' - '; private static final c
+        sb.append("* har WILD_CHAR ='*';。
+        sb.append("* 
+        sb.append("*  / * public String toString(){StringBuffer sb = new StringBuffer(); sb.append("*** \ n"); sb.append("cpath ="+ cpath +"\ n"); sb.append("mask ="+ mask +"\ n"); sb.append("actions ="+ getActions()+"\ n"); sb.append("directory ="+ directory +"\ n"); sb.append("recursive ="+ recursive +"\ n"); sb.append("*** \ n"); return sb.toString(); }
+        sb.append("* }。
+        sb.append("* 
 */
 
     private static final long serialVersionUID = 7930732926638008763L;
@@ -177,6 +241,10 @@ public final class FilePermission extends Permission implements Serializable {
      * initialize a FilePermission object. Common to all constructors.
      * Also called during de-serialization.
      *
+     * <p>
+     *  初始化FilePermission对象。所有构造函数的公共。在反序列化期间也调用。
+     * 
+     * 
      * @param mask the actions mask to use.
      *
      */
@@ -265,6 +333,18 @@ public final class FilePermission extends Permission implements Serializable {
      *
      * <p>A pathname containing an empty string represents an empty path.
      *
+     * <p>
+     *  使用指定的操作创建新的FilePermission对象。 <i>路径</i>是文件或目录的路径名,<i> actions </i>包含在文件或目录上授予的所需操作的逗号分隔列表。
+     * 可能的操作是"读取","写入","执行","删除"和"readlink"。
+     * 
+     *  <p>以"/ *"结尾的路径名(其中"/"是文件分隔符,<code> File.separatorChar </code>)表示该目录中包含的所有文件和目录。
+     * 以"/  - "结尾的路径名表示(递归地)该目录中包含的所有文件和子目录。特殊路径名"&lt;&lt;&lt; ALL FILES&gt;&gt;"匹配任何文件。
+     * 
+     *  <p>由单个"*"组成的路径名指示当前目录中的所有文件,而由单个" - "组成的路径名指示当前目录中的所有文件,并且(递归地)包含在当前目录中的所有文件和子目录当前目录。
+     * 
+     * <p>包含空字符串的路径名表示空路径。
+     * 
+     * 
      * @param path the pathname of the file/directory.
      * @param actions the action string.
      *
@@ -284,6 +364,11 @@ public final class FilePermission extends Permission implements Serializable {
      * code that needs to create a FilePermission object to pass into the
      * <code>implies</code> method.
      *
+     * <p>
+     *  使用操作掩码创建一个新的FilePermission对象。比FilePermission(String,String)构造函数更高效。
+     * 可以从需要创建FilePermission对象的代码中使用,以传递到<code>隐含</code>方法。
+     * 
+     * 
      * @param path the pathname of the file/directory.
      * @param mask the action mask to use.
      */
@@ -308,6 +393,16 @@ public final class FilePermission extends Permission implements Serializable {
      *      including the one named "foo".
      * </ul>
      *
+     * <p>
+     *  检查此FilePermission对象是否"暗示"指定的权限。
+     * <P>
+     *  更具体地说,这个方法返回true如果：
+     * <ul>
+     *  <li> <i> p </i>是FilePermission的实例,<li> <i> p </i>的操作是此对象操作的一个子集,<li> <i> p </i >的路径名由该对象的路径名隐含。
+     * 例如,"/ tmp / *"意味着"/ tmp / foo",因为"/ tmp / *"包含"/ tmp"目录中的所有文件,包括名为"foo"的文件。
+     * </ul>
+     * 
+     * 
      * @param p the permission to check against.
      *
      * @return <code>true</code> if the specified permission is not
@@ -331,6 +426,10 @@ public final class FilePermission extends Permission implements Serializable {
      * this object's actions. Returns the effective mask iff the
      * this FilePermission's path also implies that FilePermission's path.
      *
+     * <p>
+     *  检查权限的操作是否是此对象操作的正确子集。如果此FilePermission的路径也暗示FilePermission的路径,则返回有效掩码。
+     * 
+     * 
      * @param that the FilePermission to check against.
      * @return the effective mask
      */
@@ -381,6 +480,10 @@ public final class FilePermission extends Permission implements Serializable {
      * Checks two FilePermission objects for equality. Checks that <i>obj</i> is
      * a FilePermission, and has the same pathname and actions as this object.
      *
+     * <p>
+     *  检查两个FilePermission对象是否相等。检查<i> obj </i>是否为FilePermission,并且具有与此对象相同的路径名和操作。
+     * 
+     * 
      * @param obj the object we are testing for equality with this object.
      * @return <code>true</code> if obj is a FilePermission, and has the same
      *          pathname and actions as this FilePermission object,
@@ -404,6 +507,10 @@ public final class FilePermission extends Permission implements Serializable {
     /**
      * Returns the hash code value for this object.
      *
+     * <p>
+     *  返回此对象的哈希码值。
+     * 
+     * 
      * @return a hash code value for this object.
      */
     public int hashCode() {
@@ -413,6 +520,10 @@ public final class FilePermission extends Permission implements Serializable {
     /**
      * Converts an actions String to an actions mask.
      *
+     * <p>
+     *  将操作字符串转换为操作掩码。
+     * 
+     * 
      * @param actions the action string.
      * @return the actions mask.
      */
@@ -542,6 +653,10 @@ public final class FilePermission extends Permission implements Serializable {
     /**
      * Return the current action mask. Used by the FilePermissionCollection.
      *
+     * <p>
+     *  返回当前操作掩码。由FilePermissionCollection使用。
+     * 
+     * 
      * @return the actions mask.
      */
     int getMask() {
@@ -553,6 +668,10 @@ public final class FilePermission extends Permission implements Serializable {
      * Always returns present actions in the following order:
      * read, write, execute, delete, readlink.
      *
+     * <p>
+     *  返回操作的规范字符串表示形式。始终按以下顺序返回当前操作：读取,写入,执行,删除,读取链接。
+     * 
+     * 
      * @return the canonical string representation of the actions.
      */
     private static String getActions(int mask) {
@@ -598,6 +717,11 @@ public final class FilePermission extends Permission implements Serializable {
      * object allows both write and read actions, a call to <code>getActions</code>
      * will return the string "read,write".
      *
+     * <p>
+     * 返回操作的"规范字符串表示"。也就是说,此方法总是按以下顺序返回当前操作：读取,写入,执行,删除,读取链接。
+     * 例如,如果此FilePermission对象允许写入和读取操作,则调用<code> getActions </code>将返回字符串"read,write"。
+     * 
+     * 
      * @return the canonical string representation of the actions.
      */
     public String getActions() {
@@ -635,6 +759,26 @@ public final class FilePermission extends Permission implements Serializable {
      * FilePermissions are handled properly by the PermissionCollection object
      * returned by this <code>newPermissionCollection</code> method.
      *
+     * <p>
+     *  返回用于存储FilePermission对象的新PermissionCollection对象。
+     * <p>
+     *  FilePermission对象必须以允许以任何顺序插入到集合中的方式存储,但这也使得PermissionCollection <code>隐含</code>方法能够以高效(且一致)的方式实现。
+     * 
+     *  <p>例如,如果您有两个FilePermissions：
+     * <OL>
+     *  <li> <code>"/ tmp /  - ","read"</code> <li> <code>"/ tmp / scratch / foo"
+     * </OL>
+     * 
+     *  <p>,您正在使用FilePermission调用<code>隐含</code>方法：
+     * 
+     * <pre>
+     *  "/ tmp / scratch / foo","读取,写入",
+     * </pre>
+     * 
+     *  那么<code>意味着</code>函数必须考虑"/ tmp /  - "和"/ tmp / scratch / foo"权限,因此有效权限是"读取,写入" </code>返回true。
+     *  FilePermissions的"隐含"语义由此<code> newPermissionCollection </code>方法返回的PermissionCollection对象正确处理。
+     * 
+     * 
      * @return a new PermissionCollection object suitable for storing
      * FilePermissions.
      */
@@ -646,6 +790,9 @@ public final class FilePermission extends Permission implements Serializable {
      * WriteObject is called to save the state of the FilePermission
      * to a stream. The actions are serialized, and the superclass
      * takes care of the name.
+     * <p>
+     *  WriteObject被调用以将FilePermission的状态保存到流。操作是序列化的,超类负责处理名称。
+     * 
      */
     private void writeObject(ObjectOutputStream s)
         throws IOException
@@ -660,6 +807,9 @@ public final class FilePermission extends Permission implements Serializable {
     /**
      * readObject is called to restore the state of the FilePermission from
      * a stream.
+     * <p>
+     *  readObject被调用以从流中恢复FilePermission的状态。
+     * 
      */
     private void readObject(ObjectInputStream s)
          throws IOException, ClassNotFoundException
@@ -686,6 +836,16 @@ public final class FilePermission extends Permission implements Serializable {
  * take into account both the /tmp/- and /tmp/scratch/foo
  * permissions, so the effective permission is "read,write".
  *
+ * <p>
+ * FilePermissionCollection存储一组FilePermission权限。
+ *  FilePermission对象必须以允许以任何顺序插入的方式存储,但启用implies函数来评估implies方法。例如,如果您有两个FilePermissions：。
+ * <OL>
+ *  <LI>"/ tmp /  - ","read"<LI>"/ tmp / scratch / foo"
+ * </OL>
+ *  并且你使用FilePermission："/ tmp / scratch / foo","read,write"调用implies函数,那么implies函数必须同时考虑/ tmp /  - 和/ t
+ * mp / scratch / foo权限,有效权限是"读,写"。
+ * 
+ * 
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.PermissionCollection
@@ -706,6 +866,9 @@ final class FilePermissionCollection extends PermissionCollection
 
     /**
      * Create an empty FilePermissionCollection object.
+     * <p>
+     *  创建一个空FilePermissionCollection对象。
+     * 
      */
     public FilePermissionCollection() {
         perms = new ArrayList<>();
@@ -715,6 +878,10 @@ final class FilePermissionCollection extends PermissionCollection
      * Adds a permission to the FilePermissionCollection. The key for the hash is
      * permission.path.
      *
+     * <p>
+     *  向FilePermissionCollection添加权限。哈希的键是permission.path。
+     * 
+     * 
      * @param permission the Permission object to add.
      *
      * @exception IllegalArgumentException - if the permission is not a
@@ -740,6 +907,10 @@ final class FilePermissionCollection extends PermissionCollection
      * Check and see if this set of permissions implies the permissions
      * expressed in "permission".
      *
+     * <p>
+     *  检查并确定这组权限是否意味着在"权限"中表达的权限。
+     * 
+     * 
      * @param permission the Permission object to compare
      *
      * @return true if "permission" is a proper subset of a permission in
@@ -774,6 +945,10 @@ final class FilePermissionCollection extends PermissionCollection
      * Returns an enumeration of all the FilePermission objects in the
      * container.
      *
+     * <p>
+     *  返回容器中所有FilePermission对象的枚举。
+     * 
+     * 
      * @return an enumeration of all the FilePermission objects.
      */
     public Enumeration<Permission> elements() {
@@ -790,6 +965,8 @@ final class FilePermissionCollection extends PermissionCollection
     //    private Vector permissions;
 
     /**
+    /* <p>
+    /* 
      * @serialField permissions java.util.Vector
      *     A list of FilePermission objects.
      */
@@ -798,11 +975,16 @@ final class FilePermissionCollection extends PermissionCollection
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData "permissions" field (a Vector containing the FilePermissions).
      */
     /*
      * Writes the contents of the perms field out as a Vector for
      * serialization compatibility with earlier releases.
+     * <p>
+     *  将perms字段的内容作为Vector与先前版本的序列化兼容性写入。
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -820,6 +1002,8 @@ final class FilePermissionCollection extends PermissionCollection
 
     /*
      * Reads in a Vector of FilePermissions and saves them in the perms field.
+     * <p>
+     *  读取FilePermissions的向量并将其保存在perms字段中。
      */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -108,6 +109,57 @@ import java.nio.channels.spi.SelectorProvider;
  * or write operation while an invocation of one of these methods is in
  * progress will block until that invocation is complete.  </p>
  *
+ * <p>
+ *  用于面向流的连接插座的可选通道。
+ * 
+ *  <p>套接字通道是通过调用此类的{@link #open open}方法之一创建的。不能为任意预先存在的套接字创建通道。新创建的套接字通道已打开但尚未连接。
+ * 尝试在未连接的通道上调用I / O操作将导致抛出{@link NotYetConnectedException}。
+ * 套接字通道可以通过调用其{@link #connect connect}方法来连接;一旦连接,插座通道保持连接直到其关闭。
+ * 是否连接套接字通道可以通过调用其{@link #isConnected isConnected}方法来确定。
+ * 
+ *  <p>套接字通道支持<i>非阻塞连接：</i>&nbsp;可以创建套接字通道,并且可以通过{@link #connect connect}方法启动建立到远程套接字的链接的过程稍后由{@link #finishConnect finishConnect}
+ * 方法完成。
+ * 是否正在进行连接操作可以通过调用{@link #isConnectionPending isConnectionPending}方法来确定。
+ * 
+ * <p>套接字通道支持<i>异步关闭</i>,这与{@link Channel}类中指定的异步关闭操作类似。
+ * 如果套接字的输入端被一个线程关闭,而另一个线程在套接字通道上的读操作中被阻塞,那么阻塞线程中的读操作将在不读取任何字节的情况下完成,并将返回<tt> -1 < / tt>。
+ * 如果套接字的输出端被一个线程关闭,而另一个线程在套接字的通道上的写操作中被阻塞,那么被阻塞的线程将接收{@link AsynchronousCloseException}。
+ * 
+ *  <p>使用{@link #setOption(SocketOption,Object)setOption}方法配置套接字选项。套接字通道支持以下选项：
+ * <blockquote>
+ * <table border summary="Socket options">
+ * <tr>
+ *  <th>选项名称</th> <th>说明</th>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_SNDBUF SO_SNDBUF} </td> <td>套接字发送缓冲区的大小</td>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_RCVBUF SO_RCVBUF} </td> <td>套接字接收缓冲区的大小</td>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_KEEPALIVE SO_KEEPALIVE} </td> <td>保持连接活动</td>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_REUSEADDR SO_REUSEADDR} </td> <td>重新使用地址</td>
+ * </tr>
+ * <tr>
+ *  <td> {@link java.net.StandardSocketOptions#SO_LINGER SO_LINGER} </td> <td>如果数据存在,则关闭(仅在阻止模式下配置)</td>
+ * 。
+ * </tr>
+ * <tr>
+ * <td> {@link java.net.StandardSocketOptions#TCP_NODELAY TCP_NODELAY} </td> <td>禁用Nagle算法</td>
+ * </tr>
+ * </table>
+ * </blockquote>
+ *  还可以支持附加(实现特定)选项。
+ * 
+ *  <p>套接字通道可安全地用于多个并发线程。它们支持并发读取和写入,但是最多一个线程可能正在读取,并且最多一个线程可能在任何给定时间写入。
+ *  {@link #connect connect}和{@link #finishConnect finishConnect}方法彼此相互同步,并且在调用这些方法之一时尝试启动读取或写入操作将阻塞,直到该
+ * 调用做完了。
+ *  <p>套接字通道可安全地用于多个并发线程。它们支持并发读取和写入,但是最多一个线程可能正在读取,并且最多一个线程可能在任何给定时间写入。 </p>。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -121,6 +173,10 @@ public abstract class SocketChannel
     /**
      * Initializes a new instance of this class.
      *
+     * <p>
+     *  初始化此类的新实例。
+     * 
+     * 
      * @param  provider
      *         The provider that created this channel
      */
@@ -136,6 +192,14 @@ public abstract class SocketChannel
      * openSocketChannel} method of the system-wide default {@link
      * java.nio.channels.spi.SelectorProvider} object.  </p>
      *
+     * <p>
+     *  打开套接字通道。
+     * 
+     *  <p>新频道是通过调用系统级默认{@link java.nio.channels.spi.SelectorProvider}对象的{@link java.nio.channels.spi.SelectorProvider#openSocketChannel openSocketChannel}
+     * 方法创建的。
+     *  </p>。
+     * 
+     * 
      * @return  A new socket channel
      *
      * @throws  IOException
@@ -153,6 +217,14 @@ public abstract class SocketChannel
      * the resulting socket channel, passing it <tt>remote</tt>, and then
      * returning that channel.  </p>
      *
+     * <p>
+     *  打开套接字通道并将其连接到远程地址。
+     * 
+     *  <p>这种方便的方法好像是通过调用{@link #open()}方法,在产生的套接字通道上调用{@link #connect(SocketAddress)connect}方法,传递<tt> remot
+     * e </tt >,然后返回该通道。
+     *  </p>。
+     * 
+     * 
      * @param  remote
      *         The remote address to which the new channel is to be connected
      *
@@ -208,6 +280,14 @@ public abstract class SocketChannel
      * <tt>|</tt>&nbsp;{@link SelectionKey#OP_READ} <tt>|</tt>&nbsp;{@link
      * SelectionKey#OP_WRITE}<tt>)</tt>.  </p>
      *
+     * <p>
+     *  返回标识此通道支持的操作的操作集。
+     * 
+     * <p>套接字频道支持连接,读取和写入,因此此方法返回<tt>(</tt> {@ link SelectionKey#OP_CONNECT} <tt> | </tt>&nbsp; {@ link SelectionKey#OP_READ}
+     *  tt> | </tt>&nbsp; {@ link SelectionKey#OP_WRITE} <tt>)</tt>。
+     *  </p>。
+     * 
+     * 
      * @return  The valid-operation set
      */
     public final int validOps() {
@@ -220,6 +300,8 @@ public abstract class SocketChannel
     // -- Socket-specific operations --
 
     /**
+    /* <p>
+    /* 
      * @throws  ConnectionPendingException
      *          If a non-blocking connect operation is already in progress on
      *          this channel
@@ -239,6 +321,8 @@ public abstract class SocketChannel
         throws IOException;
 
     /**
+    /* <p>
+    /* 
      * @throws  UnsupportedOperationException           {@inheritDoc}
      * @throws  IllegalArgumentException                {@inheritDoc}
      * @throws  ClosedChannelException                  {@inheritDoc}
@@ -257,6 +341,12 @@ public abstract class SocketChannel
      * return {@code -1}, the end-of-stream indication. If the input side of the
      * connection is already shutdown then invoking this method has no effect.
      *
+     * <p>
+     *  关闭连接以进行读取,而不关闭通道。
+     * 
+     *  <p>一旦关闭读取,则通道上的进一步读取将返回{@code -1},流末端指示。如果连接的输入端已经关闭,则调用此方法不起作用。
+     * 
+     * 
      * @return  The channel
      *
      * @throws  NotYetConnectedException
@@ -278,6 +368,12 @@ public abstract class SocketChannel
      * the connection is already shutdown then invoking this method has no
      * effect.
      *
+     * <p>
+     *  关闭用于写入的连接,而不关闭通道。
+     * 
+     *  <p>一旦关闭写入,则进一步尝试写入通道将抛出{@link ClosedChannelException}。如果连接的输出端已经关闭,那么调用此方法没有效果。
+     * 
+     * 
      * @return  The channel
      *
      * @throws  NotYetConnectedException
@@ -297,6 +393,12 @@ public abstract class SocketChannel
      * <p> The returned object will not declare any public methods that are not
      * declared in the {@link java.net.Socket} class.  </p>
      *
+     * <p>
+     *  检索与此通道关联的套接字。
+     * 
+     *  <p>返回的对象不会声明任何未在{@link java.net.Socket}类中声明的公共方法。 </p>
+     * 
+     * 
      * @return  A socket associated with this channel
      */
     public abstract Socket socket();
@@ -304,6 +406,10 @@ public abstract class SocketChannel
     /**
      * Tells whether or not this channel's network socket is connected.
      *
+     * <p>
+     *  告诉这个通道的网络插座是否连接。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this channel's network socket
      *          is {@link #isOpen open} and connected
      */
@@ -313,6 +419,10 @@ public abstract class SocketChannel
      * Tells whether or not a connection operation is in progress on this
      * channel.
      *
+     * <p>
+     *  告知此通道上的连接操作是否正在进行。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, a connection operation has been
      *          initiated on this channel but not yet completed by invoking the
      *          {@link #finishConnect finishConnect} method
@@ -346,6 +456,23 @@ public abstract class SocketChannel
      * that is, if an invocation of this method throws a checked exception,
      * then the channel will be closed.  </p>
      *
+     * <p>
+     *  连接此通道的插座。
+     * 
+     * <p>如果此通道处于非阻塞模式,则调用此方法将启动非阻塞连接操作。如果立即建立连接,就像使用本地连接一样,则此方法返回<tt> true </tt>。
+     * 否则,此方法返回<tt> false </tt>,并且连接操作必须稍后通过调用{@link #finishConnect finishConnect}方法完成。
+     * 
+     *  <p>如果此通道处于阻塞模式,则调用此方法将阻塞,直到建立连接或发生I / O错误。
+     * 
+     *  <p>此方法执行与{@link java.net.Socket}类完全相同的安全检查。
+     * 也就是说,如果安装了安全管理器,则此方法将验证其{@link java.lang.SecurityManager#checkConnect checkConnect}方法是否允许连接到给定远程端点的地址
+     * 和端口号。
+     *  <p>此方法执行与{@link java.net.Socket}类完全相同的安全检查。
+     * 
+     *  <p>此方法可能随时被调用。如果在调用此方法的同时调用此通道上的读取或写入操作,则该操作将首先阻塞,直到此调用完成。
+     * 如果连接尝试启动但失败,也就是说,如果调用此方法抛出一个已检查的异常,则通道将关闭。 </p>。
+     * 
+     * 
      * @param  remote
      *         The remote address to which this channel is to be connected
      *
@@ -414,6 +541,19 @@ public abstract class SocketChannel
      * invocation of this method throws a checked exception, then the channel
      * will be closed.  </p>
      *
+     * <p>
+     *  完成连接套接字通道的过程。
+     * 
+     * <p>通过将套接字通道置于非阻塞模式,然后调用其{@link #connect connect}方法,启动非阻塞连接操作。
+     * 一旦建立连接或者尝试失败,套接字通道将变为可连接的,并且可以调用该方法来完成连接序列。如果连接操作失败,则调用此方法将导致适当的{@link java.io.IOException}被抛出。
+     * 
+     *  <p>如果此频道已连接,则此方法不会阻止,并会立即返回<tt> true </tt>。如果此通道处于非阻塞模式,则如果连接进程尚未完成,则此方法将返回<tt> false </tt>。
+     * 如果此通道处于阻塞模式,则此方法将阻塞,直到连接完成或失败,并且将始终返回<tt> true </tt>或抛出一个描述失败的已检查异常。
+     * 
+     *  <p>此方法可能随时被调用。如果在调用此方法的同时调用此通道上的读取或写入操作,则该操作将首先阻塞,直到此调用完成。如果连接尝试失败,也就是说,如果此方法的调用引发检查异常,则通道将关闭。
+     *  </p>。
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, this channel's socket is now
      *          connected
      *
@@ -446,6 +586,12 @@ public abstract class SocketChannel
      * socket address then the return value from this method is of type {@link
      * java.net.InetSocketAddress}.
      *
+     * <p>
+     *  返回此通道的套接字所连接的远程地址。
+     * 
+     * <p>当频道绑定并连接到Internet协议套接字地址时,此方法的返回值的类型为{@link java.net.InetSocketAddress}。
+     * 
+     * 
      * @return  The remote address; {@code null} if the channel's socket is not
      *          connected
      *
@@ -461,12 +607,16 @@ public abstract class SocketChannel
     // -- ByteChannel operations --
 
     /**
+    /* <p>
+    /* 
      * @throws  NotYetConnectedException
      *          If this channel is not yet connected
      */
     public abstract int read(ByteBuffer dst) throws IOException;
 
     /**
+    /* <p>
+    /* 
      * @throws  NotYetConnectedException
      *          If this channel is not yet connected
      */
@@ -474,6 +624,8 @@ public abstract class SocketChannel
         throws IOException;
 
     /**
+    /* <p>
+    /* 
      * @throws  NotYetConnectedException
      *          If this channel is not yet connected
      */
@@ -482,12 +634,16 @@ public abstract class SocketChannel
     }
 
     /**
+    /* <p>
+    /* 
      * @throws  NotYetConnectedException
      *          If this channel is not yet connected
      */
     public abstract int write(ByteBuffer src) throws IOException;
 
     /**
+    /* <p>
+    /* 
      * @throws  NotYetConnectedException
      *          If this channel is not yet connected
      */
@@ -495,6 +651,8 @@ public abstract class SocketChannel
         throws IOException;
 
     /**
+    /* <p>
+    /* 
      * @throws  NotYetConnectedException
      *          If this channel is not yet connected
      */
@@ -512,6 +670,12 @@ public abstract class SocketChannel
      * {@link java.net.InetAddress#getLoopbackAddress loopback} address and the
      * local port of the channel's socket is returned.
      *
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     *  如果存在安全管理器集,则会使用本地地址和{@code -1}作为其参数来调用其{@code checkConnect}方法,以查看是否允许该操作。
+     * 如果不允许该操作,则返回表示{@link java.net.InetAddress#getLoopbackAddress loopback}地址和通道套接字的本地端口的{@code SocketAddress}
+     * 
      * @return  The {@code SocketAddress} that the socket is bound to, or the
      *          {@code SocketAddress} representing the loopback address if
      *          denied by the security manager, or {@code null} if the

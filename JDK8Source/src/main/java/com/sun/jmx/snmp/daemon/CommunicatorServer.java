@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -107,6 +108,36 @@ import javax.management.remote.MBeanServerForwarder;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  定义连接器或适配器的服务器部分的通用行为。大多数连接器或适配器扩展<CODE> CommunicatorServer </CODE>并继承此行为。
+ * 不适合此型号的连接器或适配器不扩展<CODE> CommunicatorServer </CODE>。
+ * <p>
+ *  <CODE> CommunicatorServer </CODE>是一个活动对象,它侦听客户端请求并在自己的线程中处理它们。
+ * 必要时,<CODE> CommunicatorServer </CODE>创建其他线程以并发处理多个请求。
+ * <p>
+ *  可以通过调用<CODE> stop </CODE>方法停止<CODE> CommunicatorServer </CODE>对象。
+ * 当它停止时,<CODE> CommunicatorServer </CODE>不再侦听客户端请求,不再持有任何线程或通信资源。可以通过调用<CODE> start </CODE>方法重新启动。
+ * <p>
+ *  <CODE> CommunicatorServer </CODE>具有反映其活动的<CODE>状态</CODE>属性。
+ * <p>
+ * <TABLE>
+ *  <TR> <TH> CommunicatorServer </TH> <TH>状态</TH> </TR> <TR> <TD> <CODE>已停止</CODE> </TD> <TD> <CODE> CO
+ * DE>开始</CODE> </TD> </TR> <TR> </TD> </TD> <TD> <CODE>运行</CODE> </TD> <TD> <CODE>在线</CODE> </TD> </TR>
+ *  <TR> <TD> <CODE> TD> <TD> <CODE> STOPPING </CODE> </TD> </TR>。
+ * </TABLE>
+ * <p>
+ * <CODE> STARTING </CODE>状态标记从<CODE> OFFLINE </CODE>到<CODE> ONLINE </CODE>的转换。
+ * <p>
+ *  <CODE> STOPPING </CODE>状态标记从<CODE>在线</CODE>到<CODE>离线</CODE>的转换。
+ * 当<CODE> CommunicatorServer </CODE>正在完成或中断活动请求时,会发生这种情况。
+ * <p>
+ *  当<CODE> CommunicatorServer </CODE>从MBeanServer注销时,它会自动停止。
+ * <p>
+ *  当<CODE> State </CODE>属性的值更改时,<CODE> CommunicatorServer </CODE>向注册的侦听器发送<tt> {@ link javax.management.AttributeChangeNotification}
+ *  </tt>。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public abstract class CommunicatorServer
@@ -119,21 +150,33 @@ public abstract class CommunicatorServer
 
     /**
      * Represents an <CODE>ONLINE</CODE> state.
+     * <p>
+     *  表示<CODE>在线</CODE>状态。
+     * 
      */
     public static final int ONLINE = 0 ;
 
     /**
      * Represents an <CODE>OFFLINE</CODE> state.
+     * <p>
+     *  表示<CODE>离线</CODE>状态。
+     * 
      */
     public static final int OFFLINE = 1 ;
 
     /**
      * Represents a <CODE>STOPPING</CODE> state.
+     * <p>
+     *  表示<CODE> STOPPING </CODE>状态。
+     * 
      */
     public static final int STOPPING = 2 ;
 
     /**
      * Represents a <CODE>STARTING</CODE> state.
+     * <p>
+     *  表示<CODE>开始</CODE>状态。
+     * 
      */
     public static final int STARTING = 3 ;
 
@@ -143,26 +186,41 @@ public abstract class CommunicatorServer
 
     /**
      * Indicates that it is an RMI connector type.
+     * <p>
+     *  表示它是RMI连接器类型。
+     * 
      */
     //public static final int RMI_TYPE = 1 ;
 
     /**
      * Indicates that it is an HTTP connector type.
+     * <p>
+     *  表示它是HTTP连接器类型。
+     * 
      */
     //public static final int HTTP_TYPE = 2 ;
 
     /**
      * Indicates that it is an HTML connector type.
+     * <p>
+     *  表示它是HTML连接器类型。
+     * 
      */
     //public static final int HTML_TYPE = 3 ;
 
     /**
      * Indicates that it is an SNMP connector type.
+     * <p>
+     *  表示它是SNMP连接器类型。
+     * 
      */
     public static final int SNMP_TYPE = 4 ;
 
     /**
      * Indicates that it is an HTTPS connector type.
+     * <p>
+     *  表示它是HTTPS连接器类型。
+     * 
      */
     //public static final int HTTPS_TYPE = 5 ;
 
@@ -172,11 +230,18 @@ public abstract class CommunicatorServer
 
     /**
      * The state of the connector server.
+     * <p>
+     *  连接器服务器的状态。
+     * 
      */
      transient volatile int state = OFFLINE ;
 
     /**
      * The object name of the connector server.
+     * <p>
+     *  连接器服务器的对象名称。
+     * 
+     * 
      * @serial
      */
     ObjectName objectName ;
@@ -185,28 +250,42 @@ public abstract class CommunicatorServer
     MBeanServer bottomMBS;
 
     /**
+    /* <p>
      */
     transient String dbgTag = null ;
 
     /**
      * The maximum number of clients that the CommunicatorServer can
      * process concurrently.
+     * <p>
+     *  CommunicatorServer可以并发处理的最大客户端数。
+     * 
+     * 
      * @serial
      */
     int maxActiveClientCount = 1 ;
 
     /**
+    /* <p>
      */
     transient int servedClientCount = 0 ;
 
     /**
      * The host name used by this CommunicatorServer.
+     * <p>
+     *  此CommunicatorServer使用的主机名。
+     * 
+     * 
      * @serial
      */
     String host = null ;
 
     /**
      * The port number used by this CommunicatorServer.
+     * <p>
+     *  此CommunicatorServer使用的端口号。
+     * 
+     * 
      * @serial
      */
     int port = -1 ;
@@ -218,6 +297,10 @@ public abstract class CommunicatorServer
 
     /* This object controls access to the "state" and "interrupted" variables.
        If held at the same time as the lock on "this", the "this" lock must
+    /* <p>
+    /*  如果在锁定的同时保持"this","this"锁必须
+    /* 
+    /* 
        be taken first.  */
     private transient Object stateLock = new Object();
 
@@ -240,6 +323,10 @@ public abstract class CommunicatorServer
     /**
      * Instantiates a <CODE>CommunicatorServer</CODE>.
      *
+     * <p>
+     *  实例化<CODE> CommunicatorServer </CODE>。
+     * 
+     * 
      * @param connectorType Indicates the connector type. Possible values are:
      * SNMP_TYPE.
      *
@@ -267,6 +354,12 @@ public abstract class CommunicatorServer
      * <p>
      * Has no effect if this <CODE>CommunicatorServer</CODE> is
      * <CODE>ONLINE</CODE> or <CODE>STOPPING</CODE>.
+     * <p>
+     * 启动此<CODE> CommunicatorServer </CODE>。
+     * <p>
+     *  如果此<CODE> CommunicatorServer </CODE>为<CODE>在线</CODE>或<CODE> STOPPING </CODE>,则不起作用。
+     * 
+     * 
      * @param timeout Time in ms to wait for the connector to start.
      *        If <code>timeout</code> is positive, wait for at most
      *        the specified time. An infinite timeout can be specified
@@ -323,6 +416,11 @@ public abstract class CommunicatorServer
      * <p>
      * Has no effect if this <CODE>CommunicatorServer</CODE> is
      * <CODE>ONLINE</CODE> or <CODE>STOPPING</CODE>.
+     * <p>
+     *  启动此<CODE> CommunicatorServer </CODE>。
+     * <p>
+     *  如果此<CODE> CommunicatorServer </CODE>为<CODE>在线</CODE>或<CODE> STOPPING </CODE>,则不起作用。
+     * 
      */
     @Override
     public void start() {
@@ -342,6 +440,11 @@ public abstract class CommunicatorServer
      * <p>
      * Has no effect if this <CODE>CommunicatorServer</CODE> is
      * <CODE>OFFLINE</CODE> or  <CODE>STOPPING</CODE>.
+     * <p>
+     *  停止此<CODE> CommunicatorServer </CODE>。
+     * <p>
+     *  如果此<CODE> CommunicatorServer </CODE>为<CODE> OFFLINE </CODE>或<CODE> STOPPING </CODE>,则不起作用。
+     * 
      */
     @Override
     public void stop() {
@@ -389,6 +492,10 @@ public abstract class CommunicatorServer
     /**
      * Tests whether the <CODE>CommunicatorServer</CODE> is active.
      *
+     * <p>
+     *  测试<CODE> CommunicatorServer </CODE>是否处于活动状态。
+     * 
+     * 
      * @return True if connector is <CODE>ONLINE</CODE>; false otherwise.
      */
     @Override
@@ -415,6 +522,16 @@ public abstract class CommunicatorServer
      *     is the same as the <VAR>wantedState</VAR> parameter (i.e. will wait
      *     indefinitely if this condition is never met).</LI></UL>
      *
+     * <p>
+     *  <p>等待,直到此MBean的State属性等于指定的<VAR> wantedState </VAR>参数,或指定的<VAR> timeOut </VAR>已过。
+     * 方法<CODE> waitState </CODE>返回一个布尔值,指示方法终止时指定的<VAR> wantedState </VAR>参数是否等于此MBean的State属性的值。</p>。
+     * 
+     *  <p> <VAR> timeOut </VAR>参数值的两种特殊情况是：</p> <UL> <LI>如果<VAR> timeOut </VAR>为负,那么<CODE> waitState </CODE>
+     * 立即返回(即完全不等待),</LI> <LI>如果<VAR> timeOut </VAR>等于零,那么<CODE> waitState </CODE>等待,直到此MBean的State属性的值相同作为<VAR>
+     *  wantedState </VAR>参数(即,如果永远不满足该条件,将无限期地等待)。
+     * </LI> </UL>。
+     * 
+     * 
      * @param wantedState The value of this MBean's State attribute to wait
      *        for. <VAR>wantedState</VAR> can be one of:
      * <ul>
@@ -485,6 +602,10 @@ public abstract class CommunicatorServer
     /**
      * <p>Waits until the communicator is started or timeout expires.
      *
+     * <p>
+     *  <p>等待直到通信器启动或超时到期。
+     * 
+     * 
      * @param timeout Time in ms to wait for the connector to start.
      *        If <code>timeout</code> is positive, wait for at most
      *        the specified time. An infinite timeout can be specified
@@ -592,6 +713,10 @@ public abstract class CommunicatorServer
     /**
      * Gets the state of this <CODE>CommunicatorServer</CODE> as an integer.
      *
+     * <p>
+     *  获取此<CODE> CommunicatorServer </CODE>的状态为整数。
+     * 
+     * 
      * @return <CODE>ONLINE</CODE>, <CODE>OFFLINE</CODE>,
      *         <CODE>STARTING</CODE> or <CODE>STOPPING</CODE>.
      */
@@ -605,6 +730,10 @@ public abstract class CommunicatorServer
     /**
      * Gets the state of this <CODE>CommunicatorServer</CODE> as a string.
      *
+     * <p>
+     * 获取此<CODE> CommunicatorServer </CODE>的状态为字符串。
+     * 
+     * 
      * @return One of the strings "ONLINE", "OFFLINE", "STARTING" or
      *         "STOPPING".
      */
@@ -616,6 +745,10 @@ public abstract class CommunicatorServer
     /**
      * Gets the host name used by this <CODE>CommunicatorServer</CODE>.
      *
+     * <p>
+     *  获取此<CODE> CommunicatorServer </CODE>使用的主机名。
+     * 
+     * 
      * @return The host name used by this <CODE>CommunicatorServer</CODE>.
      */
     @Override
@@ -631,6 +764,10 @@ public abstract class CommunicatorServer
     /**
      * Gets the port number used by this <CODE>CommunicatorServer</CODE>.
      *
+     * <p>
+     *  获取此<CODE> CommunicatorServer </CODE>使用的端口号。
+     * 
+     * 
      * @return The port number used by this <CODE>CommunicatorServer</CODE>.
      */
     @Override
@@ -643,6 +780,10 @@ public abstract class CommunicatorServer
     /**
      * Sets the port number used by this <CODE>CommunicatorServer</CODE>.
      *
+     * <p>
+     *  设置此<CODE> CommunicatorServer </CODE>使用的端口号。
+     * 
+     * 
      * @param port The port number used by this
      *             <CODE>CommunicatorServer</CODE>.
      *
@@ -662,6 +803,10 @@ public abstract class CommunicatorServer
 
     /**
      * Gets the protocol being used by this <CODE>CommunicatorServer</CODE>.
+     * <p>
+     *  获取此<CODE> CommunicatorServer </CODE>正在使用的协议。
+     * 
+     * 
      * @return The protocol as a string.
      */
     @Override
@@ -671,6 +816,10 @@ public abstract class CommunicatorServer
      * Gets the number of clients that have been processed by this
      * <CODE>CommunicatorServer</CODE>  since its creation.
      *
+     * <p>
+     *  获取此<CODE> CommunicatorServer </CODE>创建后处理的客户端数。
+     * 
+     * 
      * @return The number of clients handled by this
      *         <CODE>CommunicatorServer</CODE>
      *         since its creation. This counter is not reset by the
@@ -684,6 +833,10 @@ public abstract class CommunicatorServer
      * Gets the number of clients currently being processed by this
      * <CODE>CommunicatorServer</CODE>.
      *
+     * <p>
+     *  获取此<CODE> CommunicatorServer </CODE>正在处理的客户端数。
+     * 
+     * 
      * @return The number of clients currently being processed by this
      *         <CODE>CommunicatorServer</CODE>.
      */
@@ -696,6 +849,10 @@ public abstract class CommunicatorServer
      * Gets the maximum number of clients that this
      * <CODE>CommunicatorServer</CODE> can  process concurrently.
      *
+     * <p>
+     *  获取此<CODE> CommunicatorServer </CODE>可同时处理的客户端的最大数量。
+     * 
+     * 
      * @return The maximum number of clients that this
      *         <CODE>CommunicatorServer</CODE> can
      *         process concurrently.
@@ -708,6 +865,10 @@ public abstract class CommunicatorServer
      * Sets the maximum number of clients this
      * <CODE>CommunicatorServer</CODE> can process concurrently.
      *
+     * <p>
+     *  设置此<CODE> CommunicatorServer </CODE>可并发处理的客户端的最大数量。
+     * 
+     * 
      * @param c The number of clients.
      *
      * @exception java.lang.IllegalStateException This method has been invoked
@@ -726,6 +887,9 @@ public abstract class CommunicatorServer
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     void notifyClientHandlerCreated(ClientHandler h) {
         clientHandlerVector.addElement(h) ;
@@ -733,6 +897,9 @@ public abstract class CommunicatorServer
 
     /**
      * For SNMP Runtime internal use only.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * 
      */
     synchronized void notifyClientHandlerDeleted(ClientHandler h) {
         clientHandlerVector.removeElement(h);
@@ -742,6 +909,10 @@ public abstract class CommunicatorServer
     /**
      * The number of times the communicator server will attempt
      * to bind before giving up.
+     * <p>
+     *  通信器服务器在放弃之前将尝试绑定的次数。
+     * 
+     * 
      **/
     protected int getBindTries() {
         return 50;
@@ -750,6 +921,10 @@ public abstract class CommunicatorServer
     /**
      * The delay, in ms, during which the communicator server will sleep before
      * attempting to bind again.
+     * <p>
+     *  延迟(以毫秒为单位),通信器服务器在尝试再次绑定之前将休眠。
+     * 
+     * 
      **/
     protected long getBindSleepTime() {
         return 100;
@@ -759,6 +934,11 @@ public abstract class CommunicatorServer
      * For SNMP Runtime internal use only.
      * <p>
      * The <CODE>run</CODE> method executed by this connector's main thread.
+     * <p>
+     *  仅供SNMP Runtime内部使用。
+     * <p>
+     *  由此连接器的主线程执行的<CODE>运行</CODE>方法。
+     * 
      */
     @Override
     public void run() {
@@ -884,6 +1064,7 @@ public abstract class CommunicatorServer
     }
 
     /**
+    /* <p>
      */
     protected abstract void doError(Exception e) throws CommunicationException;
 
@@ -908,6 +1089,7 @@ public abstract class CommunicatorServer
     //
 
     /**
+    /* <p>
      */
     protected abstract void doBind()
         throws CommunicationException, InterruptedException ;
@@ -917,6 +1099,10 @@ public abstract class CommunicatorServer
      * If this method throws an exception, <CODE>doProcess()</CODE> is not
      * called but <CODE>doUnbind()</CODE> is called then <CODE>run()</CODE>
      * stops.
+     * <p>
+     *  <CODE> doReceive()</CODE>应阻止,直到客户端可用。
+     * 如果此方法抛出异常,则不调用<CODE> doProcess()</CODE>,而是调用<CODE> doUnbind()</CODE>,然后调用<CODE> run()</CODE>。
+     * 
      */
     protected abstract void doReceive()
         throws CommunicationException, InterruptedException ;
@@ -926,6 +1112,10 @@ public abstract class CommunicatorServer
      * it should process the requests of the incoming client.
      * If it throws an exception, <CODE>doUnbind()</CODE> is called and
      * <CODE>run()</CODE> stops.
+     * <p>
+     * <CODE> doProcess()</CODE>在<CODE> doReceive()</CODE>之后调用：它应该处理传入客户端的请求。
+     * 如果它抛出异常,则调用<CODE> doUnbind()</CODE>并停止<CODE> run()</CODE>。
+     * 
      */
     protected abstract void doProcess()
         throws CommunicationException, InterruptedException ;
@@ -934,6 +1124,9 @@ public abstract class CommunicatorServer
      * <CODE>doUnbind()</CODE> is called whenever the connector goes
      * <CODE>OFFLINE</CODE>, except if <CODE>doBind()</CODE> has thrown an
      * exception.
+     * <p>
+     *  <CODE> doUnbind()</CODE>在连接器变为<CODE> OFFLINE </CODE>时调用,除非<CODE> doBind()</CODE>引发异常。
+     * 
      */
     protected abstract void doUnbind()
         throws CommunicationException, InterruptedException ;
@@ -943,6 +1136,9 @@ public abstract class CommunicatorServer
      * sent.  This is either the MBean server in which this connector is
      * registered, or an <code>MBeanServerForwarder</code> leading to that
      * server.
+     * <p>
+     *  获取发送传入请求的<code> MBeanServer </code>对象。这是注册此连接器的MBean服务器或导向该服务器的<code> MBeanServerForwarder </code>。
+     * 
      */
     public synchronized MBeanServer getMBeanServer() {
         return topMBS;
@@ -959,6 +1155,14 @@ public abstract class CommunicatorServer
      * or an <code>MBeanServerForwarder</code> leading to
      * <code>mbs</code>.
      *
+     * <p>
+     *  设置发送传入请求的<code> MBeanServer </code>对象。
+     * 它必须是注册此连接器的MBean服务器或导向该服务器的<code> MBeanServerForwarder </code>。
+     * 如果<code> mbsf.getMBeanServer()</code>是<code> mbs </code>,则<code> MBeanServerForwarder </code> <code> 
+     * mbsf </code>会导向MBean服务器< / code>或导致<code> mbs </code>的<code> MBeanServerForwarder </code>。
+     * 它必须是注册此连接器的MBean服务器或导向该服务器的<code> MBeanServerForwarder </code>。
+     * 
+     * 
      * @exception IllegalArgumentException if <code>newMBS</code> is neither
      * the MBean server in which this connector is registered nor an
      * <code>MBeanServerForwarder</code> leading to that server.
@@ -996,6 +1200,9 @@ public abstract class CommunicatorServer
     //
     /**
      * For internal use only.
+     * <p>
+     *  仅限内部使用。
+     * 
      */
     ObjectName getObjectName() {
         return objectName ;
@@ -1003,6 +1210,9 @@ public abstract class CommunicatorServer
 
     /**
      * For internal use only.
+     * <p>
+     *  仅限内部使用。
+     * 
      */
     void changeState(int newState) {
         int oldState;
@@ -1018,6 +1228,9 @@ public abstract class CommunicatorServer
 
     /**
      * Returns the string used in debug traces.
+     * <p>
+     *  返回调试跟踪中使用的字符串。
+     * 
      */
     String makeDebugTag() {
         return "CommunicatorServer["+ getProtocol() + ":" + getPort() + "]" ;
@@ -1025,6 +1238,9 @@ public abstract class CommunicatorServer
 
     /**
      * Returns the string used to name the connector thread.
+     * <p>
+     *  返回用于命名连接器线程的字符串。
+     * 
      */
     String makeThreadName() {
         String result ;
@@ -1041,6 +1257,9 @@ public abstract class CommunicatorServer
      * This method blocks if there are too many active clients.
      * Call to <CODE>wait()</CODE> is terminated when a client handler
      * thread calls <CODE>notifyClientHandlerDeleted(this)</CODE> ;
+     * <p>
+     *  此方法阻止是否有太多活动客户端。当客户端处理程序线程调用<CODE> notifyClientHandlerDeleted(this)</CODE>时,调用<CODE> wait()</CODE>
+     * 
      */
     private synchronized void waitIfTooManyClients()
         throws InterruptedException {
@@ -1055,6 +1274,9 @@ public abstract class CommunicatorServer
 
     /**
      * This method blocks until there is no more active client.
+     * <p>
+     *  此方法阻塞,直到没有更多的活动客户端。
+     * 
      */
     private void waitClientTermination() {
         int s = clientHandlerVector.size() ;
@@ -1099,6 +1321,9 @@ public abstract class CommunicatorServer
 
     /**
      * Call <CODE>interrupt()</CODE> on each pending client.
+     * <p>
+     *  在每个挂起的客户端上调用<CODE> interrupt()</CODE>。
+     * 
      */
     private void terminateAllClient() {
         final int s = clientHandlerVector.size() ;
@@ -1144,6 +1369,9 @@ public abstract class CommunicatorServer
 
     /**
      * Controls the way the CommunicatorServer service is deserialized.
+     * <p>
+     * 控制CommunicatorServer服务反序列化的方式。
+     * 
      */
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
@@ -1181,6 +1409,13 @@ public abstract class CommunicatorServer
      * sent when the <tt>State</tt> attribute of this CommunicatorServer
      * changes.
      *
+     * <p>
+     *  为此CommunicatorServer发出的通知添加一个侦听器。
+     *  CommunicatorServer只发送一种类型的通知：它们是<CommunicatorServer <tt> State </tt>属性更改时发送的<tt> {@ link javax.management.AttributeChangeNotification}
+     *  </tt>。
+     *  为此CommunicatorServer发出的通知添加一个侦听器。
+     * 
+     * 
      * @param listener The listener object which will handle the emitted
      *        notifications.
      * @param filter The filter object. If filter is null, no filtering
@@ -1210,6 +1445,10 @@ public abstract class CommunicatorServer
      * handback objects or notification filters, all entries corresponding
      * to the listener will be removed.
      *
+     * <p>
+     *  从此CommunicatorServer中删除指定的侦听器。请注意,如果侦听器已注册了不同的手动对象或通知过滤器,则与侦听器相对应的所有条目都将被删除。
+     * 
+     * 
      * @param listener The listener object to be removed.
      *
      * @exception ListenerNotFoundException The listener is not registered.
@@ -1232,6 +1471,12 @@ public abstract class CommunicatorServer
      * it is <tt>{@link javax.management.AttributeChangeNotification}</tt>,
      * sent when the <tt>State</tt> attribute of this CommunicatorServer
      * changes.
+     * <p>
+     *  返回描述此CommunicatorServer发送的通知类型的MBeanNotificationInfo对象的数组。
+     *  CommunicatorServer只发送一种类型的通知：<CommunicatorServer <tt> State </tt>属性更改时发送<tt> {@ link javax.management.AttributeChangeNotification}
+     *  </tt>。
+     *  返回描述此CommunicatorServer发送的通知类型的MBeanNotificationInfo对象的数组。
+     * 
      */
     @Override
     public MBeanNotificationInfo[] getNotificationInfo() {
@@ -1253,6 +1498,7 @@ public abstract class CommunicatorServer
 
     /**
      *
+     * <p>
      */
     private void sendStateChangeNotification(int oldState, int newState) {
 
@@ -1284,6 +1530,7 @@ public abstract class CommunicatorServer
 
     /**
      *
+     * <p>
      */
     private static String getStringForState(int s) {
         switch (s) {
@@ -1303,6 +1550,10 @@ public abstract class CommunicatorServer
     /**
      * Preregister method of connector.
      *
+     * <p>
+     *  连接器的预注册方法。
+     * 
+     * 
      *@param server The <CODE>MBeanServer</CODE> in which the MBean will
      *       be registered.
      *@param name The object name of the MBean.
@@ -1331,6 +1582,8 @@ public abstract class CommunicatorServer
 
     /**
      *
+     * <p>
+     * 
      *@param registrationDone Indicates whether or not the MBean has been
      *       successfully registered in the <CODE>MBeanServer</CODE>.
      *       The value false means that the registration phase has failed.
@@ -1347,6 +1600,10 @@ public abstract class CommunicatorServer
     /**
      * Stop the connector.
      *
+     * <p>
+     *  停止连接器。
+     * 
+     * 
      * @exception java.langException This exception should be caught by
      *            the <CODE>MBeanServer</CODE> and re-thrown
      *            as an <CODE>MBeanRegistrationException</CODE>.
@@ -1365,6 +1622,8 @@ public abstract class CommunicatorServer
 
     /**
      * Do nothing.
+     * <p>
+     *  没做什么。
      */
     @Override
     public void postDeregister(){

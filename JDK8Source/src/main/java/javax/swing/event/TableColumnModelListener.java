@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import java.util.EventListener;
  * TableColumnModelListener defines the interface for an object that listens
  * to changes in a TableColumnModel.
  *
+ * <p>
+ *  TableColumnModelListener定义用于侦听TableColumnModel中的更改的对象的接口。
+ * 
+ * 
  * @author Alan Chung
  * @see TableColumnModelEvent
  */
@@ -54,6 +59,8 @@ public interface TableColumnModelListener extends java.util.EventListener
     /**
      * Tells listeners that the selection model of the
      * TableColumnModel changed.
+     * <p>
+     *  告诉监听器TableColumnModel的选择模型发生了变化。
      */
     public void columnSelectionChanged(ListSelectionEvent e);
 }

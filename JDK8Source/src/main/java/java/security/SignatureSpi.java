@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,12 @@ import sun.security.jca.JCAUtil;
  * cryptographic service provider who wishes to supply the implementation
  * of a particular signature algorithm.
  *
+ * <p>
+ *  此类为{@code Signature}类定义了<i>服务提供程序接口</i>(<b> SPI </b>),用于提供数字签名算法的功能。数字签名用于数字数据的认证和完整性保证。
+ * 
+ *  <p>此类中的所有抽象方法必须由希望提供特定签名算法实现的每个加密服务提供者实现。
+ * 
+ * 
  * @author Benjamin Renaud
  *
  *
@@ -53,6 +60,9 @@ public abstract class SignatureSpi {
 
     /**
      * Application-specified source of randomness.
+     * <p>
+     *  应用程序指定的随机源。
+     * 
      */
     protected SecureRandom appRandom = null;
 
@@ -60,6 +70,10 @@ public abstract class SignatureSpi {
      * Initializes this signature object with the specified
      * public key for verification operations.
      *
+     * <p>
+     *  使用指定的公钥初始化此签名对象以进行验证操作。
+     * 
+     * 
      * @param publicKey the public key of the identity whose signature is
      * going to be verified.
      *
@@ -73,6 +87,10 @@ public abstract class SignatureSpi {
      * Initializes this signature object with the specified
      * private key for signing operations.
      *
+     * <p>
+     *  使用指定的用于签名操作的私钥初始化此签名对象。
+     * 
+     * 
      * @param privateKey the private key of the identity whose signature
      * will be generated.
      *
@@ -89,6 +107,12 @@ public abstract class SignatureSpi {
      * <p>This concrete method has been added to this previously-defined
      * abstract class. (For backwards compatibility, it cannot be abstract.)
      *
+     * <p>
+     *  使用指定的私钥和用于签名操作的随机源初始化此签名对象。
+     * 
+     *  <p>这个具体方法已添加到此前定义的抽象类中。 (为了向后兼容,它不能是抽象的。)
+     * 
+     * 
      * @param privateKey the private key of the identity whose signature
      * will be generated.
      * @param random the source of randomness
@@ -107,6 +131,10 @@ public abstract class SignatureSpi {
      * Updates the data to be signed or verified
      * using the specified byte.
      *
+     * <p>
+     *  使用指定的字节更新要签名或验证的数据。
+     * 
+     * 
      * @param b the byte to use for the update.
      *
      * @exception SignatureException if the engine is not initialized
@@ -118,6 +146,10 @@ public abstract class SignatureSpi {
      * Updates the data to be signed or verified, using the
      * specified array of bytes, starting at the specified offset.
      *
+     * <p>
+     *  使用指定的字节数组,从指定的偏移量开始,更新要签名或验证的数据。
+     * 
+     * 
      * @param b the array of bytes
      * @param off the offset to start from in the array of bytes
      * @param len the number of bytes to use, starting at offset
@@ -135,6 +167,11 @@ public abstract class SignatureSpi {
      * Upon return, the buffer's position will be equal to its limit;
      * its limit will not have changed.
      *
+     * <p>
+     * 使用指定的ByteBuffer更新要签名或验证的数据。处理{@code data.remaining()}字节,从{@code data.position()}开始。
+     * 返回时,缓冲区的位置将等于其限制;其极限不会改变。
+     * 
+     * 
      * @param input the ByteBuffer
      * @since 1.5
      */
@@ -173,6 +210,10 @@ public abstract class SignatureSpi {
      * The format of the signature depends on the underlying
      * signature scheme.
      *
+     * <p>
+     *  返回到目前为止更新的所有数据的签名字节。签名的格式取决于底层签名方案。
+     * 
+     * 
      * @return the signature bytes of the signing operation's result.
      *
      * @exception SignatureException if the engine is not
@@ -198,6 +239,14 @@ public abstract class SignatureSpi {
      * binary compatibility.  Knowledgeable providers should override this
      * method.
      *
+     * <p>
+     *  完成此签名操作并将生成的签名字节存储在{@code outbuf}提供的缓冲区中,从{@code offset}开始。签名的格式取决于底层签名方案。
+     * 
+     *  <p>签名实现被重置为其初始状态(在调用{@code engineInitSign}方法之一后的状态),并且可以重新使用以生成具有相同私钥的其他签名。
+     * 
+     *  这个方法应该是抽象的,但我们把它具体的二进制兼容性。知识渊博的提供者应该重写这个方法。
+     * 
+     * 
      * @param outbuf buffer for the signature result.
      *
      * @param offset offset into {@code outbuf} where the signature is
@@ -240,6 +289,10 @@ public abstract class SignatureSpi {
     /**
      * Verifies the passed-in signature.
      *
+     * <p>
+     *  验证传入的签名。
+     * 
+     * 
      * @param sigBytes the signature bytes to be verified.
      *
      * @return true if the signature was verified, false if not.
@@ -259,6 +312,12 @@ public abstract class SignatureSpi {
      * <p> Note: Subclasses should overwrite the default implementation.
      *
      *
+     * <p>
+     *  从指定的偏移量开始,验证指定的字节数组中传入的签名。
+     * 
+     *  <p>注意：子类应该覆盖默认实现。
+     * 
+     * 
      * @param sigBytes the signature bytes to be verified.
      * @param offset the offset to start from in the array of bytes.
      * @param length the number of bytes to use, starting at offset.
@@ -289,6 +348,11 @@ public abstract class SignatureSpi {
      * naming scheme for each parameter is desirable but left unspecified
      * at this time.
      *
+     * <p>
+     * 将指定的算法参数设置为指定的值。该方法提供通用机制,通过该机制可以设置该对象的各种参数。
+     * 参数可以是用于算法的任何可设置参数,诸如参数大小或用于签名生成的随机比特的源(如果适当),或者是否执行特定但可选的计算的指示。对于每个参数的统一的特定于算法的命名方案是期望的,但是此时仍未指定。
+     * 
+     * 
      * @param param the string identifier of the parameter.
      *
      * @param value the parameter value.
@@ -310,6 +374,10 @@ public abstract class SignatureSpi {
      * <p>This method is overridden by providers to initialize
      * this signature engine with the specified parameter set.
      *
+     * <p>
+     *  <p>此方法被提供程序覆盖,以使用指定的参数集初始化此签名引擎。
+     * 
+     * 
      * @param params the parameters
      *
      * @exception UnsupportedOperationException if this method is not
@@ -335,6 +403,12 @@ public abstract class SignatureSpi {
      * implementation if this signature engine requires algorithm parameters
      * but was not initialized with any.
      *
+     * <p>
+     *  <p>此方法被提供程序覆盖,以返回与此签名引擎一起使用的参数,如果此签名引擎不使用任何参数,则为null。
+     * 
+     *  <p>返回的参数可以与用于初始化此签名引擎的参数相同,或者可以包含由底层签名实现使用的默认和随机生成的参数值的组合,如果该签名引擎需要算法参数,但没有用任何。
+     * 
+     * 
      * @return the parameters used with this signature engine, or null if this
      * signature engine does not use any parameters
      *
@@ -357,6 +431,11 @@ public abstract class SignatureSpi {
      * naming scheme for each parameter is desirable but left unspecified
      * at this time.
      *
+     * <p>
+     * 获取指定算法参数的值。该方法提供通用机制,通过该机制可以获得该对象的各种参数。
+     * 参数可以是用于算法的任何可设置参数,诸如参数大小或用于签名生成的随机比特的源(如果适当),或者是否执行特定但可选的计算的指示。对于每个参数的统一的特定于算法的命名方案是期望的,但是此时仍未指定。
+     * 
+     * 
      * @param param the string name of the parameter.
      *
      * @return the object that represents the parameter value, or null if
@@ -375,6 +454,8 @@ public abstract class SignatureSpi {
     /**
      * Returns a clone if the implementation is cloneable.
      *
+     * <p>
+     * 
      * @return a clone if the implementation is cloneable.
      *
      * @exception CloneNotSupportedException if this is called

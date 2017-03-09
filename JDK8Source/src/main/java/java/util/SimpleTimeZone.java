@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996  - 保留所有权利(C)版权所有IBM Corp. 1996  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.util;
@@ -140,6 +147,55 @@ import sun.util.calendar.Gregorian;
  * These parameter rules are also applicable to the set rule methods, such as
  * <code>setStartRule</code>.
  *
+ * <p>
+ *  <code> SimpleTimeZone </code>是<code> TimeZone </code>的具体子类,表示用于公历日历的时区。
+ * 类别保存与GMT的偏移量,称为<em>原始偏移量</em>,以及夏令时计划的开始和结束规则。
+ * 由于它只为每个值保存单个值,因此除了{@link #setStartYear setStartYear}方法可以指定夏令时计划开始生效的年份之外,它不能处理与GMT和夏令时计划的偏移量的历史更改。
+ * <p>
+ * 要使用夏令时时间表构造<code> SimpleTimeZone </code>,可以使用一组规则<em> start-rule </em>和<em> end-rule </em> 。
+ * 夏令时开始或结束的日期由<em>月份</em>,<em>日期</em>和<em>日期</em>值。
+ *  <em>月</em>值由日历{@link日历#MONTH MONTH}字段值表示,例如{@link Calendar#MARCH}。
+ *  <em>日期</em>值由日历{@link日历#DAY_OF_WEEK DAY_OF_WEEK}值表示,例如{@link日历#SUNDAY SUNDAY}。值组合的含义如下。
+ * 
+ * <ul>
+ *  <li> <b>每月的确切日期</b> <br>要指定每月的确切日期,请将<em>月份</em>和<em>日期</em>精确值和<em>星期</em>为零。
+ * 例如,要指定3月1日,请将<em>月份</em>设置为{@link日历#MARCH MARCH},将<em>日期</em>设置为1, -week </em>设为0。</li>。
+ * 
+ * <li> <b>每月的某一天或每月的某一天</b> <br>要在一个月的某一天或之后指定一周中的某一天,请将<em> month </em>月日期,<em>日期</em>到应用规则的日期,并且<em>星
+ * 期几</em>为负数{@link日历#DAY_OF_WEEK DAY_OF_WEEK }字段值。
+ * 例如,要指定4月的第二个星期日,请将<em>月</em>设置为{@link日历#APRIL APRIL},<em>日期</em>为8, -of-week </em>到<code>  -  </code>
+ *  {@ link Calendar#SUNDAY SUNDAY}。
+ * </li>。
+ * 
+ *  <li> <b>每月的日期</b> <br / <br>要在一个月的确切日期当天或之前指定一周中的某一天,请设置<em>日期</em>和<em>星期几</em>为负值。
+ * 例如,要指定3月21日或之前的最后一个星期三,请将<em>月</em>设置为{@link日历#MARCH MARCH},<em>日期</em>是-21和<em>星期几</em>是<code>  -  </code>
+ *  {@ link Calendar#WEDNESDAY WEDNESDAY}。
+ *  <li> <b>每月的日期</b> <br / <br>要在一个月的确切日期当天或之前指定一周中的某一天,请设置<em>日期</em>和<em>星期几</em>为负值。 </li>。
+ * 
+ *  <li> <b>每月的最后一天</b> <br>要指定一个月的最后一个星期几,请将<em>星期</em>设置为{@link日历#DAY_OF_WEEK DAY_OF_WEEK}值和<em>日期</em>
+ * 更改为-1。
+ * 例如,要指定10月的最后一个星期日,请将<em>月</em>设置为{@link日历#OCTOBER OCTOBER},星期六</em>到{@link Calendar#SUNDAY SUNDAY }和<em>
+ *  day-of-month </em>为-1。
+ *  </li>。
+ * 
+ * </ul>
+ * 夏令时开始或结束的日期时间由白天内的毫秒值指定。
+ * 有三种类型的<em>模式</em>用于指定时间：{@link #WALL_TIME},{@link #STANDARD_TIME}和{@link #UTC_TIME}。
+ * 例如,如果夏令时在挂钟时间的2:00 am结束,则可以在{@link #WALL_TIME}模式中以7200000毫秒指定。在这种情况下,<em>结束规则</em>的挂钟时间意味着与夏令时相同的事情。
+ * <p>
+ *  以下是用于构造时区对象的参数的示例。
+ *  <pre> <code> // Base GMT offset：-8：00 // DST starts：at 2:00 am in standard time // on the first Sund
+ * ay in April // DST ends：at 2:00 am in daylight time // // Save：1小时SimpleTimeZone(-28800000,"America /
+ *  Los_Angeles",Calendar.APRIL,1,-Calendar.SUNDAY,7200000,Calendar.OCTOBER,-1,Calendar.SUNDAY,7200000,3
+ * 6000 )。
+ *  以下是用于构造时区对象的参数的示例。
+ * 
+ * // Base GMT偏移：+1：00 // DST开始：UTC时间上午1:00 //三月最后一个星期日// DST结束时间：UTC时间上午1:00 //十月最后一个星期日// Save：1 hour 
+ * SimpleTimeZone(3600000,"Europe / Paris",Calendar.MARCH,-1,Calendar.SUNDAY,3600000,SimpleTimeZone.UTC_
+ * TIME,Calendar.OCTOBER,-1,Calendar.SUNDAY,3600000,SimpleTimeZone.UTC_TIME, 3600000)</code> </pre>这些参数规
+ * 则也适用于设置规则方法,如<code> setStartRule </code>。
+ * 
+ * 
  * @since 1.1
  * @see      Calendar
  * @see      GregorianCalendar
@@ -152,6 +208,10 @@ public class SimpleTimeZone extends TimeZone {
      * Constructs a SimpleTimeZone with the given base time zone offset from GMT
      * and time zone ID with no daylight saving time schedule.
      *
+     * <p>
+     *  构造SimpleTimeZone,其中给定的基准时区偏离GMT和时区ID,没有夏令时计划。
+     * 
+     * 
      * @param rawOffset  The base time zone offset in milliseconds to GMT.
      * @param ID         The time zone name that is given to this instance.
      */
@@ -186,6 +246,15 @@ public class SimpleTimeZone extends TimeZone {
      *                    3600000)
      * </code></pre>
      *
+     * <p>
+     *  构造具有给定基准时区偏离GMT,时区ID以及开始和结束日光时间的规则的SimpleTimeZone。
+     * 指定<code> startTime </code>和<code> endTime </code>在挂钟时间中表示。夏令时量假定为3600000毫秒(即一小时)。
+     * 此构造函数等效于：<pre> <code> SimpleTimeZone(rawOffset,ID,startMonth,startDay,startDayOfWeek,startTime,Simple
+     * TimeZone.{@link #WALL_TIME},endMonth,endDay,endDayOfWeek,endTime,SimpleTimeZone.{@link #WALL_TIME },3
+     * 600000)</code> </pre>。
+     * 指定<code> startTime </code>和<code> endTime </code>在挂钟时间中表示。夏令时量假定为3600000毫秒(即一小时)。
+     * 
+     * 
      * @param rawOffset       The given base time zone offset from GMT.
      * @param ID              The time zone ID which is given to this object.
      * @param startMonth      The daylight saving time starting month. Month is
@@ -243,6 +312,15 @@ public class SimpleTimeZone extends TimeZone {
      *                    dstSavings)
      * </code></pre>
      *
+     * <p>
+     * 构造具有给定基准时区偏离GMT,时区ID以及开始和结束日光时间的规则的SimpleTimeZone。
+     * 假设<code> startTime </code>和<code> endTime </code>在挂钟时间中表示。
+     * 此构造函数等效于：<pre> <code> SimpleTimeZone(rawOffset,ID,startMonth,startDay,startDayOfWeek,startTime,Simple
+     * TimeZone.{@link #WALL_TIME},endMonth,endDay,endDayOfWeek,endTime,SimpleTimeZone.{@link #WALL_TIME },d
+     * stSavings)</code> </pre>。
+     * 假设<code> startTime </code>和<code> endTime </code>在挂钟时间中表示。
+     * 
+     * 
      * @param rawOffset       The given base time zone offset from GMT.
      * @param ID              The time zone ID which is given to this object.
      * @param startMonth      The daylight saving time starting month. Month is
@@ -290,6 +368,12 @@ public class SimpleTimeZone extends TimeZone {
      * time} or {@link #STANDARD_TIME standard time} or {@link #UTC_TIME UTC
      * time}.
      *
+     * <p>
+     *  构造具有给定基准时区偏离GMT,时区ID以及开始和结束日光时间的规则的SimpleTimeZone。
+     * 此构造函数接受开始和结束规则参数的完整集合,包括<code> startTime </code>和<code> endTime </code>的模式。
+     * 模式指定{@link #WALL_TIME挂图时间}或{@link #STANDARD_TIME标准时间}或{@link #UTC_TIME UTC时间}。
+     * 
+     * 
      * @param rawOffset       The given base time zone offset from GMT.
      * @param ID              The time zone ID which is given to this object.
      * @param startMonth      The daylight saving time starting month. Month is
@@ -356,6 +440,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Sets the daylight saving time starting year.
      *
+     * <p>
+     *  设置从年开始的夏令时。
+     * 
+     * 
      * @param year  The daylight saving starting year.
      */
     public void setStartYear(int year)
@@ -370,6 +458,13 @@ public class SimpleTimeZone extends TimeZone {
      * time, you can set the start rule by calling:
      * <pre><code>setStartRule(Calendar.APRIL, 1, Calendar.SUNDAY, 2*60*60*1000);</code></pre>
      *
+     * <p>
+     *  设置夏令时开始规则。
+     * 例如,如果夏令时在4月的第一个星期日在本地挂钟时间的凌晨2点开始,您可以通过调用以下方式设置开始规则：<pre> <code> setStartRule(Calendar.APRIL,1,Calenda
+     * r.SUNDAY, 2 * 60 * 60 * 1000); </code> </pre>。
+     *  设置夏令时开始规则。
+     * 
+     * 
      * @param startMonth      The daylight saving time starting month. Month is
      *                        a {@link Calendar#MONTH MONTH} field
      *                        value (0-based. e.g., 0 for January).
@@ -398,6 +493,11 @@ public class SimpleTimeZone extends TimeZone {
      * This method is equivalent to:
      * <pre><code>setStartRule(startMonth, startDay, 0, startTime)</code></pre>
      *
+     * <p>
+     *  将夏令时启动规则设置为一个月内的固定日期。
+     * 此方法等效于：<pre> <code> setStartRule(startMonth,startDay,0,startTime)</code> </pre>。
+     * 
+     * 
      * @param startMonth      The daylight saving time starting month. Month is
      *                        a {@link Calendar#MONTH MONTH} field
      *                        value (0-based. e.g., 0 for January).
@@ -417,6 +517,10 @@ public class SimpleTimeZone extends TimeZone {
      * Sets the daylight saving time start rule to a weekday before or after the given date within
      * a month, e.g., the first Monday on or after the 8th.
      *
+     * <p>
+     * 将夏令时开始规则设置为一个月内给定日期之前或之后的工作日,例如8日或之后的第一个星期一。
+     * 
+     * 
      * @param startMonth      The daylight saving time starting month. Month is
      *                        a {@link Calendar#MONTH MONTH} field
      *                        value (0-based. e.g., 0 for January).
@@ -449,6 +553,13 @@ public class SimpleTimeZone extends TimeZone {
      * you can set the end rule by calling:
      * <code>setEndRule(Calendar.OCTOBER, -1, Calendar.SUNDAY, 2*60*60*1000);</code>
      *
+     * <p>
+     *  设置夏令时结束规则。
+     * 例如,如果夏令时在10月的最后一个星期日在挂钟时间的2点结束,您可以通过调用设置结束规则：<code> setEndRule(Calendar.OCTOBER,-1,Calendar.SUNDAY,2 
+     * * 60 * 60 * 1000); </code>。
+     *  设置夏令时结束规则。
+     * 
+     * 
      * @param endMonth        The daylight saving time ending month. Month is
      *                        a {@link Calendar#MONTH MONTH} field
      *                        value (0-based. e.g., 9 for October).
@@ -479,6 +590,10 @@ public class SimpleTimeZone extends TimeZone {
      * This method is equivalent to:
      * <pre><code>setEndRule(endMonth, endDay, 0, endTime)</code></pre>
      *
+     * <p>
+     *  将夏令时结束规则设置为一个月内的固定日期。此方法等效于：<pre> <code> setEndRule(endMonth,endDay,0,endTime)</code> </pre>
+     * 
+     * 
      * @param endMonth        The daylight saving time ending month. Month is
      *                        a {@link Calendar#MONTH MONTH} field
      *                        value (0-based. e.g., 9 for October).
@@ -499,6 +614,10 @@ public class SimpleTimeZone extends TimeZone {
      * Sets the daylight saving time end rule to a weekday before or after the given date within
      * a month, e.g., the first Monday on or after the 8th.
      *
+     * <p>
+     *  将夏令时结束规则设置为一个月内给定日期之前或之后的工作日,例如8日或之后的第一个星期一。
+     * 
+     * 
      * @param endMonth        The daylight saving time ending month. Month is
      *                        a {@link Calendar#MONTH MONTH} field
      *                        value (0-based. e.g., 9 for October).
@@ -530,6 +649,10 @@ public class SimpleTimeZone extends TimeZone {
      * the offset value is adjusted with the amount of daylight
      * saving.
      *
+     * <p>
+     *  返回此时区在给定时间从UTC的偏移量。如果夏令时在给定时间有效,则使用夏令时量调整偏移值。
+     * 
+     * 
      * @param date the time at which the time zone offset is found
      * @return the amount of time in milliseconds to add to UTC to get
      * local time.
@@ -540,6 +663,8 @@ public class SimpleTimeZone extends TimeZone {
     }
 
     /**
+    /* <p>
+    /* 
      * @see TimeZone#getOffsets
      */
     int getOffsets(long date, int[] offsets) {
@@ -589,6 +714,15 @@ public class SimpleTimeZone extends TimeZone {
      * <code>Calendar.get(ZONE_OFFSET) + Calendar.get(DST_OFFSET)</code>
      * instead of calling this method.</em>
      *
+     * <p>
+     *  返回本地时间和UTC之间的毫秒差值,同时考虑指定日期和时间的原始偏移量和夏令时的效果。此方法假定开始和结束月份是不同的。
+     * 它还使用默认的{@link GregorianCalendar}对象作为其基础日历,例如用于确定闰年。
+     * 不要将此方法的结果与默认的<code> GregorianCalendar </code>以外的日历结合使用。
+     * 
+     * <p> <em>注意：一般来说,客户端应使用<code> Calendar.get(ZONE_OFFSET)+ Calendar.get(DST_OFFSET)</code>而不是调用此方法。
+     * </em>。
+     * 
+     * 
      * @param era       The era of the given date.
      * @param year      The year in the given date.
      * @param month     The month in the given date. Month is 0-based. e.g.,
@@ -775,6 +909,10 @@ public class SimpleTimeZone extends TimeZone {
 
     /**
      * Gets the GMT offset for this time zone.
+     * <p>
+     *  获取此时区的GMT偏移量。
+     * 
+     * 
      * @return the GMT offset value in milliseconds
      * @see #setRawOffset
      */
@@ -788,6 +926,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Sets the base time zone offset to GMT.
      * This is the offset to add to UTC to get local time.
+     * <p>
+     *  将基准时区偏移设置为GMT。这是添加到UTC以获取本地时间的偏移量。
+     * 
+     * 
      * @see #getRawOffset
      */
     public void setRawOffset(int offsetMillis)
@@ -798,6 +940,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Sets the amount of time in milliseconds that the clock is advanced
      * during daylight saving time.
+     * <p>
+     *  设置时钟在夏令时期间提前的时间(以毫秒为单位)。
+     * 
+     * 
      * @param millisSavedDuringDST the number of milliseconds the time is
      * advanced with respect to standard time when the daylight saving time rules
      * are in effect. A positive number, typically one hour (3600000).
@@ -816,6 +962,10 @@ public class SimpleTimeZone extends TimeZone {
      * Returns the amount of time in milliseconds that the clock is
      * advanced during daylight saving time.
      *
+     * <p>
+     *  返回时钟在夏令时期间提前的时间(以毫秒为单位)。
+     * 
+     * 
      * @return the number of milliseconds the time is advanced with
      * respect to standard time when the daylight saving rules are in
      * effect, or 0 (zero) if this time zone doesn't observe daylight
@@ -830,6 +980,10 @@ public class SimpleTimeZone extends TimeZone {
 
     /**
      * Queries if this time zone uses daylight saving time.
+     * <p>
+     *  查询此时区是否使用夏令时。
+     * 
+     * 
      * @return true if this time zone uses daylight saving time;
      * false otherwise.
      */
@@ -843,6 +997,10 @@ public class SimpleTimeZone extends TimeZone {
      * Daylight Saving Time. This method is equivalent to {@link
      * #useDaylightTime()}.
      *
+     * <p>
+     *  如果此{@code SimpleTimeZone}遵循夏令时,则返回{@code true}。此方法等效于{@link #useDaylightTime()}。
+     * 
+     * 
      * @return {@code true} if this {@code SimpleTimeZone} observes
      * Daylight Saving Time; {@code false} otherwise.
      * @since 1.7
@@ -854,6 +1012,10 @@ public class SimpleTimeZone extends TimeZone {
 
     /**
      * Queries if the given date is in daylight saving time.
+     * <p>
+     *  查询给定日期是否为夏令时。
+     * 
+     * 
      * @return true if daylight saving time is in effective at the
      * given date; false otherwise.
      */
@@ -864,6 +1026,10 @@ public class SimpleTimeZone extends TimeZone {
 
     /**
      * Returns a clone of this <code>SimpleTimeZone</code> instance.
+     * <p>
+     *  返回此<c> SimpleTimeZone </code>实例的克隆。
+     * 
+     * 
      * @return a clone of this instance.
      */
     public Object clone()
@@ -873,6 +1039,10 @@ public class SimpleTimeZone extends TimeZone {
 
     /**
      * Generates the hash code for the SimpleDateFormat object.
+     * <p>
+     *  生成SimpleDateFormat对象的哈希码。
+     * 
+     * 
      * @return the hash code for this object
      */
     public synchronized int hashCode()
@@ -884,6 +1054,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Compares the equality of two <code>SimpleTimeZone</code> objects.
      *
+     * <p>
+     *  比较两个<code> SimpleTimeZone </code>对象的相等性。
+     * 
+     * 
      * @param obj  The <code>SimpleTimeZone</code> object to be compared with.
      * @return     True if the given <code>obj</code> is the same as this
      *             <code>SimpleTimeZone</code> object; false otherwise.
@@ -905,6 +1079,10 @@ public class SimpleTimeZone extends TimeZone {
 
     /**
      * Returns <code>true</code> if this zone has the same rules and offset as another zone.
+     * <p>
+     *  如果此区域具有与另一个区域相同的规则和偏移,则返回<code> true </code>。
+     * 
+     * 
      * @param other the TimeZone object to be compared with
      * @return <code>true</code> if the given zone is a SimpleTimeZone and has the
      * same rules and offset as this one
@@ -940,6 +1118,10 @@ public class SimpleTimeZone extends TimeZone {
 
     /**
      * Returns a string representation of this time zone.
+     * <p>
+     *  返回此时区的字符串表示形式。
+     * 
+     * 
      * @return a string representation of this time zone.
      */
     public String toString() {
@@ -971,6 +1153,11 @@ public class SimpleTimeZone extends TimeZone {
      * <code>Calendar.DECEMBER</code> inclusive.  This value must not equal
      * <code>endMonth</code>.
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     *  夏令时开始的月份。此值必须在<code> Calendar.JANUARY </code>和<code> Calendar.DECEMBER </code>之间。
+     * 此值不能等于<code> endMonth </code>。 <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      */
     private int startMonth;
@@ -996,6 +1183,26 @@ public class SimpleTimeZone extends TimeZone {
      * </dd>
      * </dl>
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     *  此字段有两种可能的解释：
+     * <dl>
+     *  <dt> <code> startMode == DOW_IN_MONTH </code> </dt>
+     * <dd>
+     * <code> startDay </code>指示开始夏令时的<code> startMonth </code>的月份日期,从1到28,30或31,具体取决于<code> startMonth </code >
+     * 。
+     * </dd>
+     *  <dt> <code> startMode！= DOW_IN_MONTH </code> </dt>
+     * <dd>
+     *  <code> startDay </code>表示<code> startMonth </code>夏令时开始的<code> startDayOfWeek </code>。
+     * 例如,<code> Calendar.SUNDAY </code>的值+1和<code> startDayOfWeek </code>表示<code> startMonth </code>的第一个星期日
+     * 。
+     *  <code> startDay </code>表示<code> startMonth </code>夏令时开始的<code> startDayOfWeek </code>。
+     * 同样,+2表示第二个星期日,-1表示最后一个星期日。值为0是非法的。
+     * </dd>
+     * </dl>
+     *  <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      */
     private int startDay;
@@ -1006,6 +1213,11 @@ public class SimpleTimeZone extends TimeZone {
      * <code>Calendar.SATURDAY</code> inclusive.
      * <p>If <code>useDaylight</code> is false or
      * <code>startMode == DAY_OF_MONTH</code>, this value is ignored.
+     * <p>
+     *  夏令时开始的星期几。此值必须在<code> Calendar.SUNDAY </code>和<code> Calendar.SATURDAY </code>之间。
+     *  <p>如果<code> useDaylight </code>为false或<code> startMode == DAY_OF_MONTH </code>,则会忽略此值。
+     * 
+     * 
      * @serial
      */
     private int startDayOfWeek;
@@ -1015,12 +1227,21 @@ public class SimpleTimeZone extends TimeZone {
      * time starts.  This value is expressed as wall time, standard time,
      * or UTC time, depending on the setting of <code>startTimeMode</code>.
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     *  夏令时开始后午夜之后的毫秒数。该值表示为墙时间,标准时间或UTC时间,具体取决于<code> startTimeMode </code>的设置。
+     *  <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      */
     private int startTime;
 
     /**
      * The format of startTime, either WALL_TIME, STANDARD_TIME, or UTC_TIME.
+     * <p>
+     *  startTime的格式,WALL_TIME,STANDARD_TIME或UTC_TIME。
+     * 
+     * 
      * @serial
      * @since 1.3
      */
@@ -1032,6 +1253,11 @@ public class SimpleTimeZone extends TimeZone {
      * <code>Calendar.UNDECIMBER</code>.  This value must not equal
      * <code>startMonth</code>.
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     * 夏令时结束的月份。此值必须在<code> Calendar.JANUARY </code>和<code> Calendar.UNDECIMBER </code>之间。
+     * 此值不能等于<code> startMonth </code>。 <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      */
     private int endMonth;
@@ -1057,6 +1283,23 @@ public class SimpleTimeZone extends TimeZone {
      * </dd>
      * </dl>
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     *  此字段有两种可能的解释：
+     * <dl>
+     *  <dt> <code> endMode == DOW_IN_MONTH </code> </dt>
+     * <dd>
+     *  <code> endDay </code>指示夏令时结束的<code> endMonth </code>的月份日期,从1到28,30或31,具体取决于<code> endMonth </code >。
+     * </dd>
+     *  <dt> <code> endMode！= DOW_IN_MONTH </code> </dt>
+     * <dd>
+     *  <code> endDay </code>表示<code> endMonth </code>夏令时结束的<code> endDayOfWeek </code>。
+     * 例如,<code> Calendar.SUNDAY </code>的值+1和<code> endDayOfWeek </code>表示<code> endMonth </code>的第一个星期日。
+     * 同样,+2表示第二个星期日,-1表示最后一个星期日。值为0是非法的。
+     * </dd>
+     * </dl>
+     *  <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      */
     private int endDay;
@@ -1067,6 +1310,11 @@ public class SimpleTimeZone extends TimeZone {
      * <code>Calendar.SATURDAY</code> inclusive.
      * <p>If <code>useDaylight</code> is false or
      * <code>endMode == DAY_OF_MONTH</code>, this value is ignored.
+     * <p>
+     *  夏令时结束的星期几。此值必须在<code> Calendar.SUNDAY </code>和<code> Calendar.SATURDAY </code>之间。
+     *  <p>如果<code> useDaylight </code>为false或<code> endMode == DAY_OF_MONTH </code>,则会忽略此值。
+     * 
+     * 
      * @serial
      */
     private int endDayOfWeek;
@@ -1076,6 +1324,11 @@ public class SimpleTimeZone extends TimeZone {
      * time ends.  This value is expressed as wall time, standard time,
      * or UTC time, depending on the setting of <code>endTimeMode</code>.
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     * 夏令时结束的午夜后的毫秒数。该值表示为墙时间,标准时间或UTC时间,具体取决于<code> endTimeMode </code>的设置。
+     *  <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      */
     private int endTime;
@@ -1083,6 +1336,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * The format of endTime, either <code>WALL_TIME</code>,
      * <code>STANDARD_TIME</code>, or <code>UTC_TIME</code>.
+     * <p>
+     *  endTime的格式,<code> WALL_TIME </code>,<code> STANDARD_TIME </code>或<code> UTC_TIME </code>。
+     * 
+     * 
      * @serial
      * @since 1.3
      */
@@ -1093,6 +1350,11 @@ public class SimpleTimeZone extends TimeZone {
      * value.  If this value is less than 1 then daylight saving time is observed
      * for all <code>AD</code> years.
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     *  首次观察夏令时的年份。这是一个{@link GregorianCalendar#AD AD}值。如果此值小于1,则对所有<code> AD </code>年观察夏令时。
+     *  <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      */
     private int startYear;
@@ -1102,6 +1364,11 @@ public class SimpleTimeZone extends TimeZone {
      * are to the west of Greenwich.  To obtain local <em>standard</em> time,
      * add the offset to GMT time.  To obtain local wall time it may also be
      * necessary to add <code>dstSavings</code>.
+     * <p>
+     *  此区域和GMT之间的偏移量(以毫秒为单位)。负偏移在格林威治的西边。要获取本地<em>标准</em>时间,请将偏移量添加到GMT时间。
+     * 要获取本地挂起时间,还可能需要添加<code> dstSavings </code>。
+     * 
+     * 
      * @serial
      */
     private int rawOffset;
@@ -1109,6 +1376,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * A boolean value which is true if and only if this zone uses daylight
      * saving time.  If this value is false, several other fields are ignored.
+     * <p>
+     *  布尔值,当且仅当此区域使用夏令时时为true。如果此值为false,则会忽略其他几个字段。
+     * 
+     * 
      * @serial
      */
     private boolean useDaylight=false; // indicate if this time zone uses DST
@@ -1120,6 +1391,10 @@ public class SimpleTimeZone extends TimeZone {
      * This field was serialized in JDK 1.1, so we have to keep it that way
      * to maintain serialization compatibility. However, there's no need to
      * recreate the array each time we create a new time zone.
+     * <p>
+     *  此字段在JDK 1.1中序列化,因此我们必须保持这种方式来保持序列化兼容性。但是,每次创建新时区时,不需要重新创建数组。
+     * 
+     * 
      * @serial An array of bytes containing the values {31, 28, 31, 30, 31, 30,
      * 31, 31, 30, 31, 30, 31}.  This is ignored as of the Java 2 platform v1.2, however, it must
      * be streamed out for compatibility with JDK 1.1.
@@ -1152,6 +1427,29 @@ public class SimpleTimeZone extends TimeZone {
      * The setting of this field affects the interpretation of the
      * <code>startDay</code> field.
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     *  指定启动规则模式的变量。采用以下值：
+     * <dl>
+     *  <dt> <code> DOM_MODE </code> </dt>
+     * <dd>
+     *  星期几;例如,3月1日。
+     * </dd>
+     *  <dt> <code> DOW_IN_MONTH_MODE </code> </dt>
+     * <dd>
+     *  月中的星期;例如,3月的最后一个星期日。
+     * </dd>
+     * <dt> <code> DOW_GE_DOM_MODE </code> </dt>
+     * <dd>
+     *  月份的星期几;例如3月15日或之后的星期天。
+     * </dd>
+     *  <dt> <code> DOW_LE_DOM_MODE </code> </dt>
+     * <dd>
+     *  月份之前的星期几;例如3月15日或之前的星期天。
+     * </dd>
+     * </dl>
+     *  此字段的设置影响<code> startDay </code>字段的解释。 <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      * @since 1.1.4
      */
@@ -1181,6 +1479,29 @@ public class SimpleTimeZone extends TimeZone {
      * The setting of this field affects the interpretation of the
      * <code>endDay</code> field.
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     *  指定结束规则的模式的变量。采用以下值：
+     * <dl>
+     *  <dt> <code> DOM_MODE </code> </dt>
+     * <dd>
+     *  星期几;例如,3月1日。
+     * </dd>
+     *  <dt> <code> DOW_IN_MONTH_MODE </code> </dt>
+     * <dd>
+     *  月中的星期;例如,3月的最后一个星期日。
+     * </dd>
+     *  <dt> <code> DOW_GE_DOM_MODE </code> </dt>
+     * <dd>
+     *  月份的星期几;例如3月15日或之后的星期天。
+     * </dd>
+     *  <dt> <code> DOW_LE_DOM_MODE </code> </dt>
+     * <dd>
+     *  月份之前的星期几;例如3月15日或之前的星期天。
+     * </dd>
+     * </dl>
+     *  此字段的设置影响<code> endDay </code>字段的解释。 <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      * @since 1.1.4
      */
@@ -1191,6 +1512,11 @@ public class SimpleTimeZone extends TimeZone {
      * milliseconds.
      * Typically one hour (3600000); sometimes 30 minutes (1800000).
      * <p>If <code>useDaylight</code> is false, this value is ignored.
+     * <p>
+     *  指示DST期间节省的时间量的正值,以毫秒为单位。通常为1小时(3600000);有时30分钟(1800000)。
+     *  <p>如果<code> useDaylight </code>为false,则忽略此值。
+     * 
+     * 
      * @serial
      * @since 1.1.4
      */
@@ -1209,6 +1535,12 @@ public class SimpleTimeZone extends TimeZone {
      * cacheStart and cacheEnd are in different years. cacheStart is 0
      * if the cache values are void. cacheYear is a long to support
      * Integer.MIN_VALUE - 1 (JCK requirement).
+     * <p>
+     *  缓存表示单个夏令时间的值。当缓存值有效时,cacheStart是夏令时的开始时间(包括),cacheEnd是结束时间(独占)。
+     * 
+     * cacheYear具有年值,如果cacheStart和cacheEnd都在同一年。 cacheYear设置为startYear  -  1如果cacheStart和cacheEnd在不同的年份。
+     * 如果缓存值无效,cacheStart为0。 cacheYear是一个long来支持Integer.MIN_VALUE  -  1(JCK要求)。
+     * 
      */
     private transient long cacheYear;
     private transient long cacheStart;
@@ -1216,6 +1548,9 @@ public class SimpleTimeZone extends TimeZone {
 
     /**
      * Constants specifying values of startMode and endMode.
+     * <p>
+     *  常量指定startMode和endMode的值。
+     * 
      */
     private static final int DOM_MODE          = 1; // Exact day of month, "Mar 1"
     private static final int DOW_IN_MONTH_MODE = 2; // Day of week in month, "lastSun"
@@ -1226,12 +1561,20 @@ public class SimpleTimeZone extends TimeZone {
      * Constant for a mode of start or end time specified as wall clock
      * time.  Wall clock time is standard time for the onset rule, and
      * daylight time for the end rule.
+     * <p>
+     *  指定为挂钟时间的开始或结束时间模式的常数。挂钟时间是起始规则的标准时间,以及结束规则的日光时间。
+     * 
+     * 
      * @since 1.4
      */
     public static final int WALL_TIME = 0; // Zero for backward compatibility
 
     /**
      * Constant for a mode of start or end time specified as standard time.
+     * <p>
+     *  指定为标准时间的开始或结束时间模式的常数。
+     * 
+     * 
      * @since 1.4
      */
     public static final int STANDARD_TIME = 1;
@@ -1239,6 +1582,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Constant for a mode of start or end time specified as UTC. European
      * Union rules are specified as UTC time, for example.
+     * <p>
+     *  指定为UTC的开始或结束时间模式的常数。例如,欧盟规则被指定为UTC时间。
+     * 
+     * 
      * @since 1.4
      */
     public static final int UTC_TIME = 2;
@@ -1273,6 +1620,25 @@ public class SimpleTimeZone extends TimeZone {
      * When streaming out this class, the most recent format
      * and the highest allowable <code>serialVersionOnStream</code>
      * is written.
+     * <p>
+     *  流上的序列化数据的版本。可能的值：
+     * <dl>
+     *  <dt> <b> 0 </b>或不在线</dt>
+     * <dd>
+     *  JDK 1.1.3或更早版本。
+     * </dd>
+     *  <dt> <b> 1 </b> </dt>
+     * <dd>
+     *  JDK 1.1.4或更高版本。包括三个新字段：<code> startMode </code>,<code> endMode </code>和<code> dstSavings </code>。
+     * </dd>
+     *  <dt> <b> 2 </b> </dt>
+     * <dd>
+     *  JDK 1.3或更高版本。包括两个新字段：<code> startTimeMode </code>和<code> endTimeMode </code>。
+     * </dd>
+     * </dl>
+     *  当流出这个类时,将写入最新的格式和最高允许的<code> serialVersionOnStream </code>。
+     * 
+     * 
      * @serial
      * @since 1.1.4
      */
@@ -1345,6 +1711,10 @@ public class SimpleTimeZone extends TimeZone {
      * set, and the day of week and day of month variables will be positive.
      * This method also recognizes a startDay or endDay of zero as indicating
      * no DST.
+     * <p>
+     * 给定一组编码规则在startDay和startDayOfMonth,解码它们并适当地设置startMode。对endDay和endDayOfMonth执行相同操作。
+     * 在输入时,星期变量可以是零或负数,以便指示特殊模式。日期变量也可以为负数。退出时,将设置模式变量,星期几和日期变量将为正数。此方法还将startDay或endDay识别为零,表示没有DST。
+     * 
      */
     private void decodeRules()
     {
@@ -1375,6 +1745,16 @@ public class SimpleTimeZone extends TimeZone {
      * it's not always possible to specify that, for example, on December 31.
      * While arguably the start range should still be 0..ONEDAY-1, we keep
      * the start and end ranges the same for consistency.
+     * <p>
+     *  解码启动规则并验证参数。参数预期为编码形式,其通过对某些值取反或置零来表示各种规则模式。表示格式有：
+     * <p>
+     * <pre>
+     *  DOW_IN_MONTH DOM DOW> = DOM DOW <= DOM no DST ------------ ----- -------- -------- ----- -----月0..11同一相同无关日-5..5 1..31 1..31 -1 ..- 31 0天0fWeek 1..7 0 -1 ..- 7 -1 ..- 7不关心时间0..ONEDAY同样相同同样不在乎。
+     * </pre>
+     * 月份的范围不包括UNDECIMBER,因为此类别确切地特定于GregorianCalendar,不使用该月份。时间范围包括ONEDAY(与结束于ONEDAY-1),因为结束规则是专用限制点。
+     * 也就是说,DST中的时间范围包括那些> =开始和<结束。由于这个原因,应该可以指定结束一天,以便包括整天。虽然这相当于第二天的时间0,但并不总是可以指定,例如,在12月31日。
+     * 虽然可以说开始范围应该仍然是0..ONEDAY-1,我们保持开始和结束范围一致。
+     * 
      */
     private void decodeStartRule() {
         useDaylight = (startDay != 0) && (endDay != 0);
@@ -1421,6 +1801,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Decode the end rule and validate the parameters.  This method is exactly
      * analogous to decodeStartRule().
+     * <p>
+     *  解码结束规则并验证参数。这个方法完全类似于decodeStartRule()。
+     * 
+     * 
      * @see decodeStartRule
      */
     private void decodeEndRule() {
@@ -1473,6 +1857,10 @@ public class SimpleTimeZone extends TimeZone {
      * with a possible loss of information.  startMode and endMode will NOT be
      * altered, even though semantically they should be set to DOW_IN_MONTH_MODE,
      * since the rule modification is only intended to be temporary.
+     * <p>
+     *  使规则与1.1 FCS代码兼容。由于1.1 FCS代码只理解星期几的规则,我们必须修改其他模式的规则为1.1 FCS术语中它们的近似等价。当流出这个类的对象时使用此方法。
+     * 调用后,规则将被修改,可能会丢失信息。 startMode和endMode不会改变,即使在语义上它们应该设置为DOW_IN_MONTH_MODE,因为规则修改只是暂时的。
+     * 
      */
     private void makeRulesCompatible()
     {
@@ -1531,6 +1919,10 @@ public class SimpleTimeZone extends TimeZone {
          * make a more refined adjustment of the original rules first, but in
          * most cases this extra effort will go to waste once we adjust the day
          * rules anyway.
+         * <p>
+         * 将开始和结束时间调整为挂墙时间。这个工作非常好,除非它推进到下一天或前一天。如果发生这种情况,我们试图稍微粗略地调整日规则。
+         * 日规则已强制进入DOW_IN_MONTH模式,因此我们更改了星期几向前或向后移动一天。可以对原始规则进行更精细的调整,但是在大多数情况下,一旦我们调整了日规则,这种额外的努力就会浪费。
+         * 
          */
         switch (startTimeMode) {
         case UTC_TIME:
@@ -1566,6 +1958,9 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Pack the start and end rules into an array of bytes.  Only pack
      * data which is not preserved by makeRulesCompatible.
+     * <p>
+     *  将开始和结束规则打包为字节数组。只包装由makeRulesCompatible不保留的数据。
+     * 
      */
     private byte[] packRules()
     {
@@ -1585,6 +1980,9 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Given an array of bytes produced by packRules, interpret them
      * as the start and end rules.
+     * <p>
+     *  给定一个由packRules生成的字节数组,将它们解释为开始和结束规则。
+     * 
      */
     private void unpackRules(byte[] rules)
     {
@@ -1603,6 +2001,9 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Pack the start and end times into an array of bytes.  This is required
      * as of serial version 2.
+     * <p>
+     *  将开始和结束时间打包为字节数组。从串行版本2开始这是必需的。
+     * 
      */
     private int[] packTimes() {
         int[] times = new int[2];
@@ -1614,6 +2015,9 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Unpack the start and end times from an array of bytes.  This is required
      * as of serial version 2.
+     * <p>
+     *  从字节数组解开开始和结束时间。从串行版本2开始这是必需的。
+     * 
      */
     private void unpackTimes(int[] times) {
         startTime = times[0];
@@ -1623,6 +2027,10 @@ public class SimpleTimeZone extends TimeZone {
     /**
      * Save the state of this object to a stream (i.e., serialize it).
      *
+     * <p>
+     *  将此对象的状态保存到流(即,序列化它)。
+     * 
+     * 
      * @serialData We write out two formats, a JDK 1.1 compatible format, using
      * <code>DOW_IN_MONTH_MODE</code> rules, in the required section, followed
      * by the full rules, in packed format, in the optional section.  The
@@ -1665,6 +2073,9 @@ public class SimpleTimeZone extends TimeZone {
      *
      * We handle both JDK 1.1
      * binary formats and full formats with a packed byte array.
+     * <p>
+     *  从流重构此对象(即,反序列化它)。
+     * 
      */
     private void readObject(ObjectInputStream stream)
          throws IOException, ClassNotFoundException

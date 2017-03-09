@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -18,6 +19,10 @@ package org.omg.PortableServer;
 	 * hierarchy starting with the root POA. A POA object 
 	 * must not be exported to other processes, or 
 	 * externalized with ORB::object_to_string.
+	 * <p>
+	 *  POA对象管理对象集合的实现。 POA支持由对象标识标识的对象的名称空间。 POA还为POA提供了名称空间。 POA被创建为现有POA的子节点,其形成从根POA开始的层级。
+	 *  POA对象不能导出到其他进程,也不能使用ORB :: object_to_string外部化。
+	 * 
 	 */
 public interface POAOperations 
 {
@@ -25,6 +30,10 @@ public interface POAOperations
   /**
 	 * This operation creates a new POA as a child of the 
 	 * target POA.
+	 * <p>
+	 *  此操作会创建一个新的POA作为目标POA的子级。
+	 * 
+	 * 
 	 * @param adapter_name identifies the new POA with 
 	 *        respect to other POAs with the same parent POA.
 	 * @param a_POAManager specifies the POA Manager to be
@@ -46,6 +55,10 @@ public interface POAOperations
 	 * If the target POA is the parent of a child POA with 
 	 * the specified name (relative to the target POA), that 
 	 * child POA is returned. 
+	 * <p>
+	 *  如果目标POA是具有指定名称(相对于目标POA)的子POA的父代,则返回该子POA。
+	 * 
+	 * 
 	 * @param adapter_name POA name to be found.
 	 * @param activate_it  if a POA with the specified 
 	 *        name does not exist and the value of 
@@ -66,6 +79,10 @@ public interface POAOperations
 	 * before the destruction of the containing POA. The POA 
 	 * so destroyed (that is, the POA with its name) may be 
 	 * re-created later in the same process.
+	 * <p>
+	 *  此操作会销毁POA和所有后代POA。所有后代POA在包含POA的销毁之前被销毁(递归地)。可以在相同的过程中重新创建如此销毁的POA(即,具有其名称的POA)。
+	 * 
+	 * 
 	 * @param etherealize_objects flag to indicate whether
 	 *        etherealize operation on servant manager needs
 	 *        to be called.
@@ -79,6 +96,10 @@ public interface POAOperations
   /**
 	 * These operations each return a reference to a policy 
 	 * object with the specified value.
+	 * <p>
+	 *  这些操作各自返回对具有指定值的策略对象的引用。
+	 * 
+	 * 
 	 * @param value policy type
 	 * @return ThreadPolcy Object
 	 */
@@ -87,6 +108,10 @@ public interface POAOperations
   /**
 	 * These operations each return a reference to a policy 
 	 * object with the specified value.
+	 * <p>
+	 *  这些操作各自返回对具有指定值的策略对象的引用。
+	 * 
+	 * 
 	 * @param value policy type
 	 * @return LifespanPolicy Object.
 	 */
@@ -95,6 +120,10 @@ public interface POAOperations
   /**
 	 * These operations each return a reference to a policy 
 	 * object with the specified value.
+	 * <p>
+	 *  这些操作各自返回对具有指定值的策略对象的引用。
+	 * 
+	 * 
 	 * @param value policy type
 	 * @return IdUniquenessPolicy Object.
 	 */
@@ -103,6 +132,10 @@ public interface POAOperations
   /**
 	 * These operations each return a reference to a policy 
 	 * object with the specified value. 
+	 * <p>
+	 *  这些操作各自返回对具有指定值的策略对象的引用。
+	 * 
+	 * 
 	 * @param value policy type
 	 * @return IdAssignmentPolicy Object.
 	 */
@@ -111,6 +144,10 @@ public interface POAOperations
   /**
 	 * These operations each return a reference to a policy 
 	 * object with the specified value. 
+	 * <p>
+	 * 这些操作各自返回对具有指定值的策略对象的引用。
+	 * 
+	 * 
 	 * @param value policy type
 	 * @return ImplicitActivationPolicy Object.
 	 */
@@ -119,6 +156,10 @@ public interface POAOperations
   /**
 	 * These operations each return a reference to a policy 
 	 * object with the specified value.
+	 * <p>
+	 *  这些操作各自返回对具有指定值的策略对象的引用。
+	 * 
+	 * 
 	 * @param value policy type
 	 * @return ServantRetentionPolicy Object.
 	 */
@@ -127,6 +168,10 @@ public interface POAOperations
   /**
 	 * These operations each return a reference to a policy 
 	 * object with the specified value. 
+	 * <p>
+	 *  这些操作各自返回对具有指定值的策略对象的引用。
+	 * 
+	 * 
 	 * @param value policy type
 	 * @return RequestProcessingPolicy Object.
 	 */
@@ -135,12 +180,18 @@ public interface POAOperations
   /**
 	 * This attribute identifies the POA relative to its 
 	 * parent. This name is assigned when the POA is created.
+	 * <p>
+	 *  此属性标识相对于其父代的POA。此名称在创建POA时分配。
+	 * 
 	 */
   String the_name ();
 
   /**
 	 * This attribute identifies the parent of the POA. 
 	 * The parent of the root POA is null. 
+	 * <p>
+	 *  此属性标识POA的父级。根POA的父代为null。
+	 * 
 	 */
   org.omg.PortableServer.POA the_parent ();
 
@@ -149,24 +200,36 @@ public interface POAOperations
 	 * child POAs of the POA. The set of child POAs 
 	 * includes only the POA's immediate children, and 
 	 * not their descendants.
+	 * <p>
+	 *  此属性标识POA的所有子POA的当前集合。子组POA的集合仅包括POA的直接子组,而不是它们的后代。
+	 * 
 	 */
   org.omg.PortableServer.POA[] the_children ();
 
   /**
 	 * This attribute identifies the POA manager 
 	 * associated with the POA.
+	 * <p>
+	 *  此属性标识与POA相关联的POA管理器。
+	 * 
 	 */
   org.omg.PortableServer.POAManager the_POAManager ();
 
   /**
 	 * This attribute identifies the adapter activator 
 	 * associated with the POA.
+	 * <p>
+	 *  此属性标识与POA相关联的适配器激活器。
+	 * 
 	 */
   org.omg.PortableServer.AdapterActivator the_activator ();
 
   /**
 	 * This attribute identifies the adapter activator 
 	 * associated with the POA.
+	 * <p>
+	 *  此属性标识与POA相关联的适配器激活器。
+	 * 
 	 */
   void the_activator (org.omg.PortableServer.AdapterActivator newThe_activator);
 
@@ -179,6 +242,11 @@ public interface POAOperations
 	 * interface. If the argument is nil, or does not support 
 	 * the required interface, then the OBJ_ADAPTER 
 	 * exception is raised.
+	 * <p>
+	 *  如果POA的ServantRetentionPolicy为RETAIN,则ServantManager参数(imgr)应支持ServantActivator接口。
+	 * 对于NON_RETAIN策略,ServantManager应支持ServantLocator接口。如果参数为nil,或不支持所需的接口,则引发OBJ_ADAPTER异常。
+	 * 
+	 * 
 	 * @return ServantManager associated with a POA or null if
 	 *         none exists.
 	 * @exception WrongPolicy raised if the 
@@ -194,6 +262,10 @@ public interface POAOperations
 	 * to set the servant manager after one has already 
 	 * been set will result in the BAD_INV_ORDER exception 
 	 * being raised.
+	 * <p>
+	 *  此操作设置与POA关联的默认servant管理器。此操作只能在创建POA后调用一次。在已经设置一个服务方管理器之后尝试设置服务方管理器将导致产生BAD_INV_ORDER异常。
+	 * 
+	 * 
 	 * @param imgr servant manager to be used as a default.
 	 * @exception WrongPolicy raised if the 
 	 *            USE_SERVANT_MANAGER policy is not specified.
@@ -203,6 +275,10 @@ public interface POAOperations
   /**
 	 * This operation returns the default servant associated 
 	 * with the POA. 
+	 * <p>
+	 * 此操作返回与POA关联的默认服务方。
+	 * 
+	 * 
 	 * @return p_servant default servant associated with a POA.
 	 * @exception NoServant raised if no default servant is
 	 *            associated with the POA.
@@ -217,6 +293,10 @@ public interface POAOperations
 	 * the POA as the default servant. This servant will 
 	 * be used for all requests for which no servant is 
 	 * found in the Active Object Map.
+	 * <p>
+	 *  此操作将POA注册为指定的服务方作为默认服务方。此仆人将用于在活动对象映射中找不到任何仆人的所有请求。
+	 * 
+	 * 
 	 * @param p_servant servant to be used as a default.
 	 * @exception WrongPolicy raised if the 
 	 *            USE_DEFAULT_SERVANT policy is not specified.
@@ -228,6 +308,10 @@ public interface POAOperations
 	 * This operation generates an Object Id and enters 
 	 * the Object Id and the specified servant in the 
 	 * Active Object Map.
+	 * <p>
+	 *  此操作生成对象标识,并在活动对象映射中输入对象标识和指定的服务方。
+	 * 
+	 * 
 	 * @param p_servant servant to be associated with an
 	 *            object to be activated.
 	 * @return POA generated object id.
@@ -243,6 +327,10 @@ public interface POAOperations
          * This operation enters an association between the 
 	 * specified Object Id and the specified servant in the 
 	 * Active Object Map.
+	 * <p>
+	 *  此操作在指定的对象标识和活动对象映射中指定的服务方之间输入关联。
+	 * 
+	 * 
 	 * @param id object id for the object to be activated.
 	 * @param p_servant servant to be associated with the
 	 *                  object.
@@ -265,6 +353,11 @@ public interface POAOperations
 	 * A deactivated ObjectId is removed from the Active 
 	 * Object Map when all requests executing for that 
 	 * ObjectId have completed. 
+	 * <p>
+	 *  此操作将导致在oid参数中指定的ObjectId被禁用。已停用的ObjectId继续处理请求,直到没有对该ObjectId的活动请求。
+	 * 当针对该ObjectId执行的所有请求已完成时,将从活动对象映射中删除停用的ObjectId。
+	 * 
+	 * 
 	 * @param oid Object Id for the object to be deactivated.
 	 * @exception ObjectNotActive if the object with the
 	 *            specified oid is not in the Active Object
@@ -279,6 +372,10 @@ public interface POAOperations
 	 * encapsulates a POA-generated Object Id value and 
 	 * the specified interface repository id. 
 	 *
+	 * <p>
+	 *  此操作创建一个对象引用,该对象引用封装POA生成的Object Id值和指定的接口存储库ID。
+	 * 
+	 * 
 	 * @param intf rep id for creating an object reference.
 	 * @return object reference created using intf.
 	 * @exception WrongPolicy if SYSTEM_ID policy is not 
@@ -295,6 +392,10 @@ public interface POAOperations
 	 * references will cause the object to be activated 
 	 * if necessary, or the default servant used, depending 
 	 * on the applicable policies. 
+	 * <p>
+	 *  此操作将创建封装指定的对象标识和接口存储库标识值的对象引用。它不会导致激活发生。生成的引用可以传递给客户端,以便对这些引用的后续请求将导致根据需要激活对象,或者使用默认服务方,具体取决于适用的策略。
+	 * 
+	 * 
 	 * @param oid object id for creating an objref
 	 * @param intf rep id for creating an objref
 	 * @return object reference created using oid and intf
@@ -323,6 +424,15 @@ public interface POAOperations
 	 * associated with the current invocation is returned. 
 	 * 4. Otherwise, the ServantNotActive exception is raised.
 	 *
+	 * <p>
+	 * 此操作有四种可能的行为。 1.如果POA具有UNIQUE_ID策略,并且指定的服务方是活动的,则返回与该服务方相关联的对象标识。
+	 *  2.如果POA具有IMPLICIT_ACTIVATION策略,并且POA具有MULTIPLE_ID策略或指定的服务方未处于活动状态,则使用POA生成的对象标识和与该服务方相关联的接口标识来激活服务方,
+	 * 并且该对象标识是回。
+	 * 此操作有四种可能的行为。 1.如果POA具有UNIQUE_ID策略,并且指定的服务方是活动的,则返回与该服务方相关联的对象标识。
+	 *  3.如果POA具有USE_DEFAULT_SERVANT策略,则指定的服务方是默认服务方,并且在对默认服务方执行请求的上下文中调用操作,则返回与当前调用相关联的ObjectId。
+	 * 否则,将引发ServantNotActive异常。
+	 * 
+	 * 
 	 * @param p_servant servant for which the object disi returned.
 	 * @return object id associated with the servant.
 	 * @exception ServantNotActive if the above rules and
@@ -356,6 +466,15 @@ public interface POAOperations
 	 * is returned. 
 	 * 4. Otherwise, the ServantNotActive exception is raised.
 	 *
+	 * <p>
+	 * 如果在由此POA分派的操作的上下文之外调用,则此操作需要RETAIN策略以及UNIQUE_ID或IMPLICIT_ACTIVATION策略。它有四种可能的行为。
+	 * 如果POA同时具有RETAIN和UNIQUE_ID策略,并且指定的服务方是活动的,则返回封装用于激活服务方的信息的对象引用。
+	 *  2.如果POA同时具有RETAIN和IMPLICIT_ACTIVATION策略,并且POA具有MULTIPLE_ID策略或指定的服务方不活动,则使用POA生成的对象标识和与服务方相关联的接口标识来激活
+	 * 服务方,返回相应的对象引用。
+	 * 如果POA同时具有RETAIN和UNIQUE_ID策略,并且指定的服务方是活动的,则返回封装用于激活服务方的信息的对象引用。
+	 *  3.如果在对指定的服务方执行请求的上下文中调用操作,则返回与当前调用相关联的引用。否则,将引发ServantNotActive异常。
+	 * 
+	 * 
 	 * @param p_servant servant for which the object reference
 	 *                  needs to be obtained.
 	 * @return object reference associated with the servant.
@@ -380,6 +499,12 @@ public interface POAOperations
 	 * the WrongAdapter exception is raised. (OMG Issue
 	 * on inconsistency with the POA.IDL.
 	 *
+	 * <p>
+	 *  如果POA具有RETAIN策略,并且指定的对象存在于活动对象映射中,则此操作将返回与活动对象映射中的该对象相关联的服务方。
+	 * 否则,如果POA具有USE_DEFAULT_SERVANT策略并且已向POA注册了默认服务方,则此操作将返回默认服务方。如果对象引用不是由此POA创建的,则会引发WrongAdapter异常。
+	 *  (OMG与POA.IDL不一致的问题。
+	 * 
+	 * 
 	 * @param reference object reference for which the
 	 *                  servant is returned.
 	 * @return servant associated with the reference.
@@ -402,6 +527,10 @@ public interface POAOperations
 	 * The object denoted by the reference does not have 
 	 * to be active for this operation to succeed.
 	 *
+	 * <p>
+	 * 此操作返回由指定引用封装的对象标识值。此操作仅在引用由正在执行操作的POA创建时有效。由引用表示的对象不必为此操作成功而活动。
+	 * 
+	 * 
 	 * @param reference the object reference from which the
 	 *                  object id needs to be returned.
 	 * @return object id encapsulated in the reference.
@@ -423,6 +552,11 @@ public interface POAOperations
 	 * has been registered with the POA, this operation 
 	 * returns the default servant. 
 	 *
+	 * <p>
+	 *  如果POA具有RETAIN策略,并且指定的ObjectId位于活动对象映射中,则此操作将返回与活动对象映射中的该对象相关联的服务人员。
+	 * 否则,如果POA具有USE_DEFAULT_SERVANT策略并且已向POA注册了默认服务方,则此操作将返回默认服务方。
+	 * 
+	 * 
 	 * @param oid object id for the which the servant is
 	 *            returned.
 	 * @return servant associated with oid.
@@ -442,6 +576,10 @@ public interface POAOperations
 	 * currently active, a reference encapsulating the 
 	 * information used to activate the object is returned. 
 	 *
+	 * <p>
+	 *  如果具有指定的对象标识值的对象当前处于活动状态,则返回封装用于激活对象的信息的引用。
+	 * 
+	 * 
 	 * @param oid id of the object for which the
 	 *                 reference is returned.
 	 * @return the object reference 
@@ -462,6 +600,10 @@ public interface POAOperations
 	 * in the same path with the same name as another POA, these POAs 
 	 * are identical and, therefore, have the same id.  For transient 
 	 * POAs, each POA is unique.
+	 * <p>
+	 *  这将返回创建POA的进程中的POA的唯一ID。它是便携式拦截器使用。
+	 * <p>
+	 *  此ID在过程中的POA的寿命期间保证是唯一的。对于持久性POA,这意味着如果在与另一个POA具有相同名称的相同路径中创建POA,则这些POA是相同的,并且因此具有相同的ID。
 	 */
   byte[] id ();
 } // interface POAOperations

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -15,6 +16,7 @@ public interface TransactionService
      * Identifies a CDR encapsulation of the 
      * <code>CosTSInteroperation.PropogationContext</code> defined in 
      * <i>CORBAservices: Common Object Services Specifications.</i>
+     * <p>
      */
   public static final int value = (int)(0L);
 }

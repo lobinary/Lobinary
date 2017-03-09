@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,13 @@ import sun.awt.AppContext;
  *        depends on the state of animation
  * </ul>
  *
+ * <p>
+ *  一个类帮助模仿Vista主题动画。它现在处理的唯一一种动画是"transition"动画(这似乎是Vista主题可以做的唯一动画)。这是一个图片在一段时间内褪色另一个图片。
+ * 根据https://connect.microsoft.com/feedback/ViewFeedback.aspx?FeedbackID=86852&SiteID=4动画都是线性的。
+ * 
+ *  这个类有很多责任。
+ * <ul>
+ * 
  * @author Igor Kushnirskiy
  */
 class AnimationController implements ActionListener, PropertyChangeListener {

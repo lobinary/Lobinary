@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import javax.imageio.ImageReader;
  * notify callers of their image and thumbnail reading methods of
  * pixel updates.
  *
+ * <p>
+ *  <code> ImageReader </code>实现使用的接口,通知调用者他们的图像和像素更新的缩略图读取方法。
+ * 
+ * 
  * @see javax.imageio.ImageReader#addIIOReadUpdateListener
  * @see javax.imageio.ImageReader#removeIIOReadUpdateListener
  *
@@ -55,6 +60,15 @@ public interface IIOReadUpdateListener extends EventListener {
      * bands that may be affected is indicated by the value of
      * <code>bands</code>.
      *
+     * <p>
+     *  报告当前读取操作将要开始渐进式传递。支持渐进式编码的格式的读者应该使用此选项在读取渐进编码图像时,在每次通过完成时通知客户端。
+     * 
+     *  <p>将通过通行证更新的区域的估计值由<code> minX </code>,<code> minY </code>,<code> width </code>和<code> height </code>
+     * 参数。
+     * 如果传递是隔行扫描的,即它只更新所选的行或列,则<code> periodX </code>和<code> periodY </code>参数将指示子采样的程度。
+     * 可能受影响的频带集由<code> bands </code>的值指示。
+     * 
+     * 
      * @param source the <code>ImageReader</code> object calling this
      * method.
      * @param theImage the <code>BufferedImage</code> being updated.
@@ -127,6 +141,24 @@ public interface IIOReadUpdateListener extends EventListener {
      * (10, 29) (12, 29) (14, 29)
      * </pre>
      *
+     * <p>
+     *  报告图像的给定区域已更新。应用可以选择重新显示指定区域,例如,以便提供渐进显示效果,或者执行其他增量处理。
+     * 
+     * 注意,不同的图像格式读取器可以以各种不同的顺序产生解码的像素。许多读者将以简单的从上到下,从左到右的顺序产生像素,但是其他读者可以使用多次交错,平铺等。
+     * 更新的顺序甚至可以根据网络速度而不同于呼叫到呼叫, 例如。调用此方法并不保证所有指定的像素实际上都已更新,只是在指定的某个子区域内发生了某些活动。
+     * 
+     *  <p>特定的<code> ImageReader </code>实现可以选择提供更新的频率。每个更新指定图像的给定区域自从上次更新以来已被更新。
+     * 区域由其空间边界框(<code> minX </code>,<code> minY </code>,<code> width </code>和<code> height </code>)描述; X和Y子
+     * 采样因子(<code> periodX </code>和<code> periodY </code>);和一组更新的频带(<code> bands </code>)。
+     *  <p>特定的<code> ImageReader </code>实现可以选择提供更新的频率。每个更新指定图像的给定区域自从上次更新以来已被更新。例如,更新：。
+     * 
+     * <pre>
+     *  minX = 10minY = 20 width = 3 height = 4 periodX = 2 periodY = 3 bands = {1,3}
+     * </pre>
+     * 
+     *  将指示以下像素的频带1和3被更新：
+     * 
+     * 
      * @param source the <code>ImageReader</code> object calling this method.
      * @param theImage the <code>BufferedImage</code> being updated.
      * @param minX the X coordinate of the leftmost updated column
@@ -156,6 +188,12 @@ public interface IIOReadUpdateListener extends EventListener {
      * each pass is completed when reading a progressively
      * encoded image.
      *
+     * <p>
+     * <pre>
+     *  (10,21)(12,20)(12,20)(14,20)(10,23)(12,23)(14,23)(10,26)(12,26)(14,26)(10,29) (12,29)(14,29)
+     * </pre>
+     * 
+     * 
      * @param source the <code>ImageReader</code> object calling this
      * method.
      * @param theImage the <code>BufferedImage</code> being updated.
@@ -171,6 +209,10 @@ public interface IIOReadUpdateListener extends EventListener {
      * each pass is completed when reading a progressively encoded
      * thumbnail image.
      *
+     * <p>
+     * 报告当前读取操作已完成渐进式通过。支持渐进式编码的格式的读者应该使用此选项,以便在读取逐行编码的图片时,在每次通过完成时通知客户端。
+     * 
+     * 
      * @param source the <code>ImageReader</code> object calling this
      * method.
      * @param theThumbnail the <code>BufferedImage</code> thumbnail
@@ -206,6 +248,10 @@ public interface IIOReadUpdateListener extends EventListener {
      * for example, in order to provide a progressive display effect,
      * or perform other incremental processing.
      *
+     * <p>
+     *  报告当前缩略图读取操作即将开始逐行扫描。支持渐进式编码的格式的读者应该使用此选项来在读取渐进编码的缩略图时完成每次通过时通知客户端。
+     * 
+     * 
      * @param source the <code>ImageReader</code> object calling this method.
      * @param theThumbnail the <code>BufferedImage</code> thumbnail
      * being updated.
@@ -238,6 +284,10 @@ public interface IIOReadUpdateListener extends EventListener {
      * each pass is completed when reading a progressively encoded
      * thumbnail image.
      *
+     * <p>
+     *  报告缩略图的给定区域已更新。应用可以选择重新显示指定区域,例如,以便提供渐进显示效果,或者执行其他增量处理。
+     * 
+     * 
      * @param source the <code>ImageReader</code> object calling this
      * method.
      * @param theThumbnail the <code>BufferedImage</code> thumbnail

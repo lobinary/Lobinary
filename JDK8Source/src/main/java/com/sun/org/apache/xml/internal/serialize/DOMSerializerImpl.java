@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xml.internal.serialize;
@@ -73,6 +83,12 @@ import org.w3c.dom.ls.LSSerializerFilter;
  * During serialization of XML data, namespace fixup is done when possible as
  * defined in DOM Level 3 Core, Appendix B.
  *
+ * <p>
+ *  实验：通过将序列化调用委托给<CODE> XMLSerializer </CODE>来实现DOM级别3 org.w3c.ls.LSSerializer。
+ *  LSSerializer提供了一个用于在XML文档中序列化(编写)DOM文档的API。 XML数据被写入输出流。
+ * 在XML数据的序列化过程中,命名空间修复是在可能的情况下完成的,如DOM Level 3 Core,Appendix B中所定义。
+ * 
+ * 
  * @author Elena Litani, IBM
  * @author Gopal Sharma, Sun Microsystems
  * @author Arun Yadav, Sun Microsystems
@@ -97,6 +113,9 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
 
     /** REVISIT: Currently we handle 3 different configurations, would be nice just have one configuration
      * that has different recognized parameters depending if it is used in Core/LS.
+     * <p>
+     *  它具有不同的识别参数,这取决于它是否在Core / LS中使用。
+     * 
      */
     protected short features = 0;
 
@@ -124,6 +143,12 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
      * The constructor turns on the namespace support in <code>XMLSerializer</code> and
      * initializes the following fields: fNSBinder, fLocalNSBinder, fSymbolTable,
      * fEmptySymbol, fXmlSymbol, fXmlnsSymbol, fNamespaceCounter, fFeatures.
+     * <p>
+     *  构造一个新的LSSerializer。
+     * 构造函数打开<code> XMLSerializer </code>中的命名空间支持,并初始化以下字段：fNSBinder,fLocalNSBinder,fSymbolTable,fEmptySymbo
+     * l,fXmlSymbol,fXmlnsSymbol,fNamespaceCounter,fFeatures。
+     *  构造一个新的LSSerializer。
+     * 
      */
     public DOMSerializerImpl() {
         // set default features
@@ -154,6 +179,9 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
 
     /** DOM L3-EXPERIMENTAL:
      * Setter for boolean and object parameters
+     * <p>
+     *  Setter用于布尔和对象参数
+     * 
      */
     public void setParameter(String name, Object value) throws DOMException {
         if (value instanceof Boolean) {
@@ -293,6 +321,9 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
 
     /** DOM L3-EXPERIMENTAL:
      * Check if parameter can be set
+     * <p>
+     * 检查参数是否可以设置
+     * 
      */
     public boolean canSetParameter(String name, Object state) {
 
@@ -344,6 +375,11 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
      * <code>DOMConfiguration</code> object and for which at least one value
      * can be set by the application. Note that this list can also contain
      * parameter names defined outside this specification.
+     * <p>
+     *  DOM级别3核心CR  - 实验。
+     * 
+     *  此<> DOMConfiguration </code>对象支持的参数列表,并且应用程序可以为其设置至少一个值。注意,此列表还可以包含在此规范之外定义的参数名称。
+     * 
      */
     public DOMStringList getParameterNames() {
 
@@ -387,6 +423,9 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
 
     /** DOM L3-EXPERIMENTAL:
      * Getter for boolean and object parameters
+     * <p>
+     *  Getter用于布尔和对象参数
+     * 
      */
     public Object getParameter(String name) throws DOMException {
 
@@ -464,6 +503,11 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
      * produces a fragment of text in a form that is not fully defined by
      * this document, but that should be useful to a human for debugging or
      * diagnostic purposes.
+     * <p>
+     *  DOM L3实验：如上面在<code> LSSerializer </code>的描述中所述,序列化指定的节点。序列化节点的结果将作为字符串返回。编写文档或实体节点将生成一个序列化形式的XML格式。
+     * 编写其他节点类型会生成本文档未完全定义的形式的文本片段,但对于调试或诊断目的而言,这对于人类是有用的。
+     * 
+     * 
      * @param wnode  The node to be written.
      * @return  Returns the serialized data
      * @exception DOMException
@@ -581,6 +625,17 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
      * character (#xA). </dd>
      * </dl>
      * <br>The default value for this attribute is <code>null</code>.
+     * <p>
+     *  DOM L3 EXPERIMENTAL：要在XML中使用的字符的结束行序列。唯一允许的值是：
+     * <dl>
+     *  <dt> <code> null </code> </dt>
+     * <dd>
+     *  使用默认的行结束序列。 DOM实现应该选择默认值来匹配正在使用的环境中的文本文件的通常约定。实现必须选择与2.11"End-of-Line Handling"允许的默认序列匹配的默认序列。
+     *  </dd> <dt> CR-LF </dt> <dt>回车符和换行字符(#xD)</dd> <dt>字符(#xD#xA)。 </dd> <dt> LF </dt> <dd>换行符(#xA)。
+     *  </dd>。
+     * </dl>
+     *  <br>此属性的默认值为<code> null </code>。
+     * 
      */
     public void setNewLine(String newLine) {
         serializer._format.setLineSeparator(newLine);
@@ -609,6 +664,17 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
      * character (#xA). </dd>
      * </dl>
      * <br>The default value for this attribute is <code>null</code>.
+     * <p>
+     * DOM L3 EXPERIMENTAL：要在XML中使用的字符的结束行序列。唯一允许的值是：
+     * <dl>
+     *  <dt> <code> null </code> </dt>
+     * <dd>
+     *  使用默认的行结束序列。 DOM实现应该选择默认值来匹配正在使用的环境中的文本文件的通常约定。实现必须选择与2.11"End-of-Line Handling"允许的默认序列匹配的默认序列。
+     *  </dd> <dt> CR-LF </dt> <dt>回车符和换行字符(#xD)</dd> <dt>字符(#xD#xA)。 </dd> <dt> LF </dt> <dd>换行符(#xA)。
+     *  </dd>。
+     * </dl>
+     *  <br>此属性的默认值为<code> null </code>。
+     * 
      */
     public String getNewLine() {
         return serializer._format.getLineSeparator();
@@ -620,6 +686,9 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
      * to the filter before serializing each Node. Attribute nodes are never
      * passed to the filter. The filter implementation can choose to remove
      * the node from the stream or to terminate the serialization early.
+     * <p>
+     *  当应用程序提供一个过滤器时,序列化器将在序列化每个节点之前调用过滤器。属性节点从不传递到过滤器。过滤器实现可以选择从流中移除节点或者提前终止序列化。
+     * 
      */
     public LSSerializerFilter getFilter(){
         return serializer.fDOMFilter;
@@ -629,6 +698,9 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
      * to the filter before serializing each Node. Attribute nodes are never
      * passed to the filter. The filter implementation can choose to remove
      * the node from the stream or to terminate the serialization early.
+     * <p>
+     *  当应用程序提供一个过滤器时,序列化器将在序列化每个节点之前调用过滤器。属性节点从不传递到过滤器。过滤器实现可以选择从流中移除节点或者提前终止序列化。
+     * 
      */
     public void setFilter(LSSerializerFilter filter){
         serializer.fDOMFilter = filter;
@@ -677,6 +749,22 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
       * "unsupported-encoding" error is raised.
       * <br> If no output is specified in the <code>LSOutput</code>, a
       * "no-output-specified" error is raised.
+      * <p>
+      * 按照上述在<code> LSSerializer </code>接口的一般描述中的方式串行化指定的节点。输出将写入提供的<code> LSOutput </code>。
+      *  <br>当写入<code> LSOutput </code>时,通过查看可通过<code> LSOutput </code>和要写入的项目(或其所有者文档)：。
+      * <ol>
+      *  <li> <code> LSOutput.encoding </code>,
+      * </li>
+      * <li>
+      *  <code> Document.actualEncoding </code>,
+      * </li>
+      * <li>
+      *  <code> Document.xmlEncoding </code>。
+      * </li>
+      * </ol>
+      *  <br>如果通过上述属性无法访问任何编码,则将使用默认编码"UTF-8"。 <br>如果不支持指定的编码,则会出现"不支持编码"错误。
+      *  <br>如果在<code> LSOutput </code>中未指定输出,则会出现"no-output-specified"错误。
+      * 
       * @param node  The node to serialize.
       * @param destination The destination for the serialized DOM.
       * @return  Returns <code>true</code> if <code>node</code> was
@@ -876,6 +964,9 @@ public class DOMSerializerImpl implements LSSerializer, DOMConfiguration {
       * default encoding of "UTF-8" will be used.
       * <br> If the specified encoding is not supported an
       * "unsupported-encoding" error is raised.
+      * <p>
+      * 
+      * 
       * @param node  The node to serialize.
       * @param URI The URI to write to.
       * @return  Returns <code>true</code> if <code>node</code> was

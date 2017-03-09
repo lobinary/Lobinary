@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import java.lang.ref.WeakReference;
  * of synchronized blocks and volatile fields.
  * Be very careful during editing!
  *
+ * <p>
+ *  基于哈希表的映射,它使用弱引用存储键和引用相等性来代替对象相等性来比较它们。当其键不再正常使用时,将自动删除一个条目。支持空值和空键。此类不需要额外的同步。
+ * 线程安全性由同步块和易失性字段的脆弱组合提供。编辑时要非常小心！。
+ * 
  * @see java.util.IdentityHashMap
  * @see java.util.WeakHashMap
  */

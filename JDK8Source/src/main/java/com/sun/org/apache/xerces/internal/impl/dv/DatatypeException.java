@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dv;
@@ -33,6 +43,12 @@ import java.util.MissingResourceException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  数据类型异常的基类。对于DTD类型,可以从错误消息中创建异常。对于模式类型,它需要一个错误代码(如结构规范的附录C中定义),以及一个用于错误消息替换的参数数组。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  *
  * @version $Id: DatatypeException.java,v 1.6 2010-11-01 04:39:43 joehw Exp $
@@ -50,6 +66,10 @@ public class DatatypeException extends Exception {
      * Create a new datatype exception by providing an error code and a list
      * of error message substitution arguments.
      *
+     * <p>
+     *  通过提供错误代码和错误消息替换参数列表来创建新的数据类型异常。
+     * 
+     * 
      * @param key  error code
      * @param args error arguments
      */
@@ -62,6 +82,10 @@ public class DatatypeException extends Exception {
     /**
      * Return the error code
      *
+     * <p>
+     *  返回错误代码
+     * 
+     * 
      * @return  error code
      */
     public String getKey() {
@@ -71,6 +95,10 @@ public class DatatypeException extends Exception {
     /**
      * Return the list of error arguments
      *
+     * <p>
+     *  返回错误参数列表
+     * 
+     * 
      * @return  error arguments
      */
     public Object[] getArgs() {
@@ -83,6 +111,9 @@ public class DatatypeException extends Exception {
      * REVISIT: the system locale is used to load the property file.
      *          do we want to allow the appilcation to specify a
      *          different locale?
+     * <p>
+     *  覆盖此方法以获取格式化和本地化的错误消息。
+     * 
      */
     public String getMessage() {
         ResourceBundle resourceBundle = null;

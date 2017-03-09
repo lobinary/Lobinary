@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -93,6 +94,45 @@ import java.io.IOException;
  * used to update the file's last modified time, last access time or create time
  * attributes as if by invoking the {@link #setTimes setTimes} method.
  *
+ * <p>
+ *  文件属性视图,提供许多文件系统公用的文件属性的基本集</em>视图。
+ * 基本文件属性集由{@link BasicFileAttributes}接口定义的<em>强制</em>和<em>可选</em>文件属性组成。
+ * 
+ *  <p>通过调用{@link #readAttributes()readAttributes}方法,文件属性作为<em>批量操作</em>从文件系统中检索。
+ * 此类还定义了{@link #setTimes setTimes}方法来更新文件的时间属性。
+ * 
+ *  <p>在需要对文件属性进行动态访问时,此属性视图支持的属性具有以下名称和类型：
+ * <blockquote>
+ * <table border="1" cellpadding="8" summary="Supported attributes">
+ * <tr>
+ *  <th>名称</th> <th>键入</th>
+ * </tr>
+ * <tr>
+ *  <td>"lastModifiedTime"</td> <td> {@link FileTime} </td>
+ * </tr>
+ * <tr>
+ *  <td>"lastAccessTime"</td> <td> {@link FileTime} </td>
+ * </tr>
+ * <tr>
+ *  <td>"creationTime"</td> <td> {@link FileTime} </td>
+ * </tr>
+ * <tr>
+ *  <td>"size"</td> <td> {@link Long} </td>
+ * </tr>
+ * <tr>
+ *  <td>"isRegularFile"</td> <td> {@link Boolean} </td>
+ * </tr>
+ * <tr>
+ *  <td>"isDirectory"</td> <td> {@link Boolean} </td>
+ * </tr>
+ * <tr>
+ *  <td>"isSymbolicLink"</td> <td> {@link Boolean} </td>
+ * </tr>
+ * <tr>
+ *  <td>"isOther"</td> <td> {@link Boolean} </td>
+ * </tr>
+ * <tr>
+ * 
  * @since 1.7
  */
 
@@ -102,6 +142,18 @@ public interface BasicFileAttributeView
     /**
      * Returns the name of the attribute view. Attribute views of this type
      * have the name {@code "basic"}.
+     * <p>
+     *  <td>"fileKey"</td> <td> {@link Object} </td>
+     * </tr>
+     * </table>
+     * </blockquote>
+     * 
+     * <p> {@link java.nio.file.Files#getAttribute getAttribute}方法可用于读取任何这些属性,如同通过调用{@link #readAttributes()readAttributes()}
+     * 方法。
+     * 
+     *  <p> {@link java.nio.file.Files#setAttribute setAttribute}方法可用于更新文件的上次修改时间,上次访问时间或创建时间属性,如同通过调用{@link #setTimes setTimes}
+     * 方法。
+     * 
      */
     @Override
     String name();
@@ -112,6 +164,10 @@ public interface BasicFileAttributeView
      * <p> It is implementation specific if all file attributes are read as an
      * atomic operation with respect to other file system operations.
      *
+     * <p>
+     *  返回属性视图的名称。此类型的属性视图名称为{@code"basic"}。
+     * 
+     * 
      * @return  the file attributes
      *
      * @throws  IOException
@@ -154,6 +210,12 @@ public interface BasicFileAttributeView
      *    Files.getFileAttributeView(path, BasicFileAttributeView.class).setTimes(null, time, null);
      * </pre>
      *
+     * <p>
+     *  将基本文件属性读取为批量操作。
+     * 
+     *  <p>如果所有文件属性都被读取为相对于其他文件系统操作的原子操作,则它是实现特定的。
+     * 
+     * 
      * @param   lastModifiedTime
      *          the new last modified time, or {@code null} to not change the
      *          value

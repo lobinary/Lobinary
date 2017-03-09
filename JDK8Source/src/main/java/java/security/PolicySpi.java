@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,13 @@ package java.security;
  * {@code Policy.Parameters} input.
  *
  *
+ * <p>
+ *  此类为{@code Policy}类定义了<i>服务提供程序接口</i>(<b> SPI </b>)。该类中的所有抽象方法必须由希望提供策略实现的每个服务提供者实现。
+ * 
+ *  <p>此抽象类的子类实现必须提供一个公共构造函数,它将{@code Policy.Parameters}对象作为输入参数。
+ * 如果不理解{@code Policy.Parameters}输入,此构造函数也必须抛出IllegalArgumentException。
+ * 
+ * 
  * @since 1.6
  */
 
@@ -47,6 +55,10 @@ public abstract class PolicySpi {
     /**
      * Check whether the policy has granted a Permission to a ProtectionDomain.
      *
+     * <p>
+     *  检查策略是否已授予对ProtectionDomain的权限。
+     * 
+     * 
      * @param domain the ProtectionDomain to check.
      *
      * @param permission check whether this permission is granted to the
@@ -65,6 +77,11 @@ public abstract class PolicySpi {
      * <p> The default implementation of this method does nothing.
      * This method should be overridden if a refresh operation is supported
      * by the policy implementation.
+     * <p>
+     *  刷新/重新加载策略配置。此方法的行为取决于实现。例如,在基于文件的策略上调用{@code refresh}将导致该文件被重新读取。
+     * 
+     *  <p>此方法的默认实现不执行任何操作。如果策略实现支持刷新操作,则应覆盖此方法。
+     * 
      */
     protected void engineRefresh() { }
 
@@ -77,6 +94,12 @@ public abstract class PolicySpi {
      * overridden if the policy implementation can return a set of
      * permissions granted to a CodeSource.
      *
+     * <p>
+     *  返回一个PermissionCollection对象,其中包含授予指定CodeSource的权限集。
+     * 
+     *  <p>此方法的默认实现返回Policy.UNSUPPORTED_EMPTY_COLLECTION对象。如果策略实现可以返回授予CodeSource的一组权限,则可以覆盖此方法。
+     * 
+     * 
      * @param codesource the CodeSource to which the returned
      *          PermissionCollection has been granted.
      *
@@ -101,6 +124,10 @@ public abstract class PolicySpi {
      * overridden if the policy implementation can return a set of
      * permissions granted to a ProtectionDomain.
      *
+     * <p>
+     * 返回包含授予指定ProtectionDomain的权限集的PermissionCollection对象。
+     * 
+     * 
      * @param domain the ProtectionDomain to which the returned
      *          PermissionCollection has been granted.
      *

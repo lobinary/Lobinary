@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.atomic;
@@ -42,6 +46,9 @@ import java.util.concurrent.ThreadLocalRandom;
  * A package-local class holding common representation and mechanics
  * for classes supporting dynamic striping on 64bit values. The class
  * extends Number so that concrete subclasses must publicly do so.
+ * <p>
+ *  一个包本地类,保存64位值上支持动态条带化的类的公共表示和机制。该类扩展了Number,以便具体的子类必须公开这样做。
+ * 
  */
 @SuppressWarnings("serial")
 abstract class Striped64 extends Number {
@@ -109,6 +116,28 @@ abstract class Striped64 extends Number {
      * under the assumption that for long-running instances, observed
      * contention levels will recur, so the cells will eventually be
      * needed again; and for short-lived ones, it does not matter.
+     * <p>
+     *  这个类维护一个延迟初始化的原子性更新变量表,加上一个额外的"基础"字段。表的大小是2的幂。索引使用掩蔽的每线程哈希码。这个类中几乎所有的声明都是package-private,直接由子类访问。
+     * 
+     *  表条目是类Cell;填充一个AtomicLong的变体(通过@ sun.misc.Contended)以减少缓存争用。
+     * 填充对于大多数Atomics来说都是过度的,因为它们通常在存储器中不规则地分散,因此彼此不会产生太大的干扰。
+     * 但是,存在于数组中的原子对象将倾向于彼此相邻放置,因此在没有这种预防措施的情况下,大多数情况下会共享缓存行(带来巨大的负面性能影响)。
+     * 
+     * 部分是因为单元格相对较大,我们避免创建它们,直到需要它们。当没有争用时,对基本字段进行所有更新。
+     * 在第一次争用(基本更新上失败的CAS)时,将表初始化为大小2.在进一步争用时,表大小加倍,直到达到大于或等于CPUS数的2的最接近的幂。表槽保持为空(null),直到需要它们。
+     * 
+     *  单个自旋锁("cellsBusy")用于初始化和调整表格大小,以及用新的单元格填充插槽。不需要阻塞锁;当锁不可用时,线程尝试其他插槽(或基座)。在这些重试期间,争用和局部性增加,这仍然优于替代方案。
+     * 
+     * 通过ThreadLocalRandom维护的Thread探针字段用作每个线程的哈希码。我们让它们保持未初始化为零(如果它们以这种方式),直到它们在时隙0竞争。然后它们被初始化为通常不与其他冲突的值。
+     * 执行更新操作时,失败的CASes会指示争用和/或表冲突。在冲突时,如果表大小小于容量,则其大小加倍,除非一些其他线程保持锁定。如果散列槽是空的,并且锁可用,则创建新的单元。
+     * 否则,如果插槽存在,则尝试CAS。重试通过"双重散列"进行,使用辅助散列(Marsaglia XorShift)尝试找到一个空闲插槽。
+     * 
+     *  表大小被限制,因为当有比CPU多的线程时,假设每个线程被绑定到CPU,将存在将线程映射到消除冲突的槽的完美散列函数。当我们达到容量时,我们通过随机地改变冲突线程的哈希码来搜索这个映射。
+     * 因为搜索是随机的,并且冲突仅通过CAS失败而变得已知,所以收敛可能很慢,并且因为线程通常不会永远绑定到CPUS,可能不会发生。然而,尽管有这些限制,在这些情况下观察到的竞争速率通常较低。
+     * 
+     * 当已经对其进行了散列的线程终止时,以及在双倍表导致在扩展掩码下没有线程对其进行散列的情况下,单元可能变得未使用。
+     * 我们不试图检测或删除这样的细胞,假设对于长期运行的实例,观察到竞争水平将重现,所以细胞最终将再次需要;对于短命的,没有关系。
+     * 
      */
 
     /**
@@ -116,6 +145,11 @@ abstract class Striped64 extends Number {
      *
      * JVM intrinsics note: It would be possible to use a release-only
      * form of CAS here, if it were provided.
+     * <p>
+     *  AtomicLong的填充变体仅支持原始访问加CAS。
+     * 
+     *  JVM内在注意：如果提供的话,可以在这里使用CAS的只发布形式。
+     * 
      */
     @sun.misc.Contended static final class Cell {
         volatile long value;
@@ -144,28 +178,43 @@ abstract class Striped64 extends Number {
 
     /**
      * Table of cells. When non-null, size is a power of 2.
+     * <p>
+     *  单元格表。当非null时,size是2的幂。
+     * 
      */
     transient volatile Cell[] cells;
 
     /**
      * Base value, used mainly when there is no contention, but also as
      * a fallback during table initialization races. Updated via CAS.
+     * <p>
+     *  基本值,主要用于没有争用时,但也作为表初始化比赛期间的后备。通过CAS更新。
+     * 
      */
     transient volatile long base;
 
     /**
      * Spinlock (locked via CAS) used when resizing and/or creating Cells.
+     * <p>
+     *  在调整大小和/或创建单元格时使用的旋锁(通过CAS锁定)。
+     * 
      */
     transient volatile int cellsBusy;
 
     /**
      * Package-private default constructor
+     * <p>
+     *  软件包私有默认构造函数
+     * 
      */
     Striped64() {
     }
 
     /**
      * CASes the base field.
+     * <p>
+     *  CASes基本字段。
+     * 
      */
     final boolean casBase(long cmp, long val) {
         return UNSAFE.compareAndSwapLong(this, BASE, cmp, val);
@@ -173,6 +222,9 @@ abstract class Striped64 extends Number {
 
     /**
      * CASes the cellsBusy field from 0 to 1 to acquire lock.
+     * <p>
+     *  将cellsBusy字段从0到1用于获取锁定。
+     * 
      */
     final boolean casCellsBusy() {
         return UNSAFE.compareAndSwapInt(this, CELLSBUSY, 0, 1);
@@ -181,6 +233,9 @@ abstract class Striped64 extends Number {
     /**
      * Returns the probe value for the current thread.
      * Duplicated from ThreadLocalRandom because of packaging restrictions.
+     * <p>
+     *  返回当前线程的探测值。从ThreadLocalRandom因为包装限制而重复。
+     * 
      */
     static final int getProbe() {
         return UNSAFE.getInt(Thread.currentThread(), PROBE);
@@ -190,6 +245,9 @@ abstract class Striped64 extends Number {
      * Pseudo-randomly advances and records the given probe value for the
      * given thread.
      * Duplicated from ThreadLocalRandom because of packaging restrictions.
+     * <p>
+     *  伪随机前进并记录给定线程的给定探针值。从ThreadLocalRandom因为包装限制而重复。
+     * 
      */
     static final int advanceProbe(int probe) {
         probe ^= probe << 13;   // xorshift
@@ -206,6 +264,10 @@ abstract class Striped64 extends Number {
      * problems of optimistic retry code, relying on rechecked sets of
      * reads.
      *
+     * <p>
+     *  处理涉及初始化,调整大小,创建新单元格和/或争用的更新的情况。见上面的解释。此方法遇到通常的非模块化问题的乐观重试代码,依赖于重新检查的读取集。
+     * 
+     * 
      * @param x the value
      * @param fn the update function, or null for add (this convention
      * avoids the need for an extra field or function in LongAdder).
@@ -297,6 +359,8 @@ abstract class Striped64 extends Number {
      * in too many places to sensibly merge with long version, given
      * the low-overhead requirements of this class. So must instead be
      * maintained by copy/paste/adapt.
+     * <p>
+     * 与longAccumulate相同,但是在太多地方注入长/双转换以明智地与长版本合并,因为这个类的低开销需求。所以必须改为通过复制/粘贴/适应维护。
      */
     final void doubleAccumulate(double x, DoubleBinaryOperator fn,
                                 boolean wasUncontended) {

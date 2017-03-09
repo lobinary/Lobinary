@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -87,6 +88,8 @@ public interface ORBData {
     public int getGIOPBuffMgrStrategy(GIOPVersion gv) ;
 
     /**
+    /* <p>
+    /* 
      * @return the GIOP Target Addressing preference of the ORB.
      * This ORB by default supports all addressing dispositions unless specified
      * otherwise via a java system property ORBConstants.GIOP_TARGET_ADDRESSING
@@ -117,6 +120,12 @@ public interface ORBData {
      *  the ORBServerId parameter, System properties, or other means.
      *  The user is also required to ensure that no two persistent servers
      *  on the same host have the same server-id.
+     * <p>
+     *  跨服务器的多个激活。
+     * 这与com.sun.corba.se.impl.iiop.ORB.getTransientServerId()相反,com.sun.corba.getTransientServerId()返回一个临时标
+     * 识,该标识保证在此服务器的多个激活中不同。
+     *  跨服务器的多个激活。用户/环境需要在每次启动此服务器时在ORBServerId参数,系统属性或其他方法中提供persistent-server-id。
+     * 还要求用户确保同一主机上的两个持久服务器不具有相同的服务器标识。
      */
     public int getPersistentServerId();
 
@@ -127,6 +136,8 @@ public interface ORBData {
     /**
     * Get the prefered code sets for connections. Should the client send the
     * code set service context on every request?
+    * <p>
+    * 
     */
     public CodeSetComponentInfo getCodeSetComponentInfo() ;
 

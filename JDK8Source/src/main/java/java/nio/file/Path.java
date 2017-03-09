@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,6 +92,46 @@ import java.util.Iterator;
  * <p> Implementations of this interface are immutable and safe for use by
  * multiple concurrent threads.
  *
+ * <p>
+ *  可用于在文件系统中查找文件的对象。它通常表示系统相关的文件路径。
+ * 
+ *  <p> {@code Path}表示一个层次化的路径,由目录和文件名元素序列组成,由特殊分隔符或分隔符分隔。还可以存在标识文件系统层次结构的<em>根组件</em>。
+ * 距目录层次结构根目录<em>最远的名称元素</em>是文件或目录的名称。其他名称元素是目录名称。 {@code Path}可以表示根,根和名称序列,或者简单地表示一个或多个名称元素。
+ * 如果{@code Path}仅包含一个名称元素为空,则被视为<i>空路径</i>。使用<i>空路径</i>访问文件等效于访问文件系统的默认目录。
+ *  {@code Path}定义访问路径组件或子序列的{@link #getFileName()getFileName},{@link #getParent getParent},{@link #getRoot getRoot}
+ * 和{@link #subpath subpath}的名称元素。
+ * 如果{@code Path}仅包含一个名称元素为空,则被视为<i>空路径</i>。使用<i>空路径</i>访问文件等效于访问文件系统的默认目录。
+ * 
+ * <p>除了访问路径的组件,{@code Path}还定义了{@link #resolve(Path)resolve}和{@link #resolveSibling(Path)resolveSibling}
+ * 方法来组合路径。
+ *  {@link #relativize relativize}方法,可用于构建两个路径之间的相对路径。
+ * 路径可以是{@link #compareTo comparing},并使用{@link #startsWith startsWith}和{@link #endsWith endsWith}方法彼此测试。
+ *  {@link #relativize relativize}方法,可用于构建两个路径之间的相对路径。
+ * 
+ *  <p>此接口扩展{@link Watchable}接口,以便路径所在的目录可以{@link #register注册}与{@link WatchService}和所监视目录中的条目。 </p>
+ * 
+ *  <p> <b>警告：</b>此接口仅供开发自定义文件系统实现的用户使用。在将来的版本中,可以将方法添加到此接口。 </p>
+ * 
+ *  <h2>访问文件</h2> <p>路径可以与{@link Files}类一起使用,以处理文件,目录和其他类型的文件。
+ * 例如,假设我们想要一个{@link java.io.BufferedReader}从文件"{@code access.log}"中读取文本。
+ * 该文件位于相对于当前工作目录的目录"{@code logs}"中,并且采用UTF-8编码。
+ * <pre>
+ *  路径path = FileSystems.getDefault()。
+ * getPath("logs","access.log"); BufferedReader reader = Files.newBufferedReader(path,StandardCharsets.U
+ * TF_8);。
+ *  路径path = FileSystems.getDefault()。
+ * </pre>
+ * 
+ * <a name="interop"> </a> <h2>互操作性</h2> <p>与默认{@link java.nio.file.spi.FileSystemProvider provider}相关联的
+ * 路径通常可与{@link java.io.File java.io.File}类。
+ * 其他提供程序创建的路径不太可能与{@code java.io.File}表示的抽象路径名称可互操作。
+ *  {@link java.io.File#toPath toPath}方法可用于从由{@code java.io.File}对象表示的抽象路径名称获取{@code Path}。
+ * 生成的{@code Path}可以用于与{@code java.io.File}对象相同的文件。
+ * 此外,{@link #toFile toFile}方法可用于从{@code Path}的{@code String}表示构建{@code File}。
+ * 
+ *  <h2>并发</h2> <p>此接口的实现是不可变的,并且对于多个并发线程使用是安全的。
+ * 
+ * 
  * @since 1.7
  * @see Paths
  */
@@ -101,6 +142,10 @@ public interface Path
     /**
      * Returns the file system that created this object.
      *
+     * <p>
+     *  返回创建此对象的文件系统。
+     * 
+     * 
      * @return  the file system that created this object
      */
     FileSystem getFileSystem();
@@ -111,6 +156,12 @@ public interface Path
      * <p> An absolute path is complete in that it doesn't need to be combined
      * with other path information in order to locate a file.
      *
+     * <p>
+     *  告诉这个路径是否是绝对路径。
+     * 
+     *  <p>绝对路径是完整的,因为它不需要与其他路径信息组合以定位文件。
+     * 
+     * 
      * @return  {@code true} if, and only if, this path is absolute
      */
     boolean isAbsolute();
@@ -119,6 +170,10 @@ public interface Path
      * Returns the root component of this path as a {@code Path} object,
      * or {@code null} if this path does not have a root component.
      *
+     * <p>
+     *  将此路径的根组件作为{@code Path}对象返回,如果此路径没有根组件,则返回{@code null}。
+     * 
+     * 
      * @return  a path representing the root component of this path,
      *          or {@code null}
      */
@@ -129,6 +184,10 @@ public interface Path
      * {@code Path} object. The file name is the <em>farthest</em> element from
      * the root in the directory hierarchy.
      *
+     * <p>
+     *  将由此路径表示的文件或目录的名称返回为{@code Path}对象。文件名是目录层次结构中距根目录的<em>最远的</em>元素。
+     * 
+     * 
      * @return  a path representing the name of the file or directory, or
      *          {@code null} if this path has zero elements
      */
@@ -155,6 +214,17 @@ public interface Path
      * subpath(0,&nbsp;getNameCount()-1);
      * </pre></blockquote>
      *
+     * <p>
+     *  返回<em>父路径</em>或{@code null}(如果此路径没有父路径)。
+     * 
+     * <p>此路径对象的父对象包含此路径的根组件(如果有)和路径中每个元素(目录层次结构中距根目录<em>最远的</em>除外)。此方法不访问文件系统;路径或其父级可能不存在。此外,该方法不消除诸如"。
+     * "的特殊名称。和"..",其可以在一些实现中使用。例如,在UNIX上,"{@code / a / b / c}"的父代为"{@code / a / b}",父代{@code"x / y /。
+     * }"为"{ @code x / y}"。此方法可与{@link #normalize normalize}方法一起使用,以消除需要使用类似于shell的导航的情况下的冗余名称。
+     * 
+     *  <p>如果此路径具有一个或多个元素,并且没有根组件,则此方法等效于评估表达式：<blockquote> <pre> subpath(0,getNameCount() -  1); </pre> </blockquote>
+     * 。
+     * 
+     * 
      * @return  a path representing the path's parent
      */
     Path getParent();
@@ -162,6 +232,10 @@ public interface Path
     /**
      * Returns the number of name elements in the path.
      *
+     * <p>
+     *  返回路径中的名称元素数。
+     * 
+     * 
      * @return  the number of elements in the path, or {@code 0} if this path
      *          only represents a root component
      */
@@ -175,6 +249,13 @@ public interface Path
      * has index {@code 0}. The element that is <em>farthest</em> from the root
      * has index {@link #getNameCount count}{@code -1}.
      *
+     * <p>
+     *  以{@code Path}对象的形式返回此路径的name元素。
+     * 
+     *  <p> {@code index}参数是要返回的名称元素的索引。与目录层次结构中的根最接近的元素</em>具有索引{@code 0}。
+     * 距根的<em>最远</em>的元素具有索引{@link #getNameCount count} {@ code -1}。
+     * 
+     * 
      * @param   index
      *          the index of the element
      *
@@ -199,6 +280,14 @@ public interface Path
      * that begin at {@code beginIndex} and extend to the element at index {@code
      * endIndex-1}.
      *
+     * <p>
+     *  返回一个相对的{@code Path},它是此路径的名称元素的子序列。
+     * 
+     * <p> {@code beginIndex}和{@code endIndex}参数指定名称元素的子序列。在目录层次结构中与根最接近的名称</em>具有索引{@code 0}。
+     * 从根开始的<em>最远的</em>名称具有索引{@link #getNameCount count} {@ code -1}。
+     * 返回的{@code Path}对象的名称元素从{@code beginIndex}开始,并延伸到索引{@code endIndex-1}处的元素。
+     * 
+     * 
      * @param   beginIndex
      *          the index of the first element, inclusive
      * @param   endIndex
@@ -231,6 +320,17 @@ public interface Path
      * <p> If the given path is associated with a different {@code FileSystem}
      * to this path then {@code false} is returned.
      *
+     * <p>
+     *  测试此路径是否以给定路径开头。
+     * 
+     *  <p>如果此路径的根组件<em>开始</em>,此路径</em>将使用给定路径启动</em>,并且此路径以与指定路径的根组件相同的名称元素开头,给定路径。
+     * 如果给定路径具有比此路径更多的名称元素,则返回{@code false}。
+     * 
+     *  <p>此路径的根组件是否以给定路径的根组件开头,是文件系统特定的。如果此路径没有根组件,并且给定路径具有根组件,则此路径不以给定路径开始。
+     * 
+     *  <p>如果给定路径与不同的{@code FileSystem}与此路径相关联,则返回{@code false}。
+     * 
+     * 
      * @param   other
      *          the given path
      *
@@ -246,6 +346,11 @@ public interface Path
      * "{@code foo/bar}" starts with "{@code foo}" and "{@code foo/bar}". It
      * does not start with "{@code f}" or "{@code fo}".
      *
+     * <p>
+     *  测试此路径是否以通过转换给定路径字符串构造的{@code Path}开始,完全按照{@link #startsWith(Path)startsWith(Path)}方法指定的方式。
+     * 例如,在UNIX上,路径"{@code foo / bar}"以"{@code foo}"和"{@code foo / bar}"开头。它不以"{@code f}"或"{@code fo}"开头。
+     * 
+     * 
      * @param   other
      *          the given path string
      *
@@ -276,6 +381,18 @@ public interface Path
      * <p> If the given path is associated with a different {@code FileSystem}
      * to this path then {@code false} is returned.
      *
+     * <p>
+     * 测试此路径是否以给定路径结束。
+     * 
+     *  <p>如果给定路径具有<em> N </em>个元素,且没有根组件,并且此路径具有<em> N </em>个或更多元素,则此路径以给定路径结束从距离根最远的元素开始的每个路径的<em> N </em>
+     * 元素相等。
+     * 
+     *  <p>如果给定路径具有根组件,则如果该路径的根组件以给定路径的根组件结束,则该路径以给定路径结束,并且两个路径的对应元素是相等的。此路径的根组件是否以给定路径的根组件结尾是文件系统特定的。
+     * 如果此路径没有根组件,并且给定路径具有根组件,则此路径不以给定路径结束。
+     * 
+     *  <p>如果给定路径与不同的{@code FileSystem}与此路径相关联,则返回{@code false}。
+     * 
+     * 
      * @param   other
      *          the given path
      *
@@ -294,6 +411,13 @@ public interface Path
      * Path}"{@code foo/bar}" with the {@code String} "{@code bar/}" returns
      * {@code true}.
      *
+     * <p>
+     *  测试此路径是否以通过转换给定路径字符串构造的{@code Path}以{@link #endsWith(Path)endsWith(Path)}方法指定的方式结束。
+     * 例如,在UNIX上,路径"{@code foo / bar}"以"{@code foo / bar}"和"{@code bar}"结尾。
+     * 它不以"{@code r}​​"或"{@code / bar}"结尾。
+     * 请注意,不考虑尾随分隔符,因此使用{@code String}"{@code bar /}"在{@code Path}"{@ code foo / bar}"上调用此方法会返回{@code真正}。
+     * 
+     * 
      * @param   other
      *          the given path string
      *
@@ -323,6 +447,16 @@ public interface Path
      * path may result in the path that locates a different file than the original
      * path. This can arise when the preceding name is a symbolic link.
      *
+     * <p>
+     *  返回一个路径,其中消除了冗余名称元素的此路径。
+     * 
+     * <p>此方法的精确定义与实现相关,但通常来源于此路径,即不包含<em>冗余名称元素的路径。在许多文件系统中,"{@code。}"和"{@code ..}"是用于指示当前目录和父目录的特殊名称。
+     * 在这样的文件系统中,所有出现的"{@code。}"被认为是多余的。
+     * 如果"{@code ..}"前面有一个非"{@ code ..}"名称,那么这两个名称将被视为多余的(识别此类名称的过程将重复,直到不再适用为止)。
+     * 
+     *  <p>此方法不访问文件系统;该路径可能找不到存在的文件。从路径中删除"{@code ..}"和前面的名称可能会导致找到与原始路径不同的文件的路径。当前面的名称是符号链接时,会出现这种情况。
+     * 
+     * 
      * @return  the resulting path or this path if it does not contain
      *          redundant name elements; an empty path is returned if this path
      *          does have a root component and all name elements are redundant
@@ -348,6 +482,17 @@ public interface Path
      * a root component then resolution is highly implementation dependent and
      * therefore unspecified.
      *
+     * <p>
+     *  根据此路径解析给定路径。
+     * 
+     * <p>如果{@code other}参数是{@link #isAbsolute()absolute}路径,那么此方法会简单地返回{@code other}。
+     * 如果{@code other}是一个<i>空路径</i>,则此方法会简单地返回此路径。否则,此方法将此路径视为目录,并根据此路径解析给定路径。
+     * 在最简单的情况下,给定路径没有{@link #getRoot root}组件,在这种情况下,此方法<em>连接</em>给定路径到此路径,并返回结果路径{@link# endsWith ends}与给定
+     * 的路径。
+     * 如果{@code other}是一个<i>空路径</i>,则此方法会简单地返回此路径。否则,此方法将此路径视为目录,并根据此路径解析给定路径。
+     * 在给定路径具有根分量的情况下,分辨率高度依赖于实现,因此未指定。
+     * 
+     * 
      * @param   other
      *          the path to resolve against this path
      *
@@ -365,6 +510,13 @@ public interface Path
      * invoking this method with the path string "{@code gus}" will result in
      * the {@code Path} "{@code foo/bar/gus}".
      *
+     * <p>
+     *  将给定的路径字符串转换为{@code Path},并以{@link #resolve(Path)resolve}方法指定的方式将其解析为{@code Path}。
+     * 例如,假设名称分隔符是"{@code /}",路径代表"{@code foo / bar}",则使用路径字符串"{@code gus}"调用此方法将导致{ @code Path}"{@code foo / bar / gus}
+     * "。
+     *  将给定的路径字符串转换为{@code Path},并以{@link #resolve(Path)resolve}方法指定的方式将其解析为{@code Path}。
+     * 
+     * 
      * @param   other
      *          the path string to resolve against this path
      *
@@ -389,6 +541,15 @@ public interface Path
      * returns this path's parent, or where this path doesn't have a parent, the
      * empty path.
      *
+     * <p>
+     * 根据此路径的{@link #getParent parent}路径解析指定的路径。这在文件名需要用另一个文件名替换<i> </i>时非常有用。
+     * 例如,假设名称分隔符是"{@code /}",路径代表"{@code dir1 / dir2 / foo}",然后使用{@code Path} {@code bar}将导致{@code Path}"{@code dir1 / dir2 / bar}
+     * "。
+     * 根据此路径的{@link #getParent parent}路径解析指定的路径。这在文件名需要用另一个文件名替换<i> </i>时非常有用。
+     * 如果此路径没有父路径,或{@code other}是{@link #isAbsolute()absolute},则此方法返回{@code other}。
+     * 如果{@code other}是一个空路径,那么此方法将返回此路径的父路径,或者此路径没有父路径,即空路径。
+     * 
+     * 
      * @param   other
      *          the path to resolve against this path's parent
      *
@@ -403,6 +564,11 @@ public interface Path
      * this path's {@link #getParent parent} path in exactly the manner
      * specified by the {@link #resolveSibling(Path) resolveSibling} method.
      *
+     * <p>
+     *  将给定的路径字符串转换为{@code Path},并按照{@link #getParent parent}路径完全按照{@link #resolveSibling(Path)resolveSibling}
+     * 方法指定的方式将其解析。
+     * 
+     * 
      * @param   other
      *          the path string to resolve against this path's parent
      *
@@ -445,6 +611,26 @@ public interface Path
      * "../x"}. If {@code "b"} is a symbolic link then is implementation
      * dependent if {@code "a/b/../x"} would locate the same file as {@code "/a/x"}.
      *
+     * <p>
+     *  构造此路径和给定路径之间的相对路径。
+     * 
+     * <p>相对性是{@link #resolve(Path)resolution}的倒数。
+     * 此方法尝试构造{@link #isAbsolute relative}路径,当{@link #resolve(Path)已解决}对此路径时,将生成一个路径,该路径定位与给定路径相同的文件。
+     * 例如,在UNIX上,如果此路径是{@code"/ a / b"}并且给定路径是{@code"/ a / b / c / d"},则生成的相对路径将是{@code"光盘"}。
+     * 在这个路径和给定路径没有{@link #getRoot root}组件的情况下,可以构造相对路径。如果只有一个路径具有根组件,则不能构造相对路径。
+     * 在两个路径都具有根组件的情况下,如果可以构建相对路径,则它是依赖于实现的。如果此路径和给定路径是{@link #equals equal},则返回<i>空路径</i>。
+     * 
+     *  <p>对于任何两个{@link #normalize normalized}路径p </i>和<i> q </i>,其中<i> q </i>没有根组件,
+     * <blockquote>
+     *  <i> p </i> <tt> .relativize(</tt> <i> p </i> <tt> .resolve(</tt> <i> q </i> <tt>))。
+     *  equals(</tt> <i> q </i> <tt>)</tt>。
+     * </blockquote>
+     * 
+     * <p>当支持符号链接时,当根据此路径解析时,生成的路径是否可用于定位与{@code other}相关的{@link Files#isSameFile same}文件的路径是与实现相关的。
+     * 例如,如果这个路径是{@code"/ a / b"}并且给定路径是{@code"/ a / x"},则所得到的相对路径可以是{@code"../x"}。
+     * 如果{@code"b"}是一个符号链接,那么依赖于实现,如果{@code"a / b /../ x"}定位与{@code"/ a / x"}相同的文件。
+     * 
+     * 
      * @param   other
      *          the path to relativize against this path
      *
@@ -495,6 +681,28 @@ public interface Path
      * A format for compound URIs is not defined in this release; such a scheme
      * may be added in a future release.
      *
+     * <p>
+     *  返回一个URI以表示此路径。
+     * 
+     *  <p>此方法使用等于标识提供程序的URI方案的{@link URI#getScheme()方案}构造绝对{@link URI}。方案特定部分的确切形式高度依赖于提供商。
+     * 
+     *  <p>在默认提供程序的情况下,URI是具有{@link URI#getPath()path}组件的层次结构,它是绝对的。查询和片段组件未定义。权限组件是否被定义是依赖于实现的。
+     * 不能保证{@code URI}可以用于构造一个{@link java.io.File java.io.File}。
+     * 特别地,如果该路径表示通用命名约定(UNC)路径,则UNC服务器名称可以被编码在所得到的URI的权限组件中。
+     * 在默认提供者的情况下,并且文件存在,并且可以确定该文件是目录,则所得到的{@code URI}将以斜杠结束。
+     * 
+     * <p>默认提供商向{@link java.io.File}类提供了类似的<em>往返</em>保证。
+     * 对于给定的{@code Path} <i> p </i>,保证<blockquote> <tt> {@link Paths#get(URI)Paths.get}(</tt> <i> p < i> <tt>
+     *  .toUri())。
+     * <p>默认提供商向{@link java.io.File}类提供了类似的<em>往返</em>保证。equals(</tt> <i> p </i> <tt>。
+     * {@ link #toAbsolutePath()toAbsolutePath}())</tt>。
+     * </blockquote>
+     *  只要原始的{@code Path},{@code URI}和新的{@code Path}都是在同一个Java虚拟机中创建的(可能是不同的调用)。其他提供者是否提供任何保证是提供者特定的,因此未指定。
+     * 
+     *  <p>当文件系统被构造为作为文件系统访问文件的内容时,如果返回的URI表示文件系统中的给定路径或者它代表一个复合<em> </em>用于编码封闭文件系统的URI的URI。
+     * 本版本中未定义复合URI的格式;这样的方案可以在将来的版本中添加。
+     * 
+     * 
      * @return  the URI representing this path
      *
      * @throws  java.io.IOError
@@ -520,6 +728,13 @@ public interface Path
      * against a file system default directory. Depending on the implementation,
      * this method may throw an I/O error if the file system is not accessible.
      *
+     * <p>
+     *  返回表示此路径的绝对路径的{@code Path}对象。
+     * 
+     *  <p>如果此路径已经是{@l​​ink Path#isAbsolute absolute},则此方法只返回此路径。否则,此方法以实现相关方式解析路径,通常通过根据文件系统缺省目录解析路径。
+     * 根据实现,如果文件系统不可访问,此方法可能会引发I / O错误。
+     * 
+     * 
      * @return  a {@code Path} object representing the absolute path
      *
      * @throws  java.io.IOError
@@ -561,6 +776,23 @@ public interface Path
      * then the names are only removed if it guaranteed that the resulting path
      * will locate the same file as this path.
      *
+     * <p>
+     *  返回现有文件的<em> real </em>路径。
+     * 
+     * <p>这个方法的精确定义是依赖于实现的,但是一般来说,它从这个路径派生出{@link #isAbsolute absolute}路径,该路径定位{@link Files#isSameFile same}
+     * 文件作为此路径,但具有名称元素它们表示目录和文件的实际名称。
+     * 例如,如果文件系统上的文件名比较不区分大小写,则名称元素表示其实际情况下的名称。此外,生成的路径具有删除的冗余名称元素。
+     * 
+     *  <p>如果此路径是相对的,则首先获得其绝对路径,如同通过调用{@link #toAbsolutePath toAbsolutePath}方法。
+     * 
+     *  <p> {@code options}数组可用于指示如何处理符号链接。默认情况下,符号链接解析为其最终目标。
+     * 如果存在{@link LinkOption#NOFOLLOW_LINKS NOFOLLOW_LINKS}选项,则此方法不会解析符号链接。
+     * 
+     *  一些实现允许使用特殊名称,例如"{@code ..}"来引用父目录。
+     * 当导出实际路径</em>,并且一个"{@code ..}"(或等价物)前面有一个非"{@ code ..}"名称时,实现通常会导致两个名称即将被删除。
+     * 当不解析符号链接时,前面的名称是一个符号链接,那么只有在保证结果路径将找到与此路径相同的文件时才会删除这些名称。
+     * 
+     * 
      * @param   options
      *          options indicating how symbolic links are handled
      *
@@ -590,6 +822,13 @@ public interface Path
      * File} object returned by this method is {@link #equals equal} to the
      * original {@code File}.
      *
+     * <p>
+     * 返回表示此路径的{@link File}对象。在{@code Path}与默认提供程序相关联的情况下,此方法等同于返回使用此路径的{@code String}表示构造的{@code File}对象。
+     * 
+     *  <p>如果此路径是通过调用{@code File} {@link File#toPath toPath}方法创建的,那么不能保证此方法返回的{@code File}对象是{@link #equals equal}
+     * 到原来的{@code File}。
+     * 
+     * 
      * @return  a {@code File} object representing this path
      *
      * @throws  UnsupportedOperationException
@@ -631,6 +870,24 @@ public interface Path
      * link then it is implementation specific if the watch continues to depend
      * on the existence of the symbolic link after it is registered.
      *
+     * <p>
+     *  使用手表服务注册此路径所在的文件。
+     * 
+     *  <p>在此版本中,此路径查找存在的目录。该目录已注册到监视服务,以便可以监视目录中的条目。 {@code events}参数是要注册的事件,可能包含以下事件：
+     * <ul>
+     *  <li> {@ link StandardWatchEventKinds#ENTRY_CREATE ENTRY_CREATE}  - 创建或移动到目录中的条目</li> <li> {@ link StandardWatchEventKinds#ENTRY_DELETE ENTRY_DELETE}
+     *   - 条目已删除或移出目录</li> <li> {@link StandardWatchEventKinds#ENTRY_MODIFY ENTRY_MODIFY}  - 目录中的条目已修改</li>。
+     * </ul>
+     * 
+     *  <p>这些事件的{@link WatchEvent#context context}是此路径所在的目录与定位创建,删除或修改的目录条目的路径之间的相对路径。
+     * 
+     *  <p>事件集合可能包含未由枚举{@link StandardWatchEventKinds}定义的其他实现特定事件
+     * 
+     * <p> {@code modifiers}参数指定限定目录注册方式的<em>修饰符</em>。此版本没有定义任何<em>标准</em>修饰符。它可以包含实现特定的修饰符。
+     * 
+     *  <p>当通过符号链接向观察服务注册文件时,如果在注册之后手表继续依赖于符号链接的存在,则它是实现特定的。
+     * 
+     * 
      * @param   watcher
      *          the watch service to which this object is to be registered
      * @param   events
@@ -681,6 +938,24 @@ public interface Path
      *
      *     WatchKey key = dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
      * </pre>
+     * <p>
+     *  使用手表服务注册此路径所在的文件。
+     * 
+     *  <p>此方法的调用行为与调用完全相同
+     * <pre>
+     *  看门人。
+     * {@ link #register(WatchService,WatchEvent.Kind [],WatchEvent.Modifier [])register}(watcher,events,new
+     *  WatchEvent.Modifier [0]);。
+     *  看门人。
+     * </pre>
+     * 
+     *  <p> <b>用法示例：</b>假设我们希望为创建,删除和修改事件注册目录：
+     * <pre>
+     *  Path dir = ... WatchService watcher = ...
+     * 
+     *  WatchKey key = dir.register(watcher,ENTRY_CREATE,ENTRY_DELETE,ENTRY_MODIFY);
+     * </pre>
+     * 
      * @param   watcher
      *          The watch service to which this object is to be registered
      * @param   events
@@ -721,6 +996,13 @@ public interface Path
      * is the name of the file or directory denoted by this path. The {@link
      * #getRoot root} component, if present, is not returned by the iterator.
      *
+     * <p>
+     *  返回此路径的名称元素的迭代器。
+     * 
+     *  <p>迭代器返回的第一个元素表示最接近目录层次结构中的根的name元素,第二个元素是下一个最接近的元素,依此类推。返回的最后一个元素是由此路径表示的文件或目录的名称。
+     *  {@link #getRoot root}组件(如果存在)不会由迭代器返回。
+     * 
+     * 
      * @return  an iterator over the name elements of this path.
      */
     @Override
@@ -737,6 +1019,12 @@ public interface Path
      * <p> This method may not be used to compare paths that are associated
      * with different file system providers.
      *
+     * <p>
+     * 按字典顺序比较两个抽象路径。此方法定义的顺序是特定于提供程序的,在默认提供程序的情况下,特定于平台。此方法不访问文件系统,两个文件都不需要存在。
+     * 
+     *  <p>此方法不能用于比较与不同文件系统提供程序关联的路径。
+     * 
+     * 
      * @param   other  the path compared to this path.
      *
      * @return  zero if the argument is {@link #equals equal} to this path, a
@@ -766,6 +1054,17 @@ public interface Path
      * <p> This method satisfies the general contract of the {@link
      * java.lang.Object#equals(Object) Object.equals} method. </p>
      *
+     * <p>
+     *  测试此路径与给定对象的相等性。
+     * 
+     *  <p>如果给定对象不是路径,或者是与不同{@code FileSystem}相关联的路径,则此方法返回{@code false}。
+     * 
+     *  <p>两个路径是否相等取决于文件系统实现。在一些情况下,比较路径而不考虑情况,并且其他路径是区分大小写的。此方法不访问文件系统,该文件不需要存在。
+     * 如果需要,{@link Files#isSameFile isSameFile}方法可用于检查两个路径是否找到相同的文件。
+     * 
+     *  <p>此方法满足{@link java.lang.Object#equals(Object)Object.equals}方法的一般合同。 </p>
+     * 
+     * 
      * @param   other
      *          the object to which this object is to be compared
      *
@@ -781,6 +1080,12 @@ public interface Path
      * satisfies the general contract of the {@link Object#hashCode
      * Object.hashCode} method.
      *
+     * <p>
+     *  计算此路径的哈希码。
+     * 
+     *  <p>哈希码基于路径的组件,并满足{@link Object#hashCode Object.hashCode}方法的一般约定。
+     * 
+     * 
      * @return  the hash-code value for this path
      */
     int hashCode();
@@ -795,6 +1100,11 @@ public interface Path
      * <p> The returned path string uses the default name {@link
      * FileSystem#getSeparator separator} to separate names in the path.
      *
+     * <p>
+     *  返回此路径的字符串表示形式。
+     * 
+     * <p>如果此路径是通过使用{@link FileSystem#getPath getPath}方法转换路径字符串创建的,则此方法返回的路径字符串可能与用于创建路径的原始字符串不同。
+     * 
      * @return  the string representation of this path
      */
     String toString();

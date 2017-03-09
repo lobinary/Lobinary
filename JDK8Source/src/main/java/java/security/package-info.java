@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -107,6 +108,33 @@
  *
  * </ul>
  *
+ * <p>
+ *  提供安全框架的类和接口。这包括实现易于配置的细粒度访问控制安全体系结构的类。此包还支持加密公钥对的生成和存储,以及多个可导出的加密操作,包括用于消息摘要和签名生成的加密操作。
+ * 最后,这个包提供了支持签名/守卫对象和安全随机数生成的类。
+ * 
+ *  此包中提供的许多类(特别是加密和安全随机数生成器类)是基于提供者的。类本身定义了应用程序可以编写的编程接口。实现本身可以由独立的第三方供应商编写,并根据需要无缝插入。
+ * 因此,应用程序开发人员可以利用任何数量的基于提供程序的实现,而无需添加或重写代码。
+ * 
+ *  <h2>包规格</h2>
+ * 
+ * <ul>
+ *  <li> <a href="{@docRoot}/../technotes/guides/security/crypto/CryptoSpec.html"> <b> Java&trade;加密架构(J
+ * CA)参考指南</b> </a> </li>。
+ * 
+ *  <li> PKCS#8：私钥信息语法标准,版本1.2,1993年11月</li>
+ * 
+ * <li> <a href="{@docRoot}/../technotes/guides/security/StandardNames.html"> <b> Java与贸易;加密架构标准算法名称文档</b>
+ *  </a> </li>。
+ * </ul>
+ * 
+ *  <h2>相关文档</h2>
+ * 
+ *  有关进一步的文档,请参阅：
+ * <ul>
+ *  <li> <a href =
+ * "{@docRoot}/../technotes/guides/security/spec/security-spec.doc.html">
+ *  <b> Java&trade; SE平台安全体系结构</b> </a> </li>
+ * 
  * @since 1.1
  */
 package java.security;

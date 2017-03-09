@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,10 @@ import sun.awt.AppContext;
 /**
  * Basic L&amp;F for a desktop.
  *
+ * <p>
+ *  基本L&amp; F的桌面。
+ * 
+ * 
  * @author Steve Wilson
  */
 public class BasicDesktopPaneUI extends DesktopPaneUI {
@@ -64,6 +69,10 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of 1.3.
      */
     @Deprecated
@@ -74,6 +83,10 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of 1.3.
      */
     @Deprecated
@@ -84,6 +97,10 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of 1.3.
      */
     @Deprecated
@@ -94,6 +111,10 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of 1.3.
      */
     @Deprecated
@@ -104,6 +125,10 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
      * Key bindings are now defined by the LookAndFeel, please refer to
      * the key bindings specification for further details.
      *
+     * <p>
+     *  从Java 2平台v1.3,这个以前未记录的字段不再使用。键绑定现在由LookAndFeel定义,有关更多详细信息,请参阅键绑定规范。
+     * 
+     * 
      * @deprecated As of 1.3.
      */
     @Deprecated
@@ -148,6 +173,11 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
      * <code>createPropertyChangeListener</code> on the
      * <code>JDesktopPane</code>.
      *
+     * <p>
+     *  安装<code> JDesktopPane </code>上从<code> createPropertyChangeListener </code>中返回的<code> PropertyChangeL
+     * istener </code>。
+     * 
+     * 
      * @since 1.5
      * @see #createPropertyChangeListener
      */
@@ -161,6 +191,11 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
      * <code>createPropertyChangeListener</code> from the
      * <code>JDesktopPane</code>.
      *
+     * <p>
+     *  卸载<code> JDesktopPane </code>中从<code> createPropertyChangeListener </code>中返回的<code> PropertyChangeL
+     * istener </code>。
+     * 
+     * 
      * @since 1.5
      * @see #createPropertyChangeListener
      */
@@ -277,6 +312,10 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
      * Returns the <code>PropertyChangeListener</code> to install on
      * the <code>JDesktopPane</code>.
      *
+     * <p>
+     * 返回<code> PropertyChangeListener </code>以安装在<code> JDesktopPane </code>上。
+     * 
+     * 
      * @since 1.5
      * @return The PropertyChangeListener that will be added to track
      * changes in the desktop pane.
@@ -303,6 +342,9 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
 
     /**
      * The default DesktopManager installed by the UI.
+     * <p>
+     *  由UI安装的默认DesktopManager。
+     * 
      */
     private class BasicDesktopManager extends DefaultDesktopManager
             implements UIResource {
@@ -630,6 +672,10 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
 
     /**
      * Handles restoring a minimized or maximized internal frame.
+     * <p>
+     *  处理恢复最小化或最大化的内部框架。
+     * 
+     * 
      * @since 1.3
      */
     protected class OpenAction extends AbstractAction {
@@ -645,6 +691,9 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
 
     /**
      * Handles closing an internal frame.
+     * <p>
+     *  手柄关闭内部框架。
+     * 
      */
     protected class CloseAction extends AbstractAction {
         public void actionPerformed(ActionEvent evt) {
@@ -663,6 +712,9 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
 
     /**
      * Handles minimizing an internal frame.
+     * <p>
+     *  处理最小化内部框架。
+     * 
      */
     protected class MinimizeAction extends AbstractAction {
         public void actionPerformed(ActionEvent evt) {
@@ -681,6 +733,9 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
 
     /**
      * Handles maximizing an internal frame.
+     * <p>
+     *  处理最大化内部框架。
+     * 
      */
     protected class MaximizeAction extends AbstractAction {
         public void actionPerformed(ActionEvent evt) {
@@ -699,6 +754,8 @@ public class BasicDesktopPaneUI extends DesktopPaneUI {
 
     /**
      * Handles navigating to the next internal frame.
+     * <p>
+     *  处理导航到下一个内部框架。
      */
     protected class NavigateAction extends AbstractAction {
         public void actionPerformed(ActionEvent evt) {

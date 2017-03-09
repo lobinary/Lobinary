@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2002-2005 Apache软件基金会
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XPathResultImpl.java,v 1.2.4.1 2005/09/10 04:18:54 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XPathResultImpl.java,v 1.2.4.1 2005/09/10 04:18:54 jeffsuttor Exp $
+ * 
  */
 
 
@@ -55,6 +68,18 @@ import org.w3c.dom.xpath.XPathResult;
  *
  * <p>This implementation wraps an <code>XObject</code>.
  *
+ * <p>
+ *  该类根据DOM L3 XPath规范提供了一个实现XPathResult,工作组注2004年2月26日。
+ * 
+ *  <p>另请参阅<a href='http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>文档对象模型(DOM)3级XPath规范< a>。
+ * </p>。
+ * 
+ *  <p> <code> XPathResult </code>接口表示在特定节点的上下文中评估XPath表达式的结果。
+ * 由于XPath表达式的求值可能导致各种结果类型,因此该对象可以发现和操作结果的类型和值。</p>。
+ * 
+ *  <p>这个实现包装一个<code> XObject </code>。
+ * 
+ * 
  * @see com.sun.org.apache.xpath.internal.objects.XObject
  * @see org.w3c.dom.xpath.XPathResult
  *
@@ -64,17 +89,26 @@ class XPathResultImpl implements XPathResult, EventListener {
 
         /**
      *  The wrapped XObject
+     * <p>
+     *  包装的XObject
+     * 
      */
         final private XObject m_resultObj;
 
         /**
          * The xpath object that wraps the expression used for this result.
+         * <p>
+         * 包装用于此结果的表达式的xpath对象。
+         * 
          */
         final private XPath m_xpath;
 
         /**
      *  This the type specified by the user during construction.  Typically
          *  the constructor will be called by com.sun.org.apache.xpath.internal.XPath.evaluate().
+         * <p>
+         *  这是用户在构建期间指定的类型。通常,构造函数将由com.sun.org.apache.xpath.internal.XPath.evaluate()调用。
+         * 
      */
         final private short m_resultType;
 
@@ -83,16 +117,25 @@ class XPathResultImpl implements XPathResult, EventListener {
     /**
      * Only used to attach a mutation event handler when specified
      * type is an iterator type.
+     * <p>
+     *  仅当指定的类型是迭代器类型时,用于附加一个突变事件处理程序。
+     * 
      */
         final private Node m_contextNode;
 
         /**
      *  The iterator, if this is an iterator type.
+     * <p>
+     *  迭代器,如果这是一个迭代器类型。
+     * 
      */
         private NodeIterator m_iterator = null;;
 
         /**
      *  The list, if this is a snapshot type.
+     * <p>
+     *  列表,如果这是快照类型。
+     * 
      */
         private NodeList m_list = null;
 
@@ -101,6 +144,11 @@ class XPathResultImpl implements XPathResult, EventListener {
          * Constructor for XPathResultImpl.
      *
      * For internal use only.
+     * <p>
+     *  XPathResultImpl的构造函数。
+     * 
+     *  仅限内部使用。
+     * 
          */
          XPathResultImpl(short type, XObject result, Node contextNode, XPath xpath) {
                 // Check that the type is valid
@@ -169,6 +217,8 @@ class XPathResultImpl implements XPathResult, EventListener {
         }
 
         /**
+        /* <p>
+        /* 
          * @see org.w3c.dom.xpath.XPathResult#getResultType()
          */
         public short getResultType() {
@@ -177,6 +227,10 @@ class XPathResultImpl implements XPathResult, EventListener {
 
         /**
          *  The value of this number result.
+         * <p>
+         *  此数字的值结果。
+         * 
+         * 
      * @exception XPathException
      *   TYPE_ERR: raised if <code>resultType</code> is not
      *   <code>NUMBER_TYPE</code>.
@@ -199,6 +253,10 @@ class XPathResultImpl implements XPathResult, EventListener {
 
         /**
          * The value of this string result.
+         * <p>
+         *  此字符串的值result。
+         * 
+         * 
      * @exception XPathException
      *   TYPE_ERR: raised if <code>resultType</code> is not
      *   <code>STRING_TYPE</code>.
@@ -221,6 +279,8 @@ class XPathResultImpl implements XPathResult, EventListener {
         }
 
         /**
+        /* <p>
+        /* 
          * @see org.w3c.dom.xpath.XPathResult#getBooleanValue()
          */
         public boolean getBooleanValue() throws XPathException {
@@ -240,6 +300,10 @@ class XPathResultImpl implements XPathResult, EventListener {
 
         /**
          * The value of this single node result, which may be <code>null</code>.
+         * <p>
+         *  这个单节点结果的值,可以是<code> null </code>。
+         * 
+         * 
      * @exception XPathException
      *   TYPE_ERR: raised if <code>resultType</code> is not
      *   <code>ANY_UNORDERED_NODE_TYPE</code> or
@@ -277,6 +341,8 @@ class XPathResultImpl implements XPathResult, EventListener {
         }
 
         /**
+        /* <p>
+        /* 
          * @see org.w3c.dom.xpath.XPathResult#getInvalidIteratorState()
          */
         public boolean getInvalidIteratorState() {
@@ -287,6 +353,10 @@ class XPathResultImpl implements XPathResult, EventListener {
          * The number of nodes in the result snapshot. Valid values for
      * snapshotItem indices are <code>0</code> to
      * <code>snapshotLength-1</code> inclusive.
+     * <p>
+     *  结果快照中的节点数。 snapshotItem索引的有效值为<code> 0 </code>至<code> snapshotLength-1 </code>(含)。
+     * 
+     * 
      * @exception XPathException
      *   TYPE_ERR: raised if <code>resultType</code> is not
      *   <code>UNORDERED_NODE_SNAPSHOT_TYPE</code> or
@@ -309,6 +379,10 @@ class XPathResultImpl implements XPathResult, EventListener {
         /**
          * Iterates and returns the next node from the node set or
      * <code>null</code>if there are no more nodes.
+     * <p>
+     *  如果没有更多节点,则迭代并返回节点集合中的下一个节点或<code> null </code>。
+     * 
+     * 
      * @return Returns the next node.
      * @exception XPathException
      *   TYPE_ERR: raised if <code>resultType</code> is not
@@ -350,6 +424,11 @@ class XPathResultImpl implements XPathResult, EventListener {
      * the list, this method returns <code>null</code>. Unlike the iterator
      * result, the snapshot does not become invalid, but may not correspond
      * to the current document if it is mutated.
+     * <p>
+     *  返回快照集合中的<code> index </code> th项。如果<code> index </code>大于或等于列表中的节点数,则此方法返回<code> null </code>。
+     * 与迭代器结果不同,快照不会变得无效,但如果变异,则可能不对应当前文档。
+     * 
+     * 
      * @param index Index into the snapshot collection.
      * @return The node at the <code>index</code>th position in the
      *   <code>NodeList</code>, or <code>null</code> if that is not a valid
@@ -384,6 +463,10 @@ class XPathResultImpl implements XPathResult, EventListener {
 
         /**
          * Check if the specified type is one of the supported types.
+         * <p>
+         *  检查指定的类型是否是支持的类型之一。
+         * 
+         * 
          * @param type The specified type
          *
          * @return true If the specified type is supported; otherwise, returns false.
@@ -405,6 +488,8 @@ class XPathResultImpl implements XPathResult, EventListener {
         }
 
         /**
+        /* <p>
+        /* 
          * @see org.w3c.dom.events.EventListener#handleEvent(Event)
          */
         public void handleEvent(Event event) {
@@ -422,6 +507,10 @@ class XPathResultImpl implements XPathResult, EventListener {
    * Given a request type, return the equivalent string.
    * For diagnostic purposes.
    *
+   * <p>
+   *  给定一个请求类型,返回等效的字符串。用于诊断目的。
+   * 
+   * 
    * @return type string
    */
   private String getTypeString(int type)
@@ -444,6 +533,10 @@ class XPathResultImpl implements XPathResult, EventListener {
   /**
    * Given an XObject, determine the corresponding DOM XPath type
    *
+   * <p>
+   *  给定一个XObject,确定相应的DOM XPath类型
+   * 
+   * 
    * @return type string
    */
   private short getTypeFromXObject(XObject object) {
@@ -474,6 +567,10 @@ class XPathResultImpl implements XPathResult, EventListener {
 /**
  * Given a node, determine if it is a namespace node.
  *
+ * <p>
+ *  给定一个节点,确定它是否是一个命名空间节点。
+ * 
+ * 
  * @param node
  *
  * @return boolean Returns true if this is a namespace node; otherwise, returns false.
@@ -492,6 +589,9 @@ class XPathResultImpl implements XPathResult, EventListener {
 /**
  * Add m_contextNode to Event Listner to listen for Mutations Events
  *
+ * <p>
+ *  将m_contextNode添加到事件Listner以侦听Mutations事件
+ * 
  */
   private void addEventListener(){
         if(m_contextNode instanceof EventTarget)
@@ -503,6 +603,8 @@ class XPathResultImpl implements XPathResult, EventListener {
 /**
  * Remove m_contextNode to Event Listner to listen for Mutations Events
  *
+ * <p>
+ * 删除m_contextNode到事件侦听器以侦听Mutations事件
  */
 private void removeEventListener(){
         if(m_contextNode instanceof EventTarget)

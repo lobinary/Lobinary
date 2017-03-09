@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -13,6 +14,8 @@ public final class ForwardRequest extends org.omg.CORBA.UserException
 
   /** 
      * The new object to forward the request to.
+     * <p>
+     * 
      */
   public org.omg.CORBA.Object forward = null;
 

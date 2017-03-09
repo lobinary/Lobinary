@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,23 @@ import java.lang.annotation.*;
  *
  * </ul>
  *
+ * <p>
+ *  程序员断言注释方法或构造函数的主体不对其varargs参数执行潜在的不安全操作。
+ * 将此注释应用于方法或构造函数会抑制关于<i>不可重新引用的</i>变量arity(vararg)类型的未选中警告,并抑制在调用站点上参数化数组创建的未选中警告。
+ * 
+ *  <p>除了其{@link Target @Target}元注释施加的使用限制之外,编译器还需要对此注释类型实施其他使用限制;如果方法或构造函数声明用{@code @SafeVarargs}注释注释,那
+ * 么它是编译时错误,并且：。
+ * <ul>
+ *  <li>声明是固定的方法或构造函数
+ * 
+ *  <li>声明是一种变量arity方法,既不是{@code static}也不是{@code final}。
+ * 
+ * </ul>
+ * 
+ *  <p>鼓励编译器在将此注释类型应用于方法或构造函数声明时发出警告,其中：
+ * 
+ * <ul>
+ * 
  * @since 1.7
  * @jls 4.7 Reifiable Types
  * @jls 8.4.1 Formal Parameters

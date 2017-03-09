@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码。
+ * 版权所有。
+ *  **************************************************** ************** ********************************
+ * **** ****************************。
+ * 版权所有。
+ * 
+ * 
  ******************************************************************/
 
 package java.awt.image;
@@ -61,6 +72,17 @@ package java.awt.image;
  *  {@link DataBuffer#TYPE_INT TYPE_INT},
  *  {@link DataBuffer#TYPE_FLOAT TYPE_FLOAT}, and
  *  {@link DataBuffer#TYPE_DOUBLE TYPE_DOUBLE} datatypes
+ * <p>
+ * 该类表示以带交织方式存储的图像数据,并且像素的每个样本占据DataBuffer的一个数据元素。
+ * 它将ComponentSampleModel作为子类,但提供了一种比ComponentSampleModel提供的更高效的访问带交叉图像数据的实现。
+ * 当使用存储DataBuffer的不同bank中每个频带的样本数据的图像时,通常应该使用这个类。提供访问器方法,使得可以直接操纵图像数据。
+ * 像素跨距是在相同扫描线上的相同带的两个样本之间的数据阵列元素的数量。 BandedSampleModel的像素跨度为一。扫描线跨距是给定样本和下一扫描线的同一列中的相应样本之间的数据阵列元素的数量。
+ * 带偏移表示从保持每个频带的DataBuffer的组的第一数据阵列元素到频带的第一样本的数据阵列元素的数目。频带从0到N-1编号。存储体索引表示数据缓冲器的存储体和图像数据的带之间的对应关系。
+ * 此类支持{@link DataBuffer#TYPE_BYTE TYPE_BYTE},{@link DataBuffer#TYPE_USHORT TYPE_USHORT},{@link DataBuffer#TYPE_SHORT TYPE_SHORT}
+ * ,{@link DataBuffer#TYPE_INT TYPE_INT},{@link DataBuffer#TYPE_FLOAT TYPE_FLOAT} @link DataBuffer#TYPE_
+ * DOUBLE TYPE_DOUBLE}数据类型。
+ * 带偏移表示从保持每个频带的DataBuffer的组的第一数据阵列元素到频带的第一样本的数据阵列元素的数目。频带从0到N-1编号。存储体索引表示数据缓冲器的存储体和图像数据的带之间的对应关系。
+ * 
  */
 
 
@@ -72,6 +94,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * The pixel stride will be one data element.  The scanline stride
      * will be the same as the width.  Each band will be stored in
      * a separate bank and all band offsets will be zero.
+     * <p>
+     * 构造具有指定参数的BandedSampleModel。像素跨度将是一个数据元素。扫描线跨度将与宽度相同。每个频带将存储在单独的库中,并且所有频带偏移将为零。
+     * 
+     * 
      * @param dataType  The data type for storing samples.
      * @param w         The width (in pixels) of the region of
      *                  image data described.
@@ -92,6 +118,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * The number of bands will be inferred from the lengths of the
      * bandOffsets bankIndices arrays, which must be equal.  The pixel
      * stride will be one data element.
+     * <p>
+     *  构造具有指定参数的BandedSampleModel。带的数量将从bandOffsets bankIndices数组的长度推断,这些数组必须相等。像素跨度将是一个数据元素。
+     * 
+     * 
      * @param dataType  The data type for storing samples.
      * @param w         The width (in pixels) of the region of
      *                  image data described.
@@ -119,6 +149,11 @@ public final class BandedSampleModel extends ComponentSampleModel
      * as this BandedSampleModel.  The band offsets will be compressed
      * such that the offset between bands will be w*pixelStride and
      * the minimum of all of the band offsets is zero.
+     * <p>
+     *  创建具有指定宽度和高度的新BandedSampleModel。新的BandedSampleModel将具有与此BandedSampleModel相同的频带数,存储数据类型和bank索引。
+     * 带偏移将被压缩,使得带之间的偏移将是w * pixelStride,并且所有带偏移的最小值是零。
+     * 
+     * 
      * @param w the width of the resulting <code>BandedSampleModel</code>
      * @param h the height of the resulting <code>BandedSampleModel</code>
      * @return a new <code>BandedSampleModel</code> with the specified
@@ -152,6 +187,12 @@ public final class BandedSampleModel extends ComponentSampleModel
      * can be used with.  The new BandedSampleModel/DataBuffer
      * combination will represent an image with a subset of the bands
      * of the original BandedSampleModel/DataBuffer combination.
+     * <p>
+     *  使用此BandedSampleModel的波段子集创建新的BandedSampleModel。
+     * 新的BandedSampleModel可以与现有的BandedSampleModel一起使用的任何DataBuffer一起使用。
+     * 新的BandedSampleModel / DataBuffer组合将表示具有原始BandedSampleModel / DataBuffer组合的带的子集的图像。
+     * 
+     * 
      * @throws RasterFormatException if the number of bands is greater than
      *                               the number of banks in this sample model.
      * @throws IllegalArgumentException if <code>dataType</code> is not
@@ -179,6 +220,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * Creates a DataBuffer that corresponds to this BandedSampleModel,
      * The DataBuffer's data type, number of banks, and size
      * will be consistent with this BandedSampleModel.
+     * <p>
+     *  创建与此BandedSampleModel对应的DataBuffer,DataBuffer的数据类型,组数和大小将与此BandedSampleModel一致。
+     * 
+     * 
      * @throws IllegalArgumentException if <code>dataType</code> is not
      *         one of the supported types.
      */
@@ -245,6 +290,24 @@ public final class BandedSampleModel extends ComponentSampleModel
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds, or if obj is non-null and is not large enough to hold
      * the pixel data.
+     * <p>
+     * 返回类型TransferType的基本数组中单个像素的数据。对于BandedSampleModel,这将与数据类型相同,每个数组元素将返回一个样本。
+     * 通常,obj应该作为null传递,以便对象将被自动创建并且将是正确的基本数据类型。
+     * <p>
+     *  以下代码示出了将一个像素的数据从DataBuffer <code> db1 </code>传送到DataBuffer <code> db2 </code>,其存储布局由BandedSampleMode
+     * l <code> bsm1 </code>描述,由BandedSampleModel <code> bsm2 </code>描述。
+     * 传输通常比使用getPixel / setPixel更有效。
+     * <pre>
+     *  BandedSampleModel bsm1,bsm2; DataBufferInt db1,db2; bsm2.setDataElements(x,y,bsm1.getDataElements(x,
+     * y,null,db1),db2);。
+     * </pre>
+     *  如果SampleModel具有相同数量的波段,对应的波段具有每个样本相同的位数,并且TransferTypes相同,则使用getDataElements / setDataElements在两个Dat
+     * aBuffer / SampleModel对之间进行传输是合法的。
+     * <p>
+     *  如果obj是非空的,它应该是TransferType类型的原始数组。否则,抛出ClassCastException。
+     * 如果坐标不在边界中,或者如果obj非空并且不足以容纳像素数据,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param obj       If non-null, a primitive array in which to return
@@ -363,6 +426,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * Returns all samples for the specified pixel in an int array.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回int数组中指定像素的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param iArray    If non-null, returns the samples in this array
@@ -397,6 +464,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * an int array, one sample per data array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     * 返回int数组中指定的像素矩形的所有样本,每个数据数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location
      * @param y         The Y coordinate of the upper left pixel location
      * @param w         The width of the pixel rectangle
@@ -447,6 +518,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * located at (x,y).
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  对于位于(x,y)的像素,返回指定带中的样本的int。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to return
@@ -471,6 +546,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * for the pixel located at (x,y) as a float.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  以位于(x,y)的像素作为浮点返回指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to return
@@ -495,6 +574,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * for a pixel located at (x,y) as a double.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  将位于(x,y)的像素的指定频带中的样本返回为double。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to return
@@ -519,6 +602,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * of pixels in an int array, one sample per data array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  返回int阵列中指定像素矩形的指定带中的样本,每个数据数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location
      * @param y         The Y coordinate of the upper left pixel location
      * @param w         The width of the pixel rectangle
@@ -586,6 +673,23 @@ public final class BandedSampleModel extends ComponentSampleModel
      * a ClassCastException is thrown.  An
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds, or if obj is not large enough to hold the pixel data.
+     * <p>
+     *  从TransferType类型的基本数组设置指定DataBuffer中单个像素的数据。对于BandedSampleModel,这将与数据类型相同,并且每个数组元素传输一个样本。
+     * <p>
+     *  以下代码示出了将一个像素的数据从DataBuffer <code> db1 </code>传送到DataBuffer <code> db2 </code>,其存储布局由BandedSampleMode
+     * l <code> bsm1 </code>描述,由BandedSampleModel <code> bsm2 </code>描述。
+     * 传输通常比使用getPixel / setPixel更有效。
+     * <pre>
+     * BandedSampleModel bsm1,bsm2; DataBufferInt db1,db2; bsm2.setDataElements(x,y,bsm1.getDataElements(x,y
+     * ,null,db1),db2);。
+     * </pre>
+     *  如果SampleModel具有相同数量的波段,对应的波段具有每个样本相同的位数,并且TransferTypes相同,则使用getDataElements / setDataElements在两个Dat
+     * aBuffer / SampleModel对之间进行传输是合法的。
+     * <p>
+     *  obj必须是TransferType类型的原始数组。否则,抛出ClassCastException。
+     * 如果坐标不在边界中,或者如果obj不足够大以容纳像素数据,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param obj       If non-null, returns the primitive array in this
@@ -662,6 +766,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * Sets a pixel in the DataBuffer using an int array of samples for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  设置DataBuffer中的一个像素,使用int数组样本进行输入。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param iArray    The input samples in an int array
@@ -685,6 +793,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * one sample per array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  为包含每个数组元素一个样本的int数组设置像素矩形的所有样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location
      * @param y         The Y coordinate of the upper left pixel location
      * @param w         The width of the pixel rectangle
@@ -726,6 +838,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * in the DataBuffer using an int for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  使用int作为输入,为DataBuffer中位于(x,y)的像素设置指定频带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to set
@@ -749,6 +865,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * in the DataBuffer using a float for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  使用float作为输入,为DataBuffer中位于(x,y)的像素设置指定频带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to set
@@ -773,6 +893,10 @@ public final class BandedSampleModel extends ComponentSampleModel
      * in the DataBuffer using a double for input.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     * 在指定的频带中为位于(x,y)的像素在DataBuffer中使用double输入设置样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to set
@@ -797,6 +921,9 @@ public final class BandedSampleModel extends ComponentSampleModel
      * of pixels from an int array containing one sample per data array element.
      * ArrayIndexOutOfBoundsException may be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     *  为来自包含每个数据数组元素一个样本的int数组的指定像素矩形的指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 
      * @param x         The X coordinate of the upper left pixel location
      * @param y         The Y coordinate of the upper left pixel location
      * @param w         The width of the pixel rectangle

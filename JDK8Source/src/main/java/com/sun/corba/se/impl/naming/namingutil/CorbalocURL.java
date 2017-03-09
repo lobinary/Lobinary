@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import com.sun.corba.se.impl.logging.NamingSystemException ;
  *  will be parsed and converted to  this object. This object is capable of
  *  storing multiple  Host profiles as defined in the CorbaLoc grammer.
  *
+ * <p>
+ *  corbaloc：来自-ORBInitDef和-ORBDefaultInitDef的URL定义将被解析并转换为此对象。此对象能够存储如CorbaLoc语法器中定义的多个主机配置文件。
+ * 
+ * 
  *  @author  Hemanth
  */
 public class CorbalocURL extends INSURLBase
@@ -46,6 +51,9 @@ public class CorbalocURL extends INSURLBase
      * This constructor parses the URL and initializes all the variables. Once
      * the URL Object is constructed it is immutable. URL parameter is a
      * corbaloc: URL string with 'corbaloc:' prefix stripped.
+     * <p>
+     *  此构造函数解析URL并初始化所有变量。一旦URL对象被构造,它是不可变的。 URL参数是一个corbaloc：URL字符串,带有'corbaloc：'前缀。
+     * 
      */
     public CorbalocURL( String aURL ) {
         String url = aURL;
@@ -116,6 +124,9 @@ public class CorbalocURL extends INSURLBase
     /**
      *  A Utility method to throw BAD_PARAM exception to signal malformed
      *  INS URL.
+     * <p>
+     *  用于抛出BAD_PARAM异常以指示格式错误的INS网址的实用程序方法。
+     * 
      */
     private void badAddress( java.lang.Throwable e )
     {
@@ -125,6 +136,9 @@ public class CorbalocURL extends INSURLBase
     /**
      *  If there is 'iiop:' token in the URL, this method will parses
      *  and  validates that host and port information.
+     * <p>
+     *  如果URL中有'iiop：'令牌,此方法将解析并验证主机和端口信息。
+     * 
      */
     private IIOPEndpointInfo handleIIOPColon( String iiopInfo )
     {
@@ -137,6 +151,9 @@ public class CorbalocURL extends INSURLBase
     /**
      * This is to handle the case of host information with no 'iiop:' prefix.
      * instead if ':' is specified then iiop is assumed.
+     * <p>
+     *  这是为了处理没有'iiop：'前缀的主机信息的情况。而如果指定了'：',则假设iiop。
+     * 
      */
     private IIOPEndpointInfo handleColon( String iiopInfo ) {
          // String after ":"
@@ -227,6 +244,9 @@ public class CorbalocURL extends INSURLBase
 
     /**
      *  Validate 'rir:' case.
+     * <p>
+     *  验证"rir："大小写。
+     * 
      */
     private void handleRIRColon( String rirInfo )
     {
@@ -240,6 +260,10 @@ public class CorbalocURL extends INSURLBase
       * done here, if it is an incorrect port then the request through
       * this URL results in a COMM_FAILURE, otherwise malformed list will
       * result in BAD_PARAM exception thrown in checkcorbalocGrammer.
+      * <p>
+      *  返回在[<ipv6>]之后的IPV6端口：。
+      * 这里没有验证,如果它是一个不正确的端口,则通过此URL的请求导致一个COMM_FAILURE,否则格式错误的列表将导致BAD_PARAM异常抛出在checkcorbalocGrammer。
+      * 
       */
      private String getIPV6Port( String endpointInfo )
      {
@@ -266,6 +290,10 @@ public class CorbalocURL extends INSURLBase
       * done here, if it is an incorrect IPV6 address then the request through
       * this URL results in a COMM_FAILURE, otherwise malformed list will
       * result in BAD_PARAM exception thrown in checkcorbalocGrammer.
+      * <p>
+      *  返回[]令牌内部的IPV6主机。
+      * 这里没有验证,如果它是不正确的IPV6地址,则通过此URL的请求导致COMM_FAILURE,否则格式错误的列表将导致BAD_PARAM异常抛出在checkcorbalocGrammer。
+      * 
       */
      private String getIPV6Host( String endpointInfo ) {
           // ipv6Host should be enclosed in
@@ -279,6 +307,7 @@ public class CorbalocURL extends INSURLBase
 
     /**
      * Will be true only in CorbanameURL class.
+     * <p>
      */
     public boolean isCorbanameURL( ) {
         return false;

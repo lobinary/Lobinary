@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -180,6 +181,49 @@ import sun.util.logging.PlatformLogger;
  * <a href="../../java/awt/doc-files/FocusSpec.html">Focus Specification</a>
  * for more information.
  *
+ * <p>
+ *  组件</em>是具有可以显示在屏幕上并且可以与用户交互的图形表示的对象。组件的示例是典型图形用户界面的按钮,复选框和滚动条。
+ *  <p> <code> Component </code>类是与非菜单相关的Abstract Window Toolkit组件的抽象超类。
+ * 类<code>组件</code>也可以直接扩展以创建轻量级组件。轻量级组件是不与本地窗口关联的组件。相反,重量级组件与本地窗口相关联。
+ *  {@link #isLightweight()}方法可用于区分两种类型的组件。
+ * <p>
+ *  轻量级和重量级组件可以混合在单个组件层次结构中。然而,为了正确操作这样的混合分层结构,整个分层结构必须是有效的。
+ * 当层次结构变得无效时,例如改变组件的边界,或者向容器添加/删除组件,整个层次结构必须通过在顶层上调用的{@link Container#validate()}方法验证,最无效的容器的层次结构。
+ * 
+ * <h3>序列化</h3>重要的是要注意,只有符合<code> Serializable </code>协议的AWT侦听器在对象被存储时才会被保存。
+ * 如果AWT对象具有未标记为serializable的侦听器,那么它们将在<code> writeObject </code>时间丢弃。开发人员将需要一如既往地考虑使对象可序列化的影响。
+ * 要注意的一个情况是：。
+ * <pre>
+ *  import java.awt。*; import java.awt.event。*; import java.io.Serializable;
+ * 
+ *  类MyApp实现ActionListener,Serializable {BigObjectThatShouldNotBeSerializedWithAButton bigOne; Button aButton = new Button();。
+ * 
+ *  MyApp(){//糟糕,现在aButton有一个监听器,引用//到bigOne！ aButton.addActionListener(this); }}
+ * 
+ *  public void actionPerformed(ActionEvent e){System.out.println("Hello There"); }}
+ * </pre>
+ *  在这个例子中,序列化<code> aButton </code>本身将导致<code> MyApp </code>和它引用的一切也被序列化。问题是,听者可以通过巧合而不是设计来串行化。
+ * 要分离有关<code> MyApp </code>和<code>可序列化的<code> ActionListener </code>的决定,可以使用嵌套类,如下例所示：。
+ * <pre>
+ *  import java.awt。*; import java.awt.event。*; import java.io.Serializable;
+ * 
+ *  class MyApp implements java.io.Serializable {BigObjectThatShouldNotBeSerializedWithAButton bigOne; Button aButton = new Button();。
+ * 
+ * 静态类MyActionListener实现ActionListener {public void actionPerformed(ActionEvent e){System.out.println("Hello There"); }
+ * }。
+ * 
+ *  MyApp(){aButton.addActionListener(new MyActionListener()); }}
+ * </pre>
+ * <p>
+ *  <b>注意</b>：有关由AWT和Swing使用的绘制机制的更多信息,包括有关如何编写最有效的绘画代码的信息,请参阅<a href ="http://www.oracle.com/ technetwork / java / painting-140037.html">
+ * 在AWT和Swing绘画</a>。
+ * <p>
+ *  有关焦点子系统的详细信息,请参阅
+ * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+ *  如何使用焦点子系统</a>,<em> Java教程</em>和<a href ="../../ java / awt / doc-files / FocusSpec.html" >聚焦规格</a>了解
+ * 更多信息。
+ * 
+ * 
  * @author      Arthur van Hoff
  * @author      Sami Shaio
  */
@@ -196,6 +240,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The peer of the component. The peer implements the component's
      * behavior. The peer is set when the <code>Component</code> is
      * added to a container that also is a peer.
+     * <p>
+     *  组件的对等体。对等体实现组件的行为。当将<code> Component </code>添加到也是对等体的容器时,对等体被设置。
+     * 
+     * 
      * @see #addNotify
      * @see #removeNotify
      */
@@ -204,6 +252,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The parent of the object. It may be <code>null</code>
      * for top-level components.
+     * <p>
+     *  对象的父对象。对于顶级组件可以是<code> null </code>。
+     * 
+     * 
      * @see #getParent
      */
     transient Container parent;
@@ -211,12 +263,19 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The <code>AppContext</code> of the component. Applets/Plugin may
      * change the AppContext.
+     * <p>
+     *  组件的<code> AppContext </code>。 Applet / Plugin可以改变AppContext。
+     * 
      */
     transient AppContext appContext;
 
     /**
      * The x position of the component in the parent's coordinate system.
      *
+     * <p>
+     *  组件在父坐标系中的x位置。
+     * 
+     * 
      * @serial
      * @see #getLocation
      */
@@ -225,6 +284,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The y position of the component in the parent's coordinate system.
      *
+     * <p>
+     *  组件在父坐标系中的y位置。
+     * 
+     * 
      * @serial
      * @see #getLocation
      */
@@ -233,6 +296,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The width of the component.
      *
+     * <p>
+     *  组件的宽度。
+     * 
+     * 
      * @serial
      * @see #getSize
      */
@@ -241,6 +308,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The height of the component.
      *
+     * <p>
+     *  组件的高度。
+     * 
+     * 
      * @serial
      * @see #getSize
      */
@@ -250,6 +321,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The foreground color for this component.
      * <code>foreground</code> can be <code>null</code>.
      *
+     * <p>
+     *  此组件的前景颜色。 <code> foreground </code>可以是<code> null </code>。
+     * 
+     * 
      * @serial
      * @see #getForeground
      * @see #setForeground
@@ -260,6 +335,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The background color for this component.
      * <code>background</code> can be <code>null</code>.
      *
+     * <p>
+     *  此组件的背景颜色。 <code> background </code>可以是<code> null </code>。
+     * 
+     * 
      * @serial
      * @see #getBackground
      * @see #setBackground
@@ -270,6 +349,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The font used by this component.
      * The <code>font</code> can be <code>null</code>.
      *
+     * <p>
+     *  此组件使用的字体。 <code>字体</code>可以是<code> null </code>。
+     * 
+     * 
      * @serial
      * @see #getFont
      * @see #setFont
@@ -279,6 +362,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The font which the peer is currently using.
      * (<code>null</code> if no peer exists.)
+     * <p>
+     * 对等体当前正在使用的字体。 (<code> null </code>如果不存在对等体。)
+     * 
      */
     Font        peerFont;
 
@@ -286,6 +372,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The cursor displayed when pointer is over this component.
      * This value can be <code>null</code>.
      *
+     * <p>
+     *  指针在此组件上时显示的光标。此值可以是<code> null </code>。
+     * 
+     * 
      * @serial
      * @see #getCursor
      * @see #setCursor
@@ -295,6 +385,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The locale for the component.
      *
+     * <p>
+     *  组件的语言环境。
+     * 
+     * 
      * @serial
      * @see #getLocale
      * @see #setLocale
@@ -307,6 +401,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * destination.
      * This value can be <code>null</code>.
      *
+     * <p>
+     *  对用于描述图形目标的特性的<code> GraphicsConfiguration </code>对象的引用。此值可以是<code> null </code>。
+     * 
+     * 
      * @since 1.3
      * @serial
      * @see GraphicsConfiguration
@@ -318,6 +416,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * A reference to a <code>BufferStrategy</code> object
      * used to manipulate the buffers on this component.
      *
+     * <p>
+     *  引用用于操作此组件上的缓冲区的<code> BufferStrategy </code>对象。
+     * 
+     * 
      * @since 1.4
      * @see java.awt.image.BufferStrategy
      * @see #getBufferStrategy()
@@ -327,6 +429,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * True when the object should ignore all repaint events.
      *
+     * <p>
+     *  当对象应忽略所有重绘事件时为true。
+     * 
+     * 
      * @since 1.4
      * @serial
      * @see #setIgnoreRepaint
@@ -338,6 +444,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * True when the object is visible. An object that is not
      * visible is not drawn on the screen.
      *
+     * <p>
+     *  当对象可见时为true。不可见的对象不会在屏幕上绘制。
+     * 
+     * 
      * @serial
      * @see #isVisible
      * @see #setVisible
@@ -348,6 +458,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * True when the object is enabled. An object that is not
      * enabled does not interact with the user.
      *
+     * <p>
+     *  启用对象时为true。未启用的对象不与用户交互。
+     * 
+     * 
      * @serial
      * @see #isEnabled
      * @see #setEnabled
@@ -359,6 +473,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * be layed out. This flag is set to false when the object
      * size is changed.
      *
+     * <p>
+     *  当对象有效时为True。一个无效的对象需要被布局。当对象大小更改时,此标志设置为false。
+     * 
+     * 
      * @serial
      * @see #isValid
      * @see #validate
@@ -369,6 +487,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The <code>DropTarget</code> associated with this component.
      *
+     * <p>
+     *  与此组件关联的<code> DropTarget </code>。
+     * 
+     * 
      * @since 1.2
      * @serial
      * @see #setDropTarget
@@ -377,6 +499,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     DropTarget dropTarget;
 
     /**
+    /* <p>
+    /* 
      * @serial
      * @see #add
      */
@@ -386,6 +510,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * A component's name.
      * This field can be <code>null</code>.
      *
+     * <p>
+     *  组件名称。此字段可以是<code> null </code>。
+     * 
+     * 
      * @serial
      * @see #getName
      * @see #setName(String)
@@ -398,6 +526,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * be false if the name has not been set and
      * true if it has.
      *
+     * <p>
+     *  一个bool以确定是否已明确设置名称。如果未设置名称,则<code> nameExplicitlySet </code>将为false,如果未设置则为true。
+     * 
+     * 
      * @serial
      * @see #getName
      * @see #setName(String)
@@ -407,6 +539,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Indicates whether this Component can be focused.
      *
+     * <p>
+     *  指示此组件是否可以聚焦。
+     * 
+     * 
      * @serial
      * @see #setFocusable
      * @see #isFocusable
@@ -421,6 +557,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Tracks whether this Component is relying on default focus travesability.
      *
+     * <p>
+     *  跟踪此组件是否依赖于默认焦点可跟踪性。
+     * 
+     * 
      * @serial
      * @since 1.4
      */
@@ -434,6 +574,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * have null specified for that traversal key, then the current
      * KeyboardFocusManager's default traversal key is used.
      *
+     * <p>
+     * 焦点遍历键。这些键将为启用了焦点遍历键的组件生成焦点遍历行为。如果为遍历键指定了null值,则此组件从其父项继承该遍历键。
+     * 如果此组件的所有祖先都为该遍历键指定了空值,则使用当前KeyboardFocusManager的默认遍历键。
+     * 
+     * 
      * @serial
      * @see #setFocusTraversalKeys
      * @see #getFocusTraversalKeys
@@ -455,6 +600,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * keys are enabled do not see these events; instead, the events are
      * automatically converted to traversal operations.
      *
+     * <p>
+     *  指示是否为此组件启用焦点遍历键。禁用焦点遍历键的组件接收焦点遍历键的键事件。启用了焦点遍历键的组件不会看到这些事件;而是将事件自动转换为遍历操作。
+     * 
+     * 
      * @serial
      * @see #setFocusTraversalKeysEnabled
      * @see #getFocusTraversalKeysEnabled
@@ -465,6 +614,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * The locking object for AWT component-tree and layout operations.
      *
+     * <p>
+     *  AWT组件树和布局操作的锁定对象。
+     * 
+     * 
      * @see #getTreeLock
      */
     static final Object LOCK = new AWTTreeLock();
@@ -472,6 +625,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /*
      * The component's AccessControlContext.
+     * <p>
+     *  组件的AccessControlContext。
+     * 
      */
     private transient volatile AccessControlContext acc =
         AccessController.getContext();
@@ -480,12 +636,19 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Minimum size.
      * (This field perhaps should have been transient).
      *
+     * <p>
+     *  最小尺寸。 (这个字段可能应该是瞬态的)。
+     * 
+     * 
      * @serial
      */
     Dimension minSize;
 
     /**
      * Whether or not setMinimumSize has been invoked with a non-null value.
+     * <p>
+     *  是否已使用非空值调用setMinimumSize。
+     * 
      */
     boolean minSizeSet;
 
@@ -493,29 +656,47 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Preferred size.
      * (This field perhaps should have been transient).
      *
+     * <p>
+     *  首选尺寸。 (这个字段可能应该是瞬态的)。
+     * 
+     * 
      * @serial
      */
     Dimension prefSize;
 
     /**
      * Whether or not setPreferredSize has been invoked with a non-null value.
+     * <p>
+     *  是否已使用非空值调用setPreferredSize。
+     * 
      */
     boolean prefSizeSet;
 
     /**
      * Maximum size
      *
+     * <p>
+     *  最大尺寸
+     * 
+     * 
      * @serial
      */
     Dimension maxSize;
 
     /**
      * Whether or not setMaximumSize has been invoked with a non-null value.
+     * <p>
+     *  是否已使用非空值调用setMaximumSize。
+     * 
      */
     boolean maxSizeSet;
 
     /**
      * The orientation for this component.
+     * <p>
+     *  此组件的方向。
+     * 
+     * 
      * @see #getComponentOrientation
      * @see #setComponentOrientation
      */
@@ -530,6 +711,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * to the component's parent and up the ancestor
      * tree until the event has been consumed.
      *
+     * <p>
+     * 如果事件是为组件启用的事件类型之一,则<code> newEventsOnly </code>将为true。然后它将允许正常处理继续。
+     * 如果为false,则将事件传递给组件的父级并向上传递到祖先树,直到事件被消耗。
+     * 
+     * 
      * @serial
      * @see #dispatchEvent
      */
@@ -576,6 +762,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * enabled; this bit is set by <code>enableInputMethods</code> and is
      * on by default.
      *
+     * <p>
+     *  <code> eventMask </code>只能由子类通过<code> enableEvents </code>设置。
+     * 当监听器被注册时,不应该设置掩码,这样我们可以区分监听器请求事件和子类请求它们之间的区别。
+     * 一个位用于指示是否启用输入法;此位由<code> enableInputMethods </code>设置,默认为打开。
+     * 
+     * 
      * @serial
      * @see #enableInputMethods
      * @see AWTEvent
@@ -584,6 +776,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Static properties for incremental drawing.
+     * <p>
+     *  增量绘图的静态属性。
+     * 
+     * 
      * @see #imageUpdate
      */
     static boolean isInc;
@@ -608,6 +804,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Ease-of-use constant for <code>getAlignmentY()</code>.
      * Specifies an alignment to the top of the component.
+     * <p>
+     *  <code> getAlignmentY()</code>的易用常数。指定与组件顶部的对齐。
+     * 
+     * 
      * @see     #getAlignmentY
      */
     public static final float TOP_ALIGNMENT = 0.0f;
@@ -616,6 +816,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Ease-of-use constant for <code>getAlignmentY</code> and
      * <code>getAlignmentX</code>. Specifies an alignment to
      * the center of the component
+     * <p>
+     *  易于使用的<code> getAlignmentY </code>和<code> getAlignmentX </code>常量。指定与组件中心的对齐
+     * 
+     * 
      * @see     #getAlignmentX
      * @see     #getAlignmentY
      */
@@ -624,6 +828,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Ease-of-use constant for <code>getAlignmentY</code>.
      * Specifies an alignment to the bottom of the component.
+     * <p>
+     *  <code> getAlignmentY </code>的易用常数。指定与组件底部的对齐。
+     * 
+     * 
      * @see     #getAlignmentY
      */
     public static final float BOTTOM_ALIGNMENT = 1.0f;
@@ -631,6 +839,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Ease-of-use constant for <code>getAlignmentX</code>.
      * Specifies an alignment to the left side of the component.
+     * <p>
+     *  易于使用的<code> getAlignmentX </code>常量。指定与组件左侧的对齐。
+     * 
+     * 
      * @see     #getAlignmentX
      */
     public static final float LEFT_ALIGNMENT = 0.0f;
@@ -638,12 +850,19 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Ease-of-use constant for <code>getAlignmentX</code>.
      * Specifies an alignment to the right side of the component.
+     * <p>
+     *  易于使用的<code> getAlignmentX </code>常量。指定与组件右侧的对齐。
+     * 
+     * 
      * @see     #getAlignmentX
      */
     public static final float RIGHT_ALIGNMENT = 1.0f;
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -7644114512714619750L;
 
@@ -651,6 +870,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * If any <code>PropertyChangeListeners</code> have been registered,
      * the <code>changeSupport</code> field describes them.
      *
+     * <p>
+     *  如果已经注册了任何<code> PropertyChangeListeners </code>,则<code> changeSupport </code>字段描述它们。
+     * 
+     * 
      * @serial
      * @since 1.2
      * @see #addPropertyChangeListener
@@ -671,6 +894,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      *
      * Note: this field is considered final, though readObject() prohibits
      * initializing final fields.
+     * <p>
+     * 在某些情况下,如果客户端代码还使用组件对象的同步,则使用"this"作为同步对象可能会导致死锁。对于每个这样的情况显示,我们应该考虑用下面介绍的私有objectLock对象替换"this"的可能性。
+     * 到目前为止有3个已知的问题： -  CR 6708322(getName / setName方法); -  CR 6608764(PropertyChangeListener机制); -  CR 710
+     * 8598(Container.paint / KeyboardFocusManager.clearMostRecentFocusOwner方法)。
+     * 在某些情况下,如果客户端代码还使用组件对象的同步,则使用"this"作为同步对象可能会导致死锁。对于每个这样的情况显示,我们应该考虑用下面介绍的私有objectLock对象替换"this"的可能性。
+     * 
+     *  注意：这个字段被认为是最终的,虽然readObject()禁止初始化final字段。
+     * 
      */
     private transient Object objectLock = new Object();
     Object getObjectLock() {
@@ -679,6 +910,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /*
      * Returns the acc this component was constructed with.
+     * <p>
+     *  返回此组件所构造的acc。
+     * 
      */
     final AccessControlContext getAccessControlContext() {
         if (acc == null) {
@@ -694,6 +928,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * to signal setBounds what's changing. Should be used under TreeLock.
      * This is only needed due to the inability to change the cross-calling
      * order of public and deprecated methods.
+     * <p>
+     *  直接几何API的伪参数(setLocation,setBounds setSize to signal setBounds什么正在改变,应该在TreeLock下使用。
+     * 这只是需要的,因为无法改变公共和不推荐使用的方法的交叉调用顺序。
+     * 
      */
     private int boundsOp = ComponentPeer.DEFAULT_OPERATION;
 
@@ -711,6 +949,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <code>Short.MAX_VALUE</code> the baseline may change in a way
      * other than the baseline resize behavior indicates.
      *
+     * <p>
+     * 枚举组件基线的常见方式可以随大小更改而更改。基线调整行为主要用于需要知道基线位置随着部件尺寸变化而变化的布局管理器。
+     * 通常,基线调整大小行为对大于或等于最小大小(实际最小大小;不是开发人员指定的最小大小)的大小有效。对于小于最小大小的大小,基线可能会以不同于基线调整大小行为指示的方式更改。
+     * 类似地,当大小接近<code> Integer.MAX_VALUE </code>和/或<code> Short.MAX_VALUE </code>时,基线可能以不同于基线调整行为指示的方式改变。
+     * 
+     * 
      * @see #getBaselineResizeBehavior
      * @see #getBaseline(int,int)
      * @since 1.6
@@ -723,6 +967,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * <code>JLabel</code> containing non-empty text with a
          * vertical alignment of <code>TOP</code> should have a
          * baseline type of <code>CONSTANT_ASCENT</code>.
+         * <p>
+         *  表示基线相对于y原点保持固定。也就是说,<code> getBaseline </code>返回相同的值,而不管高度或宽度。
+         * 例如,包含垂直对齐方式为<code> TOP </code>的非空文本的<code> JLabel </code>应具有<code> CONSTANT_ASCENT </code>的基线类型。
+         * 
          */
         CONSTANT_ASCENT,
 
@@ -734,6 +982,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * <code>JLabel</code> containing non-empty text with a
          * vertical alignment of <code>BOTTOM</code> should have a
          * baseline type of <code>CONSTANT_DESCENT</code>.
+         * <p>
+         *  表示基线相对于高度保持固定,并且不随宽度变化而变化。也就是说,对于任何高度H,H和<code> getBaseline(w,H)</code>之间的差异是相同的。
+         * 例如,包含垂直对齐方式为<code> BOTTOM </code>的非空文本的<code> JLabel </code>应具有<code> CONSTANT_DESCENT </code>的基线类型。
+         * 
          */
         CONSTANT_DESCENT,
 
@@ -773,6 +1025,19 @@ public abstract class Component implements ImageObserver, MenuContainer,
          *   // the height z:
          *   int calculatedBaseline = (z + padding) / 2 + baselineOffset;
          * </pre>
+         * <p>
+         * 表示基线与组件中心保持固定距离。
+         * 也就是说,对于任何高度H,<code> getBaseline(w,H)</code>和<code> H / 2 </code>之间的差异是相同的(根据舍入误差,加或减一)。
+         * <p>
+         *  由于可能出现舍入误差,建议您请求具有两个连续高度的基线,并使用返回值确定是否需要通过1填充计算。以下显示如何计算任何高度的基线：
+         * <pre>
+         *  Dimension preferredSize = component.getPreferredSize(); int baseline = getBaseline(preferredSize.wid
+         * th,preferredSize.height); int nextBaseline = getBaseline(preferredSize.width,preferredSize.height + 1
+         * ); //计算基线//到达特定高度的位置时,添加到高度的数量：int padding = 0; //其中基线相对于中点int baselineOffset = baseline  -  height /
+         *  2; if(preferredSize.height％2 == 0&amp;&amp; baseline！= nextBaseline){padding = 1; } else if(preferre
+         * dSize.height％2 == 1&amp;&amp;&amp; baseline == nextBaseline){baselineOffset--; padding = 1; } //以下计算基
+         * 线到达高度z的位置：int calculatedBaseline =(z + padding)/ 2 + baselineOffset;。
+         * </pre>
          */
         CENTER_OFFSET,
 
@@ -781,6 +1046,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * any of the other constants.  This may also indicate the baseline
          * varies with the width of the component.  This is also returned
          * by components that do not have a baseline.
+         * <p>
+         *  表示不能使用任何其他常量表示基线调整大小行为。这也可能表明基线随组件的宽度而变化。这也由没有基线的组件返回。
+         * 
          */
         OTHER
     }
@@ -791,6 +1059,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the user-specified shape of the component.
      * The 'null' value means the component has normal shape (or has no shape at all)
      * and applyCompoundShape() will skip the following shape identical to normal.
+     * <p>
+     * 使用applyCompoundShape()方法设置的形状。它暗示了HW / LW混合相关形状计算的结果。它还可以包括用户指定的部件形状。
+     *  "null"值表示组件具有正常形状(或根本没有形状),applyCompoundShape()将跳过与正常形状相同的下面的形状。
+     * 
      */
     private transient Region compoundShape = null;
 
@@ -800,18 +1072,28 @@ public abstract class Component implements ImageObserver, MenuContainer,
      *    1. null - consider the shape rectangular
      *    2. EMPTY_REGION - nothing gets cut out (children still get cut out)
      *    3. non-empty - this shape gets cut out.
+     * <p>
+     *  表示从重量级组件(如果它们相交)切出的该轻质组件的形状。
+     * 可能的值：1. null  - 认为形状为长方形2. EMPTY_REGION  - 没有被剪掉(孩子们仍然被剪掉)3.非空 - 这个形状被剪掉了。
+     * 
      */
     private transient Region mixingCutoutRegion = null;
 
     /*
      * Indicates whether addNotify() is complete
      * (i.e. the peer is created).
+     * <p>
+     *  指示addNotify()是否完成(即创建对等体)。
+     * 
      */
     private transient boolean isAddNotifyComplete = false;
 
     /**
      * Should only be used in subclass getBounds to check that part of bounds
      * is actualy changing
+     * <p>
+     *  应该只在子类getBounds中使用,以检查边界的一部分是否实际改变
+     * 
      */
     int getBoundsOp() {
         assert Thread.holdsLock(getTreeLock());
@@ -983,6 +1265,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * utilize an opaque native window. A lightweight component must be
      * hosted by a native container somewhere higher up in the component
      * tree (for example, by a <code>Frame</code> object).
+     * <p>
+     *  构造一个新的组件。类<code> Component </code>可以直接扩展,以创建一个不使用不透明本地窗口的轻量级组件。
+     * 轻量级组件必须由组件树中更高层的本地容器托管(例如,通过<code> Frame </code>对象)。
+     * 
      */
     protected Component() {
         appContext = AppContext.getAppContext();
@@ -996,6 +1282,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Constructs a name for this component.  Called by <code>getName</code>
      * when the name is <code>null</code>.
+     * <p>
+     *  构造此组件的名称。当名称为<code> null </code>时,由<code> getName </code>调用。
+     * 
      */
     String constructComponentName() {
         return null; // For strict compliance with prior platform versions, a Component
@@ -1005,6 +1294,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the name of the component.
+     * <p>
+     *  获取组件的名称。
+     * 
+     * 
      * @return this component's name
      * @see    #setName
      * @since JDK1.1
@@ -1021,6 +1314,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Sets the name of the component to the specified string.
+     * <p>
+     *  将组件的名称设置为指定的字符串。
+     * 
+     * 
      * @param name  the string that is to be this
      *           component's name
      * @see #getName
@@ -1038,6 +1335,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the parent of this component.
+     * <p>
+     *  获取此组件的父级。
+     * 
+     * 
      * @return the parent container of this component
      * @since JDK1.0
      */
@@ -1061,6 +1362,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * programs should not directly manipulate peers;
      * replaced by <code>boolean isDisplayable()</code>.
@@ -1075,6 +1378,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The <code>Component</code> will receive drops only if it
      * is enabled.
      *
+     * <p>
+     *  将<code> DropTarget </code>与此组件相关联。 <code> Component </code>只有在启用时才会接收。
+     * 
+     * 
      * @see #isEnabled
      * @param dt The DropTarget
      */
@@ -1121,6 +1428,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Gets the <code>DropTarget</code> associated with this
      * <code>Component</code>.
+     * <p>
+     * 获取与此<code> Component </code>关联的<code> DropTarget </code>。
+     * 
      */
 
     public synchronized DropTarget getDropTarget() { return dropTarget; }
@@ -1136,6 +1446,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * If the <code>Component</code> has been created, but not yet added
      * to a <code>Container</code>, this method returns <code>null</code>.
      *
+     * <p>
+     *  获取与此<code> Component </code>关联的<code> GraphicsConfiguration </code>。
+     * 如果<code> Component </code>没有被赋予特定的<code> GraphicsConfiguration </code>,则<code> Component </code>对象的顶级
+     * 容器的<code> GraphicsConfiguration </code>回。
+     *  获取与此<code> Component </code>关联的<code> GraphicsConfiguration </code>。
+     * 如果<code> Component </code>已创建,但尚未添加到<code> Container </code>,此方法将返回<code> null </code>。
+     * 
+     * 
      * @return the <code>GraphicsConfiguration</code> used by this
      *          <code>Component</code> or <code>null</code>
      * @since 1.3
@@ -1178,6 +1496,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Checks that this component's <code>GraphicsDevice</code>
      * <code>idString</code> matches the string argument.
+     * <p>
+     *  检查此组件的<code> GraphicsDevice </code> <code> idString </code>是否与字符串参数匹配。
+     * 
      */
     void checkGD(String stringID) {
         if (graphicsConfig != null) {
@@ -1192,6 +1513,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Gets this component's locking object (the object that owns the thread
      * synchronization monitor) for AWT component-tree and layout
      * operations.
+     * <p>
+     *  获取此组件的锁定对象(拥有线程同步监视器的对象)以进行AWT组件树和布局操作。
+     * 
+     * 
      * @return this component's locking object
      */
     public final Object getTreeLock() {
@@ -1209,6 +1534,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the frame that contains a component controls which
      * toolkit is used by that component. Therefore if the component
      * is moved from one frame to another, the toolkit it uses may change.
+     * <p>
+     *  获取此组件的工具包。请注意,包含组件的框架控制该组件使用哪个工具包。因此,如果组件从一个框架移动到另一个框架,则其使用的工具包可能会更改。
+     * 
+     * 
      * @return  the toolkit of this component
      * @since JDK1.0
      */
@@ -1219,6 +1548,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /*
      * This is called by the native code, so client code can't
      * be called on the toolkit thread.
+     * <p>
+     *  这是由本地代码调用的,所以客户端代码不能在工具包线程上调用。
+     * 
      */
     final Toolkit getToolkitImpl() {
         Container parent = this.parent;
@@ -1235,6 +1567,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * In order to account for peers' size requirements, components are invalidated
      * before they are first shown on the screen. By the time the parent container
      * is fully realized, all its components will be valid.
+     * <p>
+     *  确定此组件是否有效。当组件大小正确并位于其父容器中且其所有子项也有效时,组件是有效的。为了考虑对等体的大小要求,组件在它们首先在屏幕上显示之前被无效。当父容器完全实现时,其所有组件都将有效。
+     * 
+     * 
      * @return <code>true</code> if the component is valid, <code>false</code>
      * otherwise
      * @see #validate
@@ -1260,6 +1596,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * is made undisplayable.  A containment hierarchy is made
      * undisplayable when its ancestor window is disposed.
      *
+     * <p>
+     * 确定此组件是否可显示。组件连接到本机屏幕资源时是可显示的。
+     * <p>
+     *  组件在被添加到可显示的包含层次结构或其包含层次结构可显示时显示。当它的祖先窗口被打包或变为可见时,包含层次结构是可显示的。
+     * <p>
+     *  当组件从可显示的包含层次结构中删除时或者当其包含层次结构不可显示时,该组件将不可显示。包含层次结构在其祖先窗口被布置时是不可显示的。
+     * 
+     * 
      * @return <code>true</code> if the component is displayable,
      * <code>false</code> otherwise
      * @see Container#add(Component)
@@ -1278,6 +1622,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * parent is visible. Components are
      * initially visible, with the exception of top level components such
      * as <code>Frame</code> objects.
+     * <p>
+     *  确定此组件在其父级可见时是否可见。组件最初可见,除了顶层组件(如<code> Frame </code>对象)。
+     * 
+     * 
      * @return <code>true</code> if the component is visible,
      * <code>false</code> otherwise
      * @see #setVisible
@@ -1293,6 +1641,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Determines whether this component will be displayed on the screen.
+     * <p>
+     *  确定此组件是否将显示在屏幕上。
+     * 
+     * 
      * @return <code>true</code> if the component and all of its ancestors
      *          until a toplevel window or null parent are visible,
      *          <code>false</code> otherwise
@@ -1304,6 +1656,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Translates absolute coordinates into coordinates in the coordinate
      * space of this component.
+     * <p>
+     *  将绝对坐标转换为该组件坐标空间中的坐标。
+     * 
      */
     Point pointRelativeToComponent(Point absolute) {
         Point compCoords = getLocationOnScreen();
@@ -1319,6 +1674,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * NOTE: this method should be called under the protection of
      * tree lock, as it is done in Component.getMousePosition() and
      * Container.getMousePosition(boolean).
+     * <p>
+     *  假设鼠标位置存储在传递给此方法的PointerInfo中,它将找到一个与此组件位于同一窗口中并位于鼠标指针下的组件。如果没有这样的组件,返回null。
+     * 注意：此方法应在树锁保护下调用,如在Component.getMousePosition()和Container.getMousePosition(boolean)中所做的。
+     * 
      */
     Component findUnderMouseInWindow(PointerInfo pi) {
         if (!isShowing()) {
@@ -1357,6 +1716,20 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * pointer. If the return value of this method is <code>null</code>, mouse
      * pointer is not directly above the <code>Component</code>.
      *
+     * <p>
+     * 如果<code> Component </code>直接位于鼠标指针下,则返回鼠标指针在<code> Component </code>坐标空间中的位置,否则返回<code> null </code>。
+     * 如果<code> Component </code>没有显示在屏幕上,即使鼠标指针位于显示<code> Component </code>的区域上方,此方法也会返回<code> null </code>
+     *  。
+     * 如果<code> Component </code>被其他<code> Component </code>或本地窗口部分或完全隐藏,则此方法仅在鼠标指针位于未隐藏部分之上时才返回非空值组件</code>
+     * 。
+     * <p>
+     *  对于<code> Container </code> s,如果鼠标位于<code> Container </code>本身或其任何后代之上,则返回非空值。
+     * 如果您需要排除子级,请使用{@link Container#getMousePosition(boolean)}。
+     * <p>
+     *  有时,确切的鼠标坐标不重要,唯一重要的是一个特定的<code> Component </code>是否在鼠标指针下。
+     * 如果这个方法的返回值是<code> null </code>,鼠标指针不是位于<code> Component </code>之上。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless() returns true
      * @see       #isShowing
      * @see       Container#getMousePosition
@@ -1387,6 +1760,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Overridden in Container. Must be called under TreeLock.
+     * <p>
+     *  在容器中重写。必须在TreeLock下调用。
+     * 
      */
     boolean isSameOrAncestorOf(Component comp, boolean allowChildren) {
         return comp == this;
@@ -1405,6 +1781,15 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <li>the {@code Component} is obscured by another {@code Component} or
      * {@code Container}.
      * </ul>
+     * <p>
+     *  确定此组件是否显示在屏幕上。这意味着组件必须可见,并且必须在可见和显示的容器中。
+     * <p>
+     * <strong>注意：</strong>有时无法检测{@code Component}是否实际上对用户可见。这可能发生在以下情况：
+     * <ul>
+     *  <li>该组件已添加到可见的{@code ScrollPane},但{@code Component}当前不在滚动窗格的视图端口中。
+     *  <li> {@code Component}被另一个{@code Component}或{@code Container}隐藏。
+     * </ul>
+     * 
      * @return <code>true</code> if the component is showing,
      *          <code>false</code> otherwise
      * @see #setVisible
@@ -1423,6 +1808,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * can respond to user input and generate events. Components are
      * enabled initially by default. A component may be enabled or disabled by
      * calling its <code>setEnabled</code> method.
+     * <p>
+     *  确定是否启用此组件。启用的组件可以响应用户输入并生成事件。默认情况下,组件最初启用。可以通过调用其<code> setEnabled </code>方法来启用或禁用组件。
+     * 
+     * 
      * @return <code>true</code> if the component is enabled,
      *          <code>false</code> otherwise
      * @see #setEnabled
@@ -1435,6 +1824,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /*
      * This is called by the native code, so client code can't
      * be called on the toolkit thread.
+     * <p>
+     *  这是由本地代码调用的,所以客户端代码不能在工具包线程上调用。
+     * 
      */
     final boolean isEnabledImpl() {
         return enabled;
@@ -1451,6 +1843,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * in this container from receiving any input events.  But disabling a
      * lightweight container affects only this container.
      *
+     * <p>
+     *  根据参数<code> b </code>的值启用或禁用此组件。启用的组件可以响应用户输入并生成事件。默认情况下,组件最初启用。
+     * 
+     *  <p>注意：禁用轻量级组件不会阻止它接收MouseEvents。 <p>注意：禁用重型容器会阻止此容器中的所有组件接收任何输入事件。但是禁用轻量级容器只会影响这个容器。
+     * 
+     * 
      * @param     b   If <code>true</code>, this component is
      *            enabled; otherwise this component is disabled
      * @see #isEnabled
@@ -1462,6 +1860,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setEnabled(boolean)</code>.
      */
@@ -1487,6 +1887,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setEnabled(boolean)</code>.
      */
@@ -1500,6 +1902,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setEnabled(boolean)</code>.
      */
@@ -1541,6 +1945,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * subclasses that support double buffering should override this
      * method to return true if double buffering is enabled.
      *
+     * <p>
+     *  如果此组件绘制到稍后复制到屏幕的离屏图像("缓冲区"),则返回true。支持双缓冲的组件子类应该覆盖此方法以在启用双缓冲时返回true。
+     * 
+     * 
      * @return false by default
      */
     public boolean isDoubleBuffered() {
@@ -1555,6 +1963,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * dispatched to its listeners if the input method does not consume them.
      * By default, input method support is enabled.
      *
+     * <p>
+     * 启用或禁用此组件的输入法支持。如果启用了输入法支持并且组件还处理关键事件,则传入的事件将提供给当前输入法,并且只有在组件处理时才会处理,或者如果输入方法不消耗它们,则会将它们分派给其侦听器。
+     * 默认情况下,启用输入法支持。
+     * 
+     * 
      * @param enable true to enable, false to disable
      * @see #processKeyEvent
      * @since 1.2
@@ -1596,6 +2009,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  根据参数<code> b </code>的值显示或隐藏此组件。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param b  if <code>true</code>, shows this component;
      * otherwise, hides this component
      * @see #isVisible
@@ -1607,6 +2026,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setVisible(boolean)</code>.
      */
@@ -1645,6 +2066,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setVisible(boolean)</code>.
      */
@@ -1671,6 +2094,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /*
      * Delete references from LightweithDispatcher of a heavyweight parent
+     * <p>
+     *  从重量级父级的LightweithDispatcher中删除引用
+     * 
      */
     void clearLightweightDispatcherOnRemove(Component removedComponent) {
         if (parent != null) {
@@ -1679,6 +2105,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setVisible(boolean)</code>.
      */
@@ -1724,6 +2152,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the foreground color of this component.
+     * <p>
+     *  获取此组件的前景色。
+     * 
+     * 
      * @return this component's foreground color; if this component does
      * not have a foreground color, the foreground color of its parent
      * is returned
@@ -1744,6 +2176,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Sets the foreground color of this component.
+     * <p>
+     *  设置此组件的前景色。
+     * 
+     * 
      * @param c the color to become this component's
      *          foreground color; if this parameter is <code>null</code>
      *          then this component will inherit
@@ -1771,6 +2207,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Component. If this method returns <code>false</code>, this Component is
      * inheriting its foreground color from an ancestor.
      *
+     * <p>
+     *  返回是否已为此组件显式设置前景颜色。如果此方法返回<code> false </code>,则此组件从祖先继承其前景色。
+     * 
+     * 
      * @return <code>true</code> if the foreground color has been explicitly
      *         set for this Component; <code>false</code> otherwise.
      * @since 1.4
@@ -1781,6 +2221,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the background color of this component.
+     * <p>
+     *  获取此组件的背景颜色。
+     * 
+     * 
      * @return this component's background color; if this component does
      *          not have a background color,
      *          the background color of its parent is returned
@@ -1804,6 +2248,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * parts of the component that are affected by the background color
      * may differ between operating systems.
      *
+     * <p>
+     *  设置此组件的背景颜色。
+     * <p>
+     *  背景颜色不同地影响每个组件,并且受背景颜色影响的组件的部分在不同操作系统之间可能不同。
+     * 
+     * 
      * @param c the color to become this component's color;
      *          if this parameter is <code>null</code>, then this
      *          component will inherit the background color of its parent
@@ -1832,6 +2282,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Component. If this method returns <code>false</code>, this Component is
      * inheriting its background color from an ancestor.
      *
+     * <p>
+     *  返回是否已为此组件显式设置背景颜色。如果此方法返回<code> false </code>,则此组件从祖先继承其背景颜色。
+     * 
+     * 
      * @return <code>true</code> if the background color has been explicitly
      *         set for this Component; <code>false</code> otherwise.
      * @since 1.4
@@ -1842,6 +2296,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the font of this component.
+     * <p>
+     *  获取此组件的字体。
+     * 
+     * 
      * @return this component's font; if a font has not been set
      * for this component, the font of its parent is returned
      * @see #setFont
@@ -1871,6 +2329,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  设置此组件的字体。
+     * <p>
+     * 此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param f the font to become this component's font;
      *          if this parameter is <code>null</code> then this
      *          component will inherit the font of its parent
@@ -1912,6 +2376,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * this method returns <code>false</code>, this Component is inheriting its
      * font from an ancestor.
      *
+     * <p>
+     *  返回是否已为此组件显式设置字体。如果此方法返回<code> false </code>,则此组件从祖先继承其字体。
+     * 
+     * 
      * @return <code>true</code> if the font has been explicitly set for this
      *         Component; <code>false</code> otherwise.
      * @since 1.4
@@ -1922,6 +2390,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the locale of this component.
+     * <p>
+     *  获取此组件的语言环境。
+     * 
+     * 
      * @return this component's locale; if this component does not
      *          have a locale, the locale of its parent is returned
      * @see #setLocale
@@ -1951,6 +2423,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  设置此组件的区域设置。这是一个bound属性。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param l the locale to become this component's locale
      * @see #getLocale
      * @see #invalidate
@@ -1971,6 +2449,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Gets the instance of <code>ColorModel</code> used to display
      * the component on the output device.
+     * <p>
+     *  获取用于在输出设备上显示组件的<code> ColorModel </code>实例。
+     * 
+     * 
      * @return the color model used by this component
      * @see java.awt.image.ColorModel
      * @see java.awt.peer.ComponentPeer#getColorModel()
@@ -2000,6 +2482,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * which is called after the operating system has finished moving the
      * component.
      * </p>
+     * <p>
+     *  以指定组件左上角的点的形式获取此组件的位置。该位置将相对于父级的坐标空间。
+     * <p>
+     *  由于本地事件处理的异步性质,该方法可以返回过时的值(例如,在快速连续的<code> setLocation()</code>的多个调用之后)。
+     * 因此,获取组件位置的推荐方法在操作系统移动组件后调用的<code> java.awt.event.ComponentListener.componentMoved()</code>中。
+     * </p>
+     * 
      * @return an instance of <code>Point</code> representing
      *          the top-left corner of the component's bounds in
      *          the coordinate space of the component's parent
@@ -2015,6 +2504,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Gets the location of this component in the form of a point
      * specifying the component's top-left corner in the screen's
      * coordinate space.
+     * <p>
+     *  以指定组件在屏幕坐标空间中左上角的点的形式获取此组件的位置。
+     * 
+     * 
      * @return an instance of <code>Point</code> representing
      *          the top-left corner of the component's bounds in the
      *          coordinate space of the screen
@@ -2032,6 +2525,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /*
      * a package private version of getLocationOnScreen
      * used by GlobalCursormanager to update cursor
+     * <p>
+     *  GlobalCursormanager用于更新游标的软件包私有版本的getLocationOnScreen
+     * 
      */
     final Point getLocationOnScreen_NoTreeLock() {
 
@@ -2057,6 +2553,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getLocation()</code>.
      */
@@ -2077,6 +2575,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     * 将此组件移动到新位置。新位置的左上角由此组件父级的坐标空间中的<code> x </code>和<code> y </code>参数指定。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param x the <i>x</i>-coordinate of the new location's
      *          top-left corner in the parent's coordinate space
      * @param y the <i>y</i>-coordinate of the new location's
@@ -2091,6 +2595,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setLocation(int, int)</code>.
      */
@@ -2110,6 +2616,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  将此组件移动到新位置。新位置的左上角由点<code> p </code>指定。点<code> p </code>在父级的坐标空间中给出。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param p the point defining the top-left corner
      *          of the new location, given in the coordinate space of this
      *          component's parent
@@ -2129,6 +2641,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * this component's height, and the <code>width</code>
      * field of the <code>Dimension</code> object contains
      * this component's width.
+     * <p>
+     *  以<code> Dimension </code>对象的形式返回此组件的大小。
+     *  <code> Dimension </code>对象的<code> height </code>字段包含此组件的高度,<code> Dimension </code>对象的<code> width </code>
+     * 组件的宽度。
+     *  以<code> Dimension </code>对象的形式返回此组件的大小。
+     * 
+     * 
      * @return a <code>Dimension</code> object that indicates the
      *          size of this component
      * @see #setSize
@@ -2139,6 +2658,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getSize()</code>.
      */
@@ -2154,6 +2675,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  调整此组件的大小,使其具有<code> width </code>和height <code> height </code>的宽度。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param width the new width of this component in pixels
      * @param height the new height of this component in pixels
      * @see #getSize
@@ -2166,6 +2693,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setSize(int, int)</code>.
      */
@@ -2184,6 +2713,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  调整此组件的大小,使其宽度为<code> d.width </code>和height <code> d.height </code>。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param d the dimension specifying the new size
      *          of this component
      * @throws NullPointerException if {@code d} is {@code null}
@@ -2197,6 +2732,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setSize(Dimension)</code>.
      */
@@ -2210,6 +2747,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <code>Rectangle</code> object. The bounds specify this
      * component's width, height, and location relative to
      * its parent.
+     * <p>
+     *  以<code> Rectangle </code>对象的形式获取此组件的边界。 bounds指定此组件的宽度,高度和相对于其父项的位置。
+     * 
+     * 
      * @return a rectangle indicating this component's bounds
      * @see #setBounds
      * @see #getLocation
@@ -2220,6 +2761,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getBounds()</code>.
      */
@@ -2236,6 +2779,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     * 移动和调整此组件的大小。
+     * 左上角的新位置由<code> x </code>和<code> y </code>指定,新大小由<code> width </code>和<code> height </code>。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param x the new <i>x</i>-coordinate of this component
      * @param y the new <i>y</i>-coordinate of this component
      * @param width the new <code>width</code> of this component
@@ -2254,6 +2804,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setBounds(int, int, int, int)</code>.
      */
@@ -2383,6 +2935,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  移动并调整此组件的大小以符合新的包围矩形<code> r </code>。
+     * 该组件的新位置由<code> rx </code>和<code> ry </code>指定,其新大小由<code> r.width </code>和<code> r.height < / code>。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param r the new bounding rectangle for this component
      * @throws NullPointerException if {@code r} is {@code null}
      * @see       #getBounds
@@ -2405,6 +2964,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * or <code>component.getLocation().x</code> because it doesn't
      * cause any heap allocations.
      *
+     * <p>
+     *  返回组件origin的当前x坐标。这种方法比编写<code> component.getBounds()。x </code>或<code> component.getLocation()。
+     * x </code>更好,因为它不会引起任何堆分配。
+     * 
+     * 
      * @return the current x coordinate of the components origin
      * @since 1.2
      */
@@ -2420,6 +2984,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * or <code>component.getLocation().y</code> because it
      * doesn't cause any heap allocations.
      *
+     * <p>
+     *  返回组件origin的当前y坐标。这种方法比编写<code> component.getBounds()。y </code>或<code> component.getLocation()。
+     * y </code>更好,因为它不会引起任何堆分配。
+     * 
+     * 
      * @return the current y coordinate of the components origin
      * @since 1.2
      */
@@ -2435,6 +3004,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * or <code>component.getSize().width</code> because it
      * doesn't cause any heap allocations.
      *
+     * <p>
+     *  返回此组件的当前宽度。这种方法比编写<code> component.getBounds()。width </code>或<code> component.getSize()。
+     * width </code>更好,因为它不会引起任何堆分配。
+     * 
+     * 
      * @return the current width of this component
      * @since 1.2
      */
@@ -2450,6 +3024,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * or <code>component.getSize().height</code> because it
      * doesn't cause any heap allocations.
      *
+     * <p>
+     * 返回此组件的当前高度。这种方法比编写<code> component.getBounds(),height </code>或<code> component.getSize()。
+     * height </code>更好,因为它不会引起任何堆分配。
+     * 
+     * 
      * @return the current height of this component
      * @since 1.2
      */
@@ -2465,6 +3044,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * wants to avoid allocating a new <code>Rectangle</code> object
      * on the heap.
      *
+     * <p>
+     *  将此组件的边界存储到"返回值"<b> rv </b>中,并返回<b> rv </b>。
+     * 如果rv是<code> null </code>,则分配一个新的<code> Rectangle </code>。
+     * 如果调用者想要避免在堆上分配新的<code> Rectangle </code>对象,则此版本的<code> getBounds </code>。
+     * 
+     * 
      * @param rv the return value, modified to the components bounds
      * @return rv
      */
@@ -2485,6 +3070,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <code>getSize</code> is useful if the caller wants to avoid
      * allocating a new <code>Dimension</code> object on the heap.
      *
+     * <p>
+     *  将此组件的宽度/高度存储到"返回值"<b> rv </b>中,并返回<b> rv </b>。
+     * 如果rv是<code> null </code>,则会分配一个新的<code> Dimension </code>对象。
+     * 如果调用者想要避免在堆上分配新的<code> Dimension </code>对象,则此版本的<code> getSize </code>很有用。
+     * 
+     * 
      * @param rv the return value, modified to the components size
      * @return rv
      */
@@ -2506,6 +3097,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * caller wants to avoid allocating a new <code>Point</code>
      * object on the heap.
      *
+     * <p>
+     *  将此组件的x,y原点存储到"返回值"<b> rv </b>中,并返回<b> rv </b>。如果rv是<code> null </code>,则分配新的<code> Point </code>。
+     * 如果调用者想要避免在堆上分配新的<code> Point </code>对象,则此版本的<code> getLocation </code>。
+     * 
+     * 
      * @param rv the return value, modified to the components location
      * @return rv
      */
@@ -2532,6 +3128,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Subclasses that guarantee to always completely paint their
      * contents should override this method and return true.
      *
+     * <p>
+     *  如果此组件完全不透明,则返回true,默认情况下返回false。
+     * <p>
+     *  不透明的组件绘制矩形区域内的每个像素。非不透明组件仅绘制其某些像素,从而允许其下方的像素"显示"。因此,不完全涂覆其像素的组件提供一定程度的透明度。
+     * <p>
+     * 保证始终完全绘制其内容的子类应该覆盖此方法并返回true。
+     * 
+     * 
      * @return true if this component is completely opaque
      * @see #isLightweight
      * @since 1.2
@@ -2557,6 +3161,15 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * is not displayable because it is impossible to determine the
      * weight of an undisplayable component.
      *
+     * <p>
+     *  轻量级组件没有本地工具包对等体。
+     *  <code> Component </code>和<code> Container </code>之外的子类是轻量级的,除了在此包中定义的<code> Button </code>或<code> Sc
+     * rollbar </code>所有的Swing组件都是轻重量。
+     *  轻量级组件没有本地工具包对等体。
+     * <p>
+     *  如果此组件不可显示,则此方法将始终返回<code> false </code>,因为无法确定不可显示组件的权重。
+     * 
+     * 
      * @return true if this component has a lightweight peer; false if
      *         it has a native peer or no peer
      * @see #isDisplayable
@@ -2573,6 +3186,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * return this value.  Setting the preferred size to <code>null</code>
      * restores the default behavior.
      *
+     * <p>
+     *  将此组件的首选大小设置为常量值。对<code> getPreferredSize </code>的后续调用将始终返回此值。将首选大小设置为<code> null </code>可恢复默认行为。
+     * 
+     * 
      * @param preferredSize The new preferred size, or null
      * @see #getPreferredSize
      * @see #isPreferredSizeSet
@@ -2599,6 +3216,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns true if the preferred size has been set to a
      * non-<code>null</code> value otherwise returns false.
      *
+     * <p>
+     *  如果首选大小已设置为非<code> null </code>值,则返回true,否则返回false。
+     * 
+     * 
      * @return true if <code>setPreferredSize</code> has been invoked
      *         with a non-null value.
      * @since 1.5
@@ -2610,6 +3231,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the preferred size of this component.
+     * <p>
+     *  获取此组件的首选大小。
+     * 
+     * 
      * @return a dimension object indicating this component's preferred size
      * @see #getMinimumSize
      * @see LayoutManager
@@ -2620,6 +3245,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getPreferredSize()</code>.
      */
@@ -2627,6 +3254,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     public Dimension preferredSize() {
         /* Avoid grabbing the lock if a reasonable cached size value
          * is available.
+         * <p>
+         *  可用。
+         * 
          */
         Dimension dim = prefSize;
         if (dim == null || !(isPreferredSizeSet() || isValid())) {
@@ -2646,6 +3276,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * return this value.  Setting the minimum size to <code>null</code>
      * restores the default behavior.
      *
+     * <p>
+     *  将此组件的最小大小设置为常量值。对<code> getMinimumSize </code>的后续调用将始终返回此值。将最小大小设置为<code> null </code>可恢复默认行为。
+     * 
+     * 
      * @param minimumSize the new minimum size of this component
      * @see #getMinimumSize
      * @see #isMinimumSizeSet
@@ -2671,6 +3305,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns whether or not <code>setMinimumSize</code> has been
      * invoked with a non-null value.
      *
+     * <p>
+     *  返回是否已使用非空值调用<code> setMinimumSize </code>。
+     * 
+     * 
      * @return true if <code>setMinimumSize</code> has been invoked with a
      *              non-null value.
      * @since 1.5
@@ -2681,6 +3319,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the minimum size of this component.
+     * <p>
+     *  获取此组件的最小大小。
+     * 
+     * 
      * @return a dimension object indicating this component's minimum size
      * @see #getPreferredSize
      * @see LayoutManager
@@ -2690,6 +3332,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getMinimumSize()</code>.
      */
@@ -2697,6 +3341,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     public Dimension minimumSize() {
         /* Avoid grabbing the lock if a reasonable cached size value
          * is available.
+         * <p>
+         *  可用。
+         * 
          */
         Dimension dim = minSize;
         if (dim == null || !(isMinimumSizeSet() || isValid())) {
@@ -2716,6 +3363,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * return this value.  Setting the maximum size to <code>null</code>
      * restores the default behavior.
      *
+     * <p>
+     * 将此组件的最大大小设置为常量值。对<code> getMaximumSize </code>的后续调用将始终返回此值。将最大大小设置为<code> null </code>可恢复默认行为。
+     * 
+     * 
      * @param maximumSize a <code>Dimension</code> containing the
      *          desired maximum allowable size
      * @see #getMaximumSize
@@ -2742,6 +3393,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns true if the maximum size has been set to a non-<code>null</code>
      * value otherwise returns false.
      *
+     * <p>
+     *  如果最大大小已设置为非<code> null </code>值,则返回true,否则返回false。
+     * 
+     * 
      * @return true if <code>maximumSize</code> is non-<code>null</code>,
      *          false otherwise
      * @since 1.5
@@ -2752,6 +3407,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Gets the maximum size of this component.
+     * <p>
+     *  获取此组件的最大大小。
+     * 
+     * 
      * @return a dimension object indicating this component's maximum size
      * @see #getMinimumSize
      * @see #getPreferredSize
@@ -2770,6 +3429,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * components.  The value should be a number between 0 and 1
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
+     * <p>
+     *  返回沿x轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
      */
     public float getAlignmentX() {
         return CENTER_ALIGNMENT;
@@ -2781,6 +3443,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * components.  The value should be a number between 0 and 1
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
+     * <p>
+     *  返回沿y轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
      */
     public float getAlignmentY() {
         return CENTER_ALIGNMENT;
@@ -2801,6 +3466,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * size &gt;= the minimum size and <code>getBaselineResizeBehavior</code>
      * can be used to determine how the baseline changes with size.
      *
+     * <p>
+     *  返回基线。基线从组件的顶部测量。此方法主要用于<code> LayoutManager </code>以沿其基线对齐组件。
+     * 小于0的返回值表示此组件没有合理的基线,并且<code> LayoutManager </code>不应将此组件与其基线对齐。
+     * <p>
+     * 默认实现返回-1。支持基线的子类应适当覆盖。
+     * 如果返回值> = 0,则组件对于任何大小&gt; =最小大小具有有效基线,并且<code> getBaselineResizeBehavior </code>可以用于确定基线如何随大小改变。
+     * 
+     * 
      * @param width the width to get the baseline for
      * @param height the height to get the baseline for
      * @return the baseline or &lt; 0 indicating there is no reasonable
@@ -2834,6 +3507,15 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * value other than <code>BaselineResizeBehavior.OTHER</code> even if
      * <code>getBaseline</code> returns a value less than 0.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。此方法主要用于布局管理器和GUI构建器。
+     * <p>
+     *  默认实现返回<code> BaselineResizeBehavior.OTHER </code>。具有基线的子类应适当覆盖。
+     * 子类不应返回<code> null </code>;如果基线不能计算返回<code> BaselineResizeBehavior.OTHER </code>。
+     * 调用者应首先使用<code> getBaseline </code>请求基线,如果返回值>&gt; = 0,则使用此方法。
+     * 此方法可以接受<code> BaselineResizeBehavior.OTHER </code>以外的值,即使<code> getBaseline </code>返回的值小于0也是如此。
+     * 
+     * 
      * @return an enum indicating how the baseline changes as the component
      *         size changes
      * @see #getBaseline(int, int)
@@ -2847,6 +3529,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Prompts the layout manager to lay out this component. This is
      * usually called when the component (more specifically, container)
      * is validated.
+     * <p>
+     *  提示布局管理器布局此组件。这通常在组件(更具体地,容器)被验证时被调用。
+     * 
+     * 
      * @see #validate
      * @see LayoutManager
      */
@@ -2855,6 +3541,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>doLayout()</code>.
      */
@@ -2868,6 +3556,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The meaning of the term <i>validating</i> is defined by the ancestors of
      * this class. See {@link Container#validate} for more details.
      *
+     * <p>
+     *  验证此组件。
+     * <p>
+     *  术语<i>验证</i>的含义由此类的祖先定义。有关详细信息,请参阅{@link Container#validate}。
+     * 
+     * 
      * @see       #invalidate
      * @see       #doLayout()
      * @see       LayoutManager
@@ -2911,6 +3605,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>
      * This method might be called often, so it should work fast.
      *
+     * <p>
+     *  无效此组件及其祖先。
+     * <p>
+     * 默认情况下,组件的所有祖先到层次结构的最顶层容器都被标记为无效。
+     * 如果{@code java.awt.smartInvalidate}系统属性设置为{@code true},则无效将停止在此组件最近的验证根上。标记容器<i>无效</i>表示容器需要布局。
+     * <p>
+     *  当任何与布局相关的信息更改(例如设置组件的边界,或将组件添加到容器)时,将自动调用此方法。
+     * <p>
+     *  这个方法可能会被频繁调用,所以它应该工作得很快。
+     * 
+     * 
      * @see       #validate
      * @see       #doLayout
      * @see       LayoutManager
@@ -2922,6 +3627,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
             /* Nullify cached layout and size information.
              * For efficiency, propagate invalidate() upwards only if
              * some other component hasn't already done so first.
+             * <p>
+             *  为了提高效率,只有当一些其他组件尚未这样做时才向上传播invalidate()。
+             * 
              */
             valid = false;
             if (!isPreferredSizeSet()) {
@@ -2941,6 +3649,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Invalidates the parent of this component if any.
      *
      * This method MUST BE invoked under the TreeLock.
+     * <p>
+     *  使此组件的父项(如果有)无效。
+     * 
+     *  此方法必须在TreeLock下调用。
+     * 
      */
     void invalidateParent() {
         if (parent != null) {
@@ -2949,6 +3662,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /** Invalidates the component unless it is already invalid.
+    /* <p>
      */
     final void invalidateIfValid() {
         if (isValid()) {
@@ -2969,6 +3683,15 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * then calling the {@link #validate()} method on the nearest validate
      * root.
      *
+     * <p>
+     *  重新验证组件层次结构,直到最近的验证根。
+     * <p>
+     *  此方法首先使组件层次结构从此组件开始到最近的验证根失效。然后,从最近的验证根开始验证组件层次结构。
+     * <p>
+     *  这是一个方便的方法,应该帮助应用程序开发人员避免手动查找验证根。
+     * 基本上,它相当于首先调用此组件上的{@link #invalidate()}方法,然后调用最近的验证根上的{@link #validate()}方法。
+     * 
+     * 
      * @see Container#isValidateRoot
      * @since 1.7
      */
@@ -2978,6 +3701,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Revalidates the component synchronously.
+     * <p>
+     *  同步重新验证组件。
+     * 
      */
     final void revalidateSynchronously() {
         synchronized (getTreeLock()) {
@@ -3007,6 +3733,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Creates a graphics context for this component. This method will
      * return <code>null</code> if this component is currently not
      * displayable.
+     * <p>
+     * 为此组件创建图形上下文。如果此组件当前不可显示,此方法将返回<code> null </code>。
+     * 
+     * 
      * @return a graphics context for this component, or <code>null</code>
      *             if it has none
      * @see       #paint
@@ -3067,6 +3797,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * used. Instead metrics can be obtained at rendering time by calling
      * {@link Graphics#getFontMetrics()} or text measurement APIs on the
      * {@link Font Font} class.
+     * <p>
+     *  获取指定字体的字体指标。
+     * 警告：由于字体指标受{@link java.awt.font.FontRenderContext FontRenderContext}的影响,并且此方法不提供一个,它可以仅返回默认渲染上下文的指标,该指
+     * 标可能与在组件上呈现时如果正在使用{@link Graphics2D}功能。
+     *  获取指定字体的字体指标。相反,度量可以在呈现时通过在{@link Font Font}类上调用{@link Graphics#getFontMetrics()}或文本测量API来获取。
+     * 
+     * 
      * @param font the font for which font metrics is to be
      *          obtained
      * @return the font metrics for <code>font</code>
@@ -3103,6 +3840,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The method may have no visual effect if the Java platform
      * implementation and/or the native system do not support
      * changing the mouse cursor shape.
+     * <p>
+     *  将光标图像设置为指定的光标。当此组件的<code>包含</code>方法对当前光标位置返回true并且此组件可见,可显示和启用时,将显示此光标图像。
+     * 设置<code> Container </code>的光标会导致光标显示在所有容器的子组件中,除非有<code> null </code>光标。
+     * <p>
+     *  如果Java平台实现和/或本地系统不支持改变鼠标光标形状,则该方法可以没有视觉效果。
+     * 
+     * 
      * @param cursor One of the constants defined
      *          by the <code>Cursor</code> class;
      *          if this parameter is <code>null</code>
@@ -3124,6 +3868,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Updates the cursor.  May not be invoked from the native
      * message pump.
+     * <p>
+     *  更新光标。可能不能从本机消息泵调用。
+     * 
      */
     final void updateCursorImmediately() {
         if (peer instanceof LightweightPeer) {
@@ -3146,6 +3893,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * not have a cursor set, the cursor of its parent is returned.
      * If no cursor is set in the entire hierarchy,
      * <code>Cursor.DEFAULT_CURSOR</code> is returned.
+     * <p>
+     * 获取组件中设置的游标。如果组件没有设置游标,则返回其父游标。如果在整个层次结构中没有设置光标,则返回<code> Cursor.DEFAULT_CURSOR </code>。
+     * 
+     * 
      * @see #setCursor
      * @since      JDK1.1
      */
@@ -3171,6 +3922,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * If this method returns <code>false</code>, this Component is inheriting
      * its cursor from an ancestor.
      *
+     * <p>
+     *  返回是否已为此组件显式设置游标。如果此方法返回<code> false </code>,则此组件从祖先继承其游标。
+     * 
+     * 
      * @return <code>true</code> if the cursor has been explicitly set for this
      *         Component; <code>false</code> otherwise.
      * @since 1.4
@@ -3199,6 +3954,18 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * efficient painting code, see
      * <a href="http://www.oracle.com/technetwork/java/painting-140037.html">Painting in AWT and Swing</a>.
      *
+     * <p>
+     *  绘制此组件。
+     * <p>
+     *  当组件的内容应该被绘制时,调用此方法;例如当该部件首先被示出或被损坏并且需要修理时。 <code> Graphics </code>参数中的剪辑矩形设置为需要绘制的区域。
+     * 覆盖此方法的<code> Component </code>子类不需要调用<code> super.paint(g)</code>。
+     * <p>
+     *  出于性能原因,具有零宽度或高度的<code>组件</code>在第一次显示时不被认为需要绘制,并且也不被认为需要修复。
+     * <p>
+     *  <b>注意</b>：有关由AWT和Swing使用的绘制机制的更多信息,包括有关如何编写最有效的绘画代码的信息,请参阅<a href ="http://www.oracle.com/ technetwork / java / painting-140037.html">
+     * 在AWT和Swing绘画</a>。
+     * 
+     * 
      * @param g the graphics context to use for painting
      * @see       #update
      * @since     JDK1.0
@@ -3234,6 +4001,24 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * efficient painting code, see
      * <a href="http://www.oracle.com/technetwork/java/painting-140037.html">Painting in AWT and Swing</a>.
      *
+     * <p>
+     *  更新此组件。
+     * <p>
+     *  如果此组件不是轻量级组件,则AWT会调用<code> update </code>方法以响应对<code> repaint </code>的调用。您可以假定背景不被清除。
+     * <p>
+     * <code> Component </code>的<code> update </code>方法调用此组件的<code> paint </code>方法重绘此组件。
+     * 这个方法通常被需要做额外工作的子类覆盖,以响应对<code> repaint </code>的调用。
+     * 覆盖此方法的Component的子类应该从<code> update </code>方法中调用<code> super.update(g)</code>或调用<code> paint(g)</code>
+     * 。
+     * 这个方法通常被需要做额外工作的子类覆盖,以响应对<code> repaint </code>的调用。
+     * <p>
+     *  图形上下文的原点,其(<code> 0 </code>,&nbsp; <code> 0 </code>)坐标点是此组件的左上角。图形上下文的剪切区域是该组件的有界矩形。
+     * 
+     * <p>
+     *  <b>注意</b>：有关由AWT和Swing使用的绘制机制的更多信息,包括有关如何编写最有效的绘画代码的信息,请参阅<a href ="http://www.oracle.com/ technetwork / java / painting-140037.html">
+     * 在AWT和Swing绘画</a>。
+     * 
+     * 
      * @param g the specified context to use for updating
      * @see       #paint
      * @see       #repaint()
@@ -3251,6 +4036,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * top-left corner of this component. The clipping region of the
      * graphics context is the bounding rectangle of this component.
      *
+     * <p>
+     *  绘制此组件及其所有子组件。
+     * <p>
+     *  图形上下文的原点,其(<code> 0 </code>,&nbsp; <code> 0 </code>)坐标点是此组件的左上角。图形上下文的剪切区域是该组件的有界矩形。
+     * 
+     * 
      * @param     g   the graphics context to use for painting
      * @see       #paint
      * @since     JDK1.0
@@ -3268,6 +4059,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Simulates the peer callbacks into java.awt for painting of
      * lightweight Components.
+     * <p>
+     *  将对等回调模拟为java.awt以绘制轻量级组件。
+     * 
+     * 
      * @param     g   the graphics context to use for painting
      * @see       #paintAll
      */
@@ -3277,6 +4072,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Paints all the heavyweight subcomponents.
+     * <p>
+     *  绘制所有重量级子组件。
+     * 
      */
     void paintHeavyweightComponents(Graphics g) {
     }
@@ -3296,6 +4094,15 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <a href="http://www.oracle.com/technetwork/java/painting-140037.html">Painting in AWT and Swing</a>.
 
      *
+     * <p>
+     *  重绘此组件。
+     * <p>
+     * 如果此组件是轻量级组件,此方法会尽快调用此组件的<code> paint </code>方法。否则,此方法将尽快调用此组件的<code> update </code>方法。
+     * <p>
+     *  <b>注意</b>：有关由AWT和Swing使用的绘制机制的更多信息,包括有关如何编写最有效的绘画代码的信息,请参阅<a href ="http://www.oracle.com/ technetwork / java / painting-140037.html">
+     * 在AWT和Swing绘画</a>。
+     * 
+     * 
      * @see       #update(Graphics)
      * @since     JDK1.0
      */
@@ -3313,6 +4120,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * efficient painting code, see
      * <a href="http://www.oracle.com/technetwork/java/painting-140037.html">Painting in AWT and Swing</a>.
      *
+     * <p>
+     *  重新绘制组件。如果此组件是轻量级组件,则会导致在<code> tm </code>毫秒内调用<code> paint </code>。
+     * <p>
+     *  <b>注意</b>：有关由AWT和Swing使用的绘制机制的更多信息,包括有关如何编写最有效的绘画代码的信息,请参阅<a href ="http://www.oracle.com/ technetwork / java / painting-140037.html">
+     * 在AWT和Swing绘画</a>。
+     * 
+     * 
      * @param tm maximum time in milliseconds before update
      * @see #paint
      * @see #update(Graphics)
@@ -3335,6 +4149,15 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * efficient painting code, see
      * <a href="http://www.oracle.com/technetwork/java/painting-140037.html">Painting in AWT and Swing</a>.
      *
+     * <p>
+     *  重绘此组件的指定矩形。
+     * <p>
+     *  如果此组件是轻量级组件,此方法会尽快调用此组件的<code> paint </code>方法。否则,此方法将尽快调用此组件的<code> update </code>方法。
+     * <p>
+     *  <b>注意</b>：有关由AWT和Swing使用的绘制机制的更多信息,包括有关如何编写最有效的绘画代码的信息,请参阅<a href ="http://www.oracle.com/ technetwork / java / painting-140037.html">
+     * 在AWT和Swing绘画</a>。
+     * 
+     * 
      * @param     x   the <i>x</i> coordinate
      * @param     y   the <i>y</i> coordinate
      * @param     width   the width
@@ -3360,6 +4183,15 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * efficient painting code, see
      * <a href="http://www.oracle.com/technetwork/java/painting-140037.html">Painting in AWT and Swing</a>.
      *
+     * <p>
+     * 在<code> tm </code>毫秒内重绘此组件的指定矩形。
+     * <p>
+     *  如果此组件是轻量级组件,则此方法将调用此组件的<code> paint </code>方法。否则,此方法将调用此组件的<code> update </code>方法。
+     * <p>
+     *  <b>注意</b>：有关由AWT和Swing使用的绘制机制的更多信息,包括有关如何编写最有效的绘画代码的信息,请参阅<a href ="http://www.oracle.com/ technetwork / java / painting-140037.html">
+     * 在AWT和Swing绘画</a>。
+     * 
+     * 
      * @param     tm   maximum time in milliseconds before update
      * @param     x    the <i>x</i> coordinate
      * @param     y    the <i>y</i> coordinate
@@ -3417,6 +4249,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * (<code>0</code>,&nbsp;<code>0</code>) coordinate point, is the
      * top-left corner of this component. The clipping region of the
      * graphics context is the bounding rectangle of this component.
+     * <p>
+     *  打印此组件。应用程序应该覆盖此方法,以便在打印之前必须进行特殊处理的组件或应该与打印不同的组件进行打印。
+     * <p>
+     *  此方法的默认实现调用<code> paint </code>方法。
+     * <p>
+     *  图形上下文的原点,其(<code> 0 </code>,&nbsp; <code> 0 </code>)坐标点是此组件的左上角。图形上下文的剪切区域是该组件的有界矩形。
+     * 
+     * 
      * @param     g   the graphics context to use for printing
      * @see       #paint(Graphics)
      * @since     JDK1.0
@@ -3432,6 +4272,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * (<code>0</code>,&nbsp;<code>0</code>) coordinate point, is the
      * top-left corner of this component. The clipping region of the
      * graphics context is the bounding rectangle of this component.
+     * <p>
+     *  打印此组件及其所有子组件。
+     * <p>
+     *  图形上下文的原点,其(<code> 0 </code>,&nbsp; <code> 0 </code>)坐标点是此组件的左上角。图形上下文的剪切区域是该组件的有界矩形。
+     * 
+     * 
      * @param     g   the graphics context to use for printing
      * @see       #print(Graphics)
      * @since     JDK1.0
@@ -3449,6 +4295,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Simulates the peer callbacks into java.awt for printing of
      * lightweight Components.
+     * <p>
+     *  将对等回调模拟为java.awt以打印轻量级组件。
+     * 
+     * 
      * @param     g   the graphics context to use for printing
      * @see       #printAll
      */
@@ -3458,6 +4308,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Prints all the heavyweight subcomponents.
+     * <p>
+     *  打印所有重量级子组件。
+     * 
      */
     void printHeavyweightComponents(Graphics g) {
     }
@@ -3499,6 +4352,24 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <code>width</code>, and <code>height</code> arguments depends on
      * the value of the <code>infoflags</code> argument.
      *
+     * <p>
+     * 当图像更改时重新绘制组件。
+     * 当关于先前使用异步例程请求的图像的更多信息时,调用<code> ImageObserver </code>的<code> imageUpdate </code>方法,例如<code> drawImage
+     *  </code> <code>图形</code>变为可用。
+     * 当图像更改时重新绘制组件。有关此方法及其参数的更多信息,请参阅<code> imageUpdate </code>的定义。
+     * <p>
+     *  <code> Component </code>的<code> imageUpdate </code>方法在图像的更多位可用时,在组件上递增地绘制图像。
+     * <p>
+     *  如果系统属性<code> awt.image.incrementaldraw </code>缺失或值为<code> true </code>,则会逐步绘制图像。
+     * 如果系统属性具有任何其他值,则在完全加载图像之前不会绘制图像。
+     * <p>
+     *  此外,如果增量绘图有效,系统属性<code> awt.image.redrawrate </code>的值将被解释为一个整数,以提供最大重绘速率(以毫秒为单位)。
+     * 如果系统属性缺失或无法解释为整数,则重绘速率为每100毫秒一次。
+     * <p>
+     *  <code> x </code>,<code> y </code>,<code> width </code>和<code> height </code>参数的解释取决于<code> infoflags
+     *  </code>参数。
+     * 
+     * 
      * @param     img   the image being observed
      * @param     infoflags   see <code>imageUpdate</code> for more information
      * @param     x   the <i>x</i> coordinate
@@ -3537,6 +4408,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Creates an image from the specified image producer.
+     * <p>
+     *  从指定的图像制作者创建图像。
+     * 
+     * 
      * @param     producer  the image producer
      * @return    the image produced
      * @since     JDK1.0
@@ -3552,6 +4427,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Creates an off-screen drawable image
      *     to be used for double buffering.
+     * <p>
+     *  创建用于双缓冲的离屏可绘制图像。
+     * 
+     * 
      * @param     width the specified width
      * @param     height the specified height
      * @return    an off-screen drawable image, which can be used for double
@@ -3576,6 +4455,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Creates a volatile off-screen drawable image
      *     to be used for double buffering.
+     * <p>
+     * 创建一个易失的离屏可绘图像,用于双缓冲。
+     * 
+     * 
      * @param     width the specified width.
      * @param     height the specified height.
      * @return    an off-screen drawable image, which can be used for double
@@ -3606,6 +4489,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The contents of this image may be lost at any time due
      * to operating system issues, so the image must be managed
      * via the <code>VolatileImage</code> interface.
+     * <p>
+     *  使用给定的功能创建一个易失的离屏可绘制图像。由于操作系统问题,此映像的内容可能随时丢失,因此必须通过<code> VolatileImage </code>界面管理映像。
+     * 
+     * 
      * @param width the specified width.
      * @param height the specified height.
      * @param caps the image capabilities
@@ -3626,6 +4513,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Prepares an image for rendering on this component.  The image
      * data is downloaded asynchronously in another thread and the
      * appropriate screen representation of the image is generated.
+     * <p>
+     *  准备要在此组件上渲染的图像。图像数据异步地下载到另一线程中,并且生成图像的适当的屏幕表示。
+     * 
+     * 
      * @param     image   the <code>Image</code> for which to
      *                    prepare a screen representation
      * @param     observer   the <code>ImageObserver</code> object
@@ -3645,6 +4536,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The image data is downloaded asynchronously in another thread,
      * and an appropriately scaled screen representation of the image is
      * generated.
+     * <p>
+     *  准备要在指定宽度和高度的此组件上渲染的图像。
+     * <p>
+     *  图像数据异步地下载在另一线程中,并且生成图像的适当缩放的屏幕表示。
+     * 
+     * 
      * @param     image    the instance of <code>Image</code>
      *            for which to prepare a screen representation
      * @param     width    the width of the desired screen representation
@@ -3680,6 +4577,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>
      * Information on the flags returned by this method can be found
      * with the discussion of the <code>ImageObserver</code> interface.
+     * <p>
+     *  返回构造指定图像的屏幕表示的状态。
+     * <p>
+     *  此方法不会导致图像开始加载。应用程序必须使用<code> prepareImage </code>方法强制加载图像。
+     * <p>
+     *  关于由此方法返回的标志的信息可以在<code> ImageObserver </code>接口的讨论中找到。
+     * 
+     * 
      * @param     image   the <code>Image</code> object whose status
      *            is being checked
      * @param     observer   the <code>ImageObserver</code>
@@ -3712,6 +4617,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>
      * Information on the flags returned by this method can be found
      * with the discussion of the <code>ImageObserver</code> interface.
+     * <p>
+     *  返回构造指定图像的屏幕表示的状态。
+     * <p>
+     *  此方法不会导致图像开始加载。应用程序必须使用<code> prepareImage </code>方法强制加载图像。
+     * <p>
+     * <code> Component </code>的<code> checkImage </code>方法调用其对等体的<code> checkImage </code>方法来计算标志。
+     * 如果这个组件还没有对等端,则调用组件的工具包的<code> checkImage </code>方法。
+     * <p>
+     *  关于由此方法返回的标志的信息可以在<code> ImageObserver </code>接口的讨论中找到。
+     * 
+     * 
      * @param     image   the <code>Image</code> object whose status
      *                    is being checked
      * @param     width   the width of the scaled version
@@ -3754,6 +4670,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>
      * Each time this method is called,
      * the existing buffer strategy for this component is discarded.
+     * <p>
+     *  在此组件上创建多缓冲的新策略。多缓冲对于呈现性能很有用。此方法尝试创建可用的最佳策略,提供的缓冲区数。它将总是创建一个<code> BufferStrategy </code>。
+     * 首先尝试页面翻转策略,然后尝试使用加速缓冲区的blitting策略。最后,使用未加速的打击策略。
+     * <p>
+     *  每次调用此方法时,将丢弃此组件的现有缓冲区策略。
+     * 
+     * 
      * @param numBuffers number of buffers to create, including the front buffer
      * @exception IllegalArgumentException if numBuffers is less than 1.
      * @exception IllegalStateException if the component is not displayable
@@ -3809,6 +4732,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Each time this method
      * is called, <code>dispose</code> will be invoked on the existing
      * <code>BufferStrategy</code>.
+     * <p>
+     *  使用所需的缓冲区功能在此组件上创建多缓冲的新策略。这是有用的,例如,如果只需要加速的存储器或页面翻转(由缓冲器功能指定)。
+     * <p>
+     *  每次调用此方法时,将会在现有的<code> BufferStrategy </code>上调用<code> dispose </code>。
+     * 
+     * 
      * @param numBuffers number of buffers to create
      * @param caps the required capabilities for creating the buffer strategy;
      * cannot be <code>null</code>
@@ -3857,6 +4786,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This is a proxy capabilities class used when a FlipBufferStrategy
      * is created instead of the requested Blit strategy.
      *
+     * <p>
+     *  这是在创建FlipBufferStrategy而不是请求的Blit策略时使用的代理功能类。
+     * 
+     * 
      * @see sun.java2d.SunGraphicsEnvironment#isFlipStrategyPreferred(ComponentPeer)
      */
     private class ProxyCapabilities extends ExtendedBufferCapabilities {
@@ -3873,6 +4806,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @return the buffer strategy used by this component
      * @see Window#createBufferStrategy
      * @see Canvas#createBufferStrategy
@@ -3883,6 +4818,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @return the back buffer currently used by this component's
      * BufferStrategy.  If there is no BufferStrategy or no
      * back buffer, this method returns null.
@@ -3903,6 +4840,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Inner class for flipping buffers on a component.  That component must
      * be a <code>Canvas</code> or <code>Window</code>.
+     * <p>
+     * 内部类用于翻转组件上的缓冲区。该组件必须是<code> Canvas </code>或<code> Window </code>。
+     * 
+     * 
      * @see Canvas
      * @see Window
      * @see java.awt.image.BufferStrategy
@@ -3912,23 +4853,38 @@ public abstract class Component implements ImageObserver, MenuContainer,
     protected class FlipBufferStrategy extends BufferStrategy {
         /**
          * The number of buffers
+         * <p>
+         *  缓冲区的数量
+         * 
          */
         protected int numBuffers; // = 0
         /**
          * The buffering capabilities
+         * <p>
+         *  缓冲能力
+         * 
          */
         protected BufferCapabilities caps; // = null
         /**
          * The drawing buffer
+         * <p>
+         *  绘图缓冲区
+         * 
          */
         protected Image drawBuffer; // = null
         /**
          * The drawing buffer as a volatile image
+         * <p>
+         *  绘图缓冲区作为易失性映像
+         * 
          */
         protected VolatileImage drawVBuffer; // = null
         /**
          * Whether or not the drawing buffer has been recently restored from
          * a lost state.
+         * <p>
+         *  是否绘图缓冲器最近已从丢失状态恢复。
+         * 
          */
         protected boolean validatedContents; // = false
         /**
@@ -3937,6 +4893,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * None of these fields/methods really should have been marked
          * protected when they were introduced in 1.4, but now we just have
          * to live with that decision.)
+         * <p>
+         *  后缓冲区的大小。 (注意：这些字段是在6.0中添加的,但是保持package-private以避免在规范中暴露他们。
+         * 当在1.4中引入时,这些字段/方法都不应该被标记为protected,但是现在我们只需要决定)。
+         * 
          */
         int width;
         int height;
@@ -3944,6 +4904,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Creates a new flipping buffer strategy for this component.
          * The component must be a <code>Canvas</code> or <code>Window</code>.
+         * <p>
+         *  为此组件创建新的翻转缓冲区策略。组件必须是<code> Canvas </code>或<code> Window </code>。
+         * 
+         * 
          * @see Canvas
          * @see Window
          * @param numBuffers the number of buffers
@@ -3975,6 +4939,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Creates one or more complex, flipping buffers with the given
          * capabilities.
+         * <p>
+         *  使用给定的功能创建一个或多个复杂的翻转缓冲区。
+         * 
+         * 
          * @param numBuffers number of buffers to create; must be greater than
          * one
          * @param caps the capabilities of the buffers.
@@ -4036,6 +5004,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Updates internal buffers (both volatile and non-volatile)
          * by requesting the back-buffer from the peer.
+         * <p>
+         *  通过从对等体请求回缓冲区更新内部缓冲区(易失性和非易失性)。
+         * 
          */
         private void updateInternalBuffers() {
             // get the images associated with the draw buffer
@@ -4048,6 +5019,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return direct access to the back buffer, as an image.
          * @exception IllegalStateException if the buffers have not yet
          * been created
@@ -4064,6 +5037,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Flipping moves the contents of the back buffer to the front buffer,
          * either by copying or by moving the video pointer.
+         * <p>
+         *  翻转通过复制或移动视频指针将后台缓冲区的内容移动到前缓冲区。
+         * 
+         * 
          * @param flipAction an integer value describing the flipping action
          * for the contents of the back buffer.  This should be one of the
          * values of the <code>BufferCapabilities.FlipContents</code>
@@ -4099,6 +5076,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * Destroys the buffers created through this object
+         * <p>
+         *  销毁通过此对象创建的缓冲区
+         * 
          */
         protected void destroyBuffers() {
             VSyncedBSManager.releaseVsync(this);
@@ -4111,6 +5091,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return the buffering capabilities of this strategy
          */
         public BufferCapabilities getCapabilities() {
@@ -4122,6 +5104,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return the graphics on the drawing buffer.  This method may not
          * be synchronized for performance reasons; use of this method by multiple
          * threads should be handled at the application level.  Disposal of the
@@ -4134,6 +5118,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * Restore the drawing buffer if it has been lost
+         * <p>
+         *  恢复绘图缓冲区(如果已丢失)
+         * 
          */
         protected void revalidate() {
             revalidate(true);
@@ -4179,6 +5166,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return whether the drawing buffer was lost since the last call to
          * <code>getDrawGraphics</code>
          */
@@ -4190,6 +5179,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return whether the drawing buffer was recently restored from a lost
          * state and reinitialized to the default background color (white)
          */
@@ -4200,6 +5191,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Makes the next available buffer visible by either blitting or
          * flipping.
+         * <p>
+         *  使下一个可用缓冲区通过blitting或flipping可见。
+         * 
          */
         public void show() {
             flip(caps.getFlipContents());
@@ -4208,6 +5202,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Makes specified region of the the next available buffer visible
          * by either blitting or flipping.
+         * <p>
+         *  使下一个可用缓冲区的指定区域通过blitting或flipping可见。
+         * 
          */
         void showSubRegion(int x1, int y1, int x2, int y2) {
             flipSubRegion(x1, y1, x2, y2, caps.getFlipContents());
@@ -4215,6 +5212,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.6
          */
         public void dispose() {
@@ -4231,6 +5232,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Inner class for blitting offscreen surfaces to a component.
      *
+     * <p>
+     *  内部类,用于将屏幕外的表面连接到组件。
+     * 
+     * 
      * @author Michael Martak
      * @since 1.4
      */
@@ -4238,19 +5243,31 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * The buffering capabilities
+         * <p>
+         *  缓冲能力
+         * 
          */
         protected BufferCapabilities caps; // = null
         /**
          * The back buffers
+         * <p>
+         *  后缓冲区
+         * 
          */
         protected VolatileImage[] backBuffers; // = null
         /**
          * Whether or not the drawing buffer has been recently restored from
          * a lost state.
+         * <p>
+         *  是否绘图缓冲器最近已从丢失状态恢复。
+         * 
          */
         protected boolean validatedContents; // = false
         /**
          * Size of the back buffers
+         * <p>
+         * 后缓冲区的大小
+         * 
          */
         protected int width;
         protected int height;
@@ -4258,11 +5275,18 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Insets for the hosting Component.  The size of the back buffer
          * is constrained by these.
+         * <p>
+         *  主机组件的插件。后台缓冲区的大小受这些限制。
+         * 
          */
         private Insets insets;
 
         /**
          * Creates a new blt buffer strategy around a component
+         * <p>
+         *  围绕组件创建一个新的blt缓冲区策略
+         * 
+         * 
          * @param numBuffers number of buffers to create, including the
          * front buffer
          * @param caps the capabilities of the buffers
@@ -4274,6 +5298,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.6
          */
         public void dispose() {
@@ -4293,6 +5321,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * Creates the back buffers
+         * <p>
+         *  创建后缓冲区
+         * 
          */
         protected void createBackBuffers(int numBuffers) {
             if (numBuffers == 0) {
@@ -4330,6 +5361,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return the buffering capabilities of this strategy
          */
         public BufferCapabilities getCapabilities() {
@@ -4337,6 +5370,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return the draw graphics
          */
         public Graphics getDrawGraphics() {
@@ -4353,6 +5388,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return direct access to the back buffer, as an image.
          * If there is no back buffer, returns null.
          */
@@ -4366,6 +5403,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * Makes the next available buffer visible.
+         * <p>
+         *  使下一个可用缓冲区可见。
+         * 
          */
         public void show() {
             showSubRegion(insets.left, insets.top,
@@ -4381,6 +5421,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * and FlipSubRegionBufferStrategy) may have region-specific show
          * methods that call this method with actual sub regions of the
          * buffer.
+         * <p>
+         *  Package-private方法来呈现此缓冲区的特定矩形区域。此类目前仅显示整个缓冲区,通过调用具有缓冲区的完整维度的showSubRegion()。
+         * 子类(例如,BltSubRegionBufferStrategy和FlipSubRegionBufferStrategy)可以具有区域特定的显示方法,该方法使用缓冲器的实际子区域调用该方法。
+         * 
          */
         void showSubRegion(int x1, int y1, int x2, int y2) {
             if (backBuffers == null) {
@@ -4418,6 +5462,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * Restore the drawing buffer if it has been lost
+         * <p>
+         *  恢复绘图缓冲区(如果已丢失)
+         * 
          */
         protected void revalidate() {
             revalidate(true);
@@ -4461,6 +5508,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return whether the drawing buffer was lost since the last call to
          * <code>getDrawGraphics</code>
          */
@@ -4473,6 +5522,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
         }
 
         /**
+        /* <p>
+        /* 
          * @return whether the drawing buffer was recently restored from a lost
          * state and reinitialized to the default background color (white)
          */
@@ -4483,6 +5534,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Private class to perform sub-region flipping.
+     * <p>
+     *  私有类执行子区域翻转。
+     * 
      */
     private class FlipSubRegionBufferStrategy extends FlipBufferStrategy
         implements SubRegionShowable
@@ -4514,6 +5568,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * this subclass via the SubRegionShowable interface in order to
      * copy only the area changed during a repaint.
      * See javax.swing.BufferStrategyPaintManager.
+     * <p>
+     *  私有类执行子区域blitting。 Swing将通过SubRegionShowable接口使用这个子类,以便仅复制在重绘期间更改的区域。
+     * 请参阅javax.swing.BufferStrategyPaintManager。
+     * 
      */
     private class BltSubRegionBufferStrategy extends BltBufferStrategy
         implements SubRegionShowable
@@ -4542,6 +5600,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Inner class for flipping buffers on a component.  That component must
      * be a <code>Canvas</code> or <code>Window</code>.
+     * <p>
+     *  内部类用于翻转组件上的缓冲区。该组件必须是<code> Canvas </code>或<code> Window </code>。
+     * 
+     * 
      * @see Canvas
      * @see Window
      * @see java.awt.image.BufferStrategy
@@ -4582,6 +5644,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * better performance is desired, or if page-flipping is used as the
      * buffer strategy.
      *
+     * <p>
+     *  设置是否应忽略从操作系统接收的绘制消息。这不影响AWT在软件中生成的绘制事件,除非它们是对OS级别绘制消息的立即响应。
+     * <p>
+     *  这是有用的,例如,如果在全屏模式下运行并且期望更好的性能,或者如果页面翻转用作缓冲器策略。
+     * 
+     * 
      * @since 1.4
      * @see #getIgnoreRepaint
      * @see Canvas#createBufferStrategy
@@ -4594,6 +5662,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @return whether or not paint messages received from the operating system
      * should be ignored.
      *
@@ -4608,6 +5678,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Checks whether this component "contains" the specified point,
      * where <code>x</code> and <code>y</code> are defined to be
      * relative to the coordinate system of this component.
+     * <p>
+     * 检查此组件是否"包含"指定点,其中<code> x </code>和<code> y </code>被定义为相对于此组件的坐标系。
+     * 
+     * 
      * @param     x   the <i>x</i> coordinate of the point
      * @param     y   the <i>y</i> coordinate of the point
      * @see       #getComponentAt(int, int)
@@ -4618,6 +5692,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by contains(int, int).
      */
@@ -4630,6 +5706,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Checks whether this component "contains" the specified point,
      * where the point's <i>x</i> and <i>y</i> coordinates are defined
      * to be relative to the coordinate system of this component.
+     * <p>
+     *  检查此组件是否"包含"指定点,其中点的<i> x </i>和<y>坐标被定义为相对于该组件的坐标系。
+     * 
+     * 
      * @param     p     the point
      * @throws    NullPointerException if {@code p} is {@code null}
      * @see       #getComponentAt(Point)
@@ -4651,6 +5731,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * returns the component itself if the (<i>x</i>,&nbsp;<i>y</i>)
      * coordinate location is inside its bounding box, and <code>null</code>
      * otherwise.
+     * <p>
+     *  确定此组件或其直接子组件之一是否包含(<i> x </i>,<y> y </i>)位置,如果是,则返回包含的组件。这种方法看起来只有一层。
+     * 如果点(<i> x </i>,<y> y </i>)位于本身具有子组件的子组件内,则它不会向下查看子组件树。
+     * <p>
+     *  如果(<i> x </i>,<y> y </i>)坐标位置是</i>坐标位置,<code> Component </code>的<code> locate </code>在其边界框内,<code> n
+     * ull </code>。
+     * 
+     * 
      * @param     x   the <i>x</i> coordinate
      * @param     y   the <i>y</i> coordinate
      * @return    the component or subcomponent that contains the
@@ -4665,6 +5753,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by getComponentAt(int, int).
      */
@@ -4676,6 +5766,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Returns the component or subcomponent that contains the
      * specified point.
+     * <p>
+     *  返回包含指定点的组件或子组件。
+     * 
+     * 
      * @param     p   the point
      * @see       java.awt.Component#contains
      * @since     JDK1.1
@@ -4685,6 +5779,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>dispatchEvent(AWTEvent e)</code>.
      */
@@ -4697,6 +5793,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Dispatches an event to this component or one of its sub components.
      * Calls <code>processEvent</code> before returning for 1.1-style
      * events which have been enabled for the <code>Component</code>.
+     * <p>
+     *  将事件分派到此组件或其某个子组件。在返回为<code> Component </code>启用的1.1样式事件之前调用<code> processEvent </code>。
+     * 
+     * 
      * @param e the event
      */
     public final void dispatchEvent(AWTEvent e) {
@@ -4721,6 +5821,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /*
          * 0. Set timestamp and modifiers of current event.
+         * <p>
+         *  0.设置当前事件的时间戳和修饰符。
+         * 
          */
         if (!(e instanceof KeyEvent)) {
             // Timestamp of a key event is set later in DKFM.preDispatchKeyEvent(KeyEvent).
@@ -4730,6 +5833,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /*
          * 1. Pre-dispatchers. Do any necessary retargeting/reordering here
          *    before we notify AWTEventListeners.
+         * <p>
+         *  预调度员。在我们通知AWTEventListener之前,请先进行任何必要的重新定位/重新排序。
+         * 
          */
 
         if (e instanceof SunDropTargetEvent) {
@@ -4772,6 +5878,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /*
          * 2. Allow the Toolkit to pass this to AWTEventListeners.
+         * <p>
+         *  2.允许工具包将此传递给AWTEventListeners。
+         * 
          */
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         toolkit.notifyAWTEventListeners(e);
@@ -4780,6 +5889,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /*
          * 3. If no one has consumed a key event, allow the
          *    KeyboardFocusManager to process it.
+         * <p>
+         *  3.如果没有人使用键事件,请允许KeyboardFocusManager处理它。
+         * 
          */
         if (!e.isConsumed()) {
             if (e instanceof java.awt.event.KeyEvent) {
@@ -4793,6 +5905,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /*
          * 4. Allow input methods to process the event
+         * <p>
+         * 4.允许输入法处理事件
+         * 
          */
         if (areInputMethodsEnabled()) {
             // We need to pass on InputMethodEvents since some host
@@ -4834,6 +5949,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /*
          * 5. Pre-process any special events before delivery
+         * <p>
+         *  5.交货前预处理任何特殊事件
+         * 
          */
         switch(id) {
             // Handling of the PAINT and UPDATE events is now done in the
@@ -4871,6 +5989,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /*
          * 6. Deliver event for normal processing
+         * <p>
+         *  6.提供正常处理的事件
+         * 
          */
         if (newEventsOnly) {
             // Filtering needs to really be moved to happen at a lower
@@ -4922,6 +6043,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /*
          * 8. Special handling for 4061116 : Hook for browser to close modal
          *    dialogs.
+         * <p>
+         *  8. 4061116的特殊处理：钩子用于浏览器关闭模态对话框。
+         * 
          */
         if (id == WindowEvent.WINDOW_CLOSING && !e.isConsumed()) {
             if (toolkit instanceof WindowClosingListener) {
@@ -4939,6 +6063,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * Except KeyEvents, they will be processed by peer after
          * all KeyEventPostProcessors
          * (see DefaultKeyboardFocusManager.dispatchKeyEvent())
+         * <p>
+         *  9.允许对等体处理事件。
+         * 除了KeyEvents,它们将由所有的KeyEventPostProcessors之后的对等体处理(参见DefaultKeyboardFocusManager.dispatchKeyEvent())。
+         * 
          */
         if (!(e instanceof KeyEvent)) {
             ComponentPeer tpeer = peer;
@@ -4963,6 +6091,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * If newEventsOnly is false, method is called so that ScrollPane can
      * override it and handle common-case mouse wheel scrolling.  NOP
      * for Component.
+     * <p>
+     *  如果newEventsOnly为false,则调用方法,以便ScrollPane可以覆盖它并处理常见的鼠标滚轮滚动。组件的NOP。
+     * 
      */
     void autoProcessMouseWheel(MouseWheelEvent e) {}
 
@@ -4971,6 +6102,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * MouseWheelEvents are enabled.
      *
      * Returns whether or not event was dispatched to an ancestor
+     * <p>
+     *  将MouseWheelEvent分派给启用了MouseWheelEvents的第一个祖先。
+     * 
+     *  返回是否已将事件分派到祖先
+     * 
      */
     boolean dispatchMouseWheelToAncestor(MouseWheelEvent e) {
         int newX, newY;
@@ -4987,6 +6123,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /* parent field for Window refers to the owning Window.
          * MouseWheelEvents should NOT be propagated into owning Windows
+         * <p>
+         *  MouseWheelEvents不应该传播到拥有Windows
+         * 
          */
         synchronized (getTreeLock()) {
             Container anc = getParent();
@@ -5170,6 +6309,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by dispatchEvent(AWTEvent).
      */
@@ -5208,6 +6349,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的组件侦听器以从此组件接收组件事件。如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the component listener
      * @see      java.awt.event.ComponentEvent
      * @see      java.awt.event.ComponentListener
@@ -5232,6 +6378,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * no exception is thrown and no action is performed.
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
+     * <p>
+     * 删除指定的组件侦听器,使其不再从此组件接收组件事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the component listener
      * @see      java.awt.event.ComponentEvent
      * @see      java.awt.event.ComponentListener
@@ -5250,6 +6402,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the component listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有组件侦听器的数组。
+     * 
+     * 
      * @return all <code>ComponentListener</code>s of this component
      *         or an empty array if no component
      *         listeners are currently registered
@@ -5270,6 +6426,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  当此组件获得输入焦点时,添加指定的焦点侦听器以从此组件接收焦点事件。如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the focus listener
      * @see      java.awt.event.FocusEvent
      * @see      java.awt.event.FocusListener
@@ -5301,6 +6462,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的焦点侦听器,以使其不再从此组件接收焦点事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the focus listener
      * @see      java.awt.event.FocusEvent
      * @see      java.awt.event.FocusListener
@@ -5319,6 +6486,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the focus listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有焦点侦听器的数组。
+     * 
+     * 
      * @return all of this component's <code>FocusListener</code>s
      *         or an empty array if no component
      *         listeners are currently registered
@@ -5340,6 +6511,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     * 添加指定的层次结构侦听器以在此容器所属的层次结构更改时从此组件接收层次结构已更改事件。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the hierarchy listener
      * @see      java.awt.event.HierarchyEvent
      * @see      java.awt.event.HierarchyListener
@@ -5378,6 +6555,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的层次结构侦听器,以使其不再从此组件接收层次结构已更改的事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the hierarchy listener
      * @see      java.awt.event.HierarchyEvent
      * @see      java.awt.event.HierarchyListener
@@ -5410,6 +6593,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the hierarchy listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有层次结构侦听器的数组。
+     * 
+     * 
      * @return all of this component's <code>HierarchyListener</code>s
      *         or an empty array if no hierarchy
      *         listeners are currently registered
@@ -5431,6 +6618,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的层次结构边界侦听器以在此容器所属的层次结构更改时从此组件接收层次结构边界事件。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the hierarchy bounds listener
      * @see      java.awt.event.HierarchyEvent
      * @see      java.awt.event.HierarchyBoundsListener
@@ -5471,6 +6664,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     * 删除指定的层次结构边界侦听器,以使其不再从此组件接收层次结构边界事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the hierarchy bounds listener
      * @see      java.awt.event.HierarchyEvent
      * @see      java.awt.event.HierarchyBoundsListener
@@ -5572,6 +6771,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the hierarchy bounds listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有层次结构边界侦听器的数组。
+     * 
+     * 
      * @return all of this component's <code>HierarchyBoundsListener</code>s
      *         or an empty array if no hierarchy bounds
      *         listeners are currently registered
@@ -5588,6 +6791,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Should only be called while holding the tree lock.
      * It's added only for overriding in java.awt.Window
      * because parent in Window is owner.
+     * <p>
+     *  应该只有在持有树锁时才被调用。它只添加到覆盖在java.awt.Window中,因为Window中的父是owner。
+     * 
      */
     void adjustListeningChildrenOnParent(long mask, int num) {
         if (parent != null) {
@@ -5602,6 +6808,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的键监听器以从此组件接收键事件。如果l为null,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the key listener.
      * @see      java.awt.event.KeyEvent
      * @see      java.awt.event.KeyListener
@@ -5633,6 +6844,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的键监听器,以使其不再从此组件接收键事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the key listener
      * @see      java.awt.event.KeyEvent
      * @see      java.awt.event.KeyListener
@@ -5651,6 +6868,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the key listeners
      * registered on this component.
      *
+     * <p>
+     * 返回在此组件上注册的所有键监听器的数组。
+     * 
+     * 
      * @return all of this component's <code>KeyListener</code>s
      *         or an empty array if no key
      *         listeners are currently registered
@@ -5671,6 +6892,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的鼠标监听器以从此组件接收鼠标事件。如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the mouse listener
      * @see      java.awt.event.MouseEvent
      * @see      java.awt.event.MouseListener
@@ -5702,6 +6928,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的鼠标监听器,使其不再从此组件接收鼠标事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the mouse listener
      * @see      java.awt.event.MouseEvent
      * @see      java.awt.event.MouseListener
@@ -5720,6 +6952,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the mouse listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有鼠标监听器的数组。
+     * 
+     * 
      * @return all of this component's <code>MouseListener</code>s
      *         or an empty array if no mouse
      *         listeners are currently registered
@@ -5740,6 +6976,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的鼠标移动侦听器以从此组件接收鼠标移动事件。如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the mouse motion listener
      * @see      java.awt.event.MouseEvent
      * @see      java.awt.event.MouseMotionListener
@@ -5771,6 +7012,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     * 删除指定的鼠标移动侦听器,使其不再从此组件接收鼠标移动事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the mouse motion listener
      * @see      java.awt.event.MouseEvent
      * @see      java.awt.event.MouseMotionListener
@@ -5789,6 +7036,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the mouse motion listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有鼠标移动侦听器的数组。
+     * 
+     * 
      * @return all of this component's <code>MouseMotionListener</code>s
      *         or an empty array if no mouse motion
      *         listeners are currently registered
@@ -5814,6 +7065,15 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的鼠标滚轮监听器以从此组件接收鼠标滚轮事件。容器还从子组件接收鼠标滚轮事件。
+     * <p>
+     *  有关如何分派鼠标滚轮事件的信息,请参阅{@link MouseWheelEvent}的类描述。
+     * <p>
+     *  如果l是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the mouse wheel listener
      * @see      java.awt.event.MouseWheelEvent
      * @see      java.awt.event.MouseWheelListener
@@ -5844,6 +7104,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     * 删除指定的鼠标滚轮监听器,使其不再从此组件接收鼠标滚轮事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。如果l为null,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the mouse wheel listener.
      * @see      java.awt.event.MouseWheelEvent
      * @see      java.awt.event.MouseWheelListener
@@ -5862,6 +7127,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the mouse wheel listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有鼠标滚轮监听器的数组。
+     * 
+     * 
      * @return all of this component's <code>MouseWheelListener</code>s
      *         or an empty array if no mouse wheel
      *         listeners are currently registered
@@ -5885,6 +7154,16 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="{@docRoot}/java/awt/doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的输入方法侦听器以从此组件接收输入方法事件。
+     * 如果组件还覆盖<code> getInputMethodRequests </code>以返回<code> InputMethodRequests </code>实例,则组件将仅从输入方法接收输入方法事
+     * 件。
+     *  添加指定的输入方法侦听器以从此组件接收输入方法事件。如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="{@docRoot}/java/awt/doc-files/AWTThreadIssues.html#ListenersThreads">
+     *  AWT线程问题</a>。
+     *  添加指定的输入方法侦听器以从此组件接收输入方法事件。如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     * 
+     * 
      * @param    l   the input method listener
      * @see      java.awt.event.InputMethodEvent
      * @see      java.awt.event.InputMethodListener
@@ -5911,6 +7190,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     * 删除指定的输入方法侦听器,以使其不再从此组件接收输入方法事件。如果参数指定的侦听器以前未添加到此组件,此方法不执行任何函数,也不会抛出异常。
+     * 如果侦听器<code> l </code>是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param    l   the input method listener
      * @see      java.awt.event.InputMethodEvent
      * @see      java.awt.event.InputMethodListener
@@ -5929,6 +7214,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the input method listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有输入法侦听器的数组。
+     * 
+     * 
      * @return all of this component's <code>InputMethodListener</code>s
      *         or an empty array if no input method
      *         listeners are currently registered
@@ -5960,6 +7249,19 @@ public abstract class Component implements ImageObserver, MenuContainer,
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此<code> Component </code>上注册为<code> <em> Foo </em>侦听器</code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * 
+     * <p>
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询<code> Component </code> <code> c </code>的鼠标监听器：。
+     * 
+     *  <pre> MouseListener [] mls =(MouseListener [])(c.getListeners(MouseListener.class)); </pre>
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -6017,6 +7319,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * method to return an <code>InputMethodRequests</code> instance.
      * At the same time, it also has to handle input method events.
      *
+     * <p>
+     * 获取支持来自此组件的输入方法的请求的输入法请求处理程序。支持现场文本输入的组件必须覆盖此方法才能返回<code> InputMethodRequests </code>实例。
+     * 同时,它还必须处理输入法事件。
+     * 
+     * 
      * @return the input method request handler for this component,
      *          <code>null</code> by default
      * @see #addInputMethodListener
@@ -6033,6 +7340,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the parent component is returned. Components may
      * override this to return a private input context.
      *
+     * <p>
+     *  获取此组件使用的输入上下文,用于在文本输入此组件时处理与输入法的通信。默认情况下,将返回用于父组件的输入上下文。组件可以覆盖此来返回私有输入上下文。
+     * 
+     * 
      * @return the input context used by this component;
      *          <code>null</code> if no context can be determined
      * @since 1.2
@@ -6057,6 +7368,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <code>Component</code> which desire to have the specified event
      * types delivered to <code>processEvent</code> regardless of whether
      * or not a listener is registered.
+     * <p>
+     *  使由指定的事件掩码参数定义的事件传递到此组件。
+     * <p>
+     *  当将该事件类型的侦听器添加到组件时,会自动启用事件类型。
+     * <p>
+     *  这个方法只需要被<code> Component </code>的子类调用,它希望将指定的事件类型传递给<code> processEvent </code>,而不管是否注册了一个监听器。
+     * 
+     * 
      * @param      eventsToEnable   the event mask defining the event types
      * @see        #processEvent
      * @see        #disableEvents
@@ -6095,6 +7414,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Disables the events defined by the specified event mask parameter
      * from being delivered to this component.
+     * <p>
+     *  禁用由指定的事件掩码参数定义的事件传递到此组件。
+     * 
+     * 
      * @param      eventsToDisable   the event mask defining the event types
      * @see        #enableEvents
      * @since      JDK1.1
@@ -6124,6 +7447,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     transient sun.awt.EventQueueItem[] eventCache;
 
     /**
+    /* <p>
+    /* 
      * @see #isCoalescingEnabled
      * @see #checkCoalescing
      */
@@ -6133,6 +7458,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Weak map of known coalesceEvent overriders.
      * Value indicates whether overriden.
      * Bootstrap classes are not included.
+     * <p>
+     *  弱图的已知coalesceEvent覆盖。值表示是否覆盖。不包括引导类。
+     * 
      */
     private static final Map<Class<?>, Boolean> coalesceMap =
         new java.util.WeakHashMap<Class<?>, Boolean>();
@@ -6144,6 +7472,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The boostrap class loader is assumed to be represented by null.
      * We do not check that the method really overrides
      *   (it might be static, private or package private).
+     * <p>
+     * 指示此类是否覆盖coalesceEvents。假设从引导加载的所有类都不是。假设boostrap类加载器由null表示。我们不检查该方法是否真的覆盖(它可能是静态,私有或包私有)。
+     * 
      */
      private boolean checkCoalescing() {
          if (getClass().getClassLoader()==null) {
@@ -6172,6 +7503,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Parameter types of coalesceEvents(AWTEvent,AWTEVent).
+     * <p>
+     *  coalesceEvents的参数类型(AWTEvent,AWTEVent)。
+     * 
      */
     private static final Class[] coalesceEventsParams = {
         AWTEvent.class, AWTEvent.class
@@ -6180,6 +7514,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Indicates whether a class or its superclasses override coalesceEvents.
      * Must be called with lock on coalesceMap and privileged.
+     * <p>
+     *  指示类或其超类是否覆盖coalesceEvents。必须使用coalesceMap上的锁调用和特权。
+     * 
+     * 
      * @see checkCoalsecing
      */
     private static boolean isCoalesceEventsOverriden(Class<?> clazz) {
@@ -6219,6 +7557,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Indicates whether coalesceEvents may do something.
+     * <p>
+     *  指示coalesceEvents是否可以执行某些操作。
+     * 
      */
     final boolean isCoalescingEnabled() {
         return coalescingEnabled;
@@ -6245,6 +7586,16 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * event is coalesced into a complex <code>RepaintArea</code> in the peer.
      * The new <code>AWTEvent</code> is always returned.
      *
+     * <p>
+     *  潜在地合并用现有事件发布的事件。
+     * 如果在队列中找到与要发布的事件具有相同ID的事件(两个事件都必须以此组件为其源),则此方法由<code> EventQueue.postEvent </code>调用。
+     * 此方法返回一个合并事件,替换现有事件(然后新事件被丢弃),或<code> null </code>以指示不应进行合并(将第二个事件添加到队列的末尾)。
+     * 可以修改和返回任一事件参数,因为除非返回<code> null </code>,否则丢弃另一个事件参数。
+     * <p>
+     * <code> coalesceEvents </code>的实现合并了两种事件类型：鼠标移动(和拖动)事件和绘制(和更新)事件。对于鼠标移动事件,总是返回最后一个事件,导致中间移动被丢弃。
+     * 对于绘制事件,新事件将合并到对等体中的复杂<code> RepaintArea </code>中。始终返回新的<code> AWTEvent </code>。
+     * 
+     * 
      * @param  existingEvent  the event already on the <code>EventQueue</code>
      * @param  newEvent       the event being posted to the
      *          <code>EventQueue</code>
@@ -6265,6 +7616,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  处理在此组件上发生的事件。默认情况下,此方法为给定的事件类调用适当的<code> process&lt; event&nbsp; type&gt; Event </code>方法。
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param     e the event
      * @see       #processComponentEvent
      * @see       #processFocusEvent
@@ -6335,6 +7691,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将组件分派到任何注册的<code> ComponentListener </code>对象,来处理在此组件上发生的组件事件。
+     * <p>
+     *  除非为此组件启用组件事件,否则不会调用此方法。当发生以下情况之一时,将启用组件事件：
+     * <ul>
+     *  <li> <code> ComponentListener </code>对象通过<code> addComponentListener </code>注册。
+     *  <li>组件事件通过<code> enableEvents </code>启用。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the component event
      * @see         java.awt.event.ComponentEvent
      * @see         java.awt.event.ComponentListener
@@ -6396,6 +7763,27 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将事件分派到任何已注册的<code> FocusListener </code>对象,来处理发生在此组件上的事件。
+     * <p>
+     * 除非为此组件启用焦点事件,否则不会调用此方法。当发生以下情况之一时,将启用聚焦事件：
+     * <ul>
+     *  <li> <code> FocusListener </code>对象通过<code> addFocusListener </code>注册。
+     *  <li>通过<code> enableEvents </code>启用焦点事件。
+     * </ul>
+     * <p>
+     *  如果为<code> Component </code>启用焦点事件,则当前<code> KeyboardFocusManager </code>确定焦点事件是否应分派到注册的<code> FocusL
+     * istener </code>对象。
+     * 如果要调度事件,<code> KeyboardFocusManager </code>会调用<code> Component </code>的<code> dispatchEvent </code>方法
+     * ,这会调用<code> Component </code>的<code> processFocusEvent </code>方法。
+     * <p>
+     *  如果为<code> Component </code>启用焦点事件,则以<code> FocusEvent </code>作为参数调用<code> Component </code>的<code> d
+     * ispatchEvent </code>将会调用<code> Component </code>的<code> processFocusEvent </code>方法,而不管当前的<code> Keyb
+     * oardFocusManager </code>。
+     * 
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the focus event
      * @see         java.awt.event.FocusEvent
      * @see         java.awt.event.FocusListener
@@ -6459,6 +7847,28 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将它们分派到任何注册的<code> KeyListener </code>对象来处理在此组件上发生的关键事件。
+     * <p>
+     *  除非为此组件启用了键事件,否则不会调用此方法。当发生以下情况之一时,将启用键事件：
+     * <ul>
+     * <li> <code> KeyListener </code>对象通过<code> addKeyListener </code>注册。
+     *  <li>通过<code> enableEvents </code>启用重要事件。
+     * </ul>
+     * 
+     * <p>
+     *  如果为<code> Component </code>启用了键事件,当前<code> KeyboardFocusManager </code>确定是否应该将键事件分派到注册的<code> KeyLis
+     * tener </code>对象。
+     *  <code> DefaultKeyboardFocusManager </code>不会将键事件分派给不是焦点所有者或未显示的<code> Component </code>。
+     * <p>
+     *  从J2SE 1.4开始,<code> KeyEvent </code>被重定向到焦点所有者。
+     * 有关详细信息,请参阅<a href="doc-files/FocusSpec.html">焦点规范</a>。
+     * <p>
+     *  使用<code> KeyEvent </code>作为参数调用<code> Component </code>的<code> dispatchEvent </code>方法将会调用<code> Com
+     * ponent </code>只要组件正在显示,关注和启用,并且已启用关键事件,则无论当前<code> KeyboardFocusManager </code>如何,都可以使用<code> process
+     * KeyEvent </code> <p>如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the key event
      * @see         java.awt.event.KeyEvent
      * @see         java.awt.event.KeyListener
@@ -6506,6 +7916,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将鼠标事件分派到任何注册的<code> MouseListener </code>对象来处理发生在此组件上的鼠标事件。
+     * <p>
+     *  除非为此组件启用鼠标事件,否则不会调用此方法。当发生以下情况之一时,将启用鼠标事件：
+     * <ul>
+     * <li> <code> MouseListener </code>对象是通过<code> addMouseListener </code>注册的。
+     *  <li>通过<code> enableEvents </code>启用鼠标事件。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the mouse event
      * @see         java.awt.event.MouseEvent
      * @see         java.awt.event.MouseListener
@@ -6554,6 +7975,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将鼠标移动事件分派到任何注册的<code> MouseMotionListener </code>对象来处理在此组件上发生的鼠标移动事件。
+     * <p>
+     *  除非为此组件启用鼠标运动事件,否则不会调用此方法。当发生以下情况之一时,将启用鼠标运动事件：
+     * <ul>
+     *  <li> <code> MouseMotionListener </code>对象是通过<code> addMouseMotionListener </code>注册的。
+     *  <li>通过<code> enableEvents </code>启用鼠标运动事件。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the mouse motion event
      * @see         java.awt.event.MouseEvent
      * @see         java.awt.event.MouseMotionListener
@@ -6597,6 +8029,20 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将鼠标滚轮事件分派到任何注册的<code> MouseWheelListener </code>对象来处理在此组件上发生的鼠标滚轮事件。
+     * <p>
+     *  除非为此组件启用鼠标滚轮事件,否则不会调用此方法。当发生以下情况之一时,将启用鼠标滚轮事件：
+     * <ul>
+     *  <li> <code> MouseWheelListener </code>对象是通过<code> addMouseWheelListener </code>注册的。
+     *  <li>鼠标滚轮事件是通过<code> enableEvents </code>启用的。
+     * </ul>
+     * <p>
+     *  有关如何分派鼠标滚轮事件的信息,请参阅{@link MouseWheelEvent}的类描述。
+     * <p>
+     * 注意,如果事件参数是<code> null </code>,那么行为是未指定的,可能会导致异常。
+     * 
+     * 
      * @param       e the mouse wheel event
      * @see         java.awt.event.MouseWheelEvent
      * @see         java.awt.event.MouseWheelListener
@@ -6637,6 +8083,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将它们分派到任何注册的<code> InputMethodListener </code>对象来处理在此组件上发生的输入方法事件。
+     * <p>
+     *  除非为此组件启用了输入法事件,否则不会调用此方法。当发生以下情况之一时,将启用输入法事件：
+     * <ul>
+     *  <li> <code> InputMethodListener </code>对象通过<code> addInputMethodListener </code>注册。
+     *  <li>通过<code> enableEvents </code>启用输入法事件。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the input method event
      * @see         java.awt.event.InputMethodEvent
      * @see         java.awt.event.InputMethodListener
@@ -6676,6 +8133,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将它们分派到任何注册的<code> HierarchyListener </code>对象来处理在此组件上发生的层次结构事件。
+     * <p>
+     *  除非为此组件启用层次结构事件,否则不会调用此方法。当发生以下情况之一时将启用层次结构事件：
+     * <ul>
+     *  <li> <code> HierarchyListener </code>对象通过<code> addHierarchyListener </code>注册。
+     *  <li>层级事件通过<code> enableEvents </code>启用。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the hierarchy event
      * @see         java.awt.event.HierarchyEvent
      * @see         java.awt.event.HierarchyListener
@@ -6712,6 +8180,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  进程层次结构通过将它们分派到任何注册的<code> HierarchyBoundsListener </code>对象来限制发生在此组件上的事件。
+     * <p>
+     * 除非为此组件启用层次结构边界事件,否则不会调用此方法。当发生以下情况之一时,将启用层次结构边界事件：
+     * <ul>
+     *  <li> <code> HierarchyBoundsListener </code>对象通过<code> addHierarchyBoundsListener </code>注册。
+     *  <li>层级边界事件通过<code> enableEvents </code>启用。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the hierarchy event
      * @see         java.awt.event.HierarchyEvent
      * @see         java.awt.event.HierarchyBoundsListener
@@ -6735,6 +8214,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1
      * replaced by processEvent(AWTEvent).
      */
@@ -6778,6 +8259,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processMouseEvent(MouseEvent).
      */
@@ -6787,6 +8270,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processMouseMotionEvent(MouseEvent).
      */
@@ -6796,6 +8281,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processMouseEvent(MouseEvent).
      */
@@ -6805,6 +8292,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processMouseMotionEvent(MouseEvent).
      */
@@ -6814,6 +8303,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processMouseEvent(MouseEvent).
      */
@@ -6823,6 +8314,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processMouseEvent(MouseEvent).
      */
@@ -6832,6 +8325,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processKeyEvent(KeyEvent).
      */
@@ -6841,6 +8336,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processKeyEvent(KeyEvent).
      */
@@ -6850,6 +8347,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * should register this component as ActionListener on component
      * which fires action events.
@@ -6868,6 +8367,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method changes layout-related information, and therefore,
      * invalidates the component hierarchy.
      *
+     * <p>
+     *  将此<code>组件</code>连接到本机屏幕资源可显示。此方法由工具包在内部调用,不应由程序直接调用。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @see       #isDisplayable
      * @see       #removeNotify
      * @see #invalidate
@@ -6972,6 +8477,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * this method should call <code>super.removeNotify</code> as
      * the first line of the overriding method.
      *
+     * <p>
+     *  使此<code>组件</code>不可显示,通过销毁它本机屏幕资源。
+     * <p>
+     *  此方法由内部工具包调用,不应由程序直接调用。代码覆盖此方法应调用<code> super.removeNotify </code>作为覆盖方法的第一行。
+     * 
+     * 
      * @see       #isDisplayable
      * @see       #addNotify
      * @since JDK1.0
@@ -7059,6 +8570,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processFocusEvent(FocusEvent).
      */
@@ -7068,6 +8581,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by processFocusEvent(FocusEvent).
      */
@@ -7080,6 +8595,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns whether this <code>Component</code> can become the focus
      * owner.
      *
+     * <p>
+     *  返回这个<code> Component </code>是否可以成为焦点所有者。
+     * 
+     * 
      * @return <code>true</code> if this <code>Component</code> is
      * focusable; <code>false</code> otherwise
      * @see #setFocusable
@@ -7097,6 +8616,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Returns whether this Component can be focused.
      *
+     * <p>
+     *  返回此组件是否可以聚焦。
+     * 
+     * 
      * @return <code>true</code> if this Component is focusable;
      *         <code>false</code> otherwise.
      * @see #setFocusable
@@ -7110,6 +8633,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Sets the focusable state of this Component to the specified value. This
      * value overrides the Component's default focusability.
      *
+     * <p>
+     *  将此组件的可对焦状态设置为指定的值。此值覆盖组件的默认可聚焦性。
+     * 
+     * 
      * @param focusable indicates whether this Component is focusable
      * @see #isFocusable
      * @since 1.4
@@ -7190,6 +8717,39 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * This method may throw a {@code ClassCastException} if any {@code Object}
      * in {@code keystrokes} is not an {@code AWTKeyStroke}.
      *
+     * <p>
+     *  设置此组件的给定遍历操作的焦点遍历键。
+     * <p>
+     * 组件的焦点遍历键的默认值是与实现相关的。 Sun建议特定本机平台的所有实现使用相同的默认值。下面列出了对Windows和Unix的建议。这些建议在Sun AWT实现中使用。
+     * 
+     * <table border=1 summary="Recommended default values for a Component's focus traversal keys">
+     * <tr>
+     *  <th>标识符</th> <th>含义</th> <th>默认</th>
+     * </tr>
+     * <tr>
+     *  <td> KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS </td> <td>正向向前键盘遍历</td> <td> TAB在KEY_PRESSED上,CTRL-
+     * TAB在KEY_PRESSED上</td>。
+     * </tr>
+     * <tr>
+     *  <td> KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS </td> <td>正常反向键盘遍历</td> <td> SHIFT-TAB在KEY_PRESSED
+     * 上,CTRL-SHIFT-TAB在KEY_PRESSED上</td>。
+     * </tr>
+     * <tr>
+     *  <td> KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS </td> <td>向上移动一个焦点遍历周期</td> <td> none </td>
+     * </tr>
+     * </table>
+     * 
+     *  要禁用遍历键,请使用空的Set;建议使用Collections.EMPTY_SET。
+     * <p>
+     *  使用AWTKeyStroke API,客户端代码可以指定两个特定的KeyEvent(KEY_PRESSED或KEY_RELEASED)中的哪一个,焦点遍历操作将发生。
+     * 然而,无论指定了哪个KeyEvent,与焦点遍历键相关的所有KeyEvent(包括相关联的KEY_TYPED事件)都将被消耗,并且不会被分派到任何组件。
+     * 将运行时错误指定为映射到焦点遍历操作的KEY_TYPED事件,或将同一事件映射到多个默认焦点遍历操作。
+     * <p>
+     * 如果为集指定了值为null,则此组件从其父代继承集合。如果此组件的所有祖先都为集指定了空值,则使用当前KeyboardFocusManager的默认集。
+     * <p>
+     *  如果{@code keystrokes}中的{@code Object}不是{@code AWTKeyStroke},此方法可能会抛出{@code ClassCastException}。
+     * 
+     * 
      * @param id one of KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, or
      *        KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS
@@ -7229,6 +8789,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * has been explicitly defined for any of this Component's ancestors, then
      * the current KeyboardFocusManager's default Set is returned.
      *
+     * <p>
+     *  返回此组件的给定遍历操作的焦点遍历键集合。 (有关每个键的完整说明,请参阅<code> setFocusTraversalKeys </code>)。
+     * <p>
+     *  如果没有为该组件显式定义一组遍历键,则返回此组件的父组的Set。如果没有为这个组件的任何祖先显式定义Set,则返回当前KeyboardFocusManager的默认Set。
+     * 
+     * 
      * @param id one of KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, or
      *        KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS
@@ -7325,6 +8891,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * this method returns <code>false</code>, this Component is inheriting the
      * Set from an ancestor, or from the current KeyboardFocusManager.
      *
+     * <p>
+     *  返回是否为该组件显式定义了给定焦点遍历操作的焦点遍历键集合。如果此方法返回<code> false </code>,则此组件从祖先或从当前KeyboardFocusManager继承Set。
+     * 
+     * 
      * @param id one of KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, or
      *        KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS
@@ -7352,6 +8922,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * keys are enabled do not see these events; instead, the events are
      * automatically converted to traversal operations.
      *
+     * <p>
+     *  设置是否为此组件启用焦点遍历键。禁用焦点遍历键的组件接收焦点遍历键的键事件。启用了焦点遍历键的组件不会看到这些事件;而是将事件自动转换为遍历操作。
+     * 
+     * 
      * @param focusTraversalKeysEnabled whether focus traversal keys are
      *        enabled for this Component
      * @see #getFocusTraversalKeysEnabled
@@ -7380,6 +8954,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * keys are enabled do not see these events; instead, the events are
      * automatically converted to traversal operations.
      *
+     * <p>
+     * 返回是否为此组件启用了焦点遍历键。禁用焦点遍历键的组件接收焦点遍历键的键事件。启用了焦点遍历键的组件不会看到这些事件;而是将事件自动转换为遍历操作。
+     * 
+     * 
      * @return whether focus traversal keys are enabled for this Component
      * @see #setFocusTraversalKeysEnabled
      * @see #setFocusTraversalKeys
@@ -7416,6 +8994,18 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * such, a component may receive focus without this or any of the other
      * {@code requestFocus} methods of {@code Component} being invoked.
      *
+     * <p>
+     *  请求此组件获取输入焦点,并且此组件的顶级祖先成为关注的窗口。此组件必须是可显示的,可聚焦的,可见的,并且其所有祖先(除了顶级窗口之外)必须可见才能授予请求。
+     * 将尽一切努力兑现这一要求;然而,在一些情况下,可能不可能这样做。在此组件接收到FOCUS_GAINED事件之前,开发人员不得假设此组件是焦点所有者。
+     * 如果此请求被拒绝,因为此组件的顶级窗口不能成为关注的窗口,请求将被记住,并且将在窗口稍后由用户聚焦时被授予。
+     * <p>
+     *  此方法不能用于将焦点所有者设置为无组件。使用<code> KeyboardFocusManager.clearGlobalFocusOwner()</code>。
+     * <p>
+     *  因为此方法的焦点行为是平台相关的,强烈建议开发人员尽可能使用<code> requestFocusInWindow </code>。
+     * 
+     * <p>注意：并非所有的焦点转移都是由调用此方法产生的。因此,组件可以在没有调用{@code Component}的任何其他{@code requestFocus}方法的情况下接收焦点。
+     * 
+     * 
      * @see #requestFocusInWindow
      * @see java.awt.event.FocusEvent
      * @see #addFocusListener
@@ -7478,6 +9068,26 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * such, a component may receive focus without this or any of the other
      * {@code requestFocus} methods of {@code Component} being invoked.
      *
+     * <p>
+     *  请求此<code> Component </code>获取输入焦点,并且<code> Component </code>的顶级祖先成为集中的<code> Window </code>。
+     * 该组件必须是可显示的,可聚焦的,可见的,并且其所有祖先(除了顶级窗口之外)必须对于要授予的请求可见。将尽一切努力兑现这一要求;然而,在一些情况下,可能不可能这样做。
+     * 在此组件接收到FOCUS_GAINED事件之前,开发人员不得假设此组件是焦点所有者。如果此请求被拒绝,因为此组件的顶级窗口不能成为关注的窗口,则请求将被记住,并且当窗口稍后由用户聚焦时将被授予。
+     * <p>
+     * 此方法返回一个布尔值。如果返回<code> false </code>,则请求<b>保证失败</b>。
+     * 如果返回<code> true </code>,则请求将成功<b>,除非</b>被否决,或者在处理组件的对等体之前发生异常事件,本地窗口系统。
+     * 同样,虽然<code> true </code>的返回值表示请求可能成功,但开发人员不得假设此组件是焦点所有者,直到此组件接收到FOCUS_GAINED事件。
+     * <p>
+     *  此方法不能用于将焦点所有者设置为没有组件。请改用<code> KeyboardFocusManager.clearGlobalFocusOwner </code>。
+     * <p>
+     *  因为此方法的焦点行为是平台相关的,强烈建议开发人员尽可能使用<code> requestFocusInWindow </code>。
+     * <p>
+     *  将尽一切努力确保作为此请求的结果生成的<code> FocusEvent </code>具有指定的临时值。
+     * 然而,因为指定任意临时状态可能不能在所有本地窗口系统上实现,所以仅对于轻型<code> Component </code>可以保证该方法的正确行为。
+     * 此方法不是一般用途,而是作为轻量级组件库(如Swing)的钩子存在。
+     * 
+     * <p>注意：并非所有的焦点转移都是由调用此方法产生的。因此,组件可以在没有调用{@code Component}的任何其他{@code requestFocus}方法的情况下接收焦点。
+     * 
+     * 
      * @param temporary true if the focus change is temporary,
      *        such as when the window loses the focus; for
      *        more information on temporary focus changes see the
@@ -7532,6 +9142,22 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * such, a component may receive focus without this or any of the other
      * {@code requestFocus} methods of {@code Component} being invoked.
      *
+     * <p>
+     *  请求此组件获取输入焦点,如果此组件的顶级祖先已经是焦点窗口。此组件必须是可显示的,可聚焦的,可见的,并且其所有祖先(除了顶级窗口之外)必须可见才能授予请求。
+     * 将尽一切努力兑现这一要求;然而,在一些情况下,可能不可能这样做。在此组件接收到FOCUS_GAINED事件之前,开发人员不得假设此组件是焦点所有者。
+     * <p>
+     *  此方法返回一个布尔值。如果返回<code> false </code>,则请求<b>保证失败</b>。
+     * 如果返回<code> true </code>,则请求将成功<b>除非</b>被否决,或者在处理组件的对等体之前发生异常事件,本地窗口系统。
+     * 同样,虽然<code> true </code>的返回值表示请求可能成功,但开发人员不得假设此组件是焦点所有者,直到此组件接收到FOCUS_GAINED事件。
+     * <p>
+     *  此方法不能用于将焦点所有者设置为无组件。使用<code> KeyboardFocusManager.clearGlobalFocusOwner()</code>。
+     * <p>
+     * 该方法的焦点行为可以跨平台实现一致,因此强烈建议开发人员在可能的情况下通过<code> requestFocus </code>使用此方法。
+     * 依赖于<code> requestFocus </code>的代码可能在不同平台上展示不同的焦点行为。
+     * 
+     *  <p>注意：并非所有的焦点转移都是由调用此方法产生的。因此,组件可以在没有调用{@code Component}的任何其他{@code requestFocus}方法的情况下接收焦点。
+     * 
+     * 
      * @return <code>false</code> if the focus change request is guaranteed to
      *         fail; <code>true</code> if it is likely to succeed
      * @see #requestFocus
@@ -7593,6 +9219,26 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * such, a component may receive focus without this or any of the other
      * {@code requestFocus} methods of {@code Component} being invoked.
      *
+     * <p>
+     *  请求此<code> Component </code>获取输入焦点,如果<code> Component </code>的顶级祖先已经是焦点<code> Window </code>。
+     * 此组件必须是可显示的,可聚焦的,可见的,并且其所有祖先(除了顶级窗口之外)必须可见才能授予请求。将尽一切努力兑现这一要求;然而,在一些情况下,可能不可能这样做。
+     * 在此组件接收到FOCUS_GAINED事件之前,开发人员不得假设此组件是焦点所有者。
+     * <p>
+     * 此方法返回一个布尔值。如果返回<code> false </code>,则请求<b>保证失败</b>。
+     * 如果返回<code> true </code>,则请求将成功<b>,除非</b>被否决,或者在处理组件的对等体之前发生异常事件,本地窗口系统。
+     * 同样,虽然<code> true </code>的返回值表示请求可能成功,但开发人员不得假设此组件是焦点所有者,直到此组件接收到FOCUS_GAINED事件。
+     * <p>
+     *  此方法不能用于将焦点所有者设置为没有组件。请改用<code> KeyboardFocusManager.clearGlobalFocusOwner </code>。
+     * <p>
+     *  该方法的焦点行为可以跨平台实现一致,因此强烈建议开发人员在可能的情况下通过<code> requestFocus </code>使用此方法。
+     * 依赖于<code> requestFocus </code>的代码可能在不同平台上展示不同的焦点行为。
+     * <p>
+     *  将尽一切努力确保作为此请求的结果生成的<code> FocusEvent </code>具有指定的临时值。
+     * 但是,由于指定任意临时状态可能无法在所有本机窗口系统上实现,因此只能为轻型组件保证此方法的正确行为。此方法不是一般用途,而是作为轻量级组件库(如Swing)的钩子存在。
+     * 
+     * <p>注意：并非所有的焦点转移都是由调用此方法产生的。因此,组件可以在没有调用{@code Component}的任何其他{@code requestFocus}方法的情况下接收焦点。
+     * 
+     * 
      * @param temporary true if the focus change is temporary,
      *        such as when the window loses the focus; for
      *        more information on temporary focus changes see the
@@ -7814,6 +9460,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Containers, this method will return the Container's nearest focus-cycle-
      * root ancestor.
      *
+     * <p>
+     *  返回Container,这是该组件的焦点遍历循环的焦点循环根。每个焦点遍历周期只有一个焦点周期根,并且不是容器的每个组件仅属于单个焦点遍历周期。
+     * 是焦点循环根的容器属于两个循环：一个根在容器本身,一个根在容器的最近的焦点循环根祖先。对于这样的容器,此方法将返回容器最近的焦点循环根祖先。
+     * 
+     * 
      * @return this Component's nearest focus-cycle-root ancestor
      * @see Container#isFocusCycleRoot()
      * @since 1.4
@@ -7832,6 +9483,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * a single focus cycle root and each Component which is not a Container
      * belongs to only a single focus traversal cycle.
      *
+     * <p>
+     *  返回指定的Container是否为此Component的焦点遍历循环的焦点循环根。每个焦点遍历周期只有一个焦点周期根,并且不是容器的每个组件仅属于单个焦点遍历周期。
+     * 
+     * 
      * @param container the Container to be tested
      * @return <code>true</code> if the specified Container is a focus-cycle-
      *         root of this Component; <code>false</code> otherwise
@@ -7850,6 +9505,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Transfers the focus to the next component, as though this Component were
      * the focus owner.
+     * <p>
+     *  将焦点转移到下一个组件,就像此组件是焦点所有者。
+     * 
+     * 
      * @see       #requestFocus()
      * @since     JDK1.1
      */
@@ -7858,6 +9517,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by transferFocus().
      */
@@ -7929,6 +9590,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Transfers the focus to the previous component, as though this Component
      * were the focus owner.
+     * <p>
+     *  将焦点转移到上一个组件,就像这个组件是焦点所有者。
+     * 
+     * 
      * @see       #requestFocus()
      * @since     1.4
      */
@@ -7976,6 +9641,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * owner is set to the focus cycle root's default Component to focus, and
      * the current focus cycle root is unchanged.
      *
+     * <p>
+     * 将焦点转移到一个焦点遍历周期。通常,焦点所有者设置为此组件的焦点循环根,并且当前焦点循环根将设置为新焦点所有者的焦点循环根。
+     * 然而,如果该组件的焦点循环根是一个窗口,则焦点所有者被设置为焦点循环根的默认组件以聚焦,并且当前焦点循环根不变。
+     * 
+     * 
      * @see       #requestFocus()
      * @see       Container#isFocusCycleRoot()
      * @see       Container#setFocusCycleRoot(boolean)
@@ -8019,6 +9689,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * focus owner.  This method is obsolete, and has been replaced by
      * <code>isFocusOwner()</code>.
      *
+     * <p>
+     *  如果此<code> Component </code>是焦点所有者,则返回<code> true </code>。此方法已过时,并已替换为<code> isFocusOwner()</code>。
+     * 
+     * 
      * @return <code>true</code> if this <code>Component</code> is the
      *         focus owner; <code>false</code> otherwise
      * @since 1.2
@@ -8032,6 +9706,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns <code>true</code> if this <code>Component</code> is the
      *    focus owner.
      *
+     * <p>
+     *  如果此<code> Component </code>是焦点所有者,则返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if this <code>Component</code> is the
      *     focus owner; <code>false</code> otherwise
      * @since 1.4
@@ -8043,6 +9721,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /*
      * Used to disallow auto-focus-transfer on disposal of the focus owner
      * in the process of disposing its parent container.
+     * <p>
+     *  用于在处置其父容器的过程中禁止焦点所有者处置时的自动对焦转移。
+     * 
      */
     private boolean autoFocusTransferOnDisposal = true;
 
@@ -8056,6 +9737,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Adds the specified popup menu to the component.
+     * <p>
+     *  将指定的弹出菜单添加到组件。
+     * 
+     * 
      * @param     popup the popup menu to be added to the component.
      * @see       #remove(MenuComponent)
      * @exception NullPointerException if {@code popup} is {@code null}
@@ -8082,6 +9767,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Removes the specified popup menu from the component.
+     * <p>
+     *  从组件中删除指定的弹出菜单。
+     * 
+     * 
      * @param     popup the popup menu to be removed
      * @see       #add(PopupMenu)
      * @since     JDK1.1
@@ -8114,6 +9803,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     *  返回表示此组件的状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this component's state
      * @since     JDK1.0
      */
@@ -8128,6 +9821,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Returns a string representation of this component and its values.
+     * <p>
+     *  返回此组件及其值的字符串表示形式。
+     * 
+     * 
      * @return    a string representation of this component
      * @since     JDK1.0
      */
@@ -8138,6 +9835,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Prints a listing of this component to the standard system output
      * stream <code>System.out</code>.
+     * <p>
+     *  将此组件的列表打印到标准系统输出流<code> System.out </code>。
+     * 
+     * 
      * @see       java.lang.System#out
      * @since     JDK1.0
      */
@@ -8148,6 +9849,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Prints a listing of this component to the specified output
      * stream.
+     * <p>
+     *  将此组件的列表打印到指定的输出流。
+     * 
+     * 
      * @param    out   a print stream
      * @throws   NullPointerException if {@code out} is {@code null}
      * @since    JDK1.0
@@ -8159,6 +9864,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Prints out a list, starting at the specified indentation, to the
      * specified print stream.
+     * <p>
+     *  从指定的缩进打印出指定打印流的列表。
+     * 
+     * 
      * @param     out      a print stream
      * @param     indent   number of spaces to indent
      * @see       java.io.PrintStream#println(java.lang.Object)
@@ -8174,6 +9883,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Prints a listing to the specified print writer.
+     * <p>
+     *  将列表打印到指定的打印作者。
+     * 
+     * 
      * @param  out  the print writer to print to
      * @throws NullPointerException if {@code out} is {@code null}
      * @since JDK1.1
@@ -8185,6 +9898,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Prints out a list, starting at the specified indentation, to
      * the specified print writer.
+     * <p>
+     * 从指定的缩进打印出指定的打印作者的列表。
+     * 
+     * 
      * @param out the print writer to print to
      * @param indent the number of spaces to indent
      * @throws NullPointerException if {@code out} is {@code null}
@@ -8201,6 +9918,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /*
      * Fetches the native container somewhere higher up in the component
      * tree that contains this component.
+     * <p>
+     *  在包含此组件的组件树中的较高位置获取本机容器。
+     * 
      */
     final Container getNativeContainer() {
         Container p = getContainer();
@@ -8238,6 +9958,19 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * If <code>listener</code> is <code>null</code>,
      * no exception is thrown and no action is performed.
      *
+     * <p>
+     *  将PropertyChangeListener添加到侦听器列表。侦听器为此类的所有绑定属性注册,包括以下内容：
+     * <ul>
+     *  <li>此组件的前景颜色("前景")</li> <li>此组件的背景颜色("背景" </li> <li>此组件的FORWARD_TRAVERSAL_KEYS("forwardFocusTraversa
+     * lKeys")集</li> <li>此组件的焦点遍历键已启用状态("focusTraversalKeysEnabled" </li> <li>此组件的首选大小("preferredSize")</li>
+     *  <li>此组件的UP_CYCLE_TRAVERSAL_KEYS("upCycleFocusTraversalKeys")</li> <li>此组件的BACKWARD_TRAVERSAL_KEYS("b
+     * ackwardFocusTraversalKeys" </li> </li> </li>此组件的最小大小("minimumSize")</li> <li>此组件的最大大小。
+     * </ul>
+     *  注意,如果这个<code> Component </code>继承一个绑定的属性,那么没有事件会响应继承的属性的改变触发。
+     * <p>
+     *  如果<code> listener </code>是<code> null </code>,则不会抛出任何异常,并且不执行任何操作。
+     * 
+     * 
      * @param    listener  the property change listener to be added
      *
      * @see #removePropertyChangeListener
@@ -8264,6 +9997,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <p>
      * If listener is null, no exception is thrown and no action is performed.
      *
+     * <p>
+     * 从侦听器列表中删除PropertyChangeListener。此方法应用于删除为此类的所有绑定属性注册的PropertyChangeListeners。
+     * <p>
+     *  如果侦听器为null,则不抛出异常,并且不执行任何操作。
+     * 
+     * 
      * @param listener the PropertyChangeListener to be removed
      *
      * @see #addPropertyChangeListener
@@ -8284,6 +10023,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the property change listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有属性更改侦听器的数组。
+     * 
+     * 
      * @return all of this component's <code>PropertyChangeListener</code>s
      *         or an empty array if no property change
      *         listeners are currently registered
@@ -8327,6 +10070,18 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * If <code>propertyName</code> or <code>listener</code> is <code>null</code>,
      * no exception is thrown and no action is taken.
      *
+     * <p>
+     *  将PropertyChangeListener添加到特定属性的侦听器列表。指定的属性可以是用户定义的,也可以是以下之一：
+     * <ul>
+     *  <li>此组件的前景颜色("前景")</li> <li>此组件的背景颜色("背景" </li> <li>此组件的FORWARD_TRAVERSAL_KEYS("forwardFocusTraversa
+     * lKeys")集</li> <li>此组件的焦点遍历键已启用状态("focusTraversalKeysEnabled" >此组件的BACKWARD_TRAVERSAL_KEYS("backwardFo
+     * cusTraversalKeys")</li> <li>此组件的UP_CYCLE_TRAVERSAL_KEYS("upCycleFocusTraversalKeys")</li>。
+     * </ul>
+     *  注意,如果这个<code> Component </code>继承一个绑定的属性,那么没有事件会响应继承的属性的改变触发。
+     * <p>
+     *  如果<code> propertyName </code>或<code> listener </code>为<code> null </code>,则不会抛出任何异常,因此不会执行任何操作。
+     * 
+     * 
      * @param propertyName one of the property names listed above
      * @param listener the property change listener to be added
      *
@@ -8357,6 +10112,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * If <code>propertyName</code> or <code>listener</code> is <code>null</code>,
      * no exception is thrown and no action is taken.
      *
+     * <p>
+     * 从特定属性的侦听器列表中删除<code> PropertyChangeListener </code>。
+     * 此方法应用于删除为特定绑定属性注册的<code> PropertyChangeListener </code>。
+     * <p>
+     *  如果<code> propertyName </code>或<code> listener </code>为<code> null </code>,则不会抛出任何异常,因此不会执行任何操作。
+     * 
+     * 
      * @param propertyName a valid property name
      * @param listener the PropertyChangeListener to be removed
      *
@@ -8379,6 +10141,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns an array of all the listeners which have been associated
      * with the named property.
      *
+     * <p>
+     *  返回与命名属性关联的所有侦听器的数组。
+     * 
+     * 
      * @return all of the <code>PropertyChangeListener</code>s associated with
      *         the named property; if no such listeners have been added or
      *         if <code>propertyName</code> is <code>null</code>, an empty
@@ -8405,6 +10171,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * send the appropriate PropertyChangeEvent to any registered
      * PropertyChangeListeners.
      *
+     * <p>
+     *  支持为对象属性报告绑定的属性更改。当绑定属性发生变化时,可以调用此方法,并且它会向适当的PropertyChangeListener发送适当的PropertyChangeEvent。
+     * 
+     * 
      * @param propertyName the property whose value has changed
      * @param oldValue the property's previous value
      * @param newValue the property's new value
@@ -8428,6 +10198,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * send the appropriate PropertyChangeEvent to any registered
      * PropertyChangeListeners.
      *
+     * <p>
+     *  支持报告布尔属性的绑定属性更改。当绑定属性发生变化时,可以调用此方法,并且它会向适当的PropertyChangeListener发送适当的PropertyChangeEvent。
+     * 
+     * 
      * @param propertyName the property whose value has changed
      * @param oldValue the property's previous value
      * @param newValue the property's new value
@@ -8448,6 +10222,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * send the appropriate PropertyChangeEvent to any registered
      * PropertyChangeListeners.
      *
+     * <p>
+     *  支持报告整数属性的绑定属性更改。当绑定属性发生变化时,可以调用此方法,并且它会向适当的PropertyChangeListener发送适当的PropertyChangeEvent。
+     * 
+     * 
      * @param propertyName the property whose value has changed
      * @param oldValue the property's previous value
      * @param newValue the property's new value
@@ -8465,6 +10243,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Reports a bound property change.
      *
+     * <p>
+     *  报告绑定的属性更改。
+     * 
+     * 
      * @param propertyName the programmatic name of the property
      *          that was changed
      * @param oldValue the old value of the property (as a byte)
@@ -8483,6 +10265,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Reports a bound property change.
      *
+     * <p>
+     *  报告绑定的属性更改。
+     * 
+     * 
      * @param propertyName the programmatic name of the property
      *          that was changed
      * @param oldValue the old value of the property (as a char)
@@ -8501,6 +10287,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Reports a bound property change.
      *
+     * <p>
+     *  报告绑定的属性更改。
+     * 
+     * 
      * @param propertyName the programmatic name of the property
      *          that was changed
      * @param oldValue the old value of the property (as a short)
@@ -8520,6 +10310,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Reports a bound property change.
      *
+     * <p>
+     *  报告绑定的属性更改。
+     * 
+     * 
      * @param propertyName the programmatic name of the property
      *          that was changed
      * @param oldValue the old value of the property (as a long)
@@ -8538,6 +10332,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Reports a bound property change.
      *
+     * <p>
+     *  报告绑定的属性更改。
+     * 
+     * 
      * @param propertyName the programmatic name of the property
      *          that was changed
      * @param oldValue the old value of the property (as a float)
@@ -8556,6 +10354,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Reports a bound property change.
      *
+     * <p>
+     *  报告绑定的属性更改。
+     * 
+     * 
      * @param propertyName the programmatic name of the property
      *          that was changed
      * @param oldValue the old value of the property (as a double)
@@ -8577,6 +10379,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Component Serialized Data Version.
      *
+     * <p>
+     *  组件序列化数据版本。
+     * 
+     * 
      * @serial
      */
     private int componentSerializedDataVersion = 4;
@@ -8584,6 +10390,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * This hack is for Swing serialization. It will invoke
      * the Swing package private method <code>compWriteObjectNotify</code>.
+     * <p>
+     *  这个黑客是为了Swing序列化。它将调用Swing包的私有方法<code> compWriteObjectNotify </code>。
+     * 
      */
     private void doSwingSerialization() {
         Package swingPackage = Package.getPackage("javax.swing");
@@ -8637,6 +10446,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * The non-serializable listeners are detected and
      * no attempt is made to serialize them.
      *
+     * <p>
+     * 将缺省可序列化字段写入流。将各种可序列化侦听器作为可选数据。检测到不可序列化的侦听器,并且不尝试将它们串行化。
+     * 
+     * 
      * @param s the <code>ObjectOutputStream</code> to write
      * @serialData <code>null</code> terminated sequence of
      *   0 or more pairs; the pair consists of a <code>String</code>
@@ -8708,6 +10521,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * of events fired by the component.
      * Unrecognized keys or values will be ignored.
      *
+     * <p>
+     *  读取<code> ObjectInputStream </code>,如果不是<code> null </code>添加一个监听器来接收组件触发的各种事件。无法识别的键或值将被忽略。
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      * @see #writeObject(ObjectOutputStream)
      */
@@ -8869,6 +10686,18 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * invalidates the component hierarchy.
      *
      *
+     * <p>
+     *  设置用于对此组件中的元素或文本进行排序的用于语言敏感的方向。
+     * 语言敏感的<code> LayoutManager </code>和<code> Component </code>子类将使用此属性来确定如何布局和绘制组件。
+     * <p>
+     *  在构造时,组件的方向设置为<code> ComponentOrientation.UNKNOWN </code>,表示它未被明确指定。
+     *  UNKNOWN方向的行为与<code> ComponentOrientation.LEFT_TO_RIGHT </code>相同。
+     * <p>
+     *  要设置单个组件的方向,请使用此方法。要设置整个组件层次结构的方向,请使用{@link #applyComponentOrientation applyComponentOrientation}。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @see ComponentOrientation
      * @see #invalidate
      *
@@ -8895,6 +10724,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * subclasses that wish to respect orientation should call this method to
      * get the component's orientation before performing layout or drawing.
      *
+     * <p>
+     * 检索用于对此组件中的元素或文本进行排序的语言敏感方向。
+     *  <code> LayoutManager </code>和<code> Component </code>子类希望尊重定向,应该调用此方法在执行布局或绘图之前获取组件的方向。
+     * 
+     * 
      * @see ComponentOrientation
      *
      * @author Laura Werner, IBM
@@ -8911,6 +10745,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * invalidates the component hierarchy.
      *
      *
+     * <p>
+     *  设置此组件及其中包含的所有组件的<code> ComponentOrientation </code>属性。
+     * <p>
+     *  此方法会更改布局相关信息,因此会使组件层次结构无效。
+     * 
+     * 
      * @param orientation the new component orientation of this component and
      *        the components contained within it.
      * @exception NullPointerException if <code>orientation</code> is null.
@@ -8941,6 +10781,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * - top-level window is focusable
      * - if focus cycle root has DefaultFocusTraversalPolicy then it also checks that this policy accepts
      * this component as focus owner
+     * <p>
+     *  检查此组件是否满足要求的焦点所有者： - 它是启用,可见,可聚焦 - 它的父级都启用并显示 - 顶级窗口是可聚焦的 - 如果焦点循环根目录有DefaultFocusTraversalPolicy,那么
+     * 它还检查该策略接受这个组件作为焦点所有者。
+     * 
+     * 
      * @since 1.5
      */
     final boolean canBeFocusOwnerRecursively() {
@@ -8960,6 +10805,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Fix the location of the HW component in a LW container hierarchy.
+     * <p>
+     *  在LW容器层次结构中修复HW组件的位置。
+     * 
      */
     final void relocateComponent() {
         synchronized (getTreeLock()) {
@@ -8982,6 +10830,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Returns the <code>Window</code> ancestor of the component.
+     * <p>
+     *  返回组件的<code> Window </code>祖代。
+     * 
+     * 
      * @return Window ancestor of the component or component by itself if it is Window;
      *         null, if component is not a part of window hierarchy
      */
@@ -8991,6 +10843,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -9000,10 +10855,18 @@ public abstract class Component implements ImageObserver, MenuContainer,
      *  Component will contain all of the methods in interface Accessible,
      *  though it won't actually implement the interface - that will be up
      *  to the individual objects which extend Component.
+     * <p>
+     *  ---辅助功能
+     * 
+     *  组件将包含接口Accessible中的所有方法,虽然它不会实际实现接口 - 将由扩展Component的各个对象。
+     * 
      */
 
     /**
      * The {@code AccessibleContext} associated with this {@code Component}.
+     * <p>
+     *  与此{@code Component}相关联的{@code AccessibleContext}。
+     * 
      */
     protected AccessibleContext accessibleContext = null;
 
@@ -9016,6 +10879,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * <code>AccessibleContext</code> associated with the subclass.
      *
      *
+     * <p>
+     * 获取与此<code> Component </code>关联的<code> AccessibleContext </code>。此基类实现的方法返回null。
+     * 扩展<code> Component </code>的类应实现此方法以返回与子类关联的<code> AccessibleContext </code>。
+     * 
+     * 
      * @return the <code>AccessibleContext</code> of this
      *    <code>Component</code>
      * @since 1.3
@@ -9031,6 +10899,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * subclassed by component developers.
      * <p>
      * The class used to obtain the accessible role for this object.
+     * <p>
+     *  组件的内部类用于提供对辅助功能的默认支持。这个类不是直接由应用程序开发人员使用,而是仅仅由组件开发人员进行子类化。
+     * <p>
+     *  用于获取此对象的可访问角色的类。
+     * 
+     * 
      * @since 1.3
      */
     protected abstract class AccessibleAWTComponent extends AccessibleContext
@@ -9041,6 +10915,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Though the class is abstract, this should be called by
          * all sub-classes.
+         * <p>
+         *  虽然类是抽象的,但是这应该被所有子类调用。
+         * 
          */
         protected AccessibleAWTComponent() {
         }
@@ -9049,6 +10926,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * Number of PropertyChangeListener objects registered. It's used
          * to add/remove ComponentListener and FocusListener to track
          * target Component's state.
+         * <p>
+         *  已注册的PropertyChangeListener对象数。它用于添加/删除ComponentListener和FocusListener以跟踪目标组件的状态。
+         * 
          */
         private volatile transient int propertyListenersCount = 0;
 
@@ -9058,6 +10938,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Fire PropertyChange listener, if one is registered,
          * when shown/hidden..
+         * <p>
+         *  Fire PropertyChange侦听器,如果已注册,显示/隐藏..
+         * 
+         * 
          * @since 1.3
          */
         protected class AccessibleAWTComponentHandler implements ComponentListener {
@@ -9088,6 +10972,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Fire PropertyChange listener, if one is registered,
          * when focus events happen
+         * <p>
+         *  Fire PropertyChange侦听器(如果已注册),当焦点事件发生时
+         * 
+         * 
          * @since 1.3
          */
         protected class AccessibleAWTFocusHandler implements FocusListener {
@@ -9111,6 +10999,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Adds a <code>PropertyChangeListener</code> to the listener list.
          *
+         * <p>
+         *  向侦听器列表中添加<code> PropertyChangeListener </code>。
+         * 
+         * 
          * @param listener  the property change listener to be added
          */
         public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -9132,6 +11024,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * This removes a PropertyChangeListener that was registered
          * for all properties.
          *
+         * <p>
+         *  从侦听器列表中删除PropertyChangeListener。这将删除为所有属性注册的PropertyChangeListener。
+         * 
+         * 
          * @param listener  The PropertyChangeListener to be removed
          */
         public void removePropertyChangeListener(PropertyChangeListener listener) {
@@ -9154,6 +11050,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * If the object has a tooltip, the tooltip text may also be an
          * appropriate String to return.
          *
+         * <p>
+         * 获取此对象的可访问名称。这应该几乎不会返回<code> java.awt.Component.getName()</code>,因为一般不是本地化的名称,并且没有用户的意义。
+         * 如果对象基本上是文本对象(例如菜单项),则可访问名称应该是对象的文本(例如"保存")。如果对象有一个工具提示,工具提示文本也可能是一个合适的返回字符串。
+         * 
+         * 
          * @return the localized name of the object -- can be
          *         <code>null</code> if this
          *         object does not have a name
@@ -9174,6 +11075,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * text as the description, but something like "Saves the current
          * text document" instead).
          *
+         * <p>
+         *  获取此对象的可访问描述。这应该是一个简洁的,本地化的描述这个对象是什么 - 它对用户的意义。
+         * 如果对象有一个工具提示,工具提示文本可能是一个合适的返回字符串,假设它包含对象的简明描述(而不仅仅是对象的名称 - 例如工具栏上的"保存"图标, ",因为工具提示文本不应返回工具提示文本作为描述,而是类
+         * 似"保存当前文本文档")。
+         *  获取此对象的可访问描述。这应该是一个简洁的,本地化的描述这个对象是什么 - 它对用户的意义。
+         * 
+         * 
          * @return the localized description of the object -- can be
          *        <code>null</code> if this object does not have a description
          * @see javax.accessibility.AccessibleContext#setAccessibleDescription
@@ -9185,6 +11093,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Gets the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of <code>AccessibleRole</code>
          *      describing the role of the object
          * @see javax.accessibility.AccessibleRole
@@ -9196,6 +11108,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Gets the state of this object.
          *
+         * <p>
+         *  获取此对象的状态。
+         * 
+         * 
          * @return an instance of <code>AccessibleStateSet</code>
          *       containing the current state set of the object
          * @see javax.accessibility.AccessibleState
@@ -9209,6 +11125,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * If the parent of this object implements <code>Accessible</code>,
          * this method should simply return <code>getParent</code>.
          *
+         * <p>
+         *  获取此对象的<code> Accessible </code> parent。
+         * 如果此对象的父对象实现<code> Accessible </code>,此方法应该只返回<code> getParent </code>。
+         * 
+         * 
          * @return the <code>Accessible</code> parent of this
          *      object -- can be <code>null</code> if this
          *      object does not have an <code>Accessible</code> parent
@@ -9228,6 +11149,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Gets the index of this object in its accessible parent.
          *
+         * <p>
+         *  获取此对象在其可访问父级中的索引。
+         * 
+         * 
          * @return the index of this object in its parent; or -1 if this
          *    object does not have an accessible parent
          * @see #getAccessibleParent
@@ -9241,6 +11166,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * of the children of this object implement <code>Accessible</code>,
          * then this method should return the number of children of this object.
          *
+         * <p>
+         *  返回对象中可访问的子项数。如果这个对象的所有子实现<code> Accessible </code>,那么这个方法应该返回这个对象的子数。
+         * 
+         * 
          * @return the number of accessible children in the object
          */
         public int getAccessibleChildrenCount() {
@@ -9250,6 +11179,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Returns the nth <code>Accessible</code> child of the object.
          *
+         * <p>
+         * 返回对象的第n个<code> Accessible </code>子对象。
+         * 
+         * 
          * @param i zero-based index of child
          * @return the nth <code>Accessible</code> child of the object
          */
@@ -9260,6 +11193,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Returns the locale of this object.
          *
+         * <p>
+         *  返回此对象的语言环境。
+         * 
+         * 
          * @return the locale of this object
          */
         public Locale getLocale() {
@@ -9271,6 +11208,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * with this object if one exists.
          * Otherwise return <code>null</code>.
          *
+         * <p>
+         *  获取与此对象关联的<code> AccessibleComponent </code>(如果存在)。否则返回<code> null </code>。
+         * 
+         * 
          * @return the component
          */
         public AccessibleComponent getAccessibleComponent() {
@@ -9283,6 +11224,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Gets the background color of this object.
          *
+         * <p>
+         *  获取此对象的背景颜色。
+         * 
+         * 
          * @return the background color, if supported, of the object;
          *      otherwise, <code>null</code>
          */
@@ -9294,6 +11239,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * Sets the background color of this object.
          * (For transparency, see <code>isOpaque</code>.)
          *
+         * <p>
+         *  设置此对象的背景颜色。 (有关透明度,请参阅<code> isOpaque </code>。)
+         * 
+         * 
          * @param c the new <code>Color</code> for the background
          * @see Component#isOpaque
          */
@@ -9304,6 +11253,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Gets the foreground color of this object.
          *
+         * <p>
+         *  获取此对象的前景颜色。
+         * 
+         * 
          * @return the foreground color, if supported, of the object;
          *     otherwise, <code>null</code>
          */
@@ -9314,6 +11267,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Sets the foreground color of this object.
          *
+         * <p>
+         *  设置此对象的前景颜色。
+         * 
+         * 
          * @param c the new <code>Color</code> for the foreground
          */
         public void setForeground(Color c) {
@@ -9323,6 +11280,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Gets the <code>Cursor</code> of this object.
          *
+         * <p>
+         *  获取此对象的<code> Cursor </code>。
+         * 
+         * 
          * @return the <code>Cursor</code>, if supported,
          *     of the object; otherwise, <code>null</code>
          */
@@ -9336,6 +11297,12 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * The method may have no visual effect if the Java platform
          * implementation and/or the native system do not support
          * changing the mouse cursor shape.
+         * <p>
+         *  设置此对象的<code> Cursor </code>。
+         * <p>
+         *  如果Java平台实现和/或本地系统不支持改变鼠标光标形状,则该方法可以没有视觉效果。
+         * 
+         * 
          * @param cursor the new <code>Cursor</code> for the object
          */
         public void setCursor(Cursor cursor) {
@@ -9345,6 +11312,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Gets the <code>Font</code> of this object.
          *
+         * <p>
+         *  获取此对象的<code> Font </code>。
+         * 
+         * 
          * @return the <code>Font</code>, if supported,
          *    for the object; otherwise, <code>null</code>
          */
@@ -9355,6 +11326,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Sets the <code>Font</code> of this object.
          *
+         * <p>
+         *  设置此对象的<code> Font </code>。
+         * 
+         * 
          * @param f the new <code>Font</code> for the object
          */
         public void setFont(Font f) {
@@ -9364,6 +11339,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Gets the <code>FontMetrics</code> of this object.
          *
+         * <p>
+         *  获取此对象的<code> FontMetrics </code>。
+         * 
+         * 
          * @param f the <code>Font</code>
          * @return the <code>FontMetrics</code>, if supported,
          *     the object; otherwise, <code>null</code>
@@ -9380,6 +11359,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Determines if the object is enabled.
          *
+         * <p>
+         *  确定对象是否已启用。
+         * 
+         * 
          * @return true if object is enabled; otherwise, false
          */
         public boolean isEnabled() {
@@ -9389,6 +11372,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Sets the enabled state of the object.
          *
+         * <p>
+         *  设置对象的启用状态。
+         * 
+         * 
          * @param b if true, enables this object; otherwise, disables it
          */
         public void setEnabled(boolean b) {
@@ -9416,6 +11403,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * is contained by is not visible.  To determine if an object is
          * showing on the screen, use <code>isShowing</code>.
          *
+         * <p>
+         *  确定对象是否可见。注意：这意味着对象是可见的;然而,它可能实际上不在屏幕上显示,因为包含该对象的对象之一是不可见的。
+         * 要确定对象是否显示在屏幕上,请使用<code> isShowing </code>。
+         * 
+         * 
          * @return true if object is visible; otherwise, false
          */
         public boolean isVisible() {
@@ -9425,6 +11417,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Sets the visible state of the object.
          *
+         * <p>
+         *  设置对象的可见状态。
+         * 
+         * 
          * @param b if true, shows this object; otherwise, hides it
          */
         public void setVisible(boolean b) {
@@ -9452,6 +11448,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * (for example, it happens to be underneath a menu that was pulled
          * down).
          *
+         * <p>
+         * 确定对象是否正在显示。这是通过检查对象和对象的祖先的可见性来确定的。注意：即使对象被另一个对象遮盖,这将返回true(例如,它恰好在下拉菜单下)。
+         * 
+         * 
          * @return true if object is showing; otherwise, false
          */
         public boolean isShowing() {
@@ -9463,6 +11463,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * where the point's x and y coordinates are defined to be relative to
          * the coordinate system of the object.
          *
+         * <p>
+         *  检查指定点是否在此对象的边界内,其中点的x和y坐标被定义为相对于对象的坐标系。
+         * 
+         * 
          * @param p the <code>Point</code> relative to the
          *     coordinate system of the object
          * @return true if object contains <code>Point</code>; otherwise false
@@ -9474,6 +11478,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Returns the location of the object on the screen.
          *
+         * <p>
+         *  返回对象在屏幕上的位置。
+         * 
+         * 
          * @return location of object on screen -- can be
          *    <code>null</code> if this object is not on the screen
          */
@@ -9492,6 +11500,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * of a point specifying the object's top-left corner in the screen's
          * coordinate space.
          *
+         * <p>
+         *  以指定对象在屏幕坐标空间中左上角的点的形式获取对象相对于父对象的位置。
+         * 
+         * 
          * @return an instance of Point representing the top-left corner of
          * the object's bounds in the coordinate space of the screen;
          * <code>null</code> if this object or its parent are not on the screen
@@ -9502,6 +11514,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * Sets the location of the object relative to the parent.
+         * <p>
+         *  设置对象相对于父对象的位置。
+         * 
+         * 
          * @param p  the coordinates of the object
          */
         public void setLocation(Point p) {
@@ -9513,6 +11529,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * The bounds specify this object's width, height, and location
          * relative to its parent.
          *
+         * <p>
+         *  以Rectangle对象的形式获取此对象的边界。 bounds指定此对象的宽度,高度和相对于其父级的位置。
+         * 
+         * 
          * @return a rectangle indicating this component's bounds;
          *   <code>null</code> if this object is not on the screen
          */
@@ -9526,6 +11546,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * The bounds specify this object's width, height, and location
          * relative to its parent.
          *
+         * <p>
+         *  以<code> Rectangle </code>对象的形式设置此对象的边界。 bounds指定此对象的宽度,高度和相对于其父级的位置。
+         * 
+         * 
          * @param r a rectangle indicating this component's bounds
          */
         public void setBounds(Rectangle r) {
@@ -9539,6 +11563,11 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * height, and the width field of the <code>Dimension</code>
          * object contains this object's width.
          *
+         * <p>
+         *  以<code> Dimension </code>对象的形式返回此对象的大小。
+         *  <code> Dimension </code>对象的高度字段包含此对象的高度,<code> Dimension </code>对象的宽度字段包含此对象的宽度。
+         * 
+         * 
          * @return a <code>Dimension</code> object that indicates
          *     the size of this component; <code>null</code> if
          *     this object is not on the screen
@@ -9550,6 +11579,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Resizes this object so that it has width and height.
          *
+         * <p>
+         *  调整此对象的大小,使其具有宽度和高度。
+         * 
+         * 
          * @param d - the dimension specifying the new size of the object
          */
         public void setSize(Dimension d) {
@@ -9562,6 +11595,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * coordinate <code>Point</code>.  Otherwise returns
          * <code>null</code>.
          *
+         * <p>
+         *  返回包含在本地坐标<code> Point </code>处的<code> Accessible </code>子代(如果存在)。否则返回<code> null </code>。
+         * 
+         * 
          * @param p the point defining the top-left corner of
          *      the <code>Accessible</code>, given in the
          *      coordinate space of the object's parent
@@ -9575,6 +11612,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
         /**
          * Returns whether this object can accept focus or not.
          *
+         * <p>
+         * 返回此对象是否可以接受焦点。
+         * 
+         * 
          * @return true if object can accept focus; otherwise false
          */
         public boolean isFocusTraversable() {
@@ -9583,6 +11624,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
         /**
          * Requests focus for this object.
+         * <p>
+         *  此对象的请求焦点。
+         * 
          */
         public void requestFocus() {
             Component.this.requestFocus();
@@ -9592,6 +11636,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * Adds the specified focus listener to receive focus events from this
          * component.
          *
+         * <p>
+         *  添加指定的焦点侦听器以从此组件接收焦点事件。
+         * 
+         * 
          * @param l the focus listener
          */
         public void addFocusListener(FocusListener l) {
@@ -9602,6 +11650,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
          * Removes the specified focus listener so it no longer receives focus
          * events from this component.
          *
+         * <p>
+         *  删除指定的焦点侦听器,使其不再从此组件接收焦点事件。
+         * 
+         * 
          * @param l the focus listener
          */
         public void removeFocusListener(FocusListener l) {
@@ -9616,6 +11668,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * If this object does not have an accessible parent, returns
      * -1.
      *
+     * <p>
+     *  获取此对象在其可访问父级中的索引。如果此对象没有可访问的父代,则返回-1。
+     * 
+     * 
      * @return the index of this object in its accessible parent
      */
     int getAccessibleIndexInParent() {
@@ -9640,6 +11696,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
     /**
      * Gets the current state set of this object.
      *
+     * <p>
+     *  获取此对象的当前状态集。
+     * 
+     * 
      * @return an instance of <code>AccessibleStateSet</code>
      *    containing the current state set of the object
      * @see AccessibleState
@@ -9694,6 +11754,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Checks that the given object is instance of the given class.
+     * <p>
+     *  检查给定的对象是给定类的实例。
+     * 
+     * 
      * @param obj Object to be checked
      * @param className The name of the class. Must be fully-qualified class name.
      * @return true, if this object is instanceof given class,
@@ -9723,6 +11787,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * probably mean changing the bounds of its children.
      * Null-layout of the container or absence of the container mean
      * the bounds of the component are final and can be trusted.
+     * <p>
+     *  检查我们是否可以信任组件的当前边界。返回值false表示组件的容器无效,因此需要进行布局,这可能意味着更改其子项的边界。容器的空布局或容器的不存在意味着组件的边界是最终的并且可以是可信的。
+     * 
      */
     final boolean areBoundsValid() {
         Container cont = getContainer();
@@ -9731,6 +11798,10 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Applies the shape to the component
+     * <p>
+     *  将形状应用于组件
+     * 
+     * 
      * @param shape Shape to be applied to the component
      */
     void applyCompoundShape(Region shape) {
@@ -9787,6 +11858,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * Returns the shape previously set with applyCompoundShape().
      * If the component is LW or no shape was applied yet,
      * the method returns the normal shape.
+     * <p>
+     *  返回先前使用applyCompoundShape()设置的形状。如果组件是LW或尚未应用形状,则该方法返回正常形状。
+     * 
      */
     private Region getAppliedShape() {
         checkTreeLock();
@@ -9811,6 +11885,9 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
     /**
      * Returns the full shape of the component located in window coordinates
+     * <p>
+     *  返回位于窗口坐标中的组件的完整形状
+     * 
      */
     final Region getNormalShape() {
         checkTreeLock();
@@ -9836,6 +11913,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
      * containers containing opaque children.
      *
      * See 6637655 for details.
+     * <p>
+     *  返回组件的"不透明形状"。
+     * 
+     *  轻质部件的不透明形状是需要从重量部件上切下的实际形状,以便将这种轻质部件与它们正确地混合。
+     * 
+     *  该方法在java.awt.Container中被覆盖以处理包含不透明子元素的非不透明容器。
+     * 
+     *  有关详细信息,请参阅6637655。
      */
     Region getOpaqueShape() {
         checkTreeLock();
@@ -9923,6 +12008,8 @@ public abstract class Component implements ImageObserver, MenuContainer,
                      *
                      * The assumption has been made according to the current
                      * implementation of the Container class.
+                     * <p>
+                     * 
                      */
                     Component c = cont.getComponent(index);
                     if (c.isLightweight() && c.isShowing()) {

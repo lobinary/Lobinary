@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,12 +57,36 @@ import java.awt.*;
  * they can throw a <code>NullPointerException</code> or
  * <code>IllegalArgumentException</code> in response to invalid arguments.
  *
+ * <p>
+ *  <code> SynthPainter </code>用于绘制<code> JComponent </code>的部分。
+ * 至少每个<code> JComponent </code>有两个绘制方法：一个用于边框,一个用于背景。
+ * 一些<code> JComponent </code>有多个<code> Region </code>,因此更多的绘制方法。
+ * <p>
+ *  <code> SynthPainter </code>的实例是从{@link javax.swing.plaf.synth.SynthStyle#getPainter}方法获取的。
+ * <p>
+ *  您通常通过Synth的<a href="doc-files/synthFileFormat.html">文件</a>格式提供<code> SynthPainter </code>。
+ * 以下示例为所有<code> JButton </code>注册一个绘图器,它将渲染图像<code> myImage.png </code>：。
+ * <pre>
+ *  &lt; style id ="buttonStyle"&gt; &lt; imagePainter path ="myImage.png"sourceInsets ="2 2 2 2"paintCe
+ * nter ="true"stretch ="true"/&gt; &lt; insets top ="2"bottom ="2"left ="2"right ="2"/&gt; &lt; / style
+ * &gt; &lt; bind style ="buttonStyle"type ="REGION"key ="button"/&gt;。
+ * /pre>
+ * <p>
+ *  <code> SynthPainter </code>是抽象的,因为它没有绘画,所有的方法都是空的。
+ * 虽然没有这些方法被打入抛出异常,子类可以假设有效的参数被传入,如果不是,它们可以抛出一个<code> NullPointerException </code>或<code> IllegalArgumen
+ * tException </code>参数。
+ *  <code> SynthPainter </code>是抽象的,因为它没有绘画,所有的方法都是空的。
+ * 
+ * 
  * @since 1.5
  * @author Scott Violet
  */
 public abstract class SynthPainter {
     /**
      * Used to avoid null painter checks everywhere.
+     * <p>
+     *  用于避免无处不在的画家检查。
+     * 
      */
     static SynthPainter NULL_PAINTER = new SynthPainter() {};
 
@@ -70,6 +95,10 @@ public abstract class SynthPainter {
      * Paints the background of an arrow button. Arrow buttons are created by
      * some components, such as <code>JScrollBar</code>.
      *
+     * <p>
+     * 描绘一个箭头按钮的背景。箭头按钮由某些组件创建,例如<code> JScrollBar </code>。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -87,6 +116,10 @@ public abstract class SynthPainter {
      * Paints the border of an arrow button. Arrow buttons are created by
      * some components, such as <code>JScrollBar</code>.
      *
+     * <p>
+     *  绘制箭头按钮的边框。箭头按钮由某些组件创建,例如<code> JScrollBar </code>。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -106,6 +139,10 @@ public abstract class SynthPainter {
      * an arrow. Arrow buttons are created by
      * some components, such as <code>JScrollBar</code>
      *
+     * <p>
+     *  绘制箭头按钮的前景。此方法负责绘制方向(通常为箭头)的图形表示。箭头按钮由某些组件创建,例如<code> JScrollBar </code>
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -125,6 +162,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a button.
      *
+     * <p>
+     *  绘制按钮的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -141,6 +182,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a button.
      *
+     * <p>
+     *  绘制按钮的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -157,6 +202,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a check box menu item.
      *
+     * <p>
+     *  描绘复选框菜单项的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -173,6 +222,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a check box menu item.
      *
+     * <p>
+     *  绘制复选框菜单项的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -189,6 +242,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a check box.
      *
+     * <p>
+     *  绘制复选框的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -205,6 +262,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a check box.
      *
+     * <p>
+     *  绘制复选框的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -221,6 +282,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a color chooser.
      *
+     * <p>
+     *  绘制颜色选择器的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -237,6 +302,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a color chooser.
      *
+     * <p>
+     *  绘制颜色选择器的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -253,6 +322,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a combo box.
      *
+     * <p>
+     *  绘制组合框的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -269,6 +342,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a combo box.
      *
+     * <p>
+     *  绘制组合框的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -285,6 +362,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a desktop icon.
      *
+     * <p>
+     *  描绘桌面图标的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -301,6 +382,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a desktop icon.
      *
+     * <p>
+     *  绘制桌面图标的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -317,6 +402,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a desktop pane.
      *
+     * <p>
+     *  绘制桌面窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -333,6 +422,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a desktop pane.
      *
+     * <p>
+     *  绘制桌面窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -349,6 +442,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of an editor pane.
      *
+     * <p>
+     *  描绘编辑器窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -365,6 +462,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of an editor pane.
      *
+     * <p>
+     *  绘制编辑器窗格的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -381,6 +482,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a file chooser.
      *
+     * <p>
+     *  描绘文件选择器的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -397,6 +502,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a file chooser.
      *
+     * <p>
+     *  绘制文件选择器的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -413,6 +522,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a formatted text field.
      *
+     * <p>
+     *  绘制格式化文本字段的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -429,6 +542,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a formatted text field.
      *
+     * <p>
+     *  绘制格式化文本字段的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -445,6 +562,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of an internal frame title pane.
      *
+     * <p>
+     *  绘制内部框架标题窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -461,6 +582,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of an internal frame title pane.
      *
+     * <p>
+     *  绘制内部框架标题窗格的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -477,6 +602,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of an internal frame.
      *
+     * <p>
+     *  描绘内部框架的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -493,6 +622,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of an internal frame.
      *
+     * <p>
+     *  描绘内部框架的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -509,6 +642,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a label.
      *
+     * <p>
+     * 描绘标签的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -525,6 +662,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a label.
      *
+     * <p>
+     *  绘制标签的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -541,6 +682,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a list.
      *
+     * <p>
+     *  描述列表的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -557,6 +702,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a list.
      *
+     * <p>
+     *  描画列表的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -573,6 +722,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a menu bar.
      *
+     * <p>
+     *  绘制菜单栏的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -589,6 +742,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a menu bar.
      *
+     * <p>
+     *  绘制菜单栏的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -605,6 +762,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a menu item.
      *
+     * <p>
+     *  描绘菜单项的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -621,6 +782,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a menu item.
      *
+     * <p>
+     *  绘制菜单项的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -637,6 +802,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a menu.
      *
+     * <p>
+     *  描绘菜单的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -653,6 +822,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a menu.
      *
+     * <p>
+     *  绘制菜单的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -669,6 +842,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of an option pane.
      *
+     * <p>
+     *  绘制选项窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -685,6 +862,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of an option pane.
      *
+     * <p>
+     *  绘制选项窗格的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -701,6 +882,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a panel.
      *
+     * <p>
+     *  描绘面板的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -717,6 +902,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a panel.
      *
+     * <p>
+     *  绘制面板的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -733,6 +922,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a password field.
      *
+     * <p>
+     *  描绘密码字段的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -749,6 +942,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a password field.
      *
+     * <p>
+     *  绘制密码字段的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -765,6 +962,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a popup menu.
      *
+     * <p>
+     *  绘制弹出菜单的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -781,6 +982,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a popup menu.
      *
+     * <p>
+     *  绘制弹出菜单的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -797,6 +1002,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a progress bar.
      *
+     * <p>
+     *  绘制进度条的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -814,6 +1023,10 @@ public abstract class SynthPainter {
      * Paints the background of a progress bar. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制进度条的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -834,6 +1047,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a progress bar.
      *
+     * <p>
+     *  绘制进度条的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -851,6 +1068,10 @@ public abstract class SynthPainter {
      * Paints the border of a progress bar. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制进度条的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -872,6 +1093,10 @@ public abstract class SynthPainter {
      * Paints the foreground of a progress bar. is responsible for
      * providing an indication of the progress of the progress bar.
      *
+     * <p>
+     *  绘制进度条的前台。负责提供进度条进度的指示。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -890,6 +1115,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a radio button menu item.
      *
+     * <p>
+     *  描绘单选按钮菜单项的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -906,6 +1135,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a radio button menu item.
      *
+     * <p>
+     *  绘制单选按钮菜单项的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -922,6 +1155,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a radio button.
      *
+     * <p>
+     *  描绘单选按钮的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -938,6 +1175,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a radio button.
      *
+     * <p>
+     *  绘制单选按钮的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -954,6 +1195,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a root pane.
      *
+     * <p>
+     *  绘制根窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -970,6 +1215,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a root pane.
      *
+     * <p>
+     *  绘制根窗格的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -986,6 +1235,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a scrollbar.
      *
+     * <p>
+     *  描绘滚动条的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1003,6 +1256,10 @@ public abstract class SynthPainter {
      * Paints the background of a scrollbar. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     * 描绘滚动条的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1024,6 +1281,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a scrollbar.
      *
+     * <p>
+     *  绘制滚动条的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1041,6 +1302,10 @@ public abstract class SynthPainter {
      * Paints the border of a scrollbar. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制滚动条的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1064,6 +1329,10 @@ public abstract class SynthPainter {
      * a graphical indication as to how much of the Component is visible in a
      * <code>JScrollPane</code>.
      *
+     * <p>
+     *  描绘滚动条的缩略图的背景。拇指提供了一个图形指示,表明在<code> JScrollPane </code>中可以看到组件的多少。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1085,6 +1354,10 @@ public abstract class SynthPainter {
      * a graphical indication as to how much of the Component is visible in a
      * <code>JScrollPane</code>.
      *
+     * <p>
+     *  绘制滚动条的缩略图的边框。拇指提供了一个图形指示,表明在<code> JScrollPane </code>中可以看到组件的多少。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1105,6 +1378,10 @@ public abstract class SynthPainter {
      * Paints the background of the track of a scrollbar. The track contains
      * the thumb.
      *
+     * <p>
+     *  描绘滚动条轨迹的背景。轨道包含拇指。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1123,6 +1400,10 @@ public abstract class SynthPainter {
      * the thumb. This implementation invokes the method of the same name without
      * the orientation.
      *
+     * <p>
+     *  描绘滚动条轨迹的背景。轨道包含拇指。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1145,6 +1426,10 @@ public abstract class SynthPainter {
      * Paints the border of the track of a scrollbar. The track contains
      * the thumb.
      *
+     * <p>
+     *  绘制滚动条轨道的边框。轨道包含拇指。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1163,6 +1448,10 @@ public abstract class SynthPainter {
      * the thumb. This implementation invokes the method of the same name without
      * the orientation.
      *
+     * <p>
+     *  绘制滚动条轨道的边框。轨道包含拇指。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1184,6 +1473,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a scroll pane.
      *
+     * <p>
+     *  绘制滚动窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1200,6 +1493,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a scroll pane.
      *
+     * <p>
+     *  绘制滚动窗格的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1216,6 +1513,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a separator.
      *
+     * <p>
+     *  绘制分隔符的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1233,6 +1534,10 @@ public abstract class SynthPainter {
      * Paints the background of a separator. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制分隔符的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1253,6 +1558,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a separator.
      *
+     * <p>
+     *  绘制分隔符的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1270,6 +1579,10 @@ public abstract class SynthPainter {
      * Paints the border of a separator. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制分隔符的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1290,6 +1603,10 @@ public abstract class SynthPainter {
     /**
      * Paints the foreground of a separator.
      *
+     * <p>
+     * 绘制分隔符的前景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1308,6 +1625,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a slider.
      *
+     * <p>
+     *  绘制滑块的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1325,6 +1646,10 @@ public abstract class SynthPainter {
      * Paints the background of a slider. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制滑块的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1345,6 +1670,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a slider.
      *
+     * <p>
+     *  绘制滑块的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1362,6 +1691,10 @@ public abstract class SynthPainter {
      * Paints the border of a slider. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制滑块的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1382,6 +1715,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of the thumb of a slider.
      *
+     * <p>
+     *  绘制滑块的缩略图的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1400,6 +1737,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of the thumb of a slider.
      *
+     * <p>
+     *  绘制滑块的缩略图的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1418,6 +1759,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of the track of a slider.
      *
+     * <p>
+     *  描绘滑块轨迹的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1435,6 +1780,10 @@ public abstract class SynthPainter {
      * Paints the background of the track of a slider. This implementation invokes
      * the method of the same name without the orientation.
      *
+     * <p>
+     *  描绘滑块轨迹的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1455,6 +1804,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of the track of a slider.
      *
+     * <p>
+     *  绘制滑块轨迹的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1472,6 +1825,10 @@ public abstract class SynthPainter {
      * Paints the border of the track of a slider. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制滑块轨迹的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1492,6 +1849,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a spinner.
      *
+     * <p>
+     *  绘制旋转器的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1508,6 +1869,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a spinner.
      *
+     * <p>
+     *  绘制微调框的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1524,6 +1889,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of the divider of a split pane.
      *
+     * <p>
+     *  绘制分割窗格的分隔线的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1541,6 +1910,10 @@ public abstract class SynthPainter {
      * Paints the background of the divider of a split pane. This implementation
      * invokes the method of the same name without the orientation.
      *
+     * <p>
+     *  绘制分割窗格的分隔线的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1561,6 +1934,10 @@ public abstract class SynthPainter {
     /**
      * Paints the foreground of the divider of a split pane.
      *
+     * <p>
+     *  绘制拆分窗格的分隔符的前景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1580,6 +1957,10 @@ public abstract class SynthPainter {
      * Paints the divider, when the user is dragging the divider, of a
      * split pane.
      *
+     * <p>
+     *  在分割窗格中绘制分隔线,当用户拖动分隔线时。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1598,6 +1979,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a split pane.
      *
+     * <p>
+     *  绘制拆分窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1614,6 +1999,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a split pane.
      *
+     * <p>
+     *  绘制拆分窗格的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1630,6 +2019,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a tabbed pane.
      *
+     * <p>
+     *  绘制选项卡式窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1646,6 +2039,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a tabbed pane.
      *
+     * <p>
+     *  绘制选项卡式窗格的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1662,6 +2059,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of the area behind the tabs of a tabbed pane.
      *
+     * <p>
+     *  在选项卡式窗格的选项卡后面绘制区域的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1680,6 +2081,10 @@ public abstract class SynthPainter {
      * This implementation invokes the method of the same name without the
      * orientation.
      *
+     * <p>
+     * 在选项卡式窗格的选项卡后面绘制区域的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1702,6 +2107,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of the area behind the tabs of a tabbed pane.
      *
+     * <p>
+     *  在选项卡式窗格的选项卡后面绘制区域的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1719,6 +2128,10 @@ public abstract class SynthPainter {
      * Paints the border of the area behind the tabs of a tabbed pane. This
      * implementation invokes the method of the same name without the orientation.
      *
+     * <p>
+     *  在选项卡式窗格的选项卡后面绘制区域的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1741,6 +2154,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a tab of a tabbed pane.
      *
+     * <p>
+     *  绘制选项卡式窗格的选项卡的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1759,6 +2176,10 @@ public abstract class SynthPainter {
      * Paints the background of a tab of a tabbed pane. This implementation
      * invokes the method of the same name without the orientation.
      *
+     * <p>
+     *  绘制选项卡式窗格的选项卡的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1782,6 +2203,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a tab of a tabbed pane.
      *
+     * <p>
+     *  绘制选项卡式窗格的选项卡的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1800,6 +2225,10 @@ public abstract class SynthPainter {
      * Paints the border of a tab of a tabbed pane. This implementation invokes
      * the method of the same name without the orientation.
      *
+     * <p>
+     *  绘制选项卡式窗格的选项卡的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1824,6 +2253,10 @@ public abstract class SynthPainter {
      * Paints the background of the area that contains the content of the
      * selected tab of a tabbed pane.
      *
+     * <p>
+     *  绘制包含选项卡式窗格的所选选项卡内容的区域的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1841,6 +2274,10 @@ public abstract class SynthPainter {
      * Paints the border of the area that contains the content of the
      * selected tab of a tabbed pane.
      *
+     * <p>
+     *  绘制包含选项卡式窗格的所选选项卡内容的区域的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1856,6 +2293,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of the header of a table.
      *
+     * <p>
+     *  描绘表头的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1872,6 +2313,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of the header of a table.
      *
+     * <p>
+     *  描画表头的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1888,6 +2333,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a table.
      *
+     * <p>
+     *  描绘表的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1904,6 +2353,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a table.
      *
+     * <p>
+     *  绘制表的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1920,6 +2373,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a text area.
      *
+     * <p>
+     *  描绘文本区域的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1936,6 +2393,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a text area.
      *
+     * <p>
+     *  绘制文本区域的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1952,6 +2413,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a text pane.
      *
+     * <p>
+     *  描绘文本窗格的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1968,6 +2433,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a text pane.
      *
+     * <p>
+     *  绘制文本窗格的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -1984,6 +2453,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a text field.
      *
+     * <p>
+     *  描绘文本字段的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2000,6 +2473,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a text field.
      *
+     * <p>
+     *  绘制文本字段的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2016,6 +2493,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a toggle button.
      *
+     * <p>
+     *  描绘切换按钮的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2032,6 +2513,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a toggle button.
      *
+     * <p>
+     *  绘制切换按钮的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2048,6 +2533,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a tool bar.
      *
+     * <p>
+     *  绘制工具栏的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2065,6 +2554,10 @@ public abstract class SynthPainter {
      * Paints the background of a tool bar. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     * 绘制工具栏的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2085,6 +2578,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a tool bar.
      *
+     * <p>
+     *  绘制工具栏的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2102,6 +2599,10 @@ public abstract class SynthPainter {
      * Paints the border of a tool bar. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制工具栏的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2122,6 +2623,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of the tool bar's content area.
      *
+     * <p>
+     *  描绘工具栏内容区域的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2139,6 +2644,10 @@ public abstract class SynthPainter {
      * Paints the background of the tool bar's content area. This implementation
      * invokes the method of the same name without the orientation.
      *
+     * <p>
+     *  描绘工具栏内容区域的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2159,6 +2668,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of the content area of a tool bar.
      *
+     * <p>
+     *  绘制工具栏的内容区域的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2176,6 +2689,10 @@ public abstract class SynthPainter {
      * Paints the border of the content area of a tool bar. This implementation
      * invokes the method of the same name without the orientation.
      *
+     * <p>
+     *  绘制工具栏的内容区域的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2197,6 +2714,10 @@ public abstract class SynthPainter {
      * Paints the background of the window containing the tool bar when it
      * has been detached from its primary frame.
      *
+     * <p>
+     *  绘制包含工具栏的窗口与主框架分离时的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2215,6 +2736,10 @@ public abstract class SynthPainter {
      * has been detached from its primary frame. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制包含工具栏的窗口与主框架分离时的背景。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2236,6 +2761,10 @@ public abstract class SynthPainter {
      * Paints the border of the window containing the tool bar when it
      * has been detached from it's primary frame.
      *
+     * <p>
+     *  绘制包含工具栏的窗口已从主框架分离时的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2254,6 +2783,10 @@ public abstract class SynthPainter {
      * has been detached from it's primary frame. This implementation invokes the
      * method of the same name without the orientation.
      *
+     * <p>
+     *  绘制包含工具栏的窗口已从主框架分离时的边框。这个实现调用没有方向的同名方法。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2274,6 +2807,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a tool tip.
      *
+     * <p>
+     *  绘制工具提示的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2290,6 +2827,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a tool tip.
      *
+     * <p>
+     *  绘制刀尖的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2306,6 +2847,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of a tree.
      *
+     * <p>
+     *  画一棵树的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2322,6 +2867,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a tree.
      *
+     * <p>
+     *  画一棵树的边界。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2338,6 +2887,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of the row containing a cell in a tree.
      *
+     * <p>
+     *  在树中绘制包含单元格的行的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2354,6 +2907,10 @@ public abstract class SynthPainter {
     /**
      * Paints the border of the row containing a cell in a tree.
      *
+     * <p>
+     * 在树中绘制包含单元格的行的边框。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2370,6 +2927,10 @@ public abstract class SynthPainter {
     /**
      * Paints the focus indicator for a cell in a tree when it has focus.
      *
+     * <p>
+     *  在树中的单元格具有焦点时绘制聚焦指示符。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2386,6 +2947,10 @@ public abstract class SynthPainter {
     /**
      * Paints the background of the viewport.
      *
+     * <p>
+     *  绘制视口的背景。
+     * 
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to
@@ -2402,6 +2967,9 @@ public abstract class SynthPainter {
     /**
      * Paints the border of a viewport.
      *
+     * <p>
+     *  绘制视口的边框。
+     * 
      * @param context SynthContext identifying the <code>JComponent</code> and
      *        <code>Region</code> to paint to
      * @param g <code>Graphics</code> to paint to

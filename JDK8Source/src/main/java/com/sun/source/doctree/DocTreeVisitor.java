@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,12 @@ package com.sun.source.doctree;
  * interface may be source incompatible with future versions of the
  * platform.
  *
+ * <p>
+ *  树的访客,以访客设计样式的样式。实现此接口的类用于在树在编译时未知的情况下对树进行操作。
+ * 当访问者传递到树{@link DocTree#accept accept}方法时,会调用最适用于该树的<tt>访问<i> XYZ </i> </tt>方法。
+ * 
+ *  <p>实现此接口的类可能会抛出一个{@code NullPointerException},如果附加参数{@code p}是{@code null};有关详细信息,请参阅实现类的文档。
+ * 
  * @param <R> the return type of this visitor's methods.  Use {@link
  *            Void} for visitors that do not need to return results.
  * @param <P> the type of the additional parameter to this visitor's

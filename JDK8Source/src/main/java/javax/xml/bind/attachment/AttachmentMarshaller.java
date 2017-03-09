@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,21 @@ import javax.xml.bind.Marshaller;
  * {http://ws-i.org/profiles/basic/1.1/xsd}swaRef.</p>
  *
  *
+ * <p>
+ *  <p>启用JAXB编组以优化二进制数据的存储。</p>
+ * 
+ *  <p>此API支持在JAXB编组过程和基于MIME的包处理器之间高效协作地创建优化的二进制数据格式。
+ *  JAXB实现调度基于MIME的包的根体,将可引用的MIME部分的创建委托给实现此抽象的基于MIME的包处理器。</p>。
+ * 
+ *  <p>当{@link #isXOPPackage()}为true时,将启用XOP处理。
+ * 有关详情,请参见{@link #addMtomAttachment(DataHandler,String,String)}。
+ * </p>
+ * 
+ *  <p>由编程者为与{http://ws-i.org/profiles/basic/1.1/xsd相关的每个JAXB属性调用的{@link #addSwaRefAttachment(DataHandler)}
+ * 支持WS-I Attachment Profile 1.0 } swaRef。
+ * </p>。
+ * 
+ * 
  * @author Marc Hadley
  * @author Kohsuke Kawaguchi
  * @author Joseph Fialli
@@ -92,6 +108,30 @@ public abstract class AttachmentMarshaller {
      * be used by the MIME-based package processor to determine if the
      * binary data should be inlined or optimized as an attachment.
      *
+     * <p>
+     *  <p>考虑MIME内容<code> data </code>,将优化的二进制存储作为附件。
+     * 
+     * <p>
+     *  对于数据类型为"base64Binary"的每个元素,{@link #isXOPPackage()}为<code> true </code>时,此方法由JAXB marshal进程调用,如<a href = //www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages">
+     * 创建XOP套件</a>。
+     * 
+     * <p>
+     * 方法实现者确定<code> data </code>是单独附加还是作为base64Binary数据内联。
+     * 如果实现选择优化二进制数据作为MIME部分的存储,则它负责将<code> data </code>附加到基于MIME的包,然后分配唯一的content-id cid, MIME消息中的MIME部分。
+     * 此方法返回cid,它使JAXB编组程序能够编组引用该cid的XOP元素,而不是编组二进制数据。
+     * 当方法返回null时,JAXB marshaller将<code> data </code>嵌入为base64二进制数据。
+     * 
+     * <p>
+     *  此方法的调用者需要满足以下约束。
+     * 如果包含<code> data </code>的元素信息集项具有属性<code> xmime：contentType </code>或者如果表示<code> data </code>的JAXB属性/字段
+     * 用已知MIME类型,<code> data.getContentType()</code>应设置为该MIME类型。
+     *  此方法的调用者需要满足以下约束。
+     * 
+     * <p>
+     *  <code> elementNamespace </code>和<code> elementLocalName </code>参数提供包含二进制数据的上下文。
+     * 该信息可以由基于MIME的包处理器使用以确定二进制数据是否应当作为附件内联或优化。
+     * 
+     * 
      * @param data
      *       represents the data to be attached. Must be non-null.
      * @param elementNamespace
@@ -121,6 +161,16 @@ public abstract class AttachmentMarshaller {
      * be used by the MIME-based package processor to determine if the
      * binary data should be inlined or optimized as an attachment.
      *
+     * <p>
+     *  <p>将二进制<code>数据</code>考虑为优化的二进制存储作为附件。
+     * 
+     *  <p>由于内容类型未知,附件的MIME内容类型必须设置为"application / octet-stream"。</p>
+     * 
+     * <p>
+     * <code> elementNamespace </code>和<code> elementLocalName </code>参数提供包含二进制数据的上下文。
+     * 该信息可以由基于MIME的包处理器使用以确定二进制数据是否应当作为附件内联或优化。
+     * 
+     * 
      * @param data
      *      represents the data to be attached. Must be non-null. The actual data region is
      *      specified by <tt>(data,offset,length)</tt> tuple.
@@ -174,6 +224,19 @@ public abstract class AttachmentMarshaller {
      * Step 5 of
      * <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages">Creating XOP Pacakges</a>.<p>
      *
+     * <p>
+     *  <p>只读属性,如果JAXB marshaller应启用XOP创建,则返回true。</p>
+     * 
+     *  <p>此值在编组过程中不能更改。当此值为true时,当marshal进程遇到相应的二进制数据类型时,调用<code> addMtomAttachment(...)</code>方法。</p>
+     * 
+     *  <p>如果此值为<code> true </code>,则Marshaller.marshal()必须抛出IllegalStateException,并且要编组的XML内容违反了<a href ="http://www.w3.org/TR中的步骤1 / 2005 / REC-xop10-20050125 /#creating_xop_packages">
+     * 创建XOP Pacakges </a> http://www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages。
+     *  <i>"确保原始XML信息集不包含[名称空间名称]为"http://www.w3.org/2004/08/xop/include"的元素信息项,且包含[本地名称]为Include"< / i>。
+     * 
+     *  <p>当此方法返回true且在编组过程中,至少一次调用<code> addMtomAttachment(...)</code>返回一个content-id时,基于MIME的包处理器必须使用applic
+     * ation / xop + xml媒体类型,如<a href="http://www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages">
+     * 创建XOP Pacakges </a>的步骤5中所述。
+     * 
      * @return true when MIME context is a XOP Package.
      */
     public boolean isXOPPackage() { return false; }
@@ -190,6 +253,10 @@ public abstract class AttachmentMarshaller {
     *
     * <p>Caller inserts the returned content-id, cid, into the XML content being marshalled.</p>
     *
+    * <p>
+    *  <p>。
+    * 
+    * 
     * @param data
     *       represents the data to be attached. Must be non-null.
     * @return

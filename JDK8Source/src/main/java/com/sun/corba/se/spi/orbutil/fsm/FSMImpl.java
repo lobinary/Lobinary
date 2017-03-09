@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import com.sun.corba.se.spi.orbutil.fsm.FSM ;
  * using a state engine.  It may be used as a base class, in which case
  * the guards and actions have access to the derived class.
  *
+ * <p>
+ *  这是表示使用状态引擎的状态机的实例的主类。它可以用作基类,在这种情况下,守卫和动作都可以访问派生类。
+ * 
+ * 
  * @author Ken Cavanaugh
  */
 public class FSMImpl implements FSM
@@ -49,6 +54,9 @@ public class FSMImpl implements FSM
 
     /** Create an instance of an FSM using the StateEngine
     * in a particular start state.
+    * <p>
+    *  在特定的开始状态。
+    * 
     */
     public FSMImpl( StateEngine se, State startState )
     {
@@ -63,6 +71,7 @@ public class FSMImpl implements FSM
     }
 
     /** Return the current state.
+    /* <p>
     */
     public State getState()
     {
@@ -86,6 +95,12 @@ public class FSMImpl implements FSM
     * <li>Execute the action.
     * <li>If the next state is not the current state, execute the next state preAction method.
     * <li>Set the current state to the next state.
+    * </ol>
+    * <p>
+    *  <p>令S是FSM的当前状态。如果有输入的S的保护动作,连续评估它们的保护,直到所有已经被评估,或者一个返回一个非DISABLED结果。
+    * <ol>
+    *  <li>如果返回DEFERED结果,请重试输入<li>如果返回ENABLED结果,则受保护操作的操作是当前操作<li>否则,没有已启用的操作。
+    * 如果S具有默认动作和下一状态,则使用它们;否则使用状态引擎默认动作(下一个状态总是当前状态)。
     * </ol>
     */
     public void doIt( Input in )

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -107,6 +108,35 @@ public class SwitchPoint {
   }
 }
  * }</pre></blockquote>
+ * <p>
+ * <p>
+ *  {@code SwitchPoint}是一个可以将状态转换发布到其他线程的对象。开关点最初处于<em>有效</em>状态,但可以随时更改为<em>无效</em>状态。无效无效。
+ * 切换点可以将方法句柄的<em>保护对</em>组合到<em>守卫的委托者</em>中。受保护的委托器是一个方法句柄,它委托给其中一个旧的方法句柄。切换点的状态确定两个中的哪一个获得委派。
+ * <p>
+ *  单个开关点可以用于控制任何数量的方法句柄。 (间接地,因此,它可以控制任何数量的调用站点。)这是通过使用单个切换点作为工厂来组合任何数量的守卫方法句柄对到守护委托者。
+ * <p>
+ *  当受保护的委托者从保护对创建时,该对被包裹在一个新的方法句柄{@code M}中,它与创建它的交换点永久相关联。每个对由目标{@code T}和后备{@code F}组成。
+ * 当切换点有效时,对{@code M}的调用将委派给{@code T}。在它失效后,调用委托给{@code F}。
+ * <p>
+ * 无效是全局的和立即的,就像切换点包含一个易失的布尔变量,在每次调用{@code M}时都会查询。无效也是永久的,这意味着切换点只能改变状态一次。切换点在被无效后总是委托给{@code F}。
+ * 此时{@code guardWithTest}可能会忽略{@code T}并返回{@code F}。
+ * <p>
+ *  下面是一个切换点的示例：<blockquote> <pre> {@ code MethodHandle MH_strcat = MethodHandles.lookup().findVirtual(String.class,"concat",MethodType.methodType(String.class,String.class )); SwitchPoint spt = new SwitchPoint(); assert(！spt.hasBeenInvalidated()); //以下步骤可以重复使用同一个切换点：MethodHandle worker1 = MH_strcat; MethodHandle worker2 = MethodHandles.permuteArguments(MH_strcat,MH_strcat.type(),1,0); MethodHandle worker = spt.guardWithTest(worker1,worker2); assertEquals("method",(String)worker.invokeExact("met","hod")); SwitchPoint.invalidateAll(new SwitchPoint [] {spt}
+ * ); assert(spt.hasBeenInvalidated()); assertEquals("hodmet",(String)worker.invokeExact("met","hod")); 
+ * } </pre> </blockquote>。
+ * <p style="font-size:smaller;">
+ * <em>讨论：</em>切换点在没有子类化的情况下很有用。它们也可以是子类。这可以有用于将应用特定的无效逻辑与切换点相关联。请注意,在切换点和方法处理它产生和消耗之间没有永久关联。
+ * 垃圾收集器可以独立于切换点本身的寿命而收集由切换点产生或消耗的方法句柄。
+ * <p style="font-size:smaller;">
+ * <em>实现注意：</em>切换点的行为好像是在{@link MutableCallSite}上实现的,大致如下：<blockquote> <pre> {@ code public class SwitchPoint {private static MethodHandle K_true = MethodHandles .constant(boolean.class,true),K_false = MethodHandles.constant(boolean.class,false); private final MutableCallSite mcs; private final MethodHandle mcsInvoker; public SwitchPoint(){this.mcs = new MutableCallSite(K_true); this.mcsInvoker = mcs.dynamicInvoker(); }
+ *  public MethodHandle guardWithTest(MethodHandle target,MethodHandle fallback){//注意：mcsInvoker是type()boolean。
+ *  //目标和回退可以接受任何参数,但必须具有相同的类型。
+ *  return MethodHandles.guardWithTest(this.mcsInvoker,target,fallback); } public static void invalidate
+ * All(SwitchPoint [] spts){List&lt; MutableCallSite&gt; mcss = new ArrayList&lt;&gt;(); for(SwitchPoint spt：spts)mcss.add(spt.mcs); for(MutableCallSite mcs：mcss)mcs.setTarget(K_false); MutableCallSite.syncAll(mcss.toArray(new MutableCallSite [0])); }
+ * }} </pre> </blockquote>。
+ *  //目标和回退可以接受任何参数,但必须具有相同的类型。
+ * 
+ * 
  * @author Remi Forax, JSR 292 EG
  */
 public class SwitchPoint {
@@ -119,6 +149,9 @@ public class SwitchPoint {
 
     /**
      * Creates a new switch point.
+     * <p>
+     *  创建一个新的切换点。
+     * 
      */
     public SwitchPoint() {
         this.mcs = new MutableCallSite(K_true);
@@ -146,6 +179,19 @@ public class SwitchPoint {
      * to call {@code s.guardWithTest} on
      * {@link MethodHandles#constant constant} true and false method handles.
      *
+     * <p>
+     *  确定此切换点是否已失效。
+     * 
+     * <p style="font-size:smaller;">
+     *  <em>讨论：</em>由于无效的单向性质,一旦切换点开始为{@code hasBeenInvalidated}返回true,它将来总是这样做。
+     * 另一方面,由于另一个线程的请求,在其他线程可见的有效切换点可能在任何时刻被无效。
+     * <p style="font-size:smaller;">
+     * 由于无效是全局和立即操作,因此在有效交换点上执行此查询必须与可能导致无效的任何其他线程内部排序。因此,该查询可能是昂贵的。
+     * 建立一个查询切换点{@code s}的无效状态的布尔值方法句柄的建议方法是在{@link MethodHandles#constant constant} true和false方法句柄上调用{@code s.guardWithTest}
+     * 。
+     * 由于无效是全局和立即操作,因此在有效交换点上执行此查询必须与可能导致无效的任何其他线程内部排序。因此,该查询可能是昂贵的。
+     * 
+     * 
      * @return true if this switch point has been invalidated
      */
     public boolean hasBeenInvalidated() {
@@ -160,6 +206,12 @@ public class SwitchPoint {
      * The target and fallback must be of exactly the same method type,
      * and the resulting combined method handle will also be of this type.
      *
+     * <p>
+     *  返回一个方法句柄,它总是委派给目标或回退。只要切换点有效,方法句柄就会完全委派给目标。之后,它将永久委派给后备。
+     * <p>
+     *  目标和后备必须具有完全相同的方法类型,并且生成的组合方法句柄也将是此类型。
+     * 
+     * 
      * @param target the method handle selected by the switch point as long as it is valid
      * @param fallback the method handle selected by the switch point after it is invalidated
      * @return a combined method handle which always calls either the target or fallback
@@ -210,6 +262,17 @@ public class SwitchPoint {
      * {@linkplain MutableCallSite#syncAll synchronize} all the
      * private call sites.
      *
+     * <p>
+     *  将所有给定的切换点设置为无效状态。在该调用执行之后,没有线程将观察到任何切换点处于有效状态。
+     * <p>
+     *  这种操作可能是昂贵的,应该谨慎使用。如果可能,应缓冲它用于对多组切换点进行批处理。
+     * <p>
+     *  如果{@code switchPoints}包含一个空元素,将会引发{@code NullPointerException}。在这种情况下,可以在该方法异常返回之前处理数组中的一些非空元素。
+     * 这些元素(如果有的话)是与实现相关的。
+     * 
+     * <p style="font-size:smaller;">
+     * <em>讨论：</em>出于性能原因,{@code invalidateAll}不是单个切换点上的虚拟方法,而是适用于一组切换点。
+     * 
      * @param switchPoints an array of call sites to be synchronized
      * @throws NullPointerException if the {@code switchPoints} array reference is null
      *                              or the array contains a null

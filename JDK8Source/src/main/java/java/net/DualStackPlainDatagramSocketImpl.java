@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ import sun.misc.JavaIOFileDescriptorAccess;
  * TwoStacksPlainDatagramSocketImpl. This is to overcome the lack
  * of behavior defined for multicasting over a dual layer socket by the RFC.
  *
+ * <p>
+ *  此类定义了在大于或等于Windows Vista的Windows平台上使用的普通DatagramSocketImpl。
+ * 这些平台具有双层TCP / IP堆栈,并且可以通过单个文件描述符处理IPv4和IPV6。
+ * <p>
+ *  注意：在双层TCP / IP堆栈上的组播始终由TwoStacksPlainDatagramSocketImpl完成。这是为了克服由RFC定义的通过双层套接字的多播的行为的缺乏。
+ * 
+ * 
  * @author Chris Hegarty
  */
 
@@ -51,6 +59,9 @@ class DualStackPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
     /*
      * Set to true if SO_REUSEADDR is set after the socket is bound to
      * indicate SO_REUSEADDR is being emulated
+     * <p>
+     *  如果在绑定套接字以指示正在模拟SO_REUSEADDR之后设置SO_REUSEADDR,那么设置为true
+     * 
      */
     private boolean reuseAddressEmulated;
 
@@ -106,6 +117,29 @@ class DualStackPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
         if (p.getData() == null)
             throw new NullPointerException("packet buffer");
 
+        int newfd = socketCreate(false /* <p>
+        int newfd = socketCreate(false /*  fdAccess.set(fd,newfd); }}
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /*  protected void bind0(int lport,InetAddress laddr)throws SocketException {int nativefd = checkAndReturnNativeFD();。
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /*  if(laddr == null)throw new NullPointerException("argument address");
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /*  socketBind(nativefd,laddr,lport,exclusiveBind); if(lport == 0){localPort = socketLocalPort(nativefd); }
+        int newfd = socketCreate(false /*  else {localPort = lport; }}。
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /*  protected InetAddress address(InetAddress address)throws IOException {int nativefd = checkAndReturnNativeFD();。
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /*  if(address == null)throw new NullPointerException("Null address in peek()");
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /*  // Use peekData()DatagramPacket peekPacket = new DatagramPacket(new byte [1],1); int peekPort = peek
+        int newfd = socketCreate(false /* Data(peekPacket); address = peekPacket.getAddress(); return peekPort; }}。
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /* protected synchronized int peekData(DatagramPacket p)throws IOException {int nativefd = checkAndReturnNativeFD();。
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /*  if(p == null)throw new NullPointerException("packet"); if(p.getData()== null)throw new NullPointerEx
+        int newfd = socketCreate(false /* ception("packet buffer");。
+        int newfd = socketCreate(false /* 
+        int newfd = socketCreate(false /* 
         return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /*peek*/);
     }
 
@@ -117,6 +151,15 @@ class DualStackPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
         if (p.getData() == null)
             throw new NullPointerException("packet buffer");
 
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /* <p>
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /*  }}
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /* 
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /*  protected synchronized void receive0(DatagramPacket p)throws IOException {int nativefd = checkAndReturnNativeFD();。
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /* 
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /*  if(p == null)throw new NullPointerException("packet"); if(p.getData()== null)throw new NullPointerEx
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /* ception("packet buffer");。
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /* 
+        return socketReceiveOrPeekData(nativefd, p, timeout, connected, true /* 
         socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*receive*/);
     }
 
@@ -142,6 +185,26 @@ class DualStackPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
         socketConnect(nativefd, address, port);
     }
 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* <p>
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*  }}
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*  protected void send(DatagramPacket p)throws IOException {int nativefd = checkAndReturnNativeFD();
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*  if(p == null)throw new NullPointerException("null packet");
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*  if(p.getAddress()== null || p.getData()== null)throw new NullPointerException("null address || null 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* buffer");。
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*  socketSend(nativefd,p.getData(),p.getOffset(),p.getLength(),p.getAddress(),p.getPort(),connected); }
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* }。
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*  protected void connect0(InetAddress address,int port)throws SocketException {int nativefd = checkAndReturnNativeFD();。
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*  if(address == null)throw new NullPointerException("address");
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /*  socketConnect(nativefd,address,port); }}
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
+        socketReceiveOrPeekData(nativefd, p, timeout, connected, false /* 
     protected void disconnect0(int family /*unused*/) {
         if (fd == null || !fd.valid())
             return;   // disconnect doesn't throw any exceptions
@@ -180,6 +243,18 @@ class DualStackPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
             case SO_BROADCAST :
                 optionValue = ((Boolean)val).booleanValue() ? 1 : 0;
                 break;
+    protected void disconnect0(int family /* <p>
+    protected void disconnect0(int family /*  if(fd == null ||！fd.valid())return; // disconnect不会抛出任何异常
+    protected void disconnect0(int family /* 
+    protected void disconnect0(int family /*  socketDisconnect(fdAccess.get(fd)); }}
+    protected void disconnect0(int family /* 
+    protected void disconnect0(int family /*  protected void datagramSocketClose(){if(fd == null ||！fd.valid())return; // close不会抛出任何异常
+    protected void disconnect0(int family /* 
+    protected void disconnect0(int family /*  socketClose(fdAccess.get(fd)); fdAccess.set(fd,-1); }}
+    protected void disconnect0(int family /* 
+    protected void disconnect0(int family /* @SuppressWarnings("fallthrough")protected void socketSetOption(int opt,Object val)throws SocketExcept
+    protected void disconnect0(int family /* ion {int nativefd = checkAndReturnNativeFD();。
+    protected void disconnect0(int family /* 
             default: /* shouldn't get here */
                 throw new SocketException("Option not supported");
         }
@@ -221,6 +296,12 @@ class DualStackPlainDatagramSocketImpl extends AbstractPlainDatagramSocketImpl
      * Multicasting on a dual layer TCP/IP stack is always done with
      * TwoStacksPlainDatagramSocketImpl. This is to overcome the lack
      * of behavior defined for multicasting over a dual layer socket by the RFC.
+     * <p>
+     * 
+     *  int optionValue = 0;
+     * 
+     *  switch(opt){case IP_TOS：case SO_RCVBUF：case SO_SNDBUF：optionValue =((Integer)val).intValue();打破; case SO_REUSEADDR：if(exclusiveBind && localPort！= 0){//套接字已绑定,模拟SO_REUSEADDR reuseAddressEmulated = true; isReuseAddress =(Boolean)val;返回; }
+     *  //意图fallthrough case SO_BROADCAST：optionValue =((Boolean)val).booleanValue()? 1：0;打破;。
      */
     protected void join(InetAddress inetaddr, NetworkInterface netIf)
         throws IOException {

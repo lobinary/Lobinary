@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -26,6 +27,8 @@
 package org.omg.CORBA.DynAnyPackage;
 
 /**
+/* <p>
+/* 
  * @author unattributed
  *
  * Dynamic Any insert operations raise the <code>InvalidValue</code>
@@ -37,6 +40,9 @@ public final class InvalidValue
 
     /**
      * Constructs an <code>InvalidValue</code> object.
+     * <p>
+     *  构造一个<code> InvalidValue </code>对象。
+     * 
      */
     public InvalidValue() {
         super();
@@ -44,6 +50,9 @@ public final class InvalidValue
 
     /**
      * Constructs an <code>InvalidValue</code> object.
+     * <p>
+     *  构造一个<code> InvalidValue </code>对象。
+     * 
      * @param reason  a <code>String</code> giving more information
      * regarding the exception.
      */

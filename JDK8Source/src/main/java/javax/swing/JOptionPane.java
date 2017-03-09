@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -301,6 +302,144 @@ import static javax.swing.ClientPropertyKey.PopupFactory_FORCE_HEAVYWEIGHT_POPUP
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> JOptionPane </code>可以很容易地弹出一个标准对话框,提示用户输入一个值或者告诉他们某些东西。
+ * 有关使用<code> JOptionPane </code>的信息,请参阅<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html">
+ * 如何创建对话</a> ,在Java教程</em>中的一个部分。
+ *  <code> JOptionPane </code>可以很容易地弹出一个标准对话框,提示用户输入一个值或者告诉他们某些东西。
+ * 
+ * <p>
+ * 
+ *  虽然<code> JOptionPane </code>类可能因为大量方法而显得复杂,但是这个类的几乎所有使用都是对下面所示的静态<code> showXxxDialog </code>方法之一的单行
+ * 调用：。
+ * <blockquote>
+ * 
+ * <table border=1 summary="Common JOptionPane method names and their descriptions">
+ * <tr>
+ *  <th>方法名称</th> <th>描述</th>
+ * </tr>
+ * <tr>
+ *  <td> showConfirmDialog </td> <td>询问确认问题,例如yes / no / cancel。</td>
+ * </tr>
+ * <tr>
+ *  <td> showInputDialog </td> <td>提示输入。</td>
+ * </tr>
+ * <tr>
+ *  <td> showMessageDialog </td> <td>告诉用户发生了什么。</td>
+ * </tr>
+ * <tr>
+ *  <td> showOptionDialog </td> <td>上述三种的大统一。</td>
+ * </tr>
+ * </table>
+ * 
+ * </blockquote>
+ *  这些方法中的每一个都有一个<code> showInternalXXX </code> flavor,它使用一个内部框架来保存对话框(参见{@link JInternalFrame})。
+ * 还定义了多个方便的方法 - 使用不同参数列表的基本方法的重载版本。
+ * <p>
+ *  所有对话框都是模态的。每个<code> showXxxDialog </code>方法阻止调用者,直到用户的交互完成。
+ * 
+ * <table cellspacing=6 cellpadding=4 border=0 style="float:right" summary="layout">
+ * <tr>
+ * <td style ="background-color：#FFe0d0"rowspan = 2>图标</td> <td style ="background-color：#FFe0d0">消息</td>
+ * 。
+ * </tr>
+ * <tr>
+ *  <td style ="background-color：#FFe0d0">输入值</td>
+ * </tr>
+ * <tr>
+ *  <td style ="background-color：#FFe0d0"colspan = 2>选项按钮</td>
+ * </tr>
+ * </table>
+ * 
+ *  这些对话框之一的基本外观通常类似于右侧的图片,尽管各种外观和感觉最终对最终结果负责。特别地,外观将调整布局以适应选项窗格的<code> ComponentOrientation </code>属性。
+ * <br style="clear:all">
+ * <p>
+ *  <b>参数：</b> <br>这些方法的参数遵循一致的模式：
+ * <blockquote>
+ * <dl compact>
+ *  <dt> parentComponent <dd>定义要作为此对话框的父代的<code> Component </code>。
+ * 它以两种方式使用：包含它的<code> Frame </code>用作对话框的<code> Frame </code>父对象,其屏幕坐标用于对话框的放置。通常,对话框放置在组件的正下方。
+ * 此参数可以是<code> null </code>,在这种情况下,使用默认的<code> Frame </code>作为父对象,对话框将以屏幕为中心(取决于{@literal L&F} )。
+ *  <dt> <a name=message> message </a> <dd>要在对话框中显示的描述性消息。
+ * 在最常见的用法中,消息只是一个<code> String </code>或<code> String </code>常量。但是,此参数的类型实际上是<code> Object </code>。
+ * 其解释取决于其类型：。
+ * <dl compact>
+ * <dt> Object [] <dd>对象数组被解释为一系列排列在垂直堆栈中的消息(每个对象一个)。解释是递归的 - 数组中的每个对象都根据其类型进行解释。
+ *  <dt>组件<dd> <code>组件</code>显示在对话框中。 <dt>图标<dd> <code>图标</code>包裹在<code> JLabel </code>中,并显示在对话框中。
+ *  <dt>其他<dd>通过调用<code> toString </code>方法将对象转换为<code> String </code>。
+ * 结果被包装在一个<code> JLabel </code>中并显示。
+ * </dl>
+ *  <dt> messageType <dd>定义消息的样式。 Look and Feel管理器可以根据此值不同地布置对话框,并且通常会提供默认图标。可能的值为：
+ * <ul>
+ *  <li> <code> <code> ERROR_MESSAGE </code> <li> <code> INFORMATION_MESSAGE </code> <li> <code> WARNING
+ * _MESSAGE </code> PLAIN_MESSAGE </code>。
+ * </ul>
+ *  <dt> optionType <dd>定义出现在对话框底部的一组选项按钮：
+ * <ul>
+ *  <li> <code> DEFAULT_OPTION </code> <li> <code> YES_NO_OPTION </code> <li> <code> YES_NO_CANCEL_OPTIO
+ * N </code> <li> <code> OK_CANCEL_OPTION </code>。
+ * </ul>
+ * 您不限于此组选项按钮。您可以使用options参数提供所需的任何按钮。 <dt> options <dd>将出现在对话框底部的一组选项按钮的更详细描述。
+ *  options参数的通常值是<code> String </code> s的数组。但是参数类型是<code> Objects </code>的数组。根据其类型为每个对象创建一个按钮：。
+ * <dl compact>
+ *  <dt>组件<dd>组件直接添加到按钮行。 <dt>图标<dd>使用此标签作为<code> JButton </code>。
+ *  <dt> other <dd>使用<code> toString </code>方法将<code> Object </code>转换为字符串,结果用于标记<code> JButton </code>。
+ *  <dt>组件<dd>组件直接添加到按钮行。 <dt>图标<dd>使用此标签作为<code> JButton </code>。
+ * </dl>
+ *  <dt>图标<dd>要放置在对话框中的装饰图标。此值的默认值由<code> messageType </code>参数确定。 <dt> title <dd>对话框的标题。
+ *  <dt> initialValue <dd>默认选择(输入值)。
+ * </dl>
+ * </blockquote>
+ * <p>
+ *  当选择被改变时,调用<code> setValue </code>,其产生<code> PropertyChangeEvent </code>。
+ * <p>
+ *  如果<code> JOptionPane </code>已配置为所有输入<code> setWantsInput </code>,也可以侦听绑定属性<code> JOptionPane.INPUT_V
+ * ALUE_PROPERTY </code>,以确定用户何时输入选择一个值。
+ * <p>
+ *  当<code> showXxxDialog </code>方法之一返回一个整数时,可能的值为：
+ * <ul>
+ * <li> <code> YES_OPTION </code> <li> <code> NO_OPTION </code> <li> <code> CANCEL_OPTION </code> <li> <code>
+ *  OK_OPTION </code> <li> <code> CLOSED_OPTION </code>。
+ * </ul>
+ *  <b>示例：</b>
+ * <dl>
+ *  <dt>显示一个显示消息"alert"的错误对话框：<dd> <code> JOptionPane.showMessageDialog(null,"alert","alert",JOptionPane
+ * .ERROR_MESSAGE);。
+ * </code>
+ *  <dt>使用消息"information"显示内部信息对话框：<dd> <pre> JOptionPane.showInternalMessageDialog(frame,"information",
+ * "information",JOptionPane.INFORMATION_MESSAGE);。
+ * </pre>
+ *  <dt>显示一个带有选项yes / no和消息'choose one'的信息面板：<dd> <pre> JOptionPane.showConfirmDialog(null,"choose one",
+ * "choose one",JOptionPane.YES_NO_OPTION);。
+ * </pre>
+ *  <dt>显示内部信息对话框,其中包含选项是/否/取消和消息"请选择一个"和标题信息：<dd> <pre> JOptionPane.showInternalConfirmDialog(frame,"请选
+ * 择一个","信息",JOptionPane .YES_NO_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);。
+ * </pre>
+ *  <dt>显示一个警告对话框,其中包含确定,取消,标题'警告'和消息'单击确定以继续'：<dd> <pre> Object [] options = {"OK","CANCEL"}; JOptionPa
+ * ne.showOptionDialog(null,"单击确定继续","警告",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,选项
+ * ,选项[0]);。
+ * </pre>
+ *  <dt>显示一个对话框,要求用户键入一个字符串：<dd> <code> String inputValue = JOptionPane.showInputDialog("请输入值");
+ * </code>
+ * <dt>显示一个对话框,要求用户选择一个字符串：<dd> <pre> Object [] possibleValues = {"First","Second","Third"}; <br> Object
+ *  selectedValue = JOptionPane.showInputDialog ,"Choose one","Input",JOptionPane.INFORMATION_MESSAGE,nu
+ * ll,possibleValues,possibleValues [0]); </pre> <p>。
+ * </dl>
+ *  <b>直接使用：</b> <br>要直接创建和使用<code> JOptionPane </code>,标准模式大致如下：
+ * <pre>
+ *  JOptionPane pane = new JOptionPane(<i> arguments </i>); pane.set <i> .Xxxx(...); // Configure </i> J
+ * Dialog dialog = pane.createDialog(<i> parentComponent,title </i>); dialog.show(); Object selectedValu
+ * e = pane.getValue(); if(selectedValue == null)return CLOSED_OPTION; </i> if(options == null){if(selectedValue instanceof Integer)return((Integer)selectedValue).intValue() ); return CLOSED_OPTION; }
+ * 如果有一个选项按钮的数组：</i> for(int counter = 0,maxCounter = options.length; counter&lt; maxCounter; counter ++
+ * ){if(options [counter] .equals(selectedValue ))return counter; } return CLOSED_OPTION;。
+ * </pre>
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的。有关详情,请参阅<a href="package-summary.html#threading"> Swing的线程策略</a>。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see JInternalFrame
  *
  * @beaninfo
@@ -313,6 +452,8 @@ import static javax.swing.ClientPropertyKey.PopupFactory_FORCE_HEAVYWEIGHT_POPUP
 public class JOptionPane extends JComponent implements Accessible
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
@@ -320,6 +461,9 @@ public class JOptionPane extends JComponent implements Accessible
 
     /**
      * Indicates that the user has not yet selected a value.
+     * <p>
+     *  表示用户尚未选择值。
+     * 
      */
     public static final Object      UNINITIALIZED_VALUE = "uninitializedValue";
 
@@ -330,6 +474,9 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Type meaning Look and Feel should not supply any options -- only
      * use the options from the <code>JOptionPane</code>.
+     * <p>
+     *  类型含义Look and Feel不应该提供任何选项 - 只使用来自<code> JOptionPane </code>的选项。
+     * 
      */
     public static final int         DEFAULT_OPTION = -1;
     /** Type used for <code>showConfirmDialog</code>. */
@@ -352,6 +499,10 @@ public class JOptionPane extends JComponent implements Accessible
     public static final int         OK_OPTION = 0;
     /** Return value from class method if user closes window without selecting
      * anything, more than likely this should be treated as either a
+     * <p>
+     *  任何东西,更可能这应该被视为一个
+     * 
+     * 
      * <code>CANCEL_OPTION</code> or <code>NO_OPTION</code>. */
     public static final int         CLOSED_OPTION = -1;
 
@@ -408,12 +559,20 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>YES_NO_OPTION</code>,
      * <code>YES_NO_CANCEL_OPTION</code> or
      * <code>OK_CANCEL_OPTION</code>.
+     * <p>
+     *  选项类型,<code> DEFAULT_OPTION </code>,<code> YES_NO_OPTION </code>,<code> YES_NO_CANCEL_OPTION </code>或
+     * <code> OK_CANCEL_OPTION </code>之一。
+     * 
      */
     protected int                   optionType;
     /** Currently selected value, will be a valid option, or
+    /* <p>
+    /* 
      * <code>UNINITIALIZED_VALUE</code> or <code>null</code>. */
     transient protected Object                value;
     /** Array of values the user can choose from. Look and feel will
+    /* <p>
+    /* 
      * provide the UI component to choose this from. */
     protected transient Object[]              selectionValues;
     /** Value the user has input. */
@@ -429,6 +588,10 @@ public class JOptionPane extends JComponent implements Accessible
      * dialog uses the default frame, which usually means it is centered on
      * the screen.
      *
+     * <p>
+     *  显示请求来自用户的输入的问题消息对话框。对话框使用默认框架,通常意味着它在屏幕上居中。
+     * 
+     * 
      * @param message the <code>Object</code> to display
      * @exception HeadlessException if
      *   <code>GraphicsEnvironment.isHeadless</code> returns
@@ -446,6 +609,10 @@ public class JOptionPane extends JComponent implements Accessible
      * dialog uses the default frame, which usually means it is centered on
      * the screen.
      *
+     * <p>
+     *  显示问询消息对话框,请求来自用户的输入,输入值初始化为<code> initialSelectionValue </code>。对话框使用默认框架,通常意味着它在屏幕上居中。
+     * 
+     * 
      * @param message the <code>Object</code> to display
      * @param initialSelectionValue the value used to initialize the input
      *                 field
@@ -461,6 +628,11 @@ public class JOptionPane extends JComponent implements Accessible
      * The dialog is displayed on top of the <code>Component</code>'s
      * frame, and is usually positioned below the <code>Component</code>.
      *
+     * <p>
+     *  显示问题消息对话框,请求来自用户父母为<component> parentComponent </code>的用户输入。
+     * 对话框显示在<code> Component </code>框架的顶部,通常位于<code> Component </code>下面。
+     * 
+     * 
      * @param parentComponent  the parent <code>Component</code> for the
      *          dialog
      * @param message  the <code>Object</code> to display
@@ -482,6 +654,11 @@ public class JOptionPane extends JComponent implements Accessible
      * The dialog is displayed on top of the <code>Component</code>'s
      * frame, and is usually positioned below the <code>Component</code>.
      *
+     * <p>
+     * 显示问询消息对话框,请求用户输入并置于<code> parentComponent </code>中。输入值将初始化为<code> initialSelectionValue </code>。
+     * 对话框显示在<code> Component </code>框架的顶部,通常位于<code> Component </code>下面。
+     * 
+     * 
      * @param parentComponent  the parent <code>Component</code> for the
      *          dialog
      * @param message the <code>Object</code> to display
@@ -502,6 +679,11 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>parentComponent</code> with the dialog having the title
      * <code>title</code> and message type <code>messageType</code>.
      *
+     * <p>
+     *  使用具有标题<code> title </code>和消息类型<code> messageType </code>的对话框,显示一个对话框,请求来自用户母体化为<code> parentCompone
+     * nt </code>的用户输入。
+     * 
+     * 
      * @param parentComponent  the parent <code>Component</code> for the
      *                  dialog
      * @param message  the <code>Object</code> to display
@@ -538,6 +720,16 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>JComboBox</code>, <code>JList</code>, or
      * <code>JTextField</code> will be used.
      *
+     * <p>
+     *  在阻止对话框中提示用户输入,其中可以指定初始选择,可能的选择和所有其他选项。
+     * 用户将能够从<code> selectionValues </code>中选择,其中<code> null </code>意味着用户可以通过<code> JTextField </code>输入任何他们
+     * 想要的内容。
+     *  在阻止对话框中提示用户输入,其中可以指定初始选择,可能的选择和所有其他选项。 <code> initialSelectionValue </code>是提示用户的初始值。
+     * 由UI决定如何最好地表示<code> selectionValues </code>,但通常是<code> JComboBox </code>,<code> JList </code>或<code> J
+     * TextField </code>代码>将被使用。
+     *  在阻止对话框中提示用户输入,其中可以指定初始选择,可能的选择和所有其他选项。 <code> initialSelectionValue </code>是提示用户的初始值。
+     * 
+     * 
      * @param parentComponent  the parent <code>Component</code> for the
      *                  dialog
      * @param message  the <code>Object</code> to display
@@ -593,6 +785,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Brings up an information-message dialog titled "Message".
      *
+     * <p>
+     *  打开一个名为"消息"的信息对话框。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code> in
      *          which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -614,6 +810,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Brings up a dialog that displays a message using a default
      * icon determined by the <code>messageType</code> parameter.
      *
+     * <p>
+     *  显示一个对话框,使用由<code> messageType </code>参数确定的默认图标显示消息。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code>
      *          in which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -640,6 +840,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Brings up a dialog displaying a message, specifying all parameters.
      *
+     * <p>
+     *  打开显示消息的对话框,指定所有参数。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code> in which the
      *                  dialog is displayed; if <code>null</code>,
      *                  or if the <code>parentComponent</code> has no
@@ -672,6 +876,10 @@ public class JOptionPane extends JComponent implements Accessible
      * <i>No</i> and <i>Cancel</i>; with the
      * title, <b>Select an Option</b>.
      *
+     * <p>
+     *  显示包含选项<i>是</i>,<i>否</i>和<i>取消</i>的对话框;标题为<b>选择选项</b>。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code> in which the
      *                  dialog is displayed; if <code>null</code>,
      *                  or if the <code>parentComponent</code> has no
@@ -695,6 +903,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Brings up a dialog where the number of choices is determined
      * by the <code>optionType</code> parameter.
      *
+     * <p>
+     * 打开一个对话框,其中的选择数由<code> optionType </code>参数决定。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code> in which the
      *                  dialog is displayed; if <code>null</code>,
      *                  or if the <code>parentComponent</code> has no
@@ -727,6 +939,11 @@ public class JOptionPane extends JComponent implements Accessible
      * The <code>messageType</code> parameter is primarily used to supply
      * a default icon from the Look and Feel.
      *
+     * <p>
+     *  打开一个对话框,其中选项数由<code> optionType </code>参数确定,其中<code> messageType </code>参数确定要显示的图标。
+     *  <code> messageType </code>参数主要用于从外观提供默认图标。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code> in
      *                  which the dialog is displayed; if <code>null</code>,
      *                  or if the <code>parentComponent</code> has no
@@ -764,6 +981,10 @@ public class JOptionPane extends JComponent implements Accessible
      * The <code>messageType</code> parameter is primarily used to supply
      * a default icon from the look and feel.
      *
+     * <p>
+     *  打开一个带有指定图标的对话框,其中选项数由<code> optionType </code>参数确定。 <code> messageType </code>参数主要用于从外观和感觉提供默认图标。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code> in which the
      *                  dialog is displayed; if <code>null</code>,
      *                  or if the <code>parentComponent</code> has no
@@ -811,6 +1032,15 @@ public class JOptionPane extends JComponent implements Accessible
      * The <code>messageType</code> parameter is primarily used to supply
      * a default icon from the look and feel.
      *
+     * <p>
+     *  创建一个带有指定图标的对话框,其中初始选择由<code> initialValue </code>参数确定,选项数由<code> optionType </code>参数确定。
+     * <p>
+     *  如果<code> optionType </code>为<code> YES_NO_OPTION </code>或<code> YES_NO_CANCEL_OPTION </code>且<code>选
+     * 项</code>参数为<code> null </code>选项由外观和感觉提供。
+     * <p>
+     *  <code> messageType </code>参数主要用于从外观和感觉提供默认图标。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code>
      *                  in which the dialog is displayed;  if
      *                  <code>null</code>, or if the
@@ -902,6 +1132,14 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>JOptionPane.UNINITIALIZED_VALUE</code> to ensure the
      * user's subsequent action closes the dialog properly.
      *
+     * <p>
+     * 创建并返回以<code> parentComponent </code>框架中的<code> parentComponent </code>为中心的新<包> <code> JDialog </code>
+     *  <code> title </code>是返回的对话框的标题。
+     * 返回的<code> JDialog </code>不会被用户调整大小,但是程序可以调用<code> JDialog </code>实例上的<code> setResizable </code>返回的<code>
+     *  JDialog </code>将被设置,使得一旦关闭,或用户点击其中一个按钮,将相应地设置optionpane的value属性,并关闭对话框。
+     * 每次对话框可见时,它都会将选项窗格的value属性重置为<code> JOptionPane.UNINITIALIZED_VALUE </code>,以确保用户的后续操作正确关闭对话框。
+     * 
+     * 
      * @param parentComponent determines the frame in which the dialog
      *          is displayed; if the <code>parentComponent</code> has
      *          no <code>Frame</code>, a default <code>Frame</code> is used
@@ -932,6 +1170,14 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>JOptionPane.UNINITIALIZED_VALUE</code> to ensure the
      * user's subsequent action closes the dialog properly.
      *
+     * <p>
+     *  创建并返回具有指定标题的新的无代码<code> JDialog </code>。
+     * 返回的<code> JDialog </code>不会被用户调整大小,但是程序可以调用<code> JDialog </code>实例上的<code> setResizable </code>返回的<code>
+     *  JDialog </code>将被设置,使得一旦关闭,或用户点击其中一个按钮,将相应地设置optionpane的value属性,并关闭对话框。
+     *  创建并返回具有指定标题的新的无代码<code> JDialog </code>。
+     * 每次对话框可见时,它都会将选项窗格的value属性重置为<code> JOptionPane.UNINITIALIZED_VALUE </code>,以确保用户的后续操作正确关闭对话框。
+     * 
+     * 
      * @param title     the title string for the dialog
      * @return a new <code>JDialog</code> containing this instance
      * @exception HeadlessException if
@@ -1036,6 +1282,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Brings up an internal confirmation dialog panel. The dialog
      * is a information-message dialog titled "Message".
      *
+     * <p>
+     * 启动内部确认对话面板。该对话框是一个名为"消息"的信息对话框。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code>
      *          in which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -1054,6 +1304,10 @@ public class JOptionPane extends JComponent implements Accessible
      * using a default icon determined by the <code>messageType</code>
      * parameter.
      *
+     * <p>
+     *  打开内部对话面板,使用由<code> messageType </code>参数确定的默认图标显示消息。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code>
      *          in which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -1077,6 +1331,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Brings up an internal dialog panel displaying a message,
      * specifying all parameters.
      *
+     * <p>
+     *  启动内部对话面板显示消息,指定所有参数。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code>
      *          in which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -1104,6 +1362,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Brings up an internal dialog panel with the options <i>Yes</i>, <i>No</i>
      * and <i>Cancel</i>; with the title, <b>Select an Option</b>.
      *
+     * <p>
+     *  使用选项<i>是</i>,<i>否</i>和<i>取消</i>创建内部对话面板;标题为<b>选择选项</b>。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code> in
      *          which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -1122,6 +1384,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Brings up a internal dialog panel where the number of choices
      * is determined by the <code>optionType</code> parameter.
      *
+     * <p>
+     *  创建一个内部对话面板,其中选项数由<code> optionType </code>参数确定。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code>
      *          in which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -1152,6 +1418,11 @@ public class JOptionPane extends JComponent implements Accessible
      * The <code>messageType</code> parameter is primarily used to supply
      * a default icon from the Look and Feel.
      *
+     * <p>
+     *  创建内部对话面板,其中选项数由<code> optionType </code>参数确定,其中<code> messageType </code>参数确定要显示的图标。
+     *  <code> messageType </code>参数主要用于从外观提供默认图标。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code> in
      *          which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -1189,6 +1460,10 @@ public class JOptionPane extends JComponent implements Accessible
      * The <code>messageType</code> parameter is primarily used to supply
      * a default icon from the look and feel.
      *
+     * <p>
+     *  创建具有指定图标的内部对话框面板,其中选项数由<code> optionType </code>参数确定。 <code> messageType </code>参数主要用于从外观和感觉提供默认图标。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code>
      *          in which the dialog is displayed; if <code>null</code>,
      *          or if the parentComponent has no Frame, a
@@ -1235,6 +1510,15 @@ public class JOptionPane extends JComponent implements Accessible
      * The <code>messageType</code> parameter is primarily used to supply
      * a default icon from the look and feel.
      *
+     * <p>
+     *  启动具有指定图标的内部对话面板,其中初始选择由<code> initialValue </code>参数确定,选项数由<code> optionType </code>参数确定。
+     * <p>
+     * 如果<code> optionType </code>为<code> YES_NO_OPTION </code>或<code> YES_NO_CANCEL_OPTION </code>且<code>选项
+     * </code>参数为<code> null </code>选项由外观和感觉提供。
+     * <p>
+     *  <code> messageType </code>参数主要用于从外观和感觉提供默认图标。
+     * 
+     * 
      * @param parentComponent determines the <code>Frame</code>
      *          in which the dialog is displayed; if <code>null</code>,
      *          or if the <code>parentComponent</code> has no
@@ -1294,6 +1578,10 @@ public class JOptionPane extends JComponent implements Accessible
          * start() method returns -- if this method is called from start(),
          * the applet will appear to hang while an invisible modal frame
          * waits for input.
+         * <p>
+         *  请确保其父容器首先可见(此组件在下面进行测试)。
+         * 这对于JApplet是必要的,因为一个applet通常不会在其start()方法返回之后才可见 - 如果从start()调用此方法,则applet将显示为挂起,而不可见的模态帧等待输入。
+         * 
          */
         if (dialog.isVisible() && !dialog.isShowing()) {
             Container parent = dialog.getParent();
@@ -1353,6 +1641,11 @@ public class JOptionPane extends JComponent implements Accessible
      * is displayed in the <code>Component</code>'s frame,
      * and is usually positioned below the <code>Component</code>.
      *
+     * <p>
+     *  显示内部问题对话框,请求来自用户父母为<component> parentComponent </code>的用户输入。
+     * 对话框显示在<code> Component </code>框架中,通常位于<code> Component </code>下面。
+     * 
+     * 
      * @param parentComponent  the parent <code>Component</code>
      *          for the dialog
      * @param message  the <code>Object</code> to display
@@ -1369,6 +1662,11 @@ public class JOptionPane extends JComponent implements Accessible
      * to <code>parentComponent</code> with the dialog having the title
      * <code>title</code> and message type <code>messageType</code>.
      *
+     * <p>
+     *  显示一个内部对话框,请求使用<code> parentComponent </code>为父级的用户输入,标题为<code> title </code>和消息类型<code> messageType 
+     * </code>的对话框。
+     * 
+     * 
      * @param parentComponent the parent <code>Component</code> for the dialog
      * @param message  the <code>Object</code> to display
      * @param title    the <code>String</code> to display in the
@@ -1396,6 +1694,16 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>JComboBox</code>, <code>JList</code>, or
      * <code>JTextField</code> will be used.
      *
+     * <p>
+     * 在阻止内部对话框中提示用户输入,可以指定初始选择,可能的选择和所有其他选项。
+     * 用户将能够从<code> selectionValues </code>中选择,其中<code> null </code>意味着用户可以通过<code> JTextField </code>输入任何他们
+     * 想要的内容。
+     * 在阻止内部对话框中提示用户输入,可以指定初始选择,可能的选择和所有其他选项。 <code> initialSelectionValue </code>是提示用户的初始值。
+     * 由UI决定如何最好地表示<code> selectionValues </code>,但通常是<code> JComboBox </code>,<code> JList </code>或<code> J
+     * TextField </code>代码>将被使用。
+     * 在阻止内部对话框中提示用户输入,可以指定初始选择,可能的选择和所有其他选项。 <code> initialSelectionValue </code>是提示用户的初始值。
+     * 
+     * 
      * @param parentComponent the parent <code>Component</code> for the dialog
      * @param message  the <code>Object</code> to display
      * @param title    the <code>String</code> to display in the dialog
@@ -1439,6 +1747,10 @@ public class JOptionPane extends JComponent implements Accessible
          * start() method returns -- if this method is called from start(),
          * the applet will appear to hang while an invisible modal frame
          * waits for input.
+         * <p>
+         *  请确保其父容器首先可见(此组件在下面进行测试)。
+         * 这对于JApplet是必要的,因为一个applet通常不会在其start()方法返回之后才可见 - 如果从start()调用此方法,则applet将显示为挂起,而不可见的模态帧等待输入。
+         * 
          */
         if (dialog.isVisible() && !dialog.isShowing()) {
             Container parent = dialog.getParent();
@@ -1491,6 +1803,14 @@ public class JOptionPane extends JComponent implements Accessible
      * or if <code>parentComponent</code>
      * doesn't have a parent then a <code>RuntimeException</code> is thrown.
      *
+     * <p>
+     *  创建并返回<code> JInternalFrame </code>的实例。内部框架使用指定的标题创建,并包装<code> JOptionPane </code>。
+     * 返回的<code> JInternalFrame </code>被添加到<code> parentComponent </code>的<code> JDesktopPane </code>祖代,或者组件
+     * 父类的祖先不是<code> JDesktopPane <代码>,或者如果<code> parentComponent </code>没有父代,则会抛出<code> RuntimeException </code>
+     * 。
+     *  创建并返回<code> JInternalFrame </code>的实例。内部框架使用指定的标题创建,并包装<code> JOptionPane </code>。
+     * 
+     * 
      * @param parentComponent  the parent <code>Component</code> for
      *          the internal frame
      * @param title    the <code>String</code> to display in the
@@ -1594,6 +1914,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the specified component's <code>Frame</code>.
      *
+     * <p>
+     *  返回指定组件的<code> Frame </code>。
+     * 
+     * 
      * @param parentComponent the <code>Component</code> to check for a
      *          <code>Frame</code>
      * @return the <code>Frame</code> that contains the component,
@@ -1619,6 +1943,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Returns the specified component's toplevel <code>Frame</code> or
      * <code>Dialog</code>.
      *
+     * <p>
+     * 返回指定组件的toplevel <code> Frame </code>或<code> Dialog </code>。
+     * 
+     * 
      * @param parentComponent the <code>Component</code> to check for a
      *          <code>Frame</code> or <code>Dialog</code>
      * @return the <code>Frame</code> or <code>Dialog</code> that
@@ -1644,6 +1972,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the specified component's desktop pane.
      *
+     * <p>
+     *  返回指定组件的桌面窗格。
+     * 
+     * 
      * @param parentComponent the <code>Component</code> to check for a
      *          desktop
      * @return the <code>JDesktopPane</code> that contains the component,
@@ -1668,6 +2000,12 @@ public class JOptionPane extends JComponent implements Accessible
      * <strong>Note:</strong>
      * It is recommended that rather than using this method you supply a valid parent.
      *
+     * <p>
+     *  设置用于不提供帧的类方法的帧。
+     * <p>
+     *  <strong>注意</strong>：建议您不要使用此方法提供有效的父级。
+     * 
+     * 
      * @param newRootFrame the default <code>Frame</code> to use
      */
     public static void setRootFrame(Frame newRootFrame) {
@@ -1682,6 +2020,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Returns the <code>Frame</code> to use for the class methods in
      * which a frame is not provided.
      *
+     * <p>
+     *  返回<code> Frame </code>以用于不提供框架的类方法。
+     * 
+     * 
      * @return the default <code>Frame</code> to use
      * @exception HeadlessException if
      *   <code>GraphicsEnvironment.isHeadless</code> returns
@@ -1701,6 +2043,9 @@ public class JOptionPane extends JComponent implements Accessible
 
     /**
      * Creates a <code>JOptionPane</code> with a test message.
+     * <p>
+     *  使用测试消息创建<code> JOptionPane </code>。
+     * 
      */
     public JOptionPane() {
         this("JOptionPane message");
@@ -1712,6 +2057,10 @@ public class JOptionPane extends JComponent implements Accessible
      * plain-message message type and the default options delivered by
      * the UI.
      *
+     * <p>
+     *  创建<code> JOptionPane </code>的实例以使用纯消息消息类型和UI提供的默认选项显示消息。
+     * 
+     * 
      * @param message the <code>Object</code> to display
      */
     public JOptionPane(Object message) {
@@ -1722,6 +2071,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Creates an instance of <code>JOptionPane</code> to display a message
      * with the specified message type and the default options,
      *
+     * <p>
+     *  创建<code> JOptionPane </code>的实例以显示具有指定消息类型和默认选项的消息,
+     * 
+     * 
      * @param message the <code>Object</code> to display
      * @param messageType the type of message to be displayed:
      *                  <code>ERROR_MESSAGE</code>,
@@ -1738,6 +2091,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Creates an instance of <code>JOptionPane</code> to display a message
      * with the specified message type and options.
      *
+     * <p>
+     *  创建<code> JOptionPane </code>的实例以显示具有指定消息类型和选项的消息。
+     * 
+     * 
      * @param message the <code>Object</code> to display
      * @param messageType the type of message to be displayed:
      *                  <code>ERROR_MESSAGE</code>,
@@ -1758,6 +2115,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Creates an instance of <code>JOptionPane</code> to display a message
      * with the specified message type, options, and icon.
      *
+     * <p>
+     *  创建<code> JOptionPane </code>的实例以显示具有指定的消息类型,选项和图标的消息。
+     * 
+     * 
      * @param message the <code>Object</code> to display
      * @param messageType the type of message to be displayed:
      *                  <code>ERROR_MESSAGE</code>,
@@ -1788,6 +2149,13 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>Component</code> is clicked it messages <code>setValue</code>
      * in the created <code>JOptionPane</code>.
      *
+     * <p>
+     *  创建<code> JOptionPane </code>的实例以显示具有指定消息类型,图标和选项的消息。最初未选择任何选项。
+     * <p>
+     * options对象应该包含<code> Component </code> s的实例(直接添加)或<code> Strings </code>(包含在<code> JButton </code>中)。
+     * 如果您提供<code> Component </code>,您必须确保当<code> Component </code>被点击时,它在创建的<code> JOptionPane </code> 。
+     * 
+     * 
      * @param message the <code>Object</code> to display
      * @param messageType the type of message to be displayed:
      *                  <code>ERROR_MESSAGE</code>,
@@ -1813,6 +2181,10 @@ public class JOptionPane extends JComponent implements Accessible
      * with the specified message type, icon, and options, with the
      * initially-selected option specified.
      *
+     * <p>
+     *  创建<code> JOptionPane </code>的实例以显示具有指定的消息类型,图标和选项的消息,并指定初始选择的选项。
+     * 
+     * 
      * @param message the <code>Object</code> to display
      * @param messageType the type of message to be displayed:
      *                  <code>ERROR_MESSAGE</code>,
@@ -1848,6 +2220,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Sets the UI object which implements the {@literal L&F} for this component.
      *
+     * <p>
+     *  设置实现此组件的{@literal L&F}的UI对象。
+     * 
+     * 
      * @param ui  the <code>OptionPaneUI</code> {@literal L&F} object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -1865,6 +2241,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the UI object which implements the {@literal L&F} for this component.
      *
+     * <p>
+     *  返回实现此组件的{@literal L&F}的UI对象。
+     * 
+     * 
      * @return the <code>OptionPaneUI</code> object
      */
     public OptionPaneUI getUI() {
@@ -1876,6 +2256,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Replaces the current UI object with the latest version from the
      * <code>UIManager</code>.
      *
+     * <p>
+     *  从<code> UIManager </code>通知{@literal L&F}已更改。使用<code> UIManager </code>中的最新版本替换当前的UI对象。
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -1887,6 +2271,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Returns the name of the UI class that implements the
      * {@literal L&F} for this component.
      *
+     * <p>
+     *  返回实现此组件的{@literal L&F}的UI类的名称。
+     * 
+     * 
      * @return the string "OptionPaneUI"
      * @see JComponent#getUIClassID
      * @see UIDefaults#getUI
@@ -1898,6 +2286,10 @@ public class JOptionPane extends JComponent implements Accessible
 
     /**
      * Sets the option pane's message-object.
+     * <p>
+     *  设置选项窗格的消息对象。
+     * 
+     * 
      * @param newMessage the <code>Object</code> to display
      * @see #getMessage
      *
@@ -1915,6 +2307,10 @@ public class JOptionPane extends JComponent implements Accessible
 
     /**
      * Returns the message-object this pane displays.
+     * <p>
+     *  返回此窗格显示的消息对象。
+     * 
+     * 
      * @see #setMessage
      *
      * @return the <code>Object</code> that is displayed
@@ -1926,6 +2322,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Sets the icon to display. If non-<code>null</code>, the look and feel
      * does not provide an icon.
+     * <p>
+     *  设置要显示的图标。如果非<code> null </code>,外观和感觉不提供图标。
+     * 
+     * 
      * @param newIcon the <code>Icon</code> to display
      *
      * @see #getIcon
@@ -1943,6 +2343,10 @@ public class JOptionPane extends JComponent implements Accessible
 
     /**
      * Returns the icon this pane displays.
+     * <p>
+     *  返回此窗格显示的图标。
+     * 
+     * 
      * @return the <code>Icon</code> that is displayed
      *
      * @see #setIcon
@@ -1953,6 +2357,10 @@ public class JOptionPane extends JComponent implements Accessible
 
     /**
      * Sets the value the user has chosen.
+     * <p>
+     *  设置用户选择的值。
+     * 
+     * 
      * @param newValue  the chosen value
      *
      * @see #getValue
@@ -1975,6 +2383,11 @@ public class JOptionPane extends JComponent implements Accessible
      * the returned value will be one of the options defined in this
      * object.
      *
+     * <p>
+     *  返回用户选择的值。 <code> UNINITIALIZED_VALUE </code>表示用户尚未进行选择,<code> null </code>表示用户关闭窗口时未选择任何内容。
+     * 否则返回的值将是此对象中定义的选项之一。
+     * 
+     * 
      * @return the <code>Object</code> chosen by the user,
      *         <code>UNINITIALIZED_VALUE</code>
      *         if the user has not yet made a choice, or <code>null</code> if
@@ -1992,6 +2405,10 @@ public class JOptionPane extends JComponent implements Accessible
      * it is added directly to the pane,
      * otherwise a button is created for the element.
      *
+     * <p>
+     * 设置此窗格显示的选项。如果<code> newOptions </code>中的元素是<code> Component </code>,它会直接添加到窗格中,否则将为该元素创建一个按钮。
+     * 
+     * 
      * @param newOptions an array of <code>Objects</code> that create the
      *          buttons the user can click on, or arbitrary
      *          <code>Components</code> to add to the pane
@@ -2010,6 +2427,10 @@ public class JOptionPane extends JComponent implements Accessible
 
     /**
      * Returns the choices the user can make.
+     * <p>
+     *  返回用户可以做出的选择。
+     * 
+     * 
      * @return the array of <code>Objects</code> that give the user's choices
      *
      * @see #setOptions
@@ -2030,6 +2451,10 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>Component</code>
      * that has the focus when the pane is initially displayed.
      *
+     * <p>
+     *  设置要启用的初始值 - 在窗格最初显示时具有焦点的<code> Component </code>。
+     * 
+     * 
      * @param newInitialValue the <code>Object</code> that gets the initial
      *                         keyboard focus
      *
@@ -2049,6 +2474,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the initial value.
      *
+     * <p>
+     *  返回初始值。
+     * 
+     * 
      * @return the <code>Object</code> that gets the initial keyboard focus
      *
      * @see #setInitialValue
@@ -2062,6 +2491,10 @@ public class JOptionPane extends JComponent implements Accessible
      * The message type is used by the Look and Feel to determine the
      * icon to display (if not supplied) as well as potentially how to
      * lay out the <code>parentComponent</code>.
+     * <p>
+     *  设置选项窗格的消息类型。消息类型由Look和Feel用于确定要显示的图标(如果未提供)以及潜在的如何布局<code> parentComponent </code>。
+     * 
+     * 
      * @param newType an integer specifying the kind of message to display:
      *                <code>ERROR_MESSAGE</code>, <code>INFORMATION_MESSAGE</code>,
      *                <code>WARNING_MESSAGE</code>,
@@ -2090,6 +2523,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the message type.
      *
+     * <p>
+     *  返回消息类型。
+     * 
+     * 
      * @return an integer specifying the message type
      *
      * @see #setMessageType
@@ -2102,6 +2539,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Sets the options to display.
      * The option type is used by the Look and Feel to
      * determine what buttons to show (unless options are supplied).
+     * <p>
+     *  设置要显示的选项。选项类型由查看和感觉用于确定要显示的按钮(除非提供选项)。
+     * 
+     * 
      * @param newType an integer specifying the options the {@literal L&F} is to display:
      *                  <code>DEFAULT_OPTION</code>,
      *                  <code>YES_NO_OPTION</code>,
@@ -2131,6 +2572,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the type of options that are displayed.
      *
+     * <p>
+     *  返回显示的选项类型。
+     * 
+     * 
      * @return an integer specifying the user-selectable options
      *
      * @see #setOptionType
@@ -2150,6 +2595,14 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>setInitialSelectionValue</code> to specify the initially-chosen
      * value. After the pane as been enabled, <code>inputValue</code> is
      * set to the value the user has selected.
+     * <p>
+     *  设置窗格的输入选择值,为用户提供要从中进行选择的项目列表。 (UI提供了一个用于选择一个值的小部件。
+     * )<code> null </code>值意味着用户可以通过<code> JTextField </code>输入任何他们想要的内容。
+     * <p>
+     *  将<code> wantsInput </code>设置为true。使用<code> setInitialSelectionValue </code>指定最初选择的值。
+     * 启用窗格后,将<code> inputValue </code>设置为用户选择的值。
+     * 
+     * 
      * @param newValues an array of <code>Objects</code> the user to be
      *                  displayed
      *                  (usually in a list or combo-box) from which
@@ -2173,6 +2626,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the input selection values.
      *
+     * <p>
+     *  返回输入选择值。
+     * 
+     * 
      * @return the array of <code>Objects</code> the user can select
      * @see #setSelectionValues
      */
@@ -2183,6 +2640,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Sets the input value that is initially displayed as selected to the user.
      * Only used if <code>wantsInput</code> is true.
+     * <p>
+     *  将最初显示为选定的输入值设置为用户。仅当<code> wantsInput </code>为true时使用。
+     * 
+     * 
      * @param newValue the initially selected value
      * @see #setSelectionValues
      * @see #getInitialSelectionValue
@@ -2201,6 +2662,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the input value that is displayed as initially selected to the user.
      *
+     * <p>
+     * 将最初显示的输入值返回给用户。
+     * 
+     * 
      * @return the initially selected value
      * @see #setInitialSelectionValue
      * @see #setSelectionValues
@@ -2217,6 +2682,11 @@ public class JOptionPane extends JComponent implements Accessible
      * input value initially displayed as selected to the user, use
      * <code>setInitialSelectionValue</code>.
      *
+     * <p>
+     *  设置用户选择或输入的输入值。仅当<code> wantsInput </code>为true时使用。请注意,此方法由选项窗格在内部调用(响应用户操作),通常不应由客户端程序调用。
+     * 要将最初显示为输入值的输入值设置为用户,请使用<code> setInitialSelectionValue </code>。
+     * 
+     * 
      * @param newValue the <code>Object</code> used to set the
      *          value that the user specified (usually in a text field)
      * @see #setSelectionValues
@@ -2239,6 +2709,10 @@ public class JOptionPane extends JComponent implements Accessible
      * Returns the value the user has input, if <code>wantsInput</code>
      * is true.
      *
+     * <p>
+     *  返回用户输入的值,如果<code> wantsInput </code>为true。
+     * 
+     * 
      * @return the <code>Object</code> the user specified,
      *          if it was one of the objects, or a
      *          <code>String</code> if it was a value typed into a
@@ -2257,6 +2731,10 @@ public class JOptionPane extends JComponent implements Accessible
      * The value can be
      * changed by overriding this method in a subclass.
      *
+     * <p>
+     *  返回要在消息中的一行上放置的最大字符数。默认为返回<code> Integer.MAX_VALUE </code>。可以通过在子类中覆盖此方法来更改值。
+     * 
+     * 
      * @return an integer giving the maximum number of characters on a line
      */
     public int getMaxCharactersPerLineCount() {
@@ -2275,6 +2753,14 @@ public class JOptionPane extends JComponent implements Accessible
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  设置<code> wantsInput </code>属性。
+     * 如果<code> newValue </code>为true,则提供其父代码为<code> parentComponent </code>的输入组件(例如文本字段或组合框),以允许用户输入值。
+     * 如果<code> getSelectionValues </code>返回一个非<code> null </code>数组,则输入值是该数组中的一个对象。否则输入值是用户输入的任何值。
+     * <p>
+     *  这是一个bound属性。
+     * 
+     * 
      * @see #setSelectionValues
      * @see #setInputValue
      * @beaninfo
@@ -2292,6 +2778,10 @@ public class JOptionPane extends JComponent implements Accessible
     /**
      * Returns the value of the <code>wantsInput</code> property.
      *
+     * <p>
+     *  返回<code> wantsInput </code>属性的值。
+     * 
+     * 
      * @return true if an input component will be provided
      * @see #setWantsInput
      */
@@ -2304,6 +2794,9 @@ public class JOptionPane extends JComponent implements Accessible
      * focus to the initial value. This method
      * should be invoked after the window containing the option pane
      * is made visible.
+     * <p>
+     *  请求选择初始值,这将将焦点设置为初始值。在包含选项窗格的窗口可见后,应调用此方法。
+     * 
      */
     public void selectInitialValue() {
         OptionPaneUI         ui = getUI();
@@ -2468,6 +2961,11 @@ public class JOptionPane extends JComponent implements Accessible
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     * 返回此<code> JOptionPane </code>的字符串表示形式。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JOptionPane</code>
      */
     protected String paramString() {
@@ -2513,6 +3011,9 @@ public class JOptionPane extends JComponent implements Accessible
 
     /**
      * Retrieves a method from the provided class and makes it accessible.
+     * <p>
+     *  从提供的类中检索方法并使其可访问。
+     * 
      */
     private static class ModalPrivilegedAction implements PrivilegedAction<Method> {
         private Class<?> clazz;
@@ -2548,6 +3049,12 @@ public class JOptionPane extends JComponent implements Accessible
      * <code>AccessibleJOptionPane</code>.
      * A new <code>AccessibleJOptionPane</code> instance is created if necessary.
      *
+     * <p>
+     *  返回与此JOptionPane关联的<code> AccessibleContext </code>。
+     * 对于选项窗格,<code> AccessibleContext </code>采用<code> AccessibleJOptionPane </code>的形式。
+     * 如果需要,将创建一个新的<code> AccessibleJOptionPane </code>实例。
+     * 
+     * 
      * @return an AccessibleJOptionPane that serves as the
      *         AccessibleContext of this AccessibleJOptionPane
      * @beaninfo
@@ -2575,12 +3082,20 @@ public class JOptionPane extends JComponent implements Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  此类实现了对<code> JOptionPane </code>类的辅助功能支持。它提供了适用于选项窗格用户界面元素的Java辅助功能API的实现。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
      */
     protected class AccessibleJOptionPane extends AccessibleJComponent {
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the object
          * @see AccessibleRole
          */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -130,6 +131,47 @@ import java.util.Stack;
  *         report_fatal_error("Couldn't repair and continue parse", null);
  *  </dl>
  *
+ * <p>
+ *  LR解析器是一种自下而上的shift-reduce解析器。 Shift-reduce解析器通过将输入移动到解析堆栈上,直到匹配生产的右侧的符号出现在堆栈的顶部。一旦发生这种情况,就执行减少。
+ * 这涉及去除对应于生产的右手侧的符号(所谓的"手柄"),并且用生产的左手侧的非终端来替换它们。 <p>。
+ * 
+ * 为了控制在任何给定点是否移位或减少的决定,解析器使用状态机(由解析器生成器构建的"可行前缀识别机")。机器的当前状态被放置在语法分析栈的顶部(存储为表示终端或非终端的Symbol对象的一部分)。
+ * 查询分析动作表(使用当前状态和当前前瞻符号作为索引)以确定是否移位或减少。当解析器改变时,它通过将新的符号(包含新的状态)推入堆栈而改变到新的状态。当解析器减少时,它弹出手柄(生产的右手边)离开堆栈。
+ * 这使得解析器处于在任何这些符号匹配之前的状态。接下来,查阅reduce-goto表(使用新的状态和当前的lookahead符号作为索引)以确定要去的新状态。
+ * 解析器然后通过将生产的左手边符号(也包含新状态)推到栈上而转换到这个goto状态。<p>。
+ * 
+ * 这个类实际上提供了四个LR解析器。方法parse()和debug_parse()提供了两个版本的主解析器(唯一的区别是,debug_parse()在解析时发出调试跟踪消息)。
+ * 除了这些主要的解析器,错误恢复机制使用两个。
+ * 其中之一用于模拟输入中的"解析",而不执行动作(以验证潜在的错误恢复已经起作用),并且另一个用于解析通过缓冲的"解析提前"输入以便执行所有动作并重新同步实际的解析器配置。<p>。
+ * 
+ *  这是一个抽象类,通常由JavaCup解析器生成器生成的子类填充。除了提供实际的解析表,生成的代码还提供调用各种用户提供的代码,提供对某些特殊符号(例如,EOF和错误)等的访问的方法。
+ * 具体地,以下抽象方法通常由生成的码：。
+ * <dl compact>
+ * <dt> short [] [] production_table()<dd>提供对生产表的引用(指示语法中每个生产的左手侧非终端的索引和右手的长度)。
+ *  <dt> short [] [] action_table()<dd>提供对解析操作表的引用。
+ *  <dt> short [] [] reduce_table()<dd>提供对reduce-goto表的引用。 <dt> int start_state()<dd>指示开始状态的索引。
+ *  <dt> int start_production()<dd>指示开始生产的索引。 <dt> int EOF_sym()<dd>表示EOF符号的索引。
+ *  <dt> int error_sym()<dd>指示错误符号的索引。 <dt>符号do_action()<dd>执行一段用户提供的操作代码。
+ * 这总是在解析的减少点,所以这段代码也分配和填充左边的非终端符号对象被推到堆栈为reduce。
+ *  <dt> void init_actions()<dd>用于初始化封装用户提供的操作的特殊对象的代码(此对象由do_action()用来实际执行操作)。
+ * </dl>
+ * 
+ *  除了必须由所生成的子类提供的这些例程之外,还存在可以提供的一系列例程。这些包括：
+ * <dl>
+ * <dt>符号扫描()<dd>用于从扫描仪获取下一个输入符号。 <dt>扫描器getScanner()<dd>用于为scan()的默认实现提供扫描程序。
+ *  <dt> int error_sync_size()<dd>这决定了超过错误点的多少符号必须无错误地解析,以便考虑恢复是有效的。默认值为3.不推荐使用小于2的值。
+ *  <dt> void report_error(String message,Object info)<dd>调用此方法以报告错误。默认实现只是打印一条消息到System.err和发生错误的地方。
+ * 这种方法经常被替换以提供更复杂的错误报告机制。
+ *  <dt> void report_fatal_error(String message,Object info)<dd>遇到无法从中恢复的致命错误时调用此方法。
+ * 在默认实现中,它调用report_error()来发出消息,然后抛出异常。
+ *  <dt> void syntax_error(Symbol cur_token)<dd>只要检测到语法错误(尝试恢复之前),就会调用此方法。
+ * 在默认实现中,它调用：report_error("Syntax error",null); <dt> void unrecovered_syntax_error(Symbol cur_token)<dd>
+ * 如果语法错误恢复失败,则调用此方法。
+ *  <dt> void syntax_error(Symbol cur_token)<dd>只要检测到语法错误(尝试恢复之前),就会调用此方法。
+ * 在默认实现中,它调用：<br> report_fatal_error("Could not repair and continue parse",null);。
+ * </dl>
+ * 
+ * 
  * @see     com.sun.java_cup.internal.runtime.Symbol
  * @see     com.sun.java_cup.internal.runtime.Symbol
  * @see     com.sun.java_cup.internal.runtime.virtual_parse_stack
@@ -160,6 +202,9 @@ public abstract class lr_parser {
 
   /** The default number of Symbols after an error we much match to consider
    *  it recovered from.
+   * <p>
+   *  它从。
+   * 
    */
   protected final static int _error_sync_size = 3;
 
@@ -167,6 +212,9 @@ public abstract class lr_parser {
 
   /** The number of Symbols after an error we much match to consider it
    *  recovered from.
+   * <p>
+   *  恢复。
+   * 
    */
   protected int error_sync_size() {return _error_sync_size; }
 
@@ -180,6 +228,9 @@ public abstract class lr_parser {
    *  Each entry has two parts, the index of the non-terminal on the
    *  left hand side of the production, and the number of Symbols
    *  on the right hand side.
+   * <p>
+   * 此表每个生产包含一个条目,并由action_table中的负编码值(reduce操作)进行索引。每个条目有两个部分,在生产的左手边的非终端的索引,以及右手边的符号数。
+   * 
    */
   public abstract short[][] production_table();
 
@@ -197,6 +248,12 @@ public abstract class lr_parser {
    *  state shifted to).  Reduces are encoded as negative values (one less
    *  than the production reduced by).  Error entries are denoted by zero.
    *
+   * <p>
+   *  由状态和终端编号索引,指示当解析器处于给定状态(即,给定状态在堆栈顶部)并且给定终端是输入上的下一个时要采取什么动作。
+   * 状态使用第一维索引,然而,给定状态的条目被压缩并存储在相邻的索引,值对中,这些索引,值对被搜索而不是直接访问(参见get_action())。存储在表中的操作将是移位,减少或错误。
+   * 移位被编码为正值(一个大于移位到的状态)。减少编码为负值(比生产减少一个)。错误条目由零表示。
+   * 
+   * 
    * @see com.sun.java_cup.internal.runtime.lr_parser#get_action
    */
   public abstract short[][] action_table();
@@ -214,6 +271,11 @@ public abstract class lr_parser {
    *  then indexed by that state and the LHS of the reducing production to
    *  indicate where to "shift" to.
    *
+   * <p>
+   * 表由状态和非终端号索引并包含状态号。状态使用第一维索引,然而,给定状态的条目被压缩并存储在相邻的索引,值对中,这些索引,值对被搜索而不是直接访问(参见get_reduce())。
+   * 当发生减少时,句柄(对应于匹配生产的RHS)从堆栈弹出。堆栈的新顶部指示一个状态。然后,该表由该状态和还原生产的LHS索引,以指示"移动"到何处。
+   * 
+   * 
    * @see com.sun.java_cup.internal.runtime.lr_parser#get_reduce
    */
   public abstract short[][] reduce_table();
@@ -232,6 +294,9 @@ public abstract class lr_parser {
 
   /** The index of the end of file terminal Symbol (supplied by generated
    *  subclass).
+   * <p>
+   *  子类)。
+   * 
    */
   public abstract int EOF_sym();
 
@@ -250,6 +315,9 @@ public abstract class lr_parser {
   /** This method is called to indicate that the parser should quit.  This is
    *  normally called by an accept action, but can be used to cancel parsing
    *  early in other circumstances if desired.
+   * <p>
+   *  通常由接受动作调用,但是如果需要可以用于在其他情况下提前取消解析。
+   * 
    */
   public void done_parsing()
     {
@@ -258,6 +326,8 @@ public abstract class lr_parser {
 
   /*. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .*/
   /* Global parse state shared by parse(), error recovery, and
+  /* <p>
+  /* 
    * debugging routines */
   /*. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .*/
 
@@ -293,16 +363,26 @@ public abstract class lr_parser {
 
   /** This is the scanner object used by the default implementation
    *  of scan() to get Symbols.  To avoid name conflicts with existing
+   * <p>
+   *  of scan()获取符号。避免与现有名称冲突
+   * 
+   * 
    *  code, this field is private. [CSA/davidm] */
   private Scanner _scanner;
 
   /**
    * Simple accessor method to set the default scanner.
+   * <p>
+   *  简单的访问器方法来设置默认扫描器。
+   * 
    */
   public void setScanner(Scanner s) { _scanner = s; }
 
   /**
    * Simple accessor method to get the default scanner.
+   * <p>
+   *  获取默认扫描器的简单访问器方法。
+   * 
    */
   public Scanner getScanner() { return _scanner; }
 
@@ -314,6 +394,10 @@ public abstract class lr_parser {
    *  subclass).  Actions are indexed by an internal action number assigned
    *  at parser generation time.
    *
+   * <p>
+   *  子类)。操作通过在解析器生成时分配的内部操作号索引。
+   * 
+   * 
    * @param act_num   the internal index of the action to be performed.
    * @param parser    the parser object we are acting for.
    * @param stack     the parse stack of that object.
@@ -334,6 +418,9 @@ public abstract class lr_parser {
    *  might need this and we perform no action.   This method is normally
    *  overridden by the generated code using this contents of the "init with"
    *  clause as its body.
+   * <p>
+   *  初始化扫描仪。这在解析器请求第一个符号之前调用。这里只是一个可能需要它的子类的占位符,我们不执行任何操作。此方法通常由生成的代码覆盖,使用"init with"子句的此内容作为其主体。
+   * 
    */
   public void user_init() throws java.lang.Exception { }
 
@@ -342,6 +429,9 @@ public abstract class lr_parser {
   /** Initialize the action object.  This is called before the parser does
    *  any parse actions. This is filled in by generated code to create
    *  an object that encapsulates all action code.
+   * <p>
+   *  任何解析操作。这由生成的代码填充,以创建封装所有动作代码的对象。
+   * 
    */
   protected abstract void init_actions() throws java.lang.Exception;
 
@@ -354,6 +444,10 @@ public abstract class lr_parser {
    *  can be overriden by the generated parser using the code declared in
    *  the "scan with" clause.  Do not recycle objects; every call to
    *  scan() should return a fresh object.
+   * <p>
+   * 一旦到达文件结束,所有后续的扫描调用都应返回一个EOF符号(即符号编号0)。默认情况下,此方法返回getScanner()。
+   * next_token();此实现可以由生成的解析器使用在"scan with"子句中声明的代码覆盖。不要回收物品;每次调用scan()都应该返回一个新对象。
+   * 
    */
   public Symbol scan() throws java.lang.Exception {
     return getScanner().next_token();
@@ -366,6 +460,10 @@ public abstract class lr_parser {
    *  subclasses).  Here in the base class a very simple implementation
    *  is provided which reports the error then throws an exception.
    *
+   * <p>
+   *  附加对象(要在子类中实现的特殊化使用)。这里在基类中提供了一个非常简单的实现,报告错误然后抛出异常。
+   * 
+   * 
    * @param message an error message.
    * @param info    an extra object reserved for use by specialized subclasses.
    */
@@ -392,6 +490,10 @@ public abstract class lr_parser {
    *  implementation is provided which simply prints the message to
    *  System.err.
    *
+   * <p>
+   *  字符串和一个附加对象(要在子类中实现的特殊化使用)。这里在基类中提供了一个非常简单的实现,它只是将消息打印到System.err。
+   * 
+   * 
    * @param message an error message.
    * @param info    an extra object reserved for use by specialized subclasses.
    */
@@ -412,6 +514,10 @@ public abstract class lr_parser {
    *  is about to be invoked.  Here in the base class we just emit a
    *  "Syntax error" error message.
    *
+   * <p>
+   *  即将被调用。这里在基类中,我们只是发出一个"语法错误"的错误信息。
+   * 
+   * 
    * @param cur_token the current lookahead Symbol.
    */
   public void syntax_error(Symbol cur_token)
@@ -424,6 +530,10 @@ public abstract class lr_parser {
   /** This method is called if it is determined that syntax error recovery
    *  has been unsuccessful.  Here in the base class we report a fatal error.
    *
+   * <p>
+   *  已经不成功。这里在基类中我们报告一个致命错误。
+   * 
+   * 
    * @param cur_token the current lookahead Symbol.
    */
   public void unrecovered_syntax_error(Symbol cur_token)
@@ -441,6 +551,11 @@ public abstract class lr_parser {
    *  (denoted with a Symbol index of -1).  To find the proper entry in a row
    *  we do a linear or binary search (depending on the size of the row).
    *
+   * <p>
+   *  行,每个状态一个(行通过状态号直接索引)。在每一行中,给出索引,值对的列表(作为表中的顺序条目),并且列表由默认条目(用符号索引-1表示)终止。
+   * 要在行中找到正确的条目,我们执行线性或二进制搜索(取决于行的大小)。
+   * 
+   * 
    * @param state the state index of the action being accessed.
    * @param sym   the Symbol index of the action being accessed.
    */
@@ -483,6 +598,8 @@ public abstract class lr_parser {
         }
 
       /* shouldn't happened, but if we run off the end we return the
+      /* <p>
+      /* 
          default (error == 0) */
       return 0;
     }
@@ -496,6 +613,10 @@ public abstract class lr_parser {
    *  (denoted with a Symbol index of -1).  To find the proper entry in a row
    *  we do a linear search.
    *
+   * <p>
+   * 行,每个状态一个(行通过状态号直接索引)。在每一行中,给出索引,值对的列表(作为表中的顺序条目),并且列表由默认条目(用符号索引-1表示)终止。要在行中找到正确的条目,我们执行线性搜索。
+   * 
+   * 
    * @param state the state index of the entry being accessed.
    * @param sym   the Symbol index of the entry being accessed.
    */
@@ -529,6 +650,9 @@ public abstract class lr_parser {
    *  accepted, or a fatal error has been reported).  See the header
    *  documentation for the class regarding how shift/reduce parsers operate
    *  and how the various tables are used.
+   * <p>
+   *  done_parsing()已被调用(通常是因为解析器已接受,或已报告致命错误)。请参阅该类的头文档,了解shift / reduce解析器如何操作以及如何使用各种表。
+   * 
    */
   public Symbol parse() throws java.lang.Exception
     {
@@ -638,6 +762,10 @@ public abstract class lr_parser {
   /** Write a debugging message to System.err for the debugging version
    *  of the parser.
    *
+   * <p>
+   *  的解析器。
+   * 
+   * 
    * @param mess the text of the debugging message.
    */
   public void debug_message(String mess)
@@ -671,6 +799,8 @@ public abstract class lr_parser {
 
   /** Do debug output for a reduce.
    *
+   * <p>
+   * 
    * @param prod_num  the production we are reducing with.
    * @param nt_num    the index of the LHS non terminal.
    * @param rhs_size  the size of the RHS.
@@ -685,6 +815,8 @@ public abstract class lr_parser {
 
   /** Do debug output for shift.
    *
+   * <p>
+   * 
    * @param shift_tkn the Symbol being shifted onto the stack.
    */
   public void debug_shift(Symbol shift_tkn)
@@ -696,6 +828,7 @@ public abstract class lr_parser {
   /*. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .*/
 
   /** Do debug output for stack state. [CSA]
+  /* <p>
    */
   public void debug_stack() {
       StringBuffer sb=new StringBuffer("## STACK:");
@@ -715,6 +848,9 @@ public abstract class lr_parser {
    *  same things as parse(), except that it calls debug_shift() and
    *  debug_reduce() when shift and reduce moves are taken by the parser
    *  and produces various other debugging messages.
+   * <p>
+   *  与parse()相同的东西,除了当shift和reduce移动由解析器执行时调用debug_shift()和debug_reduce(),并产生各种其他调试消息。
+   * 
    */
   public Symbol debug_parse()
     throws java.lang.Exception
@@ -857,6 +993,13 @@ public abstract class lr_parser {
    *  configuration and executing all actions.  Finally, we return the the
    *  normal parser to continue with the overall parse.
    *
+   * <p>
+   * 失败,如果成功则为true。恢复发生在4个步骤。首先,我们将解析堆栈弹出到一个点,在该点我们对错误符号上的最顶部状态进行了移位。这表示初始错误恢复配置。如果没有找到这样的配置,那么我们失败。
+   * 接下来,将少量的"前瞻"或"前解析"符号读入缓冲器。此缓冲区的大小由error_sync_size()确定,并确定超出错误的多少个符号必须匹配才能考虑恢复成功。
+   * 接下来,我们开始丢弃符号,试图通过错误的点到我们可以继续解析的点。在每个符号之后,我们尝试通过缓冲的符号前向"解析"。 "解析"过程模拟实际解析,但不会修改真正的解析器配置,也不执行任何操作。
+   * 如果我们可以解析所有存储的符号而没有错误,那么恢复被认为是成功的。一旦确定成功的恢复点,我们对存储的输入进行实际解析 - 修改实际解析配置并执行所有动作。最后,我们返回正常解析器继续进行整体解析。
+   * 
+   * 
    * @param debug should we produce debugging messages as we parse.
    */
   protected boolean error_recovery(boolean debug)
@@ -865,6 +1008,8 @@ public abstract class lr_parser {
       if (debug) debug_message("# Attempting error recovery");
 
       /* first pop the stack back into a state that can shift on error and
+      /* <p>
+      /* 
          do that shift (if that fails, we fail) */
       if (!find_recovery_config(debug))
         {
@@ -912,6 +1057,9 @@ public abstract class lr_parser {
 
   /** Determine if we can shift under the special error Symbol out of the
    *  state currently on the top of the (real) parse stack.
+   * <p>
+   *  状态当前在(真实)解析堆栈的顶部。
+   * 
    */
   protected boolean shift_under_error()
     {
@@ -926,6 +1074,10 @@ public abstract class lr_parser {
    *  error Symbol, then doing the shift.  If no suitable state exists on
    *  the stack we return false
    *
+   * <p>
+   *  将堆栈弹出到可以在特殊错误符号上移位的状态,然后进行移位。如果堆栈上没有合适的状态,我们返回false
+   * 
+   * 
    * @param debug should we produce debugging messages as we parse.
    */
   protected boolean find_recovery_config(boolean debug)
@@ -988,6 +1140,9 @@ public abstract class lr_parser {
 
   /** Read from input to establish our buffer of "parse ahead" lookahead
    *  Symbols.
+   * <p>
+   *  符号。
+   * 
    */
   protected void read_lookahead() throws java.lang.Exception
     {
@@ -1014,6 +1169,9 @@ public abstract class lr_parser {
 
   /** Advance to next "parse ahead" input Symbol. Return true if we have
    *  input to advance to, false otherwise.
+   * <p>
+   *  输入前进到,否则为假。
+   * 
    */
   protected boolean advance_lookahead()
     {
@@ -1028,6 +1186,9 @@ public abstract class lr_parser {
 
   /** Reset the parse ahead input to one Symbol past where we started error
    *  recovery (this consumes one new Symbol from the real input).
+   * <p>
+   * 恢复(这从实际输入消耗一个新的符号)。
+   * 
    */
   protected void restart_lookahead() throws java.lang.Exception
     {
@@ -1052,6 +1213,10 @@ public abstract class lr_parser {
    *  parse() using only our saved "parse ahead" input, and not executing any
    *  actions.
    *
+   * <p>
+   *  使用存储的前瞻输入和虚拟解析堆栈的堆栈配置。如果我们使它一直通过存储的前瞻输入没有错误,返回true。这基本上模拟parse()的操作,只使用我们保存的"解析提前"输入,而不是执行任何操作。
+   * 
+   * 
    * @param debug should we produce debugging messages as we parse.
    */
   protected boolean try_parse_ahead(boolean debug)
@@ -1123,6 +1288,10 @@ public abstract class lr_parser {
    *  parser performs all actions and modifies the real parse configuration.
    *  This returns once we have consumed all the stored input or we accept.
    *
+   * <p>
+   *  已经验证了解析将使它通过存储的前瞻符号,我们现在回到我们可以手动控制回到正常解析器的点。因此,此版本的解析器执行所有操作并修改实际解析配置。一旦我们消耗了所有存储的输入或者我们接受,这个返回。
+   * 
+   * 
    * @param debug should we produce debugging messages as we parse.
    */
   protected void parse_lookahead(boolean debug)
@@ -1217,6 +1386,8 @@ public abstract class lr_parser {
 
             }
           /* finally if the entry is zero, we have an error
+          /* <p>
+          /* 
              (shouldn't happen here, but...)*/
           else if (act == 0)
             {

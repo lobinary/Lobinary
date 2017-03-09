@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -120,6 +124,39 @@ import java.util.concurrent.Executor;
  * enables interoperability among different implementations of this
  * interface by providing a common conversion type.
  *
+ * <p>
+ *  可能异步计算的阶段,执行动作或在另一个CompletionStage完成时计算值。阶段在其计算结束时完成,但是这又可以触发其他相关阶段。
+ * 此接口中定义的功能只需要几个基本形式,可扩展到一组更大的方法来捕获一系列使用样式：<ul>。
+ * 
+ *  <li>阶段执行的计算可以表示为Function,Consumer或Runnable(使用名称包括<em> apply </em>,<em> accept </em>或<em> / em>),具体取决
+ * 于它是否需要参数和/或产生结果。
+ * For example, {@code stage.thenApply(x -> square(x)).thenAccept(x ->
+ *  System.out.print(x))。thenRun(() - > System.out.println())}。
+ * 附加表单(<em> compose </em>)适用于阶段本身的功能,而不是结果。 </li>。
+ * 
+ * <li>一个阶段的执行可以通过完成单个阶段或两个阶段或两个阶段中的任一阶段来触发。使用具有前缀<em>然后</em>的方法来排列对单个阶段的依赖性。
+ * 通过完成两个阶段的<em>两者而触发的那些可以使用相应命名的方法来组合</em>它们的结果或效果。由<em>两个阶段的<em>触发的那些不保证关于哪个结果或效果用于依赖阶段的计算。</li>。
+ * 
+ *  <li>阶段之间的依赖性控制计算的触发,但不以其他方式保证任何特定的排序。
+ * 另外,新阶段的计算的执行可以以三种方式中的任一种来布置：默认执行,默认异步执行(使用具有后缀<as> </em>的方法,其使用阶段的默认异步执行设施)或定制提供的{@link Executor})。
+ * 默认和异步模式的执行属性由CompletionStage实现指定,而不是此接口。具有显式Executor参数的方法可能具有任意执行属性,甚至可能不支持并行执行,但是以适应异步的方式进行处理。
+ * 
+ * <li>两种方法表单支持处理触发阶段是正常完成还是异常完成：方法{@link #whenComplete whenComplete}允许注入操作,而不管结果如何,否则在结束时保留结果。
+ * 方法{@link #handle handle}另外允许阶段计算替换结果,其可以使得能够由其他依赖阶段进一步处理。
+ * 在所有其他情况下,如果一个阶段的计算使用(未检查的)异常或错误突然终止,则所有需要其完成的依赖阶段也会异常完成,其中{@link CompletionException}将异常作为其原因。
+ * 如果阶段依赖于两个阶段的两者,并且两者完全异常,则CompletionException可以对应于这些异常中的任一个。
+ * 如果一个阶段依赖于两个其他的阶段,并且只有其中一个阶段完全异常,则不能保证依赖阶段是正常完成还是异常完成。
+ * 在方法{@code whenComplete}的情况下,当提供的操作本身遇到异常时,如果尚未完全异常完成,则此阶段异常完成此异常。</li>。
+ * 
+ * </ul>
+ * 
+ * <p>所有方法都遵循上述触发,执行和异常完成规范(在单个方法规范中不再重复)。
+ * 另外,尽管用于传递接受它们的方法的完成结果(即,类型为{@code T}的参数)的参数可能为空,但是为任何其他参数传递空值将导致{@link NullPointerException}抛出。
+ * 
+ *  <p>此接口没有定义最初创建,强制完成正常或异常探测完成状态或结果,或等待阶段完成的方法。 CompletionStage的实现可以提供适当的实现这些效果的手段。
+ * 方法{@link #toCompletableFuture}通过提供常见的转换类型来实现此接口的不同实现之间的互操作性。
+ * 
+ * 
  * @author Doug Lea
  * @since 1.8
  */
@@ -133,6 +170,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,将执行此阶段的结果作为提供的函数的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
      * @param <U> the function's return type
@@ -149,6 +192,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,使用此阶段的默认异步执行工具执行该阶段的结果作为提供的函数的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
      * @param <U> the function's return type
@@ -165,6 +214,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     * 返回一个新的CompletionStage,当此阶段正常完成时,使用提供的Executor执行,该阶段的结果作为提供的函数的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
      * @param executor the executor to use for asynchronous execution
@@ -183,6 +238,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,将执行此阶段的结果作为提供的操作的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param action the action to perform before completing the
      * returned CompletionStage
      * @return the new CompletionStage
@@ -198,6 +259,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,使用此阶段的默认异步执行工具执行该阶段的结果作为提供的操作的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param action the action to perform before completing the
      * returned CompletionStage
      * @return the new CompletionStage
@@ -212,6 +279,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,使用提供的Executor执行该阶段的结果作为提供的操作的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param action the action to perform before completing the
      * returned CompletionStage
      * @param executor the executor to use for asynchronous execution
@@ -226,6 +299,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,执行给定的操作。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param action the action to perform before completing the
      * returned CompletionStage
      * @return the new CompletionStage
@@ -240,6 +319,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,使用此阶段的默认异步执行设施执行给定的操作。
+     * 
+     * 有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param action the action to perform before completing the
      * returned CompletionStage
      * @return the new CompletionStage
@@ -253,6 +338,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,使用提供的Executor执行给定的操作。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param action the action to perform before completing the
      * returned CompletionStage
      * @param executor the executor to use for asynchronous execution
@@ -269,6 +360,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当这个和其他给定阶段都正常完成时,将两个结果作为提供的函数的参数执行。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
@@ -289,6 +386,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此和其他给定阶段正常完成时,使用此阶段的默认异步执行设施执行,两个结果作为提供的函数的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
@@ -309,6 +412,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当这个和其他给定阶段正常完成时,使用提供的执行器执行,两个结果作为提供的函数的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
@@ -330,6 +439,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此和其他给定阶段都正常完成时,将两个结果作为所提供操作的参数执行。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -346,6 +461,10 @@ public interface CompletionStage<T> {
      * default asynchronous execution facility, with the two results
      * as arguments to the supplied action.
      *
+     * <p>
+     * 返回一个新的CompletionStage,当此和其他给定阶段正常完成时,将使用此阶段的默认异步执行工具执行,两个结果作为提供的操作的参数。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -362,6 +481,10 @@ public interface CompletionStage<T> {
      * executor, with the two results as arguments to the supplied
      * function.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当这个和其他给定阶段正常完成时,使用提供的执行器执行,两个结果作为提供的函数的参数。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -381,6 +504,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当这个和其他给定阶段都正常完成时,执行给定的操作。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -396,6 +525,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此和其他给定阶段正常完成时,使用此阶段的默认异步执行设施执行给定的操作。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -412,6 +547,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此和其他给定阶段正常完成时,使用提供的执行器执行给定的操作。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -429,6 +570,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此或其他给定阶段正常完成时,将执行相应的结果作为所提供函数的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
@@ -448,6 +595,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     * 返回一个新的CompletionStage,当此或其他给定阶段正常完成时,将使用此阶段的默认异步执行工具执行,相应的结果作为参数提供的函数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
@@ -467,6 +620,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此或其他给定阶段正常完成时,将使用提供的执行器执行,相应的结果作为参数提供的函数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param fn the function to use to compute the value of
      * the returned CompletionStage
@@ -487,6 +646,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此或其他给定阶段正常完成时,将执行相应的结果作为所提供操作的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -505,6 +670,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此或其他给定阶段正常完成时,将使用此阶段的默认异步执行工具执行,相应的结果作为所提供操作的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -523,6 +694,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此或其他给定阶段正常完成时,将使用提供的执行器执行,相应的结果作为参数提供的函数。
+     * 
+     * 有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -541,6 +718,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此或其他给定阶段正常完成时,执行给定的操作。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -557,6 +740,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此或其他给定阶段正常完成时,使用此阶段的默认异步执行设施执行给定的操作。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -574,6 +763,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此或其他给定阶段正常完成时,使用提供的执行程序执行给定的操作。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param other the other CompletionStage
      * @param action the action to perform before completing the
      * returned CompletionStage
@@ -593,6 +788,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,将以此阶段作为提供的函数的参数执行。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param fn the function returning a new CompletionStage
      * @param <U> the type of the returned CompletionStage's result
      * @return the CompletionStage
@@ -609,6 +810,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成时,将使用此阶段的默认异步执行工具执行,此阶段作为提供的函数的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param fn the function returning a new CompletionStage
      * @param <U> the type of the returned CompletionStage's result
      * @return the CompletionStage
@@ -624,6 +831,12 @@ public interface CompletionStage<T> {
      * See the {@link CompletionStage} documentation for rules
      * covering exceptional completion.
      *
+     * <p>
+     * 返回一个新的CompletionStage,当此阶段正常完成时,使用提供的Executor执行,该阶段的结果作为提供的函数的参数。
+     * 
+     *  有关涵盖特殊完成的规则​​,请参阅{@link CompletionStage}文档。
+     * 
+     * 
      * @param fn the function returning a new CompletionStage
      * @param executor the executor to use for asynchronous execution
      * @param <U> the type of the returned CompletionStage's result
@@ -640,6 +853,10 @@ public interface CompletionStage<T> {
      * completes normally, then the returned stage also completes
      * normally with the same value.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段异常完成时,将作为提供的函数的参数使用此阶段的异常执行。否则,如果此阶段正常完成,则返回的阶段也将以相同的值正常完成。
+     * 
+     * 
      * @param fn the function to use to compute the value of the
      * returned CompletionStage if this CompletionStage completed
      * exceptionally
@@ -659,6 +876,13 @@ public interface CompletionStage<T> {
      * exception, then the returned stage exceptionally completes with this
      * exception unless this stage also completed exceptionally.
      *
+     * <p>
+     *  返回与此阶段具有相同结果或异常的新CompletionStage,该阶段在此阶段完成时执行给定操作。
+     * 
+     *  <p>当这个阶段完成时,使用结果(或{@code null}(如果没有))和本阶段的异常(或{@code null}如果没有)调用给定的操作作为参数。当操作返回时,返回的阶段完成。
+     * 如果提供的操作本身遇到异常,则返回的阶段异常地完成此异常,除非此阶段也异常完成。
+     * 
+     * 
      * @param action the action to perform
      * @return the new CompletionStage
      */
@@ -677,6 +901,13 @@ public interface CompletionStage<T> {
      * exception, then the returned stage exceptionally completes with this
      * exception unless this stage also completed exceptionally.
      *
+     * <p>
+     *  返回与此阶段具有相同结果或异常的新CompletionStage,当此阶段完成时,使用此阶段的默认异步执行设施执行给定操作。
+     * 
+     * <p>当这个阶段完成时,使用结果(或{@code null}(如果没有))和本阶段的异常(或{@code null}如果没有)调用给定的操作作为参数。当操作返回时,返回的阶段完成。
+     * 如果提供的操作本身遇到异常,则返回的阶段异常地完成此异常,除非此阶段也异常完成。
+     * 
+     * 
      * @param action the action to perform
      * @return the new CompletionStage
      */
@@ -695,6 +926,13 @@ public interface CompletionStage<T> {
      * exception, then the returned stage exceptionally completes with this
      * exception unless this stage also completed exceptionally.
      *
+     * <p>
+     *  返回一个与此阶段具有相同结果或异常的新CompletionStage,当此阶段完成时,使用提供的Executor执行给定操作。
+     * 
+     *  <p>当这个阶段完成时,使用结果(或{@code null}(如果没有))和本阶段的异常(或{@code null}如果没有)调用给定的操作作为参数。当操作返回时,返回的阶段完成。
+     * 如果提供的操作本身遇到异常,则返回的阶段异常地完成此异常,除非此阶段也异常完成。
+     * 
+     * 
      * @param action the action to perform
      * @param executor the executor to use for asynchronous execution
      * @return the new CompletionStage
@@ -713,6 +951,12 @@ public interface CompletionStage<T> {
      * {@code null} if none) of this stage as arguments, and the
      * function's result is used to complete the returned stage.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成或异常完成时,将执行此阶段的结果和异常作为提供的函数的参数。
+     * 
+     *  <p>当这个阶段完成时,使用结果(或{@code null}(如果没有))和本阶段的异常(或{@code null}如果没有)作为参数调用给定的函数,函数的结果用于完成返回阶段。
+     * 
+     * 
      * @param fn the function to use to compute the value of the
      * returned CompletionStage
      * @param <U> the function's return type
@@ -732,6 +976,12 @@ public interface CompletionStage<T> {
      * {@code null} if none) of this stage as arguments, and the
      * function's result is used to complete the returned stage.
      *
+     * <p>
+     * 返回一个新的CompletionStage,当此阶段正常完成或异常完成时,使用此阶段的默认异步执行机制执行该阶段的结果和异常作为提供的函数的参数。
+     * 
+     *  <p>当这个阶段完成时,使用结果(或{@code null}(如果没有))和本阶段的异常(或{@code null}如果没有)作为参数调用给定的函数,函数的结果用于完成返回阶段。
+     * 
+     * 
      * @param fn the function to use to compute the value of the
      * returned CompletionStage
      * @param <U> the function's return type
@@ -751,6 +1001,12 @@ public interface CompletionStage<T> {
      * {@code null} if none) of this stage as arguments, and the
      * function's result is used to complete the returned stage.
      *
+     * <p>
+     *  返回一个新的CompletionStage,当此阶段正常完成或异常完成时,使用提供的执行器执行该阶段的结果和异常作为提供的函数的参数。
+     * 
+     *  <p>当这个阶段完成时,使用结果(或{@code null}(如果没有))和本阶段的异常(或{@code null}如果没有)作为参数调用给定的函数,函数的结果用于完成返回阶段。
+     * 
+     * 
      * @param fn the function to use to compute the value of the
      * returned CompletionStage
      * @param executor the executor to use for asynchronous execution
@@ -771,6 +1027,10 @@ public interface CompletionStage<T> {
      * implementation that does not choose to interoperate with others
      * may throw {@code UnsupportedOperationException}.
      *
+     * <p>
+     *  返回{@link CompletableFuture}维护与此阶段相同的完成属性。如果这个阶段已经是一个CompletableFuture,这个方法可能会返回这个阶段本身。
+     * 否则,调用此方法可能等效于{@code thenApply(x  - > x)},但返回类型为{@code CompletableFuture}的实例。
+     * 
      * @return the CompletableFuture
      * @throws UnsupportedOperationException if this implementation
      * does not interoperate with CompletableFuture

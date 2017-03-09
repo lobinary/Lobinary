@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,11 @@ import sun.font.BidiUtils;
  * GlyphView and can be rendered by TextLayout, a GlyphPainter
  * that uses TextLayout is plugged into the GlyphView.
  *
+ * <p>
+ *  使用java.awt.font.LineBreakMeasureer来生成java.awt.font.TextLayout以进行i18n能力渲染的流策略。
+ * 如果放置到流中的子视图是GlyphView类型,并且可以通过TextLayout呈现,那么使用TextLayout的GlyphPainter将插入GlyphView。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 class TextLayoutStrategy extends FlowView.FlowStrategy {
@@ -48,6 +54,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
     /**
      * Constructs a layout strategy for paragraphs based
      * upon java.awt.font.LineBreakMeasurer.
+     * <p>
+     *  基于java.awt.font.LineBreakMeasurer构造段落的布局策略。
+     * 
      */
     public TextLayoutStrategy() {
         text = new AttributedSegment();
@@ -61,6 +70,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * strategy should update the appropriate changed region (which
      * depends upon the strategy used for repair).
      *
+     * <p>
+     *  提供通知,说明在给定流视图负责的位置将某些内容插入到文档中。策略应该更新适当的改变区域(其取决于用于修复的策略)。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param alloc the current allocation of the view inside of the insets.
      *   This value will be null if the view has not yet been displayed.
@@ -75,6 +88,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * Gives notification that something was removed from the document
      * in a location that the given flow view is responsible for.
      *
+     * <p>
+     *  提供通知,说明在给定流视图负责的位置中从文档中删除的内容。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param alloc the current allocation of the view inside of the insets.
      * @see View#removeUpdate
@@ -88,6 +105,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * Gives notification from the document that attributes were changed
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。
+     * 
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -104,6 +125,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * constraints for each row.  This is called by a FlowView.layout
      * to update the child views in the flow.
      *
+     * <p>
+     *  做一个完整的布局在给定的视图。这将导致重建所有行(子视图)以匹配每行的给定约束。这由FlowView.layout调用以更新流中的子视图。
+     * 
+     * 
      * @param fv the view to reflow
      */
     public void layout(FlowView fv) {
@@ -117,6 +142,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * views or view fragments) and follow that with bidi reordering
      * of the unidirectional view fragments.
      *
+     * <p>
+     *  创建将适合行的布局跨度内的视图行。这被实现为执行超类功能(其填充行具有子视图或视图片段),并且遵循单向视图片段的双向重排序。
+     * 
+     * 
      * @param row the row to fill in with views.  This is assumed
      *   to be empty on entry.
      * @param pos  The current position in the children of
@@ -157,6 +186,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * calculated by the LineBreakMeasurer, this is implemented
      * to do nothing.
      *
+     * <p>
+     * 如果可能,调整给定行以适应布局跨度。由于所有的调整都已经由LineBreakMeasurer计算,这被实现为什么也不做。
+     * 
+     * 
      * @param r the row to adjust to the current layout
      *  span.
      * @param desiredSpan the current layout span >= 0
@@ -170,6 +203,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * current chunk.  This can be either an entire view from the
      * logical view, or a fragment of the view.
      *
+     * <p>
+     *  创建可用于表示当前块的单向视图。这可以是来自逻辑视图的整个视图,也可以是视图的片段。
+     * 
+     * 
      * @param fv the view holding the flow
      * @param startOffset the start location for the view being created
      * @param spanLeft the about of span left to fill in the row
@@ -231,6 +268,11 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * LineBreakMeasurer as a limit to consider in addition to the
      * remaining span.
      *
+     * <p>
+     *  计算下一个视图片段的极限偏移。至多这将是整个视图(即,在这种情况下,极限偏移将是端部偏移)。如果范围包含制表符或方向更改,则会将偏移量限制为更小的值。
+     * 然后,除了剩余跨度之外,此值还将作为要考虑的限制馈送到LineBreakMeasurer。
+     * 
+     * 
      * @param v the logical view representing the starting offset.
      * @param startOffset the model location to start at.
      */
@@ -286,6 +328,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * to update its state to account for changes in that portion of the
      * model represented by the FlowView.  Also allows the strategy
      * to update the FlowView in response to these changes.
+     * <p>
+     *  将策略与其FlowView同步。允许策略更新其状态,以说明由FlowView表示的模型部分的更改。还允许策略更新FlowView以响应这些更改。
+     * 
      */
     void sync(FlowView fv) {
         View lv = getLogicalView(fv);
@@ -341,6 +386,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
      * Implementation of AttributedCharacterIterator that supports
      * the GlyphView attributes for rendering the glyphs through a
      * TextLayout.
+     * <p>
+     *  实现AttributedCharacterIterator,支持GlyphView属性,通过TextLayout渲染字形。
+     * 
      */
     static class AttributedSegment extends Segment implements AttributedCharacterIterator {
 
@@ -370,6 +418,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
          * equal if their references are equal (i.e. that the
          * font came from a cache).
          *
+         * <p>
+         *  获取字体的边界位置。这被实现为假设如果两个字体的引用相等(即,字体来自高速缓存),则两个字体相等。
+         * 
+         * 
          * @return the location in model coordinates.  This is
          *  not the same as the Segment coordinates.
          */
@@ -390,6 +442,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
 
         /**
          * Get the font at the given child index.
+         * <p>
+         *  在给定的子索引处获取字体。
+         * 
          */
         Font getFont(int childIndex) {
             View child = v.getView(childIndex);
@@ -416,6 +471,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
         /**
          * Returns the index of the first character of the run
          * with respect to all attributes containing the current character.
+         * <p>
+         *  返回关于包含当前字符的所有属性的运行的第一个字符的索引。
+         * 
          */
         public int getRunStart() {
             int pos = toModelPosition(getIndex());
@@ -427,6 +485,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
         /**
          * Returns the index of the first character of the run
          * with respect to the given attribute containing the current character.
+         * <p>
+         * 返回相对于包含当前字符的给定属性的运行的第一个字符的索引。
+         * 
          */
         public int getRunStart(AttributedCharacterIterator.Attribute attribute) {
             if (attribute instanceof TextAttribute) {
@@ -442,6 +503,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
         /**
          * Returns the index of the first character of the run
          * with respect to the given attributes containing the current character.
+         * <p>
+         *  返回相对于包含当前字符的给定属性的运行的第一个字符的索引。
+         * 
          */
         public int getRunStart(Set<? extends Attribute> attributes) {
             int index = getBeginIndex();
@@ -456,6 +520,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
         /**
          * Returns the index of the first character following the run
          * with respect to all attributes containing the current character.
+         * <p>
+         *  返回运行后的第一个字符相对于包含当前字符的所有属性的索引。
+         * 
          */
         public int getRunLimit() {
             int pos = toModelPosition(getIndex());
@@ -467,6 +534,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
         /**
          * Returns the index of the first character following the run
          * with respect to the given attribute containing the current character.
+         * <p>
+         *  返回相对于包含当前字符的给定属性的运行后的第一个字符的索引。
+         * 
          */
         public int getRunLimit(AttributedCharacterIterator.Attribute attribute) {
             if (attribute instanceof TextAttribute) {
@@ -482,6 +552,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
         /**
          * Returns the index of the first character following the run
          * with respect to the given attributes containing the current character.
+         * <p>
+         *  返回关于包含当前字符的给定属性的运行后的第一个字符的索引。
+         * 
          */
         public int getRunLimit(Set<? extends Attribute> attributes) {
             int index = getEndIndex();
@@ -496,6 +569,9 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
         /**
          * Returns a map with the attributes defined on the current
          * character.
+         * <p>
+         *  返回具有在当前字符上定义的属性的地图。
+         * 
          */
         public Map<Attribute, Object> getAttributes() {
             Object[] ka = keys.toArray();
@@ -513,6 +589,10 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
         /**
          * Returns the value of the named attribute for the current character.
          * Returns null if the attribute is not defined.
+         * <p>
+         *  返回当前字符的命名属性的值。如果未定义属性,则返回null。
+         * 
+         * 
          * @param attribute the key of the attribute whose value is requested.
          */
         public Object getAttribute(AttributedCharacterIterator.Attribute attribute) {
@@ -533,6 +613,8 @@ class TextLayoutStrategy extends FlowView.FlowStrategy {
          * Returns the keys of all attributes defined on the
          * iterator's text range. The set is empty if no
          * attributes are defined.
+         * <p>
+         *  返回在迭代器文本范围上定义的所有属性的键。如果未定义属性,则该集为空。
          */
         public Set<Attribute> getAllAttributeKeys() {
             return keys;

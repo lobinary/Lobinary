@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,12 +17,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 /*
  * WARNING: because java doesn't support multi-inheritance some code is
  * duplicated. If you're changing this file you probably want to change
  * DeferredAttrNSImpl.java at the same time.
+ * <p>
+ *  警告：因为java不支持多继承,一些代码是重复的。如果你改变这个文件,你可能想改变DeferredAttrNSImpl.java在同一时间。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -56,6 +69,18 @@ package com.sun.org.apache.xerces.internal.dom;
  * <P>
  * DeferredAttrImpl inherits from AttrImpl which does not support
  * Namespaces. DeferredAttrNSImpl, which inherits from AttrNSImpl, does.
+ * <p>
+ *  属性表示元素的XML样式属性。通常,允许值由其在管理此类文档的文档类型定义(DTD)中的声明控​​制。
+ * <P>
+ *  如果属性没有显式分配一个值,但已在DTD中声明,它将存在并具有该缺省值。只有当文档和DTD都没有指定一个值时,属性才会被认为是空的并且没有值;在这种情况下,查询属性将返回null。
+ * <P>
+ * 属性可能有多个包含其数据的子级。 (XML允许属性包含实体引用,并且标记化的属性类型,如NMTOKENS可能为每个标记有一个子类。
+ * )为方便起见,Attribute对象的getValue()方法返回属性值的字符串版本。
+ * <P>
+ *  属性不是它们属于的元素的子元素,通常意义上,并没有有效的父引用。但是,规范说他们_do_属于一个特定的元素,如果用户尝试在元素之间显式共享它们,则抛出INUSE异常。
+ * <P>
+ *  请注意,元素不允许属性显示为共享(参见INUSE异常),因此该对象的可变性在官方上不是问题。
+ * 
  * @see DeferredAttrNSImpl
  *
  * @xerces.internal
@@ -89,6 +114,10 @@ public final class DeferredAttrImpl
     /**
      * This is the deferred constructor. Only the fNodeIndex is given here.
      * All other data, can be requested from the ownerDocument via the index.
+     * <p>
+     * <P>
+     *  DeferredAttrImpl从不支持命名空间的AttrImpl继承。 DeferredAttrNSImpl,它继承自AttrNSImpl。
+     * 
      */
     DeferredAttrImpl(DeferredDocumentImpl ownerDocument, int nodeIndex) {
         super(ownerDocument, null);
@@ -135,6 +164,9 @@ public final class DeferredAttrImpl
      * Fluffing the children at once solves a lot of work to keep
      * the two structures in sync. The problem gets worse when
      * editing the tree -- this makes it a lot easier.
+     * <p>
+     *  这是延迟构造函数。这里只给出fNodeIndex。所有其他数据,可以通过索引从ownerDocument请求。
+     * 
      */
     protected void synchronizeChildren() {
         DeferredDocumentImpl ownerDocument =

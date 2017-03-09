@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -62,6 +63,9 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException ;
 /**
  * IORInfoImpl is the implementation of the IORInfo class, as described
  * in orbos/99-12-02, section 7.
+ * <p>
+ *  IORInfoImpl是IORInfo类的实现,如orbos / 99-12-02,第7节中所述。
+ * 
  */
 public final class IORInfoImpl
     extends LocalObject
@@ -94,6 +98,9 @@ public final class IORInfoImpl
     /**
      * Creates a new IORInfo implementation.  This info object will establish
      * tagged components with the template for the provided IOR Template.
+     * <p>
+     *  创建新的IORInfo实现。此信息对象将使用所提供的IOR模板的模板建立标记的组件。
+     * 
      */
     IORInfoImpl( ObjectAdapter adapter ) {
         this.orb = adapter.getORB() ;
@@ -119,6 +126,15 @@ public final class IORInfoImpl
      * If a policy for the given type is not known to the ORB, then this
      * operation will raise INV_POLICY with a standard minor code of 2.
      *
+     * <p>
+     *  ORB服务实现可以确定特定类型的什么服务器端策略对于通过调用get_effective_policy操作构造的IOR是有效的。
+     * 当构造的IOR是针对使用POA实现的对象时,传递到创建该POA的PortableServer :: POA :: create_POA调用的所有策略对象都可以通过get_effective_policy
+     * 访问。
+     *  ORB服务实现可以确定特定类型的什么服务器端策略对于通过调用get_effective_policy操作构造的IOR是有效的。
+     * <p>
+     *  如果ORB不知道给定类型的策略,则此操作将使标准次要代码为2的INV_POLICY升高。
+     * 
+     * 
      * @param type The CORBA::PolicyType specifying the type of policy to
      *   return.
      * @return The effective CORBA::Policy object of the requested type.
@@ -139,6 +155,12 @@ public final class IORInfoImpl
      * <p>
      * Any number of components may exist with the same component ID.
      *
+     * <p>
+     *  一个可移植的ORB服务实现从它的Establish_components实现中调用这个方法,将一个标记的组件添加到在构造IOR时将被包括的集合中。此集合中的组件将包含在所有配置文件中。
+     * <p>
+     *  任何数量的组件可以存在具有相同的组件ID。
+     * 
+     * 
      * @param tagged_component The IOP::TaggedComponent to add
      */
     public void add_ior_component (TaggedComponent tagged_component) {
@@ -161,6 +183,14 @@ public final class IORInfoImpl
      * impossible to add components to thgat profile, BAD_PARAM is raised
      * with a minor code of TBD_BP + 3.
      *
+     * <p>
+     *  一个可移植的ORB服务实现从它的Establish_components实现中调用这个方法,将一个标记的组件添加到在构造IOR时将被包括的集合中。此集合中的组件将包含在指定的配置文件中。
+     * <p>
+     * 任何数量的组件可以存在具有相同的组件ID。
+     * <p>
+     *  如果给定的配置文件ID未定义已知配置文件或无法向Thgat配置文件添加组件,则BAD_PARAM将以次要代码TBD_BP + 3引发。
+     * 
+     * 
      * @param tagged_component The IOP::TaggedComponent to add.
      * @param profile_id The IOP::ProfileId tof the profile to which this
      *     component will be added.
@@ -177,6 +207,8 @@ public final class IORInfoImpl
     }
 
     /**
+    /* <p>
+    /* 
      * @param type The type of the server port
      *     (see connection.ORBSocketFactory for discussion).
      * @return The listen port number for that type.
@@ -251,6 +283,9 @@ public final class IORInfoImpl
     /**
      * Internal utility method to add an IOR component to the set of profiles
      * present in the iterator.
+     * <p>
+     *  内部实用程序方法,用于将IOR组件添加到迭代器中存在的配置集。
+     * 
      */
     private void addIORComponentToProfileInternal(
         TaggedComponent tagged_component, Iterator iterator )
@@ -281,6 +316,8 @@ public final class IORInfoImpl
     /**
      * Called when an invalid null parameter was passed.  Throws a
      * BAD_PARAM with a minor code of 1
+     * <p>
+     *  当传递无效的空参数时调用。投掷BAD_PARAM,次要代码为1
      */
     private void nullParam()
     {

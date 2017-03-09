@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -114,6 +115,48 @@ import java.io.Serializable;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  将键映射到值的对象。地图不能包含重复键;每个键可以映射到至多一个值。
+ * 
+ *  <p>此界面取代了<tt>字典</tt>类,这是一个完全抽象的类,而不是一个接口。
+ * 
+ *  <p> <tt>地图</tt>界面提供了三个<i>集合视图</i>,允许将地图内容视为一组键,值集合或键值映射集。地图的<i>顺序</i>定义为地图集合视图上的迭代器返回其元素的顺序。
+ * 一些映射实现,如<tt> TreeMap </tt>类,对它们的顺序做出特定保证;其他,像<tt> HashMap </tt>类,不要。
+ * 
+ *  <p>注意：如果可变对象用作地图键,则必须非常小心。如果对象的值以影响<tt>等于</tt>比较的方式更改,而对象是映射中的键,则不指定映射的行为。这种禁止的特殊情况是,地图不允许将自身作为关键字。
+ * 虽然允许一个映射包含自身作为一个值,建议非常小心：<tt> equals </tt>和<tt> hashCode </tt>方法在这样的映射上不再被很好地定义。
+ * 
+ * <p>所有通用地图实现类都应提供两个"标准"构造函数：一个void(无参数)构造函数,用于创建一个空映射,以及一个构造函数,其单个参数类型为<tt> Map </tt>创建具有与其参数相同的键值映射的新
+ * 地图。
+ * 实际上,后一个构造函数允许用户复制任何映射,产生期望类的等效映射。没有办法强制执行这个建议(因为接口不能包含构造函数),但JDK中的所有通用映射实现都符合。
+ * 
+ *  <p>此接口中包含的"破坏性"方法,即修改其所操作的映射的方法,如果此映射不支持该操作,则指定为抛出<tt> UnsupportedOperationException </tt>。
+ * 如果是这种情况,如果调用对地图没有影响,这些方法可以但不是必须抛出<tt> UnsupportedOperationException </tt>。
+ * 例如,如果映射要"叠加"的映射为空,则调用不可修改映射上的{@link #putAll(Map)}方法可以(但不是必须)抛出异常。
+ * 
+ * <p>一些地图实现对它们可能包含的键和值有限制。例如,一些实现禁止空键和值,并且一些实施例对它们的键的类型具有限制。
+ * 尝试插入不合格的键或值会抛出未检查的异常,通常为<tt> NullPointerException </tt>或<tt> ClassCastException </tt>。
+ * 尝试查询不合格的键或值的存在可能会抛出异常,或者它可能只是返回false;一些实现将展示前一行为,一些将展示后者。
+ * 更一般地,尝试对不合格键或值的操作,其完成不会导致将不合格元素插入到映射中可能抛出异常或者它可以成功,在实现的选择。这种异常在此接口的规范中标记为"可选"。
+ * 
+ * <p> Collections框架接口中的许多方法都是根据{@link Object#equals(Object)equals}方法来定义的。
+ * 例如,{@link #containsKey(Object)containsKey(Object key)}方法的规范说：当且仅当这个映射包含关键字<tt> k的映射时,返回<tt> true </tt>
+ *  </tt>,使得<tt>(key == null?k == null：key.equals(k))</tt>。
+ * <p> Collections框架接口中的许多方法都是根据{@link Object#equals(Object)equals}方法来定义的。
+ * 此规范不应被解释为暗示使用非空参数<tt>键</tt>调用<tt> Map.containsKey </tt>会导致<tt> key.equals k)</tt>来为任何键<tt> k </tt>调用。
+ * <p> Collections框架接口中的许多方法都是根据{@link Object#equals(Object)equals}方法来定义的。
+ * 实现可以自由地实现优化,从而避免<tt>等于</t>>调用,例如,首先比较两个密钥的散列码。 ({@ link Object#hashCode()}规范保证具有不相等的哈希码的两个对象不能相等。
+ * )更一般地,各种集合框架接口的实现可以利用底层{@link对象}方法,无论实现者认为合适。
+ * 
+ *  <p>执行地图递归遍历的一些映射操作可能会失败,自变量直接或间接包含自身的自引用实例的异常。
+ * 这包括{@code clone()},{@code equals()},{@code hashCode()}和{@code toString()}方法。
+ * 实现可以可选地处理自引用场景,然而大多数当前实现不这样做。
+ * 
+ * <p>此接口是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @param <K> the type of keys maintained by this map
  * @param <V> the type of mapped values
  *
@@ -134,6 +177,10 @@ public interface Map<K,V> {
      * map contains more than <tt>Integer.MAX_VALUE</tt> elements, returns
      * <tt>Integer.MAX_VALUE</tt>.
      *
+     * <p>
+     *  返回此地图中的键值映射的数量。如果地图包含的元素超过<tt> Integer.MAX_VALUE </tt>,则返回<tt> Integer.MAX_VALUE </tt>。
+     * 
+     * 
      * @return the number of key-value mappings in this map
      */
     int size();
@@ -141,6 +188,10 @@ public interface Map<K,V> {
     /**
      * Returns <tt>true</tt> if this map contains no key-value mappings.
      *
+     * <p>
+     *  如果此地图不包含键值映射,则返回<tt> true </tt>。
+     * 
+     * 
      * @return <tt>true</tt> if this map contains no key-value mappings
      */
     boolean isEmpty();
@@ -152,6 +203,12 @@ public interface Map<K,V> {
      * <tt>(key==null ? k==null : key.equals(k))</tt>.  (There can be
      * at most one such mapping.)
      *
+     * <p>
+     *  如果此地图包含指定键的映射,则返回<tt> true </tt>。
+     * 更正式地,如果且仅当此映射包含关键字<tt> k </tt>的映射,使得<tt>(key == null?k == null：key)时,返回<tt> true </tt>。
+     *  equals(k))</tt>。 (最多只能有一个这样的映射。)。
+     * 
+     * 
      * @param key key whose presence in this map is to be tested
      * @return <tt>true</tt> if this map contains a mapping for the specified
      *         key
@@ -172,6 +229,13 @@ public interface Map<K,V> {
      * will probably require time linear in the map size for most
      * implementations of the <tt>Map</tt> interface.
      *
+     * <p>
+     *  如果此映射将一个或多个键映射到指定的值,则返回<tt> true </tt>。
+     * 更正式地,如果且仅当此映射包含至少一个映射到<tt> v </tt>的值时,返回<tt> true </tt>,使得<tt>(value == null?v == null： value.equals(
+     * v))</tt>。
+     *  如果此映射将一个或多个键映射到指定的值,则返回<tt> true </tt>。对于<tt> Map </tt>接口的大多数实现,此操作可能需要地图大小的时间线性。
+     * 
+     * 
      * @param value value whose presence in this map is to be tested
      * @return <tt>true</tt> if this map maps one or more keys to the
      *         specified value
@@ -199,6 +263,17 @@ public interface Map<K,V> {
      * explicitly maps the key to {@code null}.  The {@link #containsKey
      * containsKey} operation may be used to distinguish these two cases.
      *
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回{@code null}。
+     * 
+     *  更正式地说,如果此映射包含从密钥{@code k}到值{@code v}的映射,使得{@code(key == null?k == null：key.equals(k) )},那么这个方法返回{@code v}
+     * ;否则返回{@code null}。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     * <p>如果此映射允许空值,则{@code null}的返回值不一定表示该映射不包含键的映射;也有可能映射将键明确映射到{@code null}。
+     *  {@link #containsKey containsKey}操作可用于区分这两种情况。
+     * 
+     * 
      * @param key the key whose associated value is to be returned
      * @return the value to which the specified key is mapped, or
      *         {@code null} if this map contains no mapping for the key
@@ -221,6 +296,11 @@ public interface Map<K,V> {
      * if {@link #containsKey(Object) m.containsKey(k)} would return
      * <tt>true</tt>.)
      *
+     * <p>
+     *  将指定的值与此映射中的指定键相关联(可选操作)。如果映射先前包含键的映射,则旧值将替换为指定的值。
+     *  (当且仅当{@link #containsKey(Object)m.containsKey(k)}将返回<tt> k </tt>时,映射<tt> m </tt> tt> true </tt>。)。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param value value to be associated with the specified key
      * @return the previous value associated with <tt>key</tt>, or
@@ -257,6 +337,19 @@ public interface Map<K,V> {
      * <p>The map will not contain a mapping for the specified key once the
      * call returns.
      *
+     * <p>
+     *  如果该映射存在,则从此映射中删除该映射(可选操作)。
+     * 更正式地,如果该映射包含从键<tt> k </tt>到值<tt> v </tt>的映射,使得<code>(key == null?k == null：key.equals ))</code>,则删除该映
+     * 射。
+     *  如果该映射存在,则从此映射中删除该映射(可选操作)。 (地图最多只能包含一个这样的映射。)。
+     * 
+     *  <p>返回此地图先前与键相关联的值,如果地图未包含键的映射,则返回<tt> null </tt>。
+     * 
+     *  <p>如果此映射允许空值,则<tt> null </tt>的返回值不一定表示该映射不包含键的映射;还有可能映射将键明确映射到<tt> null </tt>。
+     * 
+     *  <p>在调用返回后,地图将不包含指定键的映射。
+     * 
+     * 
      * @param key key whose mapping is to be removed from the map
      * @return the previous value associated with <tt>key</tt>, or
      *         <tt>null</tt> if there was no mapping for <tt>key</tt>.
@@ -282,6 +375,12 @@ public interface Map<K,V> {
      * specified map.  The behavior of this operation is undefined if the
      * specified map is modified while the operation is in progress.
      *
+     * <p>
+     * 将指定映射中的所有映射复制到此映射(可选操作)。
+     * 对于从键<tt> k </tt>到值<tt>的每个映射,此调用的效果等同于在该映射上调用{@link #put(Object,Object)put(k,v) v </tt>。
+     * 如果在操作正在进行时修改指定的映射,则此操作的行为是未定义的。
+     * 
+     * 
      * @param m mappings to be stored in this map
      * @throws UnsupportedOperationException if the <tt>putAll</tt> operation
      *         is not supported by this map
@@ -299,6 +398,10 @@ public interface Map<K,V> {
      * Removes all of the mappings from this map (optional operation).
      * The map will be empty after this call returns.
      *
+     * <p>
+     *  从此映射中删除所有映射(可选操作)。此调用返回后,地图将为空。
+     * 
+     * 
      * @throws UnsupportedOperationException if the <tt>clear</tt> operation
      *         is not supported by this map
      */
@@ -320,6 +423,14 @@ public interface Map<K,V> {
      * operations.  It does not support the <tt>add</tt> or <tt>addAll</tt>
      * operations.
      *
+     * <p>
+     *  返回此地图中包含的键的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在迭代集合的过程中修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>操作。
+     * 如果在迭代集合的过程中修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
+     * 
      * @return a set view of the keys contained in this map
      */
     Set<K> keySet();
@@ -337,6 +448,14 @@ public interface Map<K,V> {
      * <tt>retainAll</tt> and <tt>clear</tt> operations.  It does not
      * support the <tt>add</tt> or <tt>addAll</tt> operations.
      *
+     * <p>
+     * 返回此地图中包含的值的{@link Collection}视图。集合由地图支持,因此对地图的更改会反映在集合中,反之亦然。
+     * 如果在集合的迭代正在进行时修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。
+     * 集合支持元素删除,通过<tt> Iterator.remove </tt>,<tt> Collection.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射>
+     *  retainAll </tt>和<tt>清除</tt>操作。
+     * 如果在集合的迭代正在进行时修改映射(除非通过迭代器自己的<tt> remove </tt>操作),迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
+     * 
      * @return a collection view of the values contained in this map
      */
     Collection<V> values();
@@ -355,6 +474,15 @@ public interface Map<K,V> {
      * <tt>clear</tt> operations.  It does not support the
      * <tt>add</tt> or <tt>addAll</tt> operations.
      *
+     * <p>
+     *  返回此地图中包含的映射的{@link Set}视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在对迭代器执行迭代(即通过迭代器自己的<tt> remove </tt>操作,或通过对迭代器返回的映射条目执行<tt> setValue </tt>操作) )迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>操作。
+     * 如果在对迭代器执行迭代(即通过迭代器自己的<tt> remove </tt>操作,或通过对迭代器返回的映射条目执行<tt> setValue </tt>操作) )迭代的结果是未定义的。
+     * 它不支持<tt>添加</tt>或<tt> addAll </tt>操作。
+     * 
+     * 
      * @return a set view of the mappings contained in this map
      */
     Set<Map.Entry<K, V>> entrySet();
@@ -369,6 +497,13 @@ public interface Map<K,V> {
      * modified after the entry was returned by the iterator, except through
      * the <tt>setValue</tt> operation on the map entry.
      *
+     * <p>
+     * 地图条目(键值对)。 <tt> Map.entrySet </tt>方法返回地图的集合视图,其元素是此类的元素。获取对映射条目的引用的<i>仅</i>方式来自此集合视图的迭代器。
+     * 这些<tt> Map.Entry </tt>对象在迭代期间仅有效<i> </i>;更正式地说,如果在迭代器返回条目之后修改了后台映射,则映射条目的行为是未定义的,除非通过映射条目上的<tt> setVa
+     * lue </tt>操作。
+     * 地图条目(键值对)。 <tt> Map.entrySet </tt>方法返回地图的集合视图,其元素是此类的元素。获取对映射条目的引用的<i>仅</i>方式来自此集合视图的迭代器。
+     * 
+     * 
      * @see Map#entrySet()
      * @since 1.2
      */
@@ -376,6 +511,10 @@ public interface Map<K,V> {
         /**
          * Returns the key corresponding to this entry.
          *
+         * <p>
+         *  返回与此条目对应的键。
+         * 
+         * 
          * @return the key corresponding to this entry
          * @throws IllegalStateException implementations may, but are not
          *         required to, throw this exception if the entry has been
@@ -388,6 +527,10 @@ public interface Map<K,V> {
          * has been removed from the backing map (by the iterator's
          * <tt>remove</tt> operation), the results of this call are undefined.
          *
+         * <p>
+         *  返回与此条目对应的值。如果已从映射(通过迭代器的<tt> remove </tt>操作)中删除映射,则此调用的结果未定义。
+         * 
+         * 
          * @return the value corresponding to this entry
          * @throws IllegalStateException implementations may, but are not
          *         required to, throw this exception if the entry has been
@@ -401,6 +544,10 @@ public interface Map<K,V> {
          * behavior of this call is undefined if the mapping has already been
          * removed from the map (by the iterator's <tt>remove</tt> operation).
          *
+         * <p>
+         *  将与此条目对应的值替换为指定值(可选操作)。 (写入到映射。)如果映射已经从映射中移除(通过迭代器的<tt> remove </tt>操作),则此调用的行为是未定义的。
+         * 
+         * 
          * @param value new value to be stored in this entry
          * @return old value corresponding to the entry
          * @throws UnsupportedOperationException if the <tt>put</tt> operation
@@ -431,6 +578,15 @@ public interface Map<K,V> {
          * This ensures that the <tt>equals</tt> method works properly across
          * different implementations of the <tt>Map.Entry</tt> interface.
          *
+         * <p>
+         *  将指定的对象与此条目进行比较以确保相等。如果给定对象也是映射条目,并且这两个条目表示相同的映射,则返回<tt> true </tt>。
+         * 更正式地,如果<pre>(e1.getKey()== null?e2.getKey()== null：e1,则两个条目<tt> e1 </tt>和<tt> e2 </tt> .getKey()。
+         * equals(e2.getKey()))&amp;&amp; (e1.getValue()== null?e2.getValue()== null：e1.getValue()。
+         * equals(e2.getValue()))。
+         * </pre>
+         * 这可以确保<tt>等于</tt>方法在<tt> Map.Entry </tt>界面的不同实现中正常工作。
+         * 
+         * 
          * @param o object to be compared for equality with this map entry
          * @return <tt>true</tt> if the specified object is equal to this map
          *         entry
@@ -448,6 +604,14 @@ public interface Map<K,V> {
          * <tt>e1</tt> and <tt>e2</tt>, as required by the general
          * contract of <tt>Object.hashCode</tt>.
          *
+         * <p>
+         *  返回此映射条目的哈希码值。映射条目<tt> e </tt>的哈希码定义为：<pre>(e.getKey()== null?0：e.getKey()。
+         * hashCode())^(e.getValue ()== null?0：e.getValue()。hashCode())。
+         * </pre>
+         *  这确保对于任何两个条目<tt> e1 </tt>,<tt> e1.equals(e2)</tt>意味着<tt> e1.hashCode()== e2.hashCode()</tt> <tt> e2 </tt>
+         * ,根据<tt> Object.hashCode </tt>的一般合同的要求。
+         * 
+         * 
          * @return the hash code value for this map entry
          * @see Object#hashCode()
          * @see Object#equals(Object)
@@ -461,6 +625,12 @@ public interface Map<K,V> {
          * <p>The returned comparator is serializable and throws {@link
          * NullPointerException} when comparing an entry with a null key.
          *
+         * <p>
+         *  返回一个比较器,比较{@link Map.Entry}键的自然顺序。
+         * 
+         *  <p>返回的比较器是可序列化的,并且在将一个条目与一个空键比较时会抛出{@link NullPointerException}。
+         * 
+         * 
          * @param  <K> the {@link Comparable} type of then map keys
          * @param  <V> the type of the map values
          * @return a comparator that compares {@link Map.Entry} in natural order on key.
@@ -478,6 +648,12 @@ public interface Map<K,V> {
          * <p>The returned comparator is serializable and throws {@link
          * NullPointerException} when comparing an entry with null values.
          *
+         * <p>
+         *  返回一个比较器,比较{@link Map.Entry}的自然顺序。
+         * 
+         *  <p>返回的比较器是可序列化的,并且在将一个条目与空值比较时会抛出{@link NullPointerException}。
+         * 
+         * 
          * @param <K> the type of the map keys
          * @param <V> the {@link Comparable} type of the map values
          * @return a comparator that compares {@link Map.Entry} in natural order on value.
@@ -496,6 +672,12 @@ public interface Map<K,V> {
          * <p>The returned comparator is serializable if the specified comparator
          * is also serializable.
          *
+         * <p>
+         *  返回一个比较器,通过使用给定的{@link比较器}比较{@link Map.Entry}。
+         * 
+         *  <p>如果指定的比较器也是可串行化的,返回的比较器是可序列化的。
+         * 
+         * 
          * @param  <K> the type of the map keys
          * @param  <V> the type of the map values
          * @param  cmp the key {@link Comparator}
@@ -515,6 +697,12 @@ public interface Map<K,V> {
          * <p>The returned comparator is serializable if the specified comparator
          * is also serializable.
          *
+         * <p>
+         *  返回一个比较器,使用给定的{@link Comparator}比较{@link Map.Entry}的值。
+         * 
+         *  <p>如果指定的比较器也是可串行化的,返回的比较器是可序列化的。
+         * 
+         * 
          * @param  <K> the type of the map keys
          * @param  <V> the type of the map values
          * @param  cmp the value {@link Comparator}
@@ -539,6 +727,13 @@ public interface Map<K,V> {
      * <tt>equals</tt> method works properly across different implementations
      * of the <tt>Map</tt> interface.
      *
+     * <p>
+     * 将指定的对象与此映射进行比较以实现相等性。如果给定对象也是一个映射,并且这两个映射表示相同的映射,则返回<tt> true </tt>。更正式地,如果<tt> m1.entrySet()。
+     * equals(m2.entrySet())</tt>,则两个映射<tt> m1 </tt>和<tt> m2 </tt>这可以确保<tt>等于</tt>方法在<tt> Map </tt>界面的不同实现中正
+     * 常工作。
+     * 将指定的对象与此映射进行比较以实现相等性。如果给定对象也是一个映射,并且这两个映射表示相同的映射,则返回<tt> true </tt>。更正式地,如果<tt> m1.entrySet()。
+     * 
+     * 
      * @param o object to be compared for equality with this map
      * @return <tt>true</tt> if the specified object is equal to this map
      */
@@ -552,6 +747,13 @@ public interface Map<K,V> {
      * <tt>m1</tt> and <tt>m2</tt>, as required by the general contract of
      * {@link Object#hashCode}.
      *
+     * <p>
+     *  返回此地图的哈希码值。地图的哈希码定义为地图的<tt> entrySet()</tt>视图中每个条目的哈希码的总和。
+     * 这确保对于任何两个映射<tt> m1 </tt>,<tt> m1.equals(m2)</tt>意味着<tt> m1.hashCode()== m2.hashCode()</tt> <tt> m2 </tt>
+     * ,根据{@link Object#hashCode}的一般合同的要求。
+     *  返回此地图的哈希码值。地图的哈希码定义为地图的<tt> entrySet()</tt>视图中每个条目的哈希码的总和。
+     * 
+     * 
      * @return the hash code value for this map
      * @see Map.Entry#hashCode()
      * @see Object#equals(Object)
@@ -571,6 +773,12 @@ public interface Map<K,V> {
      * atomicity guarantees must override this method and document its
      * concurrency properties.
      *
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回{@code defaultValue}。
+     * 
+     *  @implSpec默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 
+     * 
      * @param key the key whose associated value is to be returned
      * @param defaultValue the default mapping of the key
      * @return the value to which the specified key is mapped, or
@@ -609,6 +817,15 @@ public interface Map<K,V> {
      * atomicity guarantees must override this method and document its
      * concurrency properties.
      *
+     * <p>
+     *  对此映射中的每个条目执行给定的操作,直到所有条目都已处理或操作抛出异常。除非实现类另有规定,否则将按入口集迭代(如果指定了迭代顺序)的顺序执行操作。由操作抛出的异常中继到调用者。
+     * 
+     * @implSpec默认实现等效于{@code map}：<pre> {@code for(Map.Entry <K,V> entry：map.entrySet())action.accept(entry.getKey ,entry.getValue()); }
+     *  </pre>。
+     * 
+     *  默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 
+     * 
      * @param action The action to be performed for each entry
      * @throws NullPointerException if the specified action is null
      * @throws ConcurrentModificationException if an entry is found to be
@@ -649,6 +866,15 @@ public interface Map<K,V> {
      * atomicity guarantees must override this method and document its
      * concurrency properties.
      *
+     * <p>
+     *  将每个条目的值替换为调用该条目上的给定函数的结果,直到所有条目都已处理或函数抛出异常。函数抛出的异常被中继到调用者。
+     * 
+     *  @implSpec <p>对于这个{@code map},默认实现是等同的：<pre> {@code for(Map.Entry <K,V> entry：map.entrySet())entry.setValue apply(entry.getKey(),entry.getValue())); }
+     *  </pre>。
+     * 
+     *  <p>默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 
+     * 
      * @param function the function to apply to each entry
      * @throws UnsupportedOperationException if the {@code set} operation
      * is not supported by this map's entry set iterator.
@@ -717,6 +943,18 @@ public interface Map<K,V> {
      * atomicity guarantees must override this method and document its
      * concurrency properties.
      *
+     * <p>
+     *  如果指定的键尚未与某个值相关联(或映射到{@code null}),则将其与给定值相关联并返回{@code null},否则返回当前值。
+     * 
+     *  @implSpec对于这个{@code map},默认实现是等价的：
+     * 
+     *  <pre> {@code V v = map.get(key); if(v == null)v = map.put(key,value);
+     * 
+     *  return v; } </pre>
+     * 
+     * <p>默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param value value to be associated with the specified key
      * @return the previous value associated with the specified key, or
@@ -767,6 +1005,17 @@ public interface Map<K,V> {
      * atomicity guarantees must override this method and document its
      * concurrency properties.
      *
+     * <p>
+     *  仅当指定键的条目当前映射到指定值时,才删除该条目。
+     * 
+     *  @implSpec对于这个{@code map},默认实现是等价的：
+     * 
+     *  <pre> {@code if(map.containsKey(key)&& Objects.equals(map.get(key),value)){map.remove(key); return true; }
+     *  else return false; } </pre>。
+     * 
+     *  <p>默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 
+     * 
      * @param key key with which the specified value is associated
      * @param value value expected to be associated with the specified key
      * @return {@code true} if the value was removed
@@ -815,6 +1064,19 @@ public interface Map<K,V> {
      * atomicity guarantees must override this method and document its
      * concurrency properties.
      *
+     * <p>
+     *  仅当当前映射到指定值时替换指定键的条目。
+     * 
+     *  @implSpec对于这个{@code map},默认实现是等价的：
+     * 
+     *  <pre> {@code if(map.containsKey(key)&& Objects.equals(map.get(key),value)){map.put(key,newValue); return true; }
+     *  else return false; } </pre>。
+     * 
+     *  如果oldValue为null,除非newValue也为null,否则默认实现不会为不支持null值的映射抛出NullPointerException。
+     * 
+     *  <p>默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 
+     * 
      * @param key key with which the specified value is associated
      * @param oldValue value expected to be associated with the specified key
      * @param newValue value to be associated with the specified key
@@ -862,6 +1124,16 @@ public interface Map<K,V> {
      * atomicity guarantees must override this method and document its
      * concurrency properties.
       *
+      * <p>
+      * 仅当指定键的条目当前映射到某个值时,才替换该条目。
+      * 
+      *  @implSpec对于这个{@code map},默认实现是等价的：
+      * 
+      *  <pre> {@code if(map.containsKey(key)){return map.put(key,value); } else return null; } </pre>
+      * 
+      *  <p>默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+      * 
+      * 
      * @param key key with which the specified value is associated
      * @param value value to be associated with the specified key
      * @return the previous value associated with the specified key, or
@@ -933,6 +1205,26 @@ public interface Map<K,V> {
      * whether the function is applied once atomically only if the value is not
      * present.
      *
+     * <p>
+     *  如果指定的键尚未与某个值相关联(或映射到{@code null}),则尝试使用给定的映射函数计算其值,并将其输入到此映射中,除非{@code null}。
+     * 
+     *  <p>如果函数返回{@code null},则不记录映射。如果函数本身抛出一个(未检查的)异常,则抛出异常,并且不记录映射。最常见的用法是构造一个用作初始映射值或记忆结果的新对象,如：
+     * 
+     *  <pre> {@code map.computeIfAbsent(key,k  - > new Value(f(k))); } </pre>
+     * 
+     *  <p>或实施多值地图,{@code Map <K,Collection <V >>},支持每个键的多个值：
+     * 
+     *  <pre> {@code map.computeIfAbsent(key,k  - > new HashSet <V>())。add(v); } </pre>
+     * 
+     *  @implSpec默认实现等效于此{@code map}的以下步骤,然后返回当前值或{@code null}(如果现在缺少)：
+     * 
+     * <pre> {@code if(map.get(key)== null){V newValue = mappingFunction.apply(key); if(newValue！= null)map.put(key,newValue); }
+     * } </pre>。
+     * 
+     *  <p>默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 特别地,子接口{@link java.util.concurrent.ConcurrentMap}的所有实现都必须记录该函数是否仅在值不存在时原子地应用。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param mappingFunction the function to compute a value
      * @return the current (existing or computed) value associated with
@@ -995,6 +1287,20 @@ public interface Map<K,V> {
      * whether the function is applied once atomically only if the value is not
      * present.
      *
+     * <p>
+     *  如果指定键的值存在且非空,则尝试计算给定键和其当前映射值的新映射。
+     * 
+     *  <p>如果函数返回{@code null},则会删除映射。如果函数本身抛出一个(未检查的)异常,则异常被重新抛出,并且当前映射保持不变。
+     * 
+     *  @implSpec默认实现等效于对此{@code map}执行以下步骤,然后返回当前值或{@code null}(如果现在缺少)：
+     * 
+     *  <pre> {@code if(map.get(key)！= null){V oldValue = map.get(key); V newValue = remappingFunction.apply(key,oldValue); if(newValue！= null)map.put(key,newValue); else map.remove(key); }
+     * } </pre>。
+     * 
+     * <p>默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 特别地,子接口{@link java.util.concurrent.ConcurrentMap}的所有实现都必须记录该函数是否仅在值不存在时原子地应用。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param remappingFunction the function to compute a value
      * @return the new value associated with the specified key, or null if none
@@ -1071,6 +1377,24 @@ public interface Map<K,V> {
      * whether the function is applied once atomically only if the value is not
      * present.
      *
+     * <p>
+     *  尝试计算指定键及其当前映射值的映射(如果没有当前映射,则为{@code null})。例如,要创建或附加一个{@code String} msg到值映射：
+     * 
+     *  <pre> {@code map.compute(key,(k,v) - >(v == null)?msg：v.concat(msg))}方法{@link #merge merge }通常更容易用于这
+     * 样的目的。
+     * )。
+     * 
+     *  <p>如果函数返回{@code null},则会删除映射(如果初始不存在则保持不存在)。如果函数本身抛出一个(未检查的)异常,则异常被重新抛出,并且当前映射保持不变。
+     * 
+     *  @implSpec默认实现等效于对此{@code map}执行以下步骤,然后返回当前值或{@code null}(如果不存在)：
+     * 
+     *  <pre> {@code V oldValue = map.get(key); V newValue = remappingFunction.apply(key,oldValue); if(oldValue！= null){if(newValue！= null)map.put(key,newValue); else map.remove(key); }
+     *  else {if(newValue！= null)map.put(key,newValue); else return null; }} </pre>。
+     * 
+     * <p>默认实现不保证此方法的同步或原子性属性。任何提供原子性保证的实现必须覆盖此方法并记录其并发属性。
+     * 特别地,子接口{@link java.util.concurrent.ConcurrentMap}的所有实现都必须记录该函数是否仅在值不存在时原子地应用。
+     * 
+     * 
      * @param key key with which the specified value is to be associated
      * @param remappingFunction the function to compute a value
      * @return the new value associated with the specified key, or null if none
@@ -1148,6 +1472,8 @@ public interface Map<K,V> {
      * whether the function is applied once atomically only if the value is not
      * present.
      *
+     * <p>
+     * 
      * @param key key with which the resulting value is to be associated
      * @param value the non-null value to be merged with the existing value
      *        associated with the key or, if no existing value or a null value

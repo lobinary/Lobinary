@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 
@@ -76,6 +86,22 @@ import org.w3c.dom.DOMError;
  * boundaries, indent lines, and serialize elements on separate
  * lines. Line terminators will be regarded as spaces, and
  * spaces at beginning of line will be stripped.
+ * <p>
+ *  实现一个XML序列化器支持DOM和SAX相当序列化。有关使用说明,请参阅{@link Serializer}。
+ * <p>
+ *  如果使用输出流,则从输出格式(默认为<tt> UTF-8 </tt>)获取编码。如果使用写入程序,请确保写入程序使用与输出格式中指定的相同的编码(如果适用)。
+ * <p>
+ *  序列化器支持DOM和SAX。 SAX序列化是通过触发SAX事件并使用序列化程序作为文档处理程序来完成的。
+ *  DOM序列化是通过调用{@link #serialize(Document)}或使用DOM Level 3 {@link org.w3c.dom.ls.DOMSerializer}并使用{@link org.w3c.dom.ls.DOMSerializer#写}
+ * ,{@link org.w3c.dom.ls.DOMSerializer#writeToString}。
+ *  序列化器支持DOM和SAX。 SAX序列化是通过触发SAX事件并使用序列化程序作为文档处理程序来完成的。
+ * <p>
+ * 如果在序列化时发生I / O异常,则序列化器不会直接抛出异常,而只是在序列化结束时抛出异常(DOM或SAX的{@link org.xml.sax.DocumentHandler#endDocument}
+ * 。
+ * <p>
+ *  对于未指定为空白保留的元素,序列化程序可能会在空格边界,缩进行和序列化元素在单独的行上断开长文本行。行终止符将被视为空格,行开始处的空格将被删除。
+ * 
+ * 
  * @author <a href="mailto:arkin@intalio.com">Assaf Arkin</a>
  * @author <a href="mailto:rahul.srivastava@sun.com">Rahul Srivastava</a>
  * @author Elena Litani IBM
@@ -119,6 +145,12 @@ extends XMLSerializer {
      * NOTE: if this field is set to true the following
      * fields need to be initialized: fNSBinder, fLocalNSBinder, fSymbolTable,
      * XMLSymbols.EMPTY_STRING, fXmlSymbol, fXmlnsSymbol, fNamespaceCounter.
+     * <p>
+     *  控制是否应在序列化期间执行命名空间fixup。
+     * 注意：如果此字段设置为true,以下字段需要初始化：fNSBinder,fLocalNSBinder,fSymbolTable,XMLSymbols.EMPTY_STRING,fXmlSymbol,fX
+     * mlnsSymbol,fNamespaceCounter。
+     *  控制是否应在序列化期间执行命名空间fixup。
+     * 
      */
     protected boolean fNamespaces = false;
 
@@ -130,6 +162,9 @@ extends XMLSerializer {
      * Constructs a new serializer. The serializer cannot be used without
      * calling {@link #setOutputCharStream} or {@link #setOutputByteStream}
      * first.
+     * <p>
+     *  构造新的序列化程序。不调用{@link #setOutputCharStream}或{@link #setOutputByteStream}时,不能使用序列化器。
+     * 
      */
     public XML11Serializer() {
         super( );
@@ -141,6 +176,9 @@ extends XMLSerializer {
      * Constructs a new serializer. The serializer cannot be used without
      * calling {@link #setOutputCharStream} or {@link #setOutputByteStream}
      * first.
+     * <p>
+     *  构造新的序列化程序。不调用{@link #setOutputCharStream}或{@link #setOutputByteStream}时,不能使用序列化器。
+     * 
      */
     public XML11Serializer( OutputFormat format ) {
         super( format );
@@ -153,6 +191,10 @@ extends XMLSerializer {
      * using the specified output format. If <tt>format</tt> is null,
      * will use a default output format.
      *
+     * <p>
+     *  构造使用指定的输出格式写入指定的写入程序的新序列化程序。如果<tt>格式</tt>为空,将使用默认输出格式。
+     * 
+     * 
      * @param writer The writer to use
      * @param format The output format to use, null for the default
      */
@@ -167,6 +209,9 @@ extends XMLSerializer {
      * stream using the specified output format. If <tt>format</tt>
      * is null, will use a default output format.
      *
+     * <p>
+     *  构造新的序列化器,使用指定的输出格式写入指定的输出流。如果<tt>格式</tt>为空,将使用默认输出格式。
+     * 
      * @param output The output stream to use
      * @param format The output format to use, null for the default
      */

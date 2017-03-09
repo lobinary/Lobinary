@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,22 @@ import java.awt.ItemSelectable;
  *                     </ul>
  * Assigning the value different from listed above will cause an unspecified behavior.
  *
+ * <p>
+ *  指示项目已选择或取消选择的语义事件。当用户选择或取消选择项目时,此高级事件由ItemSelectable对象(例如列表)生成。
+ * 事件被传递到每个使用组件的<code> addItemListener </code>方法注册接收这些事件的每个<code> ItemListener </code>对象。
+ * <P>
+ *  实现<code> ItemListener </code>接口的对象在事件发生时获得此<code> ItemEvent </code>。
+ * 监听器免除了处理单个鼠标移动和鼠标点击的细节,并且可以代替地处理像"选择的项目"或"取消选择的项目"的"有意义的"(语义)事件。
+ * <p>
+ *  如果任何特定{@code ItemEvent}实例的{@code id}参数不在{@code ITEM_FIRST}到{@code ITEM_LAST}的范围内,则会导致未指定的行为。
+ * <p>
+ *  任何{@code ItemEvent}实例的{@code stateChange}都会使用以下值之一：
+ * <ul>
+ *  <li> {@code ItemEvent.SELECTED} <li> {@code ItemEvent.DESELECTED}
+ * </ul>
+ *  分配与上述不同的值将导致未指定的行为。
+ * 
+ * 
  * @author Carl Quinn
  *
  * @see java.awt.ItemSelectable
@@ -66,32 +83,51 @@ public class ItemEvent extends AWTEvent {
 
     /**
      * The first number in the range of ids used for item events.
+     * <p>
+     *  用于项目事件的ids范围中的第一个数字。
+     * 
      */
     public static final int ITEM_FIRST          = 701;
 
     /**
      * The last number in the range of ids used for item events.
+     * <p>
+     *  用于项事件的ids范围中的最后一个数字。
+     * 
      */
     public static final int ITEM_LAST           = 701;
 
     /**
      * This event id indicates that an item's state changed.
+     * <p>
+     *  此事件ID指示项目的状态已更改。
+     * 
      */
     public static final int ITEM_STATE_CHANGED  = ITEM_FIRST; //Event.LIST_SELECT
 
     /**
      * This state-change value indicates that an item was selected.
+     * <p>
+     *  该状态变化值表示选择了项目。
+     * 
      */
     public static final int SELECTED = 1;
 
     /**
      * This state-change-value indicates that a selected item was deselected.
+     * <p>
+     * 该状态变化值指示所选择的项目被取消选择。
+     * 
      */
     public static final int DESELECTED  = 2;
 
     /**
      * The item whose selection state has changed.
      *
+     * <p>
+     *  选择状态已更改的项目。
+     * 
+     * 
      * @serial
      * @see #getItem()
      */
@@ -101,6 +137,10 @@ public class ItemEvent extends AWTEvent {
      * <code>stateChange</code> indicates whether the <code>item</code>
      * was selected or deselected.
      *
+     * <p>
+     *  <code> stateChange </code>指示是否选择或取消选择<code>项</code>。
+     * 
+     * 
      * @serial
      * @see #getStateChange()
      */
@@ -108,6 +148,9 @@ public class ItemEvent extends AWTEvent {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -608708132447206933L;
 
@@ -117,6 +160,11 @@ public class ItemEvent extends AWTEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造一个<code> ItemEvent </code>对象。
+     *  <p>如果<code> source </code>是<code> null </code>,此方法会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param source The <code>ItemSelectable</code> object
      *               that originated the event
      * @param id           The integer that identifies the event type.
@@ -141,6 +189,10 @@ public class ItemEvent extends AWTEvent {
     /**
      * Returns the originator of the event.
      *
+     * <p>
+     *  返回事件的发起者。
+     * 
+     * 
      * @return the ItemSelectable object that originated the event.
      */
     public ItemSelectable getItemSelectable() {
@@ -150,6 +202,10 @@ public class ItemEvent extends AWTEvent {
    /**
     * Returns the item affected by the event.
     *
+    * <p>
+    *  返回受事件影响的项目。
+    * 
+    * 
     * @return the item (object) that was affected by the event
     */
     public Object getItem() {
@@ -159,6 +215,10 @@ public class ItemEvent extends AWTEvent {
    /**
     * Returns the type of state change (selected or deselected).
     *
+    * <p>
+    *  返回状态更改的类型(选择或取消选择)。
+    * 
+    * 
     * @return an integer that indicates whether the item was selected
     *         or deselected
     *
@@ -173,6 +233,9 @@ public class ItemEvent extends AWTEvent {
      * Returns a parameter string identifying this item event.
      * This method is useful for event-logging and for debugging.
      *
+     * <p>
+     *  返回标识此项事件的参数字符串。此方法对事件记录和调试非常有用。
+     * 
      * @return a string identifying the event and its attributes
      */
     public String paramString() {

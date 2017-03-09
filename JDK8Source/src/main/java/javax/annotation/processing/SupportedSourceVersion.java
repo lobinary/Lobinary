@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,12 @@ import javax.lang.model.SourceVersion;
  * result from the value of this annotation, as done by {@link
  * AbstractProcessor#getSupportedSourceVersion}.
  *
+ * <p>
+ *  用于指示注释处理器支持的最新源版本的注释。
+ *  {@link Processor#getSupportedSourceVersion}方法可以根据此注释的值构造其结果,如{@link AbstractProcessor#getSupportedSourceVersion}
+ * 所做。
+ *  用于指示注释处理器支持的最新源版本的注释。
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;
@@ -49,6 +56,9 @@ import javax.lang.model.SourceVersion;
 public @interface SupportedSourceVersion {
     /**
      * Returns the latest supported source version.
+     * <p>
+     * 
+     * 
      * @return the latest supported source version
      */
     SourceVersion value();

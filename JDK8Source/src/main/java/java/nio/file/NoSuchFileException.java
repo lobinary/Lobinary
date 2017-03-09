@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package java.nio.file;
  * Checked exception thrown when an attempt is made to access a file that does
  * not exist.
  *
+ * <p>
+ *  尝试访问不存在的文件时检测到异常。
+ * 
+ * 
  * @since 1.7
  */
 
@@ -40,6 +45,10 @@ public class NoSuchFileException
     /**
      * Constructs an instance of this class.
      *
+     * <p>
+     *  构造此类的实例。
+     * 
+     * 
      * @param   file
      *          a string identifying the file or {@code null} if not known.
      */
@@ -50,6 +59,9 @@ public class NoSuchFileException
     /**
      * Constructs an instance of this class.
      *
+     * <p>
+     *  构造此类的实例。
+     * 
      * @param   file
      *          a string identifying the file or {@code null} if not known.
      * @param   other

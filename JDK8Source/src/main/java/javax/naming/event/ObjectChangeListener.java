@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,18 @@ package javax.naming.event;
   * should also implement the <tt>NamespaceChangeListener</tt>
   * interface.
   *
+  * <p>
+  *  指定事件类型为<tt> OBJECT_CHANGED </tt>的<tt> NamingEvent </tt>的侦听器必须实现的方法。
+  * p>
+  *  当对象的(内容)更改时,将触发<tt> OBJECT_CHANGED </tt>事件类型。这可能意味着其属性已被修改,添加或删除,和/或对象本身已被替换。
+  * 对象如何更改可以通过检查<tt> NamingEvent </tt>的旧和新绑定来确定。
+  * p>
+  *  对<tt> OBJECT_CHANGED </tt>事件类型感兴趣的监听器必须：
+  * ol>
+  * 
+  *  li>实现此接口及其方法(<tt> objectChanged()</tt>)li>实现<tt> NamingListener.namingExceptionThrown()</tt>,以便在尝试收集
+  * 有关事件。
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -66,6 +79,12 @@ public interface ObjectChangeListener extends NamingListener {
      * The binding of the changed object can be obtained using
      * <tt>evt.getNewBinding()</tt>. Its old binding (before the change)
      * can be obtained using <tt>evt.getOldBinding()</tt>.
+     * <p>
+     *  li>使用源的<tt> addNamingListener()</tt>方法向源注册。
+     * /ol>
+     *  想要通知命名空间更改事件的侦听器还应实现<tt> NamespaceChangeListener </tt>界面。
+     * 
+     * 
      * @param evt The nonnull naming event.
      * @see NamingEvent#OBJECT_CHANGED
      */

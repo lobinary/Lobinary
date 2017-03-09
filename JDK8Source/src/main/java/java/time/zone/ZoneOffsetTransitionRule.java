@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2009-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.zone;
 
@@ -95,18 +114,36 @@ import java.util.Objects;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  表示如何创建转换的规则。
+ * <p>
+ *  此类允许表示用于识别未来转换的规则。规则可以以许多形式写：
+ * <ul>
+ *  <li> 3月16日<li> 3月16日或之后的星期天<li> 3月16日或之前的星期天<li> 2月最后一个星期日
+ * </ul>
+ *  这些不同的规则类型可以表示和查询。
+ * 
+ *  @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 public final class ZoneOffsetTransitionRule implements Serializable {
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 6889046316657758795L;
 
     /**
      * The month of the month-day of the first day of the cutover week.
      * The actual date will be adjusted by the dowChange field.
+     * <p>
+     *  割接周的第一天的月 - 日的月份。实际的日期将通过dowChange字段进行调整。
+     * 
      */
     private final Month month;
     /**
@@ -116,34 +153,59 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * The value is the number of days from the end of the month, such that
      * {@code -1} is the last day of the month, {@code -2} is the second
      * to last day, and so on.
+     * <p>
+     * 割接周的月 - 日的月。如果为正,则是切换可能发生的星期的开始。如果为负,则表示可能发生割接的星期末。
+     * 该值是从月底算起的天数,因此{@code -1}是该月的最后一天,{@code -2}是第二天到最后一天,依此类推。
+     * 
      */
     private final byte dom;
     /**
      * The cutover day-of-week, null to retain the day-of-month.
+     * <p>
+     *  切换日期,星期,null保留月。
+     * 
      */
     private final DayOfWeek dow;
     /**
      * The cutover time in the 'before' offset.
+     * <p>
+     *  割接时间在"before"偏移。
+     * 
      */
     private final LocalTime time;
     /**
      * Whether the cutover time is midnight at the end of day.
+     * <p>
+     *  切换时间是否在一天结束时为午夜。
+     * 
      */
     private final boolean timeEndOfDay;
     /**
      * The definition of how the local time should be interpreted.
+     * <p>
+     *  定义如何解释本地时间。
+     * 
      */
     private final TimeDefinition timeDefinition;
     /**
      * The standard offset at the cutover.
+     * <p>
+     *  割接处的标准偏移。
+     * 
      */
     private final ZoneOffset standardOffset;
     /**
      * The offset before the cutover.
+     * <p>
+     *  割接前的偏移量。
+     * 
      */
     private final ZoneOffset offsetBefore;
     /**
      * The offset after the cutover.
+     * <p>
+     *  割接后的偏移量。
+     * 
      */
     private final ZoneOffset offsetAfter;
 
@@ -153,6 +215,12 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * Applications should normally obtain an instance from {@link ZoneRules}.
      * This factory is only intended for use when creating {@link ZoneRules}.
      *
+     * <p>
+     *  获取定义年度规则以在两个偏移之间创建过渡的实例。
+     * <p>
+     *  应用程序通常应从{@link ZoneRules}获取一个实例。此工厂仅用于创建{@link ZoneRules}时使用。
+     * 
+     * 
      * @param month  the month of the month-day of the first day of the cutover week, not null
      * @param dayOfMonthIndicator  the day of the month-day of the cutover week, positive if the week is that
      *  day or later, negative if the week is that day or earlier, counting from the last day of the month,
@@ -196,6 +264,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Creates an instance defining the yearly rule to create transitions between two offsets.
      *
+     * <p>
+     *  创建定义年度规则以在两个偏移之间创建过渡的实例。
+     * 
+     * 
      * @param month  the month of the month-day of the first day of the cutover week, not null
      * @param dayOfMonthIndicator  the day of the month-day of the cutover week, positive if the week is that
      *  day or later, negative if the week is that day or earlier, counting from the last day of the month,
@@ -235,6 +307,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */
@@ -245,6 +321,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Writes the object using a
      * <a href="../../../serialized-form.html#java.time.zone.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../../serialized-form.html#java.time.zone.Ser">专用序列化表单</a>写入对象。
+     * 
+     * 
      * @serialData
      * Refer to the serialized form of
      * <a href="../../../serialized-form.html#java.time.zone.ZoneRules">ZoneRules.writeReplace</a>
@@ -294,6 +374,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Writes the state to the stream.
      *
+     * <p>
+     *  将状态写入流。
+     * 
+     * 
      * @param out  the output stream, not null
      * @throws IOException if an error occurs
      */
@@ -333,6 +417,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Reads the state from the stream.
      *
+     * <p>
+     *  从流中读取状态。
+     * 
+     * 
      * @param in  the input stream, not null
      * @return the created object, not null
      * @throws IOException if an error occurs
@@ -364,6 +452,14 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * If the rule defines a week where the transition might occur, then the month
      * if the month of either the earliest or latest possible date of the cutover.
      *
+     * <p>
+     *  获取转换的月份。
+     * <p>
+     *  如果规则定义确切的日期,则月份是该日期的月份。
+     * <p>
+     *  如果规则定义了可能发生转换的星期,则指定割接的最早或最近可能日期的月份。
+     * 
+     * 
      * @return the month of the transition, not null
      */
     public Month getMonth() {
@@ -386,6 +482,18 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * end of the month where {@code -1} is the last day of the month.
      * In this case, the day identified is the latest possible date that the transition can be.
      *
+     * <p>
+     * 获取转换的月份的指标。
+     * <p>
+     *  如果规则定义确切的日期,则日期是该日期的月份。
+     * <p>
+     *  如果规则定义了可能发生转换的一周,那么该天定义转换周结束的开始。
+     * <p>
+     *  如果值为正,则它表示正常的日期,并且是转换可能的最早日期。日期可以参考2月29日,应该被视为非闰年的3月1日。
+     * <p>
+     *  如果值为负,则表示从月底开始的天数,其中{@code -1}是月份的最后一天。在这种情况下,识别的日期是转换可能的最晚可能的日期。
+     * 
+     * 
      * @return the day-of-month indicator, from -28 to 31 excluding 0
      */
     public int getDayOfMonthIndicator() {
@@ -402,6 +510,14 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * If the day is positive then the adjustment is later.
      * If the day is negative then the adjustment is earlier.
      *
+     * <p>
+     *  获取过渡的星期几。
+     * <p>
+     *  如果规则定义确切的日期,则返回null。
+     * <p>
+     *  如果规则定义可能发生割接的星期,则此方法返回月份日将被调整为的星期几。如果天是正的,那么调整是稍后的。如果日期为负,则调整较早。
+     * 
+     * 
      * @return the day-of-week that the transition occurs, null if the rule defines an exact date
      */
     public DayOfWeek getDayOfWeek() {
@@ -414,6 +530,12 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * <p>
      * The time is converted into an instant using the time definition.
      *
+     * <p>
+     *  获取转换的当天时间,必须使用{@link #isMidnightEndOfDay()}进行检查。
+     * <p>
+     *  使用时间定义将时间转换为即时。
+     * 
+     * 
      * @return the local time of day of the transition, not null
      */
     public LocalTime getLocalTime() {
@@ -425,6 +547,12 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * <p>
      * The transition may be represented as occurring at 24:00.
      *
+     * <p>
+     *  是转换本地时间午夜在一天结束。
+     * <p>
+     *  该转换可以表示为在24:00发生。
+     * 
+     * 
      * @return whether a local time of midnight is at the start or end of the day
      */
     public boolean isMidnightEndOfDay() {
@@ -437,6 +565,12 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * The local time can be converted to an instant using the standard offset,
      * the wall offset or UTC.
      *
+     * <p>
+     *  获取时间定义,指定如何将时间转换为即时。
+     * <p>
+     * 本地时间可以使用标准偏移,壁偏移或UTC转换为瞬时。
+     * 
+     * 
      * @return the time definition, not null
      */
     public TimeDefinition getTimeDefinition() {
@@ -446,6 +580,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Gets the standard offset in force at the transition.
      *
+     * <p>
+     *  获取过渡时的标准偏置。
+     * 
+     * 
      * @return the standard offset, not null
      */
     public ZoneOffset getStandardOffset() {
@@ -455,6 +593,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Gets the offset before the transition.
      *
+     * <p>
+     *  获取转换前的偏移量。
+     * 
+     * 
      * @return the offset before, not null
      */
     public ZoneOffset getOffsetBefore() {
@@ -464,6 +606,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Gets the offset after the transition.
      *
+     * <p>
+     *  获取转换后的偏移量。
+     * 
+     * 
      * @return the offset after, not null
      */
     public ZoneOffset getOffsetAfter() {
@@ -476,6 +622,12 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * <p>
      * Calculations are performed using the ISO-8601 chronology.
      *
+     * <p>
+     *  创建指定年份的转换实例。
+     * <p>
+     *  使用ISO-8601年表进行计算。
+     * 
+     * 
      * @param year  the year to create a transition for, not null
      * @return the transition instance, not null
      */
@@ -506,6 +658,12 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * <p>
      * The entire state of the object is compared.
      *
+     * <p>
+     *  检查此对象是否等于另一个。
+     * <p>
+     *  比较对象的整个状态。
+     * 
+     * 
      * @param otherRule  the other object to compare to, null returns false
      * @return true if equal
      */
@@ -530,6 +688,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Returns a suitable hash code.
      *
+     * <p>
+     *  返回合适的哈希码。
+     * 
+     * 
      * @return the hash code
      */
     @Override
@@ -545,6 +707,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * Returns a string describing this object.
      *
+     * <p>
+     *  返回描述此对象的字符串。
+     * 
+     * 
      * @return a string for debugging, not null
      */
     @Override
@@ -582,6 +748,13 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * <li>Relative to the standard offset in force</li>
      * <li>Relative to the wall offset (what you would see on a clock on the wall)</li>
      * </ul>
+     * <p>
+     *  本地时间可以转换为实际转换日期时间的方式的定义。
+     * <p>
+     *  时区规则以三种方式之一表示：
+     * <ul>
+     *  <li>相对于UTC </li> <li>相对于标准偏差</li> <li>相对于墙面偏移(您将在墙上看到的时钟)</li>
+     * </ul>
      */
     public static enum TimeDefinition {
         /** The local date-time is expressed in terms of the UTC offset. */
@@ -603,6 +776,11 @@ public final class ZoneOffsetTransitionRule implements Serializable {
          * The WALL type returns the input date-time.
          * The result is intended for use with the wall-offset.
          *
+         * <p>
+         *  将指定的本地日期时间转换为实际在挂钟上显示的本地日期时间。
+         * <p>
+         *  此方法使用此枚举的类型进行转换。相对于转换的"before"偏移量定义输出。
+         * 
          * @param dateTime  the local date-time, not null
          * @param standardOffset  the standard offset, not null
          * @param wallOffset  the wall offset, not null

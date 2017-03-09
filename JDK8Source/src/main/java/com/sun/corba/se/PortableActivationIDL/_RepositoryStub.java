@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -15,6 +16,9 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
   /** register server definition.
 	* This returns the serverId of the server.  A newly created server is
 	* always uninstalled.
+	* <p>
+	*  这将返回服务器的serverId。始终卸载新创建的服务器。
+	* 
 	*/
   public String registerServer (com.sun.corba.se.PortableActivationIDL.RepositoryPackage.ServerDef serverDef) throws com.sun.corba.se.PortableActivationIDL.ServerAlreadyRegistered, com.sun.corba.se.PortableActivationIDL.BadServerDefinition
   {
@@ -43,6 +47,7 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
 
 
   /** unregister server definition
+  /* <p>
 	*/
   public void unregisterServer (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered
   {
@@ -68,6 +73,7 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
 
 
   /** get server definition
+  /* <p>
 	*/
   public com.sun.corba.se.PortableActivationIDL.RepositoryPackage.ServerDef getServer (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered
   {
@@ -94,6 +100,7 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
 
 
   /** Return whether the server has been installed
+  /* <p>
 	*/
   public boolean isInstalled (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered
   {
@@ -121,6 +128,9 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
 
   /** Mark the server as being installed.  Raises ServerAlreadyInstalled
 	* if the server is currently marked as installed.
+	* <p>
+	*  如果服务器当前标记为已安装。
+	* 
 	*/
   public void install (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerAlreadyInstalled
   {
@@ -149,6 +159,9 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
 
   /** Mark the server as being uninstalled.  Raises ServerAlreadyUninstalled
 	* if the server is currently marked as uninstalled.
+	* <p>
+	*  如果服务器当前标记为已卸载。
+	* 
 	*/
   public void uninstall (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerAlreadyUninstalled
   {
@@ -176,6 +189,7 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
 
 
   /** list registered servers
+  /* <p>
 	*/
   public String[] listRegisteredServers ()
   {
@@ -199,6 +213,9 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
 
   /** Returns list of ALL applicationNames defined in ServerDefs of registered 
 	* servers.
+	* <p>
+	*  服务器。
+	* 
 	*/
   public String[] getApplicationNames ()
   {
@@ -221,6 +238,7 @@ public class _RepositoryStub extends org.omg.CORBA.portable.ObjectImpl implement
 
 
   /** Find the ServerID associated with the given application name.
+  /* <p>
 	*/
   public String getServerID (String applicationName) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered
   {

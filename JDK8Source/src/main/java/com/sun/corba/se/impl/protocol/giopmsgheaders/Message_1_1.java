@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException ;
 /*
  * This implements the GIOP 1.1 & 1.2 Message header.
  *
+ * <p>
+ *  这实现GIOP 1.1&1.2消息报头。
+ * 
+ * 
  * @author Ram Jeyaraman 05/14/2000
  */
 
@@ -132,6 +137,9 @@ public class Message_1_1
 
     /**
      * Allows us to create a fragment message from any message type.
+     * <p>
+     *  允许我们从任何消息类型创建片段消息。
+     * 
      */
     public FragmentMessage createFragmentMessage() {
 
@@ -159,6 +167,12 @@ public class Message_1_1
         if ( (this.flags & MORE_FRAGMENTS_BIT) != MORE_FRAGMENTS_BIT ) {
                 throw wrapper.fragmentationDisallowed( CompletionStatus.COMPLETED_MAYBE);
         }
+        /* <p>
+        /*  //只有当当前mesg'分段//位被设置时,才能创建分段的mesg。
+        /* 否则,引发错误//太严格检查if((this.flags&MORE_FRAGMENTS_BIT)！= MORE_FRAGMENTS_BIT){throw wrapper.fragmentationDisallowed(CompletionStatus.COMPLETED_MAYBE); }
+        /* }。
+        /*  //只有当当前mesg'分段//位被设置时,才能创建分段的mesg。
+        /* 
         */
         if (this.GIOP_version.equals(GIOPVersion.V1_1)) {
             return new FragmentMessage_1_1(this);
@@ -182,6 +196,10 @@ public class Message_1_1
         this.flags = istream.read_octet();
         this.message_type = istream.read_octet();
         this.message_size = istream.read_ulong();
+        /* <p>
+        /*  this.magic = istream.read_long(); this.GIOP_version =(new GIOPVersion())。
+        /* read(istream); this.flags = istream.read_octet(); this.message_type = istream.read_octet(); this.mess
+        /* age_size = istream.read_ulong();。
         */
     }
 

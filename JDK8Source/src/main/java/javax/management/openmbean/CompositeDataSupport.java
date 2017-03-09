@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,10 @@ import java.util.TreeSet;
  * implements the <tt>CompositeData</tt> interface.
  *
  *
+ * <p>
+ *  <tt> CompositeDataSupport </tt>类是实现<tt> CompositeData </tt>接口的<i>开放数据</i>类。
+ * 
+ * 
  * @since 1.5
  */
 public class CompositeDataSupport
@@ -58,6 +63,8 @@ public class CompositeDataSupport
     static final long serialVersionUID = 8003518976613702244L;
 
     /**
+    /* <p>
+    /* 
      * @serial Internal representation of the mapping of item names to their
      * respective values.
      *         A {@link SortedMap} is used for faster retrieval of elements.
@@ -65,6 +72,8 @@ public class CompositeDataSupport
     private final SortedMap<String, Object> contents;
 
     /**
+    /* <p>
+    /* 
      * @serial The <i>composite type </i> of this <i>composite data</i> instance.
      */
     private final CompositeType compositeType;
@@ -86,6 +95,16 @@ public class CompositeDataSupport
      * parameter are satisfied,
      * and throws the appropriate exception if they are not.</p>
      *
+     * <p>
+     *  <p>使用指定的<tt> compositeType </tt>构造一个<tt> CompositeDataSupport </tt>实例,其项目值由<tt> itemValues [] </tt>指
+     * 定, tt> itemNames [] </tt>。
+     * 由于<tt> CompositeType </tt>未对其项目指定任何顺序,因此<tt> itemNames [] </tt>参数用于指定在<tt> itemValues []中给出的值的顺序</tt>
+     * 。
+     * 此<tt> CompositeDataSupport </tt>实例中包含的项目内部存储在<tt> TreeMap </tt>中,因此按照其名称的升序顺序排序,以更快速地检索单个项目值。</p>。
+     * 
+     *  <p>构造函数检查每个参数下面列出的所有约束是否都满足,如果没有,则抛出相应的异常。</p>
+     * 
+     * 
      * @param compositeType the <i>composite type </i> of this <i>composite
      * data</i> instance; must not be null.
      *
@@ -152,6 +171,14 @@ public class CompositeDataSupport
      * This constructor converts the keys to a string array and the values to an object array and calls
      * <tt>CompositeDataSupport(javax.management.openmbean.CompositeType, java.lang.String[], java.lang.Object[])</tt>.
      *
+     * <p>
+     * <p>
+     *  构造具有指定的<tt> compositeType </tt>的<tt> CompositeDataSupport </tt>实例,其项目名称和对应的值由映射<tt>项目</tt>中的映射给出。
+     * 此构造函数将键转换为字符串数组,并将值转换为对象数组,并调用<tt> CompositeDataSupport(javax.management.openmbean.CompositeType,java
+     * .lang.String [],java.lang.Object [])</tt >。
+     *  构造具有指定的<tt> compositeType </tt>的<tt> CompositeDataSupport </tt>实例,其项目名称和对应的值由映射<tt>项目</tt>中的映射给出。
+     * 
+     * 
      * @param  compositeType  the <i>composite type </i> of this <i>composite data</i> instance;
      *                        must not be null.
      * @param  items  the mappings of all the item names to their values;
@@ -246,6 +273,9 @@ public class CompositeDataSupport
 
     /**
      * Returns the <i>composite type </i> of this <i>composite data</i> instance.
+     * <p>
+     * 返回此<i>复合数据</i>实例的<i>复合类型</i>。
+     * 
      */
     public CompositeType getCompositeType() {
 
@@ -255,6 +285,10 @@ public class CompositeDataSupport
     /**
      * Returns the value of the item whose name is <tt>key</tt>.
      *
+     * <p>
+     *  返回名称为<tt>键</tt>的项目的值。
+     * 
+     * 
      * @throws IllegalArgumentException  if <tt>key</tt> is a null or empty String.
      *
      * @throws InvalidKeyException  if <tt>key</tt> is not an existing item name for
@@ -275,6 +309,10 @@ public class CompositeDataSupport
      * Returns an array of the values of the items whose names are specified by
      * <tt>keys</tt>, in the same order as <tt>keys</tt>.
      *
+     * <p>
+     *  以与<tt>键</tt>相同的顺序返回其名称由<tt>键</tt>指定的项目的值的数组。
+     * 
+     * 
      * @throws IllegalArgumentException  if an element in <tt>keys</tt> is a null
      * or empty String.
      *
@@ -297,6 +335,10 @@ public class CompositeDataSupport
      * Returns <tt>true</tt> if and only if this <tt>CompositeData</tt> instance contains
      * an item whose name is <tt>key</tt>.
      * If <tt>key</tt> is a null or empty String, this method simply returns false.
+     * <p>
+     *  当且仅当此<tt> CompositeData </tt>实例包含名称为<tt>键</tt>的项目时,返回<tt> true </tt>。
+     * 如果<tt>键</tt>是空或空字符串,此方法只返回false。
+     * 
      */
     public boolean containsKey(String key) {
 
@@ -310,6 +352,9 @@ public class CompositeDataSupport
      * Returns <tt>true</tt> if and only if this <tt>CompositeData</tt> instance
      * contains an item
      * whose value is <tt>value</tt>.
+     * <p>
+     *  当且仅当此<tt> CompositeData </tt>实例包含值为<tt> value </tt>的项目时,返回<tt> true </tt>。
+     * 
      */
     public boolean containsValue(Object value) {
 
@@ -322,6 +367,9 @@ public class CompositeDataSupport
      * The returned collection's iterator will return the values in the ascending
      * lexicographic order of the corresponding
      * item names.
+     * <p>
+     *  返回此<tt> CompositeData </tt>实例中包含的项值的不可修改的Collection视图。返回的集合的迭代器将以相应项目名称的升序字典顺序返回值。
+     * 
      */
     public Collection<?> values() {
 
@@ -350,6 +398,21 @@ public class CompositeDataSupport
      * {@link java.util.Collection#equals(Object) equals}
      * method of the <tt>java.util.Collection</tt> interface.
      *
+     * <p>
+     *  将指定的<var> obj </var>参数与此<code> CompositeDataSupport </code>实例进行比较以确保相等。
+     * <p>
+     *  当且仅当所有以下语句都为真时返回<tt> true </tt>：
+     * <ul>
+     * <li> <var> obj </var>不为空,</li> <li> <var> obj </var>也实现<code> CompositeData </code>它们的复合类型是相等的</li> <li>
+     * 它们的内容,即(名称,值)对是相等的。
+     * 如果内容中包含的值是数组,则值比较是通过为对象引用类型数组调用{@link java.util.Arrays#deepEquals(Object [],Object [])deepEquals}对原始类
+     * 型数组{@code Arrays.equals(e1,e2)}的适当重载</li>。
+     * </ul>
+     * <p>
+     *  这可以确保<tt>等于</tt>方法适用于<var> obj </var>参数,这是<code> CompositeData </code>接口的不同实现,具有{@link java.util.Collection#equals(Object)equals}
+     * 方法的<tt> java.util.Collection </tt>接口。
+     * 
+     * 
      * @param  obj  the object to be compared for equality with this
      * <code>CompositeDataSupport</code> instance.
      * @return  <code>true</code> if the specified object is equal to this
@@ -418,6 +481,18 @@ public class CompositeDataSupport
      * for arrays of object reference types or the appropriate overloading
      * of {@code Arrays.hashCode(e)} for arrays of primitive types.
      *
+     * <p>
+     *  返回此<> CompositeDataSupport </code>实例的哈希码值。
+     * <p>
+     *  <code> CompositeDataSupport </code>实例的哈希码是<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即：其<i>复合类型</i>和所有
+     * 项目值)。
+     * <p>
+     *  这确保<code> t1.equals(t2)</code>意味着任何两个<code> CompositeDataSupport </code>实例的<code> t1.hashCode()== t2
+     * .hashCode()</代码> t1 </code>和<code> t2 </code>,这是方法{@link Object#hashCode()Object.hashCode()}的一般合同的要求。
+     * <p>
+     * 每个项的值的哈希码被添加到返回的哈希码。
+     * 如果一个项目值是一个数组,它的哈希码是通过调用对象引用类型数组的{@link java.util.Arrays#deepHashCode(Object [])deepHashCode}方法或{@code Arrays.hashCode(e)}
+     * 
      * @return the hash code value for this <code>CompositeDataSupport</code> instance
      */
     @Override
@@ -457,6 +532,11 @@ public class CompositeDataSupport
      * the string representation of the composite type of this instance, and the string representation of the contents
      * (ie list the itemName=itemValue mappings).
      *
+     * <p>
+     * 。
+     * 每个项的值的哈希码被添加到返回的哈希码。
+     * 
+     * 
      * @return  a string representation of this <code>CompositeDataSupport</code> instance
      */
     @Override

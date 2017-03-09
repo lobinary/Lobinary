@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SerializableLocatorImpl.java,v 1.2.4.1 2005/09/15 08:15:54 suresh_emailid Exp $
+ * <p>
+ *  $ Id：SerializableLocatorImpl.java,v 1.2.4.1 2005/09/15 08:15:54 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
@@ -36,6 +49,13 @@ package com.sun.org.apache.xml.internal.utils;
  * to its interface. Since it's so simple, I've taken the latter approach
  * for now.
  *
+ * <p>
+ *  LocatorImpl的标准SAX实现不是可序列化的,将其实用性限制为"定位器的永久性快照"。这是一个快速的黑客,使它。
+ * 请注意,在许多情况下,更有意义的是设置字段来保存此数据,而不是指向另一个对象...但是该决策应该基于架构原因而不是串行化。
+ * p>
+ *  不清楚子类化LocatorImpl和添加序列化方法是否比复制它更有意义,只是添加Serializable到其接口。因为它很简单,我现在采取后一种方法。
+ * 
+ * 
  * @see org.xml.sax.helpers.LocatorImpl
  * @see org.xml.sax.Locator Locator
  * @since XalanJ2
@@ -55,6 +75,12 @@ implements org.xml.sax.Locator, java.io.Serializable
      * pointing to a specific location... which, after all, is why the
      * setter methods are provided.
      * </p>
+     * <p>
+     *  零参数构造函数。
+     * 
+     * <p> SAX说："这通常不会有用,因为这个类的主要目的是制作现有定位器的快照。
+     * 事实上,当你想构造一个新的Locator指向一个特定的位置时,它_is_有时是有用的,这毕竟是为什么提供setter方法。
+     * </p>
      */
     public SerializableLocatorImpl ()
     {
@@ -69,6 +95,12 @@ implements org.xml.sax.Locator, java.io.Serializable
      * the original values (and it can be used outside the scope of
      * DocumentHandler methods).</p>
      *
+     * <p>
+     *  复制构造函数。
+     * 
+     *  <p>创建定位器当前状态的永久副本。当原始定位器更改时,此副本仍将保留原始值(并且可以在DocumentHandler方法范围之外使用)。</p>
+     * 
+     * 
      * @param locator The locator to copy.
      */
     public SerializableLocatorImpl (org.xml.sax.Locator locator)
@@ -88,6 +120,10 @@ implements org.xml.sax.Locator, java.io.Serializable
     /**
      * Return the saved public identifier.
      *
+     * <p>
+     *  返回保存的公共标识符。
+     * 
+     * 
      * @return The public identifier as a string, or null if none
      *         is available.
      * @see org.xml.sax.Locator#getPublicId
@@ -102,6 +138,10 @@ implements org.xml.sax.Locator, java.io.Serializable
     /**
      * Return the saved system identifier.
      *
+     * <p>
+     *  返回保存的系统标识符。
+     * 
+     * 
      * @return The system identifier as a string, or null if none
      *         is available.
      * @see org.xml.sax.Locator#getSystemId
@@ -116,6 +156,10 @@ implements org.xml.sax.Locator, java.io.Serializable
     /**
      * Return the saved line number (1-based).
      *
+     * <p>
+     *  返回保存的行号(从1开始)。
+     * 
+     * 
      * @return The line number as an integer, or -1 if none is available.
      * @see org.xml.sax.Locator#getLineNumber
      * @see #setLineNumber
@@ -129,6 +173,10 @@ implements org.xml.sax.Locator, java.io.Serializable
     /**
      * Return the saved column number (1-based).
      *
+     * <p>
+     *  返回保存的列编号(从1开始)。
+     * 
+     * 
      * @return The column number as an integer, or -1 if none is available.
      * @see org.xml.sax.Locator#getColumnNumber
      * @see #setColumnNumber
@@ -147,6 +195,10 @@ implements org.xml.sax.Locator, java.io.Serializable
     /**
      * Set the public identifier for this locator.
      *
+     * <p>
+     *  设置此定位器的公共标识符。
+     * 
+     * 
      * @param publicId The new public identifier, or null
      *        if none is available.
      * @see #getPublicId
@@ -160,6 +212,10 @@ implements org.xml.sax.Locator, java.io.Serializable
     /**
      * Set the system identifier for this locator.
      *
+     * <p>
+     *  设置此定位器的系统标识符。
+     * 
+     * 
      * @param systemId The new system identifier, or null
      *        if none is available.
      * @see #getSystemId
@@ -173,6 +229,10 @@ implements org.xml.sax.Locator, java.io.Serializable
     /**
      * Set the line number for this locator (1-based).
      *
+     * <p>
+     *  设置此定位器的行号(从1开始)。
+     * 
+     * 
      * @param lineNumber The line number, or -1 if none is available.
      * @see #getLineNumber
      */
@@ -185,6 +245,10 @@ implements org.xml.sax.Locator, java.io.Serializable
     /**
      * Set the column number for this locator (1-based).
      *
+     * <p>
+     *  设置此定位器的列号(从1开始)。
+     * 
+     * 
      * @param columnNumber The column number, or -1 if none is available.
      * @see #getColumnNumber
      */
@@ -200,24 +264,39 @@ implements org.xml.sax.Locator, java.io.Serializable
 
     /**
      * The public ID.
+     * <p>
+     *  公共ID。
+     * 
+     * 
      * @serial
      */
     private String publicId;
 
     /**
      * The system ID.
+     * <p>
+     *  系统ID。
+     * 
+     * 
      * @serial
      */
     private String systemId;
 
     /**
      * The line number.
+     * <p>
+     *  行号。
+     * 
+     * 
      * @serial
      */
     private int lineNumber;
 
     /**
      * The column number.
+     * <p>
+     *  列号。
+     * 
      * @serial
      */
     private int columnNumber;

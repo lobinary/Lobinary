@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -218,6 +219,108 @@ import java.lang.Double;
  *
  * </ol>
  *
+ * <p>
+ *  偏好数据的分层集合中的节点。此类允许应用程序存储和检索用户和系统首选项和配置数据。此数据持久存储在实现相关的后备存储中。典型的实现包括平面文件,操作系统特定的注册表,目录服务器和SQL数据库。
+ * 这个类的用户不需要关心后台存储的细节。
+ * 
+ *  <p>偏好节点有两个单独的树,一个用于用户偏好,一个用于系统偏好。每个用户具有单独的用户首选项树,并且给定系统中的所有用户共享相同的系统首选项树。 "用户"和"系统"的精确描述将随着实现而变​​化。
+ * 存储在用户偏好树中的典型信息可以包括用于特定应用的字体选择,颜色选择或优选的窗口位置和大小。存储在系统偏好树中的典型信息可能包括应用程序的安装配置数据。
+ * 
+ *  <p>偏好树中的节点以与分层文件系统中的目录相似的方式命名。偏好树中的每个节点具有<i>节点名</i>(其不一定是唯一的),唯一的<i>绝对路径名</i>和路径名<i>到每个祖先包括它自己。
+ * 
+ * <p>根节点具有空字符串("")的节点名称。每个其他节点都有一个任意节点名称,在创建时指定。对此名称的唯一限制是它不能是空字符串,并且不能包含斜杠字符('/')。
+ * 
+ *  <p>根节点的绝对路径名为<tt>"/"</tt>。根节点的子节点具有<tt>"/"+ </tt> <i>&lt; node name&gt; </i>的绝对路径名。
+ * 所有其他节点具有<i>&lt;父的绝对路径名&gt; </i> <tt> +"/"+ </tt> <i>&lt; node name&gt; </i>的绝对路径名。
+ * 请注意,所有绝对路径名以斜杠字符开头。
+ * 
+ *  <p>节点<n>相对于其祖先</i>的路径名称只是必须附加到</i>绝对路径的字符串名称,以便形成<i>的绝对路径名,其中删除了初始斜杠字符(如果存在)。注意：
+ * <ul>
+ *  <li>没有相对路径名以斜杠字符开头。 <li>每个节点相对于自身的路径名称都是空字符串。 <li>每个节点相对于其父节点的路径名称是其节点名称(根节点除外,它没有父节点)。
+ *  <li>每个节点相对于根的路径名称都是其绝对路径名称,并删除了初始斜杠字符。
+ * </ul>
+ * 
+ *  <p>最后请注意：
+ * <ul>
+ * <li>没有路径名称包含多个连续的斜杠字符。 <li>除了根的绝对路径名称之外,没有路径名以斜杠字符结尾。 <li>符合这两条规则的任何字符串都是有效的路径名。
+ * </ul>
+ * 
+ *  <p>允许修改首选项数据的所有方法异步操作;它们可以立即返回,并且改变将最终传播到具有实现相关延迟的持久后备存储。 <tt> flush </tt>方法可用于同步强制对后备存储的更新。
+ *  Java虚拟机的正常终止将不会导致等待更新的丢失 - 在终止时不需要显式的<tt> flush </t>>调用,以确保等待更新被持久化。
+ * 
+ *  <p>从<tt>首选项</tt>对象读取首选项的所有方法都需要调用者提供默认值。如果之前未设置任何值<i>或后备存储器不可用,则会返回默认值。
+ * </i>其目的是允许应用程序操作,即使有稍微降低的功能,即使后备存储不可用。有几种方法,如<tt> flush </tt>,如果后备存储不可用,就有语义阻止它们操作。
+ * 普通应用程序应该不需要调用任何这些方法,这可以通过它们被声明抛出{@link BackingStoreException}的事实来识别。
+ * 
+ * <p>此类中的方法可以由单个JVM中的多个线程并发调用,而不需要外部同步,并且结果将等同于一些串行执行。
+ * 如果这个类通过将它们的偏好数据存储在同一后备存储器中的多个JVMs同时使用,则数据存储器将不会被破坏,但是关于偏好数据的一致性没有做出其他保证。
+ * 
+ *  <p>此类包含导出/导入功能,允许将"首选项"导出到XML文档,以及将表示首选项的XML文档"导入"回系统。该设施可以用于备份偏好树的全部或部分,并且随后从备份中恢复。
+ * 
+ *  <p> XML文档具有以下DOCTYPE声明：<pre> {@ code
+ * <!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+ *  } </pre>请注意,在导出或导入首选项时,系统URI(http://java.sun.com/dtd/preferences.dtd)未被</i>访问;它只是作为一个字符串来唯一标识DTD,它是：
+ * <pre> {@ code。
+ * <?xml version="1.0" encoding="UTF-8"?>
+ * 
+ * <!-- DTD for a Preferences tree. -->
+ * 
+ *  <！ - 首选项元素位于XML文档的根位置
+ * representing a Preferences tree. -->
+ * <!ELEMENT preferences (root)>
+ * 
+ *  <！ -  preferences元素包含可选的版本属性,
+ * which specifies version of DTD. -->
+ * <!ATTLIST preferences EXTERNAL_XML_VERSION CDATA "0.0" >
+ * 
+ *  <！ - 根元素有一个映射表示根的首选项
+ * (if any), and one node for each child of the root (if any). -->
+ * <!ELEMENT root (map, node*) >
+ * 
+ *  <！ - 此外,根包含一个type属性,它
+ * specifies whether it's the system or user root. -->
+ *  <！ATTLIST root
+ * type (system|user) #REQUIRED >
+ * 
+ *  <！ - 每个节点都有一个映射表示其首选项(如果有)
+ * and one node for each child (if any). -->
+ * <!ELEMENT node (map, node*) >
+ * 
+ * <!-- Additionally, each node has a name attribute -->
+ *  <！ATTLIST节点
+ * name CDATA #REQUIRED >
+ * 
+ * <!-- A map represents the preferences stored at a node (if any). -->
+ * <!ELEMENT map (entry*) >
+ * 
+ *  <！ - 一个条目表示单个首选项,这是简单的
+ * a key-value pair. -->
+ * <!ELEMENT entry EMPTY >
+ * <！ATTLIST entry key CDATA #REQUIRED
+ * value CDATA #REQUIRED >
+ *  } </pre>
+ * 
+ *  每个<tt>偏好设置</tt>实施必须具有关联的{@link PreferencesFactory}实现。
+ * 每个Java(TM)SE实现必须提供一些方法来指定哪个<tt> PreferencesFactory </tt>实现用于生成根首选项节点。这允许管理员用替代实现替换默认首选项实现。
+ * 
+ *  <p>实施注意事项：在Sun的JRE中,<tt> PreferencesFactory </tt>实施如下：
+ * 
+ * <ol>
+ * 
+ *  <li> <p>如果定义了系统属性<tt> java.util.prefs.PreferencesFactory </tt>,则它将被视为实现<tt> PreferencesFactory </tt>
+ * 的类的完全限定名称>接口。
+ * 类被加载和实例化;如果此过程失败,则会抛出未指定的错误。</p> </li>。
+ * 
+ *  <li> <p>如果在{@link java.lang.ClassLoader#getSystemClassLoader系统类加载器}可见的jar文件中安装了<tt> PreferencesFacto
+ * ry </tt>实现类文件,并且该jar文件在资源目录<tt> META-INF / services </tt>中包含名为<tt> java.util.prefs.PreferencesFactory
+ *  </tt>的提供程序配置文件,则会采用该文件中指定的第一个类名。
+ * 如果提供了多个这样的jar文件,则将使用找到的第一个jar文件。类被加载和实例化;如果此过程失败,则抛出未指定的错误。 </p> </li>。
+ * 
+ * <li> <p>最后,如果既不提供上述系统属性也不提供扩展jar文件,则会加载并实例化基础平台的系统级默认<tt> PreferencesFactory </tt>实现。 p> </li>
+ * 
+ * </ol>
+ * 
+ * 
  * @author  Josh Bloch
  * @since   1.4
  */
@@ -311,16 +414,25 @@ public abstract class Preferences {
 
     /**
      * Maximum length of string allowed as a key (80 characters).
+     * <p>
+     *  允许作为键的字符串的最大长度(80个字符)。
+     * 
      */
     public static final int MAX_KEY_LENGTH = 80;
 
     /**
      * Maximum length of string allowed as a value (8192 characters).
+     * <p>
+     *  允许作为值的字符串的最大长度(8192个字符)。
+     * 
      */
     public static final int MAX_VALUE_LENGTH = 8*1024;
 
     /**
      * Maximum length of a node name (80 characters).
+     * <p>
+     *  节点名称的最大长度(80个字符)。
+     * 
      */
     public static final int MAX_NAME_LENGTH = 80;
 
@@ -356,6 +468,22 @@ public abstract class Preferences {
      * the <tt>flush</tt> method is called on the returned node (or one of its
      * ancestors or descendants).
      *
+     * <p>
+     *  从调用用户的首选项树返回偏好节点,该偏好树与指定类的包关联(按照约定)。约定如下：节点的绝对路径名是完全限定包名称,前面带有斜杠(<tt>'/'</tt>),并且每个句点(<tt>'。
+     * '< tt>)替换为斜杠。例如,与类<tt> com.acme.widget.Foo </tt>关联的节点的绝对路径名为<tt> / com / acme / widget </tt>。
+     * 
+     *  <p>此约定不适用于其相关联的首选项节点为<tt>&lt;无名的&gt; </tt>的未命名包。此节点不是为了长期使用,而是为了方便早期开发尚不属于包的程序和"一次性"程序。
+     *  <i>有价值的数据不应存储在此节点上,因为它使用它的所有程序共享。</i>。
+     * 
+     *  <p>希望访问与其包相关的首选项的类<tt> Foo </tt>可以获得首选节点,如下所示：<pre> static Preferences prefs = Preferences.userNodeF
+     * orPackage(Foo.class);。
+     * </pre>
+     * 这个习语消除了使用字符串来描述偏好节点并降低运行时失败的可能性的需要。 (如果类名拼写错误,通常会导致编译时错误。)
+     * 
+     *  <p>调用此方法将导致创建返回的节点及其祖先(如果它们尚不存在)。
+     * 如果在此调用之前返回的节点不存在,则此调用创建的此节点和任何祖先不能保证永久性,直到在返回的节点上调用<tt> flush </tt>方法(或其祖先或后代)。
+     * 
+     * 
      * @param c the class for whose package a user preference node is desired.
      * @return the user preference node associated with the package of which
      *         <tt>c</tt> is a member.
@@ -400,6 +528,22 @@ public abstract class Preferences {
      * the <tt>flush</tt> method is called on the returned node (or one of its
      * ancestors or descendants).
      *
+     * <p>
+     *  从与指定类的包关联(按照约定)的系统首选项树返回首选项节点。约定如下：节点的绝对路径名是完全限定包名称,前面带有斜杠(<tt>'/'</tt>),并且每个句点(<tt>'。'< tt>)替换为斜杠。
+     * 例如,与类<tt> com.acme.widget.Foo </tt>关联的节点的绝对路径名为<tt> / com / acme / widget </tt>。
+     * 
+     *  <p>此约定不适用于其相关联的首选项节点为<tt>&lt;无名的&gt; </tt>的未命名包。此节点不是为了长期使用,而是为了方便早期开发尚不属于包的程序和"一次性"程序。
+     *  <i>有价值的数据不应存储在此节点上,因为它使用它的所有程序共享。</i>。
+     * 
+     * <p>希望访问与其包相关的首选项的类<tt> Foo </tt>可以获得如下的首选节点：<pre> static Preferences prefs = Preferences.systemNodeFo
+     * rPackage(Foo.class);。
+     * </pre>
+     *  这个习语消除了使用字符串来描述偏好节点并降低运行时失败的可能性的需要。 (如果类名拼写错误,通常会导致编译时错误。)
+     * 
+     *  <p>调用此方法将导致创建返回的节点及其祖先(如果它们尚不存在)。
+     * 如果在此调用之前返回的节点不存在,则此调用创建的此节点和任何祖先不能保证永久性,直到在返回的节点上调用<tt> flush </tt>方法(或其祖先或后代)。
+     * 
+     * 
      * @param c the class for whose package a system preference node is desired.
      * @return the system preference node associated with the package of which
      *         <tt>c</tt> is a member.
@@ -416,6 +560,10 @@ public abstract class Preferences {
      * Returns the absolute path name of the node corresponding to the package
      * of the specified object.
      *
+     * <p>
+     *  返回与指定对象的包对应的节点的绝对路径名。
+     * 
+     * 
      * @throws IllegalArgumentException if the package has node preferences
      *         node associated with it.
      */
@@ -435,12 +583,19 @@ public abstract class Preferences {
      * This permission object represents the permission required to get
      * access to the user or system root (which in turn allows for all
      * other operations).
+     * <p>
+     *  此权限对象表示访问用户或系统根目录所需的权限(依次允许所有其他操作)。
+     * 
      */
     private static Permission prefsPerm = new RuntimePermission("preferences");
 
     /**
      * Returns the root preference node for the calling user.
      *
+     * <p>
+     *  返回主叫用户的根首选节点。
+     * 
+     * 
      * @return the root preference node for the calling user.
      * @throws SecurityException If a security manager is present and
      *         it denies <tt>RuntimePermission("preferences")</tt>.
@@ -457,6 +612,10 @@ public abstract class Preferences {
     /**
      * Returns the root preference node for the system.
      *
+     * <p>
+     *  返回系统的根首选节点。
+     * 
+     * 
      * @return the root preference node for the system.
      * @throws SecurityException If a security manager is present and
      *         it denies <tt>RuntimePermission("preferences")</tt>.
@@ -473,6 +632,9 @@ public abstract class Preferences {
     /**
      * Sole constructor. (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     *  唯一构造函数。 (对于子类构造函数的调用,通常是隐式的。)
+     * 
      */
     protected Preferences() {
     }
@@ -481,6 +643,10 @@ public abstract class Preferences {
      * Associates the specified value with the specified key in this
      * preference node.
      *
+     * <p>
+     *  将指定的值与此首选项节点中指定的键相关联。
+     * 
+     * 
      * @param key key with which the specified value is to be associated.
      * @param value value to be associated with the specified key.
      * @throws NullPointerException if key or value is <tt>null</tt>.
@@ -502,6 +668,12 @@ public abstract class Preferences {
      * but there is such a <i>stored default</i>, it is returned in
      * preference to the specified default.
      *
+     * <p>
+     * 返回与此首选项节点中指定键关联的值。如果没有与密钥关联的值,或返回存储不可访问,则返回指定的缺省值。
+     * 
+     *  <p>一些实现可以在其后备存储中存储默认值。如果没有与指定键相关联的值,但存在此类<i>存储的默认值</i>,则优先返回指定的默认值。
+     * 
+     * 
      * @param key key whose associated value is to be returned.
      * @param def the value to be returned in the event that this
      *        preference node has no value associated with <tt>key</tt>.
@@ -524,6 +696,12 @@ public abstract class Preferences {
      * "exposed" by this call, in the sense that it will be returned
      * by a succeeding call to <tt>get</tt>.
      *
+     * <p>
+     *  删除与此首选项节点中指定键相关联的值(如果有)。
+     * 
+     *  <p>如果此实现支持<i>存储的默认值</i>,并且对于指定的首选项有这样的默认值,则存储的默认值将通过此调用"暴露",意味着它将由后续调用<tt> get </tt>。
+     * 
+     * 
      * @param key key whose mapping is to be removed from the preference node.
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>.
      * @throws IllegalStateException if this node (or an ancestor) has been
@@ -541,6 +719,12 @@ public abstract class Preferences {
      * the stored defaults will be "exposed" by this call, in the sense that
      * they will be returned by succeeding calls to <tt>get</tt>.
      *
+     * <p>
+     *  删除此首选项节点中的所有首选项(键值关联)。此调用对此节点的任何后代没有影响。
+     * 
+     *  <p>如果此实现支持<i>存储的默认值</i>,并且首选项层次结构中的此节点包含任何此类默认值,则存储的默认值将由此调用"暴露",意味着它们将由后续对<tt> get </tt>的调用。
+     * 
+     * 
      * @throws BackingStoreException if this operation cannot be completed
      *         due to a failure in the backing store, or inability to
      *         communicate with it.
@@ -557,6 +741,11 @@ public abstract class Preferences {
      * {@link Integer#toString(int)}.  This method is intended for use in
      * conjunction with {@link #getInt}.
      *
+     * <p>
+     *  将表示指定int值的字符串与此首选项节点中的指定键相关联。如果int值被传递给{@link Integer#toString(int)},则相关联的字符串将被返回。
+     * 此方法旨在与{@link #getInt}结合使用。
+     * 
+     * 
      * @param key key with which the string form of value is to be associated.
      * @param value value whose string form is to be associated with key.
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>.
@@ -583,6 +772,15 @@ public abstract class Preferences {
      * with <tt>Integer.parseInt</tt>, this int is returned in preference to
      * the specified default.
      *
+     * <p>
+     * 返回由此首选项节点中与指定键关联的字符串表示的int值。该字符串通过{@link Integer#parseInt(String)}转换为整数。
+     * 如果没有与键相关联的值,后备存储器不可访问,或者如果传递了相关值,则<tt> Integer.parseInt(String)</tt>将抛出{@link NumberFormatException},
+     * 则返回指定的默认值。
+     * 返回由此首选项节点中与指定键关联的字符串表示的int值。该字符串通过{@link Integer#parseInt(String)}转换为整数。此方法旨在与{@link #putInt}结合使用。
+     * 
+     *  <p>如果实现支持<i>存储的默认值</i>,并且此类默认值存在,可访问,并且可以转换为<tt> Integer.parseInt </tt>到指定的默认值。
+     * 
+     * 
      * @param key key whose associated value is to be returned as an int.
      * @param def the value to be returned in the event that this
      *        preference node has no value associated with <tt>key</tt>
@@ -607,6 +805,11 @@ public abstract class Preferences {
      * {@link Long#toString(long)}.  This method is intended for use in
      * conjunction with {@link #getLong}.
      *
+     * <p>
+     *  将表示指定长整型值的字符串与此首选项节点中的指定键相关联。如果长值传递给{@link Long#toString(long)},则相关联的字符串将被返回。
+     * 此方法旨在与{@link #getLong}结合使用。
+     * 
+     * 
      * @param key key with which the string form of value is to be associated.
      * @param value value whose string form is to be associated with key.
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>.
@@ -633,6 +836,15 @@ public abstract class Preferences {
      * with <tt>Long.parseLong</tt>, this long is returned in preference to
      * the specified default.
      *
+     * <p>
+     *  返回由此首选项节点中与指定键关联的字符串表示的长整型值。该字符串由{@link Long#parseLong(String)}转换为long。
+     * 如果没有与键相关联的值,后备存储器不可访问,或者如果传递了相关值,则<tt> Long.parseLong(String)</tt>将抛出{@link NumberFormatException},则返
+     * 回指定的默认值。
+     *  返回由此首选项节点中与指定键关联的字符串表示的长整型值。该字符串由{@link Long#parseLong(String)}转换为long。此方法旨在与{@link #putLong}结合使用。
+     * 
+     * <p>如果实施支持<i>存储的默认值</i>,并且此类默认值存在,可访问,并且可以通过<tt> Long.parseLong </tt>转换为long,到指定的默认值。
+     * 
+     * 
      * @param key key whose associated value is to be returned as a long.
      * @param def the value to be returned in the event that this
      *        preference node has no value associated with <tt>key</tt>
@@ -657,6 +869,11 @@ public abstract class Preferences {
      * false.  This method is intended for use in conjunction with
      * {@link #getBoolean}.
      *
+     * <p>
+     *  将表示指定布尔值的字符串与此首选项节点中指定的键相关联。如果值为true,则关联的字符串为<tt>"true"</tt>,如果值为false,则为<tt>"false"</tt>。
+     * 此方法旨在与{@link #getBoolean}结合使用。
+     * 
+     * 
      * @param key key with which the string form of value is to be associated.
      * @param value value whose string form is to be associated with key.
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>.
@@ -688,6 +905,16 @@ public abstract class Preferences {
      * <tt>"true"</tt> or <tt>"false"</tt>, ignoring case, in which case the
      * specified default is used.
      *
+     * <p>
+     *  返回由与此首选项节点中的指定键关联的字符串表示的布尔值。有效字符串为<tt>"true"</tt>(表示true)和<tt>"false"</tt>,表示false。
+     * 大小写被忽略,因此,例如<tt>"TRUE"</tt>和<tt>"False"</tt>也有效。此方法旨在与{@link #putBoolean}结合使用。
+     * 
+     *  <p>如果没有与键相关联的值,后备存储器无法访问,或者相关值不是<tt>"true"</tt>或<tt>"false"的其他值,则返回指定的默认值< / tt>,忽略大小写。
+     * 
+     *  <p>如果实现支持<i>存储的默认值</i>,并且此类默认值存在且可访问,则优先于指定的默认值使用,除非存储的默认值为<tt>"true" / tt>或<tt>"false"</tt>,忽略大小写,在
+     * 这种情况下使用指定的默认值。
+     * 
+     * 
      * @param key key whose associated value is to be returned as a boolean.
      * @param def the value to be returned in the event that this
      *        preference node has no value associated with <tt>key</tt>
@@ -712,6 +939,11 @@ public abstract class Preferences {
      * {@link Float#toString(float)}.  This method is intended for use in
      * conjunction with {@link #getFloat}.
      *
+     * <p>
+     * 将表示指定浮点值的字符串与此首选项节点中的指定键相关联。如果float值传递给{@link Float#toString(float)},那么相关的字符串就是返回的字符串。
+     * 此方法旨在与{@link #getFloat}结合使用。
+     * 
+     * 
      * @param key key with which the string form of value is to be associated.
      * @param value value whose string form is to be associated with key.
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>.
@@ -737,6 +969,15 @@ public abstract class Preferences {
      * with <tt>Float.parseFloat</tt>, this float is returned in preference to
      * the specified default.
      *
+     * <p>
+     *  返回由此首选项节点中与指定键关联的字符串表示的浮点值。该字符串通过{@link Float#parseFloat(String)}转换为整数。
+     * 如果没有与键相关联的值,后备存储器不可访问,或者如果传递了相关值,则<tt> Float.parseFloat(String)</tt>会抛出{@link NumberFormatException},
+     * 则返回指定的默认值。
+     *  返回由此首选项节点中与指定键关联的字符串表示的浮点值。该字符串通过{@link Float#parseFloat(String)}转换为整数。此方法旨在与{@link #putFloat}结合使用。
+     * 
+     *  <p>如果实现支持<i>存储的默认值</i>,并且这样的默认值存在,可访问,并且可以转换为<tt> Float.parseFloat </tt>到指定的默认值。
+     * 
+     * 
      * @param key key whose associated value is to be returned as a float.
      * @param def the value to be returned in the event that this
      *        preference node has no value associated with <tt>key</tt>
@@ -761,6 +1002,11 @@ public abstract class Preferences {
      * {@link Double#toString(double)}.  This method is intended for use in
      * conjunction with {@link #getDouble}.
      *
+     * <p>
+     *  将表示指定的double值的字符串与此首选项节点中的指定键相关联。如果double值传递给{@link Double#toString(double)},则相关联的字符串将被返回。
+     * 此方法旨在与{@link #getDouble}结合使用。
+     * 
+     * 
      * @param key key with which the string form of value is to be associated.
      * @param value value whose string form is to be associated with key.
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>.
@@ -786,6 +1032,16 @@ public abstract class Preferences {
      * with <tt>Double.parseDouble</tt>, this double is returned in preference
      * to the specified default.
      *
+     * <p>
+     * 返回由此首选项节点中与指定键关联的字符串表示的双精度值。该字符串通过{@link Double#parseDouble(String)}转换为整数。
+     * 如果没有与键相关联的值,后备存储器不可访问,或者如果传递了相关值,则<tt> Double.parseDouble(String)</tt>将抛出{@link NumberFormatException}
+     * ,则返回指定的默认值。
+     * 返回由此首选项节点中与指定键关联的字符串表示的双精度值。该字符串通过{@link Double#parseDouble(String)}转换为整数。
+     * 此方法旨在与{@link #putDouble}结合使用。
+     * 
+     *  <p>如果实现支持<i>存储的默认值</i>,并且此类默认值存在,可访问,并且可以使用<tt> Double.parseDouble </tt>转换为double,到指定的默认值。
+     * 
+     * 
      * @param key key whose associated value is to be returned as a double.
      * @param def the value to be returned in the event that this
      *        preference node has no value associated with <tt>key</tt>
@@ -816,6 +1072,15 @@ public abstract class Preferences {
      * This method is intended for use in conjunction with
      * {@link #getByteArray}.
      *
+     * <p>
+     *  将表示指定字节数组的字符串与此首选项节点中指定的键相关联。
+     * 相关联的字符串是字节数组的<i> Base64 </i>编码,如<a href=http://www.ietf.org/rfc/rfc2045.txt> RFC 2045 </a>中所定义, 6.8,有
+     * 一个小的更改：字符串将只包含来自<i> Base64 Alphabet </i>的字符;它不会包含任何换行符。
+     *  将表示指定字节数组的字符串与此首选项节点中指定的键相关联。
+     * 请注意,字节数组的最大长度限制为<tt> MAX_VALUE_LENGTH </tt>的四分之三,以便Base64编码字符串的长度不超过<tt> MAX_VALUE_LENGTH </tt>。
+     * 此方法旨在与{@link #getByteArray}结合使用。
+     * 
+     * 
      * @param key key with which the string form of value is to be associated.
      * @param value value whose string form is to be associated with key.
      * @throws NullPointerException if key or value is <tt>null</tt>.
@@ -849,6 +1114,17 @@ public abstract class Preferences {
      * encoded byte array (as defined above), in which case the
      * specified default is used.
      *
+     * <p>
+     * 返回由此首选项节点中与指定键关联的字符串表示的字节数组值。
+     * 有效的字符串是<i> Base64 </i>编码的二进制数据,如<a href=http://www.ietf.org/rfc/rfc2045.txt> RFC 2045 </a>第6.8节中所定义,其
+     * 中一个次要更改：字符串必须只包含来自<i> Base64 Alphabet </i>的字符;不允许换行符或无关字符。
+     * 返回由此首选项节点中与指定键关联的字符串表示的字节数组值。此方法旨在与{@link #putByteArray}结合使用。
+     * 
+     *  <p>如果没有与键相关联的值,后备存储器不可访问或者关联值不是有效的Base64编码字节数组(如上定义),则返回指定的默认值。
+     * 
+     *  <p>如果实施支持<i>存储的默认值</i>,并且此类默认值存在且可访问,则优先于指定的默认值使用,除非存储的默认值不是有效的Base64编码字节数组上面),在这种情况下使用指定的默认值。
+     * 
+     * 
      * @param key key whose associated value is to be returned as a byte array.
      * @param def the value to be returned in the event that this
      *        preference node has no value associated with <tt>key</tt>
@@ -877,6 +1153,12 @@ public abstract class Preferences {
      * by explicit preferences, the defaults are returned in the array in
      * addition to any explicit preferences.
      *
+     * <p>
+     *  返回在此首选项节点中具有关联值的所有键。 (如果此节点没有首选项,返回的数组的大小为零。)
+     * 
+     *  <p>如果实施支持<i>存储的默认值</i>,并且在此节点上有任何未被重写的默认值,通过显式首选项,除了任何显式首选项之外,还会在数组中返回默认值。
+     * 
+     * 
      * @return an array of the keys that have an associated value in this
      *         preference node.
      * @throws BackingStoreException if this operation cannot be completed
@@ -892,6 +1174,10 @@ public abstract class Preferences {
      * this node.  (The returned array will be of size zero if this node has
      * no children.)
      *
+     * <p>
+     * 返回此首选节点相对于此节点的子节点的名称。 (如果此节点没有子节点,返回的数组的大小为零。)
+     * 
+     * 
      * @return the names of the children of this preference node.
      * @throws BackingStoreException if this operation cannot be completed
      *         due to a failure in the backing store, or inability to
@@ -905,6 +1191,10 @@ public abstract class Preferences {
      * Returns the parent of this preference node, or <tt>null</tt> if this is
      * the root.
      *
+     * <p>
+     *  返回此首选项节点的父项,如果这是根,则返回<tt> null </tt>。
+     * 
+     * 
      * @return the parent of this preference node.
      * @throws IllegalStateException if this node (or an ancestor) has been
      *         removed with the {@link #removeNode()} method.
@@ -923,6 +1213,12 @@ public abstract class Preferences {
      * to become permanent until the <tt>flush</tt> method is called on
      * the returned node (or one of its ancestors or descendants).
      *
+     * <p>
+     *  返回与此节点相同的树中的命名首选项节点,如果它和它的任何祖先不存在,则创建它。接受相对路径名或绝对路径名。相对路径名(不以斜杠字符<tt>('/')</tt>开头)将相对于此首选项节点进行解释。
+     * 
+     *  <p>如果在此调用之前返回的节点不存在,则此调用创建的此节点和任何祖先不能保证永久性,直到在返回的节点上调用<tt> flush </tt>方法或其祖先或后代之一)。
+     * 
+     * 
      * @param pathName the path name of the preference node to return.
      * @return the specified preference node.
      * @throws IllegalArgumentException if the path name is invalid (i.e.,
@@ -947,6 +1243,14 @@ public abstract class Preferences {
      * <tt>false</tt>.  Thus, the idiom <tt>p.nodeExists("")</tt> may be
      * used to test whether <tt>p</tt> has been removed.
      *
+     * <p>
+     *  如果命名的首选项节点与该节点存在于同一个树中,则返回true。相对路径名(不以斜杠字符<tt>('/')</tt>开头)将相对于此首选项节点进行解释。
+     * 
+     *  <p>如果已通过{@link #removeNode()}方法删除了此节点(或祖代),则</i>是调用此方法的合法操作,但只有路径名称<tt >""</tt>;该调用将返回<tt> false </tt>
+     * 。
+     * 因此,习语<tt> p.nodeExists("")</tt>可用于测试<tt> p </tt>是否已被删除。
+     * 
+     * 
      * @param pathName the path name of the node whose existence
      *        is to be checked.
      * @return true if the specified node exists.
@@ -985,6 +1289,21 @@ public abstract class Preferences {
      * path name may return a (different) <tt>Preferences</tt> instance
      * representing a non-empty collection of preferences and/or children.
      *
+     * <p>
+     * 删除此首选项节点及其所有后代,使包含在已删除节点中的任何首选项无效。
+     * 删除节点后,尝试使用{@link #name()},{@link #absolutePath()},{@link #isUserNode()},{@link #flush()}或{@在相应的<tt>首选项</tt>实例上的链接#node(String)nodeExists("")}
+     * 将失败并显示<tt> IllegalStateException </tt>。
+     * 删除此首选项节点及其所有后代,使包含在已删除节点中的任何首选项无效。
+     *  (在{@link Object}上定义的方法在删除后仍然可以在节点上调用;它们不会引发<tt> IllegalStateException </tt>。)。
+     * 
+     *  <p>在此节点(或祖先)上调用<tt> flush </tt>方法之前,不会保证删除操作是持久的。
+     * 
+     *  <p>如果此实现支持<i>存储的默认值</i>,则删除节点会显示该节点或其下的任何已存储的默认值。
+     * 因此,对此节点路径名上的<tt> nodeExists </tt>的后续调用可能返回<tt> true </tt>,并且对此路径名上的<tt>节点</tt>的后续调用可能返回(不同)<tt>首选项</tt>
+     * 表示非首选项集合和/或子项的实例。
+     *  <p>如果此实现支持<i>存储的默认值</i>,则删除节点会显示该节点或其下的任何已存储的默认值。
+     * 
+     * 
      * @throws BackingStoreException if this operation cannot be completed
      *         due to a failure in the backing store, or inability to
      *         communicate with it.
@@ -999,6 +1318,10 @@ public abstract class Preferences {
     /**
      * Returns this preference node's name, relative to its parent.
      *
+     * <p>
+     *  返回此首选项节点的名称,相对于其父节点。
+     * 
+     * 
      * @return this preference node's name, relative to its parent.
      */
     public abstract String name();
@@ -1006,6 +1329,10 @@ public abstract class Preferences {
     /**
      * Returns this preference node's absolute path name.
      *
+     * <p>
+     *  返回此首选项节点的绝对路径名。
+     * 
+     * 
      * @return this preference node's absolute path name.
      */
     public abstract String absolutePath();
@@ -1014,6 +1341,10 @@ public abstract class Preferences {
      * Returns <tt>true</tt> if this preference node is in the user
      * preference tree, <tt>false</tt> if it's in the system preference tree.
      *
+     * <p>
+     *  如果此首选项节点在用户首选项树中,则返回<tt> true </tt>,如果它在系统首选项树中,则返回<tt> false </tt>。
+     * 
+     * 
      * @return <tt>true</tt> if this preference node is in the user
      *         preference tree, <tt>false</tt> if it's in the system
      *         preference tree.
@@ -1024,6 +1355,10 @@ public abstract class Preferences {
      * Returns a string representation of this preferences node,
      * as if computed by the expression:<tt>(this.isUserNode() ? "User" :
      * "System") + " Preference Node: " + this.absolutePath()</tt>.
+     * <p>
+     * 返回此首选项节点的字符串表示形式,如同通过表达式计算：<tt>(this.isUserNode()?"User"："System")+"Preference Node："+ this.absoluteP
+     * ath()</tt> 。
+     * 
      */
     public abstract String toString();
 
@@ -1046,6 +1381,16 @@ public abstract class Preferences {
      * the {@link #removeNode()} method, flushSpi() is invoked on this node,
      * but not on others.
      *
+     * <p>
+     *  强制将此首选项节点及其后代的内容中的任何更改强制更改为持久存储。一旦该方法成功返回,可以安全地假定在方法调用之前在根节点处的子树中进行的所有更改已成为永久性。
+     * 
+     *  <p>实现可随时将更改刷新到持久存储中。他们不需要等待这个方法被调用。
+     * 
+     *  <p>当一个新创建的节点发生刷新时,它被设置为持久化,任何祖先(和后代)也必须持久化。然而,请注意,祖先中的任何偏好值变化不能保证被持久化。
+     * 
+     *  <p>如果在使用{@link #removeNode()}方法删除的节点上调用此方法,则会在此节点上调用flushSpi(),而在其他节点上则不会调用。
+     * 
+     * 
      * @throws BackingStoreException if this operation cannot be completed
      *         due to a failure in the backing store, or inability to
      *         communicate with it.
@@ -1061,6 +1406,11 @@ public abstract class Preferences {
      * and its descendants to the persistent store, as if the <tt>flush</tt>
      * method had been invoked on this node.
      *
+     * <p>
+     *  确保未来从此首选节点及其后代的读取反映在<tt> sync </tt>调用之前提交到持久存储(从任何VM)的任何更改。
+     * 作为副作用,将此首选项节点及其后代的内容的任何更改强制到持久存储,就好像已在此节点上调用<tt> flush </tt>方法。
+     * 
+     * 
      * @throws BackingStoreException if this operation cannot be completed
      *         due to a failure in the backing store, or inability to
      *         communicate with it.
@@ -1087,6 +1437,14 @@ public abstract class Preferences {
      * when preferences are modified in descendants of this node; a caller
      * desiring such events must register with each descendant.
      *
+     * <p>
+     * 注册指定的侦听器以接收此首选项节点的<i>首选项更改事件</i>。当首选项添加到此节点,从此节点删除或与首选项关联的值更改时,会生成首选项更改事件。
+     *  (偏好改变事件不是由{@link #removeNode()}方法产生的,它产生<i>节点改变事件</i>。偏好改变事件<i> </i> >由<tt>清除</tt>方法生成)。
+     * 
+     *  <p>只有在与注册侦听器相同的JVM中进行的更改才能保证事件,但某些实现可能会为在此JVM外部进行的更改生成事件。可以在更改持续之前生成事件。
+     * 在此节点的后代中修改首选项时不会生成事件;希望这样的事件的呼叫者必须向每个后代登记。
+     * 
+     * 
      * @param pcl The preference change listener to add.
      * @throws NullPointerException if <tt>pcl</tt> is null.
      * @throws IllegalStateException if this node (or an ancestor) has been
@@ -1101,6 +1459,10 @@ public abstract class Preferences {
      * Removes the specified preference change listener, so it no longer
      * receives preference change events.
      *
+     * <p>
+     *  删除指定的首选项更改侦听器,因此它不再接收首选项更改事件。
+     * 
+     * 
      * @param pcl The preference change listener to remove.
      * @throws IllegalArgumentException if <tt>pcl</tt> was not a registered
      *         preference change listener on this node.
@@ -1133,6 +1495,17 @@ public abstract class Preferences {
      * circumstances, implementations are neither required to generate node
      * change events nor prohibited from doing so.
      *
+     * <p>
+     *  注册指定的侦听器以接收此节点的<i>节点更改事件</i>。当子节点添加到该节点或从该节点删除时,会生成节点更改事件。
+     *  (单个{@link #removeNode()}调用导致多个节点改变事件,其中一个用于处在移除的节点处的子树中的每个节点)。
+     * 
+     * <p>只有在与注册侦听器相同的JVM中进行的更改才能保证事件,但某些实现可能会为在此JVM外部进行的更改生成事件。可以在更改变为永久之前生成事件。
+     * 添加或删除此节点的间接后代时不生成事件;希望这样的事件的呼叫者必须向每个后代登记。
+     * 
+     *  <p>对节点创建几乎没有保证。因为节点是在访问时隐式创建的,所以对于实现来说确定在访问之前是否存在后备存储中的子节点(例如,因为后备存储不可达或缓存的信息是过时的)可能是不可行的。
+     * 在这些情况下,实现既不需要生成节点改变事件也不禁止这样做。
+     * 
+     * 
      * @param ncl The <tt>NodeChangeListener</tt> to add.
      * @throws NullPointerException if <tt>ncl</tt> is null.
      * @throws IllegalStateException if this node (or an ancestor) has been
@@ -1146,6 +1519,10 @@ public abstract class Preferences {
      * Removes the specified <tt>NodeChangeListener</tt>, so it no longer
      * receives change events.
      *
+     * <p>
+     *  删除指定的<tt> NodeChangeListener </tt>,因此它不再接收更改事件。
+     * 
+     * 
      * @param ncl The <tt>NodeChangeListener</tt> to remove.
      * @throws IllegalArgumentException if <tt>ncl</tt> was not a registered
      *         <tt>NodeChangeListener</tt> on this node.
@@ -1174,6 +1551,17 @@ public abstract class Preferences {
      * preferences contained in the node; some of the concurrent modifications
      * may be reflected in the exported data while others may not.
      *
+     * <p>
+     *  在指定的输出流上发出一个XML文档,该文档表示此节点中包含的所有首选项(但不包含其后代)。这个XML文档实际上是节点的离线备份。
+     * 
+     *  <p> XML文档将具有以下DOCTYPE声明：<pre> {@ code
+     * <!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+     *  } </pre>将使用UTF-8字符编码。
+     * 
+     * <p>此方法是一般规则的例外,即在此类中同时执行多个方法的结果产生等同于某些串行执行的结果。
+     * 如果在该节点的偏好与该方法的调用同时被修改,则所导出的偏好包括该节点中包含的偏好的"模糊快照";一些并发修改可以反映在导出的数据中,而其他修改可能不反映。
+     * 
+     * 
      * @param os the output stream on which to emit the XML document.
      * @throws IOException if writing to the specified output stream
      *         results in an <tt>IOException</tt>.
@@ -1205,6 +1593,17 @@ public abstract class Preferences {
      * "fuzzy snapshot" of the subtree; some of the concurrent modifications
      * may be reflected in the exported data while others may not.
      *
+     * <p>
+     *  发出一个XML文档,表示此节点及其所有后代中包含的所有首选项。这个XML文档实际上是以节点为根的子树的离线备份。
+     * 
+     *  <p> XML文档将具有以下DOCTYPE声明：<pre> {@ code
+     * <!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+     *  } </pre>将使用UTF-8字符编码。
+     * 
+     *  <p>此方法是一般规则的例外,即在此类中同时执行多个方法的结果产生等同于某些串行执行的结果。
+     * 如果根据此节点的子树中的偏好或节点与该方法的调用同时被修改,则所导出的偏好包括子树的"模糊快照";一些并发修改可以反映在导出的数据中,而其他修改可能不反映。
+     * 
+     * 
      * @param os the output stream on which to emit the XML document.
      * @throws IOException if writing to the specified output stream
      *         results in an <tt>IOException</tt>.
@@ -1241,6 +1640,13 @@ public abstract class Preferences {
      * as if implemented on top of the other public methods in this class,
      * notably {@link #node(String)} and {@link #put(String, String)}.
      *
+     * <p>
+     * 导入由指定输入流上的XML文档表示的所有首选项。文档可以表示用户偏好或系统偏好。如果它代表用户首选项,则首选项将被导入到主叫用户的首选项树中(即使它们最初来自不同用户的首选项树)。
+     * 如果文档描述的任何偏好驻留在不存在的偏好节点中,则将创建节点。
+     * 
+     *  <p> XML文档必须具有以下DOCTYPE声明：<pre> {@ code
+     * <!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+     * 
      * @param is the input stream from which to read the XML document.
      * @throws IOException if reading from the specified input stream
      *         results in an <tt>IOException</tt>.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,9 @@ import sun.corba.EncapsInputStreamFactory;
 /** Based on the magic and scid, return the appropriate
 * ObjectKeyTemplate.  Expects to be called with a valid
 * magic.  If scid is not valid, null should be returned.
+* <p>
+*  ObjectKeyTemplate。期望有一个有效的魔法。如果scid无效,则应返回null。
+* 
 */
 interface Handler {
     ObjectKeyTemplate handle( int magic, int scid,
@@ -63,6 +67,10 @@ interface Handler {
 
 /** Singleton used to manufacture ObjectKey and ObjectKeyTemplate
  * instances.
+ * <p>
+ *  实例。
+ * 
+ * 
  * @author Ken Cavanaugh
  */
 public class ObjectKeyFactoryImpl implements ObjectKeyFactory
@@ -126,6 +134,9 @@ public class ObjectKeyFactoryImpl implements ObjectKeyFactory
 
     /** This handler reads the full object key, both the oktemp
     * and the ID.
+    * <p>
+    *  和ID。
+    * 
     */
     private Handler fullKey = new Handler() {
         public ObjectKeyTemplate handle( int magic, int scid,
@@ -150,6 +161,7 @@ public class ObjectKeyFactoryImpl implements ObjectKeyFactory
         } ;
 
     /** This handler reads only the oktemp.
+    /* <p>
     */
     private Handler oktempOnly = new Handler() {
         public ObjectKeyTemplate handle( int magic, int scid,
@@ -175,6 +187,9 @@ public class ObjectKeyFactoryImpl implements ObjectKeyFactory
 
     /** Returns true iff magic is in the range of valid magic numbers
     * for our ORB.
+    * <p>
+    *  为我们的ORB。
+    * 
     */
     private boolean validMagic( int magic )
     {
@@ -183,6 +198,8 @@ public class ObjectKeyFactoryImpl implements ObjectKeyFactory
 
     /** Creates an ObjectKeyTemplate from the InputStream.  Most of the
     * decoding is done inside the handler.
+    * <p>
+    *  解码是在处理程序内部完成的。
     */
     private ObjectKeyTemplate create( InputStream is, Handler handler,
         OctetSeqHolder osh )

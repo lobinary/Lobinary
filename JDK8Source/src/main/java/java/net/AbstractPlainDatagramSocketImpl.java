@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import sun.net.ResourceManager;
  * security checks present in the DatagramSocket and MulticastSocket
  * classes.
  *
+ * <p>
+ *  抽象数据报和组播套接字实现基类。注意：这不是一个公共类,所以applet不能直接调用到实现,因此不能绕过DatagramSocket和MulticastSocket类中存在的安全检查。
+ * 
+ * 
  * @author Pavani Diwanji
  */
 
@@ -54,11 +59,17 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * flag set if the native connect() call not to be used
+     * <p>
+     *  如果本机connect()调用不使用,则设置标志
+     * 
      */
     private final static boolean connectDisabled = os.contains("OS X");
 
     /**
      * Load net library into runtime.
+     * <p>
+     *  将网络库加载到运行时。
+     * 
      */
     static {
         java.security.AccessController.doPrivileged(
@@ -73,6 +84,9 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * Creates a datagram socket
+     * <p>
+     *  创建数据报套接字
+     * 
      */
     protected synchronized void create() throws SocketException {
         ResourceManager.beforeUdpCreate();
@@ -88,6 +102,9 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * Binds a datagram socket to a local port.
+     * <p>
+     *  将数据报套接字绑定到本地端口。
+     * 
      */
     protected synchronized void bind(int lport, InetAddress laddr)
         throws SocketException {
@@ -100,6 +117,10 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
     /**
      * Sends a datagram packet. The packet contains the data and the
      * destination address to send the packet to.
+     * <p>
+     *  发送数据包。数据包包含要发送数据包的数据和目标地址。
+     * 
+     * 
      * @param p the packet to be sent.
      */
     protected abstract void send(DatagramPacket p) throws IOException;
@@ -108,6 +129,10 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
      * Connects a datagram socket to a remote destination. This associates the remote
      * address with the local socket so that datagrams may only be sent to this destination
      * and received from this destination.
+     * <p>
+     *  将数据报套接字连接到远程目标。这将远程地址与本地套接字相关联,使得数据报可以仅被发送到该目的地并从该目的地接收。
+     * 
+     * 
      * @param address the remote InetAddress to connect to
      * @param port the remote port number
      */
@@ -121,6 +146,9 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
     /**
      * Disconnects a previously connected socket. Does nothing if the socket was
      * not connected already.
+     * <p>
+     *  断开以前连接的插座。如果套接字未连接,则不执行任何操作。
+     * 
      */
     protected void disconnect() {
         disconnect0(connectedAddress.holder().getFamily());
@@ -131,12 +159,20 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * Peek at the packet to see who it is from.
+     * <p>
+     *  偷看包,看看它是从哪里来的。
+     * 
+     * 
      * @param i the address to populate with the sender address
      */
     protected abstract int peek(InetAddress i) throws IOException;
     protected abstract int peekData(DatagramPacket p) throws IOException;
     /**
      * Receive the datagram packet.
+     * <p>
+     *  接收数据包。
+     * 
+     * 
      * @param p the packet to receive into
      */
     protected synchronized void receive(DatagramPacket p)
@@ -149,17 +185,28 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * Set the TTL (time-to-live) option.
+     * <p>
+     *  设置TTL(存活时间)选项。
+     * 
+     * 
      * @param ttl TTL to be set.
      */
     protected abstract void setTimeToLive(int ttl) throws IOException;
 
     /**
      * Get the TTL (time-to-live) option.
+     * <p>
+     *  获取TTL(生存时间)选项。
+     * 
      */
     protected abstract int getTimeToLive() throws IOException;
 
     /**
      * Set the TTL (time-to-live) option.
+     * <p>
+     *  设置TTL(存活时间)选项。
+     * 
+     * 
      * @param ttl TTL to be set.
      */
     @Deprecated
@@ -167,12 +214,19 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * Get the TTL (time-to-live) option.
+     * <p>
+     *  获取TTL(生存时间)选项。
+     * 
      */
     @Deprecated
     protected abstract byte getTTL() throws IOException;
 
     /**
      * Join the multicast group.
+     * <p>
+     *  加入组播组。
+     * 
+     * 
      * @param inetaddr multicast address to join.
      */
     protected void join(InetAddress inetaddr) throws IOException {
@@ -181,6 +235,10 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * Leave the multicast group.
+     * <p>
+     *  离开组播组。
+     * 
+     * 
      * @param inetaddr multicast address to leave.
      */
     protected void leave(InetAddress inetaddr) throws IOException {
@@ -188,6 +246,10 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
     }
     /**
      * Join the multicast group.
+     * <p>
+     *  加入组播组。
+     * 
+     * 
      * @param mcastaddr multicast address to join.
      * @param netIf specifies the local interface to receive multicast
      *        datagram packets
@@ -208,6 +270,10 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * Leave the multicast group.
+     * <p>
+     *  离开组播组。
+     * 
+     * 
      * @param mcastaddr  multicast address to leave.
      * @param netIf specified the local interface to leave the group at
      * @throws  IllegalArgumentException if mcastaddr is null or is a
@@ -226,6 +292,9 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /**
      * Close the socket.
+     * <p>
+     *  关闭套接字。
+     * 
      */
     protected void close() {
         if (fd != null) {
@@ -246,6 +315,9 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
     /**
      * set a value - since we only support (setting) binary options
      * here, o must be a Boolean
+     * <p>
+     *  设置一个值 - 因为我们只支持(设置)二进制选项在这里,o必须是一个布尔值
+     * 
      */
 
      public void setOption(int optID, Object o) throws SocketException {
@@ -256,6 +328,9 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
             /* check type safety b4 going native.  These should never
              * fail, since only java.Socket* has access to
              * PlainSocketImpl.setOption().
+             * <p>
+             *  失败,因为只有java.Socket *可以访问PlainSocketImpl.setOption()。
+             * 
              */
          case SO_TIMEOUT:
              if (o == null || !(o instanceof Integer)) {
@@ -312,6 +387,8 @@ abstract class AbstractPlainDatagramSocketImpl extends DatagramSocketImpl
 
     /*
      * get option's state - set or not
+     * <p>
+     * 获取选项的状态 - 设置与否
      */
 
     public Object getOption(int optID) throws SocketException {

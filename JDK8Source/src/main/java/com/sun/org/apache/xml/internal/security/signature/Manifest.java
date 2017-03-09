@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.signature;
 
@@ -52,11 +61,17 @@ import org.xml.sax.SAXException;
 /**
  * Handles <code>&lt;ds:Manifest&gt;</code> elements.
  * <p> This element holds the <code>Reference</code> elements</p>
+ * <p>
+ *  处理<code>&lt; ds：Manifest&gt; </code>元素。 <p>此元素包含<code>参考</code>元素</p>
+ * 
  */
 public class Manifest extends SignatureElementProxy {
 
     /**
      * The maximum number of references per Manifest, if secure validation is enabled.
+     * <p>
+     *  如果启用安全验证,则每个清单的最大引用数。
+     * 
      */
     public static final int MAXIMUM_REFERENCE_COUNT = 30;
 
@@ -82,6 +97,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Constructs {@link Manifest}
      *
+     * <p>
+     *  构造{@link Manifest}
+     * 
+     * 
      * @param doc the {@link Document} in which <code>XMLsignature</code> is placed
      */
     public Manifest(Document doc) {
@@ -95,6 +114,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Constructor Manifest
      *
+     * <p>
+     *  构造函数清单
+     * 
+     * 
      * @param element
      * @param baseURI
      * @throws XMLSecurityException
@@ -106,6 +129,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Constructor Manifest
      *
+     * <p>
+     *  构造函数清单
+     * 
+     * 
      * @param element
      * @param baseURI
      * @param secureValidation
@@ -160,6 +187,11 @@ public class Manifest extends SignatureElementProxy {
      * signed info. A {@link com.sun.org.apache.xml.internal.security.signature.Reference} is built
      * from the supplied values.
      *
+     * <p>
+     *  此<code> addDocument </code>方法用于向签名信息添加新资源。
+     *  {@link com.sun.org.apache.xml.internal.security.signature.Reference}是从提供的值构建的。
+     * 
+     * 
      * @param baseURI the URI of the resource where the XML instance was stored
      * @param referenceURI <code>URI</code> attribute in <code>Reference</code> for specifying
      * where data is
@@ -199,6 +231,10 @@ public class Manifest extends SignatureElementProxy {
      * References are already added to the document and during the signing
      * process. This ensures that all necessary data is in place.
      *
+     * <p>
+     * 引用中的DigestValues的计算必须在引用已经添加到文档和签名过程之后。这确保所有必要的数据到位。
+     * 
+     * 
      * @throws ReferenceNotInitializedException
      * @throws XMLSignatureException
      */
@@ -214,6 +250,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Return the nonnegative number of added references.
      *
+     * <p>
+     *  返回添加引用的非负数。
+     * 
+     * 
      * @return the number of references
      */
     public int getLength() {
@@ -224,6 +264,10 @@ public class Manifest extends SignatureElementProxy {
      * Return the <it>i</it><sup>th</sup> reference. Valid <code>i</code>
      * values are 0 to <code>{link@ getSize}-1</code>.
      *
+     * <p>
+     *  返回<it> i </it> <sup> th </sup>引用。有效的<code> i </code>值为0到<code> {link @ getSize} -1 </code>。
+     * 
+     * 
      * @param i Index of the requested {@link Reference}
      * @return the <it>i</it><sup>th</sup> reference
      * @throws XMLSecurityException
@@ -243,6 +287,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Sets the <code>Id</code> attribute
      *
+     * <p>
+     *  设置<code> Id </code>属性
+     * 
+     * 
      * @param Id the <code>Id</code> attribute in <code>ds:Manifest</code>
      */
     public void setId(String Id) {
@@ -255,6 +303,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Returns the <code>Id</code> attribute
      *
+     * <p>
+     *  返回<code> Id </code>属性
+     * 
+     * 
      * @return the <code>Id</code> attribute in <code>ds:Manifest</code>
      */
     public String getId() {
@@ -271,6 +323,14 @@ public class Manifest extends SignatureElementProxy {
      * it returns <code>true</code>. The results of the individual reference
      * validations are available by using the {@link #getVerificationResult(int)} method
      *
+     * <p>
+     *  用于使用{@link Reference#verify}对所有引用的参考文献执行<A HREF="http://www.w3.org/TR/xmldsig-core/#def-ValidationReference">
+     * 参考验证</A>方法。
+     * 
+     *  <p>此步骤循环遍历所有{@link Reference}并验证哈希值。如果一个或多个验证失败,则方法返回<code> false </code>。
+     * 如果<i>所有</i>验证成功,则返回<code> true </code>。通过使用{@link #getVerificationResult(int)}方法可以获得各个引用验证的结果。
+     * 
+     * 
      * @return true if all References verify, false if one or more do not verify.
      * @throws MissingResourceFailureException if a {@link Reference} does not verify
      * (throws a {@link com.sun.org.apache.xml.internal.security.signature.ReferenceNotInitializedException}
@@ -295,6 +355,14 @@ public class Manifest extends SignatureElementProxy {
      * it returns <code>true</code>. The results of the individual reference
      * validations are available by using the {@link #getVerificationResult(int)} method
      *
+     * <p>
+     *  用于使用{@link Reference#verify}对所有引用的参考文献执行<A HREF="http://www.w3.org/TR/xmldsig-core/#def-ValidationReference">
+     * 参考验证</A>方法。
+     * 
+     * <p>此步骤循环遍历所有{@link Reference}并验证哈希值。如果一个或多个验证失败,则方法返回<code> false </code>。
+     * 如果<i>所有</i>验证成功,则返回<code> true </code>。通过使用{@link #getVerificationResult(int)}方法可以获得各个引用验证的结果。
+     * 
+     * 
      * @param followManifests
      * @return true if all References verify, false if one or more do not verify.
      * @throws MissingResourceFailureException if a {@link Reference} does not verify
@@ -427,6 +495,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Method setVerificationResult
      *
+     * <p>
+     *  方法setVerificationResult
+     * 
+     * 
      * @param index
      * @param verify
      */
@@ -443,6 +515,11 @@ public class Manifest extends SignatureElementProxy {
      * {@link Manifest#verifyReferences()} or {@link SignedInfo#verify()} methods,
      * the individual results can be retrieved with this method.
      *
+     * <p>
+     *  在使用{@link Manifest#verifyReferences()}或{@link SignedInfo#verify()}方法验证{@link Manifest}或{@link SignedInfo}
+     * 后,可以使用此方法检索单个结果。
+     * 
+     * 
      * @param index an index of into a {@link Manifest} or a {@link SignedInfo}
      * @return the results of reference validation at the specified index
      * @throws XMLSecurityException
@@ -473,6 +550,10 @@ public class Manifest extends SignatureElementProxy {
      * Adds Resource Resolver for retrieving resources at specified <code>URI</code> attribute
      * in <code>reference</code> element
      *
+     * <p>
+     *  添加资源解析器以在<code>引用</code>元素中的指定<code> URI </code>属性检索资源
+     * 
+     * 
      * @param resolver {@link ResourceResolver} can provide the implemenatin subclass of
      * {@link ResourceResolverSpi} for retrieving resource.
      */
@@ -490,6 +571,10 @@ public class Manifest extends SignatureElementProxy {
      * Adds Resource Resolver for retrieving resources at specified <code>URI</code> attribute
      * in <code>reference</code> element
      *
+     * <p>
+     *  添加资源解析器以在<code>引用</code>元素中的指定<code> URI </code>属性检索资源
+     * 
+     * 
      * @param resolverSpi the implementation subclass of {@link ResourceResolverSpi} for
      * retrieving the resource.
      */
@@ -505,6 +590,10 @@ public class Manifest extends SignatureElementProxy {
 
     /**
      * Get the Per-Manifest Resolver List
+     * <p>
+     *  获取每个清单解析器列表
+     * 
+     * 
      * @return the per-manifest Resolver List
      */
     public List<ResourceResolver> getPerManifestResolvers() {
@@ -513,6 +602,10 @@ public class Manifest extends SignatureElementProxy {
 
     /**
      * Get the resolver property map
+     * <p>
+     *  获取解析器属性映射
+     * 
+     * 
      * @return the resolver property map
      */
     public Map<String, String> getResolverProperties() {
@@ -523,6 +616,10 @@ public class Manifest extends SignatureElementProxy {
      * Used to pass parameters like proxy servers etc to the ResourceResolver
      * implementation.
      *
+     * <p>
+     *  用于将参数(如代理服务器等)传递给ResourceResolver实现。
+     * 
+     * 
      * @param key the key
      * @param value the value
      */
@@ -536,6 +633,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Returns the value at specified key
      *
+     * <p>
+     *  返回指定键的值
+     * 
+     * 
      * @param key the key
      * @return the value
      */
@@ -546,6 +647,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Method getSignedContentItem
      *
+     * <p>
+     *  方法getSignedContentItem
+     * 
+     * 
      * @param i
      * @return The signed content of the i reference.
      *
@@ -568,6 +673,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Method getReferencedContentPriorTransformsItem
      *
+     * <p>
+     *  方法getReferencedContentPriorTransformsItem
+     * 
+     * 
      * @param i
      * @return The contents before transformation of the reference i.
      * @throws XMLSecurityException
@@ -580,6 +689,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Method getReferencedContentAfterTransformsItem
      *
+     * <p>
+     *  方法getReferencedContentAfterTransformsItem
+     * 
+     * 
      * @param i
      * @return The contents after transformation of the reference i.
      * @throws XMLSecurityException
@@ -592,6 +705,10 @@ public class Manifest extends SignatureElementProxy {
     /**
      * Method getSignedContentLength
      *
+     * <p>
+     *  方法getSignedContentLength
+     * 
+     * 
      * @return The number of references contained in this reference.
      */
     public int getSignedContentLength() {
@@ -602,6 +719,9 @@ public class Manifest extends SignatureElementProxy {
      * Method getBaseLocalName
      *
      * @inheritDoc
+     * <p>
+     *  方法getBaseLocalName
+     * 
      */
     public String getBaseLocalName() {
         return Constants._TAG_MANIFEST;

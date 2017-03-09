@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,15 @@ import javax.naming.NamingException;
   *   }
   *</pre></blockquote>
   *
+  * <p>
+  *  此接口用于返回在NamingEnumerations中返回的对象的控件。
+  * 例如,假设服务器发回带有搜索操作结果的控件,服务提供程序将返回既是SearchResult又实现HasControls的对象的NamingEnumeration。
+  *  blockquote> <pre> NamingEnumeration elts = ectx.search((Name)name,filter,sctls); while(elts.hasMore(
+  * )){Object entry = elts.next();。
+  * 例如,假设服务器发回带有搜索操作结果的控件,服务提供程序将返回既是SearchResult又实现HasControls的对象的NamingEnumeration。
+  * 
+  *  //获取搜索结果SearchResult res =(SearchResult)条目; //做点什么
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   * @author Vincent Ryan
@@ -63,6 +73,12 @@ public interface HasControls {
       * Retrieves an array of <tt>Control</tt>s from the object that
       * implements this interface. It is null if there are no controls.
       *
+      * <p>
+      * 
+      *  //获取条目控制if(条目instanceof HasControls){Control [] entryCtls =((HasControls)条目).getControls(); // do something with controls}
+      * } / pre> </blockquote>。
+      * 
+      * 
       * @return A possibly null array of <tt>Control</tt> objects.
       * @throws NamingException If cannot return controls due to an error.
       */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -60,6 +70,17 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource;
  * <ul>
  * </ul>
  *
+ * <p>
+ *  <p>此配置提供了使用Xerces的语法缓存设施的一般方法。它扩展了XIncludeAwareParserConfiguration,因此可以根据XML模式或DTD来验证文档。
+ * 它还允许用户预先分割语法,并锁定语法池实现,以便不再添加语法。
+ * </p> <p>使用com.sun.org.apache.xerces.internal.xni.parser属性,应用程序可以使用此配置实例化Xerces SAX或DOM解析器。
+ * 当以这种方式调用时,将引出默认行为;要使用此配置的特定功能,用户将需要直接引用它。</p>。
+ * <p>
+ * 除了基本解析器配置识别的功能和属性之外,此类还识别这些附加的功能和属性：
+ * <ul>
+ * </ul>
+ * 
+ * 
  * @author Neil Graham, IBM
  *
  * @version $Id: XMLGrammarCachingConfiguration.java,v 1.6 2010-11-01 04:40:10 joehw Exp $
@@ -109,6 +130,10 @@ public class XMLGrammarCachingConfiguration
     /**
      * Constructs a parser configuration using the specified symbol table.
      *
+     * <p>
+     *  使用指定的符号表构造解析器配置。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      */
     public XMLGrammarCachingConfiguration(SymbolTable symbolTable) {
@@ -123,6 +148,12 @@ public class XMLGrammarCachingConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表和语法池构造解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      * @param grammarPool The grammar pool to use.
      */
@@ -139,6 +170,12 @@ public class XMLGrammarCachingConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表,语法池和父设置构造一个解析器配置。
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新。
+     * 
+     * 
      * @param symbolTable    The symbol table to use.
      * @param grammarPool    The grammar pool to use.
      * @param parentSettings The parent settings.
@@ -169,6 +206,9 @@ public class XMLGrammarCachingConfiguration
     /*
      * lock the XMLGrammarPoolImpl object so that it does not
      * accept any more grammars from the validators.
+     * <p>
+     *  锁定XMLGrammarPoolImpl对象,以使它不接受来自验证器的任何更多的语法。
+     * 
      */
     public void lockGrammarPool() {
         fGrammarPool.lockPool();
@@ -177,6 +217,9 @@ public class XMLGrammarCachingConfiguration
     /*
      * clear the XMLGrammarPoolImpl object so that it does not
      * contain any more grammars.
+     * <p>
+     *  清除XMLGrammarPoolImpl对象,以使其不包含任何更多的语法。
+     * 
      */
     public void clearGrammarPool() {
         fGrammarPool.clear();
@@ -185,6 +228,9 @@ public class XMLGrammarCachingConfiguration
     /*
      * unlock the XMLGrammarPoolImpl object so that it
      * accepts more grammars from the validators.
+     * <p>
+     *  解锁XMLGrammarPoolImpl对象,以便它从验证器接受更多的语法。
+     * 
      */
     public void unlockGrammarPool() {
         fGrammarPool.unlockPool();
@@ -194,6 +240,10 @@ public class XMLGrammarCachingConfiguration
      * Parse a grammar from a location identified by an URI.
      * This method also adds this grammar to the XMLGrammarPool
      *
+     * <p>
+     *  从由URI标识的位置解析语法。此方法还将此语法添加到XMLGrammarPool
+     * 
+     * 
      * @param type The type of the grammar to be constructed
      * @param uri The location of the grammar to be constructed.
      * <strong>The parser will not expand this URI or make it
@@ -216,6 +266,10 @@ public class XMLGrammarCachingConfiguration
      * XMLInputSource.
      * This method also adds this grammar to the XMLGrammarPool
      *
+     * <p>
+     *  从由XMLInputSource标识的位置解析语法。此方法还将此语法添加到XMLGrammarPool
+     * 
+     * 
      * @param type The type of the grammar to be constructed
      * @param is The XMLInputSource containing this grammar's
      * information
@@ -249,6 +303,9 @@ public class XMLGrammarCachingConfiguration
      * It requires a GrammarBucket parameter so that DOMASBuilder can
      * extract the info it needs.
      * Therefore, bucket must not be null!
+     * <p>
+     *  它需要一个GrammarBucket参数,以便DOMASBuilder可以提取需要的信息。因此,bucket不能为null！
+     * 
      */
     SchemaGrammar parseXMLSchema(XMLInputSource is)
                 throws IOException {
@@ -285,6 +342,7 @@ public class XMLGrammarCachingConfiguration
     } // parseXMLSchema(XMLInputSource) :  SchemaGrammar
 
     /* This method parses an external DTD entity.
+    /* <p>
      */
     DTDGrammar parseDTD(XMLInputSource is)
                 throws IOException {

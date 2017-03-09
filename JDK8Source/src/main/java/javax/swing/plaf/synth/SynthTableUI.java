@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,10 @@ import javax.swing.table.TableColumnModel;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JTable}.
  *
+ * <p>
+ *  为{@link javax.swing.JTable}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author Philip Milne
  * @since 1.7
  */
@@ -90,6 +95,10 @@ public class SynthTableUI extends BasicTableUI
     /**
      * Creates a new UI object for the given component.
      *
+     * <p>
+     *  为给定组件创建一个新的UI对象。
+     * 
+     * 
      * @param c component to create UI object for
      * @return the UI object
      */
@@ -103,6 +112,10 @@ public class SynthTableUI extends BasicTableUI
      * current value is either null or a UIResource, other properties are set
      * if the current value is null.
      *
+     * <p>
+     *  初始化JTable属性,如字体,前景和背景。仅当字体,前景和背景属性的当前值为null或UIResource时,才设置它们,如果当前值为null,则设置其他属性。
+     * 
+     * 
      * @see #installUI
      */
     @Override
@@ -194,6 +207,9 @@ public class SynthTableUI extends BasicTableUI
 
     /**
      * Attaches listeners to the JTable.
+     * <p>
+     *  将侦听器附加到JTable。
+     * 
      */
     @Override
     protected void installListeners() {
@@ -203,6 +219,9 @@ public class SynthTableUI extends BasicTableUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallDefaults() {
@@ -226,6 +245,9 @@ public class SynthTableUI extends BasicTableUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallListeners() {
@@ -239,6 +261,9 @@ public class SynthTableUI extends BasicTableUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -261,6 +286,12 @@ public class SynthTableUI extends BasicTableUI
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -278,6 +309,9 @@ public class SynthTableUI extends BasicTableUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -290,6 +324,10 @@ public class SynthTableUI extends BasicTableUI
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -305,6 +343,10 @@ public class SynthTableUI extends BasicTableUI
     /**
      * Paints the specified component.
      *
+     * <p>
+     *  绘制指定的组件。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -504,6 +546,11 @@ public class SynthTableUI extends BasicTableUI
      * if <code>getShowVerticalLines()</code> returns true and paints
      * horizontal lines if <code>getShowHorizontalLines()</code>
      * returns true.
+     * <p>
+     *  使用<I> setGridColor </I>设置的网格颜色在<I> aRect </I>中绘制网格线。
+     * 如果<code> getShowVerticalLines()</code>返回true,则绘制垂直线,如果<code> getShowHorizo​​ntalLines()</code>返回true,
+     * 则绘制垂直线。
+     *  使用<I> setGridColor </I>设置的网格颜色在<I> aRect </I>中绘制网格线。
      */
     private void paintGrid(SynthContext context, Graphics g, int rMin,
                            int rMax, int cMin, int cMax) {
@@ -696,6 +743,8 @@ public class SynthTableUI extends BasicTableUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     * 
      */
     @Override
     public void propertyChange(PropertyChangeEvent event) {

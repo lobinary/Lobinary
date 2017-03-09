@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,11 @@ import com.sun.jmx.snmp.SnmpStatusException;
  * SNMPv3).
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  SNMP数据包的部分解码表示。它包含任何SNMP消息(SNMPv1,SNMPv2或SNMPv3)中包含的信息。
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
+ * 
  * @since 1.5
  */
 public abstract class SnmpMsg implements SnmpDefinitions {
@@ -48,6 +54,12 @@ public abstract class SnmpMsg implements SnmpDefinitions {
      * perform any check on this value.
      * <BR><CODE>decodeSnmpPdu</CODE> and <CODE>encodeSnmpPdu</CODE> only
      * accept  the values 0 (for SNMPv1), 1 (for SNMPv2) and 3 (for SNMPv3).
+     * <p>
+     *  协议版本。 <P> <CODE> decodeMessage </CODE>和<CODE> encodeMessage </CODE>不要对此值执行任何检查。
+     *  <BR> <CODE> decodeSnmpPdu </CODE>和<CODE> encodeSnmpPdu </CODE>仅接受值0(对于SNMPv1),1(对于SNMPv2)和3(对于SNMPv3
+     * )。
+     *  协议版本。 <P> <CODE> decodeMessage </CODE>和<CODE> encodeMessage </CODE>不要对此值执行任何检查。
+     * 
      */
     public int version = 0;
 
@@ -57,11 +69,18 @@ public abstract class SnmpMsg implements SnmpDefinitions {
      * defined in RFC1157 and RFC1902. However, this can be authenticated
      * or encrypted data (but you need to implemented your own
      * <CODE>SnmpPduFactory</CODE> class).
+     * <p>
+     *  PDU的编码。 <P>这通常是RFC1157和RFC1902中定义的PDU语法的BER编码。
+     * 然而,这可以是认证或加密的数据(但是你需要实现自己的<CODE> SnmpPduFactory </CODE>类)。
+     * 
      */
     public byte[] data = null;
 
     /**
      * Number of useful bytes in the <CODE>data</CODE> field.
+     * <p>
+     *  <CODE>数据</CODE>字段中的有用字节数。
+     * 
      */
     public int dataLength = 0;
 
@@ -69,6 +88,9 @@ public abstract class SnmpMsg implements SnmpDefinitions {
      * Source or destination address.
      * <BR>For an incoming message it's the source.
      * For an outgoing message it's the destination.
+     * <p>
+     *  源或目标地址。 <BR>对于传入邮件,它是源。对于外发消息,它是目的地。
+     * 
      */
     public InetAddress address = null;
 
@@ -76,14 +98,24 @@ public abstract class SnmpMsg implements SnmpDefinitions {
      * Source or destination port.
      * <BR>For an incoming message it's the source.
      * For an outgoing message it's the destination.
+     * <p>
+     *  源或目标端口。 <BR>对于传入邮件,它是源。对于外发消息,它是目的地。
+     * 
      */
     public int port = 0;
     /**
      * Security parameters. Contain informations according to Security Model (Usm, community string based, ...).
+     * <p>
+     *  安全参数。包含根据安全模型(Usm,基于社区字符串,...)的信息。
+     * 
      */
     public SnmpSecurityParameters securityParameters = null;
     /**
      * Returns the encoded SNMP version present in the passed byte array.
+     * <p>
+     *  返回传递的字节数组中存在的已编码的SNMP版本。
+     * 
+     * 
      * @param data The unmarshalled SNMP message.
      * @return The SNMP version (0, 1 or 3).
      */
@@ -109,6 +141,10 @@ public abstract class SnmpMsg implements SnmpDefinitions {
 
     /**
      * Returns the associated request ID.
+     * <p>
+     *  返回关联的请求ID。
+     * 
+     * 
      * @param data The flat message.
      * @return The request ID.
      */
@@ -118,6 +154,10 @@ public abstract class SnmpMsg implements SnmpDefinitions {
      * Encodes this message and puts the result in the specified byte array.
      * For internal use only.
      *
+     * <p>
+     *  对此消息进行编码,并将结果放入指定的字节数组中。仅限内部使用。
+     * 
+     * 
      * @param outputBytes An array to receive the resulting encoding.
      *
      * @exception ArrayIndexOutOfBoundsException If the result does not fit
@@ -130,6 +170,10 @@ public abstract class SnmpMsg implements SnmpDefinitions {
      * Decodes the specified bytes and initializes this message.
      * For internal use only.
      *
+     * <p>
+     * 解码指定的字节并初始化此消息。仅限内部使用。
+     * 
+     * 
      * @param inputBytes The bytes to be decoded.
      *
      * @exception SnmpStatusException If the specified bytes are not a valid encoding.
@@ -148,6 +192,15 @@ public abstract class SnmpMsg implements SnmpDefinitions {
      * If the encoding length exceeds <CODE>maxDataLength</CODE>,
      * the method throws an exception.
      *
+     * <p>
+     *  使用指定的<CODE> pdu </CODE>初始化此消息。
+     * <P>
+     *  此方法使用<CODE> maxDataLength </CODE>字节数组初始化数据字段。它编码<CODE> pdu </CODE>。
+     * 所得到的编码存储在数据字段中,并且编码的长度存储在<CODE> dataLength </CODE>中。
+     * <p>
+     *  如果编码长度超过<CODE> maxDataLength </CODE>,则该方法将抛出异常。
+     * 
+     * 
      * @param pdu The PDU to be encoded.
      * @param maxDataLength The maximum length permitted for the data field.
      *
@@ -165,6 +218,12 @@ public abstract class SnmpMsg implements SnmpDefinitions {
      * <P>
      * This method decodes the data field and returns the resulting PDU.
      *
+     * <p>
+     *  获取此消息中编码的PDU。
+     * <P>
+     *  此方法解码数据字段并返回生成的PDU。
+     * 
+     * 
      * @return The resulting PDU.
      * @exception SnmpStatusException If the encoding is not valid.
      */
@@ -174,6 +233,10 @@ public abstract class SnmpMsg implements SnmpDefinitions {
     /**
      * Dumps the content of a byte buffer using hexadecimal form.
      *
+     * <p>
+     *  使用十六进制形式转储字节缓冲区的内容。
+     * 
+     * 
      * @param b The buffer to dump.
      * @param offset The position of the first byte to be dumped.
      * @param len The number of bytes to be dumped starting from offset.
@@ -202,6 +265,10 @@ public abstract class SnmpMsg implements SnmpDefinitions {
     /**
      * Dumps this message in a string.
      *
+     * <p>
+     *  将此消息转储到字符串中。
+     * 
+     * 
      * @return The string containing the dump.
      */
     public String printMessage() {
@@ -223,6 +290,9 @@ public abstract class SnmpMsg implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime private use only.
+     * <p>
+     *  仅供SNMP Runtime私人使用。
+     * 
      */
     public void encodeVarBindList(BerEncoder benc,
                                   SnmpVarBind[] varBindList)
@@ -254,6 +324,9 @@ public abstract class SnmpMsg implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime private use only.
+     * <p>
+     *  仅供SNMP Runtime私人使用。
+     * 
      */
     void encodeVarBindValue(BerEncoder benc,
                             SnmpValue v)throws SnmpStatusException {
@@ -313,6 +386,9 @@ public abstract class SnmpMsg implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime private use only.
+     * <p>
+     *  仅供SNMP Runtime私人使用。
+     * 
      */
     public SnmpVarBind[] decodeVarBindList(BerDecoder bdec)
         throws BerException {
@@ -335,6 +411,8 @@ public abstract class SnmpMsg implements SnmpDefinitions {
 
     /**
      * For SNMP Runtime private use only.
+     * <p>
+     *  仅供SNMP Runtime私人使用。
      */
     SnmpValue decodeVarBindValue(BerDecoder bdec)
         throws BerException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import java.awt.image.BufferedImage;
  * standard Nimbus TitledBorder. This class is both a painter and a swing
  * border.
  *
+ * <p>
+ *  LoweredBorder  - 一个凹进的圆形内部阴影边框。用作标准Nimbus TitledBorder。这个类既是画家又是摇摆边界。
+ * 
+ * 
  * @author Jasper Potts
  */
 class LoweredBorder extends AbstractRegionPainter implements Border {
@@ -70,6 +75,12 @@ class LoweredBorder extends AbstractRegionPainter implements Border {
      * <code>height</code>. For performance reasons, you may want to read the
      * clip from the Graphics2D object and only render within that space.
      *
+     * <p>
+     *  实际上执行喷涂操作。子类必须实现此方法。传递的图形对象可以表示正被渲染的实际表面,或者它可以是中间缓冲器。它也已经预翻译。
+     * 简单地渲染组件,就像它位于0,0,宽度为<code> width </code>和高度<code> height </code>。
+     * 出于性能原因,您可能需要从Graphics2D对象中读取剪辑,并且只在该空间内呈现。
+     * 
+     * 
      * @param g      The Graphics2D surface to paint to
      * @param c      The JComponent related to the drawing event. For example,
      *               if the region being rendered is Button, then <code>c</code>
@@ -136,6 +147,13 @@ class LoweredBorder extends AbstractRegionPainter implements Border {
      * different states with possibly different canvas sizes, etc, into one
      * AbstractRegionPainter implementation.</p>
      *
+     * <p>
+     *  <p>获取此绘画操作的PaintContext。这种方法在每种颜料上调用,因此应该快速,不产生垃圾。 PaintContext包含诸如缓存提示之类的信息。
+     * 它还包含在运行时解码点所需的数据,例如拉伸插入,定义编码点的画布大小,以及拉伸插入是否反转。</p>。
+     * <p/>
+     *  <p>此方法允许子类将具有可能不同的画布大小等的不同状态的绘画打包到一个AbstractRegionPainter实现中。</p>
+     * 
+     * 
      * @return a PaintContext associated with this paint operation.
      */
     protected PaintContext getPaintContext() {
@@ -148,6 +166,10 @@ class LoweredBorder extends AbstractRegionPainter implements Border {
     /**
      * Returns the insets of the border.
      *
+     * <p>
+     *  返回边框的插入。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      */
     public Insets getBorderInsets(Component c) {
@@ -157,6 +179,9 @@ class LoweredBorder extends AbstractRegionPainter implements Border {
     /**
      * Returns whether or not the border is opaque.  If the border is opaque, it
      * is responsible for filling in it's own background when painting.
+     * <p>
+     * 返回边框是否不透明。如果边框是不透明的,它负责填充它自己的背景时,绘画。
+     * 
      */
     public boolean isBorderOpaque() {
         return false;
@@ -166,6 +191,9 @@ class LoweredBorder extends AbstractRegionPainter implements Border {
      * Paints the border for the specified component with the specified position
      * and size.
      *
+     * <p>
+     *  以指定的位置和大小绘制指定组件的边框。
+     * 
      * @param c      the component for which this border is being painted
      * @param g      the paint graphics
      * @param x      the x position of the painted border

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -128,6 +129,8 @@ import com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage_1_2 ;
 // REVISIT: normalize requestHeader, replyHeader, messageHeader.
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class CorbaMessageMediatorImpl
@@ -528,6 +531,11 @@ public class CorbaMessageMediatorImpl
      *
      * This is only sent on requests.  Clients can find out the
      * server's maximum by looking for a tagged component in the IOR.
+     * <p>
+     *  如果存在RMI-IIOP最大流格式版本服务上下文,则其指示我们可以用于答复的最大流格式版本。如果不存在,GIOP 1.3或更大的缺省值为2,下限为1。
+     * 
+     *  这仅在请求时发送。客户端可以通过在IOR中查找标记的组件来查找服务器的最大值。
+     * 
      */
     public byte getStreamFormatVersionForReply() {
 
@@ -1348,6 +1356,9 @@ public class CorbaMessageMediatorImpl
                      if (! header.moreFragmentsToFollow()) {
                      // Last fragment.
                      }
+                     * <p>
+                     *  不需要做任何事情。我们应该标记收到最后一次吗? if(！header.moreFragmentsToFollow()){//最后碎片。 }}
+                     * 
                     */
                 }
             } finally {
@@ -1469,6 +1480,16 @@ public class CorbaMessageMediatorImpl
          *    start processing the request and the server sends out
          *    an early reply. In such a case if the CancelRequest arrives
          *    after the reply has been sent, it has no effect.
+         * <p>
+         *  CancelRequest处理逻辑：
+         * 
+         *   - 找到具有匹配requestId的请求
+         * 
+         *   - 在BufferManagerRead [BMR]中调用cancelProcessing()
+         * 
+         *   - 希望工作线程调用BMR.underflow()等待更多的片段进入。
+         * 当调用BMR.underflow()时,如果一个CancelRequest已经到达,工作线程将抛出ThreadDeath,否则线程会等待被通知新片段或CancelRequest的到达。
+         * 通知后,唤醒线程将检查是否已经到达CancelRequest,如果是,则抛出ThreadDeath,否则它将继续处理接收到的分段。
          */
 
         if (!connection.isServer()) {
@@ -1835,6 +1856,11 @@ public class CorbaMessageMediatorImpl
             .unmarshaledHeader()) {
             return;
         }
+        /* <p>
+        /* 
+        /*   - 如果所有的片段都在CancelRequest之前被接收,那么工作线程将永远不会在BMR.underflow()中阻塞。因此,在BMR中设置中止标志没有任何效果。请求处理将正常完成。
+        /* 
+        /*  - 在服务器已经接收到足够的片段以开始处理请求并且服务器发出早期答复的情况下。在这种情况下,如果CancelRequest在答复发送后到达,则它没有效果。
         */
         handleThrowableDuringServerDispatch(messageMediator,
                                             throwable,

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: XslAttribute.java,v 1.2.4.1 2005/09/12 11:39:32 pvedula Exp $
+ * <p>
+ *  $ Id：XslAttribute.java,v 1.2.4.1 2005/09/12 11:39:32 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -46,6 +59,8 @@ import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
 import com.sun.org.apache.xml.internal.utils.XML11Char;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -62,6 +77,9 @@ final class XslAttribute extends Instruction {
 
     /**
      * Returns the name of the attribute
+     * <p>
+     *  返回属性的名称
+     * 
      */
     public AttributeValue getName() {
         return _name;
@@ -69,6 +87,9 @@ final class XslAttribute extends Instruction {
 
     /**
      * Displays the contents of the attribute
+     * <p>
+     *  显示属性的内容
+     * 
      */
     public void display(int indent) {
         indent(indent);
@@ -78,6 +99,9 @@ final class XslAttribute extends Instruction {
 
     /**
      * Parses the attribute's contents. Special care taken for namespaces.
+     * <p>
+     *  解析属性的内容。对命名空间特别小心。
+     * 
      */
     public void parseContents(Parser parser) {
         boolean generated = false;
@@ -161,6 +185,9 @@ final class XslAttribute extends Instruction {
              * TODO: The namespace URI must be passed to the parent
              * element but we don't yet know what the actual URI is
              * (as we only know it as an attribute value template).
+             * <p>
+             *  TODO：命名空间URI必须传递给父元素,但我们还不知道实际的URI是什么(因为我们只知道它是一个属性值模板)。
+             * 
              */
             if ((parent instanceof LiteralElement) && (!generated)) {
                 ((LiteralElement)parent).registerNamespace(_prefix,
@@ -190,6 +217,7 @@ final class XslAttribute extends Instruction {
 
     /**
      *
+     * <p>
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         final ConstantPoolGen cpg = classGen.getConstantPool();

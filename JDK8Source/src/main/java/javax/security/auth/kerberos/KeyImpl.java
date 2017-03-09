@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import sun.security.util.DerValue;
  * This class encapsulates a Kerberos encryption key. It is not associated
  * with a principal and may represent an ephemeral session key.
  *
+ * <p>
+ *  此类封装了Kerberos加密密钥。它不与主体相关联,并且可以表示短暂的会话密钥。
+ * 
+ * 
  * @author Mayank Upadhyay
  * @since 1.4
  *
@@ -60,6 +65,10 @@ class KeyImpl implements SecretKey, Destroyable, Serializable {
     /**
      * Constructs a KeyImpl from the given bytes.
      *
+     * <p>
+     *  从给定的字节构造KeyImpl。
+     * 
+     * 
      * @param keyBytes the raw bytes for the secret key
      * @param keyType the key type for the secret key as defined by the
      * Kerberos protocol specification.
@@ -73,6 +82,10 @@ class KeyImpl implements SecretKey, Destroyable, Serializable {
     /**
      * Constructs a KeyImpl from a password.
      *
+     * <p>
+     *  从密码构造KeyImpl。
+     * 
+     * 
      * @param principal the principal from which to derive the salt
      * @param password the password that should be used to compute the
      * key.
@@ -97,6 +110,9 @@ class KeyImpl implements SecretKey, Destroyable, Serializable {
 
     /**
      * Returns the keyType for this key as defined in the Kerberos Spec.
+     * <p>
+     *  返回在Kerberos Spec中定义的此键的keyType。
+     * 
      */
     public final int getKeyType() {
         if (destroyed)
@@ -106,6 +122,9 @@ class KeyImpl implements SecretKey, Destroyable, Serializable {
 
     /*
      * Methods from java.security.Key
+     * <p>
+     *  java.security.Key中的方法
+     * 
      */
 
     public final String getAlgorithm() {
@@ -166,6 +185,8 @@ class KeyImpl implements SecretKey, Destroyable, Serializable {
     }
 
     /**
+    /* <p>
+    /* 
      * @serialData this {@code KeyImpl} is serialized by
      * writing out the ASN1 Encoded bytes of the encryption key.
      * The ASN1 encoding is defined in RFC4120 and as  follows:

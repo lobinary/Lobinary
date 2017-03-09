@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.utils;
@@ -32,6 +42,14 @@ package com.sun.org.apache.xerces.internal.utils;
  * when bundled as part of the JDK.
  * <p>
  *
+ * <p>
+ *  这个类被复制到每个JAXP子包,所以保持同步。它是包私有的,因此不作为JAXP API的一部分公开。
+ * <p>
+ *  此代码旨在实现JAXP 1.1规范的可插入性功能,并设计为在JDK 1.1和更高版本上运行,并在JDK 1.2及更高版本上进行编译。
+ * 代码还作为未绑定的jar文件的一部分运行,并作为JDK的一部分捆绑。
+ * <p>
+ * 
+ * 
  * @version $Id: ObjectFactory.java,v 1.6 2010/04/23 01:44:34 joehw Exp $
  */
 public final class ObjectFactory {
@@ -71,6 +89,9 @@ public final class ObjectFactory {
     /**
      * Figure out which ClassLoader to use.  For JDK 1.2 and later use
      * the context ClassLoader.
+     * <p>
+     *  确定使用哪个ClassLoader。对于JDK 1.2和更高版本,使用上下文ClassLoader。
+     * 
      */
     public static ClassLoader findClassLoader()
         throws ConfigurationError
@@ -133,6 +154,9 @@ public final class ObjectFactory {
     /**
      * Create an instance of a class using the same classloader for the ObjectFactory by default
      * or bootclassloader when Security Manager is in place
+     * <p>
+     *  创建一个类的实例,在安全管理器到位时,默认使用与ObjectFactory相同的类加载器或bootclassloader
+     * 
      */
     public static Object newInstance(String className, boolean doFallback)
         throws ConfigurationError
@@ -147,6 +171,9 @@ public final class ObjectFactory {
 
     /**
      * Create an instance of a class using the specified ClassLoader
+     * <p>
+     *  使用指定的ClassLoader创建类的实例
+     * 
      */
     public static Object newInstance(String className, ClassLoader cl,
                                       boolean doFallback)
@@ -172,6 +199,9 @@ public final class ObjectFactory {
     /**
      * Find a Class using the same classloader for the ObjectFactory by default
      * or bootclassloader when Security Manager is in place
+     * <p>
+     * 在安全管理器就位时,使用默认情况下的ObjectFactory或bootclassloader使用相同的类加载器来查找类
+     * 
      */
     public static Class findProviderClass(String className, boolean doFallback)
         throws ClassNotFoundException, ConfigurationError
@@ -181,6 +211,8 @@ public final class ObjectFactory {
     }
     /**
      * Find a Class using the specified ClassLoader
+     * <p>
+     *  使用指定的ClassLoader查找类
      */
     public static Class findProviderClass(String className, ClassLoader cl,
                                       boolean doFallback)

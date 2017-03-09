@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,18 @@ package java.sql;
  * to write data from the <code>SQLData</code> object to
  * the <code>SQLOutput</code> output stream as the
  * representation of an SQL user-defined type.
+ * <p>
+ *  用于将用户定义类型的属性写回数据库的输出流。此接口仅用于自定义映射,由驱动程序使用,并且其方法不会直接由编程人员调用。
+ *  <p>当实现接口<code> SQLData </code>的类的对象作为参数传递给SQL语句时,JDBC驱动程序会调用<code> SQLData.getSQLType </code>方法来确定类型
+ * 的SQL数据传递到数据库。
+ *  用于将用户定义类型的属性写回数据库的输出流。此接口仅用于自定义映射,由驱动程序使用,并且其方法不会直接由编程人员调用。
+ * 然后,驱动程序创建一个<code> SQLOutput </code>的实例,并将其传递给方法<code> SQLData.writeSQL </code>。
+ * 方法<code> writeSQL </code>依次调用<code> SQLOutput </code> <i> writer </i>方法<code> writeBoolean </code>,<code>
+ *  writeCharacterStream </code>等等)将数据从<code> SQLData </code>对象写入到<code> SQLOutput </code>输出流中,作为SQL用户定义
+ * 类型的表示。
+ * 然后,驱动程序创建一个<code> SQLOutput </code>的实例,并将其传递给方法<code> SQLData.writeSQL </code>。
+ * 
+ * 
  * @since 1.2
  */
 
@@ -58,6 +71,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为Java编程语言中的<code> String </code>写入流中。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -71,6 +88,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为Java布尔值写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -84,6 +105,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为Java字节写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -97,6 +122,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   * 将下一个属性作为Java短语写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -110,6 +139,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为Java int写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -123,6 +156,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为Java长度写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -136,6 +173,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为Java浮动写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -149,6 +190,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为Java double写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -162,6 +207,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为java.math.BigDecimal对象写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -175,6 +224,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>String</code>
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为字节数组写入流。将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -188,6 +241,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>java.sql.Date</code> object
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为java.sql.Date对象写入流。将下一个属性作为Java编程语言中的<code> java.sql.Date </code>对象写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -201,6 +258,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>java.sql.Date</code> object
    * in the Java programming language.
    *
+   * <p>
+   *  将下一个属性作为java.sql.Time对象写入流。将下一个属性作为Java编程语言中的<code> java.sql.Date </code>对象写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -214,6 +275,10 @@ package java.sql;
    * Writes the next attribute to the stream as a <code>java.sql.Date</code> object
    * in the Java programming language.
    *
+   * <p>
+   * 将下一个属性作为java.sql.Timestamp对象写入流。将下一个属性作为Java编程语言中的<code> java.sql.Date </code>对象写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -225,6 +290,10 @@ package java.sql;
   /**
    * Writes the next attribute to the stream as a stream of Unicode characters.
    *
+   * <p>
+   *  将下一个属性作为Unicode字符流写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -236,6 +305,10 @@ package java.sql;
   /**
    * Writes the next attribute to the stream as a stream of ASCII characters.
    *
+   * <p>
+   *  将下一个属性作为ASCII字符流写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -248,6 +321,10 @@ package java.sql;
    * Writes the next attribute to the stream as a stream of uninterpreted
    * bytes.
    *
+   * <p>
+   *  将下一个属性作为未解释字节流写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -280,6 +357,14 @@ package java.sql;
    * output stream in the same order in which they were
    * listed in the SQL definition of the user-defined type.
    *
+   * <p>
+   *  将给定的<code> SQLData </code>对象中包含的数据写入流。
+   * 当<code> SQLData </code>对象是<code> null </code>时,此方法将SQL <code> NULL </code>写入流。
+   * 否则,它调用给定对象的<code> SQLData.writeSQL </code>方法,它将对象的属性写入流。
+   * 方法<code> SQLData.writeSQL </code>的实现调用适当的<code> SQLOutput </code> writer方法,按顺序写入对象的每个属性。
+   * 这些属性必须从<code> SQLInput </code>输入流读取,并以与在用户定义类型的SQL定义中列出的顺序相同的顺序写入<code> SQLOutput </code>输出流。
+   * 
+   * 
    * @param x the object representing data of an SQL structured or
    * distinct type
    * @exception SQLException if a database access error occurs
@@ -292,6 +377,10 @@ package java.sql;
   /**
    * Writes an SQL <code>REF</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> REF </code>值写入流。
+   * 
+   * 
    * @param x a <code>Ref</code> object representing data of an SQL
    * <code>REF</code> value
    * @exception SQLException if a database access error occurs
@@ -304,6 +393,10 @@ package java.sql;
   /**
    * Writes an SQL <code>BLOB</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> BLOB </code>值写入流。
+   * 
+   * 
    * @param x a <code>Blob</code> object representing data of an SQL
    * <code>BLOB</code> value
    *
@@ -317,6 +410,10 @@ package java.sql;
   /**
    * Writes an SQL <code>CLOB</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> CLOB </code>值写入流。
+   * 
+   * 
    * @param x a <code>Clob</code> object representing data of an SQL
    * <code>CLOB</code> value
    *
@@ -330,6 +427,10 @@ package java.sql;
   /**
    * Writes an SQL structured type value to the stream.
    *
+   * <p>
+   *  将SQL结构类型值写入流。
+   * 
+   * 
    * @param x a <code>Struct</code> object representing data of an SQL
    * structured type
    *
@@ -343,6 +444,10 @@ package java.sql;
   /**
    * Writes an SQL <code>ARRAY</code> value to the stream.
    *
+   * <p>
+   *  向流中写入一个SQL <code> ARRAY </code>值。
+   * 
+   * 
    * @param x an <code>Array</code> object representing data of an SQL
    * <code>ARRAY</code> type
    *
@@ -358,6 +463,10 @@ package java.sql;
      /**
       * Writes a SQL <code>DATALINK</code> value to the stream.
       *
+      * <p>
+      *  将一个SQL <code> DATALINK </code>值写入流。
+      * 
+      * 
       * @param x a <code>java.net.URL</code> object representing the data
       * of SQL DATALINK type
       *
@@ -379,6 +488,13 @@ package java.sql;
    * size relative to the driver's limits on <code>NVARCHAR</code> values)
    * when it sends it to the stream.
    *
+   * <p>
+   * 将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 驱动程序将其转换为SQL <code> NCHAR </code>或<code> NVARCHAR </code>或<code> LONGNVARCHAR </code>值(取决于参数的大小相对于驱动程
+   * 序在<code> </code>值),当它发送到流。
+   * 将下一个属性作为Java编程语言中的<code> String </code>写入流。
+   * 
+   * 
    * @param x the value to pass to the database
    * @exception SQLException if a database access error occurs
    * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -390,6 +506,10 @@ package java.sql;
   /**
    * Writes an SQL <code>NCLOB</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> NCLOB </code>值写入流。
+   * 
+   * 
    * @param x a <code>NClob</code> object representing data of an SQL
    * <code>NCLOB</code> value
    *
@@ -404,6 +524,10 @@ package java.sql;
   /**
    * Writes an SQL <code>ROWID</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> ROWID </code>值写入流。
+   * 
+   * 
    * @param x a <code>RowId</code> object representing data of an SQL
    * <code>ROWID</code> value
    *
@@ -418,6 +542,10 @@ package java.sql;
   /**
    * Writes an SQL <code>XML</code> value to the stream.
    *
+   * <p>
+   *  将SQL <code> XML </code>值写入流。
+   * 
+   * 
    * @param x a <code>SQLXML</code> object representing data of an SQL
    * <code>XML</code> value
    *
@@ -455,6 +583,14 @@ package java.sql;
    *<P>
    * The default implementation will throw {@code SQLFeatureNotSupportedException}
    *
+   * <p>
+   *  将包含在给定对象中的数据写入流。对象将在发送到流之前转换为指定的targetSqlType。
+   * p>
+   *  当{@code object}是{@code null}时,此方法将SQL {@code NULL}写入流。
+   * <p>
+   *  如果对象具有自定义映射(是实现接口{@code SQLData}的类),JDBC驱动程序应调用{@code SQLData.writeSQL}方法将其写入SQL数据流。
+   * 另一方面,如果对象是实现{@code Ref},{@code Blob},{@code Clob},{@code NClob},{@code Struct},{@code java.net .URL}或
+   * 
    * @param x the object containing the input parameter value
    * @param targetSqlType the SQL type to be sent to the database.
    * @exception SQLException if a database access error occurs  or

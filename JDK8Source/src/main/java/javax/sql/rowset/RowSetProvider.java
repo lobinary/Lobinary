@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,21 @@ import sun.reflect.misc.ReflectUtil;
  * {@code javax.sql.rowset.RowSetFactory.debug} to any value but {@code false}.
  * </p>
  *
+ * <p>
+ *  工厂API,使应用程序可以获得{@code RowSetFactory}实现,可用于创建不同类型的{@code RowSet}实现。
+ * <p>
+ *  例：
+ * </p>
+ * <pre>
+ *  RowSetFactory aFactory = RowSetProvider.newFactory(); CachedRowSet crs = aFactory.createCachedRowSet
+ * (); ... RowSetFactory rsf = RowSetProvider.newFactory("com.sun.rowset.RowSetFactoryImpl",null); WebRo
+ * wSet wrs = rsf.createWebRowSet();。
+ * </pre>
+ * p>
+ *  可以通过将系统属性{@code javax.sql.rowset.RowSetFactory.debug}设置为任何值(但是{@code false})来启用此类的跟踪。
+ * </p>
+ * 
+ * 
  * @author Lance Andersen
  * @since 1.7
  */
@@ -63,6 +79,9 @@ public class RowSetProvider {
     private static final String ROWSET_FACTORY_NAME = "javax.sql.rowset.RowSetFactory";
     /**
      * Internal debug flag.
+     * <p>
+     *  内部调试标志。
+     * 
      */
     private static boolean debug = true;
 
@@ -76,6 +95,9 @@ public class RowSetProvider {
 
     /**
      * RowSetProvider constructor
+     * <p>
+     *  RowSetProvider构造函数
+     * 
      */
     protected RowSetProvider () {
     }
@@ -114,6 +136,35 @@ public class RowSetProvider {
      * <p>Once an application has obtained a reference to a {@code RowSetFactory},
      * it can use the factory to obtain RowSet instances.</p>
      *
+     * <p>
+     *  <p>创建<code> RowSetFactory </code>实现的新实例。此方法使用以下查找顺序来确定要加载的<code> RowSetFactory </code>实现类：</p>
+     * <ul>
+     * <li>
+     *  系统属性{@code javax.sql.rowset.RowSetFactory}。例如：
+     * <ul>
+     * <li>
+     *  -Djavax.sql.rowset.RowSetFactory = com.sun.rowset.RowSetFactoryImpl
+     * </li>
+     * </ul>
+     * <li>
+     *  {@link ServiceLoader} API。
+     *  {@code ServiceLoader} API将在运行时可用的jar中的文件{@code META-INF / services / javax.sql.rowset.RowSetFactory}
+     * 中查找类名。
+     *  {@link ServiceLoader} API。
+     * 例如,要装载RowSetFactory实现{@code com.sun.rowset.RowSetFactoryImpl},{@code META-INF / services / javax.sql.rowset.RowSetFactory}
+     * 中的条目将为：。
+     *  {@link ServiceLoader} API。
+     * <ul>
+     * <li>
+     * {@code com.sun.rowset.RowSetFactoryImpl}
+     * </li>
+     * </ul>
+     * </li>
+     * <li>
+     *  平台默认<code> RowSetFactory </code>实例。
+     * </li>
+     * </ul>
+     * 
      * @return New instance of a <code>RowSetFactory</code>
      *
      * @throws SQLException if the default factory class cannot be loaded,
@@ -161,6 +212,11 @@ public class RowSetProvider {
      * <p>Once an application has obtained a reference to a <code>RowSetFactory</code>
      * it can use the factory to obtain RowSet instances.</p>
      *
+     * <p>
+     * 
+     *  <p>一旦应用程序获得对{@code RowSetFactory}的引用,它就可以使用工厂来获取RowSet实例。</p>
+     * 
+     * 
      * @param factoryClassName fully qualified factory class name that
      * provides  an implementation of <code>javax.sql.rowset.RowSetFactory</code>.
      *
@@ -211,6 +267,13 @@ public class RowSetProvider {
 
     /*
      * Returns the class loader to be used.
+     * <p>
+     *  <p>从指定的工厂类名称创建<code> RowSetFactory </code>的新实例。当类路径中有多个提供程序时,此函数很有用。
+     * 它为应用程序提供了更多的控制,因为它可以指定应该加载哪个提供程序。</p>。
+     * 
+     *  <p>一旦应用程序获得对<code> RowSetFactory </code>的引用,它就可以使用工厂获取RowSet实例。</p>
+     * 
+     * 
      * @return The ClassLoader to use.
      *
      */
@@ -238,6 +301,10 @@ public class RowSetProvider {
      *
      * If the class loader supplied is <code>null</code>, first try using the
      * context class loader followed by the current class loader.
+     * <p>
+     *  返回要使用的类加载器。
+     * 
+     * 
      *  @return The class which was loaded
      */
     static private Class<?> getFactoryClass(String factoryClassName, ClassLoader cl,
@@ -265,6 +332,12 @@ public class RowSetProvider {
 
     /**
      * Use the ServiceLoader mechanism to load  the default RowSetFactory
+     * <p>
+     *  尝试使用提供的类加载器加载类。如果失败并且回退被启用,则尝试当前(即引导)类装载器。
+     * 
+     *  如果提供的类加载器是<code> null </code>,首先尝试使用上下文类加载器,然后是当前类加载器。
+     * 
+     * 
      * @return default RowSetFactory Implementation
      */
     static private RowSetFactory loadViaServiceLoader() throws SQLException {
@@ -288,6 +361,10 @@ public class RowSetProvider {
     /**
      * Returns the requested System Property.  If a {@code SecurityException}
      * occurs, just return NULL
+     * <p>
+     *  使用ServiceLoader机制加载默认的RowSetFactory
+     * 
+     * 
      * @param propName - System property to retrieve
      * @return The System property value or NULL if the property does not exist
      * or a {@code SecurityException} occurs.
@@ -313,6 +390,10 @@ public class RowSetProvider {
     /**
      * Debug routine which will output tracing if the System Property
      * -Djavax.sql.rowset.RowSetFactory.debug is set
+     * <p>
+     *  返回请求的系统属性。如果发生{@code SecurityException},只返回NULL
+     * 
+     * 
      * @param msg - The debug message to display
      */
     private static void trace(String msg) {

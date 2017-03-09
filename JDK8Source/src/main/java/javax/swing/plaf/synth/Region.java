@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,26 @@ import javax.swing.UIDefaults;
  * &lt;bind style="splitPaneStyle" type="region" key="SplitPane"/&gt;
  * </pre>
  *
+ * <p>
+ *  Swing组件的独特呈现区域。组件可以支持一个或多个区域。特定组件区域由此类中的类型安全枚举定义。
+ * <p>
+ *  区域通常用作标识要应用于特定样式的<code>组件</code>和区域的方式。 Synth的文件格式允许您基于<code> Region </code>的名称绑定样式。名称派生自常量的字段名称：
+ * <ol>
+ *  <li>将所有字符映射为小写。 <li>将第一个字符映射为大写。 <li>将下划线后的第一个字符映射为大写。 <li>删除所有下划线。
+ * </ol>
+ *  例如,要识别<code> SPLIT_PANE </code> <code> Region </code>,您将使用<code> SplitPane </code>。
+ * 下面显示了返回分割窗格的特定样式的自定义<code> SynthStyleFactory </code>：。
+ * <pre>
+ *  public SynthStyle getStyle(JComponent c,Region id){if(id == Region.SPLIT_PANE){return splitPaneStyle; }
+ *  ...}。
+ * </pre>
+ *  以下<a href="doc-files/synthFileFormat.html"> xml </a>完成相同的操作：
+ * <pre>
+ *  &lt; style id ="splitPaneStyle"&gt; ...&lt; / style&gt; &lt; bind style ="splitPaneStyle"type ="regi
+ * on"key ="SplitPane"/&gt;。
+ * </pre>
+ * 
+ * 
  * @since 1.5
  * @author Scott Violet
  */
@@ -81,72 +102,109 @@ public class Region {
      * composite components, for example ScrollBar's contain ArrowButtons.
      * To bind a style to this <code>Region</code> use the name
      * <code>ArrowButton</code>.
+     * <p>
+     * ArrowButton是特殊类型的按钮,也提供方向指示器,通常是箭头。 ArrowButton由复合组件使用,例如ScrollBar的包含ArrowButtons。
+     * 要将样式绑定到此<code> Region </code>,请使用名称<code> ArrowButton </code>。
+     * 
      */
     public static final Region ARROW_BUTTON = new Region("ArrowButton", false);
 
     /**
      * Button region. To bind a style to this <code>Region</code> use the name
      * <code>Button</code>.
+     * <p>
+     *  按钮区域。要将样式绑定到此<code> Region </code>,请使用名称<code> Button </code>。
+     * 
      */
     public static final Region BUTTON = new Region("Button", false);
 
     /**
      * CheckBox region. To bind a style to this <code>Region</code> use the name
      * <code>CheckBox</code>.
+     * <p>
+     *  复选框区域。要将样式绑定到此<code> Region </code>,请使用名称<code>复选框</code>。
+     * 
      */
     public static final Region CHECK_BOX = new Region("CheckBox", false);
 
     /**
      * CheckBoxMenuItem region. To bind a style to this <code>Region</code> use
      * the name <code>CheckBoxMenuItem</code>.
+     * <p>
+     *  CheckBoxMenuItem区域。要将样式绑定到此<code> Region </code>,请使用名称<code> CheckBoxMenuItem </code>。
+     * 
      */
     public static final Region CHECK_BOX_MENU_ITEM = new Region("CheckBoxMenuItem", false);
 
     /**
      * ColorChooser region. To bind a style to this <code>Region</code> use
      * the name <code>ColorChooser</code>.
+     * <p>
+     *  ColorChooser区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ColorChooser </code>。
+     * 
      */
     public static final Region COLOR_CHOOSER = new Region("ColorChooser", false);
 
     /**
      * ComboBox region. To bind a style to this <code>Region</code> use
      * the name <code>ComboBox</code>.
+     * <p>
+     *  ComboBox区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ComboBox </code>。
+     * 
      */
     public static final Region COMBO_BOX = new Region("ComboBox", false);
 
     /**
      * DesktopPane region. To bind a style to this <code>Region</code> use
      * the name <code>DesktopPane</code>.
+     * <p>
+     *  DesktopPane区域。要将样式绑定到此<code> Region </code>,请使用名称<code> DesktopPane </code>。
+     * 
      */
     public static final Region DESKTOP_PANE = new Region("DesktopPane", false);
 
     /**
      * DesktopIcon region. To bind a style to this <code>Region</code> use
      * the name <code>DesktopIcon</code>.
+     * <p>
+     *  DesktopIcon区域。要将样式绑定到此<code> Region </code>,请使用名称<code> DesktopIcon </code>。
+     * 
      */
     public static final Region DESKTOP_ICON = new Region("DesktopIcon", false);
 
     /**
      * EditorPane region. To bind a style to this <code>Region</code> use
      * the name <code>EditorPane</code>.
+     * <p>
+     *  编辑器区域。要将样式绑定到此<code> Region </code>,请使用名称<code> EditorPane </code>。
+     * 
      */
     public static final Region EDITOR_PANE = new Region("EditorPane", false);
 
     /**
      * FileChooser region. To bind a style to this <code>Region</code> use
      * the name <code>FileChooser</code>.
+     * <p>
+     *  FileChooser区域。要将样式绑定到此<code> Region </code>,请使用名称<code> FileChooser </code>。
+     * 
      */
     public static final Region FILE_CHOOSER = new Region("FileChooser", false);
 
     /**
      * FormattedTextField region. To bind a style to this <code>Region</code> use
      * the name <code>FormattedTextField</code>.
+     * <p>
+     *  FormattedTextField region。要将样式绑定到此<code> Region </code>,请使用名称<code> FormattedTextField </code>。
+     * 
      */
     public static final Region FORMATTED_TEXT_FIELD = new Region("FormattedTextField", false);
 
     /**
      * InternalFrame region. To bind a style to this <code>Region</code> use
      * the name <code>InternalFrame</code>.
+     * <p>
+     *  InternalFrame区域。要将样式绑定到此<code> Region </code>,请使用名称<code> InternalFrame </code>。
+     * 
      */
     public static final Region INTERNAL_FRAME = new Region("InternalFrame", false);
 
@@ -155,108 +213,163 @@ public class Region {
      * shows a menu, title, widgets to manipulate the internal frame.
      * To bind a style to this <code>Region</code> use the name
      * <code>InternalFrameTitlePane</code>.
+     * <p>
+     * InternalFrame的标题面板。 TitlePane通常显示一个菜单,标题,控制内部框架的小部件。
+     * 要将样式绑定到此<code> Region </code>,请使用名称<code> InternalFrameTitlePane </code>。
+     * 
      */
     public static final Region INTERNAL_FRAME_TITLE_PANE = new Region("InternalFrameTitlePane", false);
 
     /**
      * Label region. To bind a style to this <code>Region</code> use the name
      * <code>Label</code>.
+     * <p>
+     *  标签区域。要将样式绑定到此<code> Region </code>,请使用名称<code> Label </code>。
+     * 
      */
     public static final Region LABEL = new Region("Label", false);
 
     /**
      * List region. To bind a style to this <code>Region</code> use the name
      * <code>List</code>.
+     * <p>
+     *  列表区域。要将样式绑定到此<code> Region </code>,请使用名称<code> List </code>。
+     * 
      */
     public static final Region LIST = new Region("List", false);
 
     /**
      * Menu region. To bind a style to this <code>Region</code> use the name
      * <code>Menu</code>.
+     * <p>
+     *  菜单区域。要将样式绑定到此<code> Region </code>,请使用名称<code> Menu </code>。
+     * 
      */
     public static final Region MENU = new Region("Menu", false);
 
     /**
      * MenuBar region. To bind a style to this <code>Region</code> use the name
      * <code>MenuBar</code>.
+     * <p>
+     *  MenuBar区域。要将样式绑定到此<code> Region </code>,请使用名称<code> MenuBar </code>。
+     * 
      */
     public static final Region MENU_BAR = new Region("MenuBar", false);
 
     /**
      * MenuItem region. To bind a style to this <code>Region</code> use the name
      * <code>MenuItem</code>.
+     * <p>
+     *  MenuItem区域。要将样式绑定到此<code> Region </code>,请使用名称<code> MenuItem </code>。
+     * 
      */
     public static final Region MENU_ITEM = new Region("MenuItem", false);
 
     /**
      * Accelerator region of a MenuItem. To bind a style to this
      * <code>Region</code> use the name <code>MenuItemAccelerator</code>.
+     * <p>
+     *  MenuItem的加速器区域。要将样式绑定到此<code> Region </code>,请使用名称<code> MenuItemAccelerator </code>。
+     * 
      */
     public static final Region MENU_ITEM_ACCELERATOR = new Region("MenuItemAccelerator", true);
 
     /**
      * OptionPane region. To bind a style to this <code>Region</code> use
      * the name <code>OptionPane</code>.
+     * <p>
+     *  OptionPane区域。要将样式绑定到此<code> Region </code>,请使用名称<code> OptionPane </code>。
+     * 
      */
     public static final Region OPTION_PANE = new Region("OptionPane", false);
 
     /**
      * Panel region. To bind a style to this <code>Region</code> use the name
      * <code>Panel</code>.
+     * <p>
+     *  面板区域。要将样式绑定到此<code> Region </code>,请使用名称<code> Panel </code>。
+     * 
      */
     public static final Region PANEL = new Region("Panel", false);
 
     /**
      * PasswordField region. To bind a style to this <code>Region</code> use
      * the name <code>PasswordField</code>.
+     * <p>
+     *  PasswordField区域。要将样式绑定到此<code> Region </code>,请使用名称<code> PasswordField </code>。
+     * 
      */
     public static final Region PASSWORD_FIELD = new Region("PasswordField", false);
 
     /**
      * PopupMenu region. To bind a style to this <code>Region</code> use
      * the name <code>PopupMenu</code>.
+     * <p>
+     *  PopupMenu区域。要将样式绑定到此<code> Region </code>,请使用名称<code> PopupMenu </code>。
+     * 
      */
     public static final Region POPUP_MENU = new Region("PopupMenu", false);
 
     /**
      * PopupMenuSeparator region. To bind a style to this <code>Region</code>
      * use the name <code>PopupMenuSeparator</code>.
+     * <p>
+     *  PopupMenuSeparator区域。要将样式绑定到此<code> Region </code>,请使用名称<code> PopupMenuSeparator </code>。
+     * 
      */
     public static final Region POPUP_MENU_SEPARATOR = new Region("PopupMenuSeparator", false);
 
     /**
      * ProgressBar region. To bind a style to this <code>Region</code>
      * use the name <code>ProgressBar</code>.
+     * <p>
+     *  ProgressBar区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ProgressBar </code>。
+     * 
      */
     public static final Region PROGRESS_BAR = new Region("ProgressBar", false);
 
     /**
      * RadioButton region. To bind a style to this <code>Region</code>
      * use the name <code>RadioButton</code>.
+     * <p>
+     * RadioButton区域。要将样式绑定到此<code> Region </code>,请使用名称<code> RadioButton </code>。
+     * 
      */
     public static final Region RADIO_BUTTON = new Region("RadioButton", false);
 
     /**
      * RegionButtonMenuItem region. To bind a style to this <code>Region</code>
      * use the name <code>RadioButtonMenuItem</code>.
+     * <p>
+     *  RegionButtonMenuItem region。要将样式绑定到此<code> Region </code>,请使用名称<code> RadioButtonMenuItem </code>。
+     * 
      */
     public static final Region RADIO_BUTTON_MENU_ITEM = new Region("RadioButtonMenuItem", false);
 
     /**
      * RootPane region. To bind a style to this <code>Region</code> use
      * the name <code>RootPane</code>.
+     * <p>
+     *  RootPane区域。要将样式绑定到此<code> Region </code>,请使用名称<code> RootPane </code>。
+     * 
      */
     public static final Region ROOT_PANE = new Region("RootPane", false);
 
     /**
      * ScrollBar region. To bind a style to this <code>Region</code> use
      * the name <code>ScrollBar</code>.
+     * <p>
+     *  ScrollBar区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ScrollBar </code>。
+     * 
      */
     public static final Region SCROLL_BAR = new Region("ScrollBar", false);
 
     /**
      * Track of the ScrollBar. To bind a style to this <code>Region</code> use
      * the name <code>ScrollBarTrack</code>.
+     * <p>
+     *  TrackBar的轨道。要将样式绑定到此<code> Region </code>,请使用名称<code> ScrollBarTrack </code>。
+     * 
      */
     public static final Region SCROLL_BAR_TRACK = new Region("ScrollBarTrack", true);
 
@@ -265,30 +378,46 @@ public class Region {
      * that gives a graphical depiction of what percentage of the View is
      * currently visible. To bind a style to this <code>Region</code> use
      * the name <code>ScrollBarThumb</code>.
+     * <p>
+     *  ScrollBar的缩略图。大拇指是ScrollBar的区域,它给出了当前可见的视图的百分比的图形描述。
+     * 要将样式绑定到此<code> Region </code>,请使用名称<code> ScrollBarThumb </code>。
+     * 
      */
     public static final Region SCROLL_BAR_THUMB = new Region("ScrollBarThumb", true);
 
     /**
      * ScrollPane region. To bind a style to this <code>Region</code> use
      * the name <code>ScrollPane</code>.
+     * <p>
+     *  滚动区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ScrollPane </code>。
+     * 
      */
     public static final Region SCROLL_PANE = new Region("ScrollPane", false);
 
     /**
      * Separator region. To bind a style to this <code>Region</code> use
      * the name <code>Separator</code>.
+     * <p>
+     *  分隔符区域。要将样式绑定到此<code> Region </code>,请使用名称<code> Separator </code>。
+     * 
      */
     public static final Region SEPARATOR = new Region("Separator", false);
 
     /**
      * Slider region. To bind a style to this <code>Region</code> use
      * the name <code>Slider</code>.
+     * <p>
+     *  滑块区域。要将样式绑定到此<code> Region </code>,请使用名称<code> Slider </code>。
+     * 
      */
     public static final Region SLIDER = new Region("Slider", false);
 
     /**
      * Track of the Slider. To bind a style to this <code>Region</code> use
      * the name <code>SliderTrack</code>.
+     * <p>
+     *  滑块的轨道。要将样式绑定到此<code> Region </code>,请使用名称<code> SliderTrack </code>。
+     * 
      */
     public static final Region SLIDER_TRACK = new Region("SliderTrack", true);
 
@@ -296,132 +425,198 @@ public class Region {
      * Thumb of the Slider. The thumb of the Slider identifies the current
      * value. To bind a style to this <code>Region</code> use the name
      * <code>SliderThumb</code>.
+     * <p>
+     *  滑块的拇指。滑块的缩略图标识当前值。要将样式绑定到此<code> Region </code>,请使用名称<code> SliderThumb </code>。
+     * 
      */
     public static final Region SLIDER_THUMB = new Region("SliderThumb", true);
 
     /**
      * Spinner region. To bind a style to this <code>Region</code> use the name
      * <code>Spinner</code>.
+     * <p>
+     *  旋转地区。要将样式绑定到此<code> Region </code>,请使用名称<code> Spinner </code>。
+     * 
      */
     public static final Region SPINNER = new Region("Spinner", false);
 
     /**
      * SplitPane region. To bind a style to this <code>Region</code> use the name
      * <code>SplitPane</code>.
+     * <p>
+     * SplitPane区域。要将样式绑定到此<code> Region </code>,请使用名称<code> SplitPane </code>。
+     * 
      */
     public static final Region SPLIT_PANE = new Region("SplitPane", false);
 
     /**
      * Divider of the SplitPane. To bind a style to this <code>Region</code>
      * use the name <code>SplitPaneDivider</code>.
+     * <p>
+     *  SplitPane的分隔线。要将样式绑定到此<code> Region </code>,请使用名称<code> SplitPaneDivider </code>。
+     * 
      */
     public static final Region SPLIT_PANE_DIVIDER = new Region("SplitPaneDivider", true);
 
     /**
      * TabbedPane region. To bind a style to this <code>Region</code> use
      * the name <code>TabbedPane</code>.
+     * <p>
+     *  TabbedPane区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TabbedPane </code>。
+     * 
      */
     public static final Region TABBED_PANE = new Region("TabbedPane", false);
 
     /**
      * Region of a TabbedPane for one tab. To bind a style to this
      * <code>Region</code> use the name <code>TabbedPaneTab</code>.
+     * <p>
+     *  一个选项卡的TabbedPane的区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TabbedPaneTab </code>。
+     * 
      */
     public static final Region TABBED_PANE_TAB = new Region("TabbedPaneTab", true);
 
     /**
      * Region of a TabbedPane containing the tabs. To bind a style to this
      * <code>Region</code> use the name <code>TabbedPaneTabArea</code>.
+     * <p>
+     *  包含标签的TabbedPane的区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TabbedPaneTabArea </code>。
+     * 
      */
     public static final Region TABBED_PANE_TAB_AREA = new Region("TabbedPaneTabArea", true);
 
     /**
      * Region of a TabbedPane containing the content. To bind a style to this
      * <code>Region</code> use the name <code>TabbedPaneContent</code>.
+     * <p>
+     *  包含内容的TabbedPane的区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TabbedPaneContent </code>。
+     * 
      */
     public static final Region TABBED_PANE_CONTENT = new Region("TabbedPaneContent", true);
 
     /**
      * Table region. To bind a style to this <code>Region</code> use
      * the name <code>Table</code>.
+     * <p>
+     *  表区域。要将样式绑定到此<code> Region </code>,请使用名称<code> Table </code>。
+     * 
      */
     public static final Region TABLE = new Region("Table", false);
 
     /**
      * TableHeader region. To bind a style to this <code>Region</code> use
      * the name <code>TableHeader</code>.
+     * <p>
+     *  TableHeader区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TableHeader </code>。
+     * 
      */
     public static final Region TABLE_HEADER = new Region("TableHeader", false);
 
     /**
      * TextArea region. To bind a style to this <code>Region</code> use
      * the name <code>TextArea</code>.
+     * <p>
+     *  TextArea区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TextArea </code>。
+     * 
      */
     public static final Region TEXT_AREA = new Region("TextArea", false);
 
     /**
      * TextField region. To bind a style to this <code>Region</code> use
      * the name <code>TextField</code>.
+     * <p>
+     *  TextField区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TextField </code>。
+     * 
      */
     public static final Region TEXT_FIELD = new Region("TextField", false);
 
     /**
      * TextPane region. To bind a style to this <code>Region</code> use
      * the name <code>TextPane</code>.
+     * <p>
+     *  TextPane区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TextPane </code>。
+     * 
      */
     public static final Region TEXT_PANE = new Region("TextPane", false);
 
     /**
      * ToggleButton region. To bind a style to this <code>Region</code> use
      * the name <code>ToggleButton</code>.
+     * <p>
+     *  ToggleButton区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ToggleButton </code>。
+     * 
      */
     public static final Region TOGGLE_BUTTON = new Region("ToggleButton", false);
 
     /**
      * ToolBar region. To bind a style to this <code>Region</code> use
      * the name <code>ToolBar</code>.
+     * <p>
+     *  工具栏区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ToolBar </code>。
+     * 
      */
     public static final Region TOOL_BAR = new Region("ToolBar", false);
 
     /**
      * Region of the ToolBar containing the content. To bind a style to this
      * <code>Region</code> use the name <code>ToolBarContent</code>.
+     * <p>
+     * 包含内容的ToolBar的区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ToolBarContent </code>。
+     * 
      */
     public static final Region TOOL_BAR_CONTENT = new Region("ToolBarContent", true);
 
     /**
      * Region for the Window containing the ToolBar. To bind a style to this
      * <code>Region</code> use the name <code>ToolBarDragWindow</code>.
+     * <p>
+     *  包含ToolBar的窗口的区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ToolBarDragWindow </code>。
+     * 
      */
     public static final Region TOOL_BAR_DRAG_WINDOW = new Region("ToolBarDragWindow", false);
 
     /**
      * ToolTip region. To bind a style to this <code>Region</code> use
      * the name <code>ToolTip</code>.
+     * <p>
+     *  工具提示区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ToolTip </code>。
+     * 
      */
     public static final Region TOOL_TIP = new Region("ToolTip", false);
 
     /**
      * ToolBar separator region. To bind a style to this <code>Region</code> use
      * the name <code>ToolBarSeparator</code>.
+     * <p>
+     *  ToolBar分隔符区域。要将样式绑定到此<code> Region </code>,请使用名称<code> ToolBarSeparator </code>。
+     * 
      */
     public static final Region TOOL_BAR_SEPARATOR = new Region("ToolBarSeparator", false);
 
     /**
      * Tree region. To bind a style to this <code>Region</code> use the name
      * <code>Tree</code>.
+     * <p>
+     *  树区。要将样式绑定到此<code> Region </code>,请使用名称<code> Tree </code>。
+     * 
      */
     public static final Region TREE = new Region("Tree", false);
 
     /**
      * Region of the Tree for one cell. To bind a style to this
      * <code>Region</code> use the name <code>TreeCell</code>.
+     * <p>
+     *  一个单元格的树的区域。要将样式绑定到此<code> Region </code>,请使用名称<code> TreeCell </code>。
+     * 
      */
     public static final Region TREE_CELL = new Region("TreeCell", true);
 
     /**
      * Viewport region. To bind a style to this <code>Region</code> use
      * the name <code>Viewport</code>.
+     * <p>
+     *  视口区域。要将样式绑定到此<code> Region </code>,请使用名称<code> Viewport </code>。
+     * 
      */
     public static final Region VIEWPORT = new Region("Viewport", false);
 
@@ -516,6 +711,10 @@ public class Region {
      * used if you are creating your own <code>JComponent</code> subclass
      * with a custom <code>ComponentUI</code> class.
      *
+     * <p>
+     *  创建具有指定名称的区域。只有在使用自定义<code> ComponentUI </code>类创建自己的<code> JComponent </code>子类时,才应使用此方法。
+     * 
+     * 
      * @param name Name of the region
      * @param ui String that will be returned from
      *           <code>component.getUIClassID</code>. This will be null
@@ -535,6 +734,13 @@ public class Region {
      * <code>Component</code> so that <code>Region.BUTTON.isSubregion()</code>
      * returns false.
      *
+     * <p>
+     *  如果Region是Component的子区域,则返回true,否则返回false。
+     * 例如,<code> Region.BUTTON </code>对应一个<code> Component </code>,这样<code> Region.BUTTON.isSubregion()</code>
+     * 返回false。
+     *  如果Region是Component的子区域,则返回true,否则返回false。
+     * 
+     * 
      * @return true if the Region is a subregion of a Component.
      */
     public boolean isSubregion() {
@@ -544,6 +750,10 @@ public class Region {
     /**
      * Returns the name of the region.
      *
+     * <p>
+     *  返回区域的名称。
+     * 
+     * 
      * @return name of the Region.
      */
     public String getName() {
@@ -553,6 +763,10 @@ public class Region {
     /**
      * Returns the name, in lowercase.
      *
+     * <p>
+     *  返回小写的名称。
+     * 
+     * 
      * @return lower case representation of the name of the Region
      */
     String getLowerCaseName() {
@@ -568,6 +782,9 @@ public class Region {
     /**
      * Returns the name of the Region.
      *
+     * <p>
+     *  返回区域的名称。
+     * 
      * @return name of the Region.
      */
     @Override

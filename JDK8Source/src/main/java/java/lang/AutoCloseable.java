@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,18 @@ package java.lang;
  * non-I/O-based forms, {@code try}-with-resources blocks are in
  * general unnecessary when using non-I/O-based forms.
  *
+ * <p>
+ *  可能包含资源(例如文件或套接字句柄)的对象,直到它被关闭。
+ * 当退出对象已在资源规范头中声明的{@code try} -with-resources块时,会自动调用{@code AutoCloseable}对象的{@link #close()}方法。
+ * 此结构确保快速释放,避免资源耗尽异常和错误,否则可能会发生。
+ * 
+ *  @apiNote <p>尽管并非所有的子类或实例都拥有可释放的资源,但基类可以实现AutoCloseable,这实际上很普遍。
+ * 对于必须以完全通用性操作的代码,或者当知道{@code AutoCloseable}实例需要资源释放时,建议使用{@code try} -with-resources结构。
+ * 但是,当使用支持基于I / O和非基于I / O的表单的{@link java.util.stream.Stream}等设施时,通常不需要{@code try} -with-resources块当使用非
+ * 基于I / O的形式。
+ * 对于必须以完全通用性操作的代码,或者当知道{@code AutoCloseable}实例需要资源释放时,建议使用{@code try} -with-resources结构。
+ * 
+ * 
  * @author Josh Bloch
  * @since 1.7
  */
@@ -92,6 +105,18 @@ public interface AutoCloseable {
      * However, implementers of this interface are strongly encouraged
      * to make their {@code close} methods idempotent.
      *
+     * <p>
+     *  关闭此资源,放弃任何基础资源。此方法将自动在由{@code try} -with-resources语句管理的对象上调用。
+     * 
+     * <p>虽然这个接口方法被声明为抛出{@code Exception},但是我们鼓励实现者强烈地声明{@code close}方法的具体实现来抛出更多特定的异常,或者抛出异常,如果关闭操作不能失败。
+     * 
+     *  <p>关闭操作可能失败的情况需要实施者仔细注意。强烈建议放弃底层资源,并在抛出异常之前将内部资源标记为已关闭。
+     * <em> </em> {@code close}方法不太可能被多次调用,因此这可确保资源及时发布。此外,它减少了当资源包裹或被另一个资源包裹时可能出现的问题。
+     * 
+     *  <p> <em>强烈建议您不要使用此界面的实施者{@code close}方法抛出{@link InterruptedException}。</em>
+     * 
+     *  这个异常与线程的中断状态相互作用,如果{@code InterruptedException}是{@linkplain Throwable#addSuppressed suppressed},则可能会
+     * 
      * @throws Exception if this resource cannot be closed
      */
     void close() throws Exception;

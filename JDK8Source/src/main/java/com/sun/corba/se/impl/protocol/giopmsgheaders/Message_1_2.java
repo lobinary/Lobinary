@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,8 @@ public class Message_1_2 extends Message_1_1
      * The byteBuffer is presumed to have contents of the message already
      * read in.  It must have 12 bytes of space at the beginning for the GIOP header,
      * but the header doesn't have to be copied in.
+     * <p>
+     *  byteBuffer被假定为具有已经读入的消息的内容。对于GIOP头部,它必须在开始处具有12个字节的空间,但是头部不必被复制。
      */
     public void unmarshalRequestID(ByteBuffer byteBuffer) {
         int b1, b2, b3, b4;

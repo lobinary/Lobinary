@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import java.io.EOFException;
  * "deflate" compression format. It is also used as the basis for other
  * decompression filters, such as GZIPInputStream.
  *
+ * <p>
+ *  这个类实现了一个流过滤器,用于以"deflate"压缩格式解压缩数据。它也用作其他解压缩过滤器的基础,如GZIPInputStream。
+ * 
+ * 
  * @see         Inflater
  * @author      David Connelly
  */
@@ -42,16 +47,25 @@ public
 class InflaterInputStream extends FilterInputStream {
     /**
      * Decompressor for this stream.
+     * <p>
+     *  此流的解压缩。
+     * 
      */
     protected Inflater inf;
 
     /**
      * Input buffer for decompression.
+     * <p>
+     *  用于解压缩的输入缓冲区。
+     * 
      */
     protected byte[] buf;
 
     /**
      * Length of input buffer.
+     * <p>
+     *  输入缓冲区的长度。
+     * 
      */
     protected int len;
 
@@ -61,6 +75,9 @@ class InflaterInputStream extends FilterInputStream {
 
     /**
      * Check to make sure that this stream has not been closed
+     * <p>
+     *  请检查以确保此流未关闭
+     * 
      */
     private void ensureOpen() throws IOException {
         if (closed) {
@@ -72,6 +89,10 @@ class InflaterInputStream extends FilterInputStream {
     /**
      * Creates a new input stream with the specified decompressor and
      * buffer size.
+     * <p>
+     *  使用指定的解压缩器和缓冲区大小创建新的输入流。
+     * 
+     * 
      * @param in the input stream
      * @param inf the decompressor ("inflater")
      * @param size the input buffer size
@@ -91,6 +112,10 @@ class InflaterInputStream extends FilterInputStream {
     /**
      * Creates a new input stream with the specified decompressor and a
      * default buffer size.
+     * <p>
+     *  使用指定的解压缩器和默认缓冲区大小创建新的输入流。
+     * 
+     * 
      * @param in the input stream
      * @param inf the decompressor ("inflater")
      */
@@ -102,6 +127,10 @@ class InflaterInputStream extends FilterInputStream {
 
     /**
      * Creates a new input stream with a default decompressor and buffer size.
+     * <p>
+     *  使用默认解压缩器和缓冲区大小创建新的输入流。
+     * 
+     * 
      * @param in the input stream
      */
     public InflaterInputStream(InputStream in) {
@@ -114,6 +143,10 @@ class InflaterInputStream extends FilterInputStream {
     /**
      * Reads a byte of uncompressed data. This method will block until
      * enough input is available for decompression.
+     * <p>
+     *  读取一个字节的未压缩数据。此方法将阻塞,直到有足够的输入可用于解压缩。
+     * 
+     * 
      * @return the byte read, or -1 if end of compressed input is reached
      * @exception IOException if an I/O error has occurred
      */
@@ -126,6 +159,10 @@ class InflaterInputStream extends FilterInputStream {
      * Reads uncompressed data into an array of bytes. If <code>len</code> is not
      * zero, the method will block until some input can be decompressed; otherwise,
      * no bytes are read and <code>0</code> is returned.
+     * <p>
+     *  将未压缩的数据读入字节数组。如果<code> len </code>不为零,则该方法将阻塞,直到某些输入可以解压缩;否则,不读取任何字节,并返回<code> 0 </code>。
+     * 
+     * 
      * @param b the buffer into which the data is read
      * @param off the start offset in the destination array <code>b</code>
      * @param len the maximum number of bytes read
@@ -171,6 +208,12 @@ class InflaterInputStream extends FilterInputStream {
      * Programs should not count on this method to return the actual number
      * of bytes that could be read without blocking.
      *
+     * <p>
+     *  在达到EOF后返回0,否则始终返回1。
+     * <p>
+     *  程序不应该依赖此方法返回可以无阻塞地读取的实际字节数。
+     * 
+     * 
      * @return     1 before EOF and 0 after EOF.
      * @exception  IOException  if an I/O error occurs.
      *
@@ -188,6 +231,10 @@ class InflaterInputStream extends FilterInputStream {
 
     /**
      * Skips specified number of bytes of uncompressed data.
+     * <p>
+     *  跳过指定的未压缩数据字节数。
+     * 
+     * 
      * @param n the number of bytes to skip
      * @return the actual number of bytes skipped.
      * @exception IOException if an I/O error has occurred
@@ -218,6 +265,10 @@ class InflaterInputStream extends FilterInputStream {
     /**
      * Closes this input stream and releases any system resources associated
      * with the stream.
+     * <p>
+     *  关闭此输入流,并释放与流相关联的任何系统资源。
+     * 
+     * 
      * @exception IOException if an I/O error has occurred
      */
     public void close() throws IOException {
@@ -231,6 +282,10 @@ class InflaterInputStream extends FilterInputStream {
 
     /**
      * Fills input buffer with more data to decompress.
+     * <p>
+     *  用更多数据填充输入缓冲区以进行解压缩。
+     * 
+     * 
      * @exception IOException if an I/O error has occurred
      */
     protected void fill() throws IOException {
@@ -248,6 +303,11 @@ class InflaterInputStream extends FilterInputStream {
      * method of <code>InflaterInputStream</code> returns
      * <code>false</code>.
      *
+     * <p>
+     * 测试此输入流是否支持<code>标记</code>和<code>重置</code>方法。
+     *  <code> InflaterInputStream </code>的<code> markSupported </code>方法返回<code> false </code>。
+     * 
+     * 
      * @return  a <code>boolean</code> indicating if this stream type supports
      *          the <code>mark</code> and <code>reset</code> methods.
      * @see     java.io.InputStream#mark(int)
@@ -263,6 +323,12 @@ class InflaterInputStream extends FilterInputStream {
      * <p> The <code>mark</code> method of <code>InflaterInputStream</code>
      * does nothing.
      *
+     * <p>
+     *  标记此输入流中的当前位置。
+     * 
+     *  <p> <code> InflaterInputStream </code>的<code> mark </code>方法什么都不做。
+     * 
+     * 
      * @param   readlimit   the maximum limit of bytes that can be read before
      *                      the mark position becomes invalid.
      * @see     java.io.InputStream#reset()
@@ -278,6 +344,11 @@ class InflaterInputStream extends FilterInputStream {
      * <code>InflaterInputStream</code> does nothing except throw an
      * <code>IOException</code>.
      *
+     * <p>
+     *  将此流重新定位到在此输入流上最后调用<code>标记</code>方法时的位置。
+     * 
+     *  <p>类<code> InflaterInputStream </code>的方法<code> reset </code>不会产生任何异常,除了抛出一个<code> IOException </code>
+     * 
      * @exception  IOException  if this method is invoked.
      * @see     java.io.InputStream#mark(int)
      * @see     java.io.IOException

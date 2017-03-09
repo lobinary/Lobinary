@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 
 /**
@@ -163,6 +182,45 @@
  * <p>
  * Unless otherwise noted, passing a null argument to a constructor or method in any class or interface
  * in this package will cause a {@link java.lang.NullPointerException NullPointerException} to be thrown.
+ * <p>
+ * <p>
+ *  日期,时间,时刻和持续时间的主要API。
+ * </p>
+ * <p>
+ *  这里定义的类代表主要的日期 - 时间概念,包括时刻,持续时间,日期,时间,时区和时期。它们基于ISO日历系统,其是遵循推测的格雷戈里亚规则的<i>事实</i>世界日历。
+ * 所有的类都是不可变的和线程安全的。
+ * </p>
+ * <p>
+ *  每个日期时间实例由方便地由API可用的字段组成。对于对字段的低级访问,请参阅{@code java.time.temporal}包。每个类包括支持打印和解析所有方式的日期和时间。
+ * 有关自定义选项,请参阅{@code java.time.format}包。
+ * </p>
+ * <p>
+ * {@code java.time.chrono}套件包含日历中性API {@link java.time.chrono.ChronoLocalDate ChronoLocalDate},{@link java.time.chrono.ChronoLocalDateTime ChronoLocalDateTime}
+ * ,{@link java.time.chrono .ChronoZonedDateTime ChronoZonedDateTime}和{@link java.time.chrono.Era Era}。
+ * 这适用于需要使用本地化日历的应用程序。建议应用程序跨系统边界使用此包中的ISO-8601日期和时间类,例如数据库或网络。日历中性API应保留用于与用户的交互。
+ * </p>
+ * 
+ *  <h3>日期和时间</h3>
+ * <p>
+ *  {@link java.time.Instant}本质上是一个数字时间戳。当前的Instant可以从{@link java.time.Clock}中检索。
+ * 这对于记录和持久化一个时间点是有用的,并且在过去已经与存储来自{@link java.lang.System#currentTimeMillis()}的结果相关联。
+ * </p>
+ * <p>
+ *  {@link java.time.LocalDate}存储没有时间的日期。它存储像"2010-12-03"这样的日期,并可用于存储生日。
+ * </p>
+ * <p>
+ *  {@link java.time.LocalTime}存储没有日期的时间。它存储类似'11：30'的时间,并可用于存储开启或关闭时间。
+ * </p>
+ * <p>
+ *  {@link java.time.LocalDateTime}存储日期和时间。它存储一个日期时间,如'2010-12-03T11：30'。
+ * </p>
+ * <p>
+ * {@link java.time.ZonedDateTime}存储带有时区的日期和时间。
+ * 如果您想要考虑{@link java.time.ZoneId}(如"Europe / Paris")执行准确的日期和时间计算,则此选项非常有用。在可能的情况下,建议使用没有时区的更简单的类。
+ * 时区的广泛使用趋向于对应用增加相当大的复杂性。
+ * </p>
+ * 
+ * 
  * The Javadoc "@param" definition is used to summarise the null-behavior.
  * The "@throws {@link java.lang.NullPointerException}" is not explicitly documented in each method.
  * </p>

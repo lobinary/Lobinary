@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,9 @@ import com.sun.corba.se.spi.oa.NullServant ;
 
 /** Implementation of POARequesHandler that provides policy specific
  * operations on the POA.
+ * <p>
+ *  操作POA。
+ * 
  */
 public class POAPolicyMediatorImpl_R_USM extends POAPolicyMediatorBase_R {
     protected ServantActivator activator ;
@@ -75,6 +79,9 @@ public class POAPolicyMediatorImpl_R_USM extends POAPolicyMediatorBase_R {
      * entry is created.  This fix also required extending the FSM StateEngine
      * to allow actions to throw exceptions, and adding a new state in the
      * AOMEntry FSM to detect this condition.
+     * <p>
+     *  enter将等待条目,如果它是飘渺。
+     * 当延迟状态转换完成时,该条目不再在AOM中,因此我们需要获取一个新条目,否则,activate.incarnate将被调用两次,一次用于旧条目,并且再次当创建新条目时。
      */
     private AOMEntry enterEntry( ActiveObjectMap.Key key )
     {

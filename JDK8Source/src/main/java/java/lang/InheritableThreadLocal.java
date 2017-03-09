@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,13 @@ import java.lang.ref.*;
  * maintained in the variable (e.g., User ID, Transaction ID) must be
  * automatically transmitted to any child threads that are created.
  *
+ * <p>
+ *  这个类扩展了<tt> ThreadLocal </tt>以提供从父线程到子线程的值的继承：当子线程被创建时,子级接收父级具有值的所有可继承线程局部变量的初始值。
+ * 通常孩子的值将与父母的值相同;然而,通过覆盖此类中的<tt> childValue </tt>方法,可以将子值的值设置为父值的任意函数。
+ * 
+ *  <p>当在变量(例如,用户ID,事务ID)中维护的每个线程属性必须被自动传输到创建的任何子线程时,可继承的线程局部变量优先于普通线程局部变量。
+ * 
+ * 
  * @author  Josh Bloch and Doug Lea
  * @see     ThreadLocal
  * @since   1.2
@@ -55,6 +63,12 @@ public class InheritableThreadLocal<T> extends ThreadLocal<T> {
      * This method merely returns its input argument, and should be overridden
      * if a different behavior is desired.
      *
+     * <p>
+     *  在创建子线程时,计算子对象的可继承线程局部变量的初始值,作为父值的函数。这个方法在子线程启动之前从父线程中调用。
+     * <p>
+     *  此方法仅返回其输入参数,如果需要不同的行为,应该覆盖。
+     * 
+     * 
      * @param parentValue the parent thread's value
      * @return the child thread's initial value
      */
@@ -65,6 +79,10 @@ public class InheritableThreadLocal<T> extends ThreadLocal<T> {
     /**
      * Get the map associated with a ThreadLocal.
      *
+     * <p>
+     *  获取与ThreadLocal相关联的地图。
+     * 
+     * 
      * @param t the current thread
      */
     ThreadLocalMap getMap(Thread t) {
@@ -74,6 +92,9 @@ public class InheritableThreadLocal<T> extends ThreadLocal<T> {
     /**
      * Create the map associated with a ThreadLocal.
      *
+     * <p>
+     *  创建与ThreadLocal关联的地图。
+     * 
      * @param t the current thread
      * @param firstValue value for the initial entry of the table.
      */

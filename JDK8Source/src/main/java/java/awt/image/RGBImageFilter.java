@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,19 @@ import java.awt.image.ColorModel;
  *
  * }</pre>
  *
+ * <p>
+ *  此类提供了一种创建ImageFilter的简单方法,该方法修改默认RGB ColorModel中图像的像素。它意味着与FilteredImageSource对象结合使用,以生成现有映像的过滤版本。
+ * 它是一个抽象类,它提供了通过一种单一方法来传递所有像素数据所需的调用,该方法在默认RGB ColorModel中一次转换一个像素,而不管ImageProducer使用的ColorModel。
+ * 唯一需要定义以创建可用的图像过滤器的方法是filterRGB方法。这里是一个过滤器的定义的例子,它交换图像的红色和蓝色分量：<pre> {@ code。
+ * 
+ *  类RedBlueSwapFilter扩展RGBImageFilter {public RedBlueSwapFilter(){//过滤器的操作不依赖于像素的位置,因此可以直接过滤IndexColorModels。
+ *  canFilterIndexColorModel = true; }}。
+ * 
+ *  public int filterRGB(int x,int y,int rgb){return((rgb&0xff00ff00)|((rgb&0xff0000)>> 16)|((rgb&0xff)<< 16) }}。
+ * 
+ *  } </pre>
+ * 
+ * 
  * @see FilteredImageSource
  * @see ImageFilter
  * @see ColorModel#getRGBdefault
@@ -70,6 +84,10 @@ public abstract class RGBImageFilter extends ImageFilter {
      * The <code>ColorModel</code> to be replaced by
      * <code>newmodel</code> when the user calls
      * {@link #substituteColorModel(ColorModel, ColorModel) substituteColorModel}.
+     * <p>
+     *  当用户调用{@link #substituteColorModel(ColorModel,ColorModel)replaceColorModel}时,<code> ColorModel </code>
+     * 将替换为<code> newmodel </code>。
+     * 
      */
     protected ColorModel origmodel;
 
@@ -77,6 +95,9 @@ public abstract class RGBImageFilter extends ImageFilter {
      * The <code>ColorModel</code> with which to
      * replace <code>origmodel</code> when the user calls
      * <code>substituteColorModel</code>.
+     * <p>
+     * 当用户调用<code> substituteColorModel </code>时,用<code> ColorModel </code>替换<code> origmodel </code>。
+     * 
      */
     protected ColorModel newmodel;
 
@@ -87,6 +108,11 @@ public abstract class RGBImageFilter extends ImageFilter {
      * filtering.  Subclasses should set this variable to true in their
      * constructor if their filterRGB method does not depend on the
      * coordinate of the pixel being filtered.
+     * <p>
+     *  该布尔表示是否可以将filterRGB方法的颜色滤波应用于IndexColorModel对象的颜色表条目,而不是逐个像素滤波。
+     * 如果子类的filterRGB方法不依赖于被过滤的像素的坐标,则子类应在其构造函数中将此变量设置为true。
+     * 
+     * 
      * @see #substituteColorModel
      * @see #filterRGB
      * @see IndexColorModel
@@ -108,6 +134,15 @@ public abstract class RGBImageFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  如果ColorModel是一个IndexColorModel,并且子类将canFilterIndexColorModel标志设置为true,那么在这里,以及原始ColorModel对象出现在setPi
+     * xels方法中的哪个位置,都会替换颜色模型的过滤版本。
+     * 如果ColorModel不是IndexColorModel或为null,此方法将覆盖ImageProducer使用的默认ColorModel,并指定默认的RGB ColorModel。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ImageConsumer
      * @see ColorModel#getRGBdefault
      */
@@ -126,6 +161,10 @@ public abstract class RGBImageFilter extends ImageFilter {
      * is encountered during any of the setPixels methods, the newcm
      * is substituted and the pixels passed through
      * untouched (but with the new ColorModel object).
+     * <p>
+     *  注册两个ColorModel对象以进行替换。如果在任何setPixels方法期间遇到oldcm,则newcm将被替换,像​​素通过未触摸的(但使用新的ColorModel对象)。
+     * 
+     * 
      * @param oldcm the ColorModel object to be replaced on the fly
      * @param newcm the ColorModel object to replace oldcm on the fly
      */
@@ -140,6 +179,10 @@ public abstract class RGBImageFilter extends ImageFilter {
      * subclasses must provide.  Uses coordinates of -1 to indicate that
      * a color table entry is being filtered rather than an actual
      * pixel value.
+     * <p>
+     * 通过RGBImageFilter子类必须提供的filterRGB函数运行其颜色表中的每个条目来过滤IndexColorModel对象。使用坐标为-1表示正在过滤颜色表条目,而不是实际的像素值。
+     * 
+     * 
      * @param icm the IndexColorModel object to be filtered
      * @exception NullPointerException if <code>icm</code> is null
      * @return a new IndexColorModel representing the filtered colors
@@ -178,6 +221,10 @@ public abstract class RGBImageFilter extends ImageFilter {
     /**
      * Filters a buffer of pixels in the default RGB ColorModel by passing
      * them one by one through the filterRGB method.
+     * <p>
+     *  通过filterRGB方法逐个传递默认RGB ColorModel中的像素的缓冲区。
+     * 
+     * 
      * @param x the X coordinate of the upper-left corner of the region
      *          of pixels
      * @param y the Y coordinate of the upper-left corner of the region
@@ -218,6 +265,14 @@ public abstract class RGBImageFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  如果ColorModel对象与已经转换的对象相同,则只使用转换后的ColorModel传递像素。
+     * 否则将字节像素的缓冲区转换为默认的RGB ColorModel,并将转换后的缓冲区传递给filterRGBPixels方法以逐个转换。
+     * <p>
+     *  注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @see ColorModel#getRGBdefault
      * @see #filterRGBPixels
      */
@@ -255,6 +310,13 @@ public abstract class RGBImageFilter extends ImageFilter {
      * this class to filter pixels from an image should avoid calling
      * this method directly since that operation could interfere
      * with the filtering operation.
+     * <p>
+     *  如果ColorModel对象与已经转换的相同,那么只需通过转换的ColorModel传递像素,否则将整数像素的缓冲区转换为默认的RGB ColorModel,并将转换后的缓冲区传递给filterRGB
+     * Pixels方法进行转换一个。
+     * 将整数像素的缓冲区转换为默认的RGB ColorModel,并将转换后的缓冲区传递给filterRGBPixels方法。
+     * <p>
+     * 注意：此方法旨在由其像素被过滤的<code> Image </code>的<code> ImageProducer </code>调用。
+     * 
      * @see ColorModel#getRGBdefault
      * @see #filterRGBPixels
      */
@@ -280,6 +342,10 @@ public abstract class RGBImageFilter extends ImageFilter {
     /**
      * Subclasses must specify a method to convert a single input pixel
      * in the default RGB ColorModel to a single output pixel.
+     * <p>
+     * 使用此类从图像中过滤像素的开发人员应避免直接调用此方法,因为该操作可能会干扰过滤操作。
+     * 
+     * 
      * @param x the X coordinate of the pixel
      * @param y the Y coordinate of the pixel
      * @param rgb the integer pixel representation in the default RGB

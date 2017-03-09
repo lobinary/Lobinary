@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -28,6 +38,11 @@ import org.w3c.dom.Node;
  *
  * @xerces.internal
  *
+ * <p>
+ *  ChildNode继承自NodeImpl,并通过引用其上一个和下一个兄弟姐妹来添加作为子代的能力。
+ * 
+ *  @ xerces.internal
+ * 
  */
 public abstract class ChildNode
     extends NodeImpl {
@@ -60,6 +75,11 @@ public abstract class ChildNode
      * instantiated, and those normally via a Document's factory methods
      * <p>
      * Every Node knows what Document it belongs to.
+     * <p>
+     *  没有公共构造函数;只有Node的子类应该被实例化,并且那些通常通过Document的工厂方法
+     * <p>
+     *  每个节点知道它属于什么文档。
+     * 
      */
     protected ChildNode(CoreDocumentImpl ownerDocument) {
         super(ownerDocument);
@@ -80,6 +100,12 @@ public abstract class ChildNode
      * <P>
      * Note: since we never have any children deep is meaningless here,
      * ParentNode overrides this behavior.
+     * <p>
+     *  返回给定节点的副本。你可以认为这是一个通用的"复制构造函数"的节点。新返回的对象应该完全独立于源对象的子树,因此在克隆之后的一个更改不会影响另一个。
+     * <P>
+     *  注意：因为我们从来没有任何孩子deep在这里没有意义,ParentNode重写这个行为。
+     * 
+     * 
      * @see ParentNode
      *
      * <p>
@@ -110,6 +136,9 @@ public abstract class ChildNode
 
     /**
      * Returns the parent node of this node
+     * <p>
+     *  返回此节点的父节点
+     * 
      */
     public Node getParentNode() {
         // if we have an owner, ownerNode is our parent, otherwise it's
@@ -119,6 +148,9 @@ public abstract class ChildNode
 
     /*
      * same as above but returns internal type
+     * <p>
+     *  同上,但返回内部类型
+     * 
      */
     final NodeImpl parentNode() {
         // if we have an owner, ownerNode is our parent, otherwise it's
@@ -140,6 +172,8 @@ public abstract class ChildNode
 
     /*
      * same as above but returns internal type
+     * <p>
+     * 与上面相同但返回内部类型
      */
     final ChildNode previousSibling() {
         // if we are the firstChild, previousSibling actually refers to our

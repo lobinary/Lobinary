@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,17 @@ import sun.reflect.misc.*;
  * that, while not nullary, simply requires some property values
  * as arguments.
  *
+ * <p>
+ *  <code> DefaultPersistenceDelegate </code>是抽象<code> PersistenceDelegate </code>类的具体实现,是默认情况下对于没有可用信息的
+ * 类使用的委托。
+ *  <code> DefaultPersistenceDelegate </code>为JavaBeans&trade之后的类提供了基于API的基于公共API的持久性;没有任何类特定配置的约定。
+ * <p>
+ *  关键假设是类有一个nullary构造函数,并且它的状态通过匹配的"setter"和"getter"方法的对按照Introspector返回的顺序精确表示。
+ * 除了为JavaBean提供无代码持久化之外,<code> DefaultPersistenceDelegate </code>提供了一种方便的方法来实现具有构造函数的类的持久存储,该构造函数虽然不是nu
+ * llary,只需要一些属性值作为参数。
+ *  关键假设是类有一个nullary构造函数,并且它的状态通过匹配的"setter"和"getter"方法的对按照Introspector返回的顺序精确表示。
+ * 
+ * 
  * @see #DefaultPersistenceDelegate(String[])
  * @see java.beans.Introspector
  *
@@ -65,6 +77,10 @@ public class DefaultPersistenceDelegate extends PersistenceDelegate {
     /**
      * Creates a persistence delegate for a class with a nullary constructor.
      *
+     * <p>
+     *  为具有nullary构造函数的类创建持久委托。
+     * 
+     * 
      * @see #DefaultPersistenceDelegate(java.lang.String[])
      */
     public DefaultPersistenceDelegate() {
@@ -88,6 +104,16 @@ public class DefaultPersistenceDelegate extends PersistenceDelegate {
      *     new DefaultPersistenceDelegate(new String[]{"name", "style", "size"});
      * </pre>
      *
+     * <p>
+     * 为具有构造函数的类创建默认持久委托,该构造函数的参数是由<code> constructorPropertyNames </code>指定的属性名称的值。
+     * 构造函数参数是通过按提供的顺序评估属性名称来创建的。要使用这个类来指定一个用于序列化特定类型的首选构造函数,我们声明构成构造函数参数的属性的名称。
+     * 例如,不定义nullary构造函数的<code> Font </code>类可以使用以下persistence委托来处理：。
+     * 
+     * <pre>
+     *  new DefaultPersistenceDelegate(new String [] {"name","style","size"});
+     * </pre>
+     * 
+     * 
      * @param  constructorPropertyNames The property names for the arguments of this constructor.
      *
      * @see #instantiate
@@ -123,6 +149,12 @@ public class DefaultPersistenceDelegate extends PersistenceDelegate {
      * Otherwise, this method uses the superclass's definition which returns true if the
      * classes of the two instances are equal.
      *
+     * <p>
+     *  如果指定的构造函数中的参数数量不为零,并且<code> oldInstance </code>类明确声明了一个"equals"方法,则此方法返回<code> oldInstance.equals(ne
+     * wInstance)</code >。
+     * 否则,此方法使用超类的定义,如果两个实例的类相等,则返回true。
+     * 
+     * 
      * @param oldInstance The instance to be copied.
      * @param newInstance The instance that is to be modified.
      * @return True if an equivalent copy of <code>newInstance</code> may be
@@ -144,6 +176,11 @@ public class DefaultPersistenceDelegate extends PersistenceDelegate {
      * call to a constructor with the arguments as specified in
      * the <code>DefaultPersistenceDelegate</code>'s constructor.
      *
+     * <p>
+     *  <code> instantiate </code>方法的默认实现返回一个包含预定义方法名"new"的表达式,它表示对构造函数的调用,该构造函数具有<code> DefaultPersistenceD
+     * elegate </code>的构造函数中指定的参数。
+     * 
+     * 
      * @param  oldInstance The instance to be instantiated.
      * @param  out The code output stream.
      * @return An expression whose value is <code>oldInstance</code>.
@@ -285,6 +322,16 @@ public class DefaultPersistenceDelegate extends PersistenceDelegate {
         be created to provide a general means to differentiate these
         special cases so as to provide reliable persistence of listeners
         for the general case.
+        /* <p>
+        /* 待定(milne)。有一个普遍的问题,存档的听众是未解决的1.4。
+        /* 许多将一个对象安装在另一个对象(通常是"添加"方法或设置器)中的方法自动在"子"对象上安装一个监听器,使得它的"父"可以响应对它做出的更改。
+        /* 例如,JTable：setModel()方法在提供的表模型中自动添加一个TableModelListener(在这种情况下是JTable本身)。
+        /* 
+        /*  我们不需要显式地将这些监听器添加到归档中的模型中,因为它们将通过JTable的"setModel"方法自动添加。
+        /* 在某些情况下,我们必须特别避免尝试这样做,因为侦听器可能是一个内部类,不能使用公共API实例化。
+        /* 
+        /*  当前不存在用于区分这些类型的监听器和用户明确添加的那些的通用机制。必须创建一种机制来提供一般手段来区分这些特殊情况,以便为一般情况提供可靠的持久性监听器。
+        /* 
         */
         if (!java.awt.Component.class.isAssignableFrom(type)) {
             return; // Just handle the listeners of Components for now.
@@ -386,6 +433,14 @@ public class DefaultPersistenceDelegate extends PersistenceDelegate {
      * a class such that no property value depends on the value of
      * a subsequent property.
      *
+     * <p>
+     * <code> initialize </code>方法的默认实现假设所有在此类型的对象中保持的状态通过匹配的"setter"和"getter"方法对按照Introspector返回的顺序显示。
+     * 如果属性描述符定义了一个值等于<code> Boolean.TRUE </code>的"transient"属性,则此默认实现将忽略该属性。
+     * 注意,这个词"transient"的使用完全独立于<code> ObjectOutputStream </code>使用的字段修饰符。
+     * <p>
+     *  对于每个非瞬态属性,创建一个表达式,其中将空值"getter"方法应用于<code> oldInstance </code>。此表达式的值是正在序列化的实例中的属性的值。
+     * 如果克隆环境中此表达式的值<code> mutatesTo </code>目标值,则会初始化新值以使其等同于旧值。
+     * 
      * @param type the type of the instances
      * @param oldInstance The instance to be copied.
      * @param newInstance The instance that is to be modified.

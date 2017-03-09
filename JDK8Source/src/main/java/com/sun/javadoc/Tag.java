@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,8 @@ import java.text.BreakIterator;
 import java.util.Locale;
 
 /**
+/* <p>
+/* 
  * Represents a simple documentation tag, such as @since, @author, @version.
  * Given a tag (e.g. "@since 1.2"), holds tag name (e.g. "@since")
  * and tag text (e.g. "1.2").  Tags with structure or which require
@@ -50,6 +53,10 @@ public interface Tag {
     /**
      * Return the name of this tag.  The name is the string
      * starting with "@" that is used in a doc comment, such as
+     * <p>
+     *  返回此标记的名称。名称是以"@"开头的字符串,用于doc注释中,例如
+     * 
+     * 
      * <code>@return</code>.  For inline tags, such as
      * <code>{&#064;link}</code>, the curly brackets
      * are not part of the name, so in this example the name
@@ -62,6 +69,10 @@ public interface Tag {
     /**
      * Return the containing {@link Doc} of this Tag element.
      *
+     * <p>
+     *  返回此标签元素的包含{@link Doc}。
+     * 
+     * 
      * @return the containing {@link Doc} of this Tag element
      */
     Doc holder();
@@ -75,6 +86,13 @@ public interface Tag {
      *
      * <table border="1" cellpadding="4" cellspacing="0" summary="related tags">
      * <tr><th>{@code kind()  }</th>  <th>{@code name()      }</th></tr>
+     * <p>
+     *  返回此标签的类型。对于大多数标签,<code> kind()&nbsp; ==&nbsp; name()</code>;下表列出了有多个给定类型的标签的情况：
+     * 
+     * <table border="1" cellpadding="4" cellspacing="0" summary="related tags">
+     *  <tr> <th> {@ code kind()} </th> <th> {@ code name()} </th> </tr>
+     * 
+     * 
      * <tr><td>{@code @throws }</td>  <td>{@code @throws     }</td></tr>
      * <tr><td>{@code @throws }</td>  <td>{@code @exception  }</td></tr>
      * <tr><td>{@code @see    }</td>  <td>{@code @see        }</td></tr>
@@ -91,12 +109,19 @@ public interface Tag {
     /**
      * Return the text of this tag, that is, the portion beyond tag name.
      *
+     * <p>
+     *  返回此标记的文本,即标记名称之外的部分。
+     * 
+     * 
      * @return the text of this tag
      */
     String text();
 
     /**
      * Convert this object to a string.
+     * <p>
+     *  将此对象转换为字符串。
+     * 
      */
     String toString();
 
@@ -110,6 +135,12 @@ public interface Tag {
      * Each string is represented by a <code>Tag</code> object of
      * name "Text", where {@link #text()} returns the string.  Each
      * <code>{&#064;link}</code> tag is represented by a
+     * <p>
+     *  对于嵌入了<code> {@ link} </code>标签的文档注释,返回<code> Tag </code>对象的数组。
+     * 整个文档评论被细分为由<code> {@ link} </code>标签分隔的字符串,其中数组的每个后续元素都表示字符串或<code> {@ link} </code>顺序,从开始到结束。
+     * 每个字符串由名称为"Text"的<code> Tag </code>对象表示,其中{@link #text()}返回字符串。每个<code> {@ link} </code>标记由a表示。
+     * 
+     * 
      * {@link SeeTag} of name "@link" and kind "@see".
      * For example, given the following comment
      * tag:
@@ -153,6 +184,13 @@ public interface Tag {
      * determined by
      * {@link BreakIterator#getSentenceInstance(Locale)}.
      *
+     * <p>
+     * 将注释的第一个句子作为一个标签数组。包含内置标记(即{@link <i>参考</i>}标记),但不能屏蔽标记。纯文本的每个部分表示为类型为"Text"的{@link Tag}。
+     * 内联标记表示为类型为"@link"的{@link SeeTag}。
+     * 如果语言环境是英语语言,则第一句由Java语言规范(第一版本)中描述的规则确定："该语句在第一周期结束,其后是空白,制表符或行终止符,或在第一标签",另外一行将由段落和段终止HTML标签终止：&lt; 
+     * p&gt; &lt; / p&gt; &lt; h1&gt; &lt; h2&gt; &lt; h3&gt; &lt; h4&gt; &lt; h5&gt; &lt; h6&gt; &lt; hr&gt
+     * ; &lt; pre&gt;或&lt; / pre&gt ;.如果语言环境不是英语,则句子结束将由{@link BreakIterator#getSentenceInstance(Locale)}确定。
+     * 
      * @return an array of {@link Tag} objects representing the
      *         first sentence of the comment
      */
@@ -160,6 +198,10 @@ public interface Tag {
 
     /**
      * Return the source position of this tag.
+     * <p>
+     * 内联标记表示为类型为"@link"的{@link SeeTag}。
+     * 
+     * 
      * @return the source position of this tag.
      */
     public SourcePosition position();

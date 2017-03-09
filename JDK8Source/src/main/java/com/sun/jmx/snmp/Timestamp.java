@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -17,6 +18,11 @@ import java.util.Date;
  * with the response variables.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此类由{@link com.sun.jmx.snmp.SnmpVarBindList SnmpVarBindList}对象使用。
+ *  <CODE> SnmpVarBindList </CODE>时间戳记对象表示使用响应变量更新列表时的时间戳记。
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
  */
 
 public class Timestamp implements java.io.Serializable {
@@ -28,16 +34,25 @@ public class Timestamp implements java.io.Serializable {
     /**
      * The time (in hundreds of a second) since the network management portion of the system
      * was last re-initialized.
+     * <p>
+     *  自从系统的网络管理部分最后被重新初始化以来的时间(几百秒)。
+     * 
      */
     private long sysUpTime ;
 
     /**
      * A <CODE>long</CODE> representing the current date.
+     * <p>
+     *  代表当前日期的<CODE>长</CODE>。
+     * 
      */
     private long crtime ;
 
     /**
      * The <CODE>SnmpTimeticks</CODE> object corresponding to the <CODE>TimeStamp</CODE> object.
+     * <p>
+     *  对应于<CODE> TimeStamp </CODE>对象的<CODE> SnmpTimeticks </CODE>对象。
+     * 
      */
     private SnmpTimeticks uptimeCache = null ;
 
@@ -48,6 +63,9 @@ public class Timestamp implements java.io.Serializable {
     /**
      * The default constructor. <CODE>Sysuptime</CODE> is 0.
      * This simply indicates when this object was created.
+     * <p>
+     *  默认构造函数。 <CODE> Sysuptime </CODE>为0.这只是表示创建此对象的时间。
+     * 
      */
     public Timestamp() {
         crtime = System.currentTimeMillis() ;
@@ -55,6 +73,10 @@ public class Timestamp implements java.io.Serializable {
 
     /**
      * Creates a <CODE>TimeStamp</CODE> object using the user parameters.
+     * <p>
+     *  使用用户参数创建<CODE> TimeStamp </CODE>对象。
+     * 
+     * 
      * @param uptime The time (in hundredths of a second) since the
      * network management portion of the system was last re-initialized.
      * @param when The current time.
@@ -66,6 +88,10 @@ public class Timestamp implements java.io.Serializable {
 
     /**
      * Creates a <CODE>TimeStamp</CODE> object using the user parameters.
+     * <p>
+     *  使用用户参数创建<CODE> TimeStamp </CODE>对象。
+     * 
+     * 
      * @param uptime The time (in hundredths of a second) since the
      * network management portion of the system was last re-initialized.
      */
@@ -80,6 +106,10 @@ public class Timestamp implements java.io.Serializable {
 
     /**
      * Gets the <CODE>SnmpTimeticks</CODE> object corresponding to the <CODE>TimeStamp</CODE> object.
+     * <p>
+     *  获取与<CODE> TimeStamp </CODE>对象相对应的<CODE> SnmpTimeticks </CODE>对象。
+     * 
+     * 
      * @return The <CODE>SnmpTimeticks</CODE> object.
      */
     final public synchronized SnmpTimeticks getTimeTicks() {
@@ -91,6 +121,10 @@ public class Timestamp implements java.io.Serializable {
     /**
      * Gets the time (in hundredths of a second) since the network management portion of the system
      * was last re-initialized.
+     * <p>
+     *  自从系统的网络管理部分最后重新初始化以来,获取时间(百分之一秒)。
+     * 
+     * 
      * @return The <CODE>sysUpTime</CODE>.
      */
     final public long getSysUpTime() {
@@ -99,6 +133,10 @@ public class Timestamp implements java.io.Serializable {
 
     /**
      * Gets the current date.
+     * <p>
+     *  获取当前日期。
+     * 
+     * 
      * @return A <CODE>Date</CODE> object representing the current date.
      */
     final public synchronized Date getDate() {
@@ -107,6 +145,10 @@ public class Timestamp implements java.io.Serializable {
 
     /**
      * Gets the current date.
+     * <p>
+     *  获取当前日期。
+     * 
+     * 
      * @return A <CODE>long</CODE> representing the current date.
      */
     final public long getDateTime() {
@@ -115,6 +157,9 @@ public class Timestamp implements java.io.Serializable {
 
     /**
      * Returns a <CODE>String</CODE> representation of the <CODE>TimeStamp</CODE> object.
+     * <p>
+     *  返回<CODE> TimeStamp </CODE>对象的<CODE> String </CODE>表示形式。
+     * 
      * @return A <CODE>String</CODE> representation of the <CODE>TimeStamp</CODE> object.
      */
     final public String toString() {

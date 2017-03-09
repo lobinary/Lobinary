@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent.atomic;
@@ -48,6 +52,12 @@ import sun.misc.Unsafe;
  * {@code Number} to allow uniform access by tools and utilities that
  * deal with numerically-based classes.
  *
+ * <p>
+ *  可自动更新的{@code long}值。有关原子变量属性的描述,请参阅{@link java.util.concurrent.atomic}包规范。
+ *  {@code AtomicLong}用于应用程序中,例如原子递增的序列号,不能用作{@link java.lang.Long}的替代。
+ * 然而,这个类扩展了{@code Number},允许通过处理基于数字的类的工具和实用程序进行统一访问。
+ * 
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -63,12 +73,19 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * compareAndSwap for longs. While the Unsafe.compareAndSwapLong
      * method works in either case, some constructions should be
      * handled at Java level to avoid locking user-visible locks.
+     * <p>
+     *  记录底层JVM是否支持longs的无锁compareAndSwap。
+     * 虽然Unsafe.compareAndSwapLong方法在任何情况下都有效,但是一些结构应该在Java级别处理,以避免锁定用户可见的锁。
+     * 
      */
     static final boolean VM_SUPPORTS_LONG_CAS = VMSupportsCS8();
 
     /**
      * Returns whether underlying JVM supports lockless CompareAndSet
      * for longs. Called only once and cached in VM_SUPPORTS_LONG_CAS.
+     * <p>
+     *  返回底层JVM是否支持无锁CompareAndSet for longs。仅调用一次并在VM_SUPPORTS_LONG_CAS中缓存。
+     * 
      */
     private static native boolean VMSupportsCS8();
 
@@ -84,6 +101,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Creates a new AtomicLong with the given initial value.
      *
+     * <p>
+     *  使用给定的初始值创建一个新的AtomicLong。
+     * 
+     * 
      * @param initialValue the initial value
      */
     public AtomicLong(long initialValue) {
@@ -92,6 +113,9 @@ public class AtomicLong extends Number implements java.io.Serializable {
 
     /**
      * Creates a new AtomicLong with initial value {@code 0}.
+     * <p>
+     *  创建一个带有初始值{@code 0}的新AtomicLong。
+     * 
      */
     public AtomicLong() {
     }
@@ -99,6 +123,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Gets the current value.
      *
+     * <p>
+     *  获取当前值。
+     * 
+     * 
      * @return the current value
      */
     public final long get() {
@@ -108,6 +136,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Sets to the given value.
      *
+     * <p>
+     *  设置为给定值。
+     * 
+     * 
      * @param newValue the new value
      */
     public final void set(long newValue) {
@@ -117,6 +149,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Eventually sets to the given value.
      *
+     * <p>
+     *  最终设置为给定值。
+     * 
+     * 
      * @param newValue the new value
      * @since 1.6
      */
@@ -127,6 +163,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Atomically sets to the given value and returns the old value.
      *
+     * <p>
+     *  原子设置为给定值并返回旧值。
+     * 
+     * 
      * @param newValue the new value
      * @return the previous value
      */
@@ -138,6 +178,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * Atomically sets the value to the given updated value
      * if the current value {@code ==} the expected value.
      *
+     * <p>
+     *  如果当前值{@code ==}为期望值,则将该值原子地设置为给定的更新值。
+     * 
+     * 
      * @param expect the expected value
      * @param update the new value
      * @return {@code true} if successful. False return indicates that
@@ -155,6 +199,13 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * spuriously and does not provide ordering guarantees</a>, so is
      * only rarely an appropriate alternative to {@code compareAndSet}.
      *
+     * <p>
+     * 如果当前值{@code ==}为期望值,则将该值原子地设置为给定的更新值。
+     * 
+     *  <p> <a href="package-summary.html#weakCompareAndSet">可能会失败,并且不提供排序保证</a>,因此很少是{@code compareAndSet}的
+     * 适当替代品。
+     * 
+     * 
      * @param expect the expected value
      * @param update the new value
      * @return {@code true} if successful
@@ -166,6 +217,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Atomically increments by one the current value.
      *
+     * <p>
+     *  以当前值为基础增加1。
+     * 
+     * 
      * @return the previous value
      */
     public final long getAndIncrement() {
@@ -175,6 +230,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Atomically decrements by one the current value.
      *
+     * <p>
+     *  将当前值递减1。
+     * 
+     * 
      * @return the previous value
      */
     public final long getAndDecrement() {
@@ -184,6 +243,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Atomically adds the given value to the current value.
      *
+     * <p>
+     *  以原子方式将给定值添加到当前值。
+     * 
+     * 
      * @param delta the value to add
      * @return the previous value
      */
@@ -194,6 +257,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Atomically increments by one the current value.
      *
+     * <p>
+     *  以当前值为基础增加1。
+     * 
+     * 
      * @return the updated value
      */
     public final long incrementAndGet() {
@@ -203,6 +270,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Atomically decrements by one the current value.
      *
+     * <p>
+     *  将当前值递减1。
+     * 
+     * 
      * @return the updated value
      */
     public final long decrementAndGet() {
@@ -212,6 +283,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
     /**
      * Atomically adds the given value to the current value.
      *
+     * <p>
+     *  以原子方式将给定值添加到当前值。
+     * 
+     * 
      * @param delta the value to add
      * @return the updated value
      */
@@ -225,6 +300,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * function should be side-effect-free, since it may be re-applied
      * when attempted updates fail due to contention among threads.
      *
+     * <p>
+     *  使用应用给定函数的结果以原子方式更新当前值,返回前一个值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 
+     * 
      * @param updateFunction a side-effect-free function
      * @return the previous value
      * @since 1.8
@@ -244,6 +323,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * function should be side-effect-free, since it may be re-applied
      * when attempted updates fail due to contention among threads.
      *
+     * <p>
+     *  使用应用给定函数的结果以原子方式更新当前值,返回更新后的值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 
+     * 
      * @param updateFunction a side-effect-free function
      * @return the updated value
      * @since 1.8
@@ -266,6 +349,11 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * is applied with the current value as its first argument,
      * and the given update as the second argument.
      *
+     * <p>
+     *  通过将给定函数应用于当前值和给定值,返回上一个值的结果,以原子方式更新当前值。该函数应该是无副作用的,因为它可能会在尝试更新失败时重新应用,因为线程之间的争用。
+     * 该函数应用当前值作为其第一个参数,给定的更新作为第二个参数。
+     * 
+     * 
      * @param x the update value
      * @param accumulatorFunction a side-effect-free function of two arguments
      * @return the previous value
@@ -290,6 +378,11 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * is applied with the current value as its first argument,
      * and the given update as the second argument.
      *
+     * <p>
+     * 使用将给定函数应用于当前值和给定值的结果,以原子方式更新当前值,返回更新后的值。该函数应该是无副作用的,因为当尝试的更新由于线程之间的争用而失败时,它可以被重新应用。
+     * 该函数应用当前值作为其第一个参数,给定的更新作为第二个参数。
+     * 
+     * 
      * @param x the update value
      * @param accumulatorFunction a side-effect-free function of two arguments
      * @return the updated value
@@ -307,6 +400,10 @@ public class AtomicLong extends Number implements java.io.Serializable {
 
     /**
      * Returns the String representation of the current value.
+     * <p>
+     *  返回当前值的字符串表示形式。
+     * 
+     * 
      * @return the String representation of the current value
      */
     public String toString() {
@@ -317,6 +414,9 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * Returns the value of this {@code AtomicLong} as an {@code int}
      * after a narrowing primitive conversion.
      * @jls 5.1.3 Narrowing Primitive Conversions
+     * <p>
+     *  在缩小的原始转换后,将此{@code AtomicLong}的值作为{@code int}返回。 @jls 5.1.3缩小基本转换
+     * 
      */
     public int intValue() {
         return (int)get();
@@ -324,6 +424,9 @@ public class AtomicLong extends Number implements java.io.Serializable {
 
     /**
      * Returns the value of this {@code AtomicLong} as a {@code long}.
+     * <p>
+     *  将{@code AtomicLong}的值作为{@code long}返回。
+     * 
      */
     public long longValue() {
         return get();
@@ -333,6 +436,9 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * Returns the value of this {@code AtomicLong} as a {@code float}
      * after a widening primitive conversion.
      * @jls 5.1.2 Widening Primitive Conversions
+     * <p>
+     *  在扩展基元转换后,将此{@code AtomicLong}的值作为{@code float}返回。 @jls 5.1.2扩大原始转换
+     * 
      */
     public float floatValue() {
         return (float)get();
@@ -342,6 +448,8 @@ public class AtomicLong extends Number implements java.io.Serializable {
      * Returns the value of this {@code AtomicLong} as a {@code double}
      * after a widening primitive conversion.
      * @jls 5.1.2 Widening Primitive Conversions
+     * <p>
+     *  在扩展基元转换后,将此{@code AtomicLong}的值作为{@code double}返回。 @jls 5.1.2扩大原始转换
      */
     public double doubleValue() {
         return (double)get();

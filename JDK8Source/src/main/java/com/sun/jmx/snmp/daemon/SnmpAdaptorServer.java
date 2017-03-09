@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -125,6 +126,32 @@ import com.sun.jmx.snmp.tasks.ThreadService;
  * the managers.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  在SNMP协议之上实现适配器。
+ * <P>
+ *  当启动此SNMP协议适配器时,它将创建一个数据报套接字,并能够接收请求和发送陷阱或通知请求。当它停止时,套接字关闭,并且不处理请求和陷阱/通知请求。
+ * <P>
+ *  套接字的默认端口号为161.可以通过指定端口号来更改此默认值：
+ * <UL>
+ *  在启动适配器之前在对象构造函数</LI> <LI>中使用{@link com.sun.jmx.snmp.daemon.CommunicatorServer#setPort setPort}方法</LI>
+ * 。
+ * </UL>
+ *  默认对象名称由{@link com.sun.jmx.snmp.ServiceName#DOMAIN com.sun.jmx.snmp.ServiceName.DOMAIN}和{@link com.sun.jmx.snmp.ServiceName#SNMP_ADAPTOR_SERVER com。
+ *  sun.jmx.snmp.ServiceName.SNMP_ADAPTOR_SERVER}。
+ * <P>
+ *  SNMP协议适配器以无状态方式支持SNMP协议的版本1和2：当它接收到v1请求时,它回复v1响应,当它接收到v2请求时,它回复v2响应。
+ *  <BR>方法{@link#snmpV1Trap snmpV1Trap}使用SNMP v1格式发送陷阱。方法{@link#snmpV2Trap snmpV2Trap}使用SNMP v2格式发送陷阱。
+ * 方法{@link #snmpInformRequest snmpInformRequest}使用SNMP v2格式发送通知请求。
+ * <P>
+ * 为了接收数据包,SNMP协议适配器使用可以使用属性<CODE> bufferSize </CODE>(默认值为1024)配置的缓冲区。不适合缓冲区的数据包被拒绝。
+ * 增加<CODE> bufferSize </CODE>允许交换较大的数据包。然而,底层网络系统可能对UDP分组的大小施加限制。
+ * 超过此限制的数据包将被拒绝,无论<CODE> bufferSize </CODE>的值是什么。
+ * <P>
+ *  SNMP协议适配器可以同时为几个管理器服务。可以使用属性<CODE> maxActiveClientCount </CODE>限制并发管理器的数量。
+ * <p>
+ *  SNMP协议适配器为<CODE> maxActiveClientCount </CODE>属性指定默认值(10)。当适配器停止时,活动请求将中断,并将错误结果发送到管理器。
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>。
+ * 
  */
 
 public class SnmpAdaptorServer extends CommunicatorServer
@@ -137,12 +164,18 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Port number for sending SNMP traps.
      * <BR>The default value is 162.
+     * <p>
+     *  发送SNMP陷阱的端口号。 <BR>默认值为162。
+     * 
      */
     private int                 trapPort = 162;
 
     /**
      * Port number for sending SNMP inform requests.
      * <BR>The default value is 162.
+     * <p>
+     *  发送SNMP通知请求的端口号。 <BR>默认值为162。
+     * 
      */
     private int                 informPort = 162;
 
@@ -150,38 +183,59 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * The <CODE>InetAddress</CODE> used when creating the datagram socket.
      * <BR>It is specified when creating the SNMP protocol adaptor.
      * If not specified, the local host machine is used.
+     * <p>
+     *  创建数据报套接字时使用的<CODE> InetAddress </CODE>。 <BR>创建SNMP协议适配器时指定。如果未指定,则使用本地主机。
+     * 
      */
     InetAddress address = null;
 
     /**
      * The IP address based ACL used by this SNMP protocol adaptor.
+     * <p>
+     *  此SNMP协议适配器使用的基于IP地址的ACL。
+     * 
      */
     private InetAddressAcl ipacl = null;
 
     /**
      * The factory object.
+     * <p>
+     *  工厂对象。
+     * 
      */
     private SnmpPduFactory pduFactory = null;
 
     /**
      * The user-data factory object.
+     * <p>
+     *  用户数据工厂对象。
+     * 
      */
     private SnmpUserDataFactory userDataFactory = null;
 
     /**
      * Indicates if the SNMP protocol adaptor sends a response in case
      * of authentication failure
+     * <p>
+     * 指示在认证失败的情况下SNMP协议适配器是否发送响应
+     * 
      */
     private boolean authRespEnabled = true;
 
     /**
      * Indicates if authentication traps are enabled.
+     * <p>
+     *  指示是否启用认证陷阱。
+     * 
      */
     private boolean authTrapEnabled = true;
 
     /**
      * The enterprise OID.
      * <BR>The default value is "1.3.6.1.4.1.42".
+     * <p>
+     *  企业OID。 <BR>默认值为"1.3.6.1.4.1.42"。
+     * 
      */
     private SnmpOid enterpriseOid = new SnmpOid("1.3.6.1.4.1.42");
 
@@ -190,6 +244,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * This buffer size is used for both incoming request and outgoing
      * inform requests.
      * <BR>The default value is 1024.
+     * <p>
+     *  SNMP协议适配器的缓冲区大小。此缓冲区大小用于传入请求和传出通知请求。 <BR>默认值为1024。
+     * 
      */
     int bufferSize = 1024;
 
@@ -203,6 +260,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Whether ACL must be used.
+     * <p>
+     *  是否必须使用ACL。
+     * 
      */
     private transient boolean         useAcl = true;
 
@@ -213,12 +273,18 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Number of times to try an inform request before giving up.
      * The default number is 3.
+     * <p>
+     *  在放弃之前尝试通知请求的次数。默认值为3。
+     * 
      */
     private int maxTries = 3 ;
 
     /**
      * The amount of time to wait for an inform response from the manager.
      * The default amount of time is 3000 millisec.
+     * <p>
+     *  等待管理器发出通知响应的时间量。默认时间为3000毫秒。
+     * 
      */
     private int timeout = 3 * 1000 ;
 
@@ -227,91 +293,145 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * The <CODE>snmpOutTraps</CODE> value defined in MIB-II.
+     * <p>
+     *  MIB-II中定义的<CODE> snmpOutTraps </CODE>值。
+     * 
      */
     int snmpOutTraps=0;
 
     /**
      * The <CODE>snmpOutGetResponses</CODE> value defined in MIB-II.
+     * <p>
+     *  MIB-II中定义的<CODE> snmpOutGetResponses </CODE>值。
+     * 
      */
     private int snmpOutGetResponses=0;
 
     /**
      * The <CODE>snmpOutGenErrs</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpOutGenErrs </CODE>值。
+     * 
      */
     private int snmpOutGenErrs=0;
 
     /**
      * The <CODE>snmpOutBadValues</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpOutBadValues </CODE>值。
+     * 
      */
     private int snmpOutBadValues=0;
 
     /**
      * The <CODE>snmpOutNoSuchNames</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpOutNoSuchNames </CODE>值。
+     * 
      */
     private int snmpOutNoSuchNames=0;
 
     /**
      * The <CODE>snmpOutTooBigs</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpOutTooBigs </CODE>值。
+     * 
      */
     private int snmpOutTooBigs=0;
 
     /**
      * The <CODE>snmpOutPkts</CODE> value defined in MIB-II.
+     * <p>
+     *  MIB-II中定义的<CODE> snmpOutPkts </CODE>值。
+     * 
      */
     int snmpOutPkts=0;
 
     /**
      * The <CODE>snmpInASNParseErrs</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpInASNParseErrs </CODE>值。
+     * 
      */
     private int snmpInASNParseErrs=0;
 
     /**
      * The <CODE>snmpInBadCommunityUses</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpInBadCommunityUses </CODE>值。
+     * 
      */
     private int snmpInBadCommunityUses=0;
 
     /**
      * The <CODE>snmpInBadCommunityNames</CODE> value defined in MIB-II.
+     * <p>
+     *  MIB-II中定义的<CODE> snmpInBadCommunityNames </CODE>值。
+     * 
      */
     private int snmpInBadCommunityNames=0;
 
     /**
      * The <CODE>snmpInBadVersions</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpInBadVersions </CODE>值。
+     * 
      */
     private int snmpInBadVersions=0;
 
     /**
      * The <CODE>snmpInGetRequests</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpInGetRequests </CODE>值。
+     * 
      */
     private int snmpInGetRequests=0;
 
     /**
      * The <CODE>snmpInGetNexts</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpInGetNexts </CODE>值。
+     * 
      */
     private int snmpInGetNexts=0;
 
     /**
      * The <CODE>snmpInSetRequests</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpInSetRequests </CODE>值。
+     * 
      */
     private int snmpInSetRequests=0;
 
     /**
      * The <CODE>snmpInPkts</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpInPkts </CODE>值。
+     * 
      */
     private int snmpInPkts=0;
 
     /**
      * The <CODE>snmpInTotalReqVars</CODE> value defined in MIB-II.
+     * <p>
+     * 在MIB-II中定义的<CODE> snmpInTotalReqVars </CODE>值。
+     * 
      */
     private int snmpInTotalReqVars=0;
 
     /**
      * The <CODE>snmpInTotalSetVars</CODE> value defined in MIB-II.
+     * <p>
+     *  在MIB-II中定义的<CODE> snmpInTotalSetVars </CODE>值。
+     * 
      */
     private int snmpInTotalSetVars=0;
 
     /**
      * The <CODE>snmpInTotalSetVars</CODE> value defined in rfc 1907 MIB-II.
+     * <p>
+     *  在rfc 1907 MIB-II中定义的<CODE> snmpInTotalSetVars </CODE>值。
+     * 
      */
     private int snmpSilentDrops=0;
 
@@ -347,6 +467,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Initializes this SNMP protocol adaptor using the default port (161).
      * Use the {@link com.sun.jmx.snmp.IPAcl.SnmpAcl} default
      * implementation of the <CODE>InetAddressAcl</CODE> interface.
+     * <p>
+     *  使用默认端口(161)初始化此SNMP协议适配器。
+     * 使用{@link com.sun.jmx.snmp.IPAcl.SnmpAcl}默认实现<CODE> InetAddressAcl </CODE>界面。
+     * 
      */
     public SnmpAdaptorServer() {
         this(true, null, com.sun.jmx.snmp.ServiceName.SNMP_ADAPTOR_PORT,
@@ -358,6 +482,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Use the {@link com.sun.jmx.snmp.IPAcl.SnmpAcl} default
      * implementation of the <CODE>InetAddressAcl</CODE> interface.
      *
+     * <p>
+     *  使用指定的端口初始化此SNMP协议适配器。使用{@link com.sun.jmx.snmp.IPAcl.SnmpAcl}默认实现<CODE> InetAddressAcl </CODE>界面。
+     * 
+     * 
      * @param port The port number for sending SNMP responses.
      */
     public SnmpAdaptorServer(int port) {
@@ -368,6 +496,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Initializes this SNMP protocol adaptor using the default port (161)
      * and the specified IP address based ACL implementation.
      *
+     * <p>
+     *  使用默认端口(161)和指定的基于IP地址的ACL实施初始化此SNMP协议适配器。
+     * 
+     * 
      * @param acl The <CODE>InetAddressAcl</CODE> implementation.
      *        <code>null</code> means no ACL - everybody is authorized.
      *
@@ -385,6 +517,11 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Use the {@link com.sun.jmx.snmp.IPAcl.SnmpAcl} default
      * implementation of the <CODE>InetAddressAcl</CODE> interface.
      *
+     * <p>
+     *  使用默认端口(161)和指定的<CODE> InetAddress </CODE>初始化此SNMP协议适配器。
+     * 使用{@link com.sun.jmx.snmp.IPAcl.SnmpAcl}默认实现<CODE> InetAddressAcl </CODE>界面。
+     * 
+     * 
      * @param addr The IP address to bind.
      */
     public SnmpAdaptorServer(InetAddress addr) {
@@ -396,6 +533,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Initializes this SNMP protocol adaptor using the specified port and the
      * specified IP address based ACL implementation.
      *
+     * <p>
+     *  使用指定的端口和指定的基于IP地址的ACL实施初始化此SNMP协议适配器。
+     * 
+     * 
      * @param acl The <CODE>InetAddressAcl</CODE> implementation.
      *        <code>null</code> means no ACL - everybody is authorized.
      * @param port The port number for sending SNMP responses.
@@ -412,6 +553,11 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Use the {@link com.sun.jmx.snmp.IPAcl.SnmpAcl} default
      * implementation of the <CODE>InetAddressAcl</CODE> interface.
      *
+     * <p>
+     *  使用指定的端口和指定的<CODE> InetAddress </CODE>初始化此SNMP协议适配器。
+     * 使用{@link com.sun.jmx.snmp.IPAcl.SnmpAcl}默认实现<CODE> InetAddressAcl </CODE>界面。
+     * 
+     * 
      * @param port The port number for sending SNMP responses.
      * @param addr The IP address to bind.
      */
@@ -424,6 +570,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * address based ACL implementation and the specified
      * <CODE>InetAddress</CODE>.
      *
+     * <p>
+     *  使用指定的基于IP地址的ACL实现和指定的<CODE> InetAddress </CODE>初始化此SNMP协议适配器。
+     * 
+     * 
      * @param acl The <CODE>InetAddressAcl</CODE> implementation.
      * @param addr The IP address to bind.
      *
@@ -439,6 +589,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * specified  address based ACL implementation and the specified
      * <CODE>InetAddress</CODE>.
      *
+     * <p>
+     * 使用指定的端口,指定的基于地址的ACL实施和指定的<CODE> InetAddress </CODE>初始化此SNMP协议适配器。
+     * 
+     * 
      * @param acl The <CODE>InetAddressAcl</CODE> implementation.
      * @param port The port number for sending SNMP responses.
      * @param addr The IP address to bind.
@@ -458,6 +612,12 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * <br>This constructor must be used in particular with a platform that
      * does not support the <CODE>java.security.acl</CODE> package like pJava.
      *
+     * <p>
+     *  使用指定的端口和指定的<CODE> InetAddress </CODE>初始化此SNMP协议适配器。
+     * 此构造函数允许在不使用ACL机制(通过将<CODE> useAcl </CODE>参数设置为false)的情况下初始化SNMP适配器。
+     *  <br>此构造函数必须特别适用于不支持像pJava的<CODE> java.security.acl </CODE>包的平台。
+     * 
+     * 
      * @param useAcl Specifies if this new SNMP adaptor uses the ACL mechanism.
      * If the specified parameter is set to <CODE>true</CODE>, this
      * constructor is equivalent to
@@ -502,6 +662,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Gets the number of managers that have been processed by this
      * SNMP protocol adaptor  since its creation.
      *
+     * <p>
+     *  获取此SNMP协议适配器自创建以来已处理的管理器数。
+     * 
+     * 
      * @return The number of managers handled by this SNMP protocol adaptor
      * since its creation. This counter is not reset by the <CODE>stop</CODE>
      * method.
@@ -515,6 +679,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Gets the number of managers currently being processed by this
      * SNMP protocol adaptor.
      *
+     * <p>
+     *  获取此SNMP协议适配器当前正在处理的管理器数。
+     * 
+     * 
      * @return The number of managers currently being processed by this
      * SNMP protocol adaptor.
      */
@@ -527,6 +695,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Gets the maximum number of managers that this SNMP protocol adaptor can
      * process concurrently.
      *
+     * <p>
+     *  获取此SNMP协议适配器可以并发处理的最大管理器数。
+     * 
+     * 
      * @return The maximum number of managers that this SNMP protocol adaptor
      *         can process concurrently.
      */
@@ -539,6 +711,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Sets the maximum number of managers this SNMP protocol adaptor can
      * process concurrently.
      *
+     * <p>
+     *  设置此SNMP协议适配器可以并发处理的最大管理器数。
+     * 
+     * 
      * @param c The number of managers.
      *
      * @exception java.lang.IllegalStateException This method has been invoked
@@ -552,6 +728,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Returns the Ip address based ACL used by this SNMP protocol adaptor.
+     * <p>
+     *  返回此SNMP协议适配器使用的基于IP地址的ACL。
+     * 
+     * 
      * @return The <CODE>InetAddressAcl</CODE> implementation.
      *
      * @since 1.5
@@ -565,6 +745,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Returns the port used by this SNMP protocol adaptor for sending traps.
      * By default, port 162 is used.
      *
+     * <p>
+     *  返回此SNMP协议适配器用于发送陷阱的端口。默认情况下,使用端口162。
+     * 
+     * 
      * @return The port number for sending SNMP traps.
      */
     @Override
@@ -575,6 +759,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Sets the port used by this SNMP protocol adaptor for sending traps.
      *
+     * <p>
+     *  设置此SNMP协议适配器用于发送陷阱的端口。
+     * 
+     * 
      * @param port The port number for sending SNMP traps.
      */
     @Override
@@ -585,6 +773,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Sets the port used by this SNMP protocol adaptor for sending traps.
      *
+     * <p>
+     *  设置此SNMP协议适配器用于发送陷阱的端口。
+     * 
+     * 
      * @param port The port number for sending SNMP traps.
      */
     public void setTrapPort(int port) {
@@ -598,6 +790,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Returns the port used by this SNMP protocol adaptor for sending
      * inform requests. By default, port 162 is used.
      *
+     * <p>
+     *  返回此SNMP协议适配器用于发送通知请求的端口。默认情况下,使用端口162。
+     * 
+     * 
      * @return The port number for sending SNMP inform requests.
      */
     @Override
@@ -609,6 +805,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Sets the port used by this SNMP protocol adaptor for sending
      * inform requests.
      *
+     * <p>
+     *  设置此SNMP协议适配器用于发送通知请求的端口。
+     * 
+     * 
      * @param port The port number for sending SNMP inform requests.
      */
     @Override
@@ -622,6 +822,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the protocol of this SNMP protocol adaptor.
      *
+     * <p>
+     *  返回此SNMP协议适配器的协议。
+     * 
+     * 
      * @return The string "snmp".
      */
     @Override
@@ -635,6 +839,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * inform requests.
      * By default, buffer size 1024 is used.
      *
+     * <p>
+     * 返回此SNMP协议适配器的缓冲区大小。此缓冲区大小用于传入请求和传出通知请求。默认情况下,使用缓冲区大小1024。
+     * 
+     * 
      * @return The buffer size.
      */
     @Override
@@ -647,6 +855,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * This buffer size is used for both incoming request and outgoing
      * inform requests.
      *
+     * <p>
+     *  设置此SNMP协议适配器的缓冲区大小。此缓冲区大小用于传入请求和传出通知请求。
+     * 
+     * 
      * @param s The buffer size.
      *
      * @exception java.lang.IllegalStateException This method has been invoked
@@ -666,6 +878,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Gets the number of times to try sending an inform request before
      * giving up.
      * By default, a maximum of 3 tries is used.
+     * <p>
+     *  获取在放弃之前尝试发送通知请求的次数。默认情况下,最多使用3次尝试。
+     * 
+     * 
      * @return The maximun number of tries.
      */
     @Override
@@ -676,6 +892,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Changes the maximun number of times to try sending an inform
      * request before giving up.
+     * <p>
+     *  更改最大尝试次数,尝试在放弃之前发送通知请求。
+     * 
+     * 
      * @param newMaxTries The maximun number of tries.
      */
     @Override
@@ -688,6 +908,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Gets the timeout to wait for an inform response from the manager.
      * By default, a timeout of 3 seconds is used.
+     * <p>
+     *  获取超时,等待管理器发出通知响应。默认情况下,使用3秒的超时。
+     * 
+     * 
      * @return The value of the timeout property.
      */
     @Override
@@ -697,6 +921,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Changes the timeout to wait for an inform response from the manager.
+     * <p>
+     *  更改超时以等待管理器发出通知响应。
+     * 
+     * 
      * @param newTimeout The timeout (in milliseconds).
      */
     @Override
@@ -709,6 +937,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the message factory of this SNMP protocol adaptor.
      *
+     * <p>
+     *  返回此SNMP协议适配器的消息工厂。
+     * 
+     * 
      * @return The factory object.
      */
     @Override
@@ -719,6 +951,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Sets the message factory of this SNMP protocol adaptor.
      *
+     * <p>
+     *  设置此SNMP协议适配器的消息出厂。
+     * 
+     * 
      * @param factory The factory object (null means the default factory).
      */
     @Override
@@ -732,6 +968,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Set the user-data factory of this SNMP protocol adaptor.
      *
+     * <p>
+     *  设置此SNMP协议适配器的用户数据出厂设置。
+     * 
+     * 
      * @param factory The factory object (null means no factory).
      * @see com.sun.jmx.snmp.agent.SnmpUserDataFactory
      */
@@ -743,6 +983,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Get the user-data factory associated with this SNMP protocol adaptor.
      *
+     * <p>
+     *  获取与此SNMP协议适配器关联的用户数据工厂。
+     * 
+     * 
      * @return The factory object (null means no factory).
      * @see com.sun.jmx.snmp.agent.SnmpUserDataFactory
      */
@@ -760,6 +1004,14 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * <P>
      * The default behaviour is to send authentication traps.
      *
+     * <p>
+     *  如果启用了身份验证陷阱,则返回<CODE> true </CODE>。
+     * <P>
+     *  启用此功能时,SNMP协议适配器会在每次认证失败时发送<CODE> authenticationFailure </CODE>陷阱。
+     * <P>
+     *  默认行为是发送身份验证陷阱。
+     * 
+     * 
      * @return <CODE>true</CODE> if authentication traps are enabled,
      *         <CODE>false</CODE> otherwise.
      */
@@ -772,6 +1024,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Sets the flag indicating if traps need to be sent in case of
      * authentication failure.
      *
+     * <p>
+     *  设置标志,指​​示在认证失败的情况下是否需要发送陷阱。
+     * 
+     * 
      * @param enabled Flag indicating if traps need to be sent.
      */
     @Override
@@ -790,6 +1046,15 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * <P>
      * The default behavior is to send responses.
      *
+     * <p>
+     *  如果此SNMP协议适配器在认证失败的情况下发送响应,则返回<code> true </code>。
+     * <P>
+     * 启用此功能时,当认证失败时,SNMP协议适配器会发送一个带有<CODE> noSuchName </CODE>或<CODE> readOnly </CODE>的响应。
+     * 如果禁用该标志,SNMP协议适配器将静默地丢弃PDU。
+     * <P>
+     *  默认行为是发送响应。
+     * 
+     * 
      * @return <CODE>true</CODE> if responses are sent.
      */
     @Override
@@ -801,6 +1066,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Sets the flag indicating if responses need to be sent in case of
      * authentication failure.
      *
+     * <p>
+     *  设置指示在认证失败的情况下是否需要发送响应的标志。
+     * 
+     * 
      * @param enabled Flag indicating if responses need to be sent.
      */
     @Override
@@ -813,6 +1082,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * {@link #snmpV1Trap snmpV1Trap} to fill the 'enterprise' field of the
      * trap request.
      *
+     * <p>
+     *  返回企业OID。它由{@link#snmpV1Trap snmpV1Trap}用于填充陷阱请求的"enterprise"字段。
+     * 
+     * 
      * @return The OID in string format "x.x.x.x".
      */
     @Override
@@ -823,6 +1096,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Sets the enterprise OID.
      *
+     * <p>
+     *  设置企业OID。
+     * 
+     * 
      * @param oid The OID in string format "x.x.x.x".
      *
      * @exception IllegalArgumentException The string format is incorrect
@@ -835,6 +1112,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the names of the MIBs available in this SNMP protocol adaptor.
      *
+     * <p>
+     *  返回此SNMP协议适配器中可用的MIB的名称。
+     * 
+     * 
      * @return An array of MIB names.
      */
     @Override
@@ -854,6 +1135,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpOutTraps</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpOutTraps </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpOutTraps</CODE> value.
      */
     @Override
@@ -864,6 +1149,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpOutGetResponses</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpOutGetResponses </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpOutGetResponses</CODE> value.
      */
     @Override
@@ -874,6 +1163,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpOutGenErrs</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpOutGenErrs </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpOutGenErrs</CODE> value.
      */
     @Override
@@ -884,6 +1177,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpOutBadValues</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpOutBadValues </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpOutBadValues</CODE> value.
      */
     @Override
@@ -894,6 +1191,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpOutNoSuchNames</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpOutNoSuchNames </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpOutNoSuchNames</CODE> value.
      */
     @Override
@@ -904,6 +1205,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpOutTooBigs</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpOutTooBigs </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpOutTooBigs</CODE> value.
      */
     @Override
@@ -914,6 +1219,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInASNParseErrs</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInASNParseErrs </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInASNParseErrs</CODE> value.
      */
     @Override
@@ -924,6 +1233,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInBadCommunityUses</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInBadCommunityUses </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInBadCommunityUses</CODE> value.
      */
     @Override
@@ -935,6 +1248,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Returns the <CODE>snmpInBadCommunityNames</CODE> value defined in
      * MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInBadCommunityNames </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInBadCommunityNames</CODE> value.
      */
     @Override
@@ -945,6 +1262,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInBadVersions</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInBadVersions </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInBadVersions</CODE> value.
      */
     @Override
@@ -955,6 +1276,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpOutPkts</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpOutPkts </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpOutPkts</CODE> value.
      */
     @Override
@@ -965,6 +1290,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInPkts</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInPkts </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInPkts</CODE> value.
      */
     @Override
@@ -975,6 +1304,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInGetRequests</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInGetRequests </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInGetRequests</CODE> value.
      */
     @Override
@@ -985,6 +1318,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInGetNexts</CODE> value defined in MIB-II.
      *
+     * <p>
+     * 返回在MIB-II中定义的<CODE> snmpInGetNexts </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInGetNexts</CODE> value.
      */
     @Override
@@ -995,6 +1332,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInSetRequests</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInSetRequests </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInSetRequests</CODE> value.
      */
     @Override
@@ -1005,6 +1346,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInTotalSetVars</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInTotalSetVars </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInTotalSetVars</CODE> value.
      */
     @Override
@@ -1015,6 +1360,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the <CODE>snmpInTotalReqVars</CODE> value defined in MIB-II.
      *
+     * <p>
+     *  返回在MIB-II中定义的<CODE> snmpInTotalReqVars </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpInTotalReqVars</CODE> value.
      */
     @Override
@@ -1026,6 +1375,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Returns the <CODE>snmpSilentDrops</CODE> value defined in RFC
      * 1907 NMPv2-MIB .
      *
+     * <p>
+     *  返回在RFC 1907 NMPv2-MIB中定义的<CODE> snmpSilentDrops </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpSilentDrops</CODE> value.
      *
      * @since 1.5
@@ -1039,6 +1392,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Returns the <CODE>snmpProxyDrops</CODE> value defined in RFC
      * 1907 NMPv2-MIB .
      *
+     * <p>
+     *  返回在RFC 1907 NMPv2-MIB中定义的<CODE> snmpProxyDrops </CODE>值。
+     * 
+     * 
      * @return The <CODE>snmpProxyDrops</CODE> value.
      *
      * @since 1.5
@@ -1064,6 +1421,14 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * If any exception is raised, the SNMP protocol adaptor MBean will
      * not be registered in the MBean server.
      *
+     * <p>
+     *  允许MBean在注册到MBean服务器之前执行其所需的任何操作。
+     * 如果未指定SNMP协议适配器MBean的名称,则使用缺省值初始化它：{@link com.sun.jmx.snmp.ServiceName#DOMAIN com.sun.jmx.snmp.ServiceName.DOMAIN}
+     * ：{@链接com.sun.jmx.snmp.ServiceName#SNMP_ADAPTOR_SERVER com.sun.jmx.snmp.ServiceName.SNMP_ADAPTOR_SERVER}
+     * 。
+     *  允许MBean在注册到MBean服务器之前执行其所需的任何操作。如果出现任何异常,SNMP协议适配器MBean将不会在MBean服务器中注册。
+     * 
+     * 
      * @param server The MBean server to register the service with.
      * @param name The object name.
      *
@@ -1084,6 +1449,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Not used in this context.
+     * <p>
+     *  在此上下文中未使用。
+     * 
      */
     @Override
     public void postRegister (Boolean registrationDone) {
@@ -1092,6 +1460,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Not used in this context.
+     * <p>
+     *  在此上下文中未使用。
+     * 
      */
     @Override
     public void preDeregister() throws java.lang.Exception {
@@ -1100,6 +1471,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Not used in this context.
+     * <p>
+     *  在此上下文中未使用。
+     * 
      */
     @Override
     public void postDeregister() {
@@ -1109,6 +1483,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Adds a new MIB in the SNMP MIB handler.
      *
+     * <p>
+     *  在SNMP MIB处理程序中添加一个新的MIB。
+     * 
+     * 
      * @param mib The MIB to add.
      *
      * @return A reference to the SNMP MIB handler.
@@ -1137,6 +1515,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Some OID can be implemented in more than one MIB. In this case,
      * the OID nearer agent will be used on SNMP operations.
      *
+     * <p>
+     *  在SNMP MIB处理程序中添加一个新的MIB。调用此方法以将特定代理设置为特定OID。这在处理MIB重叠时很有用。一些OID可以在多个MIB中实现。在这种情况下,OID近端代理将用于SNMP操作。
+     * 
+     * 
      * @param mib The MIB to add.
      * @param oids The set of OIDs this agent implements.
      *
@@ -1171,6 +1553,11 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * <CODE>contextName</CODE> is useless and this method
      * is equivalent to <CODE>addMib(SnmpMibAgent mib)</CODE>.
      *
+     * <p>
+     * 在SNMP MIB处理程序中添加一个新的MIB。
+     * 在SNMP V1和V2中,<CODE> contextName </CODE>是无用的,此方法等效于<CODE> addMib(SnmpMibAgent mib)</CODE>。
+     * 
+     * 
      * @param mib The MIB to add.
      * @param contextName The MIB context name.
      * @return A reference on the SNMP MIB handler.
@@ -1190,6 +1577,13 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * <CODE>contextName</CODE> is useless and this method
      * is equivalent to <CODE>addMib(SnmpMibAgent mib, SnmpOid[] oids)</CODE>.
      *
+     * <p>
+     *  在SNMP MIB处理程序中添加一个新的MIB。
+     * 在SNMP V1和V2中,<CODE> contextName </CODE>是无用的,此方法等效于<CODE> addMib(SnmpMibAgent mib,SnmpOid [] oids)</CODE>
+     * 。
+     *  在SNMP MIB处理程序中添加一个新的MIB。
+     * 
+     * 
      * @param mib The MIB to add.
      * @param contextName The MIB context. If null is passed, will be
      *        registered in the default context.
@@ -1215,6 +1609,11 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * In SNMP V1 and V2 the <CODE>contextName</CODE> is useless and this
      * method is equivalent to <CODE>removeMib(SnmpMibAgent mib)</CODE>.
      *
+     * <p>
+     *  从SNMP协议适配器中删除指定的MIB。
+     * 在SNMP V1和V2中,<CODE> contextName </CODE>是无用的,此方法等效于<CODE> removeMib(SnmpMibAgent mib)</CODE>。
+     * 
+     * 
      * @param mib The MIB to be removed.
      * @param contextName The context name used at registration time.
      *
@@ -1232,6 +1631,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Removes the specified MIB from the SNMP protocol adaptor.
      *
+     * <p>
+     *  从SNMP协议适配器中删除指定的MIB。
+     * 
+     * 
      * @param mib The MIB to be removed.
      *
      * @return <CODE>true</CODE> if the specified <CODE>mib</CODE> was a MIB
@@ -1246,6 +1649,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Removes the specified MIB from the SNMP protocol adaptor.
      *
+     * <p>
+     *  从SNMP协议适配器中删除指定的MIB。
+     * 
+     * 
      * @param mib The MIB to be removed.
      * @param oids The oid the MIB was previously registered for.
      * @return <CODE>true</CODE> if the specified <CODE>mib</CODE> was
@@ -1263,6 +1670,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      /**
      * Removes the specified MIB from the SNMP protocol adaptor.
      *
+     * <p>
+     *  从SNMP协议适配器中删除指定的MIB。
+     * 
+     * 
      * @param mib The MIB to be removed.
      * @param contextName The context name used at registration time.
      * @param oids The oid the MIB was previously registered for.
@@ -1284,6 +1695,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Creates the datagram socket.
+     * <p>
+     *  创建数据报套接字。
+     * 
      */
     @Override
     protected void doBind()
@@ -1311,6 +1725,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Return the actual port to which the adaptor is bound.
      * Can be different from the port given at construction time if
      * that port number was 0.
+     * <p>
+     *  返回适配器绑定的实际端口。如果该端口号为0,则可以不同于在构建时给定的端口。
+     * 
+     * 
      * @return the actual port to which the adaptor is bound.
      **/
     @Override
@@ -1323,6 +1741,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Closes the datagram socket.
+     * <p>
+     *  关闭数据报套接字。
+     * 
      */
     @Override
     protected void doUnbind()
@@ -1362,6 +1783,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Reads a packet from the datagram socket and creates a request
      * handler which decodes and processes the request.
+     * <p>
+     *  从数据报套接字读取数据包,并创建一个请求处理程序,对请求进行解码和处理。
+     * 
      */
     @Override
     protected void doReceive()
@@ -1411,6 +1835,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Not used in this context.
+     * <p>
+     *  在此上下文中未使用。
+     * 
      */
     @Override
     protected void doProcess()
@@ -1422,6 +1849,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * The number of times the communicator server will attempt
      * to bind before giving up.
      * We attempt only once...
+     * <p>
+     *  通信器服务器在放弃之前将尝试绑定的次数。我们只尝试一次...
+     * 
+     * 
      * @return 1
      **/
     @Override
@@ -1435,6 +1866,11 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * <p>
      * Has no effect if this SNMP protocol adaptor is <CODE>OFFLINE</CODE> or
      * <CODE>STOPPING</CODE>.
+     * <p>
+     *  停止此SNMP协议适配器。关闭数据报套接字。
+     * <p>
+     *  如果此SNMP协议适配器为<CODE> OFFLINE </CODE>或<CODE> STOPPING </CODE>,则不起作用。
+     * 
      */
     @Override
     public void stop(){
@@ -1485,6 +1921,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * If no ACL file or no destinations are available, the trap is sent
      * to the local host.
      *
+     * <p>
+     * 使用SNMP V1陷阱格式发送陷阱。 <BR>陷阱发送到ACL文件中定义的每个目标(如果可用)。如果没有ACL文件或没有目标可用,则将陷阱发送到本地主机。
+     * 
+     * 
      * @param generic The generic number of the trap.
      * @param specific The specific number of the trap.
      * @param varBindList A list of <CODE>SnmpVarBind</CODE> instances or null.
@@ -1559,6 +1999,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * destination using the specified community string (and the ACL file
      * is not used).
      *
+     * <p>
+     *  使用SNMP V1陷阱格式发送陷阱。 <BR>使用指定的社区字符串将陷阱发送到指定的<CODE> InetAddress </CODE>目标(并且不使用ACL文件)。
+     * 
+     * 
      * @param addr The <CODE>InetAddress</CODE> destination of the trap.
      * @param cs The community string to be used for the trap.
      * @param generic The generic number of the trap.
@@ -1632,6 +2076,11 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Note that if the specified <CODE>InetAddress</CODE> destination is null,
      * then the ACL file mechanism is used.
      *
+     * <p>
+     *  使用SNMP V1陷阱格式发送陷阱。 <BR>使用指定的参数将陷阱发送到指定的<CODE> InetAddress </CODE>目标(并且不使用ACL文件)。
+     * 请注意,如果指定的<CODE> InetAddress </CODE>目标为null,那么将使用ACL文件机制。
+     * 
+     * 
      * @param addr The <CODE>InetAddress</CODE> destination of the trap.
      * @param agentAddr The agent address to be used for the trap.
      * @param cs The community string to be used for the trap.
@@ -1674,6 +2123,11 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * <CODE>SnmpPeer</CODE> parameters
      * (<CODE>SnmpParameters.getRdCommunity() </CODE>).
      *
+     * <p>
+     *  使用SNMP V1陷阱格式发送陷阱。 <BR>陷阱发送到指定的<CODE> SnmpPeer </CODE>目标。
+     * 使用的团体字符串是位于<CODE> SnmpPeer </CODE>参数(<CODE> SnmpParameters.getRdCommunity()</CODE>)中的团体字符串。
+     * 
+     * 
      * @param peer The <CODE>SnmpPeer</CODE> destination of the trap.
      * @param agentAddr The agent address to be used for the trap.
      * @param enterpOid The enterprise OID to be used for the trap.
@@ -1807,6 +2261,16 @@ public class SnmpAdaptorServer extends CommunicatorServer
      *     <CODE>varBindList</CODE></LI>
      * </UL>
      *
+     * <p>
+     *  使用SNMP V2陷阱格式发送陷阱。 <BR>陷阱发送到指定的<CODE> SnmpPeer </CODE>目标。
+     *  <BR>所使用的社区字符串是位于<CODE> SnmpPeer </CODE>参数(<CODE> SnmpParameters.getRdCommunity()</CODE>)中的字符串。
+     *  <BR>包含在输出陷阱中的变量列表由以下项目组成：。
+     * <UL>
+     * <CODE>时间</CODE> </LI> <LI> <CODE> snmpTrapOid.0 </CODE>指定的值的<CODE> sysUpTime.0 </CODE> > CODE> varBin
+     * dList </CODE> </LI> </CODE>的所有(oid,值)</CODE>。
+     * </UL>
+     * 
+     * 
      * @param peer The <CODE>SnmpPeer</CODE> destination of the trap.
      * @param trapOid The OID identifying the trap.
      * @param varBindList A list of <CODE>SnmpVarBind</CODE> instances or null.
@@ -1849,6 +2313,15 @@ public class SnmpAdaptorServer extends CommunicatorServer
      *     <CODE>varBindList</CODE></LI>
      * </UL>
      *
+     * <p>
+     *  使用SNMP V2陷阱格式发送陷阱。 <BR>陷阱发送到ACL文件中定义的每个目标(如果可用)。如果没有ACL文件或没有目标可用,则将陷阱发送到本地主机。
+     *  <BR>包含在输出陷阱中的变量列表由以下项目组成：。
+     * <UL>
+     *  <CODE>与<CODE>一起使用<CODE> trapOid </CODE> </LI>指定的值,将其当前值</LI> <LI> <CODE> snmpTrapOid.0 </CODE>从指定的<CODE>
+     *  varBindList </CODE> </LI>中选择所有(oid,值)</CODE>。
+     * </UL>
+     * 
+     * 
      * @param trapOid The OID identifying the trap.
      * @param varBindList A list of <CODE>SnmpVarBind</CODE> instances or null.
      *
@@ -1907,6 +2380,15 @@ public class SnmpAdaptorServer extends CommunicatorServer
      *     <CODE>varBindList</CODE></LI>
      * </UL>
      *
+     * <p>
+     *  使用SNMP V2陷阱格式发送陷阱。 <BR>使用指定的社区字符串将陷阱发送到指定的<CODE> InetAddress </CODE>目标(并且不使用ACL文件)。
+     *  <BR>包含在输出陷阱中的变量列表由以下项目组成：。
+     * <UL>
+     *  <CODE>与<CODE>一起使用<CODE> trapOid </CODE> </LI>指定的值,将其当前值</LI> <LI> <CODE> snmpTrapOid.0 </CODE>从指定的<CODE>
+     *  varBindList </CODE> </LI>中选择所有(oid,值)</CODE>。
+     * </UL>
+     * 
+     * 
      * @param addr The <CODE>InetAddress</CODE> destination of the trap.
      * @param cs The community string to be used for the trap.
      * @param trapOid The OID identifying the trap.
@@ -1978,6 +2460,15 @@ public class SnmpAdaptorServer extends CommunicatorServer
      *     <CODE>varBindList</CODE></LI>
      * </UL>
      *
+     * <p>
+     * 使用SNMP V2陷阱格式发送陷阱。 <BR>使用指定的参数将陷阱发送到指定的<CODE> InetAddress </CODE>目标(并且不使用ACL文件)。
+     * 请注意,如果指定的<CODE> InetAddress </CODE>目标为null,那么将使用ACL文件机制。 <BR>包含在输出陷阱中的变量列表由以下项目组成：。
+     * <UL>
+     *  <CODE>时间</CODE> </LI> <LI> <CODE> snmpTrapOid.0 </CODE>指定的值的<CODE> sysUpTime.0 </CODE> > CODE> varBi
+     * ndList </CODE> </LI> </CODE>的所有(oid,值)</CODE>。
+     * </UL>
+     * 
+     * 
      * @param addr The <CODE>InetAddress</CODE> destination of the trap.
      * @param cs The community string to be used for the trap.
      * @param trapOid The OID identifying the trap.
@@ -2071,6 +2562,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Send the specified trap PDU to the passed <CODE>InetAddress</CODE>.
+     * <p>
+     *  将指定的陷阱PDU发送到传递的<CODE> InetAddress </CODE>。
+     * 
+     * 
      * @param address The destination address.
      * @param pdu The pdu to send.
      * @exception IOException An I/O error occurred while sending the trap.
@@ -2091,6 +2586,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Send the specified trap PDU to the passed <CODE>SnmpPeer</CODE>.
+     * <p>
+     *  将指定的陷阱PDU发送到传递的<CODE> SnmpPeer </CODE>。
+     * 
+     * 
      * @param peer The destination peer. The Read community string is used of
      * <CODE>SnmpParameters</CODE> is used as the trap community string.
      * @param pdu The pdu to send.
@@ -2115,6 +2614,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Send the specified trap PDU to every destinations from the ACL file.
+     * <p>
+     *  将指定的陷阱PDU从ACL文件发送到每个目的地。
+     * 
      */
     private void sendTrapPdu(SnmpPduPacket pdu)
      throws SnmpStatusException, IOException {
@@ -2194,6 +2696,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Send the specified trap PDU to the specified destination.
+     * <p>
+     *  将指定的陷阱PDU发送到指定的目标。
+     * 
      */
     private void sendTrapPdu(InetAddress addr, SnmpPduPacket pdu)
         throws SnmpStatusException, IOException {
@@ -2239,6 +2744,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Send the specified message on trapSocket.
+     * <p>
+     *  在trapSocket上发送指定的消息。
+     * 
      */
     private void sendTrapMessage(SnmpMessage msg)
         throws IOException, SnmpTooBigException {
@@ -2266,6 +2774,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Open trapSocket if it's not already done.
+     * <p>
+     *  如果尚未完成,请打开trapSocket。
+     * 
      */
     synchronized void openTrapSocketIfNeeded() throws SocketException {
         if (trapSocket == null) {
@@ -2280,6 +2791,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Close trapSocket if the SNMP protocol adaptor is not ONLINE.
+     * <p>
+     *  如果SNMP协议适配器不是ONLINE,请关闭trapSocket。
+     * 
      */
     synchronized void closeTrapSocketIfNeeded() {
         if ((trapSocket != null) && (state != ONLINE)) {
@@ -2308,6 +2822,16 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * </UL>
      * To send an inform request, the SNMP adaptor server must be active.
      *
+     * <p>
+     *  使用SNMP V2通知请求格式发送通知。 <BR>通知请求发送到ACL文件中定义的每个目标(如果可用)。如果没有ACL文件或没有目标可用,则通知请求将发送到本地主机。
+     *  <BR>传出通知中包含的变量列表由以下项目组成：。
+     * <UL>
+     * <CODE>与<CODE>一起使用<CODE> trapOid </CODE> </LI>指定的值,将其当前值</LI> <LI> <CODE> snmpTrapOid.0 </CODE>从指定的<CODE>
+     *  varBindList </CODE> </LI>中选择所有(oid,值)</CODE>。
+     * </UL>
+     *  要发送通知请求,SNMP适配器服务器必须处于活动状态。
+     * 
+     * 
      * @param cb The callback that is invoked when a request is complete.
      * @param trapOid The OID identifying the trap.
      * @param varBindList A list of <CODE>SnmpVarBind</CODE> instances or null.
@@ -2394,6 +2918,15 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * </UL>
      * To send an inform request, the SNMP adaptor server must be active.
      *
+     * <p>
+     *  使用SNMP V2通知请求格式发送通知。 <BR>通知使用指定的社区字符串发送到指定的<CODE> InetAddress </CODE>目标。 <BR>传出通知中包含的变量列表由以下项目组成：
+     * <UL>
+     *  <CODE>与<CODE>一起使用<CODE> trapOid </CODE> </LI>指定的值,将其当前值</LI> <LI> <CODE> snmpTrapOid.0 </CODE>从指定的<CODE>
+     *  varBindList </CODE> </LI>中选择所有(oid,值)</CODE>。
+     * </UL>
+     *  要发送通知请求,SNMP适配器服务器必须处于活动状态。
+     * 
+     * 
      * @param addr The <CODE>InetAddress</CODE> destination for this inform
      *             request.
      * @param cs The community string to be used for the inform request.
@@ -2444,6 +2977,17 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * </UL>
      * To send an inform request, the SNMP adaptor server must be active.
      *
+     * <p>
+     *  使用SNMP V2通知请求格式发送通知。 <BR>通知发送到指定的<CODE> SnmpPeer </CODE>目标。
+     *  <BR>使用的社区字符串是位于<CODE> SnmpPeer </CODE>参数(<CODE> SnmpParameters.getInformCommunity()</CODE>)中的字符串。
+     *  <BR>传出通知中包含的变量列表由以下项目组成：。
+     * <UL>
+     *  <CODE>与<CODE>一起使用<CODE> trapOid </CODE> </LI>指定的值,将其当前值</LI> <LI> <CODE> snmpTrapOid.0 </CODE>从指定的<CODE>
+     *  varBindList </CODE> </LI>中选择所有(oid,值)</CODE>。
+     * </UL>
+     * 要发送通知请求,SNMP适配器服务器必须处于活动状态。
+     * 
+     * 
      * @param peer The <CODE>SnmpPeer</CODE> destination for this inform
      *             request.
      * @param cb The callback that is invoked when a request is complete.
@@ -2480,6 +3024,10 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Method that maps an SNMP error status in the passed protocolVersion
      * according to the provided pdu type.
+     * <p>
+     *  根据提供的pdu类型映射传递的protocolVersion中的SNMP错误状态的方法。
+     * 
+     * 
      * @param errorStatus The error status to convert.
      * @param protocolVersion The protocol version.
      * @param reqPduType The pdu type.
@@ -2531,6 +3079,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Open informSocket if it's not already done.
+     * <p>
+     *  打开informSocket如果还没有完成。
+     * 
      */
     synchronized void openInformSocketIfNeeded() throws SocketException {
         if (informSession == null) {
@@ -2545,6 +3096,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Close informSocket if the SNMP protocol adaptor is not ONLINE.
+     * <p>
+     *  如果SNMP协议适配器不是ONLINE,请关闭informSocket。
+     * 
      */
     synchronized void closeInformSocketIfNeeded() {
         if ((informSession != null) && (state != ONLINE)) {
@@ -2557,6 +3111,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * Gets the IP address to bind.
      * This getter is used to initialize the DatagramSocket in the
      * SnmpSocket object created for the inform request stuff.
+     * <p>
+     *  获取要绑定的IP地址。这个getter用于初始化为notify请求创建的SnmpSocket对象中的DatagramSocket。
+     * 
      */
     InetAddress getAddress() {
         return address;
@@ -2572,6 +3129,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
      * when garbage collection determines that there are no more
      * references to the object.
      * <P>Closes the datagram socket associated to this SNMP protocol adaptor.
+     * <p>
+     *  SNMP协议适配器对象的终结器。当垃圾回收确定没有对对象的更多引用时,垃圾收集器在对象上调用此方法。 <P>关闭与此SNMP协议适配器关联的数据报套接字。
+     * 
      */
     @Override
     protected void finalize() {
@@ -2595,6 +3155,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Returns the string used in debug traces.
+     * <p>
+     *  返回调试跟踪中使用的字符串。
+     * 
      */
     @Override
     String makeDebugTag() {
@@ -2682,6 +3245,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
     /**
      * Returns the time (in hundreths of second) elapsed since the SNMP
      * protocol adaptor startup.
+     * <p>
+     *  返回自SNMP协议适配器启动以来经过的时间(以秒为单位)。
+     * 
      */
     long getSysUpTime() {
         return (System.currentTimeMillis() - startUpTime) / 10 ;
@@ -2689,6 +3255,9 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Control the way the SnmpAdaptorServer service is deserialized.
+     * <p>
+     *  控制SnmpAdaptorServer服务反序列化的方式。
+     * 
      */
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
@@ -2706,6 +3275,8 @@ public class SnmpAdaptorServer extends CommunicatorServer
 
     /**
      * Common initializations.
+     * <p>
+     *  常用初始化。
      */
     private void init(InetAddressAcl acl, int p, InetAddress a) {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,24 @@ import static java.lang.annotation.ElementType.PACKAGE;
  *
  * <p><b> Example: </b> See example in {@link XmlAdapter}
  *
+ * <p>
+ *  使用实现{@link XmlAdapter}的适配器进行自定义封送。
+ * 
+ *  <p> <b>用法：</b> </p>
+ * 
+ *  <p> <tt> @XmlJavaTypeAdapter </tt>注释可与以下程序元素一起使用：
+ * <ul>
+ *  <li> {@link XmlJavaTypeAdapters}中的</li> </li>字符串</li> <li>字段</li> <li>参数</li>
+ * </ul>
+ * 
+ *  <p>当<tt> @XmlJavaTypeAdapter </tt>注释在类上定义时,它将应用于对类的所有引用。
+ *  <p>当在包级别定义<tt> @XmlJavaTypeAdapter </tt>注释时,它适用于从包内到<tt> @ XmlJavaTypeAdapter.type()</tt>的所有引用。
+ *  <p>当对字段,属性或参数定义<tt> @XmlJavaTypeAdapter </tt>注释时,注释仅应用于字段,属性或参数。
+ *  <p>字段,属性或参数上的<tt> @XmlJavaTypeAdapter </tt>注释覆盖与字段,属性或参数引用的类关联的<tt> @XmlJavaTypeAdapter </tt>注释。
+ *  <p>类的<tt> @XmlJavaTypeAdapter </tt>注释会覆盖在该类的包级别指定的<tt> @XmlJavaTypeAdapter </tt>注释。
+ * 
+ * <p>此注释可与以下其他注释一起使用：{@link XmlElement},{@link XmlAttribute},{@link XmlElementRef},{@link XmlElementRefs}
+ * 
  * @author <ul><li>Sekhar Vajjhala, Sun Microsystems Inc.</li> <li> Kohsuke Kawaguchi, Sun Microsystems Inc.</li></ul>
  * @since JAXB2.0
  * @see XmlAdapter
@@ -95,12 +114,22 @@ public @interface XmlJavaTypeAdapter {
     /**
      * Points to the class that converts a value type to a bound type or vice versa.
      * See {@link XmlAdapter} for more details.
+     * <p>
+     * ,{@link XmlAnyElement}。
+     * 这也可以在包级别使用以下注释：{@link XmlAccessorType},{@link XmlSchema},{@link XmlSchemaType},{@link XmlSchemaTypes}
+     * 。
+     * 
+     *  <p> <b>示例：</b>请参见{@link XmlAdapter}
+     * 
      */
     Class<? extends XmlAdapter> value();
 
     /**
      * If this annotation is used at the package level, then value of
      * the type() must be specified.
+     * <p>
+     *  指向将值类型转换为绑定类型的类,反之亦然。有关详细信息,请参阅{@link XmlAdapter}。
+     * 
      */
 
     Class type() default DEFAULT.class;
@@ -109,6 +138,9 @@ public @interface XmlJavaTypeAdapter {
      * Used in {@link XmlJavaTypeAdapter#type()} to
      * signal that the type be inferred from the signature
      * of the field, property, parameter or the class.
+     * <p>
+     *  如果在包级别使用此注释,则必须指定type()的值。
+     * 
      */
 
     static final class DEFAULT {}

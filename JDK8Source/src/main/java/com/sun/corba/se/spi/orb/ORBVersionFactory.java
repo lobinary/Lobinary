@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,7 @@ public class ORBVersionFactory {
     }
 
     /** Return the current version of this ORB
+    /* <p>
      */
     public static ORBVersion getORBVersion()
     {
@@ -86,6 +88,10 @@ public class ORBVersionFactory {
         * unknown versions as the latest version.
         if (value < 0)
             throw new INTERNAL() ;
+        * <p>
+        *  与ORB的未来版本不兼容,以至于该版本甚至不能从使用扩展版本控制的较新版本解组objrefs。因此,我们将只处理所有未知版本作为最新版本。
+        *  if(value <0)throw new INTERNAL();。
+        * 
         */
 
         /**
@@ -98,6 +104,10 @@ public class ORBVersionFactory {
          * different.
          *
          * Instead, just capture the version bytes.
+         * <p>
+         *  更新：如果我们将所有未知版本作为最新版本,那么当我们发送带有PEORB版本的IOR到不知道PEORB版本的ORB时,它会将其视为最新版本的想法。
+         * 然后,如果该IOR被发送回服务器并与原始比较,则等式检查将失败,因为版本将不同。
+         * 
          */
 
         switch (value) {

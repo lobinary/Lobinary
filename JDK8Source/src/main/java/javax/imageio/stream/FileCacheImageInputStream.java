@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,9 @@ import sun.java2d.DisposerRecord;
  * input from a regular <code>InputStream</code>.  A file is used to
  * cache previously read data.
  *
+ * <p>
+ *  <code> ImageInputStream </code>的实现,它从普通的<code> InputStream </code>获取输入。文件用于缓存先前读取的数据。
+ * 
  */
 public class FileCacheImageInputStream extends ImageInputStreamImpl {
 
@@ -64,6 +68,8 @@ public class FileCacheImageInputStream extends ImageInputStreamImpl {
     private final DisposerRecord disposerRecord;
 
     /** The CloseAction that closes the stream in
+    /* <p>
+    /* 
      *  the StreamCloser's shutdown hook                     */
     private final StreamCloser.CloseAction closeAction;
 
@@ -78,6 +84,13 @@ public class FileCacheImageInputStream extends ImageInputStreamImpl {
      * directory will be used (see the documentation for
      * <code>File.createTempFile</code> for details).
      *
+     * <p>
+     *  构造将从给定的<code> InputStream </code>读取的<code> FileCacheImageInputStream </code>。
+     * 
+     *  <p>临时文件用作缓存。如果<code> cacheDir </code>是非<code> null </code>并且是目录,那么将在那里创建文件。
+     * 如果是<code> null </code>,将使用系统相关的默认临时文件目录(有关详细信息,请参阅<code> File.createTempFile </code>的文档)。
+     * 
+     * 
      * @param stream an <code>InputStream</code> to read from.
      * @param cacheDir a <code>File</code> indicating where the
      * cache file should be created, or <code>null</code> to use the
@@ -122,6 +135,9 @@ public class FileCacheImageInputStream extends ImageInputStreamImpl {
      * or the end of the source is reached.  The return value
      * is equal to the smaller of <code>pos</code> and the
      * length of the source file.
+     * <p>
+     *  确保至少<code> pos </code>字节已缓存,或达到源的结尾。返回值等于<code> pos </code>和源文件的长度中的较小值。
+     * 
      */
     private long readUntil(long pos) throws IOException {
         // We've already got enough data cached
@@ -203,6 +219,10 @@ public class FileCacheImageInputStream extends ImageInputStreamImpl {
      * <code>ImageInputStream</code> caches data in order to allow
      * seeking backwards.
      *
+     * <p>
+     *  返回<code> true </code>,因为此<code> ImageInputStream </code>缓存数据以允许向后搜索。
+     * 
+     * 
      * @return <code>true</code>.
      *
      * @see #isCachedMemory
@@ -216,6 +236,10 @@ public class FileCacheImageInputStream extends ImageInputStreamImpl {
      * Returns <code>true</code> since this
      * <code>ImageInputStream</code> maintains a file cache.
      *
+     * <p>
+     *  返回<code> true </code>,因为此<code> ImageInputStream </code>维护文件缓存。
+     * 
+     * 
      * @return <code>true</code>.
      *
      * @see #isCached
@@ -230,6 +254,10 @@ public class FileCacheImageInputStream extends ImageInputStreamImpl {
      * <code>ImageInputStream</code> does not maintain a main memory
      * cache.
      *
+     * <p>
+     *  返回<code> false </code>,因为此<code> ImageInputStream </code>不维护主内存缓存。
+     * 
+     * 
      * @return <code>false</code>.
      *
      * @see #isCached
@@ -244,6 +272,10 @@ public class FileCacheImageInputStream extends ImageInputStreamImpl {
      * and removing the cache file.  The source <code>InputStream</code>
      * is not closed.
      *
+     * <p>
+     *  关闭此<code> FileCacheImageInputStream </code>,关闭和删除缓存文件。源<code> InputStream </code>未关闭。
+     * 
+     * 
      * @exception IOException if an error occurs.
      */
     public void close() throws IOException {
@@ -257,6 +289,8 @@ public class FileCacheImageInputStream extends ImageInputStreamImpl {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     protected void finalize() throws Throwable {
         // Empty finalizer: for performance reasons we instead use the

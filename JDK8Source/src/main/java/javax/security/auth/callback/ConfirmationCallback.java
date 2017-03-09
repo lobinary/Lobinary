@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,11 @@ package javax.security.auth.callback;
  * method of a {@code CallbackHandler} to ask for YES/NO,
  * OK/CANCEL, YES/NO/CANCEL or other similar confirmations.
  *
+ * <p>
+ *  <p>基础安全服务会实例化{@code ConfirmationCallback}并传送给{@code CallbackHandler}的{@code handle}方法,要求提供YES / NO,O
+ * K / CANCEL,YES / NO / CANCEL或其他类似确认。
+ * 
+ * 
  * @see javax.security.auth.callback.CallbackHandler
  */
 public class ConfirmationCallback implements Callback, java.io.Serializable {
@@ -43,6 +49,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      * <p> The {@code getOptionType} method returns this
      * value if this {@code ConfirmationCallback} was instantiated
      * with {@code options} instead of an {@code optionType}.
+     * <p>
+     *  未指定的选项类型。
+     * 
+     *  <p>如果{@code ConfirmationCallback}使用{@code options}而不是{@code optionType}实例化,{@code getOptionType}方法会返
+     * 回此值。
+     * 
      */
     public static final int UNSPECIFIED_OPTION          = -1;
 
@@ -53,6 +65,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      * {@code optionType} to a {@code ConfirmationCallback}
      * constructor if it requires a confirmation which can be answered
      * with either {@code YES} or {@code NO}.
+     * <p>
+     *  是/否确认选项。
+     * 
+     *  <p>如果底层安全服务需要可以使用{@code YES}或{@code NO}来回答的确认,那么底层安全服务会将其指定为{@code ConfirmationCallback}构造函数的{@code optionType}
+     * 。
+     * 
      */
     public static final int YES_NO_OPTION               = 0;
 
@@ -63,6 +81,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      * {@code optionType} to a {@code ConfirmationCallback}
      * constructor if it requires a confirmation which can be answered
      * with either {@code YES}, {@code NO} or {@code CANCEL}.
+     * <p>
+     *  YES / NO / CANCEL确认确认选项。
+     * 
+     *  <p>如果底层安全服务需要可以使用{@code YES},{@code NO}或{@code}来回答的确认,那么底层安全服务会将其指定为{@code ConfirmationCallback}构造函数
+     * 的{@code optionType}取消}。
+     * 
      */
     public static final int YES_NO_CANCEL_OPTION        = 1;
 
@@ -73,6 +97,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      * {@code optionType} to a {@code ConfirmationCallback}
      * constructor if it requires a confirmation which can be answered
      * with either {@code OK} or {@code CANCEL}.
+     * <p>
+     *  确定/取消确认确认选项。
+     * 
+     *  <p>如果底层安全服务要求可以使用{@code OK}或{@code CANCEL}应答的确认,则此底层安全服务会将其指定为{@code ConfirmationCallback}构造函数的{@code optionType}
+     * 。
+     * 
      */
     public static final int OK_CANCEL_OPTION            = 2;
 
@@ -82,6 +112,11 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      * <p> If an {@code optionType} was specified to this
      * {@code ConfirmationCallback}, this option may be specified as a
      * {@code defaultOption} or returned as the selected index.
+     * <p>
+     *  YES选项。
+     * 
+     * <p>如果为此{@code ConfirmationCallback}指定了{@code optionType},则此选项可以指定为{@code defaultOption}或返回为所选索引。
+     * 
      */
     public static final int YES                         = 0;
 
@@ -91,6 +126,11 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      * <p> If an {@code optionType} was specified to this
      * {@code ConfirmationCallback}, this option may be specified as a
      * {@code defaultOption} or returned as the selected index.
+     * <p>
+     *  NO选项。
+     * 
+     *  <p>如果为此{@code ConfirmationCallback}指定了{@code optionType},则此选项可以指定为{@code defaultOption}或返回为所选索引。
+     * 
      */
     public static final int NO                          = 1;
 
@@ -100,6 +140,11 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      * <p> If an {@code optionType} was specified to this
      * {@code ConfirmationCallback}, this option may be specified as a
      * {@code defaultOption} or returned as the selected index.
+     * <p>
+     *  CANCEL选项。
+     * 
+     *  <p>如果为此{@code ConfirmationCallback}指定了{@code optionType},则此选项可以指定为{@code defaultOption}或返回为所选索引。
+     * 
      */
     public static final int CANCEL                      = 2;
 
@@ -109,6 +154,11 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      * <p> If an {@code optionType} was specified to this
      * {@code ConfirmationCallback}, this option may be specified as a
      * {@code defaultOption} or returned as the selected index.
+     * <p>
+     *  确定选项。
+     * 
+     *  <p>如果为此{@code ConfirmationCallback}指定了{@code optionType},则此选项可以指定为{@code defaultOption}或返回为所选索引。
+     * 
      */
     public static final int OK                          = 3;
 
@@ -121,31 +171,43 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
     /** ERROR message type. */
     public static final int ERROR                       = 2;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private String prompt;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private int messageType;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private int optionType = UNSPECIFIED_OPTION;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private int defaultOption;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private String[] options;
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
@@ -161,6 +223,14 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  使用消息类型,选项类型和默认选项构造{@code ConfirmationCallback}。
+     * 
+     *  <p>如果基础安全服务需要YES / NO,YES / NO / CANCEL或OK / CANCEL确认,则使用此构造函数。
+     * 
+     * <p>
+     * 
+     * 
      * @param messageType the message type ({@code INFORMATION},
      *                  {@code WARNING} or {@code ERROR}). <p>
      *
@@ -224,6 +294,15 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  使用消息类型,选项列表和默认选项构造{@code ConfirmationCallback}。
+     * 
+     *  <p>如果基础安全服务需要与提供的可用预设确认(例如,CONTINUE / ABORT或STOP / GO)不同的确认,则使用此构造函数。
+     * 确认选项列在{@code options}数组中,并由{@code CallbackHandler}实现以与显示预设选项的方式一致的方式显示。
+     * 
+     * <p>
+     * 
+     * 
      * @param messageType the message type ({@code INFORMATION},
      *                  {@code WARNING} or {@code ERROR}). <p>
      *
@@ -270,6 +349,14 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     * 使用提示,消息类型,选项类型和默认选项构造{@code ConfirmationCallback}。
+     * 
+     *  <p>如果基础安全服务需要YES / NO,YES / NO / CANCEL或OK / CANCEL确认,则使用此构造函数。
+     * 
+     * <p>
+     * 
+     * 
      * @param prompt the prompt used to describe the list of options. <p>
      *
      * @param messageType the message type ({@code INFORMATION},
@@ -339,6 +426,15 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  使用提示,消息类型,选项列表和默认选项构造{@code ConfirmationCallback}。
+     * 
+     *  <p>如果基础安全服务需要与提供的可用预设确认(例如,CONTINUE / ABORT或STOP / GO)不同的确认,则使用此构造函数。
+     * 确认选项列在{@code options}数组中,并由{@code CallbackHandler}实现以与显示预设选项的方式一致的方式显示。
+     * 
+     * <p>
+     * 
+     * 
      * @param prompt the prompt used to describe the list of options. <p>
      *
      * @param messageType the message type ({@code INFORMATION},
@@ -386,6 +482,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取提示。
+     * 
+     * <p>
+     * 
+     * 
      * @return the prompt, or null if this {@code ConfirmationCallback}
      *          was instantiated without a {@code prompt}.
      */
@@ -398,6 +500,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取消息类型。
+     * 
+     * <p>
+     * 
+     * 
      * @return the message type ({@code INFORMATION},
      *          {@code WARNING} or {@code ERROR}).
      */
@@ -416,6 +524,16 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取选项类型。
+     * 
+     *  <p>如果此方法返回{@code UNSPECIFIED_OPTION},则此{@code ConfirmationCallback}将使用{@code options}而不是{@code optionType}
+     * 进行实例化。
+     * 在这种情况下,调用{@code getOptions}方法来确定要显示哪些确认选项。
+     * 
+     * <p>
+     * 
+     * 
      * @return the option type ({@code YES_NO_OPTION},
      *          {@code YES_NO_CANCEL_OPTION} or
      *          {@code OK_CANCEL_OPTION}), or
@@ -432,6 +550,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取确认选项。
+     * 
+     * <p>
+     * 
+     * 
      * @return the list of confirmation options, or null if this
      *          {@code ConfirmationCallback} was instantiated with
      *          an {@code optionType} instead of {@code options}.
@@ -445,6 +569,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取默认选项。
+     * 
+     * <p>
+     * 
+     * 
      * @return the default option, represented as
      *          {@code YES}, {@code NO}, {@code OK} or
      *          {@code CANCEL} if an {@code optionType}
@@ -464,6 +594,12 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  设置所选的确认选项。
+     * 
+     * <p>
+     * 
+     * 
      * @param selection the selection represented as {@code YES},
      *          {@code NO}, {@code OK} or {@code CANCEL}
      *          if an {@code optionType} was specified to the constructor
@@ -483,6 +619,10 @@ public class ConfirmationCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取所选的确认选项。
+     * 
+     * 
      * @return the selected confirmation option represented as
      *          {@code YES}, {@code NO}, {@code OK} or
      *          {@code CANCEL} if an {@code optionType}

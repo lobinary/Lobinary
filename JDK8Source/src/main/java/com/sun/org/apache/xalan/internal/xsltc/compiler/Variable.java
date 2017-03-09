@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Variable.java,v 1.2.4.1 2005/09/12 11:36:46 pvedula Exp $
+ * <p>
+ *  $ Id：Variable.java,v 1.2.4.1 2005/09/12 11:36:46 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -49,6 +62,9 @@ final class Variable extends VariableBase {
 
     /**
      * Parse the contents of the variable
+     * <p>
+     *  解析变量的内容
+     * 
      */
     public void parseContents(Parser parser) {
         // Parse 'name' and 'select' attributes plus parameter contents
@@ -93,6 +109,9 @@ final class Variable extends VariableBase {
     /**
      * Runs a type check on either the variable element body or the
      * expression in the 'select' attribute
+     * <p>
+     *  对变量元素主体或'select'属性中的表达式运行类型检查
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
 
@@ -118,6 +137,8 @@ final class Variable extends VariableBase {
      * This method is part of a little trick that is needed to use local
      * variables inside nested for-each loops. See the initializeVariables()
      * method in the ForEach class for an explanation
+     * <p>
+     *  这个方法是一个小技巧的一部分,需要在嵌套for-each循环中使用局部变量。有关解释,请参阅ForEach类中的initializeVariables()方法
      */
     public void initialize(ClassGenerator classGen, MethodGenerator methodGen) {
         final ConstantPoolGen cpg = classGen.getConstantPool();

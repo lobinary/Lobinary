@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,10 @@ import javax.swing.text.html.CSS.Value;
 /**
  * CSS-style borders for HTML elements.
  *
+ * <p>
+ *  HTML元素的CSS样式边框。
+ * 
+ * 
  * @author Sergey Groznyh
  */
 class CSSBorder extends AbstractBorder {
@@ -85,6 +90,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Initialize the attribute set.
+     * <p>
+     *  初始化属性集。
+     * 
      */
     CSSBorder(AttributeSet attrs) {
         this.attrs = attrs;
@@ -92,6 +100,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Return the border color for the given side.
+     * <p>
+     *  返回给定边的边框颜色。
+     * 
      */
     private Color getBorderColor(int side) {
         Object o = attrs.getAttribute(ATTRIBUTES[COLOR][side]);
@@ -112,6 +123,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Return the border width for the given side.
+     * <p>
+     *  返回给定边的边框宽度。
+     * 
      */
     private int getBorderWidth(int side) {
         int width = 0;
@@ -132,6 +146,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Return an array of border widths in the TOP, RIGHT, BOTTOM, LEFT order.
+     * <p>
+     *  以TOP,RIGHT,BOTTOM,LEFT顺序返回边框宽度的数组。
+     * 
      */
     private int[] getWidths() {
         int[] widths = new int[4];
@@ -143,6 +160,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Return the border style for the given side.
+     * <p>
+     *  返回给定边的边框样式。
+     * 
      */
     private Value getBorderStyle(int side) {
         BorderStyle style =
@@ -156,6 +176,9 @@ class CSSBorder extends AbstractBorder {
     /**
      * Return border shape for {@code side} as if the border has zero interior
      * length.  Shape start is at (0,0); points are added clockwise.
+     * <p>
+     *  返回{@code side}的边框形状,如同边框的内部长度为零。形状开始在(0,0);点顺时针添加。
+     * 
      */
     private Polygon getBorderShape(int side) {
         Polygon shape = null;
@@ -172,6 +195,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Return the border painter appropriate for the given side.
+     * <p>
+     *  返回适合给定边的边界画家。
+     * 
      */
     private BorderPainter getBorderPainter(int side) {
         Value style = getBorderStyle(side);
@@ -183,6 +209,11 @@ class CSSBorder extends AbstractBorder {
      *
      * The factor values are between 0.0 (no change) and 1.0 (turn into white).
      * Negative factor values decrease brigthness (ie, 1.0 turns into black).
+     * <p>
+     *  返回以指定系数调整亮度的颜色。
+     * 
+     *  因子值介于0.0(无变化)和1.0(变为白色)之间。负因子值降低粗糙度(即,1.0变成黑色)。
+     * 
      */
     static Color getAdjustedColor(Color c, double factor) {
         double f = 1 - Math.min(Math.abs(factor), 1);
@@ -262,12 +293,20 @@ class CSSBorder extends AbstractBorder {
          *
          * Clip is set by the caller to the exact border shape so it's safe to
          * simply draw into the shape's bounding rectangle.
+         * <p>
+         *  画家应该绘制边框,就像它在顶部,内部区域的NW角的坐标是(0,0)。调用者负责适当的仿射变换。
+         * 
+         *  剪辑由调用者设置为精确的边框形状,因此可以安全地绘制到形状的边界矩形中。
+         * 
          */
         void paint(Polygon shape, Graphics g, Color color, int side);
     }
 
     /**
      * Painter for the "none" and "hidden" CSS border styles.
+     * <p>
+     *  画家为"无"和"隐藏"的CSS边框样式。
+     * 
      */
     static class NullPainter implements BorderPainter {
         public void paint(Polygon shape, Graphics g, Color color, int side) {
@@ -277,6 +316,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Painter for the "solid" CSS border style.
+     * <p>
+     *  画家为"实体"CSS边框样式。
+     * 
      */
     static class SolidPainter implements BorderPainter {
         public void paint(Polygon shape, Graphics g, Color color, int side) {
@@ -288,10 +330,16 @@ class CSSBorder extends AbstractBorder {
     /**
      * Defines a method for painting strokes in the specified direction using
      * the given length and color patterns.
+     * <p>
+     *  定义使用给定的长度和颜色模式在指定方向上绘画笔划的方法。
+     * 
      */
     abstract static class StrokePainter implements BorderPainter {
         /**
          * Paint strokes repeatedly using the given length and color patterns.
+         * <p>
+         *  重复使用给定的长度和颜色模式绘制笔划。
+         * 
          */
         void paintStrokes(Rectangle r, Graphics g, int axis,
                                 int[] lengthPattern, Color[] colorPattern) {
@@ -321,6 +369,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Painter for the "double" CSS border style.
+     * <p>
+     *  画家为"双"CSS边框样式。
+     * 
      */
     static class DoublePainter extends StrokePainter {
         public void paint(Polygon shape, Graphics g, Color color, int side) {
@@ -334,6 +385,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Painter for the "dotted" and "dashed" CSS border styles.
+     * <p>
+     * 画家为"虚线"和"虚线"CSS边框样式。
+     * 
      */
     static class DottedDashedPainter extends StrokePainter {
         final int factor;
@@ -353,10 +407,16 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Painter that defines colors for "shadow" and "light" border sides.
+     * <p>
+     *  定义"阴影"和"轻"边框边的颜色的画家。
+     * 
      */
     abstract static class ShadowLightPainter extends StrokePainter {
         /**
          * Return the "shadow" border side color.
+         * <p>
+         *  返回"阴影"边框侧颜色。
+         * 
          */
         static Color getShadowColor(Color c) {
             return CSSBorder.getAdjustedColor(c, -0.3);
@@ -364,6 +424,9 @@ class CSSBorder extends AbstractBorder {
 
         /**
          * Return the "light" border side color.
+         * <p>
+         *  返回"light"边框侧颜色。
+         * 
          */
         static Color getLightColor(Color c) {
             return CSSBorder.getAdjustedColor(c, 0.7);
@@ -372,6 +435,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Painter for the "groove" and "ridge" CSS border styles.
+     * <p>
+     *  画家为"槽"和"岭"CSS边框样式。
+     * 
      */
     static class GrooveRidgePainter extends ShadowLightPainter {
         final Value type;
@@ -394,6 +460,9 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Painter for the "inset" and "outset" CSS border styles.
+     * <p>
+     *  画家为"插入"和"开始"CSS边框样式。
+     * 
      */
     static class InsetOutsetPainter extends ShadowLightPainter {
         Value type;
@@ -411,6 +480,8 @@ class CSSBorder extends AbstractBorder {
 
     /**
      * Add the specified painter to the painters map.
+     * <p>
+     *  将指定的painter添加到绘图器地图。
      */
     static void registerBorderPainter(Value style, BorderPainter painter) {
         borderPainters.put(style, painter);

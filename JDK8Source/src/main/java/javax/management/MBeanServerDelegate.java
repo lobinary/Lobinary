@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import com.sun.jmx.mbeanserver.Util;
  * The MBeanServerDelegate MBean emits the MBeanServerNotifications when
  * an MBean is registered/unregistered in the MBean server.
  *
+ * <p>
+ *  从管理角度表示MBean服务器。当MBean在MBean服务器中注册/注销时,MBeanServerDelegate MBean会发出MBeanServer通知。
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanServerDelegate implements MBeanServerDelegateMBean,
@@ -43,6 +48,8 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
     private String mbeanServerId ;
 
     /** The NotificationBroadcasterSupport object that sends the
+    /* <p>
+    /* 
         notifications */
     private final NotificationBroadcasterSupport broadcaster;
 
@@ -66,6 +73,9 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
 
     /**
      * Create a MBeanServerDelegate object.
+     * <p>
+     *  创建MBeanServerDelegate对象。
+     * 
      */
     public MBeanServerDelegate () {
         stamp = getStamp();
@@ -76,6 +86,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
     /**
      * Returns the MBean server agent identity.
      *
+     * <p>
+     *  返回MBean服务器代理标识。
+     * 
+     * 
      * @return the identity.
      */
     public synchronized String getMBeanServerId() {
@@ -97,6 +111,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
      * Returns the full name of the JMX specification implemented
      * by this product.
      *
+     * <p>
+     *  返回此产品实现的JMX规范的全名。
+     * 
+     * 
      * @return the specification name.
      */
     public String getSpecificationName() {
@@ -107,6 +125,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
      * Returns the version of the JMX specification implemented
      * by this product.
      *
+     * <p>
+     *  返回此产品实现的JMX规范的版本。
+     * 
+     * 
      * @return the specification version.
      */
     public String getSpecificationVersion() {
@@ -117,6 +139,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
      * Returns the vendor of the JMX specification implemented
      * by this product.
      *
+     * <p>
+     *  返回此产品实现的JMX规范的供应商。
+     * 
+     * 
      * @return the specification vendor.
      */
     public String getSpecificationVendor() {
@@ -126,6 +152,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
     /**
      * Returns the JMX implementation name (the name of this product).
      *
+     * <p>
+     *  返回JMX实现名称(此产品的名称)。
+     * 
+     * 
      * @return the implementation name.
      */
     public String getImplementationName() {
@@ -135,6 +165,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
     /**
      * Returns the JMX implementation version (the version of this product).
      *
+     * <p>
+     *  返回JMX实现版本(此产品的版本)。
+     * 
+     * 
      * @return the implementation version.
      */
     public String getImplementationVersion() {
@@ -148,6 +182,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
     /**
      * Returns the JMX implementation vendor (the vendor of this product).
      *
+     * <p>
+     *  返回JMX实现供应商(此产品的供应商)。
+     * 
+     * 
      * @return the implementation vendor.
      */
     public String getImplementationVendor()  {
@@ -197,6 +235,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
      * If the passed <var>notification</var> has a sequence number lesser
      * or equal to 0, then replace it with the delegate's own sequence
      * number.
+     * <p>
+     *  使MBean服务器能够发送通知。如果传递的<var>通知</var>具有小于或等于0的序列号,则将其替换为委托自己的序列号。
+     * 
+     * 
      * @param notification The notification to send.
      *
      */
@@ -212,6 +254,10 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
     /**
      * Defines the default ObjectName of the MBeanServerDelegate.
      *
+     * <p>
+     *  定义MBeanServerDelegate的默认ObjectName。
+     * 
+     * 
      * @since 1.6
      */
     public static final ObjectName DELEGATE_NAME =
@@ -222,6 +268,9 @@ public class MBeanServerDelegate implements MBeanServerDelegateMBean,
        constructor more than once in the same millisecond, or if the
        clock always returns the same value).  This means that the ids
        for a given JVM will always be distinact, though there is no
+    /* <p>
+    /*  System.currentTimeMillis()不是(例如,如果你在同一毫秒内多次调用此构造函数,或者时钟总是返回相同的值)。这意味着给定的JVM的id将总是相同的,虽然没有
+    /* 
        such guarantee for two different JVMs.  */
     private static synchronized long getStamp() {
         long s = System.currentTimeMillis();

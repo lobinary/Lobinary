@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013 Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -31,6 +32,9 @@ import javax.xml.XMLConstants;
 /**
  * This class manages security related properties
  *
+ * <p>
+ *  这个类管理安全相关的属性
+ * 
  */
 public final class XMLSecurityPropertyManager {
 
@@ -38,6 +42,9 @@ public final class XMLSecurityPropertyManager {
      * States of the settings of a property, in the order: default value, value
      * set by FEATURE_SECURE_PROCESSING, jaxp.properties file, jaxp system
      * properties, and jaxp api properties
+     * <p>
+     *  状态设置的属性,按顺序：默认值,由FEATURE_SECURE_PROCESSING设置的值,jaxp.properties文件,jaxp系统属性和jaxp api属性
+     * 
      */
     public static enum State {
         //this order reflects the overriding order
@@ -46,6 +53,9 @@ public final class XMLSecurityPropertyManager {
 
     /**
      * Limits managed by the security manager
+     * <p>
+     *  由安全管理器管理的限制
+     * 
      */
     public static enum Property {
         ACCESS_EXTERNAL_DTD(XMLConstants.ACCESS_EXTERNAL_DTD,
@@ -72,15 +82,24 @@ public final class XMLSecurityPropertyManager {
 
     /**
      * Values of the properties as defined in enum Properties
+     * <p>
+     *  枚举属性中定义的属性值
+     * 
      */
     private final String[] values;
     /**
      * States of the settings for each property in Properties above
+     * <p>
+     * 上述属性中每个属性的设置状态
+     * 
      */
     private State[] states = {State.DEFAULT, State.DEFAULT};
 
     /**
      * Default constructor. Establishes default values
+     * <p>
+     *  默认构造函数。建立默认值
+     * 
      */
     public XMLSecurityPropertyManager() {
         values = new String[Property.values().length];
@@ -94,6 +113,10 @@ public final class XMLSecurityPropertyManager {
 
     /**
      * Set limit by property name and state
+     * <p>
+     *  按属性名称和状态设置限制
+     * 
+     * 
      * @param propertyName property name
      * @param state the state of the property
      * @param value the value of the property
@@ -112,6 +135,10 @@ public final class XMLSecurityPropertyManager {
     /**
      * Set the value for a specific property.
      *
+     * <p>
+     *  设置特定属性的值。
+     * 
+     * 
      * @param property the property
      * @param state the state of the property
      * @param value the value of the property
@@ -126,6 +153,10 @@ public final class XMLSecurityPropertyManager {
 
     /**
      * Set the value of a property by its index
+     * <p>
+     *  通过其索引设置属性的值
+     * 
+     * 
      * @param index the index of the property
      * @param state the state of the property
      * @param value the value of the property
@@ -142,6 +173,10 @@ public final class XMLSecurityPropertyManager {
     /**
      * Return the value of the specified property
      *
+     * <p>
+     *  返回指定属性的值
+     * 
+     * 
      * @param propertyName the property name
      * @return the value of the property as a string
      */
@@ -157,6 +192,10 @@ public final class XMLSecurityPropertyManager {
     /**
      * Return the value of the specified property
      *
+     * <p>
+     *  返回指定属性的值
+     * 
+     * 
      * @param property the property
      * @return the value of the property
      */
@@ -166,6 +205,10 @@ public final class XMLSecurityPropertyManager {
 
     /**
      * Return the value of a property by its ordinal
+     * <p>
+     *  通过其序数返回属性的值
+     * 
+     * 
      * @param index the index of a property
      * @return value of a property
      */
@@ -175,6 +218,10 @@ public final class XMLSecurityPropertyManager {
 
     /**
      * Get the index by property name
+     * <p>
+     *  按属性名称获取索引
+     * 
+     * 
      * @param propertyName property name
      * @return the index of the property if found; return -1 if not
      */
@@ -190,6 +237,9 @@ public final class XMLSecurityPropertyManager {
 
     /**
      * Read from system properties, or those in jaxp.properties
+     * <p>
+     *  从系统属性或jaxp.properties中读取
+     * 
      */
     private void readSystemProperties() {
         getSystemProperty(Property.ACCESS_EXTERNAL_DTD,
@@ -201,6 +251,9 @@ public final class XMLSecurityPropertyManager {
     /**
      * Read from system properties, or those in jaxp.properties
      *
+     * <p>
+     *  从系统属性或jaxp.properties中读取
+     * 
      * @param property the property
      * @param systemProperty the name of the system property
      */

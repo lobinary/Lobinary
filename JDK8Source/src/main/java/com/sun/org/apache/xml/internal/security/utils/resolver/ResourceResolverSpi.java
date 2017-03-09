@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils.resolver;
 
@@ -31,6 +40,10 @@ import org.w3c.dom.Attr;
 /**
  * During reference validation, we have to retrieve resources from somewhere.
  *
+ * <p>
+ *  在参考验证期间,我们必须从某处检索资源。
+ * 
+ * 
  * @author $Author: coheigea $
  */
 public abstract class ResourceResolverSpi {
@@ -46,6 +59,10 @@ public abstract class ResourceResolverSpi {
      * Deprecated - used to carry state about whether resolution was being done in a secure fashion,
      * but was not thread safe, so the resolution information is now passed as parameters to methods.
      *
+     * <p>
+     *  已弃用 - 用于承载有关是否以安全方式完成解析,但不是线程安全的状态,因此解析度信息现在作为参数传递给方法。
+     * 
+     * 
      * @deprecated Secure validation flag is now passed to methods.
      */
     @Deprecated
@@ -54,6 +71,10 @@ public abstract class ResourceResolverSpi {
     /**
      * This is the workhorse method used to resolve resources.
      *
+     * <p>
+     *  这是用于解决资源的主力方法。
+     * 
+     * 
      * @param uri
      * @param BaseURI
      * @return the resource wrapped around a XMLSignatureInput
@@ -70,6 +91,10 @@ public abstract class ResourceResolverSpi {
 
     /**
      * This is the workhorse method used to resolve resources.
+     * <p>
+     *  这是用于解决资源的主力方法。
+     * 
+     * 
      * @param context Context to use to resolve resources.
      *
      * @return the resource wrapped around a XMLSignatureInput
@@ -86,6 +111,10 @@ public abstract class ResourceResolverSpi {
     /**
      * Method engineSetProperty
      *
+     * <p>
+     *  方法engineSetProperty
+     * 
+     * 
      * @param key
      * @param value
      */
@@ -99,6 +128,10 @@ public abstract class ResourceResolverSpi {
     /**
      * Method engineGetProperty
      *
+     * <p>
+     *  方法engineGetProperty
+     * 
+     * 
      * @param key
      * @return the value of the property
      */
@@ -111,6 +144,8 @@ public abstract class ResourceResolverSpi {
 
     /**
      *
+     * <p>
+     * 
      * @param newProperties
      */
     public void engineAddProperies(Map<String, String> newProperties) {
@@ -127,6 +162,10 @@ public abstract class ResourceResolverSpi {
      * It normally means that the implementation does not have any member, or there is
      * member change between engineCanResolve & engineResolve invocations. Or it maintains all
      * member info in ThreadLocal methods.
+     * <p>
+     * 告诉这个实现是否可以被多个线程安全地重用。它通常意味着实现没有任何成员,或者engineCanResolve&engineResolve调用之间有成员更改。
+     * 或者它维护所有成员信息在ThreadLocal方法。
+     * 
      */
     public boolean engineIsThreadSafe() {
         return false;
@@ -136,6 +175,10 @@ public abstract class ResourceResolverSpi {
      * This method helps the {@link ResourceResolver} to decide whether a
      * {@link ResourceResolverSpi} is able to perform the requested action.
      *
+     * <p>
+     *  此方法有助于{@link ResourceResolver}决定{@link ResourceResolverSpi}是否能够执行请求的操作。
+     * 
+     * 
      * @param uri
      * @param BaseURI
      * @return true if the engine can resolve the uri
@@ -154,6 +197,12 @@ public abstract class ResourceResolverSpi {
      *
      * <p>New clients should override this method, and not override {@link #engineCanResolve(Attr, String)}
      * </p>
+     * <p>
+     *  此方法有助于{@link ResourceResolver}决定{@link ResourceResolverSpi}是否能够执行请求的操作。
+     * 
+     *  <p>新客户端应覆盖此方法,而不覆盖{@link #engineCanResolve(Attr,String)}
+     * </p>
+     * 
      * @param context Context in which to do resolution.
      * @return true if the engine can resolve the uri
      */
@@ -166,6 +215,10 @@ public abstract class ResourceResolverSpi {
     /**
      * Method engineGetPropertyKeys
      *
+     * <p>
+     *  方法engineGetPropertyKeys
+     * 
+     * 
      * @return the property keys
      */
     public String[] engineGetPropertyKeys() {
@@ -175,6 +228,10 @@ public abstract class ResourceResolverSpi {
     /**
      * Method understandsProperty
      *
+     * <p>
+     *  方法understandsProperty
+     * 
+     * 
      * @param propertyToTest
      * @return true if understands the property
      */
@@ -196,6 +253,9 @@ public abstract class ResourceResolverSpi {
     /**
      * Fixes a platform dependent filename to standard URI form.
      *
+     * <p>
+     *  将平台相关的文件名修复为标准URI形式。
+     * 
      * @param str The string to fix.
      *
      * @return Returns the fixed URI string.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,10 @@ import sun.awt.AppContext;
  * TimerQueue manages a queue of Timers. The Timers are chained
  * together in a linked list sorted by the order in which they will expire.
  *
+ * <p>
+ *  内部类使用一个线程来管理所有定时器。 TimerQueue管理定时器队列。计时器链接在一起,按照它们到期的顺序排序。
+ * 
+ * 
  * @author Dave Moore
  * @author Igor Kushnirskiy
  */
@@ -58,6 +63,9 @@ class TimerQueue implements Runnable
 
     /* Lock object used in place of class object for synchronization.
      * (4187686)
+     * <p>
+     *  (4187686)
+     * 
      */
     private static final Object classLock = new Object();
 
@@ -66,6 +74,9 @@ class TimerQueue implements Runnable
 
     /**
      * Constructor for TimerQueue.
+     * <p>
+     *  TimerQueue的构造函数。
+     * 
      */
     public TimerQueue() {
         super();
@@ -177,6 +188,9 @@ class TimerQueue implements Runnable
                              * Timer is not removed after we get it from
                              * the queue and before the lock on the timer is
                              * acquired
+                             * <p>
+                             *  在我们从队列中获取定时器之后并且在获取定时器的锁定之前,不会移除定时器
+                             * 
                              */
                             timer.post(); // have timer post an event
                             timer.delayedTimer = null;
@@ -233,6 +247,9 @@ class TimerQueue implements Runnable
 
     /**
      * Returns nanosecond time offset by origin
+     * <p>
+     *  返回按原点的纳秒时间偏移量
+     * 
      */
     private static long now() {
         return System.nanoTime() - NANO_ORIGIN;
@@ -245,6 +262,8 @@ class TimerQueue implements Runnable
         /**
          * Sequence number to break scheduling ties, and in turn to
          * guarantee FIFO order among tied entries.
+         * <p>
+         *  序列号以打破调度关系,进而保证绑定条目之间的FIFO顺序。
          */
         private static final AtomicLong sequencer = new AtomicLong(0);
 

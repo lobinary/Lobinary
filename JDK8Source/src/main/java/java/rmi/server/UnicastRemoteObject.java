@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -140,6 +141,70 @@ import sun.rmi.server.UnicastServerRef2;
  * in the
  * <a href="{@docRoot}/../platform/rmi/spec/rmiTOC.html">Java RMI Specification</a>.
  *
+ * <p>
+ *  用于使用JRMP导出远程对象并获取与远程对象通信的存根。存根是在运行时使用动态代理对象生成的,或者它们是在构建时静态生成的,通常使用{@code rmic}工具。
+ * 
+ *  <p> <strong>已弃用：静态存根。</strong> <em>支持静态生成的存根已弃用。这包括在这个类中需要使用静态存根的API,以及用于加载静态存根的运行时支持。
+ * 动态生成存根是首选,使用导出对象的五种非过时方法之一,如下所示。不要运行{@code rmic}来生成静态存根类。这是不必要的,它也被弃用。</em>。
+ * 
+ *  <p>有六种方式可以导出远程对象：
+ * 
+ * <ol>
+ * 
+ *  <li>将{@code UnicastRemoteObject}子类化并调用{@link #UnicastRemoteObject()}构造函数。
+ * 
+ *  <li>将{@code UnicastRemoteObject}子类化并调用{@link #UnicastRemoteObject(int)UnicastRemoteObject(port)}构造函数
+ * 。
+ * 
+ *  <li>将{@code UnicastRemoteObject}子类化并调用{@link #UnicastRemoteObject(int,RMIClientSocketFactory,RMIServerSocketFactory)UnicastRemoteObject(port,csf,ssf)}
+ * 构造函数。
+ * 
+ *  <li>调用{@link #exportObject(远程)exportObject(远程)}方法。 <strong>已弃用。</strong>
+ * 
+ * <li>调用{@link #exportObject(Remote,int)exportObject(Remote,port)}方法。
+ * 
+ *  <li>调用{@link #exportObject(Remote,int,RMIClientSocketFactory,RMIServerSocketFactory)exportObject(Remote,port,csf,ssf)}
+ * 方法。
+ * 
+ * </ol>
+ * 
+ *  <p>第四种方法{@link #exportObject(Remote)}总是使用静态生成的存根,并且已被弃用。
+ * 
+ *  <p>其他五种技术都使用以下方法：如果{@code java.rmi.server.ignoreStubClasses}属性是{@code true}(不区分大小写)或者如果找不到静态存根,则stub
+ * s是动态生成的使用{@link java.lang.reflect.Proxy Proxy}对象。
+ * 否则,使用静态存根。
+ * 
+ *  <p> {@code java.rmi.server.ignoreStubClasses}属性的默认值为{@code false}。
+ * 
+ *  <p>静态生成的存根通常是使用{@code rmic}工具从远程对象的类预生成的。加载静态存根,并且如下所述构造该存根类的实例。
+ * 
+ * <ul>
+ * 
+ *  <li>"根类"确定如下：如果远程对象的类直接实现了扩展{@link Remote}的接口,则远程对象的类是根类;否则,根类是远程对象的类的最被派生的超类,它直接实现一个扩展{@code Remote}
+ * 的接口。
+ * 
+ *  <li>要加载的存根类的名称通过将根类的二进制名称与后缀{@code _Stub}连接来确定。
+ * 
+ * <li> stub类是使用根类的类加载器通过名称加载的。存根类必须扩展{@link RemoteStub},并且必须有一个具有类型为{@link RemoteRef}的参数的公共构造函数。
+ * 
+ *  <li>最后,stub类的实例使用{@link RemoteRef}构造。
+ * 
+ *  <li>如果找不到相应的存根类,或者如果无法加载存根类,或者创建存根实例时出现问题,则会抛出{@link StubNotFoundException}。
+ * 
+ * </ul>
+ * 
+ *  <p>存根是通过构造具有以下特征的{@link java.lang.reflect.Proxy Proxy}的实例来动态生成的：
+ * 
+ * <ul>
+ * 
+ *  <li>代理的类由远程对象的类的类加载器定义。
+ * 
+ *  <li>代理实现了由远程对象的类实现的所有远程接口。
+ * 
+ *  <li>代理的调用处理程序是使用{@link RemoteRef}构造的{@link RemoteObjectInvocationHandler}实例。
+ * 
+ *  <li>如果无法创建代理,则会抛出{@link StubNotFoundException}。
+ * 
  * @author  Ann Wollrath
  * @author  Peter Jones
  * @since   JDK1.1
@@ -147,16 +212,31 @@ import sun.rmi.server.UnicastServerRef2;
 public class UnicastRemoteObject extends RemoteServer {
 
     /**
+    /* <p>
+    /* 
+    /* </ul>
+    /* 
+    /*  @implNote根据用于导出对象的构造函数或静态方法,{@link RMISocketFactory}可用于创建套接字。
+    /* 默认情况下,由{@link RMISocketFactory}创建的服务器套接字侦听所有网络接口。
+    /* 请参阅{@link RMISocketFactory}类和<a href="{@docRoot}/../platform/rmi/spec/rmi-server29.html"> RMI套接字工厂</a>
+    /* 部分的<a href = "{@docRoot} /../ platform / rmi / spec / rmiTOC.html"> Java RMI规范</a>。
+    /* 默认情况下,由{@link RMISocketFactory}创建的服务器套接字侦听所有网络接口。
+    /* 
+    /* 
      * @serial port number on which to export object
      */
     private int port = 0;
 
     /**
+    /* <p>
+    /* 
      * @serial client-side socket factory (if any)
      */
     private RMIClientSocketFactory csf = null;
 
     /**
+    /* <p>
+    /* 
      * @serial server-side socket factory (if any) to use when
      * exporting object
      */
@@ -172,6 +252,8 @@ public class UnicastRemoteObject extends RemoteServer {
      * <p>The object is exported with a server socket
      * created using the {@link RMISocketFactory} class.
      *
+     * <p>
+     * 
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
@@ -187,6 +269,12 @@ public class UnicastRemoteObject extends RemoteServer {
      * <p>The object is exported with a server socket
      * created using the {@link RMISocketFactory} class.
      *
+     * <p>
+     * 使用匿名端口创建和导出新的UnicastRemoteObject对象。
+     * 
+     *  <p>使用{@link RMISocketFactory}类创建的服务器套接字导出对象。
+     * 
+     * 
      * @param port the port number on which the remote object receives calls
      * (if <code>port</code> is zero, an anonymous port is chosen)
      * @throws RemoteException if failed to export object
@@ -206,6 +294,12 @@ public class UnicastRemoteObject extends RemoteServer {
      * the corresponding client or server socket creation method of
      * {@link RMISocketFactory} is used instead.
      *
+     * <p>
+     *  使用特定提供的端口创建和导出新的UnicastRemoteObject对象。
+     * 
+     *  <p>使用{@link RMISocketFactory}类创建的服务器套接字导出对象。
+     * 
+     * 
      * @param port the port number on which the remote object receives calls
      * (if <code>port</code> is zero, an anonymous port is chosen)
      * @param csf the client-side socket factory for making calls to the
@@ -227,6 +321,11 @@ public class UnicastRemoteObject extends RemoteServer {
 
     /**
      * Re-export the remote object when it is deserialized.
+     * <p>
+     *  使用特定提供的端口和套接字工厂创建和导出新的UnicastRemoteObject对象。
+     * 
+     *  <p>套接字工厂可能是{@code null},在这种情况下,将使用{@link RMISocketFactory}的相应客户端或服务器套接字创建方法。
+     * 
      */
     private void readObject(java.io.ObjectInputStream in)
         throws java.io.IOException, java.lang.ClassNotFoundException
@@ -239,6 +338,10 @@ public class UnicastRemoteObject extends RemoteServer {
      * Returns a clone of the remote object that is distinct from
      * the original.
      *
+     * <p>
+     *  远程对象在反序列化时重新导出。
+     * 
+     * 
      * @exception CloneNotSupportedException if clone failed due to
      * a RemoteException.
      * @return the new remote object
@@ -259,6 +362,9 @@ public class UnicastRemoteObject extends RemoteServer {
      * Exports this UnicastRemoteObject using its initialized fields because
      * its creation bypassed running its constructors (via deserialization
      * or cloning, for example).
+     * <p>
+     *  返回与原始对象不同的远程对象的克隆。
+     * 
      */
     private void reexport() throws RemoteException
     {
@@ -277,6 +383,10 @@ public class UnicastRemoteObject extends RemoteServer {
      * <p>The object is exported with a server socket
      * created using the {@link RMISocketFactory} class.
      *
+     * <p>
+     *  导出此UnicastRemoteObject使用其初始化字段,因为其创建绕过运行其构造函数(例如通过反序列化或克隆)。
+     * 
+     * 
      * @param obj the remote object to be exported
      * @return remote object stub
      * @exception RemoteException if export fails
@@ -297,6 +407,11 @@ public class UnicastRemoteObject extends RemoteServer {
          * generated stub class must be used instead of a dynamic proxy
          * because the return value of this method is RemoteStub which a
          * dynamic proxy class cannot extend.
+         * <p>
+         *  导出远程对象以使其可用于使用匿名端口接收传入呼叫。此方法将始终返回静态生成的存根。
+         * 
+         *  <p>使用{@link RMISocketFactory}类创建的服务器套接字导出对象。
+         * 
          */
         return (RemoteStub) exportObject(obj, new UnicastServerRef(true));
     }
@@ -308,6 +423,10 @@ public class UnicastRemoteObject extends RemoteServer {
      * <p>The object is exported with a server socket
      * created using the {@link RMISocketFactory} class.
      *
+     * <p>
+     *  使用传递布尔值true的UnicastServerRef构造函数指示只应使用生成的存根类。必须使用生成的存根类,而不是动态代理,因为此方法的返回值是RemoteStub,动态代理类不能扩展。
+     * 
+     * 
      * @param obj the remote object to be exported
      * @param port the port to export the object on
      * @return remote object stub
@@ -328,6 +447,12 @@ public class UnicastRemoteObject extends RemoteServer {
      * the corresponding client or server socket creation method of
      * {@link RMISocketFactory} is used instead.
      *
+     * <p>
+     * 导出远程对象,使其可用于接收来电,使用特定提供的端口。
+     * 
+     *  <p>使用{@link RMISocketFactory}类创建的服务器套接字导出对象。
+     * 
+     * 
      * @param obj the remote object to be exported
      * @param port the port to export the object on
      * @param csf the client-side socket factory for making calls to the
@@ -355,6 +480,12 @@ public class UnicastRemoteObject extends RemoteServer {
      * parameter is false, the object is only unexported if there are
      * no pending or in progress calls to the object.
      *
+     * <p>
+     *  导出远程对象以使其可用于接收传入呼叫,使用给定套接字工厂指定的传输。
+     * 
+     *  <p>套接字工厂可能是{@code null},在这种情况下,将使用{@link RMISocketFactory}的相应客户端或服务器套接字创建方法。
+     * 
+     * 
      * @param obj the remote object to be unexported
      * @param force if true, unexports the object even if there are
      * pending or in-progress calls; if false, only unexports the object
@@ -372,6 +503,10 @@ public class UnicastRemoteObject extends RemoteServer {
 
     /**
      * Exports the specified object using the specified server ref.
+     * <p>
+     *  从RMI运行时中删除远程对象obj。如果成功,对象不能再接受传入的RMI调用。如果force参数为true,则即使有对远程对象的挂起调用或远程对象仍有呼叫正在进行,对象也会被强制取消导出。
+     * 如果force参数为false,那么只有在没有对对象的挂起或进行中调用时,才会取消导出对象。
+     * 
      */
     private static Remote exportObject(Remote obj, UnicastServerRef sref)
         throws RemoteException

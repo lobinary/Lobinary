@@ -45,11 +45,11 @@ public class JAU2 {
 		翻译(f);
 	}
 	
-	public static void 翻译(File f) throws Exception{
+	public static boolean 翻译(File f) throws Exception{
 		List<String> list = FileUtil.readLine2List(f);
 		if(list.get(0).equals(翻译完成标志)){
 			System.out.println("发现翻译完成Java文件:"+f.getAbsolutePath());
-			return ;
+			return false;
 		}
 		long startTime=System.currentTimeMillis();
 		List<String> 翻译后的数据 = 抓取注释数据(list);
@@ -62,6 +62,7 @@ public class JAU2 {
 		System.out.println("翻译总耗时:"+GTU.总耗时时间);
 		System.out.println("加签总耗时:"+GTU.加签总耗时);
 		System.out.println("请求总耗时:"+GTU.请求总耗时);
+		return true;
 	}
 
 	private static List<String> 抓取注释数据(List<String> java文件数据List) throws Exception {

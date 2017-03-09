@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import java.awt.Component;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  MenuKeyEvent用于通知相关方菜单元素已收到在菜单树中转发给它的KeyEvent。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Georges Saab
  */
 @SuppressWarnings("serial")
@@ -55,6 +63,10 @@ public class MenuKeyEvent extends KeyEvent {
     /**
      * Constructs a MenuKeyEvent object.
      *
+     * <p>
+     *  构造一个MenuKeyEvent对象。
+     * 
+     * 
      * @param source     the Component that originated the event
      *                     (typically <code>this</code>)
      * @param id         an int specifying the type of event, as defined
@@ -80,6 +92,10 @@ public class MenuKeyEvent extends KeyEvent {
     /**
      * Returns the path to the menu item referenced by this event.
      *
+     * <p>
+     *  返回此事件引用的菜单项的路径。
+     * 
+     * 
      * @return an array of MenuElement objects representing the path value
      */
     public MenuElement[] getPath() {
@@ -89,6 +105,9 @@ public class MenuKeyEvent extends KeyEvent {
     /**
      * Returns the current menu selection manager.
      *
+     * <p>
+     *  返回当前菜单选择管理器。
+     * 
      * @return a MenuSelectionManager object
      */
     public MenuSelectionManager getMenuSelectionManager() {

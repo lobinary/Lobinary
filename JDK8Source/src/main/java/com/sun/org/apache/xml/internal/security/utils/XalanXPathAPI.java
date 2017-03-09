@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils;
 
@@ -45,6 +54,9 @@ import org.w3c.dom.NodeList;
 /**
  * An implementation of XPathAPI using Xalan. This supports the "here()" function defined in the digital
  * signature spec.
+ * <p>
+ *  使用Xalan的XPathAPI的实现。这支持在数字签名规范中定义的"here()"函数。
+ * 
  */
 public class XalanXPathAPI implements XPathAPI {
 
@@ -70,6 +82,10 @@ public class XalanXPathAPI implements XPathAPI {
      *  Use an XPath string to select a nodelist.
      *  XPath namespace prefixes are resolved from the namespaceNode.
      *
+     * <p>
+     *  使用XPath字符串选择一个节点列表。 XPath命名空间前缀从namespaceNode解析。
+     * 
+     * 
      *  @param contextNode The node to start searching from.
      *  @param xpathnode
      *  @param str
@@ -91,6 +107,10 @@ public class XalanXPathAPI implements XPathAPI {
 
     /**
      * Evaluate an XPath string and return true if the output is to be included or not.
+     * <p>
+     *  评估XPath字符串,如果要包括或不包括输出,则返回true。
+     * 
+     * 
      *  @param contextNode The node to start searching from.
      *  @param xpathnode The XPath node
      *  @param str The XPath expression
@@ -104,6 +124,9 @@ public class XalanXPathAPI implements XPathAPI {
 
     /**
      * Clear any context information from this object
+     * <p>
+     *  清除此对象的任何上下文信息
+     * 
      */
     public void clear() {
         xpathStr = null;
@@ -172,6 +195,8 @@ public class XalanXPathAPI implements XPathAPI {
         }
         /**
          * Try to register our here() implementation as internal function.
+         * <p>
+         *  尝试注册我们的here()实现作为内部函数。
          */
         try {
             Class<?>[] args = {String.class, Expression.class};

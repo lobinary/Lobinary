@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,12 @@ import sun.nio.cs.StreamEncoder;
  * classes of this package.  </p>
  *
  *
+ * <p>
+ *  通道和流的实用方法。
+ * 
+ *  <p>此类定义了支持<tt> {@ link java.io} </tt>包的流类与此包的通道类的互操作的静态方法。 </p>
+ * 
+ * 
  * @author Mark Reinhold
  * @author Mike McCloskey
  * @author JSR-51 Expert Group
@@ -70,6 +77,9 @@ public final class Channels {
     /**
      * Write all remaining bytes in buffer to the given channel.
      * If the channel is selectable then it must be configured blocking.
+     * <p>
+     *  将缓冲区中的所有剩余字节写入给定通道。如果通道可选,则必须配置阻塞。
+     * 
      */
     private static void writeFullyImpl(WritableByteChannel ch, ByteBuffer bb)
         throws IOException
@@ -84,6 +94,10 @@ public final class Channels {
     /**
      * Write all remaining bytes in buffer to the given channel.
      *
+     * <p>
+     *  将缓冲区中的所有剩余字节写入给定通道。
+     * 
+     * 
      * @throws  IllegalBlockingModeException
      *          If the channel is selectable and configured non-blocking.
      */
@@ -115,6 +129,14 @@ public final class Channels {
      * multiple concurrent threads.  Closing the stream will in turn cause the
      * channel to be closed.  </p>
      *
+     * <p>
+     *  构造从给定通道读取字节的流。
+     * 
+     *  <p>如果在底层通道处于非阻塞模式时调用,所产生的流的<tt>读取</tt>方法将抛出{@link IllegalBlockingModeException}。
+     * 该流不会被缓冲,它不支持{@link InputStream#mark mark}或{@link InputStream#reset reset}方法。该流将安全地由多个并发线程访问。
+     * 关闭流将依次导致通道关闭。 </p>。
+     * 
+     * 
      * @param  ch
      *         The channel from which bytes will be read
      *
@@ -134,6 +156,13 @@ public final class Channels {
      * stream will be safe for access by multiple concurrent threads.  Closing
      * the stream will in turn cause the channel to be closed.  </p>
      *
+     * <p>
+     *  构造一个将字节写入给定通道的流。
+     * 
+     *  <p>如果在底层通道处于非阻塞模式时调用,所产生的流的<tt> write </tt>方法将抛出{@link IllegalBlockingModeException}。流不会被缓冲。
+     * 该流将安全地由多个并发线程访问。关闭流将依次导致通道关闭。 </p>。
+     * 
+     * 
      * @param  ch
      *         The channel to which bytes will be written
      *
@@ -189,6 +218,13 @@ public final class Channels {
      * stream will be safe for access by multiple concurrent threads.  Closing
      * the stream will in turn cause the channel to be closed.  </p>
      *
+     * <p>
+     * 构造从给定通道读取字节的流。
+     * 
+     *  <p>流不会被缓冲,它不支持{@link InputStream#mark mark}或{@link InputStream#reset reset}方法。该流将安全地由多个并发线程访问。
+     * 关闭流将依次导致通道关闭。 </p>。
+     * 
+     * 
      * @param  ch
      *         The channel from which bytes will be read
      *
@@ -263,6 +299,12 @@ public final class Channels {
      * by multiple concurrent threads.  Closing the stream will in turn cause
      * the channel to be closed.  </p>
      *
+     * <p>
+     *  构造一个将字节写入给定通道的流。
+     * 
+     *  <p>流不会被缓冲。该流将安全地由多个并发线程访问。关闭流将依次导致通道关闭。 </p>
+     * 
+     * 
      * @param  ch
      *         The channel to which bytes will be written
      *
@@ -338,6 +380,12 @@ public final class Channels {
      * its I/O operations to the given stream.  Closing the channel will in
      * turn cause the stream to be closed.  </p>
      *
+     * <p>
+     *  构造一个从给定流读取字节的通道。
+     * 
+     *  <p>生成的通道不会被缓冲;它将简单地将其I / O操作重定向到给定流。关闭通道将依次导致流被关闭。 </p>
+     * 
+     * 
      * @param  in
      *         The stream from which bytes are to be read
      *
@@ -413,6 +461,12 @@ public final class Channels {
      * its I/O operations to the given stream.  Closing the channel will in
      * turn cause the stream to be closed.  </p>
      *
+     * <p>
+     *  构造一个将字节写入给定流的通道。
+     * 
+     *  <p>生成的通道不会被缓冲;它将简单地将其I / O操作重定向到给定流。关闭通道将依次导致流被关闭。 </p>
+     * 
+     * 
      * @param  out
      *         The stream to which bytes are to be written
      *
@@ -487,6 +541,14 @@ public final class Channels {
      * the {@link Reader#mark mark} or {@link Reader#reset reset} methods.
      * Closing the stream will in turn cause the channel to be closed.  </p>
      *
+     * <p>
+     *  构造一个阅读器,使用给定的解码器解码来自给定通道的字节。
+     * 
+     * <p>生成的流将包含至少为<tt> minBufferCap </tt>字节的内部输入缓冲区。
+     * 流的<tt>读</tt>方法将根据需要通过从底层通道读取字节来填充缓冲区;如果当要读取字节时,通道处于非阻塞模式,那么将抛出{@link IllegalBlockingModeException}。
+     * 生成的流将不会被缓冲,并且不支持{@link Reader#mark mark}或{@link Reader#reset reset}方法。关闭流将依次导致通道关闭。 </p>。
+     * 
+     * 
      * @param  ch
      *         The channel from which bytes will be read
      *
@@ -525,6 +587,19 @@ public final class Channels {
      *                        .newDecoder(),
      *                    -1);</pre></blockquote>
      *
+     * <p>
+     *  构造一个阅读器,根据命名的字符集解码给定通道的字节。
+     * 
+     *  <p>表单的此方法的调用
+     * 
+     *  <blockquote> <pre> Channels.newReader(ch,csname)</pre> </blockquote>
+     * 
+     *  表现方式与表达式完全相同
+     * 
+     *  <blockquote> <pre> Channels.newReader(ch,Charset.forName(csName).newDecoder(),-1); </pre> </blockquote>
+     * 。
+     * 
+     * 
      * @param  ch
      *         The channel from which bytes will be read
      *
@@ -556,6 +631,14 @@ public final class Channels {
      * The resulting stream will not otherwise be buffered.  Closing the stream
      * will in turn cause the channel to be closed.  </p>
      *
+     * <p>
+     *  构造一个使用给定编码器对字符进行编码并将结果字节写入给定通道的写入程序。
+     * 
+     * <p>生成的流将包含至少为<tt> minBufferCap </tt>字节的内部输出缓冲区。
+     * 流的<tt>写入</tt>方法将根据需要通过将字节写入底层通道来刷新缓冲区;如果当要写入字节时通道处于非阻塞模式,则会抛出{@link IllegalBlockingModeException}。
+     * 否则将不对所得到的流进行缓冲。关闭流将依次导致通道关闭。 </p>。
+     * 
+     * 
      * @param  ch
      *         The channel to which bytes will be written
      *
@@ -594,6 +677,14 @@ public final class Channels {
      *                        .newEncoder(),
      *                    -1);</pre></blockquote>
      *
+     * <p>
+     *  构造一个根据命名的字符集对字符进行编码并将结果字节写入给定通道的写入程序。
+     * 
+     *  <p>表单的此方法的调用
+     * 
+     *  <blockquote> <pre> Channels.newWriter(ch,csname)</pre> </blockquote>
+     * 
+     * 
      * @param  ch
      *         The channel to which bytes will be written
      *

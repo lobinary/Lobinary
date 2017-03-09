@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DTMDefaultBaseIterators.java,v 1.2.4.1 2005/09/15 08:15:00 suresh_emailid Exp $
+ * <p>
+ *  $ Id：DTMDefaultBaseIterators.java,v 1.2.4.1 2005/09/15 08:15:00 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref;
 
@@ -34,6 +47,9 @@ import com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter;
 
 /**
  * This class implements the traversers for DTMDefaultBase.
+ * <p>
+ *  这个类实现了DTMDefaultBase的遍历器。
+ * 
  */
 public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 {
@@ -41,6 +57,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Construct a DTMDefaultBaseTraversers object from a DOM node.
    *
+   * <p>
+   *  从DOM节点构造一个DTMDefaultBaseTraversers对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -63,6 +83,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Construct a DTMDefaultBaseTraversers object from a DOM node.
    *
+   * <p>
+   *  从DOM节点构造一个DTMDefaultBaseTraversers对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -94,6 +118,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    * Returns an iterator that must be initialized
    * with a start node (using iterator.setStartNode()).
    *
+   * <p>
+   *  获取一个可以在XPath Axis上导航的迭代器,由扩展类型ID预测。返回一个必须用起始节点初始化的迭代器(使用iterator.setStartNode())。
+   * 
+   * 
    * @param axis One of Axes.ANCESTORORSELF, etc.
    * @param type An extended type ID.
    *
@@ -107,6 +135,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /* This causes an error when using patterns for elements that
        do not exist in the DOM (translet types which do not correspond
        to a DOM type are mapped to the DOM.ELEMENT type).
+    /* <p>
+    /*  不存在于DOM中(与DOM类型不对应的translet类型映射到DOM.ELEMENT类型)。
+    /* 
     */
 
     //        if (type == NO_TYPE) {
@@ -176,6 +207,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    * Returns a bare-bones iterator that must be initialized
    * with a start node (using iterator.setStartNode()).
    *
+   * <p>
+   *  这是实现XPath轴的迭代器的快捷方式。返回一个裸体迭代器,它必须使用一个起始节点初始化(使用iterator.setStartNode())。
+   * 
+   * 
    * @param axis One of Axes.ANCESTORORSELF, etc.
    *
    * @return A DTMAxisIterator, or null if the given axis isn't supported.
@@ -243,6 +278,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    * individual axis iterator.
    *
    * Currently there isn't a lot here
+   * <p>
+   * 抽象超类定义由所有DTMDefault的DTMAxisIterator的内部实现共享的行为。将此子类(如果需要,覆盖)实现单个轴迭代器的细节。
+   * 
+   *  目前这里没有很多
+   * 
    */
   public abstract class InternalAxisIteratorBase extends DTMAxisIteratorBase
   {
@@ -259,6 +299,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Current iteration location. Usually this is the last location
      * returned (starting point for the next() search); for single-node
      * iterators it may instead be initialized to point to that single node.
+     * <p>
+     *  当前迭代位置。通常这是返回的最后一个位置(下一个()搜索的起始点);对于单节点迭代器,它可以被初始化为指向该单个节点。
+     * 
      */
     protected int _currentNode;
 
@@ -266,6 +309,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Remembers the current node for the next call to gotoMark().
      *
      * %REVIEW% Should this save _position too?
+     * <p>
+     *  记住下一次调用gotoMark()的当前节点。
+     * 
+     *  ％REVIEW％这应该保存_position吗?
+     * 
      */
     public void setMark()
     {
@@ -276,6 +324,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Restores the current node remembered by setMark().
      *
      * %REVEIW% Should this restore _position too?
+     * <p>
+     *  恢复由setMark()记住的当前节点。
+     * 
+     *  ％REVEIW％这个还原_position吗?
+     * 
      */
     public void gotoMark()
     {
@@ -286,6 +339,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns all immediate children of a given node
+   * <p>
+   *  迭代器返回给定节点的所有直接子节点
+   * 
    */
   public final class ChildrenIterator extends InternalAxisIteratorBase
   {
@@ -298,6 +354,12 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * %REVIEW% Should it return/throw something in that case,
      * or set current node to END, to indicate request-not-honored?
      *
+     * <p>
+     *  设置开始到END应该"关闭"迭代器,即,next()的后续调用应该返回END。
+     * 
+     *  如果迭代器不可重新启动,这没有效果。 ％REVIEW％在这种情况下是否应该返回/ throw一些东西,或者将当前节点设置为END,以指示请求不成功?
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -322,6 +384,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END if no more
      * are available.
      */
@@ -341,6 +407,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    * Iterator that returns the parent of a given node. Note that
    * this delivers only a single node; if you want all the ancestors,
    * see AncestorIterator.
+   * <p>
+   *  返回给定节点的父代的迭代器。注意,这只传递一个节点;如果你想要所有的祖先,请参见AncestorIterator。
+   * 
    */
   public final class ParentIterator extends InternalAxisIteratorBase
   {
@@ -352,6 +421,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -378,6 +451,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * this type", but "yield the parent if it is of this type".
      *
      *
+     * <p>
+     *  设置我们要查找的父节点的节点类型。注意,这不是_not_意味着"找到这个类型的最近的祖先",而是"如果它是这种类型,则产生父类"。
+     * 
+     * 
      * @param type extended type ID.
      *
      * @return ParentIterator configured with the type filter set.
@@ -394,6 +471,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Get the next node in the iteration. In this case, we return
      * only the immediate parent, _if_ it matches the requested nodeType.
      *
+     * <p>
+     * 获取迭代中的下一个节点。在这种情况下,我们只返回直接父,_if_它匹配请求的nodeType。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -421,6 +502,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    * The functionality chould be achieved by putting a filter on top
    * of a basic child iterator, but a specialised iterator is used
    * for efficiency (both speed and size of translet).
+   * <p>
+   *  返回给定节点的给定类型的子类的迭代器。该功能可以通过在基本子迭代器的顶部放置一个过滤器来实现,但是一个专门的迭代器用于效率(速度和translet的速度和大小)。
+   * 
    */
   public final class TypedChildrenIterator extends InternalAxisIteratorBase
   {
@@ -432,6 +516,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedChildrenIterator
      *
      *
+     * <p>
+     *  构造函数TypedChildrenIterator
+     * 
+     * 
      * @param nodeType The extended type ID being requested.
      */
     public TypedChildrenIterator(int nodeType)
@@ -443,6 +531,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -468,6 +560,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -511,6 +607,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    * given node. The functionality chould be achieved by putting a
    * filter on top of a basic child iterator, but a specialised
    * iterator is used for efficiency (both speed and size of translet).
+   * <p>
+   *  Iterator返回给定节点的给定命名空间内的子节点。该功能可以通过在基本子迭代器的顶部放置一个过滤器来实现,但是一个专门的迭代器用于效率(速度和translet的速度和大小)。
+   * 
    */
   public final class NamespaceChildrenIterator
           extends InternalAxisIteratorBase
@@ -523,6 +622,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor NamespaceChildrenIterator
      *
      *
+     * <p>
+     *  构造函数NamespaceChildrenIterator
+     * 
+     * 
      * @param type The extended type ID being requested.
      */
     public NamespaceChildrenIterator(final int type)
@@ -534,6 +637,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -557,6 +664,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -582,6 +693,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Iterator that returns the namespace nodes as defined by the XPath data model
    * for a given node.
+   * <p>
+   *  Iterator返回给定节点的XPath数据模型定义的命名空间节点。
+   * 
    */
   public class NamespaceIterator
           extends InternalAxisIteratorBase
@@ -589,6 +703,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
     /**
      * Constructor NamespaceAttributeIterator
+     * <p>
+     *  构造函数NamespaceAttributeIterator
+     * 
      */
     public NamespaceIterator()
     {
@@ -600,6 +717,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -623,6 +744,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -640,6 +765,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Iterator that returns the namespace nodes as defined by the XPath data model
    * for a given node, filtered by extended type ID.
+   * <p>
+   *  Iterator返回由扩展类型ID过滤的给定节点的XPath数据模型定义的命名空间节点。
+   * 
    */
   public class TypedNamespaceIterator extends NamespaceIterator
   {
@@ -651,6 +779,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedNamespaceIterator
      *
      *
+     * <p>
+     *  构造函数TypedNamespaceIterator
+     * 
+     * 
      * @param nodeType The extended type ID being requested.
      */
     public TypedNamespaceIterator(int nodeType)
@@ -662,6 +794,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -687,6 +823,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Iterator that returns the the root node as defined by the XPath data model
    * for a given node.
+   * <p>
+   * 迭代器,返回由给定节点的XPath数据模型定义的根节点。
+   * 
    */
   public class RootIterator
           extends InternalAxisIteratorBase
@@ -694,6 +833,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
     /**
      * Constructor RootIterator
+     * <p>
+     *  构造函数RootIterator
+     * 
      */
     public RootIterator()
     {
@@ -705,6 +847,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -726,6 +872,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -742,6 +892,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Iterator that returns the namespace nodes as defined by the XPath data model
    * for a given node, filtered by extended type ID.
+   * <p>
+   *  Iterator返回由扩展类型ID过滤的给定节点的XPath数据模型定义的命名空间节点。
+   * 
    */
   public class TypedRootIterator extends RootIterator
   {
@@ -752,6 +905,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Constructor TypedRootIterator
      *
+     * <p>
+     *  构造函数TypedRootIterator
+     * 
+     * 
      * @param nodeType The extended type ID being requested.
      */
     public TypedRootIterator(int nodeType)
@@ -763,6 +920,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -798,6 +959,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns attributes within a given namespace for a node.
+   * <p>
+   *  返回节点的给定命名空间内的属性的迭代器。
+   * 
    */
   public final class NamespaceAttributeIterator
           extends InternalAxisIteratorBase
@@ -810,6 +974,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor NamespaceAttributeIterator
      *
      *
+     * <p>
+     *  构造函数NamespaceAttributeIterator
+     * 
+     * 
      * @param nsType The extended type ID being requested.
      */
     public NamespaceAttributeIterator(int nsType)
@@ -824,6 +992,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -847,6 +1019,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -863,6 +1039,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns all siblings of a given node.
+   * <p>
+   *  返回给定节点的所有兄弟节点的迭代器。
+   * 
    */
   public class FollowingSiblingIterator extends InternalAxisIteratorBase
   {
@@ -871,6 +1050,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -894,6 +1077,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -906,6 +1093,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns all following siblings of a given node.
+   * <p>
+   *  返回给定节点的所有后续兄弟节点的Iterator。
+   * 
    */
   public final class TypedFollowingSiblingIterator
           extends FollowingSiblingIterator
@@ -918,6 +1108,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedFollowingSiblingIterator
      *
      *
+     * <p>
+     *  构造函数TypedFollowingSiblingIterator
+     * 
+     * 
      * @param type The extended type ID being requested.
      */
     public TypedFollowingSiblingIterator(int type)
@@ -928,6 +1122,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -967,6 +1165,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns attribute nodes (of what nodes?)
+   * <p>
+   *  迭代器返回属性节点(什么节点?)
+   * 
    */
   public final class AttributeIterator extends InternalAxisIteratorBase
   {
@@ -977,6 +1178,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -1000,6 +1205,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1018,6 +1227,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns attribute nodes of a given type
+   * <p>
+   *  返回给定类型的属性节点的迭代器
+   * 
    */
   public final class TypedAttributeIterator extends InternalAxisIteratorBase
   {
@@ -1029,6 +1241,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedAttributeIterator
      *
      *
+     * <p>
+     *  构造函数TypedAttributeIterator
+     * 
+     * 
      * @param nodeType The extended type ID that is requested.
      */
     public TypedAttributeIterator(int nodeType)
@@ -1042,6 +1258,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -1063,6 +1283,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1080,18 +1304,28 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns preceding siblings of a given node
+   * <p>
+   *  返回给定节点的先前兄弟节点的迭代器
+   * 
    */
   public class PrecedingSiblingIterator extends InternalAxisIteratorBase
   {
 
     /**
      * The node identity of _startNode for this iterator
+     * <p>
+     * 此迭代器的_startNode的节点标识
+     * 
      */
     protected int _startNodeID;
 
     /**
      * True if this iterator has a reversed axis.
      *
+     * <p>
+     *  如果此迭代器具有反转轴,则为true。
+     * 
+     * 
      * @return true.
      */
     public boolean isReverse()
@@ -1103,6 +1337,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -1148,6 +1386,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1170,6 +1412,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Iterator that returns preceding siblings of a given type for
    * a given node
+   * <p>
+   *  迭代器,返回给定节点的给定类型的先前兄弟节点
+   * 
    */
   public final class TypedPrecedingSiblingIterator
           extends PrecedingSiblingIterator
@@ -1182,6 +1427,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedPrecedingSiblingIterator
      *
      *
+     * <p>
+     *  构造函数TypedPrecedingSiblingIterator
+     * 
+     * 
      * @param type The extended type ID being requested.
      */
     public TypedPrecedingSiblingIterator(int type)
@@ -1192,6 +1441,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1236,6 +1489,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    * Iterator that returns preceding nodes of a given node.
    * This includes the node set {root+1, start-1}, but excludes
    * all ancestors, attributes, and namespace nodes.
+   * <p>
+   *  返回给定节点的前一节点的迭代器。这包括节点集{root + 1,start-1},但排除所有祖先,属性和命名空间节点。
+   * 
    */
   public class PrecedingIterator extends InternalAxisIteratorBase
   {
@@ -1246,6 +1502,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * The stack of start node + ancestors up to the root of the tree,
      *  which we must avoid.
+     * <p>
+     *  堆栈的起始节点+祖先到树的根,这是我们必须避免的。
+     * 
      */
     protected int[] _stack = new int[_maxAncestors];
 
@@ -1259,6 +1518,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * True if this iterator has a reversed axis.
      *
+     * <p>
+     *  如果此迭代器具有反转轴,则为true。
+     * 
+     * 
      * @return true since this iterator is a reversed axis.
      */
     public boolean isReverse()
@@ -1269,6 +1532,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Returns a deep copy of this iterator.   The cloned iterator is not reset.
      *
+     * <p>
+     *  返回此迭代器的深度副本。克隆的迭代器不会重置。
+     * 
+     * 
      * @return a deep copy of this iterator.
      */
     public DTMAxisIterator cloneIterator()
@@ -1296,6 +1563,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -1347,6 +1618,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1375,6 +1650,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Resets the iterator to the last start node.
      *
+     * <p>
+     *  将迭代器重置为最后一个起始节点。
+     * 
+     * 
      * @return A DTMAxisIterator, which may or may not be the same as this
      *         iterator.
      */
@@ -1402,6 +1681,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    * Iterator that returns preceding nodes of agiven type for a
    * given node. This includes the node set {root+1, start-1}, but
    * excludes all ancestors.
+   * <p>
+   *  迭代器,返回给定节点的给定类型的先前节点。这包括节点集{root + 1,start-1},但排除所有祖先。
+   * 
    */
   public final class TypedPrecedingIterator extends PrecedingIterator
   {
@@ -1413,6 +1695,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedPrecedingIterator
      *
      *
+     * <p>
+     *  构造函数TypedPrecedingIterator
+     * 
+     * 
      * @param type The extended type ID being requested.
      */
     public TypedPrecedingIterator(int type)
@@ -1423,6 +1709,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1483,6 +1773,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns following nodes of for a given node.
+   * <p>
+   *  迭代器返回给定节点的以下节点。
+   * 
    */
   public class FollowingIterator extends InternalAxisIteratorBase
   {
@@ -1497,6 +1790,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -1527,6 +1824,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1542,6 +1843,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns following nodes of a given type for a given node.
+   * <p>
+   *  迭代器,返回给定节点的给定类型的以下节点。
+   * 
    */
   public final class TypedFollowingIterator extends FollowingIterator
   {
@@ -1553,6 +1857,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedFollowingIterator
      *
      *
+     * <p>
+     *  构造函数TypedFollowingIterator
+     * 
+     * 
      * @param type The extended type ID being requested.
      */
     public TypedFollowingIterator(int type)
@@ -1563,6 +1871,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1586,6 +1898,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Iterator that returns the ancestors of a given node in document
    * order.  (NOTE!  This was changed from the XSLTC code!)
+   * <p>
+   * 迭代器,以文档顺序返回给定节点的祖先。 (注意！这从XSLTC代码改变了！)
+   * 
    */
   public class AncestorIterator extends InternalAxisIteratorBase
   {
@@ -1603,6 +1918,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Get start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  获取开始到END应该"关闭"迭代器,即,next()的后续调用应该返回END。
+     * 
+     * 
      * @return The root node of the iteration.
      */
     public int getStartNode()
@@ -1613,6 +1932,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * True if this iterator has a reversed axis.
      *
+     * <p>
+     *  如果此迭代器具有反转轴,则为true。
+     * 
+     * 
      * @return true since this iterator is a reversed axis.
      */
     public final boolean isReverse()
@@ -1623,6 +1946,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Returns a deep copy of this iterator.  The cloned iterator is not reset.
      *
+     * <p>
+     *  返回此迭代器的深度副本。克隆的迭代器不会重置。
+     * 
+     * 
      * @return a deep copy of this iterator.
      */
     public DTMAxisIterator cloneIterator()
@@ -1648,6 +1975,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -1690,6 +2021,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Resets the iterator to the last start node.
      *
+     * <p>
+     *  将迭代器重置为最后一个起始节点。
+     * 
+     * 
      * @return A DTMAxisIterator, which may or may not be the same as this
      *         iterator.
      */
@@ -1707,6 +2042,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1735,6 +2074,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Typed iterator that returns the ancestors of a given node.
+   * <p>
+   *  类型化迭代器,返回给定节点的祖先。
+   * 
    */
   public final class TypedAncestorIterator extends AncestorIterator
   {
@@ -1746,6 +2088,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedAncestorIterator
      *
      *
+     * <p>
+     *  构造函数TypedAncestorIterator
+     * 
+     * 
      * @param type The extended type ID being requested.
      */
     public TypedAncestorIterator(int type)
@@ -1757,6 +2103,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -1815,6 +2165,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns the descendants of a given node.
+   * <p>
+   *  迭代器,返回给定节点的后代。
+   * 
    */
   public class DescendantIterator extends InternalAxisIteratorBase
   {
@@ -1823,6 +2176,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -1859,6 +2216,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * for this iterator, but it's not really an isDescendent() test.
      * %REVIEW% rename?
      *
+     * <p>
+     *  告诉这个节点标识是否是一个子孙。假设已经获得了元素的节点信息。
+     * 
+     *  这种单方面测试只有当父母以前已经过测试并且已知是后代时才会工作。如果父节点是_startNode的下一个兄弟节点,或者是文档顺序中跟随_startNode的任何节点,它将失败。
+     * 这可能就足够了这个迭代器,但它不是一个真正的isDescendent()测试。 ％REVIEW％rename?。
+     * 
+     * 
      * @param identity The index number of the node in question.
      * @return true if the index is a descendant of _startNode.
      */
@@ -1870,6 +2234,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1902,6 +2270,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Reset.
      *
+     * <p>
+     *  重启。
+     * 
      */
   public DTMAxisIterator reset()
   {
@@ -1921,6 +2292,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Typed iterator that returns the descendants of a given node.
+   * <p>
+   *  类型化迭代器,返回给定节点的后代。
+   * 
    */
   public final class TypedDescendantIterator extends DescendantIterator
   {
@@ -1932,6 +2306,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedDescendantIterator
      *
      *
+     * <p>
+     *  构造函数TypedDescendantIterator
+     * 
+     * 
      * @param nodeType Extended type ID being requested.
      */
     public TypedDescendantIterator(int nodeType)
@@ -1942,6 +2320,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -1975,6 +2357,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
   /**
    * Iterator that returns the descendants of a given node.
    * I'm not exactly clear about this one... -sb
+   * <p>
+   * 迭代器,返回给定节点的后代。我不清楚这一个...
+   * 
    */
   public class NthDescendantIterator extends DescendantIterator
   {
@@ -1986,6 +2371,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor NthDescendantIterator
      *
      *
+     * <p>
+     *  构造函数NthDescendantIterator
+     * 
+     * 
      * @param pos The nth position being requested.
      */
     public NthDescendantIterator(int pos)
@@ -1996,6 +2385,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -2031,6 +2424,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Class SingletonIterator.
+   * <p>
+   *  类SingletonIterator。
+   * 
    */
   public class SingletonIterator extends InternalAxisIteratorBase
   {
@@ -2041,6 +2437,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Constructor SingletonIterator
      *
+     * <p>
+     *  构造函数SingletonIterator
+     * 
      */
     public SingletonIterator()
     {
@@ -2051,6 +2450,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor SingletonIterator
      *
      *
+     * <p>
+     *  构造函数SingletonIterator
+     * 
+     * 
      * @param node The node handle to return.
      */
     public SingletonIterator(int node)
@@ -2062,6 +2465,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor SingletonIterator
      *
      *
+     * <p>
+     *  构造函数SingletonIterator
+     * 
+     * 
      * @param node the node handle to return.
      * @param constant (Not sure what this is yet.  -sb)
      */
@@ -2075,6 +2482,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Set start to END should 'close' the iterator,
      * i.e. subsequent call to next() should return END.
      *
+     * <p>
+     *  将start设置为END应该'关闭'迭代器,即对next()的后续调用应该返回END。
+     * 
+     * 
      * @param node Sets the root of the iteration.
      *
      * @return A DTMAxisIterator set to the start of the iteration.
@@ -2103,6 +2514,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Resets the iterator to the last start node.
      *
+     * <p>
+     *  将迭代器重置为最后一个起始节点。
+     * 
+     * 
      * @return A DTMAxisIterator, which may or may not be the same as this
      *         iterator.
      */
@@ -2132,6 +2547,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()
@@ -2147,6 +2566,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
   /**
    * Iterator that returns a given node only if it is of a given type.
+   * <p>
+   *  只有给定节点属于给定类型时才返回给定节点的迭代器。
+   * 
    */
   public final class TypedSingletonIterator extends SingletonIterator
   {
@@ -2158,6 +2580,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Constructor TypedSingletonIterator
      *
      *
+     * <p>
+     *  构造函数TypedSingletonIterator
+     * 
+     * 
      * @param nodeType The extended type ID being requested.
      */
     public TypedSingletonIterator(int nodeType)
@@ -2168,6 +2594,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
     /**
      * Get the next node in the iteration.
      *
+     * <p>
+     *  获取迭代中的下一个节点。
+     * 
      * @return The next node handle in the iteration, or END.
      */
     public int next()

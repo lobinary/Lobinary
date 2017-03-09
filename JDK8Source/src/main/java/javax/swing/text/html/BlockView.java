@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import javax.swing.text.*;
  * A view implementation to display a block (as a box)
  * with CSS specifications.
  *
+ * <p>
+ *  用CSS规范显示块(作为框)的视图实现。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class BlockView extends BoxView  {
@@ -44,6 +49,10 @@ public class BlockView extends BoxView  {
      * html box.  This can be used for a number
      * of elements.
      *
+     * <p>
+     *  创建一个表示html框的新视图。这可以用于多个元素。
+     * 
+     * 
      * @param elem the element to create a view for
      * @param axis either View.X_AXIS or View.Y_AXIS
      */
@@ -64,6 +73,12 @@ public class BlockView extends BoxView  {
      * the ability to resolve upward through the parents
      * view attributes.
      *
+     * <p>
+     *  为此视图建立父视图。如果父视图正常工作,这保证在任何其他方法之前被调用。
+     * <p>
+     *  这被实现为转发到超类以及调用{@link #setPropertiesFromAttributes()}方法从css属性设置段落属性。此时进行调用以确保通过父视图属性向上分辨的能力。
+     * 
+     * 
      * @param parent the new parent, or null if the view is
      *  being removed from a parent it was previously added
      *  to
@@ -81,6 +96,9 @@ public class BlockView extends BoxView  {
      * to provide the superclass behavior and then adjust it if the
      * CSS width or height attribute is specified and applicable to
      * the axis.
+     * <p>
+     *  计算沿着主轴(即与其并列的轴)的块的要求。这被实现以提供超类行为,然后如果CSS宽度或高度属性被指定并适用于轴,则对其进行调整。
+     * 
      */
     protected SizeRequirements calculateMajorAxisRequirements(int axis, SizeRequirements r) {
         if (r == null) {
@@ -111,6 +129,9 @@ public class BlockView extends BoxView  {
      * to provide the superclass behavior and then adjust it if the
      * CSS width or height attribute is specified and applicable to
      * the axis.
+     * <p>
+     *  计算块沿着短轴(即,与轴一起正交的轴及其贴片)的要求。这被实现以提供超类行为,然后如果CSS宽度或高度属性被指定并适用于轴,则对其进行调整。
+     * 
      */
     protected SizeRequirements calculateMinorAxisRequirements(int axis, SizeRequirements r) {
         if (r == null) {
@@ -125,6 +146,9 @@ public class BlockView extends BoxView  {
              * children that have a percentage value specified will be treated
              * as completely stretchable since that child is not limited in any
              * way.
+             * <p>
+             * 这些需求不是由属性直接指定的,因此请计算子项的需求的聚合。具有指定百分比值的孩子将被视为完全可伸展的,因为该孩子不以任何方式受到限制。
+             * 
              */
 /*
             int min = 0;
@@ -142,6 +166,11 @@ public class BlockView extends BoxView  {
             r.preferred = (int) pref;
             r.minimum = min;
             r.maximum = max;
+/* <p>
+/*  int min = 0; long pref = 0; int max = 0; int n = getViewCount(); for(int i = 0; i <n; i ++){View v = getView(i); min = Math.max((int)v.getMinimumSpan(axis),min); pref = Math.max((int)v.getPreferredSpan(axis),pref); if(max = Math.max((int)v.getMaximumSpan(axis),max);。
+/* 
+/*  } r.preferred =(int)pref; r.minimum = min; r.maximum = max;
+/* 
             */
             r = super.calculateMinorAxisRequirements(axis, r);
         }
@@ -162,6 +191,9 @@ public class BlockView extends BoxView  {
          * Set the alignment based upon the CSS properties if it is
          * specified.  For X_AXIS this would be text-align, for
          * Y_AXIS this would be vertical-align.
+         * <p>
+         *  如果指定了CSS属性,请根据CSS属性设置对齐方式。对于X_AXIS这将是文本对齐,对于Y_AXIS这将是vertical-align。
+         * 
          */
         if (axis == X_AXIS) {
             Object o = getAttributes().getAttribute(CSS.Attribute.TEXT_ALIGN);
@@ -198,6 +230,9 @@ public class BlockView extends BoxView  {
      * it is specified along the applicable axis.  Return true if the
      * size is exactly specified, false if the span is not specified
      * in an attribute or the size specified is a percentage.
+     * <p>
+     *  如果沿适用的轴指定,则将给定的要求调整为CSS宽度或高度。如果大小完全指定,则返回true,如果未在属性中指定span或指定的大小为百分比,则返回false。
+     * 
      */
     static boolean spanSetFromAttributes(int axis, SizeRequirements r,
                                          CSS.LengthValue cssWidth,
@@ -223,6 +258,10 @@ public class BlockView extends BoxView  {
      * placed in the given arrays which represent the allocations to
      * the children along the minor axis.
      *
+     * <p>
+     *  执行箱子短轴(即与它代表的轴正交的轴)的布局。布局的结果(每个子节点的偏移和跨度)被放置在给定的数组中,这些数组表示沿着短轴的子节点的分配。
+     * 
+     * 
      * @param targetSpan the total span given to the view, which
      *  would be used to layout the children.
      * @param axis the axis being layed out
@@ -272,6 +311,10 @@ public class BlockView extends BoxView  {
      * painter to paint the border and background prior to the
      * interior.
      *
+     * <p>
+     *  使用给定的渲染表面和该表面上的区域渲染。这被实现委托给css盒子画家在内部之前绘制边界和背景。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param allocation the allocated region to render into
      * @see View#paint
@@ -286,6 +329,9 @@ public class BlockView extends BoxView  {
      * Fetches the attributes to use when rendering.  This is
      * implemented to multiplex the attributes specified in the
      * model with a StyleSheet.
+     * <p>
+     * 获取渲染时要使用的属性。这被实现为将在模型中指定的属性与StyleSheet复用。
+     * 
      */
     public AttributeSet getAttributes() {
         if (attr == null) {
@@ -298,6 +344,10 @@ public class BlockView extends BoxView  {
     /**
      * Gets the resize weight.
      *
+     * <p>
+     *  获取调整大小权重。
+     * 
+     * 
      * @param axis may be either X_AXIS or Y_AXIS
      * @return the weight
      * @exception IllegalArgumentException for an invalid axis
@@ -316,6 +366,10 @@ public class BlockView extends BoxView  {
     /**
      * Gets the alignment.
      *
+     * <p>
+     *  获取对齐。
+     * 
+     * 
      * @param axis may be either X_AXIS or Y_AXIS
      * @return the alignment
      */
@@ -350,6 +404,10 @@ public class BlockView extends BoxView  {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *           or <code>View.Y_AXIS</code>
      * @return   the span the view would like to be rendered into &gt;= 0;
@@ -366,6 +424,10 @@ public class BlockView extends BoxView  {
      * Determines the minimum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *           or <code>View.Y_AXIS</code>
      * @return  the span the view would like to be rendered into &gt;= 0;
@@ -382,6 +444,10 @@ public class BlockView extends BoxView  {
      * Determines the maximum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最大跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *           or <code>View.Y_AXIS</code>
      * @return   the span the view would like to be rendered into &gt;= 0;
@@ -396,6 +462,9 @@ public class BlockView extends BoxView  {
 
     /**
      * Update any cached values that come from attributes.
+     * <p>
+     *  更新来自属性的任何缓存值。
+     * 
      */
     protected void setPropertiesFromAttributes() {
 
@@ -425,6 +494,8 @@ public class BlockView extends BoxView  {
     /**
      * Constrains <code>want</code> to fit in the minimum size specified
      * by <code>min</code>.
+     * <p>
+     *  约束<code>希望</code>适合由<code> min </code>指定的最小大小。
      */
     private void constrainSize(int axis, SizeRequirements want,
                                SizeRequirements min) {

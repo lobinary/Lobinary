@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,8 @@ import java.util.List;
 
 /**
  *
+ * <p>
+ * 
  * A tree node for an @exception or &#064;throws block tag.
  * &#064;exception is a synonym for &#064;throws.
  *

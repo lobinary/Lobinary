@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.util.*;
  * This class consists exclusively of static methods that operate on sets of
  * {@link PosixFilePermission} objects.
  *
+ * <p>
+ *  这个类只包括对{@link PosixFilePermission}对象进行操作的静态方法。
+ * 
+ * 
  * @since 1.7
  */
 
@@ -65,6 +70,12 @@ public final class PosixFilePermissions {
      * <p> If the set contains {@code null} or elements that are not of type
      * {@code PosixFilePermission} then these elements are ignored.
      *
+     * <p>
+     *  返回一组权限的{@code String}表示形式。它保证返回的{@code String}可以由{@link #fromString}方法解析。
+     * 
+     *  <p>如果集合包含{@code null}或不是类型为{@code PosixFilePermission}的元素,则会忽略这些元素。
+     * 
+     * 
      * @param   perms
      *          the set of permissions
      *
@@ -113,6 +124,16 @@ public final class PosixFilePermissions {
      *   Set&lt;PosixFilePermission&gt; perms = PosixFilePermissions.fromString("rwxr-x---");
      * </pre>
      *
+     * <p>
+     *  返回与给定{@code String}表示形式对应的权限集。
+     * 
+     *  <p> {@code perms}参数是一个表示权限的{@code String}参数。它有9个字符,被解释为三组三个。第一个集合指的是所有者的权限;旁边的组权限和最后的对其他人。
+     * 在每个集合中,第一个字符是{@code'r'}表示读取权限,第二个字符是{@code'w'}表示允许写入,第三个字符是{@code'x'}执行权限。
+     * 如果未设置权限,则相应的字符将设置为{@code' - '}。
+     * 
+     *  <p> <b>用法示例：</b>假设我们需要一组权限,表明所有者具有读取,写入和执行权限,该组具有读取和执行权限,其他权限没有权限。
+     * <pre>
+     * 
      * @param   perms
      *          string representing a set of permissions
      *
@@ -145,6 +166,11 @@ public final class PosixFilePermissions {
      * createFile} or {@link java.nio.file.Files#createDirectory createDirectory}
      * methods.
      *
+     * <p>
+     *  设置&lt; PosixFilePermission&gt; perms = PosixFilePermissions.fromString("rwxr-x ---");
+     * </pre>
+     * 
+     * 
      * @param   perms
      *          the set of permissions
      *

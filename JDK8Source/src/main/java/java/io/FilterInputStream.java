@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,12 @@ package java.io;
  * and may also provide additional methods
  * and fields.
  *
+ * <p>
+ *  <code> FilterInputStream </code>包含一些其他输入流,它用作其基本数据源,可能会沿着数据转换或提供额外的功能。
+ * 类<code> FilterInputStream </code>本身简单地覆盖了所有方法的<code> InputStream </code>与传递所有请求到包含的输入流的版本。
+ *  <code> FilterInputStream </code>的子类可以进一步覆盖这些方法中的一些,并且还可以提供附加的方法和字段。
+ * 
+ * 
  * @author  Jonathan Payne
  * @since   JDK1.0
  */
@@ -46,6 +53,9 @@ public
 class FilterInputStream extends InputStream {
     /**
      * The input stream to be filtered.
+     * <p>
+     *  要过滤的输入流。
+     * 
      */
     protected volatile InputStream in;
 
@@ -55,6 +65,10 @@ class FilterInputStream extends InputStream {
      * to the field <code>this.in</code> so as
      * to remember it for later use.
      *
+     * <p>
+     *  通过将</code>中的参数<code>分配给<code> this.in </code>字段来创建<code> FilterInputStream </code>,以便记住以供日后使用。
+     * 
+     * 
      * @param   in   the underlying input stream, or <code>null</code> if
      *          this instance is to be created without an underlying stream.
      */
@@ -74,6 +88,13 @@ class FilterInputStream extends InputStream {
      * This method
      * simply performs <code>in.read()</code> and returns the result.
      *
+     * <p>
+     *  从此输入流读取数据的下一个字节。值字节作为<code> 0 </code>到<code> 255 </code>范围内的<code> int </code>返回。
+     * 如果没有字节可用,因为已经到达流的结尾,则返回值<code> -1 </code>。此方法阻塞,直到输入数据可用,检测到流的结尾,或抛出异常。
+     * <p>
+     *  这个方法只是执行<code> in.read()</code>并返回结果。
+     * 
+     * 
      * @return     the next byte of data, or <code>-1</code> if the end of the
      *             stream is reached.
      * @exception  IOException  if an I/O error occurs.
@@ -96,6 +117,13 @@ class FilterInputStream extends InputStream {
      * depend on the implementation strategy actually
      * used.
      *
+     * <p>
+     *  从此输入流中读取最多<code> byte.length </code>字节的数据为字节数组。此方法阻塞,直到某些输入可用。
+     * <p>
+     * 这个方法只是执行调用<code> read(b,0,b.length)</code>并返回结果。
+     * 重要的是它不会</i>做<code> in.read(b)</code>; <code> FilterInputStream </code>的某些子类依赖于实际使用的实现策略。
+     * 
+     * 
      * @param      b   the buffer into which the data is read.
      * @return     the total number of bytes read into the buffer, or
      *             <code>-1</code> if there is no more data because the end of
@@ -116,6 +144,13 @@ class FilterInputStream extends InputStream {
      * This method simply performs <code>in.read(b, off, len)</code>
      * and returns the result.
      *
+     * <p>
+     *  从此输入流中读取最多<code> len </code>字节的数据为字节数组。
+     * 如果<code> len </code>不为零,则该方法阻塞,直到某些输入可用;否则,不读取任何字节,并返回<code> 0 </code>。
+     * <p>
+     *  这个方法只是执行<code> in.read(b,off,len)</code>并返回结果。
+     * 
+     * 
      * @param      b     the buffer into which the data is read.
      * @param      off   the start offset in the destination array <code>b</code>
      * @param      len   the maximum number of bytes read.
@@ -142,6 +177,13 @@ class FilterInputStream extends InputStream {
      * <p>
      * This method simply performs <code>in.skip(n)</code>.
      *
+     * <p>
+     *  跳过并丢弃来自输入流的<code> n </code>字节数据。由于各种原因,<code> skip </code>方法可能跳过一些较小数量的字节,可能是<code> 0 </code>。
+     * 将返回实际跳过的字节数。
+     * <p>
+     *  这个方法只是执行<code> in.skip(n)</code>。
+     * 
+     * 
      * @param      n   the number of bytes to be skipped.
      * @return     the actual number of bytes skipped.
      * @exception  IOException  if the stream does not support seek,
@@ -160,6 +202,12 @@ class FilterInputStream extends InputStream {
      * <p>
      * This method returns the result of {@link #in in}.available().
      *
+     * <p>
+     *  返回此输入流中可以读取(或跳过)的字节数的估计值,而不会被此输入流的方法的下一个调用者阻止。下一个调用者可能是同一个线程或另一个线程。单个读取或跳过这么多字节不会阻塞,但可以读取或跳过更少的字节。
+     * <p>
+     *  此方法返回{@link #in in} .available()的结果。
+     * 
+     * 
      * @return     an estimate of the number of bytes that can be read (or skipped
      *             over) from this input stream without blocking.
      * @exception  IOException  if an I/O error occurs.
@@ -174,6 +222,10 @@ class FilterInputStream extends InputStream {
      * This
      * method simply performs <code>in.close()</code>.
      *
+     * <p>
+     *  关闭此输入流,并释放与流相关联的任何系统资源。这个方法只是执行<code> in.close()</code>。
+     * 
+     * 
      * @exception  IOException  if an I/O error occurs.
      * @see        java.io.FilterInputStream#in
      */
@@ -192,6 +244,14 @@ class FilterInputStream extends InputStream {
      * <p>
      * This method simply performs <code>in.mark(readlimit)</code>.
      *
+     * <p>
+     * 标记此输入流中的当前位置。随后对<code> reset </code>方法的调用将该流重新定位在最后标记的位置,使得后续读取重新读取相同的字节。
+     * <p>
+     *  <code> readlimit </code>参数告诉此输入流允许在标记位置无效之前读取许多字节。
+     * <p>
+     *  这个方法只是执行<code> in.mark(readlimit)</code>。
+     * 
+     * 
      * @param   readlimit   the maximum limit of bytes that can be read before
      *                      the mark position becomes invalid.
      * @see     java.io.FilterInputStream#in
@@ -217,6 +277,13 @@ class FilterInputStream extends InputStream {
      * If this happens within readlimit bytes, it allows the outer
      * code to reset the stream and try another parser.
      *
+     * <p>
+     *  将此流重新定位到在此输入流上最后调用<code>标记</code>方法时的位置。
+     * <p>
+     *  这个方法只是执行<code> in.reset()</code>。
+     * <p>
+     *  流标记用于需要提前阅读以查看流中的内容的情况。通常这最容易通过调用一些一般的解析器来完成。如果流是由解析处理的类型,它只是愉快地chugs。如果流不是该类型,解析器在失败时应抛出异常。
+     * 
      * @exception  IOException  if the stream has not been marked or if the
      *               mark has been invalidated.
      * @see        java.io.FilterInputStream#in
@@ -232,6 +299,10 @@ class FilterInputStream extends InputStream {
      * This method
      * simply performs <code>in.markSupported()</code>.
      *
+     * <p>
+     * 如果这发生在readlimit字节内,它允许外部代码重置流并尝试另一个解析器。
+     * 
+     * 
      * @return  <code>true</code> if this stream type supports the
      *          <code>mark</code> and <code>reset</code> method;
      *          <code>false</code> otherwise.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,8 @@ import java.util.ResourceBundle;
 
 /**
  * Formats error messages.
+ * <p>
+ *  格式化错误消息。
  */
 class Messages
 {

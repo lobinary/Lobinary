@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,6 +92,27 @@ import java.util.*;
  * }
  * </pre>
  *
+ * <p>
+ *  这个类的目的是帮助客户端通过GUI与文本字段的平滑聚焦导航。这样的GUI通常需要确保在允许用户导航出文本字段之前,由用户输入的文本是有效的(例如,其以正确的格式)。
+ * 为此,客户端创建<code> InputVerifier </code>的子类,并使用<code> JComponent </code>的<code> setInputVerifier </code>方
+ * 法,将其子类的实例附加到<code > JComponent </code>,它们的输入要验证。
+ *  这个类的目的是帮助客户端通过GUI与文本字段的平滑聚焦导航。这样的GUI通常需要确保在允许用户导航出文本字段之前,由用户输入的文本是有效的(例如,其以正确的格式)。
+ * 在将焦点转移到请求它的另一个Swing组件之前,输入验证器的<code> shouldYieldFocus </code>方法被调用。
+ * 仅当该方法返回<code> true </code>时,才会传输焦点。
+ * <p>
+ *  以下示例具有两个文本字段,第一个期望字符串"pass"由用户输入。如果在第一个文本字段中输入了该字符串,则用户可以通过单击或按TAB键前进到第二个文本字段。
+ * 但是,如果在第一个文本字段中输入了另一个字符串,则用户将无法将焦点转移到第二个文本字段。
+ * 
+ * <pre>
+ *  import java.awt。*; import java.util。*; import java.awt.event。*; import javax.swing。*;
+ * 
+ * //这个程序演示了使用Swing InputVerifier类。 //它创建两个文本字段;第一个文本字段期望//字符串"pass"作为输入,并且将允许焦点提前出来//只有在用户输入该字符串之后。
+ * 
+ *  public class VerifierTest extends JFrame {public VerifierTest(){JTextField tf1 = new JTextField("Type \"pass \"here"); getContentPane()。
+ * add(tf1,BorderLayout.NORTH); tf1.setInputVerifier(new PassVerifier());。
+ * 
+ *  JTextField tf2 = new JTextField("TextField2"); getContentPane()。add(tf2,BorderLayout.SOUTH);
+ * 
  *  @since 1.3
  */
 
@@ -102,6 +124,17 @@ public abstract class InputVerifier {
    * have no side effects. It returns a boolean indicating the status
    * of the argument's input.
    *
+   * <p>
+   * 
+   *  WindowListener l = new WindowAdapter(){public void windowClosing(WindowEvent e){System.exit(0); }}; 
+   * addWindowListener(l); }}。
+   * 
+   *  类PassVerifier扩展InputVerifier {public boolean verify(JComponent input){JTextField tf =(JTextField)input; return"pass".equals(tf.getText()); }
+   * }。
+   * 
+   *  public static void main(String [] args){Frame f = new VerifierTest(); f.pack(); f.setVisible(true); }
+   * }。
+   * 
    * @param input the JComponent to verify
    * @return <code>true</code> when valid, <code>false</code> when invalid
    * @see JComponent#setInputVerifier
@@ -121,6 +154,10 @@ public abstract class InputVerifier {
    * normally; if it returns <code>false</code>, then the focus remains in
    * the argument component.
    *
+   * <p>
+   * </pre>
+   * 
+   * 
    * @param input the JComponent to verify
    * @return <code>true</code> when valid, <code>false</code> when invalid
    * @see JComponent#setInputVerifier

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,18 @@ import javax.swing.SizeRequirements;
  * If the layout algorithm is changed, these methods will
  * likely need to be reimplemented.
  *
+ * <p>
+ *  一个视图,通过沿着一个轴平铺它的孩子将它的孩子排列成一个盒子形状。该框有点像在TeX中找到的,其中存在孩子的对齐,孩子的灵活性被考虑等。
+ * 这是可能有用于表示诸如线,段落,列表,列的集合的构建块,页面等。孩子们被平铺的轴被认为是主轴。正交轴是短轴。
+ * <p>
+ *  每个轴的布局由方法<code> layoutMajorAxis </code>和<code> layoutMinorAxis </code>分别处理。子类可以通过重新实现这些方法来更改布局算法。
+ * 这些方法将根据是否有缓存的布局信息以及缓存是否有效来进行调用。如果沿轴的给定大小改变,或者如果调用<code> layoutChanged </code>以强制更新布局,则通常调用这些方法。
+ *  <code> layoutChanged </code>方法无效缓存的布局信息,如果有的话。
+ * 发布到父视图的要求通过方法<code> calculateMajorAxisRequirements </code>和<code> calculateMinorAxisRequirements </code>
+ * 计算。
+ *  <code> layoutChanged </code>方法无效缓存的布局信息,如果有的话。如果布局算法改变,这些方法可能需要重新实现。
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class BoxView extends CompositeView {
@@ -63,6 +76,10 @@ public class BoxView extends CompositeView {
     /**
      * Constructs a <code>BoxView</code>.
      *
+     * <p>
+     *  构造一个<code> BoxView </code>。
+     * 
+     * 
      * @param elem the element this view is responsible for
      * @param axis either <code>View.X_AXIS</code> or <code>View.Y_AXIS</code>
      */
@@ -85,6 +102,10 @@ public class BoxView extends CompositeView {
      * Fetches the tile axis property.  This is the axis along which
      * the child views are tiled.
      *
+     * <p>
+     * 获取切片轴属性。这是子视图沿其平铺的轴。
+     * 
+     * 
      * @return the major axis of the box, either
      *  <code>View.X_AXIS</code> or <code>View.Y_AXIS</code>
      *
@@ -98,6 +119,10 @@ public class BoxView extends CompositeView {
      * Sets the tile axis property.  This is the axis along which
      * the child views are tiled.
      *
+     * <p>
+     *  设置切片轴属性。这是子视图沿其平铺的轴。
+     * 
+     * 
      * @param axis either <code>View.X_AXIS</code> or <code>View.Y_AXIS</code>
      *
      * @since 1.3
@@ -120,6 +145,11 @@ public class BoxView extends CompositeView {
      * be updated the next time the <code>setSize</code> method
      * is called on this view (typically in paint).
      *
+     * <p>
+     *  使沿轴的布局无效。如果任何子视图的首选项已更改,则会自动进行此操作。在某些情况下,当首选项未更改时,可能需要重新计算布局。可以通过调用此方法将布局标记为无效。
+     * 布局将在下次在此视图上调用<code> setSize </code>方法时更新(通常在绘画中)。
+     * 
+     * 
      * @param axis either <code>View.X_AXIS</code> or <code>View.Y_AXIS</code>
      *
      * @since 1.3
@@ -135,6 +165,10 @@ public class BoxView extends CompositeView {
     /**
      * Determines if the layout is valid along the given axis.
      *
+     * <p>
+     *  确定布局是否沿给定轴有效。
+     * 
+     * 
      * @param axis either <code>View.X_AXIS</code> or <code>View.Y_AXIS</code>
      *
      * @since 1.4
@@ -152,6 +186,10 @@ public class BoxView extends CompositeView {
      * that is all it does, but a subclass can use this to paint
      * things relative to the child.
      *
+     * <p>
+     *  涂一个孩子。默认情况下,它是它所做的一切,但一个子类可以使用它来绘制相对于孩子的东西。
+     * 
+     * 
      * @param g the graphics context
      * @param alloc the allocated region to paint into
      * @param index the child index, &gt;= 0 &amp;&amp; &lt; getViewCount()
@@ -169,6 +207,10 @@ public class BoxView extends CompositeView {
      * be accessed for the old layout, but the new children
      * will have an offset and span of 0.
      *
+     * <p>
+     *  使布局无效,并调整请求/分配的缓存大小。仍然可以为旧布局访问子分配,但新的子代将具有0的偏移和跨度。
+     * 
+     * 
      * @param index the starting index into the child views to insert
      *   the new views; this should be a value &gt;= 0 and &lt;= getViewCount
      * @param length the number of existing child views to remove;
@@ -199,6 +241,10 @@ public class BoxView extends CompositeView {
      * inserted into the new array at the appropriate places so that
      * the old layout information is transferred to the new array.
      *
+     * <p>
+     *  调整给定布局数组的大小以匹配新的子视图数。子视图的当前数量用于生成新数组。将旧数组的内容插入到新数组中的适当位置,以便将旧布局信息传输到新数组。
+     * 
+     * 
      * @param oldArray the original layout array
      * @param offset location where new views will be inserted
      * @param nInserted the number of child views being inserted;
@@ -224,6 +270,10 @@ public class BoxView extends CompositeView {
      * from the starting child to the end of the box will
      * be repainted.
      *
+     * <p>
+     * 将给定的<code> DocumentEvent </code>转发给需要通知模型更改的子视图。如果儿童改变其要求并且在转发之前分配是有效的,则从初始孩子到盒子结束的盒子的部分将被重画。
+     * 
+     * 
      * @param ec changes to the element this view is responsible
      *  for (may be <code>null</code> if there were no changes)
      * @param e the change information from the associated document
@@ -268,6 +318,10 @@ public class BoxView extends CompositeView {
      * calculations will be done the next time the children
      * need an allocation.
      *
+     * <p>
+     *  这由孩子调用以指示其首选跨度已更改。这被实现为丢弃高速缓存的布局信息,以便在下一次子进程需要分配时进行新的计算。
+     * 
+     * 
      * @param child the child view
      * @param width true if the width preference should change
      * @param height true if the height preference should change
@@ -289,6 +343,10 @@ public class BoxView extends CompositeView {
     /**
      * Gets the resize weight.  A value of 0 or less is not resizable.
      *
+     * <p>
+     *  获取调整大小权重。值为0或更小不可调整大小。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @return the weight
@@ -314,6 +372,10 @@ public class BoxView extends CompositeView {
      * Sets the size of the view along an axis.  This should cause
      * layout of the view along the given axis.
      *
+     * <p>
+     *  设置沿轴的视图大小。这应该导致沿给定轴的视图的布局。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @param span the span to layout to >= 0
@@ -352,6 +414,9 @@ public class BoxView extends CompositeView {
 
     /**
      * Propagates the current allocations to the child views.
+     * <p>
+     *  将当前分配传播到子视图。
+     * 
      */
     void updateChildSizes() {
         int n = getViewCount();
@@ -372,6 +437,10 @@ public class BoxView extends CompositeView {
      * Returns the size of the view along an axis.  This is implemented
      * to return zero.
      *
+     * <p>
+     *  返回沿轴的视图大小。这被实现为返回零。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @return the current span of the view along the given axis, >= 0
@@ -390,6 +459,10 @@ public class BoxView extends CompositeView {
      * information.  This is implemented to call the
      * layout method with the sizes inside of the insets.
      *
+     * <p>
+     *  设置视图的大小。如果视图缓存任何布局信息,这应该导致视图的布局。这被实现为调用具有插入内部大小的布局方法。
+     * 
+     * 
      * @param width the width &gt;= 0
      * @param height the height &gt;= 0
      */
@@ -405,6 +478,10 @@ public class BoxView extends CompositeView {
      * the clip bounds of the given <code>Graphics</code>
      * will be rendered.
      *
+     * <p>
+     *  使用该表面上给定的渲染表面和区域渲染<code> BoxView </code>。只有与给定<code> Graphics </code>的剪辑边界相交的子节点才会被渲染。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param allocation the allocated region to render into
      * @see View#paint
@@ -442,6 +519,10 @@ public class BoxView extends CompositeView {
      * <code>null</code> if the layout is invalid,
      * otherwise the superclass behavior is executed.
      *
+     * <p>
+     *  获取给定子视图的分配。这使得能够找到各种视图位于何处。这被实现为如果布局无效则返回<code> null </code>,否则执行超类行为。
+     * 
+     * 
      * @param index the index of the child, &gt;= 0 &amp;&amp; &gt; getViewCount()
      * @param a  the allocation to this view
      * @return the allocation to the child; or <code>null</code>
@@ -469,6 +550,10 @@ public class BoxView extends CompositeView {
      * to the coordinate space of the view mapped to it.  This makes
      * sure the allocation is valid before calling the superclass.
      *
+     * <p>
+     * 提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。这确保分配在调用超类之前有效。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param a the allocated region to render into
      * @return the bounding box of the given position
@@ -488,6 +573,10 @@ public class BoxView extends CompositeView {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param x   x coordinate of the view location to convert &gt;= 0
      * @param y   y coordinate of the view location to convert &gt;= 0
      * @param a the allocated region to render into
@@ -511,6 +600,10 @@ public class BoxView extends CompositeView {
      * being tiled.  The axis being tiled will request to be
      * centered (i.e. 0.5f).
      *
+     * <p>
+     *  确定沿着轴的该视图的期望对准。这被实现为给出定位儿童所需的总对准,其中对准点沿着与正被平铺的轴线正交的轴线排列。平铺的轴将请求居中(即0.5f)。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *   or <code>View.Y_AXIS</code>
      * @return the desired alignment &gt;= 0.0f &amp;&amp; &lt;= 1.0f; this should
@@ -533,6 +626,10 @@ public class BoxView extends CompositeView {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *           or <code>View.Y_AXIS</code>
      * @return   the span the view would like to be rendered into &gt;= 0;
@@ -556,6 +653,10 @@ public class BoxView extends CompositeView {
      * Determines the minimum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *           or <code>View.Y_AXIS</code>
      * @return  the span the view would like to be rendered into &gt;= 0;
@@ -579,6 +680,10 @@ public class BoxView extends CompositeView {
      * Determines the maximum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最大跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code>
      *           or <code>View.Y_AXIS</code>
      * @return   the span the view would like to be rendered into &gt;= 0;
@@ -604,6 +709,10 @@ public class BoxView extends CompositeView {
      * Are the allocations for the children still
      * valid?
      *
+     * <p>
+     *  子系统的分配是否仍然有效?
+     * 
+     * 
      * @return true if allocations still valid
      */
     protected boolean isAllocationValid() {
@@ -613,6 +722,10 @@ public class BoxView extends CompositeView {
     /**
      * Determines if a point falls before an allocated region.
      *
+     * <p>
+     *  确定点是否落在分配的区域之前。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param innerAlloc the allocated region; this is the area
@@ -630,6 +743,10 @@ public class BoxView extends CompositeView {
     /**
      * Determines if a point falls after an allocated region.
      *
+     * <p>
+     *  确定点是否落在分配的区域之后。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param innerAlloc the allocated region; this is the area
@@ -647,6 +764,10 @@ public class BoxView extends CompositeView {
     /**
      * Fetches the child view at the given coordinates.
      *
+     * <p>
+     *  在给定的坐标处获取子视图。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param alloc the parents inner allocation on entry, which should
@@ -687,6 +808,10 @@ public class BoxView extends CompositeView {
     /**
      * Allocates a region for a child view.
      *
+     * <p>
+     *  为子视图分配一个区域。
+     * 
+     * 
      * @param index the index of the child view to
      *   allocate, &gt;= 0 &amp;&amp; &lt; getViewCount()
      * @param alloc the allocated region
@@ -701,6 +826,10 @@ public class BoxView extends CompositeView {
     /**
      * Perform layout on the box
      *
+     * <p>
+     *  在框上执行布局
+     * 
+     * 
      * @param width the width (inside of the insets) &gt;= 0
      * @param height the height (inside of the insets) &gt;= 0
      */
@@ -712,6 +841,10 @@ public class BoxView extends CompositeView {
     /**
      * Returns the current width of the box.  This is the width that
      * it was last allocated.
+     * <p>
+     *  返回框的当前宽度。这是最后分配的宽度。
+     * 
+     * 
      * @return the current width of the box
      */
     public int getWidth() {
@@ -728,6 +861,10 @@ public class BoxView extends CompositeView {
     /**
      * Returns the current height of the box.  This is the height that
      * it was last allocated.
+     * <p>
+     *  返回框的当前高度。这是它最后分配的高度。
+     * 
+     * 
      * @return the current height of the box
      */
     public int getHeight() {
@@ -748,6 +885,10 @@ public class BoxView extends CompositeView {
      * arrays which represent the allocations to the children
      * along the major axis.
      *
+     * <p>
+     *  执行箱子长轴(即它代表的轴)的布局。布局的结果(每个孩子的偏移和跨度)被放置在给定的数组中,这些数组表示沿着长轴的孩子的分配。
+     * 
+     * 
      * @param targetSpan the total span given to the view, which
      *  would be used to layout the children
      * @param axis the axis being layed out
@@ -761,6 +902,9 @@ public class BoxView extends CompositeView {
         /*
          * first pass, calculate the preferred sizes
          * and the flexibility to adjust the sizes.
+         * <p>
+         * 第一次通过,计算首选尺寸和灵活性来调整尺寸。
+         * 
          */
         long preferred = 0;
         int n = getViewCount();
@@ -773,6 +917,9 @@ public class BoxView extends CompositeView {
         /*
          * Second pass, expand or contract by as much as possible to reach
          * the target span.
+         * <p>
+         *  第二遍,尽可能扩展或收缩到达目标跨度。
+         * 
          */
 
         // determine the adjustment to be made
@@ -821,6 +968,10 @@ public class BoxView extends CompositeView {
      * placed in the given arrays which represent the allocations to
      * the children along the minor axis.
      *
+     * <p>
+     *  执行箱子短轴(即与它代表的轴正交的轴)的布局。布局的结果(每个子节点的偏移和跨度)被放置在给定的数组中,这些数组表示沿着短轴的子节点的分配。
+     * 
+     * 
      * @param targetSpan the total span given to the view, which
      *  would be used to layout the children
      * @param axis the axis being layed out
@@ -853,6 +1004,10 @@ public class BoxView extends CompositeView {
      * Calculates the size requirements for the major axis
      * <code>axis</code>.
      *
+     * <p>
+     *  计算长轴<code> axis </code>的大小要求。
+     * 
+     * 
      * @param axis the axis being studied
      * @param r the <code>SizeRequirements</code> object;
      *          if <code>null</code> one will be created
@@ -887,6 +1042,10 @@ public class BoxView extends CompositeView {
      * Calculates the size requirements for the minor axis
      * <code>axis</code>.
      *
+     * <p>
+     *  计算短轴<code> axis </code>的大小要求。
+     * 
+     * 
      * @param axis the axis being studied
      * @param r the <code>SizeRequirements</code> object;
      *          if <code>null</code> one will be created
@@ -917,6 +1076,10 @@ public class BoxView extends CompositeView {
 
     /**
      * Checks the request cache and update if needed.
+     * <p>
+     *  检查请求缓存,如果需要更新。
+     * 
+     * 
      * @param axis the axis being studied
      * @exception IllegalArgumentException if <code>axis</code> is
      *  neither <code>View.X_AXIS</code> nor <code>View.Y_AXIS</code>
@@ -943,6 +1106,10 @@ public class BoxView extends CompositeView {
      * which is the width (or height) of the region we have to
      * work with.
      *
+     * <p>
+     *  在<code> BoxView </code>中给出每个子视图的位置和范围,其中给出了<code> targetSpan </code>,这是我们要处理的区域的宽度(或高度)。
+     * 
+     * 
      * @param targetSpan the total span given to the view, which
      *  would be used to layout the children
      * @param axis the axis being studied, either
@@ -998,6 +1165,10 @@ public class BoxView extends CompositeView {
      * Calculates the size requirements for this <code>BoxView</code>
      * by examining the size of each child view.
      *
+     * <p>
+     *  通过检查每个子视图的大小来计算此<Box> BoxView </code>的大小要求。
+     * 
+     * 
      * @param axis the axis being studied
      * @param r the <code>SizeRequirements</code> object;
      *          if <code>null</code> one will be created
@@ -1092,6 +1263,10 @@ public class BoxView extends CompositeView {
 
     /**
      * Fetches the offset of a particular child's current layout.
+     * <p>
+     *  获取特定孩子当前布局的偏移量。
+     * 
+     * 
      * @param axis the axis being studied
      * @param childIndex the index of the requested child
      * @return the offset (location) for the specified child
@@ -1103,6 +1278,10 @@ public class BoxView extends CompositeView {
 
     /**
      * Fetches the span of a particular child's current layout.
+     * <p>
+     *  获取特定孩子当前布局的跨度。
+     * 
+     * 
      * @param axis the axis being studied
      * @param childIndex the index of the requested child
      * @return the span (width or height) of the specified child
@@ -1133,6 +1312,17 @@ public class BoxView extends CompositeView {
      * responsible for rendering <code>position</code> and
      * <code>bias</code>. Otherwise this will return false.
      *
+     * <p>
+     * 确定下一个视图放置的方向。考虑索引n处的视图。
+     * 通常,从左到右布置<code> View </code>,以便到EAST的<code> View </code>将位于索引n + 1处,而<code> View </code >到WEST将在索引n-1
+     * 处。
+     * 确定下一个视图放置的方向。考虑索引n处的视图。
+     * 在某些情况下,例如具有双向文本,可能的是,到EAST的<code> View </code>不在索引n + 1,而是在索引n -  1,或者指向WEST的<code> View </code>不在索引n
+     * -1,而是索引n + 1.在这种情况下,此方法将返回true,表示<code> View </code> s按降序排列。
+     * 确定下一个视图放置的方向。考虑索引n处的视图。否则,该方法将返回false,表示<code> View </code>以升序排列。
+     * <p>
+     *  如果接收器沿着<code> Y_AXIS </code>放置<code> View </code>,这将返回调用负责呈现的<code> View </code>上的相同方法的值<code> posit
+     * 
      * @param position position into the model
      * @param bias either <code>Position.Bias.Forward</code> or
      *          <code>Position.Bias.Backward</code>
@@ -1167,6 +1357,10 @@ public class BoxView extends CompositeView {
 
     /*
      * Request cache
+     * <p>
+     * ion </code>和<code> bias </code>。
+     * 否则这将返回false。
+     * 
      */
     boolean majorReqValid;
     boolean minorReqValid;
@@ -1175,6 +1369,9 @@ public class BoxView extends CompositeView {
 
     /*
      * Allocation cache
+     * <p>
+     *  请求高速缓存
+     * 
      */
     boolean majorAllocValid;
     int[] majorOffsets;

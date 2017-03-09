@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -40,6 +50,15 @@ import org.w3c.dom.Node;
  *
  * @xerces.internal
  *
+ * <p>
+ *  Document接口表示整个HTML或XML文档。从概念上讲,它是文档树的根,并提供对文档数据的主要访问。
+ * <P>
+ *  由于元素,文本节点,注释,处理指令等不能存在于Document的上下文之外,因此Document接口还包含创建这些对象所需的工厂方法。
+ * 创建的Node对象具有ownerDocument属性,将其与在其上下文中创建的文档相关联。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @version $Id: DeferredDocumentImpl.java,v 1.11 2010-11-01 04:39:38 joehw Exp $
  * @since  PR-DOM-Level-1-19980818.
  */
@@ -124,6 +143,7 @@ public class DeferredDocumentImpl
     protected transient int fIdElement[];
 
     /** DOM2: For namespace support in the deferred case.
+    /* <p>
      */
     // Implementation Note: The deferred element and attribute must know how to
     // interpret the int representing the qname.
@@ -142,6 +162,9 @@ public class DeferredDocumentImpl
     /**
      * NON-DOM: Actually creating a Document is outside the DOM's spec,
      * since it has to operate in terms of a particular implementation.
+     * <p>
+     *  NON-DOM：实际创建一个文档是在DOM规范之外,因为它必须根据特定的实现操作。
+     * 
      */
     public DeferredDocumentImpl() {
         this(false);
@@ -150,6 +173,9 @@ public class DeferredDocumentImpl
     /**
      * NON-DOM: Actually creating a Document is outside the DOM's spec,
      * since it has to operate in terms of a particular implementation.
+     * <p>
+     * NON-DOM：实际创建一个文档是在DOM规范之外,因为它必须根据特定的实现操作。
+     * 
      */
     public DeferredDocumentImpl(boolean namespacesEnabled) {
         this(namespacesEnabled, false);
@@ -175,6 +201,9 @@ public class DeferredDocumentImpl
      * DOM implementation. Intended to support applications that may be
      * using DOMs retrieved from several different sources, potentially
      * with different underlying representations.
+     * <p>
+     *  检索描述此特定DOM实现的能力的信息。旨在支持可能使用从几个不同来源检索的DOM的应用程序,可能具有不同的底层表示。
+     * 
      */
     public DOMImplementation getImplementation() {
         // Currently implemented as a singleton, since it's hardcoded
@@ -336,6 +365,11 @@ public class DeferredDocumentImpl
      * <code>null</code> otherwise.
      * <br> This attribute represents the property [character encoding scheme]
      * defined in .
+     * <p>
+     *  DOM内部
+     * 
+     *  指定此文档的实际编码的属性。这是<code> null </code>。 <br>此属性表示在中定义的属性[字符编码方案]。
+     * 
      */
     public void setInputEncoding(int currentEntityDecl, String value){
         // get first extra data chunk
@@ -368,6 +402,10 @@ public class DeferredDocumentImpl
 
     /**
      * Creates an element node with a URI in the table and type information.
+     * <p>
+     *  在表和类型信息中创建具有URI的元素节点。
+     * 
+     * 
      * @deprecated
      */
     public int createDeferredElement(String elementURI, String elementName,
@@ -388,6 +426,10 @@ public class DeferredDocumentImpl
 
     /**
      * Creates an element node in the table.
+     * <p>
+     *  在表中创建元素节点。
+     * 
+     * 
      * @deprecated
      */
     public int createDeferredElement(String elementName) {
@@ -396,6 +438,9 @@ public class DeferredDocumentImpl
 
     /**
      * Creates an element node with a URI in the table.
+     * <p>
+     *  在表中创建带有URI的元素节点。
+     * 
      */
     public int createDeferredElement(String elementURI, String elementName) {
 
@@ -414,6 +459,10 @@ public class DeferredDocumentImpl
 
         /**
          * This method is used by the DOMParser to create attributes.
+         * <p>
+         *  此方法由DOMParser用于创建属性。
+         * 
+         * 
          * @param elementNodeIndex
          * @param attrName
          * @param attrURI
@@ -473,6 +522,10 @@ public class DeferredDocumentImpl
 
     /**
      * Sets an attribute on an element node.
+     * <p>
+     *  设置元素节点上的属性。
+     * 
+     * 
      * @deprecated
      */
     public int setDeferredAttribute(int elementNodeIndex,
@@ -784,6 +837,9 @@ public class DeferredDocumentImpl
     /**
      * Returns the parent node of the given node.
      * <em>Calling this method does not free the parent index.</em>
+     * <p>
+     *  返回给定节点的父节点。调用此方法不会释放父索引。</em>
+     * 
      */
     public int getParentNode(int nodeIndex) {
         return getParentNode(nodeIndex, false);
@@ -791,6 +847,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the parent node of the given node.
+     * <p>
+     *  返回给定节点的父节点。
+     * 
+     * 
      * @param free True to free parent node.
      */
     public int getParentNode(int nodeIndex, boolean free) {
@@ -813,6 +873,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the last child of the given node.
+     * <p>
+     *  返回给定节点的最后一个子节点。
+     * 
+     * 
      * @param free True to free child index.
      */
     public int getLastChild(int nodeIndex, boolean free) {
@@ -831,6 +895,9 @@ public class DeferredDocumentImpl
     /**
      * Returns the prev sibling of the given node.
      * This is post-normalization of Text Nodes.
+     * <p>
+     *  返回给定节点的上一个兄弟节点。这是文本节点的后归一化。
+     * 
      */
     public int getPrevSibling(int nodeIndex) {
         return getPrevSibling(nodeIndex, true);
@@ -838,6 +905,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the prev sibling of the given node.
+     * <p>
+     *  返回给定节点的上一个兄弟节点。
+     * 
+     * 
      * @param free True to free sibling index.
      */
     public int getPrevSibling(int nodeIndex, boolean free) {
@@ -872,6 +943,9 @@ public class DeferredDocumentImpl
      * Returns the <i>real</i> prev sibling of the given node,
      * directly from the data structures. Used by TextImpl#getNodeValue()
      * to normalize values.
+     * <p>
+     *  返回给定节点的<i> real </i> prev兄弟,直接从数据结构。由TextImpl#getNodeValue()用于规范化值。
+     * 
      */
     public int getRealPrevSibling(int nodeIndex) {
         return getRealPrevSibling(nodeIndex, true);
@@ -879,6 +953,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the <i>real</i> prev sibling of the given node.
+     * <p>
+     *  返回给定节点的<i> real </i> prev兄弟。
+     * 
+     * 
      * @param free True to free sibling index.
      */
     public int getRealPrevSibling(int nodeIndex, boolean free) {
@@ -898,6 +976,9 @@ public class DeferredDocumentImpl
      * Returns the index of the element definition in the table
      * with the specified name index, or -1 if no such definition
      * exists.
+     * <p>
+     *  返回具有指定名称index的表中元素定义的索引,如果不存在此类定义,则返回-1。
+     * 
      */
     public int lookupElementDefinition(String elementName) {
 
@@ -1114,6 +1195,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the name of the given node.
+     * <p>
+     * 返回给定节点的名称。
+     * 
+     * 
      * @param free True to free the string index.
      */
     public String getNodeName(int nodeIndex, boolean free) {
@@ -1136,6 +1221,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the real value of the given node.
+     * <p>
+     *  返回给定节点的实际值。
+     * 
+     * 
      * @param free True to free the string index.
      */
     public String getNodeValueString(int nodeIndex, boolean free) {
@@ -1220,6 +1309,9 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the value of the given node.
+     * <p>
+     *  返回给定节点的值。
+     * 
      */
     public String getNodeValue(int nodeIndex) {
         return getNodeValue(nodeIndex, true);
@@ -1227,6 +1319,10 @@ public class DeferredDocumentImpl
 
         /**
          * Clears the type info that is stored in the fNodeValue array
+         * <p>
+         *  清除存储在fNodeValue数组中的类型信息
+         * 
+         * 
          * @param nodeIndex
          * @return Object - type information for the attribute/element node
          */
@@ -1253,6 +1349,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the value of the given node.
+     * <p>
+     *  返回给定节点的值。
+     * 
+     * 
      * @param free True to free the value index.
      */
     public String getNodeValue(int nodeIndex, boolean free) {
@@ -1271,6 +1371,9 @@ public class DeferredDocumentImpl
     /**
      * Returns the extra info of the given node.
      * Used by AttrImpl to store specified value (1 == true).
+     * <p>
+     *  返回给定节点的额外信息。由AttrImpl用于存储指定的值(1 == true)。
+     * 
      */
     public int getNodeExtra(int nodeIndex) {
         return getNodeExtra(nodeIndex, true);
@@ -1278,6 +1381,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the extra info of the given node.
+     * <p>
+     *  返回给定节点的额外信息。
+     * 
+     * 
      * @param free True to free the value index.
      */
     public int getNodeExtra(int nodeIndex, boolean free) {
@@ -1300,6 +1407,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the type of the given node.
+     * <p>
+     *  返回给定节点的类型。
+     * 
+     * 
      * @param free True to free type index.
      */
     public short getNodeType(int nodeIndex, boolean free) {
@@ -1341,6 +1452,10 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the URI of the given node.
+     * <p>
+     *  返回给定节点的URI。
+     * 
+     * 
      * @param free True to free URI index.
      */
     public String getNodeURI(int nodeIndex, boolean free) {
@@ -1607,6 +1722,9 @@ public class DeferredDocumentImpl
      * Fluffing the children at once solves a lot of work to keep
      * the two structures in sync. The problem gets worse when
      * editing the tree -- this makes it a lot easier.
+     * <p>
+     *  将节点的子代与内部结构同步。立即起毛儿童解决了大量的工作,保持两个结构同步。编辑树时问题变得更糟 - 这使得它更容易。
+     * 
      */
     protected void synchronizeChildren() {
 
@@ -1616,6 +1734,9 @@ public class DeferredDocumentImpl
              * when we have elements with IDs this method is being recursively
              * called from synchronizeData, in which case we've already gone
              * through the following and we can now simply stop here.
+             * <p>
+             *  当我们有IDs的元素,这个方法被递归地从synchronizeData调用,在这种情况下,我们已经经历了以下,我们现在可以在这里停止。
+             * 
              */
             if (!needsSyncChildren()) {
                 return;
@@ -1678,6 +1799,10 @@ public class DeferredDocumentImpl
      * editing the tree -- this makes it a lot easier.
      * This is not directly used in this class but this method is
      * here so that it can be shared by all deferred subclasses of AttrImpl.
+     * <p>
+     *  将节点的子代与内部结构同步。立即起毛儿童解决了大量的工作,保持两个结构同步。编辑树时问题变得更糟 - 这使得它更容易。
+     * 这不是直接在这个类中使用,但此方法在这里,以便它可以共享的AttrImpl的所有延迟子类。
+     * 
      */
     protected final void synchronizeChildren(AttrImpl a, int nodeIndex) {
 
@@ -1735,6 +1860,9 @@ public class DeferredDocumentImpl
      * editing the tree -- this makes it a lot easier.
      * This is not directly used in this class but this method is
      * here so that it can be shared by all deferred subclasses of ParentNode.
+     * <p>
+     * 将节点的子代与内部结构同步。立即起毛儿童解决了大量的工作,保持两个结构同步。编辑树时问题变得更糟 - 这使得它更容易。这不是直接在这个类中使用,但此方法在这里,以便它可以共享的所有父节点的延迟子类。
+     * 
      */
     protected final void synchronizeChildren(ParentNode p, int nodeIndex) {
 
@@ -1867,6 +1995,10 @@ public class DeferredDocumentImpl
      * before calling this method and all array values must be
      * non-negative.
      *
+     * <p>
+     *  对值数组中的目标值执行二进制搜索。在调用此方法之前,值的数组必须按升序排序,所有数组值必须为非负数。
+     * 
+     * 
      * @param values  The array of values to search.
      * @param start   The starting offset of the search.
      * @param end     The ending offset of the search.
@@ -1948,6 +2080,10 @@ public class DeferredDocumentImpl
     /**
      * Sets the specified value in the given of data at the chunk and index.
      *
+     * <p>
+     *  在块和索引的数据给定中设置指定的值。
+     * 
+     * 
      * @return Returns the old value.
      */
     private final int setChunkIndex(int data[][], int value,
@@ -1990,6 +2126,9 @@ public class DeferredDocumentImpl
 
     /**
      * Returns the specified value in the given data at the chunk and index.
+     * <p>
+     *  返回块和索引处给定数据中的指定值。
+     * 
      */
     private final int getChunkIndex(int data[][], int chunk, int index) {
         return data[chunk] != null ? data[chunk][index] : -1;
@@ -2017,6 +2156,10 @@ public class DeferredDocumentImpl
      * Note that this method will clear the given chunk if the reference
      * count becomes zero.
      *
+     * <p>
+     *  在块和索引处清除给定数据中的指定值。注意,如果引用计数变为零,此方法将清除给定的块。
+     * 
+     * 
      * @return Returns the old value.
      */
     private final int clearChunkIndex(int data[][], int chunk, int index) {
@@ -2048,6 +2191,9 @@ public class DeferredDocumentImpl
      * This version of putIdentifier is needed to avoid fluffing
      * all of the paths to ID attributes when a node object is
      * created that contains an ID attribute.
+     * <p>
+     *  当创建包含ID属性的节点对象时,需要使用此版本的putIdentifier来避免对ID属性的所有路径进行取消。
+     * 
      */
     private final void putIdentifier0(String idName, Element element) {
 
@@ -2097,6 +2243,8 @@ public class DeferredDocumentImpl
 
     /**
      * A simple integer vector.
+     * <p>
+     *  一个简单的整数向量。
      */
     static final class IntVector {
 

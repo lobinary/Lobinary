@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Fallback.java,v 1.2.4.1 2005/09/01 14:22:25 pvedula Exp $
+ * <p>
+ *  $ Id：Fallback.java,v 1.2.4.1 2005/09/01 14:22:25 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -31,6 +44,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 
 /**
+/* <p>
+/* 
  * @author Morten Jorgensen
  */
 final class Fallback extends Instruction {
@@ -39,6 +54,9 @@ final class Fallback extends Instruction {
 
     /**
      * This element never produces any data on the stack
+     * <p>
+     *  此元素不会在堆栈上生成任何数据
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         if (_active) {
@@ -51,6 +69,9 @@ final class Fallback extends Instruction {
 
     /**
      * Activate this fallback element
+     * <p>
+     *  激活此后备元素
+     * 
      */
     public void activate() {
         _active = true;
@@ -63,6 +84,9 @@ final class Fallback extends Instruction {
     /**
      * Parse contents only if this fallback element is put in place of
      * some unsupported element or non-XSLTC extension element
+     * <p>
+     *  仅当此后备元素替换某些不受支持的元素或非XSLTC扩展元素时,才解析内容
+     * 
      */
     public void parseContents(Parser parser) {
         if (_active) parseChildren(parser);
@@ -71,6 +95,8 @@ final class Fallback extends Instruction {
     /**
      * Translate contents only if this fallback element is put in place of
      * some unsupported element or non-XSLTC extension element
+     * <p>
+     *  仅当此后备元素替换某些不受支持的元素或非XSLTC扩展元素时,才会翻译内容
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         final ConstantPoolGen cpg = classGen.getConstantPool();

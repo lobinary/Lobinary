@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,26 @@ import javax.imageio.stream.ImageOutputStream;
  * of large tables, should be deferred at least until the first
  * invocation of this method.
  *
+ * <p>
+ *  用于<code> ImageWriter </code>的服务提供程序接口(SPI)。有关服务提供程序类的更多信息,请参阅<code> IIORegistry </code>类的类注释。
+ * 
+ *  <p>每个<code> ImageWriterSpi </code>提供了与它相关的<code> ImageWriter </code>类的几种类型的信息。
+ * 
+ *  <p>通过<code> getVendorName </code>,<code> getDescription </code>和<code> getVersion </code可以获得定义SPI类的供应商的名称和类的简要描述>
+ * 方法。
+ * 这些方法可以被国际化以提供特定于场所的输出。这些方法主要旨在提供可用于组织弹出菜单或其他列表的短的,人类可写的信息。
+ * 
+ *  <p>与服务相关联的格式名称,文件后缀和MIME类型的列表可以通过<code> getFormatNames </code>,<code> getFileSuffixes </code>和<code>
+ *  getMIMEType </code>代码>方法。
+ * 这些方法可以用于基于手动格式选择,文件命名或MIME关联来识别用于写入特定文件或流的候选<code> ImageWriter </code>。
+ * 
+ * <p>通过<code> canEncodeImage </code>方法提供了一种更可靠的方法来确定哪些<code> ImageWriter </code>可能能够解析特定数据流。
+ * 这种方法允许服务提供商检查实际图像内容。
+ * 
+ *  <p>最后,可以通过调用<code> createWriterInstance </code>方法获得与此服务提供程序关联的<code> ImageWriter </code>类的实例。
+ * 任何重量级初始化,例如加载本机库或创建大表,都应该推迟,直到第一次调用此方法。
+ * 
+ * 
  * @see IIORegistry
  * @see javax.imageio.ImageTypeSpecifier
  * @see javax.imageio.ImageWriter
@@ -79,6 +100,10 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * A single-element array, initially containing
      * <code>ImageOutputStream.class</code>, to be returned from
      * <code>getOutputTypes</code>.
+     * <p>
+     *  一个单元素数组,最初包含<code> ImageOutputStream.class </code>,从<code> getOutputTypes </code>返回。
+     * 
+     * 
      * @deprecated Instead of using this field, directly create
      * the equivalent array <code>{ ImageOutputStream.class }</code>.
      */
@@ -89,6 +114,9 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
     /**
      * An array of <code>Class</code> objects to be returned from
      * <code>getOutputTypes</code>, initially <code>null</code>.
+     * <p>
+     *  从<code> getOutputTypes </code>返回的<code> Class </code>对象数组,最初为<code> null </code>。
+     * 
      */
     protected Class[] outputTypes = null;
 
@@ -96,12 +124,18 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * An array of strings to be returned from
      * <code>getImageReaderSpiNames</code>, initially
      * <code>null</code>.
+     * <p>
+     *  要从<code> getImageReaderSpiNames </code>返回的字符串数组,最初为<code> null </code>。
+     * 
      */
     protected String[] readerSpiNames = null;
 
     /**
      * The <code>Class</code> of the writer, initially
      * <code>null</code>.
+     * <p>
+     *  作者的<code> Class </code>,最初为<code> null </code>。
+     * 
      */
     private Class writerClass = null;
 
@@ -110,6 +144,9 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * the subclass to initialize instance variables and/or override
      * method implementations in order to provide working versions of
      * all methods.
+     * <p>
+     *  构造一个空白<code> ImageWriterSpi </code>。它是由子类初始化实例变量和/或覆盖方法实现为了提供所有方法的工作版本。
+     * 
      */
     protected ImageWriterSpi() {
     }
@@ -118,6 +155,10 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * Constructs an <code>ImageWriterSpi</code> with a given
      * set of values.
      *
+     * <p>
+     *  用给定的一组值构造一个<code> ImageWriterSpi </code>。
+     * 
+     * 
      * @param vendorName the vendor name, as a non-<code>null</code>
      * <code>String</code>.
      * @param version a version identifier, as a non-<code>null</code>
@@ -247,6 +288,10 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * outputs preserves pixel data bit-accurately.  The default
      * implementation returns <code>true</code>.
      *
+     * <p>
+     *  如果该写入程序输出的格式准确地保留像素数据,则返回<code> true </code>。默认实现返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if the format preserves full pixel
      * accuracy.
      */
@@ -264,6 +309,13 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * containing <code>ImageOutputStream.class</code> should be
      * returned.
      *
+     * <p>
+     * 返回一个<code> Class </code>对象的数组,表示可以用作写入器的<code> setOutput </code>方法的参数的对象类型。
+     * 
+     *  <p>对于大多数只输出到<code> ImageOutputStream </code>的写入程序,应该返回包含<code> ImageOutputStream.class </code>的单元素数组
+     * 。
+     * 
+     * 
      * @return a non-<code>null</code> array of
      * <code>Class</code>objects of length at least 1.
      */
@@ -298,6 +350,20 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * it will have to be divided out of each pixel, at some loss of
      * precision, in order to be stored.
      *
+     * <p>
+     *  如果与此服务提供程序相关联的<code> ImageWriter </code>实现能够编码具有给定布局的图像,则返回<code> true </code>。
+     * 通过<code> ImageTypeSpecifier </code>对象描述布局(<i> ie </i>,图像的<code> SampleModel </code>和<code> ColorModel
+     *  </code>)。
+     *  如果与此服务提供程序相关联的<code> ImageWriter </code>实现能够编码具有给定布局的图像,则返回<code> true </code>。
+     * 
+     *  <p> <code> true </code>的返回值不是成功编码的绝对保证;编码过程仍然可能由于诸如I / O错误,不一致或畸形的数据结构等因素而产生错误。
+     * 意图是执行对图像的基本结构的合理检查,以便确定它是否在编码格式的范围。
+     * 例如,对于只能编码灰度的格式的服务提供商,如果交给RGB <code> BufferedImage </code>,则返回<code> false </code>。
+     * 类似地,用于可以编码8位RGB图像的格式的服务提供商可以拒绝使用相关联的alpha通道对图像进行编码。
+     * 
+     * <p>不同的<code> ImageWriter </code>,因此服务提供商可能选择或多或少严格。例如,它们可以接受具有预乘α的图像,即使它将必须在某些精度损失时被从每个像素中划分出来以便存储。
+     * 
+     * 
      * @param type an <code>ImageTypeSpecifier</code> specifying the
      * layout of the image to be written.
      *
@@ -320,6 +386,13 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * <code>canEncodeImage(ImageTypeSpecifier)</code> for information
      * on the semantics of this method.
      *
+     * <p>
+     *  如果与此服务提供程序相关联的<code> ImageWriter </code>实现能够对给定的<code> RenderedImage </code>实例进行编码,则返回<code> true </code>
+     * 请注意,这包括<code> java.awt.image.BufferedImage </code>的实例。
+     * 
+     *  <p>有关此方法的语义的信息,请参阅<code> canEncodeImage(ImageTypeSpecifier)</code>的讨论。
+     * 
+     * 
      * @param im an instance of <code>RenderedImage</code> to be encoded.
      *
      * @return <code>true</code> if this writer is likely to be able
@@ -341,6 +414,12 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * <p> The default implementation simply returns
      * <code>createWriterInstance(null)</code>.
      *
+     * <p>
+     *  返回与此服务提供商相关联的<code> ImageWriter </code>实现的实例。返回的对象最初将处于初始状态,就像它的<code> reset </code>方法被调用。
+     * 
+     *  <p>默认实现只返回<code> createWriterInstance(null)</code>。
+     * 
+     * 
      * @return an <code>ImageWriter</code> instance.
      *
      * @exception IOException if an error occurs during loading,
@@ -364,6 +443,14 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * <p> Typically, a plug-in will implement this method using code
      * such as <code>return new MyImageWriter(this)</code>.
      *
+     * <p>
+     *  返回与此服务提供商相关联的<code> ImageWriter </code>实现的实例。返回的对象最初将处于初始状态,就像它的<code> reset </code>方法被调用。
+     * 
+     *  <p>在构建时可以向插件提供<code> Object </code>。对象的本质是完全插件特定的。
+     * 
+     *  <p>通常,插件将使用<code> return new MyImageWriter(this)</code>等代码实现此方法。
+     * 
+     * 
      * @param extension a plug-in specific extension object, which may
      * be <code>null</code>.
      *
@@ -384,6 +471,10 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * passed in is an instance of the <code>ImageWriter</code>
      * associated with this service provider.
      *
+     * <p>
+     * 如果传入的<code> ImageWriter </code>对象是与此服务提供程序关联的<code> ImageWriter </code>的实例,则返回<code> true </code>
+     * 
+     * 
      * @param writer an <code>ImageWriter</code> instance.
      *
      * @return <code>true</code> if <code>writer</code> is recognized
@@ -426,6 +517,14 @@ public abstract class ImageWriterSpi extends ImageReaderWriterSpi {
      * about the internal structure of the meta-data, or even about
      * the image format.
      *
+     * <p>
+     *  返回一个包含所有<code> ImageReaderSpi </code>类的所有完全限定名称的<code> String </code>数组,可以理解<code> ImageWriter </code>
+     * 关联与此服务提供程序,或<code> null </code>如果没有指定此类<code> ImageReaders </code>。
+     * 如果返回非<code> null </code>值,则它必须具有非零长度。
+     * 
+     *  <p>数组中的第一个项目必须是"首选"读取器的服务提供程序的名称,因为它将用于实例化由<code> ImageIO.getImageReader(ImageWriter)返回的<code> Image
+     * Reader </code> )</code>。
+     * 
      * @return an array of <code>String</code>s of length at least 1
      * containing names of <code>ImageReaderSpi</code>s, or
      * <code>null</code>.

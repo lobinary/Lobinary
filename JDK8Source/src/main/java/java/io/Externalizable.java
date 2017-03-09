@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,18 @@ import java.io.ObjectInput;
  * the writeReplace and readResolve methods documented in the Serializable
  * interface.<br>
  *
+ * <p>
+ *  只有Externalizable实例的类的身份被写入序列化流中,并且类的责任是保存和恢复其实例的内容。
+ * 
+ *  Externalizable接口的writeExternal和readExternal方法是通过一个类来实现的,以使该类完全控制对象及其超类型的流的格式和内容。
+ * 这些方法必须明确地与超类型协调以保存其状态。这些方法取代了writeObject和readObject方法的自定义实现。
+ * 
+ *  对象序列化使用Serializable和Externalizable接口。对象持久机制也可以使用它们。要存储的每个对象都针对Externalizable接口进行测试。
+ * 如果对象支持Externalizable,则调用writeExternal方法。
+ * 如果对象不支持Externalizable并且实现Serializable,则使用ObjectOutputStream保存对象。
+ *  <br>当重构可外化对象时,将使用public no-arg构造函数创建一个实例,然后调用readExternal方法。可序列化对象通过从ObjectInputStream读取来恢复。<br>。
+ * 
+ * 
  * @author  unascribed
  * @see java.io.ObjectOutputStream
  * @see java.io.ObjectInputStream
@@ -70,6 +83,10 @@ public interface Externalizable extends java.io.Serializable {
      * calling the writeObject method of ObjectOutput for objects, strings,
      * and arrays.
      *
+     * <p>
+     * Externalizable实例可以通过Serializable接口中记录的writeReplace和readResolve方法指定替换对象。<br>
+     * 
+     * 
      * @serialData Overriding methods should use this tag to describe
      *             the data layout of this Externalizable object.
      *             List the sequence of element types and, if possible,
@@ -88,6 +105,10 @@ public interface Externalizable extends java.io.Serializable {
      * readExternal method must read the values in the same sequence
      * and with the same types as were written by writeExternal.
      *
+     * <p>
+     *  该对象实现writeExternal方法,通过调用DataOutput的原始值方法或调用ObjectOutput的writeObject方法来保存对象,字符串和数组的内容。
+     * 
+     * 
      * @param in the stream to read data from in order to restore the object
      * @exception IOException if I/O errors occur
      * @exception ClassNotFoundException If the class for an object being

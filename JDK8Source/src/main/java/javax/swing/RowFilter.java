@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -88,6 +89,28 @@ import java.util.regex.PatternSyntaxException;
  * sorter.setRowFilter(ageFilter);
  * </pre>
  *
+ * <p>
+ *  <code> RowFilter </code>用于过滤掉模型中的条目,以使它们不会显示在视图中。
+ * 例如,与<code> JTable </code>关联的<code> RowFilter </code>可能只允许包含具有特定字符串的列的行。 <em>条目</em>的含义取决于组件类型。
+ * 例如,当过滤器与<code> JTable </code>相关联时,条目对应于行;当与<code> JTree </code>相关联时,条目对应于节点。
+ * <p>
+ *  子类必须覆盖<code> include </code>方法以指示该条目是否应显示在视图中。 <code> Entry </code>参数可用于获取该条目中每个列中的值。
+ * 以下示例显示了一个<code> include </code>方法,该方法只允许包含以字符串"a"开头的一个或多个值的条目：。
+ * <pre>
+ *  RowFilter&lt; Object,Object&gt; beginWithAFilter = new RowFilter&lt; Object,Object&gt;(){public boolean include(Entry&lt ;? extends Object,?extends Object&gt; entry){for(int i = entry.getValueCount() -  1; i&gt; = 0; i- - ){if(entry.getStringValue(i).startsWith("a")){//该值以"a"开始,包括return true; }
+ * } //没有列以"a"开头;返回false,因此这个//条目未显示return false; }};。
+ * </pre>
+ * <code> RowFilter </code>有两个形式类型参数,您可以为特定模型创建<code> RowFilter </code>。
+ * 例如,下面假设一个特定的模型,它包装类型<code> Person </code>的对象。只会显示年龄超过20岁的<code> Person </code>：。
+ * <pre>
+ *  RowFilter&lt; PersonModel,Integer&gt; ageFilter = new RowFilter&lt; PersonModel,Integer&gt;(){public boolean include(Entry&lt ;? extends PersonModel,?extends Integer&gt; entry){PersonModel personModel = entry.getModel Person person = personModel.getPerson(entry.getIdentifier()); if(person.getAge()&gt; 20){//返回true表示应该显示此行。
+ *  return true; } //年龄是<= 20,不显示它。
+ *  return false; }}; PersonModel model = createPersonModel(); TableRowSorter&lt; PersonModel&gt; sorter
+ *  = new TableRowSorter&lt; PersonModel&gt;(model); sorter.setRowFilter(ageFilter);。
+ *  return true; } //年龄是<= 20,不显示它。
+ * </pre>
+ * 
+ * 
  * @param <M> the type of the model; for example <code>PersonModel</code>
  * @param <I> the type of the identifier; when using
  *            <code>TableRowSorter</code> this will be <code>Integer</code>
@@ -99,6 +122,10 @@ public abstract class RowFilter<M,I> {
      * Enumeration of the possible comparison values supported by
      * some of the default <code>RowFilter</code>s.
      *
+     * <p>
+     *  枚举一些默认的<code> RowFilter </code>支持的可能的比较值。
+     * 
+     * 
      * @see RowFilter
      * @since 1.6
      */
@@ -106,24 +133,36 @@ public abstract class RowFilter<M,I> {
         /**
          * Indicates that entries with a value before the supplied
          * value should be included.
+         * <p>
+         *  表示应包含提供的值之前的值的条目。
+         * 
          */
         BEFORE,
 
         /**
          * Indicates that entries with a value after the supplied
          * value should be included.
+         * <p>
+         *  表示应包括具有提供的值之后的值的条目。
+         * 
          */
         AFTER,
 
         /**
          * Indicates that entries with a value equal to the supplied
          * value should be included.
+         * <p>
+         *  表示应包括值等于提供的值的条目。
+         * 
          */
         EQUAL,
 
         /**
          * Indicates that entries with a value not equal to the supplied
          * value should be included.
+         * <p>
+         *  表示应包括值不等于提供的值的条目。
+         * 
          */
         NOT_EQUAL
     }
@@ -131,6 +170,9 @@ public abstract class RowFilter<M,I> {
     /**
      * Throws an IllegalArgumentException if any of the values in
      * columns are {@literal <} 0.
+     * <p>
+     *  如果列中的任何值为{@literal <} 0,则抛出IllegalArgumentException。
+     * 
      */
     private static void checkIndices(int[] columns) {
         for (int i = columns.length - 1; i >= 0; i--) {
@@ -159,6 +201,17 @@ public abstract class RowFilter<M,I> {
      * {@link java.util.regex.Pattern} for a complete description of
      * the supported regular-expression constructs.
      *
+     * <p>
+     * 返回一个<code> RowFilter </code>,它使用正则表达式来确定要包括哪些条目。只包括具有至少一个匹配值的条目。
+     * 例如,以下创建一个<code> RowFilter </code>,其中包含至少一个以"a"开头的值的条目：。
+     * <pre>
+     *  RowFilter.regexFilter("^ a");
+     * </pre>
+     * <p>
+     *  返回的过滤器使用{@link java.util.regex.Matcher#find}测试包含。要测试完全匹配,请使用字符"^"和"$"分别匹配字符串的开头和结尾。
+     * 例如,"^ foo $"仅包含其字符串正好为"foo"的行,而不包括例如"food"。有关受支持的正则表达式构造的完整描述,请参阅{@link java.util.regex.Pattern}。
+     * 
+     * 
      * @param regex the regular expression to filter on
      * @param indices the indices of the values to check.  If not supplied all
      *               values are evaluated
@@ -186,6 +239,14 @@ public abstract class RowFilter<M,I> {
      *   RowFilter.dateFilter(ComparisonType.AFTER, new Date());
      * </pre>
      *
+     * <p>
+     *  返回<code> RowFilter </code>,其中包含至少一个符合指定条件的<code> Date </code>值的条目。
+     * 例如,以下<code> RowFilter </code>仅包含在当前日期后至少有一个日期值的条目：。
+     * <pre>
+     *  RowFilter.dateFilter(ComparisonType.AFTER,new Date());
+     * </pre>
+     * 
+     * 
      * @param type the type of comparison to perform
      * @param date the date to compare against
      * @param indices the indices of the values to check.  If not supplied all
@@ -214,6 +275,13 @@ public abstract class RowFilter<M,I> {
      *   RowFilter.numberFilter(ComparisonType.EQUAL, 10);
      * </pre>
      *
+     * <p>
+     *  返回<code> RowFilter </code>,其中包含至少有一个符合指定条件的<code> Number </code>值的条目。例如,以下过滤器将仅包含至少一个数值等于10的条目：
+     * <pre>
+     *  RowFilter.numberFilter(ComparisonType.EQUAL,10);
+     * </pre>
+     * 
+     * 
      * @param type the type of comparison to perform
      * @param indices the indices of the values to check.  If not supplied all
      *               values are evaluated
@@ -241,6 +309,17 @@ public abstract class RowFilter<M,I> {
      *   RowFilter&lt;Object,Object&gt; fooBarFilter = RowFilter.orFilter(filters);
      * </pre>
      *
+     * <p>
+     *  如果任何提供的过滤器包含条目,则返回包含条目的<code> RowFilter </code>。
+     * <p>
+     * 以下示例创建一个<code> RowFilter </code>,它将包含任何包含字符串"foo"或字符串"bar"的条目：
+     * <pre>
+     *  List&lt; RowFilter&lt; Object,Object&gt;&gt; filters = new ArrayList&lt; RowFilter&lt; Object,Object
+     * &gt;&gt;(2); filters.add(RowFilter.regexFilter("foo")); filters.add(RowFilter.regexFilter("bar")); Ro
+     * wFilter&lt; Object,Object&gt; fooBarFilter = RowFilter.orFilter(filters);。
+     * </pre>
+     * 
+     * 
      * @param filters the <code>RowFilter</code>s to test
      * @throws IllegalArgumentException if any of the filters
      *         are <code>null</code>
@@ -267,6 +346,17 @@ public abstract class RowFilter<M,I> {
      *   RowFilter&lt;Object,Object&gt; fooBarFilter = RowFilter.andFilter(filters);
      * </pre>
      *
+     * <p>
+     *  如果所有提供的过滤器都包含条目,则返回包含条目的<code> RowFilter </code>。
+     * <p>
+     *  以下示例创建一个<code> RowFilter </code>,它将包含任何包含字符串"foo"和字符串"bar"的条目：
+     * <pre>
+     *  List&lt; RowFilter&lt; Object,Object&gt;&gt; filters = new ArrayList&lt; RowFilter&lt; Object,Object
+     * &gt;&gt;(2); filters.add(RowFilter.regexFilter("foo")); filters.add(RowFilter.regexFilter("bar")); Ro
+     * wFilter&lt; Object,Object&gt; fooBarFilter = RowFilter.andFilter(filters);。
+     * </pre>
+     * 
+     * 
      * @param filters the <code>RowFilter</code>s to test
      * @return a <code>RowFilter</code> implementing the specified criteria
      * @throws IllegalArgumentException if any of the filters
@@ -283,6 +373,10 @@ public abstract class RowFilter<M,I> {
      * Returns a <code>RowFilter</code> that includes entries if the
      * supplied filter does not include the entry.
      *
+     * <p>
+     *  如果提供的过滤器不包含条目,则返回包含条目的<code> RowFilter </code>。
+     * 
+     * 
      * @param filter the <code>RowFilter</code> to negate
      * @return a <code>RowFilter</code> implementing the specified criteria
      * @throws IllegalArgumentException if <code>filter</code> is
@@ -300,6 +394,12 @@ public abstract class RowFilter<M,I> {
      * the invocation.  Using <code>entry</code> after the call returns
      * results in undefined behavior.
      *
+     * <p>
+     *  如果应显示指定的条目,则返回true;如果条目应该被隐藏,则返回false。
+     * <p>
+     *  <code>条目</code>参数仅在调用的持续时间有效。在调用返回后使用<code>条目</code>会导致未定义的行为。
+     * 
+     * 
      * @param entry a non-<code>null</code> object that wraps the underlying
      *              object from the model
      * @return true if the entry should be shown
@@ -321,6 +421,11 @@ public abstract class RowFilter<M,I> {
      * An <code>Entry</code> object contains information about the model
      * as well as methods for getting the underlying values from the model.
      *
+     * <p>
+     * 将<code> Entry </code>对象传递给<code> RowFilter </code>的实例,允许过滤器获取条目数据的值,从而确定是否应显示该条目。
+     *  <code> Entry </code>对象包含有关模型的信息以及从模型中获取基础值的方法。
+     * 
+     * 
      * @param <M> the type of the model; for example <code>PersonModel</code>
      * @param <I> the type of the identifier; when using
      *            <code>TableRowSorter</code> this will be <code>Integer</code>
@@ -331,6 +436,9 @@ public abstract class RowFilter<M,I> {
     public static abstract class Entry<M, I> {
         /**
          * Creates an <code>Entry</code>.
+         * <p>
+         *  创建<code>条目</code>。
+         * 
          */
         public Entry() {
         }
@@ -338,6 +446,10 @@ public abstract class RowFilter<M,I> {
         /**
          * Returns the underlying model.
          *
+         * <p>
+         *  返回底层模型。
+         * 
+         * 
          * @return the model containing the data that this entry represents
          */
         public abstract M getModel();
@@ -347,6 +459,10 @@ public abstract class RowFilter<M,I> {
          * example, when used with a table this corresponds to the
          * number of columns.
          *
+         * <p>
+         *  返回条目中的值的数量。例如,当与表一起使用时,这对应于列数。
+         * 
+         * 
          * @return number of values in the object being filtered
          */
         public abstract int getValueCount();
@@ -356,6 +472,10 @@ public abstract class RowFilter<M,I> {
          * <code>null</code>.  When used with a table, index
          * corresponds to the column number in the model.
          *
+         * <p>
+         *  返回指定索引处的值。这可能返回<code> null </code>。与表一起使用时,索引对应于模型中的列号。
+         * 
+         * 
          * @param index the index of the value to get
          * @return value at the specified index
          * @throws IndexOutOfBoundsException if index &lt; 0 or
@@ -375,6 +495,13 @@ public abstract class RowFilter<M,I> {
          * different string conversion should override this method if
          * necessary.
          *
+         * <p>
+         *  返回指定索引处的字符串值。
+         * 如果基于<code> String </code>值进行过滤,则该方法优先于<code> getValue </code>的<code> getValue(index).toString()</code>
+         * 不同于<code> getStringValue(index)</code>的结果。
+         *  返回指定索引处的字符串值。
+         * <p>
+         * 
          * @param index the index of the value to get
          * @return {@code non-null} string at the specified index
          * @throws IndexOutOfBoundsException if index &lt; 0 ||
@@ -390,6 +517,10 @@ public abstract class RowFilter<M,I> {
          * For a table this corresponds to the index of the row in the model,
          * expressed as an <code>Integer</code>.
          *
+         * <p>
+         *  这个实现在检查<code> null </code>之后调用<code> getValue(index).toString()</code>。提供不同字符串转换的子类必须覆盖此方法。
+         * 
+         * 
          * @return a model-based (not view-based) identifier for
          *         this entry
          */

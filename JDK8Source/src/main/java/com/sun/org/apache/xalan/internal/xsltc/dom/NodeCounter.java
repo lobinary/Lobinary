@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: NodeCounter.java,v 1.2.4.1 2005/09/12 11:52:36 pvedula Exp $
+ * <p>
+ *  $ Id：NodeCounter.java,v 1.2.4.1 2005/09/12 11:52:36 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.dom;
@@ -31,6 +44,8 @@ import com.sun.org.apache.xml.internal.dtm.DTM;
 import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -72,6 +87,9 @@ public abstract class NodeCounter {
 
     /**
      * Indicates if this instance of xsl:number has a from pattern.
+     * <p>
+     *  指示此xsl：number实例是否具有来自模式。
+     * 
      */
     protected boolean _hasFrom;
 
@@ -93,12 +111,18 @@ public abstract class NodeCounter {
     /**
      * Set the start node for this counter. The same <tt>NodeCounter</tt>
      * object can be used multiple times by resetting the starting node.
+     * <p>
+     *  设置此计数器的起始节点。通过重置起始节点,可以多次使用相同的<tt> NodeCounter </tt>对象。
+     * 
      */
     abstract public NodeCounter setStartNode(int node);
 
     /**
      * If the user specified a value attribute, use this instead of
      * counting nodes.
+     * <p>
+     *  如果用户指定了value属性,请使用此属性而不是计算节点。
+     * 
      */
     public NodeCounter setValue(double value) {
     _value = value;
@@ -107,6 +131,9 @@ public abstract class NodeCounter {
 
     /**
      * Sets formatting fields before calling formatNumbers().
+     * <p>
+     *  在调用formatNumbers()之前设置格式化字段。
+     * 
      */
     protected void setFormatting(String format, String lang, String letterValue,
                  String groupSep, String groupSize) {
@@ -124,6 +151,11 @@ public abstract class NodeCounter {
      * is used instead of Integer.parseInt() since it does not incur the
      * overhead of throwing an Exception which is expensive.
      *
+     * <p>
+     *  有效地做与Integer.parseInt(String s)相同的事情,除了而不是抛出一个NumberFormatException,它返回0.这个方法,而不是Integer.parseInt(),
+     * 因为它不会引发一个昂贵的Exception的开销。
+     * 
+     * 
      * @param s  A String to be parsed into an int.
      * @return  Either an int represented by the incoming String s, or 0 if
      *          the parsing is not successful.
@@ -197,6 +229,9 @@ public abstract class NodeCounter {
          /*
           * Tokenize the format string into alphanumeric and non-alphanumeric
           * tokens as described in M. Kay page 241.
+          * <p>
+          *  将格式字符串标记为字母数字和非字母数字标记,如M. Kay第241页中所述。
+          * 
           */
          for (int j = 0, i = 0; i < length;) {
                  char c = format.charAt(i);
@@ -240,6 +275,9 @@ public abstract class NodeCounter {
  }
     /**
      * Sets formatting fields to their default values.
+     * <p>
+     * 将格式化字段设置为其默认值。
+     * 
      */
     public NodeCounter setDefaultFormatting() {
     setFormatting("1", "en", "alphabetic", null, null);
@@ -249,6 +287,9 @@ public abstract class NodeCounter {
     /**
      * Returns the position of <tt>node</tt> according to the level and
      * the from and count patterns.
+     * <p>
+     *  根据级别以及从和计数模式返回<tt>节点</tt>的位置。
+     * 
      */
     abstract public String getCounter();
 
@@ -256,6 +297,9 @@ public abstract class NodeCounter {
      * Returns the position of <tt>node</tt> according to the level and
      * the from and count patterns. This position is converted into a
      * string based on the arguments passed.
+     * <p>
+     *  根据级别以及从和计数模式返回<tt>节点</tt>的位置。此位置将基于传递的参数转换为字符串。
+     * 
      */
     public String getCounter(String format, String lang, String letterValue,
                 String groupSep, String groupSize) {
@@ -267,6 +311,9 @@ public abstract class NodeCounter {
      * Returns true if <tt>node</tt> matches the count pattern. By
      * default a node matches the count patterns if it is of the
      * same type as the starting node.
+     * <p>
+     *  如果<tt>节点</tt>与计数模式匹配,则返回true。默认情况下,如果节点与起始节点的类型相同,则节点匹配计数模式。
+     * 
      */
     public boolean matchesCount(int node) {
     return _nodeType == _document.getExpandedTypeID(node);
@@ -275,6 +322,9 @@ public abstract class NodeCounter {
     /**
      * Returns true if <tt>node</tt> matches the from pattern. By default,
      * no node matches the from pattern.
+     * <p>
+     *  如果<tt>节点</tt>与模式匹配,则返回true。默认情况下,没有节点与从模式匹配。
+     * 
      */
     public boolean matchesFrom(int node) {
     return false;
@@ -282,6 +332,9 @@ public abstract class NodeCounter {
 
     /**
      * Format a single value according to the format parameters.
+     * <p>
+     *  根据格式参数格式化单个值。
+     * 
      */
     protected String formatNumbers(int value) {
     return formatNumbers(new int[] { value });
@@ -290,6 +343,9 @@ public abstract class NodeCounter {
     /**
      * Format a sequence of values according to the format paramaters
      * set by calling setFormatting().
+     * <p>
+     *  根据通过调用setFormatting()设置的格式参数来格式化值序列。
+     * 
      */
     protected String formatNumbers(int[] values) {
     final int nValues = values.length;
@@ -331,6 +387,8 @@ public abstract class NodeCounter {
      * Format a single value based on the appropriate formatting token.
      * This method is based on saxon (Michael Kay) and only implements
      * lang="en".
+     * <p>
+     *  基于适当的格式化令牌格式化单个值。此方法基于saxon(Michael Kay),并且只实现lang ="en"。
      */
     private void formatValue(int value, String format, StringBuilder buffer) {
         char c = format.charAt(0);

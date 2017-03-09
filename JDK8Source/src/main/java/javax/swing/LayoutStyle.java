@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,12 @@ import sun.awt.AppContext;
  * <code>LayoutStyle</code>.  Instead use the static method
  * <code>getInstance</code> to obtain the current instance.
  *
+ * <p>
+ *  <code> LayoutStyle </code>提供有关如何定位组件的信息。这个类主要用于可视化工具和布局管理器。大多数开发人员不需要使用这个类。
+ * <p>
+ *  您通常不设置或创建<code> LayoutStyle </code>。而是使用静态方法<code> getInstance </code>获取当前实例。
+ * 
+ * 
  * @since 1.6
  */
 public abstract class LayoutStyle {
@@ -45,6 +52,11 @@ public abstract class LayoutStyle {
      * <code>null</code> results in using the <code>LayoutStyle</code> from
      * the current <code>LookAndFeel</code>.
      *
+     * <p>
+     *  设置<code> LayoutStyle </code>的共享实例。
+     * 指定<code> null </code>会导致使用当前<code> LookAndFeel </code>中的<code> LayoutStyle </code>。
+     * 
+     * 
      * @param style the <code>LayoutStyle</code>, or <code>null</code>
      * @see #getInstance
      */
@@ -64,6 +76,11 @@ public abstract class LayoutStyle {
      * has not been specified in <code>setInstance</code>, this will return
      * the <code>LayoutStyle</code> from the current <code>LookAndFeel</code>.
      *
+     * <p>
+     *  返回<code> LayoutStyle </code>的共享实例。
+     * 如果在<code> setInstance </code>中没有指定实例,则将返回当前<code> LookAndFeel </code>中的<code> LayoutStyle </code>。
+     * 
+     * 
      * @see LookAndFeel#getLayoutStyle
      * @return the shared instance of <code>LayoutStyle</code>
      */
@@ -87,6 +104,12 @@ public abstract class LayoutStyle {
      * <code>LayoutStyle</code> method <code>getPreferredGap</code>.  Refer to
      * <code>LayoutStyle</code> for more information.
      *
+     * <p>
+     *  <code> ComponentPlacement </code>是两个组件相对于彼此放置的可能方式的枚举。
+     *  <code> ComponentPlacement </code>由<code> LayoutStyle </code>方法<code> getPreferredGap </code>使用。
+     * 有关详细信息,请参阅<code> LayoutStyle </code>。
+     * 
+     * 
      * @see LayoutStyle#getPreferredGap(JComponent,JComponent,
      *      ComponentPlacement,int,Container)
      * @since 1.6
@@ -99,6 +122,12 @@ public abstract class LayoutStyle {
          * <code>JTextField</code> is typically visually associated
          * with the <code>JTextField</code>; the constant <code>RELATED</code>
          * is used for this.
+         * <p>
+         *  枚举值指示两个组件在视觉上相关,并将放置在同一个父代。
+         * 例如,为<code> JTextField </code>提供标签的<code> JLabel </code>通常与<code> JTextField </code>在视觉上相关联;为此使用常量<code>
+         *  RELATED </code>。
+         *  枚举值指示两个组件在视觉上相关,并将放置在同一个父代。
+         * 
          */
         RELATED,
 
@@ -107,6 +136,9 @@ public abstract class LayoutStyle {
          * visually unrelated and will be placed in the same parent.
          * For example, groupings of components are usually visually
          * separated; the constant <code>UNRELATED</code> is used for this.
+         * <p>
+         * 枚举值指示两个组件在视觉上不相关,并且将放置在同一父级中。例如,组件的分组通常在视觉上分离;使用常量<code> UNRELATED </code>。
+         * 
          */
         UNRELATED,
 
@@ -119,6 +151,11 @@ public abstract class LayoutStyle {
          * <p>
          * This value is typically only useful with a direction of
          * <code>EAST</code> or <code>WEST</code>.
+         * <p>
+         *  枚举值,指示正在请求组件的缩进距离。例如,通常标签的子元素将从标签水平缩进。要确定这种间隙的首选距离,请使用<code> INDENT </code>类型。
+         * <p>
+         *  此值通常仅适用于<code> EAST </code>或<code> WEST </code>的方向。
+         * 
          */
         INDENT;
     }
@@ -129,6 +166,10 @@ public abstract class LayoutStyle {
      * create a <code>LayoutStyle</code>.  Instead use the method
      * <code>getInstance</code> to obtain the current
      * <code>LayoutStyle</code>.
+     * <p>
+     *  创建新的<code> LayoutStyle </code>。您通常不创建<code> LayoutStyle </code>。
+     * 而是使用方法<code> getInstance </code>获取当前<code> LayoutStyle </code>。
+     * 
      */
     public LayoutStyle() {
     }
@@ -162,6 +203,17 @@ public abstract class LayoutStyle {
      * example, the space may vary based on font size, or the preferred
      * size of the component.
      *
+     * <p>
+     *  返回在两个组件之间使用的空间量。返回值表示相对于<code> component1 </code>放置<code> component2 </code>的距离。
+     * 例如,当<code> component2 </code>垂直放置在<code> component1 </code>之上时,以下内容返回<code> component2 </code>和<code>
+     *  component1 </code>之间的空格大小>：。
+     *  返回在两个组件之间使用的空间量。返回值表示相对于<code> component1 </code>放置<code> component2 </code>的距离。
+     * <pre>
+     *  int gap = getPreferredGap(component1,component2,ComponentPlacement.RELATED,SwingConstants.NORTH,pare
+     * nt);。
+     * </pre>
+     * <code> type </code>参数指示两个组件之间的关系。如果两个组件将包含在相同的父项中并显示类似的逻辑相关项,请使用<code> RELATED </code>。
+     * 
      * @param component1 the <code>JComponent</code>
      *               <code>component2</code> is being placed relative to
      * @param component2 the <code>JComponent</code> being placed
@@ -195,6 +247,13 @@ public abstract class LayoutStyle {
      * Returns the amount of space to place between the component and specified
      * edge of its parent.
      *
+     * <p>
+     * 如果两个组件将包含在同一父代,但显示逻辑上不相关的项目使用<code> UNRELATED </code>。
+     * 一些外观和感觉可能不区分<code> RELATED </code>和<code> UNRELATED </code>类型。
+     * <p>
+     *  返回值不打算考虑<code> component2 </code>或<code> component1 </code>的当前大小和位置。返回值可以考虑组件的各种属性。
+     * 例如,空间可以基于字体大小或组件的优选大小而变化。
+     * 
      * @param component the <code>JComponent</code> being positioned
      * @param position the position <code>component</code> is being placed
      *        relative to its parent; one of

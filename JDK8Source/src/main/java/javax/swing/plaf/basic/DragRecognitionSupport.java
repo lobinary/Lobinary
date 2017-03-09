@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,12 @@ import sun.awt.AppContext;
  * pixels. An instance of this class is maintained per AppContext, and the
  * public static methods call into the appropriate instance.
  *
+ * <p>
+ *  对具有<code> TransferHandler </code>的类的拖动手势识别支持。
+ * 在这个类中的拖动的手势是鼠标按下,然后由<code> DragSource.getDragThreshold()</code>像素的移动。
+ * 每个AppContext维护此类的实例,并且将public static方法调用到适当的实例中。
+ * 
+ * 
  * @author Shannon Hickey
  */
 class DragRecognitionSupport {
@@ -48,6 +55,9 @@ class DragRecognitionSupport {
     /**
      * This interface allows us to pass in a handler to mouseDragged,
      * so that we can be notified immediately before a drag begins.
+     * <p>
+     *  此接口允许我们将一个处理程序传递给mouseDragged,以便我们可以在拖动开始前立即通知。
+     * 
      */
     public static interface BeforeDrag {
         public void dragStarting(MouseEvent me);
@@ -55,6 +65,9 @@ class DragRecognitionSupport {
 
     /**
      * Returns the DragRecognitionSupport for the caller's AppContext.
+     * <p>
+     *  返回调用者的AppContext的DragRecognitionSupport。
+     * 
      */
     private static DragRecognitionSupport getDragRecognitionSupport() {
         DragRecognitionSupport support =
@@ -71,6 +84,9 @@ class DragRecognitionSupport {
 
     /**
      * Returns whether or not the event is potentially part of a drag sequence.
+     * <p>
+     *  返回该事件是否可能是拖动序列的一部分。
+     * 
      */
     public static boolean mousePressed(MouseEvent me) {
         return getDragRecognitionSupport().mousePressedImpl(me);
@@ -79,6 +95,9 @@ class DragRecognitionSupport {
     /**
      * If a dnd recognition has been going on, return the MouseEvent
      * that started the recognition. Otherwise, return null.
+     * <p>
+     *  如果dnd识别正在进行,则返回开始识别的MouseEvent。否则,返回null。
+     * 
      */
     public static MouseEvent mouseReleased(MouseEvent me) {
         return getDragRecognitionSupport().mouseReleasedImpl(me);
@@ -86,6 +105,9 @@ class DragRecognitionSupport {
 
     /**
      * Returns whether or not a drag gesture recognition is ongoing.
+     * <p>
+     *  返回是否正在进行拖动手势识别。
+     * 
      */
     public static boolean mouseDragged(MouseEvent me, BeforeDrag bd) {
         return getDragRecognitionSupport().mouseDraggedImpl(me, bd);
@@ -110,6 +132,9 @@ class DragRecognitionSupport {
 
     /**
      * Returns whether or not the event is potentially part of a drag sequence.
+     * <p>
+     *  返回该事件是否可能是拖动序列的一部分。
+     * 
      */
     private boolean mousePressedImpl(MouseEvent me) {
         component = (JComponent)me.getSource();
@@ -129,6 +154,9 @@ class DragRecognitionSupport {
     /**
      * If a dnd recognition has been going on, return the MouseEvent
      * that started the recognition. Otherwise, return null.
+     * <p>
+     *  如果dnd识别正在进行,则返回开始识别的MouseEvent。否则,返回null。
+     * 
      */
     private MouseEvent mouseReleasedImpl(MouseEvent me) {
         /* no recognition has been going on */
@@ -148,6 +176,8 @@ class DragRecognitionSupport {
 
     /**
      * Returns whether or not a drag gesture recognition is ongoing.
+     * <p>
+     *  返回是否正在进行拖动手势识别。
      */
     private boolean mouseDraggedImpl(MouseEvent me, BeforeDrag bd) {
         /* no recognition is in progress */

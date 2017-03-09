@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.IOP;
 
 
@@ -13,16 +14,24 @@ public final class Encoding implements org.omg.CORBA.portable.IDLEntity
 
   /**
      * The encoding format.
+     * <p>
+     *  编码格式。
+     * 
      */
   public short format = (short)0;
 
   /**
      * The major version of this Encoding format.
+     * <p>
+     *  此编码格式的主要版本。
+     * 
      */
   public byte major_version = (byte)0;
 
   /**
      * The minor version of this Encoding format.
+     * <p>
+     *  此编码格式的次要版本。
      */
   public byte minor_version = (byte)0;
 

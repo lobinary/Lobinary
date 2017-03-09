@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ExsltDynamic.java,v 1.1.2.1 2005/08/01 02:08:51 jeffsuttor Exp $
+ * <p>
+ *  $ Id：ExsltDynamic.java,v 1.1.2.1 2005/08/01 02:08:51 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xalan.internal.lib;
 
@@ -56,6 +69,16 @@ import org.xml.sax.SAXNotSupportedException;
  * The documentation for each function has been copied from the relevant
  * EXSLT Implementer page.
  *
+ * <p>
+ *  这个类包含EXSLT动态扩展函数。
+ * 
+ *  可通过指定名称空间URI来访问它,如下所示：
+ * <pre>
+ *  xmlns：dyn ="http://exslt.org/dynamic"
+ * </pre>
+ *  每个函数的文档已从相关的EXSLT实施者页面复制。
+ * 
+ * 
  * @see <a href="http://www.exslt.org/">EXSLT</a>
 
  * @xsl.usage general
@@ -92,6 +115,22 @@ public class ExsltDynamic extends ExsltBase
    * This function must take a second argument. To calculate the maximum of a set of
    * nodes based on their string values, you should use the math:max function.
    *
+   * <p>
+   *  dyn：max函数计算作为第一个参数传递的节点的最大值,其中每个节点的值使用作为第二个参数作为字符串传递的XPath表达式动态计算。
+   * <p>
+   * 表达式相对于作为第一个参数传递的节点进行求值。换句话说,通过评估XPath表达式计算每个节点的值,所有上下文信息与对dyn：max函数本身的调用相同,但以下情况除外：
+   * <p>
+   * <ul>
+   *  <li>上下文位置是节点集中作为第一个参数传递给dyn：max函数的节点的位置,排列在文档中</li> <li>上下文大小是作为dyn：max函数的第一个参数传递的节点数。</li>
+   * </ul>
+   * <p>
+   *  dyn：max函数返回这些值的最大值,以与math：max完全相同的方式计算。
+   * <p>
+   *  如果作为第二个参数传递的表达式字符串是无效的XPath表达式(包括空字符串),则此函数返回NaN。
+   * <p>
+   *  此函数必须使用第二个参数。要根据字符串值计算一组节点的最大值,应使用math：max函数。
+   * 
+   * 
    * @param myContext The ExpressionContext passed by the extension processor
    * @param nl The node set
    * @param expr The expression string
@@ -173,6 +212,22 @@ public class ExsltDynamic extends ExsltBase
    * This function must take a second argument. To calculate the minimum of a set of
    * nodes based on their string values, you should use the math:min function.
    *
+   * <p>
+   *  dyn：min函数计算作为第一个参数传递的节点的最小值,其中每个节点的值是使用作为第二个参数的字符串传递的XPath表达式动态计算的。
+   * <p>
+   * 表达式相对于作为第一个参数传递的节点进行求值。换句话说,通过评估XPath表达式来计算每个节点的值,所有上下文信息与对dyn：min函数本身的调用相同,但以下情况除外：
+   * <p>
+   * <ul>
+   *  <li>上下文位置是节点集中作为第一个参数传递给dyn：min函数的节点的位置,排列在文档中</li> <li>上下文大小是作为dyn：min函数的第一个参数传递的节点数。</li>
+   * </ul>
+   * <p>
+   *  dyn：min函数返回这些值的最小值,以与math：min完全相同的方式计算。
+   * <p>
+   *  如果作为第二个参数传递的表达式字符串是无效的XPath表达式(包括空字符串),则此函数返回NaN。
+   * <p>
+   *  此函数必须使用第二个参数。要根据它们的字符串值计算一组节点的最小值,您应该使用math：min函数。
+   * 
+   * 
    * @param myContext The ExpressionContext passed by the extension processor
    * @param nl The node set
    * @param expr The expression string
@@ -254,6 +309,22 @@ public class ExsltDynamic extends ExsltBase
    * This function must take a second argument. To calculate the sumimum of a set of
    * nodes based on their string values, you should use the sum function.
    *
+   * <p>
+   *  dyn：sum函数计算作为第一个参数传递的节点的总和,其中每个节点的值是使用作为第二个参数的字符串传递的XPath表达式动态计算的。
+   * <p>
+   * 表达式相对于作为第一个参数传递的节点进行求值。换句话说,通过评估XPath表达式计算每个节点的值,其中所有上下文信息与对dyn：sum函数本身的调用相同,但以下情况除外：
+   * <p>
+   * <ul>
+   *  <li>上下文位置是节点集合中作为第一个参数传递给dyn：sum函数的节点的位置,排列在文档中</li> <li>上下文大小是作为dyn：sum函数的第一个参数传递的节点数。</li>
+   * </ul>
+   * <p>
+   *  dyn：sum函数返回这些值的最大值,按照与sum完全相同的方式计算。
+   * <p>
+   *  如果作为第二个参数传递的表达式字符串是无效的XPath表达式(包括空字符串),则此函数返回NaN。
+   * <p>
+   *  此函数必须使用第二个参数。要基于其字符串值计算一组节点的最大值,应使用sum函数。
+   * 
+   * 
    * @param myContext The ExpressionContext passed by the extension processor
    * @param nl The node set
    * @param expr The expression string
@@ -356,6 +427,35 @@ public class ExsltDynamic extends ExsltBase
    * result of evaluating the expression for the relevant node to a string as with
    * the string function.
    *
+   * <p>
+   *  dyn：map函数计算作为第一个参数传递的每个节点的第二个参数传递的表达式,并返回这些值的节点集。
+   * <p>
+   *  表达式相对于作为第一个参数传递的节点进行求值。换句话说,通过评估XPath表达式来计算每个节点的值,其中所有上下文信息与调用dyn：map函数本身的情况相同,但以下情况除外：
+   * <p>
+   * <ul>
+   * <li>上下文节点是要计算其值的节点。
+   * </li> <li>上下文位置是节点集中作为第一个参数传递给dyn：map函数的节点的位置, </li> <li>上下文大小是作为dyn：map函数的第一个参数传递的节点数。</li>。
+   * </ul>
+   * <p>
+   *  如果作为第二个参数传递的表达式字符串是无效的XPath表达式(包括空字符串),则此函数将返回空节点集。
+   * <p>
+   *  如果XPath表达式计算为节点集,则dyn：map函数返回通过计算第一个参数中每个节点的表达式而返回的节点集的并集。
+   * 注意,这可能意味着从对dyn：map函数的调用导致的节点集包含与作为函数的第一个参数传递的节点集中的数字不同数量的节点。
+   * <p>
+   * 如果XPath表达式计算为数字,dyn：map函数返回一个包含一个exsl：number元素(命名空间http://exslt.org/common)的节点集,作为第一个参数传递给节点集中的每个节点dy
+   * n：map函数,按文档顺序。
+   * 每个exsl：number元素的字符串值与将使用number函数计算表达式得到的数字转换为字符串的结果相同,但Infinity会导致exsl：number中包含最大数字的实现可以存储,而-Infinit
+   * y导致一个exsl：number保存实现可以存储的最小数字。
+   * <p>
+   *  如果XPath表达式计算为布尔值,则dyn：map函数返回一个节点集,该节点集包含作为第一个参数传递给节点集的每个节点的一个exsl：boolean元素(命名空间http://exslt.org/co
+   * mmon) dyn：map函数,按文档顺序。
+   * 如果表达式对节点求值为true,则每个exsl：boolean元素的字符串值为'true',如果表达式求值为false,则为''。
+   * <p>
+   *  否则,dyn：map函数返回一个节点集,该节点集包含作为第一个参数传递给dyn：map函数的节点集中每个节点的一个exsl：string元素(命名空间http://exslt.org/common)订
+   * 购。
+   * 每个exsl：string元素的字符串值与将相关节点的表达式计算结果转换为string函数的字符串的结果相同。
+   * 
+   * 
    * @param myContext The ExpressionContext passed by the extension processor
    * @param nl The node set
    * @param expr The expression string
@@ -456,6 +556,8 @@ public class ExsltDynamic extends ExsltBase
    * You should only use this function if the expression must be constructed dynamically,
    * otherwise it is much more efficient to use the expression literally.
    *
+   * <p>
+   * 
    * @param myContext The ExpressionContext passed by the extension processor
    * @param xpathExpr The XPath expression string
    *
@@ -523,6 +625,14 @@ public class ExsltDynamic extends ExsltBase
    * expression (including an empty string) or an expression that does not return a
    * node set, this function returns an empty node set.
    *
+   * <p>
+   * dyn：evaluate函数将字符串计算为XPath表达式,并返回结果值,其可能是布尔值,数字,字符串,节点集,结果树片段或外部对象。唯一的参数是要评估的字符串。
+   * <p>
+   *  如果作为第二个参数传递的表达式字符串是无效的XPath表达式(包括空字符串),则此函数将返回空节点集。
+   * <p>
+   *  如果表达式必须动态构造,那么只应使用此函数,否则使用字面意义上的表达式要高效得多。
+   * 
+   * 
    * @param myContext The ExpressionContext passed by the extension processor
    * @param nl The node set
    * @param expr The expression string

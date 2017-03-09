@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,16 @@ package java.security.cert;
  * provide the necessary locking. Multiple threads each manipulating
  * separate objects need not synchronize.
  *
+ * <p>
+ *  用作LDAP {@code CertStore}算法的输入的参数。
+ * <p>
+ *  此类用于向LDAP {@code CertStore}算法的实现提供必要的配置参数(服务器名称和端口号)。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  除非另有说明,否则此类中定义的方法不是线程安全的。需要并发访问单个对象的多个线程应在它们之间同步并提供必要的锁定。每个操作单独对象的多个线程不需要同步。
+ * 
+ * 
  * @since       1.4
  * @author      Steve Hanna
  * @see         CertStore
@@ -50,11 +61,17 @@ public class LDAPCertStoreParameters implements CertStoreParameters {
 
     /**
      * the port number of the LDAP server
+     * <p>
+     *  LDAP服务器的端口号
+     * 
      */
     private int port;
 
     /**
      * the DNS name of the LDAP server
+     * <p>
+     *  LDAP服务器的DNS名称
+     * 
      */
     private String serverName;
 
@@ -62,6 +79,10 @@ public class LDAPCertStoreParameters implements CertStoreParameters {
      * Creates an instance of {@code LDAPCertStoreParameters} with the
      * specified parameter values.
      *
+     * <p>
+     *  使用指定的参数值创建{@code LDAPCertStoreParameters}的实例。
+     * 
+     * 
      * @param serverName the DNS name of the LDAP server
      * @param port the port number of the LDAP server
      * @exception NullPointerException if {@code serverName} is
@@ -78,6 +99,10 @@ public class LDAPCertStoreParameters implements CertStoreParameters {
      * Creates an instance of {@code LDAPCertStoreParameters} with the
      * specified server name and a default port of 389.
      *
+     * <p>
+     *  使用指定的服务器名称和默认端口389创建{@code LDAPCertStoreParameters}的实例。
+     * 
+     * 
      * @param serverName the DNS name of the LDAP server
      * @exception NullPointerException if {@code serverName} is
      * {@code null}
@@ -89,6 +114,9 @@ public class LDAPCertStoreParameters implements CertStoreParameters {
     /**
      * Creates an instance of {@code LDAPCertStoreParameters} with the
      * default parameter values (server name "localhost", port 389).
+     * <p>
+     *  使用默认参数值(服务器名称"localhost",端口389)创建{@code LDAPCertStoreParameters}的实例。
+     * 
      */
     public LDAPCertStoreParameters() {
         this("localhost", LDAP_DEFAULT_PORT);
@@ -97,6 +125,10 @@ public class LDAPCertStoreParameters implements CertStoreParameters {
     /**
      * Returns the DNS name of the LDAP server.
      *
+     * <p>
+     *  返回LDAP服务器的DNS名称。
+     * 
+     * 
      * @return the name (not {@code null})
      */
     public String getServerName() {
@@ -106,6 +138,10 @@ public class LDAPCertStoreParameters implements CertStoreParameters {
     /**
      * Returns the port number of the LDAP server.
      *
+     * <p>
+     *  返回LDAP服务器的端口号。
+     * 
+     * 
      * @return the port number
      */
     public int getPort() {
@@ -121,6 +157,12 @@ public class LDAPCertStoreParameters implements CertStoreParameters {
      * future revision to perform a deep copy if new parameters are added
      * that should not be shared.
      *
+     * <p>
+     *  返回此对象的副本。对副本的更改不会影响原始副本,反之亦然。
+     * <p>
+     * 注意：此方法当前执行对象的浅拷贝(只需调用{@code Object.clone()})。如果添加了不应共享的新参数,则可以在将来的版本中更改此选项以执行深度复制。
+     * 
+     * 
      * @return the copy
      */
     public Object clone() {
@@ -135,6 +177,8 @@ public class LDAPCertStoreParameters implements CertStoreParameters {
     /**
      * Returns a formatted string describing the parameters.
      *
+     * <p>
+     * 
      * @return a formatted string describing the parameters
      */
     public String toString() {

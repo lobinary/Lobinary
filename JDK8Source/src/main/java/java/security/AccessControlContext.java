@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -69,6 +70,29 @@ import sun.security.util.SecurityConstants;
  *   acc.checkPermission(permission)
  * </pre>
  *
+ * <p>
+ *  AccessControlContext用于根据其封装的上下文进行系统资源访问决策。
+ * 
+ *  <p>更具体地说,它封装了一个上下文,并且有一个方法{@code checkPermission},它等同于AccessController类中的{@code checkPermission}方法,有
+ * 一个区别：AccessControlContext {@code checkPermission}基于它封装的上下文而不是当前执行线程的上下文来作出访问决策。
+ * 
+ *  因此,AccessControlContext的目的是用于那些应当在给定上下文内进行的安全检查实际上需要在不同的上下文内完成的情况(例如,从工作者线)。
+ * 
+ *  <p> AccessControlContext是通过调用{@code AccessController.getContext}方法创建的。
+ *  {@code getContext}方法获取当前调用上下文的"快照",并将其放在AccessControlContext对象中,它返回。示例调用如下：。
+ * 
+ * <pre>
+ *  AccessControlContext acc = AccessController.getContext()
+ * </pre>
+ * 
+ * <p>
+ *  不同上下文中的代码随后可以调用先前保存的AccessControlContext对象上的{@code checkPermission}方法。示例调用如下：
+ * 
+ * <pre>
+ *  acc.checkPermission(permission)
+ * </pre>
+ * 
+ * 
  * @see AccessController
  *
  * @author Roland Schemers
@@ -118,6 +142,10 @@ public final class AccessControlContext {
      * Context must not be null. Duplicate domains will be removed from the
      * context.
      *
+     * <p>
+     * 使用给定的ProtectionDomains数组创建一个AccessControlContext。上下文不能为null。重复的域将从上下文中删除。
+     * 
+     * 
      * @param context the ProtectionDomains associated with this context.
      * The non-duplicate domains are copied from the array. Subsequent
      * changes to the array will not affect this AccessControlContext.
@@ -155,6 +183,13 @@ public final class AccessControlContext {
      *
      * <p>
      *
+     * <p>
+     *  使用给定的{@code AccessControlContext}和{@code DomainCombiner}创建一个新的{@code AccessControlContext}。
+     * 此构造函数将提供的{@code DomainCombiner}与提供的{@code AccessControlContext}相关联。
+     * 
+     * <p>
+     * 
+     * 
      * @param acc the {@code AccessControlContext} associated
      *          with the provided {@code DomainCombiner}.
      *
@@ -194,6 +229,11 @@ public final class AccessControlContext {
      *
      * This "argument wrapper" context will be passed as the actual context
      * parameter on an internal doPrivileged() call used in the implementation.
+     * <p>
+     *  AccessController的包私有
+     * 
+     *  这个"参数包装器"上下文将作为实现中使用的内部doPrivileged()调用的实际上下文参数传递。
+     * 
      */
     AccessControlContext(ProtectionDomain caller, DomainCombiner combiner,
         AccessControlContext parent, AccessControlContext context,
@@ -202,6 +242,9 @@ public final class AccessControlContext {
         /*
          * Combine the domains from the doPrivileged() context into our
          * wrapper context, if necessary.
+         * <p>
+         *  如果需要,将来自doPrivileged()上下文的域合并到我们的包装器上下文中。
+         * 
          */
         ProtectionDomain[] callerPDs = null;
         if (caller != null) {
@@ -216,6 +259,9 @@ public final class AccessControlContext {
         } else {
             /*
              * Call combiner even if there is seemingly nothing to combine.
+             * <p>
+             *  呼叫组合器即使看似没有什么要组合。
+             * 
              */
             if (combiner != null) {
                 this.context = combiner.combine(callerPDs, null);
@@ -236,6 +282,9 @@ public final class AccessControlContext {
                 /*
                  * An AllPermission argument is equivalent to calling
                  * doPrivileged() without any limit permissions.
+                 * <p>
+                 *  AllPermission参数相当于调用doPrivileged(),没有任何限制权限。
+                 * 
                  */
                 if (perms[i].getClass() == AllPermission.class) {
                     parent = null;
@@ -252,6 +301,11 @@ public final class AccessControlContext {
          * are enclosed by this limited privilege scope. In other words,
          * it contains all of the domains which could potentially be checked
          * if none of the limiting permissions implied a requested permission.
+         * <p>
+         *  对于具有有限权限范围的doPrivileged(),初始化相关字段。
+         * 
+         *  restrictedContext字段包含由此有限权限范围包含的所有域的并集。换句话说,它包含所有可能被检查的域,如果没有一个限制权限暗示一个请求的权限。
+         * 
          */
         if (parent != null) {
             this.limitedContext = combine(parent.context, parent.limitedContext);
@@ -267,6 +321,9 @@ public final class AccessControlContext {
 
     /**
      * package private constructor for AccessController.getContext()
+     * <p>
+     *  包私有构造函数AccessController.getContext()
+     * 
      */
 
     AccessControlContext(ProtectionDomain context[],
@@ -279,6 +336,9 @@ public final class AccessControlContext {
 
     /**
      * Constructor for JavaSecurityAccess.doIntersectionPrivilege()
+     * <p>
+     *  JavaSecurityAccess.doIntersectionPrivilege()的构造方法
+     * 
      */
     AccessControlContext(ProtectionDomain[] context,
                          AccessControlContext privilegedContext)
@@ -290,6 +350,9 @@ public final class AccessControlContext {
 
     /**
      * Returns this context's context.
+     * <p>
+     *  返回此上下文的上下文。
+     * 
      */
     ProtectionDomain[] getContext() {
         return context;
@@ -297,6 +360,9 @@ public final class AccessControlContext {
 
     /**
      * Returns true if this context is privileged.
+     * <p>
+     *  如果此上下文具有特权,则返回true。
+     * 
      */
     boolean isPrivileged()
     {
@@ -305,6 +371,9 @@ public final class AccessControlContext {
 
     /**
      * get the assigned combiner from the privileged or inherited context
+     * <p>
+     *  从特权或继承的上下文中获取分配的组合器
+     * 
      */
     DomainCombiner getAssignedCombiner() {
         AccessControlContext acc;
@@ -325,6 +394,12 @@ public final class AccessControlContext {
      *
      * <p>
      *
+     * <p>
+     * 获取与此{@code AccessControlContext}相关联的{@code DomainCombiner}。
+     * 
+     * <p>
+     * 
+     * 
      * @return the {@code DomainCombiner} associated with this
      *          {@code AccessControlContext}, or {@code null}
      *          if there is none.
@@ -345,6 +420,9 @@ public final class AccessControlContext {
 
     /**
      * package private for AccessController
+     * <p>
+     *  AccessController的包私有
+     * 
      */
     DomainCombiner getCombiner() {
         return combiner;
@@ -366,6 +444,13 @@ public final class AccessControlContext {
      * This method quietly returns if the access request
      * is permitted, or throws a suitable AccessControlException otherwise.
      *
+     * <p>
+     *  根据当前有效的安全策略和此对象中的上下文,确定是否应允许或拒绝由指定的权限指示的访问请求。仅当上下文中的每个ProtectionDomain都包含该权限时,才允许该请求。否则,请求被拒绝。
+     * 
+     * <p>
+     *  如果允许访问请求,此方法静默返回,否则抛出合适的AccessControlException。
+     * 
+     * 
      * @param perm the requested permission.
      *
      * @exception AccessControlException if the specified permission
@@ -420,10 +505,17 @@ public final class AccessControlContext {
          * Stop at the first one that doesn't allow the
          * requested permission (throwing an exception).
          *
+         * <p>
+         *  在上下文中迭代ProtectionDomains。停止在第一个不允许所请求的权限(抛出异常)。
+         * 
          */
 
         /* if ctxt is null, all we had on the stack were system domains,
            or the first domain was a Privileged system domain. This
+        /* <p>
+        /*  或第一个域是特权系统域。这个
+        /* 
+        /* 
            is to make the common case for system code very fast */
 
         if (context == null) {
@@ -468,6 +560,9 @@ public final class AccessControlContext {
 
     /*
      * Check the domains associated with the limited privilege scope.
+     * <p>
+     *  检查与受限权限范围关联的域。
+     * 
      */
     private void checkPermission2(Permission perm) {
         if (!isLimited) {
@@ -476,6 +571,9 @@ public final class AccessControlContext {
 
         /*
          * Check the doPrivileged() context parameter, if present.
+         * <p>
+         *  检查doPrivileged()上下文参数(如果存在)。
+         * 
          */
         if (privilegedContext != null) {
             privilegedContext.checkPermission2(perm);
@@ -485,6 +583,9 @@ public final class AccessControlContext {
          * Ignore the limited permissions and parent fields of a wrapper
          * context since they were already carried down into the unwrapped
          * context.
+         * <p>
+         *  忽略包装器上下文的有限权限和父字段,因为它们已被传递到解包的上下文中。
+         * 
          */
         if (isWrapped) {
             return;
@@ -492,6 +593,9 @@ public final class AccessControlContext {
 
         /*
          * Try to match any limited privilege scope.
+         * <p>
+         *  尝试匹配任何有限权限范围。
+         * 
          */
         if (permissions != null) {
             Class<?> permClass = perm.getClass();
@@ -506,6 +610,9 @@ public final class AccessControlContext {
         /*
          * Check the limited privilege scope up the call stack or the inherited
          * parent thread call stack of this ACC.
+         * <p>
+         *  检查调用堆栈或此ACC的继承父线程调用堆栈的有限权限范围。
+         * 
          */
         if (parent != null) {
             /*
@@ -516,6 +623,10 @@ public final class AccessControlContext {
              * optimize(). When parent is set to an inherited context this
              * context was not directly created by a limited scope
              * doPrivileged() and it does not have its own limited permissions.
+             * <p>
+             * 作为优化,如果父上下文是从父线程继承的调用堆栈上下文,则检查父上下文的保护域是多余的,因为它们已经通过optimize()被合并到子线程的上下文中。
+             * 当parent设置为继承上下文时,此上下文不是由有限范围的doPrivileged()直接创建的,并且它没有自己的有限权限。
+             * 
              */
             if (permissions == null) {
                 parent.checkPermission2(perm);
@@ -532,6 +643,10 @@ public final class AccessControlContext {
      * context comes from an immediately enclosing limited doPrivileged().
      * The limited privilege scope can indirectly flow from the inherited
      * parent thread or an assigned context previously captured by getContext().
+     * <p>
+     *  取基于堆栈的上下文(this),并将其与特权或继承的上下文,如果需要的话。无论所分配的上下文是否来自直接包含的有限的doPrivileged(),都会标记任何受限权限范围。
+     * 有限权限范围可以从继承的父线程或先前由getContext()捕获的分配的上下文间接地流动。
+     * 
      */
     AccessControlContext optimize() {
         // the assigned (privileged or inherited) context
@@ -547,6 +662,9 @@ public final class AccessControlContext {
                  * If the context is from a limited scope doPrivileged() then
                  * copy the permissions and parent fields out of the wrapper
                  * context that was created to hold them.
+                 * <p>
+                 *  如果上下文来自有限范围的doPrivileged(),则将权限和父字段复制到创建用于保存它们的包装器上下文中。
+                 * 
                  */
                 if (acc.isWrapped) {
                     permissions = acc.permissions;
@@ -560,6 +678,9 @@ public final class AccessControlContext {
                  * If the inherited context is constrained by a limited scope
                  * doPrivileged() then set it as our parent so we will process
                  * the non-domain-related state.
+                 * <p>
+                 *  如果继承的上下文受限于有限范围的doPrivileged(),那么将其设置为我们的父,所以我们将处理非域相关的状态。
+                 * 
                  */
                 if (acc.isLimited) {
                     parent = acc;
@@ -631,6 +752,9 @@ public final class AccessControlContext {
 
     /*
      * Combine the current (stack) and assigned domains.
+     * <p>
+     *  组合当前(堆栈)和分配的域。
+     * 
      */
     private static ProtectionDomain[] combine(ProtectionDomain[]current,
         ProtectionDomain[] assigned) {
@@ -699,6 +823,9 @@ public final class AccessControlContext {
      * privilege scope unless the reachable domains (if any) are already
      * contained in this domain context (in which case any limited
      * privilege scope checking would be redundant).
+     * <p>
+     *  计算可能通过有限权限范围访问的其他域。将上下文标记为受限特权范围,除非可达域(如果有)已经包含在此域上下文中(在这种情况下,任何有限特权范围检查都将是多余的)。
+     * 
      */
     private void calculateFields(AccessControlContext assigned,
         AccessControlContext parent, Permission[] permissions)
@@ -727,6 +854,11 @@ public final class AccessControlContext {
      * an AccessControlContext and has the same set of ProtectionDomains
      * as this context.
      * <P>
+     * <p>
+     * 检查两个AccessControlContext对象是否相等。
+     * 检查<i> obj </i>是否为AccessControlContext,并且具有与此上下文相同的ProtectionDomains集合。
+     * <P>
+     * 
      * @param obj the object we are testing for equality with this object.
      * @return true if <i>obj</i> is an AccessControlContext, and has the
      * same set of ProtectionDomains as this context, false otherwise.
@@ -752,6 +884,9 @@ public final class AccessControlContext {
     /*
      * Compare for equality based on state that is free of limited
      * privilege complications.
+     * <p>
+     *  基于没有有限特权并发症的状态比较平等。
+     * 
      */
     private boolean equalContext(AccessControlContext that) {
         if (!equalPDs(this.context, that.context))
@@ -784,6 +919,9 @@ public final class AccessControlContext {
      * Compare for equality based on state that is captured during a
      * call to AccessController.getContext() when a limited privilege
      * scope is in effect.
+     * <p>
+     *  基于在受限权限范围生效时调用AccessController.getContext()期间捕获的状态进行比较。
+     * 
      */
     private boolean equalLimitedContext(AccessControlContext that) {
         if (that == null)
@@ -791,12 +929,18 @@ public final class AccessControlContext {
 
         /*
          * If neither instance has limited privilege scope then we're done.
+         * <p>
+         *  如果两个实例都没有有限的权限范围,我们就完成了。
+         * 
          */
         if (!this.isLimited && !that.isLimited)
             return true;
 
         /*
          * If only one instance has limited privilege scope then we're done.
+         * <p>
+         *  如果只有一个实例具有有限的权限范围,那么我们就完成了。
+         * 
          */
          if (!(this.isLimited && that.isLimited))
              return false;
@@ -806,6 +950,9 @@ public final class AccessControlContext {
          * this class and AccessController so this will probably never happen
          * but it only makes any sense to compare if they both have the same
          * isWrapped state.
+         * <p>
+         *  包装的实例应该永远不会逃避实现这个类和AccessController外部,所以这可能永远不会发生,但它只有任何意义,比较,如果他们都有相同的isWrapped状态。
+         * 
          */
         if ((this.isWrapped && !that.isWrapped) ||
             (!this.isWrapped && that.isWrapped)) {
@@ -823,6 +970,9 @@ public final class AccessControlContext {
 
         /*
          * Skip through any wrapped contexts.
+         * <p>
+         *  跳过任何包装的上下文。
+         * 
          */
         AccessControlContext thisNextPC = getNextPC(this);
         AccessControlContext thatNextPC = getNextPC(that);
@@ -832,6 +982,9 @@ public final class AccessControlContext {
          * not relevant because they have already been included in the context
          * of this instance by optimize() so we only care about any limited
          * privilege state they may have.
+         * <p>
+         *  保护域和privilegedContext的组合器是不相关的,因为它们已经通过optimize()被包括在这个实例的上下文中,所以我们只关心它们可能具有的任何有限的特权状态。
+         * 
          */
         if (thisNextPC == null && thatNextPC != null && thatNextPC.isLimited)
             return false;
@@ -851,6 +1004,9 @@ public final class AccessControlContext {
     /*
      * Follow the privilegedContext link making our best effort to skip
      * through any wrapper contexts.
+     * <p>
+     *  遵循privilegedContext链接,尽最大努力跳过任何包装器上下文。
+     * 
      */
     private static AccessControlContext getNextPC(AccessControlContext acc) {
         while (acc != null && acc.privilegedContext != null) {
@@ -921,6 +1077,9 @@ public final class AccessControlContext {
      * is computed by exclusive or-ing the hash code of all the protection
      * domains in the context together.
      *
+     * <p>
+     *  返回此上下文的哈希码值。通过将上下文中的所有保护域的哈希码一起排除或计算来计算哈希码。
+     * 
      * @return a hash code value for this context.
      */
 

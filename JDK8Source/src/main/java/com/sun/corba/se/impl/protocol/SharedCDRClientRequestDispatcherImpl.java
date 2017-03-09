@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.protocol;
@@ -119,6 +123,8 @@ import com.sun.corba.se.impl.util.JDKBridge;
  * ClientDelegate is the RMI client-side subcontract or representation
  * It implements RMI delegate as well as our internal ClientRequestDispatcher
  * interface.
+ * <p>
+ *  ClientDelegate是RMI客户端子合同或表示它实现RMI委托以及我们的内部ClientRequestDispatcher接口。
  */
 public class SharedCDRClientRequestDispatcherImpl
     extends

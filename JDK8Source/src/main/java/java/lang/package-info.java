@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -66,6 +67,18 @@
  * that must be supported by every implementation of the Java
  * platform.
  *
+ * <p>
+ *  提供对Java编程语言的设计至关重要的类。最重要的类是{@code Object},它是类层次结构的根,和{@code Class},其实例在运行时表示类。
+ * 
+ *  <p>通常,必须表示原始类型的值,如同它是一个对象一样。
+ * 包装器类{@code Boolean},{@code Character},{@code Integer},{@code Long},{@code Float}和{@code Double}用于此目的。
+ *  <p>通常,必须表示原始类型的值,如同它是一个对象一样。例如,类型为{@code Double}的对象包含类型为double的字段,以这样的方式表示该值,即对其的引用可以存储在引用类型的变量中。
+ * 这些类还提供了许多用于在原始值之间转换的方法,以及支持诸如equals和hashCode的标准方法。
+ *  {@code Void}类是一个不可实例化的类,它保存对表示类型void的{@code Class}对象的引用。
+ * 
+ *  <p>类{@code Math}提供常用的数学函数,如正弦,余弦和平方根。
+ * 类{@code String},{@code StringBuffer}和{@code StringBuilder}类似地提供了对字符串的常用操作。
+ * 
  * @since JDK1.0
  */
 package java.lang;

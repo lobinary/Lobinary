@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2009, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.util.Iterator;
  * This event type is used by the BeanContextServicesListener in order to
  * identify the service being registered.
  * </p>
+ * <p>
+ * <p>
+ *  此事件类型由BeanContextServicesListener使用,以便标识正在注册的服务。
+ * </p>
  */
 
 public class BeanContextServiceAvailableEvent extends BeanContextEvent {
@@ -44,6 +49,10 @@ public class BeanContextServiceAvailableEvent extends BeanContextEvent {
 
     /**
      * Construct a <code>BeanContextAvailableServiceEvent</code>.
+     * <p>
+     *  构造<code> BeanContextAvailableServiceEvent </code>。
+     * 
+     * 
      * @param bcs The context in which the service has become available
      * @param sc A <code>Class</code> reference to the newly available service
      */
@@ -55,6 +64,10 @@ public class BeanContextServiceAvailableEvent extends BeanContextEvent {
 
     /**
      * Gets the source as a reference of type <code>BeanContextServices</code>.
+     * <p>
+     *  获取源作为<code> BeanContextServices </code>类型的引用。
+     * 
+     * 
      * @return The context in which the service has become available
      */
     public BeanContextServices getSourceAsBeanContextServices() {
@@ -63,12 +76,20 @@ public class BeanContextServiceAvailableEvent extends BeanContextEvent {
 
     /**
      * Gets the service class that is the subject of this notification.
+     * <p>
+     *  获取作为此通知主题的服务类。
+     * 
+     * 
      * @return A <code>Class</code> reference to the newly available service
      */
     public Class getServiceClass() { return serviceClass; }
 
     /**
      * Gets the list of service dependent selectors.
+     * <p>
+     *  获取服务相关选择器的列表。
+     * 
+     * 
      * @return the current selectors available from the service
      */
     public Iterator getCurrentServiceSelectors() {
@@ -77,10 +98,15 @@ public class BeanContextServiceAvailableEvent extends BeanContextEvent {
 
     /*
      * fields
+     * <p>
+     *  字段
+     * 
      */
 
     /**
      * A <code>Class</code> reference to the newly available service
+     * <p>
+     *  对新可用服务的<code> Class </code>引用
      */
     protected Class                      serviceClass;
 }

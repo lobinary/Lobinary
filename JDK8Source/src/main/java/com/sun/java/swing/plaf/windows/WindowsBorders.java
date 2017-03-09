@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,10 @@ import static com.sun.java.swing.plaf.windows.XPStyle.Skin;
 
 /**
  * Factory object that can vend Borders appropriate for the Windows 95 L & F.
+ * <p>
+ *  可以销售适用于Windows 95 L&F的边框的工厂对象。
+ * 
+ * 
  * @author Rich Schiavi
  */
 
@@ -47,6 +52,10 @@ public class WindowsBorders {
 
     /**
      * Returns a  border instance for a Windows Progress Bar
+     * <p>
+     *  返回Windows进度栏的边框实例
+     * 
+     * 
      * @since 1.4
      */
     public static Border getProgressBarBorder() {
@@ -63,6 +72,10 @@ public class WindowsBorders {
     /**
      * Returns a border instance for a Windows ToolBar
      *
+     * <p>
+     *  返回Windows工具栏的边框实例
+     * 
+     * 
      * @return a border used for the toolbar
      * @since 1.4
      */
@@ -78,6 +91,10 @@ public class WindowsBorders {
      * Returns an new instance of a border used to indicate which cell item
      * has focus.
      *
+     * <p>
+     *  返回用于指示哪个单元格项具有焦点的边框的新实例。
+     * 
+     * 
      * @return a border to indicate which cell item has focus
      * @since 1.4
      */
@@ -142,6 +159,10 @@ public class WindowsBorders {
     /**
      * A border for the ToolBar. If the ToolBar is floatable then the handle grip is drawn
      * <p>
+     * <p>
+     *  ToolBar的边框。如果工具栏是可浮动的,则拉动把手
+     * <p>
+     * 
      * @since 1.4
      */
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
@@ -245,6 +266,10 @@ public class WindowsBorders {
 
     /**
      * This class is an implementation of a dashed border.
+     * <p>
+     *  这个类是一个虚线边框的实现。
+     * 
+     * 
      * @since 1.4
      */
     public static class DashedBorder extends LineBorder implements UIResource {
@@ -271,6 +296,9 @@ public class WindowsBorders {
     /**
      * A dashed border that paints itself in the complementary color
      * of the component's background color.
+     * <p>
+     *  一个虚线边框,以组件背景颜色的互补颜色绘制。
+     * 
      */
     static class ComplementDashedBorder extends LineBorder implements UIResource {
         private Color origColor;
@@ -295,6 +323,9 @@ public class WindowsBorders {
 
     /**
      * This class is an implementation of the InternalFrameLine border.
+     * <p>
+     *  这个类是InternalFrameLine边框的一个实现。
+     * 
      * @since 1.4
      */
     public static class InternalFrameLineBorder extends LineBorder implements

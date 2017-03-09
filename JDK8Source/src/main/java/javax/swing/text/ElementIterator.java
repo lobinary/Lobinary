@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -64,6 +65,22 @@ import java.util.Enumeration;
  *        }
  *    }
  *
+ * <p>
+ * <p>
+ *  ElementIterator,顾名思义,遍历元素树。可以使用Document或Element作为参数来调用构造函数。
+ * 如果使用Document作为参数调用构造函数,那么迭代的根是document.getDefaultRootElement()的返回值。
+ * 
+ *  迭代以深度优先的方式发生。关于如何处理边界条件：a)如果next()在first()或current()之前被调用,将返回根。 b)next()返回null以指示列表的结尾。
+ *  c)当当前元素是根或next()返回null时,previous()返回null。
+ * 
+ *  ElementIterator没有锁定元素树。这意味着它不跟踪任何更改。这是类的用户的责任,以确保在元素迭代期间不发生更改。
+ * 
+ *  简单用法示例：
+ * 
+ *  public void iterate(){ElementIterator it = new ElementIterator(root);元素元素while(true){if((elem = next())！= null){// process element System.out.println("elem："+ elem.getName()); }
+ *  else {break; }}}。
+ * 
+ * 
  * @author Sunita Mani
  *
  */
@@ -84,6 +101,9 @@ public class ElementIterator implements Cloneable {
      * In this case, the item on the stack
      * represents the "index"th child of the element
      *
+     * <p>
+     * StackItem类存储元素以及子索引。如果索引是-1,则在堆栈上表示的元素是元素本身。否则,索引用作元素的子元素的向量中的索引。在这种情况下,堆栈上的项表示元素的"索引"th子元素
+     * 
      */
     private class StackItem implements Cloneable {
         Element item;
@@ -94,6 +114,9 @@ public class ElementIterator implements Cloneable {
              * -1 index implies a self reference,
              * as opposed to an index into its
              * list of children.
+             * <p>
+             *  -1索引表示自引用,而不是其子列表中的索引。
+             * 
              */
             this.item = elem;
             this.childIndex = -1;
@@ -121,6 +144,10 @@ public class ElementIterator implements Cloneable {
      * root element is taken to get the
      * default root element of the document.
      *
+     * <p>
+     *  创建一个新的ElementIterator。根元素用于获取文档的默认根元素。
+     * 
+     * 
      * @param document a Document.
      */
     public ElementIterator(Document document) {
@@ -131,6 +158,10 @@ public class ElementIterator implements Cloneable {
     /**
      * Creates a new ElementIterator.
      *
+     * <p>
+     *  创建一个新的ElementIterator。
+     * 
+     * 
      * @param root the root Element.
      */
     public ElementIterator(Element root) {
@@ -141,6 +172,10 @@ public class ElementIterator implements Cloneable {
     /**
      * Clones the ElementIterator.
      *
+     * <p>
+     *  克隆ElementIterator。
+     * 
+     * 
      * @return a cloned ElementIterator Object.
      */
     public synchronized Object clone() {
@@ -165,6 +200,10 @@ public class ElementIterator implements Cloneable {
     /**
      * Fetches the first element.
      *
+     * <p>
+     *  获取第一个元素。
+     * 
+     * 
      * @return an Element.
      */
     public Element first() {
@@ -183,6 +222,10 @@ public class ElementIterator implements Cloneable {
     /**
      * Fetches the current depth of element tree.
      *
+     * <p>
+     *  获取元素树的当前深度。
+     * 
+     * 
      * @return the depth.
      */
     public int depth() {
@@ -196,6 +239,10 @@ public class ElementIterator implements Cloneable {
     /**
      * Fetches the current Element.
      *
+     * <p>
+     *  获取当前元素。
+     * 
+     * 
      * @return element on top of the stack or
      *          <code>null</code> if the root element is <code>null</code>
      */
@@ -207,6 +254,9 @@ public class ElementIterator implements Cloneable {
 
         /*
           get a handle to the element on top of the stack.
+        /* <p>
+        /*  获取堆栈顶部元素的句柄。
+        /* 
         */
         if (! elementStack.empty()) {
             StackItem item = elementStack.peek();
@@ -228,6 +278,10 @@ public class ElementIterator implements Cloneable {
      * used to locate the next element is
      * a depth-first search.
      *
+     * <p>
+     *  获取下一个元素。用于定位下一个元素的策略是深度优先搜索。
+     * 
+     * 
      * @return the next element or <code>null</code>
      *          at the end of the list.
      */
@@ -235,6 +289,10 @@ public class ElementIterator implements Cloneable {
 
         /* if current() has not been invoked
            and next is invoked, the very first
+        /* <p>
+        /*  接下来被调用,第一个
+        /* 
+        /* 
            element will be returned. */
         if (elementStack == null) {
             return first();
@@ -256,25 +314,39 @@ public class ElementIterator implements Cloneable {
             if (child.isLeaf()) {
                 /* In this case we merely want to increment
                    the child index of the item on top of the
+                /* <p>
+                /*  项的子索引在顶部
+                /* 
+                /* 
                    stack.*/
                 item.incrementIndex();
             } else {
                 /* In this case we need to push the child(branch)
                    on the stack so that we can iterate over its
+                /* <p>
+                /*  在栈上,这样我们可以迭代它的
+                /* 
+                /* 
                    children. */
                 elementStack.push(new StackItem(child));
             }
             return child;
         } else {
             /* No more children for the item on top of the
+            /* <p>
+            /* 
                stack therefore pop the stack. */
             elementStack.pop();
             if (!elementStack.isEmpty()) {
                 /* Increment the child index for the item that
+                /* <p>
+                /* 
                    is now on top of the stack. */
                 StackItem top = elementStack.peek();
                 top.incrementIndex();
                 /* We now want to return its next child, therefore
+                /* <p>
+                /* 
                    call next() recursively. */
                 return next();
             }
@@ -288,6 +360,10 @@ public class ElementIterator implements Cloneable {
      * element is the last element, or the current element
      * is null, then null is returned.
      *
+     * <p>
+     *  获取上一个元素。然而,如果当前元素是最后一个元素,或当前元素为null,则返回null。
+     * 
+     * 
      * @return previous <code>Element</code> if available
      *
      */
@@ -310,6 +386,10 @@ public class ElementIterator implements Cloneable {
         } else if (index == 0) {
             /* this implies that current is the element's
                first child, therefore previous is the
+            /* <p>
+            /*  第一个孩子,因此以前是的
+            /* 
+            /* 
                element itself. */
             return elem;
         } else if (index == -1) {
@@ -319,6 +399,10 @@ public class ElementIterator implements Cloneable {
             }
             /* We need to return either the item
                below the top item or one of the
+            /* <p>
+            /*  低于顶部项目或其中一个
+            /* 
+            /* 
                former's children. */
             StackItem top = elementStack.pop();
             item = elementStack.peek();
@@ -337,6 +421,9 @@ public class ElementIterator implements Cloneable {
     /**
      * Returns the last child of <code>parent</code> that is a leaf. If the
      * last child is a not a leaf, this method is called with the last child.
+     * <p>
+     *  返回作为叶子的<code> parent </code>的最后一个子项。如果最后一个子节点不是一个叶子,则该方法将与最后一个子节点一起调用。
+     * 
      */
     private Element getDeepestLeaf(Element parent) {
         if (parent.isLeaf()) {
@@ -352,6 +439,8 @@ public class ElementIterator implements Cloneable {
     /*
       Iterates through the element tree and prints
       out each element and its attributes.
+    /* <p>
+    /*  迭代通过元素树并打印出每个元素及其属性。
     */
     private void dumpTree() {
 

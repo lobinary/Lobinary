@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,28 @@ import java.lang.reflect.Constructor;
  * and another thread invokes a method that also attempts to load the providers
  * then the method will block until the loading completes.
  *
+ * <p>
+ *  文件系统的工厂方法。这个类定义了{@link #getDefault getDefault}方法来获取默认的文件系统和工厂方法来构造其他类型的文件系统。
+ * 
+ *  <p>对此类定义的任何方法的第一次调用会导致加载默认的{@link FileSystemProvider provider}。
+ * 由URI方案"file"标识的默认提供程序创建{@link FileSystem},提供对Java虚拟机可访问的文件系统的访问。如果加载或初始化默认提供程序的过程失败,则抛出一个未指定的错误。
+ * 
+ * <p>第一次调用{@link FileSystemProvider#installedProviders installedProviders}方法时,通过调用此类定义的任何{@code newFileSystem}
+ * 方法,定位并加载所有已安装的文件系统提供程序。
+ * 已安装的提供程序使用由{@link ServiceLoader}类定义的服务提供程序加载工具加载。已安装的提供程序使用系统类加载器加载。
+ * 如果系统类加载器不能被找到,则使用扩展类加载器;如果没有扩展类加载器,那么使用引导类加载器。
+ * 提供程序通常通过将它们放置在应用程序类路径或扩展目录中的JAR文件中来安装,JAR文件在资源目录中包含名为{@code java.nio.file.spi.FileSystemProvider}的提供程
+ * 序配置文件{ @code META-INF / services},并且该文件列出了{@link FileSystemProvider}的具有零参数构造函数的一个或多个具体子类的完全限定名。
+ * 如果系统类加载器不能被找到,则使用扩展类加载器;如果没有扩展类加载器,那么使用引导类加载器。安装的提供程序所在的顺序是特定于实现的。
+ * 如果提供程序被实例化并且其{@link FileSystemProvider#getScheme()getScheme}返回之前实例化的提供程序的相同URI方案,则丢弃最近实例化的副本。
+ * 比较URI方案而不考虑情况。在构建期间,提供者可以安全地访问与默认提供者相关联的文件,但需要注意避免其他已安装的提供者的循环加载。如果检测到已安装的提供程序的循环加载,则抛出未指定的错误。
+ * 
+ * <p>此类还定义了允许在查找提供程序时指定{@link ClassLoader}的工厂方法。
+ * 与已安装的提供程序一样,通过将提供程序配置文件放在资源目录{@code META-INF / services}中来标识提供程序类。
+ * 
+ *  <p>如果线程启动加载已安装的文件系统提供程序,并且另一个线程调用一个也试图加载提供程序的方法,则该方法将阻塞,直到加载完成。
+ * 
+ * 
  * @since 1.7
  */
 
@@ -170,6 +193,24 @@ public final class FileSystems {
      * <p> Subsequent invocations of this method return the file system that was
      * returned by the first invocation.
      *
+     * <p>
+     *  返回默认的{@code FileSystem}。默认文件系统创建的对象提供对Java虚拟机可访问的文件系统的访问。
+     * 文件系统的<em>工作目录</em>是当前用户目录,由系统属性{@code user.dir}命名。这允许与{@link java.io.File java.io.File}类的互操作性。
+     * 
+     *  <p>对此类定义的任何方法的第一次调用将定位默认的{@link FileSystemProvider provider}对象。
+     * 在未定义系统属性{@code java.nio.file.spi.DefaultFileSystemProvider}的情况下,默认提供程序是被调用以创建默认文件系统的系统默认提供程序。
+     * 
+     * <p>如果定义了系统属性{@code java.nio.file.spi.DefaultFileSystemProvider},则它被视为由URI方案标识的具体提供程序类的一个或多个完全限定名称的列表{@code "文件"}
+     * 。
+     * 如果属性是多个名称的列表,那么这些名称之间用逗号分隔。使用系统类加载器加载每个类,并通过调用形式参数类型为{@code FileSystemProvider}的一个参数构造函数来实例化。
+     * 提供程序按它们在属性中列出的顺序加载和实例化。如果此进程失败或提供程序的方案不等于{@code"file"},则会抛出未指定的错误。
+     *  URI方案通常是比较而不考虑情况,但是对于默认提供者,该方案需要是{@code"file"}。第一个提供程序类通过引用系统默认提供程序进行调用来实例化。
+     * 第二个提供程序类通过引用第一个提供程序实例来调用它来实例化。第三个提供程序类通过调用它引用第二个实例来实例化,依此类推。
+     * 要实例化的最后一个提供程序成为默认提供程序;它的{@code getFileSystem}方法用URI {@code"file：///"}调用以获得对默认文件系统的引用。
+     * 
+     *  <p>此方法的后续调用返回第一次调用返回的文件系统。
+     * 
+     * 
      * @return  the default file system
      */
     public static FileSystem getDefault() {
@@ -200,6 +241,22 @@ public final class FileSystems {
      * existing file system. In the case of the {@link FileSystems#getDefault
      * default} file system, no permission check is required.
      *
+     * <p>
+     *  返回对现有{@code FileSystem}的引用。
+     * 
+     * <p>此方法遍历{@link FileSystemProvider#installedProviders()installed}提供程序,以查找由给定URI的URI {@link URI#getScheme scheme}
+     * 标识的提供程序。
+     * 比较URI方案而不考虑情况。 URI的确切形式高度依赖于提供程序。
+     * 如果找到,则调用提供程序的{@link FileSystemProvider#getFileSystem getFileSystem}方法来获取对{@code FileSystem}的引用。
+     * 
+     *  <p>如果此方法返回对封闭文件系统的引用或抛出{@link FileSystemNotFoundException},则此提供程序创建的文件系统为{@link FileSystem#close Closed}
+     * 时,它取决于提供程序。
+     * 如果提供程序允许使用与之前创建的文件系统相同的URI创建新的文件系统,则该方法在文件系统关闭后(以及在{@link# newFileSystem newFileSystem}方法)。
+     * 
+     *  <p>如果安装了安全管理器,则提供程序实现可能需要在返回对现有文件系统的引用之前检查权限。
+     * 对于{@link FileSystems#getDefault default}文件系统,不需要进行权限检查。
+     * 
+     * 
      * @param   uri  the URI to locate the file system
      *
      * @return  the reference to the file system
@@ -248,6 +305,23 @@ public final class FileSystems {
      *   FileSystem fs = FileSystems.newFileSystem(URI.create("memory:///?name=logfs"), env);
      * </pre>
      *
+     * <p>
+     *  构造一个由{@link URI}标识的新文件系统
+     * 
+     * <p>此方法遍历{@link FileSystemProvider#installedProviders()installed}提供程序,以查找由给定URI的URI {@link URI#getScheme scheme}
+     * 标识的提供程序。
+     * 比较URI方案而不考虑情况。 URI的确切形式高度依赖于提供程序。
+     * 如果找到,则调用提供程序的{@link FileSystemProvider#newFileSystem(URI,Map)newFileSystem(URI,Map)}方法来构造新的文件系统。
+     * 
+     *  <p>一旦文件系统是{@link FileSystem#close Closed},它是依赖于提供程序的,如果提供程序允许使用与之前创建的文件系统相同的URI创建新的文件系统。
+     * 
+     *  <p> <b>使用示例：</b>假设有一个由安装的方案{@code"memory"}标识的提供者：
+     * <pre>
+     *  Map&lt; String,String&gt; env = new HashMap&lt;&gt;(); env.put("capacity","16G"); env.put("blockSize
+     * ","4k"); FileSystem fs = FileSystems.newFileSystem(URI.create("memory：///?name = logfs"),env);。
+     * </pre>
+     * 
+     * 
      * @param   uri
      *          the URI identifying the file system
      * @param   env
@@ -287,6 +361,16 @@ public final class FileSystems {
      * FileSystemProvider#newFileSystem(URI,Map) newFileSystem(URI,Map)} is
      * invoked to construct the new file system.
      *
+     * <p>
+     *  构造一个由{@link URI}标识的新文件系统
+     * 
+     *  <p>此方法首先尝试以与{@link #newFileSystem(URI,Map)newFileSystem(URI,Map)}方法完全相同的方式查找已安装的提供程序。
+     * 如果没有安装的提供程序支持URI方案,则尝试使用给定的类加载器来定位提供程序。
+     * 如果支持URI方案的提供者被定位,则调用其{@link FileSystemProvider#newFileSystem(URI,Map)newFileSystem(URI,Map)}来构造新的文件系统
+     * 。
+     * 如果没有安装的提供程序支持URI方案,则尝试使用给定的类加载器来定位提供程序。
+     * 
+     * 
      * @param   uri
      *          the URI identifying the file system
      * @param   env
@@ -358,6 +442,13 @@ public final class FileSystems {
      * the provider using the given class loader. If a provider returns a file
      * system then the lookup terminates and the file system is returned.
      *
+     * <p>
+     * 构造新的{@code FileSystem}以作为文件系统访问文件的内容。
+     * 
+     *  <p>此方法使用创建伪文件系统的专用提供程序,其中一个或多个文件的内容被视为文件系统。
+     * 
+     *  <p>此方法遍历{@link FileSystemProvider#installedProviders()installed}提供程序。
+     * 
      * @param   path
      *          the path to the file
      * @param   loader

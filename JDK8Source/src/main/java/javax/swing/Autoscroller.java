@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,12 +35,19 @@ import java.awt.event.*;
  * that receive the events to do the actual scrolling in response to the
  * mouse dragged events.
  *
+ * <p>
+ *  Autoscroller负责生成合成鼠标拖动事件。它是组件(或其MouseListeners)的责任,接收事件做实际滚动响应鼠标拖动事件。
+ * 
+ * 
  * @author Dave Moore
  * @author Scott Violet
  */
 class Autoscroller implements ActionListener {
     /**
      * Global Autoscroller.
+     * <p>
+     *  全局自动滚动。
+     * 
      */
     private static Autoscroller sharedInstance = new Autoscroller();
 
@@ -55,6 +63,9 @@ class Autoscroller implements ActionListener {
     //
     /**
      * Stops autoscroll events from happening on the specified component.
+     * <p>
+     *  停止在指定组件上发生自动滚动事件。
+     * 
      */
     public static void stop(JComponent c) {
         sharedInstance._stop(c);
@@ -62,6 +73,9 @@ class Autoscroller implements ActionListener {
 
     /**
      * Stops autoscroll events from happening on the specified component.
+     * <p>
+     *  停止在指定组件上发生自动滚动事件。
+     * 
      */
     public static boolean isRunning(JComponent c) {
         return sharedInstance._isRunning(c);
@@ -70,6 +84,9 @@ class Autoscroller implements ActionListener {
     /**
      * Invoked when a mouse dragged event occurs, will start the autoscroller
      * if necessary.
+     * <p>
+     *  在发生鼠标拖动事件时调用,将在必要时启动自动滚动器。
+     * 
      */
     public static void processMouseDragged(MouseEvent e) {
         sharedInstance._processMouseDragged(e);
@@ -81,6 +98,9 @@ class Autoscroller implements ActionListener {
 
     /**
      * Starts the timer targeting the passed in component.
+     * <p>
+     *  启动定向传递组件的计时器。
+     * 
      */
     private void start(JComponent c, MouseEvent e) {
         Point screenLocation = c.getLocationOnScreen();
@@ -112,6 +132,9 @@ class Autoscroller implements ActionListener {
 
     /**
      * Stops scrolling for the passed in widget.
+     * <p>
+     *  停止传递的窗口小部件的滚动。
+     * 
      */
     private void _stop(JComponent c) {
         if (component == c) {
@@ -127,6 +150,9 @@ class Autoscroller implements ActionListener {
     /**
      * Returns true if autoscrolling is currently running for the specified
      * widget.
+     * <p>
+     *  如果当前正在为指定的窗口小部件运行自动滚动,则返回true。
+     * 
      */
     private boolean _isRunning(JComponent c) {
         return (c == component && timer != null && timer.isRunning());
@@ -134,6 +160,9 @@ class Autoscroller implements ActionListener {
 
     /**
      * MouseListener method, invokes start/stop as necessary.
+     * <p>
+     *  MouseListener方法,根据需要调用start / stop。
+     * 
      */
     private void _processMouseDragged(MouseEvent e) {
         JComponent component = (JComponent)e.getComponent();
@@ -155,6 +184,8 @@ class Autoscroller implements ActionListener {
     /**
      * ActionListener method. Invoked when the Timer fires. This will scroll
      * if necessary.
+     * <p>
+     *  ActionListener方法。定时器触发时调用。如果需要,将滚动。
      */
     public void actionPerformed(ActionEvent x) {
         JComponent component = Autoscroller.component;

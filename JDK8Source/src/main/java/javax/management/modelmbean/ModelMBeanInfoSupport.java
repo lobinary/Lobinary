@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -79,6 +82,22 @@ import javax.management.RuntimeOperationsException;
  * <p>The <b>serialVersionUID</b> of this class is
  * <code>-1935722590756516193L</code>.
  *
+ * <p>
+ *  此类表示ModelMBeans的元数据。描述符已添加到元数据对象上。
+ * <P>
+ *  希望可管理的Java资源使用MBeanServer的createMBean方法实例化ModelMBean。
+ * 然后,资源设置ModelMBean实例的ModelMBeanInfo和Descriptors。
+ * 通过ModelMBean的ModelMBeanInfo公开的属性和操作可以从MBean,连接器/适配器(如其他MBean)访问。
+ * 通过描述符,可以定义受管应用程序中的值和方法,并将其映射到ModelMBean的属性和操作。此映射可以在开发期间在文件中定义,也可以在运行时以动态和编程方式定义。
+ * <P>
+ *  在MBeanServer中实例化的每个ModelMBean变得易于管理：其属性和操作可通过连接到该MBeanServer的连接器/适配器远程访问。
+ * 不能在MBeanServer中注册Java对象,除非它是符合JMX的MBean。通过实例化ModelMBean,保证MBean有效的资源。
+ * 
+ *  必须在每个公共方法上抛出MBeanException和RuntimeOperationsException。这允许包装来自分布式通信(RMI,EJB等)的异常,
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> -1935722590756516193L </code>。
+ * 
+ * 
  * @since 1.5
  */
 @SuppressWarnings("serial")
@@ -120,6 +139,8 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField modelMBeanDescriptor Descriptor The descriptor containing
      *              MBean wide policy
      * @serialField modelMBeanAttributes ModelMBeanAttributeInfo[] The array of
@@ -157,6 +178,8 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
     // END Serialization compatibility stuff
 
     /**
+    /* <p>
+    /* 
      * @serial The descriptor containing MBean wide policy
      */
     private Descriptor modelMBeanDescriptor = null;
@@ -167,27 +190,41 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
        get rid of them.
 
        These fields can't be final because they are assigned to by
+    /* <p>
+    /* 从MBeanInfo继承的字段,并且仅为了兼容性而保留。通过重写序列化代码,我们可以摆脱它们。
+    /* 
+    /*  这些字段不能是final,因为它们由分配给
+    /* 
+    /* 
        readObject().  */
 
     /**
+    /* <p>
+    /* 
      * @serial The array of {@link ModelMBeanAttributeInfo} objects which
      *         have descriptors
      */
     private MBeanAttributeInfo[] modelMBeanAttributes;
 
     /**
+    /* <p>
+    /* 
      * @serial The array of {@link ModelMBeanConstructorInfo} objects which
      *         have descriptors
      */
     private MBeanConstructorInfo[] modelMBeanConstructors;
 
     /**
+    /* <p>
+    /* 
      * @serial The array of {@link ModelMBeanNotificationInfo} objects which
      *         have descriptors
      */
     private MBeanNotificationInfo[] modelMBeanNotifications;
 
     /**
+    /* <p>
+    /* 
      * @serial The array of {@link ModelMBeanOperationInfo} objects which
      *         have descriptors
      */
@@ -210,6 +247,12 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
      * via {@link #setDescriptor setDescriptor} without affecting the
      * Descriptor of the original object.
      *
+     * <p>
+     *  构造一个ModelMBeanInfoSupport,它是给定的ModelMBeanInfo的副本。返回的对象是给定对象的浅拷贝。
+     * 无论是描述符还是包含的数组({@code ModelMBeanAttributeInfo []}等)都被克隆。
+     * 此方法主要感兴趣的是通过{@link #setDescriptor setDescriptor}修改返回的实例的描述符,而不影响原始对象的描述符。
+     * 
+     * 
      * @param mbi the ModelMBeanInfo instance from which the ModelMBeanInfo
      * being created is initialized.
      */
@@ -253,6 +296,13 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
      * The default descriptor is: name=className, descriptorType="mbean",
      * displayName=className, persistPolicy="never", log="F", visibility="1"
      *
+     * <p>
+     *  使用提供的信息创建ModelMBeanInfoSupport,但描述符是默认值。
+     * 默认描述符是：name = className,descriptorType ="mbean",displayName = className,persistPolicy ="never",log ="
+     * F"。
+     *  使用提供的信息创建ModelMBeanInfoSupport,但描述符是默认值。
+     * 
+     * 
      * @param className classname of the MBean
      * @param description human readable description of the
      * ModelMBean
@@ -279,6 +329,10 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
      * Creates a ModelMBeanInfoSupport with the provided information
      * and the descriptor given in parameter.
      *
+     * <p>
+     *  使用提供的信息和参数中给出的描述符创建ModelMBeanInfoSupport。
+     * 
+     * 
      * @param className classname of the MBean
      * @param description human readable description of the
      * ModelMBean
@@ -324,6 +378,10 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
            some stage we replace null with an empty array
            here, as we do in the superclass constructor
            parameters, then we must also do this in
+        /* <p>
+        /*  检查这里他们被引用的地方。如果在某个阶段我们用空数组替换null,就像我们在超类构造函数参数中做的那样,那么我们也必须这样做
+        /* 
+        /* 
            readObject().  */
         modelMBeanAttributes = attributes;
         modelMBeanConstructors = constructors;
@@ -358,6 +416,11 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
      * of the clone via {@link #setDescriptor setDescriptor} without affecting
      * the Descriptor of the original object.
      *
+     * <p>
+     *  返回此实例的浅克隆。无论是描述符还是包含的数组({@code ModelMBeanAttributeInfo []}等)都被克隆。
+     * 此方法主要感兴趣的是通过{@link #setDescriptor setDescriptor}修改克隆的描述符,而不影响原始对象的描述符。
+     * 
+     * 
      * @return a shallow clone of this instance.
      */
     public Object clone() {
@@ -516,6 +579,10 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
     /**
      * Returns a Descriptor requested by name.
      *
+     * <p>
+     * 返回名称所请求的描述符。
+     * 
+     * 
      * @param inDescriptorName The name of the descriptor.
      *
      * @return Descriptor containing a descriptor for the ModelMBean with the
@@ -560,6 +627,11 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
                one of the following ifs will run, and it will either
                return a descriptor or null.  If inDescriptorType is
                null, then all of the following ifs will run until one
+            /* <p>
+            /*  处理两种可能的情况,取决于inDescriptorType是否为null。如果它不为null,则只有以下ifs中的一个将运行,并且它将返回一个描述符或null。
+            /* 如果inDescriptorType为null,则所有以下ifs将运行,直到一个。
+            /* 
+            /* 
                of them finds a descriptor.  */
         if (ATTR.equalsIgnoreCase(inDescriptorType) || inDescriptorType == null) {
             ModelMBeanAttributeInfo attr = getAttribute(inDescriptorName);
@@ -811,6 +883,10 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
      * Returns the ModelMBeanConstructorInfo requested by name.
      * If no ModelMBeanConstructorInfo exists for this name null is returned.
      *
+     * <p>
+     *  返回按名称请求的ModelMBeanConstructorInfo。如果没有ModelMBeanConstructorInfo存在,则返回此名称null。
+     * 
+     * 
      * @param inName the name of the constructor.
      *
      * @return the constructor info for the named constructor, or null
@@ -889,6 +965,8 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
 
     /* We override MBeanInfo.getDescriptor() to return our descriptor. */
     /**
+    /* <p>
+    /* 
      * @since 1.6
      */
     @Override
@@ -939,6 +1017,13 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
      * displayName=className,name=className,descriptorType="mbean",
      * persistPolicy="never", log="F", visibility="1"
      *
+     * <p>
+     *  克隆在描述符中传递的,设置默认值,并检查有效性。如果描述符无效(例如有错误的"名称"),这表示编程错误,并将抛出RuntimeOperationsException。
+     * 
+     *  如果尚未设置以下字段,那么将默认使用以下字段：displayName = className,name = className,descriptorType ="mbean",persistPolic
+     * y ="never",log ="F"。
+     * 
+     * 
      * @param in Descriptor to be checked, or null which is equivalent to
      * an empty Descriptor.
      * @exception RuntimeOperationsException if Descriptor is invalid
@@ -1000,6 +1085,9 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
 
     /**
      * Deserializes a {@link ModelMBeanInfoSupport} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link ModelMBeanInfoSupport}。
+     * 
      */
     private void readObject(ObjectInputStream in)
     throws IOException, ClassNotFoundException {
@@ -1042,6 +1130,8 @@ public class ModelMBeanInfoSupport extends MBeanInfo implements ModelMBeanInfo {
 
     /**
      * Serializes a {@link ModelMBeanInfoSupport} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link ModelMBeanInfoSupport}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
     throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -206,6 +207,79 @@ import javax.security.auth.Subject;
  *    };
  * </pre>
 
+ * <p>
+ *  此类表示<code> javax.security.auth.Policy </code>的默认实现。
+ * 
+ *  <p>此对象存储整个Java运行时的策略,并且是驻留在文件中的多个静态策略配置的合并。用于定位策略文件并将其信息读入此<code> Policy </code>对象的算法是：
+ * 
+ * <ol>
+ * <li>
+ *  循环浏览安全属性<a> auth.policy.url.1 </i>,<a> auth.policy.url.2 </i>,...,<a> auth.policy.url.X </i>"。
+ * 每个属性值指定一个指向要加载的策略文件的<code> URL </code>。读入并加载每个策略。
+ * 
+ * <li>
+ *  <code> java.lang.System </code>属性<i> java.security.auth.policy </i>也可以设置为指向另一个策略文件的<code> URL </code>
+ * 当用户在运行时使用-D开关的情况)。
+ * 如果定义此属性,并且安全属性文件允许其使用(Security属性,<i> policy.allowSystemProperty </i>设置为<i> true </i>),也请加载该策略。
+ * 
+ * <li>
+ *  如果使用"=="(而不是"=")定义<i> java.security.auth.policy </i>属性,则忽略所有其他指定的策略,并且只加载此策略。
+ * </ol>
+ * 
+ *  每个策略文件由一个或多个授权条目组成,每个授权条目由多个权限条目组成。
+ * 
+ * <pre>
+ * </b>"<b> </b>"<b> </b>"<b> </b> </b>"<b> principalName </b>",... {
+ * 
+ *  </b> </b> <b> </b> <b> <b> </b> "<b> name </b>"<b> action </b>",signedBy"<b>别名</b>"; ....};
+ * </pre>
+ * 
+ *  上面的所有非粗体项目必须按原样显示(虽然大小写不重要,有些是可选的,如下所述)。斜体项表示变量值。
+ * 
+ *  <p>授权项必须以字<code> grant </code>开头。 <code> signedBy </code>和<code> codeBase </code>名称/值对是可选的。
+ * 如果它们不存在,则任何签名者(包括未签名的代码)将匹配,并且任何codeBase将匹配。请注意,<code> principal </code>名称/值对不是可选的。
+ * 此<code> Policy </code>实现仅允许基于主体的授权条目。
+ * 请注意,<i> principalClass </i>可以设置为通配符值*,它允许它匹配任何<code> Principal </code>类。
+ * 此外,<i> principalName </i>也可以设置为通配符值*,允许它匹配任何<code> Principal </code>名称。
+ * 将<i> principalName </i>设置为*时,不要用引号括住*。
+ * 
+ * <p>权限输入必须以<code> permission </code>开头。
+ * 上述模板中的<code> <i> Type </i> </code>是特定的权限类型,例如<code> java.io.FilePermission </code>或<code> java.lang.R
+ * untimePermission </code>。
+ * <p>权限输入必须以<code> permission </code>开头。
+ * 
+ *  <p>许多权限类型(例如<code> java.io.FilePermission </code>(它指定允许的文件访问类型)需要"<i> action </i>"。
+ * 它不是必需的类别,如<code> java.lang.RuntimePermission </code>在这里不必要 - 您有<code>"<i> name </i>"</code >值跟在类型名称后面
+ * ,或者不是。
+ *  <p>许多权限类型(例如<code> java.io.FilePermission </code>(它指定允许的文件访问类型)需要"<i> action </i>"。
+ * 
+ *  <p>权限条目的<code> signedBy </code>名称/值对是可选的。如果存在,它表示签名的权限。也就是说,权限类本身必须由给定的别名签名,以便授予它。例如,假设您具有以下授权条目：
+ * 
+ * <pre>
+ *  grant principal foo.com.Principal"Duke"{permission Foo"foobar",signedBy"FooSoft"; }}
+ * </pre>
+ * 
+ *  <p>然后,如果<code> Foo.class </code>权限已由"FooSoft"别名签名,或者如果<code> Foo.class < / code>是一个系统类(即,在CLASSPATH上
+ * 找到)。
+ * 
+ *  <p>条目中显示的项目必须以指定的顺序显示(<code> permission </code>,<i> Type </i>,"<i> name </i>"和"<i>动作</i>")。条目以分号结尾。
+ * 
+ * <p>案例对于标识符(<code> permission </code>,<code> signedBy </code>,<code> codeBase </code>等)并不重要, / i>或作为值传
+ * 递的任何字符串。
+ *  <p>。
+ * 
+ *  <p>策略配置文件中的两个条目的示例为
+ * <pre>
+ *  //如果代码来自"foo.com"并且运行为"Duke",//授予它对/ tmp中所有文件的读/写。
+ * 
+ *  授权代码库"foo.com",主体foo.com.Principal"Duke"{permission java.io.FilePermission"/ tmp / *","read,write"; }
+ * ;。
+ * 
+ *  //授予任何运行为"Duke"权限的代码来读取"java.vendor"属性。
+ * 
+ *  grant principal foo.com.Principal"Duke"{permission java.util.PropertyPermission"java.vendor";
+ * </pre>
+ * 
  * @deprecated As of JDK&nbsp;1.4, replaced by
  *             <code>sun.security.provider.PolicyFile</code>.
  *             This class is entirely deprecated.
@@ -224,6 +298,39 @@ public class PolicyFile extends javax.security.auth.Policy {
     /**
      * Initializes the Policy object and reads the default policy
      * configuration file(s) into the Policy object.
+     * <p>
+     * 
+     *  <p>此<code> Policy </code>实施支持PrivateCredentialPermissions的特殊处理。
+     * 如果授权条目配置有<code> PrivateCredentialPermission </code>,并且<code> PrivateCredentialPermission </code>的"主体类
+     * /主体名称"是"self",则该条目授予指定的<code>主题</code>访问其自己的私有Credential的权限。
+     *  <p>此<code> Policy </code>实施支持PrivateCredentialPermissions的特殊处理。
+     * 例如,以下授予<code> Subject </code>"Duke"访问其自己的a.b.Credential。
+     * 
+     * <pre>
+     *  grant principal foo.com.Principal"Duke"{permission javax.security.auth.PrivateCredentialPermission"a.b.Credential self","read"; }
+     * ;。
+     * </pre>
+     * 
+     *  以下授予<code>主题</code>"Duke"对其所有私有凭据的访问权限：
+     * 
+     * <pre>
+     * grant principal foo.com.Principal"Duke"{permission javax.security.auth.PrivateCredentialPermission"* self","read"; }
+     * ;。
+     * </pre>
+     * 
+     *  以下授予所有经过身份验证为<code> SolarisPrincipal </code>(无论其各自的名称)的主体访问其自己的私有凭据的权限：
+     * 
+     * <pre>
+     *  grant principal com.sun.security.auth.SolarisPrincipal * {permission javax.security.auth.PrivateCredentialPermission"* self","read"; }
+     * ;。
+     * </pre>
+     * 
+     *  以下授予所有主体访问他们自己的私人凭据的权限：
+     * 
+     * <pre>
+     *  grant principal * * {permission javax.security.auth.PrivateCredentialPermission"* self","read"; };
+     * </pre>
+     * 
      */
     public PolicyFile() {
         apf = new sun.security.provider.AuthPolicyFile();
@@ -234,6 +341,10 @@ public class PolicyFile extends javax.security.auth.Policy {
      *
      * <p>
      *
+     * <p>
+     *  初始化Policy对象并将默认策略配置文件读入Policy对象。
+     * 
+     * 
      * @exception SecurityException if the caller doesn't have permission
      *          to refresh the <code>Policy</code>.
      */
@@ -286,6 +397,12 @@ public class PolicyFile extends javax.security.auth.Policy {
      *
      * <p>
      *
+     * <p>
+     *  通过重新读取所有策略文件刷新策略对象。
+     * 
+     * <p>
+     * 
+     * 
      * @param subject the Permissions granted to this <code>Subject</code>
      *          and the additionally provided <code>CodeSource</code>
      *          are returned. <p>

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -98,6 +99,50 @@ import javax.activation.DataHandler;
  * class was correctly implemented then it will continue to behave correctly
  * relative to the version of the specification against which it was written.
  *
+ * <p>
+ *  所有SOAP消息的根类。如在"wire"上传输的,SOAP消息是XML文档或MIME消息,其第一主体部分是XML / SOAP文档。
+ * <P>
+ *  <code> SOAPMessage </code>对象由SOAP部分和可选的一个或多个附件部分组成。
+ * 用于<code> SOAPMessage </code>对象的SOAP部分是一个<code> SOAPPart </code>对象,它包含用于消息路由和标识的信息,并且可以包含特定于应用程序的内容。
+ * 消息的SOAP部分中的所有数据必须为XML格式。
+ * <P>
+ *  默认情况下,新的<code> SOAPMessage </code>对象包含以下内容：
+ * <UL>
+ *  <LI> A <code> SOAPPart </code>对象<LI> A <code> SOAPEnvelope </code>对象</li> A <code> SOAPBody </code> 
+ * >对象。
+ * </UL>
+ *  可以通过调用<code> SOAPMessage.getSOAPPart()</code>方法检索消息的SOAP部分。
+ * 从<code> SOAPPart </code>对象检索<code> SOAPEnvelope </code>对象,<code> SOAPEnvelope </code>对象用于检索<code> SOA
+ * PBody </code>代码> SOAPHeader </code>对象。
+ *  可以通过调用<code> SOAPMessage.getSOAPPart()</code>方法检索消息的SOAP部分。
+ * 
+ * <PRE>
+ *  SOAPPart sp = message.getSOAPPart(); SOAPEnvelope se = sp.getEnvelope(); SOAPBody sb = se.getBody();
+ *  SOAPHeader sh = se.getHeader();。
+ * </PRE>
+ * 
+ * <P>
+ * 除了强制的<code> SOAPPart </code>对象,<code> SOAPMessage </code>对象可以包含零个或多个<code> AttachmentPart </code>对象,每
+ * 个对象包含特定于应用程序的数据。
+ *  <code> SOAPMessage </code>接口提供了创建<code> AttachmentPart </code>对象以及将它们添加到<code> SOAPMessage </code>对象
+ * 的方法。
+ * 接收到<code> SOAPMessage </code>对象的方可以通过检索单个附件部分来检查其内容。
+ * <P>
+ *  与SOAP消息的其余部分不同,附件不需要是XML格式,因此可以是从简单文本到图像文件的任何内容。
+ * 因此,任何不是XML格式的消息内容必须位于<code> AttachmentPart </code>对象中。
+ * <P>
+ *  <code> MessageFactory </code>对象可以创建具有专用于SAAJ的特定实现或应用的行为的<code> SOAPMessage </code>对象。
+ * 例如,<code> MessageFactory </code>对象可以产生符合特定简档(例如ebXML)的<code> SOAPMessage </code>对象。
+ * 在这种情况下,一个<code> MessageFactory </code>对象可以产生用ebXML头部初始化的<code> SOAPMessage </code>对象。
+ * <P>
+ * 为了确保向后源兼容性,在SAAJ规范的1.1版之后添加到此类的方法都是具体的而不是抽象的,并且它们都具有默认实现。
+ * 除非在JavaDocs中为这些方法另有说明,默认实现只是抛出一个<code> UnsupportedOperationException </code>,SAAJ实现代码必须用提供指定行为的方法覆盖它们
+ * 。
+ * 为了确保向后源兼容性,在SAAJ规范的1.1版之后添加到此类的方法都是具体的而不是抽象的,并且它们都具有默认实现。
+ * 然而,旧客户端代码没有此限制,只要没有声明它符合规范的某些较新版本,而不是它最初编写的。扩展SOAPMessage类的传统类可以在不修改的情况下针对后续版本的SAAJ API进行编译和/或运行。
+ * 如果这样的类被正确实现,那么它将继续相对于其被写入的规范的版本正确地行为。
+ * 
+ * 
  * @see MessageFactory
  * @see AttachmentPart
  */
@@ -107,6 +152,10 @@ public abstract class SOAPMessage {
          * include "utf-8" and "utf-16". See vendor documentation for additional
          * supported values. The default is "utf-8".
          *
+         * <p>
+         *  指定SOAP消息的字符类型编码。有效值包括"utf-8"和"utf-16"。有关其他受支持的值,默认值为"utf-8"。
+         * 
+         * 
          * @see SOAPMessage#setProperty(String, Object) SOAPMessage.setProperty
          * @since SAAJ 1.2
          */
@@ -118,6 +167,10 @@ public abstract class SOAPMessage {
      * it is sent. The only valid values are "true" and "false". The default is
      * "false".
      *
+     * <p>
+     *  指定SOAP消息在发送时是否包含XML声明。唯一有效的值是"true"和"false"。默认值为"false"。
+     * 
+     * 
      * @see SOAPMessage#setProperty(String, Object) SOAPMessage.setProperty
      * @since SAAJ 1.2
      */
@@ -128,6 +181,10 @@ public abstract class SOAPMessage {
      * Sets the description of this <code>SOAPMessage</code> object's
      * content with the given description.
      *
+     * <p>
+     *  使用给定的描述设置此<<code> SOAPMessage </code>对象的内容的描述。
+     * 
+     * 
      * @param description a <code>String</code> describing the content of this
      *         message
      * @see #getContentDescription
@@ -138,6 +195,10 @@ public abstract class SOAPMessage {
      * Retrieves a description of this <code>SOAPMessage</code> object's
      * content.
      *
+     * <p>
+     *  检索此<code> SOAPMessage </code>对象的内容的描述。
+     * 
+     * 
      * @return a <code>String</code> describing the content of this
      *         message or <code>null</code> if no description has been set
      * @see #setContentDescription
@@ -150,6 +211,12 @@ public abstract class SOAPMessage {
          * <code>SOAPMessage</code> object contains one or more attachments, the
          * SOAP Part must be the first MIME body part in the message.
          *
+         * <p>
+         * 获取此<code> SOAPMessage </code>对象的SOAP部分。
+         * <P>
+         *  <code> SOAPMessage </code>对象包含一个或多个附件,SOAP部分必须是消息中的第一个MIME主体部分。
+         * 
+         * 
          * @return the <code>SOAPPart</code> object for this <code>SOAPMessage</code>
          *         object
          */
@@ -159,6 +226,11 @@ public abstract class SOAPMessage {
          * Gets the SOAP Body contained in this <code>SOAPMessage</code> object.
          * <p>
          *
+         * <p>
+         *  获取此<code> SOAPMessage </code>对象中包含的SOAP主体。
+         * <p>
+         * 
+         * 
          * @return the <code>SOAPBody</code> object contained by this <code>SOAPMessage</code>
          *         object
          * @exception SOAPException
@@ -174,6 +246,11 @@ public abstract class SOAPMessage {
          * object.
          * <p>
          *
+         * <p>
+         *  获取此<code> SOAPMessage </code>对象中包含的SOAP标头。
+         * <p>
+         * 
+         * 
          * @return the <code>SOAPHeader</code> object contained by this <code>SOAPMessage</code>
          *         object
          * @exception SOAPException
@@ -189,6 +266,11 @@ public abstract class SOAPMessage {
          * to this <code>SOAPMessage</code> object.
          * <P>
          * This method does not touch the SOAP part.
+         * <p>
+         *  删除已添加到此<code> SOAPMessage </code>对象的所有<code> AttachmentPart </code>对象。
+         * <P>
+         *  此方法不接触SOAP部分。
+         * 
          */
     public abstract void removeAllAttachments();
 
@@ -196,6 +278,10 @@ public abstract class SOAPMessage {
          * Gets a count of the number of attachments in this message. This count
          * does not include the SOAP part.
          *
+         * <p>
+         *  获取此邮件中附件数的计数。此计数不包括SOAP部分。
+         * 
+         * 
          * @return the number of <code>AttachmentPart</code> objects that are
          *         part of this <code>SOAPMessage</code> object
          */
@@ -205,6 +291,10 @@ public abstract class SOAPMessage {
          * Retrieves all the <code>AttachmentPart</code> objects that are part of
          * this <code>SOAPMessage</code> object.
          *
+         * <p>
+         *  检索属于此<code> SOAPMessage </code>对象一部分的所有<code> AttachmentPart </code>对象。
+         * 
+         * 
          * @return an iterator over all the attachments in this message
          */
     public abstract Iterator getAttachments();
@@ -214,6 +304,10 @@ public abstract class SOAPMessage {
          * entries that match the specified headers. Note that a returned
          * attachment could have headers in addition to those specified.
          *
+         * <p>
+         *  检索具有与指定标头匹配的标头条目的所有<code> AttachmentPart </code>对象。请注意,返回的附件除了指定的附件之外还可以包含标头。
+         * 
+         * 
          * @param headers
          *           a <code>MimeHeaders</code> object containing the MIME
          *           headers for which to search
@@ -227,6 +321,10 @@ public abstract class SOAPMessage {
      * entries that match the specified headers. Note that the removed
      * attachment could have headers in addition to those specified.
      *
+     * <p>
+     *  删除具有与指定标头匹配的标头条目的所有<code> AttachmentPart </code>对象。请注意,除了指定的附件之外,删除的附件还可以包含标题。
+     * 
+     * 
      * @param headers
      *           a <code>MimeHeaders</code> object containing the MIME
      *           headers for which to search
@@ -251,6 +349,18 @@ public abstract class SOAPMessage {
      * other reference mechanisms may be supported by individual
      * implementations of this standard. Contact your vendor for details.
      *
+     * <p>
+     * 如果没有此类附件存在,则返回与此<code> SOAPElement </code>或<code> null </code>引用的附件关联的<code> AttachmentPart </code>对象
+     * 。
+     * 可以通过<code> href </code>属性进行引用,如{@link <a href="http://www.w3.org/TR/SOAP-attachments#SOAPReferenceToAttachements"> SOAP消息附件< / a>}
+     * ,或通过包含URI的单个<code> Text </code>子节点,如WS-I Attachment Profile 1.0中所述的模式类型{@link <a href ="http：// www .ws-i.org / Profiles / AttachmentsProfile-1.0-2004-08-24.html"> ref：swaRef </a>}
+     * 。
+     * 这两个机制必须得到支持。
+     * 通过<code> href </code>属性支持引用也意味着这个方法也应该支持一个<i> xop：Include </i>元素({@link <a href ="http ：//www.w3.org/2000/xp/Group/3/06/Attachments/XOP.html"> XOP </a>}
+     * )。
+     * 这两个机制必须得到支持。但是本标准的各个实现可以支持其他参考机制。有关详细信息,请与供应商联系。
+     * 
+     * 
      * @param  element The <code>SOAPElement</code> containing the reference to an Attachment
      * @return the referenced <code>AttachmentPart</code> or null if no such
      *          <code>AttachmentPart</code> exists or no reference can be
@@ -268,6 +378,11 @@ public abstract class SOAPMessage {
      * object. An <code>AttachmentPart</code> object must be created before
      * it can be added to a message.
      *
+     * <p>
+     *  将给定的<code> AttachmentPart </code>对象添加到此<code> SOAPMessage </code>对象。
+     * 必须先创建一个<code> AttachmentPart </code>对象,然后才能将其添加到消息中。
+     * 
+     * 
      * @param AttachmentPart
      *           an <code>AttachmentPart</code> object that is to become part
      *           of this <code>SOAPMessage</code> object
@@ -281,6 +396,13 @@ public abstract class SOAPMessage {
      * <code>AttachmentPart</code> object as the parameter in order for it to
      * become an attachment to this <code>SOAPMessage</code> object.
      *
+     * <p>
+     *  创建一个新的空的<code> AttachmentPart </code>对象。
+     * 请注意,必须使用此新的<code> AttachmentPart </code>对象作为参数调用<code> addAttachmentPart </code>方法,以使其成为此<code> SOAPM
+     * essage </code>对象的附件。
+     *  创建一个新的空的<code> AttachmentPart </code>对象。
+     * 
+     * 
      * @return a new <code>AttachmentPart</code> object that can be populated
      *         and added to this <code>SOAPMessage</code> object
      */
@@ -290,6 +412,10 @@ public abstract class SOAPMessage {
      * Creates an <code>AttachmentPart</code> object and populates it using
      * the given <code>DataHandler</code> object.
      *
+     * <p>
+     * 创建一个<code> AttachmentPart </code>对象,并使用给定的<code> DataHandler </code>对象填充它。
+     * 
+     * 
      * @param dataHandler
      *           the <code>javax.activation.DataHandler</code> object that
      *           will generate the content for this <code>SOAPMessage</code>
@@ -312,6 +438,10 @@ public abstract class SOAPMessage {
      * Returns all the transport-specific MIME headers for this <code>SOAPMessage</code>
      * object in a transport-independent fashion.
      *
+     * <p>
+     *  以传输独立方式返回此<code> SOAPMessage </code>对象的所有传输专用MIME头。
+     * 
+     * 
      * @return a <code>MimeHeaders</code> object containing the <code>MimeHeader</code>
      *         objects
      */
@@ -323,6 +453,11 @@ public abstract class SOAPMessage {
      * <code>Object</code> should correspond to the value given for the
      * <code>Content-Type</code>.
      *
+     * <p>
+     *  创建<code> AttachmentPart </code>对象,并使用指定内容类型的指定数据填充该对象。
+     *  <code> Object </code>的类型应该对应于<code> Content-Type </code>给定的值。
+     * 
+     * 
      * @param content
      *           an <code>Object</code> containing the content for the
      *           <code>AttachmentPart</code> object to be created
@@ -364,6 +499,16 @@ public abstract class SOAPMessage {
      * message.
      * <P>
      *
+     * <p>
+     *  更新此<code> SOAPMessage </code>对象及其所做的所有更改。当调用{@link SOAPMessage#writeTo(OutputStream)}时,将自动调用此方法。
+     * 但是,如果对已接收的消息或已发送的消息进行更改,则需要显式调用<code> saveChanges </code>方法以保存更改。
+     * 方法<code> saveChanges </code>还生成可以读回的任何更改(例如,在支持消息标识的概要文件中的MessageId)。
+     * 为发送目的而创建的消息中的所有MIME头都必须在调用<code> saveChanges </code>之后才具有有效值。
+     * <P>
+     *  此外,该方法标记来自所有组成<code> AttachmentPart </code>对象的数据被拉入消息的点。
+     * <P>
+     * 
+     * 
      * @exception <code>SOAPException</code> if there was a problem saving
      *               changes to this message.
      */
@@ -373,6 +518,10 @@ public abstract class SOAPMessage {
      * Indicates whether this <code>SOAPMessage</code> object needs to have
      * the method <code>saveChanges</code> called on it.
      *
+     * <p>
+     *  指示此<> SOAPMessage </code>对象是否需要调用方法<code> saveChanges </code>。
+     * 
+     * 
      * @return <code>true</code> if <code>saveChanges</code> needs to be
      *         called; <code>false</code> otherwise.
      */
@@ -390,6 +539,14 @@ public abstract class SOAPMessage {
      * Note that this method does not write the transport-specific MIME Headers
      * of the Message
      *
+     * <p>
+     * 将此<code> SOAPMessage </code>对象写入给定的输出流。外部化格式由具有附件规范的SOAP 1.1定义。
+     * <P>
+     *  如果没有附件,只会写出一个XML流。对于那些有附件的邮件,<code> writeTo </code>写入一个MIME编码的字节流。
+     * <P>
+     *  请注意,此方法不会写入消息的特定于传输的MIME标头
+     * 
+     * 
      * @param out
      *           the <code>OutputStream</code> object to which this <code>SOAPMessage</code>
      *           object will be written
@@ -425,6 +582,16 @@ public abstract class SOAPMessage {
      * Some implementations may allow encodings in addition to UTF-8 and
      * UTF-16. Refer to your vendor's documentation for details.
      *
+     * <p>
+     *  将指定的值与指定的属性关联。如果已有与此属性关联的值,则替换旧值。
+     * <p>
+     *  有效的属性名称包括{@link SOAPMessage#WRITE_XML_DECLARATION}和{@link SOAPMessage#CHARACTER_SET_ENCODING}。
+     * 所有这些标准SAAJ属性都以"javax.xml.soap"作为前缀。供应商还可以添加实现特定的属性。这些属性必须以供应商特有的软件包名称作为前缀。
+     * <p>
+     *  将属性<code> WRITE_XML_DECLARATION </code>设置为<code>"true"</code>会导致在SOAP消息开始时写出XML声明。默认值"false"禁止此声明。
+     * <p>
+     *  属性<code> CHARACTER_SET_ENCODING </code>的默认值为<code>"utf-8"</code>,这会导致SOAP消息使用UTF-8编码。
+     * 
      * @param property
      *           the property with which the specified value is to be
      *           associated.
@@ -442,6 +609,12 @@ public abstract class SOAPMessage {
     /**
      * Retrieves value of the specified property.
      *
+     * <p>
+     * 将<code> CHARACTER_SET_ENCODING </code>设置为<code>"utf-16"</code>会导致使用UTF-16编码SOAP消息。
+     * <p>
+     * 一些实现可以允许除了UTF-8和UTF-16之外的编码。有关详细信息,请参阅供应商文档。
+     * 
+     * 
      * @param property
      *           the name of the property to retrieve
      * @return the value associated with the named property or <code>null</code>

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: LogicalExpr.java,v 1.2.4.1 2005/09/01 16:03:31 pvedula Exp $
+ * <p>
+ *  $ Id：LogicalExpr.java,v 1.2.4.1 2005/09/01 16:03:31 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler;
@@ -33,6 +46,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  * @author Morten Jorgensen
@@ -53,6 +68,9 @@ final class LogicalExpr extends Expression {
      * left- and right-hand side expressions can also be logical expressions,
      * thus creating logical trees representing structures such as
      * (a and (b or c) and d), etc...
+     * <p>
+     *  创建一个新的逻辑表达式 -  OR或AND。注意,左手和右手表达式也可以是逻辑表达式,从而创建表示诸如(a和(b或c)和d)等等的结构的逻辑树。
+     * 
      */
     public LogicalExpr(int op, Expression left, Expression right) {
         _op = op;
@@ -63,6 +81,9 @@ final class LogicalExpr extends Expression {
     /**
      * Returns true if this expressions contains a call to position(). This is
      * needed for context changes in node steps containing multiple predicates.
+     * <p>
+     *  如果此表达式包含对position()的调用,则返回true。这对于包含多个谓词的节点步骤中的上下文更改是必需的。
+     * 
      */
     public boolean hasPositionCall() {
         return (_left.hasPositionCall() || _right.hasPositionCall());
@@ -70,6 +91,9 @@ final class LogicalExpr extends Expression {
 
     /**
      * Returns true if this expressions contains a call to last()
+     * <p>
+     *  如果此表达式包含对last()的调用,则返回true
+     * 
      */
     public boolean hasLastCall() {
             return (_left.hasLastCall() || _right.hasLastCall());
@@ -79,6 +103,9 @@ final class LogicalExpr extends Expression {
      * Returns an object representing the compile-time evaluation
      * of an expression. We are only using this for function-available
      * and element-available at this time.
+     * <p>
+     *  返回表示表达式的编译时评估的对象。我们现在只使用这个功能可用和元素可用。
+     * 
      */
     public Object evaluateAtCompileTime() {
         final Object leftb = _left.evaluateAtCompileTime();
@@ -102,6 +129,9 @@ final class LogicalExpr extends Expression {
     /**
      * Returns this logical expression's operator - OR or AND represented
      * by 0 and 1 respectively.
+     * <p>
+     *  返回此逻辑表达式的运算符 - 分别由0和1表示的OR或AND。
+     * 
      */
     public int getOp() {
         return(_op);
@@ -110,6 +140,9 @@ final class LogicalExpr extends Expression {
     /**
      * Override the SyntaxTreeNode.setParser() method to make sure that the
      * parser is set for sub-expressions
+     * <p>
+     * 覆盖SyntaxTreeNode.setParser()方法以确保为子表达式设置解析器
+     * 
      */
     public void setParser(Parser parser) {
         super.setParser(parser);
@@ -119,6 +152,9 @@ final class LogicalExpr extends Expression {
 
     /**
      * Returns a string describing this expression
+     * <p>
+     *  返回描述此表达式的字符串
+     * 
      */
     public String toString() {
         return Ops[_op] + '(' + _left + ", " + _right + ')';
@@ -126,6 +162,9 @@ final class LogicalExpr extends Expression {
 
     /**
      * Type-check this expression, and possibly child expressions.
+     * <p>
+     *  键入检查此表达式,以及可能的子表达式。
+     * 
      */
     public Type typeCheck(SymbolTable stable) throws TypeCheckError {
         // Get the left and right operand types
@@ -154,6 +193,9 @@ final class LogicalExpr extends Expression {
 
     /**
      * Compile the expression - leave boolean expression on stack
+     * <p>
+     *  编译表达式 - 在堆栈上留下布尔表达式
+     * 
      */
     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
         translateDesynthesized(classGen, methodGen);
@@ -162,6 +204,8 @@ final class LogicalExpr extends Expression {
 
     /**
      * Compile expression and update true/false-lists
+     * <p>
+     *  编译表达式并更新true / false列表
      */
     public void translateDesynthesized(ClassGenerator classGen,
                                        MethodGenerator methodGen) {

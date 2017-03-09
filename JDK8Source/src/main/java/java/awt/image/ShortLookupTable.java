@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,11 @@ package java.awt.image;
  * constrained input.  If there is only one array in the lookup
  * table, it will be applied to all bands.
  *
+ * <p>
+ *  这个类定义了一个查找表对象。使用此类的对象的查找操作的输出被解释为无符号短数量。查找表包含用于图像的一个或多个带(或分量)的短数据阵列,并且它包含将在索引阵列之前从输入值中减去的偏移。
+ * 这允许为受限输入提供比本机数据大小更小的数组。如果查找表中只有一个数组,则它将应用于所有波段。
+ * 
+ * 
  * @see ByteLookupTable
  * @see LookupOp
  */
@@ -44,6 +50,9 @@ public class ShortLookupTable extends LookupTable {
 
     /**
      * Constants
+     * <p>
+     *  常量
+     * 
      */
 
     short data[][];
@@ -55,6 +64,10 @@ public class ShortLookupTable extends LookupTable {
      * values before indexing into the arrays.  The number of
      * bands is the length of the data argument.  The
      * data array for each band is stored as a reference.
+     * <p>
+     *  从表示每个频段的查找表的短阵列数组构造ShortLookupTable对象。在索引到数组之前,将从输入值中减去偏移量。带的数量是数据自变量的长度。每个频带的数据阵列被存储为参考。
+     * 
+     * 
      * @param offset the value subtracted from the input values
      *        before indexing into the arrays
      * @param data an array of short arrays representing a lookup
@@ -77,6 +90,10 @@ public class ShortLookupTable extends LookupTable {
      * band.  The offset will be subtracted from the input
      * values before indexing into the array.  The
      * data array is stored as a reference.
+     * <p>
+     *  从表示每个频段的查找表的短阵列构造ShortLookupTable对象。在索引到数组之前,将从输入值中减去偏移量。数据数组被存储为参考。
+     * 
+     * 
      * @param offset the value subtracted from the input values
      *        before indexing into the arrays
      * @param data an array of shorts
@@ -93,6 +110,10 @@ public class ShortLookupTable extends LookupTable {
      * Returns the lookup table data by reference.  If this ShortLookupTable
      * was constructed using a single short array, the length of the returned
      * array is one.
+     * <p>
+     *  通过引用返回查找表数据。如果此ShortLookupTable是使用单个短数组构造的,则返回的数组的长度为1。
+     * 
+     * 
      * @return ShortLookupTable data array.
      */
     public final short[][] getTable(){
@@ -104,6 +125,10 @@ public class ShortLookupTable extends LookupTable {
      * table. The source and destination array can be the same array.
      * Array <code>dst</code> is returned.
      *
+     * <p>
+     * 返回像素的样本数组,使用查找表进行翻译。源和目标数组可以是同一个数组。返回数组<code> dst </code>。
+     * 
+     * 
      * @param src the source array.
      * @param dst the destination array. This array must be at least as
      *         long as <code>src</code>.  If <code>dst</code> is
@@ -155,6 +180,9 @@ public class ShortLookupTable extends LookupTable {
      * table. The source and destination array can be the same array.
      * Array <code>dst</code> is returned.
      *
+     * <p>
+     *  返回像素的样本数组,使用查找表进行翻译。源和目标数组可以是同一个数组。返回数组<code> dst </code>。
+     * 
      * @param src the source array.
      * @param dst the destination array. This array must be at least as
      *         long as <code>src</code>.  If <code>dst</code> is

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,10 @@ import java.net.URL;
  * a list of elements and their attributes as well as a list of
  * entities defined in the DTD.
  *
+ * <p>
+ *  SGML DTD的表示。 DTD描述文档语法,并用于解析HTML文档。它包含元素及其属性的列表以及在DTD中定义的实体的列表。
+ * 
+ * 
  * @see Element
  * @see AttributeList
  * @see ContentModel
@@ -82,6 +87,10 @@ class DTD implements DTDConstants {
 
     /**
      * Creates a new DTD with the specified name.
+     * <p>
+     *  创建具有指定名称的新DTD。
+     * 
+     * 
      * @param name the name, as a <code>String</code> of the new DTD
      */
     protected DTD(String name) {
@@ -94,6 +103,10 @@ class DTD implements DTDConstants {
 
     /**
      * Gets the name of the DTD.
+     * <p>
+     *  获取DTD的名称。
+     * 
+     * 
      * @return the name of the DTD
      */
     public String getName() {
@@ -102,6 +115,10 @@ class DTD implements DTDConstants {
 
     /**
      * Gets an entity by name.
+     * <p>
+     *  按名称获取实体。
+     * 
+     * 
      * @return the <code>Entity</code> corresponding to the
      *   <code>name</code> <code>String</code>
      */
@@ -111,6 +128,10 @@ class DTD implements DTDConstants {
 
     /**
      * Gets a character entity.
+     * <p>
+     *  获取字符实体。
+     * 
+     * 
      * @return the <code>Entity</code> corresponding to the
      *    <code>ch</code> character
      */
@@ -122,6 +143,10 @@ class DTD implements DTDConstants {
      * Returns <code>true</code> if the element is part of the DTD,
      * otherwise returns <code>false</code>.
      *
+     * <p>
+     *  如果元素是DTD的一部分,则返回<code> true </code>,否则返回<code> false </code>。
+     * 
+     * 
      * @param  name the requested <code>String</code>
      * @return <code>true</code> if <code>name</code> exists as
      *   part of the DTD, otherwise returns <code>false</code>
@@ -134,6 +159,10 @@ class DTD implements DTDConstants {
      * Gets an element by name. A new element is
      * created if the element doesn't exist.
      *
+     * <p>
+     *  按名称获取元素。如果该元素不存在,则创建一个新元素。
+     * 
+     * 
      * @param name the requested <code>String</code>
      * @return the <code>Element</code> corresponding to
      *   <code>name</code>, which may be newly created
@@ -151,6 +180,10 @@ class DTD implements DTDConstants {
     /**
      * Gets an element by index.
      *
+     * <p>
+     *  按索引获取元素。
+     * 
+     * 
      * @param index the requested index
      * @return the <code>Element</code> corresponding to
      *   <code>index</code>
@@ -165,6 +198,13 @@ class DTD implements DTDConstants {
      * exists, it is returned; otherwise a new <code>Entity</code>
      * is created and is returned.
      *
+     * <p>
+     *  定义实体。
+     * 如果存在<code> name </code>,<code> type </code>和<code> data </code>指定的<code> Entity </code>否则创建一个新的<code>
+     * 实体</code>并返回。
+     *  定义实体。
+     * 
+     * 
      * @param name the name of the <code>Entity</code> as a <code>String</code>
      * @param type the type of the <code>Entity</code>
      * @param data the <code>Entity</code>'s data
@@ -193,6 +233,10 @@ class DTD implements DTDConstants {
      * specified parameters.  If one doesn't exist, a new
      * one is created and returned.
      *
+     * <p>
+     *  返回与指定参数匹配的<code> Element </code>。如果不存在,则创建并返回一个新的。
+     * 
+     * 
      * @param name the name of the <code>Element</code>
      * @param type the type of the <code>Element</code>
      * @param omitStart <code>true</code> if start should be omitted
@@ -219,6 +263,10 @@ class DTD implements DTDConstants {
     /**
      * Defines attributes for an {@code Element}.
      *
+     * <p>
+     *  定义{@code Element}的属性。
+     * 
+     * 
      * @param name the name of the <code>Element</code>
      * @param atts the <code>AttributeList</code> specifying the
      *    <code>Element</code>
@@ -230,6 +278,10 @@ class DTD implements DTDConstants {
 
     /**
      * Creates and returns a character <code>Entity</code>.
+     * <p>
+     *  创建并返回一个字符<code> Entity </code>。
+     * 
+     * 
      * @param name the entity's name
      * @return the new character <code>Entity</code>
      */
@@ -240,6 +292,10 @@ class DTD implements DTDConstants {
 
     /**
      * Creates and returns an <code>Entity</code>.
+     * <p>
+     *  创建并返回<code>实体</code>。
+     * 
+     * 
      * @param name the entity's name
      * @return the new <code>Entity</code>
      */
@@ -252,6 +308,10 @@ class DTD implements DTDConstants {
 
     /**
      * Creates and returns an <code>Element</code>.
+     * <p>
+     *  创建并返回<code>元素</code>。
+     * 
+     * 
      * @param name the element's name
      * @return the new <code>Element</code>
      */
@@ -281,6 +341,10 @@ class DTD implements DTDConstants {
 
     /**
      * Creates and returns an <code>AttributeList</code>.
+     * <p>
+     *  创建并返回<code> AttributeList </code>。
+     * 
+     * 
      * @param name the attribute list's name
      * @return the new <code>AttributeList</code>
      */
@@ -300,6 +364,10 @@ class DTD implements DTDConstants {
 
     /**
      * Creates and returns a new content model.
+     * <p>
+     *  创建并返回新的内容模型。
+     * 
+     * 
      * @param type the type of the new content model
      * @return the new <code>ContentModel</code>
      */
@@ -309,6 +377,10 @@ class DTD implements DTDConstants {
 
     /**
      * Returns a string representation of this DTD.
+     * <p>
+     *  返回此DTD的字符串表示形式。
+     * 
+     * 
      * @return the string representation of this DTD
      */
     public String toString() {
@@ -317,6 +389,9 @@ class DTD implements DTDConstants {
 
     /**
      * The hashtable key of DTDs in AppContext.
+     * <p>
+     *  AppContext中DTD的散列表键。
+     * 
      */
     private static final Object DTD_HASH_KEY = new Object();
 
@@ -330,6 +405,10 @@ class DTD implements DTDConstants {
      * and returned.  Any uppercase characters in the name
      * are converted to lowercase.
      *
+     * <p>
+     * 返回具有指定的<code> name </code>的DTD。如果具有该名称的DTD不存在,则创建并返回一个。名称中的任何大写字符都将转换为小写。
+     * 
+     * 
      * @param name the name of the DTD
      * @return the DTD which corresponds to <code>name</code>
      */
@@ -358,6 +437,9 @@ class DTD implements DTDConstants {
 
     /**
      * Recreates a DTD from an archived format.
+     * <p>
+     *  从归档格式重新创建DTD。
+     * 
      * @param in  the <code>DataInputStream</code> to read from
      */
     public void read(DataInputStream in) throws IOException {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,15 @@ import java.util.concurrent.TimeUnit;
  *
  * <p> Instances of this class are immutable.
  *
+ * <p>
+ *  表示文件的时间戳属性的值。
+ * 例如,它可以表示文件最后一次的时间{@link BasicFileAttributes#lastModifiedTime()modified},{@link BasicFileAttributes#lastAccessTime()accessible}
+ * 或{@link BasicFileAttributes#creationTime()created}。
+ *  表示文件的时间戳属性的值。
+ * 
+ *  <p>此类的实例是不可变的。
+ * 
+ * 
  * @since 1.7
  * @see java.nio.file.Files#setLastModifiedTime
  * @see java.nio.file.Files#getLastModifiedTime
@@ -53,26 +63,41 @@ public final class FileTime
      * this {@code FileTime} is converted from an {@code Instant},
      * the {@code value} and {@code unit} pair will not be used
      * in this scenario.
+     * <p>
+     *  用于解释值的粒度单位。 Null如果{@code FileTime}从{@code Instant}转换,则{@code value}和{@code unit}对不会在此方案中使用。
+     * 
      */
     private final TimeUnit unit;
 
     /**
      * The value since the epoch; can be negative.
+     * <p>
+     *  自纪元以来的价值;可以为负。
+     * 
      */
     private final long value;
 
     /**
      * The value as Instant (created lazily, if not from an instant)
+     * <p>
+     *  值为Instant(创建延迟,如果不是从即时)
+     * 
      */
     private Instant instant;
 
     /**
      * The value return by toString (created lazily)
+     * <p>
+     *  由toString返回的值(创建lazily)
+     * 
      */
     private String valueAsString;
 
     /**
      * Initializes a new instance of this class.
+     * <p>
+     *  初始化此类的新实例。
+     * 
      */
     private FileTime(long value, TimeUnit unit, Instant instant) {
         this.value = value;
@@ -84,6 +109,10 @@ public final class FileTime
      * Returns a {@code FileTime} representing a value at the given unit of
      * granularity.
      *
+     * <p>
+     *  返回表示给定粒度单位的值的{@code FileTime}。
+     * 
+     * 
      * @param   value
      *          the value since the epoch (1970-01-01T00:00:00Z); can be
      *          negative
@@ -100,6 +129,10 @@ public final class FileTime
     /**
      * Returns a {@code FileTime} representing the given value in milliseconds.
      *
+     * <p>
+     *  返回表示给定值的{@code FileTime}(以毫秒为单位)。
+     * 
+     * 
      * @param   value
      *          the value, in milliseconds, since the epoch
      *          (1970-01-01T00:00:00Z); can be negative
@@ -114,6 +147,10 @@ public final class FileTime
      * Returns a {@code FileTime} representing the same point of time value
      * on the time-line as the provided {@code Instant} object.
      *
+     * <p>
+     *  返回表示时间线上与提供的{@code Instant}对象相同的时间点值的{@code FileTime}。
+     * 
+     * 
      * @param   instant
      *          the instant to convert
      * @return  a {@code FileTime} representing the same point on the time-line
@@ -132,6 +169,12 @@ public final class FileTime
      * saturate to {@code Long.MIN_VALUE} if negative or {@code Long.MAX_VALUE}
      * if positive.
      *
+     * <p>
+     *  返回给定粒度单位的值。
+     * 
+     *  <p>如果为负则将数字上溢出的较粗粒度转换为{@code Long.MIN_VALUE},如果为正则将转换为{@code Long.MAX_VALUE}。
+     * 
+     * 
      * @param   unit
      *          the unit of granularity for the return value
      *
@@ -164,6 +207,12 @@ public final class FileTime
      * saturate to {@code Long.MIN_VALUE} if negative or {@code Long.MAX_VALUE}
      * if positive.
      *
+     * <p>
+     *  返回以毫秒为单位的值。
+     * 
+     * <p>如果为负则将数字上溢出的较粗粒度转换为{@code Long.MIN_VALUE},如果为正则将转换为{@code Long.MAX_VALUE}。
+     * 
+     * 
      * @return  the value in milliseconds, since the epoch (1970-01-01T00:00:00Z)
      */
     public long toMillis() {
@@ -186,6 +235,9 @@ public final class FileTime
 
     /**
      * Time unit constants for conversion.
+     * <p>
+     *  转换的时间单位常数。
+     * 
      */
     private static final long HOURS_PER_DAY      = 24L;
     private static final long MINUTES_PER_HOUR   = 60L;
@@ -204,6 +256,9 @@ public final class FileTime
 
     /*
      * Scale d by m, checking for overflow.
+     * <p>
+     *  缩放d乘m,检查溢出。
+     * 
      */
     private static long scale(long d, long m, long over) {
         if (d >  over) return Long.MAX_VALUE;
@@ -223,6 +278,17 @@ public final class FileTime
      * earlier than {@code Instant.MIN} or {@link Instant#MAX} if later
      * than {@code Instant.MAX}.
      *
+     * <p>
+     *  将此{@code FileTime}对象转换为{@code Instant}。
+     * 
+     *  <p>转换会建立{@code Instant},表示时间轴上与{@code FileTime}相同的点。
+     * 
+     *  <p> {@code FileTime}可以在{@code Instant}中的未来进一步在时间轴上存储点。
+     * 如果时间早于{@code Instant.MIN}或{@link Instant#MAX}(如果晚于{@code Instant.MAX}),从这些更多时间点的转换会饱和到{@link Instant#MIN}
+     * 。
+     *  <p> {@code FileTime}可以在{@code Instant}中的未来进一步在时间轴上存储点。
+     * 
+     * 
      * @return  an instant representing the same point on the time-line as
      *          this {@code FileTime} object
      * @since 1.8
@@ -280,6 +346,13 @@ public final class FileTime
      * null} and is a {@code FileTime} that represents the same time. This
      * method satisfies the general contract of the {@code Object.equals} method.
      *
+     * <p>
+     *  测试此{@code FileTime}以与给定对象相等。
+     * 
+     *  <p>如果且仅当参数不是{@code null},并且是代表相同时间的{@code FileTime},结果是{@code true}。
+     * 此方法满足{@code Object.equals}方法的一般性约定。
+     * 
+     * 
      * @param   obj
      *          the object to compare with
      *
@@ -297,6 +370,12 @@ public final class FileTime
      * <p> The hash code is based upon the value represented, and satisfies the
      * general contract of the {@link Object#hashCode} method.
      *
+     * <p>
+     *  计算此文件时间的哈希码。
+     * 
+     *  <p>哈希码基于表示的值,并满足{@link Object#hashCode}方法的一般合同。
+     * 
+     * 
      * @return  the hash-code value
      */
     @Override
@@ -325,6 +404,10 @@ public final class FileTime
     /**
      * Compares the value of two {@code FileTime} objects for order.
      *
+     * <p>
+     *  比较两个{@code FileTime}对象的值的顺序。
+     * 
+     * 
      * @param   other
      *          the other {@code FileTime} to be compared
      *
@@ -405,6 +488,16 @@ public final class FileTime
      * and may be negative-signed. If more than four digits then leading zeros
      * are not present. The year before "{@code 0001}" is "{@code -0001}".
      *
+     * <p>
+     *  返回此{@code FileTime}的字符串表示形式。该字符串以<a href="http://www.w3.org/TR/NOTE-datetime"> ISO 8601 </a>格式返回：
+     * <pre>
+     *  YYYY-MM-DDThh：mm：ss [.s +] Z
+     * </pre>
+     * 其中"{@code [.s +]}"表示一个点,其后跟一个多位数字,小数的秒数。它只在一秒的小数不为零时出现。
+     * 例如,{@code FileTime.fromMillis(1234567890000L).toString()}会生成{@code"2009-02-13T23：31：30Z"}和{@code FileTime.fromMillis(1234567890123L).toString {@code"2009-02-13T23：31：30.123Z"}
+     * 。
+     * 其中"{@code [.s +]}"表示一个点,其后跟一个多位数字,小数的秒数。它只在一秒的小数不为零时出现。
+     * 
      * @return  the string representation of this file time
      */
     @Override

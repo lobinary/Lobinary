@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,18 @@ import sun.swing.CachedPainter;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  工厂对象为Java&trade提供<code> Icon </code>;外观和感觉(金属)。这些图标通过默认机制广泛用于Metal。
+ * 虽然其他外观和感觉经常使用GIF图标,在代码中创建图标可以切换到其他主题。
+ * 
+ * <p>
+ *  此类中的每个方法都返回<code> Icon </code>或<code> null </code>,其中<code> null </code>表示没有默认图标。
+ * 
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Michael C. Albers
  */
 public class MetalIconFactory implements Serializable {
@@ -160,6 +173,10 @@ public class MetalIconFactory implements Serializable {
 
     /**
      * Returns a checkbox icon.
+     * <p>
+     *  返回复选框图标。
+     * 
+     * 
      * @since 1.3
      */
     public static Icon getCheckBoxIcon() {
@@ -212,6 +229,10 @@ public class MetalIconFactory implements Serializable {
     /**
      * Returns an icon to be used by <code>JCheckBoxMenuItem</code>.
      *
+     * <p>
+     *  返回要由<code> JCheckBoxMenuItem </code>使用的图标。
+     * 
+     * 
      * @return the default icon for check box menu items,
      *         or <code>null</code> if no default exists
      */
@@ -508,6 +529,10 @@ public class MetalIconFactory implements Serializable {
 
     /**
      * Defines an icon for Palette close
+     * <p>
+     *  定义调色板关闭的图标
+     * 
+     * 
      * @since 1.3
      */
     public static class PaletteCloseIcon implements Icon, UIResource, Serializable{
@@ -1497,6 +1522,12 @@ public class MetalIconFactory implements Serializable {
      * GC's).
      * So now whenever we create a new icon image for a given GC, we
      * cache that image with the GC for later retrieval.
+     * <p>
+     * 用于缓存图标图像的实用程序类。
+     * 这是必要的,因为我们需要一个新的图像,只要我们渲染到一个新的GraphicsConfiguration,但我们不想继续重新创建我们已经看到的GC的图标图像(例如,在multimon监视器之间来回拖动窗口
+     * 系统,或者将图标绘制到具有不同GC的不同组件)。
+     * 用于缓存图标图像的实用程序类。因此,无论何时为给定的GC创建新的图标图像,我们都会将该图像与GC缓存以供稍后检索。
+     * 
      */
     static class ImageCacher {
 
@@ -1553,6 +1584,11 @@ public class MetalIconFactory implements Serializable {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class FolderIcon16 implements Icon, Serializable {
 
@@ -1635,6 +1671,11 @@ public class MetalIconFactory implements Serializable {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class TreeFolderIcon extends FolderIcon16 {
         public int getShift() { return -1; }
@@ -1654,6 +1695,11 @@ public class MetalIconFactory implements Serializable {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
      */
     public static class FileIcon16 implements Icon, Serializable {
 
@@ -1739,6 +1785,9 @@ public class MetalIconFactory implements Serializable {
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
      */
     public static class TreeControlIcon implements Icon, Serializable {
         // This data member should not have been exposed.  It's called

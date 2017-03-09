@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
+/* <p>
+/* 
  * @author Joshua Outwater
  */
 class GTKGraphicsUtils extends SynthGraphicsUtils {
@@ -80,6 +83,9 @@ class GTKGraphicsUtils extends SynthGraphicsUtils {
      * render the text as html nor will it offset by the insets of the
      * component.
      *
+     * <p>
+     *  在指定位置绘制文本。这不会尝试将文本呈现为html,也不会被组件的插入偏移。
+     * 
      * @param ss SynthContext
      * @param g Graphics used to render string in.
      * @param text Text to render

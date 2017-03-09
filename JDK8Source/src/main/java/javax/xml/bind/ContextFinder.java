@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,12 @@ import static javax.xml.bind.JAXBContext.JAXB_CONTEXT_FACTORY;
  *
  * This code is designed to implement the JAXB 1.0 spec pluggability feature
  *
+ * <p>
+ *  此类是包私有的,因此不作为JAXB API的一部分公开。
+ * 
+ *  此代码旨在实现JAXB 1.0规范的可插入性功能
+ * 
+ * 
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  */
@@ -81,6 +88,9 @@ class ContextFinder {
     /**
      * If the {@link InvocationTargetException} wraps an exception that shouldn't be wrapped,
      * throw the wrapped exception.
+     * <p>
+     *  如果{@link InvocationTargetException}包装不应该封装的异常,请抛出该封装的异常。
+     * 
      */
     private static void handleInvocationTargetException(InvocationTargetException x) throws JAXBException {
         Throwable t = x.getTargetException();
@@ -102,6 +112,12 @@ class ContextFinder {
      *
      * For example, (targetType)originalType
      *
+     * <p>
+     *  确定两种类型(在这种情况下为JAXBContext)是否会生成ClassCastException。
+     * 
+     *  例如,(targetType)originalType
+     * 
+     * 
      * @param originalType
      *          The Class object of the type being cast
      * @param targetType
@@ -120,6 +136,9 @@ class ContextFinder {
 
     /**
      * Create an instance of a class using the specified ClassLoader
+     * <p>
+     *  使用指定的ClassLoader创建类的实例
+     * 
      */
     static JAXBContext newInstance( String contextPath,
                                String className,
@@ -159,6 +178,9 @@ class ContextFinder {
              * javax.xml.bind.context.factory points to a class which has a
              * static method called 'createContext' that
              * returns a javax.xml.JAXBContext.
+             * <p>
+             *  javax.xml.bind.context.factory指向一个类,它有一个称为'createContext'的静态方法,该方法返回一个javax.xml.JAXBContext。
+             * 
              */
 
             Object context = null;
@@ -213,6 +235,9 @@ class ContextFinder {
 
     /**
      * Create an instance of a class using the thread context ClassLoader
+     * <p>
+     *  使用线程上下文ClassLoader创建一个类的实例
+     * 
      */
     static JAXBContext newInstance(
                               Class[] classes,
@@ -508,6 +533,10 @@ class ContextFinder {
      * Search the given ClassLoader for an instance of the specified class and
      * return a string representation of the URL that points to the resource.
      *
+     * <p>
+     *  搜索给定的ClassLoader指定类的实例,并返回指向资源的URL的字符串表示形式。
+     * 
+     * 
      * @param clazz
      *          The class to search for
      * @param loader
@@ -534,6 +563,14 @@ class ContextFinder {
      *
      * Equivalent to calling: which(clazz, clazz.getClassLoader())
      *
+     * <p>
+     *  从它的ClassLoader获取类的URL。
+     * 
+     *  {@link #which(Class,ClassLoader)}的便利方法。
+     * 
+     *  相当于调用：which(clazz,clazz.getClassLoader())
+     * 
+     * 
      * @param clazz
      *          The class to search for
      * @return
@@ -555,11 +592,22 @@ class ContextFinder {
      *
      * <p>
      * For this reason, we have to hard-code the class name into the API.
+     * <p>
+     *  当JAXB在J2SE中时,rt.jar必须具有JAXB实现。
+     * 但是,rt.jar不能有META-INF / services / javax.xml.bind.JAXBContext,因为如果有,它将优先于应用程序在其jar文件中的任何文件。
+     * 
+     * <p>
+     * 当用户捆绑自己的JAXB实现,我们想使用它,我们希望平台默认只有当没有其他JAXB提供程序时使用。
+     * 
      */
     private static final String PLATFORM_DEFAULT_FACTORY_CLASS = "com.sun.xml.internal.bind.v2.ContextFactory";
 
     /**
      * Loads the class, provided that the calling thread has an access to the class being loaded.
+     * <p>
+     * <p>
+     *  因此,我们必须将类名硬编码到API中。
+     * 
      */
     private static Class safeLoadClass(String className, ClassLoader classLoader) throws ClassNotFoundException {
        logger.log(Level.FINE, "Trying to load {0}", className);

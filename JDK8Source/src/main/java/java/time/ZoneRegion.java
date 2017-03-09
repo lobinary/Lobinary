@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time;
 
@@ -85,26 +104,50 @@ import java.util.Objects;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  应用相同时区规则的地理区域。
+ * <p>
+ *  时区信息被分类为一组规则,定义UTC / Greenwich偏移的时间和方式。使用基于地理区域(例如国家或州)的标识符来访问这些规则。
+ * 最常见的区域分类是时区数据库(TZDB),其定义诸如"欧洲/巴黎"和"亚洲/东京"的区域。
+ * <p>
+ *  由此类建模的区域标识符与由{@link ZoneRules}建模的基础规则不同。规则由政府定义并经常改变。相比之下,区域标识符是明确定义的和长寿命的。这种分离还允许在区域之间共享规则(如果适当)。
+ * 
+ * @implSpec这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 final class ZoneRegion extends ZoneId implements Serializable {
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 8386373296231747096L;
     /**
      * The time-zone ID, not null.
+     * <p>
+     *  时区ID,不为null。
+     * 
      */
     private final String id;
     /**
      * The time-zone rules, null if zone ID was loaded leniently.
+     * <p>
+     *  时区规则,如果区域ID被宽松地加载,则为null。
+     * 
      */
     private final transient ZoneRules rules;
 
     /**
      * Obtains an instance of {@code ZoneId} from an identifier.
      *
+     * <p>
+     *  从标识符获取{@code ZoneId}的实例。
+     * 
+     * 
      * @param zoneId  the time-zone ID, not null
      * @param checkAvailable  whether to check if the zone ID is available
      * @return the zone ID, not null
@@ -129,6 +172,10 @@ final class ZoneRegion extends ZoneId implements Serializable {
     /**
      * Checks that the given string is a legal ZondId name.
      *
+     * <p>
+     *  检查给定的字符串是一个合法的ZondId名称。
+     * 
+     * 
      * @param zoneId  the time-zone ID, not null
      * @throws DateTimeException if the ID format is invalid
      */
@@ -156,6 +203,10 @@ final class ZoneRegion extends ZoneId implements Serializable {
     /**
      * Constructor.
      *
+     * <p>
+     *  构造函数。
+     * 
+     * 
      * @param id  the time-zone ID, not null
      * @param rules  the rules, null for lazy lookup
      */
@@ -181,6 +232,10 @@ final class ZoneRegion extends ZoneId implements Serializable {
     /**
      * Writes the object using a
      * <a href="../../serialized-form.html#java.time.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href="../../serialized-form.html#java.time.Ser">专用序列化表单</a>写入对象。
+     * 
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(7);  // identifies a ZoneId (not ZoneOffset)
@@ -196,6 +251,9 @@ final class ZoneRegion extends ZoneId implements Serializable {
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流。
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

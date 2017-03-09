@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.math.BigInteger;
  * This immutable class specifies an elliptic curve private key with
  * its associated parameters.
  *
+ * <p>
+ *  这个不可变类指定了一个带有相关参数的椭圆曲线私钥。
+ * 
+ * 
  * @see KeySpec
  * @see ECParameterSpec
  *
@@ -45,6 +50,10 @@ public class ECPrivateKeySpec implements KeySpec {
     /**
      * Creates a new ECPrivateKeySpec with the specified
      * parameter values.
+     * <p>
+     *  使用指定的参数值创建新的ECPrivateKeySpec。
+     * 
+     * 
      * @param s the private value.
      * @param params the associated elliptic curve domain
      * parameters.
@@ -64,6 +73,10 @@ public class ECPrivateKeySpec implements KeySpec {
 
     /**
      * Returns the private value S.
+     * <p>
+     *  返回私有值S.
+     * 
+     * 
      * @return the private value S.
      */
     public BigInteger getS() {
@@ -73,6 +86,9 @@ public class ECPrivateKeySpec implements KeySpec {
     /**
      * Returns the associated elliptic curve domain
      * parameters.
+     * <p>
+     *  返回关联的椭圆曲线域参数。
+     * 
      * @return the EC domain parameters.
      */
     public ECParameterSpec getParams() {

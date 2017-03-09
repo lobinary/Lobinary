@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,10 @@
 * The Helper for <tt>WStringValue</tt>.  For more information on
 * Helper files, see <a href="doc-files/generatedfiles.html#helper">
 * "Generated Files: Helper Files"</a>.<P>
+* <p>
+*  <tt> WStringValue </tt>的帮助器。
+* 有关帮助文件的详细信息,请参阅<a href="doc-files/generatedfiles.html#helper">"生成的文件：帮助程序文件"</a>。<P>。
+* 
 */
 
 /*
@@ -34,6 +39,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性版权所有IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package org.omg.CORBA;
@@ -55,6 +63,14 @@ package org.omg.CORBA;
 *       <a href="http://cgi.omg.org/cgi-bin/doc?ptc/00-01-08">ptc/00-01-08</a>
 *       </li>
 *   </ul>
+* <p>
+*  org / omg / CORBA / WStringValueHelper.java由IDL到Java编译器(portable)生成,版本"3.0"from orb.idl 1999年5月31日22
+* :27:30 GMT + 00：00。
+* 
+*  类定义已修改为符合以下OMG规范：
+* <ul>
+*  <li> CORBA 2.3.1定义的ORB核心(<a href="http://cgi.omg.org/cgi-bin/doc?formal/99-10-07"> formal / 99-10-07
+*  </a>)。
 */
 
 public class WStringValueHelper implements org.omg.CORBA.portable.BoxedValueHelper

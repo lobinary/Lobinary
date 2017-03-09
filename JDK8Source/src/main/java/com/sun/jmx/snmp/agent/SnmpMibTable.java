@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,28 @@ import com.sun.jmx.snmp.SnmpVarBind;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此类是SNMP表元数据的基类。
+ * <p>
+ *  它的职责是根据"真实"表上的SNMP索引方案管理OID索引的排序数组。
+ * 此类的每个对象都可以绑定到{@link com.sun.jmx.snmp.agent.SnmpTableEntryFactory},它将转发远程条目创建请求,并在条目成功添加到/从中删除时调用回调OID
+ * 索引数组。
+ *  它的职责是根据"真实"表上的SNMP索引方案管理OID索引的排序数组。
+ * </p>
+ * 
+ * <p>
+ *  对于在MIB中定义的每个表,mibgen将生成将实现SnmpTableEntryFactory接口的称为表</i> TableName </i>的特定类以及将扩展该类的相应<i> TableName 
+ * </i> Meta类。
+ *  <br> Table <i> TableName </i>类对应于表的MBean视图,而<b> TableName </i> Meta类对应于同一个表的MIB元数据视图。
+ * </p>
+ * 
+ * <p>
+ *  这个类的对象由生成的整个MIB类实例化{@link com.sun.jmx.snmp.agent.SnmpMib}你应该永远不需要直接实例化这个类。
+ * </p>
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @see com.sun.jmx.snmp.agent.SnmpMib
  * @see com.sun.jmx.snmp.agent.SnmpMibEntry
  * @see com.sun.jmx.snmp.agent.SnmpTableEntryFactory
@@ -92,6 +115,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Create a new <CODE>SnmpMibTable</CODE> metadata node.
      *
      * <p>
+     * <p>
+     *  创建一个新的<CODE> SnmpMibTable </CODE>元数据节点。
+     * 
+     * <p>
+     * 
      * @param mib The SNMP MIB to which the metadata will be linked.
      */
     public SnmpMibTable(SnmpMib mib) {
@@ -117,6 +145,15 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * behaviour, should the default behaviour not be at your convenience.
      * </p>
      * <p>
+     * <p>
+     * 当远程SNMP管理器请求创建新条目时,将调用此方法。 <br>默认情况下,禁用远程条目创建 - 并且不会调用此方法。
+     * 您可以通过在此对象上调用<code> setCreationEnabled(true)</code>和<code> setCreationEnabled(false)</code>来动态切换条目创建策略
+     * 。
+     * 当远程SNMP管理器请求创建新条目时,将调用此方法。 <br>默认情况下,禁用远程条目创建 - 并且不会调用此方法。 <p> <b> <i>此方法由SNMP运行时在内部调用,您不应该直接调用它。
+     *  </b> </i>但是,您可能希望扩展它以实现您自己的特定应用程序行为,如果默认行为不是您的方便。
+     * </p>
+     * <p>
+     * 
      * @param req   The SNMP  subrequest requesting this creation
      * @param rowOid  The OID indexing the conceptual row (entry) for which
      *                the creation was requested.
@@ -140,6 +177,13 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * registered, then passing an ObjectName becomes optional (null
      * can be passed instead).
      *
+     * <p>
+     *  判断<code> mibgen </code>生成的此元数据的特定版本是否需要向MBeanServer注册条目。
+     * 在这种情况下,为了使表正常工作(通用元数据的情况),必须将ObjectName传递给addEntry()。
+     * <p>
+     *  如果该版本的元数据不要求条目被注册,则传递ObjectName变为可选(可以传递null)。
+     * 
+     * 
      * @return <code>true</code> if registration is required by this
      *         version of the metadata.
      */
@@ -149,6 +193,10 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Tell whether a new entry should be created when a SET operation
      * is received for an entry that does not exist yet.
      *
+     * <p>
+     *  当接收到尚不存在的条目的SET操作时,判断是否应当创建新条目。
+     * 
+     * 
      * @return true if a new entry must be created, false otherwise.<br>
      *         [default: returns <CODE>false</CODE>]
      **/
@@ -160,6 +208,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * This method lets you dynamically switch the creation policy.
      *
      * <p>
+     * <p>
+     *  此方法允许您动态切换创建策略。
+     * 
+     * <p>
+     * 
      * @param remoteCreationFlag Tells whether remote entry creation must
      *        be enabled or disabled.
      * <ul><li>
@@ -206,6 +259,24 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * isRowReady(), and setRowStatus() methods to suit your specific
      * implementation.
      * <p>
+     * <p>
+     *  如果概念性行包含用于控制此表中行的创建/删除的列对象,则返回<code> true </code>。
+     * <p>
+     * 此列对象可以是由RFC 2579定义的具有RowStatus语法的变量,也可以是其语义是表特定的纯变量。
+     * <p>
+     *  默认情况下,此函数返回<code> false </code>,并假定表中没有此类控制变量。
+     * <br>当在SMIv2 MIB上使用<code> mibgen </code>时, <code> hasRowStatus()</code>方法为包含具有RowStatus语法的对象的每个表返回<code>
+     *  true </code>。
+     *  默认情况下,此函数返回<code> false </code>,并假定表中没有此类控制变量。
+     * <p>
+     *  当此方法返回<code> false </code>时,将使用缺省机制创建远程条目。否则,将按照控制变量的指定执行创建/删除(有关详细信息,请参阅getRowAction())。
+     * <p>
+     *  当处理涉及此表的SET请求时,将在内部调用此方法。
+     * <p>
+     *  如果需要实现不使用RFC 2579定义的RowStatus约定的控制变量,则应该对生成的表元数据类进行子类化,以重新定义此方法,并使其返回<code> true </code>。
+     *  >然后,您必须重新定义isRowStatus(),mapRowStatus(),isRowReady()和setRowStatus()方法以适合您的特定实现。
+     * <p>
+     * 
      * @return <li><code>true</code> if this table contains a control
      *         variable (eg: a variable with RFC 2579 RowStatus syntax),
      *         </li>
@@ -265,6 +336,26 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * derivative of <CODE>SnmpMibEntry</CODE>.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE> get </CODE>操作。 <p>此方法的默认实现是
+     * <ul>
+     *  <li>检查条目是否存在,如果未针对列表中的每个varbind注册异常。 <li>调用生成的<CODE> get(req,oid,depth + 1)</CODE>方法。 </li>
+     * </ul>
+     * <p>
+     * <pre>
+     * public void get(SnmpMibSubRequest req,int depth)throws SnmpStatusException {boolean isnew = req.isNewEntry();。
+     * 
+     *  //如果条目不存在,则为每个涉及的varbind注册一个错误(nb：这不应该发生,因为错误应该早已被检测到)// if(isnew){SnmpVarBind var = null ; for(Enumeration e = req.getElements(); e.hasMoreElements();){var =(SnmpVarBind)e.nextElement(); req.registerGetException(var,noSuchNameException); }
+     * }。
+     * 
+     *  final SnmpOid oid = req.getEntryOid(); get(req,oid,depth + 1); }}
+     * </pre>
+     *  <p>您不应该在任何情况下重写此方法,因为它将最终调用<CODE> get(SnmpMibSubRequest req,int depth)</CODE>对生成的<CODE> SnmpMibEntry
+     *  </CODE>的派生。
+     * 如果您需要实现特定的策略以最小化对一些远程基础资源的访问,或者如果您需要在varbind列表中提供的不同值之间实施一些一致性检查,那么您应该覆盖<CODE> get(SnmpMibSubRequest 
+     * req, int depth)</CODE>对所生成的<CODE> SnmpMibEntry </CODE>的导数。
+     * <p>
+     * 
      */
     @Override
     public void get(SnmpMibSubRequest req, int depth)
@@ -329,6 +420,23 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * derivative of <CODE>SnmpMibEntry</CODE>.
      * <p>
      *
+     * <p>
+     *  一般处理<CODE>检查</CODE>操作。 <p>此方法的默认实现是
+     * <ul>
+     *  <li>检查是否必须创建新条目,如果启用了条目的远程创建,请创建它。 </li> <li>调用生成的<CODE>检查(req,oid,depth + 1)</CODE>方法。 </li>
+     * </ul>
+     * <p>
+     * <pre>
+     * public void check(SnmpMibSubRequest req,int depth)throws SnmpStatusException {final SnmpOid oid = req.getEntryOid(); final int action = getRowAction(req,oid,depth + 1);。
+     * 
+     *  beginRowAction(req,oid,depth + 1,action); check(req,oid,depth + 1); }}
+     * </pre>
+     *  <p>您不应该在任何情况下重写此方法,因为它将最终调用<CODE>检查(SnmpMibSubRequest req,int depth)</CODE>对生成的<CODE> SnmpMibEntry </CODE>
+     * 的派生。
+     * 如果需要实现特定的策略以最小化对一些远程基础资源的访问,或者如果您需要在varbind列表中提供的不同值之间实施一些一致性检查,那么您应该覆盖<CODE> check(SnmpMibSubRequest
+     *  req, int depth)</CODE>对所生成的<CODE> SnmpMibEntry </CODE>的导数。
+     * <p>
+     * 
      */
     @Override
     public void check(SnmpMibSubRequest req, int depth)
@@ -390,6 +498,20 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * derivative of <CODE>SnmpMibEntry</CODE>.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE>设置</CODE>操作。 <p>此方法的默认实现是调用生成的<CODE> set(req,oid,depth + 1)</CODE>方法。
+     * <p>
+     * <pre>
+     *  public void set(SnmpMibSubRequest req,int depth)throws SnmpStatusException {final SnmpOid oid = req.getEntryOid(); final int action = getRowAction(req,oid,depth + 1);。
+     * 
+     *  set(req,oid,depth + 1); endRowAction(req,oid,depth + 1,action); }}
+     * </pre>
+     * <p>您不应该在任何情况下覆盖此方法,因为它将最终调用<CODE> set(SnmpMibSubRequest req,int depth)</CODE>对生成的<CODE> SnmpMibEntry 
+     * </CODE>的派生。
+     * 如果需要实现特定的策略以最小化对一些远程底层资源的访问,或者如果您需要在varbind列表中提供的不同值之间实施一些一致性检查,那么应该覆盖<CODE> set(SnmpMibSubRequest re
+     * q, int depth)</CODE>对所生成的<CODE> SnmpMibEntry </CODE>的导数。
+     * <p>
+     * 
      */
     @Override
     public void set(SnmpMibSubRequest req, int depth)
@@ -439,6 +561,17 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * <br> This function is mainly provided for backward compatibility.
      *
      * <p>
+     * <p>
+     *  在此<CODE> SnmpMibTable </CODE>中添加新条目。
+     * 如果此节点绑定到工厂,也触发{@link com.sun.jmx.snmp.agent.SnmpTableEntryFactory}接口的addEntryCB()回调。
+     * 
+     *  此方法假定给定条目将不会注册。
+     * 如果条目要注册,或者如果需要ObjectName,那么应该首选{@link com.sun.jmx.snmp.agent.SnmpMibTable#addEntry(SnmpOid,ObjectName,Object)}
+     * 。
+     *  此方法假定给定条目将不会注册。 <br>此功能主要用于向后兼容。
+     * 
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
      *               row to be added.
      * @param entry The entry to add.
@@ -462,6 +595,12 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * if this node is bound to a factory.
      *
      * <p>
+     * <p>
+     *  在此<CODE> SnmpMibTable </CODE>中添加新条目。
+     * 如果此节点绑定到工厂,也触发{@link com.sun.jmx.snmp.agent.SnmpTableEntryFactory}接口的addEntryCB()回调。
+     * 
+     * <p>
+     * 
      * @param oid    The <CODE>SnmpOid</CODE> identifying the table
      *               row to be added.
      *
@@ -579,6 +718,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * if this node is bound to a factory.
      *
      * <p>
+     * <p>
+     *  从表中删除指定的条目。如果此节点绑定到工厂,也触发{@link com.sun.jmx.snmp.agent.SnmpTableEntryFactory}接口的removeEntryCB()回调。
+     * 
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
      *               row to remove.
      *
@@ -605,6 +749,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * if this node is bound to a factory.
      *
      * <p>
+     * <p>
+     * 从表中删除指定的条目。如果此节点绑定到工厂,也触发{@link com.sun.jmx.snmp.agent.SnmpTableEntryFactory}接口的removeEntryCB()回调。
+     * 
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
      *               row to remove.
      *
@@ -627,6 +776,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * if this node is bound to a factory.
      *
      * <p>
+     * <p>
+     *  从表中删除指定的条目。如果此节点绑定到工厂,也触发{@link com.sun.jmx.snmp.agent.SnmpTableEntryFactory}接口的removeEntryCB()回调。
+     * 
+     * <p>
+     * 
      * @param pos The position of the entry in the table.
      *
      * @param entry The entry to be removed. This parameter is not used
@@ -671,6 +825,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Get the entry corresponding to the specified rowOid.
      *
      * <p>
+     * <p>
+     *  获取对应于指定rowOid的条目。
+     * 
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the
      *        row to be retrieved.
      *
@@ -694,6 +853,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * isRegistrationRequired() yields true.
      *
      * <p>
+     * <p>
+     *  获取与指定rowOid对应的条目的ObjectName。这个方法的结果只有当isRegistrationRequired()产生true时才有意义。
+     * 
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
      *        row whose ObjectName we want to retrieve.
      *
@@ -722,6 +886,13 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * through their standard MBean interface) this array will contain all
      * the entries.
      * <p>
+     * <p>
+     *  返回此表中存储的条目<CODE> SnmpMibTable </CODE>。
+     * <p>
+     *  如果mibgen生成的子类使用通用方法访问条目(即,如果它通过MBeanServer),则一些条目可能是<code> null </code>。
+     * 这取决于是否将一个非<code> null </code>条目传递给addEntry()。<br>否则,如果它使用标准方式(直接通过其标准MBean接口访问条目),则此数组将包含所有条目。
+     * <p>
+     * 
      * @return The entries array.
      */
     public Object[] getBasicEntries() {
@@ -733,6 +904,10 @@ public abstract class SnmpMibTable extends SnmpMibNode
     /**
      * Get the size of the table.
      *
+     * <p>
+     *  获取表的大小。
+     * 
+     * 
      * @return The number of entries currently registered in this table.
      */
     public int getSize() {
@@ -747,6 +922,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * <CODE>SnmpMibTable</CODE>.
      *
      * <p>
+     * <p>
+     *  启用以向此<CODE> SnmpMibTable </CODE>添加SNMP条目侦听器。
+     * 
+     * <p>
+     * 
      * @param listener The listener object which will handle the
      *    notifications emitted by the registered MBean.
      *
@@ -791,6 +971,10 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Enable to remove an SNMP entry listener from this
      * <CODE>SnmpMibTable</CODE>.
      *
+     * <p>
+     *  启用从此<CODE> SnmpMibTable </CODE>中删除SNMP条目侦听器。
+     * 
+     * 
      * @param listener The listener object which will handle the
      *    notifications emitted by the registered MBean.
      *    This method will remove all the information related to this
@@ -821,6 +1005,9 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Return a <CODE>NotificationInfo</CODE> object containing the
      * notification class and the notification type sent by the
      * <CODE>SnmpMibTable</CODE>.
+     * <p>
+     *  返回包含由<CODE> SnmpMibTable </CODE>发送的通知类和通知类型的<CODE> NotificationInfo </CODE>对象。
+     * 
      */
     @Override
     public MBeanNotificationInfo[] getNotificationInfo() {
@@ -843,6 +1030,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * be created when remote entry creation is enabled.
      *
      * <p>
+     * <p>
+     *  注册工厂,在启用远程条目创建时应通过该工厂创建表条目。
+     * 
+     * <p>
+     * 
      * @param factory The
      *        {@link com.sun.jmx.snmp.agent.SnmpTableEntryFactory} through
      *        which entries will be created when a remote SNMP manager
@@ -873,6 +1065,17 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * control variables that do not conform to RFC 2579 RowStatus
      * TEXTUAL-CONVENTION.
      * <p>
+     * <p>
+     * 如果由<code> var </code>标识的列对象用于控制此表中行的添加/删除,则返回true。
+     * 
+     * <p>
+     *  默认情况下,此方法假定没有控制变量,并始终返回<code> false </code>
+     * <p>
+     *  如果此表是使用SMIv2定义的,并且如果它包含具有RowStatus语法的控制变量,则<code> mibgen </code>将为此方法生成一个非默认实现,该实现将标识RowStatus控制变量。
+     * <p>
+     *  如果需要实现不符合RFC 2579 RowStatus TEXTUAL-CONVENTION的控制变量,则必须重新定义此方法。
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
      *               row involved in the operation.
      *
@@ -899,6 +1102,14 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * value which is SNMP Runtime specific.
      * <p>
      *
+     * <p>
+     *  返回此请求中指定的RowStatus代码值。
+     * <p>
+     *  RowStatus代码值应为由{@link com.sun.jmx.snmp.EnumRowStatus}定义的值之一。
+     * 这些代码对应于RFC 2579中定义的RowStatus代码,以及特定于SNMP Runtime的<i>未指定</i>值。
+     * <p>
+     * 
+     * 
      * @param req    The sub-request that must be handled by this node.
      *
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
@@ -965,6 +1176,18 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * TEXTUAL-CONVENTION.
      *
      * <p>
+     * <p>
+     *  将<code> vbstatus </code> varbind的值映射到{@link com.sun.jmx.snmp.EnumRowStatus}中定义的相应RowStatus代码。
+     * 这些代码对应于RFC 2579中定义的RowStatus代码,以及特定于SNMP Runtime的<i>未指定</i>值。
+     * <p>
+     *  默认情况下,此方法假定控制变量是一个整数,它只是返回其值而不进一步分析。
+     * <p>
+     *  如果此表是使用SMIv2定义的,并且如果它包含具有RowStatus语法的控制变量,则<code> mibgen </code>将为此方法生成一个非默认实现。
+     * <p>
+     * 如果需要实现不符合RFC 2579 RowStatus TEXTUAL-CONVENTION的控制变量,则必须重新定义此方法。
+     * 
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
      *               row involved in the operation.
      *
@@ -1018,6 +1241,20 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * TEXTUAL-CONVENTION.
      *
      * <p>
+     * <p>
+     *  将控制变量设置为指定的<code> newStatus </code>值。
+     * 
+     * <p>
+     *  此方法将给定的<code> newStatus </code>映射到控制变量的适当值,然后在由<code> rowOid </code>标识的条目中设置控制变量。它返回控制变量的新值。
+     * <p>
+     *  默认情况下,假设没有控制变量,因此此方法不执行任何操作,只返回<code> null </code>。
+     * <p>
+     *  如果此表是使用SMIv2定义的,并且如果它包含具有RowStatus语法的控制变量,则<code> mibgen </code>将为此方法生成一个非默认实现。
+     * <p>
+     *  如果需要实现不符合RFC 2579 RowStatus TEXTUAL-CONVENTION的控制变量,则必须重新定义此方法。
+     * 
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
      *               row involved in the operation.
      *
@@ -1077,6 +1314,26 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * does not suit your needs.
      *
      * <p>
+     * <p>
+     *  判断指定的行是否已准备就绪,并且可以将其设置为<i> notInService </i>状态。
+     * <p>
+     *  只有在为指定了<i> createAndWait </i>的新条目设置了varbind之后,才会调用此方法一次。
+     * <p>
+     *  如果条目尚未准备好,则此方法应返回false。然后,当条目准备就绪时,它将负责将自己的状态切换到<i> notInService </i>。
+     * 不会进一步调用<code> isRowReady()</code>。
+     * <p>
+     * 默认情况下,此方法总是返回true。
+     *  <br> <code> mibgen </code>不会为此方法生成任何特定实现 - 这意味着默认情况下,使用<i> createAndWait </i>创建的行将始终位于<i> notInServi
+     * ce </i > state在请求结束时。
+     * 默认情况下,此方法总是返回true。
+     * <p>
+     *  如果此表是使用SMIv2定义的,并且如果它包含具有RowStatus语法的控制变量,则<code> mibgen </code>将为此方法生成一个实现,它将工作委托给对概念行建模的元数据类,您可以通过
+     * 对该元数据类进行子类化来覆盖默认行为。
+     * <p>
+     *  如果此默认机制不适合您的需要,您将必须重新定义此方法。
+     * 
+     * <p>
+     * 
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
      *               row involved in the operation.
      *
@@ -1116,6 +1373,17 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * atomicity of the request is no longer guaranteed.
      *
      * <p>
+     * <p>
+     *  检查给定行的控制变量是否可以切换到新的指定<code> newStatus </code>。
+     * <p>
+     *  当控制变量指定<i>活动</i>或<i> notInService </i>时,在SET请求的<i>检查</i>阶段期间调用此方法。
+     * <p>
+     *  默认情况下,假设没有什么可以阻止将行置于请求的状态,并且此方法不执行任何操作。它被简单地提供为钩子,以便可以实现特定的检查。
+     * <p>
+     *  请注意,如果实际行删除失败,请求的原子性不再保证。
+     * 
+     * <p>
+     * 
      * @param req    The sub-request that must be handled by this node.
      *
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
@@ -1154,6 +1422,17 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * atomicity of the request is no longer guaranteed.
      *
      * <p>
+     * <p>
+     *  检查指定的行是否可以从表中删除。
+     * <p>
+     *  当控制变量指定<i> destroy </i>时,在SET请求的<i>检查</i>阶段期间调用此方法。
+     * <p>
+     * 默认情况下,假设没有什么可以防止行删除,并且此方法不执行任何操作。它被简单地提供为钩子,以便可以实现特定的检查。
+     * <p>
+     *  请注意,如果实际行删除失败,请求的原子性不再保证。
+     * 
+     * <p>
+     * 
      * @param req    The sub-request that must be handled by this node.
      *
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
@@ -1191,6 +1470,20 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * longer be guaranteed.
      * <p>
      *
+     * <p>
+     *  根据远程管理器请求删除表行。
+     * 
+     *  当<code> getRowAction()</code>产生<i> destroy </i>时,会调用此方法 - 即：只有在远程管理器请求删除表行时才会调用此方法。<br>需要直接调用此函数。
+     * <p>
+     *  默认情况下,此方法只需调用<code> removeEntry(rowOid)</code>。
+     * <p>
+     *  如果需要在调用远程行删除时实现某些特定行为,可以重新定义此方法。
+     * <p>
+     *  请注意,特定检查不应在此方法中实现,而应在<code> checkRemoveTableRow()</code>中实现。
+     * 如果<code> checkRemoveTableRow()</code>成功,此方法失败,原始SET请求的原子性不能再保证。
+     * <p>
+     * 
+     * 
      * @param req    The sub-request that must be handled by this node.
      *
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
@@ -1239,6 +1532,23 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * is performed.
      *
      * <p>
+     * <p>
+     *  此方法负责在SET请求的check()阶段期间初始RowStatus处理。
+     * 
+     * 具体来说,它将：<ul> <li>检查<code> getRowAction()</code>返回的给定<code> rowAction </code>是否有效。
+     * </li> <li>代码> rowAction </code>指定它将：<ul> <li>调用<code> createNewEntry()</code>(<code> rowAction = <i> 
+     * createAndGo </i>或<i> createAndWait < i> </code>),</li> <li>或调用<code> checkRemoveTableRow()</code>(<code>
+     *  rowAction = <i> destroy </i> </code>),</li > <li>或调用<code> checkRowStatusChange()</code>(<code> rowA
+     * ction = <i>活动</i>或<i> notInService </i> </code>如果传递的<code> rowAction </code>不正确,则会产生SnmpStatusExcepti
+     * on。
+     * 具体来说,它将：<ul> <li>检查<code> getRowAction()</code>返回的给定<code> rowAction </code>是否有效。</li> </ul> </li>。
+     * <p>
+     *  原则上,您不需要重新定义此方法。
+     * <p>
+     *  在执行对varbind列表的实际检查之前,在SET请求的检查阶段期间调用<code> beginRowAction()</code>。
+     * 
+     * <p>
+     * 
      * @param req    The sub-request that must be handled by this node.
      *
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
@@ -1392,6 +1702,24 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * not <code>null</code>).
      *
      * <p>
+     * <p>
+     *  此方法在SET请求的set()阶段处理最终的RowStatus处理。
+     * 
+     * 具体来说,它会：<ul> <li>调用<code> setRowStatus(<i> active </i>)</code>(<code> rowAction = <i> createAndGo </i>
+     *  </i> </code>)来调用<code> setRowStatus(<i> notInService </i>或<i> notReady </i>)</code> <code> isRowRead
+     * y()</code>(<code> rowAction = <i> createAndWait </i> </code>),</li> <li>或调用<code> setRowStatus(<i> no
+     * tInService < / i>)</code>(<code> rowAction = <i> notInService </i> </code>),<li>或调用<code> removeTable
+     * Row i> destroy </i> </code>),</li> <li>或生成SnmpStatusException。
+     * 这应该避免,因为它会打破SET请求原子性</li>。
+     * </ul>
+     * <p>
+     *  原则上,您不需要重新定义此方法。
+     * <p>
+     *  在执行varbind列表上的实际set()之后,在SET请求的set()阶段期间调用<code> endRowAction()</code>。
+     * 包含控制变量的varbind将使用setRowStatus()返回的值(如果不是<code> null </code>)更新。
+     * 
+     * <p>
+     * 
      * @param req    The sub-request that must be handled by this node.
      *
      * @param rowOid The <CODE>SnmpOid</CODE> identifying the table
@@ -1524,6 +1852,12 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * java.lang.Object,int)} returns false.
      *
      *
+     * <p>
+     *  返回对应于底层条目OBJECT-TYPE中的可读列对象的下一个OID弧,可能跳过不能或不能返回的那些对象。
+     * 调用{@link #getNextVarEntryId(com.sun.jmx.snmp.SnmpOid,long,java.lang.Object)},直到{@link #skipEntryVariable(com.sun.jmx.snmp.SnmpOid,long,java.lang。
+     *  返回对应于底层条目OBJECT-TYPE中的可读列对象的下一个OID弧,可能跳过不能或不能返回的那些对象。 Object,int)}返回false。
+     * 
+     * 
      * @param rowOid The OID index of the row involved in the operation.
      *
      * @param var Id of the variable we start from, looking for the next.
@@ -1565,6 +1899,13 @@ public abstract class SnmpMibTable extends SnmpMibNode
      *     version of the protocol (e.g. an Counter64 with SNMPv1).</li>
      * </ul>
      *
+     * <p>
+     * 钩子的子类。此方法的默认实现是始终返回false。
+     * 子类应重新定义此方法,以便在以下情况下返回true：<ul> <li>该变量是未实例化的叶子</li> <li>或者该变量是类型不能由该版本返回的叶子协议(例如,使用SNMPv1的Counter64)。
+     * 钩子的子类。此方法的默认实现是始终返回false。</li>。
+     * </ul>
+     * 
+     * 
      * @param rowOid The OID index of the row involved in the operation.
      *
      * @param var Id of the variable we start from, looking for the next.
@@ -1592,6 +1933,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * oid</CODE> does not need to be a valid row OID index.
      *
      * <p>
+     * <p>
+     *  获取表中的给定<CODE> oid </CODE>后面的行的<CODE> SnmpOid </CODE>索引。给定的<CODE> oid </CODE>不需要是有效的行OID索引。
+     * 
+     * <p>
+     * 
      * @param oid The OID from which the search will begin.
      *
      * @param userData A contextual object containing user-data.
@@ -1658,6 +2004,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Return the first entry OID registered in the table.
      *
      * <p>
+     * <p>
+     *  返回表中注册的第一个条目OID。
+     * 
+     * <p>
+     * 
      * @param userData A contextual object containing user-data.
      *        This object is allocated through the <code>
      *        {@link com.sun.jmx.snmp.agent.SnmpUserDataFactory}</code>
@@ -1688,6 +2039,13 @@ public abstract class SnmpMibTable extends SnmpMibNode
      *     object in the underlying entry OBJECT-TYPE.</p>
      *
      * <p>
+     * <p>
+     *  此方法在内部使用,由<CODE> mibgen </CODE>生成的<CODE> SnmpMibTable </CODE>子类实现。
+     * 
+     *  <p>返回与底层条目OBJECT-TYPE中的可读列对象相对应的下一个OID弧。</p>
+     * 
+     * <p>
+     * 
      * @param rowOid The OID index of the row involved in the operation.
      *
      * @param var Id of the variable we start from, looking for the next.
@@ -1711,6 +2069,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * <CODE>SnmpMibTable</CODE> subclasses generated by <CODE>mibgen</CODE>.
      *
      * <p>
+     * <p>
+     *  此方法在内部使用,由<CODE> mibgen </CODE>生成的<CODE> SnmpMibTable </CODE>子类实现。
+     * 
+     * <p>
+     * 
      * @param rowOid The OID index of the row involved in the operation.
      *
      * @param var The var we want to validate.
@@ -1733,6 +2096,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * <CODE>SnmpMibTable</CODE> subclasses generated by <CODE>mibgen</CODE>.
      *
      * <p>
+     * <p>
+     *  此方法在内部使用,由<CODE> mibgen </CODE>生成的<CODE> SnmpMibTable </CODE>子类实现。
+     * 
+     * <p>
+     * 
      * @param rowOid The OID index of the row involved in the operation.
      *
      * @param var The OID arc.
@@ -1752,6 +2120,9 @@ public abstract class SnmpMibTable extends SnmpMibNode
     /**
      * This method is used internally and is implemented by the
      * <CODE>SnmpMibTable</CODE> subclasses generated by <CODE>mibgen</CODE>.
+     * <p>
+     *  此方法在内部使用,由<CODE> mibgen </CODE>生成的<CODE> SnmpMibTable </CODE>子类实现。
+     * 
      */
     abstract protected void get(SnmpMibSubRequest req,
                                 SnmpOid rowOid, int depth)
@@ -1760,6 +2131,9 @@ public abstract class SnmpMibTable extends SnmpMibNode
     /**
      * This method is used internally and is implemented by the
      * <CODE>SnmpMibTable</CODE> subclasses generated by <CODE>mibgen</CODE>.
+     * <p>
+     *  此方法在内部使用,由<CODE> mibgen </CODE>生成的<CODE> SnmpMibTable </CODE>子类实现。
+     * 
      */
     abstract protected void check(SnmpMibSubRequest req,
                                   SnmpOid rowOid, int depth)
@@ -1768,6 +2142,9 @@ public abstract class SnmpMibTable extends SnmpMibNode
     /**
      * This method is used internally and is implemented by the
      * <CODE>SnmpMibTable</CODE> subclasses generated by <CODE>mibgen</CODE>.
+     * <p>
+     *  此方法在内部使用,由<CODE> mibgen </CODE>生成的<CODE> SnmpMibTable </CODE>子类实现。
+     * 
      */
     abstract protected void set(SnmpMibSubRequest req,
                                 SnmpOid rowOid, int depth)
@@ -1784,6 +2161,12 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * <code>getNextOid(oid,userData)</code>;
      *
      * <p>
+     * <p>
+     * 获取从指定OID数组提取的索引后面的行的<CODE> SnmpOid </CODE>索引。
+     * 构建对应于行OID的SnmpOid,并调用<code> getNextOid(oid,userData)</code>;。
+     * 
+     * <p>
+     * 
      * @param oid The OID array.
      *
      * @param pos The position in the OID array at which the index starts.
@@ -2178,6 +2561,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Validate the specified OID.
      *
      * <p>
+     * <p>
+     *  验证指定的OID。
+     * 
+     * <p>
+     * 
      * @param oid The OID array.
      *
      * @param pos The position in the array.
@@ -2208,6 +2596,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Enable this <CODE>SnmpMibTable</CODE> to send a notification.
      *
      * <p>
+     * <p>
+     *  启用此<CODE> SnmpMibTable </CODE>以发送通知。
+     * 
+     * <p>
+     * 
      * @param notification The notification to send.
      */
     private synchronized void sendNotification(Notification notification) {
@@ -2249,6 +2642,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * notification.
      *
      * <p>
+     * <p>
+     *  SnmpMibTable使用此方法来创建表项条目通知并将其发送到为此类通知注册的所有侦听器。
+     * 
+     * <p>
+     * 
      * @param type The notification type.
      *
      * @param timeStamp The notification emission date.
@@ -2285,6 +2683,17 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Note that this method is called by the Runtime from within a
      * synchronized block.
      *
+     * <p>
+     *  如果由给定OID索引标识的条目包含在此表中,则返回true。
+     * <p>
+     *  <b>不要直接调用此方法</b>。
+     * <p>
+     *  这个方法提供了一个钩子的子类。当接收到get / set请求时,将调用此函数,以确定表中是否包含指定的条目。如果您需要执行例如,您可能想要覆盖此方法。
+     * 延迟表的评估(需要在接收到请求时更新表)或者您的表是虚拟的。
+     * <p>
+     *  注意,此方法由运行时在同步块内调用。
+     * 
+     * 
      * @param oid The index part of the OID we're looking for.
      * @param userData A contextual object containing user-data.
      *        This object is allocated through the <code>
@@ -2305,6 +2714,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * its position.
      *
      * <p>
+     * <p>
+     *  在OID表(tableoids)中查找给定的oid并返回其位置。
+     * 
+     * <p>
+     * 
      * @param oid The OID we're looking for.
      *
      * @return The position of the OID in the table. -1 if the given
@@ -2348,6 +2762,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * in the OID table (tableoids).
      *
      * <p>
+     * <p>
+     *  在OID表(tableoids)中搜索给定oid应插入的位置。
+     * 
+     * <p>
+     * 
      * @param oid The OID we would like to insert.
      *
      * @param fail Tells whether a SnmpStatusException must be generated
@@ -2402,6 +2821,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Remove the OID located at the given position.
      *
      * <p>
+     * <p>
+     *  删除位于给定位置的OID。
+     * 
+     * <p>
+     * 
      * @param pos The position at which the OID to be removed is located.
      *
      **/
@@ -2419,6 +2843,11 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * Insert an OID at the given position.
      *
      * <p>
+     * <p>
+     *  在给定位置插入OID。
+     * 
+     * <p>
+     * 
      * @param oid The OID to be inserted in the table
      * @param pos The position at which the OID to be added is located.
      *
@@ -2473,12 +2902,20 @@ public abstract class SnmpMibTable extends SnmpMibNode
 
     /**
      * The id of the contained entry object.
+     * <p>
+     *  包含的条目对象的标识。
+     * 
+     * 
      * @serial
      */
     protected int nodeId=1;
 
     /**
      * The MIB to which the metadata is linked.
+     * <p>
+     *  元数据链接到的MIB。
+     * 
+     * 
      * @serial
      */
     protected SnmpMib theMib;
@@ -2487,12 +2924,19 @@ public abstract class SnmpMibTable extends SnmpMibNode
      * <CODE>true</CODE> if remote creation of entries via SET operations
      * is enabled.
      * [default value is <CODE>false</CODE>]
+     * <p>
+     *  如果启用通过SET操作远程创建条目,则<CODE> true </CODE>。 [默认值为<CODE> false </CODE>]
+     * 
+     * 
      * @serial
      */
     protected boolean creationEnabled = false;
 
     /**
      * The entry factory
+     * <p>
+     *  进入工厂
+     * 
      */
     protected SnmpTableEntryFactory factory = null;
 
@@ -2502,18 +2946,30 @@ public abstract class SnmpMibTable extends SnmpMibNode
 
     /**
      * The number of elements in the table.
+     * <p>
+     * 表中元素的数量。
+     * 
+     * 
      * @serial
      */
     private int size=0;
 
     /**
      * The list of indexes.
+     * <p>
+     *  索引的列表。
+     * 
+     * 
      * @serial
      */
     //    private Vector indexes= new Vector();
 
     /**
      * The list of OIDs.
+     * <p>
+     *  OID列表。
+     * 
+     * 
      * @serial
      */
     // private Vector oids= new Vector();
@@ -2524,29 +2980,46 @@ public abstract class SnmpMibTable extends SnmpMibNode
 
     /**
      * The list of entries.
+     * <p>
+     *  条目列表。
+     * 
+     * 
      * @serial
      */
     private final Vector<Object> entries= new Vector<>();
 
     /**
      * The list of object names.
+     * <p>
+     *  对象名称列表。
+     * 
+     * 
      * @serial
      */
     private final Vector<ObjectName> entrynames= new Vector<>();
 
     /**
      * Callback handlers
+     * <p>
+     *  回调处理程序
+     * 
      */
     // final Vector callbacks = new Vector();
 
     /**
      * Listener hashtable containing the hand-back objects.
+     * <p>
+     *  包含回传对象的侦听器哈希表。
+     * 
      */
     private Hashtable<NotificationListener, Vector<Object>> handbackTable =
             new Hashtable<>();
 
     /**
      * Listener hashtable containing the filter objects.
+     * <p>
+     *  包含过滤器对象的侦听器hashtable。
+     * 
      */
     private Hashtable<NotificationListener, Vector<NotificationFilter>>
             filterTable = new Hashtable<>();
@@ -2556,6 +3029,8 @@ public abstract class SnmpMibTable extends SnmpMibNode
     /**
      * SNMP table sequence number.
      * The default value is set to 0.
+     * <p>
+     *  SNMP表序列号。默认值设置为0。
      */
     transient long sequenceNumber = 0;
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,24 @@ import java.util.stream.StreamSupport;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  这个类完全由对集合进行操作或返回集合的静态方法组成。它包含对集合操作的多态性算法,"wrappers",它返回由指定集合支持的新集合,以及一些其他的奇数和结束。
+ * 
+ *  <p>如果提供给它们的集合或类对象为null,则此类的方法都会抛出一个<tt> NullPointerException </tt>。
+ * 
+ *  <p>此类中包含的多态性算法的文档通常包括对<i>实现</i>的简要描述。这样的描述应当被视为<i>实现注释</i>,而不是<i>规范</i>的部分。实现者应该随意替换其他算法,只要遵守规范本身。
+ *  (例如,<tt> sort </tt>使用的算法不必是合并排序,但必须<i>稳定</i>。)。
+ * 
+ * <p>此类中包含的"破坏性"算法,即修改其操作的集合的算法,如果集合不支持适当的突变基元,则指定为抛出<tt> UnsupportedOperationException </tt> s),例如<tt>
+ *  set </tt>方法。
+ * 如果调用对集合没有影响,这些算法可以(但不是必须)抛出此异常。
+ * 例如,对已经排序的不可修改列表调用<tt> sort </tt>方法可能会也可能不会引发<tt> UnsupportedOperationException </tt>。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @author  Josh Bloch
  * @author  Neal Gafter
  * @see     Collection
@@ -97,6 +116,11 @@ public class Collections {
      * do well to validate the values of these parameters from time to time.
      * (The first word of each tuning parameter name is the algorithm to which
      * it applies.)
+     * <p>
+     *  调整算法的参数 - 许多List算法有两个实现,其中一个适用于RandomAccess列表,另一个适用于"顺序"。通常,随机访问变体在小的顺序访问列表上产生更好的性能。
+     * 下面的调谐参数确定什么构成每个算法的"小"顺序访问列表的截止点。下面的值经验性地确定为对LinkedList工作良好。希望他们应该是合理的其他顺序访问列表实现。
+     * 那些在这个代码上进行性能工作的人将不时地验证这些参数的值。 (每个调整参数名称的第一个字是它应用的算法。)。
+     * 
      */
     private static final int BINARYSEARCH_THRESHOLD   = 5000;
     private static final int REVERSE_THRESHOLD        =   18;
@@ -125,6 +149,19 @@ public class Collections {
      * This implementation defers to the {@link List#sort(Comparator)}
      * method using the specified list and a {@code null} comparator.
      *
+     * <p>
+     * 根据其元素的{@linkplain Comparable natural ordering}将升序排序指定的列表。列表中的所有元素都必须实现{@link Comparable}接口。
+     * 此外,列表中的所有元素必须<i>相互比较</i>(也就是说,{@code e1.compareTo(e2)}不得为任何元素{@code e1}抛出{@code ClassCastException} {@code e2}
+     * )。
+     * 根据其元素的{@linkplain Comparable natural ordering}将升序排序指定的列表。列表中的所有元素都必须实现{@link Comparable}接口。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     *  <p>指定的列表必须可修改,但不必可调整大小。
+     * 
+     *  @implNote这个实现使用指定的列表和一个{@code null}比较器来推迟{@link List#sort(Comparator)}方法。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param  list the list to be sorted.
      * @throws ClassCastException if the list contains elements that are not
@@ -157,6 +194,19 @@ public class Collections {
      * This implementation defers to the {@link List#sort(Comparator)}
      * method using the specified list and comparator.
      *
+     * <p>
+     *  根据指定的比较器引起的顺序对指定的列表进行排序。
+     * 列表中的所有元素必须使用指定的比较器<i>互相比较</i>(即{@code c.compare(e1,e2)}不能为任何元素{@code ClassCastException}代码e1}和{@code e2}
+     * )。
+     *  根据指定的比较器引起的顺序对指定的列表进行排序。
+     * 
+     *  <p>这种类型保证是<i>稳定</i>：等于元素将不会被重新排序作为排序的结果。
+     * 
+     *  <p>指定的列表必须可修改,但不必可调整大小。
+     * 
+     *  @implNote此实现使用指定的列表和比较器,推迟到{@link List#sort(Comparator)}方法。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param  list the list to be sorted.
      * @param  c the comparator to determine the order of the list.  A
@@ -191,6 +241,15 @@ public class Collections {
      * this method will do an iterator-based binary search that performs
      * O(n) link traversals and O(log n) element comparisons.
      *
+     * <p>
+     * 使用二分查找算法搜索指定对象的指定列表。
+     * 在进行此调用之前,列表必须根据其元素的{@linkplain Comparable natural ordering}(如{@link #sort(List)}方法)按升序排序。
+     * 如果没有排序,结果是未定义的。如果列表包含等于指定对象的多个元素,则不能保证将找到哪个元素。
+     * 
+     *  <p>对于"随机访问"列表(其提供接近恒定时间的位置访问),该方法在log(n)时间中运行。
+     * 如果指定的列表不实现{@link RandomAccess}接口并且很大,这个方法将执行基于迭代器的二进制搜索,执行O(n)链接遍历和O(log n)元素比较。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param  list the list to be searched.
      * @param  key the key to be searched for.
@@ -260,6 +319,9 @@ public class Collections {
     /**
      * Gets the ith element from the given list by repositioning the specified
      * list listIterator.
+     * <p>
+     *  通过重新定位指定的列表listIterator从给定列表获取第i个元素。
+     * 
      */
     private static <T> T get(ListIterator<? extends T> i, int index) {
         T obj = null;
@@ -292,6 +354,15 @@ public class Collections {
      * this method will do an iterator-based binary search that performs
      * O(n) link traversals and O(log n) element comparisons.
      *
+     * <p>
+     *  使用二分查找算法搜索指定对象的指定列表。
+     * 在进行此调用之前,列表必须根据指定的比较器(如{@link #sort(List,Comparator)sort(List,Comparator)}方法)按升序排序。如果没有排序,结果是未定义的。
+     * 如果列表包含等于指定对象的多个元素,则不能保证将找到哪个元素。
+     * 
+     * <p>对于"随机访问"列表(其提供接近恒定时间的位置访问),该方法在log(n)时间中运行。
+     * 如果指定的列表不实现{@link RandomAccess}接口并且很大,这个方法将执行基于迭代器的二进制搜索,执行O(n)链接遍历和O(log n)元素比较。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param  list the list to be searched.
      * @param  key the key to be searched for.
@@ -366,6 +437,12 @@ public class Collections {
      *
      * This method runs in linear time.
      *
+     * <p>
+     *  颠倒指定列表中元素的顺序。<p>
+     * 
+     *  此方法在线性时间运行。
+     * 
+     * 
      * @param  list the list whose elements are to be reversed.
      * @throws UnsupportedOperationException if the specified list or
      *         its list-iterator does not support the <tt>set</tt> operation.
@@ -414,6 +491,17 @@ public class Collections {
      * quadratic behavior that would result from shuffling a "sequential
      * access" list in place.
      *
+     * <p>
+     *  使用默认的随机性随机排列指定的列表。所有排列以大致相等的可能性发生。
+     * 
+     *  在上述描述中使用对冲"大约",因为默认的随机性源仅仅是大约独立选择的比特的无偏差源。如果它是随机选择的比特的完美来源,则算法将选择具有完全均匀性的置换。
+     * 
+     *  <p>这个实现从最后一个元素向后遍历列表,重复地将随机选择的元素交换到"当前位置"。元素是从列表中从第一个元素到当前位置(包括第一个元素)的部分中随机选择的。
+     * 
+     * <p>此方法在线性时间运行。如果指定的列表不实现{@link RandomAccess}接口并且很大,则此实现在将指定的列表转储到数组之前对其进行混排,并将混洗后的数组转储回列表中。
+     * 这避免了将"顺序访问"列表移到适当位置而产生的二次行为。
+     * 
+     * 
      * @param  list the list to be shuffled.
      * @throws UnsupportedOperationException if the specified list or
      *         its list-iterator does not support the <tt>set</tt> operation.
@@ -445,6 +533,15 @@ public class Collections {
      * quadratic behavior that would result from shuffling a "sequential
      * access" list in place.
      *
+     * <p>
+     *  使用指定的随机源随机替换指定的列表。假设随机性的来源是公平的,所有排列以相等的可能性发生
+     * 
+     *  这个实现从最后一个元素向后遍历列表,直到第二个,重复地将随机选择的元素交换到"当前位置"。元素是从列表中从第一个元素到当前位置(包括第一个元素)的部分中随机选择的。<p>
+     * 
+     *  此方法在线性时间运行。如果指定的列表不实现{@link RandomAccess}接口并且很大,则此实现在将指定的列表转储到数组之前对其进行混排,并将混洗后的数组转储回列表中。
+     * 这避免了将"顺序访问"列表移到适当位置而产生的二次行为。
+     * 
+     * 
      * @param  list the list to be shuffled.
      * @param  rnd the source of randomness to use to shuffle the list.
      * @throws UnsupportedOperationException if the specified list or its
@@ -480,6 +577,10 @@ public class Collections {
      * (If the specified positions are equal, invoking this method leaves
      * the list unchanged.)
      *
+     * <p>
+     *  在指定列表中的指定位置交换元素。 (如果指定的位置相等,调用此方法会使列表保持不变。)
+     * 
+     * 
      * @param list The list in which to swap elements.
      * @param i the index of one element to be swapped.
      * @param j the index of the other element to be swapped.
@@ -499,6 +600,9 @@ public class Collections {
 
     /**
      * Swaps the two specified elements in the specified array.
+     * <p>
+     *  交换指定数组中的两个指定元素。
+     * 
      */
     private static void swap(Object[] arr, int i, int j) {
         Object tmp = arr[i];
@@ -512,6 +616,12 @@ public class Collections {
      *
      * This method runs in linear time.
      *
+     * <p>
+     *  用指定的元素替换指定列表的所有元素。 <p>
+     * 
+     * 此方法在线性时间运行。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param  list the list to be filled with the specified element.
      * @param  obj The element with which to fill the specified list.
@@ -542,6 +652,12 @@ public class Collections {
      *
      * This method runs in linear time.
      *
+     * <p>
+     *  将所有元素从一个列表复制到另一个列表。操作之后,目标列表中每个复制元素的索引将与其在源列表中的索引相同。目标列表必须至少与源列表一样长。如果更长,目标列表中的其余元素不受影响。 <p>
+     * 
+     *  此方法在线性时间运行。
+     * 
+     * 
      * @param  <T> the class of the objects in the lists
      * @param  dest The destination list.
      * @param  src The source list.
@@ -581,6 +697,15 @@ public class Collections {
      * This method iterates over the entire collection, hence it requires
      * time proportional to the size of the collection.
      *
+     * <p>
+     *  根据元素的<i>自然排序</i>,返回给定集合的最小元素。集合中的所有元素都必须实现<tt>可比较</tt>界面。
+     * 此外,集合中的所有元素必须<i>相互比较</i>(即,<tt> e1.compareTo(e2)</tt>不得对任何元素抛出<tt> ClassCastException </tt> <tt> e1 </tt>
+     * 和<tt> e2 </tt>)。
+     *  根据元素的<i>自然排序</i>,返回给定集合的最小元素。集合中的所有元素都必须实现<tt>可比较</tt>界面。<p>。
+     * 
+     *  此方法遍历整个集合,因此它需要与集合大小成比例的时间。
+     * 
+     * 
      * @param  <T> the class of the objects in the collection
      * @param  coll the collection whose minimum element is to be determined.
      * @return the minimum element of the given collection, according
@@ -614,6 +739,15 @@ public class Collections {
      * This method iterates over the entire collection, hence it requires
      * time proportional to the size of the collection.
      *
+     * <p>
+     *  根据指定比较器引起的顺序返回给定集合的最小元素。
+     * 集合中的所有元素必须通过指定的比较器<i>互相比较</i>(即<tt> comp.compare(e1,e2)</tt>不得抛出<tt> ClassCastException </tt >对于集合中的任
+     * 何元素<tt> e1 </tt>和<tt> e2 </tt>)。
+     *  根据指定比较器引起的顺序返回给定集合的最小元素。<p>。
+     * 
+     *  此方法遍历整个集合,因此它需要与集合大小成比例的时间。
+     * 
+     * 
      * @param  <T> the class of the objects in the collection
      * @param  coll the collection whose minimum element is to be determined.
      * @param  comp the comparator with which to determine the minimum element.
@@ -654,6 +788,15 @@ public class Collections {
      * This method iterates over the entire collection, hence it requires
      * time proportional to the size of the collection.
      *
+     * <p>
+     * 根据元素的<i>自然排序</i>,返回给定集合的最大元素。集合中的所有元素都必须实现<tt>可比较</tt>界面。
+     * 此外,集合中的所有元素必须<i>相互比较</i>(即,<tt> e1.compareTo(e2)</tt>不得对任何元素抛出<tt> ClassCastException </tt> <tt> e1 </tt>
+     * 和<tt> e2 </tt>)。
+     * 根据元素的<i>自然排序</i>,返回给定集合的最大元素。集合中的所有元素都必须实现<tt>可比较</tt>界面。<p>。
+     * 
+     *  此方法遍历整个集合,因此它需要与集合大小成比例的时间。
+     * 
+     * 
      * @param  <T> the class of the objects in the collection
      * @param  coll the collection whose maximum element is to be determined.
      * @return the maximum element of the given collection, according
@@ -687,6 +830,15 @@ public class Collections {
      * This method iterates over the entire collection, hence it requires
      * time proportional to the size of the collection.
      *
+     * <p>
+     *  根据指定比较器引起的顺序返回给定集合的最大元素。
+     * 集合中的所有元素必须通过指定的比较器<i>互相比较</i>(即<tt> comp.compare(e1,e2)</tt>不得抛出<tt> ClassCastException </tt >对于集合中的任
+     * 何元素<tt> e1 </tt>和<tt> e2 </tt>)。
+     *  根据指定比较器引起的顺序返回给定集合的最大元素。<p>。
+     * 
+     *  此方法遍历整个集合,因此它需要与集合大小成比例的时间。
+     * 
+     * 
      * @param  <T> the class of the objects in the collection
      * @param  coll the collection whose maximum element is to be determined.
      * @param  comp the comparator with which to determine the maximum element.
@@ -762,6 +914,37 @@ public class Collections {
      * description of both algorithms, see Section 2.3 of Jon Bentley's
      * <i>Programming Pearls</i> (Addison-Wesley, 1986).
      *
+     * <p>
+     *  将指定列表中的元素旋转指定的距离。
+     * 在调用此方法之后,索引<tt> i </tt>处的元素将是之前在索引<tt>(i  -  distance)</tt> mod <tt> list.size()</tt>对于<tt> 0 </tt>和<tt>
+     *  list.size() -  1 </tt>之间的所有值<tt> i </tt> (此方法对列表的大小没有影响。
+     *  将指定列表中的元素旋转指定的距离。)。
+     * 
+     * <p>例如,假设<tt>列表</tt>包含<tt> [t,a,n,k,s] </tt>。
+     * 调用<tt> Collections.rotate(list,1)</tt>(或<tt> Collections.rotate(list,-4)</tt>)后,<tt>列表</tt> [s,t,a,n,
+     * k] </tt>。
+     * <p>例如,假设<tt>列表</tt>包含<tt> [t,a,n,k,s] </tt>。
+     * 
+     *  <p>请注意,此方法可以有效地应用于子列表,以移动列表中的一个或多个元素,同时保留其余元素的顺序。
+     * 例如,以下成语将位于索引<tt> j </tt>的元素移动到位置<tt> k </tt>(必须大于或等于<tt> j </tt>)：。
+     * <pre>
+     *  Collections.rotate(list.subList(j,k + 1),-1);
+     * </pre>
+     *  为了具体化,假设<tt>列表</tt>包括<tt> [a,b,c,d,e] </tt>。要将索引<tt> 1 </tt>(<tt> b </tt>)处的元素向前移动两个位置,请执行以下调用：
+     * <pre>
+     *  Collections.rotate(l.subList(1,4),-1);
+     * </pre>
+     *  结果列表是<tt> [a,c,d,b,e] </tt>。
+     * 
+     *  <p>要向前移动多个元素,请增加旋转距离的绝对值。要向后移动元素,请使用正移位距离。
+     * 
+     * <p>如果指定的列表很小或者实现了{@link RandomAccess}接口,这个实现将第一个元素交换到它应该去的位置,然后重复地交换被移动的元素到它应该去的位置,直到被移动的元素交换到第一个元素。
+     * 如果需要,对第二和后续元件重复该过程,直到旋转完成。
+     * 如果指定的列表很大,并且不实现<tt> RandomAccess </tt>接口,则此实现将列表分成两个子列表视图,围绕索引<tt> -distance mod size </tt>。
+     * 然后在每个子列表视图上调用{@link #reverse(List)}方法,最后在整个列表上调用它。
+     * 有关这两种算法的更完整的描述,参见Jon Bentley的<i> Programming Pearls </i>(Addison-Wesley,1986)第2.3节。
+     * 
+     * 
      * @param list the list to be rotated.
      * @param distance the distance to rotate the list.  There are no
      *        constraints on this value; it may be zero, negative, or
@@ -822,6 +1005,12 @@ public class Collections {
      * <tt>(oldVal==null ? e==null : oldVal.equals(e))</tt>.
      * (This method has no effect on the size of the list.)
      *
+     * <p>
+     *  将列表中所有出现的指定值替换为另一个。
+     * 更正式地,用<tt> newVal </tt>替换<tt>列表</tt>中的每个元素<tt> e </tt>,使得<tt>(oldVal == null?e == null：oldVal。
+     * 等于(e))</tt>。 (此方法对列表的大小没有影响。)。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param list the list in which replacement is to occur.
      * @param oldVal the old value to be replaced.
@@ -886,6 +1075,14 @@ public class Collections {
      * over the source list, looking for a match with the target at each
      * location in turn.
      *
+     * <p>
+     * 返回指定源列表中指定目标列表的第一个出现的开始位置,如果没有此类出现,则返回-1。
+     * 更正式地,返回最小索引<tt> i </tt>,使得{@code source.subList(i,i + target.size())。equals(target)},如果没有这样的索引。
+     *  (如果{@code target.size()> source.size()},则返回-1)。
+     * 
+     *  <p>此实施方案使用"强力"扫描源列表,依次查找与每个位置处的目标匹配的技术。
+     * 
+     * 
      * @param source the list in which to search for the first occurrence
      *        of <tt>target</tt>.
      * @param target the list to search for as a subList of <tt>source</tt>.
@@ -939,6 +1136,14 @@ public class Collections {
      * over the source list, looking for a match with the target at each
      * location in turn.
      *
+     * <p>
+     *  返回指定源列表中指定目标列表的最后一次出现的开始位置,如果没有此类出现,则返回-1。
+     * 更正式地,返回最高索引<tt> i </tt>,使得{@code source.subList(i,i + target.size())。equals(target)},如果没有这样的索引。
+     *  (如果{@code target.size()> source.size()},则返回-1)。
+     * 
+     *  <p>此实现使用"强力"技术迭代源列表,在每个位置依次查找与目标的匹配。
+     * 
+     * 
      * @param source the list in which to search for the last occurrence
      *        of <tt>target</tt>.
      * @param target the list to search for as a subList of <tt>source</tt>.
@@ -1004,6 +1209,17 @@ public class Collections {
      * The returned collection will be serializable if the specified collection
      * is serializable.
      *
+     * <p>
+     *  返回指定集合的​​不可修改视图。此方法允许模块为用户提供对内部集合的"只读"访问。
+     * 对返回的集合"读取"到指定集合的​​查询操作,并尝试修改返回的集合,无论是直接还是通过其迭代器,都会导致<tt> UnsupportedOperationException </tt>。<p>。
+     * 
+     * 返回的集合</i>不会</i>将hashCode和equals操作传递给后端集合,但依赖于<tt> Object </tt>的<tt> equals </tt>和<tt> hashCode </tt>方
+     * 法。
+     * 在后台集合为集合或列表的情况下,必须保留这些操作的合同。<p>。
+     * 
+     *  如果指定的集合是可序列化的,返回的集合将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the collection
      * @param  c the collection for which an unmodifiable view is to be
      *         returned.
@@ -1014,6 +1230,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class UnmodifiableCollection<E> implements Collection<E>, Serializable {
@@ -1110,6 +1328,13 @@ public class Collections {
      * The returned set will be serializable if the specified set
      * is serializable.
      *
+     * <p>
+     *  返回指定集合的​​不可修改视图。此方法允许模块为用户提供对内部集的"只读"访问。
+     * 对返回的集合"读取"到指定集合的​​查询操作,并尝试修改返回的集合,无论是直接的还是通过其迭代器,导致<tt> UnsupportedOperationException </tt>。<p>。
+     * 
+     *  如果指定的集合是可序列化的,返回的集合将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the set
      * @param  s the set for which an unmodifiable view is to be returned.
      * @return an unmodifiable view of the specified set.
@@ -1119,6 +1344,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class UnmodifiableSet<E> extends UnmodifiableCollection<E>
@@ -1142,6 +1369,15 @@ public class Collections {
      * The returned sorted set will be serializable if the specified sorted set
      * is serializable.
      *
+     * <p>
+     *  返回指定排序集的不可修改视图。此方法允许模块为用户提供对内部排序集的"只读"访问。对返回的排序集的查询操作"读取"到指定的排序集。
+     * 尝试修改返回的排序集(无论是直接的,通过其迭代器还是通过其<tt>子集</tt>,<tt> headSet </tt>或<tt> tailSet </tt>视图) <tt> UnsupportedOpe
+     * rationException </tt>。
+     *  返回指定排序集的不可修改视图。此方法允许模块为用户提供对内部排序集的"只读"访问。对返回的排序集的查询操作"读取"到指定的排序集。<p>。
+     * 
+     *  如果指定的排序集是可序列化的,返回的排序集将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the set
      * @param s the sorted set for which an unmodifiable view is to be
      *        returned.
@@ -1152,6 +1388,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class UnmodifiableSortedSet<E>
@@ -1190,6 +1428,15 @@ public class Collections {
      * The returned navigable set will be serializable if the specified
      * navigable set is serializable.
      *
+     * <p>
+     * 返回指定导航集的不可修改视图。此方法允许模块向用户提供对内部可导航集的"只读"访问。对返回的导航集的查询操作"读取"到指定的可导航集。
+     * 尝试修改返回的导航集,无论是直接的,通过其迭代器,还是通过其{@code subSet},{@code headSet}或{@code tailSet}视图,导致{@code UnsupportedOperationException}
+     * 。
+     * 返回指定导航集的不可修改视图。此方法允许模块向用户提供对内部可导航集的"只读"访问。对返回的导航集的查询操作"读取"到指定的可导航集。<p>。
+     * 
+     *  如果指定的可导航集是可序列化的,返回的可导航集将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the set
      * @param s the navigable set for which an unmodifiable view is to be
      *        returned
@@ -1203,6 +1450,10 @@ public class Collections {
     /**
      * Wraps a navigable set and disables all of the mutative operations.
      *
+     * <p>
+     *  包装可导航集,并禁用所有的变更操作。
+     * 
+     * 
      * @param <E> type of elements
      * @serial include
      */
@@ -1216,6 +1467,10 @@ public class Collections {
          * A singleton empty unmodifiable navigable set used for
          * {@link #emptyNavigableSet()}.
          *
+         * <p>
+         *  用于{@link #emptyNavigableSet()}的单独的空不可修改导航集。
+         * 
+         * 
          * @param <E> type of elements, if there were any, and bounds
          */
         private static class EmptyNavigableSet<E> extends UnmodifiableNavigableSet<E>
@@ -1235,6 +1490,9 @@ public class Collections {
 
         /**
          * The instance we are protecting.
+         * <p>
+         *  我们正在保护的实例。
+         * 
          */
         private final NavigableSet<E> ns;
 
@@ -1279,6 +1537,13 @@ public class Collections {
      * is serializable. Similarly, the returned list will implement
      * {@link RandomAccess} if the specified list does.
      *
+     * <p>
+     *  返回指定列表的不可修改视图。此方法允许模块为用户提供对内部列表的"只读"访问。
+     * 对返回的列表的查询操作"读取"到指定的列表,并尝试修改返回的列表,无论是直接还是通过其迭代器,导致<tt> UnsupportedOperationException </tt>。<p>。
+     * 
+     *  如果指定的列表是可序列化的,返回的列表将是可序列化的。同样,返回的列表将实现{@link RandomAccess},如果指定的列表。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param  list the list for which an unmodifiable view is to be returned.
      * @return an unmodifiable view of the specified list.
@@ -1290,6 +1555,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class UnmodifiableList<E> extends UnmodifiableCollection<E>
@@ -1377,6 +1644,13 @@ public class Collections {
          * Note: Unfortunately, UnmodifiableRandomAccessList instances
          * serialized in 1.4.1 and deserialized in 1.4 will become
          * UnmodifiableList instances, as this method was missing in 1.4.
+         * <p>
+         * UnmodifiableRandomAccessList实例被序列化为UnmodifiableList实例,以允许它们在1.4之前的JRE(其没有UnmodifiableRandomAccessList
+         * )中被反序列化。
+         * 该方法反转变换。作为有益的副作用,它还将RandomAccess标记移植到在1.4之前的JRE中序列化的UnmodifiableList实例上。
+         * 
+         *  注意：不幸的是,UnmodifiableRandomAccessList实例在1.4.1中序列化并在1.4中反序列化将成为UnmodifiableList实例,因为在1.4中缺少此方法。
+         * 
          */
         private Object readResolve() {
             return (list instanceof RandomAccess
@@ -1386,6 +1660,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class UnmodifiableRandomAccessList<E> extends UnmodifiableList<E>
@@ -1407,6 +1683,10 @@ public class Collections {
          * not have UnmodifiableRandomAccessList).  UnmodifiableList has
          * a readResolve method that inverts this transformation upon
          * deserialization.
+         * <p>
+         *  允许实例在1.4之前的JRE(其没有UnmodifiableRandomAccessList)中被反序列化。
+         *  UnmodifiableList有一个readResolve方法,在反序列化后反转这个转换。
+         * 
          */
         private Object writeReplace() {
             return new UnmodifiableList<>(list);
@@ -1424,6 +1704,13 @@ public class Collections {
      * The returned map will be serializable if the specified map
      * is serializable.
      *
+     * <p>
+     *  返回指定地图的不可修改视图。此方法允许模块为用户提供对内部映射的"只读"访问。
+     * 在返回的地图上的查询操作"读取"到指定的地图,并尝试修改返回的地图,无论是直接还是通过其收集视图,导致<tt> UnsupportedOperationException </tt>。<p>。
+     * 
+     *  如果指定的地图是可序列化的,返回的地图将是可序列化的。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param  m the map for which an unmodifiable view is to be returned.
@@ -1434,6 +1721,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class UnmodifiableMap<K,V> implements Map<K,V>, Serializable {
@@ -1559,6 +1848,10 @@ public class Collections {
          * via their setValue operation.  This class is subtle: there are
          * many possible attacks that must be thwarted.
          *
+         * <p>
+         *  我们需要这个类除了UnmodifiableSet作为Map.Entries自己允许通过他们的setValue操作修改背景Map。这个类是微妙的：有许多可能的攻击必须挫败。
+         * 
+         * 
          * @serial include
          */
         static class UnmodifiableEntrySet<K,V>
@@ -1698,6 +1991,9 @@ public class Collections {
              * an object with a nefarious equals function that senses
              * that the equality-candidate is Map.Entry and calls its
              * setValue method.
+             * <p>
+             * 覆盖此方法以保护后端集对具有恶意equals函数的对象,该函数检测等式候选是Map.Entry并调用其setValue方法。
+             * 
              */
             public boolean contains(Object o) {
                 if (!(o instanceof Map.Entry))
@@ -1710,6 +2006,9 @@ public class Collections {
              * The next two methods are overridden to protect against
              * an unscrupulous List whose contains(Object o) method senses
              * when o is a Map.Entry, and calls o.setValue.
+             * <p>
+             *  接下来的两个方法被覆盖以防止一个不道德的List,它的contains(Object o)方法在o是Map.Entry时检测,并调用o.setValue。
+             * 
              */
             public boolean containsAll(Collection<?> coll) {
                 for (Object e : coll) {
@@ -1736,6 +2035,9 @@ public class Collections {
              * the setValue method, and it protects the backing Map against
              * an ill-behaved Map.Entry that attempts to modify another
              * Map Entry when asked to perform an equality check.
+             * <p>
+             *  这个"包装类"用于两个目的：它通过短路setValue方法防止客户端修改后台Map,并且保护后台Map免受不良行为Map.Entry的影响,当请求时尝试修改另一个Map条目以执行等式检查。
+             * 
              */
             private static class UnmodifiableEntry<K,V> implements Map.Entry<K,V> {
                 private Map.Entry<? extends K, ? extends V> e;
@@ -1775,6 +2077,15 @@ public class Collections {
      * The returned sorted map will be serializable if the specified sorted map
      * is serializable.
      *
+     * <p>
+     *  返回指定排序映射的不可修改视图。此方法允许模块为用户提供对内部排序映射的"只读"访问。返回的排序映射的查询操作"读取"到指定的排序映射。
+     * 尝试修改返回的排序映射(无论是直接的,通过其集合视图还是通过其<tt> subMap </tt>,<tt> headMap </tt>或<tt> tailMap </tt>视图) a <tt> Unsu
+     * pportedOperationException </tt>。
+     *  返回指定排序映射的不可修改视图。此方法允许模块为用户提供对内部排序映射的"只读"访问。返回的排序映射的查询操作"读取"到指定的排序映射。<p>。
+     * 
+     *  如果指定的排序映射是可序列化的,返回的排序映射将是可序列化的。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param m the sorted map for which an unmodifiable view is to be
@@ -1786,6 +2097,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class UnmodifiableSortedMap<K,V>
@@ -1819,6 +2132,15 @@ public class Collections {
      * The returned navigable map will be serializable if the specified
      * navigable map is serializable.
      *
+     * <p>
+     * 返回指定导航地图的不可修改视图。此方法允许模块向用户提供对内部可导航地图的"只读"访问。返回的导航地图上的查询操作"读取"到指定的可导航地图。
+     * 尝试修改返回的导航地图,无论是直接的,通过其集合视图还是通过其{@code subMap},{@code headMap}或{@code tailMap}视图,都会导致{@code UnsupportedOperationException}
+     * 。
+     * 返回指定导航地图的不可修改视图。此方法允许模块向用户提供对内部可导航地图的"只读"访问。返回的导航地图上的查询操作"读取"到指定的可导航地图。<p >。
+     * 
+     *  如果指定的可导航地图是可序列化的,返回的可导航地图将是可序列化的。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param m the navigable map for which an unmodifiable view is to be
@@ -1831,6 +2153,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class UnmodifiableNavigableMap<K,V>
@@ -1842,6 +2166,10 @@ public class Collections {
          * A class for the {@link EMPTY_NAVIGABLE_MAP} which needs readResolve
          * to preserve singleton property.
          *
+         * <p>
+         *  {@link EMPTY_NAVIGABLE_MAP}的类,它需要readResolve来保留singleton属性。
+         * 
+         * 
          * @param <K> type of keys, if there were any, and of bounds
          * @param <V> type of values, if there were any
          */
@@ -1861,12 +2189,18 @@ public class Collections {
 
         /**
          * Singleton for {@link emptyNavigableMap()} which is also immutable.
+         * <p>
+         *  Singleton for {@link emptyNavigableMap()}这也是不可变的。
+         * 
          */
         private static final EmptyNavigableMap<?,?> EMPTY_NAVIGABLE_MAP =
             new EmptyNavigableMap<>();
 
         /**
          * The instance we wrap and protect.
+         * <p>
+         *  我们包装和保护的实例。
+         * 
          */
         private final NavigableMap<K, ? extends V> nm;
 
@@ -1980,6 +2314,22 @@ public class Collections {
      * The returned collection will be serializable if the specified collection
      * is serializable.
      *
+     * <p>
+     *  返回由指定集合支持的同步(线程安全)集合。为了保证串行访问,至关重要的是通过返回的集合实现对所有后端集合的<strong>所有</strong>访问。<p>
+     * 
+     *  当用户通过{@link迭代器},{@link分割器}或{@link Stream}遍历时,用户必须手动同步返回的集合：
+     * <pre>
+     *  集合c = Collections.synchronizedCollection(myCollection); ... synchronized(c){迭代器i = c.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  不遵循此建议可能会导致非确定性行为。
+     * 
+     * <p>返回的集合</i>不会将{@code hashCode}和{@code equals}操作传递给后端集合,而是依赖于{@code Object}的equals和hashCode方法。
+     * 在后台集合为集合或列表的情况下,必须保留这些操作的合同。<p>。
+     * 
+     *  如果指定的集合是可序列化的,返回的集合将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the collection
      * @param  c the collection to be "wrapped" in a synchronized collection.
      * @return a synchronized view of the specified collection.
@@ -1993,6 +2343,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class SynchronizedCollection<E> implements Collection<E>, Serializable {
@@ -2104,6 +2456,19 @@ public class Collections {
      * <p>The returned set will be serializable if the specified set is
      * serializable.
      *
+     * <p>
+     *  返回由指定集支持的同步(线程安全)集。为了保证串行访问,至关重要的是通过返回的集合完成对后端集的<strong>所有</strong>访问。<p>
+     * 
+     *  当迭代它时,用户必须在返回的集合上手动同步：
+     * <pre>
+     *  Set s = Collections.synchronizedSet(new HashSet()); ... synchronized(s){迭代器i = s.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  不遵循此建议可能会导致非确定性行为。
+     * 
+     *  <p>如果指定的集合是可序列化的,返回的集合将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the set
      * @param  s the set to be "wrapped" in a synchronized set.
      * @return a synchronized view of the specified set.
@@ -2117,6 +2482,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class SynchronizedSet<E>
@@ -2175,6 +2542,24 @@ public class Collections {
      * <p>The returned sorted set will be serializable if the specified
      * sorted set is serializable.
      *
+     * <p>
+     *  返回由指定的排序集支持的同步(线程安全)排序集。为了保证串行访问,至关重要的是通过返回的排序集(或其视图)完成对后退排序集的<strong>所有</strong>访问。<p>
+     * 
+     * 当迭代它或其任何<tt> subSet </tt>,<tt> headSet </tt>或<tt> tailSet </tt>视图时,用户必须在返回的排序集合上手动同步。
+     * <pre>
+     *  SortedSet s = Collections.synchronizedSortedSet(new TreeSet()); ... synchronized(s){迭代器i = s.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  要么：
+     * <pre>
+     *  SortedSet s = Collections.synchronizedSortedSet(new TreeSet()); SortedSet s2 = s.headSet(foo); ... s
+     * ynchronized(s){//注意：s,不是s2！迭代器i = s2.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }}。
+     * </pre>
+     *  不遵循此建议可能会导致非确定性行为。
+     * 
+     *  <p>如果指定的排序集是可序列化的,则返回的排序集将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the set
      * @param  s the sorted set to be "wrapped" in a synchronized sorted set.
      * @return a synchronized view of the specified sorted set.
@@ -2184,6 +2569,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class SynchronizedSortedSet<E>
@@ -2266,6 +2653,25 @@ public class Collections {
      * <p>The returned navigable set will be serializable if the specified
      * navigable set is serializable.
      *
+     * <p>
+     *  返回由指定的可导航集支持的同步(线程安全)可导航集。为了保证串行访问,至关重要的是,通过返回的导航集(或其视图)实现对后端可导航集的<strong>所有</strong>访问。<p>
+     * 
+     *  当迭代它或其任何{@code subSet},{@code headSet}或{@code tailSet}视图时,用户必须在返回的可导航集上手动同步。
+     * <pre>
+     *  NavigableSet s = Collections.synchronizedNavigableSet(new TreeSet()); ... synchronized(s){迭代器i = s.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  要么：
+     * <pre>
+     * NavigableSet s = Collections.synchronizedNavigableSet(new TreeSet()); NavigableSet s2 = s.headSet(foo
+     * ,true); ... synchronized(s){//注意：s,不是s2！迭代器i = s2.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  不遵循此建议可能会导致非确定性行为。
+     * 
+     *  <p>如果指定的可导航集是可序列化的,则返回的可导航集将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the set
      * @param  s the navigable set to be "wrapped" in a synchronized navigable
      * set
@@ -2277,6 +2683,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class SynchronizedNavigableSet<E>
@@ -2369,6 +2777,19 @@ public class Collections {
      * <p>The returned list will be serializable if the specified list is
      * serializable.
      *
+     * <p>
+     *  返回由指定列表支持的同步(线程安全)列表。为了保证串行访问,至关重要的是通过返回的列表完成对后备列表的<strong>所有</strong>访问。<p>
+     * 
+     *  当迭代它时,用户必须在返回的列表上手动同步：
+     * <pre>
+     *  List list = Collections.synchronizedList(new ArrayList()); ... synchronized(list){Iterator i = list.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  不遵循此建议可能会导致非确定性行为。
+     * 
+     *  <p>如果指定的列表是可序列化的,返回的列表将是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param  list the list to be "wrapped" in a synchronized list.
      * @return a synchronized view of the specified list.
@@ -2386,6 +2807,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class SynchronizedList<E>
@@ -2472,6 +2895,13 @@ public class Collections {
          * Note: Unfortunately, SynchronizedRandomAccessList instances
          * serialized in 1.4.1 and deserialized in 1.4 will become
          * SynchronizedList instances, as this method was missing in 1.4.
+         * <p>
+         *  SynchronizedRandomAccessList实例被序列化为SynchronizedList实例,以允许它们在1.4之前的JRE(其没有SynchronizedRandomAccessLis
+         * t)中被反序列化。
+         * 该方法反转变换。作为有益的副作用,它还将RandomAccess标记移植到在1.4之前的JRE中序列化的SynchronizedList实例上。
+         * 
+         * 注意：不幸的是,在1.4.1中序列化并在1.4中反序列化的SynchronizedRandomAccessList实例将成为SynchronizedList实例,因为在1.4中缺少此方法。
+         * 
          */
         private Object readResolve() {
             return (list instanceof RandomAccess
@@ -2481,6 +2911,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class SynchronizedRandomAccessList<E>
@@ -2509,6 +2941,10 @@ public class Collections {
          * not have SynchronizedRandomAccessList).  SynchronizedList has
          * a readResolve method that inverts this transformation upon
          * deserialization.
+         * <p>
+         *  允许在1.4之前的JRE(其没有SynchronizedRandomAccessList)中反序列化实例。
+         *  SynchronizedList有一个readResolve方法,在反序列化后反转这个转换。
+         * 
          */
         private Object writeReplace() {
             return new SynchronizedList<>(list);
@@ -2539,6 +2975,19 @@ public class Collections {
      * <p>The returned map will be serializable if the specified map is
      * serializable.
      *
+     * <p>
+     *  返回由指定映射支持的同步(线程安全)映射。为了保证串行访问,至关重要的是通过返回的映射完成对后备映射的<strong>所有</strong>访问。<p>
+     * 
+     *  当迭代其任何集合视图时,用户必须在返回的地图上手动同步：
+     * <pre>
+     *  Map m = Collections.synchronizedMap(new HashMap()); ... Set s = m.keySet(); //不需要在同步块中... synchroniz
+     * ed(m){//在m上同步,而不是s！迭代器i = s.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }}。
+     * </pre>
+     *  不遵循此建议可能会导致非确定性行为。
+     * 
+     *  <p>如果指定的地图是可序列化的,返回的地图将是可序列化的。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param  m the map to be "wrapped" in a synchronized map.
@@ -2549,6 +2998,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class SynchronizedMap<K,V>
@@ -2731,6 +3182,25 @@ public class Collections {
      * <p>The returned sorted map will be serializable if the specified
      * sorted map is serializable.
      *
+     * <p>
+     *  返回由指定的排序映射支持的同步(线程安全)排序映射。为了保证串行访问,至关重要的是通过返回的排序映射(或其视图)实现对返回的排序映射的<strong>所有</strong>访问。<p>
+     * 
+     * 当迭代任何其集合视图或其任何<tt> subMap </tt>,<tt> headMap </tt>或<tt的任何集合视图时,用户必须在返回的排序映射上手动同步> tailMap </tt>视图。
+     * <pre>
+     *  SortedMap m = Collections.synchronizedSortedMap(new TreeMap()); ... Set s = m.keySet(); //不需要在同步块中..
+     * . synchronized(m){//在m上同步,而不是s！迭代器i = s.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }}。
+     * </pre>
+     *  要么：
+     * <pre>
+     *  SortedMap m = Collections.synchronizedSortedMap(new TreeMap()); SortedMap m2 = m.subMap(foo,bar); ..
+     * . Set s2 = m2.keySet(); //不需要在同步块中... synchronized(m){//在m上同步,而不是m2或s2！迭代器i = s.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  不遵循此建议可能会导致非确定性行为。
+     * 
+     *  <p>如果指定的排序映射是可序列化的,返回的排序映射将是可序列化的。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param  m the sorted map to be "wrapped" in a synchronized sorted map.
@@ -2741,6 +3211,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class SynchronizedSortedMap<K,V>
@@ -2828,6 +3300,26 @@ public class Collections {
      * <p>The returned navigable map will be serializable if the specified
      * navigable map is serializable.
      *
+     * <p>
+     *  返回由指定的可导航地图支持的同步(线程安全)可导航地图。为了保证串行访问,至关重要的是,通过返回的导航地图(或其视图)完成对背景可导航地图的<strong>所有</strong>访问。<p>
+     * 
+     * 当迭代任何其集合视图或其任何{@code subMap},{@code headMap}或{@code tailMap}视图的集合视图时,用户必须在返回的导航地图上手动同步。
+     * <pre>
+     *  NavigableMap m = Collections.synchronizedNavigableMap(new TreeMap()); ... Set s = m.keySet(); //不需要在
+     * 同步块中... synchronized(m){//在m上同步,而不是s！迭代器i = s.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  要么：
+     * <pre>
+     *  NavigableMap m = Collections.synchronizedNavigableMap(new TreeMap()); NavigableMap m2 = m.subMap(foo
+     * ,true,bar,false); ... Set s2 = m2.keySet(); //不需要在同步块中... synchronized(m){//在m上同步,而不是m2或s2！迭代器i = s.iterator(); //必须在同步块中while(i.hasNext())foo(i.next()); }
+     * }。
+     * </pre>
+     *  不遵循此建议可能会导致非确定性行为。
+     * 
+     *  <p>如果指定的导航地图是可序列化的,则返回的导航地图将是可序列化的。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param  m the navigable map to be "wrapped" in a synchronized navigable
@@ -2842,6 +3334,10 @@ public class Collections {
     /**
      * A synchronized NavigableMap.
      *
+     * <p>
+     *  同步NavigableMap。
+     * 
+     * 
      * @serial include
      */
     static class SynchronizedNavigableMap<K,V>
@@ -3005,6 +3501,28 @@ public class Collections {
      * type, the returned collection permits insertion of null elements
      * whenever the backing collection does.
      *
+     * <p>
+     * 返回指定集合的​​动态类型安全视图。任何尝试插入错误类型的元素将导致立即{@link ClassCastException}。
+     * 假设在生成动态类型安全视图之前集合不包含不正确类型的元素,并且所有后续对集合的访问都通过视图进行,则保证集合不能包含不正确的类型元素。
+     * 
+     *  <p>语言中的泛型机制提供了编译时(静态)类型检查,但是可以使用unchecked类型检查来消除这种机制。通常这不是一个问题,因为编译器对所有这样的未经检查的操作发出警告。
+     * 然而,有时候静态类型检查是不够的。例如,假设一个集合被传递给第三方库,并且库代码不会通过插入一个错误类型的元素来破坏集合。
+     * 
+     * <p>动态类型安全视图的另一个用途是调试。假设程序失败并出现{@code ClassCastException},表示将一个不正确类型的元素放入参数化集合中。
+     * 不幸的是,异常可以在插入错误元素之后的任何时间发生,因此它通常提供关于问题的真实源的很少或没有信息。如果问题是可重现的,可以通过临时修改程序来以动态类型安全视图包装集合来快速确定其来源。
+     * 例如,这个声明：<pre> {@code Collection <String> c = new HashSet <>(); } </pre>可以被这个替换：<pre> {@code Collection <String> c = Collections.checkedCollection(new HashSet <>(),String.class); }
+     *  </pre>再次运行程序将导致它在将错误类型的元素插入到集合中的时候失败,从而清楚地识别问题的根源。
+     * 不幸的是,异常可以在插入错误元素之后的任何时间发生,因此它通常提供关于问题的真实源的很少或没有信息。如果问题是可重现的,可以通过临时修改程序来以动态类型安全视图包装集合来快速确定其来源。
+     * 一旦问题得到修复,修改的声明可以恢复到原来的状态。
+     * 
+     *  <p>返回的集合</i> </i>不会将hashCode和equals操作传递给后端集合,而是依赖于{@code Object}的{@code equals}和{@code hashCode}方法。
+     * 在后台集合是集合或列表的情况下,这是保留这些操作的合同所必需的。
+     * 
+     *  <p>如果指定的集合是可序列化的,返回的集合将是可序列化的。
+     * 
+     * <p>由于{@code null}被认为是任何引用类型的值,所以返回的集合允许在后台收集时插入空元素。
+     * 
+     * 
      * @param <E> the class of the objects in the collection
      * @param c the collection for which a dynamically typesafe view is to be
      *          returned
@@ -3023,6 +3541,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedCollection<E> implements Collection<E>, Serializable {
@@ -3152,6 +3672,17 @@ public class Collections {
      * type, the returned queue permits insertion of {@code null} elements
      * whenever the backing queue does.
      *
+     * <p>
+     *  返回指定队列的动态类型安全视图。任何尝试插入错误类型的元素将导致立即{@link ClassCastException}。
+     * 假定队列在生成动态类型安全视图之前不包含不正确类型的元素,并且所有后续对队列的访问通过视图进行,则保证队列不能包含不正确的类型元素。
+     * 
+     *  <p>有关使用动态类型安全视图的讨论可在{@link #checkedCollection checkedCollection}方法的文档中找到。
+     * 
+     *  <p>如果指定的队列是可串行化的,则返回的队列将是可序列化的。
+     * 
+     *  <p>由于{@code null}被视为任何引用类型的值,所以返回的队列允许在后台队列中插入{@code null}元素。
+     * 
+     * 
      * @param <E> the class of the objects in the queue
      * @param queue the queue for which a dynamically typesafe view is to be
      *             returned
@@ -3164,6 +3695,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedQueue<E>
@@ -3207,6 +3740,17 @@ public class Collections {
      * type, the returned set permits insertion of null elements whenever
      * the backing set does.
      *
+     * <p>
+     *  返回指定集合的​​动态类型安全视图。任何尝试插入错误类型的元素将导致立即{@link ClassCastException}。
+     * 假设一个集合在生成动态类型安全视图之前不包含不正确类型的元素,并且所有对该集合的后续访问通过该视图发生,则保证该集合不能包含不正确的类型元素。
+     * 
+     * <p>有关使用动态类型安全视图的讨论可在{@link #checkedCollection checkedCollection}方法的文档中找到。
+     * 
+     *  <p>如果指定的集合是可序列化的,返回的集合将是可序列化的。
+     * 
+     *  <p>由于{@code null}被认为是任何引用类型的值,所以返回的集合允许在后台集合插入空元素。
+     * 
+     * 
      * @param <E> the class of the objects in the set
      * @param s the set for which a dynamically typesafe view is to be
      *          returned
@@ -3219,6 +3763,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedSet<E> extends CheckedCollection<E>
@@ -3253,6 +3799,17 @@ public class Collections {
      * type, the returned sorted set permits insertion of null elements
      * whenever the backing sorted set does.
      *
+     * <p>
+     *  返回指定排序集的动态类型安全视图。任何尝试插入错误类型的元素将导致立即{@link ClassCastException}。
+     * 假定排序集合在生成动态类型安全视图之前不包含不正确类型的元素,并且所有后续对排序集合的访问通过视图发生,则保证了排序集合不能包含不正确类型的元素。
+     * 
+     *  <p>有关使用动态类型安全视图的讨论可在{@link #checkedCollection checkedCollection}方法的文档中找到。
+     * 
+     *  <p>如果指定的排序集是可序列化的,则返回的排序集将是可序列化的。
+     * 
+     *  <p>由于{@code null}被视为任何引用类型的值,所以返回的排序集允许在后退排序集合插入空元素。
+     * 
+     * 
      * @param <E> the class of the objects in the set
      * @param s the sorted set for which a dynamically typesafe view is to be
      *          returned
@@ -3266,6 +3823,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedSortedSet<E> extends CheckedSet<E>
@@ -3316,6 +3875,17 @@ public class Collections {
      * type, the returned navigable set permits insertion of null elements
      * whenever the backing sorted set does.
      *
+     * <p>
+     * 返回指定导航集的动态类型安全视图。任何尝试插入错误类型的元素将导致立即{@link ClassCastException}。
+     * 假设可导航集合在生成动态类型安全视图之前不包含不正确类型的元素,并且所有对可导航集合的所有后续访问都通过视图发生,则保证</em>可导航集合不能包含不正确类型的元素。
+     * 
+     *  <p>有关使用动态类型安全视图的讨论可在{@link #checkedCollection checkedCollection}方法的文档中找到。
+     * 
+     *  <p>如果指定的可导航集是可序列化的,则返回的可导航集将是可序列化的。
+     * 
+     *  <p>由于{@code null}被认为是任何引用类型的值,所以返回的可导航集允许在后退排序集合插入空元素。
+     * 
+     * 
      * @param <E> the class of the objects in the set
      * @param s the navigable set for which a dynamically typesafe view is to be
      *          returned
@@ -3329,6 +3899,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedNavigableSet<E> extends CheckedSortedSet<E>
@@ -3397,6 +3969,17 @@ public class Collections {
      * type, the returned list permits insertion of null elements whenever
      * the backing list does.
      *
+     * <p>
+     *  返回指定列表的动态类型安全视图。任何尝试插入错误类型的元素将导致立即{@link ClassCastException}。
+     * 假设在生成动态类型安全视图之前列表不包含不正确类型的元素,并且所有对列表的后续访问都通过视图进行,则保证该列表不能包含不正确的类型元素。
+     * 
+     *  <p>有关使用动态类型安全视图的讨论可在{@link #checkedCollection checkedCollection}方法的文档中找到。
+     * 
+     * <p>如果指定的列表是可序列化的,返回的列表将是可序列化的。
+     * 
+     *  <p>由于{@code null}被视为任何引用类型的值,返回的列表允许在后备列表中插入空元素。
+     * 
+     * 
      * @param <E> the class of the objects in the list
      * @param list the list for which a dynamically typesafe view is to be
      *             returned
@@ -3411,6 +3994,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedList<E>
@@ -3479,6 +4064,10 @@ public class Collections {
         /**
          * {@inheritDoc}
          *
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @throws ClassCastException if the class of an element returned by the
          *         operator prevents it from being added to this collection. The
          *         exception may be thrown after some elements of the list have
@@ -3497,6 +4086,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedRandomAccessList<E> extends CheckedList<E>
@@ -3541,6 +4132,21 @@ public class Collections {
      * type, the returned map permits insertion of null keys or values
      * whenever the backing map does.
      *
+     * <p>
+     *  返回指定地图的动态类型安全视图。任何尝试插入其键或值具有错误类型的映射将导致立即{@link ClassCastException}。
+     * 类似地,任何修改当前与键相关联的值的尝试将导致立即{@link ClassCastException},无论是直接通过映射本身尝试修改还是通过从映射获得的{@link Map.Entry}实例{@link Map#entrySet()entry set}
+     * 视图。
+     *  返回指定地图的动态类型安全视图。任何尝试插入其键或值具有错误类型的映射将导致立即{@link ClassCastException}。
+     * 
+     *  <p>假设地图在生成动态类型安全视图之前不包含不正确键入的键或值,并且所有后续对地图的访问都通过视图(或其集合视图之一)进行,则<i> >确保</i>地图不能包含错误键入的键或值。
+     * 
+     *  <p>有关使用动态类型安全视图的讨论可在{@link #checkedCollection checkedCollection}方法的文档中找到。
+     * 
+     *  <p>如果指定的地图是可序列化的,返回的地图将是可序列化的。
+     * 
+     *  <p>由于{@code null}被认为是任何引用类型的值,所以返回的映射允许在后台映射时插入空键或值。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param m the map for which a dynamically typesafe view is to be
@@ -3558,6 +4164,8 @@ public class Collections {
 
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class CheckedMap<K,V>
@@ -3724,6 +4332,10 @@ public class Collections {
          * class is subtle: there are many possible attacks that must be
          * thwarted.
          *
+         * <p>
+         * 我们需要这个类除了CheckedSet作为Map.Entry允许通过setValue操作修改背景Map。这个类是微妙的：有许多可能的攻击必须挫败。
+         * 
+         * 
          * @serial exclude
          */
         static class CheckedEntrySet<K,V> implements Set<Map.Entry<K,V>> {
@@ -3769,6 +4381,9 @@ public class Collections {
                 /*
                  * Ensure that we don't get an ArrayStoreException even if
                  * s.toArray returns an array of something other than Object
+                 * <p>
+                 *  确保我们不会得到一个ArrayStoreException,即使s.toArray返回一个非Object对象的数组
+                 * 
                  */
                 Object[] dest = (CheckedEntry.class.isInstance(
                     source.getClass().getComponentType()) ? source :
@@ -3804,6 +4419,9 @@ public class Collections {
              * an object with a nefarious equals function that senses
              * that the equality-candidate is Map.Entry and calls its
              * setValue method.
+             * <p>
+             *  覆盖此方法以保护后端集对具有恶意equals函数的对象,该函数检测等式候选是Map.Entry并调用其setValue方法。
+             * 
              */
             public boolean contains(Object o) {
                 if (!(o instanceof Map.Entry))
@@ -3817,6 +4435,9 @@ public class Collections {
              * The bulk collection methods are overridden to protect
              * against an unscrupulous collection whose contains(Object o)
              * method senses when o is a Map.Entry, and calls o.setValue.
+             * <p>
+             *  覆盖批量收集方法以防止一个不道德的集合,其contains(Object o)方法在o是Map.Entry时检测,并调用o.setValue。
+             * 
              */
             public boolean containsAll(Collection<?> c) {
                 for (Object o : c)
@@ -3872,6 +4493,10 @@ public class Collections {
              * the setValue method, and it protects the backing Map against
              * an ill-behaved Map.Entry that attempts to modify another
              * Map.Entry when asked to perform an equality check.
+             * <p>
+             *  这个"包装器类"有两个目的：它防止客户端通过短接setValue方法来修改背景映射,并且保护背景映射免受不良行为Map.Entry的影响,该Map.Entry尝试修改另一个Map.Entry要求执行平
+             * 等检查。
+             * 
              */
             private static class CheckedEntry<K,V,T> implements Map.Entry<K,V> {
                 private final Map.Entry<K, V> e;
@@ -3937,6 +4562,21 @@ public class Collections {
      * type, the returned map permits insertion of null keys or values
      * whenever the backing map does.
      *
+     * <p>
+     *  返回指定排序映射的动态类型安全视图。任何尝试插入其键或值具有错误类型的映射将导致立即{@link ClassCastException}。
+     * 类似地,任何修改当前与键相关联的值的尝试将导致立即{@link ClassCastException},无论是直接通过映射本身尝试修改还是通过从映射获得的{@link Map.Entry}实例{@link Map#entrySet()entry set}
+     * 视图。
+     *  返回指定排序映射的动态类型安全视图。任何尝试插入其键或值具有错误类型的映射将导致立即{@link ClassCastException}。
+     * 
+     * <p>假设地图在生成动态类型安全视图之前不包含不正确键入的键或值,并且所有后续对地图的访问都通过视图(或其集合视图之一)进行,则<i> >确保</i>地图不能包含错误键入的键或值。
+     * 
+     *  <p>有关使用动态类型安全视图的讨论可在{@link #checkedCollection checkedCollection}方法的文档中找到。
+     * 
+     *  <p>如果指定的地图是可序列化的,返回的地图将是可序列化的。
+     * 
+     *  <p>由于{@code null}被认为是任何引用类型的值,所以返回的映射允许在后台映射时插入空键或值。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param m the map for which a dynamically typesafe view is to be
@@ -3953,6 +4593,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedSortedMap<K,V> extends CheckedMap<K,V>
@@ -4011,6 +4653,21 @@ public class Collections {
      * type, the returned map permits insertion of null keys or values
      * whenever the backing map does.
      *
+     * <p>
+     *  返回指定导航地图的动态类型安全视图。任何尝试插入其键或值具有错误类型的映射将导致立即{@link ClassCastException}。
+     * 类似地,任何修改当前与键相关联的值的尝试将导致立即{@link ClassCastException},无论是直接通过映射本身尝试修改还是通过从映射获得的{@link Map.Entry}实例{@link Map#entrySet()entry set}
+     * 视图。
+     *  返回指定导航地图的动态类型安全视图。任何尝试插入其键或值具有错误类型的映射将导致立即{@link ClassCastException}。
+     * 
+     * <p>假设地图在生成动态类型安全视图之前不包含不正确键入的键或值,并且所有后续对地图的访问都通过视图(或其集合视图之一)进行,则<em> >保证</em>：地图不能包含键入错误的键或值。
+     * 
+     *  <p>有关使用动态类型安全视图的讨论可在{@link #checkedCollection checkedCollection}方法的文档中找到。
+     * 
+     *  <p>如果指定的地图是可序列化的,返回的地图将是可序列化的。
+     * 
+     *  <p>由于{@code null}被认为是任何引用类型的值,所以返回的映射允许在后台映射时插入空键或值。
+     * 
+     * 
      * @param <K> type of map keys
      * @param <V> type of map values
      * @param m the map for which a dynamically typesafe view is to be
@@ -4027,6 +4684,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     static class CheckedNavigableMap<K,V> extends CheckedSortedMap<K,V>
@@ -4172,6 +4831,18 @@ public class Collections {
      * <p>Implementations of this method are permitted, but not
      * required, to return the same object from multiple invocations.
      *
+     * <p>
+     *  返回没有元素的迭代器。更确切地说,
+     * 
+     * <ul>
+     *  <li> {@ link Iterator#hasNext hasNext}始终返回{@code false}。
+     * </li> <li> {@ link Iterator#next next}总是引发{@link NoSuchElementException}。
+     * </li> <li> @link Iterator#remove remove}总是引发{@link IllegalStateException}。</li>。
+     * </ul>
+     * 
+     *  <p>允许(但不是必须)从多个调用返回相同对象的此方法的实现。
+     * 
+     * 
      * @param <T> type of elements, if there were any, in the iterator
      * @return an empty iterator
      * @since 1.7
@@ -4216,6 +4887,20 @@ public class Collections {
      * <p>Implementations of this method are permitted, but not
      * required, to return the same object from multiple invocations.
      *
+     * <p>
+     *  返回没有元素的列表迭代器。更确切地说,
+     * 
+     * <ul>
+     * <li> {@ link Iterator#hasNext hasNext}和{@link ListIterator#hasPrevious hasPrevious}总是返回{@code false}。
+     * </li> <li> {@ link Iterator#next next}和{@link ListIterator#previous </li> <li> {@ link Iterator#remove remove}
+     * 和{@link ListIterator#set set}总是会抛出{@link IllegalStateException}。
+     * </li> <li> </li> {@ link ListIterator#nextIndex nextIndex}总是返回{@code 0}。
+     * </li> <li> {@ link ListIterator# previousIndex previousIndex}总是返回{@code -1}。</li>。
+     * </ul>
+     * 
+     *  <p>允许(但不是必须)从多个调用返回相同对象的此方法的实现。
+     * 
+     * 
      * @param <T> type of elements, if there were any, in the iterator
      * @return an empty list iterator
      * @since 1.7
@@ -4253,6 +4938,17 @@ public class Collections {
      * <p>Implementations of this method are permitted, but not
      * required, to return the same object from multiple invocations.
      *
+     * <p>
+     *  返回没有元素的枚举。更确切地说,
+     * 
+     * <ul>
+     *  <li> {@ link Enumeration#hasMoreElements hasMoreElements}总是返回{@code false}。
+     * </li> <li> {@link Enumeration#nextElement nextElement}总是引发{@link NoSuchElementException}。
+     * </ul>
+     * 
+     *  <p>允许(但不是必须)从多个调用返回相同对象的此方法的实现。
+     * 
+     * 
      * @param  <T> the class of the objects in the enumeration
      * @return an empty enumeration
      * @since 1.7
@@ -4273,6 +4969,10 @@ public class Collections {
     /**
      * The empty set (immutable).  This set is serializable.
      *
+     * <p>
+     *  空集(immutable)。这个集合是可序列化的。
+     * 
+     * 
      * @see #emptySet()
      */
     @SuppressWarnings("rawtypes")
@@ -4291,6 +4991,16 @@ public class Collections {
      * comparable cost to using the like-named field.  (Unlike this method, the
      * field does not provide type safety.)
      *
+     * <p>
+     *  返回一个空集(不可变)。这个集合是可序列化的。与类似命名的字段不同,此方法是参数化的。
+     * 
+     *  <p>此示例说明了获取空集的类型安全方式：
+     * <pre>
+     *  设置&lt; String&gt; s = Collections.emptySet();
+     * </pre>
+     * @implNote此方法的实现不需要为每个调用创建单独的{@code Set}对象。使用这种方法可能具有与使用相同命名字段相当的成本。 (与此方法不同,该字段不提供类型安全性。)
+     * 
+     * 
      * @param  <T> the class of the objects in the set
      * @return the empty set
      *
@@ -4303,6 +5013,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class EmptySet<E>
@@ -4358,6 +5070,14 @@ public class Collections {
      * @implNote Implementations of this method need not create a separate
      * {@code SortedSet} object for each call.
      *
+     * <p>
+     *  返回一个空的排序集(不可变)。这个集合是可序列化的。
+     * 
+     *  <p>此示例说明了获取空排序集的类型安全方法：<pre> {@code SortedSet <String> s = Collections.emptySortedSet(); } </pre>
+     * 
+     *  @implNote此方法的实现不需要为每个调用创建单独的{@code SortedSet}对象。
+     * 
+     * 
      * @param <E> type of elements, if there were any, in the set
      * @return the empty sorted set
      * @since 1.8
@@ -4379,6 +5099,15 @@ public class Collections {
      * @implNote Implementations of this method need not
      * create a separate {@code NavigableSet} object for each call.
      *
+     * <p>
+     *  返回一个空的可导航集(不可变)。这个集合是可序列化的。
+     * 
+     *  <p>此示例说明了获取空导航集的类型安全方法：<pre> {@code NavigableSet <String> s = Collections.emptyNavigableSet(); } </pre>
+     * 。
+     * 
+     *  @implNote此方法的实现不需要为每个调用创建单独的{@code NavigableSet}对象。
+     * 
+     * 
      * @param <E> type of elements, if there were any, in the set
      * @return the empty navigable set
      * @since 1.8
@@ -4391,6 +5120,10 @@ public class Collections {
     /**
      * The empty list (immutable).  This list is serializable.
      *
+     * <p>
+     *  空列表(不可变)。此列表是可序列化的。
+     * 
+     * 
      * @see #emptyList()
      */
     @SuppressWarnings("rawtypes")
@@ -4410,6 +5143,17 @@ public class Collections {
      * cost to using the like-named field.  (Unlike this method, the field does
      * not provide type safety.)
      *
+     * <p>
+     *  返回一个空列表(不可变)。此列表是可序列化的。
+     * 
+     *  <p>此示例说明获取空列表的类型安全方式：
+     * <pre>
+     *  List&lt; String&gt; s = Collections.emptyList();
+     * </pre>
+     * 
+     *  @implNote此方法的实现不需要为每个调用创建单独的<tt> List </tt>对象。使用这种方法可能具有与使用相同命名字段相当的成本。 (与此方法不同,该字段不提供类型安全性。)
+     * 
+     * 
      * @param <T> type of elements, if there were any, in the list
      * @return an empty immutable list
      *
@@ -4422,6 +5166,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class EmptyList<E>
@@ -4491,6 +5237,10 @@ public class Collections {
     /**
      * The empty map (immutable).  This map is serializable.
      *
+     * <p>
+     *  空地图(不可变)。这个地图是可序列化的。
+     * 
+     * 
      * @see #emptyMap()
      * @since 1.3
      */
@@ -4509,6 +5259,16 @@ public class Collections {
      * comparable cost to using the like-named field.  (Unlike this method, the
      * field does not provide type safety.)
      *
+     * <p>
+     * 返回一个空的地图(不可变)。这个地图是可序列化的。
+     * 
+     *  <p>此示例说明了获取空地图的类型安全方式：
+     * <pre>
+     *  地图&lt; String,Date&gt; s = Collections.emptyMap();
+     * </pre>
+     *  @implNote此方法的实现不需要为每个调用创建单独的{@code Map}对象。使用这种方法可能具有与使用相同命名字段相当的成本。 (与此方法不同,该字段不提供类型安全性。)
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @return an empty map
@@ -4531,6 +5291,15 @@ public class Collections {
      * @implNote Implementations of this method need not create a separate
      * {@code SortedMap} object for each call.
      *
+     * <p>
+     *  返回一个空的排序映射(不可变)。这个地图是可序列化的。
+     * 
+     *  <p>此示例说明了获取空映射的类型安全方法：<pre> {@code SortedMap <String,Date> s = Collections.emptySortedMap(); } </pre>
+     * 。
+     * 
+     *  @implNote此方法的实现不需要为每个调用创建单独的{@code SortedMap}对象。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @return an empty sorted map
@@ -4552,6 +5321,15 @@ public class Collections {
      * @implNote Implementations of this method need not create a separate
      * {@code NavigableMap} object for each call.
      *
+     * <p>
+     *  返回一个空的可导航地图(不可变)。这个地图是可序列化的。
+     * 
+     *  <p>此示例说明了获取空映射的类型安全方法：<pre> {@code NavigableMap <String,Date> s = Collections.emptyNavigableMap(); }
+     *  </pre>。
+     * 
+     *  @implNote此方法的实现不需要为每个调用创建单独的{@code NavigableMap}对象。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @return an empty navigable map
@@ -4563,6 +5341,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class EmptyMap<K,V>
@@ -4659,6 +5439,10 @@ public class Collections {
      * Returns an immutable set containing only the specified object.
      * The returned set is serializable.
      *
+     * <p>
+     *  返回仅包含指定对象的不可变集。返回的集合是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the set
      * @param o the sole object to be stored in the returned set.
      * @return an immutable set containing only the specified object.
@@ -4697,6 +5481,10 @@ public class Collections {
     /**
      * Creates a {@code Spliterator} with only the specified element
      *
+     * <p>
+     *  创建仅包含指定元素的{@code Spliterator}
+     * 
+     * 
      * @param <T> Type of elements
      * @return A singleton {@code Spliterator}
      */
@@ -4741,6 +5529,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class SingletonSet<E>
@@ -4780,6 +5570,10 @@ public class Collections {
      * Returns an immutable list containing only the specified object.
      * The returned list is serializable.
      *
+     * <p>
+     *  返回仅包含指定对象的不可变列表。返回的列表是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects in the list
      * @param o the sole object to be stored in the returned list.
      * @return an immutable list containing only the specified object.
@@ -4790,6 +5584,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class SingletonList<E>
@@ -4842,6 +5638,10 @@ public class Collections {
      * Returns an immutable map, mapping only the specified key to the
      * specified value.  The returned map is serializable.
      *
+     * <p>
+     *  返回不可变的映射,只将指定的键映射到指定的值。返回的地图是可序列化的。
+     * 
+     * 
      * @param <K> the class of the map keys
      * @param <V> the class of the map values
      * @param key the sole key to be stored in the returned map.
@@ -4855,6 +5655,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class SingletonMap<K,V>
@@ -4969,6 +5771,11 @@ public class Collections {
      * combination with the <tt>List.addAll</tt> method to grow lists.
      * The returned list is serializable.
      *
+     * <p>
+     * 返回由指定对象的<tt> n </tt>副本组成的不可变列表。新分配的数据对象很小(它包含对数据对象的单个引用)。此方法与<tt> List.addAll </tt>方法结合使用可以增长列表。
+     * 返回的列表是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the object to copy and of the objects
      *         in the returned list.
      * @param  n the number of elements in the returned list.
@@ -4986,6 +5793,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class CopiesList<E>
@@ -5091,6 +5900,14 @@ public class Collections {
      *
      * The returned comparator is serializable.
      *
+     * <p>
+     *  返回在实现{@code Comparable}接口的对象集合上施加与自然排序</em>相反的比较器。 (自然排序是由对象自己的{@code compareTo}方法强加的排序。
+     * )这使得一个简单的成语可以排序(或维护)实现{@code Comparable}接口的对象的集合(或数组) - 自然阶。例如,假设{@code a}是一个字符串数组。
+     * 然后：<pre> Arrays.sort(a,Collections.reverseOrder()); </pre>按字母顺序排列数组。<p>。
+     * 
+     *  返回的比较器是可序列化的。
+     * 
+     * 
      * @param  <T> the class of the objects compared by the comparator
      * @return A comparator that imposes the reverse of the <i>natural
      *         ordering</i> on a collection of objects that implement
@@ -5103,6 +5920,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class ReverseComparator
@@ -5135,6 +5954,15 @@ public class Collections {
      * <p>The returned comparator is serializable (assuming the specified
      * comparator is also serializable or {@code null}).
      *
+     * <p>
+     *  返回施加指定比较器的相反顺序的比较器。
+     * 如果指定的比较器是{@code null},这个方法等效于{@link #reverseOrder()}(换句话说,它返回一个比较器,它强加了<em>自然排序</em>实现Comparable接口的对象
+     * 集合)。
+     *  返回施加指定比较器的相反顺序的比较器。
+     * 
+     *  <p>返回的比较器是可序列化的(假设指定的比较器也是可序列化的或{@code null})。
+     * 
+     * 
      * @param <T> the class of the objects compared by the comparator
      * @param cmp a comparator who's ordering is to be reversed by the returned
      * comparator or {@code null}
@@ -5153,6 +5981,8 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
      * @serial include
      */
     private static class ReverseComparator2<T> implements Comparator<T>,
@@ -5165,6 +5995,10 @@ public class Collections {
          * be null, as the static factory returns a ReverseComparator
          * instance if its argument is null.
          *
+         * <p>
+         * 比较器在静态工厂中指定。这将永远不为null,因为静态工厂返回一个ReverseComparator实例,如果其参数为null。
+         * 
+         * 
          * @serial
          */
         final Comparator<T> cmp;
@@ -5199,6 +6033,10 @@ public class Collections {
      * interoperability with legacy APIs that require an enumeration
      * as input.
      *
+     * <p>
+     *  返回指定集合的​​枚举。这提供了与需要枚举作为输入的传统API的互操作性。
+     * 
+     * 
      * @param  <T> the class of the objects in the collection
      * @param c the collection for which an enumeration is to be returned.
      * @return an enumeration over the specified collection.
@@ -5225,6 +6063,10 @@ public class Collections {
      * legacy APIs that return enumerations and new APIs that require
      * collections.
      *
+     * <p>
+     *  返回包含指定枚举返回的元素的数组列表,按照枚举返回的顺序。此方法提供传回的API之间的互操作性,返回枚举和需要集合的新API。
+     * 
+     * 
      * @param <T> the class of the objects returned by the enumeration
      * @param e enumeration providing elements for the returned
      *          array list
@@ -5245,6 +6087,11 @@ public class Collections {
      * Returns true if the specified arguments are equal, or both null.
      *
      * NB: Do not replace with Object.equals until JDK-8015417 is resolved.
+     * <p>
+     *  如果指定的参数相等或返回null,则返回true。
+     * 
+     *  NB：直到JDK-8015417解决,不要替换Object.equals。
+     * 
      */
     static boolean eq(Object o1, Object o2) {
         return o1==null ? o2==null : o1.equals(o2);
@@ -5256,6 +6103,10 @@ public class Collections {
      * <tt>e</tt> in the collection such that
      * <tt>(o == null ? e == null : o.equals(e))</tt>.
      *
+     * <p>
+     *  返回指定集合中等于指定对象的元素数。更正式地,返回集合中的元素数量<tt> e </tt>,使得<tt>(o == null?e == null：o.equals(e))</tt>。
+     * 
+     * 
      * @param c the collection in which to determine the frequency
      *     of <tt>o</tt>
      * @param o the object whose frequency is to be determined
@@ -5302,6 +6153,19 @@ public class Collections {
      * parameters, in which case the method will return {@code true} if and
      * only if the collection is empty.
      *
+     * <p>
+     *  如果两个指定的集合没有共同的元素,则返回{@code true}。
+     * 
+     * <p>如果此方法用于不符合{@code Collection}的一般合同的集合,则必须小心。实现可以选择对任一集合进行迭代,并在另一集合中测试用于包含(或执行任何等效计算)。
+     * 如果任一集合使用非标准等式测试(如{@link SortedSet},其排序不与equals </em>兼容,或{@link IdentityHashMap}的键集),则两个集合都必须使用相同的非标准等
+     * 式测试,或者这个方法的结果是未定义的。
+     * <p>如果此方法用于不符合{@code Collection}的一般合同的集合,则必须小心。实现可以选择对任一集合进行迭代,并在另一集合中测试用于包含(或执行任何等效计算)。
+     * 
+     *  <p>当使用对其可能包含的元素有限制的集合时,也必须小心。允许集合实现为涉及其认为不合格的元素的任何操作抛出异常。对于绝对安全,指定的集合应该只包含两个集合的合格元素。
+     * 
+     *  <p>请注意,允许在两个参数中传递相同的集合,在这种情况下,当且仅当集合为空时,该方法将返回{@code true}。
+     * 
+     * 
      * @param c1 a collection
      * @param c2 a collection
      * @return {@code true} if the two specified collections have no
@@ -5380,6 +6244,16 @@ public class Collections {
      *     Collections.addAll(flavors, "Peaches 'n Plutonium", "Rocky Racoon");
      * </pre>
      *
+     * <p>
+     *  将所有指定的元素添加到指定的集合。要添加的元素可以单独指定或作为数组指定。
+     * 此方便方法的行为与<tt> c.addAll(Arrays.asList(elements))</tt>的行为相同,但是这种方法在大多数实现中可能运行得更快。
+     * 
+     * <p>当单独指定元素时,此方法提供了一种向现有集合添加几个元素的便捷方法：
+     * <pre>
+     *  Collections.addAll(flavors,"Peaches'n Plutonium","Rocky Racoon");
+     * </pre>
+     * 
+     * 
      * @param  <T> the class of the elements to add and of the collection
      * @param c the collection into which <tt>elements</tt> are to be inserted
      * @param elements the elements to insert into <tt>c</tt>
@@ -5426,6 +6300,19 @@ public class Collections {
      *        new WeakHashMap&lt;Object, Boolean&gt;());
      * </pre>
      *
+     * <p>
+     *  返回由指定映射支持的集合。结果集显示与背景图相同的排序,并发和性能特性。实质上,这个工厂方法提供了一个{@link Set}实现,对应于任何{@link Map}实现。
+     * 在已经具有相应的{@link Set}实现(例如{@link HashMap}或{@link TreeMap})的{@link Map}实现上不需要使用此方法。
+     * 
+     *  <p>对此方法返回的集合的每个方法调用都会在后台映射或其<tt> keySet </tt>视图上产生一个方法调用,但有一个例外。
+     *  <tt> addAll </tt>方法是作为后台映射上的<tt> put </tt>调用序列实现的。
+     * 
+     *  <p>指定的映射在调用此方法时必须为空,并且在此方法返回后不应直接访问。如果映射创建为空,直接传递到此方法,并且不会保留对映射的引用,则会确保这些条件,如以下代码段所示：
+     * <pre>
+     *  Set&lt; Object&gt; weakHashSet = Collections.newSetFromMap(new WeakHashMap&lt; Object,Boolean&gt;())
+     * ;。
+     * </pre>
+     * 
      * @param <E> the class of the map keys and of the objects in the
      *        returned set
      * @param map the backing map
@@ -5438,6 +6325,9 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 
+    /* 
      * @serial include
      */
     private static class SetFromMap<E> extends AbstractSet<E>
@@ -5510,6 +6400,8 @@ public class Collections {
      * implemented as a sequence of {@link Deque#addFirst addFirst}
      * invocations on the backing deque.
      *
+     * <p>
+     * 
      * @param  <T> the class of the objects in the deque
      * @param deque the deque
      * @return the queue
@@ -5520,6 +6412,12 @@ public class Collections {
     }
 
     /**
+    /* <p>
+    /* 将{@link Deque}的视图返回为最后进先出(Lifo){@link Queue}。
+    /* 方法<tt>添加</tt>映射到<tt> push </tt>,<tt>删除</tt>映射到<tt> pop </tt>等。
+    /* 当您想要使用需要<tt>队列</tt>但需要Lifo排序的方法时,此视图很有用。
+    /* 
+    /* 
      * @serial include
      */
     static class AsLIFOQueue<E> extends AbstractQueue<E>

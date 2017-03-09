@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.spi.activation;
 
 
@@ -10,12 +11,14 @@ package com.sun.corba.se.spi.activation;
 
 
 /** Server callback API, passed to Activator in active method.
+/* <p>
     */
 public class _ServerStub extends org.omg.CORBA.portable.ObjectImpl implements com.sun.corba.se.spi.activation.Server
 {
 
 
   /** Shutdown this server.  Returns after orb.shutdown() completes.
+  /* <p>
 	*/
   public void shutdown ()
   {
@@ -38,6 +41,9 @@ public class _ServerStub extends org.omg.CORBA.portable.ObjectImpl implements co
 
   /** Install the server.  Returns after the install hook completes
 	* execution in the server.
+	* <p>
+	*  执行在服务器。
+	* 
 	*/
   public void install ()
   {
@@ -60,6 +66,8 @@ public class _ServerStub extends org.omg.CORBA.portable.ObjectImpl implements co
 
   /** Uninstall the server.  Returns after the uninstall hook
 	* completes execution.
+	* <p>
+	*  完成执行。
 	*/
   public void uninstall ()
   {

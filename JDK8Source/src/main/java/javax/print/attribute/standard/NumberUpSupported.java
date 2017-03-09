@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,15 @@ import javax.print.attribute.SupportedValuesAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  NumberUpSupported类是一个打印属性类,一组整数,为{@link NumberUp NumberUp}属性提供受支持的值。
+ * <P>
+ *  <B> IPP兼容性：</B> NumberUpSupported属性的规范数组形式给出了每个向上范围的下限和上限,以包含在IPP"编号向上支持"属性中。
+ * 有关规范数组形式的解释,请参阅{@link javax.print.attribute.SetOfIntegerSyntax SetOfIntegerSyntax}类。
+ * 由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class NumberUpSupported    extends SetOfIntegerSyntax
@@ -55,6 +65,13 @@ public final class NumberUpSupported    extends SetOfIntegerSyntax
      * {@link javax.print.attribute.SetOfIntegerSyntax SetOfIntegerSyntax}
      * for an explanation of array form.
      *
+     * <p>
+     *  使用给定成员构造支持的新数字上限属性。
+     *  NumberUp支持的值在"数组形式"中指定;有关数组形式的说明,请参阅类{@link javax.print.attribute.SetOfIntegerSyntax SetOfIntegerSyntax}
+     * 。
+     *  使用给定成员构造支持的新数字上限属性。
+     * 
+     * 
      * @param  members  Set members in array form.
      *
      * @exception  NullPointerException
@@ -89,6 +106,10 @@ public final class NumberUpSupported    extends SetOfIntegerSyntax
      * Construct a new number up supported attribute containing a single
      * integer. That is, only the one value of NumberUp is supported.
      *
+     * <p>
+     *  构造包含单个整数的支持的新数字。也就是说,只支持NumberUp的一个值。
+     * 
+     * 
      * @param  member  Set member.
      *
      * @exception  IllegalArgumentException
@@ -107,6 +128,10 @@ public final class NumberUpSupported    extends SetOfIntegerSyntax
      * of integers. That is, only those values of NumberUp in the one range are
      * supported.
      *
+     * <p>
+     *  构造包含单个整数范围的支持的新数字上限属性。也就是说,只支持在一个范围内的NumberUp的值。
+     * 
+     * 
      * @param  lowerBound  Lower bound of the range.
      * @param  upperBound  Upper bound of the range.
      *
@@ -139,6 +164,18 @@ public final class NumberUpSupported    extends SetOfIntegerSyntax
      * members are the same.
      * </OL>
      *
+     * <p>
+     *  返回此数字是否支持的属性等于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是NumberUpSupported类的实例。
+     * <LI>
+     * 此数字支持属性的成员和<CODE>对象</CODE>的成员是相同的。
+     * </OL>
+     * 
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this number up
@@ -156,6 +193,8 @@ public final class NumberUpSupported    extends SetOfIntegerSyntax
      * For class NumberUpSupported, the
      * category is class NumberUpSupported itself.
      *
+     * <p>
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -170,6 +209,12 @@ public final class NumberUpSupported    extends SetOfIntegerSyntax
      * For class NumberUpSupported, the
      * category name is <CODE>"number-up-supported"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于NumberUpSupported类,类别是NumberUpSupported类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

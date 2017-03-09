@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -172,6 +173,64 @@ import sun.security.util.SecurityConstants;
  *   "java.net.URLClassLoader$3$1"
  * </pre></blockquote>
  *
+ * <p>
+ *  类加载器是一个负责加载类的对象。类<tt> ClassLoader </tt>是一个抽象类。给定类的<a href="#name">二进制名称</a>,类加载器应尝试定位或生成构成类的定义的数据。
+ * 一个典型的策略是将名称转换为文件名,然后从文件系统读取该名称的"类文件"。
+ * 
+ *  <p>每个{@link Class <tt> Class </Tt>}对象都包含一个{@link Class#getClassLoader()引用}到定义它的<tt> ClassLoader </tt>
+ * 。
+ * 
+ *  数组类的<p> <tt>类</tt>对象不是由类加载器创建的,而是根据Java运行时的需要自动创建的。
+ *  {@link Class#getClassLoader()}返回的数组类的类加载器与其元素类型的类加载器相同;如果元素类型是基本类型,那么数组类没有类装载器。
+ * 
+ *  <p>应用程序实现<tt> ClassLoader </tt>的子类,以便扩展Java虚拟机动态加载类的方式。
+ * 
+ *  类装载器通常可以由安全管理器用来指示安全域。
+ * 
+ * <p> <tt> ClassLoader </tt>类使用委派模型来搜索类和资源。 <tt> ClassLoader </tt>的每个实例都有一个关联的父类加载器。
+ * 当请求查找类或资源时,在尝试查找类或资源本身之前,<tt> ClassLoader </tt>实例会将类或资源的搜索委托给其父类加载器。
+ * 虚拟机的内置类加载器(称为"引导类加载器")本身没有父类,但可以充当<tt> ClassLoader </tt>实例的父类。
+ * 
+ *  <p>支持并发加载类的类加载器称为<em>并行能力</em>类加载器,并且需要在类初始化时通过调用{@link #registerAsParallelCapable <tt> ClassLoader.registerAsParallelCapable </tt>}
+ * 方法。
+ * 请注意,默认情况下,<tt> ClassLoader </tt>类注册为并行。然而,它的子类仍然需要注册自己,如果他们是并行能力。
+ *  <br>在委托模型不是严格分层的环境中,类加载器需要具有并行能力,否则类加载可能导致死锁,因为加载器锁在类加载过程期间保持(参见{@link# loadClass <tt> loadClass </tt>}
+ * 方法)。
+ * 请注意,默认情况下,<tt> ClassLoader </tt>类注册为并行。然而,它的子类仍然需要注册自己,如果他们是并行能力。
+ * 
+ * <p>通常,Java虚拟机以平台相关的方式从本地文件系统加载类。例如,在UNIX系统上,虚拟机从由<tt> CLASSPATH </tt>环境变量定义的目录加载类。
+ * 
+ *  <p>但是,一些类可能不是源自一个文件;它们可以源自其他源,例如网络,或者它们可以由应用构建。
+ * 方法{@link #defineClass(String,byte [],int,int)<tt> defineClass </tt>}将字节数组转换为<tt> Class </tt>类的实例。
+ * 这个新定义的类的实例可以使用{@link Class#newInstance <tt> Class.newInstance </tt>}创建。
+ * 
+ *  <p>类加载器创建的对象的方法和构造函数可以引用其他类。
+ * 为了确定所引用的类,Java虚拟机调用最初创建类的类加载器的{@link #loadClass <tt> loadClass </tt>}方法。
+ * 
+ *  <p>例如,应用程序可以创建网络类加载器以从服务器下载类文件。示例代码可能如下所示：
+ * 
+ *  <blockquote> <pre> ClassLoader载入器&nbsp; = new NetworkClassLoader(host,&port;); Object main&nbsp; = l
+ * oader.loadClass("Main",true).newInstance(); &nbsp;。
+ * &nbsp;。&nbsp; </pre> </blockquote>。
+ * 
+ * <p>网络类加载器子类必须定义方法{@link #findClass <tt> findClass </tt>}和<tt> loadClassData </tt>以从网络加载类。
+ * 一旦它下载了构成类的字节,它应该使用{@link #defineClass <tt> defineClass </tt>}方法创建一个类实例。示例实现是：。
+ * 
+ *  <blockquote> <pre> class NetworkClassLoader extends ClassLoader {String host; int port;
+ * 
+ *  public class findClass(String name){byte [] b = loadClassData(name); return defineClass(name,b,0,b.length); }
+ * }。
+ * 
+ *  private byte [] loadClassData(String name){//从连接加载类数据&nbsp;。&nbsp;。 }} </pre> </blockquote>
+ * 
+ *  <h3> <a name="name">二进制名称</a> </h3>
+ * 
+ *  <p> <tt> ClassLoader </tt>中作为{@link String}参数提供的任何类名都必须是由<cite> Java&trade;语言规范</cite>。
+ * 
+ *  <p>有效类名的示例包括：<blockquote> <pre>"java.lang.String""javax.swing.JSpinner $ DefaultEditor""java.securit
+ * y.KeyStore $ Builder $ FileBuilder $ 1""java.net.URLClassLoader $ 3 $ 1"</pre> </blockquote>。
+ * 
+ * 
  * @see      #resolveClass(Class)
  * @since 1.0
  */
@@ -189,6 +248,9 @@ public abstract class ClassLoader {
 
     /**
      * Encapsulates the set of parallel capable loader types.
+     * <p>
+     *  封装一组具有并行能力的加载器类型。
+     * 
      */
     private static class ParallelLoaders {
         private ParallelLoaders() {}
@@ -205,6 +267,9 @@ public abstract class ClassLoader {
          * Registers the given class loader type as parallel capabale.
          * Returns {@code true} is successfully registered; {@code false} if
          * loader's super class is not registered.
+         * <p>
+         *  将给定的类装入器类型注册为并行capabale。返回{@code true}已成功注册; {@code false}如果加载器的超类没有注册。
+         * 
          */
         static boolean register(Class<? extends ClassLoader> c) {
             synchronized (loaderTypes) {
@@ -225,6 +290,9 @@ public abstract class ClassLoader {
         /**
          * Returns {@code true} if the given class loader type is
          * registered as parallel capable.
+         * <p>
+         *  如果给定的类加载器类型注册为并行能力,则返回{@code true}。
+         * 
          */
         static boolean isRegistered(Class<? extends ClassLoader> c) {
             synchronized (loaderTypes) {
@@ -302,6 +370,14 @@ public abstract class ClassLoader {
      * <tt>checkCreateClassLoader</tt>} method is invoked.  This may result in
      * a security exception.  </p>
      *
+     * <p>
+     * 使用指定的父类加载器创建新的类加载器以进行委派。
+     * 
+     *  <p>如果有安全管理员,则会调用其{@link SecurityManager#checkCreateClassLoader()<tt> checkCreateClassLoader </tt>}方法
+     * 。
+     * 这可能导致安全异常。 </p>。
+     * 
+     * 
      * @param  parent
      *         The parent class loader
      *
@@ -326,6 +402,15 @@ public abstract class ClassLoader {
      * <tt>checkCreateClassLoader</tt>} method is invoked.  This may result in
      * a security exception.  </p>
      *
+     * <p>
+     *  使用方法{@link #getSystemClassLoader()<tt> getSystemClassLoader()</tt>}返回的<tt> ClassLoader </tt>作为父类加载器创
+     * 建新的类加载器。
+     * 
+     *  <p>如果有安全管理员,则会调用其{@link SecurityManager#checkCreateClassLoader()<tt> checkCreateClassLoader </tt>}方法
+     * 。
+     * 这可能导致安全异常。 </p>。
+     * 
+     * 
      * @throws  SecurityException
      *          If a security manager exists and its
      *          <tt>checkCreateClassLoader</tt> method doesn't allow creation
@@ -345,6 +430,11 @@ public abstract class ClassLoader {
      * to invoking {@link #loadClass(String, boolean) <tt>loadClass(name,
      * false)</tt>}.
      *
+     * <p>
+     *  使用指定的<a href="#name">二进制名称</a>加载类。此方法以与{@link #loadClass(String,boolean)}方法相同的方式搜索类。
+     * 它由Java虚拟机调用来解析类引用。调用此方法等效于调用{@link #loadClass(String,boolean)<tt> loadClass(name,false)</tt>}。
+     * 
+     * 
      * @param  name
      *         The <a href="#name">binary name</a> of the class
      *
@@ -387,6 +477,27 @@ public abstract class ClassLoader {
      * {@link #getClassLoadingLock <tt>getClassLoadingLock</tt>} method
      * during the entire class loading process.
      *
+     * <p>
+     *  使用指定的<a href="#name">二进制名称</a>加载类。此方法的默认实现按以下顺序搜索类：
+     * 
+     * <ol>
+     * 
+     *  <li> <p>调用{@link #findLoadedClass(String)}以检查类是否已加载。 </p> </li>
+     * 
+     *  <li> <p>在父类装载器上调用{@link #loadClass(String)<tt> loadClass </tt>}方法。
+     * 如果父项<tt> null </tt>,则使用虚拟机内置的类加载器。 </p> </li>。
+     * 
+     * <li> <p>调用{@link #findClass(String)}方法来查找类。 </p> </li>
+     * 
+     * </ol>
+     * 
+     *  <p>如果使用上述步骤找到类,并且<tt> resolve </tt>标记为true,则此方法将调用所生成的<tt>类的{@link #resolveClass(Class)}方法</tt>对象。
+     * 
+     *  <p>鼓励<tt> ClassLoader </tt>的子类重写{@link #findClass(String)},而不是此方法。 </p>
+     * 
+     *  <p>除非重写,此方法会在整个类加载过程中同步{@link #getClassLoadingLock <tt> getClassLoadingLock </tt>}方法的结果。
+     * 
+     * 
      * @param  name
      *         The <a href="#name">binary name</a> of the class
      *
@@ -444,6 +555,10 @@ public abstract class ClassLoader {
      * with the specified class name. Otherwise, the method returns this
      * ClassLoader object.
      *
+     * <p>
+     *  返回类加载操作的锁对象。为了向后兼容,此方法的默认实现行为如下。如果此ClassLoader对象注册为并行能力,则该方法返回与指定类名相关联的专用对象。否则,该方法返回此ClassLoader对象。
+     * 
+     * 
      * @param  className
      *         The name of the to-be-loaded class
      *
@@ -516,6 +631,12 @@ public abstract class ClassLoader {
      * parent class loader for the requested class.  The default implementation
      * throws a <tt>ClassNotFoundException</tt>.
      *
+     * <p>
+     *  查找具有指定的<a href="#name">二进制名称</a>的类。
+     * 这个方法应该被类加载器实现覆盖,它遵循用于加载类的委托模型,并且在检查所请求类的父类加载器之后将由{@link #loadClass <tt> loadClass </tt>}方法调用。
+     * 默认实现会抛出<tt> ClassNotFoundException </tt>。
+     * 
+     * 
      * @param  name
      *         The <a href="#name">binary name</a> of the class
      *
@@ -536,6 +657,11 @@ public abstract class ClassLoader {
      * is deprecated in favor of the version that takes a <a
      * href="#name">binary name</a> as its first argument, and is more secure.
      *
+     * <p>
+     * 将字节数组转换为<tt> Class </tt>类的实例。在可以使用<tt>类</tt>之前,必须解决。
+     * 不建议使用此方法,而是使用将<a href="#name">二进制名称</a>作为其第一个参数,并且更安全的版本。
+     * 
+     * 
      * @param  b
      *         The bytes that make up the class data.  The bytes in positions
      *         <tt>off</tt> through <tt>off+len-1</tt> should have the format
@@ -597,6 +723,20 @@ public abstract class ClassLoader {
      * java.security.ProtectionDomain) <tt>defineClass</tt>} method that takes a
      * <tt>ProtectionDomain</tt> as one of its arguments.  </p>
      *
+     * <p>
+     *  将字节数组转换为<tt> Class </tt>类的实例。在可以使用<tt>类</tt>之前,必须解决。
+     * 
+     *  <p>此方法为新定义的类分配默认的{@link java.security.ProtectionDomain <tt> ProtectionDomain </tt>}。
+     *  <tt> ProtectionDomain </tt>实际上被授予与{@link java.security.Policy#getPermissions(java.security.CodeSource)<tt> Policy.getPolicy()。
+     *  <p>此方法为新定义的类分配默认的{@link java.security.ProtectionDomain <tt> ProtectionDomain </tt>}。
+     * getPermissions(new CodeSource null,null))</tt>}被调用。
+     * 默认域是在第一次调用{@link #defineClass(String,byte [],int,int)<tt> defineClass </tt>}时创建的,并在后续调用时重用。
+     * 
+     *  <p>要为类指定特定的<tt> ProtectionDomain </tt>,请使用{@link #defineClass(String,byte [],int,int,java.security.ProtectionDomain)<tt> defineClass </tt >}
+     * 方法将<tt> ProtectionDomain </tt>作为其参数之一。
+     *  </p>。
+     * 
+     * 
      * @param  name
      *         The expected <a href="#name">binary name</a> of the class, or
      *         <tt>null</tt> if not known
@@ -646,6 +786,9 @@ public abstract class ClassLoader {
         - not define java.* class,
         - signer of this class matches signers for the rest of the classes in
           package.
+        - not define java.* <p>
+        - not define java.*   - 不定义java。*类, - 此类的签名者匹配包中其余类的签名者。
+        - not define java.* 
     */
     private ProtectionDomain preDefineClass(String name,
                                             ProtectionDomain pd)
@@ -712,6 +855,22 @@ public abstract class ClassLoader {
      * specified by the byte array "<tt>b</tt>", otherwise a {@link
      * NoClassDefFoundError <tt>NoClassDefFoundError</tt>} will be thrown. </p>
      *
+     * <p>
+     * 将字节数组转换为<tt> Class </tt>类的实例,并使用可选的<tt> ProtectionDomain </tt>。
+     * 如果域是<tt> null </tt>,那么默认域将被分配给{@link #defineClass(String,byte [],int,int)}文档中指定的类。在类可以使用之前必须解决。
+     * 
+     *  <p>包中定义的第一个类将确定该包中定义的所有后续类必须包含的确切证书集。
+     * 类的证书集合是从类的<tt> ProtectionDomain </tt>中的{@link java.security.CodeSource <tt> CodeSource </tt>}获取的。
+     * 添加到该程序包的任何类都必须包含相同的证书集,否则将抛出<tt> SecurityException </tt>。
+     * 请注意,如果<tt> name </tt>是<tt> null </tt>,则不执行此检查。您应该总是传递您定义的类的<a href="#name">二进制名称</a>以及字节。
+     * 这确保您定义的类确实是您认为的类。
+     * 
+     *  <p>指定的<tt>名称</tt>不能以"<tt> java。</tt>"开头,因为"<tt> java。
+     * * </tt>如果<tt> name </tt>不是<tt> null </tt>,则它必须等于指定类的<a href="#name">二进制名称</a>由字节数组"<tt> b </tt>",否则将抛
+     * 出{@link NoClassDefFoundError <tt> NoClassDefFoundError </tt>}。
+     *  <p>指定的<tt>名称</tt>不能以"<tt> java。</tt>"开头,因为"<tt> java。</p>。
+     * 
+     * 
      * @param  name
      *         The expected <a href="#name">binary name</a> of the class, or
      *         <tt>null</tt> if not known
@@ -791,6 +950,23 @@ public abstract class ClassLoader {
      * temp.length, pd);<br>
      * </tt></p>
      *
+     * <p>
+     * 将{@link java.nio.ByteBuffer <tt> ByteBuffer </tt>}转换为<tt> Class </tt>类的实例,并使用可选的<tt> ProtectionDomain
+     *  </tt>。
+     * 如果域是<tt> null </tt>,那么默认域将被分配给{@link #defineClass(String,byte [],int,int)}文档中指定的类。在类可以使用之前必须解决。
+     * 
+     *  <p>在包中定义的第一个类的规则决定了包的证书集,以及对类名的限制与{@link #defineClass(String,byte [],int ,int,ProtectionDomain)}。
+     * 
+     *  <p>调用此方法的形式<i> cl </i> <tt> .defineClass(</tt> <i> name </i> <tt>,</tt> <i> bBuffer < / i> <tt>,</tt>
+     *  <i> pd </i> <tt>)</tt>产生与语句完全相同的结果。
+     * 
+     *  p> <tt> ... <br> byte [] temp = new byte [bBuffer。
+     * {@ link java.nio.ByteBuffer#remaining remaining}()]; <br> bBuffer.{@link java.nio.ByteBuffer #get(byte [])get}
+     * (temp); <br> return {@link #defineClass(String,byte [],int,int,ProtectionDomain)cl.defineClass}(name,
+     * temp,0,temp.length, pd); <br> </tt> </p>。
+     *  p> <tt> ... <br> byte [] temp = new byte [bBuffer。
+     * 
+     * 
      * @param  name
      *         The expected <a href="#name">binary name</a>. of the class, or
      *         <tt>null</tt> if not known
@@ -900,6 +1076,9 @@ public abstract class ClassLoader {
     /**
      * check to make sure the certs for the new class (certs) are the same as
      * the certs for the first class inserted in the package (pcerts)
+     * <p>
+     *  检查以确保新类别(证书)的证书与插入包裹中的第一类证书(证书)相同。
+     * 
      */
     private boolean compareCerts(Certificate[] pcerts,
                                  Certificate[] certs)
@@ -949,6 +1128,11 @@ public abstract class ClassLoader {
      * class is linked as described in the "Execution" chapter of
      * <cite>The Java&trade; Language Specification</cite>.
      *
+     * <p>
+     * 链接指定的类。这个(误导性的)方法可以由类加载器用来链接类。如果<tt> c </tt>类已经被链接,那么这个方法就返回。否则,类将按照<cite> Java&trade;的执行章节中所述进行链接。
+     * 语言规范</cite>。
+     * 
+     * 
      * @param  c
      *         The class to link
      *
@@ -974,6 +1158,14 @@ public abstract class ClassLoader {
      * because most class loaders need to override just {@link
      * #findClass(String)}.  </p>
      *
+     * <p>
+     *  查找具有指定的<a href="#name">二进制名称</a>的类,如有必要,请加载该类。
+     * 
+     *  <p>此方法通过系统类加载器加载类(请参阅{@link #getSystemClassLoader()})。
+     * 返回的<tt> Class </tt>对象可能有多个<tt> ClassLoader </tt>与之关联。
+     *  <tt> ClassLoader </tt>的子类不需要调用此方法,因为大多数类加载器只需要覆盖{@link #findClass(String)}。 </p>。
+     * 
+     * 
      * @param  name
      *         The <a href="#name">binary name</a> of the class
      *
@@ -1004,6 +1196,9 @@ public abstract class ClassLoader {
     /**
      * Returns a class loaded by the bootstrap class loader;
      * or return null if not found.
+     * <p>
+     *  返回由引导类加载器加载的类;或如果找不到则返回null。
+     * 
      */
     private Class<?> findBootstrapClassOrNull(String name)
     {
@@ -1021,6 +1216,11 @@ public abstract class ClassLoader {
      * loader of a class with that <a href="#name">binary name</a>.  Otherwise
      * <tt>null</tt> is returned.
      *
+     * <p>
+     *  如果此加载器已由Java虚拟机记录为具有该<a href="#name">类的启动加载程序,则返回具有给定<a href="#name">二进制名称</a>的类二进制名称</a>。
+     * 否则返回<tt> null </tt>。
+     * 
+     * 
      * @param  name
      *         The <a href="#name">binary name</a> of the class
      *
@@ -1041,6 +1241,10 @@ public abstract class ClassLoader {
      * Sets the signers of a class.  This should be invoked after defining a
      * class.
      *
+     * <p>
+     *  设置类的签名者。这应该在定义一个类后被调用。
+     * 
+     * 
      * @param  c
      *         The <tt>Class</tt> object
      *
@@ -1073,6 +1277,17 @@ public abstract class ClassLoader {
      * implementation ensures that any delegation is consistent with the {@link
      * #getResources(java.lang.String) getResources(String)} method.
      *
+     * <p>
+     *  查找具有给定名称的资源。资源是可以通过类代码以独立于代码的位置的方式访问的一些数据(图像,音频,文本等)。
+     * 
+     *  <p>资源的名称是标识资源的"<tt> / </tt>" - 分隔的路径名。
+     * 
+     * <p>此方法将首先搜索父类加载器的资源;如果父代为<tt> null </tt>,则搜索虚拟机内置的类装入器的路径。
+     * 那个失败,这个方法将调用{@link #findResource(String)}来查找资源。 </p>。
+     * 
+     *  @apiNote当覆盖此方法时,建议实施确保任何委托与{@link #getResources(java.lang.String)getResources(String)}方法一致。
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -1113,6 +1328,17 @@ public abstract class ClassLoader {
      * {@code nextElement} method is the same resource that the
      * {@code getResource(String)} method would return.
      *
+     * <p>
+     *  查找具有给定名称的所有资源。资源是可以通过类代码以独立于代码的位置的方式访问的一些数据(图像,音频,文本等)。
+     * 
+     *  <p>资源的名称是标识资源的<tt> / </tt>分隔的路径名称。
+     * 
+     *  <p>搜索顺序在{@link #getResource(String)}的文档中有描述。 </p>
+     * 
+     *  @apiNote当覆盖此方法时,建议实施确保任何委托与{@link #getResource(java.lang.String)getResource(String)}方法一致。
+     * 这应该确保枚举的{@code nextElement}方法返回的第一个元素与{@code getResource(String)}方法返回的资源相同。
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -1145,6 +1371,10 @@ public abstract class ClassLoader {
      * Finds the resource with the given name. Class loader implementations
      * should override this method to specify where to find resources.
      *
+     * <p>
+     *  查找具有给定名称的资源。类加载器实现应该覆盖此方法以指定在哪里找到资源。
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -1163,6 +1393,10 @@ public abstract class ClassLoader {
      * implementations should override this method to specify where to load
      * resources from.
      *
+     * <p>
+     * 返回表示具有给定名称的所有资源的{@link java.net.URL <tt> URL </tt>}对象的枚举。类加载器实现应该覆盖此方法以指定从何处加载资源。
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -1190,6 +1424,14 @@ public abstract class ClassLoader {
      * <p>Note that once a class loader is registered as parallel capable, there
      * is no way to change it back.</p>
      *
+     * <p>
+     *  将调用者注册为并行能力。当且仅当满足以下所有条件时,注册成功：
+     * <ol>
+     *  <li>未创建任何调用者实例</li> <li>调用者的所有超类(除类Object外)都被注册为并行功能</li>
+     * </ol>
+     *  <p>请注意,一旦类加载器注册为并行能力,则无法将其改回。</p>
+     * 
+     * 
      * @return  true if the caller is successfully registered as
      *          parallel capable and false if otherwise.
      *
@@ -1207,6 +1449,10 @@ public abstract class ClassLoader {
      * classes.  This method locates the resource through the system class
      * loader (see {@link #getSystemClassLoader()}).
      *
+     * <p>
+     *  从用于加载类的搜索路径中查找指定名称的资源。此方法通过系统类加载器查找资源(请参阅{@link #getSystemClassLoader()})。
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -1232,6 +1478,13 @@ public abstract class ClassLoader {
      * <p> The search order is described in the documentation for {@link
      * #getSystemResource(String)}.  </p>
      *
+     * <p>
+     *  从用于加载类的搜索路径中查找指定名称的所有资源。
+     * 因此找到的资源将作为{@link java.net.URL <tt> URL </tt>}对象的{@link java.util.Enumeration <tt>枚举</tt>}返回。
+     * 
+     *  <p>搜索顺序在{@link #getSystemResource(String)}的文档中有所描述。 </p>
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -1255,6 +1508,9 @@ public abstract class ClassLoader {
 
     /**
      * Find resources from the VM's built-in classloader.
+     * <p>
+     *  从VM的内置类加载器中查找资源。
+     * 
      */
     private static URL getBootstrapResource(String name) {
         URLClassPath ucp = getBootstrapClassPath();
@@ -1264,6 +1520,9 @@ public abstract class ClassLoader {
 
     /**
      * Find resources from the VM's built-in classloader.
+     * <p>
+     *  从VM的内置类加载器中查找资源。
+     * 
      */
     private static Enumeration<URL> getBootstrapResources(String name)
         throws IOException
@@ -1292,6 +1551,12 @@ public abstract class ClassLoader {
      * <p> The search order is described in the documentation for {@link
      * #getResource(String)}.  </p>
      *
+     * <p>
+     *  返回读取指定资源的输入流。
+     * 
+     *  <p>搜索顺序在{@link #getResource(String)}的文档中有描述。 </p>
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -1314,6 +1579,10 @@ public abstract class ClassLoader {
      * used to load classes.  This method locates the resource through the
      * system class loader (see {@link #getSystemClassLoader()}).
      *
+     * <p>
+     * 从用于加载类的搜索路径中打开读取指定名称的资源。此方法通过系统类加载器查找资源(请参阅{@link #getSystemClassLoader()})。
+     * 
+     * 
      * @param  name
      *         The resource name
      *
@@ -1350,6 +1619,14 @@ public abstract class ClassLoader {
      * access to the parent class loader is permitted.  If not, a
      * <tt>SecurityException</tt> will be thrown.  </p>
      *
+     * <p>
+     *  返回用于委派的父类装入器。一些实现可以使用<tt> null </tt>来表示引导类加载器。如果此类加载器的父类是引导类加载器,则此方法将在此类实现中返回<tt> null </tt>。
+     * 
+     *  <p>如果存在安全管理器,并且调用者的类加载器不是<tt> null </tt>,并且不是此类加载器的祖先,则此方法调用安全管理器的{@link SecurityManager#checkPermission .checkPermission)<tt> RuntimePermission("getClassLoader")</tt>}
+     * 允许验证对父类加载器的访问权限的方法(.security.Permission)<tt> checkPermission </tt>允许。
+     * 如果没有,将会抛出<tt> SecurityException </tt>。 </p>。
+     * 
+     * 
      * @return  The parent <tt>ClassLoader</tt>
      *
      * @throws  SecurityException
@@ -1406,6 +1683,23 @@ public abstract class ClassLoader {
      * access to the system class loader.  If not, a
      * <tt>SecurityException</tt> will be thrown.  </p>
      *
+     * <p>
+     *  返回用于委派的系统类装入器。这是新<tt> ClassLoader </tt>实例的默认委托父对象,通常是用于启动应用程序的类加载器。
+     * 
+     *  <p>此方法首先在运行时的启动序列中被调用,此时它创建系统类加载器并将其设置为调用<tt> Thread </tt>的上下文类加载器。
+     * 
+     *  <p>默认系统类加载器是此类的实现相关实例。
+     * 
+     * <p>如果系统属性"<tt> java.system.class.loader </tt>"在首次调用此方法时定义,那么该属性的值将被视为将返回的类的名称作为系统类加载器。
+     * 该类使用默认系统类加载器加载,并且必须定义一个公共构造函数,该构造函数接受一个类型为<tt> ClassLoader </tt>的单一参数,该参数用作代理父级。
+     * 然后使用此默认系统类加载器作为参数的构造函数创建一个实例。生成的类加载器被定义为系统类加载器。
+     * 
+     *  <p>如果存在安全管理器,并且调用者的类加载器不是<tt> null </tt>,并且调用器的类加载器与系统类加载器不同或者是系统类加载器的祖先,则此方法调用安全性经理的{@link SecurityManager#checkPermission(java.security.Permission)<tt> checkPermission </tt>}
+     * 方法与{@link RuntimePermission#RuntimePermission(String)<tt> RuntimePermission("getClassLoader")</tt>}权限
+     * 以验证对系统类装入器的访问。
+     * 如果没有,将会抛出<tt> SecurityException </tt>。 </p>。
+     * 
+     * 
      * @return  The system <tt>ClassLoader</tt> for delegation, or
      *          <tt>null</tt> if none
      *
@@ -1515,6 +1809,9 @@ public abstract class ClassLoader {
      * Checks RuntimePermission("getClassLoader") permission
      * if caller's class loader is not null and caller's class loader
      * is not the same as or an ancestor of the given cl argument.
+     * <p>
+     *  如果调用者的类加载器不为null,并且调用者的类加载器与给定的cl参数的祖先不相同或者是祖先,则检查RuntimePermission("getClassLoader")权限。
+     * 
      */
     static void checkClassLoaderPermission(ClassLoader cl, Class<?> caller) {
         SecurityManager sm = System.getSecurityManager();
@@ -1545,6 +1842,10 @@ public abstract class ClassLoader {
      * unique within a class loader and cannot be redefined or changed once
      * created.
      *
+     * <p>
+     * 在此<tt> ClassLoader </tt>中按名称定义包。这允许类装载器为它们的类定义包。包必须在定义类之前创建,并且包名在类加载器中必须是唯一的,并且一旦创建,就不能重新定义或更改。
+     * 
+     * 
      * @param  name
      *         The package name
      *
@@ -1602,6 +1903,10 @@ public abstract class ClassLoader {
      * Returns a <tt>Package</tt> that has been defined by this class loader
      * or any of its ancestors.
      *
+     * <p>
+     *  返回由此类加载器或其任何祖先定义的<tt>包</tt>。
+     * 
+     * 
      * @param  name
      *         The package name
      *
@@ -1639,6 +1944,10 @@ public abstract class ClassLoader {
      * Returns all of the <tt>Packages</tt> defined by this class loader and
      * its ancestors.
      *
+     * <p>
+     *  返回此类加载器及其祖先定义的所有<tt>包</tt>。
+     * 
+     * 
      * @return  The array of <tt>Package</tt> objects defined by this
      *          <tt>ClassLoader</tt>
      *
@@ -1676,6 +1985,11 @@ public abstract class ClassLoader {
      * searches the library along the path specified as the
      * "<tt>java.library.path</tt>" property.
      *
+     * <p>
+     *  返回本机库的绝对路径名。 VM调用此方法来查找属于使用此类加载器加载的类的本机库。
+     * 如果此方法返回<tt> null </tt>,VM将沿着指定为"<tt> java.library.path </tt>"属性的路径搜索库。
+     * 
+     * 
      * @param  libname
      *         The library name
      *
@@ -1702,6 +2016,13 @@ public abstract class ClassLoader {
      * the VM when it loads the library, and used by the VM to pass the correct
      * version of JNI to the native methods.  </p>
      *
+     * <p>
+     *  内部类NativeLibrary表示加载的本机库实例。每个类加载器都在私有字段<tt> nativeLibraries </tt>中包含加载的本机库的向量。
+     * 加载到系统中的本机库被输入到<tt> systemNativeLibraries </tt>向量中。
+     * 
+     *  <p>每个本地库都需要特定版本的JNI。这由私有<tt> jniVersion </tt>字段表示。此字段由VM在加载库时设置,并由VM用于将正确版本的JNI传递给本机方法。 </p>
+     * 
+     * 
      * @see      ClassLoader
      * @since    1.2
      */
@@ -1916,6 +2237,13 @@ public abstract class ClassLoader {
                  * If there is a pending load operation for the library, we
                  * immediately return success; otherwise, we raise
                  * UnsatisfiedLinkError.
+                 * <p>
+                 *  因为Runtime.load和Runtime.loadLibrary是同步的)。原因是可能发生的是,JNI_OnLoad函数可能导致另一个loadLibrary调用。
+                 * 
+                 * 因此,我们可以使用静态堆栈来保存我们正在加载的库列表。
+                 * 
+                 *  如果库有挂起的装入操作,我们立即返回成功;否则,我们引发UnsatisfiedLinkError。
+                 * 
                  */
                 int n = nativeLibraryContext.size();
                 for (int i = 0; i < n; i++) {
@@ -1996,6 +2324,13 @@ public abstract class ClassLoader {
      * invoking {@link #setPackageAssertionStatus(String, boolean)} or {@link
      * #setClassAssertionStatus(String, boolean)}.
      *
+     * <p>
+     *  设置此类加载器的默认断言状态。此设置确定由此类加载器加载并在将来初始化的类是否将默认启用或禁用断言。
+     * 此设置可以通过调用{@link #setPackageAssertionStatus(String,boolean)}或{@link #setClassAssertionStatus(String,boolean)}
+     * 在每个包或每个类上覆盖。
+     *  设置此类加载器的默认断言状态。此设置确定由此类加载器加载并在将来初始化的类是否将默认启用或禁用断言。
+     * 
+     * 
      * @param  enabled
      *         <tt>true</tt> if classes loaded by this class loader will
      *         henceforth have assertions enabled by default, <tt>false</tt>
@@ -2034,6 +2369,20 @@ public abstract class ClassLoader {
      * assertion status, and may be overridden on a per-class basis by invoking
      * {@link #setClassAssertionStatus(String, boolean)}.  </p>
      *
+     * <p>
+     *  设置命名软件包的软件包默认断言状态。包默认断言状态确定将来初始化的类属于命名包或其任何"子包"的断言状态。
+     * 
+     *  <p>名为p的包的子包是任何以"<tt> p。</tt>"开头的包。
+     * 例如,<tt> javax.swing.text </tt>是<tt> javax.swing </tt>的子包,以及<tt> java.util </tt>和<tt> java.lang的子包。
+     * 反映</tt>是<tt> java </tt>的子包。
+     * 
+     *  <p>如果多个包默认值应用于给定类,则与最特定包相关的包默认值优先于其他包。
+     * 例如,如果<tt> javax.lang </tt>和<tt> javax.lang.reflect </tt>都具有与其关联的包默认值,则后一个包默认适用于<tt> javax.lang中的类。
+     * 反映</tt>。
+     * 
+     * <p>包默认值优先于类加载器的默认断言状态,并且可以通过调用{@link #setClassAssertionStatus(String,boolean)}在每个类的基础上重写。 </p>
+     * 
+     * 
      * @param  packageName
      *         The name of the package whose package default assertion status
      *         is to be set. A <tt>null</tt> value indicates the unnamed
@@ -2070,6 +2419,13 @@ public abstract class ClassLoader {
      * <p> If the named class is not a top-level class, this invocation will
      * have no effect on the actual assertion status of any class. </p>
      *
+     * <p>
+     *  设置此类加载器中命名的顶级类以及其中包含的任何嵌套类的期望断言状态。此设置优先于类加载器的默认断言状态,并优于任何适用的每包默认值。如果已命名的类已经初始化,则此方法不起作用。
+     *  (一旦类被初始化,其断言状态不能改变。)。
+     * 
+     *  <p>如果命名类不是顶级类,则此调用将不会影响任何类的实际断言状态。 </p>
+     * 
+     * 
      * @param  className
      *         The fully qualified class name of the top-level class whose
      *         assertion status is to be set.
@@ -2097,12 +2453,20 @@ public abstract class ClassLoader {
      * provided so that class loaders can be made to ignore any command line or
      * persistent assertion status settings and "start with a clean slate."
      *
+     * <p>
+     *  将此类加载器的默认断言状态设置为<tt> false </tt>,并丢弃与类加载器关联的任何软件包默认值或类断言状态设置。
+     * 提供此方法,以便类加载器可以忽略任何命令行或持久断言状态设置和"以干净的状态开始"。
+     * 
+     * 
      * @since  1.4
      */
     public void clearAssertionStatus() {
         /*
          * Whether or not "Java assertion maps" are initialized, set
          * them to empty maps, effectively ignoring any present settings.
+         * <p>
+         *  无论是否初始化"Java断言映射",将它们设置为空映射,有效地忽略任何当前设置。
+         * 
          */
         synchronized (assertionLock) {
             classAssertionStatus = new HashMap<>();
@@ -2121,6 +2485,10 @@ public abstract class ClassLoader {
      * otherwise, this class loader's default assertion status is returned.
      * </p>
      *
+     * <p>
+     * 返回将分配给指定类的断言状态(如果在调用此方法时要初始化该类)。
+     * 如果命名类已设置其断言状态,则将返回最近的设置;否则,如果任何包默认断言状态属于该类,则返回最特定的相关包默认断言状态的最近设置;否则,将返回此类加载器的缺省断言状态。
+     * 
      * @param  className
      *         The fully qualified class name of the class whose desired
      *         assertion status is being queried.

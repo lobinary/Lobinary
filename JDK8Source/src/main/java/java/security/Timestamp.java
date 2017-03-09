@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import java.util.List;
  * It includes the timestamp's date and time as well as information about the
  * Timestamping Authority (TSA) which generated and signed the timestamp.
  *
+ * <p>
+ *  此类封装有关签名的时间戳的信息。它是不可变的。它包括时间戳的日期和时间以及生成和签名时间戳的时间戳记授权(TSA)的信息。
+ * 
+ * 
  * @since 1.5
  * @author Vincent Ryan
  */
@@ -49,6 +54,10 @@ public final class Timestamp implements Serializable {
     /**
      * The timestamp's date and time
      *
+     * <p>
+     *  时间戳的日期和时间
+     * 
+     * 
      * @serial
      */
     private Date timestamp;
@@ -56,18 +65,29 @@ public final class Timestamp implements Serializable {
     /**
      * The TSA's certificate path.
      *
+     * <p>
+     *  TSA的证书路径。
+     * 
+     * 
      * @serial
      */
     private CertPath signerCertPath;
 
     /*
      * Hash code for this timestamp.
+     * <p>
+     *  此时间戳的哈希代码。
+     * 
      */
     private transient int myhash = -1;
 
     /**
      * Constructs a Timestamp.
      *
+     * <p>
+     *  构造时间戳。
+     * 
+     * 
      * @param timestamp is the timestamp's date and time. It must not be null.
      * @param signerCertPath is the TSA's certificate path. It must not be null.
      * @throws NullPointerException if timestamp or signerCertPath is null.
@@ -83,6 +103,10 @@ public final class Timestamp implements Serializable {
     /**
      * Returns the date and time when the timestamp was generated.
      *
+     * <p>
+     *  返回生成时间戳的日期和时间。
+     * 
+     * 
      * @return The timestamp's date and time.
      */
     public Date getTimestamp() {
@@ -92,6 +116,10 @@ public final class Timestamp implements Serializable {
     /**
      * Returns the certificate path for the Timestamping Authority.
      *
+     * <p>
+     *  返回时间戳记权威机构的证书路径。
+     * 
+     * 
      * @return The TSA's certificate path.
      */
     public CertPath getSignerCertPath() {
@@ -103,6 +131,10 @@ public final class Timestamp implements Serializable {
      * The hash code is generated using the date and time of the timestamp
      * and the TSA's certificate path.
      *
+     * <p>
+     *  返回此时间戳的哈希码值。散列码是使用时间戳的日期和时间以及TSA的证书路径生成的。
+     * 
+     * 
      * @return a hash code value for this timestamp.
      */
     public int hashCode() {
@@ -117,6 +149,10 @@ public final class Timestamp implements Serializable {
      * timestamp. Two timestamps are considered equal if the date and time of
      * their timestamp's and their signer's certificate paths are equal.
      *
+     * <p>
+     *  测试指定对象与此时间戳之间的相等性。如果两个时间戳的时间戳及其签名者的证书路径的日期和时间相等,则两个时间戳被视为相等。
+     * 
+     * 
      * @param obj the object to test for equality with this timestamp.
      *
      * @return true if the timestamp are considered equal, false otherwise.
@@ -137,6 +173,9 @@ public final class Timestamp implements Serializable {
     /**
      * Returns a string describing this timestamp.
      *
+     * <p>
+     *  返回描述此时间戳的字符串。
+     * 
      * @return A string comprising the date and time of the timestamp and
      *         its signer's certificate.
      */

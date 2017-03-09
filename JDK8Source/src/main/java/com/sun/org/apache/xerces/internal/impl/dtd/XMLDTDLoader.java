@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,33 @@
  * Business Machines, Inc., http://www.apache.org.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)1999-2003 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得将"Xerces"和"Apache Software Foundation"名称用于支持或推广从本软件衍生的产品。如需书面许可,请联系apache@apache.org。
+ * 
+ *  未经Apache软件基金会事先书面许可,从本软件派生的产品可能不会被称为"Apache",也不可能出现在他们的名字中。
+ * 
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
+ * 本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款,最初是基于软件版权(c)1999,国际商业机器公司,http://www.apache.org。
+ * 有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dtd;
@@ -105,6 +133,20 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource;
  *
  * @xerces.internal
  *
+ * <p>
+ *  DTD加载器。加载器知道如何从XMLInputSources构建语法。它扩展了DTD处理器来做到这一点;它是一个单独的类,因为DTD处理器不需要知道如何作为实例文档助手与外部世界交谈。
+ * <p>
+ * 此组件需要以下功能和属性。它知道如果没有其他人,设置他们：从
+ * <ul>
+ *  <li> http://xml.org/sax/features/namespaces </li> <li> http://apache.org/xml/properties/internal/sym
+ * bol-table </li> <li> http：/ /apache.org/xml/properties/internal/error-reporter </li> <li> http://apac
+ * he.org/xml/properties/internal/grammar-pool </li> <li> http：// apache .org / xml / properties / inter
+ * nal / datatype-validator-factory </li>。
+ * </ul>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neil Graham, IBM
  * @author Michael Glavassevich, IBM
  *
@@ -234,6 +276,9 @@ public class XMLDTDLoader
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的要素标识符列表。如果此组件未识别任何功能,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedFeatures() {
         return (String[])(LOADER_RECOGNIZED_FEATURES.clone());
@@ -246,6 +291,12 @@ public class XMLDTDLoader
      * <strong>Note:</strong> Components should silently ignore features
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置要素的状态。当特性改变状态时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应默认忽略不影响组件操作的功能。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -283,6 +334,9 @@ public class XMLDTDLoader
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符列表。如果此组件未识别任何属性,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedProperties() {
         return (String[])(LOADER_RECOGNIZED_PROPERTIES.clone());
@@ -291,6 +345,10 @@ public class XMLDTDLoader
     /**
      * Returns the state of a property.
      *
+     * <p>
+     *  返回属性的状态。
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @throws XMLConfigurationException Thrown on configuration error.
@@ -328,6 +386,12 @@ public class XMLDTDLoader
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置属性的值。当属性更改值时,组件管理器在重置后任何时候调用此方法。
+     * <p>
+     *  <strong>注意：</strong>组件应静默忽略不影响组件操作的属性。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *
@@ -375,6 +439,10 @@ public class XMLDTDLoader
     /**
      * Returns the state of a feature.
      *
+     * <p>
+     *  返回要素的状态。
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @throws XMLConfigurationException Thrown on configuration error.
@@ -405,6 +473,10 @@ public class XMLDTDLoader
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception XNIException Thrown if the parser does not support the
@@ -424,6 +496,10 @@ public class XMLDTDLoader
     /**
      * Sets the error handler.
      *
+     * <p>
+     *  设置错误处理程序。
+     * 
+     * 
      * @param errorHandler The error handler.
      */
     public void setErrorHandler(XMLErrorHandler errorHandler) {
@@ -438,6 +514,10 @@ public class XMLDTDLoader
     /**
      * Sets the entity resolver.
      *
+     * <p>
+     *  设置实体解析器。
+     * 
+     * 
      * @param entityResolver The new entity resolver.
      */
     public void setEntityResolver(XMLEntityResolver entityResolver) {
@@ -454,6 +534,10 @@ public class XMLDTDLoader
      * Returns a Grammar object by parsing the contents of the
      * entity pointed to by source.
      *
+     * <p>
+     * 通过解析源指向的实体的内容来返回语法对象。
+     * 
+     * 
      * @param source        the location of the entity which forms
      *                          the starting point of the grammar to be constructed.
      * @throws IOException      When a problem is encountered reading the entity
@@ -498,6 +582,8 @@ public class XMLDTDLoader
     /**
      * Parse a DTD internal and/or external subset and insert the content
      * into the existing DTD grammar owned by the given DTDValidator.
+     * <p>
+     *  解析DTD内部和/或外部子集,并将内容插入给定DTDValidator拥有的现有DTD语法。
      */
     public void loadGrammarWithContext(XMLDTDValidator validator, String rootName,
             String publicId, String systemId, String baseSystemId, String internalSubset)

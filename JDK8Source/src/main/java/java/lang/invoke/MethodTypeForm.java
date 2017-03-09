@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,14 @@ import static java.lang.invoke.MethodHandleStatics.*;
  * There are approximately 2000 distinct erased method types in the JDK.
  * There are a little over 10 times that number of unerased types.
  * No more than half of these are likely to be loaded at once.
+ * <p>
+ *  一组方法类型的共享信息,这些方法类型的区别仅在于引用类型,因此共享一个常见的擦除和包装。
+ * <p>
+ *  有关方法类型结构的经验讨论,请参见<a href="http://groups.google.com/group/jvm-languages/browse_thread/thread/ac9308ae74da9b7e/">
+ *  jvm-上的"避免拳击"语言</a>。
+ *  JDK中大约有2000种不同的已擦除方法类型。有一个超过10倍的未擦除类型的数量。不超过一半的这些可能同时加载。
+ * 
+ * 
  * @author John Rose
  */
 final class MethodTypeForm {
@@ -84,6 +93,9 @@ final class MethodTypeForm {
 
     /** Return the type corresponding uniquely (1-1) to this MT-form.
      *  It might have any primitive returns or arguments, but will have no references except Object.
+     * <p>
+     *  它可能有任何原始返回或参数,但除了Object之外没有引用。
+     * 
      */
     public MethodType erasedType() {
         return erasedType;
@@ -93,6 +105,9 @@ final class MethodTypeForm {
      *  A basic type is erased (all references Object) and also has all primitive
      *  types (except int, long, float, double, void) normalized to int.
      *  Such basic types correspond to low-level JVM calling sequences.
+     * <p>
+     *  一个基本类型被擦除(所有引用Object),并且具有归一化为int的所有基本类型(除了int,long,float,double,void)。这样的基本类型对应于低级JVM调用序列。
+     * 
      */
     public MethodType basicType() {
         return basicType;
@@ -147,6 +162,9 @@ final class MethodTypeForm {
      * Build an MTF for a given type, which must have all references erased to Object.
      * This MTF will stand for that type and all un-erased variations.
      * Eagerly compute some basic properties of the type, common to all variations.
+     * <p>
+     *  为给定类型构建MTF,必须将所有引用擦除为Object。该MTF将代表该类型和所有未擦除的变化。热衷计算类型的一些基本属性,对所有变体都是通用的。
+     * 
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     protected MethodTypeForm(MethodType erasedType) {
@@ -327,12 +345,21 @@ final class MethodTypeForm {
      * to long, regardless of size.  RAW_RETURN means convert a type
      * (assumed to be a return type) to int if it is smaller than an int,
      * or if it is void.
+     * <p>
+     * ERASE表示更改每个对{@code Object}的引用。
+     *  WRAP意味着将原语(包括{@code void})转换为相应的包装类型UNWRAP意指与WRAP相反的意思INTS意味着根据大小将所有非void原语类型转换为int或long LONGS表示转换所有
+     * 非void原语无论大小,RAW_RETURN表示将一个类型(假定为一个返回类型)转换为int,如果它小于一个int,或者它是void。
+     * ERASE表示更改每个对{@code Object}的引用。
+     * 
      */
     public static final int NO_CHANGE = 0, ERASE = 1, WRAP = 2, UNWRAP = 3, INTS = 4, LONGS = 5, RAW_RETURN = 6;
 
     /** Canonicalize the types in the given method type.
      * If any types change, intern the new type, and return it.
      * Otherwise return null.
+     * <p>
+     *  如果任何类型改变,实习新类型,并返回。否则返回null。
+     * 
      */
     public static MethodType canonicalize(MethodType mt, int howRet, int howArgs) {
         Class<?>[] ptypes = mt.ptypes();
@@ -351,6 +378,9 @@ final class MethodTypeForm {
 
     /** Canonicalize the given return or param type.
      *  Return null if the type is already canonicalized.
+     * <p>
+     *  如果类型已经是canonicalized,则返回null。
+     * 
      */
     static Class<?> canonicalize(Class<?> t, int how) {
         Class<?> ct;
@@ -403,6 +433,8 @@ final class MethodTypeForm {
 
     /** Canonicalize each param type in the given array.
      *  Return null if all types are already canonicalized.
+     * <p>
+     *  如果所有类型都已经规范化,则返回null。
      */
     static Class<?>[] canonicalizeAll(Class<?>[] ts, int how) {
         Class<?>[] cs = null;

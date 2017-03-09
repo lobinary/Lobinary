@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,22 @@ import org.xml.sax.Parser;
  * <p>Note that the application still requires an XML parser that
  * implements SAX1.</p>
  *
+ * <p>
+ *  用于动态加载SAX解析器的Java特定类。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保证</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p> <strong>注意</strong>：此类旨在与现已弃用的SAX1 {@link org.xml.sax.Parser Parser}类一起使用。
+ *  SAX2应用程序应该使用{@link org.xml.sax.helpers.XMLReaderFactory XMLReaderFactory}。</p>。
+ * 
+ *  <p> ParserFactory不是SAX的平台独立定义的一部分;它是专门为Java XML应用程序编写器设计的一个附加便利类。
+ *  SAX应用程序可以使用此类中的静态方法在运行时根据org.xml.sax.parser系统属性的值或包含类名的字符串动态分配SAX解析器。</p >。
+ * 
+ *  <p>请注意,应用程序仍需要一个实现SAX1的XML解析器。</p>
+ * 
  * @deprecated This class works with the deprecated
  *             {@link org.xml.sax.Parser Parser}
  *             interface.
@@ -70,6 +87,8 @@ public class ParserFactory {
 
     /**
      * Private null constructor.
+     * <p>
+     * 
      */
     private ParserFactory ()
     {
@@ -82,6 +101,10 @@ public class ParserFactory {
      * <p>The named class must exist and must implement the
      * {@link org.xml.sax.Parser Parser} interface.</p>
      *
+     * <p>
+     *  私有null构造函数。
+     * 
+     * 
      * @exception java.lang.NullPointerException There is no value
      *            for the `org.xml.sax.parser' system property.
      * @exception java.lang.ClassNotFoundException The SAX parser
@@ -119,6 +142,12 @@ public class ParserFactory {
      * <p>The named class must exist and must implement the
      * {@link org.xml.sax.Parser Parser} interface.</p>
      *
+     * <p>
+     *  使用`org.xml.sax.parser'系统属性创建一个新的SAX解析器。
+     * 
+     *  <p>命名类必须存在,并且必须实现{@link org.xml.sax.Parser Parser}接口。</p>
+     * 
+     * 
      * @param className A string containing the name of the
      *                  SAX parser class.
      * @exception java.lang.ClassNotFoundException The SAX parser

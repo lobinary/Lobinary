@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,9 @@ import java.util.Set;
  * <p>
  * The zid<->metazone mappings are based on CLDR metaZones.xml.
  * The alias mappings are based on Link entries in tzdb data files.
+ * <p>
+ *  一个帮助类,用于将区域名称映射到元区域,并返回到特定区域设置的相应区域ID。
+ * <p>
  */
 class ZoneName {
 

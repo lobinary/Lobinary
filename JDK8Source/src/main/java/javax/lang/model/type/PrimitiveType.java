@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,11 @@ package javax.lang.model.type;
  * {@code boolean}, {@code byte}, {@code short}, {@code int},
  * {@code long}, {@code char}, {@code float}, and {@code double}.
  *
+ * <p>
+ *  表示基本类型。
+ * 包括{@code boolean},{@code byte},{@code short},{@code int},{@code long},{@code char},{@code float}和{@code double}
+ *  。
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;

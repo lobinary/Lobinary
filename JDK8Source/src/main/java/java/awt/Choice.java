@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -66,6 +67,25 @@ import javax.accessibility.*;
  * attributes as font size and length of items contained within
  * the <code>Choice</code>.
  * <p>
+ * <p>
+ *  <code> Choice </code>类提供了一个弹出的选择菜单。当前选择显示为菜单的标题。
+ * <p>
+ *  以下代码示例生成一个弹出菜单：
+ * 
+ *  <hr> <blockquote> <pre> Choice ColorChooser = new Choice(); ColorChooser.add("Green"); ColorChooser.
+ * add("Red"); ColorChooser.add("Blue"); </pre> </blockquote> <hr>。
+ * <p>
+ *  将此选择菜单添加到面板后,其正常状态下如下所示：
+ * <p>
+ *  <img src ="doc-files / Choice-1.gif"alt ="以下文本描述了图形"
+ * style="float:center; margin: 7px 10px;">
+ * <p>
+ *  在图片中,<code>"Green"</code>是当前的选择。在对象上按下鼠标按钮会出现一个菜单,突出显示当前选择。
+ * <p>
+ *  一些本机平台不支持对<code> Choice </code>组件的任意调整大小,并且<code> setSize()/ getSize()</code>的行为受到这些限制的约束。
+ * 本地GUI <code>选择</code>组件的大小通常受诸如<code> Choice </code>中包含的项目的字体大小和长度等属性的约束。
+ * <p>
+ * 
  * @author      Sami Shaio
  * @author      Arthur van Hoff
  * @since       JDK1.0
@@ -74,6 +94,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
     /**
      * The items for the <code>Choice</code>.
      * This can be a <code>null</code> value.
+     * <p>
+     *  <code>选择</code>的项目。这可以是<code> null </code>值。
+     * 
+     * 
      * @serial
      * @see #add(String)
      * @see #addItem(String)
@@ -87,6 +111,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
     /**
      * The index of the current choice for this <code>Choice</code>
      * or -1 if nothing is selected.
+     * <p>
+     *  这个<code> Choice </code>或-1(如果没有选择)的当前选择的索引。
+     * 
+     * 
      * @serial
      * @see #getSelectedItem()
      * @see #select(int)
@@ -100,6 +128,9 @@ public class Choice extends Component implements ItemSelectable, Accessible {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -4075310674757313071L;
 
@@ -118,6 +149,12 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * By default, the first item added to the choice menu becomes the
      * selected item, until a different selection is made by the user
      * by calling one of the <code>select</code> methods.
+     * <p>
+     *  创建新的选项菜单。菜单最初没有项目。
+     * <p>
+     * 默认情况下,添加到选择菜单的第一个项目变为所选项目,直到用户通过调用<code> select </code>方法之一进行不同的选择。
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true
      * @see       java.awt.GraphicsEnvironment#isHeadless
@@ -132,6 +169,9 @@ public class Choice extends Component implements ItemSelectable, Accessible {
     /**
      * Constructs a name for this component.  Called by
      * <code>getName</code> when the name is <code>null</code>.
+     * <p>
+     *  构造此组件的名称。当名称为<code> null </code>时,由<code> getName </code>调用。
+     * 
      */
     String constructComponentName() {
         synchronized (Choice.class) {
@@ -143,6 +183,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * Creates the <code>Choice</code>'s peer.  This peer allows us
      * to change the look
      * of the <code>Choice</code> without changing its functionality.
+     * <p>
+     *  创建<code> Choice </code>的对等体。这个对等体允许我们改变<code> Choice </code>的外观,而不改变它的功能。
+     * 
+     * 
      * @see     java.awt.Toolkit#createChoice(java.awt.Choice)
      * @see     java.awt.Component#getToolkit()
      */
@@ -156,6 +200,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
 
     /**
      * Returns the number of items in this <code>Choice</code> menu.
+     * <p>
+     *  返回此<code> Choice </code>菜单中的项目数。
+     * 
+     * 
      * @return the number of items in this <code>Choice</code> menu
      * @see     #getItem
      * @since   JDK1.1
@@ -165,6 +213,8 @@ public class Choice extends Component implements ItemSelectable, Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getItemCount()</code>.
      */
@@ -176,6 +226,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
     /**
      * Gets the string at the specified index in this
      * <code>Choice</code> menu.
+     * <p>
+     *  获取此<code> Choice </code>菜单中指定索引处的字符串。
+     * 
+     * 
      * @param      index the index at which to begin
      * @see        #getItemCount
      */
@@ -186,6 +240,9 @@ public class Choice extends Component implements ItemSelectable, Accessible {
     /*
      * This is called by the native code, so client code can't
      * be called on the toolkit thread.
+     * <p>
+     *  这是由本地代码调用的,所以客户端代码不能在工具包线程上调用。
+     * 
      */
     final String getItemImpl(int index) {
         return pItems.elementAt(index);
@@ -193,6 +250,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
 
     /**
      * Adds an item to this <code>Choice</code> menu.
+     * <p>
+     *  向此<code>选择</code>菜单中添加项目。
+     * 
+     * 
      * @param      item    the item to be added
      * @exception  NullPointerException   if the item's value is
      *                  <code>null</code>
@@ -207,6 +268,12 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * <code>add</code> method instead.
      * <p>
      * Adds an item to this <code>Choice</code> menu.
+     * <p>
+     *  作为Java 2平台v1.1的已过时。请改用<code> add </code>方法。
+     * <p>
+     *  向此<code>选择</code>菜单中添加项目。
+     * 
+     * 
      * @param item the item to be added
      * @exception NullPointerException if the item's value is equal to
      *          <code>null</code>
@@ -225,6 +292,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * but does not invalidate the <code>Choice</code>.
      * Client methods must provide their own synchronization before
      * invoking this method.
+     * <p>
+     *  在<code> Choice </code>中插入项目,但不会使<code> Choice </code>无效。客户端方法必须在调用此方法之前提供自己的同步。
+     * 
+     * 
      * @param item the item to be added
      * @param index the new item position
      * @exception NullPointerException if the item's value is equal to
@@ -261,6 +332,13 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * item in the choice becomes the selected item.  If the
      * selected item was no among those shifted, it remains
      * the selected item.
+     * <p>
+     *  在指定位置将项目插入此选项。将大于或等于<code> index </code>的索引的现有项目向上移位1以容纳新项目。
+     * 如果<code> index </code>大于或等于此选项中的项数,则<code> item </code>将添加到此选择的末尾。
+     * <p>
+     * 如果项目是添加到选择中的第一个项目,则该项目变为选择。否则,如果所选项目是移动的项目之一,则选项中的第一项目变为所选项目。如果所选项目在移动的项目中不是,则其保持为所选项目。
+     * 
+     * 
      * @param item the non-<code>null</code> item to be inserted
      * @param index the position at which the item should be inserted
      * @exception IllegalArgumentException if index is less than 0
@@ -288,6 +366,11 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * selected item.  Otherwise, the currently selected
      * item remains selected (and the selected index is
      * updated accordingly).
+     * <p>
+     *  从<code>选择</code>菜单中删除第一次出现的<code>项</code>。如果要删除的项目是当前选定的项目,则选项中的第一个项目将成为所选项目。
+     * 否则,当前选择的项目保持选中状态(并且相应地更新所选索引)。
+     * 
+     * 
      * @param      item  the item to remove from this <code>Choice</code> menu
      * @exception  IllegalArgumentException  if the item doesn't
      *                     exist in the choice menu
@@ -316,6 +399,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * selected item.  Otherwise, the currently selected
      * item remains selected (and the selected index is
      * updated accordingly).
+     * <p>
+     *  从指定位置的选项菜单中删除项目。如果要删除的项目是当前选定的项目,则选项中的第一个项目将成为所选项目。否则,当前选择的项目保持选中状态(并且相应地更新所选索引)。
+     * 
+     * 
      * @param      position the position of the item
      * @throws IndexOutOfBoundsException if the specified
      *          position is out of bounds
@@ -335,6 +422,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * specified position, but does not invalidate the <code>Choice</code>.
      * Client methods must provide their
      * own synchronization before invoking this method.
+     * <p>
+     *  从指定位置的<code> Choice </code>中移除项目,但不会使<code> Choice </code>无效。客户端方法必须在调用此方法之前提供自己的同步。
+     * 
+     * 
      * @param      position   the position of the item
      */
     private void removeNoInvalidate(int position) {
@@ -356,6 +447,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
 
     /**
      * Removes all items from the choice menu.
+     * <p>
+     *  从选项菜单中删除所有项目。
+     * 
+     * 
      * @see       #remove
      * @since     JDK1.1
      */
@@ -374,6 +469,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
 
     /**
      * Gets a representation of the current choice as a string.
+     * <p>
+     *  以字符串形式获取当前选择的表示。
+     * 
+     * 
      * @return    a string representation of the currently
      *                     selected item in this choice menu
      * @see       #getSelectedIndex
@@ -385,6 +484,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
     /**
      * Returns an array (length 1) containing the currently selected
      * item.  If this choice has no items, returns <code>null</code>.
+     * <p>
+     *  返回包含当前选定项目的数组(长度1)。如果此选择没有项目,则返回<code> null </code>。
+     * 
+     * 
      * @see ItemSelectable
      */
     public synchronized Object[] getSelectedObjects() {
@@ -400,6 +503,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * Returns the index of the currently selected item.
      * If nothing is selected, returns -1.
      *
+     * <p>
+     *  返回当前选定项目的索引。如果没有选择,返回-1。
+     * 
+     * 
      * @return the index of the currently selected item, or -1 if nothing
      *  is currently selected
      * @see #getSelectedItem
@@ -418,6 +525,13 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * an <code>ItemEvent</code>.  The only way to trigger an
      * <code>ItemEvent</code> is by user interaction.
      *
+     * <p>
+     * 将此<code> Choice </code>菜单中的选定项目设置为指定位置的项目。
+     * 
+     *  <p>请注意,此方法应主要用于初始选择此组件中的项目。以编程方式调用此方法将</i>不会触发<code> ItemEvent </code>。
+     * 触发<code> ItemEvent </code>的唯一方法是通过用户交互。
+     * 
+     * 
      * @param      pos      the position of the selected item
      * @exception  IllegalArgumentException if the specified
      *                            position is greater than the
@@ -450,6 +564,13 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * an <code>ItemEvent</code>.  The only way to trigger an
      * <code>ItemEvent</code> is by user interaction.
      *
+     * <p>
+     *  将此<code> Choice </code>菜单中的选定项目设置为名称等于指定字符串的项目。如果多个项目与指定的字符串匹配(等于),则选择索引最小的字符串。
+     * 
+     *  <p>请注意,此方法应主要用于初始选择此组件中的项目。以编程方式调用此方法将</i>不会触发<code> ItemEvent </code>。
+     * 触发<code> ItemEvent </code>的唯一方法是通过用户交互。
+     * 
+     * 
      * @param       str     the specified string
      * @see         #getSelectedItem
      * @see         #getSelectedIndex
@@ -469,6 +590,12 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * is performed.
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
+     * <p>
+     *  添加指定的项目监听器以从此<code> Choice </code>菜单接收项目事件。项目事件是响应用户输入而发送的,但不响应对<code> select </code>的调用。
+     * 如果l是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param         l    the item listener
      * @see           #removeItemListener
      * @see           #getItemListeners
@@ -492,6 +619,11 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * action is performed.
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
+     * <p>
+     * 删除指定的项目侦听器,使其不再从此<code> Choice </code>菜单接收项目事件。如果l是<code> null </code>,则不抛出异常,并且不执行任何操作。
+     *  <p>有关AWT的线程模型的详细信息,请参阅<a href="doc-files/AWTThreadIssues.html#ListenersThreads"> AWT线程问题</a>。
+     * 
+     * 
      * @param         l    the item listener
      * @see           #addItemListener
      * @see           #getItemListeners
@@ -510,6 +642,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * Returns an array of all the item listeners
      * registered on this choice.
      *
+     * <p>
+     *  返回在此选择上注册的所有项目侦听器的数组。
+     * 
+     * 
      * @return all of this choice's <code>ItemListener</code>s
      *         or an empty array if no item
      *         listeners are currently registered
@@ -543,6 +679,19 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此<code> Choice </code>上注册为<code> <em> Foo </em>侦听器</code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * 
+     * <p>
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询其项目侦听器的<code> Choice </code> <code> c </code>：。
+     * 
+     *  <pre> ItemListener [] ils =(ItemListener [])(c.getListeners(ItemListener.class)); </pre>
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -588,6 +737,11 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  处理此选择上的事件。如果事件是<code> ItemEvent </code>的实例,它会调用<code> processItemEvent </code>方法。
+     * 否则,它调用其超类的<code> processEvent </code>方法。 <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param      e the event
      * @see        java.awt.event.ItemEvent
      * @see        #processItemEvent
@@ -618,6 +772,17 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将它们分发到任何已注册的<code> ItemListener </code>对象来处理在此<code> Choice </code>菜单上发生的项目事件。
+     * <p>
+     * 除非为此组件启用项目事件,否则不会调用此方法。当发生以下情况之一时,将启用项目事件：
+     * <ul>
+     *  <li> <code> ItemListener </code>对象通过<code> addItemListener </code>注册。
+     *  <li>项目事件通过<code> enableEvents </code>启用。
+     * </ul>
+     *  <p>请注意,如果事件参数为<code> null </code>,则此行为未指定,并可能导致异常。
+     * 
+     * 
      * @param       e the item event
      * @see         java.awt.event.ItemEvent
      * @see         java.awt.event.ItemListener
@@ -639,6 +804,11 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     *  返回表示此<code> Choice </code>菜单的状态的字符串。此方法仅用于调试目的,并且返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是<code> null </code>。
+     * 
+     * 
      * @return    the parameter string of this <code>Choice</code> menu
      */
     protected String paramString() {
@@ -647,10 +817,15 @@ public class Choice extends Component implements ItemSelectable, Accessible {
 
 
     /* Serialization support.
+    /* <p>
      */
 
     /*
      * Choice Serial Data Version.
+     * <p>
+     *  选择串行数据版本。
+     * 
+     * 
      * @serial
      */
     private int choiceSerializedDataVersion = 1;
@@ -662,6 +837,11 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * <code>ItemListeners</code> are detected and
      * no attempt is made to serialize them.
      *
+     * <p>
+     *  将缺省可序列化字段写入流。将可序列化的<code> ItemListeners </code>列表写为可选数据。
+     * 检测到不可序列化的<code> ItemListeners </code>,并且不尝试将它们序列化。
+     * 
+     * 
      * @param s the <code>ObjectOutputStream</code> to write
      * @serialData <code>null</code> terminated sequence of 0
      *   or more pairs; the pair consists of a <code>String</code>
@@ -689,6 +869,12 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * item events fired by the <code>Choice</code> item.
      * Unrecognized keys or values will be ignored.
      *
+     * <p>
+     *  读取<code> ObjectInputStream </code>,如果不是<code> null </code>添加了一个侦听器来接收由<code> Choice </code>项目触发的项目事件
+     * 。
+     * 无法识别的键或值将被忽略。
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      * @exception HeadlessException if
      *   <code>GraphicsEnvironment.isHeadless</code> returns
@@ -719,6 +905,9 @@ public class Choice extends Component implements ItemSelectable, Accessible {
 
     /**
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -734,6 +923,12 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * <code>AccessibleAWTChoice</code>. A new <code>AccessibleAWTChoice</code>
      * instance is created if necessary.
      *
+     * <p>
+     *  获取与此<code> Choice </code>关联的<code> AccessibleContext </code>。
+     * 对于<code> Choice </code>组件,<code> AccessibleContext </code>采用<code> AccessibleAWTChoice </code>的形式。
+     * 如有必要,将创建一个新的<code> AccessibleAWTChoice </code>实例。
+     * 
+     * 
      * @return an <code>AccessibleAWTChoice</code> that serves as the
      *         <code>AccessibleContext</code> of this <code>Choice</code>
      * @since 1.3
@@ -749,6 +944,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
      * This class implements accessibility support for the
      * <code>Choice</code> class.  It provides an implementation of the
      * Java Accessibility API appropriate to choice user-interface elements.
+     * <p>
+     * 此类实现<code> Choice </code>类的辅助功能支持。它提供了适合于选择用户界面元素的Java可访问性API的实现。
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTChoice extends AccessibleAWTComponent
@@ -756,6 +955,9 @@ public class Choice extends Component implements ItemSelectable, Accessible {
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 1.3 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 7175603582428509322L;
 
@@ -769,6 +971,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
          * return this object, which is responsible for implementing the
          * AccessibleAction interface on behalf of itself.
          *
+         * <p>
+         *  获取与此对象关联的AccessibleAction。在为该类实现Java辅助功能API时,返回此对象,该对象负责代表自身实现AccessibleAction接口。
+         * 
+         * 
          * @return this object
          * @see AccessibleAction
          */
@@ -779,6 +985,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用。
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -792,6 +1002,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
          * If there are more than one, the first one is considered the "default"
          * action of the object.
          *
+         * <p>
+         *  返回此对象中可用的可用操作数如果有多个,则第一个被视为对象的"默认"操作。
+         * 
+         * 
          * @return the zero-based number of Actions in this object
          */
         public int getAccessibleActionCount() {
@@ -801,6 +1015,10 @@ public class Choice extends Component implements ItemSelectable, Accessible {
         /**
          * Returns a description of the specified action of the object.
          *
+         * <p>
+         *  返回对象的指定操作的描述。
+         * 
+         * 
          * @param i zero-based index of the actions
          * @return a String description of the action
          * @see #getAccessibleActionCount
@@ -812,6 +1030,9 @@ public class Choice extends Component implements ItemSelectable, Accessible {
         /**
          * Perform the specified Action on the object
          *
+         * <p>
+         *  对对象执行指定的Action
+         * 
          * @param i zero-based index of actions
          * @return true if the action was performed; otherwise false.
          * @see #getAccessibleActionCount

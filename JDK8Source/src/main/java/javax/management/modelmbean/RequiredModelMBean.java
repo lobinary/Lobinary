@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -115,6 +118,21 @@ import sun.reflect.misc.ReflectUtil;
  * public method.  This allows for wrapping exceptions from distributed
  * communications (RMI, EJB, etc.)
  *
+ * <p>
+ *  这个类是ModelMBean的实现。 ModelMBean的适当实现必须随每个JMX代理一起提供,并且该类必须命名为RequiredModelMBean。
+ * <P>
+ *  希望可管理的Java资源使用MBeanServer的createMBean方法实例化RequiredModelMBean。
+ * 然后,资源设置RequiredModelMBean实例的MBeanInfo和Descriptors。
+ * 通过ModelMBean的ModelMBeanInfo公开的属性和操作可以从MBean,连接器/适配器(如其他MBean)访问。
+ * 通过描述符,可以定义受管应用程序中的值和方法,并将其映射到ModelMBean的属性和操作。此映射可以在XML格式的文件中定义,也可以在运行时以动态和编程方式定义。
+ * <P>
+ *  在MBeanServer中实例化的每个RequiredModelMBean变得易于管理：<br>其属性和操作可通过连接到该MBeanServer的连接器/适配器远程访问。
+ * <P>
+ *  不能在MBeanServer中注册Java对象,除非它是符合JMX的MBean。通过实例化RequiredModelMBean,保证MBean有效的资源。
+ * 
+ *  必须在每个公共方法上抛出MBeanException和RuntimeOperationsException。这允许包装来自分布式通信(RMI,EJB等)的异常,
+ * 
+ * 
  * @since 1.5
  */
 
@@ -127,6 +145,8 @@ public class RequiredModelMBean
     ModelMBeanInfo modelMBeanInfo;
 
     /* Notification broadcaster for any notification to be sent
+    /* <p>
+    /* 
      * from the application through the RequiredModelMBean.  */
     private NotificationBroadcasterSupport generalBroadcaster = null;
 
@@ -134,6 +154,8 @@ public class RequiredModelMBean
     private NotificationBroadcasterSupport attributeBroadcaster = null;
 
     /* handle, name, or reference for instance on which the actual invoke
+    /* <p>
+    /* 
      * and operations will be executed */
     private Object managedResource = null;
 
@@ -159,6 +181,13 @@ public class RequiredModelMBean
      * customized, the RequiredModelMBean can be registered with
      * the MBeanServer.
      *
+     * <p>
+     * 用一个空的ModelMBeanInfo构造一个<CODE> RequiredModelMBean </CODE>。
+     * <P>
+     *  可以使用{@link #setModelMBeanInfo}方法自定义RequiredModelMBean的MBeanInfo和Descriptors。
+     * 在自定义RequiredModelMBean的MBeanInfo和Descriptors之后,可以向MBeanServer注册RequiredModelMBean。
+     * 
+     * 
      * @exception MBeanException Wraps a distributed communication Exception.
      *
      * @exception RuntimeOperationsException Wraps a {@link
@@ -189,6 +218,14 @@ public class RequiredModelMBean
      * customized, the RequiredModelMBean can be registered with the
      * MBeanServer.
      *
+     * <p>
+     *  使用传递的ModelMBeanInfo构造RequiredModelMBean对象。
+     * 只要RequiredModelMBean尚未向MBeanServer注册,就可以使用{@link #setModelMBeanInfo}方法自定义RequiredModelMBean的MBeanInfo
+     * 和Descriptors。
+     *  使用传递的ModelMBeanInfo构造RequiredModelMBean对象。
+     * 在自定义RequiredModelMBean的MBeanInfo和Descriptors之后,可以向MBeanServer注册RequiredModelMBean。
+     * 
+     * 
      * @param mbi The ModelMBeanInfo object to be used by the
      *            RequiredModelMBean. The given ModelMBeanInfo is cloned
      *            and modified as specified by {@link #setModelMBeanInfo}
@@ -241,6 +278,18 @@ public class RequiredModelMBean
      * {@link ModelMBeanNotificationInfo ModelMBeanNotificationInfo}s for
      * those missing notifications.
      *
+     * <p>
+     *  使用传入的ModelMBeanInfo初始化ModelMBean对象。只要未在MBeanServer中注册,就可以在ModelMBean上设置自定义的ModelMBeanInfo。
+     * <br>
+     *  一旦ModelMBean的ModelMBeanInfo(带有Descriptors)被自定义并在ModelMBean上设置,ModelMBean将被注册到MBeanServer。
+     * <P>
+     *  如果ModelMBean当前已注册,则此方法会抛出一个{@link javax.management.RuntimeOperationsException}包装一个{@link IllegalStateException}
+     * 。
+     * <P>
+     * 如果给定的<var> inModelMBeanInfo </var>不包含用于<code> GENERIC </code>或<code> ATTRIBUTE_CHANGE </code>通知的任何{@link ModelMBeanNotificationInfo}
+     * ,则RequiredModelMBean将提供其自己的默认{ @link ModelMBeanNotificationInfo ModelMBeanNotificationInfo}用于这些缺失的通知。
+     * 
+     * 
      * @param mbi The ModelMBeanInfo object to be used
      *        by the ModelMBean.
      *
@@ -328,6 +377,10 @@ public class RequiredModelMBean
      * execute all methods in this ModelMBean management interface
      * (MBeanInfo and Descriptors).
      *
+     * <p>
+     *  设置要在此ModelMBean管理接口(MBeanInfo和Descriptors)中执行所有方法的对象的实例句柄。
+     * 
+     * 
      * @param mr Object that is the managed resource
      * @param mr_type The type of reference for the managed resource.
      *     <br>Can be: "ObjectReference", "Handle", "IOR", "EJBHandle",
@@ -393,6 +446,14 @@ public class RequiredModelMBean
      * persistence, an {@link MBeanException} wrapping a {@link
      * ServiceNotFoundException} is thrown.</p>
      *
+     * <p>
+     *  <p>使用在持久存储中找到的MBean的数据实例化此MBean实例。加载的数据可以包括属性和操作值。</p>
+     * 
+     *  <p>此方法应在此实例的构建或初始化期间,以及在向MBeanServer注册MBean之前调用。</p>
+     * 
+     *  <p>如果此类的实现不支持持久性,则会抛出{@link MBeanException}包装{@link ServiceNotFoundException}。</p>
+     * 
+     * 
      * @exception MBeanException Wraps another exception, or
      * persistence is not supported
      * @exception RuntimeOperationsException Wraps exceptions from the
@@ -435,6 +496,20 @@ public class RequiredModelMBean
      *    = "onTimer" && now < 'lastPersistTime' + 'persistPeriod'
      * }</PRE>
      *
+     * <p>
+     *  <p>捕获此MBean实例的当前状态,并将其写入持久存储。存储的状态可以包括属性和操作值。</p>
+     * 
+     *  <p>如果此类的实现不支持持久性,则会抛出{@link MBeanException}包装{@link ServiceNotFoundException}。</p>
+     * 
+     *  <p>来自MBean和属性描述符的持久性策略用于指导此方法的执行。如果"persistPolicy"字段为：</p>,则应存储MBean
+     * 
+     * <PRE> {@ literal！="never"="always"="onTimer"and now>'lastPersistTime'+'persistPeriod'="NoMoreOftenThan"and now>'lastPersistTime'+'persistPeriod'="onUnregister"}
+     *  < PRE>。
+     * 
+     *  <p>如果'persistPolicy'字段为：</p> <PRE> {@ literal ="never"="onUpdate"="onTimer"&& now <'lastPersistTime'+'persistPeriod'} < PRE>
+     * 。
+     * 
+     * 
      * @exception MBeanException Wraps another exception, or
      * persistence is not supported
      * @exception RuntimeOperationsException Wraps exceptions from the
@@ -478,6 +553,20 @@ public class RequiredModelMBean
      *   </li>
      * </ul>
      *
+     * <p>
+     *  resolveForCacheValue方法检查传入的描述符,以查看描述符中是否有有效的缓存值。如果有值,则有效值将在"值"字段中。如果描述符中的"currencyTimeLimit"字段为：
+     * <ul>
+     *  <li> <b>&lt; 0 </b>那么该值不会被缓存,永远不会有效。返回Null。 "value"和"lastUpdatedTimeStamp"字段已清除。
+     * </li> <li> <b> = 0 </b>然后该值始终缓存并始终有效。将返回"值"字段。未检查"lastUpdatedTimeStamp"字段。
+     * </li> <li> <b>&gt; 0 </b>表示"value"字段有效的秒数。
+     *  'lastUpdatedTimeStamp'+'currencyTimeLimit'&gt;'value'字段不再有效。现在。
+     * <ul>
+     *  <li>当'value'有效时,返回'valid'。</li> <li>当'value'不再有效时,返回null,并清除'value'和'lastUpdatedTimeStamp' >
+     * </ul>
+     * </li>
+     * </ul>
+     * 
+     * 
      **/
     private Object resolveForCacheValue(Descriptor descr)
         throws MBeanException, RuntimeOperationsException {
@@ -666,6 +755,10 @@ public class RequiredModelMBean
      * Returns the attributes, operations, constructors and notifications
      * that this RequiredModelMBean exposes for management.
      *
+     * <p>
+     *  返回此RequiredModelMBean公开用于管理的属性,操作,构造函数和通知。
+     * 
+     * 
      * @return  An instance of ModelMBeanInfo allowing retrieval all
      *          attributes, operations, and Notifications of this MBean.
      *
@@ -847,6 +940,29 @@ public class RequiredModelMBean
      * <code>currencyTimeLimit</code> field.  To indicate that it is
      * always valid, use a very large number for this field.</p>
      *
+     * <p>
+     *  在RequiredModelMBean上或通过RequiredModelMBean调用方法,并返回方法执行的结果。
+     * <P>
+     * 如果要调用的给定方法与提供的签名一起匹配RequiredModelMbean可访问方法之一,则将调用此方法。否则,将对托管资源尝试对给定方法的调用。
+     * <P>
+     *  操作返回的最后一个值可以缓存在操作的描述符中,该描述符在ModelMBeanOperationInfo的描述符中。如果有值,则有效值将在"值"字段中。
+     * 如果描述符中的"currencyTimeLimit"字段为：。
+     * <UL>
+     *  <LI> <b>&lt; 0 </b>那么该值不会被缓存,永远不会有效。调用操作方法。 'value'和'lastUpdatedTimeStamp'字段被清除。
+     * </LI> <LI> <b> = 0 </b>然后该值总是被缓存并总是有效的。将返回"值"字段。如果没有'value'字段,则为该属性调用操作方法。
+     *  "lastUpdatedTimeStamp"字段和"value"字段设置为操作的返回值和当前时间戳。</LI> <LI> <b>&gt; 0 </b>字段有效。
+     *  'lastUpdatedTimeStamp'+'currencyTimeLimit'&gt;'value'字段不再有效。现在。
+     * <UL>
+     *  <LI>当'value'有效时,返回'value'。</LI> <LI>当'value'不再有效时,调用操作方法。 "lastUpdatedTimeStamp"字段和"value"字段已更新。
+     * </lI>。
+     * </UL>
+     * </LI>
+     * </UL>
+     * 
+     * <p> <b>注意：</b>由于本规范之前版本的不一致,建议不要对<code> currencyTimeLimit </code>使用负值或零值。
+     * 要指示缓存的值从不有效,请忽略<code> currencyTimeLimit </code>字段。要表示它始终有效,请在此字段中使用非常大的数字。</p>。
+     * 
+     * 
      * @param opName The name of the method to be invoked. The
      *     name can be the fully qualified method name including the
      *     classname, or just the method name if the classname is
@@ -910,6 +1026,20 @@ public class RequiredModelMBean
       resource's class loader.  There is no point in using any other
       loader because when we call Method.invoke we must call it on
       a Method that is implemented by the target object.
+    /* <p>
+    /*  能够在RequiredModelMBean类本身上调用方法的要求使得该方法比其他方法显着更复杂。请注意,与早期版本不同,如果在ModelMBeanInfo中没有明确提及,我们不允许您调用此类方法。
+    /* 这样做可能是一个安全问题,当然非常令人惊讶。
+    /* 
+    /*  如果：(a)在操作的描述符中有一个"targetObject"字段,我们不会在RequiredModelMBean类本身中查找该方法;或(b)在操作的描述符中有一个"类"字段,并且命名类不是Requi
+    /* redModelMBean或其一个超级接口;或者(c)操作的名称不是RequiredModelMBean中的方法的名称(这只是一个优化)。
+    /* 
+    /*  在情况(a)和(b)中,如果你遇到了专门为这个操作添加这些字段的麻烦,那么大概你不想调用RequiredModelMBean的方法。
+    /* 
+    /* 我们必须注意类加载问题。
+    /* 如果存在"类"字段,则必须相对于RequiredModelMBean的类加载器解析命名类,以测试上述条件(b),并相对于托管资源的类加载器,以确保托管资源实际上是命名类(或子类)。
+    /*  sig数组中的类名同样需要解析,首先是RequiredModelMBean的类加载器,然后是受管资源的类加载器。
+    /* 使用任何其他加载器没有意义,因为当我们调用Method.invoke时,我们必须在由目标对象实现的方法上调用它。
+    /* 
      */
     public Object invoke(String opName, Object[] opArgs, String[] sig)
             throws MBeanException, ReflectionException {
@@ -942,6 +1072,8 @@ public class RequiredModelMBean
             opMethodName = opName;
 
         /* Ignore anything after a left paren.  We keep this for
+        /* <p>
+        /* 
            compatibility but it isn't specified.  */
         opSplitter = opMethodName.indexOf("(");
         if (opSplitter > 0)
@@ -1007,6 +1139,10 @@ public class RequiredModelMBean
 
         /* Now look for the method, either in RequiredModelMBean itself
            or in the target object.  Set "method" and "targetObject"
+        /* <p>
+        /*  或在目标对象中。设置"method"和"targetObject"
+        /* 
+        /* 
            appropriately.  */
         Method method;
         Object targetObject;
@@ -1166,6 +1302,8 @@ public class RequiredModelMBean
     }
 
     /* Map e.g. "int" to int.class.  Goodness knows how many time this
+    /* <p>
+    /* 
        particular wheel has been reinvented.  */
     private static final Class<?>[] primitiveClasses = {
         int.class, long.class, boolean.class, double.class,
@@ -1182,6 +1320,10 @@ public class RequiredModelMBean
 
     /* Find a method in RequiredModelMBean as determined by the given
        parameters.  Return null if there is none, or if the parameters
+    /* <p>
+    /*  参数。如果没有,返回null,或者如果参数
+    /* 
+    /* 
        exclude using it.  Called from invoke. */
     private Method findRMMBMethod(String opMethodName,
                                          Object targetObjectField,
@@ -1236,6 +1378,9 @@ public class RequiredModelMBean
     /*
      * Invoke the given method, and throw the somewhat unpredictable
      * appropriate exception if the method itself gets an exception.
+     * <p>
+     *  调用给定的方法,并抛出一些不可预测的适当的异常,如果方法本身获得一个异常。
+     * 
      */
     private Object invokeMethod(String opName, final Method method,
                                 final Object targetObject, final Object[] opArgs)
@@ -1312,6 +1457,9 @@ public class RequiredModelMBean
      * called for by the descriptor's configuration.  Note that we
      * don't remember operation parameters when caching the result, so
      * this is unlikely to be useful if there are any.
+     * <p>
+     *  缓存描述符中的操作的结果,如果它是由描述符的配置调用的话。请注意,在缓存结果时,我们不记得操作参数,因此如果有任何结果,这不太可能有用。
+     * 
      */
     private void cacheResult(ModelMBeanOperationInfo opInfo,
                              Descriptor opDescr, Object result)
@@ -1367,6 +1515,13 @@ public class RequiredModelMBean
      * doesn't have the required permissions to do reflection, in
      * which case we don't touch anything so as not to interfere
      * with a later permissionful caller.
+     * <p>
+     *  确定给定的名称是否是此类中的公共方法的名称。这只是一个优化：它阻止我们尝试对一个明显失败的方法执行参数类型查找和反射,因为它有错误的名称。
+     * 
+     *  第一次调用这个方法时,我们做反射,每隔一段时间我们重用记住的值。
+     * 
+     * 可以想象,(可能是恶意的)第一呼叫者没有所需的权限来做反射,在这种情况下,我们不触摸任何东西,以免干扰以后的许可呼叫者。
+     * 
      */
     private static Set<String> rmmbMethodNames;
     private static synchronized boolean isRMMBMethodName(String name) {
@@ -1451,6 +1606,36 @@ public class RequiredModelMBean
      * method and thus needs operationInfo, an operation must be specified
      * for that getMethod so that the invocation works correctly.</p>
      *
+     * <p>
+     *  返回为此ModelMBean定义的特定属性的值。属性返回的最后一个值可能被缓存在属性的描述符中。如果有值,则有效值将在"值"字段中。如果描述符中的"currencyTimeLimit"字段为：
+     * <UL>
+     *  <LI> <b>&lt; 0 </b>那么该值不会被缓存,永远不会有效。为属性调用getter方法。 'value'和'lastUpdatedTimeStamp'字段被清除。
+     * </LI> <LI> <b> = 0 </b>然后该值总是被缓存并总是有效的。将返回"值"字段。如果没有'value'字段,那么为该属性调用getter方法。
+     *  "lastUpdatedTimeStamp"字段和"value"字段设置为属性的值和当前时间戳。</LI> <LI> <b>&gt; 0 </b>表示"value"字段的秒数已验证。
+     *  'lastUpdatedTimeStamp'+'currencyTimeLimit'&gt;'value'字段不再有效。现在。
+     * <UL>
+     *  <LI>当'value'有效时,返回'value'。</LI> <LI>当'value'不再有效时,为属性调用getter方法。
+     *  "lastUpdatedTimeStamp"字段和"value"字段被更新。</LI> </UL> </LI>。
+     * </UL>
+     * 
+     * <p> <b>注意：</b>由于本规范之前版本的不一致,建议不要对<code> currencyTimeLimit </code>使用负值或零值。
+     * 要指示缓存的值从不有效,请忽略<code> currencyTimeLimit </code>字段。要表示它始终有效,请在此字段中使用非常大的数字。</p>。
+     * 
+     *  <p>如果'getMethod'字段包含有效操作描述符的名称,则执行由操作描述符描述的方法。方法的响应作为属性的值返回。如果操作失败或返回的值与属性的声明类型不兼容,将抛出异常。</p>
+     * 
+     *  <p>如果没有定义"getMethod"字段,则返回属性的默认值。如果返回的值与属性的声明类型不兼容,则会抛出异常。</p>
+     * 
+     *  <p>属性的声明类型是由{@link ModelMBeanAttributeInfo#getType()}返回的字符串。如果满足以下条件之一,则值与此类型兼容：
+     * <ul>
+     *  <li>值为null; </li> <li>声明的名称是原始类型名称(例如"int"),值是相应包装类型的实例(如java.lang.Integer) ; </li> <li>该值的类的名称与声明的名
+     * 称相同; </li> <li>声明的名称可以由值的类加载器加载并生成一个类, 。
+     * </li>。
+     * </ul>
+     * 
+     * <p>在此实现中,在需要调用getMethod的每种情况下,因为该方法通过标准"invoke"方法调用,因此需要operationInfo,必须为该getMethod指定操作,以便调用正确工作。
+     *  </p>。
+     * 
+     * 
      * @param attrName A String specifying the name of the
      * attribute to be retrieved. It must match the name of a
      * ModelMBeanAttributeInfo.
@@ -1770,6 +1955,10 @@ public class RequiredModelMBean
      * Executes a getAttribute for each attribute name in the
      * attrNames array passed in.
      *
+     * <p>
+     *  返回ModelMBean中的几个属性的值。对传入的attrNames数组中的每个属性名称执行getAttribute。
+     * 
+     * 
      * @param attrNames A String array of names of the attributes
      * to be retrieved.
      *
@@ -1860,6 +2049,28 @@ public class RequiredModelMBean
      *
      * <p>The ModelMBeanInfo of the Model MBean is stored in a file.
      *
+     * <p>
+     *  设置命名的ModelMBean的特定属性的值。
+     * 
+     *  如果属性描述符的"setMethod"字段包含有效操作描述符的名称,则执行由操作描述符描述的方法。
+     * 在此实现中,必须正确指定操作描述符并将其分配给modelMBeanInfo,以使'setMethod'正确工作。来自该方法的响应被设置为描述符中的属性的值。
+     * 
+     *  <p>如果currencyTimeLimit为&gt; 0,则属性的新值被缓存在属性描述符的"value"字段中,并且"lastUpdatedTimeStamp"字段被设置为当前时间戳。
+     * 
+     *  <p>如果属性描述符的持久字段不为空,那么来自属性描述符的持久性策略将用于指导将属性存储在持久存储中。 <br>如果'persistPolicy'字段为：存储MBean：
+     * <UL>
+     * <li> </li> <li> {@literal ="onTimer"and now>'lastPersistTime'</li> <li> +'persistPeriod'} </Li> <Li> 
+     * {@literal ="NoMoreOftenThan"and now>'lastPersistTime'+'persistPeriod'} </Li>。
+     * </UL>
+     *  如果'persistPolicy'字段为：不存储MBean：
+     * <UL>
+     *  <Li> ="从不"</Li> <Li> = {@literal ="onTimer"&& now <'lastPersistTime'+'persistPeriod'} </Li> <Li> ="o
+     * nUnregister"</> = {@literal ="NoMoreOftenThan"and now <'lastPersistTime'+'persistPeriod'} </Li>。
+     * </UL>
+     * 
+     *  <p> Model MBean的ModelMBeanInfo存储在文件中。
+     * 
+     * 
      * @param attribute The Attribute instance containing the name of
      *        the attribute to be set and the value it is to be set to.
      *
@@ -2067,6 +2278,10 @@ public class RequiredModelMBean
      * Sets the values of an array of attributes of this ModelMBean.
      * Executes the setAttribute() method for each attribute in the list.
      *
+     * <p>
+     *  设置此ModelMBean的属性数组的值。对列表中的每个属性执行setAttribute()方法。
+     * 
+     * 
      * @param attributes A list of attributes: The identification of the
      * attributes to be set and  the values they are to be set to.
      *
@@ -2174,6 +2389,11 @@ public class RequiredModelMBean
      * not include attributeChangeNotifications.  They must be registered
      * for independently.
      *
+     * <p>
+     *  将实现NotificationListener接口的对象注册为监听器。当通过或由ModelMBean发出任何通知时,将调用此对象的"handleNotification()"方法。
+     * 这不包括attributeChangeNotifications。他们必须独立注册。
+     * 
+     * 
      * @param listener The listener object which will handles
      *        notifications emitted by the registered MBean.
      * @param filter The filter object. If null, no filtering will be
@@ -2217,6 +2437,10 @@ public class RequiredModelMBean
     /**
      * Removes a listener for Notifications from the RequiredModelMBean.
      *
+     * <p>
+     *  从RequiredModelMBean中删除通知的侦听器。
+     * 
+     * 
      * @param listener The listener name which was handling notifications
      *    emitted by the registered MBean.
      *    This method will remove all information related to this listener.
@@ -2388,6 +2612,10 @@ public class RequiredModelMBean
     /**
      * Returns `true' if the notification `notifName' is found
      * in `info'. (bug 4744667)
+     * <p>
+     *  如果在"info"中找到通知"notifName",则返回"true"。 (错误4744667)
+     * 
+     * 
      **/
     private static final
         boolean hasNotification(final ModelMBeanInfo info,
@@ -2405,6 +2633,10 @@ public class RequiredModelMBean
     /**
      * Creates a default ModelMBeanNotificationInfo for GENERIC
      * notification.  (bug 4744667)
+     * <p>
+     *  为GENERIC通知创建默认的ModelMBeanNotificationInfo。 (错误4744667)
+     * 
+     * 
      **/
     private static final ModelMBeanNotificationInfo makeGenericInfo() {
         final Descriptor genericDescriptor = new DescriptorSupport( new
@@ -2425,6 +2657,10 @@ public class RequiredModelMBean
     /**
      * Creates a default ModelMBeanNotificationInfo for ATTRIBUTE_CHANGE
      * notification.  (bug 4744667)
+     * <p>
+     *  为ATTRIBUTE_CHANGE通知创建默认ModelMBeanNotificationInfo。 (错误4744667)
+     * 
+     * 
      **/
     private static final
         ModelMBeanNotificationInfo makeAttributeChangeInfo() {
@@ -2457,6 +2693,19 @@ public class RequiredModelMBean
      * Thus these two notifications are always added to those specified
      * by the application.
      *
+     * <p>
+     *  返回始终由RequiredModelMBean生成的通知数组。
+     * <P>
+     * 
+     *  RequiredModelMBean可能还会发送另外两个通知：
+     * <UL>
+     * <LI>一个带有描述符<code>"name = GENERIC,descriptorType = notification,log = T,severity = 6,displayName = jmx
+     * .modelmbean.generic"</code> </更改通知描述符<code>"name = ATTRIBUTE_CHANGE,descriptorType = notification,log
+     *  = T,severity = 6,displayName = jmx.attribute.change"</code>。
+     * </UL>
+     *  因此,这两个通知总是添加到应用程序指定的那些。
+     * 
+     * 
      * @return MBeanNotificationInfo[]
      *
      **/
@@ -2649,6 +2898,10 @@ public class RequiredModelMBean
         /* note: */
         /* this may be a problem if the same listener is registered for
            multiple attributes with multiple filters and/or handback
+        /* <p>
+        /*  具有多个过滤器和/或回传的多个属性
+        /* 
+        /* 
            objects.  It may remove all of them */
 
         attributeBroadcaster.removeNotificationListener(inlistener);
@@ -2843,6 +3096,11 @@ public class RequiredModelMBean
      * the appropriate {@link javax.management.loading.ClassLoaderRepository}
      * that should be used in this object.
      *
+     * <p>
+     *  返回类加载器用于执行类加载的存储库。
+     * 子类可能希望重新定义此方法,以返回应在此对象中使用的适当的{@link javax.management.loading.ClassLoaderRepository}。
+     * 
+     * 
      * @return the Class Loader Repository.
      *
      */
@@ -2900,6 +3158,13 @@ public class RequiredModelMBean
      * method should call <code>super.preRegister(server, name)</code>
      * in its own <code>preRegister</code> implementation.
      *
+     * <p>
+     *  允许MBean在注册到MBean服务器之前执行其所需的任何操作。如果未指定MBean的名称,则MBean可以为其注册提供名称。如果出现任何异常,MBean将不会在MBean服务器中注册。
+     * <P>
+     *  为了确保RequireModelMBean的正确运行时语义,任何RequiredModelMBean重载或覆盖的子类都应该在自己的<code> preRegister </code>实现中调用<code>
+     *  super.preRegister(server,name)</code> 。
+     * 
+     * 
      * @param server The MBean server in which the MBean will be registered.
      *
      * @param name The object name of the MBean.  This name is null if
@@ -2939,6 +3204,13 @@ public class RequiredModelMBean
      * method should call <code>super.postRegister(registrationDone)</code>
      * in its own <code>postRegister</code> implementation.
      *
+     * <p>
+     *  允许MBean在MBean服务器中注册后或注册失败后执行所需的任何操作。
+     * <P>
+     * 为了确保RequireModelMBean的正确运行时语义,任何RequiredModelMBean重载或覆盖的子类都应该在自己的<code> postRegister </code>实现中调用<code>
+     *  super.postRegister(registrationDone)</code>。
+     * 
+     * 
      * @param registrationDone Indicates whether or not the MBean has
      * been successfully registered in the MBean server. The value
      * false means that the registration phase has failed.
@@ -2956,6 +3228,13 @@ public class RequiredModelMBean
      * method should call <code>super.preDeregister()</code> in its own
      * <code>preDeregister</code> implementation.
      *
+     * <p>
+     *  允许MBean在由MBean服务器取消注册之前执行其所需的任何操作。
+     * <P>
+     *  为了确保RequireModelMBean的运行时语义正确,RequiredModelMBean的任何子类重载或覆盖此方法应在其自己的<code> preDeregister </code>实现中调用
+     * <code> super.preDeregister()</code>。
+     * 
+     * 
      * @exception java.lang.Exception This exception will be caught by
      * the MBean server and re-thrown as an
      * {@link javax.management.MBeanRegistrationException
@@ -2972,6 +3251,10 @@ public class RequiredModelMBean
      * Any subclass of RequiredModelMBean overloading or overriding this
      * method should call <code>super.postDeregister()</code> in its own
      * <code>postDeregister</code> implementation.
+     * <p>
+     *  允许MBean在MBean服务器中取消注册后执行所需的任何操作。
+     * <P>
+     *  为了确保RequireModelMBean的运行时语义正确,RequiredModelMBean的任何子类重载或覆盖此方法应该在自己的<code> postDeregister </code>实现中调
      */
     public void postDeregister() {
         registered = false;

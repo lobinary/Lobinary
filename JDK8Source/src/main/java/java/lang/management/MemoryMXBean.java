@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -193,6 +194,72 @@ import javax.management.openmbean.CompositeData;
  * emitter.addNotificationListener(listener, null, null);
  * </pre></blockquote>
  *
+ * <p>
+ *  Java虚拟机的内存系统的管理接口。
+ * 
+ *  <p> Java虚拟机具有此接口的实现类的单个实例。
+ * 实现此接口的实例是<a href="ManagementFactory.html#MXBean"> MXBean </a>,可通过调用{@link ManagementFactory#getMemoryMXBean}
+ * 方法或从{@link ManagementFactory#getPlatformMBeanServer platform < tt> MBeanServer </tt>}方法。
+ *  <p> Java虚拟机具有此接口的实现类的单个实例。
+ * 
+ *  <p>用于唯一标识MBeanServer内存系统的MXBean的<tt> ObjectName </tt>是：
+ * <blockquote>
+ *  {@link ManagementFactory#MEMORY_MXBEAN_NAME <tt> java.lang：type = Memory </tt>}
+ * </blockquote>
+ * 
+ *  它可以通过调用{@link PlatformManagedObject#getObjectName}方法获得。
+ * 
+ *  <h3>内存</h3> Java虚拟机的内存系统管理以下类型的内存：
+ * 
+ *  <h3> 1.堆</h3> Java虚拟机有一个<i>堆</i>,它是分配所有类实例和数组的内存的运行时数据区。它是在Java虚拟机启动时创建的。
+ * 对象的堆内存由被称为"垃圾收集器"的自动内存管理系统回收。
+ * 
+ *  <p>堆可以是固定大小,也可以是展开和缩小。堆的内存不需要是连续的。
+ * 
+ * <h3> 2.非堆内存</h3> Java虚拟机管理除堆以外的内存(称为<i>非堆内存</i>)。
+ * 
+ *  <p> Java虚拟机具有在所有线程之间共享的<i>方法区域</i>。方法区域属于非堆内存。它存储每类结构,例如运行时常量池,字段和方法数据,以及方法和构造函数的代码。
+ * 它是在Java虚拟机启动时创建的。
+ * 
+ *  <p>方法区域在逻辑上是堆的一部分,但是Java虚拟机实现可能选择不进行垃圾回收或压缩它。类似于堆,方法区域可以是固定大小或可以被扩展和收缩。方法区域的内存不需要是连续的。
+ * 
+ *  <p>除了方法区域,Java虚拟机实现可能需要内存用于内部处理或优化,这也属于非堆内存。例如,JIT编译器需要内存来存储从Java虚拟机代码翻译的本地机器代码,以实现高性能。
+ * 
+ *  <h3>内存池和内存管理器</h3> {@link MemoryPoolMXBean内存池}和{@link MemoryManagerMXBean内存管理器}是监视和管理Java虚拟机内存系统的抽象实
+ * 体。
+ * 
+ * <p>内存池表示Java虚拟机管理的内存区域。 Java虚拟机至少有一个内存池,它可以在执行过程中创建或删除内存池。内存池可以属于堆或非堆内存。
+ * 
+ *  <p>内存管理器负责管理一个或多个内存池。垃圾回收器是一种类型的内存管理器,负责回收由不可达对象占用的内存。 Java虚拟机可以具有一个或多个存储器管理器。它可以在执行期间添加或删除内存管理器。
+ * 内存池可以由多个内存管理器管理。
+ * 
+ *  <h3>内存使用监控</h3>
+ * 
+ *  内存使用是内存系统的一个非常重要的监视属性。例如,内存使用可以指示：
+ * <ul>
+ *  <li>应用程式的记忆体使用量,</li> <li>自动内存管理系统上的工作量,</li> <li>潜在的内存泄漏。</li>
+ * </ul>
+ * 
+ * <p>
+ *  可以通过三种方式监视内存使用情况：
+ * <ul>
+ *  <li>轮询</li> <li>使用阈值通知</li> <li>集合使用阈值通知</li>
+ * </ul>
+ * 
+ *  详细信息在{@link MemoryPoolMXBean}接口中指定。
+ * 
+ *  <p>内存使用情况监控机制用于负载平衡或工作负载分配使用。例如,当应用程序的内存使用超过某个阈值时,应用程序将停止接收任何新的工作负载。它不适用于应用程序检测和从低内存条件恢复。
+ * 
+ * <h3>通知</h3>
+ * 
+ *  <p>此<tt> MemoryMXBean </tt>是一个{@link javax.management.NotificationEmitter NotificationEmitter},它发出两种
+ * 类型的内存{@link javax.management.Notification通知},如果任何一个内存池支持< a href ="MemoryPoolMXBean.html#UsageThreshold">
+ * 使用阈值</a>或<a href="MemoryPoolMXBean.html#CollectionThreshold">集合使用阈值</a>,可以通过调用{@link MemoryPoolMXBean# isUsageThresholdSupported}
+ * 和{@link MemoryPoolMXBean#isCollectionUsageThresholdSupported}方法。
+ * <ul>
+ *  <li> {@ link MemoryNotificationInfo#MEMORY_THRESHOLD_EXCEEDED超过使用情况阈值通知}  - 用于通知内存池的内存使用率已增加,并已达到或超过
+ * 其<a href="MemoryPoolMXBean.html#UsageThreshold">使用阈值</a >值。
+ * 
  * @see ManagementFactory#getPlatformMXBeans(Class)
  * @see <a href="../../../javax/management/package-summary.html">
  *      JMX Specification.</a>
@@ -207,6 +274,34 @@ public interface MemoryMXBean extends PlatformManagedObject {
      * Returns the approximate number of objects for which
      * finalization is pending.
      *
+     * <p>
+     * </li>
+     *  <li> {@ link MemoryNotificationInfo#MEMORY_COLLECTION_THRESHOLD_EXCEEDED集合使用情况阈值已超过通知}  - 用于通知内存池的内存
+     * 使用量大于或等于其。
+     * <a href="MemoryPoolMXBean.html#CollectionThreshold">
+     *  收集使用阈值</a>,之后Java虚拟机已耗尽了对该内存池中未使用的对象的回收。</li>
+     * </ul>
+     * 
+     * <p>
+     * 发出的通知是{@link javax.management.Notification}实例,其{@link javax.management.Notification#setUserData用户数据}设
+     * 置为{@link CompositeData CompositeData},表示包含信息的{@link MemoryNotificationInfo}对象关于构建通知时的内存池。
+     *  <tt> CompositeData </tt>包含{@link MemoryNotificationInfo#from MemoryNotificationInfo}中描述的属性。
+     * 
+     * <hr>
+     *  <h3> NotificationEmitter </h3> {@link ManagementFactory#getMemoryMXBean}返回的<tt> MemoryMXBean </tt>对象
+     * 实现{@link javax.management.NotificationEmitter NotificationEmitter}接口,允许侦听器在< tt> MemoryMXBean </tt>作为
+     * 通知侦听器。
+     * 
+     *  以下是注册<tt> MyListener </tt>以处理由<tt> MemoryMXBean </tt>发出的通知的示例代码。
+     * 
+     *  <blockquote> <pre> class MyListener implements javax.management.NotificationListener {public void handleNotification(Notification notif,Object handback){// handle notification ....}
+     * }。
+     * 
+     *  MemoryMXBean mbean = ManagementFactory.getMemoryMXBean(); NotificationEmitter emitter =(Notification
+     * Emitter)mbean; MyListener listener = new MyListener(); emitter.addNotificationListener(listener,null,
+     * null); </pre> </blockquote>。
+     * 
+     * 
      * @return the approximate number objects for which finalization
      * is pending.
      */
@@ -233,6 +328,10 @@ public interface MemoryMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in
      * {@link MemoryUsage#from MemoryUsage}.
      *
+     * <p>
+     *  返回最终化待处理的对象的近似数量。
+     * 
+     * 
      * @return a {@link MemoryUsage} object representing
      * the heap memory usage.
      */
@@ -256,6 +355,19 @@ public interface MemoryMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in
      * {@link MemoryUsage#from MemoryUsage}.
      *
+     * <p>
+     * 返回用于对象分配的堆的当前内存使用情况。堆由一个或多个内存池组成。
+     * 所返回的内存使用量的<tt> used </tt>和<tt> committed </tt>大小是所有堆内存池的值之和,而<tt> init </tt>和<tt> max </tt>返回的内存使用量的大
+     * 小表示堆内存的设置,可能不是所有堆内存池的总和。
+     * 返回用于对象分配的堆的当前内存使用情况。堆由一个或多个内存池组成。
+     * <p>
+     *  在返回的内存使用中使用的内存量是活动对象和未收集的垃圾对象(如果有的话)占用的内存量。
+     * 
+     * <p>
+     *  <b> MBeanServer访问</b>：<br> <tt> MemoryUsage </tt>的映射类型是具有{@link MemoryUsage#from MemoryUsage}中指定的属性的
+     * <tt> CompositeData </tt>。
+     * 
+     * 
      * @return a {@link MemoryUsage} object representing
      * the non-heap memory usage.
      */
@@ -264,6 +376,17 @@ public interface MemoryMXBean extends PlatformManagedObject {
     /**
      * Tests if verbose output for the memory system is enabled.
      *
+     * <p>
+     *  返回Java虚拟机使用的非堆内存的当前内存使用情况。非堆内存由一个或多个内存池组成。
+     * 所返回的内存使用量的<tt> used </tt>和<tt> committed </tt>大小是所有非堆内存池的值之和,而<tt> init </tt>和<tt > max </tt>返回的内存使用量
+     * 的大小表示非堆内存的设置,这可能不是所有非堆内存池的总和。
+     *  返回Java虚拟机使用的非堆内存的当前内存使用情况。非堆内存由一个或多个内存池组成。
+     * 
+     * <p>
+     *  <b> MBeanServer访问</b>：<br> <tt> MemoryUsage </tt>的映射类型是<tt> CompositeData </tt>,具有{@link MemoryUsage#from MemoryUsage}
+     * 中指定的属性。
+     * 
+     * 
      * @return <tt>true</tt> if verbose output for the memory
      * system is enabled; <tt>false</tt> otherwise.
      */
@@ -280,6 +403,10 @@ public interface MemoryMXBean extends PlatformManagedObject {
      * Each invocation of this method enables or disables verbose
      * output globally.
      *
+     * <p>
+     *  测试是否启用了内存系统的详细输出。
+     * 
+     * 
      * @param value <tt>true</tt> to enable verbose output;
      *              <tt>false</tt> to disable.
      *
@@ -297,6 +424,12 @@ public interface MemoryMXBean extends PlatformManagedObject {
      * System.gc()
      * </pre></blockquote>
      *
+     * <p>
+     * 启用或禁用内存系统的详细输出。详细输出信息和发送详细信息的输出流是实现相关的。通常,Java虚拟机实现在垃圾收集时释放内存时打印一条消息。
+     * 
+     * <p>
+     *  每次调用此方法都会全局启用或禁用详细输出。
+     * 
      * @see     java.lang.System#gc()
      */
     public void gc();

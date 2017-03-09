@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,13 @@ import java.util.EventListener;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  数据模型的抽象定义,它为其内容提供了一个<code> List </code>。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @param <E> the type of the elements of this model
  *
  * @author Hans Muller
@@ -55,6 +63,10 @@ public abstract class AbstractListModel<E> implements ListModel<E>, Serializable
      * Adds a listener to the list that's notified each time a change
      * to the data model occurs.
      *
+     * <p>
+     *  将监听器添加到每当发生对数据模型的更改时通知的列表中。
+     * 
+     * 
      * @param l the <code>ListDataListener</code> to be added
      */
     public void addListDataListener(ListDataListener l) {
@@ -66,6 +78,10 @@ public abstract class AbstractListModel<E> implements ListModel<E>, Serializable
      * Removes a listener from the list that's notified each time a
      * change to the data model occurs.
      *
+     * <p>
+     *  从每当发生对数据模型的更改时通知的列表中删除侦听器。
+     * 
+     * 
      * @param l the <code>ListDataListener</code> to be removed
      */
     public void removeListDataListener(ListDataListener l) {
@@ -77,6 +93,10 @@ public abstract class AbstractListModel<E> implements ListModel<E>, Serializable
      * Returns an array of all the list data listeners
      * registered on this <code>AbstractListModel</code>.
      *
+     * <p>
+     *  返回在此<code> AbstractListModel </code>上注册的所有列表数据侦听器的数组。
+     * 
+     * 
      * @return all of this model's <code>ListDataListener</code>s,
      *         or an empty array if no list data listeners
      *         are currently registered
@@ -99,6 +119,11 @@ public abstract class AbstractListModel<E> implements ListModel<E>, Serializable
      * are included.  Note that
      * index0 need not be less than or equal to index1.
      *
+     * <p>
+     *  <code> AbstractListModel </code>子类必须在</b> </b>之后调用此方法的一个或多个元素。更改的元素由关闭的时间间隔index0,index1指定 - 包括端点。
+     * 注意,index0不需要小于或等于index1。
+     * 
+     * 
      * @param source the <code>ListModel</code> that changed, typically "this"
      * @param index0 one end of the new interval
      * @param index1 the other end of the new interval
@@ -129,6 +154,11 @@ public abstract class AbstractListModel<E> implements ListModel<E>, Serializable
      * are included.  Note that
      * index0 need not be less than or equal to index1.
      *
+     * <p>
+     *  <code> AbstractListModel </code>子类必须在<b>之后调用此方法</b>一个或多个元素添加到模型中。新元素由关闭的时间间隔index0,index1指定 - 包括点。
+     * 注意,index0不需要小于或等于index1。
+     * 
+     * 
      * @param source the <code>ListModel</code> that changed, typically "this"
      * @param index0 one end of the new interval
      * @param index1 the other end of the new interval
@@ -158,6 +188,12 @@ public abstract class AbstractListModel<E> implements ListModel<E>, Serializable
      * of the interval that's been removed.  Note that <code>index0</code>
      * need not be less than or equal to <code>index1</code>.
      *
+     * <p>
+     * <code> AbstractListModel </code>子类必须在<b>之后调用此方法</b>,从模型中删除一个或多个元素。
+     *  <code> index0 </code>和<code> index1 </code>是已删除区间的终点。
+     * 注意,<code> index0 </code>不需要小于或等于<code> index1 </code>。
+     * 
+     * 
      * @param source the <code>ListModel</code> that changed, typically "this"
      * @param index0 one end of the removed interval,
      *               including <code>index0</code>
@@ -200,6 +236,14 @@ public abstract class AbstractListModel<E> implements ListModel<E>, Serializable
      * If no such listeners exist,
      * this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此模型上注册为<code> <em> Foo </em> Listener </code>的所有对象的数组。
+     * 使用<code> add <em> </em>侦听器</code>方法注册<code> <em> </em>侦听器</code>。
+     * <p>
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listener.class </code>。
+     * 例如,您可以使用以下代码查询其列表数据侦听器的列表模型<code> m </code>：。
+     * 
+     * 
      * @param listenerType  the type of listeners requested;
      *          this parameter should specify an interface
      *          that descends from <code>java.util.EventListener</code>

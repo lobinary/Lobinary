@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,8 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import com.sun.corba.se.impl.orbutil.ORBUtility;
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public abstract class CorbaConnectionCacheBase
@@ -140,6 +143,12 @@ public abstract class CorbaConnectionCacheBase
      * by default. It could be changed such that the SelectorThread would do
      * it for SocketChannels and WorkerThreads for Sockets by updating the
      * ParserTable.
+     * <p>
+     *  丢弃最近使用的不忙的连接
+     * 
+     *  这个方法必须同步,因为一个WorkerThread可能是reclaming在同步的backingStore块内的连接,第二个WorkerThread(或SelectorThread)可能已经执行了if
+     * (numberOfConnections <= ....)。
+     * 因此,第二个线程也将尝试回收连接。
      */
     synchronized public boolean reclaim()
     {

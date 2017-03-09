@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.traversers;
@@ -68,6 +78,18 @@ import org.w3c.dom.Element;
  *
  * @xerces.internal
  *
+ * <p>
+ *  类<code> XSAttributeCheck </code>用于检查模式文档中出现的属性的有效性。
+ * 它 - 报告无效元素(无效的命名空间,无效的名称)的错误 - 报告无效属性(无效的命名空间,无效的名称)的错误 - 报告无效的属性值的错误 - 返回属性值的编译值 - 提供缺省值可选属性 - 为不正确的
+ * 属性值提供默认值。
+ *  类<code> XSAttributeCheck </code>用于检查模式文档中出现的属性的有效性。
+ * 
+ *  但是调用者的责任是检查是否存在必需的属性。
+ * 
+ * 事情需要重新审视： - 是否返回非模式属性/值 - 当reset()时,我们需要更新NamespaceScope和ErrorReporter吗? - 应该有数据类型验证器返回编译的值 - 使用符号表,而
+ * 不是许多哈希表。
+ * 
+ * 
  * @author Sandy Gao, IBM
  * @version $Id: XSAttributeChecker.java,v 1.12 2010-11-01 04:40:02 joehw Exp $
  */
@@ -952,6 +974,10 @@ public class XSAttributeChecker {
      * an array of attribute values is returned. the caller must call
      * <code>returnAttrArray</code> to return that array.
      *
+     * <p>
+     *  @ xerces.internal
+     * 
+     * 
      * @param element    which element to check
      * @param isGlobal   whether a child of &lt;schema&gt; or &lt;redefine&gt;
      * @param schemaDoc  the document where the element lives in
@@ -970,6 +996,10 @@ public class XSAttributeChecker {
      * copy of the namespace context, so that the value can be resolved as a
      * QName later.
      *
+     * <p>
+     *  检查指定的元素是否符合属性限制返回的属性值数组。调用者必须调用<code> returnAttrArray </code>返回该数组。
+     * 
+     * 
      * @param element      which element to check
      * @param isGlobal     whether a child of &lt;schema&gt; or &lt;redefine&gt;
      * @param schemaDoc    the document where the element lives in

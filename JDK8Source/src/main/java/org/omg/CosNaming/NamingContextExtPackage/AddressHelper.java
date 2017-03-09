@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming.NamingContextExtPackage;
 
 
@@ -11,6 +12,8 @@ package org.omg.CosNaming.NamingContextExtPackage;
 
 /**
  * Address is the Host and Port information represented as a String.
+ * <p>
+ * 
  */
 abstract public class AddressHelper
 {

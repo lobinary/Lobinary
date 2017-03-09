@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,11 @@ import java.io.OutputStream;
  * the stream that have already been written to the cache and not
  * yet flushed.
  *
+ * <p>
+ *  <code> ImageOutputStream </code>的实现,将其输出写入常规<code> OutputStream </code>。
+ * 存储器缓冲器用于至少缓存丢弃位置和当前写入位置之间的数据。唯一的构造函数需要一个<code> OutputStream </code>,所以这个类不能用于读/修改/写操作。
+ * 只能对已经写入高速缓存并尚未刷新的流的部分进行读取。
+ * 
  */
 public class MemoryCacheImageOutputStream extends ImageOutputStreamImpl {
 
@@ -49,6 +55,10 @@ public class MemoryCacheImageOutputStream extends ImageOutputStreamImpl {
      * Constructs a <code>MemoryCacheImageOutputStream</code> that will write
      * to a given <code>OutputStream</code>.
      *
+     * <p>
+     *  构造一个将写入给定<code> OutputStream </code>的<code> MemoryCacheImageOutputStream </code>。
+     * 
+     * 
      * @param stream an <code>OutputStream</code> to write to.
      *
      * @exception IllegalArgumentException if <code>stream</code> is
@@ -133,6 +143,10 @@ public class MemoryCacheImageOutputStream extends ImageOutputStreamImpl {
      * <code>ImageOutputStream</code> caches data in order to allow
      * seeking backwards.
      *
+     * <p>
+     *  返回<code> true </code>,因为<code> ImageOutputStream </code>缓存数据以允许向后搜索。
+     * 
+     * 
      * @return <code>true</code>.
      *
      * @see #isCachedMemory
@@ -146,6 +160,10 @@ public class MemoryCacheImageOutputStream extends ImageOutputStreamImpl {
      * Returns <code>false</code> since this
      * <code>ImageOutputStream</code> does not maintain a file cache.
      *
+     * <p>
+     *  返回<code> false </code>,因为此<code> ImageOutputStream </code>不维护文件缓存。
+     * 
+     * 
      * @return <code>false</code>.
      *
      * @see #isCached
@@ -159,6 +177,10 @@ public class MemoryCacheImageOutputStream extends ImageOutputStreamImpl {
      * Returns <code>true</code> since this
      * <code>ImageOutputStream</code> maintains a main memory cache.
      *
+     * <p>
+     *  返回<code> true </code>,因为此<code> ImageOutputStream </code>维护主内存缓存。
+     * 
+     * 
      * @return <code>true</code>.
      *
      * @see #isCached
@@ -173,6 +195,9 @@ public class MemoryCacheImageOutputStream extends ImageOutputStreamImpl {
      * pending data is flushed to the output, and the cache
      * is released.  The destination <code>OutputStream</code>
      * is not closed.
+     * <p>
+     *  关闭此<code> MemoryCacheImageOutputStream </code>。所有挂起的数据都会刷新到输出,并释放缓存。
+     * 目标<code> OutputStream </code>未关闭。
      */
     public void close() throws IOException {
         long length = cache.getLength();

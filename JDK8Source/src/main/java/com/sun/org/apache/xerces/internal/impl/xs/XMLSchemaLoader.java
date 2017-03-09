@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -98,6 +108,15 @@ import org.xml.sax.InputSource;
  *
  * @xerces.internal
  *
+ * <p>
+ *  这个类实现xni.grammars.XMLGrammarLoader。它还用作xs.XSLoader接口和DOMConfiguration接口的实现。
+ * 
+ *  此类设计为与要求预置模式的用户应用程序的代理或与我们自己的模式验证器交互。希望这些"外部"类都不需要在将来与XSDHandler直接通信。 <p>这个类只知道如何使XSDHandler做它的事情。
+ * 调用者必须确保其所有属性(schemaLocation,JAXPSchemaSource等)已正确设置。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neil Graham, IBM
  * @version $Id: XMLSchemaLoader.java,v 1.10 2010-11-01 04:39:55 joehw Exp $
  */
@@ -301,6 +320,10 @@ XSLoader, DOMConfiguration {
     /**
      * This constractor is used by the XMLSchemaValidator. Additional properties, i.e. XMLEntityManager,
      * will be passed during reset(XMLComponentManager).
+     * <p>
+     *  此构造函数由XMLSchemaValidator使用。其他属性,即XMLEntityManager,将在复位期间传递(XMLComponentManager)。
+     * 
+     * 
      * @param errorReporter
      * @param grammarBucket
      * @param sHandler
@@ -373,6 +396,9 @@ XSLoader, DOMConfiguration {
      * Returns a list of feature identifiers that are recognized by
      * this XMLGrammarLoader.  This method may return null if no features
      * are recognized.
+     * <p>
+     * 返回此XMLGrammarLoader可识别的要素标识符列表。如果没有识别特征,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedFeatures() {
         return (String[])(RECOGNIZED_FEATURES.clone());
@@ -381,6 +407,10 @@ XSLoader, DOMConfiguration {
     /**
      * Returns the state of a feature.
      *
+     * <p>
+     *  返回要素的状态。
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @throws XMLConfigurationException Thrown on configuration error.
@@ -393,6 +423,10 @@ XSLoader, DOMConfiguration {
     /**
      * Sets the state of a feature.
      *
+     * <p>
+     *  设置要素的状态。
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -415,6 +449,9 @@ XSLoader, DOMConfiguration {
      * Returns a list of property identifiers that are recognized by
      * this XMLGrammarLoader.  This method may return null if no properties
      * are recognized.
+     * <p>
+     *  返回此XMLGrammarLoader可识别的属性标识符列表。如果没有识别属性,此方法可能返回null。
+     * 
      */
     public String[] getRecognizedProperties() {
         return (String[])(RECOGNIZED_PROPERTIES.clone());
@@ -423,6 +460,10 @@ XSLoader, DOMConfiguration {
     /**
      * Returns the state of a property.
      *
+     * <p>
+     *  返回属性的状态。
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @throws XMLConfigurationException Thrown on configuration error.
@@ -435,6 +476,10 @@ XSLoader, DOMConfiguration {
     /**
      * Sets the state of a property.
      *
+     * <p>
+     *  设置属性的状态。
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param state     The state of the property.
      *
@@ -479,6 +524,10 @@ XSLoader, DOMConfiguration {
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception XNIException Thrown if the parser does not support the
@@ -497,6 +546,10 @@ XSLoader, DOMConfiguration {
     /**
      * Sets the error handler.
      *
+     * <p>
+     *  设置错误处理程序。
+     * 
+     * 
      * @param errorHandler The error handler.
      */
     public void setErrorHandler(XMLErrorHandler errorHandler) {
@@ -511,6 +564,10 @@ XSLoader, DOMConfiguration {
     /**
      * Sets the entity resolver.
      *
+     * <p>
+     *  设置实体解析器。
+     * 
+     * 
      * @param entityResolver The new entity resolver.
      */
     public void setEntityResolver(XMLEntityResolver entityResolver) {
@@ -528,6 +585,10 @@ XSLoader, DOMConfiguration {
      * Returns a Grammar object by parsing the contents of the
      * entities pointed to by sources.
      *
+     * <p>
+     *  通过解析源指向的实体的内容来返回语法对象。
+     * 
+     * 
      * @param source[]  the locations of the entity which forms
      *                      the staring point of the grammars to be constructed
      * @throws IOException  when a problem is encounted reading the entity
@@ -546,6 +607,10 @@ XSLoader, DOMConfiguration {
      * Returns a Grammar object by parsing the contents of the
      * entity pointed to by source.
      *
+     * <p>
+     *  通过解析源指向的实体的内容来返回语法对象。
+     * 
+     * 
      * @param source        the location of the entity which forms
      *                          the starting point of the grammar to be constructed.
      * @throws IOException      When a problem is encountered reading the entity
@@ -589,6 +654,11 @@ XSLoader, DOMConfiguration {
      * This method is called either from XMLGrammarLoader.loadGrammar or from XMLSchemaValidator.
      * Note: in either case, the EntityManager (or EntityResolvers) are not going to be invoked
      * to resolve the location of the schema in XSDDescription
+     * <p>
+     *  此方法从XMLGrammarLoader.loadGrammar或从XMLSchemaValidator调用。
+     * 注意：在任一种情况下,不会调用EntityManager(或EntityResolvers)来解析模式在XSDDescription中的位置。
+     * 
+     * 
      * @param desc
      * @param source
      * @param locationPairs
@@ -625,6 +695,10 @@ XSLoader, DOMConfiguration {
      * to find in the hashtable whether there is a value for that namespace,
      * if so, pass that location value to the user-defined entity resolver.
      *
+     * <p>
+     *  加载器将命名空间/位置对存储在散列表中(使用""作为无命名空间的命名空间)。当解析实体时,加载器首先尝试在散列表中查找该命名空间是否有值,如果有,则将该位置值传递给用户定义的实体解析器。
+     * 
+     * 
      * @param desc
      * @param locationPairs
      * @param entityResolver
@@ -745,6 +819,11 @@ XSLoader, DOMConfiguration {
      * that it should.  - NG
      * Note: all JAXP schema files will be checked for full-schema validity if the feature was set up
      *
+     * <p>
+     * 将各种JAXP SchemaSource属性类型转换为XNI XMLInputSource。
+     * 有效的类型是：任何以前类型的String,org.xml.sax.InputSource,InputStream,File或Object []。
+     *  REVISIT：JAXP 1.2规范不清楚是否该属性应该可用于导入的模式。我假设它应该。 -  NG注意：如果设置了此功能,将检查所有JAXP模式文件的全模式有效性。
+     * 
      */
     private void processJAXPSchemaSource(Map locationPairs) throws IOException {
         fJAXPProcessed = true;
@@ -962,6 +1041,8 @@ XSLoader, DOMConfiguration {
     } //locationArray
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.parser.XMLComponent#getFeatureDefault(java.lang.String)
      */
     public Boolean getFeatureDefault(String featureId) {
@@ -972,6 +1053,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.parser.XMLComponent#getPropertyDefault(java.lang.String)
      */
     public Object getPropertyDefault(String propertyId) {
@@ -980,6 +1063,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xni.parser.XMLComponent#reset(com.sun.org.apache.xerces.internal.xni.parser.XMLComponentManager)
      */
     public void reset(XMLComponentManager componentManager) throws XMLConfigurationException {
@@ -1100,6 +1185,8 @@ XSLoader, DOMConfiguration {
 
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xs.XSLoader#getConfig()
      */
     public DOMConfiguration getConfig() {
@@ -1107,6 +1194,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xs.XSLoader#load(org.w3c.dom.ls.LSInput)
      */
     public XSModel load(LSInput is) {
@@ -1120,6 +1209,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xs.XSLoader#loadInputList(com.sun.org.apache.xerces.internal.xs.DOMInputList)
      */
     public XSModel loadInputList(LSInputList is) {
@@ -1137,6 +1228,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xs.XSLoader#loadURI(java.lang.String)
      */
     public XSModel loadURI(String uri) {
@@ -1151,6 +1244,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xs.XSLoader#loadURIList(com.sun.org.apache.xerces.internal.xs.StringList)
      */
     public XSModel loadURIList(StringList uriList) {
@@ -1179,6 +1274,8 @@ XSLoader, DOMConfiguration {
             }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see DOMConfiguration#canSetParameter(String, Object)
      */
     public boolean canSetParameter(String name, Object value) {
@@ -1216,6 +1313,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see DOMConfiguration#getParameter(String)
      */
     public Object getParameter(String name) throws DOMException {
@@ -1247,6 +1346,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see DOMConfiguration#getParameterNames()
      */
     public DOMStringList getParameterNames() {
@@ -1279,6 +1380,8 @@ XSLoader, DOMConfiguration {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see DOMConfiguration#setParameter(String, Object)
      */
     public void setParameter(String name, Object value) throws DOMException {
@@ -1361,6 +1464,9 @@ XSLoader, DOMConfiguration {
          * the following order: characterStream, byteStream,
          * stringData, systemId, publicId. For consistency
          * have the same behaviour for XSLoader.
+         * <p>
+         *  LSParser按照以下顺序查看在LSInput中指定的输入：characterStream,byteStream,stringData,systemId,publicId。
+         * 对于一致性,具有与XSLoader相同的行为。
          */
 
         // check whether there is a Reader

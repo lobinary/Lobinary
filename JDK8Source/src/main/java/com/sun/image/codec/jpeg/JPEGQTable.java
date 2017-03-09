@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -12,6 +13,15 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ * COPYRIGHT(c)1997-1998 Eastman Kodak公司。
+ *  *** *根据United *** *国家法典第17章的未发表的作品。版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ *  *** *根据United *** *国家法典第17章的未发表的作品。版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package com.sun.image.codec.jpeg;
@@ -27,6 +37,11 @@ package com.sun.image.codec.jpeg;
  * implementations.  We expect that equivalent functionality will eventually
  * be available in a core API or standard extension.
  * <p>
+ * <p>
+ * <p>
+ *  请注意,com.sun.image.codec.jpeg包中的类不是核心Java API的一部分。它们是Sun的JDK和JRE发行版的一部分。
+ * 虽然其他许可证持有者可能选择分发这些类,但开发人员不能依赖其在非Sun实施中的可用性。我们期望等效功能最终将在核心API或标准扩展中可用。
+ * <p>
  */
 public class JPEGQTable {
 
@@ -41,6 +56,9 @@ public class JPEGQTable {
          * JPEG spec section K.1, expressed in zigzag order. The spec says
          * that the values given produce "good" quality, and when divided
          * by 2, "very good" quality.
+         * <p>
+         *  这是在JPEG规格部分K.1中给出的样本亮度量化表,以之字形顺序表示。规格说,给定的值产生"好"质量,并除以2,"非常好"的质量。
+         * 
          */
         public static final JPEGQTable StdLuminance = new JPEGQTable();
         static {
@@ -63,6 +81,9 @@ public class JPEGQTable {
          * JPEG spec section K.1, expressed in zigzag order. The spec says
          * that the values given produce "good" quality, and when divided
          * by 2, "very good" quality.
+         * <p>
+         *  这是在JPEG规格部分K.1中给出的样本亮度量化表,以之字形顺序表示。规格说,给定的值产生"好"质量,并除以2,"非常好"的质量。
+         * 
          */
         public static final JPEGQTable StdChrominance = new JPEGQTable();
         static {
@@ -83,6 +104,9 @@ public class JPEGQTable {
         /**
          * Constructs an empty quantization table. This is used to create
          * the Std Q-Tables.
+         * <p>
+         * 构造一个空的量化表。这用于创建Std Q表。
+         * 
          */
         private JPEGQTable() {
                 quantval = new int[QTABLESIZE];
@@ -92,6 +116,10 @@ public class JPEGQTable {
          * Constructs an quantization table from the array that was
          * passed.  The coefficents must be in zig-zag order. The array
          * must be of length 64.
+         * <p>
+         *  从传递的数组构造一个量化表。系数必须是之字形顺序。该数组的长度必须为64。
+         * 
+         * 
          *  @param table the quantization table (this is copied).
          */
         public JPEGQTable( int table[] ) {
@@ -108,6 +136,10 @@ public class JPEGQTable {
         /**
          * Returns the current quantization table as an array of ints in
          * zig zag order.
+         * <p>
+         *  以zig zag顺序将当前量化表返回为int数组。
+         * 
+         * 
          *  @return A copy of the contained quantization table.
          */
         public int[] getTable() {
@@ -125,6 +157,10 @@ public class JPEGQTable {
          * table, and values greater than one degrade the quality level of
          * the table.
 
+         * <p>
+         *  返回一个新的量化表,其中值乘以scaleFactor,然后钳位到范围1..32767(或如果forceBaseline为'true',则为1..255)。 <P>
+         * 
+         * 
          * @param scaleFactor the multiplication factor for the table
          * @param forceBaseline if true the values will be clamped
          * to the range  [1 .. 255]

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,13 @@ import javax.swing.event.DocumentEvent;
  * a read lock is acquired on the associated document
  * so that the model is stable while being accessed.
  *
+ * <p>
+ *  一个异步布局的框。这对于通过不对其执行任何布局来保持GUI事件线程移动是有用的。布局是在子视图上的粒度操作上完成的。
+ * 在为布局的某一部分访问每个子视图之后(可能耗时的操作),可以放弃剩余的任务或者可以采用新的较高优先级任务(即,服务同步请求或可见区域)。
+ * <p>
+ *  当正在访问子视图时,在相关联的文档上获取读取锁,使得在被访问时模型是稳定的。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @since   1.3
  */
@@ -53,6 +61,10 @@ public class AsyncBoxView extends View {
     /**
      * Construct a box view that does asynchronous layout.
      *
+     * <p>
+     *  构造一个执行异步布局的框视图。
+     * 
+     * 
      * @param elem the element of the model to represent
      * @param axis the axis to tile along.  This can be
      *  either X_AXIS or Y_AXIS.
@@ -71,6 +83,9 @@ public class AsyncBoxView extends View {
      * Fetch the major axis (the axis the children
      * are tiled along).  This will have a value of
      * either X_AXIS or Y_AXIS.
+     * <p>
+     *  获取主轴(孩子们平铺的轴)。这将具有值X_AXIS或Y_AXIS。
+     * 
      */
     public int getMajorAxis() {
         return axis;
@@ -80,6 +95,9 @@ public class AsyncBoxView extends View {
      * Fetch the minor axis (the axis orthogonal
      * to the tiled axis).  This will have a value of
      * either X_AXIS or Y_AXIS.
+     * <p>
+     *  获取短轴(与平铺轴正交的轴)。这将具有值X_AXIS或Y_AXIS。
+     * 
      */
     public int getMinorAxis() {
         return (axis == X_AXIS) ? Y_AXIS : X_AXIS;
@@ -87,6 +105,9 @@ public class AsyncBoxView extends View {
 
     /**
      * Get the top part of the margin around the view.
+     * <p>
+     *  获取视图周围边缘的顶部。
+     * 
      */
     public float getTopInset() {
         return topInset;
@@ -95,6 +116,10 @@ public class AsyncBoxView extends View {
     /**
      * Set the top part of the margin around the view.
      *
+     * <p>
+     *  在视图周围设置边距的顶部。
+     * 
+     * 
      * @param i the value of the inset
      */
     public void setTopInset(float i) {
@@ -103,6 +128,9 @@ public class AsyncBoxView extends View {
 
     /**
      * Get the bottom part of the margin around the view.
+     * <p>
+     *  获取视图周围的边距的底部。
+     * 
      */
     public float getBottomInset() {
         return bottomInset;
@@ -111,6 +139,10 @@ public class AsyncBoxView extends View {
     /**
      * Set the bottom part of the margin around the view.
      *
+     * <p>
+     *  在视图周围设置边距的底部。
+     * 
+     * 
      * @param i the value of the inset
      */
     public void setBottomInset(float i) {
@@ -119,6 +151,9 @@ public class AsyncBoxView extends View {
 
     /**
      * Get the left part of the margin around the view.
+     * <p>
+     *  获取视图周围边缘的左边部分。
+     * 
      */
     public float getLeftInset() {
         return leftInset;
@@ -127,6 +162,10 @@ public class AsyncBoxView extends View {
     /**
      * Set the left part of the margin around the view.
      *
+     * <p>
+     *  在视图周围设置边距的左边部分。
+     * 
+     * 
      * @param i the value of the inset
      */
     public void setLeftInset(float i) {
@@ -135,6 +174,9 @@ public class AsyncBoxView extends View {
 
     /**
      * Get the right part of the margin around the view.
+     * <p>
+     *  获取视图周围边缘的右侧部分。
+     * 
      */
     public float getRightInset() {
         return rightInset;
@@ -143,6 +185,10 @@ public class AsyncBoxView extends View {
     /**
      * Set the right part of the margin around the view.
      *
+     * <p>
+     *  在视图周围设置边距的右边部分。
+     * 
+     * 
      * @param i the value of the inset
      */
     public void setRightInset(float i) {
@@ -152,6 +198,10 @@ public class AsyncBoxView extends View {
     /**
      * Fetch the span along an axis that is taken up by the insets.
      *
+     * <p>
+     *  沿插入所占用的轴获取跨度。
+     * 
+     * 
      * @param axis the axis to determine the total insets along,
      *  either X_AXIS or Y_AXIS.
      * @since 1.4
@@ -173,6 +223,12 @@ public class AsyncBoxView extends View {
      * considered to be accurate and incremental changes will be
      * added into the total as they are calculated.
      *
+     * <p>
+     * 设置estimatedMajorSpan属性,以确定是否应将主要跨度视为已估计。
+     * 如果此属性为true,则setSize沿主轴的值将更改沿主轴的要求,增量更改将被忽略,直到所有子项已更新(这将导致属性自动设置为false)。
+     * 如果属性为false,则majorSpan的值将被视为准确的,并且增量更改将在计算时添加到总计中。
+     * 
+     * 
      * @since 1.4
      */
     protected void setEstimatedMajorSpan(boolean isEstimated) {
@@ -182,6 +238,10 @@ public class AsyncBoxView extends View {
     /**
      * Is the major span currently estimated?
      *
+     * <p>
+     *  目前估计的主要跨距是多少?
+     * 
+     * 
      * @since 1.4
      */
     protected boolean getEstimatedMajorSpan() {
@@ -192,6 +252,10 @@ public class AsyncBoxView extends View {
      * Fetch the object representing the layout state of
      * of the child at the given index.
      *
+     * <p>
+     *  在给定的索引处获取表示子代的布局状态的对象。
+     * 
+     * 
      * @param index the child index.  This should be a
      *   value &gt;= 0 and &lt; getViewCount().
      */
@@ -206,6 +270,9 @@ public class AsyncBoxView extends View {
 
     /**
      * Fetch the queue to use for layout.
+     * <p>
+     *  获取要用于布局的队列。
+     * 
      */
     protected LayoutQueue getLayoutQueue() {
         return LayoutQueue.getDefaultQueue();
@@ -215,6 +282,9 @@ public class AsyncBoxView extends View {
      * New ChildState records are created through
      * this method to allow subclasses the extend
      * the ChildState records to do/hold more
+     * <p>
+     *  通过此方法创建新的ChildState记录,以允许子类ChildState记录执行/保持更多
+     * 
      */
     protected ChildState createChildState(View v) {
         return new ChildState(v);
@@ -237,6 +307,11 @@ public class AsyncBoxView extends View {
      * not estimated, it is updated by the given delta to reflect
      * the incremental change.  The delta is ignored if the
      * major span is estimated.
+     * <p>
+     *  需求沿主轴变化。当完成获取子视图的新偏好时,线程为给定的ChildState对象执行布局调用。通常这将是布局线程,但如果它试图立即更新某个事件线程(如执行模型/视图转换)可能是事件线程。
+     * <p>
+     * 这被实现为将主轴标记为已经改变,使得将来检查以查看需求是否需要被发布到父视图将考虑主轴。如果未估计沿着长轴的跨度,则其由给定的增量更新以反映增量变化。如果估计主跨度,则忽略增量。
+     * 
      */
     protected synchronized void majorRequirementChange(ChildState cs, float delta) {
         if (estimatedMajorSpan == false) {
@@ -254,6 +329,9 @@ public class AsyncBoxView extends View {
      * might be the GUI thread if it is trying to update
      * something immediately (such as to perform a
      * model/view translation).
+     * <p>
+     *  需求沿着短轴改变。当完成获取子视图的新偏好时,线程为给定的ChildState对象执行布局调用。通常,这将是布局线程,但如果它试图更新某些东西(如执行模型/视图转换)可能是GUI线程。
+     * 
      */
     protected synchronized void minorRequirementChange(ChildState cs) {
         minorChanged = true;
@@ -262,6 +340,9 @@ public class AsyncBoxView extends View {
     /**
      * Publish the changes in preferences upward to the parent
      * view.  This is normally called by the layout thread.
+     * <p>
+     *  将首选项中的更改向上发布到父视图。这通常由布局线程调用。
+     * 
      */
     protected void flushRequirementChanges() {
         AbstractDocument doc = (AbstractDocument) getDocument();
@@ -350,6 +431,10 @@ public class AsyncBoxView extends View {
      * thread will not happen (i.e. the layout thread
      * acquires a read lock before doing anything).
      *
+     * <p>
+     *  调用超类更新子视图,并更新子级的状态记录。这可以在模型上保持写锁定时被调用,从而不会发生与布局线程的交互(即布局线程在执行任何操作之前获取读锁定)。
+     * 
+     * 
      * @param offset the starting offset into the child views &gt;= 0
      * @param length the number of existing views to replace &gt;= 0
      * @param views the child views to insert
@@ -397,6 +482,12 @@ public class AsyncBoxView extends View {
      * (via this method), so it is synchronized to exclude
      * preferenceChanged while we are initializing.
      *
+     * <p>
+     *  加载所有子项以初始化视图。这由{@link #setParent setParent}方法调用。子类可以重新实现这一点,以不同的方式初始化它们的子视图。默认实现为每个子元素创建一个子视图。
+     * <p>
+     * 通常在文档被改变时保持写锁定,这保持了渲染和布局线程的安全。这种情况的例外是当视图被初始化以表示现有元素(通过此方法)时,因此在我们初始化时将其同步以排除preferencesChanged。
+     * 
+     * 
      * @param f the view factory
      * @see #setParent
      */
@@ -417,6 +508,10 @@ public class AsyncBoxView extends View {
      * the model.  This is implemented to fetch the view in the case
      * where there is a child view for each child element.
      *
+     * <p>
+     *  获取表示模型中给定位置的子视图索引。这被实现为在每个子元素存在子视图的情况下获取视图。
+     * 
+     * 
      * @param pos the position &gt;= 0
      * @return  index of the view representing the given position, or
      *   -1 if no view represents that position
@@ -434,6 +529,10 @@ public class AsyncBoxView extends View {
      * change on the ChildLocator so that offsets of the children
      * will be correctly computed.
      *
+     * <p>
+     *  响应从模型接收到更改的通知,更新布局。这是为了注意ChildLocator上的更改,以便正确计算子项的偏移量。
+     * 
+     * 
      * @param ec changes to the element this view is responsible
      *  for (may be null if there were no changes).
      * @param e the change information from the associated document
@@ -470,6 +569,12 @@ public class AsyncBoxView extends View {
      * from one place in the view hierarchy to another),
      * the <code>loadChildren</code> method will not be called.
      *
+     * <p>
+     *  设置视图的父级。这被重新实现以提供超类行为以及调用<code> loadChildren </code>方法(如果此视图尚未具有子代)。
+     * 不应该在构造函数中加载子代,因为设置父代的行为可能导致它们尝试在层次结构中搜索(例如获取托管容器)。
+     * 如果此视图具有子代(视图正从视图层次结构中的一个位置移动到另一个位置),则不会调用<code> loadChildren </code>方法。
+     * 
+     * 
      * @param parent the parent of the view, null if none
      */
     public void setParent(View parent) {
@@ -487,6 +592,10 @@ public class AsyncBoxView extends View {
      * on the layout thread.  This method gets messaged from
      * multiple threads via the children.
      *
+     * <p>
+     *  子视图可以在父对象上调用此选项来指示首选项已更改,并应重新考虑布局。这被重新实现以在布局线程上排队新的工作。这个方法通过子进程从多个线程消息。
+     * 
+     * 
      * @param child the child view
      * @param width true if the width preference has changed
      * @param height true if the height preference has changed
@@ -525,6 +634,12 @@ public class AsyncBoxView extends View {
      * axis.  Since the minor axis is flexible, work is queued to resize
      * the children if the minor span changes.
      *
+     * <p>
+     * 设置视图的大小。如果视图缓存任何布局信息,这应该导致视图的布局。
+     * <p>
+     *  由于主轴是异步更新的,并且应该是平铺子代的和,对于主轴忽略调用。由于短轴是灵活的,所以如果次跨度改变,工作将排队等待子节点。
+     * 
+     * 
      * @param width the width &gt;= 0
      * @param height the height &gt;= 0
      */
@@ -536,6 +651,10 @@ public class AsyncBoxView extends View {
     /**
      * Retrieves the size of the view along an axis.
      *
+     * <p>
+     *  检索沿轴的视图大小。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @return the current span of the view along the given axis, >= 0
@@ -554,6 +673,10 @@ public class AsyncBoxView extends View {
      * the minor axis is flexible, work is queued to resize the
      * children if the minor span changes.
      *
+     * <p>
+     *  设置沿轴的视图大小。由于主轴是异步更新的,并且应该是平铺子代的和,对于主轴忽略调用。由于短轴是灵活的,所以如果次跨度改变,工作将排队等待子节点。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @param span the span to layout to >= 0
@@ -602,6 +725,13 @@ public class AsyncBoxView extends View {
      * a later time if not ready (since paint requests
      * can be rescheduled).
      *
+     * <p>
+     *  使用给定的分配和呈现表面渲染视图。
+     * <p>
+     *  这被实现为确定要呈现的期望区域(即未剪裁区域)是否是最新的。如果最新的孩子被呈现。如果不是最新的,则将用于构建期望区域的任务作为高优先级任务放置在布局队列上。
+     * 这保持事件线程移动通过渲染如果准备好,并推迟到以后的时间,如果没有准备好(因为绘画请求可以重新安排)。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param alloc the allocated region to render into
      * @see View#paint
@@ -617,6 +747,10 @@ public class AsyncBoxView extends View {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return   the span the view would like to be rendered into &gt;= 0.
      *           Typically the view is told to render into the span
@@ -642,6 +776,10 @@ public class AsyncBoxView extends View {
      * Determines the minimum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return  the span the view would like to be rendered into &gt;= 0.
      *           Typically the view is told to render into the span
@@ -670,6 +808,10 @@ public class AsyncBoxView extends View {
      * Determines the maximum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最大跨度。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return   the span the view would like to be rendered into &gt;= 0.
      *           Typically the view is told to render into the span
@@ -690,6 +832,10 @@ public class AsyncBoxView extends View {
      * the default is to not be a composite view this
      * returns 0.
      *
+     * <p>
+     *  返回此视图中的视图数。因为默认是不是一个复合视图,这将返回0。
+     * 
+     * 
      * @return the number of views &gt;= 0
      * @see View#getViewCount
      */
@@ -703,6 +849,10 @@ public class AsyncBoxView extends View {
      * Gets the nth child view.  Since there are no
      * children by default, this returns null.
      *
+     * <p>
+     * 获取第n个子视图。由于默认情况下没有子对象,因此返回null。
+     * 
+     * 
      * @param n the number of the view to get, &gt;= 0 &amp;&amp; &lt; getViewCount()
      * @return the view
      */
@@ -721,6 +871,10 @@ public class AsyncBoxView extends View {
      * their location.  This returns null since the
      * default is to not have any child views.
      *
+     * <p>
+     *  获取给定子视图的分配。这使得能够找到各种视图位于何处,而不假定视图存储它们的位置。这返回null,因为默认值是没有任何子视图。
+     * 
+     * 
      * @param index the index of the child, &gt;= 0 &amp;&amp; &lt; getViewCount()
      * @param a  the allocation to this view.
      * @return the allocation to the child
@@ -736,6 +890,10 @@ public class AsyncBoxView extends View {
      * to return -1 to indicate there is no valid child index for any
      * position.
      *
+     * <p>
+     *  返回表示模型中给定位置的子视图索引。默认情况下,一个视图没有子对象,因此实现返回-1表示没有任何有效的子索引。
+     * 
+     * 
      * @param pos the position &gt;= 0
      * @return  index of the view representing the given position, or
      *   -1 if no view represents that position
@@ -749,6 +907,10 @@ public class AsyncBoxView extends View {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param a the allocated region to render into
      * @param b the bias toward the previous character or the
@@ -788,6 +950,13 @@ public class AsyncBoxView extends View {
      * on the child view with a lock on the ChildState object
      * to avoid interaction with the layout thread.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。 biasReturn参数将被填充以表明给定的点更接近模型中的下一个字符或模型中的上一个字符。
+     * <p>
+     *  这期望由GUI线程调用,在相关联的模型上保持读锁定。
+     * 它被实现为定位子视图,并使用ChildLocator对象上的锁确定其分配,并使用ChildState对象上的锁来对子视图调用viewToModel,以避免与布局线程交互。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param a the allocated region to render into
@@ -832,6 +1001,11 @@ public class AsyncBoxView extends View {
      * will be calculated automatically.  If the value &lt; -1,
      * the {@code BadLocationException} will be thrown.
      *
+     * <p>
+     * 提供一种方法来确定下一个可视地表示的模型位置,人们可以放置插入符号。某些视图可能不可见,它们可能不是在模型中找到的相同顺序,或者它们可能不允许访问模型中的一些位置。
+     * 该方法使得能够指定在> = 0的范围内转换的位置。如果值为-1,将自动计算位置。如果值&lt; -1,将抛出{@code BadLocationException}。
+     * 
+     * 
      * @param pos the position to convert
      * @param a the allocated region to render into
      * @param direction the direction from the current position that can
@@ -866,11 +1040,17 @@ public class AsyncBoxView extends View {
     /**
      * The major axis against which the children are
      * tiled.
+     * <p>
+     *  孩子们平铺的主轴。
+     * 
      */
     int axis;
 
     /**
      * The children and their layout statistics.
+     * <p>
+     *  孩子们和他们的布局统计。
+     * 
      */
     List<ChildState> stats;
 
@@ -879,11 +1059,17 @@ public class AsyncBoxView extends View {
      * is also the value returned by getMinimumSize,
      * getPreferredSize, and getMaximumSize along
      * the major axis.
+     * <p>
+     *  沿主轴的当前跨度。这也是getMinimumSize,getPreferredSize和getMaximumSize沿主轴返回的值。
+     * 
      */
     float majorSpan;
 
     /**
      * Is the span along the major axis estimated?
+     * <p>
+     *  是沿长轴的跨度估计吗?
+     * 
      */
     boolean estimatedMajorSpan;
 
@@ -891,6 +1077,9 @@ public class AsyncBoxView extends View {
      * Current span along the minor axis.  This
      * is what layout was done against (i.e. things
      * are flexible in this direction).
+     * <p>
+     *  沿短轴的电流跨度。这是对什么布局(即事情在这个方向是灵活的)。
+     * 
      */
     float minorSpan;
 
@@ -898,6 +1087,9 @@ public class AsyncBoxView extends View {
      * Object that manages the offsets of the
      * children.  All locking for management of
      * child locations is on this object.
+     * <p>
+     *  管理孩子的偏移的对象。用于管理子位置的所有锁定都位于此对象上。
+     * 
      */
     protected ChildLocator locator;
 
@@ -918,6 +1110,9 @@ public class AsyncBoxView extends View {
      * possibly speed up the marking the state.  It also
      * helps flag an opportunity to avoid adding to flush
      * task to the layout queue.
+     * <p>
+     *  正在积极改变大小的孩子。这通常导致preferenceChanged,所以这是一个缓存,可能加速标记状态。它还有助于标记一个机会,以避免将冲洗任务添加到布局队列。
+     * 
      */
     ChildState changing;
 
@@ -928,12 +1123,19 @@ public class AsyncBoxView extends View {
      * may be continuously changing, but the visible area
      * needs to remain fairly stable until the layout thread
      * decides to publish an update to the parent.
+     * <p>
+     * 当在局部区域周围进行改变时管理局部区域中的子视图的有效位置的类。 AsyncBoxView可以不断变化,但可见区域需要保持相当稳定,直到布局线程决定向父级发布更新。
+     * 
+     * 
      * @since 1.3
      */
     public class ChildLocator {
 
         /**
          * construct a child locator.
+         * <p>
+         *  构造子定位器。
+         * 
          */
         public ChildLocator() {
             lastAlloc = new Rectangle();
@@ -946,6 +1148,9 @@ public class AsyncBoxView extends View {
          * This is called by a ChildState object that has
          * changed it's major span.  This can therefore be
          * called by multiple threads.
+         * <p>
+         *  儿童更改的通知。这可以影响是否需要新的偏移计算。这由一个已改变其主跨度的ChildState对象调用。因此,这可以由多个线程调用。
+         * 
          */
         public synchronized void childChanged(ChildState cs) {
             if (lastValidOffset == null) {
@@ -958,6 +1163,9 @@ public class AsyncBoxView extends View {
 
         /**
          * Paint the children that intersect the clip area.
+         * <p>
+         *  绘制与剪裁区域相交的子节点。
+         * 
          */
         public synchronized void paintChildren(Graphics g) {
             Rectangle clip = g.getClipBounds();
@@ -987,6 +1195,9 @@ public class AsyncBoxView extends View {
          * Fetch the allocation to use for a child view.
          * This will update the offsets for all children
          * not yet updated before the given index.
+         * <p>
+         *  获取用于子视图的分配。这将更新在给定索引之前尚未更新的所有子项的偏移量。
+         * 
          */
         public synchronized Shape getChildAllocation(int index, Shape a) {
             if (a == null) {
@@ -1015,6 +1226,10 @@ public class AsyncBoxView extends View {
          * with one or more calls to getChildAllocation that
          * should also be in the synchronized block.
          *
+         * <p>
+         *  获取给定点处的子视图索引。这是由需要计算哪个孩子转发消息的各种View方法调用。这应该由在此对象上同步的块调用,并且通常将跟随一个或多个调用getChildAllocation,也应该在同步块中。
+         * 
+         * 
          * @param x the X coordinate &gt;= 0
          * @param y the Y coordinate &gt;= 0
          * @param a the allocation to the View
@@ -1031,6 +1246,9 @@ public class AsyncBoxView extends View {
          * Fetch the allocation to use for a child view.
          * <em>This does not update the offsets in the ChildState
          * records.</em>
+         * <p>
+         *  获取用于子视图的分配。 <em> </em>这不会更新ChildState记录中的偏移量
+         * 
          */
         protected Shape getChildAllocation(int index) {
             ChildState cs = getChildState(index);
@@ -1057,6 +1275,9 @@ public class AsyncBoxView extends View {
          * Copy the currently allocated shape into the Rectangle
          * used to store the current allocation.  This would be
          * a floating point rectangle in a Java2D-specific implementation.
+         * <p>
+         *  将当前分配的形状复制到用于存储当前分配的Rectangle中。在Java2D特定的实现中,这将是一个浮点矩形。
+         * 
          */
         protected void setAllocation(Shape a) {
             if (a instanceof Rectangle) {
@@ -1073,6 +1294,10 @@ public class AsyncBoxView extends View {
          * on the ChildState objects up to the given target span
          * past the desired offset.
          *
+         * <p>
+         * 找到负责沿主轴的框中的偏移的视图。确保在ChildState对象上设置偏移,直到超过所需偏移的给定目标跨度。
+         * 
+         * 
          * @return   index of the view representing the given visual
          *   location (targetOffset), or -1 if no view represents
          *   that location
@@ -1116,6 +1341,9 @@ public class AsyncBoxView extends View {
         /**
          * Move the location of the last offset calculation forward
          * to the desired offset.
+         * <p>
+         *  将最后一次偏移计算的位置向前移动到所需的偏移。
+         * 
          */
         int updateChildOffsets(float targetOffset) {
             int n = getViewCount();
@@ -1141,6 +1369,9 @@ public class AsyncBoxView extends View {
         /**
          * Move the location of the last offset calculation forward
          * to the desired index.
+         * <p>
+         *  将最后一次偏移计算的位置向前移动到所需的索引。
+         * 
          */
         void updateChildOffsetsToIndex(int index) {
             int pos = lastValidOffset.getChildView().getStartOffset();
@@ -1167,18 +1398,27 @@ public class AsyncBoxView extends View {
         /**
          * The location of the last offset calculation
          * that is valid.
+         * <p>
+         *  最后一次偏移计算的位置有效。
+         * 
          */
         protected ChildState lastValidOffset;
 
         /**
          * The last seen allocation (for repainting when changes
          * are flushed upward).
+         * <p>
+         *  最后一次看到的分配(用于在更改向上刷新时重新绘制)。
+         * 
          */
         protected Rectangle lastAlloc;
 
         /**
          * A shape to use for the child allocation to avoid
          * creating a lot of garbage.
+         * <p>
+         *  一个用于子分配的形状,以避免创建大量的垃圾。
+         * 
          */
         protected Rectangle childAlloc;
     }
@@ -1193,6 +1433,11 @@ public class AsyncBoxView extends View {
      * same time and are not protected from each other).
      * Access to a child view hierarchy is serialized via
      * synchronization on the ChildState instance.
+     * <p>
+     *  表示子视图的布局状态的记录。它可作为另一个线程上的任务运行。对基于模型上的读锁定的子视图的所有访问应该在该对象上同步(即布局线程和GUI线程可以同时具有对模型的读取锁定,并且不受每个其他)。
+     * 通过ChildState实例上的同步可以对子视图层次结构进行序列化。
+     * 
+     * 
      * @since 1.3
      */
     public class ChildState implements Runnable {
@@ -1201,6 +1446,10 @@ public class AsyncBoxView extends View {
          * Construct a child status.  This needs to start
          * out as fairly large so we don't falsely begin with
          * the idea that all of the children are visible.
+         * <p>
+         *  构造子状态。这需要开始相当大,所以我们不是虚假地开始的想法,所有的孩子是可见的。
+         * 
+         * 
          * @since 1.4
          */
         public ChildState(View v) {
@@ -1213,6 +1462,9 @@ public class AsyncBoxView extends View {
 
         /**
          * Fetch the child view this record represents
+         * <p>
+         *  获取此记录表示的子视图
+         * 
          */
         public View getChildView() {
             return child;
@@ -1237,6 +1489,13 @@ public class AsyncBoxView extends View {
          * <li>The child may have been updated by a
          * higher priority operation (i.e. the child
          * may have become visible).
+         * </ol>
+         * <p>
+         *  更新子状态。这应该由希望花费更新子状态(意图是布局线程)的线程来调用。
+         * <p>
+         * 这将在更新期间获取相关文档的读锁定,以确保模型在操作时不会更改。首先要做的是看看是否真的需要做任何工作。在国家等待更新时可能发生以下情况：
+         * <ol>
+         *  <li>子视图可能已从视图层次结构中删除。 <li>子项可能已经通过较高优先级操作更新(即子项可能已变为可见)。
          * </ol>
          */
         public void run () {
@@ -1322,6 +1581,9 @@ public class AsyncBoxView extends View {
 
         /**
          * What is the span along the minor axis.
+         * <p>
+         *  沿着短轴的跨度是多少。
+         * 
          */
         public float getMinorSpan() {
             if (max < minorSpan) {
@@ -1333,6 +1595,9 @@ public class AsyncBoxView extends View {
 
         /**
          * What is the offset along the minor axis
+         * <p>
+         *  沿着短轴的偏移量是多少?
+         * 
          */
         public float getMinorOffset() {
             if (max < minorSpan) {
@@ -1345,6 +1610,9 @@ public class AsyncBoxView extends View {
 
         /**
          * What is the span along the major axis.
+         * <p>
+         *  沿主轴的跨度是多少。
+         * 
          */
         public float getMajorSpan() {
             return span;
@@ -1352,6 +1620,9 @@ public class AsyncBoxView extends View {
 
         /**
          * Get the offset along the major axis
+         * <p>
+         *  获得沿主轴的偏移
+         * 
          */
         public float getMajorOffset() {
             return offset;
@@ -1361,6 +1632,9 @@ public class AsyncBoxView extends View {
          * This method should only be called by the ChildLocator,
          * it is simply a convenient place to hold the cached
          * location.
+         * <p>
+         *  此方法应该只由ChildLocator调用,它只是一个方便的地方来保存缓存的位置。
+         * 
          */
         public void setMajorOffset(float offs) {
             offset = offs;
@@ -1369,6 +1643,10 @@ public class AsyncBoxView extends View {
         /**
          * Mark preferences changed for this child.
          *
+         * <p>
+         *  为此孩子更改了标记首选项。
+         * 
+         * 
          * @param width true if the width preference has changed
          * @param height true if the height preference has changed
          * @see javax.swing.JComponent#revalidate
@@ -1394,6 +1672,9 @@ public class AsyncBoxView extends View {
 
         /**
          * Has the child view been laid out.
+         * <p>
+         *  有儿童观点被布局。
+         * 
          */
         public boolean isLayoutValid() {
             return (minorValid && majorValid && childSizeValid);
@@ -1416,6 +1697,8 @@ public class AsyncBoxView extends View {
 
     /**
      * Task to flush requirement changes upward
+     * <p>
+     *  向上刷新需求更改的任务
      */
     class FlushTask implements Runnable {
 

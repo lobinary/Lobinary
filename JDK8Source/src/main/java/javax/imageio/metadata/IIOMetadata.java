@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,18 @@ import java.lang.reflect.Method;
  * between two native formats as losslessly as the image file formats
  * will allow, an <code>ImageTranscoder</code> object must be used.
  *
+ * <p>
+ *  要由表示与图像和流相关联的元数据(非图像数据)的对象扩展的抽象类。插件使用不透明的插件特定对象来表示元数据。
+ * 然而,这些对象提供了访问它们的内部信息的能力,如支持XML DOM接口的<code> IIOMetadataNode </code>对象的树以及用于存储非文本数据和检索关于法律数据值的信息的附加接口。
+ * 这种树的格式是依赖于插件的,但是插件可以选择支持下面描述的插件中性格式。
+ * 单个插件可以支持多种元数据格式,其名称可以通过调用<code> getMetadataFormatNames </code>来确定。
+ * 插件还可以支持被称为"本地"格式的单个特殊格式,其被设计为无损地对其元数据进行编码。
+ * 此格式通常专门设计为使用特定的文件格式,以便可以以相同的格式加载和保存图像而不丢失元数据,但是在<code> ImageReader </code之间传输元数据可能不太有用>和用于不同图像格式的<code>
+ *  ImageWriter </code>。
+ * 插件还可以支持被称为"本地"格式的单个特殊格式,其被设计为无损地对其元数据进行编码。
+ * 要像两个原生格式一样无损地转换为图像文件格式允许,必须使用一个<code> ImageTranscoder </code>对象。
+ * 
+ * 
  * @see javax.imageio.ImageReader#getImageMetadata
  * @see javax.imageio.ImageReader#getStreamMetadata
  * @see javax.imageio.ImageReader#readAll
@@ -68,12 +81,18 @@ public abstract class IIOMetadata {
     /**
      * A boolean indicating whether the concrete subclass supports the
      * standard metadata format, set via the constructor.
+     * <p>
+     * 一个布尔值,指示具体子类是否支持标准元数据格式,通过构造函数设置。
+     * 
      */
     protected boolean standardFormatSupported;
 
     /**
      * The name of the native metadata format for this object,
      * initialized to <code>null</code> and set via the constructor.
+     * <p>
+     *  此对象的本机元数据格式的名称,初始化为<code> null </code>并通过构造函数设置。
+     * 
      */
     protected String nativeMetadataFormatName = null;
 
@@ -81,6 +100,9 @@ public abstract class IIOMetadata {
      * The name of the class implementing <code>IIOMetadataFormat</code>
      * and representing the native metadata format, initialized to
      * <code>null</code> and set via the constructor.
+     * <p>
+     *  实现<code> IIOMetadataFormat </code>并表示本机元数据格式的类的名称,初始化为<code> null </code>并通过构造函数设置。
+     * 
      */
     protected String nativeMetadataFormatClassName = null;
 
@@ -88,6 +110,9 @@ public abstract class IIOMetadata {
      * An array of names of formats, other than the standard and
      * native formats, that are supported by this plug-in,
      * initialized to <code>null</code> and set via the constructor.
+     * <p>
+     *  此插件支持的格式名称(标准和原生格式除外)的数组,初始化为<code> null </code>并通过构造函数设置。
+     * 
      */
     protected String[] extraMetadataFormatNames = null;
 
@@ -96,6 +121,9 @@ public abstract class IIOMetadata {
      * and representing the metadata formats, other than the standard and
      * native formats, that are supported by this plug-in,
      * initialized to <code>null</code> and set via the constructor.
+     * <p>
+     *  实现<code> IIOMetadataFormat </code>的类的名称数组,表示此插件支持的标准和原生格式以外的元数据格式,初始化为<code> null </code>通过构造函数。
+     * 
      */
     protected String[] extraMetadataFormatClassNames = null;
 
@@ -109,6 +137,13 @@ public abstract class IIOMetadata {
      * provide their own default controller, usually a GUI, for
      * setting parameters.
      *
+     * <p>
+     *  建议用作此<code> IIOMetadata </code>对象的控制器的<code> IIOMetadataController </code>。
+     * 它可以通过<code> getDefaultController </code>检索。
+     * 要安装默认控制器,调用<code> setController(getDefaultController())</code>。
+     * 这个实例变量应该由子类设置,子类选择提供自己的默认控制器(通常是GUI)来设置参数。
+     * 
+     * 
      * @see IIOMetadataController
      * @see #getDefaultController
      */
@@ -121,6 +156,11 @@ public abstract class IIOMetadata {
      * is called.  This value overrides any default controller,
      * even when <code>null</code>.
      *
+     * <p>
+     * 当调用<code> activateController </code>方法时,将用于为<code> IIOMetadata </code>对象提供设置的<code> IIOMetadataContro
+     * ller </code>此值覆盖所有默认控制器,即使<code> null </code>。
+     * 
+     * 
      * @see IIOMetadataController
      * @see #setController(IIOMetadataController)
      * @see #hasController()
@@ -134,6 +174,10 @@ public abstract class IIOMetadata {
      * instance variables that will allow any non-overridden default
      * implementations of methods to satisfy their contracts.  For example,
      * <code>extraMetadataFormatNames</code> should not have length 0.
+     * <p>
+     *  构造一个空的<code> IIOMetadata </code>对象。子类负责为所有受保护的实例变量提供值,这将允许方法的任何未覆盖的默认实现来满足其合同。
+     * 例如,<code> extraMetadataFormatNames </code>的长度不能为0。
+     * 
      */
     protected IIOMetadata() {}
 
@@ -146,6 +190,12 @@ public abstract class IIOMetadata {
      * for validity.  Invalid class names may cause exceptions in
      * subsequent calls to <code>getMetadataFormat</code>.
      *
+     * <p>
+     *  构造具有给定格式名称和格式类名称的<code> IIOMetadata </code>对象,以及指示是否支持标准格式的布尔值。
+     * 
+     *  <p>此构造函数不尝试检查类名称的有效性。无效的类名可能会导致对<code> getMetadataFormat </code>的后续调用中的异常。
+     * 
+     * 
      * @param standardMetadataFormatSupported <code>true</code> if
      * this object can return or accept a DOM tree using the standard
      * metadata format.
@@ -212,6 +262,13 @@ public abstract class IIOMetadata {
      * <p> The default implementation returns the value of the
      * <code>standardFormatSupported</code> instance variable.
      *
+     * <p>
+     *  如果<code> getMetadataFormat </code>,<code> getAsTree </code>,<code> setFromTree </code>和<code> mergeT
+     * ree </code>支持标准元数据格式,则返回<code> true </code> / code>。
+     * 
+     *  <p>默认实现返回<code> standardFormatSupported </code>实例变量的值。
+     * 
+     * 
      * @return <code>true</code> if the standard metadata format
      * is supported.
      *
@@ -229,6 +286,11 @@ public abstract class IIOMetadata {
      * <code>mergeTree</code>, <code>setFromTree</code>, and
      * <code>reset</code> methods.
      *
+     * <p>
+     *  如果此对象不支持<code> mergeTree </code>,<code> setFromTree </code>和<code> reset </code>方法,则返回<code> true </code>
+     * 。
+     * 
+     * 
      * @return true if this <code>IIOMetadata</code> object cannot be
      * modified.
      */
@@ -252,6 +314,15 @@ public abstract class IIOMetadata {
      * <p> The default implementation returns the value of the
      * <code>nativeMetadataFormatName</code> instance variable.
      *
+     * <p>
+     * 返回此插件的"本机"元数据格式的名称,通常允许无损编码和传输以此插件处理的格式存储的元数据。如果不支持这种格式,将返回<code> null </code>。
+     * 
+     *  <p>"本地"元数据格式的结构和内容由创建此<code> IIOMetadata </code>对象的插件定义。
+     * 简单格式的插件通常会为根创建一个虚节点,然后创建一系列表示单个标签,块或关键字/值对的子节点。插件可以选择是否记录其原生格式。
+     * 
+     *  <p>默认实现返回<code> nativeMetadataFormatName </code>实例变量的值。
+     * 
+     * 
      * @return the name of the native format, or <code>null</code>.
      *
      * @see #getExtraMetadataFormatNames
@@ -272,6 +343,14 @@ public abstract class IIOMetadata {
      * <p> The default implementation returns a clone of the
      * <code>extraMetadataFormatNames</code> instance variable.
      *
+     * <p>
+     *  返回一个<code> String </code>数组,其中包含本插件的<code> getAsTree </code>,<code> setFromTree </code>标识的附加元数据格式的名称
+     * ,代码>和<code> mergeTree </code>方法。
+     * 如果没有这样的附加格式,则返回<code> null </code>。
+     * 
+     *  <p>默认实现返回了一个克隆的<code> extraMetadataFormatNames </code>实例变量。
+     * 
+     * 
      * @return an array of <code>String</code>s with length at least
      * 1, or <code>null</code>.
      *
@@ -301,6 +380,15 @@ public abstract class IIOMetadata {
      * <code>getExtraMetadataFormatNames</code> and returns the
      * combined results.
      *
+     * <p>
+     *  返回一个<code> String </code>数组,包含所有元数据格式的名称,包括本插件的<code> getAsTree </code>,<code> setFromTree </code >和
+     * <code> mergeTree </code>方法。
+     * 如果没有这样的格式,则返回<code> null </code>。
+     * 
+     * <p>默认实现调用<code> getNativeMetadataFormatName </code>,<code> isStandardMetadataFormatSupported </code>和
+     * <code> getExtraMetadataFormatNames </code>,并返回组合结果。
+     * 
+     * 
      * @return an array of <code>String</code>s.
      *
      * @see #getNativeMetadataFormatName
@@ -363,6 +451,18 @@ public abstract class IIOMetadata {
      * constructs an instance of that class using its
      * <code>getInstance</code> method.
      *
+     * <p>
+     *  返回描述给定元数据格式的<code> IIOMetadataFormat </code>对象,如果没有可用的描述,则返回<code> null </code>。
+     * 提供的名称必须是由<code> getMetadataFormatNames </code>(<i> </i>)返回的名称之一,即本机格式名称,标准格式名称或<code> getExtraMetadat
+     * aFormatNames < / code>)。
+     *  返回描述给定元数据格式的<code> IIOMetadataFormat </code>对象,如果没有可用的描述,则返回<code> null </code>。
+     * 
+     *  <p>默认实现根据全局标准元数据格式名称检查名称,并返回该格式(如果支持)。否则,它将检查本机格式名称,后跟任何其他格式名称。
+     * 如果找到匹配,则从<code> nativeMetadataFormatClassName </code>或<code> extraMetadataFormatClassNames </code>中适当
+     * 地检索<code> IIOMetadataFormat </code>类的名称,并构造该类的实例它的<code> getInstance </code>方法。
+     *  <p>默认实现根据全局标准元数据格式名称检查名称,并返回该格式(如果支持)。否则,它将检查本机格式名称,后跟任何其他格式名称。
+     * 
+     * 
      * @param formatName the desired metadata format.
      *
      * @return an <code>IIOMetadataFormat</code> object.
@@ -456,6 +556,12 @@ public abstract class IIOMetadata {
      * <p> The names of the available metadata formats may be queried
      * using the <code>getMetadataFormatNames</code> method.
      *
+     * <p>
+     *  返回一个XML DOM <code> Node </code>对象,它根据给定元数据格式定义的约定表示此对象中包含的元数据树的根。
+     * 
+     *  <p>可用的元数据格式的名称可以使用<code> getMetadataFormatNames </code>方法查询。
+     * 
+     * 
      * @param formatName the desired metadata format.
      *
      * @return an XML DOM <code>Node</code> object forming the
@@ -486,6 +592,13 @@ public abstract class IIOMetadata {
      * the format, including simply replacing all existing state with the
      * contents of the given tree.
      *
+     * <p>
+     * 从XML DOM <code> Node </code>的树中更改此<code> IIOMetadata </code>对象的内部状态,该树的语法由给定的元数据格式定义。
+     * 仅当必要时改变先前状态以适应存在于给定树中的节点。如果树结构或内容无效,将抛出<code> IIOInvalidTreeException </code>。
+     * 
+     *  <p>由于树或子树如何可以与另一个树合并的语义完全是格式特定的,插件作者可以以任何最适合该格式的方式实现该方法,包括简单地用所有现有状态替换为给定树的内容。
+     * 
+     * 
      * @param formatName the desired metadata format.
      * @param root an XML DOM <code>Node</code> object forming the
      * root of a tree.
@@ -519,6 +632,16 @@ public abstract class IIOMetadata {
      * appropriate subtree if they wish to support the standard
      * metadata format.
      *
+     * <p>
+     *  如果没有这样的信息,则返回表示标准<code> javax_imageio_1.0 </code>元数据格式或<code> null </code>的色度信息的<code> IIOMetadataNo
+     * de </code>。
+     * 此方法旨在由实用程序<code> getStandardTree </code>调用。
+     * 
+     *  <p>默认实现返回<code> null </code>。
+     * 
+     *  <p>如果子类支持标准元数据格式,则子类应重写此方法以生成相应的子树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code>, or <code>null</code>.
      *
      * @see #getStandardTree
@@ -541,6 +664,15 @@ public abstract class IIOMetadata {
      * appropriate subtree if they wish to support the standard
      * metadata format.
      *
+     * <p>
+     *  如果没有这样的信息,则返回表示标准<code> javax_imageio_1.0 </code>元数据格式或<code> null </code>的压缩信息的<code> IIOMetadataNo
+     * de </code>此方法旨在由实用程序<code> getStandardTree </code>调用。
+     * 
+     * <p>默认实现返回<code> null </code>。
+     * 
+     *  <p>如果子类支持标准元数据格式,则子类应重写此方法以生成相应的子树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code>, or <code>null</code>.
      *
      * @see #getStandardTree
@@ -563,6 +695,15 @@ public abstract class IIOMetadata {
      * appropriate subtree if they wish to support the standard
      * metadata format.
      *
+     * <p>
+     *  如果没有这样的信息,则返回表示标准<code> javax_imageio_1.0 </code>元数据格式或<code> null </code>的数据格式信息的<code> IIOMetadata
+     * Node </code>此方法旨在由实用程序<code> getStandardTree </code>调用。
+     * 
+     *  <p>默认实现返回<code> null </code>。
+     * 
+     *  <p>如果子类支持标准元数据格式,则子类应重写此方法以生成相应的子树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code>, or <code>null</code>.
      *
      * @see #getStandardTree
@@ -585,6 +726,15 @@ public abstract class IIOMetadata {
      * appropriate subtree if they wish to support the standard
      * metadata format.
      *
+     * <p>
+     *  如果没有此类信息可用,则返回表示标准<code> javax_imageio_1.0 </code>元数据格式或<code> null </code>的维度信息的<code> IIOMetadataN
+     * ode </code>此方法旨在由实用程序<code> getStandardTree </code>调用。
+     * 
+     *  <p>默认实现返回<code> null </code>。
+     * 
+     *  <p>如果子类支持标准元数据格式,则子类应重写此方法以生成相应的子树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code>, or <code>null</code>.
      *
      * @see #getStandardTree
@@ -606,6 +756,15 @@ public abstract class IIOMetadata {
      * appropriate subtree if they wish to support the standard
      * metadata format.
      *
+     * <p>
+     *  如果没有此类信息可用,则返回表示标准<code> javax_imageio_1.0 </code>元数据格式或<code> null </code>的文档信息的<code> IIOMetadataN
+     * ode </code>此方法旨在由实用程序<code> getStandardTree </code>调用。
+     * 
+     * <p>默认实现返回<code> null </code>。
+     * 
+     *  <p>如果子类支持标准元数据格式,则子类应重写此方法以生成相应的子树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code>, or <code>null</code>.
      *
      * @see #getStandardTree
@@ -627,6 +786,15 @@ public abstract class IIOMetadata {
      * appropriate subtree if they wish to support the standard
      * metadata format.
      *
+     * <p>
+     *  如果没有此类信息可用,则返回表示标准<code> javax_imageio_1.0 </code>元数据格式或<code> null </code>的文本信息的<code> IIOMetadataN
+     * ode </code>此方法旨在由实用程序<code> getStandardTree </code>调用。
+     * 
+     *  <p>默认实现返回<code> null </code>。
+     * 
+     *  <p>如果子类支持标准元数据格式,则子类应重写此方法以生成相应的子树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code>, or <code>null</code>.
      *
      * @see #getStandardTree
@@ -648,6 +816,15 @@ public abstract class IIOMetadata {
      * appropriate subtree if they wish to support the standard
      * metadata format.
      *
+     * <p>
+     *  如果没有这样的信息,则返回表示标准<code> javax_imageio_1.0 </code>元数据格式或<code> null </code>的平铺信息的<code> IIOMetadataNo
+     * de </code>此方法旨在由实用程序<code> getStandardTree </code>调用。
+     * 
+     *  <p>默认实现返回<code> null </code>。
+     * 
+     *  <p>如果子类支持标准元数据格式,则子类应重写此方法以生成相应的子树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code>, or <code>null</code>.
      *
      * @see #getStandardTree
@@ -670,6 +847,16 @@ public abstract class IIOMetadata {
      * appropriate subtree if they wish to support the standard
      * metadata format.
      *
+     * <p>
+     *  如果没有这样的信息,则返回表示标准<code> javax_imageio_1.0 </code>元数据格式或<code> null </code>的透明度信息的<code> IIOMetadataN
+     * ode </code>。
+     * 此方法旨在由实用程序<code> getStandardTree </code>调用。
+     * 
+     * <p>默认实现返回<code> null </code>。
+     * 
+     *  <p>如果子类支持标准元数据格式,则子类应重写此方法以生成相应的子树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code>, or <code>null</code>.
      */
     protected IIOMetadataNode getStandardTransparencyNode() {
@@ -679,6 +866,9 @@ public abstract class IIOMetadata {
     /**
      * Appends a new node to an existing node, if the new node is
      * non-<code>null</code>.
+     * <p>
+     *  如果新节点是非<code> null </code>,则向现有节点追加新节点。
+     * 
      */
     private void append(IIOMetadataNode root, IIOMetadataNode node) {
         if (node != null) {
@@ -699,6 +889,13 @@ public abstract class IIOMetadata {
      * If all of them return <code>null</code>, a tree consisting of a
      * single root node will be returned.
      *
+     * <p>
+     *  一种实用方法,用于根据标准<code> javax_imageio_1.0 </code>元数据格式的约定返回表示此对象中包含的元数据的<code> IIOMetadataNode </code>
+     * 
+     *  <p>此方法调用各种<code> getStandard * Node </code>方法来提供以根节点的子节点为根的每个子树。
+     * 如果任何这些方法返回<code> null </code>,相应的子树将被省略。如果它们都返回<code> null </code>,那么将返回由单个根节点组成的树。
+     * 
+     * 
      * @return an <code>IIOMetadataNode</code> representing the root
      * of a metadata tree in the <code>javax_imageio_1.0</code>
      * format.
@@ -736,6 +933,13 @@ public abstract class IIOMetadata {
      * <p> The default implementation calls <code>reset</code>
      * followed by <code>mergeTree(formatName, root)</code>.
      *
+     * <p>
+     *  从XML DOM <code> Node </code>的树中设置此<code> IIOMetadata </code>对象的内部状态,该树的语法由给定的元数据格式定义。先前的状态被丢弃。
+     * 如果树的结构或内容无效,将抛出<code> IIOInvalidTreeException </code>。
+     * 
+     *  <p>默认实现调用<code> reset </code>后跟<code> mergeTree(formatName,root)</code>。
+     * 
+     * 
      * @param formatName the desired metadata format.
      * @param root an XML DOM <code>Node</code> object forming the
      * root of a tree.
@@ -766,6 +970,10 @@ public abstract class IIOMetadata {
      * Note that there are many possible default values, depending on
      * how the object was created.
      *
+     * <p>
+     * 将存储在此对象中的所有数据重置为默认值,通常为此对象在构建后立即处于的状态,尽管精确语义是插件特定的。请注意,有许多可能的默认值,具体取决于对象的创建方式。
+     * 
+     * 
      * @exception IllegalStateException if this object is read-only.
      *
      * @see javax.imageio.ImageReader#getStreamMetadata
@@ -787,6 +995,15 @@ public abstract class IIOMetadata {
      * <p> The default implementation sets the <code>controller</code>
      * instance variable to the supplied value.
      *
+     * <p>
+     *  当调用<code> activateController </code>方法时,设置<code> IIOMetadataController </code>用于为<code> IIOMetadata 
+     * </code>对象提供设置,覆盖任何默认控制器。
+     * 如果参数是<code> null </code>,则不使用控制器,包括任何默认值。
+     * 要恢复默认值,使用<code> setController(getDefaultController())</code>。
+     * 
+     *  <p>默认实现将<code> controller </code>实例变量设置为提供的值。
+     * 
+     * 
      * @param controller An appropriate
      * <code>IIOMetadataController</code>, or <code>null</code>.
      *
@@ -809,6 +1026,13 @@ public abstract class IIOMetadata {
      * <p> The default implementation returns the value of the
      * <code>controller</code> instance variable.
      *
+     * <p>
+     *  返回当前安装的<code> IIOMetadataController </code>。
+     * 如果有一个<code> null </code>,或者最近一次调用<code> setController </code>的参数,这可能是默认值。
+     * 
+     *  <p>默认实现返回<code> controller </code>实例变量的值。
+     * 
+     * 
      * @return the currently installed
      * <code>IIOMetadataController</code>, or <code>null</code>.
      *
@@ -830,6 +1054,12 @@ public abstract class IIOMetadata {
      * <p> The default implementation returns the value of the
      * <code>defaultController</code> instance variable.
      *
+     * <p>
+     *  返回默认<code> IIOMetadataController </code>(如果有),而不管当前安装的控制器。如果没有默认控制器,则返回<code> null </code>。
+     * 
+     *  <p>默认实现返回<code> defaultController </code>实例变量的值。
+     * 
+     * 
      * @return the default <code>IIOMetadataController</code>, or
      * <code>null</code>.
      *
@@ -851,6 +1081,12 @@ public abstract class IIOMetadata {
      * <code>getController</code> method returns a
      * non-<code>null</code> value.
      *
+     * <p>
+     *  如果为此<code> IIOMetadata </code>对象安装了控制器,则返回<code> true </code>。
+     * 
+     * <p>如果<code> getController </code>方法返回非<code> null </code>值,则默认实现返回<code> true </code>。
+     * 
+     * 
      * @return <code>true</code> if a controller is installed.
      *
      * @see IIOMetadataController
@@ -880,6 +1116,13 @@ public abstract class IIOMetadata {
      * and the calls <code>activate</code> on the returned object if
      * <code>hasController</code> returns <code>true</code>.
      *
+     * <p>
+     *  为此<code> IIOMetadata </code>对象激活安装的<code> IIOMetadataController </code>,并返回结果值。
+     * 当此方法返回<code> true </code>时,此<code> IIOMetadata </code>对象的所有值都可以用于下一个写操作。
+     * 如果返回<code> false </code>,则此对象中的任何设置都不会受到干扰(即</i>,用户取消操作)。
+     * 
+     *  <p>通常,控制器将是为特定插件的<code> IIOMetadata </code>子类提供用户界面的GUI。然而,控制器不需要是GUI。
+     * 
      * @return <code>true</code> if the controller completed normally.
      *
      * @exception IllegalStateException if there is no controller

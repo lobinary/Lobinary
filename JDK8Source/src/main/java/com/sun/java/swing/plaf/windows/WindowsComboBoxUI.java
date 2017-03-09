@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,13 @@ import sun.swing.StringUIClientPropertyKey;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  Windows组合框。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Tom Santos
  * @author Igor Kushnirskiy
  */
@@ -162,6 +170,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     @Override
@@ -178,6 +190,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     @Override
@@ -189,6 +205,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     protected void configureEditor() {
@@ -200,6 +220,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     protected void unconfigureEditor() {
@@ -209,6 +233,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     public void paint(Graphics g, JComponent c) {
@@ -250,6 +278,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
     /**
      * If necessary paints the currently selected item.
      *
+     * <p>
+     *  如果需要,绘制当前选择的项目。
+     * 
+     * 
      * @param g Graphics to paint to
      * @param bounds Region to paint current value to
      * @param hasFocus whether or not the JComboBox has focus
@@ -318,6 +350,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     public void paintCurrentValueBackground(Graphics g, Rectangle bounds,
@@ -342,6 +378,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
      * Creates a layout manager for managing the components which make up the
      * combo box.
      *
+     * <p>
+     *  创建用于管理组成组合框的组件的布局管理器。
+     * 
+     * 
      * @return an instance of a layout manager
      */
     protected LayoutManager createLayoutManager() {
@@ -376,6 +416,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
      * A default editor will be used only if an editor has not been
      * explicitly set with <code>setEditor</code>.
      *
+     * <p>
+     *  创建将在可编辑组合框中使用的默认编辑器。只有未使用<code> setEditor </code>明确设置编辑器时,才会使用默认编辑器。
+     * 
+     * 
      * @return a <code>ComboBoxEditor</code> used for the combo box
      * @see javax.swing.JComboBox#setEditor
      */
@@ -385,6 +429,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.6
      */
     @Override
@@ -401,6 +449,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
      * Creates an button which will be used as the control to show or hide
      * the popup portion of the combo box.
      *
+     * <p>
+     *  创建一个按钮,将用作控件来显示或隐藏组合框的弹出部分。
+     * 
+     * 
      * @return a button which represents the popup control
      */
     protected JButton createArrowButton() {
@@ -436,6 +488,9 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
                 /*
                  * for non editable ComboBoxes Vista seems to have the
                  * same glyph for all non DISABLED states
+                 * <p>
+                 *  对于不可编辑的ComboBoxes Vista似乎对所有非DISABLED状态具有相同的字形
+                 * 
                  */
                 rv = State.NORMAL;
             }
@@ -462,6 +517,10 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
      * Only included for backwards API compatibility.
      * Do not call or override.
      *
+     * <p>
+     *  子类添加Windows特定的键绑定。这个类现在已经过时,不做任何事情。仅包含向后API兼容性。不要调用或覆盖。
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.4.
      */
     @Deprecated
@@ -485,12 +544,19 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
 
     /**
      * Subclassed to highlight selected item in an editable combo box.
+     * <p>
+     *  子类化以在可编辑组合框中突出显示所选项目。
+     * 
      */
     public static class WindowsComboBoxEditor
         extends BasicComboBoxEditor.UIResource {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.6
          */
         protected JTextField createEditorComponent() {
@@ -515,6 +581,9 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
     /**
      * Subclassed to set opacity {@code false} on the renderer
      * and to show border for focused cells.
+     * <p>
+     *  子类化为在渲染器上设置不透明度{@code false},并显示聚焦单元格的边框。
+     * 
      */
     private static class WindowsComboBoxRenderer
           extends BasicComboBoxRenderer.UIResource {
@@ -523,6 +592,8 @@ public class WindowsComboBoxUI extends BasicComboBoxUI {
         private static final Border NULL_BORDER = new EmptyBorder(0, 0, 0, 0);
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
          */
         @Override
         public Component getListCellRendererComponent(

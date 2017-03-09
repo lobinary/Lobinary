@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,27 @@ import javax.security.auth.Subject;
  *
  * <p>(The continuation lines with {@code \} come from the parser for
  * Properties files.)</p>
+ * <p>
+ *  <p>此类的对象实现MBeanServerAccessController接口,并为每个方法调用相应的检查方法,然后将请求转发到包装的MBeanServer对象。
+ * 如果不允许操作,检查方法可能抛出SecurityException;在这种情况下,请求不会转发到包装的对象。</p>。
+ * 
+ *  <p>此类根据访问权限实现{@link #checkRead()},{@link #checkWrite()},{@link #checkCreate(String)}和{@link #checkUnregister(ObjectName)}
+ * 方法级别属性文件包含用户名/访问级别对。
+ * 用户名/访问级别对的集合作为表示磁盘上的属性文件的文件名传递,或者直接作为{@link属性}类的实例传递。在这两种情况下,每个属性的名称表示用户名,并且属性的值是关联的访问级别。
+ * 因此,任何给定的用户名或者不存在于属性中或者具有恰好一个访问级别。相同的访问级别可以由多个用户名共享。</p>。
+ * 
+ *  <p>支持的访问级别值为{@code readonly}和{@code readwrite}。
+ *  {@code readwrite}访问级别可以由一个或多个<i>子句</i>限定,其中每个子句类似于<code> create <i> classNamePattern </i> </code>或{@code unregister }
+ * 。
+ *  <p>支持的访问级别值为{@code readonly}和{@code readwrite}。例如：</p>。
+ * 
+ * <pre>
+ * monitorRole readonly controlRole readwrite \ create javax.management.timer。
+ * *,javax.management.monitor。* \ unregister。
+ * </pre>
+ * 
+ *  <p>(与{@code \}的延续线来自属性文件的解析器。)</p>
+ * 
  */
 public class MBeanServerFileAccessController
     extends MBeanServerAccessController {
@@ -116,6 +138,14 @@ public class MBeanServerFileAccessController
      *
      * <p>This instance is initialized from the specified properties file.</p>
      *
+     * <p>
+     *  <p>创建一个新的MBeanServerAccessController,通过在根据读取和写入权限进行访问检查后调用{@link #setMBeanServer}方法将所有MBeanServer请求转
+     * 发到MBeanServer集。
+     * </p>。
+     * 
+     *  <p>此实例从指定的属性文件初始化。</p>
+     * 
+     * 
      * @param accessFileName name of the file which denotes a properties
      * file on disk containing the username/access level entries.
      *
@@ -141,6 +171,12 @@ public class MBeanServerFileAccessController
      *
      * <p>This instance is initialized from the specified properties file.</p>
      *
+     * <p>
+     *  <p>创建一个新的MBeanServerAccessController,在根据读取和写入权限进行访问检查后,将所有MBeanServer请求转发到<code> mbs </code>。</p>
+     * 
+     *  <p>此实例从指定的属性文件初始化。</p>
+     * 
+     * 
      * @param accessFileName name of the file which denotes a properties
      * file on disk containing the username/access level entries.
      *
@@ -175,6 +211,15 @@ public class MBeanServerFileAccessController
      * <code>MBeanServerFileAccessController</code> will make a new
      * copy of the properties object at that time.</p>
      *
+     * <p>
+     *  <p>创建一个新的MBeanServerAccessController,通过在根据读取和写入权限进行访问检查后调用{@link #setMBeanServer}方法将所有MBeanServer请求转
+     * 发到MBeanServer集。
+     * </p>。
+     * 
+     *  <p>此实例从指定的属性实例初始化。此构造函数创建属性实例的副本,它是查阅的副本以检查传入连接的用户名和访问级别。可以修改原始属性对象,而不会影响副本。
+     * 如果随后调用{@link #refresh}方法,那么<code> MBeanServerFileAccessController </code>将会创建此时的属性对象的新副本。</p>。
+     * 
+     * 
      * @param accessFileProps properties list containing the username/access
      * level entries.
      *
@@ -206,6 +251,15 @@ public class MBeanServerFileAccessController
      * <code>MBeanServerFileAccessController</code> will make a new
      * copy of the properties object at that time.</p>
      *
+     * <p>
+     * <p>创建一个新的MBeanServerAccessController,通过在根据读取和写入权限进行访问检查后调用{@link #setMBeanServer}方法将所有MBeanServer请求转发
+     * 到MBeanServer集。
+     * </p>。
+     * 
+     *  <p>此实例从指定的属性实例初始化。此构造函数创建属性实例的副本,它是查阅的副本以检查传入连接的用户名和访问级别。可以修改原始属性对象,而不会影响副本。
+     * 如果随后调用{@link #refresh}方法,那么<code> MBeanServerFileAccessController </code>将会创建此时的属性对象的新副本。</p>。
+     * 
+     * 
      * @param accessFileProps properties list containing the username/access
      * level entries.
      *
@@ -225,6 +279,9 @@ public class MBeanServerFileAccessController
     /**
      * Check if the caller can do read operations. This method does
      * nothing if so, otherwise throws SecurityException.
+     * <p>
+     *  检查调用者是否可以执行读取操作。此方法不执行任何操作,如果是这样,否则抛出SecurityException。
+     * 
      */
     @Override
     public void checkRead() {
@@ -234,6 +291,9 @@ public class MBeanServerFileAccessController
     /**
      * Check if the caller can do write operations.  This method does
      * nothing if so, otherwise throws SecurityException.
+     * <p>
+     *  检查调用者是否可以进行写操作。此方法不执行任何操作,如果是这样,否则抛出SecurityException。
+     * 
      */
     @Override
     public void checkWrite() {
@@ -243,6 +303,9 @@ public class MBeanServerFileAccessController
     /**
      * Check if the caller can create MBeans or instances of the given class.
      * This method does nothing if so, otherwise throws SecurityException.
+     * <p>
+     *  检查调用者是否可以创建MBean或给定类的实例。此方法不执行任何操作,如果是这样,否则抛出SecurityException。
+     * 
      */
     @Override
     public void checkCreate(String className) {
@@ -252,6 +315,9 @@ public class MBeanServerFileAccessController
     /**
      * Check if the caller can do unregister operations.  This method does
      * nothing if so, otherwise throws SecurityException.
+     * <p>
+     *  检查调用程序是否可以取消注册操作。此方法不执行任何操作,如果是这样,否则抛出SecurityException。
+     * 
      */
     @Override
     public void checkUnregister(ObjectName name) {
@@ -273,6 +339,13 @@ public class MBeanServerFileAccessController
      * constructors then a new copy of the <code>Properties</code> object
      * is made.</p>
      *
+     * <p>
+     *  <p>刷新用户名/访问级别条目集。</p>
+     * 
+     *  <p>如果此实例是使用{@link #MBeanServerFileAccessController(String)}或{@link #MBeanServerFileAccessController(String,MBeanServer)}
+     * 构造函数创建的,以指定从中读取条目的文件,则会重新读取该文件。
+     *  </p>。
+     * 
      * @exception IOException if the file does not exist, is a
      * directory rather than a regular file, or for some other
      * reason cannot be opened for reading.

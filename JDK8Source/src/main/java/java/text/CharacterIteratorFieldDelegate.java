@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.util.ArrayList;
  * <code>AttributedCharacterIterator</code> can be retrieved by way of
  * the <code>getIterator</code> method.
  *
+ * <p>
+ *  CharacterIteratorFieldDelegate将来自格式的通知合并到结果<code> AttributedCharacterIterator </code>中。
+ * 生成的<code> AttributedCharacterIterator </code>可以通过<code> getIterator </code>方法检索。
+ * 
  */
 class CharacterIteratorFieldDelegate implements Format.FieldDelegate {
     /**
@@ -40,11 +45,18 @@ class CharacterIteratorFieldDelegate implements Format.FieldDelegate {
      * attributedStrings. Subsequent invocations of <code>formatted</code>
      * for existing regions result in invoking addAttribute on the existing
      * AttributedStrings.
+     * <p>
+     *  AttributeStrings数组。每当为区域>大小调用<code>格式化的</code>时,会将一个AttributedString的新实例添加到attributStrings。
+     * 对现有区域的<code>格式化</code>的后续调用导致对现有AttributedStrings调用addAttribute。
+     * 
      */
     private ArrayList<AttributedString> attributedStrings;
     /**
      * Running count of the number of characters that have
      * been encountered.
+     * <p>
+     *  运行已遇到的字符数的计数。
+     * 
      */
     private int size;
 
@@ -102,6 +114,9 @@ class CharacterIteratorFieldDelegate implements Format.FieldDelegate {
      * to iterate over the resulting formatted String.
      *
      * @pararm string Result of formatting.
+     * <p>
+     *  返回一个<code> AttributedCharacterIterator </code>,可用于对生成的格式化String进行迭代。
+     * 
      */
     public AttributedCharacterIterator getIterator(String string) {
         // Add the last AttributedCharacterIterator if necessary

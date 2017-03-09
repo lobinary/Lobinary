@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,12 @@ import sun.misc.JarIndex;
  * an optional <code>Manifest</code> entry. The <code>Manifest</code>
  * can be used to store meta-information about the JAR file and its entries.
  *
+ * <p>
+ *  <code> JarInputStream </code>类用于从任何输入流读取JAR文件的内容。
+ * 它扩展了<code> java.util.zip.ZipInputStream </code>类,支持读取可选的<code> Manifest </code>条目。
+ *  <code> Manifest </code>可用于存储有关JAR文件及其条目的元信息。
+ * 
+ * 
  * @author  David Connelly
  * @see     Manifest
  * @see     java.util.zip.ZipInputStream
@@ -55,6 +62,10 @@ class JarInputStream extends ZipInputStream {
      * Creates a new <code>JarInputStream</code> and reads the optional
      * manifest. If a manifest is present, also attempts to verify
      * the signatures if the JarInputStream is signed.
+     * <p>
+     *  创建一个新的<code> JarInputStream </code>并读取可选的清单。如果存在清单,还会尝试在JarInputStream签名时验证签名。
+     * 
+     * 
      * @param in the actual input stream
      * @exception IOException if an I/O error has occurred
      */
@@ -67,6 +78,10 @@ class JarInputStream extends ZipInputStream {
      * manifest. If a manifest is present and verify is true, also attempts
      * to verify the signatures if the JarInputStream is signed.
      *
+     * <p>
+     *  创建一个新的<code> JarInputStream </code>并读取可选的清单。如果清单存在并且verify为true,还会尝试在JarInputStream已签名的情况下验证签名。
+     * 
+     * 
      * @param in the actual input stream
      * @param verify whether or not to verify the JarInputStream if
      * it is signed.
@@ -119,6 +134,10 @@ class JarInputStream extends ZipInputStream {
      * Returns the <code>Manifest</code> for this JAR file, or
      * <code>null</code> if none.
      *
+     * <p>
+     *  返回此JAR文件的<code> Manifest </code>,如果没有则返回<code> null </code>。
+     * 
+     * 
      * @return the <code>Manifest</code> for this JAR file, or
      *         <code>null</code> if none.
      */
@@ -131,6 +150,10 @@ class JarInputStream extends ZipInputStream {
      * beginning of the entry data. If verification has been enabled,
      * any invalid signature detected while positioning the stream for
      * the next entry will result in an exception.
+     * <p>
+     *  读取下一个ZIP文件条目,并将流定位在条目数据的开头。如果已启用验证,则在将流定位到下一个条目时检测到的任何无效签名将导致异常。
+     * 
+     * 
      * @exception ZipException if a ZIP file error has occurred
      * @exception IOException if an I/O error has occurred
      * @exception SecurityException if any of the jar file entries
@@ -169,6 +192,10 @@ class JarInputStream extends ZipInputStream {
      * beginning of the entry data. If verification has been enabled,
      * any invalid signature detected while positioning the stream for
      * the next entry will result in an exception.
+     * <p>
+     *  读取下一个JAR文件条目,并将流定位在条目数据的开头。如果已启用验证,则在将流定位到下一个条目时检测到的任何无效签名将导致异常。
+     * 
+     * 
      * @return the next JAR file entry, or null if there are no more entries
      * @exception ZipException if a ZIP file error has occurred
      * @exception IOException if an I/O error has occurred
@@ -187,6 +214,11 @@ class JarInputStream extends ZipInputStream {
      * If verification has been enabled, any invalid signature
      * on the current entry will be reported at some point before the
      * end of the entry is reached.
+     * <p>
+     * 从当前JAR文件条目读入一个字节数组。如果<code> len </code>不为零,则该方法阻塞,直到某些输入可用;否则,不读取任何字节,并返回<code> 0 </code>。
+     * 如果已启用验证,则将在到达条目结束之前的某个时间点报告当前条目上的任何无效签名。
+     * 
+     * 
      * @param b the buffer into which the data is read
      * @param off the start offset in the destination array <code>b</code>
      * @param len the maximum number of bytes to read
@@ -220,6 +252,10 @@ class JarInputStream extends ZipInputStream {
      * the specified JAR file entry name will be copied to the new
      * <CODE>JarEntry</CODE>.
      *
+     * <p>
+     *  为指定的JAR文件条目名称创建新的<code> JarEntry </code>(<code> ZipEntry </code>)。
+     * 指定的JAR文件条目名称的清单属性将复制到新的<CODE> JarEntry </CODE>。
+     * 
      * @param name the name of the JAR/ZIP file entry
      * @return the <code>JarEntry</code> object just created
      */

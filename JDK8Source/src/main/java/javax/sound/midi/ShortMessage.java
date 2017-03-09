@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,19 @@ package javax.sound.midi;
  * you can use the <A HREF="MidiMessage.html#integersVsBytes">conversion code</A>
  * given in the <code>{@link MidiMessage}</code> class description.
  *
+ * <p>
+ *  <code> ShortMessage </code>包含一个MIDI消息,其状态字节后至多有两个数据字节。
+ * 满足该标准的MIDI消息的类型是信道语音,信道模式,系统公共和系统实时 - 换句话说,除了系统独占和元事件之外的所有事物。
+ *  <code> ShortMessage </code>类提供了获取和设置MIDI消息内容的方法。
+ * <p>
+ *  许多<code> ShortMessage </code>方法具有整数参数,通过它们可以指定MIDI状态或数据字节。如果你知道数值,你可以直接表示。
+ * 对于系统公共和系统实时消息,您通常可以使用<code> ShortMessage </code>的相应字段,例如{@link #SYSTEM_RESET SYSTEM_RESET}。
+ * 对于通道消息,状态字节的高四位由命令值指定,低四位由MIDI通道号指定。
+ * 要转换采用Java签名字节形式的传入MIDI数据字节,您可以使用<code> {@ link MidiMessage} </b>中提供的<A HREF="MidiMessage.html#integersVsBytes">
+ * 转换代码</A> / code>类描述。
+ * 对于通道消息,状态字节的高四位由命令值指定,低四位由MIDI通道号指定。
+ * 
+ * 
  * @see SysexMessage
  * @see MetaMessage
  *
@@ -62,30 +76,50 @@ public class ShortMessage extends MidiMessage {
 
     /**
      * Status byte for MIDI Time Code Quarter Frame message (0xF1, or 241).
+     * <p>
+     *  MIDI时间码四分之一帧消息(0xF1或241)的状态字节。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int MIDI_TIME_CODE                              = 0xF1; // 241
 
     /**
      * Status byte for Song Position Pointer message (0xF2, or 242).
+     * <p>
+     *  歌曲位置指针消息的状态字节(0xF2或242)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int SONG_POSITION_POINTER               = 0xF2; // 242
 
     /**
      * Status byte for MIDI Song Select message (0xF3, or 243).
+     * <p>
+     *  MIDI歌曲选择消息的状态字节(0xF3或243)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int SONG_SELECT                                 = 0xF3; // 243
 
     /**
      * Status byte for Tune Request message (0xF6, or 246).
+     * <p>
+     * 调谐请求消息的状态字节(0xF6或246)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int TUNE_REQUEST                                = 0xF6; // 246
 
     /**
      * Status byte for End of System Exclusive message (0xF7, or 247).
+     * <p>
+     *  系统专用消息的状态字节(0xF7或247)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int END_OF_EXCLUSIVE                    = 0xF7; // 247
@@ -95,36 +129,60 @@ public class ShortMessage extends MidiMessage {
 
     /**
      * Status byte for Timing Clock message (0xF8, or 248).
+     * <p>
+     *  定时时钟消息的状态字节(0xF8或248)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int TIMING_CLOCK                                = 0xF8; // 248
 
     /**
      * Status byte for Start message (0xFA, or 250).
+     * <p>
+     *  启动消息的状态字节(0xFA或250)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int START                                               = 0xFA; // 250
 
     /**
      * Status byte for Continue message (0xFB, or 251).
+     * <p>
+     *  继续消息的状态字节(0xFB或251)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int CONTINUE                                    = 0xFB; // 251
 
     /**
      * Status byte for Stop message (0xFC, or 252).
+     * <p>
+     *  停止消息的状态字节(0xFC或252)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int STOP                                                = 0xFC; //252
 
     /**
      * Status byte for Active Sensing message (0xFE, or 254).
+     * <p>
+     *  Active Sensing消息的状态字节(0xFE或254)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int ACTIVE_SENSING                              = 0xFE; // 254
 
     /**
      * Status byte for System Reset message (0xFF, or 255).
+     * <p>
+     *  系统复位消息的状态字节(0xFF或255)。
+     * 
+     * 
      * @see MidiMessage#getStatus
      */
     public static final int SYSTEM_RESET                                = 0xFF; // 255
@@ -134,36 +192,57 @@ public class ShortMessage extends MidiMessage {
 
     /**
      * Command value for Note Off message (0x80, or 128)
+     * <p>
+     *  注释关闭消息(0x80或128)的命令值
+     * 
      */
     public static final int NOTE_OFF                                    = 0x80;  // 128
 
     /**
      * Command value for Note On message (0x90, or 144)
+     * <p>
+     *  注释开消息(0x90或144)的命令值
+     * 
      */
     public static final int NOTE_ON                                             = 0x90;  // 144
 
     /**
      * Command value for Polyphonic Key Pressure (Aftertouch) message (0xA0, or 160)
+     * <p>
+     *  Polyphonic Key Pressure(Aftertouch)消息(0xA0或160)的命令值
+     * 
      */
     public static final int POLY_PRESSURE                               = 0xA0;  // 160
 
     /**
      * Command value for Control Change message (0xB0, or 176)
+     * <p>
+     *  控制更改消息的命令值(0xB0或176)
+     * 
      */
     public static final int CONTROL_CHANGE                              = 0xB0;  // 176
 
     /**
      * Command value for Program Change message (0xC0, or 192)
+     * <p>
+     *  程序更改消息的命令值(0xC0或192)
+     * 
      */
     public static final int PROGRAM_CHANGE                              = 0xC0;  // 192
 
     /**
      * Command value for Channel Pressure (Aftertouch) message (0xD0, or 208)
+     * <p>
+     *  通道压力(Aftertouch)消息(0xD0或208)的命令值
+     * 
      */
     public static final int CHANNEL_PRESSURE                    = 0xD0;  // 208
 
     /**
      * Command value for Pitch Bend message (0xE0, or 224)
+     * <p>
+     *  Pitch Bend消息的命令值(0xE0或224)
+     * 
      */
     public static final int PITCH_BEND                                  = 0xE0;  // 224
 
@@ -176,6 +255,10 @@ public class ShortMessage extends MidiMessage {
      * a valid MIDI message.  Subsequently, you may set the
      * contents of the message using one of the <code>setMessage</code>
      * methods.
+     * <p>
+     *  构造一个新的<code> ShortMessage </code>。新消息的内容保证指定有效的MIDI消息。随后,您可以使用<code> setMessage </code>方法之一设置消息的内容。
+     * 
+     * 
      * @see #setMessage
      */
     public ShortMessage() {
@@ -193,6 +276,10 @@ public class ShortMessage extends MidiMessage {
      * The contents of the message can be changed by using one of
      * the {@code setMessage} methods.
      *
+     * <p>
+     *  构造一个新的{@code ShortMessage},它代表一个不需要数据字节的MIDI消息。可以使用{@code setMessage}方法之一更改消息的内容。
+     * 
+     * 
      * @param status the MIDI status byte
      * @throws InvalidMidiDataException if {@code status} does not specify
      *     a valid MIDI status byte for a message that requires no data bytes
@@ -215,6 +302,11 @@ public class ShortMessage extends MidiMessage {
      * The contents of the message can be changed by using one of
      * the {@code setMessage} methods.
      *
+     * <p>
+     * 构造一个新的{@code ShortMessage},代表一个MIDI消息,最多占用两个数据字节。如果消息只占用一个数据字节,则忽略第二个数据字节。如果消息不占用任何数据字节,则两个数据字节都被忽略。
+     * 可以使用{@code setMessage}方法之一更改消息的内容。
+     * 
+     * 
      * @param status   the MIDI status byte
      * @param data1    the first data byte
      * @param data2    the second data byte
@@ -242,6 +334,11 @@ public class ShortMessage extends MidiMessage {
      * The contents of the message can be changed by using one of
      * the {@code setMessage} methods.
      *
+     * <p>
+     *  构造一个新的{@code ShortMessage},代表一个通道MIDI消息,最多占用两个数据字节。如果消息只占用一个数据字节,则忽略第二个数据字节。
+     * 如果消息不占用任何数据字节,则两个数据字节都被忽略。可以使用{@code setMessage}方法之一更改消息的内容。
+     * 
+     * 
      * @param command  the MIDI command represented by this message
      * @param channel  the channel associated with the message
      * @param data1    the first data byte
@@ -267,6 +364,10 @@ public class ShortMessage extends MidiMessage {
 
     /**
      * Constructs a new <code>ShortMessage</code>.
+     * <p>
+     *  构造一个新的<code> ShortMessage </code>。
+     * 
+     * 
      * @param data an array of bytes containing the complete message.
      * The message data may be changed using the <code>setMessage</code>
      * method.
@@ -282,6 +383,10 @@ public class ShortMessage extends MidiMessage {
 
     /**
      * Sets the parameters for a MIDI message that takes no data bytes.
+     * <p>
+     *  设置不包含数据字节的MIDI消息的参数。
+     * 
+     * 
      * @param status    the MIDI status byte
      * @throws  InvalidMidiDataException if <code>status</code> does not
      * specify a valid MIDI status byte for a message that requires no data bytes.
@@ -304,6 +409,10 @@ public class ShortMessage extends MidiMessage {
      * byte is ignored; if the message does not take any data bytes, both
      * data bytes are ignored.
      *
+     * <p>
+     *  设置MIDI消息的参数,该消息需要一个或两个数据字节。如果消息只有一个数据字节,则忽略第二个数据字节;如果消息不占用任何数据字节,则两个数据字节都被忽略。
+     * 
+     * 
      * @param status    the MIDI status byte
      * @param data1             the first data byte
      * @param data2             the second data byte
@@ -353,6 +462,10 @@ public class ShortMessage extends MidiMessage {
      * the message does not take any data bytes, both data bytes
      * are ignored.
      *
+     * <p>
+     *  设置一个通道消息的短消息参数,该消息最多占用两个数据字节。如果消息只有一个数据字节,则忽略第二个数据字节;如果消息不占用任何数据字节,则两个数据字节都被忽略。
+     * 
+     * 
      * @param command   the MIDI command represented by this message
      * @param channel   the channel associated with the message
      * @param data1             the first data byte
@@ -384,6 +497,10 @@ public class ShortMessage extends MidiMessage {
      * Obtains the MIDI channel associated with this event.  This method
      * assumes that the event is a MIDI channel message; if not, the return
      * value will not be meaningful.
+     * <p>
+     *  获取与此事件相关联的MIDI通道。该方法假定该事件是一个MIDI通道消息;如果没有,返回值将没有意义。
+     * 
+     * 
      * @return MIDI channel associated with the message.
      * @see #setMessage(int, int, int, int)
      */
@@ -397,6 +514,10 @@ public class ShortMessage extends MidiMessage {
      * Obtains the MIDI command associated with this event.  This method
      * assumes that the event is a MIDI channel message; if not, the return
      * value will not be meaningful.
+     * <p>
+     * 获取与此事件相关联的MIDI命令。该方法假定该事件是一个MIDI通道消息;如果没有,返回值将没有意义。
+     * 
+     * 
      * @return the MIDI command associated with this event
      * @see #setMessage(int, int, int, int)
      */
@@ -408,6 +529,10 @@ public class ShortMessage extends MidiMessage {
 
     /**
      * Obtains the first data byte in the message.
+     * <p>
+     *  获取消息中的第一个数据字节。
+     * 
+     * 
      * @return the value of the <code>data1</code> field
      * @see #setMessage(int, int, int)
      */
@@ -421,6 +546,10 @@ public class ShortMessage extends MidiMessage {
 
     /**
      * Obtains the second data byte in the message.
+     * <p>
+     *  获取消息中的第二个数据字节。
+     * 
+     * 
      * @return the value of the <code>data2</code> field
      * @see #setMessage(int, int, int)
      */
@@ -435,6 +564,10 @@ public class ShortMessage extends MidiMessage {
     /**
      * Creates a new object of the same class and with the same contents
      * as this object.
+     * <p>
+     *  创建与此对象具有相同类和相同内容的新对象。
+     * 
+     * 
      * @return a clone of this instance.
      */
     public Object clone() {
@@ -449,6 +582,9 @@ public class ShortMessage extends MidiMessage {
     /**
      * Retrieves the number of data bytes associated with a particular
      * status byte value.
+     * <p>
+     *  检索与特定状态字节值关联的数据字节数。
+     * 
      * @param status status byte value, which must represent a short MIDI message
      * @return data length in bytes (0, 1, or 2)
      * @throws InvalidMidiDataException if the

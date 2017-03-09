@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DTMDefaultBaseTraversers.java,v 1.2.4.1 2005/09/15 08:15:00 suresh_emailid Exp $
+ * <p>
+ *  $ Id：DTMDefaultBaseTraversers.java,v 1.2.4.1 2005/09/15 08:15:00 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref;
 
@@ -39,6 +52,12 @@ import com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter;
  * in terms of DTM Node Handles... but they may use the internal node
  * identity indices within their logic, for efficiency's sake. Be very
  * careful to avoid confusing these when maintaining this code.
+ * <p>
+ *  这个类实现了DTMDefaultBase的遍历器。
+ * 
+ *  请注意,所有遍历器的公共接口应该是以DTM节点句柄...,但是他们可以在其逻辑内使用内部节点身份索引,以提高效率。在维护此代码时要非常小心,避免混淆这些。
+ * 
+ * 
  * */
 public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 {
@@ -46,6 +65,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
   /**
    * Construct a DTMDefaultBaseTraversers object from a DOM node.
    *
+   * <p>
+   *  从DOM节点构造一个DTMDefaultBaseTraversers对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -68,6 +91,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
   /**
    * Construct a DTMDefaultBaseTraversers object from a DOM node.
    *
+   * <p>
+   *  从DOM节点构造一个DTMDefaultBaseTraversers对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -97,6 +124,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
    * This returns a stateless "traverser", that can navigate
    * over an XPath axis, though perhaps not in document order.
    *
+   * <p>
+   *  这返回一个无状态的"遍历器",可以在XPath轴上导航,虽然也许不是按照文档顺序。
+   * 
+   * 
    * @param axis One of Axes.ANCESTORORSELF, etc.
    *
    * @return A DTMAxisTraverser, or null if the given axis isn't supported.
@@ -199,6 +230,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class AncestorTraverser extends DTMAxisTraverser
   {
@@ -206,6 +240,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node if this iteration.
      * @param current The current node of the iteration.
      *
@@ -220,6 +258,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     * 遍历到由扩展类型ID匹配的当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -243,6 +285,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class AncestorOrSelfTraverser extends AncestorTraverser
   {
@@ -252,6 +297,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * returned or the iteration will go into an infinate loop.  To see if
      * the self node should be processed, use this function.
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。要查看是否应该处理自身节点,请使用此函数。
+     * 
+     * 
      * @param context The context node of this traversal.
      *
      * @return the first node in the traversal.
@@ -268,6 +317,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * node does not match the expanded type ID, this function will return
      * false.
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。要查看是否应该处理自身节点,请使用此函数。如果上下文节点与扩展类型ID不匹配,则此函数将返回false。
+     * 
+     * 
      * @param context The context node of this traversal.
      * @param expandedTypeID The expanded type ID that must match.
      *
@@ -282,6 +335,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Attribute access
+   * <p>
+   *  实现属性访问的遍历
+   * 
    */
   private class AttributeTraverser extends DTMAxisTraverser
   {
@@ -289,6 +345,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -304,6 +364,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -329,6 +393,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class ChildTraverser extends DTMAxisTraverser
   {
@@ -339,6 +406,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * {@link #isIndexed(int) isIndexed} to make sure that the index can
      * contain nodes that match the given expanded type ID.
      *
+     * <p>
+     *  获取与扩展类型ID匹配的下一个索引节点。在调用此函数之前,应首先调用{@link #isIndexed(int)isIndexed},以确保索引可以包含与给定扩展类型ID匹配的节点。
+     * 
+     * 
      * @param axisRoot The root identity of the axis.
      * @param nextPotential The node found must match or occur after this node.
      * @param expandedTypeID The expanded type ID for the request.
@@ -404,6 +475,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * <p>This method needs to be overloaded only by those axis that process
      * the self node. <\p>
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。因此,要遍历一个轴,必须使用第一个函数来获取第一个节点。
+     * 
+     *  <p>此方法需要仅由处理自身节点的那些轴重载。 <\ p>
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * that the traversal starts from.
      * @return the first node in the traversal.
@@ -421,6 +498,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * <p>This method needs to be overloaded only by those axis that process
      * the self node. <\p>
      *
+     * <p>
+     * 由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。因此,要遍历一个轴,必须使用第一个函数来获取第一个节点。
+     * 
+     *  <p>此方法需要仅由处理自身节点的那些轴重载。 <\ p>
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * of origin for the traversal -- its "root node" or starting point.
      * @param expandedTypeID The expanded type ID that must match.
@@ -455,6 +538,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -469,6 +556,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -493,6 +584,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
   /**
    * Super class for derived classes that want a convenient way to access
    * the indexing mechanism.
+   * <p>
+   *  对于想要一种方便的方式访问索引机制的派生类的超类。
+   * 
    */
   private abstract class IndexedDTMAxisTraverser extends DTMAxisTraverser
   {
@@ -502,6 +596,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * what is in the indexes.  Derived classes should call this before
      * calling {@link #getNextIndexed(int, int, int) getNextIndexed} method.
      *
+     * <p>
+     *  告诉索引是否已打开,并且给定的扩展类型ID与索引中的内容匹配。派生类应该在调用{@link #getNextIndexed(int,int,int)getNextIndexed}方法之前调用此方法。
+     * 
+     * 
      * @param expandedTypeID The expanded type ID being requested.
      *
      * @return true if it is OK to call the
@@ -519,6 +617,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * implemented by derived classes, and must be robust enough to handle any
      * node that occurs after the axis root.
      *
+     * <p>
+     *  告诉节点是否在被遍历的轴的外部。此方法必须由派生类实现,并且必须足够强大以处理轴根后发生的任何节点。
+     * 
+     * 
      * @param axisRoot The root identity of the axis.
      * @param identity The node in question.
      *
@@ -531,6 +633,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * an arriving node should terminate.  This method must be implemented
      * be a derived class.
      *
+     * <p>
+     *  告诉轴是否已经完全处理,以告诉是否等待到达的节点应该终止。此方法必须实现为派生类。
+     * 
+     * 
      * @param axisRoot The root identity of the axis.
      *
      * @return true if the axis has been fully processed.
@@ -543,6 +649,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * {@link #isIndexed(int) isIndexed} to make sure that the index can
      * contain nodes that match the given expanded type ID.
      *
+     * <p>
+     *  获取与扩展类型ID匹配的下一个索引节点。在调用此函数之前,应首先调用{@link #isIndexed(int)isIndexed},以确保索引可以包含与给定扩展类型ID匹配的节点。
+     * 
+     * 
      * @param axisRoot The root identity of the axis.
      * @param nextPotential The node found must match or occur after this node.
      * @param expandedTypeID The expanded type ID for the request.
@@ -580,6 +690,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class DescendantTraverser extends IndexedDTMAxisTraverser
   {
@@ -587,6 +700,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Get the first potential identity that can be returned.  This should
      * be overridded by classes that need to return the self node.
      *
+     * <p>
+     * 获取可以返回的第一个可能的身份。这应该被需要返回自节点的类覆盖。
+     * 
+     * 
      * @param identity The node identity of the root context of the traversal.
      *
      * @return The first potential node that can be in the traversal.
@@ -600,6 +717,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Tell if the axis has been fully processed to tell if a the wait for
      * an arriving node should terminate.
      *
+     * <p>
+     *  告诉轴是否已经完全处理,以告诉是否等待到达的节点应该终止。
+     * 
+     * 
      * @param axisRoot The root identity of the axis.
      *
      * @return true if the axis has been fully processed.
@@ -614,6 +735,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * the caller.  Derived classes may override this to change the root
      * context of the traversal.
      *
+     * <p>
+     *  从调用者传递的句柄中获取子树根标识。派生类可以覆盖此更改遍历的根上下文。
+     * 
+     * 
      * @param handle handle to the root context.
      * @return identity of the root of the subtree.
      */
@@ -630,6 +755,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * which fails if the parent starts after the root ends.
      * May be sufficient for this class's logic, but misleadingly named!
      *
+     * <p>
+     *  告诉这个节点标识是否是一个子孙。假设已经获得了元素的节点信息。
+     * 
+     *  ％REVIEW％这是真正的parentFollowsRootInDocumentOrder ...如果父启动在根结束后失败。可能足够了这个类的逻辑,但误导性的命名！
+     * 
+     * 
      * @param subtreeRootIdentity The root context of the subtree in question.
      * @param identity The index number of the node in question.
      * @return true if the index is a descendant of _startNode.
@@ -644,6 +775,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * implemented by derived classes, and must be robust enough to handle any
      * node that occurs after the axis root.
      *
+     * <p>
+     *  告诉节点是否在被遍历的轴的外部。此方法必须由派生类实现,并且必须足够强大以处理轴根后发生的任何节点。
+     * 
+     * 
      * @param axisRoot The root identity of the axis.
      * @param identity The node in question.
      *
@@ -673,6 +808,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * <p>This method needs to be overloaded only by those axis that process
      * the self node. <\p>
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。因此,要遍历一个轴,必须使用第一个函数来获取第一个节点。
+     * 
+     *  <p>此方法需要仅由处理自身节点的那些轴重载。 <\ p>
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * of origin for the traversal -- its "root node" or starting point.
      * @param expandedTypeID The expanded type ID that must match.
@@ -696,6 +837,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -724,6 +869,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -759,6 +908,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class DescendantOrSelfTraverser extends DescendantTraverser
   {
@@ -767,6 +919,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Get the first potential identity that can be returned, which is the
      * axis context, in this case.
      *
+     * <p>
+     *  获取可以返回的第一个可能的标识,在这种情况下,这是轴上下文。
+     * 
+     * 
      * @param identity The node identity of the root context of the traversal.
      *
      * @return The axis context.
@@ -781,6 +937,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * returned or the iteration will go into an infinate loop.  To see if
      * the self node should be processed, use this function.
      *
+     * <p>
+     * 由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。要查看是否应该处理自身节点,请使用此函数。
+     * 
+     * 
      * @param context The context node of this traversal.
      *
      * @return the first node in the traversal.
@@ -793,6 +953,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the entire subtree, including the root node.
+   * <p>
+   *  实现整个子树的遍历,包括根节点。
+   * 
    */
   private class AllFromNodeTraverser extends DescendantOrSelfTraverser
   {
@@ -800,6 +963,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -829,6 +996,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the following access, in document order.
+   * <p>
+   *  按文档顺序执行以下访问的遍历。
+   * 
    */
   private class FollowingTraverser extends DescendantTraverser
   {
@@ -836,6 +1006,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Get the first of the following.
      *
+     * <p>
+     *  获得以下的第一个。
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * that the traversal starts from.
      * @return the first node in the traversal.
@@ -872,6 +1046,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Get the first of the following.
      *
+     * <p>
+     *  获得以下的第一个。
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * of origin for the traversal -- its "root node" or starting point.
      * @param expandedTypeID The expanded type ID that must match.
@@ -921,6 +1099,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -952,6 +1134,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -982,6 +1168,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class FollowingSiblingTraverser extends DTMAxisTraverser
   {
@@ -989,6 +1178,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1003,6 +1196,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1024,6 +1221,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class NamespaceDeclsTraverser extends DTMAxisTraverser
   {
@@ -1031,6 +1231,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1048,6 +1252,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1075,6 +1283,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class NamespaceTraverser extends DTMAxisTraverser
   {
@@ -1082,6 +1293,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1099,6 +1314,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1126,6 +1345,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class ParentTraverser extends DTMAxisTraverser
   {
@@ -1137,6 +1359,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * <p>This method needs to be overloaded only by those axis that process
      * the self node. <\p>
      *
+     * <p>
+     * 由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。因此,要遍历一个轴,必须使用第一个函数来获取第一个节点。
+     * 
+     *  <p>此方法需要仅由处理自身节点的那些轴重载。 <\ p>
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * that the traversal starts from.
      * @return the first node in the traversal.
@@ -1154,6 +1382,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * <p>This method needs to be overloaded only by those axis that process
      * the self node. <\p>
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。因此,要遍历一个轴,必须使用第一个函数来获取第一个节点。
+     * 
+     *  <p>此方法需要仅由处理自身节点的那些轴重载。 <\ p>
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * of origin for the traversal -- its "root node" or starting point.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1178,6 +1412,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1195,6 +1433,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1210,6 +1452,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class PrecedingTraverser extends DTMAxisTraverser
   {
@@ -1219,6 +1464,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * This is an expensive operation, made worse by the stateless traversal.
      * But the preceding axis is used fairly infrequently.
      *
+     * <p>
+     *  告诉当前的身份是否是上下文标识的祖先。这是一个昂贵的操作,由无状态遍历更糟。但前面的轴很少使用。
+     * 
+     * 
      * @param contextIdent The context node of the axis traversal.
      * @param currentIdent The node in question.
      * @return true if the currentIdent node is an ancestor of contextIdent.
@@ -1240,6 +1489,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1268,6 +1521,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1297,6 +1554,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
   /**
    * Implements traversal of the Ancestor and the Preceding axis,
    * in reverse document order.
+   * <p>
+   *  以逆向文档顺序实现祖先和前导轴的遍历。
+   * 
    */
   private class PrecedingAndAncestorTraverser extends DTMAxisTraverser
   {
@@ -1304,6 +1564,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1331,6 +1595,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1358,6 +1626,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class PrecedingSiblingTraverser extends DTMAxisTraverser
   {
@@ -1365,6 +1636,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     * 遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1379,6 +1654,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1400,6 +1679,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Self axis.
+   * <p>
+   *  实现自轴的遍历。
+   * 
    */
   private class SelfTraverser extends DTMAxisTraverser
   {
@@ -1409,6 +1691,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * returned or the iteration will go into an infinate loop.  To see if
      * the self node should be processed, use this function.
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。要查看是否应该处理自身节点,请使用此函数。
+     * 
+     * 
      * @param context The context node of this traversal.
      *
      * @return the first node in the traversal.
@@ -1425,6 +1711,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * node does not match the expanded type ID, this function will return
      * false.
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。要查看是否应该处理自身节点,请使用此函数。如果上下文节点与扩展类型ID不匹配,则此函数将返回false。
+     * 
+     * 
      * @param context The context node of this traversal.
      * @param expandedTypeID The expanded type ID that must match.
      *
@@ -1438,6 +1728,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1452,6 +1746,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1466,6 +1764,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Ancestor access, in reverse document order.
+   * <p>
+   *  以逆向文档顺序执行Ancestor访问的遍历。
+   * 
    */
   private class AllFromRootTraverser extends AllFromNodeTraverser
   {
@@ -1473,6 +1774,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Return the root.
      *
+     * <p>
+     *  返回根。
+     * 
+     * 
      * @param context The context node of this traversal.
      *
      * @return the first node in the traversal.
@@ -1485,6 +1790,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Return the root if it matches the expanded type ID.
      *
+     * <p>
+     *  如果与扩展类型ID匹配,则返回根。
+     * 
+     * 
      * @param context The context node of this traversal.
      * @param expandedTypeID The expanded type ID that must match.
      *
@@ -1499,6 +1808,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1524,6 +1837,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1552,6 +1869,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
   /**
    * Implements traversal of the Self axis.
+   * <p>
+   *  实现自轴的遍历。
+   * 
    */
   private class RootTraverser extends AllFromRootTraverser
   {
@@ -1559,6 +1879,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Return the root if it matches the expanded type ID,
      * else return null (nothing found)
      *
+     * <p>
+     *  返回根,如果它匹配扩展类型ID,否则返回null(没有找到)
+     * 
+     * 
      * @param context The context node of this traversal.
      * @param expandedTypeID The expanded type ID that must match.
      *
@@ -1574,6 +1898,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Traverse to the next node after the current node.
      *
+     * <p>
+     *  遍历到当前节点后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      *
@@ -1588,6 +1916,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Traverse to the next node after the current node that is matched
      * by the expanded type ID.
      *
+     * <p>
+     *  遍历到由扩展类型ID匹配的当前节点之后的下一个节点。
+     * 
+     * 
      * @param context The context node of this iteration.
      * @param current The current node of the iteration.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1603,6 +1935,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
   /**
    * A non-xpath axis, returns all nodes that aren't namespaces or attributes,
    * from and including the root.
+   * <p>
+   *  非xpath轴返回来自并包括根的所有不是命名空间或属性的节点。
+   * 
    */
   private class DescendantOrSelfFromRootTraverser extends DescendantTraverser
   {
@@ -1611,6 +1946,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Get the first potential identity that can be returned, which is the axis
      * root context in this case.
      *
+     * <p>
+     * 获取可以返回的第一个可能的标识,在这种情况下是轴根上下文。
+     * 
+     * 
      * @param identity The node identity of the root context of the traversal.
      *
      * @return The identity argument.
@@ -1622,6 +1961,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
     /**
      * Get the first potential identity that can be returned.
+     * <p>
+     *  获取可以返回的第一个可能的身份。
+     * 
+     * 
      * @param handle handle to the root context.
      * @return identity of the root of the subtree.
      */
@@ -1634,6 +1977,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Return the root.
      *
+     * <p>
+     *  返回根。
+     * 
+     * 
      * @param context The context node of this traversal.
      *
      * @return the first node in the traversal.
@@ -1651,6 +1998,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * <p>This method needs to be overloaded only by those axis that process
      * the self node. <\p>
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。因此,要遍历一个轴,必须使用第一个函数来获取第一个节点。
+     * 
+     *  <p>此方法需要仅由处理自身节点的那些轴重载。 <\ p>
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * of origin for the traversal -- its "root node" or starting point.
      * @param expandedTypeID The expanded type ID that must match.
@@ -1675,6 +2028,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
   /**
    * A non-xpath axis, returns all nodes that aren't namespaces or attributes,
    * from but not including the root.
+   * <p>
+   *  非xpath轴返回不是命名空间或属性的所有节点,但不包括根。
+   * 
    */
   private class DescendantFromRootTraverser extends DescendantTraverser
   {
@@ -1683,6 +2039,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * Get the first potential identity that can be returned, which is the axis
      * root context in this case.
      *
+     * <p>
+     *  获取可以返回的第一个可能的标识,在这种情况下是轴根上下文。
+     * 
+     * 
      * @param identity The node identity of the root context of the traversal.
      *
      * @return The identity argument.
@@ -1694,6 +2054,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
 
     /**
      * Get the first potential identity that can be returned.
+     * <p>
+     *  获取可以返回的第一个可能的身份。
+     * 
+     * 
      * @param handle handle to the root context.
      * @return identity of the root of the subtree.
      */
@@ -1705,6 +2069,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     /**
      * Return the root.
      *
+     * <p>
+     *  返回根。
+     * 
+     * 
      * @param context The context node of this traversal.
      *
      * @return the first node in the traversal.
@@ -1722,6 +2090,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * <p>This method needs to be overloaded only by those axis that process
      * the self node. <\p>
      *
+     * <p>
+     *  由于无状态遍历的​​性质,上下文节点不能被返回或迭代将进入一个infimate循环。因此,要遍历一个轴,必须使用第一个函数来获取第一个节点。
+     * 
+     * 
      * @param context The context node of this traversal. This is the point
      * of origin for the traversal -- its "root node" or starting point.
      * @param expandedTypeID The expanded type ID that must match.

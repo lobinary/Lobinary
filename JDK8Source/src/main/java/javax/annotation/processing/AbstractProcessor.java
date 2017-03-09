@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,18 @@ import javax.tools.Diagnostic;
  * general {@link javax.annotation.processing.Processor Processor}
  * contract for that method is obeyed.
  *
+ * <p>
+ *  一个抽象注释处理器,被设计成对于大多数具体注释处理器来说是一个方便的超类。
+ * 此类检查注释值,以计算其子类型支持的{@linkplain #getSupportedOptions选项},{@linkplain #getSupportedAnnotationTypes注释类型}和{@linkplain #getSupportedSourceVersion源版本}
+ * 。
+ *  一个抽象注释处理器,被设计成对于大多数具体注释处理器来说是一个方便的超类。
+ * 
+ *  <p> getter方法可以{@linkplain Messager#printMessage发出警告}关于在处理器{@linkplain #isInitialized initialized}之后使
+ * 用可用设施的值得注意的条件。
+ * 
+ *  <p>只要遵守该方法的一般{@link javax.annotation.processing.Processor Processor}合约,子类就可以覆盖此类中任何方法的实现和规范。
+ * 
+ * 
  * @author Joseph D. Darcy
  * @author Scott Seligman
  * @author Peter von der Ah&eacute;
@@ -60,12 +73,18 @@ import javax.tools.Diagnostic;
 public abstract class AbstractProcessor implements Processor {
     /**
      * Processing environment providing by the tool framework.
+     * <p>
+     *  由工具框架提供的处理环境。
+     * 
      */
     protected ProcessingEnvironment processingEnv;
     private boolean initialized = false;
 
     /**
      * Constructor for subclasses to call.
+     * <p>
+     *  要调用的子类的构造方法。
+     * 
      */
     protected AbstractProcessor() {}
 
@@ -75,6 +94,10 @@ public abstract class AbstractProcessor implements Processor {
      * of strings as the annotation.  If the class is not so
      * annotated, an empty set is returned.
      *
+     * <p>
+     *  如果处理器类使用{@link SupportedOptions}注释,则返回与注释相同的字符串集合的不可修改集合。如果类没有这样注释,则返回空集。
+     * 
+     * 
      * @return the options recognized by this processor, or an empty
      * set if none
      */
@@ -92,6 +115,10 @@ public abstract class AbstractProcessor implements Processor {
      * same set of strings as the annotation.  If the class is not so
      * annotated, an empty set is returned.
      *
+     * <p>
+     *  如果处理器类使用{@link SupportedAnnotationTypes}注释,则返回带有与注释相同的一组字符串的不可修改集合。如果类没有这样注释,则返回空集。
+     * 
+     * 
      * @return the names of the annotation types supported by this
      * processor, or an empty set if none
      */
@@ -115,6 +142,10 @@ public abstract class AbstractProcessor implements Processor {
      * annotation.  If the class is not so annotated, {@link
      * SourceVersion#RELEASE_6} is returned.
      *
+     * <p>
+     * 如果处理器类使用{@link SupportedSourceVersion}注释,则返回注释中的源版本。如果类没有这样注释,则返回{@link SourceVersion#RELEASE_6}。
+     * 
+     * 
      * @return the latest source version supported by this processor
      */
     public SourceVersion getSupportedSourceVersion() {
@@ -140,6 +171,11 @@ public abstract class AbstractProcessor implements Processor {
      * IllegalStateException} will be thrown if this method is called
      * more than once on the same object.
      *
+     * <p>
+     *  通过将{@code processingEnv}字段设置为{@code processingEnv}参数的值,将处理器与处理环境初始化。
+     * 如果在同一个对象上多次调用此方法,将抛出{@code IllegalStateException}。
+     * 
+     * 
      * @param processingEnv environment to access facilities the tool framework
      * provides to the processor
      * @throws IllegalStateException if this method is called more than once.
@@ -155,6 +191,9 @@ public abstract class AbstractProcessor implements Processor {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public abstract boolean process(Set<? extends TypeElement> annotations,
                                     RoundEnvironment roundEnv);
@@ -162,6 +201,10 @@ public abstract class AbstractProcessor implements Processor {
     /**
      * Returns an empty iterable of completions.
      *
+     * <p>
+     *  返回完成的空可迭代。
+     * 
+     * 
      * @param element {@inheritDoc}
      * @param annotation {@inheritDoc}
      * @param member {@inheritDoc}
@@ -178,6 +221,9 @@ public abstract class AbstractProcessor implements Processor {
      * Returns {@code true} if this object has been {@linkplain #init
      * initialized}, {@code false} otherwise.
      *
+     * <p>
+     *  如果此对象已{@linkplain #init initialized},则返回{@code true},否则返回{@code false}。
+     * 
      * @return {@code true} if this object has been initialized,
      * {@code false} otherwise.
      */

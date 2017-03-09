@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -65,6 +69,22 @@ import java.util.*;
  *   // ... add constructors, etc.
  * }}</pre>
  *
+ * <p>
+ *  提供{@link ExecutorService}执行方法的默认实现。
+ * 此类使用{@code newTaskFor}返回的{@link RunnableFuture}实现{@code submit},{@code invokeAny}和{@code invokeAll}方法
+ * ,默认为此类中提供的{@link FutureTask}类包。
+ *  提供{@link ExecutorService}执行方法的默认实现。
+ * 例如,{@code submit(Runnable)}的实现创建了一个关联的{@code RunnableFuture},它被执行并返回。
+ * 子类可以重写{@code newTaskFor}方法来返回{@code RunnableFuture}实现而不是{@code FutureTask}。
+ * 
+ *  <p> <b>扩展示例</b>。
+ * 这里是一个类的自定义{@link ThreadPoolExecutor}使用{@code CustomTask}类而不是默认的{@code FutureTask}类的草图：<pre> {@code public class CustomThreadPoolExecutor extends ThreadPoolExecutor {。
+ *  <p> <b>扩展示例</b>。
+ * 
+ *  静态类CustomTask <V>实现RunnableFuture <V> {...}
+ * 
+ *  保护<V> RunnableFuture <V> newTaskFor(Callable <V> c){return new CustomTask <V>(c); } runnableFuture <V>
+ * 
  * @since 1.5
  * @author Doug Lea
  */
@@ -74,6 +94,10 @@ public abstract class AbstractExecutorService implements ExecutorService {
      * Returns a {@code RunnableFuture} for the given runnable and default
      * value.
      *
+     * <p>
+     *  newTaskFor(Runnable r,V v){return new CustomTask <V>(r,v); } // ...添加构造函数等}} </pre>。
+     * 
+     * 
      * @param runnable the runnable task being wrapped
      * @param value the default value for the returned future
      * @param <T> the type of the given value
@@ -90,6 +114,10 @@ public abstract class AbstractExecutorService implements ExecutorService {
     /**
      * Returns a {@code RunnableFuture} for the given callable task.
      *
+     * <p>
+     *  返回一个{@code RunnableFuture}给定的runnable和默认值。
+     * 
+     * 
      * @param callable the callable task being wrapped
      * @param <T> the type of the callable's result
      * @return a {@code RunnableFuture} which, when run, will call the
@@ -103,6 +131,10 @@ public abstract class AbstractExecutorService implements ExecutorService {
     }
 
     /**
+    /* <p>
+    /* 返回给定可调用任务的{@code RunnableFuture}。
+    /* 
+    /* 
      * @throws RejectedExecutionException {@inheritDoc}
      * @throws NullPointerException       {@inheritDoc}
      */
@@ -114,6 +146,8 @@ public abstract class AbstractExecutorService implements ExecutorService {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws RejectedExecutionException {@inheritDoc}
      * @throws NullPointerException       {@inheritDoc}
      */
@@ -125,6 +159,8 @@ public abstract class AbstractExecutorService implements ExecutorService {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws RejectedExecutionException {@inheritDoc}
      * @throws NullPointerException       {@inheritDoc}
      */
@@ -137,6 +173,7 @@ public abstract class AbstractExecutorService implements ExecutorService {
 
     /**
      * the main mechanics of invokeAny.
+     * <p>
      */
     private <T> T doInvokeAny(Collection<? extends Callable<T>> tasks,
                               boolean timed, long nanos)

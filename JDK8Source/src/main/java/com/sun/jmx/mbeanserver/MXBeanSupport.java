@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.management.ObjectName;
 /**
  * Base class for MXBeans.
  *
+ * <p>
+ *  MXBeans的基类。
+ * 
+ * 
  * @since 1.6
  */
 public class MXBeanSupport extends MBeanSupport<ConvertingMethod> {
@@ -47,6 +52,10 @@ public class MXBeanSupport extends MBeanSupport<ConvertingMethod> {
        <p>Construct an MXBean that wraps the given resource using the
        given MXBean interface.</p>
 
+    /* <p>
+    /*  <p>使用给定的MXBean接口构造包装给定资源的MXBean。</p>
+    /* 
+    /* 
        @param resource the underlying resource for the new MXBean.
 
        @param mxbeanInterface the interface to be used to determine
@@ -114,6 +123,9 @@ public class MXBeanSupport extends MBeanSupport<ConvertingMethod> {
 
     /* Return all interfaces inherited by this class, directly or
      * indirectly through the parent class and interfaces.
+     * <p>
+     *  间接通过父类和接口。
+     * 
      */
     private static Set<Class<?>> transitiveInterfaces(Class<?> c) {
         Set<Class<?>> set = newSet();
@@ -147,6 +159,11 @@ public class MXBeanSupport extends MBeanSupport<ConvertingMethod> {
      * and propagates any exception.  There is no user preRegister in this case.
      * If this method succeeds but registration subsequently fails,
      * StandardMBean calls unregister from its postRegister(false) method.
+     * <p>
+     *  用于跟踪MXBean引用的事件序列相对复杂。我们使用MBeanServer知道的magical preRegister2方法。注册过程中的步骤是：(1)呼叫用户preRegister,如果有。
+     * 如果异常,放弃。 (2)调用preRegister2,因此调用这个寄存器方法。如果异常,调用postRegister(false)和抛弃。 (3)尝试注册MBean。
+     * 如果异常,调用registerFailed(),它将调用unregister方法。 (也调用postRegister(false)。
+     * )(4)如果我们得到这个,我们可以调用postRegister(true)。
      */
     @Override
     public void register(MBeanServer server, ObjectName name)

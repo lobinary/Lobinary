@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -125,6 +126,53 @@ import java.util.function.Consumer;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  这个类实现了与散列表的<tt> Map </tt>接口,当比较键(和值)时,使用引用相等来代替对象相等。
+ * 换句话说,在<tt> IdentityHashMap </tt>中,当且仅当<tt>(k1 == k2)时,两个键<tt> k1 </tt>和<tt> k2 </tt> </tt>。
+ *  (在<tt> Map </tt>实现(如<tt> HashMap </tt>)中,如果且仅当<tt> k1 </tt>和<tt> k2 </tt> tt>(k1 == null?k2 == null：
+ * k1.equals(k2))</tt>。
+ * 换句话说,在<tt> IdentityHashMap </tt>中,当且仅当<tt>(k1 == k2)时,两个键<tt> k1 </tt>和<tt> k2 </tt> </tt>。)。
+ * 
+ *  <p> <b>此课程</i>不是</i>通用的<tt>地图</tt>实施！虽然此类实现了<tt> Map </tt>接口,但它有意违反<tt> Map的</tt>一般契约,它强制在比较对象时使用<tt>
+ *  equals </tt>方法。
+ * 此类设计仅用于需要引用等价语义的罕见情况。</b>。
+ * 
+ * <p>此类别的典型用途是<i>拓扑保存对象图形变换</i>,例如序列化或深度复制。为了执行这样的变换,程序必须保持"节点表",该节点表跟踪已经处理的所有对象引用。
+ * 节点表不能等同不同对象,即使它们恰好相等。此类的另一个典型用法是维护<i>代理对象</i>。例如,调试工具可能希望为正在调试的程序中的每个对象维护代理对象。
+ * 
+ *  <p>此类提供所有可选的映射操作,并允许<tt> null </tt>值和<tt> null </tt>键。这个类不保证地图的顺序;特别是,它不保证该订单将随时间保持恒定。
+ * 
+ *  <p>这个类提供了基本操作(<tt> get </tt>和<tt> put </tt>)的恒定时间性能,假设系统身份散列函数{@link System#identityHashCode(Object) }
+ * )在桶中正确分散元素。
+ * 
+ *  <p>此类有一个调整参数(影响效果,但不影响语义)：<i>预期最大尺寸</i>。此参数是映射预期保留的键值映射的最大数量。在内部,该参数用于确定最初包括散列表的桶的数量。
+ * 期望的最大尺寸和桶的数量之间的精确关系是未指定的。
+ * 
+ * <p>如果映射的大小(键值映射的数量)充分超过预期的最大值,则桶的数量增加。增加桶的数量("重新散列")可能相当昂贵,因此它支付以创建具有足够大的预期最大大小的身份散列映射。
+ * 另一方面,对集合视图的迭代需要与哈希表中的桶数成正比的时间,因此如果您特别关心迭代性能或内存使用情况,则不应将预期最大值设置得过高。
+ * 
+ *  <p> <strong>请注意,此实现未同步。</strong>如果多个线程同时访问身份散列映射,且至少有一个线程在结构上修改了映射,则<i>必须</i>外部同步。
+ *  (结构修改是添加或删除一个或多个映射的任何操作;仅改变与实例已经包含的关键字相关联的值不是结构修改。)这通常通过在自然地封装映射的某个对象上同步来实现。
+ * 
+ *  如果不存在这样的对象,那么应该使用{@link Collections#synchronizeMap Collections.synchronizedMap}方法来"包装"映射。
+ * 这最好在创建时完成,以防止意外的不同步访问地图：<pre> Map m = Collections.synchronizedMap(new IdentityHashMap(...)); </pre>。
+ * 
+ * <p>由所有此类的"集合视图方法"返回的集合的<tt> iterator </tt>方法返回的迭代器<i> fail-fast </i>：如果地图在结构上被修改在创建迭代器之后的任何时候,除了通过迭代器
+ * 自己的<tt> remove </tt>方法,迭代器将抛出一个{@link ConcurrentModificationException}。
+ * 因此,面对并发修改,迭代器快速而干净地失败,而不是在将来的未确定时间冒任意的,非确定性行为的风险。
+ * 
+ *  <p>请注意,迭代器的故障快速行为不能得到保证,因为一般来说,在不同步并发修改的情况下不可能做出任何硬的保证。
+ * 故障快速迭代器在尽力而为的基础上抛出<tt> ConcurrentModificationException </tt>。
+ * 因此,编写依赖于此异常的程序的正确性是错误的：<i>故障快速迭代器应该仅用于检测错误。</i>。
+ * 
+ *  <p>实现说明：这是一个简单的线性探测</i>哈希表,例如在Sedgewick和Knuth的文章中所述。该数组交替保存键和值。
+ * 对于许多JRE实现和操作混合,这个类将产生比{@link HashMap}(它使用<i>链接</i>而不是线性的)更好的性能。探测)。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ * Java集合框架</a>。
+ * 
+ * 
  * @see     System#identityHashCode(Object)
  * @see     Object#hashCode()
  * @see     Collection
@@ -144,6 +192,9 @@ public class IdentityHashMap<K,V>
      * MUST be a power of two.  The value 32 corresponds to the
      * (specified) expected maximum size of 21, given a load factor
      * of 2/3.
+     * <p>
+     *  no-args构造函数使用的初始容量。必须是二的幂。值32对应于(指定的)预期最大尺寸21,给定负载因子为2/3。
+     * 
      */
     private static final int DEFAULT_CAPACITY = 32;
 
@@ -152,6 +203,9 @@ public class IdentityHashMap<K,V>
      * by either of the constructors with arguments.  The value 4 corresponds
      * to an expected maximum size of 2, given a load factor of 2/3.
      * MUST be a power of two.
+     * <p>
+     *  最小容量,如果较低的值由具有参数的任何构造函数隐式指定,则使用该容量。值4对应于预期的最大尺寸2,给定负载因子2/3。必须是二的幂。
+     * 
      */
     private static final int MINIMUM_CAPACITY = 4;
 
@@ -163,33 +217,54 @@ public class IdentityHashMap<K,V>
      * In fact, the map can hold no more than MAXIMUM_CAPACITY-1 items
      * because it has to have at least one slot with the key == null
      * in order to avoid infinite loops in get(), put(), remove()
+     * <p>
+     *  最大容量,如果较高的值由具有参数的任何构造函数隐式指定,则使用此容量。必须是二的幂<= 1 << 29。
+     * 
+     *  实际上,映射可以容纳不超过MAXIMUM_CAPACITY-1个项目,因为它必须至少有一个key == null的槽,以避免get(),put(),remove()
+     * 
      */
     private static final int MAXIMUM_CAPACITY = 1 << 29;
 
     /**
      * The table, resized as necessary. Length MUST always be a power of two.
+     * <p>
+     *  该表,必要时调整大小。长度必须始终为2的幂。
+     * 
      */
     transient Object[] table; // non-private to simplify nested class access
 
     /**
      * The number of key-value mappings contained in this identity hash map.
      *
+     * <p>
+     *  此标识哈希映射中包含的键值映射的数量。
+     * 
+     * 
      * @serial
      */
     int size;
 
     /**
      * The number of modifications, to support fast-fail iterators
+     * <p>
+     *  修改的数量,以支持快速失败的迭代器
+     * 
      */
     transient int modCount;
 
     /**
      * Value representing null keys inside tables.
+     * <p>
+     *  表示表中的空键的值。
+     * 
      */
     static final Object NULL_KEY = new Object();
 
     /**
      * Use NULL_KEY for key if it is null.
+     * <p>
+     *  如果键为空,请使用NULL_KEY。
+     * 
      */
     private static Object maskNull(Object key) {
         return (key == null ? NULL_KEY : key);
@@ -197,6 +272,9 @@ public class IdentityHashMap<K,V>
 
     /**
      * Returns internal representation of null key back to caller as null.
+     * <p>
+     *  将null键的内部表示返回给调用者为null。
+     * 
      */
     static final Object unmaskNull(Object key) {
         return (key == NULL_KEY ? null : key);
@@ -205,6 +283,9 @@ public class IdentityHashMap<K,V>
     /**
      * Constructs a new, empty identity hash map with a default expected
      * maximum size (21).
+     * <p>
+     *  构造一个具有默认预期最大大小的新的空标识哈希映射(21)。
+     * 
      */
     public IdentityHashMap() {
         init(DEFAULT_CAPACITY);
@@ -216,6 +297,10 @@ public class IdentityHashMap<K,V>
      * the map may cause the internal data structure to grow, which may be
      * somewhat time-consuming.
      *
+     * <p>
+     *  构造具有指定的预期最大大小的新的空白地图。将多于预期数量的键值映射映射到映射中可能导致内部数据结构增长,这可能有些费时。
+     * 
+     * 
      * @param expectedMaxSize the expected maximum size of the map
      * @throws IllegalArgumentException if <tt>expectedMaxSize</tt> is negative
      */
@@ -232,6 +317,10 @@ public class IdentityHashMap<K,V>
      * MAXIMUM_CAPACITY, inclusive, that is greater than (3 *
      * expectedMaxSize)/2, if such a number exists.  Otherwise returns
      * MAXIMUM_CAPACITY.
+     * <p>
+     * 返回给定预期最大大小的相应容量。返回MINIMUM_CAPACITY和MAXIMUM_CAPACITY(含)之间的最小二乘幂,大于(3 * expectedMaxSize)/ 2,如果存在这样的数字。
+     * 否则返回MAXIMUM_CAPACITY。
+     * 
      */
     private static int capacity(int expectedMaxSize) {
         // assert expectedMaxSize >= 0;
@@ -245,6 +334,9 @@ public class IdentityHashMap<K,V>
      * Initializes object to be an empty map with the specified initial
      * capacity, which is assumed to be a power of two between
      * MINIMUM_CAPACITY and MAXIMUM_CAPACITY inclusive.
+     * <p>
+     *  将对象初始化为具有指定初始容量的空映射,该容量假设为MINIMUM_CAPACITY和MAXIMUM_CAPACITY(含)之间的二的幂。
+     * 
      */
     private void init(int initCapacity) {
         // assert (initCapacity & -initCapacity) == initCapacity; // power of 2
@@ -258,6 +350,10 @@ public class IdentityHashMap<K,V>
      * Constructs a new identity hash map containing the keys-value mappings
      * in the specified map.
      *
+     * <p>
+     *  构造新的标识哈希映射,其中包含指定映射中的键值映射。
+     * 
+     * 
      * @param m the map whose mappings are to be placed into this map
      * @throws NullPointerException if the specified map is null
      */
@@ -270,6 +366,10 @@ public class IdentityHashMap<K,V>
     /**
      * Returns the number of key-value mappings in this identity hash map.
      *
+     * <p>
+     *  返回此身份散列映射中的键值映射的数量。
+     * 
+     * 
      * @return the number of key-value mappings in this map
      */
     public int size() {
@@ -280,6 +380,10 @@ public class IdentityHashMap<K,V>
      * Returns <tt>true</tt> if this identity hash map contains no key-value
      * mappings.
      *
+     * <p>
+     *  如果此标识哈希映射不包含键值映射,则返回<tt> true </tt>。
+     * 
+     * 
      * @return <tt>true</tt> if this identity hash map contains no key-value
      *         mappings
      */
@@ -289,6 +393,9 @@ public class IdentityHashMap<K,V>
 
     /**
      * Returns index for Object x.
+     * <p>
+     *  返回对象x的索引。
+     * 
      */
     private static int hash(Object x, int length) {
         int h = System.identityHashCode(x);
@@ -298,6 +405,9 @@ public class IdentityHashMap<K,V>
 
     /**
      * Circularly traverses table of size len.
+     * <p>
+     *  循环遍历大小为len的表。
+     * 
      */
     private static int nextKeyIndex(int i, int len) {
         return (i + 2 < len ? i + 2 : 0);
@@ -318,6 +428,16 @@ public class IdentityHashMap<K,V>
      * The {@link #containsKey containsKey} operation may be used to
      * distinguish these two cases.
      *
+     * <p>
+     *  返回指定键映射到的值,如果此映射不包含键的映射,则返回{@code null}。
+     * 
+     *  更正式地说,如果此映射包含从密钥{@code k}到值{@code v}的映射,使得{@code(key == k)},则此方法返回{@code v} ;否则返回{@code null}。
+     *  (最多只能有一个这样的映射。)。
+     * 
+     *  <p> {@code null}的返回值不一定</i>表示地图不包含键的映射;也有可能映射将键明确映射到{@code null}。
+     *  {@link #containsKey containsKey}操作可用于区分这两种情况。
+     * 
+     * 
      * @see #put(Object, Object)
      */
     @SuppressWarnings("unchecked")
@@ -340,6 +460,10 @@ public class IdentityHashMap<K,V>
      * Tests whether the specified object reference is a key in this identity
      * hash map.
      *
+     * <p>
+     *  测试指定的对象引用是否是此标识哈希映射中的键。
+     * 
+     * 
      * @param   key   possible key
      * @return  <code>true</code> if the specified object reference is a key
      *          in this map
@@ -364,6 +488,10 @@ public class IdentityHashMap<K,V>
      * Tests whether the specified object reference is a value in this identity
      * hash map.
      *
+     * <p>
+     * 测试指定的对象引用是否是此标识哈希映射中的值。
+     * 
+     * 
      * @param value value whose presence in this map is to be tested
      * @return <tt>true</tt> if this map maps one or more keys to the
      *         specified object reference
@@ -381,6 +509,10 @@ public class IdentityHashMap<K,V>
     /**
      * Tests if the specified key-value mapping is in the map.
      *
+     * <p>
+     *  测试指定的键值映射是否在地图中。
+     * 
+     * 
      * @param   key   possible key
      * @param   value possible value
      * @return  <code>true</code> if and only if the specified key-value
@@ -406,6 +538,10 @@ public class IdentityHashMap<K,V>
      * hash map.  If the map previously contained a mapping for the key, the
      * old value is replaced.
      *
+     * <p>
+     *  将指定的值与此标识哈希映射中的指定键相关联。如果映射先前包含键的映射,则替换旧值。
+     * 
+     * 
      * @param key the key with which the specified value is to be associated
      * @param value the value to be associated with the specified key
      * @return the previous value associated with <tt>key</tt>, or
@@ -451,6 +587,10 @@ public class IdentityHashMap<K,V>
     /**
      * Resizes the table if necessary to hold given capacity.
      *
+     * <p>
+     *  必要时调整表的大小以保持指定容量。
+     * 
+     * 
      * @param newCapacity the new capacity, must be a power of two.
      * @return whether a resize did in fact take place
      */
@@ -492,6 +632,10 @@ public class IdentityHashMap<K,V>
      * These mappings will replace any mappings that this map had for
      * any of the keys currently in the specified map.
      *
+     * <p>
+     *  将指定映射中的所有映射复制到此映射。这些映射将替换该映射对于当前在指定映射中的任何键的任何映射。
+     * 
+     * 
      * @param m mappings to be stored in this map
      * @throws NullPointerException if the specified map is null
      */
@@ -509,6 +653,10 @@ public class IdentityHashMap<K,V>
     /**
      * Removes the mapping for this key from this map if present.
      *
+     * <p>
+     *  如果存在,从此映射中删除此密钥的映射。
+     * 
+     * 
      * @param key key whose mapping is to be removed from the map
      * @return the previous value associated with <tt>key</tt>, or
      *         <tt>null</tt> if there was no mapping for <tt>key</tt>.
@@ -542,6 +690,10 @@ public class IdentityHashMap<K,V>
     /**
      * Removes the specified key-value mapping from the map if it is present.
      *
+     * <p>
+     *  从地图中删除指定的键/值映射(如果存在)。
+     * 
+     * 
      * @param   key   possible key
      * @param   value possible value
      * @return  <code>true</code> if and only if the specified key-value
@@ -576,6 +728,10 @@ public class IdentityHashMap<K,V>
      * deletion. This preserves the linear-probe
      * collision properties required by get, put, etc.
      *
+     * <p>
+     *  重命名删除后的所有可能冲突的条目。这保留了get,put等所需的线性探针冲突属性。
+     * 
+     * 
      * @param d the index of a newly empty deleted slot
      */
     private void closeDeletion(int d) {
@@ -610,6 +766,9 @@ public class IdentityHashMap<K,V>
     /**
      * Removes all of the mappings from this map.
      * The map will be empty after this call returns.
+     * <p>
+     *  从此地图中删除所有映射。此调用返回后,地图将为空。
+     * 
      */
     public void clear() {
         modCount++;
@@ -632,6 +791,14 @@ public class IdentityHashMap<K,V>
      * to a normal map.  However, the <tt>Object.equals</tt> contract is
      * guaranteed to hold among <tt>IdentityHashMap</tt> instances.</b>
      *
+     * <p>
+     *  将指定的对象与此映射进行比较以实现相等性。如果给定对象也是一个映射,并且这两个映射表示相同的对象引用映射,则返回<tt> true </tt>。
+     * 更正式地说,当且仅当<tt> this.entrySet()。equals(m.entrySet())</tt>时,此映射等于另一个映射<tt> m </tt>。
+     * 
+     * <p> <b>由于这个映射的基于引用等价的语义,如果将这个映射与一个映射比较,可能会违反<tt> Object.equals </tt>合同的对称性和传递性要求法线贴图。
+     * 但是,<tt> Object.equals </tt>合同保证在<tt> IdentityHashMap </tt>实例之间。</b>。
+     * 
+     * 
      * @param  o object to be compared for equality with this map
      * @return <tt>true</tt> if the specified object is equal to this map
      * @see Object#equals(Object)
@@ -674,6 +841,17 @@ public class IdentityHashMap<K,V>
      * paragraph will be violated if one of the two objects being compared is
      * an <tt>IdentityHashMap</tt> instance and the other is a normal map.</b>
      *
+     * <p>
+     *  返回此地图的哈希码值。地图的哈希码定义为地图的<tt> entrySet()</tt>视图中每个条目的哈希码的总和。
+     * 这确保<tt> m1.equals(m2)</tt>意味着对于任何两个<tt> IdentityHashMap </tt>实例<tt> m1.hashCode()== m2.hashCode()</tt>
+     *  tt> m1 </tt>和<tt> m2 </tt>,根据{@link Object#hashCode}的一般合同的要求。
+     *  返回此地图的哈希码值。地图的哈希码定义为地图的<tt> entrySet()</tt>视图中每个条目的哈希码的总和。
+     * 
+     *  <p> <b>由于此地图的<tt> entrySet </tt>方法返回的集合中的<tt> Map.Entry </tt>实例的基于引用等价的语义,如果正在比较的两个对象中的一个是<tt> Ident
+     * ityHashMap </tt>实例,而另一个是法线贴图,则会违反前一段中提到的<tt> Object.hashCode </tt>的合同要求。
+     *  b>。
+     * 
+     * 
      * @return the hash code value for this map
      * @see Object#equals(Object)
      * @see #equals(Object)
@@ -696,6 +874,10 @@ public class IdentityHashMap<K,V>
      * Returns a shallow copy of this identity hash map: the keys and values
      * themselves are not cloned.
      *
+     * <p>
+     *  返回此标识哈希映射的浅拷贝：键和值本身不会被克隆。
+     * 
+     * 
      * @return a shallow copy of this map
      */
     public Object clone() {
@@ -921,6 +1103,9 @@ public class IdentityHashMap<K,V>
      * This field is initialized to contain an instance of the entry set
      * view the first time this view is requested.  The view is stateless,
      * so there's no reason to create more than one.
+     * <p>
+     *  该字段被初始化为包含该视图第一次被请求时的条目集视图的实例。该视图是无状态的,因此没有理由创建多个。
+     * 
      */
     private transient Set<Map.Entry<K,V>> entrySet;
 
@@ -958,6 +1143,25 @@ public class IdentityHashMap<K,V>
      * general contract of the <tt>Object.hashCode</tt> method among sets
      * returned by this method.
      *
+     * <p>
+     * 返回此映射中包含的键的基于标识的集合视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。如果在对集合进行迭代期间修改映射,则迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>方法。
+     * 返回此映射中包含的键的基于标识的集合视图。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。如果在对集合进行迭代期间修改映射,则迭代的结果是未定义的。
+     * 它不支持<tt>添加</tt>或<tt> addAll </tt>方法。
+     * 
+     *  <p> <b>虽然此方法返回的对象实现了<tt> Set </tt>接口,但它</i> </i>不遵守<tt> Set的</tt>总合同。
+     * 像它的后备映射一样,该方法返回的集合将元素等式定义为引用相等而不是对象相等。
+     * 这会影响其<tt>包含</tt>,<tt>删除</tt>,<tt> containsAll </tt>,<tt>等于</tt>和<tt> hashCode </tt >方法。</b>。
+     * 
+     *  <p> <b>只有当指定的对象是包含与返回集完全相同的对象引用的集时,返回集的<tt> equals </tt>方法才会返回<tt> true </tt>。
+     * 如果将此方法返回的集合与正常集合进行比较,则可能会违反<tt> Object.equals </tt>合同的对称性和传递性要求。
+     * 但是,<tt> Object.equals </tt>合同保证在由此方法返回的集合之间。</b>。
+     * 
+     * <p>返回的集合的<tt> hashCode </tt>方法返回集合中元素的<i> identity hashcodes </i>的总和,而不是它们的散列码的总和。
+     * 这是通过<tt> equals </tt>方法的语义的改变来强制的,以便强制该方法返回的集合中的<tt> Object.hashCode </tt>方法的一般合同。
+     * 
+     * 
      * @return an identity-based set view of the keys contained in this map
      * @see Object#equals(Object)
      * @see System#identityHashCode(Object)
@@ -989,6 +1193,9 @@ public class IdentityHashMap<K,V>
          * Must revert from AbstractSet's impl to AbstractCollection's, as
          * the former contains an optimization that results in incorrect
          * behavior when c is a smaller "normal" (non-identity-based) Set.
+         * <p>
+         *  必须从AbstractSet的impl转换为AbstractCollection,因为前者包含一个优化,当c是一个较小的"正常"(非基于身份的)Set时,导致不正确的行为。
+         * 
          */
         public boolean removeAll(Collection<?> c) {
             Objects.requireNonNull(c);
@@ -1066,6 +1273,16 @@ public class IdentityHashMap<K,V>
      * reference-equality rather than object-equality.  This affects the
      * behavior of its <tt>contains</tt>, <tt>remove</tt> and
      * <tt>containsAll</tt> methods.</b>
+     * <p>
+     *  返回此地图中包含的值的{@link Collection}视图。集合由地图支持,因此对地图的更改会反映在集合中,反之亦然。如果在对集合进行迭代期间修改映射,则迭代的结果是未定义的。
+     * 集合支持元素删除,通过<tt> Iterator.remove </tt>,<tt> Collection.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射>
+     *  retainAll </tt>和<tt>清除</tt>方法。
+     *  返回此地图中包含的值的{@link Collection}视图。集合由地图支持,因此对地图的更改会反映在集合中,反之亦然。如果在对集合进行迭代期间修改映射,则迭代的结果是未定义的。
+     * 它不支持<tt>添加</tt>或<tt> addAll </tt>方法。
+     * 
+     * <p> <b>虽然此方法返回的对象实现了<tt> Collection </tt>接口,但它</i>不</i>遵守<tt>集合</tt>总合同。
+     * 像它的后备映射一样,此方法返回的集合将元素等同定义为引用相等而不是对象相等。这会影响其<tt>包含</tt>,<tt>删除</tt>和<tt>包含所有</tt>方法的行为。</b>。
+     * 
      */
     public Collection<V> values() {
         Collection<V> vs = values;
@@ -1169,6 +1386,25 @@ public class IdentityHashMap<K,V>
      * hold among identity-based map entries, and among sets of such entries.
      * </b>
      *
+     * <p>
+     *  返回此地图中包含的映射的{@link Set}视图。返回集合中的每个元素都是基于引用等式的<tt> Map.Entry </tt>。该集合由映射支持,因此对映射的更改反映在集合中,反之亦然。
+     * 如果在对集合进行迭代期间修改映射,则迭代的结果是未定义的。
+     * 集合支持元素删除,它通过<tt> Iterator.remove </tt>,<tt> Set.remove </tt>,<tt> removeAll </tt>,<tt从地图中删除相应的映射> ret
+     * ainAll </tt>和<tt>清除</tt>方法。
+     * 如果在对集合进行迭代期间修改映射,则迭代的结果是未定义的。它不支持<tt>添加</tt>或<tt> addAll </tt>方法。
+     * 
+     * <p>与背景贴图类似,此方法返回的集合中的<tt> Map.Entry </tt>对象将键和值的相等定义为引用相等而不是对象相等。
+     * 这会影响这些<tt> Map.Entry </tt>对象的<tt> equals </tt>和<tt> hashCode </tt>方法的行为。
+     * 当且仅当<tt> o </tt>是<tt> Map.Entry <>时,基于<tt> Map.Entry e </tt>的引用等于等于对象<tt> o </tt> / tt>和<tt> e.getKey
+     * ()== o.getKey()&amp;&amp; e.getValue()== o.getValue()</tt>。
+     * 这会影响这些<tt> Map.Entry </tt>对象的<tt> equals </tt>和<tt> hashCode </tt>方法的行为。
+     * 为了适应这些等于语义,<tt> hashCode </tt>方法返回<tt> System.identityHashCode(e.getKey())^ System.identityHashCode(e
+     * .getValue())</tt>。
+     * 这会影响这些<tt> Map.Entry </tt>对象的<tt> equals </tt>和<tt> hashCode </tt>方法的行为。
+     * 
+     *  <p> <b>由于此方法返回的集合中的<tt> Map.Entry </tt>实例的基于引用等价的语义,可能的是{@link如果将集合中的任何条目与正常映射条目进行比较,或者如果将由该方法返回的集合与一组正常映射条目(例如将被返回的集合)进行比较,则可能违反对象#等于(对象)通过在正常映射上调用此方法)。
+     * 然而,<tt> Object.equals </tt>合同保证在基于身份的映射条目之间以及在这些条目的集合之间。
+     * 
      * @return a set view of the identity-mappings contained in this map
      */
     public Set<Map.Entry<K,V>> entrySet() {
@@ -1205,6 +1441,9 @@ public class IdentityHashMap<K,V>
          * Must revert from AbstractSet's impl to AbstractCollection's, as
          * the former contains an optimization that results in incorrect
          * behavior when c is a smaller "normal" (non-identity-based) Set.
+         * <p>
+         * </b>
+         * 
          */
         public boolean removeAll(Collection<?> c) {
             Objects.requireNonNull(c);
@@ -1263,6 +1502,10 @@ public class IdentityHashMap<K,V>
      * Saves the state of the <tt>IdentityHashMap</tt> instance to a stream
      * (i.e., serializes it).
      *
+     * <p>
+     *  必须从AbstractSet的impl转换为AbstractCollection,因为前者包含一个优化,当c是一个较小的"正常"(非基于身份的)Set时,导致不正确的行为。
+     * 
+     * 
      * @serialData The <i>size</i> of the HashMap (the number of key-value
      *          mappings) (<tt>int</tt>), followed by the key (Object) and
      *          value (Object) for each key-value mapping represented by the
@@ -1291,6 +1534,9 @@ public class IdentityHashMap<K,V>
     /**
      * Reconstitutes the <tt>IdentityHashMap</tt> instance from a stream (i.e.,
      * deserializes it).
+     * <p>
+     * 将<tt> IdentityHashMap </tt>实例的状态保存到流(即将其序列化)。
+     * 
      */
     private void readObject(java.io.ObjectInputStream s)
         throws java.io.IOException, ClassNotFoundException  {
@@ -1317,6 +1563,9 @@ public class IdentityHashMap<K,V>
     /**
      * The put method for readObject.  It does not resize the table,
      * update modCount, etc.
+     * <p>
+     *  从流重新构建<tt> IdentityHashMap </tt>实例(即,将其反序列化)。
+     * 
      */
     private void putForCreate(K key, V value)
         throws java.io.StreamCorruptedException
@@ -1377,6 +1626,9 @@ public class IdentityHashMap<K,V>
     /**
      * Similar form as array-based Spliterators, but skips blank elements,
      * and guestimates size as decreasing by half per split.
+     * <p>
+     *  readObject的put方法。它不会调整表的大小,更新modCount等。
+     * 
      */
     static class IdentityHashMapSpliterator<K,V> {
         final IdentityHashMap<K,V> map;

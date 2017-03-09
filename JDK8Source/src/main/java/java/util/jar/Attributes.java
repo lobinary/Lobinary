@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,12 @@ import sun.misc.ASCIICaseInsensitiveComparator;
  * <a href="../../../../technotes/guides/jar/jar.html">JAR File Specification</a>
  * for more information about valid attribute names and values.
  *
+ * <p>
+ *  Attributes类将Manifest属性名称映射到关联的字符串值。有效的属性名称不区分大小写,仅限于集合[0-9a-zA-Z_-]中的ASCII字符,并且长度不能超过70个字符。
+ * 属性值可以包含任何字符,并且在写入输出流时将进行UTF8编码。
+ * 有关有效的属性名称和值的详细信息,请参见<a href="../../../../technotes/guides/jar/jar.html"> JAR文件规范</a>。
+ * 
+ * 
  * @author  David Connelly
  * @see     Manifest
  * @since   1.2
@@ -54,11 +61,17 @@ import sun.misc.ASCIICaseInsensitiveComparator;
 public class Attributes implements Map<Object,Object>, Cloneable {
     /**
      * The attribute name-value mappings.
+     * <p>
+     *  属性名称 - 值映射。
+     * 
      */
     protected Map<Object,Object> map;
 
     /**
      * Constructs a new, empty Attributes object with default size.
+     * <p>
+     *  构造一个具有默认大小的新的空的Attributes对象。
+     * 
      */
     public Attributes() {
         this(11);
@@ -68,6 +81,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * Constructs a new, empty Attributes object with the specified
      * initial size.
      *
+     * <p>
+     *  构造具有指定初始大小的新的空的Attributes对象。
+     * 
+     * 
      * @param size the initial number of attributes
      */
     public Attributes(int size) {
@@ -78,6 +95,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * Constructs a new Attributes object with the same attribute name-value
      * mappings as in the specified Attributes.
      *
+     * <p>
+     *  构造具有与指定属性中相同的属性名称 - 值映射的新Attributes对象。
+     * 
+     * 
      * @param attr the specified Attributes
      */
     public Attributes(Attributes attr) {
@@ -89,6 +110,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * Returns the value of the specified attribute name, or null if the
      * attribute name was not found.
      *
+     * <p>
+     *  返回指定属性名称的值,如果未找到属性名称,则返回null。
+     * 
+     * 
      * @param name the attribute name
      * @return the value of the specified attribute name, or null if
      *         not found.
@@ -107,6 +132,15 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      *      return (String)get(new Attributes.Name((String)name));
      * </pre>
      *
+     * <p>
+     *  返回指定为字符串的指定属性名称的值,如果未找到该属性,则返回null。属性名称不区分大小写。
+     * <p>
+     *  该方法定义为：
+     * <pre>
+     *  return(String)get(new Attributes.Name((String)name));
+     * </pre>
+     * 
+     * 
      * @param name the attribute name as a string
      * @return the String value of the specified attribute name, or null if
      *         not found.
@@ -125,6 +159,15 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      *     return (String)get(name);
      * </pre>
      *
+     * <p>
+     *  返回指定Attributes.Name的值,如果未找到该属性,则返回null。
+     * <p>
+     *  该方法定义为：
+     * <pre>
+     *  return(String)get(name);
+     * </pre>
+     * 
+     * 
      * @param name the Attributes.Name object
      * @return the String value of the specified Attribute.Name, or null if
      *         not found.
@@ -138,6 +181,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * (key) in this Map. If the Map previously contained a mapping for
      * the attribute name, the old value is replaced.
      *
+     * <p>
+     * 将指定的值与此映射中指定的属性名称(键)相关联。如果Map先前包含属性名称的映射,则替换旧值。
+     * 
+     * 
      * @param name the attribute name
      * @param value the attribute value
      * @return the previous value of the attribute, or null if none
@@ -159,6 +206,15 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      *      return (String)put(new Attributes.Name(name), value);
      * </pre>
      *
+     * <p>
+     *  将指定的值与指定的属性名称相关联,指定为字符串。属性名称不区分大小写。如果Map先前包含属性名称的映射,则替换旧值。
+     * <p>
+     *  该方法定义为：
+     * <pre>
+     *  return(String)put(new Attributes.Name(name),value);
+     * </pre>
+     * 
+     * 
      * @param name the attribute name as a string
      * @param value the attribute value
      * @return the previous value of the attribute, or null if none
@@ -172,6 +228,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * Removes the attribute with the specified name (key) from this Map.
      * Returns the previous attribute value, or null if none.
      *
+     * <p>
+     *  从此映射中删除具有指定名称(键)的属性。返回上一个属性值,如果没有,则返回null。
+     * 
+     * 
      * @param name attribute name
      * @return the previous value of the attribute, or null if none
      */
@@ -183,6 +243,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * Returns true if this Map maps one or more attribute names (keys)
      * to the specified value.
      *
+     * <p>
+     *  如果此映射将一个或多个属性名称(键)映射到指定的值,则返回true。
+     * 
+     * 
      * @param value the attribute value
      * @return true if this Map maps one or more attribute names to
      *         the specified value
@@ -194,6 +258,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
     /**
      * Returns true if this Map contains the specified attribute name (key).
      *
+     * <p>
+     *  如果此地图包含指定的属性名称(键),则返回true。
+     * 
+     * 
      * @param name the attribute name
      * @return true if this Map contains the specified attribute name
      */
@@ -205,6 +273,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * Copies all of the attribute name-value mappings from the specified
      * Attributes to this Map. Duplicate mappings will be replaced.
      *
+     * <p>
+     *  将所有属性名称 - 值映射从指定的属性复制到此映射。将替换重复的映射。
+     * 
+     * 
      * @param attr the Attributes to be stored in this map
      * @exception ClassCastException if attr is not an Attributes
      */
@@ -218,6 +290,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
     /**
      * Removes all attributes from this Map.
+     * <p>
+     *  从此地图中删除所有属性。
+     * 
      */
     public void clear() {
         map.clear();
@@ -225,6 +300,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
     /**
      * Returns the number of attributes in this Map.
+     * <p>
+     *  返回此地图中的属性数。
+     * 
      */
     public int size() {
         return map.size();
@@ -232,6 +310,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
     /**
      * Returns true if this Map contains no attributes.
+     * <p>
+     *  如果此地图不包含任何属性,则返回true。
+     * 
      */
     public boolean isEmpty() {
         return map.isEmpty();
@@ -239,6 +320,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
     /**
      * Returns a Set view of the attribute names (keys) contained in this Map.
+     * <p>
+     *  返回此映射中包含的属性名称(键)的集合视图。
+     * 
      */
     public Set<Object> keySet() {
         return map.keySet();
@@ -246,6 +330,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
     /**
      * Returns a Collection view of the attribute values contained in this Map.
+     * <p>
+     *  返回此映射中包含的属性值的集合视图。
+     * 
      */
     public Collection<Object> values() {
         return map.values();
@@ -254,6 +341,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
     /**
      * Returns a Collection view of the attribute name-value mappings
      * contained in this Map.
+     * <p>
+     *  返回此映射中包含的属性名称 - 值映射的集合视图。
+     * 
      */
     public Set<Map.Entry<Object,Object>> entrySet() {
         return map.entrySet();
@@ -264,6 +354,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * Returns true if the given object is also an instance of Attributes
      * and the two Attributes objects represent the same mappings.
      *
+     * <p>
+     *  将指定的Attributes对象与此Map比较以确保相等。如果给定对象也是属性的实例,并且两个Attributes对象表示相同的映射,则返回true。
+     * 
+     * 
      * @param o the Object to be compared
      * @return true if the specified Object is equal to this Map
      */
@@ -273,6 +367,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
     /**
      * Returns the hash code value for this Map.
+     * <p>
+     * 返回此Map的哈希码值。
+     * 
      */
     public int hashCode() {
         return map.hashCode();
@@ -286,6 +383,13 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * Since the attribute names and values are themselves immutable,
      * the Attributes returned can be safely modified without affecting
      * the original.
+     * <p>
+     *  返回属性的副本,实现如下：
+     * <pre>
+     *  public Object clone(){return new Attributes(this); }}
+     * </pre>
+     *  由于属性名称和值本身是不可变的,所以返回的属性可以安全地修改而不影响原始属性。
+     * 
      */
     public Object clone() {
         return new Attributes(this);
@@ -294,6 +398,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
     /*
      * Writes the current attributes to the specified data output stream.
      * XXX Need to handle UTF8 values and break up lines longer than 72 bytes
+     * <p>
+     *  将当前属性写入指定的数据输出流。 XXX需要处理UTF8值并拆分超过72个字节的行
+     * 
      */
      void write(DataOutputStream os) throws IOException {
         Iterator<Map.Entry<Object, Object>> it = entrySet().iterator();
@@ -323,6 +430,11 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * attributes first.
      *
      * XXX Need to handle UTF8 values and break up lines longer than 72 bytes
+     * <p>
+     *  将当前属性写入指定的数据输出流,请务必先写出MANIFEST_VERSION或SIGNATURE_VERSION属性。
+     * 
+     *  XXX需要处理UTF8值并拆分超过72个字节的行
+     * 
      */
     void writeMain(DataOutputStream out) throws IOException
     {
@@ -367,6 +479,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
     /*
      * Reads attributes from the specified input stream.
      * XXX Need to handle UTF8 values.
+     * <p>
+     *  从指定的输入流读取属性。 XXX需要处理UTF8值。
+     * 
      */
     void read(Manifest.FastInputStream is, byte[] lbuf) throws IOException {
         String name = null, value = null;
@@ -443,6 +558,11 @@ public class Attributes implements Map<Object,Object>, Cloneable {
      * and will be UTF8-encoded when written to the output stream.  See the
      * <a href="../../../../technotes/guides/jar/jar.html">JAR File Specification</a>
      * for more information about valid attribute names and values.
+     * <p>
+     *  Attributes.Name类表示存储在此Map中的属性名称。有效的属性名称不区分大小写,仅限于集合[0-9a-zA-Z_-]中的ASCII字符,并且长度不能超过70个字符。
+     * 属性值可以包含任何字符,并且在写入输出流时将进行UTF8编码。
+     * 有关有效的属性名称和值的详细信息,请参见<a href="../../../../technotes/guides/jar/jar.html"> JAR文件规范</a>。
+     * 
      */
     public static class Name {
         private String name;
@@ -451,6 +571,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * Constructs a new attribute name using the given string name.
          *
+         * <p>
+         *  使用给定的字符串名称构造新的属性名称。
+         * 
+         * 
          * @param name the attribute string name
          * @exception IllegalArgumentException if the attribute name was
          *            invalid
@@ -493,6 +617,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
         /**
          * Compares this attribute name to another for equality.
+         * <p>
+         *  将此属性名称与另一个属性名称相等比较。
+         * 
+         * 
          * @param o the object to compare
          * @return true if this attribute name is equal to the
          *         specified attribute object
@@ -508,6 +636,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
         /**
          * Computes the hash value for this attribute name.
+         * <p>
+         *  计算此属性名称的哈希值。
+         * 
          */
         public int hashCode() {
             if (hashCode == -1) {
@@ -518,6 +649,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
 
         /**
          * Returns the attribute name as a String.
+         * <p>
+         *  以String形式返回属性名称。
+         * 
          */
         public String toString() {
             return name;
@@ -527,6 +661,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
          * <code>Name</code> object for <code>Manifest-Version</code>
          * manifest attribute. This attribute indicates the version number
          * of the manifest standard to which a JAR file's manifest conforms.
+         * <p>
+         * <code> Manifest-Version </code>清单属性的<code> Name </code>对象。此属性指示JAR文件清单符合的清单标准的版本号。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/jar/jar.html#JAR_Manifest">
          *      Manifest and Signature Specification</a>
          */
@@ -535,6 +673,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Signature-Version</code>
          * manifest attribute used when signing JAR files.
+         * <p>
+         *  对签名JAR文件时使用的<code>签名版本</code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/jar/jar.html#JAR_Manifest">
          *      Manifest and Signature Specification</a>
          */
@@ -543,6 +685,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Content-Type</code>
          * manifest attribute.
+         * <p>
+         *  <code> Content-Type </code>清单属性的<code> Name </code>对象。
+         * 
          */
         public static final Name CONTENT_TYPE = new Name("Content-Type");
 
@@ -550,6 +695,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
          * <code>Name</code> object for <code>Class-Path</code>
          * manifest attribute. Bundled extensions can use this attribute
          * to find other JAR files containing needed classes.
+         * <p>
+         *  <code>类路径</code>清单属性的<code> Name </code>对象。捆绑扩展可以使用此属性来查找包含所需类的其他JAR文件。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/jar/jar.html#classpath">
          *      JAR file specification</a>
          */
@@ -561,12 +710,20 @@ public class Attributes implements Map<Object,Object>, Cloneable {
          * The <code>Main-Class</code> attribute is used in conjunction
          * with the <code>-jar</code> command-line option of the
          * <tt>java</tt> application launcher.
+         * <p>
+         *  用于启动JAR文件中打包的应用程序的<code> Main-Class </code>清单属性的<code> Name </code>对象。
+         *  <code> Main-Class </code>属性与<tt> java </tt>应用程序启动器的<code> -jar </code>命令行选项结合使用。
+         * 
          */
         public static final Name MAIN_CLASS = new Name("Main-Class");
 
         /**
          * <code>Name</code> object for <code>Sealed</code> manifest attribute
          * used for sealing.
+         * <p>
+         *  用于密封的<code>密封</code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/jar/jar.html#sealing">
          *      Package Sealing</a>
          */
@@ -575,6 +732,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
        /**
          * <code>Name</code> object for <code>Extension-List</code> manifest attribute
          * used for declaring dependencies on installed extensions.
+         * <p>
+         *  用于声明对已安装扩展的依赖性的<code> Extension-List </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/extensions/spec.html#dependency">
          *      Installed extension dependency</a>
          */
@@ -583,6 +744,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Extension-Name</code> manifest attribute
          * used for declaring dependencies on installed extensions.
+         * <p>
+         *  用于声明对已安装扩展的依赖性的<code> Extension-Name </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/extensions/spec.html#dependency">
          *      Installed extension dependency</a>
          */
@@ -591,6 +756,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Extension-Name</code> manifest attribute
          * used for declaring dependencies on installed extensions.
+         * <p>
+         *  用于声明对已安装扩展的依赖性的<code> Extension-Name </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @deprecated Extension mechanism will be removed in a future release.
          *             Use class path instead.
          * @see <a href="../../../../technotes/guides/extensions/spec.html#dependency">
@@ -602,6 +771,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Implementation-Title</code>
          * manifest attribute used for package versioning.
+         * <p>
+         *  用于包版本化的<code> Implementation-Title </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/versioning/spec/versioning2.html#wp90779">
          *      Java Product Versioning Specification</a>
          */
@@ -610,6 +783,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Implementation-Version</code>
          * manifest attribute used for package versioning.
+         * <p>
+         * 用于包版本化的<code>实现版本</code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/versioning/spec/versioning2.html#wp90779">
          *      Java Product Versioning Specification</a>
          */
@@ -618,6 +795,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Implementation-Vendor</code>
          * manifest attribute used for package versioning.
+         * <p>
+         *  用于包版本化的<code> Implementation-Vendor </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/versioning/spec/versioning2.html#wp90779">
          *      Java Product Versioning Specification</a>
          */
@@ -626,6 +807,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Implementation-Vendor-Id</code>
          * manifest attribute used for package versioning.
+         * <p>
+         *  用于包版本化的<code> Implementation-Vendor-Id </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @deprecated Extension mechanism will be removed in a future release.
          *             Use class path instead.
          * @see <a href="../../../../technotes/guides/extensions/versioning.html#applet">
@@ -637,6 +822,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
        /**
          * <code>Name</code> object for <code>Implementation-URL</code>
          * manifest attribute used for package versioning.
+         * <p>
+         *  用于包版本化的<code> Implementation-URL </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @deprecated Extension mechanism will be removed in a future release.
          *             Use class path instead.
          * @see <a href="../../../../technotes/guides/extensions/versioning.html#applet">
@@ -648,6 +837,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Specification-Title</code>
          * manifest attribute used for package versioning.
+         * <p>
+         *  用于包版本化的<code> Specification-Title </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/versioning/spec/versioning2.html#wp90779">
          *      Java Product Versioning Specification</a>
          */
@@ -656,6 +849,10 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Specification-Version</code>
          * manifest attribute used for package versioning.
+         * <p>
+         *  用于软件包版本控制的<code> Specification-Version </code>清单属性的<code> Name </code>对象。
+         * 
+         * 
          * @see <a href="../../../../technotes/guides/versioning/spec/versioning2.html#wp90779">
          *      Java Product Versioning Specification</a>
          */
@@ -664,6 +861,9 @@ public class Attributes implements Map<Object,Object>, Cloneable {
         /**
          * <code>Name</code> object for <code>Specification-Vendor</code>
          * manifest attribute used for package versioning.
+         * <p>
+         *  用于软件包版本控制的<code> Specification-Vendor </code>清单属性的<code> Name </code>对象。
+         * 
          * @see <a href="../../../../technotes/guides/versioning/spec/versioning2.html#wp90779">
          *      Java Product Versioning Specification</a>
          */

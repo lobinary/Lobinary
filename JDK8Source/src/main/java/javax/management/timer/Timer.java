@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -75,6 +76,24 @@ import javax.management.ObjectName;
  * executions.  See {@link NotificationBroadcasterSupport}.
  * </OL>
  *
+ * <p>
+ *  提供定时器MBean的实现。定时器MBean在指定时间发出警报,唤醒所有已注册的接收器以接收定时器通知。
+ * <P>
+ * 
+ *  此类管理日期计时器通知的列表。方法允许用户根据需要添加/删除尽可能多的通知。当定时器发出定时器通知并变为过时,它会自动从定时器通知列表中删除。 <BR>额外的计时器通知可以添加到定期重复的通知中。
+ * <P>
+ * 
+ *  注意：
+ * <OL>
+ * <LI>当发送定时器通知时,定时器更新通知序列号,而不考虑通知类型。 <LI>定时器服务依赖于加载<CODE> Timer </CODE>类的主机的系统日期。
+ * 如果主持人具有不同的系统日期,则监听器可能会收到不及时的通知。为避免此类问题,请同步所有需要计时的主机计算机的系统日期。
+ *  <LI>定期通知的默认行为是<i>固定延迟执行</i>,如{@link java.util.Timer}中所指定。
+ * 为了使用<i>固定速率执行</i>,请使用重载的{@link #addNotification(String,String,Object,Date,long,long,boolean)}方法。
+ *  <LI>通知侦听器可能都在同一个线程中执行。因此,他们应该快速执行,以避免阻止其他监听器或扰乱固定延迟执行的规律性。
+ * 请参阅{@link NotificationBroadcasterSupport}。
+ * </OL>
+ * 
+ * 
  * @since 1.5
  */
 public class Timer extends NotificationBroadcasterSupport
@@ -85,35 +104,53 @@ public class Timer extends NotificationBroadcasterSupport
      * ------------------------------------------
      *  PUBLIC VARIABLES
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------公共变量------ ------------------------------------
+     * 
      */
 
     /**
      * Number of milliseconds in one second.
      * Useful constant for the <CODE>addNotification</CODE> method.
+     * <p>
+     *  以秒为单位的毫秒数。 <CODE> addNotification </CODE>方法的有用常数。
+     * 
      */
     public static final long ONE_SECOND = 1000;
 
     /**
      * Number of milliseconds in one minute.
      * Useful constant for the <CODE>addNotification</CODE> method.
+     * <p>
+     *  一分钟内的毫秒数。 <CODE> addNotification </CODE>方法的有用常数。
+     * 
      */
     public static final long ONE_MINUTE = 60*ONE_SECOND;
 
     /**
      * Number of milliseconds in one hour.
      * Useful constant for the <CODE>addNotification</CODE> method.
+     * <p>
+     *  以一小时为单位的毫秒数。 <CODE> addNotification </CODE>方法的有用常数。
+     * 
      */
     public static final long ONE_HOUR   = 60*ONE_MINUTE;
 
     /**
      * Number of milliseconds in one day.
      * Useful constant for the <CODE>addNotification</CODE> method.
+     * <p>
+     *  一天中的毫秒数。 <CODE> addNotification </CODE>方法的有用常数。
+     * 
      */
     public static final long ONE_DAY    = 24*ONE_HOUR;
 
     /**
      * Number of milliseconds in one week.
      * Useful constant for the <CODE>addNotification</CODE> method.
+     * <p>
+     * 一周的毫秒数。 <CODE> addNotification </CODE>方法的有用常数。
+     * 
      */
     public static final long ONE_WEEK   = 7*ONE_DAY;
 
@@ -121,11 +158,17 @@ public class Timer extends NotificationBroadcasterSupport
      * ------------------------------------------
      *  PRIVATE VARIABLES
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私人变数------ ------------------------------------
+     * 
      */
 
     /**
      * Table containing all the timer notifications of this timer,
      * with the associated date, period and number of occurrences.
+     * <p>
+     *  包含此计时器的所有计时器通知的表,以及相关的日期,周期和发生次数。
+     * 
      */
     final private Map<Integer,Object[]> timerTable =
         new HashMap<>();
@@ -134,18 +177,27 @@ public class Timer extends NotificationBroadcasterSupport
      * Past notifications sending on/off flag value.
      * This attribute is used to specify if the timer has to send past notifications after start.
      * <BR>The default value is set to <CODE>false</CODE>.
+     * <p>
+     *  过去通知发送开/关标志值。此属性用于指定计时器是否必须在启动后发送过去的通知。 <BR>默认值设置为<CODE> false </CODE>。
+     * 
      */
     private boolean sendPastNotifications = false;
 
     /**
      * Timer state.
      * The default value is set to <CODE>false</CODE>.
+     * <p>
+     *  定时器状态。默认值设置为<CODE> false </CODE>。
+     * 
      */
     private transient boolean isActive = false;
 
     /**
      * Timer sequence number.
      * The default value is set to 0.
+     * <p>
+     *  定时器序列号。默认值设置为0。
+     * 
      */
     private transient long sequenceNumber = 0;
 
@@ -161,6 +213,9 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * The notification counter ID.
      * Used to keep the max key value inserted into the timer table.
+     * <p>
+     *  通知计数器ID。用于保持最大键值插入定时器表。
+     * 
      */
     volatile private int counterID = 0;
 
@@ -170,10 +225,16 @@ public class Timer extends NotificationBroadcasterSupport
      * ------------------------------------------
      *  CONSTRUCTORS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------建筑师------- -----------------------------------
+     * 
      */
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public Timer() {
     }
@@ -182,6 +243,9 @@ public class Timer extends NotificationBroadcasterSupport
      * ------------------------------------------
      *  PUBLIC METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------公共方法------------------------------------
+     * 
      */
 
     /**
@@ -190,6 +254,12 @@ public class Timer extends NotificationBroadcasterSupport
      * <P>
      * Not used in this context.
      *
+     * <p>
+     *  允许定时器MBean在注册到MBean服务器之前执行其所需的任何操作。
+     * <P>
+     *  在此上下文中未使用。
+     * 
+     * 
      * @param server The MBean server in which the timer MBean will be registered.
      * @param name The object name of the timer MBean.
      *
@@ -207,6 +277,11 @@ public class Timer extends NotificationBroadcasterSupport
      * registered in the MBean server or after the registration has failed.
      * <P>
      * Not used in this context.
+     * <p>
+     *  允许定时器MBean在已在MBean服务器中注册或注册失败后执行所需的任何操作。
+     * <P>
+     *  在此上下文中未使用。
+     * 
      */
     public void postRegister (Boolean registrationDone) {
     }
@@ -217,6 +292,12 @@ public class Timer extends NotificationBroadcasterSupport
      * <P>
      * Stops the timer.
      *
+     * <p>
+     *  允许定时器MBean在MBean服务器取消注册之前执行其所需的任何操作。
+     * <P>
+     *  停止定时器。
+     * 
+     * 
      * @exception java.lang.Exception
      */
     public void preDeregister() throws java.lang.Exception {
@@ -234,6 +315,11 @@ public class Timer extends NotificationBroadcasterSupport
      * unregistered by the MBean server.
      * <P>
      * Not used in this context.
+     * <p>
+     *  允许定时器MBean在MBean服务器取消注册后执行所需的任何操作。
+     * <P>
+     * 在此上下文中未使用。
+     * 
      */
     public void postDeregister() {
     }
@@ -245,6 +331,10 @@ public class Timer extends NotificationBroadcasterSupport
      * can emit TimerNotification.  The array of type strings
      * associated with this entry is a snapshot of the current types
      * that were given to addNotification.
+     * <p>
+     *  这将覆盖NotificationBroadcasterSupport中的方法。返回此MBean的MBeanNotificationInfo []数组。
+     * 返回的数组有一个元素,表示MBean可以发出TimerNotification。与此条目关联的类型字符串数组是给予addNotification的当前类型的快照。
+     * 
      */
     public synchronized MBeanNotificationInfo[] getNotificationInfo() {
         Set<String> notifTypes = new TreeSet<String>();
@@ -270,6 +360,12 @@ public class Timer extends NotificationBroadcasterSupport
      * according to its period and remaining number of occurrences.
      * If the timer notification date remains earlier than the current date, this notification is just removed
      * from the list of notifications.
+     * <p>
+     *  启动定时器。
+     * <P>
+     *  如果在通知列表中的时间之前存在一个或多个定时器通知,则根据<CODE> sendPastNotifications </CODE>标志发送通知,然后根据其周期和剩余出现次数来更新通知。
+     * 如果计时器通知日期早于当前日期,则此通知将从通知列表中删除。
+     * 
      */
     public synchronized void start() {
 
@@ -333,6 +429,9 @@ public class Timer extends NotificationBroadcasterSupport
 
     /**
      * Stops the timer.
+     * <p>
+     *  停止定时器。
+     * 
      */
     public synchronized void stop() {
 
@@ -395,6 +494,17 @@ public class Timer extends NotificationBroadcasterSupport
      * In the case of a periodic notification, the value of parameter <i>fixedRate</i> is used to
      * specify the execution scheme, as specified in {@link java.util.Timer}.
      *
+     * <p>
+     *  使用指定的<CODE>类型</CODE>,<CODE>消息</CODE>和<CODE> userData </CODE>创建新的计时器通知,并将其插入具有给定日期,的出现。
+     * <P>
+     *  如果要插入的计时器通知的日期早于当前日期,则该方法的行为就像指定的日期是当前日期。 <BR>对于一次性通知,通知会立即传送。
+     *  <BR>对于定期通知,第一个通知立即传递,后续的通知按照period参数指定的间隔。
+     * <P>
+     * 请注意,一旦计时器通知已添加到通知列表中,则无法更新其关联的日期,时间段和发生次数。
+     * <P>
+     *  在定期通知的情况下,参数<i> fixedRate </i>的值用于指定执行方案,如{@link java.util.Timer}中所指定。
+     * 
+     * 
      * @param type The timer notification type.
      * @param message The timer notification detailed message.
      * @param userData The timer notification user data object.
@@ -545,6 +655,18 @@ public class Timer extends NotificationBroadcasterSupport
      * {@link java.util.Timer}. In order to use a <i>fixed-rate</i> execution scheme, use
      * {@link #addNotification(String, String, Object, Date, long, long, boolean)} instead.
      *
+     * <p>
+     *  使用指定的<CODE>类型</CODE>,<CODE>消息</CODE>和<CODE> userData </CODE>创建新的计时器通知,并将其插入具有给定日期,的出现。
+     * <P>
+     *  如果要插入的计时器通知的日期早于当前日期,则该方法的行为就像指定的日期是当前日期。 <BR>对于一次性通知,通知会立即传送。
+     *  <BR>对于定期通知,第一个通知立即传递,后续的通知按照period参数指定的间隔。
+     * <P>
+     *  请注意,一旦计时器通知已添加到通知列表中,则无法更新其关联的日期,时间段和发生次数。
+     * <P>
+     *  在定期通知的情况下,使用<i> fixed-delay </i>执行方案,如{@link java.util.Timer}中所指定。
+     * 为了使用<i>固定速率</i>执行方案,请改用{@link #addNotification(String,String,Object,Date,long,long,boolean)}。
+     * 
+     * 
      * @param type The timer notification type.
      * @param message The timer notification detailed message.
      * @param userData The timer notification user data object.
@@ -586,6 +708,15 @@ public class Timer extends NotificationBroadcasterSupport
      * first notification is delivered immediately and the subsequent ones are
      * spaced as specified by the period parameter.
      *
+     * <p>
+     * 使用指定的<CODE>类型</CODE>,<CODE>消息</CODE>和<CODE> userData </CODE>创建新的计时器通知,并将其插入具有给定日期和时间的通知列表, null出现次数。
+     * <P>
+     *  定时器通知将使用固定延迟执行方案使用定时器周期连续地重复,如{@link java.util.Timer}中所规定。
+     * 为了使用<i>固定速率</i>执行方案,请改用{@link #addNotification(String,String,Object,Date,long,long,boolean)}。
+     * <P>
+     *  如果要插入的计时器通知的日期早于当前日期,则该方法的行为就像指定的日期是当前日期。第一个通知立即传递,后续的通知按照周期参数指定的间隔。
+     * 
+     * 
      * @param type The timer notification type.
      * @param message The timer notification detailed message.
      * @param userData The timer notification user data object.
@@ -620,6 +751,14 @@ public class Timer extends NotificationBroadcasterSupport
      * the method behaves as if the specified date were the current date and the
      * notification is delivered immediately.
      *
+     * <p>
+     *  使用指定的<CODE>类型</CODE>,<CODE>消息</CODE>和<CODE> userData </CODE>创建新的计时器通知,并将其插入具有给定日期和空期的通知列表和出现次数。
+     * <P>
+     *  定时器通知将在指定日期处理一次。
+     * <P>
+     *  如果要插入的定时器通知的日期在当前日期之前,则该方法的行为就像指定的日期是当前日期,并且立即发送通知。
+     * 
+     * 
      * @param type The timer notification type.
      * @param message The timer notification detailed message.
      * @param userData The timer notification user data object.
@@ -644,6 +783,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Removes the timer notification corresponding to the specified identifier from the list of notifications.
      *
+     * <p>
+     *  从通知列表中删除与指定标识符相对应的计时器通知。
+     * 
+     * 
      * @param id The timer notification identifier.
      *
      * @exception InstanceNotFoundException The specified identifier does not correspond to any timer notification
@@ -707,6 +850,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Removes all the timer notifications corresponding to the specified type from the list of notifications.
      *
+     * <p>
+     * 从通知列表中删除与指定类型对应的所有定时器通知。
+     * 
+     * 
      * @param type The timer notification type.
      *
      * @exception InstanceNotFoundException The specified type does not correspond to any timer notification
@@ -726,6 +873,9 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Removes all the timer notifications from the list of notifications
      * and resets the counter used to update the timer notification identifiers.
+     * <p>
+     *  从通知列表中删除所有计时器通知,并重置用于更新计时器通知标识符的计数器。
+     * 
      */
     public synchronized void removeAllNotifications() {
 
@@ -773,6 +923,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets the number of timer notifications registered into the list of notifications.
      *
+     * <p>
+     *  获取注册到通知列表中的计时器通知数。
+     * 
+     * 
      * @return The number of timer notifications.
      */
     public synchronized int getNbNotifications() {
@@ -782,6 +936,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets all timer notification identifiers registered into the list of notifications.
      *
+     * <p>
+     *  获取注册到通知列表中的所有计时器通知标识符。
+     * 
+     * 
      * @return A vector of <CODE>Integer</CODE> objects containing all the timer notification identifiers.
      * <BR>The vector is empty if there is no timer notification registered for this timer MBean.
      */
@@ -792,6 +950,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets all the identifiers of timer notifications corresponding to the specified type.
      *
+     * <p>
+     *  获取与指定类型对应的定时器通知的所有标识符。
+     * 
+     * 
      * @param type The timer notification type.
      *
      * @return A vector of <CODE>Integer</CODE> objects containing all the identifiers of
@@ -818,6 +980,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets the timer notification type corresponding to the specified identifier.
      *
+     * <p>
+     *  获取与指定标识符相对应的定时器通知类型。
+     * 
+     * 
      * @param id The timer notification identifier.
      *
      * @return The timer notification type or null if the identifier is not mapped to any
@@ -835,6 +1001,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets the timer notification detailed message corresponding to the specified identifier.
      *
+     * <p>
+     *  获取与指定标识符相对应的定时器通知详细消息。
+     * 
+     * 
      * @param id The timer notification identifier.
      *
      * @return The timer notification detailed message or null if the identifier is not mapped to any
@@ -852,6 +1022,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets the timer notification user data object corresponding to the specified identifier.
      *
+     * <p>
+     *  获取与指定标识符相对应的定时器通知用户数据对象。
+     * 
+     * 
      * @param id The timer notification identifier.
      *
      * @return The timer notification user data object or null if the identifier is not mapped to any
@@ -872,6 +1046,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets a copy of the date associated to a timer notification.
      *
+     * <p>
+     *  获取与计时器通知相关联的日期的副本。
+     * 
+     * 
      * @param id The timer notification identifier.
      *
      * @return A copy of the date or null if the identifier is not mapped to any
@@ -890,6 +1068,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets a copy of the period (in milliseconds) associated to a timer notification.
      *
+     * <p>
+     *  获取与计时器通知相关联的时间段(以毫秒为单位)的副本。
+     * 
+     * 
      * @param id The timer notification identifier.
      *
      * @return A copy of the period or null if the identifier is not mapped to any
@@ -907,6 +1089,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Gets a copy of the remaining number of occurrences associated to a timer notification.
      *
+     * <p>
+     *  获取与计时器通知相关联的剩余发生次数的副本。
+     * 
+     * 
      * @param id The timer notification identifier.
      *
      * @return A copy of the remaining number of occurrences or null if the identifier is not mapped to any
@@ -925,6 +1111,10 @@ public class Timer extends NotificationBroadcasterSupport
      * Gets a copy of the flag indicating whether a periodic notification is
      * executed at <i>fixed-delay</i> or at <i>fixed-rate</i>.
      *
+     * <p>
+     *  获得指示是以固定延迟还是以固定速率</i>执行周期性通知的标志的副本。
+     * 
+     * 
      * @param id The timer notification identifier.
      *
      * @return A copy of the flag indicating whether a periodic notification is
@@ -944,6 +1134,10 @@ public class Timer extends NotificationBroadcasterSupport
      * Gets the flag indicating whether or not the timer sends past notifications.
      * <BR>The default value of the past notifications sending on/off flag is <CODE>false</CODE>.
      *
+     * <p>
+     *  获取指示定时器是否发送过去通知的标志。 <BR>过去通知发送开/关标志的默认值为<CODE> false </CODE>。
+     * 
+     * 
      * @return The past notifications sending on/off flag value.
      *
      * @see #setSendPastNotifications
@@ -956,6 +1150,10 @@ public class Timer extends NotificationBroadcasterSupport
      * Sets the flag indicating whether the timer sends past notifications or not.
      * <BR>The default value of the past notifications sending on/off flag is <CODE>false</CODE>.
      *
+     * <p>
+     *  设置指示定时器是否发送过去通知的标志。 <BR>过去通知发送开/关标志的默认值为<CODE> false </CODE>。
+     * 
+     * 
      * @param value The past notifications sending on/off flag value.
      *
      * @see #getSendPastNotifications
@@ -970,6 +1168,11 @@ public class Timer extends NotificationBroadcasterSupport
      * It becomes inactive when the {@link #stop stop} method is called.
      * <BR>The default value of the active on/off flag is <CODE>false</CODE>.
      *
+     * <p>
+     * 测试定时器MBean是否活动。当调用{@link #start start}方法时,定时器MBean被标记为活动。当调用{@link #stop stop}方法时,它将变为无效。
+     *  <BR>活动开/关标志的默认值为<CODE> false </CODE>。
+     * 
+     * 
      * @return <CODE>true</CODE> if the timer MBean is active, <CODE>false</CODE> otherwise.
      */
     public boolean isActive() {
@@ -979,6 +1182,10 @@ public class Timer extends NotificationBroadcasterSupport
     /**
      * Tests whether the list of timer notifications is empty.
      *
+     * <p>
+     *  测试定时器通知的列表是否为空。
+     * 
+     * 
      * @return <CODE>true</CODE> if the list of timer notifications is empty, <CODE>false</CODE> otherwise.
      */
     public synchronized boolean isEmpty() {
@@ -989,11 +1196,18 @@ public class Timer extends NotificationBroadcasterSupport
      * ------------------------------------------
      *  PRIVATE METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私有方法------ ------------------------------------
+     * 
      */
 
     /**
      * Sends or not past notifications depending on the specified flag.
      *
+     * <p>
+     *  根据指定的标志发送或不发送通知。
+     * 
+     * 
      * @param currentDate The current date.
      * @param currentFlag The flag indicating if past notifications must be sent or not.
      */
@@ -1065,6 +1279,14 @@ public class Timer extends NotificationBroadcasterSupport
      * notification is updated if the number of occurrences has not yet been reached.
      * Otherwise it is removed from the list of notifications.
      *
+     * <p>
+     *  如果定时器通知不是周期性的,则从通知列表中移除。
+     * <P>
+     *  如果定时器通知的定时器周期具有非零周期,则通过添加周期性来更新定时器通知的日期。相关的TimerAlarmClock通过将其超时设置为周期值来更新。
+     * <P>
+     *  如果定时器周期具有定义的出现次数,则如果尚未达到出现次数,则更新定时器通知。否则,它将从通知列表中删除。
+     * 
+     * 
      * @param notifID The timer notification identifier to update.
      */
     private synchronized void updateTimerTable(Integer notifID) {
@@ -1165,12 +1387,19 @@ public class Timer extends NotificationBroadcasterSupport
      * ------------------------------------------
      *  PACKAGE METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------包装方法------ ------------------------------------
+     * 
      */
 
     /**
      * This method is called by the timer each time
      * the TimerAlarmClock has exceeded its timeout.
      *
+     * <p>
+     *  每当TimerAlarmClock超过其超时时,定时器将调用此方法。
+     * 
+     * 
      * @param notification The TimerAlarmClock notification.
      */
     @SuppressWarnings("deprecation")
@@ -1206,6 +1435,9 @@ public class Timer extends NotificationBroadcasterSupport
      * This method is used by the timer MBean to update and send a timer
      * notification to all the listeners registered for this kind of notification.
      *
+     * <p>
+     *  定时器MBean使用此方法来更新定时器通知并向为此类通知注册的所有侦听器发送定时器通知。
+     * 
      * @param timeStamp The notification emission date.
      * @param notification The timer notification to send.
      */

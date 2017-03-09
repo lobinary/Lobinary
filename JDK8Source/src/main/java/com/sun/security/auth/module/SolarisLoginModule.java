@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,14 @@ import com.sun.security.auth.SolarisNumericGroupPrincipal;
  * <p> This LoginModule recognizes the debug option.
  * If set to true in the login Configuration,
  * debug messages will be output to the output stream, System.out.
+ * <p>
+ *  <p>此<code> LoginModule </code>导入用户的Solaris <code>主体</code>信息(<code> SolarisPrincipal </code>,<code> 
+ * SolarisNumericUserPrincipal </code>和<code> SolarisNumericGroupPrincipal < / code>),并将它们与当前<code> Subj
+ * ect </code>相关联。
+ * 
+ *  <p>此LoginModule识别调试选项。如果在登录配置中设置为true,则调试消息将输出到输出流System.out。
+ * 
+ * 
  * @deprecated  As of JDK1.4, replaced by
  * <code>com.sun.security.auth.module.UnixLoginModule</code>.
  *             This LoginModule is entirely deprecated and
@@ -84,6 +93,12 @@ public class SolarisLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  初始化此<code> LoginModule </code>。
+     * 
+     * <p>
+     * 
+     * 
      * @param subject the <code>Subject</code> to be authenticated. <p>
      *
      * @param callbackHandler a <code>CallbackHandler</code> for communicating
@@ -119,6 +134,14 @@ public class SolarisLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  验证用户(第一阶段)。
+     * 
+     *  <p>此方法的实现尝试通过进行本机Solaris系统调用来检索用户的Solaris <code> Subject </code>信息。
+     * 
+     * <p>
+     * 
+     * 
      * @exception FailedLoginException if attempts to retrieve the underlying
      *          system information fail.
      *
@@ -182,6 +205,18 @@ public class SolarisLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  提交认证(第二阶段)。
+     * 
+     *  <p>如果LoginContext的整体认证成功(相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules成功),则调用此方法。
+     * 
+     *  <p>如果此LoginModule自己的身份验证尝试成功(导入Solaris身份验证信息成功),则此方法将Solaris主体与当前绑定到<code> LoginModule </code>的<code>
+     *  Subject </code> 。
+     * 如果此LoginModule的身份验证尝试失败,则此方法将删除最初保存的任何状态。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the commit fails
      *
      * @return true if this LoginModule's own login and commit attempts
@@ -237,6 +272,16 @@ public class SolarisLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     *  中止认证(第二阶段)。
+     * 
+     * <p>如果LoginContext的整体身份验证失败,则会调用此方法。 (相关的REQUIRED,REQUISITE,SUFFICIENT和OPTIONAL LoginModules没有成功)。
+     * 
+     *  <p>此方法清除从<code> login </code>和<code> commit </code>方法中最初保存为身份验证尝试的一部分的任何状态。
+     * 
+     * <p>
+     * 
+     * 
      * @exception LoginException if the abort fails
      *
      * @return false if this LoginModule's own login and/or commit attempts
@@ -276,6 +321,8 @@ public class SolarisLoginModule implements LoginModule {
      *
      * <p>
      *
+     * <p>
+     * 
      * @exception LoginException if the logout fails
      *
      * @return true in all cases (this <code>LoginModule</code>

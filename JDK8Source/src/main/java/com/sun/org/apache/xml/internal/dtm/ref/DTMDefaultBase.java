@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DTMDefaultBase.java,v 1.3 2005/09/28 13:48:52 pvedula Exp $
+ * <p>
+ *  $ Id：DTMDefaultBase.java,v 1.3 2005/09/28 13:48:52 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref;
 
@@ -42,6 +55,9 @@ import java.io.*; // for dumpDTM
  * The <code>DTMDefaultBase</code> class serves as a helper base for DTMs.
  * It sets up structures for navigation and type, while leaving data
  * management and construction to the derived classes.
+ * <p>
+ *  <code> DTMDefaultBase </code>类充当DTM的帮助基础。它设置导航和类型的结构,同时将数据管理和构造留给派生类。
+ * 
  */
 public abstract class DTMDefaultBase implements DTM
 {
@@ -56,6 +72,9 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * The number of nodes, which is also used to determine the next
    *  node index.
+   * <p>
+   *  节点的数量,也用于确定下一个节点的索引。
+   * 
    */
   protected int m_size = 0;
 
@@ -78,6 +97,8 @@ public abstract class DTMDefaultBase implements DTM
   protected Vector m_namespaceDeclSets = null;
 
   /** SuballocatedIntVector  of elements at which corresponding
+  /* <p>
+  /* 
    * namespaceDeclSets were defined */
   protected SuballocatedIntVector m_namespaceDeclSetElements = null;
 
@@ -86,6 +107,9 @@ public abstract class DTMDefaultBase implements DTM
    * The base lookup is the the namespace.  The second lookup is the local
    * name, and the last array contains the the first free element
    * at the start, and the list of element handles following.
+   * <p>
+   *  这些保存基于命名空间和本地名称的元素的索引。基本查找是命名空间。第二个查找是本地名称,最后一个数组包含开始处的第一个自由元素,以及后面的元素句柄列表。
+   * 
    */
   protected int[][][] m_elemIndexes;
 
@@ -103,11 +127,17 @@ public abstract class DTMDefaultBase implements DTM
 
   /**
    * The value to use when the information has not been built yet.
+   * <p>
+   *  当信息尚未构建时使用的值。
+   * 
    */
   protected static final int NOTPROCESSED = DTM.NULL - 1;
 
   /**
    * The DTM manager who "owns" this DTM.
+   * <p>
+   *  "拥有"此DTM的DTM经理。
+   * 
    */
 
   public DTMManager m_mgr;
@@ -115,16 +145,25 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * m_mgr cast to DTMManagerDefault, or null if it isn't an instance
    * (Efficiency hook)
+   * <p>
+   *  m_mgr转换为DTMManagerDefault,如果它不是实例,则为null(效率挂钩)
+   * 
    */
   protected DTMManagerDefault m_mgrDefault=null;
 
 
   /** The document identity number(s). If we have overflowed the addressing
+  /* <p>
+  /* 
    * range of the first that was assigned to us, we may add others. */
   protected SuballocatedIntVector m_dtmIdent;
 
   /** The mask for the identity.
       %REVIEW% Should this really be set to the _DEFAULT? What if
+  /* <p>
+  /* ％REVIEW％这是否应该设置为_DEFAULT?如果
+  /* 
+  /* 
       a particular DTM wanted to use another value? */
   //protected final static int m_mask = DTMManager.IDENT_NODE_DEFAULT;
 
@@ -133,6 +172,9 @@ public abstract class DTMDefaultBase implements DTM
 
   /**
    * The whitespace filter that enables elements to strip whitespace or not.
+   * <p>
+   *  空格过滤器,使元素能够剥离空白或不。
+   * 
    */
   protected DTMWSFilter m_wsfilter;
 
@@ -148,6 +190,9 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * The table for exandedNameID lookups.  This may or may not be the same
    * table as is contained in the DTMManagerDefault.
+   * <p>
+   *  exandedNameID查找的表。这可能是也可能不是与DTMManagerDefault中包含的表相同。
+   * 
    */
   protected ExpandedNameTable m_expandedNameTable;
 
@@ -157,6 +202,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Construct a DTMDefaultBase object using the default block size.
    *
+   * <p>
+   *  使用默认块大小构造DTMDefaultBase对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -177,6 +226,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Construct a DTMDefaultBase object from a DOM node.
    *
+   * <p>
+   *  从DOM节点构造一个DTMDefaultBase对象。
+   * 
+   * 
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
@@ -252,6 +305,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Ensure that the size of the element indexes can hold the information.
    *
+   * <p>
+   *  确保元素索引的大小可以容纳信息。
+   * 
+   * 
    * @param namespaceID Namespace ID index.
    * @param LocalNameID Local name ID.
    */
@@ -313,6 +370,10 @@ public abstract class DTMDefaultBase implements DTM
    * Add a node to the element indexes. The node will not be added unless
    * it's an element.
    *
+   * <p>
+   *  向元素索引添加节点。除非它是一个元素,否则不会添加该节点。
+   * 
+   * 
    * @param expandedTypeID The expanded type ID of the node.
    * @param identity The node identity index.
    */
@@ -341,6 +402,10 @@ public abstract class DTMDefaultBase implements DTM
    * Find the first index that occurs in the list that is greater than or
    * equal to the given value.
    *
+   * <p>
+   *  查找列表中大于或等于给定值的第一个索引。
+   * 
+   * 
    * @param list A list of integers.
    * @param start The start index to begin the search.
    * @param len The number of items to search.
@@ -377,6 +442,10 @@ public abstract class DTMDefaultBase implements DTM
    * Find the first matching element from the index at or after the
    * given node.
    *
+   * <p>
+   *  从给定节点或之后的索引中查找第一个匹配元素。
+   * 
+   * 
    * @param nsIndex The namespace index lookup.
    * @param lnIndex The local name index lookup.
    * @param firstPotential The first potential match that is worth looking at.
@@ -416,6 +485,10 @@ public abstract class DTMDefaultBase implements DTM
    * Get the next node identity value in the list, and call the iterator
    * if it hasn't been added yet.
    *
+   * <p>
+   *  获取列表中的下一个节点标识值,如果尚未添加迭代器,则调用迭代器。
+   * 
+   * 
    * @param identity The node identity (index).
    * @return identity+1, or DTM.NULL.
    */
@@ -424,6 +497,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * This method should try and build one or more nodes in the table.
    *
+   * <p>
+   *  此方法应尝试在表中构建一个或多个节点。
+   * 
+   * 
    * @return The true if a next node is found or false if
    *         there are no more nodes.
    */
@@ -432,6 +509,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the number of nodes that have been added.
    *
+   * <p>
+   *  获取已添加的节点数。
+   * 
+   * 
    * @return the number of nodes that have been mapped.
    */
   protected abstract int getNumberOfNodes();
@@ -443,6 +524,10 @@ public abstract class DTMDefaultBase implements DTM
 //     * Ensure that the size of the information arrays can hold another entry
 //     * at the given index.
 //     *
+//     * <p>
+//     *  // *确保信息数组的大小可以容纳给定索引处的另一个条目// *。 // *
+//     * 
+//     * 
 //     * @param index On exit from this function, the information arrays sizes must be
 //     * at least index+1.
 //     */
@@ -454,6 +539,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the simple type ID for the given node identity.
    *
+   * <p>
+   *  获取给定节点标识的简单类型ID。
+   * 
+   * 
    * @param identity The node identity.
    *
    * @return The simple type ID, or DTM.NULL.
@@ -472,6 +561,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the expanded type ID for the given node identity.
    *
+   * <p>
+   *  获取给定节点标识的扩展类型ID。
+   * 
+   * 
    * @param identity The node identity.
    *
    * @return The expanded type ID, or DTM.NULL.
@@ -495,6 +588,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the level in the tree for the given node identity.
    *
+   * <p>
+   *  获取给定节点标识的树中的级别。
+   * 
+   * 
    * @param identity The node identity.
    *
    * @return The tree level, or DTM.NULL.
@@ -517,6 +614,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the first child for the given node identity.
    *
+   * <p>
+   *  获取给定节点标识的第一个孩子。
+   * 
+   * 
    * @param identity The node identity.
    *
    * @return The first child identity, or DTM.NULL.
@@ -550,6 +651,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the next sibling for the given node identity.
    *
+   * <p>
+   *  获取给定节点标识的下一个兄弟节点。
+   * 
+   * 
    * @param identity The node identity.
    *
    * @return The next sibling identity, or DTM.NULL.
@@ -582,6 +687,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the previous sibling for the given node identity.
    *
+   * <p>
+   *  获取给定节点标识的上一个同级。
+   * 
+   * 
    * @param identity The node identity.
    *
    * @return The previous sibling identity, or DTM.NULL.
@@ -609,6 +718,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the parent for the given node identity.
    *
+   * <p>
+   *  获取给定节点标识的父代。
+   * 
+   * 
    * @param identity The node identity.
    *
    * @return The parent identity, or DTM.NULL.
@@ -635,6 +748,9 @@ public abstract class DTMDefaultBase implements DTM
 
   /**
    * Diagnostics function to dump the DTM.
+   * <p>
+   *  诊断功能用于转储DTM。
+   * 
    */
   public void dumpDTM(OutputStream os)
   {
@@ -788,6 +904,14 @@ public abstract class DTMDefaultBase implements DTM
    * %REVIEW% This might want to be moved up to DTMDefaultBase, or possibly
    * DTM itself, since it's a useful diagnostic and uses only DTM's public
    * APIs.
+   * <p>
+   *  诊断功能用于转储单个节点。
+   * 
+   * ％REVIEW％KNOWN GLITCH：如果你传递一个节点索引而不是一个节点句柄,它工作正常...但是冒号之前显示的标识号不同,这使得与以其他方式打印的节点进行比较变得复杂。
+   * 我们可以总是OR的DTM ID到值,以抑制这种区别...。
+   * 
+   *  ％REVIEW％这可能想要移动到DTMDefaultBase,或者可能是DTM本身,因为它是一个有用的诊断,并且只使用DTM的公共API。
+   * 
    */
   public String dumpNode(int nodeHandle)
   {
@@ -857,6 +981,12 @@ public abstract class DTMDefaultBase implements DTM
    * <p>
    * %REVIEW% Do we really expect to set features on DTMs?
    *
+   * <p>
+   *  设置实现相关的功能。
+   * <p>
+   *  ％REVIEW％我们真的希望在DTM上设置功能吗?
+   * 
+   * 
    * @param featureId A feature URL.
    * @param state true if this feature should be on, false otherwise.
    */
@@ -873,6 +1003,12 @@ public abstract class DTMDefaultBase implements DTM
    * almost as self-evident. But it's a convenience, and eases porting
    * of DOM code to DTM.  </p>
    *
+   * <p>
+   *  给定一个节点句柄,测试它是否有子节点。 <p>％REVIEW％这在DOM层显然有用,它允许在不必创建代理节点的情况下进行测试。
+   * 它在DTM API中不太有用,其中(dtm.getFirstChild(nodeHandle)！= DTM.NULL)也同样快速,几乎是不言而喻的。但它是一个方便,并简化了将DOM代码移植到DTM。
+   *  </p>。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @return int true if the given node has child nodes.
    */
@@ -896,6 +1032,14 @@ public abstract class DTMDefaultBase implements DTM
    * %REVIEW% Is it worth trying to specialcase small documents?
    * %REVIEW% Should this be exposed at the package/public layers?
    *
+   * <p>
+   *  (多个DTM ID),我们需要将身份的高位映射到正确的DTM ID。
+   * 
+   *  这使得FINAL方便内联,因为我们不希望任何DTMDefaultBase的子类改变算法。 (我真的不喜欢这样做,并希望有一个借口不要...)
+   * 
+   *  ％REVIEW％是值得尝试专业的小文档吗? ％REVIEW％是否应该在包/公共图层公开?
+   * 
+   * 
    * @param nodeIdentity Internal offset to this node's records.
    * @return NodeHandle (external representation of node)
    * */
@@ -923,6 +1067,16 @@ public abstract class DTMDefaultBase implements DTM
    *
    * %REVIEW% Should this be exposed at the package/public layers?
    *
+   * <p>
+   * 已经被使用(多个DTM ID),我们需要将身份的高比特映射到正确的DTM ID,并且因此找到适当的偏移以添加到身份的低比特
+   * 
+   *  这使得FINAL方便内联,因为我们不希望任何DTMDefaultBase的子类改变算法。 (我真的不喜欢这样做,并希望有一个借口不要...)
+   * 
+   *  ％OPT％性能对此操作至关重要。
+   * 
+   *  ％REVIEW％是否应该在包/公共图层公开?
+   * 
+   * 
    * @param nodeHandle (external representation of node)
    * @return nodeIdentity Internal offset to this node's records.
    * */
@@ -963,6 +1117,10 @@ public abstract class DTMDefaultBase implements DTM
    * If not yet resolved, waits for more nodes to be added to the document and
    * tries again.
    *
+   * <p>
+   *  给定一个节点句柄,获取节点的第一个孩子的句柄。如果尚未解析,则等待更多节点添加到文档并再次尝试。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @return int DTM node-number of first child, or DTM.NULL to indicate none exists.
    */
@@ -980,6 +1138,10 @@ public abstract class DTMDefaultBase implements DTM
    * If not yet resolved, waits for more nodes to be added to the document and
    * tries again.
    *
+   * <p>
+   *  给定一个节点句柄,获取节点的第一个孩子的句柄。如果尚未解析,则等待更多节点添加到文档并再次尝试。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @return int DTM node-number of first child, or DTM.NULL to indicate none exists.
    */
@@ -1015,6 +1177,10 @@ public abstract class DTMDefaultBase implements DTM
    * If not yet resolved, waits for more nodes to be added to the document and
    * tries again.
    *
+   * <p>
+   *  给定一个节点句柄,前进到它的最后一个孩子。如果尚未解析,则等待更多节点添加到文档并再次尝试。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @return int Node-number of last child,
    * or DTM.NULL to indicate none exists.
@@ -1038,6 +1204,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Retrieves an attribute node by by qualified name and namespace URI.
    *
+   * <p>
+   *  按限定名称和命名空间URI检索属性节点。
+   * 
+   * 
    * @param nodeHandle int Handle of the node upon which to look up this attribute..
    * @param namespaceURI The namespace URI of the attribute to
    *   retrieve, or null.
@@ -1053,6 +1223,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Given a node handle, get the index of the node's first attribute.
    *
+   * <p>
+   *  给定一个节点句柄,获取节点的第一个属性的索引。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @return Handle of first attribute, or DTM.NULL to indicate none exists.
    */
@@ -1066,6 +1240,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Given a node identity, get the index of the node's first attribute.
    *
+   * <p>
+   *  给定节点标识,获取节点的第一个属性的索引。
+   * 
+   * 
    * @param identity int identity of the node.
    * @return Identity of first attribute, or DTM.NULL to indicate none exists.
    */
@@ -1099,6 +1277,10 @@ public abstract class DTMDefaultBase implements DTM
    * Given a node handle and an expanded type ID, get the index of the node's
    * attribute of that type, if any.
    *
+   * <p>
+   *  给定一个节点句柄和扩展类型ID,获取该类型的节点属性的索引(如果有)。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @param attType int expanded type ID of the required attribute.
    * @return Handle of attribute of the required type, or DTM.NULL to indicate
@@ -1131,6 +1313,10 @@ public abstract class DTMDefaultBase implements DTM
    * Given a node handle, advance to its next sibling.
    * If not yet resolved, waits for more nodes to be added to the document and
    * tries again.
+   * <p>
+   *  给定一个节点句柄,前进到下一个兄弟节点。如果尚未解析,则等待更多节点添加到文档并再次尝试。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @return int Node-number of next sibling,
    * or DTM.NULL to indicate none exists.
@@ -1146,6 +1332,10 @@ public abstract class DTMDefaultBase implements DTM
    * Given a node handle, advance to its next sibling.
    * If not yet resolved, waits for more nodes to be added to the document and
    * tries again.
+   * <p>
+   * 给定一个节点句柄,前进到下一个兄弟节点。如果尚未解析,则等待更多节点添加到文档并再次尝试。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @return int Node-number of next sibling,
    * or DTM.NULL to indicate none exists.
@@ -1169,6 +1359,10 @@ public abstract class DTMDefaultBase implements DTM
    * WARNING: DTM is asymmetric; this operation is resolved by search, and is
    * relatively expensive.
    *
+   * <p>
+   *  给定一个节点句柄,找到它的前面的兄弟。警告：DTM是不对称的;这个操作通过搜索解决,并且相对昂贵。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return int Node-number of the previous sib,
    * or DTM.NULL to indicate none exists.
@@ -1203,6 +1397,10 @@ public abstract class DTMDefaultBase implements DTM
    * If an attr, we advance to
    * the next attr on the same node.  If not an attribute, we return NULL.
    *
+   * <p>
+   *  给定一个节点句柄,前进到下一个属性。如果一个attr,我们前进到同一节点上的下一个attr。如果不是属性,则返回NULL。
+   * 
+   * 
    * @param nodeHandle int Handle of the node.
    * @return int DTM node-number of the resolved attr,
    * or DTM.NULL to indicate none exists.
@@ -1220,6 +1418,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Given a node identity for an attribute, advance to the next attribute.
    *
+   * <p>
+   *  给定属性的节点标识,前进到下一个属性。
+   * 
+   * 
    * @param identity int identity of the attribute node.  This
    * <strong>must</strong> be an attribute node.
    *
@@ -1258,6 +1460,15 @@ public abstract class DTMDefaultBase implements DTM
    *
    * %REVIEW% Directly managed arrays rather than vectors?
    * %REVIEW% Handles or IDs? Given usage, I think handles.
+   * <p>
+   *  DTM构建期间的位置。
+   * 表是SuballocatedIntVectors的向量,包含在该ID处声明的命名空间节点HANDLES,以及这些声明出现的元素节点INDEXES的SuballocatedIntVector。
+   * 
+   *  注意：由于这是在模型构建过程中发生的,所以节点将按顺序遇到,因此表将按元素排序,允许二进制搜索作为可能的检索优化。
+   * 
+   *  ％REVIEW％直接管理的数组而不是向量? ％REVIEW％句柄或ID?给定用法,我认为句柄。
+   * 
+   * 
    * */
   protected void declareNamespaceInContext(int elementNodeIndex,int namespaceNodeIndex)
   {
@@ -1335,6 +1546,12 @@ public abstract class DTMDefaultBase implements DTM
      *
      * %REVIEW% Directly managed arrays rather than vectors?
      * %REVIEW% Handles or IDs? Given usage, I think handles.
+     * <p>
+     *  活动在此节点。 List是一个SuballocatedIntVector,其条目是在该ID声明的命名空间节点HANDLES。
+     * 
+     *  ％REVIEW％直接管理的数组而不是向量? ％REVIEW％句柄或ID?给定用法,我认为句柄。
+     * 
+     * 
      * */
   protected SuballocatedIntVector findNamespaceContext(int elementNodeIndex)
   {
@@ -1406,6 +1623,12 @@ public abstract class DTMDefaultBase implements DTM
      *
      * %REVIEW% Inlne this into findNamespaceContext? Create SortedSuballocatedIntVector type?
      *
+     * <p>
+     *  子程序：在m_namespaceDeclSetElements中找到指定的节点,或者以文档顺序排列它的最后一个元素
+     * 
+     *  ％REVIEW％Inlne this into findNamespaceContext?创建SortedSuballocatedIntVector类型?
+     * 
+     * 
      * @return If positive or zero, the index of the found item.
      * If negative, index of the point at which it would have appeared,
      * encoded as -1-index and hence reconvertable by subtracting
@@ -1448,6 +1671,10 @@ public abstract class DTMDefaultBase implements DTM
    * If not yet resolved, waits for more nodes to be added to the document and
    * tries again
    *
+   * <p>
+   * 给定一个节点句柄,获取节点的第一个孩子的索引。如果尚未解析,则等待更多节点添加到文档并再次尝试
+   * 
+   * 
    * @param nodeHandle handle to node, which should probably be an element
    *                   node, but need not be.
    *
@@ -1501,6 +1728,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Given a namespace handle, advance to the next namespace.
    *
+   * <p>
+   *  给定一个命名空间句柄,前进到下一个命名空间。
+   * 
+   * 
    * @param baseHandle handle to original node from where the first namespace
    * was relative to (needed to return nodes in document order).
    * @param nodeHandle A namespace handle for which we will find the next node.
@@ -1551,6 +1782,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Given a node handle, find its parent node.
    *
+   * <p>
+   *  给定一个节点句柄,找到它的父节点。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return int Node-number of parent,
    * or DTM.NULL to indicate none exists.
@@ -1572,6 +1807,10 @@ public abstract class DTMDefaultBase implements DTM
    * this version of the operation is primarily intended for use during negotiation
    * with the DTM Manager.
    *
+   * <p>
+   *  查找当前正在构建的文档的"文档"节点句柄。请注意,大多数人应该使用getOwnerDocument(nodeHandle);此版本的操作主要用于在与DTM管理器协商期间使用。
+   * 
+   * 
    *  @return int Node handle of document, which should always be valid.
    */
   public int getDocument()
@@ -1588,6 +1827,12 @@ public abstract class DTMDefaultBase implements DTM
    * binding layer. Included here as a convenience function and to
    * aid porting of DOM code to DTM.</p>
    *
+   * <p>
+   *  给定一个节点句柄,找到拥有的文档节点。这具有与相同名称的DOM文档方法完全相同的语义,因为如果nodeHandle是文档节点,它将返回NULL。
+   * 
+   *  <p>％REVIEW％因为这是DOM特定的,它可能属于DOM绑定层。这里包括一个方便的功能,并帮助将DOM代码移植到DTM。</p>
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return int Node handle of owning document, or -1 if the node was a Docment
    */
@@ -1604,6 +1849,10 @@ public abstract class DTMDefaultBase implements DTM
    * Given a node handle, find the owning document node.  Unlike the DOM,
    * this considers the owningDocument of a Document to be itself.
    *
+   * <p>
+   *  给定一个节点句柄,找到拥有的文档节点。与DOM不同,这里认为document的owningDocument本身就是。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return int Node handle of owning document, or the nodeHandle if it is
    *             a Document.
@@ -1618,6 +1867,10 @@ public abstract class DTMDefaultBase implements DTM
    * (see http://www.w3.org/TR/xpath#data-model
    * for the definition of a node's string-value).
    *
+   * <p>
+   *  将节点的字符串值作为String对象获取(有关节点的字符串值的定义,请参阅http://www.w3.org/TR/xpath#data-model)。
+   * 
+   * 
    * @param nodeHandle The node ID.
    *
    * @return A string object that represents the string-value of the given node.
@@ -1631,6 +1884,10 @@ public abstract class DTMDefaultBase implements DTM
    * for the definition of a node's string-value).
    * Note that a single text node may have multiple text chunks.
    *
+   * <p>
+   *  获取节点的字符串值中的字符数组块数。 (有关节点的字符串值的定义,请参见http://www.w3.org/TR/xpath#data-model)。注意,单个文本节点可以具有多个文本块。
+   * 
+   * 
    * @param nodeHandle The node ID.
    *
    * @return number of character array chunks in
@@ -1651,6 +1908,10 @@ public abstract class DTMDefaultBase implements DTM
    * for the definition of a node's string-value).
    * Note that a single text node may have multiple text chunks.
    *
+   * <p>
+   * 在节点的字符串值中获取字符数组块。 (有关节点的字符串值的定义,请参见http://www.w3.org/TR/xpath#data-model)。注意,单个文本节点可以具有多个文本块。
+   * 
+   * 
    * @param nodeHandle The node ID.
    * @param chunkIndex Which chunk to get.
    * @param startAndLen An array of 2 where the start position and length of
@@ -1671,6 +1932,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Given a node handle, return an ID that represents the node's expanded name.
    *
+   * <p>
+   *  给定一个节点句柄,返回一个表示节点扩展名的ID。
+   * 
+   * 
    * @param nodeHandle The handle to the node in question.
    *
    * @return the expanded-name id of the node.
@@ -1691,6 +1956,10 @@ public abstract class DTMDefaultBase implements DTM
    * be returned.  Any additional nodes that are created that have this
    * expanded name will use this ID.
    *
+   * <p>
+   *  给定扩展名称,返回ID。如果扩展名不存在于内部表中,则将创建该条目,并返回ID。创建的具有此扩展名称的任何其他节点将使用此标识。
+   * 
+   * 
    * @param type The simple type, i.e. one of ELEMENT, ATTRIBUTE, etc.
    *
    * @param namespace The namespace URI, which may be null, may be an empty
@@ -1712,6 +1981,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Given an expanded-name ID, return the local name part.
    *
+   * <p>
+   *  给定扩展名称ID,返回本地名称部分。
+   * 
+   * 
    * @param expandedNameID an ID that represents an expanded-name.
    * @return String Local name of this node.
    */
@@ -1723,6 +1996,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Given an expanded-name ID, return the namespace URI part.
    *
+   * <p>
+   *  给定扩展名称ID,返回名称空间URI部分。
+   * 
+   * 
    * @param expandedNameID an ID that represents an expanded-name.
    * @return String URI value of this node's namespace, or null if no
    * namespace was resolved.
@@ -1734,6 +2011,10 @@ public abstract class DTMDefaultBase implements DTM
 
   /**
    * Returns the namespace type of a specific node
+   * <p>
+   *  返回特定节点的命名空间类型
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return the ID of the namespace.
    */
@@ -1750,6 +2031,10 @@ public abstract class DTMDefaultBase implements DTM
    * Given a node handle, return its DOM-style node name. This will
    * include names such as #text or #document.
    *
+   * <p>
+   *  给定一个节点句柄,返回其DOM样式的节点名称。这将包括诸如#text或#document的名称。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Name of this node, which may be an empty string.
    * %REVIEW% Document when empty string is possible...
@@ -1762,6 +2047,10 @@ public abstract class DTMDefaultBase implements DTM
    * the name as described by the XPath data model, NOT the DOM-style
    * name.
    *
+   * <p>
+   *  给定一个节点句柄,返回XPath节点名称。这应该是XPath数据模型描述的名称,而不是DOM风格的名称。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Name of this node, which may be an empty string.
    */
@@ -1779,6 +2068,10 @@ public abstract class DTMDefaultBase implements DTM
    * (As defined in Namespaces, this is the portion of the name after any
    * colon character).
    *
+   * <p>
+   *  给定一个节点句柄,返回其XPath样式的本地名。 (如命名空间中定义,这是任何冒号字符后的名称部分)。
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String Local name of this node.
    */
@@ -1792,6 +2085,12 @@ public abstract class DTMDefaultBase implements DTM
    * <p> %REVIEW% Are you sure you want "" for no prefix?  </p>
    * <p> %REVIEW-COMMENT% I think so... not totally sure. -sb  </p>
    *
+   * <p>
+   *  给定一个命名空间句柄,返回命名空间decl正在映射的前缀。给定一个节点句柄,返回用于映射到命名空间的前缀。
+   * 
+   *  <p>％REVIEW％您确定要""没有前缀吗? </p> <p>％REVIEW-COMMENT％我认为这样...不完全确定。 -sb </p>
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String prefix of this node's name, or "" if no explicit
    * namespace prefix was given.
@@ -1805,6 +2104,12 @@ public abstract class DTMDefaultBase implements DTM
    *
    * <p>%REVIEW% Null or ""? -sb</p>
    *
+   * <p>
+   * 给定一个节点句柄,返回它的DOM风格的命名空间URI(如命名空间中定义的,这是这个节点的前缀 - 或默认替代)被声明的URI。
+   * 
+   *  <p>％REVIEW％Null或""? -sb </p>
+   * 
+   * 
    * @param nodeHandle the id of the node.
    * @return String URI value of this node's namespace, or null if no
    * namespace was resolved.
@@ -1816,6 +2121,11 @@ public abstract class DTMDefaultBase implements DTM
    * as defined by the DOM, but may ignore some conveniences.
    * <p>
    *
+   * <p>
+   *  给定一个节点句柄,返回其节点值。这主要是由DOM定义的,但可能忽略一些方便。
+   * <p>
+   * 
+   * 
    * @param nodeHandle The node id.
    * @return String Value of this node, or null if not
    * meaningful for this node type.
@@ -1828,6 +2138,12 @@ public abstract class DTMDefaultBase implements DTM
    * %REVIEW% Generally, returning short is false economy. Return int?
    * %REVIEW% Make assumption that node has already arrived.  Is OK?
    *
+   * <p>
+   *  给定一个节点句柄,返回其DOM样式的节点类型。
+   * <p>
+   *  ％REVIEW％一般来说,回报短是假经济。返回int? ％REVIEW％假设节点已经到达。是好吗?
+   * 
+   * 
    * @param nodeHandle The node id.
    * @return int Node type, as per the DOM's Node._NODE constants.
    */
@@ -1842,6 +2158,10 @@ public abstract class DTMDefaultBase implements DTM
    * Get the depth level of this node in the tree (equals 1 for
    * a parentless node).
    *
+   * <p>
+   *  获取树中此节点的深度级别(对于无父节点,等于1)。
+   * 
+   * 
    * @param nodeHandle The node id.
    * @return the number of ancestors, plus one
    * @xsl.usage internal
@@ -1856,6 +2176,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the identity of this node in the tree
    *
+   * <p>
+   *  在树中获取此节点的标识
+   * 
+   * 
    * @param nodeHandle The node handle.
    * @return the node identity
    * @xsl.usage internal
@@ -1865,6 +2189,10 @@ public abstract class DTMDefaultBase implements DTM
     /*if (nodeHandle != DTM.NULL)
       return nodeHandle & m_mask;
     else
+    /* <p>
+    /*  return nodeHandle&m_mask;其他
+    /* 
+    /* 
       return DTM.NULL;*/
 
       return makeNodeIdentity(nodeHandle);
@@ -1873,6 +2201,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Get the handle of this node in the tree
    *
+   * <p>
+   *  获取树中此节点的句柄
+   * 
+   * 
    * @param nodeId The node identity.
    * @return the node handle
    * @xsl.usage internal
@@ -1882,6 +2214,10 @@ public abstract class DTMDefaultBase implements DTM
     /*if (nodeId != DTM.NULL)
       return nodeId | m_dtmIdent;
     else
+    /* <p>
+    /*  返回nodeId | m_dtmIdent;其他
+    /* 
+    /* 
       return DTM.NULL;*/
 
       return makeNodeHandle(nodeId);
@@ -1893,6 +2229,10 @@ public abstract class DTMDefaultBase implements DTM
    * Tests whether DTM DOM implementation implements a specific feature and
    * that feature is supported by this node.
    *
+   * <p>
+   *  测试DTM DOM实现是否实现特定功能,并且此节点支持该功能。
+   * 
+   * 
    * @param feature The name of the feature to test.
    * @param version This is the version number of the feature to test.
    *   If the version is not
@@ -1913,6 +2253,10 @@ public abstract class DTMDefaultBase implements DTM
    * (because the document was parsed from a socket connection or from
    * standard input, for example), the value of this property is unknown.
    *
+   * <p>
+   *  返回文档实体的基本URI。如果不知道(因为文档是从套接字连接或标准输入解析的),此属性的值是未知的。
+   * 
+   * 
    * @return the document base URI String object or null if unknown.
    */
   public String getDocumentBaseURI()
@@ -1923,6 +2267,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Set the base URI of the document entity.
    *
+   * <p>
+   *  设置文档实体的基本URI。
+   * 
+   * 
    * @param baseURI the document base URI String object or null if unknown.
    */
   public void setDocumentBaseURI(String baseURI)
@@ -1934,6 +2282,10 @@ public abstract class DTMDefaultBase implements DTM
    * Return the system identifier of the document entity. If
    * it is not known, the value of this property is unknown.
    *
+   * <p>
+   *  返回文档实体的系统标识符。如果不知道,此属性的值是未知的。
+   * 
+   * 
    * @param nodeHandle The node id, which can be any valid node handle.
    * @return the system identifier String object or null if unknown.
    */
@@ -1948,6 +2300,10 @@ public abstract class DTMDefaultBase implements DTM
    * Return the name of the character encoding scheme
    *        in which the document entity is expressed.
    *
+   * <p>
+   *  返回表示文档实体的字符编码方案的名称。
+   * 
+   * 
    * @param nodeHandle The node id, which can be any valid node handle.
    * @return the document encoding String object.
    * @xsl.usage internal
@@ -1966,6 +2322,10 @@ public abstract class DTMDefaultBase implements DTM
    *        beginning of the document entity, and has no value if there is no
    *        standalone document declaration.
    *
+   * <p>
+   * 返回文档的独立状态的指示,"是"或"否"。此属性派生自文档实体开头处的XML声明中的可选独立文档声明,如果没有独立文档声明,则没有值。
+   * 
+   * 
    * @param nodeHandle The node id, which can be any valid node handle.
    * @return the document standalone String object, either "yes", "no", or null.
    */
@@ -1980,6 +2340,10 @@ public abstract class DTMDefaultBase implements DTM
    * beginning of the document entity, and has no value if there is no XML
    * declaration.
    *
+   * <p>
+   *  返回表示文档的XML版本的字符串。此属性派生自可选地存在于文档实体开头的XML声明,如果没有XML声明,则没有值。
+   * 
+   * 
    * @param documentHandle The document handle
    *
    * @return the document version String object.
@@ -1996,6 +2360,10 @@ public abstract class DTMDefaultBase implements DTM
    * descriptions below) may be unknown. If it is true, those properties
    * are never unknown.
    *
+   * <p>
+   *  返回处理器是否已读取完整DTD的指示。它的值是一个布尔值。如果它是假的,那么某些属性(在下面的描述中指示)可能是未知的。如果它是真的,那些属性永远不会是未知的。
+   * 
+   * 
    * @return <code>true</code> if all declarations were processed;
    *         <code>false</code> otherwise.
    */
@@ -2012,6 +2380,12 @@ public abstract class DTMDefaultBase implements DTM
    *     1. [system identifier] The system identifier of the external subset, if
    *        it exists. Otherwise this property has no value.
    *
+   * <p>
+   *  文档类型声明信息项具有以下属性：
+   * 
+   *  1. [系统标识符]外部子集的系统标识符(如果存在)。否则此属性没有值。
+   * 
+   * 
    * @return the system identifier String object, or null if there is none.
    */
   public abstract String getDocumentTypeDeclarationSystemIdentifier();
@@ -2022,6 +2396,10 @@ public abstract class DTMDefaultBase implements DTM
    * no external subset or if it has no public identifier, this property
    * has no value.
    *
+   * <p>
+   *  返回外部子集的公共标识符,如4.2.2外部实体[XML]中所述进行规范化。如果没有外部子集或者没有公共标识符,则此属性没有值。
+   * 
+   * 
    * @return the public identifier String object, or null if there is none.
    */
   public abstract String getDocumentTypeDeclarationPublicIdentifier();
@@ -2040,6 +2418,14 @@ public abstract class DTMDefaultBase implements DTM
    * and this operation searches only within a single document, right?
    * Wouldn't want collisions between DTMs in the same process.</p>
    *
+   * <p>
+   * 返回<code> Element </code>,其<code> ID </code>由<code> elementId </code>给出。
+   * 如果没有这样的元素,返回<code> DTM.NULL </code>。如果多个元素具有此<code> ID </code>,则不定义行为。
+   * 属性(包括名称为"ID"的属性)不是类型ID,除非由DTM实现的DTD /模式信息如此定义。不知道属性是否为ID类型的实现应该返回<code> DTM.NULL </code>。
+   * 
+   *  <p>％REVIEW％推测ID仍然限于单个文档,此操作仅在单个文档中搜索,对吗?不希望在同一过程中DTM之间发生冲突。</p>
+   * 
+   * 
    * @param elementId The unique <code>id</code> value for an element.
    * @return The handle of the matching element.
    */
@@ -2073,6 +2459,18 @@ public abstract class DTMDefaultBase implements DTM
    * to the DOM" refers only to parsed entities, not unparsed, and hence
    * doesn't affect this function.)
    *
+   * <p>
+   *  getUnparsedEntityURI函数返回在与上下文节点相同的文档中具有指定名称的未解析实体的URI(参见[3.3 Unparsed Entities])。如果没有这样的实体,它返回空字符串。
+   * <p>
+   *  XML处理器可以选择使用系统标识符(如果提供了一个)来解析实体,而不是公共标识符中的URI。细节取决于处理器,我们将不得不支持某种形式的插件解析器来正确处理这些。
+   * 目前,我们只返回系统标识符(如果存在),并希望它是一个可用的URI,或者我们的调用者可以将它映射到一个。 TODO：Resolve Public Identifiers ...或考虑更改函数名称。
+   * <p>
+   * 如果我们找到一个相对URI引用,XML期望它根据文档的基本URI解析。 DOM不为我们这样做,并不完全清楚是否应该在这里做;目前已经上升到我们的应用程序的更高水平。
+   *  (请注意,DOM级别1不存储文档的基本URI。)TODO：考虑解析相对URI。
+   * <p>
+   *  (DOM的声明"一个XML处理器可能选择在结构模型被传递给DOM之前完全展开实体"仅指解析的实体,而不是解析的,因此不影响这个函数)。
+   * 
+   * 
    * @param name A string containing the Entity Name of the unparsed
    * entity.
    *
@@ -2087,6 +2485,10 @@ public abstract class DTMDefaultBase implements DTM
    * Return true if the xsl:strip-space or xsl:preserve-space was processed
    * during construction of the DTM document.
    *
+   * <p>
+   *  如果在构建DTM文档期间处理了xsl：strip-space或xsl：preserve-space,则返回true。
+   * 
+   * 
    * @return true if this DTM supports prestripping.
    */
   public boolean supportsPreStripping()
@@ -2103,6 +2505,12 @@ public abstract class DTMDefaultBase implements DTM
    * There are some cases where ordering isn't defined, and neither are
    * the results of this function -- though we'll generally return false.
    *
+   * <p>
+   *  在XPath模型定义的文档顺序中,确定nodeHandle2是否应该被认为是文档中的晚于nodeHandle1。这可能与其他XML应用程序定义的顺序不一致。
+   * <p>
+   *  有些情况下,没有定义顺序,并且这个函数的结果也不是这样 - 尽管我们通常返回false。
+   * 
+   * 
    * @param nodeHandle1 Node handle to perform position comparison on.
    * @param nodeHandle2 Second Node handle to perform position comparison on .
    *
@@ -2131,6 +2539,13 @@ public abstract class DTMDefaultBase implements DTM
    *        property is unknown for white space characters. It is always false for
    *        characters that are not white space.
    *
+   * <p>
+   * 2. [元素内容空白]指示元素内容中是否出现空格的布尔(参见[XML],2.10"空白处理")。请注意,XML 1.0需要验证XML处理器以提供此信息。
+   * 如果对于contains元素没有声明,则此属性没有空格字符的值。
+   * 如果没有读取任何声明,但文档信息项的[all declarations processed]属性为false(因此可能存在未读取的声明),则此属性的值对于空格字符是未知的。
+   * 对于不是空格的字符,它总是false。
+   * 
+   * 
    * @param nodeHandle the node ID.
    * @return <code>true</code> if the character data is whitespace;
    *         <code>false</code> otherwise.
@@ -2150,6 +2565,11 @@ public abstract class DTMDefaultBase implements DTM
    *        descriptions below) may be unknown. If it is true, those properties
    *        are never unknown.
    *
+   * <p>
+   *  10. [所有声明已处理]此属性不严格地说是文档信息集的一部分。而是它是处理器是否已读取完整DTD的指示。它的值是一个布尔值。如果它是假的,那么某些属性(在下面的描述中指示)可能是未知的。
+   * 如果它是真的,那些属性永远不会是未知的。
+   * 
+   * 
    * @param documentHandle A node handle that must identify a document.
    * @return <code>true</code> if all declarations were processed;
    *         <code>false</code> otherwise.
@@ -2164,6 +2584,10 @@ public abstract class DTMDefaultBase implements DTM
    *        specified in the start-tag of its element, or was defaulted from the
    *        DTD.
    *
+   * <p>
+   *  5. [specified]指示此属性是实际上在其元素的开始标签中指定的标志,还是来自DTD的标志。
+   * 
+   * 
    * @param attributeHandle The attribute handle in question.
    *
    * @return <code>true</code> if the attribute was specified;
@@ -2181,6 +2605,11 @@ public abstract class DTMDefaultBase implements DTM
    * ContentHandler's characters methods may well occur for a single call to
    * this method.
    *
+   * <p>
+   *  在传递的ContentHandler上直接调用给定节点的字符串值的字符方法(有关节点的字符串值的定义,请参阅http://www.w3.org/TR/xpath#data-model)。
+   * 对ContentHandler的字符方法的多次调用很可能发生在对此方法的单个调用中。
+   * 
+   * 
    * @param nodeHandle The node ID.
    * @param ch A non-null reference to a ContentHandler.
    * @param normalize true if the content should be normalized according to
@@ -2197,6 +2626,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Directly create SAX parser events from a subtree.
    *
+   * <p>
+   * 从子树直接创建SAX解析器事件。
+   * 
+   * 
    * @param nodeHandle The node ID.
    * @param ch A non-null reference to a ContentHandler.
    *
@@ -2209,6 +2642,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Return an DOM node for the given node.
    *
+   * <p>
+   *  返回给定节点的DOM节点。
+   * 
+   * 
    * @param nodeHandle The node ID.
    *
    * @return A node representation of the DTM node.
@@ -2227,6 +2664,12 @@ public abstract class DTMDefaultBase implements DTM
    * <p>%REVIEW% "End of the document" needs to be defined more clearly.
    * Does it become the last child of the Document? Of the root element?</p>
    *
+   * <p>
+   *  将一个孩子追加到文档的结尾。请注意,如果节点由另一个文档所有,则它始终被克隆。
+   * 
+   *  <p>％REVIEW％"文档结束"需要更清晰地定义。它成为文档的最后一个孩子吗?根元素?</p>
+   * 
+   * 
    * @param newChild Must be a valid new node handle.
    * @param clone true if the child should be cloned into the document.
    * @param cloneDepth if the clone argument is true, specifies that the
@@ -2244,6 +2687,12 @@ public abstract class DTMDefaultBase implements DTM
    * <p>%REVIEW% "End of the document" needs to be defined more clearly.
    * Does it become the last child of the Document? Of the root element?</p>
    *
+   * <p>
+   *  将将从字符串构造的文本节点子句追加到文档的结尾。
+   * 
+   *  <p>％REVIEW％"文档结束"需要更清晰地定义。它成为文档的最后一个孩子吗?根元素?</p>
+   * 
+   * 
    * @param str Non-null reverence to a string.
    */
   public void appendTextChild(String str)
@@ -2254,6 +2703,10 @@ public abstract class DTMDefaultBase implements DTM
   /**
    * Simple error for asserts and the like.
    *
+   * <p>
+   *  断言的简单错误等。
+   * 
+   * 
    * @param msg Error message to report.
    */
   protected void error(String msg)
@@ -2265,6 +2718,10 @@ public abstract class DTMDefaultBase implements DTM
    * Find out whether or not to strip whispace nodes.
    *
    *
+   * <p>
+   *  找出是否剥离whispace节点。
+   * 
+   * 
    * @return whether or not to strip whispace nodes.
    */
   protected boolean getShouldStripWhitespace()
@@ -2276,6 +2733,10 @@ public abstract class DTMDefaultBase implements DTM
    * Set whether to strip whitespaces and push in current value of
    * m_shouldStripWS in m_shouldStripWhitespaceStack.
    *
+   * <p>
+   *  设置是否剥离空格,并在m_shouldStripWhitespaceStack中推入m_shouldStripWS的当前值。
+   * 
+   * 
    * @param shouldStrip Flag indicating whether to strip whitespace nodes
    */
   protected void pushShouldStripWhitespace(boolean shouldStrip)
@@ -2291,6 +2752,9 @@ public abstract class DTMDefaultBase implements DTM
    * Set whether to strip whitespaces at this point by popping out
    * m_shouldStripWhitespaceStack.
    *
+   * <p>
+   *  设置是否通过弹出m_shouldStripWhitespaceStack在此时剥离空格。
+   * 
    */
   protected void popShouldStripWhitespace()
   {
@@ -2303,6 +2767,10 @@ public abstract class DTMDefaultBase implements DTM
    * the current value of m_shouldStripWS.
    *
    *
+   * <p>
+   *  设置是否剥离空格,并将堆栈的顶部设置为当前值m_shouldStripWS。
+   * 
+   * 
    * @param shouldStrip Flag indicating whether to strip whitespace nodes
    */
   protected void setShouldStripWhitespace(boolean shouldStrip)
@@ -2318,6 +2786,9 @@ public abstract class DTMDefaultBase implements DTM
    * A dummy routine to satisify the abstract interface. If the DTM
    * implememtation that extends the default base requires notification
    * of registration, they can override this method.
+   * <p>
+   *  满足抽象接口的虚拟程序。如果扩展默认基数的DTM实现需要注册通知,则它们可以覆盖此方法。
+   * 
    */
    public void documentRegistration()
    {
@@ -2327,6 +2798,9 @@ public abstract class DTMDefaultBase implements DTM
    * A dummy routine to satisify the abstract interface. If the DTM
    * implememtation that extends the default base requires notification
    * when the document is being released, they can override this method
+   * <p>
+   *  满足抽象接口的虚拟程序。如果扩展默认基础的DTM实现需要在文档释放时通知,则它们可以覆盖此方法
+   * 
    */
    public void documentRelease()
    {
@@ -2337,6 +2811,10 @@ public abstract class DTMDefaultBase implements DTM
     * After the migration, the new DTMManager will treat the DTM as
     * one that is built by itself.
     * This is used to support DTM sharing between multiple transformations.
+    * <p>
+    * 将使用旧DTMManager构建的DTM迁移到新的DTMManager。迁移后,新的DTMManager会将DTM视为由其自身构建的DTM。这用于支持多个转换之间的DTM共享。
+    * 
+    * 
     * @param mgr the DTMManager
     */
    public void migrateTo(DTMManager mgr)
@@ -2350,6 +2828,10 @@ public abstract class DTMDefaultBase implements DTM
           *
           * %REVEW% Should this become part of the base DTM API?
           *
+          * <p>
+          *  ％REVEW％如果这成为基本DTM API的一部分?
+          * 
+          * 
           * @return a DTMManager, or null if this is a "stand-alone" DTM.
           */
          public DTMManager getManager()
@@ -2361,6 +2843,9 @@ public abstract class DTMDefaultBase implements DTM
           *
           * %REVEW% Should this become part of the base DTM API?
           *
+          * <p>
+          *  ％REVEW％如果这成为基本DTM API的一部分?
+          * 
           * @return an IntVector, or null if this is a "stand-alone" DTM.
           */
          public SuballocatedIntVector getDTMIDs()

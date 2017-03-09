@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,9 @@ public abstract class ClientCommunicatorAdmin {
 
     /**
      * Called by a client to inform of getting an IOException.
+     * <p>
+     *  由客户端调用以通知获取IOException。
+     * 
      */
     public void gotIOException (IOException ioe) throws IOException {
         restart(ioe);
@@ -56,21 +60,32 @@ public abstract class ClientCommunicatorAdmin {
 
     /**
      * Called by this class to check a client connection.
+     * <p>
+     *  由此类调用以检查客户端连接。
+     * 
      */
     protected abstract void checkConnection() throws IOException;
 
     /**
      * Tells a client to re-start again.
+     * <p>
+     *  告诉客户端重新启动。
+     * 
      */
     protected abstract void doStart() throws IOException;
 
     /**
      * Tells a client to stop because failing to call checkConnection.
+     * <p>
+     *  告诉客户端停止,因为未能调用checkConnection。
+     * 
      */
     protected abstract void doStop();
 
     /**
      * Terminates this object.
+     * <p>
+     *  终止此对象。
      */
     public void terminate() {
         synchronized(lock) {

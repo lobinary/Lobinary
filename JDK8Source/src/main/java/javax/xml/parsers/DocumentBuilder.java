@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,16 @@ import org.xml.sax.SAXException;
  * <code>Document</code>. It merely requires that the implementation
  * communicate with the application using these existing APIs.
  *
+ * <p>
+ *  定义用于从XML文档获取DOM文档实例的API。使用这个类,应用程序员可以从XML获得{@link Document}。<p>
+ * 
+ *  此类的实例可以从{@link DocumentBuilderFactory#newDocumentBuilder()}方法获取。获取此类的实例后,可以从各种输入源解析XML。
+ * 这些输入源是InputStreams,Files,URL和SAX InputSources。<p>。
+ * 
+ *  注意,这个类重用了SAX API中的几个类。这不要求底层DOM实现的实现者使用SAX解析器将XML文档解析为<code> Document </code>。
+ * 它只需要实现使用这些现有的API与应用程序通信。
+ * 
+ * 
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  */
 
@@ -78,6 +89,19 @@ public abstract class DocumentBuilder {
      * <code>Object</code>s, e.g. {@link Object#equals(Object obj)}.  It is guaranteed to have a functionally equal
      * <code>EntityResolver</code> and <code>ErrorHandler</code>.</p>
      *
+     * <p>
+     *  <p>将此<code> DocumentBuilder </code>重置为原始配置。</p>
+     * 
+     *  <p> <code> DocumentBuilder </code>重置为与使用{@link DocumentBuilderFactory#newDocumentBuilder()}创建时相同的状态。
+     *  <code> reset()</code>旨在允许重用现有的<code> DocumentBuilder </code>,从而节省与创建新的<code> DocumentBuilder </code>
+     * 相关的资源。
+     * </p>。
+     * 
+     * <p>重置<code> DocumentBuilder </code>不保证具有相同的{@link EntityResolver}或{@link ErrorHandler} <code> Object 
+     * </code>,例如{@link Object#equals(Object obj)}。
+     * 它保证有一个功能相等的<code> EntityResolver </code>和<code> ErrorHandler </code>。</p>。
+     * 
+     * 
      * @throws UnsupportedOperationException When implementation does not
      *   override this method.
      *
@@ -99,6 +123,11 @@ public abstract class DocumentBuilder {
      * An <code>IllegalArgumentException</code> is thrown if the
      * <code>InputStream</code> is null.
      *
+     * <p>
+     *  将给定的<code> InputStream </code>的内容解析为XML文档,并返回一个新的DOM {@link Document}对象。
+     * 如果<code> InputStream </code>为null,则会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param is InputStream containing the content to be parsed.
      *
      * @return <code>Document</code> result of parsing the
@@ -127,6 +156,11 @@ public abstract class DocumentBuilder {
      * An <code>IllegalArgumentException</code> is thrown if the
      * <code>InputStream</code> is null.
      *
+     * <p>
+     *  将给定的<code> InputStream </code>的内容解析为XML文档,并返回一个新的DOM {@link Document}对象。
+     * 如果<code> InputStream </code>为null,则会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param is InputStream containing the content to be parsed.
      * @param systemId Provide a base for resolving relative URIs.
      *
@@ -156,6 +190,11 @@ public abstract class DocumentBuilder {
      * An <code>IllegalArgumentException</code> is thrown if the
      * URI is <code>null</code> null.
      *
+     * <p>
+     *  将给定URI的内容解析为XML文档,并返回一个新的DOM {@link Document}对象。
+     * 如果URI是<code> null </code> null,则会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param uri The location of the content to be parsed.
      *
      * @return A new DOM Document object.
@@ -183,6 +222,11 @@ public abstract class DocumentBuilder {
      * An <code>IllegalArgumentException</code> is thrown if the
      * <code>File</code> is <code>null</code> null.
      *
+     * <p>
+     *  将给定文件的内容解析为XML文档并返回一个新的DOM {@link Document}对象。
+     * 如果<code> File </code>是<code> null </code> null,则会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param f The file containing the XML to parse.
      *
      * @throws IOException If any IO errors occur.
@@ -211,6 +255,11 @@ public abstract class DocumentBuilder {
      * An <code>IllegalArgumentException</code> is thrown if the
      * <code>InputSource</code> is <code>null</code> null.
      *
+     * <p>
+     *  将给定输入源的内容解析为XML文档,并返回一个新的DOM {@link Document}对象。
+     * 如果<code> InputSource </code>是<code> null </code> null,则会抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param is InputSource containing the content to be parsed.
      *
      * @return A new DOM Document object.
@@ -230,6 +279,10 @@ public abstract class DocumentBuilder {
      * Indicates whether or not this parser is configured to
      * understand namespaces.
      *
+     * <p>
+     *  指示此解析器是否配置为理解命名空间。
+     * 
+     * 
      * @return true if this parser is configured to understand
      *         namespaces; false otherwise.
      */
@@ -240,6 +293,10 @@ public abstract class DocumentBuilder {
      * Indicates whether or not this parser is configured to
      * validate XML documents.
      *
+     * <p>
+     *  指示此解析器是否配置为验证XML文档。
+     * 
+     * 
      * @return true if this parser is configured to validate
      *         XML documents; false otherwise.
      */
@@ -253,6 +310,10 @@ public abstract class DocumentBuilder {
      * implementation using it's own default implementation and
      * behavior.
      *
+     * <p>
+     * 指定要用于解析呈现在要解析的XML文档中的实体的{@link EntityResolver}。将此设置为<code> null </code>会导致使用它自己的默认实现和行为的底层实现。
+     * 
+     * 
      * @param er The <code>EntityResolver</code> to be used to resolve entities
      *           present in the XML document to be parsed.
      */
@@ -265,6 +326,10 @@ public abstract class DocumentBuilder {
      * implementation using it's own default implementation and
      * behavior.
      *
+     * <p>
+     *  指定解析器要使用的{@link ErrorHandler}。将此设置为<code> null </code>会导致使用它自己的默认实现和行为的底层实现。
+     * 
+     * 
      * @param eh The <code>ErrorHandler</code> to be used by the parser.
      */
 
@@ -274,6 +339,10 @@ public abstract class DocumentBuilder {
      * Obtain a new instance of a DOM {@link Document} object
      * to build a DOM tree with.
      *
+     * <p>
+     *  获取一个DOM {@link Document}对象的新实例来构建一个DOM树。
+     * 
+     * 
      * @return A new instance of a DOM Document object.
      */
 
@@ -282,6 +351,10 @@ public abstract class DocumentBuilder {
     /**
      * Obtain an instance of a {@link DOMImplementation} object.
      *
+     * <p>
+     *  获取{@link DOMImplementation}对象的实例。
+     * 
+     * 
      * @return A new instance of a <code>DOMImplementation</code>.
      */
 
@@ -289,12 +362,17 @@ public abstract class DocumentBuilder {
 
     /** <p>Get current state of canonicalization.</p>
      *
+     * <p>
+     * 
      * @return current state canonicalization control
      */
     /*
     public boolean getCanonicalization() {
         return canonicalState;
     }
+    /* <p>
+    /*  public boolean getCanonicalization(){return canonicalState; }}
+    /* 
     */
 
     /** <p>Get a reference to the the {@link Schema} being used by
@@ -302,6 +380,12 @@ public abstract class DocumentBuilder {
      *
      * <p>If no schema is being used, <code>null</code> is returned.</p>
      *
+     * <p>
+     *  XML处理器。</p>
+     * 
+     *  <p>如果未使用任何模式,则会返回<code> null </code>。</p>
+     * 
+     * 
      * @return {@link Schema} being used or <code>null</code>
      *  if none in use
      *
@@ -324,6 +408,8 @@ public abstract class DocumentBuilder {
     /**
      * <p>Get the XInclude processing mode for this parser.</p>
      *
+     * <p>
+     * 
      * @return
      *      the return value of
      *      the {@link DocumentBuilderFactory#isXIncludeAware()}

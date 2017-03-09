@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -73,6 +74,19 @@ import com.sun.corba.se.spi.logging.CORBALogDomains;
  * To create and destroy object references, the TransientNamingContext
  * uses the orb.connect() and orb.disconnect() methods.
  *
+ * <p>
+ *  TransientNamingContext类实现由NamingContextDataStore定义的方法,并扩展NamingContextImpl类以提供CosNaming :: NamingCon
+ * text的服务方实现。
+ *  TransientNamingContext使用哈希表来存储绑定和对象引用之间的映射,并且哈希表不是持久的;从而命名为"瞬态"。
+ * 这个类不应该直接使用;相反,应该实例化TransientNameService类。
+ * <p>
+ *  哈希表中的键是InternalBindingKey对象,包含单个NameComponent并以有效的方式实现适当的函数,即equals()和hashCode()。
+ * 散列表中的值是InternalBindingValues并存储org.omg.CosNaming :: Binding和与绑定相关联的对象引用。
+ * 对于迭代,创建了TransientBindingIterator对象,它们传递了散列表的克隆副本。由于元素被插入和删除,从不修改,这提供了稳定的迭代器,代价是克隆哈希表。
+ * <p>
+ *  为了创建和销毁对象引用,TransientNamingContext使用orb.connect()和orb.disconnect()方法。
+ * 
+ * 
  * @see NamingContextImpl
  * @see NamingContextDataStore
  * @see TransientBindingIterator
@@ -89,6 +103,10 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
 
     /**
      * Constructs a new TransientNamingContext object.
+     * <p>
+     *  构造一个新的TransientNamingContext对象。
+     * 
+     * 
      * @param orb an orb object.
      * @param initial the initial naming context.
      * @exception Exception a Java exception thrown of the base class cannot
@@ -114,6 +132,10 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
      * Binds the object to the name component as the specified binding type.
      * It creates a InternalBindingKey object and a InternalBindingValue
      * object and inserts them in the hash table.
+     * <p>
+     * 将对象绑定到名称组件作为指定的绑定类型。它创建一个InternalBindingKey对象和一个InternalBindingValue对象,并将它们插入到散列表中。
+     * 
+     * 
      * @param n A single org.omg.CosNaming::NameComponent under which the
      * object will be bound.
      * @param obj An object reference to be bound under the supplied name.
@@ -153,6 +175,10 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
      * and uses the key for looking up in the hash table. If nothing
      * is found an exception is thrown, otherwise the object reference
      * is returned and the binding type set.
+     * <p>
+     *  将提供的名称解析为对象引用,并返回已解析的绑定的类型。它创建一个InternalBindingKey并使用该键查找哈希表。如果没有找到任何异常,则抛出异常,否则返回对象引用并设置绑定类型。
+     * 
+     * 
      * @param n a NameComponent which is the name to be resolved.
      * @param bth the BindingType as an out parameter.
      * @return the object reference bound under the supplied name, null if not
@@ -193,6 +219,10 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
      * InternalBindingKey and uses it to remove the value associated
      * with the key. If nothing is found an exception is thrown, otherwise
      * the element is removed from the hash table.
+     * <p>
+     *  使用提供的名称删除绑定。它创建一个InternalBindingKey并使用它来删除与键相关联的值。如果没有找到任何异常,则抛出异常,否则从哈希表中删除该元素。
+     * 
+     * 
      * @param n a NameComponent which is the name to unbind
      * @return the object reference bound to the name, or null if not found.
      * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA
@@ -228,6 +258,10 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
      * TransientBindingIterator object and passes it a clone of the
      * hash table and an orb object. It then uses the
      * newly created object to return the required number of bindings.
+     * <p>
+     *  列出这个NamingContext的内容。它创建一个新的TransientBindingIterator对象,并传递它一个哈希表和一个orb对象的克隆。然后,它使用新创建的对象来返回所需的绑定数。
+     * 
+     * 
      * @param how_many The number of requested bindings in the BindingList.
      * @param bl The BindingList as an out parameter.
      * @param bi The BindingIterator as an out parameter.
@@ -270,6 +304,10 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
     /**
      * Create a new NamingContext. It creates a new TransientNamingContext
      * object, passing it the orb object.
+     * <p>
+     *  创建一个新的NamingContext。它创建一个新的TransientNamingContext对象,将其传递给orb对象。
+     * 
+     * 
      * @return an object reference for a new NamingContext object implemented
      * by this Name Server.
      * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA
@@ -303,6 +341,10 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
 
     /**
      * Destroys this NamingContext by disconnecting from the ORB.
+     * <p>
+     *  通过断开与ORB的连接,销毁此NamingContext。
+     * 
+     * 
      * @exception org.omg.CORBA.SystemException One of a fixed set of CORBA
      * system exceptions.
      */
@@ -332,6 +374,9 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
 
     /**
      * A Utility Method For Logging..
+     * <p>
+     *  记录的实用方法..
+     * 
      */
     private String getName( NameComponent n ) {
         return n.id + "." + n.kind;
@@ -340,6 +385,10 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
     /**
      * Return whether this NamingContext contains any bindings. It forwards
      * this request to the hash table.
+     * <p>
+     *  返回这个NamingContext是否包含任何绑定。它将此请求转发到散列表。
+     * 
+     * 
      * @return true if this NamingContext contains no bindings.
      */
     public final boolean IsEmpty()
@@ -352,6 +401,8 @@ public class TransientNamingContext extends NamingContextImpl implements NamingC
 
     /**
      * The local root naming context.
+     * <p>
+     *  本地根命名上下文。
      */
     public org.omg.CORBA.Object localRoot;
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,12 +30,20 @@ import com.sun.jmx.snmp.SnmpDefinitions;
  * Utility class used to deal with various data representations.
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  用于处理各种数据表示的实用程序类。 <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @since 1.5
  */
 public class SnmpTools implements SnmpDefinitions {
 
     /**
      * Translates a binary representation in an ASCII one. The returned string is an hexadecimal string starting with 0x.
+     * <p>
+     *  以ASCII格式翻译二进制表示。返回的字符串是以0x开头的十六进制字符串。
+     * 
+     * 
      * @param data Binary to translate.
      * @return Translated binary.
      */
@@ -64,6 +73,10 @@ public class SnmpTools implements SnmpDefinitions {
 
     /**
      * Translates a binary representation in an ASCII one. The returned string is an hexadecimal string starting with 0x.
+     * <p>
+     *  以ASCII格式翻译二进制表示。返回的字符串是以0x开头的十六进制字符串。
+     * 
+     * 
      * @param data Binary to translate.
      * @return Translated binary.
      */
@@ -73,6 +86,9 @@ public class SnmpTools implements SnmpDefinitions {
     }
     /**
      * Translates a stringified representation in a binary one. The passed string is an hexadecimal one starting with 0x.
+     * <p>
+     *  翻译二进制字符串表示。传递的字符串是以0x开头的十六进制字符串。
+     * 
      * @param str String to translate.
      * @return Translated string.
      */

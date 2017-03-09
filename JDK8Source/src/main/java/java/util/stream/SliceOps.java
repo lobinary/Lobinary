@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.util.function.IntFunction;
  * Factory for instances of a short-circuiting stateful intermediate operations
  * that produce subsequences of their input stream.
  *
+ * <p>
+ *  工厂用于产生其输入流的子序列的短路有状态中间操作的实例。
+ * 
+ * 
  * @since 1.8
  */
 final class SliceOps {
@@ -43,6 +48,10 @@ final class SliceOps {
      * Calculates the sliced size given the current size, number of elements
      * skip, and the number of elements to limit.
      *
+     * <p>
+     *  根据当前大小,跳过的元素数量和要限制的元素数量计算切片大小。
+     * 
+     * 
      * @param size the current size
      * @param skip the number of elements to skip, assumed to be >= 0
      * @param limit the number of elements to limit, assumed to be >= 0, with
@@ -56,6 +65,10 @@ final class SliceOps {
     /**
      * Calculates the slice fence, which is one past the index of the slice
      * range
+     * <p>
+     *  计算切片范围,它超过切片范围的索引
+     * 
+     * 
      * @param skip the number of elements to skip, assumed to be >= 0
      * @param limit the number of elements to limit, assumed to be >= 0, with
      *        a value of {@code Long.MAX_VALUE} if there is no limit
@@ -71,6 +84,9 @@ final class SliceOps {
      * Creates a slice spliterator given a stream shape governing the
      * spliterator type.  Requires that the underlying Spliterator
      * be SUBSIZED.
+     * <p>
+     *  创建一个切片分割器,给定流形状控制分割器类型。需要底层Spliterator被SUBSIZED。
+     * 
      */
     @SuppressWarnings("unchecked")
     private static <P_IN> Spliterator<P_IN> sliceSpliterator(StreamShape shape,
@@ -105,6 +121,10 @@ final class SliceOps {
      * Appends a "slice" operation to the provided stream.  The slice operation
      * may be may be skip-only, limit-only, or skip-and-limit.
      *
+     * <p>
+     *  将"切片"操作附加到提供的流。切片操作可以是仅跳过,仅限制,或跳过和限制。
+     * 
+     * 
      * @param <T> the type of both input and output elements
      * @param upstream a reference stream with element type T
      * @param skip the number of elements to skip.  Must be >= 0.
@@ -222,6 +242,10 @@ final class SliceOps {
      * Appends a "slice" operation to the provided IntStream.  The slice
      * operation may be may be skip-only, limit-only, or skip-and-limit.
      *
+     * <p>
+     *  将"切片"操作附加到提供的IntStream。切片操作可以是仅跳过,仅限制,或跳过和限制。
+     * 
+     * 
      * @param upstream An IntStream
      * @param skip The number of elements to skip.  Must be >= 0.
      * @param limit The maximum size of the resulting stream, or -1 if no limit
@@ -331,6 +355,10 @@ final class SliceOps {
      * Appends a "slice" operation to the provided LongStream.  The slice
      * operation may be may be skip-only, limit-only, or skip-and-limit.
      *
+     * <p>
+     *  将"slice"操作附加到所提供的LongStream。切片操作可以是仅跳过,仅限制,或跳过和限制。
+     * 
+     * 
      * @param upstream A LongStream
      * @param skip The number of elements to skip.  Must be >= 0.
      * @param limit The maximum size of the resulting stream, or -1 if no limit
@@ -440,6 +468,10 @@ final class SliceOps {
      * Appends a "slice" operation to the provided DoubleStream.  The slice
      * operation may be may be skip-only, limit-only, or skip-and-limit.
      *
+     * <p>
+     *  将"slice"操作附加到提供的DoubleStream。切片操作可以是仅跳过,仅限制,或跳过和限制。
+     * 
+     * 
      * @param upstream A DoubleStream
      * @param skip The number of elements to skip.  Must be >= 0.
      * @param limit The maximum size of the resulting stream, or -1 if no limit
@@ -552,6 +584,10 @@ final class SliceOps {
     /**
      * {@code ForkJoinTask} implementing slice computation.
      *
+     * <p>
+     *  {@code ForkJoinTask}实现切片计算。
+     * 
+     * 
      * @param <P_IN> Input element type to the stream pipeline
      * @param <P_OUT> Output element type from the stream pipeline
      */
@@ -662,6 +698,10 @@ final class SliceOps {
          * Determine if the number of completed elements in this node and nodes
          * to the left of this node is greater than or equal to the target size.
          *
+         * <p>
+         *  确定此节点中已完成元素的数量和此节点左侧的节点是否大于或等于目标大小。
+         * 
+         * 
          * @param target the target size
          * @return true if the number of elements is greater than or equal to
          *         the target size, otherwise false.
@@ -692,6 +732,10 @@ final class SliceOps {
          * number of completed elements is greater than or equal to the target
          * size.
          *
+         * <p>
+         *  计算此节点中已完成元素的数量。
+         * <p>
+         * 
          * @param target the target size
          * @return return the number of completed elements
          */

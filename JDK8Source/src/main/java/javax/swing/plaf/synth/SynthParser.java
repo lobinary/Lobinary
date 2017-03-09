@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -119,6 +120,9 @@ class SynthParser extends DefaultHandler {
 
     /**
      * Lazily created, used for anything we don't understand.
+     * <p>
+     *  Lazily创建,用于我们不了解的任何东西。
+     * 
      */
     private DocumentHandler _handler;
 
@@ -126,73 +130,115 @@ class SynthParser extends DefaultHandler {
      * Indicates the depth of how many elements we've encountered but don't
      * understand. This is used when forwarding to beans persistance to know
      * when we hsould stop forwarding.
+     * <p>
+     *  指示我们遇到了多少元素但不明白的深度。当转发到bean持久化以知道我们何时停止转发时使用。
+     * 
      */
     private int _depth;
 
     /**
      * Factory that new styles are added to.
+     * <p>
+     *  添加新样式的工厂。
+     * 
      */
     private DefaultSynthStyleFactory _factory;
 
     /**
      * Array of state infos for the current style. These are pushed to the
      * style when </style> is received.
+     * <p>
+     *  当前样式的状态信息数组。当接收到</style>时,这些将被推送到样式。
+     * 
      */
     private List<ParsedSynthStyle.StateInfo> _stateInfos;
 
     /**
      * Current style.
+     * <p>
+     *  当前风格。
+     * 
      */
     private ParsedSynthStyle _style;
 
     /**
      * Current state info.
+     * <p>
+     *  当前状态信息。
+     * 
      */
     private ParsedSynthStyle.StateInfo _stateInfo;
 
     /**
      * Bindings for the current InputMap
+     * <p>
+     *  当前InputMap的绑定
+     * 
      */
     private List<String> _inputMapBindings;
 
     /**
      * ID for the input map. This is cached as
      * the InputMap is created AFTER the inputMapProperty has ended.
+     * <p>
+     *  输入映射的ID。这是在inputMapProperty结束后创建InputMap时缓存的。
+     * 
      */
     private String _inputMapID;
 
     /**
      * Object references outside the scope of persistance.
+     * <p>
+     *  对象引用超出持久性范围。
+     * 
      */
     private Map<String,Object> _mapping;
 
     /**
      * Based URL used to resolve paths.
+     * <p>
+     *  用于解析路径的基于URL。
+     * 
      */
     private URL _urlResourceBase;
 
     /**
      * Based class used to resolve paths.
+     * <p>
+     *  基于类用于解析路径。
+     * 
      */
     private Class<?> _classResourceBase;
 
     /**
      * List of ColorTypes. This is populated in startColorType.
+     * <p>
+     *  ColorTypes列表。这是填充在startColorType。
+     * 
      */
     private List<ColorType> _colorTypes;
 
     /**
      * defaultsPropertys are placed here.
+     * <p>
+     *  defaultsPropertys放在这里。
+     * 
      */
     private Map<String, Object> _defaultsMap;
 
     /**
      * List of SynthStyle.Painters that will be applied to the current style.
+     * <p>
+     *  将应用于当前样式的SynthStyle.Painters列表。
+     * 
      */
     private List<ParsedSynthStyle.PainterInfo> _stylePainters;
 
     /**
      * List of SynthStyle.Painters that will be applied to the current state.
+     * <p>
+     *  将应用于当前状态的SynthStyle.Painters列表。
+     * 
      */
     private List<ParsedSynthStyle.PainterInfo> _statePainters;
 
@@ -212,6 +258,11 @@ class SynthParser extends DefaultHandler {
      * this method, one of the URL or the Class must be null but not both at
      * the same time.
      *
+     * <p>
+     *  从<code> inputStream </code>解析一组样式,将得到的样式添加到在DefaultSynthStyleFactory中传递的样式。资源可以从URL或类中解析。
+     * 调用此方法时,URL或类之一必须为空,但不能同时为空。
+     * 
+     * 
      * @param inputStream XML document containing the styles to read
      * @param factory DefaultSynthStyleFactory that new styles are added to
      * @param urlResourceBase the URL used to resolve any resources, such as Images
@@ -257,6 +308,9 @@ class SynthParser extends DefaultHandler {
 
     /**
      * Returns the path to a resource.
+     * <p>
+     *  返回资源的路径。
+     * 
      */
     private URL getResource(String path) {
         if (_classResourceBase != null) {
@@ -272,6 +326,9 @@ class SynthParser extends DefaultHandler {
 
     /**
      * Clears our internal state.
+     * <p>
+     *  清除我们的内部状态。
+     * 
      */
     private void reset() {
         _handler = null;
@@ -285,6 +342,9 @@ class SynthParser extends DefaultHandler {
 
     /**
      * Returns true if we are forwarding to persistance.
+     * <p>
+     *  如果我们转发到持久性,则返回true。
+     * 
      */
     private boolean isForwarding() {
         return (_depth > 0);
@@ -292,6 +352,9 @@ class SynthParser extends DefaultHandler {
 
     /**
      * Handles beans persistance.
+     * <p>
+     *  处理豆坚持。
+     * 
      */
     private DocumentHandler getHandler() {
         if (_handler == null) {
@@ -321,6 +384,9 @@ class SynthParser extends DefaultHandler {
     /**
      * If <code>value</code> is an instance of <code>type</code> it is
      * returned, otherwise a SAXException is thrown.
+     * <p>
+     * 如果<code> value </code>是<code> type </code>的实例,则返回它,否则抛出SAXException。
+     * 
      */
     private Object checkCast(Object value, Class type) throws SAXException {
         if (!type.isInstance(value)) {
@@ -333,6 +399,9 @@ class SynthParser extends DefaultHandler {
     /**
      * Returns an object created with id=key. If the object is not of
      * type type, this will throw an exception.
+     * <p>
+     *  返回使用id = key创建的对象。如果对象不是类型类型,这将抛出异常。
+     * 
      */
     private Object lookup(String key, Class type) throws SAXException {
         Object value;
@@ -351,6 +420,9 @@ class SynthParser extends DefaultHandler {
     /**
      * Registers an object by name. This will throw an exception if an
      * object has already been registered under the given name.
+     * <p>
+     *  按名称注册对象。如果对象已经在给定名称下注册,则将抛出异常。
+     * 
      */
     private void register(String key, Object value) throws SAXException {
         if (key != null) {
@@ -370,6 +442,9 @@ class SynthParser extends DefaultHandler {
     /**
      * Convenience method to return the next int, or throw if there are no
      * more valid ints.
+     * <p>
+     *  方便方法返回下一个int,或者如果没有更多的有效int则抛出。
+     * 
      */
     private int nextInt(StringTokenizer tok, String errorMsg) throws
                    SAXException {
@@ -385,6 +460,9 @@ class SynthParser extends DefaultHandler {
 
     /**
      * Convenience method to return an Insets object.
+     * <p>
+     *  方便的方法来返回Insets对象。
+     * 
      */
     private Insets parseInsets(String insets, String errorMsg) throws
                         SAXException {
@@ -1294,6 +1372,8 @@ class SynthParser extends DefaultHandler {
 
     /**
      * ImageIcon that lazily loads the image until needed.
+     * <p>
+     *  ImageIcon直接加载图像直到需要。
      */
     private static class LazyImageIcon extends ImageIcon implements UIResource {
         private URL location;

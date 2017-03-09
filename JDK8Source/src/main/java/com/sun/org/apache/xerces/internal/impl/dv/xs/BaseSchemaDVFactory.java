@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -17,6 +18,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")将此文件授予您;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dv.xs;
@@ -34,6 +43,12 @@ import com.sun.org.apache.xerces.internal.xs.XSObjectList;
  *
  * @xerces.internal
  *
+ * <p>
+ *  基本工厂创建/返回内置模式DV并创建用户定义的DV
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Neeraj Bajaj, Sun Microsystems, inc.
  * @author Sandy Gao, IBM
  * @author Khaled Noaman, IBM
@@ -255,6 +270,10 @@ public abstract class BaseSchemaDVFactory extends SchemaDVFactory {
      * Create a new simple type which is derived by restriction from another
      * simple type.
      *
+     * <p>
+     *  创建一个新的简单类型,通过限制从另一个简单类型派生。
+     * 
+     * 
      * @param name              name of the new type, could be null
      * @param targetNamespace   target namespace of the new type, could be null
      * @param finalSet          value of "final"
@@ -276,6 +295,10 @@ public abstract class BaseSchemaDVFactory extends SchemaDVFactory {
      * Create a new simple type which is derived by list from another simple
      * type.
      *
+     * <p>
+     *  创建一个新的简单类型,由另一个简单类型的列表派生。
+     * 
+     * 
      * @param name              name of the new type, could be null
      * @param targetNamespace   target namespace of the new type, could be null
      * @param finalSet          value of "final"
@@ -297,6 +320,9 @@ public abstract class BaseSchemaDVFactory extends SchemaDVFactory {
      * Create a new simple type which is derived by union from a list of other
      * simple types.
      *
+     * <p>
+     *  创建一个新的简单类型,通过union从其他简单类型的列表中派生。
+     * 
      * @param name              name of the new type, could be null
      * @param targetNamespace   target namespace of the new type, could be null
      * @param finalSet          value of "final"

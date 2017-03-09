@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,12 @@ import com.sun.imageio.plugins.common.I18N;
  * The encoding process may clip, subsample using the parameters
  * specified in the <code>ImageWriteParam</code>.
  *
+ * <p>
+ *  用于将二进制RenderedImage编码为WBMP格式的Java Image IO插件编写器。
+ * 
+ *  编码过程可以使用<code> ImageWriteParam </code>中指定的参数进行剪辑,子采样。
+ * 
+ * 
  * @see com.sun.media.imageio.plugins.WBMPImageWriteParam
  */
 public class WBMPImageWriter extends ImageWriter {
@@ -94,6 +101,7 @@ public class WBMPImageWriter extends ImageWriter {
 
     /** Constructs <code>WBMPImageWriter</code> based on the provided
      *  <code>ImageWriterSpi</code>.
+     * <p>
      */
     public WBMPImageWriter(ImageWriterSpi originator) {
         super(originator);

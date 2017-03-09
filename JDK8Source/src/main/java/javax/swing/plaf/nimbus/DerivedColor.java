@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,11 @@ import java.beans.PropertyChangeListener;
  * value will update to reflect the new derived color. Property change events
  * are fired for the "rgb" property when the derived color changes.
  *
+ * <p>
+ *  DerivedColor  - 从UIManager默认表颜色和一组偏移量派生的颜色实现。它可以通过调用rederiveColor()在任何点重新生成。
+ * 例如,当其父颜色更改时,其值将更新以反映新的派生颜色。派生颜色更改时,会为"rgb"属性触发属性更改事件。
+ * 
+ * 
  * @author Jasper Potts
  */
 class DerivedColor extends Color {
@@ -75,6 +81,9 @@ class DerivedColor extends Color {
 
     /**
      * Recalculate the derived color from the UIManager parent color and offsets
+     * <p>
+     *  从UIManager父颜色和偏移重新计算派生颜色
+     * 
      */
     public void rederiveColor() {
         Color src = UIManager.getColor(uiDefaultParentName);
@@ -100,6 +109,10 @@ class DerivedColor extends Color {
      * Returns the RGB value representing the color in the default sRGB {@link java.awt.image.ColorModel}. (Bits 24-31
      * are alpha, 16-23 are red, 8-15 are green, 0-7 are blue).
      *
+     * <p>
+     *  返回表示默认sRGB {@link java.awt.image.ColorModel}中颜色的RGB值。 (位24-31是α,16-23是红色,8-15是绿色,0-7是蓝色)。
+     * 
+     * 
      * @return the RGB value of the color in the default sRGB <code>ColorModel</code>.
      * @see java.awt.image.ColorModel#getRGBdefault
      * @see #getRed
@@ -161,6 +174,9 @@ class DerivedColor extends Color {
      * format of the returned string might vary between implementations. The
      * returned string might be empty but cannot be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> Color </code>的字符串表示形式。此方法仅用于调试目的。返回的字符串的内容和格式可能因实现而异。返回的字符串可能为空,但不能是<code> null </code>。
+     * 
      * @return a String representation of this <code>Color</code>.
      */
     @Override

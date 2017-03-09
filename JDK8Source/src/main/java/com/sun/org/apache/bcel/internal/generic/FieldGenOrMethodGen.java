@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,28 @@ import com.sun.org.apache.bcel.internal.Constants;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本1.1
+ * 
+ *  版权所有(c)2001 Apache软件基金会。版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1.源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  2.二进制形式的再分发必须在分发所提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  3.包含在重新分发中的最终用户文档(如果有)必须包括以下声明："本产品包括由Apache Software Foundation(http://www.apache.org/)开发的软件。
+ * 或者,如果此类第三方确认通常出现,则此确认可能出现在软件本身中。
+ * 
+ *  4.未经事先书面许可,不得使用名称"Apache"和"Apache Software Foundation"和"Apache BCEL"来认可或推广从本软件衍生的产品。
+ * 如需书面许可,请联系apache@apache.org。
+ * 
+ * 未经Apache软件基金会事先书面许可,从本软件衍生的产品可能不会被称为"Apache","Apache BCEL",也不可能出现在他们的名字中。
+ * 
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,APACHE软件基金会或其捐赠者均不对任何直接,间接,偶发,特殊,惩罚性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据丢失或利润或业务中断),无论是由于任何责任推理原因,无论是
+ * 在合同,严格责任或侵权(包括疏忽或其他方式)中,以任何方式使用本软件,即使已被告知此类软件的可能性损伤。
  */
 
 import com.sun.org.apache.bcel.internal.classfile.*;
@@ -66,6 +89,13 @@ import java.util.ArrayList;
  * Super class for FieldGen and MethodGen objects, since they have
  * some methods in common!
  *
+ * <p>
+ *  本软件按"原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ *  ================================================== ==================。
+ * 
+ *  该软件包括许多个人代表Apache软件基金会所做的自愿捐款。有关Apache Software Foundation的更多信息,请参阅<http://www.apache.org/>。
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class FieldGenOrMethodGen extends AccessFlags
@@ -87,6 +117,9 @@ public abstract class FieldGenOrMethodGen extends AccessFlags
   public Type            getType()            { return type; }
 
   /** @return name of method/field.
+  /* <p>
+  /*  超类FieldGen和MethodGen对象,因为他们有一些共同的方法！
+  /* 
    */
   public String          getName()            { return name; }
   public void            setName(String name) { this.name = name; }
@@ -100,21 +133,33 @@ public abstract class FieldGenOrMethodGen extends AccessFlags
    * attributes. Other attributes will be ignored by the JVM but do no
    * harm.
    *
+   * <p>
+   * 
    * @param a attribute to be added
    */
   public void addAttribute(Attribute a) { attribute_vec.add(a); }
 
   /**
    * Remove an attribute.
+   * <p>
+   *  向此方法添加属性。目前,JVM知道"Code","ConstantValue","Synthetic"和"Exceptions"属性。其他属性将被JVM忽略,但不会造成任何损害。
+   * 
    */
   public void removeAttribute(Attribute a) { attribute_vec.remove(a); }
 
   /**
    * Remove all attributes.
+   * <p>
+   * 移除属性。
+   * 
    */
   public void removeAttributes() { attribute_vec.clear(); }
 
   /**
+  /* <p>
+  /*  删除所有属性。
+  /* 
+  /* 
    * @return all attributes of this method.
    */
   public Attribute[] getAttributes() {
@@ -124,6 +169,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags
   }
 
   /** @return signature of method/field.
+  /* <p>
    */
   public abstract String  getSignature();
 

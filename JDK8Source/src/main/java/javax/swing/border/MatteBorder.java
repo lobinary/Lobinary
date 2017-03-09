@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,13 @@ import javax.swing.Icon;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  一个类,它提供一个纯色或平铺图标的无光泽边框。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Amy Fowler
  */
 @SuppressWarnings("serial")
@@ -54,6 +62,10 @@ public class MatteBorder extends EmptyBorder
 
     /**
      * Creates a matte border with the specified insets and color.
+     * <p>
+     *  创建具有指定插图和颜色的无光边框。
+     * 
+     * 
      * @param top the top inset of the border
      * @param left the left inset of the border
      * @param bottom the bottom inset of the border
@@ -67,6 +79,10 @@ public class MatteBorder extends EmptyBorder
 
     /**
      * Creates a matte border with the specified insets and color.
+     * <p>
+     *  创建具有指定插图和颜色的无光边框。
+     * 
+     * 
      * @param borderInsets the insets of the border
      * @param matteColor the color rendered for the border
      * @since 1.3
@@ -78,6 +94,10 @@ public class MatteBorder extends EmptyBorder
 
     /**
      * Creates a matte border with the specified insets and tile icon.
+     * <p>
+     *  使用指定的插图和平铺图标创建一个无光泽边框。
+     * 
+     * 
      * @param top the top inset of the border
      * @param left the left inset of the border
      * @param bottom the bottom inset of the border
@@ -91,6 +111,10 @@ public class MatteBorder extends EmptyBorder
 
     /**
      * Creates a matte border with the specified insets and tile icon.
+     * <p>
+     *  使用指定的插图和平铺图标创建一个无光泽边框。
+     * 
+     * 
      * @param borderInsets the insets of the border
      * @param tileIcon the icon to be used for tiling the border
      * @since 1.3
@@ -106,6 +130,10 @@ public class MatteBorder extends EmptyBorder
      * the tile icon, where the top and bottom will be equal to the
      * tile icon's height, and the left and right will be equal to
      * the tile icon's width.
+     * <p>
+     *  使用指定的平铺图标创建一个无光泽边框。插图将基于图块图标的大小动态计算,其中顶部和底部将等于图块图标的高度,左右将等于图块图标的宽度。
+     * 
+     * 
      * @param tileIcon the icon to be used for tiling the border
      */
     public MatteBorder(Icon tileIcon)   {
@@ -114,6 +142,9 @@ public class MatteBorder extends EmptyBorder
 
     /**
      * Paints the matte border.
+     * <p>
+     *  涂抹哑光边框。
+     * 
      */
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         Insets insets = getBorderInsets(c);
@@ -158,6 +189,10 @@ public class MatteBorder extends EmptyBorder
 
     /**
      * Reinitialize the insets parameter with this Border's current Insets.
+     * <p>
+     *  使用此Border的当前Insets重新初始化insets参数。
+     * 
+     * 
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
      * @since 1.3
@@ -168,6 +203,10 @@ public class MatteBorder extends EmptyBorder
 
     /**
      * Returns the insets of the border.
+     * <p>
+     *  返回边框的插入。
+     * 
+     * 
      * @since 1.3
      */
     public Insets getBorderInsets() {
@@ -196,6 +235,10 @@ public class MatteBorder extends EmptyBorder
     /**
      * Returns the color used for tiling the border or null
      * if a tile icon is being used.
+     * <p>
+     *  返回用于平铺边框的颜色,如果正在使用平铺图标,则返回null。
+     * 
+     * 
      * @since 1.3
      */
     public Color getMatteColor() {
@@ -205,6 +248,10 @@ public class MatteBorder extends EmptyBorder
    /**
      * Returns the icon used for tiling the border or null
      * if a solid color is being used.
+     * <p>
+     *  返回用于平铺边框的图标,如果正在使用纯色,则返回null。
+     * 
+     * 
      * @since 1.3
      */
     public Icon getTileIcon() {
@@ -213,6 +260,8 @@ public class MatteBorder extends EmptyBorder
 
     /**
      * Returns whether or not the border is opaque.
+     * <p>
+     *  返回边框是否不透明。
      */
     public boolean isBorderOpaque() {
         // If a tileIcon is set, then it may contain transparent bits

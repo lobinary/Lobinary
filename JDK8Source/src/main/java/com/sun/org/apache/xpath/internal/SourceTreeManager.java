@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: SourceTreeManager.java,v 1.2.4.1 2005/09/10 18:14:09 jeffsuttor Exp $
+ * <p>
+ *  $ Id：SourceTreeManager.java,v 1.2.4.1 2005/09/10 18:14:09 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal;
 
@@ -42,6 +55,9 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * This class bottlenecks all management of source trees.  The methods
  * in this class should allow easy garbage collection of source
  * trees (not yet!), and should centralize parsing for those source trees.
+ * <p>
+ *  这个类阻塞了源树的所有管理。这个类中的方法应该允许源树的容易的垃圾收集(还没有！),并且应该集中解析这些源树。
+ * 
  */
 public class SourceTreeManager
 {
@@ -52,6 +68,9 @@ public class SourceTreeManager
   /**
    * Reset the list of SourceTree objects that this manager manages.
    *
+   * <p>
+   *  重置此管理器管理的SourceTree对象的列表。
+   * 
    */
   public void reset()
   {
@@ -64,6 +83,10 @@ public class SourceTreeManager
   /**
    * Set an object that will be used to resolve URIs used in
    * document(), etc.
+   * <p>
+   *  设置将用于解析document()中使用的URI的对象等。
+   * 
+   * 
    * @param resolver An object that implements the URIResolver interface,
    * or null.
    */
@@ -75,6 +98,10 @@ public class SourceTreeManager
   /**
    * Get the object that will be used to resolve URIs used in
    * document(), etc.
+   * <p>
+   *  获取将用于解析在document()中使用的URI的对象等。
+   * 
+   * 
    * @return An object that implements the URIResolver interface,
    * or null.
    */
@@ -85,6 +112,10 @@ public class SourceTreeManager
 
   /**
    * Given a document, find the URL associated with that document.
+   * <p>
+   *  给定文档,找到与该文档相关联的URL。
+   * 
+   * 
    * @param owner Document that was previously processed by this liaison.
    *
    * @return The base URI of the owner argument.
@@ -108,6 +139,10 @@ public class SourceTreeManager
    * This will be called by the processor when it encounters
    * an xsl:include, xsl:import, or document() function.
    *
+   * <p>
+   *  当遇到xsl：include,xsl：import或document()函数时,将由处理器调用。
+   * 
+   * 
    * @param base The base URI that should be used.
    * @param urlString Value from an xsl:import or xsl:include's href attribute,
    * or a URI specified in the document() function.
@@ -142,6 +177,10 @@ public class SourceTreeManager
   /** JJK: Support  <?xalan:doc_cache_off?> kluge in ElemForEach.
    * TODO: This function is highly dangerous. Cache management must be improved.
    *
+   * <p>
+   *  TODO：这个功能是非常危险的。必须改进缓存管理。
+   * 
+   * 
    * @param n The node to remove.
    */
   public void removeDocumentFromCache(int n)
@@ -165,6 +204,10 @@ public class SourceTreeManager
    * Put the source tree root node in the document cache.
    * TODO: This function needs to be a LOT more sophisticated.
    *
+   * <p>
+   * 将源树根节点放在文档高速缓存中。 TODO：这个函数需要一个更复杂的LOT。
+   * 
+   * 
    * @param n The node to cache.
    * @param source The Source object to cache.
    */
@@ -191,6 +234,10 @@ public class SourceTreeManager
   /**
    * Given a Source object, find the node associated with it.
    *
+   * <p>
+   *  给定一个Source对象,找到与之相关的节点。
+   * 
+   * 
    * @param source The Source object to act as the key.
    *
    * @return The node that is associated with the Source, or null if not found.
@@ -227,6 +274,10 @@ public class SourceTreeManager
   /**
    * Get the source tree from the a base URL and a URL string.
    *
+   * <p>
+   *  从基本URL和URL字符串获取源树。
+   * 
+   * 
    * @param base The base URI to use if the urlString is relative.
    * @param urlString An absolute or relative URL string.
    * @param locator The location of the caller, for diagnostic purposes.
@@ -257,12 +308,20 @@ public class SourceTreeManager
     /* catch (TransformerException te)
      {
        throw new TransformerException(te.getMessage(), locator, te);
+    /* <p>
+    /*  {throw new TransformerException(te.getMessage(),locator,te);
+    /* 
+    /* 
      }*/
   }
 
   /**
    * Get the source tree from the input source.
    *
+   * <p>
+   *  从输入源获取源树。
+   * 
+   * 
    * @param source The Source object that should identify the desired node.
    * @param locator The location of the caller, for diagnostic purposes.
    *
@@ -291,6 +350,10 @@ public class SourceTreeManager
   /**
    * Try to create a DOM source tree from the input source.
    *
+   * <p>
+   *  尝试从输入源创建DOM源树。
+   * 
+   * 
    * @param source The Source object that identifies the source node.
    * @param locator The location of the caller, for diagnostic purposes.
    *
@@ -334,6 +397,10 @@ public class SourceTreeManager
    * be free for use (i.e.
    * not currently in use for another parse().
    *
+   * <p>
+   *  此方法返回SAX2解析器以与从此URI获取的InputSource一起使用。
+   * 如果可以使用任何符合SAX2的XML解析器,或者如果getInputSource()也将返回null,那么它可能返回null。解析器必须是可用的(即当前不用于另一个解析())。
+   * 
    * @param inputSource The value returned from the URIResolver.
    * @return a SAX2 XMLReader to use to resolve the inputSource argument.
    * @param locator The location of the original caller, for diagnostic purposes.

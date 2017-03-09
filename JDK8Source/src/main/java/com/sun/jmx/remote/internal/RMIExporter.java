@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import java.rmi.server.UnicastRemoteObject;
  * unexport them.  A replacement exporter can be specified via the
  * {@link #EXPORTER_ATTRIBUTE} property in the environment Map passed
  * to the RMI connector server.</p>
+ * <p>
+ *  <p>未发布的接口控制RMI连接器服务器如何导出对象。 RMIServerImpl对象和每个RMIConnectionImpl对象都使用导出器导出。
+ * 默认导出器调用{@link UnicastRemoteObject#exportObject(Remote,int,RMIClientSocketFactory,RMIServerSocketFactory)}
+ * 导出对象和{@link UnicastRemoteObject #exexobject(Remote,boolean)}以取消导出。
  */
 public interface RMIExporter {
     public static final String EXPORTER_ATTRIBUTE =

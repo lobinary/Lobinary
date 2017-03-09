@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,18 @@ import com.sun.jmx.snmp.agent.SnmpMibSubRequest;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此接口由mibgen生成的表对象实现,继承自{@link com.sun.jmx.snmp.agent.SnmpTableSupport}。
+ * <p>
+ *  只要远程SNMP管理器通过SNMP SET请求创建新条目,就由元数据在内部使用。
+ * </p>
+ * <p>
+ *  创建时,mibgen生成的表对象从MIB检索其对应的元数据,并作为SnmpTableEntryFactory注册此元数据。
+ * </p>
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  **/
 
 public interface SnmpTableEntryFactory extends SnmpTableCallbackHandler {
@@ -73,6 +86,15 @@ public interface SnmpTableEntryFactory extends SnmpTableCallbackHandler {
      * You should never need to call this method directlty.
      * </i></b></p>
      *
+     * <p>
+     *  每当远程管理器请求创建新条目时,SNMP运行时就会调用此方法。
+     * 
+     *  工厂负责实例化相应的MBean并将其注册到适当的元数据对象。
+     * 
+     *  通常这种方法将：
+     * <ul>
+     *  <li>检查是否可以接受创建<li>实例化新条目<li>如果需要,可以向MBeanServer注册此条目。
+     * 
      * @param request The SNMP subrequest containing the sublist of varbinds
      *                for the new entry.
      * @param rowOid  The OID indexing the conceptual row (entry) for which

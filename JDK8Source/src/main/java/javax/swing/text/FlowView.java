@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,14 @@ import javax.swing.SizeRequirements;
  * of the logical views are placed to create the flow.
  * </ul>
  *
+ * <p>
+ *  一个试图将它的孩子流入一些部分受限空间的视图。这可以用来构建像段落,页面等内容。流程由以下几个功能组成。
+ * <ul>
+ *  <li>一组逻辑子视图,用作从中形成物理视图的布局池。 <li>将逻辑视图转换为物理(流动)视图的策略。 <li>针对策略的约束。 <li>表示流的物理结构。
+ * 这个视图的子节点是逻辑视图的一部分,用于创建流。
+ * </ul>
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     View
  * @since 1.3
@@ -54,6 +63,10 @@ public abstract class FlowView extends BoxView {
     /**
      * Constructs a FlowView for the given element.
      *
+     * <p>
+     *  构造给定元素的FlowView。
+     * 
+     * 
      * @param elem the element that this view is responsible for
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      */
@@ -70,6 +83,9 @@ public abstract class FlowView extends BoxView {
      * rows are tiled (the axis of the default flow
      * rows themselves).  This is typically used
      * by the <code>FlowStrategy</code>.
+     * <p>
+     *  获取视图应沿其流动的轴。默认情况下,这将是与垂直于流行平铺的轴(默认流行本身的轴)的轴。这通常由<code> FlowStrategy </code>使用。
+     * 
      */
     public int getFlowAxis() {
         if (getAxis() == Y_AXIS) {
@@ -87,6 +103,10 @@ public abstract class FlowView extends BoxView {
      * span inside of the insets along the flow axis
      * is returned.
      *
+     * <p>
+     *  获取针对给定子索引的约束范围。这是在更新流时由FlowStrategy调用。可以通过为行约束提供不同的值来形成流。默认情况下,将返回沿流轴的插入内的整个跨度。
+     * 
+     * 
      * @param index the index of the row being updated.
      *   This should be a value &gt;= 0 and &lt; getViewCount().
      * @see #getFlowStart
@@ -102,6 +122,10 @@ public abstract class FlowView extends BoxView {
      * A flow can be shaped by providing different values
      * for the row constraints.
 
+     * <p>
+     * 获取沿流动轴线开始流动跨度的位置。这是在更新流时由FlowStrategy调用。可以通过为行约束提供不同的值来形成流。
+     * 
+     * 
      * @param index the index of the row being updated.
      *   This should be a value &gt;= 0 and &lt; getViewCount().
      * @see #getFlowSpan
@@ -116,6 +140,9 @@ public abstract class FlowView extends BoxView {
      * called by the FlowStrategy when new children
      * are added or removed (i.e. rows are added or
      * removed) in the process of updating the flow.
+     * <p>
+     *  创建一个视图,用于在流中保存一行值的子节点。当在更新流的过程中添加或删除新的子节点(即添加或删除行)时,FlowStrategy会调用此方法。
+     * 
      */
     protected abstract View createRow();
 
@@ -130,6 +157,11 @@ public abstract class FlowView extends BoxView {
      * LogicalView is created to represent the logical view
      * that is used in the process of formatting.
      *
+     * <p>
+     *  加载所有子项以初始化视图。这由<code> setParent </code>方法调用。这被重新实现以不加载任何孩子(因为它们是在格式化过程中创建的)。
+     * 如果layoutPool变量为null,将创建LogicalView的实例以表示在格式化过程中使用的逻辑视图。
+     * 
+     * 
      * @param f the view factory
      */
     protected void loadChildren(ViewFactory f) {
@@ -147,6 +179,10 @@ public abstract class FlowView extends BoxView {
      * Fetches the child view index representing the given position in
      * the model.
      *
+     * <p>
+     *  获取表示模型中给定位置的子视图索引。
+     * 
+     * 
      * @param pos the position &gt;= 0
      * @return  index of the view representing the given position, or
      *   -1 if no view represents that position
@@ -175,6 +211,11 @@ public abstract class FlowView extends BoxView {
      * a preferenceChanged is called.  Following all of that,
      * the normal box layout of the superclass is performed.
      *
+     * <p>
+     *  放下孩子。如果沿流动轴的跨度已更改,则布局将标记为无效,这将导致超类行为沿框轴重新计算布局。将调用FlowStrategy.layout方法以根据需要重建流行。
+     * 如果此视图的高度改变(由沿着框轴的优选大小确定),则调用preferenceChanged。接着,执行超类的正常框布局。
+     * 
+     * 
      * @param width  the width to lay out against &gt;= 0.  This is
      *   the width inside of the inset area.
      * @param height the height to lay out against &gt;= 0 This
@@ -225,6 +266,9 @@ public abstract class FlowView extends BoxView {
      * is implemented to forward the request to the logical
      * view by calling getMinimumSpan, getPreferredSpan, and
      * getMaximumSpan on it.
+     * <p>
+     * 计算沿短轴的要求。这被实现为通过调用getMinimumSpan,getPreferredSpan和getMaximumSpan将请求转发到逻辑视图。
+     * 
      */
     protected SizeRequirements calculateMinorAxisRequirements(int axis, SizeRequirements r) {
         if (r == null) {
@@ -246,6 +290,10 @@ public abstract class FlowView extends BoxView {
      * Gives notification that something was inserted into the document
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。
+     * 
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -260,6 +308,10 @@ public abstract class FlowView extends BoxView {
      * Gives notification that something was removed from the document
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  提供通知,说明该视图负责的位置中的文档被删除了。
+     * 
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -274,6 +326,10 @@ public abstract class FlowView extends BoxView {
      * Gives notification from the document that attributes were changed
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。
+     * 
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -298,6 +354,9 @@ public abstract class FlowView extends BoxView {
     /**
      * Default constraint against which the flow is
      * created against.
+     * <p>
+     *  针对其创建流的默认约束。
+     * 
      */
     protected int layoutSpan;
 
@@ -309,6 +368,9 @@ public abstract class FlowView extends BoxView {
      * placed into the rows directly or used for the purpose
      * of breaking into smaller chunks, to form the physical
      * view.
+     * <p>
+     *  这些是表示此视图表示的元素的子元素的视图(要转换为物理视图的逻辑视图)。这些不是这个观点的直接孩子。这些被直接放置到行中或用于分裂成更小的块的目的,以形成物理视图。
+     * 
      */
     protected View layoutPool;
 
@@ -318,6 +380,9 @@ public abstract class FlowView extends BoxView {
      * of FlowView (FlowStrategy is stateless).  Subclasses
      * can create an alternative strategy, which might keep
      * state.
+     * <p>
+     *  保持流更新的行为。默认情况下,这是由FlowView的所有实例共享的单例(FlowStrategy是无状态的)。子类可以创建一个替代策略,它可以保持状态。
+     * 
      */
     protected FlowStrategy strategy;
 
@@ -330,6 +395,10 @@ public abstract class FlowView extends BoxView {
      * be implemented by subclassing, and might
      * perform incremental repair to the layout
      * or alternative breaking behavior.
+     * <p>
+     *  保持流的物理形式的策略。默认实现是完全无状态的,如果布局在给定的FlowView上无效,则重新计算整个流。替代策略可以通过子类化实现,并且可以对布局或备选打破行为执行增量修复。
+     * 
+     * 
      * @since 1.3
      */
     public static class FlowStrategy {
@@ -359,6 +428,10 @@ public abstract class FlowView extends BoxView {
          * strategy should update the appropriate changed region (which
          * depends upon the strategy used for repair).
          *
+         * <p>
+         * 提供通知,说明在给定流视图负责的位置将某些内容插入到文档中。策略应该更新适当的改变区域(其取决于用于修复的策略)。
+         * 
+         * 
          * @param e the change information from the associated document
          * @param alloc the current allocation of the view inside of the insets.
          *   This value will be null if the view has not yet been displayed.
@@ -385,6 +458,10 @@ public abstract class FlowView extends BoxView {
          * Gives notification that something was removed from the document
          * in a location that the given flow view is responsible for.
          *
+         * <p>
+         *  提供通知,说明在给定流视图负责的位置中从文档中删除的内容。
+         * 
+         * 
          * @param e the change information from the associated document
          * @param alloc the current allocation of the view inside of the insets.
          * @see View#removeUpdate
@@ -405,6 +482,10 @@ public abstract class FlowView extends BoxView {
          * Gives notification from the document that attributes were changed
          * in a location that this view is responsible for.
          *
+         * <p>
+         *  从文档中提供属性在此视图负责的位置中更改的通知。
+         * 
+         * 
          * @param fv     the <code>FlowView</code> containing the changes
          * @param e      the <code>DocumentEvent</code> describing the changes
          *               done to the Document
@@ -426,6 +507,9 @@ public abstract class FlowView extends BoxView {
         /**
          * This method gives flow strategies access to the logical
          * view of the FlowView.
+         * <p>
+         *  此方法使流策略访问FlowView的逻辑视图。
+         * 
          */
         protected View getLogicalView(FlowView fv) {
             return fv.layoutPool;
@@ -437,6 +521,10 @@ public abstract class FlowView extends BoxView {
          * constraints for each row.  This is called by a FlowView.layout
          * to update the child views in the flow.
          *
+         * <p>
+         *  更新给定FlowView上的流。默认情况下,这将导致重建所有行(子视图)以匹配每行的给定约束。这由FlowView.layout调用以更新流中的子视图。
+         * 
+         * 
          * @param fv the view to reflow
          */
         public void layout(FlowView fv) {
@@ -495,6 +583,11 @@ public abstract class FlowView extends BoxView {
          * the adjustRow method will be called to perform adjustments
          * to the row to try and make it fit into the given span.
          *
+         * <p>
+         *  创建将适合行的布局跨度内的视图行。这由布局方法调用。这被实现为通过重复调用createView方法来填充该行,直到可用跨度已用尽,遇到强制中断,或createView方法返回null。
+         * 如果剩余的时间间隔耗尽,将调用adjustRow方法来对行进行调整,以尝试使其适合给定的跨度。
+         * 
+         * 
          * @param rowIndex the index of the row to fill in with views.  The
          *   row is assumed to be empty on entry.
          * @param pos  The current position in the children of
@@ -578,6 +671,10 @@ public abstract class FlowView extends BoxView {
          * the row.  If a forced break is encountered, the
          * break will be positioned there.
          *
+         * <p>
+         *  如果可能,调整给定行以适应布局跨度。默认情况下,这将尝试找到最接近行尾的最高分隔符。如果遇到强制断裂,断裂将位于那里。
+         * 
+         * 
          * @param rowIndex the row to adjust to the current layout
          *  span.
          * @param desiredSpan the current layout span &gt;= 0
@@ -650,6 +747,10 @@ public abstract class FlowView extends BoxView {
          * of the flow.  This can be either an entire view from the
          * logical view, or a fragment of the logical view.
          *
+         * <p>
+         * 创建可用于表示流的当前部分的视图。这可以是来自逻辑视图的整个视图,也可以是逻辑视图的片段。
+         * 
+         * 
          * @param fv the view holding the flow
          * @param startOffset the start location for the view being created
          * @param spanLeft the about of span left to fill in the row
@@ -677,6 +778,9 @@ public abstract class FlowView extends BoxView {
      * of the model, gives the logical child views access to the
      * view hierarchy, and calculates a preferred span.  It doesn't
      * do any rendering, layout, or model/view translation.
+     * <p>
+     *  此类可用于表示流的逻辑视图。它保持孩子更新以反映模型的状态,给予逻辑子视图访问视图层次结构,并计算首选跨度。它不做任何渲染,布局或模型/视图转换。
+     * 
      */
     static class LogicalView extends CompositeView {
 
@@ -706,6 +810,9 @@ public abstract class FlowView extends BoxView {
          * Fetches the attributes to use when rendering.  This view
          * isn't directly responsible for an element so it returns
          * the outer classes attributes.
+         * <p>
+         *  获取渲染时要使用的属性。此视图不直接负责元素,因此返回外部类属性。
+         * 
          */
         public AttributeSet getAttributes() {
             View p = getParent();
@@ -716,6 +823,10 @@ public abstract class FlowView extends BoxView {
          * Determines the preferred span for this view along an
          * axis.
          *
+         * <p>
+         *  确定沿着轴的此视图的首选跨度。
+         * 
+         * 
          * @param axis may be either View.X_AXIS or View.Y_AXIS
          * @return   the span the view would like to be rendered into.
          *           Typically the view is told to render into the span
@@ -744,6 +855,10 @@ public abstract class FlowView extends BoxView {
          * axis.  The is implemented to find the minimum unbreakable
          * span.
          *
+         * <p>
+         *  确定沿轴的此视图的最小跨度。实现以找到最小不可破坏跨度。
+         * 
+         * 
          * @param axis may be either View.X_AXIS or View.Y_AXIS
          * @return  the span the view would like to be rendered into.
          *           Typically the view is told to render into the span
@@ -781,6 +896,10 @@ public abstract class FlowView extends BoxView {
          * if they fit without breaking) and then execute the superclass
          * behavior.
          *
+         * <p>
+         *  将DocumentEvent转发给给定的子视图。这被实现为将子视图重新显示为逻辑视图(如果它们适合而没有断开,则子项可能已经由流中的行进行了父项),然后执行超类行为。
+         * 
+         * 
          * @param v the child view to forward the event to.
          * @param e the change information from the associated document
          * @param a the current allocation of the view
@@ -828,6 +947,10 @@ public abstract class FlowView extends BoxView {
          * surface.  This is implemented to do nothing, the logical
          * view is never visible.
          *
+         * <p>
+         *  使用给定的渲染表面和该表面上的区域渲染。这被实现为什么都不做,逻辑视图从不可见。
+         * 
+         * 
          * @param g the rendering surface to use
          * @param allocation the allocated region to render into
          * @see View#paint
@@ -840,6 +963,10 @@ public abstract class FlowView extends BoxView {
          * Implemented to return false, as hit detection is not
          * performed on the logical view.
          *
+         * <p>
+         *  测试点是否位于矩形范围之前。实现为返回false,因为未对逻辑视图执行命中检测。
+         * 
+         * 
          * @param x the X coordinate &gt;= 0
          * @param y the Y coordinate &gt;= 0
          * @param alloc the rectangle
@@ -854,6 +981,10 @@ public abstract class FlowView extends BoxView {
          * Implemented to return false, as hit detection is not
          * performed on the logical view.
          *
+         * <p>
+         *  测试点是否位于矩形范围之后。实现为返回false,因为未对逻辑视图执行命中检测。
+         * 
+         * 
          * @param x the X coordinate &gt;= 0
          * @param y the Y coordinate &gt;= 0
          * @param alloc the rectangle
@@ -868,6 +999,10 @@ public abstract class FlowView extends BoxView {
          * Implemented to return null, as hit detection is not
          * performed on the logical view.
          *
+         * <p>
+         * 在给定点获取子视图。实现为返回null,因为未对逻辑视图执行命中检测。
+         * 
+         * 
          * @param x the X coordinate &gt;= 0
          * @param y the Y coordinate &gt;= 0
          * @param alloc the parent's allocation on entry, which should
@@ -883,6 +1018,9 @@ public abstract class FlowView extends BoxView {
          * Implemented to do nothing, as the logical view doesn't
          * perform layout on the children.
          *
+         * <p>
+         *  返回给定子项的分配。实现为不执行任何操作,因为逻辑视图不对子进行布局。
+         * 
          * @param index the index of the child, &gt;= 0 &amp;&amp; &lt; getViewCount()
          * @param a  the allocation to the interior of the box on entry,
          *   and the allocation of the child view at the index on exit.

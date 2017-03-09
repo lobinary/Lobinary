@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,11 @@ package javax.sound.midi;
  * generate sound or raw MIDI output.  Common MIDI receivers include
  * synthesizers and MIDI Out ports.
  *
+ * <p>
+ *  <code> Receiver </code>接收<code> {@ link MidiEvent} </code>对象,通常做出一些有用的响应,例如解释它们生成声音或原始MIDI输出。
+ * 常见的MIDI接收器包括合成器和MIDI输出端口。
+ * 
+ * 
  * @see MidiDevice
  * @see Synthesizer
  * @see Transmitter
@@ -46,6 +52,10 @@ public interface Receiver extends AutoCloseable {
      * Sends a MIDI message and time-stamp to this receiver.
      * If time-stamping is not supported by this receiver, the time-stamp
      * value should be -1.
+     * <p>
+     *  向此接收器发送MIDI消息和时间戳。如果此接收器不支持时间戳,则时间戳值应为-1。
+     * 
+     * 
      * @param message the MIDI message to send
      * @param timeStamp the time-stamp for the message, in microseconds.
      * @throws IllegalStateException if the receiver is closed
@@ -68,6 +78,12 @@ public interface Receiver extends AutoCloseable {
      * description of open/close behaviour see the class description
      * of {@link javax.sound.midi.MidiDevice MidiDevice}.
      *
+     * <p>
+     *  表示应用程序已完成使用接收器,并且需要的有限资源可能会被释放或提供。
+     * 
+     *  <p>如果创建此<code> Receiver </code>导致隐式打开底层设备,则此方法会隐式关闭设备。
+     * 这是真的,除非设备由其他隐含打开设备的<code> Receiver </code>或<code> Transmitter </code>实例保持打开,除非设备已被明确打开。
+     * 
      * @see javax.sound.midi.MidiSystem#getReceiver
      */
     public void close();

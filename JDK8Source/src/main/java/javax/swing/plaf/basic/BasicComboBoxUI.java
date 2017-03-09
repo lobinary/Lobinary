@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,18 @@ import sun.swing.UIAction;
  * overide <code>installKeyboardActions</code> to add actions in response to
  * KeyStroke bindings. See the article <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/keybinding.html">How to Use Key Bindings</a>
  *
+ * <p>
+ *  JComboBox的基本UI实现。
+ * <p>
+ *  组合框是一个复合组件,这意味着它是许多更简单组件的聚合。此类创建和管理组合框和组合框模型上的侦听器。这些侦听器响应组合框的属性和状态的更改来更新用户界面。
+ * <p>
+ *  所有事件处理都由使用<code> createxxxListener()</code>方法和内部类创建的侦听器类处理。
+ * 您可以通过覆盖<code> createxxxListener()</code>方法并提供自己的事件侦听器或从此类中提供的子类化来更改此类的行为。
+ * <p>
+ *  要添加特定操作,请覆盖<code> installKeyboardActions </code>以添加响应KeyStroke绑定的操作。
+ * 请参阅文章<a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/keybinding.html">如何使用键绑定</a>。
+ * 
+ * 
  * @author Arnaud Weber
  * @author Tom Santos
  * @author Mark Davidson
@@ -65,6 +78,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * This protected field is implementation specific. Do not access directly
      * or override.
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。
+     * 
      */
     protected boolean   hasFocus = false;
 
@@ -94,6 +110,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This protected field is implementation specific. Do not access directly
      * or override. Override the listener construction method instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。改为覆盖侦听器构造方法。
+     * 
+     * 
      * @see #createKeyListener
      */
     protected KeyListener keyListener;
@@ -101,6 +121,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This protected field is implementation specific. Do not access directly
      * or override. Override the listener construction method instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。改为覆盖侦听器构造方法。
+     * 
+     * 
      * @see #createFocusListener
      */
     protected FocusListener focusListener;
@@ -108,6 +132,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This protected field is implementation specific. Do not access directly
      * or override. Override the listener construction method instead.
      *
+     * <p>
+     * 此受保护字段是实现特定的。不要直接访问或覆盖。改为覆盖侦听器构造方法。
+     * 
+     * 
      * @see #createPropertyChangeListener
      */
     protected PropertyChangeListener propertyChangeListener;
@@ -116,6 +144,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This protected field is implementation specific. Do not access directly
      * or override. Override the listener construction method instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。改为覆盖侦听器构造方法。
+     * 
+     * 
      * @see #createItemListener
      */
     protected ItemListener itemListener;
@@ -132,6 +164,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This protected field is implementation specific. Do not access directly
      * or override. Override the listener construction method instead.
      *
+     * <p>
+     *  此受保护字段是实现特定的。不要直接访问或覆盖。改为覆盖侦听器构造方法。
+     * 
+     * 
      * @see #createListDataListener
      */
     protected ListDataListener listDataListener;
@@ -139,24 +175,36 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Implements all the Listeners needed by this class, all existing
      * listeners redirect to it.
+     * <p>
+     *  实现这个类所需的所有侦听器,所有现有的侦听器重定向到它。
+     * 
      */
     private Handler handler;
 
     /**
      * The time factor to treate the series of typed alphanumeric key
      * as prefix for first letter navigation.
+     * <p>
+     *  将一系列键入的字母数字键作为第一个字母导航的前缀的时间因子。
+     * 
      */
     private long timeFactor = 1000L;
 
     /**
      * This is tricky, this variables is needed for DefaultKeySelectionManager
      * to take into account time factor.
+     * <p>
+     *  这是棘手的,这个变量是DefaultKeySelectionManager需要考虑到时间因素。
+     * 
      */
     private long lastTime = 0L;
     private long time = 0L;
 
     /**
      * The default key selection manager
+     * <p>
+     *  默认密钥选择管理器
+     * 
      */
     JComboBox.KeySelectionManager keySelectionManager;
 
@@ -181,6 +229,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Whether or not all cells have the same baseline.
+     * <p>
+     *  所有单元格是否具有相同的基线。
+     * 
      */
     private boolean sameBaseline;
 
@@ -189,6 +240,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * If square, then the width and height are equal, and are both set to
      * the height of the combo minus appropriate insets.
      *
+     * <p>
+     *  指示组合框按钮是否应为方形。如果是正方形,则宽度和高度相等,并且都设置为组合的高度减适当的插入。
+     * 
+     * 
      * @since 1.7
      */
     protected boolean squareButton = true;
@@ -198,6 +253,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * laying out and painting the "selected" item in the combo box. These
      * insets add to those specified by the cell renderer.
      *
+     * <p>
+     *  如果指定,当在组合框中"选择"项目进行布局和绘制时,这些插入作为单元格渲染器周围的填充。这些插入添加到单元格渲染器指定的那些插入。
+     * 
+     * 
      * @since 1.7
      */
     protected Insets padding;
@@ -217,6 +276,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Populates ComboBox's actions.
+     * <p>
+     *  填充ComboBox的操作。
+     * 
      */
     static void loadActionMap(LazyActionMap map) {
         map.put(new Actions(Actions.HIDE));
@@ -324,6 +386,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Installs the default colors, default font, default renderer, and default
      * editor into the JComboBox.
+     * <p>
+     *  将默认颜色,默认字体,默认渲染器和默认编辑器安装到JComboBox中。
+     * 
      */
     protected void installDefaults() {
         LookAndFeel.installColorsAndFont( comboBox,
@@ -346,6 +411,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Creates and installs listeners for the combo box and its model.
      * This method is called when the UI is installed.
+     * <p>
+     *  为组合框及其模型创建和安装侦听器。此方法在安装UI时调用。
+     * 
      */
     protected void installListeners() {
         if ( (itemListener = createItemListener()) != null) {
@@ -380,6 +448,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Uninstalls the default colors, default font, default renderer,
      * and default editor from the combo box.
+     * <p>
+     * 从组合框中卸载默认颜色,默认字体,默认渲染器和默认编辑器。
+     * 
      */
     protected void uninstallDefaults() {
         LookAndFeel.installColorsAndFont( comboBox,
@@ -393,6 +464,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Removes the installed listeners from the combo box and its model.
      * The number and types of listeners removed and in this method should be
      * the same that was added in <code>installListeners</code>
+     * <p>
+     *  从组合框及其模型中删除已安装的侦听器。删除的侦听器的数量和类型在此方法中应与<code> installListeners </code>中添加的相同,
+     * 
      */
     protected void uninstallListeners() {
         if ( keyListener != null ) {
@@ -426,6 +500,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Creates the popup portion of the combo box.
      *
+     * <p>
+     *  创建组合框的弹出部分。
+     * 
+     * 
      * @return an instance of <code>ComboPopup</code>
      * @see ComboPopup
      */
@@ -438,6 +516,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * combo box. If this method returns null then it will not be added
      * to the combo box.
      *
+     * <p>
+     *  创建一个<code> KeyListener </code>,它将被添加到组合框。如果此方法返回null,那么它不会被添加到组合框。
+     * 
+     * 
      * @return an instance <code>KeyListener</code> or null
      */
     protected KeyListener createKeyListener() {
@@ -448,6 +530,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Creates a <code>FocusListener</code> which will be added to the combo box.
      * If this method returns null then it will not be added to the combo box.
      *
+     * <p>
+     *  创建一个<code> FocusListener </code>,它将被添加到组合框。如果此方法返回null,那么它不会被添加到组合框。
+     * 
+     * 
      * @return an instance of a <code>FocusListener</code> or null
      */
     protected FocusListener createFocusListener() {
@@ -459,6 +545,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * <code>ComboBoxModel</code>. If this method returns null then
      * it will not be added to the combo box model.
      *
+     * <p>
+     *  创建将添加到<code> ComboBoxModel </code>中的列表数据侦听器。如果此方法返回null,那么它不会被添加到组合框模型。
+     * 
+     * 
      * @return an instance of a <code>ListDataListener</code> or null
      */
     protected ListDataListener createListDataListener() {
@@ -473,6 +563,12 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Subclasses may override this method to return instances of their own
      * ItemEvent handlers.
      *
+     * <p>
+     *  创建将添加到组合框中的<code> ItemListener </code>。如果此方法返回null,那么它不会被添加到组合框。
+     * <p>
+     *  子类可以覆盖此方法以返回它们自己的ItemEvent处理程序的实例。
+     * 
+     * 
      * @return an instance of an <code>ItemListener</code> or null
      */
     protected ItemListener createItemListener() {
@@ -484,6 +580,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * the combo box. If this method returns null then it will not
      * be added to the combo box.
      *
+     * <p>
+     *  创建一个<code> PropertyChangeListener </code>,它将被添加到组合框。如果此方法返回null,那么它不会被添加到组合框。
+     * 
+     * 
      * @return an instance of a <code>PropertyChangeListener</code> or null
      */
     protected PropertyChangeListener createPropertyChangeListener() {
@@ -494,6 +594,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Creates a layout manager for managing the components which make up the
      * combo box.
      *
+     * <p>
+     *  创建用于管理组成组合框的组件的布局管理器。
+     * 
+     * 
      * @return an instance of a layout manager
      */
     protected LayoutManager createLayoutManager() {
@@ -505,6 +609,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * box. A default renderer will used only if a renderer has not been
      * explicitly set with <code>setRenderer</code>.
      *
+     * <p>
+     *  创建将在不可编辑组合框中使用的默认渲染器。默认渲染器将仅在未使用<code> setRenderer </code>显式设置渲染器时使用。
+     * 
+     * 
      * @return a <code>ListCellRender</code> used for the combo box
      * @see javax.swing.JComboBox#setRenderer
      */
@@ -517,6 +625,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * A default editor will be used only if an editor has not been
      * explicitly set with <code>setEditor</code>.
      *
+     * <p>
+     * 创建将在可编辑组合框中使用的默认编辑器。只有未使用<code> setEditor </code>明确设置编辑器时,才会使用默认编辑器。
+     * 
+     * 
      * @return a <code>ComboBoxEditor</code> used for the combo box
      * @see javax.swing.JComboBox#setEditor
      */
@@ -526,6 +638,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Returns the shared listener.
+     * <p>
+     *  返回共享侦听器。
+     * 
      */
     private Handler getHandler() {
         if (handler == null) {
@@ -551,6 +666,11 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This public inner class should be treated as protected.
      * Instantiate it only within subclasses of
      * <code>BasicComboBoxUI</code>.
+     * <p>
+     *  此侦听器检查键事件是否不是导航键。如果它发现一个不是导航键的键事件,它将它分派到JComboBox.selectWithKeyChar(),以便它可以提前输入。
+     * 
+     *  这个公共内部类应该被视为受保护。仅在<code> BasicComboBoxUI </code>的子类中实例化它。
+     * 
      */
     public class KeyHandler extends KeyAdapter {
         @Override
@@ -566,6 +686,11 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This public inner class should be treated as protected.
      * Instantiate it only within subclasses of
      * <code>BasicComboBoxUI</code>.
+     * <p>
+     *  此监听器在焦点丢失时隐藏弹出窗口。它也重绘当焦点获得或失去。
+     * 
+     *  这个公共内部类应该被视为受保护。仅在<code> BasicComboBoxUI </code>的子类中实例化它。
+     * 
      */
     public class FocusHandler implements FocusListener {
         public void focusGained( FocusEvent e ) {
@@ -585,6 +710,12 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Instantiate it only within subclasses of
      * <code>BasicComboBoxUI</code>.
      *
+     * <p>
+     *  此侦听器监视<code> ComboBoxModel </code>中的更改。
+     * <p>
+     *  这个公共内部类应该被视为受保护。仅在<code> BasicComboBoxUI </code>的子类中实例化它。
+     * 
+     * 
      * @see #createListDataListener
      */
     public class ListDataHandler implements ListDataListener {
@@ -609,6 +740,12 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Instantiate it only within subclasses of
      * <code>BasicComboBoxUI</code>.
      *
+     * <p>
+     *  此侦听器监视对组合框中的选择所做的更改。
+     * <p>
+     *  这个公共内部类应该被视为受保护。仅在<code> BasicComboBoxUI </code>的子类中实例化它。
+     * 
+     * 
      * @see #createItemListener
      */
     public class ItemHandler implements ItemListener {
@@ -628,6 +765,14 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Instantiate it only within subclasses of
      * <code>BasicComboBoxUI</code>.
      *
+     * <p>
+     *  此侦听器监视已在组合框中更改的绑定属性。
+     * <p>
+     *  希望监听组合框属性更改的子类应调用超类方法以确保组合框ui正确处理属性更改。
+     * <p>
+     * 这个公共内部类应该被视为受保护。仅在<code> BasicComboBoxUI </code>的子类中实例化它。
+     * 
+     * 
      * @see #createPropertyChangeListener
      */
     public class PropertyChangeHandler implements PropertyChangeListener {
@@ -656,6 +801,11 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This public inner class should be treated as protected.
      * Instantiate it only within subclasses of
      * <code>BasicComboBoxUI</code>.
+     * <p>
+     *  此布局管理器处理组合框的"标准"布局。它将箭头按钮放在右边,编辑器放在左边。如果没有编辑器,它仍然保持箭头按钮在右边。
+     * 
+     *  这个公共内部类应该被视为受保护。仅在<code> BasicComboBoxUI </code>的子类中实例化它。
+     * 
      */
     public class ComboBoxLayoutManager implements LayoutManager {
         public void addLayoutComponent(String name, Component comp) {}
@@ -688,6 +838,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Creates and initializes the components which make up the
      * aggregate combo box. This method is called as part of the UI
      * installation process.
+     * <p>
+     *  创建和初始化组成聚合组合框的组件。此方法被称为UI安装过程的一部分。
+     * 
      */
     protected void installComponents() {
         arrowButton = createArrowButton();
@@ -708,6 +861,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * The aggregate components which comprise the combo box are
      * unregistered and uninitialized. This method is called as part of the
      * UI uninstallation process.
+     * <p>
+     *  构成组合框的集合组件未注册和未初始化。此方法作为UI卸载过程的一部分调用。
+     * 
      */
     protected void uninstallComponents() {
         if ( arrowButton != null ) {
@@ -725,6 +881,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * do not call or override. To implement a specific editor create a
      * custom <code>ComboBoxEditor</code>
      *
+     * <p>
+     *  这个公共方法是实现特定的,应该是私有的。不要调用或覆盖。要实现特定的编辑器,创建一个自定义<code> ComboBoxEditor </code>
+     * 
+     * 
      * @see #createEditor
      * @see javax.swing.JComboBox#setEditor
      * @see javax.swing.ComboBoxEditor
@@ -746,6 +906,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This public method is implementation specific and should be private.
      * do not call or override.
      *
+     * <p>
+     *  这个公共方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
+     * 
      * @see #addEditor
      */
     public void removeEditor() {
@@ -760,6 +924,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This protected method is implementation specific and should be private.
      * do not call or override.
      *
+     * <p>
+     *  这种受保护的方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
+     * 
      * @see #addEditor
      */
     protected void configureEditor() {
@@ -793,6 +961,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This protected method is implementation specific and should be private.
      * Do not call or override.
      *
+     * <p>
+     *  这种受保护的方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
+     * 
      * @see #addEditor
      */
     protected void unconfigureEditor() {
@@ -809,6 +981,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This public method is implementation specific and should be private. Do
      * not call or override.
      *
+     * <p>
+     *  这个公共方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
+     * 
      * @see #createArrowButton
      */
     public void configureArrowButton() {
@@ -828,6 +1004,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * This public method is implementation specific and should be private. Do
      * not call or override.
      *
+     * <p>
+     *  这个公共方法是实现特定的,应该是私有的。不要调用或覆盖。
+     * 
+     * 
      * @see #createArrowButton
      */
     public void unconfigureArrowButton() {
@@ -841,6 +1021,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Creates a button which will be used as the control to show or hide
      * the popup portion of the combo box.
      *
+     * <p>
+     * 创建一个按钮,将用作控件来显示或隐藏组合框的弹出部分。
+     * 
+     * 
      * @return a button which represents the popup control
      */
     protected JButton createArrowButton() {
@@ -864,6 +1048,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Tells if the popup is visible or not.
+     * <p>
+     *  告诉弹出窗口是否可见。
+     * 
      */
     public boolean isPopupVisible( JComboBox c ) {
         return popup.isVisible();
@@ -871,6 +1058,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Hides the popup.
+     * <p>
+     *  隐藏弹出窗口。
+     * 
      */
     public void setPopupVisible( JComboBox c, boolean v ) {
         if ( v ) {
@@ -883,6 +1073,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Determines if the JComboBox is focus traversable.  If the JComboBox is editable
      * this returns false, otherwise it returns true.
+     * <p>
+     *  确定JComboBox是否可遍历焦点。如果JComboBox是可编辑的,则返回false,否则返回true。
+     * 
      */
     public boolean isFocusTraversable( JComboBox c ) {
         return !comboBox.isEditable();
@@ -912,6 +1105,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * The minimum size is the size of the display area plus insets plus the button.
+     * <p>
+     *  最小尺寸是显示区域的尺寸加上插图加上按钮。
+     * 
      */
     @Override
     public Dimension getMinimumSize( JComponent c ) {
@@ -941,6 +1137,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -999,6 +1199,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -1087,6 +1291,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * navigation.  This is used for optimizing key input by only passing non-
      * navigation keys to the type-ahead mechanism.  Subclasses should override this
      * if they change the navigation keys.
+     * <p>
+     *  返回提供的keyCode是否映射到用于导航的键。这用于通过仅将非导航键传递到类型提前机制来优化键输入。如果子类更改导航键,则子类应覆盖此。
+     * 
      */
     protected boolean isNavigationKey( int keyCode ) {
         return keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN ||
@@ -1106,6 +1313,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Selects the next item in the list.  It won't change the selection if the
      * currently selected item is already the last item.
+     * <p>
+     *  选择列表中的下一个项目。如果当前选择的项目已经是最后一个项目,它不会更改选择。
+     * 
      */
     protected void selectNextPossibleValue() {
         int si;
@@ -1132,6 +1342,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Selects the previous item in the list.  It won't change the selection if the
      * currently selected item is already the first item.
+     * <p>
+     *  选择列表中的上一个项目。如果当前选择的项目已经是第一个项目,它不会改变选择。
+     * 
      */
     protected void selectPreviousPossibleValue() {
         int si;
@@ -1157,6 +1370,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Hides the popup if it is showing and shows the popup if it is hidden.
+     * <p>
+     *  隐藏弹出窗口(如果显示),并显示弹出窗口(如果它是隐藏的)。
+     * 
      */
     protected void toggleOpenClose() {
         setPopupVisible(comboBox, !isPopupVisible(comboBox));
@@ -1164,6 +1380,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Returns the area that is reserved for drawing the currently selected item.
+     * <p>
+     *  返回为绘制当前选定项目而保留的区域。
+     * 
      */
     protected Rectangle rectangleForCurrentValue() {
         int width = comboBox.getWidth();
@@ -1187,6 +1406,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Gets the insets from the JComboBox.
+     * <p>
+     *  从JComboBox获取插图。
+     * 
      */
     protected Insets getInsets() {
         return comboBox.getInsets();
@@ -1203,6 +1425,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Paints the currently selected item.
+     * <p>
+     *  绘制当前选定的项目。
+     * 
      */
     public void paintCurrentValue(Graphics g,Rectangle bounds,boolean hasFocus) {
         ListCellRenderer renderer = comboBox.getRenderer();
@@ -1260,6 +1485,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Paints the background of the currently selected item.
+     * <p>
+     *  绘制当前选定项目的背景。
+     * 
      */
     public void paintCurrentValueBackground(Graphics g,Rectangle bounds,boolean hasFocus) {
         Color t = g.getColor();
@@ -1275,6 +1503,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Repaint the currently selected item.
+     * <p>
+     *  重新绘制当前选定的项目。
+     * 
      */
     void repaintCurrentValue() {
         Rectangle r = rectangleForCurrentValue();
@@ -1294,6 +1525,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * Return the default size of an empty display area of the combo box using
      * the current renderer and font.
      *
+     * <p>
+     *  使用当前渲染器和字体返回组合框的空显示区域的默认大小。
+     * 
+     * 
      * @return the size of an empty display area
      * @see #getDisplaySize
      */
@@ -1313,6 +1548,12 @@ public class BasicComboBoxUI extends ComboBoxUI {
      * use a prototype display value to significantly speed up the display
      * size calculation.
      *
+     * <p>
+     * 返回计算出的显示区域大小。显示区域是组合框的显示所选项目的部分。如果已经设置,此方法将使用原型显示值。
+     * <p>
+     *  对于具有非常多项目的组合框,建议使用原型显示值来显着加快显示大小计算。
+     * 
+     * 
      * @return the size of the display area calculated from the combo box items
      * @see javax.swing.JComboBox#setPrototypeDisplayValue
      */
@@ -1399,6 +1640,10 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Returns the size a component would have if used as a cell renderer.
      *
+     * <p>
+     *  返回组件用作单元格渲染器时将具有的大小。
+     * 
+     * 
      * @param comp a {@code Component} to check
      * @return size of the component
      * @since 1.7
@@ -1428,6 +1673,9 @@ public class BasicComboBoxUI extends ComboBoxUI {
     /**
      * Adds keyboard actions to the JComboBox.  Actions on enter and esc are already
      * supplied.  Add more actions as you need them.
+     * <p>
+     *  将键盘操作添加到JComboBox。已提供输入和esc操作。根据需要添加更多操作。
+     * 
      */
     protected void installKeyboardActions() {
         InputMap km = getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
@@ -1453,6 +1701,8 @@ public class BasicComboBoxUI extends ComboBoxUI {
 
     /**
      * Removes the focus InputMap and ActionMap.
+     * <p>
+     *  删除焦点InputMap和ActionMap。
      */
     protected void uninstallKeyboardActions() {
         SwingUtilities.replaceUIInputMap(comboBox, JComponent.

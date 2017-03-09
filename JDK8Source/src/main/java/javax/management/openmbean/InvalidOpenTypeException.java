@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ package javax.management.openmbean;
  * is not the one expected.
  *
  *
+ * <p>
+ *  抛出此运行时异常以指示<i>打开数据</i>值的<i>打开类型</i>不是预期值。
+ * 
+ * 
  * @since 1.5
  */
 public class InvalidOpenTypeException extends IllegalArgumentException {
@@ -44,6 +49,9 @@ public class InvalidOpenTypeException extends IllegalArgumentException {
     /**
      * An InvalidOpenTypeException with a detail message.
      *
+     * <p>
+     *  带有详细消息的InvalidOpenTypeException。
+     * 
      * @param msg the detail message.
      */
     public InvalidOpenTypeException(String msg) {

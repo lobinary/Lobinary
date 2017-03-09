@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,28 @@ import javax.sql.rowset.*;
  * condition causing the exception.  The inherited method <code>getMessage</code> may be
  * called to retrieve the description if there is one.
  *
+ * <p>
+ *  表示<code> SyncProvider </code>机制的错误。如果在读取或写入源数据源时遇到违例,则此异常由<code> SyncProvider </code>抽象类扩展创建。
+ * <P>
+ *  如果实现这样做,<code> SyncProvider </code>对象也可以创建一个<code> SyncResolver </code>对象,并在构建时初始化<code> SyncProvide
+ * rException </code>稍后用<code> SyncProvider </code>对象设置它。
+ * <P>
+ *  方法<code> acceptChanges </code>将在写入程序完成检查冲突并发现一个或多个冲突后抛出此异常。
+ * 应用程序可以捕获<code> SyncProviderException </code>对象并调用其<code> getSyncResolver </code>方法以获取其<code> SyncReso
+ * lver </code>对象。
+ *  方法<code> acceptChanges </code>将在写入程序完成检查冲突并发现一个或多个冲突后抛出此异常。
+ * 有关示例,请参见<a href="SyncResolver.html">界面注释中的代码片段<a href="SyncResolver.html"> <code> SyncResolver </code>
+ *  </a>。
+ *  方法<code> acceptChanges </code>将在写入程序完成检查冲突并发现一个或多个冲突后抛出此异常。
+ * 这个<code> SyncResolver </code>对象将镜像生成异常的<code> RowSet </code>对象,除了它将只包含来自数据源中冲突的值。
+ *  <code> SyncResolver </code>对象中的所有其他值将为<code> null </code>。
+ * <P>
+ * <code> SyncResolver </code>对象可用于检查和解决行中的每个冲突,然后转到具有冲突的下一行以重复此过程。
+ * <P>
+ *  <code> SyncProviderException </code>对象可能包含或可能不包含导致异常的条件的描述。
+ * 可以调用继承的方法<code> getMessage </code>来检索描述(如果有的话)。
+ * 
+ * 
  * @author Jonathan Bruce
  * @see javax.sql.rowset.spi.SyncFactory
  * @see javax.sql.rowset.spi.SyncResolver
@@ -68,11 +91,18 @@ public class SyncProviderException extends java.sql.SQLException {
      * The instance of <code>javax.sql.rowset.spi.SyncResolver</code> that
      * this <code>SyncProviderException</code> object will return when its
      * <code>getSyncResolver</code> method is called.
+     * <p>
+     *  <code> javax.sql.rowset.spi.SyncResolver </code>的实例,当<code> SyncProviderException </code>对象在调用<code>
+     *  getSyncResolver </code>方法时会返回。
+     * 
      */
      private SyncResolver syncResolver = null;
 
     /**
      * Creates a new <code>SyncProviderException</code> object without a detail message.
+     * <p>
+     *  创建一个新的<code> SyncProviderException </code>对象,不包含详细信息。
+     * 
      */
     public SyncProviderException() {
         super();
@@ -82,6 +112,10 @@ public class SyncProviderException extends java.sql.SQLException {
      * Constructs a <code>SyncProviderException</code> object with the specified
      * detail message.
      *
+     * <p>
+     *  构造具有指定详细消息的<code> SyncProviderException </code>对象。
+     * 
+     * 
      * @param msg the detail message
      */
     public SyncProviderException(String msg)  {
@@ -92,6 +126,10 @@ public class SyncProviderException extends java.sql.SQLException {
      * Constructs a <code>SyncProviderException</code> object with the specified
      * <code>SyncResolver</code> instance.
      *
+     * <p>
+     *  使用指定的<code> SyncResolver </code>实例构造一个<code> SyncProviderException </code>对象。
+     * 
+     * 
      * @param syncResolver the <code>SyncResolver</code> instance used to
      *     to process the synchronization conflicts
      * @throws IllegalArgumentException if the <code>SyncResolver</code> object
@@ -117,6 +155,14 @@ public class SyncProviderException extends java.sql.SQLException {
      * with which to resolve the conflict or conflicts that caused the
      * exception to be thrown.
      *
+     * <p>
+     *  检索已为此<code> SyncProviderException </code>对象设置的<code> SyncResolver </code>对象,如果没有设置,则包含在默认<code> Sync
+     * Resolver </code>参考实现。
+     * <P>
+     *  如果抛出一个<code> SyncProviderException </code>对象,应用程序可以使用此方法来生成一个<code> SyncResolver </code>对象,用于解决导致异常抛
+     * 出的冲突或冲突。
+     * 
+     * 
      * @return the <code>SyncResolver</code> object set for this
      *     <code>SyncProviderException</code> object or, if none has
      *     been set, an instance of the default <code>SyncResolver</code>
@@ -144,6 +190,8 @@ public class SyncProviderException extends java.sql.SQLException {
      * <code>getSyncResolver</code> will return the default reference
      * implementation of the <code>SyncResolver</code> interface.
      *
+     * <p>
+     * 
      * @param syncResolver the <code>SyncResolver</code> object to be set;
      *     cannot be <code>null</code>
      * @throws IllegalArgumentException if the <code>SyncResolver</code> object

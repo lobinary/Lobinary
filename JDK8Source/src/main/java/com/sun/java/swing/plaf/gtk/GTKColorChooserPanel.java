@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import javax.swing.plaf.*;
  * A color chooser panel mimicking that of GTK's: a color wheel showing
  * hue and a triangle that varies saturation and brightness.
  *
+ * <p>
+ *  模拟GTK的颜色选择器面板：显示色调的色轮和变化饱和度和亮度的三角形。
+ * 
+ * 
  * @author Scott Violet
  */
 class GTKColorChooserPanel extends AbstractColorChooserPanel implements
@@ -68,6 +73,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Convenience method to transfer focus to the next child of component.
+     * <p>
+     *  方便的方法将焦点转移到组件的下一个子节点。
+     * 
      */
     // PENDING: remove this when a variant of this is added to awt.
     static void compositeRequestFocus(Component component, boolean direction) {
@@ -106,6 +114,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Returns a user presentable description of this GTKColorChooserPane.
+     * <p>
+     *  返回此GTKColorChooserPane的用户可呈现的描述。
+     * 
      */
     public String getDisplayName() {
         return (String)UIManager.get("GTKColorChooserPanel.nameText");
@@ -113,6 +124,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Returns the mnemonic to use with <code>getDisplayName</code>.
+     * <p>
+     *  返回与<code> getDisplayName </code>一起使用的助记符。
+     * 
      */
     public int getMnemonic() {
         String m = (String)UIManager.get("GTKColorChooserPanel.mnemonic");
@@ -129,6 +143,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Character to underline that represents the mnemonic.
+     * <p>
+     *  下划线代表助记符的字符。
+     * 
      */
     public int getDisplayedMnemonicIndex() {
         String m = (String)UIManager.get(
@@ -159,6 +176,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Builds and configures the widgets for the GTKColorChooserPanel.
+     * <p>
+     *  构建和配置GTKColorChooserPanel的小部件。
+     * 
      */
     protected void buildChooser() {
         triangle = new ColorTriangle();
@@ -233,6 +253,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Configures the spinner.
+     * <p>
+     *  配置微调器。
+     * 
      */
     private void configureSpinner(JSpinner spinner, String name) {
         spinner.addChangeListener(this);
@@ -248,6 +271,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Adds the widget creating a JLabel with the specified name.
+     * <p>
+     *  添加创建具有指定名称的JLabel的窗口小部件。
+     * 
      */
     private void add(Container parent, String key, JComponent widget,
                      int x, int y) {
@@ -291,6 +317,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Refreshes the display from the model.
+     * <p>
+     *  从模型刷新显示。
+     * 
      */
     public void updateChooser() {
         if (!settingColor) {
@@ -301,6 +330,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Resets the red component of the selected color.
+     * <p>
+     *  重置所选颜色的红色分量。
+     * 
      */
     private void setRed(int red) {
         setRGB(red << 16 | getColor().getGreen() << 8 | getColor().getBlue());
@@ -308,6 +340,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Resets the green component of the selected color.
+     * <p>
+     *  重置所选颜色的绿色分量。
+     * 
      */
     private void setGreen(int green) {
         setRGB(getColor().getRed() << 16 | green << 8 | getColor().getBlue());
@@ -315,6 +350,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Resets the blue component of the selected color.
+     * <p>
+     *  重置所选颜色的蓝色分量。
+     * 
      */
     private void setBlue(int blue) {
         setRGB(getColor().getRed() << 16 | getColor().getGreen() << 8 | blue);
@@ -323,6 +361,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
     /**
      * Sets the hue of the selected color and updates the display if
      * necessary.
+     * <p>
+     *  设置所选颜色的色调,必要时更新显示。
+     * 
      */
     private void setHue(float hue, boolean update) {
         setHSB(hue, saturation, brightness);
@@ -335,6 +376,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Returns the current amount of hue.
+     * <p>
+     *  返回当前的色相量。
+     * 
      */
     private float getHue() {
         return hue;
@@ -342,6 +386,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Resets the saturation.
+     * <p>
+     *  重置饱和度。
+     * 
      */
     private void setSaturation(float saturation) {
         setHSB(hue, saturation, brightness);
@@ -349,6 +396,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Returns the saturation.
+     * <p>
+     *  返回饱和度。
+     * 
      */
     private float getSaturation() {
         return saturation;
@@ -356,6 +406,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Sets the brightness.
+     * <p>
+     *  设置亮度。
+     * 
      */
     private void setBrightness(float brightness) {
         setHSB(hue, saturation, brightness);
@@ -363,6 +416,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Returns the brightness.
+     * <p>
+     *  返回亮度。
+     * 
      */
     private float getBrightness() {
         return brightness;
@@ -371,6 +427,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
     /**
      * Sets the saturation and brightness and updates the display if
      * necessary.
+     * <p>
+     *  设置饱和度和亮度,并在必要时更新显示。
+     * 
      */
     private void setSaturationAndBrightness(float s, float b, boolean update) {
         setHSB(hue, s, b);
@@ -384,6 +443,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Resets the rgb values.
+     * <p>
+     *  重置rgb值。
+     * 
      */
     private void setRGB(int rgb) {
         Color color = new Color(rgb);
@@ -399,6 +461,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Resets the hsb values.
+     * <p>
+     *  重置hsb值。
+     * 
      */
     private void setHSB(float h, float s, float b) {
         Color color = Color.getHSBColor(h, s, b);
@@ -419,6 +484,10 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
     /**
      * Rests the color.
      *
+     * <p>
+     *  保留颜色。
+     * 
+     * 
      * @param color new Color
      * @param updateSpinners whether or not to update the spinners.
      * @param updateHSB if true, the hsb fields are updated based on the
@@ -474,6 +543,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * ChangeListener method, updates the necessary display widgets.
+     * <p>
+     *  ChangeListener方法,更新必要的显示小部件。
+     * 
      */
     public void stateChanged(ChangeEvent e) {
         if (settingColor) {
@@ -508,60 +580,99 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
     /**
      * Flag indicating the angle, or hue, has changed and the triangle
      * needs to be recreated.
+     * <p>
+     *  指示角度或色调的标志已更改,需要重新创建三角形。
+     * 
      */
     private static final int FLAGS_CHANGED_ANGLE = 1 << 0;
     /**
      * Indicates the wheel is being dragged.
+     * <p>
+     *  表示正在拖动滚轮。
+     * 
      */
     private static final int FLAGS_DRAGGING = 1 << 1;
     /**
      * Indicates the triangle is being dragged.
+     * <p>
+     *  表示正在拖动三角形。
+     * 
      */
     private static final int FLAGS_DRAGGING_TRIANGLE = 1 << 2;
     /**
      * Indicates a color is being set and we should ignore setColor
+     * <p>
+     * 表示正在设置颜色,我们应该忽略setColor
+     * 
      */
     private static final int FLAGS_SETTING_COLOR = 1 << 3;
     /**
      * Indicates the wheel has focus.
+     * <p>
+     *  表示车轮有焦点。
+     * 
      */
     private static final int FLAGS_FOCUSED_WHEEL = 1 << 4;
     /**
      * Indicates the triangle has focus.
+     * <p>
+     *  表示三角形有焦点。
+     * 
      */
     private static final int FLAGS_FOCUSED_TRIANGLE = 1 << 5;
 
 
     /**
      * Class responsible for rendering a color wheel and color triangle.
+     * <p>
+     *  类负责渲染色轮和颜色三角形。
+     * 
      */
     private class ColorTriangle extends JPanel {
         /**
          * Cached image of the wheel.
+         * <p>
+         *  车轮的缓存图像。
+         * 
          */
         private Image wheelImage;
 
         /**
          * Cached image of the triangle.
+         * <p>
+         *  三角形的缓存图像。
+         * 
          */
         private Image triangleImage;
 
         /**
          * Angle triangle is rotated by.
+         * <p>
+         *  角三角形旋转。
+         * 
          */
         private double angle;
 
         /**
          * Boolean bitmask.
+         * <p>
+         *  布尔位掩码。
+         * 
          */
         private int flags;
 
         /**
          * X location of selected color indicator.
+         * <p>
+         *  X所选颜色指示灯的位置。
+         * 
          */
         private int circleX;
         /**
          * Y location of selected color indicator.
+         * <p>
+         *  Y所选颜色指示器的位置。
+         * 
          */
         private int circleY;
 
@@ -612,6 +723,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the GTKColorChooserPanel.
+         * <p>
+         *  返回GTKColorChooserPanel。
+         * 
          */
         GTKColorChooserPanel getGTKColorChooserPanel() {
             return GTKColorChooserPanel.this;
@@ -619,6 +733,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Gives focus to the wheel.
+         * <p>
+         *  给予焦点的轮子。
+         * 
          */
         void focusWheel() {
             setFocusType(1);
@@ -626,6 +743,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Gives focus to the triangle.
+         * <p>
+         *  给三角形的焦点。
+         * 
          */
         void focusTriangle() {
             setFocusType(2);
@@ -633,6 +753,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns true if the wheel currently has focus.
+         * <p>
+         *  如果滚轮当前具有焦点,则返回true。
+         * 
          */
         boolean isWheelFocused() {
             return isSet(FLAGS_FOCUSED_WHEEL);
@@ -640,6 +763,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Resets the selected color.
+         * <p>
+         *  重置所选颜色。
+         * 
          */
         public void setColor(float h, float s, float b) {
             if (isSet(FLAGS_SETTING_COLOR)) {
@@ -652,6 +778,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the selected color.
+         * <p>
+         *  返回所选颜色。
+         * 
          */
         public Color getColor() {
             return GTKColorChooserPanel.this.getColor();
@@ -659,6 +788,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the x location of the selected color indicator.
+         * <p>
+         *  返回所选颜色指示器的x位置。
+         * 
          */
         int getColorX() {
             return circleX + getIndicatorSize() / 2 - getWheelXOrigin();
@@ -666,6 +798,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the y location of the selected color indicator.
+         * <p>
+         *  返回所选颜色指示器的y位置。
+         * 
          */
         int getColorY() {
             return circleY + getIndicatorSize() / 2 - getWheelYOrigin();
@@ -780,6 +915,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns an image representing the triangle and wheel.
+         * <p>
+         *  返回表示三角形和滚轮的图像。
+         * 
          */
         private Image getImage(int size) {
             if (!isSet(FLAGS_CHANGED_ANGLE) && wheelImage != null &&
@@ -850,6 +988,10 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
         /**
          * Returns a color wheel image for the specified size.
          *
+         * <p>
+         *  返回指定大小的色轮图像。
+         * 
+         * 
          * @param size Integer giving size of color wheel.
          * @return Color wheel image
          */
@@ -880,6 +1022,10 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
          * <code>y</code> give the location to adjust to and are relative
          * to the origin of the wheel/triangle.
          *
+         * <p>
+         *  调整饱和度和亮度。 <code> x </code>和<code> y </code>给予位置以适应和相对于轮/三角形的原点。
+         * 
+         * 
          * @param x X coordinate on the triangle to adjust to
          * @param y Y coordinate on the triangle to adjust to
          * @param checkLoc if true the location is checked to make sure
@@ -957,6 +1103,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Sets the saturation and brightness.
+         * <p>
+         *  设置饱和度和亮度。
+         * 
          */
         private void setSaturationAndBrightness(float s, float b) {
             int innerR = getTriangleCircumscribedRadius();
@@ -978,6 +1127,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Sets the saturation and brightness.
+         * <p>
+         *  设置饱和度和亮度。
+         * 
          */
         private void setSaturationAndBrightness(float s, float b,
                                              int newCircleX, int newCircleY) {
@@ -997,6 +1149,10 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
         /**
          * Adjusts the hue based on the passed in location.
          *
+         * <p>
+         *  根据传入的位置调整色调。
+         * 
+         * 
          * @param x X location to adjust to, relative to the origin of the
          *        wheel
          * @param y Y location to adjust to, relative to the origin of the
@@ -1042,6 +1198,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Rotates the triangle to accommodate the passed in hue.
+         * <p>
+         *  旋转三角形以适应传递的色相。
+         * 
          */
         private void setAngleFromHue(float hue) {
             setHueAngle((1.0 - hue) * Math.PI * 2);
@@ -1049,6 +1208,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Sets the angle representing the hue.
+         * <p>
+         *  设置表示色相的角度。
+         * 
          */
         private void setHueAngle(double angle) {
             double oldAngle = this.angle;
@@ -1062,6 +1224,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the size of the color indicator.
+         * <p>
+         *  返回颜色指示器的大小。
+         * 
          */
         private int getIndicatorSize() {
             return 8;
@@ -1069,6 +1234,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the circumscribed radius of the triangle.
+         * <p>
+         *  返回三角形的外接半径。
+         * 
          */
         private int getTriangleCircumscribedRadius() {
             return 72;
@@ -1076,6 +1244,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the x origin of the wheel and triangle.
+         * <p>
+         *  返回车轮和三角形的x原点。
+         * 
          */
         private int getWheelXOrigin() {
             return 85;
@@ -1083,6 +1254,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns y origin of the wheel and triangle.
+         * <p>
+         *  返回车轮和三角形的y原点。
+         * 
          */
         private int getWheelYOrigin() {
             return 85;
@@ -1090,6 +1264,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the width of the wheel.
+         * <p>
+         *  返回滚轮的宽度。
+         * 
          */
         private int getWheelWidth() {
             return 13;
@@ -1097,6 +1274,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Sets the focus to one of: 0 no one, 1 the wheel or 2 the triangle.
+         * <p>
+         *  将焦点设置为以下之一：0没有人,1轮或2三角形。
+         * 
          */
         private void setFocusType(int type) {
             if (type == 0) {
@@ -1122,6 +1302,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns the radius of the wheel.
+         * <p>
+         * 返回车轮的半径。
+         * 
          */
         private int getWheelRadius() {
             // As far as I can tell, GTK doesn't allow stretching this
@@ -1131,6 +1314,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Updates the flags bitmask.
+         * <p>
+         *  更新标志位掩码。
+         * 
          */
         private void setFlag(int flag, boolean value) {
             if (value) {
@@ -1143,6 +1329,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Returns true if a particular flag has been set.
+         * <p>
+         *  如果已设置特定标志,则返回true。
+         * 
          */
         private boolean isSet(int flag) {
             return ((flags & flag) == flag);
@@ -1153,6 +1342,10 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
          * passed in point must be on the color wheel and be relative to the
          * origin of the color wheel.
          *
+         * <p>
+         *  返回要用于指定位置的RGB颜色。传入的点必须在色轮上,并且相对于色轮的原点。
+         * 
+         * 
          * @param x X location to get color for
          * @param y Y location to get color for
          * @param rad Radius from center of color wheel
@@ -1205,6 +1398,9 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
         /**
          * Increments the hue.
+         * <p>
+         *  增加色调。
+         * 
          */
         void incrementHue(boolean positive) {
             float hue = triangle.getGTKColorChooserPanel().getHue();
@@ -1228,6 +1424,8 @@ class GTKColorChooserPanel extends AbstractColorChooserPanel implements
 
     /**
      * Action class used for colors.
+     * <p>
+     *  Action类用于颜色。
      */
     private static class ColorAction extends AbstractAction {
         private int type;

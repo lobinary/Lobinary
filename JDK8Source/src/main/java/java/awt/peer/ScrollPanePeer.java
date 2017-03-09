@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,12 +37,21 @@ import java.awt.ScrollPaneAdjustable;
  * developers, and developers should not implement peers
  * nor invoke any of the peer methods directly on the peer
  * instances.
+ * <p>
+ *  {@link ScrollPane}的对等接口。
+ * 
+ *  对等接口仅用于移植AWT。它们不是供应用程序开发人员使用的,并且开发人员不应实现对等体,也不应直接在对等实例上调用任何对等方法。
+ * 
  */
 public interface ScrollPanePeer extends ContainerPeer {
 
     /**
      * Returns the height of the horizontal scroll bar.
      *
+     * <p>
+     *  返回水平滚动条的高度。
+     * 
+     * 
      * @return the height of the horizontal scroll bar
      *
      * @see ScrollPane#getHScrollbarHeight()
@@ -51,6 +61,10 @@ public interface ScrollPanePeer extends ContainerPeer {
     /**
      * Returns the width of the vertical scroll bar.
      *
+     * <p>
+     *  返回垂直滚动条的宽度。
+     * 
+     * 
      * @return the width of the vertical scroll bar
      *
      * @see ScrollPane#getVScrollbarWidth()
@@ -60,6 +74,10 @@ public interface ScrollPanePeer extends ContainerPeer {
     /**
      * Sets the scroll position of the child.
      *
+     * <p>
+     *  设置子项的滚动位置。
+     * 
+     * 
      * @param x the X coordinate of the scroll position
      * @param y the Y coordinate of the scroll position
      *
@@ -70,6 +88,10 @@ public interface ScrollPanePeer extends ContainerPeer {
     /**
      * Called when the child component changes its size.
      *
+     * <p>
+     *  当子组件更改其大小时调用。
+     * 
+     * 
      * @param w the new width of the child component
      * @param h the new height of the child component
      *
@@ -80,6 +102,10 @@ public interface ScrollPanePeer extends ContainerPeer {
     /**
      * Sets the unit increment of one of the scroll pane's adjustables.
      *
+     * <p>
+     *  设置滚动窗格的可调整项之一的单位增量。
+     * 
+     * 
      * @param adj the scroll pane adjustable object
      * @param u the unit increment
      *
@@ -90,6 +116,9 @@ public interface ScrollPanePeer extends ContainerPeer {
     /**
      * Sets the value for one of the scroll pane's adjustables.
      *
+     * <p>
+     *  设置滚动窗格的可调整值之一的值。
+     * 
      * @param adj the scroll pane adjustable object
      * @param v the value to set
      */

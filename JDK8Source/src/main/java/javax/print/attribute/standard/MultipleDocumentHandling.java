@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -155,6 +156,62 @@ import javax.print.attribute.PrintJobAttribute;
  * returns the IPP string representation of the attribute value.
  * <P>
  *
+ * <p>
+ *  Class MultipleDocumentHandling是一个打印属性类,枚举,它控制完成操作以及一个或多个打印流页面在打印和介质页面上的放置。
+ * 当{@link Copies Copies}属性的值超过1时,MultipleDocumentHandling还控制生成处理文档的副本的顺序。此属性仅适用于由两个或多个单独文档组成的多标识打印作业。
+ * <P>
+ *  简而言之,MultipleDocumentHandling确定馈送到多点打印作业的多个输入(电子)文档与由多点打印作业生成的输出(物理)文档或多个文档之间的关系。有两种可能性：
+ * <UL>
+ * <LI>
+ *  多个输入文档组合成单个输出文档。完成操作({@link Finishings Finishings})将在此单个输出文档上执行。
+ *  {@link Copies Copies}属性指示要生成的单个输出文档的副本数。
+ *  MultipleDocumentHandling值SINGLE_DOCUMENT和SINGLE_DOCUMENT_NEW_SHEET指定了这种可能性的两种变体。
+ * <P>
+ * <LI>
+ * 多个输入文档仍然是单独的输出文档。分别对每个输出文档执行整理操作({@link Finishings Finishings})。
+ *  {@link Copies Copies}属性指示要生成的每个单独输出文档的副本数。
+ *  MultipleDocumentHandling值SEPARATE_DOCUMENTS_UNCOLLATED_COPIES和SEPARATE_DOCUMENTS_COLLATED_COPIES指定了此
+ * 可能性的两种变体。
+ *  {@link Copies Copies}属性指示要生成的每个单独输出文档的副本数。
+ * </UL>
+ * <P>
+ *  在下面的详细解释中,如果"<CODE> a </CODE>"表示文档数据的实例,则处理文档"<CODE> a </CODE>"中的数据的结果是所表示的一系列介质页由"<CODE> a(*)</CODE>
+ * "。
+ * <P>
+ *  标准MultipleDocumentHandling值是：
+ * <UL>
+ * <LI>
+ * <A NAME="sdfi"> {@link #SINGLE_DOCUMENT <B> SINGLE_DOCUMENT </B>} </A>。
+ * 如果打印作业有多个文档 - 例如,文档数据称为<CODE> a </CODE>和<CODE> b </CODE>  - 处理所有文档数据的结果(<CODE> / CODE>,然后<CODE> b </CODE>
+ * )必须视为完成操作的单个介质页序列;也就是说,将对序列<CODE> a(*),b(*)</CODE>的连接执行整理。
+ * <A NAME="sdfi"> {@link #SINGLE_DOCUMENT <B> SINGLE_DOCUMENT </B>} </A>。
+ * 打印机不得强制将每个文档实例中的数据格式化到新的打印流页面上,也不得在新的介质页上开始新的印象。
+ * 如果进行多于一个复制,则由处理文档数据产生的介质页集合的排序必须是<CODE> a(*),b(*),a(*),b(*),... </CODE>,打印机对象必须强制每个副本(<CODE> a(*),b(*
+ * )</CODE>。
+ * 打印机不得强制将每个文档实例中的数据格式化到新的打印流页面上,也不得在新的介质页上开始新的印象。
+ * <P>
+ * <LI>
+ * <A NAME="sducfi"> {@link #SEPARATE_DOCUMENTS_UNCOLLATED_COPIES <B> SEPARATE_DOCUMENTS_UNCOLLATED_COPIES </B>}
+ *  </A>。
+ * 如果打印作业有多个文档 - 例如,文档数据称为<CODE> a </CODE>和<CODE> b </CODE>,则处理每个文档实例中的数据的结果必须视为用于精加工操作的单个介质片材序列;也就是说,<CODE>
+ *  a(*)</CODE>和<CODE> b(*)</CODE>打印机必须强制处理单个文档中的数据的每个副本以在新的介质页上开始。
+ * 如果进行多于一个复制,则由处理文档数据产生的介质页集合的排序必须是<CODE> a(*),a(*),...,b(*),b(*) ... </CODE>。
+ * <P>
+ * <LI>
+ *  <A NAME="sdccfi"> {@link #SEPARATE_DOCUMENTS_COLLATED_COPIES <B> SEPARATE_DOCUMENTS_COLLATED_COPIES </B>}
+ *  </A>。
+ * 如果打印作业有多个文档 - 例如,文档数据称为<CODE> a </CODE>和<CODE> b </CODE>,则处理每个文档实例中的数据的结果必须视为用于精加工操作的单个介质片材序列;也就是说,<CODE>
+ *  a(*)</CODE>和<CODE> b(*)</CODE>打印机必须强制处理单个文档中的数据的每个副本以在新的介质页上开始。
+ * 如果进行多于一个复制,则由处理文档数据产生的介质页集合的排序必须是<CODE> a(*),b(*),a(*),b(*),... </CODE>。
+ * <P>
+ * <LI>
+ * <A NAME="sdnsfi"> {@link #SINGLE_DOCUMENT_NEW_SHEET <B> SINGLE_DOCUMENT_NEW_SHEET </B>} </A>。
+ * 与SINGLE_DOCUMENT相同,但打印机必须确保作业中每个文档实例的第一个印象放在新的媒体工作表上。此值允许使用单个订书钉装订多个文档,其中每个文档在新工作表上开始。
+ * </UL>
+ * <P>
+ *  SINGLE_DOCUMENT与SEPARATE_DOCUMENTS_COLLATED_COPIES相同,关于打印流页面的排序,而不是介质页面生成,因为如果生成了奇数页面,SINGLE_DOCUMEN
+ * T会将下一个文档的第一页放在页面的背面。
+ * 
  * @see  Copies
  * @see  Finishings
  * @see  NumberUp
@@ -174,6 +231,29 @@ public class MultipleDocumentHandling extends EnumSyntax
     /**
      * Single document -- see above for <A HREF="#sdfi">further
      * information</A>.
+     * <p>
+     * 远处的工作,而SEPARATE_DOCUMENTS_COLLATED_COPIES总是强制下一个文档或文档副本到一个新工作表。
+     * <P>
+     *  此外,如果指定{@link Finishings#STAPLE STAPLE}的{@link Finishings Finishings}属性,则：
+     * <UL>
+     * <LI>
+     *  使用SINGLE_DOCUMENT,将<CODE> a </CODE>和<CODE> b </CODE>文档作为单个文档装订在一起,而不考虑新工作表。
+     * <P>
+     * <LI>
+     *  使用SINGLE_DOCUMENT_NEW_SHEET,文档<CODE> a </CODE>和<CODE> b </CODE>作为单个文档装订在一起,但文档<CODE> b </CODE>
+     * <P>
+     * <LI>
+     *  使用SEPARATE_DOCUMENTS_UNCOLLATED_COPIES和SEPARATE_DOCUMENTS_COLLATED_COPIES,文档<CODE> a </CODE>和<CODE> 
+     * b </CODE>将分开装订。
+     * </UL>
+     * <P>
+     * <I>注意：</I>这些值都不提供在文档中产生未分页的方法,即在第<I> n </I>页之前生成多个副本</n> +1的同一文档。
+     * 要指定,请参阅{@link SheetCollat​​e SheetCollat​​e}属性。
+     * <P>
+     *  <B> IPP兼容性：</B> <CODE> getName()</CODE>返回的类别名称是IPP属性名称。枚举的整数值是IPP枚举值。
+     *  <code> toString()</code>方法返回属性值的IPP字符串表示形式。
+     * <P>
+     * 
      */
     public static final MultipleDocumentHandling
         SINGLE_DOCUMENT = new MultipleDocumentHandling (0);
@@ -181,6 +261,9 @@ public class MultipleDocumentHandling extends EnumSyntax
     /**
      * Separate documents uncollated copies -- see above for
      * <A HREF="#sducfi">further information</A>.
+     * <p>
+     *  单一文件 - 请参阅上面的<A HREF="#sdfi">进一步资讯</A>。
+     * 
      */
     public static final MultipleDocumentHandling
        SEPARATE_DOCUMENTS_UNCOLLATED_COPIES = new MultipleDocumentHandling (1);
@@ -188,6 +271,9 @@ public class MultipleDocumentHandling extends EnumSyntax
     /**
      * Separate documents collated copies -- see above for
      * <A HREF="#sdccfi">further information</A>.
+     * <p>
+     *  单独的文档未分页副本 - 请参阅上面的<A HREF="#sducfi">进一步信息</A>。
+     * 
      */
     public static final MultipleDocumentHandling
         SEPARATE_DOCUMENTS_COLLATED_COPIES = new MultipleDocumentHandling (2);
@@ -195,6 +281,9 @@ public class MultipleDocumentHandling extends EnumSyntax
     /**
      * Single document new sheet -- see above for
      * <A HREF="#sdnsfi">further information</A>.
+     * <p>
+     *  单独的文档整理副本 - 请参阅上面的<A HREF="#sdccfi">进一步信息</A>。
+     * 
      */
     public static final MultipleDocumentHandling
         SINGLE_DOCUMENT_NEW_SHEET = new MultipleDocumentHandling (3);
@@ -204,6 +293,10 @@ public class MultipleDocumentHandling extends EnumSyntax
      * Construct a new multiple document handling enumeration value with the
      * given integer value.
      *
+     * <p>
+     *  单一文件新工作表 - 请参阅上述<A HREF="#sdnsfi">进一步资讯</A>。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected MultipleDocumentHandling(int value) {
@@ -226,6 +319,9 @@ public class MultipleDocumentHandling extends EnumSyntax
 
     /**
      * Returns the string table for class MultipleDocumentHandling.
+     * <p>
+     *  使用给定的整数值构造新的多文档处理枚举值。
+     * 
      */
     protected String[] getStringTable() {
         return (String[])myStringTable.clone();
@@ -233,6 +329,9 @@ public class MultipleDocumentHandling extends EnumSyntax
 
     /**
      * Returns the enumeration value table for class MultipleDocumentHandling.
+     * <p>
+     *  返回类MultipleDocumentHandling的字符串表。
+     * 
      */
     protected EnumSyntax[] getEnumValueTable() {
         return (EnumSyntax[])myEnumValueTable.clone();
@@ -245,6 +344,10 @@ public class MultipleDocumentHandling extends EnumSyntax
      * For class MultipleDocumentHandling and any vendor-defined subclasses,
      * the category is class MultipleDocumentHandling itself.
      *
+     * <p>
+     *  返回类MultipleDocumentHandling的枚举值表。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -259,6 +362,12 @@ public class MultipleDocumentHandling extends EnumSyntax
      * For class MultipleDocumentHandling and any vendor-defined subclasses,
      * the category name is <CODE>"multiple-document-handling"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于MultipleDocumentHandling类和任何供应商定义的子类,类别是MultipleDocumentHandling类本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

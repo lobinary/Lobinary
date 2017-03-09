@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import java.io.InvalidObjectException;
  * the entries in a directory. The I/O error is retrieved as an {@link
  * IOException} using the {@link #getCause() getCause()} method.
  *
+ * <p>
+ *  在对目录中的条目进行迭代时遇到I / O错误时抛出运行时异常。使用{@link #getCause()getCause()}方法将I / O错误作为{@link IOException}检索。
+ * 
+ * 
  * @since 1.7
  * @see DirectoryStream
  */
@@ -48,6 +53,10 @@ public final class DirectoryIteratorException
     /**
      * Constructs an instance of this class.
      *
+     * <p>
+     *  构造此类的实例。
+     * 
+     * 
      * @param   cause
      *          the {@code IOException} that caused the directory iteration
      *          to fail
@@ -62,6 +71,10 @@ public final class DirectoryIteratorException
     /**
      * Returns the cause of this exception.
      *
+     * <p>
+     *  返回此异常的原因。
+     * 
+     * 
      * @return  the cause
      */
     @Override
@@ -72,6 +85,9 @@ public final class DirectoryIteratorException
     /**
      * Called to read the object from a stream.
      *
+     * <p>
+     *  调用从流中读取对象。
+     * 
      * @throws  InvalidObjectException
      *          if the object is invalid or has a cause that is not
      *          an {@code IOException}

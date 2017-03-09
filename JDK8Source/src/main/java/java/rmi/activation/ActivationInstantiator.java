@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,11 @@ import java.rmi.RemoteException;
  * <code>ActivationGroup</code> implements the <code>newInstance</code>
  * method to handle creating objects within the group.
  *
+ * <p>
+ *  <code> ActivationInstantiator </code>负责创建"可激活"对象的实例。
+ *  <code> ActivationGroup </code>的具体子类实现<code> newInstance </code>方法来处理在组内创建对象。
+ * 
+ * 
  * @author      Ann Wollrath
  * @see         ActivationGroup
  * @since       1.2
@@ -62,6 +68,14 @@ public interface ActivationInstantiator extends Remote {
     * <li> returning a MarshalledObject containing the stub for the
     * remote object it created </ul>
     *
+    * <p>
+    *  激活器调用实例化器的<code> newInstance </code>方法,以便在该组中重新创建具有激活标识符<code> id </code>和描述符<code> desc </code>的对象。
+    * 实例化器负责：<ul>。
+    * 
+    *  <li>使用描述符的<code> getClassName </code>方法确定对象的类,
+    * 
+    *  <li>从使用<code> getLocation </code>方法获取的代码位置加载类,
+    * 
     * @param id the object's activation identifier
     * @param desc the object's descriptor
     * @return a marshalled object containing the serialized

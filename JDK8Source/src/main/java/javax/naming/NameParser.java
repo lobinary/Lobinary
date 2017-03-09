@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@ package javax.naming;
   * The equals() method, when used to compare two NameParsers, returns
   * true if and only if they serve the same namespace.
   *
+  * <p>
+  *  此接口用于从分层命名空间解析名称。 NameParser包含解析名称所需的句法信息(如从左到右的方向,名称分隔符等)的知识。
+  * 
+  *  equals()方法用于比较两个NameParsers,当且仅当它们提供相同的命名空间时,返回true。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
   *
@@ -46,6 +53,8 @@ public interface NameParser {
         /**
           * Parses a name into its components.
           *
+          * <p>
+          * 
           * @param name The non-null string name to parse.
           * @return A non-null parsed form of the name using the naming convention
           * of this parser.

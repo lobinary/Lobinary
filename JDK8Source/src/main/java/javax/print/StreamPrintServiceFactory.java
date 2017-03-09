@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,18 @@ import java.util.ServiceConfigurationError;
  * Applications can use a <code>StreamPrintService</code> obtained from a
  * factory in place of a <code>PrintService</code> which represents a
  * physical printer device.
+ * <p>
+ *  <code> StreamPrintServiceFactory </code>是{@link StreamPrintService}实例的工厂,可以打印到以mime类型描述的特定文档格式的输出流。
+ * 典型的输出文档格式可以是Postscript TM。
+ * <p>
+ *  这个类是由一个服务实现的,并通过实现使用
+ * <a href="../../../technotes/guides/jar/jar.html#Service Provider">
+ *  SPI JAR文件规范</a>。
+ * <p>
+ *  应用程序通过调用{@link #lookupStreamPrintServiceFactories(DocFlavor,String)}方法来查找此类的实例。
+ * <p>
+ *  应用程序可以使用从工厂获取的<code> StreamPrintService </code>代替代表物理打印机设备的<code> PrintService </code>。
+ * 
  */
 
 public abstract class StreamPrintServiceFactory {
@@ -96,6 +109,14 @@ public abstract class StreamPrintServiceFactory {
      * printing services, it's typical to search for a particular
      * desired format, such as Postscript(TM).
      * <p>
+     * <p>
+     *  找到可与打印作业一起使用的打印服务的工厂以{@code outputMimeType}指定的格式输出数据流。
+     * <p>
+     *  {@code outputMimeType}参数描述您要创建的文档类型,而{@code flavor}参数描述了应用程序将输入数据提供给{@code StreamPrintService}的格式。
+     * <p>
+     *  尽管null是用于查找流打印服务的可接受的值,但是通常搜索特定期望的格式,例如Postscript TM。
+     * <p>
+     * 
      * @param flavor of the input document type - null means match all
      * types.
      * @param outputMimeType representing the required output format, used to
@@ -116,6 +137,10 @@ public abstract class StreamPrintServiceFactory {
     /** Queries the factory for the document format that is emitted
      * by printers obtained from this factory.
      *
+     * <p>
+     *  通过从这个工厂获得的打印机。
+     * 
+     * 
      * @return the output format described as a mime type.
      */
     public abstract String getOutputFormat();
@@ -123,6 +148,10 @@ public abstract class StreamPrintServiceFactory {
     /**
      * Queries the factory for the document flavors that can be accepted
      * by printers obtained from this factory.
+     * <p>
+     * 查询工厂以查找从此工厂获得的打印机可以接受的文档风格。
+     * 
+     * 
      * @return array of supported doc flavors.
      */
     public abstract DocFlavor[] getSupportedDocFlavors();
@@ -155,6 +184,13 @@ public abstract class StreamPrintServiceFactory {
      * the stream and may wish to only allocate resources if the stream is
      * non-null.
      * <p>
+     * <p>
+     *  返回可打印到指定输出流的<code> StreamPrintService </code>。输出流由应用程序创建和管理。应用程序有责任关闭流,并确保此打印机不被重复使用。
+     * 应用程序不应关闭此流,直到从打印机创建的任何打印作业完成。这样做可能会生成<code> PrinterException </code>和指示作业失败的事件。
+     * <p>
+     *  连接到物理打印机的<code> PrintService </code>可以重复使用,但连接到流的<code> StreamPrintService </code>不能。
+     * 在从{@link DocPrintJob#print(Doc,javax.print.attribute.PrintRequestAttributeSet)返回之前,底层的<code> StreamPrintService </code>可以由打印系统使用{@link StreamPrintService#dispose )print}
+     * 
      * @param out destination stream for generated output.
      * @return a PrintService which will generate the format specified by the
      * DocFlavor supported by this Factory.

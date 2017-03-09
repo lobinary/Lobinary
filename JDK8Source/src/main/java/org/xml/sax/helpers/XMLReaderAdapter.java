@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -68,6 +69,21 @@ import org.xml.sax.SAXNotSupportedException;
  * supports a false value for the http://xml.org/sax/features/namespaces
  * property, that will also be used to improve efficiency.</p>
  *
+ * <p>
+ *  将SAX2 XMLReader适配为SAX1解析器。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)都位于公共域中,并且随附<strong>无保证</strong>。
+ * </em>请参阅<a href ='http：//www.saxproject.org '> http://www.saxproject.org </a>了解更多信息。
+ * </blockquote>
+ * 
+ *  <p>此类包装一个SAX2 {@link org.xml.sax.XMLReader XMLReader},并使其作为SAX1 {@link org.xml.sax.Parser Parser}。
+ *  XMLReader必须支持http://xml.org/sax/features/namespace-prefixes属性的真实值,否则解析将失败,并显示{@link org.xml.sax.SAXException SAXException}
+ * ;如果XMLReader支持http://xml.org/sax/features/namespaces属性的false值,那么也将用于提高效率。
+ *  <p>此类包装一个SAX2 {@link org.xml.sax.XMLReader XMLReader},并使其作为SAX1 {@link org.xml.sax.Parser Parser}。
+ * </p>。
+ * 
+ * 
  * @since SAX 2.0
  * @author David Megginson
  * @see org.xml.sax.Parser
@@ -88,6 +104,12 @@ public class XMLReaderAdapter implements Parser, ContentHandler
      * <p>Use the "org.xml.sax.driver" property to locate the SAX2
      * driver to embed.</p>
      *
+     * <p>
+     *  创建新适配器。
+     * 
+     *  <p>使用"org.xml.sax.driver"属性来定位要嵌入的SAX2驱动程序。</p>
+     * 
+     * 
      * @exception org.xml.sax.SAXException If the embedded driver
      *            cannot be instantiated or if the
      *            org.xml.sax.driver property is not specified.
@@ -106,6 +128,12 @@ public class XMLReaderAdapter implements Parser, ContentHandler
      * The adapter will make the XMLReader act like a SAX1
      * Parser.</p>
      *
+     * <p>
+     *  创建新适配器。
+     * 
+     *  <p>创建一个新的适配器,包裹在SAX2 XMLReader周围。适配器将使XMLReader的行为像SAX1解析器。</p>
+     * 
+     * 
      * @param xmlReader The SAX2 XMLReader to wrap.
      * @exception java.lang.NullPointerException If the argument is null.
      */
@@ -119,6 +147,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Internal setup.
      *
+     * <p>
+     *  内部设置。
+     * 
+     * 
      * @param xmlReader The embedded XMLReader.
      */
     private void setup (XMLReader xmlReader)
@@ -143,6 +175,12 @@ public class XMLReaderAdapter implements Parser, ContentHandler
      * <p>This is not supported in SAX2, and will always throw
      * an exception.</p>
      *
+     * <p>
+     *  设置错误报告的区域设置。
+     * 
+     *  <p>这在SAX2中不受支持,并且将始终引发异常。</p>
+     * 
+     * 
      * @param locale the locale for error reporting.
      * @see org.xml.sax.Parser#setLocale
      * @exception org.xml.sax.SAXException Thrown unless overridden.
@@ -157,6 +195,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Register the entity resolver.
      *
+     * <p>
+     *  注册实体解析器。
+     * 
+     * 
      * @param resolver The new resolver.
      * @see org.xml.sax.Parser#setEntityResolver
      */
@@ -169,6 +211,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Register the DTD event handler.
      *
+     * <p>
+     *  注册DTD事件处理程序。
+     * 
+     * 
      * @param handler The new DTD event handler.
      * @see org.xml.sax.Parser#setDTDHandler
      */
@@ -184,6 +230,12 @@ public class XMLReaderAdapter implements Parser, ContentHandler
      * <p>Note that the SAX1 document handler has no Namespace
      * support.</p>
      *
+     * <p>
+     *  注册SAX1文档事件处理程序。
+     * 
+     *  <p>请注意,SAX1文档处理程序没有命名空间支持。</p>
+     * 
+     * 
      * @param handler The new SAX1 document event handler.
      * @see org.xml.sax.Parser#setDocumentHandler
      */
@@ -196,6 +248,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Register the error event handler.
      *
+     * <p>
+     *  注册错误事件处理程序。
+     * 
+     * 
      * @param handler The new error event handler.
      * @see org.xml.sax.Parser#setErrorHandler
      */
@@ -212,6 +268,12 @@ public class XMLReaderAdapter implements Parser, ContentHandler
      * XMLReader does not support the
      * http://xml.org/sax/features/namespace-prefixes property.</p>
      *
+     * <p>
+     *  解析文档。
+     * 
+     * <p>如果嵌入的XMLReader不支持http://xml.org/sax/features/namespace-prefixes属性,此方法将抛出异常。</p>
+     * 
+     * 
      * @param systemId The absolute URL of the document.
      * @exception java.io.IOException If there is a problem reading
      *            the raw content of the document.
@@ -234,6 +296,12 @@ public class XMLReaderAdapter implements Parser, ContentHandler
      * XMLReader does not support the
      * http://xml.org/sax/features/namespace-prefixes property.</p>
      *
+     * <p>
+     *  解析文档。
+     * 
+     *  <p>如果嵌入的XMLReader不支持http://xml.org/sax/features/namespace-prefixes属性,此方法将抛出异常。</p>
+     * 
+     * 
      * @param input An input source for the document.
      * @exception java.io.IOException If there is a problem reading
      *            the raw content of the document.
@@ -252,6 +320,9 @@ public class XMLReaderAdapter implements Parser, ContentHandler
 
     /**
      * Set up the XML reader.
+     * <p>
+     *  设置XML读取器。
+     * 
      */
     private void setupXMLReader ()
         throws SAXException
@@ -276,6 +347,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Set a document locator.
      *
+     * <p>
+     *  设置文档定位器。
+     * 
+     * 
      * @param locator The document locator.
      * @see org.xml.sax.ContentHandler#setDocumentLocator
      */
@@ -289,6 +364,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Start document event.
      *
+     * <p>
+     *  启动文档事件。
+     * 
+     * 
      * @exception org.xml.sax.SAXException The client may raise a
      *            processing exception.
      * @see org.xml.sax.ContentHandler#startDocument
@@ -304,6 +383,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * End document event.
      *
+     * <p>
+     *  结束文档事件。
+     * 
+     * 
      * @exception org.xml.sax.SAXException The client may raise a
      *            processing exception.
      * @see org.xml.sax.ContentHandler#endDocument
@@ -319,6 +402,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Adapt a SAX2 start prefix mapping event.
      *
+     * <p>
+     *  修改SAX2开始前缀映射事件。
+     * 
+     * 
      * @param prefix The prefix being mapped.
      * @param uri The Namespace URI being mapped to.
      * @see org.xml.sax.ContentHandler#startPrefixMapping
@@ -331,6 +418,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Adapt a SAX2 end prefix mapping event.
      *
+     * <p>
+     *  修改SAX2结束前缀映射事件。
+     * 
+     * 
      * @param prefix The prefix being mapped.
      * @see org.xml.sax.ContentHandler#endPrefixMapping
      */
@@ -342,6 +433,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Adapt a SAX2 start element event.
      *
+     * <p>
+     *  修改SAX2 start元素事件。
+     * 
+     * 
      * @param uri The Namespace URI.
      * @param localName The Namespace local name.
      * @param qName The qualified (prefixed) name.
@@ -364,6 +459,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Adapt a SAX2 end element event.
      *
+     * <p>
+     *  修改SAX2结束元素事件。
+     * 
+     * 
      * @param uri The Namespace URI.
      * @param localName The Namespace local name.
      * @param qName The qualified (prefixed) name.
@@ -383,6 +482,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Adapt a SAX2 characters event.
      *
+     * <p>
+     *  修改SAX2字符事件。
+     * 
+     * 
      * @param ch An array of characters.
      * @param start The starting position in the array.
      * @param length The number of characters to use.
@@ -401,6 +504,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Adapt a SAX2 ignorable whitespace event.
      *
+     * <p>
+     *  修改SAX2可忽略的空格事件。
+     * 
+     * 
      * @param ch An array of characters.
      * @param start The starting position in the array.
      * @param length The number of characters to use.
@@ -419,6 +526,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Adapt a SAX2 processing instruction event.
      *
+     * <p>
+     *  修改SAX2处理指令事件。
+     * 
+     * 
      * @param target The processing instruction target.
      * @param data The remainder of the processing instruction
      * @exception org.xml.sax.SAXException The client may raise a
@@ -436,6 +547,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
     /**
      * Adapt a SAX2 skipped entity event.
      *
+     * <p>
+     *  修改SAX2跳过的实体事件。
+     * 
+     * 
      * @param name The name of the skipped entity.
      * @see org.xml.sax.ContentHandler#skippedEntity
      * @exception org.xml.sax.SAXException Throwable by subclasses.
@@ -464,6 +579,9 @@ public class XMLReaderAdapter implements Parser, ContentHandler
 
     /**
      * Internal class to wrap a SAX2 Attributes object for SAX1.
+     * <p>
+     *  用于封装SAX1的SAX2属性对象的内部类。
+     * 
      */
     final class AttributesAdapter implements AttributeList
     {
@@ -475,6 +593,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
         /**
          * Set the embedded Attributes object.
          *
+         * <p>
+         *  设置嵌入的Attributes对象。
+         * 
+         * 
          * @param The embedded SAX2 Attributes.
          */
         void setAttributes (Attributes attributes)
@@ -486,6 +608,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
         /**
          * Return the number of attributes.
          *
+         * <p>
+         *  返回属性的数量。
+         * 
+         * 
          * @return The length of the attribute list.
          * @see org.xml.sax.AttributeList#getLength
          */
@@ -498,6 +624,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
         /**
          * Return the qualified (prefixed) name of an attribute by position.
          *
+         * <p>
+         *  按位置返回属性的限定(前缀)名称。
+         * 
+         * 
          * @return The qualified name.
          * @see org.xml.sax.AttributeList#getName
          */
@@ -510,6 +640,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
         /**
          * Return the type of an attribute by position.
          *
+         * <p>
+         *  按位置返回属性的类型。
+         * 
+         * 
          * @return The type.
          * @see org.xml.sax.AttributeList#getType(int)
          */
@@ -522,6 +656,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
         /**
          * Return the value of an attribute by position.
          *
+         * <p>
+         *  按位置返回属性的值。
+         * 
+         * 
          * @return The value.
          * @see org.xml.sax.AttributeList#getValue(int)
          */
@@ -534,6 +672,10 @@ public class XMLReaderAdapter implements Parser, ContentHandler
         /**
          * Return the type of an attribute by qualified (prefixed) name.
          *
+         * <p>
+         *  通过限定(前缀)名称返回属性的类型。
+         * 
+         * 
          * @return The type.
          * @see org.xml.sax.AttributeList#getType(java.lang.String)
          */
@@ -546,6 +688,9 @@ public class XMLReaderAdapter implements Parser, ContentHandler
         /**
          * Return the value of an attribute by qualified (prefixed) name.
          *
+         * <p>
+         *  通过限定(前缀)名称返回属性的值。
+         * 
          * @return The value.
          * @see org.xml.sax.AttributeList#getValue(java.lang.String)
          */

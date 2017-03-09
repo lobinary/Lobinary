@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -99,6 +100,44 @@ import java.awt.Transparency;
  * can subclass this class for other reasons, but you cannot override
  * or modify the behavior of those methods.
  *
+ * <p>
+ *  <code> DirectColorModel </code>类是一个<code> ColorModel </code>类,它使用表示RGB颜色和alpha信息的像素值作为单独的样本工作,并将单个像素
+ * 的所有样本打包为单个int,短,或字节数量。
+ * 此类只能与ColorSpace.TYPE_RGB类型的ColorSpaces一起使用。
+ * 此外,对于ColorSpace的每个组件,通过ColorSpace的<code> getMinValue()</code>方法获得的最小标准化组件值必须为0.0,通过<code> getMaxValue
+ *  code>方法必须为1.0(这些最小/最大值是RGB空间的典型值)。
+ * 此类只能与ColorSpace.TYPE_RGB类型的ColorSpaces一起使用。在像素值中必须有三个颜色样本,并且可以有单个α样本。
+ * 对于使用<code> transferType </code>类型的基本数组像素表示的那些方法,数组长度总是为1。
+ * 支持的传输类型是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT和DataBuffer.TYPE_INT。颜色和α样本以由位掩码指示的位存储在阵列的单个元素中。
+ * 每个位掩码必须是连续的,并且掩码不能重叠。相同的掩码应用于由其他方法使用的单个int像素表示。掩模和颜色/α样本的对应如下：。
+ * <ul>
+ * <li>如果不存在alpha,则掩码由从0到2的索引标识;如果存在alpha,则掩码由3标识。 <li>前三个指数是指颜色样本;索引0对应于红色,索引1对应于绿色,索引2对应于蓝色。
+ *  <li>索引3对应于alpha样本(如果存在)。
+ * </ul>
+ * <p>
+ *  从像素值到颜色/阿尔法分量的显示或处理目的的转换是样本与分量的一对一对应。 <code> DirectColorModel </code>通常与使用蒙版来定义打包样本的图像数据一起使用。
+ * 例如,<code> DirectColorModel </code>可以与<code> SinglePixelPackedSampleModel </code>结合使用以构造{@link BufferedImage}
+ * 。
+ *  从像素值到颜色/阿尔法分量的显示或处理目的的转换是样本与分量的一对一对应。 <code> DirectColorModel </code>通常与使用蒙版来定义打包样本的图像数据一起使用。
+ * 通常,{@link SampleModel}和<code> ColorModel </code>使用的掩码将是相同的。
+ * 然而,如果它们不同,则将根据<code> ColorModel </code>的掩码来进行像素数据的颜色解释。
+ * <p>
+ *  单个int像素表示对于该类的所有对象有效,因为总是可以在单个int中表示与该类一起使用的像素值。
+ * 因此,由于无效的像素值,使用此表示的方法不会抛出<code> IllegalArgumentException </code>。
+ * <p>
+ *  此颜色模型类似于X11 TrueColor视觉效果。
+ * 由{@link ColorModel#getRGBdefault()getRGBdefault}方法指定的默认RGB ColorModel是具有以下参数的<code> DirectColorModel 
+ * </code>：。
+ *  此颜色模型类似于X11 TrueColor视觉效果。
+ * <pre>
+ * 位数：32红色掩码：0x00ff0000绿色掩码：0x0000ff00蓝色掩码：0x000000ff Alpha掩码：0xff000000颜色空间：sRGB isAlphaPremultiplied：F
+ * alse透明度：Transparency.TRANSLUCENT transferType：DataBuffer.TYPE_INT。
+ * </pre>
+ * <p>
+ *  这个类中的许多方法是最终的。这是因为底层本地图形代码对这个类的布局和操作进行了假设,这些假设反映在这里标记为final的方法的实现中。
+ * 由于其他原因,您可以对此类进行子类化,但不能覆盖或修改这些方法的行为。
+ * 
+ * 
  * @see ColorModel
  * @see ColorSpace
  * @see SinglePixelPackedSampleModel
@@ -137,6 +176,14 @@ public class DirectColorModel extends PackedColorModel {
      * transparency value is Transparency.OPAQUE.  The transfer type
      * is the smallest of DataBuffer.TYPE_BYTE, DataBuffer.TYPE_USHORT,
      * or DataBuffer.TYPE_INT that can hold a single pixel.
+     * <p>
+     *  从指定掩码中构造<code> DirectColorModel </code>,指示<code> int </code>像素表示中的哪些位包含红色,绿色和蓝色样本。
+     * 由于像素值不包含Alpha信息,因此所有像素都被视为不透明,这意味着alpha&nbsp; =&nbsp; 1.0。
+     * 每个掩码中的所有位必须是连续的并且适合于<code> int </code>像素表示的指定数量的最低有效位。 <code> ColorSpace </code>是默认的sRGB空间。
+     * 透明度值为Transparency.OPAQUE。
+     * 传输类型是可以容纳单个像素的DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT或DataBuffer.TYPE_INT中最小的。
+     * 
+     * 
      * @param bits the number of bits in the pixel values; for example,
      *         the sum of the number of bits in the masks.
      * @param rmask specifies a mask indicating which bits in an
@@ -166,6 +213,15 @@ public class DirectColorModel extends PackedColorModel {
      * present, or Transparency.TRANSLUCENT otherwise.  The transfer type
      * is the smallest of DataBuffer.TYPE_BYTE, DataBuffer.TYPE_USHORT,
      * or DataBuffer.TYPE_INT that can hold a single pixel.
+     * <p>
+     * 从指定掩码中构造<code> DirectColorModel </code>,指示<code> int </code>像素表示中的哪些位包含红色,绿色和蓝色颜色样本以及alpha样本(如果存在)。
+     * 如果<code> amask </code>为0,则像素值不包含Alpha信息,所有像素都被视为不透明,这意味着alpha&nbsp; =&nbsp; 1.0。
+     * 每个掩码中的所有位必须是连续的并且适合于<code> int </code>像素表示的指定数量的最低有效位。阿尔法(如果存在)不是预乘的。
+     *  <code> ColorSpace </code>是默认的sRGB空间。
+     * 如果没有alpha值,透明度值为Transparency.OPAQUE,否则为Transparency.TRANSLUCENT。
+     * 传输类型是可以容纳单个像素的DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT或DataBuffer.TYPE_INT中最小的。
+     * 
+     * 
      * @param bits the number of bits in the pixel values; for example,
      *         the sum of the number of bits in the masks.
      * @param rmask specifies a mask indicating which bits in an
@@ -209,6 +265,18 @@ public class DirectColorModel extends PackedColorModel {
      * is the type of primitive array used to represent pixel values and
      * must be one of DataBuffer.TYPE_BYTE, DataBuffer.TYPE_USHORT, or
      * DataBuffer.TYPE_INT.
+     * <p>
+     * 从指定的参数构造一个<code> DirectColorModel </code>。
+     * 颜色分量在指定的<code> ColorSpace </code>中,它必须是ColorSpace.TYPE_RGB类型,并且具有最小标准化组件值,均为0.0,最大值均为1.0。
+     * 掩码指定<code> int </code>像素表示中的哪些位包含红色,绿色和蓝色样本以及α样本(如果存在)。
+     * 如果<code> amask </code>为0,则像素值不包含Alpha信息,所有像素都被视为不透明,这意味着alpha&nbsp; =&nbsp; 1.0。
+     * 每个掩码中的所有位必须是连续的并且适合于<code> int </code>像素表示的指定数量的最低有效位。
+     * 如果有alpha,<code> boolean </code> <code> isAlphaPremultiplied </code>指定如何解释像素值中的颜色和alpha样本。
+     * 如果<code> boolean </code>是<code> true </code>,则颜色样本假定已经乘以alpha样本。
+     * 如果没有alpha值,透明度值为Transparency.OPAQUE,否则为Transparency.TRANSLUCENT。
+     * 传输类型是用于表示像素值的基本数组类型,必须是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT或DataBuffer.TYPE_INT中的一个。
+     * 
+     * 
      * @param space the specified <code>ColorSpace</code>
      * @param bits the number of bits in the pixel values; for example,
      *         the sum of the number of bits in the masks.
@@ -263,6 +331,10 @@ public class DirectColorModel extends PackedColorModel {
     /**
      * Returns the mask indicating which bits in an <code>int</code> pixel
      * representation contain the red color component.
+     * <p>
+     *  返回指示<code> int </code>像素表示中哪些位包含红色分量的掩码。
+     * 
+     * 
      * @return the mask, which indicates which bits of the <code>int</code>
      *         pixel representation contain the red color sample.
      */
@@ -273,6 +345,10 @@ public class DirectColorModel extends PackedColorModel {
     /**
      * Returns the mask indicating which bits in an <code>int</code> pixel
      * representation contain the green color component.
+     * <p>
+     * 返回掩码,指示<code> int </code>像素表示中的哪些位包含绿色颜色分量。
+     * 
+     * 
      * @return the mask, which indicates which bits of the <code>int</code>
      *         pixel representation contain the green color sample.
      */
@@ -283,6 +359,10 @@ public class DirectColorModel extends PackedColorModel {
     /**
      * Returns the mask indicating which bits in an <code>int</code> pixel
      * representation contain the blue color component.
+     * <p>
+     *  返回掩码,指示<code> int </code>像素表示中的哪些位包含蓝色颜色分量。
+     * 
+     * 
      * @return the mask, which indicates which bits of the <code>int</code>
      *         pixel representation contain the blue color sample.
      */
@@ -293,6 +373,10 @@ public class DirectColorModel extends PackedColorModel {
     /**
      * Returns the mask indicating which bits in an <code>int</code> pixel
      * representation contain the alpha component.
+     * <p>
+     *  返回掩码,指示<code> int </code>像素表示中的哪些位包含alpha组件。
+     * 
+     * 
      * @return the mask, which indicates which bits of the <code>int</code>
      *         pixel representation contain the alpha sample.
      */
@@ -309,6 +393,9 @@ public class DirectColorModel extends PackedColorModel {
      * Given an int pixel in this ColorModel's ColorSpace, converts
      * it to the default sRGB ColorSpace and returns the R, G, and B
      * components as float values between 0.0 and 1.0.
+     * <p>
+     *  在ColorModel的ColorSpace中给定一个int像素,将其转换为默认的sRGB ColorSpace,并返回R,G和B分量作为0.0和1.0之间的浮点值。
+     * 
      */
     private float[] getDefaultRGBComponents(int pixel) {
         int components[] = getComponents(pixel, null, 0);
@@ -361,6 +448,11 @@ public class DirectColorModel extends PackedColorModel {
      * alpha is premultiplied, this method divides it out before returning
      * the value.  If the alpha value is 0, for example, the red value
      * is 0.
+     * <p>
+     *  返回指定像素的红色分量,在默认的RGB <code> ColorSpace </code>,sRGB中从0到255。如果需要,进行颜色转换。像素值指定为<code> int </code>。
+     * 返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。如果alpha值为0,例如,红色值为0。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the red color component for the specified pixel, from
      *         0 to 255 in the sRGB <code>ColorSpace</code>.
@@ -384,6 +476,11 @@ public class DirectColorModel extends PackedColorModel {
      * alpha is premultiplied, this method divides it out before returning
      * the value.  If the alpha value is 0, for example, the green value
      * is 0.
+     * <p>
+     *  返回指定像素的绿色分量,在默认的RGB <code> ColorSpace </code>,sRGB中从0到255。如果需要,进行颜色转换。像素值指定为<code> int </code>。
+     * 返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。如果alpha值为0,例如,绿色值为0。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the green color component for the specified pixel, from
      *         0 to 255 in the sRGB <code>ColorSpace</code>.
@@ -407,6 +504,11 @@ public class DirectColorModel extends PackedColorModel {
      * alpha is premultiplied, this method divides it out before returning
      * the value.  If the alpha value is 0, for example, the blue value
      * is 0.
+     * <p>
+     * 返回指定像素的蓝色分量,在默认的RGB <code> ColorSpace </code>,sRGB中从0到255。如果需要,进行颜色转换。像素值指定为<code> int </code>。
+     * 返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。如果alpha值为0,例如,蓝色值为0。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the blue color component for the specified pixel, from
      *         0 to 255 in the sRGB <code>ColorSpace</code>.
@@ -424,6 +526,10 @@ public class DirectColorModel extends PackedColorModel {
     /**
      * Returns the alpha component for the specified pixel, scaled
      * from 0 to 255.  The pixel value is specified as an <code>int</code>.
+     * <p>
+     *  返回指定像素的alpha分量,从0到255。像素值指定为<code> int </code>。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the value of the alpha component of <code>pixel</code>
      *         from 0 to 255.
@@ -445,6 +551,11 @@ public class DirectColorModel extends PackedColorModel {
      * the alpha is premultiplied, this method divides it out of the
      * color components.  If the alpha value is 0, for example, the color
      * values are each 0.
+     * <p>
+     *  以默认的RGB颜色模型格式返回像素的颜色/ alpha分量。如果需要,进行颜色转换。像素值指定为<code> int </code>。返回的值采用非预扩展格式。
+     * 因此,如果alpha被预乘,该方法将其从颜色分量中分离出来。例如,如果α值为0,则颜色值均为0。
+     * 
+     * 
      * @param pixel the specified pixel
      * @return the RGB value of the color/alpha components of the specified
      *         pixel.
@@ -486,6 +597,23 @@ public class DirectColorModel extends PackedColorModel {
      * An <code>UnsupportedOperationException</code> is thrown if this
      * <code>transferType</code> is not supported by this
      * <code>ColorModel</code>.
+     * <p>
+     * 返回指定像素的红色分量,在默认的RGB <code> ColorSpace </code>,sRGB中从0到255。如果需要,进行颜色转换。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 例如,如果α值为0,则红色值为0.如果<code> inData </code>不是<code> transferType </code>类型的原始数组,则<code> ClassCastExcepti
+     * on </code>被抛出。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 如果<code> inData </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException 
+     * </code>。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 由于<code> DirectColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它
+     * 们会抛出异常。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 如果<code> TransferType </code>不受此<code> ColorModel </code>支持,则会抛出<code> UnsupportedOperationException 
+     * </code>。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 
+     * 
      * @param inData the array containing the pixel value
      * @return the value of the red component of the specified pixel.
      * @throws ArrayIndexOutOfBoundsException if <code>inData</code> is not
@@ -539,6 +667,23 @@ public class DirectColorModel extends PackedColorModel {
      * An <code>UnsupportedOperationException</code> is
      * thrown if this <code>transferType</code> is not supported by this
      * <code>ColorModel</code>.
+     * <p>
+     * 返回指定像素的绿色分量,在默认的RGB <code> ColorSpace </code>,sRGB中从0到255。如果需要,进行颜色转换。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 例如,如果α值为0,则绿色值为0.如果<code> inData </code>不是类型<code> transferType </code>的原始数组,则<code> ClassCastExcepti
+     * on </code>被抛出。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 如果<code> inData </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException 
+     * </code>。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 由于<code> DirectColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它
+     * 们会抛出异常。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 如果<code> TransferType </code>不受此<code> ColorModel </code>支持,则会抛出<code> UnsupportedOperationException 
+     * </code>。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 
+     * 
      * @param inData the array containing the pixel value
      * @return the value of the green component of the specified pixel.
      * @throws ArrayIndexOutOfBoundsException if <code>inData</code> is not
@@ -592,6 +737,22 @@ public class DirectColorModel extends PackedColorModel {
      * An <code>UnsupportedOperationException</code> is
      * thrown if this <code>transferType</code> is not supported by this
      * <code>ColorModel</code>.
+     * <p>
+     * 返回指定像素的蓝色分量,在默认的RGB <code> ColorSpace </code>,sRGB中从0到255。如果需要,进行颜色转换。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 例如,如果<code> inData </code>不是类型<code> transferType </code>的原始数组,则<code> ClassCastException </code>被抛出。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 如果<code> inData </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException 
+     * </code>。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 由于<code> DirectColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它
+     * 们会抛出异常。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 如果<code> TransferType </code>不受此<code> ColorModel </code>支持,则会抛出<code> UnsupportedOperationException 
+     * </code>。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。返回的值是非预乘的值。因此,如果alpha被预乘,该方法在返回值之前将其分割。
+     * 
+     * 
      * @param inData the array containing the pixel value
      * @return the value of the blue component of the specified pixel.
      * @throws ArrayIndexOutOfBoundsException if <code>inData</code> is not
@@ -639,6 +800,18 @@ public class DirectColorModel extends PackedColorModel {
      * <code>transferType</code>.
      * If this <code>transferType</code> is not supported, an
      * <code>UnsupportedOperationException</code> is thrown.
+     * <p>
+     * 返回指定像素的alpha分量,从0到255缩放。像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。
+     * 如果<code> inData </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 如果<code> inData </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException 
+     * </code>。
+     * 如果<code> inData </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 由于<code> DirectColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它
+     * 们会抛出异常。
+     * 如果<code> inData </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 如果不支持此<code> transferType </code>,则会抛出<code> UnsupportedOperationException </code>。
+     * 
+     * 
      * @param inData the specified pixel
      * @return the alpha component of the specified pixel, scaled from
      *         0 to 255.
@@ -692,6 +865,18 @@ public class DirectColorModel extends PackedColorModel {
      * they throw an exception if they use an unsupported
      * <code>transferType</code>.
      *
+     * <p>
+     * 返回默认RGB颜色模型格式中指定像素的颜色/ alpha分量。如果需要,进行颜色转换。像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。
+     * 如果<code> inData </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 如果<code> inData </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException 
+     * </code>。
+     * 如果<code> inData </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 返回的值采用非预扩展格式。因此,如果alpha被预乘,该方法将其从颜色分量中分离出来。
+     * 例如,如果alpha值为0,颜色值为0.由于<code> DirectColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么它们抛出异常if他们使用不支持的<code>
+     *  transferType </code>。
+     * 返回的值采用非预扩展格式。因此,如果alpha被预乘,该方法将其从颜色分量中分离出来。
+     * 
+     * 
      * @param inData the specified pixel
      * @return the color and alpha components of the specified pixel.
      * @exception UnsupportedOperationException if this
@@ -739,6 +924,21 @@ public class DirectColorModel extends PackedColorModel {
      * override it then they throw an exception if they use an unsupported
      * <code>transferType</code>.
      *
+     * <p>
+     * 返回此<code> ColorModel </code>中的像素的数据元素数组表示,给定默认RGB颜色模型中的整数像素表示。
+     * 然后可以将该数组传递给<code> WritableRaster </code>对象的<code> setDataElements </code>方法。
+     * 如果像素变量是<code> null </code>,则会分配一个新的数组。
+     * 如果<code> pixel </code>不是<code> null </code>,它必须是<code> transferType </code>类型的原始数组;否则,抛出<code> ClassC
+     * astException </code>。
+     * 如果像素变量是<code> null </code>,则会分配一个新的数组。
+     * 如果<code> pixel </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 如果像素变量是<code> null </code>,则会分配一个新的数组。返回像素阵列。
+     * 由于<code> DirectColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它
+     * 们会抛出异常。
+     * 如果像素变量是<code> null </code>,则会分配一个新的数组。返回像素阵列。
+     * 
+     * 
      * @param rgb the integer pixel representation in the default RGB
      *            color model
      * @param pixel the specified pixel
@@ -915,6 +1115,15 @@ public class DirectColorModel extends PackedColorModel {
      * <code>components</code> array is not <code>null</code> and is not large
      * enough to hold all the color and alpha components, starting at
      * <code>offset</code>.
+     * <p>
+     * 给定这个<code> ColorModel </code>中的一个像素,返回一个非规格化的颜色/ alpha分量的数组。像素值指定为<code> int </code>。
+     * 如果<code> components </code>数组是<code> null </code>,则会分配一个新的数组。返回<code>组件</code>数组。
+     * 颜色/ alpha分量存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * 如果<code> components </code>数组不是<code> null </code>,并且不足以容纳所有的颜色和alpha组件,则会引发<code> ArrayIndexOutOfBou
+     * ndsException </code> > offset </code>。
+     * 颜色/ alpha分量存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * 
+     * 
      * @param pixel the specified pixel
      * @param components the array to receive the color and alpha
      * components of the specified pixel
@@ -956,6 +1165,23 @@ public class DirectColorModel extends PackedColorModel {
      * inherit the implementation of this method and if they don't
      * override it then they throw an exception if they use an unsupported
      * <code>transferType</code>.
+     * <p>
+     * 给定这个<code> ColorModel </code>中的像素,返回一个非规格化的颜色/ alpha分量的数组。
+     * 像素值由作为对象引用传递的<code> transferType </code>类型的数据元素数组指定。
+     * 如果<code> pixel </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 如果<code> pixel </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 如果<code> pixel </code>不是类型<code> transferType </code>的原始数组,则会抛出<code> ClassCastException </code>。
+     * 如果<code> components </code>数组是<code> null </code>,则会分配一个新数组。返回<code>组件</code>数组。
+     * 颜色/ alpha分量存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * 如果<code> components </code>数组不是<code> null </code>,并且不足以容纳所有的颜色和alpha组件,则会引发<code> ArrayIndexOutOfBou
+     * ndsException </code> > offset </code>。
+     * 颜色/ alpha分量存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * 由于<code> DirectColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它
+     * 们会抛出异常。
+     * 颜色/ alpha分量存储在<code>组件</code>数组中,从<code> offset </code>开始,即使该数组是由此方法分配的。
+     * 
+     * 
      * @param pixel the specified pixel
      * @param components the array to receive the color and alpha
      *        components of the specified pixel
@@ -1001,6 +1227,11 @@ public class DirectColorModel extends PackedColorModel {
      * Creates a <code>WritableRaster</code> with the specified width and
      * height that has a data layout (<code>SampleModel</code>) compatible
      * with this <code>ColorModel</code>.
+     * <p>
+     *  创建具有指定宽度和高度的<code> WritableRaster </code>,其具有与此<code> ColorModel </code>兼容的数据布局(<code> SampleModel </code>
+     * )。
+     * 
+     * 
      * @param w the width to apply to the new <code>WritableRaster</code>
      * @param h the height to apply to the new <code>WritableRaster</code>
      * @return a <code>WritableRaster</code> object with the specified
@@ -1049,6 +1280,13 @@ public class DirectColorModel extends PackedColorModel {
      * thrown if the <code>components</code> array is
      * not large enough to hold all the color and alpha components, starting
      * at <code>offset</code>.
+     * <p>
+     * 给定一个非规格化的颜色/ alpha分量数组,返回这个<code> ColorModel </code>中表示为<code> int </code>的像素值。
+     * 如果<code> components </code>数组不够大,不能容纳所有的颜色和alpha组件,则从<code> offset </code>开始,会抛出<code> ArrayIndexOutO
+     * fBoundsException </code>。
+     * 给定一个非规格化的颜色/ alpha分量数组,返回这个<code> ColorModel </code>中表示为<code> int </code>的像素值。
+     * 
+     * 
      * @param components an array of unnormalized color and alpha
      * components
      * @param offset the index into <code>components</code> at which to
@@ -1089,6 +1327,23 @@ public class DirectColorModel extends PackedColorModel {
      * inherit the implementation of this method and if they don't
      * override it then they throw an exception if they use an unsupported
      * <code>transferType</code>.
+     * <p>
+     *  给定一个非规格化的颜色/ alpha分量数组,返回这个<code> ColorModel </code>中像素的数据元素数组表示。
+     * 然后可以将该数组传递给<code> WritableRaster </code>对象的<code> setDataElements </code>方法。
+     * 如果<code> components </code>数组不足以容纳所有的颜色和alpha组件(从offset开始),则抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 然后可以将该数组传递给<code> WritableRaster </code>对象的<code> setDataElements </code>方法。
+     * 如果<code> obj </code>变量是<code> null </code>,则会分配一个新数组。
+     * 如果<code> obj </code>不是<code> null </code>,它必须是<code> transferType </code>类型的原始数组;否则,抛出<code> ClassCas
+     * tException </code>。
+     * 如果<code> obj </code>变量是<code> null </code>,则会分配一个新数组。
+     * 如果<code> obj </code>不足以容纳此<code> ColorModel </code>的像素值,则会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 如果<code> obj </code>变量是<code> null </code>,则会分配一个新数组。
+     * 由于<code> DirectColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的<code> transferType </code>,它
+     * 们会抛出异常。
+     * 如果<code> obj </code>变量是<code> null </code>,则会分配一个新数组。
+     * 
      * @param components an array of unnormalized color and alpha
      * components
      * @param offset the index into <code>components</code> at which to
@@ -1164,6 +1419,9 @@ public class DirectColorModel extends PackedColorModel {
      * implementation of this method and if they don't override it then
      * they throw an exception if they use an unsupported transferType.
      *
+     * <p>
+     * 
+     * 
      * @param raster the <code>WritableRaster</code> data
      * @param isAlphaPremultiplied <code>true</code> if the alpha is
      * premultiplied; <code>false</code> otherwise
@@ -1346,6 +1604,14 @@ public class DirectColorModel extends PackedColorModel {
       * Returns <code>true</code> if <code>raster</code> is compatible
       * with this <code>ColorModel</code> and <code>false</code> if it is
       * not.
+      * <p>
+      * 假设该数据当前由<code> ColorModel </code>正确描述,强制栅格数据与<code> isAlphaPremultiplied </code>变量中指定的状态匹配。
+      * 它可以将颜色栅格数据乘以或除以阿尔法,或者如果数据处于正确状态,则什么也不做。
+      * 如果数据需要被强制,这个方法也将返回这个<code> ColorModel </code>的实例,其中<code> isAlphaPremultiplied </code>标志被适当设置。
+      * 如果此<code> ColorModel </code>不支持此transferType,此方法将抛出<code> UnsupportedOperationException </code>。
+      * 由于<code> ColorModel </code>可以被子类化,子类继承此方法的实现,如果它们不覆盖它,那么如果它们使用不支持的transferType,它们会抛出异常。
+      * 
+      * 
       * @param raster the {@link Raster} object to test for compatibility
       * @return <code>true</code> if <code>raster</code> is compatible
       * with this <code>ColorModel</code>; <code>false</code> otherwise.
@@ -1403,6 +1669,8 @@ public class DirectColorModel extends PackedColorModel {
     /**
      * Returns a <code>String</code> that represents this
      * <code>DirectColorModel</code>.
+     * <p>
+     * 
      * @return a <code>String</code> representing this
      * <code>DirectColorModel</code>.
      */

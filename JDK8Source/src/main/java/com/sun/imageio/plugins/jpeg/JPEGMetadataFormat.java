@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -139,6 +140,9 @@ abstract class JPEGMetadataFormat extends IIOMetadataFormatImpl {
      * itself.  <code>subtreeName</code> may be any node in
      * the format.  If it is not, an
      * <code>IllegalArgumentException</code> is thrown.
+     * <p>
+     *  如果命名元素出现在以<code> subtreeName </code>命名的节点开始的格式的子树中,包括节点本身,则返回<code> true </code>。
+     *  <code> subtreeName </code>可以是格式中的任何节点。如果不是,则抛出<code> IllegalArgumentException </code>。
      */
     protected boolean isInSubtree(String elementName,
                                   String subtreeName) {

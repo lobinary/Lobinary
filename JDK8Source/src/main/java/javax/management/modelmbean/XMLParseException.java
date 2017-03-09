@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -47,6 +50,14 @@ import java.security.AccessController;
 *
 * <p>The <b>serialVersionUID</b> of this class is <code>3176664577895105181L</code>.
 *
+* <p>
+*  当将XML格式的字符串解析为ModelMBean对象或从ModelMBean对象创建XML格式的字符串时,抛出此异常。
+* 
+*  它也用于可以使用的XML解析器的包装器异常。
+* 
+*  <p>此类的<b> serialVersionUID </b>是<code> 3176664577895105181L </code>。
+* 
+* 
 * @since 1.5
 */
 @SuppressWarnings("serial")  // serialVersionUID not constant
@@ -99,6 +110,9 @@ extends Exception
 
     /**
      * Default constructor .
+     * <p>
+     *  默认构造函数。
+     * 
      */
     public  XMLParseException ()
     {
@@ -108,6 +122,10 @@ extends Exception
     /**
      * Constructor taking a string.
      *
+     * <p>
+     *  构造函数接受字符串。
+     * 
+     * 
      * @param s the detail message.
      */
     public  XMLParseException (String s)
@@ -117,6 +135,10 @@ extends Exception
     /**
      * Constructor taking a string and an exception.
      *
+     * <p>
+     *  构造函数接受字符串和异常。
+     * 
+     * 
      * @param e the nested exception.
      * @param s the detail message.
      */
@@ -127,6 +149,9 @@ extends Exception
 
     /**
      * Deserializes an {@link XMLParseException} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link XMLParseException}。
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -137,6 +162,8 @@ extends Exception
 
     /**
      * Serializes an {@link XMLParseException} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link XMLParseException}序列化为{@link ObjectOutputStream}。
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

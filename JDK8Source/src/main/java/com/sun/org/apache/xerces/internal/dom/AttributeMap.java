@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -40,6 +50,17 @@ import org.w3c.dom.Node;
  *
  * @xerces.internal
  *
+ * <p>
+ *  AttributeMap从NamedNodeMapImpl继承,并扩展它来处理存储属性的细节。这些是：
+ * <ul>
+ *  <li>管理属性节点的所有权<li>管理默认属性<li>触发突变事件
+ * </ul>
+ * <p>
+ *  这个类不直接支持突变事件,但是,当执行突变时它通知文档,以便文档类这样做。
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @version $Id: AttributeMap.java,v 1.7 2010-11-01 04:39:37 joehw Exp $
  */
 public class AttributeMap extends NamedNodeMapImpl {
@@ -65,6 +86,10 @@ public class AttributeMap extends NamedNodeMapImpl {
 
     /**
      * Adds an attribute using its nodeName attribute.
+     * <p>
+     *  使用其nodeName属性添加属性。
+     * 
+     * 
      * @see org.w3c.dom.NamedNodeMap#setNamedItem
      * @return If the new Node replaces an existing node the replaced Node is
      *      returned, otherwise null is returned.
@@ -137,6 +162,10 @@ public class AttributeMap extends NamedNodeMapImpl {
 
     /**
      * Adds an attribute using its namespaceURI and localName.
+     * <p>
+     *  使用其namespaceURI和localName添加属性。
+     * 
+     * 
      * @see org.w3c.dom.NamedNodeMap#setNamedItem
      * @return If the new Node replaces an existing node the replaced Node is
      *      returned, otherwise null is returned.
@@ -215,6 +244,10 @@ public class AttributeMap extends NamedNodeMapImpl {
 
     /**
      * Removes an attribute specified by name.
+     * <p>
+     *  删除名称指定的属性。
+     * 
+     * 
      * @param name
      *      The name of a node to remove. If the
      *      removed attribute is known to have a default value, an
@@ -234,6 +267,9 @@ public class AttributeMap extends NamedNodeMapImpl {
     /**
      * Same as removeNamedItem except that it simply returns null if the
      * specified name is not found.
+     * <p>
+     *  与removeNamedItem相同,只是如果找不到指定的名称,则返回null。
+     * 
      */
     Node safeRemoveNamedItem(String name) {
         return internalRemoveNamedItem(name, false);
@@ -247,6 +283,12 @@ public class AttributeMap extends NamedNodeMapImpl {
      * name, nor the node with these contents. If node does not belong to
      * this named node map, we throw a DOMException.
      *
+     * <p>
+     *  NON-DOM：删除节点对象
+     * 
+     * 注意：特别删除此节点 - 不是具有此名称的节点,也不是具有这些内容的节点。如果节点不属于这个命名的节点映射,我们抛出一个DOMException。
+     * 
+     * 
      * @param item       The node to remove
      * @param addDefault true -- magically add default attribute
      * @return Removed node
@@ -276,6 +318,9 @@ public class AttributeMap extends NamedNodeMapImpl {
     /**
      * Internal removeNamedItem method allowing to specify whether an exception
      * must be thrown if the specified name is not found.
+     * <p>
+     *  内部removeNamedItem方法允许指定是否必须抛出一个异常,如果没有找到指定的名称。
+     * 
      */
     final protected Node internalRemoveNamedItem(String name, boolean raiseEx){
         if (isReadOnly()) {
@@ -358,6 +403,10 @@ public class AttributeMap extends NamedNodeMapImpl {
     /**
      * Introduced in DOM Level 2. <p>
      * Removes an attribute specified by local name and namespace URI.
+     * <p>
+     *  在DOM级别2中引入。<p>删除由本地名称和命名空间URI指定的属性。
+     * 
+     * 
      * @param namespaceURI
      *                      The namespace URI of the node to remove.
      *                      When it is null or an empty string, this
@@ -379,6 +428,9 @@ public class AttributeMap extends NamedNodeMapImpl {
     /**
      * Same as removeNamedItem except that it simply returns null if the
      * specified local name and namespace URI is not found.
+     * <p>
+     *  与removeNamedItem相同,只是如果找不到指定的本地名称和命名空间URI,则返回null。
+     * 
      */
     Node safeRemoveNamedItemNS(String namespaceURI, String name) {
         return internalRemoveNamedItemNS(namespaceURI, name, false);
@@ -388,6 +440,9 @@ public class AttributeMap extends NamedNodeMapImpl {
      * Internal removeNamedItemNS method allowing to specify whether an
      * exception must be thrown if the specified local name and namespace URI
      * is not found.
+     * <p>
+     *  内部removeNamedItemNS方法,允许指定是否必须抛出异常,如果找不到指定的本地名称和命名空间URI。
+     * 
      */
     final protected Node internalRemoveNamedItemNS(String namespaceURI,
             String name,
@@ -474,6 +529,9 @@ public class AttributeMap extends NamedNodeMapImpl {
     /**
      * Cloning a NamedNodeMap is a DEEP OPERATION; it always clones
      * all the nodes contained in the map.
+     * <p>
+     *  克隆NamedNodeMap是一个DEEP操作;它总是克隆地图中包含的所有节点。
+     * 
      */
 
     public NamedNodeMapImpl cloneMap(NodeImpl ownerNode) {
@@ -486,6 +544,9 @@ public class AttributeMap extends NamedNodeMapImpl {
 
     /**
      * Override parent's method to set the ownerNode correctly
+     * <p>
+     *  覆盖父项的方法以正确设置ownerNode
+     * 
      */
     protected void cloneContent(NamedNodeMapImpl srcmap) {
         List srcnodes = srcmap.nodes;
@@ -513,6 +574,9 @@ public class AttributeMap extends NamedNodeMapImpl {
 
     /**
      * Move specified attributes from the given map to this one
+     * <p>
+     *  将指定属性从给定地图移动到此地图
+     * 
      */
     void moveSpecifiedAttributes(AttributeMap srcmap) {
         int nsize = (srcmap.nodes != null) ? srcmap.nodes.size() : 0;
@@ -533,6 +597,9 @@ public class AttributeMap extends NamedNodeMapImpl {
 
     /**
      * Get this AttributeMap in sync with the given "defaults" map.
+     * <p>
+     *  获取此AttributeMap与给定的"默认值"映射同步。
+     * 
      * @param defaults The default attributes map to sync with.
      */
     protected void reconcileDefaults(NamedNodeMapImpl defaults) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -14,41 +15,58 @@ public interface RepositoryOperations
   /** register server definition.
 	* This returns the serverId of the server.  A newly created server is
 	* always uninstalled.
+	* <p>
+	*  这将返回服务器的serverId。始终卸载新创建的服务器。
+	* 
 	*/
   String registerServer (com.sun.corba.se.PortableActivationIDL.RepositoryPackage.ServerDef serverDef) throws com.sun.corba.se.PortableActivationIDL.ServerAlreadyRegistered, com.sun.corba.se.PortableActivationIDL.BadServerDefinition;
 
   /** unregister server definition
+  /* <p>
 	*/
   void unregisterServer (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered;
 
   /** get server definition
+  /* <p>
 	*/
   com.sun.corba.se.PortableActivationIDL.RepositoryPackage.ServerDef getServer (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered;
 
   /** Return whether the server has been installed
+  /* <p>
 	*/
   boolean isInstalled (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered;
 
   /** Mark the server as being installed.  Raises ServerAlreadyInstalled
 	* if the server is currently marked as installed.
+	* <p>
+	*  如果服务器当前标记为已安装。
+	* 
 	*/
   void install (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerAlreadyInstalled;
 
   /** Mark the server as being uninstalled.  Raises ServerAlreadyUninstalled
 	* if the server is currently marked as uninstalled.
+	* <p>
+	*  如果服务器当前标记为已卸载。
+	* 
 	*/
   void uninstall (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerAlreadyUninstalled;
 
   /** list registered servers
+  /* <p>
 	*/
   String[] listRegisteredServers ();
 
   /** Returns list of ALL applicationNames defined in ServerDefs of registered 
 	* servers.
+	* <p>
+	*  服务器。
+	* 
 	*/
   String[] getApplicationNames ();
 
   /** Find the ServerID associated with the given application name.
+  /* <p>
 	*/
   String getServerID (String applicationName) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered;
 } // interface RepositoryOperations

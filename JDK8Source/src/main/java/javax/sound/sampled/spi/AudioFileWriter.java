@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.sound.sampled.AudioInputStream;
  * implementations can write one or more types of audio file from an audio
  * stream.
  *
+ * <p>
+ *  音频文件写入服务提供商。提供具体实现的类可以从音频流中写入一种或多种类型的音频文件。
+ * 
+ * 
  * @author Kara Kytle
  * @since 1.3
  */
@@ -47,6 +52,10 @@ public abstract class AudioFileWriter {
     /**
      * Obtains the file types for which file writing support is provided by this
      * audio file writer.
+     * <p>
+     *  获取此音频文件编写器为其提供文件写入支持的文件类型。
+     * 
+     * 
      * @return array of file types.  If no file types are supported,
      * an array of length 0 is returned.
      */
@@ -56,6 +65,10 @@ public abstract class AudioFileWriter {
     /**
      * Indicates whether file writing support for the specified file type is provided
      * by this audio file writer.
+     * <p>
+     *  指示此音频文件编写器是否提供对指定文件类型的文件写入支持。
+     * 
+     * 
      * @param fileType the file type for which write capabilities are queried
      * @return <code>true</code> if the file type is supported,
      * otherwise <code>false</code>
@@ -76,6 +89,10 @@ public abstract class AudioFileWriter {
     /**
      * Obtains the file types that this audio file writer can write from the
      * audio input stream specified.
+     * <p>
+     *  获取此音频文件编写器可以从指定的音频输入流写入的文件类型。
+     * 
+     * 
      * @param stream the audio input stream for which audio file type support
      * is queried
      * @return array of file types.  If no file types are supported,
@@ -87,6 +104,10 @@ public abstract class AudioFileWriter {
     /**
      * Indicates whether an audio file of the type specified can be written
      * from the audio input stream indicated.
+     * <p>
+     *  指示是否可以从指示的音频输入流中写入指定类型的音频文件。
+     * 
+     * 
      * @param fileType file type for which write capabilities are queried
      * @param stream for which file writing support is queried
      * @return <code>true</code> if the file type is supported for this audio input stream,
@@ -113,6 +134,12 @@ public abstract class AudioFileWriter {
      * to write such a file type will fail with an IOException if the length in
      * the audio file format is
      * {@link javax.sound.sampled.AudioSystem#NOT_SPECIFIED AudioSystem.NOT_SPECIFIED}.
+     * <p>
+     *  写入表示所提供的输出流所指示的文件类型的音频文件的字节流。一些文件类型要求将长度写入文件头,并且不能从头到尾写入,除非提前知道长度。
+     * 如果音频文件格式的长度为{@link javax.sound.sampled.AudioSystem#NOT_SPECIFIED AudioSystem.NOT_SPECIFIED},则尝试写入此类文件
+     * 类型将失败并显示IOException。
+     *  写入表示所提供的输出流所指示的文件类型的音频文件的字节流。一些文件类型要求将长度写入文件头,并且不能从头到尾写入,除非提前知道长度。
+     * 
      * @param stream the audio input stream containing audio data to be
      * written to the output stream
      * @param fileType file type to be written to the output stream
@@ -130,6 +157,9 @@ public abstract class AudioFileWriter {
     /**
      * Writes a stream of bytes representing an audio file of the file format
      * indicated to the external file provided.
+     * <p>
+     * 
+     * 
      * @param stream the audio input stream containing audio data to be
      * written to the file
      * @param fileType file type to be written to the file

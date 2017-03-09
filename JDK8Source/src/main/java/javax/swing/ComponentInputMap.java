@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,12 @@ package javax.swing;
  * <code>ComponentInputMap</code>s are used for
  * <code>WHEN_IN_FOCUSED_WINDOW</code> bindings.
  *
+ * <p>
+ *  <code> ComponentInputMap </code>是与特定<code> JComponent </code>相关联的<code> InputMap </code>。
+ * 当<code> ComponentInputMap </code>更改时,将自动通知组件。
+ *  <code> ComponentInputMap </code> s用于<code> WHEN_IN_FOCUSED_WINDOW </code>绑定。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.3
  */
@@ -44,6 +51,10 @@ public class ComponentInputMap extends InputMap {
      * Creates a <code>ComponentInputMap</code> associated with the
      * specified component.
      *
+     * <p>
+     *  创建与指定组件关联的<code> ComponentInputMap </code>。
+     * 
+     * 
      * @param component  a non-null <code>JComponent</code>
      * @throws IllegalArgumentException  if <code>component</code> is null
      */
@@ -59,6 +70,10 @@ public class ComponentInputMap extends InputMap {
      * associated with the same component as this
      * <code>ComponentInputMap</code>.
      *
+     * <p>
+     *  设置父代,它必须是与<code> ComponentInputMap </code>相同的组件相关联的<code> ComponentInputMap </code>。
+     * 
+     * 
      * @param map  a <code>ComponentInputMap</code>
      *
      * @throws IllegalArgumentException  if <code>map</code>
@@ -79,6 +94,9 @@ public class ComponentInputMap extends InputMap {
 
     /**
      * Returns the component the <code>InputMap</code> was created for.
+     * <p>
+     *  返回为其创建的<code> InputMap </code>组件。
+     * 
      */
     public JComponent getComponent() {
         return component;
@@ -88,6 +106,10 @@ public class ComponentInputMap extends InputMap {
      * Adds a binding for <code>keyStroke</code> to <code>actionMapKey</code>.
      * If <code>actionMapKey</code> is null, this removes the current binding
      * for <code>keyStroke</code>.
+     * <p>
+     *  将<code> keyStroke </code>的绑定添加到<code> actionMapKey </code>。
+     * 如果<code> actionMapKey </code>为null,则会删除<code> keyStroke </code>的当前绑定。
+     * 
      */
     public void put(KeyStroke keyStroke, Object actionMapKey) {
         super.put(keyStroke, actionMapKey);
@@ -98,6 +120,9 @@ public class ComponentInputMap extends InputMap {
 
     /**
      * Removes the binding for <code>key</code> from this object.
+     * <p>
+     *  从此对象中删除<code>键</code>的绑定。
+     * 
      */
     public void remove(KeyStroke key) {
         super.remove(key);
@@ -108,6 +133,8 @@ public class ComponentInputMap extends InputMap {
 
     /**
      * Removes all the mappings from this object.
+     * <p>
+     *  从此对象中删除所有映射。
      */
     public void clear() {
         int oldSize = size();

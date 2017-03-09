@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import javax.swing.event.*;
  * that has text in one font and color.  The view represents each
  * child element as a line of text.
  *
+ * <p>
+ *  实现一个简单的多行文本视图的视图界面,​​该视图具有一种字体和颜色的文本。视图将每个子元素表示为一行文本。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @see     View
  */
@@ -42,6 +47,10 @@ public class PlainView extends View implements TabExpander {
     /**
      * Constructs a new PlainView wrapped on an element.
      *
+     * <p>
+     *  构造一个包含在元素上的新PlainView。
+     * 
+     * 
      * @param elem the element
      */
     public PlainView(Element elem) {
@@ -51,6 +60,10 @@ public class PlainView extends View implements TabExpander {
     /**
      * Returns the tab size set for the document, defaulting to 8.
      *
+     * <p>
+     *  返回为文档设置的选项卡大小,默认值为8。
+     * 
+     * 
      * @return the tab size
      */
     protected int getTabSize() {
@@ -66,6 +79,11 @@ public class PlainView extends View implements TabExpander {
      * <code>drawSelectedText</code> so that the way selected and
      * unselected text are rendered can be customized.
      *
+     * <p>
+     *  呈现一行文本,在结尾处抑制空格,并展开任何标签。
+     * 这被实现为调用方法<code> drawUnselectedText </code>和<code> drawSelectedText </code>,以便可以定制所选和未选择的文本的呈现方式。
+     * 
+     * 
      * @param lineIndex the line to draw &gt;= 0
      * @param g the <code>Graphics</code> context
      * @param x the starting X position &gt;= 0
@@ -137,6 +155,10 @@ public class PlainView extends View implements TabExpander {
      * Renders the given range in the model as normal unselected
      * text.  Uses the foreground or disabled color to render the text.
      *
+     * <p>
+     *  将模型中的给定范围渲染为正常未选择的文本。使用前景或禁用的颜色渲染文本。
+     * 
+     * 
      * @param g the graphics context
      * @param x the starting X coordinate &gt;= 0
      * @param y the starting Y coordinate &gt;= 0
@@ -162,6 +184,10 @@ public class PlainView extends View implements TabExpander {
      * the hosting component.  It assumes the highlighter will render
      * the selected background.
      *
+     * <p>
+     *  将模型中的给定范围渲染为选定文本。这被实现来渲染在托管组件中指定的颜色的文本。它假定荧光笔将呈现所选择的背景。
+     * 
+     * 
      * @param g the graphics context
      * @param x the starting X coordinate &gt;= 0
      * @param y the starting Y coordinate &gt;= 0
@@ -185,6 +211,10 @@ public class PlainView extends View implements TabExpander {
      * Gives access to a buffer that can be used to fetch
      * text from the associated document.
      *
+     * <p>
+     *  提供对可用于从相关联的文档获取文本的缓冲区的访问。
+     * 
+     * 
      * @return the buffer
      */
     protected final Segment getLineBuffer() {
@@ -198,6 +228,10 @@ public class PlainView extends View implements TabExpander {
      * Checks to see if the font metrics and longest line
      * are up-to-date.
      *
+     * <p>
+     *  检查字体指标和最长行是否是最新的。
+     * 
+     * 
      * @since 1.4
      */
     protected void updateMetrics() {
@@ -217,6 +251,10 @@ public class PlainView extends View implements TabExpander {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return   the span the view would like to be rendered into &gt;= 0.
      *           Typically the view is told to render into the span
@@ -241,6 +279,10 @@ public class PlainView extends View implements TabExpander {
      * The view may need to do layout and create child views to enable
      * itself to render into the given allocation.
      *
+     * <p>
+     *  使用给定的渲染表面和该表面上的区域渲染。视图可能需要进行布局和创建子视图,以使自身能够呈现给定的分配。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param a the allocated region to render into
      *
@@ -323,6 +365,9 @@ public class PlainView extends View implements TabExpander {
      * Should return a shape ideal for painting based on the passed in
      * Shape <code>a</code>. This is useful if painting in a different
      * region. The default implementation returns <code>a</code>.
+     * <p>
+     * 应该返回一个理想的绘制形状,基于传递的形式<code> a </code>。如果在不同的地区绘画,这是很有用的。默认实现返回<code> a </code>。
+     * 
      */
     Shape adjustPaintRegion(Shape a) {
         return a;
@@ -332,6 +377,10 @@ public class PlainView extends View implements TabExpander {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param a the allocated region to render into
      * @return the bounding box of the given position
@@ -369,6 +418,10 @@ public class PlainView extends View implements TabExpander {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param fx the X coordinate &gt;= 0
      * @param fy the Y coordinate &gt;= 0
      * @param a the allocated region to render into
@@ -442,6 +495,10 @@ public class PlainView extends View implements TabExpander {
      * Gives notification that something was inserted into the document
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。
+     * 
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -455,6 +512,10 @@ public class PlainView extends View implements TabExpander {
      * Gives notification that something was removed from the document
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  提供通知,说明该视图负责的位置中的文档被删除了。
+     * 
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -468,6 +529,10 @@ public class PlainView extends View implements TabExpander {
      * Gives notification from the document that attributes were changed
      * in a location that this view is responsible for.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。
+     * 
+     * 
      * @param changes the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -482,6 +547,10 @@ public class PlainView extends View implements TabExpander {
      * layout of the view along the given axis, if it
      * has any layout duties.
      *
+     * <p>
+     *  设置视图的大小。这应该导致沿给定轴的视图的布局,如果它有任何布局职责。
+     * 
+     * 
      * @param width the width &gt;= 0
      * @param height the height &gt;= 0
      */
@@ -497,6 +566,10 @@ public class PlainView extends View implements TabExpander {
      * This implementation does not support things like centering so it
      * ignores the tabOffset argument.
      *
+     * <p>
+     *  返回给定参考位置后的下一个制表符停止位置。这个实现不支持像定中心这样的东西,所以它忽略了tabOffset参数。
+     * 
+     * 
      * @param x the current position &gt;= 0
      * @param tabOffset the position within the text stream
      *   that the tab occurred at &gt;= 0.
@@ -520,6 +593,10 @@ public class PlainView extends View implements TabExpander {
      * view.  The longest line is checked to see if it has
      * changed.
      *
+     * <p>
+     *  重绘由给定文档事件覆盖的更改区域。损坏开始范围的线,以覆盖插入/移除只在一条线上的情况。如果添加或删除线,会损坏整个视图。检查最长行以查看其是否已更改。
+     * 
+     * 
      * @since 1.4
      */
     protected void updateDamage(DocumentEvent changes, Shape a, ViewFactory f) {
@@ -581,6 +658,10 @@ public class PlainView extends View implements TabExpander {
     /**
      * Repaint the given line range.
      *
+     * <p>
+     *  重新绘制给定的线范围。
+     * 
+     * 
      * @param host the component hosting the view (used to call repaint)
      * @param a  the region allocated for the view to render into
      * @param line0 the starting line number to repaint.  This must
@@ -605,6 +686,10 @@ public class PlainView extends View implements TabExpander {
     /**
      * Determine the rectangle that represents the given line.
      *
+     * <p>
+     *  确定表示给定行的矩形。
+     * 
+     * 
      * @param a  the region allocated for the view to render into
      * @param line the line number to find the region of.  This must
      *   be a valid line number in the model.
@@ -632,6 +717,9 @@ public class PlainView extends View implements TabExpander {
      * represent the longest line contained.  The <em>font</em> variable
      * is updated to indicate the font used to calculate the
      * longest line.
+     * <p>
+     * 迭代由此视图表示的元素的子元素表示的线,寻找最长的线。 <em> longLine </em>变量已更新,以表示包含的最长行。更改<em>字体</em>变量以指示用于计算最长行的字体。
+     * 
      */
     private void calculateLongestLine() {
         Component c = getContainer();
@@ -655,6 +743,9 @@ public class PlainView extends View implements TabExpander {
      * Calculate the width of the line represented by
      * the given element.  It is assumed that the font
      * and font metrics are up-to-date.
+     * <p>
+     *  计算由给定元素表示的线的宽度。假设字体和字体度量是最新的。
+     * 
      */
     private int getLineWidth(Element line) {
         if (line == null) {
@@ -678,6 +769,9 @@ public class PlainView extends View implements TabExpander {
 
     /**
      * Font metrics for the current font.
+     * <p>
+     *  当前字体的字体指标。
+     * 
      */
     protected FontMetrics metrics;
 
@@ -686,12 +780,18 @@ public class PlainView extends View implements TabExpander {
      * the preferred width of the view.  Since the calculation
      * is potentially expensive we try to avoid it by stashing
      * which line is currently the longest.
+     * <p>
+     *  当前最长的行。这用于计算视图的首选宽度。由于计算是潜在的昂贵,我们试图通过隐藏哪条线当前是最长的来避免它。
+     * 
      */
     Element longLine;
 
     /**
      * Font used to calculate the longest line... if this
      * changes we need to recalculate the longest line
+     * <p>
+     *  用于计算最长行的字体...如果这种更改,我们需要重新计算最长的行
+     * 
      */
     Font font;
 
@@ -709,6 +809,8 @@ public class PlainView extends View implements TabExpander {
      * This is a hack and temporary until we can better address the problem
      * of text measuring. This field is actually never set directly in
      * PlainView, but by FieldView.
+     * <p>
+     *  在第一行绘制第一个字符的位置的偏移量。这是一个黑客和暂时,直到我们可以更好地解决文本测量的问题。该字段实际上从不直接在PlainView中设置,而是由FieldView设置。
      */
     int firstLineOffset;
 

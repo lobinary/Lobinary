@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -73,6 +74,23 @@ import javax.swing.plaf.basic.*;
  * <p>
  * The default is <code>Angled</code>.
  *
+ * <p>
+ *  金属外观实现<code> TreeUI </code>。
+ * <p>
+ *  <code> MetalTreeUI </code>允许配置如何直观地呈现节点之间的间距和轮廓。支持以下提示：
+ * 
+ * <table summary="Descriptions of supported hints: Angled, Horizontal, and None">
+ * <tr>
+ *  <th> <p style ="text-align：left"> Angled </p> </th> <td>绘制一条连接子项与父项的线。
+ * 有关根节点的处理,请参考{@link javax.swing.JTree#setRootVisible}和{@link javax.swing.JTree#setShowsRootHandles}。
+ * </td>
+ * </tr>
+ * <tr>
+ *  <th> <p style ="text-align：left">水平</p> </th> <td>水平线是划分根节点的子节点。</td>
+ * </tr>
+ * <tr>
+ *  <th> <p style ="text-align：left">无</p> </th> <td>不要在节点之间绘制任何视觉指示。</td>
+ * 
  * @author Tom Santos
  * @author Steve Wilson (value add stuff)
  */
@@ -126,6 +144,14 @@ public class MetalTreeUI extends BasicTreeUI {
     /** this function converts between the string passed into the client property
       * and the internal representation (currently and int)
       *
+      * <p>
+      * </tr>
+      * </table>
+      * 
+      * <p>
+      *  由于从<code> JTree </code>获取<code> TreeUI </code>并转换到<code> MetalTreeUI </code>的实例通常是不切实际的,您通过客户端属性启用此属
+      * 性<code > JTree.lineStyle </code>。
+      * 例如,要切换到<code> Horizo​​ntal </code>样式,您可以：<code> tree.putClientProperty("JTree.lineStyle","Horizo​​nta
       */
     protected void decodeLineStyle(Object lineStyleFlag) {
       if ( lineStyleFlag == null ||

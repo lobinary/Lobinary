@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -122,6 +123,9 @@ public class DynArrayImpl extends DynAnyCollectionImpl implements DynArray
     public void set_elements (org.omg.CORBA.Any[] value)
         throws org.omg.DynamicAny.DynAnyPackage.TypeMismatch,
                org.omg.DynamicAny.DynAnyPackage.InvalidValue;
+/* <p>
+/*  public void set_elements(org.omg.CORBA.Any [] value)throws org.omg.DynamicAny.DynAnyPackage.TypeMism
+/* atch,org.omg.DynamicAny.DynAnyPackage.InvalidValue;。
 */
 
     //

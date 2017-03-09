@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -130,6 +131,49 @@ import sun.security.util.SecurityConstants;
  * used, but only for HTML form encoding, which is not the same
  * as the encoding scheme defined in RFC2396.
  *
+ * <p>
+ *  类{@code URL}表示统一资源定位符,指向万维网上的"资源"的指针。资源可以是简单的文件或目录,或者它可以是对更复杂的对象的引用,例如对数据库或搜索引擎的查询。
+ * 有关网址类型及其格式的详细信息,请访问：<a href =。
+ * "http://web.archive.org/web/20051219043731/http://archive.ncsa.uiuc.edu/SDG/Software/Mosaic/Demo/url-primer.html">
+ *  <i> URL的类型</i> </a>
+ * <p>
+ *  一般来说,一个URL可以分成几个部分。
+ * 请考虑以下示例：<blockquote> <pre> http://www.example.com/docs/resource1.html </pre> </blockquote>。
+ * <p>
+ *  上面的URL表示要使用的协议是{@code http}(超文本传输​​协议),并且信息驻留在名为{@code www.example.com}的主机上。
+ * 该主机上的信息被命名为{@code /docs/resource1.html}。此名称在主机上的确切含义是依赖于协议和依赖于主机。该信息通常驻留在文件中,但它可以即时生成。
+ *  URL的这个组件称为<i>路径</i>组件。
+ * <p>
+ * URL可以可选地指定"端口",其是在远程主机上进行TCP连接的端口号。如果未指定端口,将使用协议的默认端口。例如,{@code http}的默认端口是{@code 80}。
+ * 另一个端口可以指定为：<blockquote> <pre> http://www.example.com:1080/docs/resource1.html </pre> </blockquote>。
+ * <p>
+ *  {@code URL}的语法由<a href="http://www.ietf.org/rfc/rfc2396.txt"> <i> RFC 2396：统一资源标识符(URI)定义：通用语法< / i>
+ *  </a>,由<a href="http://www.ietf.org/rfc/rfc2732.txt"> <i> RFC 2732：URL中的字面IPv6地址格式</i> </a>。
+ * 字面IPv6地址格式还支持scope_ids。 <a href="Inet6Address.html#scoped">此处</a>介绍了scope_ids的语法和用法。
+ * <p>
+ *  URL可以附加有"片段",也称为"ref"或"引用"。片段由尖括号字符"#"指示,后跟更多字符。
+ * 例如,<blockquote> <pre> http://java.sun.com/index.html#chapter1 </pre> </blockquote>。
+ * <p>
+ *  此片段在技术上不是URL的一部分。相反,它指示在检索到指定资源之后,应用程序特别感兴趣于具有标签{@code chapter1}的文档的那部分。标签的含义是资源特定的。
+ * <p>
+ * 应用程序还可以指定"相对URL",其中仅包含足够的信息以相对于另一个URL访问资源。相对URL经常在HTML页面中使用。
+ * 例如,如果URL的内容：<blockquote> <pre> http://java.sun.com/index.html </pre> </blockquote>中包含相对URL：<blockquote>
+ *  <pre> FAQ.html </pre> </blockquote>这将是以下缩写：<blockquote> <pre> http://java.sun.com/FAQ.html </pre> </blockquote>
+ * 。
+ * 应用程序还可以指定"相对URL",其中仅包含足够的信息以相对于另一个URL访问资源。相对URL经常在HTML页面中使用。
+ * <p>
+ *  相对URL不需要指定URL的所有组件。如果协议,主机名或端口号缺失,则该值从完全指定的URL继承。必须指定文件组件。可选片段不是继承的。
+ * <p>
+ *  URL类本身不根据RFC2396中定义的转义机制编码或解码任何URL组件。调用者负责对任何字段进行编码,这些字段需要在调用URL之前进行转义,并对从URL返回的任何转义字段进行解码。
+ * 此外,因为URL不知道URL转义,所以它不识别同一URL的编码或解码形式之间的等同性。
+ * 例如,两个网址：<br> <pre> http://foo.com/hello world /和http://foo.com/hello%20world </pre>将被视为彼此不相等。
+ * <p>
+ * 注意,在某些情况下,{@link java.net.URI}类会执行其组件字段的转义。
+ * 建议您管理网址的编码和解码方式是使用{@link java.net.URI},并使用{@link #toURI()}和{@link URI#toURL()}在这两个类别之间进行转换。
+ * <p>
+ *  也可以使用{@link URLEncoder}和{@link URLDecoder}类,但仅适用于HTML表单编码,这与RFC2396中定义的编码方案不同。
+ * 
+ * 
  * @author  James Gosling
  * @since JDK1.0
  */
@@ -148,23 +192,40 @@ public final class URL implements java.io.Serializable {
      * default package prefix, sun.net.www.protocol, is used.  The search
      * proceeds from the first package in the list to the last and stops
      * when a match is found.
+     * <p>
+     *  指定要扫描的协议处理程序的包前缀列表的属性。此属性的值(如果有)应为要搜索的协议处理程序加载的包名称的垂直条形分隔列表。
+     * 这个类的策略是所有协议处理程序将在一个名为<protocolname> .Handler的类中,并且列表中的每个包依次检查匹配处理程序。
+     * 如果找不到(或未指定属性),则使用缺省包前缀sun.net.www.protocol。搜索从列表中的第一个包到最后一个,并在找到匹配时停止。
+     * 
      */
     private static final String protocolPathProp = "java.protocol.handler.pkgs";
 
     /**
      * The protocol to use (ftp, http, nntp, ... etc.) .
+     * <p>
+     *  要使用的协议(ftp,http,nntp,...等)。
+     * 
+     * 
      * @serial
      */
     private String protocol;
 
     /**
      * The host name to connect to.
+     * <p>
+     *  要连接的主机名。
+     * 
+     * 
      * @serial
      */
     private String host;
 
     /**
      * The protocol port to connect to.
+     * <p>
+     *  要连接的协议端口。
+     * 
+     * 
      * @serial
      */
     private int port = -1;
@@ -172,33 +233,54 @@ public final class URL implements java.io.Serializable {
     /**
      * The specified file name on that host. {@code file} is
      * defined as {@code path[?query]}
+     * <p>
+     *  该主机上指定的文件名。 {@code file}定义为{@code path [?query]}
+     * 
+     * 
      * @serial
      */
     private String file;
 
     /**
      * The query part of this URL.
+     * <p>
+     *  此URL的查询部分。
+     * 
      */
     private transient String query;
 
     /**
      * The authority part of this URL.
+     * <p>
+     *  此网址的权限部分。
+     * 
+     * 
      * @serial
      */
     private String authority;
 
     /**
      * The path part of this URL.
+     * <p>
+     *  此URL的路径部分。
+     * 
      */
     private transient String path;
 
     /**
      * The userinfo part of this URL.
+     * <p>
+     *  此URL的userinfo部分。
+     * 
      */
     private transient String userInfo;
 
     /**
      * # reference.
+     * <p>
+     *  #引用。
+     * 
+     * 
      * @serial
      */
     private String ref;
@@ -206,15 +288,23 @@ public final class URL implements java.io.Serializable {
     /**
      * The host's IP address, used in equals and hashCode.
      * Computed on demand. An uninitialized or unknown hostAddress is null.
+     * <p>
+     * 主机的IP地址,用于equals和hashCode。按需计算。未初始化或未知的hostAddress为null。
+     * 
      */
     transient InetAddress hostAddress;
 
     /**
      * The URLStreamHandler for this URL.
+     * <p>
+     *  此URL的URLStreamHandler。
+     * 
      */
     transient URLStreamHandler handler;
 
     /* Our hash code.
+    /* <p>
+    /* 
      * @serial
      */
     private int hashCode = -1;
@@ -285,6 +375,38 @@ public final class URL implements java.io.Serializable {
      *
      * <p>No validation of the inputs is performed by this constructor.
      *
+     * <p>
+     *  从指定的{@code协议},{@code主机},{@code端口}号码和{@code file}中创建{@code URL}对象。<p>
+     * 
+     *  {@code host}可以表示为主机名或文字IP地址。
+     * 如果使用IPv6字面值地址,它应该用方括号({@code'['}和{@code']'}括起来,如<a href ="http://www.ietf.org/ rfc / rfc2732.txt"> RF
+     * C&nbsp; 2732 </a>;但是,在<a href="http://www.ietf.org/rfc/rfc2373.txt"> <i> RFC 2373：IP版本6寻址体系结构</i>中定义的
+     * 字面IPv6地址格式</a >也被接受。
+     *  {@code host}可以表示为主机名或文字IP地址。<p>。
+     * 
+     *  指定{@code port} {@code -1}的数字表示该网址应使用协议的默认端口。<p>
+     * 
+     *  如果这是使用指定协议创建的第一个URL对象,则会为该协议创建一个流协议处理程序</i>对象,类{@code URLStreamHandler}的一个实例：
+     * <ol>
+     * <li>如果应用程序先前已将{@code URLStreamHandlerFactory}的实例设置为流处理程序工厂,则会使用协议字符串作为参数调用该实例的{@code createURLStreamHandler}
+     * 方法来创建流协议处理程序。
+     *  <li>如果尚未设置{@code URLStreamHandlerFactory},或者工厂的{@code createURLStreamHandler}方法返回{@code null},则构造函数会
+     * 找到系统属性的值：<blockquote> <pre> java.protocol.handler.pkgs </pre> </blockquote>如果该系统属性的值不是{@code null},它将
+     * 被解释为由垂直斜杠字符"{@code |}"分隔的包列表'。
+     * 构造函数尝试加载名为<block> </i>> </i>&gt;的</b> </i>其中&lt; i&gt;包&lt; i&gt;由包的名称和&lt; i&gt;协议&lt; / i&gt;被协议的名称
+     * 替换。
+     * 如果这个类不存在,或者该类存在,但它不是{@code URLStreamHandler}的子类,那么将尝试列表中的下一个包。
+     *  <li>如果上一步骤未能找到协议处理程序,则构造函数将尝试从系统默认程序包加载。
+     *  <block> </>> </block> </block>如果此类不存在,则</b>或者如果类存在,但它不是{@code URLStreamHandler}的子类,则会抛出{@code MalformedURLException}
+     * 。
+     *  <li>如果上一步骤未能找到协议处理程序,则构造函数将尝试从系统默认程序包加载。
+     * </ol>
+     * 
+     * <p>以下协议的协议处理程序保证存在于搜索路径上： -  <blockquote> <pre> http,https,file和jar </pre> </blockquote> 。
+     * 
+     *  <p>此构造函数不会验证输入。
+     * 
+     * 
      * @param      protocol   the name of the protocol to use.
      * @param      host       the name of the host.
      * @param      port       the port number on the host.
@@ -314,6 +436,14 @@ public final class URL implements java.io.Serializable {
      *
      * No validation of the inputs is performed by this constructor.
      *
+     * <p>
+     *  根据指定的{@code protocol}名称,{@code host}名称和{@code file}名称创建网址。使用指定协议的默认端口。
+     * <p>
+     *  此方法等效于调用参数为{@code protocol},{@code host},{@code -1}和{@code file}的四参数构造函数。
+     * 
+     *  此构造函数不执行输入验证。
+     * 
+     * 
      * @param      protocol   the name of the protocol to use.
      * @param      host       the name of the host.
      * @param      file       the file on the host.
@@ -346,6 +476,20 @@ public final class URL implements java.io.Serializable {
      *
      * No validation of the inputs is performed by this constructor.
      *
+     * <p>
+     *  从指定的{@code protocol},{@code host},{@code port} number,{@code file}和{@code handler}中创建{@code URL}对象。
+     * 指定{@code port} {@code -1}的数字表示该URL应使用协议的默认端口。
+     * 指定{@code null}的{@code handler}表示该URL应使用协议的默认流处理程序,如下所示：java.net.URL#URL(java.lang.String,java.lang.St
+     * ring ,int,java.lang.String)。
+     * 指定{@code port} {@code -1}的数字表示该URL应使用协议的默认端口。
+     * 
+     *  <p>如果处理程序不为空并且有安全管理器,则会使用{@code NetPermission("specifyStreamHandler")}权限调用安全管理器的{@code checkPermission}
+     * 方法。
+     * 这可能导致SecurityException。
+     * 
+     *  此构造函数不执行输入验证。
+     * 
+     * 
      * @param      protocol   the name of the protocol to use.
      * @param      host       the name of the host.
      * @param      port       the port number on the host.
@@ -382,6 +526,9 @@ public final class URL implements java.io.Serializable {
             /**
              * if host is a literal IPv6 address,
              * we will make it conform to RFC 2732
+             * <p>
+             *  如果主机是字面IPv6地址,我们将使其符合RFC 2732
+             * 
              */
             if (host.indexOf(':') >= 0 && !host.startsWith("[")) {
                 host = "["+host+"]";
@@ -423,6 +570,12 @@ public final class URL implements java.io.Serializable {
      * This constructor is equivalent to a call to the two-argument
      * constructor with a {@code null} first argument.
      *
+     * <p>
+     * 从{@code String}表示中创建{@code URL}对象。
+     * <p>
+     *  这个构造函数相当于调用带有{@code null}第一个参数的双参数构造函数。
+     * 
+     * 
      * @param      spec   the {@code String} to parse as a URL.
      * @exception  MalformedURLException  if no protocol is specified, or an
      *               unknown protocol is found, or {@code spec} is {@code null}.
@@ -469,6 +622,26 @@ public final class URL implements java.io.Serializable {
      * <p>
      * For a more detailed description of URL parsing, refer to RFC2396.
      *
+     * <p>
+     *  通过解析指定上下文中给定的规范来创建URL。
+     * 
+     *  新URL是从给定上下文URL和spec参数创建的,如RFC2396"Uniform Resource Identifiers：Generic * Syntax"中所述。
+     *  ：<blockquote> <pre>&lt; scheme&gt;：//&lt; authority&gt;&lt; path&gt;?&lt; query&gt;#& </pre> </blockquote>
+     * 引用被解析为方案,权限,路径,查询和片段部分。
+     *  新URL是从给定上下文URL和spec参数创建的,如RFC2396"Uniform Resource Identifiers：Generic * Syntax"中所述。
+     * 如果路径组件为空,并且方案,权限和查询组件未定义,则新URL是对当前文档的引用。否则,规范中出现的片段和查询部分将在新的URL中使用。
+     * <p>
+     *  如果方案组件在给定规范中定义并且与上下文的方案不匹配,则新URL将基于规范单独创建为绝对URL。否则,方案组件从上下文URL继承。
+     * <p>
+     *  如果权限组件存在于规范中,则规范被视为绝对的,并且规范权限和路径将替换上下文权限和路径。如果规范组件在spec中不存在,则新URL的权限将从上下文继承。
+     * <p>
+     * 如果规范的路径分量以斜杠字符"/"开始,那么该路径被视为绝对路径,spec路径替换上下文路径。
+     * <p>
+     *  否则,该路径将被视为相对路径,并附加到上下文路径,如RFC2396中所述。此外,在这种情况下,通过删除由".."的出现所做的目录改变来规范路径。和"。"。
+     * <p>
+     *  有关URL解析的更详细的描述,请参阅RFC2396。
+     * 
+     * 
      * @param      context   the context in which to parse the specification.
      * @param      spec      the {@code String} to parse as a URL.
      * @exception  MalformedURLException  if no protocol is specified, or an
@@ -488,6 +661,10 @@ public final class URL implements java.io.Serializable {
      * within a specified context. If the handler is null, the parsing
      * occurs as with the two argument constructor.
      *
+     * <p>
+     *  通过使用指定上下文中指定的处理程序解析给定规范来创建URL。如果处理程序为null,则解析与两参数构造函数一样发生。
+     * 
+     * 
      * @param      context   the context in which to parse the specification.
      * @param      spec      the {@code String} to parse as a URL.
      * @param      handler   the stream handler for the URL.
@@ -537,6 +714,9 @@ public final class URL implements java.io.Serializable {
                 /* we're assuming this is a ref relative to the context URL.
                  * This means protocols cannot start w/ '#', but we must parse
                  * ref URL's like: "hello:there" w/ a ':' in them.
+                 * <p>
+                 *  这意味着协议不能启动w /'#',但我们必须解析ref URL的像："hello：there"w / a'：'。
+                 * 
                  */
                 aRef=true;
             }
@@ -604,6 +784,9 @@ public final class URL implements java.io.Serializable {
             /*
              * Handle special case inheritance of query and fragment
              * implied by RFC2396 section 5.2.2.
+             * <p>
+             *  处理RFC2396第5.2.2节中隐含的查询和片段的特殊情况继承。
+             * 
              */
             if (isRelative && start == limit) {
                 query = context.query;
@@ -625,6 +808,9 @@ public final class URL implements java.io.Serializable {
 
     /*
      * Returns true if specified string is a valid protocol name.
+     * <p>
+     *  如果指定的字符串是有效的协议名称,则返回true。
+     * 
      */
     private boolean isValidProtocol(String protocol) {
         int len = protocol.length();
@@ -645,6 +831,9 @@ public final class URL implements java.io.Serializable {
 
     /*
      * Checks for permission to specify a stream handler.
+     * <p>
+     *  检查是否有指定流处理程序的权限。
+     * 
      */
     private void checkSpecifyHandler(SecurityManager sm) {
         sm.checkPermission(SecurityConstants.SPECIFY_HANDLER_PERMISSION);
@@ -655,6 +844,10 @@ public final class URL implements java.io.Serializable {
      * only URLStreamHandlers can modify URL fields. URLs are
      * otherwise constant.
      *
+     * <p>
+     *  设置URL的字段。这不是一个公共方法,因此只有URLStreamHandlers可以修改URL字段。 URL否则是不变的。
+     * 
+     * 
      * @param protocol the name of the protocol to use
      * @param host the name of the host
        @param port the port number on the host
@@ -671,6 +864,8 @@ public final class URL implements java.io.Serializable {
             this.file = file;
             this.ref = ref;
             /* This is very important. We must recompute this after the
+            /* <p>
+            /* 
              * URL has been changed. */
             hashCode = -1;
             hostAddress = null;
@@ -688,6 +883,10 @@ public final class URL implements java.io.Serializable {
      * that only URLStreamHandlers can modify URL fields. URLs are otherwise
      * constant.
      *
+     * <p>
+     *  设置URL的指定的8个字段。这不是一个公共方法,因此只有URLStreamHandlers可以修改URL字段。 URL否则是不变的。
+     * 
+     * 
      * @param protocol the name of the protocol to use
      * @param host the name of the host
      * @param port the port number on the host
@@ -710,6 +909,8 @@ public final class URL implements java.io.Serializable {
             this.path = path;
             this.ref = ref;
             /* This is very important. We must recompute this after the
+            /* <p>
+            /* 
              * URL has been changed. */
             hashCode = -1;
             hostAddress = null;
@@ -721,6 +922,10 @@ public final class URL implements java.io.Serializable {
     /**
      * Gets the query part of this {@code URL}.
      *
+     * <p>
+     *  获取此{@code URL}的查询部分。
+     * 
+     * 
      * @return  the query part of this {@code URL},
      * or <CODE>null</CODE> if one does not exist
      * @since 1.3
@@ -732,6 +937,10 @@ public final class URL implements java.io.Serializable {
     /**
      * Gets the path part of this {@code URL}.
      *
+     * <p>
+     *  获取此{@code URL}的路径部分。
+     * 
+     * 
      * @return  the path part of this {@code URL}, or an
      * empty string if one does not exist
      * @since 1.3
@@ -743,6 +952,10 @@ public final class URL implements java.io.Serializable {
     /**
      * Gets the userInfo part of this {@code URL}.
      *
+     * <p>
+     *  获取此{@code URL}的userInfo部分。
+     * 
+     * 
      * @return  the userInfo part of this {@code URL}, or
      * <CODE>null</CODE> if one does not exist
      * @since 1.3
@@ -754,6 +967,10 @@ public final class URL implements java.io.Serializable {
     /**
      * Gets the authority part of this {@code URL}.
      *
+     * <p>
+     *  获取此{@code URL}的权限部分。
+     * 
+     * 
      * @return  the authority part of this {@code URL}
      * @since 1.3
      */
@@ -764,6 +981,10 @@ public final class URL implements java.io.Serializable {
     /**
      * Gets the port number of this {@code URL}.
      *
+     * <p>
+     *  获取此{@code URL}的端口号。
+     * 
+     * 
      * @return  the port number, or -1 if the port is not set
      */
     public int getPort() {
@@ -776,6 +997,10 @@ public final class URL implements java.io.Serializable {
      * for the URL do not define a default port number,
      * then -1 is returned.
      *
+     * <p>
+     * 获取与此{@code URL}相关联的协议的默认端口号。如果URL方案或URL的URLStreamHandler未定义默认端口号,则返回-1。
+     * 
+     * 
      * @return  the port number
      * @since 1.4
      */
@@ -786,6 +1011,10 @@ public final class URL implements java.io.Serializable {
     /**
      * Gets the protocol name of this {@code URL}.
      *
+     * <p>
+     *  获取此{@code URL}的协议名称。
+     * 
+     * 
      * @return  the protocol of this {@code URL}.
      */
     public String getProtocol() {
@@ -798,6 +1027,10 @@ public final class URL implements java.io.Serializable {
      * literal IPv6 address, this method will return the IPv6 address
      * enclosed in square brackets ({@code '['} and {@code ']'}).
      *
+     * <p>
+     *  获取此{@code URL}的主机名(如果适用)。主机的格式符合RFC 2732,即对于文字IPv6地址,此方法将返回用方括号括起来的IPv6地址({@code'['}和{@code']'})。
+     * 
+     * 
      * @return  the host name of this {@code URL}.
      */
     public String getHost() {
@@ -812,6 +1045,11 @@ public final class URL implements java.io.Serializable {
      * no query portion, this method and <CODE>getPath()</CODE> will
      * return identical results.
      *
+     * <p>
+     *  获取此{@code URL}的文件名。返回的文件部分将与<CODE> getPath()</CODE>相同,加上<CODE> getQuery()</CODE>的值(如果有)的串联。
+     * 如果没有查询部分,此方法和<CODE> getPath()</CODE>将返回相同的结果。
+     * 
+     * 
      * @return  the file name of this {@code URL},
      * or an empty string if one does not exist
      */
@@ -823,6 +1061,10 @@ public final class URL implements java.io.Serializable {
      * Gets the anchor (also known as the "reference") of this
      * {@code URL}.
      *
+     * <p>
+     *  获取此{@code URL}的锚点(也称为"引用")。
+     * 
+     * 
      * @return  the anchor (also known as the "reference") of this
      *          {@code URL}, or <CODE>null</CODE> if one does not exist
      */
@@ -851,6 +1093,20 @@ public final class URL implements java.io.Serializable {
      * Note: The defined behavior for {@code equals} is known to
      * be inconsistent with virtual hosting in HTTP.
      *
+     * <p>
+     *  将此网址与其他对象的相等性进行比较。<p>
+     * 
+     *  如果给定的对象不是一个URL,那么这个方法立即返回{@code false}。<p>
+     * 
+     *  如果两个URL对象具有相同的协议,引用等效主机,在主机上具有相同的端口号,以及文件的相同文件和片段,则两个URL对象是相等的。<p>
+     * 
+     *  如果两个主机名可以解析为相同的IP地址,则两个主机被认为是等效的;否则如果无法解析任一主机名,则主机名必须相等,不考虑大小写;或两个主机名都等于​​null。<p>
+     * 
+     *  由于主机比较需要名称解析,此操作是阻塞操作。 <p>
+     * 
+     * 注意：已知{@code equals}的定义行为与HTTP中的虚拟主机不一致。
+     * 
+     * 
      * @param   obj   the URL to compare against.
      * @return  {@code true} if the objects are the same;
      *          {@code false} otherwise.
@@ -869,6 +1125,12 @@ public final class URL implements java.io.Serializable {
      * The hash code is based upon all the URL components relevant for URL
      * comparison. As such, this operation is a blocking operation.<p>
      *
+     * <p>
+     *  创建适合哈希表索引的整数。<p>
+     * 
+     *  哈希码基于与URL比较相关的所有URL组件。因此,此操作是阻止操作。<p>
+     * 
+     * 
      * @return  a hash code for this {@code URL}.
      */
     public synchronized int hashCode() {
@@ -886,6 +1148,12 @@ public final class URL implements java.io.Serializable {
      * {@code other} argument are equal without taking the
      * fragment component into consideration.
      *
+     * <p>
+     *  比较两个网址,不包括片段组件。<p>
+     * 
+     *  如果此{@code URL}和{@code other}参数相等,而不考虑片段组件,则返回{@code true}。
+     * 
+     * 
      * @param   other   the {@code URL} to compare against.
      * @return  {@code true} if they reference the same remote object;
      *          {@code false} otherwise.
@@ -899,6 +1167,10 @@ public final class URL implements java.io.Serializable {
      * string is created by calling the {@code toExternalForm}
      * method of the stream protocol handler for this object.
      *
+     * <p>
+     *  构造此{@code URL}的字符串表示形式。该字符串是通过调用此对象的流协议处理程序的{@code toExternalForm}方法创建的。
+     * 
+     * 
      * @return  a string representation of this object.
      * @see     java.net.URL#URL(java.lang.String, java.lang.String, int,
      *                  java.lang.String)
@@ -913,6 +1185,10 @@ public final class URL implements java.io.Serializable {
      * string is created by calling the {@code toExternalForm}
      * method of the stream protocol handler for this object.
      *
+     * <p>
+     *  构造此{@code URL}的字符串表示形式。该字符串是通过调用此对象的流协议处理程序的{@code toExternalForm}方法创建的。
+     * 
+     * 
      * @return  a string representation of this object.
      * @see     java.net.URL#URL(java.lang.String, java.lang.String,
      *                  int, java.lang.String)
@@ -929,6 +1205,11 @@ public final class URL implements java.io.Serializable {
      * to a URI. However, some URLs that are not strictly in compliance
      * can not be converted to a URI.
      *
+     * <p>
+     *  返回与此网址等效的{@link java.net.URI}。此方法的功能与{@code new URI(this.toString())}相同。
+     *  <p>请注意,符合RFC 2396的任何网址实例都可以转换为URI。但是,某些不严格遵守的网址不能转换为URI。
+     * 
+     * 
      * @exception URISyntaxException if this URL is not formatted strictly according to
      *            to RFC2396 and cannot be converted to a URI.
      *
@@ -962,6 +1243,21 @@ public final class URL implements java.io.Serializable {
      * HttpURLConnection will be returned, and for JAR a
      * JarURLConnection will be returned.</P>
      *
+     * <p>
+     *  返回一个{@link java.net.URLConnection URLConnection}实例,该实例表示与{@code URL}引用的远程对象的连接。
+     * 
+     * <P>每次调用协议处理程序的{@linkplain java.net.URLStreamHandler#openConnection(URL)URLStreamHandler.openConnection(URL)}
+     * 方法时,都会创建{@linkplain java.net.URLConnection URLConnection}的新实例此URL。
+     * </P>。
+     * 
+     *  <p>应该注意,URLConnection实例在创建时不会建立实际的网络连接。
+     * 这只会在调用{@linkplain java.net.URLConnection#connect()URLConnection.connect()}时发生。</P>。
+     * 
+     *  <P>如果对于URL的协议(例如HTTP或JAR),存在属于以下包之一或其子包之一的公共的,专用的URLConnection子类：java.lang,java.io,java.util,java .n
+     * et,返回的连接将是那个子类。
+     * 例如,对于HTTP,将返回HttpURLConnection,对于JAR,将返回JarURLConnection。</P>。
+     * 
+     * 
      * @return     a {@link java.net.URLConnection URLConnection} linking
      *             to the URL.
      * @exception  IOException  if an I/O exception occurs.
@@ -981,6 +1277,12 @@ public final class URL implements java.io.Serializable {
      * Invoking this method preempts the system's default ProxySelector
      * settings.
      *
+     * <p>
+     *  与{@link #openConnection()}相同,但连接将通过指定的代理进行;不支持代理的协议处理程序将忽略代理参数并建立正常连接。
+     * 
+     *  调用此方法将抢占系统的默认ProxySelector设置。
+     * 
+     * 
      * @param      proxy the Proxy through which this connection
      *             will be made. If direct connection is desired,
      *             Proxy.NO_PROXY should be specified.
@@ -1029,6 +1331,11 @@ public final class URL implements java.io.Serializable {
      *     openConnection().getInputStream()
      * </pre></blockquote>
      *
+     * <p>
+     *  打开与此{@code URL}的连接,并返回用于从该连接中读取的{@code InputStream}。这个方法是一个缩写：<blockquote> <pre> openConnection()。
+     * getInputStream()</pre> </blockquote>。
+     * 
+     * 
      * @return     an input stream for reading from the URL connection.
      * @exception  IOException  if an I/O exception occurs.
      * @see        java.net.URL#openConnection()
@@ -1044,6 +1351,10 @@ public final class URL implements java.io.Serializable {
      *     openConnection().getContent()
      * </pre></blockquote>
      *
+     * <p>
+     * 获取此网址的内容。这个方法是一个缩写：<blockquote> <pre> openConnection()。getContent()</pre> </blockquote>
+     * 
+     * 
      * @return     the contents of this URL.
      * @exception  IOException  if an I/O exception occurs.
      * @see        java.net.URLConnection#getContent()
@@ -1058,6 +1369,10 @@ public final class URL implements java.io.Serializable {
      *     openConnection().getContent(Class[])
      * </pre></blockquote>
      *
+     * <p>
+     *  获取此网址的内容。这个方法是一个简写：<blockquote> <pre> openConnection()。getContent(Class [])</pre> </blockquote>
+     * 
+     * 
      * @param classes an array of Java types
      * @return     the content object of this URL that is the first match of
      *               the types specified in the classes array.
@@ -1073,6 +1388,9 @@ public final class URL implements java.io.Serializable {
 
     /**
      * The URLStreamHandler factory.
+     * <p>
+     *  URLStreamHandler工厂。
+     * 
      */
     static URLStreamHandlerFactory factory;
 
@@ -1089,6 +1407,14 @@ public final class URL implements java.io.Serializable {
      * to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  设置应用程序的{@code URLStreamHandlerFactory}。此方法在给定的Java虚拟机中最多只能调用一次。
+     * 
+     *  p> {@code URLStreamHandlerFactory}实例用于从协议名称构造流协议处理程序。
+     * 
+     *  <p>如果有安全管理员,此方法会先调用安全管理员的{@code checkSetFactory}方法,以确保允许操作。这可能导致SecurityException。
+     * 
+     * 
      * @param      fac   the desired factory.
      * @exception  Error  if the application has already set a factory.
      * @exception  SecurityException  if a security manager exists and its
@@ -1115,12 +1441,19 @@ public final class URL implements java.io.Serializable {
 
     /**
      * A table of protocol handlers.
+     * <p>
+     *  协议处理程序表。
+     * 
      */
     static Hashtable<String,URLStreamHandler> handlers = new Hashtable<>();
     private static Object streamHandlerLock = new Object();
 
     /**
      * Returns the Stream Handler.
+     * <p>
+     *  返回流处理程序。
+     * 
+     * 
      * @param protocol the protocol to use
      */
     static URLStreamHandler getURLStreamHandler(String protocol) {
@@ -1224,6 +1557,10 @@ public final class URL implements java.io.Serializable {
      * ObjectOutputStream. The handler is not saved since it is
      * specific to this system.
      *
+     * <p>
+     *  WriteObject被调用来将URL的状态保存到ObjectOutputStream。处理程序不会被保存,因为它特定于此系统。
+     * 
+     * 
      * @serialData the default write object value. When read back in,
      * the reader must ensure that calling getURLStreamHandler with
      * the protocol variable returns a valid URLStreamHandler and
@@ -1239,6 +1576,8 @@ public final class URL implements java.io.Serializable {
      * readObject is called to restore the state of the URL from the
      * stream.  It reads the components of the URL and finds the local
      * stream handler.
+     * <p>
+     *  readObject被调用以从流中恢复URL的状态。它读取URL的组件并查找本地流处理程序。
      */
     private synchronized void readObject(java.io.ObjectInputStream s)
          throws IOException, ClassNotFoundException

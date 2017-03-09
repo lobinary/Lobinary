@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.keys;
 
@@ -91,6 +100,25 @@ import org.w3c.dom.NodeList;
  * The <CODE>containsXXX()</CODE> methods return <I>whether</I> the KeyInfo
  * contains the corresponding type.
  *
+ * <p>
+ *  该类代表KeyInfo Element,它可以包含密钥,名称,证书和其他公钥管理信息,例如带内密钥分发或密钥协议数据。
+ * <BR />
+ *  KeyInfo Element有两个基本功能：一个是KeyResolve,用于在签名验证处理中获取公钥。另一个是在签名生成处理中获得元素的Element。
+ * <BR />
+ *  <CODE> lengthXXX()</CODE>方法提供对内部Key对象的访问：
+ * <UL>
+ * <LI>如果<CODE> KeyInfo </CODE>是从元素(签名验证)构造的,则<CODE> lengthXXX()</CODE>方法搜索<CODE> ds：KeyInfo </CODE>为已知类
+ * 型。
+ *  </LI> <LI>如果<CODE> KeyInfo </CODE>是从头开始构建的(在签名生成期间),<CODE> lengthXXX()</CODE>方法返回<CODE> XXXs </CODE >
+ * 已经传递给KeyInfo的对象</LI>。
+ * </UL>
+ * <BR />
+ *  <CODE> addXXX()</CODE>方法用于将适当类型的对象添加到<CODE> KeyInfo </CODE>中。这在签名生成期间使用。
+ * <BR />
+ *  <CODE> itemXXX(int i)</CODE>方法返回相应类型的第i个对象。
+ * <BR />
+ *  <CODE> containsXXX()</CODE>方法返回<I>是否</I> KeyInfo包含相应的类型。
+ * 
  */
 public class KeyInfo extends SignatureElementProxy {
 
@@ -117,6 +145,9 @@ public class KeyInfo extends SignatureElementProxy {
 
     /**
      * Stores the individual (per-KeyInfo) {@link KeyResolverSpi}s
+     * <p>
+     *  存储个人(每个KeyInfo){@link KeyResolverSpi}
+     * 
      */
     private List<KeyResolverSpi> internalKeyResolvers = new ArrayList<KeyResolverSpi>();
 
@@ -124,6 +155,10 @@ public class KeyInfo extends SignatureElementProxy {
 
     /**
      * Constructor KeyInfo
+     * <p>
+     *  构造函数KeyInfo
+     * 
+     * 
      * @param doc
      */
     public KeyInfo(Document doc) {
@@ -135,6 +170,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Constructor KeyInfo
      *
+     * <p>
+     *  构造函数KeyInfo
+     * 
+     * 
      * @param element
      * @param baseURI
      * @throws XMLSecurityException
@@ -150,6 +189,9 @@ public class KeyInfo extends SignatureElementProxy {
 
     /**
      * Set whether secure processing is enabled or not. The default is false.
+     * <p>
+     *  设置是否启用安全处理。默认值为false。
+     * 
      */
     public void setSecureValidation(boolean secureValidation) {
         this.secureValidation = secureValidation;
@@ -158,6 +200,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Sets the <code>Id</code> attribute
      *
+     * <p>
+     *  设置<code> Id </code>属性
+     * 
+     * 
      * @param Id ID
      */
     public void setId(String id) {
@@ -170,6 +216,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Returns the <code>Id</code> attribute
      *
+     * <p>
+     *  返回<code> Id </code>属性
+     * 
+     * 
      * @return the <code>Id</code> attribute
      */
     public String getId() {
@@ -179,6 +229,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addKeyName
      *
+     * <p>
+     *  方法addKeyName
+     * 
+     * 
      * @param keynameString
      */
     public void addKeyName(String keynameString) {
@@ -188,6 +242,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param keyname
      */
     public void add(KeyName keyname) {
@@ -198,6 +256,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addKeyValue
      *
+     * <p>
+     *  方法addKeyValue
+     * 
+     * 
      * @param pk
      */
     public void addKeyValue(PublicKey pk) {
@@ -207,6 +269,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addKeyValue
      *
+     * <p>
+     *  方法addKeyValue
+     * 
+     * 
      * @param unknownKeyValueElement
      */
     public void addKeyValue(Element unknownKeyValueElement) {
@@ -216,6 +282,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param dsakeyvalue
      */
     public void add(DSAKeyValue dsakeyvalue) {
@@ -225,6 +295,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param rsakeyvalue
      */
     public void add(RSAKeyValue rsakeyvalue) {
@@ -234,6 +308,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param pk
      */
     public void add(PublicKey pk) {
@@ -243,6 +321,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param keyvalue
      */
     public void add(KeyValue keyvalue) {
@@ -253,6 +335,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addMgmtData
      *
+     * <p>
+     *  方法addMgmtData
+     * 
+     * 
      * @param mgmtdata
      */
     public void addMgmtData(String mgmtdata) {
@@ -262,6 +348,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param mgmtdata
      */
     public void add(MgmtData mgmtdata) {
@@ -272,6 +362,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addPGPData
      *
+     * <p>
+     *  方法addPGPData
+     * 
+     * 
      * @param pgpdata
      */
     public void add(PGPData pgpdata) {
@@ -282,6 +376,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addRetrievalMethod
      *
+     * <p>
+     *  方法addRetrievalMethod
+     * 
+     * 
      * @param uri
      * @param transforms
      * @param Type
@@ -293,6 +391,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param retrievalmethod
      */
     public void add(RetrievalMethod retrievalmethod) {
@@ -303,6 +405,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param spkidata
      */
     public void add(SPKIData spkidata) {
@@ -313,6 +419,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addX509Data
      *
+     * <p>
+     *  方法addX509Data
+     * 
+     * 
      * @param x509data
      */
     public void add(X509Data x509data) {
@@ -327,6 +437,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addEncryptedKey
      *
+     * <p>
+     *  方法addEncryptedKey
+     * 
+     * 
      * @param encryptedKey
      * @throws XMLEncryptionException
      */
@@ -343,6 +457,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addDEREncodedKeyValue
      *
+     * <p>
+     *  方法addDEREncodedKeyValue
+     * 
+     * 
      * @param pk
      * @throws XMLSecurityException
      */
@@ -353,6 +471,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param derEncodedKeyValue
      */
     public void add(DEREncodedKeyValue derEncodedKeyValue) {
@@ -363,6 +485,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addKeyInfoReference
      *
+     * <p>
+     *  方法addKeyInfoReference
+     * 
+     * 
      * @param URI
      * @throws XMLSecurityException
      */
@@ -373,6 +499,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method add
      *
+     * <p>
+     *  方法添加
+     * 
+     * 
      * @param keyInfoReference
      */
     public void add(KeyInfoReference keyInfoReference) {
@@ -383,6 +513,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addUnknownElement
      *
+     * <p>
+     *  方法addUnknownElement
+     * 
+     * 
      * @param element
      */
     public void addUnknownElement(Element element) {
@@ -393,6 +527,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthKeyName
      *
+     * <p>
+     *  方法lengthKeyName
+     * 
+     * 
      * @return the number of the KeyName tags
      */
     public int lengthKeyName() {
@@ -402,6 +540,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthKeyValue
      *
+     * <p>
+     *  方法lengthKeyValue
+     * 
+     * 
      *@return the number of the KeyValue tags
      */
     public int lengthKeyValue() {
@@ -411,6 +553,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthMgmtData
      *
+     * <p>
+     *  方法lengthMgmtData
+     * 
+     * 
      *@return the number of the MgmtData tags
      */
     public int lengthMgmtData() {
@@ -420,6 +566,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthPGPData
      *
+     * <p>
+     *  方法lengthPGPData
+     * 
+     * 
      *@return the number of the PGPDat. tags
      */
     public int lengthPGPData() {
@@ -429,6 +579,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthRetrievalMethod
      *
+     * <p>
+     * 方法lengthRetrievalMethod
+     * 
+     * 
      *@return the number of the RetrievalMethod tags
      */
     public int lengthRetrievalMethod() {
@@ -438,6 +592,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthSPKIData
      *
+     * <p>
+     *  方法lengthSPKIData
+     * 
+     * 
      *@return the number of the SPKIData tags
      */
     public int lengthSPKIData() {
@@ -447,6 +605,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthX509Data
      *
+     * <p>
+     *  方法lengthX509Data
+     * 
+     * 
      *@return the number of the X509Data tags
      */
     public int lengthX509Data() {
@@ -459,6 +621,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthDEREncodedKeyValue
      *
+     * <p>
+     *  方法lengthDEREncodedKeyValue
+     * 
+     * 
      *@return the number of the DEREncodedKeyValue tags
      */
     public int lengthDEREncodedKeyValue() {
@@ -468,6 +634,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthKeyInfoReference
      *
+     * <p>
+     *  方法lengthKeyInfoReference
+     * 
+     * 
      *@return the number of the KeyInfoReference tags
      */
     public int lengthKeyInfoReference() {
@@ -477,6 +647,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method lengthUnknownElement
      * NOTE possibly buggy.
+     * <p>
+     *  方法lengthUnknownElement注意可能是buggy。
+     * 
+     * 
      * @return the number of the UnknownElement tags
      */
     public int lengthUnknownElement() {
@@ -489,6 +663,9 @@ public class KeyInfo extends SignatureElementProxy {
             /**
              * $todo$ using this method, we don't see unknown Elements
              *  from Signature NS; revisit
+             * <p>
+             *  $ todo $使用这个方法,我们没有看到来自Signature NS的未知元素;重访
+             * 
              */
             if ((current.getNodeType() == Node.ELEMENT_NODE)
                 && current.getNamespaceURI().equals(Constants.SignatureSpecNS)) {
@@ -502,6 +679,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemKeyName
      *
+     * <p>
+     *  方法itemKeyName
+     * 
+     * 
      * @param i
      * @return the asked KeyName element, null if the index is too big
      * @throws XMLSecurityException
@@ -520,6 +701,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemKeyValue
      *
+     * <p>
+     *  方法itemKeyValue
+     * 
+     * 
      * @param i
      * @return the asked KeyValue element, null if the index is too big
      * @throws XMLSecurityException
@@ -538,6 +723,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemMgmtData
      *
+     * <p>
+     *  方法itemMgmtData
+     * 
+     * 
      * @param i
      * @return the asked MgmtData element, null if the index is too big
      * @throws XMLSecurityException
@@ -556,6 +745,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemPGPData
      *
+     * <p>
+     *  方法itemPGPData
+     * 
+     * 
      * @param i
      * @return the asked PGPData element, null if the index is too big
      * @throws XMLSecurityException
@@ -574,6 +767,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemRetrievalMethod
      *
+     * <p>
+     *  方法itemRetrievalMethod
+     * 
+     * 
      * @param i
      *@return the asked RetrievalMethod element, null if the index is too big
      * @throws XMLSecurityException
@@ -592,6 +789,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemSPKIData
      *
+     * <p>
+     *  方法项SPKIData
+     * 
+     * 
      * @param i
      * @return the asked SPKIData element, null if the index is too big
      * @throws XMLSecurityException
@@ -610,6 +811,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemX509Data
      *
+     * <p>
+     *  方法项X509Data
+     * 
+     * 
      * @param i
      * @return the asked X509Data element, null if the index is too big
      * @throws XMLSecurityException
@@ -631,6 +836,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemEncryptedKey
      *
+     * <p>
+     *  方法itemEncryptedKey
+     * 
+     * 
      * @param i
      * @return the asked EncryptedKey element, null if the index is too big
      * @throws XMLSecurityException
@@ -654,6 +863,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemDEREncodedKeyValue
      *
+     * <p>
+     *  方法itemDEREncodedKeyValue
+     * 
+     * 
      * @param i
      * @return the asked DEREncodedKeyValue element, null if the index is too big
      * @throws XMLSecurityException
@@ -672,6 +885,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemKeyInfoReference
      *
+     * <p>
+     *  方法itemKeyInfoReference
+     * 
+     * 
      * @param i
      * @return the asked KeyInfoReference element, null if the index is too big
      * @throws XMLSecurityException
@@ -690,6 +907,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemUnknownElement
      *
+     * <p>
+     *  方法itemUnknownElement
+     * 
+     * 
      * @param i index
      * @return the element number of the unknown elements
      */
@@ -703,6 +924,9 @@ public class KeyInfo extends SignatureElementProxy {
             /**
              * $todo$ using this method, we don't see unknown Elements
              *  from Signature NS; revisit
+             * <p>
+             *  $ todo $使用这个方法,我们没有看到来自Signature NS的未知元素;重访
+             * 
              */
             if ((current.getNodeType() == Node.ELEMENT_NODE)
                 && current.getNamespaceURI().equals(Constants.SignatureSpecNS)) {
@@ -720,6 +944,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method isEmpty
      *
+     * <p>
+     *  方法isEmpty
+     * 
+     * 
      * @return true if the element has no descendants.
      */
     public boolean isEmpty() {
@@ -729,6 +957,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsKeyName
      *
+     * <p>
+     *  方法containsKeyName
+     * 
+     * 
      * @return If the KeyInfo contains a KeyName node
      */
     public boolean containsKeyName() {
@@ -738,6 +970,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsKeyValue
      *
+     * <p>
+     *  方法containsKeyValue
+     * 
+     * 
      * @return If the KeyInfo contains a KeyValue node
      */
     public boolean containsKeyValue() {
@@ -747,6 +983,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsMgmtData
      *
+     * <p>
+     *  方法containsMgmtData
+     * 
+     * 
      * @return If the KeyInfo contains a MgmtData node
      */
     public boolean containsMgmtData() {
@@ -756,6 +996,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsPGPData
      *
+     * <p>
+     *  方法包含PGPData
+     * 
+     * 
      * @return If the KeyInfo contains a PGPData node
      */
     public boolean containsPGPData() {
@@ -765,6 +1009,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsRetrievalMethod
      *
+     * <p>
+     *  方法containsRetrievalMethod
+     * 
+     * 
      * @return If the KeyInfo contains a RetrievalMethod node
      */
     public boolean containsRetrievalMethod() {
@@ -774,6 +1022,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsSPKIData
      *
+     * <p>
+     *  方法包含SPKIData
+     * 
+     * 
      * @return If the KeyInfo contains a SPKIData node
      */
     public boolean containsSPKIData() {
@@ -783,6 +1035,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsUnknownElement
      *
+     * <p>
+     *  方法containsUnknownElement
+     * 
+     * 
      * @return If the KeyInfo contains a UnknownElement node
      */
     public boolean containsUnknownElement() {
@@ -792,6 +1048,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsX509Data
      *
+     * <p>
+     *  方法containsX509Data
+     * 
+     * 
      * @return If the KeyInfo contains a X509Data node
      */
     public boolean containsX509Data() {
@@ -801,6 +1061,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsDEREncodedKeyValue
      *
+     * <p>
+     *  方法containsDEREncodedKeyValue
+     * 
+     * 
      * @return If the KeyInfo contains a DEREncodedKeyValue node
      */
     public boolean containsDEREncodedKeyValue() {
@@ -810,6 +1074,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method containsKeyInfoReference
      *
+     * <p>
+     *  方法containsKeyInfoReference
+     * 
+     * 
      * @return If the KeyInfo contains a KeyInfoReference node
      */
     public boolean containsKeyInfoReference() {
@@ -819,6 +1087,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * This method returns the public key.
      *
+     * <p>
+     *  此方法返回公钥。
+     * 
+     * 
      * @return If the KeyInfo contains a PublicKey node
      * @throws KeyResolverException
      */
@@ -855,6 +1127,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Searches the library wide KeyResolvers for public keys
      *
+     * <p>
+     *  搜索库的宽KeyResolvers的公钥
+     * 
+     * 
      * @return The public key contained in this Node.
      * @throws KeyResolverException
      */
@@ -887,6 +1163,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Searches the per-KeyInfo KeyResolvers for public keys
      *
+     * <p>
+     *  搜索公钥的per-KeyInfo KeyResolvers
+     * 
+     * 
      * @return The public key contained in this Node.
      * @throws KeyResolverException
      */
@@ -921,6 +1201,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method getX509Certificate
      *
+     * <p>
+     *  方法getX509Certificate
+     * 
+     * 
      * @return The certificate contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -961,6 +1245,10 @@ public class KeyInfo extends SignatureElementProxy {
      * child elements. Each combination of {@link KeyResolver} and child element
      * is checked against all {@link StorageResolver}s.
      *
+     * <p>
+     *  此方法使用每个系统范围的{@link KeyResolver}搜索子元素。对所有{@link StorageResolver}检查{@link KeyResolver}和子元素的每个组合。
+     * 
+     * 
      * @return The certificate contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -1010,6 +1298,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method getX509CertificateFromInternalResolvers
      *
+     * <p>
+     *  方法getX509CertificateFromInternalResolvers
+     * 
+     * 
      * @return The certificate contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -1038,6 +1330,10 @@ public class KeyInfo extends SignatureElementProxy {
 
     /**
      * This method returns a secret (symmetric) key. This is for XML Encryption.
+     * <p>
+     *  此方法返回秘密(对称)密钥。这是用于XML加密。
+     * 
+     * 
      * @return the secret key contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -1074,6 +1370,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Searches the library wide KeyResolvers for Secret keys
      *
+     * <p>
+     *  搜索库密钥KeyResolvers的密钥
+     * 
+     * 
      * @return the secret key contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -1107,6 +1407,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Searches the per-KeyInfo KeyResolvers for secret keys
      *
+     * <p>
+     * 搜索密钥的per-KeyInfo KeyResolvers
+     * 
+     * 
      * @return the secret key contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -1141,6 +1445,10 @@ public class KeyInfo extends SignatureElementProxy {
 
     /**
      * This method returns a private key. This is for Key Transport in XML Encryption.
+     * <p>
+     *  此方法返回一个私钥。这是XML加密中的密钥传输。
+     * 
+     * 
      * @return the private key contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -1174,6 +1482,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Searches the library wide KeyResolvers for Private keys
      *
+     * <p>
+     *  搜索库宽KeyResolvers的私钥
+     * 
+     * 
      * @return the private key contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -1207,6 +1519,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Searches the per-KeyInfo KeyResolvers for private keys
      *
+     * <p>
+     *  搜索per-KeyInfo KeyResolvers的私钥
+     * 
+     * 
      * @return the private key contained in this KeyInfo
      * @throws KeyResolverException
      */
@@ -1242,6 +1558,10 @@ public class KeyInfo extends SignatureElementProxy {
      * This method is used to add a custom {@link KeyResolverSpi} to a KeyInfo
      * object.
      *
+     * <p>
+     *  此方法用于向KeyInfo对象添加自定义{@link KeyResolverSpi}。
+     * 
+     * 
      * @param realKeyResolver
      */
     public void registerInternalKeyResolver(KeyResolverSpi realKeyResolver) {
@@ -1250,6 +1570,10 @@ public class KeyInfo extends SignatureElementProxy {
 
     /**
      * Method lengthInternalKeyResolver
+     * <p>
+     *  方法lengthInternalKeyResolver
+     * 
+     * 
      * @return the length of the key
      */
     int lengthInternalKeyResolver() {
@@ -1259,6 +1583,10 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method itemInternalKeyResolver
      *
+     * <p>
+     *  方法itemInternalKeyResolver
+     * 
+     * 
      * @param i the index
      * @return the KeyResolverSpi for the index.
      */
@@ -1269,6 +1597,9 @@ public class KeyInfo extends SignatureElementProxy {
     /**
      * Method addStorageResolver
      *
+     * <p>
+     *  方法addStorageResolver
+     * 
      * @param storageResolver
      */
     public void addStorageResolver(StorageResolver storageResolver) {

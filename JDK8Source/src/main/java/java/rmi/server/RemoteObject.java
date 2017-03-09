@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,11 @@ import sun.rmi.server.Util;
  * <code>RemoteObject</code> provides the remote semantics of Object by
  * implementing methods for hashCode, equals, and toString.
  *
+ * <p>
+ *  <code> RemoteObject </code>类实现远程对象的<code> java.lang.Object </code>行为。
+ *  <code> RemoteObject </code>通过实现hashCode,equals和toString的方法提供Object的远程语义。
+ * 
+ * 
  * @author      Ann Wollrath
  * @author      Laird Dornin
  * @author      Peter Jones
@@ -51,6 +57,9 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
 
     /**
      * Creates a remote object.
+     * <p>
+     *  创建远程对象。
+     * 
      */
     protected RemoteObject() {
         ref = null;
@@ -59,6 +68,10 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
     /**
      * Creates a remote object, initialized with the specified remote
      * reference.
+     * <p>
+     *  创建使用指定的远程引用初始化的远程对象。
+     * 
+     * 
      * @param newref remote reference
      */
     protected RemoteObject(RemoteRef newref) {
@@ -77,6 +90,16 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
      * of its <code>RemoteObject</code> wrapper instance or the result may
      * be unportable.
      *
+     * <p>
+     *  返回远程对象的远程引用。
+     * 
+     *  <p>注意：从此方法返回的对象可能是特定于实现的类的实例。
+     *  <code> RemoteObject </code>类通过其自定义<code> writeObject </code>和<code> readObject </code>方法的行为确保其实例的远程引
+     * 用的序列化可移植性。
+     *  <p>注意：从此方法返回的对象可能是特定于实现的类的实例。
+     *  <code> RemoteRef </code>的实例不应在其<code> RemoteObject </code>包装程序实例之外序列化,否则结果可能不可移植。
+     * 
+     * 
      * @return remote reference for the remote object
      * @since 1.2
      */
@@ -88,6 +111,10 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
      * Returns the stub for the remote object <code>obj</code> passed
      * as a parameter. This operation is only valid <i>after</i>
      * the object has been exported.
+     * <p>
+     *  返回作为参数传递的远程对象<code> obj </code>的存根。此操作仅在导出对象</i>之后有效。
+     * 
+     * 
      * @param obj the remote object whose stub is needed
      * @return the stub for the remote object, <code>obj</code>.
      * @exception NoSuchObjectException if the stub for the
@@ -112,6 +139,10 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
      * that refer to the same remote object will have the same hash code
      * (in order to support remote objects as keys in hash tables).
      *
+     * <p>
+     *  返回远程对象的哈希码。引用同一远程对象的两个远程对象存根将具有相同的哈希码(以支持远程对象作为哈希表中的密钥)。
+     * 
+     * 
      * @see             java.util.Hashtable
      */
     public int hashCode() {
@@ -127,6 +158,11 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
      * then this method delegates by returning the result of invoking the
      * <code>equals</code> method of its parameter with this remote object
      * as the argument.
+     * <p>
+     * 比较两个远程对象是否相等。返回一个布尔值,指示此远程对象是否等同于指定的对象。当远程对象存储在散列表中时,将使用此方法。
+     * 如果指定的对象本身不是RemoteObject的实例,则该方法通过返回调用其参数的<code> equals </code>方法的结果作为参数来委托。
+     * 
+     * 
      * @param   obj     the Object to compare with
      * @return  true if these Objects are equal; false otherwise.
      * @see             java.util.Hashtable
@@ -144,6 +180,9 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
              * use the result of its equals method, to support symmetry is a
              * remote object implementation class that does not extend
              * RemoteObject wishes to support equality with its stub objects.
+             * <p>
+             *  修正为4099660：如果对象不是RemoteObject的实例,使用其equals方法的结果,以支持对称性是一个远程对象实现类,不扩展RemoteObject希望支持与其存根对象的相等性。
+             * 
              */
             return obj.equals(this);
         } else {
@@ -153,6 +192,9 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
 
     /**
      * Returns a String that represents the value of this remote object.
+     * <p>
+     *  返回表示此远程对象的值的字符串。
+     * 
      */
     public String toString() {
         String classname = Util.getUnqualifiedName(getClass());
@@ -181,6 +223,19 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
      * the <code>writeObject</code> method is invoked on <code>out</code>
      * passing this object's <code>ref</code> field as the argument.
      *
+     * <p>
+     *  <code> writeObject </code>用于自定义序列化。
+     * 
+     *  <p>此方法将此对象的序列化表单写入此类,如下所示：
+     * 
+     * <p>在此对象的<code> ref </code>字段上调用{@link RemoteRef#getRefClass(java.io.ObjectOutput)getRefClass}方法以获取其外部
+     * 引用类型名称。
+     * 如果<code> getRefClass </code>返回的值是长度大于零的非<code> null </code>字符串,则<code> writeUTF </code>方法在<code> / co
+     * de>与<code> getRefClass </code>返回的值,然后在该对象的<code> ref </code>字段传递<code> writeExternal </code>代码>作为参数;否
+     * 则,使用零长度字符串(<code>""</code>)在<code> out </code>上调用<code> writeUTF </code>方法,然后<code> writeObject <代码>方
+     * 法在<code> out </code>上调用,将此对象的<code> ref </code>字段作为参数传递。
+     * 
+     * 
      * @serialData
      *
      * The serialized data for this class comprises a string (written with
@@ -368,6 +423,9 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
                 /*
                  * No reference class name specified, so serialize
                  * remote reference.
+                 * <p>
+                 *  没有指定引用类名,所以序列化远程引用。
+                 * 
                  */
                 out.writeUTF("");
                 out.writeObject(ref);
@@ -375,6 +433,9 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
                 /*
                  * Built-in reference class specified, so delegate
                  * to reference to write out its external form.
+                 * <p>
+                 *  内置引用类指定,所以委托引用来写出它的外部形式。
+                 * 
                  */
                 out.writeUTF(refClassName);
                 ref.writeExternal(out);
@@ -417,6 +478,20 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
      * class corresponding to that external ref type name, in which
      * case this object's <code>ref</code> field will be set to an
      * instance of that implementation-specific class.
+     * <p>
+     *  <code> readObject </code>用于自定义序列化。
+     * 
+     *  <p>此方法读取此对象的此类的序列化形式,如下所示：
+     * 
+     * <p>在<code>中的<code>中调用<code> readUTF </code>方法以读取要填充到此对象的<code> RemoteRef </code>实例的外部引用类型名称< code> re
+     * f </code>字段。
+     * 如果<code> readUTF </code>返回的字符串长度为零,则</code>中的<code>上调用<code> readObject </code>方法,而不是<code> readObjec
+     * t < / code>被转换为<code> RemoteRef </code>,并且此对象的<code> ref </code>字段设置为该值。
+     * 否则,此对象的<code> ref </code>字段设置为<code> RemoteRef </code>实例,该实例由对应于<code>返回的外部引用类型名称的特定实现类class readUTF 
+     * < code>,然后在此对象的<code> ref </code>字段上调用<code> readExternal </code>方法。
+     * 
+     * <p>如果外部参考类型名称为<code>"UnicastRef"</code>,<code>"UnicastServerRef"</code>,<code>"UnicastRef2"</code>,<code>
+     * "UnicastServerRef2" / code>或<code>"ActivatableRef"</code>,必须找到相应的特定于实现的类,并且其<code> readExternal </code>
      */
     private void readObject(java.io.ObjectInputStream in)
         throws java.io.IOException, java.lang.ClassNotFoundException
@@ -426,6 +501,11 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
             /*
              * No reference class name specified, so construct
              * remote reference from its serialized form.
+             * <p>
+             * 方法必须读取指定的外部引用类型名称的串行数据要写入此类的<b> serialData </b>文档中。
+             * 如果外部引用类型名称是任何其他字符串(非零长度),将抛出一个<code> ClassNotFoundException </code>,除非实现提供了一个对应于该外部引用类型名称的实现特定类,其中cas
+             * e这个对象的<code> ref </code>字段将被设置为该实现特定的类的实例。
+             * 
              */
             ref = (RemoteRef) in.readObject();
         } else {
@@ -433,6 +513,9 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
              * Built-in reference class specified, so delegate to
              * internal reference class to initialize its fields from
              * its external form.
+             * <p>
+             *  没有指定引用类名,因此从其序列化形式构造远程引用。
+             * 
              */
             String internalRefClassName =
                 RemoteRef.packagePrefix + "." + refClassName;
@@ -444,6 +527,9 @@ public abstract class RemoteObject implements Remote, java.io.Serializable {
                  * If this step fails, assume we found an internal
                  * class that is not meant to be a serializable ref
                  * type.
+                 * <p>
+                 *  内置引用类指定,因此委托给内部引用类从其外部形式初始化其字段。
+                 * 
                  */
             } catch (InstantiationException e) {
                 throw new ClassNotFoundException(internalRefClassName, e);

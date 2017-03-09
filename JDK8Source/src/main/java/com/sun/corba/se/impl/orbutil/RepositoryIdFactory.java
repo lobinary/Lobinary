@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,9 @@ public abstract class RepositoryIdFactory
 
     /**
      * Returns the latest version RepositoryIdStrings instance
+     * <p>
+     *  返回最新版本的RepositoryIdStrings实例
+     * 
      */
     public static RepositoryIdStrings getRepIdStringsFactory()
     {
@@ -43,6 +47,8 @@ public abstract class RepositoryIdFactory
 
     /**
      * Returns the latest version RepositoryIdUtility instance
+     * <p>
+     *  返回最新版本的RepositoryIdUtility实例
      */
     public static RepositoryIdUtility getRepIdUtility()
     {

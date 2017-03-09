@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc. 1996,1997  - 保留所有权利(C)版权所有IBM Corp. 1996-1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.text;
@@ -47,6 +54,10 @@ import sun.text.IntHashtable;
  * tables that are used by the collation routines.  Several RuleBasedCollators
  * can share a single RBCollationTables object, easing memory requirements and
  * improving performance.
+ * <p>
+ *  此类包含RuleBasedCollat​​or的静态状态：归类例程使用的各种表。
+ * 几个RuleBasedCollat​​ors可以共享单个RBCollat​​ionTables对象,从而减少内存需求并提高性能。
+ * 
  */
 final class RBCollationTables {
     //===========================================================================================
@@ -88,6 +99,9 @@ final class RBCollationTables {
         /**
          * Private constructor.  Prevents anyone else besides RBTableBuilder
          * from gaining direct access to the internals of this class.
+         * <p>
+         *  私有构造函数。阻止除RBTableBuilder之外的任何人都能直接访问这个类的内部。
+         * 
          */
         private BuildAPI() {
         }
@@ -99,6 +113,11 @@ final class RBCollationTables {
          * copies of all these variables until the end of the build process and then
          * copies them en masse into the actual tables object once all the construction
          * logic is complete.  This function does that "copying en masse".
+         * <p>
+         *  RBTableBuilder使用此函数来填充此对象的所有成员。
+         *  (有效地,构建器类作为这个类的"朋友",但为了避免改变太多的逻辑,它携带所有这些变量的"阴影"副本,直到构建过程结束,然后复制它们一旦所有的构造逻辑完成,这个功能就是"复制"。
+         * 
+         * 
          * @param f2ary The value for frenchSec (the French-secondary flag)
          * @param swap The value for SE Asian swapping rule
          * @param map The collator's character-mapping table (the value for mapping)
@@ -130,6 +149,10 @@ final class RBCollationTables {
 
     /**
      * Gets the table-based rules for the collation object.
+     * <p>
+     * 获取排序规则对象的基于表的规则。
+     * 
+     * 
      * @return returns the collation rules that the table collation object
      * was created from.
      */
@@ -153,6 +176,10 @@ final class RBCollationTables {
     /**
      *  Get the entry of hash table of the contracting string in the collation
      *  table.
+     * <p>
+     *  在排序规则表中获取合同字符串的哈希表的条目。
+     * 
+     * 
      *  @param ch the starting character of the contracting string
      */
     Vector<EntryPair> getContractValues(int ch)
@@ -177,6 +204,9 @@ final class RBCollationTables {
     /**
      * Returns true if this character appears anywhere in a contracting
      * character sequence.  (Used by CollationElementIterator.setOffset().)
+     * <p>
+     *  如果此字符出现在合同字符序列中的任何位置,则返回true。 (由Collat​​ionElementIterator.setOffset()使用。)
+     * 
      */
     boolean usedInContractSeq(int c) {
         return contractFlags.get(c) == 1;
@@ -186,6 +216,10 @@ final class RBCollationTables {
       * Return the maximum length of any expansion sequences that end
       * with the specified comparison order.
       *
+      * <p>
+      *  返回以指定比较顺序结束的任何扩展序列的最大长度。
+      * 
+      * 
       * @param order a collation order returned by previous or next.
       * @return the maximum length of any expansion seuences ending
       *         with the specified order.
@@ -216,6 +250,10 @@ final class RBCollationTables {
     /**
      * Get the entry of hash table of the expanding string in the collation
      * table.
+     * <p>
+     *  获取排序规则表中扩展字符串的哈希表的条目。
+     * 
+     * 
      * @param idx the index of the expanding string value list
      */
     final int[] getExpandValueList(int idx) {
@@ -224,6 +262,10 @@ final class RBCollationTables {
 
     /**
      * Get the comarison order of a character from the collation table.
+     * <p>
+     *  从排序表中获取字符的比较顺序。
+     * 
+     * 
      * @return the comparison order of a character.
      */
     int getUnicodeOrder(int ch) {
@@ -240,6 +282,8 @@ final class RBCollationTables {
 
     /**
      * Reverse a string.
+     * <p>
+     *  颠倒字符串。
      */
     //shemran/Note: this is used for secondary order value reverse, no
     //              need to consider supplementary pair.

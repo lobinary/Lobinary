@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码。
+ * 版权所有。
+ *  **************************************************** ************** ********************************
+ * **** ****************************。
+ * 版权所有。
+ * 
+ * 
  ******************************************************************/
 
 
@@ -116,6 +127,41 @@ import sun.awt.image.SunWritableRaster;
  * standard Interleaved, Banded, and Packed SampleModels and that may
  * be processed more efficiently than a Raster created by combining
  * an externally generated SampleModel and DataBuffer.
+ * <p>
+ *  表示像素的矩形阵列的类。 Raster封装存储样本值的DataBuffer和描述如何在DataBuffer中定位给定样本值的SampleModel。
+ * <p>
+ *  栅格定义占据平面的特定矩形区域的像素的值,不一定包括(0,0)。矩形,称为栅格的边界矩形,可通过getBounds方法获得,由minX,minY,width和height值定义。
+ *  minX和minY值定义栅格左上角的坐标。对包围矩形外部的像素的引用可能导致抛出异常,或者可能导致对光栅的关联DataBuffer的非预期元素的引用。用户有责任避免访问这些像素。
+ * <p>
+ * SampleModel描述了如何将Raster的样本存储在DataBuffer的基本数组元素中。
+ * 样本可以存储一个数据元素,如PixelInterleavedSampleModel或BandedSampleModel中,或者打包为一个元素,如在SinglePixelPackedSampleModel
+ * 或MultiPixelPackedSampleModel中。
+ * SampleModel描述了如何将Raster的样本存储在DataBuffer的基本数组元素中。
+ *  SampleModel还控制是否对样本进行符号扩展,从而允许未签名的数据存储在有符号的Java数据类型(如byte,short和int)中。
+ * <p>
+ *  虽然光栅可以居住在平面中的任何地方,但SampleModel使用从(0,0)开始的简单坐标系。因此,栅格包含一个转换因子,允许像素位置在光栅的坐标系统和SampleModel的坐标系统之间映射。
+ * 从SampleModel坐标系统到栅格的坐标系的转换可以通过getSampleModelTranslateX和getSampleModelTranslateY方法获得。
+ * <p>
+ *  栅格可以通过显式构造或通过使用createChild和createTranslatedChild方法与另一个栅格共享DataBuffer。
+ * 这些方法创建的栅格可以通过getParent方法返回对它们创建的栅格的引用。
+ * 对于不是通过调用createTranslatedChild或createChild构造的栅格,getParent将返回null。
+ * <p>
+ * createTranslatedChild方法返回一个新的栅格,它共享当前栅格的所有数据,但占用相同宽度和高度但具有不同起始点的边界矩形。
+ * 例如,如果父栅格占据区域(10,10)到(100,100),并且经翻译的栅格被定义为在(50,50)开始,则父像素和像素(20,20)的像素60,60)占用由两个光栅共享的DataBuffer中的相同位
+ * 置。
+ * createTranslatedChild方法返回一个新的栅格,它共享当前栅格的所有数据,但占用相同宽度和高度但具有不同起始点的边界矩形。
+ * 在第一种情况下,应将(-10,-10)添加到像素坐标以获得相应的SampleModel坐标,在第二种情况下应添加(-50,-50)。
+ * <p>
+ *  父级和子级之间的转换可以通过从父级的那些减去子级的sampleModelTranslateX和sampleModelTranslateY值来确定。
+ * <p>
+ *  createChild方法可以用于创建仅占据其父亲的包围矩形(具有相同或已翻译的坐标系)的子集或者其父亲的带的子集的新光栅。
+ * <p>
+ *  所有构造函数都受到保护。创建栅格的正确方法是使用此类中定义的一个静态创建方法。
+ * 这些方法创建使用标准Interleaved,Banded和Packed SampleModels的Raster实例,并且可以比通过组合外部生成的SampleModel和DataBuffer创建的Rast
+ * er更有效地处理这些实例。
+ *  所有构造函数都受到保护。创建栅格的正确方法是使用此类中定义的一个静态创建方法。
+ * 
+ * 
  * @see java.awt.image.DataBuffer
  * @see java.awt.image.SampleModel
  * @see java.awt.image.PixelInterleavedSampleModel
@@ -128,6 +174,9 @@ public class Raster {
     /**
      * The SampleModel that describes how pixels from this Raster
      * are stored in the DataBuffer.
+     * <p>
+     * SampleModel描述了来自此Raster的像素如何存储在DataBuffer中。
+     * 
      */
     protected SampleModel sampleModel;
 
@@ -149,12 +198,18 @@ public class Raster {
     /**
      * The X translation from the coordinate space of the
      * Raster's SampleModel to that of the Raster.
+     * <p>
+     *  从光栅的SampleModel的坐标空间到栅格的坐标空间的X平移。
+     * 
      */
     protected int sampleModelTranslateX;
 
     /**
      * The Y translation from the coordinate space of the
      * Raster's SampleModel to that of the Raster.
+     * <p>
+     *  Y从光栅的SampleModel的坐标空间到栅格的坐标空间的Y平移。
+     * 
      */
     protected int sampleModelTranslateY;
 
@@ -188,6 +243,16 @@ public class Raster {
      * Raster.createPackedRaster().
      * <p> The only dataTypes supported currently are TYPE_BYTE
      * and TYPE_USHORT.
+     * <p>
+     *  基于具有指定数据类型,宽度,高度和带数的PixelInterleavedSampleModel创建栅格。
+     * 
+     *  <p>栅格的左上角由位置参数给出。如果location为null,将使用(0,0)。 dataType参数应该是DataBuffer类中定义的枚举值之一。
+     * 
+     *  <p>请注意,不支持交叉的<code> DataBuffer.TYPE_INT </code>栅格。
+     * 要创建<code> DataBuffer.TYPE_INT </code>类型的1波段光栅,请使用Raster.createPackedRaster()。
+     *  <p>目前唯一支持的数据类型是TYPE_BYTE和TYPE_USHORT。
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width in pixels of the image data
      * @param h         the height in pixels of the image data
@@ -230,6 +295,16 @@ public class Raster {
      * Raster.createPackedRaster().
      * <p> The only dataTypes supported currently are TYPE_BYTE
      * and TYPE_USHORT.
+     * <p>
+     *  基于具有指定的数据类型,宽度,高度,扫描线跨距,像素跨度和带偏移的PixelInterleavedSampleModel创建栅格。带的数量从bandOffsets.length推断。
+     * 
+     *  <p>栅格的左上角由位置参数给出。如果location为null,将使用(0,0)。 dataType参数应该是DataBuffer类中定义的枚举值之一。
+     * 
+     * <p>请注意,不支持交叉的<code> DataBuffer.TYPE_INT </code>栅格。
+     * 要创建<code> DataBuffer.TYPE_INT </code>类型的1波段光栅,请使用Raster.createPackedRaster()。
+     *  <p>目前唯一支持的数据类型是TYPE_BYTE和TYPE_USHORT。
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width in pixels of the image data
      * @param h         the height in pixels of the image data
@@ -290,6 +365,14 @@ public class Raster {
      *
      * <p> The only dataTypes supported currently are TYPE_BYTE, TYPE_USHORT,
      * and TYPE_INT.
+     * <p>
+     *  基于具有指定数据类型,宽度,高度和带数的BandedSampleModel创建栅格。
+     * 
+     *  <p>栅格的左上角由位置参数给出。如果location为null,将使用(0,0)。 dataType参数应该是DataBuffer类中定义的枚举值之一。
+     * 
+     *  <p>目前唯一支持的数据类型是TYPE_BYTE,TYPE_USHORT和TYPE_INT。
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width in pixels of the image data
      * @param h         the height in pixels of the image data
@@ -339,6 +422,15 @@ public class Raster {
      *
      * <p> The only dataTypes supported currently are TYPE_BYTE, TYPE_USHORT,
      * and TYPE_INT.
+     * <p>
+     *  基于具有指定的数据类型,宽度,高度,扫描线跨距,银行索引和带偏移的BandedSampleModel创建栅格。
+     * 带的数量从bankIndices.length和bandOffsets.length推断,它们必须相同。
+     * 
+     *  <p>栅格的左上角由位置参数给出。 dataType参数应该是DataBuffer类中定义的枚举值之一。
+     * 
+     *  <p>目前唯一支持的数据类型是TYPE_BYTE,TYPE_USHORT和TYPE_INT。
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width in pixels of the image data
      * @param h         the height in pixels of the image data
@@ -430,6 +522,14 @@ public class Raster {
      *
      * <p> The only dataTypes supported currently are TYPE_BYTE, TYPE_USHORT,
      * and TYPE_INT.
+     * <p>
+     *  基于具有指定数据类型,宽度,高度和带掩码的SinglePixelPackedSampleModel创建栅格。带的数量从bandMasks.length推断。
+     * 
+     * <p>栅格的左上角由位置参数给出。如果location为null,将使用(0,0)。 dataType参数应该是DataBuffer类中定义的枚举值之一。
+     * 
+     *  <p>目前唯一支持的数据类型是TYPE_BYTE,TYPE_USHORT和TYPE_INT。
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width in pixels of the image data
      * @param h         the height in pixels of the image data
@@ -494,6 +594,17 @@ public class Raster {
      *
      * <p> The only dataTypes supported currently are TYPE_BYTE, TYPE_USHORT,
      * and TYPE_INT.
+     * <p>
+     *  基于具有指定数据类型,宽度,高度,带数和每个带位数的打包SampleModel创建栅格。如果带的数量为1,则SampleModel将是MultiPixelPackedSampleModel。
+     * 
+     *  <p>如果带数大于1,则SampleModel将是SinglePixelPackedSampleModel,每个带都具有bitsPerBand位。
+     * 在任一情况下,必须满足由相应SampleModel强加的对dataType和bitsPerBand的要求。
+     * 
+     *  <p>栅格的左上角由位置参数给出。如果location为null,将使用(0,0)。 dataType参数应该是DataBuffer类中定义的枚举值之一。
+     * 
+     *  <p>目前唯一支持的数据类型是TYPE_BYTE,TYPE_USHORT和TYPE_INT。
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width in pixels of the image data
      * @param h         the height in pixels of the image data
@@ -600,6 +711,14 @@ public class Raster {
      * Rasters are not supported.  To create a 1-band Raster of type
      * <code>DataBuffer.TYPE_INT</code>, use
      * Raster.createPackedRaster().
+     * <p>
+     * 基于PixelInterleavedSampleModel创建具有指定的DataBuffer,width,height,scanline stride,pixel stride和band offsets
+     * 的栅格。
+     * 带的数量从bandOffsets.length推断。光栅的左上角由位置参数给出。如果location为null,将使用(0,0)。
+     *  <p>请注意,不支持交叉的<code> DataBuffer.TYPE_INT </code>栅格。
+     * 要创建<code> DataBuffer.TYPE_INT </code>类型的1波段光栅,请使用Raster.createPackedRaster()。
+     * 
+     * 
      * @param dataBuffer the <code>DataBuffer</code> that contains the
      *        image data
      * @param w         the width in pixels of the image data
@@ -663,6 +782,11 @@ public class Raster {
      * from bankIndices.length and bandOffsets.length, which must be
      * the same.  The upper left corner of the Raster is given by the
      * location argument.  If location is null, (0, 0) will be used.
+     * <p>
+     *  基于具有指定的DataBuffer,width,height,scanline stride,bank索引和带偏移的BandedSampleModel创建栅格。
+     * 带的数量从bankIndices.length和bandOffsets.length推断,它们必须相同。光栅的左上角由位置参数给出。如果location为null,将使用(0,0)。
+     * 
+     * 
      * @param dataBuffer the <code>DataBuffer</code> that contains the
      *        image data
      * @param w         the width in pixels of the image data
@@ -733,6 +857,11 @@ public class Raster {
      * band masks.  The number of bands is inferred from bandMasks.length.
      * The upper left corner of the Raster is given by
      * the location argument.  If location is null, (0, 0) will be used.
+     * <p>
+     *  基于具有指定的DataBuffer,width,height,scanline stride和band mask的SinglePixelPackedSampleModel创建栅格。
+     * 带的数量从bandMasks.length推断。光栅的左上角由位置参数给出。如果location为null,将使用(0,0)。
+     * 
+     * 
      * @param dataBuffer the <code>DataBuffer</code> that contains the
      *        image data
      * @param w         the width in pixels of the image data
@@ -795,6 +924,11 @@ public class Raster {
      * specified DataBuffer, width, height, and bits per pixel.  The upper
      * left corner of the Raster is given by the location argument.  If
      * location is null, (0, 0) will be used.
+     * <p>
+     *  基于具有指定的DataBuffer,width,height和每像素位数的MultiPixelPackedSampleModel创建栅格。光栅的左上角由位置参数给出。
+     * 如果location为null,将使用(0,0)。
+     * 
+     * 
      * @param dataBuffer the <code>DataBuffer</code> that contains the
      *        image data
      * @param w         the width in pixels of the image data
@@ -859,6 +993,10 @@ public class Raster {
      *  Creates a Raster with the specified SampleModel and DataBuffer.
      *  The upper left corner of the Raster is given by the location argument.
      *  If location is null, (0, 0) will be used.
+     * <p>
+     * 使用指定的SampleModel和DataBuffer创建栅格。光栅的左上角由位置参数给出。如果location为null,将使用(0,0)。
+     * 
+     * 
      *  @param sm the specified <code>SampleModel</code>
      *  @param db the specified <code>DataBuffer</code>
      *  @param location the upper-left corner of the <code>Raster</code>
@@ -922,6 +1060,10 @@ public class Raster {
      *  Creates a WritableRaster with the specified SampleModel.
      *  The upper left corner of the Raster is given by the location argument.
      *  If location is null, (0, 0) will be used.
+     * <p>
+     *  使用指定的SampleModel创建WritableRaster。光栅的左上角由位置参数给出。如果location为null,将使用(0,0)。
+     * 
+     * 
      *  @param sm the specified <code>SampleModel</code>
      *  @param location the upper-left corner of the
      *         <code>WritableRaster</code>
@@ -945,6 +1087,10 @@ public class Raster {
      *  Creates a WritableRaster with the specified SampleModel and DataBuffer.
      *  The upper left corner of the Raster is given by the location argument.
      *  If location is null, (0, 0) will be used.
+     * <p>
+     *  使用指定的SampleModel和DataBuffer创建WritableRaster。光栅的左上角由位置参数给出。如果location为null,将使用(0,0)。
+     * 
+     * 
      *  @param sm the specified <code>SampleModel</code>
      *  @param db the specified <code>DataBuffer</code>
      *  @param location the upper-left corner of the
@@ -1009,6 +1155,10 @@ public class Raster {
      *  upper left corner is origin and it is the same size as the
      *  SampleModel.  A DataBuffer large enough to describe the
      *  Raster is automatically created.
+     * <p>
+     *  使用给定的SampleModel构造栅格。光栅的左上角是原点,它的大小与SampleModel相同。自动创建大到足以描述栅格的DataBuffer。
+     * 
+     * 
      *  @param sampleModel     The SampleModel that specifies the layout
      *  @param origin          The Point that specified the origin
      *  @throws RasterFormatException if computing either
@@ -1035,6 +1185,10 @@ public class Raster {
      *  The Raster's upper left corner is origin and it is the same size
      *  as the SampleModel.  The DataBuffer is not initialized and must
      *  be compatible with SampleModel.
+     * <p>
+     *  使用给定的SampleModel和DataBuffer构造栅格。光栅的左上角是原点,它的大小与SampleModel相同。 DataBuffer未初始化,必须与SampleModel兼容。
+     * 
+     * 
      *  @param sampleModel     The SampleModel that specifies the layout
      *  @param dataBuffer      The DataBuffer that contains the image data
      *  @param origin          The Point that specifies the origin
@@ -1069,6 +1223,13 @@ public class Raster {
      *
      * Note that this constructor should generally be called by other
      * constructors or create methods, it should not be used directly.
+     * <p>
+     *  使用给定的SampleModel,DataBuffer和父构造一个栅格。 aRegion指定新栅格的边界矩形。当转换为基本光栅的坐标系时,基本光栅必须包含一个区域。
+     *  (基本栅格是栅格的祖先,没有父元素。)sampleModelTranslate指定新栅格的sampleModelTranslateX和sampleModelTranslateY值。
+     * 
+     * 注意,这个构造函数通常应该由其他构造函数或create方法调用,不应该直接使用。
+     * 
+     * 
      * @param sampleModel     The SampleModel that specifies the layout
      * @param dataBuffer      The DataBuffer that contains the image data
      * @param aRegion         The Rectangle that specifies the image area
@@ -1125,6 +1286,10 @@ public class Raster {
 
     /**
      * Returns the parent Raster (if any) of this Raster or null.
+     * <p>
+     *  返回此栅格的父栅格(如果有)或null。
+     * 
+     * 
      * @return the parent Raster or <code>null</code>.
      */
     public Raster getParent() {
@@ -1136,6 +1301,10 @@ public class Raster {
      * SampleModel to that of the Raster.  To convert a pixel's X
      * coordinate from the Raster coordinate system to the SampleModel
      * coordinate system, this value must be subtracted.
+     * <p>
+     *  返回从SampleModel的坐标系到Raster的坐标系的X平移。要将像素的X坐标从栅格坐标系转换为SampleModel坐标系,必须减去此值。
+     * 
+     * 
      * @return the X translation from the coordinate space of the
      *         Raster's SampleModel to that of the Raster.
      */
@@ -1148,6 +1317,10 @@ public class Raster {
      * SampleModel to that of the Raster.  To convert a pixel's Y
      * coordinate from the Raster coordinate system to the SampleModel
      * coordinate system, this value must be subtracted.
+     * <p>
+     *  返回从SampleModel的坐标系统到栅格的坐标系统的Y平移。要将像素的Y坐标从光栅坐标系转换为SampleModel坐标系,必须减去此值。
+     * 
+     * 
      * @return the Y translation from the coordinate space of the
      *         Raster's SampleModel to that of the Raster.
      */
@@ -1158,6 +1331,10 @@ public class Raster {
     /**
      * Create a compatible WritableRaster the same size as this Raster with
      * the same SampleModel and a new initialized DataBuffer.
+     * <p>
+     *  使用相同的SampleModel和一个新的初始化DataBuffer创建一个与此Raster具有相同大小的兼容WritableRaster。
+     * 
+     * 
      * @return a compatible <code>WritableRaster</code> with the same sample
      *         model and a new data buffer.
      */
@@ -1168,6 +1345,10 @@ public class Raster {
     /**
      * Create a compatible WritableRaster with the specified size, a new
      * SampleModel, and a new initialized DataBuffer.
+     * <p>
+     *  创建具有指定大小的兼容WritableRaster,一个新的SampleModel和一个新的初始化DataBuffer。
+     * 
+     * 
      * @param w the specified width of the new <code>WritableRaster</code>
      * @param h the specified height of the new <code>WritableRaster</code>
      * @return a compatible <code>WritableRaster</code> with the specified
@@ -1190,6 +1371,10 @@ public class Raster {
      * Create a compatible WritableRaster with location (minX, minY)
      * and size (width, height) specified by rect, a
      * new SampleModel, and a new initialized DataBuffer.
+     * <p>
+     *  创建一个兼容WritableRaster的位置(minX,minY)和大小(宽度,高度)由rect指定的,一个新的SampleModel和一个新的初始化DataBuffer。
+     * 
+     * 
      * @param rect a <code>Rectangle</code> that specifies the size and
      *        location of the <code>WritableRaster</code>
      * @return a compatible <code>WritableRaster</code> with the specified
@@ -1213,6 +1398,10 @@ public class Raster {
      * Create a compatible WritableRaster with the specified
      * location (minX, minY) and size (width, height), a
      * new SampleModel, and a new initialized DataBuffer.
+     * <p>
+     *  创建具有指定位置(minX,minY)和大小(width,height)的兼容WritableRaster,一个新的SampleModel和一个新的初始化DataBuffer。
+     * 
+     * 
      * @param x the X coordinate of the upper-left corner of
      *        the <code>WritableRaster</code>
      * @param y the Y coordinate of the upper-left corner of
@@ -1239,6 +1428,10 @@ public class Raster {
      * will possess a reference to the current Raster, accessible
      * through its getParent() method.
      *
+     * <p>
+     *  创建一个具有相同大小的Raster,SampleModel和DataBuffer作为这个,但是位置不同。新的栅格将拥有对当前栅格的引用,可通过其getParent()方法访问。
+     * 
+     * 
      * @param childMinX the X coordinate of the upper-left
      *        corner of the new <code>Raster</code>
      * @param childMinY the Y coordinate of the upper-left
@@ -1286,6 +1479,21 @@ public class Raster {
      * this method should be called with childMinX equal to parentX,
      * childMinY equal to parentY, and bandList equal to null.
      *
+     * <p>
+     * 返回一个新的光栅,它共享这个Raster的DataBuffer的全部或部分。新的栅格将拥有对当前栅格的引用,可通过其getParent()方法访问。
+     * 
+     *  <p> parentX,parentY,width和height参数在此光栅的坐标空间中构成一个Rectangle,表示要共享的像素区域。如果此矩形不包含在当前栅格的边界中,则会抛出错误。
+     * 
+     *  <p>新光栅可以另外转换为与当前光栅所使用的平面不同的坐标系。
+     *  childMinX和childMinY参数给出返回的栅格的左上像素的新(x,y)坐标;新栅格中的坐标(childMinX,childMinY)将映射到与当前栅格中的坐标(parentX,parentY
+     * )相同的像素。
+     *  <p>新光栅可以另外转换为与当前光栅所使用的平面不同的坐标系。
+     * 
+     *  <p>新光栅可以被定义为仅包含当前光栅的频带的子集,可能通过bandList参数重新排序。如果bandList为null,则它被认为包括当前栅格的当前顺序中的所有带。
+     * 
+     *  <p>要创建包含当前光栅的子区域,但共享其坐标系统和波段的新光栅,应调用childMinX等于parentX,childMinY等于parentY,bandList等于null的方法。
+     * 
+     * 
      * @param parentX The X coordinate of the upper-left corner
      *        in this Raster's coordinates
      * @param parentY The Y coordinate of the upper-left corner
@@ -1351,6 +1559,10 @@ public class Raster {
     /**
      * Returns the bounding Rectangle of this Raster. This function returns
      * the same information as getMinX/MinY/Width/Height.
+     * <p>
+     *  返回此栅格的边界矩形。此函数返回与getMinX / MinY / Width / Height相同的信息。
+     * 
+     * 
      * @return the bounding box of this <code>Raster</code>.
      */
     public Rectangle getBounds() {
@@ -1358,6 +1570,8 @@ public class Raster {
     }
 
     /** Returns the minimum valid X coordinate of the Raster.
+    /* <p>
+    /* 
      *  @return the minimum x coordinate of this <code>Raster</code>.
      */
     final public int getMinX() {
@@ -1365,6 +1579,8 @@ public class Raster {
     }
 
     /** Returns the minimum valid Y coordinate of the Raster.
+    /* <p>
+    /* 
      *  @return the minimum y coordinate of this <code>Raster</code>.
      */
     final public int getMinY() {
@@ -1372,6 +1588,8 @@ public class Raster {
     }
 
     /** Returns the width in pixels of the Raster.
+    /* <p>
+    /* 
      *  @return the width of this <code>Raster</code>.
      */
     final public int getWidth() {
@@ -1379,6 +1597,8 @@ public class Raster {
     }
 
     /** Returns the height in pixels of the Raster.
+    /* <p>
+    /* 
      *  @return the height of this <code>Raster</code>.
      */
     final public int getHeight() {
@@ -1386,6 +1606,8 @@ public class Raster {
     }
 
     /** Returns the number of bands (samples per pixel) in this Raster.
+    /* <p>
+    /* 
      *  @return the number of bands of this <code>Raster</code>.
      */
     final public int getNumBands() {
@@ -1401,6 +1623,13 @@ public class Raster {
      *  as an array of getNumDataElements() elements of a primitive type given
      *  by getTransferType().  The TransferType may or may not be the same
      *  as the storage data type of the DataBuffer.
+     * <p>
+     * 返回通过getDataElements和setDataElements方法传输一个像素所需的数据元素数。
+     * 当通过这些方法传输像素时,它们可以以打包或解包格式传输,这取决于底层SampleModel的实现。
+     * 使用这些方法,像素作为由getTransferType()给出的基元类型的getNumDataElements()元素的数组传输。
+     *  TransferType可以或可以不与DataBuffer的存储数据类型相同。
+     * 
+     * 
      *  @return the number of data elements.
      */
     final public int getNumDataElements() {
@@ -1417,6 +1646,13 @@ public class Raster {
      *  by getTransferType().  The TransferType may or may not be the same
      *  as the storage data type of the DataBuffer.  The TransferType will
      *  be one of the types defined in DataBuffer.
+     * <p>
+     *  返回用于通过getDataElements和setDataElements方法传输像素的TransferType。
+     * 当通过这些方法传输像素时,它们可以以打包或解包格式传输,这取决于底层SampleModel的实现。
+     * 使用这些方法,像素作为由getTransferType()给出的基元类型的getNumDataElements()元素的数组传输。
+     *  TransferType可以或可以不与DataBuffer的存储数据类型相同。 TransferType将是DataBuffer中定义的类型之一。
+     * 
+     * 
      *  @return this transfer type.
      */
     final public int getTransferType() {
@@ -1424,6 +1660,8 @@ public class Raster {
     }
 
     /** Returns the DataBuffer associated with this Raster.
+    /* <p>
+    /* 
      *  @return the <code>DataBuffer</code> of this <code>Raster</code>.
      */
     public DataBuffer getDataBuffer() {
@@ -1431,6 +1669,8 @@ public class Raster {
     }
 
     /** Returns the SampleModel that describes the layout of the image data.
+    /* <p>
+    /* 
      *  @return the <code>SampleModel</code> of this <code>Raster</code>.
      */
     public SampleModel getSampleModel() {
@@ -1449,6 +1689,14 @@ public class Raster {
      * checking is not guaranteed.
      * A ClassCastException will be thrown if the input object is non null
      * and references anything other than an array of TransferType.
+     * <p>
+     * 返回类型TransferType的基本数组中单个像素的数据。
+     * 对于Java 2D(tm)API支持的图像数据,这将是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT,DataBuffer.TYPE_INT,DataBuffer
+     * .TYPE_SHORT,DataBuffer.TYPE_FLOAT或DataBuffer.TYPE_DOUBLE之一。
+     * 返回类型TransferType的基本数组中单个像素的数据。可以以打包格式返回数据,从而提高数据传输的效率。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。
+     * 但是,不能保证显式边界检查。如果输入对象为非空并且引用了TransferType数组以外的任何对象,则将抛出ClassCastException。
+     * 
+     * 
      * @see java.awt.image.SampleModel#getDataElements(int, int, Object, DataBuffer)
      * @param x        The X coordinate of the pixel location
      * @param y        The Y coordinate of the pixel location
@@ -1481,6 +1729,15 @@ public class Raster {
      * checking is not guaranteed.
      * A ClassCastException will be thrown if the input object is non null
      * and references anything other than an array of TransferType.
+     * <p>
+     *  返回类型TransferType的基本数组中指定的像素矩形的像素数据。
+     * 对于Java 2D API支持的图像数据,这将是DataBuffer.TYPE_BYTE,DataBuffer.TYPE_USHORT,DataBuffer.TYPE_INT,DataBuffer.TY
+     * PE_SHORT,DataBuffer.TYPE_FLOAT或DataBuffer.TYPE_DOUBLE之一。
+     *  返回类型TransferType的基本数组中指定的像素矩形的像素数据。可以以打包格式返回数据,从而提高数据传输的效率。
+     * 如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 如果输入对象为非空并且引用了TransferType数组以外的任何对象,则将抛出ClassCastException。
+     * 
+     * 
      * @see java.awt.image.SampleModel#getDataElements(int, int, int, int, Object, DataBuffer)
      * @param x    The X coordinate of the upper-left pixel location
      * @param y    The Y coordinate of the upper-left pixel location
@@ -1507,6 +1764,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     * 返回指定像素的int数组中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x The X coordinate of the pixel location
      * @param y The Y coordinate of the pixel location
      * @param iArray An optionally preallocated int array
@@ -1527,6 +1788,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  返回指定像素的float数组中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x The X coordinate of the pixel location
      * @param y The Y coordinate of the pixel location
      * @param fArray An optionally preallocated float array
@@ -1546,6 +1811,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  返回指定像素的double数组中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x The X coordinate of the pixel location
      * @param y The Y coordinate of the pixel location
      * @param dArray An optionally preallocated double array
@@ -1566,6 +1835,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  返回一个包含像素矩形的所有样本的int数组,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x      The X coordinate of the upper-left pixel location
      * @param y      The Y coordinate of the upper-left pixel location
      * @param w      Width of the pixel rectangle
@@ -1588,6 +1861,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  返回一个float数组,其中包含一个像素矩形的所有样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the pixel location
      * @param y        The Y coordinate of the pixel location
      * @param w        Width of the pixel rectangle
@@ -1611,6 +1888,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  返回一个包含像素矩形的所有样本的双阵列,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the upper-left pixel location
      * @param y        The Y coordinate of the upper-left pixel location
      * @param w        Width of the pixel rectangle
@@ -1635,6 +1916,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     * 以位于(x,y)的像素作为int返回指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the pixel location
      * @param y        The Y coordinate of the pixel location
      * @param b        The band to return
@@ -1656,6 +1941,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  以位于(x,y)的像素作为浮点返回指定带中的样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the pixel location
      * @param y        The Y coordinate of the pixel location
      * @param b        The band to return
@@ -1677,6 +1966,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  将位于(x,y)的像素的指定频带中的样本返回为double。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the pixel location
      * @param y        The Y coordinate of the pixel location
      * @param b        The band to return
@@ -1698,6 +1991,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  返回int阵列中指定像素矩形的指定带的样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the upper-left pixel location
      * @param y        The Y coordinate of the upper-left pixel location
      * @param w        Width of the pixel rectangle
@@ -1725,6 +2022,10 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  返回float数组中指定像素矩形的指定带的样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
+     * 
      * @param x        The X coordinate of the upper-left pixel location
      * @param y        The Y coordinate of the upper-left pixel location
      * @param w        Width of the pixel rectangle
@@ -1751,6 +2052,9 @@ public class Raster {
      * An ArrayIndexOutOfBoundsException may be thrown
      * if the coordinates are not in bounds.  However, explicit bounds
      * checking is not guaranteed.
+     * <p>
+     *  返回双阵列中指定像素矩形的指定带的样本,每个数组元素一个样本。如果坐标不在边界中,则可能抛出ArrayIndexOutOfBoundsException。但是,不能保证显式边界检查。
+     * 
      * @param x        The X coordinate of the upper-left pixel location
      * @param y        The Y coordinate of the upper-left pixel location
      * @param w        Width of the pixel rectangle

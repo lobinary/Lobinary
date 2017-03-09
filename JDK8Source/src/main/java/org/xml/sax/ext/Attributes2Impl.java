@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,21 @@ import org.xml.sax.helpers.AttributesImpl;
  * its <em>declared</em> flag to match.
  * </p>
  *
+ * <p>
+ *  SAX2扩展助手用于附加属性信息,实现{@link Attributes2}接口。
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)位于公共域中,并且随附<strong>无保修</strong>。</em>
+ * </blockquote>
+ * 
+ *  <p>这不是仅核心SAX2分发的一部分。</p>
+ * 
+ *  <p>每个属性的<em>指定</em>标志将始终为true,除非已在复制构造函数中使用或使用{@link #setSpecified}设置为false。
+ * 类似地,每个属性的<em>声明的</em>标志将始终为false,除了默认属性(指定的<em> </em>为false),非CDATA属性, {@link #setDeclared}。
+ * 如果您手动更改属性的类型,则可能需要修改其<em>声明的标记</em>以匹配。
+ * </p>
+ * 
+ * 
  * @since SAX 2.0 (extensions 1.1 alpha)
  * @author David Brownell
  */
@@ -67,6 +83,9 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
 
     /**
      * Construct a new, empty Attributes2Impl object.
+     * <p>
+     *  构造一个新的,空的Attributes2Impl对象。
+     * 
      */
     public Attributes2Impl () {
         specified = null;
@@ -86,6 +105,13 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
      * <p>This constructor is especially useful inside a
      * {@link org.xml.sax.ContentHandler#startElement startElement} event.</p>
      *
+     * <p>
+     *  复制现有的Attributes或Attributes2对象。如果对象实现Attributes2,则复制每个属性的<em>指定</em>和<em>声明的</em>标志的值。
+     * 否则,标志值默认为假定没有使用DTD,除非有相反的证据(例如,除了CDATA之外的属性,必须已经被声明为</em>)。
+     * 
+     *  <p>此构造函数在{@link org.xml.sax.ContentHandler#startElement startElement}事件中特别有用。</p>
+     * 
+     * 
      * @param atts The existing Attributes object.
      */
     public Attributes2Impl (Attributes atts)
@@ -101,6 +127,9 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
 
     /**
      * Returns the current value of the attribute's "declared" flag.
+     * <p>
+     * 返回属性的"已声明"标志的当前值。
+     * 
      */
     // javadoc mostly from interface
     public boolean isDeclared (int index)
@@ -114,6 +143,9 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
 
     /**
      * Returns the current value of the attribute's "declared" flag.
+     * <p>
+     *  返回属性的"已声明"标志的当前值。
+     * 
      */
     // javadoc mostly from interface
     public boolean isDeclared (String uri, String localName)
@@ -130,6 +162,9 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
 
     /**
      * Returns the current value of the attribute's "declared" flag.
+     * <p>
+     *  返回属性的"已声明"标志的当前值。
+     * 
      */
     // javadoc mostly from interface
     public boolean isDeclared (String qName)
@@ -146,6 +181,10 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
     /**
      * Returns the current value of an attribute's "specified" flag.
      *
+     * <p>
+     *  返回属性的"指定"标志的当前值。
+     * 
+     * 
      * @param index The attribute index (zero-based).
      * @return current flag value
      * @exception java.lang.ArrayIndexOutOfBoundsException When the
@@ -163,6 +202,10 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
     /**
      * Returns the current value of an attribute's "specified" flag.
      *
+     * <p>
+     *  返回属性的"指定"标志的当前值。
+     * 
+     * 
      * @param uri The Namespace URI, or the empty string if
      *        the name has no Namespace URI.
      * @param localName The attribute's local name.
@@ -185,6 +228,10 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
     /**
      * Returns the current value of an attribute's "specified" flag.
      *
+     * <p>
+     *  返回属性的"指定"标志的当前值。
+     * 
+     * 
      * @param qName The XML qualified (prefixed) name.
      * @return current flag value
      * @exception java.lang.IllegalArgumentException When the
@@ -213,6 +260,10 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
      * unless the object is an Attributes2 object.
      * In that case those flag values are all copied.
      *
+     * <p>
+     *  复制整个Attributes对象。 "指定"标志分配为true,"宣告"标志为false(除非属性的类型不是CDATA),除非对象是Attributes2对象。在这种情况下,这些标志值都被复制。
+     * 
+     * 
      * @see AttributesImpl#setAttributes
      */
     public void setAttributes (Attributes atts)
@@ -247,6 +298,12 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
      * is marked as being declared in the DTD.  To set that flag's value
      * to true for CDATA attributes, use {@link #setDeclared}.
      *
+     * <p>
+     *  将属性添加到列表的末尾,将其"指定"标志设置为true。要将该标记的值设置为false,请使用{@link #setSpecified}。
+     * 
+     *  <p>除非属性<em> </em>是CDATA,所以此属性被标记为在DTD中声明。要为CDATA属性将该标志的值设置为true,请使用{@link #setDeclared}。
+     * 
+     * 
      * @see AttributesImpl#addAttribute
      */
     public void addAttribute (String uri, String localName, String qName,
@@ -297,6 +354,10 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
      * This is normally needed only for attributes of type CDATA,
      * including attributes whose type is changed to or from CDATA.
      *
+     * <p>
+     *  为特定属性的"已声明"标志分配一个值。这通常仅对类型为CDATA的属性需要,包括类型更改为或来自CDATA的属性。
+     * 
+     * 
      * @param index The index of the attribute (zero-based).
      * @param value The desired flag value.
      * @exception java.lang.ArrayIndexOutOfBoundsException When the
@@ -317,6 +378,9 @@ public class Attributes2Impl extends AttributesImpl implements Attributes2
      * This is the only way this flag can be cleared, except clearing
      * by initialization with the copy constructor.
      *
+     * <p>
+     *  为特定属性的"指定"标志分配值。这是该标志可以被清除的唯一方式,除了通过用复制构造函数初始化来清除。
+     * 
      * @param index The index of the attribute (zero-based).
      * @param value The desired flag value.
      * @exception java.lang.ArrayIndexOutOfBoundsException When the

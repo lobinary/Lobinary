@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,9 @@ import org.w3c.dom.NamedNodeMap;
 
 /**
  * A DHT (Define Huffman Table) marker segment.
+ * <p>
+ *  DHT(定义霍夫曼表)标记段。
+ * 
  */
 class DHTMarkerSegment extends MarkerSegment {
     List tables = new ArrayList();
@@ -114,6 +118,9 @@ class DHTMarkerSegment extends MarkerSegment {
     /**
      * Writes the data for this segment to the stream in
      * valid JPEG format.
+     * <p>
+     *  以有效的JPEG格式将此段的数据写入流。
+     * 
      */
     void write(ImageOutputStream ios) throws IOException {
         // We don't write DHT segments; the IJG library does.
@@ -141,6 +148,9 @@ class DHTMarkerSegment extends MarkerSegment {
 
     /**
      * A Huffman table within a DHT marker segment.
+     * <p>
+     *  DHT标记段内的霍夫曼表。
+     * 
      */
     class Htable implements Cloneable {
         int tableClass;  // 0 == DC, 1 == AC
@@ -253,6 +263,9 @@ class DHTMarkerSegment extends MarkerSegment {
               for (int i=0; i<count; i++) {
               System.out.println(Integer.toString(values[i]&0xff));
               }
+            /* <p>
+            /*  System.out.print("Lengths："); for(int i = 0; i <16; i ++){System.out.print(""+ Integer.toString(numCodes [i])); } int count = 0; if(values.length>
+            /*  16){System.out.println("\ nFirst 16 Values："); count = 16; } else {System.out.println("\ nValues："); count = values.length; }
             */
         }
     }

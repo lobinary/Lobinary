@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,17 @@ import static sun.swing.SwingUtilities2.IMPLIED_CR;
  * that does tab expansion.
  * <p>
  *
+ * <p>
+ *  GlyphView是一种样式化的文本块,代表在文本模型中的元素上映射的视图。此视图通常负责以某种方式使用字符级属性显示文本字形。 GlyphPainter类的实现用于执行实际的渲染和模型/视图转换。
+ * 这将渲染从布局和管理与模型的关联分离。
+ * <p>
+ *  视图支持打破格式化的目的。断开产生的片段共享对元素负有主要责任的视图(即它们是嵌套类并且仅携带自己的少量状态),以便它们可以共享其资源。
+ * <p>
+ *  由于此视图表示可以在其中嵌入选项卡的文本,因此它实现了<code> TabableView </code>界面。仅当此视图嵌入到执行制表符展开的容器中时,才会展开标签。
+ *  ParagraphView是执行制表符展开的容器的示例。
+ * <p>
+ * 
+ * 
  * @since 1.3
  *
  * @author  Timothy Prinzing
@@ -67,6 +79,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
     /**
      * Constructs a new view wrapped on an element.
      *
+     * <p>
+     *  构造包裹在元素上的新视图。
+     * 
+     * 
      * @param elem the element
      */
     public GlyphView(Element elem) {
@@ -87,6 +103,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Creates a shallow copy.  This is used by the
      * createFragment and breakView methods.
      *
+     * <p>
+     *  创建浅拷贝。这由createFragment和breakView方法使用。
+     * 
+     * 
      * @return the copy
      */
     protected final Object clone() {
@@ -103,6 +123,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Fetch the currently installed glyph painter.
      * If a painter has not yet been installed, and
      * a default was not yet needed, null is returned.
+     * <p>
+     *  获取当前安装的字形画家。如果尚未安装绘图器,并且尚不需要默认值,则返回null。
+     * 
      */
     public GlyphPainter getGlyphPainter() {
         return painter;
@@ -110,6 +133,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * Sets the painter to use for rendering glyphs.
+     * <p>
+     *  设置要用于呈现字形的绘图器。
+     * 
      */
     public void setGlyphPainter(GlyphPainter p) {
         painter = p;
@@ -121,6 +147,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * the GlyphPainter to determine what characters
      * it should render glyphs for.
      *
+     * <p>
+     * 获取占用给定范围的文本的引用。这通常由GlyphPainter使用来确定应该为其呈现字形的字符。
+     * 
+     * 
      * @param p0  the starting document offset &gt;= 0
      * @param p1  the ending document offset &gt;= p0
      * @return    the <code>Segment</code> containing the text
@@ -145,6 +175,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * be returned.  This is implemented to call
      * <code>StyledDocument.getBackground</code> if the associated
      * document is a styled document, otherwise it returns null.
+     * <p>
+     *  获取用于渲染字形的背景颜色。如果没有背景颜色,应返回null。
+     * 这是实现调用<code> StyledDocument.getBackground </code>如果关联的文档是一个样式文档,否则返回null。
+     * 
      */
     public Color getBackground() {
         Document doc = getDocument();
@@ -166,6 +200,11 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * is not a StyledDocument, the associated components foreground
      * color is used.  If there is no associated component, null
      * is returned.
+     * <p>
+     *  获取要用于渲染字形的前景颜色。如果没有前景色,应返回null。
+     * 如果相关联的文档是StyledDocument,则实现调用<code> StyledDocument.getBackground </code>。
+     * 如果关联文档不是StyledDocument,则使用相关联的组件前景色。如果没有相关联的组件,则返回null。
+     * 
      */
     public Color getForeground() {
         Document doc = getDocument();
@@ -188,6 +227,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * is not a StyledDocument, the associated components font
      * is used.  If there is no associated component, null
      * is returned.
+     * <p>
+     *  获取字形应基于的字体。如果相关联的文档是StyledDocument,则实现调用<code> StyledDocument.getFont </code>。
+     * 如果关联文档不是StyledDocument,则使用关联的组件字体。如果没有相关联的组件,则返回null。
+     * 
      */
     public Font getFont() {
         Document doc = getDocument();
@@ -205,6 +248,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
     /**
      * Determine if the glyphs should be underlined.  If true,
      * an underline should be drawn through the baseline.
+     * <p>
+     *  确定字形是否应加下划线。如果为true,则应在基线中绘制下划线。
+     * 
      */
     public boolean isUnderline() {
         AttributeSet attr = getAttributes();
@@ -215,6 +261,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Determine if the glyphs should have a strikethrough
      * line.  If true, a line should be drawn through the center
      * of the glyphs.
+     * <p>
+     *  确定字形是否应该有删除线。如果为true,则应通过字形的中心绘制一条线。
+     * 
      */
     public boolean isStrikeThrough() {
         AttributeSet attr = getAttributes();
@@ -223,6 +272,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * Determine if the glyphs should be rendered as superscript.
+     * <p>
+     *  确定字形是否应该渲染为上标。
+     * 
      */
     public boolean isSubscript() {
         AttributeSet attr = getAttributes();
@@ -231,6 +283,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * Determine if the glyphs should be rendered as subscript.
+     * <p>
+     *  确定字形是否应该渲染为下标。
+     * 
      */
     public boolean isSuperscript() {
         AttributeSet attr = getAttributes();
@@ -239,6 +294,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * Fetch the TabExpander to use if tabs are present in this view.
+     * <p>
+     * 如果此视图中存在选项卡,请提取TabExpander以使用。
+     * 
      */
     public TabExpander getTabExpander() {
         return expander;
@@ -247,6 +305,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
     /**
      * Check to see that a glyph painter exists.  If a painter
      * doesn't exist, a default glyph painter will be installed.
+     * <p>
+     *  检查字形画家是否存在。如果画家不存在,则将安装默认字形画家。
+     * 
      */
     protected void checkPainter() {
         if (painter == null) {
@@ -281,6 +342,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Determines the desired span when using the given
      * tab expansion implementation.
      *
+     * <p>
+     *  当使用给定的选项卡扩展实现时,确定所需的跨度。
+     * 
+     * 
      * @param x the position the view would be located
      *  at for the purpose of tab expansion &gt;= 0.
      * @param e how to expand the tabs when encountered.
@@ -321,6 +386,12 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * arrange for its own text buffer to make the
      * measurements.
      *
+     * <p>
+     *  确定视图的一部分沿着同一轴的选项卡扩展的跨度。这是为TabExpander使用的情况,其中选项卡扩展涉及对齐没有相对于制表符的空格的文本部分。因此,假定给定的范围不包含制表符。
+     * <p>
+     *  此方法可以在服务getTabbedSpan或getPreferredSize时调用。它必须安排自己的文本缓冲区进行测量。
+     * 
+     * 
      * @param p0 the starting document offset &gt;= 0
      * @param p1 the ending document offset &gt;= p0
      * @return the span &gt;= 0
@@ -336,6 +407,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
     /**
      * Fetches the portion of the model that this view is responsible for.
      *
+     * <p>
+     *  获取此视图负责的模型部分。
+     * 
+     * 
      * @return the starting offset into the model
      * @see View#getStartOffset
      */
@@ -347,6 +422,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
     /**
      * Fetches the portion of the model that this view is responsible for.
      *
+     * <p>
+     *  获取此视图负责的模型部分。
+     * 
+     * 
      * @return the ending offset into the model
      * @see View#getEndOffset
      */
@@ -357,6 +436,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * Lazily initializes the selections field
+     * <p>
+     *  Lazily初始化选择字段
+     * 
      */
     private void initSelections(int p0, int p1) {
         int viewPosCount = p1 - p0 + 1;
@@ -370,6 +452,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
     /**
      * Renders a portion of a text style run.
      *
+     * <p>
+     *  呈现文本样式运行的一部分。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param a the allocated region to render into
      */
@@ -484,6 +570,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * Paints the specified region of text in the specified color.
+     * <p>
+     *  以指定的颜色绘制文本的指定区域。
+     * 
      */
     final void paintTextUsingColor(Graphics g, Shape a, Color c, int p0, int p1) {
         // render the glyphs
@@ -534,6 +623,12 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * <p>This implementation returns the longest non-breakable area within
      * the view as a minimum span for {@code View.X_AXIS}.</p>
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。
+     * 
+     *  <p>此实现将视图中最长的不可断开区域作为{@code View.X_AXIS}的最小跨度返回。</p>
+     * 
+     * 
      * @param axis  may be either {@code View.X_AXIS} or {@code View.Y_AXIS}
      * @return      the minimum span the view can be rendered into
      * @throws IllegalArgumentException if the {@code axis} parameter is invalid
@@ -571,6 +666,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return   the span the view would like to be rendered into &gt;= 0.
      *           Typically the view is told to render into the span
@@ -607,6 +706,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * baseline for the y axis, and the superclasses alignment
      * along the x axis.
      *
+     * <p>
+     *  确定沿着轴的该视图的期望对准。对于标签,对齐是沿着y轴的字体基线,并且超类沿着x轴对齐。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @return the desired alignment.  This should be a value
      *   between 0.0 and 1.0 inclusive, where 0 indicates alignment at the
@@ -639,6 +742,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     * 提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param a   the allocated region to render into
      * @param b   either <code>Position.Bias.Forward</code>
@@ -657,6 +764,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param a the allocated region to render into
@@ -700,6 +811,19 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * on a whitespace location if one can be found, otherwise
      * breaking between characters.
      *
+     * <p>
+     *  确定此视图中的休息机会的吸引力。这可以用于确定哪个视图是最有吸引力的在格式化过程中调用<code> breakView </code>。重量越高,断裂越有吸引力。
+     * 等于或低于<code> View.BadBreakWeight </code>的值不应被视为中断。大于或等于<code> View.ForcedBreakWeight </code>的值应该被破坏。
+     * <p>
+     *  这被实现为转发到Y_AXIS的超类。沿X_AXIS可以返回以下值。
+     * <dl>
+     *  <dt> <b> View.ExcellentBreakWeight </b> <dd>如果有空格继续所需的休息位置。
+     *  <dt> <b> View.BadBreakWeight </b> <dd>如果所需的断点位置导致起始偏移的断点位置。
+     *  <dt> <b> View.GoodBreakWeight </b> <dd>如果其他条件不发生。
+     * </dl>
+     *  这通常会导致在空格位置上断开的行为,如果可以找到,否则在字符之间断开。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @param pos the potential location of the start of the
      *   broken view &gt;= 0.  This may be useful for calculating tab
@@ -734,6 +858,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * the end.  If a whitespace location can't be found, the
      * nearest character is used.
      *
+     * <p>
+     *  在给定长度的给定轴上中断此视图。这是为了尝试在空格位置上断开,并返回一个在结尾处带有空格的片段。如果找不到空格位置,则使用最接近的字符。
+     * 
+     * 
      * @param axis may be either View.X_AXIS or View.Y_AXIS
      * @param p0 the location in the model where the
      *  fragment should start it's representation &gt;= 0.
@@ -773,6 +901,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Returns a location to break at in the passed in region, or
      * BreakIterator.DONE if there isn't a good location to break at
      * in the specified region.
+     * <p>
+     * 返回要在传入的区域中折断的位置,如果在指定区域中没有良好的位置,则返回BreakIterator.DONE。
+     * 
      */
     private int getBreakSpot(int p0, int p1) {
         if (breakSpots == null) {
@@ -828,6 +959,11 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * Return break iterator appropriate for the current document.
      *
      * For non-i18n documents a fast whitespace-based break iterator is used.
+     * <p>
+     *  适用于当前文档的返回break迭代器。
+     * 
+     *  对于非i18n文档,使用基于快速基于空格的break迭代器。
+     * 
      */
     private BreakIterator getBreaker() {
         Document doc = getDocument();
@@ -852,6 +988,12 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * to return a nested class that shares state in this view
      * representing only a portion of the view.
      *
+     * <p>
+     *  创建表示元素的一部分的视图。这在用于对视图的片段进行测量的格式化操作期间潜在地有用。如果视图不支持分段(默认),它应该返回自身。
+     * <p>
+     *  此视图支持碎片。它被实现为返回一个嵌套类,该类在此视图中共享状态,仅表示视图的一部分。
+     * 
+     * 
      * @param p0 the starting offset &gt;= 0.  This should be a value
      *   greater or equal to the element starting offset and
      *   less than the element ending offset.
@@ -884,6 +1026,11 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * will be calculated automatically.  If the value &lt; -1,
      * the {@code BadLocationException} will be thrown.
      *
+     * <p>
+     *  提供一种方法来确定下一个可视地表示的模型位置,人们可以放置插入符号。某些视图可能不可见,它们可能不是在模型中找到的相同顺序,或者它们可能不允许访问模型中的一些位置。
+     * 该方法使得能够指定在> = 0的范围内转换的位置。如果值为-1,将自动计算位置。如果值&lt; -1,将抛出{@code BadLocationException}。
+     * 
+     * 
      * @param pos the position to convert
      * @param a the allocated region to render into
      * @param direction the direction from the current position that can
@@ -913,6 +1060,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * This is implemented to call preferenceChanged along the
      * axis the glyphs are rendered.
      *
+     * <p>
+     *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。这是实现沿着轴调用preferenceChanged字形渲染。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -932,6 +1083,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * This is implemented to call preferenceChanged along the
      * axis the glyphs are rendered.
      *
+     * <p>
+     * 提供通知,说明该视图负责的位置中的文档被删除了。这是实现沿着轴调用preferenceChanged字形渲染。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -951,6 +1106,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * This is implemented to call preferenceChanged along both the
      * horizontal and vertical axis.
      *
+     * <p>
+     *  从文档中提供属性在此视图负责的位置中更改的通知。这被实现为沿着水平和垂直轴调用preferenceChanged。
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -981,6 +1140,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * Class to hold data needed to justify this GlyphView in a PargraphView.Row
+     * <p>
+     *  在PargraphView.Row中保存需要证明此GlyphView的数据的类
+     * 
      */
     static class JustificationInfo {
         //justifiable content start
@@ -1094,6 +1256,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
     * Used by paint() to store highlighted view positions
+    * <p>
+    *  由paint()用于存储突出显示的视图位置
+    * 
     */
     private byte[] selections = null;
 
@@ -1105,6 +1270,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * how to expand tabs
+     * <p>
+     *  如何展开标签页
+     * 
      */
     TabExpander expander;
 
@@ -1116,16 +1284,25 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
     /**
      * location for determining tab expansion against.
+     * <p>
+     *  确定标签页展开的位置。
+     * 
      */
     int x;
 
     /**
      * Glyph rendering functionality.
+     * <p>
+     *  字形渲染功能。
+     * 
      */
     GlyphPainter painter;
 
     /**
      * The prototype painter used by default.
+     * <p>
+     *  默认使用的原型绘画。
+     * 
      */
     static GlyphPainter defaultPainter;
 
@@ -1142,6 +1319,11 @@ public class GlyphView extends View implements TabableView, Cloneable {
      * of JVM and selection of capabilities (i.e.
      * shaping for i18n, etc).
      *
+     * <p>
+     *  一个类来执行字形的渲染。这可以被实现为无状态的,或者保持一些信息作为高速缓存以促进更快的呈现和模型/视图转换。
+     * 至少,GlyphPainter允许View实现执行其独立于JVM的特定版本和选择能力(即,针对i18n的整形等)的职责。
+     * 
+     * 
      * @since 1.3
      */
     public static abstract class GlyphPainter {
@@ -1149,6 +1331,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
         /**
          * Determine the span the glyphs given a start location
          * (for tab expansion).
+         * <p>
+         *  确定给定开始位置的字形的跨度(用于制表符展开)。
+         * 
          */
         public abstract float getSpan(GlyphView v, int p0, int p1, TabExpander e, float x);
 
@@ -1160,6 +1345,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
 
         /**
          * Paint the glyphs representing the given range.
+         * <p>
+         *  绘制表示给定范围的字形。
+         * 
          */
         public abstract void paint(GlyphView v, Graphics g, Shape a, int p0, int p1);
 
@@ -1168,6 +1356,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
          * to the coordinate space of the view mapped to it.
          * This is shared by the broken views.
          *
+         * <p>
+         *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。这是由破碎的视图共享的。
+         * 
+         * 
          * @param v     the <code>GlyphView</code> containing the
          *              destination coordinate space
          * @param pos   the position to convert
@@ -1187,6 +1379,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
          * Provides a mapping from the view coordinate space to the logical
          * coordinate space of the model.
          *
+         * <p>
+         *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+         * 
+         * 
          * @param v          the <code>GlyphView</code> to provide a mapping for
          * @param x          the X coordinate
          * @param y          the Y coordinate
@@ -1210,6 +1406,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
          * differs from viewToModel which returns the closest
          * position which might be proud of the maximum advance.
          *
+         * <p>
+         * 确定表示适合给定范围内的最大提前的模型位置。这可以用来打破给定的视图。结果应该是一个位置只是害羞的给定的提前。这不同于viewToModel,它返回可能引起最大提前量的最接近的位置。
+         * 
+         * 
          * @param v the view to find the model location to break at.
          * @param p0 the location in the model where the
          *  fragment should start it's representation &gt;= 0.
@@ -1229,6 +1429,10 @@ public class GlyphView extends View implements TabableView, Cloneable {
          * to represent a new GlyphView that is being created.  If
          * the painter doesn't hold any significant state, it can
          * return itself.  The default behavior is to return itself.
+         * <p>
+         *  创建一个画家用于给定的GlyphView。如果画家携带状态,它可以创建另一个画家来表示正在创建的新GlyphView。如果画家没有任何重要的状态,它可以返回自己。默认行为是返回自身。
+         * 
+         * 
          * @param v  the <code>GlyphView</code> to provide a painter for
          * @param p0 the starting document offset &gt;= 0
          * @param p1 the ending document offset &gt;= p0
@@ -1244,6 +1448,9 @@ public class GlyphView extends View implements TabableView, Cloneable {
          * they just might not allow access to some of the locations in the
          * model.
          *
+         * <p>
+         *  提供一种方法来确定下一个可视地表示的模型位置,人们可以放置插入符号。某些视图可能不可见,它们可能不是在模型中找到的相同顺序,或者它们可能不允许访问模型中的一些位置。
+         * 
          * @param v the view to use
          * @param pos the position to convert &gt;= 0
          * @param b   either <code>Position.Bias.Forward</code>

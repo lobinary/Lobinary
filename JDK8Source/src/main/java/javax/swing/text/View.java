@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -186,6 +187,90 @@ A view has the following responsibilities:
     <p>
 </dl>
  *
+ * <p>
+ * <p>
+ *  文本包的一个非常重要的部分是<code> View </code>类。顾名思义,它代表文本模型的视图,或者是文本模型的一部分。正是这个类负责文本组件的外观。
+ * 这个视图并不是一个必须学习的全新东西,而是一个轻量级组件。
+ * <p>
+ *  默认情况下,视图很轻。它包含一个对父视图的引用,它可以从中获取很多没有保持状态的东西,它包含对模型的一部分的引用(<code> Element </code>)。
+ * 视图不必准确地表示模型中的元素,这只是典型的并因此方便的映射。视图可以备选地保持几个Position对象以维持其在模型中的位置(即,表示元素的片段)。这通常是格式化的结果,其中视图已分解成碎片。
+ * 与元素的实质关系的便利性使得更容易构建工厂以产生视图,并且使得当模型改变时更容易跟踪视图片段并且必须改变视图以反映模型。因此,简单视图直接表示元素,而复杂视图不表示。
+ * <p>
+ *  视图有以下职责：
+ * <dl>
+ * 
+ *  <dt> <b>参与布局。</b>
+ * <dd>
+ * <p>视图具有<code> setSize </code>方法,它与<code> Component </code>组合中的<code> doLayout </code>和<code> setSize 
+ * </code>该视图具有<code> preferenceChanged </code>方法,例如<code> Component </code>中的<code> invalidate </code>,
+ * 除了可以仅使一个轴无效并且请求更改的子进程被识别。
+ *  <p> A View表示它希望以三个值,最小值,首选和最大跨度的大小。视图中的布局可以对每个轴独立完成。对于正常工作的View实现,最小跨度将小于优选跨度,其又将小于最大跨度。
+ * </p>
+ *  <p style ="text-align：center"> <img src ="doc-files / View-flexibility.jpg"
+ * alt="The above text describes this graphic.">
+ *  <p>布局的最小方法集有：
+ * <ul>
+ *  <li> {@ link #getMinimumSpan(int)getMinimumSpan} <li> {@ link #getPreferredSpan(int)getPreferredSpan}
+ *  <li> {@ link #getMaximumSpan(int)getMaximumSpan} <li> {@ link #getAlignment getAlignment} <li> {@ link #setSize(float,float)setSize}
+ *  {@ link #preferenceChanged(javax.swing.text.View,boolean,boolean)。
+ * </ul>
+ * 
+ * <p> <code> setSize </code>方法应该准备好被调用多次(即即使大小没有改变也可以调用它)。
+ * 通常调用<code> setSize </code>方法以确保View布局在尝试对需要最新布局的操作执行之前完成。视图大小应始终</em>设置为该视图指定的最小和最大跨度内的值。
+ * 此外,如果视图必须调整父级的<code> preferenceChanged </code>方法,如果它已经更改了布局的值,并且期望父级的值。
+ * 在发送<code> preferenceChanged </code>之前,父视图不需要识别更改。这允许父View实现缓存子需求(如果需要)。调用顺序看起来像下面这样：。
+ * </p>
+ * <p style="text-align:center">
+ *  <img src ="doc-files / View-layout.jpg"alt ="父视图和子视图之间的示例调用顺序：
+ * setSize, getMinimum, getPreferred, getMaximum, getAlignment, setSize">
+ *  <p>精确的调用顺序取决于父视图的布局功能(如果视图有任何子视图)。视图可以在确定孩子将给予每个孩子之前收集孩子的偏好,或者它可以一次一个地迭代地更新孩子。
+ * </p>
+ * 
+ *  <dt> <b>呈现模型的一部分。</b>
+ * <dd>
+ * <p>这是在paint方法中完成的,这非常像一个组件paint方法。视图预计可能填充相当大的树。 <code> View </code>具有以下用于呈现的语义：
+ * </p>
+ * <ul>
+ * <li>视图在绘制时从父级获取其分配,因此如果分配的区域与准备处理的区域不同,则必须准备重新布置布局。
+ *  <li>坐标系与托管<code> Component </code>(即{@link #getContainer getContainer}方法返回的<code> Component </code>)
+ * 相同。
+ * <li>视图在绘制时从父级获取其分配,因此如果分配的区域与准备处理的区域不同,则必须准备重新布置布局。这意味着子视图生活在与父视图相同的坐标系中,除非父对象明确地更改了坐标系。
+ * 要调度自己重绘,视图可以在托管<code> Component </code>上调用重绘。 <li>默认为<em>不剪辑</em>子项。只有当它真的感觉需要剪辑时,才允许视图剪辑更高效。
+ *  <li>给出的<code> Graphics </code>对象未以任何方式初始化。视图应设置所需的任何设置。 <li> <code>查看</code>本质上是透明的。
+ * 虽然视图可能呈现其整个分配,但通常视图不会。通过遍历<code> View </code>实现的树执行渲染。每个<code> View </code>负责渲染它的孩子。这种行为取决于线程安全。
+ * 虽然视图实现不一定必须考虑线程安全,但确实利用并发的其他视图实现可以依赖于树遍历来保证线程安全。 <li>相对于模型的视图顺序取决于实现。
+ * 虽然子视图通常以与它们在模型中出现的顺序相同的顺序排列,但它们可以以完全不同的顺序在视觉上排列。如果子节点重叠,则视图实现可以具有与它们相关联的Z顺序。
+ * </ul>
+ * <p>渲染的方法有：
+ * <ul>
+ *  <li> {@ link #paint(java.awt.Graphics,java.awt.Shape)paint}
+ * </ul>
+ * 
+ *  <dt> <b>在模型和视图坐标系之间进行转换。</b>
+ * <dd>
+ *  <p>因为视图对象是从工厂生成的,因此不一定被计入特定模式,人们必须能够执行转换以正确地定位模型的空间表示。这样做的方法是：
+ * <ul>
+ *  <li> {@ link #modelToView(int,javax.swing.text.Position.Bias,int,javax.swing.text.Position.Bias,java.awt.Shape)modelToView}
+ *  <li> {@ link #viewToModel float,float,java.awt.Shape,javax.swing.text.Position.Bias [])viewToModel} 
+ * <li> {@ link #getDocument()getDocument} <li> {@ link #getElement()getElement} <li > {@ link #getStartOffset()getStartOffset}
+ *  <li> {@ link #getEndOffset()getEndOffset}。
+ * </ul>
+ *  <p>布局必须在尝试进行翻译之前有效。翻译无效,并且在通过<code> DocumentEvent </code>从模型广播更改时,不得尝试翻译。
+ * </p>
+ * 
+ *  <dt> <b>响应来自模型的更改。</b>
+ * <dd>
+ * <p>如果整体视图由许多部分表示(这是最好的情况,如果想要能够更改视图和写入最少量的新代码),拥有大量的代码是不切实际的> DocumentListener </code>。
+ * 如果每个视图都倾听模型,只有少数人实际上对在任何给定时间广播的变化感兴趣。由于模型不具有视图的知识,因此它没有办法过滤变化信息的广播。视图层次结构本身负责传播更改信息。
+ * 在视图层次结构中的任何级别,该视图对其子节点足够了解,以便进一步最佳地分发更改信息。因此,从视图层次结构的根开始广播更改。这样做的方法是：。
+ * <ul>
+ *  <li> {@ link #insertUpdate insertUpdate} <li> {@ link #removeUpdate removeUpdate} <li> {@ link #changedUpdate changedUpdate}
+ * 。
+ * </ul>
+ * <p>
+ * </dl>
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public abstract class View implements SwingConstants {
@@ -193,6 +278,10 @@ public abstract class View implements SwingConstants {
     /**
      * Creates a new <code>View</code> object.
      *
+     * <p>
+     *  创建一个新的<code> View </code>对象。
+     * 
+     * 
      * @param elem the <code>Element</code> to represent
      */
     public View(Element elem) {
@@ -202,6 +291,10 @@ public abstract class View implements SwingConstants {
     /**
      * Returns the parent of the view.
      *
+     * <p>
+     *  返回视图的父视图。
+     * 
+     * 
      * @return the parent, or <code>null</code> if none exists
      */
     public View getParent() {
@@ -213,6 +306,10 @@ public abstract class View implements SwingConstants {
      *  the view is visible or not.  By default
      *  all views are visible.
      *
+     * <p>
+     *  返回一个布尔值,指示视图是否可见。默认情况下,所有视图都可见。
+     * 
+     * 
      *  @return always returns true
      */
     public boolean isVisible() {
@@ -224,6 +321,10 @@ public abstract class View implements SwingConstants {
      * Determines the preferred span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿着轴的此视图的首选跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @return   the span the view would like to be rendered into.
@@ -238,6 +339,10 @@ public abstract class View implements SwingConstants {
      * Determines the minimum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最小跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @return  the minimum span the view can be rendered into
@@ -256,6 +361,10 @@ public abstract class View implements SwingConstants {
      * Determines the maximum span for this view along an
      * axis.
      *
+     * <p>
+     *  确定沿轴的此视图的最大跨度。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @return  the maximum span the view can be rendered into
@@ -277,6 +386,10 @@ public abstract class View implements SwingConstants {
      * the next parent.  The root view will call
      * <code>revalidate</code> on the associated text component.
      *
+     * <p>
+     * 子视图可以在父对象上调用此选项来指示首选项已更改,并应重新考虑布局。默认情况下,这只是传播到下一个父。根视图将在相关联的文本组件上调用<code> revalidate </code>。
+     * 
+     * 
      * @param child the child view
      * @param width true if the width preference has changed
      * @param height true if the height preference has changed
@@ -297,6 +410,10 @@ public abstract class View implements SwingConstants {
      * away from the origin.  An alignment of 0.5 would be the
      * center of the view.
      *
+     * <p>
+     *  确定沿着轴的该视图的期望对准。返回所需的对齐。这应该是值> = 0.0和<= 1.0,其中0表示在原点处的对准,1.0表示与远离原点的全跨度的对准。对齐为0.5将是视图的中心。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @return the value 0.5
@@ -310,6 +427,10 @@ public abstract class View implements SwingConstants {
      * surface.  The view may need to do layout and create child
      * views to enable itself to render into the given allocation.
      *
+     * <p>
+     *  使用给定的渲染表面和该表面上的区域渲染。视图可能需要进行布局和创建子视图,以使自身能够呈现给定的分配。
+     * 
+     * 
      * @param g the rendering surface to use
      * @param allocation the allocated region to render into
      */
@@ -328,6 +449,11 @@ public abstract class View implements SwingConstants {
      * reimplemented, <code>super.setParent()</code> should
      * be called.
      *
+     * <p>
+     *  为此视图建立父视图。如果父视图正常工作,这保证在任何其他方法之前被调用。这也是最后调用的方法,因为它被调用以指示视图已经从层次结构中删除。
+     * 当调用此方法将父项设置为null时,此方法对其每个子项执行相同的操作,传播它们已从视图树断开的通知。如果重新实现,应该调用<code> super.setParent()</code>。
+     * 
+     * 
      * @param parent the new parent, or <code>null</code> if the view is
      *          being removed from a parent
      */
@@ -350,6 +476,10 @@ public abstract class View implements SwingConstants {
      * the default is to not be a composite view this
      * returns 0.
      *
+     * <p>
+     *  返回此视图中的视图数。因为默认是不是一个复合视图,这将返回0。
+     * 
+     * 
      * @return the number of views &gt;= 0
      * @see View#getViewCount
      */
@@ -361,6 +491,10 @@ public abstract class View implements SwingConstants {
      * Gets the <i>n</i>th child view.  Since there are no
      * children by default, this returns <code>null</code>.
      *
+     * <p>
+     * 获取第<n>个子视图。因为默认情况下没有子级,所以返回<code> null </code>。
+     * 
+     * 
      * @param n the number of the view to get, &gt;= 0 &amp;&amp; &lt; getViewCount()
      * @return the view
      */
@@ -373,6 +507,10 @@ public abstract class View implements SwingConstants {
      * Removes all of the children.  This is a convenience
      * call to <code>replace</code>.
      *
+     * <p>
+     *  删除所有的孩子。这是对<code> replace </code>的方便调用。
+     * 
+     * 
      * @since 1.3
      */
     public void removeAll() {
@@ -382,6 +520,10 @@ public abstract class View implements SwingConstants {
     /**
      * Removes one of the children at the given position.
      * This is a convenience call to <code>replace</code>.
+     * <p>
+     *  删除指定位置的其中一个孩子。这是对<code> replace </code>的方便调用。
+     * 
+     * 
      * @since 1.3
      */
     public void remove(int i) {
@@ -392,6 +534,10 @@ public abstract class View implements SwingConstants {
      * Inserts a single child view.  This is a convenience
      * call to <code>replace</code>.
      *
+     * <p>
+     *  插入单个子视图。这是对<code> replace </code>的方便调用。
+     * 
+     * 
      * @param offs the offset of the view to insert before &gt;= 0
      * @param v the view
      * @see #replace
@@ -407,6 +553,10 @@ public abstract class View implements SwingConstants {
      * Appends a single child view.  This is a convenience
      * call to <code>replace</code>.
      *
+     * <p>
+     *  追加单个子视图。这是对<code> replace </code>的方便调用。
+     * 
+     * 
      * @param v the view
      * @see #replace
      * @since 1.3
@@ -426,6 +576,11 @@ public abstract class View implements SwingConstants {
      * This is implemented to do nothing, because by default
      * a view has no children.
      *
+     * <p>
+     *  替换子视图。如果没有视图要删除,则作为插入。如果没有视图添加这个行为作为删除。要删除的视图将父设置为<code> null </code>,并且删除它们的内部引用,以便可以对其进行垃圾回收。
+     * 这被实现为什么也不做,因为默认情况下视图没有孩子。
+     * 
+     * 
      * @param offset the starting index into the child views to insert
      *   the new views.  This should be a value &gt;= 0 and &lt;= getViewCount
      * @param length the number of existing child views to remove
@@ -444,6 +599,10 @@ public abstract class View implements SwingConstants {
      * to return -1 to indicate there is no valid child index for any
      * position.
      *
+     * <p>
+     *  返回表示模型中给定位置的子视图索引。默认情况下,一个视图没有子对象,因此实现返回-1表示没有任何有效的子索引。
+     * 
+     * 
      * @param pos the position &gt;= 0
      * @return  index of the view representing the given position, or
      *   -1 if no view represents that position
@@ -460,6 +619,10 @@ public abstract class View implements SwingConstants {
      * their location.  This returns <code>null</code> since the
      * default is to not have any child views.
      *
+     * <p>
+     *  获取给定子视图的分配。这使得能够找出各种视图位于何处,而不必假定视图如何存储它们的位置。这返回<code> null </code>,因为默认是没有任何子视图。
+     * 
+     * 
      * @param index the index of the child, &gt;= 0 &amp;&amp; &lt;
      *          <code>getViewCount()</code>
      * @param a  the allocation to this view
@@ -480,6 +643,11 @@ public abstract class View implements SwingConstants {
      * will be calculated automatically.  If the value &lt; -1,
      * the {@code BadLocationException} will be thrown.
      *
+     * <p>
+     * 提供一种方法来确定下一个可视地表示的模型位置,在该位置处可以放置插入符号。某些视图可能不可见,它们可能不是在模型中找到的相同顺序,或者它们可能不允许访问模型中的一些位置。
+     * 该方法使得能够指定在> = 0的范围内转换的位置。如果值为-1,将自动计算位置。如果值&lt; -1,将抛出{@code BadLocationException}。
+     * 
+     * 
      * @param pos the position to convert
      * @param a the allocated region in which to render
      * @param direction the direction from the current position that can
@@ -570,6 +738,10 @@ public abstract class View implements SwingConstants {
      * from the document model coordinate space
      * to the view coordinate space.
      *
+     * <p>
+     *  提供给定字符从文档模型坐标空间到视图坐标空间的映射。
+     * 
+     * 
      * @param pos the position of the desired character (&gt;=0)
      * @param a the area of the view, which encompasses the requested character
      * @param b the bias toward the previous character or the
@@ -596,6 +768,10 @@ public abstract class View implements SwingConstants {
      * to the view coordinate space. The specified region is
      * created as a union of the first and last character positions.
      *
+     * <p>
+     *  提供给定区域从文档模型坐标空间到视图坐标空间的映射。指定的区域被创建为第一个和最后一个字符位置的联合。
+     * 
+     * 
      * @param p0 the position of the first character (&gt;=0)
      * @param b0 the bias of the first character position,
      *  toward the previous character or the
@@ -660,6 +836,10 @@ public abstract class View implements SwingConstants {
      * closer to the next character in the model or the previous
      * character in the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。 <code> biasReturn </code>参数将被填充以表示给定的点更接近模型中的下一个字符或模型中的上一个字符。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param a the allocated region in which to render
@@ -691,6 +871,16 @@ public abstract class View implements SwingConstants {
      * layout, or do nothing.
      * </ol>
      *
+     * <p>
+     *  提供通知,说明在此数据视图负责的位置,文档中插入了某些内容。为了减少子类的负担,此功能分散到以下调用中,子类可以重新实现：
+     * <ol>
+     * <li>如果此视图负责的元素有任何更改,则调用{@ link #updateChildren updateChildren}。
+     * 如果此视图具有表示子元素的子视图,则此方法应执行任何必要的操作,以确保子视图正确地表示模型。
+     *  <li>调用{@ link #forwardUpdate forwardUpdate}将DocumentEvent转发到相应的子视图。
+     *  <li>调用{@ link #updateLayout updateLayout}可让视图修复其布局,重新安排布局或不执行任何操作。
+     * </ol>
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -732,6 +922,16 @@ public abstract class View implements SwingConstants {
      * layout, or do nothing.
      * </ol>
      *
+     * <p>
+     *  提供通知,说明该视图负责的位置中的文档被删除了。为了减少子类的负担,此功能分散到以下调用中,子类可以重新实现：
+     * <ol>
+     *  <li>如果此视图负责的元素有任何更改,则调用{@ link #updateChildren updateChildren}。
+     * 如果此视图具有表示子元素的子视图,则此方法应执行任何必要的操作,以确保子视图正确地表示模型。
+     *  <li>调用{@ link #forwardUpdate forwardUpdate}将DocumentEvent转发到相应的子视图。
+     *  <li>调用{@ link #updateLayout updateLayout}可让视图修复其布局,重新安排布局或不执行任何操作。
+     * </ol>
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -773,6 +973,16 @@ public abstract class View implements SwingConstants {
      * layout, or do nothing.
      * </ol>
      *
+     * <p>
+     * 从文档中提供属性在此视图负责的位置中更改的通知。为了减少子类的负担,此功能分散到以下调用中,子类可以重新实现：
+     * <ol>
+     *  <li>如果此视图负责的元素有任何更改,则调用{@ link #updateChildren updateChildren}。
+     * 如果此视图具有表示子元素的子视图,则此方法应执行任何必要的操作,以确保子视图正确地表示模型。
+     *  <li>调用{@ link #forwardUpdate forwardUpdate}将DocumentEvent转发到相应的子视图。
+     *  <li>调用{@ link #updateLayout updateLayout}可让视图修复其布局,重新安排布局或不执行任何操作。
+     * </ol>
+     * 
+     * 
      * @param e the change information from the associated document
      * @param a the current allocation of the view
      * @param f the factory to use to rebuild if the view has children
@@ -797,6 +1007,10 @@ public abstract class View implements SwingConstants {
     /**
      * Fetches the model associated with the view.
      *
+     * <p>
+     *  获取与视图相关联的模型。
+     * 
+     * 
      * @return the view model, <code>null</code> if none
      * @see View#getDocument
      */
@@ -808,6 +1022,10 @@ public abstract class View implements SwingConstants {
      * Fetches the portion of the model for which this view is
      * responsible.
      *
+     * <p>
+     *  获取此视图所负责的模型部分。
+     * 
+     * 
      * @return the starting offset into the model &gt;= 0
      * @see View#getStartOffset
      */
@@ -819,6 +1037,10 @@ public abstract class View implements SwingConstants {
      * Fetches the portion of the model for which this view is
      * responsible.
      *
+     * <p>
+     *  获取此视图所负责的模型部分。
+     * 
+     * 
      * @return the ending offset into the model &gt;= 0
      * @see View#getEndOffset
      */
@@ -831,6 +1053,10 @@ public abstract class View implements SwingConstants {
      * view is mapped to.  The view may not be responsible for the
      * entire portion of the element.
      *
+     * <p>
+     *  获取此视图映射到的主题的结构部分。视图可能不负责元素的整个部分。
+     * 
+     * 
      * @return the subject
      * @see View#getElement
      */
@@ -844,6 +1070,10 @@ public abstract class View implements SwingConstants {
      * font characteristics, and will be different for a print view
      * than a component view.
      *
+     * <p>
+     *  获取<code> Graphics </code>以进行渲染。这可以用于确定字体特征,并且对于打印视图而不是组件视图将是不同的。
+     * 
+     * 
      * @return a <code>Graphics</code> object for rendering
      * @since 1.3
      */
@@ -865,6 +1095,10 @@ public abstract class View implements SwingConstants {
      * for the purpose of rendering or layout, and should always
      * access them through the <code>AttributeSet</code> returned
      * by this method.
+     * <p>
+     * 获取渲染时要使用的属性。默认情况下,这只返回相关元素的属性。应该使用此方法,而不是直接使用元素来获取对属性的访问,以允许视图特定属性混合或允许视图通过子类具有视图特定的属性转换。
+     * 每个视图应该记录它为渲染或布局的目的识别什么属性,并且应该总是通过此方法返回的<code> AttributeSet </code>访问它们。
+     * 
      */
     public AttributeSet getAttributes() {
         return elem.getAttributes();
@@ -885,6 +1119,12 @@ public abstract class View implements SwingConstants {
      * given offset, and the end offset should be less than
      * or equal to the end offset of the view being broken.
      *
+     * <p>
+     *  尝试在给定轴上断开此视图。这是通过尝试对他们的孩子进行格式化的视图调用的。例如,段落的视图通常将尝试将其孩子放置在行中,并且表示文本块的视图有时可以被分解成较小的块。
+     * <p>
+     *  这被实现以返回视图本身,其表示不可破坏的默认行为。如果视图支持断开,则返回的视图的起始偏移应该是给定的偏移,并且结束偏移应当小于或等于被中断的视图的结束偏移。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @param offset the location in the document model
@@ -913,6 +1153,10 @@ public abstract class View implements SwingConstants {
      * the view doesn't support fragmenting (the default), it
      * should return itself.
      *
+     * <p>
+     *  创建表示元素的一部分的视图。这在用于对视图的片段进行测量的格式化操作期间潜在地有用。如果视图不支持分段(默认),它应该返回自身。
+     * 
+     * 
      * @param p0 the starting offset &gt;= 0.  This should be a value
      *   greater or equal to the element starting offset and
      *   less than the element ending offset.
@@ -950,6 +1194,16 @@ public abstract class View implements SwingConstants {
      * An example of a view that uses break weight is
      * <code>ParagraphView</code>.
      *
+     * <p>
+     * 确定此视图中的休息机会的吸引力。这可以用于确定哪个视图是最有吸引力的在格式化过程中调用<code> breakView </code>。
+     * 例如,表示其中具有空格的文本的视图可能比没有空格的视图更有吸引力。重量越高,断裂越有吸引力。等于或小于<code> BadBreakWeight </code>的值不应被视为中断。
+     * 大于或等于<code> ForcedBreakWeight </code>的值应该被破坏。
+     * <p>
+     *  这被实现以提供返回<code> BadBreakWeight </code>的默认行为,除非长度大于视图的长度,在这种情况下整个视图表示片段。
+     * 除非一个视图被写成支持破坏行为,尝试和破坏视图是没有吸引力的。支持断开的视图的示例是<code> LabelView </code>。
+     * 使用break权重的视图的示例是<code> ParagraphView </code>。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @param pos the potential location of the start of the
@@ -977,6 +1231,10 @@ public abstract class View implements SwingConstants {
      * Determines the resizability of the view along the
      * given axis.  A value of 0 or less is not resizable.
      *
+     * <p>
+     *  确定沿给定轴的视图的可重新调整性。值为0或更小不可调整大小。
+     * 
+     * 
      * @param axis may be either <code>View.X_AXIS</code> or
      *          <code>View.Y_AXIS</code>
      * @return the weight
@@ -990,6 +1248,10 @@ public abstract class View implements SwingConstants {
      * layout of the view along the given axis, if it
      * has any layout duties.
      *
+     * <p>
+     *  设置视图的大小。这应该导致沿给定轴的视图的布局,如果它有任何布局职责。
+     * 
+     * 
      * @param width the width &gt;= 0
      * @param height the height &gt;= 0
      */
@@ -1002,6 +1264,10 @@ public abstract class View implements SwingConstants {
      * components font, etc.  The default implementation
      * of this is to forward the query to the parent view.
      *
+     * <p>
+     *  获取托管视图的容器。这对于调度重绘,查找主机组件字体等事情非常有用。默认实现是将查询转发到父视图。
+     * 
+     * 
      * @return the container, <code>null</code> if none
      */
     public Container getContainer() {
@@ -1016,6 +1282,10 @@ public abstract class View implements SwingConstants {
      * are most likely to need the factory, but this
      * method serves to provide it at other times.
      *
+     * <p>
+     * 获取提供视图层次结构的<code> ViewFactory </code>实现。通常,视图被赋予这个作为参数,当模型最可能需要工厂时,从模型更新,但这种方法用于在其他时间提供它。
+     * 
+     * 
      * @return the factory, <code>null</code> if none
      */
     public ViewFactory getViewFactory() {
@@ -1028,6 +1298,10 @@ public abstract class View implements SwingConstants {
      * implementation returns the value from the child View identified by
      * the passed in location.
      *
+     * <p>
+     *  返回指定位置处的工具提示文本。默认实现从由传递的位置标识的子视图返回值。
+     * 
+     * 
      * @since 1.4
      * @see JTextComponent#getToolTipText
      */
@@ -1049,6 +1323,10 @@ public abstract class View implements SwingConstants {
      * the view. This iterates over all the children returning the
      * first with a bounds that contains <code>x</code>, <code>y</code>.
      *
+     * <p>
+     *  返回表示视图中给定位置的子视图索引。这遍历所有返回第一个的子类,其中包含<code> x </code>,<code> y </code>。
+     * 
+     * 
      * @param x the x coordinate
      * @param y the y coordinate
      * @param allocation current allocation of the View.
@@ -1084,6 +1362,13 @@ public abstract class View implements SwingConstants {
      * child views representing the removed elements specified are
      * removed.
      *
+     * <p>
+     *  响应接收到模型更改的通知,更新子视图,并且此视图负责的元素有更改记录。这被实现以假定子视图直接负责该视图表示的元素的子元素。
+     *  <code> ViewFactory </code>用于为指定为<code> ElementChange </code>中添加的每个元素创建子视图,从给定的<code> ElementChange </code>
+     * 中指定的索引开始。
+     *  响应接收到模型更改的通知,更新子视图,并且此视图负责的元素有更改记录。这被实现以假定子视图直接负责该视图表示的元素的子元素。删除表示已删除的指定元素的子视图的数量。
+     * 
+     * 
      * @param ec the change information for the element this view
      *  is responsible for.  This should not be <code>null</code> if
      *  this method gets called
@@ -1129,6 +1414,10 @@ public abstract class View implements SwingConstants {
      * forwarding (i.e. new child views should not get
      * notified).
      *
+     * <p>
+     *  将给定的<code> DocumentEvent </code>转发给需要通知模型更改的子视图。如果这个视图负责的元素有变化,那么在转发时应该考虑(即,不应该通知新的子视图)。
+     * 
+     * 
      * @param ec changes to the element this view is responsible
      *  for (may be <code>null</code> if there were no changes).
      * @param e the change information from the associated document
@@ -1168,6 +1457,10 @@ public abstract class View implements SwingConstants {
     /**
      * Calculates the first and the last indexes of the child views
      * that need to be notified of the change to the model.
+     * <p>
+     * 计算需要通知模型更改的子视图的第一个和最后一个索引。
+     * 
+     * 
      * @param e the change information from the associated document
      */
     void calculateUpdateIndexes(DocumentEvent e) {
@@ -1200,6 +1493,9 @@ public abstract class View implements SwingConstants {
 
     /**
      * Updates the view to reflect the changes.
+     * <p>
+     *  更新视图以反映更改。
+     * 
      */
     void updateAfterChange() {
         // Do nothing by default. Should be overridden in subclasses, if any.
@@ -1213,6 +1509,13 @@ public abstract class View implements SwingConstants {
      * {@link #forwardUpdate forwardUpdate} to forward
      * the event to children that need it.
      *
+     * <p>
+     *  将<code> DocumentEvent </code>转发给给定子视图。
+     * 这只是根据事件的类型调用<code> insertUpdate </code>,<code> removeUpdate </code>或<code> changedUpdate </code>这是由{@link #forwardUpdate forwardUpdate}
+     * 调用,以将该事件转发给需要它的儿童。
+     *  将<code> DocumentEvent </code>转发给给定子视图。
+     * 
+     * 
      * @param v the child view to forward the event to
      * @param e the change information from the associated document
      * @param a the current allocation of the view
@@ -1238,6 +1541,11 @@ public abstract class View implements SwingConstants {
      * <code>preferenceChanged</code> to reschedule a new layout
      * if the <code>ElementChange</code> record is not <code>null</code>.
      *
+     * <p>
+     *  响应从模型接收更改通知更新布局。
+     * 如果<code> ElementChange </code>记录不是<code> null </code>,则实现调用<code> preferenceChanged </code>重新安排新布局。
+     * 
+     * 
      * @param ec changes to the element this view is responsible
      *  for (may be <code>null</code> if there were no changes)
      * @param e the change information from the associated document
@@ -1266,6 +1574,10 @@ public abstract class View implements SwingConstants {
      * break the view into fragments as the view has
      * not been written to support fragmenting.
      *
+     * <p>
+     *  指定视图的权重是格式化目的的坏中断机会。此值指示不应尝试将视图拆分为片段,因为视图尚未写入以支持片段化。
+     * 
+     * 
      * @see #getBreakWeight
      * @see #GoodBreakWeight
      * @see #ExcellentBreakWeight
@@ -1277,6 +1589,10 @@ public abstract class View implements SwingConstants {
      * The weight to indicate a view supports breaking,
      * but better opportunities probably exist.
      *
+     * <p>
+     *  表示视图的权重支持断开,但更好的机会可能存在。
+     * 
+     * 
      * @see #getBreakWeight
      * @see #BadBreakWeight
      * @see #ExcellentBreakWeight
@@ -1289,6 +1605,10 @@ public abstract class View implements SwingConstants {
      * and this represents a very attractive place to
      * break.
      *
+     * <p>
+     *  表示视图的重量支持断裂,这代表了一个非常有吸引力的断裂的地方。
+     * 
+     * 
      * @see #getBreakWeight
      * @see #BadBreakWeight
      * @see #GoodBreakWeight
@@ -1302,6 +1622,10 @@ public abstract class View implements SwingConstants {
      * when placed in a view that formats its children
      * by breaking them.
      *
+     * <p>
+     *  指示视图支持断开的权重,并且必须断开以便在放置在通过断开其格式化其子代的视图中时被正确表示。
+     * 
+     * 
      * @see #getBreakWeight
      * @see #BadBreakWeight
      * @see #GoodBreakWeight
@@ -1311,11 +1635,17 @@ public abstract class View implements SwingConstants {
 
     /**
      * Axis for format/break operations.
+     * <p>
+     *  用于格式化/中断操作的轴。
+     * 
      */
     public static final int X_AXIS = HORIZONTAL;
 
     /**
      * Axis for format/break operations.
+     * <p>
+     *  用于格式化/中断操作的轴。
+     * 
      */
     public static final int Y_AXIS = VERTICAL;
 
@@ -1325,6 +1655,10 @@ public abstract class View implements SwingConstants {
      * implemented to default the bias to <code>Position.Bias.Forward</code>
      * which was previously implied.
      *
+     * <p>
+     * 提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。这被实现为默认偏好为<code> Position.Bias.Forward </code>,这是以前隐含的。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param a the allocated region in which to render
      * @return the bounding box of the given position is returned
@@ -1343,6 +1677,10 @@ public abstract class View implements SwingConstants {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param a the allocated region in which to render
@@ -1366,11 +1704,16 @@ public abstract class View implements SwingConstants {
 
     /**
      * The index of the first child view to be notified.
+     * <p>
+     *  要通知的第一个子视图的索引。
+     * 
      */
     int firstUpdateIndex;
 
     /**
      * The index of the last child view to be notified.
+     * <p>
+     *  要通知的最后一个子视图的索引。
      */
     int lastUpdateIndex;
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -55,6 +56,9 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
     protected SnmpEngine engine = null;
     /**
      * V3 enabled Adaptor. Each Oid is added using updateRequest method.
+     * <p>
+     *  V3启用适配器。每个Oid使用updateRequest方法添加。
+     * 
      */
     protected SnmpSubRequestHandler(SnmpEngine engine,
                                     SnmpIncomingRequest incRequest,
@@ -66,6 +70,9 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
 
     /**
      * V3 enabled Adaptor.
+     * <p>
+     *  V3启用适配器。
+     * 
      */
     protected SnmpSubRequestHandler(SnmpEngine engine,
                                     SnmpIncomingRequest incRequest,
@@ -77,6 +84,9 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
     }
     /**
      * SNMP V1/V2 . To be called with updateRequest.
+     * <p>
+     *  SNMP V1 / V2。使用updateRequest调用。
+     * 
      */
     protected SnmpSubRequestHandler(SnmpMibAgent agent, SnmpPdu req) {
         if (SNMP_ADAPTOR_LOGGER.isLoggable(Level.FINER)) {
@@ -101,6 +111,9 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
     /**
      * SNMP V1/V2 The constructor initialize the subrequest with the whole varbind list contained
      * in the original request.
+     * <p>
+     *  SNMP V1 / V2构造函数初始化包含在原始请求中的整个varbind列表的子请求。
+     * 
      */
     @SuppressWarnings("unchecked")  // cast to NonSyncVector<SnmpVarBind>
     protected SnmpSubRequestHandler(SnmpMibAgent agent,
@@ -477,6 +490,9 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
     /**
      * The method returns the error status of the operation.
      * The method takes into account the protocol version.
+     * <p>
+     *  该方法返回操作的错误状态。该方法考虑协议版本。
+     * 
      */
     protected int getErrorStatus() {
         if (errorStatus == snmpRspNoError)
@@ -489,6 +505,9 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
      * The method returns the error index as a position in the var bind list.
      * The value returned by the method corresponds to the index in the original
      * var bind list as received by the SNMP protocol adaptor.
+     * <p>
+     *  该方法返回错误索引作为var绑定列表中的位置。方法返回的值对应于SNMP协议适配器接收的原始var绑定列表中的索引。
+     * 
      */
     protected int getErrorIndex() {
         if  (errorStatus == snmpRspNoError)
@@ -506,6 +525,9 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
 
     /**
      * The method updates the varbind list of the subrequest.
+     * <p>
+     *  该方法更新子请求的varbind列表。
+     * 
      */
     protected  void updateRequest(SnmpVarBind var, int pos) {
         int size= varBind.size();
@@ -519,6 +541,9 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
      * Prior to calling the method, one must make sure that the operation was
      * successful. As such the method getErrorIndex or getErrorStatus should be
      * called.
+     * <p>
+     *  该方法使用预先调用的操作的结果更新给定的var绑定列表。在调用方法之前,必须确保操作成功。因此应该调用getErrorIndex或getErrorStatus方法。
+     * 
      */
     protected void updateResult(SnmpVarBind[] result) {
 
@@ -552,57 +577,89 @@ class SnmpSubRequestHandler implements SnmpDefinitions, Runnable {
 
     /**
      * Store the protocol version to handle
+     * <p>
+     *  存储要处理的协议版本
+     * 
      */
     protected int version= snmpVersionOne;
 
     /**
      * Store the operation type. Remember if the type is Walk, it means
      * that we have to invoke the check method ...
+     * <p>
+     *  存储操作类型。记住如果类型是Walk,这意味着我们必须调用check方法...
+     * 
      */
     protected int type= 0;
 
     /**
      * Agent directly handled by the sub-request handler.
+     * <p>
+     *  代理由子请求处理程序直接处理。
+     * 
      */
     protected SnmpMibAgent agent;
 
     /**
      * Error status.
+     * <p>
+     *  错误状态。
+     * 
      */
     protected int errorStatus= snmpRspNoError;
 
     /**
      * Index of error.
      * A value of -1 means no error.
+     * <p>
+     *  错误索引。值为-1表示没有错误。
+     * 
      */
     protected int errorIndex= -1;
 
     /**
      * The varbind list specific to the current sub request.
      * The vector must contain object of type SnmpVarBind.
+     * <p>
+     *  特定于当前子请求的varbind列表。向量必须包含SnmpVarBind类型的对象。
+     * 
      */
     protected Vector<SnmpVarBind> varBind;
 
     /**
      * The array giving the index translation between the content of
      * <VAR>varBind</VAR> and the varbind list as specified in the request.
+     * <p>
+     * 该数组给出在请求中指定的<VAR> varBind </VAR>的内容和varbind列表之间的索引转换。
+     * 
      */
     protected int[] translation;
 
     /**
      * Contextual object allocated by the SnmpUserDataFactory.
+     * <p>
+     *  由SnmpUserDataFactory分配的上下文对象。
+     * 
+     * 
      **/
     protected Object data;
 
     /**
      * The SnmpMibRequest that will be passed to the agent.
      *
+     * <p>
+     *  将传递给代理的SnmpMibRequest。
+     * 
+     * 
      **/
     private   SnmpMibRequest mibRequest = null;
 
     /**
      * The SnmpPdu that will be passed to the request.
      *
+     * <p>
+     *  将被传递到请求的SnmpPdu。
+     * 
      **/
     private   SnmpPdu reqPdu = null;
 

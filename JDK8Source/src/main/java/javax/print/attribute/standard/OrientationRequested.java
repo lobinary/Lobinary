@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -60,6 +61,22 @@ import javax.print.attribute.PrintJobAttribute;
  * returns the IPP string representation of the attribute value.
  * <P>
  *
+ * <p>
+ *  类OrientationRequested是一个打印属性类,枚举,指示打印的打印流页面的所需方向;它不描述客户提供的打印流页面的方向。
+ * <P>
+ *  对于某些文档格式(如<CODE>"application / postscript"</CODE>),在文档数据中指定打印流页面的所需方向。该信息由设备驱动程序在提交打印作业之前生成。
+ * 其他文档格式(例如<CODE>"text / plain"</CODE>)不包括文档数据中所需方向的概念。在后一种情况下,打印机可以在文档数据提交之后将期望的方向绑定到文档数据。
+ * 预期打印机只支持某些文档格式(例如,<CODE>"text / plain"</CODE>或<CODE>"text / html"</CODE>)的OrientationRequested属性, <CODE>
+ * "application / postscript"</CODE>)。
+ * 其他文档格式(例如<CODE>"text / plain"</CODE>)不包括文档数据中所需方向的概念。在后一种情况下,打印机可以在文档数据提交之后将期望的方向绑定到文档数据。
+ * 这与任何其他作业模板属性没有区别,因为打印作业可以始终在不同作业模板属性的值之间施加约束。
+ * 然而,这里特别提到,因为很可能打印机将仅支持所支持的文档格式的一个子集的OrientationRequested属性。
+ * <P>
+ * <B> IPP兼容性：</B> <CODE> getName()</CODE>返回的类别名称是IPP属性名称。枚举的整数值是IPP枚举值。
+ *  <code> toString()</code>方法返回属性值的IPP字符串表示形式。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class OrientationRequested extends EnumSyntax
@@ -69,6 +86,9 @@ public final class OrientationRequested extends EnumSyntax
 
     /**
      * The content will be imaged across the short edge of the medium.
+     * <p>
+     *  内容将跨越介质的短边缘成像。
+     * 
      */
     public static final OrientationRequested
         PORTRAIT = new OrientationRequested(3);
@@ -81,6 +101,9 @@ public final class OrientationRequested extends EnumSyntax
      * portrait orientation. <I>Note:</I> The +90 direction was chosen because
      * simple finishing on the long edge is the same edge whether portrait or
      * landscape.
+     * <p>
+     *  内容将跨越介质的长边成像。横向被定义为要从纵向取向相对于介质(即,逆时针)成像+90度的打印流页面的旋转。 <I>注意：</I>选择+90方向是因为长边上的简单整理是相同的边缘,无论是纵向还是横向。
+     * 
      */
     public static final OrientationRequested
         LANDSCAPE = new OrientationRequested(4);
@@ -93,6 +116,10 @@ public final class OrientationRequested extends EnumSyntax
      * <I>Note:</I> The REVERSE_LANDSCAPE value was added because some
      * applications rotate landscape -90 degrees from portrait, rather than
      * +90 degrees.
+     * <p>
+     *  内容将跨越介质的长边缘成像,但是以与景观相反的方式成像。反向景观被定义为要从纵向方向相对于介质(即顺时针)成像-90度的打印流页面的旋转。
+     *  <I>注意：</I>添加了REVERSE_LANDSCAPE值,因为某些应用程序从横向旋转横向-90度,而不是从+90度。
+     * 
      */
     public static final OrientationRequested
         REVERSE_LANDSCAPE = new OrientationRequested(5);
@@ -109,6 +136,13 @@ public final class OrientationRequested extends EnumSyntax
      * <CODE>"text/plain"</CODE> portrait document can be stapled "on the
      * right" by a simple finishing device as is common use with some
      * Middle Eastern languages such as Hebrew.
+     * <p>
+     * 内容将跨越介质的短边缘成像,但是以与肖像相反的方式成像。反向肖像被定义为要从纵向取向相对于介质成像180度的打印流页面的旋转。
+     *  <I>注意：</I>在需要使用相对边缘以在仅具有一个完成位置的简单完成设备上完成纵向文档的情况下,添加REVERSE_PORTRAIT值以与{@link Finishings Finishings}属
+     * 性一起使用。
+     * 内容将跨越介质的短边缘成像,但是以与肖像相反的方式成像。反向肖像被定义为要从纵向取向相对于介质成像180度的打印流页面的旋转。
+     * 因此,通过简单的整理装置可以将"CODE""text / plain"</CODE>肖像文档装订在"右边",这是一些中东语言如希伯来语的常见用法。
+     * 
      */
     public static final OrientationRequested
         REVERSE_PORTRAIT = new OrientationRequested(6);
@@ -117,6 +151,10 @@ public final class OrientationRequested extends EnumSyntax
      * Construct a new orientation requested enumeration value with the given
      * integer value.
      *
+     * <p>
+     *  使用给定的整数值构造新的方向请求的枚举值。
+     * 
+     * 
      * @param  value  Integer value.
      */
     protected OrientationRequested(int value) {
@@ -139,6 +177,9 @@ public final class OrientationRequested extends EnumSyntax
 
     /**
      * Returns the string table for class OrientationRequested.
+     * <p>
+     *  返回类OrientationRequested的字符串表。
+     * 
      */
     protected String[] getStringTable() {
         return myStringTable;
@@ -146,6 +187,9 @@ public final class OrientationRequested extends EnumSyntax
 
     /**
      * Returns the enumeration value table for class OrientationRequested.
+     * <p>
+     *  返回类OrientationRequested的枚举值表。
+     * 
      */
     protected EnumSyntax[] getEnumValueTable() {
         return myEnumValueTable;
@@ -153,6 +197,9 @@ public final class OrientationRequested extends EnumSyntax
 
     /**
      * Returns the lowest integer value used by class OrientationRequested.
+     * <p>
+     *  返回类OrientationRequested使用的最小整数值。
+     * 
      */
     protected int getOffset() {
         return 3;
@@ -165,6 +212,12 @@ public final class OrientationRequested extends EnumSyntax
      * For class OrientationRequested, the
      * category is class OrientationRequested itself.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     *  对于OrientationRequested类,类别是OrientationRequested类本身。
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -179,6 +232,10 @@ public final class OrientationRequested extends EnumSyntax
      * For class OrientationRequested, the
      * category name is <CODE>"orientation-requested"</CODE>.
      *
+     * <p>
+     *  获取此属性值为实例的类别的名称。
+     * <P>
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

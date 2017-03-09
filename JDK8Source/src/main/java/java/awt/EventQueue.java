@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -88,6 +89,25 @@ import sun.misc.JavaSecurityAccess;
  * machinery, see <a href="doc-files/AWTThreadIssues.html#Autoshutdown"
  * >AWT Threading Issues</a>.
  *
+ * <p>
+ *  <code> EventQueue </code>是一个与平台无关的类,它对来自底层对等体类和可信应用程序类的事件进行排队。
+ * <p>
+ *  它封装了异步事件分派机制,它从队列中提取事件并通过在这个<code> EventQueue </code>上调用{@link #dispatchEvent(AWTEvent)dispatchEvent(AWTEvent)}
+ * 方法来调度它们,并将事件作为参数。
+ * 这个机制的特定行为是依赖于实现的。唯一的要求是实际上入队列到这个队列的事件(注意事件发布到<code> EventQueue </code>可以合并)调度：。
+ * <dl>
+ *  <dt>按顺序。 <dd>也就是说,不允许同时调度来自此队列的几个事件。 <dt>按照它们排队的顺序。
+ *  <dd>也就是说,如果<code> AWTEvent </code>&amp; A在<code> AWTEvent </code>&nbsp; B之前入队到<code> EventQueue </code>
+ * ,那么事件B将不会在事件A.。
+ *  <dt>按顺序。 <dd>也就是说,不允许同时调度来自此队列的几个事件。 <dt>按照它们排队的顺序。
+ * </dl>
+ * <p>
+ * 一些浏览器将不同代码库中的applet分割成单独的上下文,并在这些上下文之间建立壁。在这种情况下,每个上下文将有一个<code> EventQueue </code>。
+ * 其他浏览器将所有applet放在同一上下文中,这意味着对于所有applet只有一个,全局的<code> EventQueue </code>。此行为是实现相关的。有关详细信息,请参阅浏览器的文档。
+ * <p>
+ *  有关事件调度​​机制的线程问题的信息,请参见<a href="doc-files/AWTThreadIssues.html#Autoshutdown"> AWT线程问题</a>。
+ * 
+ * 
  * @author Thomas Ball
  * @author Fred Ecks
  * @author David Mendenhall
@@ -111,6 +131,10 @@ public class EventQueue {
      * have identical priority. Events are pulled off the EventQueue starting
      * with the Queue of highest priority. We progress in decreasing order
      * across all Queues.
+     * <p>
+     *  我们为EventQueue支持的每个优先级维护一个队列。也就是说,Eve​​ntQueue对象实际上实现为NUM_PRIORITIES个队列,特定内部队列上的所有事件具有相同的优先级。
+     * 事件被从最高优先级的队列开始的EventQueue。我们在所有队列中以递减顺序前进。
+     * 
      */
     private Queue[] queues = new Queue[NUM_PRIORITIES];
 
@@ -118,12 +142,18 @@ public class EventQueue {
      * The next EventQueue on the stack, or null if this EventQueue is
      * on the top of the stack.  If nextQueue is non-null, requests to post
      * an event are forwarded to nextQueue.
+     * <p>
+     *  堆栈上的下一个EventQueue,如果此EventQueue在堆栈的顶部,则为null。如果nextQueue不为null,则发送事件的请求将转发到nextQueue。
+     * 
      */
     private EventQueue nextQueue;
 
     /*
      * The previous EventQueue on the stack, or null if this is the
      * "base" EventQueue.
+     * <p>
+     *  堆栈上的前一个EventQueue,如果这是"基本"EventQueue,则为null。
+     * 
      */
     private EventQueue previousQueue;
 
@@ -131,6 +161,9 @@ public class EventQueue {
      * A single lock to synchronize the push()/pop() and related operations with
      * all the EventQueues from the AppContext. Synchronization on any particular
      * event queue(s) is not enough: we should lock the whole stack.
+     * <p>
+     *  单个锁同步push()/ pop()和相关的操作与所有的EventQueues从AppContext。任何特定事件队列上的同步是不够的：我们应该锁定整个堆栈。
+     * 
      */
     private final Lock pushPopLock;
     private final Condition pushPopCond;
@@ -138,6 +171,9 @@ public class EventQueue {
     /*
      * Dummy runnable to wake up EDT from getNextEvent() after
      push/pop is performed
+     * <p>
+     * Dummy runnable在push / pop执行后从getNextEvent()唤醒EDT
+     * 
      */
     private final static Runnable dummyRunnable = new Runnable() {
         public void run() {
@@ -153,28 +189,43 @@ public class EventQueue {
 
     /*
      * The time stamp of the last dispatched InputEvent or ActionEvent.
+     * <p>
+     *  最后一个分派的InputEvent或ActionEvent的时间戳。
+     * 
      */
     private long mostRecentEventTime = System.currentTimeMillis();
 
     /*
      * The time stamp of the last KeyEvent .
+     * <p>
+     *  最后一个KeyEvent的时间戳。
+     * 
      */
     private long mostRecentKeyEventTime = System.currentTimeMillis();
 
     /**
      * The modifiers field of the current event, if the current event is an
      * InputEvent or ActionEvent.
+     * <p>
+     *  当前事件的修饰符字段,如果当前事件是InputEvent或ActionEvent。
+     * 
      */
     private WeakReference<AWTEvent> currentEvent;
 
     /*
      * Non-zero if a thread is waiting in getNextEvent(int) for an event of
      * a particular ID to be posted to the queue.
+     * <p>
+     *  非零,如果线程在getNextEvent(int)中等待特定ID的事件发布到队列。
+     * 
      */
     private volatile int waitForID;
 
     /*
      * AppContext corresponding to the queue.
+     * <p>
+     *  AppContext对应的队列。
+     * 
      */
     private final AppContext appContext;
 
@@ -240,6 +291,10 @@ public class EventQueue {
          * SunToolkit.createNewAppContext() the started dispatch thread
          * may call AppContext.getAppContext() before createNewAppContext()
          * completes thus causing mess in thread group to appcontext mapping.
+         * <p>
+         *  注意：如果此时必须启动关联的事件分派线程,请注意以下问题：如果在SunToolkit.createNewAppContext()中创建此EventQueue实例,则启动的分派线程可以在createNe
+         * wAppContext()之前调用AppContext.getAppContext )完成,从而导致线程组中的混乱到appcontext映射。
+         * 
          */
 
         appContext = AppContext.getAppContext();
@@ -253,6 +308,11 @@ public class EventQueue {
      * and event source, the source <code>Component</code>'s
      * <code>coalesceEvents</code> method will be called.
      *
+     * <p>
+     *  将1.1样式的事件发布到<code> EventQueue </code>。
+     * 如果队列上存在具有相同ID和事件源的现有事件,则会调用源<code> Component </code>的<code> coalesceEvents </code>方法。
+     * 
+     * 
      * @param theEvent an instance of <code>java.awt.AWTEvent</code>,
      *          or a subclass of it
      * @throws NullPointerException if <code>theEvent</code> is <code>null</code>
@@ -268,6 +328,11 @@ public class EventQueue {
      * and event source, the source <code>Component</code>'s
      * <code>coalesceEvents</code> method will be called.
      *
+     * <p>
+     *  将1.1样式的事件发布到<code> EventQueue </code>。
+     * 如果队列上存在具有相同ID和事件源的现有事件,则会调用源<code> Component </code>的<code> coalesceEvents </code>方法。
+     * 
+     * 
      * @param theEvent an instance of <code>java.awt.AWTEvent</code>,
      *          or a subclass of it
      */
@@ -317,6 +382,10 @@ public class EventQueue {
      * Posts the event to the internal Queue of specified priority,
      * coalescing as appropriate.
      *
+     * <p>
+     *  将事件发布到指定优先级的内部队列,根据情况合并。
+     * 
+     * 
      * @param theEvent an instance of <code>java.awt.AWTEvent</code>,
      *          or a subclass of it
      * @param priority  the desired priority of the event
@@ -425,6 +494,9 @@ public class EventQueue {
      * In the wors case this method alone can slow down the entire application
      * 10 times by stalling the Event processing.
      * Only here by backward compatibility reasons.
+     * <p>
+     * 应避免通过任何方式调用此方法,因为它的工作时间取决于EQ长度。在糟糕的情况下,这种方法单独可以通过停止事件处理减慢整个应用程序10次。只有在这里通过向后兼容的原因。
+     * 
      */
     private boolean coalesceOtherEvent(AWTEvent e, int priority) {
         int id = e.getID();
@@ -516,6 +588,10 @@ public class EventQueue {
     /**
      * Returns whether an event is pending on any of the separate
      * Queues.
+     * <p>
+     *  返回任何单独队列中的事件是否正在等待。
+     * 
+     * 
      * @return whether an event is pending on any of the separate Queues
      */
     private boolean noEvents() {
@@ -532,6 +608,10 @@ public class EventQueue {
      * Removes an event from the <code>EventQueue</code> and
      * returns it.  This method will block until an event has
      * been posted by another thread.
+     * <p>
+     *  从<code> EventQueue </code>中删除事件并返回。此方法将阻塞,直到另一个线程发布了一个事件。
+     * 
+     * 
      * @return the next <code>AWTEvent</code>
      * @exception InterruptedException
      *            if any thread has interrupted this thread
@@ -542,6 +622,9 @@ public class EventQueue {
              * SunToolkit.flushPendingEvents must be called outside
              * of the synchronized block to avoid deadlock when
              * event queues are nested with push()/pop().
+             * <p>
+             *  SunToolkit.flushPendingEvents必须在同步块之外调用,以避免在事件队列嵌套push()/ pop()时发生死锁。
+             * 
              */
             SunToolkit.flushPendingEvents(appContext);
             pushPopLock.lock();
@@ -560,6 +643,9 @@ public class EventQueue {
 
     /*
      * Must be called under the lock. Doesn't call flushPendingEvents()
+     * <p>
+     *  必须在锁下面调用。不调用flushPendingEvents()
+     * 
      */
     AWTEvent getNextEventPrivate() throws InterruptedException {
         for (int i = NUM_PRIORITIES - 1; i >= 0; i--) {
@@ -582,6 +668,9 @@ public class EventQueue {
              * SunToolkit.flushPendingEvents must be called outside
              * of the synchronized block to avoid deadlock when
              * event queues are nested with push()/pop().
+             * <p>
+             *  SunToolkit.flushPendingEvents必须在同步块之外调用,以避免在事件队列嵌套push()/ pop()时发生死锁。
+             * 
              */
             SunToolkit.flushPendingEvents(appContext);
             pushPopLock.lock();
@@ -616,6 +705,10 @@ public class EventQueue {
     /**
      * Returns the first event on the <code>EventQueue</code>
      * without removing it.
+     * <p>
+     *  返回<code> EventQueue </code>上的第一个事件,而不删除它。
+     * 
+     * 
      * @return the first event
      */
     public AWTEvent peekEvent() {
@@ -635,6 +728,10 @@ public class EventQueue {
 
     /**
      * Returns the first event with the specified id, if any.
+     * <p>
+     *  返回具有指定ID的第一个事件(如果有)。
+     * 
+     * 
      * @param id the id of the type of event desired
      * @return the first event of the specified id or <code>null</code>
      *    if there is no such event
@@ -693,6 +790,28 @@ public class EventQueue {
      * </tr>
      * </table>
      * <p>
+     * <p>
+     *  分派事件。事件的分派方式取决于事件的类型和事件的源对象的类型：
+     * 
+     * <table border=1 summary="Event types, source types, and dispatch methods">
+     * <tr>
+     *  <th>事件类型</th> <th>源类型</th> <th>已分派到</th>
+     * </tr>
+     * <tr>
+     *  <td> ActiveEvent </td> <td>任何</td> <td> event.dispatch()</td>
+     * </tr>
+     * <tr>
+     *  <td>其他</td> <td>组件</td> <td> source.dispatchEvent(AWTEvent)</td>
+     * </tr>
+     * <tr>
+     *  <td>其他</td> <td> MenuComponent </td> <td> source.dispatchEvent(AWTEvent)</td>
+     * </tr>
+     * <tr>
+     *  <td>其他</td> <td>其他</td> <td>无操作(忽略)</td>
+     * </tr>
+     * </table>
+     * <p>
+     * 
      * @param event an instance of <code>java.awt.AWTEvent</code>,
      *          or a subclass of it
      * @throws NullPointerException if <code>event</code> is <code>null</code>
@@ -747,6 +866,9 @@ public class EventQueue {
 
     /**
      * Called from dispatchEvent() under a correct AccessControlContext
+     * <p>
+     * 从dispatchEvent()在正确的AccessControlContext下调用
+     * 
      */
     private void dispatchEventImpl(final AWTEvent event, final Object src) {
         event.isPosted = true;
@@ -788,6 +910,15 @@ public class EventQueue {
      * invoked from another thread, the current system time (as reported by
      * <code>System.currentTimeMillis()</code>) will be returned instead.
      *
+     * <p>
+     *  返回具有时间戳的最近事件的时间戳,该事件从与调用线程相关联的<code> EventQueue </code>分派。如果当前正在分派具有时间戳的事件,则将返回其时间戳。
+     * 如果没有事件被分派,则将返回EventQueue的初始化时间。
+     * 在当前版本的JDK中,只有<code> InputEvent </code>,<code> ActionEvent </code> InvocationEvent </code>有时间戳;但是,JDK的
+     * 未来版本可能会向其他事件类型添加时间戳。
+     * 如果没有事件被分派,则将返回EventQueue的初始化时间。请注意,此方法只应从应用程序的{@link #isDispatchThread事件分派线程}调用。
+     * 如果从另一个线程调用此方法,则将返回当前系统时间(由<code> System.currentTimeMillis()</code>)报告。
+     * 
+     * 
      * @return the timestamp of the last <code>InputEvent</code>,
      *         <code>ActionEvent</code>, or <code>InvocationEvent</code> to be
      *         dispatched, or <code>System.currentTimeMillis()</code> if this
@@ -815,6 +946,8 @@ public class EventQueue {
     }
 
     /**
+    /* <p>
+    /* 
      * @return most recent event time on all threads.
      */
     long getMostRecentEventTimeEx() {
@@ -834,6 +967,11 @@ public class EventQueue {
      * only be invoked from an application's event dispatching thread. If this
      * method is invoked from another thread, null will be returned.
      *
+     * <p>
+     *  返回与调用线程相关联的<code> EventQueue </code>当前调度的事件。如果方法需要访问事件,但不是设计为接收对它的引用作为参数,这是有用的。
+     * 注意,这个方法只能从应用程序的事件分派线程调用​​。如果从另一个线程调用此方法,将返回null。
+     * 
+     * 
      * @return the event currently being dispatched, or null if this method is
      *         invoked on a thread other than an event dispatching thread
      * @since 1.4
@@ -857,6 +995,11 @@ public class EventQueue {
      * Any pending events are transferred to the new <code>EventQueue</code>
      * for processing by it.
      *
+     * <p>
+     *  用指定的<code> EventQueue </code>替换现有的<code> EventQueue </code>。
+     * 任何挂起的事件都会传输到新的<code> EventQueue </code>中,以便进行处理。
+     * 
+     * 
      * @param newEventQueue an <code>EventQueue</code>
      *          (or subclass thereof) instance to be use
      * @see      java.awt.EventQueue#pop
@@ -923,6 +1066,12 @@ public class EventQueue {
      * Warning: To avoid deadlock, do not declare this method
      * synchronized in a subclass.
      *
+     * <p>
+     * 使用此<> EventQueue </code>停止调度事件。任何挂起的事件都会被转移到上一个<code> EventQueue </code>中进行处理。
+     * <p>
+     *  警告：为了避免死锁,请不要在子类中声明此方法同步。
+     * 
+     * 
      * @exception EmptyStackException if no previous push was made
      *  on this <code>EventQueue</code>
      * @see      java.awt.EventQueue#push
@@ -985,6 +1134,11 @@ public class EventQueue {
      * {@link SecondaryLoop#exit} methods to start and stop the
      * event loop and dispatch the events from this queue.
      *
+     * <p>
+     *  创建与此事件队列关联的新{@code secondary loop}。
+     * 使用{@link SecondaryLoop#enter}和{@link SecondaryLoop#exit}方法来启动和停止事件循环,并从此队列中分派事件。
+     * 
+     * 
      * @return secondaryLoop A new secondary loop object, which can
      *                       be used to launch a new nested event
      *                       loop and dispatch events from this queue
@@ -1029,6 +1183,14 @@ public class EventQueue {
      * dispatch thread.
      * <p>
      *
+     * <p>
+     *  如果调用线程是{@link Toolkit#getSystemEventQueue当前AWT EventQueue}的调度线程,则返回true。使用此方法可确保特定任务正在执行(或不在)。
+     * <p>
+     *  注意：使用{@link #invokeLater}或{@link #invokeAndWait}方法在{@link Toolkit#getSystemEventQueue当前AWT EventQueue}
+     * 的调度线程中执行任务。
+     * <p>
+     * 
+     * 
      * @return true if running in
      * {@link Toolkit#getSystemEventQueue the current AWT EventQueue}'s
      * dispatch thread
@@ -1089,6 +1251,9 @@ public class EventQueue {
     final void detachDispatchThread(EventDispatchThread edt) {
         /*
          * Minimize discard possibility for non-posted events
+         * <p>
+         *  最小化非投递事件的丢弃可能性
+         * 
          */
         SunToolkit.flushPendingEvents(appContext);
         /*
@@ -1098,6 +1263,10 @@ public class EventQueue {
          * that the event dispatch thread is busy after posting a new event
          * to its queue, so the EventQueue.dispatchThread reference must
          * be valid at that point.
+         * <p>
+         *  这个同步块是为了保证事件分派线程不会在将新事件发布到相关联的事件队列的中间死亡。
+         * 这很重要,因为我们通知事件分派线程在将新事件发布到其队列后处于繁忙状态,因此EventQueue.dispatchThread引用必须在此时有效。
+         * 
          */
         pushPopLock.lock();
         try {
@@ -1108,6 +1277,9 @@ public class EventQueue {
             /*
              * Event was posted after EDT events pumping had stopped, so start
              * another EDT to handle this event
+             * <p>
+             *  事件在EDT事件抽取停止后发布,因此启动另一个EDT来处理此事件
+             * 
              */
             if (peekEvent() != null) {
                 initDispatchThread();
@@ -1120,6 +1292,10 @@ public class EventQueue {
     /*
      * Gets the <code>EventDispatchThread</code> for this
      * <code>EventQueue</code>.
+     * <p>
+     *  获取此<code> EventQueue </code>的<code> EventDispatchThread </code>。
+     * 
+     * 
      * @return the event dispatch thread associated with this event queue
      *         or <code>null</code> if this event queue doesn't have a
      *         working thread associated with it
@@ -1146,6 +1322,15 @@ public class EventQueue {
      *
      * This method is normally called by the source's
      * <code>removeNotify</code> method.
+     * <p>
+     * 删除指定源对象的任何挂起事件。
+     * 如果removeAllEvents参数为<code> true </code>,则除去指定源对象的所有事件,如果<code> false </code>,则<code> SequencedEvent </code>
+     * ,<code> SentEvent <代码>,<code> FocusEvent </code>,<code> WindowEvent </code>,<code> KeyEvent </code>和<code>
+     *  InputMethodEvent </code>,但所有其他事件删除。
+     * 删除指定源对象的任何挂起事件。
+     * 
+     *  此方法通常由源的<code> removeNotify </code>方法调用。
+     * 
      */
     final void removeSourceEvents(Object source, boolean removeAllEvents) {
         SunToolkit.flushPendingEvents(appContext);
@@ -1250,6 +1435,12 @@ public class EventQueue {
      * {@link Toolkit#getSystemEventQueue the system EventQueue}.
      * This will happen after all pending events are processed.
      *
+     * <p>
+     *  导致<code> runnable </code>在{@link Toolkit#getSystemEventQueue系统EventQueue}的{@link #isDispatchThread dispatch线程}
+     * 中调用其<code>运行</code>方法。
+     * 这将在处理所有待处理事件后发生。
+     * 
+     * 
      * @param runnable  the <code>Runnable</code> whose <code>run</code>
      *                  method should be executed
      *                  asynchronously in the
@@ -1274,6 +1465,12 @@ public class EventQueue {
      * will throw an Error if called from the
      * {@link #isDispatchThread event dispatcher thread}.
      *
+     * <p>
+     *  导致<code> runnable </code>在{@link Toolkit#getSystemEventQueue系统EventQueue}的{@link #isDispatchThread dispatch线程}
+     * 中调用其<code>运行</code>方法。
+     * 这将在处理所有待处理事件后发生。呼叫阻塞,直到这发生。如果从{@link #isDispatchThread事件分派器线程}调用,此方法将抛出错误。
+     * 
+     * 
      * @param runnable  the <code>Runnable</code> whose <code>run</code>
      *                  method should be executed
      *                  synchronously in the
@@ -1325,6 +1522,9 @@ public class EventQueue {
      * appeared. First it proceeds to the EventQueue on the top of the
      * stack, then notifies the associated dispatch thread if it exists
      * or starts a new one otherwise.
+     * <p>
+     *  从PostEventQueue.postEvent调用以通知新事件出现。首先它进行到堆栈顶部的EventQueue,然后通知相关的分派线程如果它存在,否则启动一个新的。
+     * 
      */
     private void wakeup(boolean isShutdown) {
         pushPopLock.lock();
@@ -1357,6 +1557,8 @@ public class EventQueue {
  * queue. An EventQueue object is composed of multiple internal Queues, one
  * for each priority supported by the EventQueue. All Events on a particular
  * internal Queue have identical priority.
+ * <p>
+ * Queue对象保存指向一个内部队列的开始和结束的指针。 EventQueue对象由多个内部队列组成,一个用于EventQueue支持的每个优先级。特定内部队列上的所有事件具有相同的优先级。
  */
 class Queue {
     EventQueueItem head;

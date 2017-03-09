@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -15,6 +16,8 @@ package org.omg.PortableInterceptor;
    * within the scope of an IMR.  Note that adapter_id is similarly unique
    * within the same scope, but it is opaque, and less useful in many
    * cases.
+   * <p>
+   * 
    */
 abstract public class ObjectReferenceTemplateHelper
 {

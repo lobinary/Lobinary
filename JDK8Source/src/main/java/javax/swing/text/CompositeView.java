@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -71,6 +72,31 @@ import javax.swing.SwingConstants;
  *     <code>CompositeView</code>.
  * </ul>
  *
+ * <p>
+ *  <code> CompositeView </code>是一个抽象的<code> View </code>实现,它管理一个或多个子视图。
+ *  (注意<code> CompositeView </code>用于管理相对较小数量的子视图。
+ * )<code> CompositeView </code>旨在用作<code> View </code>实现的起点,例如<code> BoxView </code>,其将包含子<code> View </code>
+ * 。
+ *  (注意<code> CompositeView </code>用于管理相对较小数量的子视图。希望管理子<code> View </code>集合的子类应使用{@link #replace}方法。
+ * 由于<code> View </code>在<code> DocumentListener </code>通知期间调用<code>替换</code>,所以通常不需要直接调用<code> replace 
+ * </code>。
+ *  (注意<code> CompositeView </code>用于管理相对较小数量的子视图。希望管理子<code> View </code>集合的子类应使用{@link #replace}方法。
+ * 
+ *  <p>虽然<code> CompositeView </code>没有对其子<code> View </code>强加布局策略,但它允许插入子<code> View </code> 。
+ * 插入可以通过{@link #setInsets}或{@link #setParagraphInsets}设置。
+ * 
+ *  <p>除了{@link javax.swing.text.View}的抽象方法之外,<code> CompositeView </code>的子类还需要覆盖：
+ * <ul>
+ * <li> {@ link #isBefore}  - 用于测试给定的<code> View </code>位置是否在<code> CompositeView </code>的可视空间之前。
+ *  <li> {@ link #isAfter}  - 用于测试给定的<code> View </code>位置是否位于<code> CompositeView </code>的可视空间之后。
+ *  <li> {@ link #getViewAtPoint}  - 返回给定视觉位置的视图。
+ *  <li> {@ link #childAllocation}  - 传回特定子项的边界<code> View </code>。
+ *  <code> getChildAllocation </code>将在偏离<code> CompositeView </code>的<code> Inset </code>之后调用<code> chi
+ * ldAllocation </code>。
+ *  <li> {@ link #childAllocation}  - 传回特定子项的边界<code> View </code>。
+ * </ul>
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public abstract class CompositeView extends View {
@@ -78,6 +104,10 @@ public abstract class CompositeView extends View {
     /**
      * Constructs a <code>CompositeView</code> for the given element.
      *
+     * <p>
+     *  为给定元素构造一个<code> CompositeView </code>。
+     * 
+     * 
      * @param elem  the element this view is responsible for
      */
     public CompositeView(Element elem) {
@@ -95,6 +125,10 @@ public abstract class CompositeView extends View {
      * implementation creates a child view for each
      * child element.
      *
+     * <p>
+     *  加载所有子项以初始化视图。这由{@link #setParent}方法调用。子类可以重新实现这一点,以不同的方式初始化它们的子视图。默认实现为每个子元素创建一个子视图。
+     * 
+     * 
      * @param f the view factory
      * @see #setParent
      */
@@ -130,6 +164,12 @@ public abstract class CompositeView extends View {
      * from one place in the view hierarchy to another),
      * the <code>loadChildren</code> method will not be called.
      *
+     * <p>
+     *  设置视图的父级。这被重新实现以提供超类行为以及调用<code> loadChildren </code>方法(如果此视图尚未具有子代)。
+     * 不应该在构造函数中加载子代,因为设置父代的行为可能会导致他们尝试在层次结构中搜索(例如获取托管<code> Container </code>)。
+     * 如果此视图具有子代(视图正从视图层次结构中的一个位置移动到另一个位置),则不会调用<code> loadChildren </code>方法。
+     * 
+     * 
      * @param parent the parent of the view, <code>null</code> if none
      */
     public void setParent(View parent) {
@@ -143,6 +183,10 @@ public abstract class CompositeView extends View {
     /**
      * Returns the number of child views of this view.
      *
+     * <p>
+     * 返回此视图的子视图数。
+     * 
+     * 
      * @return the number of views &gt;= 0
      * @see #getView
      */
@@ -153,6 +197,10 @@ public abstract class CompositeView extends View {
     /**
      * Returns the n-th view in this container.
      *
+     * <p>
+     *  返回此容器中的第n个视图。
+     * 
+     * 
      * @param n the number of the desired view, &gt;= 0 &amp;&amp; &lt; getViewCount()
      * @return the view at index <code>n</code>
      */
@@ -168,6 +216,10 @@ public abstract class CompositeView extends View {
      * and the internal reference to them removed so that they
      * may be garbage collected.
      *
+     * <p>
+     *  替换子视图。如果没有视图要删除,则作为插入。如果没有视图添加这个行为作为删除。正在删除的视图将父设置为<code> null </code>,并且删除它们的内部引用,以便它们可以被垃圾回收。
+     * 
+     * 
      * @param offset the starting index into the child views to insert
      *   the new views; &gt;= 0 and &lt;= getViewCount
      * @param length the number of existing child views to remove;
@@ -223,6 +275,10 @@ public abstract class CompositeView extends View {
      * render into. This enables finding out where various views
      * are located.
      *
+     * <p>
+     *  获取要呈现的给定子视图的分配。这使得能够找到各种视图位于何处。
+     * 
+     * 
      * @param index the index of the child, &gt;= 0 &amp;&amp; &lt; getViewCount()
      * @param a  the allocation to this view
      * @return the allocation to the child
@@ -237,6 +293,10 @@ public abstract class CompositeView extends View {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param a the allocated region to render into
      * @param b a bias value of either <code>Position.Bias.Forward</code>
@@ -280,6 +340,10 @@ public abstract class CompositeView extends View {
      * Provides a mapping from the document model coordinate space
      * to the coordinate space of the view mapped to it.
      *
+     * <p>
+     *  提供从文档模型坐标空间到映射到其的视图的坐标空间的映射。
+     * 
+     * 
      * @param p0 the position to convert &gt;= 0
      * @param b0 the bias toward the previous character or the
      *  next character represented by p0, in case the
@@ -378,6 +442,10 @@ public abstract class CompositeView extends View {
      * Provides a mapping from the view coordinate space to the logical
      * coordinate space of the model.
      *
+     * <p>
+     *  提供从视图坐标空间到模型的逻辑坐标空间的映射。
+     * 
+     * 
      * @param x   x coordinate of the view location to convert &gt;= 0
      * @param y   y coordinate of the view location to convert &gt;= 0
      * @param a the allocated region to render into
@@ -440,6 +508,12 @@ public abstract class CompositeView extends View {
      * will be calculated automatically.  If the value &lt; -1,
      * the {@code BadLocationException} will be thrown.
      *
+     * <p>
+     *  提供一种方法来确定下一个可视地表示的模型位置,人们可以放置插入符号。某些视图可能不可见,它们可能不是在模型中找到的相同顺序,或者它们可能不允许访问模型中的一些位置。
+     * 这是{@link #getNextNorthSouthVisualPositionFrom}和{@link #getNextEastWestVisualPositionFrom}的方便方法。
+     * 该方法使得能够指定在> = 0的范围内转换的位置。如果值为-1,将自动计算位置。如果值&lt; -1,将抛出{@code BadLocationException}。
+     * 
+     * 
      * @param pos the position to convert
      * @param b a bias value of either <code>Position.Bias.Forward</code>
      *  or <code>Position.Bias.Backward</code>
@@ -492,6 +566,10 @@ public abstract class CompositeView extends View {
      * <code>getViewIndexByPosition</code>
      * method for backward compatibility.
      *
+     * <p>
+     * 返回表示模型中给定位置的子视图索引。这被实现为调用<code> getViewIndexByPosition </code>方法向后兼容。
+     * 
+     * 
      * @param pos the position &gt;= 0
      * @return  index of the view representing the given position, or
      *   -1 if no view represents that position
@@ -513,6 +591,10 @@ public abstract class CompositeView extends View {
     /**
      * Tests whether a point lies before the rectangle range.
      *
+     * <p>
+     *  测试点是否位于矩形范围之前。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param alloc the rectangle
@@ -523,6 +605,10 @@ public abstract class CompositeView extends View {
     /**
      * Tests whether a point lies after the rectangle range.
      *
+     * <p>
+     *  测试点是否位于矩形范围之后。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param alloc the rectangle
@@ -533,6 +619,10 @@ public abstract class CompositeView extends View {
     /**
      * Fetches the child view at the given coordinates.
      *
+     * <p>
+     *  在给定的坐标处获取子视图。
+     * 
+     * 
      * @param x the X coordinate &gt;= 0
      * @param y the Y coordinate &gt;= 0
      * @param alloc the parent's allocation on entry, which should
@@ -544,6 +634,10 @@ public abstract class CompositeView extends View {
     /**
      * Returns the allocation for a given child.
      *
+     * <p>
+     *  返回给定子项的分配。
+     * 
+     * 
      * @param index the index of the child, &gt;= 0 &amp;&amp; &lt; getViewCount()
      * @param a  the allocation to the interior of the box on entry,
      *   and the allocation of the child view at the index on exit.
@@ -555,6 +649,10 @@ public abstract class CompositeView extends View {
      * the model.  This is implemented to fetch the view in the case
      * where there is a child view for each child element.
      *
+     * <p>
+     *  获取表示模型中给定位置的子视图。这被实现为在每个子元素存在子视图的情况下获取视图。
+     * 
+     * 
      * @param pos the position &gt;= 0
      * @param a  the allocation to the interior of the box on entry,
      *   and the allocation of the view containing the position on exit
@@ -578,6 +676,10 @@ public abstract class CompositeView extends View {
      * the model.  This is implemented to fetch the view in the case
      * where there is a child view for each child element.
      *
+     * <p>
+     *  获取表示模型中给定位置的子视图索引。这被实现为在每个子元素存在子视图的情况下获取视图。
+     * 
+     * 
      * @param pos the position &gt;= 0
      * @return  index of the view representing the given position, or
      *   -1 if no view represents that position
@@ -599,6 +701,12 @@ public abstract class CompositeView extends View {
      * the result of calling this method would be fed to
      * the <code>childAllocation</code> method.
      *
+     * <p>
+     *  将给予视图的不可变分配转换为表示内部分配的可变分配(即,删除了顶部,左侧,底部和右侧插入的给定分配的边界),期望返回的值将被进一步突变为表示对子视图的分配,这是为了重用一个实例变量,所以它避免创建过多
+     * 的Rectangles。
+     * 通常调用这个方法的结果将被送到<code> childAllocation </code>方法。
+     * 
+     * 
      * @param a the allocation given to the view
      * @return the allocation that represents the inside of the
      *   view after the margins have all been removed; if the
@@ -632,6 +740,10 @@ public abstract class CompositeView extends View {
      * Sets the insets from the paragraph attributes specified in
      * the given attributes.
      *
+     * <p>
+     *  根据给定属性中指定的段属性设置插入。
+     * 
+     * 
      * @param attr the attributes
      */
     protected void setParagraphInsets(AttributeSet attr) {
@@ -647,6 +759,10 @@ public abstract class CompositeView extends View {
     /**
      * Sets the insets for the view.
      *
+     * <p>
+     *  设置视图的插入。
+     * 
+     * 
      * @param top the top inset &gt;= 0
      * @param left the left inset &gt;= 0
      * @param bottom the bottom inset &gt;= 0
@@ -662,6 +778,10 @@ public abstract class CompositeView extends View {
     /**
      * Gets the left inset.
      *
+     * <p>
+     *  获取左插图。
+     * 
+     * 
      * @return the inset &gt;= 0
      */
     protected short getLeftInset() {
@@ -671,6 +791,10 @@ public abstract class CompositeView extends View {
     /**
      * Gets the right inset.
      *
+     * <p>
+     *  获取正确的插图。
+     * 
+     * 
      * @return the inset &gt;= 0
      */
     protected short getRightInset() {
@@ -680,6 +804,10 @@ public abstract class CompositeView extends View {
     /**
      * Gets the top inset.
      *
+     * <p>
+     *  获取顶部插入。
+     * 
+     * 
      * @return the inset &gt;= 0
      */
     protected short getTopInset() {
@@ -689,6 +817,10 @@ public abstract class CompositeView extends View {
     /**
      * Gets the bottom inset.
      *
+     * <p>
+     *  获取底部插图。
+     * 
+     * 
      * @return the inset &gt;= 0
      */
     protected short getBottomInset() {
@@ -699,6 +831,10 @@ public abstract class CompositeView extends View {
      * Returns the next visual position for the cursor, in either the
      * north or south direction.
      *
+     * <p>
+     * 返回光标在北或南方向的下一个视觉位置。
+     * 
+     * 
      * @param pos the position to convert &gt;= 0
      * @param b a bias value of either <code>Position.Bias.Forward</code>
      *  or <code>Position.Bias.Backward</code>
@@ -731,6 +867,10 @@ public abstract class CompositeView extends View {
      * Returns the next visual position for the cursor, in either the
      * east or west direction.
      *
+     * <p>
+     *  返回光标在东或西方向的下一个视觉位置。
+     * 
+     * 
     * @param pos the position to convert &gt;= 0
      * @param b a bias value of either <code>Position.Bias.Forward</code>
      *  or <code>Position.Bias.Backward</code>
@@ -776,6 +916,13 @@ public abstract class CompositeView extends View {
      * method if there is the possibility for laying <code>View</code>s in
      * descending order.
      *
+     * <p>
+     *  确定下一个视图的放置方向。考虑索引n处的<code> View </code>。
+     * 通常,从左到右布置<code> View </code>,以便到EAST的<code> View </code>将位于索引n + 1处,而<code> View </code >到WEST将在索引n-1
+     * 处。
+     *  确定下一个视图的放置方向。考虑索引n处的<code> View </code>。
+     * 在某些情况下,例如具有双向文本,可能的是,到EAST的<code> View </code>不在索引n + 1,而是在索引n -  1,或者指向WEST的<code> View </code>不在索引n
+     * 
      * @param position position into the model
      * @param bias either <code>Position.Bias.Forward</code> or
      *          <code>Position.Bias.Backward</code>

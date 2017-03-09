@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ package org.omg.CORBA;
  *  The <tt>DynAny</tt> APIs enable traversal of the data value associated with an
  *  Any at runtime and extraction of the primitive constituents of the
  *  data value.
+ * <p>
+ *  解释(遍历)和构造。 <tt> DynAny </tt>对象与可能对应于插入到<tt>任何</tt>中的值的副本的数据值相关联。
+ *  <tt> DynAny </tt> API允许在运行时遍历与Any相关联的数据值,并提取数据值的基本组成部分。
+ * 
+ * 
  * @deprecated Use the new <a href="../DynamicAny/DynAny.html">DynAny</a> instead
  */
 @Deprecated
@@ -43,6 +49,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Returns the <code>TypeCode</code> of the object inserted into
      * this <code>DynAny</code>.
      *
+     * <p>
+     *  返回插入到此<code> DynAny </code>中的对象的<code> TypeCode </code>。
+     * 
+     * 
      * @return the <code>TypeCode</code> object.
      */
     public org.omg.CORBA.TypeCode type() ;
@@ -50,6 +60,10 @@ public interface DynAny extends org.omg.CORBA.Object
     /**
      * Copy the contents from one Dynamic Any into another.
      *
+     * <p>
+     *  将内容从一个动态任何复制到另一个。
+     * 
+     * 
      * @param dyn_any the <code>DynAny</code> object whose contents
      *                are assigned to this <code>DynAny</code>.
      * @throws Invalid if the source <code>DynAny</code> is
@@ -62,6 +76,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Make a <code>DynAny</code> object from an <code>Any</code>
      * object.
      *
+     * <p>
+     *  从<code> Any </code>对象中创建<code> DynAny </code>对象。
+     * 
+     * 
      * @param value the <code>Any</code> object.
      * @throws Invalid if the source <code>Any</code> object is
      *                    empty or bad
@@ -73,6 +91,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Convert a <code>DynAny</code> object to an <code>Any</code>
      * object.
      *
+     * <p>
+     *  将<code> DynAny </code>对象转换为<code> Any </code>对象。
+     * 
+     * 
      * @return the <code>Any</code> object.
      * @throws Invalid if this <code>DynAny</code> is empty or
      *                    bad.
@@ -93,12 +115,24 @@ public interface DynAny extends org.omg.CORBA.Object
      * to manipulate some component of the data value associated with it,
      * should first create a <code>DynAny</code> object for the component
      * and then make a copy of the created <code>DynAny</code> object.
+     * <p>
+     *  销毁此<code> DynAny </code>对象并释放用于表示与其相关联的数据值的任何资源。这种方法还会破坏从它获得的所有<code> DynAny </code>对象。
+     * <p>
+     *  考虑到与处理与<code> DynAny </code>对象相关联的数据值的表示的问题,应谨慎处理<code> DynAny </code>对象的销毁。
+     * 一个想要销毁一个<code> DynAny </code>对象但仍然能够处理与其相关联的数据值的某个组件的程序员应该首先为该组件创建一个<code> DynAny </code>对象,然后创建所创建的<code>
+     *  DynAny </code>对象的副本。
+     *  考虑到与处理与<code> DynAny </code>对象相关联的数据值的表示的问题,应谨慎处理<code> DynAny </code>对象的销毁。
+     * 
      */
     public void destroy() ;
 
     /**
      * Clones this <code>DynAny</code> object.
      *
+     * <p>
+     *  克隆此<code> DynAny </code>对象。
+     * 
+     * 
      * @return a copy of this <code>DynAny</code> object
      */
     public org.omg.CORBA.DynAny copy() ;
@@ -111,6 +145,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     * 插入给定的<code> boolean </code>作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>boolean</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -128,6 +168,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code>字节</code>作为<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>byte</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -145,6 +191,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> char </code>作为<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>char</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -162,6 +214,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> short </code>作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>short</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -179,6 +237,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> short </code>作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>short</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -196,6 +260,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> int </code>作为<code> DynAny </code>对象的值。
+     * 
+     * <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>int</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -213,6 +283,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> int </code>作为<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>int</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -230,6 +306,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> float </code>作为<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>float</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -247,6 +329,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> double </code>作为<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>double</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -264,6 +352,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> String </code>对象作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>String</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -281,6 +375,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> org.omg.CORBA.Object </code>作为此<code> DynAny </code>对象的值。
+     * 
+     * <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>org.omg.CORBA.Object</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -298,6 +398,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> org.omg.CORBA.TypeCode </code>作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>org.omg.CORBA.TypeCode</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -315,6 +421,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> long </code>作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>long</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -332,6 +444,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> long </code>作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>long</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -349,6 +467,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> char </code>作为<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>char</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -366,6 +490,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> String </code>作为此<code> DynAny </code>对象的值。
+     * 
+     * <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>String</code> to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -383,6 +513,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> org.omg.CORBA.Any </code>对象作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>org.omg.CORBA.Any</code> object to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -402,6 +538,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * object, it initializes the next component of the constructed data
      * value associated with this <code>DynAny</code> object.
      *
+     * <p>
+     *  插入给定的<code> java.io.Serializable </code>对象作为此<code> DynAny </code>对象的值。
+     * 
+     *  <p>如果在构造的<code> DynAny </code>对象上调用此方法,它将初始化与此<code> DynAny </code>对象关联的构造数据值的下一个组件。
+     * 
+     * 
      * @param value the <code>java.io.Serializable</code> object to insert into this
      *              <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.InvalidValue
@@ -415,6 +557,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>java.io.Serializable</code> object contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> java.io.Serializable </code>对象。
+     * 
+     * 
      * @return the <code>java.io.Serializable</code> object that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -431,6 +577,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>boolean</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> boolean </code>。
+     * 
+     * 
      * @return the <code>boolean</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -446,6 +596,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>byte</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code>字节</code>。
+     * 
+     * 
      * @return the <code>byte</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -460,6 +614,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>char</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> char </code>。
+     * 
+     * 
      * @return the <code>char</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -475,6 +633,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>short</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> short </code>。
+     * 
+     * 
      * @return the <code>short</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -490,6 +652,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>short</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> short </code>。
+     * 
+     * 
      * @return the <code>short</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -505,6 +671,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>int</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> int </code>。
+     * 
+     * 
      * @return the <code>int</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -520,6 +690,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>int</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> int </code>。
+     * 
+     * 
      * @return the <code>int</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -535,6 +709,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>float</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     * 检索此<code> DynAny </code>对象中包含的<code> float </code>。
+     * 
+     * 
      * @return the <code>float</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -550,6 +728,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>double</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> double </code>。
+     * 
+     * 
      * @return the <code>double</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -565,6 +747,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>String</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> String </code>。
+     * 
+     * 
      * @return the <code>String</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -580,6 +766,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>org.omg.CORBA.Other</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> org.omg.CORBA.Other </code>。
+     * 
+     * 
      * @return the <code>org.omg.CORBA.Other</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -595,6 +785,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>org.omg.CORBA.TypeCode</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> org.omg.CORBA.TypeCode </code>。
+     * 
+     * 
      * @return the <code>org.omg.CORBA.TypeCode</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -610,6 +804,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>long</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> long </code>。
+     * 
+     * 
      * @return the <code>long</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -625,6 +823,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>long</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> long </code>。
+     * 
+     * 
      * @return the <code>long</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -640,6 +842,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>char</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> char </code>。
+     * 
+     * 
      * @return the <code>char</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -655,6 +861,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>String</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> String </code>。
+     * 
+     * 
      * @return the <code>String</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -670,6 +880,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Retrieves the <code>org.omg.CORBA.Any</code> contained
      * in this <code>DynAny</code> object.
      *
+     * <p>
+     *  检索此<code> DynAny </code>对象中包含的<code> org.omg.CORBA.Any </code>。
+     * 
+     * 
      * @return the <code>org.omg.CORBA.Any</code> that is the
      *         value for this <code>DynAny</code> object
      * @throws org.omg.CORBA.DynAnyPackage.TypeMismatch
@@ -690,6 +904,12 @@ public interface DynAny extends org.omg.CORBA.Object
      * can be called on the resulting <code>DynAny</code> object
      * to extract the value of the component.
          *
+         * <p>
+         *  返回一个<code> DynAny </code>对象引用,可用于获取/设置当前访问的组件的值。
+         * 可以在生成的<code> DynAny </code>对象上调用适当的<code> insert </code>方法来初始化组件。
+         * 可以在生成的<code> DynAny </code>对象上调用适当的<code> get </code>方法来提取组件的值。
+         * 
+         * 
          * @return a <code>DynAny</code> object reference that can be
          *         used to retrieve or set the value of the component currently
          *         accessed
@@ -703,6 +923,11 @@ public interface DynAny extends org.omg.CORBA.Object
      * component to the next.  The pointer starts out on the first
      * component when a <code>DynAny</code> object is created.
      *
+     * <p>
+     * 移动到此<code> DynAny </code>对象的下一个组件。此方法用于遍历构造类型的组件,有效地将指针从一个组件移动到下一个组件。
+     * 当创建一个<code> DynAny </code>对象时,指针从第一个组件开始。
+     * 
+     * 
      * @return <code>true</code> if the pointer points to a component;
      * <code>false</code> if there are no more components or this
      * <code>DynAny</code> is associated with a basic type rather than
@@ -714,6 +939,10 @@ public interface DynAny extends org.omg.CORBA.Object
      * Moves the internal pointer to the given index. Logically, this method
      * sets a new offset for this pointer.
      *
+     * <p>
+     *  将内部指针移动到给定的索引。逻辑上,此方法为此指针设置新的偏移量。
+     * 
+     * 
      * @param index an <code>int</code> indicating the position to which
      *              the pointer should move.  The first position is 0.
      * @return <code>true</code> if the pointer points to a component;
@@ -726,6 +955,8 @@ public interface DynAny extends org.omg.CORBA.Object
 
     /**
      * Moves the internal pointer to the first component.
+     * <p>
+     *  将内部指针移动到第一个组件。
      */
     public void rewind() ;
 }

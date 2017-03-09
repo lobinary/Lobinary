@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -103,6 +104,42 @@ import java.lang.reflect.Proxy;
    equals}: if two objects are equal according to {@code equals}, then
    they will have the same {@code hashCode}.</p>
 
+/* <p>
+/*  <p> {@link InvocationHandler}将getter方法转发到{@link CompositeData}。
+/* 如果你有一个只包含getter方法的接口(例如{@code String getName()}或{@code boolean isActive()}),那么你可以使用这个类和{@link Proxy}类
+/* 来产生一个实现接口,其中每个getter返回{@code CompositeData}中相应项的值。
+/*  <p> {@link InvocationHandler}将getter方法转发到{@link CompositeData}。</p>。
+/* 
+/*  <p>例如,假设您有这样的界面：
+/* 
+/* <blockquote>
+/* <pre>
+/*  public interface NamedNumber {public int getNumber(); public String getName(); }}
+/* </pre>
+/* </blockquote>
+/* 
+/*  和一个像这样构造的{@code CompositeData}：
+/* 
+/* <blockquote>
+/* <pre>
+/*  CompositeData cd = new {@link CompositeDataSupport}(someCompositeType,new String [] {"number","name"}
+/* ,new Object [] {<b> 5 </b>,"five"});。
+/* </pre>
+/* </blockquote>
+/* 
+/*  那么你可以构造一个实现{@code NamedNumber}并由对象{@code cd}支持的对象,如下所示：
+/* 
+/* <blockquote>
+/* <pre>
+/*  InvocationHandler handler = new CompositeDataInvocationHandler(cd); NamedNumber nn =(NamedNumber)Pro
+/* xy.newProxyInstance(NamedNumber.class.getClassLoader(),new Class [] {NamedNumber.class},handler);。
+/* </pre>
+/* </blockquote>
+/* 
+/*  然后调用{@code nn.getNumber()}将返回<b> 5 </b>。
+/* 
+/* <p>如果由getter定义的属性的第一个字母是大写,则此处理程序将首先查找{@code CompositeData}中以大写开头的项目,然后,如果找不到,则查找项目以相应的小写字母或代码点开头。
+/* 
    @since 1.6
 */
 public class CompositeDataInvocationHandler implements InvocationHandler {
@@ -110,6 +147,18 @@ public class CompositeDataInvocationHandler implements InvocationHandler {
        <p>Construct a handler backed by the given {@code
        CompositeData}.</p>
 
+    /* <p>
+    /* 对于一个名为{@code getNumber()}的getter,处理程序将首先查找一个名为{@code Number}的项,然后查找{@code number}。
+    /* 如果getter被调用{@code getnumber()},那么该项必须被调用{@code number}。</p>。
+    /* 
+    /*  <p>如果{@link #invoke invoke}的方法是{@code boolean equals(Object)}继承自{@code Object}的方法,那么当且仅当参数是{@代码Proxy}
+    /* ,其{@code InvocationHandler}也是一个{@code CompositeDataInvocationHandler},它的后台{@code CompositeData}与这个对象是
+    /* 相等的(不一定相同)。
+    /* 如果给予{@code invoke}的方法是从{@code Object}继承的方法{@code int hashCode()},那么它将返回一个与{@code equals}的定义一致的值：if tw
+    /* o对象根据{@code equals}是相等的,那么它们将具有相同的{@code hashCode}。
+    /* </p>。
+    /* 
+    /* 
        @param compositeData the {@code CompositeData} that will supply
        information to getters.
 
@@ -124,6 +173,10 @@ public class CompositeDataInvocationHandler implements InvocationHandler {
        <p>Construct a handler backed by the given {@code
        CompositeData}.</p>
 
+    /* <p>
+    /*  <p>构造由给定{@code CompositeData}。支持的处理程序。</p>
+    /* 
+    /* 
        @param compositeData the {@code CompositeData} that will supply
        information to getters.
 
@@ -141,6 +194,10 @@ public class CompositeDataInvocationHandler implements InvocationHandler {
     /**
        Return the {@code CompositeData} that was supplied to the
        constructor.
+    /* <p>
+    /*  <p>构造由给定{@code CompositeData}。支持的处理程序。</p>
+    /* 
+    /* 
        @return the {@code CompositeData} that this handler is backed
        by.  This is never null.
     */
@@ -168,6 +225,10 @@ public class CompositeDataInvocationHandler implements InvocationHandler {
                    by the generated Proxy.  At the time of writing,
                    the only non-final methods in Object that are not
                    handled above are finalize and clone, and these
+                /* <p>
+                /*  返回提供给构造函数的{@code CompositeData}。
+                /* 
+                /* 
                    are not overridden in generated proxies.  */
                 // this plain Method.invoke is called only if the declaring class
                 // is Object and so it's safe.
@@ -223,6 +284,9 @@ public class CompositeDataInvocationHandler implements InvocationHandler {
      * would be equal to otherObject.hashCode() when
      * this.equals(otherObject), because we don't know how
      * otherObject.hashCode() is computed.
+     * <p>
+     * 它是来自被生成的代理覆盖的对象的非最终方法。在写作的时候,Object中唯一没有处理的非最终方法是finalize和clone,而这些
+     * 
      */
     private boolean equals(Object proxy, Object other) {
         if (other == null)

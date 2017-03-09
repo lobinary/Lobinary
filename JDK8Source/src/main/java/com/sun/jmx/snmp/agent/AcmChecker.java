@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,8 @@ import com.sun.jmx.snmp.internal.SnmpEngineImpl;
 
 /**
  * Oid Checker makes use of ACM to check each OID during the getnext process.
+ * <p>
+ *  Oid Checker利用ACM在getnext过程中检查每个OID。
  */
 class AcmChecker {
 

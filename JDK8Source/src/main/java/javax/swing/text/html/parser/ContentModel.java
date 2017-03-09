@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,22 +38,35 @@ import java.io.*;
  * don't have to represent it as a finite state automaton.<p>
  * See Annex H on page 556 of the SGML handbook for more information.
  *
+ * <p>
+ *  内容模型的表示。内容模型基本上是受限制的BNF表达式。它被限制在它必须是确定性的意义上。这意味着您不必将其表示为有限状态自动机。<p>有关更多信息,请参见SGML手册第556页附件H。
+ * 
+ * 
  * @author   Arthur van Hoff
  *
  */
 public final class ContentModel implements Serializable {
     /**
      * Type. Either '*', '?', '+', ',', '|', '&amp;'.
+     * <p>
+     *  类型。 '*','?','+',',','|','&amp;'。
+     * 
      */
     public int type;
 
     /**
      * The content. Either an Element or a ContentModel.
+     * <p>
+     *  内容。元素或ContentModel。
+     * 
      */
     public Object content;
 
     /**
      * The next content model (in a ',', '|' or '&amp;' expression).
+     * <p>
+     *  下一个内容模型(在',','|'或'&amp;'表达式中)。
+     * 
      */
     public ContentModel next;
 
@@ -61,6 +75,9 @@ public final class ContentModel implements Serializable {
 
     /**
      * Create a content model for an element.
+     * <p>
+     *  为元素创建内容模型。
+     * 
      */
     public ContentModel(Element content) {
         this(0, content, null);
@@ -68,6 +85,9 @@ public final class ContentModel implements Serializable {
 
     /**
      * Create a content model of a particular type.
+     * <p>
+     *  创建特定类型的内容模型。
+     * 
      */
     public ContentModel(int type, ContentModel content) {
         this(type, content, null);
@@ -75,6 +95,9 @@ public final class ContentModel implements Serializable {
 
     /**
      * Create a content model of a particular type.
+     * <p>
+     *  创建特定类型的内容模型。
+     * 
      */
     public ContentModel(int type, Object content, ContentModel next) {
         this.type = type;
@@ -85,6 +108,9 @@ public final class ContentModel implements Serializable {
     /**
      * Return true if the content model could
      * match an empty input stream.
+     * <p>
+     *  如果内容模型可以匹配空输入流,则返回true。
+     * 
      */
     public boolean empty() {
         switch (type) {
@@ -118,6 +144,9 @@ public final class ContentModel implements Serializable {
     /**
      * Update elemVec with the list of elements that are
      * part of the this contentModel.
+     * <p>
+     *  使用作为此contentModel的一部分的元素列表更新elemVec。
+     * 
      */
      public void getElements(Vector<Element> elemVec) {
          switch (type) {
@@ -147,6 +176,9 @@ public final class ContentModel implements Serializable {
     /**
      * Return true if the token could potentially be the
      * first token in the input stream.
+     * <p>
+     *  如果令牌可能是输入流中的第一个令牌,则返回true。
+     * 
      */
     public boolean first(Object token) {
         switch (type) {
@@ -199,12 +231,19 @@ public final class ContentModel implements Serializable {
                   return e.content.first(token);
               }
               return false;
+/* <p>
+/*  if(content == token){return true; } Element e =(Element)content; if(e.omitStart()&& e.content！= null
+/* ){return e.content.first(token); } return false;。
+/* 
 */
         }
     }
 
     /**
      * Return the element that must be next.
+     * <p>
+     *  返回必须是下一个的元素。
+     * 
      */
     public Element first() {
         switch (type) {
@@ -225,6 +264,8 @@ public final class ContentModel implements Serializable {
 
     /**
      * Convert to a string.
+     * <p>
+     *  转换为字符串。
      */
     public String toString() {
         switch (type) {

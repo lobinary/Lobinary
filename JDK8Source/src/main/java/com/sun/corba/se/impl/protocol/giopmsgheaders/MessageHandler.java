@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ import java.io.IOException;
  * Interface which allows an implementation to use
  * double dispatch when processing the various
  * concrete message types found in this package.
+ * <p>
+ *  允许实现在处理此包中发现的各种具体消息类型时使用双调度的接口。
+ * 
  */
 public interface MessageHandler
 {
@@ -40,6 +44,8 @@ public interface MessageHandler
     /**
      * Used for message types for which we don't have concrete classes, yet,
      * such as CloseConnection and MessageError, as well as unknown types.
+     * <p>
+     *  用于我们没有具体类的消息类型,例如CloseConnection和MessageError,以及未知类型。
      */
     void handleInput(Message header) throws IOException;
 

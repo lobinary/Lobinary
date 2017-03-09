@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import javax.swing.text.StyleContext;
  * Constants used in the <code>HTMLDocument</code>.  These
  * are basically tag and attribute definitions.
  *
+ * <p>
+ *  在<code> HTMLDocument </code>中使用的常量。这些基本上是标签和属性定义。
+ * 
+ * 
  * @author  Timothy Prinzing
  * @author  Sunita Mani
  *
@@ -46,6 +51,9 @@ public class HTML {
      * set open so that people can add their own tag types
      * to their custom parser and still communicate to the
      * reader.
+     * <p>
+     *  HTML标记的Typesafe枚举。虽然HTML标签集是封闭集合,我们已将该集合保持打开,以便人们可以将自己的标签类型添加到其自定义解析器,并仍然与读者通信。
+     * 
      */
     public static class Tag {
 
@@ -57,6 +65,11 @@ public class HTML {
          * and with <code>causesBreak</code> and <code>isBlock</code>
          * set to <code>false</code>.
          *
+         * <p>
+         *  使用指定的<code> id </code>创建新的<code> Tag </code>,并使用<code> causeBreak </code>和<code> isBlock </code>设置为<code>
+         *  false <代码>。
+         * 
+         * 
          * @param id  the id of the new tag
          */
         protected Tag(String id) {
@@ -68,6 +81,10 @@ public class HTML {
          * <code>causesBreak</code> and <code>isBlock</code> are defined
          * by the user.
          *
+         * <p>
+         *  使用指定的<code> id </code>创建新的<code>标记</code>; <code> causeBreak </code>和<code> isBlock </code>由用户定义。
+         * 
+         * 
          * @param id the id of the new tag
          * @param causesBreak  <code>true</code> if this tag
          *    causes a break to the flow of data
@@ -85,6 +102,10 @@ public class HTML {
          * tag, which is a tag used to add structure to a
          * document.
          *
+         * <p>
+         *  如果此标记是块标记,则返回<code> true </code>,该标记是用于向文档添加结构的标记。
+         * 
+         * 
          * @return <code>true</code> if this tag is a block
          *   tag, otherwise returns <code>false</code>
          */
@@ -97,6 +118,10 @@ public class HTML {
          * line break to the flow of data, otherwise returns
          * <code>false</code>.
          *
+         * <p>
+         *  如果此标记对数据流产生换行符,则返回<code> true </code>,否则返回<code> false </code>。
+         * 
+         * 
          * @return <code>true</code> if this tag causes a
          *   line break to the flow of data, otherwise returns
          *   <code>false</code>
@@ -110,6 +135,10 @@ public class HTML {
          * which is true if the tag is either <code>PRE</code> or
          * <code>TEXTAREA</code>.
          *
+         * <p>
+         *  如果此标记已预先格式化,则返回<code> true </code>,如果标记是<code> PRE </code>或<code> TEXTAREA </code>,则返回true。
+         * 
+         * 
          * @return <code>true</code> if this tag is pre-formatted,
          *   otherwise returns <code>false</code>
          */
@@ -121,6 +150,10 @@ public class HTML {
          * Returns the string representation of the
          * tag.
          *
+         * <p>
+         *  返回标记的字符串表示形式。
+         * 
+         * 
          * @return the <code>String</code> representation of the tag
          */
         public String toString() {
@@ -131,6 +164,10 @@ public class HTML {
          * Returns <code>true</code> if this tag is considered to be a paragraph
          * in the internal HTML model. <code>false</code> - otherwise.
          *
+         * <p>
+         *  如果此标记被视为内部HTML模型中的段落,则返回<code> true </code>。 <code> false </code>  - 否则。
+         * 
+         * 
          * @return <code>true</code> if this tag is considered to be a paragraph
          *         in the internal HTML model. <code>false</code> - otherwise.
          * @see HTMLDocument.HTMLReader.ParagraphAction
@@ -240,6 +277,27 @@ public class HTML {
          * Since elements are identified by their tag type,
          * we create a some fake tag types to mark the elements
          * that were manufactured.
+         * <p>
+         * public static final Tag NOFRAMES = new Tag("noframes",true,true); public static final Tag OBJECT = ne
+         * w Tag("object"); public static final Tag OL = new Tag("ol",true,true); public static final Tag OPTION
+         *  = new Tag("option"); public static final Tag P = new Tag("p",true,true); public static final Tag PAR
+         * AM = new Tag("param"); public static final Tag PRE = new Tag("pre",true,true); public static final Ta
+         * g SAMP = new Tag("samp"); public static final Tag SCRIPT = new Tag("script"); public static final Tag
+         *  SELECT = new Tag("select"); public static final Tag SMALL = new Tag("small"); public static final Ta
+         * g SPAN = new Tag("span"); public static final Tag STRIKE = new Tag("strike"); public static final Tag
+         *  S = new Tag("s"); public static final Tag STRONG = new Tag("strong"); public static final Tag STYLE 
+         * = new Tag("style"); public static final Tag SUB = new Tag("sub"); public static final Tag SUP = new T
+         * ag("sup"); public static final Tag TABLE = new Tag("table",false,true); public static final Tag TD = 
+         * new Tag("td",true,true); public static final Tag TEXTAREA = new Tag("textarea"); public static final 
+         * Tag TH = new Tag("th",true,true); public static final Tag TITLE = new Tag("title",true,true); public 
+         * static final Tag TR = new Tag("tr",false,true); public static final Tag TT = new Tag("tt"); public st
+         * atic final Tag U = new Tag("u"); public static final Tag UL = new Tag("ul",true,true); public static 
+         * final Tag VAR = new Tag("var");。
+         * 
+         * / **所有文本内容必须在段落元素中。如果在遇到内容时段落不存在,则制造段落。
+         * <p>
+         *  这是由HTML阅读器合成的标签。由于元素是通过其标记类型来标识的,因此我们创建一些假标记类型来标记制造的元素。
+         * 
          */
         public static final Tag IMPLIED = new Tag("p-implied");
 
@@ -250,6 +308,11 @@ public class HTML {
          * Since elements are identified by their tag type,
          * we create a some fake tag types to mark the elements
          * that were manufactured.
+         * <p>
+         *  所有文字内容都标有此标签。
+         * <p>
+         *  这是由HTML阅读器合成的标签。由于元素是通过其标记类型来标识的,因此我们创建一些假标记类型来标记制造的元素。
+         * 
          */
         public static final Tag CONTENT = new Tag("content");
 
@@ -260,6 +323,11 @@ public class HTML {
          * Since elements are identified by their tag type,
          * we create a some fake tag types to mark the elements
          * that were manufactured.
+         * <p>
+         *  所有评论都标有此标签。
+         * <p>
+         *  这是由HTML阅读器合成的标签。由于元素是通过其标记类型来标识的,因此我们创建一些假标记类型来标记制造的元素。
+         * 
          */
         public static final Tag COMMENT = new Tag("comment");
 
@@ -288,6 +356,10 @@ public class HTML {
         /**
          * Creates a new <code>UnknownTag</code> with the specified
          * <code>id</code>.
+         * <p>
+         *  使用指定的<code> id </code>创建新的<code> UnknownTag </code>。
+         * 
+         * 
          * @param id the id of the new tag
          */
         public UnknownTag(String id) {
@@ -297,6 +369,9 @@ public class HTML {
         /**
          * Returns the hash code which corresponds to the string
          * for this tag.
+         * <p>
+         *  返回与此标记的字符串对应的哈希代码。
+         * 
          */
         public int hashCode() {
             return toString().hashCode();
@@ -308,6 +383,11 @@ public class HTML {
          * <code>null</code> and is an <code>UnknownTag</code> object
          * with the same name.
          *
+         * <p>
+         *  将此对象与指定的对象进行比较。
+         * 如果且仅当参数不是<code> null </code>且是具有相同名称的<code> UnknownTag </code>对象时,结果是<code> true </code>。
+         * 
+         * 
          * @param     obj   the object to compare this tag with
          * @return    <code>true</code> if the objects are equal;
          *            <code>false</code> otherwise
@@ -341,6 +421,9 @@ public class HTML {
     /**
      * Typesafe enumeration representing an HTML
      * attribute.
+     * <p>
+     *  表示HTML属性的Typesafe枚举。
+     * 
      */
     public static final class Attribute {
 
@@ -348,6 +431,10 @@ public class HTML {
          * Creates a new <code>Attribute</code> with the specified
          * <code>id</code>.
          *
+         * <p>
+         *  使用指定的<code> id </code>创建新的<code>属性</code>。
+         * 
+         * 
          * @param id the id of the new <code>Attribute</code>
          */
         Attribute(String id) {
@@ -356,6 +443,10 @@ public class HTML {
 
         /**
          * Returns the string representation of this attribute.
+         * <p>
+         *  返回此属性的字符串表示形式。
+         * 
+         * 
          * @return the string representation of this attribute
          */
         public String toString() {
@@ -570,6 +661,9 @@ public class HTML {
      * are recognized by the default HTML reader.
      * This set does not include tags that are
      * manufactured by the reader.
+     * <p>
+     *  返回由默认HTML阅读器识别的实际HTML标记集。此集不包括由读者制造的标签。
+     * 
      */
     public static Tag[] getAllTags() {
         Tag[] tags = new Tag[Tag.allTags.length];
@@ -592,6 +686,11 @@ public class HTML {
      * name does not represent one of the well-known tags, then
      * <code>null</code> will be returned.
      *
+     * <p>
+     * 获取知名标签名称的标签常量(即,集合{A,ADDRESS,APPLET,AREA,B,BASE,BASEFONT,BIG,BLOCKQUOTE,BODY,BR,CAPTION,CENTER,CITE,CODE中的一个标签,DD,DFN,DIR,DIV,DL,DT,EM,FONT,FORM,FRAME,FRAMESET,H1,H2,H3,H4,H5,H6,HEAD,HR,HTML,I,IMG,INPUT,ISINDEX,KBD ,LI,LINK,MAP,MENU,META,NOBR,NOFRAMES,OBJECT,OL,OPTION,P,PARAM,PRE,SAMP,SCRIPT,SELECT,SMALL,SPAN,STRIKE,S,STRONG,STYLE,SUB,SUP ,TD,TEXTAREA,TH,TITLE,TR,TT,U,UL,VAR}
+     * 如果给定的名称不代表一个已知的标签,则返回<code> null </code>。
+     * 
+     * 
      * @param tagName the <code>String</code> name requested
      * @return a tag constant corresponding to the <code>tagName</code>,
      *    or <code>null</code> if not found
@@ -608,6 +707,11 @@ public class HTML {
      * If no matching <code>Tag</code> is found, returns
      * <code>null</code>.
      *
+     * <p>
+     *  返回与<code> StyleConstants </code>键<code> sc </code>关联的HTML <code> Tag </code>。
+     * 如果未找到匹配的<code> Tag </code>,则返回<code> null </code>。
+     * 
+     * 
      * @param sc the <code>StyleConstants</code> key
      * @return tag which corresponds to <code>sc</code>, or
      *   <code>null</code> if not found
@@ -621,6 +725,10 @@ public class HTML {
      * are stored as a string, and this is a convenience method
      * to convert to an actual integer.
      *
+     * <p>
+     *  获取整数属性值。属性值存储为字符串,这是一个方便的方法转换为实际的整数。
+     * 
+     * 
      * @param attr the set of attributes to use to try to fetch a value
      * @param key the key to use to fetch the value
      * @param def the default value to use if the attribute isn't
@@ -657,6 +765,10 @@ public class HTML {
 
     /**
      * Returns the set of HTML attributes recognized.
+     * <p>
+     *  返回已识别的HTML属性集。
+     * 
+     * 
      * @return the set of HTML attributes recognized
      */
     public static Attribute[] getAllAttributeKeys() {
@@ -683,6 +795,10 @@ public class HTML {
      * If the given name does not represent one of the well-known attributes,
      * then <code>null</code> will be returned.
      *
+     * <p>
+     * 获取已知属性名称的属性常数(即集合中的属性之一{FACE,COMMENT,SIZE,COLOR,CLEAR,BACKGROUND,BGCOLOR,TEXT,LINK,VLINK,ALINK,WIDTH,HEIGHT,ALIGN,NAME ,HREF,REL,REV,TITLE,TARGET,SHAPE,COORDS,ISMAP,NOHREF,ALT,ID,SRC,HSPACE,VSPACE,USEMAP,LOWSRC,CODEBASE,CODE,ARCHIVE,VALUE,VALUETYPE,TYPE,CLASS,STYLE,LANG ,DIR,DECLARE,CLASSID,DATA,CODETYPE,STANDBY,BORDER,SHAPES,NOSHADE,COMPACT,START,ACTION,METHOD,ENCTYPE,CHECKED,MAXLENGTH,MULTIPLE,SELECTED,ROWS,COLS,DUMMY,CELLSPACING,CELLPADDING,VALIGN,HALIGN ,NOWRAP,ROWSPAN,COLSPAN,PROMPT,HTTPEQUIV,CONTENT,LANGUAGE,VERSION,N,FRAMEBORDER,MARGINWIDTH,MARGINHEIGHT,SCROLLING,NORESIZE,MEDIA,ENDTAG}
+     * )。
+     * 
      * @param attName the <code>String</code> requested
      * @return the <code>Attribute</code> corresponding to <code>attName</code>
      */

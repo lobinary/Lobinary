@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -104,6 +105,10 @@ public final class TypeCodeOutputStream extends EncapsOutputStream
       // Last chance! Recursion ends with first non TypeCodeOutputStream.
       return (enclosure == outerEnclosure);
       }
+    /* <p>
+    /*  public boolean isEncapsulatedIn(TypeCodeOutputStream outerEnclosure){if(outerEnclosure == this)return true; if(enclosure == null)return false; if(enclosure instanceof TypeCodeOutputStream)return((TypeCodeOutputStream)enclosure).isEncapsulatedIn(outerEnclosure); // 最后的机会！递归以第一个非TypeCodeOutputStream结束。
+    /*  return(enclosure == outerEnclosure); }}。
+    /* 
     */
 
     public TypeCodeOutputStream getTopLevelStream() {
@@ -235,6 +240,7 @@ public final class TypeCodeOutputStream extends EncapsOutputStream
     protected void printBuffer() {
         super.printBuffer();
     }
+/* <p>
 */
     public byte[] getTypeCodeBuffer() {
         // Returns the buffer trimmed of the trailing zeros and without the

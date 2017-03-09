@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,11 +59,17 @@ import com.sun.corba.se.spi.orb.ORB ;
  * <li>IOR</li>
  * <li>IORTemplate</li>
  * </ul>
+ * <p>
+ *  各种IOR SPI类,它们不是用于特定协议的子类。必须使用此类创建以下类型：
+ * <ul>
+ *  <li> ObjectId </li> <li> ObjectKey </li> <li> IOR </li> <li> IORTemplate </li>
+ * </ul>
  */
 public class IORFactories {
     private IORFactories() {}
 
     /** Create an ObjectId for the given byte sequence.
+    /* <p>
      */
     public static ObjectId makeObjectId( byte[] id )
     {
@@ -71,6 +78,9 @@ public class IORFactories {
 
     /** Create an ObjectKey for the given ObjectKeyTemplate and
      * ObjectId.
+     * <p>
+     *  ObjectId。
+     * 
      */
     public static ObjectKey makeObjectKey( ObjectKeyTemplate oktemp, ObjectId oid )
     {
@@ -78,6 +88,7 @@ public class IORFactories {
     }
 
     /** Create an empty IOR for the given orb and typeid.  The result is mutable.
+    /* <p>
      */
     public static IOR makeIOR( ORB orb, String typeid )
     {
@@ -85,6 +96,7 @@ public class IORFactories {
     }
 
     /** Create an empty IOR for the given orb with a null typeid.  The result is mutable.
+    /* <p>
      */
     public static IOR makeIOR( ORB orb )
     {
@@ -92,6 +104,7 @@ public class IORFactories {
     }
 
     /** Read an IOR from an InputStream.  ObjectKeys are not shared.
+    /* <p>
      */
     public static IOR makeIOR( InputStream is )
     {
@@ -100,6 +113,9 @@ public class IORFactories {
 
     /** Create an IORTemplate with the given ObjectKeyTemplate.  The result
      * is mutable.
+     * <p>
+     *  是可变的。
+     * 
      */
     public static IORTemplate makeIORTemplate( ObjectKeyTemplate oktemp )
     {
@@ -107,6 +123,7 @@ public class IORFactories {
     }
 
     /** Read an IORTemplate from an InputStream.
+    /* <p>
      */
     public static IORTemplate makeIORTemplate( InputStream is )
     {
@@ -175,6 +192,8 @@ public class IORFactories {
     /** This method must be called in order to register the value
      * factories for the ObjectReferenceTemplate and ObjectReferenceFactory
      * value types.
+     * <p>
+     *  工厂的ObjectReferenceTemplate和ObjectReferenceFactory值类型。
      */
     public static void registerValueFactories( ORB orb )
     {

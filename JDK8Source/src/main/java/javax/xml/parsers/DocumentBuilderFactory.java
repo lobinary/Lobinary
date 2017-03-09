@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import javax.xml.validation.Schema;
  * Defines a factory API that enables applications to obtain a
  * parser that produces DOM object trees from XML documents.
  *
+ * <p>
+ *  定义工厂API,使应用程序能够获取从XML文档生成DOM对象树的解析器。
+ * 
+ * 
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  * @author <a href="mailto:Neeraj.Bajaj@sun.com">Neeraj Bajaj</a>
  *
@@ -50,6 +55,9 @@ public abstract class DocumentBuilderFactory {
     /**
      * <p>Protected constructor to prevent instantiation.
      * Use {@link #newInstance()}.</p>
+     * <p>
+     *  <p>受保护的构造函数以防止实例化。使用{@link #newInstance()}。</p>
+     * 
      */
     protected DocumentBuilderFactory () {
     }
@@ -110,6 +118,44 @@ public abstract class DocumentBuilderFactory {
      * java -Djaxp.debug=1 YourProgram ....
      * </pre>
      *
+     * <p>
+     *  获取<code> DocumentBuilderFactory </code>的新实例。这个静态方法创建一个新的工厂实例。
+     * 此方法使用以下有序查找过程来确定要加载的<code> DocumentBuilderFactory </code>实现类：。
+     * <ul>
+     * <li>
+     *  使用<code> javax.xml.parsers.DocumentBuilderFactory </code>系统属性。
+     * </li>
+     * <li>
+     *  使用JRE目录中的属性文件"lib / jaxp.properties"。
+     * 此配置文件采用标准的<code> java.util.Properties </code>格式,并包含实现类的完全限定名,键是上面定义的系统属性。
+     * 
+     *  jaxp.properties文件由JAXP实现只读一次,然后将其值缓存以供将来使用。如果文件在第一次尝试读取文件时不存在,则不会进一步尝试检查其是否存在。
+     * 在首次读取jaxp.properties后,无法更改任何属性的值。
+     * </li>
+     * <li>
+     * 使用由{@link java.util.ServiceLoader}类定义的服务提供程序加载工具,尝试使用{@linkplain java.util.ServiceLoader#load(java.lang。
+     * )来定位和加载服务的实现。
+     * 类)默认加载机制}：service-provider加载工具将使用{@linkplain java.lang.Thread#getContextClassLoader()当前线程的上下文类加载器}来尝试
+     * 加载服务。
+     * )来定位和加载服务的实现。如果上下文类加载器为null,将使用{@linkplain ClassLoader#getSystemClassLoader()系统类加载器}。
+     * </li>
+     * <li>
+     *  否则,返回系统默认实现。
+     * </li>
+     * </ul>
+     * 
+     *  一旦应用程序获得了对<code> DocumentBuilderFactory </code>的引用,它就可以使用工厂来配置和获取解析器实例。
+     * 
+     *  <h2>故障排除提示</h2> <p>设置<code> jaxp.debug </code>系统属性将导致此方法将大量调试消息打印到<code> System.err </code >关于它在做什么,
+     * 它在看什么。
+     * </p>。
+     * 
+     *  <p>如果您在加载{@link DocumentBuilder}时遇到问题,请尝试：</p>
+     * <pre>
+     *  java -Djaxp.debug = 1 YourProgram ....
+     * </pre>
+     * 
+     * 
      * @return New instance of a <code>DocumentBuilderFactory</code>
      *
      * @throws FactoryConfigurationError in case of {@linkplain
@@ -144,6 +190,22 @@ public abstract class DocumentBuilderFactory {
      * java -Djaxp.debug=1 YourProgram ....
      * </pre>
      *
+     * <p>
+     *  <p>从类名获取<code> DocumentBuilderFactory </code>的新实例。当类路径中有多个提供程序时,此函数很有用。
+     * 它为应用程序提供了更多的控制,因为它可以指定应该加载哪个提供程序。</p>。
+     * 
+     * <p>一旦应用程序获得对<code> DocumentBuilderFactory </code>的引用,它就可以使用工厂来配置和获取解析器实例。</p>
+     * 
+     *  <h2>故障排除提示</h2> <p>设置<code> jaxp.debug </code>系统属性将导致此方法将大量调试消息打印到<code> System.err </code >关于它在做什么,
+     * 它在看什么。
+     * </p>。
+     * 
+     *  <p>如果您遇到问题,请尝试：</p>
+     * <pre>
+     *  java -Djaxp.debug = 1 YourProgram ....
+     * </pre>
+     * 
+     * 
      * @param factoryClassName fully qualified factory class name that provides implementation of <code>javax.xml.parsers.DocumentBuilderFactory</code>.
      *
      * @param classLoader <code>ClassLoader</code> used to load the factory class. If <code>null</code>
@@ -168,6 +230,10 @@ public abstract class DocumentBuilderFactory {
      * Creates a new instance of a {@link javax.xml.parsers.DocumentBuilder}
      * using the currently configured parameters.
      *
+     * <p>
+     *  使用当前配置的参数创建{@link javax.xml.parsers.DocumentBuilder}的新实例。
+     * 
+     * 
      * @return A new instance of a DocumentBuilder.
      *
      * @throws ParserConfigurationException if a DocumentBuilder
@@ -183,6 +249,10 @@ public abstract class DocumentBuilderFactory {
      * provide support for XML namespaces. By default the value of this is set
      * to <code>false</code>
      *
+     * <p>
+     *  指定由此代码生成的解析器将为XML命名空间提供支持。默认情况下,此值设置为<code> false </code>
+     * 
+     * 
      * @param awareness true if the parser produced will provide support
      *                  for XML namespaces; false otherwise.
      */
@@ -212,6 +282,20 @@ public abstract class DocumentBuilderFactory {
      * method to associate a schema to a parser.
      * </p>
      *
+     * <p>
+     *  指定由此代码生成的解析器将在解析文档时验证文档。默认情况下,此值设置为<code> false </code>。
+     * 
+     * <p>
+     *  请注意,这里的"验证"是指XML建议中定义的<a href="http://www.w3.org/TR/REC-xml#proc-types">验证解析器</a>。
+     * 换句话说,它本质上只是控制DTD验证。 (除了在JAXP 1.2中定义的遗留两个属性)。
+     * </p>
+     * 
+     * <p>
+     *  要使用现代模式语言(如W3C XML Schema或RELAX NG而不是DTD),可以将解析器配置为非验证解析器,方法是保留{@link #setValidating(boolean)}方法<code>
+     *  false </code> ,然后使用{@link #setSchema(Schema)}方法将模式关联到解析器。
+     * </p>
+     * 
+     * 
      * @param validating true if the parser produced will validate documents
      *                   as they are parsed; false otherwise.
      */
@@ -230,6 +314,12 @@ public abstract class DocumentBuilderFactory {
      * this setting requires the parser to be in validating mode. By default
      * the value of this is set to <code>false</code>.
      *
+     * <p>
+     * 指定由此工厂创建的解析器必须在解析XML文档时删除元素内容中的空格(有时称为"可忽略的空格")(请参阅XML Rec 2.10)。
+     * 注意,只有直接包含在具有仅元素内容模型的元素内容(见XML Rec 3.2.1)中的空白将被消除。由于依赖于内容模型,此设置要求解析器处于验证模式。
+     * 默认情况下,此值设置为<code> false </code>。
+     * 
+     * 
      * @param whitespace true if the parser created must eliminate whitespace
      *                   in the element content when parsing XML documents;
      *                   false otherwise.
@@ -244,6 +334,10 @@ public abstract class DocumentBuilderFactory {
      * expand entity reference nodes. By default the value of this is set to
      * <code>true</code>
      *
+     * <p>
+     *  指定由此代码生成的解析器将展开实体引用节点。默认情况下,此值设置为<code> true </code>
+     * 
+     * 
      * @param expandEntityRef true if the parser produced will expand entity
      *                        reference nodes; false otherwise.
      */
@@ -257,6 +351,10 @@ public abstract class DocumentBuilderFactory {
      * ignore comments. By default the value of this is set to <code>false
      * </code>.</p>
      *
+     * <p>
+     *  <p>指定由此代码生成的解析器将忽略注释。默认情况下,此值设置为<code> false </code>。</p>
+     * 
+     * 
      * @param ignoreComments <code>boolean</code> value to ignore comments during processing
      */
 
@@ -270,6 +368,10 @@ public abstract class DocumentBuilderFactory {
      * adjacent (if any) text node. By default the value of this is set to
      * <code>false</code>
      *
+     * <p>
+     *  指定由此代码生成的解析器将CDATA节点转换为Text节点,并将其附加到相邻(如果有)文本节点。默认情况下,此值设置为<code> false </code>
+     * 
+     * 
      * @param coalescing  true if the parser produced will convert CDATA nodes
      *                    to Text nodes and append it to the adjacent (if any)
      *                    text node; false otherwise.
@@ -283,6 +385,10 @@ public abstract class DocumentBuilderFactory {
      * Indicates whether or not the factory is configured to produce
      * parsers which are namespace aware.
      *
+     * <p>
+     *  指示工厂是否配置为生成可识别命名空间的解析器。
+     * 
+     * 
      * @return  true if the factory is configured to produce parsers which
      *          are namespace aware; false otherwise.
      */
@@ -295,6 +401,10 @@ public abstract class DocumentBuilderFactory {
      * Indicates whether or not the factory is configured to produce
      * parsers which validate the XML content during parse.
      *
+     * <p>
+     *  指示工厂是否配置为生成在解析期间验证XML内容的解析器。
+     * 
+     * 
      * @return  true if the factory is configured to produce parsers
      *          which validate the XML content during parse; false otherwise.
      */
@@ -307,6 +417,10 @@ public abstract class DocumentBuilderFactory {
      * Indicates whether or not the factory is configured to produce
      * parsers which ignore ignorable whitespace in element content.
      *
+     * <p>
+     *  指示工厂是否配置为生成忽略元素内容中的可忽略空格的解析器。
+     * 
+     * 
      * @return  true if the factory is configured to produce parsers
      *          which ignore ignorable whitespace in element content;
      *          false otherwise.
@@ -320,6 +434,10 @@ public abstract class DocumentBuilderFactory {
      * Indicates whether or not the factory is configured to produce
      * parsers which expand entity reference nodes.
      *
+     * <p>
+     *  指示工厂是否配置为生成扩展实体引用节点的解析器。
+     * 
+     * 
      * @return  true if the factory is configured to produce parsers
      *          which expand entity reference nodes; false otherwise.
      */
@@ -332,6 +450,10 @@ public abstract class DocumentBuilderFactory {
      * Indicates whether or not the factory is configured to produce
      * parsers which ignores comments.
      *
+     * <p>
+     * 指示工厂是否配置为生成忽略注释的解析器。
+     * 
+     * 
      * @return  true if the factory is configured to produce parsers
      *          which ignores comments; false otherwise.
      */
@@ -345,6 +467,10 @@ public abstract class DocumentBuilderFactory {
      * parsers which converts CDATA nodes to Text nodes and appends it to
      * the adjacent (if any) Text node.
      *
+     * <p>
+     *  指示工厂是否配置为生成将CDATA节点转换为Text节点的解析器,并将其附加到相邻(如果有)Text节点。
+     * 
+     * 
      * @return  true if the factory is configured to produce parsers
      *          which converts CDATA nodes to Text nodes and appends it to
      *          the adjacent (if any) Text node; false otherwise.
@@ -383,6 +509,30 @@ public abstract class DocumentBuilderFactory {
      *   </li>
      * </ul>
      *
+     * <p>
+     *  允许用户在底层实现上设置特定属性。
+     * <p>
+     *  实现JAXP 1.5或更高版本的所有实现都需要支持{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_DTD}和{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_SCHEMA}
+     * 属性。
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     *  设置{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_DTD}属性会限制对外部DTD的访问,对属性指定的协议的外部实体引用。
+     * 如果由于此属性的限制而在解析期间拒绝访问,{@link org.xml.sax.SAXException}将由{@link javax.xml.parsers.DocumentBuilder}定义的解析
+     * 方法抛出。
+     *  设置{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_DTD}属性会限制对外部DTD的访问,对属性指定的协议的外部实体引用。
+     * </p>
+     * <p>
+     *  设置{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_SCHEMA}属性会将对schemaLocation属性设置的外部模式的访问限制为属性指定的协议。
+     * 如果由于此属性的限制而在解析期间拒绝访问,{@link org.xml.sax.SAXException}将由{@link javax.xml.parsers.DocumentBuilder}定义的解析
+     * 方法抛出。
+     *  设置{@link javax.xml.XMLConstants#ACCESS_EXTERNAL_SCHEMA}属性会将对schemaLocation属性设置的外部模式的访问限制为属性指定的协议。
+     * </p>
+     * </li>
+     * </ul>
+     * 
+     * 
      * @param name The name of the attribute.
      * @param value The value of the attribute.
      *
@@ -396,6 +546,10 @@ public abstract class DocumentBuilderFactory {
      * Allows the user to retrieve specific attributes on the underlying
      * implementation.
      *
+     * <p>
+     *  允许用户检索基础实现上的特定属性。
+     * 
+     * 
      * @param name The name of the attribute.
      *
      * @return value The value of the attribute.
@@ -434,6 +588,33 @@ public abstract class DocumentBuilderFactory {
      *   </li>
      * </ul>
      *
+     * <p>
+     * <p>为此工厂创建的<code> DocumentBuilderFactory </code>和<code> DocumentBuilder </code>设置一个功能。</p>
+     * 
+     * <p>
+     *  功能名称是完全限定的{@link java.net.URI}。实现可以定义它们自己的特征。
+     * 如果<code> DocumentBuilderFactory </code>或其创建的<code> DocumentBuilder </code>无法支持该功能,则会抛出{@link ParserConfigurationException}
+     * 。
+     *  功能名称是完全限定的{@link java.net.URI}。实现可以定义它们自己的特征。
+     * 一个<code> DocumentBuilderFactory </code>可以暴露一个特征值,但是无法改变它的状态。
+     * </p>
+     * 
+     * <p>
+     *  所有实现都需要支持{@link javax.xml.XMLConstants#FEATURE_SECURE_PROCESSING}功能。功能为：</p>
+     * <ul>
+     * <li>
+     *  <code> true </code>：实现将限制XML处理以符合实现限制。示例包括将消耗大量资源的扩展限制和XML模式构造。
+     * 如果XML处理由于安全原因而受到限制,则将通过调用注册的{@link org.xml.sax.ErrorHandler#fatalError(SAXParseException exception)}来
+     * 报告。
+     *  <code> true </code>：实现将限制XML处理以符合实现限制。示例包括将消耗大量资源的扩展限制和XML模式构造。
+     * 请参阅{@link DocumentBuilder#setErrorHandler(org.xml.sax.ErrorHandler errorHandler)}。
+     * </li>
+     * <li>
+     *  <code> false </code>：实现将根据XML规范处理XML,而不考虑可能的实现限制。
+     * </li>
+     * </ul>
+     * 
+     * 
      * @param name Feature name.
      * @param value Is feature state <code>true</code> or <code>false</code>.
      *
@@ -455,6 +636,18 @@ public abstract class DocumentBuilderFactory {
      * It is possible for an <code>DocumentBuilderFactory</code> to expose a feature value but be unable to change its state.
      * </p>
      *
+     * <p>
+     *  <p>获取命名要素的状态。</p>
+     * 
+     * <p>
+     * 功能名称是完全限定的{@link java.net.URI}。实现可以定义它们自己的特征。
+     * 如果<code> DocumentBuilderFactory </code>或其创建的<code> DocumentBuilder </code>无法支持该功能,则会抛出{@link ParserConfigurationException}
+     * 。
+     * 功能名称是完全限定的{@link java.net.URI}。实现可以定义它们自己的特征。
+     * 一个<code> DocumentBuilderFactory </code>可以暴露一个特征值,但是不能改变它的状态。
+     * </p>
+     * 
+     * 
      * @param name Feature name.
      *
      * @return State of the named feature.
@@ -470,6 +663,10 @@ public abstract class DocumentBuilderFactory {
      * Gets the {@link Schema} object specified through
      * the {@link #setSchema(Schema schema)} method.
      *
+     * <p>
+     *  获取通过{@link #setSchema(Schema schema)}方法指定的{@link Schema}对象。
+     * 
+     * 
      * @return
      *      the {@link Schema} object that was last set through
      *      the {@link #setSchema(Schema)} method, or null
@@ -540,6 +737,29 @@ public abstract class DocumentBuilderFactory {
      * as long as they yield the result described in the specification.
      * </p>
      *
+     * <p>
+     *  <p>设置要从此工厂创建的解析器使用的{@link Schema}。
+     * 
+     * <p>
+     *  当{@link Schema}非空时,解析器将使用从其创建的验证器来验证文档,然后将信息传递到应用程序。
+     * 
+     *  <p>当验证器发现错误时,解析器负责将它们报告给用户指定的{@link org.xml.sax.ErrorHandler}(或者如果未设置错误处理程序,忽略它们或抛出它们) ,就像解析器本身发现的任何
+     * 其他错误一样。
+     * 换句话说,如果设置了用户指定的{@link org.xml.sax.ErrorHandler},它必须接收这些错误,如果没有,则必须根据实现特定的默认错误处理规则来对待它们。
+     * 
+     * <p>
+     *  验证器可以修改解析的结果(例如通过添加在文档中缺失的默认值),并且解析器负责确保应用程序将接收修改的DOM树。
+     * 
+     * <p>
+     *  Initialy,null设置为{@link Schema}。
+     * 
+     * <p>
+     * 即使{@link #isValidating()}方法返回<code> false </code>,此处理也会生效。
+     * 
+     *  <p>使用<code> http://java.sun.com/xml/jaxp/properties/schemaSource </code>属性和/或<code> http：//java.sun是
+     * 一个错误。
+     *  com / xml / jaxp / properties / schemaLanguage </code>属性与{@link Schema}对象结合使用。
+     * 
      * @param schema <code>Schema</code> to use or <code>null</code>
      *   to remove a schema.
      *
@@ -569,6 +789,16 @@ public abstract class DocumentBuilderFactory {
      *
      * <p>XInclude processing defaults to <code>false</code>.</p>
      *
+     * <p>
+     * 当调用{@link #newDocumentBuilder()}时,此类配置将导致{@link ParserConfigurationException}异常。</p>。
+     * 
+     *  <h4>注意事项注意事项</h4>
+     * 
+     * <p>
+     *  解析器必须能够使用任何{@link Schema}实现。然而,解析器和模式允许使用实现特定的自定义机制,只要它们产生规范中描述的结果。
+     * </p>
+     * 
+     * 
      * @param state Set XInclude processing to <code>true</code> or
      *   <code>false</code>
      *
@@ -588,6 +818,14 @@ public abstract class DocumentBuilderFactory {
     /**
      * <p>Get state of XInclude processing.</p>
      *
+     * <p>
+     *  <p>设置XInclude处理的状态。</p>
+     * 
+     *  <p>如果在文档实例中找到XInclude标记,则应按<a href="http://www.w3.org/TR/xinclude/"> XML Inclusions(XInclude)版本1.0中的
+     * 指定处理。
+     *  a>。</p>。
+     * 
+     * 
      * @return current state of XInclude processing
      *
      * @throws UnsupportedOperationException When implementation does not

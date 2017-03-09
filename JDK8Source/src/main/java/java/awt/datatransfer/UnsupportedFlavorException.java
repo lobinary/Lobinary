@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,10 @@ package java.awt.datatransfer;
 
 /**
  * Signals that the requested data is not supported in this flavor.
+ * <p>
+ *  表示此类别不支持请求的数据。
+ * 
+ * 
  * @see Transferable#getTransferData
  *
  * @author      Amy Fowler
@@ -35,12 +40,18 @@ public class UnsupportedFlavorException extends Exception {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 5383814944251665601L;
 
     /**
      * Constructs an UnsupportedFlavorException.
      *
+     * <p>
+     *  构造UnsupportedFlavorException。
+     * 
      * @param flavor the flavor object which caused the exception. May
      *        be <code>null</code>.
      */

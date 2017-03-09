@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,15 @@ import javax.print.attribute.DocAttribute;
  * <CODE>getName()</CODE> gives the IPP attribute name.
  * <P>
  *
+ * <p>
+ *  类DocumentName是一个打印属性类,一个文本属性,用于指定文档的名称。 DocumentName是打印数据(文档)的属性,而不是打印作业的属性。文档的名称是由客户端定义的任意字符串。
+ * 但是,如果未指定JobName,则应改用DocumentName,这意味着DocumentName的支持规范需要报告JobName,反之亦然。
+ * 有关详细信息,请参阅{@link JobName JobName}。
+ * <P>
+ *  <B> IPP兼容性：</B>字符串值给出IPP名称值。语言环境提供IPP自然语言。由<CODE> getName()</CODE>返回的类别名称给出了IPP属性名称。
+ * <P>
+ * 
+ * 
  * @author  Alan Kaminsky
  */
 public final class DocumentName extends TextSyntax implements DocAttribute {
@@ -55,6 +65,10 @@ public final class DocumentName extends TextSyntax implements DocAttribute {
      * Constructs a new document name attribute with the given document name
      * and locale.
      *
+     * <p>
+     *  使用给定的文档名称和区域设置构造新的文档名称属性。
+     * 
+     * 
      * @param  documentName  Document name.
      * @param  locale        Natural language of the text string. null
      * is interpreted to mean the default locale as returned
@@ -84,6 +98,19 @@ public final class DocumentName extends TextSyntax implements DocAttribute {
      * are equal.
      * </OL>
      *
+     * <p>
+     *  返回此文档名称属性是否等同于传入的对象。为了等效,所有以下条件必须为真：
+     * <OL TYPE=1>
+     * <LI>
+     *  <CODE>对象</CODE>不为空。
+     * <LI>
+     *  <CODE>对象</CODE>是类DocumentName的实例。
+     * <LI>
+     *  此文档名称属性的底层字符串和<CODE>对象</CODE>的底层字符串是相等的。
+     * <LI>
+     *  此文档名称属性的区域设置和<CODE>对象</CODE>的区域设置相等。
+     * </OL>
+     * 
      * @param  object  Object to compare to.
      *
      * @return  True if <CODE>object</CODE> is equivalent to this document
@@ -99,6 +126,9 @@ public final class DocumentName extends TextSyntax implements DocAttribute {
      * <P>
      * For class DocumentName, the category is class DocumentName itself.
      *
+     * <p>
+     * 
+     * 
      * @return  Printing attribute class (category), an instance of class
      *          {@link java.lang.Class java.lang.Class}.
      */
@@ -112,6 +142,12 @@ public final class DocumentName extends TextSyntax implements DocAttribute {
      * <P>
      * For class DocumentName, the category name is <CODE>"document-name"</CODE>.
      *
+     * <p>
+     *  获取要用作此打印属性值的"类别"的打印属性类。
+     * <P>
+     * 对于DocumentName类,类别是DocumentName本身。
+     * 
+     * 
      * @return  Attribute category name.
      */
     public final String getName() {

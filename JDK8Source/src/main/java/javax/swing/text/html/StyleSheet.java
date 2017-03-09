@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -122,6 +123,34 @@ import javax.swing.text.*;
  * that are complete.  Future versions of this class will provide
  * better CSS support.</font>
  *
+ * <p>
+ *  支持定义正在呈现的HTML视图的视觉特性。 StyleSheet用于将HTML模型转换为视觉特性。这使得可以通过外观来定制视图,可以不同地呈现相同模型上的多个视图等。这可以被认为是CSS规则存储库。
+ *  CSS属性的键是CSS.Attribute类型的对象。值的类型取决于StyleSheet实现,但是需要<code> toString </code>方法来返回CSS值的字符串表示。
+ * <p>
+ *  HTML视图实现获取其属性的主要入口点是{@link #getViewAttributes getViewAttributes}方法。这应该被实现以建立用于将属性与视图相关联的期望的策略。
+ * 每个HTMLEditorKit(即每个相关联的JEditorPane)可以有自己的StyleSheet,但是默认情况下,所有HTMLEditorKit实例都将共享一个工作表。
+ *  HTMLDocument实例还可以有一个StyleSheet,它保存特定于文档的CSS规范。
+ * <p>
+ * 为了使View存储更少的状态,因此更轻量级,StyleSheet可以作为处理一些渲染任务的画家的工厂。这允许实现确定他们想要缓存什么,并且共享可能处于选择器对于多个视图共同的水平。
+ * 由于StyleSheet可以被多个文档的视图使用,并且通常HTML属性不影响正在使用的选择器,因此共享的可能性很大。
+ * <p>
+ *  规则被存储为命名样式,并且存储其他信息以快速地将元素的上下文翻译为规则。以下代码片段将显示已命名的样式,因此包含的CSS规则。
+ *  <pre> <code>&nbsp; &nbsp; import java.util。*; &nbsp; import javax.swing.text。
+ * *; &nbsp; import javax.swing.text.html。
+ * *; &nbsp; &nbsp; public class ShowStyles {&nbsp; &nbsp; public static void main(String [] args){&nbsp; HTMLEditorKit kit = new HTMLEditorKit(); &nbsp; HTMLDocument doc =(HTMLDocument)kit.createDefaultDocument(); &nbsp; StyleSheet styles = doc.getStyleSheet(); &nbsp; &nbsp;枚举规则= styles.getStyleNames(); &nbsp; while(rules.hasMoreElements()){&nbsp; String name =(String)rules.nextElement(); &nbsp; style rule = styles.getStyle(name); &nbsp; System.out.println(rule.toString()); &nbsp; }
+ * &nbsp; System.exit(0); &nbsp; }&nbsp; }&nbsp; </code> </pre>。
+ * *; &nbsp; import javax.swing.text.html。
+ * <p>
+ * 当CSS样式应该覆盖由元素定义的视觉属性时,语义不是很好定义。例如,html <code>&lt; body bgcolor = red&gt; </code>使得正文具有红色背景。
+ * 但是如果html文件还包含CSS规则<code> body {background：blue} </code>,它对于body的背景应该是什么颜色变得不太清楚。
+ * 当前实现提供了在元素中定义的视觉属性的最高优先级,即它们总是在任何样式之前被检查。因此,在前面的示例中,背景将具有红色,因为主体元素将背景颜色定义为红色。
+ * <p>
+ *  如前所述,这支持CSS。我们不支持完整的CSS规范。请参阅CSS类的javadoc以查看我们支持的属性。
+ * 我们目前不支持的两个主要的CSS解析相关概念是伪选择器,例如<code> A：link {color：red} </code>和<code> important </code>修饰符。
+ * <p>
+ *  <font color ="red">注意：此实现目前不完整。它可以替换为完成的替代实现。此类的未来版本将提供更好的CSS支持。</font>
+ * 
+ * 
  * @author  Timothy Prinzing
  * @author  Sunita Mani
  * @author  Sara Swanson
@@ -161,6 +190,9 @@ public class StyleSheet extends StyleContext {
 
     /**
      * Construct a StyleSheet
+     * <p>
+     *  构造StyleSheet
+     * 
      */
     public StyleSheet() {
         super();
@@ -178,6 +210,10 @@ public class StyleSheet extends StyleContext {
      * for situations where the attributes will differ
      * if nesting inside of elements.
      *
+     * <p>
+     *  获取用于呈现给定类型的HTML标记的样式。给定的元素表示标记,并且可以用于确定在嵌套在元素内部时属性将不同的情况下的嵌套。
+     * 
+     * 
      * @param t the type to translate to visual attributes
      * @param e the element representing the tag; the element
      *  can be used to determine the nesting for situations where
@@ -269,6 +305,11 @@ public class StyleSheet extends StyleContext {
      * with a selector "table p" and a new rule was added with a selector
      * of "p" the returned Style would include the new attributes from
      * the rule "p".
+     * <p>
+     * 获取与字符串形式的选择器最匹配的规则。其中<code> selector </code>是元素名称的空格分隔的String。
+     * 例如,<code> selector </code>可能是'html body tr td''<p>返回的样式的属性将随着添加和删除规则而改变。
+     * 也就是说,如果您要求一个带有选择器"table p"的规则,并且新规则添加了一个选择器"p",则返回的样式将包括规则"p"的新属性。
+     * 
      */
     public Style getRule(String selector) {
         selector = cleanSelectorString(selector);
@@ -283,6 +324,9 @@ public class StyleSheet extends StyleContext {
      * Adds a set of rules to the sheet.  The rules are expected to
      * be in valid CSS format.  Typically this would be called as
      * a result of parsing a &lt;style&gt; tag.
+     * <p>
+     *  向工作表添加一组规则。规则应为有效的CSS格式。通常,这将被作为解析&lt; style&gt;标签。
+     * 
      */
     public void addRule(String rule) {
         if (rule != null) {
@@ -314,6 +358,9 @@ public class StyleSheet extends StyleContext {
      * Translates a CSS declaration to an AttributeSet that represents
      * the CSS declaration.  Typically this would be called as a
      * result of encountering an HTML style attribute.
+     * <p>
+     *  将CSS声明转换为表示CSS声明的AttributeSet。通常,这将作为遇到HTML样式属性的结果来调用。
+     * 
      */
     public AttributeSet getDeclaration(String decl) {
         if (decl == null) {
@@ -328,6 +375,10 @@ public class StyleSheet extends StyleContext {
      * CSS1 grammar.  If there are collisions with existing rules,
      * the newly specified rule will win.
      *
+     * <p>
+     *  加载根据CSS1语法指定的一组规则。如果与现有规则存在冲突,则新指定的规则将获胜。
+     * 
+     * 
      * @param in the stream to read the CSS grammar from
      * @param ref the reference URL.  This value represents the
      *  location of the stream and may be null.  All relative
@@ -343,6 +394,9 @@ public class StyleSheet extends StyleContext {
      * Fetches a set of attributes to use in the view for
      * displaying.  This is basically a set of attributes that
      * can be used for View.getAttributes.
+     * <p>
+     *  获取要在视图中使用以显示的一组属性。这基本上是一组可以用于View.getAttributes的属性。
+     * 
      */
     public AttributeSet getViewAttributes(View v) {
         return new ViewAttributeSet(v);
@@ -351,6 +405,10 @@ public class StyleSheet extends StyleContext {
     /**
      * Removes a named style previously added to the document.
      *
+     * <p>
+     *  删除先前添加到文档中的命名样式。
+     * 
+     * 
      * @param nm  the name of the style to remove
      */
     public void removeStyle(String nm) {
@@ -387,6 +445,11 @@ public class StyleSheet extends StyleContext {
      * any previously added style sheets. An added StyleSheet will never
      * override the rules of the receiving style sheet.
      *
+     * <p>
+     *  将StyleSheet <code> ss </code>中的规则添加到接收方的规则。 <code> ss </code>规则将覆盖之前添加的任何样式表的规则。
+     * 添加的StyleSheet将永远不会覆盖接收样式表的规则。
+     * 
+     * 
      * @since 1.3
      */
     public void addStyleSheet(StyleSheet ss) {
@@ -409,6 +472,10 @@ public class StyleSheet extends StyleContext {
     /**
      * Removes the StyleSheet <code>ss</code> from those of the receiver.
      *
+     * <p>
+     *  删除接收器的StyleSheet <code> ss </code>。
+     * 
+     * 
      * @since 1.3
      */
     public void removeStyleSheet(StyleSheet ss) {
@@ -434,6 +501,10 @@ public class StyleSheet extends StyleContext {
      * Returns an array of the linked StyleSheets. Will return null
      * if there are no linked StyleSheets.
      *
+     * <p>
+     * 返回链接的StyleSheets的数组。如果没有链接的StyleSheets将返回null。
+     * 
+     * 
      * @since 1.3
      */
     public StyleSheet[] getStyleSheets() {
@@ -457,6 +528,10 @@ public class StyleSheet extends StyleContext {
      * to become part of the receiver, create a new StyleSheet and use
      * addStyleSheet to link it in.
      *
+     * <p>
+     *  从<code> url </code>导入样式表。生成的规则直接添加到接收器。如果您不希望规则成为接收者的一部分,请创建一个新的StyleSheet并使用addStyleSheet链接它。
+     * 
+     * 
      * @since 1.3
      */
     public void importStyleSheet(URL url) {
@@ -479,6 +554,10 @@ public class StyleSheet extends StyleContext {
      * Sets the base. All import statements that are relative, will be
      * relative to <code>base</code>.
      *
+     * <p>
+     *  设置基数。所有相对的import语句都将相对于<code> base </code>。
+     * 
+     * 
      * @since 1.3
      */
     public void setBase(URL base) {
@@ -488,6 +567,10 @@ public class StyleSheet extends StyleContext {
     /**
      * Returns the base.
      *
+     * <p>
+     *  返回基数。
+     * 
+     * 
      * @since 1.3
      */
     public URL getBase() {
@@ -497,6 +580,10 @@ public class StyleSheet extends StyleContext {
     /**
      * Adds a CSS attribute to the given set.
      *
+     * <p>
+     *  将CSS属性添加到给定集合。
+     * 
+     * 
      * @since 1.3
      */
     public void addCSSAttribute(MutableAttributeSet attr, CSS.Attribute key,
@@ -507,6 +594,10 @@ public class StyleSheet extends StyleContext {
     /**
      * Adds a CSS attribute to the given set.
      *
+     * <p>
+     *  将CSS属性添加到给定集合。
+     * 
+     * 
      * @since 1.3
      */
     public boolean addCSSAttributeFromHTML(MutableAttributeSet attr,
@@ -525,6 +616,10 @@ public class StyleSheet extends StyleContext {
      * Converts a set of HTML attributes to an equivalent
      * set of CSS attributes.
      *
+     * <p>
+     *  将一组HTML属性转换为等效的CSS属性集。
+     * 
+     * 
      * @param htmlAttrSet AttributeSet containing the HTML attributes.
      */
     public AttributeSet translateHTMLToCSS(AttributeSet htmlAttrSet) {
@@ -544,6 +639,11 @@ public class StyleSheet extends StyleContext {
      * has no corresponding CSS entry, the StyleConstants attribute
      * is stored (but will likely be unused).
      *
+     * <p>
+     *  向给定集合添加属性,并返回新的代表集。这将重新实现以将StyleConstant属性转换为CSS,然后转发到超类行为。
+     *  StyleConstants属性没有对应的CSS条目,StyleConstants属性存储(但可能未使用)。
+     * 
+     * 
      * @param old the old attribute set
      * @param key the non-null attribute key
      * @param value the attribute value
@@ -583,6 +683,10 @@ public class StyleSheet extends StyleContext {
      * are StyleConstants attributes, they will be converted to CSS prior
      * to forwarding to the superclass behavior.
      *
+     * <p>
+     *  向元素添加一组属性。如果这些属性中的任何一个属性为StyleConstants属性,那么在转发到超类行为之前,它们将被转换为CSS。
+     * 
+     * 
      * @param old the old attribute set
      * @param attr the attributes to add
      * @return the updated attribute set
@@ -600,6 +704,10 @@ public class StyleSheet extends StyleContext {
      * attribute, the request will be converted to a CSS attribute prior to
      * forwarding to the superclass behavior.
      *
+     * <p>
+     *  从集合中删除属性。如果属性是StyleConstants属性,则在转发到超类行为之前,请求将转换为CSS属性。
+     * 
+     * 
      * @param old the old set of attributes
      * @param key the non-null attribute name
      * @return the updated attribute set
@@ -626,6 +734,10 @@ public class StyleSheet extends StyleContext {
      * is a StyleConstants attribute, the request will be converted to a CSS
      * attribute prior to forwarding to the superclass behavior.
      *
+     * <p>
+     *  删除元素的一组属性。如果任何属性是StyleConstants属性,则在转发到超类行为之前,请求将转换为CSS属性。
+     * 
+     * 
      * @param old the old attribute set
      * @param names the attribute names
      * @return the updated attribute set
@@ -643,6 +755,10 @@ public class StyleSheet extends StyleContext {
      * is a StyleConstants attribute, the request will be converted to a CSS
      * attribute prior to forwarding to the superclass behavior.
      *
+     * <p>
+     * 删除一组属性。如果任何属性是StyleConstants属性,则在转发到超类行为之前,请求将转换为CSS属性。
+     * 
+     * 
      * @param old the old attribute set
      * @param attrs the attributes
      * @return the updated attribute set
@@ -662,6 +778,10 @@ public class StyleSheet extends StyleContext {
      * to return an AttributeSet that provides some sort of
      * attribute conversion.
      *
+     * <p>
+     *  创建可能共享的一组紧凑属性。这是一个钩子,想要改变SmallAttributeSet的行为的子类。这可以重新实现以返回一个提供某种属性转换的AttributeSet。
+     * 
+     * 
      * @param a The set of attributes to be represented in the
      *  the compact form.
      */
@@ -678,6 +798,11 @@ public class StyleSheet extends StyleContext {
      * to return a MutableAttributeSet that provides some sort of
      * attribute conversion.
      *
+     * <p>
+     *  创建一组大的属性,应该在时间上折衷空间。此设置不会共享。这是一个钩子,希望改变更大的属性存储格式(默认为SimpleAttributeSet)的行为。
+     * 这可以重新实现,返回一个MutableAttributeSet,提供某种类型的属性转换。
+     * 
+     * 
      * @param a The set of attributes to be represented in the
      *  the larger form.
      */
@@ -688,6 +813,9 @@ public class StyleSheet extends StyleContext {
     /**
      * For any StyleConstants key in attr that has an associated HTML.Tag,
      * it is removed from old. The resulting AttributeSet is then returned.
+     * <p>
+     *  对于attr中具有关联的HTML.Tag的任何StyleConstants键,它将从旧的中删除。然后返回生成的AttributeSet。
+     * 
      */
     private AttributeSet removeHTMLTags(AttributeSet old, AttributeSet attr) {
         if (!(attr instanceof LargeConversionSet) &&
@@ -715,6 +843,9 @@ public class StyleSheet extends StyleContext {
      * any attributes that were specified as StyleConstants
      * attributes and have a CSS mapping, will be converted
      * to CSS attributes.
+     * <p>
+     *  转换一组属性(如果需要),以便将指定为StyleConstants属性并具有CSS映射的任何属性转换为CSS属性。
+     * 
      */
     AttributeSet convertAttributeSet(AttributeSet a) {
         if ((a instanceof LargeConversionSet) ||
@@ -762,12 +893,19 @@ public class StyleSheet extends StyleContext {
     /**
      * Large set of attributes that does conversion of requests
      * for attributes of type StyleConstants.
+     * <p>
+     *  对属性类型为StyleConstants的请求进行转换的大量属性集。
+     * 
      */
     class LargeConversionSet extends SimpleAttributeSet {
 
         /**
          * Creates a new attribute set based on a supplied set of attributes.
          *
+         * <p>
+         *  基于提供的一组属性创建新的属性集。
+         * 
+         * 
          * @param source the set of attributes
          */
         public LargeConversionSet(AttributeSet source) {
@@ -781,6 +919,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Checks whether a given attribute is defined.
          *
+         * <p>
+         *  检查是否定义了给定属性。
+         * 
+         * 
          * @param key the attribute key
          * @return true if the attribute is defined
          * @see AttributeSet#isDefined
@@ -799,6 +941,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Gets the value of an attribute.
          *
+         * <p>
+         *  获取属性的值。
+         * 
+         * 
          * @param key the attribute name
          * @return the attribute value
          * @see AttributeSet#getAttribute
@@ -822,12 +968,19 @@ public class StyleSheet extends StyleContext {
     /**
      * Small set of attributes that does conversion of requests
      * for attributes of type StyleConstants.
+     * <p>
+     *  小属性集,用于转换StyleConstants类型的属性的请求。
+     * 
      */
     class SmallConversionSet extends SmallAttributeSet {
 
         /**
          * Creates a new attribute set based on a supplied set of attributes.
          *
+         * <p>
+         * 基于提供的一组属性创建新的属性集。
+         * 
+         * 
          * @param attrs the set of attributes
          */
         public SmallConversionSet(AttributeSet attrs) {
@@ -837,6 +990,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Checks whether a given attribute is defined.
          *
+         * <p>
+         *  检查是否定义了给定属性。
+         * 
+         * 
          * @param key the attribute key
          * @return true if the attribute is defined
          * @see AttributeSet#isDefined
@@ -855,6 +1012,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Gets the value of an attribute.
          *
+         * <p>
+         *  获取属性的值。
+         * 
+         * 
          * @param key the attribute name
          * @return the attribute value
          * @see AttributeSet#getAttribute
@@ -879,6 +1040,9 @@ public class StyleSheet extends StyleContext {
 
     /**
      * Fetches the font to use for the given set of attributes.
+     * <p>
+     *  获取用于给定属性集的字体。
+     * 
      */
     public Font getFont(AttributeSet a) {
         return css.getFont(this, a, 12, this);
@@ -889,6 +1053,10 @@ public class StyleSheet extends StyleContext {
      * specification.  This might be used to specify things
      * like brighter, more hue, etc.
      *
+     * <p>
+     *  获取一组属性并将其转换为前景颜色规范。这可能用于指定更亮,更多的色调等。
+     * 
+     * 
      * @param a the set of attributes
      * @return the color
      */
@@ -905,6 +1073,10 @@ public class StyleSheet extends StyleContext {
      * specification.  This might be used to specify things
      * like brighter, more hue, etc.
      *
+     * <p>
+     *  获取一组属性并将其转换为背景颜色规范。这可能用于指定更亮,更多的色调等。
+     * 
+     * 
      * @param a the set of attributes
      * @return the color
      */
@@ -915,6 +1087,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Fetches the box formatter to use for the given set
      * of CSS attributes.
+     * <p>
+     *  获取用于给定的CSS属性集的框格式化程序。
+     * 
      */
     public BoxPainter getBoxPainter(AttributeSet a) {
         return new BoxPainter(a, css, this);
@@ -923,6 +1098,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Fetches the list formatter to use for the given set
      * of CSS attributes.
+     * <p>
+     *  获取用于给定的CSS属性集的列表格式化程序。
+     * 
      */
     public ListPainter getListPainter(AttributeSet a) {
         return new ListPainter(a, this);
@@ -930,6 +1108,9 @@ public class StyleSheet extends StyleContext {
 
     /**
      * Sets the base font size, with valid values between 1 and 7.
+     * <p>
+     *  设置基本字体大小,有效值介于1和7之间。
+     * 
      */
     public void setBaseFontSize(int sz) {
         css.setBaseFontSize(sz);
@@ -939,6 +1120,9 @@ public class StyleSheet extends StyleContext {
      * Sets the base font size from the passed in String. The string
      * can either identify a specific font size, with legal values between
      * 1 and 7, or identify a relative font size such as +1 or -2.
+     * <p>
+     *  从传入的String中设置基本字体大小。字符串可以标识特定字体大小,合法值介于1和7之间,或标识相对字体大小,例如+1或-2。
+     * 
      */
     public void setBaseFontSize(String size) {
         css.setBaseFontSize(size);
@@ -950,6 +1134,9 @@ public class StyleSheet extends StyleContext {
 
     /**
      * Returns the point size, given a size index.
+     * <p>
+     *  给定一个大小索引,返回点大小。
+     * 
      */
     public float getPointSize(int index) {
         return css.getPointSize(index, this);
@@ -958,6 +1145,9 @@ public class StyleSheet extends StyleContext {
     /**
      *  Given a string such as "+2", "-2", or "2",
      *  returns a point size value.
+     * <p>
+     *  给定诸如"+2","-2"或"2"的字符串,返回点大小值。
+     * 
      */
     public float getPointSize(String size) {
         return css.getPointSize(size, this);
@@ -968,6 +1158,9 @@ public class StyleSheet extends StyleContext {
      * Note: This will only convert the HTML3.2 color strings
      *       or a string of length 7;
      *       otherwise, it will return null.
+     * <p>
+     *  将颜色字符串(如"RED"或"#NNNNNN")转换为颜色。注意：这只会转换HTML3.2颜色字符串或长度为7的字符串;否则,它将返回null。
+     * 
      */
     public Color stringToColor(String string) {
         return CSS.stringToColor(string);
@@ -976,6 +1169,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Returns the ImageIcon to draw in the background for
      * <code>attr</code>.
+     * <p>
+     *  返回ImageIcon以在<code> attr </code>的后台中绘制。
+     * 
      */
     ImageIcon getBackgroundImage(AttributeSet attr) {
         Object value = attr.getAttribute(CSS.Attribute.BACKGROUND_IMAGE);
@@ -989,6 +1185,10 @@ public class StyleSheet extends StyleContext {
     /**
      * Adds a rule into the StyleSheet.
      *
+     * <p>
+     *  在StyleSheet中添加一个规则。
+     * 
+     * 
      * @param selector the selector to use for the rule.
      *  This will be a set of simple selectors, and must
      *  be a length of 1 or greater.
@@ -1042,6 +1242,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Updates the attributes of the rules to reference any related
      * rules in <code>ss</code>.
+     * <p>
+     *  更新规则的属性以引用<code> ss </code>中的任何相关规则。
+     * 
      */
     private synchronized void linkStyleSheetAt(StyleSheet ss, int index) {
         if (resolvedStyles.size() > 0) {
@@ -1058,6 +1261,9 @@ public class StyleSheet extends StyleContext {
      * Removes references to the rules in <code>ss</code>.
      * <code>index</code> gives the index the StyleSheet was at, that is
      * how many StyleSheets had been added before it.
+     * <p>
+     * 删除对<code> ss </code>中的规则的引用。 <code> index </code>给出StyleSheet所在的索引,即在它之前添加了多少StyleSheets。
+     * 
      */
     private synchronized void unlinkStyleSheet(StyleSheet ss, int index) {
         if (resolvedStyles.size() > 0) {
@@ -1071,6 +1277,9 @@ public class StyleSheet extends StyleContext {
 
     /**
      * Returns the simple selectors that comprise selector.
+     * <p>
+     *  返回包含selector的简单选择器。
+     * 
      */
     /* protected */
     String[] getSimpleSelectors(String selector) {
@@ -1104,6 +1313,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Returns a string that only has one space between simple selectors,
      * which may be the passed in String.
+     * <p>
+     *  返回在简单选择器之间只有一个空格的字符串,这可能是在String中传递的。
+     * 
      */
     /*protected*/ String cleanSelectorString(String selector) {
         boolean lastWasSpace = true;
@@ -1134,6 +1346,12 @@ public class StyleSheet extends StyleContext {
     /**
      * Returns a new String that contains only one space between non
      * white space characters.
+     * <p>
+     *  boolean lastWasSpace = true; for(int counter = 0,maxCounter = selector.length(); counter <maxCounter; counter ++){switch(selector.charAt(counter)){case''：if(lastWasSpace){return _cleanSelectorString(selector); } lastWasSpace = true;打破; case'\ n'：case'\ r'：case'\ t'：return _cleanSelectorString(selector); default：lastWasSpace = false; }} if(lastWasSpace){return _cleanSelectorString(selector); } //很好。
+     * 返回选择器; }}。
+     * 
+     *  / **返回一个新的字符串,它在非空格字符之间只包含一个空格。
+     * 
      */
     private String _cleanSelectorString(String selector) {
         SearchBuffer sb = SearchBuffer.obtainSearchBuffer();
@@ -1192,6 +1410,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Returns the root selector mapping that all selectors are relative
      * to. This is an inverted graph of the selectors.
+     * <p>
+     *  返回所有选择器相对的根选择器映射。这是选择器的反转图。
+     * 
      */
     private SelectorMapping getRootSelectorMapping() {
         return selectorMapping;
@@ -1203,6 +1424,10 @@ public class StyleSheet extends StyleContext {
      * separated by a space and each selector at most contains one . or one
      * #. A simple selector has a weight of 1, an id selector has a weight
      * of 100, and a class selector has a weight of 10000.
+     * <p>
+     *  返回在String中传递的特殊性。它假定传入的字符串不包含垃圾,即每个选择器由一个空格分隔,每个选择器最多包含一个。或一个#。
+     * 简单选择器具有1的权重,id选择器具有100的权重,并且类选择器具有10000的权重。
+     * 
      */
     /*protected*/ static int getSpecificity(String selector) {
         int specificity = 0;
@@ -1233,6 +1458,13 @@ public class StyleSheet extends StyleContext {
     /**
      * Returns the style that linked attributes should be added to. This
      * will create the style if necessary.
+     * <p>
+     *  int specificity = 0; boolean lastWasSpace = true;
+     * 
+     * for(int counter = 0,maxCounter = selector.length(); counter <maxCounter; counter ++){switch(selector.charAt(counter)){case''：specificity + = 100;打破; case'#'：specificity + = 10000;打破; case''：lastWasSpace = true;打破;默认值：if(lastWasSpace){lastWasSpace = false;特异性+ = 1; }}} return specificity; }}。
+     * 
+     *  / **返回链接属性应添加到的样式。如果需要,这将创建样式。
+     * 
      */
     private Style getLinkedStyle(Style localStyle) {
         // NOTE: This is not synchronized, and the caller of this does
@@ -1252,6 +1484,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Returns the resolved style for <code>selector</code>. This will
      * create the resolved style, if necessary.
+     * <p>
+     *  返回<code> selector </code>的解析样式。如果需要,这将创建已解决的样式。
+     * 
      */
     private synchronized Style getResolvedStyle(String selector,
                                                 Vector elements,
@@ -1266,6 +1501,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Returns the resolved style for <code>selector</code>. This will
      * create the resolved style, if necessary.
+     * <p>
+     *  返回<code> selector </code>的解析样式。如果需要,这将创建已解决的样式。
+     * 
      */
     private synchronized Style getResolvedStyle(String selector) {
         Style retStyle = resolvedStyles.get(selector);
@@ -1279,6 +1517,9 @@ public class StyleSheet extends StyleContext {
      * Adds <code>mapping</code> to <code>elements</code>. It is added
      * such that <code>elements</code> will remain ordered by
      * specificity.
+     * <p>
+     *  将<code>映射</code>添加到<code>元素</code>。添加它使得<code>元素</code>将通过特异性保持有序。
+     * 
      */
     private void addSortedStyle(SelectorMapping mapping, Vector<SelectorMapping> elements) {
         int       size = elements.size();
@@ -1300,6 +1541,10 @@ public class StyleSheet extends StyleContext {
      * Adds <code>parentMapping</code> to <code>styles</code>, and
      * recursively calls this method if <code>parentMapping</code> has
      * any child mappings for any of the Elements in <code>elements</code>.
+     * <p>
+     *  将<code> parentMapping </code>添加到<code> styles </code>,如果<code> parentMapping </code>对<code>元素</code>
+     * 中的任何元素有任何子映射,则递归调用此方法>。
+     * 
      */
     private synchronized void getStyles(SelectorMapping parentMapping,
                            Vector<SelectorMapping> styles,
@@ -1361,6 +1606,9 @@ public class StyleSheet extends StyleContext {
     /**
      * Creates and returns a Style containing all the rules that match
      *  <code>selector</code>.
+     * <p>
+     *  创建并返回包含匹配<code> selector </code>的所有规则的样式。
+     * 
      */
     private synchronized Style createResolvedStyle(String selector,
                                       String[] tags,
@@ -1443,6 +1691,10 @@ public class StyleSheet extends StyleContext {
      * Creates and returns a Style containing all the rules that
      * matches <code>selector</code>.
      *
+     * <p>
+     *  创建并返回包含匹配<code> selector </code>的所有规则的样式。
+     * 
+     * 
      * @param elements  a Vector of all the Elements
      *                  the style is being asked for. The
      *                  first Element is the deepest Element, with the last Element
@@ -1507,6 +1759,9 @@ public class StyleSheet extends StyleContext {
      * Creates and returns a Style containing all the rules that match
      *  <code>selector</code>. It is assumed that each simple selector
      * in <code>selector</code> is separated by a space.
+     * <p>
+     *  创建并返回包含匹配<code> selector </code>的所有规则的样式。假设<code> selector </code>中的每个简单选择器由一个空格分隔。
+     * 
      */
     private Style createResolvedStyle(String selector) {
         SearchBuffer sb = SearchBuffer.obtainSearchBuffer();
@@ -1652,6 +1907,9 @@ public class StyleSheet extends StyleContext {
      * Should be invoked when a new rule is added that did not previously
      * exist. Goes through and refreshes the necessary resolved
      * rules.
+     * <p>
+     *  添加新规则以前不存在时应调用。浏览和刷新必要的解决规则。
+     * 
      */
     private synchronized void refreshResolvedRules(String selectorName,
                                                    String[] selector,
@@ -1675,9 +1933,15 @@ public class StyleSheet extends StyleContext {
      * searching for rules. Use the static method obtainSearchBuffer and
      * releaseSearchBuffer to get a SearchBuffer, and release it when
      * done.
+     * <p>
+     * 一个临时类,用于保存一个Vector,一个StringBuffer和一个Hashtable。这用于避免在搜索规则时分配大量垃圾。
+     * 使用静态方法getsSearchBuffer和releaseSearchBuffer来获取SearchBuffer,并在完成后释放它。
+     * 
      */
     private static class SearchBuffer {
         /** A stack containing instances of SearchBuffer. Used in getting
+        /* <p>
+        /* 
          * rules. */
         static Stack<SearchBuffer> searchBuffers = new Stack<SearchBuffer>();
         // A set of temporary variables that can be used in whatever way.
@@ -1688,6 +1952,9 @@ public class StyleSheet extends StyleContext {
         /**
          * Returns an instance of SearchBuffer. Be sure and issue
          * a releaseSearchBuffer when done with it.
+         * <p>
+         *  返回SearchBuffer的实例。确保并发布releaseSearchBuffer完成它。
+         * 
          */
         static SearchBuffer obtainSearchBuffer() {
             SearchBuffer sb;
@@ -1706,6 +1973,9 @@ public class StyleSheet extends StyleContext {
         /**
          * Adds <code>sb</code> to the stack of SearchBuffers that can
          * be used.
+         * <p>
+         *  将<code> sb </code>添加到可以使用的SearchBuffers堆栈。
+         * 
          */
         static void releaseSearchBuffer(SearchBuffer sb) {
             sb.empty();
@@ -1759,6 +2029,11 @@ public class StyleSheet extends StyleContext {
      * As a delegate of Views, this object is responsible for
      * the insets of a View and making sure the background
      * is maintained according to the CSS attributes.
+     * <p>
+     *  类执行CSS格式化的一些职责。此类的实现使视图能够呈现CSS格式,同时不知道如何缓存CSS值。
+     * <p>
+     *  作为视图的委托,此对象负责视图的插入,并确保根据CSS属性维护背景。
+     * 
      */
     public static class BoxPainter implements Serializable {
 
@@ -1781,6 +2056,9 @@ public class StyleSheet extends StyleContext {
          * Fetches a border to render for the given attributes.
          * PENDING(prinz) This is pretty badly hacked at the
          * moment.
+         * <p>
+         *  获取为给定属性呈现的边框。 PENDING(prinz)这是非常严重的黑客入侵。
+         * 
          */
         Border getBorder(AttributeSet a) {
             return new CSSBorder(a);
@@ -1791,6 +2069,9 @@ public class StyleSheet extends StyleContext {
          * the value specified by the border-color attribute (which
          * is not inherited), or it will default to the color attribute
          * (which is inherited).
+         * <p>
+         *  获取用于边框的颜色。这将是由border-color属性(不继承)指定的值,或者它将默认为color属性(它是继承的)。
+         * 
          */
         Color getBorderColor(AttributeSet a) {
             Color color = css.getColor(a, CSS.Attribute.BORDER_COLOR);
@@ -1807,6 +2088,10 @@ public class StyleSheet extends StyleContext {
          * Fetches the inset needed on a given side to
          * account for the margin, border, and padding.
          *
+         * <p>
+         *  获取给定边上所需的插入,以考虑边距,边框和填充。
+         * 
+         * 
          * @param side The size of the box to fetch the
          *  inset for.  This can be View.TOP,
          *  View.LEFT, View.BOTTOM, or View.RIGHT.
@@ -1852,6 +2137,10 @@ public class StyleSheet extends StyleContext {
          * given.  This should paint the border, padding,
          * and background.
          *
+         * <p>
+         *  根据给定的属性绘制CSS框。这应该绘制边框,填充和背景。
+         * 
+         * 
          * @param g the rendering surface.
          * @param x the x coordinate of the allocated area to
          *  render into.
@@ -1932,6 +2221,9 @@ public class StyleSheet extends StyleContext {
          * <dir>, <menu>, <ul>, <ol>
          * for all others we return true. It is implemented this way
          * for performance purposes
+         * <p>
+         *  只有某些标签关心的方向<dir>,<menu>,<ul>,<ol>对于所有其他我们返回true。这是为了性能目的实现
+         * 
          */
         static boolean isOrientationAware(View v) {
             boolean ret = false;
@@ -1959,6 +2251,11 @@ public class StyleSheet extends StyleContext {
          * margin-(left|right)-(ltr|rtl) were introduced to describe it
          * if margin-(left|right) is present we are to use it.
          *
+         * <p>
+         * 对于<dir>,<menu>,<ul>等边距是从左到右/从右到左依赖。
+         * 见5088268更多细节margin-(左|右) - (ltr | rtl)被介绍来描述如果margin-(left | right)存在,我们将使用它。
+         * 
+         * 
          * @param side The horizontal side to fetch margin for
          *  This can be HorizontalMargin.LEFT or HorizontalMargin.RIGHT
          * @param cssMargin margin from css
@@ -2018,6 +2315,9 @@ public class StyleSheet extends StyleContext {
      * class enable views to present the CSS formatting
      * while not knowing anything about how the CSS values
      * are being cached.
+     * <p>
+     *  类执行CSS列表格式化的一些职责。此类的实现使视图能够呈现CSS格式,同时不知道如何缓存CSS值。
+     * 
      */
     public static class ListPainter implements Serializable {
 
@@ -2069,6 +2369,9 @@ public class StyleSheet extends StyleContext {
          * then the type defaults to "disc" unless
          * the tag is on Ordered list.  In the case
          * of the latter, the default type is "decimal".
+         * <p>
+         *  返回表示HTML.Attribute.TYPE属性值的字符串。如果未定义此属性,则类型默认为"disc",除非标记位于有序列表中。在后者的情况下,默认类型是"十进制"。
+         * 
          */
         private CSS.Value getChildType(View childView) {
             CSS.Value childtype = (CSS.Value)childView.getAttributes().
@@ -2094,6 +2397,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Obtains the starting index from <code>parent</code>.
+         * <p>
+         *  从<code> parent </code>获取起始索引。
+         * 
          */
         private void getStart(View parent) {
             checkedForStart = true;
@@ -2120,6 +2426,12 @@ public class StyleSheet extends StyleContext {
          * <code>childIndex</code> + 1, unless <code>parentView</code>
          * has some Views that do not represent LI's, or one of the views
          * has a HTML.Attribute.START specified.
+         * <p>
+         *  返回在<code> childIndex </code>中用于渲染子元素的整数。
+         *  retValue通常为<code> childIndex </code> + 1,除非<code> parentView </code>有一些视图不代表LI,或其中一个视图指定了HTML.Attrib
+         * ute.START。
+         *  返回在<code> childIndex </code>中用于渲染子元素的整数。
+         * 
          */
         private int getRenderIndex(View parentView, int childIndex) {
             if (!checkedForStart) {
@@ -2151,6 +2463,10 @@ public class StyleSheet extends StyleContext {
          * Paints the CSS list decoration according to the
          * attributes given.
          *
+         * <p>
+         *  根据给定的属性绘制CSS列表装饰。
+         * 
+         * 
          * @param g the rendering surface.
          * @param x the x coordinate of the list item allocation
          * @param y the y coordinate of the list item allocation
@@ -2244,6 +2560,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Draws the bullet icon specified by the list-style-image argument.
          *
+         * <p>
+         *  绘制由list-style-image参数指定的项目符号图标。
+         * 
+         * 
          * @param g     the graphics context
          * @param ax    x coordinate to place the bullet
          * @param ay    y coordinate to place the bullet
@@ -2265,6 +2585,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Draws the graphical bullet item specified by the type argument.
          *
+         * <p>
+         *  绘制由type参数指定的图形项目符号项。
+         * 
+         * 
          * @param g     the graphics context
          * @param type  type of bullet to draw (circle, square, disc)
          * @param ax    x coordinate to place the bullet
@@ -2292,6 +2616,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Draws the letter or number for an ordered list.
          *
+         * <p>
+         *  绘制有序列表的字母或数字。
+         * 
+         * 
          * @param g     the graphics context
          * @param letter type of ordered list to draw
          * @param ax    x coordinate to place the bullet
@@ -2317,6 +2645,10 @@ public class StyleSheet extends StyleContext {
          * Converts the item number into the ordered list number
          * (i.e.  1 2 3, i ii iii, a b c, etc.
          *
+         * <p>
+         *  将项目号转换成有序列表号(即1 2 3,i ii iii,a b c等
+         * 
+         * 
          * @param itemNum number to format
          * @param type    type of ordered list
          */
@@ -2357,6 +2689,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Converts the item number into an alphabetic character
          *
+         * <p>
+         *  将项目编号转换为字母字符
+         * 
+         * 
          * @param itemNum number to format
          */
         String formatAlphaNumerals(int itemNum) {
@@ -2384,6 +2720,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Converts the item number into a roman numeral
          *
+         * <p>
+         *  将项目编号转换为罗马数字
+         * 
+         * 
          * @param num  number to format
          */
         String formatRomanNumerals(int num) {
@@ -2393,6 +2733,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Converts the item number into a roman numeral
          *
+         * <p>
+         * 将项目编号转换为罗马数字
+         * 
+         * 
          * @param num  number to format
          */
         String formatRomanNumerals(int level, int num) {
@@ -2408,6 +2752,10 @@ public class StyleSheet extends StyleContext {
         /**
          * Converts the item number into a roman numeral
          *
+         * <p>
+         *  将项目编号转换为罗马数字
+         * 
+         * 
          * @param level position
          * @param digit digit to format
          */
@@ -2447,6 +2795,9 @@ public class StyleSheet extends StyleContext {
 
     /**
      * Paints the background image.
+     * <p>
+     *  绘制背景图像。
+     * 
      */
     static class BackgroundImagePainter implements Serializable {
         ImageIcon   backgroundImage;
@@ -2614,6 +2965,9 @@ public class StyleSheet extends StyleContext {
      * A subclass of MuxingAttributeSet that translates between
      * CSS and HTML and StyleConstants. The AttributeSets used are
      * the CSS rules that match the Views Elements.
+     * <p>
+     *  MuxingAttributeSet的子类,在CSS和HTML和StyleConstants之间转换。使用的AttributeSets是与视图元素匹配的CSS规则。
+     * 
      */
     class ViewAttributeSet extends MuxingAttributeSet {
         ViewAttributeSet(View v) {
@@ -2653,6 +3007,11 @@ public class StyleSheet extends StyleContext {
                                    it will be possible to specificity this
                                    kind of conditional behaviour in the
                                    stylesheet.
+                                /* <p>
+                                /*  在A标记的情况下,css规则仅适用于定义了href属性的标记,而不适用于仅定义其名称属性的锚点(即用作目标的锚点)。因此,我们不添加后一种锚的属性。
+                                /* 当添加CSS2支持时,可以在样式表中指定这种条件行为。
+                                /* 
+                                /* 
                                  **/
                                     if (o != null && o instanceof AttributeSet) {
                                         AttributeSet attr = (AttributeSet)o;
@@ -2693,6 +3052,10 @@ public class StyleSheet extends StyleContext {
          * key is a StyleConstants key that has a CSS
          * mapping.
          *
+         * <p>
+         *  检查是否定义了给定属性。如果键是具有CSS映射的StyleConstants键,这将把键转换为CSS。
+         * 
+         * 
          * @param key the attribute key
          * @return true if the attribute is defined
          * @see AttributeSet#isDefined
@@ -2713,6 +3076,10 @@ public class StyleSheet extends StyleContext {
          * attribute is a StyleConstants attribute that has
          * a CSS mapping, the request will be converted.
          *
+         * <p>
+         *  获取属性的值。如果请求的属性是具有CSS映射的StyleConstants属性,请求将被转换。
+         * 
+         * 
          * @param key the attribute name
          * @return the attribute value
          * @see AttributeSet#getAttribute
@@ -2754,6 +3121,10 @@ public class StyleSheet extends StyleContext {
          * If not overriden, the resolving parent defaults to
          * the parent element.
          *
+         * <p>
+         *  如果不覆盖,则解析父代方默认为父元素。
+         * 
+         * 
          * @return the attributes from the parent
          * @see AttributeSet#getResolveParent
          */
@@ -2774,6 +3145,9 @@ public class StyleSheet extends StyleContext {
      * A subclass of MuxingAttributeSet that implements Style. Currently
      * the MutableAttributeSet methods are unimplemented, that is they
      * do nothing.
+     * <p>
+     *  实现Style的MuxingAttributeSet的子类。当前的MutableAttributeSet方法是未实现的,那就是它们什么都不做。
+     * 
      */
     // PENDING(sky): Decide what to do with this. Either make it
     // contain a SimpleAttributeSet that modify methods are delegated to,
@@ -2792,6 +3166,9 @@ public class StyleSheet extends StyleContext {
          * receiver represents are still ordered by specificity.
          * <code>style</code> will be added before any extended styles, that
          * is before extendedIndex.
+         * <p>
+         *  在接收器中插入样式,以便接收器表示的样式仍然按照特异性排序。 <code> style </code>将在任何扩展样式之前添加,即在extendedIndex之前。
+         * 
          */
         synchronized void insertStyle(Style style, int specificity) {
             AttributeSet[] attrs = getAttributes();
@@ -2810,6 +3187,9 @@ public class StyleSheet extends StyleContext {
         /**
          * Removes a previously added style. This will do nothing if
          * <code>style</code> is not referenced by the receiver.
+         * <p>
+         * 删除先前添加的样式。如果<code> style </code>没有被接收器引用,这将不会执行任何操作。
+         * 
          */
         synchronized void removeStyle(Style style) {
             AttributeSet[] attrs = getAttributes();
@@ -2828,6 +3208,9 @@ public class StyleSheet extends StyleContext {
         /**
          * Adds <code>s</code> as one of the Attributesets to look up
          * attributes in.
+         * <p>
+         *  添加<code> s </code>作为查找属性的属性集之一。
+         * 
          */
         synchronized void insertExtendedStyleAt(Style attr, int index) {
             insertAttributeSetAt(attr, extendedIndex + index);
@@ -2836,6 +3219,9 @@ public class StyleSheet extends StyleContext {
         /**
          * Adds <code>s</code> as one of the AttributeSets to look up
          * attributes in. It will be the AttributeSet last checked.
+         * <p>
+         *  添加<code> s </code>作为AttributeSet之一来查找属性。它将是上次检查的AttributeSet。
+         * 
          */
         synchronized void addExtendedStyle(Style attr) {
             insertAttributeSetAt(attr, getAttributes().length);
@@ -2844,6 +3230,9 @@ public class StyleSheet extends StyleContext {
         /**
          * Removes the style at <code>index</code> +
          * <code>extendedIndex</code>.
+         * <p>
+         *  删除<code> index </code> + <code> extendedIndex </code>中的样式。
+         * 
          */
         synchronized void removeExtendedStyleAt(int index) {
             removeAttributeSetAt(extendedIndex + index);
@@ -2853,6 +3242,9 @@ public class StyleSheet extends StyleContext {
          * Returns true if the receiver matches <code>selector</code>, where
          * a match is defined by the CSS rule matching.
          * Each simple selector must be separated by a single space.
+         * <p>
+         *  如果接收器匹配<code> selector </code>,则返回true,其中匹配由CSS规则匹配定义。每个简单选择器必须由单个空格分隔。
+         * 
          */
         protected boolean matches(String selector) {
             int sLast = selector.length();
@@ -2899,6 +3291,9 @@ public class StyleSheet extends StyleContext {
          * Returns true if the substring of the receiver, in the range
          * thisCurrent, thisLast matches the substring of selector in
          * the ranme sCurrent to sLast based on CSS selector matching.
+         * <p>
+         *  如果接收器的子串,在thisCurrent范围内,thisLast匹配选择器在ranme sCurrent中的子字符串sLast基于CSS选择器匹配返回true。
+         * 
          */
         boolean matches(String selector, int sCurrent, int sLast,
                        int thisCurrent, int thisLast) {
@@ -2980,6 +3375,9 @@ public class StyleSheet extends StyleContext {
          * Similar to String.indexOf, but allows an upper bound
          * (this is slower in that it will still check string starting at
          * start.
+         * <p>
+         *  类似于String.indexOf,但允许上限(这是慢的,因为它仍然检查字符串开始从开始。
+         * 
          */
         int boundedIndexOf(String string, char search, int start,
                            int end) {
@@ -3005,6 +3403,9 @@ public class StyleSheet extends StyleContext {
 
         /** The name of the Style, which is the selector.
          * This will NEVER change!
+         * <p>
+         *  这将永远不会改变！
+         * 
          */
         String name;
         /** Start index of styles coming from other StyleSheets. */
@@ -3019,6 +3420,11 @@ public class StyleSheet extends StyleContext {
      * <p>
      * This is not thread safe, it is assumed the caller will take the
      * necessary precations if this is to be used in a threaded environment.
+     * <p>
+     *  SelectorMapping包含一个作为整数的规范和一个关联的样式。它还可以引用children <code> SelectorMapping </code>,以便它的行为像树。
+     * <p>
+     *  这不是线程安全的,假定调用者将采取必要的预测,如果这是要在线程环境中使用。
+     * 
      */
     static class SelectorMapping implements Serializable {
         public SelectorMapping(int specificity) {
@@ -3027,6 +3433,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Returns the specificity this mapping represents.
+         * <p>
+         *  返回此映射表示的特异性。
+         * 
          */
         public int getSpecificity() {
             return specificity;
@@ -3034,6 +3443,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Sets the Style associated with this mapping.
+         * <p>
+         *  设置与此映射关联的样式。
+         * 
          */
         public void setStyle(Style style) {
             this.style = style;
@@ -3041,6 +3453,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Returns the Style associated with this mapping.
+         * <p>
+         *  返回与此映射关联的样式。
+         * 
          */
         public Style getStyle() {
             return style;
@@ -3051,6 +3466,10 @@ public class StyleSheet extends StyleContext {
          * <code>selector</code>. If a child mapping does not exist for
          *<code>selector</code>, and <code>create</code> is true, a new
          * one will be created.
+         * <p>
+         * 返回由简单选择器<code> selector </code>标识的子映射。
+         * 如果代码> selector </code>不存在子映射,并且<code> create </code>为true,则将创建一个新映射。
+         * 
          */
         public SelectorMapping getChildSelectorMapping(String selector,
                                                        boolean create) {
@@ -3074,6 +3493,9 @@ public class StyleSheet extends StyleContext {
         /**
          * Creates a child <code>SelectorMapping</code> with the specified
          * <code>specificity</code>.
+         * <p>
+         *  创建具有指定的<code>特殊性</code>的<code> SelectorMapping </code>子元素。
+         * 
          */
         protected SelectorMapping createChildSelectorMapping(int specificity) {
             return new SelectorMapping(specificity);
@@ -3082,6 +3504,9 @@ public class StyleSheet extends StyleContext {
         /**
          * Returns the specificity for the child selector
          * <code>selector</code>.
+         * <p>
+         *  返回子选择器<code> selector </code>的特殊性。
+         * 
          */
         protected int getChildSpecificity(String selector) {
             // class (.) 100
@@ -3109,15 +3534,24 @@ public class StyleSheet extends StyleContext {
 
         /**
          * The specificity for this selector.
+         * <p>
+         *  此选择器的特殊性。
+         * 
          */
         private int specificity;
         /**
          * Style for this selector.
+         * <p>
+         *  此选择器的样式。
+         * 
          */
         private Style style;
         /**
          * Any sub selectors. Key will be String, and value will be
          * another SelectorMapping.
+         * <p>
+         *  任何子选择器。键将是String,值将是另一个SelectorMapping。
+         * 
          */
         private HashMap<String, SelectorMapping> children;
     }
@@ -3131,14 +3565,20 @@ public class StyleSheet extends StyleContext {
 
     /**
      * An inverted graph of the selectors.
+     * <p>
+     *  选择器的反向图。
+     * 
      */
     private SelectorMapping selectorMapping;
 
     /** Maps from selector (as a string) to Style that includes all
+    /* <p>
+    /* 
      * relevant styles. */
     private Hashtable<String, ResolvedStyle> resolvedStyles;
 
     /** Vector of StyleSheets that the rules are to reference.
+    /* <p>
      */
     private Vector<StyleSheet> linkedStyleSheets;
 
@@ -3151,11 +3591,17 @@ public class StyleSheet extends StyleContext {
      * the StyleSheet.<p>
      * This class is NOT thread safe, do not ask it to parse while it is
      * in the middle of parsing.
+     * <p>
+     *  默认解析器为CSS规范被加载到StyleSheet。<p>这个类不是线程安全的,不要求它解析,而它正在解析。
+     * 
      */
     class CssParser implements CSSParser.CSSParserCallback {
 
         /**
          * Parses the passed in CSS declaration into an AttributeSet.
+         * <p>
+         *  将在CSS声明中传递的值解析为AttributeSet。
+         * 
          */
         public AttributeSet parseDeclaration(String string) {
             try {
@@ -3166,6 +3612,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Parses the passed in CSS declaration into an AttributeSet.
+         * <p>
+         *  将在CSS声明中传递的值解析为AttributeSet。
+         * 
          */
         public AttributeSet parseDeclaration(Reader r) throws IOException {
             parse(base, r, true, false);
@@ -3174,6 +3623,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Parse the given CSS stream
+         * <p>
+         *  解析给定的CSS流
+         * 
          */
         public void parse(URL base, Reader r, boolean parseDeclaration,
                           boolean isLink) throws IOException {
@@ -3196,6 +3648,10 @@ public class StyleSheet extends StyleContext {
          * <code>importStyleSheet</code> if a
          * <code>MalformedURLException</code> is not thrown in creating
          * the URL.
+         * <p>
+         *  在遇到有效的@import时调用,如果在创建URL时未引发<code> MalformedURLException </code>,则将调用<code> importStyleSheet </code>
+         * 。
+         * 
          */
         public void handleImport(String importString) {
             URL url = CSS.getURL(base, importString);
@@ -3206,6 +3662,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * A selector has been encountered.
+         * <p>
+         *  遇到选择器。
+         * 
          */
         public void handleSelector(String selector) {
             //class and index selectors are case sensitive
@@ -3229,6 +3688,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Invoked when the start of a rule is encountered.
+         * <p>
+         *  在遇到规则的开始时调用。
+         * 
          */
         public void startRule() {
             if (selectorTokens.size() > 0) {
@@ -3239,6 +3701,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Invoked when a property name is encountered.
+         * <p>
+         *  在遇到属性名称时调用。
+         * 
          */
         public void handleProperty(String property) {
             propertyName = property;
@@ -3246,6 +3711,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Invoked when a property value is encountered.
+         * <p>
+         *  在遇到属性值时调用。
+         * 
          */
         public void handleValue(String value) {
             if (propertyName != null && value != null && value.length() > 0) {
@@ -3273,6 +3741,9 @@ public class StyleSheet extends StyleContext {
 
         /**
          * Invoked when the end of a rule is encountered.
+         * <p>
+         *  在遇到规则的结尾时调用。
+         * 
          */
         public void endRule() {
             int n = selectors.size();
@@ -3300,6 +3771,8 @@ public class StyleSheet extends StyleContext {
         String propertyName;
         MutableAttributeSet declaration = new SimpleAttributeSet();
         /** True if parsing a declaration, that is the Reader will not
+        /* <p>
+        /* 
          * contain a selector. */
         boolean parsingDeclaration;
         /** True if the attributes are coming from a linked/imported style. */
@@ -3330,6 +3803,8 @@ public class StyleSheet extends StyleContext {
     /**
      * The HTML/CSS size model has seven slots
      * that one can assign sizes to.
+     * <p>
+     *  HTML / CSS大小模型有七个插槽,可以分配大小。
      */
     static final int sizeMapDefault[] = { 8, 10, 12, 14, 18, 24, 36 };
 

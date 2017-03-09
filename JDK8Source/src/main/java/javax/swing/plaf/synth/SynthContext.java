@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,11 @@ import javax.swing.JComponent;
  * a <code>SynthContext</code> that is passed to you and expect it to
  * remain valid.
  *
+ * <p>
+ *  包含有关<code> Region </code>的上下文信息的不可变瞬态对象。一个<code> SynthContext </code>应该被认为在传递的方法的有效期内是有效的。
+ * 换句话说,你不应该缓存传递给你的<code> SynthContext </code>,并期望它保持有效。
+ * 
+ * 
  * @since 1.5
  * @author Scott Violet
  */
@@ -74,6 +80,10 @@ public class SynthContext {
      * for subclasses and custom UI implementors. You very rarely need to
      * construct a SynthContext, though some methods will take one.
      *
+     * <p>
+     *  创建具有指定值的SynthContext。这是为子类和自定义UI实现。你很少需要构造一个SynthContext,虽然一些方法将需要一个。
+     * 
+     * 
      * @param component JComponent
      * @param region Identifies the portion of the JComponent
      * @param style Style associated with the component
@@ -93,6 +103,10 @@ public class SynthContext {
     /**
      * Returns the hosting component containing the region.
      *
+     * <p>
+     *  返回包含区域的主机组件。
+     * 
+     * 
      * @return Hosting Component
      */
     public JComponent getComponent() {
@@ -102,6 +116,10 @@ public class SynthContext {
     /**
      * Returns the Region identifying this state.
      *
+     * <p>
+     *  返回标识此状态的区域。
+     * 
+     * 
      * @return Region of the hosting component
      */
     public Region getRegion() {
@@ -110,6 +128,9 @@ public class SynthContext {
 
     /**
      * A convenience method for <code>getRegion().isSubregion()</code>.
+     * <p>
+     *  <code> getRegion()。isSubregion()</code>的一个方便的方法。
+     * 
      */
     boolean isSubregion() {
         return getRegion().isSubregion();
@@ -122,6 +143,10 @@ public class SynthContext {
     /**
      * Returns the style associated with this Region.
      *
+     * <p>
+     *  返回与此Region相关联的样式。
+     * 
+     * 
      * @return SynthStyle associated with the region.
      */
     public SynthStyle getStyle() {
@@ -139,6 +164,13 @@ public class SynthContext {
      * <code>ENABLED</code>, <code>MOUSE_OVER</code>, <code>PRESSED</code>
      * or <code>DISABLED</code>.
      *
+     * <p>
+     *  返回窗口小部件的状态,它是<code> SynthConstants </code>中定义的值的位掩码。
+     * 区域将至少在<code> ENABLED </code>,<code> MOUSE_OVER </code>,<code> PRESSED </code>或<code> DISABLED </code>
+     * 之一。
+     *  返回窗口小部件的状态,它是<code> SynthConstants </code>中定义的值的位掩码。
+     * 
+     * 
      * @see SynthConstants
      * @return State of Component
      */
@@ -148,6 +180,9 @@ public class SynthContext {
 
     /**
      * Resets the state of the Context.
+     * <p>
+     *  重置上下文的状态。
+     * 
      */
     void reset(JComponent component, Region region, SynthStyle style,
                int state) {
@@ -166,6 +201,8 @@ public class SynthContext {
     /**
      * Convenience method to get the Painter from the current SynthStyle.
      * This will NEVER return null.
+     * <p>
+     *  方便的方法来获取画家从当前的SynthStyle。这将不会返回null。
      */
     SynthPainter getPainter() {
         SynthPainter painter = getStyle().getPainter(this);

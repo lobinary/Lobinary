@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,45 +37,68 @@ import java.util.Arrays;
  * enumerated values common to
  * {@code LinearGradientPaint} and {@code RadialGradientPaint}.
  *
+ * <p>
+ *  这是油漆的超类,它使用多颜色渐变填充它们的栅格。它为{@code LinearGradientPaint}和{@code RadialGradientPaint}常用的变量和枚举值提供存储。
+ * 
+ * 
  * @author Nicholas Talian, Vincent Hardy, Jim Graham, Jerry Evans
  * @since 1.6
  */
 public abstract class MultipleGradientPaint implements Paint {
 
     /** The method to use when painting outside the gradient bounds.
+    /* <p>
+    /* 
      * @since 1.6
      */
     public static enum CycleMethod {
         /**
          * Use the terminal colors to fill the remaining area.
+         * <p>
+         *  使用端子颜色填充剩余区域。
+         * 
          */
         NO_CYCLE,
 
         /**
          * Cycle the gradient colors start-to-end, end-to-start
          * to fill the remaining area.
+         * <p>
+         *  循环渐变颜色的开始到结束,结束到开始填充剩余的区域。
+         * 
          */
         REFLECT,
 
         /**
          * Cycle the gradient colors start-to-end, start-to-end
          * to fill the remaining area.
+         * <p>
+         *  循环渐变颜色的开始到结束,从头到尾填充剩余的区域。
+         * 
          */
         REPEAT
     }
 
     /** The color space in which to perform the gradient interpolation.
+    /* <p>
+    /* 
      * @since 1.6
      */
     public static enum ColorSpaceType {
         /**
          * Indicates that the color interpolation should occur in sRGB space.
+         * <p>
+         *  表示颜色插值应发生在sRGB空间中。
+         * 
          */
         SRGB,
 
         /**
          * Indicates that the color interpolation should occur in linearized
          * RGB space.
+         * <p>
+         *  表示颜色插值应在线性化的RGB空间中进行。
+         * 
          */
         LINEAR_RGB
     }
@@ -101,6 +125,9 @@ public abstract class MultipleGradientPaint implements Paint {
      * The following fields are used only by MultipleGradientPaintContext
      * to cache certain values that remain constant and do not need to be
      * recalculated for each context created from this paint instance.
+     * <p>
+     *  以下字段仅由MultipleGradientPaintContext用于缓存某些值,这些值保持不变,并且不需要为从此绘制实例创建的每个上下文重新计算。
+     * 
      */
     ColorModel model;
     float[] normalizedIntervals;
@@ -112,6 +139,10 @@ public abstract class MultipleGradientPaint implements Paint {
     /**
      * Package-private constructor.
      *
+     * <p>
+     *  包私有构造函数。
+     * 
+     * 
      * @param fractions numbers ranging from 0.0 to 1.0 specifying the
      *                  distribution of colors along the gradient
      * @param colors array of colors corresponding to each fractional value
@@ -245,6 +276,10 @@ public abstract class MultipleGradientPaint implements Paint {
      * The returned array always has 0 as its first value and 1 as its
      * last value, with increasing values in between.
      *
+     * <p>
+     *  返回此渐变用于计算颜色分布的浮点数组的副本。返回的数组总是具有0作为其第一个值,1作为其最后一个值,两者之间的值增加。
+     * 
+     * 
      * @return a copy of the array of floats used by this gradient to
      * calculate color distribution
      */
@@ -257,6 +292,10 @@ public abstract class MultipleGradientPaint implements Paint {
      * The first color maps to the first value in the fractions array,
      * and the last color maps to the last value in the fractions array.
      *
+     * <p>
+     *  返回此渐变使用的颜色数组的副本。第一种颜色映射到fractions数组中的第一个值,最后一个颜色映射到fractions数组中的最后一个值。
+     * 
+     * 
      * @return a copy of the array of colors used by this gradient
      */
     public final Color[] getColors() {
@@ -266,6 +305,10 @@ public abstract class MultipleGradientPaint implements Paint {
     /**
      * Returns the enumerated type which specifies cycling behavior.
      *
+     * <p>
+     *  返回指定循环行为的枚举类型。
+     * 
+     * 
      * @return the enumerated type which specifies cycling behavior
      */
     public final CycleMethod getCycleMethod() {
@@ -276,6 +319,10 @@ public abstract class MultipleGradientPaint implements Paint {
      * Returns the enumerated type which specifies color space for
      * interpolation.
      *
+     * <p>
+     *  返回指定用于插值的颜色空间的枚举类型。
+     * 
+     * 
      * @return the enumerated type which specifies color space for
      * interpolation
      */
@@ -290,6 +337,12 @@ public abstract class MultipleGradientPaint implements Paint {
      * Note that if no transform is applied to the gradient
      * when it is created, the identity transform is used.
      *
+     * <p>
+     * 返回应用于渐变的变换的副本。
+     * 
+     * <p>
+     *  请注意,如果在创建梯度时未对其应用变换,那么将使用标识转换。
+     * 
      * @return a copy of the transform applied to the gradient
      */
     public final AffineTransform getTransform() {
@@ -299,6 +352,9 @@ public abstract class MultipleGradientPaint implements Paint {
     /**
      * Returns the transparency mode for this {@code Paint} object.
      *
+     * <p>
+     * 
+     * 
      * @return {@code OPAQUE} if all colors used by this
      *         {@code Paint} object are opaque,
      *         {@code TRANSLUCENT} if at least one of the

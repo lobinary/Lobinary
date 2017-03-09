@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -104,6 +105,10 @@ public class Util {
      *    X x = cast(y);
      * or, if that doesn't work (e.g. X is a type variable)
      *    Util.<X>cast(y);
+     * <p>
+     *  允许检查cast。而不是使用@SuppressWarnings标记包含代码的整个方法,您可以使用对此方法的调用,以获取您需要转义约束的确切位置。
+     * 通常你将"import static"这个方法,然后写入x x = cast(y);或者,如果这不起作用(例如X是一个类型变量)Util.X cast(y);。
+     * 
      */
     @SuppressWarnings("unchecked")
     public static <T> T cast(Object x) {
@@ -112,6 +117,10 @@ public class Util {
 
     /**
      * Computes a descriptor hashcode from its names and values.
+     * <p>
+     *  从其名称和值计算描述符hashcode。
+     * 
+     * 
      * @param names  the sorted array of descriptor names.
      * @param values the array of descriptor values.
      * @return a hash code value, as described in {@link #hashCode(Descriptor)}
@@ -145,6 +154,11 @@ public class Util {
         {@code wildmatch("sandwich","sa?d*ch",1,4,1,4)} will match
         {@code "and"} against {@code "a?d"}.
 
+        {@code wildmatch("sandwich","sa?d* <p>
+        {@code wildmatch("sandwich","sa?d*  唯一可识别的模式字符是代表任何一个字符的<code>?</code>和代表任何字符串的<code> * </code>,包括空字符串。
+        {@code wildmatch("sandwich","sa?d* 例如,{@code wildmatch("sandwich","sa?d * ch",1,4,1,4)}会将{@code"和"}与{@code"a?d"}匹配。
+        {@code wildmatch("sandwich","sa?d* 
+        {@code wildmatch("sandwich","sa?d* 
         @param str  the string containing the sequence to match.
         @param pat  a string containing a pattern to match the sub string
                     against.
@@ -174,6 +188,13 @@ public class Util {
        We're therefore setting up a match of *C against the remainder
        of the string, which will match if that remainder looks like
        YC, so the whole string looks like AXBYC.
+       We're therefore setting up a match of * <p>
+       We're therefore setting up a match of *  平行通过str和pat。如果我们在帕特遇到一个明星,我们记住它的位置,继续前进。如果在任何阶段我们得到str和pat之间的不匹配,我们看看是否有一个记住的明星。如果不是,我们失败。
+       We're therefore setting up a match of * 如果是这样,我们撤退,直到过去那个明星,并在我们尝试的最后一个之后,我们让比赛再次提出。
+       We're therefore setting up a match of * 
+       We're therefore setting up a match of * 即使只有一个记住的星位置,算法工作时,有几个星星的模式。当我们遇到第二个明星,我们忘记了第一个。这是可以的,因为如果我们到达A * B * C中的第二个星(其中A是任意字符串),我们已经看到了AXB。
+       We're therefore setting up a match of * 因此,我们建立了一个* C与字符串的其余部分匹配,如果该剩余部分看起来像YC,则匹配,所以整个字符串看起来像AXBYC。
+       We're therefore setting up a match of * 
     */
     private static boolean wildmatch(final String str, final String pat,
             int stri, final int strend, int pati, final int patend) {
@@ -187,6 +208,8 @@ public class Util {
 
         /* On each pass through this loop, we either advance pati,
            or we backtrack pati and advance starstri.  Since starstri
+        /* <p>
+        /* 
            is only ever assigned from pati, the loop must terminate.  */
         while (true) {
             if (pati < patend) {
@@ -230,6 +253,10 @@ public class Util {
         character, and <code>*</code>, standing for any string of
         characters, including the empty string.
 
+        character, and <code>* <p>
+        character, and <code>*  或者我们回溯pati和提前starstri。自starstri
+        character, and <code>* 
+        character, and <code>* 
         @param str the string to match.
         @param pat the pattern to match the string against.
 

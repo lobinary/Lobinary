@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,10 @@ import java.util.*;
  * Class to track and run user level shutdown hooks registered through
  * <tt>{@link Runtime#addShutdownHook Runtime.addShutdownHook}</tt>.
  *
+ * <p>
+ *  Class来跟踪和运行通过<tt> {@ link Runtime#addShutdownHook Runtime.addShutdownHook} </tt>注册的用户级关机挂钩。
+ * 
+ * 
  * @see java.lang.Runtime#addShutdownHook
  * @see java.lang.Runtime#removeShutdownHook
  */
@@ -40,6 +45,8 @@ class ApplicationShutdownHooks {
     static {
         try {
             Shutdown.add(1 /* shutdown hook invocation order */,
+            Shutdown.add(1 /* <p>
+            Shutdown.add(1 /* 
                 false /* not registered if shutdown in progress */,
                 new Runnable() {
                     public void run() {
@@ -60,6 +67,14 @@ class ApplicationShutdownHooks {
 
     /* Add a new shutdown hook.  Checks the shutdown state and the hook itself,
      * but does not do any security checks.
+     * <p>
+     *  new Runnable(){public void run(){runHooks(); }}); hooks = new IdentityHashMap <>(); } catch(IllegalS
+     * tateException e){//如果//正在进行关闭,则无法添加应用程序关闭挂接。
+     *  hooks = null; }}。
+     * 
+     *  private ApplicationShutdownHooks(){}
+     * 
+     *  / *添加一个新的关机挂钩。检查关闭状态和挂钩本身,但不进行任何安全检查。
      */
     static synchronized void add(Thread hook) {
         if(hooks == null)
@@ -76,6 +91,8 @@ class ApplicationShutdownHooks {
 
     /* Remove a previously-registered hook.  Like the add method, this method
      * does not do any security checks.
+     * <p>
+     * 
      */
     static synchronized boolean remove(Thread hook) {
         if(hooks == null)
@@ -90,6 +107,9 @@ class ApplicationShutdownHooks {
     /* Iterates over all application hooks creating a new thread for each
      * to run in. Hooks are run concurrently and this method waits for
      * them to finish.
+     * <p>
+     *  不做任何安全检查。
+     * 
      */
     static void runHooks() {
         Collection<Thread> threads;

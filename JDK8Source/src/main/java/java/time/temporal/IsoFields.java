@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2011-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.temporal;
 
@@ -151,6 +170,52 @@ import sun.util.locale.provider.LocaleResources;
  * <p>
  * This class is immutable and thread-safe.
  *
+ * <p>
+ *  ISO-8601日历系统特有的字段和单位,包括年度和周为基础的年度。
+ * <p>
+ *  此类定义特定于ISO日历系统的字段和单位。
+ * 
+ *  <h3>年度季度</h3> ISO-8601标准基于标准公民12个月。这通常分为四个季度,通常缩写为Q1,Q2,Q3和Q4。
+ * <p>
+ *  1月,2月和3月在Q1。 4月,5月和6月是第2季度。 7月,8月和9月在Q3。 10月,11月和12月在Q4。
+ * <p>
+ *  完整日期使用三个字段表示：
+ * <ul>
+ * <li> {@ link #DAY_OF_QUARTER DAY_OF_QUARTER}  -  1至90,91或92天<li> {@ link #QUARTER_OF_YEAR QUARTER_OF_YEAR}
+ *   - 每周一周<li> {@ link ChronoField#YEAR YEAR}  - 标准ISO年。
+ * </ul>
+ * 
+ *  <h3>以周为基础的年度</h3> ISO-8601标准最初用作数据交换格式,定义日期和时间的字符串格式。然而,它还定义了基于基于周的年的概念的表示日期的替代方式。
+ * <p>
+ *  日期使用三个字段表示：
+ * <ul>
+ *  <li> {@ link ChronoField#DAY_OF_WEEK DAY_OF_WEEK}  - 定义星期一(1)到星期日(7)的星期几的标准字段<li> {@ link #WEEK_OF_WEEK_BASED_YEAR}
+ *   - 一周内的一周,年<li> {@ link #WEEK_BASED_YEAR WEEK_BASED_YEAR}  - 以周为基础的年。
+ * </ul>
+ *  基于星期的年份本身是相对于标准ISO预测年来定义的。它与标准年不同,它总是从星期一开始。
+ * <p>
+ *  每周基于周的年的第一周是标准ISO年的第一个基于星期一的星期,在新的一年中至少有4天。
+ * <ul>
+ * <li>如果1月1日是星期一,则第1周从1月1日开始<li>如果1月1日是星期二,则第1周从上一年的12月31日开始<li>如果1月1日是星期三,则第1周从12月30日开始<li>如果1月1日是星期四,
+ * 则第1周从上一个标准年12月29日开始<li>如果1月1日是星期五,则1月1日从1月4日开始<li>如果1月1日是星期六, 1将于1月3日开始<li>如果1月1日是星期日,则第1周从1月2日开始。
+ * </ul>
+ *  在大多数周的年份有52周,但有时有53周。
+ * <p>
+ *  例如：
+ * 
+ * <table cellpadding="0" cellspacing="3" border="0" style="text-align: left; width: 50%;">
+ *  <caption>以周为基础的年份示例</caption> <tr> <th>日期</th> <th>星期</th> <th>字段值</th> </tr> <tr > <th> 2008年12月28日
+ * </t> <td>星期日</td> <td> 2008年第52周</td> </tr> <tr> <th> -29 </t> <td>星期一</td> <td> 2009年第一周的第一周</td> </tr>
+ *  <tr> <th> 2008-12-31 </th> < td>星期三</td> <td> 2009年第1周</td> </tr> <tr> <th> 2009-01-01 </th> <td>星期四
+ * </td> <td> 2009年第1周第/ 1周</td> </tr> <tr> <th> 2009-01-04 </th> <td>周日</td> <td> 2009年</td> </tr> <tr>
+ *  <th> 2009-01-05 </th> <td>星期一</td> <td> td> </tr>。
+ * </table>
+ * 
+ *  @implSpec
+ * <p>
+ *  这个类是不可变的和线程安全的。
+ * 
+ * 
  * @since 1.8
  */
 public final class IsoFields {
@@ -191,6 +256,27 @@ public final class IsoFields {
      * and add the amount in days to the date.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     *  表示季度的字段。
+     * <p>
+     * 此字段允许查询和设置季度值。季度的季度值在标准年的第一季度从1到90,从闰年的第一季度的1到91,第二季度的从1到91,以及第三季度和第四季度的从1到92。
+     * <p>
+     *  每日季度只能在年,月和年可用时计算。
+     * <p>
+     *  设置此字段时,允许该值部分放宽,取1到92之间的任何值。如果季度少于92天,则第92天(可能为第91天)在下一季度。
+     * <p>
+     *  在解析的解析阶段,可以从一年,四分之一和四分之一天创建日期。
+     * <p>
+     *  在{@linkplain ResolverStyle#STRICT strict mode}中,所有三个字段都根据其有效值范围进行验证。季度字段的有效期为1至90,91或92,具体取决于年份和季度。
+     * <p>
+     *  在{@linkplain ResolverStyle#SMART智能模式}中,所有三个字段均根据其有效值范围进行验证。季度字段在1到92之间有效,忽略基于年份和季度的实际范围。
+     * 如果季度超过实际范围一天,则生成的日期是一天后。如果季度超过实际范围两天,则生成的日期为两天后。
+     * <p>
+     * 在{@linkplain ResolverStyle#LENIENT宽松模式}中,只对有效值范围验证年份。计算结果日期等同于以下三阶段方法。首先,在请求的年份中,在1月1日创建日期。
+     * 然后取四分之一,减去1,并将该季度的金额加到日期。最后,取季度,减去1,然后将天数加上日期。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     public static final TemporalField DAY_OF_QUARTER = Field.DAY_OF_QUARTER;
     /**
@@ -206,6 +292,17 @@ public final class IsoFields {
      * See {@link #DAY_OF_QUARTER} for details.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     *  表示四分之一的字段。
+     * <p>
+     *  此字段允许查询和设置四分之一年的值。四分之一的值为1到4。
+     * <p>
+     *  只有当年份可用时,才能计算年度季度。
+     * <p>
+     *  在解析的解析阶段,可以从一年,四分之一和四分之一天创建日期。有关详情,请参阅{@link #DAY_OF_QUARTER}。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     public static final TemporalField QUARTER_OF_YEAR = Field.QUARTER_OF_YEAR;
     /**
@@ -236,6 +333,23 @@ public final class IsoFields {
      * from the resulting date.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     *  表示基于星期的年份的字段。
+     * <p>
+     *  此字段允许查询和设置基于周的年份值的周。基于星期的年份的值为1到52,如果基于星期的年份有53周,则为53。
+     * <p>
+     *  在解析的解析阶段中,可以从基于周的年,基于周的周的年和周的周中创建日期。
+     * <p>
+     * 在{@linkplain ResolverStyle#STRICT strict mode}中,所有三个字段都根据其有效值范围进行验证。基于星期的年份字段根据基于星期的年份从1到52或53来验证。
+     * <p>
+     *  在{@linkplain ResolverStyle#SMART智能模式}中,所有三个字段均根据其有效值范围进行验证。基于星期的年份字段在1和53之间有效,忽略基于周的年。
+     * 如果基于星期的年份为53,但基于星期的年份仅具有52周,则所得日期在下一周基于年的年份的第1周。
+     * <p>
+     *  在{@linkplain ResolverStyle#LENIENT宽松模式}中,仅对基于周的年份对有效值范围进行验证。
+     * 如果星期在1到7的范围之外,则将所得到的日期调整合适的周数,以将星期减少到1至7的范围。如果星期的周 - 基于年的值在1到52的范围之外,则从结果日期中添加或减去任何多余的周。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     public static final TemporalField WEEK_OF_WEEK_BASED_YEAR = Field.WEEK_OF_WEEK_BASED_YEAR;
     /**
@@ -250,6 +364,17 @@ public final class IsoFields {
      * See {@link #WEEK_OF_WEEK_BASED_YEAR} for details.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     *  表示基于周的年的字段。
+     * <p>
+     *  此字段允许查询和设置基于周的年份值。
+     * <p>
+     *  该字段的范围与{@link LocalDate#MAX}和{@link LocalDate#MIN}匹配。
+     * <p>
+     *  在解析的解析阶段中,可以从基于周的年,基于周的周的年和周的周中创建日期。有关详情,请参阅{@link #WEEK_OF_WEEK_BASED_YEAR}。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     public static final TemporalField WEEK_BASED_YEAR = Field.WEEK_BASED_YEAR;
     /**
@@ -265,6 +390,15 @@ public final class IsoFields {
      * then the date will be in week 1 of the following week-based-year.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     * 表示加法和减法目的的基于周的年的单位。
+     * <p>
+     *  这允许将多个基于周的年份添加到日期中或从日期中减去。单位等于52或53周。每周基准年的估计持续时间与标准ISO年{@code 365.2425 Days}的持续时间相同。
+     * <p>
+     *  添加规则将基于周的年份数添加到基于周的年份字段的现有值。如果生成的基于周的年只有52周,则日期将是下一周基于年的周的第1周。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     public static final TemporalUnit WEEK_BASED_YEARS = Unit.WEEK_BASED_YEARS;
     /**
@@ -273,11 +407,19 @@ public final class IsoFields {
      * The estimated duration of a quarter-year is one quarter of {@code 365.2425 Days}.
      * <p>
      * This unit is an immutable and thread-safe singleton.
+     * <p>
+     *  代表四分之一年概念的单位。对于ISO日历系统,它等于3个月。四分之一年的估计持续时间为{@code 365.2425 Days}的四分之一。
+     * <p>
+     *  这个单元是一个不可变和线程安全的单例。
+     * 
      */
     public static final TemporalUnit QUARTER_YEARS = Unit.QUARTER_YEARS;
 
     /**
      * Restricted constructor.
+     * <p>
+     *  受限制的构造函数。
+     * 
      */
     private IsoFields() {
         throw new AssertionError("Not instantiable");
@@ -286,6 +428,9 @@ public final class IsoFields {
     //-----------------------------------------------------------------------
     /**
      * Implementation of the field.
+     * <p>
+     *  实施该领域。
+     * 
      */
     private static enum Field implements TemporalField {
         DAY_OF_QUARTER {
@@ -639,15 +784,23 @@ public final class IsoFields {
     //-----------------------------------------------------------------------
     /**
      * Implementation of the period unit.
+     * <p>
+     *  执行期间单位。
+     * 
      */
     private static enum Unit implements TemporalUnit {
 
         /**
          * Unit that represents the concept of a week-based-year.
+         * <p>
+         *  表示每周基于年的概念的单位。
+         * 
          */
         WEEK_BASED_YEARS("WeekBasedYears", Duration.ofSeconds(31556952L)),
         /**
          * Unit that represents the concept of a quarter-year.
+         * <p>
+         *  代表四分之一年概念的单位。
          */
         QUARTER_YEARS("QuarterYears", Duration.ofSeconds(31556952L / 4));
 

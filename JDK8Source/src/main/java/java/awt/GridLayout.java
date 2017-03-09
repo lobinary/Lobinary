@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -87,12 +88,51 @@ package java.awt;
  * the number of columns affects the layout only when the
  * number of rows is set to zero.
  *
+ * <p>
+ *  <code> GridLayout </code>类是一个布局管理器,在矩形网格中展开容器的组件。容器被划分为等大小的矩形,并且一个分量被放置在每个矩形中。
+ * 例如,以下是将六个按钮布置成三行和两列的小程序：。
+ * 
+ *  <hr> <blockquote>
+ * <pre>
+ *  import java.awt。
+ * *; import java.applet.Applet; public class ButtonGrid extends Applet {public void init(){setLayout(new GridLayout(3,2)); add(new Button("1")); add(new Button("2")); add(new Button("3")); add(new Button("4")); add(new Button("5")); add(new Button("6")); }
+ * } </pre> </blockquote> <hr>。
+ *  import java.awt。
+ * <p>
+ *  如果容器的<code> ComponentOrientation </code>属性是水平和从左到右,上面的示例生成如图1所示的输出。
+ * 如果容器的<code> ComponentOrientation </code>属性是水平和右到 - 左,该示例产生如图2所示的输出。
+ * 
+ * <table style="float:center" WIDTH=600 summary="layout">
+ * <tr ALIGN=CENTER>
+ *  <td> <img SRC ="doc-files / GridLayout-1.gif"alt ="在2行中显示6个按钮。第1行显示按钮1,然后按2。
+ * Row 2 shows buttons 3 then 4. Row 3 shows buttons 5 then 6.">
+ * </td>
+ * 
+ *  <td ALIGN = CENTER> <img SRC ="doc-files / GridLayout-2.gif"alt ="在2行中显示6个按钮。第1行显示按钮2,然后按1。
+ * Row 2 shows buttons 4 then 3. Row 3 shows buttons 6 then 5.">
+ * </td>
+ * </tr>
+ * 
+ * <tr ALIGN=CENTER>
+ *  <td>图1：水平,从左到右</td>
+ * 
+ *  <td>图2：水平,从右到左</td>
+ * </tr>
+ * </table>
+ * <p>
+ * 当通过构造函数或通过<tt> setRows </tt>和<tt> setColumns </tt>方法将行数和列数设置为非零值时,列数指定被忽略。相反,列数由指定的行数和布局中的组件总数确定。
+ * 因此,例如,如果指定了三行和两列,并且将九个组件添加到布局,则它们将显示为三行三列。指定列数只会在行数设置为零时影响布局。
+ * 
+ * 
  * @author  Arthur van Hoff
  * @since   JDK1.0
  */
 public class GridLayout implements LayoutManager, java.io.Serializable {
     /*
      * serialVersionUID
+     * <p>
+     *  serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -7411804673224730901L;
 
@@ -101,6 +141,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * between columns.  They can be changed at any time.
      * This should be a non-negative integer.
      *
+     * <p>
+     *  这是指定列之间的空间的水平间隙(以像素为单位)。他们可以随时更改。这应该是一个非负整数。
+     * 
+     * 
      * @serial
      * @see #getHgap()
      * @see #setHgap(int)
@@ -111,6 +155,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * between rows.  They can be changed at any time.
      * This should be a non negative integer.
      *
+     * <p>
+     *  这是指定行之间的间隔的垂直间隙(以像素为单位)。他们可以随时更改。这应该是一个非负整数。
+     * 
+     * 
      * @serial
      * @see #getVgap()
      * @see #setVgap(int)
@@ -123,6 +171,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * 'any number' meaning that the number of Rows in that
      * dimension depends on the other dimension.
      *
+     * <p>
+     *  这是为网格指定的行数。行数可以随时更改。这应该是非负整数,其中"0"表示"任意数字",意味着该维中的行数取决于其他维度。
+     * 
+     * 
      * @serial
      * @see #getRows()
      * @see #setRows(int)
@@ -135,6 +187,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * 'any number' meaning that the number of Columns in that
      * dimension depends on the other dimension.
      *
+     * <p>
+     *  这是为网格指定的列数。列数可以随时更改。这应该是非负整数,其中"0"表示"任意数字",表示该维度中的列数取决于其他维度。
+     * 
+     * 
      * @serial
      * @see #getColumns()
      * @see #setColumns(int)
@@ -144,6 +200,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
     /**
      * Creates a grid layout with a default of one column per component,
      * in a single row.
+     * <p>
+     * 在单个行中为每个组件创建一个默认为一列的网格布局。
+     * 
+     * 
      * @since JDK1.1
      */
     public GridLayout() {
@@ -157,6 +217,12 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * One, but not both, of <code>rows</code> and <code>cols</code> can
      * be zero, which means that any number of objects can be placed in a
      * row or in a column.
+     * <p>
+     *  创建具有指定数量的行和列的网格布局。布局中的所有组件都具有相等的大小。
+     * <p>
+     *  <code> rows </code>和<code> cols </code>中的一个而不是两个都可以为零,这意味着任何数量的对象都可以放置在一行或一列中。
+     * 
+     * 
      * @param     rows   the rows, with the value zero meaning
      *                   any number of rows.
      * @param     cols   the columns, with the value zero meaning
@@ -180,6 +246,16 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * row or in a column.
      * <p>
      * All <code>GridLayout</code> constructors defer to this one.
+     * <p>
+     *  创建具有指定数量的行和列的网格布局。布局中的所有组件都具有相等的大小。
+     * <p>
+     *  此外,水平和垂直间隙设置为指定值。水平间隙位于每列之间。在每行之间放置垂直间隙。
+     * <p>
+     *  <code> rows </code>和<code> cols </code>中的一个而不是两个都可以为零,这意味着任何数量的对象都可以放置在一行或一列中。
+     * <p>
+     *  所有<code> GridLayout </code>构造函数都适用于这一个。
+     * 
+     * 
      * @param     rows   the rows, with the value zero meaning
      *                   any number of rows
      * @param     cols   the columns, with the value zero meaning
@@ -202,6 +278,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Gets the number of rows in this layout.
+     * <p>
+     *  获取此布局中的行数。
+     * 
+     * 
      * @return    the number of rows in this layout
      * @since     JDK1.1
      */
@@ -211,6 +291,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Sets the number of rows in this layout to the specified value.
+     * <p>
+     *  将此布局中的行数设置为指定的值。
+     * 
+     * 
      * @param        rows   the number of rows in this layout
      * @exception    IllegalArgumentException  if the value of both
      *               <code>rows</code> and <code>cols</code> is set to zero
@@ -225,6 +309,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Gets the number of columns in this layout.
+     * <p>
+     *  获取此布局中的列数。
+     * 
+     * 
      * @return     the number of columns in this layout
      * @since      JDK1.1
      */
@@ -239,6 +327,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * the <tt>setRows</tt> method is non-zero. In that case, the number
      * of columns displayed in the layout is determined by the total
      * number of components and the number of rows specified.
+     * <p>
+     *  将此布局中的列数设置为指定的值。如果由构造函数或<tt> setRows </tt>方法指定的行数不为零,则设置列数不会影响布局。在这种情况下,布局中显示的列数由组件的总数和指定的行数确定。
+     * 
+     * 
      * @param        cols   the number of columns in this layout
      * @exception    IllegalArgumentException  if the value of both
      *               <code>rows</code> and <code>cols</code> is set to zero
@@ -253,6 +345,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Gets the horizontal gap between components.
+     * <p>
+     *  获取组件之间的水平间隙。
+     * 
+     * 
      * @return       the horizontal gap between components
      * @since        JDK1.1
      */
@@ -262,6 +358,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Sets the horizontal gap between components to the specified value.
+     * <p>
+     * 将组件之间的水平间距设置为指定的值。
+     * 
+     * 
      * @param        hgap   the horizontal gap between components
      * @since        JDK1.1
      */
@@ -271,6 +371,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Gets the vertical gap between components.
+     * <p>
+     *  获取组件之间的垂直间隙。
+     * 
+     * 
      * @return       the vertical gap between components
      * @since        JDK1.1
      */
@@ -280,6 +384,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Sets the vertical gap between components to the specified value.
+     * <p>
+     *  将组件之间的垂直间距设置为指定的值。
+     * 
+     * 
      * @param         vgap  the vertical gap between components
      * @since        JDK1.1
      */
@@ -289,6 +397,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Adds the specified component with the specified name to the layout.
+     * <p>
+     *  将具有指定名称的指定组件添加到布局。
+     * 
+     * 
      * @param name the name of the component
      * @param comp the component to be added
      */
@@ -297,6 +409,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Removes the specified component from the layout.
+     * <p>
+     *  从布局中删除指定的组件。
+     * 
+     * 
      * @param comp the component to be removed
      */
     public void removeLayoutComponent(Component comp) {
@@ -316,6 +432,14 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * rows, plus the vertical padding times the number of rows minus one,
      * plus the top and bottom insets of the target container.
      *
+     * <p>
+     *  使用此网格布局确定容器参数的首选大小。
+     * <p>
+     *  网格布局的首选宽度是容器中所有组件的最大首选宽度乘以列数,再加上水平填充乘以列数减1,再加上目标容器的左右插入。
+     * <p>
+     *  网格布局的首选高度是容器中所有组件的最大首选高度乘以行数,加上垂直填充乘以行数减去1,再加上目标容器的顶部和底部插入。
+     * 
+     * 
      * @param     parent   the container in which to do the layout
      * @return    the preferred dimensions to lay out the
      *                      subcomponents of the specified container
@@ -365,6 +489,14 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * plus the vertical padding times the number of rows minus one, plus
      * the top and bottom insets of the target container.
      *
+     * <p>
+     *  使用此网格布局确定容器参数的最小大小。
+     * <p>
+     *  网格布局的最小宽度是容器中所有组件的最大最小宽度乘以列数,再加上水平填充乘以列数减1,再加上目标容器的左右插入。
+     * <p>
+     *  网格布局的最小高度是容器中所有组件的最大最小高度乘以行数,加上垂直填充乘以行数减去1,再加上目标容器的顶部和底部插入。
+     * 
+     * 
      * @param       parent   the container in which to do the layout
      * @return      the minimum dimensions needed to lay out the
      *                      subcomponents of the specified container
@@ -414,6 +546,13 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
      * size minus any insets and any specified horizontal or vertical
      * gap. All components in a grid layout are given the same size.
      *
+     * <p>
+     * 使用此布局放出指定的容器。
+     * <p>
+     *  此方法重新塑造指定目标容器中的组件,以满足<code> GridLayout </code>对象的约束。
+     * <p>
+     *  网格布局管理器通过根据布局中的行和列的数目将容器中的空闲空间划分为相等大小的部分来确定各个组件的大小。容器的可用空间等于容器的大小减去任何插入和任何指定的水平或垂直间隙。
+     * 
      * @param      parent   the container in which to do the layout
      * @see        java.awt.Container
      * @see        java.awt.Container#doLayout
@@ -472,6 +611,10 @@ public class GridLayout implements LayoutManager, java.io.Serializable {
 
     /**
      * Returns the string representation of this grid layout's values.
+     * <p>
+     * 网格布局中的所有组件都具有相同的大小。
+     * 
+     * 
      * @return     a string representation of this grid layout
      */
     public String toString() {

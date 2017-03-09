@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.io;
@@ -88,6 +92,10 @@ import com.sun.corba.se.spi.logging.CORBALogDomains ;
  * IIOPInputStream is used by the ValueHandlerImpl to handle Java serialization
  * input semantics.
  *
+ * <p>
+ *  IIOPInputStream由ValueHandlerImpl用于处理Java序列化输入语义。
+ * 
+ * 
  * @author  Stephen Lewallen
  * @since   JDK1.1.6
  */
@@ -156,12 +164,19 @@ public class IIOPInputStream
     /* Vector of validation callback objects
      * The vector is created as needed. The vector is maintained in
      * order of highest (first) priority to lowest
+     * <p>
+     *  向量根据需要创建。向量以最高(第一)优先级到最低的顺序维护
+     * 
      */
     private Vector callbacks;
 
     // Serialization machinery fields
     /* Arrays used to keep track of classes and ObjectStreamClasses
      * as they are being merged; used in inputObject.
+     * <p>
+     *  因为它们正在合并;用于inputObject。
+     * 
+     * 
      * spClass is the stack pointer for both.  */
     ObjectStreamClass[] classdesc;
     Class[] classes;
@@ -293,6 +308,10 @@ public class IIOPInputStream
 
     /**
      * Dummy constructor; passes upper stream a dummy stream;
+     * <p>
+     *  虚拟构造函数;通过上流一个虚拟流;
+     * 
+     * 
      **/
     public IIOPInputStream()
         throws java.io.IOException {
@@ -338,6 +357,10 @@ public class IIOPInputStream
     /**
      * Override the actions of the final method "readObject()"
      * in ObjectInputStream.
+     * <p>
+     *  覆盖ObjectInputStream中最终方法"readObject()"的操作。
+     * 
+     * 
      * @since     JDK1.1.6
      *
      * Read an object from the ObjectInputStream.
@@ -407,6 +430,9 @@ public class IIOPInputStream
 
         /*
          * Check for reset, handle it before reading an object.
+         * <p>
+         *  检查复位,在读取对象之前处理。
+         * 
          */
         try {
             // d4365188: backward compatability
@@ -440,6 +466,9 @@ public class IIOPInputStream
 
         /* Check for thrown exceptions and re-throw them, clearing them if
          * this is the last recursive call .
+         * <p>
+         *  这是最后一个递归调用。
+         * 
          */
         IOException exIOE = abortIOException;
         if (simpleReadDepth == 0)
@@ -477,6 +506,9 @@ public class IIOPInputStream
 
         /*
          * Check for reset, handle it before reading an object.
+         * <p>
+         *  检查复位,在读取对象之前处理。
+         * 
          */
         try {
             skipObjectUsingFVD(repositoryID, sender);
@@ -502,6 +534,9 @@ public class IIOPInputStream
 
         /* Check for thrown exceptions and re-throw them, clearing them if
          * this is the last recursive call .
+         * <p>
+         *  这是最后一个递归调用。
+         * 
          */
         IOException exIOE = abortIOException;
         if (simpleReadDepth == 0)
@@ -530,6 +565,10 @@ public class IIOPInputStream
      * protected no-arg constructor. The subclass is expected to provide
      * an override method with the modifier "final".
      *
+     * <p>
+     *  此方法由使用受保护的无参构造函数构造ObjectOutputStream的ObjectOutputStream的可信子类调用。子类期望提供具有修饰符"final"的覆盖方法。
+     * 
+     * 
      * @return the Object read from the stream.
      *
      * @see #ObjectInputStream()
@@ -545,6 +584,10 @@ public class IIOPInputStream
     /**
      * Override the actions of the final method "defaultReadObject()"
      * in ObjectInputStream.
+     * <p>
+     *  覆盖ObjectInputStream中最终方法"defaultReadObject()"的操作。
+     * 
+     * 
      * @since     JDK1.1.6
      *
      * Read the non-static and non-transient fields of the current class
@@ -617,6 +660,10 @@ public class IIOPInputStream
     /**
      * Override the actions of the final method "enableResolveObject()"
      * in ObjectInputStream.
+     * <p>
+     *  覆盖ObjectInputStream中最终方法"enableResolveObject()"的操作。
+     * 
+     * 
      * @since     JDK1.1.6
      *
      * Enable the stream to allow objects read from the stream to be replaced.
@@ -896,6 +943,9 @@ public class IIOPInputStream
      * with larger than 8-bit chars).  The old behavior is preserved
      * in orbutil.IIOPInputStream_1_3 in order to interoperate with
      * our legacy ORBs.
+     * <p>
+     *  帮助方法用于纠正Kestrel bug 4367783(处理大于8位的字符)。旧行为保留在orbutil.IIOPInputStream_1_3中,以便与我们的旧ORB进行互操作。
+     * 
      */
     protected String internalReadUTF(org.omg.CORBA.portable.InputStream stream)
     {
@@ -997,6 +1047,9 @@ public class IIOPInputStream
 
         /*
          * Get the descriptor and then class of the incoming object.
+         * <p>
+         *  获取传入对象的描述符和类。
+         * 
          */
 
         currentClassDesc = ObjectStreamClass.lookup(clz);
@@ -1011,6 +1064,9 @@ public class IIOPInputStream
              *  Create an instance and tell it to read its data.
              * else,
              *  Handle it as a serializable class.
+             * <p>
+             * 创建一个实例并让它读取其数据。 else,把它作为一个可序列化的类。
+             * 
              */
             if (Enum.class.isAssignableFrom( clz )) {
                 int ordinal = orbStream.read_long() ;
@@ -1056,6 +1112,9 @@ public class IIOPInputStream
         else {
             /* Count number of classes and descriptors we might have
              * to work on.
+             * <p>
+             *  工作。
+             * 
              */
 
             ObjectStreamClass currdesc = currentClassDesc;
@@ -1077,11 +1136,20 @@ public class IIOPInputStream
              * present in the local hierarchy of the object the class will be
              * null.
              *
+             * <p>
+             *  将当前对象的所有clases推送到堆栈。注意,只有可序列化的类在描述符列表中表示。
+             * 
+             *  处理已插入或删除一个或多个超类型的版本。堆栈将包含描述符对和相应的类。如果对象有一个没有发生在原来的类,描述符将为null。
+             * 如果原始对象有一个不存在于对象的局部层次结构中的类的描述符,则该类将为null。
+             * 
              */
 
             /*
              * This is your basic diff pattern, made simpler
              * because reordering is not allowed.
+             * <p>
+             *  这是你的基本diff模式,更简单,因为不允许重新排序。
+             * 
              */
             // sun.4296963 ibm.11861
             // d11861 we should stop when we find the highest serializable class
@@ -1102,6 +1170,9 @@ public class IIOPInputStream
                  * it's found assume its an inserted class.  If it's
                  * not found, its the descriptor's class that has been
                  * removed.
+                 * <p>
+                 *  搜索类以查看此描述符的类是否出现在层次结构的更上方。直到它被发现假设它是一个插入类。如果没有找到,它的描述符的类已经被删除。
+                 * 
                  */
                 Class cc = currdesc.forClass();
                 Class cl;
@@ -1113,11 +1184,17 @@ public class IIOPInputStream
                         /* Ignore a class that doesn't match.  No
                          * action is needed since it is already
                          * initialized.
+                         * <p>
+                         *  需要动作,因为它已经被初始化。
+                         * 
                          */
                     }
                 } // end : for (cl = currclass; cl != null; cl = cl.getSuperclass())
                 /* Test if there is room for this new entry.
                  * If not, double the size of the arrays and copy the contents.
+                 * <p>
+                 *  如果没有,请将数组的大小加倍,然后复制内容。
+                 * 
                  */
                 spClass++;
                 if (spClass >= classes.length) {
@@ -1140,6 +1217,9 @@ public class IIOPInputStream
                     /* Class not found corresponding to this descriptor.
                      * Pop off all the extra classes pushed.
                      * Push the descriptor and a null class.
+                     * <p>
+                     *  弹出所有额外的类推。推送描述符和一个null类。
+                     * 
                      */
                     classdesc[spClass] = currdesc;
                     classes[spClass] = null;
@@ -1148,6 +1228,9 @@ public class IIOPInputStream
                      * Some classes may have been inserted.
                      * Record the match and advance the class, continue
                      * with the next descriptor.
+                     * <p>
+                     *  有些类可能已插入。记录匹配并提前类,继续下一个描述符。
+                     * 
                      */
                     classdesc[spClass] = currdesc;
                     classes[spClass] = cl;
@@ -1158,6 +1241,9 @@ public class IIOPInputStream
             /* Allocate a new object.  The object is only constructed
              * above the highest serializable class and is set to
              * default values for all more specialized classes.
+             * <p>
+             *  高于最高可序列化类,并且设置为所有更专门类的默认值。
+             * 
              */
             try {
                 currentObject = (currentClass == null) ?
@@ -1193,17 +1279,26 @@ public class IIOPInputStream
              *      call the readObject method
              *  else
              *      invoke the defaultReadObject method
+             * <p>
+             *  对于所有推的描述符和类。如果类有自己的writeObject和readObject方法调用readObject方法,则调用defaultReadObject方法
+             * 
              */
             try {
                 for (spClass = spClass; spClass > spBase; spClass--) {
                     /*
                      * Set current descriptor and corresponding class
+                     * <p>
+                     * 设置当前描述符和对应的类
+                     * 
                      */
                     currentClassDesc = classdesc[spClass];
                     currentClass = classes[spClass];
                     if (classes[spClass] != null) {
                         /* Read the data from the stream described by the
                          * descriptor and store into the matching class.
+                         * <p>
+                         *  描述符并存储到匹配类中。
+                         * 
                          */
 
                         ReadObjectState oldState = readObjectState;
@@ -1256,6 +1351,9 @@ public class IIOPInputStream
                          * Skip over the data for this class.
                          * like defaultReadObject with a null currentObject.
                          * The code will read the values but discard them.
+                         * <p>
+                         *  跳过此类的数据。像defaultReadObject和null currentObject。代码将读取值,但丢弃它们。
+                         * 
                          */
                             ObjectStreamField[] fields =
                                 currentClassDesc.getFieldsNoCopy();
@@ -1316,6 +1414,13 @@ public class IIOPInputStream
      * if either says custom while the other does not, a MARSHAL error is thrown.  Externalizable is
      * a form of custom marshaling.
      *
+     * <p>
+     *  此输入法使用从发送方运行时检索的FullValueDescriptions读取数据。这种方法能够抛出不适用于客户字段的数据。
+     * 此方法处理读者具有不由发送者发送的类,发送者发送读者不存在的类,和/或读者的类与发送者的类不匹配的实例。
+     * 
+     *  注意：如果本地描述指示自定义编组,并且远程类型的FVD还指示自定义marsahling,则本地类型用于从线上读取数据。然而,如果说自定义,而另一个不,则抛出MARSHAL错误。
+     * 可外化是一种定制封送的形式。
+     * 
      */
     private synchronized Object inputObjectUsingFVD(Class clz,
                                        String repositoryID,
@@ -1328,6 +1433,9 @@ public class IIOPInputStream
 
             /*
              * Get the descriptor and then class of the incoming object.
+             * <p>
+             *  获取传入对象的描述符和类。
+             * 
              */
 
             ObjectStreamClass currdesc = currentClassDesc = ObjectStreamClass.lookup(clz);
@@ -1337,6 +1445,9 @@ public class IIOPInputStream
              *  Create an instance and tell it to read its data.
              * else,
              *  Handle it as a serializable class.
+             * <p>
+             *  创建一个实例并让它读取其数据。 else,把它作为一个可序列化的类。
+             * 
              */
             if (currentClassDesc.isExternalizable()) {
                 try {
@@ -1377,6 +1488,9 @@ public class IIOPInputStream
                 /*
                  * This is your basic diff pattern, made simpler
                  * because reordering is not allowed.
+                 * <p>
+                 *  这是你的基本diff模式,更简单,因为不允许重新排序。
+                 * 
                  */
                 for (currdesc = currentClassDesc, currclass = currentClass;
                      currdesc != null && currdesc.isSerializable();   /*sun.4296963 ibm.11861*/
@@ -1389,6 +1503,9 @@ public class IIOPInputStream
                      * it's found assume its an inserted class.  If it's
                      * not found, its the descriptor's class that has been
                      * removed.
+                     * <p>
+                     *  搜索类以查看此描述符的类是否出现在层次结构的更上方。直到它被发现假设它是一个插入类。如果没有找到,它的描述符的类已经被删除。
+                     * 
                      */
                     Class cc = currdesc.forClass();
                     Class cl;
@@ -1400,11 +1517,17 @@ public class IIOPInputStream
                             /* Ignore a class that doesn't match.  No
                              * action is needed since it is already
                              * initialized.
+                             * <p>
+                             *  需要动作,因为它已经被初始化。
+                             * 
                              */
                         }
                     } // end : for (cl = currclass; cl != null; cl = cl.getSuperclass())
                     /* Test if there is room for this new entry.
                      * If not, double the size of the arrays and copy the contents.
+                     * <p>
+                     *  如果没有,请将数组的大小加倍,然后复制内容。
+                     * 
                      */
                     spClass++;
                     if (spClass >= classes.length) {
@@ -1427,6 +1550,9 @@ public class IIOPInputStream
                         /* Class not found corresponding to this descriptor.
                          * Pop off all the extra classes pushed.
                          * Push the descriptor and a null class.
+                         * <p>
+                         * 弹出所有额外的类推。推送描述符和一个null类。
+                         * 
                          */
                         classdesc[spClass] = currdesc;
                         classes[spClass] = null;
@@ -1435,6 +1561,9 @@ public class IIOPInputStream
                          * Some classes may have been inserted.
                          * Record the match and advance the class, continue
                          * with the next descriptor.
+                         * <p>
+                         *  有些类可能已插入。记录匹配并提前类,继续下一个描述符。
+                         * 
                          */
                         classdesc[spClass] = currdesc;
                         classes[spClass] = cl;
@@ -1443,6 +1572,7 @@ public class IIOPInputStream
                 } // end : for (currdesc = currentClassDesc, currclass = currentClass;
 
                 /* Allocate a new object.
+                /* <p>
                  */
                 try {
                     currentObject = (currentClass == null) ?
@@ -1641,6 +1771,12 @@ public class IIOPInputStream
      * if either says custom while the other does not, a MARSHAL error is thrown.  Externalizable is
      * a form of custom marshaling.
      *
+     * <p>
+     *  此输入法使用从发送方运行时检索的FullValueDescriptions读取数据。这种方法能够抛出不适用于客户字段的数据。
+     * 
+     *  注意：如果本地描述指示自定义编组,并且远程类型的FVD还指示自定义marsahling,则本地类型用于从线上读取数据。然而,如果说自定义,而另一个不,则抛出MARSHAL错误。
+     * 可外化是一种定制封送的形式。
+     * 
      */
     private Object skipObjectUsingFVD(String repositoryID,
                                       com.sun.org.omg.SendingContext.CodeBase sender)
@@ -1701,6 +1837,9 @@ public class IIOPInputStream
      * Invoke the readObject method if present.  Assumes that in the case of custom
      * marshaling, the format version and defaultWriteObject indicator were already
      * removed.
+     * <p>
+     *  调用readObject方法(如果存在)。假设在自定义编组的情况下,格式版本和defaultWriteObject指示符已被删除。
+     * 
      */
     private boolean invokeObjectReader(ObjectStreamClass osc, Object obj, Class aclass)
         throws InvalidClassException, StreamCorruptedException,
@@ -1733,6 +1872,9 @@ public class IIOPInputStream
 
     /*
      * Reset the stream to be just like it was after the constructor.
+     * <p>
+     *  重置流就像它是在构造函数之后。
+     * 
      */
     private void resetStream() throws IOException {
 
@@ -1760,6 +1902,11 @@ public class IIOPInputStream
      *
      * Note that reflection cannot be used here, because reflection cannot be used
      * to set final fields.
+     * <p>
+     *  输出的inputClassFields读取一个原始值并将其设置在由ObjectStreamField字段描述的o的字段中。
+     * 
+     *  请注意,此处无法使用反射,因为反射不能用于设置最终字段。
+     * 
      */
     private void inputPrimitiveField(Object o, Class cl, ObjectStreamField field)
         throws InvalidClassException, IOException {
@@ -1813,6 +1960,10 @@ public class IIOPInputStream
         } catch (IllegalArgumentException e) {
             /* This case should never happen. If the field types
                are not the same, InvalidClassException is raised when
+            /* <p>
+            /*  是不一样的,InvalidClassException被抛出的时候
+            /* 
+            /* 
                matching the local class to the serialized ObjectStreamClass. */
             ClassCastException cce = new ClassCastException("Assigning instance of class " +
                                          field.getType().getName() +
@@ -1928,6 +2079,11 @@ public class IIOPInputStream
      *
      * Reads the field (which of an Object type as opposed to a primitive)
      * described by ObjectStreamField field and returns it.
+     * <p>
+     *  解决了inputClassFields并重用在inputCurrentClassFieldsForReadFields中。
+     * 
+     *  读取由ObjectStreamField字段描述的字段(对象类型而不是基元),并返回它。
+     * 
      */
     private Object inputObjectField(ObjectStreamField field)
         throws InvalidClassException, StreamCorruptedException,
@@ -2119,6 +2275,11 @@ public class IIOPInputStream
      * queried from the remote FVD) and puts them in
      * the given Map, name to value.  Wraps primitives in the
      * corresponding java.lang Objects.
+     * <p>
+     *  从InputStreamHook调用。
+     * 
+     * 读取当前类的字段(可以是从远程FVD查询的字段),并将它们放在给定的Map中,名称为值。在相应的java.lang对象中封装原语。
+     * 
      */
     private final void inputCurrentClassFieldsForReadFields(java.util.Map fieldToValueMap)
         throws InvalidClassException, StreamCorruptedException,
@@ -2205,6 +2366,11 @@ public class IIOPInputStream
      *
      * REVISIT -- This code doesn't do what the comment says to when
      * getField() is null!
+     * <p>
+     *  从输入流中读取指定类的字段,并设置指定对象中字段的值。如果指定的对象为null,只需使用字段,而不设置任何值。如果任何ObjectStreamField没有反映的字段,不要尝试在对象中设置该字段。
+     * 
+     *  REVISIT  - 这段代码不做什么评论说,当getField()是null！
+     * 
      */
     private void inputClassFields(Object o, Class cl,
                                   ObjectStreamField[] fields,
@@ -2269,6 +2435,9 @@ public class IIOPInputStream
      * object is null, just consume the fields without setting any values. If
      * any ObjectStreamField does not have a reflected Field, don't try to set
      * that field in the object.
+     * <p>
+     *  从输入流中读取指定类的字段,并设置指定对象中字段的值。如果指定的对象为null,只需使用字段,而不设置任何值。如果任何ObjectStreamField没有反映的字段,不要尝试在对象中设置该字段。
+     * 
      */
     private void inputClassFields(Object o, Class cl,
                                   ObjectStreamClass osc,
@@ -2376,6 +2545,10 @@ public class IIOPInputStream
                 } catch (IllegalArgumentException e) {
                     /* This case should never happen. If the field types
                        are not the same, InvalidClassException is raised when
+                    /* <p>
+                    /*  是不一样的,InvalidClassException被抛出的时候
+                    /* 
+                    /* 
                        matching the local class to the serialized ObjectStreamClass. */
                     // XXX I18N, logging needed.
                     ClassCastException cce = new ClassCastException("Assigning instance of class " + fields[i].id +
@@ -2413,6 +2586,9 @@ public class IIOPInputStream
     /*
      * Read the fields of the specified class from the input stream throw data away.
      * This must handle same switch logic as above.
+     * <p>
+     *  从输入流中读取指定类的字段抛出数据。这必须处理与上面相同的开关逻辑。
+     * 
      */
     private void throwAwayData(ValueMember[] fields,
                                com.sun.org.omg.SendingContext.CodeBase sender)
@@ -2541,6 +2717,10 @@ public class IIOPInputStream
             } catch (IllegalArgumentException e) {
                 /* This case should never happen. If the field types
                    are not the same, InvalidClassException is raised when
+                /* <p>
+                /*  是不一样的,InvalidClassException被抛出的时候
+                /* 
+                /* 
                    matching the local class to the serialized ObjectStreamClass. */
                 // XXX I18N, logging needed.
                 ClassCastException cce = new ClassCastException("Assigning instance of class " +
@@ -2681,6 +2861,8 @@ public class IIOPInputStream
      * an object on the recursion stack.  The CDR level
      * handles indirections to objects previously seen
      * (and completely deserialized) in the stream.
+     * <p>
+     *  这个类保持流位置到当前被反序列化的对象的映射。它用于处理递归堆栈中对象的不连续性的情况。 CDR级别处理对于以前在流中看到(和完全反序列化)的对象的不确定性。
      */
     static class ActiveRecursionManager
     {

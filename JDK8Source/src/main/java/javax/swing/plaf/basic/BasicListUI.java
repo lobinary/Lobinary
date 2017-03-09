@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,12 @@ import javax.swing.plaf.basic.DragRecognitionSupport.BeforeDrag;
  * {@code BasicListUI} instances cannot be shared between multiple
  * lists.
  *
+ * <p>
+ *  {@code ListUI}的可扩展实现。
+ * <p>
+ *  {@code BasicListUI}实例无法在多个列表之间共享。
+ * 
+ * 
  * @author Hans Muller
  * @author Philip Milne
  * @author Shannon Hickey (drag and drop)
@@ -77,17 +84,26 @@ public class BasicListUI extends ListUI
     /**
      * Height of the list. When asked to paint, if the current size of
      * the list differs, this will update the layout state.
+     * <p>
+     *  列表的高度。当被要求绘制时,如果列表的当前大小不同,这将更新布局状态。
+     * 
      */
     private int listHeight;
 
     /**
      * Width of the list. When asked to paint, if the current size of
      * the list differs, this will update the layout state.
+     * <p>
+     *  列表的宽度。当被要求绘制时,如果列表的当前大小不同,这将更新布局状态。
+     * 
      */
     private int listWidth;
 
     /**
      * The layout orientation of the list.
+     * <p>
+     *  列表的布局方向。
+     * 
      */
     private int layoutOrientation;
 
@@ -95,32 +111,50 @@ public class BasicListUI extends ListUI
 
     /**
      * Number of columns to create.
+     * <p>
+     *  要创建的列数。
+     * 
      */
     private int columnCount;
     /**
      * Preferred height to make the list, this is only used if the
      * the list is layed out horizontally.
+     * <p>
+     *  指定列表的首选高度,仅当列表水平布局时才使用。
+     * 
      */
     private int preferredHeight;
     /**
      * Number of rows per column. This is only used if the row height is
      * fixed.
+     * <p>
+     *  每列的行数。仅当行高是固定的时才使用。
+     * 
      */
     private int rowsPerColumn;
 
     /**
      * The time factor to treate the series of typed alphanumeric key
      * as prefix for first letter navigation.
+     * <p>
+     *  将一系列键入的字母数字键作为第一个字母导航的前缀的时间因子。
+     * 
      */
     private long timeFactor = 1000L;
 
     /**
      * Local cache of JList's client property "List.isFileList"
+     * <p>
+     *  JList的客户端属性"List.isFileList"的本地缓存
+     * 
      */
     private boolean isFileList = false;
 
     /**
      * Local cache of JList's component orientation property
+     * <p>
+     *  JList的组件定向属性的本地缓存
+     * 
      */
     private boolean isLeftToRight = true;
 
@@ -129,6 +163,10 @@ public class BasicListUI extends ListUI
      * updateLayoutStateNeeded.  The change is dealt with lazily, see
      * maybeUpdateLayoutState.  Changes to the JLists model, e.g. the
      * models length changed, are handled similarly, see DataListener.
+     * <p>
+     *  当这些属性中的一个更改时,我们在updateLayoutStateNeeded中设置一个位。这种改变是懒惰的,参见maybeUpdateLayoutState。
+     * 对JLists模型的更改,例如模型长度改变,类似处理,参见DataListener。
+     * 
      */
 
     protected final static int modelChanged = 1 << 0;
@@ -190,6 +228,10 @@ public class BasicListUI extends ListUI
      * cell renderer component, and then use the CellRendererPane to paint it.
      * Subclasses may want to override this method rather than paint().
      *
+     * <p>
+     *  绘制一个列表单元格：计算相关状态,获取"橡皮图章"单元格渲染器组件,然后使用CellRendererPane绘制它。子类可能想要覆盖此方法,而不是paint()。
+     * 
+     * 
      * @see #paint
      */
     protected void paintCell(
@@ -233,6 +275,10 @@ public class BasicListUI extends ListUI
      * method calls paintCell as necessary.  Subclasses
      * may want to override these methods.
      *
+     * <p>
+     * 绘制与Graphics对象clipRect相交的行。此方法根据需要调用paintCell。子类可能想要覆盖这些方法。
+     * 
+     * 
      * @see #paintCell
      */
     public void paint(Graphics g, JComponent c) {
@@ -466,6 +512,10 @@ public class BasicListUI extends ListUI
     /**
      * Returns the baseline.
      *
+     * <p>
+     *  返回基线。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @throws IllegalArgumentException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
@@ -509,6 +559,10 @@ public class BasicListUI extends ListUI
      * Returns an enum indicating how the baseline of the component
      * changes as the size changes.
      *
+     * <p>
+     *  返回枚举,指示组件的基准如何随着大小更改而更改。
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @see javax.swing.JComponent#getBaseline(int, int)
      * @since 1.6
@@ -571,6 +625,32 @@ public class BasicListUI extends ListUI
      * insets.bottom. Where the <code>Insets</code> are determined from
      * <code>list.getInsets()</code>.
      *
+     * <p>
+     *  列表的preferredSize取决于布局方向。
+     * <table summary="Describes the preferred size for each layout orientation">
+     *  <tr> <th>布局方向</th> <th>首选尺寸</th> </tr>
+     * <tr>
+     *  <td> JList.VERTICAL <td>列表的preferredSize是行的总高度和单元格的最大宽度。
+     * 如果指定了JList.fixedCellHeight,那么行的总高度只是(cellVerticalMargins + fixedCellHeight)* model.getSize()其中rowVert
+     * icalMargins是我们分配用于绘制黄色焦点轮廓的空间。
+     *  <td> JList.VERTICAL <td>列表的preferredSize是行的总高度和单元格的最大宽度。类似地,如果fixedCellWidth被指定,那么我们只是使用它。
+     * </td>
+     * <tr>
+     *  <td> JList.VERTICAL_WRAP <td>如果可见行计数大于零,则preferredHeight是最大单元格高度* visibleRowCount。
+     * 如果可见行计数<= 0,则优选高度是列表的当前高度或最大单元高度,以较大者为准。首选宽度是最大单元格宽度*所需的列数。其中列数需要为列表高度/最大单元格高度。
+     * 最大单元格高度是固定单元格高度,或通过遍历所有单元格以从ListCellRenderer中找到最大高度来确定。
+     * <tr>
+     * <td> JList.HORIZONTAL_WRAP <td>如果可见行计数大于零,则preferredHeight是最大单元格高度* adjustedRowCount。
+     * 其中visibleRowCount用于确定列数。因为这是水平排列,所以从列数确定行数。
+     * 例如,假设你有一个有10个项目的模型,可见的行计数是8.显示这个的列数是2,但是你不再需要8行来显示这个,你只需要5,因此adjustedRowCount <p>如果可见行计数<= 0,则优选高度由列数决定,其将尽可能多地适合<code>
+     *  JList </code>宽/最大单元格宽度),至少有一列。
+     * 其中visibleRowCount用于确定列数。因为这是水平排列,所以从列数确定行数。然后,首选高度变为模型大小/列数*最大单元格高度。
+     * 最大单元格高度是固定单元格高度,或通过遍历所有单元格以从ListCellRenderer中找到最大高度来确定。
+     * </table>
+     *  上面指定了原始首选宽度和高度。生成的首选宽度是上面的宽度+ insets.left + insets.right,生成的首选高度是上面的高度+ insets.top + insets.bottom。
+     * 从<code> list.getInsets()</code>确定<code> Insets </code>的位置。
+     * 
+     * 
      * @param c The JList component.
      * @return The total size of the list.
      */
@@ -606,6 +686,10 @@ public class BasicListUI extends ListUI
     /**
      * Selected the previous row and force it to be visible.
      *
+     * <p>
+     *  选择上一行并强制它可见。
+     * 
+     * 
      * @see JList#ensureIndexIsVisible
      */
     protected void selectPreviousIndex() {
@@ -621,6 +705,10 @@ public class BasicListUI extends ListUI
     /**
      * Selected the previous row and force it to be visible.
      *
+     * <p>
+     *  选择上一行并强制它可见。
+     * 
+     * 
      * @see JList#ensureIndexIsVisible
      */
     protected void selectNextIndex()
@@ -639,6 +727,10 @@ public class BasicListUI extends ListUI
      * <code>BasicListUI</code> is associated with. This method is called at
      * installUI() time.
      *
+     * <p>
+     * 在<code> BasicListUI </code>关联的<code> JList </code>上注册键盘绑定。此方法在installUI()时调用。
+     * 
+     * 
      * @see #installUI
      */
     protected void installKeyboardActions() {
@@ -676,6 +768,11 @@ public class BasicListUI extends ListUI
      * ensure that all of the keyboard actions registered at installUI
      * time are removed here.
      *
+     * <p>
+     *  取消注册从<code> installKeyboardActions </code>安装的键盘操作。
+     * 此方法在uninstallUI()时调用 - 子类应该确保在此处删除在installUI时间注册的所有键盘操作。
+     * 
+     * 
      * @see #installUI
      */
     protected void uninstallKeyboardActions() {
@@ -688,6 +785,10 @@ public class BasicListUI extends ListUI
      * Creates and installs the listeners for the JList, its model, and its
      * selectionModel.  This method is called at installUI() time.
      *
+     * <p>
+     *  为JList,其模型和其selectionModel创建并安装侦听器。此方法在installUI()时调用。
+     * 
+     * 
      * @see #installUI
      * @see #uninstallListeners
      */
@@ -733,6 +834,10 @@ public class BasicListUI extends ListUI
      * null here.  This method is called at uninstallUI() time,
      * it should be kept in sync with installListeners.
      *
+     * <p>
+     *  从JList,其模型和其selectionModel中删除侦听器。所有侦听器字段在此处重置为null。此方法在uninstallUI()时间被调用,它应该与installListeners保持同步。
+     * 
+     * 
      * @see #uninstallUI
      * @see #installListeners
      */
@@ -770,6 +875,10 @@ public class BasicListUI extends ListUI
      * or a UIResource, other properties are set if the current
      * value is null.
      *
+     * <p>
+     *  初始化列表属性,如字体,前景和背景,并添加CellRendererPane。仅当字体,前景和背景属性的当前值为null或UIResource时,才设置它们,如果当前值为null,则设置其他属性。
+     * 
+     * 
      * @see #uninstallDefaults
      * @see #installUI
      * @see CellRendererPane
@@ -824,6 +933,10 @@ public class BasicListUI extends ListUI
      * {@code null}. A property is considered overridden if its current value
      * is not a {@code UIResource}.
      *
+     * <p>
+     *  将未显式覆盖的列表属性设置为{@code null}。如果某个属性的当前值不是{@code UIResource},则会被视为覆盖。
+     * 
+     * 
      * @see #installDefaults
      * @see #uninstallUI
      * @see CellRendererPane
@@ -860,6 +973,11 @@ public class BasicListUI extends ListUI
      * <code>installListeners()</code>, and <code>installKeyboardActions()</code>
      * in order.
      *
+     * <p>
+     *  通过依次调用<code> installDefaults()</code>,<code> installListeners()</code>和<code> installKeyboardActions
+     * ()</code>来初始化<code> this.list </code>。
+     * 
+     * 
      * @see #installDefaults
      * @see #installListeners
      * @see #installKeyboardActions
@@ -889,6 +1007,11 @@ public class BasicListUI extends ListUI
      * <code>uninstallKeyboardActions()</code>, and <code>uninstallDefaults()</code>
      * in order.  Sets this.list to null.
      *
+     * <p>
+     * 通过依次调用<code> uninstallListeners()</code>,<code> uninstallKeyboardActions()</code>和<code> uninstallDef
+     * aults()</code>来取消初始化<code> this.list </code>将this.list设置为null。
+     * 
+     * 
      * @see #uninstallListeners
      * @see #uninstallKeyboardActions
      * @see #uninstallDefaults
@@ -914,6 +1037,10 @@ public class BasicListUI extends ListUI
      * Returns a new instance of BasicListUI.  BasicListUI delegates are
      * allocated one per JList.
      *
+     * <p>
+     *  返回BasicListUI的一个新实例。每个JList分配一个BasicListUI委托。
+     * 
+     * 
      * @return A new ListUI implementation for the Windows look and feel.
      */
     public static ComponentUI createUI(JComponent list) {
@@ -923,6 +1050,10 @@ public class BasicListUI extends ListUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      */
     public int locationToIndex(JList list, Point location) {
@@ -933,6 +1064,9 @@ public class BasicListUI extends ListUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public Point indexToLocation(JList list, int index) {
         maybeUpdateLayoutState();
@@ -947,6 +1081,9 @@ public class BasicListUI extends ListUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public Rectangle getCellBounds(JList list, int index1, int index2) {
         maybeUpdateLayoutState();
@@ -991,6 +1128,9 @@ public class BasicListUI extends ListUI
     /**
      * Gets the bounds of the specified model index, returning the resulting
      * bounds, or null if <code>index</code> is not valid.
+     * <p>
+     *  获取指定模型索引的边界,返回生成的边界,如果<code> index </code>无效,则返回null。
+     * 
      */
     private Rectangle getCellBounds(JList list, int index) {
         maybeUpdateLayoutState();
@@ -1041,6 +1181,10 @@ public class BasicListUI extends ListUI
     /**
      * Returns the height of the specified row based on the current layout.
      *
+     * <p>
+     *  根据当前布局返回指定行的高度。
+     * 
+     * 
      * @return The specified row height or -1 if row isn't valid.
      * @see #convertYToRow
      * @see #convertRowToY
@@ -1057,6 +1201,10 @@ public class BasicListUI extends ListUI
      * based on the current layout.  If y0 doesn't fall within any row,
      * return -1.
      *
+     * <p>
+     *  基于当前布局将JList相对坐标转换为包含它的行。如果y0不在任何行内,则返回-1。
+     * 
+     * 
      * @return The row that contains y0, or -1.
      * @see #getRowHeight
      * @see #updateLayoutState
@@ -1071,6 +1219,10 @@ public class BasicListUI extends ListUI
      * Return the JList relative Y coordinate of the origin of the specified
      * row or -1 if row isn't valid.
      *
+     * <p>
+     *  返回指定行的原点的JList相对Y坐标,如果行无效,则返回-1。
+     * 
+     * 
      * @return The Y coordinate of the origin of row, or -1.
      * @see #getRowHeight
      * @see #updateLayoutState
@@ -1086,6 +1238,9 @@ public class BasicListUI extends ListUI
 
     /**
      * Returns the height of the cell at the passed in location.
+     * <p>
+     *  返回传入位置处单元格的高度。
+     * 
      */
     private int getHeight(int column, int row) {
         if (column < 0 || column > columnCount || row < 0) {
@@ -1104,6 +1259,10 @@ public class BasicListUI extends ListUI
     /**
      * Returns the row at location x/y.
      *
+     * <p>
+     *  返回位置x / y处的行。
+     * 
+     * 
      * @param closest If true and the location doesn't exactly match a
      *                particular location, this will return the closest row.
      */
@@ -1152,6 +1311,9 @@ public class BasicListUI extends ListUI
     /**
      * Returns the closest row that starts at the specified y-location
      * in the passed in column.
+     * <p>
+     *  返回在传入列中指定y位置处开始的最近行。
+     * 
      */
     private int convertLocationToRowInColumn(int y, int column) {
         int x = 0;
@@ -1169,6 +1331,9 @@ public class BasicListUI extends ListUI
     /**
      * Returns the closest location to the model index of the passed in
      * location.
+     * <p>
+     *  返回与传入位置的模型索引最接近的位置。
+     * 
      */
     private int convertLocationToModel(int x, int y) {
         int row = convertLocationToRow(x, y, true);
@@ -1182,6 +1347,9 @@ public class BasicListUI extends ListUI
 
     /**
      * Returns the number of rows in the given column.
+     * <p>
+     *  返回给定列中的行数。
+     * 
      */
     private int getRowCount(int column) {
         if (column < 0 || column >= columnCount) {
@@ -1215,6 +1383,9 @@ public class BasicListUI extends ListUI
      * Returns the model index for the specified display location.
      * If <code>column</code>x<code>row</code> is beyond the length of the
      * model, this will return the model size - 1.
+     * <p>
+     *  返回指定显示位置的模型索引。如果<code> column </code> x <code> row </code>超出模型的长度,则返回模型大小-1。
+     * 
      */
     private int getModelIndex(int column, int row) {
         switch (layoutOrientation) {
@@ -1231,6 +1402,9 @@ public class BasicListUI extends ListUI
 
     /**
      * Returns the closest column to the passed in location.
+     * <p>
+     *  返回与传递的位置最接近的列。
+     * 
      */
     private int convertLocationToColumn(int x, int y) {
         if (cellWidth > 0) {
@@ -1258,6 +1432,9 @@ public class BasicListUI extends ListUI
     /**
      * Returns the row that the model index <code>index</code> will be
      * displayed in..
+     * <p>
+     *  返回模型索引<code> index </code>将显示在的行。
+     * 
      */
     private int convertModelToRow(int index) {
         int size = list.getModel().getSize();
@@ -1279,6 +1456,9 @@ public class BasicListUI extends ListUI
     /**
      * Returns the column that the model index <code>index</code> will be
      * displayed in.
+     * <p>
+     *  返回将显示模型索引<code> index </code>的列。
+     * 
      */
     private int convertModelToColumn(int index) {
         int size = list.getModel().getSize();
@@ -1303,6 +1483,11 @@ public class BasicListUI extends ListUI
      * before doing any computation based on the geometry of the list.
      * For example it's the first call in paint() and getPreferredSize().
      *
+     * <p>
+     * 如果updateLayoutStateNeeded非零,调用updateLayoutState()并重置updateLayoutStateNeeded。
+     * 此方法应该在根据列表的几何进行任何计算之前通过方法调用。例如,它是paint()和getPreferredSize()中的第一个调用。
+     * 
+     * 
      * @see #updateLayoutState
      */
     protected void maybeUpdateLayoutState()
@@ -1319,6 +1504,10 @@ public class BasicListUI extends ListUI
      * and cellWidth, based on the current font and the current
      * values of fixedCellWidth, fixedCellHeight, and prototypeCellValue.
      *
+     * <p>
+     *  根据当前字体和fixedCellWidth,fixedCellHeight和prototypeCellValue的当前值重新计算cellHeight或cellHeights的值和cellWidth。
+     * 
+     * 
      * @see #maybeUpdateLayoutState
      */
     protected void updateLayoutState()
@@ -1326,6 +1515,9 @@ public class BasicListUI extends ListUI
         /* If both JList fixedCellWidth and fixedCellHeight have been
          * set, then initialize cellWidth and cellHeight, and set
          * cellHeights to null.
+         * <p>
+         *  设置,然后初始化cellWidth和cellHeight,并将cellHeights设置为null。
+         * 
          */
 
         int fixedCellHeight = list.getFixedCellHeight();
@@ -1347,6 +1539,10 @@ public class BasicListUI extends ListUI
          * scanning through the entire model.  Note: if the renderer is
          * null, we just set cellWidth and cellHeights[*] to zero,
          * if they're not set already.
+         * <p>
+         *  已设置,然后通过扫描整个模型来初始化cellWidth和cellHeights。
+         * 注意：如果renderer为null,我们只要将cellWidth和cellHeights [*]设置为零,如果它们没有设置。
+         * 
          */
 
         if ((fixedCellWidth == -1) || (fixedCellHeight == -1)) {
@@ -1395,6 +1591,12 @@ public class BasicListUI extends ListUI
      * This updates the <code>rowsPerColumn, </code><code>columnCount</code>,
      * <code>preferredHeight</code> and potentially <code>cellHeight</code>
      * instance variables.
+     * <p>
+     *  在水平排列列表时调用,以确定要创建多少列。
+     * <p>
+     *  这会更新<code> rowsPerColumn,</code> <code> columnCount </code>,<code> preferredHeight </code>和潜在的<code>
+     *  cellHeight </code>实例变量。
+     * 
      */
     private void updateHorizontalLayoutState(int fixedCellWidth,
                                              int fixedCellHeight) {
@@ -1492,6 +1694,14 @@ public class BasicListUI extends ListUI
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  鼠标输入和JList的焦点处理。此类的实例在installUI()时间添加到相应的java.awt.Component列表中。
+     * 注意键盘输入使用JComponent KeyboardActions处理,请参见installKeyboardActions()。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see #createMouseInputListener
      * @see #installKeyboardActions
      * @see #installUI
@@ -1547,6 +1757,16 @@ public class BasicListUI extends ListUI
      * }
      * </pre>
      *
+     * <p>
+     *  创建实现MouseInputListener的委托。委托在installUI()时间被添加到相应的java.awt.Component监听器列表中。
+     * 子类可以覆盖此方法以返回自定义MouseInputListener,例如。
+     * <pre>
+     *  class MyListUI extends BasicListUI {protected MouseInputListener <b> createMouseInputListener </b>(){return New MyMouseInputHandler(); }
+     *  public class MyMouseInputHandler extends MouseInputHandler {public void mouseMoved(MouseEvent e){//当鼠标移动时做一些额外的工作super.mouseMoved(e); }
+     * }}。
+     * </pre>
+     * 
+     * 
      * @see MouseInputHandler
      * @see #installUI
      */
@@ -1557,6 +1777,9 @@ public class BasicListUI extends ListUI
     /**
      * This class should be treated as a &quot;protected&quot; inner class.
      * Instantiate it only within subclasses of {@code BasicListUI}.
+     * <p>
+     *  该类应当被视为"受保护的"内部类。仅在{@code BasicListUI}的子类中实例化它。
+     * 
      */
     public class FocusHandler implements FocusListener
     {
@@ -1567,6 +1790,9 @@ public class BasicListUI extends ListUI
 
         /* The focusGained() focusLost() methods run when the JList
          * focus changes.
+         * <p>
+         *  焦点变化。
+         * 
          */
 
         public void focusGained(FocusEvent e) {
@@ -1596,6 +1822,13 @@ public class BasicListUI extends ListUI
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  在installUI时添加到JLists选择模型的ListSelectionListener,以及JList.selectionModel属性更改时。当选择更改时,我们重新绘制受影响的行。
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see #createListSelectionListener
      * @see #getCellBounds
      * @see #installUI
@@ -1627,6 +1860,15 @@ public class BasicListUI extends ListUI
      * }
      * </pre>
      *
+     * <p>
+     *  创建根据需要通过selectionModel添加到JLists的ListSelectionHandler的实例。子类可以覆盖此方法以返回自定义ListSelectionListener,例如
+     * <pre>
+     *  class MyListUI extends BasicListUI {protected ListSelectionListener <b> createListSelectionListener </b>(){return new MySelectionListener(); }
+     *  public class MySelectionListener extends ListSelectionHandler {public void valueChanged(ListSelectionEvent e){//当选择更改时做一些额外的工作super.valueChange(e); }
+     * }}。
+     * </pre>
+     * 
+     * 
      * @see ListSelectionHandler
      * @see #installUI
      */
@@ -1654,6 +1896,13 @@ public class BasicListUI extends ListUI
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  在installUI时添加到JLists模型的ListDataListener,以及JList.model属性更改时。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see JList#getModel
      * @see #maybeUpdateLayoutState
      * @see #createListDataListener
@@ -1696,6 +1945,15 @@ public class BasicListUI extends ListUI
      * }
      * </pre>
      *
+     * <p>
+     * 根据需要创建按模型添加到JLists的ListDataListener的实例。子类可以覆盖此方法以返回自定义ListDataListener,例如
+     * <pre>
+     *  class MyListUI extends BasicListUI {protected ListDataListener <b> createListDataListener </b>(){return new MyListDataListener(); }
+     *  public class MyListDataListener extends ListDataHandler {public void contentsChanged(ListDataEvent e){//当模型内容改变时做一些额外的工作super.contentsChange(e); }
+     * }}。
+     * </pre>
+     * 
+     * 
      * @see ListDataListener
      * @see JList#getModel
      * @see #installUI
@@ -1721,6 +1979,14 @@ public class BasicListUI extends ListUI
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
      *
+     * <p>
+     *  在installUI时间添加到JList的PropertyChangeListener。当影响布局的JList属性的值发生变化时,我们在updateLayoutStateNeeded中设置一点。
+     * 如果JLists模型更改,我们还从旧模型中删除我们的侦听器。同样对于JList selectionModel。
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+     * 
+     * 
      * @see #maybeUpdateLayoutState
      * @see #createPropertyChangeListener
      * @see #installUI
@@ -1754,6 +2020,15 @@ public class BasicListUI extends ListUI
      * }
      * </pre>
      *
+     * <p>
+     *  创建由installUI()添加到JList的PropertyChangeHandler的实例。子类可以覆盖此方法以返回自定义PropertyChangeListener,例如
+     * <pre>
+     * class MyListUI extends BasicListUI {protected PropertyChangeListener <b> createPropertyChangeListener </b>(){return new MyPropertyChangeListener(); }
+     *  public class MyPropertyChangeListener extends PropertyChangeHandler {public void propertyChange(PropertyChangeEvent e){if(e.getPropertyName()。
+     * equals("model")){//当模型改变时做一些额外的工作} super.propertyChange }}}。
+     * </pre>
+     * 
+     * 
      * @see PropertyChangeListener
      * @see #installUI
      */
@@ -1762,12 +2037,18 @@ public class BasicListUI extends ListUI
     }
 
     /** Used by IncrementLeadSelectionAction. Indicates the action should
+    /* <p>
+    /* 
      * change the lead, and not select it. */
     private static final int CHANGE_LEAD = 0;
     /** Used by IncrementLeadSelectionAction. Indicates the action should
+    /* <p>
+    /* 
      * change the selection and lead. */
     private static final int CHANGE_SELECTION = 1;
     /** Used by IncrementLeadSelectionAction. Indicates the action should
+    /* <p>
+    /* 
      * extend the selection from the anchor to the next index. */
     private static final int EXTEND_SELECTION = 2;
 
@@ -2193,6 +2474,9 @@ public class BasicListUI extends ListUI
          * When scroll down makes selected index the last completely visible
          * index. When scroll up makes selected index the first visible index.
          * Adjust visible rectangle respect to list's component orientation.
+         * <p>
+         *  当向下滚动时,使所选索引成为最后完全可见的索引。当向上滚动时,选择索引为第一个可见索引。根据列表的组件方向调整可见矩形。
+         * 
          */
         private void adjustScrollPositionIfNecessary(JList list, int index,
                                                      int direction) {
@@ -2365,6 +2649,12 @@ public class BasicListUI extends ListUI
          * focus to the next object that starts with the same letter until another
          * key is pressed, then it is treated as the prefix with appropriate number
          * of the same letters followed by first typed another letter.
+         * <p>
+         *  在键入键时调用。
+         * 
+         *  将键盘焦点移动到第一个元素,前缀与用户按下的延迟小于<code> timeFactor </code>属性值的字母数字键序列匹配(如果未定义,则为1000毫秒)。
+         * 后续相同的按键将键盘焦点移动到以相同的字母开始的下一个对象,直到按下另一个键,然后它被视为具有适当数目的相同字母的前缀,之后是第一个键入的另一个字母。
+         * 
          */
         public void keyTyped(KeyEvent e) {
             JList src = (JList)e.getSource();
@@ -2422,6 +2712,11 @@ public class BasicListUI extends ListUI
          *
          * Checks to see if the key event is a navigation key to prevent
          * dispatching these keys for the first letter navigation.
+         * <p>
+         *  在按下键时调用。
+         * 
+         *  检查键事件是否是导航键,以防止分派这些键用于第一个字母导航。
+         * 
          */
         public void keyPressed(KeyEvent e) {
             if ( isNavigationKey(e) ) {
@@ -2435,6 +2730,9 @@ public class BasicListUI extends ListUI
          * Invoked when a key has been released.
          * See the class description for {@link KeyEvent} for a definition of
          * a key released event.
+         * <p>
+         *  在释放键时调用。有关键释放事件的定义,请参阅{@link KeyEvent}的类描述。
+         * 
          */
         public void keyReleased(KeyEvent e) {
         }
@@ -2443,6 +2741,9 @@ public class BasicListUI extends ListUI
          * Returns whether or not the supplied key event maps to a key that is used for
          * navigation.  This is used for optimizing key input by only passing non-
          * navigation keys to the first letter navigation mechanism.
+         * <p>
+         * 返回提供的键事件是否映射到用于导航的键。这用于通过仅将非导航键传递到第一字母导航机制来优化键输入。
+         * 
          */
         private boolean isNavigationKey(KeyEvent event) {
             InputMap inputMap = list.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
@@ -2462,6 +2763,9 @@ public class BasicListUI extends ListUI
 
             /* If the JList.model property changes, remove our listener,
              * listDataListener from the old model and add it to the new one.
+             * <p>
+             *  listDataListener从旧模型并将其添加到新的模型。
+             * 
              */
             if (propertyName == "model") {
                 ListModel oldModel = (ListModel)e.getOldValue();
@@ -2478,6 +2782,9 @@ public class BasicListUI extends ListUI
 
             /* If the JList.selectionModel property changes, remove our listener,
              * listSelectionListener from the old selectionModel and add it to the new one.
+             * <p>
+             *  listSelectionListener从旧的selectionModel并将其添加到新的。
+             * 
              */
             else if (propertyName == "selectionModel") {
                 ListSelectionModel oldModel = (ListSelectionModel)e.getOldValue();
@@ -2574,6 +2881,7 @@ public class BasicListUI extends ListUI
             int maxIndex = Math.max(e.getIndex0(), e.getIndex1());
 
             /* Sync the SelectionModel with the DataModel.
+            /* <p>
              */
 
             ListSelectionModel sm = list.getSelectionModel();
@@ -2584,6 +2892,9 @@ public class BasicListUI extends ListUI
             /* Repaint the entire list, from the origin of
              * the first added cell, to the bottom of the
              * component.
+             * <p>
+             *  第一个添加的单元格,到组件的底部。
+             * 
              */
             redrawList();
         }
@@ -2594,6 +2905,7 @@ public class BasicListUI extends ListUI
             updateLayoutStateNeeded = modelChanged;
 
             /* Sync the SelectionModel with the DataModel.
+            /* <p>
              */
 
             ListSelectionModel sm = list.getSelectionModel();
@@ -2604,6 +2916,9 @@ public class BasicListUI extends ListUI
             /* Repaint the entire list, from the origin of
              * the first removed cell, to the bottom of the
              * component.
+             * <p>
+             *  第一个去除的单元格,到组件的底部。
+             * 
              */
 
             redrawList();
@@ -2813,6 +3128,9 @@ public class BasicListUI extends ListUI
 
         /* The focusGained() focusLost() methods run when the JList
          * focus changes.
+         * <p>
+         *  焦点变化。
+         * 
          */
 
         public void focusGained(FocusEvent e) {
@@ -2835,6 +3153,9 @@ public class BasicListUI extends ListUI
         /**
          * Create a Transferable to use as the source for a data transfer.
          *
+         * <p>
+         *  创建一个可转移以用作数据传输的源。
+         * 
          * @param c  The component holding the data to be transfered.  This
          *  argument is provided to enable sharing of TransferHandlers by
          *  multiple components.

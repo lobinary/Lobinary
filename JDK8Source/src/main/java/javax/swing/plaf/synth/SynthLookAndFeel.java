@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,17 @@ import sun.swing.plaf.synth.*;
  * An attempt to serialize it will
  * result in {@link NotSerializableException}.
  *
+ * <p>
+ *  SynthLookAndFeel提供了创建自定义外观的基础。 SynthLookAndFeel不直接提供一个外观,所有的绘画都是委托的。
+ * 您需要通过{@link #load}方法提供配置文件,或者向{@link #setStyleFactory}提供您自己的{@link SynthStyleFactory}。
+ * 有关加载文件的示例,请参阅<a href="package-summary.html">程序包摘要</a>;有关提供自己的示例,请参阅{@link javax.swing.plaf.synth.SynthStyleFactory}
+ *  <code> SynthStyleFactory </code>到<code> setStyleFactory </code>。
+ * 您需要通过{@link #load}方法提供配置文件,或者向{@link #setStyleFactory}提供您自己的{@link SynthStyleFactory}。
+ * <p>
+ *  <strong>警告：</strong>此类实现{@link Serializable},因为它扩展了{@link BasicLookAndFeel}的副作用。它不打算序列化。
+ * 尝试序列化它将导致{@link NotSerializableException}。
+ * 
+ * 
  * @serial exclude
  * @since 1.5
  * @author Scott Violet
@@ -66,44 +78,68 @@ import sun.swing.plaf.synth.*;
 public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Used in a handful of places where we need an empty Insets.
+     * <p>
+     *  用于少数需要空插页的地方。
+     * 
      */
     static final Insets EMPTY_UIRESOURCE_INSETS = new InsetsUIResource(
                                                             0, 0, 0, 0);
 
     /**
      * AppContext key to get the current SynthStyleFactory.
+     * <p>
+     *  AppContext键获取当前的SynthStyleFactory。
+     * 
      */
     private static final Object STYLE_FACTORY_KEY =
                   new StringBuffer("com.sun.java.swing.plaf.gtk.StyleCache");
 
     /**
      * AppContext key to get selectedUI.
+     * <p>
+     *  AppContext键获取selectUI。
+     * 
      */
     private static final Object SELECTED_UI_KEY = new StringBuilder("selectedUI");
 
     /**
      * AppContext key to get selectedUIState.
+     * <p>
+     *  AppContext键获取selectedUIState。
+     * 
      */
     private static final Object SELECTED_UI_STATE_KEY = new StringBuilder("selectedUIState");
 
     /**
      * The last SynthStyleFactory that was asked for from AppContext
      * <code>lastContext</code>.
+     * <p>
+     *  最后一个从AppContext <code> lastContext </code>请求的SynthStyleFactory。
+     * 
      */
     private static SynthStyleFactory lastFactory;
     /**
      * AppContext lastLAF came from.
+     * <p>
+     *  AppContext lastLAF来自。
+     * 
      */
     private static AppContext lastContext;
 
     /**
      * SynthStyleFactory for the this SynthLookAndFeel.
+     * <p>
+     *  这个SynthLookAndFeel的SynthStyleFactory。
+     * 
      */
     private SynthStyleFactory factory;
 
     /**
      * Map of defaults table entries. This is populated via the load
      * method.
+     * <p>
+     *  默认表项的映射。这是通过加载方法填充。
+     * 
      */
     private Map<String, Object> defaultsMap;
 
@@ -120,6 +156,11 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * UI matches that of <code>selectedUI</code> (which this methods sets), if
      * it does, then a state as set by this method is returned. This provides
      * a way for labels to have a state other than selected.
+     * <p>
+     * 由渲染器使用。在大多数情况下,渲染器被实现为标签,这是有问题的,因为它们从未被选择。
+     * 为了适应这个SynthLabelUI,检查当前UI是否与<code> selectedUI </code>(这个方法设置)匹配,如果匹配,则返回由此方法设置的状态。
+     * 这为标签提供了一种不是所选状态的方式。
+     * 
      */
     static void setSelectedUI(ComponentUI uix, boolean selected,
                               boolean focused, boolean enabled,
@@ -165,6 +206,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
 
     /**
      * Clears out the selected UI that was last set in setSelectedUI.
+     * <p>
+     *  清除最后在setSelectedUI中设置的所选UI。
+     * 
      */
     static void resetSelectedUI() {
         AppContext.getAppContext().remove(SELECTED_UI_KEY);
@@ -175,6 +219,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * Sets the SynthStyleFactory that the UI classes provided by
      * synth will use to obtain a SynthStyle.
      *
+     * <p>
+     *  设置Synth提供的UI类用于获取SynthStyle的SynthStyleFactory。
+     * 
+     * 
      * @param cache SynthStyleFactory the UIs should use.
      */
     public static void setStyleFactory(SynthStyleFactory cache) {
@@ -191,6 +239,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Returns the current SynthStyleFactory.
      *
+     * <p>
+     *  返回当前的SynthStyleFactory。
+     * 
+     * 
      * @return SynthStyleFactory
      */
     public static SynthStyleFactory getStyleFactory() {
@@ -211,6 +263,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * only be used for Components that don't have any special state beyond
      * that of ENABLED, DISABLED or FOCUSED. For example, buttons shouldn't
      * call into this method.
+     * <p>
+     *  返回指定组件的组件状态。这只应该用于除了ENABLED,DISABLED或FOCUSED之外没有任何特殊状态的组件。例如,按钮不应调用此方法。
+     * 
      */
     static int getComponentState(Component c) {
         if (c.isEnabled()) {
@@ -227,6 +282,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * This is not for general consumption, only custom UIs should call this
      * method.
      *
+     * <p>
+     *  获取指定组件的指定区域的SynthStyle。这不是一般消费,只有自定义UI应调用此方法。
+     * 
+     * 
      * @param c JComponent to get the SynthStyle for
      * @param region Identifies the region of the specified component
      * @return SynthStyle to use.
@@ -239,6 +298,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * Returns true if the Style should be updated in response to the
      * specified PropertyChangeEvent. This forwards to
      * <code>shouldUpdateStyleOnAncestorChanged</code> as necessary.
+     * <p>
+     *  如果应响应指定的PropertyChangeEvent更新样式,则返回true。根据需要转发到<code> shouldUpdateStyleOnAncestorChanged </code>。
+     * 
      */
     static boolean shouldUpdateStyle(PropertyChangeEvent event) {
         LookAndFeel laf = UIManager.getLookAndFeel();
@@ -250,6 +312,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * A convience method that will reset the Style of StyleContext if
      * necessary.
      *
+     * <p>
+     *  如果需要,将重置StyleContext的Style的convience方法。
+     * 
+     * 
      * @return newStyle
      */
     static SynthStyle updateStyle(SynthContext context, SynthUI ui) {
@@ -272,6 +338,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * This is a lighter version of
      * <code>SwingUtilities.updateComponentTreeUI</code>.
      *
+     * <p>
+     *  更新与<code> c </code>及其所有子项关联的样式。这是一个较轻的版本的<code> SwingUtilities.updateComponentTreeUI </code>。
+     * 
+     * 
      * @param c Component to update style for.
      */
     public static void updateStyles(Component c) {
@@ -304,6 +374,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Returns the Region for the JComponent <code>c</code>.
      *
+     * <p>
+     *  返回JComponent <code> c </code>的Region。
+     * 
+     * 
      * @param c JComponent to fetch the Region for
      * @return Region corresponding to <code>c</code>
      */
@@ -315,6 +389,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * A convenience method to return where the foreground should be
      * painted for the Component identified by the passed in
      * AbstractSynthContext.
+     * <p>
+     * 一个方便的方法来返回前景应该为由AbstractSynthContext传递的组件识别的组件。
+     * 
      */
     static Insets getPaintingInsets(SynthContext state, Insets insets) {
         if (state.isSubregion()) {
@@ -330,6 +407,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * A convenience method that handles painting of the background.
      * All SynthUI implementations should override update and invoke
      * this method.
+     * <p>
+     *  处理背景绘画的方便方法。所有SynthUI实现应该覆盖更新并调用此方法。
+     * 
      */
     static void update(SynthContext state, Graphics g) {
         paintRegion(state, g, null);
@@ -339,6 +419,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * A convenience method that handles painting of the background for
      * subregions. All SynthUI's that have subregions should invoke
      * this method, than paint the foreground.
+     * <p>
+     *  处理子区域的背景绘画的便利方法。所有具有子区域的SynthUI都应该调用此方法,而不是绘制前景。
+     * 
      */
     static void updateSubregion(SynthContext state, Graphics g,
                                 Rectangle bounds) {
@@ -380,6 +463,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Returns the ui that is of type <code>klass</code>, or null if
      * one can not be found.
+     * <p>
+     *  返回类型为<code> klass </code>的ui,如果找不到,则返回null。
+     * 
      */
     static Object getUIOfType(ComponentUI ui, Class klass) {
         if (klass.isInstance(ui)) {
@@ -392,6 +478,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * Creates the Synth look and feel <code>ComponentUI</code> for
      * the passed in <code>JComponent</code>.
      *
+     * <p>
+     *  为<code> JComponent </code>中传递的</code>创建Synth外观和感觉<code> ComponentUI </code>。
+     * 
+     * 
      * @param c JComponent to create the <code>ComponentUI</code> for
      * @return ComponentUI to use for <code>c</code>
      */
@@ -538,6 +628,13 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * invoke <code>load</code> to specify the set of
      * <code>SynthStyle</code>s, or invoke <code>setStyleFactory</code>.
      *
+     * <p>
+     *  创建SynthLookAndFeel。
+     * <p>
+     *  对于返回的<code> SynthLookAndFeel </code>有用,你需要调用<code> load </code>来指定<code> SynthStyle </code>的集合,或者调用<code>
+     *  setStyleFactory </code >。
+     * 
+     * 
      * @see #load
      * @see #setStyleFactory
      */
@@ -555,6 +652,14 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * <a href="doc-files/synthFileFormat.html">Synth File Format</a>
      * for more information.
      *
+     * <p>
+     *  加载将由此<code> SynthLookAndFeel </code>使用的<code> SynthStyle </code>集合。
+     *  <code> resourceBase </code>用于解析任何基于路径的资源,例如<code> Image </code>将由<code> resourceBase.getResource(pat
+     * h)</code>解析。
+     *  加载将由此<code> SynthLookAndFeel </code>使用的<code> SynthStyle </code>集合。
+     * 有关详细信息,请参阅<a href="doc-files/synthFileFormat.html">合成文件格式</a>。
+     * 
+     * 
      * @param input InputStream to load from
      * @param resourceBase used to resolve any images or other resources
      * @throws ParseException if there is an error in parsing
@@ -584,6 +689,12 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * <a href="doc-files/synthFileFormat.html">Synth File Format</a> for more
      * information.
      *
+     * <p>
+     * 加载将由此<code> SynthLookAndFeel </code>使用的<code> SynthStyle </code>集合。
+     * 基于路径的资源相对于样式的指定<code> URL </code>来解析。例如,<code> Image </code>将由<code>新网址(synthFile,path)</code>解析。
+     * 有关详细信息,请参阅<a href="doc-files/synthFileFormat.html">合成文件格式</a>。
+     * 
+     * 
      * @param url the <code>URL</code> to load the set of
      *     <code>SynthStyle</code> from
      * @throws ParseException if there is an error in parsing
@@ -608,6 +719,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
 
     /**
      * Called by UIManager when this look and feel is installed.
+     * <p>
+     *  由UIManager调用时,这种外观和感觉安装。
+     * 
      */
     @Override
     public void initialize() {
@@ -620,6 +734,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
 
     /**
      * Called by UIManager when this look and feel is uninstalled.
+     * <p>
+     *  当UIManager卸载此外观时调用。
+     * 
      */
     @Override
     public void uninitialize() {
@@ -634,6 +751,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Returns the defaults for this SynthLookAndFeel.
      *
+     * <p>
+     *  返回此SynthLookAndFeel的默认值。
+     * 
+     * 
      * @return Defaults table.
      */
     @Override
@@ -700,6 +821,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Returns true, SynthLookAndFeel is always supported.
      *
+     * <p>
+     *  返回true,始终支持SynthLookAndFeel。
+     * 
+     * 
      * @return true.
      */
     @Override
@@ -710,6 +835,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Returns false, SynthLookAndFeel is not a native look and feel.
      *
+     * <p>
+     *  返回false,SynthLookAndFeel不是本地的外观和感觉。
+     * 
+     * 
      * @return false
      */
     @Override
@@ -720,6 +849,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Returns a textual description of SynthLookAndFeel.
      *
+     * <p>
+     *  返回SynthLookAndFeel的文本描述。
+     * 
+     * 
      * @return textual description of synth.
      */
     @Override
@@ -730,6 +863,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Return a short string that identifies this look and feel.
      *
+     * <p>
+     *  返回一个标识此外观的短字符串。
+     * 
+     * 
      * @return a short string identifying this look and feel.
      */
     @Override
@@ -740,6 +877,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     /**
      * Return a string that identifies this look and feel.
      *
+     * <p>
+     *  返回一个标识此外观的字符串。
+     * 
+     * 
      * @return a short string identifying this look and feel.
      */
     @Override
@@ -755,6 +896,11 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * return value from <code>getStyle</code> off the containment hierarchy
      * would override this method to return true.
      *
+     * <p>
+     *  返回当<code> JComponent </code>的祖先更改时,UI是否应从<code> SynthStyleFactory </code>更新其<code> SynthStyles </code>
+     * 提供了一个<code> SynthStyleFactory </code>的子类,它基于包含层次结构中的<code> getStyle </code>返回值,将覆盖此方法返回true。
+     * 
+     * 
      * @return whether or not the UIs should update their
      * <code>SynthStyles</code> from the <code>SynthStyleFactory</code>
      * when the ancestor changed.
@@ -767,6 +913,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * Returns whether or not the UIs should update their styles when a
      * particular event occurs.
      *
+     * <p>
+     *  返回在特定事件发生时UI是否应更新其样式。
+     * 
+     * 
      * @param ev a {@code PropertyChangeEvent}
      * @return whether or not the UIs should update their styles
      * @since 1.7
@@ -791,6 +941,11 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
      * with what GTK does. See com.sun.java.swing.plaf.gtk.GtkLookAndFeel
      * for more information about CJK and antialiased fonts.
      *
+     * <p>
+     * 返回主机桌面指定的抗锯齿信息。如果桌面是GNOME,并且用户已将其区域设置为中文,日语或韩语,则可能会强制关闭抗锯齿。这与GTK是一致的。
+     * 有关CJK和抗锯齿字体的更多信息,请参阅com.sun.java.swing.plaf.gtk.GtkLookAndFeel。
+     * 
+     * 
      * @return the text antialiasing information associated to the desktop
      */
     private static Object getAATextInfo() {
@@ -856,6 +1011,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
 
         /**
          * Updates the UI of the passed in window and all its children.
+         * <p>
+         *  更新传入的窗口及其所有子窗口的UI。
+         * 
          */
         private static void updateWindowUI(Window window) {
             updateStyles(window);
@@ -867,6 +1025,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
 
         /**
          * Updates the UIs of all the known Frames.
+         * <p>
+         *  更新所有已知帧的UI。
+         * 
          */
         private static void updateAllUIs() {
             Frame appFrames[] = Frame.getFrames();
@@ -877,11 +1038,17 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
 
         /**
          * Indicates if an updateUI call is pending.
+         * <p>
+         *  指示updateUI调用是否挂起。
+         * 
          */
         private static boolean updatePending;
 
         /**
          * Sets whether or not an updateUI call is pending.
+         * <p>
+         *  设置updateUI调用是否正在等待。
+         * 
          */
         private static synchronized void setUpdatePending(boolean update) {
             updatePending = update;
@@ -889,6 +1056,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
 
         /**
          * Returns true if a UI update is pending.
+         * <p>
+         *  如果UI更新待处理,则返回true。
+         * 
          */
         private static synchronized boolean isUpdatePending() {
             return updatePending;
@@ -951,6 +1121,9 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
          * If the color differ the component will then repaint itself.
          *
          * @comp the component to check
+         * <p>
+         *  这是一种支持方法,将检查指定组件的背景颜色在聚焦状态和非聚焦状态之间是否不同。如果颜色不同,组件将重新绘制自身。
+         * 
          */
         private void repaintIfBackgroundsDiffer(JComponent comp) {
             ComponentUI ui = (ComponentUI)comp.getClientProperty(

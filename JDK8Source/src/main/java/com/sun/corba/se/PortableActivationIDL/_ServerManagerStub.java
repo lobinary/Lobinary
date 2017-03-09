@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -12,12 +13,16 @@ package com.sun.corba.se.PortableActivationIDL;
 /** Interface used to combine the Activator and Locator when both are
     * implemented together in the same process, as is currently the case
     * for our implementation.
+    * <p>
+    *  在同一过程中一起实施,就像我们实施的情况一样。
+    * 
     */
 public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implements com.sun.corba.se.PortableActivationIDL.ServerManager
 {
 
 
   /** A new ORB started server registers itself with the Activator
+  /* <p>
 	*/
   public void registerServer (String serverId, com.sun.corba.se.PortableActivationIDL.ServerProxy serverObj) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered
   {
@@ -46,6 +51,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
   /** A server is shutting down that was started by this activator.
 	* Complete termination of the server is detected by the death of the
 	* process implementing the server.
+	* <p>
+	*  实现服务器的进程的死亡检测到服务器的完全终止。
+	* 
 	*/
   public void serverGoingDown (String serverId)
   {
@@ -71,6 +79,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 	* the transport endpoints and the ORB proxy callback object.
 	* Note that we cannot detect when an ORB shuts down, although
 	* all of the POA shutdowns should still be reported.
+	* <p>
+	*  传输端点和ORB代理回调对象。请注意,我们无法检测到ORB何时关闭,虽然所有POA关机仍应报告。
+	* 
 	*/
   public void registerORB (String serverId, String orbId, com.sun.corba.se.PortableActivationIDL.ORBProxy orb, com.sun.corba.se.PortableActivationIDL.EndPointInfo[] endPointInfo) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.NoSuchEndPoint, com.sun.corba.se.PortableActivationIDL.ORBAlreadyRegistered
   {
@@ -105,6 +116,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
   /** Construct or find an ORBD object template corresponding to the 
 	* server's object template and return it.  Called whenever a 
 	* persistent POA is created.
+	* <p>
+	*  服务器的对象模板并返回它。每当创建持久POA时调用。
+	* 
 	*/
   public org.omg.PortableInterceptor.ObjectReferenceTemplate registerPOA (String serverId, String orbId, org.omg.PortableInterceptor.ObjectReferenceTemplate poaTemplate)
   {
@@ -130,6 +144,7 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
 
   /** Called whenever a POA is destroyed.
+  /* <p>
 	*/
   public void poaDestroyed (String serverId, String orbId, org.omg.PortableInterceptor.ObjectReferenceTemplate poaTemplate)
   {
@@ -155,6 +170,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
   /** If the server is not running, start it up.  This is allowed
 	* whether or not the server has been installed.
+	* <p>
+	*  无论服务器是否已安装。
+	* 
 	*/
   public void activate (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerAlreadyActive, com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown
   {
@@ -184,6 +202,7 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
 
   /** If the server is running, shut it down
+  /* <p>
 	*/
   public void shutdown (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotActive, com.sun.corba.se.PortableActivationIDL.ServerNotRegistered
   {
@@ -212,6 +231,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
   /** Invoke the server install hook.  If the server is not 
 	* currently running, this method will activate it.
+	* <p>
+	*  当前运行,这个方法会激活它。
+	* 
 	*/
   public void install (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown, com.sun.corba.se.PortableActivationIDL.ServerAlreadyInstalled
   {
@@ -243,6 +265,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
   /** Invoke the server uninstall hook.  If the server is not
 	* currently running, this method will activate it.
 	* After this hook completes, the server may still be running.
+	* <p>
+	*  当前运行,这个方法会激活它。此挂接完成后,服务器可能仍在运行。
+	* 
 	*/
   public void uninstall (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown, com.sun.corba.se.PortableActivationIDL.ServerAlreadyUninstalled
   {
@@ -272,6 +297,7 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
 
   /** list active servers
+  /* <p>
 	*/
   public String[] getActiveServers ()
   {
@@ -294,6 +320,7 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
 
   /** list all registered ORBs for a server
+  /* <p>
 	*/
   public String[] getORBNames (String serverId) throws com.sun.corba.se.PortableActivationIDL.ServerNotRegistered
   {
@@ -321,6 +348,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
   /** Find the server template that corresponds to the ORBD's
 	* adapter id.
+	* <p>
+	*  适配器标识。
+	* 
 	*/
   public org.omg.PortableInterceptor.ObjectReferenceTemplate lookupPOATemplate (String serverId, String orbId, String[] orbAdapterName)
   {
@@ -348,6 +378,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
   /** locate server - returns the port with a specific type for all registered
 	* ORBs of an active server.
 	* Starts the server if it is not already running.
+	* <p>
+	*  活动服务器的ORB。启动服务器(如果服务器尚未运行)。
+	* 
 	*/
   public com.sun.corba.se.PortableActivationIDL.LocatorPackage.ServerLocationPerType locateServer (String serverId, String endPoint) throws com.sun.corba.se.PortableActivationIDL.NoSuchEndPoint, com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown
   {
@@ -381,6 +414,9 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
   /** locate server - returns all ports registered with a specified ORB for
 	* an active server
 	* Starts the server if it is not already running.
+	* <p>
+	*  活动服务器如果服务器尚未运行,则启动该服务器。
+	* 
 	*/
   public com.sun.corba.se.PortableActivationIDL.LocatorPackage.ServerLocationPerORB locateServerForORB (String serverId, String orbId) throws com.sun.corba.se.PortableActivationIDL.InvalidORBid, com.sun.corba.se.PortableActivationIDL.ServerNotRegistered, com.sun.corba.se.PortableActivationIDL.ServerHeldDown
   {
@@ -412,6 +448,7 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
 
   /** get the port for the endpoint of the locator
+  /* <p>
 	*/
   public int getEndpoint (String endPointType) throws com.sun.corba.se.PortableActivationIDL.NoSuchEndPoint
   {
@@ -439,6 +476,8 @@ public class _ServerManagerStub extends org.omg.CORBA.portable.ObjectImpl implem
 
   /** Useful from external BadServerIdHandlers which need
 	* to pick a particular port type.
+	* <p>
+	*  选择特定的端口类型。
 	*/
   public int getServerPortForType (com.sun.corba.se.PortableActivationIDL.LocatorPackage.ServerLocationPerORB location, String endPointType) throws com.sun.corba.se.PortableActivationIDL.NoSuchEndPoint
   {

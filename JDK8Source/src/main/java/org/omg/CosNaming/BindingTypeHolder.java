@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.CosNaming;
 
 /**
@@ -11,6 +12,8 @@ package org.omg.CosNaming;
 /**
    * Specifies whether the given binding is for a object (that is not a
    * naming context) or for a naming context.
+   * <p>
+   * 
    */
 public final class BindingTypeHolder implements org.omg.CORBA.portable.Streamable
 {

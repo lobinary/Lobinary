@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -70,6 +74,23 @@ import java.util.function.Consumer;
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
  *
+ * <p>
+ *  基于链接节点的可选边界{@linkplain BlockingDeque blocking deque}。
+ * 
+ *  <p>可选容量绑定构造函数参数用作防止过度扩展的一种方法。容量(如果未指定)等于{@link整数#MAX_VALUE}。链接节点是在每次插入时动态创建的,除非这将使容量超过容量。
+ * 
+ *  <p>大多数操作在固定时间内运行(忽略阻塞所花费的时间)。
+ * 例外包括{@link #remove(Object)remove},{@link #removeFirstOccurrence removeFirstOccurrence},{@link #removeLastOccurrence removeLastOccurrence}
+ * ,{@link #contains contains},{@link #iterator iterator.remove()}批量操作,所有这些都在线性时间运行。
+ *  <p>大多数操作在固定时间内运行(忽略阻塞所花费的时间)。
+ * 
+ *  <p>此类及其迭代器实现{@link Collection}和{@link Iterator}接口的所有<em>可选</em>方法。
+ * 
+ *  <p>此类是的成员
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ *  Java集合框架</a>。
+ * 
+ * 
  * @since 1.6
  * @author  Doug Lea
  * @param <E> the type of elements held in this collection
@@ -95,6 +116,13 @@ public class LinkedBlockingDeque<E>
      * linking a Node that has just been dequeued to itself.  Such a
      * self-link implicitly means to jump to "first" (for next links)
      * or "last" (for prev links).
+     * <p>
+     *  实现为由单个锁保护的简单的双向链表,并使用条件来管理阻塞。
+     * 
+     * 为了实现弱一致的迭代器,似乎我们需要保持所有节点从前面的出列节点GC可达。
+     * 这将导致两个问题： - 允许流氓迭代器导致无限的内存保留 - 导致旧节点到新节点的跨代链接,如果节点在活期间被终止,这些世代GC很难处理,导致重复的主要收集。
+     * 然而,只有未删除的节点需要从出列节点可达,并且可达性不一定是GC所理解的类型。我们使用把刚刚出队的节点链接到自己的技巧。这样的自链接意味着跳转到"第一"(对于下一链接)或"最后"(对于prev链接)。
+     * 
      */
 
     /*
@@ -102,6 +130,9 @@ public class LinkedBlockingDeque<E>
      * here, and that introduces ambiguities. Often we want the
      * BlockingDeque javadoc combined with the AbstractQueue
      * implementation, so a lot of method specs are duplicated here.
+     * <p>
+     *  我们在这里有"钻石"多接口/抽象类继承,并且引入歧义。通常我们希望BlockingDeque javadoc结合AbstractQueue实现,所以很多方法规范在这里重复。
+     * 
      */
 
     private static final long serialVersionUID = -387911632671998426L;
@@ -110,6 +141,9 @@ public class LinkedBlockingDeque<E>
     static final class Node<E> {
         /**
          * The item, or null if this node has been removed.
+         * <p>
+         *  该项,如果此节点已删除,则为null。
+         * 
          */
         E item;
 
@@ -118,6 +152,9 @@ public class LinkedBlockingDeque<E>
          * - the real predecessor Node
          * - this Node, meaning the predecessor is tail
          * - null, meaning there is no predecessor
+         * <p>
+         *  之一： - 真正的前任Node  - 这个Node,意味着前导是tail-null,意味着没有前导
+         * 
          */
         Node<E> prev;
 
@@ -126,6 +163,9 @@ public class LinkedBlockingDeque<E>
          * - the real successor Node
          * - this Node, meaning the successor is head
          * - null, meaning there is no successor
+         * <p>
+         *  之一： - 真正的后继节点 - 这个节点,意味着后继者是head-null,意味着没有后继
+         * 
          */
         Node<E> next;
 
@@ -138,6 +178,9 @@ public class LinkedBlockingDeque<E>
      * Pointer to first node.
      * Invariant: (first == null && last == null) ||
      *            (first.prev == null && first.item != null)
+     * <p>
+     *  指向第一个节点的指针。不变量：(first == null && last == null)|| (first.prev == null && first.item！= null)
+     * 
      */
     transient Node<E> first;
 
@@ -145,6 +188,9 @@ public class LinkedBlockingDeque<E>
      * Pointer to last node.
      * Invariant: (first == null && last == null) ||
      *            (last.next == null && last.item != null)
+     * <p>
+     *  指向最后一个节点的指针。不变量：(first == null && last == null)|| (last.next == null && last.item！= null)
+     * 
      */
     transient Node<E> last;
 
@@ -166,6 +212,9 @@ public class LinkedBlockingDeque<E>
     /**
      * Creates a {@code LinkedBlockingDeque} with a capacity of
      * {@link Integer#MAX_VALUE}.
+     * <p>
+     * 创建容量为{@link Integer#MAX_VALUE}的{@code LinkedBlockingDeque}。
+     * 
      */
     public LinkedBlockingDeque() {
         this(Integer.MAX_VALUE);
@@ -174,6 +223,10 @@ public class LinkedBlockingDeque<E>
     /**
      * Creates a {@code LinkedBlockingDeque} with the given (fixed) capacity.
      *
+     * <p>
+     *  创建具有给定(固定)容量的{@code LinkedBlockingDeque}。
+     * 
+     * 
      * @param capacity the capacity of this deque
      * @throws IllegalArgumentException if {@code capacity} is less than 1
      */
@@ -188,6 +241,10 @@ public class LinkedBlockingDeque<E>
      * the given collection, added in traversal order of the
      * collection's iterator.
      *
+     * <p>
+     *  创建容量为{@link Integer#MAX_VALUE}的{@code LinkedBlockingDeque},最初包含给定集合的元素,以集合的迭代器的遍历顺序添加。
+     * 
+     * 
      * @param c the collection of elements to initially contain
      * @throws NullPointerException if the specified collection or any
      *         of its elements are null
@@ -213,6 +270,9 @@ public class LinkedBlockingDeque<E>
 
     /**
      * Links node as first element, or returns false if full.
+     * <p>
+     *  链接节点作为第一个元素,或返回假如完全。
+     * 
      */
     private boolean linkFirst(Node<E> node) {
         // assert lock.isHeldByCurrentThread();
@@ -232,6 +292,9 @@ public class LinkedBlockingDeque<E>
 
     /**
      * Links node as last element, or returns false if full.
+     * <p>
+     *  将节点链接为最后一个元素,或者如果完全返回false。
+     * 
      */
     private boolean linkLast(Node<E> node) {
         // assert lock.isHeldByCurrentThread();
@@ -251,6 +314,9 @@ public class LinkedBlockingDeque<E>
 
     /**
      * Removes and returns first element, or null if empty.
+     * <p>
+     *  删除并返回第一个元素,如果为空,则为null。
+     * 
      */
     private E unlinkFirst() {
         // assert lock.isHeldByCurrentThread();
@@ -273,6 +339,9 @@ public class LinkedBlockingDeque<E>
 
     /**
      * Removes and returns last element, or null if empty.
+     * <p>
+     *  删除并返回最后一个元素,如果为空,则为null。
+     * 
      */
     private E unlinkLast() {
         // assert lock.isHeldByCurrentThread();
@@ -295,6 +364,9 @@ public class LinkedBlockingDeque<E>
 
     /**
      * Unlinks x.
+     * <p>
+     *  取消链接x。
+     * 
      */
     void unlink(Node<E> x) {
         // assert lock.isHeldByCurrentThread();
@@ -318,6 +390,8 @@ public class LinkedBlockingDeque<E>
     // BlockingDeque methods
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException if this deque is full
      * @throws NullPointerException {@inheritDoc}
      */
@@ -327,6 +401,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException if this deque is full
      * @throws NullPointerException  {@inheritDoc}
      */
@@ -336,6 +412,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      */
     public boolean offerFirst(E e) {
@@ -351,6 +429,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      */
     public boolean offerLast(E e) {
@@ -366,6 +446,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @throws InterruptedException {@inheritDoc}
      */
@@ -383,6 +465,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @throws InterruptedException {@inheritDoc}
      */
@@ -400,6 +484,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @throws InterruptedException {@inheritDoc}
      */
@@ -423,6 +509,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @throws InterruptedException {@inheritDoc}
      */
@@ -446,6 +534,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E removeFirst() {
@@ -455,6 +545,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E removeLast() {
@@ -546,6 +638,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E getFirst() {
@@ -555,6 +649,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E getLast() {
@@ -626,6 +722,12 @@ public class LinkedBlockingDeque<E>
      *
      * <p>This method is equivalent to {@link #addLast}.
      *
+     * <p>
+     *  在此deque的结尾插入指定的元素,除非它违反容量限制。当使用容量限制的deque时,通常优选使用方法{@link #offer(Object)offer}。
+     * 
+     *  <p>此方法相当于{@link #addLast}。
+     * 
+     * 
      * @throws IllegalStateException if this deque is full
      * @throws NullPointerException if the specified element is null
      */
@@ -635,6 +737,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException if the specified element is null
      */
     public boolean offer(E e) {
@@ -642,6 +746,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @throws InterruptedException {@inheritDoc}
      */
@@ -650,6 +756,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @throws InterruptedException {@inheritDoc}
      */
@@ -665,6 +773,12 @@ public class LinkedBlockingDeque<E>
      *
      * <p>This method is equivalent to {@link #removeFirst() removeFirst}.
      *
+     * <p>
+     *  检索并删除由此deque表示的队列的头。此方法与{@link #poll poll}不同之处仅在于,如果此deque为空,它会抛出异常。
+     * 
+     *  <p>此方法等效于{@link #removeFirst()removeFirst}。
+     * 
+     * 
      * @return the head of the queue represented by this deque
      * @throws NoSuchElementException if this deque is empty
      */
@@ -691,6 +805,12 @@ public class LinkedBlockingDeque<E>
      *
      * <p>This method is equivalent to {@link #getFirst() getFirst}.
      *
+     * <p>
+     *  检索但不删除由此deque表示的队列的头。此方法与{@link #peek peek}的不同之处仅在于,如果此deque为空,它会抛出异常。
+     * 
+     *  <p>此方法等效于{@link #getFirst()getFirst}。
+     * 
+     * 
      * @return the head of the queue represented by this deque
      * @throws NoSuchElementException if this deque is empty
      */
@@ -712,6 +832,11 @@ public class LinkedBlockingDeque<E>
      * an element will succeed by inspecting {@code remainingCapacity}
      * because it may be the case that another thread is about to
      * insert or remove an element.
+     * <p>
+     * 返回此deque可以理想地(在没有内存或资源约束的情况下)接受而不阻塞的其他元素的数量。这总是等于这个deque的初始容量减去这个deque的当前{@code size}。
+     * 
+     *  <p>请注意,您<em>不能</em>总是通过检查{@code remainingCapacity}来确定是否尝试插入元素将会成功,因为可能是另一个线程要插入或删除元素。
+     * 
      */
     public int remainingCapacity() {
         final ReentrantLock lock = this.lock;
@@ -724,6 +849,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -734,6 +861,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
@@ -763,6 +892,8 @@ public class LinkedBlockingDeque<E>
     // Stack methods
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException if this deque is full
      * @throws NullPointerException {@inheritDoc}
      */
@@ -771,6 +902,8 @@ public class LinkedBlockingDeque<E>
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NoSuchElementException {@inheritDoc}
      */
     public E pop() {
@@ -790,6 +923,13 @@ public class LinkedBlockingDeque<E>
      * <p>This method is equivalent to
      * {@link #removeFirstOccurrence(Object) removeFirstOccurrence}.
      *
+     * <p>
+     *  从此deque中删除指定元素的第一次出现。如果deque不包含元素,它不会改变。更正式地,删除第一个元素{@code e},使得{@code o.equals(e)}(如果这样的元素存在)。
+     * 如果此deque包含指定的元素(或等效地,如果这个deque作为调用的结果而改变),则返回{@code true}。
+     * 
+     *  <p>此方法等效于{@link #removeFirstOccurrence(Object)removeFirstOccurrence}。
+     * 
+     * 
      * @param o element to be removed from this deque, if present
      * @return {@code true} if this deque changed as a result of the call
      */
@@ -800,6 +940,10 @@ public class LinkedBlockingDeque<E>
     /**
      * Returns the number of elements in this deque.
      *
+     * <p>
+     *  返回此deque中的元素数。
+     * 
+     * 
      * @return the number of elements in this deque
      */
     public int size() {
@@ -817,6 +961,11 @@ public class LinkedBlockingDeque<E>
      * More formally, returns {@code true} if and only if this deque contains
      * at least one element {@code e} such that {@code o.equals(e)}.
      *
+     * <p>
+     *  如果此deque包含指定的元素,则返回{@code true}。
+     * 更正式地说,当且仅当这个deque包含至少一个{@code e}元素{@code o.equals(e)}时,返回{@code true}。
+     * 
+     * 
      * @param o object to be checked for containment in this deque
      * @return {@code true} if this deque contains the specified element
      */
@@ -840,6 +989,11 @@ public class LinkedBlockingDeque<E>
      * We don't want to acquire the lock for every iteration, but we
      * also want other threads a chance to interact with the
      * collection, especially when count is close to capacity.
+     * <p>
+     *  TODO：添加对更高效批量操作的支持。
+     * 
+     *  我们不想为每次迭代获取锁,但我们还希望其他线程有机会与集合交互,特别是当计数接近容量时。
+     * 
      */
 
 //     /**
@@ -849,6 +1003,11 @@ public class LinkedBlockingDeque<E>
 //      * this operation is undefined if the specified collection is
 //      * modified while the operation is in progress.
 //      *
+//      * <p>
+//      * // *将指定集合中的所有元素添加到此// *队列。尝试将一个队列添加到自身会导致// * {@code IllegalArgumentException}。
+//      * 此外,如果在操作正在进行时修改指定的集合// *,此操作的行为是未定义的。 // *。
+//      * 
+//      * 
 //      * @param c collection containing elements to be added to this queue
 //      * @return {@code true} if this queue changed as a result of the call
 //      * @throws ClassCastException            {@inheritDoc}
@@ -886,6 +1045,14 @@ public class LinkedBlockingDeque<E>
      * <p>This method acts as bridge between array-based and collection-based
      * APIs.
      *
+     * <p>
+     *  以适当的顺序(从第一个元素到最后一个元素)返回包含此deque中所有元素的数组。
+     * 
+     *  <p>返回的数组将是"安全的",因为没有对它的引用由此deque保持。 (换句话说,这个方法必须分配一个新的数组)。因此调用者可以自由地修改返回的数组。
+     * 
+     *  <p>此方法充当基于阵列和基于集合的API之间的桥梁。
+     * 
+     * 
      * @return an array containing all of the elements in this deque
      */
     @SuppressWarnings("unchecked")
@@ -929,6 +1096,21 @@ public class LinkedBlockingDeque<E>
      * Note that {@code toArray(new Object[0])} is identical in function to
      * {@code toArray()}.
      *
+     * <p>
+     *  以正确的顺序返回包含此deque中所有元素的数组;返回的数组的运行时类型是指定数组的运行时类型。如果deque符合指定的数组,则返回其中。
+     * 否则,将使用指定数组的运行时类型和此deque的大小分配新数组。
+     * 
+     *  <p>如果此deque适合指定的阵列,并且有空余余地(即,数组具有的元素多于此deque),那么在deque结束之后的数组中的元素将设置为{@code null}。
+     * 
+     * <p>与{@link #toArray()}方法类似,此方法充当基于数组和基于集合的API之间的桥梁。此外,该方法允许对输出阵列的运行时类型的精确控制,并且在某些情况下可以用于节省分配成本。
+     * 
+     *  <p>假设{@code x}是一个已知只包含字符串的deque。以下代码可用于将deque转储到新分配的{@code String}数组中：
+     * 
+     *  <pre> {@code String [] y = x.toArray(new String [0]);} </pre>
+     * 
+     *  注意,{@code toArray(new Object [0])}在功能上与{@code toArray()}是相同的。
+     * 
+     * 
      * @param a the array into which the elements of the deque are to
      *          be stored, if it is big enough; otherwise, a new array of the
      *          same runtime type is allocated for this purpose
@@ -984,6 +1166,9 @@ public class LinkedBlockingDeque<E>
     /**
      * Atomically removes all of the elements from this deque.
      * The deque will be empty after this call returns.
+     * <p>
+     *  原子性地删除此deque中的所有元素。此调用返回后,deque将为空。
+     * 
      */
     public void clear() {
         final ReentrantLock lock = this.lock;
@@ -1011,6 +1196,12 @@ public class LinkedBlockingDeque<E>
      * <p>The returned iterator is
      * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
      *
+     * <p>
+     *  以正确的顺序返回此deque中的元素的迭代器。元素将按从头(头)到尾(尾)的顺序返回。
+     * 
+     *  <p>返回的迭代器为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     * 
      * @return an iterator over the elements in this deque in proper sequence
      */
     public Iterator<E> iterator() {
@@ -1025,6 +1216,12 @@ public class LinkedBlockingDeque<E>
      * <p>The returned iterator is
      * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
      *
+     * <p>
+     *  以相反的顺序在此deque中的元素上返回一个迭代器。元素将按从最后(尾)到第一(头)的顺序返回。
+     * 
+     *  <p>返回的迭代器为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     * 
      * @return an iterator over the elements in this deque in reverse order
      */
     public Iterator<E> descendingIterator() {
@@ -1033,10 +1230,16 @@ public class LinkedBlockingDeque<E>
 
     /**
      * Base class for Iterators for LinkedBlockingDeque
+     * <p>
+     *  LinkedBlockingDeque的迭代器的基类
+     * 
      */
     private abstract class AbstractItr implements Iterator<E> {
         /**
          * The next node to return in next()
+         * <p>
+         *  下一个返回节点()
+         * 
          */
         Node<E> next;
 
@@ -1045,12 +1248,18 @@ public class LinkedBlockingDeque<E>
          * an element exists in hasNext(), we must return item read
          * under lock (in advance()) even if it was in the process of
          * being removed when hasNext() was called.
+         * <p>
+         *  nextItem保持项目字段,因为一旦我们声明hasNext()中存在一个元素,即使hasNext()被调用时,它也正在被删除的过程中,我们必须返回在lock下的item read()。
+         * 
          */
         E nextItem;
 
         /**
          * Node returned by most recent call to next. Needed by remove.
          * Reset to null if this element is deleted by a call to remove.
+         * <p>
+         * 由最近一次调用返回的节点。需要删除。如果调用remove删除此元素,则重置为null。
+         * 
          */
         private Node<E> lastRet;
 
@@ -1072,6 +1281,9 @@ public class LinkedBlockingDeque<E>
         /**
          * Returns the successor node of the given non-null, but
          * possibly previously deleted, node.
+         * <p>
+         *  返回给定非空节点的后续节点,但可能先前已删除的节点。
+         * 
          */
         private Node<E> succ(Node<E> n) {
             // Chains of deleted nodes ending in null or self-links
@@ -1091,6 +1303,9 @@ public class LinkedBlockingDeque<E>
 
         /**
          * Advances next.
+         * <p>
+         *  下一步。
+         * 
          */
         void advance() {
             final ReentrantLock lock = LinkedBlockingDeque.this.lock;
@@ -1275,6 +1490,16 @@ public class LinkedBlockingDeque<E>
      * The {@code Spliterator} implements {@code trySplit} to permit limited
      * parallelism.
      *
+     * <p>
+     *  在此deque中的元素上返回一个{@link Spliterator}。
+     * 
+     *  <p>返回的分隔符为<a href="package-summary.html#Weakly"> <i>弱一致</i> </a>。
+     * 
+     *  <p> {@code Spliterator}报告{@link Spliterator#CONCURRENT},{@link Spliterator#ORDERED}和{@link Spliterator#NONNULL}
+     * 。
+     * 
+     *  @implNote {@code Spliterator}实现{@code trySplit}以允许有限的并行性。
+     * 
      * @return a {@code Spliterator} over the elements in this deque
      * @since 1.8
      */
@@ -1285,6 +1510,9 @@ public class LinkedBlockingDeque<E>
     /**
      * Saves this deque to a stream (that is, serializes it).
      *
+     * <p>
+     * 
+     * 
      * @param s the stream
      * @throws java.io.IOException if an I/O error occurs
      * @serialData The capacity (int), followed by elements (each an
@@ -1309,6 +1537,10 @@ public class LinkedBlockingDeque<E>
 
     /**
      * Reconstitutes this deque from a stream (that is, deserializes it).
+     * <p>
+     *  将此deque保存到流(即,序列化它)。
+     * 
+     * 
      * @param s the stream
      * @throws ClassNotFoundException if the class of a serialized object
      *         could not be found

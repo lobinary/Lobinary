@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -59,6 +60,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * If no {@code Transient} annotation is present
  * in any superclass the feature is not transient.
  *
+ * <p>
+ *  指示当{@link Introspector}构造与带注释的代码元素相关联的{@link PropertyDescriptor}或{@link EventSetDescriptor}类时,应使用给定的
+ * {@code value}来声明名为"transient"的属性。
+ *  "transient"属性的{@code true}值表示从{@link Encoder}派生的编码器应忽略此功能。
+ * <p>
+ *  {@code Transient}注解可以用于{@link FeatureDescriptor}子类中涉及的任何方法中,以识别注释类及其子类中的瞬态特征。
+ * 通常,以"get"开头的方法是放置注释的最佳位置,并且在为相同特征定义多个注释的情况下,该声明优先。
+ * <p>
+ * 
  * @since 1.7
  */
 @Target({METHOD})
@@ -67,6 +77,11 @@ public @interface Transient {
     /**
      * Returns whether or not the {@code Introspector} should
      * construct artifacts for the annotated method.
+     * <p>
+     *  要在其超类声明为transient的类中声明非瞬态特征,请使用{@code @Transient(false)}。
+     * 在所有情况下,{@link Introspector}通过引用最特定超类上的注释来决定要素是否是暂时的。如果在任何超类中不存在{@code Transient}注释,则该特征不是暂时的。
+     * 
+     * 
      * @return whether or not the {@code Introspector} should
      * construct artifacts for the annotated method
      */

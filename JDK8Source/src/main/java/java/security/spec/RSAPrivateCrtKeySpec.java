@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.math.BigInteger;
  * standard, using the Chinese Remainder Theorem (CRT) information values for
  * efficiency.
  *
+ * <p>
+ *  该类指定了PKCS#1标准中定义的RSA私钥,使用中国剩余定理(CRT)信息值来提高效率。
+ * 
+ * 
  * @author Jan Luehe
  *
  *
@@ -60,6 +65,11 @@ public class RSAPrivateCrtKeySpec extends RSAPrivateKeySpec {
     * primeP, primeQ, primeExponentP, primeExponentQ, and
     * crtCoefficient as defined in PKCS#1.
     *
+    * <p>
+    *  创建一个新的{@code RSAPrivateCrtKeySpec}给定在PKCS#1中定义的模数,publicExponent,privateExponent,primeP,primeQ,prime
+    * ExponentP,primeExponentQ和crtCoefficient。
+    * 
+    * 
     * @param modulus the modulus n
     * @param publicExponent the public exponent e
     * @param privateExponent the private exponent d
@@ -90,6 +100,10 @@ public class RSAPrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the public exponent.
      *
+     * <p>
+     *  返回公共指数。
+     * 
+     * 
      * @return the public exponent
      */
     public BigInteger getPublicExponent() {
@@ -99,6 +113,10 @@ public class RSAPrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the primeP.
 
+     * <p>
+     *  返回primeP。
+     * 
+     * 
      * @return the primeP
      */
     public BigInteger getPrimeP() {
@@ -108,6 +126,10 @@ public class RSAPrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the primeQ.
      *
+     * <p>
+     *  返回primeQ。
+     * 
+     * 
      * @return the primeQ
      */
     public BigInteger getPrimeQ() {
@@ -117,6 +139,10 @@ public class RSAPrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the primeExponentP.
      *
+     * <p>
+     *  返回primeExponentP。
+     * 
+     * 
      * @return the primeExponentP
      */
     public BigInteger getPrimeExponentP() {
@@ -126,6 +152,10 @@ public class RSAPrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the primeExponentQ.
      *
+     * <p>
+     *  返回primeExponentQ。
+     * 
+     * 
      * @return the primeExponentQ
      */
     public BigInteger getPrimeExponentQ() {
@@ -135,6 +165,9 @@ public class RSAPrivateCrtKeySpec extends RSAPrivateKeySpec {
     /**
      * Returns the crtCoefficient.
      *
+     * <p>
+     *  返回crtCoefficient。
+     * 
      * @return the crtCoefficient
      */
     public BigInteger getCrtCoefficient() {

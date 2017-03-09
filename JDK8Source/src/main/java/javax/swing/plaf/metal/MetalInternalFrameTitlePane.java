@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,10 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
 /**
  * Class that manages a JLF title bar
+ * <p>
+ *  管理JLF标题栏的类
+ * 
+ * 
  * @author Steve Wilson
  * @author Brian Beck
  * @since 1.3
@@ -55,21 +60,33 @@ public class MetalInternalFrameTitlePane  extends BasicInternalFrameTitlePane {
     /**
      * Key used to lookup Color from UIManager. If this is null,
      * <code>getWindowTitleBackground</code> is used.
+     * <p>
+     *  用于从UIManager查找颜色的键。如果这是null,使用<code> getWindowTitleBackground </code>。
+     * 
      */
     private String selectedBackgroundKey;
     /**
      * Key used to lookup Color from UIManager. If this is null,
      * <code>getWindowTitleForeground</code> is used.
+     * <p>
+     *  用于从UIManager查找颜色的键。如果这是null,使用<code> getWindowTitleForeground </code>。
+     * 
      */
     private String selectedForegroundKey;
     /**
      * Key used to lookup shadow color from UIManager. If this is null,
      * <code>getPrimaryControlDarkShadow</code> is used.
+     * <p>
+     *  用于从UIManager查找阴影颜色的键。如果此值为null,则使用<code> getPrimaryControlDarkShadow </code>。
+     * 
      */
     private String selectedShadowKey;
     /**
      * Boolean indicating the state of the <code>JInternalFrame</code>s
      * closable property at <code>updateUI</code> time.
+     * <p>
+     *  布尔值,指示<code> updateUI </code>时间的<code> JInternalFrame </code> s closable属性的状态。
+     * 
      */
     private boolean wasClosable;
 
@@ -154,24 +171,36 @@ public class MetalInternalFrameTitlePane  extends BasicInternalFrameTitlePane {
     /**
      * Override the parent's method to do nothing. Metal frames do not
      * have system menus.
+     * <p>
+     *  覆盖父级的方法不做任何事情。金属框架没有系统菜单。
+     * 
      */
     protected void assembleSystemMenu() {}
 
     /**
      * Override the parent's method to do nothing. Metal frames do not
      * have system menus.
+     * <p>
+     *  覆盖父级的方法不做任何事情。金属框架没有系统菜单。
+     * 
      */
     protected void addSystemMenuItems(JMenu systemMenu) {}
 
     /**
      * Override the parent's method to do nothing. Metal frames do not
      * have system menus.
+     * <p>
+     *  覆盖父级的方法不做任何事情。金属框架没有系统菜单。
+     * 
      */
     protected void showSystemMenu() {}
 
     /**
      * Override the parent's method avoid creating a menu bar. Metal frames
      * do not have system menus.
+     * <p>
+     *  覆盖父项的方法,避免创建菜单栏。金属框架没有系统菜单。
+     * 
      */
     protected void addSubComponents() {
         add(iconButton);
@@ -494,6 +523,8 @@ public class MetalInternalFrameTitlePane  extends BasicInternalFrameTitlePane {
     /**
      * Updates any state dependant upon the JInternalFrame being shown in
      * a <code>JOptionPane</code>.
+     * <p>
+     *  更新依赖于JInternalFrame显示在<code> JOptionPane </code>中的任何状态。
      */
     private void updateOptionPaneState() {
         int type = -2;

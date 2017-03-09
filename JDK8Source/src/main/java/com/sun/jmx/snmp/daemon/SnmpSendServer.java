@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -20,6 +21,9 @@ import static com.sun.jmx.defaults.JmxProperties.SNMP_ADAPTOR_LOGGER;
  * and prepares the inform request protocol data unit (PDU) packet and sends
  * it to the manager. The request is then added to the wait queue and
  * marked as one that is waiting for a response.
+ * <p>
+ *  该类启动从队列中拾取会话的线程,并准备通知请求协议数据单元(PDU)包,并将其发送给管理器。然后将请求添加到等待队列,并标记为等待响应的请求。
+ * 
  */
 
 final class SnmpSendServer extends Thread {
@@ -144,6 +148,8 @@ final class SnmpSendServer extends Thread {
 
     /**
      * This will fire the specified request.
+     * <p>
+     *  这将触发指定的请求。
      */
     private void fireRequest(SnmpInformRequest req) {
         if (req != null && req.inProgress()) {

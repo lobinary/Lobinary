@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -83,6 +84,8 @@ public class FileResolverImpl implements Resolver
     /**
     * Checks the lastModified() timestamp of the file and optionally
     * re-reads the Properties object from the file if newer.
+    * <p>
+    *  检查文件的lastModified()时间戳,如果是较新的,可以从文件中重新读取Properties对象。
     */
     private void check()
     {

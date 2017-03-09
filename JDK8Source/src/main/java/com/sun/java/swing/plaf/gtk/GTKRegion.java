@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ import javax.swing.plaf.synth.Region;
  * A typesafe enumeration of the distinct rendering portions specific
  * to GTK.
  *
+ * <p>
+ *  GTK特有的不同渲染部分的类型安全枚举。
+ * 
  * @author Scott Violet
  */
 class GTKRegion extends Region {

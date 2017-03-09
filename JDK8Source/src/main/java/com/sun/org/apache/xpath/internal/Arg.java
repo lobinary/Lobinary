@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: Arg.java,v 1.1.2.1 2005/08/01 01:30:11 jeffsuttor Exp $
+ * <p>
+ *  $ Id：Arg.java,v 1.1.2.1 2005/08/01 01:30:11 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal;
 
@@ -31,12 +44,19 @@ import java.util.Objects;
  * the stack. The value of the argument can be either an
  * XObject or a String containing an expression.
  * @xsl.usage internal
+ * <p>
+ *  这个类保存了栈上一个参数的实例。参数的值可以是XObject或包含表达式的字符串。 @ xsl.usage internal
+ * 
  */
 public class Arg
 {
 
   /** Field m_qname: The name of this argument, expressed as a QName
    * (Qualified Name) object.
+   * <p>
+   *  (限定名称)对象。
+   * 
+   * 
    * @see getQName
    * @see setQName
    *  */
@@ -45,6 +65,10 @@ public class Arg
   /**
    * Get the qualified name for this argument.
    *
+   * <p>
+   *  获取此参数的限定名称。
+   * 
+   * 
    * @return QName object containing the qualified name
    */
   public final QName getQName()
@@ -55,6 +79,10 @@ public class Arg
   /**
    * Set the qualified name for this argument.
    *
+   * <p>
+   *  设置此参数的限定名称。
+   * 
+   * 
    * @param name QName object representing the new Qualified Name.
    */
   public final void setQName(QName name)
@@ -63,6 +91,8 @@ public class Arg
   }
 
   /** Field m_val: Stored XObject value of this argument
+  /* <p>
+  /* 
    * @see #getVal()
    * @see #setVal()
    */
@@ -71,6 +101,10 @@ public class Arg
   /**
    * Get the value for this argument.
    *
+   * <p>
+   *  获取此参数的值。
+   * 
+   * 
    * @return the argument's stored XObject value.
    * @see #setVal(XObject)
    */
@@ -82,6 +116,10 @@ public class Arg
   /**
    * Set the value of this argument.
    *
+   * <p>
+   *  设置此参数的值。
+   * 
+   * 
    * @param val an XObject representing the arguments's value.
    * @see #getVal()
    */
@@ -93,6 +131,9 @@ public class Arg
   /**
    * Have the object release it's resources.
    * Call only when the variable or argument is going out of scope.
+   * <p>
+   *  让对象释放它的资源。只有当变量或参数超出范围时才调用。
+   * 
    */
   public void detach()
   {
@@ -105,6 +146,8 @@ public class Arg
 
 
   /** Field m_expression: Stored expression value of this argument.
+  /* <p>
+  /* 
    * @see #setExpression
    * @see #getExpression
    * */
@@ -113,6 +156,10 @@ public class Arg
   /**
    * Get the value expression for this argument.
    *
+   * <p>
+   *  获取此参数的值表达式。
+   * 
+   * 
    * @return String containing the expression previously stored into this
    * argument
    * @see #setExpression
@@ -125,6 +172,10 @@ public class Arg
   /**
    * Set the value expression for this argument.
    *
+   * <p>
+   *  设置此参数的值表达式。
+   * 
+   * 
    * @param expr String containing the expression to be stored as this
    * argument's value.
    * @see #getExpression
@@ -137,12 +188,18 @@ public class Arg
   /**
    * True if this variable was added with an xsl:with-param or
    * is added via setParameter.
+   * <p>
+   *  如果此变量添加了xsl：with-param或通过setParameter添加,则为true。
+   * 
    */
   private boolean m_isFromWithParam;
 
   /**
    * Tell if this variable is a parameter passed with a with-param or as
    * a top-level parameter.
+   * <p>
+   *  告诉这个变量是使用with-param还是作为顶级参数传递的参数。
+   * 
    */
    public boolean isFromWithParam()
    {
@@ -155,11 +212,17 @@ public class Arg
    * a "received" parameter, ie one for which an xsl:param has
    * been encountered.
    * Set at the time the object is constructed and updated as needed.
+   * <p>
+   * 如果此变量当前可见,则为true。为了可见,变量需要来自xsl：variable或者是"received"参数,即遇到xsl：param的参数。在对象根据需要构造和更新时设置。
+   * 
    */
   private boolean m_isVisible;
 
   /**
    * Tell if this variable is currently visible.
+   * <p>
+   *  告诉这个变量目前是否可见。
+   * 
    */
    public boolean isVisible()
    {
@@ -168,6 +231,9 @@ public class Arg
 
   /**
    * Update visibility status of this variable.
+   * <p>
+   *  更新此变量的可见性状态。
+   * 
    */
    public void setIsVisible(boolean b)
    {
@@ -178,6 +244,9 @@ public class Arg
    * Construct a dummy parameter argument, with no QName and no
    * value (either expression string or value XObject). isVisible
    * defaults to true.
+   * <p>
+   *  构造一个伪参数参数,没有QName和没有值(表达式字符串或值XObject)。 isVisible默认为true。
+   * 
    */
   public Arg()
   {
@@ -193,6 +262,10 @@ public class Arg
   /**
    * Construct a parameter argument that contains an expression.
    *
+   * <p>
+   *  构造包含表达式的参数参数。
+   * 
+   * 
    * @param qname Name of the argument, expressed as a QName object.
    * @param expression String to be stored as this argument's value expression.
    * @param isFromWithParam True if this is a parameter variable.
@@ -211,6 +284,10 @@ public class Arg
    * Construct a parameter argument which has an XObject value.
    * isVisible defaults to true.
    *
+   * <p>
+   *  构造具有XObject值的参数参数。 isVisible默认为true。
+   * 
+   * 
    * @param qname Name of the argument, expressed as a QName object.
    * @param val Value of the argument, expressed as an XObject
    */
@@ -233,6 +310,10 @@ public class Arg
    * Equality function specialized for the variable name.  If the argument
    * is not a qname, it will deligate to the super class.
    *
+   * <p>
+   *  专用于变量名的等式函数。如果参数不是一个qname,它将分配到超类。
+   * 
+   * 
    * @param   obj   the reference object with which to compare.
    * @return  <code>true</code> if this object is the same as the obj
    *          argument; <code>false</code> otherwise.
@@ -251,6 +332,9 @@ public class Arg
   /**
    * Construct a parameter argument.
    *
+   * <p>
+   *  构造参数参数。
+   * 
    * @param qname Name of the argument, expressed as a QName object.
    * @param val Value of the argument, expressed as an XObject
    * @param isFromWithParam True if this is a parameter variable.

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,14 @@ import com.sun.jmx.snmp.SnmpOid;
  * </p>
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此接口模拟要在特定SNMP MIB节点上执行的SNMP子请求。涉及的节点可以是SNMP组,SNMP表或SNMP表条目(概念性行)。概念行可能已经存在,也可能不存在。
+ * 如果在收到请求时该行不存在,<CODE> isNewEntry()</CODE>方法将返回<CODE> true </CODE>。
+ * <p>
+ *  实现此接口的对象将由SNMP引擎分配。你永远不需要实现这个接口。你只会使用它。
+ * </p>
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 public interface SnmpMibSubRequest extends SnmpMibRequest {
     /**
@@ -62,6 +71,15 @@ public interface SnmpMibSubRequest extends SnmpMibRequest {
      * creation and deletion.
      * </ul>
      * <p>
+     * <p>
+     *  返回要由SNMP MIB节点处理的varbind的列表。
+     * <p>
+     *  <b>注意：</b> <ul> <i>在SET操作的情况下,如果此节点是包含控制变量(由表的isRowStatus()方法标识)的表行,控制变量不会包含在此列表中：它将通过调用getRowStatus
+     * VarBind()获得。
+     * 这将允许你具体处理控制变量。</i> <br>除非你需要实现一个非标准的机制来处理行创建和删除,否则你永远不需要担心。
+     * </ul>
+     * <p>
+     * 
      * @return The elements of the enumeration are instances of
      *         {@link com.sun.jmx.snmp.SnmpVarBind}
      */
@@ -83,6 +101,15 @@ public interface SnmpMibSubRequest extends SnmpMibRequest {
      * creation and deletion.
      * </ul>
      * <p>
+     * <p>
+     *  返回要由SNMP MIB节点处理的varbind的列表。
+     * <p>
+     * <b>注意：</b> <ul> <i>在SET操作的情况下,如果此节点是包含控制变量(由表的isRowStatus()方法标识)的表行,控制变量不会包含在此列表中：它将通过调用getRowStatusV
+     * arBind()获得。
+     * 这将允许你具体处理控制变量。</i> <br>除非你需要实现一个非标准的机制来处理行创建和删除,否则你永远不需要担心。
+     * </ul>
+     * <p>
+     * 
      * @return The elements of the vector are instances of
      *         {@link com.sun.jmx.snmp.SnmpVarBind}
      */
@@ -93,6 +120,11 @@ public interface SnmpMibSubRequest extends SnmpMibRequest {
      * Return the part of the OID identifying the table entry involved.
      * <p>
      *
+     * <p>
+     *  返回标识涉及的表条目的OID的一部分。
+     * <p>
+     * 
+     * 
      * @return {@link com.sun.jmx.snmp.SnmpOid} or <CODE>null</CODE>
      *         if the request is not directed to an entry.
      */
@@ -108,6 +140,12 @@ public interface SnmpMibSubRequest extends SnmpMibRequest {
      * is involved.
      *
      * <p>
+     * <p>
+     *  指示所涉及的条目是否是新条目。如果在处理请求时未找到条目,此方法将返回<CODE> true </CODE>。
+     * 因此,<CODE> true </CODE>表示该条目尚不存在,或者在处理此请求时已创建。此方法的结果仅在涉及条目时才有意义。
+     * 
+     * <p>
+     * 
      * @return <CODE>true</CODE> If the entry did not exist,
      *  or <CODE>false</CODE> if the entry involved was found.
      */
@@ -128,6 +166,16 @@ public interface SnmpMibSubRequest extends SnmpMibRequest {
      *          (see  {@link com.sun.jmx.snmp.agent.SnmpMibTable}).</ul>
      * </ul>
      * <p>
+     * <p>
+     * 返回包含RowStatus变量的varbind。
+     * 它对应于由mibgen在{@link com.sun.jmx.snmp.agent.SnmpMibTable}衍生产生的<code> isRowStatus()</code>方法标识的varbind。
+     *  </li> <li>在SMIv1中,没有生成任何特殊</li> <ul>您可以将子类别生成表元数据类,以便提供您自己的实现isRowStatus(),getRowAction(),isRowReady
+     * ()和setRowStatus()(请参阅{@link com.sun.jmx.snmp.agent.SnmpMibTable})。
+     * 它对应于由mibgen在{@link com.sun.jmx.snmp.agent.SnmpMibTable}衍生产生的<code> isRowStatus()</code>方法标识的varbind。
+     * </ul>。
+     * </ul>
+     * <p>
+     * 
      * @return a varbind that serves to control the table modification.
      *         <code>null</code> means that no such varbind could be
      *         identified.<br>
@@ -152,6 +200,13 @@ public interface SnmpMibSubRequest extends SnmpMibRequest {
      * index field.
      * <p>
      *
+     * <p>
+     *  当需要为SNMP GET请求的给定varbind引发状态异常时,应调用此方法。
+     * 此方法执行所有必要的转换(SNMPv1 <=> SNMPv2),并根据需要传播异常：如果版本为SNMP v1,则会传播异常。如果版本是SNMP v2,则异常存储在varbind中。
+     * 此方法还负责设置索引字段的正确值。
+     * <p>
+     * 
+     * 
      * @param varbind The varbind for which the exception is
      *        registered. Note that this varbind <b>must</b> have
      *        been obtained from the enumeration returned by
@@ -174,6 +229,11 @@ public interface SnmpMibSubRequest extends SnmpMibRequest {
      * index field.
      * <p>
      *
+     * <p>
+     *  当需要为SNMP SET请求的给定varbind引发状态异常时,应调用此方法。此方法执行所有必要的转换(SNMPv1 <=> SNMPv2),并根据需要传播异常。此方法还负责设置索引字段的正确值。
+     * <p>
+     * 
+     * 
      * @param varbind The varbind for which the exception is
      *        registered. Note that this varbind <b>must</b> have
      *        been obtained from the enumeration returned by
@@ -196,6 +256,10 @@ public interface SnmpMibSubRequest extends SnmpMibRequest {
      * index field.
      * <p>
      *
+     * <p>
+     * 当检查SNMP SET请求的给定varbind时需要引发状态异常时,应调用此方法。此方法执行所有必要的转换(SNMPv1 <=> SNMPv2),并根据需要传播异常。此方法还负责设置索引字段的正确值。
+     * <p>
+     * 
      * @param varbind The varbind for which the exception is
      *        registered. Note that this varbind <b>must</b> have
      *        been obtained from the enumeration returned by

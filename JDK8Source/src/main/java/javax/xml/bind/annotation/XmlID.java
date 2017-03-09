@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,27 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    &lt;/xs:complexType>
  * </pre>
  *
+ * <p>
+ * <p>
+ *  将JavaBean属性映射到XML ID。
+ * 
+ * <p>
+ *  为了保持XML序列化之后的XML反序列化的对象图的引用完整性,需要通过引用或包含适当地对对象引用进行编组。
+ * 注释<tt> @XmlID </tt>和<tt> @XmlIDREF </tt>一起允许通过包含或引用对JavaBean属性的类型进行自定义映射。
+ * 
+ *  <p> <b>使用</b> </p> <tt> @XmlID </tt>注释可用于以下程序元素：
+ * <ul>
+ *  <li>一个JavaBean属性</li> <li>非静态,非瞬态字段</li>
+ * </ul>
+ * 
+ *  <p>有关其他常见信息,请参阅javax.xml.bind.package javadoc中的"包规范"。</p>
+ * 
+ *  用法受以下约束：
+ * <ul>
+ *  <li>类别中的一个字段或属性最多可以使用<tt> @XmlID </tt>注释。
+ *  </li> <li>唯一可用于<tt> @XmlID </t>的其他映射注释</li> </tt>是：<tt> @XmlElement </tt>和<tt> @XmlAttribute </tt>。
+ * </li>。
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlIDREF
  * @since JAXB2.0

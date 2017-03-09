@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ import javax.naming.NamingException;
 /**
   * The FactoryEnumeration is used for returning factory instances.
   *
+  * <p>
+  *  FactoryEnumeration用于返回工厂实例。
+  * 
+  * 
   * @author Rosanna Lee
   * @author Scott Seligman
  */
@@ -57,6 +62,11 @@ public final class FactoryEnumeration {
      * weak reference is tagged with the factory's class name so the
      * class can be reloaded if the reference is cleared.
      *
+     * <p>
+     *  记录输入列表,并直接使用它来满足hasMore()/ next()请求。一个替代方法是使用列表中的枚举/迭代器,但是我们要更新列表,以便保留原始列表。该列表最初包含Class对象。
+     * 当使用每个元素时,Class对象被类本身的一个实例替代;最终,列表仅包含工厂实例的列表,不需要更新。
+     * 
+     * 
      * @param factories A non-null list
      * @param loader    The class loader of the list's contents
      *

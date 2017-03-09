@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,8 @@ import javax.management.ObjectName;
 import javax.management.openmbean.OpenDataException;
 
 /**
+/* <p>
+/* 
  * @since 1.6
  */
 
@@ -83,6 +86,20 @@ import javax.management.openmbean.OpenDataException;
  *
  * From the above, it is clear that the logic for getX on an MXBean is
  * the same as for setX on a proxy, and vice versa.
+ * <p>
+ *  此类处理MXBean引用和ObjectNames之间的映射。考虑一个像这样的MXBean接口：
+ * 
+ *  public interface ModuleMXBean {ProductMXBean getProduct(); void setProduct(ProductMXBean product); }
+ * }。
+ * 
+ *  这定义了一个称为"Product"的属性,其原始类型将是ProductMXBean,其openType将是ObjectName。映射如下进行。
+ * 
+ *  当调用MXBean的getProduct方法时,应该返回对另一个MXBean的引用,或者返回另一个MXBean的代理。 MXBean层必须将其转换为ObjectName。
+ * 如果它是对另一个MXBean的引用,它需要能够查找MXBean在此MBeanServer中注册的名称;这是mxbeanToObjectName映射的目的。
+ * 如果它是一个代理,它可以检查MBeanServer匹配,如果是,从代理提取ObjectName。
+ * 
+ *  当为此MXBean的代理调用setProduct方法时,参数可以是MXBean引用(如果代理具有本地MBeanServer,则只有真正的逻辑)或另一个代理。
+ * 所以映射逻辑与MXBean上的getProduct相同。
  */
 public class MXBeanLookup {
     private MXBeanLookup(MBeanServerConnection mbsc) {
@@ -163,6 +180,13 @@ public class MXBeanLookup {
             return false;
         /* removeReference can be called when the above condition fails,
          * notably if you try to register the same MXBean twice.
+         * <p>
+         * 
+         * 当MXBean的setProduct方法被调用时,它需要将ObjectName转换为实现ProductMXBean接口的对象。
+         * 我们可以有一个查找表反转mxbeanToObjectName,但这可能违反一般的JMX属性,你不能获得对MBean对象的引用。所以我们总是使用代理。
+         * 但是我们有一个objectNameToProxy映射,允许我们重用代理实例。
+         * 
+         *  当为此MXBean的代理调用getProduct方法时,它必须将返回的ObjectName转换为ProductMXBean的实例。再次,它可以通过做一个代理。
          */
     }
 

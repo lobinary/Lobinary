@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: FunctionTable.java,v 1.3 2005/09/28 13:49:34 pvedula Exp $
+ * <p>
+ *  $ Id：FunctionTable.java,v 1.3 2005/09/28 13:49:34 pvedula Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.compiler;
 
@@ -29,6 +42,9 @@ import javax.xml.transform.TransformerException;
 
 /**
  * The function table for XPath.
+ * <p>
+ *  XPath的函数表。
+ * 
  */
 public class FunctionTable
 {
@@ -142,6 +158,9 @@ public class FunctionTable
 
   /**
    * The function table.
+   * <p>
+   *  函数表。
+   * 
    */
   private static Class m_functions[];
 
@@ -150,27 +169,42 @@ public class FunctionTable
 
   /**
    * The function table contains customized functions
+   * <p>
+   *  功能表包含自定义功能
+   * 
    */
   private Class m_functions_customer[] = new Class[NUM_ALLOWABLE_ADDINS];
 
   /**
    * Table of function name to function ID associations for customized functions
+   * <p>
+   *  自定义函数的函数名称到函数ID关联的表
+   * 
    */
   private HashMap m_functionID_customer = new HashMap();
 
   /**
    * Number of built in functions.  Be sure to update this as
    * built-in functions are added.
+   * <p>
+   *  内置函数的数量。一定要更新此内置函数添加。
+   * 
    */
   private static final int NUM_BUILT_IN_FUNCS = 37;
 
   /**
    * Number of built-in functions that may be added.
+   * <p>
+   *  可以添加的内置函数的数量。
+   * 
    */
   private static final int NUM_ALLOWABLE_ADDINS = 30;
 
   /**
    * The index to the next free function index.
+   * <p>
+   *  到下一个自由函数索引的索引。
+   * 
    */
   private int m_funcNextFreeIndex = NUM_BUILT_IN_FUNCS;
 
@@ -310,6 +344,9 @@ public class FunctionTable
   /**
    * Return the name of the a function in the static table. Needed to avoid
    * making the table publicly available.
+   * <p>
+   *  返回静态表中的a函数的名称。需要避免使表格公开。
+   * 
    */
   String getFunctionName(int funcID) {
       if (funcID < NUM_BUILT_IN_FUNCS) return m_functions[funcID].getName();
@@ -319,6 +356,10 @@ public class FunctionTable
   /**
    * Obtain a new Function object from a function ID.
    *
+   * <p>
+   *  从函数ID获取一个新的Function对象。
+   * 
+   * 
    * @param which  The function ID, which may correspond to one of the FUNC_XXX
    *    values found in {@link com.sun.org.apache.xpath.internal.compiler.FunctionTable}, but may
    *    be a value installed by an external module.
@@ -346,6 +387,10 @@ public class FunctionTable
 
   /**
    * Obtain a function ID from a given function name
+   * <p>
+   *  从给定的函数名称获取函数ID
+   * 
+   * 
    * @param key the function name in a java.lang.String format.
    * @return a function ID, which may correspond to one of the FUNC_XXX values
    * found in {@link com.sun.org.apache.xpath.internal.compiler.FunctionTable}, but may be a
@@ -359,6 +404,10 @@ public class FunctionTable
 
   /**
    * Install a built-in function.
+   * <p>
+   *  安装内置函数。
+   * 
+   * 
    * @param name The unqualified name of the function, must not be null
    * @param func A Implementation of an XPath Function object.
    * @return the position of the function in the internal index.
@@ -394,6 +443,9 @@ public class FunctionTable
   /**
    * Tell if a built-in, non-namespaced function is available.
    *
+   * <p>
+   *  告诉内置的,非命名空间的函数是否可用。
+   * 
    * @param methName The local name of the function.
    *
    * @return True if the function can be executed.

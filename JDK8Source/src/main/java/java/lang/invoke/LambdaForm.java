@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -114,6 +115,35 @@ import static java.lang.invoke.MethodHandleNatives.Constants.*;
  *     == invoker for identity method handle which performs cast
  * }</pre></blockquote>
  * <p>
+ * <p>
+ *  方法句柄的调用语义的符号,不可执行形式。它由一系列名称组成。前N个(N = arity)名称是参数,而任何剩余的名称都是临时值。每个临时指定函数的应用程序的一些参数。
+ * 函数是方法句柄,而参数是常量值和本地名称的混合。 lambda的结果被定义为名称之一,通常是最后一个名称。
+ * <p>
+ * 这里是一个近似语法：<blockquote> <pre> {@ code LambdaForm ="("ArgName *")=> {"TempName * Result"}"ArgName ="a"N
+ * "："T TempName ="t"N "："T"="Function"("Argument *");" Function = ConstantValue Argument = NameRef | Co
+ * nstantValue Result = NameRef | "void"NameRef ="a"N | "t"N N =(任何整数)T ="L"| "I"| "J"| "F"| "D"| "V"} </pre>
+ *  </blockquote>名称从零开始从左到右依次编号。
+ *  (字母仅仅是语法糖的味道。)因此,第一临时(如果有的话)总是编号为N(其中N = arity)。参数列表中每次出现的名称引用必须引用以前在同一个lambda中定义的名称。
+ * 当且仅当其结果索引为-1时,lambda具有void结果。如果临时的类型为"V",它不能是NameRef的主体,即使拥有一个数字。
+ * 注意,所有引用类型都被擦除为"L",它代表{@code Object}。所有子字符类型(boolean,byte,short,char)被擦除为"I",即{@code int}。
+ * 其他类型代表通常的基本类型。
+ * <p>
+ *  函数调用严格遵循Java验证器的静态规则。当考虑其"名称"类型时,参数和返回值必须完全匹配。只有在不更改已擦除类型的情况下,才允许转换。
+ * <ul>
+ * <li> L = Object：casts可以自由地转换为引用类型和转出引用类型<li> I = int：当作为参数传递时,子类型被强制缩小(参见{@code explicitCastArguments}
+ * )<li>没有隐式转换<li> F = float：没有隐式转换<li> D = double：没有隐式转换<li> V = void：当且仅当其名称为"V"。
+ * </ul>
+ *  尽管不允许隐式转换,但是显式转换可以通过使用调用类型转换的标识函数的临时表达式来容易地编码。
+ * <p>
+ * 示例：<blockquote> <pre> {@ code(a0：J)=> {a0} == identity(long)(a0：I)=> {t1：V = System.out#println(a0); void; == System.out#println(int)(a0：L)=> {t1：V = System.out#println(a0); a0}
+ *  == identity,with printing side-effect(a0：L,a1：L)=> {t2：L = BoundMethodHandle#argument(a0); t3：L = BoundMethodHandle#target(a0); t4：L = MethodHandle#invoke(t3,t2,a1); t4}
+ *  ==一元插入参数组合的一般调用者(a0：L,a1：L)=> {t2：L = FilterMethodHandle#filter(a0); t3：L = MethodHandle#invoke(t2,a1); t4：L = FilterMethodHandle#target(a0); t5：L = MethodHandle#invoke(t4,t3); t5}
+ *  ==一元调用者的一元filterArgument组合(a0：L,a1：L)=> {...(与前面的例子相同)... t5：L = MethodHandle#invoke(t4,t3,a1); t5} 
+ * ==一元/一元foldArgument组合的一般调用者(a0：L,a1：I)=> {t2：I = identity(long).asType((int)→long)(a1); t2} ==用于执行i2l
+ * (a0：L,a1：L)=> {t2：L = BoundMethodHandle#argument(a0);}的身份方法句柄的调用者。
+ *  t3：L = Class#cast(t2,a1); t3} ==用于执行cast的身份方法句柄的调用器} </pre> </blockquote>。
+ * <p>
+ * 
  * @author John Rose, JSR 292 EG
  */
 class LambdaForm {
@@ -376,6 +406,8 @@ class LambdaForm {
     }
 
     /** Renumber and/or replace params so that they are interned and canonically numbered.
+    /* <p>
+    /* 
      *  @return maximum argument list length among the names (since we have to pass over them anyway)
      */
     private int normalize() {
@@ -430,6 +462,11 @@ class LambdaForm {
      * it possesses the same index in each use site.
      * This allows Name references to be freely reused to construct
      * fresh lambdas, without confusion.
+     * <p>
+     *  检查所有嵌入的名称引用是否可以本地化为此lambda,并在其相应的定义后正确排序。
+     * <p>
+     *  请注意,对于多个lambdas,名称可以是本地的,只要它在每个使用站点中具有相同的索引即可。这允许名称引用可以自由地重用来构造新鲜的lambdas,而不会混淆。
+     * 
      */
     boolean nameRefsAreLegal() {
         assert(arity >= 0 && arity <= names.length);
@@ -596,6 +633,29 @@ class LambdaForm {
      * depend on.  This probably means that reusable compiled LFs
      * will be tabulated (indexed) on relevant class loaders,
      * or else that the tables that cache them will have weak links.
+     * <p>
+     *  代码生成问题：
+     * 
+     * 编译LF应该是可重复使用的。最大的问题是如何决定何时将名称拉入字节码,而不是从MH数据加载已格式化的表单。
+     * 
+     *  例如,asType包装器可能需要在调用MH之后执行转换。投射的目标类型可以作为常数放置在LF本身中。这将强制转换类型被编译为MH的字节码和本地代码。
+     * 或者,可以在LF中擦除演员的目标类型,并从MH数据加载。 (稍后,如果MH作为整体被内联,则数据将流入LF的内联实例,作为常数,并且最终结果将是最佳的强制转换)。
+     * 
+     *  这种对类型的擦除可以通过使用引用类型来完成。它也可以用整个方法句柄。擦除方法句柄可能留下对于给定类型的任何MH正确执行的LF代码,并从包含MH的数据加载所需的MH。或者,擦除甚至可以擦除预期的MT。
+     * 
+     * 此外,对于直接MH,目标的MemberName可以被擦除,并从包含的直接MH加载。
+     * 作为一个简单的情况,所有int值非静态字段getter的LF将对其输入参数(对于从MemberName派生的非常量基类型)执行强制转换,并从输入对象加载整数值(在非 - 常数偏移也来自MemberNam
+     * e)。
+     * 此外,对于直接MH,目标的MemberName可以被擦除,并从包含的直接MH加载。这样的MN擦除的LF将内联回到优化的代码,每当恒定的封闭DMH可用于从其数据提供恒定MN。
+     * 
+     *  这里的主要问题是保持LF合理地通用,同时确保热点将内联好的实例。 "合理的通用"意味着我们不会得到在它们的优化形式上没有不同的重复版本的字节代码或机器代码。
+     * 机器的重复版本将具有(a)冗余编译工作和(b)额外I $压力的不期望的开销。为了控制重复版本,我们需要准备从LF中删除细节,并将它们移动到MH数据,这些细节与重大优化无关。
+     *  "重要"意味着优化实际上很热的代码。
+     * 
+     *  如果(a)MH被频繁执行并且(b)MH不能被内联到包含的调用者中,则实现这可能需要通过在相同的MH上用更专门的LF替换通用LF来动态地拆分MH,例如调用动态。
+     * 
+     * 不再使用的编译LF应该具有GC能力。如果它们包含非BCP引用,它们应该与它们的嵌入类型依赖的类加载器适当地互连。
+     * 这可能意味着可重用的编译的LF将在相关类加载器上列表(索引),否则缓存它们的表将具有弱链接。
      */
 
     /**
@@ -604,6 +664,8 @@ class LambdaForm {
      * before invocation.
      * (In principle, the JVM could do this very lazily,
      * as a sort of pre-invocation linkage step.)
+     * <p>
+     * 
      */
     public void prepare() {
         if (COMPILE_THRESHOLD == 0) {
@@ -1441,6 +1503,9 @@ class LambdaForm {
         }
         /** In the arguments of this Name, replace oldNames[i] pairwise by newNames[i].
          *  Limit such replacements to {@code start<=i<end}.  Return possibly changed self.
+         * <p>
+         *  使这个LF直接可执行,作为MethodHandle的一部分。不变量：每个被调用的MH必须在调用之前准备它的LF。 (原则上,JVM可以非常懒惰地,作为一种预调用链接步骤)。
+         * 
          */
         Name replaceNames(Name[] oldNames, Name[] newNames, int start, int end) {
             if (start >= end)  return this;
@@ -1538,6 +1603,9 @@ class LambdaForm {
 
         /** Return the index of the last occurrence of n in the argument array.
          *  Return -1 if the name is not used.
+         * <p>
+         *  将此类替换限制为{@code start <= i <end}。返回可能改变自我。
+         * 
          */
         int lastUseIndex(Name n) {
             if (arguments == null)  return -1;
@@ -1549,6 +1617,9 @@ class LambdaForm {
 
         /** Return the number of occurrences of n in the argument array.
          *  Return 0 if the name is not used.
+         * <p>
+         *  如果未使用名称,则返回-1。
+         * 
          */
         int useCount(Name n) {
             if (arguments == null)  return 0;
@@ -1588,6 +1659,9 @@ class LambdaForm {
 
     /** Return the index of the last name which contains n as an argument.
      *  Return -1 if the name is not used.  Return names.length if it is the return value.
+     * <p>
+     *  如果未使用名称,则返回0。
+     * 
      */
     int lastUseIndex(Name n) {
         int ni = n.index, nmax = names.length;
@@ -1779,6 +1853,9 @@ class LambdaForm {
 
     /**
      * Internal marker for byte-compiled LambdaForms.
+     * <p>
+     *  如果未使用名称,则返回-1。返回names.length如果是返回值。
+     * 
      */
     /*non-public*/
     @Target(ElementType.METHOD)
@@ -1788,6 +1865,9 @@ class LambdaForm {
 
     /**
      * Internal marker for LambdaForm interpreter frames.
+     * <p>
+     *  字节编译的LambdaForms的内部标记。
+     * 
      */
     /*non-public*/
     @Target(ElementType.METHOD)

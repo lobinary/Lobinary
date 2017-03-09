@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,10 @@ import java.util.ArrayList;
  * A default L&amp;F implementation of MenuUI.  This implementation
  * is a "combined" view/controller.
  *
+ * <p>
+ *  MenuUI的默认L&amp; F实现。这个实现是一个"组合"视图/控制器。
+ * 
+ * 
  * @author Georges Saab
  * @author David Karlton
  * @author Arnaud Weber
@@ -293,6 +298,9 @@ public class BasicMenuUI extends BasicMenuItemUI
     /*
      * Set the background color depending on whether this is a toplevel menu
      * in a menubar or a submenu of another menu.
+     * <p>
+     *  设置背景颜色取决于这是菜单栏中的顶级菜单还是另一个菜单的子菜单。
+     * 
      */
     private void updateDefaultBackgroundColor() {
         if (!UIManager.getBoolean("Menu.useMenuBarBackgroundForTopLevel")) {
@@ -318,6 +326,12 @@ public class BasicMenuUI extends BasicMenuItemUI
      * methods should call the parent methods so that the menu selection
      * is correct.
      *
+     * <p>
+     *  实例化并由菜单项使用以处理来自鼠标事件的当前菜单选择。 MouseInputHandler处理所有鼠标事件并将其转发到MenuSelectionManager的共享实例。
+     * <p>
+     *  这个类是受保护的,所以它可以被其他外观和感觉子类化来实现自己的鼠标处理行为。所有重写的方法应调用父方法,以便菜单选择正确。
+     * 
+     * 
      * @see javax.swing.MenuSelectionManager
      * @since 1.4
      */
@@ -336,6 +350,10 @@ public class BasicMenuUI extends BasicMenuItemUI
          * method clears or sets the selection path of the
          * MenuSelectionManager.
          *
+         * <p>
+         *  在菜单上单击鼠标时调用。此方法清除或设置MenuSelectionManager的选择路径。
+         * 
+         * 
          * @param e the mouse event
          */
         public void mousePressed(MouseEvent e) {
@@ -346,6 +364,10 @@ public class BasicMenuUI extends BasicMenuItemUI
          * Invoked when the mouse has been released on the menu. Delegates the
          * mouse event to the MenuSelectionManager.
          *
+         * <p>
+         *  在菜单上释放鼠标时调用。将鼠标事件委派给MenuSelectionManager。
+         * 
+         * 
          * @param e the mouse event
          */
         public void mouseReleased(MouseEvent e) {
@@ -358,6 +380,10 @@ public class BasicMenuUI extends BasicMenuItemUI
          * in which a menu item is used to pop up an additional menu, as in a
          * hierarchical menu system.
          *
+         * <p>
+         *  当光标进入菜单时调用。此方法设置MenuSelectionManager的所选路径,并处理菜单项用于弹出附加菜单的情况,如在分层菜单系统中。
+         * 
+         * 
          * @param e the mouse event; not used
          */
         public void mouseEntered(MouseEvent e) {
@@ -371,6 +397,10 @@ public class BasicMenuUI extends BasicMenuItemUI
          * Invoked when a mouse button is pressed on the menu and then dragged.
          * Delegates the mouse event to the MenuSelectionManager.
          *
+         * <p>
+         *  在菜单上按下鼠标按钮然后拖动时调用。将鼠标事件委派给MenuSelectionManager。
+         * 
+         * 
          * @param e the mouse event
          * @see java.awt.event.MouseMotionListener#mouseDragged
          */
@@ -386,6 +416,9 @@ public class BasicMenuUI extends BasicMenuItemUI
     /**
      * As of Java 2 platform 1.4, this previously undocumented class
      * is now obsolete. KeyBindings are now managed by the popup menu.
+     * <p>
+     *  从Java 2平台1.4,这个以前未记录的类现在已过时。 KeyBindings现在由弹出菜单管理。
+     * 
      */
     public class ChangeHandler implements ChangeListener {
         public JMenu    menu;
@@ -429,6 +462,10 @@ public class BasicMenuUI extends BasicMenuItemUI
          * method clears or sets the selection path of the
          * MenuSelectionManager.
          *
+         * <p>
+         * 在菜单上单击鼠标时调用。此方法清除或设置MenuSelectionManager的选择路径。
+         * 
+         * 
          * @param e the mouse event
          */
         public void mousePressed(MouseEvent e) {
@@ -469,6 +506,10 @@ public class BasicMenuUI extends BasicMenuItemUI
          * Invoked when the mouse has been released on the menu. Delegates the
          * mouse event to the MenuSelectionManager.
          *
+         * <p>
+         *  在菜单上释放鼠标时调用。将鼠标事件委派给MenuSelectionManager。
+         * 
+         * 
          * @param e the mouse event
          */
         public void mouseReleased(MouseEvent e) {
@@ -488,6 +529,10 @@ public class BasicMenuUI extends BasicMenuItemUI
          * in which a menu item is used to pop up an additional menu, as in a
          * hierarchical menu system.
          *
+         * <p>
+         *  当光标进入菜单时调用。此方法设置MenuSelectionManager的所选路径,并处理菜单项用于弹出附加菜单的情况,如在分层菜单系统中。
+         * 
+         * 
          * @param e the mouse event; not used
          */
         public void mouseEntered(MouseEvent e) {
@@ -534,6 +579,10 @@ public class BasicMenuUI extends BasicMenuItemUI
          * Invoked when a mouse button is pressed on the menu and then dragged.
          * Delegates the mouse event to the MenuSelectionManager.
          *
+         * <p>
+         *  在菜单上按下鼠标按钮然后拖动时调用。将鼠标事件委派给MenuSelectionManager。
+         * 
+         * 
          * @param e the mouse event
          * @see java.awt.event.MouseMotionListener#mouseDragged
          */
@@ -590,6 +639,8 @@ public class BasicMenuUI extends BasicMenuItemUI
         //
         /**
          * Open the Menu
+         * <p>
+         *  打开菜单
          */
         public void menuKeyTyped(MenuKeyEvent e) {
             if (!crossMenuMnemonic && BasicPopupMenuUI.getLastPopup() != null) {

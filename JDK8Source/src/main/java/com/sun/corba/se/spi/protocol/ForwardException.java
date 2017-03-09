@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,8 @@ import com.sun.corba.se.spi.orb.ORB ;
 
 /**
  * Thrown to signal an OBJECT_FORWARD or LOCATION_FORWARD
+ * <p>
+ *  被投射以表示OBJECT_FORWARD或LOCATION_FORWARD
  */
 public class ForwardException extends RuntimeException {
     private ORB orb ;

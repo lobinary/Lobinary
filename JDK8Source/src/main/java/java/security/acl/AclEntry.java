@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,15 @@ import java.security.Principal;
  * {@link #setNegativePermissions() setNegativePermissions}
  * method is called on it.
  *
+ * <p>
+ *  这是用于表示访问控制列表(ACL)中的一个条目的接口。<p>
+ * 
+ *  ACL可以被认为是具有多个ACL条目对象的数据结构。每个ACL条目对象包含与特定主体关联的一组权限。 (主体表示诸如单个用户或组的实体)。另外,每个ACL条目被指定为正或负。
+ * 如果为正,则将权限授予相关联的主体。如果为负,则拒绝权限。每个主体最多可以有一个正ACL条目和一个负条目;也就是说,不允许任何主体使用多个正或负ACL条目。
+ * 
+ *  注意：ACL条目默认为正。只有在调用{@link #setNegativePermissions()setNegativePermissions}方法时,条目才会变为否定条目。
+ * 
+ * 
  * @see java.security.acl.Acl
  *
  * @author      Satish Dharmaraj
@@ -58,6 +68,10 @@ public interface AclEntry extends Cloneable {
      * by this ACL entry. If a principal was already set for this ACL entry,
      * false is returned, otherwise true is returned.
      *
+     * <p>
+     *  指定此ACL条目授予或拒绝许可权的主体。如果已为此ACL条目设置了主体,则返回false,否则返回true。
+     * 
+     * 
      * @param user the principal to be set for this entry.
      *
      * @return true if the principal is set, false if there was
@@ -72,6 +86,10 @@ public interface AclEntry extends Cloneable {
      * this ACL entry. Returns null if there is no principal set for this
      * entry yet.
      *
+     * <p>
+     *  返回此ACL条目授予或拒绝权限的主体。如果此条目没有主体集,则返回null。
+     * 
+     * 
      * @return the principal associated with this entry.
      *
      * @see #setPrincipal
@@ -86,6 +104,11 @@ public interface AclEntry extends Cloneable {
      * Note: ACL entries are by default positive. An entry becomes a
      * negative entry only if this {@code setNegativePermissions}
      * method is called on it.
+     * <p>
+     * 将此ACL条目设置为负值。也就是说,相关主体(例如,用户或组)将被拒绝在条目中指定的权限集。
+     * 
+     *  注意：ACL条目默认为正。只有在调用此{@code setNegativePermissions}方法时,条目才会变为否定条目。
+     * 
      */
     public void setNegativePermissions();
 
@@ -94,6 +117,10 @@ public interface AclEntry extends Cloneable {
      * associated principal the set of permissions in the entry), false
      * otherwise.
      *
+     * <p>
+     *  如果这是一个否定ACL条目(一个拒绝相关主体的条目中的权限集),则返回true,否则返回false。
+     * 
+     * 
      * @return true if this is a negative ACL entry, false if it's not.
      */
     public boolean isNegative();
@@ -102,6 +129,10 @@ public interface AclEntry extends Cloneable {
      * Adds the specified permission to this ACL entry. Note: An entry can
      * have multiple permissions.
      *
+     * <p>
+     *  将指定的权限添加到此ACL条目。注意：条目可以有多个权限。
+     * 
+     * 
      * @param permission the permission to be associated with
      * the principal in this entry.
      *
@@ -113,6 +144,10 @@ public interface AclEntry extends Cloneable {
     /**
      * Removes the specified permission from this ACL entry.
      *
+     * <p>
+     *  从此ACL条目中删除指定的权限。
+     * 
+     * 
      * @param permission the permission to be removed from this entry.
      *
      * @return true if the permission is removed, false if the
@@ -124,6 +159,10 @@ public interface AclEntry extends Cloneable {
      * Checks if the specified permission is part of the
      * permission set in this entry.
      *
+     * <p>
+     *  检查指定的权限是否是此条目中设置的权限的一部分。
+     * 
+     * 
      * @param permission the permission to be checked for.
      *
      * @return true if the permission is part of the
@@ -134,6 +173,10 @@ public interface AclEntry extends Cloneable {
     /**
      * Returns an enumeration of the permissions in this ACL entry.
      *
+     * <p>
+     *  返回此ACL条目中的权限的枚举。
+     * 
+     * 
      * @return an enumeration of the permissions in this ACL entry.
      */
     public Enumeration<Permission> permissions();
@@ -141,6 +184,10 @@ public interface AclEntry extends Cloneable {
     /**
      * Returns a string representation of the contents of this ACL entry.
      *
+     * <p>
+     *  返回此ACL条目的内容的字符串表示形式。
+     * 
+     * 
      * @return a string representation of the contents.
      */
     public String toString();
@@ -148,6 +195,9 @@ public interface AclEntry extends Cloneable {
     /**
      * Clones this ACL entry.
      *
+     * <p>
+     *  克隆此ACL条目。
+     * 
      * @return a clone of this ACL entry.
      */
     public Object clone();

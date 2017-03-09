@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2001, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,13 @@ import java.nio.ByteBuffer;
  * the type of the channel. </p>
  *
  *
+ * <p>
+ *  可读取字节的通道。
+ * 
+ *  <p>在任何给定时间,在可读通道上只能进行一次读取操作。如果一个线程在通道上启动读取操作,那么尝试启动另一读取操作的任何其他线程将阻塞,直到第一操作完成。
+ * 其他种类的I / O操作是否可以与读取操作同时进行取决于通道的类型。 </p>。
+ * 
+ * 
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
  * @since 1.4
@@ -78,6 +86,16 @@ public interface ReadableByteChannel extends Channel {
      * invocation of this method will block until the first operation is
      * complete. </p>
      *
+     * <p>
+     *  从该通道读取一个字节序列到给定的缓冲区。
+     * 
+     *  <p>尝试从通道读取<i> r </i>个字节,其中<i> r </i>是缓冲区中剩余的字节数,即<tt> dst .remaining()</tt>,此时调用此方法。
+     * 
+     *  <p>假设读取长度为n的字节序列,其中<tt> 0 </tt> <tt> <= </tt>&lt; i>&nbsp; <tt>&lt; = </tt>&nbsp; <i> r </i>。
+     * 这个字节序列将被传送到缓冲器中,使得序列中的第一个字节在索引p i,最后一个字节在索引p i <tt> + < / tt>&nbsp; <i> n </i>&nbsp; <tt>  -  </tt>&n
+     * bsp; <tt> 1 </tt>,其中<i> p </i>这个方法被调用。
+     *  <p>假设读取长度为n的字节序列,其中<tt> 0 </tt> <tt> <= </tt>&lt; i>&nbsp; <tt>&lt; = </tt>&nbsp; <i> r </i>。
+     * 
      * @param  dst
      *         The buffer into which bytes are to be transferred
      *

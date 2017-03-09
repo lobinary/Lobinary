@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ import javax.imageio.IIOException;
  * <p> In particular, this class handles most or all of the details of
  * byte order interpretation, buffering, mark/reset, discarding,
  * closing, and disposing.
+ * <p>
+ *  一个实现<code> ImageInputStream </code>接口的抽象类。这个类被设计为减少必须由子类实现的方法的数量。
+ * 
+ *  <p>特别地,此类处理字节顺序解释,缓冲,标记/重置,丢弃,关闭和处理的大部分或全部细节。
+ * 
  */
 public abstract class ImageInputStreamImpl implements ImageInputStream {
 
@@ -58,6 +64,11 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * it should be large enough to hold a primitive value (i.e. >= 8 bytes).
      * Also note that this array is package protected, so that it can be
      * used by ImageOutputStreamImpl in a similar manner.
+     * <p>
+     *  用于readFully的字节缓冲区(type [],int,int)。
+     * 请注意,此数组也用于readShort(),readInt()等中的批量读取,因此它应该足够大以容纳一个原始值(即> = 8个字节)。
+     * 还要注意,这个数组是受包保护的,所以它可以由ImageOutputStreamImpl以类似的方式使用。
+     * 
      */
     byte[] byteBuf = new byte[BYTE_BUF_LENGTH];
 
@@ -68,6 +79,11 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * and <code>ByteOrder.LITTLE_ENDIAN</code> indicates the reverse
      * order.  By default, the value is
      * <code>ByteOrder.BIG_ENDIAN</code>.
+     * <p>
+     *  作为枚举类实例的流的字节顺序<code> java.nio.ByteOrder </code>,其中<code> ByteOrder.BIG_ENDIAN </code>表示网络字节顺序和<code>
+     *  ByteOrder.LITTLE_ENDIAN <代码>表示逆序。
+     * 默认情况下,值为<code> ByteOrder.BIG_ENDIAN </code>。
+     * 
      */
     protected ByteOrder byteOrder = ByteOrder.BIG_ENDIAN;
 
@@ -75,6 +91,9 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * The current read position within the stream.  Subclasses are
      * responsible for keeping this value current from any method they
      * override that alters the read position.
+     * <p>
+     *  流中的当前读取位置。子类负责保持这个值从它们覆盖的任何方法改变为读取位置。
+     * 
      */
     protected long streamPos;
 
@@ -82,6 +101,9 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * The current bit offset within the stream.  Subclasses are
      * responsible for keeping this value current from any method they
      * override that alters the bit offset.
+     * <p>
+     *  流中的当前位偏移。子类负责将此值保持为来自它们覆盖的任何方法的当前值,以改变位偏移。
+     * 
      */
     protected int bitOffset;
 
@@ -89,11 +111,17 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * The position prior to which data may be discarded.  Seeking
      * to a smaller position is not allowed.  <code>flushedPos</code>
      * will always be {@literal >= 0}.
+     * <p>
+     * 可以丢弃数据之前的位置。不允许寻求较小的职位。 <code> flushedPos </code>将始终为{@literal> = 0}。
+     * 
      */
     protected long flushedPos = 0;
 
     /**
      * Constructs an <code>ImageInputStreamImpl</code>.
+     * <p>
+     *  构造一个<code> ImageInputStreamImpl </code>。
+     * 
      */
     public ImageInputStreamImpl() {
     }
@@ -103,6 +131,10 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * Subclasses may call this method from any of their methods that
      * require the stream not to be closed.
      *
+     * <p>
+     *  如果流已关闭,则抛出<code> IOException </code>。子类可以从需要不关闭流的任何方法调用此方法。
+     * 
+     * 
      * @exception IOException if the stream is closed.
      */
     protected final void checkClosed() throws IOException {
@@ -131,6 +163,14 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * <p> The bit offset within the stream must be reset to zero before
      * the read occurs.
      *
+     * <p>
+     *  从流中读取一个字节,并以0到255之间的<code> int </code>返回它。如果到达EOF,则返回<code> -1 </code>。
+     * 
+     *  <p>子类必须提供此方法的实现。子类实现应在退出之前更新流位置。
+     * 
+     *  <p>在读取发生之前,流中的位偏移必须重置为零。
+     * 
+     * 
      * @return the value of the next byte in the stream, or <code>-1</code>
      * if EOF is reached.
      *
@@ -144,6 +184,12 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * <p> The bit offset within the stream is reset to zero before
      * the read occurs.
      *
+     * <p>
+     *  一个方便的方法,调用<code> read(b,0,b.length)</code>。
+     * 
+     *  <p>在读取发生之前,流内的位偏移重置为零。
+     * 
+     * 
      * @return the number of bytes actually read, or <code>-1</code>
      * to indicate EOF.
      *
@@ -168,6 +214,15 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * The subclass implementation should update the stream position
      * before exiting.
      *
+     * <p>
+     *  从流中读取<code> len </code>个字节,并将它们从索引<code> off </code>开始存储到<code> b </code>中。
+     * 如果没有字节可以读取,因为到达流的结尾,返回<code> -1 </code>。
+     * 
+     *  <p>在读取发生之前,流中的位偏移必须重置为零。
+     * 
+     *  <p>子类必须提供此方法的实现。子类实现应在退出之前更新流位置。
+     * 
+     * 
      * @param b an array of bytes to be written to.
      * @param off the starting position within <code>b</code> to write to.
      * @param len the maximum number of bytes to read.
@@ -712,6 +767,10 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * length.  Subclasses must override this method to provide actual
      * length information.
      *
+     * <p>
+     *  返回<code> -1L </code>以指示流的长度未知。子类必须覆盖此方法以提供实际的长度信息。
+     * 
+     * 
      * @return -1L to indicate unknown length.
      */
     public long length() {
@@ -724,6 +783,12 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      *
      * <p> The bit offset is reset to zero.
      *
+     * <p>
+     * 通过调用<code> seek(getStreamPosition()+ n)</code>提高当前流的位置。
+     * 
+     *  <p>位偏移重置为零。
+     * 
+     * 
      * @param n the number of bytes to seek forward.
      *
      * @return an <code>int</code> representing the number of bytes
@@ -745,6 +810,12 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      *
      * <p> The bit offset is reset to zero.
      *
+     * <p>
+     *  通过调用<code> seek(getStreamPosition()+ n)</code>提高当前流的位置。
+     * 
+     *  <p>位偏移重置为零。
+     * 
+     * 
      * @param n the number of bytes to seek forward.
      *
      * @return a <code>long</code> representing the number of bytes
@@ -775,6 +846,9 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
     /**
      * Pushes the current stream position onto a stack of marked
      * positions.
+     * <p>
+     *  将当前流位置推到一堆标记位置。
+     * 
      */
     public void mark() {
         try {
@@ -791,6 +865,12 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * <p> An <code>IOException</code> will be thrown if the previous
      * marked position lies in the discarded portion of the stream.
      *
+     * <p>
+     *  从标记位置的堆栈重置当前流字节和位位置。
+     * 
+     *  <p>如果先前标记的位置在流的丢弃部分中,则将抛出<code> IOException </code>。
+     * 
+     * 
      * @exception IOException if an I/O error occurs.
      */
     public void reset() throws IOException {
@@ -832,6 +912,9 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
     /**
      * Default implementation returns false.  Subclasses should
      * override this if they cache data.
+     * <p>
+     *  默认实现返回false。如果子类缓存数据,子类应该覆盖此。
+     * 
      */
     public boolean isCached() {
         return false;
@@ -840,6 +923,9 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
     /**
      * Default implementation returns false.  Subclasses should
      * override this if they cache data in main memory.
+     * <p>
+     *  默认实现返回false。如果子类在主内存中缓存数据,子类应该覆盖此。
+     * 
      */
     public boolean isCachedMemory() {
         return false;
@@ -848,6 +934,9 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
     /**
      * Default implementation returns false.  Subclasses should
      * override this if they cache data in a temporary file.
+     * <p>
+     *  默认实现返回false。如果子类在临时文件中缓存数据,子类应该覆盖此。
+     * 
      */
     public boolean isCachedFile() {
         return false;
@@ -865,6 +954,9 @@ public abstract class ImageInputStreamImpl implements ImageInputStream {
      * source.  This method should not be called from application
      * code.
      *
+     * <p>
+     *  在垃圾收集之前完成此对象。调用<code> close </code>方法以关闭任何打开的输入源。不应该从应用程序代码调用此方法。
+     * 
      * @exception Throwable if an error occurs during superclass
      * finalization.
      */

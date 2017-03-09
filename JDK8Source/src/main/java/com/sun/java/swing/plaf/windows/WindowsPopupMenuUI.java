@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,13 @@ import static sun.swing.SwingUtilities2.BASICMENUITEMUI_MAX_TEXT_OFFSET;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  Windows组件的翻译。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author Igor Kushnirskiy
  */
 public class WindowsPopupMenuUI extends BasicPopupMenuUI {
@@ -81,6 +89,10 @@ public class WindowsPopupMenuUI extends BasicPopupMenuUI {
      * Returns the <code>Popup</code> that will be responsible for
      * displaying the <code>JPopupMenu</code>.
      *
+     * <p>
+     *  返回将负责显示<code> JPopupMenu </code>的<code> Popup </code>。
+     * 
+     * 
      * @param popupMenu JPopupMenu requesting Popup
      * @param x     Screen x location Popup is to be shown at
      * @param y     Screen y location Popup is to be shown at.
@@ -119,6 +131,10 @@ public class WindowsPopupMenuUI extends BasicPopupMenuUI {
     /**
      * Returns offset for the text.
      * BasicMenuItemUI sets max text offset on the JPopupMenuUI.
+     * <p>
+     *  返回文本的偏移量。 BasicMenuItemUI在JPopupMenuUI上设置最大文本偏移量。
+     * 
+     * 
      * @param c PopupMenu to return text offset for.
      * @return text offset for the component
      */
@@ -130,6 +146,9 @@ public class WindowsPopupMenuUI extends BasicPopupMenuUI {
             /*
              * this is in JMenuItem coordinates.
              * Let's assume all the JMenuItem have the same offset along X.
+             * <p>
+             *  这是在JMenuItem坐标。让我们假设所有的JMenuItem都有与X相同的偏移量。
+             * 
              */
             rv = (Integer) maxTextOffset;
             int menuItemOffset = 0;
@@ -145,6 +164,10 @@ public class WindowsPopupMenuUI extends BasicPopupMenuUI {
     /**
      * Returns span before gutter.
      * used only on Vista.
+     * <p>
+     *  返回gutter之前的span。仅用于Vista。
+     * 
+     * 
      * @return span before gutter
      */
     static int getSpanBeforeGutter() {
@@ -154,6 +177,10 @@ public class WindowsPopupMenuUI extends BasicPopupMenuUI {
     /**
      * Returns span after gutter.
      * used only on Vista.
+     * <p>
+     *  返回gutter之后的span。仅用于Vista。
+     * 
+     * 
      * @return span after gutter
      */
     static int getSpanAfterGutter() {
@@ -163,6 +190,10 @@ public class WindowsPopupMenuUI extends BasicPopupMenuUI {
     /**
      * Returns gutter width.
      * used only on Vista.
+     * <p>
+     *  返回槽宽度。仅用于Vista。
+     * 
+     * 
      * @return width of the gutter
      */
     static int getGutterWidth() {
@@ -180,6 +211,9 @@ public class WindowsPopupMenuUI extends BasicPopupMenuUI {
      * The orientation is derived from the children of the component.
      * It is leftToRight if all the children are leftToRight
      *
+     * <p>
+     *  检查PopupMenu是否为leftToRight方向是从组件的子项派生的。如果所有的孩子都是leftToRight,它是leftToRight
+     * 
      * @param c component to return orientation for
      * @return true if all the children are leftToRight
      */

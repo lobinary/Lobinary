@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,11 @@ import java.security.Principal;
  * interface.) The initial owner Principal should be specified as an
  * argument to the constructor of the class implementing this interface.
  *
+ * <p>
+ *  用于管理访问控制列表(ACL)或ACL配置所有者的接口。 (请注意,{@code java.security.acl}包中的Acl接口扩展了此Owner接口。
+ * )初始所有者Principal应指定为实现此接口的类的构造函数的参数。
+ * 
+ * 
  * @see java.security.acl.Acl
  *
  */
@@ -45,6 +51,10 @@ public interface Owner {
      * That is, only an owner can add another owner. The initial owner is
      * configured at ACL construction time.
      *
+     * <p>
+     *  添加所有者。只有所有者才能修改ACL内容。调用者主体必须是ACL的所有者才能调用此方法。也就是说,只有所有者可以添加其他所有者。初始所有者在ACL构建时配置。
+     * 
+     * 
      * @param caller the principal invoking this method. It must be an owner
      * of the ACL.
      *
@@ -64,6 +74,12 @@ public interface Owner {
      * The caller principal must be an owner of the ACL in order to invoke
      * this method.
      *
+     * <p>
+     *  删除所有者。如果这是ACL中的最后一个所有者,则会引发异常。<p>
+     * 
+     *  调用者主体必须是ACL的所有者才能调用此方法。
+     * 
+     * 
      * @param caller the principal invoking this method. It must be an owner
      * of the ACL.
      *
@@ -84,6 +100,8 @@ public interface Owner {
     /**
      * Returns true if the given principal is an owner of the ACL.
      *
+     * <p>
+     * 
      * @param owner the principal to be checked to determine whether or not
      * it is an owner.
      *

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ContextMatchStepPattern.java,v 1.2.4.2 2005/09/15 00:21:15 jeffsuttor Exp $
+ * <p>
+ *  $ Id：ContextMatchStepPattern.java,v 1.2.4.2 2005/09/15 00:21:15 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.patterns;
 
@@ -31,6 +44,9 @@ import com.sun.org.apache.xpath.internal.axes.WalkerFactory;
 import com.sun.org.apache.xpath.internal.objects.XObject;
 /**
  * Special context node pattern matcher.
+ * <p>
+ *  特殊上下文节点模式匹配器。
+ * 
  */
 public class ContextMatchStepPattern extends StepPattern
 {
@@ -39,6 +55,9 @@ public class ContextMatchStepPattern extends StepPattern
   /**
    * Construct a ContextMatchStepPattern.
    *
+   * <p>
+   *  构造ContextMatchStepPattern。
+   * 
    */
   public ContextMatchStepPattern(int axis, int paxis)
   {
@@ -49,6 +68,10 @@ public class ContextMatchStepPattern extends StepPattern
    * Execute this pattern step, including predicates.
    *
    *
+   * <p>
+   *  执行此模式步骤,包括谓词。
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return {@link com.sun.org.apache.xpath.internal.patterns.NodeTest#SCORE_NODETEST},
@@ -73,6 +96,9 @@ public class ContextMatchStepPattern extends StepPattern
    * Execute the match pattern step relative to another step.
    *
    *
+   * <p>
+   *  相对于另一个步骤执行匹配模式步骤。
+   * 
    * @param xctxt The XPath runtime context.
    * NEEDSDOC @param prevStep
    *

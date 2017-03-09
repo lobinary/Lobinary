@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: WalkingIteratorSorted.java,v 1.2.4.1 2005/09/14 19:45:23 jeffsuttor Exp $
+ * <p>
+ *  $ Id：WalkingIteratorSorted.java,v 1.2.4.1 2005/09/14 19:45:23 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -29,6 +42,9 @@ import com.sun.org.apache.xpath.internal.compiler.Compiler;
 /**
  * This class iterates over set of nodes that needs to be sorted.
  * @xsl.usage internal
+ * <p>
+ *  此类遍历需要排序的节点集。 @ xsl.usage internal
+ * 
  */
 public class WalkingIteratorSorted extends WalkingIterator
 {
@@ -38,12 +54,18 @@ public class WalkingIteratorSorted extends WalkingIterator
 //  protected boolean m_inNaturalOrder = false;
 
   /** True if the nodes will be found in document order, and this can
+  /* <p>
+  /* 
    * be determined statically. */
   protected boolean m_inNaturalOrderStatic = false;
 
   /**
    * Create a WalkingIteratorSorted object.
    *
+   * <p>
+   *  创建一个WalkingIteratorSorted对象。
+   * 
+   * 
    * @param nscontext The namespace context for this iterator,
    * should be OK if null.
    */
@@ -57,6 +79,10 @@ public class WalkingIteratorSorted extends WalkingIterator
    * of step walkers from the opcode list, and call back
    * into the Compiler to create predicate expressions.
    *
+   * <p>
+   *  创建一个WalkingIterator迭代器,包括从操作码列表创建步骤步行器,并回调到编译器以创建谓词表达式。
+   * 
+   * 
    * @param compiler The Compiler which is creating
    * this expression.
    * @param opPos The position of this iterator in the
@@ -78,6 +104,10 @@ public class WalkingIteratorSorted extends WalkingIterator
    * Returns true if all the nodes in the iteration well be returned in document
    * order.
    *
+   * <p>
+   *  如果迭代中的所有节点都以文档顺序返回,则返回true。
+   * 
+   * 
    * @return true as a default.
    */
   public boolean isDocOrdered()
@@ -90,6 +120,10 @@ public class WalkingIteratorSorted extends WalkingIterator
    * Tell if the nodeset can be walked in doc order, via static analysis.
    *
    *
+   * <p>
+   *  告诉节点集是否可以通过静态分析在文档顺序中走。
+   * 
+   * 
    * @return true if the nodeset can be walked in doc order, without sorting.
    */
   boolean canBeWalkedInNaturalDocOrderStatic()
@@ -140,6 +174,10 @@ public class WalkingIteratorSorted extends WalkingIterator
 //   * NEEDSDOC Method canBeWalkedInNaturalDocOrder
 //   *
 //   *
+//   * <p>
+//   *  // * NEEDSDOC方法canBeWalkedInNaturalDocOrder // * // *
+//   * 
+//   * 
 //   * NEEDSDOC (canBeWalkedInNaturalDocOrder) @return
 //   */
 //  boolean canBeWalkedInNaturalDocOrder()
@@ -188,6 +226,9 @@ public class WalkingIteratorSorted extends WalkingIterator
   /**
    * This function is used to perform some extra analysis of the iterator.
    *
+   * <p>
+   *  此函数用于对迭代器执行一些额外的分析。
+   * 
    * @param vars List of QNames that correspond to variables.  This list
    * should be searched backwards for the first qualified name that
    * corresponds to the variable reference qname.  The position of the

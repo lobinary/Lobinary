@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -120,6 +121,8 @@ public class MonitoredObjectImpl implements MonitoredObject {
     /**
      * calls clearState() on all the registered children MonitoredObjects and
      * MonitoredAttributes.
+     * <p>
+     *  对所有已注册的子项MonitoredObjects和MonitoredAttributes调用clearState()。
      */
     public void clearState( ) {
         synchronized( this ) {

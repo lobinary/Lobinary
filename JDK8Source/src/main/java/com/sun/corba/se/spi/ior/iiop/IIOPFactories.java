@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,8 @@ import org.omg.IOP.TAG_INTERNET_IOP ;
  * components.  This includes direct construction of profiles and templates,
  * as well as constructing factories that can be registered with an
  * IdentifiableFactoryFinder.
+ * <p>
+ *  组件。这包括直接构建配置文件和模板,以及构建可以使用IdentifiableFactoryFinder注册的工厂。
  */
 public abstract class IIOPFactories {
     private IIOPFactories() {}

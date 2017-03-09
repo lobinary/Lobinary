@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -25,6 +26,14 @@ package org.omg.PortableInterceptor;
    * A PICurrent can still be obtained via 
    * <code>resolve_initial_references</code>, but that is the Interceptor's 
    * thread scope PICurrent.
+   * <p>
+   *  便携式拦截器当前(也称为<code> PICurrent </code>)仅仅是一个时隙表,其时隙由每个服务用于在其上下文和请求或应答的服务上下文之间传输其上下文数据。
+   * 希望使用PICurrent的每个服务在初始化时保留一个或多个插槽,并在处理请求和回复期间使用这些插槽。
+   * <p>
+   *  在进行调用之前,通过调用<code> ORB.resolve_initial_references("PICurrent")</code>获得PICurrent。
+   * 在截取点内,PICurrent上从线程范围移动到请求范围的数据可通过<code> RequestInfo </code>对象上的<code> get_slot </code>操作获得。
+   *  PICurrent仍然可以通过<code> resolve_initial_references </code>获取,但这是Interceptor的线程作用域PICurrent。
+   * 
    */
 public interface CurrentOperations  extends org.omg.CORBA.CurrentOperations
 {
@@ -37,6 +46,12 @@ public interface CurrentOperations  extends org.omg.CORBA.CurrentOperations
      * with a <code>TCKind</code> value of <code>tk_null</code> and no value 
      * is returned. 
      *
+     * <p>
+     *  通过<code> get_slot </code>检索PICurrent中设置的应用程序的插槽数据。数据以Any的形式。
+     * <p>
+     *  如果未设置给定时隙,则包含具有<code> TCKind </code>值<code> tk_null </code>的类型代码且不返回任何值的Any包含在内。
+     * 
+     * 
      * @param id The <code>SlotId</code> of the slot from which the data will 
      *     be returned. 
      * @return The data, in the form of an Any, of the given slot identifier.
@@ -51,6 +66,8 @@ public interface CurrentOperations  extends org.omg.CORBA.CurrentOperations
      * Sets data in a slot. The data is in the form of an Any. If data 
      * already exists in that slot, it is overridden. 
      *
+     * <p>
+     * 
      * @param id The <code>SlotId</code> of the slot to which the data will 
      *     be set. 
      * @param data The data, in the form of an Any, which will be set 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,14 @@
  * such as the wrong colors showing up, and is generally not
  * encouraged.
  *
+ * <p>
+ *  <p>这些类设计为在安装相应的<code> LookAndFeel </code>类时使用(<code> UIManager.setLookAndFeel(new <i> XXX </i> LookA
+ * ndFeel())</code> )。
+ * 在安装不同的<code> LookAndFeel </code>时使用它们可能会产生意外的结果,包括异常。
+ * 另外,改变由<code> UIManager </code>维护的<code> LookAndFeel </code>而不更新任何<code> JComponent </code>的相应<Component>
+ *  ComponentUI </code>结果,如出现错误的颜色,一般不鼓励。
+ * 在安装不同的<code> LookAndFeel </code>时使用它们可能会产生意外的结果,包括异常。
+ * 
  */
 
 package com.sun.java.swing.plaf.windows;
@@ -61,6 +70,10 @@ import static com.sun.java.swing.plaf.windows.TMSchema.*;
 /**
  * Implements Windows XP Styles for the Windows Look and Feel.
  *
+ * <p>
+ *  实现Windows XP风格的Windows外观和感觉。
+ * 
+ * 
  * @author Leif Samuelsson
  */
 class XPStyle {
@@ -83,6 +96,9 @@ class XPStyle {
 
     /** Static method for clearing the hashmap and loading the
      * current XP style and theme
+     * <p>
+     *  当前XP风格和主题
+     * 
      */
     static synchronized void invalidateStyle() {
         xp = null;
@@ -92,6 +108,8 @@ class XPStyle {
 
     /** Get the singleton instance of this class
      *
+     * <p>
+     * 
      * @return the singleton instance of this class or null if XP styles
      * are not active or if this is not Windows XP
      */
@@ -125,6 +143,8 @@ class XPStyle {
 
     /** Get a named <code>String</code> value from the current style
      *
+     * <p>
+     * 
      * @param part a <code>Part</code>
      * @param state a <code>String</code>
      * @param attributeKey a <code>String</code>
@@ -160,6 +180,8 @@ class XPStyle {
 
     /** Get a named <code>int</code> value from the current style
      *
+     * <p>
+     * 
      * @param part a <code>Part</code>
      * @return an <code>int</code> or null if key is not found
      *    in the current style
@@ -172,6 +194,8 @@ class XPStyle {
 
     /** Get a named <code>Dimension</code> value from the current style
      *
+     * <p>
+     * 
      * @param key a <code>String</code>
      * @return a <code>Dimension</code> or null if key is not found
      *    in the current style
@@ -189,6 +213,10 @@ class XPStyle {
     /** Get a named <code>Point</code> (e.g. a location or an offset) value
      *  from the current style
      *
+     * <p>
+     *  从当前样式
+     * 
+     * 
      * @param key a <code>String</code>
      * @return a <code>Point</code> or null if key is not found
      *    in the current style
@@ -205,6 +233,8 @@ class XPStyle {
 
     /** Get a named <code>Insets</code> value from the current style
      *
+     * <p>
+     * 
      * @param key a <code>String</code>
      * @return an <code>Insets</code> object or null if key is not found
      *    in the current style
@@ -223,6 +253,8 @@ class XPStyle {
 
     /** Get a named <code>Color</code> value from the current style
      *
+     * <p>
+     * 
      * @param part a <code>Part</code>
      * @return a <code>Color</code> or null if key is not found
      *    in the current style
@@ -251,6 +283,8 @@ class XPStyle {
 
     /** Get a named <code>Border</code> value from the current style
      *
+     * <p>
+     * 
      * @param part a <code>Part</code>
      * @return a <code>Border</code> or null if key is not found
      *    in the current style or if the style for the particular
@@ -445,6 +479,10 @@ class XPStyle {
     /** Get a <code>Skin</code> object from the current style
      * for a named part (component type)
      *
+     * <p>
+     *  对于命名零件(组件类型)
+     * 
+     * 
      * @param part a <code>Part</code>
      * @return a <code>Skin</code> object
      */
@@ -467,6 +505,9 @@ class XPStyle {
     /** A class which encapsulates attributes for a given part
      * (component type) and which provides methods for painting backgrounds
      * and glyphs
+     * <p>
+     *  (组件类型),并提供了绘制背景和字形的方法
+     * 
      */
     static class Skin {
         final Component component;
@@ -499,6 +540,9 @@ class XPStyle {
         Insets getContentMargin() {
             /* idk: it seems margins are the same for all 'big enough'
              * bounding rectangles.
+             * <p>
+             *  边界矩形。
+             * 
              */
             int boundingWidth = 100;
             int boundingHeight = 100;
@@ -545,6 +589,8 @@ class XPStyle {
 
         /** Paint a skin at x, y.
          *
+         * <p>
+         * 
          * @param g   the graphics context to use for painting
          * @param dx  the destination <i>x</i> coordinate
          * @param dy  the destination <i>y</i> coordinate
@@ -559,6 +605,8 @@ class XPStyle {
 
         /** Paint a skin in an area defined by a rectangle.
          *
+         * <p>
+         * 
          * @param g the graphics context to use for painting
          * @param r     a <code>Rectangle</code> defining the area to fill,
          *                     may cause the image to be stretched or tiled
@@ -571,6 +619,10 @@ class XPStyle {
         /** Paint a skin at a defined position and size
          *  This method supports animation.
          *
+         * <p>
+         *  此方法支持动画。
+         * 
+         * 
          * @param g   the graphics context to use for painting
          * @param dx  the destination <i>x</i> coordinate
          * @param dy  the destination <i>y</i> coordinate
@@ -599,6 +651,10 @@ class XPStyle {
          *  does not trigger animation. It is needed for the animation
          *  support.
          *
+         * <p>
+         *  不触发动画。它是动画支持所需要的。
+         * 
+         * 
          * @param g   the graphics context to use for painting
          * @param dx  the destination <i>x</i> coordinate.
          * @param dy  the destination <i>y</i> coordinate.
@@ -617,6 +673,8 @@ class XPStyle {
 
         /** Paint a skin at a defined position and size
          *
+         * <p>
+         * 
          * @param g   the graphics context to use for painting
          * @param dx  the destination <i>x</i> coordinate
          * @param dy  the destination <i>y</i> coordinate

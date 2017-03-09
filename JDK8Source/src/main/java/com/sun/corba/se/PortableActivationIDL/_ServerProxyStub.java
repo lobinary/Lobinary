@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -10,12 +11,14 @@ package com.sun.corba.se.PortableActivationIDL;
 
 
 /** Server callback interface, passed to Activator in registerServer method.
+/* <p>
     */
 public class _ServerProxyStub extends org.omg.CORBA.portable.ObjectImpl implements com.sun.corba.se.PortableActivationIDL.ServerProxy
 {
 
 
   /** Shutdown this server.  Returns after orb.shutdown() completes.
+  /* <p>
 	*/
   public void shutdown ()
   {
@@ -38,6 +41,9 @@ public class _ServerProxyStub extends org.omg.CORBA.portable.ObjectImpl implemen
 
   /** Install the server.  Returns after the install hook completes
 	* execution in the server.
+	* <p>
+	*  执行在服务器。
+	* 
 	*/
   public void install ()
   {
@@ -60,6 +66,8 @@ public class _ServerProxyStub extends org.omg.CORBA.portable.ObjectImpl implemen
 
   /** Uninstall the server.  Returns after the uninstall hook
 	* completes execution.
+	* <p>
+	*  完成执行。
 	*/
   public void uninstall ()
   {

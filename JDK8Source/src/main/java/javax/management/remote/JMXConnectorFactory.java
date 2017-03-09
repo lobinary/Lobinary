@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -161,6 +162,60 @@ import sun.reflect.misc.ReflectUtil;
  * the new read-only <code>Map</code>.  The associated value is the
  * calling thread's context class loader.</p>
  *
+ * <p>
+ *  <p>工厂创建JMX API连接器客户端。没有此类的实例。</p>
+ * 
+ *  <p>连接通常使用此类的{@link #connect(JMXServiceURL)connect}方法。
+ * 更高级的应用程序可以使用{@link #newJMXConnector(JMXServiceURL,Map)newJMXConnector}和连接本身的建立来分离连接器客户端的创建,使用{@link JMXConnector#connect(Map)}
+ * 。
+ *  <p>连接通常使用此类的{@link #connect(JMXServiceURL)connect}方法。</p>。
+ * 
+ *  <p>每个客户端由{@link JMXConnectorProvider}的实例创建。此实例如下所示。
+ * 假设给定的{@link JMXServiceURL}看起来像<code>"service：jmx：<em> protocol </em>：<em> remaining </em>"</code>。
+ * 然后,工厂将尝试为<code> <em>协议</em> </code>找到适当的{@link JMXConnectorProvider}。
+ *  <code> <em> protocol </em> </code>中的每个字符<code> + </code>或<code>  -  </code>会被替换为<code>。
+ * </code> <code> _ </code>。</p>。
+ * 
+ *  <p>如下搜索<em>提供程序包列表</em>：</p>
+ * 
+ * <ol>
+ * 
+ *  <li>如果{@link #newJMXConnector(JMXServiceURL,Map)newJMXConnector}的<code> environment </code>参数包含关键字<code>
+ *  jmx.remote.protocol.provider.pkgs </code>是提供程序包列表。
+ * 
+ * <li>否则,如果系统属性<code> jmx.remote.protocol.provider.pkgs </code>存在,则其值为提供程序包列表。
+ * 
+ *  <li>否则,没有提供程序包列表。
+ * 
+ * </ol>
+ * 
+ *  <p>提供程序包列表是一个字符串,解释为用竖线(<code> | </code>)分隔的非空Java包名称的列表。如果字符串为空,那么提供程序包列表也是如此。
+ * 如果提供程序包列表不是字符串,或者它包含一个为空字符串的元素,则会抛出{@link JMXProviderException}。</p>。
+ * 
+ *  <p>如果提供程序包列表存在且不为空,则对于列表中的每个元素<code> <em> pkg </em> </code>,工厂将尝试加载类
+ * 
+ * <blockquote>
+ *  <code> <em> pkg </em>。<em> protocol </em> .ClientProvider </code>
+ * </blockquote>
+ * 
+ *  <p>如果{@link #newJMXConnector(JMXServiceURL,Map)newJMXConnector}的<code> environment </code>参数包含密钥<code>
+ *  jmx.remote.protocol.provider.class.loader </code>关联值是用于加载提供程序的类加载器。
+ * 如果相关联的值不是{@link java.lang.ClassLoader}的实例,则会抛出{@link java.lang.IllegalArgumentException}。</p>。
+ * 
+ *  <p>如果<code> jmx.remote.protocol.provider.class.loader </code>键不存在于<code> environment </code>参数中,则使用调
+ * 用线程的上下文类加载器。
+ *  p>。
+ * 
+ * <p>如果尝试加载此类会生成{@link ClassNotFoundException},则会继续搜索处理程序,并显示列表的下一个元素。</p>
+ * 
+ *  <p>否则,由{@link JMXProviderException} {@link JMXProviderException#getCause()<em> cause </em>}指示基本异常的{@link JMXProviderException}
+ * 指示提供程序发现问题,如下所示：</p>。
+ * 
+ * <ul>
+ * 
+ *  <li>如果尝试加载类会产生除<code> ClassNotFoundException </code>之外的异常,即<em> cause </em>;
+ * 
+ * 
  * @since 1.5
  */
 public class JMXConnectorFactory {
@@ -171,6 +226,30 @@ public class JMXConnectorFactory {
      * exceptions from remote <code>MBeanServerConnection</code>
      * calls.  The value associated with this attribute is an instance
      * of {@link ClassLoader}.</p>
+     * <p>
+     *  <li>如果类的{@link Class#newInstance()}产生异常,即<em> cause </em>。
+     * 
+     * </ul>
+     * 
+     *  <p>如果没有通过上述步骤找到提供者,包括没有提供者包列表的默认情况,那么实现将使用自己的提供者<code> <em> protocol </em> </code>或者如果没有,它会抛出一个<code>
+     *  MalformedURLException </code>。
+     * 实现可以选择通过其他方式找到提供商。例如,它可以支持<a。
+     * href="{@docRoot}/../technotes/guides/jar/jar.html#Service Provider">
+     *  服务提供者的JAR约定</a>,其中服务接口是<code> JMXConnectorProvider </code>。</p>
+     * 
+     *  <p>每个实现都必须使用默认的RMI传输支持RMI连接器协议,使用字符串<code> rmi </code>指定。
+     * 实现可以可选地支持RMI连接器协议与用字符串<code> iiop </code>指定的RMI / IIOP传输。</p>。
+     * 
+     * <p>一旦找到提供者,<code> newJMXConnector </code>方法的结果是在提供者上调用{@link JMXConnectorProvider#newJMXConnector(JMXServiceURL,Map)newJMXConnector}
+     * 的结果。
+     * </p>。
+     * 
+     *  <p>传递给<code> JMXConnectorProvider </code>的<code> Map </code>参数是一个新的只读<code> Map </code>,其中包含<code>环境
+     * </code>参数到{@link #newJMXConnector(JMXServiceURL,Map)JMXConnectorFactory.newJMXConnector},如果有的话。
+     * 此外,如果<code> jmx.remote.protocol.provider.class.loader </code>键不存在于<code> environment </code>参数中,它将被添加
+     * 到新的只读<code>地图</code>。
+     * 相关的值是调用线程的上下文类加载器。</p>。
+     * 
      */
     public static final String DEFAULT_CLASS_LOADER =
         "jmx.remote.default.class.loader";
@@ -180,6 +259,10 @@ public class JMXConnectorFactory {
      * that are consulted when looking for the handler for a protocol.
      * The value associated with this attribute is a string with
      * package names separated by vertical bars (<code>|</code>).</p>
+     * <p>
+     *  <p>指定默认类装入器的属性的名称。这个类加载器用于反序列化来自远程<code> MBeanServerConnection </code>调用的返回值和异常。
+     * 与此属性关联的值是{@link ClassLoader}的实例。</p>。
+     * 
      */
     public static final String PROTOCOL_PROVIDER_PACKAGES =
         "jmx.remote.protocol.provider.pkgs";
@@ -189,6 +272,9 @@ public class JMXConnectorFactory {
      * loader for loading protocol providers.
      * The value associated with this attribute is an instance
      * of {@link ClassLoader}.</p>
+     * <p>
+     *  <p>指定在查找协议的处理程序时查询的提供程序包的属性的名称。与此属性关联的值是一个字符串,其中包名称由竖线(<code> | </code>)分隔。</p>
+     * 
      */
     public static final String PROTOCOL_PROVIDER_CLASS_LOADER =
         "jmx.remote.protocol.provider.class.loader";
@@ -210,6 +296,10 @@ public class JMXConnectorFactory {
      * <p>This method is equivalent to {@link
      * #connect(JMXServiceURL,Map) connect(serviceURL, null)}.</p>
      *
+     * <p>
+     *  <p>指定用于加载协议提供程序的类加载器的属性的名称。与此属性关联的值是{@link ClassLoader}的实例。</p>
+     * 
+     * 
      * @param serviceURL the address of the connector server to
      * connect to.
      *
@@ -241,6 +331,12 @@ public class JMXConnectorFactory {
      * conn.connect(environment);
      * </pre>
      *
+     * <p>
+     * <p>在指定地址创建与连接器服务器的连接。</p>
+     * 
+     *  <p>此方法相当于{@link #connect(JMXServiceURL,Map)connect(serviceURL,null)}。</p>
+     * 
+     * 
      * @param serviceURL the address of the connector server to connect to.
      *
      * @param environment a set of attributes to determine how the
@@ -284,6 +380,14 @@ public class JMXConnectorFactory {
      * given address.  The resultant client is not connected until its
      * {@link JMXConnector#connect(Map) connect} method is called.</p>
      *
+     * <p>
+     *  <p>在指定地址创建与连接器服务器的连接。</p>
+     * 
+     *  <p>此方法等效于：</p>
+     * 
+     * <pre>
+     *  JMXConnector conn = JMXConnectorFactory.newJMXConnector(serviceURL,environment); conn.connect(enviro
+     * 
      * @param serviceURL the address of the connector server to connect to.
      *
      * @param environment a set of attributes to determine how the

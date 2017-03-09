@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.PortableActivationIDL;
 
 
@@ -10,6 +11,9 @@ package com.sun.corba.se.PortableActivationIDL;
 
 
 /** Sequence of server Ids, used for queries about servers.
+/* <p>
+/* com / sun / corba / se / PortableActivationIDL / ServerIdsHolder.java。
+/* 
     */
 public final class ServerIdsHolder implements org.omg.CORBA.portable.Streamable
 {

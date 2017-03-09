@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,9 @@ import javax.swing.plaf.basic.ComboPopup;
  * Windows implementation of RootPaneUI, there is one shared between all
  * JRootPane instances.
  *
+ * <p>
+ *  Windows实现RootPaneUI,有一个在所有JRootPane实例之间共享。
+ * 
  * @author Mark Davidson
  * @since 1.4
  */

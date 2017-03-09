@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  *
  * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
@@ -12,6 +13,16 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ * COPYRIGHT(c)Eastman Kodak Company,1997 *** *根据United *** 
+ * *国家法典第17章的未公布的工作。
+ * 版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ * 版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package com.sun.image.codec.jpeg;
@@ -27,6 +38,14 @@ package com.sun.image.codec.jpeg;
  * be available in a core API or standard extension.
  * <p>
  *
+ * <p>
+ *  表示发生了某种类型的图像格式异常。
+ * <p>
+ *  请注意,com.sun.image.codec.jpeg包中的类不是核心Java API的一部分。它们是Sun的JDK和JRE发行版的一部分。
+ * 虽然其他许可证持有者可能选择分发这些类,但开发人员不能依赖其在非Sun实施中的可用性。我们期望等效功能最终将在核心API或标准扩展中可用。
+ * <p>
+ * 
+ * 
  * @author  Tom Sausner
  * @see     JPEGImageEncoder
  * @see     JPEGImageDecoder
@@ -36,6 +55,7 @@ public
 class ImageFormatException extends RuntimeException {
     /**
      * Constructs an <code>ImageFormatException</code> with no detail message.
+     * <p>
      */
     public ImageFormatException() {
         super();
@@ -45,6 +65,10 @@ class ImageFormatException extends RuntimeException {
      * Constructs an <code>ImageFormatException</code> with the specified
      * detailed message.
      *
+     * <p>
+     *  构造一个没有详细消息的<code> ImageFormatException </code>。
+     * 
+     * 
      * @param   s   the message.
      */
     public ImageFormatException(String s) {

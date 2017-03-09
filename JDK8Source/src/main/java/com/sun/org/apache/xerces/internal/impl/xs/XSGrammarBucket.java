@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs;
@@ -30,6 +40,12 @@ import java.util.Vector;
  *
  * @xerces.internal
  *
+ * <p>
+ *  用于保存当前实例的内部模式语法集的类
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Sandy Gao, IBM
  * @version $Id: XSGrammarBucket.java,v 1.7 2010-11-01 04:39:55 joehw Exp $
  */
@@ -39,6 +55,9 @@ public class XSGrammarBucket {
 
     /**
      * Hashtable that maps between Namespace and a Grammar
+     * <p>
+     *  在命名空间和语法之间映射的Hashtable
+     * 
      */
     Map<String, SchemaGrammar> fGrammarRegistry = new HashMap();
     SchemaGrammar fNoNSGrammar = null;
@@ -46,6 +65,10 @@ public class XSGrammarBucket {
     /**
      * Get the schema grammar for the specified namespace
      *
+     * <p>
+     *  获取指定命名空间的模式语法
+     * 
+     * 
      * @param namespace
      * @return SchemaGrammar associated with the namespace
      */
@@ -60,6 +83,10 @@ public class XSGrammarBucket {
      * This method is for internal use only: it assumes that a grammar with
      * the same target namespace is not already in the bucket.
      *
+     * <p>
+     *  将模式语法放入注册表此方法仅供内部使用：它假定具有相同目标命名空间的语法不在存储桶中。
+     * 
+     * 
      * @param grammar   the grammar to put in the registry
      */
     public void putGrammar(SchemaGrammar grammar) {
@@ -75,6 +102,10 @@ public class XSGrammarBucket {
      * namespace is already in the bucket, and different from the one being
      * added, it's an error, and no grammar will be added into the bucket.
      *
+     * <p>
+     *  将模式语法和由它导入的任何语法(直接或独立地)放入注册表。当具有相同目标命名空间的语法已经在桶中,并且与添加的不同时,它是一个错误,并且没有语法将被添加到桶中。
+     * 
+     * 
      * @param grammar   the grammar to put in the registry
      * @param deep      whether to add imported grammars
      * @return          whether the process succeeded
@@ -143,6 +174,10 @@ public class XSGrammarBucket {
      * namespace is already in the bucket, and different from the one being
      * added, no grammar will be added into the bucket.
      *
+     * <p>
+     * 将模式语法和由它导入的任何语法(直接或独立地)放入注册表中。当具有相同目标命名空间的语法已经在桶中并且不同于被添加的语法时,将不向语句添加语法。
+     * 
+     * 
      * @param grammar        the grammar to put in the registry
      * @param deep           whether to add imported grammars
      * @param ignoreConflict whether to ignore grammars that already exist in the grammar
@@ -211,6 +246,10 @@ public class XSGrammarBucket {
     /**
      * get all grammars in the registry
      *
+     * <p>
+     *  获取注册表中的所有语法
+     * 
+     * 
      * @return an array of SchemaGrammars.
      */
     public SchemaGrammar[] getGrammars() {
@@ -232,6 +271,8 @@ public class XSGrammarBucket {
     /**
      * Clear the registry.
      * REVISIT: update to use another XSGrammarBucket
+     * <p>
+     *  清除注册表。 REVISIT：更新使用另一个XSGrammarBucket
      */
     public void reset() {
         fNoNSGrammar = null;

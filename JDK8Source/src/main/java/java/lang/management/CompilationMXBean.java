@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,22 @@ package java.lang.management;
  * It can be obtained by calling the
  * {@link PlatformManagedObject#getObjectName} method.
  *
+ * <p>
+ *  Java虚拟机的编译系统的管理接口。
+ * 
+ *  <p> Java虚拟机具有此接口的实现类的单个实例。
+ * 实现此接口的实例是<a href="ManagementFactory.html#MXBean"> MXBean </a>,可通过调用{@link ManagementFactory#getCompilationMXBean}
+ * 方法或从{@link ManagementFactory#getPlatformMBeanServer platform < tt> MBeanServer </tt>}方法。
+ *  <p> Java虚拟机具有此接口的实现类的单个实例。
+ * 
+ *  <p>用于唯一标识MBeanServer中编译系统的MXBean的<tt> ObjectName </tt>是：
+ * <blockquote>
+ *  {@link ManagementFactory#COMPILATION_MXBEAN_NAME <tt> java.lang：type = Compilation </tt>}
+ * </blockquote>
+ * 
+ *  它可以通过调用{@link PlatformManagedObject#getObjectName}方法获得。
+ * 
+ * 
  * @see ManagementFactory#getPlatformMXBeans(Class)
  * @see <a href="../../../javax/management/package-summary.html">
  *      JMX Specification.</a>
@@ -60,6 +77,8 @@ public interface CompilationMXBean extends PlatformManagedObject {
     /**
      * Returns the name of the Just-in-time (JIT) compiler.
      *
+     * <p>
+     * 
      * @return the name of the JIT compiler.
      */
     public java.lang.String    getName();
@@ -68,6 +87,10 @@ public interface CompilationMXBean extends PlatformManagedObject {
      * Tests if the Java virtual machine supports the monitoring of
      * compilation time.
      *
+     * <p>
+     *  返回Just-in-time(JIT)编译器的名称。
+     * 
+     * 
      * @return <tt>true</tt> if the monitoring of compilation time is
      * supported ; <tt>false</tt> otherwise.
      */
@@ -91,6 +114,10 @@ public interface CompilationMXBean extends PlatformManagedObject {
      * The implementations may have different definitions and different
      * measurements of the compilation time.
      *
+     * <p>
+     *  测试Java虚拟机是否支持监视编译时间。
+     * 
+     * 
      * @return Compilation time in milliseconds
      * @throws java.lang.UnsupportedOperationException if the Java
      * virtual machine does not support

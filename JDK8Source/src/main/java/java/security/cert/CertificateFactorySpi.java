@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,16 @@ import java.security.NoSuchProviderException;
  * instance of {@code java.security.cert.X509Certificate}, and CRLs
  * that are an instance of {@code java.security.cert.X509CRL}.
  *
+ * <p>
+ *  此类为{@code CertificateFactory}类定义了<i>服务提供程序接口</i>(<b> SPI </b>)。
+ * 该类中的所有抽象方法必须由希望为特定证书类型(例如X.509)提供证书工厂的实现的每个加密服务提供者来实现。
+ * 
+ *  <p>证书工厂用于从其编码中生成证书,证书路径({@code CertPath})和证书吊销列表(CRL)对象。
+ * 
+ *  <p> X.509的证书工厂必须返回作为{@code java.security.cert.X509Certificate}的实例的证书和作为{@code java.security.cert.X509CRL}
+ * 的实例的CRL。
+ * 
+ * 
  * @author Hemma Prafullchandra
  * @author Jan Luehe
  * @author Sean Mullan
@@ -94,6 +105,21 @@ public abstract class CertificateFactorySpi {
      * than EOF) and there is trailing data after the certificate is parsed, a
      * {@code CertificateException} is thrown.
      *
+     * <p>
+     *  生成证书对象,并使用从输入流{@code inStream}读取的数据进行初始化。
+     * 
+     *  <p>为了利用此证书工厂支持的专门的证书格式,返回的证书对象可以类型转换到相应的证书类。
+     * 例如,如果此证书工厂实现X.509证书,则返回的证书对象可以类型转换为{@code X509Certificate}类。
+     * 
+     * <p>对于X.509证书的证书工厂,{@code inStream}中提供的证书必须是DER编码的,并且可以以二进制或可打印(Base64)编码提供。
+     * 如果证书以Base64编码提供,则必须在开始时由----- BEGIN CERTIFICATE -----进行限制,并且必须在末尾通过----- END CERTIFICATE ----- 。
+     * 
+     *  <p>请注意,如果给定的输入流不支持{@link java.io.InputStream#mark(int)mark}和{@link java.io.InputStream#reset()reset}
+     * ,此方法将使用整个输入流。
+     * 否则,每次调用此方法都会消耗一个证书,并且输入流的读取位置将位于固有的证书结束标记之后的下一个可用字节。
+     * 如果输入流中的数据不包含固有的证书结束标记(除了EOF),并且在解析证书后存在结尾数据,则会抛出{@code CertificateException}。
+     * 
+     * 
      * @param inStream an input stream with the certificate data.
      *
      * @return a certificate object initialized with the data
@@ -114,6 +140,13 @@ public abstract class CertificateFactorySpi {
      * existing service providers, this method cannot be {@code abstract}
      * and by default throws an {@code UnsupportedOperationException}.
      *
+     * <p>
+     *  生成{@code CertPath}对象,并使用从{@code InputStream} inStream读取的数据进行初始化。数据假定为采用默认编码。
+     * 
+     *  <p>此方法已添加到Java 2平台标准版的1.4版中。
+     * 为了保持与现有服务提供程序的向后兼容性,此方法不能是{@code abstract},默认情况下会抛出{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param inStream an {@code InputStream} containing the data
      * @return a {@code CertPath} initialized with the data from the
      *   {@code InputStream}
@@ -137,6 +170,13 @@ public abstract class CertificateFactorySpi {
      * existing service providers, this method cannot be {@code abstract}
      * and by default throws an {@code UnsupportedOperationException}.
      *
+     * <p>
+     * 生成{@code CertPath}对象,并使用从{@code InputStream} inStream读取的数据进行初始化。数据假定为指定的编码。
+     * 
+     *  <p>此方法已添加到Java 2平台标准版的1.4版中。
+     * 为了保持与现有服务提供程序的向后兼容性,此方法不能是{@code abstract},默认情况下会抛出{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param inStream an {@code InputStream} containing the data
      * @param encoding the encoding used for the data
      * @return a {@code CertPath} initialized with the data from the
@@ -165,6 +205,15 @@ public abstract class CertificateFactorySpi {
      * existing service providers, this method cannot be {@code abstract}
      * and by default throws an {@code UnsupportedOperationException}.
      *
+     * <p>
+     *  生成{@code CertPath}对象,并使用{@code Certificate}的{@code List}对其进行初始化。
+     * <p>
+     *  所提供的证书必须是{@code CertificateFactory}支持的类型。它们将从提供的{@code List}对象中复制。
+     * 
+     *  <p>此方法已添加到Java 2平台标准版的1.4版中。
+     * 为了保持与现有服务提供程序的向后兼容性,此方法不能是{@code abstract},默认情况下会抛出{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param certificates a {@code List} of {@code Certificate}s
      * @return a {@code CertPath} initialized with the supplied list of
      *   certificates
@@ -196,6 +245,17 @@ public abstract class CertificateFactorySpi {
      * existing service providers, this method cannot be {@code abstract}
      * and by default throws an {@code UnsupportedOperationException}.
      *
+     * <p>
+     *  返回此证书工厂支持的{@code CertPath}编码的迭代,首先使用默认编码。请参阅<a href =中的CertPath编码部分
+     * "{@docRoot}/../technotes/guides/security/StandardNames.html#CertPathEncodings">
+     *  Java加密架构标准算法名称文档</a>以获取有关标准编码名称的信息。
+     * <p>
+     *  尝试通过其{@code remove}方法修改返回的{@code Iterator}会导致{@code UnsupportedOperationException}。
+     * 
+     * <p>此方法已添加到Java 2平台标准版的1.4版中。
+     * 为了保持与现有服务提供程序的向后兼容性,此方法不能是{@code abstract},默认情况下会抛出{@code UnsupportedOperationException}。
+     * 
+     * 
      * @return an {@code Iterator} over the names of the supported
      *         {@code CertPath} encodings (as {@code String}s)
      * @exception UnsupportedOperationException if the method is not supported
@@ -233,6 +293,21 @@ public abstract class CertificateFactorySpi {
      * {@link java.io.InputStream#reset() reset}, this method will
      * consume the entire input stream.
      *
+     * <p>
+     *  返回从给定输入流{@code inStream}读取的证书的(可能为空)集合视图。
+     * 
+     *  <p>为了利用此证书工厂支持的专门的证书格式,返回的集合视图中的每个元素可以类型转换为相应的证书类。
+     * 例如,如果此证书工厂实现X.509证书,则返回的集合中的元素可以类型转换为{@code X509Certificate}类。
+     * 
+     *  <p>对于X.509证书的证书工厂,{@code inStream}可能包含一个单独的DER编码证书,格式为{@link CertificateFactory#generateCertificate(java.io.InputStream)generateCertificate}
+     * 中所述的格式。
+     * 此外,{@code inStream}可能包含PKCS#7证书链。这是一个PKCS#7 <i> SignedData </i>对象,唯一有效的字段是<i>证书</i>。特别地,签名和内容被忽略。
+     * 此格式允许立即下载多个证书。如果不存在证书,则返回空集合。
+     * 
+     * <p>请注意,如果给定的输入流不支持{@link java.io.InputStream#mark(int)mark}和{@link java.io.InputStream#reset()reset},
+     * 此方法将使用整个输入流。
+     * 
+     * 
      * @param inStream the input stream with the certificates.
      *
      * @return a (possibly empty) collection view of
@@ -267,6 +342,18 @@ public abstract class CertificateFactorySpi {
      * than EOF) and there is trailing data after the CRL is parsed, a
      * {@code CRLException} is thrown.
      *
+     * <p>
+     *  生成证书吊销列表(CRL)对象,并使用从输入流{@code inStream}读取的数据对其进行初始化。
+     * 
+     *  <p>为了利用此证书工厂支持的特殊CRL格式,返回的CRL对象可以类型转换到相应的CRL类。
+     * 例如,如果此证书工厂实现X.509 CRL,则返回的CRL对象可以类型转换为{@code X509CRL}类。
+     * 
+     *  <p>请注意,如果给定的输入流不支持{@link java.io.InputStream#mark(int)mark}和{@link java.io.InputStream#reset()reset}
+     * ,此方法将使用整个输入流。
+     * 否则,每次调用此方法将消耗一个CRL,并且输入流的读取位置将位于CRL标记结束后的下一个可用字节。
+     * 如果输入流中的数据不包含固有的CRL结束标记(除了EOF),并且在解析CRL之后存在结尾数据,则会抛出{@code CRLException}。
+     * 
+     * 
      * @param inStream an input stream with the CRL data.
      *
      * @return a CRL object initialized with the data
@@ -302,6 +389,14 @@ public abstract class CertificateFactorySpi {
      * {@link java.io.InputStream#reset() reset}, this method will
      * consume the entire input stream.
      *
+     * <p>
+     *  返回从给定输入流{@code inStream}读取的CRL的(可能为空)集合视图。
+     * 
+     * <p>为了利用此证书工厂支持的特殊CRL格式,返回的集合视图中的每个元素都可以类型转换为相应的CRL类。
+     * 例如,如果此证书工厂实现X.509 CRL,则返回的集合中的元素可以类型转换为{@code X509CRL}类。
+     * 
+     *  <p>对于X.509 CRL的证书工厂,{@code inStream}可能包含单个DER编码的CRL。此外,{@code inStream}可能包含PKCS#7 CRL集。
+     * 
      * @param inStream the input stream with the CRLs.
      *
      * @return a (possibly empty) collection view of

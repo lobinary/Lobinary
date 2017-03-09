@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,10 @@ import java.util.Arrays;
  * interpolation functionality.  Subclasses only have to deal with using
  * the gradient to fill pixels in a raster.
  *
+ * <p>
+ *  这是所有使用多颜色渐变填充其栅格的PaintContexts的超类。它提供了实际的颜色插值功能。子类只需要使用渐变来填充光栅中的像素。
+ * 
+ * 
  * @author Nicholas Talian, Vincent Hardy, Jim Graham, Jerry Evans
  */
 abstract class MultipleGradientPaintContext implements PaintContext {
@@ -55,6 +60,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
     /**
      * The PaintContext's ColorModel.  This is ARGB if colors are not all
      * opaque, otherwise it is RGB.
+     * <p>
+     *  PaintContext的ColorModel。这是ARGB如果颜色不是全部不透明,否则是RGB。
+     * 
      */
     protected ColorModel model;
 
@@ -86,12 +94,18 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * array of gradient colors.  If this boolean value is false, then we have
      * to use a 2-step process where we have to determine which gradient array
      * we fall into, then determine the index into that array.
+     * <p>
+     *  此布尔值指定是否处于简单查找模式,其中0和1之间的输入值可用于直接索引到单个渐变颜色数组中。如果这个布尔值为假,那么我们必须使用一个2步过程,我们必须确定我们落入哪个梯度数组,然后确定该数组的索引。
+     * 
      */
     protected boolean isSimpleLookup;
 
     /**
      * Size of gradients array for scaling the 0-1 index when looking up
      * colors the fast way.
+     * <p>
+     *  用于缩放0-1索引的渐变数组的大小以快速方式查找颜色。
+     * 
      */
     protected int fastGradientArraySize;
 
@@ -99,12 +113,18 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * Array which contains the interpolated color values for each interval,
      * used by calculateSingleArrayGradient().  It is protected for possible
      * direct access by subclasses.
+     * <p>
+     *  数组,包含每个间隔的内插颜色值,由calculateSingleArrayGradient()使用。它受到保护,可能直接访问的子类。
+     * 
      */
     protected int[] gradient;
 
     /**
      * Array of gradient arrays, one array for each interval.  Used by
      * calculateMultipleArrayGradient().
+     * <p>
+     *  梯度数组数组,每个间隔一个数组。用于calculateMultipleArrayGradient()。
+     * 
      */
     private int[][] gradients;
 
@@ -132,6 +152,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
     /**
      * Constant number of max colors between any 2 arbitrary colors.
      * Used for creating and indexing gradients arrays.
+     * <p>
+     *  任意2种任意颜色之间的最大颜色的常数。用于创建和索引渐变数组。
+     * 
      */
     protected static final int GRADIENT_SIZE = 256;
     protected static final int GRADIENT_SIZE_INDEX = GRADIENT_SIZE -1;
@@ -141,11 +164,17 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * is greater than this, switch over to the slow lookup method.
      * No particular reason for choosing this number, but it seems to provide
      * satisfactory performance for the common case (fast lookup).
+     * <p>
+     * 快速单阵列的最大长度。如果估计的阵列大小大于此值,请切换到慢查找方法。没有特别的理由选择这个数字,但似乎提供满意的性能的常见情况(快速查找)。
+     * 
      */
     private static final int MAX_GRADIENT_ARRAY_SIZE = 5000;
 
     /**
      * Constructor for MultipleGradientPaintContext superclass.
+     * <p>
+     *  MultipleGradientPaintContext超类的构造方法。
+     * 
      */
     protected MultipleGradientPaintContext(MultipleGradientPaint mgp,
                                            ColorModel cm,
@@ -243,6 +272,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * This function is the meat of this class.  It calculates an array of
      * gradient colors based on an array of fractions and color values at
      * those fractions.
+     * <p>
+     *  这个功能是这个类的肉。它根据这些分数上的分数和颜色值数组计算渐变颜色数组。
+     * 
      */
     private void calculateLookupData(Color[] colors) {
         Color[] normalizedColors;
@@ -333,6 +365,17 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * intervals will be allocated huge space, but much of that data is
      * redundant.  We thus need to use the space conserving scheme below.
      *
+     * <p>
+     *  快速查找方法
+     * 
+     *  此方法计算渐变颜色值,并将它们放在一个int数组中,gradient []。它通过为每个间隔分配空间,基于其相对于数组中最小间隔的大小来实现。
+     * 最小间隔被分配255个内插值(在24位彩色系统中的唯一中间颜色的最大数目),并且所有其他间隔被分配size =(255 *它们的大小与最小间隔的比率)。
+     * 
+     *  该方案加速了快速检索,因为颜色根据其用户指定的分布沿着阵列分布。所需要的是从0到1的相对索引。
+     * 
+     *  这种方法的唯一问题是,在存在不成比例的小梯度间隔的情况下,存在用于数组大小的可能性。在这种情况下,其他间隔将分配巨大的空间,但大部分数据是多余的。因此,我们需要使用下面的空间守恒计划。
+     * 
+     * 
      * @param Imin the size of the smallest interval
      */
     private void calculateSingleArrayGradient(Color[] colors, float Imin) {
@@ -404,6 +447,15 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      *
      * For those of you who are interested, this is a classic example of the
      * time-space tradeoff.
+     * <p>
+     *  慢速查找方法
+     * 
+     * 此方法计算每个间隔的渐变颜色值,并将每个值放置到其自己的255大小的数组中。数组以梯度[] []存储。 (使用255,因为这是24位彩色系统中2个任意颜色之间的唯一颜色的最大数目)。
+     * 
+     *  此方法使用最小的空间量(只有255 *间隔数),但它会加重查找过程,因为现在我们必须找出要选择的间隔,然后计算该间隔内的索引。这会导致显着的性能损失,因为它需要对渲染循环中的每个点执行此计算。
+     * 
+     *  对于那些有兴趣的人来说,这是时空折衷的典型例子。
+     * 
      */
     private void calculateMultipleArrayGradient(Color[] colors) {
         // set the flag so we know later it is a non-simple lookup
@@ -447,6 +499,10 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * Yet another helper function.  This one linearly interpolates between
      * 2 colors, filling up the output array.
      *
+     * <p>
+     *  又一个帮助函数。这一个线性内插在两种颜色之间,填充输出数组。
+     * 
+     * 
      * @param rgb1 the start color
      * @param rgb2 the end color
      * @param output the output array of colors; must not be null
@@ -486,6 +542,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * Yet another helper function.  This one extracts the color components
      * of an integer RGB triple, converts them from LinearRGB to SRGB, then
      * recompacts them into an int.
+     * <p>
+     *  又一个帮助函数。它提取整数RGB三元组的颜色分量,将它们从LinearRGB转换为SRGB,然后将它们重新编译为int。
+     * 
      */
     private int convertEntireColorLinearRGBtoSRGB(int rgb) {
         // color components
@@ -515,6 +574,10 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * However, the color intervals are not necessarily of uniform length, so
      * a conversion is required.
      *
+     * <p>
+     *  帮助函数索引到渐变数组中。这是必要的,因为每个间隔具有均匀尺寸255的颜色阵列。然而,颜色间隔不一定是均匀的长度,因此需要转换。
+     * 
+     * 
      * @param position the unmanipulated position, which will be mapped
      *                 into the range 0 to 1
      * @returns integer color to display
@@ -586,6 +649,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
     /**
      * Helper function to convert a color component in sRGB space to linear
      * RGB space.  Used to build a static lookup table.
+     * <p>
+     *  帮助函数将sRGB空间中的颜色分量转换为线性RGB空间。用于构建静态查找表。
+     * 
      */
     private static int convertSRGBtoLinearRGB(int color) {
         float input, output;
@@ -603,6 +669,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
     /**
      * Helper function to convert a color component in linear RGB space to
      * SRGB space.  Used to build a static lookup table.
+     * <p>
+     *  帮助函数将线性RGB空间中的颜色分量转换为SRGB空间。用于构建静态查找表。
+     * 
      */
     private static int convertLinearRGBtoSRGB(int color) {
         float input, output;
@@ -620,6 +689,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public final Raster getRaster(int x, int y, int w, int h) {
         // If working raster is big enough, reuse it. Otherwise,
@@ -659,6 +731,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * Took this cacheRaster code from GradientPaint. It appears to recycle
      * rasters for use by any other instance, as long as they are sufficiently
      * large.
+     * <p>
+     * 从GradientPaint获取此cacheRaster代码。它看起来可以循环栅格以供任何其他实例使用,只要它们足够大。
+     * 
      */
     private static synchronized Raster getCachedRaster(ColorModel cm,
                                                        int w, int h)
@@ -682,6 +757,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
      * Took this cacheRaster code from GradientPaint. It appears to recycle
      * rasters for use by any other instance, as long as they are sufficiently
      * large.
+     * <p>
+     *  从GradientPaint获取此cacheRaster代码。它看起来可以循环栅格以供任何其他实例使用,只要它们足够大。
+     * 
      */
     private static synchronized void putCachedRaster(ColorModel cm,
                                                      Raster ras)
@@ -707,6 +785,9 @@ abstract class MultipleGradientPaintContext implements PaintContext {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public final void dispose() {
         if (saved != null) {
@@ -717,6 +798,8 @@ abstract class MultipleGradientPaintContext implements PaintContext {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     public final ColorModel getColorModel() {
         return model;

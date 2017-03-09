@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,11 +41,17 @@ import javax.imageio.ImageTypeSpecifier;
  * This class implements the octree quantization method
  *  as it is described in the "Graphics Gems"
  *  (ISBN 0-12-286166-3, Chapter 4, pages 297-293)
+ * <p>
+ *  该类实现了如在"Graphics Gems"(ISBN 0-12-286166-3,第4章,第297-293页)中描述的八叉树量化方法,
+ * 
  */
 public class PaletteBuilder {
 
     /**
      * maximum of tree depth
+     * <p>
+     *  最大树深度
+     * 
      */
     protected static final int MAXLEVEL = 8;
 
@@ -77,6 +84,12 @@ public class PaletteBuilder {
      * Result image then is an approximation constructed by octree
      * quantization method.
      *
+     * <p>
+     *  使用<code> IndexColorModel </code>创建表示给定图像<code> src </code>的图像。
+     * 
+     *  无损转换并不总是可能的(例如,如果给定图像中的颜色数量超过最大调色板尺寸)。然后,结果图像是由八叉树量化方法构造的近似。
+     * 
+     * 
      * @exception IllegalArgumentException if <code>src</code> is
      * <code>null</code>.
      *
@@ -100,6 +113,10 @@ public class PaletteBuilder {
      * <code>img</code>. If number of colors in the given image exceeds
      * maximum palette size closest colors would be merged.
      *
+     * <p>
+     *  创建代表来自给定图像<code> img </code>的颜色的调色板。如果给定图像中的颜色数量超过最大调色板尺寸,则最近的颜色将被合并。
+     * 
+     * 
      * @exception IllegalArgumentException if <code>img</code> is
      * <code>null</code>.
      *
@@ -122,6 +139,10 @@ public class PaletteBuilder {
      * Returns <code>true</code> if PaletteBuilder is able to create
      * palette for given image type.
      *
+     * <p>
+     *  如果PaletteBuilder能够为给定的图像类型创建调色板,则返回<code> true </code>。
+     * 
+     * 
      * @param type an instance of <code>ImageTypeSpecifier</code> to be
      * indexed.
      *
@@ -142,6 +163,10 @@ public class PaletteBuilder {
      * Returns <code>true</code> if PaletteBuilder is able to create
      * palette for given rendered image.
      *
+     * <p>
+     *  如果PaletteBuilder能够为给定的渲染图像创建调色板,则返回<code> true </code>。
+     * 
+     * 
      * @param image an instance of <code>RenderedImage</code> to be
      * indexed.
      *
@@ -229,6 +254,9 @@ public class PaletteBuilder {
         /*
           from the book
 
+        /* <p>
+        /*  从书
+        /* 
         */
 
         int w = src.getWidth();
@@ -240,6 +268,9 @@ public class PaletteBuilder {
                 /*
                  * If transparency of given image is not opaque we assume all
                  * colors with alpha less than 1.0 as fully transparent.
+                 * <p>
+                 *  如果给定图像的透明度不是不透明的,我们假设所有的alpha小于1.0的颜色是完全透明的。
+                 * 
                  */
                 if (transparency != Transparency.OPAQUE &&
                     aColor.getAlpha() != 0xff)
@@ -426,6 +457,8 @@ public class PaletteBuilder {
 
     /**
      * The node of color tree.
+     * <p>
+     *  颜色树的节点。
      */
     protected class ColorNode {
         public boolean isLeaf;

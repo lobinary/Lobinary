@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,35 @@ import sun.reflect.misc.ReflectUtil;
  * returned by the default MBeanServerBuilder implementation, for the purpose
  * of e.g. adding an additional security layer.</p>
  *
+ * <p>
+ *  <p>提供MBean服务器引用。没有此类的实例。</p>
+ * 
+ *  <p>由于JMX 1.2这个类可以替换默认的MBeanServer实现。这是使用{@link javax.management.MBeanServerBuilder}类完成的。
+ * 要实例化的初始MBeanServerBuilder的类可以通过<b> javax.management.builder.initial </b>系统属性指定。
+ * 指定的类必须是{@link javax.management.MBeanServerBuilder}的公共子类,并且必须具有公共的空构造函数。
+ *  <p>默认情况下,如果未指定该属性的值,则会创建{@link javax.management.MBeanServerBuilder javax.management.MBeanServerBuilder}
+ * 的实例。
+ * 指定的类必须是{@link javax.management.MBeanServerBuilder}的公共子类,并且必须具有公共的空构造函数。
+ * 否则,MBeanServerFactory尝试使用{@link java.lang.Thread#getContextClassLoader()Thread.currentThread()。
+ * getContextClassLoader()}加载指定的类,或者如果它为null,{@link java.lang.Class#forName (java.lang.String)Class.forName()}
+ * 。
+ * 否则,MBeanServerFactory尝试使用{@link java.lang.Thread#getContextClassLoader()Thread.currentThread()。
+ * 然后使用{@link java.lang.Class#newInstance()}创建该类的初始实例。
+ * 如果在此过程中引发任何检查异常(例如{@link java.lang.ClassNotFoundException},{@link java.lang.InstantiationException}),
+ * MBeanServerFactory将在RuntimeException中传播此异常。
+ * 然后使用{@link java.lang.Class#newInstance()}创建该类的初始实例。</p>。
+ * 
+ * <p>每次需要创建一个新的MBeanServer时都会查询<b> javax.management.builder.initial </b>系统属性,并加载该属性指向的类。
+ * 如果该类与当前MBeanServerBuilder的类不同,则会创建一个新的MBeanServerBuilder。
+ * 否则,MBeanServerFactory可能会创建一个新的MBeanServerBuilder或重用当前的MBeanServerBuilder。</p>。
+ * 
+ *  <p>如果属性指向的类无法加载,或者不对应于MBeanServerBuilder的有效子类,那么会传播异常,并且不能创建MBeanServer,直到<b> javax.management.build
+ * er.initial < / b>系统属性重置为有效值。
+ * </p>。
+ * 
+ *  <p> MBeanServerBuilder可以包装由默认MBeanServerBuilder实现返回的MBeanServers,例如添加额外的安全层。</p>
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanServerFactory {
@@ -89,6 +119,9 @@ public class MBeanServerFactory {
     /*
      * There are no instances of this class so don't generate the
      * default public constructor.
+     * <p>
+     *  没有这个类的实例,所以不生成默认的公共构造函数。
+     * 
      */
     private MBeanServerFactory() {
 
@@ -97,11 +130,19 @@ public class MBeanServerFactory {
     /**
      * The builder that will be used to construct MBeanServers.
      *
+     * <p>
+     *  将用于构建MBeanServers的构建器。
+     * 
+     * 
      **/
     private static MBeanServerBuilder builder = null;
 
     /**
      * Provide a new {@link javax.management.MBeanServerBuilder}.
+     * <p>
+     *  提供一个新的{@link javax.management.MBeanServerBuilder}。
+     * 
+     * 
      * @param builder The new MBeanServerBuilder that will be used to
      *        create {@link javax.management.MBeanServer}s.
      * @exception IllegalArgumentException if the given builder is null.
@@ -120,6 +161,10 @@ public class MBeanServerFactory {
     /**
      * Get the current {@link javax.management.MBeanServerBuilder}.
      *
+     * <p>
+     *  获取当前的{@link javax.management.MBeanServerBuilder}。
+     * 
+     * 
      * @return the current {@link javax.management.MBeanServerBuilder}.
      *
      * @exception SecurityException if there is a SecurityManager and
@@ -137,6 +182,10 @@ public class MBeanServerFactory {
      * MBeanServer. This allows the garbage collector to remove the
      * MBeanServer object.
      *
+     * <p>
+     *  删除对创建的MBeanServer的内部MBeanServerFactory引用。这允许垃圾收集器删除MBeanServer对象。
+     * 
+     * 
      * @param mbeanServer the MBeanServer object to remove.
      *
      * @exception java.lang.IllegalArgumentException if
@@ -169,6 +218,16 @@ public class MBeanServerFactory {
      *
      * <p>This method is equivalent to <code>createMBeanServer(null)</code>.
      *
+     * <p>
+     * <p>使用标准默认域名返回实现MBeanServer接口的新对象。当用户指定的域为空时,默认域名用作MBeans的ObjectName中的域部分。</p>
+     * 
+     *  <p>标准默认域名为<code> DefaultDomain </code>。</p>
+     * 
+     *  <p> MBeanServer引用内部保留。这将允许<CODE> findMBeanServer </CODE>返回对此MBeanServer对象的引用。</p>
+     * 
+     *  <p>此方法等效于<code> createMBeanServer(null)</code>。
+     * 
+     * 
      * @return the newly created MBeanServer.
      *
      * @exception SecurityException if there is a SecurityManager and the
@@ -202,6 +261,12 @@ public class MBeanServerFactory {
      * allow <CODE>findMBeanServer</CODE> to return a reference to
      * this MBeanServer object.</p>
      *
+     * <p>
+     *  <p>返回实现具有指定默认域名的{@link MBeanServer}接口的新对象。当用户指定的域为空时,给定的域名用作MBeans的ObjectName中的域部分。</p>
+     * 
+     *  <p> MBeanServer引用内部保留。这将允许<CODE> findMBeanServer </CODE>返回对此MBeanServer对象的引用。</p>
+     * 
+     * 
      * @param domain the default domain name for the created
      * MBeanServer.  This is the value that will be returned by {@link
      * MBeanServer#getDefaultDomain}.
@@ -250,6 +315,17 @@ public class MBeanServerFactory {
      *
      * <p>This method is equivalent to <code>newMBeanServer(null)</code>.</p>
      *
+     * <p>
+     *  <p>使用标准默认域名返回实现MBeanServer接口的新对象,而不保留对此新对象的内部引用。当用户指定的域为空时,默认域名用作MBeans的ObjectName中的域部分。</p>
+     * 
+     *  <p>标准默认域名为<code> DefaultDomain </code>。</p>
+     * 
+     * <p>不保留引用。 <CODE> findMBeanServer </CODE>将无法返回对此MBeanServer对象的引用,但是当不再引用MBeanServer对象时,垃圾回收器将能够删除它。
+     * </p>。
+     * 
+     *  <p>此方法等效于<code> newMBeanServer(null)</code>。</p>
+     * 
+     * 
      * @return the newly created MBeanServer.
      *
      * @exception SecurityException if there is a SecurityManager and the
@@ -285,6 +361,13 @@ public class MBeanServerFactory {
      * the garbage collector will be able to remove the MBeanServer
      * object when it is no longer referenced.</p>
      *
+     * <p>
+     *  <p>返回实现具有指定默认域名的MBeanServer接口的新对象,而不保留对此新对象的内部引用。当用户指定的域为空时,给定的域名用作MBeans的ObjectName中的域部分。</p>
+     * 
+     *  <p>不保留引用。 <CODE> findMBeanServer </CODE>将无法返回对此MBeanServer对象的引用,但是当不再引用MBeanServer对象时,垃圾回收器将能够删除它。
+     * </p>。
+     * 
+     * 
      * @param domain the default domain name for the created
      * MBeanServer.  This is the value that will be returned by {@link
      * MBeanServer#getDefaultDomain}.
@@ -342,6 +425,12 @@ public class MBeanServerFactory {
      * the <code>createMBeanServer</code> methods and not subsequently
      * released with <code>releaseMBeanServer</code>.</p>
      *
+     * <p>
+     *  <p>返回已注册的MBeanServer对象的列表。
+     * 注册的MBeanServer对象是由<code> createMBeanServer </code>方法之一创建的对象,随后不会随<code> releaseMBeanServer </code>发布。
+     *  <p>返回已注册的MBeanServer对象的列表。
+     * 
+     * 
      * @param agentId The agent identifier of the MBeanServer to
      * retrieve.  If this parameter is null, all registered
      * MBeanServers in this JVM are returned.  Otherwise, only
@@ -376,6 +465,11 @@ public class MBeanServerFactory {
      * Return the ClassLoaderRepository used by the given MBeanServer.
      * This method is equivalent to {@link
      * MBeanServer#getClassLoaderRepository() server.getClassLoaderRepository()}.
+     * <p>
+     *  返回给定MBeanServer使用的ClassLoaderRepository。
+     * 此方法等效于{@link MBeanServer#getClassLoaderRepository()server.getClassLoaderRepository()}。
+     * 
+     * 
      * @param server The MBeanServer under examination. Since JMX 1.2,
      * if <code>server</code> is <code>null</code>, the result is a
      * {@link NullPointerException}.  This behavior differs from what
@@ -434,6 +528,10 @@ public class MBeanServerFactory {
 
     /**
      * Load the builder class through the context class loader.
+     * <p>
+     *  通过上下文类加载器加载构建器类。
+     * 
+     * 
      * @param builderClassName The name of the builder class.
      **/
     private static Class<?> loadBuilderClass(String builderClassName)
@@ -455,6 +553,10 @@ public class MBeanServerFactory {
      * javax.management.builder.initial System property - if specified.
      * If any checked exception needs to be thrown, it is embedded in
      * a JMRuntimeException.
+     * <p>
+     *  根据javax.management.builder.initial创建初始构建器系统属性 - 如果指定。如果需要抛出任何已检查的异常,它将嵌入在JMRuntimeException中。
+     * 
+     * 
      **/
     private static MBeanServerBuilder newBuilder(Class<?> builderClass) {
         try {
@@ -473,6 +575,10 @@ public class MBeanServerFactory {
     /**
      * Instantiate a new builder according to the
      * javax.management.builder.initial System property - if needed.
+     * <p>
+     * 根据javax.management.builder.initial系统属性实例化新构建器(如果需要)。
+     * 
+     * 
      **/
     private static synchronized void checkMBeanServerBuilder() {
         try {
@@ -525,6 +631,10 @@ public class MBeanServerFactory {
      * This method consults the property and instantiates a new builder
      * if needed.
      *
+     * <p>
+     *  获取由javax.management.builder.initial属性的当前值指定的当前{@link javax.management.MBeanServerBuilder}。
+     * 
+     * 
      * @return the new current {@link javax.management.MBeanServerBuilder}.
      *
      * @exception SecurityException if there is a SecurityManager and

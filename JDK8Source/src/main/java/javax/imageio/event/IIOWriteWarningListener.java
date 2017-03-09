@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,13 @@ import javax.imageio.ImageWriter;
  * with an <code>ImageWriter</code>.  It is up to the
  * <code>ImageWriter</code> to provide localized messages.
  *
+ * <p>
+ *  <code> ImageWriter </code>实现使用的接口,通知调用者其图像和警告的缩略图读取方法(非致命错误)。
+ * 致命错误导致相关的读取方法抛出一个<code> IIOException </code>。
+ * 
+ *  <p>通过使用<code> ImageWriter </code>注册<code> Locale </code>与每个<code> IIOWriteWarningListener </code>关联来
+ * 处理本地化。
+ * 
  * @see javax.imageio.ImageWriter#addIIOWriteWarningListener
  * @see javax.imageio.ImageWriter#removeIIOWriteWarningListener
  *
@@ -51,6 +59,10 @@ public interface IIOWriteWarningListener extends EventListener {
      * may choose to display a dialog, print the warning to the console,
      * ignore the warning, or take any other action it chooses.
      *
+     * <p>
+     * 它由<code> ImageWriter </code>提供本地化的消息。
+     * 
+     * 
      * @param source the <code>ImageWriter</code> object calling this method.
      * @param imageIndex the index, starting with 0, of the image
      * generating the warning.

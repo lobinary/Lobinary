@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,13 @@ import com.sun.jmx.snmp.SnmpStatusException;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  表示对应于表条目元节点的SNMP MIB中的节点。
+ * <P>
+ *  此类由<CODE> mibgen </CODE>生成的类使用。你不应该直接使用这个类。
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
  */
 
 public abstract class SnmpMibEntry extends SnmpMibNode
@@ -49,6 +57,10 @@ public abstract class SnmpMibEntry extends SnmpMibNode
      * Tells whether the given arc identifies a variable (scalar object) in
      * this entry.
      *
+     * <p>
+     *  指示给定的圆弧是否在此条目中标识变量(标量对象)。
+     * 
+     * 
      * @param arc An OID arc.
      *
      * @return <CODE>true</CODE> if `arc' leads to a variable.
@@ -59,6 +71,10 @@ public abstract class SnmpMibEntry extends SnmpMibNode
      * Tells whether the given arc identifies a readable scalar object in
      * this entry.
      *
+     * <p>
+     *  指示给定的圆弧是否标识此条目中的可读标量对象。
+     * 
+     * 
      * @param arc An OID arc.
      *
      * @return <CODE>true</CODE> if `arc' leads to a readable variable.
@@ -68,6 +84,9 @@ public abstract class SnmpMibEntry extends SnmpMibNode
     /**
      * Get the next OID arc corresponding to a readable scalar variable.
      *
+     * <p>
+     *  获取对应于可读标量变量的下一个OID弧。
+     * 
      */
     public long getNextVarId(long id, Object userData)
         throws SnmpStatusException {
@@ -81,6 +100,10 @@ public abstract class SnmpMibEntry extends SnmpMibNode
      * Checks whether the given OID arc identifies a variable (columnar
      * object).
      *
+     * <p>
+     *  检查给定的OID是否标识变量(柱状对象)。
+     * 
+     * 
      * @param userData A contextual object containing user-data.
      *        This object is allocated through the <code>
      *        {@link com.sun.jmx.snmp.agent.SnmpUserDataFactory}</code>
@@ -115,6 +138,14 @@ public abstract class SnmpMibEntry extends SnmpMibNode
      * underlying resources.
      * <p>
      *
+     * <p>
+     *  通用处理<CODE> get </CODE>操作。 <p>此方法的实际实现将由mibgen生成。通常,此实现仅将作业委派给某个其他提供的运行时类,该类知道如何访问MBean。
+     * 因此,当前工具包提供了两种实现：<ul> <li>标准实现将通过java引用直接访问MBean,</li> <li>通用实现将通过MBean服务器访问MBean。</li>。
+     * </ul>
+     *  <p>这两个实现依赖于特定的和不同的mibgen生成方法集合。 <p>如果您需要实施一些特定策略以最小化对某些远程基础资源的访问,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -144,6 +175,14 @@ public abstract class SnmpMibEntry extends SnmpMibNode
      * underlying resources.
      * <p>
      *
+     * <p>
+     * 通用处理<CODE>设置</CODE>操作。 <p>此方法的实际实现将由mibgen生成。通常,此实现仅将作业委派给某个其他提供的运行时类,该类知道如何访问MBean。
+     * 因此,当前工具包提供了两种实现：<ul> <li>标准实现将通过java引用直接访问MBean,</li> <li>通用实现将通过MBean服务器访问MBean。</li>。
+     * </ul>
+     *  <p>这两个实现依赖于特定的和不同的mibgen生成方法集合。 <p>如果您需要实施一些特定策略以最小化对某些远程基础资源的访问,您可以覆盖此方法。
+     * <p>
+     * 
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.
@@ -175,6 +214,13 @@ public abstract class SnmpMibEntry extends SnmpMibNode
      * checks between the different values provided in the varbind list.
      * <p>
      *
+     * <p>
+     *  一般处理<CODE>检查</CODE>操作。
+     * 
+     *  <p>此方法的实际实现将由mibgen生成。通常,此实现仅将作业委派给某个其他提供的运行时类,该类知道如何访问MBean。
+     * 因此,当前工具包提供了两种实现：<ul> <li>标准实现将通过java引用直接访问MBean,</li> <li>通用实现将通过MBean服务器访问MBean。</li>。
+     * </ul>
+     * 
      * @param req   The sub-request that must be handled by this node.
      *
      * @param depth The depth reached in the OID tree.

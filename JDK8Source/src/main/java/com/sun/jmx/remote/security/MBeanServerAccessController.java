@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -82,6 +83,21 @@ import javax.management.remote.MBeanServerForwarder;
  * download and execute arbitrary code in the target MBean server. Advanced
  * users who do want the ability to use MLets are presumably advanced enough
  * to handle policy files and security managers.</p>
+ * <p>
+ *  <p>此类的对象实现MBeanServer接口,并为每个方法调用相应的检查方法,然后将请求转发到包装的MBeanServer对象。
+ * 如果不允许操作,检查方法可能抛出RuntimeException;在这种情况下,请求不会转发到包装的对象。</p>。
+ * 
+ *  <p>此类的典型用法是将其插入连接器服务器(如RMI连接器)和与该连接器关联的MBeanServer之间。
+ * 然后可以过滤来自连接器客户端的请求,并且可以通过在相应的<code> check * </code中抛出<code> SecurityException </code>来拒绝不允许或不允许在特定上下文中
+ * 执行的操作>方法。
+ *  <p>此类的典型用法是将其插入连接器服务器(如RMI连接器)和与该连接器关联的MBeanServer之间。</p>。
+ * 
+ *  <p>这是一个抽象类,因为在它的实现中没有任何检查方法。为了有用,它必须被子类化,并且至少一个检查方法被覆盖以做一些检查。
+ * 某些或所有MBeanServer方法也可能被覆盖,例如,如果默认检查行为不合适。</p>。
+ * 
+ * <p>如果没有SecurityManager,则访问控制器将拒绝创建一个包含MLets的ClassLoader的MBean,或者在作为MLet的MBean上执行addURL方法。
+ * 这防止人们无意中打开安全漏洞。否则,授予写访问权限将允许在目标MBean服务器中下载和执行任意代码。想要使用MLets的高级用户可能已经足够高级以处理策略文件和安全管理器。</p>。
+ * 
  */
 public abstract class MBeanServerAccessController
         implements MBeanServerForwarder {
@@ -102,18 +118,27 @@ public abstract class MBeanServerAccessController
     /**
      * Check if the caller can do read operations. This method does
      * nothing if so, otherwise throws SecurityException.
+     * <p>
+     *  检查调用者是否可以执行读取操作。此方法不执行任何操作,如果是这样,否则抛出SecurityException。
+     * 
      */
     protected abstract void checkRead();
 
     /**
      * Check if the caller can do write operations.  This method does
      * nothing if so, otherwise throws SecurityException.
+     * <p>
+     *  检查调用者是否可以进行写操作。此方法不执行任何操作,如果是这样,否则抛出SecurityException。
+     * 
      */
     protected abstract void checkWrite();
 
     /**
      * Check if the caller can create the named class.  The default
      * implementation of this method calls {@link #checkWrite()}.
+     * <p>
+     *  检查调用者是否可以创建命名类。此方法的默认实现调用{@link #checkWrite()}。
+     * 
      */
     protected void checkCreate(String className) {
         checkWrite();
@@ -122,6 +147,9 @@ public abstract class MBeanServerAccessController
     /**
      * Check if the caller can unregister the named MBean.  The default
      * implementation of this method calls {@link #checkWrite()}.
+     * <p>
+     *  检查调用程序是否可以注销指定的MBean。此方法的默认实现调用{@link #checkWrite()}。
+     * 
      */
     protected void checkUnregister(ObjectName name) {
         checkWrite();
@@ -138,6 +166,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public void addNotificationListener(ObjectName name,
                                         NotificationListener listener,
@@ -152,6 +183,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public void addNotificationListener(ObjectName name,
                                         ObjectName listener,
@@ -166,6 +200,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkCreate(className)</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkCreate(className)</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ObjectInstance createMBean(String className, ObjectName name)
         throws
@@ -188,6 +225,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkCreate(className)</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkCreate(className)</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ObjectInstance createMBean(String className, ObjectName name,
                                       Object params[], String signature[])
@@ -214,6 +254,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkCreate(className)</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkCreate(className)</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ObjectInstance createMBean(String className,
                                       ObjectName name,
@@ -240,6 +283,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkCreate(className)</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     * 调用<code> checkCreate(className)</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ObjectInstance createMBean(String className,
                                       ObjectName name,
@@ -271,6 +317,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     @Deprecated
     public ObjectInputStream deserialize(ObjectName name, byte[] data)
@@ -282,6 +331,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     @Deprecated
     public ObjectInputStream deserialize(String className, byte[] data)
@@ -293,6 +345,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     @Deprecated
     public ObjectInputStream deserialize(String className,
@@ -309,6 +364,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Object getAttribute(ObjectName name, String attribute)
         throws
@@ -323,6 +381,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public AttributeList getAttributes(ObjectName name, String[] attributes)
         throws InstanceNotFoundException, ReflectionException {
@@ -333,6 +394,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ClassLoader getClassLoader(ObjectName loaderName)
         throws InstanceNotFoundException {
@@ -343,6 +407,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ClassLoader getClassLoaderFor(ObjectName mbeanName)
         throws InstanceNotFoundException {
@@ -353,6 +420,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ClassLoaderRepository getClassLoaderRepository() {
         checkRead();
@@ -362,6 +432,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public String getDefaultDomain() {
         checkRead();
@@ -371,6 +444,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public String[] getDomains() {
         checkRead();
@@ -380,6 +456,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Integer getMBeanCount() {
         checkRead();
@@ -389,6 +468,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public MBeanInfo getMBeanInfo(ObjectName name)
         throws
@@ -402,6 +484,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ObjectInstance getObjectInstance(ObjectName name)
         throws InstanceNotFoundException {
@@ -412,6 +497,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkCreate(className)</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkCreate(className)</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Object instantiate(String className)
         throws ReflectionException, MBeanException {
@@ -422,6 +510,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkCreate(className)</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkCreate(className)</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Object instantiate(String className,
                               Object params[],
@@ -434,6 +525,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkCreate(className)</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkCreate(className)</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Object instantiate(String className, ObjectName loaderName)
         throws ReflectionException, MBeanException, InstanceNotFoundException {
@@ -444,6 +538,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkCreate(className)</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkCreate(className)</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Object instantiate(String className, ObjectName loaderName,
                               Object params[], String signature[])
@@ -456,6 +553,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkWrite()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     * 调用<code> checkWrite()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Object invoke(ObjectName name, String operationName,
                          Object params[], String signature[])
@@ -471,6 +571,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public boolean isInstanceOf(ObjectName name, String className)
         throws InstanceNotFoundException {
@@ -481,6 +584,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public boolean isRegistered(ObjectName name) {
         checkRead();
@@ -490,6 +596,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Set<ObjectInstance> queryMBeans(ObjectName name, QueryExp query) {
         checkRead();
@@ -499,6 +608,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public Set<ObjectName> queryNames(ObjectName name, QueryExp query) {
         checkRead();
@@ -508,6 +620,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkWrite()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkWrite()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public ObjectInstance registerMBean(Object object, ObjectName name)
         throws
@@ -521,6 +636,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public void removeNotificationListener(ObjectName name,
                                            NotificationListener listener)
@@ -532,6 +650,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public void removeNotificationListener(ObjectName name,
                                            NotificationListener listener,
@@ -546,6 +667,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public void removeNotificationListener(ObjectName name,
                                            ObjectName listener)
@@ -557,6 +681,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkRead()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkRead()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public void removeNotificationListener(ObjectName name,
                                            ObjectName listener,
@@ -571,6 +698,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkWrite()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkWrite()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public void setAttribute(ObjectName name, Attribute attribute)
         throws
@@ -586,6 +716,9 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkWrite()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkWrite()</code>,然后将此方法转发到包装的对象。
+     * 
      */
     public AttributeList setAttributes(ObjectName name,
                                        AttributeList attributes)
@@ -597,6 +730,8 @@ public abstract class MBeanServerAccessController
     /**
      * Call <code>checkUnregister()</code>, then forward this method to the
      * wrapped object.
+     * <p>
+     *  调用<code> checkUnregister()</code>,然后将此方法转发到包装的对象。
      */
     public void unregisterMBean(ObjectName name)
         throws InstanceNotFoundException, MBeanRegistrationException {

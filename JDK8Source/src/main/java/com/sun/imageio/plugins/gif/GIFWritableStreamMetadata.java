@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,9 @@ package com.sun.imageio.plugins.gif;
  * The source for this class was copied verbatim from the source for
  * package com.sun.imageio.plugins.gif.GIFImageMetadata and then modified
  * to make the class read-write capable.
+ * <p>
+ *  该类的源是从com.sun.imageio.plugins.gif.GIFImageMetadata包的源中逐字复制的,然后进行修改以使该类具有读写能力。
+ * 
  */
 
 import javax.imageio.ImageTypeSpecifier;
@@ -108,6 +112,8 @@ class GIFWritableStreamMetadata extends GIFStreamMetadata {
                  * integer values in tree representation.
                  * We need to add better support for undefined/default values
                  * later.
+                 * <p>
+                 *  树表示中的整数值。稍后我们需要为未定义/默认值添加更好的支持。
                  */
                 logicalScreenWidth = getIntAttribute(node,
                                                      "logicalScreenWidth",

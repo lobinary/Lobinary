@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,14 @@ public class ORBConstants {
        16 ORB Type IDs    0x53554e00 - 0x53554e0f ("SUN\x00" - "SUN\x0f")
        64 service tags    0x53554e00 - 0x53554e3f ("SUN\x00" - "SUN\x3f")
        64 component tags  0x53554e00 - 0x53554e3f ("SUN\x00" - "SUN\x3f")
+    /* <p>
+    /*  tag-request@omg.org标签和标签分配的常见问题：http://doc.omg.org/ptc/99-02-01。
+    /*  http://doc.omg.org/standard-tags http://doc.omg.org/vendor-tags。
+    /* 
+    /*  最后更新：2003年8月19日(ptc / 03-08-14)
+    /* 
+    /*  //传统1配置文件标签0x4f4e4300("ONC \ x00")1配置文件标签0x4e454f00("NEO \ x00")1配置文件标签0x434f4f4c("COOL")16服务标签0x4e4
+    /* 54f00  -  0x4e454f0f("NEO \ x00" x0f")。
     */
 
     // All NEO service contexts must be in the range

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,17 @@ import java.util.Collections;
  * provide the necessary locking. Multiple threads each manipulating
  * separate objects need not synchronize.
  *
+ * <p>
+ *  用作Collection {@code CertStore}算法的输入的参数。
+ * <p>
+ *  此类用于向Collection {@code CertStore}算法的实现提供必要的配置参数。
+ * 此类中包含的唯一参数是{@code Collection},{@code CertStore}将从中检索证书和CRL。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ *  除非另有说明,否则此类中定义的方法不是线程安全的。需要并发访问单个对象的多个线程应在它们之间同步并提供必要的锁定。每个操作单独对象的多个线程不需要同步。
+ * 
+ * 
  * @since       1.4
  * @author      Steve Hanna
  * @see         java.util.Collection
@@ -78,6 +90,19 @@ public class CollectionCertStoreParameters
      * that has been initialized with this {@code Collection}, the
      * {@code Collection} must have fail-fast iterators.
      *
+     * <p>
+     *  创建{@code CollectionCertStoreParameters}的实例,这将允许从指定的{@code集合}检索证书和CRL。
+     * 如果指定的{@code集合}包含不是{@code Certificate}或{@code CRL}的对象,该集合{@code CertStore}将会忽略该对象。
+     * <p>
+     * {@code集合}已复制<b>不</b>。相反,使用引用。
+     * 这样,调用者可以随后从{@code集合}中添加或删除{@code Certificates}或{@code CRL},从而将集合{@code Certificates}或{@code CRL}更改为集合
+     * {@code CertStore}。
+     * {@code集合}已复制<b>不</b>。相反,使用引用。集合{@code CertStore}不会修改{@code集合}的内容。
+     * <p>
+     *  如果{@code Collection}将被一个线程修改,而另一个线程正在调用使用此{@code集合}初始化的Collection {@code CertStore}的方法,则{@code Collection}
+     * 快速迭代器。
+     * 
+     * 
      * @param collection a {@code Collection} of
      *        {@code Certificate}s and {@code CRL}s
      * @exception NullPointerException if {@code collection} is
@@ -93,6 +118,9 @@ public class CollectionCertStoreParameters
      * Creates an instance of {@code CollectionCertStoreParameters} with
      * the default parameter values (an empty and immutable
      * {@code Collection}).
+     * <p>
+     *  使用默认参数值(一个空的和不可变的{@code Collection})创建{@code CollectionCertStoreParameters}的实例。
+     * 
      */
     public CollectionCertStoreParameters() {
         coll = Collections.EMPTY_SET;
@@ -105,6 +133,11 @@ public class CollectionCertStoreParameters
      * subsequently add or remove {@code Certificates} or
      * {@code CRL}s from the {@code Collection}.
      *
+     * <p>
+     *  返回检索到{@code Certificate}和{@code CRL}的{@code Collection}。这是<b>不是</b> {@code集合}的副本,它是一个参考。
+     * 这允许调用者随后从{@code Collection}添加或删除{@code Certificates}或{@code CRL}。
+     * 
+     * 
      * @return the {@code Collection} (never null)
      */
     public Collection<?> getCollection() {
@@ -115,6 +148,10 @@ public class CollectionCertStoreParameters
      * Returns a copy of this object. Note that only a reference to the
      * {@code Collection} is copied, and not the contents.
      *
+     * <p>
+     *  返回此对象的副本。请注意,只会复制对{@code Collection}的引用,而不是内容。
+     * 
+     * 
      * @return the copy
      */
     public Object clone() {
@@ -129,6 +166,9 @@ public class CollectionCertStoreParameters
     /**
      * Returns a formatted string describing the parameters.
      *
+     * <p>
+     *  返回描述参数的格式化字符串。
+     * 
      * @return a formatted string describing the parameters
      */
     public String toString() {

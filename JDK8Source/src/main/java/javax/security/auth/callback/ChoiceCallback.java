@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,10 @@ package javax.security.auth.callback;
  * method of a {@code CallbackHandler} to display a list of choices
  * and to retrieve the selected choice(s).
  *
+ * <p>
+ *  <p>基础安全服务实例化并将{@code ChoiceCallback}传递给{@code CallbackHandler}的{@code handle}方法,以显示选项列表并检索所选的选项。
+ * 
+ * 
  * @see javax.security.auth.callback.CallbackHandler
  */
 public class ChoiceCallback implements Callback, java.io.Serializable {
@@ -38,27 +43,37 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
     private static final long serialVersionUID = -3975664071579892167L;
 
     /**
+    /* <p>
+    /* 
      * @serial
      * @since 1.4
      */
     private String prompt;
     /**
+    /* <p>
+    /* 
      * @serial the list of choices
      * @since 1.4
      */
     private String[] choices;
     /**
+    /* <p>
+    /* 
      * @serial the choice to be used as the default choice
      * @since 1.4
      */
     private int defaultChoice;
     /**
+    /* <p>
+    /* 
      * @serial whether multiple selections are allowed from the list of
      * choices
      * @since 1.4
      */
     private boolean multipleSelectionsAllowed;
     /**
+    /* <p>
+    /* 
      * @serial the selected choices, represented as indexes into the
      *          {@code choices} list.
      * @since 1.4
@@ -72,6 +87,12 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  使用提示,选择列表,默认选项和布尔值构造{@code ChoiceCallback},指定是否允许从选择列表中进行多个选择。
+     * 
+     * <p>
+     * 
+     * 
      * @param prompt the prompt used to describe the list of choices. <p>
      *
      * @param choices the list of choices. <p>
@@ -119,6 +140,12 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取提示。
+     * 
+     * <p>
+     * 
+     * 
      * @return the prompt.
      */
     public String getPrompt() {
@@ -130,6 +157,12 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取选择列表。
+     * 
+     * <p>
+     * 
+     * 
      * @return the list of choices.
      */
     public String[] getChoices() {
@@ -141,6 +174,12 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取defaultChoice。
+     * 
+     * <p>
+     * 
+     * 
      * @return the defaultChoice, represented as an index into
      *          the {@code choices} list.
      */
@@ -154,6 +193,12 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取布尔值,确定是否允许从{@code choices}列表中进行多个选择。
+     * 
+     * <p>
+     * 
+     * 
      * @return whether multiple selections are allowed.
      */
     public boolean allowMultipleSelections() {
@@ -165,6 +210,12 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  设置所选择的选项。
+     * 
+     * <p>
+     * 
+     * 
      * @param selection the selection represented as an index into the
      *          {@code choices} list.
      *
@@ -180,6 +231,12 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  设置所选择的选项。
+     * 
+     * <p>
+     * 
+     * 
      * @param selections the selections represented as indexes into the
      *          {@code choices} list.
      *
@@ -200,6 +257,10 @@ public class ChoiceCallback implements Callback, java.io.Serializable {
      *
      * <p>
      *
+     * <p>
+     *  获取选定的选项。
+     * 
+     * 
      * @return the selected choices, represented as indexes into the
      *          {@code choices} list.
      *

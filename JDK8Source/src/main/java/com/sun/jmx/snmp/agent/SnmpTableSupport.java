@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -76,6 +77,24 @@ import com.sun.jmx.snmp.SnmpStatusException;
  *
  * <p><b>This API is a Sun Microsystems internal API  and is subject
  * to change without notice.</b></p>
+ * <p>
+ *  此类是SNMP表的抽象。它是在MBean世界中实现SNMP表的基类。
+ * 
+ * <p>
+ *  它的职责是将表(表条目)的MBean视图与MIB视图(OID索引数组)同步。此类的每个对象将绑定到元数据对象,该元数据对象管理MIB中的相同SNMP表。
+ * </p>
+ * 
+ * <p>
+ *  对于在MIB中定义的每个表,mibgen将生成将对该类进行子类化的称为Table </i> TableName </i>的特定类以及扩展SnmpMibTable并且对应于MIB的相应<视图相同的表。
+ * </p>
+ * 
+ * <p>
+ *  此类的对象由表示该表所属的SNMP组的MBeans实例化。
+ * </p>
+ * 
+ *  <p> <b>此API是Sun Microsystems的内部API,如有更改,恕不另行通知。</b> </p>
+ * 
+ * 
  * @see com.sun.jmx.snmp.agent.SnmpTableEntryFactory
  * @see com.sun.jmx.snmp.agent.SnmpMibTable
  *
@@ -94,16 +113,28 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
 
     /**
      * The list of entries
+     * <p>
+     *  条目列表
+     * 
+     * 
      **/
     protected List<Object> entries;
 
     /**
      * The associated metadata object
+     * <p>
+     *  关联的元数据对象
+     * 
+     * 
      **/
     protected SnmpMibTable meta;
 
     /**
      * The MIB to which this table belongs
+     * <p>
+     *  此表所属的MIB
+     * 
+     * 
      **/
     protected SnmpMib      theMib;
 
@@ -116,6 +147,10 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
     /**
      * This variable is initialized while binding this object to its
      * corresponding meta object.
+     * <p>
+     *  当将此对象绑定到其对应的元对象时,将初始化此变量。
+     * 
+     * 
      **/
     private boolean registrationRequired = false;
 
@@ -137,6 +172,11 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      *          from the MIB.</li>
      * </ul>
      *
+     * <p>
+     *  初始化表。步骤如下：<ul> <li>分配用于存储条目对象的数组,</li> <li>从MIB检索相应的元数据对象,<li>将此对象绑定到来自MIB的对应元数据对象。 </li>
+     * </ul>
+     * 
+     * 
      * @param mib The MIB to which this table belong.
      *
      **/
@@ -163,6 +203,13 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * You may subclass this method to implement any specific behaviour
      * your application requires.
      *
+     * <p>
+     *  在表中创建一个新条目。
+     * 
+     * 此工厂方法由mibgen生成并在内部使用。它是{@link com.sun.jmx.snmp.agent.SnmpTableEntryFactory}接口的一部分。
+     * 您可以将此方法子类化以实现应用程序需要的任何特定行为。
+     * 
+     * 
      * @exception SnmpStatusException if the entry cannot be created.
      **/
     public abstract void createNewEntry(SnmpMibSubRequest request,
@@ -180,6 +227,10 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
     /**
      * Returns the entry located at the given position in the table.
      *
+     * <p>
+     *  返回位于表中给定位置的条目。
+     * 
+     * 
      * @return The entry located at the given position, <code>null</code>
      *         if no entry can be found at this position.
      **/
@@ -192,6 +243,10 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
     /**
      * Returns the number of entries registered in the table.
      *
+     * <p>
+     *  返回在表中注册的条目数。
+     * 
+     * 
      * @return The number of entries registered in the table.
      **/
     public int getSize() {
@@ -207,6 +262,14 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      *      associated with this table.
      * <BR> By default remote entry creation via SET operation is disabled.
      *
+     * <p>
+     *  此方法允许您动态切换创建策略。
+     * 
+     *  <CODE> setCreationEnabled()</CODE>将通过在与此表关联的元数据对象上调用<code> setCreationEnabled()</code>来切换通过SET操作创建远程
+     * 条目的策略。
+     *  <BR>默认情况下,通过SET操作创建远程条目被禁用。
+     * 
+     * 
      * @param remoteCreationFlag Tells whether remote entry creation must
      *        be enabled or disabled.
      * <li>
@@ -231,6 +294,10 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * This method calls <code>isCreationEnabled()</code> on the metadata
      * object associated with this table.
      *
+     * <p>
+     *  告知当接收到尚不存在的条目的SET操作时是否应创建新条目。此方法在与此表关联的元数据对象上调用<code> isCreationEnabled()</code>。
+     * 
+     * 
      * @return true if a new entry must be created, false otherwise.<br>
      *         [default: returns <CODE>false</CODE>]
      *
@@ -245,6 +312,10 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * requires entries to be registered. In this case passing an
      * ObjectName when registering entries will be mandatory.
      *
+     * <p>
+     *  指出此表链接到的元数据对象是否需要注册条目。在这种情况下,在注册条目时传递ObjectName将是必需的。
+     * 
+     * 
      * @return <code>true</code> if the associated metadata requires entries
      *         to be registered (mibgen generated generic metadata).
      **/
@@ -257,6 +328,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      *
      * This method is generated by mibgen and used internally.
      *
+     * <p>
+     *  从其行OID构建一个条目SnmpIndex。
+     * 
+     *  此方法由mibgen生成并在内部使用。
+     * 
+     * 
      * @param rowOid The SnmpOid object identifying a table entry.
      *
      * @return The SnmpIndex of the entry identified by <code>rowOid</code>.
@@ -274,6 +351,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      *
      * This method is generated by mibgen and used internally.
      *
+     * <p>
+     *  从SnmpIndex对象构建SnmpOid。
+     * 
+     *  此方法由mibgen生成并在内部使用。
+     * 
+     * 
      * @param index An SnmpIndex object identifying a table entry.
      *
      * @return The SnmpOid form of the given entry index.
@@ -292,6 +375,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * ObjectName policy. This is only meaningfull when entries
      * are registered MBeans.
      *
+     * <p>
+     *  从标识此条目的SnmpIndex构建条目的默认ObjectName。不能对条目本身进行访问。
+     * 
+     * 此方法由mibgen生成并在内部使用。如果要更改默认ObjectName策略,可以对此方法进行子类化。这只有在条目注册MBean时才有意义。
+     * 
+     * 
      * @param index The SnmpIndex identifying the entry from which we
      *              want to build the default ObjectName.
      *
@@ -317,6 +406,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      *
      * This method will update the <code>entries</code> list.
      *
+     * <p>
+     *  当在表元数据中注册了新的表条目时,该回调由关联的元数据对象调用。
+     * 
+     *  此方法将更新<code>条目</code>列表。
+     * 
+     * 
      * @param pos   The position at which the new entry was inserted
      *              in the table.
      * @param row   The row OID of the new entry
@@ -343,6 +438,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      *
      * This method will update the <code>entries</code> list.
      *
+     * <p>
+     *  当已从表元数据中删除新的表条目时,由相关联的元数据对象调用此回调。
+     * 
+     *  此方法将更新<code>条目</code>列表。
+     * 
+     * 
      * @param pos   The position from which the entry was deleted
      * @param row   The row OID of the deleted entry
      * @param name  The ObjectName of the deleted entry (may be null if
@@ -367,6 +468,10 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * Enables to add an SNMP entry listener to this
      * <CODE>SnmpMibTable</CODE>.
      *
+     * <p>
+     *  允许向此<CODE> SnmpMibTable </CODE>添加SNMP条目侦听器。
+     * 
+     * 
      * @param listener The listener object which will handle the
      *    notifications emitted by the registered MBean.
      *
@@ -388,6 +493,10 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * Enables to remove an SNMP entry listener from this
      * <CODE>SnmpMibTable</CODE>.
      *
+     * <p>
+     *  允许从此<CODE> SnmpMibTable </CODE>中删除SNMP条目侦听器。
+     * 
+     * 
      * @param listener The listener object which will handle the
      *    notifications emitted by the registered MBean.
      *    This method will remove all the information related to this
@@ -406,6 +515,9 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * Returns a <CODE>NotificationInfo</CODE> object containing the
      * notification class and the notification type sent by the
      * <CODE>SnmpMibTable</CODE>.
+     * <p>
+     *  返回一个包含由<CODE> SnmpMibTable </CODE>发送的通知类和通知类型的<CODE> NotificationInfo </CODE>对象。
+     * 
      */
     public MBeanNotificationInfo[] getNotificationInfo() {
         return meta.getNotificationInfo();
@@ -422,6 +534,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      *
      * This method is generated by mibgen and used internally.
      *
+     * <p>
+     *  从OID的索引部分构建SnmpIndex对象。
+     * 
+     *  此方法由mibgen生成并在内部使用。
+     * 
+     * 
      * @param oid The OID from which to build the index, represented
      *        as an array of long.
      * @param start The position where to start from in the OID array.
@@ -438,6 +556,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      *
      * This method is generated by mibgen and used internally.
      *
+     * <p>
+     *  返回与此表关联的元数据对象。
+     * 
+     *  此方法由mibgen生成并在内部使用。
+     * 
+     * 
      * @param mib The SnmpMib object holding the Metadata corresponding
      *            to this table.
      *
@@ -461,6 +585,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * Any object implementing the {@link java.util.List} interface can
      * be used.
      *
+     * <p>
+     *  分配用于存储表条目的ArrayList。
+     * 
+     *  此方法在对象创建时在构造函数中调用。可以使用实现{@link java.util.List}接口的任何对象。
+     * 
+     * 
      * @return A new list in which to store entries. If <code>null</code>
      *         is returned then no entry will be stored in the list
      *         and getEntry() will always return null.
@@ -483,6 +613,18 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * {@link com.sun.jmx.snmp.agent.SnmpTableSupport#addEntry(SnmpIndex, ObjectName, Object)} should be preferred.
      * <br> This function is mainly provided for backward compatibility.
      *
+     * <p>
+     *  在此表中添加条目。
+     * 
+     *  此方法在表中注册一个条目,并与关联的表元数据对象执行同步。
+     * 
+     * 此方法假定给定条目不会被注册,或者将使用从关联的SnmpIndex构建的默认ObjectName注册。
+     * <p>
+     *  如果该条目要注册,则应优先使用{@link com.sun.jmx.snmp.agent.SnmpTableSupport#addEntry(SnmpIndex,ObjectName,Object)}
+     * 。
+     *  <br>此功能主要用于向后兼容。
+     * 
+     * 
      * @param index The SnmpIndex built from the given entry.
      * @param entry The entry that should be added in the table.
      *
@@ -505,6 +647,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * This method registers an entry in the table and performs
      * synchronization with the associated table metadata object.
      *
+     * <p>
+     *  在此表中添加条目。
+     * 
+     *  此方法在表中注册一个条目,并执行与关联的表元数据对象的同步。
+     * 
+     * 
      * @param index The SnmpIndex built from the given entry.
      * @param name  The ObjectName with which this entry will be registered.
      * @param entry The entry that should be added in the table.
@@ -524,6 +672,12 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
      * This method unregisters an entry from the table and performs
      * synchronization with the associated table metadata object.
      *
+     * <p>
+     *  从此表中删除条目。
+     * 
+     *  此方法从表中注销一个条目,并执行与关联的表元数据对象的同步。
+     * 
+     * 
      * @param index The SnmpIndex identifying the entry.
      * @param entry The entry that should be removed in the table. This
      *              parameter is optional and can be omitted if it doesn't
@@ -548,6 +702,10 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
     /**
      * Returns the entries in the table.
      *
+     * <p>
+     *  返回表中的条目。
+     * 
+     * 
      * @return An Object[] array containing the entries registered in the
      *         table.
      **/
@@ -561,6 +719,9 @@ public abstract class SnmpTableSupport implements SnmpTableEntryFactory,
     /**
      * Binds this table with its associated metadata, registering itself
      * as an SnmpTableEntryFactory.
+     * <p>
+     *  将此表与其关联的元数据绑定,将其注册为SnmpTableEntryFactory。
+     * 
      **/
     protected void bindWithTableMeta() {
         if (meta == null) return;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 package java.time.chrono;
 
@@ -137,6 +156,50 @@ import java.util.Objects;
  * All implementations that can be instantiated must be final, immutable and thread-safe.
  * Subclasses should be Serializable wherever possible.
  *
+ * <p>
+ *  以标准年 - 月 - 日日历系统表示的日期。
+ * <p>
+ *  此类由寻求处理非ISO日历系统中的日期的应用程序使用。例如,日本,民族,泰国佛教和其他。
+ * <p>
+ *  {@code ChronoLocalDate}建立在年,月和日的通用概念上。
+ * 日历系统由{@link java.time.chrono.Chronology}表示,表示字段之间的关系,并且此类允许处理生成的日期。
+ * <p>
+ *  请注意,并非所有日历系统都适合与此类别一起使用。例如,玛雅日历使用与年,月和日无关的系统。
+ * <p>
+ * API设计鼓励对大多数应用程序使用{@code LocalDate}。这包括从持久性数据存储(如数据库)读取和写入的代码,并通过网络发送日期和时间。
+ * 然后在用户界面级别使用{@code ChronoLocalDate}实例来处理本地化的输入/输出。
+ * 
+ *  <P>示例：</p>
+ * <pre>
+ *  System.out.printf("Example()％n"); //枚举可用日历的列表,并为每个Set&lt; Chronology&gt; chronos = Chronology.getAva
+ * ilableChronologies(); for(Chronology chrono：chronos){ChronoLocalDate date = chrono.dateNow(); System.out.printf("％20s：％s％n",chrono.getID(),date.toString()) }
+ * }。
+ * 
+ *  //打印Hijrah日期和日历ChronoLocalDate date = Chronology.of("Hijrah")。
+ * dateNow(); int day = date.get(ChronoField.DAY_OF_MONTH); int dow = date.get(ChronoField.DAY_OF_WEEK);
+ *  int month = date.get(ChronoField.MONTH_OF_YEAR); int year = date.get(ChronoField.YEAR); System.out.p
+ * rintf("Today is％s％s％d-％s-％d％n",date.getChronology()。
+ *  //打印Hijrah日期和日历ChronoLocalDate date = Chronology.of("Hijrah")。getID(),dow,day,month,year);。
+ * 
+ *  //打印今天的日期和一年中的最后一天ChronoLocalDate now1 = Chronology.of("Hijrah")。
+ * dateNow(); ChronoLocalDate first = now1.with(ChronoField.DAY_OF_MONTH,1).with(ChronoField.MONTH_OF_YE
+ * AR,1); ChronoLocalDate last = first.plus(1,ChronoUnit.YEARS).minus(1,ChronoUnit.DAYS); System.out.pri
+ * ntf("Today is％s：start：％s; end：％s％n",last.getChronology()。
+ *  //打印今天的日期和一年中的最后一天ChronoLocalDate now1 = Chronology.of("Hijrah")。getID(),first,last);。
+ * </pre>
+ * 
+ * <h3>添加日历</h3> <p>通过定义{@link ChronoLocalDate}的子类来表示日期实例,并将{@code Chronology}的实现作为ChronoLocalDate子类的工厂,
+ * 可以扩展日历集。
+ * </p>
+ *  <p>为了允许发现其他日历类型,{@code Chronology}的实现必须注册为实现{@code META-INF / Services}文件中的{@code Chronology}界面的服务的{@link java.util.ServiceLoader}
+ * 。
+ * 子类必须根据{@code Chronology}类描述运行,并且必须提供其{@link java.time.chrono.Chronology#getId()计时ID}和{@link Chronology#getCalendarType()日历类型}
+ * 。
+ *  </p>。
+ * 
+ *  @implSpec这个抽象类必须小心地实现,以确保其他类操作正确。所有可以实例化的实现必须是final,immutable和线程安全的。子类应尽可能序列化。
+ * 
+ * 
  * @param <D> the ChronoLocalDate of this date-time
  * @since 1.8
  */
@@ -145,12 +208,19 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本。
+     * 
      */
     private static final long serialVersionUID = 6282433883239719096L;
 
     /**
      * Casts the {@code Temporal} to {@code ChronoLocalDate} ensuring it bas the specified chronology.
      *
+     * <p>
+     *  将{@code Temporal}转换为{@code ChronoLocalDate},确保它基于指定的年表。
+     * 
+     * 
      * @param chrono  the chronology to check for, not null
      * @param temporal  a date-time to cast, not null
      * @return the date-time checked and cast to {@code ChronoLocalDate}, not null
@@ -169,6 +239,9 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
     //-----------------------------------------------------------------------
     /**
      * Creates an instance.
+     * <p>
+     *  创建实例。
+     * 
      */
     ChronoLocalDateImpl() {
     }
@@ -236,6 +309,14 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的副本,其中包含指定的周期(以增加的年数)。
+     * <p>
+     * 这会将以年为单位的指定期间添加到日期。在某些情况下,添加年份可能会导致生成的日期无效。如果发生这种情况,则将调整其他字段(通常为月份日期)以确保结果有效。通常,这将选择月份的最后一个有效日期。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param yearsToAdd  the years to add, may be negative
      * @return a date based on this one with the years added, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -252,6 +333,14 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的副本,其中包含指定的期间(以月为单位)。
+     * <p>
+     *  这会将指定的期间以月为单位添加到日期。在某些情况下,添加月份可能会导致生成的日期无效。如果发生这种情况,则将调整其他字段(通常为月份日期)以确保结果有效。通常,这将选择月份的最后一个有效日期。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param monthsToAdd  the months to add, may be negative
      * @return a date based on this one with the months added, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -269,6 +358,16 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的副本,指定的周期(以添加的星期为单位)。
+     * <p>
+     *  这会将指定的周期(以周为单位)添加到日期。在某些情况下,添加周可能导致生成的日期无效。如果发生这种情况,则将调整其他字段以确保结果有效。
+     * <p>
+     *  默认实现使用{@link #plusDays(long)}每周7天。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param weeksToAdd  the weeks to add, may be negative
      * @return a date based on this one with the weeks added, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -284,6 +383,14 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的添加指定天数的副本。
+     * <p>
+     *  这会将指定的期间(以天为单位)添加到日期。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param daysToAdd  the days to add, may be negative
      * @return a date based on this one with the days added, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -303,6 +410,16 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     * 返回此日期的副本,指定的期间(减去年份)。
+     * <p>
+     *  这将指定的年份减去该日期。在某些情况下,减去年份可能会导致生成的日期无效。如果发生这种情况,则将调整其他字段(通常为月份日期)以确保结果有效。通常,这将选择月份的最后一个有效日期。
+     * <p>
+     *  默认实现使用{@link #plusYears(long)}。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param yearsToSubtract  the years to subtract, may be negative
      * @return a date based on this one with the years subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -324,6 +441,16 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的副本,以指定的周期减去月份。
+     * <p>
+     *  这将从指定的月份减去该日期。在某些情况下,减去月份可能会导致生成的日期无效。如果发生这种情况,则将调整其他字段(通常为月份日期)以确保结果有效。通常,这将选择月份的最后一个有效日期。
+     * <p>
+     *  默认实现使用{@link #plusMonths(long)}。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param monthsToSubtract  the months to subtract, may be negative
      * @return a date based on this one with the months subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -344,6 +471,16 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的副本,指定的周期(以星期扣除)。
+     * <p>
+     *  这将减去指定的周期(以周为单位)。在某些情况下,减去星期可能导致生成的日期无效。如果发生这种情况,则将调整其他字段以确保结果有效。
+     * <p>
+     *  默认实现使用{@link #plusWeeks(long)}。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响。
+     * 
+     * 
      * @param weeksToSubtract  the weeks to subtract, may be negative
      * @return a date based on this one with the weeks subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -362,6 +499,12 @@ abstract class ChronoLocalDateImpl<D extends ChronoLocalDate>
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     * 返回此日期的指定减去天数的副本。
+     * <p>
+     *  这将从指定日期减去指定的期间。
+     * <p>
+     * 
      * @param daysToSubtract  the days to subtract, may be negative
      * @return a date based on this one with the days subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -31,6 +32,9 @@
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
+ * <p>
+ *  由Doug Lea在JCP JSR-166专家组成员的帮助下撰写,并发布到公共领域,如http://creativecommons.org/publicdomain/zero/1.0/
+ * 
  */
 
 package java.util.concurrent;
@@ -103,6 +107,22 @@ package java.util.concurrent;
  *     if (result != null)
  *         use(result);
  * }}</pre>
+ * <p>
+ *  {@link CompletionService},使用提供的{@link Executor}执行任务。这个类安排提交的任务在完成后放置在使用{@code take}可访问的队列上。
+ * 该类轻量级足以适合在处理任务组时临时使用。
+ * 
+ * <p>
+ * 
+ *  <b>使用示例。</b>
+ * 
+ *  假设你对某个问题有一组求解器,每个返回一个类型{@code Result}的值,并且希望并发运行它们,处理每个返回非空值的结果,在某些方法{@code use(Result r)}。你可以这样写：
+ * 
+ *  <pre> {@code void solve(Executor e,Collection <Callable <Result >> solvers)throws InterruptedException,ExecutionException {CompletionService <Result> ecs = new ExecutorCompletionService <Result>(e); for(Callable <Result> s：solvers)ecs.submit(s); int n = solvers.size(); for(int i = 0; i <n; ++ i){result r = ecs.take()。
+ * get(); if(r！= null)use(r); }}} </pre>。
+ * 
+ *  假设您想要使用该组任务的第一个非空结果,忽略任何遇到异常的任何结果,并在第一个准备就绪时取消所有其他任务：
+ * 
+ * <pre> {@code void solve(Executor e,Collection <Callable <Result >> solvers)throws InterruptedException {CompletionService <Result> ecs = new ExecutorCompletionService <Result>(e); int n = solvers.size(); List <Future <Result >> futures = new ArrayList <Future <Result >>(n);结果result = null; try {for(Callable <Result> s：solvers)futures.add(ecs.submit(s)); for(int i = 0; i <n; ++ i){try {Result r = ecs.take()。
  */
 public class ExecutorCompletionService<V> implements CompletionService<V> {
     private final Executor executor;
@@ -111,6 +131,12 @@ public class ExecutorCompletionService<V> implements CompletionService<V> {
 
     /**
      * FutureTask extension to enqueue upon completion
+     * <p>
+     * get(); if(r！= null){result = r;打破; }} catch(ExecutionException ignore){}}} finally {for(Future <Result> f：futures)f.cancel(true); }
+     * }。
+     * 
+     *  if(result！= null)use(result); }} </pre>
+     * 
      */
     private class QueueingFuture extends FutureTask<Void> {
         QueueingFuture(RunnableFuture<V> task) {
@@ -140,6 +166,10 @@ public class ExecutorCompletionService<V> implements CompletionService<V> {
      * executor for base task execution and a
      * {@link LinkedBlockingQueue} as a completion queue.
      *
+     * <p>
+     *  FutureTask扩展完成后入列
+     * 
+     * 
      * @param executor the executor to use
      * @throws NullPointerException if executor is {@code null}
      */
@@ -157,6 +187,10 @@ public class ExecutorCompletionService<V> implements CompletionService<V> {
      * executor for base task execution and the supplied queue as its
      * completion queue.
      *
+     * <p>
+     *  使用提供的执行程序创建一个ExecutorCompletionService用于基本任务执行,并使用{@link LinkedBlockingQueue}作为完成队列。
+     * 
+     * 
      * @param executor the executor to use
      * @param completionQueue the queue to use as the completion queue
      *        normally one dedicated for use by this service. This

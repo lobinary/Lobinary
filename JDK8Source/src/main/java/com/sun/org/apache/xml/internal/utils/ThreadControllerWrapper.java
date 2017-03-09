@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,15 +17,30 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: ThreadControllerWrapper.java,v 1.2.4.1 2005/09/15 08:15:59 suresh_emailid Exp $
+ * <p>
+ *  $ Id：ThreadControllerWrapper.java,v 1.2.4.1 2005/09/15 08:15:59 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.utils;
 
 /**
  * A utility class that wraps the ThreadController, which is used
  * by IncrementalSAXSource for the incremental building of DTM.
+ * <p>
+ *  一个包装ThreadController的实用程序类,由IncrementalSAXSource用于增量构建DTM。
+ * 
  */
 public class ThreadControllerWrapper
 {
@@ -48,12 +64,20 @@ public class ThreadControllerWrapper
    * be overriden with a derived class to support thread pooling.
    *
    * All thread-related stuff is in this class.
+   * <p>
+   *  增量SAX源的线程控制器实用程序类。必须用一个派生类来覆盖以支持线程池。
+   * 
+   *  所有与线程相关的东西都在这个类中。
+   * 
    */
   public static class ThreadController
   {
 
     /**
      * This class was introduced as a fix for CR 6607339.
+     * <p>
+     *  此类作为CR 6607339的修订引入。
+     * 
      */
     final class SafeThread extends Thread {
          private volatile boolean ran = false;
@@ -87,6 +111,12 @@ public class ThreadControllerWrapper
      *  The return value is used only to wait for completion
      *
      *
+     * <p>
+     *  将从池中获取线程,执行任务并将线程返回到池。
+     * 
+     *  返回值仅用于等待完成
+     * 
+     * 
      * NEEDSDOC @param task
      * @param priority if >0 the task will run with the given priority
      *  ( doesn't seem to be used in xalan, since it's allways the default )
@@ -109,6 +139,8 @@ public class ThreadControllerWrapper
      *  Wait until the task is completed on the worker
      *  thread.
      *
+     * <p>
+     * 
      * NEEDSDOC @param worker
      * NEEDSDOC @param task
      *

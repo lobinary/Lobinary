@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,24 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有。
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *二进制形式的再分发必须在随发行提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明。
+ * 
+ *  *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或推广衍生自此软件的产品。
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 在任何情况下,版权所有者或贡献者对任何直接,间接,偶发,特殊,惩戒性或后果性损害(包括但不限于替代商品或服务的采购,使用,数据或利润损失,或业务中断),无论是由于任何责任推定,无论是在合同,严格责任,或
+ * 侵权(包括疏忽或其他)任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或默示的保证,包括但不限于适销性和特定用途适用性的默示保证。
+ * 
  */
 
 /**
@@ -147,6 +166,40 @@
  * <p>
  * Unless otherwise noted, passing a null argument to a constructor or method in any class or interface
  * in this package will cause a {@link java.lang.NullPointerException NullPointerException} to be thrown.
+ * <p>
+ * <p>
+ *  使用字段和单位以及日期时间调整器访问日期和时间。
+ * </p>
+ * <p>
+ *  此包在基础包上扩展,以提供更强大的用例的附加功能。支持包括：
+ * </p>
+ * <ul>
+ *  <li>日期时间单位,例如年,月,日和小时</li> <li>日期时间字段,例如年月日,星期几或小时</li> <li>日期时间调整功能</li> <li>周的不同定义</li>
+ * </ul>
+ * 
+ *  <h3>字段和单位</h3>
+ * <p>
+ * 日期和时间以字段和单位表示。单位用于测量时间量,如年,天或分钟。所有单位都实现{@link java.time.temporal.TemporalUnit}。
+ *  {@link java.time.temporal.ChronoUnit}中定义了一组众所周知的单位,例如{@code DAYS}。单元接口被设计为允许应用定义的单元。
+ * </p>
+ * <p>
+ *  字段用于表示较大日期时间的一部分,例如年,月或秒。所有字段都实现{@link java.time.temporal.TemporalField}。
+ * 知名字段集在{@link java.time.temporal.ChronoField}中定义,例如{@code HOUR_OF_DAY}。
+ * 其他字段由{@link java.time.temporal.JulianFields},{@link java.time.temporal.WeekFields}和{@link java.time.temporal.IsoFields}
+ * 定义。
+ * 知名字段集在{@link java.time.temporal.ChronoField}中定义,例如{@code HOUR_OF_DAY}。字段接口被设计为允许应用程序定义的字段。
+ * </p>
+ * <p>
+ *  此软件包提供的工具允许以最适合框架的通用方式访问日期和时间的单位和字段。 {@link java.time.temporal.Temporal}提供了支持字段的日期时间类型的抽象。
+ * 其方法支持获取字段的值,创建具有修改的字段的值的新的日期时间,并查询附加信息,通常用于提取偏移或时区。
+ * </p>
+ * <p>
+ * 应用程序代码中字段的一种使用是检索没有方便方法的字段。例如,获取日期是常见的,在{@code LocalDate}上有一个名为{@code getDayOfMonth()}的方法。
+ * 然而,对于更不寻常的字段,有必要使用字段。例如,{@code date.get(ChronoField.ALIGNED_WEEK_OF_MONTH)}。这些字段还提供对有效值范围的访问。
+ * </p>
+ * 
+ *  <h3>调整和查询</h3>
+ * 
  * The Javadoc "@param" definition is used to summarise the null-behavior.
  * The "@throws {@link java.lang.NullPointerException}" is not explicitly documented in each method.
  * </p>

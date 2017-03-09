@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.encryption;
 
@@ -40,6 +49,24 @@ package com.sun.org.apache.xml.internal.security.encryption;
  * </complexType>
  * </xmp>
  *
+ * <p>
+ *  <code> CipherData </code>提供加密数据。
+ * 它必须包含加密的八位字节序列作为<code> CipherValue </code>元素的base64编码文本,或者通过<code> CipherReference </code>元素提供包含加密的八位
+ * 字节序列的外部位置的引用。
+ *  <code> CipherData </code>提供加密数据。
+ * <p>
+ *  模式定义如下：
+ * <xmp>
+ * <element name='CipherData' type='xenc:CipherDataType'/>
+ * <complexType name='CipherDataType'>
+ * <choice>
+ * <element name='CipherValue' type='base64Binary'/>
+ * <element ref='xenc:CipherReference'/>
+ * </choice>
+ * </complexType>
+ * </xmp>
+ * 
+ * 
  * @author Axl Mattheus
  */
 public interface CipherData {
@@ -54,6 +81,8 @@ public interface CipherData {
      * Returns the type of encrypted data contained in the
      * <code>CipherData</code>.
      *
+     * <p>
+     * 
      * @return <code>VALUE_TYPE</code> if the encrypted data is contained as
      *   <code>CipherValue</code> or <code>REFERENCE_TYPE</code> if the
      *   encrypted data is contained as <code>CipherReference</code>.
@@ -63,6 +92,10 @@ public interface CipherData {
     /**
      * Returns the cipher value as a base64 encoded <code>byte</code> array.
      *
+     * <p>
+     *  返回<code> CipherData </code>中包含的加密数据的类型。
+     * 
+     * 
      * @return the <code>CipherData</code>'s value.
      */
     CipherValue getCipherValue();
@@ -70,6 +103,10 @@ public interface CipherData {
     /**
      * Sets the <code>CipherData</code>'s value.
      *
+     * <p>
+     *  以base64编码的<code> byte </code>数组返回密码值。
+     * 
+     * 
      * @param value the value of the <code>CipherData</code>.
      * @throws XMLEncryptionException
      */
@@ -79,6 +116,10 @@ public interface CipherData {
      * Returns a reference to an external location containing the encrypted
      * octet sequence (<code>byte</code> array).
      *
+     * <p>
+     *  设置<code> CipherData </code>的值。
+     * 
+     * 
      * @return the reference to an external location containing the encrypted
      * octet sequence.
      */
@@ -87,6 +128,10 @@ public interface CipherData {
     /**
      * Sets the <code>CipherData</code>'s reference.
      *
+     * <p>
+     * 返回对包含加密的八位字节序列(<code> byte </code> array)的外部位置的引用。
+     * 
+     * 
      * @param reference an external location containing the encrypted octet sequence.
      * @throws XMLEncryptionException
      */

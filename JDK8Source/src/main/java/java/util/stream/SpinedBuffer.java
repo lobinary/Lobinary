@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,13 @@ import java.util.function.LongConsumer;
  * no copying of elements is required.  This is usually beneficial in the case
  * where the results will be traversed a small number of times.
  *
+ * <p>
+ *  元素的有序集合。元素可以添加,但不会删除。经过可以添加元素的构建阶段和遍历阶段,在该阶段期间可以按顺序遍历元素,但是不可能进行进一步的修改。
+ * 
+ *  <p>一个或多个数组用于存储元素。与{@link ArrayList}使用的单个数组相比,使用多个数组具有更好的性能特性,因为当需要增加列表的容量时,不需要复制元素。
+ * 这在结果将被遍历少量次数的情况下通常是有益的。
+ * 
+ * 
  * @param <E> the type of elements in this list
  * @since 1.8
  */
@@ -72,22 +80,40 @@ class SpinedBuffer<E>
      * array, curChunk becomes the first element in it.  When we clear the
      * buffer, we discard all chunks except the first one, which we clear,
      * restoring it to the initial single-chunk state.
+     * <p>
+     *  我们乐观地希望所有的数据将适合第一个块,所以我们尽量避免过度地膨胀spine []和priorElementCount []数组。所以方法必须准备好处理这些数组为null。
+     * 如果spine为非null,则spineIndex指向当前块内的脊柱,否则为零。
+     *  spine和priorElementCount数组总是相同的大小,并且对于任何i <= spineIndex,priorElementCount [i]是所有先前块的大小的总和。
+     * 
+     * curChunk指针总是有效的。 elementIndex是要写入curChunk的下一个元素的索引;这可能超过了curChunk的结束,所以我们必须在写前检查。
+     * 当我们充斥脊柱数组时,curChunk成为它的第一个元素。当我们清除缓冲区时,我们丢弃除第一个块以外的所有块,我们清除它,将其恢复到初始单块状态。
+     * 
      */
 
     /**
      * Chunk that we're currently writing into; may or may not be aliased with
      * the first element of the spine.
+     * <p>
+     *  我们目前写入的块;可以或可以不与脊柱的第一元素混叠。
+     * 
      */
     protected E[] curChunk;
 
     /**
      * All chunks, or null if there is only one chunk.
+     * <p>
+     *  所有块,如果只有一个块,则为null。
+     * 
      */
     protected E[][] spine;
 
     /**
      * Constructs an empty list with the specified initial capacity.
      *
+     * <p>
+     *  构造具有指定初始容量的空列表。
+     * 
+     * 
      * @param  initialCapacity  the initial capacity of the list
      * @throws IllegalArgumentException if the specified initial capacity
      *         is negative
@@ -100,6 +126,9 @@ class SpinedBuffer<E>
 
     /**
      * Constructs an empty list with an initial capacity of sixteen.
+     * <p>
+     *  构造一个初始容量为16的空列表。
+     * 
      */
     @SuppressWarnings("unchecked")
     SpinedBuffer() {
@@ -109,6 +138,9 @@ class SpinedBuffer<E>
 
     /**
      * Returns the current capacity of the buffer
+     * <p>
+     *  返回缓冲区的当前容量
+     * 
      */
     protected long capacity() {
         return (spineIndex == 0)
@@ -127,6 +159,9 @@ class SpinedBuffer<E>
 
     /**
      * Ensure that the buffer has at least capacity to hold the target size
+     * <p>
+     *  确保缓冲区至少具有容纳目标大小的容量
+     * 
      */
     @SuppressWarnings("unchecked")
     protected final void ensureCapacity(long targetSize) {
@@ -149,6 +184,9 @@ class SpinedBuffer<E>
 
     /**
      * Force the buffer to increase its capacity.
+     * <p>
+     *  强制缓冲区增加其容量。
+     * 
      */
     protected void increaseCapacity() {
         ensureCapacity(capacity() + 1);
@@ -156,6 +194,9 @@ class SpinedBuffer<E>
 
     /**
      * Retrieve the element at the specified index.
+     * <p>
+     *  检索指定索引处的元素。
+     * 
      */
     public E get(long index) {
         // @@@ can further optimize by caching last seen spineIndex,
@@ -183,6 +224,9 @@ class SpinedBuffer<E>
     /**
      * Copy the elements, starting at the specified offset, into the specified
      * array.
+     * <p>
+     *  将指定偏移量开始的元素复制到指定的数组中。
+     * 
      */
     public void copyInto(E[] array, int offset) {
         long finalOffset = offset + count();
@@ -206,6 +250,9 @@ class SpinedBuffer<E>
     /**
      * Create a new array using the specified array factory, and copy the
      * elements into it.
+     * <p>
+     *  使用指定的数组工厂创建一个新数组,并将元素复制到其中。
+     * 
      */
     public E[] asArray(IntFunction<E[]> arrayFactory) {
         long size = count();
@@ -275,6 +322,9 @@ class SpinedBuffer<E>
 
     /**
      * Return a {@link Spliterator} describing the contents of the buffer.
+     * <p>
+     *  返回描述缓冲区内容的{@link Spliterator}。
+     * 
      */
     public Spliterator<E> spliterator() {
         class Splitr implements Spliterator<E> {
@@ -411,6 +461,13 @@ class SpinedBuffer<E>
      * no copying of elements is required.  This is usually beneficial in the case
      * where the results will be traversed a small number of times.
      *
+     * <p>
+     *  原始值的有序集合。元素可以添加,但不会删除。经过可以添加元素的构建阶段和遍历阶段,在该阶段期间可以按顺序遍历元素,但是不可能进行进一步的修改。
+     * 
+     * <p>一个或多个数组用于存储元素。与{@link ArrayList}使用的单个数组相比,使用多个数组具有更好的性能特性,因为当需要增加列表的容量时,不需要复制元素。
+     * 这在结果将被遍历少量次数的情况下通常是有益的。
+     * 
+     * 
      * @param <E> the wrapper type for this primitive type
      * @param <T_ARR> the array type for this primitive type
      * @param <T_CONS> the Consumer type for this primitive type
@@ -433,6 +490,14 @@ class SpinedBuffer<E>
          * array, curChunk becomes the first element in it.  When we clear the
          * buffer, we discard all chunks except the first one, which we clear,
          * restoring it to the initial single-chunk state.
+         * <p>
+         *  我们乐观地希望所有的数据将适合第一个块,所以我们尽量避免过度地膨胀spine []和priorElementCount []数组。所以方法必须准备好处理这些数组为null。
+         * 如果spine为非null,则spineIndex指向当前块内的脊柱,否则为零。
+         *  spine和priorElementCount数组总是相同的大小,并且对于任何i <= spineIndex,priorElementCount [i]是所有先前块的大小的总和。
+         * 
+         *  curChunk指针总是有效的。 elementIndex是要写入curChunk的下一个元素的索引;这可能超过了curChunk的结束,所以我们必须在写前检查。
+         * 当我们充斥脊柱数组时,curChunk成为它的第一个元素。当我们清除缓冲区时,我们丢弃除第一个块以外的所有块,我们清除它,将其恢复到初始单块状态。
+         * 
          */
 
         // The chunk we're currently writing into
@@ -444,6 +509,10 @@ class SpinedBuffer<E>
         /**
          * Constructs an empty list with the specified initial capacity.
          *
+         * <p>
+         *  构造具有指定初始容量的空列表。
+         * 
+         * 
          * @param  initialCapacity  the initial capacity of the list
          * @throws IllegalArgumentException if the specified initial capacity
          *         is negative
@@ -455,6 +524,9 @@ class SpinedBuffer<E>
 
         /**
          * Constructs an empty list with an initial capacity of sixteen.
+         * <p>
+         *  构造一个初始容量为16的空列表。
+         * 
          */
         OfPrimitive() {
             super();
@@ -719,6 +791,9 @@ class SpinedBuffer<E>
 
     /**
      * An ordered collection of {@code int} values.
+     * <p>
+     *  {@code int}值的有序集合。
+     * 
      */
     static class OfInt extends SpinedBuffer.OfPrimitive<Integer, int[], IntConsumer>
             implements IntConsumer {
@@ -832,6 +907,9 @@ class SpinedBuffer<E>
 
     /**
      * An ordered collection of {@code long} values.
+     * <p>
+     *  {@code long}值的有序集合。
+     * 
      */
     static class OfLong extends SpinedBuffer.OfPrimitive<Long, long[], LongConsumer>
             implements LongConsumer {
@@ -946,6 +1024,8 @@ class SpinedBuffer<E>
 
     /**
      * An ordered collection of {@code double} values.
+     * <p>
+     * {@code double}值的有序集合。
      */
     static class OfDouble
             extends SpinedBuffer.OfPrimitive<Double, double[], DoubleConsumer>

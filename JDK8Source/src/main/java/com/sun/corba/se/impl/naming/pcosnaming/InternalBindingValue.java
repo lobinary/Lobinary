@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,8 @@ import java.io.Serializable;
  * Class InternalBindingKey acts as a container for two objects, namely
  * a org.omg.CosNaming::Binding and an CORBA object reference, which are the two
  * components associated with the binding.
+ * <p>
+ *  类InternalBindingKey充当两个对象的容器,即org.omg.CosNaming :: Binding和CORBA对象引用,它们是与绑定关联的两个组件。
  */
 public class InternalBindingValue
                 implements Serializable

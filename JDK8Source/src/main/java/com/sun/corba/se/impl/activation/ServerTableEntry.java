@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -26,6 +27,8 @@ package com.sun.corba.se.impl.activation;
 
 /**
  *
+ * <p>
+ * 
  * @author      Anita Jindal
  * @since       JDK1.2
  */
@@ -162,6 +165,8 @@ public class ServerTableEntry
 
     /**
      * Verify whether the server definition is valid.
+     * <p>
+     *  验证服务器定义是否有效。
      */
     public int verify()
     {

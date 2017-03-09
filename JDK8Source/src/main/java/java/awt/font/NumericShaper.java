@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -130,6 +131,61 @@ import java.util.Set;
  *    </tr>
  * </table>
  *
+ * <p>
+ *  <code> NumericShaper </code>类用于将Latin-1(欧洲)数字转换为其他Unicode十进制数字。
+ * 该类的用户主要是希望使用国家数字形状呈现数据的人,但是使用Latin-1(欧洲)数字在内部表示数据更加方便。这不会解释已弃用的数字形状选择器字符(U + 206E)。
+ * <p>
+ *  通常使用<code> TextAttribute </code>类的{@link TextAttribute#NUMERIC_SHAPING NUMERIC_SHAPING}属性将<code> Num
+ * ericShaper </code>实例作为属性应用于文本。
+ * 例如,此代码段会导致<code> TextLayout </code>在阿拉伯语上下文中将欧洲数字变为阿拉伯语：<br> <blockquote> <pre> Map map = new HashMap
+ * (); map.put(TextAttribute.NUMERIC_SHAPING,NumericShaper.getContextualShaper(NumericShaper.ARABIC)); F
+ * ontRenderContext frc = ...; TextLayout layout = new TextLayout(text,map,frc); layout.draw(g2d,x,y); </pre>
+ *  </blockquote>。
+ * <br>
+ *  也可以使用<code> NumericShaper </code>的实例来显式地执行数值形状,如下面的代码片段所示：<br> <blockquote> <pre> char [] text = ...
+ * ; //将所有EUROPEAN数字(除零)格式化为ARABIC数字NumericShaper shaper = NumericShaper.getShaper(NumericShaper.ARABIC)
+ * ; shaper.shape(text,start,count);。
+ * 
+ * //如果前面的文本是阿拉伯语,则将欧洲数字形状转换成ARABIC数字,或//如果前面的文本是泰米尔语,则将//欧洲数字转换为TAMIL数字,或//如果没有前面的文本,阿拉伯语或泰米尔语NumericSh
+ * aper shaper = NumericShaper.getContextualShaper(NumericShaper.ARABIC | NumericShaper.TAMIL,NumericSha
+ * per.EUROPEAN); shaper.shape(text,start,count); </pre> </blockquote>。
+ * 
+ *  <p> <b>基于位掩码和基于枚举的Unicode范围</b> </p>
+ * 
+ *  <p>此类支持两种不同的编程接口来表示特定于脚本的数字的Unicode范围：基于位掩码的类型,例如{@link #ARABIC NumericShaper.ARABIC}和基于枚举的类型,例如{@link NumericShaper .Range#ARABIC}
+ * 。
+ * 可以通过对基于位掩码的常量进行OR运算来指定多个范围,例如：<blockquote> <pre> NumericShaper.ARABIC | NumericShaper.TAMIL </pre> </blockquote>
+ * 或使用{@link NumericShaper.Range}常数创建{@code Set},例如：<blockquote> <pre> EnumSet.of(NumericShaper.Scirpt.A
+ * RABIC,NumericShaper .Range.TAMIL)</pre> </blockquote>基于枚举的范围是基于位掩码的范围的超集。
+ * 
+ * <p>如果两个接口混合(包括序列化),Unicode范围值将映射到可能进行映射的对等方,例如{@code NumericShaper.Range.ARABIC}从/到{@code NumericShaper.ARABIC}
+ * 。
+ * 如果指定了任何不可映射的范围值,例如{@code NumericShaper.Range.BALINESE},那些范围将被忽略。
+ * 
+ *  <p> <b>小数位数优先</b> </p>
+ * 
+ *  <p> Unicode范围可能有多个小数位数。如果为同一个Unicode范围指定了多个十进制数字集,则其中一个集将优先如下。
+ * 
+ * <table border=1 cellspacing=3 cellpadding=0 summary="NumericShaper constants precedence.">
+ * <tr>
+ *  <th class ="TableHeadingColor"> Unicode范围</th> <th class ="TableHeadingColor"> <code> NumericShaper 
+ * </code>常数</th> <th class ="TableHeadingColor"> Precedence </th>。
+ * </tr>
+ * <tr>
+ *  <td rowspan ="2">阿拉伯语</td> <td> {@ link NumericShaper#ARABIC NumericShaper.ARABIC} <br> {@link NumericShaper.EASTERN_ARABIC NumericShaper.EASTERN_ARABIC}
+ *  </td> <td> {@ link NumericShaper #EASTERN_ARABIC NumericShaper.EASTERN_ARABIC} </td>。
+ * </tr>
+ * <tr>
+ *  <td> {@ link NumericShaper.Range#ARABIC} <br> {@link NumericShaper.Range#EASTERN_ARABIC} </td> <td> 
+ * {@ link NumericShaper.Range#EASTERN_ARABIC} </td>。
+ * </tr>
+ * <tr>
+ *  <td> Tai Tham </td> <td> {@ link NumericShaper.Range#TAI_THAM_HORA} <br> {@link NumericShaper.Range#TAI_THAM_THAM}
+ *  </td> <td> {@ link NumericShaper.Range#TAI_THAM_THAM} < / td>。
+ * </tr>
+ * </table>
+ * 
+ * 
  * @since 1.4
  */
 
@@ -157,6 +213,18 @@ public final class NumericShaper implements java.io.Serializable {
      *                                   NumericShaper.Range.EUROPEAN);
      * </pre></blockquote>
      *
+     * <p>
+     * {@code NumericShaper.Range}表示具有自己的十进制数字的脚本的Unicode范围。
+     * 例如,{@link NumericShaper.Range#THAI}范围具有泰国数字,THAI DIGIT ZERO(U + 0E50)到THAI DIGIT NINE(U + 0E59)。
+     * 
+     *  <p> <code> Range </code>枚举取代了传统的基于位掩码的值(例如{@link NumericShaper#ARABIC}),并支持比基于位掩码的Unicode范围更多的Unicod
+     * e范围。
+     * 例如,以下代码使用位掩码：<blockquote> <pre> NumericShaper.getContextualShaper(NumericShaper.ARABIC | NumericShape
+     * r.TAMIL,NumericShaper.EUROPEAN); </pre> </blockquote>可以使用此枚举编写：<blockquote> <pre> NumericShaper.getCo
+     * ntextualShaper(EnumSet.of(NumericShaper.Range.ARABIC,NumericShaper.Range.TAMIL),NumericShaper.Range.E
+     * UROPEAN); </pre> </blockquote>。
+     * 
+     * 
      * @since 1.7
      */
     public static enum Range {
@@ -164,72 +232,123 @@ public final class NumericShaper implements java.io.Serializable {
         // with the bitmask-based constants.
         /**
          * The Latin (European) range with the Latin (ASCII) digits.
+         * <p>
+         *  带拉丁语(ASCII)数字的拉丁语(欧洲)范围。
+         * 
          */
         EUROPEAN        ('\u0030', '\u0000', '\u0300'),
         /**
          * The Arabic range with the Arabic-Indic digits.
+         * <p>
+         *  阿拉伯语范围与阿拉伯语 - 印度数字。
+         * 
          */
         ARABIC          ('\u0660', '\u0600', '\u0780'),
         /**
          * The Arabic range with the Eastern Arabic-Indic digits.
+         * <p>
+         *  阿拉伯语范围与东部阿拉伯语 - 印度数字。
+         * 
          */
         EASTERN_ARABIC  ('\u06f0', '\u0600', '\u0780'),
         /**
          * The Devanagari range with the Devanagari digits.
+         * <p>
+         *  梵文系列与梵文数字。
+         * 
          */
         DEVANAGARI      ('\u0966', '\u0900', '\u0980'),
         /**
          * The Bengali range with the Bengali digits.
+         * <p>
+         *  孟加拉语范围与孟加拉数字。
+         * 
          */
         BENGALI         ('\u09e6', '\u0980', '\u0a00'),
         /**
          * The Gurmukhi range with the Gurmukhi digits.
+         * <p>
+         *  Gurmukhi系列与Gurmukhi数字。
+         * 
          */
         GURMUKHI        ('\u0a66', '\u0a00', '\u0a80'),
         /**
          * The Gujarati range with the Gujarati digits.
+         * <p>
+         *  古吉拉特语系列与古吉拉特数字。
+         * 
          */
         GUJARATI        ('\u0ae6', '\u0b00', '\u0b80'),
         /**
          * The Oriya range with the Oriya digits.
+         * <p>
+         *  与Oriya数字的Oriya范围。
+         * 
          */
         ORIYA           ('\u0b66', '\u0b00', '\u0b80'),
         /**
          * The Tamil range with the Tamil digits.
+         * <p>
+         *  泰米尔语有泰米尔语的数字。
+         * 
          */
         TAMIL           ('\u0be6', '\u0b80', '\u0c00'),
         /**
          * The Telugu range with the Telugu digits.
+         * <p>
+         *  泰卢固语数字的泰卢固语系列。
+         * 
          */
         TELUGU          ('\u0c66', '\u0c00', '\u0c80'),
         /**
          * The Kannada range with the Kannada digits.
+         * <p>
+         *  卡纳达系列与卡纳达数字。
+         * 
          */
         KANNADA         ('\u0ce6', '\u0c80', '\u0d00'),
         /**
          * The Malayalam range with the Malayalam digits.
+         * <p>
+         *  马拉雅拉姆范围与马拉雅拉姆数字。
+         * 
          */
         MALAYALAM       ('\u0d66', '\u0d00', '\u0d80'),
         /**
          * The Thai range with the Thai digits.
+         * <p>
+         *  泰国范围与泰国数字。
+         * 
          */
         THAI            ('\u0e50', '\u0e00', '\u0e80'),
         /**
          * The Lao range with the Lao digits.
+         * <p>
+         *  老挝范围与老挝数字。
+         * 
          */
         LAO             ('\u0ed0', '\u0e80', '\u0f00'),
         /**
          * The Tibetan range with the Tibetan digits.
+         * <p>
+         *  藏族范围与藏族数字。
+         * 
          */
         TIBETAN         ('\u0f20', '\u0f00', '\u1000'),
         /**
          * The Myanmar range with the Myanmar digits.
+         * <p>
+         * 缅甸范围与缅甸数字。
+         * 
          */
         MYANMAR         ('\u1040', '\u1000', '\u1080'),
         /**
          * The Ethiopic range with the Ethiopic digits. Ethiopic
          * does not have a decimal digit 0 so Latin (European) 0 is
          * used.
+         * <p>
+         *  埃塞俄比亚的范围与埃塞俄比亚数字。埃塞俄比亚没有十进制数字0,因此使用拉丁语(欧洲)0。
+         * 
          */
         ETHIOPIC        ('\u1369', '\u1200', '\u1380') {
             @Override
@@ -237,10 +356,16 @@ public final class NumericShaper implements java.io.Serializable {
         },
         /**
          * The Khmer range with the Khmer digits.
+         * <p>
+         *  高棉范围与高棉数字。
+         * 
          */
         KHMER           ('\u17e0', '\u1780', '\u1800'),
         /**
          * The Mongolian range with the Mongolian digits.
+         * <p>
+         *  蒙古语范围与蒙古数字。
+         * 
          */
         MONGOLIAN       ('\u1810', '\u1800', '\u1900'),
         // The order of EUROPEAN to MOGOLIAN must be consistent
@@ -248,66 +373,114 @@ public final class NumericShaper implements java.io.Serializable {
 
         /**
          * The N'Ko range with the N'Ko digits.
+         * <p>
+         *  N'Ko范围与N'Ko数字。
+         * 
          */
         NKO             ('\u07c0', '\u07c0', '\u0800'),
         /**
          * The Myanmar range with the Myanmar Shan digits.
+         * <p>
+         *  缅甸范围与缅甸山数字。
+         * 
          */
         MYANMAR_SHAN    ('\u1090', '\u1000', '\u10a0'),
         /**
          * The Limbu range with the Limbu digits.
+         * <p>
+         *  Limbu系列与Limbu数字。
+         * 
          */
         LIMBU           ('\u1946', '\u1900', '\u1950'),
         /**
          * The New Tai Lue range with the New Tai Lue digits.
+         * <p>
+         *  新太极系列有新太极数字。
+         * 
          */
         NEW_TAI_LUE     ('\u19d0', '\u1980', '\u19e0'),
         /**
          * The Balinese range with the Balinese digits.
+         * <p>
+         *  巴厘岛系列与巴厘岛数字。
+         * 
          */
         BALINESE        ('\u1b50', '\u1b00', '\u1b80'),
         /**
          * The Sundanese range with the Sundanese digits.
+         * <p>
+         *  Sund ese范围与Sund他数字。
+         * 
          */
         SUNDANESE       ('\u1bb0', '\u1b80', '\u1bc0'),
         /**
          * The Lepcha range with the Lepcha digits.
+         * <p>
+         *  Lepcha范围与Lepcha数字。
+         * 
          */
         LEPCHA          ('\u1c40', '\u1c00', '\u1c50'),
         /**
          * The Ol Chiki range with the Ol Chiki digits.
+         * <p>
+         *  Ol Chiki系列与Ol Chiki数字。
+         * 
          */
         OL_CHIKI        ('\u1c50', '\u1c50', '\u1c80'),
         /**
          * The Vai range with the Vai digits.
+         * <p>
+         *  Vai范围与Vai数字。
+         * 
          */
         VAI             ('\ua620', '\ua500', '\ua640'),
         /**
          * The Saurashtra range with the Saurashtra digits.
+         * <p>
+         *  Saurashtra系列与Saurashtra数字。
+         * 
          */
         SAURASHTRA      ('\ua8d0', '\ua880', '\ua8e0'),
         /**
          * The Kayah Li range with the Kayah Li digits.
+         * <p>
+         *  Kayah Li范围与Kayah Li数字。
+         * 
          */
         KAYAH_LI        ('\ua900', '\ua900', '\ua930'),
         /**
          * The Cham range with the Cham digits.
+         * <p>
+         *  Cham范围与Cham数字。
+         * 
          */
         CHAM            ('\uaa50', '\uaa00', '\uaa60'),
         /**
          * The Tai Tham Hora range with the Tai Tham Hora digits.
+         * <p>
+         *  大Tham Hora范围与Tai Tham Hora数字。
+         * 
          */
         TAI_THAM_HORA   ('\u1a80', '\u1a20', '\u1ab0'),
         /**
          * The Tai Tham Tham range with the Tai Tham Tham digits.
+         * <p>
+         *  大Tham Tham范围与大Tham Tham数字。
+         * 
          */
         TAI_THAM_THAM   ('\u1a90', '\u1a20', '\u1ab0'),
         /**
          * The Javanese range with the Javanese digits.
+         * <p>
+         *  爪哇范围与爪哇数字。
+         * 
          */
         JAVANESE        ('\ua9d0', '\ua980', '\ua9e0'),
         /**
          * The Meetei Mayek range with the Meetei Mayek digits.
+         * <p>
+         *  Meetei Mayek系列与Meetei Mayek数字。
+         * 
          */
         MEETEI_MAYEK    ('\uabf0', '\uabc0', '\uac00');
 
@@ -372,6 +545,9 @@ public final class NumericShaper implements java.io.Serializable {
 
     /** flag indicating whether to shape contextually (high bit) and which
      *  digit ranges to shape (bits 0-18)
+     * <p>
+     *  数位范围(位0-18)
+     * 
      */
     private int mask;
 
@@ -380,6 +556,10 @@ public final class NumericShaper implements java.io.Serializable {
      * Range} for non-contextual shaping. {@code null} for the bit
      * mask-based API.
      *
+     * <p>
+     *  用于上下文整形的上下文{@code Range}或用于非上下文整形的{@code Range}。 {@code null}用于基于位掩码的API。
+     * 
+     * 
      * @since 1.7
      */
     private Range shapingRange;
@@ -387,17 +567,26 @@ public final class NumericShaper implements java.io.Serializable {
     /**
      * {@code Set<Range>} indicating which Unicode ranges to
      * shape. {@code null} for the bit mask-based API.
+     * <p>
+     *  {@code设置<Range>},指示要形成哪些Unicode范围。 {@code null}用于基于位掩码的API。
+     * 
      */
     private transient Set<Range> rangeSet;
 
     /**
      * rangeSet.toArray() value. Sorted by Range.base when the number
      * of elements is greater then BSEARCH_THRESHOLD.
+     * <p>
+     *  rangeSet.toArray()值。当元素数量大于BSEARCH_THRESHOLD时,按Range.base排序。
+     * 
      */
     private transient Range[] rangeArray;
 
     /**
      * If more than BSEARCH_THRESHOLD ranges are specified, binary search is used.
+     * <p>
+     *  如果指定的范围超过BSEARCH_THRESHOLD,则使用二进制搜索。
+     * 
      */
     private static final int BSEARCH_THRESHOLD = 3;
 
@@ -405,6 +594,9 @@ public final class NumericShaper implements java.io.Serializable {
 
     /** Identifies the Latin-1 (European) and extended range, and
      *  Latin-1 (European) decimal base.
+     * <p>
+     *  拉丁-1(欧洲)十进制基数。
+     * 
      */
     public static final int EUROPEAN = 1<<0;
 
@@ -468,6 +660,9 @@ public final class NumericShaper implements java.io.Serializable {
      * <p>This constant specifies all of the bit mask-based
      * ranges. Use {@code EmunSet.allOf(NumericShaper.Range.class)} to
      * specify all of the enum-based ranges.
+     * <p>
+     * <p>此常数指定所有基于位掩码的范围。使用{@code EmunSet.allOf(NumericShaper.Range.class)}指定所有基于枚举的范围。
+     * 
      */
     public static final int ALL_RANGES = 0x0007ffff;
 
@@ -599,6 +794,9 @@ public final class NumericShaper implements java.io.Serializable {
      * Even (left) indexes are starts of ranges of non-strong-directional (or undefined)
      * characters, odd (right) indexes are starts of ranges of strong directional
      * characters.
+     * <p>
+     *  强方向字符(类型L,R,AL)的范围表。偶数(左)索引是非强方向(或未定义)字符范围的开始,奇(右)索引是强方向字符范围的开始。
+     * 
      */
     private static int[] strongTable = {
         0x0000, 0x0041,
@@ -936,6 +1134,10 @@ public final class NumericShaper implements java.io.Serializable {
      * Returns a shaper for the provided unicode range.  All
      * Latin-1 (EUROPEAN) digits are converted
      * to the corresponding decimal unicode digits.
+     * <p>
+     *  返回所提供的unicode范围的整形器。所有Latin-1(EUROPEAN)数字将转换为相应的十进制Unicode数字。
+     * 
+     * 
      * @param singleRange the specified Unicode range
      * @return a non-contextual numeric shaper
      * @throws IllegalArgumentException if the range is not a single range
@@ -950,6 +1152,10 @@ public final class NumericShaper implements java.io.Serializable {
      * range. All Latin-1 (EUROPEAN) digits are converted to the
      * corresponding decimal digits of the specified Unicode range.
      *
+     * <p>
+     *  返回所提供的Unicode范围的整形器。所有Latin-1(EUROPEAN)数字将转换为指定的Unicode范围的相应十进制数字。
+     * 
+     * 
      * @param singleRange the Unicode range given by a {@link
      *                    NumericShaper.Range} constant.
      * @return a non-contextual {@code NumericShaper}.
@@ -971,6 +1177,12 @@ public final class NumericShaper implements java.io.Serializable {
      * EUROPEAN digits are encountered before any strong directional
      * text in the string, the context is presumed to be EUROPEAN, and
      * so the digits will not shape.
+     * <p>
+     *  返回所提供的unicode范围的上下文整形器。如果范围是提供的范围之一,拉丁语-1(EUROPEAN)数字将转换为与前一个文本的范围相对应的十进制数字。
+     * 多个范围通过将值一起表示,例如<code> NumericShaper.ARABIC | NumericShaper.THAI </code>。
+     * 成形器假定EUROPEAN作为起始上下文,即如果在字符串中的任何强方向文本之前遇到EUROPEAN数字,则上下文被假定为EUROPEAN,因此数字不会成形。
+     * 
+     * 
      * @param ranges the specified Unicode ranges
      * @return a shaper for the specified ranges
      */
@@ -990,6 +1202,12 @@ public final class NumericShaper implements java.io.Serializable {
      * directional text in the string, the context is presumed to be
      * EUROPEAN, and so the digits will not shape.
      *
+     * <p>
+     *  返回所提供的Unicode范围的上下文整形器。如果范围是提供的范围之一,拉丁语-1(EUROPEAN)数字将转换为与前一个文本的范围相对应的十进制数字。
+     * 
+     * <p>整形器假定EUROPEAN为起始上下文,也就是说,如果在字符串中的任何强方向文本之前遇到EUROPEAN数字,则上下文假定为EUROPEAN,因此数字不会整形。
+     * 
+     * 
      * @param ranges the specified Unicode ranges
      * @return a contextual shaper for the specified ranges
      * @throws NullPointerException if {@code ranges} is {@code null}.
@@ -1009,6 +1227,11 @@ public final class NumericShaper implements java.io.Serializable {
      * represented by or-ing the values together, for example,
      * <code>NumericShaper.ARABIC | NumericShaper.THAI</code>.  The
      * shaper uses defaultContext as the starting context.
+     * <p>
+     *  返回所提供的unicode范围的上下文整形器。如果范围是提供的范围之一,拉丁语-1(EUROPEAN)数字将转换为与前一个文本的范围相对应的十进制数字。
+     * 多个范围通过将值一起表示,例如<code> NumericShaper.ARABIC | NumericShaper.THAI </code>。整形器使用defaultContext作为起始上下文。
+     * 
+     * 
      * @param ranges the specified Unicode ranges
      * @param defaultContext the starting context, such as
      * <code>NumericShaper.EUROPEAN</code>
@@ -1029,6 +1252,11 @@ public final class NumericShaper implements java.io.Serializable {
      * range is one of the provided ranges. The shaper uses {@code
      * defaultContext} as the starting context.
      *
+     * <p>
+     *  返回所提供的Unicode范围的上下文整形器。如果范围是提供的范围之一,拉丁语-1(EUROPEAN)数字将转换为与前一个文本的范围相对应的十进制数字。
+     * 整形器使用{@code defaultContext}作为起始上下文。
+     * 
+     * 
      * @param ranges the specified Unicode ranges
      * @param defaultContext the starting context, such as
      *                       {@code NumericShaper.Range.EUROPEAN}
@@ -1049,6 +1277,9 @@ public final class NumericShaper implements java.io.Serializable {
 
     /**
      * Private constructor.
+     * <p>
+     *  私有构造函数。
+     * 
      */
     private NumericShaper(int key, int mask) {
         this.key = key;
@@ -1088,6 +1319,10 @@ public final class NumericShaper implements java.io.Serializable {
     /**
      * Converts the digits in the text that occur between start and
      * start + count.
+     * <p>
+     *  转换在开始和开始+计数之间出现的文本中的数字。
+     * 
+     * 
      * @param text an array of characters to convert
      * @param start the index into <code>text</code> to start
      *        converting
@@ -1114,6 +1349,10 @@ public final class NumericShaper implements java.io.Serializable {
      * Converts the digits in the text that occur between start and
      * start + count, using the provided context.
      * Context is ignored if the shaper is not a contextual shaper.
+     * <p>
+     *  使用提供的上下文转换在开始和开始+计数之间出现的文本中的数字。如果整形器不是上下文整形器,则忽略上下文。
+     * 
+     * 
      * @param text an array of characters
      * @param start the index into <code>text</code> to start
      *        converting
@@ -1148,6 +1387,11 @@ public final class NumericShaper implements java.io.Serializable {
      * context}. {@code Context} is ignored if the shaper is not a
      * contextual shaper.
      *
+     * <p>
+     *  使用提供的{@code context},转换{@code start}和{@code start + count}之间出现的文本中的数字。
+     * 如果整形器不是上下文整形器,则忽略{@code Context}。
+     * 
+     * 
      * @param text  a {@code char} array
      * @param start the index into {@code text} to start converting
      * @param count the number of {@code char}s in {@code text}
@@ -1198,6 +1442,10 @@ public final class NumericShaper implements java.io.Serializable {
     /**
      * Returns a <code>boolean</code> indicating whether or not
      * this shaper shapes contextually.
+     * <p>
+     *  返回一个<code> boolean </code>,指示这个整形器是否以上下文方式形成。
+     * 
+     * 
      * @return <code>true</code> if this shaper is contextual;
      *         <code>false</code> otherwise.
      */
@@ -1218,6 +1466,17 @@ public final class NumericShaper implements java.io.Serializable {
      * <p>Note that this method supports only the bit mask-based
      * ranges. Call {@link #getRangeSet()} for the enum-based ranges.
      *
+     * <p>
+     * 返回一个<code> int </code>,用于将要成形的所有范围的值进行OR运算。
+     * <p>
+     *  例如,要检查整形器是否变成阿拉伯语,您可以使用以下命令：
+     * <blockquote>
+     *  {@code if((shaper.getRanges()&shaper.ARABIC)！= 0){...}
+     * </blockquote>
+     * 
+     *  <p>请注意,此方法仅支持基于位掩码的范围。对基于枚举的范围调用{@link #getRangeSet()}。
+     * 
+     * 
      * @return the values for all the ranges to be shaped.
      */
     public int getRanges() {
@@ -1228,6 +1487,10 @@ public final class NumericShaper implements java.io.Serializable {
      * Returns a {@code Set} representing all the Unicode ranges in
      * this {@code NumericShaper} that will be shaped.
      *
+     * <p>
+     *  返回{@code Set},表示此{@code NumericShaper}中将被整形的所有Unicode范围。
+     * 
+     * 
      * @return all the Unicode ranges to be shaped.
      * @since 1.7
      */
@@ -1240,6 +1503,9 @@ public final class NumericShaper implements java.io.Serializable {
 
     /**
      * Perform non-contextual shaping.
+     * <p>
+     *  执行非上下文整形。
+     * 
      */
     private void shapeNonContextually(char[] text, int start, int count) {
         int base;
@@ -1264,6 +1530,9 @@ public final class NumericShaper implements java.io.Serializable {
     /**
      * Perform contextual shaping.
      * Synchronized to protect caches used in getContextKey.
+     * <p>
+     *  执行上下文整形。同步以保护在getContextKey中使用的缓存。
+     * 
      */
     private synchronized void shapeContextually(char[] text, int start, int count, int ctxKey) {
 
@@ -1339,6 +1608,10 @@ public final class NumericShaper implements java.io.Serializable {
 
     /**
      * Returns a hash code for this shaper.
+     * <p>
+     *  返回此整形器的哈希代码。
+     * 
+     * 
      * @return this shaper's hash code.
      * @see java.lang.Object#hashCode
      */
@@ -1365,6 +1638,15 @@ public final class NumericShaper implements java.io.Serializable {
      * System.out.println(ns1.equals(ns2));
      * </pre></blockquote>
      *
+     * <p>
+     *  如果指定的对象是<code> NumericShaper </code>的实例并且与此形状相同,则返回{@code true},而不管范围表示,位掩码或枚举。
+     * 例如,以下代码产生{@code"true"}。
+     *  <blockquote> <pre> NumericShaper ns1 = NumericShaper.getShaper(NumericShaper.ARABIC); NumericShaper 
+     * ns2 = NumericShaper.getShaper(NumericShaper.Range.ARABIC); System.out.println(ns1.equals(ns2)); </pre>
+     *  </blockquote>。
+     * 例如,以下代码产生{@code"true"}。
+     * 
+     * 
      * @param o the specified object to compare to this
      *          <code>NumericShaper</code>
      * @return <code>true</code> if <code>o</code> is an instance
@@ -1403,6 +1685,10 @@ public final class NumericShaper implements java.io.Serializable {
     /**
      * Returns a <code>String</code> that describes this shaper. This method
      * is used for debugging purposes only.
+     * <p>
+     *  返回描述此整形器的<code> String </code>。此方法仅用于调试目的。
+     * 
+     * 
      * @return a <code>String</code> describing this shaper.
      */
     public String toString() {
@@ -1440,6 +1726,9 @@ public final class NumericShaper implements java.io.Serializable {
     /**
      * Returns the index of the high bit in value (assuming le, actually
      * power of 2 >= value). value must be positive.
+     * <p>
+     *  返回值的高位的索引(假设le,实际上是2的幂> =值)。值必须为正。
+     * 
      */
     private static int getHighBit(int value) {
         if (value <= 0) {
@@ -1477,6 +1766,9 @@ public final class NumericShaper implements java.io.Serializable {
 
     /**
      * fast binary search over subrange of array.
+     * <p>
+     *  快速二进制搜索数组的子范围。
+     * 
      */
     private static int search(int value, int[] array, int start, int length)
     {
@@ -1506,6 +1798,9 @@ public final class NumericShaper implements java.io.Serializable {
      * object to the {@code stream}. Any enum constants that have no
      * bit mask-based counterparts are ignored in the conversion.
      *
+     * <p>
+     * 将{@code NumericShaper.Range}基于枚举的参数转换为基于位掩码的参数,并将此对象写入{@code stream}。任何没有基于位掩码的对应的枚举常量在转换中被忽略。
+     * 
      * @param stream the output stream to write to
      * @throws IOException if an I/O error occurs while writing to {@code stream}
      * @since 1.7

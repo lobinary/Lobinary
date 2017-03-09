@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@
  * This notice and attribution to Taligent may not be removed.
  * Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权所有Taligent,Inc. 1996  -  1997,保留所有权利(C)版权所有IBM Corp. 1996  -  1998,保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc.拥有版权和所有权。这些材料是根据Taligent和Sun之间的许可协议的条款提供的。该技术受多项美国和国际专利保护。
+ * 
+ *  此通知和归因于Taligent不得删除。 Taligent是Taligent,Inc.的注册商标。
+ * 
  */
 
 package java.awt.font;
@@ -90,6 +98,25 @@ import sun.font.FontResolver;
  * which implements the standard line break policy (placing as many words
  * as will fit on each line).
  *
+ * <p>
+ *  <code> TextMeasurer </code>类提供了换行所需的原始操作：测量一个给定的提前,确定一个字符范围的提前,并为一个范围内的一个范围生成一个<code> TextLayout </code>
+ * 字符。
+ * 它还提供了段落的增量编辑方法。
+ * <p>
+ * 一个<code> TextMeasurer </code>对象由一个{@link java.text.AttributedCharacterIterator AttributedCharacterIterator}
+ * 构成,表示一段文本。
+ * 由<code> AttributedCharacterIterator </code>的{@link AttributedCharacterIterator#getBeginIndex()getBeginIndex}
+ * 方法返回的值定义了第一个字符的绝对索引。
+ * 由<code> AttributedCharacterIterator </code>的{@link AttributedCharacterIterator#getEndIndex()getEndIndex}
+ * 方法返回的值定义了超过最后一个字符的索引。
+ * 这些值定义在调用<code> TextMeasurer </code>时使用的索引范围。例如,调用获取文本范围的前进或文本范围的换行符必须使用开始和结束索引值之间的索引。
+ * 调用{@link #insertChar(java.text.AttributedCharacterIterator,int)insertChar}和{@link #deleteChar(java.text.AttributedCharacterIterator,int)deleteChar}
+ * 重置<code> TextMeasurer </code>以使用开始索引和在这些调用中传递的<code> AttributedCharacterIterator </code>的结束索引。
+ * 这些值定义在调用<code> TextMeasurer </code>时使用的索引范围。例如,调用获取文本范围的前进或文本范围的换行符必须使用开始和结束索引值之间的索引。
+ * <p>
+ *  大多数客户端将使用更方便的<code> LineBreakMeasurer </code>,它实现标准换行策略(放置尽可能多的单词,适合每行)。
+ * 
+ * 
  * @author John Raley
  * @see LineBreakMeasurer
  * @since 1.3
@@ -113,6 +140,10 @@ public final class TextMeasurer implements Cloneable {
         }
         //System.out.println("EST_LINES="+EST_LINES);
     }
+    /* <p>
+    /*  static {String s = System.getProperty("estLines"); if(s！= null){try {Float f = new Float(s); EST_LINES = f.floatValue(); }
+    /*  catch(NumberFormatException e){}} //System.out.println("EST_LINES="+EST_LINES); }}。
+    /* 
     */
 
     private FontRenderContext fFrc;
@@ -158,6 +189,10 @@ public final class TextMeasurer implements Cloneable {
     /**
      * Constructs a <code>TextMeasurer</code> from the source text.
      * The source text should be a single entire paragraph.
+     * <p>
+     * 从源文本构造一个<code> TextMeasurer </code>。源文本应该是单个整个段落。
+     * 
+     * 
      * @param text the source paragraph.  Cannot be null.
      * @param frc the information about a graphics device which is needed
      *       to measure the text correctly.  Cannot be null.
@@ -191,6 +226,9 @@ public final class TextMeasurer implements Cloneable {
     /**
      * Initialize state, including fChars array, direction, and
      * fBidi.
+     * <p>
+     *  初始化状态,包括fChars数组,方向和fBidi。
+     * 
      */
     private void initAll(AttributedCharacterIterator text) {
 
@@ -261,6 +299,9 @@ public final class TextMeasurer implements Cloneable {
     /**
      * Generate components for the paragraph.  fChars, fBidi should have been
      * initialized already.
+     * <p>
+     *  为段落生成组件。 fChars,fBidi应该已经初始化。
+     * 
      */
     private void generateComponents(int startingAt, int endingAt) {
 
@@ -359,6 +400,10 @@ public final class TextMeasurer implements Cloneable {
      * end of the line.  This method returns the start of the sequence
      * of trailing whitespace characters to move to the end of a
      * line taken from the given range.
+     * <p>
+     *  根据Unicode双向行为规范(Unicode标准2.0,第3.11节),在自然流向基本方向的行的末端的空白必须沿着行方向流动,并移动到行的结尾。
+     * 此方法返回结尾空白字符序列的开始,以移动到从给定范围取出的行的结尾。
+     * 
      */
     private int trailingCdWhitespaceStart(int startPos, int limitPos) {
 
@@ -543,6 +588,10 @@ public final class TextMeasurer implements Cloneable {
      * on a line beginning at <code>start</code> and possible
      * measuring up to <code>maxAdvance</code> in graphical width.
      *
+     * <p>
+     *  返回在<code> start </code>开始的行上不适合的第一个字符的索引,可能在图形宽度中最多测量<code> maxAdvance </code>。
+     * 
+     * 
      * @param start the character index at which to start measuring.
      *  <code>start</code> is an absolute index, not relative to the
      *  start of the paragraph
@@ -572,6 +621,11 @@ public final class TextMeasurer implements Cloneable {
      * <code>start</code> and <code>limit</code> are absolute indices,
      * not relative to the start of the paragraph.
      *
+     * <p>
+     *  返回从<code> start </code>开始并包含高达<code> limit </code>的字符的行的图形宽度。
+     *  <code> start </code>和<code> limit </code>是绝对索引,不是相对于段落的开头。
+     * 
+     * 
      * @param start the character index at which to start measuring
      * @param limit the character index at which to stop measuring
      * @return the graphical width of a line beginning at <code>start</code>
@@ -596,6 +650,10 @@ public final class TextMeasurer implements Cloneable {
     /**
      * Returns a <code>TextLayout</code> on the given character range.
      *
+     * <p>
+     *  在给定字符范围上返回<code> TextLayout </code>。
+     * 
+     * 
      * @param start the index of the first character
      * @param limit the index after the last character.  Must be greater
      *   than <code>start</code>
@@ -646,6 +704,13 @@ public final class TextMeasurer implements Cloneable {
      * usually be more efficient to update an existing
      * <code>TextMeasurer</code> than to create a new one from scratch.
      *
+     * <p>
+     * 在当前由<code> TextMeasurer </code>表示的段落中插入单个字符后更新<code> TextMeasurer </code>。
+     * 在此调用之后,此<code> TextMeasurer </code>等价于从文本创建的新<Text> TextMeasurer </code>然而,更新现有的<code> TextMeasurer </code>
+     * 通常比从头创建一个新的更有效率。
+     * 在当前由<code> TextMeasurer </code>表示的段落中插入单个字符后更新<code> TextMeasurer </code>。
+     * 
+     * 
      * @param newParagraph the text of the paragraph after performing
      * the insertion.  Cannot be null.
      * @param insertPos the position in the text where the character was
@@ -712,6 +777,12 @@ public final class TextMeasurer implements Cloneable {
      * to update an existing <code>TextMeasurer</code> than to create a new one
      * from scratch.
      *
+     * <p>
+     *  在当前由<code> TextMeasurer </code>表示的段落中删除单个字符后,更新<code> TextMeasurer </code>。
+     * 在此调用之后,此<code> TextMeasurer </code>等价于从文本创建的新<Text> TextMeasurer </code>然而,更新现有的<code> TextMeasurer </code>
+     * 通常比从头开始创建一个更有效。
+     *  在当前由<code> TextMeasurer </code>表示的段落中删除单个字符后,更新<code> TextMeasurer </code>。
+     * 
      * @param newParagraph the text of the paragraph after performing
      * the deletion.  Cannot be null.
      * @param deletePos the position in the text where the character was removed.
@@ -756,6 +827,8 @@ public final class TextMeasurer implements Cloneable {
     /**
      * NOTE:  This method is only for LineBreakMeasurer's use.  It is package-
      * private because it returns internal data.
+     * <p>
+     * 
      */
     char[] getChars() {
 

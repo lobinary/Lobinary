@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.net.URL;
 /**
  * This is a writer for HTMLDocuments.
  *
+ * <p>
+ *  这是HTMLDocuments的作者。
+ * 
+ * 
  * @author  Sunita Mani
  */
 
@@ -45,11 +50,16 @@ public class HTMLWriter extends AbstractWriter {
     /*
      * Stores all elements for which end tags have to
      * be emitted.
+     * <p>
+     *  存储需要发出结束标签的所有元素。
+     * 
      */
     private Stack<Element> blockElementStack = new Stack<Element>();
     private boolean inContent = false;
     private boolean inPre = false;
     /** When inPre is true, this will indicate the end offset of the pre
+    /* <p>
+    /* 
      * element. */
     private int preEndOffset;
     private boolean inTextArea = false;
@@ -61,36 +71,57 @@ public class HTMLWriter extends AbstractWriter {
      * stored as attributes in other tags. Generally they're
      * character level attributes.  Examples include
      * &lt;b&gt;, &lt;i&gt;, &lt;font&gt;, and &lt;a&gt;.
+     * <p>
+     *  存储所有嵌入的代码。嵌入式标记是作为属性存储在其他标记中的标记。通常它们是字符级属性。示例包括&lt; b&gt;,&lt; i&gt;,&lt; font&gt;和&lt; a&gt ;.
+     * 
      */
     private Vector<HTML.Tag> tags = new Vector<HTML.Tag>(10);
 
     /**
      * Values for the tags.
+     * <p>
+     *  标记的值。
+     * 
      */
     private Vector<Object> tagValues = new Vector<Object>(10);
 
     /**
      * Used when writing out content.
+     * <p>
+     *  用于写出内容时。
+     * 
      */
     private Segment segment;
 
     /*
      * This is used in closeOutUnwantedEmbeddedTags.
+     * <p>
+     *  这在closeOutUnwantedEmbeddedTags中使用。
+     * 
      */
     private Vector<HTML.Tag> tagsToRemove = new Vector<HTML.Tag>(10);
 
     /**
      * Set to true after the head has been output.
+     * <p>
+     *  输出磁头后设置为true。
+     * 
      */
     private boolean wroteHead;
 
     /**
      * Set to true when entities (such as &lt;) should be replaced.
+     * <p>
+     *  当实体(例如&lt;)应被替换时,设置为true。
+     * 
      */
     private boolean replaceEntities;
 
     /**
      * Temporary buffer.
+     * <p>
+     *  临时缓冲区。
+     * 
      */
     private char[] tempChars;
 
@@ -98,6 +129,10 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Creates a new HTMLWriter.
      *
+     * <p>
+     *  创建新的HTMLWriter。
+     * 
+     * 
      * @param w   a Writer
      * @param doc  an HTMLDocument
      *
@@ -109,6 +144,10 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Creates a new HTMLWriter.
      *
+     * <p>
+     *  创建新的HTMLWriter。
+     * 
+     * 
      * @param w  a Writer
      * @param doc an HTMLDocument
      * @param pos the document location from which to fetch the content
@@ -125,6 +164,10 @@ public class HTMLWriter extends AbstractWriter {
      * Element tree and controls the writing out of
      * all the tags and its attributes.
      *
+     * <p>
+     *  迭代元素树并控制写出所有的标签及其属性。
+     * 
+     * 
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
      *            location within the document.
@@ -158,6 +201,9 @@ public class HTMLWriter extends AbstractWriter {
 
                 /*
                   if next is child of current increment indent
+                /* <p>
+                /*  如果next是当前增量缩进的子级
+                /* 
                 */
 
                 if (indentNeedsIncrementing(current, next)) {
@@ -168,11 +214,17 @@ public class HTMLWriter extends AbstractWriter {
                        so emit end tags for items on the stack until the
                        item on top of the stack, is the parent of the
                        next.
+                    /* <p>
+                    /*  next和current不是兄弟,所以为堆栈中的项目发出结束标签,直到堆栈顶部的项目是下一个的父节点。
+                    /* 
                     */
                     Element top = blockElementStack.peek();
                     while (top != next.getParentElement()) {
                         /*
                            pop() will return top.
+                        /* <p>
+                        /*  pop()将返回顶部。
+                        /* 
                         */
                         blockElementStack.pop();
                         if (!synthesizedElement(top)) {
@@ -190,6 +242,9 @@ public class HTMLWriter extends AbstractWriter {
                        if next and current are siblings the indent level
                        is correct.  But, we need to make sure that if current is
                        on the stack, we pop it off, and put out its end tag.
+                    /* <p>
+                    /*  如果next和current是兄弟节点,缩进级别是正确的。但是,我们需要确保如果当前在堆栈上,我们将其弹出,并提出其结束标签。
+                    /* 
                     */
                     Element top = blockElementStack.peek();
                     if (top == current) {
@@ -211,6 +266,9 @@ public class HTMLWriter extends AbstractWriter {
         /* A null parameter ensures that all embedded tags
            currently in the tags vector have their
            corresponding end tags written out.
+        /* <p>
+        /*  目前在标签向量中有相应的末尾标签。
+        /* 
         */
         closeOutUnwantedEmbeddedTags(null);
 
@@ -245,6 +303,10 @@ public class HTMLWriter extends AbstractWriter {
      * and attributes with a key of type
      * HTML.Attribute.ENDTAG.
      *
+     * <p>
+     *  写出属性集。使用HTML.Tag类型的键忽略所有属性,具有类型为StyleConstants的键的属性以及类型为HTML.Attribute.ENDTAG的键的属性。
+     * 
+     * 
      * @param attr   an AttributeSet
      * @exception IOException on any I/O error
      *
@@ -270,6 +332,10 @@ public class HTMLWriter extends AbstractWriter {
      * Writes out all empty elements (all tags that have no
      * corresponding end tag).
      *
+     * <p>
+     * 写出所有空元素(所有没有相应结束标签的标签)。
+     * 
+     * 
      * @param elem   an Element
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
@@ -344,6 +410,10 @@ public class HTMLWriter extends AbstractWriter {
      * Determines if the HTML.Tag associated with the
      * element is a block tag.
      *
+     * <p>
+     *  确定与元素关联的HTML.Tag是否是块标记。
+     * 
+     * 
      * @param attr  an AttributeSet
      * @return  true if tag is block tag, false otherwise.
      */
@@ -361,6 +431,10 @@ public class HTMLWriter extends AbstractWriter {
      * Writes out a start tag for the element.
      * Ignores all synthesized elements.
      *
+     * <p>
+     *  写出元素的开始标签。忽略所有合成元素。
+     * 
+     * 
      * @param elem   an Element
      * @exception IOException on any I/O error
      */
@@ -448,6 +522,10 @@ public class HTMLWriter extends AbstractWriter {
      * Writes out text that is contained in a TEXTAREA form
      * element.
      *
+     * <p>
+     *  写出TEXTAREA表单元素中包含的文本。
+     * 
+     * 
      * @param attr  an AttributeSet
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
@@ -482,6 +560,10 @@ public class HTMLWriter extends AbstractWriter {
      * is invoked, then only the appropriate range of text is written
      * out.
      *
+     * <p>
+     *  写出文本。如果在调用构造函数时指定了范围,则只写出适当的文本范围。
+     * 
+     * 
      * @param elem   an Element
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
@@ -520,6 +602,10 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Writes out the content of the SELECT form element.
      *
+     * <p>
+     *  写出SELECT表单元素的内容。
+     * 
+     * 
      * @param attr the AttributeSet associated with the form element
      * @exception IOException on any I/O error
      */
@@ -547,6 +633,10 @@ public class HTMLWriter extends AbstractWriter {
 
     /**
      * Writes out the content of the Option form element.
+     * <p>
+     *  写出选项表单元素的内容。
+     * 
+     * 
      * @param option  an Option
      * @exception IOException on any I/O error
      *
@@ -575,6 +665,10 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Writes out an end tag for the element.
      *
+     * <p>
+     *  写出元素的结束标记。
+     * 
+     * 
      * @param elem    an Element
      * @exception IOException on any I/O error
      */
@@ -610,6 +704,10 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Writes out comments.
      *
+     * <p>
+     *  写出评论。
+     * 
+     * 
      * @param elem    an Element
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
@@ -632,6 +730,10 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Writes out comment string.
      *
+     * <p>
+     *  写出注释字符串。
+     * 
+     * 
      * @param string   the comment
      * @exception IOException on any I/O error
      * @exception BadLocationException if pos represents an invalid
@@ -651,6 +753,9 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Writes out any additional comments (comments outside of the body)
      * stored under the property HTMLDocument.AdditionalComments.
+     * <p>
+     *  写入存储在属性HTMLDocument.AdditionalComments下的任何其他注释(在正文之外的注释)。
+     * 
      */
     void writeAdditionalComments() throws IOException {
         Object comments = getDocument().getProperty
@@ -670,6 +775,9 @@ public class HTMLWriter extends AbstractWriter {
      * Returns true if the element is a
      * synthesized element.  Currently we are only testing
      * for the p-implied tag.
+     * <p>
+     *  如果元素是合成元素,则返回true。目前我们只测试p-implied标签。
+     * 
      */
     protected boolean synthesizedElement(Element elem) {
         if (matchNameAttribute(elem.getAttributes(), HTML.Tag.IMPLIED)) {
@@ -682,6 +790,9 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Returns true if the StyleConstants.NameAttribute is
      * equal to the tag that is passed in as a parameter.
+     * <p>
+     *  如果StyleConstants.NameAttribute等于作为参数传递的标记,则返回true。
+     * 
      */
     protected boolean matchNameAttribute(AttributeSet attr, HTML.Tag tag) {
         Object o = attr.getAttribute(StyleConstants.NameAttribute);
@@ -700,6 +811,10 @@ public class HTMLWriter extends AbstractWriter {
      * so that when appropriate the corresponding end tags can be
      * written out.
      *
+     * <p>
+     *  搜索AttributeSet中的嵌入式标签并将其写出。它还将这些标签存储在向量中,使得在适当时可以写出相应的结束标签。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void writeEmbeddedTags(AttributeSet attr) throws IOException {
@@ -733,6 +848,9 @@ public class HTMLWriter extends AbstractWriter {
      * Searches the attribute set for a tag, both of which
      * are passed in as a parameter.  Returns true if no match is found
      * and false otherwise.
+     * <p>
+     *  搜索标记的属性集,两者都作为参数传递。如果没有找到匹配则返回true,否则返回false。
+     * 
      */
     private boolean noMatchForTagInAttributes(AttributeSet attr, HTML.Tag t,
                                               Object tagValue) {
@@ -754,6 +872,10 @@ public class HTMLWriter extends AbstractWriter {
      * then the tag is removed from the vector and a corresponding
      * end tag is written out.
      *
+     * <p>
+     *  搜索属性集和存储在标记向量中的每个标记。如果没有找到标签,则从向量中删除标签,并写出相应的结束标签。
+     * 
+     * 
      * @exception IOException on any I/O error
      */
     protected void closeOutUnwantedEmbeddedTags(AttributeSet attr) throws IOException {
@@ -811,6 +933,9 @@ public class HTMLWriter extends AbstractWriter {
      * Determines if the element associated with the attributeset
      * is a TEXTAREA or SELECT.  If true, returns true else
      * false
+     * <p>
+     * 确定与属性集关联的元素是TEXTAREA还是SELECT。如果为true,则返回true否则为false
+     * 
      */
     private boolean isFormElementWithContent(AttributeSet attr) {
         return matchNameAttribute(attr, HTML.Tag.TEXTAREA) ||
@@ -826,6 +951,10 @@ public class HTMLWriter extends AbstractWriter {
      * is a synthesized element, then its children must be indented.
      * This state is maintained by the indentNext boolean.
      *
+     * <p>
+     *  确定缩进是否需要递增。基本上,如果next是当前的子节点,next不是合成元素,则缩进级别将增加。如果存在父子关系并且"next"是合成元素,则其子代必须缩进。此状态由indentNext布尔维护。
+     * 
+     * 
      * @return boolean that's true if indent level
      *         needs incrementing.
      */
@@ -847,6 +976,9 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Outputs the maps as elements. Maps are not stored as elements in
      * the document, and as such this is used to output them.
+     * <p>
+     *  将地图输出为元素。地图不会作为元素存储在文档中,因此用于输出它们。
+     * 
      */
     void writeMaps(Enumeration maps) throws IOException {
         if (maps != null) {
@@ -893,6 +1025,9 @@ public class HTMLWriter extends AbstractWriter {
      * Outputs the styles as a single element. Styles are not stored as
      * elements, but part of the document. For the time being styles are
      * written out as a comment, inside a style tag.
+     * <p>
+     *  将样式输出为单个元素。样式不存储为元素,而是文档的一部分。当前样式被写为注释,在样式标签内。
+     * 
      */
     void writeStyles(StyleSheet sheet) throws IOException {
         if (sheet != null) {
@@ -918,6 +1053,9 @@ public class HTMLWriter extends AbstractWriter {
      * Outputs the named style. <code>outputStyle</code> indicates
      * whether or not a style has been output yet. This will return
      * true if a style is written.
+     * <p>
+     *  输出命名样式。 <code> outputStyle </code>指示样式是否已输出。如果写了一个样式,这将返回true。
+     * 
      */
     boolean writeStyle(String name, Style style, boolean outputStyle)
                  throws IOException{
@@ -990,6 +1128,10 @@ public class HTMLWriter extends AbstractWriter {
      * resultant set the same as the received set.<p>
      * This will put the converted values into <code>to</code>, unless
      * it is null in which case a temporary AttributeSet will be returned.
+     * <p>
+     *  将给定的属性集转换为html以便写出它们。已转换的任何键都不会出现在结果集中。任何未转换的键都会出现在与接收到的集合相同的结果集中。
+     * <p>这将把转换的值放入<code>到</code>,除非它是null,在这种情况下将返回一个临时的AttributeSet。
+     * 
      */
     AttributeSet convertToHTML(AttributeSet from, MutableAttributeSet to) {
         if (to == null) {
@@ -1008,17 +1150,26 @@ public class HTMLWriter extends AbstractWriter {
      * If true, the writer will emit CSS attributes in preference
      * to HTML tags/attributes (i.e. It will emit an HTML 4.0
      * style).
+     * <p>
+     *  如果为true,则写入器将优先于HTML标签/属性(即,将发出HTML 4.0样式)发出CSS属性。
+     * 
      */
     private boolean writeCSS = false;
 
     /**
      * Buffer for the purpose of attribute conversion
+     * <p>
+     *  缓冲区用于属性转换的目的
+     * 
      */
     private MutableAttributeSet convAttr = new SimpleAttributeSet();
 
     /**
      * Buffer for the purpose of attribute conversion. This can be
      * used if convAttr is being used.
+     * <p>
+     * 缓冲区用于属性转换的目的。如果正在使用convAttr,则可以使用。
+     * 
      */
     private MutableAttributeSet oConvAttr = new SimpleAttributeSet();
 
@@ -1027,6 +1178,9 @@ public class HTMLWriter extends AbstractWriter {
      * convert character level attributes that have a StyleConstants
      * mapping over to an HTML tag/attribute.  Other CSS attributes
      * will be placed in an HTML style attribute.
+     * <p>
+     *  创建旧样式的HTML属性。这将将具有StyleConstants映射的字符级属性转换为HTML标记/属性。其他CSS属性将放置在HTML样式属性中。
+     * 
      */
     private static void convertToHTML32(AttributeSet from, MutableAttributeSet to) {
         if (from == null) {
@@ -1096,6 +1250,9 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Add an attribute only if it doesn't exist so that we don't
      * loose information replacing it with SimpleAttributeSet.EMPTY
+     * <p>
+     *  只有当属性不存在时才添加属性,以便我们不会丢失用SimpleAttributeSet.EMPTY替换它的信息
+     * 
      */
     private static void addAttribute(MutableAttributeSet to, Object key, Object value) {
         Object attr = to.getAttribute(key);
@@ -1113,6 +1270,9 @@ public class HTMLWriter extends AbstractWriter {
      * Create/update an HTML &lt;font&gt; tag attribute.  The
      * value of the attribute should be a MutableAttributeSet so
      * that the attributes can be updated as they are discovered.
+     * <p>
+     *  创建/更新HTML&lt; font&gt;标签属性。属性的值应该是MutableAttributeSet,以便可以在发现属性时对其进行更新。
+     * 
      */
     private static void createFontAttribute(CSS.Attribute a, AttributeSet from,
                                     MutableAttributeSet to) {
@@ -1137,6 +1297,9 @@ public class HTMLWriter extends AbstractWriter {
      * Copies the given AttributeSet to a new set, converting
      * any CSS attributes found to arguments of an HTML style
      * attribute.
+     * <p>
+     *  将给定的AttributeSet复制到一个新集合,将发现的任何CSS属性转换为HTML样式属性的参数。
+     * 
      */
     private static void convertToHTML40(AttributeSet from, MutableAttributeSet to) {
         Enumeration keys = from.getAttributeNames();
@@ -1164,6 +1327,10 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * Writes the line separator. This is overriden to make sure we don't
      * replace the newline content in case it is outside normal ascii.
+     * <p>
+     *  写入行分隔符。这是覆盖,以确保我们不替换换行内容,如果它在正常ascii。
+     * 
+     * 
      * @since 1.3
      */
     protected void writeLineSeparator() throws IOException {
@@ -1178,6 +1345,10 @@ public class HTMLWriter extends AbstractWriter {
      * This method is overriden to map any character entities, such as
      * &lt; to &amp;lt;. <code>super.output</code> will be invoked to
      * write the content.
+     * <p>
+     *  该方法被覆盖以映射任何字符实体,到&amp; lt。 <code> super.output </code>将被调用来写入内容。
+     * 
+     * 
      * @since 1.3
      */
     protected void output(char[] chars, int start, int length)
@@ -1249,6 +1420,9 @@ public class HTMLWriter extends AbstractWriter {
     /**
      * This directly invokes super's <code>output</code> after converting
      * <code>string</code> to a char[].
+     * <p>
+     *  这在将<code> string </code>转换为char []之后直接调用super的<code>输出</code>。
+     * 
      */
     private void output(String string) throws IOException {
         int length = string.length();
@@ -1263,6 +1437,8 @@ public class HTMLWriter extends AbstractWriter {
 
     /**
      * Writes indent only once per line.
+     * <p>
+     *  每行只写一次缩进。
      */
     private void indentSmart() throws IOException {
         if (!indented) {

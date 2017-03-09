@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package java.util.prefs;
  * Static methods for translating Base64 encoded strings to byte arrays
  * and vice-versa.
  *
+ * <p>
+ *  用于将Base64编码字符串转换为字节数组的静态方法,反之亦然。
+ * 
+ * 
  * @author  Josh Bloch
  * @see     Preferences
  * @since   1.4
@@ -37,6 +42,9 @@ class Base64 {
     /**
      * Translates the specified byte array into a Base64 string as per
      * Preferences.put(byte[]).
+     * <p>
+     *  根据Preferences.put(byte [])将指定的字节数组转换为Base64字符串。
+     * 
      */
     static String byteArrayToBase64(byte[] a) {
         return byteArrayToBase64(a, false);
@@ -47,6 +55,9 @@ class Base64 {
      * Base64 string.  This non-standard variant uses an alphabet that does
      * not contain the uppercase alphabetic characters, which makes it
      * suitable for use in situations where case-folding occurs.
+     * <p>
+     *  将指定的字节数组转换为"替代表示"Base64字符串。此非标准变体使用不包含大写字母字符的字母表,这使得它适合在发生大小写折叠的情况下使用。
+     * 
      */
     static String byteArrayToAltBase64(byte[] a) {
         return byteArrayToBase64(a, true);
@@ -96,6 +107,9 @@ class Base64 {
      * This array is a lookup table that translates 6-bit positive integer
      * index values into their "Base64 Alphabet" equivalents as specified
      * in Table 1 of RFC 2045.
+     * <p>
+     *  此数组是一个查找表,它将6位正整数索引值转换为RFC 2045表1中规定的"Base64 Alphabet"等效项。
+     * 
      */
     private static final char intToBase64[] = {
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -111,6 +125,10 @@ class Base64 {
      * This is NOT the real Base64 Alphabet as per in Table 1 of RFC 2045.
      * This alternate alphabet does not use the capital letters.  It is
      * designed for use in environments where "case folding" occurs.
+     * <p>
+     *  此数组是一个查找表,它将6位正整数索引值转换为其"Alternate Base64 Alphabet"等效项。这不是RFC 2045表1中的真正的Base64字母表。此替代字母表不使用大写字母。
+     * 它设计用于发生"盒折叠"的环境。
+     * 
      */
     private static final char intToAltBase64[] = {
         '!', '"', '#', '$', '%', '&', '\'', '(', ')', ',', '-', '.', ':',
@@ -126,6 +144,11 @@ class Base64 {
      *
      * @throw IllegalArgumentException if <tt>s</tt> is not a valid Base64
      *        string.
+     * <p>
+     *  将指定的Base64字符串(根据Preferences.get(byte []))转换为字节数组。
+     * 
+     *  @throw IllegalArgumentException如果<tt> s </tt>不是有效的Base64字符串。
+     * 
      */
     static byte[] base64ToByteArray(String s) {
         return base64ToByteArray(s, false);
@@ -138,6 +161,11 @@ class Base64 {
      * @throw IllegalArgumentException or ArrayOutOfBoundsException
      *        if <tt>s</tt> is not a valid alternate representation
      *        Base64 string.
+     * <p>
+     *  将指定的"备用表示"Base64字符串转换为字节数组。
+     * 
+     *  @throw IllegalArgumentException或ArrayOutOfBoundsException如果<tt> s </tt>不是有效的替代表示Base64字符串。
+     * 
      */
     static byte[] altBase64ToByteArray(String s) {
         return base64ToByteArray(s, true);
@@ -196,6 +224,11 @@ class Base64 {
      *
      * @throw IllegalArgumentException or ArrayOutOfBoundsException if
      *        c is not in the Base64 Alphabet.
+     * <p>
+     * 将指定字符(假定为"Base 64 Alphabet"中的字符)转换为等效的6位正整数。
+     * 
+     *  @throw IllegalArgumentException或ArrayOutOfBoundsException如果c不在Base64字母表中。
+     * 
      */
     private static int base64toInt(char c, byte[] alphaToInt) {
         int result = alphaToInt[c];
@@ -210,6 +243,9 @@ class Base64 {
      * into their 6-bit positive integer equivalents.  Characters that
      * are not in the Base64 alphabet but fall within the bounds of the
      * array are translated to -1.
+     * <p>
+     *  此数组是一个查找表,它将从"Base64字母表"(如RFC 2045的表1中指定)绘制的Unicode字符转换为其6位正整数等效值。不在Base64字母表中但落在数组边界内的字符将转换为-1。
+     * 
      */
     private static final byte base64ToInt[] = {
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -224,6 +260,8 @@ class Base64 {
     /**
      * This array is the analogue of base64ToInt, but for the nonstandard
      * variant that avoids the use of uppercase alphabetic characters.
+     * <p>
+     *  此数组类似于base64ToInt,但是对于非标准变量,避免使用大写字母字符。
      */
     private static final byte altBase64ToInt[] = {
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,

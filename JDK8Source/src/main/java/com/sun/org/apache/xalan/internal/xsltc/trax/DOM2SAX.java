@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: DOM2SAX.java,v 1.2.4.1 2005/09/06 11:52:46 pvedula Exp $
+ * <p>
+ *  $ Id：DOM2SAX.java,v 1.2.4.1 2005/09/06 11:52:46 pvedula Exp $
+ * 
  */
 
 
@@ -48,6 +61,8 @@ import com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 
 /**
+/* <p>
+/* 
  * @author G. Todd Miller
  */
 public class DOM2SAX implements XMLReader, Locator {
@@ -86,6 +101,9 @@ public class DOM2SAX implements XMLReader, Locator {
      * Begin the scope of namespace prefix. Forward the event to the
      * SAX handler only if the prefix is unknown or it is mapped to a
      * different URI.
+     * <p>
+     *  开始命名空间前缀的作用域。仅当前缀未知或映射到不同的URI时,才将事件转发到SAX处理程序。
+     * 
      */
     private boolean startPrefixMapping(String prefix, String uri)
         throws SAXException
@@ -120,6 +138,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /*
      * End the scope of a name prefix by popping it from the stack and
      * passing the event to the SAX Handler.
+     * <p>
+     *  通过从堆栈中弹出它并将事件传递到SAX处理程序来结束名称前缀的作用域。
+     * 
      */
     private void endPrefixMapping(String prefix)
         throws SAXException
@@ -136,6 +157,9 @@ public class DOM2SAX implements XMLReader, Locator {
      * If the DOM was created using a DOM 1.0 API, the local name may be
      * null. If so, get the local name from the qualified name before
      * generating the SAX event.
+     * <p>
+     *  如果DOM是使用DOM 1.0 API创建的,则本地名称可以为null。如果是,请在生成SAX事件之前从限定名称获取本地名称。
+     * 
      */
     private static String getLocalName(Node node) {
         final String localName = node.getLocalName();
@@ -172,6 +196,9 @@ public class DOM2SAX implements XMLReader, Locator {
      * Traverse the DOM and generate SAX events for a handler. A
      * startElement() event passes all attributes, including namespace
      * declarations.
+     * <p>
+     *  遍历DOM并为处理程序生成SAX事件。 startElement()事件传递所有属性,包括命名空间声明。
+     * 
      */
     private void parse(Node node) throws IOException, SAXException {
         Node first = null;
@@ -328,6 +355,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public DTDHandler getDTDHandler() {
         return null;
@@ -336,6 +366,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public ErrorHandler getErrorHandler() {
         return null;
@@ -344,6 +377,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     * 此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public boolean getFeature(String name) throws SAXNotRecognizedException,
         SAXNotSupportedException
@@ -354,6 +390,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setFeature(String name, boolean value) throws
         SAXNotRecognizedException, SAXNotSupportedException
@@ -363,6 +402,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void parse(String sysId) throws IOException, SAXException {
         throw new IOException("This method is not yet implemented.");
@@ -371,6 +413,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setDTDHandler(DTDHandler handler) throws NullPointerException {
     }
@@ -378,6 +423,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setEntityResolver(EntityResolver resolver) throws
         NullPointerException
@@ -387,6 +435,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public EntityResolver getEntityResolver() {
         return null;
@@ -395,6 +446,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setErrorHandler(ErrorHandler handler) throws
         NullPointerException
@@ -404,6 +458,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public void setProperty(String name, Object value) throws
         SAXNotRecognizedException, SAXNotSupportedException {
@@ -412,6 +469,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public Object getProperty(String name) throws SAXNotRecognizedException,
         SAXNotSupportedException
@@ -422,6 +482,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public int getColumnNumber() {
         return 0;
@@ -430,6 +493,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public int getLineNumber() {
         return 0;
@@ -438,6 +504,9 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
+     * 
      */
     public String getPublicId() {
         return null;
@@ -446,6 +515,8 @@ public class DOM2SAX implements XMLReader, Locator {
     /**
      * This class is only used internally so this method should never
      * be called.
+     * <p>
+     *  此类仅在内部使用,因此不应调用此方法。
      */
     public String getSystemId() {
         return null;

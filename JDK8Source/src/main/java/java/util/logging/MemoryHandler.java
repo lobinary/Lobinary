@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -83,6 +84,46 @@ package java.util.logging;
  * <li>   com.foo.MyHandler.formatter=java.util.logging.SimpleFormatter </li>
  * </ul>
  * <p>
+ * <p>
+ *  <tt>处理程序</tt>,用于在内存中的循环缓冲区中缓冲请求。
+ * <p>
+ *  通常,此<tt>处理程序</tt>只是将传入的<tt> LogRecords </tt>存储到其内存缓冲区中,并丢弃更早的记录。这种缓冲非常便宜,并且避免了格式化成本。
+ * 在某些触发条件下,<tt> MemoryHandler </tt>会将其当前缓冲区内容推送到目标<tt>处理程序</tt>,通常将其发布到外部世界。
+ * <p>
+ *  有三种主要模型用于触发缓冲区的推送：
+ * <ul>
+ * <li>
+ *  传入的<tt> LogRecord </tt>的类型大于预定义级别<tt> pushLevel </tt>。 </li>
+ * <li>
+ *  外部类显式调用<tt> push </tt>方法。 </li>
+ * <li>
+ *  子类覆盖<tt> log </tt>方法,并扫描每个传入的<tt> LogRecord </tt>并调用<tt> push </tt> </li>
+ * </ul>
+ * <p>
+ *  <b>配置：</b>默认情况下,每个<tt> MemoryHandler </tt>都使用以下<tt> LogManager </tt>配置属性进行初始化,其中<tt>&lt; handler-nam
+ * e&gt; </tt>到处理程序的完全限定类名。
+ * 如果未定义属性(或具有无效值),则使用指定的默认值。如果没有定义默认值,那么抛出RuntimeException。
+ * <ul>
+ * <li>&lt; handler-name&gt; .level指定<tt>处理程序</tt>(默认为<tt> Level.ALL </tt>)的级别。
+ *  </li> <li>&lt; handler-name&gt; .filter指定要使用的<tt> Filter </tt>类的名称(默认为<tt> Filter </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .size定义了缓冲区大小(默认为1000)。
+ *  </li> <li>&lt; handler-name&gt; .push定义<tt> pushLevel </tt>(默认为<tt> level.SEVERE </tt>)。
+ *  </li> <li>&lt; handler-name&gt; .target指定目标<tt>处理程序</tt>类的名称。 (无默认值)。 </li>。
+ * </ul>
+ * <p>
+ *  例如,{@code MemoryHandler}的属性将是：
+ * <ul>
+ *  <li> java.util.logging.MemoryHandler.level = INFO </li> <li> java.util.logging.MemoryHandler.formatt
+ * er = java.util.logging.SimpleFormatter </li>。
+ * </ul>
+ * <p>
+ *  对于自定义处理程序,例如com.foo.MyHandler,属性将是：
+ * <ul>
+ *  <li> com.foo.MyHandler.level = INFO </li> <li> com.foo.MyHandler.formatter = java.util.logging.Simpl
+ * eFormatter </li>。
+ * </ul>
+ * <p>
+ * 
  * @since 1.4
  */
 
@@ -114,6 +155,9 @@ public class MemoryHandler extends Handler {
     /**
      * Create a <tt>MemoryHandler</tt> and configure it based on
      * <tt>LogManager</tt> configuration properties.
+     * <p>
+     *  创建<tt> MemoryHandler </tt>并根据<tt> LogManager </tt>配置属性进行配置。
+     * 
      */
     public MemoryHandler() {
         sealed = false;
@@ -151,6 +195,12 @@ public class MemoryHandler extends Handler {
      * properties (or their default values) except that the given <tt>pushLevel</tt>
      * argument and buffer size argument are used.
      *
+     * <p>
+     *  创建<tt> MemoryHandler </tt>。
+     * <p>
+     *  除了使用给定的<tt> pushLevel </tt>参数和缓冲区大小参数,<tt> MemoryHandler </tt>是基于<tt> LogManager </tt>属性(或其默认值)配置的。
+     * 
+     * 
      * @param target  the Handler to which to publish output.
      * @param size    the number of log records to buffer (must be greater than zero)
      * @param pushLevel  message level to push on
@@ -185,6 +235,14 @@ public class MemoryHandler extends Handler {
      * is called to write all buffered records to the target output
      * <tt>Handler</tt>.
      *
+     * <p>
+     *  在内部缓冲区中存储<tt> LogRecord </tt>。
+     * <p>
+     * 如果有<tt>过滤器</tt>,则会调用<tt> isLoggable </tt>方法来检查给定的日志记录是否可以记录。如果不是我们回来。否则,给定的记录被复制到内部循环缓冲器中。
+     * 然后将记录的level属性与<tt> pushLevel </tt>进行比较。
+     * 如果给定级别大于或等于<tt> pushLevel </tt>,则调用<tt> push </tt>将所有缓冲的记录写入目标输出<tt> Handler </tt>。
+     * 
+     * 
      * @param  record  description of the log event. A null record is
      *                 silently ignored and is not published
      */
@@ -210,6 +268,11 @@ public class MemoryHandler extends Handler {
      * Push any buffered output to the target <tt>Handler</tt>.
      * <p>
      * The buffer is then cleared.
+     * <p>
+     *  将任何缓冲输出推送到目标<tt>处理程序</tt>。
+     * <p>
+     *  然后清除缓冲区。
+     * 
      */
     public synchronized void push() {
         for (int i = 0; i < count; i++) {
@@ -227,6 +290,11 @@ public class MemoryHandler extends Handler {
      * <p>
      * Note that the current contents of the <tt>MemoryHandler</tt>
      * buffer are <b>not</b> written out.  That requires a "push".
+     * <p>
+     *  导致目标<tt>处理程序</tt>冲刷。
+     * <p>
+     *  请注意,<tt> MemoryHandler </tt>缓冲区的当前内容为<b>不是</b>。这需要一个"推"。
+     * 
      */
     @Override
     public void flush() {
@@ -237,6 +305,10 @@ public class MemoryHandler extends Handler {
      * Close the <tt>Handler</tt> and free all associated resources.
      * This will also close the target <tt>Handler</tt>.
      *
+     * <p>
+     *  关闭<tt>处理程序</tt>并释放所有相关资源。这也将关闭目标<tt>处理程序</tt>。
+     * 
+     * 
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have <tt>LoggingPermission("control")</tt>.
      */
@@ -251,6 +323,11 @@ public class MemoryHandler extends Handler {
      * into our internal buffer, if its level is greater than or equal to
      * the <tt>pushLevel</tt>, then <tt>push</tt> will be called.
      *
+     * <p>
+     *  设置<tt> pushLevel </tt>。
+     * 将<tt> LogRecord </tt>复制到内部缓冲区后,如果其级别大于或等于<tt> pushLevel </tt>,则将调用<tt> push </tt>。
+     * 
+     * 
      * @param newLevel the new value of the <tt>pushLevel</tt>
      * @exception  SecurityException  if a security manager exists and if
      *             the caller does not have <tt>LoggingPermission("control")</tt>.
@@ -266,6 +343,10 @@ public class MemoryHandler extends Handler {
     /**
      * Get the <tt>pushLevel</tt>.
      *
+     * <p>
+     *  获取<tt> pushLevel </tt>。
+     * 
+     * 
      * @return the value of the <tt>pushLevel</tt>
      */
     public Level getPushLevel() {
@@ -281,6 +362,11 @@ public class MemoryHandler extends Handler {
      * check whether the <tt>LogRecord</tt> would result in a "push" of the
      * buffer contents. It will return false if the <tt>LogRecord</tt> is null.
      * <p>
+     * <p>
+     *  检查此<tt>处理程序</tt>是否会将给定的<tt> LogRecord </tt>记录到其内部缓冲区中。
+     * <p>
+     *  此方法检查<tt> LogRecord </tt>是否具有适当的级别,以及是否满足任何<tt>过滤器</tt>。
+     * 
      * @param record  a <tt>LogRecord</tt>
      * @return true if the <tt>LogRecord</tt> would be logged.
      *

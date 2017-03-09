@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,10 @@ import javax.management.openmbean.OpenType;
 /**
  * Introspector for MXBeans.  There is exactly one instance of this class.
  *
+ * <p>
+ *  MXBeans的Introspector。这个类只有一个实例。
+ * 
+ * 
  * @since 1.6
  */
 class MXBeanIntrospector extends MBeanIntrospector<ConvertingMethod> {
@@ -201,6 +206,10 @@ class MXBeanIntrospector extends MBeanIntrospector<ConvertingMethod> {
         /* Ideally this would be an empty string, but
            OMBOperationInfo constructor forbids that.  Also, we
            could consult an annotation to get a useful
+        /* <p>
+        /*  OMBOperationInfo构造函数禁止。此外,我们可以参考注释获得一个有用的
+        /* 
+        /* 
            description.  */
 
         final int impact = MBeanOperationInfo.UNKNOWN;
@@ -253,6 +262,11 @@ class MXBeanIntrospector extends MBeanIntrospector<ConvertingMethod> {
              * the getType() is the primitive type, not its wrapped type as
              * we would get with an OpenMBean*Info.  The OpenType is available
              * in the Descriptor in either case.
+             * <p>
+             *  表示为OpenType,然后我们返回一个OpenMBeanOperationInfo。如果它们中的任何一个是原始类型,我们不能。
+             * 与JSR 174的兼容性意味着我们必须返回一个MBean * Info,其中getType()是原始类型,而不是它的封装类型,就像OpenMBean * Info一样。
+             * 在任一种情况下,OpenType在描述符中都可用。
+             * 
              */
             final OpenMBeanParameterInfo[] oparams =
                 new OpenMBeanParameterInfo[params.length];
@@ -290,6 +304,9 @@ class MXBeanIntrospector extends MBeanIntrospector<ConvertingMethod> {
          * method is being called for the MXBean *class* to add any
          * new items beyond those in the interface Descriptor, which
          * currently it does not.
+         * <p>
+         *  包含在MXBean接口的MBeanInfo中。正在调用此方法,MXBean *类*添加除接口描述符中的任何新项目,目前它没有。
+         * 
          */
         return ImmutableDescriptor.EMPTY_DESCRIPTOR;
     }
@@ -315,6 +332,11 @@ class MXBeanIntrospector extends MBeanIntrospector<ConvertingMethod> {
      * <p>Compatibility with JMX 1.2 (including J2SE 5.0) means that arrays
      * of primitive types cannot use an ArrayType representing an array of
      * primitives, because that didn't exist in JMX 1.2.</p>
+     * <p>
+     *  <p>如果此类型可以在OpenMBean * Info中忠实表示,则为True。</p>
+     * 
+     *  <p>与JSR 174的兼容性意味着原始类型必须由MBean * Info表示,其getType()是原始类型字符串,例如。 "int"。
+     * 如果我们使用OpenMBean * Info,那么这个字符串将是包装类型,例如。 "java.lang.Integer"。</p>。
      */
     private static boolean canUseOpenInfo(Type type) {
         if (type instanceof GenericArrayType) {

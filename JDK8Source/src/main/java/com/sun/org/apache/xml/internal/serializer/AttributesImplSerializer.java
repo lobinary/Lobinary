@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2003-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: AttributesImplSerializer.java,v 1.2.4.1 2005/09/15 08:15:14 suresh_emailid Exp $
+ * <p>
+ *  $ Id：AttributesImplSerializer.java,v 1.2.4.1 2005/09/15 08:15:14 suresh_emailid Exp $
+ * 
  */
 
 package com.sun.org.apache.xml.internal.serializer;
@@ -34,6 +47,11 @@ import org.xml.sax.helpers.AttributesImpl;
  * faster lookup of an index by qName, which is commonly done in the stream
  * serializer.
  *
+ * <p>
+ *  这个类扩展了实现org的org.xml.sax.helpers.AttributesImpl。 xml.sax.Attributes。
+ * 但是对于优化,这个类添加了一个Hashtable,用于通过qName更快地查找索引,这通常在流串行器中完成。
+ * 
+ * 
  * @see org.xml.sax.Attributes
  *
  * @xsl.usage internal
@@ -47,6 +65,11 @@ public final class AttributesImplSerializer extends AttributesImpl
      *
      * The keys to the hashtable to find the index are either
      * "prefix:localName"  or "{uri}localName".
+     * <p>
+     *  qName / index值的哈希表,以快速查找属性qName的索引。 qNames在哈希表中大写,以使搜索不区分大小写。
+     * 
+     *  哈希表找到索引的键是"prefix：localName"或"{uri} localName"。
+     * 
      */
     private final Hashtable m_indexFromQName = new Hashtable();
 
@@ -55,17 +78,27 @@ public final class AttributesImplSerializer extends AttributesImpl
     /**
      * This is the number of attributes before switching to the hash table,
      * and can be tuned, but 12 seems good for now - Brian M.
+     * <p>
+     *  这是切换到散列表之前的属性数量,可以调整,但现在12似乎很好 -  Brian M.
+     * 
      */
     private static final int MAX = 12;
 
     /**
      * One less than the number of attributes before switching to
      * the Hashtable.
+     * <p>
+     * 一个小于切换到Hashtable之前的属性数。
+     * 
      */
     private static final int MAXMinus1 = MAX - 1;
 
     /**
      * This method gets the index of an attribute given its qName.
+     * <p>
+     *  此方法获取属性的索引给定其qName。
+     * 
+     * 
      * @param qname the qualified name of the attribute, e.g. "prefix1:locName1"
      * @return the integer index of the attribute.
      * @see org.xml.sax.Attributes#getIndex(String)
@@ -93,6 +126,10 @@ public final class AttributesImplSerializer extends AttributesImpl
     /**
      * This method adds the attribute, but also records its qName/index pair in
      * the hashtable for fast lookup by getIndex(qName).
+     * <p>
+     *  此方法添加属性,但也将其qName /索引对记录在散列表中,以便通过getIndex(qName)快速查找。
+     * 
+     * 
      * @param uri the URI of the attribute
      * @param local the local name of the attribute
      * @param qname the qualified name of the attribute
@@ -144,6 +181,10 @@ public final class AttributesImplSerializer extends AttributesImpl
      * information in the Hashtable, so we now update the Hashtable.
      * Future additional attributes will update the Hashtable as
      * they are added.
+     * <p>
+     *  我们正在切换到具有快速查找属性的哈希表,但是直到现在我们还没有在Hashtable中保存任何信息,所以我们现在更新Hashtable。未来的附加属性将更新Hashtable,因为它们被添加。
+     * 
+     * 
      * @param numAtts
      */
     private void switchOverToHash(int numAtts)
@@ -167,6 +208,10 @@ public final class AttributesImplSerializer extends AttributesImpl
     /**
      * This method clears the accumulated attributes.
      *
+     * <p>
+     *  此方法清除累积的属性。
+     * 
+     * 
      * @see org.xml.sax.helpers.AttributesImpl#clear()
      */
     public final void clear()
@@ -187,6 +232,10 @@ public final class AttributesImplSerializer extends AttributesImpl
      * This method sets the attributes, previous attributes are cleared,
      * it also keeps the hashtable up to date for quick lookup via
      * getIndex(qName).
+     * <p>
+     *  此方法设置属性,以前的属性被清除,它也保持哈希表最新的快速查找通过getIndex(qName)。
+     * 
+     * 
      * @param atts the attributes to copy into these attributes.
      * @see org.xml.sax.helpers.AttributesImpl#setAttributes(Attributes)
      * @see #getIndex(String)
@@ -207,6 +256,9 @@ public final class AttributesImplSerializer extends AttributesImpl
 
     /**
      * This method gets the index of an attribute given its uri and locanName.
+     * <p>
+     *  此方法获取属性的索引给定其uri和locanName。
+     * 
      * @param uri the URI of the attribute name.
      * @param localName the local namer (after the ':' ) of the attribute name.
      * @return the integer index of the attribute.

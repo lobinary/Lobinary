@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,10 @@ import sun.swing.SwingUtilities2;
 /**
  * Basic L&amp;F implementation of a FileChooser.
  *
+ * <p>
+ *  FileChooser的基本L&amp; F实现。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class BasicFileChooserUI extends FileChooserUI {
@@ -73,6 +78,10 @@ public class BasicFileChooserUI extends FileChooserUI {
      * The mnemonic keycode used for the approve button when a directory
      * is selected and the current selection mode is FILES_ONLY.
      *
+     * <p>
+     *  当选择目录并且当前选择模式为FILES_ONLY时,用于批准按钮的助记键代码。
+     * 
+     * 
      * @since 1.4
      */
     protected int directoryOpenButtonMnemonic = 0;
@@ -87,6 +96,10 @@ public class BasicFileChooserUI extends FileChooserUI {
      * The label text displayed on the approve button when a directory
      * is selected and the current selection mode is FILES_ONLY.
      *
+     * <p>
+     *  当选择目录并且当前选择模式为FILES_ONLY时,批准按钮上显示的标签文本。
+     * 
+     * 
      * @since 1.4
      */
     protected String directoryOpenButtonText = null;
@@ -104,6 +117,10 @@ public class BasicFileChooserUI extends FileChooserUI {
      * The tooltip text displayed on the approve button when a directory
      * is selected and the current selection mode is FILES_ONLY.
      *
+     * <p>
+     *  选择目录并且当前选择模式为FILES_ONLY时,在批准按钮上显示的工具提示文本。
+     * 
+     * 
      * @since 1.4
      */
     protected String directoryOpenButtonToolTipText = null;
@@ -148,6 +165,11 @@ public class BasicFileChooserUI extends FileChooserUI {
      * {@code createUI} methods of all basic UIs classes
      * to instantiate UIs.
      *
+     * <p>
+     *  为指定的组件创建{@code BasicFileChooserUI}实现。
+     * 默认情况下,{@code BasicLookAndFeel}类使用所有基本UI类的{@code createUI}方法来实例化UI。
+     * 
+     * 
      * @param c the {@code JFileChooser} which needs a UI
      * @return the {@code BasicFileChooserUI} object
      *
@@ -580,6 +602,10 @@ public class BasicFileChooserUI extends FileChooserUI {
          * JFileChooser is also installed in the file list as it is used as the actual
          * transfer source.  The list is updated on a mouse enter to reflect the current
          * data transfer state of the file chooser.
+         * <p>
+         *  用于表示文件的JList由子类创建,但是在此类中监视选择。安装在JFileChooser中的TransferHandler也被安装在文件列表中,因为它被用作实际的传输源。
+         * 该列表在鼠标输入时更新,以反映文件选择器的当前数据传输状态。
+         * 
          */
         public void mouseEntered(MouseEvent e) {
             handler.mouseEntered(e);
@@ -603,6 +629,10 @@ public class BasicFileChooserUI extends FileChooserUI {
     /**
      * Property to remember whether a directory is currently selected in the UI.
      *
+     * <p>
+     *  记住当前是否在UI中选择目录的属性。
+     * 
+     * 
      * @return <code>true</code> iff a directory is currently selected.
      * @since 1.4
      */
@@ -614,6 +644,10 @@ public class BasicFileChooserUI extends FileChooserUI {
      * Property to remember whether a directory is currently selected in the UI.
      * This is normally called by the UI on a selection event.
      *
+     * <p>
+     *  记住当前是否在UI中选择目录的属性。这通常由UI在选择事件上调用。
+     * 
+     * 
      * @param b iff a directory is currently selected.
      * @since 1.4
      */
@@ -624,6 +658,10 @@ public class BasicFileChooserUI extends FileChooserUI {
     /**
      * Property to remember the directory that is currently selected in the UI.
      *
+     * <p>
+     *  记住当前在UI中选择的目录的属性。
+     * 
+     * 
      * @return the value of the <code>directory</code> property
      * @see #setDirectory
      * @since 1.4
@@ -636,6 +674,10 @@ public class BasicFileChooserUI extends FileChooserUI {
      * Property to remember the directory that is currently selected in the UI.
      * This is normally called by the UI on a selection event.
      *
+     * <p>
+     * 记住当前在UI中选择的目录的属性。这通常由UI在选择事件上调用。
+     * 
+     * 
      * @param f the <code>File</code> object representing the directory that is
      *          currently selected
      * @since 1.4
@@ -646,6 +688,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /**
      * Returns the mnemonic for the given key.
+     * <p>
+     *  返回给定键的助记符。
+     * 
      */
     private int getMnemonic(String key, Locale l) {
         return SwingUtilities2.getUIDefaultsInt(key, l);
@@ -657,6 +702,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /**
      * Returns the default accept all file filter
+     * <p>
+     *  返回默认接受所有文件过滤器
+     * 
      */
     public FileFilter getAcceptAllFileFilter(JFileChooser fc) {
         return acceptAllFileFilter;
@@ -670,6 +718,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /**
      * Returns the title of this dialog
+     * <p>
+     *  返回此对话框的标题
+     * 
      */
     public String getDialogTitle(JFileChooser fc) {
         String dialogTitle = fc.getDialogTitle();
@@ -751,6 +802,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /**
      * Creates a new folder.
+     * <p>
+     *  创建新文件夹。
+     * 
      */
     protected class NewFolderAction extends AbstractAction {
         protected NewFolderAction() {
@@ -793,6 +847,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /**
      * Acts on the "home" key event or equivalent event.
+     * <p>
+     *  作用于"主页"键事件或等效事件。
+     * 
      */
     protected class GoHomeAction extends AbstractAction {
         protected GoHomeAction() {
@@ -816,6 +873,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /**
      * Responds to an Open or Save request
+     * <p>
+     *  响应打开或保存请求
+     * 
      */
     protected class ApproveSelectionAction extends AbstractAction {
         protected ApproveSelectionAction() {
@@ -999,6 +1059,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /* A file filter which accepts file patterns containing
      * the special wildcards *? on Windows and *?[] on Unix.
+     * <p>
+     *  特殊通配符*?在Windows和*?[]在Unix。
+     * 
      */
     class GlobFilter extends FileFilter {
         Pattern pattern;
@@ -1124,6 +1187,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /**
      * Responds to a cancel request.
+     * <p>
+     *  响应取消请求。
+     * 
      */
     protected class CancelSelectionAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -1133,6 +1199,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
     /**
      * Rescans the files in the current directory
+     * <p>
+     *  重新扫描当前目录中的文件
+     * 
      */
     protected class UpdateAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -1285,12 +1354,19 @@ public class BasicFileChooserUI extends FileChooserUI {
     /**
      * Data transfer support for the file chooser.  Since files are currently presented
      * as a list, the list support is reused with the added flavor of DataFlavor.javaFileListFlavor
+     * <p>
+     *  数据传输支持文件选择器。由于文件当前以列表形式显示,因此列表支持将重用,增加了DataFlavor.javaFileListFlavor的风格
+     * 
      */
     static class FileTransferHandler extends TransferHandler implements UIResource {
 
         /**
          * Create a Transferable to use as the source for a data transfer.
          *
+         * <p>
+         *  创建一个可转移以用作数据传输的源。
+         * 
+         * 
          * @param c  The component holding the data to be transfered.  This
          *  argument is provided to enable sharing of TransferHandlers by
          *  multiple components.
@@ -1348,6 +1424,9 @@ public class BasicFileChooserUI extends FileChooserUI {
 
             /**
              * Best format of the file chooser is DataFlavor.javaFileListFlavor.
+             * <p>
+             *  文件选择器的最佳格式是DataFlavor.javaFileListFlavor。
+             * 
              */
             protected DataFlavor[] getRicherFlavors() {
                 DataFlavor[] flavors = new DataFlavor[1];
@@ -1357,6 +1436,8 @@ public class BasicFileChooserUI extends FileChooserUI {
 
             /**
              * The only richer format supported is the file list flavor
+             * <p>
+             *  支持的唯一更丰富的格式是文件列表风格
              */
             protected Object getRicherData(DataFlavor flavor) {
                 if (DataFlavor.javaFileListFlavor.equals(flavor)) {

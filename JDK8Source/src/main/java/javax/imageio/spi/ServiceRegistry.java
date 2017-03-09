@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -93,6 +94,41 @@ import java.util.ServiceLoader;
  * href="../../../../technotes/guides/jar/jar.html">
  * JAR File Specification</a>.
  *
+ * <p>
+ *  服务提供程序实例的注册表。
+ * 
+ *  <p> A <i>服务</i>是一组众所周知的接口和(通常是抽象的)类。服务提供商</i>是服务的具体实现。提供者中的类通常实现由服务本身定义的类的接口或子类。
+ * 
+ *  <p>服务提供者存储在一个或多个类别</i>中,每个类别由一个接口类(由<code> Class </code>对象描述)定义,实行。类别的集合可以动态地改变。
+ * 
+ *  <p>只能注册给定叶类的一个实例(即,由<code> getClass()</code>返回的实际类,而不是任何继承的类或接口)。
+ * 也就是说,假设<code> com.mycompany.mypkg.GreenServiceProvider </code>类实现<code> com.mycompany.mypkg.MyService
+ *  </code>接口。
+ *  <p>只能注册给定叶类的一个实例(即,由<code> getClass()</code>返回的实际类,而不是任何继承的类或接口)。
+ * 如果注册了一个<code> GreenServiceProvider </code>实例,它将被存储在由<code> MyService </code>类定义的类别中。
+ * 如果注册了<code> GreenServiceProvider </code>的新实例,它将替换上一个实例。在实践中,服务提供程序对象通常是单例,因此这种行为是适当的。
+ * 
+ * <p>要声明服务提供者,<code> services </code>子目录放置在每个JAR文件中的<code> META-INF </code>目录中。
+ * 此目录包含每个服务提供程序接口的文件,该文件在JAR文件中具有一个或多个实现类。
+ * 例如,如果JAR文件包含实现<code> javax.someapi.SomeService </code>接口的类名为<code> com.mycompany.mypkg.MyServiceImpl 
+ * </code>的类,那么JAR文件将包含一个名为：<pre> META-INF / services / javax.someapi.SomeService </pre>。
+ * 此目录包含每个服务提供程序接口的文件,该文件在JAR文件中具有一个或多个实现类。
+ * 
+ *  包含行：
+ * 
+ * <pre>
+ *  com.mycompany.mypkg.MyService
+ * </pre>
+ * 
+ *  <p>服务提供者类应该是轻量级并且快速加载。这些接口的实现应避免对其他类和本地代码的复杂依赖。对于更复杂的服务,通常的模式是为重量级服务注册轻量级代理。
+ * 
+ *  <p>应用程序可以自定义注册表的内容,只要它具有适当的运行时权限即可。
+ * 
+ *  <p>有关声明服务提供程序和JAR格式的更多详细信息,请参阅<a
+ * href="../../../../technotes/guides/jar/jar.html">
+ *  JAR文件规范</a>。
+ * 
+ * 
  * @see RegisterableService
  *
  */
@@ -106,6 +142,10 @@ public class ServiceRegistry {
      * set of categories taken from the <code>categories</code>
      * argument.
      *
+     * <p>
+     *  使用从<code> categories </code>参数中提取的一组类别构造一个<code> ServiceRegistry </code>实例。
+     * 
+     * 
      * @param categories an <code>Iterator</code> containing
      * <code>Class</code> objects to be used to define categories.
      *
@@ -149,6 +189,15 @@ public class ServiceRegistry {
      * a running Java virtual machine, this method may return
      * different results each time it is invoked.
      *
+     * <p>
+     *  使用给定的类加载器搜索特定服务类的实现。
+     * 
+     * <p>此方法将给定服务类的名称转换为类注释中描述的提供程序配置文件名,然后使用给定类加载器的<code> getResources </code>方法查找所有可用的文件名称。
+     * 然后读取和解析这些文件以生成提供程序类名称的列表。返回的迭代器使用给定的类加载器来查找并实例化列表的每个元素。
+     * 
+     *  <p>由于扩展可能安装到正在运行的Java虚拟机中,因此每次调用此方法时可能会返回不同的结果。
+     * 
+     * 
      * @param providerClass a <code>Class</code>object indicating the
      * class or interface of the service providers being detected.
      *
@@ -187,6 +236,15 @@ public class ServiceRegistry {
      *   return Service.providers(service, cl);
      * </pre>
      *
+     * <p>
+     *  使用上下文类加载器定位和增量实例化给定服务的可用提供程序。这种方便的方法等效于：
+     * 
+     * <pre>
+     *  ClassLoader cl = Thread.currentThread()。
+     * getContextClassLoader(); return Service.providers(service,cl);。
+     * </pre>
+     * 
+     * 
      * @param providerClass a <code>Class</code>object indicating the
      * class or interface of the service providers being detected.
      *
@@ -213,6 +271,10 @@ public class ServiceRegistry {
      * indicating the current set of categories.  The iterator will be
      * empty if no categories exist.
      *
+     * <p>
+     *  返回<code>类</code>对象的<code>迭代器</code>,表示当前类别集。如果没有类别,迭代器将为空。
+     * 
+     * 
      * @return an <code>Iterator</code> containing
      * <code>Class</code>objects.
      */
@@ -224,6 +286,9 @@ public class ServiceRegistry {
     /**
      * Returns an Iterator containing the subregistries to which the
      * provider belongs.
+     * <p>
+     *  返回包含提供程序所属的子域的迭代器。
+     * 
      */
     private Iterator getSubRegistries(Object provider) {
         List l = new ArrayList();
@@ -248,6 +313,14 @@ public class ServiceRegistry {
      * it is deregistered from a category, for example if a
      * category is removed or the registry is garbage collected.
      *
+     * <p>
+     *  将服务提供程序对象添加到注册表。提供者与给定类别相关联。
+     * 
+     * <p>如果<code> provider </code>实现<code> RegisterableService </code>接口,它的<code> onRegistration </code>方法将
+     * 被调用。
+     * 它的<code> onDegistration </code>方法将在每次从类别中注销时调用,例如,如果类别被删除或注册表被垃圾回收。
+     * 
+     * 
      * @param provider the service provide object to be registered.
      * @param category the category under which to register the
      * provider.
@@ -292,6 +365,14 @@ public class ServiceRegistry {
      * it is deregistered from a category or when the registry is
      * finalized.
      *
+     * <p>
+     *  将服务提供程序对象添加到注册表。提供程序在实现其<code> Class </code>的注册表中的每个类别中相关联。
+     * 
+     *  <p>如果<code> provider </code>实现<code> RegisterableService </code>接口,它的<code> onRegistration </code>方法
+     * 将被调用一次。
+     * 它的<code> onDegistration </code>方法将在每次从类别中注销或在注册表完成时被调用。
+     * 
+     * 
      * @param provider the service provider object to be registered.
      *
      * @exception IllegalArgumentException if
@@ -322,6 +403,14 @@ public class ServiceRegistry {
      * it is deregistered from a category or when the registry is
      * finalized.
      *
+     * <p>
+     *  添加一组服务提供程序对象,取自<code> Iterator </code>到注册表。每个提供者在其实现的<code> Class </code>的注册表中存在的每个类别内相关联。
+     * 
+     *  <p>对于实现<code> RegisterableService </code>接口的<code> providers </code>的每个条目,其<code> onRegistration </code>
+     * 方法将为其注册的每个类别调用一次。
+     * 它的<code> onDegistration </code>方法将在每次从类别中注销或在注册表完成时被调用。
+     * 
+     * 
      * @param providers an Iterator containing service provider
      * objects to be registered.
      *
@@ -350,6 +439,14 @@ public class ServiceRegistry {
      * <code>RegisterableService</code> interface, its
      * <code>onDeregistration</code> method will be called.
      *
+     * <p>
+     * 从给定类别中删除服务提供程序对象。如果提供程序以前未注册,则不会发生任何操作,并返回<code> false </code>。否则,返回<code> true </code>。
+     * 如果注册与<code> provider </code>相同类但不等于(使用<code> == </code>)到<code> provider </code>的对象,则不会注销。
+     * 
+     *  <p>如果<code> provider </code>实现<code> RegisterableService </code>接口,则会调用<code> onDeregistration </code>
+     * 方法。
+     * 
+     * 
      * @param provider the service provider object to be deregistered.
      * @param category the category from which to deregister the
      * provider.
@@ -385,6 +482,10 @@ public class ServiceRegistry {
      * Removes a service provider object from all categories that
      * contain it.
      *
+     * <p>
+     *  从包含它的所有类别中删除服务提供程序对象。
+     * 
+     * 
      * @param provider the service provider object to be deregistered.
      *
      * @exception IllegalArgumentException if <code>provider</code> is
@@ -405,6 +506,10 @@ public class ServiceRegistry {
      * Returns <code>true</code> if <code>provider</code> is currently
      * registered.
      *
+     * <p>
+     *  如果<code>提供程序</code>当前已注册,则返回<code> true </code>。
+     * 
+     * 
      * @param provider the service provider object to be queried.
      *
      * @return <code>true</code> if the given provider has been
@@ -438,6 +543,12 @@ public class ServiceRegistry {
      * orderings contains cycles, any providers that belong to a cycle
      * will not be returned.
      *
+     * <p>
+     *  返回包含给定类别中所有注册服务提供商的<code>迭代器</code>。
+     * 如果<code> useOrdering </code>是<code> false </code>,则迭代器将以任意顺序返回所有服务器提供程序对象。否则,排序将遵守已设置的任何成对顺序。
+     * 如果成对排序的图包含循环,则不会返回属于循环的任何提供程序。
+     * 
+     * 
      * @param category the category to be retrieved from.
      * @param useOrdering <code>true</code> if pairwise orderings
      * should be taken account in ordering the returned objects.
@@ -466,6 +577,13 @@ public class ServiceRegistry {
      * of the <code>getServiceProviders</code> method of
      * <code>ServiceRegistry</code> that takes a <code>Filter</code>.
      *
+     * <p>
+     *  由<code> ServiceRegistry.getServiceProviders </code>使用的简单过滤器接口来选择与任意条件匹配的提供程序。
+     * 应该定义实现此接口的类,以便利用<code> ServiceRegistry </code>的<code> getServiceProviders </code>方法,该方法需要一个<code> Fil
+     * ter </code>。
+     *  由<code> ServiceRegistry.getServiceProviders </code>使用的简单过滤器接口来选择与任意条件匹配的提供程序。
+     * 
+     * 
      * @see ServiceRegistry#getServiceProviders(Class, ServiceRegistry.Filter, boolean)
      */
     public interface Filter {
@@ -475,6 +593,10 @@ public class ServiceRegistry {
          * <code>provider</code> object matches the criterion defined
          * by this <code>Filter</code>.
          *
+         * <p>
+         * 如果给定的<code> provider </code>对象符合此<code> Filter </code>定义的条件,则返回<code> true </code>。
+         * 
+         * 
          * @param provider a service provider <code>Object</code>.
          *
          * @return true if the provider matches the criterion.
@@ -492,6 +614,13 @@ public class ServiceRegistry {
      * ordering of the results using the same rules as
      * <code>getServiceProviders(Class, boolean)</code>.
      *
+     * <p>
+     *  返回一个包含给定类别中的服务提供程序对象的<code> Iterator </code>,它们满足由<code> ServiceRegistry.Filter </code>对象的<code> fil
+     * ter </code>方法强加的标准。
+     * 
+     *  <p> <code> useOrdering </code>参数使用与<code> getServiceProviders(Class,boolean)</code>相同的规则控制结果的排序。
+     * 
+     * 
      * @param category the category to be retrieved from.
      * @param filter an instance of <code>ServiceRegistry.Filter</code>
      * whose <code>filter</code> method will be invoked.
@@ -523,6 +652,10 @@ public class ServiceRegistry {
      * registered object has the desired class type, <code>null</code>
      * is returned.
      *
+     * <p>
+     *  返回当前注册的属于给定类类型的服务提供程序对象。允许给定类的至多一个对象在任何给定时间被注册。如果没有注册对象具有所需的类类型,则返回<code> null </code>。
+     * 
+     * 
      * @param providerClass the <code>Class</code> of the desired
      * service provider object.
      * @param <T> the type of the provider.
@@ -565,6 +698,13 @@ public class ServiceRegistry {
      * <code>getServiceProviders</code> methods when their
      * <code>useOrdering</code> argument is <code>true</code>.
      *
+     * <p>
+     *  在给定类别中的两个服务提供程序对象之间设置成对顺序。如果一个或两个对象当前未在给定类别中注册,或者如果期望的排序已经设置,则什么都不发生,并且返回<code> false </code>。
+     * 如果提供商以前是按相反方向排序的,那么该排序将被删除。
+     * 
+     *  <p>当<code> useOrdering </code>参数为<code> true </code>时,<code> getServiceProviders </code>方法将使用该顺序。
+     * 
+     * 
      * @param category a <code>Class</code> object indicating the
      * category under which the preference is to be established.
      * @param firstProvider the preferred provider.
@@ -611,6 +751,12 @@ public class ServiceRegistry {
      * <code>getServiceProviders</code> methods when their
      * <code>useOrdering</code> argument is <code>true</code>.
      *
+     * <p>
+     * 在给定类别中的两个服务提供程序对象之间设置成对顺序。如果一个或两个对象当前未在给定类别中注册,或者当前未在它们之间设置排序,则不发生任何事情,并返回<code> false </code>。
+     * 
+     *  <p>当<code> useOrdering </code>参数为<code> true </code>时,<code> getServiceProviders </code>方法将使用该顺序。
+     * 
+     * 
      * @param category a <code>Class</code> object indicating the
      * category under which the preference is to be disestablished.
      * @param firstProvider the formerly preferred provider.
@@ -650,6 +796,10 @@ public class ServiceRegistry {
      * Deregisters all service provider object currently registered
      * under the given category.
      *
+     * <p>
+     *  取消注册当前在给定类别下注册的所有服务提供程序对象。
+     * 
+     * 
      * @param category the category to be emptied.
      *
      * @exception IllegalArgumentException if there is no category
@@ -666,6 +816,9 @@ public class ServiceRegistry {
     /**
      * Deregisters all currently registered service providers from all
      * categories.
+     * <p>
+     *  取消注册所有类别的所有当前注册的服务提供商。
+     * 
      */
     public void deregisterAll() {
         Iterator iter = categoryMap.values().iterator();
@@ -681,6 +834,10 @@ public class ServiceRegistry {
      * currently registered service providers.  This method should not
      * be called from application code.
      *
+     * <p>
+     *  在垃圾收集之前完成此对象。调用<code> deregisterAll </code>方法注销所有当前注册的服务提供程序。不应该从应用程序代码调用此方法。
+     * 
+     * 
      * @exception Throwable if an error occurs during superclass
      * finalization.
      */
@@ -694,6 +851,9 @@ public class ServiceRegistry {
 /**
  * A portion of a registry dealing with a single superclass or
  * interface.
+ * <p>
+ *  处理单个超类或接口的注册表的一部分。
+ * 
  */
 class SubRegistry {
 
@@ -732,6 +892,10 @@ class SubRegistry {
     /**
      * If the provider was not previously registered, do nothing.
      *
+     * <p>
+     *  如果提供者以前没有注册,则什么也不做。
+     * 
+     * 
      * @return true if the provider was previously registered.
      */
     public boolean deregisterServiceProvider(Object provider) {
@@ -800,6 +964,8 @@ class SubRegistry {
 /**
  * A class for wrapping <code>Iterators</code> with a filter function.
  * This provides an iterator for a subset without duplication.
+ * <p>
+ *  用于包装带有过滤器功能的<code>迭代器</code>的类。这为不具有重复的子集提供了迭代器。
  */
 class FilterIterator<T> implements Iterator<T> {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -17,6 +18,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")将此文件授予您;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dtd;
@@ -31,6 +40,12 @@ import com.sun.org.apache.xerces.internal.xni.XNIException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  <p>产生平衡语法树的DTD语法。</p>
+ * 
+ *  @ xerces.internal
+ * 
+ * 
  * @author Michael Glavassevich, IBM
  * @version $Id: BalancedDTDGrammar.java,v 1.1 2010/08/11 07:18:38 joehw Exp $
  */
@@ -73,6 +88,10 @@ final class BalancedDTDGrammar extends DTDGrammar {
      * model, specific methods may be called between the call to the
      * startContentModel method and the call to the endContentModel method.
      *
+     * <p>
+     *  内容模型的开始。根据内容模型的类型,可以在调用startContentModel方法和调用endContentModel方法之间调用特定方法。
+     * 
+     * 
      * @param elementName The name of the element.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -91,6 +110,10 @@ final class BalancedDTDGrammar extends DTDGrammar {
      * <code>pcdata()</code> method. A children content model will
      * contain additional groups and/or elements.
      *
+     * <p>
+     *  混合或儿童内容模型的开始。混合内容模型将立即调用<code> pcdata()</code>方法。子内容模型将包含其他组和/或元素。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -109,6 +132,10 @@ final class BalancedDTDGrammar extends DTDGrammar {
      * mixed content model. This method will be the first called
      * following the content model's <code>startGroup()</code>.
      *
+     * <p>
+     * 表示混合内容模型的组中的"#PCDATA"的外观。这个方法将首先被调用遵循内容模型的<code> startGroup()</code>。
+     * 
+     * 
      *@param augs Additional information that may include infoset
      *                      augmentations.
      *
@@ -123,6 +150,10 @@ final class BalancedDTDGrammar extends DTDGrammar {
     /**
      * A referenced element in a mixed or children content model.
      *
+     * <p>
+     *  混合或子内容模型中引用的元素。
+     * 
+     * 
      * @param elementName The name of the referenced element.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -137,6 +168,10 @@ final class BalancedDTDGrammar extends DTDGrammar {
      * The separator between choices or sequences of a mixed or children
      * content model.
      *
+     * <p>
+     *  混合或子内容模型的选择或序列之间的分隔符。
+     * 
+     * 
      * @param separator The type of children separator.
      * @param augs Additional information that may include infoset
      *                      augmentations.
@@ -158,6 +193,10 @@ final class BalancedDTDGrammar extends DTDGrammar {
      * The occurrence count for a child in a children content model or
      * for the mixed content model group.
      *
+     * <p>
+     *  子内容模型中的子级或混合内容模型组的子级的发生计数。
+     * 
+     * 
      * @param occurrence The occurrence count for the last element
      *                   or group.
      * @param augs Additional information that may include infoset
@@ -186,6 +225,10 @@ final class BalancedDTDGrammar extends DTDGrammar {
     /**
      * The end of a group for mixed or children content models.
      *
+     * <p>
+     *  一个组的结尾的混合或儿童内容模型。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -200,6 +243,10 @@ final class BalancedDTDGrammar extends DTDGrammar {
     /**
      * The end of the DTD.
      *
+     * <p>
+     *  DTD的结束。
+     * 
+     * 
      * @param augs Additional information that may include infoset
      *                      augmentations.
      * @throws XNIException Thrown by handler to signal an error.
@@ -217,6 +264,9 @@ final class BalancedDTDGrammar extends DTDGrammar {
 
     /**
      * Adds the content spec to the given element declaration.
+     * <p>
+     *  将内容规范添加到给定元素声明。
+     * 
      */
     protected final void addContentSpecToElement(XMLElementDecl elementDecl) {
         int contentSpec = fGroupIndexStackSizes[0] > 0 ? fGroupIndexStack[0][0] : -1;
@@ -229,6 +279,9 @@ final class BalancedDTDGrammar extends DTDGrammar {
 
     /**
      * Creates a subtree from the leaf nodes at the current depth.
+     * <p>
+     *  从当前深度的叶节点创建子树。
+     * 
      */
     private int addContentSpecNodes(int begin, int end) {
         if (begin == end) {
@@ -242,6 +295,9 @@ final class BalancedDTDGrammar extends DTDGrammar {
 
     /**
      * Initialize the stacks which temporarily hold content models.
+     * <p>
+     *  初始化临时保存内容模型的堆栈。
+     * 
      */
     private void initializeContentModelStacks() {
         if (fOpStack == null) {
@@ -267,6 +323,9 @@ final class BalancedDTDGrammar extends DTDGrammar {
     /**
      * Add XMLContentSpec to the current group.
      *
+     * <p>
+     *  将XMLContentSpec添加到当前组。
+     * 
      * @param contentSpec handle to the XMLContentSpec to add to the current group
      */
     private void addToCurrentGroup(int contentSpec) {

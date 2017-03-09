@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2010, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,23 @@ import static javax.lang.model.SourceVersion.*;
  * to run on Java SE 8 and later may take advantage of default methods
  * in this situation.
  *
+ * <p>
+ *  基于其{@linkplain ElementKind kind}的程序元素的访问者,其默认行为适用于{@link SourceVersion#RELEASE_7 RELEASE_7}源版本。
+ * 对于可能有多种类型的{@linkplain Element elements} <tt> <i> XYZ </i> </tt>,<tt>访问<i> XYZ </i> </tt>类委托给<tt>访问对应于
+ * 第一个参数种类的<i> XYZKind </i> </tt>方法。
+ *  基于其{@linkplain ElementKind kind}的程序元素的访问者,其默认行为适用于{@link SourceVersion#RELEASE_7 RELEASE_7}源版本。
+ *  <tt>访问<z> XYZKind </i> </tt>方法调用{@link #defaultAction defaultAction},将其参数传递给{@code defaultAction}的相应
+ * 参数。
+ *  基于其{@linkplain ElementKind kind}的程序元素的访问者,其默认行为适用于{@link SourceVersion#RELEASE_7 RELEASE_7}源版本。
+ * 
+ *  <p>此类别中的方法可能会根据其总合同被覆盖。注意,在具体子类中使用{@link java.lang.Override @Override}注释方法将有助于确保方法按预期被覆盖。
+ * 
+ * <p> <b>警告：</b>此类别实施的{@code ElementVisitor}界面可能已添加了方法,或者在此情况下使用的{@code ElementKind} {@code枚举}它在未来适应新的,
+ * 目前未知的语言结构添加到未来版本的Java&贸易;编程语言。
+ * 因此,名称以{@code"visit"}开头的方法可能会在将来添加到此类中;为避免不兼容性,扩展此类的类不应声明任何名称以{@code"visit"}开头的实例方法。
+ * 
+ *  <p>添加这种新的访问方法时,此类中的默认实现将是调用{@link #visitUnknown visitUnknown}方法。
+ * 
  * @param <R> the return type of this visitor's methods.  Use {@link
  *            Void} for visitors that do not need to return results.
  * @param <P> the type of the additional parameter to this visitor's
@@ -89,6 +107,13 @@ public class ElementKindVisitor7<R, P> extends ElementKindVisitor6<R, P> {
     /**
      * Constructor for concrete subclasses; uses {@code null} for the
      * default value.
+     * <p>
+     * 还将引入新的抽象元素类访问类来对应于新的语言级别;此访问者将对所讨论的访问方法具有不同的默认行为。当新访问者被引入时,该访问者的全部或部分可能被弃用。
+     * 
+     *  <p>请注意,在访问者类中添加一个新访问方法的默认实现,而不是直接在访问者界面中添加<em>默认方法</em>,因为Java SE 8语言功能不能用于此版本的API,因为此版本需要在Java SE 7
+     * 实现上运行。
+     * 仅需要在Java SE 8和更高版本上运行的API的未来版本可以在这种情况下利用默认方法。
+     * 
      */
     protected ElementKindVisitor7() {
         super(null);
@@ -98,6 +123,10 @@ public class ElementKindVisitor7<R, P> extends ElementKindVisitor6<R, P> {
      * Constructor for concrete subclasses; uses the argument for the
      * default value.
      *
+     * <p>
+     * 具体子类的构造函数;使用{@code null}作为默认值。
+     * 
+     * 
      * @param defaultValue the value to assign to {@link #DEFAULT_VALUE}
      */
     protected ElementKindVisitor7(R defaultValue) {
@@ -108,6 +137,10 @@ public class ElementKindVisitor7<R, P> extends ElementKindVisitor6<R, P> {
      * Visits a {@code RESOURCE_VARIABLE} variable element by calling
      * {@code defaultAction}.
      *
+     * <p>
+     *  具体子类的构造函数;使用该参数作为默认值。
+     * 
+     * 
      * @param e {@inheritDoc}
      * @param p {@inheritDoc}
      * @return  the result of {@code defaultAction}

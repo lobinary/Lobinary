@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -12,6 +13,8 @@ package org.omg.DynamicAny;
 /**
     * DynStruct objects support the manipulation of IDL struct and exception values.
     * Members of the exceptions are handled in the same way as members of a struct.
+    * <p>
+    * 
     */
 public interface DynStruct extends DynStructOperations, org.omg.DynamicAny.DynAny, org.omg.CORBA.portable.IDLEntity 
 {

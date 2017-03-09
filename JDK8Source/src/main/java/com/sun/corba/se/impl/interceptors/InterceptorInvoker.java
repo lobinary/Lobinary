@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,10 @@ import com.sun.corba.se.impl.orbutil.ORBUtility;
  * Makes use of the InterceptorList to retrieve the list of interceptors to
  * be invoked.  Most methods in this class are package scope so that they
  * may only be called from the PIHandlerImpl.
+ * <p>
+ *  处理拦截器的调用。具有如何调用IOR,ClientRequest和ServerRequest拦截器的特定知识。使用InterceptorList来检索要调用的拦截器列表。
+ * 此类中的大多数方法都是包范围,因此它们只能从PIHandlerImpl中调用。
+ * 
  */
 public class InterceptorInvoker {
 
@@ -78,6 +83,9 @@ public class InterceptorInvoker {
      * Creates a new Interceptor Invoker.  Constructor is package scope so
      * only the ORB can create it.  The invoker is initially disabled, and
      * must be explicitly enabled using setEnabled().
+     * <p>
+     *  创建一个新的Interceptor Invoker。构造函数是包范围,因此只有ORB可以创建它。调用者最初被禁用,并且必须使用setEnabled()显式地启用。
+     * 
      */
     InterceptorInvoker( ORB orb, InterceptorList interceptorList,
                         PICurrent piCurrent )
@@ -90,6 +98,9 @@ public class InterceptorInvoker {
 
     /**
      * Enables or disables the interceptor invoker
+     * <p>
+     *  启用或禁用拦截器调用者
+     * 
      */
     void setEnabled( boolean enabled ) {
         this.enabled = enabled;
@@ -98,11 +109,19 @@ public class InterceptorInvoker {
     /*
      **********************************************************************
      * IOR Interceptor invocation
+     * <p>
+     *  **************************************************** ****************** IOR拦截器调用
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Called when a new POA is created.
      *
+     * <p>
+     *  创建新POA时调用。
+     * 
+     * 
      * @param oa The Object Adapter associated with the IOR interceptor.
      */
     void objectAdapterCreated( ObjectAdapter oa ) {
@@ -205,11 +224,18 @@ public class InterceptorInvoker {
     /*
      **********************************************************************
      * Client Interceptor invocation
+     * <p>
+     *  **************************************************** ******************客户端拦截器调用
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Invokes either send_request, or send_poll, depending on the value
      * of info.getStartingPointCall()
+     * <p>
+     *  调用send_request或send_poll,具体取决于info.getStartingPointCall()的值,
+     * 
      */
     void invokeClientInterceptorStartingPoint( ClientRequestInfoImpl info ) {
         // If invocation is not yet enabled, don't do anything.
@@ -311,6 +337,9 @@ public class InterceptorInvoker {
     /**
      * Invokes either receive_reply, receive_exception, or receive_other,
      * depending on the value of info.getEndingPointCall()
+     * <p>
+     *  调用receive_reply,receive_exception或receive_other,具体取决于info.getEndingPointCall()的值,
+     * 
      */
     void invokeClientInterceptorEndingPoint( ClientRequestInfoImpl info ) {
         // If invocation is not yet enabled, don't do anything.
@@ -401,10 +430,17 @@ public class InterceptorInvoker {
     /*
      **********************************************************************
      * Server Interceptor invocation
+     * <p>
+     *  **************************************************** ******************服务器拦截器调用
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Invokes receive_request_service_context interception points.
+     * <p>
+     *  调用receive_request_service_context拦截点。
+     * 
      */
     void invokeServerInterceptorStartingPoint( ServerRequestInfoImpl info ) {
         // If invocation is not yet enabled, don't do anything.
@@ -498,6 +534,9 @@ public class InterceptorInvoker {
 
     /**
      * Invokes receive_request interception points
+     * <p>
+     *  调用receive_request拦截点
+     * 
      */
     void invokeServerInterceptorIntermediatePoint(
         ServerRequestInfoImpl info )
@@ -557,6 +596,9 @@ public class InterceptorInvoker {
     /**
      * Invokes either send_reply, send_exception, or send_other,
      * depending on the value of info.getEndingPointCall()
+     * <p>
+     *  调用send_reply,send_exception或send_other,具体取决于info.getEndingPointCall()的值,
+     * 
      */
     void invokeServerInterceptorEndingPoint( ServerRequestInfoImpl info ) {
         // If invocation is not yet enabled, don't do anything.
@@ -635,11 +677,17 @@ public class InterceptorInvoker {
     /*
      **********************************************************************
      * Private utility methods
+     * <p>
+     * **************************************************** ******************私有实用方法
+     * 
+     * 
      **********************************************************************/
 
     /**
      * Update the client delegate in the event of a ForwardRequest, given the
      * information in the passed-in info object.
+     * <p>
+     *  在ForwardRequest的情况下更新客户端委托,给定传入的info对象中的信息。
      */
     private void updateClientRequestDispatcherForward(
         ClientRequestInfoImpl info )

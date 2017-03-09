@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -29,6 +30,10 @@ package java.io;
  * This class implements a character buffer that can be used as a
  * character-input stream.
  *
+ * <p>
+ *  这个类实现了一个字符缓冲区,可以用作字符输入流。
+ * 
+ * 
  * @author      Herb Jellinek
  * @since       JDK1.1
  */
@@ -45,11 +50,18 @@ public class CharArrayReader extends Reader {
     /**
      *  The index of the end of this buffer.  There is not valid
      *  data at or beyond this index.
+     * <p>
+     *  此缓冲区的结尾的索引。在该索引处或以外没有有效数据。
+     * 
      */
     protected int count;
 
     /**
      * Creates a CharArrayReader from the specified array of chars.
+     * <p>
+     *  从指定的字符数组中创建CharArrayReader。
+     * 
+     * 
      * @param buf       Input buffer (not copied)
      */
     public CharArrayReader(char buf[]) {
@@ -66,6 +78,13 @@ public class CharArrayReader extends Reader {
      * read from this reader will be either <tt>length</tt> or
      * <tt>buf.length-offset</tt>, whichever is smaller.
      *
+     * <p>
+     *  从指定的字符数组中创建CharArrayReader。
+     * 
+     *  <p>结果阅读器将从给定的<tt>偏移量</tt>开始读取。
+     * 可从此读取器读取的<tt> char </tt>值的总数将为<tt>长度</tt>或<tt> buf.length-offset </tt>(以较小者为准)。
+     * 
+     * 
      * @throws IllegalArgumentException
      *         If <tt>offset</tt> is negative or greater than
      *         <tt>buf.length</tt>, or if <tt>length</tt> is negative, or if
@@ -95,6 +114,10 @@ public class CharArrayReader extends Reader {
     /**
      * Reads a single character.
      *
+     * <p>
+     *  读取单个字符。
+     * 
+     * 
      * @exception   IOException  If an I/O error occurs
      */
     public int read() throws IOException {
@@ -109,6 +132,10 @@ public class CharArrayReader extends Reader {
 
     /**
      * Reads characters into a portion of an array.
+     * <p>
+     *  将字符读入数组的一部分。
+     * 
+     * 
      * @param b  Destination buffer
      * @param off  Offset at which to start storing characters
      * @param len   Maximum number of characters to read
@@ -150,6 +177,13 @@ public class CharArrayReader extends Reader {
      * an exception in this case. If <code>n</code> is negative, then
      * this method does nothing and returns <code>0</code>.
      *
+     * <p>
+     *  跳过字符。返回被跳过的字符数。
+     * 
+     *  <p> <code> n </code>参数可能为负值,即使{@link Reader}超类的<code> skip </code>方法在此情况下抛出异常。
+     * 如果<code> n </code>为负,则此方法不执行任何操作,并返回<code> 0 </code>。
+     * 
+     * 
      * @param n The number of characters to skip
      * @return       The number of characters actually skipped
      * @exception  IOException If the stream is closed, or an I/O error occurs
@@ -172,6 +206,10 @@ public class CharArrayReader extends Reader {
      * Tells whether this stream is ready to be read.  Character-array readers
      * are always ready to be read.
      *
+     * <p>
+     *  告诉这个流是否准备好被读取。字符数组读取器总是可以读取。
+     * 
+     * 
      * @exception  IOException  If an I/O error occurs
      */
     public boolean ready() throws IOException {
@@ -183,6 +221,9 @@ public class CharArrayReader extends Reader {
 
     /**
      * Tells whether this stream supports the mark() operation, which it does.
+     * <p>
+     *  告诉这个流是否支持它所做的mark()操作。
+     * 
      */
     public boolean markSupported() {
         return true;
@@ -192,6 +233,10 @@ public class CharArrayReader extends Reader {
      * Marks the present position in the stream.  Subsequent calls to reset()
      * will reposition the stream to this point.
      *
+     * <p>
+     *  标记流中的当前位置。随后调用reset()将重新定位流到这一点。
+     * 
+     * 
      * @param  readAheadLimit  Limit on the number of characters that may be
      *                         read while still preserving the mark.  Because
      *                         the stream's input comes from a character array,
@@ -211,6 +256,10 @@ public class CharArrayReader extends Reader {
      * Resets the stream to the most recent mark, or to the beginning if it has
      * never been marked.
      *
+     * <p>
+     *  将流重置为最近的标记,如果尚未标记,则将流重置为开始。
+     * 
+     * 
      * @exception  IOException  If an I/O error occurs
      */
     public void reset() throws IOException {
@@ -225,6 +274,8 @@ public class CharArrayReader extends Reader {
      * it.  Once the stream has been closed, further read(), ready(),
      * mark(), reset(), or skip() invocations will throw an IOException.
      * Closing a previously closed stream has no effect.
+     * <p>
+     * 关闭流并释放与其关联的任何系统资源。一旦流被关闭,进一步的read(),ready(),mark(),reset()或skip()调用将抛出IOException。关闭先前关闭的流没有任何效果。
      */
     public void close() {
         buf = null;

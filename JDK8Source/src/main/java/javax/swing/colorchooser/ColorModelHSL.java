@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,10 @@ final class ColorModelHSL extends ColorModel {
     /**
      * Converts HSL components of a color to a set of RGB components.
      *
+     * <p>
+     *  将颜色的HSL组件转换为一组RGB组件。
+     * 
+     * 
      * @param hsl  a float array with length equal to
      *             the number of HSL components
      * @param rgb  a float array with length of at least 3
@@ -91,6 +96,10 @@ final class ColorModelHSL extends ColorModel {
     /**
      * Converts RGB components of a color to a set of HSL components.
      *
+     * <p>
+     *  将颜色的RGB分量转换为一组HSL分量。
+     * 
+     * 
      * @param rgb  a float array with length of at least 3
      *             that contains RGB components of a color
      * @param hsl  a float array with length equal to
@@ -120,6 +129,10 @@ final class ColorModelHSL extends ColorModel {
     /**
      * Returns the smaller of three color components.
      *
+     * <p>
+     *  返回三个颜色分量中较小的一个。
+     * 
+     * 
      * @param red    the red component of the color
      * @param green  the green component of the color
      * @param blue   the blue component of the color
@@ -133,6 +146,10 @@ final class ColorModelHSL extends ColorModel {
     /**
      * Returns the larger of three color components.
      *
+     * <p>
+     *  返回三个颜色分量中较大的一个。
+     * 
+     * 
      * @param red    the red component of the color
      * @param green  the green component of the color
      * @param blue   the blue component of the color
@@ -146,6 +163,9 @@ final class ColorModelHSL extends ColorModel {
     /**
      * Calculates the hue component for HSL and HSV color spaces.
      *
+     * <p>
+     *  计算HSL和HSV色彩空间的色调分量。
+     * 
      * @param red    the red component of the color
      * @param green  the green component of the color
      * @param blue   the blue component of the color

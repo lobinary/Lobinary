@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.io;
@@ -168,6 +172,10 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
 
     /**
      * Writes the value to the stream using java semantics.
+     * <p>
+     *  使用java语义将值写入流。
+     * 
+     * 
      * @param out The stream to write the value to
      * @param value The value to be written to the stream
      **/
@@ -238,6 +246,10 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
 
     /**
      * Reads a value from the stream using java semantics.
+     * <p>
+     *  使用java语义从流读取值。
+     * 
+     * 
      * @param in The stream to read the value from
      * @param clazz The type of the value to be read in
      * @param sender The sending context runtime
@@ -346,6 +358,10 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
 
     /**
      * Returns the repository ID for the given RMI value Class.
+     * <p>
+     *  返回给定RMI值类的存储库ID。
+     * 
+     * 
      * @param clz The class to return a repository ID for.
      * @return the repository ID of the Class.
      **/
@@ -356,6 +372,10 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
     /**
      * Indicates whether the given Class performs custom or
      * default marshaling.
+     * <p>
+     *  指示给定类是否执行自定义或默认编组。
+     * 
+     * 
      * @param clz The class to test for custom marshaling.
      * @return True if the class performs custom marshaling, false
      * if it does not.
@@ -369,6 +389,10 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
      * the ORB runtime.  The server sends the service context containing
      * the IOR for this CodeBase on the first GIOP reply.  The clients
      * do the same on the first GIOP request.
+     * <p>
+     *  返回此ValueHandler的CodeBase。这由ORB运行时使用。服务器在第一GIOP答复中发送包含该CodeBase的IOR的服务上下文。客户端在第一个GIOP请求上执行相同的操作。
+     * 
+     * 
      * @return the SendingContext.CodeBase of this ValueHandler.
      **/
     public org.omg.SendingContext.RunTime getRunTimeCodeBase() {
@@ -394,6 +418,9 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
      *  Returns a boolean of whether or not RepositoryId indicates
      *  FullValueDescriptor.
      *  used for backward compatability
+     * <p>
+     *  返回一个布尔值,表示RepositoryId是否指示FullValueDescriptor。用于向后兼容
+     * 
      */
 
      public boolean useFullValueDescription(Class clazz, String repositoryID)
@@ -460,6 +487,10 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
     /**
      * If the value contains a writeReplace method then the result
      * is returned.  Otherwise, the value itself is returned.
+     * <p>
+     *  如果值包含writeReplace方法,则返回结果。否则,将返回值本身。
+     * 
+     * 
      * @return the true value to marshal on the wire.
      **/
     public java.io.Serializable writeReplace(java.io.Serializable value) {
@@ -818,6 +849,9 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
     /**
      * Construct a built in implementation with priveleges.
      * Returning null indicates a non-built is specified.
+     * <p>
+     *  使用priveleges构建内置实现。返回null表示指定了非构建。
+     * 
      */
     private IIOPOutputStream createOutputStreamBuiltIn(
         final String name
@@ -837,6 +871,9 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
 
     /**
      * Returning null indicates a non-built is specified.
+     * <p>
+     *  返回null表示指定了非构建。
+     * 
      */
     private IIOPOutputStream createOutputStreamBuiltInNoPriv(
         final String name
@@ -870,6 +907,9 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
     /**
      * Construct a built in implementation with priveleges.
      * Returning null indicates a non-built is specified.
+     * <p>
+     *  使用priveleges构建内置实现。返回null表示指定了非构建。
+     * 
      */
      private IIOPInputStream createInputStreamBuiltIn(
          final String name
@@ -889,6 +929,9 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
 
      /**
       * Returning null indicates a non-built is specified.
+      * <p>
+      *  返回null表示指定了非构建。
+      * 
       */
      private IIOPInputStream createInputStreamBuiltInNoPriv(
          final String name
@@ -899,6 +942,8 @@ public final class ValueHandlerImpl implements javax.rmi.CORBA.ValueHandlerMulti
 
      /**
       * Create a custom implementation without privileges.
+      * <p>
+      *  创建没有权限的自定义实现。
       */
      private <T> T createCustom(
          final Class<T> type, final String className

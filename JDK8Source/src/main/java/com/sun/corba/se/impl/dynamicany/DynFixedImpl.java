@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -65,6 +66,9 @@ public class DynFixedImpl extends DynAnyBasicImpl implements DynFixed
     public int component_count() {
         return 0;
     }
+/* <p>
+/*  public int component_count(){return 0; }}
+/* 
 */
     //
     // DynFixed interface methods
@@ -179,6 +183,8 @@ public class DynFixedImpl extends DynAnyBasicImpl implements DynFixed
         if (currentScale > scale) {
             throw new InvalidValue("Scale exceeds " + scale);
         }
+/* <p>
+/*  if(currentScale> scale){throw new InvalidValue("Scale exceed"+ scale); }}
 */
         // Now check whether both parts are valid numbers
         BigDecimal result;

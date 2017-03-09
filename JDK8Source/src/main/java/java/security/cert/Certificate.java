@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,14 @@ import sun.security.x509.X509CertImpl;
  * sets of information, and they store and retrieve the information in
  * different ways.
  *
+ * <p>
+ *  <p>用于管理各种身份证书的抽象类。身份证书是主体与由另一主体支持的公钥的绑定。 (主体表示诸如个人用户,群组或公司的实体。)
+ * p>
+ *  此类是具有不同格式但重要的常见用途的证书的抽象。例如,不同类型的证书(例如X.509和PGP)共享通用证书功能(如编码和验证)和某些类型的信息(如公钥)。
+ * <p>
+ *  X.509,PGP和SDSI证书都可以通过子类化证书类实现,即使它们包含不同的信息集合,它们以不同的方式存储和检索信息。
+ * 
+ * 
  * @see X509Certificate
  * @see CertificateFactory
  *
@@ -72,6 +81,10 @@ public abstract class Certificate implements java.io.Serializable {
     /**
      * Creates a certificate of the specified type.
      *
+     * <p>
+     *  创建指定类型的证书。
+     * 
+     * 
      * @param type the standard name of the certificate type.
      * See the CertificateFactory section in the <a href=
      * "{@docRoot}/../technotes/guides/security/StandardNames.html#CertificateFactory">
@@ -85,6 +98,10 @@ public abstract class Certificate implements java.io.Serializable {
     /**
      * Returns the type of this certificate.
      *
+     * <p>
+     *  返回此证书的类型。
+     * 
+     * 
      * @return the type of this certificate.
      */
     public final String getType() {
@@ -98,6 +115,11 @@ public abstract class Certificate implements java.io.Serializable {
      * its encoded form is retrieved and compared with the
      * encoded form of this certificate.
      *
+     * <p>
+     *  将此证书与指定对象的等同性进行比较。
+     * 如果{@code other}对象是{@code instanceof} {@code Certificate},则会检索其编码形式,并与此证书的编码形式进行比较。
+     * 
+     * 
      * @param other the object to test for equality with this certificate.
      * @return true iff the encoded forms of the two certificates
      * match, false otherwise.
@@ -123,6 +145,10 @@ public abstract class Certificate implements java.io.Serializable {
      * Returns a hashcode value for this certificate from its
      * encoded form.
      *
+     * <p>
+     *  从其编码形式返回此证书的哈希码值。
+     * 
+     * 
      * @return the hashcode value.
      */
     public int hashCode() {
@@ -144,6 +170,10 @@ public abstract class Certificate implements java.io.Serializable {
      * form of encoding; for example, X.509 certificates would
      * be encoded as ASN.1 DER.
      *
+     * <p>
+     * 返回此证书的编码形式。假设每个证书类型只有一种形式的编码;例如,X.509证书将被编码为ASN.1 DER。
+     * 
+     * 
      * @return the encoded form of this certificate
      *
      * @exception CertificateEncodingException if an encoding error occurs.
@@ -155,6 +185,10 @@ public abstract class Certificate implements java.io.Serializable {
      * Verifies that this certificate was signed using the
      * private key that corresponds to the specified public key.
      *
+     * <p>
+     *  验证此证书是否使用与指定的公钥相对应的私钥进行签名。
+     * 
+     * 
      * @param key the PublicKey used to carry out the verification.
      *
      * @exception NoSuchAlgorithmException on unsupported signature
@@ -175,6 +209,10 @@ public abstract class Certificate implements java.io.Serializable {
      * This method uses the signature verification engine
      * supplied by the specified provider.
      *
+     * <p>
+     *  验证此证书是否使用与指定的公钥相对应的私钥进行签名。此方法使用由指定提供程序提供的签名验证引擎。
+     * 
+     * 
      * @param key the PublicKey used to carry out the verification.
      * @param sigProvider the name of the signature provider.
      *
@@ -202,6 +240,13 @@ public abstract class Certificate implements java.io.Serializable {
      * existing service providers, this method cannot be {@code abstract}
      * and by default throws an {@code UnsupportedOperationException}.
      *
+     * <p>
+     *  验证此证书是否使用与指定的公钥相对应的私钥进行签名。此方法使用由指定提供程序提供的签名验证引擎。请注意,指定的Provider对象不必在提供程序列表中注册。
+     * 
+     *  <p>此方法已添加到Java Platform Standard Edition的1.8版中。
+     * 为了保持与现有服务提供程序的向后兼容性,此方法不能是{@code abstract},默认情况下会抛出{@code UnsupportedOperationException}。
+     * 
+     * 
      * @param key the PublicKey used to carry out the verification.
      * @param sigProvider the signature provider.
      *
@@ -222,6 +267,10 @@ public abstract class Certificate implements java.io.Serializable {
     /**
      * Returns a string representation of this certificate.
      *
+     * <p>
+     *  返回此证书的字符串表示形式。
+     * 
+     * 
      * @return a string representation of this certificate.
      */
     public abstract String toString();
@@ -229,12 +278,20 @@ public abstract class Certificate implements java.io.Serializable {
     /**
      * Gets the public key from this certificate.
      *
+     * <p>
+     *  从此证书获取公钥。
+     * 
+     * 
      * @return the public key.
      */
     public abstract PublicKey getPublicKey();
 
     /**
      * Alternate Certificate class for serialization.
+     * <p>
+     *  用于序列化的备用证书类。
+     * 
+     * 
      * @since 1.3
      */
     protected static class CertificateRep implements java.io.Serializable {
@@ -250,6 +307,12 @@ public abstract class Certificate implements java.io.Serializable {
          *
          * <p>
          *
+         * <p>
+         *  使用证书类型和证书编码字节构造备用证书类。
+         * 
+         * <p>
+         * 
+         * 
          * @param type the standard name of the Certificate type. <p>
          *
          * @param data the Certificate data.
@@ -264,6 +327,12 @@ public abstract class Certificate implements java.io.Serializable {
          *
          * <p>
          *
+         * <p>
+         *  解析证书对象。
+         * 
+         * <p>
+         * 
+         * 
          * @return the resolved Certificate Object
          *
          * @throws java.io.ObjectStreamException if the Certificate
@@ -287,6 +356,8 @@ public abstract class Certificate implements java.io.Serializable {
     /**
      * Replace the Certificate to be serialized.
      *
+     * <p>
+     * 
      * @return the alternate Certificate object to be serialized
      *
      * @throws java.io.ObjectStreamException if a new object representing

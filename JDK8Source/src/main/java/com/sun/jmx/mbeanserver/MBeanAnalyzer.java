@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,12 @@ import javax.management.NotCompliantMBeanException;
  * visit the attributes and operations of the interface, calling
  * a caller-supplied visitor method for each one.</p>
  *
+ * <p>
+ *  <p>给定MBean接口的分析器。分析仪可以用于标准MBeans或MXBeans,具体取决于在构建时传递的MBeanInspector。
+ * 
+ *  <p>分析器可以访问接口的属性和操作,调用每个接口的调用者提供的访问者方法。</p>
+ * 
+ * 
  * @param <M> Method or ConvertingMethod according as this is a
  * Standard MBean or an MXBean.
  *
@@ -90,6 +97,9 @@ class MBeanAnalyzer<M> {
      * MBeanIntrospector.  Calling this method twice with the same
      * parameters may return the same object or two different but
      * equivalent objects.
+     * <p>
+     *  <p>返回给定MBean接口和MBeanIntrospector的MBeanAnalyzer。使用相同的参数调用此方法两次可能会返回相同的对象或两个不同但等效的对象。
+     * 
      */
     // Currently it's two different but equivalent objects.  This only
     // really impacts proxy generation.  For MBean creation, the
@@ -129,6 +139,8 @@ class MBeanAnalyzer<M> {
         final List<Method> methods = eliminateCovariantMethods(methods1);
 
         /* Run through the methods to detect inconsistencies and to enable
+        /* <p>
+        /* 
            us to give getter and setter together to visitAttribute. */
         for (Method m : methods) {
             final String name = m.getName();
@@ -203,6 +215,12 @@ class MBeanAnalyzer<M> {
      * Integer getFoo(). This makes it possible to determine whether
      * a method overrides another one simply by looking at the method(s)
      * that precedes it in the list. (see eliminateCovariantMethods).
+     * <p>
+     *  比较器,定义总次序,以使方法具有相同的名称和相同的签名出现在彼此旁边。这些方法以这样的方式排序,使得彼此覆盖的方法将彼此相邻,首先是重写的方法。
+     *  Object getFoo()放在Integer getFoo()之前。这使得可以通过查看列表中位于其前面的方法来确定方法是否覆盖另一个方法。
+     *  (请参见eliminationCovariantMethods)。
+     * 
+     * 
      **/
     private static class MethodOrder implements Comparator<Method> {
         public int compare(Method a, Method b) {
@@ -238,6 +256,10 @@ class MBeanAnalyzer<M> {
 
        Because of the way this method works, if the same Method appears
        more than once in the given List then it will be completely deleted!
+    /* <p>
+    /*  反射将返回原始和重写的方法,但只有重要的一个是感兴趣的。我们以他们到达的相同顺序返回方法。这是规范不需要的,但是现有代码可能依赖于它,并且用户可能被用于看到操作或属性以特定顺序出现。
+    /* 
+    /* 
        So don't do that.  */
     static List<Method>
             eliminateCovariantMethods(List<Method> startMethods) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -75,6 +76,8 @@ import com.sun.corba.se.spi.legacy.connection.LegacyServerSocketEndPointInfo;
 // END Legacy support.
 
 /**
+/* <p>
+/* 
  * @author Harold Carr
  */
 public class SocketOrChannelAcceptorImpl
@@ -426,6 +429,8 @@ public class SocketOrChannelAcceptorImpl
     {
         return this.toString();
     }
+    /* <p>
+    /*  public String getName(){return this.toString(); }}
     */
 
     public void doWork()

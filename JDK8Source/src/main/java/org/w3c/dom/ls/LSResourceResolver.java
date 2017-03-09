@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究联合会信息学和数学,庆应大学)。版权所有。这项工作是根据W3C(r)软件许可证[1]分发的,希望它将是有用的,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证。
+ * 
+ *  [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * 
  */
 
 package org.w3c.dom.ls;
@@ -63,6 +71,17 @@ package org.w3c.dom.ls;
  * interface.
  * <p>See also the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'>Document Object Model (DOM) Level 3 Load
 and Save Specification</a>.
+ * <p>
+ * <code> LSResourceResolver </code>为应用程序提供了一种将引用重定向到外部资源的方法。
+ *  <p>需要为外部资源实现自定义处理的应用程序可以实现此接口并通过设置附加到<code> LSParser </code>的<code> DOMConfiguration </code>对象的"reso
+ * urce-resolver"参数来注册其实现, <code> LSSerializer </code>。
+ * <code> LSResourceResolver </code>为应用程序提供了一种将引用重定向到外部资源的方法。
+ * 如果支持"LS"功能,也可以在<code> Document </code>上附加的<code> DOMConfiguration </code>对象上注册。
+ *  <p>然后,<code> LSParser </code>将允许应用程序在包含它们之前拦截任何外部实体,包括外部DTD子集和外部参数实体。
+ * 顶层文档实体从不会传递到<code> resolveResource </code>方法。
+ *  <p>许多DOM应用程序不需要实现此接口,但对于从数据库或其他专用输入源或使用URN的应用程序构建XML文档的应用程序尤其有用。
+ *  <p> <b>注意：</b> <code> LSResourceResolver </code>基于SAX2 [<a href='http://www.saxproject.org/'> SAX </a>
+ * ]代码> EntityResolver </code>接口。
  */
 public interface LSResourceResolver {
     /**
@@ -79,6 +98,11 @@ public interface LSResourceResolver {
      * system identifiers to secure and/or local URI, to look up public
      * identifiers in a catalogue, or to read an entity from a database or
      * other input source (including, for example, a dialog box).
+     * <p>
+     *  <p>许多DOM应用程序不需要实现此接口,但对于从数据库或其他专用输入源或使用URN的应用程序构建XML文档的应用程序尤其有用。
+     *  <p>另请参阅<a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'>文档对象模型(DOM)3级加载和保存规范</a>。
+     * 
+     * 
      * @param type  The type of the resource being resolved. For XML [<a href='http://www.w3.org/TR/2004/REC-xml-20040204'>XML 1.0</a>] resources
      *   (i.e. entities), applications must use the value
      *   <code>"http://www.w3.org/TR/REC-xml"</code>. For XML Schema [<a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/'>XML Schema Part 1</a>]

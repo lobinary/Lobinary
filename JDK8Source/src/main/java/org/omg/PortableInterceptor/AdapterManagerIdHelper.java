@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -14,6 +15,8 @@ package org.omg.PortableInterceptor;
    * instances may share the same adapter manager, in which case state transitions
    * reported for the adapter manager are observed by all object adapters with the
    * same adapter manager ID.
+   * <p>
+   * 
    */
 abstract public class AdapterManagerIdHelper
 {

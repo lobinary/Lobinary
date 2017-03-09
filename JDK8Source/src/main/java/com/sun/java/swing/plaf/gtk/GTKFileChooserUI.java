@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -50,6 +51,10 @@ import sun.awt.shell.ShellFolder;
 /**
  * GTK FileChooserUI.
  *
+ * <p>
+ *  GTK FileChooserUI。
+ * 
+ * 
  * @author Leif Samuelsson
  * @author Jeff Dinkins
  */
@@ -1083,6 +1088,9 @@ class GTKFileChooserUI extends SynthFileChooserUI {
 
     /**
      * Data model for a type-face selection combo-box.
+     * <p>
+     *  面型选择组合框的数据模型。
+     * 
      */
     protected class DirectoryComboBoxModel extends AbstractListModel implements ComboBoxModel {
         Vector<File> directories = new Vector<File>();
@@ -1103,6 +1111,9 @@ class GTKFileChooserUI extends SynthFileChooserUI {
          * Adds the directory to the model and sets it to be selected,
          * additionally clears out the previous selected directory and
          * the paths leading up to it, if any.
+         * <p>
+         *  将目录添加到模型并将其设置为选择,另外清除先前选择的目录及其前面的路径(如果有)。
+         * 
          */
         private void addItem(File directory) {
 
@@ -1159,6 +1170,9 @@ class GTKFileChooserUI extends SynthFileChooserUI {
 
     /**
      * Acts when DirectoryComboBox has changed the selected item.
+     * <p>
+     *  当DirectoryComboBox更改所选项目时执行操作。
+     * 
      */
     protected class DirectoryComboBoxAction extends AbstractAction {
         protected DirectoryComboBoxAction() {
@@ -1173,6 +1187,9 @@ class GTKFileChooserUI extends SynthFileChooserUI {
 
     /**
      * Creates a new folder.
+     * <p>
+     *  创建新文件夹。
+     * 
      */
     private class NewFolderAction extends AbstractAction {
         protected NewFolderAction() {
@@ -1239,6 +1256,9 @@ class GTKFileChooserUI extends SynthFileChooserUI {
 
     /**
      * Renames file
+     * <p>
+     *  重命名文件
+     * 
      */
     private class RenameFileAction extends AbstractAction {
         protected RenameFileAction() {
@@ -1284,6 +1304,9 @@ class GTKFileChooserUI extends SynthFileChooserUI {
 
     /**
      * Render different filters
+     * <p>
+     *  呈现不同的过滤器
+     * 
      */
     public class FilterComboBoxRenderer extends DefaultListCellRenderer {
         public String getName() {
@@ -1327,6 +1350,8 @@ class GTKFileChooserUI extends SynthFileChooserUI {
 
     /**
      * Data model for filter combo-box.
+     * <p>
+     *  过滤器组合框的数据模型。
      */
     protected class FilterComboBoxModel extends AbstractListModel
             implements ComboBoxModel, PropertyChangeListener {

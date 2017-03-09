@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,16 @@
  *** States Code.  All rights reserved.                             ***
  **********************************************************************
  **********************************************************************
+ * <p>
+ *  **************************************************** ****************** ****************************
+ * **** ************************************ * COPYRIGHT(c)Eastman Kodak Company,1997 *** *根据United *** 
+ * *国家法典第17章的未公布的工作。
+ * 版权所有。
+ *  *** *********************************************** ********************* **************************
+ * *** ***************************************。
+ * 版权所有。
+ * 
+ * 
  **********************************************************************/
 
 package java.awt.image.renderable;
@@ -44,6 +55,9 @@ import java.util.Vector;
 /**
  * This class handles the renderable aspects of an operation with help
  * from its associated instance of a ContextualRenderedImageFactory.
+ * <p>
+ *  该类通过其关联的ContextualRenderedImageFactory的实例的帮助处理操作的可呈现方面。
+ * 
  */
 public class RenderableImageOp implements RenderableImage {
 
@@ -64,6 +78,11 @@ public class RenderableImageOp implements RenderableImage {
      * parameters.  Any RenderedImage sources referenced by the
      * ParameterBlock will be ignored.
      *
+     * <p>
+     *  构造一个RenderedImageOp给定一个ContextualRenderedImageFactory对象,以及一个ParameterBlock包含RenderableImage源和其他参数。
+     * 将忽略ParameterBlock引用的任何RenderedImage源。
+     * 
+     * 
      * @param CRIF a ContextualRenderedImageFactory object
      * @param paramBlock a ParameterBlock containing this operation's source
      *        images and other parameters necessary for the operation
@@ -81,6 +100,10 @@ public class RenderableImageOp implements RenderableImage {
      * return an empty vector, to indicate that the image has no sources,
      * or null, to indicate that no information is available.
      *
+     * <p>
+     *  返回一个RenderableImages的向量,它是这个RenderableImage的图像数据的来源。注意,该方法可以返回空向量,以指示图像没有源或空,以指示没有可用的信息。
+     * 
+     * 
      * @return a (possibly empty) Vector of RenderableImages, or null.
      */
     public Vector<RenderableImage> getSources() {
@@ -111,6 +134,10 @@ public class RenderableImageOp implements RenderableImage {
      * If the property name is not recognized, java.awt.Image.UndefinedProperty
      * will be returned.
      *
+     * <p>
+     *  从此图像的属性集获取属性。如果属性名不被识别,将返回java.awt.Image.UndefinedProperty。
+     * 
+     * 
      * @param name the name of the property to get, as a String.
      * @return a reference to the property Object, or the value
      *         java.awt.Image.UndefinedProperty.
@@ -121,6 +148,10 @@ public class RenderableImageOp implements RenderableImage {
 
     /**
      * Return a list of names recognized by getProperty.
+     * <p>
+     *  返回由getProperty识别的名称列表。
+     * 
+     * 
      * @return a list of property names.
      */
     public String[] getPropertyNames() {
@@ -133,6 +164,11 @@ public class RenderableImageOp implements RenderableImage {
      * may produce different results.  This method may be used to
      * determine whether an existing rendering may be cached and
      * reused.  The CRIF's isDynamic method will be called.
+     * <p>
+     * 如果连续的渲染(即使用相同的参数调用createRendering()或createScaledRendering())可能会产生不同的结果,则返回true。
+     * 该方法可以用于确定现有的渲染是否可以被高速缓存和重用。 CRIF的isDynamic方法将被调用。
+     * 
+     * 
      * @return <code>true</code> if successive renderings with the
      *         same arguments might produce different results;
      *         <code>false</code> otherwise.
@@ -146,6 +182,10 @@ public class RenderableImageOp implements RenderableImage {
      * usual width of a RenderableImage is equal to the image's aspect
      * ratio (width divided by height).
      *
+     * <p>
+     *  获取用户坐标空间中的宽度。按照惯例,RenderableImage的通常宽度等于图片的宽高比(宽度除以高度)。
+     * 
+     * 
      * @return the width of the image in user coordinates.
      */
     public float getWidth() {
@@ -159,6 +199,10 @@ public class RenderableImageOp implements RenderableImage {
      * Gets the height in user coordinate space.  By convention, the
      * usual height of a RenderedImage is equal to 1.0F.
      *
+     * <p>
+     *  获取用户坐标空间中的高度。按照惯例,RenderedImage的通常高度等于1.0F。
+     * 
+     * 
      * @return the height of the image in user coordinates.
      */
     public float getHeight() {
@@ -170,6 +214,9 @@ public class RenderableImageOp implements RenderableImage {
 
     /**
      * Gets the minimum X coordinate of the rendering-independent image data.
+     * <p>
+     *  获取渲染无关图像数据的最小X坐标。
+     * 
      */
     public float getMinX() {
         if (boundingBox == null) {
@@ -180,6 +227,9 @@ public class RenderableImageOp implements RenderableImage {
 
     /**
      * Gets the minimum Y coordinate of the rendering-independent image data.
+     * <p>
+     *  获取渲染无关图像数据的最小Y坐标。
+     * 
      */
     public float getMinY() {
         if (boundingBox == null) {
@@ -194,6 +244,10 @@ public class RenderableImageOp implements RenderableImage {
      * change will be visible when a new rendering is created from
      * this RenderableImageOp or any dependent RenderableImageOp.
      *
+     * <p>
+     *  更改操作的当前ParameterBlock,允许编辑图像渲染链。当从此RenderableImageOp或任何依赖的RenderableImageOp创建新的渲染时,这种更改的效果将可见。
+     * 
+     * 
      * @param paramBlock the new ParameterBlock.
      * @return the old ParameterBlock.
      * @see #getParameterBlock
@@ -206,6 +260,10 @@ public class RenderableImageOp implements RenderableImage {
 
     /**
      * Returns a reference to the current parameter block.
+     * <p>
+     *  返回当前参数块的引用。
+     * 
+     * 
      * @return the <code>ParameterBlock</code> of this
      *         <code>RenderableImageOp</code>.
      * @see #setParameterBlock(ParameterBlock)
@@ -234,6 +292,18 @@ public class RenderableImageOp implements RenderableImage {
      * that are obtained via the getSources() method on the created
      * RenderedImage may have such a property.
      *
+     * <p>
+     *  使用宽度w和高度h(以像素为单位)创建此图像的RenderedImage实例。 RenderContext是使用适当的usr2dev变换和完整图像的感兴趣区域自动构建的。
+     * 所有的渲染提示都来自传入的提示。
+     * 
+     * <p>如果w == 0,它将等于Math.round(h *(getWidth()/ getHeight()))。
+     * 类似地,如果h == 0,它将取等于Math.round(w *(getHeight()/ getWidth()))。
+     *  w或h之一必须是非零或否则将抛出IllegalArgumentException。
+     * 
+     *  <p>所创建的RenderedImage可能具有由字符串HINTS_OBSERVED标识的属性,以指示哪个RenderingHint用于创建图像。
+     * 此外,通过在创建的RenderedImage上的getSources()方法获得的任何RenderedImages可能有这样的属性。
+     * 
+     * 
      * @param w the width of rendered image in pixels, or 0.
      * @param h the height of rendered image in pixels, or 0.
      * @param hints a RenderingHints object containing hints.
@@ -260,6 +330,11 @@ public class RenderableImageOp implements RenderableImage {
      * from hints passed in.  Implementors of this interface must be
      * sure that there is a defined default width and height.
      *
+     * <p>
+     *  获取此图片的RenderedImage实例,默认宽度和高度(以像素为单位)。 RenderContext是使用适当的usr2dev变换和完整图像的感兴趣区域自动构建的。
+     * 所有的渲染提示都来自传递的提示。此接口的实现者必须确保有一个定义的默认宽度和高度。
+     * 
+     * 
      * @return a RenderedImage containing the rendered data.
      */
     public RenderedImage createDefaultRendering() {
@@ -303,6 +378,17 @@ public class RenderableImageOp implements RenderableImage {
      * that are obtained via the getSources() method on the created
      * RenderedImage may have such a property.
      *
+     * <p>
+     *  创建一个RenderedImage,它表示根据给定的RenderContext渲染的这个RenderableImageOp(包括它的Renderable源)。
+     * 
+     *  <p>此方法支持Renderable或RenderedImage操作的链接。
+     * 如果用于构造RenderableImageOp的ParameterBlock中的源是RenderableImages,那么将执行三个步骤：。
+     * 
+     * <ol>
+     * <li>在每个RenderableImage源的关联CRIF上调用mapRenderContext(); <li>使用在步骤1中获得的向后映射的RenderContexts在每个RenderableIm
+     * age源上调用createRendering(),从而导致每个源的呈现; <li>使用包含由createRendering()调用创建的RenderableImageOp和RenderedImages的
+     * 参数的新ParameterBlock调用ContextualRenderedImageFactory.create()。
+     * 
      * @param renderContext The RenderContext to use to perform the rendering.
      * @return a RenderedImage containing the desired output image.
      */

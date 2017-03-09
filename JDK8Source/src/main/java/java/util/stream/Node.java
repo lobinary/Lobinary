@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,19 @@ import java.util.function.LongConsumer;
  * framework is largely to avoid copying data unnecessarily during parallel
  * operations.
  *
+ * <p>
+ *  一个不可变容器,用于描述某种类型{@code T}的元素的有序序列。
+ * 
+ *  <p> {@code Node}包含固定数量的元素,可以通过{@link #count},{@link #spliterator},{@link #forEach},{@link #asArray},
+ * 或{@link #copyInto}方法。
+ *  {@code Node}可能有零个或多个子{@code Node};如果没有子元素(通过{@link #getChildCount}和{@link #getChild(int)}访问),则视为<em>
+ * 平面</em>或<em>叶</em>;如果子节点,它被认为是一个<em>内部</em>节点。
+ * 内部节点的大小是其子节点的大小之和。
+ * 
+ *  @apiNote <p> {@code Node}通常不直接存储元素,而是介入对一个或多个现有(有效不可变)数据结构的访问,例如{@code Collection},数组或一组其他{@code节点}。
+ * 通常{@codeNode}被形成为树,其形状对应于产生包含在叶节点中的元素的计算树。在流框架中使用{@code Node}主要是为了避免在并行操作期间不必要地复制数据。
+ * 
+ * 
  * @param <T> the type of elements.
  * @since 1.8
  */
@@ -63,6 +77,10 @@ interface Node<T> {
      * Returns a {@link Spliterator} describing the elements contained in this
      * {@code Node}.
      *
+     * <p>
+     *  返回{@link Spliterator},描述此{@code Node}中包含的元素。
+     * 
+     * 
      * @return a {@code Spliterator} describing the elements contained in this
      *         {@code Node}
      */
@@ -73,6 +91,10 @@ interface Node<T> {
      * {@code Consumer} with each element.  Elements are provided in encounter
      * order if the source for the {@code Node} has a defined encounter order.
      *
+     * <p>
+     * 遍历此节点的元素,并为每个元素调用提供的{@code Consumer}。如果{@code Node}的源有一个定义的遇到顺序,则按遇到顺序提供元素。
+     * 
+     * 
      * @param consumer a {@code Consumer} that is to be invoked with each
      *        element in this {@code Node}
      */
@@ -83,6 +105,12 @@ interface Node<T> {
      *
      * @implSpec The default implementation returns zero.
      *
+     * <p>
+     *  返回此节点的子节点数。
+     * 
+     *  @implSpec默认实现返回零。
+     * 
+     * 
      * @return the number of child nodes
      */
     default int getChildCount() {
@@ -95,6 +123,12 @@ interface Node<T> {
      * @implSpec The default implementation always throws
      * {@code IndexOutOfBoundsException}.
      *
+     * <p>
+     *  在给定索引处检索子{{codeNode}}。
+     * 
+     *  @implSpec默认实现总是抛出{@code IndexOutOfBoundsException}。
+     * 
+     * 
      * @param i the index to the child node
      * @return the child node
      * @throws IndexOutOfBoundsException if the index is less than 0 or greater
@@ -109,6 +143,10 @@ interface Node<T> {
      * starting at the given inclusive start offset and ending at the given
      * exclusive end offset.
      *
+     * <p>
+     *  返回描述该节点的元素的子序列的节点,从给定的包含开始偏移开始并且在给定排他结束偏移处结束。
+     * 
+     * 
      * @param from The (inclusive) starting offset of elements to include, must
      *             be in range 0..count().
      * @param to The (exclusive) end offset of elements to include, must be
@@ -139,6 +177,12 @@ interface Node<T> {
      * {@code generator} function may be consulted to create the array if a new
      * array needs to be created.
      *
+     * <p>
+     *  提供此节点的内容的数组视图。
+     * 
+     *  <p>根据底层实现,这可能返回对内部数组的引用,而不是副本。由于返回的数组可能是共享的,返回的数组不应该被修改。如果需要创建新数组,可以参考{@code generator}函数创建数组。
+     * 
+     * 
      * @param generator a factory function which takes an integer parameter and
      *        returns a new, empty array of that size and of the appropriate
      *        array type
@@ -153,6 +197,10 @@ interface Node<T> {
      * will occur if the array length is less than the number of elements
      * contained in this node.
      *
+     * <p>
+     *  将此{@code Node}的内容复制到数组中,从数组的给定偏移量开始。调用者的责任是确保数组中有足够的空间,否则如果数组长度小于此节点中包含的元素数量,则会发生未指定的行为。
+     * 
+     * 
      * @param array the array into which to copy the contents of this
      *       {@code Node}
      * @param offset the starting offset within the array
@@ -168,6 +216,12 @@ interface Node<T> {
      * @implSpec The default in {@code Node} returns
      * {@code StreamShape.REFERENCE}
      *
+     * <p>
+     *  获取与此{@code Node}相关联的{@code StreamShape}。
+     * 
+     *  @implSpec {@code Node}中的默认值返回{@code StreamShape.REFERENCE}
+     * 
+     * 
      * @return the stream shape associated with this node
      */
     default StreamShape getShape() {
@@ -177,6 +231,10 @@ interface Node<T> {
     /**
      * Returns the number of elements contained in this node.
      *
+     * <p>
+     *  返回此节点中包含的元素数。
+     * 
+     * 
      * @return the number of elements contained in this node
      */
     long count();
@@ -184,6 +242,9 @@ interface Node<T> {
     /**
      * A mutable builder for a {@code Node} that implements {@link Sink}, which
      * builds a flat node containing the elements that have been pushed to it.
+     * <p>
+     * 用于实现{@link Sink}的{@code Node}的可变构建器,它构建一个包含已推送到其中的元素的平面节点。
+     * 
      */
     interface Builder<T> extends Sink<T> {
 
@@ -191,12 +252,19 @@ interface Node<T> {
          * Builds the node.  Should be called after all elements have been
          * pushed and signalled with an invocation of {@link Sink#end()}.
          *
+         * <p>
+         *  构建节点。应该在所有元素都被推送并通过调用{@link Sink#end()}发出信号后调用。
+         * 
+         * 
          * @return the resulting {@code Node}
          */
         Node<T> build();
 
         /**
          * Specialized @{code Node.Builder} for int elements
+         * <p>
+         *  专门用于int元素的@ {code Node.Builder}
+         * 
          */
         interface OfInt extends Node.Builder<Integer>, Sink.OfInt {
             @Override
@@ -205,6 +273,9 @@ interface Node<T> {
 
         /**
          * Specialized @{code Node.Builder} for long elements
+         * <p>
+         *  专门用于长元素的{{Node.Builder}
+         * 
          */
         interface OfLong extends Node.Builder<Long>, Sink.OfLong {
             @Override
@@ -213,6 +284,9 @@ interface Node<T> {
 
         /**
          * Specialized @{code Node.Builder} for double elements
+         * <p>
+         *  专门用于双元素的@ {code Node.Builder}
+         * 
          */
         interface OfDouble extends Node.Builder<Double>, Sink.OfDouble {
             @Override
@@ -228,6 +302,10 @@ interface Node<T> {
         /**
          * {@inheritDoc}
          *
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @return a {@link Spliterator.OfPrimitive} describing the elements of
          *         this node
          */
@@ -238,6 +316,10 @@ interface Node<T> {
          * Traverses the elements of this node, and invoke the provided
          * {@code action} with each element.
          *
+         * <p>
+         *  遍历这个节点的元素,并调用每个元素提供的{@code action}。
+         * 
+         * 
          * @param action a consumer that is to be invoked with each
          *        element in this {@code Node.OfPrimitive}
          */
@@ -258,6 +340,11 @@ interface Node<T> {
          * an instance of a boxed primitive array with a length of
          * {@link #count()} and then invokes {@link #copyInto(T[], int)} with
          * that array at an offset of 0.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec默认实现调用生成器创建一个长度为{@link #count()}的boxed原始数组的实例,然后使用该数组调用{@link #copyInto(T [],int)}偏移量为0。
+         * 
          */
         @Override
         default T[] asArray(IntFunction<T[]> generator) {
@@ -280,6 +367,12 @@ interface Node<T> {
          * responsibility to decide if either this node or the array is utilized
          * as the primary reference for the data.</p>
          *
+         * <p>
+         *  将此节点视为原始数组。
+         * 
+         *  <p>根据底层实现,这可能返回对内部数组的引用,而不是副本。调用者负责决定是否将该节点或数组用作数据的主要引用。</p>
+         * 
+         * 
          * @return an array containing the contents of this {@code Node}
          */
         T_ARR asPrimitiveArray();
@@ -287,6 +380,10 @@ interface Node<T> {
         /**
          * Creates a new primitive array.
          *
+         * <p>
+         *  创建新的基本数组。
+         * 
+         * 
          * @param count the length of the primitive array.
          * @return the new primitive array.
          */
@@ -297,6 +394,10 @@ interface Node<T> {
          * starting at a given offset into the array.  It is the caller's
          * responsibility to ensure there is sufficient room in the array.
          *
+         * <p>
+         *  将此{@code Node}的内容复制到原始数组中,从数组的给定偏移量开始。这是呼叫者的责任,以确保在阵列中有足够的空间。
+         * 
+         * 
          * @param array the array into which to copy the contents of this
          *              {@code Node}
          * @param offset the starting offset within the array
@@ -309,12 +410,19 @@ interface Node<T> {
 
     /**
      * Specialized {@code Node} for int elements
+     * <p>
+     *  专门用于int元素的{@code Node}
+     * 
      */
     interface OfInt extends OfPrimitive<Integer, IntConsumer, int[], Spliterator.OfInt, OfInt> {
 
         /**
          * {@inheritDoc}
          *
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @param consumer a {@code Consumer} that is to be invoked with each
          *        element in this {@code Node}.  If this is an
          *        {@code IntConsumer}, it is cast to {@code IntConsumer} so the
@@ -339,6 +447,12 @@ interface Node<T> {
          * obtain an int[] array then and copies the elements from that int[]
          * array into the boxed Integer[] array.  This is not efficient and it
          * is recommended to invoke {@link #copyInto(Object, int)}.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * @implSpec默认实现调用{@link #asPrimitiveArray()}获得一个int []数组,然后将该int []数组中的元素复制到框中的Integer []数组中。
+         * 这不是有效的,建议调用{@link #copyInto(Object,int)}。
+         * 
          */
         @Override
         default void copyInto(Integer[] boxed, int offset) {
@@ -374,6 +488,9 @@ interface Node<T> {
          * {@inheritDoc}
          * @implSpec The default in {@code Node.OfInt} returns
          * {@code StreamShape.INT_VALUE}
+         * <p>
+         *  {@inheritDoc} @implSpec {@code Node.OfInt}中的默认值返回{@code StreamShape.INT_VALUE}
+         * 
          */
         default StreamShape getShape() {
             return StreamShape.INT_VALUE;
@@ -382,12 +499,19 @@ interface Node<T> {
 
     /**
      * Specialized {@code Node} for long elements
+     * <p>
+     *  为长元素专门{@code Node}
+     * 
      */
     interface OfLong extends OfPrimitive<Long, LongConsumer, long[], Spliterator.OfLong, OfLong> {
 
         /**
          * {@inheritDoc}
          *
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @param consumer A {@code Consumer} that is to be invoked with each
          *        element in this {@code Node}.  If this is an
          *        {@code LongConsumer}, it is cast to {@code LongConsumer} so
@@ -412,6 +536,12 @@ interface Node<T> {
          * to obtain a long[] array then and copies the elements from that
          * long[] array into the boxed Long[] array.  This is not efficient and
          * it is recommended to invoke {@link #copyInto(Object, int)}.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec默认实现调用{@link #asPrimitiveArray()}获得一个long []数组,然后将这个long []数组中的元素复制到方框Long []数组中。
+         * 这不是有效的,建议调用{@link #copyInto(Object,int)}。
+         * 
          */
         @Override
         default void copyInto(Long[] boxed, int offset) {
@@ -447,6 +577,9 @@ interface Node<T> {
          * {@inheritDoc}
          * @implSpec The default in {@code Node.OfLong} returns
          * {@code StreamShape.LONG_VALUE}
+         * <p>
+         *  {@inheritDoc} @implSpec {@code Node.OfLong}中的默认值会返回{@code StreamShape.LONG_VALUE}
+         * 
          */
         default StreamShape getShape() {
             return StreamShape.LONG_VALUE;
@@ -455,12 +588,19 @@ interface Node<T> {
 
     /**
      * Specialized {@code Node} for double elements
+     * <p>
+     *  专门用于{@code Node}的双元素
+     * 
      */
     interface OfDouble extends OfPrimitive<Double, DoubleConsumer, double[], Spliterator.OfDouble, OfDouble> {
 
         /**
          * {@inheritDoc}
          *
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @param consumer A {@code Consumer} that is to be invoked with each
          *        element in this {@code Node}.  If this is an
          *        {@code DoubleConsumer}, it is cast to {@code DoubleConsumer}
@@ -487,6 +627,12 @@ interface Node<T> {
          * to obtain a double[] array then and copies the elements from that
          * double[] array into the boxed Double[] array.  This is not efficient
          * and it is recommended to invoke {@link #copyInto(Object, int)}.
+         * <p>
+         *  {@inheritDoc}
+         * 
+         *  @implSpec默认实现调用{@link #asPrimitiveArray()}获得一个double []数组,然后将该double []数组中的元素复制到方框Double []数组中。
+         * 这不是有效的,建议调用{@link #copyInto(Object,int)}。
+         * 
          */
         @Override
         default void copyInto(Double[] boxed, int offset) {
@@ -523,6 +669,7 @@ interface Node<T> {
          *
          * @implSpec The default in {@code Node.OfDouble} returns
          * {@code StreamShape.DOUBLE_VALUE}
+         * <p>
          */
         default StreamShape getShape() {
             return StreamShape.DOUBLE_VALUE;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,9 +43,13 @@ import com.sun.corba.se.spi.orb.StringPair ;
 
 /** Utility class that provides factory methods for all of the
  * standard resolvers that we provide.
+ * <p>
+ *  我们提供的标准解决者。
+ * 
  */
 public class ResolverDefault {
     /** Return a local resolver that simply stores bindings in a map.
+    /* <p>
     */
     public static LocalResolver makeLocalResolver( )
     {
@@ -52,6 +57,7 @@ public class ResolverDefault {
     }
 
     /** Return a resolver that relies on configured values of ORBInitRef for data.
+    /* <p>
     */
     public static Resolver makeORBInitRefResolver( Operation urlOperation,
         StringPair[] initRefs )
@@ -69,6 +75,9 @@ public class ResolverDefault {
     /** Return a resolver that uses the proprietary bootstrap protocol
     * to implement a resolver.  Obtains the necessary host and port
     * information from the ORB.
+    * <p>
+    *  以实现解算器。从ORB获取必要的主机和端口信息。
+    * 
     */
     public static Resolver makeBootstrapResolver( ORB orb, String host, int port )
     {
@@ -79,6 +88,9 @@ public class ResolverDefault {
     * union of first.list() and second.list().  result.resolve( name ) returns
     * first.resolve( name ) if that is not null, otherwise returns the result of
     * second.resolve( name ).
+    * <p>
+    *  first.list()和second.list()的联合。
+    *  result.resolve(name)返回first.resolve(name),如果不为null,否则返回second.resolve(name)的结果。
     */
     public static Resolver makeCompositeResolver( Resolver first, Resolver second )
     {

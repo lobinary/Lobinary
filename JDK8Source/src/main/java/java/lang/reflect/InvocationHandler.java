@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@ package java.lang.reflect;
  * invocation is encoded and dispatched to the {@code invoke}
  * method of its invocation handler.
  *
+ * <p>
+ *  {@code InvocationHandler}是由代理实例的<i>调用处理程序</i>实现的接口。
+ * 
+ *  <p>每个代理实例都有一个关联的调用处理程序。当在代理实例上调用方法时,方法调用被编码并分派到其调用处理程序的{@code invoke}方法。
+ * 
+ * 
  * @author      Peter Jones
  * @see         Proxy
  * @since       1.3
@@ -46,6 +53,8 @@ public interface InvocationHandler {
      * when a method is invoked on a proxy instance that it is
      * associated with.
      *
+     * <p>
+     * 
      * @param   proxy the proxy instance that the method was invoked on
      *
      * @param   method the {@code Method} instance corresponding to

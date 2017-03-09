@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001,2002,2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.opti;
@@ -41,6 +51,10 @@ import org.w3c.dom.DOMException;
 /**
  * @xerces.internal
  *
+ * <p>
+ *  @ xerces.internal
+ * 
+ * 
  * @author Rahul Srivastava, Sun Microsystems Inc.
  *
  */
@@ -150,6 +164,10 @@ public class DefaultDocument extends NodeImpl
     public void setInputEncoding(String actualEncoding){
        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Method not supported");
     }
+    /* <p>
+    /*  public void setInputEncoding(String actualEncoding){throw new DOMException(DOMException.NOT_SUPPORTED_ERR,"Method not supported"); }
+    /* }。
+    /* 
         */
 
     public String getXmlEncoding(){
@@ -160,6 +178,10 @@ public class DefaultDocument extends NodeImpl
     /**
      * An attribute specifying, as part of the XML declaration, the encoding
      * of this document. This is <code>null</code> when unspecified.
+     * <p>
+     *  作为XML声明的一部分的属性,指定此文档的编码。未指定时,这是<code> null </code>。
+     * 
+     * 
      * @since DOM Level 3
     public void setXmlEncoding(String encoding){
         throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Method not supported");
@@ -170,6 +192,10 @@ public class DefaultDocument extends NodeImpl
      * An attribute specifying, as part of the XML declaration, whether this
      * document is standalone.
      * <br> This attribute represents the property [standalone] defined in .
+     * <p>
+     *  作为XML声明的一部分的属性,指定此文档是独立的。 <br>此属性表示在中定义的属性[standalone]。
+     * 
+     * 
      * @since DOM Level 3
      */
     public boolean getXmlStandalone(){
@@ -179,6 +205,10 @@ public class DefaultDocument extends NodeImpl
      * An attribute specifying, as part of the XML declaration, whether this
      * document is standalone.
      * <br> This attribute represents the property [standalone] defined in .
+     * <p>
+     *  作为XML声明的一部分的属性,指定此文档是独立的。 <br>此属性表示在中定义的属性[standalone]。
+     * 
+     * 
      * @since DOM Level 3
      */
     public void setXmlStandalone(boolean standalone){
@@ -189,6 +219,10 @@ public class DefaultDocument extends NodeImpl
      * An attribute specifying, as part of the XML declaration, the version
      * number of this document. This is <code>null</code> when unspecified.
      * <br> This attribute represents the property [version] defined in .
+     * <p>
+     * 作为XML声明的一部分的属性,指定此文档的版本号。未指定时,这是<code> null </code>。 <br>此属性表示在中定义的属性[version]。
+     * 
+     * 
      * @exception DOMException
      *   NOT_SUPPORTED_ERR: Raised if the version is set to a value that is
      *   not supported by this <code>Document</code>.
@@ -201,6 +235,10 @@ public class DefaultDocument extends NodeImpl
      * An attribute specifying, as part of the XML declaration, the version
      * number of this document. This is <code>null</code> when unspecified.
      * <br> This attribute represents the property [version] defined in .
+     * <p>
+     *  作为XML声明的一部分的属性,指定此文档的版本号。未指定时,这是<code> null </code>。 <br>此属性表示在中定义的属性[version]。
+     * 
+     * 
      * @exception DOMException
      *   NOT_SUPPORTED_ERR: Raised if the version is set to a value that is
      *   not supported by this <code>Document</code>.
@@ -217,6 +255,12 @@ public class DefaultDocument extends NodeImpl
      * and not raise any <code>DOMException</code>. In case of error, the
      * behavior is undefined. This attribute is <code>true</code> by
      * defaults.
+     * <p>
+     *  指定是否强制执行错误检查的属性。
+     * 当设置为<code> false </code>时,实现可以不测试通常在DOM操作上定义的每个可能的错误情况,而不会引发任何<code> DOMException </code>。
+     * 如果发生错误,行为是未定义的。默认情况下,此属性为<code> true </code>。
+     * 
+     * 
      * @since DOM Level 3
      */
     public boolean getStrictErrorChecking(){
@@ -229,6 +273,12 @@ public class DefaultDocument extends NodeImpl
      * and not raise any <code>DOMException</code>. In case of error, the
      * behavior is undefined. This attribute is <code>true</code> by
      * defaults.
+     * <p>
+     *  指定是否强制执行错误检查的属性。
+     * 当设置为<code> false </code>时,实现可以不测试通常在DOM操作上定义的每个可能的错误情况,而不会引发任何<code> DOMException </code>。
+     * 如果发生错误,行为是未定义的。默认情况下,此属性为<code> true </code>。
+     * 
+     * 
      * @since DOM Level 3
      */
     public void setStrictErrorChecking(boolean strictErrorChecking){
@@ -240,6 +290,10 @@ public class DefaultDocument extends NodeImpl
      * <br>Beware that when the <code>Document</code> supports the feature
      * "HTML" , the href attribute of the HTML BASE element takes precedence
      * over this attribute.
+     * <p>
+     *  文档的位置或<code> null </code>(如果未定义)。 <br>请注意,当<code>文档</code>支持特性"HTML"时,HTML BASE元素的href属性优先于此属性。
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getDocumentURI() {
@@ -251,6 +305,10 @@ public class DefaultDocument extends NodeImpl
      * <br>Beware that when the <code>Document</code> supports the feature
      * "HTML" , the href attribute of the HTML BASE element takes precedence
      * over this attribute.
+     * <p>
+     * 文档的位置或<code> null </code>(如果未定义)。 <br>请注意,当<code>文档</code>支持特性"HTML"时,HTML BASE元素的href属性优先于此属性。
+     * 
+     * 
      * @since DOM Level 3
      */
     public void setDocumentURI(String documentURI) {
@@ -270,6 +328,9 @@ public class DefaultDocument extends NodeImpl
     /**
      *  The configuration used when <code>Document.normalizeDocument</code> is
      * invoked.
+     * <p>
+     *  调用<code> Document.normalizeDocument </code>时使用的配置。
+     * 
      * @since DOM Level 3
      */
     public DOMConfiguration getDomConfig(){

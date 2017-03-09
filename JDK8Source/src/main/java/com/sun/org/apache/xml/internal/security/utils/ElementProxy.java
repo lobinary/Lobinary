@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)。有关版权所有权的其他信息,请参阅随此作品分发的NOTICE文件。
+ *  ASF根据Apache许可证2.0版("许可证")向您授予此文件;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本。
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xml.internal.security.utils;
 
@@ -38,6 +47,9 @@ import org.w3c.dom.Text;
 /**
  * This is the base class to all Objects which have a direct 1:1 mapping to an
  * Element in a particular namespace.
+ * <p>
+ *  这是所有具有到特定命名空间中的元素的直接1：1映射的对象的基类。
+ * 
  */
 public abstract class ElementProxy {
 
@@ -59,6 +71,9 @@ public abstract class ElementProxy {
     /**
      * Constructor ElementProxy
      *
+     * <p>
+     *  构造函数ElementProxy
+     * 
      */
     public ElementProxy() {
     }
@@ -66,6 +81,10 @@ public abstract class ElementProxy {
     /**
      * Constructor ElementProxy
      *
+     * <p>
+     *  构造函数ElementProxy
+     * 
+     * 
      * @param doc
      */
     public ElementProxy(Document doc) {
@@ -81,6 +100,10 @@ public abstract class ElementProxy {
     /**
      * Constructor ElementProxy
      *
+     * <p>
+     *  构造函数ElementProxy
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @throws XMLSecurityException
@@ -104,6 +127,10 @@ public abstract class ElementProxy {
     /**
      * Returns the namespace of the Elements of the sub-class.
      *
+     * <p>
+     *  返回子类的Elements的命名空间。
+     * 
+     * 
      * @return the namespace of the Elements of the sub-class.
      */
     public abstract String getBaseNamespace();
@@ -111,6 +138,10 @@ public abstract class ElementProxy {
     /**
      * Returns the localname of the Elements of the sub-class.
      *
+     * <p>
+     *  返回子类的Elements的localname。
+     * 
+     * 
      * @return the localname of the Elements of the sub-class.
      */
     public abstract String getBaseLocalName();
@@ -144,6 +175,12 @@ public abstract class ElementProxy {
      * <BR />
      * This method was refactored out of the constructor.
      *
+     * <p>
+     *  此方法在给定的命名空间中创建具有给定本地名称的元素。它使用{@link ElementProxy#getDefaultPrefix}方法来决定特定的前缀是否绑定到该命名空间。
+     * <BR />
+     *  这个方法从构造函数重构。
+     * 
+     * 
      * @param doc
      * @param namespace
      * @param localName
@@ -171,6 +208,10 @@ public abstract class ElementProxy {
     /**
      * Method setElement
      *
+     * <p>
+     *  方法setElement
+     * 
+     * 
      * @param element
      * @param BaseURI
      * @throws XMLSecurityException
@@ -193,6 +234,10 @@ public abstract class ElementProxy {
     /**
      * Returns the Element which was constructed by the Object.
      *
+     * <p>
+     * 返回由对象构造的元素。
+     * 
+     * 
      * @return the Element which was constructed by the Object.
      */
     public final Element getElement() {
@@ -202,6 +247,10 @@ public abstract class ElementProxy {
     /**
      * Returns the Element plus a leading and a trailing CarriageReturn Text node.
      *
+     * <p>
+     *  返回元素加上前导和尾部CarriageReturn文本节点。
+     * 
+     * 
      * @return the Element which was constructed by the Object.
      */
     public final NodeList getElementPlusReturns() {
@@ -218,6 +267,10 @@ public abstract class ElementProxy {
     /**
      * Method getDocument
      *
+     * <p>
+     *  方法getDocument
+     * 
+     * 
      * @return the Document where this element is contained.
      */
     public Document getDocument() {
@@ -227,6 +280,10 @@ public abstract class ElementProxy {
     /**
      * Method getBaseURI
      *
+     * <p>
+     *  方法getBaseURI
+     * 
+     * 
      * @return the base uri of the namespace of this element
      */
     public String getBaseURI() {
@@ -236,6 +293,10 @@ public abstract class ElementProxy {
     /**
      * Method guaranteeThatElementInCorrectSpace
      *
+     * <p>
+     *  方法guaranteeThatElementInCorrectSpace
+     * 
+     * 
      * @throws XMLSecurityException
      */
     void guaranteeThatElementInCorrectSpace() throws XMLSecurityException {
@@ -257,6 +318,10 @@ public abstract class ElementProxy {
     /**
      * Method addBigIntegerElement
      *
+     * <p>
+     *  方法addBigIntegerElement
+     * 
+     * 
      * @param bi
      * @param localname
      */
@@ -273,6 +338,10 @@ public abstract class ElementProxy {
     /**
      * Method addBase64Element
      *
+     * <p>
+     *  方法addBase64Element
+     * 
+     * 
      * @param bytes
      * @param localname
      */
@@ -290,6 +359,10 @@ public abstract class ElementProxy {
     /**
      * Method addTextElement
      *
+     * <p>
+     *  方法addTextElement
+     * 
+     * 
      * @param text
      * @param localname
      */
@@ -305,6 +378,10 @@ public abstract class ElementProxy {
     /**
      * Method addBase64Text
      *
+     * <p>
+     *  方法addBase64Text
+     * 
+     * 
      * @param bytes
      */
     public void addBase64Text(byte[] bytes) {
@@ -319,6 +396,10 @@ public abstract class ElementProxy {
     /**
      * Method addText
      *
+     * <p>
+     *  方法addText
+     * 
+     * 
      * @param text
      */
     public void addText(String text) {
@@ -332,6 +413,10 @@ public abstract class ElementProxy {
     /**
      * Method getVal
      *
+     * <p>
+     *  方法getVal
+     * 
+     * 
      * @param localname
      * @param namespace
      * @return The biginteger contained in the given element
@@ -349,6 +434,10 @@ public abstract class ElementProxy {
 
     /**
      * Method getBytesFromChildElement
+     * <p>
+     *  方法getBytesFromChildElement
+     * 
+     * 
      * @deprecated
      * @param localname
      * @param namespace
@@ -369,6 +458,10 @@ public abstract class ElementProxy {
     /**
      * Method getTextFromChildElement
      *
+     * <p>
+     *  方法getTextFromChildElement
+     * 
+     * 
      * @param localname
      * @param namespace
      * @return the Text of the textNode
@@ -384,6 +477,10 @@ public abstract class ElementProxy {
     /**
      * Method getBytesFromTextChild
      *
+     * <p>
+     *  方法getBytesFromTextChild
+     * 
+     * 
      * @return The base64 bytes from the text children of this element
      * @throws XMLSecurityException
      */
@@ -394,6 +491,10 @@ public abstract class ElementProxy {
     /**
      * Method getTextFromTextChild
      *
+     * <p>
+     *  方法getTextFromTextChild
+     * 
+     * 
      * @return the Text obtained by concatenating all the text nodes of this
      *    element
      */
@@ -404,6 +505,10 @@ public abstract class ElementProxy {
     /**
      * Method length
      *
+     * <p>
+     *  方法长度
+     * 
+     * 
      * @param namespace
      * @param localname
      * @return the number of elements {namespace}:localname under this element
@@ -430,6 +535,16 @@ public abstract class ElementProxy {
      * xpathContainer.setXPathNamespaceContext("xmlns:ds", "http://www.w3.org/2000/09/xmldsig#");
      * </PRE>
      *
+     * <p>
+     *  向元素添加xmlns：定义。这可以被称为如下：
+     * 
+     * <PRE>
+     *  // set namespace with ds prefix xpathContainer.setXPathNamespaceContext("ds","http://www.w3.org/2000
+     * /09/xmldsig#"); xpathContainer.setXPathNamespaceContext("xmlns：ds","http://www.w3.org/2000/09/xmldsig
+     * #");。
+     * </PRE>
+     * 
+     * 
      * @param prefix
      * @param uri
      * @throws XMLSecurityException
@@ -465,6 +580,10 @@ public abstract class ElementProxy {
     /**
      * Method setDefaultPrefix
      *
+     * <p>
+     *  方法setDefaultPrefix
+     * 
+     * 
      * @param namespace
      * @param prefix
      * @throws XMLSecurityException
@@ -494,6 +613,9 @@ public abstract class ElementProxy {
 
     /**
      * This method registers the default prefixes.
+     * <p>
+     *  此方法注册默认前缀。
+     * 
      */
     public static void registerDefaultPrefixes() throws XMLSecurityException {
         setDefaultPrefix("http://www.w3.org/2000/09/xmldsig#", "ds");
@@ -511,6 +633,9 @@ public abstract class ElementProxy {
     /**
      * Method getDefaultPrefix
      *
+     * <p>
+     *  方法getDefaultPrefix
+     * 
      * @param namespace
      * @return the default prefix bind to this element.
      */

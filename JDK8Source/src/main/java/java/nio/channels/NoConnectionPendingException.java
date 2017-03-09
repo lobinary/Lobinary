@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2007, Oracle and/or its affiliates. All rights reserved.
  *
@@ -35,6 +36,11 @@ package java.nio.channels;
  * finishConnect} method of a {@link SocketChannel} is invoked without first
  * successfully invoking its {@link SocketChannel#connect connect} method.
  *
+ * <p>
+ *  在未调用其{@link SocketChannel#connect connect}方法的情况下调用{@link SocketChannel}的{@link SocketChannel#finishConnect finishConnect}
+ * 方法时抛出未经检查的异常。
+ * 
+ * 
  * @since 1.4
  */
 
@@ -46,6 +52,7 @@ public class NoConnectionPendingException
 
     /**
      * Constructs an instance of this class.
+     * <p>
      */
     public NoConnectionPendingException() { }
 

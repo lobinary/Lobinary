@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -87,6 +88,39 @@ import javax.swing.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> InternationalFormatter </code>扩展<code> DefaultFormatter </code>,使用<code> java.text.Format </code>
+ * 的实例来处理对String的转换以及从String的转换。
+ * <p>
+ *  如果<code> getAllowsInvalid()</code>为false,这将要求<code> Format </code>在每次编辑时设置当前文本的格式。
+ * <p>
+ *  您可以通过<code> setMinimum </code>和<code> setMaximum </code>方法指定最小值和最大值。
+ * 为了使其工作,从<code> stringToValue </code>返回的值必须通过<code> Comparable </code>接口与最小/最大值相当。
+ * <p>
+ *  请小心配置<code>格式</code>和<code> InternationalFormatter </code>,因为可能会创建无法输入某些值的情况。
+ * 考虑日期格式"M / d / yy",一个总是有效的<code> InternationalFormatter </code>(<code> setAllowsInvalid(false)</code>
+ * ),处于覆盖模式(<code> setOverwriteMode )</code>)和日期7/1/99。
+ *  请小心配置<code>格式</code>和<code> InternationalFormatter </code>,因为可能会创建无法输入某些值的情况。
+ * 在这种情况下,用户将无法输入两位数的月份或月份。为避免这种情况,格式应为"MM / dd / yy"。
+ * <p>
+ * 如果<code> InternationalFormatter </code>配置为只允许有效值(<code> setAllowsInvalid(false)</code>),每个有效的编辑将导致<code>
+ *  JFormattedTextField </code>从<code> Format </code>重置。
+ * 还将调整光标位置,因为从生成的字符串添加/删除文字字符。
+ * <p>
+ *  <code> InternationalFormatter </code>的行为<code> stringToValue </code>与<code> DefaultTextFormatter </code>
+ * 略有不同,它执行以下操作：。
+ * <ol>
+ *  <li>如果已为值设置了类(<code> setValueClass),则在<code> setFormat </code> <li>指定的<code> Format </code> </code>)
+ * ,supers实现被调用来将从<code> parseObject </code>返回的值转换为适当的类。
+ *  <li>如果未抛出<code> ParseException </code>,并且值超出最小/最大值,则抛出<code> ParseException </code>。 <li>返回值。
+ * </ol>
+ *  <code> InternationalFormatter </code>以这种方式实现<code> stringToValue </code>,以便可以指定一个替代类,而不是<code> Forma
+ * t </code>可能返回。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @see java.text.Format
  * @see java.lang.Comparable
  *
@@ -95,19 +129,31 @@ import javax.swing.*;
 public class InternationalFormatter extends DefaultFormatter {
     /**
      * Used by <code>getFields</code>.
+     * <p>
+     *  由<code> getFields </code>使用。
+     * 
      */
     private static final Format.Field[] EMPTY_FIELD_ARRAY =new Format.Field[0];
 
     /**
      * Object used to handle the conversion.
+     * <p>
+     *  用于处理转换的对象。
+     * 
      */
     private Format format;
     /**
      * Can be used to impose a maximum value.
+     * <p>
+     *  可用于施加最大值。
+     * 
      */
     private Comparable max;
     /**
      * Can be used to impose a minimum value.
+     * <p>
+     *  可以用于施加最小值。
+     * 
      */
     private Comparable min;
 
@@ -133,30 +179,60 @@ public class InternationalFormatter extends DefaultFormatter {
      * value. If you want to support changing the value outside of
      * the valid FieldPositions, you will need to override
      * <code>canIncrement</code>.
+     * <p>
+     *  <code> InternationalFormatter </code>的行为由从<code> Format </code>获得的<code> AttributedCharacterIterator
+     *  </code>分隔。
+     * 在每次编辑时,假设允许invalid为false,则使用<code> formatToCharacterIterator </code>来调用<code> Format </code>实例。
+     *  <code> BitSet </code>也保持最新的非字面字符,即对于<code> AttributedCharacterIterator </code>中的每个索引,位集合中的条目基于来自<code>
+     *  isLiteral(Map)</code>。
+     * 在每次编辑时,假设允许invalid为false,则使用<code> formatToCharacterIterator </code>来调用<code> Format </code>实例。
+     *  <code> isLiteral(int)</code>然后使用这个缓存的信息。
+     * <p>
+     *  如果allowedInvalid为false,则每次编辑都将重置JTextComponent的完整文本。
+     * <p>
+     * InternationalFormatterFilter也可以提供适合递增和递减的两个动作。
+     * 要启用它,子类必须重写<code> getSupportsIncrement </code>以返回true,并覆盖<code> adjustValue </code>以处理值的更改。
+     * 如果要支持更改有效FieldPositions之外的值,则需要覆盖<code> canIncrement </code>。
+     * 
      */
     /**
      * A bit is set for every index identified in the
      * AttributedCharacterIterator that is not considered decoration.
      * This should only be used if validMask is true.
+     * <p>
+     *  对于在AttributedCharacterIterator中标识的每个不被认为是装饰的索引,设置一个位。这应该只有当validMask为真时才使用。
+     * 
      */
     private transient BitSet literalMask;
     /**
      * Used to iterate over characters.
+     * <p>
+     *  用于遍历字符。
+     * 
      */
     private transient AttributedCharacterIterator iterator;
     /**
      * True if the Format was able to convert the value to a String and
      * back.
+     * <p>
+     *  如果格式能够将值转换为字符串并返回,则为True。
+     * 
      */
     private transient boolean validMask;
     /**
      * Current value being displayed.
+     * <p>
+     *  显示当前值。
+     * 
      */
     private transient String string;
     /**
      * If true, DocumentFilter methods are unconditionally allowed,
      * and no checking is done on their values. This is used when
      * incrementing/decrementing via the actions.
+     * <p>
+     *  如果为true,则DocumentFilter方法被无条件地允许,并且不对其值进行检查。当通过操作递增/递减时使用。
+     * 
      */
     private transient boolean ignoreDocumentMutate;
 
@@ -164,6 +240,9 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Creates an <code>InternationalFormatter</code> with no
      * <code>Format</code> specified.
+     * <p>
+     *  创建一个未指定<code> Format </code>的<code> InternationalFormatter </code>。
+     * 
      */
     public InternationalFormatter() {
         setOverwriteMode(false);
@@ -173,6 +252,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * Creates an <code>InternationalFormatter</code> with the specified
      * <code>Format</code> instance.
      *
+     * <p>
+     *  使用指定的<code> Format </code>实例创建<code> InternationalFormatter </code>。
+     * 
+     * 
      * @param format Format instance used for converting from/to Strings
      */
     public InternationalFormatter(Format format) {
@@ -184,6 +267,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * Sets the format that dictates the legal values that can be edited
      * and displayed.
      *
+     * <p>
+     *  设置指定可编辑和显示的合法值的格式。
+     * 
+     * 
      * @param format <code>Format</code> instance used for converting
      * from/to Strings
      */
@@ -195,6 +282,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * Returns the format that dictates the legal values that can be edited
      * and displayed.
      *
+     * <p>
+     *  返回指定可编辑和显示的合法值的格式。
+     * 
+     * 
      * @return Format instance used for converting from/to Strings
      */
     public Format getFormat() {
@@ -207,6 +298,13 @@ public class InternationalFormatter extends DefaultFormatter {
      * <code>valueClass</code> will be set to that of the class of
      * <code>minimum</code>.
      *
+     * <p>
+     *  设置最小允许值。
+     * 如果未指定<code> valueClass </code>,并且<code> minimum </code>为非null,则<code> valueClass </code>将设置为<code> mi
+     * nimum </code>。
+     *  设置最小允许值。
+     * 
+     * 
      * @param minimum Minimum legal value that can be input
      * @see #setValueClass
      */
@@ -220,6 +318,10 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Returns the minimum permissible value.
      *
+     * <p>
+     *  返回最小允许值。
+     * 
+     * 
      * @return Minimum legal value that can be input
      */
     public Comparable getMinimum() {
@@ -232,6 +334,13 @@ public class InternationalFormatter extends DefaultFormatter {
      * <code>valueClass</code> will be set to that of the class of
      * <code>max</code>.
      *
+     * <p>
+     * 设置最大允许值。
+     * 如果未指定<code> valueClass </code>,且<code> max </code>为非空,则<code> valueClass </code>将设置为<code> max </code>
+     * 。
+     * 设置最大允许值。
+     * 
+     * 
      * @param max Maximum legal value that can be input
      * @see #setValueClass
      */
@@ -245,6 +354,10 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Returns the maximum permissible value.
      *
+     * <p>
+     *  返回最大允许值。
+     * 
+     * 
      * @return Maximum legal value that can be input
      */
     public Comparable getMaximum() {
@@ -278,6 +391,23 @@ public class InternationalFormatter extends DefaultFormatter {
      * the appropriate times when the value changes, or its internal
      * state changes.
      *
+     * <p>
+     *  将<code> DefaultFormatter </code>安装到特定的<code> JFormattedTextField </code>。
+     * 这将调用<code> valueToString </code>将当前值从<code> JFormattedTextField </code>转换为字符串。
+     * 这将安装<code> Action </code>从<code> getActions </code>,<code> DocumentFilter </code>从<code> getDocumentF
+     * ilter </code>返回,<code> NavigationFilter < / code>从<code> getNavigationFilter </code>返回到<code> JFormat
+     * tedTextField </code>。
+     * 这将调用<code> valueToString </code>将当前值从<code> JFormattedTextField </code>转换为字符串。
+     * <p>
+     *  如果子类想要在<code> JFormattedTextField </code>上安装附加的监听器,通常只需要覆盖这个。
+     * <p>
+     *  如果在将当前值转换为字符串时存在<code> ParseException </code>,则会将文本设置为空字符串,并将<code> JFormattedTextField </code>标记为无效
+     * 状态。
+     * <p>
+     *  虽然这是一个公共方法,但这通常只对<code> JFormattedTextField </code>的子类有用。
+     *  <code> JFormattedTextField </code>将在值更改或其内部状态更改的适当时间调用此方法。
+     * 
+     * 
      * @param ftf JFormattedTextField to format for, may be null indicating
      *            uninstall from current JFormattedTextField.
      */
@@ -292,6 +422,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * Returns a String representation of the Object <code>value</code>.
      * This invokes <code>format</code> on the current <code>Format</code>.
      *
+     * <p>
+     *  返回Object <code>值</code>的String表示形式。这将调用当前<code> Format </code>上的<code>格式</code>。
+     * 
+     * 
      * @throws ParseException if there is an error in the conversion
      * @param value Value to convert
      * @return String representation of value
@@ -312,6 +446,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * Returns the <code>Object</code> representation of the
      * <code>String</code> <code>text</code>.
      *
+     * <p>
+     * 返回<code> String </code> <code> text </code>的<code> Object </code>表示形式。
+     * 
+     * 
      * @param text <code>String</code> to convert
      * @return <code>Object</code> representation of text
      * @throws ParseException if there is an error in the conversion
@@ -342,6 +480,11 @@ public class InternationalFormatter extends DefaultFormatter {
      * a valid location into the current text, this will return an
      * empty array.
      *
+     * <p>
+     *  返回与<code> offset </code>上的文本相关联的<code> Format.Field </code>常量。
+     * 如果<code> offset </code>不是当前文本中的有效位置,则将返回一个空数组。
+     * 
+     * 
      * @param offset offset into text to be examined
      * @return Format.Field constants associated with the text at the
      *         given position.
@@ -366,6 +509,10 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Creates a copy of the DefaultFormatter.
      *
+     * <p>
+     *  创建DefaultFormatter的副本。
+     * 
+     * 
      * @return copy of the DefaultFormatter
      */
     public Object clone() throws CloneNotSupportedException {
@@ -382,6 +529,9 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * If <code>getSupportsIncrement</code> returns true, this returns
      * two Actions suitable for incrementing/decrementing the value.
+     * <p>
+     *  如果<code> getSupportsIncrement </code>返回true,则返回两个适用于递增/递减值的操作。
+     * 
      */
     protected Action[] getActions() {
         if (getSupportsIncrement()) {
@@ -394,6 +544,9 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Invokes <code>parseObject</code> on <code>f</code>, returning
      * its value.
+     * <p>
+     *  调用<code> f </code>上的<code> parseObject </code>,返回其值。
+     * 
      */
     Object stringToValue(String text, Format f) throws ParseException {
         if (f == null) {
@@ -405,6 +558,10 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Returns true if <code>value</code> is between the min/max.
      *
+     * <p>
+     *  如果<code> value </code>在min / max之间,则返回true。
+     * 
+     * 
      * @param wantsCCE If false, and a ClassCastException is thrown in
      *                 comparing the values, the exception is consumed and
      *                 false is returned.
@@ -439,6 +596,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Returns a Set of the attribute identifiers at <code>index</code>.
+     * <p>
+     *  返回<code> index </code>的属性标识符集合。
+     * 
      */
     Map<Attribute, Object> getAttributes(int index) {
         if (isValidMask()) {
@@ -457,6 +617,9 @@ public class InternationalFormatter extends DefaultFormatter {
      * Returns the start of the first run that contains the attribute
      * <code>id</code>. This will return <code>-1</code> if the attribute
      * can not be found.
+     * <p>
+     *  返回包含属性<code> id </code>的第一个运行的开始。如果找不到属性,将返回<code> -1 </code>。
+     * 
      */
     int getAttributeStart(AttributedCharacterIterator.Attribute id) {
         if (isValidMask()) {
@@ -476,6 +639,9 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Returns the <code>AttributedCharacterIterator</code> used to
      * format the last value.
+     * <p>
+     *  返回用于格式化最后一个值的<code> AttributedCharacterIterator </code>。
+     * 
      */
     AttributedCharacterIterator getIterator() {
         return iterator;
@@ -483,6 +649,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Updates the AttributedCharacterIterator and bitset, if necessary.
+     * <p>
+     *  如有必要,更新AttributedCharacterIterator和bitset。
+     * 
      */
     void updateMaskIfNecessary() {
         if (!getAllowsInvalid() && (getFormat() != null)) {
@@ -505,6 +674,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * If this is successful,
      * <code>updateMask(AttributedCharacterIterator)</code>
      * is then invoked to update the internal bitmask.
+     * <p>
+     *  通过调用<code> Format </code>上的<code> formatToCharacterIterator </code>更新AttributedCharacterIterator。
+     * 如果这是成功的,然后调用<code> updateMask(AttributedCharacterIterator)</code>来更新内部位掩码。
+     * 
      */
     void updateMask() {
         if (getFormat() != null) {
@@ -535,6 +708,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Returns the number of literal characters before <code>index</code>.
+     * <p>
+     *  返回<code> index </code>之前的文字字符数。
+     * 
      */
     int getLiteralCountTo(int index) {
         int lCount = 0;
@@ -550,6 +726,9 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Returns true if the character at index is a literal, that is
      * not editable.
+     * <p>
+     *  如果索引处的字符是字面值,那么返回true,即不可编辑。
+     * 
      */
     boolean isLiteral(int index) {
         if (isValidMask() && index < string.length()) {
@@ -560,6 +739,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Returns the literal character at index.
+     * <p>
+     *  返回索引处的文字字符。
+     * 
      */
     char getLiteral(int index) {
         if (isValidMask() && string != null && index < string.length()) {
@@ -572,6 +754,9 @@ public class InternationalFormatter extends DefaultFormatter {
      * Returns true if the character at offset is navigable too. This
      * is implemented in terms of <code>isLiteral</code>, subclasses
      * may wish to provide different behavior.
+     * <p>
+     * 如果偏移处的字符也可导航,则返回true。这是根据<code> isLiteral </code>实现的,子类可能希望提供不同的行为。
+     * 
      */
     boolean isNavigatable(int offset) {
         return !isLiteral(offset);
@@ -579,6 +764,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Overriden to update the mask after invoking supers implementation.
+     * <p>
+     *  覆盖在调用supers实现后更新掩码。
+     * 
      */
     void updateValue(Object value) {
         super.updateValue(value);
@@ -588,6 +776,9 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Overriden to unconditionally allow the replace if
      * ignoreDocumentMutate is true.
+     * <p>
+     *  如果ignoreDocumentMutate为true,则覆盖到无条件地允许替换。
+     * 
      */
     void replace(DocumentFilter.FilterBypass fb, int offset,
                      int length, String text,
@@ -603,6 +794,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * Returns the index of the next non-literal character starting at
      * index. If index is not a literal, it will be returned.
      *
+     * <p>
+     *  返回从索引开始的下一个非文字字符的索引。如果index不是文字,它将被返回。
+     * 
+     * 
      * @param direction Amount to increment looking for non-literal
      */
     private int getNextNonliteralIndex(int index, int direction) {
@@ -627,6 +822,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * inserted at the next non literal index going forward.  If there
      * is only text to remove, it is removed from the next non literal
      * index going backward.
+     * <p>
+     *  覆盖以试图兑现文字。 <p>如果我们不允许无效值并且处于覆盖模式,则会对此{@code rh.length}进行更正,以保留尾随文字。
+     * 如果不是在覆盖模式下,并且有要插入的文本,它将在下一个非文字索引上插入。如果只有要删除的文本,它将从下一个非文本索引向后移除。
+     * 
      */
     boolean canReplace(ReplaceHolder rh) {
         if (!getAllowsInvalid()) {
@@ -684,6 +883,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * supers implementation will position the cursor at the wrong position.
      * As such, this invokes supers implementation and then invokes
      * <code>repositionCursor</code> to correctly reset the cursor.
+     * <p>
+     *  当in！允许无效模式时,文本在每次编辑时被重置,因此,超级实施将把光标定位在错误的位置。
+     * 因此,这将调用supers实现,然后调用<code> repositionCursor </code>以正确重置游标。
+     * 
      */
     boolean replace(ReplaceHolder rh) throws BadLocationException {
         int start = -1;
@@ -730,6 +933,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * gives the ending location to adjust from, direction gives
      * the direction relative to <code>end</code> to position the
      * cursor from.
+     * <p>
+     *  重新定位游标。
+     *  <code> startLiteralCount </code>给出了删除范围开始处的文字数,end给出了从中调整的结束位置,方向给出了相对于<code> end </code>的方向来定位光标。
+     * 
      */
     private void repositionCursor(int startLiteralCount, int end,
                                   int direction)  {
@@ -749,6 +956,11 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Returns the character from the mask that has been buffered
      * at <code>index</code>.
+     * <p>
+     *  }}
+     * 
+     *  / **返回在<code> index </code>缓冲的掩码中的字符。
+     * 
      */
     char getBufferedChar(int index) {
         if (isValidMask()) {
@@ -761,6 +973,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Returns true if the current mask is valid.
+     * <p>
+     *  如果当前掩码有效,则返回true。
+     * 
      */
     boolean isValidMask() {
         return validMask;
@@ -768,6 +983,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Returns true if <code>attributes</code> is null or empty.
+     * <p>
+     * 如果<code> attributes </code>为空或为空,则返回true。
+     * 
      */
     boolean isLiteral(Map attributes) {
         return ((attributes == null) || attributes.size() == 0);
@@ -777,6 +995,10 @@ public class InternationalFormatter extends DefaultFormatter {
      * Updates the interal bitset from <code>iterator</code>. This will
      * set <code>validMask</code> to true if <code>iterator</code> is
      * non-null.
+     * <p>
+     *  更新<code> iterator </code>中的interal bitset。
+     * 如果<code> iterator </code>为非空,这将会将<code> validMask </code>设置为true。
+     * 
      */
     private void updateMask(AttributedCharacterIterator iterator) {
         if (iterator != null) {
@@ -819,6 +1041,9 @@ public class InternationalFormatter extends DefaultFormatter {
      * Returns true if <code>field</code> is non-null.
      * Subclasses that wish to allow incrementing to happen outside of
      * the known fields will need to override this.
+     * <p>
+     *  如果<code>字段</code>为非空,则返回true。希望允许递增发生在已知字段之外的子类将需要覆盖此。
+     * 
      */
     boolean canIncrement(Object field, int cursorPosition) {
         return (field != null);
@@ -826,6 +1051,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Selects the fields identified by <code>attributes</code>.
+     * <p>
+     *  选择由<code> attributes </code>标识的字段。
+     * 
      */
     void selectField(Object f, int count) {
         AttributedCharacterIterator iterator = getIterator();
@@ -856,6 +1084,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Returns the field that will be adjusted by adjustValue.
+     * <p>
+     *  返回将由adjustValue调整的字段。
+     * 
      */
     Object getAdjustField(int start, Map attributes) {
         return null;
@@ -865,6 +1096,9 @@ public class InternationalFormatter extends DefaultFormatter {
      * Returns the number of occurrences of <code>f</code> before
      * the location <code>start</code> in the current
      * <code>AttributedCharacterIterator</code>.
+     * <p>
+     *  返回当前<code> AttributedCharacterIterator </code>中位置<code> start </code>之前<code> f </code>的出现次数。
+     * 
      */
     private int getFieldTypeCountTo(Object f, int start) {
         AttributedCharacterIterator iterator = getIterator();
@@ -898,6 +1132,12 @@ public class InternationalFormatter extends DefaultFormatter {
      * <code>attributes</code> gives the field the cursor is in (may be
      * null depending upon <code>canIncrement</code>) and
      * <code>direction</code> is the amount to increment by.
+     * <p>
+     *  支持增量的子类必须覆盖此来处理实际的增量。
+     *  <code> value </code>是当前值,<code> attributes </code>给出游标所在的字段(根据<code> canIncrement </code>可以为null) co
+     * de>是要增加的量。
+     *  支持增量的子类必须覆盖此来处理实际的增量。
+     * 
      */
     Object adjustValue(Object value, Map attributes, Object field,
                            int direction) throws
@@ -911,6 +1151,9 @@ public class InternationalFormatter extends DefaultFormatter {
      * incrementing/decrementing the value should override this and
      * return true. Subclasses should also override
      * <code>adjustValue</code>.
+     * <p>
+     *  返回false,表示InternationalFormatter不允许值的递增。希望支持递增/递减值的子类应该覆盖此并返回true。子类也应覆盖<code> adjustValue </code>。
+     * 
      */
     boolean getSupportsIncrement() {
         return false;
@@ -919,6 +1162,9 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Resets the value of the JFormattedTextField to be
      * <code>value</code>.
+     * <p>
+     *  将JFormattedTextField的值重置为<code> value </code>。
+     * 
      */
     void resetValue(Object value) throws BadLocationException, ParseException {
         Document doc = getFormattedTextField().getDocument();
@@ -937,6 +1183,9 @@ public class InternationalFormatter extends DefaultFormatter {
     /**
      * Subclassed to update the internal representation of the mask after
      * the default read operation has completed.
+     * <p>
+     *  子类化以在默认读取操作完成后更新掩码的内部表示。
+     * 
      */
     private void readObject(ObjectInputStream s)
         throws IOException, ClassNotFoundException {
@@ -947,6 +1196,9 @@ public class InternationalFormatter extends DefaultFormatter {
 
     /**
      * Overriden to return an instance of <code>ExtendedReplaceHolder</code>.
+     * <p>
+     *  覆盖以返回<code> ExtendedReplaceHolder </code>的实例。
+     * 
      */
     ReplaceHolder getReplaceHolder(DocumentFilter.FilterBypass fb, int offset,
                                    int length, String text,
@@ -962,18 +1214,28 @@ public class InternationalFormatter extends DefaultFormatter {
      * As InternationalFormatter replaces the complete text on every edit,
      * ExtendedReplaceHolder keeps track of the offset and length passed
      * into canReplace.
+     * <p>
+     * 由于InternationalFormatter在每次编辑时替换了完整的文本,ExtendedReplaceHolder会跟踪传递到canReplace中的偏移量和长度。
+     * 
      */
     static class ExtendedReplaceHolder extends ReplaceHolder {
         /** Offset of the insert/remove. This may differ from offset in
+        /* <p>
+        /* 
          * that if !allowsInvalid the text is replaced on every edit. */
         int endOffset;
         /** Length of the text. This may differ from text.length in
+        /* <p>
+        /* 
          * that if !allowsInvalid the text is replaced on every edit. */
         int endTextLength;
 
         /**
          * Resets the region to delete to be the complete document and
          * the text from invoking valueToString on the current value.
+         * <p>
+         *  将要删除的区域重置为完整文档,并将文本从当前值调用valueToString。
+         * 
          */
         void resetFromValue(InternationalFormatter formatter) {
             // Need to reset the complete string as Format's result can
@@ -995,6 +1257,8 @@ public class InternationalFormatter extends DefaultFormatter {
      * IncrementAction is used to increment the value by a certain amount.
      * It calls into <code>adjustValue</code> to handle the actual
      * incrementing of the value.
+     * <p>
+     *  IncrementAction用于将值增加一定量。它调用<code> adjustValue </code>来处理该值的实际递增。
      */
     private class IncrementAction extends AbstractAction {
         private int direction;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -13,6 +14,8 @@ public interface HOLDING
 
   /** Object adapter state that holds requests temporarily until the 
    * state is changed.
+   * <p>
+   * 
    */
   public static final short value = (short)(0);
 }

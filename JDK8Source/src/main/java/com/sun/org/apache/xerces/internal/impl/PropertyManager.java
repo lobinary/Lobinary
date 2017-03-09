@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,10 @@ import javax.xml.stream.XMLResolver;
  * This class constructor also takes itself (PropertyManager object) as parameter and initializes the
  * object with the property taken from the object passed.
  *
+ * <p>
+ *  这个类管理与Stax规范及其实现相关的不同属性。此类构造函数还将自身(PropertyManager对象)作为参数,并使用从传递的对象中提取的属性初始化对象。
+ * 
+ * 
  * @author  Neeraj Bajaj, neeraj.bajaj@sun.com
  * @author K.Venugopal@sun.com
  * @author Sunitha Reddy, sunitha.reddy@sun.com
@@ -82,6 +87,9 @@ public class PropertyManager {
 
     /**
      * Initialize this object with the properties taken from passed PropertyManager object.
+     * <p>
+     *  使用从传递的PropertyManager对象获取的属性初始化此对象。
+     * 
      */
     public PropertyManager(PropertyManager propertyManager){
 
@@ -101,6 +109,9 @@ public class PropertyManager {
      * 1. We are not exposing Xerces namespace property. Application should configure namespace through
      * Stax specific property.
      *
+     * <p>
+     *  重要的是：1.我们没有暴露Xerces命名空间属性。应用程序应通过Stax特定属性配置命名空间。
+     * 
      */
     private void initConfigurableReaderProperties(){
         //spec default values
@@ -147,6 +158,9 @@ public class PropertyManager {
      * public void reset(){
      * supportedProps.clear() ;
      * }
+     * <p>
+     *  public void reset(){supportedProps.clear(); }}
+     * 
      */
     public boolean containsProperty(String property){
         return supportedProps.containsKey(property) ||
@@ -181,6 +195,8 @@ public class PropertyManager {
         /**
          * It's possible for users to set a security manager through the interface.
          * If it's the old SecurityManager, convert it to the new XMLSecurityManager
+         * <p>
+         *  用户可以通过界面设置安全管理器。如果是旧的SecurityManager,请将其转换为新的XMLSecurityManager
          */
         if (property.equals(Constants.SECURITY_MANAGER)) {
             fSecurityManager = XMLSecurityManager.convert(value, fSecurityManager);

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -33,6 +34,10 @@ import java.util.Arrays;
 /**
  * A simple whitespace-based BreakIterator implementation.
  *
+ * <p>
+ *  一个简单的基于空白的BreakIterator实现。
+ * 
+ * 
  * @author Sergey Groznyh
  */
 class WhitespaceBasedBreakIterator extends BreakIterator {
@@ -42,6 +47,8 @@ class WhitespaceBasedBreakIterator extends BreakIterator {
 
     /**
      * Calculate break positions eagerly parallel to reading text.
+     * <p>
+     *  计算断点位置热切地平行于阅读文本。
      */
     public void setText(CharacterIterator ci) {
         int begin = ci.getBeginIndex();

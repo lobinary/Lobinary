@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableServer;
 
 
@@ -14,6 +15,8 @@ package org.omg.PortableServer;
 	 * A POA manager may be associated with one or more 
 	 * POA objects. A POA manager encapsulates the processing 
 	 * state of the POAs it is associated with.
+	 * <p>
+	 * 
 	 */
 public interface POAManager extends POAManagerOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
 {

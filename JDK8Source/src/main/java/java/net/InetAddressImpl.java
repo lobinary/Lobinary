@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import java.io.IOException;
  * See {@link java.net.Inet4AddressImp} and
  * {@link java.net.Inet6AddressImp}.
  *
+ * <p>
+ *  将私有接口封装为{@link InetAddress}使用的"实现"。
+ * <p>
+ * 
  * @since 1.4
  */
 interface InetAddressImpl {

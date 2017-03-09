@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,6 +40,9 @@ import sun.invoke.util.Wrapper;
  *  A lambda-form editor can derive new LFs from its base LF.
  *  The editor can cache derived LFs, which simplifies the reuse of their underlying bytecodes.
  *  To support this caching, a LF has an optional pointer to its editor.
+ * <p>
+ *  λ形式编辑器可以从其基本LF中导出新的LF。编辑器可以缓存派生的LF,这简化了其底层字节码的重用。为了支持这种缓存,LF有一个指向其编辑器的可选指针。
+ * 
  */
 class LambdaFormEditor {
     final LambdaForm lambdaForm;
@@ -58,6 +62,9 @@ class LambdaFormEditor {
      *  The logical content is a sequence of byte values, starting with a Kind.ordinal value.
      *  The sequence is unterminated, ending with an indefinite number of zero bytes.
      *  Sequences that are simple (short enough and with small enough values) pack into a 64-bit long.
+     * <p>
+     *  逻辑内容是一个字节值序列,从Kind.ordinal值开始。序列是未终止的,以零字节的不定数结束。简单(足够短,值足够小)的序列包装成64位长。
+     * 
      */
     private static final class Transform extends SoftReference<LambdaForm> {
         final long packedBytes;
@@ -285,6 +292,8 @@ class LambdaFormEditor {
 
     /** Cache a transform with its result, and return that result.
      *  But if an equivalent transform has already been cached, return its result instead.
+     * <p>
+     *  但是如果一个等效的变换已经被缓存,则返回它的结果。
      */
     private LambdaForm putInCache(Transform key, LambdaForm form) {
         key = key.withResult(form);

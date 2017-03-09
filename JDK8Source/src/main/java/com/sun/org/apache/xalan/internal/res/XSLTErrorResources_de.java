@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 package com.sun.org.apache.xalan.internal.res;
 
@@ -33,6 +43,10 @@ import java.util.ResourceBundle;
  * Array. You also need to update MAX_CODE for error strings
  * and MAX_WARNING for warnings ( Needed for only information
  * purpose )
+ * <p>
+ *  设置错误消息。我们构建一个消息键和消息字符串的二维数组。为了在这里添加一个新消息,你需要首先添加一个String常量。您需要输入键,值对作为内容数组的一部分。
+ * 您还需要更新MAX_CODE的错误字符串和MAX_WARNING的警告(仅为信息目的需要)。
+ * 
  */
 public class XSLTErrorResources_de extends ListResourceBundle
 {
@@ -73,10 +87,32 @@ public class XSLTErrorResources_de extends ListResourceBundle
  *     nodes in a tree-structured representation of an XML document.  An
  *     instance of that notation is referred to as an XPath expression.
  *
+ * <p>
+ *  此文件包含与Xalan错误处理相关的错误和警告消息。
+ * 
+ *  翻译者的一般注意事项：
+ * 
+ *  1)Xalan(或更恰当地,Xalan解释)和XSLTC是组件的名称。 XSLT是"XML Stylesheet Language：Transformations"的缩写。
+ *  XSLTC是XSLT编译器的首字母缩写。
+ * 
+ * 2)样式表是如何将输入XML文档转换为结果XML文档(或HTML文档或文本)的描述。样式表本身以XML文档的形式描述。
+ * 
+ *  3)模板是用于匹配输入文档的特定部分并指定输出文档的对应部分的形式的样式表的组件。
+ * 
+ *  4)元素是XML文档中的标记标记;属性是标记上的修饰符。
+ * 例如,在<elem attr ='val'attr2 ='val2'>"elem"是元素名称,"attr"和"attr2"分别是具有值"val"和"val2"的属性名称。
+ * 
  */
 
   /*
    * Static variables
+   * <p>
+   *  5)命名空间声明是一个特殊属性,用于将前缀与URI(命名空间)相关联。使用该前缀的元素名称和属性名称的含义是相对于该命名空间定义的。
+   * 
+   *  6)"Translet"是一个发明的术语,描述了将XML样式表编译成Java类所产生的类文件。
+   * 
+   *  7)XPath是描述用于标识XML文档的树结构表示中的节点的符号的规范。该符号的实例称为XPath表达式。
+   * 
    */
   public static final String ER_INVALID_NAMESPACE_URI_VALUE_FOR_RESULT_PREFIX =
         "ER_INVALID_SET_NAMESPACE_URI_VALUE_FOR_RESULT_PREFIX";
@@ -464,12 +500,19 @@ public class XSLTErrorResources_de extends ListResourceBundle
    * Now fill in the message text.
    * Then fill in the message text for that message code in the
    * array. Use the new error code as the index into the array.
+   * <p>
+   *  静态变量
+   * 
    */
 
   // Error messages...
 
   /** Get the lookup table for error messages.
     *
+    * <p>
+    *  现在填写消息文本。然后在数组中填写该消息代码的消息文本。使用新的错误代码作为数组的索引。
+    * 
+    * 
     * @return The message lookup table.
     */
   public Object[][] getContents()
@@ -1440,6 +1483,8 @@ public class XSLTErrorResources_de extends ListResourceBundle
   public static final String XML_HEADER = "XML ";
 
   /** I don't think this is used any more.
+  /* <p>
+  /* 
    * @deprecated  */
   public static final String QUERY_HEADER = "PATTERN ";
 

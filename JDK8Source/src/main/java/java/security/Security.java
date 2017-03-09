@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,12 @@ import sun.security.jca.*;
  * implementation-specific location, which is typically the properties file
  * {@code lib/security/java.security} in the Java installation directory.
  *
+ * <p>
+ *  <p>此类集中所有安全属性和常见安全方法。其主要用途之一是管理提供商。
+ * 
+ *  <p>安全属性的默认值是从实现特定的位置读取的,这通常是Java安装目录中的属性文件{@code lib / security / java.security}。
+ * 
+ * 
  * @author Benjamin Renaud
  */
 
@@ -192,6 +199,9 @@ public final class Security {
     /*
      * Initialize to default values, if <java.home>/lib/java.security
      * is not found.
+     * <p>
+     *  初始化为默认值,如果未找到<java.home> /lib/java.security。
+     * 
      */
     private static void initializeStatic() {
         props.put("security.provider.1", "sun.security.provider.Sun");
@@ -204,6 +214,9 @@ public final class Security {
 
     /**
      * Don't let anyone instantiate this.
+     * <p>
+     *  不要让任何人实例化这个。
+     * 
      */
     private Security() {
     }
@@ -222,6 +235,9 @@ public final class Security {
      * The order in which the providers are looked up is the
      * provider-preference order, as specificed in the security
      * properties file.
+     * <p>
+     *  查找提供程序,并返回映射键的属性(及其关联的提供程序)(如果有)。查找提供程序的顺序是提供程序首选项顺序,如安全属性文件中所述。
+     * 
      */
     private static ProviderProperty getProviderProperty(String key) {
         ProviderProperty entry = null;
@@ -259,6 +275,9 @@ public final class Security {
 
     /**
      * Returns the property (if any) mapping the key for the given provider.
+     * <p>
+     *  返回映射给定提供程序的键的属性(如果有)。
+     * 
      */
     private static String getProviderProperty(String key, Provider provider) {
         String prop = provider.getProperty(key);
@@ -288,6 +307,14 @@ public final class Security {
      * classes to algorithms which they understand (much like Key parsers
      * do).
      *
+     * <p>
+     *  获取算法的指定属性。算法名称应为标准名称。请参阅<a href =
+     * "{@docRoot}/../technotes/guides/security/StandardNames.html">
+     *  Java加密架构标准算法名称文档</a>以获取有关标准算法名称的信息。
+     * 
+     *  一个可能的用途是专门的算法解析器,它可以将类映射到他们理解的算法(很像Key解析器)。
+     * 
+     * 
      * @param algName the algorithm name.
      *
      * @param propName the name of the property to get.
@@ -334,6 +361,19 @@ public final class Security {
      * {@code "insertProvider."+provider.getName()} permission target name. If
      * both checks are denied, a {@code SecurityException} is thrown.
      *
+     * <p>
+     *  在指定位置添加新提供者。位置是提供商搜索请求的算法的优先顺序。位置是基于1的,即,1是最优选的,后面是2,以此类推。
+     * 
+     * <p>如果给定的提供者安装在请求的位置,则原来位于该位置的提供者以及位置大于{@code position}的所有提供者被向上移动一个位置(朝向列表的末尾)的安装提供商)。
+     * 
+     *  <p>如果已经安装了提供程序,则无法添加。
+     * 
+     *  <p>如果有安全管理员,则使用{@code"insertProvider"}权限目标名称调用{@link java.lang.SecurityManager#checkSecurityAccess}方
+     * 法,看看是否可以添加新的提供商。
+     * 如果拒绝此权限检查,则会使用{@code"insertProvider。"+ provider.getName()}权限目标名称再次调用{@code checkSecurityAccess}。
+     * 如果两个检查都被拒绝,则会抛出{@code SecurityException}。
+     * 
+     * 
      * @param provider the provider to be added.
      *
      * @param position the preference position that the caller would
@@ -377,6 +417,15 @@ public final class Security {
      * {@code "insertProvider."+provider.getName()} permission target name. If
      * both checks are denied, a {@code SecurityException} is thrown.
      *
+     * <p>
+     *  将提供程序添加到可用的下一个位置。
+     * 
+     *  <p>如果有安全管理员,则使用{@code"insertProvider"}权限目标名称调用{@link java.lang.SecurityManager#checkSecurityAccess}方
+     * 法,看看是否可以添加新的提供商。
+     * 如果拒绝此权限检查,则会使用{@code"insertProvider。"+ provider.getName()}权限目标名称再次调用{@code checkSecurityAccess}。
+     * 如果两个检查都被拒绝,则会抛出{@code SecurityException}。
+     * 
+     * 
      * @param provider the provider to be added.
      *
      * @return the preference position in which the provider was
@@ -399,6 +448,9 @@ public final class Security {
          * registered providers may not have been installed yet.
          * insertProviderAt() will fix that value after it has
          * loaded the static providers.
+         * <p>
+         *  我们不能在这里分配位置,因为静态注册的提供程序可能尚未安装。 insertProviderAt()将在加载静态提供程序后修复该值。
+         * 
          */
         return insertProviderAt(provider, 0);
     }
@@ -424,6 +476,18 @@ public final class Security {
      * with a {@code SecurityPermission("removeProvider."+name)}
      * permission.
      *
+     * <p>
+     *  删除指定名称的提供程序。
+     * 
+     * <p>删除指定的提供程序时,位于大于指定提供程序位置的位置的所有提供程序将向下移动一个位置(朝向已安装提供程序列表的头部)。
+     * 
+     *  <p>如果未安装提供程序或名称为null,此方法将静默返回。
+     * 
+     *  <p>首先,如果有安全管理器,则使用字符串{@code"removeProvider。"+ name}调用其{@code checkSecurityAccess}方法,以查看是否可以删除提供程序。
+     * 如果使用{@code checkSecurityAccess}的默认实现(即该方法不被覆盖),那么这将导致使用{@code SecurityPermission("removeProvider。
+     * ")调用安全管理器的{@code checkPermission}方法。 + name)}权限。
+     * 
+     * 
      * @param name the name of the provider to remove.
      *
      * @throws  SecurityException
@@ -446,6 +510,10 @@ public final class Security {
      * Returns an array containing all the installed providers. The order of
      * the providers in the array is their preference order.
      *
+     * <p>
+     *  返回包含所有已安装提供程序的数组。数组中提供程序的顺序是其首选顺序。
+     * 
+     * 
      * @return an array of all the installed providers.
      */
     public static Provider[] getProviders() {
@@ -457,6 +525,10 @@ public final class Security {
      * any. Returns null if no provider with the specified name is
      * installed or if name is null.
      *
+     * <p>
+     *  返回使用指定名称安装的提供程序(如果有)。如果未安装具有指定名称的提供程序或名称为null,则返回null。
+     * 
+     * 
      * @param name the name of the provider to get.
      *
      * @return the provider of the specified name.
@@ -515,6 +587,30 @@ public final class Security {
      * for information about standard cryptographic service names, standard
      * algorithm names and standard attribute names.
      *
+     * <p>
+     *  返回包含满足指定选择条件的所有已安装提供程序的数组,如果尚未安装此类提供程序,则返回null。
+     * 返回的提供程序根据其{@linkplain #insertProviderAt(java.security.Provider,int)首选顺序}进行排序。
+     * 
+     * <p>加密服务始终与特定算法或类型相关联。例如,数字签名服务总是与特定算法(例如,DSA)相关联,并且CertificateFactory服务总是与特定证书类型(例如X.509)相关联。
+     * 
+     *  <p>选择条件必须以下列两种格式之一指定：
+     * <ul>
+     * <li> <i> {@ literal <crypto_service>。<algorithm_or_type>} </i> <p>加密服务名称不能包含任何点。
+     *  <p>如果提供者实现指定的加密服务的指定算法或类型,则提供者满足指定的选择标准。
+     *  <p>例如,"CertificateFactory.X.509"将由为X.509证书提供CertificateFactory实现的任何提供程序来满足。
+     *  <li> <i> {@ literal <crypto_service>。
+     * <algorithm_or_type> <attribute_name>：<attribute_value>} </i> <p>加密服务名称不能包含任何点。
+     * 在<i> {@ literal <algorithm_or_type>} </i>和<i> {@ literal <attribute_name>} </i>之间必须有一个或多个空格字符。
+     *  <p>如果提供者实现指定的加密服务的指定算法或类型,并且其实现满足指定的属性名称/值对表达的约束,则提供者满足此选择标准。
+     *  <p>例如,"Signature.SHA1withDSA KeySize：1024"将由以1024(或更大)的键值实现具有DSA签名算法的SHA1的任何提供者来满足。
+     * 
+     * </ul>
+     * 
+     *  <p>请参阅<a href =
+     * "{@docRoot}/../technotes/guides/security/StandardNames.html">
+     *  Java加密架构标准算法名称文档</a>,以获取有关标准加密服务名称,标准算法名称和标准属性名称的信息。
+     * 
+     * 
      * @param filter the criterion for selecting
      * providers. The filter is case-insensitive.
      *
@@ -586,6 +682,24 @@ public final class Security {
      * for information about standard cryptographic service names, standard
      * algorithm names and standard attribute names.
      *
+     * <p>
+     * 返回包含满足指定*选择条件的所有已安装提供程序的数组,如果尚未安装此类提供程序,则返回null。
+     * 返回的提供程序根据其{@linkplain #insertProviderAt(java.security.Provider,int)首选顺序}进行排序。
+     * 
+     *  <p>选择条件由地图表示。每个映射条目表示选择标准。如果提供商满足所有选择条件,则选择提供商。此类地图中的任何条目的键必须采用以下两种格式之一：
+     * <ul>
+     *  <li> <i> {@ literal <crypto_service>。<algorithm_or_type>} </i> <p>加密服务名称不能包含任何点。 <p>与键相关联的值必须为空字符串。
+     *  <p>如果提供者实现指定的加密服务的指定算法或类型,则提供者满足此选择标准。 <li> <i> {@ literal <crypto_service>}。
+     *  {@literal <algorithm_or_type> <attribute_name>} </i> <p>加密服务名称不能包含任何点。
+     * 在<i> {@ literal <algorithm_or_type>} </i>和<i> {@ literal <attribute_name>} </i>之间必须有一个或多个空格字符。
+     *  <p>与键相关联的值必须是非空字符串。如果提供者实现用于指定的加密服务的指定算法或类型并且其实现满足由指定的属性名称/值对表达的约束,则提供者满足该选择标准。
+     * </ul>
+     * 
+     *  <p>请参阅<a href =
+     * "../../../technotes/guides/security/StandardNames.html">
+     * Java加密架构标准算法名称文档</a>,以获取有关标准加密服务名称,标准算法名称和标准属性名称的信息。
+     * 
+     * 
      * @param filter the criteria for selecting
      * providers. The filter is case-insensitive.
      *
@@ -665,6 +779,9 @@ public final class Security {
      * Return the Class object for the given engine type
      * (e.g. "MessageDigest"). Works for Spis in the java.security package
      * only.
+     * <p>
+     *  返回给定引擎类型的Class对象(例如"MessageDigest")。仅适用于java.security包中的Spis。
+     * 
      */
     private static Class<?> getSpiClass(String type) {
         Class<?> clazz = spiMap.get(type);
@@ -687,6 +804,10 @@ public final class Security {
      * of that implementation.
      * The {@code provider} argument can be null, in which case all
      * configured providers will be searched in order of preference.
+     * <p>
+     *  返回一个对象数组：数组中的第一个对象是请求的算法和类型的实现的实例,数组中的第二个对象标识该实现的提供者。
+     *  {@code provider}参数可以为null,在这种情况下,将按优先级顺序搜索所有配置的提供程序。
+     * 
      */
     static Object[] getImpl(String algorithm, String type, String provider)
             throws NoSuchAlgorithmException, NoSuchProviderException {
@@ -717,6 +838,9 @@ public final class Security {
      * and type, and the second object in the array identifies the provider
      * of that implementation.
      * The {@code provider} argument cannot be null.
+     * <p>
+     *  返回一个对象数组：数组中的第一个对象是请求的算法和类型的实现的实例,数组中的第二个对象标识该实现的提供者。 {@code provider}参数不能为空。
+     * 
      */
     static Object[] getImpl(String algorithm, String type, Provider provider)
             throws NoSuchAlgorithmException {
@@ -740,6 +864,13 @@ public final class Security {
      * permission to see if it's ok to retrieve the specified
      * security property value..
      *
+     * <p>
+     *  获取安全属性值。
+     * 
+     *  <p>首先,如果有安全管理器,则会使用{@code java.security.SecurityPermission("getProperty。
+     * "+ key)}权限调用其{@code checkPermission}方法,以查看是否可以检索指定的安全属性值。
+     * 
+     * 
      * @param key the key of the property being retrieved.
      *
      * @return the value of the security property corresponding to key.
@@ -775,6 +906,13 @@ public final class Security {
      * permission to see if it's ok to set the specified
      * security property value.
      *
+     * <p>
+     *  设置安全属性值。
+     * 
+     *  <p>首先,如果有安全管理器,则会使用{@code java.security.SecurityPermission("setProperty。
+     * "+ key)}权限调用其{@code checkPermission}方法,以查看是否可以设置指定的安全属性值。
+     * 
+     * 
      * @param key the name of the property to be set.
      *
      * @param datum the value of the property to be set.
@@ -803,6 +941,12 @@ public final class Security {
      *
      * Rather than create a new API entry for this function,
      * we use reflection to set a private variable.
+     * <p>
+     * 实现细节：如果我们刚刚在setProperty()中设置的属性是"package.access"或"package.definition",我们需要向SecurityManager类发信号通知该值刚刚改
+     * 变,并且它应该使它的本地缓存值。
+     * 
+     *  不是为此函数创建新的API条目,而是使用反射来设置专用变量。
+     * 
      */
     private static void invalidateSMCache(String key) {
 
@@ -840,6 +984,11 @@ public final class Security {
                          * are inside a doPrivileged() here.
                          *
                          * NOOP: don't do anything...
+                         * <p>
+                         *  已加载。如果没有这样的字段,我们不应该尝试设置它。不应该有安全性,因为我们是由引导类加载器加载的,我们在里面有doPrivileged()。
+                         * 
+                         *  NOOP：不要做任何事情...
+                         * 
                          */
                     }
                     return null;
@@ -875,6 +1024,9 @@ public final class Security {
     /*
     * Returns all providers who satisfy the specified
     * criterion.
+    * <p>
+    *  返回满足指定条件的所有提供者。
+    * 
     */
     private static LinkedHashSet<Provider> getAllQualifyingCandidates(
                                                 String filterKey,
@@ -914,6 +1066,9 @@ public final class Security {
     /*
      * Returns true if the given provider satisfies
      * the selection criterion key:value.
+     * <p>
+     *  如果给定的提供者满足选择条件key：value,则返回true。
+     * 
      */
     private static boolean isCriterionSatisfied(Provider prov,
                                                 String serviceName,
@@ -973,6 +1128,9 @@ public final class Security {
     /*
      * Returns true if the attribute is a standard attribute;
      * otherwise, returns false.
+     * <p>
+     *  如果属性是标准属性,则返回true;否则返回false。
+     * 
      */
     private static boolean isStandardAttr(String attribute) {
         // For now, we just have two standard attributes:
@@ -989,6 +1147,9 @@ public final class Security {
     /*
      * Returns true if the requested attribute value is supported;
      * otherwise, returns false.
+     * <p>
+     *  如果支持请求的属性值,则返回true;否则返回false。
+     * 
      */
     private static boolean isConstraintSatisfied(String attribute,
                                                  String value,
@@ -1080,6 +1241,11 @@ public final class Security {
      * Cryptography Architecture API Specification &amp; Reference</a>.
      * Note: the returned set is immutable.
      *
+     * <p>
+     *  返回一组字符串,包含指定Java密码服务(例如,Signature,MessageDigest,Cipher,Mac,KeyStore)的所有可用算法或类型的名称。
+     * 如果没有支持指定服务的提供程序或serviceName为null,则返回一个空集合。
+     * 有关Java加密服务的完整列表,请参阅<a href="../../../technotes/guides/security/crypto/CryptoSpec.html"> Java加密架构API规范
+     * 
      * @param serviceName the name of the Java cryptographic
      * service (e.g., Signature, MessageDigest, Cipher, Mac, KeyStore).
      * Note: this parameter is case-insensitive.

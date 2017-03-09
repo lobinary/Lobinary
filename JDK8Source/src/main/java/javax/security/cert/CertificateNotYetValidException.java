@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,6 +39,13 @@ package javax.security.cert;
  * use the standard Java SE certificate classes located in
  * {@code java.security.cert}.</em></p>
  *
+ * <p>
+ *  证书尚未生效。每当当前{@code Date}或指定的{@code Date}在证书有效期内的{@code notBefore}日期/时间之前时,都会抛出此错误。
+ * 
+ *  <p> <em>注意：包{@code javax.security.cert}中的类是为了与早期版本的Java安全套接字扩展(JSSE)兼容而存在。
+ * 新应用程序应使用位于{@code java.security.cert}中的标准Java SE证书类。</em> </p>。
+ * 
+ * 
  * @since 1.4
  * @author Hemma Prafullchandra
  */
@@ -48,6 +56,9 @@ public class CertificateNotYetValidException extends CertificateException {
      * Constructs a CertificateNotYetValidException with no detail message. A
      * detail message is a String that describes this particular
      * exception.
+     * <p>
+     *  构造没有详细消息的CertificateNotYetValidException。详细消息是描述此特殊异常的字符串。
+     * 
      */
     public CertificateNotYetValidException() {
         super();
@@ -58,6 +69,9 @@ public class CertificateNotYetValidException extends CertificateException {
      * message. A detail message is a String that describes this
      * particular exception.
      *
+     * <p>
+     *  构造具有指定详细消息的CertificateNotYetValidException。详细消息是描述此特殊异常的字符串。
+     * 
      * @param message the detail message.
      */
     public CertificateNotYetValidException(String message) {

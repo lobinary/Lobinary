@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -28,6 +29,10 @@ package javax.xml.ws;
 /** The <code>WebServiceException</code> class is the base
  *  exception class for all JAX-WS API runtime exceptions.
  *
+ * <p>
+ *  所有JAX-WS API运行时异常的异常类。
+ * 
+ * 
  *  @since JAX-WS 2.0
 **/
 
@@ -35,6 +40,10 @@ public class WebServiceException extends java.lang.RuntimeException {
 
   /** Constructs a new exception with <code>null</code> as its
    *  detail message. The cause is not initialized.
+   * <p>
+   *  详细消息。原因未初始化。
+   * 
+   * 
   **/
   public WebServiceException() {
     super();
@@ -42,6 +51,10 @@ public class WebServiceException extends java.lang.RuntimeException {
 
   /** Constructs a new exception with the specified detail
    *  message.  The cause is not initialized.
+   * <p>
+   *  信息。原因未初始化。
+   * 
+   * 
    *  @param message The detail message which is later
    *                 retrieved using the getMessage method
   **/
@@ -52,6 +65,10 @@ public class WebServiceException extends java.lang.RuntimeException {
   /** Constructs a new exception with the specified detail
    *  message and cause.
    *
+   * <p>
+   *  消息和原因。
+   * 
+   * 
    *  @param message The detail message which is later retrieved
    *                 using the getMessage method
    *  @param cause   The cause which is saved for the later
@@ -66,6 +83,9 @@ public class WebServiceException extends java.lang.RuntimeException {
    *  cause.toString())</tt> (which typically contains the
    *  class and detail message of <tt>cause</tt>).
    *
+   * <p>
+   *  和<tt>(cause == null?null：cause.toString())</tt>(通常包含<tt> cause </tt>的类和详细消息)的详细消息。
+   * 
    *  @param cause   The cause which is saved for the later
    *                 retrieval throw by the getCause method.
    *                 (A <tt>null</tt> value is permitted, and

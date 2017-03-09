@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -38,39 +39,64 @@ import java.io.FileDescriptor;
  * A "plain" socket implements these methods exactly as
  * described, without attempting to go through a firewall or proxy.
  *
+ * <p>
+ *  抽象类{@code SocketImpl}是实际实现套接字的所有类的一个通用超类。它用于创建客户端和服务器套接字。
+ * <p>
+ *  "纯"套接字完全按照所描述的方式实现这些方法,而不尝试通过防火墙或代理。
+ * 
+ * 
  * @author  unascribed
  * @since   JDK1.0
  */
 public abstract class SocketImpl implements SocketOptions {
     /**
      * The actual Socket object.
+     * <p>
+     *  实际的Socket对象。
+     * 
      */
     Socket socket = null;
     ServerSocket serverSocket = null;
 
     /**
      * The file descriptor object for this socket.
+     * <p>
+     *  此套接字的文件描述符对象。
+     * 
      */
     protected FileDescriptor fd;
 
     /**
      * The IP address of the remote end of this socket.
+     * <p>
+     *  此套接字的远程端的IP地址。
+     * 
      */
     protected InetAddress address;
 
     /**
      * The port number on the remote host to which this socket is connected.
+     * <p>
+     *  连接此套接字的远程主机上的端口号。
+     * 
      */
     protected int port;
 
     /**
      * The local port number to which this socket is connected.
+     * <p>
+     *  此套接字连接到的本地端口号。
+     * 
      */
     protected int localport;
 
     /**
      * Creates either a stream or a datagram socket.
      *
+     * <p>
+     *  创建流或数据报套接字。
+     * 
+     * 
      * @param      stream   if {@code true}, create a stream socket;
      *                      otherwise, create a datagram socket.
      * @exception  IOException  if an I/O error occurs while creating the
@@ -81,6 +107,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Connects this socket to the specified port on the named host.
      *
+     * <p>
+     *  将此套接字连接到指定主机上的指定端口。
+     * 
+     * 
      * @param      host   the name of the remote host.
      * @param      port   the port number.
      * @exception  IOException  if an I/O error occurs when connecting to the
@@ -91,6 +121,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Connects this socket to the specified port number on the specified host.
      *
+     * <p>
+     *  将此套接字连接到指定主机上的指定端口号。
+     * 
+     * 
      * @param      address   the IP address of the remote host.
      * @param      port      the port number.
      * @exception  IOException  if an I/O error occurs when attempting a
@@ -103,6 +137,10 @@ public abstract class SocketImpl implements SocketOptions {
      * A timeout of zero is interpreted as an infinite timeout. The connection
      * will then block until established or an error occurs.
      *
+     * <p>
+     *  将此套接字连接到指定主机上的指定端口号。超时为零被解释为无限超时。然后,连接将阻塞,直到建立或发生错误。
+     * 
+     * 
      * @param      address   the Socket address of the remote host.
      * @param     timeout  the timeout value, in milliseconds, or zero for no timeout.
      * @exception  IOException  if an I/O error occurs when attempting a
@@ -114,6 +152,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Binds this socket to the specified local IP address and port number.
      *
+     * <p>
+     *  将此套接字绑定到指定的本地IP地址和端口号。
+     * 
+     * 
      * @param      host   an IP address that belongs to a local interface.
      * @param      port   the port number.
      * @exception  IOException  if an I/O error occurs when binding this socket.
@@ -126,6 +168,10 @@ public abstract class SocketImpl implements SocketOptions {
      * connection indication arrives when the queue is full, the
      * connection is refused.
      *
+     * <p>
+     *  将传入连接指示(连接请求)的最大队列长度设置为{@code count}参数。如果在队列已满时连接指示到达,则拒绝连接。
+     * 
+     * 
      * @param      backlog   the maximum length of the queue.
      * @exception  IOException  if an I/O error occurs when creating the queue.
      */
@@ -134,6 +180,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Accepts a connection.
      *
+     * <p>
+     *  接受连接。
+     * 
+     * 
      * @param      s   the accepted connection.
      * @exception  IOException  if an I/O error occurs when accepting the
      *               connection.
@@ -143,6 +193,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Returns an input stream for this socket.
      *
+     * <p>
+     *  返回此套接字的输入流。
+     * 
+     * 
      * @return     a stream for reading from this socket.
      * @exception  IOException  if an I/O error occurs when creating the
      *               input stream.
@@ -152,6 +206,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Returns an output stream for this socket.
      *
+     * <p>
+     *  返回此套接字的输出流。
+     * 
+     * 
      * @return     an output stream for writing to this socket.
      * @exception  IOException  if an I/O error occurs when creating the
      *               output stream.
@@ -162,6 +220,10 @@ public abstract class SocketImpl implements SocketOptions {
      * Returns the number of bytes that can be read from this socket
      * without blocking.
      *
+     * <p>
+     * 返回可以从此套接字读取但不阻塞的字节数。
+     * 
+     * 
      * @return     the number of bytes that can be read from this socket
      *             without blocking.
      * @exception  IOException  if an I/O error occurs when determining the
@@ -172,6 +234,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Closes this socket.
      *
+     * <p>
+     *  关闭此套接字。
+     * 
+     * 
      * @exception  IOException  if an I/O error occurs when closing this socket.
      */
     protected abstract void close() throws IOException;
@@ -185,6 +251,12 @@ public abstract class SocketImpl implements SocketOptions {
      * socket, the stream's {@code available} method will return 0, and its
      * {@code read} methods will return {@code -1} (end of stream).
      *
+     * <p>
+     *  将此套接字的输入流放置在"流结束"。发送到此套接字的任何数据都将被确认,然后被静默丢弃。
+     * 
+     *  如果你在套接字上调用这个方法之后从套接字输入流中读取,流的{@code available}方法将返回0,它的{@code read}方法将返回{@code -1}(流结束)。
+     * 
+     * 
      * @exception IOException if an I/O error occurs when shutting down this
      * socket.
      * @see java.net.Socket#shutdownOutput()
@@ -205,6 +277,12 @@ public abstract class SocketImpl implements SocketOptions {
      * shutdownOutput() on the socket, the stream will throw
      * an IOException.
      *
+     * <p>
+     *  禁用此套接字的输出流。对于TCP套接字,任何先前写入的数据将被发送,之后是TCP的正常连接终止序列。
+     * 
+     *  如果在套接字上调用shutdownOutput()之后写入套接字输出流,流将抛出一个IOException异常。
+     * 
+     * 
      * @exception IOException if an I/O error occurs when shutting down this
      * socket.
      * @see java.net.Socket#shutdownInput()
@@ -219,6 +297,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Returns the value of this socket's {@code fd} field.
      *
+     * <p>
+     *  返回此套接字的{@code fd}字段的值。
+     * 
+     * 
      * @return  the value of this socket's {@code fd} field.
      * @see     java.net.SocketImpl#fd
      */
@@ -229,6 +311,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Returns the value of this socket's {@code address} field.
      *
+     * <p>
+     *  返回此套接字的{@code address}字段的值。
+     * 
+     * 
      * @return  the value of this socket's {@code address} field.
      * @see     java.net.SocketImpl#address
      */
@@ -239,6 +325,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Returns the value of this socket's {@code port} field.
      *
+     * <p>
+     *  返回此套接字的{@code port}字段的值。
+     * 
+     * 
      * @return  the value of this socket's {@code port} field.
      * @see     java.net.SocketImpl#port
      */
@@ -251,6 +341,10 @@ public abstract class SocketImpl implements SocketOptions {
      * urgent data. By default, false is returned
      * unless the method is overridden in a sub-class
      *
+     * <p>
+     *  返回此SocketImpl是否支持发送紧急数据。默认情况下,返回false,除非该方法在子类中被覆盖
+     * 
+     * 
      * @return  true if urgent data supported
      * @see     java.net.SocketImpl#address
      * @since 1.4
@@ -262,6 +356,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Send one byte of urgent data on the socket.
      * The byte to be sent is the low eight bits of the parameter
+     * <p>
+     *  在套接字上发送一个字节的紧急数据。要发送的字节是参数的低8位
+     * 
+     * 
      * @param data The byte of data to send
      * @exception IOException if there is an error
      *  sending the data.
@@ -272,6 +370,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Returns the value of this socket's {@code localport} field.
      *
+     * <p>
+     *  返回此套接字的{@code localport}字段的值。
+     * 
+     * 
      * @return  the value of this socket's {@code localport} field.
      * @see     java.net.SocketImpl#localport
      */
@@ -298,6 +400,10 @@ public abstract class SocketImpl implements SocketOptions {
     /**
      * Returns the address and port of this socket as a {@code String}.
      *
+     * <p>
+     *  以{@code String}形式返回此套接字的地址和端口。
+     * 
+     * 
      * @return  a string representation of this socket.
      */
     public String toString() {
@@ -335,6 +441,13 @@ public abstract class SocketImpl implements SocketOptions {
      * By default, this method does nothing, unless it is overridden in a
      * a sub-class.
      *
+     * <p>
+     *  设置此套接字的性能首选项。
+     * 
+     * <p>套接字默认使用TCP / IP协议。一些实现可以提供具有与TCP / IP不同的性能特征的替代协议。该方法允许应用表达其自己关于当实现从可用协议选择时如何进行这些折衷的偏好。
+     * 
+     *  <p>性能偏好由三个整数描述,其值指示短连接时间,低延迟和高带宽的相对重要性。整数的绝对值是不相关的;为了选择协议,简单地比较值,较大的值指示较强的偏好。负值表示比正值低的优先级。
+     * 
      * @param  connectionTime
      *         An {@code int} expressing the relative importance of a short
      *         connection time

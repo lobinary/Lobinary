@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -26,6 +27,8 @@ package com.sun.corba.se.impl.naming.namingutil;
 
 /**
  *  Constants specific to INS parsing and validation.
+ * <p>
+ *  特定于INS解析和验证的常量。
  */
 public class NamingConstants {
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2000, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,14 @@ package javax.swing.text.html.parser;
  * <p>
  * See Annex H on page 556 of the SGML handbook for more information.
  *
+ * <p>
+ *  内容模型状态。这基本上是指向表示模型(ContentModel)的BNF表达式的指针列表。 DTD中的每个元素都有一个内容模型,用于描述可能出现在内部的元素,以及它们可能出现的顺序。
+ * <p>
+ *  每次减少令牌时,创建新的状态。
+ * <p>
+ *  有关更多信息,请参见SGML手册第556页附件H。
+ * 
+ * 
  * @see Parser
  * @see DTD
  * @see Element
@@ -49,6 +58,9 @@ class ContentModelState {
 
     /**
      * Create a content model state for a content model.
+     * <p>
+     *  为内容模型创建内容模型状态。
+     * 
      */
     public ContentModelState(ContentModel model) {
         this(model, null, 0);
@@ -57,6 +69,9 @@ class ContentModelState {
     /**
      * Create a content model state for a content model given the
      * remaining state that needs to be reduce.
+     * <p>
+     *  在给定需要减少的剩余状态的情况下为内容模型创建内容模型状态。
+     * 
      */
     ContentModelState(Object content, ContentModelState next) {
         this(content, next, 0);
@@ -65,6 +80,9 @@ class ContentModelState {
     /**
      * Create a content model state for a content model given the
      * remaining state that needs to be reduce.
+     * <p>
+     *  在给定需要减少的剩余状态的情况下为内容模型创建内容模型状态。
+     * 
      */
     ContentModelState(Object content, ContentModelState next, long value) {
         this.model = (ContentModel)content;
@@ -74,6 +92,9 @@ class ContentModelState {
 
     /**
      * Return the content model that is relevant to the current state.
+     * <p>
+     *  返回与当前状态相关的内容模型。
+     * 
      */
     public ContentModel getModel() {
         ContentModel m = model;
@@ -90,6 +111,10 @@ class ContentModelState {
     /**
      * Check if the state can be terminated. That is there are no more
      * tokens required in the input stream.
+     * <p>
+     *  检查状态是否可以终止。也就是说,在输入流中不再需要令牌。
+     * 
+     * 
      * @return true if the model can terminate without further input
      */
     public boolean terminate() {
@@ -142,6 +167,10 @@ class ContentModelState {
     /**
      * Check if the state can be terminated. That is there are no more
      * tokens required in the input stream.
+     * <p>
+     *  检查状态是否可以终止。也就是说,在输入流中不再需要令牌。
+     * 
+     * 
      * @return the only possible element that can occur next
      */
     public Element first() {
@@ -169,6 +198,10 @@ class ContentModelState {
     /**
      * Advance this state to a new state. An exception is thrown if the
      * token is illegal at this point in the content model.
+     * <p>
+     *  将此状态提前到新状态。如果令牌在内容模型中的此点非法,则抛出异常。
+     * 
+     * 
      * @return next state after reducing a token
      */
     public ContentModelState advance(Object token) {
@@ -279,6 +312,10 @@ class ContentModelState {
                                            token);
                 }
             }
+/* <p>
+/*  if((model.content instanceof Element)){Element e =(Element)model.content;
+/* 
+/*  if(e.omitStart()&& e.content！= null){return new ContentModelState(e.content,next).advance(token); }}
 */
         }
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2010, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -219,6 +220,12 @@ public class ExceptionHandlerImpl implements ExceptionHandler
                         firstClassName, secondClassName, repositoryId ) ;
                 }
 
+                 * <p>
+                 *  以保持与rmic的相容性。参见错误4989312。
+                 * 
+                 *  //检查重复的存储库ID String repositoryId = erw.getId(); int duplicateIndex = findDeclaredException(repositor
+                 * yId); if(duplicateIndex> 0){ExceptionRW duprw = rws [duplicateIndex]; String firstClassName = erw.getExceptionClass()。
+                 * getName(); String secondClassName = duprw.getExceptionClass()。
                 */
 
                 rws[index++] = erw ;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,13 @@ import sun.awt.OSInfo;
  * version of Swing.  A future release of Swing will provide support for
  * long term persistence.
  *
+ * <p>
+ *  实现主题外观和感觉。未专门为Motif实现的UI类将默认为在Basic中实现的类。
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 未来的Swing版本将为长期持久性提供支持。
+ * 
+ * 
  * @author unattributed
  */
 public class MotifLookAndFeel extends BasicLookAndFeel
@@ -92,6 +100,10 @@ public class MotifLookAndFeel extends BasicLookAndFeel
      * created on a native Motif platform we use the SystemColor
      * values, otherwise we create color objects whose values match
      * the default CDE/Motif colors.
+     * <p>
+     *  将SystemColors加载到默认值表中。 SystemColor默认值的键与SystemColor中的公共字段的名称相同。
+     * 如果在原生Motif平台上创建表,我们使用SystemColor值,否则我们创建颜色对象的值与默认CDE / Motif颜色匹配。
+     * 
      */
     protected void initSystemColorDefaults(UIDefaults table)
     {
@@ -176,6 +188,9 @@ public class MotifLookAndFeel extends BasicLookAndFeel
     /**
      * Initialize the defaults table with the name of the ResourceBundle
      * used for getting localized defaults.
+     * <p>
+     *  使用用于获取本地化默认值的ResourceBundle的名称初始化defaults表。
+     * 
      */
     private void initResourceBundle(UIDefaults table) {
         table.addResourceBundle( "com.sun.java.swing.plaf.motif.resources.motif" );
@@ -361,6 +376,10 @@ public class MotifLookAndFeel extends BasicLookAndFeel
                       "shift END", DefaultEditorKit.selectionEndLineAction,
              "control BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
                           "ENTER", JTextField.notifyAction,
+             "control BACK_SLASH", "unselect"/* <p>
+             "control BACK_SLASH", "unselect"/*  "ENTER",JTextField.notifyAction,
+             "control BACK_SLASH", "unselect"/* 
+             "control BACK_SLASH", "unselect"/* 
                 "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 
@@ -395,6 +414,10 @@ public class MotifLookAndFeel extends BasicLookAndFeel
                       "shift END", DefaultEditorKit.selectionEndLineAction,
              "control BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
                           "ENTER", JTextField.notifyAction,
+             "control BACK_SLASH", "unselect"/* <p>
+             "control BACK_SLASH", "unselect"/*  "ENTER",JTextField.notifyAction,
+             "control BACK_SLASH", "unselect"/* 
+             "control BACK_SLASH", "unselect"/* 
                 "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 
@@ -452,6 +475,10 @@ public class MotifLookAndFeel extends BasicLookAndFeel
                       "control T", "next-link-action",
                 "control shift T", "previous-link-action",
                   "control SPACE", "activate-link-action",
+             "control BACK_SLASH", "unselect"/* <p>
+             "control BACK_SLASH", "unselect"/*  "control HOME",DefaultEditorKit.beginAction,"control END",DefaultEditorKit.endAction,"control shift 
+             "control BACK_SLASH", "unselect"/* HOME",DefaultEditorKit.selectionBeginAction,"control shift END",DefaultEditorKit.selectionEndAction,"
+             "control BACK_SLASH", "unselect"/* 
                 "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,12 @@ import java.util.Map;
  * JMXConnectorFactory#newJMXConnector(JMXServiceURL, Map)
  * newJMXConnector} method.</p>
  *
+ * <p>
+ *  <p>使用给定协议创建JMX API连接器客户端的提供程序。
+ * 此接口的实例由{@link JMXConnectorFactory}作为其{@link JMXConnectorFactory#newJMXConnector(JMXServiceURL,Map)newJMXConnector}
+ * 方法的一部分创建。
+ *  <p>使用给定协议创建JMX API连接器客户端的提供程序。</p>。
+ * 
  * @since 1.5
  */
 public interface JMXConnectorProvider {
@@ -45,6 +52,9 @@ public interface JMXConnectorProvider {
      * call to this method produces a different
      * <code>JMXConnector</code> object.</p>
      *
+     * <p>
+     * 
+     * 
      * @param serviceURL the address of the connector server to connect to.
      *
      * @param environment a read-only Map containing named attributes

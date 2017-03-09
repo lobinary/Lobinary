@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -123,6 +124,41 @@ import javax.xml.bind.JAXBElement;
  *
  * <p>See "Package Specification" in javax.xml.bind.package javadoc for
  * additional common information.</p>
+ * <p>
+ * <p>
+ *  注释JavaBean多值属性以支持混合内容。
+ * 
+ * <p>
+ *  用法受以下约束：
+ * <ul>
+ *  <li>可以与@XmlElementRef,@XmlElementRefs或@XmlAnyElement一起使用</li>
+ * </ul>
+ * <p>
+ *  以下可以插入到@XmlMixed注释的多值属性中
+ * <ul>
+ *  <li> XML文本信息项作为java.lang.String的值添加。
+ * </li> <li>子元素信息项作为{@link JAXBElement}的实例添加,或者添加了使用@XmlRootElement </li> <li>未绑定到JAXB映射类的未知内容将作为{@link Element}
+ * 插入。
+ *  <li> XML文本信息项作为java.lang.String的值添加。 (假设使用@XmlAnyElement注释的属性)</li>。
+ * </ul>
+ * 
+ *  下面是绑定和创建混合内容的示例。
+ * <pre>
+ * &lt;!-- schema fragment having  mixed content -->
+ * &lt;xs:complexType name="letterBody" mixed="true">
+ * &lt;xs:sequence>
+ * &lt;xs:element name="name" type="xs:string"/>
+ * &lt;xs:element name="quantity" type="xs:positiveInteger"/>
+ * &lt;xs:element name="productName" type="xs:string"/>
+ * &lt;!-- etc. -->
+ * &lt;/xs:sequence>
+ * &lt;/xs:complexType>
+ * &lt;xs:element name="letterBody" type="letterBody"/>
+ * 
+ *  //模式派生的Java代码：//(只有与混合内容相关的注释如下所示,//其他的被忽略。
+ * )import java.math.BigInteger; public class ObjectFactory {//元素实例工厂JAXBElement&lt; LetterBody> createLetterBody(LetterBody value); JAXBElement&lt; String&gt; createLetterBodyName(String value); JAXBElement&lt; BigInteger> createLetterBodyQuantity(BigInteger value); JAXBElement&lt; String&gt; createLetterBodyProductName(String value); // type instance factory LetterBody> createLetterBody(); }
+ * }。
+ * 
  * @author Kohsuke Kawaguchi
  * @since JAXB2.0
  */

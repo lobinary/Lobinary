@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.corba.se.spi.activation;
 
 
@@ -10,6 +11,7 @@ package com.sun.corba.se.spi.activation;
 
 
 /** Server callback API, passed to Activator in active method.
+/* <p>
     */
 abstract public class ServerHelper
 {

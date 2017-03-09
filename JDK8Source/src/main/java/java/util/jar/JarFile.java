@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -61,6 +62,17 @@ import sun.security.util.SignatureFileVerifier;
  * {@link JarEntry#getCodeSigners()} to further determine if the signature
  * can be trusted.
  *
+ * <p>
+ *  <code> JarFile </code>类用于从可以使用<code> java.io.RandomAccessFile </code>打开的任何文件读取jar文件的内容。
+ * 它扩展了<code> java.util.zip.ZipFile </code>类,支持读取可选的<code> Manifest </code>条目。
+ *  <code> Manifest </code>可用于指定有关jar文件及其条目的元信息。
+ * 
+ *  <p>除非另有说明,否则将<tt> null </tt>参数传递给此类中的构造函数或方法将导致抛出{@link NullPointerException}。
+ * 
+ *  如果打开签名的jar文件时验证标志为打开,则会根据嵌入文件中的签名验证文件的内容。请注意,验证过程不包括验证签名者的证书。
+ * 调用者应检查{@link JarEntry#getCodeSigners()}的返回值,以进一步确定签名是否可信。
+ * 
+ * 
  * @author  David Connelly
  * @see     Manifest
  * @see     java.util.zip.ZipFile
@@ -87,6 +99,9 @@ class JarFile extends ZipFile {
 
     /**
      * The JAR manifest file name.
+     * <p>
+     *  JAR清单文件名。
+     * 
      */
     public static final String MANIFEST_NAME = "META-INF/MANIFEST.MF";
 
@@ -94,6 +109,10 @@ class JarFile extends ZipFile {
      * Creates a new <code>JarFile</code> to read from the specified
      * file <code>name</code>. The <code>JarFile</code> will be verified if
      * it is signed.
+     * <p>
+     *  创建新的<code> JarFile </code>以从指定的文件<code> name </code>读取。如果<code> JarFile </code>被签名,它将被验证。
+     * 
+     * 
      * @param name the name of the jar file to be opened for reading
      * @throws IOException if an I/O error has occurred
      * @throws SecurityException if access to the file is denied
@@ -106,6 +125,10 @@ class JarFile extends ZipFile {
     /**
      * Creates a new <code>JarFile</code> to read from the specified
      * file <code>name</code>.
+     * <p>
+     *  创建新的<code> JarFile </code>以从指定的文件<code> name </code>读取。
+     * 
+     * 
      * @param name the name of the jar file to be opened for reading
      * @param verify whether or not to verify the jar file if
      * it is signed.
@@ -121,6 +144,10 @@ class JarFile extends ZipFile {
      * Creates a new <code>JarFile</code> to read from the specified
      * <code>File</code> object. The <code>JarFile</code> will be verified if
      * it is signed.
+     * <p>
+     *  创建一个新的<code> JarFile </code>以从指定的<code> File </code>对象中读取。如果<code> JarFile </code>被签名,它将被验证。
+     * 
+     * 
      * @param file the jar file to be opened for reading
      * @throws IOException if an I/O error has occurred
      * @throws SecurityException if access to the file is denied
@@ -134,6 +161,10 @@ class JarFile extends ZipFile {
     /**
      * Creates a new <code>JarFile</code> to read from the specified
      * <code>File</code> object.
+     * <p>
+     * 创建一个新的<code> JarFile </code>以从指定的<code> File </code>对象中读取。
+     * 
+     * 
      * @param file the jar file to be opened for reading
      * @param verify whether or not to verify the jar file if
      * it is signed.
@@ -151,6 +182,11 @@ class JarFile extends ZipFile {
      * <code>File</code> object in the specified mode.  The mode argument
      * must be either <tt>OPEN_READ</tt> or <tt>OPEN_READ | OPEN_DELETE</tt>.
      *
+     * <p>
+     *  创建一个新的<code> JarFile </code>以指定模式从指定的<code> File </code>对象中读取。
+     *  mode参数必须为<tt> OPEN_READ </tt>或<tt> OPEN_READ | OPEN_DELETE </tt>。
+     * 
+     * 
      * @param file the jar file to be opened for reading
      * @param verify whether or not to verify the jar file if
      * it is signed.
@@ -170,6 +206,10 @@ class JarFile extends ZipFile {
     /**
      * Returns the jar file manifest, or <code>null</code> if none.
      *
+     * <p>
+     *  返回jar文件清单,如果没有,则返回<code> null </code>。
+     * 
+     * 
      * @return the jar file manifest, or <code>null</code> if none
      *
      * @throws IllegalStateException
@@ -210,6 +250,10 @@ class JarFile extends ZipFile {
      * Returns the <code>JarEntry</code> for the given entry name or
      * <code>null</code> if not found.
      *
+     * <p>
+     *  如果找不到,返回给定条目名称的<code> JarEntry </code>或<code> null </code>。
+     * 
+     * 
      * @param name the jar file entry name
      * @return the <code>JarEntry</code> for the given entry name or
      *         <code>null</code> if not found.
@@ -227,6 +271,10 @@ class JarFile extends ZipFile {
      * Returns the <code>ZipEntry</code> for the given entry name or
      * <code>null</code> if not found.
      *
+     * <p>
+     *  如果找不到,返回给定条目名称的<code> ZipEntry </code>或<code> null </code>。
+     * 
+     * 
      * @param name the jar file entry name
      * @return the <code>ZipEntry</code> for the given entry name or
      *         <code>null</code> if not found
@@ -269,6 +317,9 @@ class JarFile extends ZipFile {
 
     /**
      * Returns an enumeration of the zip file entries.
+     * <p>
+     *  返回zip文件条目的枚举。
+     * 
      */
     public Enumeration<JarEntry> entries() {
         return new JarEntryIterator();
@@ -323,6 +374,9 @@ class JarFile extends ZipFile {
      * necessary (i.e., the jar appears to be signed.) This is done as
      * a quick check to avoid processing of the manifest for unsigned
      * jars.
+     * <p>
+     *  确保已经创建了JarVerifier,如果有必要的话(即,该瓶子似乎被签名)。这是作为快速检查来完成的,以避免处理未签名的瓶子的清单。
+     * 
      */
     private void maybeInstantiateVerifier() throws IOException {
         if (jv != null) {
@@ -356,6 +410,9 @@ class JarFile extends ZipFile {
     /*
      * Initializes the verifier object by reading all the manifest
      * entries and passing them to the verifier.
+     * <p>
+     *  通过读取所有清单条目并将其传递给验证程序来初始化验证程序对象。
+     * 
      */
     private void initializeVerifier() {
         ManifestEntryVerifier mev = null;
@@ -419,6 +476,9 @@ class JarFile extends ZipFile {
     /*
      * Reads all the bytes for a given entry. Used to process the
      * META-INF files.
+     * <p>
+     *  读取给定条目的所有字节。用于处理META-INF文件。
+     * 
      */
     private byte[] getBytes(ZipEntry ze) throws IOException {
         try (InputStream is = super.getInputStream(ze)) {
@@ -429,6 +489,10 @@ class JarFile extends ZipFile {
     /**
      * Returns an input stream for reading the contents of the specified
      * zip file entry.
+     * <p>
+     *  返回用于读取指定zip文件条目的内容的输入流。
+     * 
+     * 
      * @param ze the zip file entry
      * @return an input stream for reading the contents of the specified
      *         zip file entry
@@ -513,6 +577,9 @@ class JarFile extends ZipFile {
    /**
     * Returns {@code true} iff this JAR file has a manifest with the
     * Class-Path attribute
+    * <p>
+    *  返回{@code true} iff此JAR文件具有带类路径属性的清单
+    * 
     */
     boolean hasClassPathAttribute() throws IOException {
         checkForSpecialAttributes();
@@ -523,6 +590,9 @@ class JarFile extends ZipFile {
      * Returns true if the pattern {@code src} is found in {@code b}.
      * The {@code lastOcc} and {@code optoSft} arrays are the precomputed
      * bad character and good suffix shifts.
+     * <p>
+     *  如果在{@code b}中找到模式{@code src},则返回true。 {@code lastOcc}和{@code optoSft}数组是预计算的坏字符和好的后缀移位。
+     * 
      */
     private boolean match(char[] src, byte[] b, int[] lastOcc, int[] optoSft) {
         int len = src.length;
@@ -546,6 +616,9 @@ class JarFile extends ZipFile {
     /**
      * On first invocation, check if the JAR file has the Class-Path
      * attribute. A no-op on subsequent calls.
+     * <p>
+     *  在第一次调用时,检查JAR文件是否具有Class-Path属性。后续呼叫的无操作。
+     * 
      */
     private void checkForSpecialAttributes() throws IOException {
         if (hasCheckedSpecialAttributes) return;
@@ -627,6 +700,9 @@ class JarFile extends ZipFile {
         /*
          * JAR file has no signed content. Is there a non-signing
          * code source?
+         * <p>
+         *  JAR文件没有签名内容。是否有非签名代码源?
+         * 
          */
         boolean includeUnsigned = false;
         for (int i = 0; i < cs.length; i++) {
@@ -655,6 +731,9 @@ class JarFile extends ZipFile {
      * Returns an enumeration of the zip file entries
      * excluding internal JAR mechanism entries and including
      * signed entries missing from the ZIP directory.
+     * <p>
+     * 返回zip文件条目的枚举,不包括内部JAR机制条目,并包括ZIP目录中缺少的已签名条目。
+     * 
      */
     Enumeration<JarEntry> entries2() {
         ensureInitialization();
@@ -703,6 +782,9 @@ class JarFile extends ZipFile {
         /*
          * JAR file has no signed content. Is there a non-signing
          * code source?
+         * <p>
+         *  JAR文件没有签名内容。是否有非签名代码源?
+         * 
          */
         Enumeration<String> unsigned = unsignedEntryNames();
         if (unsigned.hasMoreElements()) {
@@ -721,6 +803,8 @@ class JarFile extends ZipFile {
             /*
              * Grab entries from ZIP directory but screen out
              * metadata.
+             * <p>
+             *  从ZIP目录抓取条目,但是屏蔽掉元数据。
              */
             public boolean hasMoreElements() {
                 if (name != null) {

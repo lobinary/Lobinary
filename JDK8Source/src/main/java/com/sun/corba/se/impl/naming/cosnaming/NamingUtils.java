@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,11 +37,18 @@ public class NamingUtils {
     /**
      * Debug flag which must be true for debug streams to be created and
      * dprint output to be generated.
+     * <p>
+     *  调试标志,对于要创建的调试流必须为true,并且要生成dprint输出。
+     * 
      */
     public static boolean debug = false;
 
     /**
      * Prints the message to the debug stream if debugging is enabled.
+     * <p>
+     *  如果启用调试,则将消息打印到调试流。
+     * 
+     * 
      * @param msg the debug message to print.
      */
     public static void dprint(String msg) {
@@ -50,6 +58,10 @@ public class NamingUtils {
 
     /**
      * Prints the message to the error stream (System.err is default).
+     * <p>
+     *  将消息打印到错误流(System.err是默认值)。
+     * 
+     * 
      * @param msg the error message to print.
      */
     public static void errprint(String msg) {
@@ -61,6 +73,10 @@ public class NamingUtils {
 
     /**
      * Prints the stacktrace of the supplied exception to the error stream.
+     * <p>
+     *  将提供的异常的stacktrace打印到错误流。
+     * 
+     * 
      * @param e any Java exception.
      */
     public static void printException(java.lang.Exception e) {
@@ -72,6 +88,10 @@ public class NamingUtils {
 
     /**
      * Create a debug print stream to the supplied log file.
+     * <p>
+     *  创建一个调试打印流到提供的日志文件。
+     * 
+     * 
      * @param logFile the file to which debug output will go.
      * @exception IOException thrown if the file cannot be opened for output.
      */
@@ -90,6 +110,10 @@ public class NamingUtils {
 
     /**
      * Create a error print stream to the supplied file.
+     * <p>
+     *  向提供的文件创建错误打印流。
+     * 
+     * 
      * @param logFile the file to which error messages will go.
      * @exception IOException thrown if the file cannot be opened for output.
      */
@@ -111,6 +135,9 @@ public class NamingUtils {
      * A utility method that takes Array of NameComponent and converts
      * into a directory structured name in the format of /id1.kind1/id2.kind2..
      * This is used mainly for Logging.
+     * <p>
+     *  一个实用方法,它接受NameComponent数组并转换为目录结构化名称,格式为/id1.kind1/id2.kind2 ..这主要用于日志记录。
+     * 
      */
     static String getDirectoryStructuredName( NameComponent[] name ) {
         StringBuffer directoryStructuredName = new StringBuffer("/");
@@ -122,11 +149,16 @@ public class NamingUtils {
 
     /**
      * The debug printstream.
+     * <p>
+     *  调试打印流。
+     * 
      */
     public static java.io.PrintStream debugStream;
 
     /**
      * The error printstream.
+     * <p>
+     *  错误printstream。
      */
     public static java.io.PrintStream errStream;
 }

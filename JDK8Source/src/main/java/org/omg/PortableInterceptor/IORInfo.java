@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -15,6 +16,9 @@ package org.omg.PortableInterceptor;
    * The ORB passes an instance of its implementation of this interface as 
    * a parameter to <code>IORInterceptor.establish_components</code>.
    *
+   * <p>
+   * 
+   * 
    * @see IORInterceptor
    */
 public interface IORInfo extends IORInfoOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 

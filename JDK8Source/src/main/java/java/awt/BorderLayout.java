@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -116,6 +117,57 @@ import java.util.Hashtable;
  * }
  * </pre></blockquote><hr>
  * <p>
+ * <p>
+ *  边界布局布置一个容器,安排和调整其组件的大小以适应五个区域：北,南,东,西和中心。
+ * 每个区域可以包含不多于一个组件,并且由相应的常量来标识：<code> NORTH </code>,<code> SOUTH </code>,<code> EAST </code> / code>和<code>
+ *  CENTER </code>。
+ *  边界布局布置一个容器,安排和调整其组件的大小以适应五个区域：北,南,东,西和中心。当向带有边框布局的容器添加组件时,请使用这五个常量之一,例如：。
+ * <pre>
+ *  面板p =新面板(); p.setLayout(new BorderLayout()); p.add(new Button("Okay"),BorderLayout.SOUTH);
+ * </pre>
+ *  为方便起见,<code> BorderLayout </code>解释不存在与常量<code> CENTER </code>相同的字符串规范：
+ * <pre>
+ *  面板p2 =新面板(); p2.setLayout(new BorderLayout()); p2.add(new TextArea()); //与p.add相同(new TextArea(),Bor
+ * derLayout.CENTER);。
+ * </pre>
+ * <p>
+ *  此外,<code> BorderLayout </code>支持相对定位常数<code> PAGE_START </code>,<code> PAGE_END </code>,<code> LINE_
+ * START </code>和<code> LINE_END < / code>。
+ * 在<code> ComponentOrientation </code>设置为<code> ComponentOrientation.LEFT_TO_RIGHT </code>的容器中,这些常量映射到<code>
+ *  NORTH </code>,<code> SOUTH </code> > WEST </code>和<code> EAST </code>。
+ * <p>
+ * 为了与先前版本兼容,<code> BorderLayout </code>还包括相对定位常量<code> BEFORE_FIRST_LINE </code>,<code> AFTER_LAST_LINE
+ *  </code>,<code> BEFORE_LINE_BEGINS </code> AFTER_LINE_ENDS </code>。
+ * 分别等同于<code> PAGE_START </code>,<code> PAGE_END </code>,<code> LINE_START </code>和<code> LINE_END </code>
+ * 。
+ * 为了与其它组分使用的相对定位常数一致,优选后者常数。
+ * <p>
+ *  混合绝对和相对定位常数可能导致不可预测的结果。如果使用这两种类型,相对常数将优先。
+ * 例如,如果在定向为<code> LEFT_TO_RIGHT </code>的容器中同时使用<code> NORTH </code>和<code> PAGE_START </code>常量添加组件,则只有
+ * <code> PAGE_START < / code>将被布局。
+ *  混合绝对和相对定位常数可能导致不可预测的结果。如果使用这两种类型,相对常数将优先。
+ * <p>
+ *  注意：目前(在Java 2平台v1.2中),<code> BorderLayout </code>不支持垂直方向。
+ * 不会尊重容器的<code> ComponentOrientation </code>上的<code> isVertical </code>设置。
+ * <p>
+ *  根据它们的优选尺寸和容器尺寸的约束来布置组件。
+ *  <code> NORTH </code>和<code> SOUTH </code>组件可以水平拉伸; <code> EAST </code>和<code> WEST </code>组件可以垂直拉伸; 
+ * <code> CENTER </code>组件可以水平和垂直伸展以填充剩余的任何空间。
+ *  根据它们的优选尺寸和容器尺寸的约束来布置组件。
+ * <p>
+ * 下面是使用<code> BorderLayout </code>布局管理器布局的applet中的五个按钮的示例：
+ * <p>
+ *  <img src ="doc-files / BorderLayout-1.gif"alt ="展示BorderLayout的小程序图.BlackLayout的每个部分包含一个Button,它对应于它在布局中的位置,包括：North,West,东或南"。
+ * style="float:center; margin: 7px 10px;">
+ * <p>
+ *  此小程序的代码如下：
+ * 
+ *  <hr> <blockquote> <pre> import java.awt。*; import java.applet.Applet;
+ * 
+ *  public class buttonDir extends Applet {public void init(){setLayout(new BorderLayout()); add(new Button("North"),BorderLayout.NORTH); add(new Button("South"),BorderLayout.SOUTH); add(new Button("East"),BorderLayout.EAST); add(new Button("West"),BorderLayout.WEST); add(new Button("Center"),BorderLayout.CENTER); }
+ * } </pre> </blockquote> <hr>。
+ * <p>
+ * 
  * @author      Arthur van Hoff
  * @see         java.awt.Container#add(String, Component)
  * @see         java.awt.ComponentOrientation
@@ -128,6 +180,10 @@ public class BorderLayout implements LayoutManager2,
      * between components.
      * The horizontal gap is specified by <code>hgap</code>.
      *
+     * <p>
+     *  构造具有组件之间的水平间隙的边框布局。水平间隙由<code> hgap </code>指定。
+     * 
+     * 
      * @see #getHgap()
      * @see #setHgap(int)
      *
@@ -140,6 +196,10 @@ public class BorderLayout implements LayoutManager2,
      * between components.
      * The vertical gap is specified by <code>vgap</code>.
      *
+     * <p>
+     *  构造具有组件之间的垂直间隙的边框布局。垂直间隙由<code> vgap </code>指定。
+     * 
+     * 
      * @see #getVgap()
      * @see #setVgap(int)
      * @serial
@@ -149,6 +209,10 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Constant to specify components location to be the
      *      north portion of the border layout.
+     * <p>
+     *  常数指定组件位置为边框布局的北部。
+     * 
+     * 
      * @serial
      * @see #getChild(String, boolean)
      * @see #addLayoutComponent
@@ -160,6 +224,10 @@ public class BorderLayout implements LayoutManager2,
      /**
      * Constant to specify components location to be the
      *      west portion of the border layout.
+     * <p>
+     *  常量指定组件位置为边界布局的西部。
+     * 
+     * 
      * @serial
      * @see #getChild(String, boolean)
      * @see #addLayoutComponent
@@ -171,6 +239,10 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Constant to specify components location to be the
      *      east portion of the border layout.
+     * <p>
+     *  常量指定组件位置为边框布局的东部。
+     * 
+     * 
      * @serial
      * @see #getChild(String, boolean)
      * @see #addLayoutComponent
@@ -182,6 +254,10 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Constant to specify components location to be the
      *      south portion of the border layout.
+     * <p>
+     *  常量指定组件位置为边框布局的南部。
+     * 
+     * 
      * @serial
      * @see #getChild(String, boolean)
      * @see #addLayoutComponent
@@ -193,6 +269,10 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Constant to specify components location to be the
      *      center portion of the border layout.
+     * <p>
+     *  常量指定要作为边框布局的中心部分的组件位置。
+     * 
+     * 
      * @serial
      * @see #getChild(String, boolean)
      * @see #addLayoutComponent
@@ -213,6 +293,13 @@ public class BorderLayout implements LayoutManager2,
      * orientation is <code>LEFT_TO_RIGHT</code>, only the
      * <code>BEFORE_FIRST_LINE</code> will be layed out.
      * This will be the same for lastLine, firstItem, lastItem.
+     * <p>
+     * 相对定位常数,可用于代替北,南,东,西或中心。混合两种类型的常量可能导致不可预测的结果。如果使用这两种类型,相对常数将优先。
+     * 例如,如果在定向为<code> LEFT_TO_RIGHT </code>的容器中同时使用<code> NORTH </code>和<code> BEFORE_FIRST_LINE </code>常量添
+     * 加组件,则只有<code> BEFORE_FIRST_LINE < / code>将被布局。
+     * 相对定位常数,可用于代替北,南,东,西或中心。混合两种类型的常量可能导致不可预测的结果。如果使用这两种类型,相对常数将优先。这将是lastLine,firstItem,lastItem相同。
+     * 
+     * 
      * @serial
      */
     Component firstLine;
@@ -220,6 +307,10 @@ public class BorderLayout implements LayoutManager2,
      * A relative positioning constant, that can be used instead of
      * north, south, east, west or center.
      * Please read Description for firstLine.
+     * <p>
+     *  相对定位常数,可用于代替北,南,东,西或中心。请阅读firstLine的说明。
+     * 
+     * 
      * @serial
      */
         Component lastLine;
@@ -227,6 +318,10 @@ public class BorderLayout implements LayoutManager2,
      * A relative positioning constant, that can be used instead of
      * north, south, east, west or center.
      * Please read Description for firstLine.
+     * <p>
+     *  相对定位常数,可用于代替北,南,东,西或中心。请阅读firstLine的说明。
+     * 
+     * 
      * @serial
      */
         Component firstItem;
@@ -234,32 +329,51 @@ public class BorderLayout implements LayoutManager2,
      * A relative positioning constant, that can be used instead of
      * north, south, east, west or center.
      * Please read Description for firstLine.
+     * <p>
+     *  相对定位常数,可用于代替北,南,东,西或中心。请阅读firstLine的说明。
+     * 
+     * 
      * @serial
      */
         Component lastItem;
 
     /**
      * The north layout constraint (top of container).
+     * <p>
+     *  北布局约束(容器顶部)。
+     * 
      */
     public static final String NORTH  = "North";
 
     /**
      * The south layout constraint (bottom of container).
+     * <p>
+     *  南布局约束(容器底部)。
+     * 
      */
     public static final String SOUTH  = "South";
 
     /**
      * The east layout constraint (right side of container).
+     * <p>
+     *  东布局约束(容器右侧)。
+     * 
      */
     public static final String EAST   = "East";
 
     /**
      * The west layout constraint (left side of container).
+     * <p>
+     *  西布局约束(容器的左侧)。
+     * 
      */
     public static final String WEST   = "West";
 
     /**
      * The center layout constraint (middle of container).
+     * <p>
+     *  中心布局约束(容器中间)。
+     * 
      */
     public static final String CENTER = "Center";
 
@@ -267,6 +381,10 @@ public class BorderLayout implements LayoutManager2,
      * Synonym for PAGE_START.  Exists for compatibility with previous
      * versions.  PAGE_START is preferred.
      *
+     * <p>
+     *  PAGE_START的同义词。存在与以前版本的兼容性。 PAGE_START是首选。
+     * 
+     * 
      * @see #PAGE_START
      * @since 1.2
      */
@@ -276,6 +394,10 @@ public class BorderLayout implements LayoutManager2,
      * Synonym for PAGE_END.  Exists for compatibility with previous
      * versions.  PAGE_END is preferred.
      *
+     * <p>
+     *  PAGE_END的同义词。存在与以前版本的兼容性。 PAGE_END是首选。
+     * 
+     * 
      * @see #PAGE_END
      * @since 1.2
      */
@@ -285,6 +407,10 @@ public class BorderLayout implements LayoutManager2,
      * Synonym for LINE_START.  Exists for compatibility with previous
      * versions.  LINE_START is preferred.
      *
+     * <p>
+     * LINE_START的同义词。存在与以前版本的兼容性。 LINE_START是首选。
+     * 
+     * 
      * @see #LINE_START
      * @since 1.2
      */
@@ -294,6 +420,10 @@ public class BorderLayout implements LayoutManager2,
      * Synonym for LINE_END.  Exists for compatibility with previous
      * versions.  LINE_END is preferred.
      *
+     * <p>
+     *  LINE_END的同义词。存在与以前版本的兼容性。 LINE_END是首选。
+     * 
+     * 
      * @see #LINE_END
      * @since 1.2
      */
@@ -304,6 +434,10 @@ public class BorderLayout implements LayoutManager2,
      * For Western, left-to-right and top-to-bottom orientations, this is
      * equivalent to NORTH.
      *
+     * <p>
+     *  组件位于布局内容的第一行之前。对于西,从左到右和从上到下的方向,这相当于NORTH。
+     * 
+     * 
      * @see java.awt.Component#getComponentOrientation
      * @since 1.4
      */
@@ -314,6 +448,10 @@ public class BorderLayout implements LayoutManager2,
      * For Western, left-to-right and top-to-bottom orientations, this is
      * equivalent to SOUTH.
      *
+     * <p>
+     *  组件位于布局内容的最后一行之后。对于西,从左到右和从上到下的方向,这相当于SOUTH。
+     * 
+     * 
      * @see java.awt.Component#getComponentOrientation
      * @since 1.4
      */
@@ -324,6 +462,10 @@ public class BorderLayout implements LayoutManager2,
      * layout. For Western, left-to-right and top-to-bottom orientations,
      * this is equivalent to WEST.
      *
+     * <p>
+     *  组件在布局的线方向的开始处。对于西方,从左到右和从上到下的方向,这相当于西方。
+     * 
+     * 
      * @see java.awt.Component#getComponentOrientation
      * @since 1.4
      */
@@ -334,6 +476,10 @@ public class BorderLayout implements LayoutManager2,
      * layout. For Western, left-to-right and top-to-bottom orientations,
      * this is equivalent to EAST.
      *
+     * <p>
+     *  组件在布局的线方向的末尾。对于西,从左到右和从上到下的方向,这相当于EAST。
+     * 
+     * 
      * @see java.awt.Component#getComponentOrientation
      * @since 1.4
      */
@@ -341,12 +487,18 @@ public class BorderLayout implements LayoutManager2,
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 1.1 serialVersionUID
+     * 
      */
      private static final long serialVersionUID = -8658291919501921765L;
 
     /**
      * Constructs a new border layout with
      * no gaps between components.
+     * <p>
+     *  构造新的边框布局,组件之间没有间隙。
+     * 
      */
     public BorderLayout() {
         this(0, 0);
@@ -357,6 +509,10 @@ public class BorderLayout implements LayoutManager2,
      * between components.
      * The horizontal gap is specified by <code>hgap</code>
      * and the vertical gap is specified by <code>vgap</code>.
+     * <p>
+     *  构造具有组件之间指定间隙的边框布局。水平间隙由<code> hgap </code>指定,垂直间隙由<code> vgap </code>指定。
+     * 
+     * 
      * @param   hgap   the horizontal gap.
      * @param   vgap   the vertical gap.
      */
@@ -367,6 +523,10 @@ public class BorderLayout implements LayoutManager2,
 
     /**
      * Returns the horizontal gap between components.
+     * <p>
+     *  返回组件之间的水平间距。
+     * 
+     * 
      * @since   JDK1.1
      */
     public int getHgap() {
@@ -375,6 +535,10 @@ public class BorderLayout implements LayoutManager2,
 
     /**
      * Sets the horizontal gap between components.
+     * <p>
+     *  设置组件之间的水平间距。
+     * 
+     * 
      * @param hgap the horizontal gap between components
      * @since   JDK1.1
      */
@@ -384,6 +548,10 @@ public class BorderLayout implements LayoutManager2,
 
     /**
      * Returns the vertical gap between components.
+     * <p>
+     *  返回组件之间的垂直间隙。
+     * 
+     * 
      * @since   JDK1.1
      */
     public int getVgap() {
@@ -392,6 +560,10 @@ public class BorderLayout implements LayoutManager2,
 
     /**
      * Sets the vertical gap between components.
+     * <p>
+     *  设置组件之间的垂直间距。
+     * 
+     * 
      * @param vgap the vertical gap between components
      * @since   JDK1.1
      */
@@ -409,6 +581,15 @@ public class BorderLayout implements LayoutManager2,
      * Most applications do not call this method directly. This method
      * is called when a component is added to a container using the
      * <code>Container.add</code> method with the same argument types.
+     * <p>
+     * 使用指定的约束对象将指定的组件添加到布局。
+     * 对于边框布局,约束必须是以下常量之一：<code> NORTH </code>,<code> SOUTH </code>,<code> EAST </code>,<code> WEST </code>或
+     * <code> CENTER </code>。
+     * 使用指定的约束对象将指定的组件添加到布局。
+     * <p>
+     *  大多数应用程序不直接调用此方法。当使用具有相同参数类型的<code> Container.add </code>方法将组件添加到容器时,将调用此方法。
+     * 
+     * 
      * @param   comp         the component to be added.
      * @param   constraints  an object that specifies how and where
      *                       the component is added to the layout.
@@ -429,6 +610,8 @@ public class BorderLayout implements LayoutManager2,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated  replaced by <code>addLayoutComponent(Component, Object)</code>.
      */
     @Deprecated
@@ -440,6 +623,7 @@ public class BorderLayout implements LayoutManager2,
         }
 
         /* Assign the component to one of the known regions of the layout.
+        /* <p>
          */
         if ("Center".equals(name)) {
             center = comp;
@@ -470,6 +654,10 @@ public class BorderLayout implements LayoutManager2,
      * method is called when a container calls its <code>remove</code> or
      * <code>removeAll</code> methods. Most applications do not call this
      * method directly.
+     * <p>
+     *  从此边框布局中删除指定的组件。当容器调用其<code> remove </code>或<code> removeAll </code>方法时,将调用此方法。大多数应用程序不直接调用此方法。
+     * 
+     * 
      * @param   comp   the component to be removed.
      * @see     java.awt.Container#remove(java.awt.Component)
      * @see     java.awt.Container#removeAll()
@@ -502,6 +690,10 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Gets the component that was added using the given constraint
      *
+     * <p>
+     *  获取使用给定约束添加的组件
+     * 
+     * 
      * @param   constraints  the desired constraint, one of <code>CENTER</code>,
      *                       <code>NORTH</code>, <code>SOUTH</code>,
      *                       <code>WEST</code>, <code>EAST</code>,
@@ -549,6 +741,14 @@ public class BorderLayout implements LayoutManager2,
      * The <code>Container</code>'s component orientation is used to determine the location of components
      * added with <code>LINE_START</code> and <code>LINE_END</code>.
      *
+     * <p>
+     *  根据目标<code> Container </code>的组件方向,返回与给定约束位置对应的组件。
+     * 使用相对限制条件<code> PAGE_START </code>,<code> PAGE_END </code>,<code> LINE_START </code>和<code> LINE_END </code>
+     * 添加的组件优先于使用显式约束<code> NORTH </code>,<code> SOUTH </code>,<code> WEST </code>和<code> EAST </code>。
+     *  根据目标<code> Container </code>的组件方向,返回与给定约束位置对应的组件。
+     *  <code> Container </code>的组件方向用于确定用<code> LINE_START </code>和<code> LINE_END </code>添加的组件的位置。
+     * 
+     * 
      * @param   constraints     the desired absolute position, one of <code>CENTER</code>,
      *                          <code>NORTH</code>, <code>SOUTH</code>,
      *                          <code>EAST</code>, <code>WEST</code>
@@ -594,6 +794,10 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Gets the constraints for the specified component
      *
+     * <p>
+     *  获取指定组件的约束
+     * 
+     * 
      * @param   comp the component to be queried
      * @return  the constraint for the specified component,
      *          or null if component is null or is not present
@@ -635,6 +839,12 @@ public class BorderLayout implements LayoutManager2,
      * This method is called when a container calls its
      * <code>getMinimumSize</code> method. Most applications do not call
      * this method directly.
+     * <p>
+     *  使用此布局管理器确定<code>目标</code>容器的最小大小。
+     * <p>
+     * 当容器调用其<code> getMinimumSize </code>方法时,将调用此方法。大多数应用程序不直接调用此方法。
+     * 
+     * 
      * @param   target   the container in which to do the layout.
      * @return  the minimum dimensions needed to lay out the subcomponents
      *          of the specified container.
@@ -691,6 +901,12 @@ public class BorderLayout implements LayoutManager2,
      * Most applications do not call this method directly. This method
      * is called when a container calls its <code>getPreferredSize</code>
      * method.
+     * <p>
+     *  使用此布局管理器,基于容器中的组件,确定<code> target </code>容器的首选大小。
+     * <p>
+     *  大多数应用程序不直接调用此方法。当容器调用其<code> getPreferredSize </code>方法时,将调用此方法。
+     * 
+     * 
      * @param   target   the container in which to do the layout.
      * @return  the preferred dimensions to lay out the subcomponents
      *          of the specified container.
@@ -742,6 +958,10 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Returns the maximum dimensions for this layout given the components
      * in the specified target container.
+     * <p>
+     *  返回给定指定目标容器中的组件的此布局的最大尺寸。
+     * 
+     * 
      * @param target the component which needs to be laid out
      * @see Container
      * @see #minimumLayoutSize
@@ -757,6 +977,9 @@ public class BorderLayout implements LayoutManager2,
      * components.  The value should be a number between 0 and 1
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
+     * <p>
+     *  返回沿x轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
      */
     public float getLayoutAlignmentX(Container parent) {
         return 0.5f;
@@ -768,6 +991,9 @@ public class BorderLayout implements LayoutManager2,
      * components.  The value should be a number between 0 and 1
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
+     * <p>
+     *  返回沿y轴的对齐。这指定了组件将如何相对于其他组件对齐。该值应为0和1之间的数字,其中0表示沿原点的对齐,1对齐距离原点最远,0.5为中心等。
+     * 
      */
     public float getLayoutAlignmentY(Container parent) {
         return 0.5f;
@@ -776,6 +1002,9 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Invalidates the layout, indicating that if the layout manager
      * has cached information it should be discarded.
+     * <p>
+     *  使布局无效,指示如果布局管理器具有缓存的信息,它应该被丢弃。
+     * 
      */
     public void invalidateLayout(Container target) {
     }
@@ -795,6 +1024,15 @@ public class BorderLayout implements LayoutManager2,
      * <p>
      * Most applications do not call this method directly. This method
      * is called when a container calls its <code>doLayout</code> method.
+     * <p>
+     *  使用此边框布局放出容器参数。
+     * <p>
+     * 这个方法实际上重塑了指定容器中的组件,以满足这个<code> BorderLayout </code>对象的约束。
+     *  <code> NORTH </code>和<code> SOUTH </code>组件(如果有)分别放置在容器的顶部和底部。
+     * 然后将<code> WEST </code>和<code> EAST </code>组件分别放置在左侧和右侧。最后,<code> CENTER </code>对象被放置在中间的任何剩余空间中。
+     * <p>
+     *  大多数应用程序不直接调用此方法。当容器调用其<code> doLayout </code>方法时,将调用此方法。
+     * 
      * @param   target   the container in which to do the layout.
      * @see     java.awt.Container
      * @see     java.awt.Container#doLayout()
@@ -843,6 +1081,9 @@ public class BorderLayout implements LayoutManager2,
     /**
      * Get the component that corresponds to the given constraint location
      *
+     * <p>
+     * 
+     * 
      * @param   key     The desired absolute position,
      *                  either NORTH, SOUTH, EAST, or WEST.
      * @param   ltr     Is the component line direction left-to-right?
@@ -879,6 +1120,10 @@ public class BorderLayout implements LayoutManager2,
 
     /**
      * Returns a string representation of the state of this border layout.
+     * <p>
+     *  获取与给定约束位置对应的组件
+     * 
+     * 
      * @return    a string representation of this border layout.
      */
     public String toString() {

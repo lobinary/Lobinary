@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 /*
  * $Id: NodeType.java,v 1.2.4.1 2005/09/05 11:24:25 pvedula Exp $
+ * <p>
+ *  $ Id：NodeType.java,v 1.2.4.1 2005/09/05 11:24:25 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -42,6 +55,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.FlowList;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.NodeTest;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
@@ -85,6 +100,10 @@ public final class NodeType extends Type {
      * The translation to int is undefined since nodes are always converted
      * to reals in arithmetic expressions.
      *
+     * <p>
+     *  将节点转换为内部类型<code> type </code>的对象。转换为int是未定义的,因为节点总是转换为算术表达式中的reals。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -117,6 +136,10 @@ public final class NodeType extends Type {
     /**
      * Expects a node on the stack and pushes its string value.
      *
+     * <p>
+     *  期望堆栈上的一个节点并推送其字符串值。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -161,6 +184,10 @@ public final class NodeType extends Type {
      * then "true" is pushed iff "attr" is an attribute of the current node.
      * If the expression is ".", the result is always "true".
      *
+     * <p>
+     *  将节点转换为合成布尔值。如果表达式是"@attr",则如果"attr"是当前节点的属性,则推送"true"。如果表达式为"。",则结果始终为"true"。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -177,6 +204,10 @@ public final class NodeType extends Type {
      * Expects a node on the stack and pushes a real.
      * First the node is converted to string, and from string to real.
      *
+     * <p>
+     *  期望堆栈上的一个节点并推送一个真实的。首先将节点转换为字符串,然后从字符串转换为实数。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -189,6 +220,10 @@ public final class NodeType extends Type {
      * Expects a node on the stack and pushes a singleton node-set. Singleton
      * iterators are already started after construction.
      *
+     * <p>
+     *  期望堆栈上的一个节点并推送一个单例节点集。单元迭代器在构建之后已经开始。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -208,6 +243,10 @@ public final class NodeType extends Type {
     /**
      * Subsume Node into ObjectType.
      *
+     * <p>
+     *  将Node节点转换为ObjectType。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -220,6 +259,10 @@ public final class NodeType extends Type {
      * 0 or a 1 but instead returns branchhandle list to be appended to the
      * false list.
      *
+     * <p>
+     * 将节点转换为非合成布尔值。它不推动0或1,而是返回分支句柄列表附加到false列表。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateToDesynthesized
      */
     public FlowList translateToDesynthesized(ClassGenerator classGen,
@@ -233,6 +276,10 @@ public final class NodeType extends Type {
      * Expects a node on the stack and pushes a boxed node. Boxed nodes
      * are represented by an instance of <code>com.sun.org.apache.xalan.internal.xsltc.dom.Node</code>.
      *
+     * <p>
+     *  预期堆栈上的一个节点,并推送一个盒装的节点。盒子节点由<code> com.sun.org.apache.xalan.internal.xsltc.dom.Node </code>的实例表示。
+     * 
+     * 
      * @see     com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type#translateTo
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
@@ -251,6 +298,9 @@ public final class NodeType extends Type {
      * Translates a node into the Java type denoted by <code>clazz</code>.
      * Expects a node on the stack and pushes an object of the appropriate
      * type after coercion.
+     * <p>
+     *  将节点转换为由<code> clazz </code>表示的Java类型。期望堆栈上的一个节点,并在强制后推送适当类型的对象。
+     * 
      */
     public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
                             Class clazz) {
@@ -288,6 +338,9 @@ public final class NodeType extends Type {
 
     /**
      * Translates an object of this type to its boxed representation.
+     * <p>
+     *  将此类型的对象转换为其框化表示。
+     * 
      */
     public void translateBox(ClassGenerator classGen,
                              MethodGenerator methodGen) {
@@ -296,6 +349,9 @@ public final class NodeType extends Type {
 
     /**
      * Translates an object of this type to its unboxed representation.
+     * <p>
+     *  将此类型的对象转换为其未装箱的表示。
+     * 
      */
     public void translateUnBox(ClassGenerator classGen,
                                MethodGenerator methodGen) {
@@ -309,6 +365,8 @@ public final class NodeType extends Type {
 
     /**
      * Returns the class name of an internal type's external representation.
+     * <p>
+     *  返回内部类型的外部表示的类名。
      */
     public String getClassName() {
         return(RUNTIME_NODE_CLASS);

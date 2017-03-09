@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v1.0的属性Copyright IBM Corp. 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.encoding;
@@ -48,6 +52,9 @@ public final class CodeSetComponentInfo {
      * CodeSetComponent is part of an IOR multi-component profile.  Two
      * instances constitute a CodeSetComponentInfo (one for char and one
      * for wchar data)
+     * <p>
+     *  CodeSetComponent是IOR多组件配置文件的一部分。两个实例构成一个CodeSetComponentInfo(一个用于char,一个用于wchar数据)
+     * 
      */
     public static final class CodeSetComponent {
         int nativeCodeSet;
@@ -185,6 +192,9 @@ public final class CodeSetComponentInfo {
 
     /**
      * CodeSetContext goes in a GIOP service context
+     * <p>
+     *  CodeSetContext进入GIOP服务上下文
+     * 
      */
     public static final class CodeSetContext {
         private int char_data;
@@ -250,6 +260,21 @@ public final class CodeSetComponentInfo {
      * Thus, I've chosen not to include UTF-8 in the conversion set
      * for wchar data.
      *
+     * <p>
+     *  我们的默认代码集方案如下：
+     * 
+     *  字符数据：
+     * 
+     *  本地代码集：ISO 8859-1(8位)转换集：UTF-8,ISO 646(7位)
+     * 
+     *  wchar数据：
+     * 
+     *  本地代码集：UTF-16转换集：UCS-2
+     * 
+     *  Pre-Merlin / J2EE 1.3 JavaSoft ORB列出了针对char的ISO646和针对wchar的UCS-2,并且未提供转换集。他们也没有做正确的谈判或提供回退集。
+     *  UCS-2仍然在转换列表中,用于向后兼容。
+     * 
+     *  备用字符为UTF-8用于char,UTF-16用于wchar。
      */
     public static final CodeSetComponentInfo JAVASOFT_DEFAULT_CODESETS;
     static {
@@ -280,6 +305,10 @@ public final class CodeSetComponentInfo {
      * and the rest is the conversion code set list.
      *
      * The numbers can either be decimal or hex.
+     * <p>
+     * 
+     *  在GIOP 1.1中,与wchar的互操作性限于2字节固定宽度编码,因为它的wchar之前没有长度。因此,我选择不在UTF-8的转换集中为wchar数据。
+     * 
      */
     public static CodeSetComponent createFromString(String str) {
         ORBUtilSystemException wrapper = ORBUtilSystemException.get(
@@ -333,6 +362,12 @@ public final class CodeSetComponentInfo {
 
     /**
      * Code sets for local cases without a connection.
+     * <p>
+     *  从包含逗号分隔的OSF代码集注册表号列表的字符串中创建一个CodeSetComponent。如果任何数字不为我们的注册表所知,则抛出INITIALIZE异常。由corba.ORB init使用。
+     * 
+     *  列表中的第一个数字被视为本机代码集,其余的是转换代码集列表。
+     * 
+     * 数字可以是十进制或十六进制。
      */
     public static final CodeSetContext LOCAL_CODE_SETS
         = new CodeSetContext(OSFCodeSetRegistry.ISO_8859_1.getNumber(),

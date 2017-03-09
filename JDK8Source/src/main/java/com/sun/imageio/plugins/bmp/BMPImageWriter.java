@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -71,6 +72,12 @@ import com.sun.imageio.plugins.common.I18N;
  * The encoding process may clip, subsample using the parameters
  * specified in the <code>ImageWriteParam</code>.
  *
+ * <p>
+ *  用于将二进制RenderedImage编码为BMP格式的Java Image IO插件编写器。
+ * 
+ *  编码过程可以使用<code> ImageWriteParam </code>中指定的参数进行剪辑,子采样。
+ * 
+ * 
  * @see javax.imageio.plugins.bmp.BMPImageWriteParam
  */
 public class BMPImageWriter extends ImageWriter implements BMPConstants {
@@ -90,6 +97,9 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
 
     /** Constructs <code>BMPImageWriter</code> based on the provided
      *  <code>ImageWriterSpi</code>.
+     * <p>
+     *  <code> ImageWriterSpi </code>。
+     * 
      */
     public BMPImageWriter(ImageWriterSpi originator) {
         super(originator);
@@ -353,6 +363,9 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
                  * Technically, it should work for other direct color
                  * model types but it might be non compatible with win98
                  * and friends.
+                 * <p>
+                 *  这里输入USHORT_565_RGB或USHORT_555_RGB类型。技术上,它应该适用于其他直接颜色模型类型,但它可能与win98和朋友不兼容。
+                 * 
                  */
                 if (colorModel instanceof DirectColorModel) {
                     DirectColorModel dcm = (DirectColorModel)colorModel;
@@ -453,6 +466,9 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
                          * For example: in case of TYPE_INT_RGB actual pixel
                          * size is 24 bits, but size of DataBuffere element
                          * is 32 bits
+                         * <p>
+                         *  使用的DataBuffer元素的大小。例如：在TYPE_INT_RGB的情况下,实际像素大小为24位,但DataBuffere元素的大小为32位
+                         * 
                          */
                         int[] sample_sizes = sampleModel.getSampleSize();
                         bitsPerPixel = 0;
@@ -502,6 +518,9 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
          * is allowed only if compression type is BI_RGB or BI_BITFIELDS.
          * Images with any other compression type must be wrote in the
          * bottom-up layout.
+         * <p>
+         *  仅当压缩类型为BI_RGB或BI_BITFIELDS时才允许。具有任何其他压缩类型的图像必须以自下而上的布局写入。
+         * 
          */
         if (compressionType == BI_RGB ||
             compressionType == BI_BITFIELDS)
@@ -830,6 +849,11 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
              * BI_RGB        - the RGB order should be maintained.
              * BI_BITFIELDS  - use bitPos array that was built
              *                 according to bitfields masks.
+             * <p>
+             *  我们期望像素数据以RGB顺序。我们将组装短像素考虑压缩类型：
+             * 
+             *  BI_RGB  - 应保持RGB顺序。 BI_BITFIELDS  - 使用根据位字段掩码构建的bitPos数组。
+             * 
              */
             for (int j = 0, m = 0; j < scanlineBytes; m++) {
                 spixels[m] = 0;
@@ -837,6 +861,9 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
                     /*
                      * please note that despite other cases,
                      * the 16bpp BI_RGB requires the RGB data order
+                     * <p>
+                     *  请注意,尽管其他情况,16bpp BI_RGB需要RGB数据顺序
+                     * 
                      */
                     spixels[m] = (short)
                         (((0x1f & pixels[j    ]) << 10) |
@@ -899,6 +926,11 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
                  * BI_RGB        - the BGR order should be used.
                  * BI_BITFIELDS  - use bitPos array that was built
                  *                 according to bitfields masks.
+                 * <p>
+                 *  我们期望像素数据以RGB顺序。我们将考虑压缩类型来组合int像素。
+                 * 
+                 *  BI_RGB  - 应使用BGR顺序。 BI_BITFIELDS  - 使用根据位字段掩码构建的bitPos数组。
+                 * 
                  */
                 for (int j = 0, m = 0; j < scanlineBytes; m++) {
                     ipixels[m] = 0;
@@ -1404,6 +1436,12 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
      *
      * NB: we probably need to extend this method if we encounter other image
      * types which can not be encoded with BI_RGB compression type.
+     * <p>
+     * 返回给定图像的首选压缩类型。默认压缩类型为BI_RGB,但某些图像类型无法使用默认压缩而不使用cahnge颜色分辨率。
+     * 例如,TYPE_USHORT_565_RGB可以仅使用BI_BITFIELDS压缩类型进行编码。
+     * 
+     *  注意：如果遇到不能用BI_RGB压缩类型编码的其他图像类型,我们可能需要扩展此方法。
+     * 
      */
     protected int getPreferredCompressionType(ColorModel cm, SampleModel sm) {
         ImageTypeSpecifier imageType = new ImageTypeSpecifier(cm, sm);
@@ -1424,6 +1462,13 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
      *
      * NB: method should be extended if other cases when we can not encode
      *     with given compression will be discovered.
+     * <p>
+     *  检查是否可以使用所讨论的压缩方法对给定类型的图像进行编码。
+     * 
+     *  例如,TYPE_USHORT_565_RGB只能使用BI_BITFIELDS压缩编码。
+     * 
+     *  NB：方法应该扩展,如果其他情况下,当我们无法编码与给定的压缩将被发现。
+     * 
      */
     protected boolean canEncodeImage(int compression, ColorModel cm, SampleModel sm) {
         ImageTypeSpecifier imgType = new ImageTypeSpecifier(cm, sm);
@@ -1471,6 +1516,14 @@ public class BMPImageWriter extends ImageWriter implements BMPConstants {
              *     is 0x7C00; and a 5-6-5 16-bit image, where the blue mask
              *     is 0x001F, the green mask is 0x07E0, and the red mask is
              *     0xF800.
+             * <p>
+             *  从技术上讲,我们期望我们可以在这里只编码一些SinglePixelPackedSampleModel图像。
+             * 
+             *  此外,我们应考虑以下因素：
+             * 
+             *  1. BI_RGB的情况,根据MSDN的描述：
+             * 
+             *  位图最多有2 ^ 16种颜色。如果BITMAPINFOHEADER的biCompression成员是BI_RGB,则BITMAPINFO的bmiColors成员为NULL。
              */
             boolean canUseRGB = false;
             boolean canUseBITFIELDS = false;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -54,6 +55,22 @@ import com.sun.jndi.ldap.BerDecoder;
  *
  * </pre>
  *
+ * <p>
+ *  表示一批搜索结果的结束。包含结果集中条目总数的估计值和不透明Cookie。必须将cookie提供给下一个搜索操作,才能获得下一批结果。
+ * <p>
+ *  {@link PagedResultsControl}中的代码示例说明如何使用此类。
+ * <p>
+ *  此类实现了<a href="http://www.ietf.org/rfc/rfc2696"> RFC 2696 </a>中定义的分页结果的LDAPv3响应控件。
+ * 
+ *  控件的值具有以下ASN.1定义：
+ * <pre>
+ * 
+ *  realSearchControlValue :: = SEQUENCE {size INTEGER(0..maxInt), - 从客户端请求的页面大小 - 从服务器cookie估计的结果集大小OCTET STRING}
+ * 。
+ * 
+ * </pre>
+ * 
+ * 
  * @since 1.5
  * @see PagedResultsControl
  * @author Vincent Ryan
@@ -63,6 +80,9 @@ final public class PagedResultsResponseControl extends BasicControl {
     /**
      * The paged-results response control's assigned object identifier
      * is 1.2.840.113556.1.4.319.
+     * <p>
+     *  分页结果响应控件的分配的对象标识符是1.2.840.113556.1.4.319。
+     * 
      */
     public static final String OID = "1.2.840.113556.1.4.319";
 
@@ -71,6 +91,10 @@ final public class PagedResultsResponseControl extends BasicControl {
     /**
      * An estimate of the number of entries in the search result.
      *
+     * <p>
+     *  搜索结果中条目数的估计。
+     * 
+     * 
      * @serial
      */
     private int resultSize;
@@ -78,6 +102,10 @@ final public class PagedResultsResponseControl extends BasicControl {
     /**
      * A server-generated cookie.
      *
+     * <p>
+     *  服务器生成的Cookie。
+     * 
+     * 
      * @serial
      */
     private byte[] cookie;
@@ -85,6 +113,10 @@ final public class PagedResultsResponseControl extends BasicControl {
     /**
      * Constructs a paged-results response control.
      *
+     * <p>
+     *  构造分页结果响应控件。
+     * 
+     * 
      * @param   id              The control's object identifier string.
      * @param   criticality     The control's criticality.
      * @param   value           The control's ASN.1 BER encoded value.
@@ -109,6 +141,10 @@ final public class PagedResultsResponseControl extends BasicControl {
     /**
      * Retrieves (an estimate of) the number of entries in the search result.
      *
+     * <p>
+     *  检索(搜索)搜索结果中条目数的估计。
+     * 
+     * 
      * @return The number of entries in the search result, or zero if unknown.
      */
     public int getResultSize() {
@@ -119,6 +155,9 @@ final public class PagedResultsResponseControl extends BasicControl {
      * Retrieves the server-generated cookie. Null is returned when there are
      * no more entries for the server to return.
      *
+     * <p>
+     *  检索服务器生成的Cookie。当没有更多条目要返回服务器时,将返回Null。
+     * 
      * @return A possibly null server-generated cookie. It is not cloned - any
      *         changes to the cookie will update the control's state and thus
      *         are not recommended.

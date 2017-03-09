@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -40,6 +41,11 @@ import java.util.Enumeration;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将与以后的Swing版本不兼容。当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ *  1.4以上,支持所有JavaBean和贸易的长期存储;已添加到<code> java.beans </code>包中。请参阅{@link java.beans.XMLEncoder}。
+ * 
+ * 
  * @author Scott Violet
  */
 
@@ -56,12 +62,18 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * True if the root node is displayed, false if its children are
      * the highest visible nodes.
+     * <p>
+     *  如果显示根节点,则为True,如果其子节点是最高可见节点,则为false。
+     * 
      */
     protected boolean            rootVisible;
 
     /**
       * Height to use for each row.  If this is &lt;= 0 the renderer will be
       * used to determine the height for each row.
+      * <p>
+      *  每行使用的高度。如果这是&lt; = 0,则渲染器将用于确定每行的高度。
+      * 
       */
     protected int                rowHeight;
 
@@ -71,6 +83,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * and which is therefore responsible for calculating the dimensions of
      * individual nodes.
      *
+     * <p>
+     *  设置负责绘制树中节点的渲染器,因此负责计算单个节点的维度。
+     * 
+     * 
      * @param nd a <code>NodeDimensions</code> object
      */
     public void setNodeDimensions(NodeDimensions nd) {
@@ -81,6 +97,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * Returns the object that renders nodes in the tree, and which is
      * responsible for calculating the dimensions of individual nodes.
      *
+     * <p>
+     *  返回在树中呈现节点的对象,它负责计算各个节点的维度。
+     * 
+     * 
      * @return the <code>NodeDimensions</code> object
      */
     public NodeDimensions getNodeDimensions() {
@@ -90,6 +110,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Sets the <code>TreeModel</code> that will provide the data.
      *
+     * <p>
+     *  设置将提供数据的<code> TreeModel </code>。
+     * 
+     * 
      * @param newModel the <code>TreeModel</code> that is to
      *          provide the data
      */
@@ -100,6 +124,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Returns the <code>TreeModel</code> that is providing the data.
      *
+     * <p>
+     *  返回提供数据的<code> TreeModel </code>。
+     * 
+     * 
      * @return the <code>TreeModel</code> that is providing the data
      */
     public TreeModel getModel() {
@@ -110,6 +138,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * Determines whether or not the root node from
      * the <code>TreeModel</code> is visible.
      *
+     * <p>
+     *  确定来自<code> TreeModel </code>的根节点是否可见。
+     * 
+     * 
      * @param rootVisible true if the root node of the tree is to be displayed
      * @see #rootVisible
      * @beaninfo
@@ -124,6 +156,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Returns true if the root node of the tree is displayed.
      *
+     * <p>
+     *  如果显示树的根节点,则返回true。
+     * 
+     * 
      * @return true if the root node of the tree is displayed
      * @see #rootVisible
      */
@@ -136,6 +172,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * is less than or equal to zero the current cell renderer is
      * queried for each row's height.
      *
+     * <p>
+     *  设置每个单元格的高度。如果指定的值小于或等于零,则查询每一行的高度的当前单元格渲染器。
+     * 
+     * 
      * @param rowHeight the height of each cell, in pixels
      * @beaninfo
      *        bound: true
@@ -149,6 +189,9 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * Returns the height of each row.  If the returned value is less than
      * or equal to 0 the height for each row is determined by the
      * renderer.
+     * <p>
+     * 返回每行的高度。如果返回值小于或等于0,每行的高度由渲染器确定。
+     * 
      */
     public int getRowHeight() {
         return rowHeight;
@@ -158,6 +201,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * Sets the <code>TreeSelectionModel</code> used to manage the
      * selection to new LSM.
      *
+     * <p>
+     *  将用于管理选择的<code> TreeSelectionModel </code>设置为新的LSM。
+     * 
+     * 
      * @param newLSM  the new <code>TreeSelectionModel</code>
      */
     public void setSelectionModel(TreeSelectionModel newLSM) {
@@ -171,6 +218,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Returns the model used to maintain the selection.
      *
+     * <p>
+     *  返回用于维护选择的模型。
+     * 
+     * 
      * @return the <code>treeSelectionModel</code>
      */
     public TreeSelectionModel getSelectionModel() {
@@ -180,6 +231,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Returns the preferred height.
      *
+     * <p>
+     *  返回首选高度。
+     * 
+     * 
      * @return the preferred height
      */
     public int getPreferredHeight() {
@@ -206,6 +261,12 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * will be returned (and this may be a VERY expensive
      * computation).
      *
+     * <p>
+     *  返回传入的区域的首选宽度。
+     * 该区域由最接近<code>(bounds.x,bounds.y)</code>的路径定义,并以<code> bounds.height + bounds.y </code>结束。
+     * 如果<code> bounds </code>是<code> null </code>,将返回所有节点的首选宽度(这可能是一个非常昂贵的计算)。
+     * 
+     * 
      * @param bounds the region being queried
      * @return the preferred width for the passed in region
      */
@@ -263,12 +324,19 @@ public abstract class AbstractLayoutCache implements RowMapper {
 
     /**
       * Returns true if the value identified by row is currently expanded.
+      * <p>
+      *  如果由行标​​识的值当前已展开,则返回true。
+      * 
       */
     public abstract boolean isExpanded(TreePath path);
 
     /**
      * Returns a rectangle giving the bounds needed to draw path.
      *
+     * <p>
+     *  返回一个给出绘制路径所需的边界的矩形。
+     * 
+     * 
      * @param path     a <code>TreePath</code> specifying a node
      * @param placeIn  a <code>Rectangle</code> object giving the
      *          available space
@@ -280,6 +348,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
       * Returns the path for passed in row.  If row is not visible
       * <code>null</code> is returned.
       *
+      * <p>
+      *  返回在行中传递的路径。如果行不可见,则返回<code> null </code>。
+      * 
+      * 
       * @param row  the row being queried
       * @return the <code>TreePath</code> for the given row
       */
@@ -290,6 +362,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
       * at.  Will return -1 if any of the elements in path are not
       * currently visible.
       *
+      * <p>
+      *  返回在路径中标识的最后一个项目所在的行在哪里可见。如果路径中的任何元素当前不可见,将返回-1。
+      * 
+      * 
       * @param path the <code>TreePath</code> being queried
       * @return the row where the last item in path is visible or -1
       *         if any elements in path aren't currently visible
@@ -304,6 +380,11 @@ public abstract class AbstractLayoutCache implements RowMapper {
       * returned object is exactly at x, y you should get the bounds for
       * the returned path and test x, y against that.
       *
+      * <p>
+      *  返回最接近x,y的节点的路径。如果当前没有可见的,这将返回<code> null </code>,否则它总是返回一个有效的路径。
+      * 如果你需要测试返回的对象是否正好在x,y,你应该得到返回的路径的边界,并测试x,y。
+      * 
+      * 
       * @param x the horizontal component of the desired location
       * @param y the vertical component of the desired location
       * @return the <code>TreePath</code> closest to the specified point
@@ -318,6 +399,11 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * unless it isn't visible,
      * in which case <code>null</code> will be returned.
      *
+     * <p>
+     * 返回一个<code>枚举器</code>,它在从传入位置开始的可见路径上递增。枚举的排序基于如何显示路径。
+     * 返回的枚举的第一个元素将是path,除非它不可见,在这种情况下将返回<code> null </code>。
+     * 
+     * 
      * @param path the starting location for the enumeration
      * @return the <code>Enumerator</code> starting at the desired location
      */
@@ -326,6 +412,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Returns the number of visible children for row.
      *
+     * <p>
+     *  返回行的可见子项数。
+     * 
+     * 
      * @param path  the path being queried
      * @return the number of visible children for the specified path
      */
@@ -335,6 +425,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * Marks the path <code>path</code> expanded state to
      * <code>isExpanded</code>.
      *
+     * <p>
+     *  将路径<code> path </code>扩展状态标记为<code> isExpanded </code>。
+     * 
+     * 
      * @param path  the path being expanded or collapsed
      * @param isExpanded true if the path should be expanded, false otherwise
      */
@@ -343,6 +437,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Returns true if the path is expanded, and visible.
      *
+     * <p>
+     *  如果路径已展开,则返回true,并且可见。
+     * 
+     * 
      * @param path  the path being queried
      * @return true if the path is expanded and visible, false otherwise
      */
@@ -351,6 +449,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Number of rows being displayed.
      *
+     * <p>
+     *  显示的行数。
+     * 
+     * 
      * @return the number of rows being displayed
      */
     public abstract int getRowCount();
@@ -358,6 +460,9 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Informs the <code>TreeState</code> that it needs to recalculate
      * all the sizes it is referencing.
+     * <p>
+     *  通知<code> TreeState </code>,它需要重新计算它引用的所有大小。
+     * 
      */
     public abstract void invalidateSizes();
 
@@ -365,6 +470,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * Instructs the <code>LayoutCache</code> that the bounds for
      * <code>path</code> are invalid, and need to be updated.
      *
+     * <p>
+     *  指示<code> LayoutCache </code> <code> path </code>的边界无效,需要更新。
+     * 
+     * 
      * @param path the path being updated
      */
     public abstract void invalidatePathBounds(TreePath path);
@@ -388,6 +497,15 @@ public abstract class AbstractLayoutCache implements RowMapper {
      *
      * <p>e.childIndices() returns the index(es) of the changed node(s).</p>
      *
+     * <p>
+     * <p>
+     *  在一个节点(或一组兄弟节点)以某种方式更改后调用。节点没有改变树中的位置或改变它们的子数组,但是其他属性已经改变并且可能影响呈现。示例：文件的名称已更改,但它位于文件系统中的相同位置。</p>
+     * 
+     *  <p> e.path()返回变更节点的父节点的路径。</p>
+     * 
+     *  <p> e.childIndices()返回变更节点的索引。</p>
+     * 
+     * 
      * @param e  the <code>TreeModelEvent</code>
      */
     public abstract void treeNodesChanged(TreeModelEvent e);
@@ -399,6 +517,12 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * <p>e.childIndices() returns the indices of the new nodes in
      * ascending order.</p>
      *
+     * <p>
+     *  <p>在树已插入节点后调用。</p>
+     * 
+     *  <p> e.path()返回新节点的父节点</p> <p> e.childIndices()以升序返回新节点的索引。</p>
+     * 
+     * 
      * @param e the <code>TreeModelEvent</code>
      */
     public abstract void treeNodesInserted(TreeModelEvent e);
@@ -413,6 +537,14 @@ public abstract class AbstractLayoutCache implements RowMapper {
      *
      * <p>e.childIndices() returns the indices the nodes had before they were deleted in ascending order.</p>
      *
+     * <p>
+     * <p>在从树中删除节点后调用。注意,如果从树中删除子树,则该方法对于删除的子树的根可以只被调用一次,而对于去除的每个兄弟姐妹的每个集合不能被调用一次。</p>
+     * 
+     *  <p> e.path()返回已删除节点的前父节点。</p>
+     * 
+     *  <p> e.childIndices()返回节点在以升序删除之前所具有的索引。</p>
+     * 
+     * 
      * @param e the <code>TreeModelEvent</code>
      */
     public abstract void treeNodesRemoved(TreeModelEvent e);
@@ -427,6 +559,12 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * <p>e.path() holds the path to the node.</p>
      * <p>e.childIndices() returns null.</p>
      *
+     * <p>
+     *  <p>在树已从给定节点向下大幅更改结构后调用。如果<code> e.getPath()</code>返回的路径长度为1,并且第一个元素不标识当前根节点,则第一个元素应该成为树的新根。</p>
+     * 
+     *  <p> e.path()包含节点的路径。</p> <p> e.childIndices()返回null。</p>
+     * 
+     * 
      * @param e the <code>TreeModelEvent</code>
      */
     public abstract void treeStructureChanged(TreeModelEvent e);
@@ -443,6 +581,11 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * in <code>path</code> is not valid its entry in the array should
      * be set to -1.
      *
+     * <p>
+     *  返回<code> path </code>中显示的<code> TreePath </code>实例的行。
+     * 此方法应返回与传入的长度相同的数组,如果<code> path </code>中的<code> TreePaths </code>之一无效,则其数组中的条目应设置为 - 1。
+     * 
+     * 
      * @param paths the array of <code>TreePath</code>s being queried
      * @return an array of the same length that is passed in containing
      *          the rows that each corresponding where each
@@ -474,6 +617,13 @@ public abstract class AbstractLayoutCache implements RowMapper {
      * should be placed in <code>inPlace</code> and returned. This will
      * return <code>null</code> if there is no renderer.
      *
+     * <p>
+     *  通过<code> placeIn </code>中的引用返回表示<code> value </code>所需的大小。
+     * 如果<code> inPlace </code>是<code> null </code>,则应返回一个新创建的<code> Rectangle </code>,否则该值应放在<code> inPlace
+     *  </code>回。
+     *  通过<code> placeIn </code>中的引用返回表示<code> value </code>所需的大小。如果没有渲染器,将返回<code> null </code>。
+     * 
+     * 
      * @param value the <code>value</code> to be represented
      * @param row  row being queried
      * @param depth the depth of the row
@@ -496,6 +646,9 @@ public abstract class AbstractLayoutCache implements RowMapper {
 
     /**
       * Returns true if the height of each row is a fixed size.
+      * <p>
+      *  如果每行的高度为固定大小,则返回true。
+      * 
       */
     protected boolean isFixedRowHeight() {
         return (rowHeight > 0);
@@ -505,6 +658,9 @@ public abstract class AbstractLayoutCache implements RowMapper {
     /**
      * Used by <code>AbstractLayoutCache</code> to determine the size
      * and x origin of a particular node.
+     * <p>
+     * 由<code> AbstractLayoutCache </code>使用以确定特定节点的大小和x起点。
+     * 
      */
     static public abstract class NodeDimensions {
         /**
@@ -514,6 +670,10 @@ public abstract class AbstractLayoutCache implements RowMapper {
          * <code>Rectangle</code> should be returned,
          * otherwise the value should be placed in bounds and returned.
          *
+         * <p>
+         *  通过引用以边界返回大小和x原点到位置值。调用方法负责确定Y位置。
+         * 如果bounds是<code> null </code>,应该返回一个新创建的<code> Rectangle </code>,否则该值应该放在边界中并返回。
+         * 
          * @param value the <code>value</code> to be represented
          * @param row row being queried
          * @param depth the depth of the row

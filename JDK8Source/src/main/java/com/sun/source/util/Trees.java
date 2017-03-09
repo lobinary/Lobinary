@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,12 +50,20 @@ import com.sun.source.tree.Tree;
 /**
  * Bridges JSR 199, JSR 269, and the Tree API.
  *
+ * <p>
+ *  Bridges JSR 199,JSR 269和Tree API。
+ * 
+ * 
  * @author Peter von der Ah&eacute;
  */
 @jdk.Exported
 public abstract class Trees {
     /**
      * Gets a Trees object for a given CompilationTask.
+     * <p>
+     *  获取给定CompilationTask的Trees对象。
+     * 
+     * 
      * @param task the compilation task for which to get the Trees object
      * @throws IllegalArgumentException if the task does not support the Trees API.
      */
@@ -68,6 +77,10 @@ public abstract class Trees {
 
     /**
      * Gets a Trees object for a given ProcessingEnvironment.
+     * <p>
+     *  获取给定ProcessingEnvironment的Trees对象。
+     * 
+     * 
      * @param env the processing environment for which to get the Trees object
      * @throws IllegalArgumentException if the env does not support the Trees API.
      */
@@ -91,65 +104,99 @@ public abstract class Trees {
 
     /**
      * Gets a utility object for obtaining source positions.
+     * <p>
+     *  获取用于获取源位置的实用程序对象。
+     * 
      */
     public abstract SourcePositions getSourcePositions();
 
     /**
      * Gets the Tree node for a given Element.
      * Returns null if the node can not be found.
+     * <p>
+     *  获取给定Element的Tree节点。如果找不到节点,则返回null。
+     * 
      */
     public abstract Tree getTree(Element element);
 
     /**
      * Gets the ClassTree node for a given TypeElement.
      * Returns null if the node can not be found.
+     * <p>
+     *  获取给定TypeElement的ClassTree节点。如果找不到节点,则返回null。
+     * 
      */
     public abstract ClassTree getTree(TypeElement element);
 
     /**
      * Gets the MethodTree node for a given ExecutableElement.
      * Returns null if the node can not be found.
+     * <p>
+     *  获取给定的ExecutableElement的MethodTree节点。如果找不到节点,则返回null。
+     * 
      */
     public abstract MethodTree getTree(ExecutableElement method);
 
     /**
      * Gets the Tree node for an AnnotationMirror on a given Element.
      * Returns null if the node can not be found.
+     * <p>
+     *  获取给定元素上AnnotationMirror的Tree节点。如果找不到节点,则返回null。
+     * 
      */
     public abstract Tree getTree(Element e, AnnotationMirror a);
 
     /**
      * Gets the Tree node for an AnnotationValue for an AnnotationMirror on a given Element.
      * Returns null if the node can not be found.
+     * <p>
+     *  获取给定元素上AnnotationMirror的AnnotationValue的Tree节点。如果找不到节点,则返回null。
+     * 
      */
     public abstract Tree getTree(Element e, AnnotationMirror a, AnnotationValue v);
 
     /**
      * Gets the path to tree node within the specified compilation unit.
+     * <p>
+     *  获取指定编译单元中的树节点的路径。
+     * 
      */
     public abstract TreePath getPath(CompilationUnitTree unit, Tree node);
 
     /**
      * Gets the TreePath node for a given Element.
      * Returns null if the node can not be found.
+     * <p>
+     *  获取给定Element的TreePath节点。如果找不到节点,则返回null。
+     * 
      */
     public abstract TreePath getPath(Element e);
 
     /**
      * Gets the TreePath node for an AnnotationMirror on a given Element.
      * Returns null if the node can not be found.
+     * <p>
+     *  获取给定元素上AnnotationMirror的TreePath节点。如果找不到节点,则返回null。
+     * 
      */
     public abstract TreePath getPath(Element e, AnnotationMirror a);
 
     /**
      * Gets the TreePath node for an AnnotationValue for an AnnotationMirror on a given Element.
      * Returns null if the node can not be found.
+     * <p>
+     *  获取给定元素上AnnotationMirror的AnnotationValue的TreePath节点。如果找不到节点,则返回null。
+     * 
      */
     public abstract TreePath getPath(Element e, AnnotationMirror a, AnnotationValue v);
 
     /**
      * Gets the Element for the Tree node identified by a given TreePath.
      * Returns null if the element is not available.
+     * <p>
+     *  获取由给定TreePath标识的树节点的元素。如果元素不可用,则返回null。
+     * 
+     * 
      * @throws IllegalArgumentException is the TreePath does not identify
      * a Tree node that might have an associated Element.
      */
@@ -158,6 +205,10 @@ public abstract class Trees {
     /**
      * Gets the TypeMirror for the Tree node identified by a given TreePath.
      * Returns null if the TypeMirror is not available.
+     * <p>
+     *  获取由给定TreePath标识的Tree节点的TypeMirror。如果TypeMirror不可用,则返回null。
+     * 
+     * 
      * @throws IllegalArgumentException is the TreePath does not identify
      * a Tree node that might have an associated TypeMirror.
      */
@@ -166,18 +217,29 @@ public abstract class Trees {
     /**
      * Gets the Scope for the Tree node identified by a given TreePath.
      * Returns null if the Scope is not available.
+     * <p>
+     * 获取由给定TreePath标识的树节点的作用域。如果Scope不可用,则返回null。
+     * 
      */
     public abstract Scope getScope(TreePath path);
 
     /**
      * Gets the doc comment, if any, for the Tree node identified by a given TreePath.
      * Returns null if no doc comment was found.
+     * <p>
+     *  获取由给定TreePath标识的Tree节点的doc注释(如果有)。如果未找到doc注释,则返回null。
+     * 
+     * 
      * @see DocTrees#getDocCommentTree(TreePath)
      */
     public abstract String getDocComment(TreePath path);
 
     /**
      * Checks whether a given type is accessible in a given scope.
+     * <p>
+     *  检查给定范围中是否可访问给定类型。
+     * 
+     * 
      * @param scope the scope to be checked
      * @param type the type to be checked
      * @return true if {@code type} is accessible
@@ -187,6 +249,10 @@ public abstract class Trees {
     /**
      * Checks whether the given element is accessible as a member of the given
      * type in a given scope.
+     * <p>
+     *  检查给定元素是否可作为给定范围中给定类型的成员访问。
+     * 
+     * 
      * @param scope the scope to be checked
      * @param member the member to be checked
      * @param type the type for which to check if the member is accessible
@@ -196,6 +262,10 @@ public abstract class Trees {
 
     /**
       * Gets the original type from the ErrorType object.
+      * <p>
+      *  从ErrorType对象获取原始类型。
+      * 
+      * 
       * @param errorType The errorType for which we want to get the original type.
       * @return javax.lang.model.type.TypeMirror corresponding to the original type, replaced by the ErrorType.
       */
@@ -205,6 +275,10 @@ public abstract class Trees {
      * Prints a message of the specified kind at the location of the
      * tree within the provided compilation unit
      *
+     * <p>
+     *  在提供的编译单元内的树的位置打印指定类型的消息
+     * 
+     * 
      * @param kind the kind of message
      * @param msg  the message, or an empty string if none
      * @param t    the tree to use as a position hint
@@ -216,6 +290,9 @@ public abstract class Trees {
 
     /**
      * Gets the lub of an exception parameter declared in a catch clause.
+     * <p>
+     *  获取在catch子句中声明的异常参数的lub。
+     * 
      * @param tree the tree for the catch clause
      * @return The lub of the exception parameter
      */

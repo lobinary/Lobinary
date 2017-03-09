@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -73,6 +74,15 @@ import com.sun.corba.se.impl.protocol.JIDLLocalCRDImpl ;
 * <LI>AdapterStateChanged must be invoked (from somewhere) whenever
 * an adapter state changes that is not due to an adapter manager state change.</LI>
 * </UL>
+* <p>
+*  对象。它用于标准RMI-IIOP以及向后兼容的服务器支持(即ORB.connect()方法)其特性包括：
+* <UL>
+*  <LI> TOA只有一个OA实例。其OAId为{"TOA"} </LI> <LI>没有适配器管理器。 TOA管理器ID是固定的。<LI> <LI>状态与ORB状态(TBD)相同</LI>
+* </UL>
+*  其他需求：
+* <UL>
+*  <LI>所有对象适配器在创建时都必须调用ORB.adapterCreated。
+* </LI>
 */
 public class TOAImpl extends ObjectAdapterBase implements TOA
 {
@@ -118,6 +128,11 @@ public class TOAImpl extends ObjectAdapterBase implements TOA
     * This will update thread Current, so that subsequent calls to
     * returnServant and removeCurrent from the same thread are for the
     * same request.
+    * <p>
+    *  <LI>所有适配器管理器必须在其状态改变时调用ORB.adapterManagerStateChanged,将内部状态映射到ORT状态。
+    * </LI> <LI> AdapterStateChanged必须在适配器状态更改时调用(从某处)适配器管理器状态更改。</LI>。
+    * </UL>
+    * 
     * @param request is the request containing the rest of the request
     */
     public void getInvocationServant( OAInvocationInfo info )
@@ -136,6 +151,9 @@ public class TOAImpl extends ObjectAdapterBase implements TOA
     }
 
     /** Return the most derived interface for the given servant and objectId.
+    /* <p>
+    /*  这将更新线程Current,以便后续调用returnServant和removeCurrent从同一线程是为同一请求。
+    /* 
     */
     public String[] getInterfaces( Object servant, byte[] objectId )
     {

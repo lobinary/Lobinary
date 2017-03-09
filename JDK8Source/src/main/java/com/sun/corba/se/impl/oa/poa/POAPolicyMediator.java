@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2003, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,10 +43,16 @@ import org.omg.PortableServer.POAPackage.ObjectNotActive ;
  * time.  Also note that as much as possible, this interface does not
  * do any concurrency control, except as noted.  The POA is responsible
  * for concurrency control.
+ * <p>
+ *  策略特定操作。这允许通过在POA创建时创建正确的代码来优化不同策略的代码路径。还要注意尽可能多的,这个接口不做任何并发控制,除非另有说明。 POA负责并发控制。
+ * 
  */
 public interface POAPolicyMediator {
     /** Return the policies object that was used to create this
     * POAPolicyMediator.
+    * <p>
+    *  POAPolicyMediator。
+    * 
     */
     Policies getPolicies() ;
 
@@ -53,6 +60,9 @@ public interface POAPolicyMediator {
     * created by this POAPolicyMediator's POA.  This is initialized
     * according to the policies and the POA used to construct this
     * POAPolicyMediator in the POAPolicyMediatorFactory.
+    * <p>
+    *  由POAPolicyMediator的POA创建。这根据策略和用于在POAPolicyMediatorFactory中构造此POAPolicyMediator的POA进行初始化。
+    * 
     */
     int getScid() ;
 
@@ -60,11 +70,18 @@ public interface POAPolicyMediator {
     * created by this POAPolicyMediator's POA.  This is initialized
     * according to the policies and the POA used to construct this
     * POAPolicyMediator in the POAPolicyMediatorFactory.
+    * <p>
+    *  由POAPolicyMediator的POA创建。这根据策略和用于在POAPolicyMediatorFactory中构造此POAPolicyMediator的POA进行初始化。
+    * 
     */
     int getServerId() ;
 
     /** Get the servant to use for an invocation with the
     * given id and operation.
+    * <p>
+    *  给定id和操作。
+    * 
+    * 
     * @param id the object ID for which we are requesting a servant
     * @param operation the name of the operation to be performed on
     * the servant
@@ -74,35 +91,52 @@ public interface POAPolicyMediator {
         String operation ) throws ForwardRequest ;
 
     /** Release a servant that was obtained from getInvocationServant.
+    /* <p>
     */
     void returnServant() ;
 
     /** Etherealize all servants associated with this POAPolicyMediator.
     * Does nothing if the retention policy is non-retain.
+    * <p>
+    *  如果保留策略为非保留,则不执行任何操作。
+    * 
     */
     void etherealizeAll() ;
 
     /** Delete everything in the active object map.
+    /* <p>
     */
     void clearAOM() ;
 
     /** Return the servant manager.  Will throw WrongPolicy
     * if the request processing policy is not USE_SERVANT_MANAGER.
+    * <p>
+    *  如果请求处理策略不是USE_SERVANT_MANAGER。
+    * 
     */
     ServantManager getServantManager() throws WrongPolicy ;
 
     /** Set the servant manager.  Will throw WrongPolicy
     * if the request processing policy is not USE_SERVANT_MANAGER.
+    * <p>
+    *  如果请求处理策略不是USE_SERVANT_MANAGER。
+    * 
     */
     void setServantManager( ServantManager servantManager ) throws WrongPolicy ;
 
     /** Return the default servant.   Will throw WrongPolicy
     * if the request processing policy is not USE_DEFAULT_SERVANT.
+    * <p>
+    *  如果请求处理策略不是USE_DEFAULT_SERVANT。
+    * 
     */
     Servant getDefaultServant() throws NoServant, WrongPolicy ;
 
     /** Set the default servant.   Will throw WrongPolicy
     * if the request processing policy is not USE_DEFAULT_SERVANT.
+    * <p>
+    *  如果请求处理策略不是USE_DEFAULT_SERVANT。
+    * 
     */
     void setDefaultServant( Servant servant ) throws WrongPolicy ;
 
@@ -111,11 +145,16 @@ public interface POAPolicyMediator {
 
     /** Deactivate the object that is associated with the given id.
     * Returns the servant for id.
+    * <p>
+    *  返回id的servant。
+    * 
     */
     Servant deactivateObject( byte[] id ) throws ObjectNotActive, WrongPolicy ;
 
     /** Allocate a new, unique system ID.  Requires the ID assignment policy
     * to be SYSTEM.
+    * <p>
+    *  为SYSTEM。
     */
     byte[] newSystemId() throws WrongPolicy ;
 

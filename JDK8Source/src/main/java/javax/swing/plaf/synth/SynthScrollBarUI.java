@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import javax.swing.plaf.basic.*;
  * Provides the Synth L&amp;F UI delegate for
  * {@link javax.swing.JScrollBar}.
  *
+ * <p>
+ *  为{@link javax.swing.JScrollBar}提供Synth L&amp; F UI委托。
+ * 
+ * 
  * @author Scott Violet
  * @since 1.7
  */
@@ -54,6 +59,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installDefaults() {
@@ -69,6 +77,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void configureScrollBarColors() {
@@ -137,6 +148,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void installListeners() {
@@ -146,6 +160,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallListeners() {
@@ -155,6 +172,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected void uninstallDefaults(){
@@ -178,6 +198,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public SynthContext getContext(JComponent c) {
@@ -211,6 +234,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public boolean getSupportsAbsolutePositioning() {
@@ -229,6 +255,12 @@ public class SynthScrollBarUI extends BasicScrollBarUI
      * <p>In general, this method does not need to be overridden by subclasses.
      * All Look and Feel rendering code should reside in the {@code paint} method.
      *
+     * <p>
+     *  通知此UI代理重新绘制指定的组件。此方法绘制组件背景,然后调用{@link #paint(SynthContext,Graphics)}方法。
+     * 
+     *  <p>通常,此方法不需要被子类覆盖。所有Look and Feel渲染代码应该驻留在{@code paint}方法中。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -250,6 +282,10 @@ public class SynthScrollBarUI extends BasicScrollBarUI
      * <p>This method is not used by Synth Look and Feel.
      * Painting is handled by the {@link #paint(SynthContext,Graphics)} method.
      *
+     * <p>
+     *  根据外观来绘制指定的组件。 <p>此方法不被Synth Look and Feel使用。绘画由{@link #paint(SynthContext,Graphics)}方法处理。
+     * 
+     * 
      * @param g the {@code Graphics} object used for painting
      * @param c the component being painted
      * @see #paint(SynthContext,Graphics)
@@ -265,6 +301,10 @@ public class SynthScrollBarUI extends BasicScrollBarUI
     /**
      * Paints the specified component.
      *
+     * <p>
+     *  绘制指定的组件。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g the {@code Graphics} object used for painting
      * @see #update(Graphics,JComponent)
@@ -282,6 +322,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     public void paintBorder(SynthContext context, Graphics g, int x,
@@ -293,6 +336,10 @@ public class SynthScrollBarUI extends BasicScrollBarUI
     /**
      * Paints the scrollbar track.
      *
+     * <p>
+     *  绘制滚动条轨道。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g {@code Graphics} object used for painting
      * @param trackBounds bounding box for the track
@@ -311,6 +358,10 @@ public class SynthScrollBarUI extends BasicScrollBarUI
     /**
      * Paints the scrollbar thumb.
      *
+     * <p>
+     *  绘制滚动条缩略图。
+     * 
+     * 
      * @param context context for the component being painted
      * @param g {@code Graphics} object used for painting
      * @param thumbBounds bounding box for the thumb
@@ -338,6 +389,12 @@ public class SynthScrollBarUI extends BasicScrollBarUI
      * The <code>preferredSize</code> is only computed once, subsequent
      * calls to this method just return a cached size.
      *
+     * <p>
+     *  垂直滚动条的首选宽度是(非<code> null </code>)增量/减量按钮的首选宽度的最大值,以及缩略图的最小宽度。优选的高度是相同部件的优选高度的总和。水平滚动条的首选大小的基础是类似的。
+     * <p>
+     *  <code> preferredSize </code>只计算一次,对此方法的后续调用只返回缓存的大小。
+     * 
+     * 
      * @param c the <code>JScrollBar</code> that's delegating this method to us
      * @return the preferred size of a Basic JScrollBar
      * @see #getMaximumSize
@@ -353,6 +410,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected Dimension getMinimumThumbSize() {
@@ -370,6 +430,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected JButton createDecreaseButton(int orientation)  {
@@ -399,6 +462,9 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     @Override
     protected JButton createIncreaseButton(int orientation)  {
@@ -430,6 +496,8 @@ public class SynthScrollBarUI extends BasicScrollBarUI
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
      */
     @Override
     protected void setThumbRollover(boolean active) {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会。
+ * 
+ *  根据Apache许可证2.0版("许可证")授权;您不能使用此文件,除非符合许可证。您可以通过获取许可证的副本
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件按"原样"分发,不附带任何明示或暗示的担保或条件。请参阅管理许可证下的权限和限制的特定语言的许可证。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -91,6 +101,36 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLParserConfiguration;
  *  </ul>
  * </ul>
  *
+ * <p>
+ *  一个非常基本的解析器配置。此配置类可以用作自定义解析器配置的基类。基本解析器配置创建符号表(如果在构建时未指定)并管理所有已识别的特征和属性。
+ * <p>
+ *  基本解析器配置<strong>不</strong>要求任何特定的管道配置或使用除符号表之外的特定组件。
+ * 如果即使这对于基本的解析器配置太多了,程序员也可以创建一个实现<code> XMLParserConfiguration </code>接口的新配置类。
+ * <p>
+ * 基本解析器配置的子类可以通过分别调用<code> addRecognizedFeature </code>和<code> addRecognizedProperty </code>方法来添加自己已识别的
+ * 特性和属性。
+ * <p>
+ *  基本解析器配置假设配置将由实现<code> XMLComponent </code>接口的各种解析器组件组成。
+ * 如果此配置的子类创建自己的组件以在解析器配置中使用,则每个组件应通过调用<code> addComponent </code>方法添加到组件列表中。
+ * 基本解析器配置将确保在解析实例文档之前调用每个注册组件的<code> reset </code>方法。
+ * <p>
+ *  此类识别以下功能和属性：
+ * <ul>
+ *  <li>功能
+ * <ul>
+ *  <li> http://xml.org/sax/features/validation </li> <li> http://xml.org/sax/features/namespaces </li> 
+ * <li> http://xml.org / sax / features / external-general-entities </li> <li> http://xml.org/sax/featur
+ * es/external-parameter-entities </li>。
+ * </ul>
+ *  <li>属性
+ * <ul>
+ *  <li> http://xml.org/sax/properties/xml-string </li> <li> http://apache.org/xml/properties/internal/s
+ * ymbol-table </li> <li> http ：//apache.org/xml/properties/internal/error-handler </li> <li> http://apa
+ * che.org/xml/properties/internal/entity-resolver </li>。
+ * </ul>
+ * </ul>
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Andy Clark, IBM
  *
@@ -184,6 +224,10 @@ public abstract class BasicParserConfiguration
     /**
      * Constructs a parser configuration using the specified symbol table.
      *
+     * <p>
+     *  使用指定的符号表构造解析器配置。
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      */
     protected BasicParserConfiguration(SymbolTable symbolTable) {
@@ -194,6 +238,10 @@ public abstract class BasicParserConfiguration
      * Constructs a parser configuration using the specified symbol table
      * and parent settings.
      *
+     * <p>
+     *  使用指定的符号表和父设置构造解析器配置。
+     * 
+     * 
      * @param symbolTable    The symbol table to use.
      * @param parentSettings The parent settings.
      */
@@ -246,6 +294,10 @@ public abstract class BasicParserConfiguration
      * also add all of the component's recognized features and properties
      * to the list of default recognized features and properties.
      *
+     * <p>
+     * 向解析器配置中添加一个组件。此方法还会将所有组件的已识别要素和属性添加到默认的已识别要素和属性列表中。
+     * 
+     * 
      * @param component The component to add.
      */
     protected void addComponent(XMLComponent component) {
@@ -305,6 +357,16 @@ public abstract class BasicParserConfiguration
      * has ended.  If a client application wants to terminate
      * parsing early, it should throw an exception.
      *
+     * <p>
+     *  解析XML文档。
+     * <p>
+     *  解析器可以使用此方法指示此配置开始从任何有效的输入源(字符流,字节流或URI)解析XML文档。
+     * <p>
+     *  解析正在进行时,解析器不能调用此方法。一旦解析完成,解析器就可以解析另一个XML文档。
+     * <p>
+     *  此方法是同步的：它将不会返回,直到解析结束。如果客户端应用程序想要尽早终止解析,它应该抛出异常。
+     * 
+     * 
      * @param inputSource The input source for the top-level of the
      *               XML document.
      *
@@ -321,6 +383,10 @@ public abstract class BasicParserConfiguration
      * Sets the document handler on the last component in the pipeline
      * to receive information about the document.
      *
+     * <p>
+     *  在管道中的最后一个组件上设置文档处理程序,以接收有关文档的信息。
+     * 
+     * 
      * @param documentHandler   The document handler.
      */
     public void setDocumentHandler(XMLDocumentHandler documentHandler) {
@@ -341,6 +407,10 @@ public abstract class BasicParserConfiguration
     /**
      * Sets the DTD handler.
      *
+     * <p>
+     *  设置DTD处理程序。
+     * 
+     * 
      * @param dtdHandler The DTD handler.
      */
     public void setDTDHandler(XMLDTDHandler dtdHandler) {
@@ -355,6 +425,10 @@ public abstract class BasicParserConfiguration
     /**
      * Sets the DTD content model handler.
      *
+     * <p>
+     *  设置DTD内容模型处理程序。
+     * 
+     * 
      * @param handler The DTD content model handler.
      */
     public void setDTDContentModelHandler(XMLDTDContentModelHandler handler) {
@@ -370,6 +444,10 @@ public abstract class BasicParserConfiguration
      * Sets the resolver used to resolve external entities. The EntityResolver
      * interface supports resolution of public and system identifiers.
      *
+     * <p>
+     *  设置用于解析外部实体的解析器。 EntityResolver接口支持公共和系统标识符的解析。
+     * 
+     * 
      * @param resolver The new entity resolver. Passing a null value will
      *                 uninstall the currently installed resolver.
      */
@@ -381,6 +459,10 @@ public abstract class BasicParserConfiguration
     /**
      * Return the current entity resolver.
      *
+     * <p>
+     *  返回当前实体解析器。
+     * 
+     * 
      * @return The current entity resolver, or null if none
      *         has been registered.
      * @see #setEntityResolver
@@ -403,6 +485,14 @@ public abstract class BasicParserConfiguration
      * middle of a parse, and the SAX parser must begin using the new
      * handler immediately.</p>
      *
+     * <p>
+     *  允许应用程序注册错误事件处理程序。
+     * 
+     *  <p>如果应用程序未注册错误处理程序,则SAX解析器报告的所有错误事件将被忽略;然而,正常处理可能不会继续。强烈建议所有SAX应用程序实现错误处理程序,以避免意外的错误。</p>
+     * 
+     * <p>应用程序可能在解析中间注册一个新的或不同的处理程序,并且SAX解析器必须立即开始使用新的处理程序。</p>
+     * 
+     * 
      * @param errorHandler The error handler.
      * @exception java.lang.NullPointerException If the handler
      *            argument is null.
@@ -416,6 +506,10 @@ public abstract class BasicParserConfiguration
     /**
      * Return the current error handler.
      *
+     * <p>
+     *  返回当前错误处理程序。
+     * 
+     * 
      * @return The current error handler, or null if none
      *         has been registered.
      * @see #setErrorHandler
@@ -432,6 +526,12 @@ public abstract class BasicParserConfiguration
      * might not recognize the feature, and if it does recognize
      * it, it might not be able to fulfill the request.
      *
+     * <p>
+     *  设置要素的状态。
+     * 
+     *  设置SAX2解析器中任何功能的状态。解析器可能无法识别该功能,如果它识别它,它可能无法满足该请求。
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      * @param state The requested state of the feature (true or false).
      *
@@ -455,6 +555,10 @@ public abstract class BasicParserConfiguration
     /**
      * setProperty
      *
+     * <p>
+     *  setProperty
+     * 
+     * 
      * @param propertyId
      * @param value
      */
@@ -476,6 +580,10 @@ public abstract class BasicParserConfiguration
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置。
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception XNIException Thrown if the parser does not support the
@@ -496,6 +604,9 @@ public abstract class BasicParserConfiguration
 
     /**
      * reset all components before parsing and namespace context
+     * <p>
+     *  在解析和命名空间上下文之前重置所有组件
+     * 
      */
     protected void reset() throws XNIException {
 
@@ -512,6 +623,10 @@ public abstract class BasicParserConfiguration
      * Check a property. If the property is known and supported, this method
      * simply returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查属性。如果属性是已知的和支持的,这个方法简单地返回。否则,抛出适当的异常。
+     * 
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      * @exception com.sun.org.apache.xerces.internal.xni.parser.XMLConfigurationException If the
@@ -553,6 +668,9 @@ public abstract class BasicParserConfiguration
      * Check a feature. If feature is know and supported, this method simply
      * returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查功能。如果特性是知道和支持的,这个方法简单地返回。否则,抛出适当的异常。
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      *
      * @throws XMLConfigurationException Thrown for configuration error.

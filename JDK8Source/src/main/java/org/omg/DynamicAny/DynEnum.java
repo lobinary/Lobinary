@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -12,6 +13,8 @@ package org.omg.DynamicAny;
 /**
     * DynEnum objects support the manipulation of IDL enumerated values.
     * The current position of a DynEnum is always -1.
+    * <p>
+    * 
     */
 public interface DynEnum extends DynEnumOperations, org.omg.DynamicAny.DynAny, org.omg.CORBA.portable.IDLEntity 
 {

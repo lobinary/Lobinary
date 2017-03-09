@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -96,6 +97,40 @@ import java.beans.ConstructorProperties;
  * alt="image showing the output of the example code">
  * </center>
  *
+ * <p>
+ *  {@code LinearGradientPaint}类提供了一种用线性颜色渐变图案填充{@link java.awt.Shape}的方法。
+ * 用户可以指定两个或更多个渐变颜色,并且该涂色将在每个颜色之间提供插值。用户还指定开始和结束点,它们定义用户空间中颜色渐变应该开始和结束的位置。
+ * <p>
+ *  用户必须提供一个浮点数组,指定如何沿渐变分布颜色。这些值应该在0.0到1.0之间,并且沿着渐变(它们标记渐变应该是特定颜色的位置)的关键帧。
+ * <p>
+ *  在用户未将第一关键帧值设置为等于0和/或最后关键帧值等于1的情况下,将在这些位置创建关键帧,并且将在那里复制第一和最后一个颜色。因此,如果用户指定以下数组来构造渐变：<br>
+ * <pre>
+ *  {Color.BLUE,Color.RED},{.3f,.7f}
+ * </pre>
+ *  这将被转换为具有以下关键帧的渐变：<br>
+ * <pre>
+ *  {Color.BLUE,Color.BLUE,Color.RED,Color.RED},{0f,.3f,.7f,1f}
+ * </pre>
+ * 
+ * <p>
+ * 用户还可以通过将{@code CycleMethod}设置为{@code REFLECTION}或{@code REPEAT},来选择{@code LinearGradientPaint}对象在填充开始
+ * 点和结束点之外的空间时采取的操作。
+ * 在梯度的任何反射或重复拷贝中的任何两种颜色之间的距离与起点和终点之间的相同的两种颜色之间的距离相同。注意,由于以像素的粒度进行采样,可能发生一些小的距离变化。
+ * 如果没有指定循环方法,默认情况下将选择{@code NO_CYCLE},这意味着端点颜色将用于填充剩余区域。
+ * <p>
+ *  colorSpace参数允许用户指定应在哪个颜色空间中执行插值,默认sRGB或线性化RGB。
+ * 
+ * <p>
+ *  以下代码演示了{@code LinearGradientPaint}的典型用法：
+ * <pre>
+ *  Point2D start = new Point2D.Float(0,0); Point2D end = new Point2D.Float(50,50); float [] dist = {0.0f,0.2f,1.0f}
+ * ; Color [] colors = {Color.RED,Color.WHITE,Color.BLUE}; LinearGradientPaint p = new LinearGradientPai
+ * nt(start,end,dist,colors);。
+ * </pre>
+ * <p>
+ *  此代码将创建一个{@code LinearGradientPaint},它在渐变的前20％内插入红色和白色之间,在剩余的80％内插入白色和蓝色之间。
+ * 
+ * 
  * @see java.awt.Paint
  * @see java.awt.Graphics2D#setPaint
  * @author Nicholas Talian, Vincent Hardy, Jim Graham, Jerry Evans
@@ -110,6 +145,15 @@ public final class LinearGradientPaint extends MultipleGradientPaint {
      * Constructs a {@code LinearGradientPaint} with a default
      * {@code NO_CYCLE} repeating method and {@code SRGB} color space.
      *
+     * <p>
+     * <p>
+     *  这个图像演示了上面的三个循环方法中的每一个的示例代码：
+     * <center>
+     *  <img src ="doc-files / LinearGradientPaint.png"
+     * alt="image showing the output of the example code">
+     * </center>
+     * 
+     * 
      * @param startX the X coordinate of the gradient axis start point
      *               in user space
      * @param startY the Y coordinate of the gradient axis start point
@@ -147,6 +191,10 @@ public final class LinearGradientPaint extends MultipleGradientPaint {
      * Constructs a {@code LinearGradientPaint} with a default {@code SRGB}
      * color space.
      *
+     * <p>
+     * 使用默认的{@code NO_CYCLE}重复方法和{@code SRGB}颜色空间构造{@code LinearGradientPaint}。
+     * 
+     * 
      * @param startX the X coordinate of the gradient axis start point
      *               in user space
      * @param startY the Y coordinate of the gradient axis start point
@@ -188,6 +236,10 @@ public final class LinearGradientPaint extends MultipleGradientPaint {
      * Constructs a {@code LinearGradientPaint} with a default
      * {@code NO_CYCLE} repeating method and {@code SRGB} color space.
      *
+     * <p>
+     *  使用默认的{@code SRGB}颜色空间构造{@code LinearGradientPaint}。
+     * 
+     * 
      * @param start the gradient axis start {@code Point2D} in user space
      * @param end the gradient axis end {@code Point2D} in user space
      * @param fractions numbers ranging from 0.0 to 1.0 specifying the
@@ -217,6 +269,10 @@ public final class LinearGradientPaint extends MultipleGradientPaint {
      * Constructs a {@code LinearGradientPaint} with a default {@code SRGB}
      * color space.
      *
+     * <p>
+     *  使用默认的{@code NO_CYCLE}重复方法和{@code SRGB}颜色空间构造{@code LinearGradientPaint}。
+     * 
+     * 
      * @param start the gradient axis start {@code Point2D} in user space
      * @param end the gradient axis end {@code Point2D} in user space
      * @param fractions numbers ranging from 0.0 to 1.0 specifying the
@@ -251,6 +307,10 @@ public final class LinearGradientPaint extends MultipleGradientPaint {
     /**
      * Constructs a {@code LinearGradientPaint}.
      *
+     * <p>
+     *  使用默认的{@code SRGB}颜色空间构造{@code LinearGradientPaint}。
+     * 
+     * 
      * @param start the gradient axis start {@code Point2D} in user space
      * @param end the gradient axis end {@code Point2D} in user space
      * @param fractions numbers ranging from 0.0 to 1.0 specifying the
@@ -308,6 +368,10 @@ public final class LinearGradientPaint extends MultipleGradientPaint {
      * method in the {@link Paint} interface for information
      * on null parameter handling.
      *
+     * <p>
+     *  构造一个{@code LinearGradientPaint}。
+     * 
+     * 
      * @param cm the preferred {@link ColorModel} which represents the most convenient
      *           format for the caller to receive the pixel data, or {@code null}
      *           if there is no preference.
@@ -364,6 +428,11 @@ public final class LinearGradientPaint extends MultipleGradientPaint {
     /**
      * Returns a copy of the start point of the gradient axis.
      *
+     * <p>
+     *  创建并返回用于生成线性颜色渐变图案的{@link PaintContext}。
+     * 有关空参数处理的信息,请参阅{@link Paint}界面中的方法的{@link Paint#createContext specification}。
+     * 
+     * 
      * @return a {@code Point2D} object that is a copy of the point
      * that anchors the first color of this {@code LinearGradientPaint}
      */
@@ -374,6 +443,10 @@ public final class LinearGradientPaint extends MultipleGradientPaint {
     /**
      * Returns a copy of the end point of the gradient axis.
      *
+     * <p>
+     *  返回梯度轴起点的副本。
+     * 
+     * 
      * @return a {@code Point2D} object that is a copy of the point
      * that anchors the last color of this {@code LinearGradientPaint}
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -21,6 +22,12 @@ package org.omg.PortableInterceptor;
    * information that is common to both, so they both inherit from a common 
    * interface: <code>RequestInfo</code>.
    *
+   * <p>
+   *  请求信息,拦截器可访问。
+   * <p>
+   *  每个拦截点都被赋予一个对象,通过该对象,拦截器可以访问请求信息。
+   * 客户端和服务器端拦截点涉及不同的信息,因此有两个信息对象：<code> ClientRequestInfo </code>被传递到客户端拦截点,并且<code> ServerRequestInfo </code>
+   * 
    * @see ClientRequestInfo
    * @see ServerRequestInfo
    */

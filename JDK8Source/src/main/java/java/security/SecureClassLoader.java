@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,10 @@ import sun.security.util.Debug;
  * classes with an associated code source and permissions which are
  * retrieved by the system policy by default.
  *
+ * <p>
+ *  此类扩展了ClassLoader,同时还支持定义具有相关代码源和权限的类,这些权限由系统策略默认检索。
+ * 
+ * 
  * @author  Li Gong
  * @author  Roland Schemers
  */
@@ -44,6 +49,9 @@ public class SecureClassLoader extends ClassLoader {
      * If initialization succeed this is set to true and security checks will
      * succeed. Otherwise the object is not initialized and the object is
      * useless.
+     * <p>
+     *  如果初始化成功,则设置为true,安全检查将成功。否则对象不被初始化,对象是无用的。
+     * 
      */
     private final boolean initialized;
 
@@ -66,6 +74,12 @@ public class SecureClassLoader extends ClassLoader {
      * calls the security manager's {@code checkCreateClassLoader}
      * method  to ensure creation of a class loader is allowed.
      * <p>
+     * <p>
+     *  使用指定的父类装入器创建新的SecureClassLoader以进行委派。
+     * 
+     *  <p>如果有安全管理员,此方法首先会调用安全管理员的{@code checkCreateClassLoader}方法,以确保允许创建类加载器。
+     * <p>
+     * 
      * @param parent the parent ClassLoader
      * @exception  SecurityException  if a security manager exists and its
      *             {@code checkCreateClassLoader} method doesn't allow
@@ -90,6 +104,12 @@ public class SecureClassLoader extends ClassLoader {
      * calls the security manager's {@code checkCreateClassLoader}
      * method  to ensure creation of a class loader is allowed.
      *
+     * <p>
+     *  使用默认父类装入器创建新的SecureClassLoader以进行委派。
+     * 
+     *  <p>如果有安全管理员,此方法首先会调用安全管理员的{@code checkCreateClassLoader}方法,以确保允许创建类加载器。
+     * 
+     * 
      * @exception  SecurityException  if a security manager exists and its
      *             {@code checkCreateClassLoader} method doesn't allow
      *             creation of a class loader.
@@ -113,6 +133,12 @@ public class SecureClassLoader extends ClassLoader {
      * If a non-null CodeSource is supplied a ProtectionDomain is
      * constructed and associated with the class being defined.
      * <p>
+     * <p>
+     *  将字节数组转换为Class类的实例,使用可选的CodeSource。在类可以使用之前必须解决。
+     * <p>
+     *  如果提供了一个非空的CodeSource,则构造一个ProtectionDomain并与被定义的类相关联。
+     * <p>
+     * 
      * @param      name the expected name of the class, or {@code null}
      *                  if not known, using '.' and not '/' as the separator
      *                  and without a trailing ".class" suffix.
@@ -150,6 +176,12 @@ public class SecureClassLoader extends ClassLoader {
      * If a non-null CodeSource is supplied a ProtectionDomain is
      * constructed and associated with the class being defined.
      * <p>
+     * <p>
+     *  将{@link java.nio.ByteBuffer ByteBuffer}转换为类{@code Class}的实例,并带有一个可选的CodeSource。在类可以使用之前必须解决。
+     * <p>
+     * 如果提供了一个非空的CodeSource,则构造一个ProtectionDomain并与被定义的类相关联。
+     * <p>
+     * 
      * @param      name the expected name of the class, or {@code null}
      *                  if not known, using '.' and not '/' as the separator
      *                  and without a trailing ".class" suffix.
@@ -181,6 +213,12 @@ public class SecureClassLoader extends ClassLoader {
      * a CodeSource as an argument when it is constructing the
      * ProtectionDomain for the class being defined.
      * <p>
+     * <p>
+     *  返回给定CodeSource对象的权限。
+     * <p>
+     *  此方法由defineClass方法调用,该方法在为正在定义的类构造ProtectionDomain时将CodeSource作为参数。
+     * <p>
+     * 
      * @param codesource the codesource.
      *
      * @return the permissions granted to the codesource.
@@ -194,6 +232,9 @@ public class SecureClassLoader extends ClassLoader {
 
     /*
      * Returned cached ProtectionDomain for the specified CodeSource.
+     * <p>
+     *  返回指定CodeSource的缓存ProtectionDomain。
+     * 
      */
     private ProtectionDomain getProtectionDomain(CodeSource cs) {
         if (cs == null)
@@ -217,6 +258,8 @@ public class SecureClassLoader extends ClassLoader {
 
     /*
      * Check to make sure the class loader has been initialized.
+     * <p>
+     *  检查以确保类加载器已初始化。
      */
     private void check() {
         if (!initialized) {

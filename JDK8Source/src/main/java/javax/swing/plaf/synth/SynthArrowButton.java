@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,9 @@ import javax.swing.plaf.UIResource;
 /**
  * JButton object that draws a scaled Arrow in one of the cardinal directions.
  *
+ * <p>
+ *  JButton对象在一个基本方向上绘制缩放的箭头。
+ * 
  * @author Scott Violet
  */
 class SynthArrowButton extends JButton implements SwingConstants, UIResource {

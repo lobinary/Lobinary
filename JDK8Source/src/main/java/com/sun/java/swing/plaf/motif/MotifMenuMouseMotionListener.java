@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 1998, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -30,6 +31,9 @@ import javax.swing.MenuSelectionManager;
 /**
  * A default MouseListener for menu elements
  *
+ * <p>
+ *  菜单元素的默认MouseListener
+ * 
  * @author Arnaud Weber
  */
 class MotifMenuMouseMotionListener implements MouseMotionListener {

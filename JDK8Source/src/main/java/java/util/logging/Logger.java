@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -213,6 +214,87 @@ import sun.reflect.Reflection;
  * All the other logging methods are implemented as calls on this
  * log(LogRecord) method.
  *
+ * <p>
+ *  Logger对象用于记录特定系统或应用程序组件的消息。记录器通常使用分层的点分隔命名空间命名。
+ * 记录器名称可以是任意字符串,但它们通常应基于记录的组件的包名称或类名称,例如java.net或javax.swing。此外,可以创建不存储在Logger命名空间中的"匿名"Logger。
+ * <p>
+ *  记录器对象可以通过对getLogger工厂方法之一的调用来获得。这些将创建一个新的Logger或返回一个合适的现有Logger。
+ * 重要的是注意,如果没有保存对Logger的强引用,那么由{@code getLogger}工厂方法之一返回的Logger可能在任何时间被垃圾收集。
+ * <p>
+ *  日志消息将转发到已注册的Handler对象,该对象可将消息转发到各种目标,包括控制台,文件,操作系统日志等。
+ * <p>
+ *  每个记录器跟踪"父"记录器,它是Logger命名空间中最接近的现有祖先。
+ * <p>
+ *  每个记录器具有与其相关联的"级别"。这反映了这个记录器关心的最低水平。如果记录器的级别设置为<tt> null </tt>,那么它的有效级别从其父级继承,这反过来可以从其父级递归地获取它,等等。
+ * <p>
+ * 日志级别可以基于日志配置文件的属性进行配置,如LogManager类的描述中所述。但是,它也可以通过Logger.setLevel方法的调用动态更改。
+ * 如果记录器级别更改,则更改也可能会影响子记录器,因为任何具有<tt> null </tt>作为其级别的子记录器将从其父级继承其有效级别。
+ * <p>
+ *  在每个记录调用中,记录器首先针对记录器的有效日志级别执行请求级别的便宜检查(例如,SEVERE或FINE)。如果请求级别低于日志级别,则日志调用立即返回。
+ * <p>
+ *  在通过这个初始(便宜)测试之后,Logger将分配一个LogRecord来描述日志消息。然后它将调用过滤器(如果存在),以便对是否应该发布该记录进行更详细的检查。
+ * 如果它通过,然后将LogRecord发布到其输出处理程序。默认情况下,日志记录器还向树上递归地发布到其父级的处理程序。
+ * <p>
+ * 每个记录器可能有一个{@code ResourceBundle}与它相关联。
+ *  {@code ResourceBundle}可以通过名称指定,使用{@link #getLogger(java.lang.String,java.lang.String)}工厂方法,或者通过使用{@link #setResourceBundle(java。
+ * 每个记录器可能有一个{@code ResourceBundle}与它相关联。 util.ResourceBundle)setResourceBundle}方法。此捆绑包将用于本地化日志记录消息。
+ * 如果Logger没有自己的{@code ResourceBundle}或资源包名称,那么它将从父对象继承树的{@code ResourceBundle}或资源包名称。
+ * <p>
+ *  大多数记录器输出方法采用"msg"参数。这个msg参数可以是原始值或本地化键。
+ * 在格式化期间,如果记录器具有(或继承)本地化{@code ResourceBundle},并且如果{@code ResourceBundle}具有msg字符串的映射,则msg字符串被本地化值替代。
+ * 否则使用原始的msg字符串。通常,格式化程序使用java.text.MessageFormat样式格式化参数,因此例如格式化字符串"{0} {1}"会将两个参数格式化为字符串。
+ * <p>
+ * 一组方法交替地采用"msgSupplier"而不是"msg"参数。
+ * 这些方法采用{@link Supplier} {@ code <String>}函数,只有当根据有效日志级别记录消息时,才调用该函数来构造所需的日志消息,从而消除不必要的消息构造。
+ * 例如,如果开发人员想要记录系统健康状态以进行诊断,使用字符串接受版本,代码将如下所示：<pre> <code>。
+ * 
+ *  class DiagnosisMessages {static String systemHealthStatus(){//收集系统健康信息...}} ... logger.log(Level.FIN
+ * ER,DiagnosisMessages.systemHealthStatus()); </code> </pre>使用上面的代码,健康状态被不必要地收集,即使日志级别FINER被禁用。
+ * 使用以下供应商接受版本,只有在启用日志级别FINER时才会收集状态。 <pre> <code>。
+ * 
+ *  logger.log(Level.FINER,DiagnosisMessages :: systemHealthStatus); </code> </pre>
+ * <p>
+ * 当查找{@code ResourceBundle}时,记录器将首先查看是否使用{@link #setResourceBundle(java.util.ResourceBundle)setResourceBundle}
+ * 指定了包,然后仅查看是否通过{ @link #getLogger(java.lang.String,java.lang.String)getLogger}工厂方法。
+ * 如果没有找到{@code ResourceBundle}或没有找到资源包名称,那么它将使用从其父树继承的最近的{@code ResourceBundle}或资源包名称。
+ * <br>当{@code ResourceBundle}被继承或指定时通过{@link #setResourceBundle(java.util.ResourceBundle)setResourceBundle}
+ * 方法,那么将使用{@code ResourceBundle}。
+ * 如果没有找到{@code ResourceBundle}或没有找到资源包名称,那么它将使用从其父树继承的最近的{@code ResourceBundle}或资源包名称。
+ * 否则,如果记录器仅具有或继承了资源束名称,那么该资源束名称将被映射到{@code ResourceBundle}对象,在记录时使用默认的区域设置。
+ *  <br id="ResourceBundleMapping">当将资源包名称映射到{@code ResourceBundle}对象时,记录器将首先尝试使用线程的{@linkplain java.lang.Thread#getContextClassLoader()上下文类加载器}
+ * 来映射给定的资源包名称到{@code ResourceBundle}。
+ * 否则,如果记录器仅具有或继承了资源束名称,那么该资源束名称将被映射到{@code ResourceBundle}对象,在记录时使用默认的区域设置。
+ * 如果线程上下文类加载器是{@code null},它将尝试使用{@linkplain java.lang.ClassLoader#getSystemClassLoader()系统类加载器}。
+ * 如果仍然找不到{@code ResourceBundle},它将使用{@link #getLogger(java.lang.String,java.lang.String)getLogger}工厂方法的
+ * 第一个调用者的类加载器。
+ * 如果线程上下文类加载器是{@code null},它将尝试使用{@linkplain java.lang.ClassLoader#getSystemClassLoader()系统类加载器}。
+ * <p>
+ * 格式化(包括本地化)是输出处理程序的责任,它通常调用一个格式化程序。
+ * <p>
+ *  请注意,格式化不需要同步进行。它可能会被延迟,直到LogRecord实际写入外部接收器。
+ * <p>
+ *  记录方法分为五大类：
+ * <ul>
+ *  <li> <p>有一组"日志"方法,它们将日志级别,消息字符串和可选的消息字符串的一些参数。
+ *  <li> <p>有一组"logp"方法(对于"日志精确"),类似于"log"方法,但也需要一个明确的源类名称和方法名称。
+ *  <li> <p>有一组"logrb"方法(对于"使用资源包的日志"),类似于"logp"方法,但也使用一个显式资源包对象用于本地化日志消息。
+ *  <li> <p>有一些方便的方法用于跟踪方法条目("输入"方法),方法返回("exiting"方法)和抛出异常("throwing"方法)。
+ *  <li> <p>最后,当开发人员只想在给定日志级别记录一个简单的字符串时,在最简单的情况下使用一组方便的方法。
+ * 这些方法以标准级别名称("severe","warning","info"等)命名,并采用单个参数,即消息字符串。
+ * </ul>
+ * <p>
+ * 对于没有显式的源名称和方法名的方法,Logging框架将做出"尽力而为"来确定在日志记录方法中调用哪个类和方法。然而,重要的是意识到,这种自动推断的信息可能仅仅是近似的(或者甚至可能是相当错误的！)。
+ * 虚拟机允许在JITing时进行广泛的优化,并且可能完全删除堆栈帧,使得不可能可靠地定位调用类和方法。
+ * <P>
+ *  Logger上的所有方法都是多线程安全的。
+ * <p>
+ *  <b>子类信息：</b>请注意,LogManager类可以为命名空间中的任何点提供其自己的命名Loggers实现。
+ * 因此,Logger的任何子类(除非它们与新的LogManager类一起实现)应注意从LogManager类获取Logger实例,并应将诸如"isLoggable"和"log(LogRecord)"之类的
+ * 操作委托给该实例。
+ *  <b>子类信息：</b>请注意,LogManager类可以为命名空间中的任何点提供其自己的命名Loggers实现。注意,为了拦截所有日志输出,子类只需要覆盖日志(LogRecord)方法。
+ * 所有其他日志记录方法都实现为对此日志(LogRecord)方法的调用。
+ * 
+ * 
  * @since 1.4
  */
 public class Logger {
@@ -282,6 +364,10 @@ public class Logger {
     /**
      * GLOBAL_LOGGER_NAME is a name for the global logger.
      *
+     * <p>
+     *  GLOBAL_LOGGER_NAME是全局记录器的名称。
+     * 
+     * 
      * @since 1.6
      */
     public static final String GLOBAL_LOGGER_NAME = "global";
@@ -289,6 +375,10 @@ public class Logger {
     /**
      * Return global logger object with the name Logger.GLOBAL_LOGGER_NAME.
      *
+     * <p>
+     *  使用名称Logger.GLOBAL_LOGGER_NAME返回全局日志记录器对象。
+     * 
+     * 
      * @return global logger object
      * @since 1.7
      */
@@ -339,6 +429,12 @@ public class Logger {
      * strong reference to their Logger objects to prevent them from
      * being garbage collected.
      * <p>
+     * <p>
+     * 提供"全局"Logger对象是为了方便开发人员随意使用Logging包。
+     * 严重使用日志记录包(例如在产品中)的开发人员应该使用适当的名称创建和使用自己的Logger对象,以便可以在合适的每个Logger粒度上控制日志记录。
+     * 开发人员还需要保持对其Logger对象的强引用,以防止它们被垃圾回收。
+     * <p>
+     * 
      * @deprecated Initialization of this field is prone to deadlocks.
      * The field must be initialized by the Logger class initialization
      * which may cause deadlocks with the LogManager class initialization.
@@ -359,6 +455,12 @@ public class Logger {
      * The logger will be initially configured with a null Level
      * and with useParentHandlers set to true.
      *
+     * <p>
+     *  用于为命名的子系统构造记录器的受保护方法。
+     * <p>
+     *  记录器最初将配置为空级别,并将useParentHandlers设置为true。
+     * 
+     * 
      * @param   name    A name for the logger.  This should
      *                          be a dot-separated name and should normally
      *                          be based on the package name or class name
@@ -476,6 +578,16 @@ public class Logger {
      * objects named "MyLogger" if there is no strong reference to the
      * Logger named "MyLogger" elsewhere in the program.
      *
+     * <p>
+     *  为命名的子系统查找或创建记录器。如果已经创建了具有给定名称的记录器,则返回该记录器。否则,将创建一个新的记录器。
+     * <p>
+     *  如果创建了一个新的日志记录器,它的日志级别将基于LogManager配置进行配置,并且它将配置为还将日志输出发送到其父级的处理程序。它将在LogManager全局命名空间中注册。
+     * <p>
+     * 注意：LogManager只能保留对新创建的Logger的弱引用。重要的是要知道,如果没有对记录器的强引用,那么以前创建的具有给定名称的记录器可以在任何时间被垃圾收集。
+     * 特别是,这意味着如果没有对名为"Logger"的Logger对象的强引用,那么像{@code getLogger("MyLogger")。
+     * log(...)}这样的两个背对背调用可以使用不同的Logger对象, "MyLogger"在程序的其他地方。
+     * 
+     * 
      * @param   name            A name for the logger.  This should
      *                          be a dot-separated name and should normally
      *                          be based on the package name or class name
@@ -527,6 +639,18 @@ public class Logger {
      * a different resource bundle name then an IllegalArgumentException
      * is thrown.
      * <p>
+     * <p>
+     *  为命名的子系统查找或创建记录器。如果已经创建了具有给定名称的记录器,则返回该记录器。否则,将创建一个新的记录器。
+     * <p>
+     *  如果创建了一个新的日志记录器,它的日志级别将基于LogManager进行配置,并且它将配置为还将日志输出发送到其父级的处理器。它将在LogManager全局命名空间中注册。
+     * <p>
+     *  注意：LogManager只能保留对新创建的Logger的弱引用。重要的是要知道,如果没有对记录器的强引用,那么以前创建的具有给定名称的记录器可以在任何时间被垃圾收集。
+     * 特别是,这意味着如果没有强引用,像{@code getLogger("MyLogger",...)。
+     * log(...)}这样两个背对背调用可以使用不同的Logger对象,名为"MyLogger"到程序中其他地方的名为"MyLogger"的Logger。
+     * <p>
+     * 如果命名的Logger已经存在,并且还没有本地化资源包,则使用给定的资源包名称。如果指定的Logger已经存在并且具有不同的资源束名称,那么将抛出IllegalArgumentException。
+     * <p>
+     * 
      * @param   name    A name for the logger.  This should
      *                          be a dot-separated name and should normally
      *                          be based on the package name or class name
@@ -597,6 +721,17 @@ public class Logger {
      * will still require the security permission specified by that method.
      * <p>
      *
+     * <p>
+     *  创建匿名记录器。新创建的Logger未在LogManager命名空间中注册。对记录器的更新不会进行访问检查。
+     * <p>
+     *  这种工厂方法主要用于applet。因为生成的Logger是匿名的,所以可以通过创建类保持私有。这消除了对正常安全检查的需要,这又允许不可信的小应用程序代码更新记录器的控制状态。
+     * 例如,applet可以在匿名记录器上执行setLevel或addHandler。
+     * <p>
+     *  即使新的记录器是匿名的,它被配置为具有根记录器("")作为其父。这意味着默认情况下,它从根记录器继承其有效级别和处理程序。
+     * 通过{@link #setParent(java.util.logging.Logger)setParent}方法更改其父级仍需要该方法指定的安全权限。
+     * <p>
+     * 
+     * 
      * @return a newly created private Logger
      */
     public static Logger getAnonymousLogger() {
@@ -622,6 +757,16 @@ public class Logger {
      * {@link #setParent(java.util.logging.Logger) setParent} method
      * will still require the security permission specified by that method.
      * <p>
+     * <p>
+     *  创建匿名记录器。新创建的Logger未在LogManager命名空间中注册。对记录器的更新不会进行访问检查。
+     * <p>
+     * 这种工厂方法主要用于applet。因为生成的Logger是匿名的,所以可以通过创建类保持私有。这消除了对正常安全检查的需要,这又允许不可信的小应用程序代码更新记录器的控制状态。
+     * 例如,applet可以在匿名记录器上执行setLevel或addHandler。
+     * <p>
+     *  即使新的记录器是匿名的,它被配置为具有根记录器("")作为其父。这意味着默认情况下,它从根记录器继承其有效级别和处理程序。
+     * 通过{@link #setParent(java.util.logging.Logger)setParent}方法更改其父级仍需要该方法指定的安全权限。
+     * <p>
+     * 
      * @param   resourceBundleName  name of ResourceBundle to be used for localizing
      *                          messages for this logger.
      *          May be null if none of the messages require localization.
@@ -658,6 +803,14 @@ public class Logger {
      * <br>Note that if the result is {@code null}, then the Logger will use a resource
      * bundle or resource bundle name inherited from its parent.
      *
+     * <p>
+     *  检索此记录器的本地化资源包。
+     * 此方法将返回由{@link #setResourceBundle(java.util.ResourceBundle)setResourceBundle}方法或<a href="#ResourceBundleMapping">
+     * 从资源包名称映射的方法设置的{@code ResourceBundle} a>通过{@link Logger#getLogger(java.lang.String,java.lang.String)getLogger}
+     * 工厂方法为当前默认语言环境设置。
+     *  检索此记录器的本地化资源包。 <br>请注意,如果结果是{@code null},那么Logger将使用从其父代继承的资源束或资源束名称。
+     * 
+     * 
      * @return localization bundle (may be {@code null})
      */
     public ResourceBundle getResourceBundle() {
@@ -675,6 +828,14 @@ public class Logger {
      * <br>Note that if the result is {@code null}, then the Logger will use a resource
      * bundle or resource bundle name inherited from its parent.
      *
+     * <p>
+     * 检索此记录器的本地化资源包名称。
+     * 这是通过{@link #getLogger(java.lang.String,java.lang.String)getLogger}工厂方法指定的名称,或者是通过{@link}设置的ResourceBu
+     * ndle的{@linkplain ResourceBundle#getBaseBundleName @link #setResourceBundle(java.util.ResourceBundle)setResourceBundle}
+     * 方法。
+     * 检索此记录器的本地化资源包名称。 <br>请注意,如果结果是{@code null},那么Logger将使用从其父代继承的资源束或资源束名称。
+     * 
+     * 
      * @return localization bundle name (may be {@code null})
      */
     public String getResourceBundleName() {
@@ -688,6 +849,12 @@ public class Logger {
      * call this Filter to check if a log record should really
      * be published.
      *
+     * <p>
+     *  设置过滤器以控制此记录器上的输出。
+     * <P>
+     *  在通过初始"级别"检查后,记录器将调用此过滤器来检查日志记录是否应该真正发布。
+     * 
+     * 
      * @param   newFilter  a filter object (may be null)
      * @throws  SecurityException if a security manager exists,
      *          this logger is not anonymous, and the caller
@@ -701,6 +868,10 @@ public class Logger {
     /**
      * Get the current filter for this Logger.
      *
+     * <p>
+     *  获取此Logger的当前过滤器。
+     * 
+     * 
      * @return  a filter object (may be null)
      */
     public Filter getFilter() {
@@ -714,6 +885,12 @@ public class Logger {
      * this method to actually perform any logging.  Subclasses can
      * override this single method to capture all log activity.
      *
+     * <p>
+     *  记录LogRecord。
+     * <p>
+     *  此类中的所有其他日志记录方法通过此方法调用,以实际执行任何日志记录。子类可以覆盖此单个方法以捕获所有日志活动。
+     * 
+     * 
      * @param record the LogRecord to be published
      */
     public void log(LogRecord record) {
@@ -777,6 +954,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     *  记录一个没有参数的消息。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则给定消息被转发到所有注册的输出处理器对象。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   msg     The string message (or a key in the message catalog)
      */
@@ -797,6 +980,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     *  记录消息,只有在记录级别为实际记录消息时才构建消息。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则通过调用所提供的供应商功能并且转发到所有注册的输出处理器对象来构造消息。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   msgSupplier   A function, which when called, produces the
      *                        desired log message
@@ -816,6 +1005,12 @@ public class Logger {
      * level then a corresponding LogRecord is created and forwarded
      * to all the registered output Handler objects.
      * <p>
+     * <p>
+     *  记录一条消息,带有一个对象参数。
+     * <p>
+     * 如果记录器当前对于给定的消息级别被启用,则创建相应的LogRecord并将其转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   msg     The string message (or a key in the message catalog)
      * @param   param1  parameter to the message
@@ -837,6 +1032,12 @@ public class Logger {
      * level then a corresponding LogRecord is created and forwarded
      * to all the registered output Handler objects.
      * <p>
+     * <p>
+     *  记录一条消息,带有一个对象参数数组。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则创建相应的LogRecord并将其转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   msg     The string message (or a key in the message catalog)
      * @param   params  array of parameters to the message
@@ -862,6 +1063,14 @@ public class Logger {
      * processed specially by output Formatters and is not treated
      * as a formatting parameter to the LogRecord message property.
      * <p>
+     * <p>
+     *  记录一条消息,其中包含关联的Throwable信息。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则给定的参数被存储在LogRecord中,LogRecord被转发到所有注册的输出处理器。
+     * <p>
+     *  请注意,thrown参数存储在LogRecord的thrown属性中,而不是LogRecord参数属性中。因此,它由输出格式化程序专门处理,不会被视为LogRecord消息属性的格式化参数。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   msg     The string message (or a key in the message catalog)
      * @param   thrown  Throwable associated with log message.
@@ -888,6 +1097,15 @@ public class Logger {
      * processed specially by output Formatters and is not treated
      * as a formatting parameter to the LogRecord message property.
      * <p>
+     * <p>
+     *  记录一条懒惰构造的消息,带有相关的Throwable信息。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则通过调用所提供的供应商功能来构造消息。
+     * 然后消息和给定的{@link Throwable}存储在{@link LogRecord}中,它被转发到所有注册的输出处理程序。
+     * <p>
+     *  请注意,thrown参数存储在LogRecord的thrown属性中,而不是LogRecord参数属性中。因此,它由输出格式化程序专门处理,不会被视为LogRecord消息属性的格式化参数。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   thrown  Throwable associated with log message.
      * @param   msgSupplier   A function, which when called, produces the
@@ -915,6 +1133,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     * 记录一条消息,指定没有参数的源类和方法。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则给定消息被转发到所有注册的输出处理器对象。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -939,6 +1163,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     *  记录一个懒惰构造的消息,指定没有参数的源类和方法。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则通过调用所提供的供应商功能并且转发到所有注册的输出处理器对象来构造消息。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -965,6 +1195,12 @@ public class Logger {
      * level then a corresponding LogRecord is created and forwarded
      * to all the registered output Handler objects.
      * <p>
+     * <p>
+     *  记录消息,指定源类和方法,并在日志消息中使用单个对象参数。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则创建相应的LogRecord并将其转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -992,6 +1228,12 @@ public class Logger {
      * level then a corresponding LogRecord is created and forwarded
      * to all the registered output Handler objects.
      * <p>
+     * <p>
+     *  记录一个消息,指定源类和方法,使用对象参数数组。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则创建相应的LogRecord并将其转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -1023,6 +1265,14 @@ public class Logger {
      * processed specially by output Formatters and is not treated
      * as a formatting parameter to the LogRecord message property.
      * <p>
+     * <p>
+     *  记录消息,指定源类和方法,以及关联的Throwable信息。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则给定的参数被存储在LogRecord中,LogRecord被转发到所有注册的输出处理器。
+     * <p>
+     * 请注意,thrown参数存储在LogRecord的thrown属性中,而不是LogRecord参数属性中。因此,它由输出格式化程序专门处理,不会被视为LogRecord消息属性的格式化参数。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -1055,6 +1305,15 @@ public class Logger {
      * processed specially by output Formatters and is not treated
      * as a formatting parameter to the LogRecord message property.
      * <p>
+     * <p>
+     *  记录一条懒惰构造的消息,指定源类和方法,以及相关的Throwable信息。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则通过调用所提供的供应商功能来构造消息。
+     * 然后消息和给定的{@link Throwable}存储在{@link LogRecord}中,它被转发到所有注册的输出处理程序。
+     * <p>
+     *  请注意,thrown参数存储在LogRecord的thrown属性中,而不是LogRecord参数属性中。因此,它由输出格式化程序专门处理,不会被视为LogRecord消息属性的格式化参数。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -1114,6 +1373,14 @@ public class Logger {
      * resource bundle name is null, or an empty String or invalid
      * then the msg string is not localized.
      * <p>
+     * <p>
+     *  记录消息,指定不带参数的源类,方法和资源束名称。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则给定消息被转发到所有注册的输出处理器对象。
+     * <p>
+     *  msg字符串使用指定的资源束进行本地化。如果资源束名称为null,或空字符串或无效,则msg字符串未本地化。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -1148,6 +1415,14 @@ public class Logger {
      * resource bundle name is null, or an empty String or invalid
      * then the msg string is not localized.
      * <p>
+     * <p>
+     *  记录消息,指定源类,方法和资源束名称,并在日志消息中使用单个对象参数。
+     * <p>
+     * 如果记录器当前对于给定的消息级别被启用,则创建相应的LogRecord并将其转发到所有注册的输出Handler对象。
+     * <p>
+     *  msg字符串使用指定的资源束进行本地化。如果资源束名称为null,或空字符串或无效,则msg字符串未本地化。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -1185,6 +1460,14 @@ public class Logger {
      * resource bundle name is null, or an empty String or invalid
      * then the msg string is not localized.
      * <p>
+     * <p>
+     *  记录一条消息,指定源类,方法和资源包名称,以及一个对象参数数组。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则创建相应的LogRecord并将其转发到所有注册的输出Handler对象。
+     * <p>
+     *  msg字符串使用指定的资源束进行本地化。如果资源束名称为null,或空字符串或无效,则msg字符串未本地化。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -1221,6 +1504,14 @@ public class Logger {
      * If the resource bundle is {@code null}, then the {@code msg} string is not
      * localized.
      * <p>
+     * <p>
+     *  记录消息,指定源类,方法和资源束,以及消息参数的可选列表。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则创建相应的LogRecord并将其转发到所有注册的输出Handler对象。
+     * <p>
+     *  {@code msg}字符串使用给定的资源包进行本地化。如果资源束是{@code null},那么{@code msg}字符串未本地化。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    Name of the class that issued the logging request
      * @param   sourceMethod   Name of the method that issued the logging request
@@ -1261,6 +1552,16 @@ public class Logger {
      * processed specially by output Formatters and is not treated
      * as a formatting parameter to the LogRecord message property.
      * <p>
+     * <p>
+     *  记录消息,指定源类,方法和资源包名称以及相关的Throwable信息。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则给定的参数被存储在LogRecord中,LogRecord被转发到所有注册的输出处理器。
+     * <p>
+     * msg字符串使用指定的资源束进行本地化。如果资源束名称为null,或空字符串或无效,则msg字符串未本地化。
+     * <p>
+     *  请注意,thrown参数存储在LogRecord的thrown属性中,而不是LogRecord参数属性中。因此,它由输出格式化程序专门处理,不会被视为LogRecord消息属性的格式化参数。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that issued the logging request
@@ -1302,6 +1603,16 @@ public class Logger {
      * processed specially by output Formatters and is not treated
      * as a formatting parameter to the LogRecord message property.
      * <p>
+     * <p>
+     *  记录消息,指定源类,方法和资源束以及相关联的Throwable信息。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则给定的参数被存储在LogRecord中,LogRecord被转发到所有注册的输出处理器。
+     * <p>
+     *  {@code msg}字符串使用给定的资源包进行本地化。如果资源束是{@code null},那么{@code msg}字符串未本地化。
+     * <p>
+     *  请注意,thrown参数存储在LogRecord的thrown属性中,而不是LogRecord参数属性中。因此,它由输出格式化程序专门处理,不会被视为LogRecord消息属性的格式化参数。
+     * <p>
+     * 
      * @param   level   One of the message level identifiers, e.g., SEVERE
      * @param   sourceClass    Name of the class that issued the logging request
      * @param   sourceMethod   Name of the method that issued the logging request
@@ -1334,6 +1645,12 @@ public class Logger {
      * to a method.  A LogRecord with message "ENTRY", log level
      * FINER, and the given sourceMethod and sourceClass is logged.
      * <p>
+     * <p>
+     *  记录方法条目。
+     * <p>
+     *  这是一个方便的方法,可用于记录对方法的输入。具有消息"ENTRY"的日志记录,日志级别FINER,并且记录给定的sourceMethod和sourceClass。
+     * <p>
+     * 
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that is being entered
      */
@@ -1349,6 +1666,12 @@ public class Logger {
      * FINER, and the given sourceMethod, sourceClass, and parameter
      * is logged.
      * <p>
+     * <p>
+     *  使用一个参数记录方法条目。
+     * <p>
+     * 这是一个方便的方法,可用于记录对方法的输入。具有消息"ENTRY {0}"的日志记录,日志级别FINER,并且记录给定的sourceMethod,sourceClass和参数。
+     * <p>
+     * 
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that is being entered
      * @param   param1         parameter to the method being entered
@@ -1366,6 +1689,13 @@ public class Logger {
      * log level FINER, and the given sourceMethod, sourceClass, and
      * parameters is logged.
      * <p>
+     * <p>
+     *  使用参数数组记录方法条目。
+     * <p>
+     *  这是一个方便的方法,可用于记录对方法的输入。
+     * 具有消息"ENTRY"的LogRecord(后面是参数数组中每个条目的格式{N}指示符),日志级别FINER,以及给定的sourceMethod,sourceClass和参数。
+     * <p>
+     * 
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of method that is being entered
      * @param   params         array of parameters to the method being entered
@@ -1390,6 +1720,12 @@ public class Logger {
      * from a method.  A LogRecord with message "RETURN", log level
      * FINER, and the given sourceMethod and sourceClass is logged.
      * <p>
+     * <p>
+     *  记录方法返回。
+     * <p>
+     *  这是一个方便的方法,可用于记录从方法返回。具有消息"RETURN"的日志记录,日志级别FINER,并且记录给定的sourceMethod和sourceClass。
+     * <p>
+     * 
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of the method
      */
@@ -1406,6 +1742,12 @@ public class Logger {
      * FINER, and the gives sourceMethod, sourceClass, and result
      * object is logged.
      * <p>
+     * <p>
+     *  记录一个方法返回,带有result对象。
+     * <p>
+     *  这是一个方便的方法,可用于记录从方法返回。具有消息"RETURN {0}"的日志记录,日志级别FINER,并且记录给出sourceMethod,sourceClass和result对象。
+     * <p>
+     * 
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod   name of the method
      * @param   result  Object that is being returned
@@ -1431,6 +1773,16 @@ public class Logger {
      * processed specially by output Formatters and is not treated
      * as a formatting parameter to the LogRecord message property.
      * <p>
+     * <p>
+     *  日志抛出异常。
+     * <p>
+     *  这是一个方便的方法来记录方法通过抛出异常而终止。日志记录使用FINER级别完成。
+     * <p>
+     *  如果记录器当前对于给定的消息级别被启用,则给定的参数被存储在LogRecord中,LogRecord被转发到所有注册的输出处理器。 LogRecord的消息设置为"THROW"。
+     * <p>
+     * 请注意,thrown参数存储在LogRecord的thrown属性中,而不是LogRecord参数属性中。因此,它由输出格式化程序专门处理,不会被视为LogRecord消息属性的格式化参数。
+     * <p>
+     * 
      * @param   sourceClass    name of class that issued the logging request
      * @param   sourceMethod  name of the method.
      * @param   thrown  The Throwable that is being thrown.
@@ -1457,6 +1809,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     *  记录SEVERE消息。
+     * <p>
+     *  如果记录器当前启用了SEVERE消息级别,则给定消息被转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   msg     The string message (or a key in the message catalog)
      */
     public void severe(String msg) {
@@ -1470,6 +1828,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     *  记录警告消息。
+     * <p>
+     *  如果记录器当前启用了WARNING消息级别,则给定消息将转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   msg     The string message (or a key in the message catalog)
      */
     public void warning(String msg) {
@@ -1483,6 +1847,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     *  记录INFO消息。
+     * <p>
+     *  如果记录器当前为INFO消息级别启用,则给定消息被转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   msg     The string message (or a key in the message catalog)
      */
     public void info(String msg) {
@@ -1496,6 +1866,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     *  记录CONFIG消息。
+     * <p>
+     *  如果记录器当前启用了CONFIG消息级别,则给定的消息被转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   msg     The string message (or a key in the message catalog)
      */
     public void config(String msg) {
@@ -1509,6 +1885,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     *  记录一条FINE消息。
+     * <p>
+     *  如果记录器当前启用了FINE消息级别,则给定消息将转发到所有注册的输出处理程序对象。
+     * <p>
+     * 
      * @param   msg     The string message (or a key in the message catalog)
      */
     public void fine(String msg) {
@@ -1522,6 +1904,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     *  记录FINER消息。
+     * <p>
+     *  如果记录器当前启用了FINER消息级别,则给定消息被转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   msg     The string message (or a key in the message catalog)
      */
     public void finer(String msg) {
@@ -1535,6 +1923,12 @@ public class Logger {
      * level then the given message is forwarded to all the
      * registered output Handler objects.
      * <p>
+     * <p>
+     *  记录FINEST消息。
+     * <p>
+     *  如果记录器当前启用了FINEST消息级别,则给定的消息被转发到所有注册的输出Handler对象。
+     * <p>
+     * 
      * @param   msg     The string message (or a key in the message catalog)
      */
     public void finest(String msg) {
@@ -1555,6 +1949,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     * 记录一个SEVERE消息,该消息只有在日志记录级别为消息实际被记录时才被构造。
+     * <p>
+     *  如果记录器当前启用了SEVERE消息级别,则通过调用所提供的供应商函数并转发到所有注册的输出Handler对象来构造消息。
+     * <p>
+     * 
      * @param   msgSupplier   A function, which when called, produces the
      *                        desired log message
      * @since   1.8
@@ -1572,6 +1972,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     *  记录警告消息,只有在日志记录级别为实际记录消息时才构建此消息。
+     * <p>
+     *  如果记录器当前启用了WARNING消息级别,则通过调用所提供的供应商函数并转发到所有注册的输出Handler对象来构造消息。
+     * <p>
+     * 
      * @param   msgSupplier   A function, which when called, produces the
      *                        desired log message
      * @since   1.8
@@ -1589,6 +1995,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     *  记录INFO消息,只有在日志记录级别为实际记录消息时才构造该消息。
+     * <p>
+     *  如果当前对INFO消息级别启用记录器,则通过调用所提供的供应商功能并转发到所有注册的输出Handler对象来构造消息。
+     * <p>
+     * 
      * @param   msgSupplier   A function, which when called, produces the
      *                        desired log message
      * @since   1.8
@@ -1606,6 +2018,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     *  记录一个CONFIG消息,该消息只有在日志记录级别为实际记录消息时才被构造。
+     * <p>
+     *  如果记录器当前为CONFIG消息级别启用,则通过调用所提供的供应商功能并转发到所有注册的输出Handler对象来构造消息。
+     * <p>
+     * 
      * @param   msgSupplier   A function, which when called, produces the
      *                        desired log message
      * @since   1.8
@@ -1623,6 +2041,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     *  记录一条FINE消息,只有在日志记录级别为实际记录消息时才构造该消息。
+     * <p>
+     * 如果记录器当前启用了FINE消息级别,则通过调用所提供的供应商函数并转发到所有注册的输出Handler对象来构造消息。
+     * <p>
+     * 
      * @param   msgSupplier   A function, which when called, produces the
      *                        desired log message
      * @since   1.8
@@ -1640,6 +2064,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     *  记录一条FINER消息,它只有在日志记录级别为实际记录消息时才被构造。
+     * <p>
+     *  如果记录器当前启用了FINER消息级别,则通过调用提供的供应商函数并转发到所有注册的输出Handler对象来构造消息。
+     * <p>
+     * 
      * @param   msgSupplier   A function, which when called, produces the
      *                        desired log message
      * @since   1.8
@@ -1657,6 +2087,12 @@ public class Logger {
      * supplier function and forwarded to all the registered output
      * Handler objects.
      * <p>
+     * <p>
+     *  记录一条FINEST消息,它只有在日志记录级别为实际记录消息时才被构造。
+     * <p>
+     *  如果记录器当前启用了FINEST消息级别,则通过调用所提供的供应商函数并转发到所有注册的输出Handler对象来构造消息。
+     * <p>
+     * 
      * @param   msgSupplier   A function, which when called, produces the
      *                        desired log message
      * @since   1.8
@@ -1679,6 +2115,12 @@ public class Logger {
      * inherit its level from its nearest ancestor with a specific
      * (non-null) level value.
      *
+     * <p>
+     *  设置日志级别,指定此记录器将记录哪些消息级别。低于此值的邮件级别将被丢弃。级别值Level.OFF可用于关闭日志记录。
+     * <p>
+     *  如果新级别为null,则意味着此节点应从具有特定(非空)级别值的最近祖先继承其级别。
+     * 
+     * 
      * @param newLevel   the new value for the log level (may be null)
      * @throws  SecurityException if a security manager exists,
      *          this logger is not anonymous, and the caller
@@ -1701,6 +2143,10 @@ public class Logger {
      * The result may be null, which means that this logger's
      * effective level will be inherited from its parent.
      *
+     * <p>
+     *  获取为此记录器指定的日志级别。结果可能为null,这意味着此记录器的有效级别将从其父级继承。
+     * 
+     * 
      * @return  this Logger's level
      */
     public Level getLevel() {
@@ -1712,6 +2158,10 @@ public class Logger {
      * by this logger.  This check is based on the Loggers effective level,
      * which may be inherited from its parent.
      *
+     * <p>
+     * 检查给定级别的消息是否实际上将被此记录器记录。此检查基于记录器有效级别,可以从其父级继承。
+     * 
+     * 
      * @param   level   a message logging level
      * @return  true if the given message level is currently being logged.
      */
@@ -1724,6 +2174,10 @@ public class Logger {
 
     /**
      * Get the name for this logger.
+     * <p>
+     *  获取此记录器的名称。
+     * 
+     * 
      * @return logger name.  Will be null for anonymous Loggers.
      */
     public String getName() {
@@ -1737,6 +2191,12 @@ public class Logger {
      * Typically the root Logger is configured with a set of Handlers
      * that essentially act as default handlers for all loggers.
      *
+     * <p>
+     *  添加日志处理程序以接收日志消息。
+     * <p>
+     *  默认情况下,记录器还将其输出发送到其父记录器。通常,根Logger配置有一组处理程序,它们基本上充当所有记录器的默认处理程序。
+     * 
+     * 
      * @param   handler a logging Handler
      * @throws  SecurityException if a security manager exists,
      *          this logger is not anonymous, and the caller
@@ -1754,6 +2214,12 @@ public class Logger {
      * <P>
      * Returns silently if the given Handler is not found or is null
      *
+     * <p>
+     *  删除日志处理程序。
+     * <P>
+     *  如果未找到给定的处理程序或为空,则以静默方式返回
+     * 
+     * 
      * @param   handler a logging Handler
      * @throws  SecurityException if a security manager exists,
      *          this logger is not anonymous, and the caller
@@ -1770,6 +2236,10 @@ public class Logger {
     /**
      * Get the Handlers associated with this logger.
      * <p>
+     * <p>
+     *  获取与此记录器相关联的处理程序。
+     * <p>
+     * 
      * @return  an array of all registered Handlers
      */
     public Handler[] getHandlers() {
@@ -1788,6 +2258,10 @@ public class Logger {
      * also be written to the parent's Handlers, and potentially
      * to its parent, recursively up the namespace.
      *
+     * <p>
+     *  指定此记录器是否应将其输出发送到其父记录器。这意味着任何LogRecords也将写入父的处理程序,并且可能地写入其父项,递归到命名空间。
+     * 
+     * 
      * @param useParentHandlers   true if output is to be sent to the
      *          logger's parent.
      * @throws  SecurityException if a security manager exists,
@@ -1803,6 +2277,10 @@ public class Logger {
      * Discover whether or not this logger is sending its output
      * to its parent logger.
      *
+     * <p>
+     *  发现此记录器是否正在将其输出发送到其父记录器。
+     * 
+     * 
      * @return  true if output is to be sent to the logger's parent
      */
     public boolean getUseParentHandlers() {
@@ -1832,6 +2310,10 @@ public class Logger {
      * May also return null if we can't find the resource bundle and
      * there is no suitable previous cached value.
      *
+     * <p>
+     *  私有实用程序方法使用简单的单项缓存将资源束名称映射到实际的资源束。为空名称返回null。如果我们找不到资源束,并且没有合适的以前的缓存值,也可能返回null。
+     * 
+     * 
      * @param name the ResourceBundle to locate
      * @param userCallersClassLoader if true search using the caller's ClassLoader
      * @return ResourceBundle specified by name or null if not found
@@ -1955,6 +2437,10 @@ public class Logger {
      * Sets a resource bundle on this logger.
      * All messages will be logged using the given resource bundle for its
      * specific {@linkplain ResourceBundle#getLocale locale}.
+     * <p>
+     *  在此记录器上设置资源束。所有消息将使用给定的资源包来记录其特定的{@linkplain ResourceBundle#getLocale locale}。
+     * 
+     * 
      * @param bundle The resource bundle that this logger shall use.
      * @throws NullPointerException if the given bundle is {@code null}.
      * @throws IllegalArgumentException if the given bundle doesn't have a
@@ -2002,6 +2488,14 @@ public class Logger {
      * The result will be null if it is called on the root Logger
      * in the namespace.
      *
+     * <p>
+     *  返回此记录器的父级。
+     * <p>
+     * 此方法返回命名空间中最近的现有父代。
+     * 因此,如果记录器被称为"a.b.c.d",并且已经创建了称为"a.b"的记录器,但是不存在记录器"a.b.c",则在记录器"a.b.c.d"上的getParent的调用将返回记录器"a.b"。
+     * <p>
+     *  如果在命名空间中的根Logger上调用,结果将为null。
+     * 
      * @return nearest existing parent Logger
      */
     public Logger getParent() {
@@ -2019,6 +2513,9 @@ public class Logger {
      * <p>
      * It should not be called from application code.
      * <p>
+     * <p>
+     * 
+     * 
      * @param  parent   the new parent logger
      * @throws  SecurityException  if a security manager exists and if
      *          the caller does not have LoggingPermission("control").

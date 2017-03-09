@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,7 @@ import org.xml.sax.SAXException;
 import org.w3c.dom.*;
 
 /**
+/* <p>
  */
 class Metacity implements SynthConstants {
     // Tutorial:
